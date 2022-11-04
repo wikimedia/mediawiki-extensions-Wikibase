@@ -26,12 +26,30 @@ use Wikibase\Lib\WikibaseContentLanguages;
 class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 
 	/**
-	 * @param array $expectedItems
+	 * @param array $expectedItems Each element can either be a string language code,
+	 * or an array of two strings, the actual and source language code.
 	 * @param LanguageWithConversion[] $chain
 	 */
 	private function assertChainEquals( array $expectedItems, array $chain ) {
-		$this->assertSame( count( $expectedItems ), count( $chain ) );
+		// format both chains into a string for a nice message in case of assertion failure
+		$expectedChain = implode( ',', array_map( function ( $expected ) {
+			if ( is_array( $expected ) ) {
+				return "{$expected[0]}({$expected[1]})";
+			} else {
+				return $expected;
+			}
+		}, $expectedItems ) );
+		$actualChain = implode( ',', array_map( function ( LanguageWithConversion $actual ) {
+			if ( $actual->getSourceLanguageCode() === null ) {
+				return $actual->getLanguageCode();
+			} else {
+				return $actual->getLanguageCode() . '(' . $actual->getSourceLanguageCode() . ')';
+			}
+		}, $chain ) );
+		$this->assertSame( $expectedChain, $actualChain );
 
+		// also compare the chains element by element, in case the string comparison missed a detail
+		$this->assertSame( count( $expectedItems ), count( $chain ) );
 		foreach ( $expectedItems as $i => $expected ) {
 			if ( is_array( $expected ) ) {
 				$this->assertSame( $expected[0], $chain[$i]->getLanguage()->getCode() );
