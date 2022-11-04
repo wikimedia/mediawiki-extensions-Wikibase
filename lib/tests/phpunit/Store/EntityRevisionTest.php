@@ -45,11 +45,7 @@ class EntityRevisionTest extends \PHPUnit\Framework\TestCase {
 
 	public function invalidConstructorArgumentsProvider() {
 		return [
-			[ null, '20150211000000' ],
-			[ '1', '20150211000000' ],
 			[ -1, '20150211000000' ],
-			[ 1, null ],
-			[ 1, 1423612800 ],
 			[ 1, '20150211' ],
 			[ 1, "20150211000000\n" ],
 			[ 1, '2015-02-110000' ],
