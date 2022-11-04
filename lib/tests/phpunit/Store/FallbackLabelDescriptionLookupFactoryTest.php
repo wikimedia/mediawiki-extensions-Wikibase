@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Lib\Tests\Store;
 
+use MediaWiki\MainConfigNames;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
@@ -26,6 +27,12 @@ use Wikibase\Lib\Tests\FakeCache;
  * @license GPL-2.0-or-later
  */
 class FallbackLabelDescriptionLookupFactoryTest extends MediaWikiIntegrationTestCase {
+
+	public function setUp(): void {
+		parent::setUp();
+
+		$this->overrideConfigValue( MainConfigNames::UsePigLatinVariant, false );
+	}
 
 	public function testNewLabelDescriptionLookup(): void {
 		$sourceId = new ItemId( 'Q2' );
