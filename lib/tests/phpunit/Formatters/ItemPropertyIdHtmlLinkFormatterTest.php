@@ -111,7 +111,7 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 		$this->assertThatHamcrest(
 			$result,
 			is( htmlPiece( havingDirectChild(
-				tagMatchingOutline( "<a href=\"${expectedUrl}\"/>" ) )
+				tagMatchingOutline( "<a href=\"{$expectedUrl}\"/>" ) )
 		) ) );
 	}
 
@@ -276,7 +276,7 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 		$this->assertThatHamcrest(
 			$result,
 			is( htmlPiece( havingDirectChild(
-					tagMatchingOutline( "<a href=\"${expectedUrl}\"/>" ) )
+					tagMatchingOutline( "<a href=\"{$expectedUrl}\"/>" ) )
 			) ) );
 	}
 

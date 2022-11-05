@@ -383,7 +383,7 @@ class PatchItemStatementTest extends TestCase {
 		];
 		yield 'PatchPathException' => [
 			new PatchPathException( '-', $op, 'path' ),
-			"Target '${op['path']}' not found on the resource",
+			"Target '{$op['path']}' not found on the resource",
 			'patch-target-not-found',
 			[
 				'operation' => $op,
@@ -408,7 +408,7 @@ class PatchItemStatementTest extends TestCase {
 				$testOperation,
 				[ 'key' => 'actualValue' ]
 			),
-			"Test operation in the provided patch failed. At path '${testOperation['path']}' " .
+			"Test operation in the provided patch failed. At path '{$testOperation['path']}' " .
 			"expected '" . json_encode( $testOperation['value'] ) . "', " .
 			"actual: '" . json_encode( [ 'key' => 'actualValue' ] ) . "'",
 			'patch-test-failed',

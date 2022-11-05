@@ -189,7 +189,7 @@ class DispatchChangesJob extends Job {
 	private function logUnsubscribedWikisWithSitelinkChanges( $dispatchingClientSites, $subscribedClientSites ) {
 		$clientsWithAddedSitelinks = array_diff( array_keys( $dispatchingClientSites ), $subscribedClientSites );
 		foreach ( $clientsWithAddedSitelinks as $wikiId ) {
-			$this->stats->increment( "wikibase.repo.dispatchChangesJob.sitelinkAdditionDispatched.${wikiId}" );
+			$this->stats->increment( "wikibase.repo.dispatchChangesJob.sitelinkAdditionDispatched.{$wikiId}" );
 		}
 	}
 

@@ -752,7 +752,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 		$langCodes = WikibaseRepo::getTermsLanguages()->getLanguages();
 
 		for ( $langCount = min( $langCount, ( count( $langCodes ) ) ); $langCount > 0; $langCount-- ) {
-			$result[ $langCodes[ $langCount ] ] = [ 'language' => $langCodes[ $langCount ], 'value' => "Foo${langCount}" ];
+			$result[ $langCodes[ $langCount ] ] = [ 'language' => $langCodes[ $langCount ], 'value' => "Foo{$langCount}" ];
 		}
 		return $result;
 	}
