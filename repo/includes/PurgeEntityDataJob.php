@@ -63,7 +63,7 @@ class PurgeEntityDataJob extends Job {
 		);
 	}
 
-	public function run(): void {
+	public function run(): bool {
 		$entityId = $this->entityIdParser->parse( $this->params['entityId'] );
 
 		// URLs for latest data...
@@ -79,6 +79,8 @@ class PurgeEntityDataJob extends Job {
 		if ( $urls !== [] ) {
 			$this->htmlCacheUpdater->purgeUrls( $urls );
 		}
+
+		return true;
 	}
 
 	private function getArchivedRevisionIds(): iterable {
