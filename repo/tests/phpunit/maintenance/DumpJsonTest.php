@@ -226,9 +226,7 @@ class DumpJsonTest extends MediaWikiIntegrationTestCase {
 	 * @return Title
 	 */
 	public function getMockTitle() {
-		$mock = $this->getMockBuilder( Title::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$mock = $this->createMock( Title::class );
 		$mock->method( 'getArticleID' )
 			->willReturn( 42 );
 		$mock->method( 'getNamespace' )
