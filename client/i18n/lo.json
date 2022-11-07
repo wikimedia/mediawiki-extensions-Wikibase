@@ -1,10 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Aefgh39622"
+			"Aefgh39622",
+			"Lookruk"
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}} ລາຍການ",
-	"wikibase-editlinks": "ແກ້ໄຂລິງກ໌",
+	"wikibase-editlinks": "ດັດແກ້ລິງກ໌",
 	"wikibase-editlinkstitle": "ແກ້ໄຂລິງກ໌ຂ້າມພາສາ"
 }

@@ -4,14 +4,15 @@
 			"Anass Sedrati",
 			"Meno25",
 			"Reda Benkhadra",
-			"SADIQUI"
+			"SADIQUI",
+			"Ideophagous"
 		]
 	},
 	"tooltip-t-wikibase": "الربط بعنصر مرتابط في مستودع البيانات",
 	"wikibase-comment-update": "تبديل عنصر {{WBREPONAME}}",
 	"wikibase-dataitem": "عنصر {{WBREPONAME}}",
 	"wikibase-editlinks": "بدل ليانات",
-	"wikibase-editlinkstitle": "تعديل الروابط ما بين اللغات",
+	"wikibase-editlinkstitle": "تبديل الليانات بين اللوغات",
 	"wikibase-linkitem-addlinks": "زيد ليانات",
 	"wikibase-linkitem-title": "ربط معا صفحة",
 	"wikibase-linkitem-linkpage": "ربط معا صفحة",
@@ -23,6 +24,6 @@
 	"wikibase-rc-wikibase-edit-letter": "د",
 	"wikibase-rc-wikibase-edit-title": "تعديل {{WBREPONAME}}",
 	"unconnectedpages": "صفاحي مامربوطينش",
-	"wikibase-otherprojects": "فمشاريع خرا",
+	"wikibase-otherprojects": "ف مشاريع خرة",
 	"notification-header-page-connection": "صفحة <strong>$3</strong> {{GENDER:$2|تربطات}} ب {{PLURAL:$4|-1=a {{WBREPONAME}} item|دخلة {{WBREPONAME}} $4}}، فين كيتجمع ڭاع لمعلومات لي عندها علاقة ب لموضوع."
 }
