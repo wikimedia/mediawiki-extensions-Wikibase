@@ -142,8 +142,9 @@ class WikiPageEntityRevisionLookup implements EntityRevisionLookup {
 			// Get the revision id we actually loaded, if none was passed explicitly
 			$revisionId = $revisionId ?: $entityRevision->getRevisionId();
 			throw new DivergingEntityIdException(
+				$revisionId,
 				$entityRevision,
-				"Revision $revisionId belongs to $actualEntityId instead of expected $entityId"
+				$entityId->getSerialization()
 			);
 		}
 
