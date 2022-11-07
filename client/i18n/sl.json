@@ -51,7 +51,7 @@
 	"wikibase-rc-wikibase-edit-letter": "P",
 	"wikibase-rc-wikibase-edit-title": "Urejanje v {{WBREPONAME}}h",
 	"wikibase-rcfilters-hide-wikibase-label": "Urejanja v {{GRAMMAR:mestnik|{{WBREPONAME}}}}",
-	"wikibase-rcfilters-hide-wikibase-description": "Urejanja, ki so narejena v projektu {{WBREPONAME}}.",
+	"wikibase-rcfilters-hide-wikibase-description": "Urejanja, ki izvirajo iz projekta {{WBREPONAME}}.",
 	"wikibase-rcfilters-hide-wikibase-conflicts-ores": "Ta filter je v navzkrižju z enim ali več filtri kakovosti prispevka ali namena uporabnika. Predvidevanje kakovosti in namena za urejanja projekta {{WBREPONAME}} ni na voljo.",
 	"wikibase-rcfilters-hide-wikibase-conflicts-ores-global": "Filter »urejanja {{GRAMMAR:dative|{{WBREPONAME}}}}« je v navzkrižju z enim ali več filtri kakovosti prispevka ali namena uporabnika. Predvidevanje kakovosti in namena za urejanje {{GRAMMAR:genitive|{{WBREPONAME}}}} ni na voljo. Filtri, ki so v navzkrižju, so označeni v območju Aktivni filtri zgoraj.",
 	"wikibase-rcfilters-damaging-conflicts-hide-wikibase": "Predvidevanje kakovosti prispevkov za nekatere vrste sprememb ni na voljo, zato je ta filter v navzkrižju z naslednjo vrsto spremembe {{PLURAL:$2|filtra|filtrov}}: $1",

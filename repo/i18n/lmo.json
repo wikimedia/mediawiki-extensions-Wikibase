@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"S4b1nuz E.656",
 			"Salvemm el lombard"
 		]
 	},
@@ -82,7 +83,7 @@
 	"wikibase-undo-nocontent": "A se po minga caregà el contegnud de la version $2 de la pagina $1",
 	"wikibase-undo-redirect-latestredirect": "Impossibil inversà la modifica senza redirezzion se l'ultima version l'è una redirezzion",
 	"wikibase-undo-redirect-latestnoredirect": "Impossibil inversà la modifica de la redirezzion se l'ultima revision l'è nò una redirezzion",
-	"wikibase-summary-generated": "Riasson (el sarà apes in automatich a un riassont ingenerad in automatich)ː",
+	"wikibase-summary-generated": "Riasson (el sarà apes in automatich a un riassont ingenerad in automatich):",
 	"wikibase-disambiguation-title": "Disambiguazzion per \"$1\"",
 	"wikibase-aliases-input-help-message": "Per fà diventà pussee facil trovà quella entità chì , a l'è possibil met denter di alter nom rapresentativ che se poden drovà inscambi.",
 	"wikibase-propertypage-datatype": "Tipo de dato",
@@ -364,7 +365,7 @@
 	"wikibase-api-invalid-property-id": "ID di proprietà minga valid.",
 	"wikibase-api-invalid-entity-id": "ID de l'entità minga valid.",
 	"wikibase-api-no-common-item": "A gh'è minga de element comun.",
-	"wikibase-api-no-data": "Nissun data de lavoràgh adree.",
+	"wikibase-api-no-data": "Nissun dato de lavoràgh adree.",
 	"wikibase-api-no-external-page": "El sit client esterno \"$1\" l'hà fornid no di informazzion sora la pagina \"$2\".",
 	"wikibase-api-nosuchrevid": "Version con ID minga trovada.",
 	"wikibase-api-no-such-claim": "A trovà quell'afermazzion chì l'è impossibil l'è impossibil.",

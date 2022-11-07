@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Amire80",
+			"Eric Mukiza",
 			"RebecaRwanda",
 			"Rodrigue"
 		]
@@ -47,5 +48,6 @@
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} hindura",
 	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}} Impinduka",
-	"wikibase-rcfilters-hide-wikibase-description": "Impinduka zituruka kuri {{WBREPONAME}}."
+	"wikibase-rcfilters-hide-wikibase-description": "Impinduka zituruka kuri {{WBREPONAME}}.",
+	"wikibase-otherprojects": "Muyindi mishinga"
 }
