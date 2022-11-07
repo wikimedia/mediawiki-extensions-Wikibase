@@ -32,7 +32,7 @@ class JsonDiffJsonPatchValidatorTest extends TestCase {
 
 		$this->assertSame( $source, $error->getSource() );
 		$this->assertEmpty( $error->getValue() );
-		$this->assertNull( $error->getContext() );
+		$this->assertEmpty( $error->getContext() );
 	}
 
 	/**

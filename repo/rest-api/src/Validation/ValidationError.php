@@ -8,9 +8,9 @@ namespace Wikibase\Repo\RestApi\Validation;
 class ValidationError {
 	private string $value;
 	private string $source;
-	private ?array $context;
+	private array $context;
 
-	public function __construct( string $value, string $source, array $context = null ) {
+	public function __construct( string $value, string $source, array $context = [] ) {
 		$this->value = $value;
 		$this->source = $source;
 		$this->context = $context;
@@ -24,7 +24,7 @@ class ValidationError {
 		return $this->source;
 	}
 
-	public function getContext(): ?array {
+	public function getContext(): array {
 		return $this->context;
 	}
 }
