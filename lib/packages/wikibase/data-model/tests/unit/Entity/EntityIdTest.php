@@ -203,9 +203,9 @@ class EntityIdTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider invalidSerializationProvider
 	 */
 	public function testConstructor( $serialization ) {
-		$mockBuilder = $this->getMockBuilder( SerializableEntityId::class );
-		$mockBuilder->disableOriginalConstructor();
-		$mock = $mockBuilder->getMockForAbstractClass();
+		$mock = $this->getMockBuilder( SerializableEntityId::class )
+			->disableOriginalConstructor()
+			->getMockForAbstractClass();
 
 		$constructor = ( new ReflectionClass( SerializableEntityId::class ) )->getConstructor();
 

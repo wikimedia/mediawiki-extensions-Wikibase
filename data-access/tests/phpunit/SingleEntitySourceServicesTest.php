@@ -5,7 +5,6 @@ namespace Wikibase\DataAccess\Tests;
 use DataValues\Deserializers\DataValueDeserializer;
 use LogicException;
 use MediaWiki\Storage\NameTableStore;
-use PHPUnit\Framework\MockObject\MockObject;
 use Serializers\DispatchingSerializer;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\SingleEntitySourceServices;
@@ -65,7 +64,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			new BasicEntityIdParser(),
 			new EntityIdComposer( [] ),
 			new DataValueDeserializer( [] ),
-			$this->getMockNameTableStore(),
+			$this->createMock( NameTableStore::class ),
 			DataAccessSettingsFactory::anySettings(),
 			new DatabaseEntitySource( 'source', 'sourcedb', [], '', '', '', '' ),
 			new LanguageFallbackChainFactory(),
@@ -87,7 +86,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			new BasicEntityIdParser(),
 			new EntityIdComposer( [] ),
 			new DataValueDeserializer( [] ),
-			$this->getMockNameTableStore(),
+			$this->createMock( NameTableStore::class ),
 			DataAccessSettingsFactory::anySettings(),
 			new DatabaseEntitySource( 'source', 'sourcedb', [], '', '', '', '' ),
 			new LanguageFallbackChainFactory(),
@@ -106,7 +105,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			new BasicEntityIdParser(),
 			new EntityIdComposer( [] ),
 			new DataValueDeserializer( [] ),
-			$this->getMockNameTableStore(),
+			$this->createMock( NameTableStore::class ),
 			DataAccessSettingsFactory::anySettings(),
 			new DatabaseEntitySource( 'source', 'sourcedb', [], '', '', '', '' ),
 			new LanguageFallbackChainFactory(),
@@ -125,7 +124,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			new BasicEntityIdParser(),
 			new EntityIdComposer( [] ),
 			new DataValueDeserializer( [] ),
-			$this->getMockNameTableStore(),
+			$this->createMock( NameTableStore::class ),
 			DataAccessSettingsFactory::anySettings(),
 			new DatabaseEntitySource( 'source', 'sourcedb', [], '', '', '', '' ),
 			new LanguageFallbackChainFactory(),
@@ -143,7 +142,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			new BasicEntityIdParser(),
 			new EntityIdComposer( [] ),
 			new DataValueDeserializer( [] ),
-			$this->getMockNameTableStore(),
+			$this->createMock( NameTableStore::class ),
 			DataAccessSettingsFactory::anySettings(),
 			new DatabaseEntitySource( 'source', 'sourcedb', [ 'property' => [ 'namespaceId' => 200, 'slot' => 'main' ] ], '', '', '', '' ),
 			new LanguageFallbackChainFactory(),
@@ -154,14 +153,6 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			[],
 			[]
 		);
-	}
-
-	/**
-	 * @return MockObject|NameTableStore
-	 */
-	private function getMockNameTableStore() {
-		$m = $this->getMockBuilder( NameTableStore::class );
-		return $m->disableOriginalConstructor()->getMock();
 	}
 
 	// TODO test entityUpdated
