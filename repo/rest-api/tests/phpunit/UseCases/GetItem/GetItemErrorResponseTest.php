@@ -30,19 +30,19 @@ class GetItemErrorResponseTest extends TestCase {
 
 	public function validationErrorDataProvider(): \Generator {
 		yield "from invalid item ID" => [
-			new ValidationError( GetItemValidator::SOURCE_ITEM_ID, [ ItemIdValidator::ERROR_CONTEXT_VALUE => 'X123' ] ),
+			new ValidationError( ItemIdValidator::CODE_INVALID, [ ItemIdValidator::ERROR_CONTEXT_VALUE => 'X123' ] ),
 			ErrorResponse::INVALID_ITEM_ID,
 			"Not a valid item ID: X123"
 		];
 
 		yield "from invalid field" => [
-			new ValidationError( GetItemValidator::SOURCE_FIELDS, [ GetItemValidator::ERROR_CONTEXT_FIELD_VALUE => 'unknown_field' ] ),
+			new ValidationError( GetItemValidator::CODE_INVALID_FIELD, [ GetItemValidator::ERROR_CONTEXT_FIELD_VALUE => 'unknown_field' ] ),
 			ErrorResponse::INVALID_FIELD,
 			"Not a valid field: unknown_field"
 		];
 	}
 
-	public function testNewFromUnknownSource(): void {
+	public function testNewFromUnknownCode(): void {
 		$this->expectException( \LogicException::class );
 
 		GetItemErrorResponse::newFromValidationError(

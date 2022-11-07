@@ -38,14 +38,14 @@ class RemoveItemStatementValidatorTest extends TestCase {
 	/**
 	 * @dataProvider provideInvalidRequest
 	 */
-	public function testValidateFails( array $requestData, array $errorContext, string $errorSource ): void {
+	public function testValidateFails( array $requestData, array $errorContext, string $errorCode ): void {
 		$error = $this->newRemoveItemStatementValidator()->validate(
 			$this->newUseCaseRequest( $requestData )
 		);
 
 		$this->assertNotNull( $error );
 		$this->assertSame( $errorContext, $error->getContext() );
-		$this->assertSame( $errorSource, $error->getSource() );
+		$this->assertSame( $errorCode, $error->getCode() );
 	}
 
 	public function provideValidRequest(): Generator {
@@ -84,7 +84,7 @@ class RemoveItemStatementValidatorTest extends TestCase {
 				'$itemId' => $itemId
 			],
 			[ ItemIdValidator::ERROR_CONTEXT_VALUE => $itemId ],
-			RemoveItemStatementValidator::SOURCE_ITEM_ID
+			ItemIdValidator::CODE_INVALID
 		];
 
 		$itemId = 'Q123';
@@ -99,7 +99,7 @@ class RemoveItemStatementValidatorTest extends TestCase {
 				'$itemId' => $itemId
 			],
 			[ StatementIdValidator::ERROR_CONTEXT_VALUE => $statementId ],
-			RemoveItemStatementValidator::SOURCE_STATEMENT_ID
+			StatementIdValidator::CODE_INVALID
 		];
 		yield 'Invalid statement ID (without item ID)' => [
 			[
@@ -111,7 +111,7 @@ class RemoveItemStatementValidatorTest extends TestCase {
 				'$itemId' => null
 			],
 			[ StatementIdValidator::ERROR_CONTEXT_VALUE => $statementId ],
-			RemoveItemStatementValidator::SOURCE_STATEMENT_ID
+			StatementIdValidator::CODE_INVALID
 		];
 
 		$itemId = 'Q42';
@@ -126,7 +126,7 @@ class RemoveItemStatementValidatorTest extends TestCase {
 				'$itemId' => $itemId
 			],
 			[ EditMetadataValidator::ERROR_CONTEXT_COMMENT_MAX_LENGTH => strval( CommentStore::COMMENT_CHARACTER_LIMIT ) ],
-			RemoveItemStatementValidator::SOURCE_COMMENT
+			EditMetadataValidator::CODE_COMMENT_TOO_LONG
 		];
 
 		$itemId = 'Q24';
@@ -141,7 +141,7 @@ class RemoveItemStatementValidatorTest extends TestCase {
 				'$itemId' => null
 			],
 			[ EditMetadataValidator::ERROR_CONTEXT_TAG_VALUE => json_encode( $invalidTag ) ],
-			RemoveItemStatementValidator::SOURCE_EDIT_TAGS
+			EditMetadataValidator::CODE_INVALID_TAG
 		];
 	}
 

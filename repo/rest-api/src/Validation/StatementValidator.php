@@ -9,7 +9,9 @@ use Wikibase\DataModel\Statement\Statement;
  */
 interface StatementValidator {
 
-	public function validate( array $statementSerialization, string $source ): ?ValidationError;
+	public const CODE_INVALID = 'invalid-statement';
+
+	public function validate( array $statementSerialization ): ?ValidationError;
 
 	/**
 	 * Returns the Statement object which is deserialized during the validation.

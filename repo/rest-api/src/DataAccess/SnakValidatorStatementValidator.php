@@ -23,8 +23,8 @@ class SnakValidatorStatementValidator implements StatementValidator {
 		$this->snakValidator = $snakValidator;
 	}
 
-	public function validate( array $statementSerialization, string $source ): ?ValidationError {
-		$error = new ValidationError( $source );
+	public function validate( array $statementSerialization ): ?ValidationError {
+		$error = new ValidationError( self::CODE_INVALID );
 
 		try {
 			$deserializedStatement = $this->deserializer->deserialize( $statementSerialization );

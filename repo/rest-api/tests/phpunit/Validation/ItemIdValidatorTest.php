@@ -16,17 +16,16 @@ class ItemIdValidatorTest extends TestCase {
 
 	public function testWithInvalidId(): void {
 		$invalidId = 'X123';
-		$source = 'some-source';
 
-		$error = ( new ItemIdValidator() )->validate( $invalidId, $source );
+		$error = ( new ItemIdValidator() )->validate( $invalidId );
 
-		$this->assertSame( $source, $error->getSource() );
+		$this->assertSame( ItemIdValidator::CODE_INVALID, $error->getCode() );
 		$this->assertSame( $invalidId, $error->getContext()[ItemIdValidator::ERROR_CONTEXT_VALUE] );
 	}
 
 	public function testWithValidId(): void {
 		$this->assertNull(
-			( new ItemIdValidator() )->validate( 'Q123', 'some-source' )
+			( new ItemIdValidator() )->validate( 'Q123' )
 		);
 	}
 

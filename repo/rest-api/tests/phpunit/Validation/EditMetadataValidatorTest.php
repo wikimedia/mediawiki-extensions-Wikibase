@@ -20,22 +20,18 @@ class EditMetadataValidatorTest extends TestCase {
 	private const ALLOWED_TAGS = [ 'tag1', 'tag2', 'tag3' ];
 
 	public function testValidateValidComment(): void {
-		$source = 'comment';
-
-		$result = $this->newEditMetadataValidator()->validateComment( "this is a valid comment", $source );
+		$result = $this->newEditMetadataValidator()->validateComment( "this is a valid comment" );
 
 		$this->assertNull( $result );
 	}
 
 	public function testValidateCommentTooLong(): void {
-		$source = 'comment';
-
 		$result = $this->newEditMetadataValidator()->validateComment(
-			"This comment is longer than 42 characters!!", $source
+			"This comment is longer than 42 characters!!"
 		);
 
 		$this->assertInstanceOf( ValidationError::class, $result );
-		$this->assertSame( $source, $result->getSource() );
+		$this->assertSame( EditMetadataValidator::CODE_COMMENT_TOO_LONG, $result->getCode() );
 		$this->assertSame(
 			(string)self::MAX_COMMENT_LENGTH,
 			$result->getContext()[EditMetadataValidator::ERROR_CONTEXT_COMMENT_MAX_LENGTH]
@@ -44,9 +40,8 @@ class EditMetadataValidatorTest extends TestCase {
 
 	public function testValidateValidEditTags(): void {
 		$tags = [ self::ALLOWED_TAGS[2], self::ALLOWED_TAGS[0] ];
-		$source = 'tags';
 
-		$result = $this->newEditMetadataValidator()->validateEditTags( $tags, $source );
+		$result = $this->newEditMetadataValidator()->validateEditTags( $tags );
 
 		$this->assertNull( $result );
 	}
@@ -55,12 +50,10 @@ class EditMetadataValidatorTest extends TestCase {
 	 * @dataProvider invalidEditTagsProvider
 	 */
 	public function testValidateInvalidEditTags( array $tags, string $invalidTag ): void {
-		$source = 'tags';
-
-		$result = $this->newEditMetadataValidator()->validateEditTags( $tags, $source );
+		$result = $this->newEditMetadataValidator()->validateEditTags( $tags );
 
 		$this->assertInstanceOf( ValidationError::class, $result );
-		$this->assertSame( $source, $result->getSource() );
+		$this->assertSame( EditMetadataValidator::CODE_INVALID_TAG, $result->getCode() );
 		$this->assertSame( $invalidTag, $result->getContext()[EditMetadataValidator::ERROR_CONTEXT_TAG_VALUE] );
 	}
 

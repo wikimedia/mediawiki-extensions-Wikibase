@@ -27,7 +27,7 @@ class GetItemStatementValidatorTest extends TestCase {
 			new GetItemStatementRequest( $statementId )
 		);
 
-		$this->assertSame( GetItemStatementValidator::SOURCE_STATEMENT_ID, $error->getSource() );
+		$this->assertSame( StatementIdValidator::CODE_INVALID, $error->getCode() );
 		$this->assertSame( $statementId, $error->getContext()[StatementIdValidator::ERROR_CONTEXT_VALUE] );
 	}
 
@@ -47,7 +47,7 @@ class GetItemStatementValidatorTest extends TestCase {
 			)
 		);
 
-		$this->assertSame( GetItemStatementValidator::SOURCE_ITEM_ID, $error->getSource() );
+		$this->assertSame( ItemIdValidator::CODE_INVALID, $error->getCode() );
 		$this->assertSame( $itemId, $error->getContext()[ItemIdValidator::ERROR_CONTEXT_VALUE] );
 	}
 

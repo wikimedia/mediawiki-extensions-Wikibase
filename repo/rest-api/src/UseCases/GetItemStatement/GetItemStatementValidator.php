@@ -11,9 +11,6 @@ use Wikibase\Repo\RestApi\Validation\ValidationError;
  */
 class GetItemStatementValidator {
 
-	public const SOURCE_STATEMENT_ID = 'statement ID';
-	public const SOURCE_ITEM_ID = 'item ID';
-
 	private StatementIdValidator $statementIdValidator;
 	private ItemIdValidator $itemIdValidator;
 
@@ -27,13 +24,12 @@ class GetItemStatementValidator {
 
 	public function validate( GetItemStatementRequest $statementRequest ): ?ValidationError {
 		return $this->statementIdValidator->validate(
-			$statementRequest->getStatementId(),
-			self::SOURCE_STATEMENT_ID
+			$statementRequest->getStatementId()
 		) ?: $this->validateItemId( $statementRequest->getItemId() );
 	}
 
 	private function validateItemId( ?string $itemId ): ?ValidationError {
-		return $itemId ? $this->itemIdValidator->validate( $itemId, self::SOURCE_ITEM_ID ) : null;
+		return $itemId ? $this->itemIdValidator->validate( $itemId ) : null;
 	}
 
 }

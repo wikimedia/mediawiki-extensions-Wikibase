@@ -7,9 +7,6 @@ use PHPUnit\Framework\TestCase;
 use Swaggest\JsonDiff\JsonDiff;
 use Wikibase\Repo\RestApi\Domain\Services\JsonPatchValidator;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatchValidator;
-use Wikibase\Repo\RestApi\Validation\PatchInvalidFieldTypeValidationError;
-use Wikibase\Repo\RestApi\Validation\PatchInvalidOpValidationError;
-use Wikibase\Repo\RestApi\Validation\PatchMissingFieldValidationError;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatchValidator
@@ -28,85 +25,82 @@ class JsonDiffJsonPatchValidatorTest extends TestCase {
 	}
 
 	public function testInvalidJsonPatch(): void {
-		$source = 'test source';
-		$error = ( new JsonDiffJsonPatchValidator() )->validate( [ 'invalid JSON Patch' ], $source );
+		$error = ( new JsonDiffJsonPatchValidator() )->validate( [ 'invalid JSON Patch' ] );
 
-		$this->assertSame( $source, $error->getSource() );
+		$this->assertSame( JsonPatchValidator::CODE_INVALID, $error->getCode() );
 		$this->assertEmpty( $error->getContext() );
 	}
 
 	/**
 	 * @dataProvider provideInvalidJsonPatch
 	 */
-	public function testInvalidJsonPatch_specificExceptions( string $errorInstance, array $patch, ?array $context ): void {
-		$source = 'test source';
-		$error = ( new JsonDiffJsonPatchValidator() )->validate( $patch, $source );
+	public function testInvalidJsonPatch_specificExceptions( string $errorCode, array $patch, ?array $context ): void {
+		$error = ( new JsonDiffJsonPatchValidator() )->validate( $patch );
 
-		$this->assertInstanceOf( $errorInstance, $error );
-		$this->assertSame( $source, $error->getSource() );
+		$this->assertSame( $errorCode, $error->getCode() );
 		$this->assertSame( $context, $error->getContext() );
 	}
 
 	public function provideInvalidJsonPatch(): Generator {
 		$invalidOperationObject = [ 'path' => '/a/b/c', 'value' => 'foo' ];
 		yield 'missing "op" field' => [
-			PatchMissingFieldValidationError::class,
+			JsonPatchValidator::CODE_MISSING_FIELD,
 			[ $invalidOperationObject ],
 			[ JsonPatchValidator::ERROR_CONTEXT_OPERATION => $invalidOperationObject, JsonPatchValidator::ERROR_CONTEXT_FIELD => 'op' ]
 		];
 
 		$invalidOperationObject = [ 'op' => 'add', 'value' => 'foo' ];
 		yield 'missing "path" field' => [
-			PatchMissingFieldValidationError::class,
+			JsonPatchValidator::CODE_MISSING_FIELD,
 			[ $invalidOperationObject ],
 			[ JsonPatchValidator::ERROR_CONTEXT_OPERATION => $invalidOperationObject, JsonPatchValidator::ERROR_CONTEXT_FIELD => 'path' ]
 		];
 
 		$invalidOperationObject = [ 'op' => 'add', 'path' => '/a/b/c' ];
 		yield 'missing "value" field' => [
-			PatchMissingFieldValidationError::class,
+			JsonPatchValidator::CODE_MISSING_FIELD,
 			[ $invalidOperationObject ],
 			[ JsonPatchValidator::ERROR_CONTEXT_OPERATION => $invalidOperationObject, JsonPatchValidator::ERROR_CONTEXT_FIELD => 'value' ]
 		];
 
 		$invalidOperationObject = [ 'op' => 'copy', 'path' => '/a/b/c' ];
 		yield 'missing "from" field' => [
-			PatchMissingFieldValidationError::class,
+			JsonPatchValidator::CODE_MISSING_FIELD,
 			[ $invalidOperationObject ],
 			[ JsonPatchValidator::ERROR_CONTEXT_OPERATION => $invalidOperationObject, JsonPatchValidator::ERROR_CONTEXT_FIELD => 'from' ]
 		];
 
 		$invalidOperationObject = [ 'op' => 'invalid', 'path' => '/a/b/c', 'value' => 'foo' ];
 		yield 'invalid "op" field' => [
-			PatchInvalidOpValidationError::class,
+			JsonPatchValidator::CODE_INVALID_OPERATION,
 			[ $invalidOperationObject ],
 			[ JsonPatchValidator::ERROR_CONTEXT_OPERATION => $invalidOperationObject ]
 		];
 
 		$invalidOperationObject = [ 'op' => true, 'path' => '/a/b/c', 'value' => 'foo' ];
 		yield 'invalid field type - "op" is a boolean not a string' => [
-			PatchInvalidFieldTypeValidationError::class,
+			JsonPatchValidator::CODE_INVALID_FIELD_TYPE,
 			[ $invalidOperationObject ],
 			[ JsonPatchValidator::ERROR_CONTEXT_OPERATION => $invalidOperationObject, JsonPatchValidator::ERROR_CONTEXT_FIELD => 'op' ]
 		];
 
 		$invalidOperationObject = [ 'op' => [ 'foo' => [ 'bar' ], 'baz' => 42 ], 'path' => '/a/b/c', 'value' => 'foo' ];
 		yield 'invalid field type - "op" is an object not a string' => [
-			PatchInvalidFieldTypeValidationError::class,
+			JsonPatchValidator::CODE_INVALID_FIELD_TYPE,
 			[ $invalidOperationObject ],
 			[ JsonPatchValidator::ERROR_CONTEXT_OPERATION => $invalidOperationObject, JsonPatchValidator::ERROR_CONTEXT_FIELD => 'op' ]
 		];
 
 		$invalidOperationObject = [ 'op' => 'add', 'path' => [ 'foo', 'bar', 'baz' ], 'value' => 'foo' ];
 		yield 'invalid field type - "path" is not a string' => [
-			PatchInvalidFieldTypeValidationError::class,
+			JsonPatchValidator::CODE_INVALID_FIELD_TYPE,
 			[ $invalidOperationObject ],
 			[ JsonPatchValidator::ERROR_CONTEXT_OPERATION => $invalidOperationObject, JsonPatchValidator::ERROR_CONTEXT_FIELD => 'path' ]
 		];
 
 		$invalidOperationObject = [ 'op' => 'move', 'from' => 42, 'path' => '/a/b/c' ];
 		yield 'invalid field type - "from" is not a string' => [
-			PatchInvalidFieldTypeValidationError::class,
+			JsonPatchValidator::CODE_INVALID_FIELD_TYPE,
 			[ $invalidOperationObject ],
 			[ JsonPatchValidator::ERROR_CONTEXT_OPERATION => $invalidOperationObject, JsonPatchValidator::ERROR_CONTEXT_FIELD => 'from' ]
 		];
@@ -119,7 +113,7 @@ class JsonDiffJsonPatchValidatorTest extends TestCase {
 			'value' => 'patched',
 		] ];
 		$this->assertNull(
-			( new JsonDiffJsonPatchValidator() )->validate( $validPatch, 'test source' )
+			( new JsonDiffJsonPatchValidator() )->validate( $validPatch )
 		);
 	}
 

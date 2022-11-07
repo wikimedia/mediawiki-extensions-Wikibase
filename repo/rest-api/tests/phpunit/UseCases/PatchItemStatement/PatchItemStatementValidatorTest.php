@@ -92,7 +92,7 @@ class PatchItemStatementValidatorTest extends TestCase {
 		);
 
 		$this->assertNotNull( $error );
-		$this->assertSame( PatchItemStatementValidator::SOURCE_ITEM_ID, $error->getSource() );
+		$this->assertSame( ItemIdValidator::CODE_INVALID, $error->getCode() );
 		$this->assertSame( $itemId, $error->getContext()[ItemIdValidator::ERROR_CONTEXT_VALUE] );
 	}
 
@@ -112,16 +112,16 @@ class PatchItemStatementValidatorTest extends TestCase {
 		);
 
 		$this->assertNotNull( $error );
-		$this->assertSame( PatchItemStatementValidator::SOURCE_STATEMENT_ID, $error->getSource() );
+		$this->assertSame( StatementIdValidator::CODE_INVALID, $error->getCode() );
 		$this->assertSame( $statementId, $error->getContext()[StatementIdValidator::ERROR_CONTEXT_VALUE] );
 	}
 
 	public function testValidate_withInvalidPatch(): void {
 		$invalidPatch = [ 'this is' => 'not a valid patch' ];
-		$expectedError = new ValidationError( PatchItemStatementValidator::SOURCE_PATCH );
+		$expectedError = new ValidationError( JsonPatchValidator::CODE_INVALID );
 		$this->jsonPatchValidator = $this->createMock( JsonPatchValidator::class );
 		$this->jsonPatchValidator->method( 'validate' )
-			->with( $invalidPatch, PatchItemStatementValidator::SOURCE_PATCH )
+			->with( $invalidPatch )
 			->willReturn( $expectedError );
 
 		$error = $this->newPatchItemStatementValidator()->validate(
@@ -155,7 +155,7 @@ class PatchItemStatementValidatorTest extends TestCase {
 
 		$this->assertEquals(
 			new ValidationError(
-				PatchItemStatementValidator::SOURCE_COMMENT,
+				EditMetadataValidator::CODE_COMMENT_TOO_LONG,
 				[ EditMetadataValidator::ERROR_CONTEXT_COMMENT_MAX_LENGTH => '500' ]
 			),
 			$error
@@ -178,7 +178,7 @@ class PatchItemStatementValidatorTest extends TestCase {
 
 		$this->assertEquals(
 			new ValidationError(
-				PatchItemStatementValidator::SOURCE_EDIT_TAGS,
+				EditMetadataValidator::CODE_INVALID_TAG,
 				[ EditMetadataValidator::ERROR_CONTEXT_TAG_VALUE => json_encode( $invalid ) ]
 			),
 			$error

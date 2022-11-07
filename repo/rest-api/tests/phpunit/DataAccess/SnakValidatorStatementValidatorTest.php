@@ -8,6 +8,7 @@ use ValueValidators\Result;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\RestApi\DataAccess\SnakValidatorStatementValidator;
 use Wikibase\Repo\RestApi\Domain\Serialization\StatementDeserializer;
+use Wikibase\Repo\RestApi\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Validation\ValidationError;
 use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Repo\WikibaseRepo;
@@ -42,24 +43,20 @@ class SnakValidatorStatementValidatorTest extends TestCase {
 	}
 
 	public function testGivenInvalidStatementSerialization_validateReturnsValidationError(): void {
-		$source = 'statement';
-		$error = $this->newValidator()->validate( [ 'invalid' => 'serialization' ], $source );
+		$error = $this->newValidator()->validate( [ 'invalid' => 'serialization' ] );
 
 		$this->assertInstanceOf( ValidationError::class, $error );
-		$this->assertSame( $error->getSource(), $source );
+		$this->assertSame( StatementValidator::CODE_INVALID, $error->getCode() );
 	}
 
 	public function testGetValidatedStatement(): void {
 		$validator = $this->newValidator();
-		$result = $validator->validate(
-			[
-				'mainsnak' => [
-					'snaktype' => 'novalue',
-					'property' => 'P123',
-				]
-			],
-			'statement'
-		);
+		$result = $validator->validate( [
+			'mainsnak' => [
+				'snaktype' => 'novalue',
+				'property' => 'P123',
+			]
+		] );
 
 		$this->assertNull( $result );
 		$this->assertInstanceOf( Statement::class, $validator->getValidatedStatement() );
@@ -78,7 +75,6 @@ class SnakValidatorStatementValidatorTest extends TestCase {
 				],
 			],
 		];
-		$source = 'statement';
 
 		$deserializedStatement = $this->createStub( Statement::class );
 
@@ -93,10 +89,10 @@ class SnakValidatorStatementValidatorTest extends TestCase {
 
 		$validator = $this->newValidator();
 
-		$error = $validator->validate( $serialization, $source );
+		$error = $validator->validate( $serialization );
 
 		$this->assertInstanceOf( ValidationError::class, $error );
-		$this->assertSame( $source, $error->getSource() );
+		$this->assertSame( StatementValidator::CODE_INVALID, $error->getCode() );
 	}
 
 	private function newValidator(): SnakValidatorStatementValidator {

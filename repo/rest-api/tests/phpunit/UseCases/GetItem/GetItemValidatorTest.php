@@ -38,27 +38,27 @@ class GetItemValidatorTest extends TestCase {
 	/**
 	 * @dataProvider dataProviderFail
 	 */
-	public function testValidateFail( GetItemRequest $request, string $expectedSource ): void {
+	public function testValidateFail( GetItemRequest $request, string $expectedCode ): void {
 		$result = ( new GetItemValidator( new ItemIdValidator() ) )->validate( $request );
 
 		$this->assertNotNull( $result );
-		$this->assertEquals( $expectedSource, $result->getSource() );
+		$this->assertEquals( $expectedCode, $result->getCode() );
 	}
 
 	public function dataProviderFail(): \Generator {
 		yield "invalid item ID" => [
 			new GetItemRequest( "X123" ),
-			GetItemValidator::SOURCE_ITEM_ID
+			ItemIdValidator::CODE_INVALID
 		];
 
 		yield "invalid field" => [
 			new GetItemRequest( "Q123", [ 'type', 'unknown_field' ] ),
-			GetItemValidator::SOURCE_FIELDS
+			GetItemValidator::CODE_INVALID_FIELD
 		];
 
 		yield "invalid item ID and invalid field" => [
 			new GetItemRequest( "X123", [ 'type', 'unknown_field' ] ),
-			GetItemValidator::SOURCE_ITEM_ID
+			ItemIdValidator::CODE_INVALID
 		];
 	}
 }

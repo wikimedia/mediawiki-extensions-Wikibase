@@ -10,6 +10,7 @@ use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
  */
 class StatementIdValidator {
 
+	public const CODE_INVALID = 'invalid-statement-id';
 	public const ERROR_CONTEXT_VALUE = 'statement-id-value';
 
 	private EntityIdParser $entityIdParser;
@@ -18,10 +19,10 @@ class StatementIdValidator {
 		$this->entityIdParser = $entityIdParser;
 	}
 
-	public function validate( string $statementId, string $source ): ?ValidationError {
+	public function validate( string $statementId ): ?ValidationError {
 		$statementGuidValidator = new StatementGuidValidator( $this->entityIdParser );
 		if ( !$statementGuidValidator->validate( $statementId ) ) {
-			return new ValidationError( $source, [ self::ERROR_CONTEXT_VALUE => $statementId ] );
+			return new ValidationError( self::CODE_INVALID, [ self::ERROR_CONTEXT_VALUE => $statementId ] );
 		}
 
 		return null;

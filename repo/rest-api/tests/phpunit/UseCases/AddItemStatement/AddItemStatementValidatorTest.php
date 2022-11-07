@@ -57,16 +57,16 @@ class AddItemStatementValidatorTest extends TestCase {
 		);
 
 		$this->assertNotNull( $error );
-		$this->assertSame( AddItemStatementValidator::SOURCE_ITEM_ID, $error->getSource() );
+		$this->assertSame( ItemIdValidator::CODE_INVALID, $error->getCode() );
 		$this->assertSame( $itemId, $error->getContext()[ItemIdValidator::ERROR_CONTEXT_VALUE] );
 	}
 
 	public function testWithInvalidStatement(): void {
 		$invalidStatement = [ 'this is' => 'not a valid statement' ];
-		$expectedError = new ValidationError( AddItemStatementValidator::SOURCE_STATEMENT );
+		$expectedError = new ValidationError( StatementValidator::CODE_INVALID );
 		$this->statementValidator = $this->createMock( StatementValidator::class );
 		$this->statementValidator->method( 'validate' )
-			->with( $invalidStatement, AddItemStatementValidator::SOURCE_STATEMENT )
+			->with( $invalidStatement )
 			->willReturn( $expectedError );
 
 		$error = $this->newAddItemStatementValidator()->validate(
@@ -79,13 +79,13 @@ class AddItemStatementValidatorTest extends TestCase {
 	public function testWithCommentTooLong(): void {
 		$comment = str_repeat( 'x', CommentStore::COMMENT_CHARACTER_LIMIT + 1 );
 		$expectedError = new ValidationError(
-			AddItemStatementValidator::SOURCE_COMMENT,
+			EditMetadataValidator::CODE_COMMENT_TOO_LONG,
 			[ EditMetadataValidator::ERROR_CONTEXT_COMMENT_MAX_LENGTH ]
 		);
 
 		$this->editMetadataValidator = $this->createMock( EditMetadataValidator::class );
 		$this->editMetadataValidator->method( 'validateComment' )
-			->with( $comment, AddItemStatementValidator::SOURCE_COMMENT )
+			->with( $comment )
 			->willReturn( $expectedError );
 
 		$error = $this->newAddItemStatementValidator()->validate(
@@ -98,13 +98,13 @@ class AddItemStatementValidatorTest extends TestCase {
 	public function testWithInvalidEditTags(): void {
 		$invalidTags = [ 'bad', 'tags' ];
 		$expectedError = new ValidationError(
-			AddItemStatementValidator::SOURCE_EDIT_TAGS,
+			EditMetadataValidator::CODE_INVALID_TAG,
 			[ EditMetadataValidator::ERROR_CONTEXT_TAG_VALUE => json_encode( $invalidTags ) ]
 		);
 
 		$this->editMetadataValidator = $this->createMock( EditMetadataValidator::class );
 		$this->editMetadataValidator->method( 'validateEditTags' )
-			->with( $invalidTags, AddItemStatementValidator::SOURCE_EDIT_TAGS )
+			->with( $invalidTags )
 			->willReturn( $expectedError );
 
 		$error = $this->newAddItemStatementValidator()->validate(

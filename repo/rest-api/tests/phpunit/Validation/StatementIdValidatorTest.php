@@ -22,10 +22,7 @@ class StatementIdValidatorTest extends TestCase {
 	 */
 	public function testItemStatement_ValidId( string $statementId ): void {
 		$this->assertNull(
-			( new StatementIdValidator( new ItemIdParser() ) )->validate(
-				$statementId,
-				'test source'
-			)
+			( new StatementIdValidator( new ItemIdParser() ) )->validate( $statementId )
 		);
 	}
 
@@ -35,10 +32,7 @@ class StatementIdValidatorTest extends TestCase {
 	 */
 	public function testBasicEntityStatement_ValidId( string $statementId ): void {
 		$this->assertNull(
-			( new StatementIdValidator( new BasicEntityIdParser() ) )->validate(
-				$statementId,
-				'test source'
-			)
+			( new StatementIdValidator( new BasicEntityIdParser() ) )->validate( $statementId )
 		);
 	}
 
@@ -47,10 +41,9 @@ class StatementIdValidatorTest extends TestCase {
 	 * @dataProvider invalidItemStatementIdDataProvider
 	 */
 	public function testItemStatement_InvalidId( string $invalidId ): void {
-		$source = 'test source';
-		$error = ( new StatementIdValidator( new ItemIdParser() ) )->validate( $invalidId, $source );
-
-		$this->assertSame( $source, $error->getSource() );
+		$error = ( new StatementIdValidator( new ItemIdParser() ) )
+			->validate( $invalidId );
+		$this->assertSame( StatementIdValidator::CODE_INVALID, $error->getCode() );
 		$this->assertSame( $invalidId, $error->getContext()[StatementIdValidator::ERROR_CONTEXT_VALUE] );
 	}
 
@@ -58,10 +51,9 @@ class StatementIdValidatorTest extends TestCase {
 	 * @dataProvider invalidStatementIdDataProvider
 	 */
 	public function testBasicEntityStatement_InvalidId( string $invalidId ): void {
-		$source = 'test source';
-		$error = ( new StatementIdValidator( new BasicEntityIdParser() ) )->validate( $invalidId, $source );
+		$error = ( new StatementIdValidator( new BasicEntityIdParser() ) )->validate( $invalidId );
 
-		$this->assertSame( $source, $error->getSource() );
+		$this->assertSame( StatementIdValidator::CODE_INVALID, $error->getCode() );
 		$this->assertSame( $invalidId, $error->getContext()[StatementIdValidator::ERROR_CONTEXT_VALUE] );
 	}
 
