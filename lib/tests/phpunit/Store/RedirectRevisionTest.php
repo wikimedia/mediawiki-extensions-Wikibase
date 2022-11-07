@@ -32,12 +32,7 @@ class RedirectRevisionTest extends \PHPUnit\Framework\TestCase {
 
 	public function invalidConstructorArgumentsProvider() {
 		return [
-			[ null, '' ],
-			[ true, '' ],
 			[ -1, '' ],
-			[ 0, null ],
-			[ 0, true ],
-			[ 0, 1 ],
 			[ 0, '20141231' ],
 			[ 0, "20141231000000\n" ],
 			[ 0, '2014-12-31T00:00:00' ],
