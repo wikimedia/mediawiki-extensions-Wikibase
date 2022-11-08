@@ -157,9 +157,9 @@ class PatchItemStatementTest extends TestCase {
 		$response = $this->newUseCase()->execute( $request );
 
 		$this->assertInstanceOf( PatchItemStatementSuccessResponse::class, $response );
-		$this->assertEquals( $response->getStatement(), $patchedStatement );
-		$this->assertSame( $response->getLastModified(), $modificationTimestamp );
-		$this->assertSame( $response->getRevisionId(), $postModificationRevisionId );
+		$this->assertEquals( $patchedStatement, $response->getStatement() );
+		$this->assertSame( $modificationTimestamp, $response->getLastModified() );
+		$this->assertSame( $postModificationRevisionId, $response->getRevisionId() );
 	}
 
 	public function testPatchItemStatement_requestValidationError(): void {

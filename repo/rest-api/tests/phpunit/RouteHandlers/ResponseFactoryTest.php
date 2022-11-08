@@ -34,7 +34,7 @@ class ResponseFactoryTest extends TestCase {
 
 		$httpResponse = ( new ResponseFactory( $errorPresenter ) )->newErrorResponse( $useCaseResponse );
 
-		$this->assertSame( $httpResponse->getBody()->getContents(), $responseBody );
+		$this->assertSame( $responseBody, $httpResponse->getBody()->getContents() );
 		$this->assertSame( $httpStatus, $httpResponse->getStatusCode() );
 	}
 
