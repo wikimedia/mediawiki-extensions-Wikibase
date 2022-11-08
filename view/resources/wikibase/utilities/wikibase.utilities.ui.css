@@ -20,23 +20,17 @@
 }
 
 .wb-toggle span.ui-icon.wb-toggle-icon3dtrans {
-	-webkit-transition: 0.25s ease-out;
 	transition: 0.25s ease-out;
 }
 
 /** rotate toggle icon in ltr languages */
 .wb-toggle-collapsed span.ui-icon.wb-toggle-icon3dtrans {
-	-webkit-transition: 0.25s ease-out;
 	transition: 0.25s ease-out;
-	-webkit-transform: rotate( -90deg );
-	-ms-transform: rotate( -90deg );
 	transform: rotate( -90deg );
 }
 
 /** rotate toggle icon in rtl languages (overwrite above) */
 body.rtl .wb-toggle-collapsed span.ui-icon.wb-toggle-icon3dtrans {
-	-webkit-transform: rotate( 90deg );
-	-ms-transform: rotate( 90deg );
 	transform: rotate( 90deg );
 }
 
