@@ -40,7 +40,7 @@
 	"wikibase-deletedentity-item": "Élément supprimé",
 	"wikibase-deletedentity-property": "Propriété supprimée",
 	"wikibase-deletedentity-query": "Requête supprimée",
-	"wikibase-error-unexpected": "Erreur : $1.",
+	"wikibase-error-unexpected": "Erreur : $1.",
 	"wikibase-error-unknown": "Une erreur s’est produite.",
 	"wikibase-error-save-generic": "Échec de l’enregistrement en raison d’une erreur.",
 	"wikibase-error-remove-generic": "Échec de la suppression en raison d’une erreur.",
