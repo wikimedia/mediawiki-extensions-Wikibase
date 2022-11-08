@@ -6,7 +6,8 @@
 			"Kareyac",
 			"Vadgt",
 			"Xelgen",
-			"Դավիթ Սարոյան"
+			"Դավիթ Սարոյան",
+			"Սերգեյ Սաֆարյան"
 		]
 	},
 	"tooltip-t-wikibase": "Հղում Վիքիտվյալի համապատասխան էջին",
@@ -14,6 +15,7 @@
 	"wikibase-dataitem": "{{WBREPONAME}}ի տարր",
 	"wikibase-editlinks": "Փոխել հղումները",
 	"wikibase-editlinkstitle": "Խմբագրել միջլեզվային հղումները",
+	"wikibase-addlinkstitle": "Միջլեզվային հղումներ ավելացնել",
 	"wikibase-linkitem-addlinks": "Ստեղծել հղումը",
 	"wikibase-linkitem-close": "Փակել պատուհանը և վերբեռնել էջը",
 	"wikibase-linkitem-title": "Կապել էջի հետ",
