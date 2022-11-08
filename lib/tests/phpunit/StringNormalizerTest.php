@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Lib\Tests;
 
 use Wikibase\Lib\StringNormalizer;
@@ -18,12 +20,12 @@ class StringNormalizerTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider providerTrimBadChars
 	 */
-	public function testTrimBadsChars( $string, $expected ) {
+	public function testTrimBadsChars( string $string, string $expected ): void {
 		$normalizer = new StringNormalizer();
 		$this->assertEquals( $expected, $normalizer->trimBadChars( $string ) );
 	}
 
-	public function providerTrimBadChars() {
+	public function providerTrimBadChars(): iterable {
 		return [
 			[ // #7: empty
 				"",
@@ -71,12 +73,12 @@ class StringNormalizerTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider providerTrimWhitespace
 	 */
-	public function testTrimWhitespace( $string, $expected ) {
+	public function testTrimWhitespace( string $string, string $expected ): void {
 		$normalizer = new StringNormalizer();
 		$this->assertEquals( $expected, $normalizer->trimWhitespace( $string ) );
 	}
 
-	public function providerTrimWhitespace() {
+	public function providerTrimWhitespace(): iterable {
 		return [
 			[
 				'foo bar',
@@ -119,12 +121,12 @@ class StringNormalizerTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider providerCleanupToNFC
 	 */
-	public function testCleanupToNFC( $string, $expected ) {
+	public function testCleanupToNFC( string $string, string $expected ): void {
 		$normalizer = new StringNormalizer();
 		$this->assertSame( $expected, $normalizer->cleanupToNFC( $string ) );
 	}
 
-	public function providerCleanupToNFC() {
+	public function providerCleanupToNFC(): iterable {
 		return [
 			[ "\xC3\x85land", 'Åland' ],
 			[ "A\xCC\x8Aland", 'Åland' ],
@@ -135,12 +137,12 @@ class StringNormalizerTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider providerTrimToNFC
 	 */
-	public function testTrimToNFC( $src, $dst ) {
+	public function testTrimToNFC( string $src, string $dst ): void {
 		$normalizer = new StringNormalizer();
 		$this->assertEquals( $dst, $normalizer->trimToNFC( $src ), "String '$src' is not the same as the expected '$dst'" );
 	}
 
-	public function providerTrimToNFC() {
+	public function providerTrimToNFC(): iterable {
 		return [
 			[ "  \xC3\x85land  øyene  ", 'Åland  øyene' ], // #0
 			[ "  A\xCC\x8Aland  øyene  ", 'Åland  øyene' ], // #1
