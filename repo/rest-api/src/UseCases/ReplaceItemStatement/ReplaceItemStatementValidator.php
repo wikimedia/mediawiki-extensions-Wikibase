@@ -14,12 +14,6 @@ use Wikibase\Repo\RestApi\Validation\ValidationError;
  */
 class ReplaceItemStatementValidator {
 
-	public const SOURCE_ITEM_ID = 'item ID';
-	public const SOURCE_STATEMENT_ID = 'statement ID';
-	public const SOURCE_STATEMENT = 'statement';
-	public const SOURCE_COMMENT = 'comment';
-	public const SOURCE_EDIT_TAGS = 'edit tags';
-
 	private ItemIdValidator $itemIdValidator;
 	private StatementIdValidator $statementIdValidator;
 	private EditMetadataValidator $editMetadataValidator;
@@ -39,10 +33,10 @@ class ReplaceItemStatementValidator {
 
 	public function validate( ReplaceItemStatementRequest $request ): ?ValidationError {
 		return $this->validateItemId( $request->getItemId() ) ?:
-			$this->statementIdValidator->validate( $request->getStatementId(), self::SOURCE_STATEMENT_ID ) ?:
-				$this->statementValidator->validate( $request->getStatement(), self::SOURCE_STATEMENT ) ?:
-					$this->editMetadataValidator->validateEditTags( $request->getEditTags(), self::SOURCE_EDIT_TAGS ) ?:
-						$this->editMetadataValidator->validateComment( $request->getComment(), self::SOURCE_COMMENT );
+			$this->statementIdValidator->validate( $request->getStatementId() ) ?:
+				$this->statementValidator->validate( $request->getStatement() ) ?:
+					$this->editMetadataValidator->validateEditTags( $request->getEditTags() ) ?:
+						$this->editMetadataValidator->validateComment( $request->getComment() );
 	}
 
 	public function getValidatedStatement(): ?Statement {
@@ -50,6 +44,6 @@ class ReplaceItemStatementValidator {
 	}
 
 	private function validateItemId( ?string $itemId ): ?ValidationError {
-		return $itemId ? $this->itemIdValidator->validate( $itemId, self::SOURCE_ITEM_ID ) : null;
+		return $itemId ? $this->itemIdValidator->validate( $itemId ) : null;
 	}
 }

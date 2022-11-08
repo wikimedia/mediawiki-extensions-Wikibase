@@ -13,12 +13,6 @@ use Wikibase\Repo\RestApi\Validation\ValidationError;
  */
 class PatchItemStatementValidator {
 
-	public const SOURCE_ITEM_ID = 'item ID';
-	public const SOURCE_STATEMENT_ID = 'statement ID';
-	public const SOURCE_PATCH = 'patch';
-	public const SOURCE_COMMENT = 'comment';
-	public const SOURCE_EDIT_TAGS = 'edit tags';
-
 	private ItemIdValidator $itemIdValidator;
 	private StatementIdValidator $statementIdValidator;
 	private JsonPatchValidator $jsonPatchValidator;
@@ -38,13 +32,13 @@ class PatchItemStatementValidator {
 
 	public function validate( PatchItemStatementRequest $request ): ?ValidationError {
 		return $this->validateItemId( $request->getItemId() ) ?:
-			$this->statementIdValidator->validate( $request->getStatementId(), self::SOURCE_STATEMENT_ID ) ?:
-				$this->jsonPatchValidator->validate( $request->getPatch(), self::SOURCE_PATCH ) ?:
-					$this->editMetadataValidator->validateEditTags( $request->getEditTags(), self::SOURCE_EDIT_TAGS ) ?:
-						$this->editMetadataValidator->validateComment( $request->getComment(), self::SOURCE_COMMENT );
+			$this->statementIdValidator->validate( $request->getStatementId() ) ?:
+				$this->jsonPatchValidator->validate( $request->getPatch() ) ?:
+					$this->editMetadataValidator->validateEditTags( $request->getEditTags() ) ?:
+						$this->editMetadataValidator->validateComment( $request->getComment() );
 	}
 
 	private function validateItemId( ?string $itemId ): ?ValidationError {
-		return $itemId ? $this->itemIdValidator->validate( $itemId, self::SOURCE_ITEM_ID ) : null;
+		return $itemId ? $this->itemIdValidator->validate( $itemId ) : null;
 	}
 }

@@ -6,12 +6,8 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\Domain\Services\JsonPatchValidator;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementErrorResponse;
-use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementValidator;
 use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
-use Wikibase\Repo\RestApi\Validation\PatchInvalidFieldTypeValidationError;
-use Wikibase\Repo\RestApi\Validation\PatchInvalidOpValidationError;
-use Wikibase\Repo\RestApi\Validation\PatchMissingFieldValidationError;
 use Wikibase\Repo\RestApi\Validation\StatementIdValidator;
 use Wikibase\Repo\RestApi\Validation\ValidationError;
 
@@ -42,14 +38,14 @@ class PatchItemStatementErrorResponseTest extends TestCase {
 
 	public function provideValidationError(): \Generator {
 		yield 'from invalid item ID' => [
-			new ValidationError( PatchItemStatementValidator::SOURCE_ITEM_ID, [ ItemIdValidator::ERROR_CONTEXT_VALUE => 'X123' ] ),
+			new ValidationError( ItemIdValidator::CODE_INVALID, [ ItemIdValidator::ERROR_CONTEXT_VALUE => 'X123' ] ),
 			ErrorResponse::INVALID_ITEM_ID,
 			'Not a valid item ID: X123'
 		];
 
 		yield 'from invalid statement ID' => [
 			new ValidationError(
-				PatchItemStatementValidator::SOURCE_STATEMENT_ID,
+				StatementIdValidator::CODE_INVALID,
 				[ StatementIdValidator::ERROR_CONTEXT_VALUE => 'Q123$INVALID_STATEMENT_ID' ]
 			),
 			ErrorResponse::INVALID_STATEMENT_ID,
@@ -57,7 +53,7 @@ class PatchItemStatementErrorResponseTest extends TestCase {
 		];
 
 		yield 'from invalid patch' => [
-			new ValidationError( PatchItemStatementValidator::SOURCE_PATCH ),
+			new ValidationError( JsonPatchValidator::CODE_INVALID ),
 			ErrorResponse::INVALID_PATCH,
 			'The provided patch is invalid'
 		];
@@ -67,7 +63,7 @@ class PatchItemStatementErrorResponseTest extends TestCase {
 			JsonPatchValidator::ERROR_CONTEXT_FIELD => 'op',
 		];
 		yield 'from missing patch field' => [
-			new PatchMissingFieldValidationError( PatchItemStatementValidator::SOURCE_PATCH, $context ),
+			new ValidationError( JsonPatchValidator::CODE_MISSING_FIELD, $context ),
 			ErrorResponse::MISSING_JSON_PATCH_FIELD,
 			"Missing 'op' in JSON patch",
 			$context
@@ -75,7 +71,7 @@ class PatchItemStatementErrorResponseTest extends TestCase {
 
 		$context = [ JsonPatchValidator::ERROR_CONTEXT_OPERATION => [ 'op' => 'bad', 'path' => '/a/b/c', 'value' => 'test' ] ];
 		yield 'from invalid patch operation' => [
-			new PatchInvalidOpValidationError( PatchItemStatementValidator::SOURCE_PATCH, $context ),
+			new ValidationError( JsonPatchValidator::CODE_INVALID_OPERATION, $context ),
 			ErrorResponse::INVALID_PATCH_OPERATION,
 			"Incorrect JSON patch operation: 'bad'",
 			$context
@@ -89,7 +85,7 @@ class PatchItemStatementErrorResponseTest extends TestCase {
 			JsonPatchValidator::ERROR_CONTEXT_FIELD => 'op',
 		];
 		yield 'from invalid patch field type' => [
-			new PatchInvalidFieldTypeValidationError( PatchItemStatementValidator::SOURCE_PATCH, $context ),
+			new ValidationError( JsonPatchValidator::CODE_INVALID_FIELD_TYPE, $context ),
 			ErrorResponse::INVALID_PATCH_FIELD_TYPE,
 			"The value of 'op' must be of type string",
 			$context
@@ -97,7 +93,7 @@ class PatchItemStatementErrorResponseTest extends TestCase {
 
 		yield 'from comment too long' => [
 			new ValidationError(
-				PatchItemStatementValidator::SOURCE_COMMENT,
+				EditMetadataValidator::CODE_COMMENT_TOO_LONG,
 				[ EditMetadataValidator::ERROR_CONTEXT_COMMENT_MAX_LENGTH => '500' ]
 			),
 			ErrorResponse::COMMENT_TOO_LONG,
@@ -106,7 +102,7 @@ class PatchItemStatementErrorResponseTest extends TestCase {
 
 		yield 'from invalid tag' => [
 			new ValidationError(
-				PatchItemStatementValidator::SOURCE_EDIT_TAGS,
+				EditMetadataValidator::CODE_INVALID_TAG,
 				[ EditMetadataValidator::ERROR_CONTEXT_TAG_VALUE => 'bad tag' ]
 			),
 			ErrorResponse::INVALID_EDIT_TAG,
@@ -114,7 +110,7 @@ class PatchItemStatementErrorResponseTest extends TestCase {
 		];
 	}
 
-	public function testNewFromUnknownSource(): void {
+	public function testNewFromUnknownCode(): void {
 		$this->expectException( \LogicException::class );
 
 		PatchItemStatementErrorResponse::newFromValidationError(

@@ -10,14 +10,15 @@ use Wikibase\DataModel\Entity\ItemId;
  */
 class ItemIdValidator {
 
+	public const CODE_INVALID = 'invalid-item-id';
 	public const ERROR_CONTEXT_VALUE = 'item-id-value';
 
-	public function validate( string $itemId, string $source ): ?ValidationError {
+	public function validate( string $itemId ): ?ValidationError {
 		try {
 			// @phan-suppress-next-line PhanNoopNew
 			new ItemId( $itemId );
 		} catch ( InvalidArgumentException $ex ) {
-			return new ValidationError( $source, [ self::ERROR_CONTEXT_VALUE => $itemId ] );
+			return new ValidationError( self::CODE_INVALID, [ self::ERROR_CONTEXT_VALUE => $itemId ] );
 		}
 		return null;
 	}

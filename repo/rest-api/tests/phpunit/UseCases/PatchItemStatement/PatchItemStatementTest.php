@@ -179,7 +179,7 @@ class PatchItemStatementTest extends TestCase {
 			->method( 'validate' )
 			->with( $request )
 			->willReturn(
-				new ValidationError( PatchItemStatementValidator::SOURCE_ITEM_ID, [ ItemIdValidator::ERROR_CONTEXT_VALUE => 'INVALID-ID' ] )
+				new ValidationError( ItemIdValidator::CODE_INVALID, [ ItemIdValidator::ERROR_CONTEXT_VALUE => 'INVALID-ID' ] )
 			);
 
 		$response = $this->newUseCase()->execute( $request );

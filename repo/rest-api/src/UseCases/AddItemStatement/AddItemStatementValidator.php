@@ -13,11 +13,6 @@ use Wikibase\Repo\RestApi\Validation\ValidationError;
  */
 class AddItemStatementValidator {
 
-	public const SOURCE_ITEM_ID = 'item ID';
-	public const SOURCE_STATEMENT = 'statement';
-	public const SOURCE_COMMENT = 'comment';
-	public const SOURCE_EDIT_TAGS = 'edit tags';
-
 	private StatementValidator $statementValidator;
 	private ItemIdValidator $itemIdValidator;
 	private EditMetadataValidator $editMetadataValidator;
@@ -33,10 +28,10 @@ class AddItemStatementValidator {
 	}
 
 	public function validate( AddItemStatementRequest $request ): ?ValidationError {
-		return $this->itemIdValidator->validate( $request->getItemId(), self::SOURCE_ITEM_ID ) ?:
-			$this->statementValidator->validate( $request->getStatement(), self::SOURCE_STATEMENT ) ?:
-				$this->editMetadataValidator->validateComment( $request->getComment(), self::SOURCE_COMMENT ) ?:
-					$this->editMetadataValidator->validateEditTags( $request->getEditTags(), self::SOURCE_EDIT_TAGS );
+		return $this->itemIdValidator->validate( $request->getItemId() ) ?:
+			$this->statementValidator->validate( $request->getStatement() ) ?:
+				$this->editMetadataValidator->validateComment( $request->getComment() ) ?:
+					$this->editMetadataValidator->validateEditTags( $request->getEditTags() );
 	}
 
 	public function getValidatedStatement(): ?Statement {
