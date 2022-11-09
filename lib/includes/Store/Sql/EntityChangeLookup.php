@@ -6,7 +6,6 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
-use Wikibase\Lib\Store\ChunkAccess;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\IResultWrapper;
@@ -18,7 +17,7 @@ use Wikimedia\Timestamp\ConvertibleTimestamp;
  * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
-class EntityChangeLookup implements ChunkAccess {
+class EntityChangeLookup {
 
 	/**
 	 * @var EntityChangeFactory
@@ -46,40 +45,6 @@ class EntityChangeLookup implements ChunkAccess {
 		$this->entityChangeFactory = $entityChangeFactory;
 		$this->entityIdParser = $entityIdParser;
 		$this->db = $db;
-	}
-
-	/**
-	 * Returns the sequential ID of the given EntityChange.
-	 *
-	 * @param EntityChange $rec
-	 *
-	 * @return int
-	 */
-	public function getRecordId( $rec ) {
-		Assert::parameterType( EntityChange::class, $rec, '$rec' );
-
-		return $rec->getId();
-	}
-
-	/**
-	 * @param int $start
-	 * @param int $size
-	 *
-	 * @return EntityChange[]
-	 */
-	public function loadChunk( $start, $size ) {
-		Assert::parameterType( 'integer', $start, '$start' );
-		Assert::parameterType( 'integer', $size, '$size' );
-
-		return $this->loadChanges(
-			[ 'change_id >= ' . (int)$start ],
-			[
-				'ORDER BY' => 'change_id ASC',
-				'LIMIT' => $size
-			],
-			__METHOD__,
-			$this->db->connections()->getReadConnectionRef()
-		);
 	}
 
 	/**
