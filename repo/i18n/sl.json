@@ -72,7 +72,7 @@
 	"wikibase-sitelinks": "Povezave na stran",
 	"wikibase-sitelinkgroupview-input-help-message": "Dodajte povezavo na spletno mesto, tako da navedete spletno mesto in stran na tem spletnem mestu, uredite obstoječe povezave ali jih odstranite.",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|vnos|vnosa|vnosi|vnosov}}",
-	"wikibase-sitelinks-empty": "Na ta predmet se ne povezuje nobena stran.",
+	"wikibase-sitelinks-empty": "S tem predmetom se ne povezuje nobena stran.",
 	"wikibase-sitelinks-special": "Druge strani",
 	"wikibase-badgeselector-badge-placeholder-title": "Kliknite za dodelitev značke.",
 	"wikibase-remove": "odstrani",
