@@ -24,9 +24,11 @@ class HTMLTrimmedTextField extends HTMLTextField {
 	}
 
 	public function filter( $value, $alldata ) {
-		$filteredValue = $this->stringNormalizer->trimToNFC( $value );
+		if ( is_string( $value ) ) {
+			$value = $this->stringNormalizer->trimToNFC( $value );
+		}
 
-		return parent::filter( $filteredValue, $alldata );
+		return parent::filter( $value, $alldata );
 	}
 
 }
