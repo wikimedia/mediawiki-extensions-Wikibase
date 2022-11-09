@@ -126,7 +126,7 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 
 		// Setup
 		$request = $this->getRequest();
-		$parts = ( $subPage === '' ) ? [] : explode( '/', $subPage, 2 );
+		$parts = $subPage ? explode( '/', $subPage, 2 ) : [];
 		$site = trim( $request->getVal( 'site', $parts[0] ?? '' ) );
 		$page = trim( $request->getVal( 'page', $parts[1] ?? '' ) );
 

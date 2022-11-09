@@ -101,7 +101,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 		$this->checkBlockedOnNamespace();
 		$this->checkReadOnly();
 
-		$this->parts = ( $subPage === '' ? [] : explode( '/', $subPage ) );
+		$this->parts = $subPage ? explode( '/', $subPage ) : [];
 
 		$form = $this->createForm();
 
