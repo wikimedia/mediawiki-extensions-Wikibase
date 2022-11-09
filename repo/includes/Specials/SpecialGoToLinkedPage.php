@@ -102,7 +102,7 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 	 */
 	private function getArguments( $subPage ) {
 		$request = $this->getRequest();
-		$parts = ( $subPage === '' ) ? [] : explode( '/', $subPage, 2 );
+		$parts = $subPage ? explode( '/', $subPage, 2 ) : [];
 		$sites = array_map(
 			[ $this->stringNormalizer, 'trimToNFC' ],
 			explode( ',', $request->getVal( 'site', $parts[0] ?? '' ) )

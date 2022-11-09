@@ -170,7 +170,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 
 		$request = $this->getRequest();
 		// explode the sub page from the format Special:SetSitelink/q123/enwiki
-		$parts = ( $subPage === '' ) ? [] : explode( '/', $subPage, 2 );
+		$parts = $subPage ? explode( '/', $subPage, 2 ) : [];
 
 		$entityId = $this->getEntityId();
 

@@ -97,7 +97,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		parent::processArguments( $subPage );
 
 		$request = $this->getRequest();
-		$parts = ( $subPage === '' ) ? [] : explode( '/', $subPage, 2 );
+		$parts = $subPage ? explode( '/', $subPage, 2 ) : [];
 
 		$this->languageCode = $request->getRawVal( 'language', $parts[1] ?? '' );
 
