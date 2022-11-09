@@ -8,8 +8,6 @@ use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\IResultWrapper;
-use Wikimedia\Timestamp\ConvertibleTimestamp;
 
 /**
  * Allows accessing changes stored in a database.
@@ -55,12 +53,11 @@ class EntityChangeLookup {
 	public function loadByChangeIds( array $ids ) {
 		Assert::parameterElementType( 'integer', $ids, '$ids' );
 
-		return $this->loadChanges(
-			[ 'change_id' => $ids ],
-			[],
-			__METHOD__,
-			$this->db->connections()->getReadConnectionRef()
-		);
+		$dbr = $this->db->connections()->getReadConnection();
+		return $this->newEntityChangeSelectQueryBuilder( $dbr )
+			->where( [ 'change_id' => $ids ] )
+			->caller( __METHOD__ )
+			->fetchChanges();
 	}
 
 	/**
@@ -69,12 +66,11 @@ class EntityChangeLookup {
 	 * @return EntityChange[]
 	 */
 	public function loadByEntityIdFromPrimary( string $entityId ): array {
-		return $this->loadChanges(
-			[ 'change_object_id' => $entityId ],
-			[],
-			__METHOD__,
-			$this->db->connections()->getWriteConnectionRef()
-		);
+		$dbw = $this->db->connections()->getWriteConnection();
+		return $this->newEntityChangeSelectQueryBuilder( $dbw )
+			->where( [ 'change_object_id' => $entityId ] )
+			->caller( __METHOD__ )
+			->fetchChanges();
 	}
 
 	/**
@@ -85,59 +81,21 @@ class EntityChangeLookup {
 	 * @return EntityChange[]
 	 */
 	public function loadChangesBefore( string $thisTimeOrOlder, int $batchSize, int $offset ): array {
-		$dbr = $this->db->connections()->getReadConnectionRef();
-		return $this->loadChanges(
-			[ 'change_time <= ' . $dbr->addQuotes( $dbr->timestamp( $thisTimeOrOlder ) ) ],
-			[ 'LIMIT' => $batchSize, 'OFFSET' => $offset ],
-			__METHOD__,
-			$dbr
-		);
+		$dbr = $this->db->connections()->getReadConnection();
+		return $this->newEntityChangeSelectQueryBuilder( $dbr )
+			->where( [ 'change_time <= ' . $dbr->addQuotes( $dbr->timestamp( $thisTimeOrOlder ) ) ] )
+			->limit( $batchSize )
+			->offset( $offset )
+			->caller( __METHOD__ )
+			->fetchChanges();
 	}
 
-	/**
-	 * @param array $where
-	 * @param array $options
-	 * @param string $method
-	 * @param IDatabase $dbr
-	 *
-	 * @return EntityChange[]
-	 */
-	private function loadChanges( array $where, array $options, $method, IDatabase $dbr ) {
-		$rows = $dbr->select(
-			'wb_changes',
-			[
-				'change_id', 'change_type', 'change_time', 'change_object_id',
-				'change_revision_id', 'change_user_id', 'change_info'
-			],
-			$where,
-			$method,
-			$options
+	private function newEntityChangeSelectQueryBuilder( IDatabase $db ): EntityChangeSelectQueryBuilder {
+		return new EntityChangeSelectQueryBuilder(
+			$db,
+			$this->entityIdParser,
+			$this->entityChangeFactory
 		);
-
-		return $this->changesFromRows( $rows );
-	}
-
-	/**
-	 * @param IResultWrapper $rows
-	 *
-	 * @return EntityChange[]
-	 */
-	private function changesFromRows( IResultWrapper $rows ) {
-		$changes = [];
-
-		foreach ( $rows as $row ) {
-			$data = [
-				'id' => (int)$row->change_id,
-				'time' => ConvertibleTimestamp::convert( TS_MW, $row->change_time ),
-				'info' => $row->change_info,
-				'user_id' => $row->change_user_id,
-				'revision_id' => $row->change_revision_id,
-			];
-			$entityId = $this->entityIdParser->parse( $row->change_object_id );
-			$changes[] = $this->entityChangeFactory->newForChangeType( $row->change_type, $entityId, $data );
-		}
-
-		return $changes;
 	}
 
 }

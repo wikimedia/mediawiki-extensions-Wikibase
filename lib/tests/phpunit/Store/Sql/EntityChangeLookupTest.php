@@ -16,6 +16,7 @@ use Wikimedia\Timestamp\ConvertibleTimestamp;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\EntityChangeLookup
+ * @covers \Wikibase\Lib\Store\Sql\EntityChangeSelectQueryBuilder
  *
  * @group Wikibase
  * @group WikibaseStore
