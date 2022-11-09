@@ -40,17 +40,6 @@ class EntityChangeLookupTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	public function testGetRecordId() {
-		$change = $this->createMock( EntityChange::class );
-		$change->expects( $this->once() )
-			->method( 'getId' )
-			->willReturn( 42 );
-
-		$changeLookup = $this->newEntityChangeLookup();
-
-		$this->assertSame( 42, $changeLookup->getRecordId( $change ) );
-	}
-
 	public static function setUpBeforeClass(): void {
 		parent::setUpBeforeClass();
 
@@ -59,69 +48,21 @@ class EntityChangeLookupTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	public function loadChunkProvider() {
-		[ $changeOne, $changeTwo, $changeThree ] = $this->getEntityChanges();
-
-		return [
-			'Get one change' => [
-				[ $changeOne ],
-				[ $changeThree, $changeTwo, $changeOne ],
-				3,
-				1
-			],
-			'Get two changes, with offset' => [
-				[ $changeOne, $changeTwo ],
-				[ $changeTwo, $changeTwo, $changeTwo ],
-				3,
-				2
-			],
-			'Ask for six changes (get two), with offset' => [
-				[ $changeTwo, $changeThree ],
-				[ $changeThree ],
-				6,
-				100
-			]
-		];
-	}
-
-	/**
-	 * @dataProvider loadChunkProvider
-	 */
-	public function testLoadChunk( array $expected, array $changesToStore, $start, $size ) {
+	public function testLoadByChangeIds() {
+		$this->db->delete( 'wb_changes', '*', __METHOD__ );
+		$changesToStore = $this->getEntityChanges();
 		$changeStore = new SqlChangeStore( $this->getRepoDomainDb() );
 		foreach ( $changesToStore as $change ) {
-			$change->setField( 'id', null ); // Null the id as we save the same changes multiple times
 			$changeStore->saveChange( $change );
 		}
-		$start = $this->offsetStart( $start );
-
 		$lookup = $this->newEntityChangeLookup();
 
-		$changes = $lookup->loadChunk( $start, $size );
+		$changeIds = array_map( static function ( EntityChange $change ) {
+			return $change->getId();
+		}, $changesToStore );
+		$changes = $lookup->loadByChangeIds( $changeIds );
 
-		$this->assertChangesEqual( $expected, $changes, $start );
-	}
-
-	/**
-	 * @depends testLoadChunk
-	 */
-	public function testLoadByChangeIds() {
-		$start = $this->offsetStart( 3 );
-
-		$lookup = $this->newEntityChangeLookup();
-
-		$changes = $lookup->loadByChangeIds( [ $start, $start + 1, $start + 4 ] );
-		[ $changeOne, $changeTwo, $changeThree ] = $this->getEntityChanges();
-
-		$this->assertChangesEqual(
-			[
-				$changeOne,
-				$changeTwo,
-				$changeThree,
-			],
-			$changes,
-			$start
-		);
+		$this->assertChangesEqual( $changesToStore, $changes );
 	}
 
 	public function testLoadChangesBefore(): void {
@@ -140,17 +81,13 @@ class EntityChangeLookupTest extends MediaWikiIntegrationTestCase {
 		$this->assertChangesEqual( [ $changesToStore[0] ], $changes );
 	}
 
-	private function assertChangesEqual( array $expected, array $changes, $start = 0 ) {
+	private function assertChangesEqual( array $expected, array $changes ) {
 		$this->assertCount( count( $expected ), $changes );
 
 		$i = 0;
 		foreach ( $changes as $change ) {
 			$expectedFields = $expected[$i]->getFields();
 			$actualFields = $change->getFields();
-
-			$this->assertGreaterThanOrEqual( $start, $actualFields['id'] );
-			unset( $expectedFields['id'] );
-			unset( $actualFields['id'] );
 
 			$this->assertEquals( $expectedFields, $actualFields );
 			$i++;
