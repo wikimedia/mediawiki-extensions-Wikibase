@@ -3,6 +3,7 @@
 		"authors": [
 			"Amire80",
 			"Bfpage",
+			"Kitanago",
 			"Tisave"
 		]
 	},
@@ -17,9 +18,9 @@
 	"wikibase-addlinkstitle": "Ajoute lyen entèlang yo",
 	"wikibase-linkitem-addlinks": "Ajoute lyen yo",
 	"wikibase-linkitem-close": "Fèmen dyalòg la epi rechaje paj la",
-	"wikibase-linkitem-title": "Relye ak yon paj",
-	"wikibase-linkitem-linkpage": "Relye ak yon paj",
-	"wikibase-linkitem-selectlink": "Tanpri chwazi yon sit ak yon paj ki ou vle relye nan paj sa a.",
+	"wikibase-linkitem-title": "Lyen ak paj la",
+	"wikibase-linkitem-linkpage": "Lyen ak paj la",
+	"wikibase-linkitem-selectlink": "Tanpri chwazi yon sit ak yon paj ke ou vle relye ak paj sa a.",
 	"wikibase-linkitem-input-site": "Lang :",
 	"wikibase-linkitem-input-page": "Paj :",
 	"wikibase-linkitem-confirmitem-button": "Konfime",
