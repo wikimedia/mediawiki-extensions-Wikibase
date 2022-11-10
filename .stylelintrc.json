@@ -3,8 +3,7 @@
 	"rules": {
 		"selector-max-id": null,
 		"no-duplicate-selectors": null,
-		"no-descending-specificity": null,
-		"declaration-no-important": null
+		"no-descending-specificity": null
 	},
 	"ignoreFiles": [
 		"lib/resources/lib/**"

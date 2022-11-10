@@ -9,6 +9,7 @@
 }
 
 .wikibase-aliasesview .wikibase-aliasesview-container {
+	/* stylelint-disable-next-line declaration-no-important */
 	display: block !important;
 	padding-left: 10px;
 	padding-right: 19em;
@@ -63,7 +64,9 @@
 }
 
 .wikibase-aliasesview .tagadata-choice input {
+	/* stylelint-disable-next-line declaration-no-important */
 	padding-top: 0 !important;
+	/* stylelint-disable-next-line declaration-no-important */
 	padding-bottom: 0 !important;
 }
 

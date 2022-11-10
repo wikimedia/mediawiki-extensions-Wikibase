@@ -7,6 +7,7 @@
 .wb-langlinks-link {
 	list-style: none;
 	text-align: right;
+	/* stylelint-disable-next-line declaration-no-important */
 	padding-right: 0.5em !important;
 }
 
@@ -25,6 +26,7 @@
 
 .wb-langlinks-link > a:link,
 .wb-langlinks-link > a:visited {
+	/* stylelint-disable-next-line declaration-no-important */
 	color: #54595d !important;
 }
 
@@ -36,6 +38,7 @@
 }
 
 .wb-langlinks-link > a:hover {
+	/* stylelint-disable-next-line declaration-no-important */
 	color: #0645ad !important;
 }
 
