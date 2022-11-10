@@ -131,16 +131,16 @@ abstract class ChangeModificationNotificationJob extends Job {
 			$timestamps[] = $dbr->timestamp( $revisionIdentifier->getRevisionTimestamp() );
 		}
 
-		return $dbr->select(
-			'recentchanges',
-			[ 'rc_id', 'rc_params' ],
-			[
+		return $dbr->newSelectQueryBuilder()
+			->select( [ 'rc_id', 'rc_params' ] )
+			->from( 'recentchanges' )
+			->where( [
 				'rc_timestamp' => $timestamps,
 				"rc_params $rcParamPattern",
 				'rc_source' => RecentChangeFactory::SRC_WIKIBASE
-			],
-			__METHOD__
-		);
+			] )
+			->caller( __METHOD__ )
+			->fetchResultSet();
 	}
 
 	/**
