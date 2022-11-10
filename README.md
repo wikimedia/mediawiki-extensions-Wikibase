@@ -81,6 +81,6 @@ Some notable (not a comprehensive list) mentions are
 * use of the [Javascript interfaces exposed by MediaWiki](https://www.mediawiki.org/wiki/Manual:Interface/JavaScript); e.g. `mw.hook` in [EntityInitializer](./repo/resources/wikibase.EntityInitializer.js)
 * frontend components making heavy use of jQuery; e.g. for so called [experts](repo/resources/experts/Entity.js)
 * the use of qunit to test this code; e.g. in `repo/tests/qunit`, available [via a special page](https://www.mediawiki.org/wiki/Manual:JavaScript_unit_testing)
-* [vue.js](https://vuejs.org/v2/guide/) as a frontend framework; e.g. in [data-bridge](./client/data-bridge), the [Lexeme](https://gerrit.wikimedia.org/r/plugins/gitiles/mediawiki/extensions/WikibaseLexeme/) extension, and [termbox](https://gerrit.wikimedia.org/g/wikibase/termbox)
+* [vue.js](https://vuejs.org/guide/introduction.html) as a frontend framework; e.g. in [data-bridge](./client/data-bridge), the [Lexeme](https://gerrit.wikimedia.org/r/plugins/gitiles/mediawiki/extensions/WikibaseLexeme/) extension, and [termbox](https://gerrit.wikimedia.org/g/wikibase/termbox)
 
 

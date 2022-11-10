@@ -2,11 +2,6 @@
 	"name": "Wikibase",
 	"version": "0.1.0",
 	"private": true,
-	"config": {
-		"remoteVersion": {
-			"vue": "https://raw.githubusercontent.com/wikimedia/mediawiki/#{ZUUL_BRANCH}/resources/lib/vue/vue.common.prod.js"
-		}
-	},
 	"scripts": {
 		"api-testing": "npm-run-all -p api-testing:*",
 		"api-testing:wikibase": "mocha --timeout 0 --recursive tests/api-testing",
@@ -31,7 +26,6 @@
 		"test-fast:grunt": "grunt test",
 		"test-fast:bridge": "npm --prefix client/data-bridge test",
 		"test-fast:tainted-ref": "npm --prefix view/lib/wikibase-tainted-ref test",
-		"test-fast:mwlibs": "echo 'disabled (T297381)' # ZUUL_BRANCH=${ZUUL_BRANCH:-master} lib-version-check",
 		"test-fast:rest-api": "npm --prefix repo/rest-api test",
 		"coverage": "npm --prefix client/data-bridge run-script test-unit-coverage",
 		"fix": "grunt fix"
@@ -42,7 +36,6 @@
 		"@wdio/mocha-framework": "^7.16.15",
 		"@wdio/spec-reporter": "7.16.13",
 		"@wdio/sync": "^7.16.13",
-		"@wmde/lib-version-check": "^0.1.0",
 		"api-testing": "^1.5.0",
 		"apollo-boost": "^0.4.9",
 		"cross-fetch": "^3.1.5",
@@ -54,7 +47,6 @@
 		"mocha": "^9.2.0",
 		"npm-run-all": "^4.1.5",
 		"stylelint-config-wikimedia": "0.11.1",
-		"vue": "^2.6.11",
 		"wdio-mediawiki": "^1.2.0",
 		"wdio-wikibase": "^5.2.0",
 		"webdriverio": "^7.16.13"
