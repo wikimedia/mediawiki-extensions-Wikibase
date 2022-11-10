@@ -26,11 +26,11 @@ require_once $basePath . '/maintenance/Maintenance.php';
 class PopulateEntityUsage extends LoggedUpdateMaintenance {
 
 	public function __construct() {
+		parent::__construct();
+
 		$this->addDescription( 'Populate the wbc_entity_usage table based on entries in page_props.' );
 
 		$this->addOption( 'start-page', "The page ID to start from.", false, true );
-
-		parent::__construct();
 
 		$this->setBatchSize( 1000 );
 	}
