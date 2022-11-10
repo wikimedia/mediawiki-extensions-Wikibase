@@ -151,7 +151,7 @@ class SitesBuilderTest extends \PHPUnit\Framework\TestCase {
 			];
 
 			$site = new MediaWikiSite();
-			$site->unserialize( serialize( $fields ) );
+			$site->__unserialize( $fields );
 			$siteId = $siteData['siteid'];
 			$sites[$siteId] = $site;
 		}
