@@ -71,21 +71,17 @@ class SqlSiteLinkConflictLookup implements SiteLinkConflictLookup {
 		//       by the database. We could chop it up of we know that size limit.
 		//       For MySQL, it's select @@max_allowed_packet.
 
-		$conflictingLinks = $dbr->select(
-			'wb_items_per_site',
-			[
+		$conflictingLinks = $dbr->newSelectQueryBuilder()
+			->select( [
 				'ips_site_id',
 				'ips_site_page',
 				'ips_item_id',
-			],
-			$dbr->makeList( [
-				$dbr->makeList( $linkConds, $dbr::LIST_OR ),
-				'ips_item_id != ' . (int)$item->getId()->getNumericId(),
-			], $dbr::LIST_AND ),
-			__METHOD__
-		);
-
-		$this->db->connections()->releaseConnection( $dbr );
+			] )
+			->from( 'wb_items_per_site' )
+			->where( $dbr->makeList( $linkConds, $dbr::LIST_OR ) )
+			->andWhere( [ 'ips_item_id != ' . (int)$item->getId()->getNumericId() ] )
+			->caller( __METHOD__ )
+			->fetchResultSet();
 
 		$conflicts = [];
 
