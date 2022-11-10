@@ -17,7 +17,8 @@
 			"Tar Lócesilion",
 			"The Polish",
 			"WTM",
-			"Woytecr"
+			"Woytecr",
+			"Msz2001"
 		]
 	},
 	"wikibase-client-desc": "Klient rozszerzenia Wikibase",
@@ -94,9 +95,12 @@
 	"wikibase-pageinfo-description-central": "Centralny opis",
 	"wikibase-pageinfo-entity-usage": "Obiekty z Wikidanych użyte na tej stronie",
 	"wikibase-pageinfo-entity-usage-S": "Link do strony",
+	"wikibase-pageinfo-entity-usage-L": "Kilka etykiet",
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "Etykieta: $1",
+	"wikibase-pageinfo-entity-usage-D": "Kilka opisów",
 	"wikibase-pageinfo-entity-usage-D-with-modifier": "Opis: $1",
 	"wikibase-pageinfo-entity-usage-T": "Tytuł",
+	"wikibase-pageinfo-entity-usage-C": "Kilka deklaracji",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Deklaracja: $1",
 	"wikibase-pageinfo-entity-usage-X": "Wszystkie dane encji",
 	"wikibase-pageinfo-entity-usage-O": "Inne (np. aliasy, sprawdzenie istnienia)",

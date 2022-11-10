@@ -1,10 +1,19 @@
 {
 	"@metadata": {
 		"authors": [
-			"Aefgh39622"
+			"Aefgh39622",
+			"Lookruk"
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}} ລາຍການ",
-	"wikibase-editlinks": "ແກ້ໄຂລິງກ໌",
-	"wikibase-editlinkstitle": "ແກ້ໄຂລິງກ໌ຂ້າມພາສາ"
+	"wikibase-editlinks": "ດັດແກ້ລິງກ໌",
+	"wikibase-editlinkstitle": "ແກ້ໄຂລິງກ໌ຂ້າມພາສາ",
+	"wikibase-linkitem-addlinks": "ເພີ່ມລິ້ງ",
+	"wikibase-linkitem-title": "ລິ້ງກັບໜ້າ",
+	"wikibase-linkitem-linkpage": "ລິ້ງກັບໜ້າ",
+	"wikibase-linkitem-selectlink": "ກະ​ລຸ​ນາ​ເລືອກ​​ໄຊແລະໜ້າ​ທີ່​ທ່ານ​ຕ້ອງ​ການ​ທີ່​ຈະ​ເຊື່ອມ​ຕໍ່​ກັບໜ້າ​ນີ້​",
+	"wikibase-linkitem-input-site": "ພາສາ:",
+	"wikibase-linkitem-input-page": "ໜ້າ:",
+	"wikibase-rc-hide-wikidata-hide": "ເຊື່ອງ",
+	"wikibase-rc-hide-wikidata-show": "ສະແດງ"
 }

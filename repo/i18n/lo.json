@@ -2,10 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"Aefgh39622",
-			"Iberia2011"
+			"Iberia2011",
+			"Lookruk"
 		]
 	},
-	"wikibase-edit": "ແກ້ໄຂ",
+	"wikibase-edit": "ດັດແກ້",
+	"wikibase-add": "ເພີ່ມ",
+	"wikibase-sitelinks-special": "ໄຊຕ໌ອື່ນ",
 	"wikibase-itemdisambiguation-lookup-language": "ລະຫັດພາສາ:",
 	"wikibase-modifyterm-language": "ລະຫັດພາສາ:"
 }
