@@ -8,6 +8,8 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikibase\DataModel\Reference;
+use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -50,6 +52,11 @@ class NewStatement {
 	 * @var Snak[]
 	 */
 	private $qualifiers = [];
+
+	/**
+	 * @var Reference[]
+	 */
+	private $references = [];
 
 	/**
 	 * @param NumericPropertyId|string $propertyId
@@ -174,6 +181,14 @@ class NewStatement {
 		return $result;
 	}
 
+	public function withReference( Reference $reference ): self {
+		$result = clone $this;
+
+		$result->references[] = $reference;
+
+		return $result;
+	}
+
 	private function __construct() {
 	}
 
@@ -216,6 +231,8 @@ class NewStatement {
 		foreach ( $this->qualifiers as $qualifier ) {
 			$result->getQualifiers()->addSnak( $qualifier );
 		}
+
+		$result->setReferences( new ReferenceList( $this->references ) );
 
 		return $result;
 	}

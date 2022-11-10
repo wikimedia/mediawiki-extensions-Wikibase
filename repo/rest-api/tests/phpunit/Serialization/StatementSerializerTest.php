@@ -91,14 +91,12 @@ class StatementSerializerTest extends TestCase {
 		$ref2 = new Reference( [
 			new PropertyNoValueSnak( new NumericPropertyId( 'P888' ) ),
 		] );
-		$statementWithReferences = NewStatement::noValueFor( 'P123' )
-			->withGuid( self::STATEMENT_ID )
-			->build();
-		$statementWithReferences->addNewReference( ...$ref1->getSnaks()->getArrayCopy() );
-		$statementWithReferences->addNewReference( ...$ref2->getSnaks()->getArrayCopy() );
-
 		yield 'with references' => [
-			$statementWithReferences,
+			NewStatement::noValueFor( 'P123' )
+				->withGuid( self::STATEMENT_ID )
+				->withReference( $ref1 )
+				->withReference( $ref2 )
+				->build(),
 			[
 				'id' => self::STATEMENT_ID,
 				'rank' => 'normal',
