@@ -112,20 +112,24 @@ class PropertyInfoTableBuilder {
 
 		$total = 0;
 
-		$join = [];
-		$tables = [ 'page' ];
+		$queryBuilderTemplate = $dbw->newSelectQueryBuilder();
+		$queryBuilderTemplate->select( [ 'page_title', 'page_id' ] )
+			->from( 'page' );
 
 		if ( !$this->shouldUpdateAllEntities ) {
-			$piTable = $this->propertyInfoTable->getTableName();
-
-			$tables[] = $piTable;
-			$join[$piTable] = [
-				'LEFT JOIN',
-				[
-					$dbw->buildConcat( [ "'P'", 'pi_property_id' ] ) . ' = page_title',
-				]
-			];
+			$queryBuilderTemplate->leftJoin(
+				$this->propertyInfoTable->getTableName(),
+				null,
+				$dbw->buildConcat( [ "'P'", 'pi_property_id' ] ) . ' = page_title'
+			);
+			$queryBuilderTemplate->where( 'pi_property_id IS NULL' ); // only add missing entries
 		}
+
+		$queryBuilderTemplate->where( [ 'page_namespace' => $propertyNamespace ] )
+			->orderBy( 'page_id', $queryBuilderTemplate::SORT_ASC )
+			->limit( $this->batchSize )
+			->forUpdate()
+			->caller( __METHOD__ );
 
 		$ticket = $this->propertyInfoTable->getDomainDb()->getEmptyTransactionTicket( __METHOD__ );
 		$pageId = 1;
@@ -137,22 +141,9 @@ class PropertyInfoTableBuilder {
 
 			$dbw->startAtomic( __METHOD__ );
 
-			$props = $dbw->select(
-				$tables,
-				[ 'page_title', 'page_id' ],
-				[
-					'page_id > ' . $pageId,
-					'page_namespace = ' . $propertyNamespace,
-					$this->shouldUpdateAllEntities ? '1=1' : 'pi_property_id IS NULL', // if not $all, only add missing entries
-				],
-				__METHOD__,
-				[
-					'LIMIT' => $this->batchSize,
-					'ORDER BY' => 'page_id ASC',
-					'FOR UPDATE'
-				],
-				$join
-			);
+			$queryBuilder = clone $queryBuilderTemplate;
+			$queryBuilder->where( 'page_id > ' . $pageId );
+			$props = $queryBuilder->fetchResultSet();
 
 			$c = 0;
 
