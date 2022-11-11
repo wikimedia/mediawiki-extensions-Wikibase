@@ -47,19 +47,18 @@ class PatchStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->initHandler(
 			$routeHandler,
 			new RequestData( [
-					'method' => 'PATCH',
-					'headers' => [
-						'User-Agent' => 'PHPUnit Test',
-						'Content-Type' => 'application/json'
-					],
-					'pathParams' => [
-						PatchStatementRouteHandler::STATEMENT_ID_PATH_PARAM => 'Q123$some-guid'
-					],
-					'bodyContents' => json_encode( [
-						'patch' => [ [ 'op' => 'remove', 'path' => '/references' ] ],
-					] )
-				]
-			)
+				'method' => 'PATCH',
+				'headers' => [
+					'User-Agent' => 'PHPUnit Test',
+					'Content-Type' => 'application/json'
+				],
+				'pathParams' => [
+					PatchStatementRouteHandler::STATEMENT_ID_PATH_PARAM => 'Q123$some-guid'
+				],
+				'bodyContents' => json_encode( [
+					'patch' => [ [ 'op' => 'remove', 'path' => '/references' ] ],
+				] )
+			] )
 		);
 		return $routeHandler;
 	}

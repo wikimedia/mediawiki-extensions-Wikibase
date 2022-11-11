@@ -47,12 +47,11 @@ class GetStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->initHandler(
 			$routeHandler,
 			new RequestData( [
-					'headers' => [ 'User-Agent' => 'PHPUnit Test' ],
-					'pathParams' => [
-						'statement_id' => 'Q123$F1EF6966-6CE3-4771-ADB1-C9B6BEFBC8F9'
-					]
+				'headers' => [ 'User-Agent' => 'PHPUnit Test' ],
+				'pathParams' => [
+					'statement_id' => 'Q123$F1EF6966-6CE3-4771-ADB1-C9B6BEFBC8F9'
 				]
-			)
+			] )
 		);
 		$this->validateHandler( $routeHandler );
 

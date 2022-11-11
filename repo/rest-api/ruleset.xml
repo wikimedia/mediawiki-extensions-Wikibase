@@ -4,6 +4,8 @@
 		config, from which it is loaded. -->
 
 	<rule ref="Generic.PHP.RequireStrictTypes" />
+	<rule ref="Generic.Arrays.ArrayIndent" />
+	<rule ref="PEAR.Functions.FunctionCallSignature.Indent" />
 	<rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHint">
 		<exclude name="SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification" />
 	</rule>

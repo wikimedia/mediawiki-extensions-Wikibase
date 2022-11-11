@@ -28,16 +28,16 @@ class StatementSerializer {
 
 		return array_merge(
 			[
-			'id' => $statement->getGuid(),
-			'rank' => self::RANK_LABELS[ $statement->getRank() ],
-			'qualifiers' => array_map(
-				fn( Snak $qualifier ) => $this->propertyValuePairSerializer->serialize( $qualifier ),
-				iterator_to_array( $statement->getQualifiers() )
-			),
-			'references' => array_map(
-				fn( Reference $reference ) => $this->referenceSerializer->serialize( $reference ),
-				iterator_to_array( $statement->getReferences() )
-			),
+				'id' => $statement->getGuid(),
+				'rank' => self::RANK_LABELS[ $statement->getRank() ],
+				'qualifiers' => array_map(
+					fn( Snak $qualifier ) => $this->propertyValuePairSerializer->serialize( $qualifier ),
+					iterator_to_array( $statement->getQualifiers() )
+				),
+				'references' => array_map(
+					fn( Reference $reference ) => $this->referenceSerializer->serialize( $reference ),
+					iterator_to_array( $statement->getReferences() )
+				),
 			],
 			$this->propertyValuePairSerializer->serialize( $statement->getMainSnak() )
 		);

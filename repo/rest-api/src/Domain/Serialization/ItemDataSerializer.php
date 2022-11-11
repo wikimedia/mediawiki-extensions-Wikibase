@@ -25,17 +25,20 @@ class ItemDataSerializer {
 	}
 
 	public function serialize( ItemData $itemData ): array {
-		return array_filter( [
-			'id' => $itemData->getId()->getSerialization(),
-			'type' => $itemData->getType(),
-			'labels' => $itemData->getLabels() ? new ArrayObject( $itemData->getLabels()->toTextArray() ) : null,
-			'descriptions' => $itemData->getDescriptions() ? new ArrayObject( $itemData->getDescriptions()->toTextArray() ) : null,
-			'aliases' => $itemData->getAliases() ? new ArrayObject( $itemData->getAliases()->toTextArray() ) : null,
-			'statements' => $itemData->getStatements() ? $this->statementsSerializer->serialize( $itemData->getStatements() ) : null,
-			'sitelinks' => $itemData->getSiteLinks() ? $this->siteLinksSerializer->serialize( $itemData->getSiteLinks() ) : null,
-		], function ( $part ) {
-			return $part !== null;
-		} );
+		return array_filter(
+			[
+				'id' => $itemData->getId()->getSerialization(),
+				'type' => $itemData->getType(),
+				'labels' => $itemData->getLabels() ? new ArrayObject( $itemData->getLabels()->toTextArray() ) : null,
+				'descriptions' => $itemData->getDescriptions() ? new ArrayObject( $itemData->getDescriptions()->toTextArray() ) : null,
+				'aliases' => $itemData->getAliases() ? new ArrayObject( $itemData->getAliases()->toTextArray() ) : null,
+				'statements' => $itemData->getStatements() ? $this->statementsSerializer->serialize( $itemData->getStatements() ) : null,
+				'sitelinks' => $itemData->getSiteLinks() ? $this->siteLinksSerializer->serialize( $itemData->getSiteLinks() ) : null,
+			],
+			function ( $part ) {
+				return $part !== null;
+			}
+		);
 	}
 
 }
