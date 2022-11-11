@@ -3,14 +3,12 @@
 namespace Wikibase\Repo\Tests\RestApi\Domain\Serialization;
 
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Serializers\SerializerFactory as LegacySerializerFactory;
 use Wikibase\DataModel\Serializers\SnakSerializer;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Tests\NewStatement;
-use Wikibase\Repo\RestApi\Domain\Model\ItemDataBuilder;
 use Wikibase\Repo\RestApi\Domain\Serialization\SerializerFactory;
 
 /**
@@ -54,23 +52,6 @@ class SerializerFactoryTest extends TestCase {
 		$this->assertEquals(
 			self::STUB_SNAK_SERIALIZATION + [ 'datatype' => self::PROPERTY_DATA[1]['datatype'] ],
 			$serializedStatementList->{self::PROPERTY_DATA[1]['propertyId']}[0]['mainsnak']
-		);
-	}
-
-	public function testNewItemDataSerializer(): void {
-		$itemData = ( new ItemDataBuilder() )->setId( new ItemId( 'Q123' ) )
-			->setStatements( new StatementList(
-				NewStatement::someValueFor( self::PROPERTY_DATA[2]['propertyId'] )->build()
-			) )
-			->build();
-
-		$serializedItemData = $this->newSerializerFactory()
-			->newItemDataSerializer()
-			->serialize( $itemData );
-
-		$this->assertEquals(
-			self::STUB_SNAK_SERIALIZATION + [ 'datatype' => self::PROPERTY_DATA[2]['datatype'] ],
-			$serializedItemData['statements']->{self::PROPERTY_DATA[2]['propertyId']}[0]['mainsnak']
 		);
 	}
 

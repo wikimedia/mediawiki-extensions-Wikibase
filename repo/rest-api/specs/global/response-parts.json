@@ -5,15 +5,30 @@
 			{
 				"required": [ "id", "type", "labels", "descriptions", "aliases", "statements", "sitelinks" ],
 				"properties": {
-					"statements": { "$ref": "#/StatementsResponse" }
+					"statements": { "$ref": "#/NewStatementsResponse" }
 				}
 			}
 		]
 	},
 	"StatementsResponse": {
-		"additionalProperties": {
-			"items": { "$ref": "#/StatementResponse" }
-		}
+		"allOf": [
+			{ "$ref": "./schema-parts.json#/Statements" },
+			{
+				"additionalProperties": {
+					"items": { "$ref": "#/StatementResponse" }
+				}
+			}
+		]
+	},
+	"NewStatementsResponse": {
+		"allOf": [
+			{ "$ref": "./schema-parts.json#/NewStatements" },
+			{
+				"additionalProperties": {
+					"items": { "$ref": "#/NewStatementResponse" }
+				}
+			}
+		]
 	},
 	"StatementResponse": {
 		"allOf": [
@@ -73,6 +88,11 @@
 	"NewStatementResponse": {
 		"allOf": [
 			{ "$ref": "./schemas.json#/NewStatement" },
+			{ "$ref": "#/NewStatementResponseRequired" }
+		]
+	},
+	"NewStatementResponseRequired": {
+		"allOf": [
 			{ "$ref": "#/PropertyValueResponseRequired" },
 			{
 				"required": [ "id", "rank", "qualifiers", "references" ],

@@ -2,6 +2,8 @@
 
 namespace Wikibase\Repo\RestApi\Serialization;
 
+use Wikibase\DataModel\Serializers\SiteLinkListSerializer;
+use Wikibase\DataModel\Serializers\SiteLinkSerializer;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 
 /**
@@ -21,4 +23,14 @@ class SerializerFactory {
 		return new StatementSerializer( $propertyValuePairSerializer, $referenceSerializer );
 	}
 
+	public function newStatementListSerializer(): StatementListSerializer {
+		return new StatementListSerializer( $this->newStatementSerializer() );
+	}
+
+	public function newItemDataSerializer(): ItemDataSerializer {
+		return new ItemDataSerializer(
+			$this->newStatementListSerializer(),
+			new SiteLinkListSerializer( new SiteLinkSerializer(), true )
+		);
+	}
 }

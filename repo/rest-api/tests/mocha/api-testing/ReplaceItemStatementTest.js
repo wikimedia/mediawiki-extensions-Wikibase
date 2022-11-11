@@ -172,11 +172,11 @@ describe( 'PUT statement tests', () => {
 
 					assert.strictEqual( actualSecondStatement.id, originalSecondStatement.id );
 					assert.strictEqual(
-						actualSecondStatement.mainsnak.datavalue.value,
+						actualSecondStatement.value.content,
 						newSecondStatement.mainsnak.datavalue.value
 					);
 					assert.notEqual(
-						actualSecondStatement.mainsnak.datavalue.value,
+						actualSecondStatement.value.content,
 						originalSecondStatement.mainsnak.datavalue.value
 					);
 				} );

@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Domain\Serialization;
 
+use ArrayObject;
 use Generator;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -9,7 +10,6 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Serializers\SiteLinkListSerializer;
 use Wikibase\DataModel\Serializers\SiteLinkSerializer;
-use Wikibase\DataModel\Serializers\StatementListSerializer;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\AliasGroup;
@@ -18,10 +18,11 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Domain\Model\ItemData;
 use Wikibase\Repo\RestApi\Domain\Model\ItemDataBuilder;
-use Wikibase\Repo\RestApi\Domain\Serialization\ItemDataSerializer;
+use Wikibase\Repo\RestApi\Serialization\ItemDataSerializer;
+use Wikibase\Repo\RestApi\Serialization\StatementListSerializer;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Domain\Serialization\ItemDataSerializer
+ * @covers \Wikibase\Repo\RestApi\Serialization\ItemDataSerializer
  *
  * @group Wikibase
  *
@@ -41,10 +42,14 @@ class ItemDataSerializerTest extends TestCase {
 
 	protected function setUp(): void {
 		$this->statementsSerializer = $this->createMock( StatementListSerializer::class );
-		$this->statementsSerializer->method( 'serialize' )->willReturn( [ 'some' => 'serialization' ] );
+		$this->statementsSerializer
+			->method( 'serialize' )
+			->willReturn( new ArrayObject( [ 'some' => 'serialization' ] ) );
 
 		$this->siteLinkListSerializer = $this->createMock( SiteLinkListSerializer::class );
-		$this->siteLinkListSerializer->method( 'serialize' )->willReturn( [ 'some' => 'serialization' ] );
+		$this->siteLinkListSerializer
+			->method( 'serialize' )
+			->willReturn( new ArrayObject( [ 'some' => 'serialization' ] ) );
 	}
 
 	public function testSerializeId(): void {
@@ -117,7 +122,7 @@ class ItemDataSerializerTest extends TestCase {
 
 	public function testSerializeStatements(): void {
 		$statements = $this->createStub( StatementList::class );
-		$expectedSerialization = [ 'some' => 'serialization' ];
+		$expectedSerialization = new ArrayObject( [ 'some' => 'serialization' ] );
 
 		$itemData = $this->newItemDataBuilderWithSomeId()
 			->setStatements( $statements )

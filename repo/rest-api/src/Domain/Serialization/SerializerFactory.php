@@ -25,13 +25,6 @@ class SerializerFactory {
 		$this->dataTypeLookup = $dataTypeLookup;
 	}
 
-	public function newItemDataSerializer(): ItemDataSerializer {
-		return new ItemDataSerializer(
-			$this->newStatementListSerializer(),
-			new SiteLinkListSerializer( $this->legacySerializerFactory->newSiteLinkSerializer(), true )
-		);
-	}
-
 	public function newStatementListSerializer(): StatementListSerializer {
 		return new StatementListSerializer( $this->newStatementSerializer(), true );
 	}

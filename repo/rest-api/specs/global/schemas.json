@@ -21,7 +21,7 @@
 				"$ref": "./schema-parts.json#/Sitelinks"
 			},
 			"statements": {
-				"$ref": "./schema-parts.json#/Statements"
+				"$ref": "./schema-parts.json#/NewStatements"
 			}
 		},
 		"discriminator": {

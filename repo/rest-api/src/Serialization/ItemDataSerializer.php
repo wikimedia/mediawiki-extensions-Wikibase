@@ -1,10 +1,9 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Domain\Serialization;
+namespace Wikibase\Repo\RestApi\Serialization;
 
 use ArrayObject;
 use Wikibase\DataModel\Serializers\SiteLinkListSerializer;
-use Wikibase\DataModel\Serializers\StatementListSerializer;
 use Wikibase\Repo\RestApi\Domain\Model\ItemData;
 
 /**
