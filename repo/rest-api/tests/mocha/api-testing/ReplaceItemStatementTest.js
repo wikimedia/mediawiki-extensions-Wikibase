@@ -77,13 +77,18 @@ describe( 'PUT statement tests', () => {
 					assertValid200Response( response );
 
 					assert.deepEqual(
-						response.body.mainsnak.datavalue,
-						statementSerialization.mainsnak.datavalue
+						response.body.value.content,
+						statementSerialization.mainsnak.datavalue.value
 					);
 					const { comment } = await entityHelper.getLatestEditMetadata( testItemId );
 					assert.strictEqual(
 						comment,
-						formatStatementEditSummary( 'wbsetclaim', 'update', statementSerialization.mainsnak )
+						formatStatementEditSummary(
+							'wbsetclaim',
+							'update',
+							statementSerialization.mainsnak.property,
+							statementSerialization.mainsnak.datavalue.value
+						)
 					);
 				} );
 
@@ -104,8 +109,8 @@ describe( 'PUT statement tests', () => {
 
 					assertValid200Response( response );
 					assert.deepEqual(
-						response.body.mainsnak.datavalue,
-						statementSerialization.mainsnak.datavalue
+						response.body.value.content,
+						statementSerialization.mainsnak.datavalue.value
 					);
 
 					const editMetadata = await entityHelper.getLatestEditMetadata( testItemId );
@@ -116,7 +121,8 @@ describe( 'PUT statement tests', () => {
 						formatStatementEditSummary(
 							'wbsetclaim',
 							'update',
-							statementSerialization.mainsnak,
+							statementSerialization.mainsnak.property,
+							statementSerialization.mainsnak.datavalue.value,
 							editSummary
 						)
 					);

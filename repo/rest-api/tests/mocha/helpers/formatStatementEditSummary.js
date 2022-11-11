@@ -1,8 +1,6 @@
 'use strict';
 
-module.exports = function formatStatementEditSummary( module, action, mainsnak, userComment ) {
-	const property = mainsnak.property;
-	const value = mainsnak.datavalue.value;
+module.exports = function formatStatementEditSummary( module, action, property, value, userComment ) {
 	const commentArgs = module === 'wbsetclaim' ? '1||1' : '1|';
 	const autoSummary = `/* ${module}-${action}:${commentArgs} */ [[Property:${property}]]: ${value}`;
 

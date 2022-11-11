@@ -440,7 +440,7 @@
 		"content": {
 			"application/json": {
 				"schema": {
-					"$ref": "./response-parts.json#/StatementResponse"
+					"$ref": "./response-parts.json#/NewStatementResponse"
 				}
 			}
 		}
@@ -476,7 +476,7 @@
 		"content": {
 			"application/json": {
 				"schema": {
-					"$ref": "./response-parts.json#/StatementResponse"
+					"$ref": "./response-parts.json#/NewStatementResponse"
 				}
 			}
 		}

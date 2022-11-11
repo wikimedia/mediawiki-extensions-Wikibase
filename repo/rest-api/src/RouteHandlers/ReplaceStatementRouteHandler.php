@@ -58,7 +58,7 @@ class ReplaceStatementRouteHandler extends SimpleHandler {
 		$responseFactory = new ResponseFactory( new ErrorJsonPresenter() );
 		return new self(
 			WbRestApi::getReplaceItemStatement(),
-			new StatementJsonPresenter( WbRestApi::getSerializerFactory()->newStatementSerializer() ),
+			new StatementJsonPresenter( WbRestApi::getRestSerializerFactory()->newStatementSerializer() ),
 			new MiddlewareHandler( [
 				new UnexpectedErrorHandlerMiddleware( $responseFactory, WikibaseRepo::getLogger() ),
 				new UserAgentCheckMiddleware(),

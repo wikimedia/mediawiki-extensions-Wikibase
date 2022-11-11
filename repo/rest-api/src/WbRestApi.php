@@ -4,10 +4,11 @@ namespace Wikibase\Repo\RestApi;
 
 use MediaWiki\MediaWikiServices;
 use Psr\Container\ContainerInterface;
-use Wikibase\Repo\RestApi\Domain\Serialization\SerializerFactory;
+use Wikibase\Repo\RestApi\Domain\Serialization\SerializerFactory as DomainSerializerFactory;
 use Wikibase\Repo\RestApi\Domain\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
+use Wikibase\Repo\RestApi\Serialization\SerializerFactory as RestSerializerFactory;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatement;
@@ -36,9 +37,14 @@ class WbRestApi {
 			->get( 'WbRestApi.GetItemStatement' );
 	}
 
-	public static function getSerializerFactory( ContainerInterface $services = null ): SerializerFactory {
+	public static function getDomainSerializerFactory( ContainerInterface $services = null ): DomainSerializerFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.SerializerFactory' );
+			->get( 'WbRestApi.DomainSerializerFactory' );
+	}
+
+	public static function getRestSerializerFactory( ContainerInterface $services = null ): RestSerializerFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.RestSerializerFactory' );
 	}
 
 	public static function getAddItemStatement( ContainerInterface $services = null ): AddItemStatement {
