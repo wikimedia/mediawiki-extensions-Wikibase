@@ -57,5 +57,40 @@
 			"P31": [ ],
 			"P100": [ ]
 		}
+	},
+	"PropertyValuePair": {
+		"type": "object",
+		"properties": {
+			"property": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"description": "The ID of the Property",
+						"type": "string",
+						"example": "P92"
+					},
+					"data-type": {
+						"description": "The data type of the Property",
+						"type": "string",
+						"readOnly": true,
+						"example": "string"
+					}
+				}
+			},
+			"value": {
+				"type": "object",
+				"properties": {
+					"content": {
+						"description": "The value, if type == \"value\", otherwise omitted",
+						"example": "I am a goat"
+					},
+					"type": {
+						"description": "The value type",
+						"type": "string",
+						"enum": [ "value", "somevalue", "novalue" ]
+					}
+				}
+			}
+		}
 	}
 }

@@ -175,5 +175,60 @@
 				}
 			}
 		]
+	},
+	"NewStatement": {
+		"allOf": [
+			{
+				"type": "object",
+				"properties": {
+					"id": {
+						"description": "The globally unique identifier for this Statement",
+						"type": "string",
+						"readOnly": true,
+						"example": "Q11$6403c562-401a-2b26-85cc-8327801145e1"
+					},
+					"rank": {
+						"description": "The rank of the Statement",
+						"type": "string",
+						"enum": [ "deprecated", "normal", "preferred" ],
+						"default": "normal"
+					}
+				}
+			},
+			{ "$ref": "./schema-parts.json#/PropertyValuePair" },
+			{
+				"type": "object",
+				"properties": {
+					"qualifiers": {
+						"type": "array",
+						"items": { "$ref": "#/NewQualifier" },
+						"default": [ ]
+					},
+					"references": {
+						"type": "array",
+						"items": { "$ref": "#/NewReference" },
+						"default": [ ]
+					}
+				}
+			}
+		]
+	},
+	"NewQualifier": {
+		"$ref": "./schema-parts.json#/PropertyValuePair"
+	},
+	"NewReference": {
+		"type": "object",
+		"properties": {
+			"hash": {
+				"description": "Hash of the Reference",
+				"type": "string",
+				"readOnly": true,
+				"example": "455481eeac76e6a8af71a6b493c073d54788e7e9"
+			},
+			"parts": {
+				"type": "array",
+				"items": { "$ref": "./schema-parts.json#/PropertyValuePair" }
+			}
+		}
 	}
 }
