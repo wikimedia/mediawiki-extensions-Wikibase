@@ -66,8 +66,9 @@ class StatementSerializerTest extends TestCase {
 
 	private function newSerializer(): StatementSerializer {
 		return new StatementSerializer( ( new SerializerFactory(
-			new DataValueSerializer(), SerializerFactory::OPTION_OBJECTS_FOR_MAPS )
-		)->newStatementSerializer() );
+			new DataValueSerializer(),
+			SerializerFactory::OPTION_OBJECTS_FOR_MAPS
+		) )->newStatementSerializer() );
 	}
 
 }

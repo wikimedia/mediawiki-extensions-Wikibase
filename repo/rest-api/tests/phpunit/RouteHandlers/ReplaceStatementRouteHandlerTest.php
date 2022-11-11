@@ -47,24 +47,23 @@ class ReplaceStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->initHandler(
 			$routeHandler,
 			new RequestData( [
-					'method' => 'PUT',
-					'headers' => [
-						'User-Agent' => 'PHPUnit Test',
-						'Content-Type' => 'application/json'
-					],
-					'pathParams' => [
-						ReplaceStatementRouteHandler::STATEMENT_ID_PATH_PARAM => 'Q1$1e63e3d9-4bd4-7671-706c-b745db23c3f1',
-					],
-					'bodyContents' => json_encode( [
-						'statement' => [
-							'mainsnak' => [
-								'snaktype' => 'novalue',
-								'property' => 'P1',
-							],
+				'method' => 'PUT',
+				'headers' => [
+					'User-Agent' => 'PHPUnit Test',
+					'Content-Type' => 'application/json'
+				],
+				'pathParams' => [
+					ReplaceStatementRouteHandler::STATEMENT_ID_PATH_PARAM => 'Q1$1e63e3d9-4bd4-7671-706c-b745db23c3f1',
+				],
+				'bodyContents' => json_encode( [
+					'statement' => [
+						'mainsnak' => [
+							'snaktype' => 'novalue',
+							'property' => 'P1',
 						],
-					] )
-				]
-			)
+					],
+				] )
+			] )
 		);
 		return $routeHandler;
 	}

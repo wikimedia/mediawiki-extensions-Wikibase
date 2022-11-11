@@ -47,33 +47,32 @@ class AddItemStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->initHandler(
 			$routeHandler,
 			new RequestData( [
-					'method' => 'POST',
-					'headers' => [
-						'User-Agent' => 'PHPUnit Test',
-						'Content-Type' => 'application/json'
-					],
-					'pathParams' => [
-						AddItemStatementRouteHandler::ITEM_ID_PATH_PARAM => 'Q123'
-					],
-					'bodyContents' => json_encode( [
-						'statement' => [
-							'mainsnak' => [
-								'snaktype' => "value",
-								'property' => "P1",
-								'datavalue' => [
-									'type' => "string",
-									'value' => "I am a goat"
-								],
-								'hash' => "455481eeac76e6a8af71a6b493c073d54788e7e9"
+				'method' => 'POST',
+				'headers' => [
+					'User-Agent' => 'PHPUnit Test',
+					'Content-Type' => 'application/json'
+				],
+				'pathParams' => [
+					AddItemStatementRouteHandler::ITEM_ID_PATH_PARAM => 'Q123'
+				],
+				'bodyContents' => json_encode( [
+					'statement' => [
+						'mainsnak' => [
+							'snaktype' => "value",
+							'property' => "P1",
+							'datavalue' => [
+								'type' => "string",
+								'value' => "I am a goat"
 							],
-							'rank' => "preferred",
-							'references' => []
-
+							'hash' => "455481eeac76e6a8af71a6b493c073d54788e7e9"
 						],
-						'tags' => [ 'edit', 'tags' ],
-					] )
-				]
-			)
+						'rank' => "preferred",
+						'references' => []
+
+					],
+					'tags' => [ 'edit', 'tags' ],
+				] )
+			] )
 		);
 		return $routeHandler;
 	}

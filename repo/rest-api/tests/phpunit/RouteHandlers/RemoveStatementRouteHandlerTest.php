@@ -47,19 +47,18 @@ class RemoveStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->initHandler(
 			$routeHandler,
 			new RequestData( [
-					'method' => 'DELETE',
-					'headers' => [
-						'User-Agent' => 'PHPUnit Test',
-						'Content-Type' => 'application/json'
-					],
-					'pathParams' => [
-						RemoveStatementRouteHandler::STATEMENT_ID_PATH_PARAM => 'Q123$some-guid'
-					],
-					'bodyContents' => json_encode( [
-						'tags' => [ 'edit', 'tags' ],
-					] )
-				]
-			)
+				'method' => 'DELETE',
+				'headers' => [
+					'User-Agent' => 'PHPUnit Test',
+					'Content-Type' => 'application/json'
+				],
+				'pathParams' => [
+					RemoveStatementRouteHandler::STATEMENT_ID_PATH_PARAM => 'Q123$some-guid'
+				],
+				'bodyContents' => json_encode( [
+					'tags' => [ 'edit', 'tags' ],
+				] )
+			] )
 		);
 		return $routeHandler;
 	}

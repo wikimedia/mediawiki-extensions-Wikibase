@@ -107,11 +107,13 @@ class JsonDiffJsonPatchValidatorTest extends TestCase {
 	}
 
 	public function testValidJsonPatch(): void {
-		$validPatch = [ [
-			'op' => 'replace',
-			'path' => '/mainsnak/datavalue/value',
-			'value' => 'patched',
-		] ];
+		$validPatch = [
+			[
+				'op' => 'replace',
+				'path' => '/mainsnak/datavalue/value',
+				'value' => 'patched',
+			]
+		];
 		$this->assertNull(
 			( new JsonDiffJsonPatchValidator() )->validate( $validPatch )
 		);
