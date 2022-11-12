@@ -20,6 +20,10 @@ class DivergingEntityIdException extends BadRevisionException {
 		parent::__construct( "Revision $revisionId belongs to $actualEntityId instead of expected $expectedEntityId" );
 	}
 
+	/**
+	 * @return array
+	 * @phan-return non-empty-array
+	 */
 	public function getNormalizedDataForLogging(): array {
 		return [
 			'Revision {revisionId} belongs to {actualEntityId} instead of expected {entityId}',
