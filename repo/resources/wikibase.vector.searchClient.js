@@ -55,6 +55,9 @@
 	const vectorSearchClient = {
 		fetchByTitle: ( q, limit = 10, _showDescription = true ) => {
 			return fetchResults( q, limit );
+		},
+		loadMore: ( q, offset, limit = 10, _showDescription = true ) => {
+			return fetchResults( q, limit, offset );
 		}
 	};
 

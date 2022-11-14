@@ -42,7 +42,15 @@ describe( 'Vector Search Client', () => {
 		]
 	} ];
 
-	it( 'test construction and fetchByTitle behavior', async () => {
+	beforeEach( () => {
+		// ensure that require( searchClient.js ) has the side-effect we want to test each time
+		jest.resetModules();
+	} );
+
+	it.each( [
+		[ 'fetchByTitle' ],
+		[ 'loadMore' ]
+	] )( 'test construction and %s behavior', async ( name ) => {
 		const fakeApiInstance = {
 			get: jest.fn().mockResolvedValue( {
 				search: mockApiResults
@@ -62,14 +70,10 @@ describe( 'Vector Search Client', () => {
 		const vectorSearchClient = global.mw.config.set.mock.calls[ 0 ][ 1 ];
 
 		const exampleSearchString = 'abc';
+		const vectorOffset = 20;
 		const vectorLimit = 10;
 
-		const apiController = vectorSearchClient.fetchByTitle(
-			exampleSearchString,
-			vectorLimit,
-			true
-		);
-		expect( fakeApiInstance.get ).toHaveBeenCalledWith( {
+		const expectedParams = {
 			action: 'wbsearchentities',
 			search: exampleSearchString,
 			limit: vectorLimit,
@@ -78,7 +82,26 @@ describe( 'Vector Search Client', () => {
 			type: 'item',
 			format: 'json',
 			errorformat: 'plaintext'
-		} );
+		};
+		let apiController;
+		if ( name === 'fetchByTitle' ) {
+			apiController = vectorSearchClient.fetchByTitle(
+				exampleSearchString,
+				vectorLimit,
+				true
+			);
+		} else if ( name === 'loadMore' ) {
+			apiController = vectorSearchClient.loadMore(
+				exampleSearchString,
+				vectorOffset,
+				vectorLimit,
+				true
+			);
+			expectedParams.continue = vectorOffset;
+		} else {
+			throw new Error( `Unexpected test name ${name}` );
+		}
+		expect( fakeApiInstance.get ).toHaveBeenCalledWith( expectedParams );
 
 		const actualTransformedResult = await apiController.fetch;
 		expect( actualTransformedResult ).toStrictEqual( {
