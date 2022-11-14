@@ -27,6 +27,8 @@ require_once $basePath . '/maintenance/Maintenance.php';
 class UpdateSubscriptions extends Maintenance {
 
 	public function __construct() {
+		parent::__construct();
+
 		$this->addDescription( 'Updates the repo\'s wb_changes_subscription table based on entries'
 			. ' in wbc_entity_usage.' );
 
@@ -37,8 +39,6 @@ class UpdateSubscriptions extends Maintenance {
 			false,
 			false
 		);
-
-		parent::__construct();
 
 		$this->setBatchSize( 1000 );
 	}
