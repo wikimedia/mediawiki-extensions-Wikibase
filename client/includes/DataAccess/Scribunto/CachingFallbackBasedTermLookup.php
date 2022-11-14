@@ -6,7 +6,7 @@ namespace Wikibase\Client\DataAccess\Scribunto;
 use Language;
 use LogicException;
 use MediaWiki\Languages\LanguageFactory;
-use MWException;
+use MediaWiki\Languages\LanguageNameUtils;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Term\TermFallback;
@@ -51,6 +51,9 @@ class CachingFallbackBasedTermLookup implements TermLookup {
 	/** @var LanguageFactory */
 	private $languageFactory;
 
+	/** @var LanguageNameUtils */
+	private $langNameUtils;
+
 	/** @var ContentLanguages */
 	private $contentLanguages;
 
@@ -63,6 +66,7 @@ class CachingFallbackBasedTermLookup implements TermLookup {
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		TermLookup $termLookup,
 		LanguageFactory $languageFactory,
+		LanguageNameUtils $langNameUtils,
 		ContentLanguages $contentLanguages
 	) {
 		$this->termFallbackCache = $termFallbackCacheFacade;
@@ -70,6 +74,7 @@ class CachingFallbackBasedTermLookup implements TermLookup {
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 		$this->termLookup = $termLookup;
 		$this->languageFactory = $languageFactory;
+		$this->langNameUtils = $langNameUtils;
 		$this->contentLanguages = $contentLanguages;
 	}
 
@@ -93,9 +98,9 @@ class CachingFallbackBasedTermLookup implements TermLookup {
 			return null;
 		}
 
-		try {
+		if ( $this->langNameUtils->isValidCode( $languageCode ) ) {
 			$language = $this->languageFactory->getLanguage( $languageCode );
-		} catch ( MWException $e ) {
+		} else {
 			return null;
 		}
 
