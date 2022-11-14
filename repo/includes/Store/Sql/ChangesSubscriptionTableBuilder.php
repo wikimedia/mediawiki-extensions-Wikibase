@@ -187,30 +187,28 @@ class ChangesSubscriptionTableBuilder {
 	 * @return array[] An associative array mapping item IDs to lists of site IDs.
 	 */
 	private function getSubscriptionsPerItemBatch( IDatabase $db, &$continuation = [] ) {
-		if ( empty( $continuation ) ) {
-			$continuationCondition = '1=1';
-		} else {
+		$queryBuilder = $db->newSelectQueryBuilder();
+		$queryBuilder->select( [ 'ips_row_id', 'ips_item_id', 'ips_site_id' ] )
+			->from( 'wb_items_per_site' );
+
+		$continuationMsg = '';
+		if ( !empty( $continuation ) ) {
 			list( $fromItemId, $fromRowId ) = $continuation;
 			$continuationCondition = $db->buildComparison( '>', [
 				'ips_item_id' => (int)$fromItemId,
 				'ips_row_id' => $fromRowId,
 			] );
+			$queryBuilder->where( $continuationCondition );
+			$continuationMsg = ' with continuation: ' . $continuationCondition;
 		}
 
-		$res = $db->select(
-			'wb_items_per_site',
-			[ 'ips_row_id', 'ips_item_id', 'ips_site_id' ],
-			$continuationCondition,
-			__METHOD__,
-			[
-				'LIMIT' => $this->batchSize,
-				'ORDER BY' => 'ips_item_id, ips_row_id'
-			]
-		);
+		$queryBuilder->orderBy( [ 'ips_item_id', 'ips_row_id' ] )
+			->limit( $this->batchSize );
+		$res = $queryBuilder->caller( __METHOD__ )->fetchResultSet();
 
 		if ( $this->verbosity === 'verbose' ) {
 			$this->progressReporter->reportMessage( 'Selected ' . $res->numRows() . ' wb_item_per_site records'
-				. ' with continuation: ' . $continuationCondition );
+				. $continuationMsg );
 		}
 
 		return $this->getSubscriptionsPerItemFromRows( $res, $continuation );
