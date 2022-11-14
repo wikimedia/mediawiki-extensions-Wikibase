@@ -69,5 +69,48 @@
 	},
 	"ReferencesResponseRequired": {
 		"items": { "$ref": "#/ReferenceResponseRequired" }
+	},
+	"NewStatementResponse": {
+		"allOf": [
+			{ "$ref": "./schemas.json#/NewStatement" },
+			{ "$ref": "#/PropertyValueResponseRequired" },
+			{
+				"required": [ "id", "rank", "qualifiers", "references" ],
+				"properties": {
+					"qualifiers": { "$ref": "#/NewQualifiersResponseRequired" },
+					"references": { "$ref": "#/NewReferencesResponseRequired" }
+				}
+			}
+		]
+	},
+	"NewQualifiersResponseRequired": {
+		"items": { "$ref": "#/NewQualifierResponseRequired" }
+	},
+	"NewQualifierResponseRequired": {
+		"$ref": "#/PropertyValueResponseRequired"
+	},
+	"NewReferencesResponseRequired": {
+		"items": { "$ref": "#/NewReferenceResponseRequired" }
+	},
+	"NewReferenceResponseRequired": {
+		"required": [ "hash", "parts" ],
+		"properties": {
+			"parts": {
+				"items": {
+					"$ref": "#/PropertyValueResponseRequired"
+				}
+			}
+		}
+	},
+	"PropertyValueResponseRequired": {
+		"required": [ "property", "value" ],
+		"properties": {
+			"property": {
+				"required": [ "id", "data-type" ]
+			},
+			"value": {
+				"required": [ "type" ]
+			}
+		}
 	}
 }

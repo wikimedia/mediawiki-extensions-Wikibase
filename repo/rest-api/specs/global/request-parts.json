@@ -105,5 +105,48 @@
 			"qualifiers": { "$ref": "#/QualifiersRequestRequired" },
 			"references": { "$ref": "#/ReferencesRequestRequired" }
 		}
+	},
+	"NewStatementRequestRequired": {
+		"allOf": [
+			{ "$ref": "#/PropertyValuePairRequestRequired" },
+			{
+				"properties": {
+					"qualifiers": {
+						"items": {
+							"$ref": "#/NewQualifierRequestRequired"
+						}
+					},
+					"references": {
+						"items": {
+							"$ref": "#/NewReferenceRequestRequired"
+						}
+					}
+				}
+			}
+		]
+	},
+	"NewQualifierRequestRequired": {
+		"$ref": "#/PropertyValuePairRequestRequired"
+	},
+	"NewReferenceRequestRequired": {
+		"required": [ "parts" ],
+		"properties": {
+			"parts": {
+				"items": {
+					"$ref": "#/PropertyValuePairRequestRequired"
+				}
+			}
+		}
+	},
+	"PropertyValuePairRequestRequired": {
+		"required": [ "property", "value" ],
+		"properties": {
+			"property": {
+				"required": [ "id" ]
+			},
+			"value": {
+				"required": [ "type" ]
+			}
+		}
 	}
 }
