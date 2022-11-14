@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Serialization;
 
+use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 
@@ -11,9 +12,14 @@ use Wikibase\DataModel\Statement\Statement;
 class StatementDeserializer {
 
 	private PropertyValuePairDeserializer $propertyValuePairDeserializer;
+	private ReferenceDeserializer $referenceDeserializer;
 
-	public function __construct( PropertyValuePairDeserializer $propertyValuePairDeserializer ) {
+	public function __construct(
+		PropertyValuePairDeserializer $propertyValuePairDeserializer,
+		ReferenceDeserializer $referenceDeserializer
+	) {
 		$this->propertyValuePairDeserializer = $propertyValuePairDeserializer;
+		$this->referenceDeserializer = $referenceDeserializer;
 	}
 
 	public function deserialize( array $serialization ): Statement {
@@ -35,7 +41,10 @@ class StatementDeserializer {
 				fn( array $q ) => $this->propertyValuePairDeserializer->deserialize( $q ),
 				$qualifiers
 			) ),
-			null, // TODO
+			new ReferenceList( array_map(
+				fn( array $r ) => $this->referenceDeserializer->deserialize( $r ),
+				$references
+			) ),
 			$id
 		);
 		$statement->setRank( array_flip( StatementSerializer::RANK_LABELS )[$rank] );

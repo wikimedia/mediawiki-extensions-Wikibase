@@ -5,12 +5,14 @@ namespace Wikibase\Repo\Tests\RestApi\Serialization;
 use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\Serialization\InvalidFieldException;
 use Wikibase\Repo\RestApi\Serialization\PropertyValuePairDeserializer;
+use Wikibase\Repo\RestApi\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\RestApi\Serialization\StatementDeserializer;
 
 /**
@@ -28,9 +30,9 @@ class StatementDeserializerTest extends TestCase {
 	 * @dataProvider serializationProvider
 	 */
 	public function testDeserialize( Statement $expectedStatement, array $serialization ): void {
-		$this->assertEquals(
-			$expectedStatement,
+		$this->assertTrue(
 			$this->newDeserializer()->deserialize( $serialization )
+				->equals( $expectedStatement )
 		);
 	}
 
@@ -88,7 +90,43 @@ class StatementDeserializerTest extends TestCase {
 			],
 		];
 
-		// TODO references
+		yield 'with references' => [
+			NewStatement::someValueFor( 'P23' )
+				->withReference( new Reference( [
+					new PropertySomeValueSnak( new NumericPropertyId( 'P234' ) ),
+				] ) )
+				->withReference( new Reference( [
+					new PropertySomeValueSnak( new NumericPropertyId( 'P345' ) ),
+					new PropertySomeValueSnak( new NumericPropertyId( 'P456' ) ),
+				] ) )
+				->build(),
+			[
+				'property' => [ 'id' => 'P23' ],
+				'value' => [ 'type' => 'somevalue' ],
+				'references' => [
+					[
+						'parts' => [
+							[
+								'property' => [ 'id' => 'P234' ],
+								'value' => [ 'type' => 'somevalue' ],
+							],
+						]
+					],
+					[
+						'parts' => [
+							[
+								'property' => [ 'id' => 'P345' ],
+								'value' => [ 'type' => 'somevalue' ],
+							],
+							[
+								'property' => [ 'id' => 'P456' ],
+								'value' => [ 'type' => 'somevalue' ],
+							],
+						]
+					],
+				]
+			],
+		];
 	}
 
 	/**
@@ -157,12 +195,19 @@ class StatementDeserializerTest extends TestCase {
 	}
 
 	private function newDeserializer(): StatementDeserializer {
-		$propValPairDeserializer = $this->createStub( PropertyValuePairDeserializer::class );
-		$propValPairDeserializer->method( 'deserialize' )->willReturnCallback(
-			fn( array $p ) => new PropertySomeValueSnak( new NumericPropertyId( $p['property']['id'] ) )
-		);
+		$newSomeValueSnakFromSerialization = fn( array $p ) => new PropertySomeValueSnak( new NumericPropertyId( $p['property']['id'] ) );
 
-		return new StatementDeserializer( $propValPairDeserializer );
+		$propValPairDeserializer = $this->createStub( PropertyValuePairDeserializer::class );
+		$propValPairDeserializer->method( 'deserialize' )
+			->willReturnCallback( $newSomeValueSnakFromSerialization );
+
+		$referenceDeserializer = $this->createStub( ReferenceDeserializer::class );
+		$referenceDeserializer->method( 'deserialize' )
+			->willReturnCallback( fn( array $ref ) => new Reference(
+				array_map( $newSomeValueSnakFromSerialization, $ref['parts'] )
+			) );
+
+		return new StatementDeserializer( $propValPairDeserializer, $referenceDeserializer );
 	}
 
 }
