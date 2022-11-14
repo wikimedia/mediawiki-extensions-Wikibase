@@ -163,7 +163,7 @@
 	"wikibase-api-no-such-site": "ایہہ سائیٹ نہیں لبھی۔",
 	"wikibase-api-not-statement": "بیان نہیں اے۔",
 	"wikibase-api-not-item": "آئیٹم نہیں اے۔",
-	"wikibase-noentity-createone": "تسیں وی [[$1|نویں چیز بݨا سکیو]]",
+	"wikibase-noentity-createone": "تسیں [[$1|نویں چیز بݨا]] وی سکدے۔",
 	"wikibase-listdatatypes-wikibase-item-head": "آئٹم",
 	"wikibase-listdatatypes-wikibase-property-head": "وشیشتا",
 	"wikibase-listdatatypes-commonsmedia-head": "میڈیا",
