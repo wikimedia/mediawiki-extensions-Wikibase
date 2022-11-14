@@ -10,7 +10,8 @@
 			"Xelgen",
 			"Աշոտ1997",
 			"Դավիթ Սարոյան",
-			"Սահակ"
+			"Սահակ",
+			"Սերգեյ Սաֆարյան"
 		]
 	},
 	"wikibase-edit": "խմբագրել",
@@ -34,11 +35,13 @@
 	"wikibase-statementsection-statements": "Պնդումներ",
 	"wikibase-sitelinks-special": "Այլ կայքեր",
 	"wikibase-statementview-rank-normal": "Նորմալ աստիճան",
-	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|աղբյուր|աղբյուրներ}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|աղբյուր}}",
 	"wikibase-entityselector-more": "Ավելին",
 	"wikibase-validator-no-validators": "Արգելված է",
+	"wikibase-itemdisambiguation-lookup-language": "Լեզվի կոդը՝",
 	"wikibase-newitem-fieldset": "Ստեղծել նոր տարր",
 	"wikibase-newentity-language": "Լեզու.",
+	"wikibase-modifyterm-language": "Լեզվի կոդը՝",
 	"special-mergeitems": "Միացնել երկու տարր",
 	"wikibase-listproperties-submit": "Գտնել",
 	"wikibase-listdatatypes-multilingualtext-head": "Բազմալեզու տեքստ",

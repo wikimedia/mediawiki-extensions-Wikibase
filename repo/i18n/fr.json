@@ -59,7 +59,9 @@
 			"Wyz",
 			"Yasten",
 			"Zolo",
-			"DreZhsh"
+			"DreZhsh",
+			"SleaY",
+			"Winston Sung"
 		]
 	},
 	"wikibase-desc": "Référentiel de données structurées",
@@ -535,7 +537,7 @@
 	"wikibase-search-bad-profile-name": "Nom de profil recherché invalide: $1",
 	"wikibase-search-namespace-mix": "Il n'est actuellement pas autorisé pour une recherche, d'utiliser les espaces de noms des entités avec ceux des articles. La recherche ne sera faite que sur l'espace de noms des entités.",
 	"wikibase-search-config-notfound": "Configuration de recherche en plein texte non trouvée : $1",
-	"wikibase-search-config-badclass": "Mauvaise classe de constructeur de requête : $1",
+	"wikibase-search-config-badclass": "Mauvaise classe de constructeur de requête : $1",
 	"wikibase-refresh-for-missing-datatype": "Le type de données $1 n’a pas été trouvé dans le script client local. Cela peut résulter d’un script obsolète en cache. Essayez l’actualisation forcée de votre navigateur pour contourner le cache local  (Ctrl + Maj + R ou Cmd + Maj + R dans la plupart des navigateurs) pour résoudre le problème.",
 	"wikibase-outdated-client-script": "Hou là, un rafraîchissement forcé est nécessaire !",
 	"wikibase-shortcopyrightwarning-heading": "Attribution de licence",

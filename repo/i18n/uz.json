@@ -5,13 +5,16 @@
 			"CoderSI",
 			"Macofe",
 			"Sociologist",
-			"Malikxan"
+			"Malikxan",
+			"Zafar Shamsiddinov"
 		]
 	},
 	"wikibase-edit": "tahrirlash",
 	"wikibase-save": "saqlash",
 	"wikibase-cancel": "bekor qilish",
 	"wikibase-add": "qoʻshish",
+	"wikibase-label-empty": "Nishon koʻrsatilmagan",
+	"wikibase-description-empty": "Hech qanday tavsif belgilanmagan",
 	"wikibase-sitelink-page-edit-placeholder": "maqola",
 	"wikibase-sitelinks-special": "Boshqa saytlar",
 	"wikibase-remove": "oʻchirish",
