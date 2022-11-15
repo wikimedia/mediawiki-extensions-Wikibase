@@ -78,38 +78,17 @@ class ReplaceItemStatementTest extends TestCase {
 	public function testReplaceStatement(): void {
 		$itemId = 'Q123';
 		$statementId = $itemId . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-		$oldStatementValue = "old statement value";
-		$newStatementValue = "new statement value";
-		$oldStatement = NewStatement::someValueFor( 'P123' )
-			->withGuid( $statementId )
-			->withValue( $oldStatementValue )
-			->build();
+		$oldStatement = NewStatement::noValueFor( 'P123' )->withGuid( $statementId )->build();
 		$newStatement = NewStatement::someValueFor( 'P123' )
 			->withGuid( $statementId )
-			->withValue( $newStatementValue )
+			->withValue( "new statement value" )
 			->build();
-		$item = NewItem::withId( $itemId )
-			->andStatement( $oldStatement )
-			->build();
-		$updatedItem = NewItem::withId( $itemId )
-			->andStatement( $newStatement )
-			->build();
-		$postModificationRevisionId = 322;
+		$item = NewItem::withId( $itemId )->andStatement( $oldStatement )->build();
+		$modificationRevisionId = 322;
 		$modificationTimestamp = '20221111070707';
 		$editTags = [ 'some', 'tags' ];
 		$isBot = false;
 		$comment = 'statement replaced by ' . __method__;
-
-		$requestData = [
-			'$statementId' => $statementId,
-			'$statement' => $this->getStatementSerialization( $newStatement ),
-			'$editTags' => $editTags,
-			'$isBot' => $isBot,
-			'$comment' => $comment,
-			'$username' => null,
-			'$itemId' => $itemId
-		];
-		$request = $this->newUseCaseRequest( $requestData );
 
 		$this->revisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
 		$this->revisionMetadataRetriever->method( 'getLatestRevisionMetadata' )
@@ -121,16 +100,23 @@ class ReplaceItemStatementTest extends TestCase {
 		$this->itemUpdater = $this->createMock( ItemUpdater::class );
 		$this->itemUpdater->method( 'update' )
 			->with( $item, $this->expectEquivalentMetadata( $editTags, $isBot, $comment, EditSummary::REPLACE_ACTION ) )
-			->willReturn( new ItemRevision( $updatedItem, $modificationTimestamp, $postModificationRevisionId ) );
+			->willReturn( new ItemRevision( $item, $modificationTimestamp, $modificationRevisionId ) );
 
-		$useCase = $this->newUseCase();
-
-		$response = $useCase->execute( $request );
+		$response = $this->newUseCase()->execute(
+			$this->newUseCaseRequest( [
+				'$statementId' => $statementId,
+				'$statement' => $this->getStatementSerialization( $newStatement ),
+				'$editTags' => $editTags,
+				'$isBot' => $isBot,
+				'$comment' => $comment,
+				'$itemId' => $itemId
+			] )
+		);
 
 		$this->assertInstanceOf( ReplaceItemStatementSuccessResponse::class, $response );
 		$this->assertSame( $statementId, $response->getStatement()->getGuid() );
 		$this->assertEquals( $newStatement, $response->getStatement() );
-		$this->assertSame( $postModificationRevisionId, $response->getRevisionId() );
+		$this->assertSame( $modificationRevisionId, $response->getRevisionId() );
 		$this->assertSame( $modificationTimestamp, $response->getLastModified() );
 	}
 
@@ -140,9 +126,8 @@ class ReplaceItemStatementTest extends TestCase {
 		$originalStatement = NewStatement::noValueFor( 'P123' )
 			->withGuid( (string)$originalStatementId )
 			->build();
-		$newStatementId = new StatementGuid( $itemId, 'LLLLLLL-MMMM-NNNN-OOOO-PPPPPPPPPPPP' );
 		$newStatement = NewStatement::someValueFor( 'P123' )
-			->withGuid( (string)$newStatementId )
+			->withGuid( $itemId . '$LLLLLLL-MMMM-NNNN-OOOO-PPPPPPPPPPPP' )
 			->build();
 
 		$item = NewItem::withId( $itemId )->andStatement( $originalStatement )->build();
@@ -174,7 +159,7 @@ class ReplaceItemStatementTest extends TestCase {
 		$originalStatement = NewStatement::noValueFor( 'P123' )
 			->withGuid( (string)$statementId )
 			->build();
-		$newStatement = NewStatement::someValueFor( 'P321' )->build();
+		$newStatement = NewStatement::noValueFor( 'P321' )->build();
 
 		$item = NewItem::withId( $itemId )->andStatement( $originalStatement )->build();
 
@@ -201,18 +186,11 @@ class ReplaceItemStatementTest extends TestCase {
 
 	public function testInvalidStatementId_returnsInvalidStatementId(): void {
 		$newStatement = NewStatement::noValueFor( 'P123' )->build();
-		$requestData = [
-			'$statementId' => 'INVALID-STATEMENT-ID',
-			'$statement' => $this->getStatementSerialization( $newStatement ),
-			'$editTags' => [],
-			'$isBot' => false,
-			'$comment' => null,
-			'$username' => null,
-			'$itemId' => null
-		];
-
 		$response = $this->newUseCase()->execute(
-			$this->newUseCaseRequest( $requestData )
+			$this->newUseCaseRequest( [
+				'$statementId' => 'INVALID-STATEMENT-ID',
+				'$statement' => $this->getStatementSerialization( $newStatement )
+			] )
 		);
 
 		$this->assertInstanceOf( ReplaceItemStatementErrorResponse::class, $response );
@@ -347,10 +325,9 @@ class ReplaceItemStatementTest extends TestCase {
 		$snakValidator = $this->createStub( SnakValidator::class );
 		$snakValidator->method( 'validateStatementSnaks' )->willReturn( Result::newSuccess() );
 
-		$itemIdParser = new ItemIdParser();
 		return new ReplaceItemStatementValidator(
 			new ItemIdValidator(),
-			new StatementIdValidator( $itemIdParser ),
+			new StatementIdValidator( new ItemIdParser() ),
 			new SnakValidatorStatementValidator(
 				WbRestApi::getStatementDeserializer(),
 				$snakValidator
