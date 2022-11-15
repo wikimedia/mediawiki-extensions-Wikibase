@@ -19,8 +19,8 @@ use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedStatementException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedStatementValueTypeException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\PatchPathException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\PatchTestConditionFailedException;
+use Wikibase\Repo\RestApi\Domain\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffStatementPatcher;
-use Wikibase\Repo\RestApi\WbRestApi;
 use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -225,7 +225,9 @@ class JsonDiffStatementPatcherTest extends TestCase {
 		return new JsonDiffStatementPatcher(
 			WikibaseRepo::getBaseDataModelSerializerFactory()
 				->newStatementSerializer(),
-			WbRestApi::getStatementDeserializer(),
+			new StatementDeserializer(
+				WikibaseRepo::getBaseDataModelDeserializerFactory()->newStatementDeserializer()
+			),
 			$this->snakValidator
 		);
 	}

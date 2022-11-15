@@ -181,7 +181,7 @@ class RequestBuilder {
 
 			if ( typeof errors !== 'undefined' ) {
 				const error = errors.errors[ 0 ];
-				errorMessage = `[${error.errorCode}] ${error.path} ${error.message} in ${error.location}`;
+				errorMessage = `[${error.errorCode}] ${error.path} ${error.message} in '${error.location}'`;
 			}
 			assert.isUndefined( errors, errorMessage );
 		} else {

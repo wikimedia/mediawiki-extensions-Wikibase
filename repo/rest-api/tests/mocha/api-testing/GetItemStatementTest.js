@@ -27,7 +27,7 @@ describe( 'GET statement', () => {
 	before( async () => {
 		const statementPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
 		const createItemResponse = await entityHelper.createItemWithStatements( [
-			entityHelper.newStatementWithRandomStringValue( statementPropertyId )
+			entityHelper.newLegacyStatementWithRandomStringValue( statementPropertyId )
 		] );
 		testItemId = createItemResponse.entity.id;
 		testStatement = createItemResponse.entity.claims[ statementPropertyId ][ 0 ];

@@ -6,7 +6,7 @@ const {
 	createRedirectForItem,
 	createItemWithStatements,
 	createUniqueStringProperty,
-	newStatementWithRandomStringValue
+	newLegacyStatementWithRandomStringValue
 } = require( '../helpers/entityHelper' );
 const { newGetItemStatementsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const expect = chai.expect;
@@ -32,8 +32,8 @@ describe( 'validate GET /entities/items/{id}/statements responses against OpenAP
 	it( '200 OK response is valid for an Item with statements', async () => {
 		const statementPropertyId = ( await createUniqueStringProperty() ).entity.id;
 		const { entity: { id } } = await createItemWithStatements( [
-			newStatementWithRandomStringValue( statementPropertyId ),
-			newStatementWithRandomStringValue( statementPropertyId )
+			newLegacyStatementWithRandomStringValue( statementPropertyId ),
+			newLegacyStatementWithRandomStringValue( statementPropertyId )
 		] );
 		const response = await newGetItemStatementsRequestBuilder( id ).makeRequest();
 

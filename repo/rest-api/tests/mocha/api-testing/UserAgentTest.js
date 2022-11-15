@@ -1,10 +1,11 @@
 'use strict';
 
-const { assert } = require( 'api-testing' );
+const { assert, utils } = require( 'api-testing' );
 const rbf = require( '../helpers/RequestBuilderFactory' );
 const {
 	createItemWithStatements,
 	createUniqueStringProperty,
+	newLegacyStatementWithRandomStringValue,
 	newStatementWithRandomStringValue
 } = require( '../helpers/entityHelper' );
 const hasJsonDiffLib = require( '../helpers/hasJsonDiffLib' );
@@ -24,7 +25,7 @@ describe( 'User-Agent requests', () => {
 	before( async () => {
 		stringPropertyId = ( await createUniqueStringProperty() ).entity.id;
 		const createEntityResponse = await createItemWithStatements( [
-			newStatementWithRandomStringValue( stringPropertyId )
+			newLegacyStatementWithRandomStringValue( stringPropertyId )
 		] );
 		itemId = createEntityResponse.entity.id;
 		statementId = createEntityResponse.entity.claims[ stringPropertyId ][ 0 ].id;
@@ -54,16 +55,16 @@ describe( 'User-Agent requests', () => {
 			statementId,
 			[ {
 				op: 'replace',
-				path: '/mainsnak',
-				value: newStatementWithRandomStringValue( stringPropertyId ).mainsnak
+				path: '/mainsnak/datavalue/value',
+				value: 'random-string-value-' + utils.uniq()
 			} ]
 		) );
 		editRequests.push( () => rbf.newPatchStatementRequestBuilder(
 			statementId,
 			[ {
 				op: 'replace',
-				path: '/mainsnak',
-				value: newStatementWithRandomStringValue( stringPropertyId ).mainsnak
+				path: '/mainsnak/datavalue/value',
+				value: 'random-string-value-' + utils.uniq()
 			} ]
 		) );
 	}

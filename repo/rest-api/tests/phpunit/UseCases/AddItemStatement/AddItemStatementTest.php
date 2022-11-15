@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\RestApi\UseCases\AddItemStatement;
 use PHPUnit\Framework\MockObject\MockObject;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Tests\NewItem;
@@ -17,6 +18,9 @@ use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\Serialization\PropertyValuePairDeserializer;
+use Wikibase\Repo\RestApi\Serialization\ReferenceDeserializer;
+use Wikibase\Repo\RestApi\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementRequest;
@@ -25,9 +29,9 @@ use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementValidator;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
-use Wikibase\Repo\RestApi\WbRestApi;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 use Wikibase\Repo\Validators\SnakValidator;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatement
@@ -211,13 +215,25 @@ class AddItemStatementTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	private function newValidator(): AddItemStatementValidator {
+		$propertyValuePairDeserializer = new PropertyValuePairDeserializer(
+			$this->createStub( PropertyDataTypeLookup::class ),
+			WikibaseRepo::getDataTypeDefinitions()->getValueTypes(),
+			WikibaseRepo::getDataValueDeserializer(),
+			WikibaseRepo::getEntityIdParser()
+		);
+
+		$statementDeserializer = new StatementDeserializer(
+			$propertyValuePairDeserializer,
+			new ReferenceDeserializer( $propertyValuePairDeserializer )
+		);
+
 		$snakValidator = $this->createStub( SnakValidator::class );
 		$snakValidator->method( 'validateStatementSnaks' )->willReturn( Result::newSuccess() );
 
 		return new AddItemStatementValidator(
 			new ItemIdValidator(),
 			new SnakValidatorStatementValidator(
-				WbRestApi::getStatementDeserializer(),
+				$statementDeserializer,
 				$snakValidator
 			),
 			new EditMetadataValidator(
@@ -229,10 +245,12 @@ class AddItemStatementTest extends \PHPUnit\Framework\TestCase {
 
 	private function getValidNoValueStatementSerialization(): array {
 		return [
-			'mainsnak' => [
-				'snaktype' => 'novalue',
-				'property' => 'P123',
-			]
+			'property' => [
+				'id' => 'P123'
+			],
+			'value' => [
+				'type' => 'novalue'
+			],
 		];
 	}
 

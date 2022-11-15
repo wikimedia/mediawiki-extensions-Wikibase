@@ -17,7 +17,7 @@ describe( 'validate GET statement responses', () => {
 	before( async () => {
 		const statementPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
 		const createItemResponse = await entityHelper.createItemWithStatements( [
-			entityHelper.newStatementWithRandomStringValue( statementPropertyId )
+			entityHelper.newLegacyStatementWithRandomStringValue( statementPropertyId )
 		] );
 		testItemId = createItemResponse.entity.id;
 		testStatementId = Object.values( createItemResponse.entity.claims )[ 0 ][ 0 ].id;

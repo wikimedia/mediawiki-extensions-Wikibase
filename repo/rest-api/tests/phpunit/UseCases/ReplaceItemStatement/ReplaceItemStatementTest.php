@@ -7,6 +7,7 @@ use PHPUnit\Framework\TestCase;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Tests\NewItem;
@@ -21,6 +22,12 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
+use Wikibase\Repo\RestApi\Serialization\PropertyValuePairDeserializer;
+use Wikibase\Repo\RestApi\Serialization\PropertyValuePairSerializer;
+use Wikibase\Repo\RestApi\Serialization\ReferenceDeserializer;
+use Wikibase\Repo\RestApi\Serialization\ReferenceSerializer;
+use Wikibase\Repo\RestApi\Serialization\StatementDeserializer;
+use Wikibase\Repo\RestApi\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatement;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementErrorResponse;
@@ -30,7 +37,6 @@ use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementVali
 use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\StatementIdValidator;
-use Wikibase\Repo\RestApi\WbRestApi;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Repo\WikibaseRepo;
@@ -46,6 +52,10 @@ class ReplaceItemStatementTest extends TestCase {
 
 	use EditMetadataHelper;
 
+	/**
+	 * @var MockObject|PropertyDataTypeLookup
+	 */
+	private $propertyDataTypeLookup;
 	/**
 	 * @var MockObject|ItemRevisionMetadataRetriever
 	 */
@@ -67,6 +77,9 @@ class ReplaceItemStatementTest extends TestCase {
 
 	protected function setUp(): void {
 		parent::setUp();
+
+		$this->propertyDataTypeLookup = $this->createStub( PropertyDataTypeLookup::class );
+		$this->propertyDataTypeLookup->method( 'getDataTypeIdForProperty' )->willReturn( 'string' );
 
 		$this->revisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
@@ -322,6 +335,18 @@ class ReplaceItemStatementTest extends TestCase {
 	}
 
 	private function newValidator(): ReplaceItemStatementValidator {
+		$propertyValuePairDeserializer = new PropertyValuePairDeserializer(
+			$this->propertyDataTypeLookup,
+			WikibaseRepo::getDataTypeDefinitions()->getValueTypes(),
+			WikibaseRepo::getDataValueDeserializer(),
+			WikibaseRepo::getEntityIdParser()
+		);
+
+		$statementDeserializer = new StatementDeserializer(
+			$propertyValuePairDeserializer,
+			new ReferenceDeserializer( $propertyValuePairDeserializer )
+		);
+
 		$snakValidator = $this->createStub( SnakValidator::class );
 		$snakValidator->method( 'validateStatementSnaks' )->willReturn( Result::newSuccess() );
 
@@ -329,7 +354,7 @@ class ReplaceItemStatementTest extends TestCase {
 			new ItemIdValidator(),
 			new StatementIdValidator( new ItemIdParser() ),
 			new SnakValidatorStatementValidator(
-				WbRestApi::getStatementDeserializer(),
+				$statementDeserializer,
 				$snakValidator
 			),
 			new EditMetadataValidator( \CommentStore::COMMENT_CHARACTER_LIMIT, self::ALLOWED_TAGS )
@@ -337,8 +362,14 @@ class ReplaceItemStatementTest extends TestCase {
 	}
 
 	private function getStatementSerialization( Statement $statement ): array {
-		$serializer = WikibaseRepo::getBaseDataModelSerializerFactory()->newStatementSerializer();
-		return $serializer->serialize( $statement );
+		$propertyValuePairSerializer = new PropertyValuePairSerializer(
+			$this->propertyDataTypeLookup
+		);
+		$statementSerializer = new StatementSerializer(
+			$propertyValuePairSerializer,
+			new ReferenceSerializer( $propertyValuePairSerializer )
+		);
+		return $statementSerializer->serialize( $statement );
 	}
 
 	private function getValidStatementSerialization(): array {

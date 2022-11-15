@@ -10,6 +10,14 @@ async function createEntity( type, entity ) {
 	}, 'POST' );
 }
 
+async function editEntity( entity ) {
+	return action.getAnon().action( 'wbeditentity', {
+		id: entity.id,
+		token: '+\\',
+		data: JSON.stringify( entity )
+	}, 'POST' );
+}
+
 async function createUniqueStringProperty() {
 	return await createEntity( 'property', {
 		labels: { en: { language: 'en', value: `string-property-${utils.uniq()}` } },
@@ -69,7 +77,11 @@ async function changeItemProtectionStatus( itemId, allowedUserGroup ) {
 	}, 'POST' );
 }
 
-function newStatementSerializationWithRandomStringValue( property ) {
+/**
+ * @param {string} propertyId
+ * @return {{mainsnak: {datavalue: {type: string, value: string}, property: string, snaktype: string}}}
+ */
+function newLegacyStatementWithRandomStringValue( propertyId ) {
 	return {
 		mainsnak: {
 			snaktype: 'value',
@@ -77,17 +89,35 @@ function newStatementSerializationWithRandomStringValue( property ) {
 				type: 'string',
 				value: 'random-string-value-' + utils.uniq()
 			},
-			property
+			property: propertyId
+		}
+	};
+}
+
+/**
+ * @param {string} propertyId
+ * @return {{property: {id: string}, value: {type: string, content: string}}}
+ */
+function newStatementWithRandomStringValue( propertyId ) {
+	return {
+		property: {
+			id: propertyId
+		},
+		value: {
+			type: 'value',
+			content: 'random-string-value-' + utils.uniq()
 		}
 	};
 }
 
 module.exports = {
 	createEntity,
+	editEntity,
 	createItemWithStatements,
 	createUniqueStringProperty,
 	createRedirectForItem,
 	getLatestEditMetadata,
 	changeItemProtectionStatus,
-	newStatementWithRandomStringValue: newStatementSerializationWithRandomStringValue
+	newStatementWithRandomStringValue,
+	newLegacyStatementWithRandomStringValue
 };
