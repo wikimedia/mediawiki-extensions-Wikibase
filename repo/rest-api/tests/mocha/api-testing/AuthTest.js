@@ -116,6 +116,7 @@ describe( 'Auth', () => {
 				assert.header( response, 'X-Authenticated-User', mindy.username );
 			} );
 
+			// eslint-disable-next-line mocha/no-skipped-tests
 			describe.skip( 'OAuth', () => { // Skipping due to apache auth header issues. See T305709
 				before( requireExtensions( [ 'OAuth' ] ) );
 
