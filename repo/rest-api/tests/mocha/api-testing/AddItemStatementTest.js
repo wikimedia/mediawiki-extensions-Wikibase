@@ -21,7 +21,8 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 		assert.isAbove( new Date( response.header[ 'last-modified' ] ), originalLastModified );
 		assert.notStrictEqual( response.header.etag, makeEtag( originalRevisionId ) );
 		assert.header( response, 'Location', response.request.url + '/' + encodeURIComponent( response.body.id ) );
-		assert.deepInclude( response.body.mainsnak, testStatement.mainsnak );
+		assert.equal( response.body.property.id, testStatement.mainsnak.property );
+		assert.equal( response.body.value.content, testStatement.mainsnak.datavalue.value );
 	}
 
 	before( async () => {
@@ -52,7 +53,12 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 			const { comment } = await entityHelper.getLatestEditMetadata( testItemId );
 			assert.strictEqual(
 				comment,
-				formatStatementEditSummary( 'wbsetclaim', 'create', testStatement.mainsnak )
+				formatStatementEditSummary(
+					'wbsetclaim',
+					'create',
+					testStatement.mainsnak.property,
+					testStatement.mainsnak.datavalue.value
+				)
 			);
 		} );
 		it( 'can add a statement to an item with edit metadata provided', async () => {
@@ -74,7 +80,12 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 			assert.property( editMetadata, 'bot' );
 			assert.strictEqual(
 				editMetadata.comment,
-				formatStatementEditSummary( 'wbsetclaim', 'create', testStatement.mainsnak, editSummary )
+				formatStatementEditSummary(
+					'wbsetclaim',
+					'create',
+					testStatement.mainsnak.property,
+					testStatement.mainsnak.datavalue.value,
+					editSummary )
 			);
 			assert.strictEqual( editMetadata.user, user.username );
 		} );

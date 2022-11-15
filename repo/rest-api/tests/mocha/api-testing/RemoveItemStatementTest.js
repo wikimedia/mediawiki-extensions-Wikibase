@@ -62,7 +62,12 @@ describe( 'DELETE statement', () => {
 					const { comment } = await entityHelper.getLatestEditMetadata( testItemId );
 					assert.strictEqual(
 						comment,
-						formatStatementEditSummary( 'wbremoveclaims', 'remove', testStatement.mainsnak )
+						formatStatementEditSummary(
+							'wbremoveclaims',
+							'remove',
+							testStatement.property.id,
+							testStatement.value.content
+						)
 					);
 					await verifyStatementDeleted( testStatement.id );
 				} );
@@ -90,7 +95,8 @@ describe( 'DELETE statement', () => {
 						editMetadata.comment,
 						formatStatementEditSummary( 'wbremoveclaims',
 							'remove',
-							testStatement.mainsnak,
+							testStatement.property.id,
+							testStatement.value.content,
 							editSummary
 						)
 					);

@@ -53,7 +53,7 @@ class GetItemRouteHandler extends SimpleHandler {
 	}
 
 	public static function factory(): Handler {
-		$serializerFactory = WbRestApi::getSerializerFactory();
+		$serializerFactory = WbRestApi::getDomainSerializerFactory();
 		$responseFactory = new ResponseFactory( new ErrorJsonPresenter() );
 		return new self(
 			WbRestApi::getGetItem(),

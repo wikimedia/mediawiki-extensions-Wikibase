@@ -12,13 +12,14 @@ use Wikibase\Repo\RestApi\DataAccess\SnakValidatorStatementValidator;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemDataRetriever;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityRevisionLookupItemRevisionMetadataRetriever;
-use Wikibase\Repo\RestApi\Domain\Serialization\SerializerFactory;
+use Wikibase\Repo\RestApi\Domain\Serialization\SerializerFactory as DomainSerializerFactory;
 use Wikibase\Repo\RestApi\Domain\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatchValidator;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffStatementPatcher;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
+use Wikibase\Repo\RestApi\Serialization\SerializerFactory as RestSerializerFactory;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementValidator;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
@@ -70,6 +71,19 @@ return [
 				WikibaseRepo::getEntityPermissionChecker( $services ),
 				$services->getUserFactory()
 			)
+		);
+	},
+
+	'WbRestApi.DomainSerializerFactory' => function( MediaWikiServices $services ): DomainSerializerFactory {
+		// same as WikibaseRepo.BaseDataModelSerializerFactory but with OPTION_OBJECTS_FOR_MAPS
+		$legacySerializerFactory = new LegacySerializerFactory(
+			new DataValueSerializer(),
+			LegacySerializerFactory::OPTION_OBJECTS_FOR_MAPS
+		);
+
+		return new DomainSerializerFactory(
+			$legacySerializerFactory,
+			WikibaseRepo::getPropertyDataTypeLookup( $services )
 		);
 	},
 
@@ -213,14 +227,8 @@ return [
 		);
 	},
 
-	'WbRestApi.SerializerFactory' => function( MediaWikiServices $services ): SerializerFactory {
-		// same as WikibaseRepo.BaseDataModelSerializerFactory but with OPTION_OBJECTS_FOR_MAPS
-		$legacySerializerFactory = new LegacySerializerFactory(
-			new DataValueSerializer(),
-			LegacySerializerFactory::OPTION_OBJECTS_FOR_MAPS
-		);
-
-		return new SerializerFactory( $legacySerializerFactory, WikibaseRepo::getPropertyDataTypeLookup( $services ) );
+	'WbRestApi.RestSerializerFactory' => function( MediaWikiServices $services ): RestSerializerFactory {
+		return new RestSerializerFactory( WikibaseRepo::getPropertyDataTypeLookup( $services ) );
 	},
 
 	'WbRestApi.StatementDeserializer' => function( MediaWikiServices $services ): StatementDeserializer {

@@ -55,7 +55,7 @@ class PatchItemStatementRouteHandler extends SimpleHandler {
 	}
 
 	public static function factory(): Handler {
-		$statementSerializer = WbRestApi::getSerializerFactory()->newStatementSerializer();
+		$statementSerializer = WbRestApi::getDomainSerializerFactory()->newStatementSerializer();
 		$responseFactory = new ResponseFactory(
 			new PatchItemStatementErrorJsonPresenter( $statementSerializer )
 		);
@@ -76,7 +76,7 @@ class PatchItemStatementRouteHandler extends SimpleHandler {
 					}
 				),
 			] ),
-			new StatementJsonPresenter( $statementSerializer ),
+			new StatementJsonPresenter( WbRestApi::getRestSerializerFactory()->newStatementSerializer() ),
 			$responseFactory
 		);
 	}

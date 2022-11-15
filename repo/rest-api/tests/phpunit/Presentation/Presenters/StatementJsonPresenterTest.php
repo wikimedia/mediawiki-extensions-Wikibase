@@ -4,8 +4,8 @@ namespace Wikibase\Repo\Tests\RestApi\Presentation\Presenters;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Repo\RestApi\Domain\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\Presentation\Presenters\StatementJsonPresenter;
+use Wikibase\Repo\RestApi\Serialization\StatementSerializer;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Presentation\Presenters\StatementJsonPresenter

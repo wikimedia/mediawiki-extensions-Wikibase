@@ -97,7 +97,7 @@ describe( 'PATCH statement tests', () => {
 					] ).assertValidRequest().makeRequest();
 
 					assertValid200Response( response );
-					assert.strictEqual( response.body.mainsnak.datavalue.value, expectedValue );
+					assert.strictEqual( response.body.value.content, expectedValue );
 				} );
 
 				it( 'allows content-type application/json-patch+json', async () => {
@@ -113,7 +113,7 @@ describe( 'PATCH statement tests', () => {
 						.assertValidRequest().makeRequest();
 
 					assertValid200Response( response );
-					assert.strictEqual( response.body.mainsnak.datavalue.value, expectedValue );
+					assert.strictEqual( response.body.value.content, expectedValue );
 				} );
 
 				it( 'can patch a statement with edit metadata', async () => {
@@ -134,7 +134,7 @@ describe( 'PATCH statement tests', () => {
 						.assertValidRequest().makeRequest();
 
 					assertValid200Response( response );
-					assert.strictEqual( response.body.mainsnak.datavalue.value, expectedValue );
+					assert.strictEqual( response.body.value.content, expectedValue );
 
 					const editMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 					assert.include( editMetadata.tags, tag );
@@ -144,7 +144,8 @@ describe( 'PATCH statement tests', () => {
 						formatStatementEditSummary(
 							'wbsetclaim',
 							'update',
-							response.body.mainsnak,
+							response.body.property.id,
+							response.body.value.content,
 							editSummary
 						)
 					);
