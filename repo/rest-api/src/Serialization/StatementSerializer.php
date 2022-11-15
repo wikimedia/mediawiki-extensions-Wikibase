@@ -11,7 +11,7 @@ use Wikibase\DataModel\Statement\Statement;
  */
 class StatementSerializer {
 
-	private const RANK_LABELS = [
+	public const RANK_LABELS = [
 		Statement::RANK_DEPRECATED => 'deprecated',
 		Statement::RANK_NORMAL => 'normal',
 		Statement::RANK_PREFERRED => 'preferred'
