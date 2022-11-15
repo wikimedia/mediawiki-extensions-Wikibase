@@ -5,6 +5,7 @@
 	],
 	"rules": {
 		"max-len": [ "error", 120 ],
-		"mocha/no-setup-in-describe": 0
+		"mocha/no-setup-in-describe": 0,
+		"mocha/no-skipped-tests": "error"
 	}
 }
