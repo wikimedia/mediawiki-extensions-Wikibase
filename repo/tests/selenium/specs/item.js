@@ -10,7 +10,12 @@ const Page = require( 'wdio-mediawiki/Page' );
 describe( 'item', function () {
 
 	it( 'can add a statement using the keyboard', function () {
-		// high-level overview: add statement, add qualifier, add second qualifier, add reference, save
+		// high-level overview:
+		// - add statement,
+		// - add qualifier,
+		// - add second qualifier,
+		// - add reference,
+		// - save
 
 		const itemId = browser.call( () => WikibaseApi.createItem( Util.getTestString( 'T154869-' ) ) );
 		const propertyId = browser.call( () => WikibaseApi.getProperty( 'string' ) );
@@ -45,7 +50,8 @@ describe( 'item', function () {
 		browser.waitUntil( () => ItemPage.isSaveButtonEnabled() );
 
 		// move focus to “add reference” and activate link
-		// (first Tab skips over link to remove current qualifier, second one over link to add another qualifier)
+		// - first Tab skips over link to remove current qualifier,
+		// - second one over link to add another qualifier
 		browser.keys( [ 'Tab', 'Tab', 'Tab' ] );
 		browser.keys( [ 'Enter' ] ); // this should also not save the statement (T154869)
 		// property input automatically focused

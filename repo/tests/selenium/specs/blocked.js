@@ -58,6 +58,7 @@ describe( 'blocked user cannot use', function () {
 	];
 
 	for ( const test of tests ) {
+		// eslint-disable-next-line mocha/no-setup-in-describe
 		const title = `Special:${test.name}`;
 		it( title, function () {
 			( new Page() ).openTitle( title );

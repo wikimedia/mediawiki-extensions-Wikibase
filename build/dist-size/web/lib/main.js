@@ -30,7 +30,9 @@ function augmentFileHistoryBySizeDelta( fileHistory ) {
 	let previousRevision = null;
 	newHistory.forEach( ( revision ) => {
 		const previousSize = previousRevision ? previousRevision[ FIELDS.SIZE ] : null;
-		const deltaPercent = Math.round( ( revision[ FIELDS.SIZE ] - previousSize ) / previousSize * 100 );
+		const deltaPercent = Math.round(
+			( revision[ FIELDS.SIZE ] - previousSize ) / previousSize * 100,
+		);
 		revision[ CUSTOM_FIELDS.PREVIOUS_SIZE ] = previousSize;
 		revision[ CUSTOM_FIELDS.SIZE_DELTA_PERCENT ] = deltaPercent;
 		previousRevision = revision;
