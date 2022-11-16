@@ -1,10 +1,8 @@
 <?php declare( strict_types=1 );
 
-use DataValues\Serializers\DataValueSerializer;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\ConditionalHeaderUtil;
 use Wikibase\DataModel\Entity\ItemIdParser;
-use Wikibase\DataModel\Serializers\SerializerFactory as DataModelSerializerFactory;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\Repo\RestApi\DataAccess\MediaWikiEditEntityFactoryItemUpdater;
@@ -12,7 +10,6 @@ use Wikibase\Repo\RestApi\DataAccess\SnakValidatorStatementValidator;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemDataRetriever;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityRevisionLookupItemRevisionMetadataRetriever;
-use Wikibase\Repo\RestApi\Domain\Serialization\SerializerFactory as DomainSerializerFactory;
 use Wikibase\Repo\RestApi\Domain\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
@@ -71,19 +68,6 @@ return [
 				WikibaseRepo::getEntityPermissionChecker( $services ),
 				$services->getUserFactory()
 			)
-		);
-	},
-
-	'WbRestApi.DomainSerializerFactory' => function( MediaWikiServices $services ): DomainSerializerFactory {
-		// same as WikibaseRepo.BaseDataModelSerializerFactory but with OPTION_OBJECTS_FOR_MAPS
-		$dataModelSerializerFactory = new DataModelSerializerFactory(
-			new DataValueSerializer(),
-			DataModelSerializerFactory::OPTION_OBJECTS_FOR_MAPS
-		);
-
-		return new DomainSerializerFactory(
-			$dataModelSerializerFactory,
-			WikibaseRepo::getPropertyDataTypeLookup( $services )
 		);
 	},
 
