@@ -506,7 +506,7 @@
 		"content": {
 			"application/json": {
 				"schema": {
-					"$ref": "./response-parts.json#/StatementsResponse"
+					"$ref": "./response-parts.json#/NewStatementsResponse"
 				}
 			}
 		}

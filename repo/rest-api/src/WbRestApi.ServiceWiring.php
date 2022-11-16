@@ -4,7 +4,7 @@ use DataValues\Serializers\DataValueSerializer;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\ConditionalHeaderUtil;
 use Wikibase\DataModel\Entity\ItemIdParser;
-use Wikibase\DataModel\Serializers\SerializerFactory as LegacySerializerFactory;
+use Wikibase\DataModel\Serializers\SerializerFactory as DataModelSerializerFactory;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\Repo\RestApi\DataAccess\MediaWikiEditEntityFactoryItemUpdater;
@@ -76,13 +76,13 @@ return [
 
 	'WbRestApi.DomainSerializerFactory' => function( MediaWikiServices $services ): DomainSerializerFactory {
 		// same as WikibaseRepo.BaseDataModelSerializerFactory but with OPTION_OBJECTS_FOR_MAPS
-		$legacySerializerFactory = new LegacySerializerFactory(
+		$dataModelSerializerFactory = new DataModelSerializerFactory(
 			new DataValueSerializer(),
-			LegacySerializerFactory::OPTION_OBJECTS_FOR_MAPS
+			DataModelSerializerFactory::OPTION_OBJECTS_FOR_MAPS
 		);
 
 		return new DomainSerializerFactory(
-			$legacySerializerFactory,
+			$dataModelSerializerFactory,
 			WikibaseRepo::getPropertyDataTypeLookup( $services )
 		);
 	},
@@ -228,7 +228,9 @@ return [
 	},
 
 	'WbRestApi.RestSerializerFactory' => function( MediaWikiServices $services ): RestSerializerFactory {
-		return new RestSerializerFactory( WikibaseRepo::getPropertyDataTypeLookup( $services ) );
+		return new RestSerializerFactory(
+			WikibaseRepo::getPropertyDataTypeLookup( $services )
+		);
 	},
 
 	'WbRestApi.StatementDeserializer' => function( MediaWikiServices $services ): StatementDeserializer {

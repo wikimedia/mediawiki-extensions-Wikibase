@@ -46,11 +46,11 @@ describe( 'GET /entities/items/{id}/statements', () => {
 		assert.equal( response.status, 200 );
 		assert.exists( response.body[ testPropertyId ] );
 		assert.equal(
-			response.body[ testPropertyId ][ 0 ].mainsnak.datavalue.value,
+			response.body[ testPropertyId ][ 0 ].value.content,
 			testStatements[ 0 ].mainsnak.datavalue.value
 		);
 		assert.equal(
-			response.body[ testPropertyId ][ 1 ].mainsnak.datavalue.value,
+			response.body[ testPropertyId ][ 1 ].value.content,
 			testStatements[ 1 ].mainsnak.datavalue.value
 		);
 		assert.equal( response.header[ 'last-modified' ], testModified );

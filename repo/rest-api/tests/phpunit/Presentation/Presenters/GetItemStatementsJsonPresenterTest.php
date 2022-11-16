@@ -2,10 +2,11 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Presentation\Presenters;
 
+use ArrayObject;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Serializers\StatementListSerializer;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Repo\RestApi\Presentation\Presenters\GetItemStatementsJsonPresenter;
+use Wikibase\Repo\RestApi\Serialization\StatementListSerializer;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatementsSuccessResponse;
 
 /**
@@ -19,9 +20,11 @@ class GetItemStatementsJsonPresenterTest extends TestCase {
 
 	public function testGetJsonForSuccess(): void {
 		$statements = $this->createStub( StatementList::class );
-		$serialization = [
-			'P31' => [ [ 'id' => 'Q1$943B784F-FFBC-43A9-B7AA-79C3546AA0EF' ] ]
-		];
+		$serialization = new ArrayObject(
+			[
+				'P31' => [ [ 'id' => 'Q1$943B784F-FFBC-43A9-B7AA-79C3546AA0EF' ] ]
+			]
+		);
 
 		$serializer = $this->createMock( StatementListSerializer::class );
 		$serializer->expects( $this->once() )
