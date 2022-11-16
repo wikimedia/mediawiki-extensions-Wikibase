@@ -7,7 +7,7 @@ use Psr\Container\ContainerInterface;
 use Wikibase\Repo\RestApi\Domain\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
-use Wikibase\Repo\RestApi\Serialization\SerializerFactory as RestSerializerFactory;
+use Wikibase\Repo\RestApi\Serialization\SerializerFactory;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatement;
@@ -36,9 +36,9 @@ class WbRestApi {
 			->get( 'WbRestApi.GetItemStatement' );
 	}
 
-	public static function getRestSerializerFactory( ContainerInterface $services = null ): RestSerializerFactory {
+	public static function getSerializerFactory( ContainerInterface $services = null ): SerializerFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.RestSerializerFactory' );
+			->get( 'WbRestApi.SerializerFactory' );
 	}
 
 	public static function getAddItemStatement( ContainerInterface $services = null ): AddItemStatement {

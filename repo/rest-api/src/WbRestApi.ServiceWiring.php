@@ -16,7 +16,7 @@ use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatchValidator;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffStatementPatcher;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
-use Wikibase\Repo\RestApi\Serialization\SerializerFactory as RestSerializerFactory;
+use Wikibase\Repo\RestApi\Serialization\SerializerFactory;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementValidator;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
@@ -211,8 +211,8 @@ return [
 		);
 	},
 
-	'WbRestApi.RestSerializerFactory' => function( MediaWikiServices $services ): RestSerializerFactory {
-		return new RestSerializerFactory(
+	'WbRestApi.SerializerFactory' => function( MediaWikiServices $services ): SerializerFactory {
+		return new SerializerFactory(
 			WikibaseRepo::getPropertyDataTypeLookup( $services )
 		);
 	},
