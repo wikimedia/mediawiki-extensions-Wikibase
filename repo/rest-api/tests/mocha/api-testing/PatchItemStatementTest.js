@@ -473,7 +473,7 @@ describe( 'PATCH statement tests', () => {
 					assert.strictEqual( body.code, 'patched-statement-value-type-mismatch' );
 					assert.include( body.message, `'${testPropertyId}'` );
 					assert.strictEqual( body.context[ 'property-id' ], testPropertyId );
-					assert.deepStrictEqual( body.context[ 'patched-statement' ].mainsnak.datavalue, datavalue );
+					assert.deepStrictEqual( body.context[ 'patched-statement' ].value.content, datavalue.value );
 				} );
 			} );
 
