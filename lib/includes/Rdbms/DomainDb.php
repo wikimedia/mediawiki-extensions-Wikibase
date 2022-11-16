@@ -124,6 +124,16 @@ abstract class DomainDb {
 	}
 
 	/**
+	 * Reload the LBFactory configuration.
+	 * Long-running processes should call this regularly.
+	 *
+	 * @see ILBFactory::autoReconfigure
+	 */
+	public function autoReconfigure(): void {
+		$this->lbFactory->autoReconfigure();
+	}
+
+	/**
 	 * @deprecated Don't use this unless it needs to be passed to a service we don't control
 	 */
 	public function loadBalancer(): ILoadBalancer {

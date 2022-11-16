@@ -7,6 +7,7 @@ use Exception;
 use InvalidArgumentException;
 use MWContentSerializationException;
 use Onoi\MessageReporter\MessageReporter;
+use stdClass;
 use Wikibase\DataModel\Deserializers\DeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
@@ -574,6 +575,29 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 		$json = trim( ob_get_clean() );
 
 		$this->assertCount( 9, json_decode( $json ), 'Redirected Item Q9 not in dump' );
+	}
+
+	public function testCallbackCalled(): void {
+		$ids = [];
+		for ( $i = 1; $i <= 100; $i++ ) {
+			$ids[] = new ItemId( "Q$i" );
+		}
+
+		$dumper = $this->newDumpGenerator( $ids );
+		$pager = $this->makeIdPager( $ids );
+
+		$callbackChecker = $this->getMockBuilder( stdClass::class )
+			->addMethods( [ 'callback' ] )
+			->getMock();
+		$callbackChecker->expects( $this->exactly( count( $ids ) / 10 + 1 ) )
+			->method( 'callback' );
+
+		$dumper->setBatchSize( 10 );
+		$dumper->setBatchCallback( [ $callbackChecker, 'callback' ] );
+
+		ob_start();
+		$dumper->generateDump( $pager );
+		ob_end_clean();
 	}
 
 	private function newMockPropertyIdParser(): EntityIdParser {

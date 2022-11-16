@@ -72,6 +72,9 @@ abstract class DumpGenerator {
 	 */
 	protected $limit = 0;
 
+	/** @var callable Callback called once per batch. */
+	private $batchCallback;
+
 	/**
 	 * @param resource $out
 	 * @param EntityPrefetcher $entityPrefetcher
@@ -88,6 +91,8 @@ abstract class DumpGenerator {
 		$this->entityPrefetcher = $entityPrefetcher;
 		$this->progressReporter = new NullMessageReporter();
 		$this->exceptionHandler = new RethrowingExceptionHandler();
+		$this->batchCallback = function () {
+		};
 	}
 
 	/**
@@ -161,6 +166,13 @@ abstract class DumpGenerator {
 			$types = array_flip( $types );
 		}
 		$this->entityTypes = $types;
+	}
+
+	/**
+	 * Set a callback that is called once per batch, at the beginning of each batch.
+	 */
+	public function setBatchCallback( callable $callback ) {
+		$this->batchCallback = $callback;
 	}
 
 	private function idMatchesFilters( EntityId $entityId ) {
@@ -247,6 +259,8 @@ abstract class DumpGenerator {
 
 		// Iterate over batches of IDs, maintaining the current position of the pager in the $position variable.
 		while ( true ) {
+			( $this->batchCallback )();
+
 			if ( $this->limit && ( $dumpCount + $this->batchSize ) > $this->limit ) {
 				// Try not to overrun $limit in order to make sure pager's position can be used for continuing.
 				$limit = $this->limit - $dumpCount;

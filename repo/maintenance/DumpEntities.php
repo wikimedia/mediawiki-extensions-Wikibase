@@ -228,6 +228,9 @@ abstract class DumpEntities extends Maintenance {
 		$dumper->setEntityTypesFilter( $entityTypes );
 		$dumper->setBatchSize( $batchSize );
 
+		$db = WikibaseRepo::getRepoDomainDbFactory()->newRepoDb();
+		$dumper->setBatchCallback( [ $db, 'autoReconfigure' ] );
+
 		$idStream = $this->makeIdStream( $entityTypes, $exceptionReporter );
 		AtEase::suppressWarnings();
 		$dumper->generateDump( $idStream );
