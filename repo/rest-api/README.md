@@ -7,11 +7,9 @@ Enable the REST API:
 $wgRestAPIAdditionalRouteFiles[] = 'extensions/Wikibase/repo/rest-api/routes.json';
 ```
 
-## Tests
+## JSON structure changes
 
-### e2e and schema tests
-
-These tests can be run via `npm run api-testing`. They require the targeted wiki to act as both client and repo, so that Items can have sitelinks to pages on the same wiki.
+* @subpage rest_data_format_differences
 
 ## OpenAPI Specification
 
@@ -71,5 +69,11 @@ This REST API follows the [Hexagonal Architecture](https://alistair.cockburn.us/
     - `api-testing/`: end-to-end tests using [MediaWiki's api-testing][1] library
 	- `openapi-validation/`: tests against the OpenAPI spec
   - `phpunit/`: integration and unit tests using the phpunit framework
+
+### Tests
+
+#### e2e and schema tests
+
+These tests can be run via `npm run api-testing`. They require the targeted wiki to act as both client and repo, so that Items can have sitelinks to pages on the same wiki.
 
 [1]: https://www.mediawiki.org/wiki/MediaWiki_API_integration_tests
