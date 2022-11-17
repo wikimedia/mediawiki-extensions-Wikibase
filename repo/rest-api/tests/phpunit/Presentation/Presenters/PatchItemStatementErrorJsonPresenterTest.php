@@ -4,8 +4,8 @@ namespace Wikibase\Repo\Tests\RestApi\Presentation\Presenters;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Tests\NewStatement;
-use Wikibase\Repo\RestApi\Domain\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\Presentation\Presenters\PatchItemStatementErrorJsonPresenter;
+use Wikibase\Repo\RestApi\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementErrorResponse;
 
 /**

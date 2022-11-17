@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Presentation\Presenters;
 
-use Wikibase\Repo\RestApi\Domain\Serialization\StatementSerializer;
+use Wikibase\Repo\RestApi\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 
 /**
