@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"BadDog",
 			"Conquistador",
 			"Kolega2357",
 			"Ladsgroup",
@@ -45,7 +46,7 @@
 	"wikibase-statementsection-identifiers": "Naznake",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|unos|unosa}}",
 	"wikibase-sitelinks-empty": "Trenutno još nema sajt-stranica za ovu stavku.",
-	"wikibase-sitelinks-special": "Drugi sajtovi",
+	"wikibase-sitelinks-special": "Drugi projekti",
 	"wikibase-remove": "ukloni",
 	"wikibase-undo-title": "Poništava se izmjena kod \"$1\"",
 	"wikibase-restore-title": "Vraća se stara revizija od \"$1\"",
