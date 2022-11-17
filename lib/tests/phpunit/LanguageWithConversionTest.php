@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests;
 
-use Language;
 use MediaWikiIntegrationTestCase;
 use MWException;
 use Wikibase\Lib\LanguageWithConversion;
@@ -59,8 +58,7 @@ class LanguageWithConversionTest extends MediaWikiIntegrationTestCase {
 	public function testFactory( $langCode, $sourceLangCode,
 		$expectedLangCode, $expectedSourceLangCode, $expectedFetchLangCode
 	) {
-		$obj = LanguageWithConversion::factory( Language::factory( $langCode ),
-			$sourceLangCode === null ? null : Language::factory( $sourceLangCode ) );
+		$obj = LanguageWithConversion::factory( $langCode, $sourceLangCode );
 		$this->assertLanguageWithConversion( $obj,
 			$expectedLangCode, $expectedSourceLangCode, $expectedFetchLangCode
 		);
@@ -91,8 +89,7 @@ class LanguageWithConversionTest extends MediaWikiIntegrationTestCase {
 	 */
 	public function testFactoryException( $langCode, $sourceLangCode ) {
 		$this->expectException( MWException::class );
-		LanguageWithConversion::factory( Language::factory( $langCode ),
-			$sourceLangCode === null ? null : Language::factory( $sourceLangCode ) );
+		LanguageWithConversion::factory( $langCode, $sourceLangCode );
 	}
 
 	public function provideFactoryException() {
