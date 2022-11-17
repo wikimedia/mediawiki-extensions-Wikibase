@@ -10,6 +10,7 @@ use MediaWikiIntegrationTestCase;
 use MWException;
 use Site;
 use SiteLookup;
+use stdClass;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -360,6 +361,12 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 		$redirects = [ 'Q4242' => new ItemId( 'Q42' ) ];
 		$dumper = $this->newDumpGenerator( $flavor, $entityRevisions, $redirects );
 		$dumper->setTimestamp( 1000000 );
+		$callbackChecker = $this->getMockBuilder( stdClass::class )
+			->addMethods( [ 'callback' ] )
+			->getMock();
+		$callbackChecker->expects( $this->atLeastOnce() )
+			->method( 'callback' );
+		$dumper->setBatchCallback( [ $callbackChecker, 'callback' ] );
 		$jsonTest = new JsonDumpGeneratorTest();
 		$pager = $jsonTest->makeIdPager( $ids );
 
