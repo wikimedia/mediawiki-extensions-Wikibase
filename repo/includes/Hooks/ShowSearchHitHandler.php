@@ -10,7 +10,6 @@ use InvalidArgumentException;
 use Language;
 use MediaWiki\Search\Hook\ShowSearchHitHook;
 use MediaWiki\Search\Hook\ShowSearchHitTitleHook;
-use MWException;
 use RequestContext;
 use SearchResult;
 use SpecialSearch;
@@ -153,9 +152,9 @@ class ShowSearchHitHandler implements ShowSearchHitHook, ShowSearchHitTitleHook 
 	 */
 	public static function addLanguageAttrs( array &$attr, string $displayLanguage, array $text ) {
 		if ( $text['language'] !== $displayLanguage ) {
-			try {
+			if ( Language::isValidCode( $text['language'] ) ) {
 				$language = Language::factory( $text['language'] );
-			} catch ( MWException $e ) {
+			} else {
 				// If somebody fed us broken language, ignore it
 				return;
 			}

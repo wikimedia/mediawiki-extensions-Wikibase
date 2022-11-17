@@ -284,6 +284,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			WikibaseClient::getLanguageFallbackChainFactory( $mediaWikiServices ),
 			WikibaseClient::getTermLookup( $mediaWikiServices ),
 			$mediaWikiServices->getLanguageFactory(),
+			$mediaWikiServices->getLanguageNameUtils(),
 			$termsLanguages
 		);
 

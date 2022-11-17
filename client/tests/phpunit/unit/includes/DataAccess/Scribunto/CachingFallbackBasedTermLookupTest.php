@@ -5,6 +5,7 @@ namespace Wikibase\Client\Tests\Unit\DataAccess\Scribunto;
 
 use Language;
 use MediaWiki\Languages\LanguageFactory;
+use MediaWiki\Languages\LanguageNameUtils;
 use MediaWiki\MediaWikiServices;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Client\DataAccess\Scribunto\CachingFallbackBasedTermLookup;
@@ -42,6 +43,10 @@ class CachingFallbackBasedTermLookupTest extends TestCase {
 	 */
 	private $languageFactory;
 	/**
+	 * @var LanguageNameUtils|\PHPUnit\Framework\MockObject\MockObject
+	 */
+	private $langNameUtils;
+	/**
 	 * @var \PHPUnit\Framework\MockObject\MockObject|ContentLanguages
 	 */
 	private $contentLanguages;
@@ -54,12 +59,16 @@ class CachingFallbackBasedTermLookupTest extends TestCase {
 		$this->termLookup = $this->createMock( TermLookup::class );
 		$this->factoryReturnLookup = $this->createMock( LanguageFallbackLabelDescriptionLookup::class );
 		$this->languageFactory = $this->createMock( LanguageFactory::class );
+		$this->langNameUtils = $this->createMock( LanguageNameUtils::class );
 		$this->contentLanguages = $this->createMock( ContentLanguages::class );
 
 		$englishLanguage = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'en' );
 		$this->languageFactory->method( 'getLanguage' )
 			->with( 'en' )
 			->willReturn( $englishLanguage );
+		$this->langNameUtils->method( 'isValidCode' )
+			->with( 'en' )
+			->willReturn( true );
 	}
 
 	/**
@@ -75,6 +84,7 @@ class CachingFallbackBasedTermLookupTest extends TestCase {
 			$this->languageFallbackChainFactory,
 			$this->termLookup,
 			$this->languageFactory,
+			$this->langNameUtils,
 			$this->contentLanguages
 		);
 
