@@ -36,8 +36,8 @@ describe( 'PATCH statement tests', () => {
 	let testPropertyId;
 	let testStatement;
 	let testStatementId;
-	let originalLastModified;
-	let originalRevisionId;
+	let previousLastModified;
+	let previousEtag;
 
 	before( async function () {
 		if ( !hasJsonDiffLib() ) {
@@ -54,8 +54,8 @@ describe( 'PATCH statement tests', () => {
 		testStatementId = testStatement.id;
 
 		const testItemCreationMetadata = await entityHelper.getLatestEditMetadata( testItemId );
-		originalLastModified = new Date( testItemCreationMetadata.timestamp );
-		originalRevisionId = testItemCreationMetadata.revid;
+		previousLastModified = new Date( testItemCreationMetadata.timestamp );
+		previousEtag = makeEtag( testItemCreationMetadata.revid );
 
 		// wait 1s before adding any statements to verify the last-modified timestamps are different
 		await new Promise( ( resolve ) => {
@@ -73,8 +73,10 @@ describe( 'PATCH statement tests', () => {
 				assert.strictEqual( response.status, 200 );
 				assert.strictEqual( response.body.id, testStatementId );
 				assert.strictEqual( response.header[ 'content-type' ], 'application/json' );
-				assert.isAbove( new Date( response.header[ 'last-modified' ] ), originalLastModified );
-				assert.notStrictEqual( response.header.etag, makeEtag( originalRevisionId ) );
+				assert.isAbove( new Date( response.header[ 'last-modified' ] ), previousLastModified );
+				assert.notStrictEqual( response.header.etag, previousEtag );
+				previousLastModified = new Date( response.header[ 'last-modified' ] );
+				previousEtag = response.header.etag;
 			}
 
 			describe( '200 success response', () => {
@@ -84,6 +86,11 @@ describe( 'PATCH statement tests', () => {
 						testStatementId,
 						testStatement
 					).makeRequest();
+
+					// wait 1s before next test to ensure the last-modified timestamps are different
+					await new Promise( ( resolve ) => {
+						setTimeout( resolve, 1000 );
+					} );
 				} );
 
 				it( 'can patch a statement', async () => {
