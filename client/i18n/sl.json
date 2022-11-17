@@ -86,7 +86,7 @@
 	"wikibase-pageinfo-description-local": "Lokalni opis",
 	"wikibase-pageinfo-description-central": "Centralni opis",
 	"wikibase-pageinfo-entity-usage": "Predmeti v Wikipodatkih, uporabljeni na tej strani",
-	"wikibase-pageinfo-entity-usage-S": "Povezava s stranjo",
+	"wikibase-pageinfo-entity-usage-S": "Povezava mesta",
 	"wikibase-pageinfo-entity-usage-L": "Nekatere oznake",
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "Oznaka: $1",
 	"wikibase-pageinfo-entity-usage-D": "Nekateri opisi",
