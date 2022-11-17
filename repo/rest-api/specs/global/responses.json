@@ -440,7 +440,7 @@
 		"content": {
 			"application/json": {
 				"schema": {
-					"$ref": "./response-parts.json#/NewStatementResponse"
+					"$ref": "./response-parts.json#/StatementResponse"
 				}
 			}
 		}
@@ -476,7 +476,7 @@
 		"content": {
 			"application/json": {
 				"schema": {
-					"$ref": "./response-parts.json#/NewStatementResponse"
+					"$ref": "./response-parts.json#/StatementResponse"
 				}
 			}
 		}
@@ -506,7 +506,7 @@
 		"content": {
 			"application/json": {
 				"schema": {
-					"$ref": "./response-parts.json#/NewStatementsResponse"
+					"$ref": "./response-parts.json#/StatementsResponse"
 				}
 			}
 		}

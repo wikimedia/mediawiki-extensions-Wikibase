@@ -21,13 +21,6 @@
 		}
 	},
 	"Statements": {
-		"type": "object",
-		"additionalProperties": {
-			"type": "array",
-			"items": { "$ref": "./schemas.json#/Statement" }
-		}
-	},
-	"NewStatements": {
 		"additionalProperties": {
 			"type": "array",
 			"items": { "$ref": "./schemas.json#/NewStatement" }
