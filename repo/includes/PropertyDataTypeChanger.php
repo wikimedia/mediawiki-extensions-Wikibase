@@ -50,11 +50,17 @@ class PropertyDataTypeChanger {
 	 * @param NumericPropertyId $propertyId
 	 * @param User $user User to attribute the changes made to.
 	 * @param string $dataTypeId
+	 * @param string $customSummary Optional custom summary to append to the automatic one.
 	 *
 	 * @throws InvalidArgumentException
 	 * @throws StorageException
 	 */
-	public function changeDataType( NumericPropertyId $propertyId, User $user, $dataTypeId ) {
+	public function changeDataType(
+		NumericPropertyId $propertyId,
+		User $user,
+		string $dataTypeId,
+		string $customSummary = ''
+	) {
 		$entityRevision = $this->entityRevisionLookup->getEntityRevision(
 			$propertyId,
 			0,
@@ -74,9 +80,14 @@ class PropertyDataTypeChanger {
 
 		$property->setDataTypeId( $dataTypeId );
 
+		$summary = 'Changed data type from ' . $oldDataTypeId . ' to ' . $dataTypeId;
+		if ( $customSummary ) {
+			$summary .= ': ' . $customSummary;
+		}
+
 		$this->entityStore->saveEntity(
 			$property,
-			'Changed data type from ' . $oldDataTypeId . ' to ' . $dataTypeId,
+			$summary,
 			$user,
 			EDIT_UPDATE,
 			$entityRevision->getRevisionId()

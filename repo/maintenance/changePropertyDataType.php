@@ -38,6 +38,12 @@ class ChangePropertyDataType extends Maintenance {
 			true,
 			true
 		);
+		$this->addOption(
+			'summary',
+			'Edit summary (will be appended to an automatic edit summary).',
+			false,
+			true
+		);
 	}
 
 	public function execute() {
@@ -66,8 +72,9 @@ class ChangePropertyDataType extends Maintenance {
 
 		// "Maintenance script" is in MediaWiki's $wgReservedUsernames
 		$user = User::newFromName( 'Maintenance script' );
+		$summary = $this->getOption( 'summary', '' );
 		try {
-			$propertyDataTypeChanger->changeDataType( $propertyId, $user, $newDataType );
+			$propertyDataTypeChanger->changeDataType( $propertyId, $user, $newDataType, $summary );
 		} catch ( Exception $e ) {
 			$this->fatalError( "An error occurred: " . $e->getMessage() );
 		}
