@@ -10,7 +10,6 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedSerializationException;
-use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedStatementException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\PatchPathException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\PatchTestConditionFailedException;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffStatementPatcher;
@@ -20,7 +19,6 @@ use Wikibase\Repo\RestApi\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\RestApi\Serialization\ReferenceSerializer;
 use Wikibase\Repo\RestApi\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Serialization\StatementSerializer;
-use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -170,26 +168,6 @@ class JsonDiffStatementPatcherTest extends TestCase {
 		}
 	}
 
-	public function testGivenDeserializedPatchResultIsInvalidStatement_throwsException(): void {
-		$this->propertyDataTypeLookup = $this->createStub( PropertyDataTypeLookup::class );
-		$this->propertyDataTypeLookup->method( 'getDataTypeIdForProperty' )->willReturn( 'url' );
-
-		$this->expectException( InvalidPatchedStatementException::class );
-
-		$this->newStatementPatcher()->patch(
-			NewStatement::forProperty( 'P1' )
-				->withValue( 'https://example.org' )
-				->build(),
-			[
-				[
-					'op' => 'replace',
-					'path' => '/value/content',
-					'value' => "valid 'string' datavalue but not a valid 'url' datatype"
-				]
-			]
-		);
-	}
-
 	public function invalidPatchProvider(): Generator {
 		yield 'patch operation is not an array' => [
 			[ 'potato' ],
@@ -215,7 +193,8 @@ class JsonDiffStatementPatcherTest extends TestCase {
 			WikibaseRepo::getEntityIdParser(),
 			$this->propertyDataTypeLookup,
 			WikibaseRepo::getDataTypeDefinitions()->getValueTypes(),
-			WikibaseRepo::getDataValueDeserializer()
+			WikibaseRepo::getDataValueDeserializer(),
+			WikibaseRepo::getDataTypeValidatorFactory()
 		);
 		$statementDeserializer = new StatementDeserializer(
 			$propertyValuePairDeserializer,
@@ -224,12 +203,7 @@ class JsonDiffStatementPatcherTest extends TestCase {
 
 		return new JsonDiffStatementPatcher(
 			$statementSerializer,
-			$statementDeserializer,
-			new SnakValidator(
-				$this->propertyDataTypeLookup,
-				WikibaseRepo::getDataTypeFactory(),
-				WikibaseRepo::getDataTypeValidatorFactory()
-			)
+			$statementDeserializer
 		);
 	}
 

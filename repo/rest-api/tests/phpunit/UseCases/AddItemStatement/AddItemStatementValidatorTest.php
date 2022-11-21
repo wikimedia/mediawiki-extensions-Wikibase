@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\RestApi\UseCases\AddItemStatement;
 use CommentStore;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\RestApi\DataAccess\SnakValidatorStatementValidator;
+use Wikibase\Repo\RestApi\DataAccess\StatementDeserializerStatementValidator;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementRequest;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementValidator;
 use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
@@ -23,7 +23,7 @@ use Wikibase\Repo\RestApi\Validation\ValidationError;
 class AddItemStatementValidatorTest extends TestCase {
 
 	/**
-	 * @var MockObject|SnakValidatorStatementValidator
+	 * @var MockObject|StatementDeserializerStatementValidator
 	 */
 	private $statementValidator;
 

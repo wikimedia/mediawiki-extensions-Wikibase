@@ -8,7 +8,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Statement\StatementGuid;
-use Wikibase\Repo\RestApi\DataAccess\SnakValidatorStatementValidator;
+use Wikibase\Repo\RestApi\DataAccess\StatementDeserializerStatementValidator;
 use Wikibase\Repo\RestApi\Domain\Services\JsonPatchValidator;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementRequest;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementValidator;
@@ -27,7 +27,7 @@ use Wikibase\Repo\RestApi\Validation\ValidationError;
 class PatchItemStatementValidatorTest extends TestCase {
 
 	/**
-	 * @var MockObject|SnakValidatorStatementValidator
+	 * @var MockObject|StatementDeserializerStatementValidator
 	 */
 	private $jsonPatchValidator;
 

@@ -12,6 +12,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\Repo\DataTypeValidatorFactory;
 
 /**
  * @license GPL-2.0-or-later
@@ -22,17 +23,20 @@ class PropertyValuePairDeserializer {
 	private PropertyDataTypeLookup $dataTypeLookup;
 	private array $dataTypeToValueTypeMap;
 	private DataValueDeserializer $dataValueDeserializer;
+	private DataTypeValidatorFactory $dataTypeValidatorFactory;
 
 	public function __construct(
 		EntityIdParser $entityIdParser,
 		PropertyDataTypeLookup $dataTypeLookup,
 		array $dataTypeToValueTypeMap,
-		DataValueDeserializer $dataValueDeserializer
+		DataValueDeserializer $dataValueDeserializer,
+		DataTypeValidatorFactory $dataTypeValidatorFactory
 	) {
 		$this->entityIdParser = $entityIdParser;
 		$this->dataTypeLookup = $dataTypeLookup;
 		$this->dataTypeToValueTypeMap = $dataTypeToValueTypeMap;
 		$this->dataValueDeserializer = $dataValueDeserializer;
+		$this->dataTypeValidatorFactory = $dataTypeValidatorFactory;
 	}
 
 	public function deserialize( array $serialization ): Snak {
@@ -41,7 +45,7 @@ class PropertyValuePairDeserializer {
 		$propertyId = $this->parsePropertyId( $serialization['property']['id'] );
 
 		try {
-			$dataType = $this->dataTypeLookup->getDataTypeIdForProperty( $propertyId );
+			$dataTypeId = $this->dataTypeLookup->getDataTypeIdForProperty( $propertyId );
 		} catch ( \Exception $e ) {
 			throw new InvalidFieldException();
 		}
@@ -57,21 +61,29 @@ class PropertyValuePairDeserializer {
 				}
 
 				try {
-					$value = $this->dataValueDeserializer->deserialize( [
-						'type' => $this->dataTypeToValueTypeMap[$dataType],
+					$dataValue = $this->dataValueDeserializer->deserialize( [
+						'type' => $this->dataTypeToValueTypeMap[$dataTypeId],
 						'value' => $serialization['value']['content'],
 					] );
 				} catch ( DeserializationException $e ) {
 					throw new InvalidFieldException();
 				}
 
-				return new PropertyValueSnak( $propertyId, $value );
+				foreach ( $this->dataTypeValidatorFactory->getValidators( $dataTypeId ) as $validator ) {
+					$result = $validator->validate( $dataValue );
+					if ( !$result->isValid() ) {
+						$error = $result->getErrors()[0];
+						throw new InvalidFieldException( "[{$error->getCode()}] {$error->getText()}" );
+					}
+				}
+
+				return new PropertyValueSnak( $propertyId, $dataValue );
 		}
 	}
 
 	private function validateSerialization( array $serialization ): void {
 		if ( !array_key_exists( 'value', $serialization )
-			|| !array_key_exists( 'property', $serialization )
+			 || !array_key_exists( 'property', $serialization )
 		) {
 			throw new MissingFieldException();
 		}
