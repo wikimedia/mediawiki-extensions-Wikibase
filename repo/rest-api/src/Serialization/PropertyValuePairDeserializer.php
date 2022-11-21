@@ -3,7 +3,9 @@
 namespace Wikibase\Repo\RestApi\Serialization;
 
 use DataValues\Deserializers\DataValueDeserializer;
+use Deserializers\Exceptions\DeserializationException;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -59,7 +61,7 @@ class PropertyValuePairDeserializer {
 						'type' => $this->dataTypeToValueTypeMap[$dataType],
 						'value' => $serialization['value']['content'],
 					] );
-				} catch ( \Exception $e ) {
+				} catch ( DeserializationException $e ) {
 					throw new InvalidFieldException();
 				}
 
@@ -101,7 +103,7 @@ class PropertyValuePairDeserializer {
 	private function parsePropertyId( string $id ): PropertyId {
 		try {
 			$propertyId = $this->entityIdParser->parse( $id );
-		} catch ( \Exception $e ) {
+		} catch ( EntityIdParsingException $e ) {
 			throw new InvalidFieldException();
 		}
 
