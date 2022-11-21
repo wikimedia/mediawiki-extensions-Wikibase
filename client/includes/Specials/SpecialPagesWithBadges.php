@@ -88,7 +88,7 @@ class SpecialPagesWithBadges extends QueryPage {
 	}
 
 	private function prepareParams( $subPage ) {
-		$badge = $this->getRequest()->getText( 'badge', $subPage );
+		$badge = $this->getRequest()->getText( 'badge', $subPage ?: '' );
 
 		try {
 			$this->badgeId = new ItemId( $badge );

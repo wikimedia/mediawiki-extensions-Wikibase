@@ -60,7 +60,7 @@ class SpecialEntityUsage extends QueryPage {
 	 * @param string|null $subPage
 	 */
 	public function execute( $subPage ) {
-		$entity = $this->getRequest()->getText( 'entity', $subPage );
+		$entity = $this->getRequest()->getText( 'entity', $subPage ?: '' );
 		$this->prepareParams( $entity );
 
 		if ( $this->entityId !== null ) {

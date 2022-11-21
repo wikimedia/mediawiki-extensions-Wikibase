@@ -106,7 +106,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	private function prepareArguments( $subPage ) {
 		$request = $this->getRequest();
 
-		$this->dataType = $request->getText( 'datatype', $subPage );
+		$this->dataType = $request->getText( 'datatype', $subPage ?: '' );
 		if ( $this->dataType !== '' && !in_array( $this->dataType, $this->dataTypeFactory->getTypeIds() ) ) {
 			$this->showErrorHTML( $this->msg( 'wikibase-listproperties-invalid-datatype', $this->dataType )->escaped() );
 			$this->dataType = null;
