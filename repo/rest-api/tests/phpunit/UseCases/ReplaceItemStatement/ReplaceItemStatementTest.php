@@ -336,10 +336,10 @@ class ReplaceItemStatementTest extends TestCase {
 
 	private function newValidator(): ReplaceItemStatementValidator {
 		$propertyValuePairDeserializer = new PropertyValuePairDeserializer(
+			WikibaseRepo::getEntityIdParser(),
 			$this->propertyDataTypeLookup,
 			WikibaseRepo::getDataTypeDefinitions()->getValueTypes(),
-			WikibaseRepo::getDataValueDeserializer(),
-			WikibaseRepo::getEntityIdParser()
+			WikibaseRepo::getDataValueDeserializer()
 		);
 
 		$statementDeserializer = new StatementDeserializer(

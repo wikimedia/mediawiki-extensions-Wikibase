@@ -216,10 +216,10 @@ class AddItemStatementTest extends \PHPUnit\Framework\TestCase {
 
 	private function newValidator(): AddItemStatementValidator {
 		$propertyValuePairDeserializer = new PropertyValuePairDeserializer(
+			WikibaseRepo::getEntityIdParser(),
 			$this->createStub( PropertyDataTypeLookup::class ),
 			WikibaseRepo::getDataTypeDefinitions()->getValueTypes(),
-			WikibaseRepo::getDataValueDeserializer(),
-			WikibaseRepo::getEntityIdParser()
+			WikibaseRepo::getDataValueDeserializer()
 		);
 
 		$statementDeserializer = new StatementDeserializer(

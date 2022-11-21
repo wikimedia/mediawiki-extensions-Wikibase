@@ -212,10 +212,10 @@ class JsonDiffStatementPatcherTest extends TestCase {
 		);
 
 		$propertyValuePairDeserializer = new PropertyValuePairDeserializer(
+			WikibaseRepo::getEntityIdParser(),
 			$this->propertyDataTypeLookup,
 			WikibaseRepo::getDataTypeDefinitions()->getValueTypes(),
-			WikibaseRepo::getDataValueDeserializer(),
-			WikibaseRepo::getEntityIdParser()
+			WikibaseRepo::getDataValueDeserializer()
 		);
 		$statementDeserializer = new StatementDeserializer(
 			$propertyValuePairDeserializer,
