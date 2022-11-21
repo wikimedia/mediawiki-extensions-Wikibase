@@ -2,7 +2,7 @@
 	"Statements": {
 		"additionalProperties": {
 			"type": "array",
-			"items": { "$ref": "./schemas.json#/NewStatement" }
+			"items": { "$ref": "./schemas.json#/Statement" }
 		}
 	},
 	"Sitelinks": {
