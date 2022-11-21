@@ -506,7 +506,14 @@
 		"content": {
 			"application/json": {
 				"schema": {
-					"$ref": "./response-parts.json#/StatementsResponse"
+					"allOf": [
+						{ "$ref": "./schema-parts.json#/Statements" },
+						{
+							"additionalProperties": {
+								"items": { "$ref": "./response-parts.json#/StatementResponse" }
+							}
+						}
+					]
 				}
 			}
 		}

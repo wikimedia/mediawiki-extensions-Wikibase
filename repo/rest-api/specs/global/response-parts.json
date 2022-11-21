@@ -5,17 +5,11 @@
 			{
 				"required": [ "id", "type", "labels", "descriptions", "aliases", "statements", "sitelinks" ],
 				"properties": {
-					"statements": { "$ref": "#/StatementsResponse" }
-				}
-			}
-		]
-	},
-	"StatementsResponse": {
-		"allOf": [
-			{ "$ref": "./schema-parts.json#/Statements" },
-			{
-				"additionalProperties": {
-					"items": { "$ref": "#/StatementResponse" }
+					"statements": {
+						"additionalProperties": {
+							"items": { "$ref": "#/StatementResponseRequired" }
+						}
+					}
 				}
 			}
 		]
@@ -52,20 +46,18 @@
 			{
 				"required": [ "id", "rank", "qualifiers", "references" ],
 				"properties": {
-					"qualifiers": { "$ref": "#/QualifiersResponseRequired" },
-					"references": { "$ref": "#/ReferencesResponseRequired" }
+					"qualifiers": {
+						"items": { "$ref": "#/QualifierResponseRequired" }
+					},
+					"references": {
+						"items": { "$ref": "#/ReferenceResponseRequired" }
+					}
 				}
 			}
 		]
 	},
-	"QualifiersResponseRequired": {
-		"items": { "$ref": "#/QualifierResponseRequired" }
-	},
 	"QualifierResponseRequired": {
 		"$ref": "#/PropertyValueResponseRequired"
-	},
-	"ReferencesResponseRequired": {
-		"items": { "$ref": "#/ReferenceResponseRequired" }
 	},
 	"ReferenceResponseRequired": {
 		"required": [ "hash", "parts" ],
