@@ -5,7 +5,7 @@
 			{
 				"required": [ "id", "type", "labels", "descriptions", "aliases", "statements", "sitelinks" ],
 				"properties": {
-					"statements": { "$ref": "#/NewStatementsResponse" }
+					"statements": { "$ref": "#/StatementsResponse" }
 				}
 			}
 		]
@@ -16,29 +16,6 @@
 			{
 				"additionalProperties": {
 					"items": { "$ref": "#/StatementResponse" }
-				}
-			}
-		]
-	},
-	"NewStatementsResponse": {
-		"allOf": [
-			{ "$ref": "./schema-parts.json#/NewStatements" },
-			{
-				"additionalProperties": {
-					"items": { "$ref": "#/NewStatementResponse" }
-				}
-			}
-		]
-	},
-	"StatementResponse": {
-		"allOf": [
-			{ "$ref": "./schemas.json#/Statement" },
-			{
-				"required": [ "id", "mainsnak", "rank", "qualifiers", "qualifiers-order", "references" ],
-				"properties": {
-					"mainsnak": { "required": [ "snaktype", "property", "datatype", "hash" ] },
-					"qualifiers": { "$ref": "#/QualifiersResponseRequired" },
-					"references": { "$ref": "#/ReferencesResponseRequired" }
 				}
 			}
 		]
@@ -63,56 +40,34 @@
 			}
 		]
 	},
-	"QualifiersResponseRequired": {
-		"additionalProperties": {
-			"items": {
-				"required": [ "snaktype", "property", "datatype", "hash" ]
-			}
-		}
-	},
-	"ReferenceResponseRequired": {
-		"required": [ "hash", "snaks", "snaks-order" ],
-		"properties": {
-			"snaks": {
-				"additionalProperties": {
-					"items": {
-						"required": [ "snaktype", "property", "datatype", "hash" ]
-					}
-				}
-			}
-		}
-	},
-	"ReferencesResponseRequired": {
-		"items": { "$ref": "#/ReferenceResponseRequired" }
-	},
-	"NewStatementResponse": {
+	"StatementResponse": {
 		"allOf": [
 			{ "$ref": "./schemas.json#/NewStatement" },
-			{ "$ref": "#/NewStatementResponseRequired" }
+			{ "$ref": "#/StatementResponseRequired" }
 		]
 	},
-	"NewStatementResponseRequired": {
+	"StatementResponseRequired": {
 		"allOf": [
 			{ "$ref": "#/PropertyValueResponseRequired" },
 			{
 				"required": [ "id", "rank", "qualifiers", "references" ],
 				"properties": {
-					"qualifiers": { "$ref": "#/NewQualifiersResponseRequired" },
-					"references": { "$ref": "#/NewReferencesResponseRequired" }
+					"qualifiers": { "$ref": "#/QualifiersResponseRequired" },
+					"references": { "$ref": "#/ReferencesResponseRequired" }
 				}
 			}
 		]
 	},
-	"NewQualifiersResponseRequired": {
-		"items": { "$ref": "#/NewQualifierResponseRequired" }
+	"QualifiersResponseRequired": {
+		"items": { "$ref": "#/QualifierResponseRequired" }
 	},
-	"NewQualifierResponseRequired": {
+	"QualifierResponseRequired": {
 		"$ref": "#/PropertyValueResponseRequired"
 	},
-	"NewReferencesResponseRequired": {
-		"items": { "$ref": "#/NewReferenceResponseRequired" }
+	"ReferencesResponseRequired": {
+		"items": { "$ref": "#/ReferenceResponseRequired" }
 	},
-	"NewReferenceResponseRequired": {
+	"ReferenceResponseRequired": {
 		"required": [ "hash", "parts" ],
 		"properties": {
 			"parts": {
