@@ -41,7 +41,8 @@ class HtmlTimeFormatter implements ValueFormatter {
 	/**
 	 * @param FormatterOptions|null $options
 	 * @param ValueFormatter $dateTimeFormatter A value formatter that accepts TimeValue objects and
-	 *  returns the formatted date and time, but not the calendar model. Must return HTML.
+	 *  returns the formatted date and time, but not the calendar model.
+	 *  The formatter is assumed to return plain text (its output will be HTML-escaped).
 	 */
 	public function __construct(
 		?FormatterOptions $options,
@@ -66,7 +67,7 @@ class HtmlTimeFormatter implements ValueFormatter {
 			throw new InvalidArgumentException( 'Data value type mismatch. Expected a TimeValue.' );
 		}
 
-		$formatted = $this->dateTimeFormatter->format( $value );
+		$formatted = htmlspecialchars( $this->dateTimeFormatter->format( $value ) );
 
 		if ( $this->calendarNameNeeded( $value ) ) {
 			$formatted .= '<sup class="wb-calendar-name">'
