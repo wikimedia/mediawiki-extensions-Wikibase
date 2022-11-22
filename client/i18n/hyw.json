@@ -13,6 +13,7 @@
 	"wikibase-dataitem": "{{WBREPONAME}}ի տարր",
 	"wikibase-editlinks": "Խմբագրել յղումները",
 	"wikibase-editlinkstitle": "‎Խմբագրել միջլեզուական յղումները",
+	"wikibase-addlinkstitle": "Աւելցնել միջլեզուական յղումներ",
 	"wikibase-linkitem-addlinks": "Ստեղծել յղումը",
 	"wikibase-linkitem-input-site": "Լեզու.",
 	"wikibase-linkitem-input-page": "Էջ.",
@@ -25,5 +26,6 @@
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}ի խմբագրում",
 	"unconnectedpages": "Նիւթերու չկապուած էջեր",
 	"wikibase-pageinfo-entity-id-none": "Ոչ մէկ",
-	"wikibase-otherprojects": "Այլ նախագիծերու մէջ"
+	"wikibase-otherprojects": "Այլ նախագիծերու մէջ",
+	"wikibase-client-data-bridge-permissions-error-info": "Յաւելեալ Մանրամասնութիւններ"
 }

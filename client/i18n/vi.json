@@ -36,7 +36,7 @@
 	"wikibase-linkitem-failure": "Đã xuất hiện lỗi bất ngờ khi đặt liên kết đến trang chỉ định.",
 	"wikibase-linkitem-title": "Đặt liên kết với trang",
 	"wikibase-linkitem-linkpage": "Đặt liên kết với trang",
-	"wikibase-linkitem-selectlink": "Vui lòng chọn một dịch vụ và một trang bạn muốn liên kết đến trang này.",
+	"wikibase-linkitem-selectlink": "Vui lòng chọn dịch vụ và trang bạn muốn liên kết đến trang này.",
 	"wikibase-linkitem-input-site": "Ngôn ngữ:",
 	"wikibase-linkitem-input-page": "Trang:",
 	"wikibase-linkitem-confirmitem-text": "Trang bạn chọn đã được liên kết với [$1 khoản mục trong kho dữ liệu chung]. Xin vui lòng xác nhận rằng bạn muốn liên kết trang này với {{PLURAL:$2|trang|các trang}} bên dưới.",
