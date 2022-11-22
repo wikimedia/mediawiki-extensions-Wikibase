@@ -31,20 +31,17 @@ class TimeDetailsFormatter implements ValueFormatter {
 
 	/**
 	 * @param FormatterOptions|null $options
-	 * @param ValueFormatter|null $timeFormatter A TimeValue formatter that outputs a single line of
+	 * @param ValueFormatter $timeFormatter A TimeValue formatter that outputs a single line of
 	 * HTML, suitable for headings.
 	 */
 	public function __construct(
-		FormatterOptions $options = null,
-		ValueFormatter $timeFormatter = null
+		?FormatterOptions $options,
+		ValueFormatter $timeFormatter
 	) {
 		$this->options = $options ?: new FormatterOptions();
 		$this->options->defaultOption( ValueFormatter::OPT_LANG, 'en' );
 
-		$this->timeFormatter = $timeFormatter ?: new HtmlTimeFormatter(
-			$this->options,
-			new MwTimeIsoFormatter( $this->options )
-		);
+		$this->timeFormatter = $timeFormatter;
 	}
 
 	/**

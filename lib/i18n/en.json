@@ -57,6 +57,7 @@
 	"version-wikibase": "Wikibase",
 	"wikibase-time-calendar-gregorian": "Gregorian",
 	"wikibase-time-calendar-julian": "Julian",
+	"wikibase-time-with-calendar": "$1 ($2)",
 	"wikibase-time-precision-CE": "$1 CE",
 	"wikibase-time-precision-Gannum": "$1 billion years CE",
 	"wikibase-time-precision-Mannum": "$1 million years CE",

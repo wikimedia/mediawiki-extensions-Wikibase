@@ -1,47 +1,36 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Lib\Formatters;
 
 use DataValues\TimeValue;
-use InvalidArgumentException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 
 /**
- * A value formatter that creates a basic, single-line HTML representation of a TimeValue's date,
- * time and calendar model. The calendar model is added in superscript when needed,
+ * A value formatter that formats a time value as plain text,
+ * including the calendar model if necessary or specified by the formatter options.
+ * The calendar model is added in parentheses when needed,
  * as determined by the {@link ShowCalendarModelDecider} (taking the options into account).
  *
- * @see \Wikibase\Lib\Formatters\TimeDetailsFormatter
- *
  * @license GPL-2.0-or-later
- * @author Adrian Heine <adrian.heine@wikimedia.de>
- * @author Thiemo Kreuz
- * @author Daniel Kinzler
  */
-class HtmlTimeFormatter implements ValueFormatter {
+class PlaintextTimeFormatter implements ValueFormatter {
 
 	private const CALENDAR_KEYS = [
 		TimeValue::CALENDAR_GREGORIAN => 'wikibase-time-calendar-gregorian',
 		TimeValue::CALENDAR_JULIAN => 'wikibase-time-calendar-julian',
 	];
 
-	/**
-	 * @var ValueFormatter
-	 */
-	private $dateTimeFormatter;
-
-	/**
-	 * @var FormatterOptions
-	 */
-	private $options;
-
+	private FormatterOptions $options;
+	private ValueFormatter $dateTimeFormatter;
 	private ShowCalendarModelDecider $decider;
 
 	/**
 	 * @param FormatterOptions|null $options
 	 * @param ValueFormatter $dateTimeFormatter A value formatter that accepts TimeValue objects and
-	 *  returns the formatted date and time, but not the calendar model. Must return HTML.
+	 *  returns the formatted date and time, but not the calendar model.
 	 * @param ShowCalendarModelDecider $decider
 	 */
 	public function __construct(
@@ -51,53 +40,41 @@ class HtmlTimeFormatter implements ValueFormatter {
 	) {
 		$this->options = $options ?: new FormatterOptions();
 		$this->options->defaultOption( ValueFormatter::OPT_LANG, 'en' );
-		$this->options->defaultOption( ShowCalendarModelDecider::OPT_SHOW_CALENDAR, 'auto' );
+		// for backwards compatibility with older versions, of Wikibase,
+		// never show the calendar model by default (users have to opt into 'auto')
+		$this->options->defaultOption( ShowCalendarModelDecider::OPT_SHOW_CALENDAR, false );
 
 		$this->dateTimeFormatter = $dateTimeFormatter;
 		$this->decider = $decider;
 	}
 
-	/**
-	 * @see ValueFormatter::format
-	 *
-	 * @param TimeValue $value
-	 *
-	 * @throws InvalidArgumentException
-	 * @return string HTML
-	 */
-	public function format( $value ) {
-		if ( !( $value instanceof TimeValue ) ) {
-			throw new InvalidArgumentException( 'Data value type mismatch. Expected a TimeValue.' );
-		}
-
+	public function format( $value ): string {
 		$formatted = $this->dateTimeFormatter->format( $value );
 
 		if ( $this->decider->showCalendarModel( $value, $this->options ) ) {
-			$formatted .= '<sup class="wb-calendar-name">'
-				. $this->formatCalendarName( $value->getCalendarModel() )
-				. '</sup>';
+			$formatted = wfMessage( 'wikibase-time-with-calendar' )
+				->inLanguage( $this->options->getOption( ValueFormatter::OPT_LANG ) )
+				->plaintextParams(
+					$formatted,
+					$this->formatCalendarName( $value->getCalendarModel() )
+				)->text();
 		}
 
 		return $formatted;
 	}
 
-	/**
-	 * @param string $calendarModel
-	 *
-	 * @return string HTML
-	 */
-	private function formatCalendarName( $calendarModel ) {
+	private function formatCalendarName( string $calendarModel ): string {
 		if ( array_key_exists( $calendarModel, self::CALENDAR_KEYS ) ) {
 			$key = self::CALENDAR_KEYS[$calendarModel];
 			$lang = $this->options->getOption( ValueFormatter::OPT_LANG );
 			$msg = wfMessage( $key )->inLanguage( $lang );
 
 			if ( $msg->exists() ) {
-				return htmlspecialchars( $msg->text() );
+				return $msg->text();
 			}
 		}
 
-		return htmlspecialchars( $calendarModel );
+		return $calendarModel;
 	}
 
 }

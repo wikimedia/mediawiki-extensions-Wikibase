@@ -8,6 +8,7 @@ use InvalidArgumentException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\Formatters\HtmlTimeFormatter;
+use Wikibase\Lib\Formatters\ShowCalendarModelDecider;
 
 /**
  * @covers \Wikibase\Lib\Formatters\HtmlTimeFormatter
@@ -34,7 +35,7 @@ class HtmlTimeFormatterTest extends \PHPUnit\Framework\TestCase {
 		$dateTimeFormatter->method( 'format' )
 			->willReturn( 'MOCKDATE' );
 
-		return new HtmlTimeFormatter( $options, $dateTimeFormatter );
+		return new HtmlTimeFormatter( $options, $dateTimeFormatter, new ShowCalendarModelDecider() );
 	}
 
 	/**
@@ -73,18 +74,6 @@ class HtmlTimeFormatterTest extends \PHPUnit\Framework\TestCase {
 		$julian = 'http://www.wikidata.org/entity/Q1985786';
 
 		$tests = [
-			'a gregorian day in 1520' => [
-				'+1520-05-01T00:00:00Z',
-				TimeValue::PRECISION_DAY,
-				$gregorian,
-				'MOCKDATE<sup class="wb-calendar-name">(wikibase-time-calendar-gregorian)</sup>'
-			],
-			'a gregorian month in 1520' => [
-				'+1520-05-01T00:00:00Z',
-				TimeValue::PRECISION_MONTH,
-				$gregorian,
-				'MOCKDATE<sup class="wb-calendar-name">(wikibase-time-calendar-gregorian)</sup>'
-			],
 			'a julian day in 1520' => [
 				'+1520-05-01T00:00:00Z',
 				TimeValue::PRECISION_DAY,
@@ -103,135 +92,11 @@ class HtmlTimeFormatterTest extends \PHPUnit\Framework\TestCase {
 				$julian,
 				'MOCKDATE<sup class="wb-calendar-name">(wikibase-time-calendar-julian)</sup>'
 			],
-			'a julian day in 1980' => [
-				'+1980-05-01T00:00:00Z',
-				TimeValue::PRECISION_DAY,
-				$julian,
-				'MOCKDATE<sup class="wb-calendar-name">(wikibase-time-calendar-julian)</sup>'
-			],
 			'a gregorian day in 1980' => [
 				'+1980-05-01T00:00:00Z',
 				TimeValue::PRECISION_DAY,
 				$gregorian,
 				'MOCKDATE'
-			],
-
-			'a gregorian year in -1000000' => [
-				'-1000000-00-00T00:00:00Z',
-				TimeValue::PRECISION_YEAR,
-				$gregorian,
-				'MOCKDATE<sup class="wb-calendar-name">(wikibase-time-calendar-gregorian)</sup>'
-			],
-			'a julian year in -1000000' => [
-				'-1000000-05-01T00:00:00Z',
-				TimeValue::PRECISION_YEAR,
-				$julian,
-				'MOCKDATE'
-			],
-			'a gregorian year in 1520' => [
-				'+1520-05-01T00:00:00Z',
-				TimeValue::PRECISION_YEAR,
-				$gregorian,
-				'MOCKDATE<sup class="wb-calendar-name">(wikibase-time-calendar-gregorian)</sup>'
-			],
-			'a julian year in 1520' => [
-				'+1520-05-01T00:00:00Z',
-				TimeValue::PRECISION_YEAR,
-				$julian,
-				'MOCKDATE'
-			],
-			'a gregorian year in 1920' => [
-				'+1920-05-01T00:00:00Z',
-				TimeValue::PRECISION_YEAR,
-				$gregorian,
-				'MOCKDATE'
-			],
-			'a julian year in 1920' => [
-				'+1920-05-01T00:00:00Z',
-				TimeValue::PRECISION_YEAR,
-				$julian,
-				'MOCKDATE<sup class="wb-calendar-name">(wikibase-time-calendar-julian)</sup>'
-			],
-			'a julian year in 1980' => [
-				'+1980-05-01T00:00:00Z',
-				TimeValue::PRECISION_YEAR,
-				$julian,
-				'MOCKDATE<sup class="wb-calendar-name">(wikibase-time-calendar-julian)</sup>'
-			],
-			'do not enforce calendar model on rough precisions' => [
-				'+1980-05-01T00:00:00Z',
-				TimeValue::PRECISION_YEAR10,
-				$julian,
-				'MOCKDATE'
-			],
-			'a gregorian year in 1980' => [
-				'+1980-05-01T00:00:00Z',
-				TimeValue::PRECISION_YEAR,
-				$gregorian,
-				'MOCKDATE'
-			],
-
-			'a month in 1980' => [
-				'+1980-05-01T00:00:00Z',
-				TimeValue::PRECISION_MONTH,
-				$gregorian,
-				'MOCKDATE'
-			],
-
-			'14th century' => [
-				'+1300-00-00T00:00:00Z',
-				TimeValue::PRECISION_YEAR100,
-				$julian,
-				'MOCKDATE'
-			],
-
-			'2014-10-10' => [
-				'+2014-10-10T00:00:00Z',
-				TimeValue::PRECISION_DAY,
-				$gregorian,
-				'MOCKDATE'
-			],
-			'2014-10-10 with leading zeros' => [
-				'+00000002014-10-10T00:00:00Z',
-				TimeValue::PRECISION_DAY,
-				$gregorian,
-				'MOCKDATE'
-			],
-			'massive year' => [
-				'+00123452014-10-10T00:00:00Z',
-				TimeValue::PRECISION_DAY,
-				$gregorian,
-				'MOCKDATE'
-			],
-			'negative' => [
-				'-1-01-01T00:00:00Z',
-				TimeValue::PRECISION_DAY,
-				$gregorian,
-				'MOCKDATE<sup class="wb-calendar-name">(wikibase-time-calendar-gregorian)</sup>'
-			],
-			'32-bit integer overflow' => [
-				'-2147483649-01-01T00:00:00Z',
-				TimeValue::PRECISION_DAY,
-				$gregorian,
-				'MOCKDATE<sup class="wb-calendar-name">(wikibase-time-calendar-gregorian)</sup>'
-			],
-			'unknown calendar model' => [
-				'+2015-01-01T00:00:00Z',
-				TimeValue::PRECISION_DAY,
-				'Stardate',
-				'MOCKDATE<sup class="wb-calendar-name">Stardate</sup>'
-			],
-			'optional sign' => [
-				'2015-01-01T00:00:00Z',
-				TimeValue::PRECISION_DAY,
-				$gregorian,
-				'MOCKDATE'
-			],
-			'unsupported time' => [
-				'MOCKTIME',
-				TimeValue::PRECISION_DAY,
-				$gregorian,
-				'MOCKDATE<sup class="wb-calendar-name">(wikibase-time-calendar-gregorian)</sup>'
 			],
 			'HTML entities' => [
 				'<a>injection</a>',

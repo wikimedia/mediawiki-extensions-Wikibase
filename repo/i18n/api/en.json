@@ -82,6 +82,7 @@
 	"apihelp-wbformatvalue-param-property": "Property ID the data value belongs to, should be used instead of the <var>datatype</var> parameter.",
 	"apihelp-wbformatvalue-example-1": "Format a simple string value.",
 	"apihelp-wbformatvalue-example-2": "Format a string value as a URL in HTML.",
+	"apihelp-wbformatvalue-example-3": "Format a time value as plain text, automatically showing the calendar model if needed.",
 	"apihelp-wbgetclaims-description": "Gets Wikibase claims.",
 	"apihelp-wbgetclaims-summary": "Gets Wikibase claims.",
 	"apihelp-wbgetclaims-param-entity": "ID of the entity from which to obtain claims. Required unless claim GUID is provided.",

@@ -10,6 +10,7 @@ use ApiUsageException;
 use DataValues\DataValue;
 use DataValues\IllegalValueException;
 use DataValues\StringValue;
+use DataValues\TimeValue;
 use IBufferingStatsdDataFactory;
 use InvalidArgumentException;
 use LogicException;
@@ -23,6 +24,7 @@ use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\DataValueFactory;
 use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
+use Wikibase\Lib\Formatters\ShowCalendarModelDecider;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\Formatters\TypedValueFormatter;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesException;
@@ -324,6 +326,12 @@ class FormatSnakValue extends ApiBase {
 		$query = 'action=' . $this->getModuleName();
 		$hello = new StringValue( 'hello' );
 		$acme = new StringValue( 'http://acme.org' );
+		$einsteinDob = new TimeValue(
+			'+1879-03-14T00:00:00Z',
+			0, 0, 0,
+			TimeValue::PRECISION_DAY,
+			TimeValue::CALENDAR_GREGORIAN
+		);
 
 		return [
 			$query . '&' . wfArrayToCgi( [
@@ -336,7 +344,14 @@ class FormatSnakValue extends ApiBase {
 				'generate' => 'text/html',
 			] ) => 'apihelp-wbformatvalue-example-2',
 
-			//TODO: example for the options parameter, once we have something sensible to show there.
+			$query . '&' . wfArrayToCgi( [
+				'datavalue' => json_encode( $einsteinDob->toArray() ),
+				'datatype' => 'time',
+				'generate' => 'text/plain',
+				'options' => json_encode( [
+					ShowCalendarModelDecider::OPT_SHOW_CALENDAR => 'auto',
+				] ),
+			] ) => 'apihelp-wbformatvalue-example-3',
 		];
 	}
 

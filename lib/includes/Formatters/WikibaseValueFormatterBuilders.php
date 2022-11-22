@@ -402,16 +402,16 @@ class WikibaseValueFormatterBuilders {
 	 * @return ValueFormatter
 	 */
 	public function newTimeFormatter( $format, FormatterOptions $options ) {
-		// TODO: Add a wikitext formatter that shows the calendar model
 		if ( $this->snakFormat->isPossibleFormat( SnakFormatter::FORMAT_HTML_DIFF, $format ) ) {
 			return new TimeDetailsFormatter(
 				$options,
-				new HtmlTimeFormatter( $options, new MwTimeIsoFormatter( $options ) )
+				new HtmlTimeFormatter( $options, new MwTimeIsoFormatter( $options ), new ShowCalendarModelDecider() )
 			);
 		} elseif ( $this->isHtmlFormat( $format ) ) {
-			return new HtmlTimeFormatter( $options, new MwTimeIsoFormatter( $options ) );
+			return new HtmlTimeFormatter( $options, new MwTimeIsoFormatter( $options ), new ShowCalendarModelDecider() );
 		} else {
-			return $this->escapeValueFormatter( $format, new MwTimeIsoFormatter( $options ) );
+			return $this->escapeValueFormatter( $format,
+				new PlaintextTimeFormatter( $options, new MwTimeIsoFormatter( $options ), new ShowCalendarModelDecider() ) );
 		}
 	}
 

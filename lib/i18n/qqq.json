@@ -71,6 +71,7 @@
 	"version-wikibase": "Name of the Wikibase extension collection, used on [[Special:Version]]\n{{Identical|Wikibase}}",
 	"wikibase-time-calendar-gregorian": "Label displayed with the formatted dates referring to the Gregorian calendar model.\n{{Identical|Gregorian}}",
 	"wikibase-time-calendar-julian": "Label displayed with the formatted dates referring to the Julian calendar model.\n{{Identical|Julian}}",
+	"wikibase-time-with-calendar": "{{optional}}\nFormat for showing a timestamp together with a calendar model.\n\nParameters:\n* $1 - the formatted timestamp\n* $2 - the calendar model (may be {{msg-mw|wikibase-time-calendar-gregorian}}, {{msg-mw|wikibase-time-calendar-julian}}, or an item ID)",
 	"wikibase-time-precision-CE": "Used to present a point in time CE (current era) with arbitrary precision, if the year on its own could be mistaken for another date component (has one or two digits). $1 is the point in time.\n{{Related|Wikibase-time-precision}}",
 	"wikibase-time-precision-Gannum": "Used to present a point in time with the precision of 1 billion of years. $1 is the point in time in billion years, rounded to billion years.\n{{Related|Wikibase-time-precision}}",
 	"wikibase-time-precision-Mannum": "Used to present a point in time with the precision of 1 million of years. $1 is the point in time in million years, rounded to million years.\n{{Related|Wikibase-time-precision}}",
