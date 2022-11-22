@@ -119,6 +119,17 @@ class HtmlTimeFormatterTest extends \PHPUnit\Framework\TestCase {
 		return $testCases;
 	}
 
+	public function testEscapesHtml(): void {
+		$dateTimeFormatter = $this->createMock( ValueFormatter::class );
+		$dateTimeFormatter->method( 'format' )
+			->willReturn( '<script>' );
+		$formatter = new HtmlTimeFormatter( null, $dateTimeFormatter, new ShowCalendarModelDecider() );
+
+		$value = $this->getTimeValue( 'MOCKTIME', TimeValue::PRECISION_DAY, 'calendar' );
+		$this->assertSame( '&lt;script&gt;<sup class="wb-calendar-name">calendar</sup>',
+			$formatter->format( $value ) );
+	}
+
 	/**
 	 * @dataProvider invalidValueProvider
 	 */
