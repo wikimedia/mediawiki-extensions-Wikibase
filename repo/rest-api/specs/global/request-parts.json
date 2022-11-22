@@ -6,8 +6,8 @@
 				"properties": {
 					"statement": {
 						"allOf": [
-							{ "$ref": "./schemas.json#/Statement" },
-							{ "$ref": "#/StatementRequestRequired" }
+							{ "$ref": "./schemas.json#/NewStatement" },
+							{ "$ref": "#/NewStatementRequestRequired" }
 						]
 					}
 				},

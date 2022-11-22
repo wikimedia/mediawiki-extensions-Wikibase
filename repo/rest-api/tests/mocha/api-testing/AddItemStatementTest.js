@@ -21,8 +21,8 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 		assert.isAbove( new Date( response.header[ 'last-modified' ] ), originalLastModified );
 		assert.notStrictEqual( response.header.etag, makeEtag( originalRevisionId ) );
 		assert.header( response, 'Location', response.request.url + '/' + encodeURIComponent( response.body.id ) );
-		assert.equal( response.body.property.id, testStatement.mainsnak.property );
-		assert.equal( response.body.value.content, testStatement.mainsnak.datavalue.value );
+		assert.equal( response.body.property.id, testStatement.property.id );
+		assert.equal( response.body.value.content, testStatement.value.content );
 	}
 
 	before( async () => {
@@ -56,8 +56,8 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 				formatStatementEditSummary(
 					'wbsetclaim',
 					'create',
-					testStatement.mainsnak.property,
-					testStatement.mainsnak.datavalue.value
+					testStatement.property.id,
+					testStatement.value.content
 				)
 			);
 		} );
@@ -83,8 +83,8 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 				formatStatementEditSummary(
 					'wbsetclaim',
 					'create',
-					testStatement.mainsnak.property,
-					testStatement.mainsnak.datavalue.value,
+					testStatement.property.id,
+					testStatement.value.content,
 					editSummary )
 			);
 			assert.strictEqual( editMetadata.user, user.username );

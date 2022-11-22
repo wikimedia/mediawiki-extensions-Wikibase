@@ -6,7 +6,7 @@ const {
 	createRedirectForItem,
 	createUniqueStringProperty,
 	getLatestEditMetadata,
-	newStatementWithRandomStringValue,
+	newLegacyStatementWithRandomStringValue,
 	createItemWithStatements
 } = require( '../helpers/entityHelper' );
 const { newGetItemStatementsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
@@ -27,8 +27,8 @@ describe( 'GET /entities/items/{id}/statements', () => {
 		testPropertyId = ( await createUniqueStringProperty() ).entity.id;
 
 		testStatements = [
-			newStatementWithRandomStringValue( testPropertyId ),
-			newStatementWithRandomStringValue( testPropertyId )
+			newLegacyStatementWithRandomStringValue( testPropertyId ),
+			newLegacyStatementWithRandomStringValue( testPropertyId )
 		];
 		const createItemResponse = await createItemWithStatements( testStatements );
 		testItemId = createItemResponse.entity.id;

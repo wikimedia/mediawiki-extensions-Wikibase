@@ -35,7 +35,7 @@ describe( 'PUT statement tests', () => {
 	before( async () => {
 		testPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
 		const createItemResponse = await entityHelper.createItemWithStatements( [
-			entityHelper.newStatementWithRandomStringValue( testPropertyId )
+			entityHelper.newLegacyStatementWithRandomStringValue( testPropertyId )
 		] );
 		testItemId = createItemResponse.entity.id;
 		testStatementId = createItemResponse.entity.claims[ testPropertyId ][ 0 ].id;
@@ -78,7 +78,7 @@ describe( 'PUT statement tests', () => {
 
 					assert.deepEqual(
 						response.body.value.content,
-						statementSerialization.mainsnak.datavalue.value
+						statementSerialization.value.content
 					);
 					const { comment } = await entityHelper.getLatestEditMetadata( testItemId );
 					assert.strictEqual(
@@ -86,8 +86,8 @@ describe( 'PUT statement tests', () => {
 						formatStatementEditSummary(
 							'wbsetclaim',
 							'update',
-							statementSerialization.mainsnak.property,
-							statementSerialization.mainsnak.datavalue.value
+							statementSerialization.property.id,
+							statementSerialization.value.content
 						)
 					);
 				} );
@@ -110,7 +110,7 @@ describe( 'PUT statement tests', () => {
 					assertValid200Response( response );
 					assert.deepEqual(
 						response.body.value.content,
-						statementSerialization.mainsnak.datavalue.value
+						statementSerialization.value.content
 					);
 
 					const editMetadata = await entityHelper.getLatestEditMetadata( testItemId );
@@ -121,8 +121,8 @@ describe( 'PUT statement tests', () => {
 						formatStatementEditSummary(
 							'wbsetclaim',
 							'update',
-							statementSerialization.mainsnak.property,
-							statementSerialization.mainsnak.datavalue.value,
+							statementSerialization.property.id,
+							statementSerialization.value.content,
 							editSummary
 						)
 					);
@@ -152,9 +152,9 @@ describe( 'PUT statement tests', () => {
 					// This is tested here by creating a new test item with three statements, replacing the
 					// middle one and then checking that it's still in the middle afterwards.
 					const newTestItem = ( await entityHelper.createItemWithStatements( [
-						entityHelper.newStatementWithRandomStringValue( testPropertyId ),
-						entityHelper.newStatementWithRandomStringValue( testPropertyId ),
-						entityHelper.newStatementWithRandomStringValue( testPropertyId )
+						entityHelper.newLegacyStatementWithRandomStringValue( testPropertyId ),
+						entityHelper.newLegacyStatementWithRandomStringValue( testPropertyId ),
+						entityHelper.newLegacyStatementWithRandomStringValue( testPropertyId )
 					] ) ).entity;
 
 					const originalSecondStatement = newTestItem.claims[ testPropertyId ][ 1 ];
@@ -173,7 +173,7 @@ describe( 'PUT statement tests', () => {
 					assert.strictEqual( actualSecondStatement.id, originalSecondStatement.id );
 					assert.strictEqual(
 						actualSecondStatement.value.content,
-						newSecondStatement.mainsnak.datavalue.value
+						newSecondStatement.value.content
 					);
 					assert.notEqual(
 						actualSecondStatement.value.content,

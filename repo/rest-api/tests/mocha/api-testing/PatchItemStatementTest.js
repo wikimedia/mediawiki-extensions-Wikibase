@@ -6,8 +6,7 @@ const hasJsonDiffLib = require( '../helpers/hasJsonDiffLib' );
 const formatStatementEditSummary = require( '../helpers/formatStatementEditSummary' );
 const {
 	newPatchItemStatementRequestBuilder,
-	newPatchStatementRequestBuilder,
-	newReplaceStatementRequestBuilder
+	newPatchStatementRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
 
 function makeEtag( ...revisionIds ) {
@@ -47,7 +46,7 @@ describe( 'PATCH statement tests', () => {
 		testPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
 
 		const createItemResponse = await entityHelper.createItemWithStatements( [
-			entityHelper.newStatementWithRandomStringValue( testPropertyId )
+			entityHelper.newLegacyStatementWithRandomStringValue( testPropertyId )
 		] );
 		testItemId = createItemResponse.entity.id;
 		testStatement = createItemResponse.entity.claims[ testPropertyId ][ 0 ];
@@ -82,10 +81,12 @@ describe( 'PATCH statement tests', () => {
 			describe( '200 success response', () => {
 
 				afterEach( async () => {
-					await newReplaceStatementRequestBuilder( // reset after successful edit
-						testStatementId,
-						testStatement
-					).makeRequest();
+					// TODO: go back to using the REST API once PATCH uses new statement format
+					const response = await entityHelper.editEntity( // reset after successful edit
+						{ id: testItemId, claims: [ testStatement ] }
+					);
+					assert.strictEqual( response.success, 1, `Cleanup failed with error: '${response.error}'` );
+					assert.deepStrictEqual( response.entity.claims[ testPropertyId ][ 0 ], testStatement );
 
 					// wait 1s before next test to ensure the last-modified timestamps are different
 					await new Promise( ( resolve ) => {
@@ -433,13 +434,14 @@ describe( 'PATCH statement tests', () => {
 						.makeRequest();
 
 					assert.strictEqual( response.statusCode, 409 );
+
+					assert.strictEqual( response.body.code, 'patch-test-failed' );
+					assert.deepEqual( response.body.context.operation, patchOperation );
+					assert.deepEqual( response.body.context[ 'actual-value' ], testStatement.mainsnak.datavalue.value );
 					assert.include( response.body.message, 'Test operation in the provided patch failed.' );
 					assert.include( response.body.message, patchOperation.path );
 					assert.include( response.body.message, JSON.stringify( patchOperation.value ) );
 					assert.include( response.body.message, testStatement.mainsnak.datavalue.value );
-					assert.strictEqual( response.body.code, 'patch-test-failed' );
-					assert.deepEqual( response.body.context.operation, patchOperation );
-					assert.deepEqual( response.body.context[ 'actual-value' ], testStatement.mainsnak.datavalue.value );
 				} );
 			} );
 

@@ -1,16 +1,16 @@
 'use strict';
 
-const { assert } = require( 'api-testing' );
+const { assert, utils } = require( 'api-testing' );
 const rbf = require( '../helpers/RequestBuilderFactory' );
 const {
 	getLatestEditMetadata,
 	newStatementWithRandomStringValue,
+	newLegacyStatementWithRandomStringValue,
 	createUniqueStringProperty,
 	createItemWithStatements
 } = require( '../helpers/entityHelper' );
 const hasJsonDiffLib = require( '../helpers/hasJsonDiffLib' );
 const { newAddItemStatementRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
-const entityHelper = require( '../helpers/entityHelper' );
 
 function makeEtag( ...revisionIds ) {
 	return revisionIds.map( ( revId ) => `"${revId}"` ).join( ',' );
@@ -46,7 +46,7 @@ describe( 'Conditional requests', () => {
 	before( async () => {
 		statementPropertyId = ( await createUniqueStringProperty() ).entity.id;
 		const createItemResponse = await createItemWithStatements( [
-			newStatementWithRandomStringValue( statementPropertyId )
+			newLegacyStatementWithRandomStringValue( statementPropertyId )
 		] );
 		itemId = createItemResponse.entity.id;
 		statementId = createItemResponse.entity.claims[ statementPropertyId ][ 0 ].id;
@@ -304,7 +304,7 @@ describe( 'Conditional requests', () => {
 			// restore the item state in between tests that may or may not edit its data
 			statementId = ( await newAddItemStatementRequestBuilder(
 				itemId,
-				entityHelper.newStatementWithRandomStringValue( statementPropertyId )
+				newStatementWithRandomStringValue( statementPropertyId )
 			).makeRequest() ).body.id;
 
 			const testItemCreationMetadata = await getLatestEditMetadata( itemId );
@@ -336,16 +336,16 @@ describe( 'Conditional requests', () => {
 				statementId,
 				[ {
 					op: 'replace',
-					path: '/mainsnak',
-					value: newStatementWithRandomStringValue( statementPropertyId ).mainsnak
+					path: '/mainsnak/datavalue/value',
+					value: 'random-string-value-' + utils.uniq()
 				} ]
 			) );
 			editRoutes.push( () => rbf.newPatchStatementRequestBuilder(
 				statementId,
 				[ {
 					op: 'replace',
-					path: '/mainsnak',
-					value: newStatementWithRandomStringValue( statementPropertyId ).mainsnak
+					path: '/mainsnak/datavalue/value',
+					value: 'random-string-value-' + utils.uniq()
 				} ]
 			) );
 		}

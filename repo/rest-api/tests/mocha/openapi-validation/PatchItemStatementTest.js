@@ -3,7 +3,7 @@
 const {
 	createUniqueStringProperty,
 	createItemWithStatements,
-	newStatementWithRandomStringValue
+	newLegacyStatementWithRandomStringValue
 } = require( '../helpers/entityHelper' );
 const hasJsonDiffLib = require( '../helpers/hasJsonDiffLib' );
 const {
@@ -24,7 +24,7 @@ describe( 'validate PATCH endpoints against OpenAPI definition', () => {
 
 		stringPropertyId = ( await createUniqueStringProperty() ).entity.id;
 		const createEntityResponse = await createItemWithStatements( [
-			newStatementWithRandomStringValue( stringPropertyId )
+			newLegacyStatementWithRandomStringValue( stringPropertyId )
 		] );
 		testItemId = createEntityResponse.entity.id;
 		testStatementId = createEntityResponse.entity.claims[ stringPropertyId ][ 0 ].id;

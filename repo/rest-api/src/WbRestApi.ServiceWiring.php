@@ -10,13 +10,16 @@ use Wikibase\Repo\RestApi\DataAccess\SnakValidatorStatementValidator;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemDataRetriever;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityRevisionLookupItemRevisionMetadataRetriever;
-use Wikibase\Repo\RestApi\Domain\Serialization\StatementDeserializer;
+use Wikibase\Repo\RestApi\Domain\Serialization\StatementDeserializer as DomainStatementDeserializer;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatchValidator;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffStatementPatcher;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
+use Wikibase\Repo\RestApi\Serialization\PropertyValuePairDeserializer;
+use Wikibase\Repo\RestApi\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\RestApi\Serialization\SerializerFactory;
+use Wikibase\Repo\RestApi\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementValidator;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
@@ -131,7 +134,9 @@ return [
 			new WikibaseEntityLookupItemDataRetriever( WikibaseRepo::getEntityLookup( $services ) ),
 			new JsonDiffStatementPatcher(
 				WikibaseRepo::getBaseDataModelSerializerFactory( $services )->newStatementSerializer(),
-				WbRestApi::getStatementDeserializer( $services ),
+				new DomainStatementDeserializer(
+					WikibaseRepo::getBaseDataModelDeserializerFactory( $services )->newStatementDeserializer()
+				),
 				new SnakValidator(
 					WikibaseRepo::getPropertyDataTypeLookup( $services ),
 					WikibaseRepo::getDataTypeFactory( $services ),
@@ -218,9 +223,16 @@ return [
 	},
 
 	'WbRestApi.StatementDeserializer' => function( MediaWikiServices $services ): StatementDeserializer {
-		return new StatementDeserializer(
-			WikibaseRepo::getBaseDataModelDeserializerFactory( $services )->newStatementDeserializer()
+		$propertyValuePairDeserializer = new PropertyValuePairDeserializer(
+			WikibaseRepo::getPropertyDataTypeLookup( $services ),
+			WikibaseRepo::getDataTypeDefinitions()->getValueTypes(),
+			WikibaseRepo::getDataValueDeserializer( $services ),
+			WikibaseRepo::getEntityIdParser( $services )
 		);
-	}
+		return new StatementDeserializer(
+			$propertyValuePairDeserializer,
+			new ReferenceDeserializer( $propertyValuePairDeserializer )
+		);
+	},
 
 ];

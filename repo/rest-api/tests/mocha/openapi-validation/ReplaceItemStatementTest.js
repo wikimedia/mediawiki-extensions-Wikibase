@@ -3,7 +3,8 @@
 const {
 	createUniqueStringProperty,
 	createItemWithStatements,
-	newStatementWithRandomStringValue
+	newStatementWithRandomStringValue,
+	newLegacyStatementWithRandomStringValue
 } = require( '../helpers/entityHelper' );
 const {
 	newReplaceItemStatementRequestBuilder,
@@ -20,7 +21,7 @@ describe( 'validate PUT endpoints against OpenAPI definition', () => {
 	before( async () => {
 		stringPropertyId = ( await createUniqueStringProperty() ).entity.id;
 		const createItemResponse = await createItemWithStatements( [
-			newStatementWithRandomStringValue( stringPropertyId )
+			newLegacyStatementWithRandomStringValue( stringPropertyId )
 		] );
 		testItemId = createItemResponse.entity.id;
 		testStatementId = createItemResponse.entity.claims[ stringPropertyId ][ 0 ].id;
