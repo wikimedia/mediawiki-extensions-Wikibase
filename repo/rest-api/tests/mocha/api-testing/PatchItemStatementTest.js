@@ -5,8 +5,10 @@ const entityHelper = require( '../helpers/entityHelper' );
 const hasJsonDiffLib = require( '../helpers/hasJsonDiffLib' );
 const formatStatementEditSummary = require( '../helpers/formatStatementEditSummary' );
 const {
+	newAddItemStatementRequestBuilder,
 	newPatchItemStatementRequestBuilder,
-	newPatchStatementRequestBuilder
+	newPatchStatementRequestBuilder,
+	newReplaceStatementRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
 
 function makeEtag( ...revisionIds ) {
@@ -44,12 +46,15 @@ describe( 'PATCH statement tests', () => {
 		}
 
 		testPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+		testItemId = ( await entityHelper.createItemWithStatements( [] ) ).entity.id;
 
-		const createItemResponse = await entityHelper.createItemWithStatements( [
-			entityHelper.newLegacyStatementWithRandomStringValue( testPropertyId )
-		] );
-		testItemId = createItemResponse.entity.id;
-		testStatement = createItemResponse.entity.claims[ testPropertyId ][ 0 ];
+		const addStatementResponse = await newAddItemStatementRequestBuilder(
+			testItemId,
+			entityHelper.newStatementWithRandomStringValue( testPropertyId )
+		).assertValidRequest().makeRequest();
+		const errMsg = `Add Statement failed with error code: '${addStatementResponse.body.code}'`;
+		assert.strictEqual( addStatementResponse.status, 201, errMsg );
+		testStatement = addStatementResponse.body;
 		testStatementId = testStatement.id;
 
 		const testItemCreationMetadata = await entityHelper.getLatestEditMetadata( testItemId );
@@ -81,12 +86,13 @@ describe( 'PATCH statement tests', () => {
 			describe( '200 success response', () => {
 
 				afterEach( async () => {
-					// TODO: go back to using the REST API once PATCH uses new statement format
-					const response = await entityHelper.editEntity( // reset after successful edit
-						{ id: testItemId, claims: [ testStatement ] }
-					);
-					assert.strictEqual( response.success, 1, `Cleanup failed with error: '${response.error}'` );
-					assert.deepStrictEqual( response.entity.claims[ testPropertyId ][ 0 ], testStatement );
+					// reset after each successful edit
+					const response = await newReplaceStatementRequestBuilder(
+						testStatementId, testStatement
+					).makeRequest();
+					const errMsg = `Cleanup failed with error code: '${response.body.code}'`;
+					assert.strictEqual( response.status, 200, errMsg );
+					assert.deepStrictEqual( response.body, testStatement );
 
 					// wait 1s before next test to ensure the last-modified timestamps are different
 					await new Promise( ( resolve ) => {
@@ -99,7 +105,7 @@ describe( 'PATCH statement tests', () => {
 					const response = await newPatchRequestBuilder( testStatementId, [
 						{
 							op: 'replace',
-							path: '/mainsnak/datavalue/value',
+							path: '/value/content',
 							value: expectedValue
 						}
 					] ).assertValidRequest().makeRequest();
@@ -113,7 +119,7 @@ describe( 'PATCH statement tests', () => {
 					const response = await newPatchRequestBuilder( testStatementId, [
 						{
 							op: 'replace',
-							path: '/mainsnak/datavalue/value',
+							path: '/value/content',
 							value: expectedValue
 						}
 					] )
@@ -132,7 +138,7 @@ describe( 'PATCH statement tests', () => {
 					const response = await newPatchRequestBuilder( testStatementId, [
 						{
 							op: 'replace',
-							path: '/mainsnak/datavalue/value',
+							path: '/value/content',
 							value: expectedValue
 						}
 					] ).withJsonBodyParam( 'tags', [ tag ] )
@@ -348,14 +354,14 @@ describe( 'PATCH statement tests', () => {
 				} );
 
 				it( 'rejects Property ID change', async () => {
-					const otherStringProperty = ( await entityHelper.createEntity(
+					const otherStringPropertyId = ( await entityHelper.createEntity(
 						'property',
 						{ datatype: 'string' }
 					) ).entity.id;
 					const patch = [ {
 						op: 'replace',
-						path: '/mainsnak/property',
-						value: otherStringProperty
+						path: '/property/id',
+						value: otherStringPropertyId
 					} ];
 					const response = await newPatchRequestBuilder( testStatementId, patch )
 						.assertValidRequest().makeRequest();
@@ -426,7 +432,7 @@ describe( 'PATCH statement tests', () => {
 				it( 'patch test condition failed', async () => {
 					const patchOperation = {
 						op: 'test',
-						path: '/mainsnak/datavalue/value',
+						path: '/value/content',
 						value: { vegetable: 'potato' }
 					};
 					const response = await newPatchRequestBuilder( testStatementId, [ patchOperation ] )
@@ -437,11 +443,11 @@ describe( 'PATCH statement tests', () => {
 
 					assert.strictEqual( response.body.code, 'patch-test-failed' );
 					assert.deepEqual( response.body.context.operation, patchOperation );
-					assert.deepEqual( response.body.context[ 'actual-value' ], testStatement.mainsnak.datavalue.value );
+					assert.deepEqual( response.body.context[ 'actual-value' ], testStatement.value.content );
 					assert.include( response.body.message, 'Test operation in the provided patch failed.' );
 					assert.include( response.body.message, patchOperation.path );
 					assert.include( response.body.message, JSON.stringify( patchOperation.value ) );
-					assert.include( response.body.message, testStatement.mainsnak.datavalue.value );
+					assert.include( response.body.message, testStatement.value.content );
 				} );
 			} );
 
@@ -449,7 +455,7 @@ describe( 'PATCH statement tests', () => {
 				it( 'malformed statement serialization', async () => {
 					const patch = [ {
 						op: 'remove',
-						path: '/mainsnak'
+						path: '/value'
 					} ];
 					const response = await newPatchRequestBuilder( testStatementId, patch )
 						.assertValidRequest()
@@ -459,18 +465,18 @@ describe( 'PATCH statement tests', () => {
 					assert.strictEqual( response.body.code, 'patched-statement-invalid' );
 				} );
 
-				it( 'mismatching value type', async () => {
-					const datavalue = {
-						value: {
+				it( 'incorrect value type', async () => {
+					const value = {
+						content: {
 							amount: '+10.38',
 							upperBound: '+10.385',
 							lowerBound: '+10.375',
 							unit: 'http://www.wikidata.org/entity/Q712226'
 						},
-						type: 'quantity'
+						type: 'value'
 					};
 					const patch = [
-						{ op: 'replace', path: '/mainsnak/datavalue', value: datavalue }
+						{ op: 'replace', path: '/value/content', value }
 					];
 
 					const response = await newPatchRequestBuilder( testStatementId, patch )
@@ -479,10 +485,7 @@ describe( 'PATCH statement tests', () => {
 
 					assert.strictEqual( response.statusCode, 422 );
 					const body = response.body;
-					assert.strictEqual( body.code, 'patched-statement-value-type-mismatch' );
-					assert.include( body.message, `'${testPropertyId}'` );
-					assert.strictEqual( body.context[ 'property-id' ], testPropertyId );
-					assert.deepStrictEqual( body.context[ 'patched-statement' ].value.content, datavalue.value );
+					assert.strictEqual( body.code, 'patched-statement-invalid' );
 				} );
 			} );
 

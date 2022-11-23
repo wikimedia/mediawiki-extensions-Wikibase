@@ -40,7 +40,7 @@ describe( 'validate PATCH endpoints against OpenAPI definition', () => {
 				const response = await newPatchRequestBuilder(
 					testStatementId,
 					[
-						{ op: 'replace', path: '/mainsnak/datavalue/value', value: 'I be patched!' }
+						{ op: 'replace', path: '/value/content', value: 'I be patched!' }
 					]
 				).makeRequest();
 
@@ -62,7 +62,7 @@ describe( 'validate PATCH endpoints against OpenAPI definition', () => {
 				const response = await newPatchRequestBuilder(
 					`${testItemId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`,
 					[
-						{ op: 'replace', path: '/mainsnak/datavalue/value', value: 'no patchy :(' }
+						{ op: 'replace', path: '/value/content', value: 'no patchy :(' }
 					]
 				).makeRequest();
 
@@ -87,7 +87,7 @@ describe( 'validate PATCH endpoints against OpenAPI definition', () => {
 				const response = await newPatchRequestBuilder(
 					testStatementId,
 					[
-						{ op: 'replace', path: '/mainsnak/datavalue/value', value: 'no patchy :(' }
+						{ op: 'replace', path: '/value/content', value: 'no patchy :(' }
 					]
 				)
 					.withHeader( 'If-Unmodified-Since', yesterday )
@@ -101,7 +101,7 @@ describe( 'validate PATCH endpoints against OpenAPI definition', () => {
 				const response = await newPatchRequestBuilder(
 					testStatementId,
 					[
-						{ op: 'replace', path: '/mainsnak/datavalue/value', value: 'no patchy :(' }
+						{ op: 'replace', path: '/value/content', value: 'no patchy :(' }
 					]
 				)
 					.withHeader( 'Content-Type', 'text/plain' )
@@ -117,7 +117,7 @@ describe( 'validate PATCH endpoints against OpenAPI definition', () => {
 					[
 						{
 							op: 'replace',
-							path: '/mainsnak/datavalue/value',
+							path: '/value/content',
 							value: { invalid: [ 'datavalue', 'value', 'for a string datavalue' ] }
 						}
 					]

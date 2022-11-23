@@ -2,25 +2,24 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Infrastructure;
 
-use DataValues\Geo\Values\GlobeCoordinateValue;
-use DataValues\Geo\Values\LatLongValue;
-use Exception;
 use Generator;
 use InvalidArgumentException;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Swaggest\JsonDiff\JsonDiff;
-use ValueValidators\Error;
-use ValueValidators\Result;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedSerializationException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedStatementException;
-use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedStatementValueTypeException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\PatchPathException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\PatchTestConditionFailedException;
-use Wikibase\Repo\RestApi\Domain\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffStatementPatcher;
+use Wikibase\Repo\RestApi\Serialization\PropertyValuePairDeserializer;
+use Wikibase\Repo\RestApi\Serialization\PropertyValuePairSerializer;
+use Wikibase\Repo\RestApi\Serialization\ReferenceDeserializer;
+use Wikibase\Repo\RestApi\Serialization\ReferenceSerializer;
+use Wikibase\Repo\RestApi\Serialization\StatementDeserializer;
+use Wikibase\Repo\RestApi\Serialization\StatementSerializer;
 use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -34,15 +33,15 @@ use Wikibase\Repo\WikibaseRepo;
 class JsonDiffStatementPatcherTest extends TestCase {
 
 	/**
-	 * @var MockObject|SnakValidator
+	 * @var MockObject|PropertyDataTypeLookup
 	 */
-	private $snakValidator;
+	private $propertyDataTypeLookup;
 
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->snakValidator = $this->createStub( SnakValidator::class );
-		$this->snakValidator->method( 'validate' )->willReturn( Result::newSuccess() );
+		$this->propertyDataTypeLookup = $this->createStub( PropertyDataTypeLookup::class );
+		$this->propertyDataTypeLookup->method( 'getDataTypeIdForProperty' )->willReturn( 'string' );
 
 		if ( !class_exists( JsonDiff::class ) ) {
 			$this->markTestSkipped( 'Skipping while swaggest/json-diff has not made it to mediawiki/vendor yet (T316245).' );
@@ -66,7 +65,7 @@ class JsonDiffStatementPatcherTest extends TestCase {
 			[
 				[
 					'op' => 'replace',
-					'path' => '/mainsnak/datavalue/value',
+					'path' => '/value/content',
 					'value' => 'patched',
 				],
 			],
@@ -112,48 +111,32 @@ class JsonDiffStatementPatcherTest extends TestCase {
 			[
 				[
 					'op' => 'remove',
-					'path' => '/mainsnak',
+					'path' => '/value',
 				],
 			]
 		);
 	}
 
-	public function testGivenPatchResultChangesValueType_throwsException(): void {
-		$this->snakValidator = $this->createStub( SnakValidator::class );
-		$this->snakValidator
-			->method( 'validate' )
-			->willReturn( Result::newError( [ Error::newError( '', null, 'bad-value-type' ), ] ) );
+	public function testGivenPatchResultHasInvalidValue_throwsException(): void {
+		$this->expectException( InvalidPatchedSerializationException::class );
 
-		$propertyId = 'P1';
-		$originalStatement = NewStatement::forProperty( $propertyId )
-			->withValue( 'unpatched' )
-			->build();
-		$patchOperation = [
-			'op' => 'replace',
-			'path' => '/mainsnak/datavalue',
-			'value' => [
-				'type' => 'globecoordinate',
-				'value' => [ 'latitude' => 100, 'longitude' => 100 ]
+		$this->newStatementPatcher()->patch(
+			NewStatement::forProperty( 'P1' )->withValue( 'unpatched' )->build(),
+			[
+				[
+					'op' => 'replace',
+					'path' => '/value/content',
+					// valid 'globecoordinate' value but invalid for a 'string' Property
+					'value' => [ 'latitude' => 100, 'longitude' => 100 ]
+				]
 			]
-		];
-		$expectedPatchedStatement = NewStatement::forProperty( $propertyId )
-			->withValue( new GlobeCoordinateValue( new LatLongValue( 100, 100 ) ) )
-			->build();
-
-		try {
-			$this->newStatementPatcher()->patch( $originalStatement, [ $patchOperation ] );
-			$this->fail( "Exception not thrown" );
-		} catch ( Exception $e ) {
-			$this->assertInstanceOf( InvalidPatchedStatementValueTypeException::class, $e );
-			$this->assertEquals( $propertyId, $e->getPropertyId()->getSerialization() );
-			$this->assertEquals( $expectedPatchedStatement, $e->getPatchedStatement() );
-		}
+		);
 	}
 
 	public function testGivenPatchTestConditionFailed_throwsException(): void {
 		$testOperation = [
 			'op' => 'test',
-			'path' => '/mainsnak/snaktype',
+			'path' => '/value/type',
 			'value' => 'value',
 		];
 
@@ -187,23 +170,21 @@ class JsonDiffStatementPatcherTest extends TestCase {
 		}
 	}
 
-	public function testGivenPatchResultsIsInvalidStatement_throwsException(): void {
-		$this->snakValidator = $this->createMock( SnakValidator::class );
-		$this->snakValidator
-			->method( 'validate' )
-			->willReturn( Result::newError( [ Error::newError() ] ) );
+	public function testGivenDeserializedPatchResultIsInvalidStatement_throwsException(): void {
+		$this->propertyDataTypeLookup = $this->createStub( PropertyDataTypeLookup::class );
+		$this->propertyDataTypeLookup->method( 'getDataTypeIdForProperty' )->willReturn( 'url' );
 
 		$this->expectException( InvalidPatchedStatementException::class );
 
 		$this->newStatementPatcher()->patch(
 			NewStatement::forProperty( 'P1' )
-				->withValue( 'abc' )
+				->withValue( 'https://example.org' )
 				->build(),
 			[
 				[
 					'op' => 'replace',
-					'path' => '/mainsnak/datavalue/type',
-					'value' => 'wikibase-entityid'
+					'path' => '/value/content',
+					'value' => "valid 'string' datavalue but not a valid 'url' datatype"
 				]
 			]
 		);
@@ -222,13 +203,33 @@ class JsonDiffStatementPatcherTest extends TestCase {
 	}
 
 	private function newStatementPatcher(): JsonDiffStatementPatcher {
+		$propertyValuePairSerializer = new PropertyValuePairSerializer(
+			$this->propertyDataTypeLookup
+		);
+		$statementSerializer = new StatementSerializer(
+			$propertyValuePairSerializer,
+			new ReferenceSerializer( $propertyValuePairSerializer )
+		);
+
+		$propertyValuePairDeserializer = new PropertyValuePairDeserializer(
+			$this->propertyDataTypeLookup,
+			WikibaseRepo::getDataTypeDefinitions()->getValueTypes(),
+			WikibaseRepo::getDataValueDeserializer(),
+			WikibaseRepo::getEntityIdParser()
+		);
+		$statementDeserializer = new StatementDeserializer(
+			$propertyValuePairDeserializer,
+			new ReferenceDeserializer( $propertyValuePairDeserializer )
+		);
+
 		return new JsonDiffStatementPatcher(
-			WikibaseRepo::getBaseDataModelSerializerFactory()
-				->newStatementSerializer(),
-			new StatementDeserializer(
-				WikibaseRepo::getBaseDataModelDeserializerFactory()->newStatementDeserializer()
-			),
-			$this->snakValidator
+			$statementSerializer,
+			$statementDeserializer,
+			new SnakValidator(
+				$this->propertyDataTypeLookup,
+				WikibaseRepo::getDataTypeFactory(),
+				WikibaseRepo::getDataTypeValidatorFactory()
+			)
 		);
 	}
 

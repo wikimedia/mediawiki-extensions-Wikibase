@@ -10,7 +10,6 @@ use Wikibase\Repo\RestApi\DataAccess\SnakValidatorStatementValidator;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemDataRetriever;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityRevisionLookupItemRevisionMetadataRetriever;
-use Wikibase\Repo\RestApi\Domain\Serialization\StatementDeserializer as DomainStatementDeserializer;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatchValidator;
@@ -133,10 +132,8 @@ return [
 			new StatementGuidParser( new ItemIdParser() ),
 			new WikibaseEntityLookupItemDataRetriever( WikibaseRepo::getEntityLookup( $services ) ),
 			new JsonDiffStatementPatcher(
-				WikibaseRepo::getBaseDataModelSerializerFactory( $services )->newStatementSerializer(),
-				new DomainStatementDeserializer(
-					WikibaseRepo::getBaseDataModelDeserializerFactory( $services )->newStatementDeserializer()
-				),
+				WbRestApi::getSerializerFactory( $services )->newStatementSerializer(),
+				WbRestApi::getStatementDeserializer( $services ),
 				new SnakValidator(
 					WikibaseRepo::getPropertyDataTypeLookup( $services ),
 					WikibaseRepo::getDataTypeFactory( $services ),
