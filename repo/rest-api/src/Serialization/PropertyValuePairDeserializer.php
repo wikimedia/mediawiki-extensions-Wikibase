@@ -2,10 +2,13 @@
 
 namespace Wikibase\Repo\RestApi\Serialization;
 
+use DataValues\DataValue;
 use DataValues\Deserializers\DataValueDeserializer;
+use DataValues\TimeValue;
 use Deserializers\Exceptions\DeserializationException;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -56,27 +59,7 @@ class PropertyValuePairDeserializer {
 			case 'somevalue':
 				return new PropertySomeValueSnak( $propertyId );
 			case 'value':
-				if ( !array_key_exists( 'content', $serialization['value'] ) ) {
-					throw new MissingFieldException();
-				}
-
-				try {
-					$dataValue = $this->dataValueDeserializer->deserialize( [
-						'type' => $this->dataTypeToValueTypeMap[$dataTypeId],
-						'value' => $serialization['value']['content'],
-					] );
-				} catch ( DeserializationException $e ) {
-					throw new InvalidFieldException();
-				}
-
-				foreach ( $this->dataTypeValidatorFactory->getValidators( $dataTypeId ) as $validator ) {
-					$result = $validator->validate( $dataValue );
-					if ( !$result->isValid() ) {
-						$error = $result->getErrors()[0];
-						throw new InvalidFieldException( "[{$error->getCode()}] {$error->getText()}" );
-					}
-				}
-
+				$dataValue = $this->deserializeValue( $dataTypeId, $serialization['value'] );
 				return new PropertyValueSnak( $propertyId, $dataValue );
 		}
 	}
@@ -124,6 +107,73 @@ class PropertyValuePairDeserializer {
 		}
 
 		return $propertyId;
+	}
+
+	private function deserializeValue( string $dataTypeId, array $valueSerialization ): DataValue {
+		if ( !array_key_exists( 'content', $valueSerialization ) ) {
+			throw new MissingFieldException();
+		}
+
+		$dataValueType = $this->dataTypeToValueTypeMap[$dataTypeId];
+		switch ( $dataValueType ) {
+			case 'wikibase-entityid':
+				$dataValue = $this->deserializeEntityIdValue( $valueSerialization['content'] );
+				break;
+			case 'time':
+				$dataValue = $this->deserializeTimeValue( $valueSerialization['content'] );
+				break;
+			default:
+				try {
+					$dataValue = $this->dataValueDeserializer->deserialize( [
+						'type' => $dataValueType,
+						'value' => $valueSerialization['content'],
+					] );
+				} catch ( DeserializationException $e ) {
+					throw new InvalidFieldException();
+				}
+				break;
+		}
+
+		foreach ( $this->dataTypeValidatorFactory->getValidators( $dataTypeId ) as $validator ) {
+			$result = $validator->validate( $dataValue );
+			if ( !$result->isValid() ) {
+				$error = $result->getErrors()[0];
+				throw new InvalidFieldException( "[{$error->getCode()}] {$error->getText()}" );
+			}
+		}
+
+		return $dataValue;
+	}
+
+	/**
+	 * @param mixed $content
+	 */
+	private function deserializeEntityIdValue( $content ): EntityIdValue {
+		try {
+			$entityId = $this->entityIdParser->parse( $content );
+		} catch ( EntityIdParsingException $e ) {
+			throw new InvalidFieldException();
+		}
+		return new EntityIdValue( $entityId );
+	}
+
+	/**
+	 * @param mixed $content
+	 */
+	private function deserializeTimeValue( $content ): TimeValue {
+		try {
+			return $this->newTimeValue(
+				$content['time'],
+				$content['precision'],
+				$content['calendarmodel']
+			);
+		} catch ( \Exception $e ) {
+			throw new InvalidFieldException();
+		}
+	}
+
+	private function newTimeValue( string $timestamp, int $precision, string $calendarmodel ): TimeValue {
+		return new TimeValue( $timestamp, 0, 0, 0, $precision, $calendarmodel );
 	}
 
 }
