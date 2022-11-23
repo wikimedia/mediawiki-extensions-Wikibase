@@ -17,15 +17,7 @@ var $rulerX, $rulerY;
 function initRulers() {
 	if ( !$rulerX ) {
 		$rulerX = $( '<div/>' )
-			.css( {
-				width: 'auto',
-				whiteSpace: 'nowrap',
-				position: 'absolute',
-				top: '-9999px',
-				left: '-9999px',
-				visibility: 'hidden',
-				display: 'none'
-			} );
+			.addClass( 'inputAutoexpand_RulerX' );
 	}
 
 	if ( !$rulerX.closest( 'body' ).length ) {
@@ -35,13 +27,7 @@ function initRulers() {
 	if ( !$rulerY ) {
 		$rulerY = $( '<textarea style="min-height: 0!important; height: 0!important;"/>' )
 			.attr( 'tabindex', '-1' )
-			.css( {
-				position: 'absolute',
-				top: '-9999px',
-				left: '-9999px',
-				right: 'auto',
-				bottom: 'auto'
-			} );
+			.addClass( 'inputAutoexpand_RulerY' );
 	}
 
 	if ( !$rulerY.closest( 'body' ).length ) {

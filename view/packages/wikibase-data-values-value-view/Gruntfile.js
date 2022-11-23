@@ -40,6 +40,7 @@ module.exports = function ( grunt ) {
 
 					'lib/jquery/jquery.PurposedCallbacks.js',
 					'lib/jquery/*.js',
+					'lib/jquery/*.css',
 					'lib/jquery.event/*.js',
 					'lib/jquery.util/*.js',
 					'lib/util/*.js',
