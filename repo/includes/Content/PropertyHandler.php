@@ -2,10 +2,10 @@
 
 namespace Wikibase\Repo\Content;
 
+use Article;
 use Content;
 use IContextSource;
 use MediaWiki\Revision\SlotRenderingProvider;
-use Page;
 use ParserOptions;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
@@ -109,9 +109,9 @@ class PropertyHandler extends EntityHandler {
 	 */
 	public function getActionOverrides() {
 		return [
-			'history' => function ( Page $page, IContextSource $context ) {
+			'history' => function ( Article $article, IContextSource $context ) {
 				return new HistoryEntityAction(
-					$page,
+					$article,
 					$context,
 					$this->entityIdLookup,
 					$this->labelLookupFactory->newLabelDescriptionLookup( $context->getLanguage() )

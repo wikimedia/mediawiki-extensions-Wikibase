@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Actions;
 
+use Article;
 use Html;
 use IContextSource;
 use Linker;
@@ -14,7 +15,6 @@ use OOUI\ButtonWidget;
 use OOUI\FieldLayout;
 use OOUI\HtmlSnippet;
 use OOUI\TextInputWidget;
-use Page;
 use Status;
 use WebRequest;
 use Wikibase\Repo\Content\EntityContent;
@@ -43,11 +43,11 @@ class EditEntityAction extends ViewEntityAction {
 	/**
 	 * @see Action::__construct
 	 *
-	 * @param Page $page
-	 * @param IContextSource|null $context
+	 * @param Article $article
+	 * @param IContextSource $context
 	 */
-	public function __construct( Page $page, IContextSource $context = null ) {
-		parent::__construct( $page, $context );
+	public function __construct( Article $article, IContextSource $context ) {
+		parent::__construct( $article, $context );
 
 		$this->entityDiffVisualizer = new DispatchingEntityDiffVisualizer(
 			WikibaseRepo::getEntityDiffVisualizerFactory(),
