@@ -76,36 +76,6 @@
 			}
 		}
 	},
-	"QualifiersRequestRequired": {
-		"additionalProperties": {
-			"items": {
-				"required": [ "snaktype", "property" ]
-			}
-		}
-	},
-	"ReferenceRequestRequired": {
-		"required": [ "snaks", "snaks-order" ],
-		"properties": {
-			"snaks": {
-				"additionalProperties": {
-					"items": {
-						"required": [ "snaktype", "property" ]
-					}
-				}
-			}
-		}
-	},
-	"ReferencesRequestRequired": {
-		"items": { "$ref": "#/ReferenceRequestRequired" }
-	},
-	"StatementRequestRequired": {
-		"required": [ "mainsnak" ],
-		"properties": {
-			"mainsnak": { "required": [ "snaktype", "property" ] },
-			"qualifiers": { "$ref": "#/QualifiersRequestRequired" },
-			"references": { "$ref": "#/ReferencesRequestRequired" }
-		}
-	},
 	"NewStatementRequestRequired": {
 		"allOf": [
 			{ "$ref": "#/PropertyValuePairRequestRequired" },
