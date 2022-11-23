@@ -45,6 +45,31 @@ class PropertyDataTypeChangerTest extends \PHPUnit\Framework\TestCase {
 		$propertyDataTypeChanger->changeDataType( $propertyId, $this->createMock( User::class ), 'shinydata' );
 	}
 
+	public function testChangeDataType_customSummary() {
+		$propertyId = new NumericPropertyId( 'P42' );
+
+		$expectedProperty = new Property( $propertyId, null, 'shinydata' );
+
+		$entityStore = $this->createMock( EntityStore::class );
+		$entityStore->expects( $this->once() )
+			->method( 'saveEntity' )
+			->with(
+				$expectedProperty,
+				'Changed data type from rustydata to shinydata: [[phabricator:T1|T1]]',
+				$this->isInstanceOf( User::class ),
+				EDIT_UPDATE, 6789
+			)
+			->willReturn( new EntityRevision( $expectedProperty, 6790 ) );
+
+		$propertyDataTypeChanger = $this->getPropertyDataTypeChanger( $entityStore );
+		$propertyDataTypeChanger->changeDataType(
+			$propertyId,
+			$this->createMock( User::class ),
+			'shinydata',
+			'[[phabricator:T1|T1]]'
+		);
+	}
+
 	public function testChangeDataType_propertyNotFound() {
 		$propertyId = new NumericPropertyId( 'P43' );
 
