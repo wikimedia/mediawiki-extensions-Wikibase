@@ -404,6 +404,9 @@ return call_user_func( function() {
 			'scripts' => [
 				'jquery/jquery.inputautoexpand.js',
 			],
+			'styles' => [
+				'jquery/jquery.inputautoexpand.css',
+			],
 			'dependencies' => [
 				'jquery.event.special.eachchange',
 			],
