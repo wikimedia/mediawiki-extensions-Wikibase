@@ -1,11 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
+			"Kimberli Mäkäräinen (WMNO)",
 			"Trondtr",
 			"Yupik"
 		]
 	},
 	"wikibase-edit": "rievdat",
+	"wikibase-add": "lasit",
 	"wikibase-addreference": "lasit gáldu",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Eará gielaide",
 	"wikibase-entitytermsforlanguagelistview-description": "Govvádus",
