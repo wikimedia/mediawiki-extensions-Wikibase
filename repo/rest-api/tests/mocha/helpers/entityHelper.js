@@ -10,14 +10,6 @@ async function createEntity( type, entity ) {
 	}, 'POST' );
 }
 
-async function editEntity( entity ) {
-	return action.getAnon().action( 'wbeditentity', {
-		id: entity.id,
-		token: '+\\',
-		data: JSON.stringify( entity )
-	}, 'POST' );
-}
-
 async function createUniqueStringProperty() {
 	return await createEntity( 'property', {
 		labels: { en: { language: 'en', value: `string-property-${utils.uniq()}` } },
@@ -112,7 +104,6 @@ function newStatementWithRandomStringValue( propertyId ) {
 
 module.exports = {
 	createEntity,
-	editEntity,
 	createItemWithStatements,
 	createUniqueStringProperty,
 	createRedirectForItem,

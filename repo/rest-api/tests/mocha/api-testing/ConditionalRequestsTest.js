@@ -336,7 +336,7 @@ describe( 'Conditional requests', () => {
 				statementId,
 				[ {
 					op: 'replace',
-					path: '/mainsnak/datavalue/value',
+					path: '/value/content',
 					value: 'random-string-value-' + utils.uniq()
 				} ]
 			) );
@@ -344,7 +344,7 @@ describe( 'Conditional requests', () => {
 				statementId,
 				[ {
 					op: 'replace',
-					path: '/mainsnak/datavalue/value',
+					path: '/value/content',
 					value: 'random-string-value-' + utils.uniq()
 				} ]
 			) );

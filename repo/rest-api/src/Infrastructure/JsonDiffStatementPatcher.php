@@ -8,7 +8,6 @@ use Swaggest\JsonDiff\JsonPatch;
 use Swaggest\JsonDiff\PatchTestOperationFailedException;
 use Swaggest\JsonDiff\PathException;
 use Throwable;
-use Wikibase\DataModel\Serializers\StatementSerializer;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\RestApi\Domain\Exceptions\InapplicablePatchException;
@@ -17,9 +16,9 @@ use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedStatementException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedStatementValueTypeException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\PatchPathException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\PatchTestConditionFailedException;
-// TODO: Changes to PropertyValuePairDeserializer required before new StatementDeserializer can be used
-use Wikibase\Repo\RestApi\Domain\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Domain\Services\StatementPatcher;
+use Wikibase\Repo\RestApi\Serialization\StatementDeserializer;
+use Wikibase\Repo\RestApi\Serialization\StatementSerializer;
 use Wikibase\Repo\Validators\SnakValidator;
 
 /**
