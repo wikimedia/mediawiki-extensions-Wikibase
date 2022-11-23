@@ -4,7 +4,8 @@
 			"Arnobarnard",
 			"Joris Darlington Quarshie",
 			"Naudefj",
-			"Rooiratel"
+			"Rooiratel",
+			"1233qwer1234qwer4"
 		]
 	},
 	"wikibase-client-desc": "Kliënt vir die Wikibase-uitbreiding",
@@ -68,6 +69,7 @@
 	"wikibase-sitelinks-sitename-columnheading": "Taal",
 	"wikibase-sitelinks-link-columnheading": "Geskakelde artikel",
 	"notification-link-text-view-item": "{{GENDER:$1|Wys}} item",
+	"connected-redirect-category": "Herleidings gekoppel aan {{WBREPONAME}}-items",
 	"wikibase-client-data-bridge-cascadeprotected-on-client-head": "<strong> Hierdie bladsy is tans [[Project:Cascade|cascade protected]] op hierdie wiki en kan slegs geredigeer word deur [[Project:Administrators|administrators]].</strong>",
 	"wikibase-client-data-bridge-bailout-heading": "In plaas daarvan sou u die volgende kon doen:",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo": "Wysig die waarde op {{WBREPONAME}}. Klik op die knoppie hieronder om die waarde direk te wysig (skakel word oop in 'n nuwe oortjie).",

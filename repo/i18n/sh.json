@@ -7,7 +7,8 @@
 			"Macofe",
 			"OC Ripper",
 			"Srdjan m",
-			"Vlad5250"
+			"Vlad5250",
+			"BadDog"
 		]
 	},
 	"wikibase-desc": "Strukturirano skladište podataka",
@@ -45,7 +46,7 @@
 	"wikibase-statementsection-identifiers": "Naznake",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|unos|unosa}}",
 	"wikibase-sitelinks-empty": "Trenutno još nema sajt-stranica za ovu stavku.",
-	"wikibase-sitelinks-special": "Drugi sajtovi",
+	"wikibase-sitelinks-special": "Drugi projekti",
 	"wikibase-remove": "ukloni",
 	"wikibase-undo-title": "Poništava se izmjena kod \"$1\"",
 	"wikibase-restore-title": "Vraća se stara revizija od \"$1\"",

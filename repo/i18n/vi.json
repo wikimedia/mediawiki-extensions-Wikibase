@@ -13,7 +13,9 @@
 			"Vinhtantran",
 			"Zolo",
 			"පසිඳු කාවින්ද",
-			"NguoiDungKhongDinhDanh"
+			"NguoiDungKhongDinhDanh",
+			"CactiStaccingCrane",
+			"Winston Sung"
 		]
 	},
 	"wikibase-desc": "Kho dữ liệu có cấu trúc",
@@ -48,7 +50,7 @@
 	"wikibase-label-empty": "Chưa định rõ nhãn",
 	"wikibase-label-edit-placeholder": "nhập nhãn",
 	"wikibase-label-edit-placeholder-language-aware": "nhập nhãn trong $1",
-	"wikibase-description-empty": "Chưa định rõ lời miêu tả",
+	"wikibase-description-empty": "Chưa có lời miêu tả",
 	"wikibase-description-edit-placeholder": "nhập miêu tả",
 	"wikibase-description-edit-placeholder-language-aware": "nhập miêu tả trong $1",
 	"wikibase-aliases-edit-placeholder": "nhập các biệt danh",

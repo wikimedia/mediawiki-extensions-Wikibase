@@ -24,5 +24,7 @@
 	"wikibase-unconnectedpages-submit": "ಹೋಗು",
 	"wikibase-pageinfo-entity-id-none": "ಯಾವುದೂ ಇಲ್ಲ",
 	"wikibase-otherprojects": "ಇತರೆ ಯೋಜನೆಗಳಲ್ಲಿ",
+	"wikibase-otherprojects-beta-message": "ಇತರ ಯೋಜನೆಗಳ ಸೈಡ್‌ಬಾರ್",
+	"wikibase-otherprojects-beta-description": "ಸೈಡ್‌ಬಾರ್‌ಗೆ \"{{int:wikibase-otherprojects}}\" ವಿಭಾಗವನ್ನು ಸೇರಿಸುತ್ತದೆ ಅದು {{WBREPONAME}} ಡೇಟಾದ ಆಧಾರದ ಮೇಲೆ ಇತರ ವಿಕಿಮೀಡಿಯಾ ಯೋಜನೆಗಳಿಗೆ ಲಿಂಕ್‌ಗಳನ್ನು ಒದಗಿಸುತ್ತದೆ.",
 	"wikibase-sitelinks-sitename-columnheading": "ಭಾಷೆ"
 }
