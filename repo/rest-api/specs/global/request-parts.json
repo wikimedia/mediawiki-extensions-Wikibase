@@ -6,8 +6,8 @@
 				"properties": {
 					"statement": {
 						"allOf": [
-							{ "$ref": "./schemas.json#/NewStatement" },
-							{ "$ref": "#/NewStatementRequestRequired" }
+							{ "$ref": "./schemas.json#/Statement" },
+							{ "$ref": "#/StatementRequestRequired" }
 						]
 					}
 				},
@@ -76,29 +76,29 @@
 			}
 		}
 	},
-	"NewStatementRequestRequired": {
+	"StatementRequestRequired": {
 		"allOf": [
 			{ "$ref": "#/PropertyValuePairRequestRequired" },
 			{
 				"properties": {
 					"qualifiers": {
 						"items": {
-							"$ref": "#/NewQualifierRequestRequired"
+							"$ref": "#/QualifierRequestRequired"
 						}
 					},
 					"references": {
 						"items": {
-							"$ref": "#/NewReferenceRequestRequired"
+							"$ref": "#/ReferenceRequestRequired"
 						}
 					}
 				}
 			}
 		]
 	},
-	"NewQualifierRequestRequired": {
+	"QualifierRequestRequired": {
 		"$ref": "#/PropertyValuePairRequestRequired"
 	},
-	"NewReferenceRequestRequired": {
+	"ReferenceRequestRequired": {
 		"required": [ "parts" ],
 		"properties": {
 			"parts": {

@@ -42,7 +42,7 @@
 	},
 	"StatementResponse": {
 		"allOf": [
-			{ "$ref": "./schemas.json#/NewStatement" },
+			{ "$ref": "./schemas.json#/Statement" },
 			{ "$ref": "#/StatementResponseRequired" }
 		]
 	},

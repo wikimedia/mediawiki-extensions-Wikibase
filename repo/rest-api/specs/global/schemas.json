@@ -79,7 +79,7 @@
 			}
 		}
 	},
-	"NewStatement": {
+	"Statement": {
 		"allOf": [
 			{
 				"type": "object",
@@ -104,22 +104,22 @@
 				"properties": {
 					"qualifiers": {
 						"type": "array",
-						"items": { "$ref": "#/NewQualifier" },
+						"items": { "$ref": "#/Qualifier" },
 						"default": [ ]
 					},
 					"references": {
 						"type": "array",
-						"items": { "$ref": "#/NewReference" },
+						"items": { "$ref": "#/Reference" },
 						"default": [ ]
 					}
 				}
 			}
 		]
 	},
-	"NewQualifier": {
+	"Qualifier": {
 		"$ref": "./schema-parts.json#/PropertyValuePair"
 	},
-	"NewReference": {
+	"Reference": {
 		"type": "object",
 		"properties": {
 			"hash": {
