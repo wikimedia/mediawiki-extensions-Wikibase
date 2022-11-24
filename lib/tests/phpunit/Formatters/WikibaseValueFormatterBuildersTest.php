@@ -28,6 +28,7 @@ use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
 use Wikibase\Lib\Formatters\FormatterLabelDescriptionLookupFactory;
+use Wikibase\Lib\Formatters\ShowCalendarModelDecider;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\LanguageFallbackChainFactory;
@@ -154,14 +155,14 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 		return $handler;
 	}
 
-	private function newFormatterOptions( $lang = 'en' ) {
+	private function newFormatterOptions( $lang = 'en', $otherOptions = [] ) {
 		$fallbackChainFactory = new LanguageFallbackChainFactory();
 		$fallbackChain = $fallbackChainFactory->newFromLanguageCode( $lang );
 
-		return new FormatterOptions( [
+		return new FormatterOptions( array_merge( $otherOptions, [
 			ValueFormatter::OPT_LANG => $lang,
 			FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => $fallbackChain,
-		] );
+		] ) );
 	}
 
 	/**
@@ -502,6 +503,19 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 				),
 				'/^1 May 1520<sup class="wb-calendar-name">Gregorian<\/sup>$/'
 			],
+			'a gregorian day in 1520 (plain, showcalendar=auto)' => [
+				'Time',
+				SnakFormatter::FORMAT_PLAIN,
+				$this->newFormatterOptions( 'en',
+					[ ShowCalendarModelDecider::OPT_SHOW_CALENDAR => 'auto' ] ),
+				new TimeValue(
+					'+1520-05-01T00:00:00Z',
+					0, 0, 0,
+					TimeValue::PRECISION_DAY,
+					'http://www.wikidata.org/entity/Q1985727'
+				),
+				'/^1 May 1520 \(Gregorian\)$/'
+			],
 			'a julian day in 1980' => [
 				'Time',
 				SnakFormatter::FORMAT_HTML_DIFF,
@@ -513,6 +527,19 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 					'http://www.wikidata.org/entity/Q1985786'
 				),
 				'/^.*>1 May 1980<sup class="wb-calendar-name">Julian<\/sup>.*$/'
+			],
+			'a julian day in 1980 (showcalendar=false)' => [
+				'Time',
+				SnakFormatter::FORMAT_HTML,
+				$this->newFormatterOptions( 'en',
+					[ ShowCalendarModelDecider::OPT_SHOW_CALENDAR => false ] ),
+				new TimeValue(
+					'+1980-05-01T00:00:00Z',
+					0, 0, 0,
+					TimeValue::PRECISION_DAY,
+					'http://www.wikidata.org/entity/Q1985786'
+				),
+				'/^1 May 1980$/'
 			],
 
 			// Monolingual

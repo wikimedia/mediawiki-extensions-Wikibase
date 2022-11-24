@@ -104,6 +104,7 @@
 	"apihelp-wbformatvalue-param-property": "{{doc-apihelp-param|wbformatvalue|property}}",
 	"apihelp-wbformatvalue-example-1": "{{doc-apihelp-example|wbformatvalue}}",
 	"apihelp-wbformatvalue-example-2": "{{doc-apihelp-example|wbformatvalue}}",
+	"apihelp-wbformatvalue-example-3": "{{doc-apihelp-example|wbformatvalue}}",
 	"apihelp-wbgetclaims-description": "{{doc-apihelp-description|wbgetclaims}}",
 	"apihelp-wbgetclaims-summary": "{{doc-apihelp-summary|wbgetclaims}}",
 	"apihelp-wbgetclaims-param-entity": "{{doc-apihelp-param|wbgetclaims|entity}}",
