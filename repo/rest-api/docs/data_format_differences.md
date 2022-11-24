@@ -100,7 +100,7 @@ old                                                                         new
   * `content` (string or JSON object) – capturing the value of the statement (previously `mainsnak.datavalue.value`)
   * `type` accepting values `novalue`, `somevalue`, `value` (previously `mainsnak.snaktype`)
   * The `content` field is omitted if the value is known to not be possible to be defined (`type: novalue`) or known to be unknown (`type: somevalue`)
-  * Values of reference and qualifier objects ("snaks") are also represented using a value object
+  * Values of reference and qualifier objects ("snaks") are also represented using a `value` object
 * The field `mainsnak.hash` and `datavalue.type` have no equivalent representations, as they were deemed internal information not necessary for API consumers
 * Redundant `type` field is not included ([T317866](https://phabricator.wikimedia.org/T316077))
 * All fields (`id`,`property`,`value`,`rank`,`qualifiers`,`references`) are included in the response, even if they only contain an "empty" value ([T308110](https://phabricator.wikimedia.org/T308110))
