@@ -157,7 +157,7 @@ class ImplicitDescriptionUsageLookupTest extends TestCase {
 
 		$usages = $usageLookup->getUsagesForPage( self::TEST_PAGE_ID );
 
-		$this->assertEmpty( $usages );
+		$this->assertSame( [], $usages );
 	}
 
 	public function testGetUsagesForPage_doesNotRemoveExplicitUsageWithLocalDescription() {

@@ -28,7 +28,7 @@ class JsonDiffJsonPatchValidatorTest extends TestCase {
 		$error = ( new JsonDiffJsonPatchValidator() )->validate( [ 'invalid JSON Patch' ] );
 
 		$this->assertSame( JsonPatchValidator::CODE_INVALID, $error->getCode() );
-		$this->assertEmpty( $error->getContext() );
+		$this->assertSame( [], $error->getContext() );
 	}
 
 	/**

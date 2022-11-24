@@ -103,7 +103,7 @@ class DataBridgeReferenceFormatterTest extends TestCase {
 
 		$wikitext = $referenceFormatter->formatReference( $reference );
 
-		$this->assertEmpty( $wikitext );
+		$this->assertSame( '', $wikitext );
 	}
 
 	public function testReferenceWithUnknownProperties() {
