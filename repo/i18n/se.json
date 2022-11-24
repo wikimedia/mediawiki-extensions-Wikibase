@@ -2,10 +2,12 @@
 	"@metadata": {
 		"authors": [
 			"Trondtr",
-			"Yupik"
+			"Yupik",
+			"Kimberli Mäkäräinen (WMNO)"
 		]
 	},
 	"wikibase-edit": "rievdat",
+	"wikibase-add": "lasit",
 	"wikibase-addreference": "lasit gáldu",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Eará gielaide",
 	"wikibase-entitytermsforlanguagelistview-description": "Govvádus",
@@ -22,5 +24,6 @@
 	"wikibase-newentity-language": "Giella:",
 	"wikibase-newentity-label": "Namma:",
 	"wikibase-setlabel-label": "Namma:",
-	"wikibase-setlabeldescriptionaliases-label-label": "Namma:"
+	"wikibase-setlabeldescriptionaliases-label-label": "Namma:",
+	"wikibase-federated-properties-edit-request-failed-notice-try-again": "Geahččal fas"
 }

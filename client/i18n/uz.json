@@ -36,6 +36,7 @@
 	"wikibase-pageswithbadges-submit": "Sahifalarni koʻrsatish",
 	"entityusage": "Obyekt foydalanilishi",
 	"wikibase-entityusage-submit": "Sahifalarni koʻrsatish",
+	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} bandi identifikatori",
 	"wikibase-pageinfo-description-local": "Mahalliy tavsif",
 	"wikibase-pageinfo-description-central": "Markaziy tavsif",
 	"wikibase-pageinfo-entity-usage": "Bu sahifada foydalanilgan {{WBREPONAME}} obyektlari",
