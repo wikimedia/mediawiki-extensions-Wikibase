@@ -260,13 +260,13 @@ class PropertyValuePairDeserializerTest extends TestCase {
 		} );
 
 		return new PropertyValuePairDeserializer(
+			$entityIdParser,
 			$dataTypeLookup,
 			[
 				'string' => 'string',
 				'wikibase-item' => 'wikibase-entityid'
 			],
-			WikibaseRepo::getDataValueDeserializer(),
-			$entityIdParser
+			WikibaseRepo::getDataValueDeserializer()
 		);
 	}
 

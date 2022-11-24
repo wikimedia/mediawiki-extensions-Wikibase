@@ -221,10 +221,10 @@ return [
 
 	'WbRestApi.StatementDeserializer' => function( MediaWikiServices $services ): StatementDeserializer {
 		$propertyValuePairDeserializer = new PropertyValuePairDeserializer(
+			WikibaseRepo::getEntityIdParser( $services ),
 			WikibaseRepo::getPropertyDataTypeLookup( $services ),
 			WikibaseRepo::getDataTypeDefinitions()->getValueTypes(),
-			WikibaseRepo::getDataValueDeserializer( $services ),
-			WikibaseRepo::getEntityIdParser( $services )
+			WikibaseRepo::getDataValueDeserializer( $services )
 		);
 		return new StatementDeserializer(
 			$propertyValuePairDeserializer,

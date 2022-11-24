@@ -18,21 +18,21 @@ use Wikibase\DataModel\Snak\Snak;
  */
 class PropertyValuePairDeserializer {
 
+	private EntityIdParser $entityIdParser;
 	private PropertyDataTypeLookup $dataTypeLookup;
 	private array $dataTypeToValueTypeMap;
 	private DataValueDeserializer $dataValueDeserializer;
-	private EntityIdParser $entityIdParser;
 
 	public function __construct(
+		EntityIdParser $entityIdParser,
 		PropertyDataTypeLookup $dataTypeLookup,
 		array $dataTypeToValueTypeMap,
-		DataValueDeserializer $dataValueDeserializer,
-		EntityIdParser $entityIdParser
+		DataValueDeserializer $dataValueDeserializer
 	) {
+		$this->entityIdParser = $entityIdParser;
 		$this->dataTypeLookup = $dataTypeLookup;
 		$this->dataTypeToValueTypeMap = $dataTypeToValueTypeMap;
 		$this->dataValueDeserializer = $dataValueDeserializer;
-		$this->entityIdParser = $entityIdParser;
 	}
 
 	public function deserialize( array $serialization ): Snak {
