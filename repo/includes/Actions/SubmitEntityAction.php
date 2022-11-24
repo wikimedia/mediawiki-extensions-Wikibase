@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Actions;
 
+use Article;
 use Content;
 use IContextSource;
 use MediaWiki\MediaWikiServices;
@@ -9,7 +10,6 @@ use MediaWiki\Permissions\PermissionManager;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
 use MWException;
-use Page;
 use Status;
 use Title;
 use Wikibase\Lib\Summary;
@@ -37,11 +37,11 @@ class SubmitEntityAction extends EditEntityAction {
 	/**
 	 * @see EditEntityAction::__construct
 	 *
-	 * @param Page $page
-	 * @param IContextSource|null $context
+	 * @param Article $article
+	 * @param IContextSource $context
 	 */
-	public function __construct( Page $page, IContextSource $context = null ) {
-		parent::__construct( $page, $context );
+	public function __construct( Article $article, IContextSource $context ) {
+		parent::__construct( $article, $context );
 
 		$this->summaryFormatter = WikibaseRepo::getSummaryFormatter();
 	}

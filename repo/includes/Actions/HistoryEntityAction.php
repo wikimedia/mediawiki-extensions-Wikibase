@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Actions;
 
+use Article;
 use HistoryAction;
 use IContextSource;
-use Page;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\Lib\Store\EntityIdLookup;
 
@@ -28,18 +28,18 @@ class HistoryEntityAction extends HistoryAction {
 	private $labelLookup;
 
 	/**
-	 * @param Page $page
-	 * @param IContextSource|null $context
+	 * @param Article $article
+	 * @param IContextSource $context
 	 * @param EntityIdLookup $entityIdLookup
 	 * @param LabelDescriptionLookup $labelLookup
 	 */
 	public function __construct(
-		Page $page,
-		?IContextSource $context,
+		Article $article,
+		IContextSource $context,
 		EntityIdLookup $entityIdLookup,
 		LabelDescriptionLookup $labelLookup
 	) {
-		parent::__construct( $page, $context );
+		parent::__construct( $article, $context );
 
 		$this->entityIdLookup = $entityIdLookup;
 		$this->labelLookup = $labelLookup;
