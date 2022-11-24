@@ -251,10 +251,13 @@ class PropertyValuePairDeserializerTest extends TestCase {
 		);
 
 		$entityIdParser = $this->createStub( EntityIdParser::class );
-		$entityIdParser->method( 'parse' )
-			->willReturnCallback(
-				fn( $id ) => substr( $id, 0, 4 ) === 'http' ? $this->newUriPropertyId( $id ) : new NumericPropertyId( $id )
-			);
+		$entityIdParser->method( 'parse' )->willReturnCallback( function( $id ) {
+			if ( substr( $id, 0, 4 ) === 'http' ) {
+				return $this->newUriPropertyId( $id );
+			}
+
+			return WikibaseRepo::getEntityIdParser()->parse( $id );
+		} );
 
 		return new PropertyValuePairDeserializer(
 			$dataTypeLookup,
