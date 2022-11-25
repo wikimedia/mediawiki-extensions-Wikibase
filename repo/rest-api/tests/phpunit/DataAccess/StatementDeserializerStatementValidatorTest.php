@@ -4,40 +4,32 @@ namespace Wikibase\Repo\Tests\RestApi\DataAccess;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use ValueValidators\Result;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Repo\RestApi\DataAccess\SnakValidatorStatementValidator;
+use Wikibase\Repo\RestApi\DataAccess\StatementDeserializerStatementValidator;
+use Wikibase\Repo\RestApi\Serialization\InvalidFieldException;
 use Wikibase\Repo\RestApi\Serialization\SerializationException;
 use Wikibase\Repo\RestApi\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Validation\ValidationError;
-use Wikibase\Repo\Validators\SnakValidator;
 
 /**
- * @covers \Wikibase\Repo\RestApi\DataAccess\SnakValidatorStatementValidator
+ * @covers \Wikibase\Repo\RestApi\DataAccess\StatementDeserializerStatementValidator
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class SnakValidatorStatementValidatorTest extends TestCase {
+class StatementDeserializerStatementValidatorTest extends TestCase {
 
 	/**
 	 * @var MockObject|StatementDeserializer
 	 */
 	private $deserializer;
 
-	/**
-	 * @var MockObject|SnakValidator
-	 */
-	private $snakValidator;
-
 	protected function setUp(): void {
 		parent::setUp();
 
 		$this->deserializer = $this->createStub( StatementDeserializer::class );
-		$this->snakValidator = $this->createStub( SnakValidator::class );
-		$this->snakValidator->method( 'validateStatementSnaks' )->willReturn( Result::newSuccess() );
 	}
 
 	public function testGivenInvalidStatementSerialization_validateReturnsValidationError(): void {
@@ -50,22 +42,23 @@ class SnakValidatorStatementValidatorTest extends TestCase {
 	}
 
 	public function testGetValidatedStatement(): void {
-		$deserializedStatement = $this->createStub( Statement::class );
-		$this->deserializer->method( 'deserialize' )->willReturn( $deserializedStatement );
-
-		$validator = $this->newValidator();
-		$result = $validator->validate( [
+		$serialization = [
 			'property' => [ 'id' => 'P123' ],
 			'value' => [ 'type' => 'novalue' ]
-		] );
+		];
+		$deserializedStatement = $this->createStub( Statement::class );
+		$this->deserializer = $this->createMock( StatementDeserializer::class );
+		$this->deserializer->method( 'deserialize' )->with( $serialization )->willReturn( $deserializedStatement );
 
-		$this->assertNull( $result );
+		$validator = $this->newValidator();
+		$this->assertNull( $validator->validate( $serialization ) );
 		$this->assertSame( $deserializedStatement, $validator->getValidatedStatement() );
 	}
 
 	public function testGivenSyntacticallyValidSerializationButInvalidValueType_validateReturnsValidationError(): void {
-		// The data type <-> value type mismatch isn't really tested here since we don't need to test SnakValidator internals.
-		// This sort of error happens if e.g. P321 is a string Property, but we're giving it an Item ID as a value here.
+		// The data type <-> value type mismatch isn't really tested here since we don't need to test
+		// StatementDeserializer internals. This sort of error happens if e.g. P321 is a string Property,
+		// but we're giving it an Item ID as a value.
 		$serialization = [
 			'property' => [ 'id' => 'P321' ],
 			'value' => [
@@ -74,28 +67,19 @@ class SnakValidatorStatementValidatorTest extends TestCase {
 			]
 		];
 
-		$deserializedStatement = $this->createStub( Statement::class );
-
 		$this->deserializer = $this->createStub( StatementDeserializer::class );
-		$this->deserializer->method( 'deserialize' )->willReturn( $deserializedStatement );
+		$this->deserializer->method( 'deserialize' )->willThrowException( new InvalidFieldException() );
 
-		$this->snakValidator = $this->createMock( SnakValidator::class );
-		$this->snakValidator->expects( $this->once() )
-			->method( 'validateStatementSnaks' )
-			->with( $deserializedStatement )
-			->willReturn( Result::newError( [] ) );
-
-		$error = $this->newValidator()->validate( $serialization );
+		$validator = $this->newValidator();
+		$error = $validator->validate( $serialization );
 
 		$this->assertInstanceOf( ValidationError::class, $error );
 		$this->assertSame( StatementValidator::CODE_INVALID, $error->getCode() );
+		$this->assertNull( $validator->getValidatedStatement() );
 	}
 
-	private function newValidator(): SnakValidatorStatementValidator {
-		return new SnakValidatorStatementValidator(
-			$this->deserializer,
-			$this->snakValidator
-		);
+	private function newValidator(): StatementDeserializerStatementValidator {
+		return new StatementDeserializerStatementValidator( $this->deserializer );
 	}
 
 }

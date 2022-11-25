@@ -6,42 +6,32 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\RestApi\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Validation\ValidationError;
-use Wikibase\Repo\Validators\SnakValidator;
 
 /**
  * @license GPL-2.0-or-later
  */
-class SnakValidatorStatementValidator implements StatementValidator {
+class StatementDeserializerStatementValidator implements StatementValidator {
 
 	private StatementDeserializer $deserializer;
-	private SnakValidator $snakValidator;
 
 	private ?Statement $deserializedStatement = null;
 
-	public function __construct( StatementDeserializer $deserializer, SnakValidator $snakValidator ) {
+	public function __construct( StatementDeserializer $deserializer ) {
 		$this->deserializer = $deserializer;
-		$this->snakValidator = $snakValidator;
 	}
 
 	public function validate( array $statementSerialization ): ?ValidationError {
-		$error = new ValidationError( self::CODE_INVALID );
-
 		try {
-			$deserializedStatement = $this->deserializer->deserialize( $statementSerialization );
+			$this->deserializedStatement = $this->deserializer->deserialize( $statementSerialization );
 		} catch ( \Exception $e ) {
-			return $error;
+			return new ValidationError( self::CODE_INVALID );
 		}
 
-		if ( $this->snakValidator->validateStatementSnaks( $deserializedStatement )->isValid() ) {
-			$this->deserializedStatement = $deserializedStatement;
-
-			return null;
-		}
-
-		return $error;
+		return null;
 	}
 
 	public function getValidatedStatement(): ?Statement {
 		return $this->deserializedStatement;
 	}
+
 }

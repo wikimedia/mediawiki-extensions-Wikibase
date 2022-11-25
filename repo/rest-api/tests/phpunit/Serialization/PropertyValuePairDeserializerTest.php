@@ -4,7 +4,10 @@ namespace Wikibase\Repo\Tests\RestApi\Serialization;
 
 use DataValues\StringValue;
 use Generator;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use ValueValidators\Result;
+use ValueValidators\ValueValidator;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
@@ -16,6 +19,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\Repo\DataTypeValidatorFactory;
 use Wikibase\Repo\RestApi\Serialization\InvalidFieldException;
 use Wikibase\Repo\RestApi\Serialization\MissingFieldException;
 use Wikibase\Repo\RestApi\Serialization\PropertyValuePairDeserializer;
@@ -30,8 +34,24 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class PropertyValuePairDeserializerTest extends TestCase {
 	private const STRING_PROPERTY_ID = 'P123';
+	private const URL_PROPERTY_ID = 'P789';
 	private const ITEM_ID_PROPERTY_ID = 'P321';
 	private const STRING_URI_PROPERTY_ID = 'https://example.com/P1';
+
+	/**
+	 * @var MockObject | DataTypeValidatorFactory
+	 */
+	private $dataTypeValidatorFactory;
+
+	protected function setUp(): void {
+		parent::setUp();
+
+		$successValidator = $this->createStub( ValueValidator::class );
+		$successValidator->method( 'validate' )->willReturn( Result::newSuccess() );
+
+		$this->dataTypeValidatorFactory = $this->createStub( DataTypeValidatorFactory::class );
+		$this->dataTypeValidatorFactory->method( 'getValidators' )->willReturn( [ $successValidator ] );
+	}
 
 	/**
 	 * @dataProvider serializationProvider
@@ -112,6 +132,7 @@ class PropertyValuePairDeserializerTest extends TestCase {
 	 * @dataProvider invalidSerializationProvider
 	 */
 	public function testDeserializationErrors( string $expectedException, array $serialization ): void {
+		$this->dataTypeValidatorFactory = WikibaseRepo::getDataTypeValidatorFactory();
 		$this->expectException( $expectedException );
 
 		$this->newDeserializer()->deserialize( $serialization );
@@ -170,6 +191,19 @@ class PropertyValuePairDeserializerTest extends TestCase {
 				'value' => [ 'type' => 'value', 'content' => 42 ],
 				'property' => [
 					'id' => self::STRING_PROPERTY_ID,
+				]
+			]
+		];
+
+		yield 'invalid value content field for url data-type' => [
+			InvalidFieldException::class,
+			[
+				'value' => [
+					'type' => 'value',
+					'content' => "valid 'sting' ValueType but not a valid 'url' Property data-type"
+				],
+				'property' => [
+					'id' => self::URL_PROPERTY_ID,
 				]
 			]
 		];
@@ -242,6 +276,10 @@ class PropertyValuePairDeserializerTest extends TestCase {
 			'string'
 		);
 		$dataTypeLookup->setDataTypeForProperty(
+			$this->newUriPropertyId( self::URL_PROPERTY_ID ),
+			'url'
+		);
+		$dataTypeLookup->setDataTypeForProperty(
 			new NumericPropertyId( self::ITEM_ID_PROPERTY_ID ),
 			'wikibase-item'
 		);
@@ -264,9 +302,11 @@ class PropertyValuePairDeserializerTest extends TestCase {
 			$dataTypeLookup,
 			[
 				'string' => 'string',
+				'url' => 'string',
 				'wikibase-item' => 'wikibase-entityid'
 			],
-			WikibaseRepo::getDataValueDeserializer()
+			WikibaseRepo::getDataValueDeserializer(),
+			$this->dataTypeValidatorFactory
 		);
 	}
 

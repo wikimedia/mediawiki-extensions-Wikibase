@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\RestApi\UseCases\ReplaceItemStatement;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use ValueValidators\Result;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
@@ -12,7 +11,7 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
-use Wikibase\Repo\RestApi\DataAccess\SnakValidatorStatementValidator;
+use Wikibase\Repo\RestApi\DataAccess\StatementDeserializerStatementValidator;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\ItemRevision;
@@ -38,7 +37,6 @@ use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\StatementIdValidator;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
-use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -339,7 +337,8 @@ class ReplaceItemStatementTest extends TestCase {
 			WikibaseRepo::getEntityIdParser(),
 			$this->propertyDataTypeLookup,
 			WikibaseRepo::getDataTypeDefinitions()->getValueTypes(),
-			WikibaseRepo::getDataValueDeserializer()
+			WikibaseRepo::getDataValueDeserializer(),
+			WikibaseRepo::getDataTypeValidatorFactory()
 		);
 
 		$statementDeserializer = new StatementDeserializer(
@@ -347,16 +346,10 @@ class ReplaceItemStatementTest extends TestCase {
 			new ReferenceDeserializer( $propertyValuePairDeserializer )
 		);
 
-		$snakValidator = $this->createStub( SnakValidator::class );
-		$snakValidator->method( 'validateStatementSnaks' )->willReturn( Result::newSuccess() );
-
 		return new ReplaceItemStatementValidator(
 			new ItemIdValidator(),
 			new StatementIdValidator( new ItemIdParser() ),
-			new SnakValidatorStatementValidator(
-				$statementDeserializer,
-				$snakValidator
-			),
+			new StatementDeserializerStatementValidator( $statementDeserializer ),
 			new EditMetadataValidator( \CommentStore::COMMENT_CHARACTER_LIMIT, self::ALLOWED_TAGS )
 		);
 	}

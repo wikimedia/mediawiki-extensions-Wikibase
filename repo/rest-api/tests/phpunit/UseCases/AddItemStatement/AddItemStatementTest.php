@@ -3,13 +3,12 @@
 namespace Wikibase\Repo\Tests\RestApi\UseCases\AddItemStatement;
 
 use PHPUnit\Framework\MockObject\MockObject;
-use ValueValidators\Result;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Tests\NewItem;
-use Wikibase\Repo\RestApi\DataAccess\SnakValidatorStatementValidator;
+use Wikibase\Repo\RestApi\DataAccess\StatementDeserializerStatementValidator;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\ItemRevision;
@@ -30,7 +29,6 @@ use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
-use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -219,7 +217,8 @@ class AddItemStatementTest extends \PHPUnit\Framework\TestCase {
 			WikibaseRepo::getEntityIdParser(),
 			$this->createStub( PropertyDataTypeLookup::class ),
 			WikibaseRepo::getDataTypeDefinitions()->getValueTypes(),
-			WikibaseRepo::getDataValueDeserializer()
+			WikibaseRepo::getDataValueDeserializer(),
+			WikibaseRepo::getDataTypeValidatorFactory()
 		);
 
 		$statementDeserializer = new StatementDeserializer(
@@ -227,15 +226,9 @@ class AddItemStatementTest extends \PHPUnit\Framework\TestCase {
 			new ReferenceDeserializer( $propertyValuePairDeserializer )
 		);
 
-		$snakValidator = $this->createStub( SnakValidator::class );
-		$snakValidator->method( 'validateStatementSnaks' )->willReturn( Result::newSuccess() );
-
 		return new AddItemStatementValidator(
 			new ItemIdValidator(),
-			new SnakValidatorStatementValidator(
-				$statementDeserializer,
-				$snakValidator
-			),
+			new StatementDeserializerStatementValidator( $statementDeserializer ),
 			new EditMetadataValidator(
 				\CommentStore::COMMENT_CHARACTER_LIMIT,
 				self::ALLOWED_TAGS

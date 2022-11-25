@@ -6,7 +6,7 @@ use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\Repo\RestApi\DataAccess\MediaWikiEditEntityFactoryItemUpdater;
-use Wikibase\Repo\RestApi\DataAccess\SnakValidatorStatementValidator;
+use Wikibase\Repo\RestApi\DataAccess\StatementDeserializerStatementValidator;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemDataRetriever;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityRevisionLookupItemRevisionMetadataRetriever;
@@ -37,7 +37,6 @@ use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\StatementIdValidator;
 use Wikibase\Repo\RestApi\WbRestApi;
-use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Repo\WikibaseRepo;
 
 /** @phpcs-require-sorted-array */
@@ -47,14 +46,7 @@ return [
 		return new AddItemStatement(
 			new AddItemStatementValidator(
 				new ItemIdValidator(),
-				new SnakValidatorStatementValidator(
-					WbRestApi::getStatementDeserializer(),
-					new SnakValidator(
-						WikibaseRepo::getPropertyDataTypeLookup( $services ),
-						WikibaseRepo::getDataTypeFactory( $services ),
-						WikibaseRepo::getDataTypeValidatorFactory( $services )
-					)
-				),
+				new StatementDeserializerStatementValidator( WbRestApi::getStatementDeserializer() ),
 				new EditMetadataValidator(
 					CommentStore::COMMENT_CHARACTER_LIMIT,
 					ChangeTags::listExplicitlyDefinedTags()
@@ -133,12 +125,7 @@ return [
 			new WikibaseEntityLookupItemDataRetriever( WikibaseRepo::getEntityLookup( $services ) ),
 			new JsonDiffStatementPatcher(
 				WbRestApi::getSerializerFactory( $services )->newStatementSerializer(),
-				WbRestApi::getStatementDeserializer( $services ),
-				new SnakValidator(
-					WikibaseRepo::getPropertyDataTypeLookup( $services ),
-					WikibaseRepo::getDataTypeFactory( $services ),
-					WikibaseRepo::getDataTypeValidatorFactory( $services )
-				)
+				WbRestApi::getStatementDeserializer( $services )
 			),
 			WbRestApi::getItemUpdater( $services ),
 			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
@@ -188,14 +175,7 @@ return [
 			new ReplaceItemStatementValidator(
 				new ItemIdValidator(),
 				new StatementIdValidator( new ItemIdParser() ),
-				new SnakValidatorStatementValidator(
-					WbRestApi::getStatementDeserializer(),
-					new SnakValidator(
-						WikibaseRepo::getPropertyDataTypeLookup( $services ),
-						WikibaseRepo::getDataTypeFactory( $services ),
-						WikibaseRepo::getDataTypeValidatorFactory( $services )
-					)
-				),
+				new StatementDeserializerStatementValidator( WbRestApi::getStatementDeserializer() ),
 				new EditMetadataValidator(
 					CommentStore::COMMENT_CHARACTER_LIMIT,
 					ChangeTags::listExplicitlyDefinedTags()
@@ -224,7 +204,8 @@ return [
 			WikibaseRepo::getEntityIdParser( $services ),
 			WikibaseRepo::getPropertyDataTypeLookup( $services ),
 			WikibaseRepo::getDataTypeDefinitions()->getValueTypes(),
-			WikibaseRepo::getDataValueDeserializer( $services )
+			WikibaseRepo::getDataValueDeserializer( $services ),
+			WikibaseRepo::getDataTypeValidatorFactory( $services )
 		);
 		return new StatementDeserializer(
 			$propertyValuePairDeserializer,
