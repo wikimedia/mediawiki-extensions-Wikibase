@@ -2,7 +2,10 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Serialization;
 
+use DataValues\Geo\Values\GlobeCoordinateValue;
+use DataValues\Geo\Values\LatLongValue;
 use DataValues\StringValue;
+use DataValues\TimeValue;
 use Generator;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -33,9 +36,12 @@ use Wikibase\Repo\WikibaseRepo;
  * @license GPL-2.0-or-later
  */
 class PropertyValuePairDeserializerTest extends TestCase {
+
 	private const STRING_PROPERTY_ID = 'P123';
 	private const URL_PROPERTY_ID = 'P789';
 	private const ITEM_ID_PROPERTY_ID = 'P321';
+	private const TIME_PROPERTY_ID = 'P456';
+	private const GLOBECOORDINATE_PROPERTY_ID = 'P678';
 	private const STRING_URI_PROPERTY_ID = 'https://example.com/P1';
 
 	/**
@@ -105,14 +111,50 @@ class PropertyValuePairDeserializerTest extends TestCase {
 			[
 				'value' => [
 					'type' => 'value',
-					'content' => [
-						'id' => 'Q123',
-						'entity-type' => 'item',
-						'numeric-id' => 123
-					],
+					'content' => 'Q123',
 				],
 				'property' => [
 					'id' => self::ITEM_ID_PROPERTY_ID,
+				]
+			]
+		];
+
+		$gregorian = 'http://www.wikidata.org/entity/Q1985727';
+		yield 'value for time prop' => [
+			new PropertyValueSnak(
+				new NumericPropertyId( self::TIME_PROPERTY_ID ),
+				new TimeValue( '+1-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $gregorian )
+			),
+			[
+				'value' => [
+					'type' => 'value',
+					'content' => [
+						'time' => '+1-00-00T00:00:00Z',
+						'precision' => TimeValue::PRECISION_YEAR,
+						'calendarmodel' => $gregorian
+					],
+				],
+				'property' => [
+					'id' => self::TIME_PROPERTY_ID,
+				]
+			]
+		];
+
+		yield 'value for globecoordinate prop' => [
+			new PropertyValueSnak(
+				new NumericPropertyId( self::GLOBECOORDINATE_PROPERTY_ID ),
+				new GlobeCoordinateValue( new LatLongValue( 100, 100 ) )
+			),
+			[
+				'value' => [
+					'type' => 'value',
+					'content' => [
+						'latitude' => 100,
+						'longitude' => 100,
+					],
+				],
+				'property' => [
+					'id' => self::GLOBECOORDINATE_PROPERTY_ID,
 				]
 			]
 		];
@@ -280,6 +322,14 @@ class PropertyValuePairDeserializerTest extends TestCase {
 			'url'
 		);
 		$dataTypeLookup->setDataTypeForProperty(
+			$this->newUriPropertyId( self::TIME_PROPERTY_ID ),
+			'time'
+		);
+		$dataTypeLookup->setDataTypeForProperty(
+			$this->newUriPropertyId( self::GLOBECOORDINATE_PROPERTY_ID ),
+			'globe-coordinate'
+		);
+		$dataTypeLookup->setDataTypeForProperty(
 			new NumericPropertyId( self::ITEM_ID_PROPERTY_ID ),
 			'wikibase-item'
 		);
@@ -300,11 +350,7 @@ class PropertyValuePairDeserializerTest extends TestCase {
 		return new PropertyValuePairDeserializer(
 			$entityIdParser,
 			$dataTypeLookup,
-			[
-				'string' => 'string',
-				'url' => 'string',
-				'wikibase-item' => 'wikibase-entityid'
-			],
+			WikibaseRepo::getDataTypeDefinitions()->getValueTypes(),
 			WikibaseRepo::getDataValueDeserializer(),
 			$this->dataTypeValidatorFactory
 		);

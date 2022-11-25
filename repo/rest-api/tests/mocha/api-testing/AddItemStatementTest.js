@@ -1,6 +1,6 @@
 'use strict';
 
-const { assert, action } = require( 'api-testing' );
+const { assert, action, utils } = require( 'api-testing' );
 const entityHelper = require( '../helpers/entityHelper' );
 const formatStatementEditSummary = require( '../helpers/formatStatementEditSummary' );
 const { newAddItemStatementRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
@@ -15,14 +15,14 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 	let originalRevisionId;
 	let testStatement;
 
-	function assertValid201Response( response ) {
+	function assertValid201Response( response, propertyId = null, content = null ) {
 		assert.strictEqual( response.status, 201 );
 		assert.strictEqual( response.header[ 'content-type' ], 'application/json' );
 		assert.isAbove( new Date( response.header[ 'last-modified' ] ), originalLastModified );
 		assert.notStrictEqual( response.header.etag, makeEtag( originalRevisionId ) );
 		assert.header( response, 'Location', response.request.url + '/' + encodeURIComponent( response.body.id ) );
-		assert.equal( response.body.property.id, testStatement.property.id );
-		assert.equal( response.body.value.content, testStatement.value.content );
+		assert.strictEqual( response.body.property.id, propertyId || testStatement.property.id );
+		assert.deepStrictEqual( response.body.value.content, content || testStatement.value.content );
 	}
 
 	before( async () => {
@@ -85,9 +85,76 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 					'create',
 					testStatement.property.id,
 					testStatement.value.content,
-					editSummary )
+					editSummary
+				)
 			);
 			assert.strictEqual( editMetadata.user, user.username );
+		} );
+		it( 'can add a statement with a globecoordinate value in new format', async () => {
+			const createPropertyResponse = await entityHelper.createEntity( 'property', {
+				labels: { en: { language: 'en', value: `globe-coordinate-property-${utils.uniq()}` } },
+				datatype: 'globe-coordinate'
+			} );
+			const propertyId = createPropertyResponse.entity.id;
+			const globecoordinate = {
+				latitude: 100,
+				longitude: 100,
+				precision: 1,
+				globe: 'http://www.wikidata.org/entity/Q2'
+			};
+			const statement = {
+				property: { id: propertyId },
+				value: { type: 'value', content: globecoordinate }
+			};
+
+			const response = await newAddItemStatementRequestBuilder( testItemId, statement )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValid201Response( response, propertyId, { ...globecoordinate, altitude: null } );
+		} );
+		it( 'can add a statement with a time value in new format', async () => {
+			const createPropertyResponse = await entityHelper.createEntity( 'property', {
+				labels: { en: { language: 'en', value: `time-property-${utils.uniq()}` } },
+				datatype: 'time'
+			} );
+			const propertyId = createPropertyResponse.entity.id;
+			const time = {
+				time: '+0001-00-00T00:00:00Z',
+				precision: 9,
+				calendarmodel: 'http://www.wikidata.org/entity/Q1985727'
+			};
+			const statement = {
+				property: { id: propertyId },
+				value: { type: 'value', content: time }
+			};
+
+			const response = await newAddItemStatementRequestBuilder( testItemId, statement )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValid201Response( response, propertyId, { ...time, before: 0, after: 0, timezone: 0 } );
+		} );
+		it( 'can add a statement with a wikibase-entityid value in new format', async () => {
+			const createPropertyResponse = await entityHelper.createEntity( 'property', {
+				labels: { en: { language: 'en', value: `wikibase-item-property-${utils.uniq()}` } },
+				datatype: 'wikibase-item'
+			} );
+			const propertyId = createPropertyResponse.entity.id;
+			const statement = {
+				property: { id: propertyId },
+				value: { type: 'value', content: testItemId }
+			};
+
+			const response = await newAddItemStatementRequestBuilder( testItemId, statement )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValid201Response( response, propertyId, {
+				id: testItemId,
+				'numeric-id': parseInt( testItemId.slice( 1 ) ),
+				'entity-type': 'item'
+			} );
 		} );
 	} );
 
