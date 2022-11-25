@@ -63,6 +63,7 @@
 	"apihelp-wbformatvalue-param-property": "O identificador de propriedade ao qual o valor pertence. Deve ser usado em vez do parâmetro <var>datatype</var>.",
 	"apihelp-wbformatvalue-example-1": "Formatar um valor de texto simples.",
 	"apihelp-wbformatvalue-example-2": "Formatar um valor de texto como um URL em HTML.",
+	"apihelp-wbformatvalue-example-3": "Formatar um valor temporal como texto simples mostrando automaticamente o modelo de calendário, se necessário.",
 	"apihelp-wbgetclaims-description": "Obtém alegações Wikibase.",
 	"apihelp-wbgetclaims-summary": "Obtém alegações Wikibase.",
 	"apihelp-wbgetclaims-param-entity": "Identificador da entidade da qual as alegações serão obtidas. Obrigatório, a menos que o identificador global único (GUID) da alegação seja fornecido.",

@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Brettchenweber",
 			"MGChecker",
 			"Metalhead64",
 			"Predatorix",
@@ -66,6 +67,7 @@
 	"apihelp-wbformatvalue-param-property": "Eigenschaftskennung, zu der der Datenwert gehört, soll anstelle des <var>datatype</var> Parameters benutzt werden.",
 	"apihelp-wbformatvalue-example-1": "Formatiert einen einfachen Zeichenfolgenwert.",
 	"apihelp-wbformatvalue-example-2": "Formatiert einen Zeichenfolgenwert als eine URL in HTML.",
+	"apihelp-wbformatvalue-example-3": "Formatiert einen Zeitwert als reinen Text, wobei bei Bedarf automatisch das Kalendermodell angezeigt wird.",
 	"apihelp-wbgetclaims-description": "Ruft Wikibase-Behauptungen ab.",
 	"apihelp-wbgetclaims-summary": "Ruft Wikibase-Behauptungen ab.",
 	"apihelp-wbgetclaims-param-entity": "Kennung des Objektes, von dem die Behauptungen abgerufen werden sollen. Erforderlich, sofern nicht die GUID der Behauptung angegeben wird.",
@@ -158,8 +160,11 @@
 	"apihelp-query+wbsearch-param-strictlanguage": "Ob der Sprach-Fallback deaktiviert werden soll",
 	"apihelp-query+wbsearch-param-type": "Sucht nach diesem Objekttyp.",
 	"apihelp-query+wbsearch-param-limit": "Maximale Anzahl der Ergebnisse",
+	"apihelp-query+wbsearch-param-profile": "Zu verwendendes Suchprofil.",
+	"apihelp-query+wbsearch-paramvalue-profile-default": "Das Standardprofil, geeignet für die meisten Zwecke.",
 	"apihelp-query+wbsearch-example-1": "Sucht nach „abc“ in englischer Sprache, mit Standards für Typ und Limit.",
 	"apihelp-query+wbsearch-example-2": "Sucht nach „abc“ in englischer Sprache mit maximal 50",
+	"apihelp-query+wbsearch-example-3": "Sucht nach „Alphabet“ in deutscher Sprache für die Eigenschaft „Typ“",
 	"apihelp-query+wbsearch-example-4": "Sucht nach „alphabet“ auf Englisch als Generator",
 	"apihelp-query+wbsubscribers-description": "Ruft die Abonnements für die angegebenen Objekte ab.",
 	"apihelp-query+wbsubscribers-summary": "Ruft die Abonnements für die angegebenen Objekte ab.",
@@ -179,6 +184,7 @@
 	"apihelp-wbsetaliases-param-bot": "Markiert diese Bearbeitung als Bot. Diese URL-Markierung wird nur berücksichtigt, wenn der Benutzer der Gruppe „{{int:group-bot}}“ angehört.",
 	"apihelp-wbsetaliases-param-add": "Liste der hinzuzufügenden Aliasse (kann mit <var>remove</var> kombiniert werden)",
 	"apihelp-wbsetaliases-param-remove": "Liste der zu entfernenden Aliasse (kann mit <var>add</var> kombiniert werden)",
+	"apihelp-wbsetaliases-param-set": "Eine Liste von Aliasnamen, die die aktuelle Liste ersetzt (kann nicht mit <var>add</var> oder <var>remove</var> kombiniert werden)",
 	"apihelp-wbsetaliases-param-language": "Die Sprache, für die die Aliasse festgelegt werden sollen",
 	"apihelp-wbsetaliases-example-1": "Legt die englischen Aliasse für das Objekt mit der Kennung <samp>$1</samp> auf <var>Foo</var> und <var>Bar</var> fest",
 	"apihelp-wbsetaliases-example-2": "Ergänzt <var>Foo</var> und <var>Bar</var> in der Liste der Aliasse auf Englisch für das Objekt mit der Kennung <samp>$1</samp>",
