@@ -35,7 +35,7 @@ class MediaWikiContentLanguagesTest extends \PHPUnit\Framework\TestCase {
 			'smn',
 			'trv',
 		], $result );
-		$this->assertEmpty( $missing, implode( ', ', $missing ) );
+		$this->assertCount( 0, $missing, implode( ', ', $missing ) );
 	}
 
 }

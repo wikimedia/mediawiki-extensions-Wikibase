@@ -174,8 +174,8 @@ class EntityDataUriManagerTest extends MediaWikiIntegrationTestCase {
 	public function testCacheableOrPotentiallyCachedUrls_withoutRevisionId() {
 		$uriManager = $this->makeUriManager();
 
-		$this->assertEmpty( $uriManager->getCacheableUrls( new ItemId( 'Q1' ) ) );
-		$this->assertEmpty( $uriManager->getPotentiallyCachedUrls( new ItemId( 'Q1' ) ) );
+		$this->assertSame( [], $uriManager->getCacheableUrls( new ItemId( 'Q1' ) ) );
+		$this->assertSame( [], $uriManager->getPotentiallyCachedUrls( new ItemId( 'Q1' ) ) );
 	}
 
 	public function testCacheableOrPotentiallyCachedUrls_withRevisionId() {
