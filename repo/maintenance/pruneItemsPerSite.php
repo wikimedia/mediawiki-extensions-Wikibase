@@ -75,6 +75,7 @@ class PruneItemsPerSite extends Maintenance {
 				$affectedRows = $this->deleteRows( $dbw, $rowsToDelete );
 				$this->output( "Deleted $affectedRows rows.\n" );
 				$db->replication()->wait();
+				$db->autoReconfigure();
 			}
 
 			$startRowId = $endRowId;

@@ -111,6 +111,7 @@ class EntityUsageTableBuilder {
 	 */
 	private function processUsageBatch( int &$fromPageId = 0 ): int {
 		$this->domainDb->replication()->wait();
+		$this->domainDb->autoReconfigure();
 
 		$connections = $this->domainDb->connections();
 		$dbw = $connections->getWriteConnectionRef();

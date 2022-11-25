@@ -100,6 +100,7 @@ class BulkSubscriptionUpdater {
 
 		while ( true ) {
 			$this->repoDb->replication()->wait();
+			$this->repoDb->autoReconfigure();
 
 			$count = $this->processUpdateBatch( $continuation );
 
@@ -243,6 +244,7 @@ class BulkSubscriptionUpdater {
 
 		while ( true ) {
 			$this->repoDb->replication()->wait();
+			$this->repoDb->autoReconfigure();
 
 			$count = $this->processDeletionBatch( $continuation );
 

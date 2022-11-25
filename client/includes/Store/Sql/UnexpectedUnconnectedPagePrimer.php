@@ -133,6 +133,7 @@ class UnexpectedUnconnectedPagePrimer {
 					'up to page ID ' . $this->position . ' (inclusive).'
 				);
 				$this->clientDb->replication()->wait();
+				$this->clientDb->autoReconfigure();
 			}
 		}
 

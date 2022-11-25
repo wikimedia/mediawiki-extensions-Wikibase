@@ -120,6 +120,7 @@ class ItemsPerSiteBuilder {
 		}
 		// Wait for the replicas, just in case we e.g. hit a range of ids which need a lot of writes.
 		$this->db->replication()->wait();
+		$this->db->autoReconfigure();
 
 		return $c;
 	}
