@@ -284,17 +284,6 @@ class BulkSubscriptionUpdater {
 	 * @return bool|string[] list( $minId, $maxId, $count ), or false if there is nothing to delete
 	 */
 	private function getDeletionRange( array &$continuation = null ) {
-		$dbr = $this->repoConnectionManager->getReadConnectionRef();
-
-		$conditions = [
-			'cs_subscriber_id' => $this->subscriberWikiId,
-		];
-
-		if ( !empty( $continuation ) ) {
-			[ $fromEntityId ] = $continuation;
-			$conditions[] = 'cs_entity_id > ' . $dbr->addQuotes( $fromEntityId );
-		}
-
 		/**
 		 * @note Below, we query and iterate all rows we want to delete in the current batch. That
 		 * is rather ugly, but appears to be the best solution, because:
@@ -308,17 +297,22 @@ class BulkSubscriptionUpdater {
 		 * needed for batched deletion.
 		 */
 
-		$res = $dbr->select(
-			'wb_changes_subscription',
-			[ 'cs_entity_id' ],
-			$conditions,
-			__METHOD__,
-			[
-				'ORDER BY' => 'cs_entity_id',
-				'LIMIT' => $this->batchSize,
-			]
-		);
+		$dbr = $this->repoConnectionManager->getReadConnection();
+		$queryBuilder = $dbr->newSelectQueryBuilder()
+			->select( [ 'cs_entity_id' ] )
+			->from( 'wb_changes_subscription' )
+			->where( [ 'cs_subscriber_id' => $this->subscriberWikiId ] );
 
+		if ( !empty( $continuation ) ) {
+			[ $fromEntityId ] = $continuation;
+			$queryBuilder->andWhere(
+				$dbr->buildComparison( '>', [ 'cs_entity_id' => $fromEntityId ] ) );
+		}
+
+		$queryBuilder->orderBy( 'cs_entity_id' )
+			->limit( $this->batchSize );
+
+		$res = $queryBuilder->caller( __METHOD__ )->fetchResultSet();
 		$subscriptions = $this->getEntityIdsFromRows( $res, 'cs_entity_id', $continuation );
 
 		if ( empty( $subscriptions ) ) {
