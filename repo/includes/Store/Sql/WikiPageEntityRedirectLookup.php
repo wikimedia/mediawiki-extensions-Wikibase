@@ -57,28 +57,23 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 		}
 
 		try {
-			$dbr = $this->repoDb->connections()->getReadConnectionRef();
+			$dbr = $this->repoDb->connections()->getReadConnection();
 		} catch ( MWException $ex ) {
 			throw new EntityRedirectLookupException( $targetId, null, $ex );
 		}
 
-		$res = $dbr->select(
-			[ 'page', 'redirect' ],
-			[ 'page_namespace', 'page_title' ],
-			[
+		$res = $dbr->newSelectQueryBuilder()
+			->select( [ 'page_namespace', 'page_title' ] )
+			->from( 'page' )
+			->join( 'redirect', null, 'rd_from=page_id' )
+			->where( [
 				'rd_title' => $title->getDBkey(),
 				'rd_namespace' => $title->getNamespace(),
 				// Entity redirects are guaranteed to be in the same namespace
 				'page_namespace' => $title->getNamespace(),
-			],
-			__METHOD__,
-			[
-				'LIMIT' => 1000 // everything should have a hard limit
-			],
-			[
-				'redirect' => [ 'JOIN', 'rd_from=page_id' ],
-			]
-		);
+			] )
+			->limit( 1000 ) // everything should have a hard limit
+			->caller( __METHOD__ )->fetchResultSet();
 
 		if ( !$res ) {
 			return [];
