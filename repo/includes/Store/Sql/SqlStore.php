@@ -316,6 +316,7 @@ class SqlStore implements Store {
 			$this->entityIdComposer,
 			$services->getRevisionStore(),
 			$this->entitySource,
+			$services->getActorNormalization(),
 			$services->getPermissionManager(),
 			$services->getWatchlistManager(),
 			$services->getWikiPageFactory(),

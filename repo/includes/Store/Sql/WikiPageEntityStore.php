@@ -2,13 +2,13 @@
 
 namespace Wikibase\Repo\Store\Sql;
 
-use ActorMigration;
 use CommentStoreComment;
 use InvalidArgumentException;
 use MediaWiki\Page\WikiPageFactory;
 use MediaWiki\Permissions\PermissionManager;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\RevisionStore;
+use MediaWiki\User\ActorNormalization;
 use MediaWiki\Watchlist\WatchlistManager;
 use MWException;
 use RecentChange;
@@ -30,6 +30,7 @@ use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\GenericEventDispatcher;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\IdGenerator;
+use Wikimedia\Rdbms\SelectQueryBuilder;
 use WikiPage;
 
 /**
@@ -76,6 +77,8 @@ class WikiPageEntityStore implements EntityStore {
 	/** @var DatabaseEntitySource */
 	private $entitySource;
 
+	private ActorNormalization $actorNormalization;
+
 	/**
 	 * @var PermissionManager
 	 */
@@ -113,6 +116,7 @@ class WikiPageEntityStore implements EntityStore {
 		EntityIdComposer $entityIdComposer,
 		RevisionStore $revisionStore,
 		DatabaseEntitySource $entitySource,
+		ActorNormalization $actorNormalization,
 		PermissionManager $permissionManager,
 		WatchlistManager $watchlistManager,
 		WikiPageFactory $wikiPageFactory,
@@ -129,6 +133,7 @@ class WikiPageEntityStore implements EntityStore {
 
 		$this->entitySource = $entitySource;
 
+		$this->actorNormalization = $actorNormalization;
 		$this->permissionManager = $permissionManager;
 
 		$this->watchlistManager = $watchlistManager;
@@ -523,21 +528,24 @@ class WikiPageEntityStore implements EntityStore {
 		}
 
 		// Scan through the revision table
-		$dbw = $this->db->connections()->getWriteConnectionRef();
-		$revWhere = ActorMigration::newMigration()->getWhere( $dbw, 'rev_user', $user );
-		$res = $dbw->select(
-			[ 'revision' ] + $revWhere['tables'],
-			1,
-			[
+		$dbw = $this->db->connections()->getWriteConnection();
+		$queryBuilder = $dbw->newSelectQueryBuilder()
+			->select( '1' )
+			->from( 'revision' )
+			->where( [
 				'rev_page' => $revision->getPageId(),
 				'rev_id > ' . (int)$lastRevId
-				. ' OR rev_timestamp > ' . $dbw->addQuotes( $dbw->timestamp( $revision->getTimestamp() ) ),
-				'NOT( ' . $revWhere['conds'] . ' )',
-			],
-			__METHOD__,
-			[ 'ORDER BY' => 'rev_timestamp ASC', 'LIMIT' => 1 ],
-			$revWhere['joins']
-		);
+				. ' OR rev_timestamp > ' . $dbw->addQuotes( $dbw->timestamp( $revision->getTimestamp() ) )
+			] );
+		$actorId = $this->actorNormalization->findActorId( $user, $dbw );
+		if ( $actorId !== null ) {
+			// @phan-suppress-next-line PhanRedundantCondition in case findActorId() changes return type
+			$queryBuilder->andWhere( 'rev_actor != ' . (int)$actorId );
+		}
+		$res = $queryBuilder
+			->orderBy( 'rev_timestamp', SelectQueryBuilder::SORT_ASC )
+			->limit( 1 )
+			->caller( __METHOD__ )->fetchResultSet();
 
 		return $res->current() === false; // return true if query had no match
 	}
