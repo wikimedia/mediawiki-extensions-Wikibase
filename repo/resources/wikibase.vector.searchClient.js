@@ -53,7 +53,7 @@
 	}
 
 	const vectorSearchClient = {
-		fetchByTitle: ( q, _domain, limit = 10, _showDescription = true ) => {
+		fetchByTitle: ( q, limit = 10, _showDescription = true ) => {
 			return fetchResults( q, limit );
 		}
 	};

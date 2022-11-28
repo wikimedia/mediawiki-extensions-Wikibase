@@ -66,7 +66,6 @@ describe( 'Vector Search Client', () => {
 
 		const apiController = vectorSearchClient.fetchByTitle(
 			exampleSearchString,
-			'/w/rest.php', // should be ignored by us
 			vectorLimit,
 			true
 		);
