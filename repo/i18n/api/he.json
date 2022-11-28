@@ -61,6 +61,7 @@
 	"apihelp-wbformatvalue-param-property": "מזהה המאפיין שערך הנתונים שייך אליו, אמור לשמש במקום פרמטר <var>datatype</var>.",
 	"apihelp-wbformatvalue-example-1": "עיצוב ערך מחרוזת פשוט.",
 	"apihelp-wbformatvalue-example-2": "עיצוב ערך מחרוזת בתור URL ל־HTML",
+	"apihelp-wbformatvalue-example-3": "עיצוב ערך זמן כטקסט רגיל, עם הצגת מודל לוח השנה באופן אוטומטי במידת הצורך.",
 	"apihelp-wbgetclaims-description": "קבלת טענות ויקיבייס.",
 	"apihelp-wbgetclaims-summary": "קבלת טענות ויקיבייס.",
 	"apihelp-wbgetclaims-param-entity": "המזהה של הישות שממנה תילקחנה הטענות. זה נדרש אלא אם כן ניתן GUID של טענה.",

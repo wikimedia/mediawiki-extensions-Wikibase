@@ -77,6 +77,7 @@
 	"apihelp-wbformatvalue-param-property": "L'ID de propriété à laquelle la valeur de données appartient doit être utilisé à la place du paramètre <var>datatype</var>.",
 	"apihelp-wbformatvalue-example-1": "Mettre en forme une valeur de chaîne simple.",
 	"apihelp-wbformatvalue-example-2": "Mettre en forme une valeur de chaîne sous forme d’une URL en HTML.",
+	"apihelp-wbformatvalue-example-3": "Formater une valeur de temps en texte brut, en affichant automatiquement le modèle de calendrier si nécessaire.",
 	"apihelp-wbgetclaims-description": "Obtenir les affirmations de Wikibase.",
 	"apihelp-wbgetclaims-summary": "Obtenir les déclarations de Wikibase.",
 	"apihelp-wbgetclaims-param-entity": "ID de l’entité de laquelle obtenir les déclarations. Obligatoire sauf si le GUID de la déclaration est fourni.",
