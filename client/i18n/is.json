@@ -54,7 +54,7 @@
 	"wikibase-rcfilters-major-conflicts-hide-wikibase": "Allar {{WBREPONAME}} breytingar eru merktar sem „minniháttar”, þannig að „{{WBREPONAME}} breytinga” sían rekst á við síu „engra minniháttar breytinga”.",
 	"wikibase-rcfilters-hide-wikibase-conflicts-major": "Allar {{WBREPONAME}} breytingar eru merktar sem „minniháttar”, þannig að „{{WBREPONAME}} breytinga” sían rekst á við síu „engra minniháttar breytinga”.",
 	"wikibase-replicationnote": "Athugaðu að það tekur nokkrar mínútur þangað til breytingarnar eru sýnilegar á öllum wiki verkefnum.",
-	"wikibase-watchlist-show-changes-pref": "Sýna {{WBREPONAME}} breytingar í vaktlistanum þínum",
+	"wikibase-watchlist-show-changes-pref": "Sýna {{WBREPONAME}}-breytingar í vaktlistanum þínum",
 	"wikibase-error-deserialize-error": "Mistókst að afpakka gögnum.",
 	"wikibase-error-serialize-error": "Mistókst að raðbinda gögn",
 	"wikibase-error-invalid-entity-id": "Auðkennið \"$2\" þekkist ekki. Vinsamlegast notaðu gilt auðkenni.",

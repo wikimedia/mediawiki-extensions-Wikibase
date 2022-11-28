@@ -1,9 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Андрей Саг."
+			"Андрей Саг.",
+			"AlexandrL714"
 		]
 	},
 	"wikibase-edit": "тӱзедерге",
-	"wikibase-add": "хозыбзарға"
+	"wikibase-add": "хозыбзарға",
+	"wikibase-label-empty": "Ады чох",
+	"wikibase-sitelinks-special": "Пасха сайттар"
 }
