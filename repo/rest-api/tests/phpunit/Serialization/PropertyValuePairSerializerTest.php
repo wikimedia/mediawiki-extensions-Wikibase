@@ -2,7 +2,10 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Serialization;
 
+use DataValues\Geo\Values\GlobeCoordinateValue;
+use DataValues\Geo\Values\LatLongValue;
 use DataValues\StringValue;
+use DataValues\TimeValue;
 use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\EntityIdValue;
@@ -25,6 +28,8 @@ use Wikibase\Repo\RestApi\Serialization\PropertyValuePairSerializer;
 class PropertyValuePairSerializerTest extends TestCase {
 	private const STRING_PROPERTY_ID = 'P123';
 	private const ITEM_ID_PROPERTY_ID = 'P321';
+	private const TIME_PROPERTY_ID = 'P456';
+	private const GLOBECOORDINATE_PROPERTY_ID = 'P678';
 
 	/**
 	 * @dataProvider serializationProvider
@@ -84,15 +89,56 @@ class PropertyValuePairSerializerTest extends TestCase {
 			[
 				'value' => [
 					'type' => 'value',
-					'content' => [
-						'id' => 'Q123',
-						'entity-type' => 'item',
-						'numeric-id' => 123
-					],
+					'content' => 'Q123',
 				],
 				'property' => [
 					'id' => self::ITEM_ID_PROPERTY_ID,
 					'data-type' => 'wikibase-item',
+				]
+			]
+		];
+
+		$timestamp = '+2022-11-25T00:00:00Z';
+		$calendar = 'Q12345';
+		yield 'time value' => [
+			new PropertyValueSnak(
+				new NumericPropertyId( self::TIME_PROPERTY_ID ),
+				new TimeValue( $timestamp, 0, 0, 0, TimeValue::PRECISION_DAY, $calendar )
+			),
+			[
+				'value' => [
+					'type' => 'value',
+					'content' => [
+						'time' => $timestamp,
+						"precision" => TimeValue::PRECISION_DAY,
+						"calendarmodel" => $calendar
+					],
+				],
+				'property' => [
+					'id' => self::TIME_PROPERTY_ID,
+					'data-type' => 'time'
+				]
+			]
+		];
+
+		yield 'globecoordinate value' => [
+			new PropertyValueSnak(
+				new NumericPropertyId( self::GLOBECOORDINATE_PROPERTY_ID ),
+				new GlobeCoordinateValue( new LatLongValue( 52.0, 13.0 ), 1 )
+			),
+			[
+				'value' => [
+					'type' => 'value',
+					'content' => [
+						"latitude" => 52.0,
+						"longitude" => 13.0,
+						"precision" => 1,
+						"globe" => "http://www.wikidata.org/entity/Q2"
+					],
+				],
+				'property' => [
+					'id' => self::GLOBECOORDINATE_PROPERTY_ID,
+					'data-type' => 'globe-coordinate'
 				]
 			]
 		];
@@ -107,6 +153,14 @@ class PropertyValuePairSerializerTest extends TestCase {
 		$dataTypeLookup->setDataTypeForProperty(
 			new NumericPropertyId( self::ITEM_ID_PROPERTY_ID ),
 			'wikibase-item'
+		);
+		$dataTypeLookup->setDataTypeForProperty(
+			new NumericPropertyId( self::TIME_PROPERTY_ID ),
+			'time'
+		);
+		$dataTypeLookup->setDataTypeForProperty(
+			new NumericPropertyId( self::GLOBECOORDINATE_PROPERTY_ID ),
+			'globe-coordinate'
 		);
 
 		return new PropertyValuePairSerializer( $dataTypeLookup );

@@ -30,7 +30,21 @@ class PropertyValuePairSerializer {
 		];
 
 		if ( $snak instanceof PropertyValueSnak ) {
-			$propertyValuePair['value']['content'] = $snak->getDataValue()->getArrayValue();
+			$content = $snak->getDataValue()->getArrayValue();
+			switch ( $snak->getDataValue()->getType() ) {
+				case 'wikibase-entityid':
+					$content = $content['id'];
+					break;
+				case 'time':
+					foreach ( [ 'before', 'after', 'timezone' ] as $key ) {
+						unset( $content[$key] );
+					}
+					break;
+				case 'globecoordinate':
+					unset( $content['altitude'] );
+					break;
+			}
+			$propertyValuePair['value']['content'] = $content;
 		}
 
 		return $propertyValuePair;
