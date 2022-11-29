@@ -26,12 +26,12 @@ class GetItemValidatorTest extends TestCase {
 	}
 
 	public function dataProviderPass(): \Generator {
-		yield "valid ID with empty fields" => [
-			new GetItemRequest( "Q123" )
+		yield 'valid ID with empty fields' => [
+			new GetItemRequest( 'Q123' )
 		];
 
-		yield "valid ID and fields" => [
-			new GetItemRequest( "Q123", [ 'type', 'labels', 'descriptions' ] )
+		yield 'valid ID and fields' => [
+			new GetItemRequest( 'Q123', [ 'type', 'labels', 'descriptions' ] )
 		];
 	}
 
@@ -46,18 +46,18 @@ class GetItemValidatorTest extends TestCase {
 	}
 
 	public function dataProviderFail(): \Generator {
-		yield "invalid item ID" => [
-			new GetItemRequest( "X123" ),
+		yield 'invalid item ID' => [
+			new GetItemRequest( 'X123' ),
 			ItemIdValidator::CODE_INVALID
 		];
 
-		yield "invalid field" => [
-			new GetItemRequest( "Q123", [ 'type', 'unknown_field' ] ),
+		yield 'invalid field' => [
+			new GetItemRequest( 'Q123', [ 'type', 'unknown_field' ] ),
 			GetItemValidator::CODE_INVALID_FIELD
 		];
 
-		yield "invalid item ID and invalid field" => [
-			new GetItemRequest( "X123", [ 'type', 'unknown_field' ] ),
+		yield 'invalid item ID and invalid field' => [
+			new GetItemRequest( 'X123', [ 'type', 'unknown_field' ] ),
 			ItemIdValidator::CODE_INVALID
 		];
 	}

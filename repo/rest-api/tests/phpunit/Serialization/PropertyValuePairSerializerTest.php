@@ -110,8 +110,8 @@ class PropertyValuePairSerializerTest extends TestCase {
 					'type' => 'value',
 					'content' => [
 						'time' => $timestamp,
-						"precision" => TimeValue::PRECISION_DAY,
-						"calendarmodel" => $calendar
+						'precision' => TimeValue::PRECISION_DAY,
+						'calendarmodel' => $calendar
 					],
 				],
 				'property' => [
@@ -130,10 +130,10 @@ class PropertyValuePairSerializerTest extends TestCase {
 				'value' => [
 					'type' => 'value',
 					'content' => [
-						"latitude" => 52.0,
-						"longitude" => 13.0,
-						"precision" => 1,
-						"globe" => "http://www.wikidata.org/entity/Q2"
+						'latitude' => 52.0,
+						'longitude' => 13.0,
+						'precision' => 1,
+						'globe' => 'http://www.wikidata.org/entity/Q2'
 					],
 				],
 				'property' => [

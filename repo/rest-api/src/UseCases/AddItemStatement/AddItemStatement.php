@@ -70,7 +70,7 @@ class AddItemStatement {
 		if ( !$this->permissionChecker->canEdit( $user, $itemId ) ) {
 			return new AddItemStatementErrorResponse(
 				ErrorResponse::PERMISSION_DENIED,
-				"You have no permission to edit this item."
+				'You have no permission to edit this item.'
 			);
 		}
 

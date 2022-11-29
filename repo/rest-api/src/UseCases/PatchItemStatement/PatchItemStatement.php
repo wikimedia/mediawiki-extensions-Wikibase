@@ -92,7 +92,7 @@ class PatchItemStatement {
 		if ( !$this->permissionChecker->canEdit( $user, $itemId ) ) {
 			return new PatchItemStatementErrorResponse(
 				ErrorResponse::PERMISSION_DENIED,
-				"You have no permission to edit this item."
+				'You have no permission to edit this item.'
 			);
 		}
 
@@ -131,11 +131,11 @@ class PatchItemStatement {
 		} catch ( PatchTestConditionFailedException $e ) {
 			return new PatchItemStatementErrorResponse(
 				ErrorResponse::PATCH_TEST_FAILED,
-				"Test operation in the provided patch failed. " .
+				'Test operation in the provided patch failed. ' .
 				"At path '" . $e->getOperation()['path'] .
 				"' expected '" . json_encode( $e->getOperation()['value'] ) .
 				"', actual: '" . json_encode( $e->getActualValue() ) . "'",
-				[ "operation" => $e->getOperation(), "actual-value" => $e->getActualValue() ]
+				[ 'operation' => $e->getOperation(), 'actual-value' => $e->getActualValue() ]
 			);
 		}
 

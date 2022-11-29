@@ -113,7 +113,7 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 
 	public function testGetStatement(): void {
 		$itemId = new ItemId( 'Q123' );
-		$statementId = new StatementGuid( $itemId, "c48c32c3-42b5-498f-9586-84608b88747c" );
+		$statementId = new StatementGuid( $itemId, 'c48c32c3-42b5-498f-9586-84608b88747c' );
 
 		$statement = NewStatement::forProperty( 'P123' )
 			->withValue( 'potato' )
@@ -135,7 +135,7 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 
 	public function testGivenItemDoesNotExist_getStatementReturnsNull(): void {
 		$itemId = new ItemId( 'Q321' );
-		$statementId = new StatementGuid( $itemId, "c48c32c3-42b5-498f-9586-84608b88747c" );
+		$statementId = new StatementGuid( $itemId, 'c48c32c3-42b5-498f-9586-84608b88747c' );
 
 		$retriever = new WikibaseEntityLookupItemDataRetriever(
 			$this->newEntityLookupForIdWithReturnValue( $itemId, null )
@@ -146,7 +146,7 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 
 	public function testGivenStatementDoesNotExist_getStatementReturnsNull(): void {
 		$itemId = new ItemId( 'Q123' );
-		$statementId = new StatementGuid( $itemId, "c48c32c3-42b5-498f-9586-84608b88747c" );
+		$statementId = new StatementGuid( $itemId, 'c48c32c3-42b5-498f-9586-84608b88747c' );
 
 		$item = NewItem::withId( $itemId )
 			->build();

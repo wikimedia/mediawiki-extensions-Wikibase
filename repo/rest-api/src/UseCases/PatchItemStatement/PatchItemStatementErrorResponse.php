@@ -21,19 +21,19 @@ class PatchItemStatementErrorResponse extends ErrorResponse {
 			case ItemIdValidator::CODE_INVALID:
 				return new self(
 					ErrorResponse::INVALID_ITEM_ID,
-					"Not a valid item ID: " . $validationError->getContext()[ItemIdValidator::ERROR_CONTEXT_VALUE]
+					'Not a valid item ID: ' . $validationError->getContext()[ItemIdValidator::ERROR_CONTEXT_VALUE]
 				);
 
 			case StatementIdValidator::CODE_INVALID:
 				return new self(
 					ErrorResponse::INVALID_STATEMENT_ID,
-					"Not a valid statement ID: " . $validationError->getContext()[StatementIdValidator::ERROR_CONTEXT_VALUE]
+					'Not a valid statement ID: ' . $validationError->getContext()[StatementIdValidator::ERROR_CONTEXT_VALUE]
 				);
 
 			case JsonPatchValidator::CODE_INVALID:
 				return new self(
 					ErrorResponse::INVALID_PATCH,
-					"The provided patch is invalid"
+					'The provided patch is invalid'
 				);
 
 			case JsonPatchValidator::CODE_INVALID_OPERATION:

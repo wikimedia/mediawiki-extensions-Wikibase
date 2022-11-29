@@ -30,8 +30,8 @@ use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
  */
 class GetItemTest extends TestCase {
 
-	private const ITEM_ID = "Q123";
-	private const ITEM_LABEL = "potato";
+	private const ITEM_ID = 'Q123';
+	private const ITEM_LABEL = 'potato';
 
 	public function testGetExistingItem(): void {
 		$lastModifiedTimestamp = '20201111070707';
@@ -43,7 +43,7 @@ class GetItemTest extends TestCase {
 			->build();
 
 		$revisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
-		$revisionMetadataRetriever->method( "getLatestRevisionMetadata" )
+		$revisionMetadataRetriever->method( 'getLatestRevisionMetadata' )
 			->willReturn( LatestItemRevisionMetadataResult::concreteRevision( $revisionId, $lastModifiedTimestamp ) );
 
 		$itemDataRetriever = $this->createMock( ItemDataRetriever::class );
@@ -65,10 +65,10 @@ class GetItemTest extends TestCase {
 	}
 
 	public function testItemNotFound(): void {
-		$itemId = "Q123";
+		$itemId = 'Q123';
 
 		$revisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
-		$revisionMetadataRetriever->method( "getLatestRevisionMetadata" )
+		$revisionMetadataRetriever->method( 'getLatestRevisionMetadata' )
 			->willReturn( LatestItemRevisionMetadataResult::itemNotFound() );
 		$itemRequest = new GetItemRequest( $itemId );
 		$itemResponse = ( new GetItem(
@@ -81,7 +81,7 @@ class GetItemTest extends TestCase {
 	}
 
 	public function testInvalidItemId(): void {
-		$itemId = "X123";
+		$itemId = 'X123';
 
 		$itemRequest = new GetItemRequest( $itemId );
 		$itemResponse = ( new GetItem(

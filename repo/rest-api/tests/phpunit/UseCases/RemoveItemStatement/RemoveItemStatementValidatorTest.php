@@ -88,7 +88,7 @@ class RemoveItemStatementValidatorTest extends TestCase {
 		];
 
 		$itemId = 'Q123';
-		$statementId = $itemId . StatementGuid::SEPARATOR . "INVALID-STATEMENT-ID";
+		$statementId = $itemId . StatementGuid::SEPARATOR . 'INVALID-STATEMENT-ID';
 		yield 'Invalid statement ID (with item ID)' => [
 			[
 				'$statementId' => $statementId,

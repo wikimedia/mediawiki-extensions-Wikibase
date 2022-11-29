@@ -22,7 +22,7 @@ class StatementListSerializerTest extends TestCase {
 	public function testSerialize(): void {
 		$statementList = new StatementList(
 			NewStatement::forProperty( 'P123' )
-				->withValue( "potato" )
+				->withValue( 'potato' )
 				->build(),
 			NewStatement::someValueFor( 'P321' )
 				->build(),
@@ -58,7 +58,7 @@ class StatementListSerializerTest extends TestCase {
 		$statementSerializer->method( 'serialize' )
 			->willReturnCallback(
 				fn( Statement $statement ) => [
-					$statement->getPropertyId()->serialize() . " statement serialization"
+					$statement->getPropertyId()->serialize() . ' statement serialization'
 				]
 			);
 		return new StatementListSerializer( $statementSerializer );

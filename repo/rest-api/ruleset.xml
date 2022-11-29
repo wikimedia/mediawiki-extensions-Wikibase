@@ -6,6 +6,9 @@
 	<rule ref="Generic.PHP.RequireStrictTypes" />
 	<rule ref="Generic.Arrays.ArrayIndent" />
 	<rule ref="PEAR.Functions.FunctionCallSignature.Indent" />
+	<rule ref="Squiz.Strings.DoubleQuoteUsage">
+		<exclude name="Squiz.Strings.DoubleQuoteUsage.ContainsVar" />
+	</rule>
 	<rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHint">
 		<exclude name="SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification" />
 	</rule>

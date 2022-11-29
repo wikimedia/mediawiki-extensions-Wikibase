@@ -88,9 +88,9 @@ class GetItemStatementsTest extends TestCase {
 	}
 
 	public function testItemNotFound_returnsErrorResponse(): void {
-		$itemId = "Q123";
+		$itemId = 'Q123';
 
-		$this->itemRevisionMetadataRetriever->method( "getLatestRevisionMetadata" )
+		$this->itemRevisionMetadataRetriever->method( 'getLatestRevisionMetadata' )
 			->willReturn( LatestItemRevisionMetadataResult::itemNotFound() );
 		$itemStatementsRequest = new GetItemStatementsRequest( $itemId );
 		$itemStatementsResponse = $this->newUseCase()->execute( $itemStatementsRequest );

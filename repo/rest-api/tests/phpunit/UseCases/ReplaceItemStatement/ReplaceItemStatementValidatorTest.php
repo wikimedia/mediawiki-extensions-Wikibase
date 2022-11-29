@@ -98,7 +98,7 @@ class ReplaceItemStatementValidatorTest extends TestCase {
 
 	public function testValidate_withInvalidStatementId(): void {
 		$itemId = 'Q123';
-		$statementId = $itemId . StatementGuid::SEPARATOR . "INVALID-STATEMENT-ID";
+		$statementId = $itemId . StatementGuid::SEPARATOR . 'INVALID-STATEMENT-ID';
 		$error = $this->newReplaceItemStatementValidator()->validate(
 			$this->newUseCaseRequest( [
 				'$statementId' => $statementId,

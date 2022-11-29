@@ -31,7 +31,7 @@ class ErrorJsonPresenterTest extends TestCase {
 		$error = new ErrorResponse(
 			'test-error-code',
 			'Test error message',
-			[ "testing" => "with", "context" => 42 ]
+			[ 'testing' => 'with', 'context' => 42 ]
 		);
 
 		$presenter = new ErrorJsonPresenter();
