@@ -20,14 +20,14 @@ class EditMetadataValidatorTest extends TestCase {
 	private const ALLOWED_TAGS = [ 'tag1', 'tag2', 'tag3' ];
 
 	public function testValidateValidComment(): void {
-		$result = $this->newEditMetadataValidator()->validateComment( "this is a valid comment" );
+		$result = $this->newEditMetadataValidator()->validateComment( 'this is a valid comment' );
 
 		$this->assertNull( $result );
 	}
 
 	public function testValidateCommentTooLong(): void {
 		$result = $this->newEditMetadataValidator()->validateComment(
-			"This comment is longer than 42 characters!!"
+			'This comment is longer than 42 characters!!'
 		);
 
 		$this->assertInstanceOf( ValidationError::class, $result );

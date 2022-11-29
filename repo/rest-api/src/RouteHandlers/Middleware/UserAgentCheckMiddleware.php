@@ -13,7 +13,7 @@ class UserAgentCheckMiddleware implements Middleware {
 	public function run( Handler $routeHandler, callable $runNext ): Response {
 		$request = $routeHandler->getRequest();
 
-		if ( $request->getHeaderLine( 'User-Agent' ) === "" ) {
+		if ( $request->getHeaderLine( 'User-Agent' ) === '' ) {
 			return $routeHandler->getResponseFactory()->createHttpError(
 				400,
 				[

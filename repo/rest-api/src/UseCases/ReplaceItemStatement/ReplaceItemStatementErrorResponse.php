@@ -21,19 +21,19 @@ class ReplaceItemStatementErrorResponse extends ErrorResponse {
 			case ItemIdValidator::CODE_INVALID:
 				return new self(
 					ErrorResponse::INVALID_ITEM_ID,
-					"Not a valid item ID: " . $validationError->getContext()[ItemIdValidator::ERROR_CONTEXT_VALUE]
+					'Not a valid item ID: ' . $validationError->getContext()[ItemIdValidator::ERROR_CONTEXT_VALUE]
 				);
 
 			case StatementIdValidator::CODE_INVALID:
 				return new self(
 					ErrorResponse::INVALID_STATEMENT_ID,
-					"Not a valid statement ID: " . $validationError->getContext()[StatementIdValidator::ERROR_CONTEXT_VALUE]
+					'Not a valid statement ID: ' . $validationError->getContext()[StatementIdValidator::ERROR_CONTEXT_VALUE]
 				);
 
 			case StatementValidator::CODE_INVALID:
 				return new self(
 					ErrorResponse::INVALID_STATEMENT_DATA,
-					"Invalid statement data provided"
+					'Invalid statement data provided'
 				);
 
 			case EditMetadataValidator::CODE_INVALID_TAG:

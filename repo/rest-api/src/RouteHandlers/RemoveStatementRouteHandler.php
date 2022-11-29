@@ -157,7 +157,7 @@ class RemoveStatementRouteHandler extends SimpleHandler {
 		$httpResponse->setStatus( 200 );
 		$httpResponse->setHeader( 'Content-Type', 'application/json' );
 		$httpResponse->setHeader( 'Content-Language', 'en' );
-		$httpResponse->setBody( new StringStream( "\"Statement deleted\"" ) );
+		$httpResponse->setBody( new StringStream( '"Statement deleted"' ) );
 
 		return $httpResponse;
 	}

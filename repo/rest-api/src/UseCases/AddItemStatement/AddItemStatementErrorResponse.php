@@ -19,13 +19,13 @@ class AddItemStatementErrorResponse extends ErrorResponse {
 			case ItemIdValidator::CODE_INVALID:
 				return new self(
 					ErrorResponse::INVALID_ITEM_ID,
-					"Not a valid item ID: " . $validationError->getContext()[ItemIdValidator::ERROR_CONTEXT_VALUE]
+					'Not a valid item ID: ' . $validationError->getContext()[ItemIdValidator::ERROR_CONTEXT_VALUE]
 				);
 
 			case StatementValidator::CODE_INVALID:
 				return new self(
 					ErrorResponse::INVALID_STATEMENT_DATA,
-					"Invalid statement data provided"
+					'Invalid statement data provided'
 				);
 
 			case EditMetadataValidator::CODE_COMMENT_TOO_LONG:
@@ -38,7 +38,7 @@ class AddItemStatementErrorResponse extends ErrorResponse {
 			case EditMetadataValidator::CODE_INVALID_TAG:
 				return new self(
 					ErrorResponse::INVALID_EDIT_TAG,
-					"Invalid MediaWiki tag: " . $validationError->getContext()[EditMetadataValidator::ERROR_CONTEXT_TAG_VALUE]
+					'Invalid MediaWiki tag: ' . $validationError->getContext()[EditMetadataValidator::ERROR_CONTEXT_TAG_VALUE]
 				);
 
 			default:

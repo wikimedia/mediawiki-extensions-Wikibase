@@ -29,16 +29,16 @@ class AddItemStatementErrorResponseTest extends TestCase {
 	}
 
 	public function validationErrorDataProvider(): \Generator {
-		yield "from invalid item ID" => [
+		yield 'from invalid item ID' => [
 			new ValidationError( ItemIdValidator::CODE_INVALID, [ ItemIdValidator::ERROR_CONTEXT_VALUE => 'X123' ] ),
 			ErrorResponse::INVALID_ITEM_ID,
-			"Not a valid item ID: X123"
+			'Not a valid item ID: X123'
 		];
 
-		yield "from invalid statement data" => [
+		yield 'from invalid statement data' => [
 			new ValidationError( StatementValidator::CODE_INVALID ),
 			ErrorResponse::INVALID_STATEMENT_DATA,
-			"Invalid statement data provided"
+			'Invalid statement data provided'
 		];
 	}
 

@@ -37,7 +37,7 @@ class PatchItemStatementErrorJsonPresenterTest extends TestCase {
 		$error = new PatchItemStatementErrorResponse(
 			'test-code',
 			'Test message',
-			[ "test" => "with", "context" => 42 ]
+			[ 'test' => 'with', 'context' => 42 ]
 		);
 
 		$this->assertJsonStringEqualsJsonString(
@@ -57,7 +57,7 @@ class PatchItemStatementErrorJsonPresenterTest extends TestCase {
 		$error = new PatchItemStatementErrorResponse(
 			'test-code',
 			'Test message',
-			[ "test" => "with", "patched-statement" => $statement ]
+			[ 'test' => 'with', 'patched-statement' => $statement ]
 		);
 
 		$this->assertJsonStringEqualsJsonString(

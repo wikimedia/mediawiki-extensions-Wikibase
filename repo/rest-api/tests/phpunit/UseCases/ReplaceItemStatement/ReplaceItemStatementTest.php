@@ -92,7 +92,7 @@ class ReplaceItemStatementTest extends TestCase {
 		$oldStatement = NewStatement::noValueFor( 'P123' )->withGuid( $statementId )->build();
 		$newStatement = NewStatement::someValueFor( 'P123' )
 			->withGuid( $statementId )
-			->withValue( "new statement value" )
+			->withValue( 'new statement value' )
 			->build();
 		$item = NewItem::withId( $itemId )->andStatement( $oldStatement )->build();
 		$modificationRevisionId = 322;

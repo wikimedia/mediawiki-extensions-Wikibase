@@ -94,8 +94,8 @@ class PatchItemStatementTest extends TestCase {
 	public function testPatchItemStatement_success(): void {
 		$itemId = 'Q123';
 		$statementId = $itemId . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-		$oldStatementValue = "old statement value";
-		$newStatementValue = "new statement value";
+		$oldStatementValue = 'old statement value';
+		$newStatementValue = 'new statement value';
 		$statement = NewStatement::someValueFor( 'P123' )
 			->withGuid( $statementId )
 			->withValue( $oldStatementValue )
@@ -413,7 +413,7 @@ class PatchItemStatementTest extends TestCase {
 			"expected '" . json_encode( $testOperation['value'] ) . "', " .
 			"actual: '" . json_encode( [ 'key' => 'actualValue' ] ) . "'",
 			'patch-test-failed',
-			[ "operation" => $testOperation, "actual-value" => [ 'key' => 'actualValue' ] ]
+			[ 'operation' => $testOperation, 'actual-value' => [ 'key' => 'actualValue' ] ]
 
 		];
 	}

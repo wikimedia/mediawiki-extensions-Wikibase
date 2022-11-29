@@ -19,13 +19,13 @@ class GetItemStatementErrorResponse extends ErrorResponse {
 			case StatementIdValidator::CODE_INVALID:
 				return new self(
 					ErrorResponse::INVALID_STATEMENT_ID,
-					"Not a valid statement ID: " . $validationError->getContext()[StatementIdValidator::ERROR_CONTEXT_VALUE]
+					'Not a valid statement ID: ' . $validationError->getContext()[StatementIdValidator::ERROR_CONTEXT_VALUE]
 				);
 
 			case ItemIdValidator::CODE_INVALID:
 				return new self(
 					ErrorResponse::INVALID_ITEM_ID,
-					"Not a valid item ID: " . $validationError->getContext()[ItemIdValidator::ERROR_CONTEXT_VALUE]
+					'Not a valid item ID: ' . $validationError->getContext()[ItemIdValidator::ERROR_CONTEXT_VALUE]
 				);
 
 			default:

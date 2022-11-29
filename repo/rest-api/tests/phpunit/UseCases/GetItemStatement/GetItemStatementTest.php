@@ -49,7 +49,7 @@ class GetItemStatementTest extends TestCase {
 		$itemId = new ItemId( 'Q123' );
 		$revision = 987;
 		$lastModified = '20201111070707';
-		$statementId = $itemId . StatementGuid::SEPARATOR . "c48c32c3-42b5-498f-9586-84608b88747c";
+		$statementId = $itemId . StatementGuid::SEPARATOR . 'c48c32c3-42b5-498f-9586-84608b88747c';
 		$expectedStatement = NewStatement::forProperty( 'P123' )
 			->withValue( 'potato' )
 			->withGuid( $statementId )
