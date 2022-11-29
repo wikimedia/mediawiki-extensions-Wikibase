@@ -14,12 +14,15 @@
 			"VezonThunder",
 			"Zache",
 			"Kyykaarme",
-			"Rönttönen"
+			"Rönttönen",
+			"Moj",
+			"Valtlai"
 		]
 	},
 	"wikibase-client-desc": "Wikibase-laajennuksen asiakasohjelma",
 	"tooltip-t-wikibase": "Linkki yhdistettyyn keskustietovaraston kohteeseen",
 	"wikibase-after-page-move": "Tekemäsi siirron vaikutusten [$1 pitäisi näkyä kielilinkkinä {{GRAMMAR:inessive|{{WBREPONAME}}}}]. Voit kuitenkin varmistaa asian vielä.",
+	"wikibase-after-page-delete": "Tämän sivun linkin pitäisi olla poistunut [$1 sen {{WBREPONAME}}-kohteesta]. Tarkistathan, että tämä on tapahtunut.",
 	"wikibase-after-page-delete-queued": "Tähän sivuun liitetty [$1 {{WBREPONAME}}-kohde] päivitetään pian automaattisesti. Huomaa, että se ei välttämättä tapahdu välittömästi.",
 	"wikibase-comment-add": "{{WBREPONAME}}-kohde luotu.",
 	"wikibase-comment-remove": "Sivuun liittyvä {{WBREPONAME}}-kohde poistettu. Kielilinkit poistettu.",

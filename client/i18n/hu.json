@@ -51,7 +51,7 @@
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}}-szerkesztések $1",
 	"wikibase-rc-hide-wikidata-hide": "elrejtése",
 	"wikibase-rc-hide-wikidata-show": "megjelenítése",
-	"wikibase-rc-show-wikidata-pref": "{{WBREPONAME}} szerkesztések mutatása a friss változtatásokban",
+	"wikibase-rc-show-wikidata-pref": "{{WBREPONAME}}-szerkesztések mutatása a friss változtatásokban",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-szerkesztés",
 	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}}-szerkesztések",
