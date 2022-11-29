@@ -111,7 +111,7 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValid201Response( response, propertyId, { ...globecoordinate, altitude: null } );
+			assertValid201Response( response, propertyId, globecoordinate );
 		} );
 		it( 'can add a statement with a time value in new format', async () => {
 			const createPropertyResponse = await entityHelper.createEntity( 'property', {
@@ -133,7 +133,7 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValid201Response( response, propertyId, { ...time, before: 0, after: 0, timezone: 0 } );
+			assertValid201Response( response, propertyId, time );
 		} );
 		it( 'can add a statement with a wikibase-entityid value in new format', async () => {
 			const createPropertyResponse = await entityHelper.createEntity( 'property', {
@@ -150,11 +150,7 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValid201Response( response, propertyId, {
-				id: testItemId,
-				'numeric-id': parseInt( testItemId.slice( 1 ) ),
-				'entity-type': 'item'
-			} );
+			assertValid201Response( response, propertyId, testItemId );
 		} );
 	} );
 
