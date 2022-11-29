@@ -19,20 +19,28 @@ class ItemDataSerializer {
 	}
 
 	public function serialize( ItemData $itemData ): array {
-		return array_filter(
-			[
-				'id' => $itemData->getId()->getSerialization(),
-				'type' => $itemData->getType(),
-				'labels' => $itemData->getLabels() ? new ArrayObject( $itemData->getLabels()->toTextArray() ) : null,
-				'descriptions' => $itemData->getDescriptions() ? new ArrayObject( $itemData->getDescriptions()->toTextArray() ) : null,
-				'aliases' => $itemData->getAliases() ? new ArrayObject( $itemData->getAliases()->toTextArray() ) : null,
-				'statements' => $itemData->getStatements() ? $this->statementsSerializer->serialize( $itemData->getStatements() ) : null,
-				'sitelinks' => $itemData->getSiteLinks() ? $this->siteLinksSerializer->serialize( $itemData->getSiteLinks() ) : null,
-			],
-			function ( $part ) {
-				return $part !== null;
-			}
+		$fieldSerializers = [
+			ItemData::FIELD_TYPE => fn() => $itemData->getType(),
+			ItemData::FIELD_LABELS => fn() => new ArrayObject( $itemData->getLabels()->toTextArray() ),
+			ItemData::FIELD_DESCRIPTIONS => fn() => new ArrayObject( $itemData->getDescriptions()->toTextArray() ),
+			ItemData::FIELD_ALIASES => fn() => new ArrayObject( $itemData->getAliases()->toTextArray() ),
+			ItemData::FIELD_STATEMENTS => fn() => $this->statementsSerializer->serialize( $itemData->getStatements() ),
+			ItemData::FIELD_SITELINKS => fn() => $this->siteLinksSerializer->serialize( $itemData->getSiteLinks() ),
+		];
+
+		// serialize all $itemData fields, filtered by isRequested()
+		$serialization = array_map(
+			fn( callable $serializeField ) => $serializeField(),
+			array_filter(
+				$fieldSerializers,
+				fn ( string $fieldName ) => $itemData->isRequested( $fieldName ),
+				ARRAY_FILTER_USE_KEY
+			)
 		);
+
+		$serialization['id'] = $itemData->getId()->getSerialization();
+
+		return $serialization;
 	}
 
 }

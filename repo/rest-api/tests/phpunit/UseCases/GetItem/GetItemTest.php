@@ -37,7 +37,7 @@ class GetItemTest extends TestCase {
 		$lastModifiedTimestamp = '20201111070707';
 		$revisionId = 42;
 		$requestedFields = [ ItemData::FIELD_LABELS, ItemData::FIELD_STATEMENTS ];
-		$expectedItemData = ( new ItemDataBuilder() )->setId( new ItemId( self::ITEM_ID ) )
+		$expectedItemData = ( new ItemDataBuilder( new ItemId( self::ITEM_ID ), $requestedFields ) )
 			->setLabels( new TermList( [ new Term( 'en', self::ITEM_LABEL ) ] ) )
 			->setStatements( new StatementList() )
 			->build();

@@ -35,11 +35,11 @@ class WikibaseEntityLookupItemDataRetriever implements ItemDataRetriever, ItemSt
 		if ( $item === null ) {
 			return null;
 		}
-		return $this->itemDataFromFields( $fields, $item );
+		return $this->itemDataFromRequestedFields( $fields, $item );
 	}
 
-	private function itemDataFromFields( array $fields, Item $item ): ItemData {
-		$itemData = ( new ItemDataBuilder() )->setId( $item->getId() );
+	private function itemDataFromRequestedFields( array $fields, Item $item ): ItemData {
+		$itemData = ( new ItemDataBuilder( $item->getId(), $fields ) );
 
 		if ( in_array( ItemData::FIELD_TYPE, $fields ) ) {
 			$itemData->setType( $item->getType() );

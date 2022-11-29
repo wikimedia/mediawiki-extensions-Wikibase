@@ -28,6 +28,7 @@ class ItemData {
 	];
 
 	private ItemId $id;
+	private array $requestedFields;
 	private ?string $type;
 	private ?TermList $labels;
 	private ?TermList $descriptions;
@@ -37,6 +38,7 @@ class ItemData {
 
 	public function __construct(
 		ItemId $id,
+		array $requestedFields,
 		?string $type,
 		?TermList $labels,
 		?TermList $descriptions,
@@ -45,6 +47,7 @@ class ItemData {
 		?SiteLinkList $siteLinks
 	) {
 		$this->id = $id;
+		$this->requestedFields = $requestedFields;
 		$this->type = $type;
 		$this->labels = $labels;
 		$this->descriptions = $descriptions;
@@ -81,4 +84,7 @@ class ItemData {
 		return $this->siteLinks;
 	}
 
+	public function isRequested( string $field ): bool {
+		return in_array( $field, $this->requestedFields );
+	}
 }

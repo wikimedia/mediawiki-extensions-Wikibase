@@ -52,8 +52,7 @@ class ItemDataSerializerTest extends TestCase {
 	}
 
 	public function testSerializeId(): void {
-		$itemData = ( new ItemDataBuilder() )
-			->setId( new ItemId( 'Q123' ) )
+		$itemData = ( new ItemDataBuilder( new ItemId( 'Q123' ), [] ) )
 			->build();
 
 		$serialization = $this->newSerializer()->serialize( $itemData );
@@ -62,7 +61,7 @@ class ItemDataSerializerTest extends TestCase {
 	}
 
 	public function testSerializeType(): void {
-		$itemData = $this->newItemDataBuilderWithSomeId()
+		$itemData = $this->newItemDataBuilderWithSomeId( [ ItemData::FIELD_TYPE ] )
 			->setType( Item::ENTITY_TYPE )
 			->build();
 
@@ -74,7 +73,7 @@ class ItemDataSerializerTest extends TestCase {
 	public function testSerializeLabels(): void {
 		$enLabel = 'potato';
 		$koLabel = '감자';
-		$itemData = $this->newItemDataBuilderWithSomeId()
+		$itemData = $this->newItemDataBuilderWithSomeId( [ ItemData::FIELD_LABELS ] )
 			->setLabels( new TermList( [
 				new Term( 'en', $enLabel ),
 				new Term( 'ko', $koLabel )
@@ -90,7 +89,7 @@ class ItemDataSerializerTest extends TestCase {
 	public function testSerializeDescriptions(): void {
 		$enDescription = 'root vegetable';
 		$deDescription = 'Art der Gattung Nachtschatten (Solanum)';
-		$itemData = $this->newItemDataBuilderWithSomeId()
+		$itemData = $this->newItemDataBuilderWithSomeId( [ ItemData::FIELD_DESCRIPTIONS ] )
 			->setDescriptions( new TermList( [
 				new Term( 'en', $enDescription ),
 				new Term( 'de', $deDescription )
@@ -106,7 +105,7 @@ class ItemDataSerializerTest extends TestCase {
 	public function testSerializeAliases(): void {
 		$enAliases = [ 'spud', 'tater' ];
 		$deAliases = [ 'Erdapfel' ];
-		$itemData = $this->newItemDataBuilderWithSomeId()
+		$itemData = $this->newItemDataBuilderWithSomeId( [ ItemData::FIELD_ALIASES ] )
 			->setAliases( new AliasGroupList( [
 				new AliasGroup( 'en', $enAliases ),
 				new AliasGroup( 'de', $deAliases ),
@@ -123,7 +122,7 @@ class ItemDataSerializerTest extends TestCase {
 		$statements = $this->createStub( StatementList::class );
 		$expectedSerialization = new ArrayObject( [ 'some' => 'serialization' ] );
 
-		$itemData = $this->newItemDataBuilderWithSomeId()
+		$itemData = $this->newItemDataBuilderWithSomeId( [ ItemData::FIELD_STATEMENTS ] )
 			->setStatements( $statements )
 			->build();
 
@@ -142,7 +141,7 @@ class ItemDataSerializerTest extends TestCase {
 		$siteLinks = $this->createStub( SiteLinkList::class );
 		$expectedSerialization = new ArrayObject( [ 'some' => 'serialization' ] );
 
-		$itemData = $this->newItemDataBuilderWithSomeId()
+		$itemData = $this->newItemDataBuilderWithSomeId( [ ItemData::FIELD_SITELINKS ] )
 			->setSiteLinks( $siteLinks )
 			->build();
 
@@ -169,17 +168,19 @@ class ItemDataSerializerTest extends TestCase {
 
 	public function itemDataFieldsProvider(): Generator {
 		yield [
-			$this->newItemDataBuilderWithSomeId()->build(),
+			$this->newItemDataBuilderWithSomeId( [] )->build(),
 			[ 'id' ]
 		];
 		yield [
-			$this->newItemDataBuilderWithSomeId()
+			$this->newItemDataBuilderWithSomeId( [ ItemData::FIELD_TYPE ] )
 				->setType( Item::ENTITY_TYPE )
 				->build(),
 			[ 'id', 'type' ]
 		];
 		yield [
-			$this->newItemDataBuilderWithSomeId()
+			$this->newItemDataBuilderWithSomeId(
+				[ ItemData::FIELD_LABELS, ItemData::FIELD_DESCRIPTIONS, ItemData::FIELD_ALIASES ]
+			)
 				->setLabels( new TermList() )
 				->setDescriptions( new TermList() )
 				->setAliases( new AliasGroupList() )
@@ -187,13 +188,13 @@ class ItemDataSerializerTest extends TestCase {
 			[ 'id', 'labels', 'descriptions', 'aliases' ]
 		];
 		yield [
-			$this->newItemDataBuilderWithSomeId()
+			$this->newItemDataBuilderWithSomeId( [ ItemData::FIELD_STATEMENTS ] )
 				->setStatements( new StatementList() )
 				->build(),
 			[ 'id', 'statements' ]
 		];
 		yield [
-			$this->newItemDataBuilderWithSomeId()
+			$this->newItemDataBuilderWithSomeId( ItemData::VALID_FIELDS )
 				->setType( Item::ENTITY_TYPE )
 				->setLabels( new TermList() )
 				->setDescriptions( new TermList() )
@@ -209,8 +210,8 @@ class ItemDataSerializerTest extends TestCase {
 		return new ItemDataSerializer( $this->statementsSerializer, $this->siteLinkListSerializer );
 	}
 
-	private function newItemDataBuilderWithSomeId(): ItemDataBuilder {
-		return ( new ItemDataBuilder() )->setId( new ItemId( 'Q666' ) );
+	private function newItemDataBuilderWithSomeId( array $requestedFields ): ItemDataBuilder {
+		return new ItemDataBuilder( new ItemId( 'Q666' ), $requestedFields );
 	}
 
 }

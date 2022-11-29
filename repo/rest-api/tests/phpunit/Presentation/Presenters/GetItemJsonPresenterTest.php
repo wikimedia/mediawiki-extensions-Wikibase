@@ -44,8 +44,10 @@ class GetItemJsonPresenterTest extends TestCase {
 	}
 
 	public function testEmptyFieldsUseObjects(): void {
-		$itemData = ( new ItemDataBuilder() )
-			->setId( new ItemId( 'Q1' ) )
+		$itemData = ( new ItemDataBuilder(
+			new ItemId( 'Q1' ),
+			[ ItemData::FIELD_LABELS, ItemData::FIELD_DESCRIPTIONS, ItemData::FIELD_ALIASES ]
+		) )
 			->setLabels( new TermList() )
 			->setDescriptions( new TermList() )
 			->setAliases( new AliasGroupList() )

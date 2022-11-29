@@ -77,14 +77,15 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 		yield 'type only' => [
 			$item,
 			[ ItemData::FIELD_TYPE ],
-			( new ItemDataBuilder() )->setId( $item->getId() )
+			( new ItemDataBuilder( $item->getId(), [ ItemData::FIELD_TYPE ] ) )
 				->setType( Item::ENTITY_TYPE )
 				->build()
 		];
+		$fields = [ ItemData::FIELD_LABELS, ItemData::FIELD_DESCRIPTIONS, ItemData::FIELD_ALIASES ];
 		yield 'labels, descriptions, aliases' => [
 			$item,
-			[ ItemData::FIELD_LABELS, ItemData::FIELD_DESCRIPTIONS, ItemData::FIELD_ALIASES ],
-			( new ItemDataBuilder() )->setId( $item->getId() )
+			$fields,
+			( new ItemDataBuilder( $item->getId(), $fields ) )
 				->setLabels( $item->getLabels() )
 				->setDescriptions( $item->getDescriptions() )
 				->setAliases( $item->getAliasGroups() )
@@ -93,14 +94,14 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 		yield 'statements only' => [
 			$item,
 			[ ItemData::FIELD_STATEMENTS ],
-			( new ItemDataBuilder() )->setId( $item->getId() )
+			( new ItemDataBuilder( $item->getId(), [ ItemData::FIELD_STATEMENTS ] ) )
 				->setStatements( $item->getStatements() )
 				->build(),
 		];
 		yield 'all fields' => [
 			$item,
 			ItemData::VALID_FIELDS,
-			( new ItemDataBuilder() )->setId( $item->getId() )
+			( new ItemDataBuilder( $item->getId(), ItemData::VALID_FIELDS ) )
 				->setType( Item::ENTITY_TYPE )
 				->setLabels( $item->getLabels() )
 				->setDescriptions( $item->getDescriptions() )
