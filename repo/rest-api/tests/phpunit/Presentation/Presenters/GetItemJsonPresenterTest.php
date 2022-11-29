@@ -4,13 +4,13 @@ namespace Wikibase\Repo\Tests\RestApi\Presentation\Presenters;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Serializers\SiteLinkListSerializer;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Domain\Model\ItemData;
 use Wikibase\Repo\RestApi\Domain\Model\ItemDataBuilder;
 use Wikibase\Repo\RestApi\Presentation\Presenters\GetItemJsonPresenter;
 use Wikibase\Repo\RestApi\Serialization\ItemDataSerializer;
+use Wikibase\Repo\RestApi\Serialization\SiteLinkListSerializer;
 use Wikibase\Repo\RestApi\Serialization\StatementListSerializer;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemSuccessResponse;
 
