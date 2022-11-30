@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Pare Mo"
+		]
+	},
+	"wikibase-editlinks": "Iislan ang manga sugpon",
+	"wikibase-linkitem-addlinks": "Magdugang kang sugpon",
+	"wikibase-linkitem-title": "Isugpon sa pahina",
+	"wikibase-linkitem-linkpage": "Isugpon sa pahina",
+	"wikibase-linkitem-input-site": "Pulong:",
+	"wikibase-linkitem-input-page": "Pahina:",
+	"wikibase-rc-hide-wikidata-hide": "Taguon",
+	"wikibase-rc-hide-wikidata-show": "Ipakità",
+	"wikibase-otherprojects": "Sa iba nga manga proyekto"
+}
