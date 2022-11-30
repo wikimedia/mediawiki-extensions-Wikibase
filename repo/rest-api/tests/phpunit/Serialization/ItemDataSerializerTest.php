@@ -8,8 +8,6 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Serializers\SiteLinkListSerializer;
-use Wikibase\DataModel\Serializers\SiteLinkSerializer;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\AliasGroup;
@@ -19,6 +17,7 @@ use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Domain\Model\ItemData;
 use Wikibase\Repo\RestApi\Domain\Model\ItemDataBuilder;
 use Wikibase\Repo\RestApi\Serialization\ItemDataSerializer;
+use Wikibase\Repo\RestApi\Serialization\SiteLinkListSerializer;
 use Wikibase\Repo\RestApi\Serialization\StatementListSerializer;
 
 /**
@@ -36,7 +35,7 @@ class ItemDataSerializerTest extends TestCase {
 	private $statementsSerializer;
 
 	/**
-	 * @var MockObject|SiteLinkSerializer
+	 * @var MockObject|SiteLinkListSerializer
 	 */
 	private $siteLinkListSerializer;
 
@@ -141,7 +140,7 @@ class ItemDataSerializerTest extends TestCase {
 
 	public function testSerializeSiteLinks(): void {
 		$siteLinks = $this->createStub( SiteLinkList::class );
-		$expectedSerialization = [ 'some' => 'serialization' ];
+		$expectedSerialization = new ArrayObject( [ 'some' => 'serialization' ] );
 
 		$itemData = $this->newItemDataBuilderWithSomeId()
 			->setSiteLinks( $siteLinks )

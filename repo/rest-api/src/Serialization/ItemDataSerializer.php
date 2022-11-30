@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\RestApi\Serialization;
 
 use ArrayObject;
-use Wikibase\DataModel\Serializers\SiteLinkListSerializer;
 use Wikibase\Repo\RestApi\Domain\Model\ItemData;
 
 /**
