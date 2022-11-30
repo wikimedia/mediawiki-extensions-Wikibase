@@ -12,9 +12,6 @@ class GetItemStatementsJsonPresenter {
 
 	private StatementListSerializer $serializer;
 
-	/**
-	 * @param StatementListSerializer $serializer Should have $useObjectsForMaps (e.g. for qualifiers) set to true.
-	 */
 	public function __construct( StatementListSerializer $serializer ) {
 		$this->serializer = $serializer;
 	}

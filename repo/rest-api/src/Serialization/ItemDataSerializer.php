@@ -13,10 +13,6 @@ class ItemDataSerializer {
 	private StatementListSerializer $statementsSerializer;
 	private SiteLinkListSerializer $siteLinksSerializer;
 
-	/**
-	 * @param StatementListSerializer $statementsSerializer should have $useObjectsForMaps set to true when used within a json presenter
-	 * @param SiteLinkListSerializer $siteLinksSerializer should have $useObjectsForMaps set to true when used within a json presenter
-	 */
 	public function __construct( StatementListSerializer $statementsSerializer, SiteLinkListSerializer $siteLinksSerializer ) {
 		$this->statementsSerializer = $statementsSerializer;
 		$this->siteLinksSerializer = $siteLinksSerializer;
