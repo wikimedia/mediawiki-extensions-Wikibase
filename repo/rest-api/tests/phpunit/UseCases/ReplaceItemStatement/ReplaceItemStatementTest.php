@@ -21,6 +21,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
+use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
 use Wikibase\Repo\RestApi\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\RestApi\Serialization\PropertyValuePairSerializer;
 use Wikibase\Repo\RestApi\Serialization\ReferenceDeserializer;
@@ -336,7 +337,7 @@ class ReplaceItemStatementTest extends TestCase {
 		$propertyValuePairDeserializer = new PropertyValuePairDeserializer(
 			WikibaseRepo::getEntityIdParser(),
 			$this->propertyDataTypeLookup,
-			WikibaseRepo::getDataTypeDefinitions()->getValueTypes(),
+			new DataTypeFactoryValueTypeLookup( WikibaseRepo::getDataTypeFactory() ),
 			WikibaseRepo::getDataValueDeserializer(),
 			WikibaseRepo::getDataTypeValidatorFactory()
 		);

@@ -23,6 +23,7 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Repo\DataTypeValidatorFactory;
+use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
 use Wikibase\Repo\RestApi\Serialization\InvalidFieldException;
 use Wikibase\Repo\RestApi\Serialization\MissingFieldException;
 use Wikibase\Repo\RestApi\Serialization\PropertyValuePairDeserializer;
@@ -350,7 +351,7 @@ class PropertyValuePairDeserializerTest extends TestCase {
 		return new PropertyValuePairDeserializer(
 			$entityIdParser,
 			$dataTypeLookup,
-			WikibaseRepo::getDataTypeDefinitions()->getValueTypes(),
+			new DataTypeFactoryValueTypeLookup( WikibaseRepo::getDataTypeFactory() ),
 			WikibaseRepo::getDataValueDeserializer(),
 			$this->dataTypeValidatorFactory
 		);
