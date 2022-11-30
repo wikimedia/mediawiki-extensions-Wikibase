@@ -15,8 +15,8 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\Repo\DataTypeValidatorFactory;
 use Wikibase\Repo\RestApi\Domain\Services\ValueTypeLookup;
+use Wikibase\Repo\RestApi\Validation\DataValueValidator;
 
 /**
  * @license GPL-2.0-or-later
@@ -27,20 +27,20 @@ class PropertyValuePairDeserializer {
 	private PropertyDataTypeLookup $dataTypeLookup;
 	private ValueTypeLookup $valueTypeLookup;
 	private DataValueDeserializer $dataValueDeserializer;
-	private DataTypeValidatorFactory $dataTypeValidatorFactory;
+	private DataValueValidator $dataValueValidator;
 
 	public function __construct(
 		EntityIdParser $entityIdParser,
 		PropertyDataTypeLookup $dataTypeLookup,
 		ValueTypeLookup $valueTypeLookup,
 		DataValueDeserializer $dataValueDeserializer,
-		DataTypeValidatorFactory $dataTypeValidatorFactory
+		DataValueValidator $dataValueValidator
 	) {
 		$this->entityIdParser = $entityIdParser;
 		$this->dataTypeLookup = $dataTypeLookup;
 		$this->valueTypeLookup = $valueTypeLookup;
 		$this->dataValueDeserializer = $dataValueDeserializer;
-		$this->dataTypeValidatorFactory = $dataTypeValidatorFactory;
+		$this->dataValueValidator = $dataValueValidator;
 	}
 
 	public function deserialize( array $serialization ): Snak {
@@ -135,12 +135,9 @@ class PropertyValuePairDeserializer {
 				break;
 		}
 
-		foreach ( $this->dataTypeValidatorFactory->getValidators( $dataTypeId ) as $validator ) {
-			$result = $validator->validate( $dataValue );
-			if ( !$result->isValid() ) {
-				$error = $result->getErrors()[0];
-				throw new InvalidFieldException( "[{$error->getCode()}] {$error->getText()}" );
-			}
+		$validationError = $this->dataValueValidator->validate( $dataTypeId, $dataValue );
+		if ( $validationError ) {
+			throw new InvalidFieldException( $validationError->getCode() );
 		}
 
 		return $dataValue;

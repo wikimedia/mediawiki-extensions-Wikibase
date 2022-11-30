@@ -13,6 +13,7 @@ use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedSerializationException
 use Wikibase\Repo\RestApi\Domain\Exceptions\PatchPathException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\PatchTestConditionFailedException;
 use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
+use Wikibase\Repo\RestApi\Infrastructure\DataTypeValidatorFactoryDataValueValidator;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffStatementPatcher;
 use Wikibase\Repo\RestApi\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\RestApi\Serialization\PropertyValuePairSerializer;
@@ -195,7 +196,9 @@ class JsonDiffStatementPatcherTest extends TestCase {
 			$this->propertyDataTypeLookup,
 			new DataTypeFactoryValueTypeLookup( WikibaseRepo::getDataTypeFactory() ),
 			WikibaseRepo::getDataValueDeserializer(),
-			WikibaseRepo::getDataTypeValidatorFactory()
+			new DataTypeValidatorFactoryDataValueValidator(
+				WikibaseRepo::getDataTypeValidatorFactory()
+			)
 		);
 		$statementDeserializer = new StatementDeserializer(
 			$propertyValuePairDeserializer,
