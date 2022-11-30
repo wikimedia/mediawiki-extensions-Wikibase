@@ -913,7 +913,7 @@ return call_user_func( function() {
 				],
 			],
 			'es6' => true,
-			'targets' => 'mobile',
+			'targets' => [ 'mobile', 'desktop' ],
 			'dependencies' => [
 				'wikibase.termbox.styles',
 				'wikibase.getLanguageNameByCode',
@@ -933,7 +933,9 @@ return call_user_func( function() {
 			'skinStyles' => [
 				'minerva' => '../../resources/wikibase/termbox/minerva.less',
 			],
-			'targets' => 'mobile'
+			'targets' => [
+				'mobile', 'desktop'
+			],
 		],
 
 		'wikibase.tainted-ref' => [
