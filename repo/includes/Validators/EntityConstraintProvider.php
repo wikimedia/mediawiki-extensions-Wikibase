@@ -18,22 +18,15 @@ use Wikibase\Repo\Store\SiteLinkConflictLookup;
  */
 class EntityConstraintProvider {
 
-	/**
-	 * @var SiteLinkConflictLookup
-	 */
-	private $siteLinkConflictLookup;
-
-	/**
-	 * @var EntityValidator
-	 */
-	private $labelUniquenessValidator;
+	private SiteLinkConflictLookup $siteLinkConflictLookup;
+	private TermValidatorFactory $termValidatorFactory;
 
 	public function __construct(
 		SiteLinkConflictLookup $siteLinkConflictLookup,
 		TermValidatorFactory $termValidatorFactory
 	) {
 		$this->siteLinkConflictLookup = $siteLinkConflictLookup;
-		$this->labelUniquenessValidator = $termValidatorFactory->getLabelUniquenessValidator( Property::ENTITY_TYPE );
+		$this->termValidatorFactory = $termValidatorFactory;
 
 		//TODO: Make validators configurable. Allow more types to register.
 	}
@@ -54,7 +47,7 @@ class EntityConstraintProvider {
 		}
 
 		if ( $entityType === Property::ENTITY_TYPE ) {
-			$validators[] = $this->labelUniquenessValidator;
+			$validators[] = $this->termValidatorFactory->getLabelUniquenessValidator( Property::ENTITY_TYPE );
 		}
 
 		return $validators;
