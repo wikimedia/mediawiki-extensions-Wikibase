@@ -3,20 +3,35 @@
 namespace Wikibase\Repo\RestApi\Validation;
 
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\Repo\RestApi\Serialization\StatementDeserializer;
 
 /**
  * @license GPL-2.0-or-later
  */
-interface StatementValidator {
+class StatementValidator {
 
 	public const CODE_INVALID = 'invalid-statement';
 
-	public function validate( array $statementSerialization ): ?ValidationError;
+	private StatementDeserializer $deserializer;
 
-	/**
-	 * Returns the Statement object which is deserialized during the validation.
-	 * This method only returns the validated Statement if the validation didn't error.
-	 */
-	public function getValidatedStatement(): ?Statement;
+	private ?Statement $deserializedStatement = null;
+
+	public function __construct( StatementDeserializer $deserializer ) {
+		$this->deserializer = $deserializer;
+	}
+
+	public function validate( array $statementSerialization ): ?ValidationError {
+		try {
+			$this->deserializedStatement = $this->deserializer->deserialize( $statementSerialization );
+		} catch ( \Exception $e ) {
+			return new ValidationError( self::CODE_INVALID );
+		}
+
+		return null;
+	}
+
+	public function getValidatedStatement(): ?Statement {
+		return $this->deserializedStatement;
+	}
 
 }

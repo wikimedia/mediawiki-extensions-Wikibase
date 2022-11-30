@@ -1,11 +1,10 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\DataAccess;
+namespace Wikibase\Repo\Tests\RestApi\Validation;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Repo\RestApi\DataAccess\StatementDeserializerStatementValidator;
 use Wikibase\Repo\RestApi\Serialization\InvalidFieldException;
 use Wikibase\Repo\RestApi\Serialization\SerializationException;
 use Wikibase\Repo\RestApi\Serialization\StatementDeserializer;
@@ -13,7 +12,7 @@ use Wikibase\Repo\RestApi\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Validation\ValidationError;
 
 /**
- * @covers \Wikibase\Repo\RestApi\DataAccess\StatementDeserializerStatementValidator
+ * @covers \Wikibase\Repo\RestApi\Validation\StatementDeserializerStatementValidator
  *
  * @group Wikibase
  *
@@ -78,8 +77,8 @@ class StatementDeserializerStatementValidatorTest extends TestCase {
 		$this->assertNull( $validator->getValidatedStatement() );
 	}
 
-	private function newValidator(): StatementDeserializerStatementValidator {
-		return new StatementDeserializerStatementValidator( $this->deserializer );
+	private function newValidator(): StatementValidator {
+		return new StatementValidator( $this->deserializer );
 	}
 
 }
