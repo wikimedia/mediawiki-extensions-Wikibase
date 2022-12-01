@@ -38,7 +38,7 @@ HTML;
 
 	$templates['wb-section-heading'] =
 <<<HTML
-<h2 class="wb-section-heading section-heading $3" dir="auto"><span class="mw-headline" id="$2">$1</span></h2>
+<h2 class="wb-section-heading section-heading $3" dir="auto" id="$2">$1</h2>
 HTML;
 
 	// empty toc to help MobileFrontend
