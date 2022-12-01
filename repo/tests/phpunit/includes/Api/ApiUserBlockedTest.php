@@ -102,7 +102,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 		yield [
 			'wbremoveclaims',
 			[
-				'claim' => [ [ 'self', 'getEntityClaimGUID' ], 'Berlin' ],
+				'claim' => [ [ self::class, 'getEntityClaimGUID' ], 'Berlin' ],
 			],
 			[ 'wikibase-api-failed-save', 'apierror-blocked', 'permissionserrors' ],
 		];
@@ -110,8 +110,8 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 		yield [
 			'wbremovequalifiers',
 			[
-				'claim' => [ [ 'self', 'getEntityClaimGUID' ], 'Berlin' ],
-				'qualifiers' => [ [ 'self', 'getEntityClaimQualifierHash' ], 'Berlin' ],
+				'claim' => [ [ self::class, 'getEntityClaimGUID' ], 'Berlin' ],
+				'qualifiers' => [ [ self::class, 'getEntityClaimQualifierHash' ], 'Berlin' ],
 			],
 			[ 'wikibase-api-failed-save', 'apierror-blocked', 'permissionserrors' ],
 		];
@@ -119,8 +119,8 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 		yield [
 			'wbremovereferences',
 			[
-				'statement' => [ [ 'self', 'getEntityClaimGUID' ], 'Berlin' ],
-				'references' => [ [ 'self', 'getEntityClaimReferenceHash' ], 'Berlin' ],
+				'statement' => [ [ self::class, 'getEntityClaimGUID' ], 'Berlin' ],
+				'references' => [ [ self::class, 'getEntityClaimReferenceHash' ], 'Berlin' ],
 			],
 			[ 'wikibase-api-failed-save', 'apierror-blocked', 'permissionserrors' ],
 		];
@@ -148,7 +148,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 		yield [
 			'wbsetclaim',
 			[
-				'claim' => [ [ 'self' , 'buildTestClaimJSON' ], 'Oslo' ],
+				'claim' => [ [ self::class , 'buildTestClaimJSON' ], 'Oslo' ],
 			],
 			[ 'wikibase-api-failed-save', 'apierror-blocked', 'permissionserrors' ],
 		];
@@ -156,7 +156,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 		yield [
 			'wbsetclaimvalue',
 			[
-				'claim' => [ [ 'self', 'getEntityClaimGUID' ], 'Berlin' ],
+				'claim' => [ [ self::class, 'getEntityClaimGUID' ], 'Berlin' ],
 				'value' => '"foobar"',
 				'snaktype' => 'value'
 			],
@@ -186,7 +186,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 		yield [
 			'wbsetqualifier',
 			[
-				'claim' => [ [ 'self', 'getEntityClaimGUID' ], 'Berlin' ],
+				'claim' => [ [ self::class, 'getEntityClaimGUID' ], 'Berlin' ],
 				'property' => [ [ EntityTestHelper::class, 'getId' ], 'StringProp' ],
 				'snaktype' => 'value',
 				'value' => '"baz"',
@@ -197,8 +197,8 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 		yield [
 			'wbsetreference',
 			[
-				'statement' => [ [ 'self', 'getEntityClaimGUID' ], 'Berlin' ],
-				'snaks' => [ [ 'self' , 'buildTestReferenceSnakJSON' ] ],
+				'statement' => [ [ self::class, 'getEntityClaimGUID' ], 'Berlin' ],
+				'snaks' => [ [ self::class , 'buildTestReferenceSnakJSON' ] ],
 			],
 			[ 'wikibase-api-failed-save', 'apierror-blocked', 'permissionserrors' ],
 		];
