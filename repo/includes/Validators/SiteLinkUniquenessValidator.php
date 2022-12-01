@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Validators;
 
 use ValueValidators\Error;
@@ -17,13 +19,17 @@ use Wikibase\Repo\Store\SiteLinkConflictLookup;
  */
 class SiteLinkUniquenessValidator implements EntityValidator {
 
-	/**
-	 * @var SiteLinkConflictLookup
-	 */
-	private $siteLinkConflictLookup;
+	private SiteLinkConflictLookup $siteLinkConflictLookup;
 
-	public function __construct( SiteLinkConflictLookup $siteLinkConflictLookup ) {
+	/** @var string[] */
+	private array $redirectBadgeItems;
+
+	public function __construct(
+		SiteLinkConflictLookup $siteLinkConflictLookup,
+		array $redirectBadgeItems
+	) {
 		$this->siteLinkConflictLookup = $siteLinkConflictLookup;
+		$this->redirectBadgeItems = $redirectBadgeItems;
 	}
 
 	/**
@@ -53,24 +59,23 @@ class SiteLinkUniquenessValidator implements EntityValidator {
 	 * @param array $conflict A record as returned by SiteLinkConflictLookup::getConflictsForItem()
 	 */
 	private function getConflictError( array $conflict ): Error {
+		$siteLink = new SiteLink( $conflict['siteId'], $conflict['sitePage'] );
 		if ( $conflict['itemId'] !== null ) {
+			$code = $this->redirectBadgeItems !== [] ?
+				'sitelink-conflict-redirects-supported' :
+				'sitelink-conflict';
 			return new UniquenessViolation(
 				$conflict['itemId'],
 				'SiteLink conflict',
-				'sitelink-conflict',
-				[
-					new SiteLink( $conflict['siteId'], $conflict['sitePage'] ),
-					$conflict['itemId'],
-				]
+				$code,
+				[ $siteLink, $conflict['itemId'] ]
 			);
 		} else {
 			return new UniquenessViolation(
 				null,
 				'SiteLink conflict with unknown item',
 				'sitelink-conflict-unknown',
-				[
-					new SiteLink( $conflict['siteId'], $conflict['sitePage'] ),
-				]
+				[ $siteLink ]
 			);
 		}
 	}

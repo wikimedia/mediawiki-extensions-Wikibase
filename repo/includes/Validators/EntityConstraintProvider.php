@@ -20,13 +20,17 @@ class EntityConstraintProvider {
 
 	private SiteLinkConflictLookup $siteLinkConflictLookup;
 	private TermValidatorFactory $termValidatorFactory;
+	/** @var string[] */
+	private array $redirectBadgeItems;
 
 	public function __construct(
 		SiteLinkConflictLookup $siteLinkConflictLookup,
-		TermValidatorFactory $termValidatorFactory
+		TermValidatorFactory $termValidatorFactory,
+		array $redirectBadgeItems
 	) {
 		$this->siteLinkConflictLookup = $siteLinkConflictLookup;
 		$this->termValidatorFactory = $termValidatorFactory;
+		$this->redirectBadgeItems = $redirectBadgeItems;
 
 		//TODO: Make validators configurable. Allow more types to register.
 	}
@@ -43,7 +47,10 @@ class EntityConstraintProvider {
 		$validators = [];
 
 		if ( $entityType === Item::ENTITY_TYPE ) {
-			$validators[] = new SiteLinkUniquenessValidator( $this->siteLinkConflictLookup );
+			$validators[] = new SiteLinkUniquenessValidator(
+				$this->siteLinkConflictLookup,
+				$this->redirectBadgeItems
+			);
 		}
 
 		if ( $entityType === Property::ENTITY_TYPE ) {
