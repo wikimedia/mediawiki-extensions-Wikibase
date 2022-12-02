@@ -11,7 +11,6 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
-use Wikibase\Repo\RestApi\DataAccess\StatementDeserializerStatementValidator;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\ItemRevision;
@@ -37,6 +36,7 @@ use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementVali
 use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\StatementIdValidator;
+use Wikibase\Repo\RestApi\Validation\StatementValidator;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -350,7 +350,7 @@ class ReplaceItemStatementTest extends TestCase {
 		return new ReplaceItemStatementValidator(
 			new ItemIdValidator(),
 			new StatementIdValidator( new ItemIdParser() ),
-			new StatementDeserializerStatementValidator( $statementDeserializer ),
+			new StatementValidator( $statementDeserializer ),
 			new EditMetadataValidator( \CommentStore::COMMENT_CHARACTER_LIMIT, self::ALLOWED_TAGS )
 		);
 	}

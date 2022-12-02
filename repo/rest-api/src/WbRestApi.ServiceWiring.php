@@ -6,7 +6,6 @@ use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\Repo\RestApi\DataAccess\MediaWikiEditEntityFactoryItemUpdater;
-use Wikibase\Repo\RestApi\DataAccess\StatementDeserializerStatementValidator;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemDataRetriever;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityRevisionLookupItemRevisionMetadataRetriever;
@@ -37,6 +36,7 @@ use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementVali
 use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\StatementIdValidator;
+use Wikibase\Repo\RestApi\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -47,7 +47,7 @@ return [
 		return new AddItemStatement(
 			new AddItemStatementValidator(
 				new ItemIdValidator(),
-				new StatementDeserializerStatementValidator( WbRestApi::getStatementDeserializer() ),
+				new StatementValidator( WbRestApi::getStatementDeserializer() ),
 				new EditMetadataValidator(
 					CommentStore::COMMENT_CHARACTER_LIMIT,
 					ChangeTags::listExplicitlyDefinedTags()
@@ -176,7 +176,7 @@ return [
 			new ReplaceItemStatementValidator(
 				new ItemIdValidator(),
 				new StatementIdValidator( new ItemIdParser() ),
-				new StatementDeserializerStatementValidator( WbRestApi::getStatementDeserializer() ),
+				new StatementValidator( WbRestApi::getStatementDeserializer() ),
 				new EditMetadataValidator(
 					CommentStore::COMMENT_CHARACTER_LIMIT,
 					ChangeTags::listExplicitlyDefinedTags()

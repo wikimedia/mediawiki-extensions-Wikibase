@@ -8,7 +8,6 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Tests\NewItem;
-use Wikibase\Repo\RestApi\DataAccess\StatementDeserializerStatementValidator;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\ItemRevision;
@@ -29,6 +28,7 @@ use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementValidator;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
+use Wikibase\Repo\RestApi\Validation\StatementValidator;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -229,7 +229,7 @@ class AddItemStatementTest extends \PHPUnit\Framework\TestCase {
 
 		return new AddItemStatementValidator(
 			new ItemIdValidator(),
-			new StatementDeserializerStatementValidator( $statementDeserializer ),
+			new StatementValidator( $statementDeserializer ),
 			new EditMetadataValidator(
 				\CommentStore::COMMENT_CHARACTER_LIMIT,
 				self::ALLOWED_TAGS
