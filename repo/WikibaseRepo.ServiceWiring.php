@@ -694,7 +694,8 @@ return [
 				),
 				WikibaseRepo::getBagOStuffSiteLinkConflictLookup( $services ),
 			] ),
-			WikibaseRepo::getTermValidatorFactory()
+			WikibaseRepo::getTermValidatorFactory( $services ),
+			WikibaseRepo::getSettings( $services )->getSetting( 'redirectBadgeItems' )
 		);
 	},
 

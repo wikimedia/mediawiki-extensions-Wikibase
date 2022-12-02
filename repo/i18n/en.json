@@ -168,6 +168,7 @@
 	"wikibase-validator-not-allowed": "Illegal value: $1",
 	"wikibase-validator-no-validators": "Forbidden",
 	"wikibase-validator-sitelink-conflict": "The link $1 is already used by Item $2. You may remove it from $2 if it does not belong there or merge the Items if they are about the exact same topic.",
+	"wikibase-validator-sitelink-conflict-redirects-supported": "The link $1 is already used by Item $2. You may remove it from $2 if it does not belong there or merge the Items if they are about the exact same topic. If the situation is more complex, please see [https://www.wikidata.org/wiki/Special:MyLanguage/Help:Sitelinks#Linking_to_Wikimedia_site_pages Help:Sitelinks].",
 	"wikibase-validator-sitelink-conflict-unknown": "The link $1 is also used by another Item that is currently being saved.",
 	"wikibase-validator-label-conflict": "Property $3 already has label \"$1\" associated with language code $2.",
 	"wikibase-validator-label-with-description-conflict": "Item $3 already has label \"$1\" associated with language code $2, using the same description text.",

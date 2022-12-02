@@ -49,7 +49,8 @@ class ChangeOpFactoryProviderTest extends \PHPUnit\Framework\TestCase {
 
 		$constraintProvider = new EntityConstraintProvider(
 			$this->mockProvider->getMockSiteLinkConflictLookup(),
-			$this->createMock( TermValidatorFactory::class )
+			$this->createMock( TermValidatorFactory::class ),
+			[]
 		);
 
 		return new ChangeOpFactoryProvider(

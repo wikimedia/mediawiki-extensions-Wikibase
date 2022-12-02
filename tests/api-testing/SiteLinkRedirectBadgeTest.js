@@ -193,7 +193,7 @@ describe( 'sitelink redirect behavior with badges', () => {
 
 			assert.strictEqual( error.code, 'failed-save' );
 			const sitelinkConflict = error.messages.find( ( message ) =>
-				message.name === 'wikibase-validator-sitelink-conflict' );
+				message.name === 'wikibase-validator-sitelink-conflict-redirects-supported' );
 			assert.isNotNull( sitelinkConflict );
 			assert.include( sitelinkConflict.parameters[ 1 ], itemLinkedToTarget );
 		} );
@@ -269,7 +269,7 @@ describe( 'sitelink redirect behavior with badges', () => {
 
 			assert.strictEqual( error.code, 'failed-save' );
 			const sitelinkConflict = error.messages.find( ( message ) =>
-				message.name === 'wikibase-validator-sitelink-conflict' );
+				message.name === 'wikibase-validator-sitelink-conflict-redirects-supported' );
 			assert.isNotNull( sitelinkConflict );
 			assert.include( sitelinkConflict.parameters[ 1 ], itemLinkedToTarget );
 		} );
@@ -329,7 +329,8 @@ describe( 'sitelink redirect behavior with badges', () => {
 				goodArticleBadgeId,
 			);
 			assert.strictEqual( error.code, 'failed-save' );
-			const sitelinkConflict = error.messages.find( ( message ) => message.name === 'wikibase-validator-sitelink-conflict' );
+			const sitelinkConflict = error.messages.find( ( message ) =>
+				message.name === 'wikibase-validator-sitelink-conflict-redirects-supported' );
 			assert.isNotNull( sitelinkConflict );
 			assert.include( sitelinkConflict.parameters[ 1 ], itemLinkedToTarget );
 		} );

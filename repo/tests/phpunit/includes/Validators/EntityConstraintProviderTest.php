@@ -34,7 +34,8 @@ class EntityConstraintProviderTest extends \PHPUnit\Framework\TestCase {
 			);
 		return new EntityConstraintProvider(
 			$this->createMock( SiteLinkConflictLookup::class ),
-			$termValidatorFactory
+			$termValidatorFactory,
+			[]
 		);
 	}
 

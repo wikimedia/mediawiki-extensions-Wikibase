@@ -6,9 +6,11 @@ namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\Store\BagOStuffSiteLinkConflictLookup;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
+use Wikibase\Repo\Validators\TermValidatorFactory;
 
 /**
  * @coversNothing
@@ -28,6 +30,10 @@ class EntityConstraintProviderTest extends ServiceWiringTestCase {
 			new EntityIdComposer( [] ) );
 		$this->mockService( 'WikibaseRepo.BagOStuffSiteLinkConflictLookup',
 			$this->createMock( BagOStuffSiteLinkConflictLookup::class ) );
+		$this->mockService( 'WikibaseRepo.TermValidatorFactory',
+			$this->createMock( TermValidatorFactory::class ) );
+		$this->mockService( 'WikibaseRepo.Settings',
+			new SettingsArray( [ 'redirectBadgeItems' => [] ] ) );
 
 		$this->assertInstanceOf(
 			EntityConstraintProvider::class,
