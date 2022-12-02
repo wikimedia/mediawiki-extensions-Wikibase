@@ -16,6 +16,7 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Repo\DataTypeValidatorFactory;
+use Wikibase\Repo\RestApi\Domain\Services\ValueTypeLookup;
 
 /**
  * @license GPL-2.0-or-later
@@ -24,20 +25,20 @@ class PropertyValuePairDeserializer {
 
 	private EntityIdParser $entityIdParser;
 	private PropertyDataTypeLookup $dataTypeLookup;
-	private array $dataTypeToValueTypeMap;
+	private ValueTypeLookup $valueTypeLookup;
 	private DataValueDeserializer $dataValueDeserializer;
 	private DataTypeValidatorFactory $dataTypeValidatorFactory;
 
 	public function __construct(
 		EntityIdParser $entityIdParser,
 		PropertyDataTypeLookup $dataTypeLookup,
-		array $dataTypeToValueTypeMap,
+		ValueTypeLookup $valueTypeLookup,
 		DataValueDeserializer $dataValueDeserializer,
 		DataTypeValidatorFactory $dataTypeValidatorFactory
 	) {
 		$this->entityIdParser = $entityIdParser;
 		$this->dataTypeLookup = $dataTypeLookup;
-		$this->dataTypeToValueTypeMap = $dataTypeToValueTypeMap;
+		$this->valueTypeLookup = $valueTypeLookup;
 		$this->dataValueDeserializer = $dataValueDeserializer;
 		$this->dataTypeValidatorFactory = $dataTypeValidatorFactory;
 	}
@@ -114,7 +115,7 @@ class PropertyValuePairDeserializer {
 			throw new MissingFieldException();
 		}
 
-		$dataValueType = $this->dataTypeToValueTypeMap[$dataTypeId];
+		$dataValueType = $this->valueTypeLookup->getValueType( $dataTypeId );
 		switch ( $dataValueType ) {
 			case 'wikibase-entityid':
 				$dataValue = $this->deserializeEntityIdValue( $valueSerialization['content'] );
