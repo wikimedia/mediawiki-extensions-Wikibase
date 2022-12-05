@@ -166,6 +166,7 @@
 	"wikibase-validator-not-allowed": "ערך בלתי־תקין: $1",
 	"wikibase-validator-no-validators": "אסור",
 	"wikibase-validator-sitelink-conflict": "הקישור $1 כבר משמש בפריט $2. אפשר להסיר אותו מהדף $2 אם אינו שייך לשם או אם זה בדיוק אותו הנושא.",
+	"wikibase-validator-sitelink-conflict-redirects-supported": "הקישור $1 כבר בשימוש בפריט $2. אפשר להסיר אותו מהפריט $2 אם הוא לא שייך לשם או למזג את הפריטים אם הם בדיוק באותו נושא. אם המצב מורכב יותר, ר' [https://www.wikidata.org/wiki/Special:MyLanguage/Help:Sitelinks#Linking_to_Wikimedia_site_pages Help:Sitelinks].",
 	"wikibase-validator-sitelink-conflict-unknown": "הקישור $1 משמש גם בפריט אחר שנשמר כעת.",
 	"wikibase-validator-label-conflict": "למאפיין $3 כבר יש תווית \"$1\" שמשויכת לקוד השפה $2.",
 	"wikibase-validator-label-with-description-conflict": "לפריט $3 כבר יש תווית \"$1\" שמשויכת לקוד השפה $2, שמשתמשת באותו הטקסט בתיאור.",

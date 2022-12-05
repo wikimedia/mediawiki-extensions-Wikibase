@@ -183,6 +183,7 @@
 	"wikibase-validator-not-allowed": "Ungültiger Wert: $1",
 	"wikibase-validator-no-validators": "Unzulässig",
 	"wikibase-validator-sitelink-conflict": "Der Link $1 wird bereits vom Objekt $2 verwendet. Du kannst ihn von $2 entfernen, falls er nicht dorthin gehört oder die Objekte zusammenführen, falls sie das gleiche Thema behandeln.",
+	"wikibase-validator-sitelink-conflict-redirects-supported": "Der Link $1 wird bereits von Objekt $2 verwendet. Du kannst ihn aus $2 entfernen, wenn er dort nicht hingehört, oder die Elemente zusammenführen, wenn sie genau dasselbe Thema betreffen. Wenn die Situation komplexer ist, lies bitte [https://www.wikidata.org/wiki/Special:MyLanguage/Help:Sitelinks#Linking_to_Wikimedia_site_pages Help:Sitelinks].",
 	"wikibase-validator-sitelink-conflict-unknown": "Der Link $1 wird auch von einem anderen Artikel verwendet, der gerade gespeichert wird.",
 	"wikibase-validator-label-conflict": "Die Eigenschaft $3 hat bereits die Bezeichnung „$1“, die dem Sprachcode $2 zugeordnet ist.",
 	"wikibase-validator-label-with-description-conflict": "Das Datenobjekt $3 hat bereits die Bezeichnung „$1“, die dem Sprachcode $2 zugeordnet ist, verwendet den gleichen Beschreibungstext.",

@@ -171,6 +171,7 @@
 	"wikibase-validator-not-allowed": "Valor inválido: $1",
 	"wikibase-validator-no-validators": "Proibido",
 	"wikibase-validator-sitelink-conflict": "A hiperligação $1 já está a ser utilizada pelo objeto $2. Pode removê-la de $2 se ela não pertence nele ou fundir os objetos se forem exatamente sobre o mesmo tópico.",
+	"wikibase-validator-sitelink-conflict-redirects-supported": "A hiperligação $1 já está a ser utilizada pelo elemento $2. Pode removê-la de $2 se ela não pertence nele ou fundir os elementos se forem exatamente sobre o mesmo tópico. Se a situação for mais complexa, consulte [https://www.wikidata.org/wiki/Special:MyLanguage/Help:Sitelinks#Linking_to_Wikimedia_site_pages Ajuda:Hiperligações de sites], por favor.",
 	"wikibase-validator-sitelink-conflict-unknown": "A hiperligação $1 já está a ser utilizada por outro elemento que está a ser gravado neste momento.",
 	"wikibase-validator-label-conflict": "A propriedade $3 já tem o rótulo \"$1\" associado ao código de língua $2.",
 	"wikibase-validator-label-with-description-conflict": "O objeto $3 já tem o rótulo \"$1\" associado ao código de língua $2, utilizando o mesmo texto de descrição.",

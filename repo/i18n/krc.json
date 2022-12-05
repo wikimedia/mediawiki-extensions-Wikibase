@@ -4,7 +4,8 @@
 			"Ernác",
 			"Iltever",
 			"Ladsgroup",
-			"Macofe"
+			"Macofe",
+			"Къарачайлы"
 		]
 	},
 	"wikibase-edit": "тюрлендир",
@@ -15,6 +16,10 @@
 	"wikibase-sitelinks-special": "Башха сайтла",
 	"wikibase-statementview-rank-normal": "Нормалы ранг",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|къайнакъ}}",
+	"wikibase-validator-sitelink-conflict-redirects-supported": "$1 джибериу алайсыз да $2 элемент бла хайырланады. Аны аныкъы тюл эсе $2 ичинден кетерирге боллукъсуз, неда бир тема эсе элементлени бирлешдирирге боллукъсуз. Болум къыйыныракъ эсе, бери къарагъыз [https://www.wikidata.org/wiki/Special:MyLanguage/Help:Sitelinks#Linking_to_Wikimedia_site_pages Help:Sitelinks].",
+	"wikibase-itembytitle-summary": "Special:ItemByTitle байланнган сайтда берилген бетде келишген элементни излеуде хайырланады.<br />Биринчи къырда \"{{int:wikibase-itembytitle-lookup-site}}\" сайтны тили бла кодун киргизтесиз.<br />Экинчи къырда \"{{int:wikibase-itembytitle-lookup-page}}\" байланнган сайтда чыкъгъаныча, бетни кескин атын белгилерге керекди.",
 	"wikibase-itemdisambiguation-lookup-language": "Тил код:",
-	"wikibase-modifyterm-language": "Тил код:"
+	"wikibase-modifyterm-language": "Тил код:",
+	"wikibase-listdatatypes-monolingualtext-body": "Башха тиллеге кёчюрюлмеген атыр ючюн литерал билгилени къыры. Сатырны бу типи бир кере белгиленеди эмда къайтарыб башха тилледе да хайырланады. Типли хайырланыу - джерли тилде джазылгъан географиялыкъ атла, къаллай болса да идентификатор, химиялыкъ формула неда латин илму ат.\n* тил — текст кесекни тилини белгилеу ючюн туура магъана\n* магъана — беглили тилге вариант сатырны туура магъанасы",
+	"wikibase-refresh-for-missing-datatype": "$1 билги тип локал клиент скриптде табылмагъанды. Бу эски болгъан кэшленнген скриптни эсеби болургъа болур. Проблеманы тюзетир ючюн, браузерни, локал кэшни атлатыб, зор бла джангыртыб кёрюгюз (браузерлени асламысында Ctrl-Shift-R неда Cmd-Shift-R)."
 }

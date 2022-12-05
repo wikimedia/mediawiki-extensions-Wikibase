@@ -157,6 +157,7 @@
 	"wikibase-validator-not-allowed": "Недопуштена вредност: $1",
 	"wikibase-validator-no-validators": "Забрането",
 	"wikibase-validator-sitelink-conflict": "Викиврската $1 веќе се користи за предметот $2. Можете да ја отстраните од $2 ако не припаѓа таму или да ги споите предметите кога се однесуваат на точно истата тема.",
+	"wikibase-validator-sitelink-conflict-redirects-supported": "Врската $1 веќе се користи во предметот $2. Можете да ја отстраните од $2 ако не припаѓа таму или да ги споите предметите ако се однесуваат на точно иста тема. Ако ситуацијата е посложена, погледајте [https://www.wikidata.org/wiki/Special:MyLanguage/Help:Sitelinks#Linking_to_Wikimedia_site_pages Помош:Викиврски].",
 	"wikibase-validator-sitelink-conflict-unknown": "Врската $1 се користи и од друг предмет кој во моментов се зачувува.",
 	"wikibase-validator-label-conflict": "Својството $3 веќе има натпис „$1“ поврзан со јазичниот код $2.",
 	"wikibase-validator-label-with-description-conflict": "Својството $3 веќе има натпис „$1“ поврзан со јазичниот код $2, користејќи го истиот описен текст.",

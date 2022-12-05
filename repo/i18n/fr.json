@@ -213,6 +213,7 @@
 	"wikibase-validator-not-allowed": "Valeur interdite : $1",
 	"wikibase-validator-no-validators": "Interdit",
 	"wikibase-validator-sitelink-conflict": "Le lien $1 est déjà utilisé par l’élément $2. Vous pouvez le supprimer de $2 s’il n’a rien à faire là, ou bien fusionner les éléments s’ils concernent exactement le même sujet.",
+	"wikibase-validator-sitelink-conflict-redirects-supported": "Le lien $1 est déjà utilisé par l’élément $2. Vous pouvez le supprimer de $2 s’il ne convient pas là, ou bien fusionner les éléments s’ils traitent exactement du même sujet. Si la situation est plus complexe, veuillez consulter [https://www.wikidata.org/wiki/Special:MyLanguage/Help:Sitelinks#Lier_une_page_d’un_site_Wikimédia Help:Liens de sites].",
 	"wikibase-validator-sitelink-conflict-unknown": "Le lien $1 est également utilisé par un autre élément qui est en cours de sauvegarde.",
 	"wikibase-validator-label-conflict": "La propriété $3 a déjà un libellé « $1 » associé au code de langue $2.",
 	"wikibase-validator-label-with-description-conflict": "L’élément $3 a déjà le libellé « $1 » associé au code de langue $2, qui utilise exactement le même texte descriptif.",
