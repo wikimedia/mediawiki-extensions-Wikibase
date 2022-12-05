@@ -50,7 +50,10 @@
 			"아라",
 			"Ajeje Brazorf",
 			"Lucas Werkmeister",
-			"Yupik"
+			"Yupik",
+			"Eleassar",
+			"Winston Sung",
+			"Woytecr"
 		]
 	},
 	"wikibase-desc": "{{desc|name=Wikibase|url=https://www.mediawiki.org/wiki/Extension:Wikibase}}\nSee also [[d:Wikidata:Glossary#Wikidata|Wikidata]] in the Wikidata glossary.\n\n\"Structured\" refers to \"data\", not to \"repository\".",
@@ -199,7 +202,7 @@
 	"wikibase-validator-unknown-unit": "Input validation error when the value has an unknown unit.\n\nParameters:\n* $1 - the unknown unit\n{{Related|Wikibase-validator}}",
 	"wikibase-validator-not-allowed": "Input validation error when the given value is not found in the known list of allowed values.\n\nParameters:\n* $1 - the illegal value\n{{Related|Wikibase-validator}}",
 	"wikibase-validator-no-validators": "Input validation error when there are no validators that can pass (that is, the validation always fails, per configuration).\n\n{{Related|Wikibase-validator}}\n{{Identical|Forbidden}}",
-	"wikibase-validator-sitelink-conflict": "Error message shown when an item contains a sitelink already used by another item.\n\nParameters:\n* $1 - an external wiki link to the sitelink's target\n* $2 - a local wiki link to the conflicting item.",
+	"wikibase-validator-sitelink-conflict": "Error message shown when an item contains a sitelink already used by another item. This message also has the variation {{msg-mw|wikibase-validator-sitelink-conflict-redirects-supported}}.\n\nParameters:\n* $1 - an external wiki link to the sitelink's target\n* $2 - a local wiki link to the conflicting item.",
 	"wikibase-validator-label-conflict": "Error message shown when a user tries to save a property that has a non-unique label.\n\nParameters:\n* $1 - label text\n* $2 - the label's language code\n* $3 - the id of the property that already has the label\nSee also:\n* {{msg-mw|Wikibase-validator-label-with-description-conflict}}",
 	"wikibase-validator-label-with-description-conflict": "Error message shown when a user tries to save an item that has a non-unique label+description pair.\n\nParameters:\n* $1 - label text\n* $2 - the label's language code\n* $3 - the id of the item that already has the label and the description\nSee also:\n* {{msg-mw|Wikibase-validator-label-conflict}}",
 	"wikibase-validator-label-equals-description": "Error message shown when a user tries to save an item that has exactly the same label and description.\n\nParameters:\n* $1 - language code where the label and description are the same.",

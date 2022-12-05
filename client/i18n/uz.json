@@ -38,6 +38,7 @@
 	"entityusage": "Obyekt foydalanilishi",
 	"wikibase-entityusage-submit": "Sahifalarni koʻrsatish",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} bandi identifikatori",
+	"wikibase-pageinfo-entity-id-none": "Hech qaysi",
 	"wikibase-pageinfo-description-local": "Mahalliy tavsif",
 	"wikibase-pageinfo-description-central": "Markaziy tavsif",
 	"wikibase-pageinfo-entity-usage": "Bu sahifada foydalanilgan {{WBREPONAME}} obyektlari",
@@ -51,6 +52,12 @@
 	"wikibase-sitelinks-sitename-columnheading": "Til",
 	"wikibase-sitelinks-link-columnheading": "Bogʻlangan sahifa",
 	"notification-header-page-connection": "<strong>$3</strong> sahifasi oʻz mavzusiga doir maʼlumotlarni oʻz ichiga olgan {{PLURAL:$4|-1={{WBREPONAME}} bandi|$4 {{WBREPONAME}} bandi}} bilan {{GENDER:$2|bogʻlandi}}.",
+	"notification-link-text-view-item": "Bandni {{GENDER:$1|koʻrish}}",
 	"wikibase-client-data-bridge-permissions-error-info": "Batafsil tafsilotlar",
-	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Kirmasdan turib tahrirlash"
+	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Kirmasdan turib tahrirlash",
+	"wikibase-client-data-bridge-anonymous-edit-warning-login": "Kirish / Roʻyxatdan oʻtish",
+	"wikibase-client-data-bridge-error-reload-bridge": "Qayta yuklash",
+	"wikibase-client-data-bridge-error-reload-page": "Sahifani qayta yuklash",
+	"wikibase-client-data-bridge-saving-error-assertuser-publish": "Hisobga kirmasdan turib chop etish",
+	"wikibase-client-data-bridge-saving-error-assertuser-save": "Hisobga kirmasdan turib saqlash"
 }

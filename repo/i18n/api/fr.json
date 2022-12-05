@@ -17,7 +17,8 @@
 			"Wladek92",
 			"Yasten",
 			"Ajeje Brazorf",
-			"Pamputt"
+			"Pamputt",
+			"Cigaryno"
 		]
 	},
 	"apihelp-wbavailablebadges-description": "Recherche les éléments de badge disponibles.",
@@ -228,7 +229,7 @@
 	"apihelp-wbsetaliases-param-summary": "Résumé pour la modification.\nSera préfixé par un commentaire généré automatiquement. La taille limite du commentaire automatique avec le résumé est de 260 caractères. Notez bien que tout ce qui dépassera cette limite sera tronqué.",
 	"apihelp-wbsetaliases-param-bot": "Marquer cette modification comme faite par robot. Cette marque d’URL sera respectée uniquement si l’utilisateur appartient au groupe « {{int:group-bot}} ».",
 	"apihelp-wbsetaliases-param-add": "Liste des alias à ajouter (peut être combiné avec des <var>remove</var>)",
-	"apihelp-wbsetaliases-param-remove": "Liste des alias à enlever (peut être combiné avec <var>add</var>)",
+	"apihelp-wbsetaliases-param-remove": "Liste des alias à retirer (peut être combiné avec <var>add</var>)",
 	"apihelp-wbsetaliases-param-set": "Une liste d'alias qui remplacera la liste actuelle (les éléments de cette liste ne peuvent être combinés ni avec <var>add</var> ni avec <var>remove</var>)",
 	"apihelp-wbsetaliases-param-language": "La langue pour laquelle définir les alias",
 	"apihelp-wbsetaliases-param-tags": "Modifier les balises à appliquer à la version.",
