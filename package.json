@@ -36,7 +36,7 @@
 		"eslint-config-wikimedia": "^0.16.2",
 		"eslint-plugin-compat": "^3.8.0",
 		"graphql": "^15.0.0",
-		"grunt": "1.4.1",
+		"grunt": "1.5.3",
 		"grunt-banana-checker": "0.9.0",
 		"grunt-eslint": "23.0.0",
 		"grunt-stylelint": "0.15.0",
