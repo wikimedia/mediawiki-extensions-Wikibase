@@ -592,6 +592,7 @@
 		"Wikibase\\Repo\\Tests\\Maintenance\\": "repo/tests/phpunit/maintenance/",
 		"Wikibase\\Repo\\Tests\\Unit\\": "repo/tests/phpunit/unit/",
 		"Wikibase\\Repo\\Tests\\RestApi\\": "repo/rest-api/tests/phpunit/",
+		"Wikibase\\Repo\\Tests\\RestApi\\Architecture\\": "repo/rest-api/tests/architecture/",
 		"Wikibase\\Lib\\Tests\\": "lib/tests/phpunit/",
 		"Wikibase\\Lib\\Tests\\Changes\\": "lib/packages/wikibase/changes/tests/",
 		"Wikibase\\DataModel\\Fixtures\\": "lib/packages/wikibase/data-model/tests/fixtures/",
