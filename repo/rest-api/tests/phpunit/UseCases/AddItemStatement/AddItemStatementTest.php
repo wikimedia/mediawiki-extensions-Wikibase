@@ -17,6 +17,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
+use Wikibase\Repo\RestApi\Infrastructure\DataTypeValidatorFactoryDataValueValidator;
 use Wikibase\Repo\RestApi\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\RestApi\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\RestApi\Serialization\StatementDeserializer;
@@ -219,7 +220,9 @@ class AddItemStatementTest extends \PHPUnit\Framework\TestCase {
 			$this->createStub( PropertyDataTypeLookup::class ),
 			new DataTypeFactoryValueTypeLookup( WikibaseRepo::getDataTypeFactory() ),
 			WikibaseRepo::getDataValueDeserializer(),
-			WikibaseRepo::getDataTypeValidatorFactory()
+			new DataTypeValidatorFactoryDataValueValidator(
+				WikibaseRepo::getDataTypeValidatorFactory()
+			)
 		);
 
 		$statementDeserializer = new StatementDeserializer(

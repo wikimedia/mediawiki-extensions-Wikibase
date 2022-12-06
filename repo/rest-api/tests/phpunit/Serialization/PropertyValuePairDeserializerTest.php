@@ -24,6 +24,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Repo\DataTypeValidatorFactory;
 use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
+use Wikibase\Repo\RestApi\Infrastructure\DataTypeValidatorFactoryDataValueValidator;
 use Wikibase\Repo\RestApi\Serialization\InvalidFieldException;
 use Wikibase\Repo\RestApi\Serialization\MissingFieldException;
 use Wikibase\Repo\RestApi\Serialization\PropertyValuePairDeserializer;
@@ -151,7 +152,7 @@ class PropertyValuePairDeserializerTest extends TestCase {
 					'type' => 'value',
 					'content' => [
 						'latitude' => 100,
-						'longitude' => 100,
+						'longitude' => 100
 					],
 				],
 				'property' => [
@@ -353,7 +354,7 @@ class PropertyValuePairDeserializerTest extends TestCase {
 			$dataTypeLookup,
 			new DataTypeFactoryValueTypeLookup( WikibaseRepo::getDataTypeFactory() ),
 			WikibaseRepo::getDataValueDeserializer(),
-			$this->dataTypeValidatorFactory
+			new DataTypeValidatorFactoryDataValueValidator( $this->dataTypeValidatorFactory )
 		);
 	}
 

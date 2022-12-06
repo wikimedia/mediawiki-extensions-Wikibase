@@ -11,6 +11,7 @@ use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityRevisionLookupItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
+use Wikibase\Repo\RestApi\Infrastructure\DataTypeValidatorFactoryDataValueValidator;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatchValidator;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffStatementPatcher;
@@ -206,7 +207,9 @@ return [
 			WikibaseRepo::getPropertyDataTypeLookup( $services ),
 			new DataTypeFactoryValueTypeLookup( WikibaseRepo::getDataTypeFactory( $services ) ),
 			WikibaseRepo::getDataValueDeserializer( $services ),
-			WikibaseRepo::getDataTypeValidatorFactory( $services )
+			new DataTypeValidatorFactoryDataValueValidator(
+				WikibaseRepo::getDataTypeValidatorFactory( $services )
+			)
 		);
 		return new StatementDeserializer(
 			$propertyValuePairDeserializer,
