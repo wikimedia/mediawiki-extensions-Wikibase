@@ -62,6 +62,8 @@ class PropertyValuePairDeserializer {
 			case 'value':
 				$dataValue = $this->deserializeValue( $dataTypeId, $serialization['value'] );
 				return new PropertyValueSnak( $propertyId, $dataValue );
+			default: // should be unreachable because of prior validation
+				throw new \LogicException( 'value type must be one of "value", "novalue", "somevalue".' );
 		}
 	}
 
