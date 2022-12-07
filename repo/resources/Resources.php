@@ -277,8 +277,7 @@ return call_user_func( function() {
 			'packageFiles' => [
 				'wikibase.vector.searchClient.js',
 			],
-			'messages' => [
-			]
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		/* Wikibase special pages */
