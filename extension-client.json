@@ -347,6 +347,7 @@
 	},
 	"ResourceModules": {
 		"wikibase.client.init": {
+			"targets": [ "desktop", "mobile" ],
 			"skinStyles": {
 				"modern": "wikibase.client.css",
 				"monobook": "wikibase.client.css",
