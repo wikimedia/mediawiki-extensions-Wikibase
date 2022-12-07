@@ -23,7 +23,7 @@
 	"apihelp-query+wbentityusage-param-limit": "Combien d’utilisations d'entités renvoyer.",
 	"apihelp-query+wbentityusage-example-simple": "Obtenir les entités utilisées dans la page <kbd>Main Page</kbd>.",
 	"apihelp-query+wblistentityusage-description": "Retourne toutes les pages qui utilisent les identifiants d'entité donnés.",
-	"apihelp-query+wblistentityusage-summary": "Retourne toutes les pages qui utilisent les ID d'entités.",
+	"apihelp-query+wblistentityusage-summary": "Retourne toutes les pages qui utilisent les identifiants d’entités donnés.",
 	"apihelp-query+wblistentityusage-param-prop": "Propriétés à ajouter au résultat.",
 	"apihelp-query+wblistentityusage-paramvalue-prop-url": "Si activé, l’URL de l’entité sera ajoutée au résultat.",
 	"apihelp-query+wblistentityusage-param-aspect": "Ne retourner que les identificateurs d'entités qui utilisaient cet aspect.",
