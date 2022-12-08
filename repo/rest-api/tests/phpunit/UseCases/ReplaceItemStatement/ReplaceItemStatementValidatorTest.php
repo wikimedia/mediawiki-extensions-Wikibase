@@ -8,7 +8,6 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Statement\StatementGuid;
-use Wikibase\Repo\RestApi\DataAccess\StatementDeserializerStatementValidator;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementRequest;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementValidator;
 use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
@@ -27,7 +26,7 @@ use Wikibase\Repo\RestApi\Validation\ValidationError;
 class ReplaceItemStatementValidatorTest extends TestCase {
 
 	/**
-	 * @var MockObject|StatementDeserializerStatementValidator
+	 * @var MockObject|StatementValidator
 	 */
 	private $statementValidator;
 

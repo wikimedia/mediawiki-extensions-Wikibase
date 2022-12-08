@@ -12,13 +12,13 @@ use Wikibase\Repo\RestApi\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Validation\ValidationError;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Validation\StatementDeserializerStatementValidator
+ * @covers \Wikibase\Repo\RestApi\Validation\StatementValidator
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class StatementDeserializerStatementValidatorTest extends TestCase {
+class StatementValidatorTest extends TestCase {
 
 	/**
 	 * @var MockObject|StatementDeserializer
