@@ -5,8 +5,8 @@ namespace Wikibase\Repo\Tests\RestApi\Infrastructure;
 use Generator;
 use PHPUnit\Framework\TestCase;
 use Swaggest\JsonDiff\JsonDiff;
-use Wikibase\Repo\RestApi\Domain\Services\JsonPatchValidator;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatchValidator;
+use Wikibase\Repo\RestApi\Validation\JsonPatchValidator;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatchValidator

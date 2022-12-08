@@ -7,7 +7,7 @@ use Swaggest\JsonDiff\InvalidFieldTypeException;
 use Swaggest\JsonDiff\JsonPatch;
 use Swaggest\JsonDiff\MissingFieldException;
 use Swaggest\JsonDiff\UnknownOperationException;
-use Wikibase\Repo\RestApi\Domain\Services\JsonPatchValidator;
+use Wikibase\Repo\RestApi\Validation\JsonPatchValidator;
 use Wikibase\Repo\RestApi\Validation\ValidationError;
 
 /**

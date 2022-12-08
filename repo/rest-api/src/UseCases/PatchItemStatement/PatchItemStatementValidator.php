@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\RestApi\UseCases\PatchItemStatement;
 
-use Wikibase\Repo\RestApi\Domain\Services\JsonPatchValidator;
 use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
+use Wikibase\Repo\RestApi\Validation\JsonPatchValidator;
 use Wikibase\Repo\RestApi\Validation\StatementIdValidator;
 use Wikibase\Repo\RestApi\Validation\ValidationError;
 
