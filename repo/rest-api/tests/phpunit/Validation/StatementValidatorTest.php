@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Validation;
 
+use Generator;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Statement\Statement;
@@ -31,13 +32,35 @@ class StatementValidatorTest extends TestCase {
 		$this->deserializer = $this->createStub( StatementDeserializer::class );
 	}
 
-	public function testGivenInvalidStatementSerialization_validateReturnsValidationError(): void {
-		$this->deserializer->method( 'deserialize' )->willThrowException( new SerializationException() );
+	/**
+	 * @dataProvider deserializationErrorProvider
+	 */
+	public function testGivenInvalidStatementSerialization_validateReturnsValidationError(
+		SerializationException $exception,
+		string $expectedErrorCode,
+		array $expectedContext
+	): void {
+		$this->deserializer->method( 'deserialize' )->willThrowException( $exception );
 
 		$error = $this->newValidator()->validate( [ 'invalid' => 'serialization' ] );
 
 		$this->assertInstanceOf( ValidationError::class, $error );
-		$this->assertSame( StatementValidator::CODE_INVALID, $error->getCode() );
+		$this->assertSame( $expectedErrorCode, $error->getCode() );
+		$this->assertSame( $expectedContext, $error->getContext() );
+	}
+
+	public function deserializationErrorProvider(): Generator {
+		yield 'generic exception' => [
+			new SerializationException(),
+			StatementValidator::CODE_INVALID,
+			[],
+		];
+
+		yield 'invalid field exception' => [
+			new InvalidFieldException( 'some-field', 'some-value' ),
+			StatementValidator::CODE_INVALID_FIELD,
+			[ 'field' => 'some-field', 'value' => 'some-value' ],
+		];
 	}
 
 	public function testGetValidatedStatement(): void {
@@ -73,7 +96,7 @@ class StatementValidatorTest extends TestCase {
 		$error = $validator->validate( $serialization );
 
 		$this->assertInstanceOf( ValidationError::class, $error );
-		$this->assertSame( StatementValidator::CODE_INVALID, $error->getCode() );
+		$this->assertSame( StatementValidator::CODE_INVALID_FIELD, $error->getCode() );
 		$this->assertNull( $validator->getValidatedStatement() );
 	}
 

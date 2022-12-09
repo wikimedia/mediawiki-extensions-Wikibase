@@ -228,6 +228,22 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 			assert.strictEqual( response.header[ 'content-language' ], 'en' );
 			assert.strictEqual( response.body.code, 'invalid-statement-data' );
 		} );
+
+		it( 'invalid statement field', async () => {
+			const invalidField = 'rank';
+			const invalidValue = 'not-a-valid-rank';
+			const invalidStatement = { ...testStatement };
+			invalidStatement[ invalidField ] = invalidValue;
+
+			const response = await newAddItemStatementRequestBuilder( testItemId, invalidStatement )
+				.assertInvalidRequest()
+				.makeRequest();
+
+			assert.strictEqual( response.status, 400 );
+			assert.strictEqual( response.body.code, 'statement-data-invalid-field' );
+			assert.deepEqual( response.body.context, { path: invalidField, value: invalidValue } );
+			assert.include( response.body.message, invalidField );
+		} );
 	} );
 
 	describe( '404 error response', () => {

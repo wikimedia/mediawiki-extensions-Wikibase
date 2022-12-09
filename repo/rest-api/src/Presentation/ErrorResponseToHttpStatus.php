@@ -18,6 +18,7 @@ class ErrorResponseToHttpStatus {
 		ErrorResponse::COMMENT_TOO_LONG => 400,
 		ErrorResponse::INVALID_EDIT_TAG => 400,
 		ErrorResponse::INVALID_STATEMENT_DATA => 400,
+		ErrorResponse::INVALID_STATEMENT_DATA_FIELD => 400,
 		ErrorResponse::INVALID_OPERATION_CHANGED_STATEMENT_ID => 400,
 		ErrorResponse::INVALID_OPERATION_CHANGED_PROPERTY => 400,
 		ErrorResponse::INVALID_PATCH => 400,

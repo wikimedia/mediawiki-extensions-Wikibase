@@ -335,6 +335,24 @@ describe( 'PUT statement tests', () => {
 					assert.strictEqual( response.body.expectedType, 'object' );
 				} );
 
+				it( 'invalid statement field', async () => {
+					const statementSerialization = entityHelper.newStatementWithRandomStringValue( testPropertyId );
+					const invalidField = 'rank';
+					const invalidValue = 'not-a-valid-rank';
+					statementSerialization[ invalidField ] = invalidValue;
+
+					const response = await newReplaceRequestBuilder(
+						testItemId,
+						testStatementId,
+						statementSerialization
+					).assertInvalidRequest().makeRequest();
+
+					assert.strictEqual( response.status, 400 );
+					assert.strictEqual( response.body.code, 'statement-data-invalid-field' );
+					assert.deepEqual( response.body.context, { path: invalidField, value: invalidValue } );
+					assert.include( response.body.message, invalidField );
+				} );
+
 			} );
 
 			describe( '404 error response', () => {
