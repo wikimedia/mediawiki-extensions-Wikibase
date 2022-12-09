@@ -9,6 +9,7 @@ use DataValues\TimeValue;
 use Generator;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Throwable;
 use ValueValidators\Result;
 use ValueValidators\ValueValidator;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -28,6 +29,7 @@ use Wikibase\Repo\RestApi\Infrastructure\DataTypeValidatorFactoryDataValueValida
 use Wikibase\Repo\RestApi\Serialization\InvalidFieldException;
 use Wikibase\Repo\RestApi\Serialization\MissingFieldException;
 use Wikibase\Repo\RestApi\Serialization\PropertyValuePairDeserializer;
+use Wikibase\Repo\RestApi\Serialization\SerializationException;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -175,16 +177,20 @@ class PropertyValuePairDeserializerTest extends TestCase {
 	/**
 	 * @dataProvider invalidSerializationProvider
 	 */
-	public function testDeserializationErrors( string $expectedException, array $serialization ): void {
+	public function testDeserializationErrors( SerializationException $expectedException, array $serialization ): void {
 		$this->dataTypeValidatorFactory = WikibaseRepo::getDataTypeValidatorFactory();
-		$this->expectException( $expectedException );
 
-		$this->newDeserializer()->deserialize( $serialization );
+		try {
+			$this->newDeserializer()->deserialize( $serialization );
+			$this->fail( 'Expected exception was not thrown.' );
+		} catch ( Throwable $e ) {
+			$this->assertEquals( $expectedException, $e );
+		}
 	}
 
 	public function invalidSerializationProvider(): Generator {
 		yield 'invalid value field type' => [
-			InvalidFieldException::class,
+			new InvalidFieldException( 'value', 42 ),
 			[
 				'value' => 42,
 				'property' => [
@@ -194,7 +200,7 @@ class PropertyValuePairDeserializerTest extends TestCase {
 		];
 
 		yield 'invalid value type field' => [
-			InvalidFieldException::class,
+			new InvalidFieldException( 'type', 'not-a-value-type' ),
 			[
 				'value' => [ 'content' => 'I am goat', 'type' => 'not-a-value-type' ],
 				'property' => [
@@ -204,7 +210,7 @@ class PropertyValuePairDeserializerTest extends TestCase {
 		];
 
 		yield 'invalid property field type' => [
-			InvalidFieldException::class,
+			new InvalidFieldException( 'property', 42 ),
 			[
 				'value' => [ 'type' => 'novalue' ],
 				'property' => 42,
@@ -212,7 +218,7 @@ class PropertyValuePairDeserializerTest extends TestCase {
 		];
 
 		yield 'invalid property id field' => [
-			InvalidFieldException::class,
+			new InvalidFieldException( 'id', 'not-a-property-id' ),
 			[
 				'value' => [ 'type' => 'novalue' ],
 				'property' => [ 'id' => 'not-a-property-id' ],
@@ -220,7 +226,7 @@ class PropertyValuePairDeserializerTest extends TestCase {
 		];
 
 		yield 'invalid value type field type' => [
-			InvalidFieldException::class,
+			new InvalidFieldException( 'type', true ),
 			[
 				'value' => [ 'type' => true ],
 				'property' => [
@@ -230,7 +236,7 @@ class PropertyValuePairDeserializerTest extends TestCase {
 		];
 
 		yield 'invalid value content field for string data-type' => [
-			InvalidFieldException::class,
+			new InvalidFieldException( 'content', 42 ),
 			[
 				'value' => [ 'type' => 'value', 'content' => 42 ],
 				'property' => [
@@ -240,11 +246,11 @@ class PropertyValuePairDeserializerTest extends TestCase {
 		];
 
 		yield 'invalid value content field for url data-type' => [
-			InvalidFieldException::class,
+			new InvalidFieldException( 'content', 'not-a-url' ),
 			[
 				'value' => [
 					'type' => 'value',
-					'content' => "valid 'sting' ValueType but not a valid 'url' Property data-type"
+					'content' => 'not-a-url',
 				],
 				'property' => [
 					'id' => self::URL_PROPERTY_ID,
@@ -253,7 +259,7 @@ class PropertyValuePairDeserializerTest extends TestCase {
 		];
 
 		yield 'property id is a valid item id' => [
-			InvalidFieldException::class,
+			new InvalidFieldException( 'id', 'Q123' ),
 			[
 				'value' => [ 'type' => 'novalue' ],
 				'property' => [ 'id' => 'Q123' ],
@@ -261,7 +267,7 @@ class PropertyValuePairDeserializerTest extends TestCase {
 		];
 
 		yield 'property does not exist' => [
-			InvalidFieldException::class,
+			new InvalidFieldException( 'id', 'P666' ),
 			[
 				'value' => [ 'type' => 'novalue' ],
 				'property' => [ 'id' => 'P666' ],
@@ -269,7 +275,7 @@ class PropertyValuePairDeserializerTest extends TestCase {
 		];
 
 		yield 'missing value field' => [
-			MissingFieldException::class,
+			new MissingFieldException(),
 			[
 				'property' => [
 					'id' => self::STRING_PROPERTY_ID,
@@ -278,7 +284,7 @@ class PropertyValuePairDeserializerTest extends TestCase {
 		];
 
 		yield 'missing value type field' => [
-			MissingFieldException::class,
+			new MissingFieldException(),
 			[
 				'value' => [ 'content' => 'I am goat' ],
 				'property' => [
@@ -288,7 +294,7 @@ class PropertyValuePairDeserializerTest extends TestCase {
 		];
 
 		yield 'missing content field' => [
-			MissingFieldException::class,
+			new MissingFieldException(),
 			[
 				'value' => [ 'type' => 'value' ],
 				'property' => [
@@ -298,14 +304,14 @@ class PropertyValuePairDeserializerTest extends TestCase {
 		];
 
 		yield 'missing property field' => [
-			MissingFieldException::class,
+			new MissingFieldException(),
 			[
 				'value' => [ 'type' => 'novalue' ],
 			]
 		];
 
 		yield 'missing property id field' => [
-			MissingFieldException::class,
+			new MissingFieldException(),
 			[
 				'value' => [ 'type' => 'novalue' ],
 				'property' => [],

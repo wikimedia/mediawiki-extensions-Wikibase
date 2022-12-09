@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\RestApi\Serialization;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
+use Throwable;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
@@ -11,6 +12,7 @@ use Wikibase\Repo\RestApi\Serialization\InvalidFieldException;
 use Wikibase\Repo\RestApi\Serialization\MissingFieldException;
 use Wikibase\Repo\RestApi\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\RestApi\Serialization\ReferenceDeserializer;
+use Wikibase\Repo\RestApi\Serialization\SerializationException;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Serialization\ReferenceDeserializer
@@ -60,25 +62,28 @@ class ReferenceDeserializerTest extends TestCase {
 	/**
 	 * @dataProvider invalidSerializationProvider
 	 */
-	public function testDeserializationErrors( string $expectedException, array $serialization ): void {
-		$this->expectException( $expectedException );
-
-		$this->newDeserializer()->deserialize( $serialization );
+	public function testDeserializationErrors( SerializationException $expectedException, array $serialization ): void {
+		try {
+			$this->newDeserializer()->deserialize( $serialization );
+			$this->fail( 'Expected exception was not thrown.' );
+		} catch ( Throwable $e ) {
+			$this->assertEquals( $expectedException, $e );
+		}
 	}
 
 	public function invalidSerializationProvider(): Generator {
 		yield 'missing parts' => [
-			MissingFieldException::class,
+			new MissingFieldException(),
 			[]
 		];
 
 		yield 'invalid parts type' => [
-			InvalidFieldException::class,
+			new InvalidFieldException( 'parts', 'potato' ),
 			[ 'parts' => 'potato' ],
 		];
 
 		yield 'invalid parts item type' => [
-			InvalidFieldException::class,
+			new InvalidFieldException( 'parts', [ 'potato' ] ),
 			[ 'parts' => [ 'potato' ] ],
 		];
 	}

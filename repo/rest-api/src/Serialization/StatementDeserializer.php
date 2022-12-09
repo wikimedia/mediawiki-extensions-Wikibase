@@ -23,31 +23,36 @@ class StatementDeserializer {
 	}
 
 	public function deserialize( array $serialization ): Statement {
-		$id = $serialization['id'] ?? null;
-		$qualifiers = $serialization['qualifiers'] ?? [];
-		$references = $serialization['references'] ?? [];
-		$rank = $serialization['rank'] ?? StatementSerializer::RANK_LABELS[Statement::RANK_NORMAL];
+		$serialization['id'] ??= null;
+		$serialization['qualifiers'] ??= [];
+		$serialization['references'] ??= [];
+		$serialization['rank'] ??= StatementSerializer::RANK_LABELS[Statement::RANK_NORMAL];
 
-		if ( !is_string( $id ) && $id !== null
-			|| !in_array( $rank, StatementSerializer::RANK_LABELS, true )
-			|| !is_array( $qualifiers ) || !$this->isArrayOfArrays( $qualifiers )
-			|| !is_array( $references ) || !$this->isArrayOfArrays( $references ) ) {
-			throw new InvalidFieldException();
+		$fieldValidation = [
+			'id' => is_string( $serialization['id'] ) || $serialization['id'] === null,
+			'rank' => in_array( $serialization['rank'], StatementSerializer::RANK_LABELS, true ),
+			'qualifiers' => is_array( $serialization['qualifiers'] ) && $this->isArrayOfArrays( $serialization['qualifiers'] ),
+			'references' => is_array( $serialization['references'] ) && $this->isArrayOfArrays( $serialization['references'] ),
+		];
+		foreach ( $fieldValidation as $field => $isValid ) {
+			if ( !$isValid ) {
+				throw new InvalidFieldException( $field, $serialization[$field] );
+			}
 		}
 
 		$statement = new Statement(
 			$this->propertyValuePairDeserializer->deserialize( $serialization ),
 			new SnakList( array_map(
 				fn( array $q ) => $this->propertyValuePairDeserializer->deserialize( $q ),
-				$qualifiers
+				$serialization['qualifiers']
 			) ),
 			new ReferenceList( array_map(
 				fn( array $r ) => $this->referenceDeserializer->deserialize( $r ),
-				$references
+				$serialization['references']
 			) ),
-			$id
+			$serialization['id']
 		);
-		$statement->setRank( array_flip( StatementSerializer::RANK_LABELS )[$rank] );
+		$statement->setRank( array_flip( StatementSerializer::RANK_LABELS )[$serialization['rank']] );
 
 		return $statement;
 	}

@@ -51,7 +51,7 @@ class PropertyValuePairDeserializer {
 		try {
 			$dataTypeId = $this->dataTypeLookup->getDataTypeIdForProperty( $propertyId );
 		} catch ( \Exception $e ) {
-			throw new InvalidFieldException();
+			throw new InvalidFieldException( 'id', $serialization['property']['id'] );
 		}
 
 		switch ( $serialization['value']['type'] ) {
@@ -74,9 +74,8 @@ class PropertyValuePairDeserializer {
 			throw new MissingFieldException();
 		}
 
-		if ( !is_array( $serialization['property'] ) || !is_array( $serialization['value'] ) ) {
-			throw new InvalidFieldException();
-		}
+		$this->assertFieldIsArray( $serialization, 'property' );
+		$this->assertFieldIsArray( $serialization, 'value' );
 
 		$this->validateProperty( $serialization['property'] );
 		$this->validateValue( $serialization['value'] );
@@ -94,7 +93,7 @@ class PropertyValuePairDeserializer {
 		}
 
 		if ( !in_array( $valueSerialization['type'], [ 'value', 'novalue', 'somevalue' ], true ) ) {
-			throw new InvalidFieldException();
+			throw new InvalidFieldException( 'type', $valueSerialization['type'] );
 		}
 	}
 
@@ -102,11 +101,11 @@ class PropertyValuePairDeserializer {
 		try {
 			$propertyId = $this->entityIdParser->parse( $id );
 		} catch ( EntityIdParsingException $e ) {
-			throw new InvalidFieldException();
+			throw new InvalidFieldException( 'id', $id );
 		}
 
 		if ( !( $propertyId instanceof PropertyId ) ) {
-			throw new InvalidFieldException();
+			throw new InvalidFieldException( 'id', $id );
 		}
 
 		return $propertyId;
@@ -132,14 +131,14 @@ class PropertyValuePairDeserializer {
 						'value' => $valueSerialization['content'],
 					] );
 				} catch ( DeserializationException $e ) {
-					throw new InvalidFieldException();
+					throw new InvalidFieldException( 'content', $valueSerialization['content'] );
 				}
 				break;
 		}
 
 		$validationError = $this->dataValueValidator->validate( $dataTypeId, $dataValue );
 		if ( $validationError ) {
-			throw new InvalidFieldException( $validationError->getCode() );
+			throw new InvalidFieldException( 'content', $valueSerialization['content'] );
 		}
 
 		return $dataValue;
@@ -152,7 +151,7 @@ class PropertyValuePairDeserializer {
 		try {
 			$entityId = $this->entityIdParser->parse( $content );
 		} catch ( EntityIdParsingException $e ) {
-			throw new InvalidFieldException();
+			throw new InvalidFieldException( 'content', $content );
 		}
 		return new EntityIdValue( $entityId );
 	}
@@ -168,12 +167,18 @@ class PropertyValuePairDeserializer {
 				$content['calendarmodel']
 			);
 		} catch ( \Exception $e ) {
-			throw new InvalidFieldException();
+			throw new InvalidFieldException( 'content', $content );
 		}
 	}
 
 	private function newTimeValue( string $timestamp, int $precision, string $calendarmodel ): TimeValue {
 		return new TimeValue( $timestamp, 0, 0, 0, $precision, $calendarmodel );
+	}
+
+	private function assertFieldIsArray( array $serializationPart, string $field ): void {
+		if ( !is_array( $serializationPart[$field] ) ) {
+			throw new InvalidFieldException( $field, $serializationPart[$field] );
+		}
 	}
 
 }
