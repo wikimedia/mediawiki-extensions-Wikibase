@@ -42,10 +42,12 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 
 	protected $linkRenderer;
 
+	protected $commentFormatter;
+
 	protected function setUp(): void {
 		parent::setUp();
 
-		// these are required because Linker is used in ChangeLineFormatter
+		// these are required because MediaWiki\CommentFormatter\CommentFormatter is used in ChangeLineFormatter
 		// @todo eliminate Linker or at least use of Linker in Wikibase :)
 		$this->setMwGlobals( [
 			'wgScriptPath' => '',
@@ -63,6 +65,8 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 		$this->userNameUtils = $this->getServiceContainer()->getUserNameUtils();
 
 		$this->linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
+
+		$this->commentFormatter = $this->getServiceContainer()->getCommentFormatter();
 	}
 
 	/**
@@ -87,7 +91,8 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 		$formatter = new ChangeLineFormatter(
 			$this->repoLinker,
 			$this->userNameUtils,
-			$this->linkRenderer
+			$this->linkRenderer,
+			$this->commentFormatter
 		);
 
 		$formattedLine = $formatter->format(
@@ -120,7 +125,8 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 		$formatter = new ChangeLineFormatter(
 			$this->repoLinker,
 			$this->userNameUtils,
-			$this->linkRenderer
+			$this->linkRenderer,
+			$this->commentFormatter
 		);
 
 		// Use the actual setting, because out handler for the FormatAutocomment hook will check
@@ -202,7 +208,8 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 		$formatter = new ChangeLineFormatter(
 			$this->repoLinker,
 			$this->userNameUtils,
-			$this->linkRenderer
+			$this->linkRenderer,
+			$this->commentFormatter
 		);
 
 		// Use the actual setting, because out handler for the FormatAutocomment hook will check

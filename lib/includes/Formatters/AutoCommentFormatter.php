@@ -114,7 +114,7 @@ class AutoCommentFormatter {
 	 * Wraps a comment by applying the appropriate directionality markers and pre and/or postfix
 	 * separators.
 	 *
-	 * @note This code should be kept in sync with what Linker::formatAutocomments does.
+	 * @note This code should be kept in sync with what MediaWiki\CommentFormatter\CommentParser::doSectionLinks does.
 	 *
 	 * @param boolean $pre True if there is text before the comment, so a prefix separator is needed.
 	 * @param string $comment the localized comment, as returned by formatAutoComment()
