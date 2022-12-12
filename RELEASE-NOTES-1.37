@@ -1,7 +1,5 @@
 = Wikibase 1.37 =
 
-This is not a release yet!
-
 == Upgrading notes for 1.37 ==
 
 Don't forget to always back up your database before upgrading!
@@ -15,6 +13,12 @@ and save it in the Wikibase folder of your mediawiki installation.
 
 Execute it as a normal maintenance script and replace the legacy repositories
 configuration with the new entitySources one.
+
+...
+
+The prototype feature "Federated Properties" is disabled this this release.
+If you are using "Federated Properties" and upgrade to this release, the feature
+will be disabled and no properties will appear to exist.
 
 ...
 
@@ -44,32 +48,25 @@ https://www.mediawiki.org/wiki/Manual:Upgrading
 * (client) (T286539) repoNamespaces has been removed.
 * (client) (T287242) repoDatabase has been removed.
 * (repo) (T287486) conceptBaseUri has been removed.
-
-=== New user-facing features in 1.37 ===
-
-* ...
+* (repo) (T317890) federatedPropertiesEnabled has been removed.
+* (repo) (T317890) federatedPropertiesSourceScriptUrl has been removed.
 
 === External library changes in 1.37 ===
 
-==== New external libraries ====
-
-* ...
-
 ==== Changed external libraries ====
 
-* ...
+* Updated data-values/data-values from 2.0.0 to 3.0.0
+* Updated data-values/common from 0.4.0 to 1.0.0
+* Updated data-values/interfaces from 0.2.0 to 1.0.0
+* Updated data-values/time from 1.0.2 to 1.0.4
+* Updated data-values/serialization from 1.2.1 to 1.2.4
 
 ==== Removed external libraries ====
 
-* (T12345) ...
-
-=== Bug fixes in 1.37 ===
-
-* (T12345) ...
-
-=== Action API changes in 1.37 ===
-
-* (T12345) ...
+* Removed wikibase/data-model - library is provided as a part of Wikibase code
+* Removed wikibase/data-model-serialization - library is provided as a part of Wikibase code
+* Removed wikibase/internal-serialization - library is provided as a part of Wikibase code
+* Removed wikibase/data-model-services - library is provided as a part of Wikibase code
 
 === Languages updated in 1.37 ===
 
@@ -78,19 +75,23 @@ Below only new and removed languages are listed, as well as changes to languages
 because of Phabricator reports.
 New monolingual support:
 
-* (T12345) ...
+* (T180771) Min Dong cdo-hani
+* (T154589) American English en-us
+* (T262922) Alsatian gsw-fr
+* (T180771) Hakka hak-hans
+* (T180771) Hakka hak-hant
+* (T265296) Omaha-Ponca oma
+* (T265297) Osage osa-latn
+* (T283364) Wendat wya
+* (T252198) Tundra Yukaghir ykg
 
 Monolingual entries removed as they are now natively supported by MediaWiki:
 
-* (T12345) ...
-
-=== Breaking changes in 1.37 ===
-
-* (T12345) ...
-
-=== Deprecations in 1.37 ===
-
-* (T12345) ...
+* (T283168) Dagbani dag
+* (T282085) Malay ms-arab
+* (T284002) Paiwan pwn
+* (T259360) Shawiya shy
+* (T283480) Wallisian wls
 
 === Other changes in 1.37 ===
 
@@ -111,5 +112,4 @@ Discussion regarding the development of Wikidata
 
 == IRC help ==
 
-Questions related to wikibase and wikidata can be asked in #wikibase or
-#wikidata on irc.libera.chat.
+Questions related to wikibase and wikidata can be asked in #wikidata on irc.libera.chat.
