@@ -17,7 +17,8 @@
 			"రహ్మానుద్దీన్",
 			"Abijeet Patro",
 			"AnupamM",
-			"Saurmandal"
+			"Saurmandal",
+			"McDutchie"
 		]
 	},
 	"wikibase-desc": "संरचित डेटा रिपॉज़िटरी",
@@ -168,7 +169,7 @@
 	"wikibase-validator-illegal-file-chars": "चित्रों के नामों पर कोलन या स्लैश जैसे अक्षर नहीं होने चाहिए",
 	"wikibase-validator-check-file-type": "चित्र का एक्सटेंशन गायब है।",
 	"wikibase-validator-illegal-geo-shape-title": "वैल्यू को <code>Data:</code> से शुरू होकर <code>.map</code> पर खत्म होना होगा। साथ ही, शीर्षक में कोलन, हैश या पाइप जैसा कोई अक्षर नहीं होना चाहिए।",
-	"wikibase-validator-illegal-tabular-data-title": "वैल्यू को <code>Data:</code> से शुरू होकर <code>.map</code> पर खत्म होना होगा। साथ ही, शीर्षक में कोलन, हैश या पाइप जैसा कोई अक्षर नहीं होना चाहिए।",
+	"wikibase-validator-illegal-tabular-data-title": "वैल्यू को <code>Data:</code> से शुरू होकर <code>.tab</code> पर खत्म होना होगा। साथ ही, शीर्षक में कोलन, हैश या पाइप जैसा कोई अक्षर नहीं होना चाहिए।",
 	"wikibase-validator-illegal-entity-schema-title": "वैल्यू को <code>E</code> से शुरू होना चाहिए और बाकी का हिस्सा पूरी तरह से संख्यात्मक होना चाहिए।",
 	"wikibase-validator-no-such-media": "चित्र \"$1\" [https://commons.wikimedia.org/ विकिमीडिया कॉमन्स] पर मौजूद नहीं है।",
 	"wikibase-validator-no-such-sitelink": "बैजेस को संपादित करते समय \"$1\" की साइटकड़ी नहीं मिली।",
