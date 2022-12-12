@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Artsiom91",
+			"Maksim L.",
 			"Mechanizatar",
 			"No Sleep till Krupki",
 			"Tomato Cream",
@@ -100,8 +101,8 @@
 	"wikibase-entity-summary-wbsetdescription-set": "Зменена апісанне [$2]",
 	"wikibase-entity-summary-wbsetdescription-remove": "Выдалена апісанне [$2]",
 	"wikibase-entity-summary-wbsetaliases-set": "{{PLURAL:$1|Зададзена дадатковая назва|Зададзеныя дадатковыя назвы}} для [$2]",
-	"wikibase-entity-summary-wbsetaliases-add-remove": "{{PLURAL:$1|Дададзена ці выдалена дадатковая назва|Дададзеныя ці выдаленыя дадатковыя назвы}} для [$2]",
-	"wikibase-entity-summary-wbsetaliases-add": "{{PLURAL:$1|1=Дададзена дадатковая назва|Дададзеныя дадатковыя назвы}} для [$2]",
+	"wikibase-entity-summary-wbsetaliases-add-remove": "{{PLURAL:$1|Дададзена ці выдалена дадатковая назва|Дададзены ці выдалены дадатковыя назвы}} для [$2]",
+	"wikibase-entity-summary-wbsetaliases-add": "{{PLURAL:$1|1=Дададзена дадатковая назва|Дададзены дадатковыя назвы}} для [$2]",
 	"wikibase-entity-summary-wbsetaliases-remove": "{{PLURAL:$1|Выдалена дадатковая назва|Выдаленыя дадатковыя назвы}} для [$2]",
 	"wikibase-entity-summary-wbsetaliases-update": "{{PLURAL:$1|1=Абноўлена дадатковая назва|Абноўленыя дадатковыя назвы}} для [$2]",
 	"wikibase-entity-summary-wbsetlabeldescriptionaliases": "Змененыя метка, апісанне і сінонімы для [$2]",

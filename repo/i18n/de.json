@@ -447,7 +447,7 @@
 	"wikibase-listdatatypes-wikibase-property-head": "Eigenschaft",
 	"wikibase-listdatatypes-wikibase-property-body": "Link zu Eigenschaften im Projekt. Wenn ein Wert eingegeben wird, wird der Eigenschaftsnamensraum des Projektes für passende Eigenschaften durchsucht.",
 	"wikibase-listdatatypes-commonsmedia-head": "Commons-Mediendatei",
-	"wikibase-listdatatypes-commonsmedia-body": "Link zu Dateien, die auf Wikimedia Commons gespeichert sind. Falls ein Wert eingegeben wurde, wird der Dateinamensraum auf Commons für treffende Dateien durchsucht.",
+	"wikibase-listdatatypes-commonsmedia-body": "Link zu Dateien, die auf Wikimedia Commons gespeichert sind. Falls ein Wert eingegeben wurde, wird der Dateinamensraum auf Commons nach entsprechenden Dateien durchsucht.",
 	"wikibase-listdatatypes-globe-coordinate-head": "Koordinate",
 	"wikibase-listdatatypes-globe-coordinate-body": "Literale Daten für eine geografische Position, die als Breitengrad-Längengrad-Paar in GMS oder Dezimalgrad für den Sternenkörper angegeben ist. Standards sind „Erde“, anschließend „WGS84“. Es wird eine Auflösung und ein Bereich hinzugefügt.\n* latitude – impliziter erster Teil (float, dms, dm, dd) der Koordinatenkette. Die Richtung wird entweder mit einem Präfixzeichen oder mit dem Postfix „N/S“ angegeben.\n* longitude – impliziter zweiter Teil (float, dms, dm, dd) der Koordinatenkette. Die Richtung wird entweder mit einem Präfixzeichen oder mit dem Postfix „O/W“ angegeben.\n* globe – ausdrücklicher (?) Datenwert, angegeben als Sternenkörper, dessen Standards auf Erde sind \"http://www.wikidata.org/entity/Q2\"\n* precision – numerische Genauigkeit der Koordinate",
 	"wikibase-listdatatypes-geo-shape-head": "Geografische Form",

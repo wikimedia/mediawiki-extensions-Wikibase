@@ -334,7 +334,7 @@
 	"wikibase-entitydata-unresolvable-sub-entity-redirect": "Preusmeritve za »$1« ni bilo mogoče razrešiti. Nadrejena entiteta je bila preusmerjena na »$2«.",
 	"special-entitypage": "Stran entitete",
 	"wikibase-entitypage-title": "Stran entitete",
-	"wikibase-entitypage-text": "Tw stran preusmerja na stran entitete v repozitoriju, ki mu pripada. Navedite ID entitete v URL-ju, pri čemer uporabite skladnjo podstrani.",
+	"wikibase-entitypage-text": "Ta stran preusmerja na stran entitete v shrambi, ki ji pripada. Navedite ID entitete v URL-ju, pri čemer uporabite skladnjo podstrani.",
 	"wikibase-entitypage-bad-id": "Neveljavni ID: $1.",
 	"wikibase-error-entity-not-local": "Entitete vrste $1 v tem vikiju ni mogoče urejati.",
 	"wikibase-error-entity-too-big": "Entiteta je prevelika. Največja dovoljena velikost entitete je $1.",
