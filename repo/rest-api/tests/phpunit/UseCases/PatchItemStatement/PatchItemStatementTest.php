@@ -96,12 +96,12 @@ class PatchItemStatementTest extends TestCase {
 		$statementId = $itemId . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 		$oldStatementValue = 'old statement value';
 		$newStatementValue = 'new statement value';
-		$statement = NewStatement::someValueFor( 'P123' )
+		$statement = NewStatement::forProperty( 'P123' )
 			->withGuid( $statementId )
 			->withValue( $oldStatementValue )
 			->build();
 
-		$patchedStatement = NewStatement::someValueFor( 'P123' )
+		$patchedStatement = NewStatement::forProperty( 'P123' )
 			->withGuid( $statementId )
 			->withValue( $newStatementValue )
 			->build();
