@@ -41,6 +41,8 @@
 	"pageswithbadges": "বেজ থকা পৃষ্ঠাসমূহ",
 	"wikibase-pageinfo-description-central": "গোলকীয় বিৱৰণ",
 	"wikibase-pageinfo-entity-usage": "এই পৃষ্ঠাত ব্যৱহৃত {{WBREPONAME}} আইটেমসমূহ",
+	"wikibase-pageinfo-entity-usage-S": "ছাইট সংযোগ",
+	"wikibase-pageinfo-entity-usage-D-with-modifier": "বিৱৰণ: $1",
 	"wikibase-pageinfo-entity-usage-T": "শিৰোনাম",
 	"wikibase-pageinfo-entity-usage-C": "কিছু বিবৃতি",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "বিবৃতি: $1",
