@@ -57,18 +57,12 @@ class AddItemStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 				],
 				'bodyContents' => json_encode( [
 					'statement' => [
-						'mainsnak' => [
-							'snaktype' => 'value',
-							'property' => 'P1',
-							'datavalue' => [
-								'type' => 'string',
-								'value' => 'I am a goat'
-							],
-							'hash' => '455481eeac76e6a8af71a6b493c073d54788e7e9'
+						'property' => [
+							'id' => 'P1',
 						],
-						'rank' => 'preferred',
-						'references' => []
-
+						'value' => [
+							'type' => 'novalue',
+						],
 					],
 					'tags' => [ 'edit', 'tags' ],
 				] )
