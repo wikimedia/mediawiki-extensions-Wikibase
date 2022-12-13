@@ -53,18 +53,13 @@ class PruneItemsPerSiteTest extends MaintenanceBaseTestCase {
 		$this->maintenance->loadWithArgv( [ '--select-batch-size', $selectBatchSize ] );
 		$this->maintenance->execute();
 
-		$existingItemRowCount = $this->db->selectRowCount(
-			'wb_items_per_site',
-			'*',
-			[ 'ips_item_id' => $entityId->getNumericId() ],
-			__METHOD__
-		);
-		$allRowCount = $this->db->selectRowCount(
-			'wb_items_per_site',
-			'*',
-			'',
-			__METHOD__
-		);
+		$existingItemRowCount = $this->db->newSelectQueryBuilder()
+			->from( 'wb_items_per_site' )
+			->where( [ 'ips_item_id' => $entityId->getNumericId() ] )
+			->caller( __METHOD__ )->fetchRowCount();
+		$allRowCount = $this->db->newSelectQueryBuilder()
+			->from( 'wb_items_per_site' )
+			->caller( __METHOD__ )->fetchRowCount();
 		$this->assertSame( 2, $existingItemRowCount );
 		$this->assertSame( $existingItemRowCount, $allRowCount );
 	}

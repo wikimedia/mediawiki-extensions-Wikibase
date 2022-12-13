@@ -58,14 +58,20 @@ class PruneItemsPerSite extends Maintenance {
 		int $itemNamespace,
 		int $selectBatchSize
 	) {
-		$dbr = $db->connections()->getReadConnectionRef( [ 'vslow' ] );
-		$dbw = $db->connections()->getWriteConnectionRef();
+		$dbr = $db->connections()->getReadConnection( [ 'vslow' ] );
+		$dbw = $db->connections()->getWriteConnection();
 
-		$maxIpsRowId = (int)$dbr->selectField( 'wb_items_per_site', 'MAX(ips_row_id)', '', __METHOD__ );
+		$maxIpsRowId = (int)$dbr->newSelectQueryBuilder()
+			->select( 'MAX(ips_row_id)' )
+			->from( 'wb_items_per_site' )
+			->caller( __METHOD__ )->fetchField();
 		// Add 1%, but at least 50, to the maxIpsRowId to use, for items created during the script run
 		$maxIpsRowId = max( $maxIpsRowId * 1.01, $maxIpsRowId + 50 );
 
-		$startRowId = (int)$dbr->selectField( 'wb_items_per_site', 'MIN(ips_row_id)', '', __METHOD__ );
+		$startRowId = (int)$dbr->newSelectQueryBuilder()
+			->select( 'MIN(ips_row_id)' )
+			->from( 'wb_items_per_site' )
+			->caller( __METHOD__ )->fetchField();
 		while ( $startRowId < $maxIpsRowId ) {
 			$endRowId = $startRowId + $selectBatchSize;
 			$rowsToDelete = $this->selectInRange( $dbr, $itemNamespace, $startRowId, $endRowId );
@@ -83,30 +89,23 @@ class PruneItemsPerSite extends Maintenance {
 	}
 
 	private function selectInRange( IDatabase $dbr, int $itemNamespace, int $startRowId, int $endRowId ): array {
-		return $dbr->selectFieldValues(
-			[ 'wb_items_per_site', 'page' ],
-			'ips_row_id',
-			[
+		return $dbr->newSelectQueryBuilder()
+			->select( 'ips_row_id' )
+			->from( 'wb_items_per_site' )
+			->leftJoin( 'page', null, [
+				'page_title = ' . $dbr->buildConcat( [
+					$dbr->addQuotes( 'Q' ),
+					'ips_item_id',
+				] ),
+				'page_namespace' => $itemNamespace,
+				'page_is_redirect' => 0,
+			] )
+			->where( [
 				'ips_row_id >= ' . $startRowId,
 				'ips_row_id < ' . $endRowId,
 				'page_id IS NULL',
-			],
-			__METHOD__,
-			[],
-			[
-				'page' => [
-					'LEFT JOIN',
-					[
-						'page_title = ' . $dbr->buildConcat( [
-							$dbr->addQuotes( "Q" ),
-							"ips_item_id",
-						] ),
-						'page_namespace' => $itemNamespace,
-						'page_is_redirect' => 0,
-					],
-				],
-			]
-		);
+			] )
+			->caller( __METHOD__ )->fetchFieldValues();
 	}
 
 	private function deleteRows( IDatabase $dbw, array $rowsToDelete ): int {
