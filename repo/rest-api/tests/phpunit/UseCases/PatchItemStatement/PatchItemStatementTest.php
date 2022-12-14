@@ -282,7 +282,7 @@ class PatchItemStatementTest extends TestCase {
 		$response = $this->newUseCase()->execute(
 			$this->newUseCaseRequest( [
 				'$statementId' => $originalStatement->getGuid(),
-				'$patch' => [ [ 'op' => 'replace', 'path' => '/mainsnak/property', 'value' => 'P321' ] ],
+				'$patch' => [ [ 'op' => 'replace', 'path' => '/property/id', 'value' => 'P321' ] ],
 			] )
 		);
 
@@ -400,7 +400,7 @@ class PatchItemStatementTest extends TestCase {
 
 		$testOperation = [
 			'op' => 'test',
-			'path' => '/mainsnak/snaktype',
+			'path' => '/value/type',
 			'value' => 'value',
 		];
 		yield 'PatchTestConditionFailedException' => [
@@ -486,7 +486,7 @@ class PatchItemStatementTest extends TestCase {
 		return [
 			[
 				'op' => 'replace',
-				'path' => '/mainsnak/datavalue/value',
+				'path' => '/value/content',
 				'value' => $newStatementValue
 			],
 		];

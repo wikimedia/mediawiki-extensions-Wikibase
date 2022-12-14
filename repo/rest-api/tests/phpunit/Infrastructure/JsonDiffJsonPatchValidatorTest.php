@@ -110,7 +110,7 @@ class JsonDiffJsonPatchValidatorTest extends TestCase {
 		$validPatch = [
 			[
 				'op' => 'replace',
-				'path' => '/mainsnak/datavalue/value',
+				'path' => '/value/content',
 				'value' => 'patched',
 			]
 		];
