@@ -64,7 +64,8 @@ class ChangesListLinesHandler implements
 		$formatter = new ChangeLineFormatter(
 			$repoLinker,
 			$userNameUtils,
-			MediaWikiServices::getInstance()->getLinkRenderer()
+			MediaWikiServices::getInstance()->getLinkRenderer(),
+			MediaWikiServices::getInstance()->getCommentFormatter()
 		);
 
 		return new self( $changeFactory, $formatter );

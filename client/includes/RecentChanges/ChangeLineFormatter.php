@@ -5,7 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\RecentChanges;
 
 use Language;
-use Linker;
+use MediaWiki\CommentFormatter\CommentFormatter;
 use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\Permissions\Authority;
 use MediaWiki\Revision\RevisionRecord;
@@ -41,10 +41,21 @@ class ChangeLineFormatter {
 	 */
 	private $linkRenderer;
 
-	public function __construct( RepoLinker $repoLinker, UserNameUtils $userNameUtils, LinkRenderer $linkRenderer ) {
+	/**
+	 * @var CommentFormatter
+	 */
+	private $commentFormatter;
+
+	public function __construct(
+		RepoLinker $repoLinker,
+		UserNameUtils $userNameUtils,
+		LinkRenderer $linkRenderer,
+		CommentFormatter $commentFormatter
+	) {
 		$this->repoLinker = $repoLinker;
 		$this->userNameUtils = $userNameUtils;
 		$this->linkRenderer = $linkRenderer;
+		$this->commentFormatter = $commentFormatter;
 	}
 
 	public function format(
@@ -178,13 +189,13 @@ class ChangeLineFormatter {
 
 		$commentHtml = $rev->getCommentHtml();
 		if ( $commentHtml === null || $commentHtml === '' ) {
-			$commentHtml = Linker::formatComment( $rev->getComment(), $title, false, $siteId );
+			$commentHtml = $this->commentFormatter->format( $rev->getComment(), $title, false, $siteId );
 		}
 		return $this->wrapCommentBlockHTML( $commentHtml );
 	}
 
 	private function wrapCommentBlockHTML( string $commentHtml ): string {
-		//NOTE: keep in sync with Linker::commentBlock
+		//NOTE: keep in sync with MediaWiki\CommentFormatter\CommentFormatter::formatBlock
 		$formatted = wfMessage( 'parentheses' )->rawParams( $commentHtml )->escaped();
 		return " <span class=\"comment\">$formatted</span>";
 	}
