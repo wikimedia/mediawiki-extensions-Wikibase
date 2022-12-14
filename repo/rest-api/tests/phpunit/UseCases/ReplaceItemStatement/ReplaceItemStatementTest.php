@@ -92,7 +92,7 @@ class ReplaceItemStatementTest extends TestCase {
 		$itemId = 'Q123';
 		$statementId = $itemId . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 		$oldStatement = NewStatement::noValueFor( 'P123' )->withGuid( $statementId )->build();
-		$newStatement = NewStatement::someValueFor( 'P123' )
+		$newStatement = NewStatement::forProperty( 'P123' )
 			->withGuid( $statementId )
 			->withValue( 'new statement value' )
 			->build();
