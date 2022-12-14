@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Salvemm el lombard",
-			"S4b1nuz E.656"
+			"S4b1nuz E.656",
+			"McDutchie"
 		]
 	},
 	"wikibase-desc": "Archivi di dati struturad",
@@ -156,7 +157,7 @@
 	"wikibase-validator-illegal-file-chars": "I nom di fail i poden no avegh denter un quai carater compagn di du pont o di sbarre",
 	"wikibase-validator-check-file-type": "L'estension del fail l'è mancanta",
 	"wikibase-validator-illegal-geo-shape-title": "El valor el gh'hà de comenzà con <code>Data:</code> e finì con <code>.map</code>. Dessorapù, o el titol el gh'hà de avegh minga dent di carater compagn di do pont di sbarre de travers o verticai.",
-	"wikibase-validator-illegal-tabular-data-title": "El valor el gh'hà de comenzà con <code>Data:</code> e finì con <code>.map</code>. Dessorapù, o el titol el gh'hà de avegh minga dent di carater compagn di do pont di sbarre de travers o verticai.",
+	"wikibase-validator-illegal-tabular-data-title": "El valor el gh'hà de comenzà con <code>Data:</code> e finì con <code>.tab</code>. Dessorapù, o el titol el gh'hà de avegh minga dent di carater compagn di do pont di sbarre de travers o verticai.",
 	"wikibase-validator-illegal-entity-schema-title": "El valor el gh'hà de comenzà con <code>E</code> e 'l rest el gh'avaria de vesser doma di numer.",
 	"wikibase-validator-no-such-media": "El fail \"$1\" a l'esist minga in su [https://commons.wikimedia.org/ Wikimedia Commons].",
 	"wikibase-validator-no-such-sitelink": "Impossibil trovà el conligament a \"$1\" intanta che se cerchen de modificà i distintiv.",
@@ -386,7 +387,7 @@
 	"wikibase-api-not-recognized-string": "L'era prevista ona striga, ma l'è stada minga riconossuda.",
 	"wikibase-api-param-missing": "A ghe cala el parameter necessari \"$1\".",
 	"wikibase-api-param-illegal": "L'è stad drovad on insema de parametri illegal.",
-	"wikibase-api-permissiondenied": "Te gh'hee minga i permess necessari de tirà inanz quell'azzion chì.",
+	"wikibase-api-permissiondenied": "Te gh'hee minga i permess necessari de tirà inanz quest'azzion chì.",
 	"wikibase-api-wrong-class": "Tipo de la class sbajad rilevad.",
 	"wikibase-api-tags-invalid": "Parametro de eticheta minga valid",
 	"wikibase-api-target-not-empty": "La redirezzion la po vesser creada domà sora un'entità voeuja o scancelada.",

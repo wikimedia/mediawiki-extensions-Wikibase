@@ -19,7 +19,8 @@
 			"Sarilho1",
 			"Vitorvicentevalente",
 			"Vivaelcelta",
-			"Waldyrious"
+			"Waldyrious",
+			"McDutchie"
 		]
 	},
 	"wikibase-desc": "Repositório de dados estruturados",
@@ -173,7 +174,7 @@
 	"wikibase-validator-illegal-file-chars": "Os nomes de ficheiro não podem conter caracteres como dois pontos ou barras.",
 	"wikibase-validator-check-file-type": "Falta a extensão do ficheiro.",
 	"wikibase-validator-illegal-geo-shape-title": "O valor tem de começar com <code>Data:</code> e terminar em <code>.map</code>. Adicionalmente, o título não deve conter caracteres como dois pontos (:), cardinal (#) ou barra vertical (|).",
-	"wikibase-validator-illegal-tabular-data-title": "O valor tem de começar com <code>Data:</code> e terminar em <code>.map</code>. Adicionalmente, o título não deve conter caracteres como dois pontos (:), cardinal (#) ou barra vertical (|).",
+	"wikibase-validator-illegal-tabular-data-title": "O valor tem de começar com <code>Data:</code> e terminar em <code>.tab</code>. Adicionalmente, o título não deve conter caracteres como dois pontos (:), cardinal (#) ou barra vertical (|).",
 	"wikibase-validator-illegal-entity-schema-title": "O valor deve começar por <code>E</code> e o resto devem ser só algarismos.",
 	"wikibase-validator-no-such-media": "O ficheiro \"$1\" não existe na wiki [https://commons.wikimedia.org/ Wikimedia Commons].",
 	"wikibase-validator-no-such-sitelink": "Não foi possível encontrar uma hiperligação intersites para \"$1\" ao tentar editar emblemas.",

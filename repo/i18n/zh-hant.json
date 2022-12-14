@@ -34,7 +34,8 @@
 			"神樂坂秀吉",
 			"飞舞回堂前",
 			"아라",
-			"Diskdance"
+			"Diskdance",
+			"捍粵者"
 		]
 	},
 	"wikibase-desc": "結構化資料儲存庫",
@@ -316,7 +317,7 @@
 	"wikibase-itemmerge-cant-load-entity-content": "讀取項目失敗。",
 	"wikibase-itemmerge-cant-merge-self": "無法合併項目至自己。",
 	"wikibase-tokencheck-missingtoken": "需要編輯權杖。",
-	"wikibase-tokencheck-mustposttoken": "只可使用 POST 請求進行編輯。",
+	"wikibase-tokencheck-mustposttoken": "只可用POST請求編輯。",
 	"wikibase-tokencheck-badtoken": "錯誤的編輯密鑰 (您的連線階段可能已過期)。",
 	"special-dispatchstats": "變更發佈統計",
 	"wikibase-dispatchstats-intro": "此頁面提供有關發佈變更至用戶端的統計資訊。用戶端 wiki 會在{{SITENAME}}發佈變更後收到變更的通知，於該 wiki 的工作佇列會開處理該通知。",
@@ -385,7 +386,7 @@
 	"wikibase-api-no-such-entity": "找不到 ID 為「$1」的實體。",
 	"wikibase-api-no-such-sitelink": "當嘗試編輯徽章時無法找尋至 \"$1\" 的網站連結。",
 	"wikibase-api-not-recognized-datatype": "缺少或無法識別應要有的資料類型。",
-	"wikibase-api-permissiondenied": "您沒有進行此操作所需的權限。",
+	"wikibase-api-permissiondenied": "您無權操作",
 	"wikibase-api-tags-invalid": "標籤參數無效。",
 	"wikibase-api-target-not-empty": "重新導向僅可以被建立在空實體或被刪除實體的最上方。",
 	"wikibase-api-target-is-redirect": "該重新導向的目標不可為重新導向頁面。",

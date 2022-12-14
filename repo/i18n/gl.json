@@ -12,7 +12,8 @@
 			"Macofe",
 			"Toliño",
 			"Vivaelcelta",
-			"아라"
+			"아라",
+			"Winston Sung"
 		]
 	},
 	"wikibase-desc": "Repositorio de datos estruturados",
@@ -178,7 +179,7 @@
 	"wikibase-gotolinkedpage-lookup-site": "Sitio:",
 	"wikibase-gotolinkedpage-lookup-item": "ID do elemento:",
 	"wikibase-gotolinkedpage-submit": "Ir",
-	"wikibase-gotolinkedpage-summary": "Special:GoToLinkedPage úsase para localizar a páxina dun elemento nun sitio conectado.<br /> O primeiro campo, \"{{int:wikibase-gotolinkedpage-lookup-site}}\" (Sitio), é onde se indica o idioma e o código do sitio.<br /> No segundo campo, \"{{int:wikibase-gotolinkedpage-lookup-item}}\" (Identificador do elemento), debe colocar o identificador do elemento que está a procurar.",
+	"wikibase-gotolinkedpage-summary": "Special:GoToLinkedPage úsase para localizar a páxina dun elemento nun sitio conectado.<br />O primeiro campo, \"{{int:wikibase-gotolinkedpage-lookup-site}}\" (Sitio), é onde se indica a lingua e o código do sitio.<br />No segundo campo, \"{{int:wikibase-gotolinkedpage-lookup-item}}\" (Identificador do elemento), debe colocar o identificador do elemento que está a procurar.",
 	"wikibase-gotolinkedpage-error-page-not-found": "Non se atopou ningunha páxina para esa combinación de elemento e sitio",
 	"wikibase-gotolinkedpage-error-item-id-invalid": "O identificador de elemento inserido non é válido",
 	"wikibase-gotolinkedpage-error-item-not-found": "Non se atopou o elemento",
