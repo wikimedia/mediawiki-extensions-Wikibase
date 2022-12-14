@@ -5,6 +5,7 @@ namespace Wikibase\DataModel\Tests;
 use DataValues\DataValue;
 use DataValues\StringValue;
 use InvalidArgumentException;
+use LogicException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\NumericPropertyId;
@@ -100,6 +101,10 @@ class NewStatement {
 	 * @return self
 	 */
 	public function withValue( $dataValue ) {
+		if ( $this->type !== null && $this->type !== PropertyValueSnak::class ) {
+			throw new LogicException( "Statements of type {$this->type} must not have a value" );
+		}
+
 		$result = clone $this;
 
 		$result->dataValue = $this->createDataValueObject( $dataValue );
@@ -139,7 +144,7 @@ class NewStatement {
 	public function withGuid( $guid ) {
 		$result = clone $this;
 		if ( $result->guid !== null ) {
-			throw new \LogicException( 'Cannot redefine GUID' );
+			throw new LogicException( 'Cannot redefine GUID' );
 		}
 
 		$result->guid = (string)$guid;
@@ -153,7 +158,7 @@ class NewStatement {
 	public function withSomeGuid() {
 		$result = clone $this;
 		if ( $result->guid !== null ) {
-			throw new \LogicException( 'Cannot redefine GUID' );
+			throw new LogicException( 'Cannot redefine GUID' );
 		}
 
 		$result->guid = self::GENERATE_GUID;
@@ -214,7 +219,7 @@ class NewStatement {
 				$snack = new PropertyValueSnak( $this->propertyId, $this->dataValue );
 				break;
 			default:
-				throw new \LogicException( "Unknown statement type: '{$this->type}'" );
+				throw new LogicException( "Unknown statement type: '{$this->type}'" );
 		}
 
 		$result = new Statement( $snack );
