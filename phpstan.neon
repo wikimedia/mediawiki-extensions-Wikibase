@@ -1,0 +1,14 @@
+services:
+    -
+        class: Wikibase\Repo\Tests\RestApi\Architecture\ArchitectureTest
+        tags:
+            - phpat.test
+
+parameters:
+	level: 1
+	paths:
+		- ./repo/rest-api/src/
+		- ./repo/rest-api/tests/architecture/
+
+includes:
+    - vendor/phpat/phpat/extension.neon
