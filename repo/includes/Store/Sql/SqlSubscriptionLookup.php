@@ -32,17 +32,11 @@ class SqlSubscriptionLookup implements SubscriptionLookup {
 	 * @return string[] wiki IDs of wikis subscribed to the given entity
 	 */
 	public function getSubscribers( EntityId $idToCheck ) {
-		$where = [ 'cs_entity_id' => $idToCheck->getSerialization() ];
-		$dbr = $this->repoConnections->getReadConnectionRef();
-
-		$subscriptions = $dbr->selectFieldValues(
-			'wb_changes_subscription',
-			'cs_subscriber_id',
-			$where,
-			__METHOD__
-		);
-
-		return $subscriptions;
+		return $this->repoConnections->getReadConnection()->newSelectQueryBuilder()
+			->select( 'cs_subscriber_id' )
+			->from( 'wb_changes_subscription' )
+			->where( [ 'cs_entity_id' => $idToCheck->getSerialization() ] )
+			->caller( __METHOD__ )->fetchFieldValues();
 	}
 
 }
