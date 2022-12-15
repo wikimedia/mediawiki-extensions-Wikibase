@@ -99,6 +99,7 @@
 	"wikibase-entity-summary-wbsetaliases-add-remove": "Lisätty ja poistettu [$2]-{{PLURAL:$1|alias|aliaksia}}",
 	"wikibase-entity-summary-wbsetaliases-add": "Lisätty [$2]-{{PLURAL:$1|alias|aliaksia}}",
 	"wikibase-entity-summary-wbsetaliases-remove": "Poistettu [$2]-{{PLURAL:$1|alias|aliaksia}}",
+	"wikibase-entity-summary-wbsetaliases-update": "Päivitetty [$2]-{{PLURAL:$1|alias|aliaksia}}",
 	"wikibase-entity-summary-wbsetlabeldescriptionaliases": "Muutettu [$2]-nimeä, -kuvausta ja/tai -aliaksia",
 	"wikibase-entity-summary-wbsetsitelink-add": "Lisättiin [$2]-linkki",
 	"wikibase-entity-summary-wbsetsitelink-add-both": "Lisätty [$2]-linkki merkkeineen",

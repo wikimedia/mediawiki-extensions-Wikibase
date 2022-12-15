@@ -5,6 +5,7 @@
 			"Nurlan"
 		]
 	},
+	"wikibase-comment-update": "{{WBREPONAME}} element ózgertildi",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|ózgeris|ózgerisler}}",
 	"wikibase-dataitem": "{{WBREPONAME}} elementi",
 	"wikibase-editlinks": "Siltemeni redaktorlaw",
@@ -18,5 +19,7 @@
 	"wikibase-linkitem-input-page": "Bet:",
 	"wikibase-rc-hide-wikidata-hide": "Jasırıw",
 	"wikibase-rc-hide-wikidata-show": "Kórsetiw",
-	"wikibase-otherprojects": "Basqa joybarlarda"
+	"wikibase-otherprojects": "Basqa joybarlarda",
+	"wikibase-sitelinks-sitename-columnheading": "Til",
+	"wikibase-sitelinks-link-columnheading": "Siltemelengen bet"
 }
