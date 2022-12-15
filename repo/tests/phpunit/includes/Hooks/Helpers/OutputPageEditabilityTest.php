@@ -60,7 +60,6 @@ class OutputPageEditabilityTest extends TestCase {
 		$title->expects( $this->once() )
 			->method( 'getLatestRevID' )
 			->willReturn( 321 );
-		$title->method( 'getRestrictions' )->willReturn( [] );
 		$out->setTitle( $title );
 		yield 'not latest revision' => [ $out ];
 
@@ -95,7 +94,6 @@ class OutputPageEditabilityTest extends TestCase {
 		$title->expects( $this->any() )
 			->method( 'exists' )
 			->willReturn( true );
-		$title->method( 'getRestrictions' )->willReturn( [] );
 
 		$request = $this->createMock( WebRequest::class );
 		$request->expects( $this->once() )
@@ -126,7 +124,6 @@ class OutputPageEditabilityTest extends TestCase {
 
 		$title = $this->createMock( Title::class );
 		$title->method( 'getNamespace' )->willReturn( NS_MAIN );
-		$title->method( 'getRestrictions' )->willReturn( [] );
 		$title->expects( $this->any() )
 			->method( 'exists' )
 			->willReturn( true );
@@ -157,7 +154,6 @@ class OutputPageEditabilityTest extends TestCase {
 
 		$title = $this->createMock( Title::class );
 		$title->method( 'getNamespace' )->willReturn( NS_MAIN );
-		$title->method( 'getRestrictions' )->willReturn( [] );
 		$title->expects( $this->any() )
 			->method( 'exists' )
 			->willReturn( false );
