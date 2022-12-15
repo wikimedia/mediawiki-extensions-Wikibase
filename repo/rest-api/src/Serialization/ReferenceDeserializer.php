@@ -20,7 +20,7 @@ class ReferenceDeserializer {
 			throw new MissingFieldException();
 		}
 		if ( !is_array( $serialization['parts'] ) || !$this->isArrayOfArrays( $serialization['parts'] ) ) {
-			throw new InvalidFieldException();
+			throw new InvalidFieldException( 'parts', $serialization['parts'] );
 		}
 
 		return new Reference( array_map(

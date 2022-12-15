@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\RestApi\Serialization;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
+use Throwable;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
@@ -13,6 +14,7 @@ use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\Serialization\InvalidFieldException;
 use Wikibase\Repo\RestApi\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\RestApi\Serialization\ReferenceDeserializer;
+use Wikibase\Repo\RestApi\Serialization\SerializationException;
 use Wikibase\Repo\RestApi\Serialization\StatementDeserializer;
 
 /**
@@ -132,15 +134,18 @@ class StatementDeserializerTest extends TestCase {
 	/**
 	 * @dataProvider invalidSerializationProvider
 	 */
-	public function testDeserializationErrors( string $expectedException, array $serialization ): void {
-		$this->expectException( $expectedException );
-
-		$this->newDeserializer()->deserialize( $serialization );
+	public function testDeserializationErrors( SerializationException $expectedException, array $serialization ): void {
+		try {
+			$this->newDeserializer()->deserialize( $serialization );
+			$this->fail( 'Expected exception was not thrown.' );
+		} catch ( Throwable $e ) {
+			$this->assertEquals( $expectedException, $e );
+		}
 	}
 
 	public function invalidSerializationProvider(): Generator {
 		yield 'invalid id field type' => [
-			InvalidFieldException::class,
+			new InvalidFieldException( 'id', [ 'invalid' ] ),
 			[
 				'id' => [ 'invalid' ],
 				'property' => [ 'id' => 'P123' ],
@@ -149,7 +154,7 @@ class StatementDeserializerTest extends TestCase {
 		];
 
 		yield 'invalid rank' => [
-			InvalidFieldException::class,
+			new InvalidFieldException( 'rank', 'bad' ),
 			[
 				'rank' => 'bad',
 				'property' => [ 'id' => 'P123' ],
@@ -158,7 +163,7 @@ class StatementDeserializerTest extends TestCase {
 		];
 
 		yield 'invalid qualifiers field type' => [
-			InvalidFieldException::class,
+			new InvalidFieldException( 'qualifiers', 'invalid' ),
 			[
 				'qualifiers' => 'invalid',
 				'property' => [ 'id' => 'P123' ],
@@ -167,7 +172,7 @@ class StatementDeserializerTest extends TestCase {
 		];
 
 		yield 'invalid qualifier item type' => [
-			InvalidFieldException::class,
+			new InvalidFieldException( 'qualifiers', [ 'invalid' ] ),
 			[
 				'qualifiers' => [ 'invalid' ],
 				'property' => [ 'id' => 'P123' ],
@@ -176,7 +181,7 @@ class StatementDeserializerTest extends TestCase {
 		];
 
 		yield 'invalid references field type' => [
-			InvalidFieldException::class,
+			new InvalidFieldException( 'references', 'invalid' ),
 			[
 				'references' => 'invalid',
 				'property' => [ 'id' => 'P123' ],
@@ -185,7 +190,7 @@ class StatementDeserializerTest extends TestCase {
 		];
 
 		yield 'invalid reference item type' => [
-			InvalidFieldException::class,
+			new InvalidFieldException( 'references', [ 'invalid' ] ),
 			[
 				'references' => [ 'invalid' ],
 				'property' => [ 'id' => 'P123' ],

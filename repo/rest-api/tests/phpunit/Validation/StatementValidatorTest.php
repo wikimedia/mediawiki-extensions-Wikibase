@@ -67,7 +67,7 @@ class StatementValidatorTest extends TestCase {
 		];
 
 		$this->deserializer = $this->createStub( StatementDeserializer::class );
-		$this->deserializer->method( 'deserialize' )->willThrowException( new InvalidFieldException() );
+		$this->deserializer->method( 'deserialize' )->willThrowException( new InvalidFieldException( 'some-field', null ) );
 
 		$validator = $this->newValidator();
 		$error = $validator->validate( $serialization );
