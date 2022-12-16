@@ -8,6 +8,7 @@ use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\JsonPatchValidator;
 use Wikibase\Repo\RestApi\Validation\StatementIdValidator;
+use Wikibase\Repo\RestApi\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Validation\ValidationError;
 
 /**
@@ -71,6 +72,14 @@ class PatchItemStatementErrorResponse extends ErrorResponse {
 				return new self(
 					ErrorResponse::COMMENT_TOO_LONG,
 					"Comment must not be longer than $commentMaxLength characters."
+				);
+
+			case StatementValidator::CODE_INVALID:
+			case StatementValidator::CODE_INVALID_FIELD:
+			case StatementValidator::CODE_MISSING_FIELD:
+				return new self(
+					ErrorResponse::PATCHED_STATEMENT_INVALID,
+					'The patch results in an invalid statement which cannot be stored'
 				);
 
 			default:

@@ -9,6 +9,7 @@ use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\JsonPatchValidator;
 use Wikibase\Repo\RestApi\Validation\StatementIdValidator;
+use Wikibase\Repo\RestApi\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Validation\ValidationError;
 
 /**
@@ -107,6 +108,24 @@ class PatchItemStatementErrorResponseTest extends TestCase {
 			),
 			ErrorResponse::INVALID_EDIT_TAG,
 			'Invalid MediaWiki tag: bad tag'
+		];
+
+		yield 'from invalid patched statement (invalid field)' => [
+			new ValidationError( StatementValidator::CODE_INVALID_FIELD ),
+			ErrorResponse::PATCHED_STATEMENT_INVALID,
+			'The patch results in an invalid statement which cannot be stored'
+		];
+
+		yield 'from invalid patched statement (missing field)' => [
+			new ValidationError( StatementValidator::CODE_MISSING_FIELD ),
+			ErrorResponse::PATCHED_STATEMENT_INVALID,
+			'The patch results in an invalid statement which cannot be stored'
+		];
+
+		yield 'from invalid patched statement (unknown reason)' => [
+			new ValidationError( StatementValidator::CODE_INVALID ),
+			ErrorResponse::PATCHED_STATEMENT_INVALID,
+			'The patch results in an invalid statement which cannot be stored'
 		];
 	}
 

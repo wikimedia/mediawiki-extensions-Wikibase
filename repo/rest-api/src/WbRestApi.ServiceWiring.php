@@ -13,8 +13,8 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
 use Wikibase\Repo\RestApi\Infrastructure\DataTypeValidatorFactoryDataValueValidator;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
+use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatchValidator;
-use Wikibase\Repo\RestApi\Infrastructure\JsonDiffStatementPatcher;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
 use Wikibase\Repo\RestApi\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\RestApi\Serialization\ReferenceDeserializer;
@@ -123,12 +123,11 @@ return [
 					ChangeTags::listExplicitlyDefinedTags()
 				)
 			),
+			new JsonDiffJsonPatcher(),
+			WbRestApi::getSerializerFactory( $services )->newStatementSerializer(),
+			new StatementValidator( WbRestApi::getStatementDeserializer( $services ) ),
 			new StatementGuidParser( new ItemIdParser() ),
 			new WikibaseEntityLookupItemDataRetriever( WikibaseRepo::getEntityLookup( $services ) ),
-			new JsonDiffStatementPatcher(
-				WbRestApi::getSerializerFactory( $services )->newStatementSerializer(),
-				WbRestApi::getStatementDeserializer( $services )
-			),
 			WbRestApi::getItemUpdater( $services ),
 			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
 				WikibaseRepo::getEntityRevisionLookup( $services )

@@ -7,10 +7,6 @@ use Wikibase\DataModel\Exception\PropertyChangedException;
 use Wikibase\DataModel\Exception\StatementGuidChangedException;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Statement\StatementGuid;
-use Wikibase\Repo\RestApi\Domain\Exceptions\InapplicablePatchException;
-use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedSerializationException;
-use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedStatementException;
-use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedStatementValueTypeException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\PatchPathException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\PatchTestConditionFailedException;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
@@ -19,36 +15,44 @@ use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\JsonPatcher;
 use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
-use Wikibase\Repo\RestApi\Domain\Services\StatementPatcher;
+use Wikibase\Repo\RestApi\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
+use Wikibase\Repo\RestApi\Validation\StatementValidator;
 
 /**
  * @license GPL-2.0-or-later
  */
 class PatchItemStatement {
 
-	private PatchItemStatementValidator $validator;
+	private PatchItemStatementValidator $useCaseValidator;
+	private JsonPatcher $jsonPatcher;
+	private StatementSerializer $statementSerializer;
+	private StatementValidator $statementValidator;
 	private StatementGuidParser $statementIdParser;
 	private ItemRetriever $itemRetriever;
-	private StatementPatcher $statementPatcher;
 	private ItemUpdater $itemUpdater;
 	private ItemRevisionMetadataRetriever $revisionMetadataRetriever;
 	private PermissionChecker $permissionChecker;
 
 	public function __construct(
-		PatchItemStatementValidator $validator,
+		PatchItemStatementValidator $useCaseValidator,
+		JsonPatcher $jsonPatcher,
+		StatementSerializer $statementSerializer,
+		StatementValidator $statementValidator,
 		StatementGuidParser $statementIdParser,
 		ItemRetriever $itemRetriever,
-		StatementPatcher $statementPatcher,
 		ItemUpdater $itemUpdater,
 		ItemRevisionMetadataRetriever $revisionMetadataRetriever,
 		PermissionChecker $permissionChecker
 	) {
-		$this->validator = $validator;
+		$this->useCaseValidator = $useCaseValidator;
+		$this->statementSerializer = $statementSerializer;
+		$this->statementValidator = $statementValidator;
+		$this->jsonPatcher = $jsonPatcher;
 		$this->statementIdParser = $statementIdParser;
 		$this->itemRetriever = $itemRetriever;
-		$this->statementPatcher = $statementPatcher;
 		$this->itemUpdater = $itemUpdater;
 		$this->revisionMetadataRetriever = $revisionMetadataRetriever;
 		$this->permissionChecker = $permissionChecker;
@@ -58,7 +62,7 @@ class PatchItemStatement {
 	 * @return PatchItemStatementSuccessResponse|PatchItemStatementErrorResponse
 	 */
 	public function execute( PatchItemStatementRequest $request ) {
-		$validationError = $this->validator->validate( $request );
+		$validationError = $this->useCaseValidator->validate( $request );
 		if ( $validationError ) {
 			return PatchItemStatementErrorResponse::newFromValidationError( $validationError );
 		}
@@ -96,48 +100,37 @@ class PatchItemStatement {
 			);
 		}
 
+		$serialization = $this->statementSerializer->serialize( $statementToPatch );
+
 		try {
-			$patchedStatement = $this->statementPatcher->patch( $statementToPatch, $request->getPatch() );
-		} catch ( InvalidPatchedStatementValueTypeException $e ) {
-			$propertyId = $e->getPropertyId()->getSerialization();
-			return new PatchItemStatementErrorResponse(
-				ErrorResponse::PATCHED_STATEMENT_VALUE_TYPE_MISMATCH,
-				"Value of '$propertyId' does not match property data type after the changes",
-				[
-					'patched-statement' => $e->getPatchedStatement(),
-					'property-id' => $propertyId
-				]
-			);
-		} catch ( InvalidPatchedSerializationException | InvalidPatchedStatementException $e ) {
-			return new PatchItemStatementErrorResponse(
-				ErrorResponse::PATCHED_STATEMENT_INVALID,
-				'The patch results in an invalid statement which cannot be stored'
-			);
+			$patchedSerialization = $this->jsonPatcher->patch( $serialization, $request->getPatch() );
 		} catch ( PatchPathException $e ) {
-			$path = $e->getOperation()[$e->getField()];
 			return new PatchItemStatementErrorResponse(
 				ErrorResponse::PATCH_TARGET_NOT_FOUND,
-				"Target '$path' not found on the resource",
+				"Target '{$e->getOperation()[$e->getField()]}' not found on the resource",
 				[
 					'operation' => $e->getOperation(),
 					'field' => $e->getField(),
 				]
 			);
-		} catch ( InapplicablePatchException $e ) {
-			return new PatchItemStatementErrorResponse(
-				ErrorResponse::CANNOT_APPLY_PATCH,
-				"The provided patch cannot be applied to the statement $statementId"
-			);
 		} catch ( PatchTestConditionFailedException $e ) {
+			$operation = $e->getOperation();
 			return new PatchItemStatementErrorResponse(
 				ErrorResponse::PATCH_TEST_FAILED,
 				'Test operation in the provided patch failed. ' .
-				"At path '" . $e->getOperation()['path'] .
-				"' expected '" . json_encode( $e->getOperation()['value'] ) .
+				"At path '" . $operation['path'] .
+				"' expected '" . json_encode( $operation['value'] ) .
 				"', actual: '" . json_encode( $e->getActualValue() ) . "'",
-				[ 'operation' => $e->getOperation(), 'actual-value' => $e->getActualValue() ]
+				[ 'operation' => $operation, 'actual-value' => $e->getActualValue() ]
 			);
 		}
+
+		$postPatchValidationError = $this->statementValidator->validate( $patchedSerialization );
+		if ( $postPatchValidationError ) {
+			return PatchItemStatementErrorResponse::newFromValidationError( $postPatchValidationError );
+		}
+
+		$patchedStatement = $this->statementValidator->getValidatedStatement();
 
 		try {
 			$item->getStatements()->replaceStatement( $statementId, $patchedStatement );

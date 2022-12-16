@@ -5,20 +5,17 @@ namespace Wikibase\Repo\Tests\RestApi\UseCases\PatchItemStatement;
 use Generator;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Swaggest\JsonDiff\JsonDiff;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityPermissionChecker;
-use Wikibase\Repo\RestApi\Domain\Exceptions\InapplicablePatchException;
-use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedSerializationException;
-use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedStatementException;
-use Wikibase\Repo\RestApi\Domain\Exceptions\InvalidPatchedStatementValueTypeException;
-use Wikibase\Repo\RestApi\Domain\Exceptions\PatchPathException;
-use Wikibase\Repo\RestApi\Domain\Exceptions\PatchTestConditionFailedException;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\ItemRevision;
 use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
@@ -27,7 +24,15 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
-use Wikibase\Repo\RestApi\Domain\Services\StatementPatcher;
+use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
+use Wikibase\Repo\RestApi\Infrastructure\DataTypeValidatorFactoryDataValueValidator;
+use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
+use Wikibase\Repo\RestApi\Serialization\PropertyValuePairDeserializer;
+use Wikibase\Repo\RestApi\Serialization\PropertyValuePairSerializer;
+use Wikibase\Repo\RestApi\Serialization\ReferenceDeserializer;
+use Wikibase\Repo\RestApi\Serialization\ReferenceSerializer;
+use Wikibase\Repo\RestApi\Serialization\StatementDeserializer;
+use Wikibase\Repo\RestApi\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatement;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementErrorResponse;
@@ -35,8 +40,10 @@ use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementRequest;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementSuccessResponse;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
+use Wikibase\Repo\RestApi\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Validation\ValidationError;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatement
@@ -49,20 +56,21 @@ class PatchItemStatementTest extends TestCase {
 
 	use EditMetadataHelper;
 
+	private const STRING_PROPERTY = 'P123';
+
 	/**
 	 * @var MockObject|PatchItemStatementValidator
 	 */
-	private $validator;
+	private $useCaseValidator;
+
+	private StatementSerializer $statementSerializer;
+
+	private StatementValidator $statementValidator;
 
 	/**
 	 * @var MockObject|ItemRetriever
 	 */
 	private $itemRetriever;
-
-	/**
-	 * @var MockObject|StatementPatcher
-	 */
-	private $statementPatcher;
 
 	/**
 	 * @var MockObject|ItemUpdater
@@ -82,13 +90,19 @@ class PatchItemStatementTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->validator = $this->createStub( PatchItemStatementValidator::class );
+		if ( !class_exists( JsonDiff::class ) ) {
+			$this->markTestSkipped( 'Skipping while swaggest/json-diff has not made it to mediawiki/vendor yet (T316245).' );
+		}
+
+		$this->useCaseValidator = $this->createStub( PatchItemStatementValidator::class );
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
-		$this->statementPatcher = $this->createStub( StatementPatcher::class );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
 		$this->revisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
 		$this->permissionChecker = $this->createStub( PermissionChecker::class );
 		$this->permissionChecker->method( 'canEdit' )->willReturn( true );
+
+		$this->statementSerializer = $this->newStatementSerializer();
+		$this->statementValidator = $this->newStatementValidator();
 	}
 
 	public function testPatchItemStatement_success(): void {
@@ -96,12 +110,12 @@ class PatchItemStatementTest extends TestCase {
 		$statementId = $itemId . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 		$oldStatementValue = 'old statement value';
 		$newStatementValue = 'new statement value';
-		$statement = NewStatement::forProperty( 'P123' )
+		$statement = NewStatement::forProperty( self::STRING_PROPERTY )
 			->withGuid( $statementId )
 			->withValue( $oldStatementValue )
 			->build();
 
-		$patchedStatement = NewStatement::forProperty( 'P123' )
+		$patchedStatement = NewStatement::forProperty( self::STRING_PROPERTY )
 			->withGuid( $statementId )
 			->withValue( $newStatementValue )
 			->build();
@@ -137,12 +151,6 @@ class PatchItemStatementTest extends TestCase {
 			->with( $itemId )
 			->willReturn( $item );
 
-		$this->statementPatcher = $this->createStub( StatementPatcher::class );
-		$this->statementPatcher
-			->method( 'patch' )
-			->with( $statement, $patch )
-			->willReturn( $patchedStatement );
-
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
 		$this->itemUpdater
 			->method( 'update' )
@@ -158,11 +166,15 @@ class PatchItemStatementTest extends TestCase {
 
 		$this->assertInstanceOf( PatchItemStatementSuccessResponse::class, $response );
 		$this->assertEquals( $patchedStatement, $response->getStatement() );
+		$this->assertEquals(
+			$item->getStatements()->getFirstStatementWithGuid( $statementId ),
+			$patchedStatement
+		);
 		$this->assertSame( $modificationTimestamp, $response->getLastModified() );
 		$this->assertSame( $postModificationRevisionId, $response->getRevisionId() );
 	}
 
-	public function testPatchItemStatement_requestValidationError(): void {
+	public function testGivenInvalidRequest_returnsErrorResponse(): void {
 		$requestData = [
 			'$statementId' => 'INVALID-STATEMENT-ID',
 			'$patch' => [ 'INVALID-PATCH' ],
@@ -174,8 +186,8 @@ class PatchItemStatementTest extends TestCase {
 		];
 
 		$request = $this->newUseCaseRequest( $requestData );
-		$this->validator = $this->createStub( PatchItemStatementValidator::class );
-		$this->validator
+		$this->useCaseValidator = $this->createStub( PatchItemStatementValidator::class );
+		$this->useCaseValidator
 			->method( 'validate' )
 			->with( $request )
 			->willReturn(
@@ -267,7 +279,7 @@ class PatchItemStatementTest extends TestCase {
 	public function testRejectsPropertyIdChange(): void {
 		$itemId = 'Q123';
 		$guid = $itemId . '$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-		$originalStatement = NewStatement::noValueFor( 'P123' )->withGuid( $guid )->build();
+		$originalStatement = NewStatement::noValueFor( self::STRING_PROPERTY )->withGuid( $guid )->build();
 		$patchedStatement = NewStatement::noValueFor( 'P321' )->withGuid( $guid )->build();
 		$item = NewItem::withId( $itemId )->andStatement( $originalStatement )->build();
 
@@ -276,8 +288,8 @@ class PatchItemStatementTest extends TestCase {
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemRetriever->method( 'getItem' )->willReturn( $item );
 
-		$this->statementPatcher = $this->createStub( StatementPatcher::class );
-		$this->statementPatcher->method( 'patch' )->willReturn( $patchedStatement );
+		$this->statementValidator = $this->createStub( StatementValidator::class );
+		$this->statementValidator->method( 'getValidatedStatement' )->willReturn( $patchedStatement );
 
 		$response = $this->newUseCase()->execute(
 			$this->newUseCaseRequest( [
@@ -294,8 +306,8 @@ class PatchItemStatementTest extends TestCase {
 		$itemId = 'Q123';
 		$originalGuid = $itemId . '$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 		$newGuid = $itemId . '$FFFFFFFF-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-		$originalStatement = NewStatement::noValueFor( 'P123' )->withGuid( $originalGuid )->build();
-		$patchedStatement = NewStatement::noValueFor( 'P123' )->withGuid( $newGuid )->build();
+		$originalStatement = NewStatement::noValueFor( self::STRING_PROPERTY )->withGuid( $originalGuid )->build();
+		$patchedStatement = NewStatement::noValueFor( self::STRING_PROPERTY )->withGuid( $newGuid )->build();
 		$item = NewItem::withId( $itemId )->andStatement( $originalStatement )->build();
 
 		$this->revisionMetadataRetriever = $this->newRevisionMetadataRetrieverWithSomeConcreteRevision();
@@ -303,8 +315,8 @@ class PatchItemStatementTest extends TestCase {
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemRetriever->method( 'getItem' )->willReturn( $item );
 
-		$this->statementPatcher = $this->createStub( StatementPatcher::class );
-		$this->statementPatcher->method( 'patch' )->willReturn( $patchedStatement );
+		$this->statementValidator = $this->createStub( StatementValidator::class );
+		$this->statementValidator->method( 'getValidatedStatement' )->willReturn( $patchedStatement );
 
 		$response = $this->newUseCase()->execute(
 			$this->newUseCaseRequest( [
@@ -315,107 +327,6 @@ class PatchItemStatementTest extends TestCase {
 
 		$this->assertInstanceOf( PatchItemStatementErrorResponse::class, $response );
 		$this->assertSame( $response->getCode(), ErrorResponse::INVALID_OPERATION_CHANGED_STATEMENT_ID );
-	}
-
-	/**
-	 * @dataProvider patchExceptionProvider
-	 */
-	public function testGivenPatcherThrows_returnsCorrespondingErrorResponse(
-		\Exception $patcherException,
-		string $expectedMessage,
-		string $expectedErrorCode,
-		array $expectedContext = null
-	): void {
-		$originalStatement = NewStatement::noValueFor( 'P123' )
-			->withGuid( 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
-			->build();
-		$item = NewItem::withId( 'Q123' )->andStatement( $originalStatement )->build();
-
-		$this->revisionMetadataRetriever = $this->newRevisionMetadataRetrieverWithSomeConcreteRevision();
-
-		$this->itemRetriever = $this->createStub( ItemRetriever::class );
-		$this->itemRetriever->method( 'getItem' )->willReturn( $item );
-
-		$this->statementPatcher = $this->createStub( StatementPatcher::class );
-		$this->statementPatcher->method( 'patch' )->willThrowException( $patcherException );
-
-		$response = $this->newUseCase()->execute(
-			$this->newUseCaseRequest( [
-				'$statementId' => $originalStatement->getGuid(),
-				'$patch' => $this->getValidValueReplacingPatch(),
-			] )
-		);
-
-		$this->assertInstanceOf( PatchItemStatementErrorResponse::class, $response );
-		$this->assertEquals( $expectedMessage, $response->getMessage() );
-		$this->assertEquals( $expectedErrorCode, $response->getCode() );
-		$this->assertEquals( $expectedContext, $response->getContext() );
-	}
-
-	public function patchExceptionProvider(): Generator {
-		yield 'InvalidPatchedSerializationException' => [
-			new InvalidPatchedSerializationException(),
-			'The patch results in an invalid statement which cannot be stored',
-			'patched-statement-invalid'
-		];
-
-		yield 'InvalidPatchedStatementException' => [
-			new InvalidPatchedStatementException(),
-			'The patch results in an invalid statement which cannot be stored',
-			'patched-statement-invalid'
-		];
-
-		$propertyId = new NumericPropertyId( 'P123' );
-		$patchedStatement = NewStatement::forProperty( $propertyId )
-			->withGuid( 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
-			->withValue( 'potato' )
-			->build();
-		yield 'InvalidPatchedStatementValueTypeException' => [
-			new InvalidPatchedStatementValueTypeException( $patchedStatement, $propertyId ),
-			"Value of '$propertyId' does not match property data type after the changes",
-			'patched-statement-value-type-mismatch',
-			[ 'patched-statement' => $patchedStatement, 'property-id' => $propertyId ]
-		];
-
-		$op = [
-			'op' => 'replace',
-			'path' => '/does/not/exist',
-			'value' => 'x'
-		];
-		yield 'PatchPathException' => [
-			new PatchPathException( '-', $op, 'path' ),
-			"Target '{$op['path']}' not found on the resource",
-			'patch-target-not-found',
-			[
-				'operation' => $op,
-				'field' => 'path'
-			]
-		];
-
-		yield 'InapplicablePatchException' => [
-			new InapplicablePatchException(),
-			'The provided patch cannot be applied to the statement Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
-			'cannot-apply-patch'
-		];
-
-		$testOperation = [
-			'op' => 'test',
-			'path' => '/value/type',
-			'value' => 'value',
-		];
-		yield 'PatchTestConditionFailedException' => [
-			new PatchTestConditionFailedException(
-				'message',
-				$testOperation,
-				[ 'key' => 'actualValue' ]
-			),
-			"Test operation in the provided patch failed. At path '{$testOperation['path']}' " .
-			"expected '" . json_encode( $testOperation['value'] ) . "', " .
-			"actual: '" . json_encode( [ 'key' => 'actualValue' ] ) . "'",
-			'patch-test-failed',
-			[ 'operation' => $testOperation, 'actual-value' => [ 'key' => 'actualValue' ] ]
-
-		];
 	}
 
 	public function testGivenProtectedItem_returnsErrorResponse(): void {
@@ -434,7 +345,7 @@ class PatchItemStatementTest extends TestCase {
 		$this->itemRetriever->method( 'getItem' )->willReturn(
 			NewItem::withId( $itemId )
 				->andStatement(
-					NewStatement::forProperty( 'P123' )
+					NewStatement::forProperty( self::STRING_PROPERTY )
 						->withGuid( $statementId )
 						->withValue( 'abc' )
 						->build()
@@ -451,12 +362,77 @@ class PatchItemStatementTest extends TestCase {
 		$this->assertSame( ErrorResponse::PERMISSION_DENIED, $response->getCode() );
 	}
 
+	/**
+	 * @dataProvider inapplicablePatchProvider
+	 */
+	public function testGivenValidInapplicablePatch_returnsErrorResponse( array $patch, string $expectedErrorCode ): void {
+		$statementId = new StatementGuid( new ItemId( 'Q123' ), 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
+		$this->itemRetriever = $this->newItemRetrieverForItemWithStringStatement( $statementId );
+		$this->revisionMetadataRetriever = $this->newRevisionMetadataRetrieverWithSomeConcreteRevision();
+
+		$response = $this->newUseCase()->execute(
+			$this->newUseCaseRequest( [
+				'$statementId' => "$statementId",
+				'$patch' => $patch,
+			] )
+		);
+		$this->assertInstanceOf( PatchItemStatementErrorResponse::class, $response );
+		$this->assertSame( $expectedErrorCode, $response->getCode() );
+	}
+
+	public function inapplicablePatchProvider(): Generator {
+		yield 'patch test operation failed' => [
+			[
+				[
+					'op' => 'test',
+					'path' => '/value/content',
+					'value' => 'these are not the droids you are looking for',
+				]
+			],
+			ErrorResponse::PATCH_TEST_FAILED,
+		];
+
+		yield 'non-existent path' => [
+			[
+				[
+					'op' => 'remove',
+					'path' => '/this/path/does/not/exist',
+				]
+			],
+			ErrorResponse::PATCH_TARGET_NOT_FOUND,
+		];
+	}
+
+	public function testGivenPatchedStatementInvalid_returnsErrorResponse(): void {
+		$patch = [
+			[
+				'op' => 'remove',
+				'path' => '/property',
+			],
+		];
+
+		$statementId = new StatementGuid( new ItemId( 'Q123' ), 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
+		$this->itemRetriever = $this->newItemRetrieverForItemWithStringStatement( $statementId );
+		$this->revisionMetadataRetriever = $this->newRevisionMetadataRetrieverWithSomeConcreteRevision();
+
+		$response = $this->newUseCase()->execute(
+			$this->newUseCaseRequest( [
+				'$statementId' => "$statementId",
+				'$patch' => $patch,
+			] )
+		);
+		$this->assertInstanceOf( PatchItemStatementErrorResponse::class, $response );
+		$this->assertSame( ErrorResponse::PATCHED_STATEMENT_INVALID, $response->getCode() );
+	}
+
 	private function newUseCase(): PatchItemStatement {
 		return new PatchItemStatement(
-			$this->validator,
+			$this->useCaseValidator,
+			new JsonDiffJsonPatcher(),
+			$this->statementSerializer,
+			$this->statementValidator,
 			new StatementGuidParser( new ItemIdParser() ),
 			$this->itemRetriever,
-			$this->statementPatcher,
 			$this->itemUpdater,
 			$this->revisionMetadataRetriever,
 			$this->permissionChecker
@@ -482,6 +458,21 @@ class PatchItemStatementTest extends TestCase {
 		return $metadataRetriever;
 	}
 
+	private function newItemRetrieverForItemWithStringStatement( StatementGuid $statementId ): ItemRetriever {
+		$retriever = $this->createStub( ItemRetriever::class );
+		$retriever->method( 'getItem' )->willReturn(
+			NewItem::withId( $statementId->getEntityId() )
+				->andStatement(
+					NewStatement::forProperty( self::STRING_PROPERTY )
+						->withGuid( $statementId )
+						->withValue( 'abc' )
+						->build()
+				)->build()
+		);
+
+		return $retriever;
+	}
+
 	private function getValidValueReplacingPatch( string $newStatementValue = '' ): array {
 		return [
 			[
@@ -496,6 +487,39 @@ class PatchItemStatementTest extends TestCase {
 		return $this->newItemRevisionMetadataRetriever(
 			LatestItemRevisionMetadataResult::concreteRevision( 123, '20220708030405' )
 		);
+	}
+
+	private function newStatementSerializer(): StatementSerializer {
+		$propertyValuePairSerializer = new PropertyValuePairSerializer( $this->newDataTypeLookup() );
+
+		return new StatementSerializer(
+			$propertyValuePairSerializer,
+			new ReferenceSerializer( $propertyValuePairSerializer )
+		);
+	}
+
+	private function newStatementValidator(): StatementValidator {
+		$propertyValuePairDeserializer = new PropertyValuePairDeserializer(
+			WikibaseRepo::getEntityIdParser(),
+			$this->newDataTypeLookup(),
+			new DataTypeFactoryValueTypeLookup( WikibaseRepo::getDataTypeFactory() ),
+			WikibaseRepo::getDataValueDeserializer(),
+			new DataTypeValidatorFactoryDataValueValidator(
+				WikibaseRepo::getDataTypeValidatorFactory()
+			)
+		);
+
+		return new StatementValidator( new StatementDeserializer(
+			$propertyValuePairDeserializer,
+			new ReferenceDeserializer( $propertyValuePairDeserializer )
+		) );
+	}
+
+	private function newDataTypeLookup(): PropertyDataTypeLookup {
+		$dataTypeLookup = new InMemoryDataTypeLookup();
+		$dataTypeLookup->setDataTypeForProperty( new NumericPropertyId( self::STRING_PROPERTY ), 'string' );
+
+		return $dataTypeLookup;
 	}
 
 }
