@@ -1,29 +1,29 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\UseCases\AddItemStatement;
+namespace Wikibase\Repo\Tests\RestApi\UseCases\ReplaceItemStatement;
 
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
+use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementErrorResponse;
 use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Validation\ValidationError;
 
 /**
- * @covers \Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementErrorResponse
+ * @covers \Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementErrorResponse
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class AddItemStatementErrorResponseTest extends TestCase {
+class ReplaceItemStatementErrorResponseTest extends TestCase {
 
 	/**
 	 * @dataProvider validationErrorDataProvider
 	 */
 	public function testNewFromValidationError( ValidationError $validationError, string $expectedCode, string $expectedMessage ): void {
-		$response = AddItemStatementErrorResponse::newFromValidationError( $validationError );
+		$response = ReplaceItemStatementErrorResponse::newFromValidationError( $validationError );
 
 		$this->assertEquals( $expectedCode, $response->getCode() );
 		$this->assertEquals( $expectedMessage, $response->getMessage() );
@@ -73,7 +73,7 @@ class AddItemStatementErrorResponseTest extends TestCase {
 	public function testNewFromUnknownCode(): void {
 		$this->expectException( \LogicException::class );
 
-		AddItemStatementErrorResponse::newFromValidationError(
+		ReplaceItemStatementErrorResponse::newFromValidationError(
 			new ValidationError( 'unknown' )
 		);
 	}
