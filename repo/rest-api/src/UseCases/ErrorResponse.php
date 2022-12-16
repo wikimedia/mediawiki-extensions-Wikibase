@@ -12,6 +12,7 @@ class ErrorResponse {
 	public const INVALID_ITEM_ID = 'invalid-item-id';
 	public const INVALID_STATEMENT_ID = 'invalid-statement-id';
 	public const INVALID_STATEMENT_DATA = 'invalid-statement-data';
+	public const INVALID_STATEMENT_DATA_FIELD = 'statement-data-invalid-field';
 	public const INVALID_OPERATION_CHANGED_STATEMENT_ID = 'invalid-operation-change-statement-id';
 	public const INVALID_OPERATION_CHANGED_PROPERTY = 'invalid-operation-change-property-of-statement';
 	public const PATCHED_STATEMENT_INVALID = 'patched-statement-invalid';
