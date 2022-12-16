@@ -16,7 +16,7 @@ class ReferenceDeserializer {
 	}
 
 	public function deserialize( array $serialization ): Reference {
-		if ( !isset( $serialization['parts'] ) ) {
+		if ( !array_key_exists( 'parts', $serialization ) ) {
 			throw new MissingFieldException();
 		}
 		if ( !is_array( $serialization['parts'] ) || !$this->isArrayOfArrays( $serialization['parts'] ) ) {

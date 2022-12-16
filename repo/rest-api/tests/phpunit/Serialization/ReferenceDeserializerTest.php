@@ -77,6 +77,11 @@ class ReferenceDeserializerTest extends TestCase {
 			[]
 		];
 
+		yield 'null parts' => [
+			new InvalidFieldException( 'parts', null ),
+			[ 'parts' => null ],
+		];
+
 		yield 'invalid parts type' => [
 			new InvalidFieldException( 'parts', 'potato' ),
 			[ 'parts' => 'potato' ],
