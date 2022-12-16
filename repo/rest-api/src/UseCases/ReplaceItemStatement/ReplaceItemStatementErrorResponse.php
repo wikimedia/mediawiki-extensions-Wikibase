@@ -39,7 +39,7 @@ class ReplaceItemStatementErrorResponse extends ErrorResponse {
 			case StatementValidator::CODE_INVALID_FIELD:
 				return new self(
 					ErrorResponse::INVALID_STATEMENT_DATA_FIELD,
-					"Invalid input for ${context[StatementValidator::CONTEXT_FIELD_NAME]}",
+					"Invalid input for {$context[StatementValidator::CONTEXT_FIELD_NAME]}",
 					[
 						'path' => $context[StatementValidator::CONTEXT_FIELD_NAME],
 						'value' => $context[StatementValidator::CONTEXT_FIELD_VALUE],
