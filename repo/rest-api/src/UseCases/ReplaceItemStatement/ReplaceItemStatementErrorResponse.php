@@ -38,12 +38,20 @@ class ReplaceItemStatementErrorResponse extends ErrorResponse {
 
 			case StatementValidator::CODE_INVALID_FIELD:
 				return new self(
-					ErrorResponse::INVALID_STATEMENT_DATA_FIELD,
+					ErrorResponse::STATEMENT_DATA_INVALID_FIELD,
 					"Invalid input for {$context[StatementValidator::CONTEXT_FIELD_NAME]}",
 					[
 						'path' => $context[StatementValidator::CONTEXT_FIELD_NAME],
 						'value' => $context[StatementValidator::CONTEXT_FIELD_VALUE],
 					]
+				);
+
+			case StatementValidator::CODE_MISSING_FIELD:
+				return new self(
+					ErrorResponse::STATEMENT_DATA_MISSING_FIELD,
+					'Mandatory field missing in the statement data: ' .
+					$context[StatementValidator::CONTEXT_FIELD_NAME],
+					[ 'path' => $context[StatementValidator::CONTEXT_FIELD_NAME] ]
 				);
 
 			case EditMetadataValidator::CODE_INVALID_TAG:

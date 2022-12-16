@@ -4,6 +4,7 @@ namespace Wikibase\Repo\RestApi\Validation;
 
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\RestApi\Serialization\InvalidFieldException;
+use Wikibase\Repo\RestApi\Serialization\MissingFieldException;
 use Wikibase\Repo\RestApi\Serialization\StatementDeserializer;
 
 /**
@@ -13,6 +14,7 @@ class StatementValidator {
 
 	public const CODE_INVALID = 'invalid-statement';
 	public const CODE_INVALID_FIELD = 'invalid-statement-field';
+	public const CODE_MISSING_FIELD = 'statement-data-missing-field';
 
 	public const CONTEXT_FIELD_NAME = 'field';
 	public const CONTEXT_FIELD_VALUE = 'value';
@@ -28,6 +30,8 @@ class StatementValidator {
 	public function validate( array $statementSerialization ): ?ValidationError {
 		try {
 			$this->deserializedStatement = $this->deserializer->deserialize( $statementSerialization );
+		} catch ( MissingFieldException $e ) {
+			return new ValidationError( self::CODE_MISSING_FIELD, [ self::CONTEXT_FIELD_NAME => $e->getField() ] );
 		} catch ( InvalidFieldException $e ) {
 			return new ValidationError(
 				self::CODE_INVALID_FIELD,

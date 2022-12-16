@@ -12,6 +12,7 @@ use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\Serialization\InvalidFieldException;
+use Wikibase\Repo\RestApi\Serialization\MissingFieldException;
 use Wikibase\Repo\RestApi\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\RestApi\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\RestApi\Serialization\SerializationException;
@@ -197,6 +198,25 @@ class StatementDeserializerTest extends TestCase {
 				'value' => [ 'type' => 'somevalue' ],
 			],
 		];
+	}
+
+	public function testDeserializationErrorFromPropertyValuePair(): void {
+		$expectedException = new MissingFieldException( 'value' );
+		$propValPairDeserializer = $this->createStub( PropertyValuePairDeserializer::class );
+		$propValPairDeserializer->method( 'deserialize' )
+			->willThrowException( $expectedException );
+
+		$deserializer = new StatementDeserializer(
+			$propValPairDeserializer,
+			$this->createStub( ReferenceDeserializer::class )
+		);
+
+		try {
+			$deserializer->deserialize( [ 'property' => [ 'id' => 'P123' ] ] );
+			$this->fail( 'Expected exception was not thrown.' );
+		} catch ( Throwable $e ) {
+			$this->assertEquals( $expectedException, $e );
+		}
 	}
 
 	private function newDeserializer(): StatementDeserializer {

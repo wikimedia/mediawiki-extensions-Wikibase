@@ -275,7 +275,7 @@ class PropertyValuePairDeserializerTest extends TestCase {
 		];
 
 		yield 'missing value field' => [
-			new MissingFieldException(),
+			new MissingFieldException( 'value' ),
 			[
 				'property' => [
 					'id' => self::STRING_PROPERTY_ID,
@@ -284,7 +284,7 @@ class PropertyValuePairDeserializerTest extends TestCase {
 		];
 
 		yield 'missing value type field' => [
-			new MissingFieldException(),
+			new MissingFieldException( 'type' ),
 			[
 				'value' => [ 'content' => 'I am goat' ],
 				'property' => [
@@ -294,7 +294,7 @@ class PropertyValuePairDeserializerTest extends TestCase {
 		];
 
 		yield 'missing content field' => [
-			new MissingFieldException(),
+			new MissingFieldException( 'content' ),
 			[
 				'value' => [ 'type' => 'value' ],
 				'property' => [
@@ -304,14 +304,14 @@ class PropertyValuePairDeserializerTest extends TestCase {
 		];
 
 		yield 'missing property field' => [
-			new MissingFieldException(),
+			new MissingFieldException( 'property' ),
 			[
 				'value' => [ 'type' => 'novalue' ],
 			]
 		];
 
 		yield 'missing property id field' => [
-			new MissingFieldException(),
+			new MissingFieldException( 'id' ),
 			[
 				'value' => [ 'type' => 'novalue' ],
 				'property' => [],

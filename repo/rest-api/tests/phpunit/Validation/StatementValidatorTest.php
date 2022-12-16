@@ -7,6 +7,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\RestApi\Serialization\InvalidFieldException;
+use Wikibase\Repo\RestApi\Serialization\MissingFieldException;
 use Wikibase\Repo\RestApi\Serialization\SerializationException;
 use Wikibase\Repo\RestApi\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Validation\StatementValidator;
@@ -60,6 +61,12 @@ class StatementValidatorTest extends TestCase {
 			new InvalidFieldException( 'some-field', 'some-value' ),
 			StatementValidator::CODE_INVALID_FIELD,
 			[ 'field' => 'some-field', 'value' => 'some-value' ],
+		];
+
+		yield 'missing field exception' => [
+			new MissingFieldException( 'property' ),
+			StatementValidator::CODE_MISSING_FIELD,
+			[ 'field' => 'property' ],
 		];
 	}
 

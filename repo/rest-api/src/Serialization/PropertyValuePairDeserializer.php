@@ -68,29 +68,21 @@ class PropertyValuePairDeserializer {
 	}
 
 	private function validateSerialization( array $serialization ): void {
-		if ( !array_key_exists( 'value', $serialization )
-			 || !array_key_exists( 'property', $serialization )
-		) {
-			throw new MissingFieldException();
-		}
-
+		$this->assertFieldExists( $serialization, 'property' );
 		$this->assertFieldIsArray( $serialization, 'property' );
-		$this->assertFieldIsArray( $serialization, 'value' );
-
 		$this->validateProperty( $serialization['property'] );
+
+		$this->assertFieldExists( $serialization, 'value' );
+		$this->assertFieldIsArray( $serialization, 'value' );
 		$this->validateValue( $serialization['value'] );
 	}
 
 	private function validateProperty( array $propertySerialization ): void {
-		if ( !array_key_exists( 'id', $propertySerialization ) ) {
-			throw new MissingFieldException();
-		}
+		$this->assertFieldExists( $propertySerialization, 'id' );
 	}
 
 	private function validateValue( array $valueSerialization ): void {
-		if ( !array_key_exists( 'type', $valueSerialization ) ) {
-			throw new MissingFieldException();
-		}
+		$this->assertFieldExists( $valueSerialization, 'type' );
 
 		if ( !in_array( $valueSerialization['type'], [ 'value', 'novalue', 'somevalue' ], true ) ) {
 			throw new InvalidFieldException( 'type', $valueSerialization['type'] );
@@ -112,9 +104,7 @@ class PropertyValuePairDeserializer {
 	}
 
 	private function deserializeValue( string $dataTypeId, array $valueSerialization ): DataValue {
-		if ( !array_key_exists( 'content', $valueSerialization ) ) {
-			throw new MissingFieldException();
-		}
+		$this->assertFieldExists( $valueSerialization, 'content' );
 
 		$dataValueType = $this->valueTypeLookup->getValueType( $dataTypeId );
 		switch ( $dataValueType ) {
@@ -173,6 +163,12 @@ class PropertyValuePairDeserializer {
 
 	private function newTimeValue( string $timestamp, int $precision, string $calendarmodel ): TimeValue {
 		return new TimeValue( $timestamp, 0, 0, 0, $precision, $calendarmodel );
+	}
+
+	private function assertFieldExists( array $serialization, string $field ): void {
+		if ( !array_key_exists( $field, $serialization ) ) {
+			throw new MissingFieldException( $field );
+		}
 	}
 
 	private function assertFieldIsArray( array $serializationPart, string $field ): void {

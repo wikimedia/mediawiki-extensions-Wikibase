@@ -229,17 +229,6 @@ describe( 'PUT statement tests', () => {
 					assert.include( response.body.message, '500' );
 				} );
 
-				it( 'invalid statement data', async () => {
-					const invalidStatement = {
-						invalidKey: []
-					};
-					const response = await newReplaceRequestBuilder( testItemId, testStatementId, invalidStatement )
-						.assertInvalidRequest()
-						.makeRequest();
-
-					assertValid400Response( response, 'invalid-statement-data' );
-				} );
-
 				it( 'invalid operation - new statement has a different Statement ID', async () => {
 					const newStatementData = entityHelper.newStatementWithRandomStringValue( testPropertyId );
 					newStatementData.id = testItemId + '$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
@@ -351,6 +340,23 @@ describe( 'PUT statement tests', () => {
 					assert.strictEqual( response.body.code, 'statement-data-invalid-field' );
 					assert.deepEqual( response.body.context, { path: invalidField, value: invalidValue } );
 					assert.include( response.body.message, invalidField );
+				} );
+
+				it( 'missing statement field', async () => {
+					const missingField = 'value';
+					const statementSerialization = entityHelper.newStatementWithRandomStringValue( testPropertyId );
+					delete statementSerialization[ missingField ];
+
+					const response = await newReplaceRequestBuilder(
+						testItemId,
+						testStatementId,
+						statementSerialization
+					).assertInvalidRequest().makeRequest();
+
+					assert.strictEqual( response.status, 400 );
+					assert.strictEqual( response.body.code, 'statement-data-missing-field' );
+					assert.deepEqual( response.body.context, { path: missingField } );
+					assert.include( response.body.message, missingField );
 				} );
 
 			} );

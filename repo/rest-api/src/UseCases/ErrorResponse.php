@@ -12,7 +12,6 @@ class ErrorResponse {
 	public const INVALID_ITEM_ID = 'invalid-item-id';
 	public const INVALID_STATEMENT_ID = 'invalid-statement-id';
 	public const INVALID_STATEMENT_DATA = 'invalid-statement-data';
-	public const INVALID_STATEMENT_DATA_FIELD = 'statement-data-invalid-field';
 	public const INVALID_OPERATION_CHANGED_STATEMENT_ID = 'invalid-operation-change-statement-id';
 	public const INVALID_OPERATION_CHANGED_PROPERTY = 'invalid-operation-change-property-of-statement';
 	public const PATCHED_STATEMENT_INVALID = 'patched-statement-invalid';
@@ -27,6 +26,8 @@ class ErrorResponse {
 	public const ITEM_NOT_FOUND = 'item-not-found';
 	public const ITEM_REDIRECTED = 'redirected-item';
 	public const PERMISSION_DENIED = 'permission-denied';
+	public const STATEMENT_DATA_INVALID_FIELD = 'statement-data-invalid-field';
+	public const STATEMENT_DATA_MISSING_FIELD = 'statement-data-missing-field';
 	public const STATEMENT_NOT_FOUND = 'statement-not-found';
 	public const UNEXPECTED_ERROR = 'unexpected-error';
 
