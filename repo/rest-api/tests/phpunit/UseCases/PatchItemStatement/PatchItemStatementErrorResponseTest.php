@@ -31,9 +31,9 @@ class PatchItemStatementErrorResponseTest extends TestCase {
 	): void {
 		$response = PatchItemStatementErrorResponse::newFromValidationError( $validationError );
 
-		$this->assertEquals( $expectedCode, $response->getCode() );
-		$this->assertEquals( $expectedMessage, $response->getMessage() );
-		$this->assertEquals( $expectedContext, $response->getContext() );
+		$this->assertSame( $expectedCode, $response->getCode() );
+		$this->assertSame( $expectedMessage, $response->getMessage() );
+		$this->assertSame( $expectedContext, $response->getContext() );
 	}
 
 	public function provideValidationError(): \Generator {
