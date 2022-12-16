@@ -14,7 +14,7 @@ use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\StatementIdValidator;
 
 /**
- * @covers \Wikibase\Repo\RestApi\UseCases\AddItemStatement\RemoveItemStatementValidator
+ * @covers \Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatementValidator
  *
  * @group Wikibase
  *
