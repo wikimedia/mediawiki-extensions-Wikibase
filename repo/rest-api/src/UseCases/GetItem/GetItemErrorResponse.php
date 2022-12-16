@@ -17,13 +17,13 @@ class GetItemErrorResponse extends ErrorResponse {
 			case ItemIdValidator::CODE_INVALID:
 				return new self(
 					ErrorResponse::INVALID_ITEM_ID,
-					'Not a valid item ID: ' . $validationError->getContext()[ItemIdValidator::ERROR_CONTEXT_VALUE]
+					'Not a valid item ID: ' . $validationError->getContext()[ItemIdValidator::CONTEXT_VALUE]
 				);
 
 			case GetItemValidator::CODE_INVALID_FIELD:
 				return new self(
 					ErrorResponse::INVALID_FIELD,
-					'Not a valid field: ' . $validationError->getContext()[GetItemValidator::ERROR_CONTEXT_FIELD_VALUE]
+					'Not a valid field: ' . $validationError->getContext()[GetItemValidator::CONTEXT_FIELD_VALUE]
 				);
 
 			default:

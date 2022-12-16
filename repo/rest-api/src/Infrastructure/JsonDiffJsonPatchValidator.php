@@ -21,17 +21,17 @@ class JsonDiffJsonPatchValidator implements JsonPatchValidator {
 		} catch ( MissingFieldException $e ) {
 			return new ValidationError(
 				self::CODE_MISSING_FIELD,
-				[ self::ERROR_CONTEXT_OPERATION => (array)$e->getOperation(), self::ERROR_CONTEXT_FIELD => $e->getMissingField() ]
+				[ self::CONTEXT_OPERATION => (array)$e->getOperation(), self::CONTEXT_FIELD => $e->getMissingField() ]
 			);
 		} catch ( InvalidFieldTypeException $e ) {
 			return new ValidationError(
 				self::CODE_INVALID_FIELD_TYPE,
-				[ self::ERROR_CONTEXT_OPERATION => (array)$e->getOperation(), self::ERROR_CONTEXT_FIELD => $e->getField() ]
+				[ self::CONTEXT_OPERATION => (array)$e->getOperation(), self::CONTEXT_FIELD => $e->getField() ]
 			);
 		} catch ( UnknownOperationException $e ) {
 			return new ValidationError(
 				self::CODE_INVALID_OPERATION,
-				[ self::ERROR_CONTEXT_OPERATION => (array)$e->getOperation() ]
+				[ self::CONTEXT_OPERATION => (array)$e->getOperation() ]
 			);
 		} catch ( Exception $e ) {
 			return new ValidationError( self::CODE_INVALID );

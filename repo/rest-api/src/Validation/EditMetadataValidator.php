@@ -10,8 +10,8 @@ class EditMetadataValidator {
 	public const CODE_INVALID_TAG = 'invalid-edit-tag';
 	public const CODE_COMMENT_TOO_LONG = 'comment-too-long';
 
-	public const ERROR_CONTEXT_COMMENT_MAX_LENGTH = 'comment-max-length';
-	public const ERROR_CONTEXT_TAG_VALUE = 'tag-value';
+	public const CONTEXT_COMMENT_MAX_LENGTH = 'comment-max-length';
+	public const CONTEXT_TAG_VALUE = 'tag-value';
 
 	private int $maxCommentLength;
 	private array $allowedTags;
@@ -28,7 +28,7 @@ class EditMetadataValidator {
 		if ( $comment !== null && strlen( $comment ) > $this->maxCommentLength ) {
 			return new ValidationError(
 				self::CODE_COMMENT_TOO_LONG,
-				[ self::ERROR_CONTEXT_COMMENT_MAX_LENGTH => (string)$this->maxCommentLength ]
+				[ self::CONTEXT_COMMENT_MAX_LENGTH => (string)$this->maxCommentLength ]
 			);
 		}
 
@@ -40,7 +40,7 @@ class EditMetadataValidator {
 			if ( !in_array( $tag, $this->allowedTags ) ) {
 				return new ValidationError(
 					self::CODE_INVALID_TAG,
-					[ self::ERROR_CONTEXT_TAG_VALUE => json_encode( $tag ) ]
+					[ self::CONTEXT_TAG_VALUE => json_encode( $tag ) ]
 				);
 			}
 		}

@@ -28,7 +28,7 @@ class GetItemStatementValidatorTest extends TestCase {
 		);
 
 		$this->assertSame( StatementIdValidator::CODE_INVALID, $error->getCode() );
-		$this->assertSame( $statementId, $error->getContext()[StatementIdValidator::ERROR_CONTEXT_VALUE] );
+		$this->assertSame( $statementId, $error->getContext()[StatementIdValidator::CONTEXT_VALUE] );
 	}
 
 	public function invalidStatementIdDataProvider(): Generator {
@@ -48,7 +48,7 @@ class GetItemStatementValidatorTest extends TestCase {
 		);
 
 		$this->assertSame( ItemIdValidator::CODE_INVALID, $error->getCode() );
-		$this->assertSame( $itemId, $error->getContext()[ItemIdValidator::ERROR_CONTEXT_VALUE] );
+		$this->assertSame( $itemId, $error->getContext()[ItemIdValidator::CONTEXT_VALUE] );
 	}
 
 	public function testWithValidStatementId(): void {

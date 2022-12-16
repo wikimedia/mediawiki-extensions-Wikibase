@@ -37,7 +37,7 @@ class ReplaceItemStatementErrorResponseTest extends TestCase {
 
 	public function validationErrorDataProvider(): \Generator {
 		yield 'from invalid item ID' => [
-			new ValidationError( ItemIdValidator::CODE_INVALID, [ ItemIdValidator::ERROR_CONTEXT_VALUE => 'X123' ] ),
+			new ValidationError( ItemIdValidator::CODE_INVALID, [ ItemIdValidator::CONTEXT_VALUE => 'X123' ] ),
 			ErrorResponse::INVALID_ITEM_ID,
 			'Not a valid item ID: X123',
 			null
@@ -75,7 +75,7 @@ class ReplaceItemStatementErrorResponseTest extends TestCase {
 		yield 'from edit metadata comment too long' => [
 			new ValidationError(
 				EditMetadataValidator::CODE_COMMENT_TOO_LONG,
-				[ EditMetadataValidator::ERROR_CONTEXT_COMMENT_MAX_LENGTH => 'a million' ]
+				[ EditMetadataValidator::CONTEXT_COMMENT_MAX_LENGTH => 'a million' ]
 			),
 			ErrorResponse::COMMENT_TOO_LONG,
 			'Comment must not be longer than a million characters.',
@@ -85,7 +85,7 @@ class ReplaceItemStatementErrorResponseTest extends TestCase {
 		yield 'from invalid edit tag' => [
 			new ValidationError(
 				EditMetadataValidator::CODE_INVALID_TAG,
-				[ EditMetadataValidator::ERROR_CONTEXT_TAG_VALUE => 'not-a-valid-tag' ]
+				[ EditMetadataValidator::CONTEXT_TAG_VALUE => 'not-a-valid-tag' ]
 			),
 			ErrorResponse::INVALID_EDIT_TAG,
 			'Invalid MediaWiki tag: not-a-valid-tag',

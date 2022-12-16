@@ -46,63 +46,63 @@ class JsonDiffJsonPatchValidatorTest extends TestCase {
 		yield 'missing "op" field' => [
 			JsonPatchValidator::CODE_MISSING_FIELD,
 			[ $invalidOperationObject ],
-			[ JsonPatchValidator::ERROR_CONTEXT_OPERATION => $invalidOperationObject, JsonPatchValidator::ERROR_CONTEXT_FIELD => 'op' ]
+			[ JsonPatchValidator::CONTEXT_OPERATION => $invalidOperationObject, JsonPatchValidator::CONTEXT_FIELD => 'op' ]
 		];
 
 		$invalidOperationObject = [ 'op' => 'add', 'value' => 'foo' ];
 		yield 'missing "path" field' => [
 			JsonPatchValidator::CODE_MISSING_FIELD,
 			[ $invalidOperationObject ],
-			[ JsonPatchValidator::ERROR_CONTEXT_OPERATION => $invalidOperationObject, JsonPatchValidator::ERROR_CONTEXT_FIELD => 'path' ]
+			[ JsonPatchValidator::CONTEXT_OPERATION => $invalidOperationObject, JsonPatchValidator::CONTEXT_FIELD => 'path' ]
 		];
 
 		$invalidOperationObject = [ 'op' => 'add', 'path' => '/a/b/c' ];
 		yield 'missing "value" field' => [
 			JsonPatchValidator::CODE_MISSING_FIELD,
 			[ $invalidOperationObject ],
-			[ JsonPatchValidator::ERROR_CONTEXT_OPERATION => $invalidOperationObject, JsonPatchValidator::ERROR_CONTEXT_FIELD => 'value' ]
+			[ JsonPatchValidator::CONTEXT_OPERATION => $invalidOperationObject, JsonPatchValidator::CONTEXT_FIELD => 'value' ]
 		];
 
 		$invalidOperationObject = [ 'op' => 'copy', 'path' => '/a/b/c' ];
 		yield 'missing "from" field' => [
 			JsonPatchValidator::CODE_MISSING_FIELD,
 			[ $invalidOperationObject ],
-			[ JsonPatchValidator::ERROR_CONTEXT_OPERATION => $invalidOperationObject, JsonPatchValidator::ERROR_CONTEXT_FIELD => 'from' ]
+			[ JsonPatchValidator::CONTEXT_OPERATION => $invalidOperationObject, JsonPatchValidator::CONTEXT_FIELD => 'from' ]
 		];
 
 		$invalidOperationObject = [ 'op' => 'invalid', 'path' => '/a/b/c', 'value' => 'foo' ];
 		yield 'invalid "op" field' => [
 			JsonPatchValidator::CODE_INVALID_OPERATION,
 			[ $invalidOperationObject ],
-			[ JsonPatchValidator::ERROR_CONTEXT_OPERATION => $invalidOperationObject ]
+			[ JsonPatchValidator::CONTEXT_OPERATION => $invalidOperationObject ]
 		];
 
 		$invalidOperationObject = [ 'op' => true, 'path' => '/a/b/c', 'value' => 'foo' ];
 		yield 'invalid field type - "op" is a boolean not a string' => [
 			JsonPatchValidator::CODE_INVALID_FIELD_TYPE,
 			[ $invalidOperationObject ],
-			[ JsonPatchValidator::ERROR_CONTEXT_OPERATION => $invalidOperationObject, JsonPatchValidator::ERROR_CONTEXT_FIELD => 'op' ]
+			[ JsonPatchValidator::CONTEXT_OPERATION => $invalidOperationObject, JsonPatchValidator::CONTEXT_FIELD => 'op' ]
 		];
 
 		$invalidOperationObject = [ 'op' => [ 'foo' => [ 'bar' ], 'baz' => 42 ], 'path' => '/a/b/c', 'value' => 'foo' ];
 		yield 'invalid field type - "op" is an object not a string' => [
 			JsonPatchValidator::CODE_INVALID_FIELD_TYPE,
 			[ $invalidOperationObject ],
-			[ JsonPatchValidator::ERROR_CONTEXT_OPERATION => $invalidOperationObject, JsonPatchValidator::ERROR_CONTEXT_FIELD => 'op' ]
+			[ JsonPatchValidator::CONTEXT_OPERATION => $invalidOperationObject, JsonPatchValidator::CONTEXT_FIELD => 'op' ]
 		];
 
 		$invalidOperationObject = [ 'op' => 'add', 'path' => [ 'foo', 'bar', 'baz' ], 'value' => 'foo' ];
 		yield 'invalid field type - "path" is not a string' => [
 			JsonPatchValidator::CODE_INVALID_FIELD_TYPE,
 			[ $invalidOperationObject ],
-			[ JsonPatchValidator::ERROR_CONTEXT_OPERATION => $invalidOperationObject, JsonPatchValidator::ERROR_CONTEXT_FIELD => 'path' ]
+			[ JsonPatchValidator::CONTEXT_OPERATION => $invalidOperationObject, JsonPatchValidator::CONTEXT_FIELD => 'path' ]
 		];
 
 		$invalidOperationObject = [ 'op' => 'move', 'from' => 42, 'path' => '/a/b/c' ];
 		yield 'invalid field type - "from" is not a string' => [
 			JsonPatchValidator::CODE_INVALID_FIELD_TYPE,
 			[ $invalidOperationObject ],
-			[ JsonPatchValidator::ERROR_CONTEXT_OPERATION => $invalidOperationObject, JsonPatchValidator::ERROR_CONTEXT_FIELD => 'from' ]
+			[ JsonPatchValidator::CONTEXT_OPERATION => $invalidOperationObject, JsonPatchValidator::CONTEXT_FIELD => 'from' ]
 		];
 	}
 

@@ -12,7 +12,7 @@ use Wikibase\Repo\RestApi\Validation\ValidationError;
 class GetItemValidator {
 	public const CODE_INVALID_FIELD = 'invalid-field';
 
-	public const ERROR_CONTEXT_FIELD_VALUE = 'field-value';
+	public const CONTEXT_FIELD_VALUE = 'field-value';
 
 	private ItemIdValidator $itemIdValidator;
 
@@ -28,7 +28,7 @@ class GetItemValidator {
 	private function validateFields( array $fields ): ?ValidationError {
 		foreach ( $fields as $field ) {
 			if ( !in_array( $field, ItemData::VALID_FIELDS ) ) {
-				return new ValidationError( self::CODE_INVALID_FIELD, [ self::ERROR_CONTEXT_FIELD_VALUE => $field ] );
+				return new ValidationError( self::CODE_INVALID_FIELD, [ self::CONTEXT_FIELD_VALUE => $field ] );
 			}
 		}
 		return null;

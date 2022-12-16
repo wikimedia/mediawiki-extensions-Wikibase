@@ -44,7 +44,7 @@ class StatementIdValidatorTest extends TestCase {
 		$error = ( new StatementIdValidator( new ItemIdParser() ) )
 			->validate( $invalidId );
 		$this->assertSame( StatementIdValidator::CODE_INVALID, $error->getCode() );
-		$this->assertSame( $invalidId, $error->getContext()[StatementIdValidator::ERROR_CONTEXT_VALUE] );
+		$this->assertSame( $invalidId, $error->getContext()[StatementIdValidator::CONTEXT_VALUE] );
 	}
 
 	/**
@@ -54,7 +54,7 @@ class StatementIdValidatorTest extends TestCase {
 		$error = ( new StatementIdValidator( new BasicEntityIdParser() ) )->validate( $invalidId );
 
 		$this->assertSame( StatementIdValidator::CODE_INVALID, $error->getCode() );
-		$this->assertSame( $invalidId, $error->getContext()[StatementIdValidator::ERROR_CONTEXT_VALUE] );
+		$this->assertSame( $invalidId, $error->getContext()[StatementIdValidator::CONTEXT_VALUE] );
 	}
 
 	/**

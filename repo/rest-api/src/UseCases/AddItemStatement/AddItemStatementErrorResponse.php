@@ -19,7 +19,7 @@ class AddItemStatementErrorResponse extends ErrorResponse {
 			case ItemIdValidator::CODE_INVALID:
 				return new self(
 					ErrorResponse::INVALID_ITEM_ID,
-					'Not a valid item ID: ' . $context[ItemIdValidator::ERROR_CONTEXT_VALUE]
+					'Not a valid item ID: ' . $context[ItemIdValidator::CONTEXT_VALUE]
 				);
 
 			case StatementValidator::CODE_INVALID:
@@ -47,7 +47,7 @@ class AddItemStatementErrorResponse extends ErrorResponse {
 				);
 
 			case EditMetadataValidator::CODE_COMMENT_TOO_LONG:
-				$commentMaxLength = $context[EditMetadataValidator::ERROR_CONTEXT_COMMENT_MAX_LENGTH];
+				$commentMaxLength = $context[EditMetadataValidator::CONTEXT_COMMENT_MAX_LENGTH];
 				return new self(
 					ErrorResponse::COMMENT_TOO_LONG,
 					"Comment must not be longer than $commentMaxLength characters."
@@ -56,7 +56,7 @@ class AddItemStatementErrorResponse extends ErrorResponse {
 			case EditMetadataValidator::CODE_INVALID_TAG:
 				return new self(
 					ErrorResponse::INVALID_EDIT_TAG,
-					'Invalid MediaWiki tag: ' . $context[EditMetadataValidator::ERROR_CONTEXT_TAG_VALUE]
+					'Invalid MediaWiki tag: ' . $context[EditMetadataValidator::CONTEXT_TAG_VALUE]
 				);
 
 			default:

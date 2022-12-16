@@ -92,7 +92,7 @@ class PatchItemStatementValidatorTest extends TestCase {
 
 		$this->assertNotNull( $error );
 		$this->assertSame( ItemIdValidator::CODE_INVALID, $error->getCode() );
-		$this->assertSame( $itemId, $error->getContext()[ItemIdValidator::ERROR_CONTEXT_VALUE] );
+		$this->assertSame( $itemId, $error->getContext()[ItemIdValidator::CONTEXT_VALUE] );
 	}
 
 	public function testValidate_withInvalidStatementId(): void {
@@ -112,7 +112,7 @@ class PatchItemStatementValidatorTest extends TestCase {
 
 		$this->assertNotNull( $error );
 		$this->assertSame( StatementIdValidator::CODE_INVALID, $error->getCode() );
-		$this->assertSame( $statementId, $error->getContext()[StatementIdValidator::ERROR_CONTEXT_VALUE] );
+		$this->assertSame( $statementId, $error->getContext()[StatementIdValidator::CONTEXT_VALUE] );
 	}
 
 	public function testValidate_withInvalidPatch(): void {
@@ -155,7 +155,7 @@ class PatchItemStatementValidatorTest extends TestCase {
 		$this->assertEquals(
 			new ValidationError(
 				EditMetadataValidator::CODE_COMMENT_TOO_LONG,
-				[ EditMetadataValidator::ERROR_CONTEXT_COMMENT_MAX_LENGTH => '500' ]
+				[ EditMetadataValidator::CONTEXT_COMMENT_MAX_LENGTH => '500' ]
 			),
 			$error
 		);
@@ -178,7 +178,7 @@ class PatchItemStatementValidatorTest extends TestCase {
 		$this->assertEquals(
 			new ValidationError(
 				EditMetadataValidator::CODE_INVALID_TAG,
-				[ EditMetadataValidator::ERROR_CONTEXT_TAG_VALUE => json_encode( $invalid ) ]
+				[ EditMetadataValidator::CONTEXT_TAG_VALUE => json_encode( $invalid ) ]
 			),
 			$error
 		);

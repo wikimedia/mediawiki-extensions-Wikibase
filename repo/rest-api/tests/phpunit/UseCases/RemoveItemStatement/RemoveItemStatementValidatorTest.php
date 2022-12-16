@@ -83,7 +83,7 @@ class RemoveItemStatementValidatorTest extends TestCase {
 				'$username' => null,
 				'$itemId' => $itemId
 			],
-			[ ItemIdValidator::ERROR_CONTEXT_VALUE => $itemId ],
+			[ ItemIdValidator::CONTEXT_VALUE => $itemId ],
 			ItemIdValidator::CODE_INVALID
 		];
 
@@ -98,7 +98,7 @@ class RemoveItemStatementValidatorTest extends TestCase {
 				'$username' => null,
 				'$itemId' => $itemId
 			],
-			[ StatementIdValidator::ERROR_CONTEXT_VALUE => $statementId ],
+			[ StatementIdValidator::CONTEXT_VALUE => $statementId ],
 			StatementIdValidator::CODE_INVALID
 		];
 		yield 'Invalid statement ID (without item ID)' => [
@@ -110,7 +110,7 @@ class RemoveItemStatementValidatorTest extends TestCase {
 				'$username' => null,
 				'$itemId' => null
 			],
-			[ StatementIdValidator::ERROR_CONTEXT_VALUE => $statementId ],
+			[ StatementIdValidator::CONTEXT_VALUE => $statementId ],
 			StatementIdValidator::CODE_INVALID
 		];
 
@@ -125,7 +125,7 @@ class RemoveItemStatementValidatorTest extends TestCase {
 				'$username' => null,
 				'$itemId' => $itemId
 			],
-			[ EditMetadataValidator::ERROR_CONTEXT_COMMENT_MAX_LENGTH => strval( CommentStore::COMMENT_CHARACTER_LIMIT ) ],
+			[ EditMetadataValidator::CONTEXT_COMMENT_MAX_LENGTH => strval( CommentStore::COMMENT_CHARACTER_LIMIT ) ],
 			EditMetadataValidator::CODE_COMMENT_TOO_LONG
 		];
 
@@ -140,7 +140,7 @@ class RemoveItemStatementValidatorTest extends TestCase {
 				'$username' => null,
 				'$itemId' => null
 			],
-			[ EditMetadataValidator::ERROR_CONTEXT_TAG_VALUE => json_encode( $invalidTag ) ],
+			[ EditMetadataValidator::CONTEXT_TAG_VALUE => json_encode( $invalidTag ) ],
 			EditMetadataValidator::CODE_INVALID_TAG
 		];
 	}

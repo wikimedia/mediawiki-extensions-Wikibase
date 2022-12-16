@@ -57,7 +57,7 @@ class AddItemStatementValidatorTest extends TestCase {
 
 		$this->assertNotNull( $error );
 		$this->assertSame( ItemIdValidator::CODE_INVALID, $error->getCode() );
-		$this->assertSame( $itemId, $error->getContext()[ItemIdValidator::ERROR_CONTEXT_VALUE] );
+		$this->assertSame( $itemId, $error->getContext()[ItemIdValidator::CONTEXT_VALUE] );
 	}
 
 	public function testWithInvalidStatement(): void {
@@ -79,7 +79,7 @@ class AddItemStatementValidatorTest extends TestCase {
 		$comment = str_repeat( 'x', CommentStore::COMMENT_CHARACTER_LIMIT + 1 );
 		$expectedError = new ValidationError(
 			EditMetadataValidator::CODE_COMMENT_TOO_LONG,
-			[ EditMetadataValidator::ERROR_CONTEXT_COMMENT_MAX_LENGTH ]
+			[ EditMetadataValidator::CONTEXT_COMMENT_MAX_LENGTH ]
 		);
 
 		$this->editMetadataValidator = $this->createMock( EditMetadataValidator::class );
@@ -98,7 +98,7 @@ class AddItemStatementValidatorTest extends TestCase {
 		$invalidTags = [ 'bad', 'tags' ];
 		$expectedError = new ValidationError(
 			EditMetadataValidator::CODE_INVALID_TAG,
-			[ EditMetadataValidator::ERROR_CONTEXT_TAG_VALUE => json_encode( $invalidTags ) ]
+			[ EditMetadataValidator::CONTEXT_TAG_VALUE => json_encode( $invalidTags ) ]
 		);
 
 		$this->editMetadataValidator = $this->createMock( EditMetadataValidator::class );

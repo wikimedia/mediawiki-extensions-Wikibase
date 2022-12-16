@@ -23,13 +23,13 @@ class PatchItemStatementErrorResponse extends ErrorResponse {
 			case ItemIdValidator::CODE_INVALID:
 				return new self(
 					ErrorResponse::INVALID_ITEM_ID,
-					'Not a valid item ID: ' . $context[ItemIdValidator::ERROR_CONTEXT_VALUE]
+					'Not a valid item ID: ' . $context[ItemIdValidator::CONTEXT_VALUE]
 				);
 
 			case StatementIdValidator::CODE_INVALID:
 				return new self(
 					ErrorResponse::INVALID_STATEMENT_ID,
-					'Not a valid statement ID: ' . $context[StatementIdValidator::ERROR_CONTEXT_VALUE]
+					'Not a valid statement ID: ' . $context[StatementIdValidator::CONTEXT_VALUE]
 				);
 
 			case JsonPatchValidator::CODE_INVALID:
@@ -39,7 +39,7 @@ class PatchItemStatementErrorResponse extends ErrorResponse {
 				);
 
 			case JsonPatchValidator::CODE_INVALID_OPERATION:
-				$op = $context[JsonPatchValidator::ERROR_CONTEXT_OPERATION]['op'];
+				$op = $context[JsonPatchValidator::CONTEXT_OPERATION]['op'];
 				return new self(
 					ErrorResponse::INVALID_PATCH_OPERATION,
 					"Incorrect JSON patch operation: '$op'",
@@ -47,7 +47,7 @@ class PatchItemStatementErrorResponse extends ErrorResponse {
 				);
 
 			case JsonPatchValidator::CODE_INVALID_FIELD_TYPE:
-				$field = $context[JsonPatchValidator::ERROR_CONTEXT_FIELD];
+				$field = $context[JsonPatchValidator::CONTEXT_FIELD];
 				return new self(
 					ErrorResponse::INVALID_PATCH_FIELD_TYPE,
 					"The value of '$field' must be of type string",
@@ -55,7 +55,7 @@ class PatchItemStatementErrorResponse extends ErrorResponse {
 				);
 
 			case JsonPatchValidator::CODE_MISSING_FIELD:
-				$field = $context[JsonPatchValidator::ERROR_CONTEXT_FIELD];
+				$field = $context[JsonPatchValidator::CONTEXT_FIELD];
 				return new self(
 					ErrorResponse::MISSING_JSON_PATCH_FIELD,
 					"Missing '$field' in JSON patch",
@@ -65,11 +65,11 @@ class PatchItemStatementErrorResponse extends ErrorResponse {
 			case EditMetadataValidator::CODE_INVALID_TAG:
 				return new self(
 					ErrorResponse::INVALID_EDIT_TAG,
-					"Invalid MediaWiki tag: {$context[EditMetadataValidator::ERROR_CONTEXT_TAG_VALUE]}"
+					"Invalid MediaWiki tag: {$context[EditMetadataValidator::CONTEXT_TAG_VALUE]}"
 				);
 
 			case EditMetadataValidator::CODE_COMMENT_TOO_LONG:
-				$commentMaxLength = $context[EditMetadataValidator::ERROR_CONTEXT_COMMENT_MAX_LENGTH];
+				$commentMaxLength = $context[EditMetadataValidator::CONTEXT_COMMENT_MAX_LENGTH];
 				return new self(
 					ErrorResponse::COMMENT_TOO_LONG,
 					"Comment must not be longer than $commentMaxLength characters."

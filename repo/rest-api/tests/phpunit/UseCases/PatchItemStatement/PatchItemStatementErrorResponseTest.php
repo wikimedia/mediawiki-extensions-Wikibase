@@ -39,7 +39,7 @@ class PatchItemStatementErrorResponseTest extends TestCase {
 
 	public function provideValidationError(): \Generator {
 		yield 'from invalid item ID' => [
-			new ValidationError( ItemIdValidator::CODE_INVALID, [ ItemIdValidator::ERROR_CONTEXT_VALUE => 'X123' ] ),
+			new ValidationError( ItemIdValidator::CODE_INVALID, [ ItemIdValidator::CONTEXT_VALUE => 'X123' ] ),
 			ErrorResponse::INVALID_ITEM_ID,
 			'Not a valid item ID: X123'
 		];
@@ -47,7 +47,7 @@ class PatchItemStatementErrorResponseTest extends TestCase {
 		yield 'from invalid statement ID' => [
 			new ValidationError(
 				StatementIdValidator::CODE_INVALID,
-				[ StatementIdValidator::ERROR_CONTEXT_VALUE => 'Q123$INVALID_STATEMENT_ID' ]
+				[ StatementIdValidator::CONTEXT_VALUE => 'Q123$INVALID_STATEMENT_ID' ]
 			),
 			ErrorResponse::INVALID_STATEMENT_ID,
 			'Not a valid statement ID: Q123$INVALID_STATEMENT_ID'
@@ -60,8 +60,8 @@ class PatchItemStatementErrorResponseTest extends TestCase {
 		];
 
 		$context = [
-			JsonPatchValidator::ERROR_CONTEXT_OPERATION => [ 'path' => '/a/b/c', 'value' => 'test' ],
-			JsonPatchValidator::ERROR_CONTEXT_FIELD => 'op',
+			JsonPatchValidator::CONTEXT_OPERATION => [ 'path' => '/a/b/c', 'value' => 'test' ],
+			JsonPatchValidator::CONTEXT_FIELD => 'op',
 		];
 		yield 'from missing patch field' => [
 			new ValidationError( JsonPatchValidator::CODE_MISSING_FIELD, $context ),
@@ -70,7 +70,7 @@ class PatchItemStatementErrorResponseTest extends TestCase {
 			$context
 		];
 
-		$context = [ JsonPatchValidator::ERROR_CONTEXT_OPERATION => [ 'op' => 'bad', 'path' => '/a/b/c', 'value' => 'test' ] ];
+		$context = [ JsonPatchValidator::CONTEXT_OPERATION => [ 'op' => 'bad', 'path' => '/a/b/c', 'value' => 'test' ] ];
 		yield 'from invalid patch operation' => [
 			new ValidationError( JsonPatchValidator::CODE_INVALID_OPERATION, $context ),
 			ErrorResponse::INVALID_PATCH_OPERATION,
@@ -79,11 +79,11 @@ class PatchItemStatementErrorResponseTest extends TestCase {
 		];
 
 		$context = [
-			JsonPatchValidator::ERROR_CONTEXT_OPERATION => [
+			JsonPatchValidator::CONTEXT_OPERATION => [
 				'op' => [ 'not', [ 'a' => 'string' ] ],
 				'path' => '/a/b/c', 'value' => 'test',
 			],
-			JsonPatchValidator::ERROR_CONTEXT_FIELD => 'op',
+			JsonPatchValidator::CONTEXT_FIELD => 'op',
 		];
 		yield 'from invalid patch field type' => [
 			new ValidationError( JsonPatchValidator::CODE_INVALID_FIELD_TYPE, $context ),
@@ -95,7 +95,7 @@ class PatchItemStatementErrorResponseTest extends TestCase {
 		yield 'from comment too long' => [
 			new ValidationError(
 				EditMetadataValidator::CODE_COMMENT_TOO_LONG,
-				[ EditMetadataValidator::ERROR_CONTEXT_COMMENT_MAX_LENGTH => '500' ]
+				[ EditMetadataValidator::CONTEXT_COMMENT_MAX_LENGTH => '500' ]
 			),
 			ErrorResponse::COMMENT_TOO_LONG,
 			'Comment must not be longer than 500 characters.'
@@ -104,7 +104,7 @@ class PatchItemStatementErrorResponseTest extends TestCase {
 		yield 'from invalid tag' => [
 			new ValidationError(
 				EditMetadataValidator::CODE_INVALID_TAG,
-				[ EditMetadataValidator::ERROR_CONTEXT_TAG_VALUE => 'bad tag' ]
+				[ EditMetadataValidator::CONTEXT_TAG_VALUE => 'bad tag' ]
 			),
 			ErrorResponse::INVALID_EDIT_TAG,
 			'Invalid MediaWiki tag: bad tag'

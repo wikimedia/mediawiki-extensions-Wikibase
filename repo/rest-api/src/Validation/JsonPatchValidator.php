@@ -12,8 +12,8 @@ interface JsonPatchValidator {
 	public const CODE_MISSING_FIELD = 'patch-missing-field';
 	public const CODE_INVALID_OPERATION = 'patch-invalid-op';
 
-	public const ERROR_CONTEXT_OPERATION = 'operation';
-	public const ERROR_CONTEXT_FIELD = 'field';
+	public const CONTEXT_OPERATION = 'operation';
+	public const CONTEXT_FIELD = 'field';
 
 	public function validate( array $patch ): ?ValidationError;
 

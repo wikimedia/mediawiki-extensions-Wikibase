@@ -34,7 +34,7 @@ class EditMetadataValidatorTest extends TestCase {
 		$this->assertSame( EditMetadataValidator::CODE_COMMENT_TOO_LONG, $result->getCode() );
 		$this->assertSame(
 			(string)self::MAX_COMMENT_LENGTH,
-			$result->getContext()[EditMetadataValidator::ERROR_CONTEXT_COMMENT_MAX_LENGTH]
+			$result->getContext()[EditMetadataValidator::CONTEXT_COMMENT_MAX_LENGTH]
 		);
 	}
 
@@ -54,7 +54,7 @@ class EditMetadataValidatorTest extends TestCase {
 
 		$this->assertInstanceOf( ValidationError::class, $result );
 		$this->assertSame( EditMetadataValidator::CODE_INVALID_TAG, $result->getCode() );
-		$this->assertSame( $invalidTag, $result->getContext()[EditMetadataValidator::ERROR_CONTEXT_TAG_VALUE] );
+		$this->assertSame( $invalidTag, $result->getContext()[EditMetadataValidator::CONTEXT_TAG_VALUE] );
 	}
 
 	public function invalidEditTagsProvider(): Generator {
