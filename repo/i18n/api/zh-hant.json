@@ -6,7 +6,8 @@
 			"Kly",
 			"Mutolisp",
 			"Translatealcd",
-			"SaldırganSincap"
+			"SaldırganSincap",
+			"捍粵者"
 		]
 	},
 	"apihelp-wbavailablebadges-description": "查詢可用的徽章項目。",
@@ -326,7 +327,7 @@
 	"apihelp-wbformatentities-extended-description": "語言能夠以全域 <var>uselang</var> 參數來指定。",
 	"apihelp-wbformatentities-param-ids": "要格式化的實體 ID。",
 	"apihelp-wbformatentities-example-1": "格式化單一項目 ID。",
-	"apihelp-wbformatentities-example-2": "格式化一個項目 ID 與一個屬性 ID。",
-	"apihelp-wbformatentities-example-3": "格式化一個項目 ID、一個屬性 ID、與一個詞位 ID。",
+	"apihelp-wbformatentities-example-2": "格式化項目編號與屬性編號",
+	"apihelp-wbformatentities-example-3": "格式化項目編號、屬性編號與詞位編號。",
 	"apihelp-wbformatentities-example-4": "格式化法語裡的三個項目 ID。"
 }

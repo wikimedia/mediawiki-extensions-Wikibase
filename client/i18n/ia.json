@@ -60,7 +60,7 @@
 	"wikibase-watchlist-show-changes-pref": "Monstrar modificationes de {{WBREPONAME}} in tu observatorio",
 	"wikibase-error-deserialize-error": "Non ha potite de-serialisar le datos.",
 	"wikibase-error-serialize-error": "Non ha potite serialisar le datos.",
-	"wikibase-error-invalid-entity-id": "Le ID \"$2\" es incognite pro le systema. Per favor usa un ID de entitate valide.",
+	"wikibase-error-invalid-entity-id": "Le ID \"$2\" es incognite in le systema. Per favor usa un ID de entitate valide.",
 	"wikibase-error-exceeded-entity-access-limit": "Troppo de entitates de {{WBREPONAME}} accedite.",
 	"wikibase-error-exceeded-referenced-entity-id-limit": "Troppo de appellos a \"mw.wikibase.getReferencedEntityId\", solo usque a $2 {{PLURAL:$2|permittite}}.",
 	"unconnectedpages": "Paginas non connectite a elementos",

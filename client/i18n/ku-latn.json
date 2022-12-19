@@ -45,5 +45,6 @@
 	"wikibase-pageinfo-entity-usage": "Daneyên {{WBREPONAME}} yên di vê rûpelê de tên bikaranîn:",
 	"wikibase-otherprojects": "Di projeyên din de",
 	"wikibase-sitelinks-sitename-columnheading": "Ziman",
-	"wikibase-sitelinks-link-columnheading": "Rûpela girêdayî"
+	"wikibase-sitelinks-link-columnheading": "Rûpela girêdayî",
+	"notification-header-page-connection": "Rûpela <strong>$3</strong> was {{PLURAL:$4|-1=hêmaneke {{WBREPONAME}}|hêmana {{WBREPONAME}} ya $4}} {{GENDER:$2|hat girêdan}} ji bo ku daneyên têkildarî mijarê karibin berhevkirin."
 }

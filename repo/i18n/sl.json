@@ -322,7 +322,7 @@
 	"wikibase-entitydata-text": "Ta stran nudi povezan podatkovni vmesnik za vrednosti entitet. Prosimo, z uporabo skladnje podstrani navedite ID entitete v URL-ju.\n* Pogajanje o vsebini velja na podlagi glave odjemalca »Accept« (Sprejmi). To pomeni, da bodo podatki entitete zagotovljeni v formatu, ki ga želi vaš odjemalec. Za spletni brskalnik bo to HTML, zaradi česar bo vaš brskalnik preusmerjen na običajno stran entitete.\n* Izrecno lahko zahtevate določen format podatkov tako, da ID-ju entitete dodate ustrezno pripono datoteke: Q23.json bo vrnil podatke v formatu JSON, Q23.ttl bo vrnil RDF/Turtle itn. Podprti formati so: $1.",
 	"special-entitypage": "Stran entitete",
 	"wikibase-entitypage-title": "Stran entitete",
-	"wikibase-entitypage-text": "Tw stran preusmerja na stran entitete v repozitoriju, ki mu pripada. Navedite ID entitete v URL-ju, pri čemer uporabite skladnjo podstrani.",
+	"wikibase-entitypage-text": "Ta stran preusmerja na stran entitete v shrambi, ki ji pripada. Navedite ID entitete v URL-ju, pri čemer uporabite skladnjo podstrani.",
 	"wikibase-entitypage-bad-id": "Neveljavni ID: $1.",
 	"wikibase-error-entity-too-big": "Entiteta je prevelika. Največja dovoljena velikost entitete je $1.",
 	"wikibase-parse-error": "Slabo oblikovana vrednost.",
