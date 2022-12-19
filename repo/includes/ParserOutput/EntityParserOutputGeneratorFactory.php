@@ -6,6 +6,7 @@ use ExtensionRegistry;
 use Hooks;
 use Language;
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
+use MediaWiki\Cache\LinkBatchFactory;
 use MediaWiki\Extension\Math\MathDataUpdater;
 use PageImages\PageImages;
 use RepoGroup;
@@ -94,6 +95,11 @@ class EntityParserOutputGeneratorFactory {
 	private $repoGroup;
 
 	/**
+	 * @var LinkBatchFactory
+	 */
+	private $linkBatchFactory;
+
+	/**
 	 * @param DispatchingEntityViewFactory $entityViewFactory
 	 * @param DispatchingEntityMetaTagsCreatorFactory $entityMetaTagsCreatorFactory
 	 * @param EntityTitleLookup $entityTitleLookup
@@ -104,6 +110,7 @@ class EntityParserOutputGeneratorFactory {
 	 * @param CachingKartographerEmbeddingHandler|null $kartographerEmbeddingHandler
 	 * @param StatsdDataFactoryInterface $stats
 	 * @param RepoGroup $repoGroup
+	 * @param LinkBatchFactory $linkBatchFactory
 	 * @param string[] $preferredGeoDataProperties
 	 * @param string[] $preferredPageImagesProperties
 	 * @param string[] $globeUris Mapping of globe URIs to canonical globe names, as recognized by
@@ -120,6 +127,7 @@ class EntityParserOutputGeneratorFactory {
 		?CachingKartographerEmbeddingHandler $kartographerEmbeddingHandler,
 		StatsdDataFactoryInterface $stats,
 		RepoGroup $repoGroup,
+		LinkBatchFactory $linkBatchFactory,
 		array $preferredGeoDataProperties = [],
 		array $preferredPageImagesProperties = [],
 		array $globeUris = []
@@ -134,6 +142,7 @@ class EntityParserOutputGeneratorFactory {
 		$this->kartographerEmbeddingHandler = $kartographerEmbeddingHandler;
 		$this->stats = $stats;
 		$this->repoGroup = $repoGroup;
+		$this->linkBatchFactory = $linkBatchFactory;
 		$this->preferredGeoDataProperties = $preferredGeoDataProperties;
 		$this->preferredPageImagesProperties = $preferredPageImagesProperties;
 		$this->globeUris = $globeUris;
@@ -217,7 +226,8 @@ class EntityParserOutputGeneratorFactory {
 			),
 			new ReferencedEntitiesDataUpdater(
 				$this->entityReferenceExtractorDelegator,
-				$this->entityTitleLookup
+				$this->entityTitleLookup,
+				$this->linkBatchFactory
 			)
 		];
 

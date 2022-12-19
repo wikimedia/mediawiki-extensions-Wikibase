@@ -916,6 +916,7 @@ return [
 			WikibaseRepo::getKartographerEmbeddingHandler( $services ),
 			$services->getStatsdDataFactory(),
 			$services->getRepoGroup(),
+			$services->getLinkBatchFactory(),
 			$settings->getSetting( 'preferredGeoDataProperties' ),
 			$settings->getSetting( 'preferredPageImagesProperties' ),
 			$settings->getSetting( 'globeUris' )

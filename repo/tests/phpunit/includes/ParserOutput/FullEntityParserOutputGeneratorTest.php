@@ -214,7 +214,8 @@ class FullEntityParserOutputGeneratorTest extends EntityParserOutputGeneratorTes
 			new ItemParserOutputUpdater( $statementUpdater ),
 			new ReferencedEntitiesDataUpdater(
 				$this->newEntityReferenceExtractor(),
-				$entityTitleLookup
+				$entityTitleLookup,
+				$this->getServiceContainer()->getLinkBatchFactory()
 			)
 		];
 

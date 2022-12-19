@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\ParserOutput;
 
-use LinkBatch;
+use MediaWiki\Cache\LinkBatchFactory;
 use ParserOutput;
 use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -30,15 +30,23 @@ class ReferencedEntitiesDataUpdater implements EntityParserOutputUpdater {
 	private $entityReferenceExtractor;
 
 	/**
+	 * @var LinkBatchFactory
+	 */
+	private $linkBatchFactory;
+
+	/**
 	 * @param EntityReferenceExtractor $entityReferenceExtractor
 	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param LinkBatchFactory $linkBatchFactory
 	 */
 	public function __construct(
 		EntityReferenceExtractor $entityReferenceExtractor,
-		EntityTitleLookup $entityTitleLookup
+		EntityTitleLookup $entityTitleLookup,
+		LinkBatchFactory $linkBatchFactory
 	) {
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->entityReferenceExtractor = $entityReferenceExtractor;
+		$this->linkBatchFactory = $linkBatchFactory;
 	}
 
 	public function updateParserOutput( ParserOutput $parserOutput, EntityDocument $entity ) {
@@ -48,7 +56,7 @@ class ReferencedEntitiesDataUpdater implements EntityParserOutputUpdater {
 	}
 
 	private function addLinksToParserOutput( ParserOutput $parserOutput, array $entityIds ) {
-		$linkBatch = new LinkBatch(); // TODO inject LinkBatchFactory
+		$linkBatch = $this->linkBatchFactory->newLinkBatch();
 		$linkBatch->setCaller( __METHOD__ );
 
 		foreach ( $entityIds as $entityId ) {

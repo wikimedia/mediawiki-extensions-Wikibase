@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\FederatedProperties\ParserOutput;
 
 use Language;
+use MediaWiki\Cache\LinkBatchFactory;
 use NullStatsdDataFactory;
 use RepoGroup;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
@@ -46,7 +47,8 @@ class EntityParserOutputGeneratorFactoryTest extends FederatedPropertiesTestCase
 			$this->createMock( EntityReferenceExtractorDelegator::class ),
 			$this->createMock( CachingKartographerEmbeddingHandler::class ),
 			new NullStatsdDataFactory(),
-			$this->createMock( RepoGroup::class )
+			$this->createMock( RepoGroup::class ),
+			$this->createMock( LinkBatchFactory::class )
 		);
 	}
 

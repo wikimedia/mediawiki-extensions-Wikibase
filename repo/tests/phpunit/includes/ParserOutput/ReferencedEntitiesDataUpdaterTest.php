@@ -61,7 +61,11 @@ class ReferencedEntitiesDataUpdaterTest extends MediaWikiIntegrationTestCase {
 				return Title::makeTitle( $namespace, $id->getSerialization() );
 			} );
 
-		return new ReferencedEntitiesDataUpdater( $mockEntityIdExtractor, $entityTitleLookup );
+		return new ReferencedEntitiesDataUpdater(
+			$mockEntityIdExtractor,
+			$entityTitleLookup,
+			$this->getServiceContainer()->getLinkBatchFactory()
+		);
 	}
 
 	/**
