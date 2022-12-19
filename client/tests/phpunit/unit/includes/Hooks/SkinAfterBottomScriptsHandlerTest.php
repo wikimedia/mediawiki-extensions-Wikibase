@@ -6,7 +6,6 @@ use File;
 use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Revision\RevisionRecord;
 use Title;
-
 use Wikibase\Client\Hooks\SkinAfterBottomScriptsHandler;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\WikibaseClient;

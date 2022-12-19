@@ -612,7 +612,7 @@ abstract class SimpleCacheTestCase extends TestCase {
 		$array = [ 'a' => 'foo', 2 => 'bar' ];
 		$this->cache->set( 'key', $array );
 		$result = $this->cache->get( 'key' );
-		$this->assertTrue( is_array( $result ), 'Wrong data type. If we store array we must get an array back.' );
+		$this->assertIsArray( $result, 'Wrong data type. If we store array we must get an array back.' );
 		$this->assertEquals( $array, $result );
 	}
 
