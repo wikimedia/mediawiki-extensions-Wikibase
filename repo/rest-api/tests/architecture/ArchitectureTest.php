@@ -19,6 +19,7 @@ class ArchitectureTest {
 	private const DOMAIN_MODEL = 'Wikibase\Repo\RestApi\Domain\Model';
 	private const DOMAIN_SERVICES = 'Wikibase\Repo\RestApi\Domain\Services';
 	private const VALIDATION = 'Wikibase\Repo\RestApi\Validation';
+	private const SERIALIZATION = 'Wikibase\Repo\RestApi\Serialization';
 	private const USE_CASES = 'Wikibase\Repo\RestApi\UseCases';
 
 	/**
@@ -61,6 +62,7 @@ class ArchitectureTest {
 	/**
 	 * Use cases may depend on:
 	 *  - validation
+	 *  - serialization
 	 *  - domain services
 	 *  - domain models
 	 *  - DataModel namespaces containing entities and their parts
@@ -74,6 +76,7 @@ class ArchitectureTest {
 			->classes( Selector::all() )
 			->excluding(
 				Selector::namespace( self::VALIDATION ),
+				Selector::namespace( self::SERIALIZATION ),
 				Selector::namespace( self::USE_CASES ),
 				Selector::namespace( self::DOMAIN_MODEL ),
 				Selector::namespace( self::DOMAIN_SERVICES ),
