@@ -33,7 +33,7 @@ class JsonDiffJsonPatcherTest extends TestCase {
 	public function testPatch( array $target, array $patch, array $expected ): void {
 		$result = ( new JsonDiffJsonPatcher() )->patch( $target, $patch );
 
-		$this->assertEquals( $result, $expected );
+		$this->assertEquals( $expected, $result );
 	}
 
 	public function validPatchProvider(): Generator {
