@@ -54,7 +54,7 @@ class SiteLinkBadgeItemReferenceExtractorTest extends TestCase {
 				new SiteLink( 'enwiki', 'Bli', [ new ItemId( 'Q123' ), new ItemId( 'Q321' ) ] ),
 				new SiteLink( 'frwiki', 'Blu', [ new ItemId( 'Q123' ), new ItemId( 'Q234' ) ] ),
 			],
-			[ new ItemId( 'Q123' ), new ItemId( 'Q321' ), new ItemId( 'Q234' ) ]
+			[ new ItemId( 'Q123' ), new ItemId( 'Q321' ), new ItemId( 'Q234' ) ],
 		];
 	}
 

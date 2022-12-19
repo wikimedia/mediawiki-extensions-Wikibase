@@ -44,15 +44,15 @@ class EntityConstraintProviderTest extends \PHPUnit\Framework\TestCase {
 			'for items' => [
 				'entityType' => Item::ENTITY_TYPE,
 				'expectedValidatorTypes' => [
-					SiteLinkUniquenessValidator::class
-				]
+					SiteLinkUniquenessValidator::class,
+				],
 			],
 			'for properties' => [
 				'entityType' => Property::ENTITY_TYPE,
 				'expectedValidatorTypes' => [
-					LabelUniquenessValidator::class
-				]
-			]
+					LabelUniquenessValidator::class,
+				],
+			],
 		];
 	}
 
@@ -77,8 +77,8 @@ class EntityConstraintProviderTest extends \PHPUnit\Framework\TestCase {
 				'entityType' => Property::ENTITY_TYPE,
 				'entityId' => NumericPropertyId::newFromNumber( 1 ), // irrelevant
 				'expectedValidatorTypes' => [
-					LabelUniquenessValidator::class
-				]
+					LabelUniquenessValidator::class,
+				],
 			],
 
 			// Item
@@ -86,9 +86,9 @@ class EntityConstraintProviderTest extends \PHPUnit\Framework\TestCase {
 				'entityType' => Item::ENTITY_TYPE,
 				'entityId' => ItemId::newFromNumber( 1 ),
 				'expectedValidatorTypes' => [
-					SiteLinkUniquenessValidator::class
-				]
-			]
+					SiteLinkUniquenessValidator::class,
+				],
+			],
 		];
 	}
 

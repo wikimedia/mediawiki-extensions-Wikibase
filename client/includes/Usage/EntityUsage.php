@@ -166,7 +166,7 @@ class EntityUsage {
 		return [
 			'entityId' => $this->entityId->getSerialization(),
 			'aspect' => $this->aspect,
-			'modifier' => $this->modifier
+			'modifier' => $this->modifier,
 		];
 	}
 

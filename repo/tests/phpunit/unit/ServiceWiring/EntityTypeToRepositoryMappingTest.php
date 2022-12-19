@@ -24,13 +24,13 @@ class EntityTypeToRepositoryMappingTest extends ServiceWiringTestCase {
 			$this->getMockEntitySourceDefinitions( [
 				'somesource' => [
 					'something',
-					'another'
+					'another',
 				],
 				'another-source' => [
-					'anything'
-				]
+					'anything',
+				],
 			], [
-				'anything' => [ 'subthing' ]
+				'anything' => [ 'subthing' ],
 			] )
 		);
 
@@ -39,7 +39,7 @@ class EntityTypeToRepositoryMappingTest extends ServiceWiringTestCase {
 				'something' => [ '' ],
 				'another' => [ '' ],
 				'anything' => [ '' ],
-				'subthing' => [ '' ]
+				'subthing' => [ '' ],
 			],
 			$this->getService( 'WikibaseRepo.EntityTypeToRepositoryMapping' )
 		);
@@ -56,7 +56,7 @@ class EntityTypeToRepositoryMappingTest extends ServiceWiringTestCase {
 					false,
 					array_fill_keys( $types, [
 						'namespaceId' => 0,
-						'slot' => SlotRecord::MAIN
+						'slot' => SlotRecord::MAIN,
 					] ),
 					'',
 					'',

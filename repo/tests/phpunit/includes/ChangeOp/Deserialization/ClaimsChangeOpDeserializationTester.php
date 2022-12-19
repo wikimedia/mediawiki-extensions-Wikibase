@@ -67,17 +67,17 @@ trait ClaimsChangeOpDeserializationTester {
 		return [
 			'numeric index format' => [
 				[ 'claims' => [
-					[ 'remove' => '', 'id' => $statement->getGuid() ]
+					[ 'remove' => '', 'id' => $statement->getGuid() ],
 				] ],
 				$entity,
-				$property
+				$property,
 			],
 			'associative format' => [
 				[ 'claims' => [
-					'P7' => [ [ 'remove' => '', 'id' => $statement->getGuid() ] ]
+					'P7' => [ [ 'remove' => '', 'id' => $statement->getGuid() ] ],
 				] ],
 				$entity->copy(),
-				$property
+				$property,
 			],
 		];
 	}
@@ -111,11 +111,11 @@ trait ClaimsChangeOpDeserializationTester {
 		return [
 			'numeric index format' => [
 				[ 'claims' => [ $statementSerialization ] ],
-				$entity
+				$entity,
 			],
 			'associative format' => [
 				[ 'claims' => [ 'P7' => [ $statementSerialization ] ] ],
-				$entity
+				$entity,
 			],
 		];
 	}

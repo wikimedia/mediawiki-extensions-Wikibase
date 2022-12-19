@@ -76,8 +76,8 @@ class ApiClientInfoTest extends MediaWikiIntegrationTestCase {
 					'base' => $settings->getSetting( 'repoUrl' ),
 					'scriptpath' => $settings->getSetting( 'repoScriptPath' ),
 					'articlepath' => $settings->getSetting( 'repoArticlePath' ),
-				]
-			]
+				],
+			],
 		];
 
 		$siteid = [ 'siteid' => $settings->getSetting( 'siteGlobalID' ) ];
@@ -85,24 +85,24 @@ class ApiClientInfoTest extends MediaWikiIntegrationTestCase {
 		return [
 			[
 				[],
-				$this->getApiRequestParams( '' )
+				$this->getApiRequestParams( '' ),
 			],
 			[
 				$repo + $siteid,
-				$this->getApiRequestParams( null )
+				$this->getApiRequestParams( null ),
 			],
 			[
 				$repo + $siteid,
-				$this->getApiRequestParams( 'url|siteid' )
+				$this->getApiRequestParams( 'url|siteid' ),
 			],
 			[
 				$repo,
-				$this->getApiRequestParams( 'url' )
+				$this->getApiRequestParams( 'url' ),
 			],
 			[
 				$siteid,
-				$this->getApiRequestParams( 'siteid' )
-			]
+				$this->getApiRequestParams( 'siteid' ),
+			],
 		];
 	}
 
@@ -115,7 +115,7 @@ class ApiClientInfoTest extends MediaWikiIntegrationTestCase {
 		$params = [
 			'action' => 'query',
 			'meta' => 'wikibase',
-			'wbprop' => $wbprop
+			'wbprop' => $wbprop,
 		];
 
 		return $params;

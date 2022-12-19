@@ -53,7 +53,7 @@ class RepoSpecialPageLinkerTest extends MediaWikiLangTestCase {
 		return [
 			[ 'SetLabel', [], '/Special:SetLabel\/?$/' ],
 			[ 'SetLabel', [ 'en' ], '/Special:SetLabel\/en\/?$/' ],
-			[ 'SetLabel', [ 'en', 'Q5' ], '/Special:SetLabel\/en\/Q5\/?$/' ]
+			[ 'SetLabel', [ 'en', 'Q5' ], '/Special:SetLabel\/en\/Q5\/?$/' ],
 		];
 	}
 

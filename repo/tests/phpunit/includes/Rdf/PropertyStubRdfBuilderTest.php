@@ -115,7 +115,7 @@ class PropertyStubRdfBuilderTest extends MediaWikiIntegrationTestCase {
 	public function testAddEntityStub(): void {
 		$propertyId = new NumericPropertyId( 'P2' );
 		$this->termLookup->setData( [
-			$this->getTestData()->getEntity( 'P2' )
+			$this->getTestData()->getEntity( 'P2' ),
 		] );
 		$builder = new PropertyStubRdfBuilder(
 			$this->termLookup,

@@ -109,7 +109,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 
 		// Replace the reference with this new one
 		$newReference = new Reference( new SnakList( [
-			new PropertyNoValueSnak( self::$propertyIds[1] )
+			new PropertyNoValueSnak( self::$propertyIds[1] ),
 		] ) );
 		$serializedReferenceResult = $this->makeValidRequest(
 			$guid,
@@ -367,7 +367,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		$params = [
 			'action' => 'wbsetreference',
 			'statement' => 'Foo$Guid',
-			'snaks' => $snaksSerialization
+			'snaks' => $snaksSerialization,
 		];
 		$this->doApiRequestWithToken( $params );
 	}

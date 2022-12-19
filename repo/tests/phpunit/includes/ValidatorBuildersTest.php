@@ -347,44 +347,44 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 				'+2013-06-06T00:00:00Z',
 				TimeValue::PRECISION_DAY,
 				'1',
-				false
+				false,
 			],
 			'Calendar model too long' => [
 				'+2013-06-06T00:00:00Z',
 				TimeValue::PRECISION_DAY,
 				$wikidataUri . 'Q' . str_repeat( '6', 224 ),
-				false
+				false,
 			],
 			'Valid calendar model' => [
 				'+2013-06-06T00:00:00Z',
 				TimeValue::PRECISION_DAY,
 				$wikidataUri . 'Q1985727',
-				true
+				true,
 			],
 			'Untrimmed calendar model' => [
 				'+2013-06-06T00:00:00Z',
 				TimeValue::PRECISION_DAY,
 				' ' . $wikidataUri . 'Q1985727 ',
-				false
+				false,
 			],
 			'Bad URL scheme' => [
 				'+2013-06-06T00:00:00Z',
 				TimeValue::PRECISION_DAY,
 				' javascript:alert(1)',
-				false
+				false,
 			],
 
 			'Values more precise than a day are currently not allowed' => [
 				'+2013-06-06T11:22:33Z',
 				TimeValue::PRECISION_DAY,
 				$wikidataUri . 'Q1985727',
-				false
+				false,
 			],
 			'Precisions more fine-grained than a day are currently not allowed' => [
 				'+2013-06-06T00:00:00Z',
 				TimeValue::PRECISION_SECOND,
 				$wikidataUri . 'Q1985727',
-				false
+				false,
 			],
 
 			'Month precision must specify nonzero month' => [
@@ -499,12 +499,12 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 			'TabularData expected StringValue, string supplied' => [
 				'tabular-data',
 				'Foo.tab',
-				false
+				false,
 			],
 			'TabularData expected StringValue, NumberValue supplied' => [
 				'tabular-data',
 				new NumberValue( 7 ),
-				false
+				false,
 			],
 
 			//string

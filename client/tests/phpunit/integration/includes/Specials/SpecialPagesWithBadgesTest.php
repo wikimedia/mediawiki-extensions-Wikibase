@@ -42,7 +42,7 @@ class SpecialPagesWithBadgesTest extends SpecialPageTestBase {
 
 		$itemIds = [
 			new ItemId( 'Q123' ),
-			new ItemId( 'Q456' )
+			new ItemId( 'Q456' ),
 		];
 
 		$labelDescriptionLookupFactory = $this->createMock( FallbackLabelDescriptionLookupFactory::class );

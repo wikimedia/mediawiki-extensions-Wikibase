@@ -80,7 +80,7 @@ class StatementHtmlGeneratorTest extends \PHPUnit\Framework\TestCase {
 			new Statement( new PropertySomeValueSnak( 42 ) ),
 			[
 				'snak html' => '/SNAK HTML/',
-			]
+			],
 		];
 
 		$testCases[] = [
@@ -93,7 +93,7 @@ class StatementHtmlGeneratorTest extends \PHPUnit\Framework\TestCase {
 			),
 			[
 				'snak html' => '/SNAK HTML.*SNAK HTML/s',
-			]
+			],
 		];
 
 		$testCases[] = [
@@ -102,12 +102,12 @@ class StatementHtmlGeneratorTest extends \PHPUnit\Framework\TestCase {
 				new PropertyValueSnak( 50, new StringValue( 'chocolate!' ) ),
 				new SnakList(),
 				new ReferenceList( [ new Reference( new SnakList( [
-					new PropertyValueSnak( 50, new StringValue( 'second snak' ) )
+					new PropertyValueSnak( 50, new StringValue( 'second snak' ) ),
 				] ) ) ] )
 			),
 			[
 				'snak html' => '/SNAK HTML.*SNAK HTML/s',
-			]
+			],
 		];
 
 		return $testCases;

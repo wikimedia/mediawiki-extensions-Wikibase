@@ -21,25 +21,25 @@ class ChangedLanguagesCollectorTest extends \PHPUnit\Framework\TestCase {
 		return [
 			'Entity changed' => [
 				new LanguageBoundChangeOpResultStub( $entityId, true, 'en' ),
-				[ 'en' ]
+				[ 'en' ],
 			],
 			'Entity did not change' => [
 				new LanguageBoundChangeOpResultStub( $entityId, false, 'en' ),
-				[]
+				[],
 			],
 			'Multiple changes in same language' => [
 				new ChangeOpsResult( $entityId, [
 					new LanguageBoundChangeOpResultStub( $entityId, true, 'en' ),
-					new LanguageBoundChangeOpResultStub( $entityId, true, 'en' )
+					new LanguageBoundChangeOpResultStub( $entityId, true, 'en' ),
 				] ),
-				[ 'en' ]
+				[ 'en' ],
 			],
 			'Multiple changes in different language' => [
 				new ChangeOpsResult( $entityId, [
 					new LanguageBoundChangeOpResultStub( $entityId, true, 'fr' ),
-					new LanguageBoundChangeOpResultStub( $entityId, true, 'en' )
+					new LanguageBoundChangeOpResultStub( $entityId, true, 'en' ),
 				] ),
-				[ 'fr', 'en' ]
+				[ 'fr', 'en' ],
 			],
 			'Multiple changes on different tree levels' => [
 				new ChangeOpsResult( $entityId, [
@@ -48,16 +48,16 @@ class ChangedLanguagesCollectorTest extends \PHPUnit\Framework\TestCase {
 						new ChangeOpResultStub( $entityId, true ),
 						new ChangeOpResultStub( $entityId, false ),
 						new LanguageBoundChangeOpResultStub( $entityId, true, 'en' ),
-						new LanguageBoundChangeOpResultStub( $entityId, true, 'en' )
+						new LanguageBoundChangeOpResultStub( $entityId, true, 'en' ),
 					] ),
 					// and collect this one too
 					new ChangeOpResultStub( $entityId, true ),
 					new ChangeOpResultStub( $entityId, false ),
 					new LanguageBoundChangeOpResultStub( $entityId, true, 'fr' ),
-					new LanguageBoundChangeOpResultStub( $entityId, false, 'de' )
+					new LanguageBoundChangeOpResultStub( $entityId, false, 'de' ),
 				] ),
-				[ 'en', 'fr' ]
-			]
+				[ 'en', 'fr' ],
+			],
 		];
 	}
 

@@ -56,8 +56,8 @@ class SpecialPageCopyrightViewTest extends MediaWikiIntegrationTestCase {
 					'copyrightpage',
 					'copyrightlink'
 				),
-				'qqx'
-			]
+				'qqx',
+			],
 		];
 	}
 

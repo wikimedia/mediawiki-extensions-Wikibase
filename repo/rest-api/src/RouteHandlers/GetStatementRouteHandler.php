@@ -97,7 +97,7 @@ class GetStatementRouteHandler extends SimpleHandler {
 				self::PARAM_SOURCE => 'path',
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => true,
-			]
+			],
 		];
 	}
 

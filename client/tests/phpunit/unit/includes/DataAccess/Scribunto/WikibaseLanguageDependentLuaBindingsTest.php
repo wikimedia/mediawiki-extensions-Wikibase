@@ -65,7 +65,7 @@ class WikibaseLanguageDependentLuaBindingsTest extends \PHPUnit\Framework\TestCa
 	public function getLabelProvider() {
 		return [
 			[ [ 'LabelString', 'lang-code' ], 'Q123' ],
-			[ [ null, null ], 'DoesntExist' ]
+			[ [ null, null ], 'DoesntExist' ],
 		];
 	}
 
@@ -86,7 +86,7 @@ class WikibaseLanguageDependentLuaBindingsTest extends \PHPUnit\Framework\TestCa
 	public function getDescriptionProvider() {
 		return [
 			[ [ 'DescriptionString', 'lang-code' ], 'Q123' ],
-			[ [ null, null ], 'DoesntExist' ]
+			[ [ null, null ], 'DoesntExist' ],
 		];
 	}
 

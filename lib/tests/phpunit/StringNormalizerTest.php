@@ -27,17 +27,17 @@ class StringNormalizerTest extends \PHPUnit\Framework\TestCase {
 		return [
 			[ // #7: empty
 				"",
-				""
+				"",
 			],
 
 			[ // #8: just blanks
 				" \n ",
-				" \n "
+				" \n ",
 			],
 
 			[ // #4: Private Use Area: U+0F818
 				"\xef\xa0\x98",
-				"\xef\xa0\x98"
+				"\xef\xa0\x98",
 			],
 
 			[ // #5: badly truncated cyrillic:
@@ -47,7 +47,7 @@ class StringNormalizerTest extends \PHPUnit\Framework\TestCase {
 
 			[ // #6: badly truncated katakana:
 				"\xe3\x82\xa6\xe3\x83",
-				"\xe3\x82\xa6"
+				"\xe3\x82\xa6",
 			],
 
 			[ // #5: badly starting cyrillic:
@@ -57,7 +57,7 @@ class StringNormalizerTest extends \PHPUnit\Framework\TestCase {
 
 			[ // #6: badly starting katakana:
 				"\x82\xa6\xe3\x83\xa6",
-				"\xe3\x83\xa6"
+				"\xe3\x83\xa6",
 			],
 
 			// XXX: this should pass, and it does for some versions of PHP/PCRE
@@ -80,38 +80,38 @@ class StringNormalizerTest extends \PHPUnit\Framework\TestCase {
 		return [
 			[
 				'foo bar',
-				'foo bar'
+				'foo bar',
 			],
 			[
 				"  foo   bar  \n",
-				'foo   bar'
+				'foo   bar',
 			],
 			[
 				"foo\tbar",
-				'foo bar'
+				'foo bar',
 			],
 			[
 				"foo\nbar",
-				'foo bar'
+				'foo bar',
 			],
 			[
 				"foo\rbar",
-				'foo bar'
+				'foo bar',
 			],
 			[
 				"\r \t\nfoo\r\t\t\tbar\n\n\n\r\r",
 				'foo bar' ],
 			[
 				"\r \t\nfoo\r\t\t\t bar\n\n\n\r\r",
-				'foo  bar'
+				'foo  bar',
 			],
 			[
 				html_entity_decode( 'foo&#8204;bar', ENT_QUOTES, 'utf-8' ),
-				html_entity_decode( 'foo&#8204;bar', ENT_QUOTES, 'utf-8' )
+				html_entity_decode( 'foo&#8204;bar', ENT_QUOTES, 'utf-8' ),
 			],
 			[
 				html_entity_decode( 'foo&#8204;&#8204;bar', ENT_QUOTES, 'utf-8' ),
-				html_entity_decode( 'foo&#8204;&#8204;bar', ENT_QUOTES, 'utf-8' )
+				html_entity_decode( 'foo&#8204;&#8204;bar', ENT_QUOTES, 'utf-8' ),
 			],
 		];
 	}
@@ -149,7 +149,7 @@ class StringNormalizerTest extends \PHPUnit\Framework\TestCase {
 
 			[ // #4: Private Use Area: U+0F818
 				"\xef\xa0\x98",
-				"\xef\xa0\x98"
+				"\xef\xa0\x98",
 			],
 
 			[ // #5: badly truncated cyrillic:
@@ -159,17 +159,17 @@ class StringNormalizerTest extends \PHPUnit\Framework\TestCase {
 
 			[ // #6: badly truncated katakana:
 				"\xe3\x82\xa6\xe3\x83",
-				"\xe3\x82\xa6"
+				"\xe3\x82\xa6",
 			],
 
 			[ // #7: empty
 				"",
-				""
+				"",
 			],
 
 			[ // #8: just blanks
 				" \n ",
-				""
+				"",
 			],
 
 			// XXX: this should pass, and it does for some versions of PHP/PCRE

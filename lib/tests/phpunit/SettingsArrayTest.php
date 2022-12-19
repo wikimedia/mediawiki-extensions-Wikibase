@@ -34,7 +34,7 @@ class SettingsArrayTest extends \PHPUnit\Framework\TestCase {
 		$argLists[] = [ [] ];
 
 		$argLists[] = [ [
-			'foo' => 'bar'
+			'foo' => 'bar',
 		] ];
 
 		$argLists[] = [ [

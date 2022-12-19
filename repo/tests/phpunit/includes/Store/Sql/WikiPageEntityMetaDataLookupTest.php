@@ -305,7 +305,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 			$this->data[0]->getEntity()->getId(),
 			$this->data[1]->getEntity()->getId(),
 			new ItemId( 'Q823487354' ), // Doesn't exist
-			$this->data[2]->getEntity()->getId()
+			$this->data[2]->getEntity()->getId(),
 		];
 
 		$result = $this->getWikiPageEntityMetaDataLookup()
@@ -325,7 +325,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 			$this->data[0]->getEntity()->getId(),
 			$this->data[1]->getEntity()->getId(),
 			new ItemId( 'Q823487354' ), // Doesn't exist
-			$this->data[2]->getEntity()->getId()
+			$this->data[2]->getEntity()->getId(),
 		];
 
 		// Make sure we have two calls to getConnection: One that asks for a
@@ -434,7 +434,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 			$this->data[0]->getEntity()->getId(),
 			$this->data[1]->getEntity()->getId(),
 			new ItemId( 'Q823487354' ), // Doesn't exist
-			$this->data[2]->getEntity()->getId()
+			$this->data[2]->getEntity()->getId(),
 		];
 
 		$result = $this->getWikiPageEntityMetaDataLookup()
@@ -451,7 +451,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 			$this->data[0]->getEntity()->getId(),
 			$this->data[1]->getEntity()->getId(),
 			new ItemId( 'Q823487354' ), // Doesn't exist
-			$this->data[2]->getEntity()->getId()
+			$this->data[2]->getEntity()->getId(),
 		];
 
 		// Make sure we have two calls to getConnection: One that asks for a

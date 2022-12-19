@@ -74,9 +74,9 @@ class ValueParserFactoryTest extends \PHPUnit\Framework\TestCase {
 				[
 					'foo' => function() {
 						return new NullParser();
-					}
+					},
 				],
-			]
+			],
 		];
 	}
 

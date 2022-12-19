@@ -94,7 +94,7 @@ class LanguageAwareRendererTest extends \PHPUnit\Framework\TestCase {
 		$propertyId = new NumericPropertyId( 'P1337' );
 		$snaks = [
 			'Q42$1' => new PropertyValueSnak( $propertyId, new StringValue( 'a kitten!' ) ),
-			'Q42$2' => new PropertyValueSnak( $propertyId, new StringValue( 'two kittens!!' ) )
+			'Q42$2' => new PropertyValueSnak( $propertyId, new StringValue( 'two kittens!!' ) ),
 		];
 
 		$renderer = $this->getRenderer(

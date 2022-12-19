@@ -185,7 +185,7 @@ class UpdateRepoOnMoveJobTest extends MediaWikiIntegrationTestCase {
 			'entityId' => $item->getId()->getSerialization(),
 			'oldTitle' => $oldTitle,
 			'newTitle' => 'New page name',
-			'user' => $user->getName()
+			'user' => $user->getName(),
 		];
 		$tags = [ 'tag 1', 'tag 2' ];
 
@@ -271,7 +271,7 @@ class UpdateRepoOnMoveJobTest extends MediaWikiIntegrationTestCase {
 			'entityId' => $item->getId()->getSerialization(),
 			'oldTitle' => $oldTitle,
 			'newTitle' => 'New page name',
-			'user' => $user->getName()
+			'user' => $user->getName(),
 		];
 
 		$job = $this->getJob(

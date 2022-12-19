@@ -45,7 +45,7 @@ class ByTypeDispatchingEntityRevisionLookupTest extends TestCase {
 
 		$lookup = new ByTypeDispatchingEntityRevisionLookup( [
 			'item' => $itemLookup,
-			'property' => $propertyLookup
+			'property' => $propertyLookup,
 		] );
 
 		$lookup->getEntityRevision( $itemId, $revId, $mode );
@@ -61,7 +61,7 @@ class ByTypeDispatchingEntityRevisionLookupTest extends TestCase {
 
 		$lookup = new ByTypeDispatchingEntityRevisionLookup( [
 			'item' => $itemLookup,
-			'property' => $propertyLookup
+			'property' => $propertyLookup,
 		] );
 
 		$this->assertEquals(
@@ -74,7 +74,7 @@ class ByTypeDispatchingEntityRevisionLookupTest extends TestCase {
 		$itemLookup = $this->createMock( EntityRevisionLookup::class );
 
 		$lookup = new ByTypeDispatchingEntityRevisionLookup( [
-			'item' => $itemLookup
+			'item' => $itemLookup,
 		] );
 
 		$this->assertNull( $lookup->getEntityRevision( new NumericPropertyId( 'P1' ) ) );
@@ -94,7 +94,7 @@ class ByTypeDispatchingEntityRevisionLookupTest extends TestCase {
 
 		$lookup = new ByTypeDispatchingEntityRevisionLookup( [
 			'item' => $itemLookup,
-			'property' => $propertyLookup
+			'property' => $propertyLookup,
 		] );
 
 		$lookup->getLatestRevisionId( $itemId );
@@ -110,7 +110,7 @@ class ByTypeDispatchingEntityRevisionLookupTest extends TestCase {
 
 		$lookup = new ByTypeDispatchingEntityRevisionLookup( [
 			'item' => $itemLookup,
-			'property' => $propertyLookup
+			'property' => $propertyLookup,
 		] );
 
 		$this->assertEquals(
@@ -123,7 +123,7 @@ class ByTypeDispatchingEntityRevisionLookupTest extends TestCase {
 		$itemLookup = $this->createMock( EntityRevisionLookup::class );
 
 		$lookup = new ByTypeDispatchingEntityRevisionLookup( [
-			'item' => $itemLookup
+			'item' => $itemLookup,
 		] );
 
 		$shouldNotBeCalled = function () {

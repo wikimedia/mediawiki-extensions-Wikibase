@@ -44,21 +44,21 @@ class SiteMatrixParserTest extends \PHPUnit\Framework\TestCase {
 			'/w/$1',
 			'/wiki/$1',
 			false,
-			$this->getSites( $siteData, '/w/$1', '/wiki/$1' )
+			$this->getSites( $siteData, '/w/$1', '/wiki/$1' ),
 		];
 
 		$data['Keep the protocol'] = [
 			'/w/$1',
 			'/wiki/$1',
 			true,
-			$this->getSites( $siteData, '/w/$1', '/wiki/$1', 'http:' )
+			$this->getSites( $siteData, '/w/$1', '/wiki/$1', 'http:' ),
 		];
 
 		$data['Force a protocol'] = [
 			'/w/$1',
 			'/wiki/$1',
 			'CompuGlobalHyperMegaNet',
-			$this->getSites( $siteData, '/w/$1', '/wiki/$1', 'CompuGlobalHyperMegaNet:' )
+			$this->getSites( $siteData, '/w/$1', '/wiki/$1', 'CompuGlobalHyperMegaNet:' ),
 		];
 
 		return $data;
@@ -74,20 +74,20 @@ class SiteMatrixParserTest extends \PHPUnit\Framework\TestCase {
 						'url' => 'http://en.wikipedia.org',
 						'dbname' => 'enwiki',
 						'code' => 'wiki',
-						'sitename' => 'Wikipedia'
+						'sitename' => 'Wikipedia',
 					],
 					[
 						'url' => 'http://en.wikivoyage.org',
 						'dbname' => 'enwikivoyage',
 						'code' => 'wikivoyage',
-						'sitename' => 'Wikipedia'
+						'sitename' => 'Wikipedia',
 					],
 					[
 						'url' => 'http://en.wikiquote.org',
 						'dbname' => 'enwikiquote',
 						'code' => 'wikiquote',
-						'sitename' => 'Wikipedia'
-					]
+						'sitename' => 'Wikipedia',
+					],
 				],
 			],
 			[
@@ -98,16 +98,16 @@ class SiteMatrixParserTest extends \PHPUnit\Framework\TestCase {
 						'url' => 'http://fr.wikipedia.org',
 						'dbname' => 'frwiki',
 						'code' => 'wiki',
-						'sitename' => 'Wikipedia'
+						'sitename' => 'Wikipedia',
 					],
 					[
 						'url' => 'http://fr.wikivoyage.org',
 						'dbname' => 'frwikivoyage',
 						'code' => 'wikivoyage',
-						'sitename' => 'Wikipedia'
-					]
-				]
-			]
+						'sitename' => 'Wikipedia',
+					],
+				],
+			],
 		];
 
 		$specialSites = [];
@@ -115,17 +115,17 @@ class SiteMatrixParserTest extends \PHPUnit\Framework\TestCase {
 		$specialSites[] = [
 			'url' => 'http://commons.wikimedia.org',
 			'dbname' => 'commonswiki',
-			'code' => 'commons'
+			'code' => 'commons',
 		];
 
 		$specialSites[] = [
 			'url' => 'http://www.wikidata.org',
 			'dbname' => 'wikidatawiki',
-			'code' => 'wikidata'
+			'code' => 'wikidata',
 		];
 
 		$specials = [
-			'specials' => $specialSites
+			'specials' => $specialSites,
 		];
 
 		$siteMatrix = array_merge(
@@ -135,7 +135,7 @@ class SiteMatrixParserTest extends \PHPUnit\Framework\TestCase {
 		);
 
 		$data = [
-			'sitematrix' => $siteMatrix
+			'sitematrix' => $siteMatrix,
 		];
 
 		return json_encode( $data );
@@ -191,7 +191,7 @@ class SiteMatrixParserTest extends \PHPUnit\Framework\TestCase {
 				'url' => 'www.wikidata.org',
 				'lang' => 'en',
 				'localids' => [ 'interwiki' => [ 'wikidata' ] ],
-			]
+			],
 		];
 
 		return $siteData;
@@ -212,11 +212,11 @@ class SiteMatrixParserTest extends \PHPUnit\Framework\TestCase {
 				'data' => [
 					'paths' => [
 						'file_path' => $protocol . '//' . $siteData['url'] . $scriptPath,
-						'page_path' => $protocol . '//' . $siteData['url'] . $articlePath
-					]
+						'page_path' => $protocol . '//' . $siteData['url'] . $articlePath,
+					],
 				],
 				'forward' => false,
-				'config' => []
+				'config' => [],
 			];
 
 			$site = new MediaWikiSite();

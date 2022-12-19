@@ -42,25 +42,25 @@ class SiteLinkDeserializerTest extends TestCase {
 	public function nonDeserializableProvider() {
 		return [
 			[
-				42
+				42,
 			],
 			[
-				[]
-			],
-			[
-				[
-					'id' => 'P10'
-				]
+				[],
 			],
 			[
 				[
-					'site' => '42value'
-				]
+					'id' => 'P10',
+				],
 			],
 			[
 				[
-					'title' => '42value'
-				]
+					'site' => '42value',
+				],
+			],
+			[
+				[
+					'title' => '42value',
+				],
 			],
 		];
 	}
@@ -78,18 +78,18 @@ class SiteLinkDeserializerTest extends TestCase {
 				new SiteLink( 'enwiki', 'Nyan Cat' ),
 				[
 					'site' => 'enwiki',
-					'title' => 'Nyan Cat'
-				]
+					'title' => 'Nyan Cat',
+				],
 			],
 			[
 				new SiteLink( 'enwiki', 'Nyan Cat', [
-					new ItemId( 'Q42' )
+					new ItemId( 'Q42' ),
 				] ),
 				[
 					'site' => 'enwiki',
 					'title' => 'Nyan Cat',
-					'badges' => [ 'Q42' ]
-				]
+					'badges' => [ 'Q42' ],
+				],
 			],
 		];
 	}
@@ -106,7 +106,7 @@ class SiteLinkDeserializerTest extends TestCase {
 		$deserializer->deserialize( [
 			'site' => 'frwikisource',
 			'title' => 'Nyan Cat',
-			'badges' => [ 'P42' ]
+			'badges' => [ 'P42' ],
 		] );
 	}
 
@@ -118,7 +118,7 @@ class SiteLinkDeserializerTest extends TestCase {
 		$deserializer->deserialize( [
 			'site' => 'frwikisource',
 			'title' => 'Nyan Cat',
-			'badges' => 'Q42'
+			'badges' => 'Q42',
 		] );
 	}
 

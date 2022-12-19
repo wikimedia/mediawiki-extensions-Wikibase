@@ -27,7 +27,7 @@ class ItemTermStoreWriterTest extends ServiceWiringTestCase {
 				false,
 				[ $type => [
 					'namespaceId' => 21,
-					'slot' => SlotRecord::MAIN
+					'slot' => SlotRecord::MAIN,
 				] ],
 				'',
 				'',

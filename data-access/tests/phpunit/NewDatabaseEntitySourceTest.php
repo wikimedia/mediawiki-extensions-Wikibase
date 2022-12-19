@@ -49,7 +49,7 @@ class NewDatabaseEntitySourceTest extends TestCase {
 	public function testWithEntityNamespaceIdsAndSlots(): void {
 		$source = NewDatabaseEntitySource::create()
 			->withEntityNamespaceIdsAndSlots( [
-				'item' => [ 'namespaceId' => 100, 'slot' => SlotRecord::MAIN, ],
+				'item' => [ 'namespaceId' => 100, 'slot' => SlotRecord::MAIN ],
 			] )
 			->build();
 

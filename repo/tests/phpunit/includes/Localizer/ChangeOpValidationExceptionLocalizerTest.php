@@ -34,17 +34,17 @@ class ChangeOpValidationExceptionLocalizerTest extends \PHPUnit\Framework\TestCa
 			'ChangeOpValidationException(0)' => [
 				new ChangeOpValidationException( $result0 ),
 				'wikibase-validator-invalid',
-				[]
+				[],
 			],
 			'ChangeOpValidationException(1)' => [
 				new ChangeOpValidationException( $result1 ),
 				'wikibase-validator-too-long',
-				[ '8' ]
+				[ '8' ],
 			],
 			'ChangeOpValidationException(2)' => [
 				new ChangeOpValidationException( $result2 ),
 				'wikibase-validator-too-long',
-				[ 'eekwiki|Eek' ]
+				[ 'eekwiki|Eek' ],
 			],
 		];
 	}

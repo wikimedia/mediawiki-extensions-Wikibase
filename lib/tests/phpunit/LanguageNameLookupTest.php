@@ -19,22 +19,22 @@ class LanguageNameLookupTest extends \PHPUnit\Framework\TestCase {
 			[ // #0
 				'en',
 				null,
-				'English'
+				'English',
 			],
 			[ // #1
 				'de',
 				null,
-				'Deutsch'
+				'Deutsch',
 			],
 			[ // #2
 				'en',
 				'de',
-				'Englisch'
+				'Englisch',
 			],
 			[ // #3
 				'de',
 				'en',
-				'German'
+				'German',
 			],
 		];
 	}

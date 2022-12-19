@@ -492,10 +492,10 @@ class PropertyTest extends \PHPUnit\Framework\TestCase {
 					new Term( 'en', 'foo' ),
 				] ),
 				new TermList( [
-					new Term( 'en', 'foo bar' )
+					new Term( 'en', 'foo bar' ),
 				] ),
 				new AliasGroupList( [
-					new AliasGroup( 'en', [ 'foo', 'bar' ] )
+					new AliasGroup( 'en', [ 'foo', 'bar' ] ),
 				] )
 			),
 			$entity->getFingerprint()
@@ -527,10 +527,10 @@ class PropertyTest extends \PHPUnit\Framework\TestCase {
 				new Term( 'en', 'english label' ),
 			] ),
 			new TermList( [
-				new Term( 'en', 'english description' )
+				new Term( 'en', 'english description' ),
 			] ),
 			new AliasGroupList( [
-				new AliasGroup( 'en', [ 'first en alias', 'second en alias' ] )
+				new AliasGroup( 'en', [ 'first en alias', 'second en alias' ] ),
 			] )
 		);
 
@@ -547,7 +547,7 @@ class PropertyTest extends \PHPUnit\Framework\TestCase {
 
 		$this->assertEquals(
 			new TermList( [
-				new Term( 'en', 'foo' )
+				new Term( 'en', 'foo' ),
 			] ),
 			$property->getLabels()
 		);
@@ -559,7 +559,7 @@ class PropertyTest extends \PHPUnit\Framework\TestCase {
 
 		$this->assertEquals(
 			new TermList( [
-				new Term( 'en', 'foo bar' )
+				new Term( 'en', 'foo bar' ),
 			] ),
 			$property->getDescriptions()
 		);
@@ -571,7 +571,7 @@ class PropertyTest extends \PHPUnit\Framework\TestCase {
 
 		$this->assertEquals(
 			new AliasGroupList( [
-				new AliasGroup( 'en', [ 'foo', 'bar' ] )
+				new AliasGroup( 'en', [ 'foo', 'bar' ] ),
 			] ),
 			$property->getAliasGroups()
 		);
@@ -643,7 +643,7 @@ class PropertyTest extends \PHPUnit\Framework\TestCase {
 					null,
 					'wikibase-entityid',
 					$this->newNonEmptyStatementList()
-				)
+				),
 			],
 		];
 	}

@@ -435,7 +435,7 @@ class EditEntityActionTest extends ActionTestCase {
 			null, // htmlPattern
 			[
 				'redirect' => '/[&?]action=edit&undo=\d+/', // redirect to undo form
-			]
+			],
 		];
 
 		yield 'submit with legal undo, but omit wpSave' => [
@@ -450,7 +450,7 @@ class EditEntityActionTest extends ActionTestCase {
 			null, // htmlPattern
 			[
 				'redirect' => '/[&?]action=edit&undo=\d+/', // redirect to undo form
-			]
+			],
 		];
 
 		// -- show undo form -----------------------------------
@@ -466,7 +466,7 @@ class EditEntityActionTest extends ActionTestCase {
 			null, // user
 			null, // htmlPattern
 			[
-				'redirect' => '![:/=]Q\d+$!' // expect success and redirect to page
+				'redirect' => '![:/=]Q\d+$!', // expect success and redirect to page
 			],
 		];
 
@@ -483,7 +483,7 @@ class EditEntityActionTest extends ActionTestCase {
 			null, // user
 			null, // htmlPattern
 			[
-				'redirect' => '![:/=]Q\d+$!' // expect success and redirect to page
+				'redirect' => '![:/=]Q\d+$!', // expect success and redirect to page
 			],
 		];
 
@@ -513,7 +513,7 @@ class EditEntityActionTest extends ActionTestCase {
 			null, // user
 			null, // htmlPattern
 			[
-				'redirect' => '![:/=]Q\d+$!' // expect success and redirect to page
+				'redirect' => '![:/=]Q\d+$!', // expect success and redirect to page
 			],
 		];
 
@@ -556,7 +556,7 @@ class EditEntityActionTest extends ActionTestCase {
 			null, // user
 			null, // htmlPattern
 			[
-				'redirect' => '![:/=]Q\d+$!' // expect success and redirect to page
+				'redirect' => '![:/=]Q\d+$!', // expect success and redirect to page
 			],
 		];
 
@@ -720,7 +720,7 @@ class EditEntityActionTest extends ActionTestCase {
 			null, // user
 			null, // htmlPattern
 			[
-				'redirect' => '![:/=]Q\d+$!' // expect success and redirect to page
+				'redirect' => '![:/=]Q\d+$!', // expect success and redirect to page
 			],
 		];
 
@@ -737,7 +737,7 @@ class EditEntityActionTest extends ActionTestCase {
 			null, // user
 			null, // htmlPattern
 			[
-				'redirect' => '![:/=]Q\d+$!' // expect success and redirect to page
+				'redirect' => '![:/=]Q\d+$!', // expect success and redirect to page
 			],
 		];
 
@@ -753,7 +753,7 @@ class EditEntityActionTest extends ActionTestCase {
 			null, // user
 			null, // htmlPattern
 			[
-				'redirect' => '![:/=]Q\d+$!' // expect success and redirect to page
+				'redirect' => '![:/=]Q\d+$!', // expect success and redirect to page
 			],
 		];
 
@@ -770,7 +770,7 @@ class EditEntityActionTest extends ActionTestCase {
 			null, // user
 			null, // htmlPattern
 			[
-				'redirect' => '![:/=]Q\d+$!' // expect success and redirect to page
+				'redirect' => '![:/=]Q\d+$!', // expect success and redirect to page
 			],
 		];
 
@@ -788,7 +788,7 @@ class EditEntityActionTest extends ActionTestCase {
 			null, // user
 			null, // htmlPattern
 			[
-				'redirect' => '![:/=]Q\d+$!' // expect success and redirect to page
+				'redirect' => '![:/=]Q\d+$!', // expect success and redirect to page
 			],
 		];
 
@@ -958,7 +958,7 @@ class EditEntityActionTest extends ActionTestCase {
 				'descriptions' => [
 					'de' => 'Hauptstadt von Deutschland',
 				],
-			]
+			],
 		];
 
 		yield 'undo last and previous revision' => [
@@ -971,7 +971,7 @@ class EditEntityActionTest extends ActionTestCase {
 				'descriptions' => [
 					'de' => 'Stadt in Deutschland',
 				],
-			]
+			],
 		];
 
 		yield 'undoafter first revision (conflict, no change)' => [
@@ -983,7 +983,7 @@ class EditEntityActionTest extends ActionTestCase {
 				'descriptions' => [
 					'de' => 'Stadt in Deutschland',
 				],
-			]
+			],
 		];
 
 		yield 'restore previous revision' => [
@@ -996,7 +996,7 @@ class EditEntityActionTest extends ActionTestCase {
 					'de' => 'Stadt in Brandenburg',
 					'en' => 'City in Germany',
 				],
-			]
+			],
 		];
 
 		yield 'restore first revision' => [
@@ -1008,7 +1008,7 @@ class EditEntityActionTest extends ActionTestCase {
 				'descriptions' => [
 					'de' => 'Stadt in Deutschland',
 				],
-			]
+			],
 		];
 
 		yield 'undo last revision and revert redirect' => [
@@ -1018,7 +1018,7 @@ class EditEntityActionTest extends ActionTestCase {
 			],
 			[ //expected
 				'labels' => [],
-			]
+			],
 		];
 
 		yield 'undo last two revisions and turn back into redirect' => [
@@ -1029,7 +1029,7 @@ class EditEntityActionTest extends ActionTestCase {
 			],
 			[ //expected
 				'redirect' => 'Berlin',
-			]
+			],
 		];
 
 		yield 'undo second-to-last revision and turn back into redirect' => [
@@ -1039,7 +1039,7 @@ class EditEntityActionTest extends ActionTestCase {
 			],
 			[ //expected
 				'redirect' => 'Berlin',
-			]
+			],
 		];
 	}
 
@@ -1108,7 +1108,7 @@ class EditEntityActionTest extends ActionTestCase {
 					'*' => [ 'edit' => false ],
 					'user' => [ 'edit' => false ],
 				],
-				'/permissions-errors/'
+				'/permissions-errors/',
 			],
 
 			[ //1
@@ -1117,7 +1117,7 @@ class EditEntityActionTest extends ActionTestCase {
 					'*' => [ 'edit' => false ],
 					'user' => [ 'edit' => false ],
 				],
-				'/permissions-errors/'
+				'/permissions-errors/',
 			],
 		];
 	}

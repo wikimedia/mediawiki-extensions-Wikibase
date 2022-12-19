@@ -50,10 +50,10 @@ class AddItemStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 				'method' => 'POST',
 				'headers' => [
 					'User-Agent' => 'PHPUnit Test',
-					'Content-Type' => 'application/json'
+					'Content-Type' => 'application/json',
 				],
 				'pathParams' => [
-					AddItemStatementRouteHandler::ITEM_ID_PATH_PARAM => 'Q123'
+					AddItemStatementRouteHandler::ITEM_ID_PATH_PARAM => 'Q123',
 				],
 				'bodyContents' => json_encode( [
 					'statement' => [
@@ -65,7 +65,7 @@ class AddItemStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 						],
 					],
 					'tags' => [ 'edit', 'tags' ],
-				] )
+				] ),
 			] )
 		);
 		return $routeHandler;

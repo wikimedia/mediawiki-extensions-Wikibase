@@ -117,7 +117,7 @@ class MwDateFormatParserFactoryTest extends TestCase {
 						$expected,
 						$languageCode,
 						$dateFormatPreference,
-						$dateFormatType
+						$dateFormatType,
 					];
 				}
 			}
@@ -252,19 +252,19 @@ class MwDateFormatParserFactoryTest extends TestCase {
 		return [
 			[
 				'B C E J K Q R S V X',
-				'B C E J K Q R S V X'
+				'B C E J K Q R S V X',
 			],
 			[
 				'b f k p q u v',
-				'b f k p q u v'
+				'b f k p q u v',
 			],
 			[
 				'XB XC XE XJ XK XQ XR XS XV XX',
-				'XB XC XE XJ XK XQ XR XS XV XX'
+				'XB XC XE XJ XK XQ XR XS XV XX',
 			],
 			[
 				'xa xb xc xd xe xf xp xl xq xs xu xv xw xy xz',
-				'a b c d e f p l q s u v w y z'
+				'a b c d e f p l q s u v w y z',
 			],
 			[
 				'xiA xiB xiC xiD xiE xiG xiH xiI xiJ xiK xiL xiM xiN xiO xiQ xiR xiS xiT xiU xiV xiW xiX',

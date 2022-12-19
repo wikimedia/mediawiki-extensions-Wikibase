@@ -94,7 +94,7 @@ class ItemDiffer implements EntityDifferStrategy {
 						return $id->getSerialization();
 					},
 					$siteLink->getBadges()
-				)
+				),
 			];
 		}
 

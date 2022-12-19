@@ -85,7 +85,7 @@ class LabelDescriptionNotEqualValidator implements EntityValidator {
 				if ( $descriptions[$languageCode] === $label ) {
 					return Result::newError( [
 						new NotEqualViolation( 'label should not be equal to description',
-							'label-equals-description', [ $languageCode ] )
+							'label-equals-description', [ $languageCode ] ),
 					] );
 				}
 			}

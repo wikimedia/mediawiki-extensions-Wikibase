@@ -53,7 +53,7 @@ class RealEntitiesTest extends \PHPUnit\Framework\TestCase {
 			if ( $fileInfo->getExtension() === 'json' ) {
 				$argumentLists[] = [
 					$fileInfo->getFilename(),
-					json_decode( file_get_contents( $fileInfo->getPathname() ), true )
+					json_decode( file_get_contents( $fileInfo->getPathname() ), true ),
 				];
 			}
 		}

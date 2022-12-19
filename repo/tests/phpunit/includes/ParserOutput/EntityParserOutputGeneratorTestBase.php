@@ -54,7 +54,7 @@ class EntityParserOutputGeneratorTestBase extends MediaWikiIntegrationTestCase {
 					return [
 						'value' => $labels['en'],
 						'language' => 'en',
-						'source' => 'en'
+						'source' => 'en',
 					];
 				}
 
@@ -108,7 +108,7 @@ class EntityParserOutputGeneratorTestBase extends MediaWikiIntegrationTestCase {
 		$entityView = $this->getMockBuilder( EntityDocumentView::class )
 			->onlyMethods( [
 				'getTitleHtml',
-				'getContent'
+				'getContent',
 			] )
 			->disableOriginalConstructor()
 			->getMockForAbstractClass();
@@ -210,9 +210,9 @@ class EntityParserOutputGeneratorTestBase extends MediaWikiIntegrationTestCase {
 					new SiteLinkBadgeItemReferenceExtractor(),
 					new StatementEntityReferenceExtractor(
 						$this->createMock( SuffixEntityIdParser::class )
-					)
+					),
 				] );
-			}
+			},
 		], $this->createMock( StatementEntityReferenceExtractor::class ) );
 	}
 

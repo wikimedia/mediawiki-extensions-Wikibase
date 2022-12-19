@@ -548,12 +548,12 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 
 		return [
 			// Only one shard
-			[ $ids, 1, 0, ],
+			[ $ids, 1, 0 ],
 
 			// Three shards
-			[ $ids, 3, 0, ],
-			[ $ids, 3, 1, ],
-			[ $ids, 3, 2, ],
+			[ $ids, 3, 0 ],
+			[ $ids, 3, 1 ],
+			[ $ids, 3, 2 ],
 		];
 	}
 

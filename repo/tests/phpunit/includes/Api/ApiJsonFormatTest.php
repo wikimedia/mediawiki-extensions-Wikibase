@@ -104,7 +104,7 @@ class ApiJsonFormatTest extends ApiFormatTestCase {
 
 		$params = [
 			'action' => 'wbgetentities',
-			'ids' => $entityId
+			'ids' => $entityId,
 		];
 
 		$module = $this->getApiModule( GetEntities::class, 'wbgetentities', $params );

@@ -138,7 +138,7 @@ class EditActionHookHandler implements EditPage__showStandardInputs_optionsHook 
 			$entityIds[$entityId] = $entityUsage->getEntityId();
 			$usageAspectsByEntity[$entityId][] = [
 				$entityUsage->getAspect(),
-				$entityUsage->getModifier()
+				$entityUsage->getModifier(),
 			];
 		}
 

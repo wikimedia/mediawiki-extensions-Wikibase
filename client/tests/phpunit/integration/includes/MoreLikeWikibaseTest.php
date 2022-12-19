@@ -64,7 +64,7 @@ class MoreLikeWikibaseTest extends MediaWikiIntegrationTestCase {
 						] )
 					),
 				true,
-			]
+			],
 		];
 	}
 

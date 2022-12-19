@@ -24,7 +24,7 @@ class ReferenceListDeserializerTest extends TestCase {
 			->method( 'deserialize' )
 			->with( $this->equalTo( [
 				'hash' => 'da39a3ee5e6b4b0d3255bfef95601890afd80709',
-				'snaks' => []
+				'snaks' => [],
 			] ) )
 			->will( $this->returnValue( new Reference() ) );
 
@@ -44,7 +44,7 @@ class ReferenceListDeserializerTest extends TestCase {
 	public function nonDeserializableProvider() {
 		return [
 			[
-				42
+				42,
 			],
 		];
 	}
@@ -63,18 +63,18 @@ class ReferenceListDeserializerTest extends TestCase {
 		return [
 			[
 				new ReferenceList(),
-				[]
+				[],
 			],
 			[
 				new ReferenceList( [
-					new Reference()
+					new Reference(),
 				] ),
 				[
 					[
 						'hash' => 'da39a3ee5e6b4b0d3255bfef95601890afd80709',
-						'snaks' => []
-					]
-				]
+						'snaks' => [],
+					],
+				],
 			],
 		];
 	}

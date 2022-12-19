@@ -67,22 +67,22 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 				[
 					'eu_page_id' => 11,
 					'eu_entity_id' => 'Q3',
-					'eu_aspect' => 'S'
+					'eu_aspect' => 'S',
 				],
 				[
 					'eu_page_id' => 11,
 					'eu_entity_id' => 'Q3',
-					'eu_aspect' => 'O'
+					'eu_aspect' => 'O',
 				],
 				[
 					'eu_page_id' => 22,
 					'eu_entity_id' => 'Q4',
-					'eu_aspect' => 'S'
+					'eu_aspect' => 'S',
 				],
 				[
 					'eu_page_id' => 22,
 					'eu_entity_id' => 'Q5',
-					'eu_aspect' => 'S'
+					'eu_aspect' => 'S',
 				],
 			],
 		];
@@ -144,7 +144,7 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 					"pageid" => 11,
 					"entityusage" => [
 						"Q3" => [ "aspects" => [ "O", "S" ] ],
-					]
+					],
 				] ],
 			],
 			'two entities in two pages' => [
@@ -159,7 +159,7 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 					"pageid" => 11,
 					"entityusage" => [
 						"Q3" => [ "aspects" => [ "O", "S" ] ],
-					]
+					],
 				],
 				"22" => [
 					"ns" => 0,
@@ -167,7 +167,7 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 					"pageid" => 22,
 					"entityusage" => [
 						"Q5" => [ "aspects" => [ "S" ] ],
-					]
+					],
 				] ],
 			],
 			'continue' => [
@@ -183,7 +183,7 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 					"pageid" => 11,
 					"entityusage" => [
 						"Q3" => [ "aspects" => [ "S" ] ],
-					]
+					],
 				],
 				"22" => [
 					"ns" => 0,
@@ -191,7 +191,7 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 					"pageid" => 22,
 					"entityusage" => [
 						"Q5" => [ "aspects" => [ "S" ] ],
-					]
+					],
 				] ],
 			],
 			'correctly finish pageination step between two pages' => [
@@ -199,7 +199,7 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 					'action' => 'query',
 					'list' => 'wblistentityusage',
 					'wbeuentities' => 'Q3|Q4|Q5',
-					'wbeulimit' => 2
+					'wbeulimit' => 2,
 				],
 				[
 					"11" => [
@@ -209,12 +209,12 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 						"entityusage" => [
 							"Q3" => [ "aspects" => [
 								"O",
-								"S"
+								"S",
 							] ],
-						]
-					]
-				]
-			]
+						],
+					],
+				],
+			],
 		];
 	}
 

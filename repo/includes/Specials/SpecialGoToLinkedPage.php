@@ -239,7 +239,7 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 				'type' => 'text',
 				'id' => 'wb-gotolinkedpage-sitename',
 				'size' => 12,
-				'label-message' => 'wikibase-gotolinkedpage-lookup-site'
+				'label-message' => 'wikibase-gotolinkedpage-lookup-site',
 			],
 			'itemid' => [
 				'name' => 'itemid',
@@ -247,8 +247,8 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 				'type' => 'text',
 				'id' => 'wb-gotolinkedpage-itemid',
 				'size' => 36,
-				'label-message' => 'wikibase-gotolinkedpage-lookup-item'
-			]
+				'label-message' => 'wikibase-gotolinkedpage-lookup-item',
+			],
 		];
 
 		HTMLForm::factory( 'ooui', $formDescriptor, $this->getContext() )

@@ -509,7 +509,7 @@ class WikibaseValueFormatterBuilders {
 
 		$options->setOption( LatLongFormatter::OPT_FORMAT, LatLongFormatter::TYPE_DMS );
 		$options->setOption( LatLongFormatter::OPT_SPACING_LEVEL, [
-			LatLongFormatter::OPT_SPACE_LATLONG
+			LatLongFormatter::OPT_SPACE_LATLONG,
 		] );
 		$options->setOption( LatLongFormatter::OPT_DIRECTIONAL, true );
 

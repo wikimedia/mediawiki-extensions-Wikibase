@@ -66,7 +66,7 @@ class ApiFormatReferenceTest extends ApiTestCase {
 					],
 				], true ),
 				'outputformat' => 'html',
-				'style' => 'internal-data-bridge'
+				'style' => 'internal-data-bridge',
 			],
 			'<div class="mw-parser-output"></div>',
 		];
@@ -85,7 +85,7 @@ class ApiFormatReferenceTest extends ApiTestCase {
 					],
 				], true ),
 				'outputformat' => 'html',
-				'style' => 'internal-data-bridge'
+				'style' => 'internal-data-bridge',
 			],
 			"<div class=\"mw-parser-output\"><p><span>a distinctive string <span class=\"error wb-format-error\">" .
 				"(wikibase-snakformatter-property-not-found: $idOfUnavailableProperty)" .
@@ -127,12 +127,12 @@ class ApiFormatReferenceTest extends ApiTestCase {
 		yield [
 			[ 'action' => 'wbformatreference', 'reference' => '{', 'outputformat' => 'html', 'style' => 'internal-data-bridge' ],
 			'json-error-syntax',
-			[]
+			[],
 		];
 		yield [
 			[ 'action' => 'wbformatreference', 'reference' => '{}', 'outputformat' => 'html', 'style' => 'internal-data-bridge' ],
 			'wikibase-error-deserialize-error',
-			[]
+			[],
 		];
 	}
 

@@ -24,7 +24,7 @@ class SnakListDeserializerTest extends TestCase {
 			->method( 'deserialize' )
 			->with( $this->equalTo( [
 					'snaktype' => 'novalue',
-					'property' => 'P42'
+					'property' => 'P42',
 			] ) )
 			->will( $this->returnValue( new PropertyNoValueSnak( 42 ) ) );
 
@@ -44,17 +44,17 @@ class SnakListDeserializerTest extends TestCase {
 	public function nonDeserializableProvider() {
 		return [
 			[
-				42
+				42,
 			],
 			[
 				[
-					'id' => 'P10'
-				]
+					'id' => 'P10',
+				],
 			],
 			[
 				[
-					'snaktype' => '42value'
-				]
+					'snaktype' => '42value',
+				],
 			],
 		];
 	}
@@ -70,20 +70,20 @@ class SnakListDeserializerTest extends TestCase {
 		return [
 			[
 				new SnakList(),
-				[]
+				[],
 			],
 			[
 				new SnakList( [
-					new PropertyNoValueSnak( 42 )
+					new PropertyNoValueSnak( 42 ),
 				] ),
 				[
 					'P42' => [
 						[
 							'snaktype' => 'novalue',
-							'property' => 'P42'
-						]
-					]
-				]
+							'property' => 'P42',
+						],
+					],
+				],
 			],
 		];
 	}

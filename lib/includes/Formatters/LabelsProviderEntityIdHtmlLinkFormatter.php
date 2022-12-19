@@ -115,7 +115,7 @@ class LabelsProviderEntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 	private function getAttributes( EntityId $entityId, Term $term = null ) {
 		$attributes = [
 			'title' => $this->entityTitleTextLookup->getPrefixedText( $entityId ),
-			'href' => $this->entityUrlLookup->getLinkUrl( $entityId )
+			'href' => $this->entityUrlLookup->getLinkUrl( $entityId ),
 		];
 
 		if ( $term instanceof TermFallback

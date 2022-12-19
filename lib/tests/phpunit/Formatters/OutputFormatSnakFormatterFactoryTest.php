@@ -189,15 +189,15 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 		return [
 			'default' => [
 				[],
-				ErrorHandlingSnakFormatter::class
+				ErrorHandlingSnakFormatter::class,
 			],
 			'OPT_ON_ERROR => ON_ERROR_WARN' => [
 				[ SnakFormatter::OPT_ON_ERROR => SnakFormatter::ON_ERROR_WARN ],
-				ErrorHandlingSnakFormatter::class
+				ErrorHandlingSnakFormatter::class,
 			],
 			'OPT_ON_ERROR => ON_ERROR_FAIL' => [
 				[ SnakFormatter::OPT_ON_ERROR => SnakFormatter::ON_ERROR_FAIL ],
-				DispatchingSnakFormatter::class
+				DispatchingSnakFormatter::class,
 			],
 		];
 	}

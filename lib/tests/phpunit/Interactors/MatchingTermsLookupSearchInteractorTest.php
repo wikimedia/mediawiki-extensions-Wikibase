@@ -188,7 +188,7 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 		$allTermTypes = [
 			TermIndexEntry::TYPE_LABEL,
 			TermIndexEntry::TYPE_DESCRIPTION,
-			TermIndexEntry::TYPE_ALIAS
+			TermIndexEntry::TYPE_ALIAS,
 		];
 
 		return [
@@ -370,7 +370,7 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 						'termtype' => 'label' ,
 					],
 				],
-			]
+			],
 		];
 	}
 

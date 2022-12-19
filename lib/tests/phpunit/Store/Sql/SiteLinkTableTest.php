@@ -53,7 +53,7 @@ class SiteLinkTableTest extends MediaWikiIntegrationTestCase {
 		$siteLinks = [
 			'cswiki' => 'Pivo',
 			'enwiki' => 'Beer',
-			'jawiki' => 'ビール'
+			'jawiki' => 'ビール',
 		];
 
 		foreach ( $siteLinks as $siteId => $pageName ) {

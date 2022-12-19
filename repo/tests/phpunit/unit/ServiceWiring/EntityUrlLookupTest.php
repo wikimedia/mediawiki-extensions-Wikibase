@@ -32,7 +32,7 @@ class EntityUrlLookupTest extends ServiceWiringTestCase {
 			NewDatabaseEntitySource::havingName( 'item-source' )
 				->withEntityNamespaceIdsAndSlots( [ 'item' => [ 'namespaceId' => 100, 'slot' => SlotRecord::MAIN ] ] )
 				->withConceptBaseUri( 'http://wikidata.org/entity/' )
-				->build()
+				->build(),
 		];
 		$this->mockService(
 			'WikibaseRepo.EntitySourceLookup',

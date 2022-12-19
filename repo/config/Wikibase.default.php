@@ -416,7 +416,7 @@ return [
 	 */
 	'sandboxEntityIds' => [
 		'mainItem' => 'Q999999998',
-		'auxItem' => 'Q999999999'
+		'auxItem' => 'Q999999999',
 	],
 
 	/**

@@ -71,7 +71,7 @@ class RepoItemLinkGeneratorTest extends \PHPUnit\Framework\TestCase {
 			'action' => 'view',
 			'noExternalLangLinks' => null,
 			'prefixedId' => $prefixedId,
-			'hasLangLinks' => true
+			'hasLangLinks' => true,
 		];
 
 		$data['add link: not linked to an entity'] = [
@@ -80,7 +80,7 @@ class RepoItemLinkGeneratorTest extends \PHPUnit\Framework\TestCase {
 			'action' => 'view',
 			'noExternalLangLinks' => null,
 			'prefixedId' => null,
-			'hasLangLinks' => false
+			'hasLangLinks' => false,
 		];
 
 		$data['add link: no language links'] = [
@@ -89,7 +89,7 @@ class RepoItemLinkGeneratorTest extends \PHPUnit\Framework\TestCase {
 			'action' => 'view',
 			'noExternalLangLinks' => null,
 			'prefixedId' => $prefixedId,
-			'hasLangLinks' => false
+			'hasLangLinks' => false,
 		];
 
 		$data['no edit link on action=history'] = [
@@ -98,7 +98,7 @@ class RepoItemLinkGeneratorTest extends \PHPUnit\Framework\TestCase {
 			'action' => 'history',
 			'noExternalLangLinks' => null,
 			'prefixedId' => $prefixedId,
-			'hasLangLinks' => true
+			'hasLangLinks' => true,
 		];
 
 		$data['no edit link if noExternalLangLinks'] = [
@@ -107,7 +107,7 @@ class RepoItemLinkGeneratorTest extends \PHPUnit\Framework\TestCase {
 			'action' => 'view',
 			'noExternalLangLinks' => [ '*' ],
 			'prefixedId' => $prefixedId,
-			'hasLangLinks' => true
+			'hasLangLinks' => true,
 		];
 
 		$data['edit link when had links and suppressing one link'] = [
@@ -116,7 +116,7 @@ class RepoItemLinkGeneratorTest extends \PHPUnit\Framework\TestCase {
 			'action' => 'view',
 			'noExternalLangLinks' => [ 'fr' ],
 			'prefixedId' => $prefixedId,
-			'hasLangLinks' => true
+			'hasLangLinks' => true,
 		];
 
 		$data['title does not exist'] = [
@@ -125,7 +125,7 @@ class RepoItemLinkGeneratorTest extends \PHPUnit\Framework\TestCase {
 			'action' => 'view',
 			'noExternalLangLinks' => null,
 			'prefixedId' => null,
-			'hasLangLinks' => null
+			'hasLangLinks' => null,
 		];
 
 		return $data;

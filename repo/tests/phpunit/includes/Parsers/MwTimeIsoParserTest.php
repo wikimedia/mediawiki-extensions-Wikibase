@@ -121,49 +121,49 @@ class MwTimeIsoParserTest extends \PHPUnit\Framework\TestCase {
 		$valid = [
 			// + dates
 			'13 billion years CE' =>
-				[ '+13000000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1G, ],
+				[ '+13000000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1G ],
 			'23 precision-Gannum' =>
-				[ '+23000000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1G, ],
+				[ '+23000000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1G ],
 			'130 billion years CE' =>
-				[ '+130000000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1G, ],
+				[ '+130000000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1G ],
 			'13000 billion years CE' =>
-				[ '+13000000000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1G, ],
+				[ '+13000000000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1G ],
 			'13,000 billion years CE' =>
-				[ '+13000000000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1G, ],
+				[ '+13000000000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1G ],
 			'13,000 million years CE' =>
-				[ '+13000000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1G, ],
+				[ '+13000000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1G ],
 			'13,800 million years CE' =>
-				[ '+13800000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR100M, ],
+				[ '+13800000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR100M ],
 			'100 million years CE' =>
-				[ '+100000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR100M, ],
+				[ '+100000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR100M ],
 			'70 million years CE' =>
-				[ '+70000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR10M, ],
+				[ '+70000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR10M ],
 			'77 million years CE' =>
-				[ '+77000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1M, ],
+				[ '+77000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1M ],
 			'55 one precision-Mannum' =>
-				[ '+55000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1M, ],
+				[ '+55000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1M ],
 			'23 more precision-Mannum' =>
-				[ '+23000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1M, ],
+				[ '+23000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1M ],
 			'21 evenmore precision-Mannum' =>
-				[ '+21000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1M, ],
+				[ '+21000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1M ],
 			'13 million years CE' =>
-				[ '+13000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1M, ],
+				[ '+13000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1M ],
 			'1 million years CE' =>
-				[ '+1000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1M, ],
+				[ '+1000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1M ],
 			'100000 years CE' =>
-				[ '+100000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR100K, ],
+				[ '+100000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR100K ],
 			'100,000 years CE' =>
-				[ '+100000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR100K, ],
+				[ '+100000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR100K ],
 			'10000 years CE' =>
-				[ '+10000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR10K, ],
+				[ '+10000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR10K ],
 			'99000 years CE' =>
-				[ '+99000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1K, ],
+				[ '+99000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1K ],
 			'99,000 years CE' =>
-				[ '+99000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1K, ],
+				[ '+99000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1K ],
 			'5. millennium' =>
-				[ '+5000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1K, ],
+				[ '+5000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1K ],
 			'55. millennium' =>
-				[ '+55000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1K, ],
+				[ '+55000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1K ],
 			'10. century' =>
 				[ '+1000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR100, $julian ],
 			'12. century' =>
@@ -173,13 +173,13 @@ class MwTimeIsoParserTest extends \PHPUnit\Framework\TestCase {
 			'9<sup>e</sup> siècle' =>
 				[ '+900-00-00T00:00:00Z', TimeValue::PRECISION_YEAR100, $julian ],
 			'1980s' =>
-				[ '+1980-00-00T00:00:00Z', TimeValue::PRECISION_YEAR10, ],
+				[ '+1980-00-00T00:00:00Z', TimeValue::PRECISION_YEAR10 ],
 			'1990 precision-10annum {{dummy|1|2|3}}' =>
-				[ '+1990-00-00T00:00:00Z', TimeValue::PRECISION_YEAR10, ],
+				[ '+1990-00-00T00:00:00Z', TimeValue::PRECISION_YEAR10 ],
 			'2000s' =>
-				[ '+2000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR10, ],
+				[ '+2000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR10 ],
 			'2010 precision-10annums {{dummy|1|2|3}}' =>
-				[ '+2010-00-00T00:00:00Z', TimeValue::PRECISION_YEAR10, ],
+				[ '+2010-00-00T00:00:00Z', TimeValue::PRECISION_YEAR10 ],
 			'10s' =>
 				[ '+0010-00-00T00:00:00Z', TimeValue::PRECISION_YEAR10, $julian ],
 			'12s' =>
@@ -262,7 +262,7 @@ class MwTimeIsoParserTest extends \PHPUnit\Framework\TestCase {
 
 			yield [
 				(string)$value,
-				new TimeValue( $timestamp, 0, 0, 0, $precision, $calendarModel )
+				new TimeValue( $timestamp, 0, 0, 0, $precision, $calendarModel ),
 			];
 		}
 	}

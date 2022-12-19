@@ -143,7 +143,7 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends Scribunto_LuaEngineT
 			->willReturnCallback( function ( array $labels ): array {
 				if ( in_array( 'LuaTestStringProperty', $labels ) ) {
 					return [
-						'LuaTestStringProperty' => new NumericPropertyId( 'P342' )
+						'LuaTestStringProperty' => new NumericPropertyId( 'P342' ),
 					];
 				}
 				return [];

@@ -108,7 +108,7 @@ class SearchEntities extends Maintenance {
 		$out = [
 			'query' => $query,
 			'totalHits' => count( $results ),
-			'rows' => []
+			'rows' => [],
 		];
 
 		foreach ( $results as $match ) {
@@ -127,7 +127,7 @@ class SearchEntities extends Maintenance {
 					'title' => $displayLabel ? $match->getDisplayLabel()->getText() : "",
 					'titleLanguage' => $displayLabel ? $match->getDisplayLabel()->getLanguageCode() : "",
 					'text' => $match->getDisplayDescription() ? $match->getDisplayDescription()->getText() : "",
-				]
+				],
 			];
 		}
 		return json_encode( $out );
@@ -143,7 +143,7 @@ class SearchEntities extends Maintenance {
 		$engines = [
 			'sql' => function() {
 				return WikibaseRepo::getEntitySearchHelper();
-			}
+			},
 		];
 
 		if ( !isset( $engines[$engine] ) ) {

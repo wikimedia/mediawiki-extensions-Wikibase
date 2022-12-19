@@ -40,18 +40,18 @@ class ChangeOpResultTraversalTest extends \PHPUnit\Framework\TestCase {
 		return [
 			'root node is not ChangeOpsResult' => [
 				$changeOpResult1,
-				[ $changeOpResult1 ]
+				[ $changeOpResult1 ],
 			],
 			'root node is ChangeOpsResult - child is not ChangeOpsResult' => [
 				$changeOpResult5,
-				[ $changeOpResult5, $changeOpResult1 ]
+				[ $changeOpResult5, $changeOpResult1 ],
 			],
 			'the full tree' => [
 				$changeOpResult7,
 				[ $changeOpResult7, $changeOpResult6, $changeOpResult2,
 				  $changeOpResult3, $changeOpResult5, $changeOpResult1,
-				  $changeOpResult4 ]
-			]
+				  $changeOpResult4 ],
+			],
 		];
 	}
 

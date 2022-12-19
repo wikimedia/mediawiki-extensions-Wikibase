@@ -74,7 +74,7 @@ class ChangeOpsTest extends \PHPUnit\Framework\TestCase {
 						new ChangeOpLabel( 'en', 'enLabel', $validatorFactory ),
 						new ChangeOpLabel( 'de', 'deLabel', $validatorFactory ),
 						new ChangeOpDescription( 'en', 'enDescr', $validatorFactory ),
-					]
+					],
 				];
 
 		return $ops;
@@ -162,7 +162,7 @@ class ChangeOpsTest extends \PHPUnit\Framework\TestCase {
 		$changeOps = new ChangeOps();
 		$changeOpsArray = [
 			new ChangeOpLabel( 'en', 'newLabel', $validatorFactory ),
-			new ChangeOpDescription( 'en', 'newDescription', $validatorFactory )
+			new ChangeOpDescription( 'en', 'newDescription', $validatorFactory ),
 		];
 		$changeOps->add( $changeOpsArray );
 		$changeOpsResult = $changeOps->apply( $item->copy() );
@@ -175,7 +175,7 @@ class ChangeOpsTest extends \PHPUnit\Framework\TestCase {
 		$actualChangeOpsResult = [
 			$changeOpsResult->isEntityChanged(),
 			$changeOpsResult->getChangeOpsResults(),
-			$changeOpsResult->getEntityId()
+			$changeOpsResult->getEntityId(),
 		];
 		$expectedChangeOpsResult = [ true, $changeOpsResultsArray, $item->getId() ];
 
@@ -255,7 +255,7 @@ class ChangeOpsTest extends \PHPUnit\Framework\TestCase {
 	public function testApply_HasTwoChangeOps_SetsGenericSummaryMessage() {
 		$changeOps = new ChangeOps( [
 			$this->createMock( ChangeOp::class ),
-			$this->createMock( ChangeOp::class )
+			$this->createMock( ChangeOp::class ),
 		] );
 
 		$summary = $this->createMock( Summary::class );

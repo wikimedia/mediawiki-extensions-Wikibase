@@ -31,15 +31,15 @@ class MonolingualWikitextFormatterTest extends \PHPUnit\Framework\TestCase {
 		return [
 			'formatting' => [
 				new MonolingualTextValue( 'de', 'Hallo Welt' ),
-				'<span lang="de">Hallo Welt</span>'
+				'<span lang="de">Hallo Welt</span>',
 			],
 			'wikitext escaping' => [
 				new MonolingualTextValue( 'de', '[[Hallo&Welt]]' ),
-				'<span lang="de">&#91;&#91;Hallo&#38;Welt&#93;&#93;</span>'
+				'<span lang="de">&#91;&#91;Hallo&#38;Welt&#93;&#93;</span>',
 			],
 			'code injection' => [
 				new MonolingualTextValue( 'de', '<script>alert("Hallo Welt")</script>' ),
-				'<span lang="de">&#60;script&#62;alert(&#34;Hallo Welt&#34;)&#60;/script&#62;</span>'
+				'<span lang="de">&#60;script&#62;alert(&#34;Hallo Welt&#34;)&#60;/script&#62;</span>',
 			],
 		];
 	}

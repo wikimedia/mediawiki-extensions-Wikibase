@@ -36,7 +36,7 @@ class AllTypesEntityDeserializerTest extends ServiceWiringTestCase {
 			array_map( function ( string $entityTypeName ): array {
 				return [
 					EntityTypeDefinitions::DESERIALIZER_FACTORY_CALLBACK
-					=> $this->makeMockDeserializer( $entityTypeName )
+					=> $this->makeMockDeserializer( $entityTypeName ),
 				];
 			}, $validEntityTypes )
 		) );
@@ -45,7 +45,7 @@ class AllTypesEntityDeserializerTest extends ServiceWiringTestCase {
 	public function testConstruction(): void {
 		$validEntityTypes = [
 			'something',
-			'another'
+			'another',
 		];
 
 		$this->mockService(

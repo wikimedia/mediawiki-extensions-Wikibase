@@ -32,7 +32,7 @@ class EntityChangeSelectQueryBuilder extends SelectQueryBuilder {
 
 		$this->select( [
 			'change_id', 'change_type', 'change_time', 'change_object_id',
-			'change_revision_id', 'change_user_id', 'change_info'
+			'change_revision_id', 'change_user_id', 'change_info',
 		] )->from( 'wb_changes' );
 	}
 

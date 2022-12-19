@@ -53,18 +53,18 @@ class TitleLookupBasedEntityExistenceCheckerTest extends TestCase {
 			'title is null' => [
 				'isNull' => true,
 				'isKnown' => false,
-				'expected' => false
+				'expected' => false,
 			],
 			'title is not null and is known' => [
 				'isNull' => false,
 				'isKnown' => true,
-				'expected' => true
+				'expected' => true,
 			],
 			'title is not null and not known' => [
 				'isNull' => false,
 				'isKnown' => false,
-				'expected' => false
-			]
+				'expected' => false,
+			],
 		];
 	}
 

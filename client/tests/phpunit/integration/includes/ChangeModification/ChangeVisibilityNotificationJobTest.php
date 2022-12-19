@@ -42,7 +42,7 @@ class ChangeVisibilityNotificationJobTest extends RecentChangesModificationTest 
 			MediaWikiServices::getInstance()->getMainConfig()->get( 'UpdateRowsPerQuery' ),
 			[
 				'revisionIdentifiersJson' => $this->revisionIdentifiersToJson( $revisionIdentifiers ),
-				'visibilityBitFlag' => $visibilityBitFlag
+				'visibilityBitFlag' => $visibilityBitFlag,
 			]
 		);
 		$job->run();
@@ -74,7 +74,7 @@ class ChangeVisibilityNotificationJobTest extends RecentChangesModificationTest 
 		$entityChange->setTimestamp( '20161111111111' );
 		$entityChange->setMetadata( [
 			'rev_id' => 342,
-			'parent_id' => 343
+			'parent_id' => 343,
 		] );
 		$additionalRecentChange = $recentChangeFactory->newRecentChange(
 			$entityChange,
@@ -89,7 +89,7 @@ class ChangeVisibilityNotificationJobTest extends RecentChangesModificationTest 
 				'revisionIdentifiersJson' => $this->revisionIdentifiersToJson( [
 					new RepoRevisionIdentifier( 'P42', '20161111111111', 342, 343 ),
 				] ),
-				'visibilityBitFlag' => 16
+				'visibilityBitFlag' => 16,
 			]
 		);
 		$job->run();
@@ -112,7 +112,7 @@ class ChangeVisibilityNotificationJobTest extends RecentChangesModificationTest 
 			'rc_deleted',
 			[
 				'rc_title' => $expectedRedactedTitles,
-				'rc_deleted' => $visibilityBitFlag
+				'rc_deleted' => $visibilityBitFlag,
 			],
 			__METHOD__
 		);
@@ -147,7 +147,7 @@ class ChangeVisibilityNotificationJobTest extends RecentChangesModificationTest 
 				'revisionIdentifiersJson' => $this->revisionIdentifiersToJson( [
 					new RepoRevisionIdentifier( 'Q1', '1', 1, 1 ),
 				] ),
-				'visibilityBitFlag' => 6
+				'visibilityBitFlag' => 6,
 			]
 		);
 

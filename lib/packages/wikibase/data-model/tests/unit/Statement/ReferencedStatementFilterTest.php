@@ -31,7 +31,7 @@ class ReferencedStatementFilterTest extends \PHPUnit\Framework\TestCase {
 		$statement->setQualifiers( new SnakList( [
 			new PropertyValueSnak( 1, new StringValue( 'wee' ) ),
 			new PropertyValueSnak( 2, new StringValue( 'woo' ) ),
-			new PropertyValueSnak( 3, new StringValue( 'waa' ) )
+			new PropertyValueSnak( 3, new StringValue( 'waa' ) ),
 		] ) );
 
 		$filter = new ReferencedStatementFilter();
@@ -42,12 +42,12 @@ class ReferencedStatementFilterTest extends \PHPUnit\Framework\TestCase {
 		$statement = new Statement( new PropertyValueSnak( 42, new StringValue( '\o/' ) ) );
 		$statement->setReferences( new ReferenceList( [
 			new Reference( [
-				new PropertyValueSnak( 1, new StringValue( 'wee' ) )
+				new PropertyValueSnak( 1, new StringValue( 'wee' ) ),
 			] ),
 			new Reference( [
 				new PropertyValueSnak( 2, new StringValue( 'woo' ) ),
-				new PropertyValueSnak( 3, new StringValue( 'waa' ) )
-			] )
+				new PropertyValueSnak( 3, new StringValue( 'waa' ) ),
+			] ),
 		] ) );
 
 		$filter = new ReferencedStatementFilter();

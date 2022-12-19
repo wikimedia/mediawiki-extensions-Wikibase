@@ -61,7 +61,7 @@ class ReferenceSerializer implements DispatchableSerializer {
 		return [
 			'hash' => $reference->getHash(),
 			'snaks' => $this->snaksSerializer->serialize( $reference->getSnaks() ),
-			'snaks-order' => $this->buildSnakListOrderList( $reference->getSnaks() )
+			'snaks-order' => $this->buildSnakListOrderList( $reference->getSnaks() ),
 		];
 	}
 

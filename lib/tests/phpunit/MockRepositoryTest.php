@@ -188,14 +188,14 @@ class MockRepositoryTest extends TestCase {
 					[ 'dewiki', 'Bar', 1 ],
 					[ 'enwiki', 'Bar', 2 ],
 					[ 'dewiki', 'Xoo', 2 ],
-				]
+				],
 			],
 			'mismatch' => [
 				$items,
 				'numericIds' => null,
 				'siteIds' => [ 'enwiki' ],
 				'pageNames' => [ 'Xoo' ],
-				'expectedLinks' => []
+				'expectedLinks' => [],
 			],
 			'by item' => [
 				$items,
@@ -205,7 +205,7 @@ class MockRepositoryTest extends TestCase {
 				'expectedLinks' => [
 					[ 'enwiki', 'Foo', 1 ],
 					[ 'dewiki', 'Bar', 1 ],
-				]
+				],
 			],
 			'by site' => [
 				$items,
@@ -215,7 +215,7 @@ class MockRepositoryTest extends TestCase {
 				'expectedLinks' => [
 					[ 'enwiki', 'Foo', 1 ],
 					[ 'enwiki', 'Bar', 2 ],
-				]
+				],
 			],
 			'by page' => [
 				$items,
@@ -225,7 +225,7 @@ class MockRepositoryTest extends TestCase {
 				'expectedLinks' => [
 					[ 'dewiki', 'Bar', 1 ],
 					[ 'enwiki', 'Bar', 2 ],
-				]
+				],
 			],
 			'by site and page' => [
 				$items,
@@ -234,7 +234,7 @@ class MockRepositoryTest extends TestCase {
 				'pageNames' => [ 'Bar' ],
 				'expectedLinks' => [
 					[ 'dewiki', 'Bar', 1 ],
-				]
+				],
 			],
 		];
 	}
@@ -262,7 +262,7 @@ class MockRepositoryTest extends TestCase {
 		return [
 			'empty' => [
 				'itemIds' => [],
-				'expectedLabels' => []
+				'expectedLabels' => [],
 			],
 			'some entities' => [
 				'itemIds' => [ 'Q1', 'Q2' ],
@@ -274,7 +274,7 @@ class MockRepositoryTest extends TestCase {
 					'Q2' => [
 						'en' => 'two',
 					],
-				]
+				],
 			],
 			'bad ID' => [
 				'itemIds' => [ 'Q1', 'Q22' ],
@@ -284,8 +284,8 @@ class MockRepositoryTest extends TestCase {
 						'de' => 'eins',
 					],
 					'Q22' => null,
-				]
-			]
+				],
+			],
 		];
 	}
 
@@ -415,21 +415,21 @@ class MockRepositoryTest extends TestCase {
 				'entity' => $thirdItem,
 				'flags' => EDIT_NEW,
 				'baseRevid' => false,
-				'error' => StorageException::class
+				'error' => StorageException::class,
 			],
 
 			'not exists' => [
 				'entity' => $fourthItem,
 				'flags' => EDIT_UPDATE,
 				'baseRevid' => false,
-				'error' => StorageException::class
+				'error' => StorageException::class,
 			],
 
 			'bad base' => [
 				'entity' => $fifthItem,
 				'flags' => EDIT_UPDATE,
 				'baseRevid' => 1234,
-				'error' => StorageException::class
+				'error' => StorageException::class,
 			],
 		];
 	}

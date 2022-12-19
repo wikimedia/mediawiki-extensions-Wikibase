@@ -31,7 +31,7 @@ class EntityIdParserTest extends ServiceWiringTestCase {
 					EntityTypeDefinitions::ENTITY_ID_BUILDER => function ( $serialization ) {
 						return new ItemId( 'Q1000' . substr( $serialization, 1 ) );
 					},
-				]
+				],
 			] ) );
 
 		$this->mockService( 'WikibaseRepo.Settings',
@@ -55,7 +55,7 @@ class EntityIdParserTest extends ServiceWiringTestCase {
 				EntityTypeDefinitions::ENTITY_ID_BUILDER => function ( $serialization ) {
 					return new ItemId( 'Q1000' . substr( $serialization, 1 ) );
 				},
-			]
+			],
 		] );
 
 		$this->mockService( 'WikibaseRepo.EntityTypeDefinitions', $entityTypeDefinitions );
@@ -83,7 +83,7 @@ class EntityIdParserTest extends ServiceWiringTestCase {
 					'',
 					'',
 					''
-				)
+				),
 			], new SubEntityTypesMapper( [] ) ) );
 
 		/** @var EntityIdParser $entityIdParser */

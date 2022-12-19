@@ -43,7 +43,7 @@ class PropertyInfoBuilder {
 	 */
 	public function buildPropertyInfo( Property $property ) {
 		$info = [
-			PropertyInfoLookup::KEY_DATA_TYPE => $property->getDataTypeId()
+			PropertyInfoLookup::KEY_DATA_TYPE => $property->getDataTypeId(),
 		];
 
 		$formatterUrl = $this->getStringFromStatements(

@@ -39,7 +39,7 @@ class SearchEntitiesTest extends FederatedPropertiesApiTestCase {
 			'search' => 'Foo',
 			'type' => 'property',
 			'language' => 'sv',
-			'strictlanguage' => true
+			'strictlanguage' => true,
 		] );
 	}
 
@@ -96,7 +96,7 @@ class SearchEntitiesTest extends FederatedPropertiesApiTestCase {
 			],
 		] );
 
-		[ $result, ] = $this->doApiRequestWithToken( $searchRequest );
+		[ $result ] = $this->doApiRequestWithToken( $searchRequest );
 
 		$this->assertArrayHasKey( 'success', $result );
 		$this->assertCount( 2, $result['search'] );
@@ -160,7 +160,7 @@ class SearchEntitiesTest extends FederatedPropertiesApiTestCase {
 			],
 		] );
 
-		[ $result, ] = $this->doApiRequestWithToken( $searchRequest );
+		[ $result ] = $this->doApiRequestWithToken( $searchRequest );
 
 		$this->assertArrayHasKey( 'success', $result );
 		$this->assertCount( 2, $result['search'] );
@@ -213,7 +213,7 @@ class SearchEntitiesTest extends FederatedPropertiesApiTestCase {
 			],
 		] );
 
-		[ $result, ] = $this->doApiRequestWithToken( $searchRequest );
+		[ $result ] = $this->doApiRequestWithToken( $searchRequest );
 
 		$this->assertArrayHasKey( 'success', $result );
 		$this->assertCount( 1, $result['search'] );

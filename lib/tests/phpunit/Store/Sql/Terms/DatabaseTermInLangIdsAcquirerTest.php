@@ -61,8 +61,8 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 			],
 			'description' => [ 'en' => 'same' ],
 			'alias' => [
-				'en' => [ 'same', 'same', 'another', 'yet another' ]
-			]
+				'en' => [ 'same', 'same', 'another', 'yet another' ],
+			],
 		];
 
 		$acquiredTermIds = $dbTermIdsAcquirer->acquireTermInLangIds( $termsArray );
@@ -89,8 +89,8 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 			],
 			'description' => [ 'en' => 'same' ],
 			'alias' => [
-				'en' => [ 'same', 'same', 'another', 'yet another' ]
-			]
+				'en' => [ 'same', 'same', 'another', 'yet another' ],
+			],
 		];
 
 		$acquiredTermIds = $dbTermIdsAcquirer->acquireTermInLangIds( $termsArray );
@@ -113,8 +113,8 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 			],
 			'description' => [ 'en' => 'same' ],
 			'alias' => [
-				'en' => [ 'same', 'same', 'another', 'yet another' ]
-			]
+				'en' => [ 'same', 'same', 'another', 'yet another' ],
+			],
 		];
 
 		$acquiredTermIds = $dbTermIdsAcquirer->acquireTermInLangIds( $termsArray );
@@ -140,8 +140,8 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 			],
 			'description' => [ 'en' => 'same' ],
 			'alias' => [
-				'en' => [ 'same', 'same', 'another', 'yet another' ]
-			]
+				'en' => [ 'same', 'same', 'another', 'yet another' ],
+			],
 		];
 
 		$acquiredTermIds = $dbTermIdsAcquirer->acquireTermInLangIds( $termsArray );
@@ -167,8 +167,8 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 			],
 			'description' => [ 'en' => 'same' ],
 			'alias' => [
-				'en' => [ 'same', 'same', 'another', 'yet another' ]
-			]
+				'en' => [ 'same', 'same', 'another', 'yet another' ],
+			],
 		];
 
 		$acquiredTermIds = $dbTermIdsAcquirer->acquireTermInLangIds( $termsArray );
@@ -187,8 +187,8 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 			],
 			'description' => [ 'en' => 'same' ],
 			'alias' => [
-				'en' => [ 'same', 'same', 'another', 'yet another' ]
-			]
+				'en' => [ 'same', 'same', 'another', 'yet another' ],
+			],
 		];
 
 		// We will populate DB with two terms that both have
@@ -273,8 +273,8 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 			],
 			'description' => [ 'en' => 'same' ],
 			'alias' => [
-				'en' => [ 'same', 'same', 'another', 'yet another' ]
-			]
+				'en' => [ 'same', 'same', 'another', 'yet another' ],
+			],
 		];
 
 		$dbTermIdsAcquirer = new DatabaseTermInLangIdsAcquirer(
@@ -332,10 +332,10 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 		$dbMaster = $this->setUpNewDb();
 		$loadBalancer = new FakeLoadBalancer( [
 			'dbr' => $this->db,
-			'dbw' => $dbMaster
+			'dbw' => $dbMaster,
 		] );
 		$lbFactory = new FakeLBFactory( [
-			'lb' => $loadBalancer
+			'lb' => $loadBalancer,
 		] );
 		$repoDb = new RepoDomainDb( $lbFactory, $lbFactory->getLocalDomainID() );
 
@@ -348,8 +348,8 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 			'label' => [ 'en' => 'same' ],
 			'description' => [ 'en' => 'same' ],
 			'alias' => [
-				'en' => [ 'same', 'another' ]
-			]
+				'en' => [ 'same', 'another' ],
+			],
 		];
 
 		$dbTermIdsAcquirer = new DatabaseTermInLangIdsAcquirer(
@@ -376,7 +376,7 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 				foreach ( $recordsInMaster as $record ) {
 					$recordsToInsertIntoReplica[] = [
 						'wbx_id' => $record->wbx_id,
-						'wbx_text' => $record->wbx_text
+						'wbx_text' => $record->wbx_text,
 					];
 				}
 				$this->db->insert( 'wbt_text', $recordsToInsertIntoReplica );
@@ -388,7 +388,7 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 					$recordsToInsertIntoReplica[] = [
 						'wbxl_id' => $record->wbxl_id,
 						'wbxl_text_id' => $record->wbxl_text_id,
-						'wbxl_language' => $record->wbxl_language
+						'wbxl_language' => $record->wbxl_language,
 					];
 				}
 				$this->db->insert( 'wbt_text_in_lang', $recordsToInsertIntoReplica );
@@ -400,7 +400,7 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 					$recordsToInsertIntoReplica[] = [
 						'wbtl_id' => $record->wbtl_id,
 						'wbtl_text_in_lang_id' => $record->wbtl_text_in_lang_id,
-						'wbtl_type_id' => $record->wbtl_type_id
+						'wbtl_type_id' => $record->wbtl_type_id,
 					];
 				}
 				$this->db->insert( 'wbt_term_in_lang', $recordsToInsertIntoReplica );
@@ -433,8 +433,8 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 				'en' => [
 					str_repeat( 'a', 255 ) . ' alias',
 					str_repeat( 'a', 255 ) . ' another alias',
-				]
-			]
+				],
+			],
 		];
 
 		$acquiredTermIds = $dbTermIdsAcquirer->acquireTermInLangIds( $termsArray );
@@ -506,7 +506,7 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 							'wbtl_id',
 							[
 								'wbtl_type_id' => $typeIds[$type],
-								'wbtl_text_in_lang_id' => $textInLangId
+								'wbtl_text_in_lang_id' => $textInLangId,
 							]
 						),
 						"Expected $type '$text' in language '$lang' is not in wbt_term_in_lang"

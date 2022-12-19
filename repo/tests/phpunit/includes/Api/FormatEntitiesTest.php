@@ -55,7 +55,7 @@ class FormatEntitiesTest extends ApiTestCase {
 			'ids' => "$itemId|$propertyId",
 		];
 
-		[ $resultArray, ] = $this->doApiRequest( $params );
+		[ $resultArray ] = $this->doApiRequest( $params );
 		$this->assertArrayHasKey( 'wbformatentities', $resultArray );
 		$results = $resultArray['wbformatentities'];
 
@@ -128,7 +128,7 @@ class FormatEntitiesTest extends ApiTestCase {
 			],
 			'spaced attributes' => [
 				'<a href  =  "/foo">link</a>',
-				"<a href=\"$foo\">link</a>"
+				"<a href=\"$foo\">link</a>",
 			],
 			'custom attribute names' => [
 				'<a data-extra=foo href="/foo">link</a>',

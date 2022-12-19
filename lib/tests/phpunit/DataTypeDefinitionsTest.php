@@ -42,7 +42,7 @@ class DataTypeDefinitionsTest extends \PHPUnit\Framework\TestCase {
 				'rdf-data-type' => function () {
 					return 'acme-test-2';
 				},
-			]
+			],
 		];
 	}
 
@@ -145,7 +145,7 @@ class DataTypeDefinitionsTest extends \PHPUnit\Framework\TestCase {
 			[
 				'foo' => 'DataTypeDefinitionsTest::getFooValidators',
 				'bar' => 'DataTypeDefinitionsTest::getBarValueValidators',
-				'fuzz' => 'DataTypeDefinitionsTest::getFooValueValidator'
+				'fuzz' => 'DataTypeDefinitionsTest::getFooValueValidator',
 			],
 			$actual
 		);
@@ -191,7 +191,7 @@ class DataTypeDefinitionsTest extends \PHPUnit\Framework\TestCase {
 			'PT:some-type' => [
 				'value-type' => 'some-value-type',
 				'expert-module' => 'some-expert-module',
-			]
+			],
 		];
 		$dataTypeDefinitions = new DataTypeDefinitions( $definitions );
 
@@ -206,7 +206,7 @@ class DataTypeDefinitionsTest extends \PHPUnit\Framework\TestCase {
 			'PT:some-type' => [
 				'value-type' => 'some-value-type',
 				'expert-module' => '',
-			]
+			],
 		];
 		$dataTypeDefinitions = new DataTypeDefinitions( $definitions );
 
@@ -218,7 +218,7 @@ class DataTypeDefinitionsTest extends \PHPUnit\Framework\TestCase {
 		$definitions = [
 			'VT:some-type' => [
 				'expert-module' => '',
-			]
+			],
 		];
 		$dataTypeDefinitions = new DataTypeDefinitions( $definitions );
 

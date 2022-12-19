@@ -123,37 +123,37 @@ class ItemDataBuilderTest extends TestCase {
 		yield 'type' => [
 			ItemData::FIELD_TYPE,
 			'setType',
-			'item'
+			'item',
 		];
 
 		yield 'labels' => [
 			ItemData::FIELD_LABELS,
 			'setLabels',
-			new TermList( [ new Term( 'en', 'potato' ) ] )
+			new TermList( [ new Term( 'en', 'potato' ) ] ),
 		];
 
 		yield 'descriptions' => [
 			ItemData::FIELD_DESCRIPTIONS,
 			'setDescriptions',
-			new TermList( [ new Term( 'en', 'root vegetable' ) ] )
+			new TermList( [ new Term( 'en', 'root vegetable' ) ] ),
 		];
 
 		yield 'aliases' => [
 			ItemData::FIELD_ALIASES,
 			'setAliases',
-			new AliasGroupList()
+			new AliasGroupList(),
 		];
 
 		yield 'statements' => [
 			ItemData::FIELD_STATEMENTS,
 			'setStatements',
-			new StatementList()
+			new StatementList(),
 		];
 
 		yield 'sitelinks' => [
 			ItemData::FIELD_SITELINKS,
 			'setSiteLinks',
-			new SiteLinkList()
+			new SiteLinkList(),
 		];
 	}
 

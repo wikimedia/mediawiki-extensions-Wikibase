@@ -120,7 +120,7 @@ class QuerySearchEntitiesTest extends MediaWikiIntegrationTestCase {
 		foreach ( $expected as $entry ) {
 			$expectedParams[] = [
 				$this->getMockTitle(),
-				[ 'displaytext' => $entry['displaytext'] ]
+				[ 'displaytext' => $entry['displaytext'] ],
 			];
 		}
 		$mock
@@ -138,7 +138,7 @@ class QuerySearchEntitiesTest extends MediaWikiIntegrationTestCase {
 		$params = array_merge( [
 			'wbstype' => 'item',
 			'wbslimit' => 7,
-			'wbslanguage' => 'en'
+			'wbslanguage' => 'en',
 		], $params );
 
 		$api = new QuerySearchEntities(
@@ -194,21 +194,21 @@ class QuerySearchEntitiesTest extends MediaWikiIntegrationTestCase {
 			'ns' => 0,
 			'title' => 'Prefixed:Title',
 			'pageid' => 42,
-			'displaytext' => 'Q111'
+			'displaytext' => 'Q111',
 		];
 
 		$q222Result = [
 			'ns' => 0,
 			'title' => 'Prefixed:Title',
 			'pageid' => 42,
-			'displaytext' => 'Fooooo'
+			'displaytext' => 'Fooooo',
 		];
 
 		$q333Result = [
 			'ns' => 0,
 			'title' => 'Prefixed:Title',
 			'pageid' => 42,
-			'displaytext' => 'AMatchedTerm'
+			'displaytext' => 'AMatchedTerm',
 		];
 
 		return [

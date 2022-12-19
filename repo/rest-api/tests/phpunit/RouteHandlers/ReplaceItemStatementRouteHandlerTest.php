@@ -51,7 +51,7 @@ class ReplaceItemStatementRouteHandlerTest extends MediaWikiIntegrationTestCase 
 				'method' => 'PUT',
 				'headers' => [
 					'User-Agent' => 'PHPUnit Test',
-					'Content-Type' => 'application/json'
+					'Content-Type' => 'application/json',
 				],
 				'pathParams' => [
 					ReplaceItemStatementRouteHandler::ITEM_ID_PATH_PARAM => 'Q1',
@@ -64,9 +64,9 @@ class ReplaceItemStatementRouteHandlerTest extends MediaWikiIntegrationTestCase 
 						],
 						'value' => [
 							'type' => 'novalue',
-						]
+						],
 					],
-				] )
+				] ),
 			] )
 		);
 		return $routeHandler;

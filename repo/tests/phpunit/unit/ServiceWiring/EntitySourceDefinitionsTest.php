@@ -40,9 +40,9 @@ class EntitySourceDefinitionsTest extends ServiceWiringTestCase {
 						'baseUri' => 'http://example.com/entity/',
 						'rdfNodeNamespacePrefix' => 'wd',
 						'rdfPredicateNamespacePrefix' => 'wdt',
-						'interwikiPrefix' => 'localwiki'
-					]
-				]
+						'interwikiPrefix' => 'localwiki',
+					],
+				],
 
 		];
 		$this->mockServices( $settingsArray );
@@ -79,7 +79,7 @@ class EntitySourceDefinitionsTest extends ServiceWiringTestCase {
 					'rdfNodeNamespacePrefix' => 'wd',
 					'rdfPredicateNamespacePrefix' => '',
 					'interwikiPrefix' => '',
-				]
+				],
 			],
 			'localEntitySourceName' => 'local',
 		];

@@ -88,7 +88,7 @@ class EchoNotificationsHandlersTest extends MediaWikiIntegrationTestCase {
 		$special = [
 			'change-dewiki-sitelink',
 			'change-enwiki-sitelink',
-			'set-enwiki-sitelink'
+			'set-enwiki-sitelink',
 		];
 		foreach ( $changes as $key => $change ) {
 			if ( in_array( $key, $special ) ) {
@@ -197,7 +197,7 @@ class EchoNotificationsHandlersTest extends MediaWikiIntegrationTestCase {
 				'enabled' => true,
 				'times' => 1,
 				'auto' => true,
-			]
+			],
 		];
 	}
 

@@ -279,7 +279,7 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 	public function testDoParserCacheSaveCompleteNoChangeEntityUsage(): void {
 		$usages = [
-			'Q1#S' => new EntityUsage( new ItemId( 'Q1' ), EntityUsage::SITELINK_USAGE )
+			'Q1#S' => new EntityUsage( new ItemId( 'Q1' ), EntityUsage::SITELINK_USAGE ),
 		];
 		$parserOutput = $this->newParserOutput( $usages );
 		$title = $this->newTitle( 23, NS_MAIN, 'Oxygen' );

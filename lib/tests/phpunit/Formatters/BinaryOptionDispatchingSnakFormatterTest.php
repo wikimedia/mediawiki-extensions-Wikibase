@@ -55,23 +55,23 @@ class BinaryOptionDispatchingSnakFormatterTest extends \PHPUnit\Framework\TestCa
 		return [
 			'PropertyNoValueSnak gets fallback treatment always' => [
 				new PropertyNoValueSnak( $pSpecial ),
-				false
+				false,
 			],
 			'PropertySomeValueSnak gets fallback treatment always' => [
 				new PropertySomeValueSnak( $pSpecial ),
-				false
+				false,
 			],
 			'PropertyValueSnak with special treatment' => [
 				new PropertyValueSnak( $pSpecial, $value ),
-				true
+				true,
 			],
 			'PropertyValueSnak without special treatment' => [
 				new PropertyValueSnak( $pRegular, $value ),
-				false
+				false,
 			],
 			'Fallback on non-existing Properties' => [
 				new PropertyValueSnak( new NumericPropertyId( 'P3' ), $value ),
-				false
+				false,
 			],
 		];
 	}

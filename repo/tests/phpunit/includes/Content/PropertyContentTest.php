@@ -166,9 +166,9 @@ class PropertyContentTest extends EntityContentTestCase {
 							new Reference(
 								[
 									new PropertySomeValueSnak( new NumericPropertyId( 'P987' ) ),
-									new PropertyNoValueSnak( new NumericPropertyId( 'P986' ) )
+									new PropertyNoValueSnak( new NumericPropertyId( 'P986' ) ),
 								]
-							)
+							),
 						]
 					),
 					'imaguid'

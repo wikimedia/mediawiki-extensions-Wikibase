@@ -70,7 +70,7 @@ class ItemChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 			'labels' => [ 'en' => [ 'language' => 'en', 'value' => $newLabel ] ],
 			'descriptions' => [ 'en' => [ 'language' => 'en', 'value' => $newDescription ] ],
 			'claims' => [ $statementSerialization ],
-			'sitelinks' => [ self::SITE_ID => [ 'site' => self::SITE_ID, 'title' => $pageTitle ] ]
+			'sitelinks' => [ self::SITE_ID => [ 'site' => self::SITE_ID, 'title' => $pageTitle ] ],
 		];
 
 		$changeOp = $this->newItemChangeOpDeserializer()->createEntityChangeOp( $changeRequest );

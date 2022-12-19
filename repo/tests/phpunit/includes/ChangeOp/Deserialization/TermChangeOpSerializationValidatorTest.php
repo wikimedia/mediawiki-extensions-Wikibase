@@ -60,12 +60,12 @@ class TermChangeOpSerializationValidatorTest extends \PHPUnit\Framework\TestCase
 			'arg lang not matching langCode' => [
 				[ 'language' => 'en', 'value' => 'foo' ],
 				'de',
-				'inconsistent-language'
+				'inconsistent-language',
 			],
 			'unknown language' => [
 				[ 'language' => 'xx', 'value' => 'foo' ],
 				'xx',
-				'not-recognized-language'
+				'not-recognized-language',
 			],
 		];
 	}
@@ -75,7 +75,7 @@ class TermChangeOpSerializationValidatorTest extends \PHPUnit\Framework\TestCase
 			'normal language code' => [
 				[ 'language' => 'en', 'value' => 'foo' ],
 				'en',
-				false
+				false,
 			],
 			'numeric langcode' => [
 				[ 'language' => 'en', 'value' => 'foo' ],

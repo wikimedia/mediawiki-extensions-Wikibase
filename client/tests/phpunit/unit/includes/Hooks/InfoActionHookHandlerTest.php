@@ -61,7 +61,7 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 					'header-basic' => [
 						[
 							$context->msg( 'wikibase-pageinfo-entity-id' )->escaped(),
-							$unLabeledLink
+							$unLabeledLink,
 						],
 					],
 					'header-properties' => [
@@ -69,7 +69,7 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 							$context->msg( 'wikibase-pageinfo-entity-usage' )->escaped(),
 							"<ul><li>$labeledLink</li><ul><li>Sitelink</li></ul></ul>",
 						],
-					]
+					],
 				],
 				$context,
 				[ 'header-basic' => [] ],
@@ -77,7 +77,7 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 				new ItemId( 'Q4' ),
 				null,
 				null,
-				'item id link'
+				'item id link',
 			],
 			[
 				[ 'header-properties' => [
@@ -85,7 +85,7 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 							$context->msg( 'wikibase-pageinfo-entity-usage' )->escaped(),
 							"<ul><li>$labeledLink</li><ul><li>Sitelink</li></ul></ul>",
 						],
-					]
+					],
 				],
 				$context,
 				[ 'header-properties' => [] ],
@@ -93,16 +93,16 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 				new ItemId( 'Q4' ),
 				null,
 				null,
-				'namespace does not have wikibase enabled'
+				'namespace does not have wikibase enabled',
 			],
 			[
 				[
 					'header-basic' => [
 						[
 							$context->msg( 'wikibase-pageinfo-entity-id' )->escaped(),
-							$context->msg( 'wikibase-pageinfo-entity-id-none' )->escaped()
-						]
-					]
+							$context->msg( 'wikibase-pageinfo-entity-id-none' )->escaped(),
+						],
+					],
 				],
 				$context,
 				[ 'header-basic' => [] ],
@@ -110,7 +110,7 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 				null,
 				null,
 				null,
-				'page is not connected to an item'
+				'page is not connected to an item',
 			],
 			[
 				[ 'header-properties' => [
@@ -118,7 +118,7 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 							$context->msg( 'wikibase-pageinfo-entity-usage' )->escaped(),
 							"<ul><li>$q5Link</li><ul><li>Sitelink</li></ul></ul>",
 						],
-					]
+					],
 				],
 				$context,
 				[ 'header-properties' => [] ],
@@ -126,14 +126,14 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 				new ItemId( 'Q5' ),
 				null,
 				null,
-				'No label for Q5'
+				'No label for Q5',
 			],
 			[
 				[
 					'header-basic' => [
 						[
 							$context->msg( 'wikibase-pageinfo-entity-id' )->escaped(),
-							$unLabeledLink
+							$unLabeledLink,
 						],
 						[
 							$context->msg( 'wikibase-pageinfo-description-local' )->escaped(),
@@ -149,7 +149,7 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 							$context->msg( 'wikibase-pageinfo-entity-usage' )->escaped(),
 							"<ul><li>$labeledLink</li><ul><li>Sitelink</li></ul></ul>",
 						],
-					]
+					],
 				],
 				$context,
 				[ 'header-basic' => [] ],

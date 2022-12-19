@@ -83,7 +83,7 @@ class SqlChangeStoreTest extends MediaWikiIntegrationTestCase {
 					'change_user_id' => '0',
 					'change_info' => '[]',
 				],
-				$simpleChange
+				$simpleChange,
 			],
 			'Change with a diff' => [
 				[
@@ -96,7 +96,7 @@ class SqlChangeStoreTest extends MediaWikiIntegrationTestCase {
 						'\"labelChanges\":[],\"descriptionChanges\":[],\"statementChanges\":[],' .
 						'\"siteLinkChanges\":[],\"otherChanges\":false}"}',
 				],
-				$changeWithDiff
+				$changeWithDiff,
 			],
 			'Change with data from RC' => [
 				[
@@ -108,8 +108,8 @@ class SqlChangeStoreTest extends MediaWikiIntegrationTestCase {
 					'change_info' => '{"metadata":{"bot":0,"page_id":2354,"rev_id":343,' .
 						'"parent_id":897,"comment":"Fake data!","user_text":"BlackMagicIsEvil","central_user_id":9}}',
 				],
-				$changeWithDataFromRC
-			]
+				$changeWithDataFromRC,
+			],
 		];
 	}
 

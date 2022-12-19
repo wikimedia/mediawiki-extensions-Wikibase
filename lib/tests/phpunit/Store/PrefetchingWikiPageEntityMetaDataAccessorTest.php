@@ -36,14 +36,14 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 				[
 					$q1->getSerialization() => $q1,
 					$q3->getSerialization() => $q3,
-					$q2->getSerialization() => $q2
+					$q2->getSerialization() => $q2,
 				],
 				$fromReplica
 			)
 			->willReturn( [
 				'Q1' => 'Nyan',
 				'Q2' => 'cat',
-				'Q3' => '~=[,,_,,]:3'
+				'Q3' => '~=[,,_,,]:3',
 			] );
 
 		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup, new NullLogger() );
@@ -78,7 +78,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 		$expected = [
 			'Q1' => 'Nyan',
 			'Q2' => 'cat',
-			'Q3' => '~=[,,_,,]:3'
+			'Q3' => '~=[,,_,,]:3',
 		];
 
 		$lookup = $this->createMock( WikiPageEntityMetaDataAccessor::class );

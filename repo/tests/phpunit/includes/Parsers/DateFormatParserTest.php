@@ -40,102 +40,102 @@ class DateFormatParserTest extends \PHPUnit\Framework\TestCase {
 			'Default options' => [
 				'1 9 2014',
 				'd M Y', null, null,
-				'+2014-09-01T00:00:00Z'
+				'+2014-09-01T00:00:00Z',
 			],
 			'Date format with slashes' => [
 				'9/11/1876',
 				'j/F/Y', null, null,
-				'+1876-11-09T00:00:00Z'
+				'+1876-11-09T00:00:00Z',
 			],
 			'Transform map' => [
 				'Z g Zo15',
 				'd M Y', [ '0' => 'o', 2 => 'Z', 9 => 'g' ], null,
-				'+2015-09-02T00:00:00Z'
+				'+2015-09-02T00:00:00Z',
 			],
 			'Default month map' => [
 				'1. September 2014',
 				'd. M Y', null, $monthNames,
-				'+2014-09-01T00:00:00Z'
+				'+2014-09-01T00:00:00Z',
 			],
 			'Simple month map' => [
 				'1 September 2014',
 				'd M Y', null, [ 9 => 'September' ],
-				'+2014-09-01T00:00:00Z'
+				'+2014-09-01T00:00:00Z',
 			],
 			'Genitive month name' => [
 				'1 September 2014',
 				'd xg Y', null, $monthNames,
-				'+2014-09-01T00:00:00Z'
+				'+2014-09-01T00:00:00Z',
 			],
 			'Month before day' => [
 				'junho 12 1990',
 				'F j Y', null, [ 6 => 'junho' ],
-				'+1990-06-12T00:00:00Z'
+				'+1990-06-12T00:00:00Z',
 			],
 			'Escapes' => [
 				'1s 9s 2014\\',
 				'd\\s M\\s Y\\', null, null,
-				'+2014-09-01T00:00:00Z'
+				'+2014-09-01T00:00:00Z',
 			],
 			'Quotes' => [
 				'1th 9th 2014"',
 				'd"th" M"th" Y"', null, null,
-				'+2014-09-01T00:00:00Z'
+				'+2014-09-01T00:00:00Z',
 			],
 			'Portuguese date format with quotes' => [
 				'9 de novembro de 1876',
 				'j "de" F "de" Y', null, [ 11 => 'novembro' ],
-				'+1876-11-09T00:00:00Z'
+				'+1876-11-09T00:00:00Z',
 			],
 			'Raw characters' => [
 				'1 9ä 2014',
 				'd Mä Y', null, null,
-				'+2014-09-01T00:00:00Z'
+				'+2014-09-01T00:00:00Z',
 			],
 			'xx escaping' => [
 				'2014 x9 1',
 				'Y xxm d', null, null,
-				'+2014-09-01T00:00:00Z'
+				'+2014-09-01T00:00:00Z',
 			],
 			'Raw modifiers' => [
 				'2014 9 1',
 				'Y xNmxN xnd', null, null,
-				'+2014-09-01T00:00:00Z'
+				'+2014-09-01T00:00:00Z',
 			],
 			'Whitespace is optional' => [
 				'1September2014',
 				'd M Y', null, $monthNames,
-				'+2014-09-01T00:00:00Z'
+				'+2014-09-01T00:00:00Z',
 			],
 			'Delimiters are optional' => [
 				'1 9 2014',
 				'd. M. Y', null, null,
-				'+2014-09-01T00:00:00Z'
+				'+2014-09-01T00:00:00Z',
 			],
 			'Delimiters are ignored' => [
 				'1. 9. 2014',
 				'd M Y', null, null,
-				'+2014-09-01T00:00:00Z'
+				'+2014-09-01T00:00:00Z',
 			],
 			'Year precision' => [
 				'2014',
 				'Y', null, null,
-				'+2014-00-00T00:00:00Z', TimeValue::PRECISION_YEAR
+				'+2014-00-00T00:00:00Z', TimeValue::PRECISION_YEAR,
 			],
 			'Month precision' => [
 				'9 2014',
 				'M Y', null, null,
-				'+2014-09-00T00:00:00Z', TimeValue::PRECISION_MONTH
+				'+2014-09-00T00:00:00Z', TimeValue::PRECISION_MONTH,
 			],
 			'Minute precision' => [
 				'1 9 2014 15:30',
 				'd M Y H:i', null, null,
-				'+2014-09-01T15:30:00Z', TimeValue::PRECISION_MINUTE
+				'+2014-09-01T15:30:00Z', TimeValue::PRECISION_MINUTE,
 			],
 			'Second precision' => [
 				'1 9 2014 15:30:59',
 				'd M Y H:i:s', null, null,
-				'+2014-09-01T15:30:59Z', TimeValue::PRECISION_SECOND
+				'+2014-09-01T15:30:59Z', TimeValue::PRECISION_SECOND,
 			],
 		];
 
@@ -157,7 +157,7 @@ class DateFormatParserTest extends \PHPUnit\Framework\TestCase {
 					DateFormatParser::OPT_DATE_FORMAT => $dateFormat,
 					DateFormatParser::OPT_DIGIT_TRANSFORM_TABLE => $digitTransformTable,
 					DateFormatParser::OPT_MONTH_NAMES => $monthNames,
-				] ) )
+				] ) ),
 			];
 		}
 

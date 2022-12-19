@@ -35,8 +35,8 @@ class UnitStorageTest extends MediaWikiIntegrationTestCase {
 						'factor' => '0.0000000000000000000243885945',
 						'unit' => 'Q3',
 						'otherdata' => 'should be ignored',
-					]
-				] ]
+					],
+				] ],
 			],
 		];
 	}

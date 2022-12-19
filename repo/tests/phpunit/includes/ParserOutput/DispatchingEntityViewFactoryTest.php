@@ -48,7 +48,7 @@ class DispatchingEntityViewFactoryTest extends \PHPUnit\Framework\TestCase {
 			[
 				'foo' => function() {
 					return null;
-				}
+				},
 			]
 		);
 
@@ -91,7 +91,7 @@ class DispatchingEntityViewFactoryTest extends \PHPUnit\Framework\TestCase {
 					$this->assertSame( $entity, $entityParam );
 
 					return $entityView;
-				}
+				},
 			]
 		);
 

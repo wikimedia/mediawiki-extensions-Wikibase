@@ -201,7 +201,7 @@ class ExternalChangeFactory {
 	 */
 	private function parseAutoComment( $comment, $type ) {
 		$newComment = [
-			'key' => 'wikibase-comment-update'
+			'key' => 'wikibase-comment-update',
 		];
 
 		if ( is_array( $comment ) ) {

@@ -91,7 +91,7 @@ class CachedDatabasePropertyLabelResolverTest extends MediaWikiIntegrationTestCa
 			1 => $p1TermsArray,
 			2 => $p2TermsArray,
 			3 => $p3TermsArray,
-			4 => $p4TermsArray
+			4 => $p4TermsArray,
 		];
 
 		return [
@@ -106,32 +106,32 @@ class CachedDatabasePropertyLabelResolverTest extends MediaWikiIntegrationTestCa
 				$termsArrayPerPropertyId,
 				[ // labels
 					'Eins',
-					'Zwei'
+					'Zwei',
 				],
 				[ // expected
 					'Eins' => new NumericPropertyId( 'P1' ),
 					'Zwei' => new NumericPropertyId( 'P2' ),
-				]
+				],
 			],
 			[ // #2
 				'de',
 				$termsArrayPerPropertyId,
 				[ // labels
 					'Drei',
-					'Vier'
+					'Vier',
 				],
 				[ // expected
 					'Drei' => new NumericPropertyId( 'P3' ),
-				]
+				],
 			],
 			[ // #3
 				'en',
 				$termsArrayPerPropertyId,
 				[ // labels
 					'Eins',
-					'Zwei'
+					'Zwei',
 				],
-				[] // expected
+				[], // expected
 			],
 			[ // #4
 				'en',
@@ -140,11 +140,11 @@ class CachedDatabasePropertyLabelResolverTest extends MediaWikiIntegrationTestCa
 					'One',
 					'Two',
 					'Three',
-					'Four'
+					'Four',
 				],
 				[ // expected
 					'One' => new NumericPropertyId( 'P1' ),
-				]
+				],
 			],
 		];
 	}
@@ -157,7 +157,7 @@ class CachedDatabasePropertyLabelResolverTest extends MediaWikiIntegrationTestCa
 							   'resolveGroupedTermIds',
 						   ] )
 						   ->onlyMethods( [
-							   'resolveTermsViaJoin'
+							   'resolveTermsViaJoin',
 						   ] )
 						   ->getMock();
 

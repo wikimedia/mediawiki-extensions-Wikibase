@@ -85,7 +85,7 @@ class SnakSerializationRendererTest extends \PHPUnit\Framework\TestCase {
 				'foo bar foo',
 				[ 'P42' => [
 					$this->getSnakSerialization( new StringValue( 'foo bar foo' ) ),
-				] ]
+				] ],
 			],
 			'Multiple Snaks' => [
 				'foo, bar, Berlin',
@@ -94,8 +94,8 @@ class SnakSerializationRendererTest extends \PHPUnit\Framework\TestCase {
 					$this->getSnakSerialization( new StringValue( 'bar' ) ),
 					$this->getSnakSerialization( new StringValue( 'Berlin' ) ),
 					$this->getSnakSerialization( new StringValue( '' ) ),
-				] ]
-			]
+				] ],
+			],
 		];
 	}
 

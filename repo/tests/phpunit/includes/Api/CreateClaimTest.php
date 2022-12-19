@@ -171,7 +171,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 				$this->equalTo( 'unknown_snaktype' ),
 				$this->equalTo( 'badvalue' )
 			),
-			$params
+			$params,
 		];
 
 		//5, 6, 7
@@ -191,7 +191,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 					$this->equalTo( 'no' . $requiredParam ),
 					$this->equalTo( 'missingparam' )
 				),
-				$params
+				$params,
 			];
 		}
 
@@ -305,7 +305,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 			'snaktype' => 'value',
 			'property' => $property->getId()->getSerialization(),
 			'value' => '"Bar"',
-			'baserevid' => $revId
+			'baserevid' => $revId,
 		];
 
 		list( $resultArray, ) = $this->doApiRequestWithToken( $params );

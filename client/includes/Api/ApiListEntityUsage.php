@@ -160,7 +160,7 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 		$this->addFields( [
 			'eu_page_id',
 			'eu_entity_id',
-			'eu_aspect'
+			'eu_aspect',
 		] );
 
 		$this->addTables( 'wbc_entity_usage' );
@@ -245,7 +245,7 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 				ParamValidator::PARAM_TYPE => 'limit',
 				IntegerDef::PARAM_MIN => 1,
 				IntegerDef::PARAM_MAX => ApiBase::LIMIT_BIG1,
-				IntegerDef::PARAM_MAX2 => ApiBase::LIMIT_BIG2
+				IntegerDef::PARAM_MAX2 => ApiBase::LIMIT_BIG2,
 			],
 			'continue' => [
 				ApiBase::PARAM_HELP_MSG => 'api-help-param-continue',

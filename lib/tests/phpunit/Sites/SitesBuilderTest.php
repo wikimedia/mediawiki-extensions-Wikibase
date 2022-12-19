@@ -80,43 +80,43 @@ class SitesBuilderTest extends \PHPUnit\Framework\TestCase {
 				'siteid' => 'enwiki',
 				'group' => 'wikipedia',
 				'url' => 'en.wikipedia.org',
-				'lang' => 'en'
+				'lang' => 'en',
 			],
 			[
 				'siteid' => 'dewiki',
 				'group' => 'wikipedia',
 				'url' => 'de.wikipedia.org',
-				'lang' => 'de'
+				'lang' => 'de',
 			],
 			[
 				'siteid' => 'enwikivoyage',
 				'group' => 'wikivoyage',
 				'url' => 'en.wikivoyage.org',
-				'lang' => 'en'
+				'lang' => 'en',
 			],
 			[
 				'siteid' => 'frwikivoyage',
 				'group' => 'wikivoyage',
 				'url' => 'fr.wikivoyage.org',
-				'lang' => 'fr'
+				'lang' => 'fr',
 			],
 			[
 				'siteid' => 'enwikiquote',
 				'group' => 'wikiquote',
 				'url' => 'en.wikiquote.org',
-				'lang' => 'en'
+				'lang' => 'en',
 			],
 			[
 				'siteid' => 'commonswiki',
 				'group' => 'commons',
 				'url' => 'commons.wikimedia.org',
-				'lang' => 'en'
+				'lang' => 'en',
 			],
 			[
 				'siteid' => 'wikidatawiki',
 				'group' => 'wikidata',
 				'url' => 'www.wikidata.org',
-				'lang' => 'en'
+				'lang' => 'en',
 			],
 		];
 
@@ -143,11 +143,11 @@ class SitesBuilderTest extends \PHPUnit\Framework\TestCase {
 				'data' => [
 					'paths' => [
 						'file_path' => '//' . $siteData['url'] . '/w/$1',
-						'page_path' => '//' . $siteData['url'] . '/wiki/$1'
-					]
+						'page_path' => '//' . $siteData['url'] . '/wiki/$1',
+					],
 				],
 				'forward' => false,
-				'config' => []
+				'config' => [],
 			];
 
 			$site = new MediaWikiSite();

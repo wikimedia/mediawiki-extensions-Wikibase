@@ -81,12 +81,12 @@ class DefaultEntityLinkFormatter implements EntityLinkFormatter {
 		if ( $termData ) {
 			return [
 				$termData['value'],
-				$this->languageFactory->getLanguage( $termData['language'] )
+				$this->languageFactory->getLanguage( $termData['language'] ),
 			];
 		} else {
 			return [
 				'',
-				$this->pageLanguage
+				$this->pageLanguage,
 			];
 		}
 	}

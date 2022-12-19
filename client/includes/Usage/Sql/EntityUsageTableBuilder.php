@@ -145,11 +145,11 @@ class EntityUsageTableBuilder {
 				[
 					'eu_page_id' => (int)$pageId,
 					'eu_aspect' => EntityUsage::ALL_USAGE,
-					'eu_entity_id' => $entityId->getSerialization()
+					'eu_entity_id' => $entityId->getSerialization(),
 				],
 				__METHOD__,
 				[
-					'IGNORE'
+					'IGNORE',
 				]
 			);
 
@@ -169,12 +169,12 @@ class EntityUsageTableBuilder {
 			[ 'pp_page', 'pp_value' ],
 			[
 				'pp_propname' => 'wikibase_item',
-				'pp_page >= ' . $fromPageId
+				'pp_page >= ' . $fromPageId,
 			],
 			__METHOD__,
 			[
 				'LIMIT' => $this->batchSize,
-				'ORDER BY pp_page'
+				'ORDER BY pp_page',
 			]
 		);
 

@@ -60,7 +60,7 @@ class UrlValidator implements ValueValidator {
 		// See RFC 3986, section-3.1.
 		if ( !preg_match( '/^([-+.a-z\d]+):/i', $url, $matches ) ) {
 			return Result::newError( [
-				Error::newError( 'Malformed URL, can\'t find scheme name.', null, 'url-scheme-missing', [ $url ] )
+				Error::newError( 'Malformed URL, can\'t find scheme name.', null, 'url-scheme-missing', [ $url ] ),
 			] );
 		}
 
@@ -74,7 +74,7 @@ class UrlValidator implements ValueValidator {
 			$validator = $this->validators['*'];
 		} else {
 			return Result::newError( [
-				Error::newError( 'Unsupported URL scheme', null, 'bad-url-scheme', [ $scheme ] )
+				Error::newError( 'Unsupported URL scheme', null, 'bad-url-scheme', [ $scheme ] ),
 			] );
 		}
 

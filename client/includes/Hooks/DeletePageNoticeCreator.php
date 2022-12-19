@@ -106,7 +106,7 @@ class DeletePageNoticeCreator implements ArticleDeleteAfterSuccessHook {
 		$html = Html::rawElement(
 			'div',
 			[
-				'class' => 'plainlinks'
+				'class' => 'plainlinks',
 			],
 			wfMessage( $msg, $itemLink )->parse()
 		);

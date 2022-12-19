@@ -31,7 +31,7 @@ class OutputPageJsConfigBuilderTest extends MediaWikiIntegrationTestCase {
 			'CC-0',
 			[
 				'Q12' => 'wb-badge-goodarticle',
-				'Q42' => 'wb-badge-featuredarticle'
+				'Q42' => 'wb-badge-featuredarticle',
 			],
 			250,
 			$taintedRefs
@@ -45,11 +45,11 @@ class OutputPageJsConfigBuilderTest extends MediaWikiIntegrationTestCase {
 					"(wikibase-shortcopyrightwarning: ($expectedKey), " .
 					wfMessage( 'copyrightpage' )->inContentLanguage()->text() .
 					', <a rel="nofollow" class="external free" href="' . $url .
-					'">' . $url . '</a>, CC-0)'
+					'">' . $url . '</a>, CC-0)',
 			],
 			'wbBadgeItems' => [
 				'Q12' => 'wb-badge-goodarticle',
-				'Q42' => 'wb-badge-featuredarticle'
+				'Q42' => 'wb-badge-featuredarticle',
 			],
 			'wbMultiLingualStringLimit' => 250,
 			'wbTaintedReferencesEnabled' => $taintedRefs,

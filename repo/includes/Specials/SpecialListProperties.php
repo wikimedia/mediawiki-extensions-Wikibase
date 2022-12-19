@@ -120,7 +120,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 		);
 
 		$options = [
-			$this->msg( 'wikibase-listproperties-all' )->text() => ''
+			$this->msg( 'wikibase-listproperties-all' )->text() => '',
 		];
 		$options = array_merge( $options, $dataTypeSelect->getOptionsArray() );
 
@@ -131,14 +131,14 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 				'id' => 'wb-listproperties-datatype',
 				'label-message' => 'wikibase-listproperties-datatype',
 				'options' => $options,
-				'default' => $this->dataType
+				'default' => $this->dataType,
 			],
 			'submit' => [
 				'name' => '',
 				'type' => 'submit',
 				'id' => 'wikibase-listproperties-submit',
-				'default' => $this->msg( 'wikibase-listproperties-submit' )->text()
-			]
+				'default' => $this->msg( 'wikibase-listproperties-submit' )->text(),
+			],
 		];
 
 		HTMLForm::factory( 'ooui', $formDescriptor, $this->getContext() )
@@ -176,7 +176,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 			'a',
 			[
 				'title' => $title ? $title->getPrefixedText() : $propertyId->getSerialization(),
-				'href' => $title ? $title->getLocalURL() : ''
+				'href' => $title ? $title->getLocalURL() : '',
 			],
 			Html::rawElement(
 				'span',

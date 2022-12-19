@@ -44,17 +44,17 @@ class WikitextExternalIdentifierFormatterTest extends \PHPUnit\Framework\TestCas
 			'formatter URL' => [
 				$formatterUrlExpander,
 				new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'abc\'\'123' ) ),
-				'[http://acme.test/stuff/abc%27%27123 abc&#39;&#39;123]'
+				'[http://acme.test/stuff/abc%27%27123 abc&#39;&#39;123]',
 			],
 			'formatter URL with escaping' => [
 				$formatterUrlExpander,
 				new PropertyValueSnak( new NumericPropertyId( 'P2' ), new StringValue( 'abc\'\'123' ) ),
-				'[http://acme.test/%5Bother%20stuff%5D/%3Cabc%27%27123%3E abc&#39;&#39;123]'
+				'[http://acme.test/%5Bother%20stuff%5D/%3Cabc%27%27123%3E abc&#39;&#39;123]',
 			],
 			'unknown property' => [
 				$formatterUrlExpander,
 				new PropertyValueSnak( new NumericPropertyId( 'P345' ), new StringValue( 'abc\'\'123' ) ),
-				'abc&#39;&#39;123'
+				'abc&#39;&#39;123',
 			],
 		];
 	}
@@ -75,7 +75,7 @@ class WikitextExternalIdentifierFormatterTest extends \PHPUnit\Framework\TestCas
 	public function provideFormatSnak_ParameterTypeException() {
 		return [
 			'bad snak type' => [
-				new PropertyNoValueSnak( new NumericPropertyId( 'P7' ) )
+				new PropertyNoValueSnak( new NumericPropertyId( 'P7' ) ),
 			],
 		];
 	}

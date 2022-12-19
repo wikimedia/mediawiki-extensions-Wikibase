@@ -44,7 +44,7 @@ class LabelsChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 
 				$deserializer = $this->newLabelsChangeOpDeserializer( $validator );
 				$deserializer->createEntityChangeOp( [
-					'labels' => [ 'en' => [ 'language' => 'de', 'value' => 'foo' ] ]
+					'labels' => [ 'en' => [ 'language' => 'de', 'value' => 'foo' ] ],
 				] );
 			},
 			'test-error'

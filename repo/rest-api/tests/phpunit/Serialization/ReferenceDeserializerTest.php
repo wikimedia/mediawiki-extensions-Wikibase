@@ -74,7 +74,7 @@ class ReferenceDeserializerTest extends TestCase {
 	public function invalidSerializationProvider(): Generator {
 		yield 'missing parts' => [
 			new MissingFieldException( 'parts' ),
-			[]
+			[],
 		];
 
 		yield 'null parts' => [

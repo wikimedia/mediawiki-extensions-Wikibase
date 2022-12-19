@@ -87,12 +87,12 @@ class JsonDataTypeInjectorTest extends TestCase {
 						] ),
 						new AliasGroupList( [
 							new AliasGroup( 'en', [ 'ali1', 'ali2' ] ),
-							new AliasGroup( 'dv', [ 'ali11', 'ali22' ] )
+							new AliasGroup( 'dv', [ 'ali11', 'ali22' ] ),
 						] )
 					),
 					new SiteLinkList( [
 						new SiteLink( 'enwiki', 'Berlin' ),
-						new SiteLink( 'dewiki', 'England', [ new ItemId( 'Q1' ) ] )
+						new SiteLink( 'dewiki', 'England', [ new ItemId( 'Q1' ) ] ),
 					] ),
 					new StatementList(
 						new Statement(
@@ -113,8 +113,8 @@ class JsonDataTypeInjectorTest extends TestCase {
 							'GUID2'
 						)
 					)
-				)
-			]
+				),
+			],
 		];
 	}
 

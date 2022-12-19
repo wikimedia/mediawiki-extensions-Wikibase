@@ -47,7 +47,7 @@ class MediaWikiConfigModule extends RL\Module {
 		$configValueProvider = call_user_func( $this->getConfigValueProvider );
 
 		return ResourceLoader::makeConfigSetScript( [
-			$configValueProvider->getKey() => $configValueProvider->getValue()
+			$configValueProvider->getKey() => $configValueProvider->getValue(),
 		] );
 	}
 

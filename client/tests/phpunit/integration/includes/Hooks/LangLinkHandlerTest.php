@@ -145,16 +145,16 @@ class LangLinkHandlerTest extends MediaWikiIntegrationTestCase {
 	public function provideGetNoExternalLangLinks() {
 		return [
 			[ // #0
-				[]
+				[],
 			],
 			[ // #1
-				[ '*' ]
+				[ '*' ],
 			],
 			[ // #2
-				[ 'de' ]
+				[ 'de' ],
 			],
 			[ // #3
-				[ 'xy', 'de', 'en' ]
+				[ 'xy', 'de', 'en' ],
 			],
 		];
 	}
@@ -185,23 +185,23 @@ class LangLinkHandlerTest extends MediaWikiIntegrationTestCase {
 			[ // #0
 				[],
 				[],
-				[]
+				[],
 			],
 			[ // #1
 				[ 'de' ],
 				[ 'cs' ],
-				[ 'de', 'cs' ]
+				[ 'de', 'cs' ],
 			],
 			[
 				[ 'de' ],
 				[ '*' ],
-				[ 'de', '*' ]
+				[ 'de', '*' ],
 			],
 			[ // #3
 				[ 'xy', 'de', 'en' ],
 				[],
-				[ 'xy', 'de', 'en' ]
-			]
+				[ 'xy', 'de', 'en' ],
+			],
 		];
 	}
 
@@ -210,22 +210,22 @@ class LangLinkHandlerTest extends MediaWikiIntegrationTestCase {
 			[ // #0
 				'Foo_sr',
 				[],
-				true
+				true,
 			],
 			[ // #1
 				'Foo_sr',
 				[ '*' ],
-				false
+				false,
 			],
 			[ // #2
 				'Foo_sr',
 				[ 'de' ],
-				true
+				true,
 			],
 			[ // #3
 				'Talk:Foo_sr',
 				[],
-				false
+				false,
 			],
 		];
 	}
@@ -258,7 +258,7 @@ class LangLinkHandlerTest extends MediaWikiIntegrationTestCase {
 				],
 				[ // expectedLinks
 					'enwiki' => 'Foo en',
-				]
+				],
 			],
 			[ // #1: namespace not covered
 				'Talk:Foo_sr', // title
@@ -269,7 +269,7 @@ class LangLinkHandlerTest extends MediaWikiIntegrationTestCase {
 				[ // noexternallinks
 				],
 				[ // expectedLinks
-				]
+				],
 			],
 			[ // #2: disabled
 				'Foo_sr', // title
@@ -278,10 +278,10 @@ class LangLinkHandlerTest extends MediaWikiIntegrationTestCase {
 					'nl' => 'Foo nl',
 				],
 				[ // noexternallinks
-					'*'
+					'*',
 				],
 				[ // expectedLinks
-				]
+				],
 			],
 			[ // #3: suppressed
 				'Foo_sr', // title
@@ -290,10 +290,10 @@ class LangLinkHandlerTest extends MediaWikiIntegrationTestCase {
 					'nl' => 'Foo nl',
 				],
 				[ // noexternallinks
-					'en'
+					'en',
 				],
 				[ // expectedLinks
-				]
+				],
 			],
 			[ // #4: suppressed redundantly
 				'Foo_sr', // title
@@ -302,11 +302,11 @@ class LangLinkHandlerTest extends MediaWikiIntegrationTestCase {
 					'nl' => 'Foo nl',
 				],
 				[ // noexternallinks
-					'de'
+					'de',
 				],
 				[ // expectedLinks
 					'enwiki' => 'Foo en',
-				]
+				],
 			],
 		];
 	}
@@ -383,7 +383,7 @@ class LangLinkHandlerTest extends MediaWikiIntegrationTestCase {
 				$case[1],
 				$case[2],
 				$expectedLinks,
-				$expectedBadges
+				$expectedBadges,
 			];
 		}
 
@@ -426,7 +426,7 @@ class LangLinkHandlerTest extends MediaWikiIntegrationTestCase {
 	public function provideFilterRepoLinksByGroup() {
 		return [
 			[ // #0: nothing
-				[], [], []
+				[], [], [],
 			],
 			[ // #1: nothing allowed
 				[
@@ -437,12 +437,12 @@ class LangLinkHandlerTest extends MediaWikiIntegrationTestCase {
 					'enwiktionary' => 'Foo en word',
 				],
 				[],
-				[]
+				[],
 			],
 			[ // #2: nothing there
 				[],
 				[ 'wikipedia' ],
-				[]
+				[],
 			],
 			[ // #3: wikipedia only
 				[
@@ -478,7 +478,7 @@ class LangLinkHandlerTest extends MediaWikiIntegrationTestCase {
 	public function provideSuppressRepoLinks() {
 		return [
 			[ // #0: nothing
-				[], [], []
+				[], [], [],
 			],
 			[ // #1: nothing allowed
 				[
@@ -489,12 +489,12 @@ class LangLinkHandlerTest extends MediaWikiIntegrationTestCase {
 					'enwiktionary' => 'Foo en word',
 				],
 				[ '*' ],
-				[]
+				[],
 			],
 			[ // #2: nothing there
 				[],
 				[ 'de' ],
-				[]
+				[],
 			],
 			[ // #3: no de
 				[

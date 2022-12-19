@@ -291,7 +291,7 @@ return call_user_func( function() {
 	$defaults['entityUsageModifierLimits'] = [
 		EntityUsage::DESCRIPTION_USAGE => 30,
 		EntityUsage::LABEL_USAGE => 30,
-		EntityUsage::STATEMENT_USAGE => 10
+		EntityUsage::STATEMENT_USAGE => 10,
 	];
 
 	// Batch size for adding entity usage records

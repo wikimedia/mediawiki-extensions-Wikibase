@@ -218,35 +218,35 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 				[ 'en' => 'Test 1', 'de' => 'Test DE' ],
 				'en',
 				[ 'en' ],
-				'en'
+				'en',
 			],
 			"de" => [
 				'Q2',
 				[ 'en' => 'Test 1', 'de' => 'Test DE' ],
 				'de',
 				[ 'de' ],
-				'de'
+				'de',
 			],
 			"fallback" => [
 				'Q3',
 				[ 'ru' => 'Test RU', 'en' => 'Test 1' ],
 				'de',
 				[ 'de', 'ru', 'en' ],
-				'de-ru'
+				'de-ru',
 			],
 			"no fallback" => [
 				'Q3',
 				[ 'ru' => 'Test RU', 'en' => 'Test 1' ],
 				'de',
 				[ 'de', 'es' ],
-				'de-none'
+				'de-none',
 			],
 			"html" => [
 				'Q4',
 				[ 'en' => 'Test <with> 1 & 2', 'de' => 'Test <DE>' ],
 				'en',
 				[ 'en' ],
-				'en-html'
+				'en-html',
 			],
 		];
 	}

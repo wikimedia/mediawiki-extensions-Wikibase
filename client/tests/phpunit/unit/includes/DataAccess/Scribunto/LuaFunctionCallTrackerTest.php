@@ -40,7 +40,7 @@ class LuaFunctionCallTrackerTest extends \PHPUnit\Framework\TestCase {
 			'per wiki and per site group logging' => [
 				[
 					'defancywiki.wikibase.client.scribunto.doStuff.call',
-					'fancy.wikibase.client.scribunto.doStuff.call'
+					'fancy.wikibase.client.scribunto.doStuff.call',
 				],
 				true,
 				true,

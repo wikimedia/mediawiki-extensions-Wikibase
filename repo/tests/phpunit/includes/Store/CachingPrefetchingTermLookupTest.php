@@ -211,7 +211,7 @@ class CachingPrefetchingTermLookupTest extends TestCase {
 
 		$cache = $this->createMock( CacheInterface::class );
 		$cache->expects( $this->once() )->method( 'getMultiple' )->with( [
-			'Q1_666_en_label'
+			'Q1_666_en_label',
 		] )->willReturn( [ 'Q1_666_en_label' => 'whatever' ] );
 		$this->lookup->expects( $this->once() )->method( 'prefetchTerms' )->with( [], [], [] );
 		$lookup = new CachingPrefetchingTermLookup(

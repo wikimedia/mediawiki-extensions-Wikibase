@@ -158,7 +158,7 @@ class InfoActionHookHandler implements InfoActionHook {
 		return [
 			// messages: wikibase-pageinfo-description-local, wikibase-pageinfo-description-central
 			$context->msg( 'wikibase-pageinfo-description-' . $source )->parse(),
-			htmlspecialchars( $description )
+			htmlspecialchars( $description ),
 		];
 	}
 
@@ -178,7 +178,7 @@ class InfoActionHookHandler implements InfoActionHook {
 
 		return [
 			$context->msg( 'wikibase-pageinfo-entity-id' )->parse(),
-			$itemLink
+			$itemLink,
 		];
 	}
 
@@ -190,7 +190,7 @@ class InfoActionHookHandler implements InfoActionHook {
 	private function getUnconnectedItemPageInfo( IContextSource $context ) {
 		return [
 			$context->msg( 'wikibase-pageinfo-entity-id' )->parse(),
-			$context->msg( 'wikibase-pageinfo-entity-id-none' )->parse()
+			$context->msg( 'wikibase-pageinfo-entity-id-none' )->parse(),
 		];
 	}
 
@@ -241,7 +241,7 @@ class InfoActionHookHandler implements InfoActionHook {
 			$entityIds[$entityId] = $entityUsage->getEntityId();
 			$usageAspectsByEntity[$entityId][] = [
 				$entityUsage->getAspect(),
-				$entityUsage->getModifier()
+				$entityUsage->getModifier(),
 			];
 		}
 

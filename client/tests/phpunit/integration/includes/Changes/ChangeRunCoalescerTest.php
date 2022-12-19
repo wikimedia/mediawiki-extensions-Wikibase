@@ -157,8 +157,8 @@ class ChangeRunCoalescerTest extends MediaWikiIntegrationTestCase {
 					'bot' => 0,
 					'comment' => $lastmeta['comment'],
 					'parent_id' => $firstmeta['parent_id'],
-				]
-			]
+				],
+			],
 		] );
 	}
 

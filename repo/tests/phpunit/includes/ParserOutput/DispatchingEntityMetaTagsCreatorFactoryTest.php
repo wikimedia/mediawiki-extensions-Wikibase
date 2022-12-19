@@ -44,7 +44,7 @@ class DispatchingEntityMetaTagsCreatorFactoryTest extends TestCase {
 			[
 				'dummy-entity-type' => function() {
 					return null;
-				}
+				},
 			]
 		);
 
@@ -69,7 +69,7 @@ class DispatchingEntityMetaTagsCreatorFactoryTest extends TestCase {
 				){
 					$this->assertSame( $language, $newLanguage );
 					return $entityMetaTags;
-				}
+				},
 			]
 		);
 

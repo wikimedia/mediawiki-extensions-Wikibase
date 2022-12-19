@@ -58,7 +58,7 @@ class SnakValidatorTest extends \PHPUnit\Framework\TestCase {
 
 		$this->dataTypeFactory = new DataTypeFactory( [
 			'numeric' => 'string',
-			'alphabetic' => 'string'
+			'alphabetic' => 'string',
 		] );
 
 		$p1 = new NumericPropertyId( 'P1' );
@@ -79,7 +79,7 @@ class SnakValidatorTest extends \PHPUnit\Framework\TestCase {
 			) {
 				return [
 					$dataTypeId === 'numeric' ? $numericValidator : $alphabeticValidator,
-					$lengthValidator
+					$lengthValidator,
 				];
 			} );
 	}
@@ -97,12 +97,12 @@ class SnakValidatorTest extends \PHPUnit\Framework\TestCase {
 			new PropertyValueSnak( $p1, new StringValue( '12' ) )
 		);
 		$statement->setQualifiers( new SnakList( [
-			new PropertyValueSnak( $p2, new StringValue( 'abc' ) )
+			new PropertyValueSnak( $p2, new StringValue( 'abc' ) ),
 		] ) );
 		$statement->setReferences( new ReferenceList( [
 			new Reference( new SnakList( [
-				new PropertyValueSnak( $p2, new StringValue( 'xyz' ) )
-			] ) )
+				new PropertyValueSnak( $p2, new StringValue( 'xyz' ) ),
+			] ) ),
 		] ) );
 		$cases[] = [ $statement, 'conforming statement', true ];
 
@@ -114,15 +114,15 @@ class SnakValidatorTest extends \PHPUnit\Framework\TestCase {
 
 		$brokenStatement = clone $statement;
 		$brokenStatement->setQualifiers( new SnakList( [
-			new PropertyValueSnak( $p2, new StringValue( '333' ) )
+			new PropertyValueSnak( $p2, new StringValue( '333' ) ),
 		] ) );
 		$cases[] = [ $brokenStatement, 'error in qualifier', false ];
 
 		$brokenStatement = clone $statement;
 		$brokenStatement->setReferences( new ReferenceList( [
 			new Reference( new SnakList( [
-				new PropertyValueSnak( $p1, new StringValue( 'xyz' ) )
-			] ) )
+				new PropertyValueSnak( $p1, new StringValue( 'xyz' ) ),
+			] ) ),
 		] ) );
 		$cases[] = [ $brokenStatement, 'error in reference', false ];
 
@@ -151,21 +151,21 @@ class SnakValidatorTest extends \PHPUnit\Framework\TestCase {
 
 		$references = new ReferenceList( [
 			new Reference( new SnakList( [
-				new PropertyValueSnak( $p1, new StringValue( '123' ) )
+				new PropertyValueSnak( $p1, new StringValue( '123' ) ),
 			] ) ),
 			new Reference( new SnakList( [
-				new PropertyValueSnak( $p2, new StringValue( 'abc' ) )
-			] ) )
+				new PropertyValueSnak( $p2, new StringValue( 'abc' ) ),
+			] ) ),
 		] );
 		$cases[] = [ $references, 'conforming reference list', true ];
 
 		$references = new ReferenceList( [
 			new Reference( new SnakList( [
-				new PropertyValueSnak( $p1, new StringValue( '123' ) )
+				new PropertyValueSnak( $p1, new StringValue( '123' ) ),
 			] ) ),
 			new Reference( new SnakList( [
-				new PropertyValueSnak( $p2, new StringValue( '456' ) )
-			] ) )
+				new PropertyValueSnak( $p2, new StringValue( '456' ) ),
+			] ) ),
 		] );
 		$cases[] = [ $references, 'invalid reference list', false ];
 
@@ -194,14 +194,14 @@ class SnakValidatorTest extends \PHPUnit\Framework\TestCase {
 
 		$reference = new Reference( new SnakList( [
 				new PropertyValueSnak( $p1, new StringValue( '123' ) ),
-				new PropertyValueSnak( $p2, new StringValue( 'abc' ) )
+				new PropertyValueSnak( $p2, new StringValue( 'abc' ) ),
 			] )
 		);
 		$cases[] = [ $reference, 'conforming reference', true ];
 
 		$reference = new Reference( new SnakList( [
 				new PropertyValueSnak( $p1, new StringValue( '123' ) ),
-				new PropertyValueSnak( $p2, new StringValue( '456' ) )
+				new PropertyValueSnak( $p2, new StringValue( '456' ) ),
 			] )
 		);
 		$cases[] = [ $reference, 'invalid reference', false ];
@@ -261,7 +261,7 @@ class SnakValidatorTest extends \PHPUnit\Framework\TestCase {
 				null,
 				'invalid',
 				[]
-			)
+			),
 		];
 
 		$snak = new PropertyValueSnak( $p1, new StringValue( 'abc' ) );
@@ -273,7 +273,7 @@ class SnakValidatorTest extends \PHPUnit\Framework\TestCase {
 				null,
 				'invalid',
 				[]
-			)
+			),
 		];
 
 		$snak = new PropertyValueSnak( $p1, new UnDeserializableValue( 'abc', 'string', 'ooops' ) );
@@ -285,7 +285,7 @@ class SnakValidatorTest extends \PHPUnit\Framework\TestCase {
 				null,
 				'bad-value',
 				[ 'ooops' ]
-			)
+			),
 		];
 
 		$snak = new PropertyValueSnak( $p1, new UnknownValue( 'abc' ) );
@@ -297,7 +297,7 @@ class SnakValidatorTest extends \PHPUnit\Framework\TestCase {
 				null,
 				'bad-value-type',
 				[ 'unknown', 'string' ]
-			)
+			),
 		];
 
 		$snak = new PropertyValueSnak( $p3, new StringValue( 'abc' ) );
@@ -309,7 +309,7 @@ class SnakValidatorTest extends \PHPUnit\Framework\TestCase {
 				null,
 				'no-such-property',
 				[ 'P3' ]
-			)
+			),
 		];
 
 		$snak = new PropertyValueSnak( $p4, new StringValue( 'abc' ) );
@@ -321,7 +321,7 @@ class SnakValidatorTest extends \PHPUnit\Framework\TestCase {
 				null,
 				'bad-data-type',
 				[ 'fiddlediddle' ]
-			)
+			),
 		];
 
 		return $cases;

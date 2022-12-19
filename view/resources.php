@@ -104,7 +104,7 @@ return call_user_func( function() {
 				'jquery/wikibase/themes/default/jquery.wikibase.sitelinklistview.css',
 				'jquery/wikibase/themes/default/jquery.wikibase.sitelinkview.css',
 				'jquery/wikibase/themes/default/jquery.wikibase.statementgroupview.css',
-			]
+			],
 		],
 
 		'wikibase.mobile' => $moduleTemplate + [
@@ -112,7 +112,7 @@ return call_user_func( function() {
 				'wikibase/wikibase.mobile.css',
 				'jquery/wikibase/themes/default/jquery.wikibase.statementview.RankSelector.css',
 			],
-			'targets' => 'mobile'
+			'targets' => 'mobile',
 		],
 
 		'wikibase.templates' => $moduleTemplate + [
@@ -143,7 +143,7 @@ return call_user_func( function() {
 				'wikibase.api.RepoApi',
 				'wikibase.datamodel', // for AliasesChanger.js
 				'wikibase.serialization',
-			]
+			],
 		],
 
 		'wikibase.utilities.ClaimGuidGenerator' => $moduleTemplate + [
@@ -163,11 +163,11 @@ return call_user_func( function() {
 			 // T326405
 			'targets' => [ 'desktop' ],
 			'scripts' => [
-				'wikibase/view/namespace.js'
+				'wikibase/view/namespace.js',
 			],
 			'dependencies' => [
-				'wikibase'
-			]
+				'wikibase',
+			],
 		],
 
 		'wikibase.view.ReadModeViewFactory' => $moduleTemplate + [
@@ -176,7 +176,7 @@ return call_user_func( function() {
 			'scripts' => 'wikibase/view/ReadModeViewFactory.js',
 			'dependencies' => [
 				'wikibase.view.__namespace',
-				'wikibase.view.ControllerViewFactory'
+				'wikibase.view.ControllerViewFactory',
 			],
 		],
 		'wikibase.view.ControllerViewFactory' => $moduleBaseTemplate + [
@@ -252,7 +252,7 @@ return call_user_func( function() {
 				'lib/wikibase-data-values-value-view/lib/jquery.ui/jquery.ui.toggler.css',
 				'resources/jquery/wikibase/themes/default/jquery.wikibase.entityview.less',
 				'resources/wikibase/utilities/wikibase.utilities.ui.css',
-				'resources/jquery/ui/jquery.ui.closeable.css'
+				'resources/jquery/ui/jquery.ui.closeable.css',
 			],
 			'dependencies' => [
 				'dataValues.DataValue', // For snakview
@@ -529,7 +529,7 @@ return call_user_func( function() {
 			 // T326405
 			'targets' => [ 'desktop' ],
 			'scripts' => [
-				'jquery.event/jquery.event.special.eachchange.js'
+				'jquery.event/jquery.event.special.eachchange.js',
 			],
 		],
 
@@ -718,7 +718,7 @@ return call_user_func( function() {
 				'util.inherit',
 				'util.MessageProviders',
 				'util.Notifier',
-				'util.Extendable'
+				'util.Extendable',
 			],
 		],
 
@@ -909,11 +909,11 @@ return call_user_func( function() {
 			 // T326405
 			'targets' => [ 'desktop' ],
 			'scripts' => [
-				'experts/UnDeserializableValue.js'
+				'experts/UnDeserializableValue.js',
 			],
 			'dependencies' => [
 				'jquery.valueview.Expert',
-			]
+			],
 		],
 
 		'jquery.valueview.ExpertStore' => $wikibaseDatavaluesValueviewSrcPaths + [
@@ -932,7 +932,7 @@ return call_user_func( function() {
 			'messages' => [
 				'valueview-expert-unsupportedvalue-unsupporteddatatype',
 				'valueview-expert-unsupportedvalue-unsupporteddatavalue',
-			]
+			],
 		],
 
 		'jquery.valueview.ExpertExtender' => $wikibaseDatavaluesValueviewSrcPaths + [
@@ -990,7 +990,7 @@ return call_user_func( function() {
 				'wikibase.getUserLanguages',
 				'mw.config.values.wbRepo',
 				'vue',
-				'vuex'
+				'vuex',
 			],
 			// 'messages' are declared by ./resources.json via TermboxModule.
 		],
@@ -1003,7 +1003,7 @@ return call_user_func( function() {
 				'minerva' => '../../resources/wikibase/termbox/minerva.less',
 			],
 			'targets' => [
-				'mobile', 'desktop'
+				'mobile', 'desktop',
 			],
 		],
 
@@ -1039,7 +1039,7 @@ return call_user_func( function() {
 				'jquery/wikibase/jquery.wikibase.wbtooltip.js',
 			],
 			'styles' => [
-				'jquery/wikibase/themes/default/jquery.wikibase.wbtooltip.css'
+				'jquery/wikibase/themes/default/jquery.wikibase.wbtooltip.css',
 			],
 			'dependencies' => [
 				'jquery.tipsy',
@@ -1082,8 +1082,8 @@ return call_user_func( function() {
 			],
 			'targets' => [
 				'desktop',
-				'mobile'
-			]
+				'mobile',
+			],
 		],
 
 		'wikibase.api.ValueCaller' => $wikibaseApiPaths + [
@@ -1097,7 +1097,7 @@ return call_user_func( function() {
 			'dependencies' => [
 				'wikibase.api.RepoApi',
 				'dataValues.DataValue',
-			]
+			],
 		],
 	];
 

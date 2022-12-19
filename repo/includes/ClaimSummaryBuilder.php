@@ -56,7 +56,7 @@ class ClaimSummaryBuilder {
 		// Only one statement touched, so we're always having singular here.
 		$summary->addAutoCommentArgs( 1 );
 		$summary->addAutoSummaryArgs( [
-			[ $newStatement->getPropertyId()->getSerialization() => $newStatement->getMainSnak() ]
+			[ $newStatement->getPropertyId()->getSerialization() => $newStatement->getMainSnak() ],
 		] );
 
 		if ( $oldStatement !== null ) {

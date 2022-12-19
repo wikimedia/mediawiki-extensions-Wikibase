@@ -26,11 +26,11 @@ class ChangeNotificationJobTest extends MediaWikiIntegrationTestCase {
 		return [
 			'empty' => [
 				[],
-				'/^ChangeNotification.*/'
+				'/^ChangeNotification.*/',
 			],
 			'some changes' => [
 				[ 5, 37 ],
-				'/^ChangeNotification/'
+				'/^ChangeNotification/',
 			],
 		];
 	}

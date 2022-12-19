@@ -82,7 +82,7 @@ class SiteLinkListPatcher {
 						return $id->getSerialization();
 					},
 					$siteLink->getBadges()
-				)
+				),
 			];
 		}
 

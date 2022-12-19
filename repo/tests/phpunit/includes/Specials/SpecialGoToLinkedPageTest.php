@@ -127,19 +127,19 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 			'empty' => [ '', null, '', '', '' ],
 			'invalidItemID' => [
 				'enwiki/invalid', null, 'enwiki', 'invalid',
-				'(wikibase-gotolinkedpage-error-item-id-invalid)'
+				'(wikibase-gotolinkedpage-error-item-id-invalid)',
 			],
 			'notFound' => [
 				'enwiki/Q42', null, 'enwiki', 'Q42',
-				'(wikibase-gotolinkedpage-error-item-not-found)'
+				'(wikibase-gotolinkedpage-error-item-not-found)',
 			],
 			'notFound2' => [
 				'XXwiki/Q23', null, 'XXwiki', 'Q23',
-				'(wikibase-gotolinkedpage-error-page-not-found)'
+				'(wikibase-gotolinkedpage-error-page-not-found)',
 			],
 			'notFound3' => [
 				'XXwiki,enwiki,zhwiki/Q23', null, 'XXwiki,enwiki,zhwiki', 'Q23',
-				'(wikibase-gotolinkedpage-error-page-not-found)'
+				'(wikibase-gotolinkedpage-error-page-not-found)',
 			],
 		];
 	}

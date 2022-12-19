@@ -108,7 +108,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 						'',
 						'',
 						''
-					)
+					),
 				], new SubEntityTypesMapper( [] ) ),
 				[ 'test' => '' ],
 				[ 'test' => '' ]

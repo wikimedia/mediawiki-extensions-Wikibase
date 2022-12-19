@@ -46,7 +46,7 @@ class ContentHandlerEntityTitleLookupTest extends MediaWikiIntegrationTestCase {
 		return new EntityContentFactory(
 			[
 				'item' => ItemContent::CONTENT_MODEL_ID,
-				'property' => PropertyContent::CONTENT_MODEL_ID
+				'property' => PropertyContent::CONTENT_MODEL_ID,
 			],
 			[
 				'item' => function() {
@@ -54,7 +54,7 @@ class ContentHandlerEntityTitleLookupTest extends MediaWikiIntegrationTestCase {
 				},
 				'property' => function() {
 					return WikibaseRepo::getPropertyHandler();
-				}
+				},
 			]
 		);
 	}
@@ -147,7 +147,7 @@ class ContentHandlerEntityTitleLookupTest extends MediaWikiIntegrationTestCase {
 			new NumericPropertyId( 'P42' ),
 			new NumericPropertyId( 'P43' ),
 			new ItemId( 'Q42' ),
-			new ItemId( 'Q43' )
+			new ItemId( 'Q43' ),
 		] );
 
 		$this->assertCount( 4, $titles );

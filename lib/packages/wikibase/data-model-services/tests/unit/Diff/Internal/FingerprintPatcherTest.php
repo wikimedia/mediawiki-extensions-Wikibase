@@ -60,7 +60,7 @@ class FingerprintPatcherTest extends TestCase {
 			'label' => new Diff( [
 				'en' => new DiffOpChange( 'foo', 'bar' ),
 				'de' => new DiffOpAdd( 'baz' ),
-			], true )
+			], true ),
 		] );
 
 		$expectedFingerprint = $this->newSimpleFingerprint();
@@ -77,7 +77,7 @@ class FingerprintPatcherTest extends TestCase {
 			'description' => new Diff( [
 				'de' => new DiffOpChange( 'bar', 'foo' ),
 				'en' => new DiffOpAdd( 'baz' ),
-			], true )
+			], true ),
 		] );
 
 		$expectedFingerprint = $this->newSimpleFingerprint();

@@ -35,19 +35,19 @@ class ListSubscribersTest extends MediaWikiLangTestCase {
 			'wb_changes_subscription' => [
 				[
 					'cs_entity_id' => 'Q3',
-					'cs_subscriber_id' => 'enwiki'
+					'cs_subscriber_id' => 'enwiki',
 				],
 				[
 					'cs_entity_id' => 'Q3',
-					'cs_subscriber_id' => 'dewiki'
+					'cs_subscriber_id' => 'dewiki',
 				],
 				[
 					'cs_entity_id' => 'Q4',
-					'cs_subscriber_id' => 'dewiki'
+					'cs_subscriber_id' => 'dewiki',
 				],
 				[
 					'cs_entity_id' => 'Q5',
-					'cs_subscriber_id' => 'fawiki'
+					'cs_subscriber_id' => 'fawiki',
 				],
 			],
 		];
@@ -119,9 +119,9 @@ class ListSubscribersTest extends MediaWikiLangTestCase {
 						'subscribers' =>
 						[
 							[ 'site' => 'dewiki' ],
-							[ 'site' => 'enwiki' ]
-						]
-					]
+							[ 'site' => 'enwiki' ],
+						],
+					],
 				],
 			],
 			'two wikis in two entities' => [
@@ -135,15 +135,15 @@ class ListSubscribersTest extends MediaWikiLangTestCase {
 						'subscribers' =>
 							[
 								[ 'site' => 'dewiki' ],
-								[ 'site' => 'enwiki' ]
-							]
+								[ 'site' => 'enwiki' ],
+							],
 					],
 					"Q5" => [
 						'subscribers' =>
 							[
-								[ 'site' => 'fawiki' ]
-							]
-					]
+								[ 'site' => 'fawiki' ],
+							],
+					],
 				],
 			],
 			'continue' => [
@@ -157,15 +157,15 @@ class ListSubscribersTest extends MediaWikiLangTestCase {
 					"Q3" => [
 						'subscribers' =>
 							[
-								[ 'site' => 'enwiki' ]
-							]
+								[ 'site' => 'enwiki' ],
+							],
 					],
 					"Q5" => [
 						'subscribers' =>
 							[
-								[ 'site' => 'fawiki' ]
-							]
-					]
+								[ 'site' => 'fawiki' ],
+							],
+					],
 				],
 			],
 		];

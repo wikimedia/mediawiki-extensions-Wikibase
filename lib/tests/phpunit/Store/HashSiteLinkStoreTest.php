@@ -69,7 +69,7 @@ class HashSiteLinkStoreTest extends \PHPUnit\Framework\TestCase {
 				[ 'dewiki', 'Bar', 1 ],
 				[ 'enwiki', 'Bar', 2 ],
 				[ 'dewiki', 'Xoo', 2 ],
-			]
+			],
 		];
 
 		// #1: mismatch ---------
@@ -78,7 +78,7 @@ class HashSiteLinkStoreTest extends \PHPUnit\Framework\TestCase {
 			null, // items
 			[ 'enwiki' ], // sites
 			[ 'Xoo' ], // pages
-			[] // expected
+			[], // expected
 		];
 
 		// #2: by item ---------
@@ -90,7 +90,7 @@ class HashSiteLinkStoreTest extends \PHPUnit\Framework\TestCase {
 			[ // expected
 				[ 'enwiki', 'Foo', 1 ],
 				[ 'dewiki', 'Bar', 1 ],
-			]
+			],
 		];
 
 		// #3: by site ---------
@@ -102,7 +102,7 @@ class HashSiteLinkStoreTest extends \PHPUnit\Framework\TestCase {
 			[ // expected
 				[ 'enwiki', 'Foo', 1 ],
 				[ 'enwiki', 'Bar', 2 ],
-			]
+			],
 		];
 
 		// #4: by page ---------
@@ -114,7 +114,7 @@ class HashSiteLinkStoreTest extends \PHPUnit\Framework\TestCase {
 			[ // expected
 				[ 'dewiki', 'Bar', 1 ],
 				[ 'enwiki', 'Bar', 2 ],
-			]
+			],
 		];
 
 		// #5: by site and page ---------
@@ -125,7 +125,7 @@ class HashSiteLinkStoreTest extends \PHPUnit\Framework\TestCase {
 			[ 'Bar' ], // pages
 			[ // expected
 				[ 'dewiki', 'Bar', 1 ],
-			]
+			],
 		];
 
 		// #6: empty condition
@@ -134,7 +134,7 @@ class HashSiteLinkStoreTest extends \PHPUnit\Framework\TestCase {
 			[], // items
 			null, // sites
 			null, // pages
-			[] // expected
+			[], // expected
 		];
 
 		return $cases;

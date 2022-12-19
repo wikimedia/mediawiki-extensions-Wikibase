@@ -67,7 +67,7 @@ class StatementValidatorTest extends TestCase {
 	public function testGetValidatedStatement(): void {
 		$serialization = [
 			'property' => [ 'id' => 'P123' ],
-			'value' => [ 'type' => 'novalue' ]
+			'value' => [ 'type' => 'novalue' ],
 		];
 		$deserializedStatement = $this->createStub( Statement::class );
 		$this->deserializer = $this->createMock( StatementDeserializer::class );
@@ -86,8 +86,8 @@ class StatementValidatorTest extends TestCase {
 			'property' => [ 'id' => 'P321' ],
 			'value' => [
 				'type' => 'value',
-				'content' => [ 'id' => 'Q123' ]
-			]
+				'content' => [ 'id' => 'Q123' ],
+			],
 		];
 
 		$this->deserializer = $this->createStub( StatementDeserializer::class );

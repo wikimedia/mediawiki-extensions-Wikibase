@@ -80,8 +80,8 @@ class ExternalChangeFactoryTest extends MediaWikiIntegrationTestCase {
 			[
 				'message' => 'wikibase-comment-sitelink-add',
 				'sitelink' => [
-					'newlink' => [ 'site' => 'dewiki', 'page' => 'Kanada' ]
-				]
+					'newlink' => [ 'site' => 'dewiki', 'page' => 'Kanada' ],
+				],
 			],
 			null,
 			'wikibase-item~update',
@@ -101,7 +101,7 @@ class ExternalChangeFactoryTest extends MediaWikiIntegrationTestCase {
 			'',
 			null,
 			[
-				'message' => 'wikibase-comment-linked'
+				'message' => 'wikibase-comment-linked',
 			],
 			null,
 			'wikibase-item~add',
@@ -123,7 +123,7 @@ class ExternalChangeFactoryTest extends MediaWikiIntegrationTestCase {
 			$comment,
 			null,
 			[
-				'message' => 'this-shall-be-ignored'
+				'message' => 'this-shall-be-ignored',
 			],
 			null,
 			'wikibase-item~update',
@@ -146,7 +146,7 @@ class ExternalChangeFactoryTest extends MediaWikiIntegrationTestCase {
 			$comment,
 			$commentHtml,
 			[
-				'message' => 'this-shall-be-ignored'
+				'message' => 'this-shall-be-ignored',
 			],
 			null,
 			'wikibase-item~update',
@@ -168,7 +168,7 @@ class ExternalChangeFactoryTest extends MediaWikiIntegrationTestCase {
 			null,
 			[
 				'wikibase-comment-update',
-				'wikibase-comment-update'
+				'wikibase-comment-update',
 			],
 			'wikibase-item~update',
 			false
@@ -407,7 +407,7 @@ class ExternalChangeFactoryTest extends MediaWikiIntegrationTestCase {
 			'rc_logid' => 0,
 			'rc_log_type' => null,
 			'rc_log_action' => '',
-			'rc_params' => serialize( $rcParams )
+			'rc_params' => serialize( $rcParams ),
 		];
 	}
 

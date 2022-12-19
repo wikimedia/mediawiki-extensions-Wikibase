@@ -157,7 +157,7 @@ class ChangeOpTestMockProvider {
 		$stringType = new DataType( 'string', 'string' );
 
 		$types = [
-			'string' => $stringType
+			'string' => $stringType,
 		];
 
 		$mock = $this->createMock( DataTypeFactory::class );
@@ -264,9 +264,9 @@ class ChangeOpTestMockProvider {
 							'label',
 							$lang,
 							$text,
-							'P666'
+							'P666',
 						]
-					)
+					),
 				] );
 			}
 		}
@@ -286,9 +286,9 @@ class ChangeOpTestMockProvider {
 							'alias',
 							$lang,
 							'DUPE',
-							'P666'
+							'P666',
 						]
-					)
+					),
 				] );
 			}
 		}

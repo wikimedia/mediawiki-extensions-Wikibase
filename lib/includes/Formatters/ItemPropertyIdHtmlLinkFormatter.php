@@ -100,7 +100,7 @@ class ItemPropertyIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 	private function getAttributes( Title $title, Term $term = null ) {
 		$attributes = [
 			'title' => $title->getPrefixedText(),
-			'href' => $title->isLocal() ? $title->getLocalURL() : $title->getFullURL()
+			'href' => $title->isLocal() ? $title->getLocalURL() : $title->getFullURL(),
 		];
 
 		if ( $term instanceof TermFallback

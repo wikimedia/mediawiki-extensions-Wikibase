@@ -59,7 +59,7 @@ class GlobeCoordinateKartographerDataUpdaterTest extends \PHPUnit\Framework\Test
 		$this->assertEquals(
 			[
 				'wgUserLanguage' => 'qqx',
-				'wgKartographerMapServer' => 'https://maps.wikimedia.org'
+				'wgKartographerMapServer' => 'https://maps.wikimedia.org',
 			],
 			$parserOutput->getJsConfigVars()
 		);

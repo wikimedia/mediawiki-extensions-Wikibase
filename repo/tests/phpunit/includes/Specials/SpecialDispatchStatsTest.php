@@ -48,7 +48,7 @@ class SpecialDispatchStatsTest extends SpecialPageTestBase {
 		] );
 		$this->dispatchStats = $dispatchStatsMock;
 
-		[ $output, ] = $this->executeSpecialPage( '', null, 'qqx' );
+		[ $output ] = $this->executeSpecialPage( '', null, 'qqx' );
 
 		$this->assertIsString( $output );
 		$this->assertStringContainsString( 'wikibase-dispatchstats-intro', $output );
@@ -65,7 +65,7 @@ class SpecialDispatchStatsTest extends SpecialPageTestBase {
 		] );
 		$this->dispatchStats = $dispatchStatsMock;
 
-		[ $output, ] = $this->executeSpecialPage( '', null, 'qqx' );
+		[ $output ] = $this->executeSpecialPage( '', null, 'qqx' );
 
 		$this->assertIsString( $output );
 		$this->assertStringContainsString( 'wikibase-dispatchstats-intro', $output );
@@ -96,7 +96,7 @@ class SpecialDispatchStatsTest extends SpecialPageTestBase {
 		] );
 		$this->dispatchStats = $dispatchStatsMock;
 
-		[ $output, ] = $this->executeSpecialPage( '', null, 'qqx' );
+		[ $output ] = $this->executeSpecialPage( '', null, 'qqx' );
 
 		$this->assertIsString( $output );
 		$this->assertStringContainsString( 'wikibase-dispatchstats-intro', $output );
@@ -123,7 +123,7 @@ class SpecialDispatchStatsTest extends SpecialPageTestBase {
 		] );
 		$this->dispatchStats = $dispatchStatsMock;
 
-		[ $output, ] = $this->executeSpecialPage( '', null, 'qqx' );
+		[ $output ] = $this->executeSpecialPage( '', null, 'qqx' );
 
 		$this->assertIsString( $output );
 		$this->assertStringContainsString( 'wikibase-dispatchstats-intro', $output );

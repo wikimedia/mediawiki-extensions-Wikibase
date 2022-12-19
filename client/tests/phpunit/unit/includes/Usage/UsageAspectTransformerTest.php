@@ -43,67 +43,67 @@ class UsageAspectTransformerTest extends \PHPUnit\Framework\TestCase {
 				$q1,
 				[],
 				[],
-				[]
+				[],
 			],
 			'non relevant' => [
 				$q1,
 				[],
 				[ 'X' ],
-				[]
+				[],
 			],
 			'non used' => [
 				$q1,
 				[ 'X' ],
 				[],
-				[]
+				[],
 			],
 			'simple filter' => [
 				$q1,
 				[ 'T', 'L' ],
 				[ 'L', 'S' ],
-				[ 'Q1#L' ]
+				[ 'Q1#L' ],
 			],
 			'all filter' => [
 				$q1,
 				[ 'X' ],
 				[ 'S', 'L' ],
-				[ 'Q1#L', 'Q1#S' ]
+				[ 'Q1#L', 'Q1#S' ],
 			],
 			'filter all' => [
 				$q1,
 				[ 'S', 'L' ],
 				[ 'X' ],
-				[ 'Q1#L', 'Q1#S' ]
+				[ 'Q1#L', 'Q1#S' ],
 			],
 			'modifier: direct match' => [
 				$q1,
 				[ 'L.de', 'L.en' ],
 				[ 'L.en', 'L.ru' ],
-				[ 'Q1#L.en' ]
+				[ 'Q1#L.en' ],
 			],
 			'modifier: mismatch' => [
 				$q1,
 				[ 'L.ru' ],
 				[ 'L.en' ],
-				[]
+				[],
 			],
 			'modifier: match unmodified used aspect' => [
 				$q1,
 				[ 'L.en' ],
 				[ 'L', 'L.ru' ],
-				[ 'Q1#L.en' ]
+				[ 'Q1#L.en' ],
 			],
 			'modifier: do not match unmodified relevant aspect' => [
 				$q1,
 				[ 'L' ],
 				[ 'L.ru' ],
-				[]
+				[],
 			],
 			'modifier: mixed' => [
 				$q1,
 				[ 'L.en', 'L' ],
 				[ 'L', 'L.ru' ],
-				[ 'Q1#L', 'Q1#L.en' ]
+				[ 'Q1#L', 'Q1#L.en' ],
 			],
 		];
 	}
@@ -133,19 +133,19 @@ class UsageAspectTransformerTest extends \PHPUnit\Framework\TestCase {
 			'empty' => [
 				[],
 				$usages,
-				[]
+				[],
 			],
 			'non relevant' => [
 				[],
 				$usages,
-				[]
+				[],
 			],
 			'simple filter' => [
 				[
 					'Q1' => [ 'T' ],
 				],
 				$usages,
-				[ 'Q1#T' ]
+				[ 'Q1#T' ],
 			],
 			'all filter' => [
 				[
@@ -153,7 +153,7 @@ class UsageAspectTransformerTest extends \PHPUnit\Framework\TestCase {
 					'Q1' => [ 'X' ],
 				],
 				$usages,
-				[ 'Q1#L', 'Q1#T', 'Q2#L', 'Q2#T' ]
+				[ 'Q1#L', 'Q1#T', 'Q2#L', 'Q2#T' ],
 			],
 		];
 	}

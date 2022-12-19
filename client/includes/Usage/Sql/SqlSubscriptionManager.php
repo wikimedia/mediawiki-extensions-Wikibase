@@ -157,7 +157,7 @@ class SqlSubscriptionManager implements SubscriptionManager {
 		foreach ( $subscriptions as $entityId ) {
 			$rows[] = [
 				'cs_entity_id' => $entityId,
-				'cs_subscriber_id' => $subscriber
+				'cs_subscriber_id' => $subscriber,
 			];
 		}
 

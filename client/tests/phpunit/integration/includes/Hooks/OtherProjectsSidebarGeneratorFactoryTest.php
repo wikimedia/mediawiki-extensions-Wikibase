@@ -28,7 +28,7 @@ class OtherProjectsSidebarGeneratorFactoryTest extends MediaWikiIntegrationTestC
 	public function testGetOtherProjectsSidebarGenerator() {
 		$settings = new SettingsArray( [
 			'siteGlobalID' => 'enwiki',
-			'otherProjectsLinks' => [ 'enwiktionary' ]
+			'otherProjectsLinks' => [ 'enwiktionary' ],
 		] );
 
 		$factory = new OtherProjectsSidebarGeneratorFactory(

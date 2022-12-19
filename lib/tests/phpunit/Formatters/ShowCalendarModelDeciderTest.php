@@ -46,161 +46,161 @@ class ShowCalendarModelDeciderTest extends MediaWikiIntegrationTestCase {
 				'+1520-05-01T00:00:00Z',
 				TimeValue::PRECISION_DAY,
 				TimeValue::CALENDAR_GREGORIAN,
-				true
+				true,
 			],
 			'a gregorian month in 1520' => [
 				'+1520-05-01T00:00:00Z',
 				TimeValue::PRECISION_MONTH,
 				TimeValue::CALENDAR_GREGORIAN,
-				true
+				true,
 			],
 			'a julian day in 1520' => [
 				'+1520-05-01T00:00:00Z',
 				TimeValue::PRECISION_DAY,
 				TimeValue::CALENDAR_JULIAN,
-				false
+				false,
 			],
 			'a gregorian day in 1920' => [
 				'+1920-05-01T00:00:00Z',
 				TimeValue::PRECISION_DAY,
 				TimeValue::CALENDAR_GREGORIAN,
-				true
+				true,
 			],
 			'a julian day in 1920' => [
 				'+1920-05-01T00:00:00Z',
 				TimeValue::PRECISION_DAY,
 				TimeValue::CALENDAR_JULIAN,
-				true
+				true,
 			],
 			'a julian day in 1980' => [
 				'+1980-05-01T00:00:00Z',
 				TimeValue::PRECISION_DAY,
 				TimeValue::CALENDAR_JULIAN,
-				true
+				true,
 			],
 			'a gregorian day in 1980' => [
 				'+1980-05-01T00:00:00Z',
 				TimeValue::PRECISION_DAY,
 				TimeValue::CALENDAR_GREGORIAN,
-				false
+				false,
 			],
 
 			'a gregorian year in -1000000' => [
 				'-1000000-00-00T00:00:00Z',
 				TimeValue::PRECISION_YEAR,
 				TimeValue::CALENDAR_GREGORIAN,
-				true
+				true,
 			],
 			'a julian year in -1000000' => [
 				'-1000000-05-01T00:00:00Z',
 				TimeValue::PRECISION_YEAR,
 				TimeValue::CALENDAR_JULIAN,
-				false
+				false,
 			],
 			'a gregorian year in 1520' => [
 				'+1520-05-01T00:00:00Z',
 				TimeValue::PRECISION_YEAR,
 				TimeValue::CALENDAR_GREGORIAN,
-				true
+				true,
 			],
 			'a julian year in 1520' => [
 				'+1520-05-01T00:00:00Z',
 				TimeValue::PRECISION_YEAR,
 				TimeValue::CALENDAR_JULIAN,
-				false
+				false,
 			],
 			'a gregorian year in 1920' => [
 				'+1920-05-01T00:00:00Z',
 				TimeValue::PRECISION_YEAR,
 				TimeValue::CALENDAR_GREGORIAN,
-				false
+				false,
 			],
 			'a julian year in 1920' => [
 				'+1920-05-01T00:00:00Z',
 				TimeValue::PRECISION_YEAR,
 				TimeValue::CALENDAR_JULIAN,
-				true
+				true,
 			],
 			'a julian year in 1980' => [
 				'+1980-05-01T00:00:00Z',
 				TimeValue::PRECISION_YEAR,
 				TimeValue::CALENDAR_JULIAN,
-				true
+				true,
 			],
 			'do not enforce calendar model on rough precisions' => [
 				'+1980-05-01T00:00:00Z',
 				TimeValue::PRECISION_YEAR10,
 				TimeValue::CALENDAR_JULIAN,
-				false
+				false,
 			],
 			'a gregorian year in 1980' => [
 				'+1980-05-01T00:00:00Z',
 				TimeValue::PRECISION_YEAR,
 				TimeValue::CALENDAR_GREGORIAN,
-				false
+				false,
 			],
 
 			'a month in 1980' => [
 				'+1980-05-01T00:00:00Z',
 				TimeValue::PRECISION_MONTH,
 				TimeValue::CALENDAR_GREGORIAN,
-				false
+				false,
 			],
 
 			'14th century' => [
 				'+1300-00-00T00:00:00Z',
 				TimeValue::PRECISION_YEAR100,
 				TimeValue::CALENDAR_JULIAN,
-				false
+				false,
 			],
 
 			'2014-10-10' => [
 				'+2014-10-10T00:00:00Z',
 				TimeValue::PRECISION_DAY,
 				TimeValue::CALENDAR_GREGORIAN,
-				false
+				false,
 			],
 			'2014-10-10 with leading zeros' => [
 				'+00000002014-10-10T00:00:00Z',
 				TimeValue::PRECISION_DAY,
 				TimeValue::CALENDAR_GREGORIAN,
-				false
+				false,
 			],
 			'massive year' => [
 				'+00123452014-10-10T00:00:00Z',
 				TimeValue::PRECISION_DAY,
 				TimeValue::CALENDAR_GREGORIAN,
-				false
+				false,
 			],
 			'negative' => [
 				'-1-01-01T00:00:00Z',
 				TimeValue::PRECISION_DAY,
 				TimeValue::CALENDAR_GREGORIAN,
-				true
+				true,
 			],
 			'32-bit integer overflow' => [
 				'-2147483649-01-01T00:00:00Z',
 				TimeValue::PRECISION_DAY,
 				TimeValue::CALENDAR_GREGORIAN,
-				true
+				true,
 			],
 			'unknown calendar model' => [
 				'+2015-01-01T00:00:00Z',
 				TimeValue::PRECISION_DAY,
 				'Stardate',
-				true
+				true,
 			],
 			'optional sign' => [
 				'2015-01-01T00:00:00Z',
 				TimeValue::PRECISION_DAY,
 				TimeValue::CALENDAR_GREGORIAN,
-				false
+				false,
 			],
 			'unsupported time' => [
 				'MOCKTIME',
 				TimeValue::PRECISION_DAY,
 				TimeValue::CALENDAR_GREGORIAN,
-				true
+				true,
 			],
 		];
 

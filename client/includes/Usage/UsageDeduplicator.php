@@ -86,7 +86,7 @@ class UsageDeduplicator {
 					$usages[0]->getEntityId(),
 					$usages[0]->getAspect()
 					// Throw away modifier
-				)
+				),
 			];
 		}
 	}

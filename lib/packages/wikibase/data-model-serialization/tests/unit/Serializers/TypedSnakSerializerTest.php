@@ -30,7 +30,7 @@ class TypedSnakSerializerTest extends TestCase {
 			->method( 'serialize' )
 			->will( $this->returnValue( [
 				'foo' => 'bar',
-				'baz' => 42
+				'baz' => 42,
 			] ) );
 
 		$this->serializer = new TypedSnakSerializer( $snakSerializer );
@@ -56,7 +56,7 @@ class TypedSnakSerializerTest extends TestCase {
 				'foo' => 'bar',
 				'baz' => 42,
 				'datatype' => 'string',
-			]
+			],
 		];
 
 		$argLists[] = [
@@ -65,7 +65,7 @@ class TypedSnakSerializerTest extends TestCase {
 				'foo' => 'bar',
 				'baz' => 42,
 				'datatype' => 'kittens',
-			]
+			],
 		];
 
 		return $argLists;

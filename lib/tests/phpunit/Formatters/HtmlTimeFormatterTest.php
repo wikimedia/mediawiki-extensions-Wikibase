@@ -78,31 +78,31 @@ class HtmlTimeFormatterTest extends \PHPUnit\Framework\TestCase {
 				'+1520-05-01T00:00:00Z',
 				TimeValue::PRECISION_DAY,
 				$julian,
-				'MOCKDATE'
+				'MOCKDATE',
 			],
 			'a gregorian day in 1920' => [
 				'+1920-05-01T00:00:00Z',
 				TimeValue::PRECISION_DAY,
 				$gregorian,
-				'MOCKDATE<sup class="wb-calendar-name">(wikibase-time-calendar-gregorian)</sup>'
+				'MOCKDATE<sup class="wb-calendar-name">(wikibase-time-calendar-gregorian)</sup>',
 			],
 			'a julian day in 1920' => [
 				'+1920-05-01T00:00:00Z',
 				TimeValue::PRECISION_DAY,
 				$julian,
-				'MOCKDATE<sup class="wb-calendar-name">(wikibase-time-calendar-julian)</sup>'
+				'MOCKDATE<sup class="wb-calendar-name">(wikibase-time-calendar-julian)</sup>',
 			],
 			'a gregorian day in 1980' => [
 				'+1980-05-01T00:00:00Z',
 				TimeValue::PRECISION_DAY,
 				$gregorian,
-				'MOCKDATE'
+				'MOCKDATE',
 			],
 			'HTML entities' => [
 				'<a>injection</a>',
 				TimeValue::PRECISION_DAY,
 				'<a>injection</a>',
-				'MOCKDATE<sup class="wb-calendar-name">&lt;a&gt;injection&lt;/a&gt;</sup>'
+				'MOCKDATE<sup class="wb-calendar-name">&lt;a&gt;injection&lt;/a&gt;</sup>',
 			],
 		];
 
@@ -113,7 +113,7 @@ class HtmlTimeFormatterTest extends \PHPUnit\Framework\TestCase {
 
 			$testCases[$name] = [
 				$this->getTimeValue( $timestamp, $precision, $calendarModel ),
-				$pattern
+				$pattern,
 			];
 		}
 		return $testCases;

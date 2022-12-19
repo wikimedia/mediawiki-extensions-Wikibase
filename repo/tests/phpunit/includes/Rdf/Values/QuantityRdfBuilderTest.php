@@ -59,7 +59,7 @@ class QuantityRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 					'<http://www/Q1>'
 					. ' <http://acme/statement/P7> '
 					. '"+23.5"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
-				]
+				],
 			],
 			'simple' => [
 				$snak,
@@ -68,7 +68,7 @@ class QuantityRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 					'<http://www/Q1> '
 					. '<http://acme/statement/P7> '
 					. '"+23.5"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
-				]
+				],
 			],
 			'complex unbounded' => [
 				$unboundedSnak,
@@ -89,7 +89,7 @@ class QuantityRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 					'<http://acme/value/d0488ea37befd2940d39a1dbf47eebc0> '
 					. '<http://acme/onto/quantityUnit> '
 					. '<http://www.wikidata.org/entity/Q199> .',
-				]
+				],
 			],
 			'complex' => [
 				$snak,
@@ -116,7 +116,7 @@ class QuantityRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 					'<http://acme/value/1ac4bb05a87bfd5fde2740bbb6941533> '
 						. '<http://acme/onto/quantityUnit> '
 						. '<http://www.wikidata.org/entity/Q199> .',
-				]
+				],
 			],
 			'units' => [
 				$snak2,
@@ -177,7 +177,7 @@ class QuantityRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 					. '<http://acme/onto/quantityNormalized> '
 					. '<http://acme/value/d56fea2e7acc4c42069d87f695cab5b9> .',
 				],
-				[ 'factor' => '1', 'unit' => 'Q2' ]
+				[ 'factor' => '1', 'unit' => 'Q2' ],
 			],
 			'units_convert' => [
 				$snak2,
@@ -229,7 +229,7 @@ class QuantityRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 					. '<http://acme/value/e80660d9a958a139230804dacf35a6ea> .',
 
 				],
-				[ 'factor' => '124.7', 'unit' => 'Q1' ]
+				[ 'factor' => '124.7', 'unit' => 'Q1' ],
 			],
 		];
 	}
@@ -335,7 +335,7 @@ class QuantityRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			. '"+23.4"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
 			'<http://acme/value/d56fea2e7acc4c42069d87f695cab5b9> '
 			. '<http://acme/onto/quantityUnit> '
-			. '<http://acme/Q2> .'
+			. '<http://acme/Q2> .',
 		];
 
 		/** @var QuantityValue $value */

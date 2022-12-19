@@ -31,12 +31,12 @@ class ReferenceSerializerTest extends DispatchableSerializerTest {
 	public function serializableProvider() {
 		return [
 			[
-				new Reference()
+				new Reference(),
 			],
 			[
 				new Reference( new SnakList( [
-					new PropertyNoValueSnak( 42 )
-				] ) )
+					new PropertyNoValueSnak( 42 ),
+				] ) ),
 			],
 		];
 	}
@@ -44,13 +44,13 @@ class ReferenceSerializerTest extends DispatchableSerializerTest {
 	public function nonSerializableProvider() {
 		return [
 			[
-				5
+				5,
 			],
 			[
-				[]
+				[],
 			],
 			[
-				new SnakList( [] )
+				new SnakList( [] ),
 			],
 		];
 	}
@@ -61,9 +61,9 @@ class ReferenceSerializerTest extends DispatchableSerializerTest {
 				[
 					'hash' => 'da39a3ee5e6b4b0d3255bfef95601890afd80709',
 					'snaks' => [],
-					'snaks-order' => []
+					'snaks-order' => [],
 				],
-				new Reference()
+				new Reference(),
 			],
 		];
 	}
@@ -75,7 +75,7 @@ class ReferenceSerializerTest extends DispatchableSerializerTest {
 			->with( $this->equalTo( new SnakList( [
 				new PropertyNoValueSnak( new NumericPropertyId( 'P42' ) ),
 				new PropertySomeValueSnak( new NumericPropertyId( 'P24' ) ),
-				new PropertyNoValueSnak( new NumericPropertyId( 'P24' ) )
+				new PropertyNoValueSnak( new NumericPropertyId( 'P24' ) ),
 			] ) ) )
 			->will( $this->returnValue( [] ) );
 
@@ -84,7 +84,7 @@ class ReferenceSerializerTest extends DispatchableSerializerTest {
 		$reference = new Reference( new SnakList( [
 			new PropertyNoValueSnak( new NumericPropertyId( 'P42' ) ),
 			new PropertySomeValueSnak( new NumericPropertyId( 'P24' ) ),
-			new PropertyNoValueSnak( new NumericPropertyId( 'P24' ) )
+			new PropertyNoValueSnak( new NumericPropertyId( 'P24' ) ),
 		] ) );
 
 		$this->assertEquals(
@@ -93,8 +93,8 @@ class ReferenceSerializerTest extends DispatchableSerializerTest {
 				'snaks' => [],
 				'snaks-order' => [
 					'P42',
-					'P24'
-				]
+					'P24',
+				],
 			],
 			$referenceSerializer->serialize( $reference )
 		);

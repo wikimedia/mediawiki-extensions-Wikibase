@@ -24,7 +24,7 @@ class ApiEntityUrlLookupTest extends TestCase {
 		yield [
 			'P123',
 			new FederatedPropertyId( 'https://pretend.url/entity/P123', 'P123' ),
-			'https://pretend.url/w/index.php?title=P123'
+			'https://pretend.url/w/index.php?title=P123',
 		];
 		yield [ null, new FederatedPropertyId( 'https://pretend.url/entity/P666', 'P666' ), null ];
 	}

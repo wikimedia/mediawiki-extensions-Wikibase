@@ -64,7 +64,7 @@ class RemoveReferencesTest extends FederatedPropertiesApiTestCase {
 		[ $result ] = $this->doApiRequestWithToken( [
 			'action' => 'wbremovereferences',
 			'statement' => $statementWithReference->getGuid(),
-			'references' => $statementWithReference->getReferences()->getIterator()[0]->getHash()
+			'references' => $statementWithReference->getReferences()->getIterator()[0]->getHash(),
 		] );
 
 		$this->assertArrayHasKey( 'success', $result );

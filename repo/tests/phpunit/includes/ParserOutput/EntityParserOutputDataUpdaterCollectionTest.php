@@ -34,7 +34,7 @@ class EntityParserOutputDataUpdaterCollectionTest extends \PHPUnit\Framework\Tes
 
 		$instance = new EntityParserOutputDataUpdaterCollection( $parserOutput, [
 			$dataUpdater1,
-			$dataUpdater2
+			$dataUpdater2,
 		] );
 
 		$instance->updateParserOutput( $entity );

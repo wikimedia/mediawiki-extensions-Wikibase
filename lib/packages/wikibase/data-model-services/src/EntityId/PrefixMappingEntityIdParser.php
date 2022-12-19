@@ -79,7 +79,7 @@ class PrefixMappingEntityIdParser implements EntityIdParser {
 		list( $repoName, $extraPrefixes, $relativeId ) = SerializableEntityId::splitSerialization( $idSerialization );
 		if ( $repoName !== '' && isset( $this->prefixMapping[$repoName] ) ) {
 			$prefixedIdSerialization = SerializableEntityId::joinSerialization( [
-				$this->prefixMapping[$repoName], $extraPrefixes, $relativeId
+				$this->prefixMapping[$repoName], $extraPrefixes, $relativeId,
 			] );
 		} else {
 			$prefixedIdSerialization = SerializableEntityId::joinSerialization( [ $defaultPrefix, '', $idSerialization ] );

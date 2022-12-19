@@ -50,7 +50,7 @@ class SiteLinkSerializer implements DispatchableSerializer {
 		return [
 			'site' => $siteLink->getSiteId(),
 			'title' => $siteLink->getPageName(),
-			'badges' => $this->serializeBadges( $siteLink->getBadges() )
+			'badges' => $this->serializeBadges( $siteLink->getBadges() ),
 		];
 	}
 

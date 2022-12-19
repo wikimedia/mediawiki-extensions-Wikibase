@@ -53,14 +53,14 @@ class InterWikiLinkExistsValidatorTest extends \PHPUnit\Framework\TestCase {
 	public function provideValidate() {
 		return [
 			"Valid, plain string" => [
-				true, self::EXISTING_PAGE
+				true, self::EXISTING_PAGE,
 			],
 			"Valid, StringValue" => [
-				true, new StringValue( self::EXISTING_PAGE )
+				true, new StringValue( self::EXISTING_PAGE ),
 			],
 			"Invalid, StringValue" => [
-				false, new StringValue( self::NONEXISTENT_PAGE )
-			]
+				false, new StringValue( self::NONEXISTENT_PAGE ),
+			],
 		];
 	}
 

@@ -40,7 +40,7 @@ class ActionTestCase extends MediaWikiIntegrationTestCase {
 
 		$this->setRequest( new FauxRequest() );
 		$this->setMwGlobals( [
-			'wgGroupPermissions' => [ '*' => [ 'edit' => true, 'read' => true, 'createpage' => true ] ]
+			'wgGroupPermissions' => [ '*' => [ 'edit' => true, 'read' => true, 'createpage' => true ] ],
 		] );
 
 		$this->setUserLang( 'qqx' );

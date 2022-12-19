@@ -52,7 +52,7 @@ class VariantsAwareRendererTest extends \PHPUnit\Framework\TestCase {
 				$itemId,
 				'cat',
 				[ 'zh', 'zh-hans' ],
-				'-{zh:cat in zh;zh-hans:cat in zh-hans;}-'
+				'-{zh:cat in zh;zh-hans:cat in zh-hans;}-',
 			],
 
 			// No need for the problematic -{…}- variant syntax if there is only one to pick from.
@@ -60,7 +60,7 @@ class VariantsAwareRendererTest extends \PHPUnit\Framework\TestCase {
 				$itemId,
 				'cat',
 				[ 'zh' ],
-				'cat in zh'
+				'cat in zh',
 			],
 
 			// Don't create "-{}-" for empty input,
@@ -69,7 +69,7 @@ class VariantsAwareRendererTest extends \PHPUnit\Framework\TestCase {
 				$itemId,
 				'cat',
 				[],
-				''
+				'',
 			],
 
 			// Skip the -{…}- language variant syntax if all possible values are the same anyway.
@@ -77,7 +77,7 @@ class VariantsAwareRendererTest extends \PHPUnit\Framework\TestCase {
 				$itemId,
 				'url',
 				[ 'zh', 'zh-hans' ],
-				'http://wikipedia.de'
+				'http://wikipedia.de',
 			],
 		];
 	}

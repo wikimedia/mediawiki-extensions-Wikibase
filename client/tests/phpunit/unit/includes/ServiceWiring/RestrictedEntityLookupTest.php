@@ -23,7 +23,7 @@ class RestrictedEntityLookupTest extends ServiceWiringTestCase {
 			'WikibaseClient.Settings',
 			new SettingsArray( [
 				'disabledAccessEntityTypes' => [],
-				'entityAccessLimit' => 250
+				'entityAccessLimit' => 250,
 			] )
 		);
 		$this->mockService(

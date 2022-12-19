@@ -165,7 +165,7 @@ class DataTypesModule extends RL\Module {
 		$summary = parent::getDefinitionSummary( $context );
 
 		$summary[] = [
-			'dataHash' => sha1( json_encode( array_keys( $this->dataTypes ) ) )
+			'dataHash' => sha1( json_encode( array_keys( $this->dataTypes ) ) ),
 		];
 
 		return $summary;

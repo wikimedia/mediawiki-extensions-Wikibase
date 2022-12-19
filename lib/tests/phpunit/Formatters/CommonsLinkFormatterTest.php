@@ -26,35 +26,35 @@ class CommonsLinkFormatterTest extends MediaWikiIntegrationTestCase {
 		return [
 			[
 				new StringValue( 'example.jpg' ), // Lower-case file name
-				'@<a .*href="//commons.wikimedia.org/wiki/File:Example.jpg".*>.*example.jpg.*</a>@'
+				'@<a .*href="//commons.wikimedia.org/wiki/File:Example.jpg".*>.*example.jpg.*</a>@',
 			],
 			[
 				new StringValue( 'Example.jpg' ),
-				'@<a .*href="//commons.wikimedia.org/wiki/File:Example.jpg".*>.*Example.jpg.*</a>@'
+				'@<a .*href="//commons.wikimedia.org/wiki/File:Example.jpg".*>.*Example.jpg.*</a>@',
 			],
 			[
 				new StringValue( 'Example space.jpg' ),
-				'@<a .*href="//commons.wikimedia.org/wiki/File:Example_space.jpg".*>.*Example space.jpg.*</a>@'
+				'@<a .*href="//commons.wikimedia.org/wiki/File:Example_space.jpg".*>.*Example space.jpg.*</a>@',
 			],
 			[
 				new StringValue( 'Example_underscore.jpg' ),
-				'@<a .*href="//commons.wikimedia.org/wiki/File:Example_underscore.jpg".*>.*Example_underscore.jpg.*</a>@'
+				'@<a .*href="//commons.wikimedia.org/wiki/File:Example_underscore.jpg".*>.*Example_underscore.jpg.*</a>@',
 			],
 			[
 				new StringValue( 'Example+plus.jpg' ),
-				'@<a .*href="//commons.wikimedia.org/wiki/File:Example%2Bplus.jpg".*>.*Example\+plus.jpg.*</a>@'
+				'@<a .*href="//commons.wikimedia.org/wiki/File:Example%2Bplus.jpg".*>.*Example\+plus.jpg.*</a>@',
 			],
 			[
 				new StringValue( '[[File:Invalid_title.mid]]' ),
-				'@^\[\[File:Invalid_title.mid\]\]$@'
+				'@^\[\[File:Invalid_title.mid\]\]$@',
 			],
 			[
 				new StringValue( '<a onmouseover=alert(0xF000)>ouch</a>' ),
-				'@^&lt;a onmouseover=alert\(0xF000\)&gt;ouch&lt;/a&gt;$@'
+				'@^&lt;a onmouseover=alert\(0xF000\)&gt;ouch&lt;/a&gt;$@',
 			],
 			[
 				new StringValue( '' ),
-				'@^$@'
+				'@^$@',
 			],
 		];
 	}

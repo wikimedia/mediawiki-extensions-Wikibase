@@ -21,7 +21,7 @@ class ReferencedEntityIdLookupExceptionTest extends TestCase {
 		$propertyId = new NumericPropertyId( 'P12' );
 		$toIds = [
 			new ItemId( 'Q5' ),
-			new ItemId( 'Q2013' )
+			new ItemId( 'Q2013' ),
 		];
 		$exception = new ReferencedEntityIdLookupException( $entityId, $propertyId, $toIds );
 
@@ -39,7 +39,7 @@ class ReferencedEntityIdLookupExceptionTest extends TestCase {
 		$propertyId = new NumericPropertyId( 'P12' );
 		$toIds = [
 			new ItemId( 'Q5' ),
-			new ItemId( 'Q2013' )
+			new ItemId( 'Q2013' ),
 		];
 		$previous = new Exception( 'previous' );
 

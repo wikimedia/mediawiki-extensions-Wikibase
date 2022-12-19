@@ -44,12 +44,12 @@ class OutputPageEntityIdReaderTest extends \PHPUnit\Framework\TestCase {
 		yield 'Entity id set' => [
 			new ItemId( 'Q42' ),
 			$this->newOutputPageWithJsConfigVars( [ 'wbEntityId' => 'Q42' ] ),
-			true
+			true,
 		];
 		yield 'page with entity view, but no entity id set' => [
 			null,
 			$this->newOutputPageWithJsConfigVars( [] ),
-			true
+			true,
 		];
 
 		$out = $this->createMock( OutputPage::class );
@@ -57,7 +57,7 @@ class OutputPageEntityIdReaderTest extends \PHPUnit\Framework\TestCase {
 		yield 'no entity view page, should abort early' => [
 			null,
 			$out,
-			false
+			false,
 		];
 	}
 

@@ -34,7 +34,7 @@ class FingerprintableEntityMetaTagsCreatorTest extends EntityMetaTagsCreatorTest
 		yield 'entity meta tags created with Item that has no label or description' => [
 			$fingerprintableEntityMetaTags,
 			new Item( new ItemId( 'Q365287' ) ),
-			[ 'title' => 'Q365287' ]
+			[ 'title' => 'Q365287' ],
 		];
 
 		yield 'entity meta tags created with Item that has both label and description' => [
@@ -42,8 +42,8 @@ class FingerprintableEntityMetaTagsCreatorTest extends EntityMetaTagsCreatorTest
 			new Item( new ItemId( 'Q538250' ), $this->getEnglishFingerprint( 'foo', 'bar' ) ),
 			[
 				'title' => 'foo',
-				'description' => 'bar'
-			]
+				'description' => 'bar',
+			],
 		];
 	}
 

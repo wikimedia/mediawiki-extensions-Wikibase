@@ -194,7 +194,7 @@ class StatementListTest extends \PHPUnit\Framework\TestCase {
 		$list->addNewStatement(
 			$this->newSnak( 'P42', 'foo' ),
 			[
-				$this->newSnak( 'P1', 'bar' )
+				$this->newSnak( 'P1', 'bar' ),
 			]
 		);
 
@@ -203,7 +203,7 @@ class StatementListTest extends \PHPUnit\Framework\TestCase {
 				new Statement(
 					$this->newSnak( 'P42', 'foo' ),
 					new SnakList( [
-						$this->newSnak( 'P1', 'bar' )
+						$this->newSnak( 'P1', 'bar' ),
 					] )
 				)
 			),
@@ -214,7 +214,7 @@ class StatementListTest extends \PHPUnit\Framework\TestCase {
 	public function testAddStatementWithQualifiersAsSnakList() {
 		$list = new StatementList();
 		$snakList = new SnakList( [
-			$this->newSnak( 'P1', 'bar' )
+			$this->newSnak( 'P1', 'bar' ),
 		] );
 
 		$list->addNewStatement(
@@ -468,9 +468,9 @@ class StatementListTest extends \PHPUnit\Framework\TestCase {
 				[
 					$this->getStatementWithSnak( 'P1', 'foo' ),
 					$this->getStatementWithSnak( 'P2', 'bar' ),
-				]
+				],
 			],
-			"one statement" => [ [ $this->getStatementWithSnak( 'P1', 'foo' ), ] ],
+			"one statement" => [ [ $this->getStatementWithSnak( 'P1', 'foo' ) ] ],
 			"no statements (empty array)" => [ [] ],
 		];
 	}
@@ -732,13 +732,13 @@ class StatementListTest extends \PHPUnit\Framework\TestCase {
 
 		$statement2->setReferences(
 			new ReferenceList( [
-				new Reference( [ new PropertyNoValueSnak( 20 ) ] )
+				new Reference( [ new PropertyNoValueSnak( 20 ) ] ),
 			] )
 		);
 
 		$statement3->setReferences(
 			new ReferenceList( [
-				new Reference( [ new PropertyNoValueSnak( 30 ) ] )
+				new Reference( [ new PropertyNoValueSnak( 30 ) ] ),
 			] )
 		);
 

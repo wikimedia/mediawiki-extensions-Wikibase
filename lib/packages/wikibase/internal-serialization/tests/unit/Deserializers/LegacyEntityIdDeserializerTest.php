@@ -60,12 +60,12 @@ class LegacyEntityIdDeserializerTest extends \PHPUnit\Framework\TestCase {
 		return [
 			[
 				new ItemId( 'Q42' ),
-				[ 'item', 42 ]
+				[ 'item', 42 ],
 			],
 
 			[
 				new NumericPropertyId( 'P1337' ),
-				[ 'property', 1337 ]
+				[ 'property', 1337 ],
 			],
 		];
 	}

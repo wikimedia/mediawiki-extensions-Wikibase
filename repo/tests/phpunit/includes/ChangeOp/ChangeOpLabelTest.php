@@ -78,30 +78,30 @@ class ChangeOpLabelTest extends \PHPUnit\Framework\TestCase {
 			'add Label is a change' => [
 				$item,
 				new ChangeOpLabel( 'en', 'myNew', $validatorFactory ),
-				new ChangeOpLabelResult( $item->getId(), 'en', null, 'myNew', true )
+				new ChangeOpLabelResult( $item->getId(), 'en', null, 'myNew', true ),
 			],
 			'update Label is a change' => [
 				$item,
 				new ChangeOpLabel( 'en', 'DUPE', $validatorFactory ),
-				new ChangeOpLabelResult( $item->getId(), 'en', 'myNew', 'DUPE', true )
+				new ChangeOpLabelResult( $item->getId(), 'en', 'myNew', 'DUPE', true ),
 
 			],
 			'add existing label is a no change' => [
 				$item,
 				new ChangeOpLabel( 'en', 'DUPE', $validatorFactory ),
-				new ChangeOpLabelResult( $item->getId(), 'en', 'DUPE', 'DUPE', false )
+				new ChangeOpLabelResult( $item->getId(), 'en', 'DUPE', 'DUPE', false ),
 
 			],
 			'set Label to null is a change' => [
 				$item,
 				new ChangeOpLabel( 'en', null, $validatorFactory ),
-				new ChangeOpLabelResult( $item->getId(), 'en', 'DUPE', null, true )
+				new ChangeOpLabelResult( $item->getId(), 'en', 'DUPE', null, true ),
 			],
 			'set null Label to null is a no change' => [
 				$item,
 				new ChangeOpLabel( 'en', null, $validatorFactory ),
-				new ChangeOpLabelResult( $item->getId(), 'en', null, null, false )
-			]
+				new ChangeOpLabelResult( $item->getId(), 'en', null, null, false ),
+			],
 		];
 
 		return $args;

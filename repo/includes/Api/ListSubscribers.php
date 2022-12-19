@@ -236,7 +236,7 @@ class ListSubscribers extends ApiQueryBase {
 			'entities' => [
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_ISMULTI => true,
-				ParamValidator::PARAM_REQUIRED => true
+				ParamValidator::PARAM_REQUIRED => true,
 			],
 			'prop' => [
 				ParamValidator::PARAM_TYPE => [
@@ -250,7 +250,7 @@ class ListSubscribers extends ApiQueryBase {
 				ParamValidator::PARAM_TYPE => 'limit',
 				IntegerDef::PARAM_MIN => 1,
 				IntegerDef::PARAM_MAX => ApiBase::LIMIT_BIG1,
-				IntegerDef::PARAM_MAX2 => ApiBase::LIMIT_BIG2
+				IntegerDef::PARAM_MAX2 => ApiBase::LIMIT_BIG2,
 			],
 			'continue' => [
 				ApiBase::PARAM_HELP_MSG => 'api-help-param-continue',

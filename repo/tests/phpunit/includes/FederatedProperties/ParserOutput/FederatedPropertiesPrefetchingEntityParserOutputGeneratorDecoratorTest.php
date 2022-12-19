@@ -115,7 +115,7 @@ class FederatedPropertiesPrefetchingEntityParserOutputGeneratorDecoratorTest ext
 					$this->newEntityReferenceExtractor(),
 					$this->getEntityTitleLookupMock(),
 					$this->getServiceContainer()->getLinkBatchFactory()
-				)
+				),
 			];
 		}
 

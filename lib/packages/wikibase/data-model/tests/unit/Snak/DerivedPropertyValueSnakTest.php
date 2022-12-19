@@ -44,8 +44,8 @@ class DerivedPropertyValueSnakTest extends \PHPUnit\Framework\TestCase {
 			'numeric id' => [
 				42,
 				new StringValue( 'foo' ),
-				[]
-			]
+				[],
+			],
 		];
 	}
 

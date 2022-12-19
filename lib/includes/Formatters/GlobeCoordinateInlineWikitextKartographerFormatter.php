@@ -50,10 +50,10 @@ class GlobeCoordinateInlineWikitextKartographerFormatter implements ValueFormatt
 	private function formatEarthCoordinate( GlobeCoordinateValue $value ) {
 		return Html::rawElement( 'maplink', [
 			'latitude' => $value->getLatitude(),
-			'longitude' => $value->getLongitude()
+			'longitude' => $value->getLongitude(),
 		], json_encode( [
 			'type' => 'Feature',
-			'geometry' => [ 'type' => 'Point', 'coordinates' => [ $value->getLongitude(), $value->getLatitude() ] ]
+			'geometry' => [ 'type' => 'Point', 'coordinates' => [ $value->getLongitude(), $value->getLatitude() ] ],
 		] ) );
 	}
 

@@ -33,7 +33,7 @@ class HTMLItemReferenceFieldTest extends MediaWikiIntegrationTestCase {
 	public function testThrowsExceptionIfTypeParameterIsSet_WhenCreated() {
 		$this->expectException( \Exception::class );
 
-		$this->createField( [ 'type' => 'some-type', ] );
+		$this->createField( [ 'type' => 'some-type' ] );
 	}
 
 	public function testSetsTypeToText_WhenCreated() {
@@ -95,7 +95,7 @@ class HTMLItemReferenceFieldTest extends MediaWikiIntegrationTestCase {
 
 		$paramsRequiredByParentClass = [
 			'fieldname' => 'some-name',
-			'parent' => $htmlFormMock
+			'parent' => $htmlFormMock,
 		];
 
 		return new HTMLItemReferenceField( array_merge( $paramsRequiredByParentClass, $params ), $this->entityLookup );

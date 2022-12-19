@@ -27,18 +27,18 @@ class DatabaseEntityTermsTableProviderTest extends TestCase {
 					[
 						"wbt_text" => [
 							'JOIN',
-							"wbxl_text_id=wbx_id"
+							"wbxl_text_id=wbx_id",
 						],
 						"wbt_text_in_lang" => [
 							'JOIN',
-							"wbtl_text_in_lang_id=wbxl_id"
+							"wbtl_text_in_lang_id=wbxl_id",
 						],
 						"wbt_term_in_lang" => [
 							'JOIN',
-							"wbit_term_in_lang_id=wbtl_id"
-						]
+							"wbit_term_in_lang_id=wbtl_id",
+						],
 					],
-					'wbit_item_id'
+					'wbit_item_id',
 				],
 			],
 
@@ -55,20 +55,20 @@ class DatabaseEntityTermsTableProviderTest extends TestCase {
 					[
 						"wbt_text" => [
 							'JOIN',
-							"wbxl_text_id=wbx_id"
+							"wbxl_text_id=wbx_id",
 						],
 						"wbt_text_in_lang" => [
 							'JOIN',
-							"wbtl_text_in_lang_id=wbxl_id"
+							"wbtl_text_in_lang_id=wbxl_id",
 						],
 						"wbt_term_in_lang" => [
 							'JOIN',
-							"wbpt_term_in_lang_id=wbtl_id"
-						]
+							"wbpt_term_in_lang_id=wbtl_id",
+						],
 					],
-					'wbpt_property_id'
+					'wbpt_property_id',
 				],
-			]
+			],
 		];
 	}
 

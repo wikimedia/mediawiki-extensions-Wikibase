@@ -140,7 +140,7 @@ class PatchItemStatementTest extends TestCase {
 			'$isBot' => $isBot,
 			'$comment' => $comment,
 			'$username' => null,
-			'$itemId' => $itemId
+			'$itemId' => $itemId,
 		];
 
 		$request = $this->newUseCaseRequest( $requestData );
@@ -182,7 +182,7 @@ class PatchItemStatementTest extends TestCase {
 			'$isBot' => false,
 			'$comment' => null,
 			'$username' => null,
-			'$itemId' => null
+			'$itemId' => null,
 		];
 
 		$request = $this->newUseCaseRequest( $requestData );
@@ -376,7 +376,7 @@ class PatchItemStatementTest extends TestCase {
 					'op' => 'test',
 					'path' => '/value/content',
 					'value' => 'these are not the droids you are looking for',
-				]
+				],
 			],
 			ErrorResponse::PATCH_TEST_FAILED,
 		];
@@ -386,7 +386,7 @@ class PatchItemStatementTest extends TestCase {
 				[
 					'op' => 'remove',
 					'path' => '/this/path/does/not/exist',
-				]
+				],
 			],
 			ErrorResponse::PATCH_TARGET_NOT_FOUND,
 		];
@@ -466,7 +466,7 @@ class PatchItemStatementTest extends TestCase {
 			[
 				'op' => 'replace',
 				'path' => '/value/content',
-				'value' => $newStatementValue
+				'value' => $newStatementValue,
 			],
 		];
 	}

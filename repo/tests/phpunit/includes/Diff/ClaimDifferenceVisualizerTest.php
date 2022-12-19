@@ -163,7 +163,7 @@ class ClaimDifferenceVisualizerTest extends MediaWikiIntegrationTestCase {
 						),
 						new DiffOpRemove(
 							new PropertyValueSnak( 44, new StringValue( 'oldqualifiervalue' ) )
-						)
+						),
 					] )
 				),
 				new Statement( new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'newmainsnakvalue' ) ) ),
@@ -211,11 +211,11 @@ class ClaimDifferenceVisualizerTest extends MediaWikiIntegrationTestCase {
 					null,
 					new Diff( [
 						new DiffOpAdd( new Reference( new SnakList( [
-							new PropertyValueSnak( 44, new StringValue( 'newreferencevalue' ) )
+							new PropertyValueSnak( 44, new StringValue( 'newreferencevalue' ) ),
 						] ) ) ),
 						new DiffOpRemove( new Reference( new SnakList( [
-							new PropertyValueSnak( 44, new StringValue( 'oldreferencevalue' ) )
-						] ) ) )
+							new PropertyValueSnak( 44, new StringValue( 'oldreferencevalue' ) ),
+						] ) ) ),
 					] )
 				),
 				new Statement( new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'newmainsnakvalue' ) ) ),
@@ -307,7 +307,7 @@ class ClaimDifferenceVisualizerTest extends MediaWikiIntegrationTestCase {
 				'<div><del class="diffchange diffchange-inline"><span>Normal rank</span></del></div></td>' .
 				'<td class="diff-marker" data-marker="+"></td><td class="diff-addedline">' .
 				'<div><ins class="diffchange diffchange-inline"><span>Preferred rank</span></ins></div></td></tr>',
-				[ 'foo', 'bar' ]
+				[ 'foo', 'bar' ],
 			],
 		];
 	}
@@ -363,7 +363,7 @@ class ClaimDifferenceVisualizerTest extends MediaWikiIntegrationTestCase {
 			new ReferenceList( [
 				new Reference(
 					new SnakList( [
-						new PropertyValueSnak( new NumericPropertyId( 'P44' ), new StringValue( 'referencevalue' ) )
+						new PropertyValueSnak( new NumericPropertyId( 'P44' ), new StringValue( 'referencevalue' ) ),
 					] ) ) ] ) );
 		$html = $visualizer->visualizeNewClaim( $claim, [ 'fooo' ] );
 
@@ -407,7 +407,7 @@ class ClaimDifferenceVisualizerTest extends MediaWikiIntegrationTestCase {
 			new ReferenceList( [
 				new Reference(
 					new SnakList( [
-						new PropertyValueSnak( new NumericPropertyId( 'P44' ), new StringValue( 'referencevalue' ) )
+						new PropertyValueSnak( new NumericPropertyId( 'P44' ), new StringValue( 'referencevalue' ) ),
 					] ) ) ] ) );
 		$html = $visualizer->visualizeRemovedClaim( $claim, [ 'bar' ] );
 

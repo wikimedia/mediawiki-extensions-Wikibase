@@ -31,7 +31,7 @@ class EntityChangeOpProviderTest extends ServiceWiringTestCase {
 					EntityTypeDefinitions::CHANGEOP_DESERIALIZER_CALLBACK => function () use ( $changeOpDeserializer ) {
 						return $changeOpDeserializer;
 					},
-				]
+				],
 			] ) );
 
 		/** @var EntityChangeOpProvider $entityChangeOpProvider */

@@ -82,8 +82,8 @@ class OutputPageJsConfigBuilder {
 		return [
 			'wbCopyright' => [
 				'version' => $versionMessage->parse(),
-				'messageHtml' => $copyrightMessage->inLanguage( $language )->parse()
-			]
+				'messageHtml' => $copyrightMessage->inLanguage( $language )->parse(),
+			],
 		];
 	}
 

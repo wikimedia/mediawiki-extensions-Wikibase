@@ -43,17 +43,17 @@ class EntityNamespaceLookupTest extends ServiceWiringTestCase {
 			$this->getEntitySources( [
 				'something' => [
 					'namespaceId' => 666,
-					'slot' => SlotRecord::MAIN
+					'slot' => SlotRecord::MAIN,
 				],
 				'another' => [
 					'namespaceId' => 777,
-					'slot' => SlotRecord::MAIN
-				]
+					'slot' => SlotRecord::MAIN,
+				],
 			], [
 				'different-thing' => [
 					'namespaceId' => 42,
-					'slot' => SlotRecord::MAIN
-				]
+					'slot' => SlotRecord::MAIN,
+				],
 			] )
 		);
 
@@ -68,7 +68,7 @@ class EntityNamespaceLookupTest extends ServiceWiringTestCase {
 		$this->assertSame( [
 			'something' => 666,
 			'another' => 777,
-			'different-thing' => 42
+			'different-thing' => 42,
 		], $entityNSLookup->getEntityNamespaces() );
 	}
 

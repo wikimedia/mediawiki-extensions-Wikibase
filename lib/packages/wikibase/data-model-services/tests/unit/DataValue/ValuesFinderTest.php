@@ -25,7 +25,7 @@ class ValuesFinderTest extends TestCase {
 	private static $propertyDataTypes = [
 		'P23' => 'string',
 		'P42' => 'url',
-		'P44' => 'boolean'
+		'P44' => 'boolean',
 	];
 
 	public function snaksProvider() {

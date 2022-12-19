@@ -77,15 +77,15 @@ class ItemTest extends \PHPUnit\Framework\TestCase {
 				'enwiki',
 				'Wikidata',
 				[
-					new ItemId( 'Q42' )
+					new ItemId( 'Q42' ),
 				]
-			)
+			),
 		];
 		$argLists[] = [
 			new SiteLink(
 				'nlwiki',
 				'Wikidata'
-			)
+			),
 		];
 		$argLists[] = [
 			new SiteLink(
@@ -93,9 +93,9 @@ class ItemTest extends \PHPUnit\Framework\TestCase {
 				'Nyan!',
 				[
 					new ItemId( 'Q42' ),
-					new ItemId( 'Q149' )
+					new ItemId( 'Q149' ),
 				]
-			)
+			),
 		];
 		$argLists[] = [
 			new SiteLink(
@@ -103,9 +103,9 @@ class ItemTest extends \PHPUnit\Framework\TestCase {
 				'baz bah',
 				[
 					new ItemId( 'Q3' ),
-					new ItemId( 'Q7' )
+					new ItemId( 'Q7' ),
 				]
-			)
+			),
 		];
 
 		return $argLists;
@@ -120,13 +120,13 @@ class ItemTest extends \PHPUnit\Framework\TestCase {
 
 		$argLists[] = [
 			new SiteLink( 'enwiki', 'Wikidata' ),
-			new SiteLink( 'nlwiki', 'Wikidata', [ new ItemId( 'Q3' ) ] )
+			new SiteLink( 'nlwiki', 'Wikidata', [ new ItemId( 'Q3' ) ] ),
 		];
 
 		$argLists[] = [
 			new SiteLink( 'enwiki', 'Wikidata' ),
 			new SiteLink( 'nlwiki', 'Wikidata' ),
-			new SiteLink( 'foo bar', 'baz bah', [ new ItemId( 'Q2' ) ] )
+			new SiteLink( 'foo bar', 'baz bah', [ new ItemId( 'Q2' ) ] ),
 		];
 
 		return $argLists;
@@ -618,10 +618,10 @@ class ItemTest extends \PHPUnit\Framework\TestCase {
 					new Term( 'en', 'foo' ),
 				] ),
 				new TermList( [
-					new Term( 'en', 'foo bar' )
+					new Term( 'en', 'foo bar' ),
 				] ),
 				new AliasGroupList( [
-					new AliasGroup( 'en', [ 'foo', 'bar' ] )
+					new AliasGroup( 'en', [ 'foo', 'bar' ] ),
 				] )
 			),
 			$entity->getFingerprint()
@@ -653,10 +653,10 @@ class ItemTest extends \PHPUnit\Framework\TestCase {
 				new Term( 'en', 'english label' ),
 			] ),
 			new TermList( [
-				new Term( 'en', 'english description' )
+				new Term( 'en', 'english description' ),
 			] ),
 			new AliasGroupList( [
-				new AliasGroup( 'en', [ 'first en alias', 'second en alias' ] )
+				new AliasGroup( 'en', [ 'first en alias', 'second en alias' ] ),
 			] )
 		);
 
@@ -673,7 +673,7 @@ class ItemTest extends \PHPUnit\Framework\TestCase {
 
 		$this->assertEquals(
 			new TermList( [
-				new Term( 'en', 'foo' )
+				new Term( 'en', 'foo' ),
 			] ),
 			$item->getLabels()
 		);
@@ -685,7 +685,7 @@ class ItemTest extends \PHPUnit\Framework\TestCase {
 
 		$this->assertEquals(
 			new TermList( [
-				new Term( 'en', 'foo bar' )
+				new Term( 'en', 'foo bar' ),
 			] ),
 			$item->getDescriptions()
 		);
@@ -697,7 +697,7 @@ class ItemTest extends \PHPUnit\Framework\TestCase {
 
 		$this->assertEquals(
 			new AliasGroupList( [
-				new AliasGroup( 'en', [ 'foo', 'bar' ] )
+				new AliasGroup( 'en', [ 'foo', 'bar' ] ),
 			] ),
 			$item->getAliasGroups()
 		);
@@ -744,7 +744,7 @@ class ItemTest extends \PHPUnit\Framework\TestCase {
 
 	public function clearableProvider() {
 		return [
-			'empty' => [ new Item( new ItemId( 'Q23' ) ), ],
+			'empty' => [ new Item( new ItemId( 'Q23' ) ) ],
 			'with fingerprint' => [
 				new Item(
 					new ItemId( 'Q42' ),
@@ -756,7 +756,7 @@ class ItemTest extends \PHPUnit\Framework\TestCase {
 					new ItemId( 'Q123' ),
 					null,
 					new SiteLinkList( [ new SiteLink( 'enwiki', 'Wikidata' ) ] )
-				)
+				),
 			],
 			'with statement' => [
 				new Item(
@@ -764,8 +764,8 @@ class ItemTest extends \PHPUnit\Framework\TestCase {
 					null,
 					null,
 					new StatementList( $this->newStatement() )
-				)
-			]
+				),
+			],
 		];
 	}
 

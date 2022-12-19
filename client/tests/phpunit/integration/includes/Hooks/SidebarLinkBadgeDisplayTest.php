@@ -74,16 +74,16 @@ class SidebarLinkBadgeDisplayTest extends MediaWikiIntegrationTestCase {
 			[
 				[
 					'class' => 'badge-Q3 bar badge-Q2',
-					'label' => 'Lesenswerter Artikel'
+					'label' => 'Lesenswerter Artikel',
 				],
-				[ $q3, $q2 ]
+				[ $q3, $q2 ],
 			],
 			[
 				[
 					'class' => 'badge-Q3 bar badge-Q4 foo',
-					'label' => 'Lesenswerter Artikel, Exzellenter Artikel'
+					'label' => 'Lesenswerter Artikel, Exzellenter Artikel',
 				],
-				[ $q3, $q4 ]
+				[ $q3, $q4 ],
 			],
 		];
 	}

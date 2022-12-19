@@ -65,7 +65,7 @@ class ParserHookHandler implements
 			'limitreport-entityaccesscount',
 			[
 				$this->restrictedEntityLookup->getEntityAccessCount(),
-				$this->entityAccessLimit
+				$this->entityAccessLimit,
 			]
 		);
 	}

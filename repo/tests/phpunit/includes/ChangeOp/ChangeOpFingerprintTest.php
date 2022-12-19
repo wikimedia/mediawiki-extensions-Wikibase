@@ -45,7 +45,7 @@ class ChangeOpFingerprintTest extends TestCase {
 	public function testGetChangeOps() {
 		$changeOps = [
 			$this->createMock( ChangeOp::class ),
-			$this->createMock( ChangeOps::class )
+			$this->createMock( ChangeOps::class ),
 		];
 
 		$this->innerChangeOp->method( 'getChangeOps' )

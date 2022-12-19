@@ -890,7 +890,7 @@ return [
 				[
 					'localId' => $localId,
 					'globalId' => $globalId,
-					'localIds' => json_encode( $site->getLocalIds() )
+					'localIds' => json_encode( $site->getLocalIds() ),
 				]
 			);
 		}

@@ -244,15 +244,15 @@ class SpecialMergeItems extends SpecialWikibasePage {
 				'default' => $this->getRequest()->getVal( 'fromid' ),
 				'type' => 'text',
 				'id' => 'wb-mergeitems-fromid',
-				'label-message' => 'wikibase-mergeitems-fromid'
+				'label-message' => 'wikibase-mergeitems-fromid',
 			],
 			'toid' => [
 				'name' => 'toid',
 				'default' => $this->getRequest()->getVal( 'toid' ),
 				'type' => 'text',
 				'id' => 'wb-mergeitems-toid',
-				'label-message' => 'wikibase-mergeitems-toid'
-			]
+				'label-message' => 'wikibase-mergeitems-toid',
+			],
 		];
 		// TODO: Selector for ignoreconflicts
 	}

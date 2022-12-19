@@ -22,7 +22,7 @@ class DataTypeDefinitionsTest extends ServiceWiringTestCase {
 		$this->mockService(
 			'WikibaseRepo.Settings',
 			new SettingsArray( [
-				'disabledDataTypes' => []
+				'disabledDataTypes' => [],
 			] )
 		);
 	}

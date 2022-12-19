@@ -25,7 +25,7 @@ class PropertyLabelResolverTest extends ServiceWiringTestCase {
 			new SettingsArray( [
 				'sharedCacheKeyPrefix' => 'test',
 				'sharedCacheDuration' => 3600, // 1 Hour
-				'sharedCacheType' => CACHE_NONE
+				'sharedCacheType' => CACHE_NONE,
 			] )
 		);
 

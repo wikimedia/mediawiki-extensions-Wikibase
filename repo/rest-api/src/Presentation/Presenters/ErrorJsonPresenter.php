@@ -15,7 +15,7 @@ class ErrorJsonPresenter {
 			array_filter( [
 				'code' => $error->getCode(),
 				'message' => $error->getMessage(),
-				'context' => $error->getContext()
+				'context' => $error->getContext(),
 			] ),
 			JSON_UNESCAPED_SLASHES
 		);

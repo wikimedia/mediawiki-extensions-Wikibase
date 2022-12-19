@@ -46,7 +46,7 @@ class UpdateUnitsTest extends MediaWikiLangTestCase {
 					'unit' => 'Q1',
 					'label' => 'test unit Q2',
 					'siLabel' => 'test unit Q1',
-				]
+				],
 			],
 			'unknown base unit' => [
 				[
@@ -56,7 +56,7 @@ class UpdateUnitsTest extends MediaWikiLangTestCase {
 					'unitLabel' => 'test unit Q2',
 					'siUnitLabel' => 'test unit Q5',
 				],
-				null
+				null,
 			],
 			'already done' => [
 				[
@@ -66,7 +66,7 @@ class UpdateUnitsTest extends MediaWikiLangTestCase {
 					'unitLabel' => 'test 10',
 					'siUnitLabel' => 'test unit Q5',
 				],
-				null
+				null,
 			],
 			'weird base unit' => [
 				[
@@ -76,7 +76,7 @@ class UpdateUnitsTest extends MediaWikiLangTestCase {
 					'unitLabel' => 'test 1',
 					'siUnitLabel' => 'test unit Q1',
 				],
-				null
+				null,
 			],
 			'weird non-base unit' => [
 				[
@@ -86,7 +86,7 @@ class UpdateUnitsTest extends MediaWikiLangTestCase {
 					'unitLabel' => 'test 2',
 					'siUnitLabel' => 'test unit Q2',
 				],
-				null
+				null,
 			],
 			'low usage unit' => [
 				[
@@ -96,7 +96,7 @@ class UpdateUnitsTest extends MediaWikiLangTestCase {
 					'unitLabel' => 'test 4',
 					'siUnitLabel' => 'test unit Q1',
 				],
-				null
+				null,
 			],
 			'reconvertable' => [
 				[
@@ -106,7 +106,7 @@ class UpdateUnitsTest extends MediaWikiLangTestCase {
 					'unitLabel' => 'test',
 					'siUnitLabel' => 'test unit Q2',
 				],
-				null
+				null,
 			],
 		];
 	}
@@ -140,7 +140,7 @@ class UpdateUnitsTest extends MediaWikiLangTestCase {
 				'unit' => 'Q1',
 				'label' => 'test unit Q2',
 				'siLabel' => 'test unit Q1',
-			]
+			],
 		];
 		$expected = [
 			'factor' => '8381.0205',

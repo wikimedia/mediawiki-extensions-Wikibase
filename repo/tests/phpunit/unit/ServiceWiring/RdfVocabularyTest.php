@@ -46,7 +46,7 @@ class RdfVocabularyTest extends ServiceWiringTestCase {
 		);
 		$this->mockService( 'WikibaseRepo.Settings',
 			new SettingsArray( [
-				'canonicalLanguageCodes' => [ 't1' => 'test-1', ],
+				'canonicalLanguageCodes' => [ 't1' => 'test-1' ],
 				'pagePropertiesRdf' => $pagePropertyDefs,
 				'rdfDataRightsUrl' => 'https://license.test/cc0',
 			] ) );
@@ -62,7 +62,7 @@ class RdfVocabularyTest extends ServiceWiringTestCase {
 		$this->serviceContainer->expects( $this->once() )
 			->method( 'getMainConfig' )
 			->willReturn( new HashConfig( [
-				'DummyLanguageCodes' => [ 'd1' => 'dummy-1', ],
+				'DummyLanguageCodes' => [ 'd1' => 'dummy-1' ],
 			] ) );
 		$this->serviceContainer->expects( $this->once() )
 			->method( 'getTitleFactory' );

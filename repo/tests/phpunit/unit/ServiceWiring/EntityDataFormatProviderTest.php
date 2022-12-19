@@ -19,13 +19,13 @@ class EntityDataFormatProviderTest extends ServiceWiringTestCase {
 	public function testConstruction(): void {
 		$mockEntityDataFormats = [
 			'test-format',
-			'json'
+			'json',
 		];
 
 		$this->mockService(
 			'WikibaseRepo.Settings',
 			new SettingsArray( [
-				'entityDataFormats' => $mockEntityDataFormats
+				'entityDataFormats' => $mockEntityDataFormats,
 			] )
 		);
 

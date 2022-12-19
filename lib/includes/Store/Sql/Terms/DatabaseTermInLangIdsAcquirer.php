@@ -315,7 +315,7 @@ class DatabaseTermInLangIdsAcquirer implements TermInLangIdsAcquirer {
 			foreach ( $textInLangIds as $textInLangId ) {
 				$termInLangRecords[] = [
 					'wbtl_text_in_lang_id' => $textInLangId,
-					'wbtl_type_id' => (string)$typeId
+					'wbtl_type_id' => (string)$typeId,
 				];
 			}
 		}

@@ -46,7 +46,7 @@ class RecentChangesFinderTest extends MediaWikiIntegrationTestCase {
 					'wikibase-repo-change' => [
 						'parent_id' => 1,
 						'rev_id' => 2,
-					]
+					],
 				],
 			] ],
 			'irrelevant differences' => [ true, [
@@ -63,7 +63,7 @@ class RecentChangesFinderTest extends MediaWikiIntegrationTestCase {
 					'wikibase-repo-change' => [
 						'parent_id' => 1,
 						'rev_id' => 2,
-					]
+					],
 				],
 			] ],
 			'repo change mismatch' => [ false, [
@@ -80,7 +80,7 @@ class RecentChangesFinderTest extends MediaWikiIntegrationTestCase {
 					'wikibase-repo-change' => [
 						'parent_id' => 7,
 						'rev_id' => 8,
-					]
+					],
 				],
 			] ],
 			'local timestamp mismatch' => [ false, [
@@ -97,7 +97,7 @@ class RecentChangesFinderTest extends MediaWikiIntegrationTestCase {
 					'wikibase-repo-change' => [
 						'parent_id' => 1,
 						'rev_id' => 2,
-					]
+					],
 				],
 			] ],
 			'local title mismatch' => [ false, [
@@ -114,7 +114,7 @@ class RecentChangesFinderTest extends MediaWikiIntegrationTestCase {
 					'wikibase-repo-change' => [
 						'parent_id' => 1,
 						'rev_id' => 2,
-					]
+					],
 				],
 			] ],
 			'external change exists but not from repo' => [ false, [
@@ -131,7 +131,7 @@ class RecentChangesFinderTest extends MediaWikiIntegrationTestCase {
 					'wikibase-repo-change' => [
 						'parent_id' => 11,
 						'rev_id' => 12,
-					]
+					],
 				],
 			] ],
 		];
@@ -203,7 +203,7 @@ class RecentChangesFinderTest extends MediaWikiIntegrationTestCase {
 
 		$change = RecentChange::newFromRow( (object)$changeData );
 		$change->setExtra( [
-			'pageStatus' => 'changed'
+			'pageStatus' => 'changed',
 		] );
 
 		return $change;
@@ -223,8 +223,8 @@ class RecentChangesFinderTest extends MediaWikiIntegrationTestCase {
 				'wikibase-repo-change' => [
 					'parent_id' => 1001, // different id
 					'rev_id' => 1002, // different id
-				]
-			]
+				],
+			],
 		] );
 		$change->save();
 
@@ -241,8 +241,8 @@ class RecentChangesFinderTest extends MediaWikiIntegrationTestCase {
 				'wikibase-repo-change' => [
 					'parent_id' => 11,
 					'rev_id' => 12,
-				]
-			]
+				],
+			],
 		] );
 		$change->save();
 
@@ -259,8 +259,8 @@ class RecentChangesFinderTest extends MediaWikiIntegrationTestCase {
 				'wikibase-repo-change' => [
 					'parent_id' => 1,
 					'rev_id' => 2,
-				]
-			]
+				],
+			],
 		] );
 		$change->save();
 

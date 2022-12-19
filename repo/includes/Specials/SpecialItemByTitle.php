@@ -224,7 +224,7 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 				'options' => $this->getSiteOptions(),
 				'id' => 'wb-itembytitle-sitename',
 				'size' => 12,
-				'label-message' => 'wikibase-itembytitle-lookup-site'
+				'label-message' => 'wikibase-itembytitle-lookup-site',
 			],
 			'page' => [
 				'name' => 'page',
@@ -232,8 +232,8 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 				'type' => 'text',
 				'id' => 'pagename',
 				'size' => 36,
-				'label-message' => 'wikibase-itembytitle-lookup-page'
-			]
+				'label-message' => 'wikibase-itembytitle-lookup-page',
+			],
 		];
 
 		HTMLForm::factory( 'ooui', $formDescriptor, $this->getContext() )

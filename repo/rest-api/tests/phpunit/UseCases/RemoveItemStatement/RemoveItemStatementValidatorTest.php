@@ -58,8 +58,8 @@ class RemoveItemStatementValidatorTest extends TestCase {
 				'$isBot' => false,
 				'$comment' => null,
 				'$username' => null,
-				'$itemId' => $itemId
-			]
+				'$itemId' => $itemId,
+			],
 		];
 		yield 'Valid without item ID' => [
 			[
@@ -67,8 +67,8 @@ class RemoveItemStatementValidatorTest extends TestCase {
 				'$editTags' => [],
 				'$isBot' => false,
 				'$comment' => null,
-				'$username' => null
-			]
+				'$username' => null,
+			],
 		];
 	}
 
@@ -81,10 +81,10 @@ class RemoveItemStatementValidatorTest extends TestCase {
 				'$isBot' => false,
 				'$comment' => null,
 				'$username' => null,
-				'$itemId' => $itemId
+				'$itemId' => $itemId,
 			],
 			[ ItemIdValidator::CONTEXT_VALUE => $itemId ],
-			ItemIdValidator::CODE_INVALID
+			ItemIdValidator::CODE_INVALID,
 		];
 
 		$itemId = 'Q123';
@@ -96,10 +96,10 @@ class RemoveItemStatementValidatorTest extends TestCase {
 				'$isBot' => false,
 				'$comment' => null,
 				'$username' => null,
-				'$itemId' => $itemId
+				'$itemId' => $itemId,
 			],
 			[ StatementIdValidator::CONTEXT_VALUE => $statementId ],
-			StatementIdValidator::CODE_INVALID
+			StatementIdValidator::CODE_INVALID,
 		];
 		yield 'Invalid statement ID (without item ID)' => [
 			[
@@ -108,10 +108,10 @@ class RemoveItemStatementValidatorTest extends TestCase {
 				'$isBot' => false,
 				'$comment' => null,
 				'$username' => null,
-				'$itemId' => null
+				'$itemId' => null,
 			],
 			[ StatementIdValidator::CONTEXT_VALUE => $statementId ],
-			StatementIdValidator::CODE_INVALID
+			StatementIdValidator::CODE_INVALID,
 		];
 
 		$itemId = 'Q42';
@@ -123,10 +123,10 @@ class RemoveItemStatementValidatorTest extends TestCase {
 				'$isBot' => false,
 				'$comment' => $comment,
 				'$username' => null,
-				'$itemId' => $itemId
+				'$itemId' => $itemId,
 			],
 			[ EditMetadataValidator::CONTEXT_COMMENT_MAX_LENGTH => strval( CommentStore::COMMENT_CHARACTER_LIMIT ) ],
-			EditMetadataValidator::CODE_COMMENT_TOO_LONG
+			EditMetadataValidator::CODE_COMMENT_TOO_LONG,
 		];
 
 		$itemId = 'Q24';
@@ -138,10 +138,10 @@ class RemoveItemStatementValidatorTest extends TestCase {
 				'$isBot' => false,
 				'$comment' => null,
 				'$username' => null,
-				'$itemId' => null
+				'$itemId' => null,
 			],
 			[ EditMetadataValidator::CONTEXT_TAG_VALUE => json_encode( $invalidTag ) ],
-			EditMetadataValidator::CODE_INVALID_TAG
+			EditMetadataValidator::CODE_INVALID_TAG,
 		];
 	}
 

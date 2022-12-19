@@ -80,7 +80,7 @@ class StatementsMergerTest extends TestCase {
 		yield 'no statements' => [
 			[],
 			[],
-			[]
+			[],
 		];
 
 		$statement1 = NewStatement::forProperty( 'P42' )
@@ -90,7 +90,7 @@ class StatementsMergerTest extends TestCase {
 		yield 'given no statements in target, copied from source' => [
 			[ $statement1 ],
 			[],
-			[ $statement1 ]
+			[ $statement1 ],
 		];
 
 		$statement2 = NewStatement::forProperty( 'P23' )
@@ -100,7 +100,7 @@ class StatementsMergerTest extends TestCase {
 		yield 'given both source and target have statements, merge' => [
 			[ $statement1 ],
 			[ $statement2 ],
-			[ $statement2, $statement1 ]
+			[ $statement2, $statement1 ],
 		];
 
 		$qualified = NewStatement::forProperty( 'P123' )
@@ -111,7 +111,7 @@ class StatementsMergerTest extends TestCase {
 		yield 'given qualified statements on source, qualifiers are copied to target' => [
 			[ $qualified ],
 			[],
-			[ $qualified ]
+			[ $qualified ],
 		];
 
 		$statementBuilder = NewStatement::forProperty( 'P321' )
@@ -119,7 +119,7 @@ class StatementsMergerTest extends TestCase {
 		yield 'given equivalent statements on source and target, merge into one' => [
 			[ $statementBuilder->withSomeGuid()->build() ],
 			[ $statementBuilder->withSomeGuid()->build() ],
-			[ $statementBuilder->build() ]
+			[ $statementBuilder->build() ],
 		];
 
 		$reference1 = new PropertyValueSnak( new NumericPropertyId( 'P345' ), new StringValue( 'hi' ) );
@@ -127,7 +127,7 @@ class StatementsMergerTest extends TestCase {
 		yield 'given equivalent statements with references, references are merged' => [
 			[ $this->newStatementWithReferences( $statementBuilder, [ $reference1 ] ) ],
 			[ $this->newStatementWithReferences( $statementBuilder, [ $reference2 ] ) ],
-			[ $this->newStatementWithReferences( $statementBuilder, [ $reference2, $reference1 ] ) ]
+			[ $this->newStatementWithReferences( $statementBuilder, [ $reference2, $reference1 ] ) ],
 		];
 	}
 
@@ -145,17 +145,17 @@ class StatementsMergerTest extends TestCase {
 
 		yield 'source not an entity' => [
 			$nonEntity,
-			new Item()
+			new Item(),
 		];
 
 		yield 'target not an entity' => [
 			new Item(),
-			$nonEntity
+			$nonEntity,
 		];
 
 		yield 'source and target both not entities' => [
 			$nonEntity,
-			clone $nonEntity
+			clone $nonEntity,
 		];
 	}
 

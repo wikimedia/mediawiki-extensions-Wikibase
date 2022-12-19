@@ -79,7 +79,7 @@ class PagePropsEntityIdLookupTest extends MediaWikiIntegrationTestCase {
 
 		$expected = [
 			11 => $q11,
-			22 => $q22
+			22 => $q22,
 		];
 
 		$lookup = new PagePropsEntityIdLookup(

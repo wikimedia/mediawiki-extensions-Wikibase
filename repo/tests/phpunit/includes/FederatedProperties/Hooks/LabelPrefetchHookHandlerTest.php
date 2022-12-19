@@ -28,17 +28,17 @@ class LabelPrefetchHookHandlerTest extends LabelPrefetchHookHandlerTestBase {
 			(object)[
 				'rc_namespace' => NS_MAIN,
 				'rc_title' => 'Q1',
-				'rc_comment_text' => "/* wbsetclaim-update:1||1 */ [[Property:P1]]: asdf"
+				'rc_comment_text' => "/* wbsetclaim-update:1||1 */ [[Property:P1]]: asdf",
 			],
 			(object)[
 				'rc_namespace' => NS_MAIN,
 				'rc_title' => 'Q2',
-				'rc_comment_text' => "/* wbsetclaim-update:1||1 */ [[Property:P2]]: asdf"
+				'rc_comment_text' => "/* wbsetclaim-update:1||1 */ [[Property:P2]]: asdf",
 			],
 			(object)[
 				'rc_namespace' => NS_MAIN,
 				'rc_title' => 'Q3',
-				'rc_comment_text' => "/* wbsetclaim-update:1||1 */ [[Property:P3]]: asdf"
+				'rc_comment_text' => "/* wbsetclaim-update:1||1 */ [[Property:P3]]: asdf",
 			],
 		];
 
@@ -63,13 +63,13 @@ class LabelPrefetchHookHandlerTest extends LabelPrefetchHookHandlerTestBase {
 		$expectedItemIds = [
 			$itemOneId,
 			$itemTwoId,
-			$itemThreeNotFoundId
+			$itemThreeNotFoundId,
 		];
 
 		$expectedPropertyIds = [
 			new NumericPropertyId( 'P1' ),
 			new NumericPropertyId( 'P2' ),
-			new NumericPropertyId( 'P3' )
+			new NumericPropertyId( 'P3' ),
 		];
 
 		$prefetchingTermLookup = $this->createMock( PrefetchingTermLookup::class );

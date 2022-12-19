@@ -37,7 +37,7 @@ class ApiEntitySearchHelperTest extends TestCase {
 		'api-entity-search-helper-test-data-multipleEntityIdResponse.json',
 		'api-entity-search-helper-test-data-errorResponse.json',
 		'api-entity-search-helper-test-data-unexpectedResponse.json',
-		'api-entity-search-helper-test-data-filteredResult.json'
+		'api-entity-search-helper-test-data-filteredResult.json',
 	];
 
 	private $data = [];
@@ -116,7 +116,7 @@ class ApiEntitySearchHelperTest extends TestCase {
 			'search' => 'P147',
 			'type' => 'property',
 			'limit' => 3,
-			'strictlanguage' => false
+			'strictlanguage' => false,
 		];
 
 		return [
@@ -147,7 +147,7 @@ class ApiEntitySearchHelperTest extends TestCase {
 				[ 'P8' ],
 				[ 'monolingualtext' ],
 				FederatedPropertiesException::class,
-			]
+			],
 		];
 	}
 
@@ -271,10 +271,10 @@ class ApiEntitySearchHelperTest extends TestCase {
 					'search' => 'foo',
 					'type' => 'property',
 					'limit' => 10,
-					'strictlanguage' => false
+					'strictlanguage' => false,
 				],
 				'api-entity-search-helper-test-data-errorResponse.json',
-				400
+				400,
 			],
 			'unexpectedResponse' => [
 				'en',
@@ -283,11 +283,11 @@ class ApiEntitySearchHelperTest extends TestCase {
 					'search' => 'foo',
 					'type' => 'property',
 					'limit' => 10,
-					'strictlanguage' => false
+					'strictlanguage' => false,
 				],
 				'api-entity-search-helper-test-data-unexpectedResponse.json',
-				null
-			]
+				null,
+			],
 		];
 	}
 
@@ -303,7 +303,7 @@ class ApiEntitySearchHelperTest extends TestCase {
 					'search' => 'foo',
 					'type' => 'property',
 					'limit' => 10,
-					'strictlanguage' => false
+					'strictlanguage' => false,
 				],
 				'api-entity-search-helper-test-data-emptyResponse.json',
 				[],
@@ -315,7 +315,7 @@ class ApiEntitySearchHelperTest extends TestCase {
 					'search' => 'publication date',
 					'type' => 'property',
 					'limit' => 10,
-					'strictlanguage' => false
+					'strictlanguage' => false,
 				],
 				'api-entity-search-helper-test-data-twoResponse.json',
 				[ 'P577', 'P14' ],
@@ -327,7 +327,7 @@ class ApiEntitySearchHelperTest extends TestCase {
 					'search' => 'Publikationsdatum',
 					'type' => 'property',
 					'limit' => 10,
-					'strictlanguage' => false
+					'strictlanguage' => false,
 				],
 				'api-entity-search-helper-test-data-oneResponse.json',
 				[ 'P14' ],
@@ -339,7 +339,7 @@ class ApiEntitySearchHelperTest extends TestCase {
 					'search' => 'P31',
 					'type' => 'property',
 					'limit' => 10,
-					'strictlanguage' => false
+					'strictlanguage' => false,
 				],
 				'api-entity-search-helper-test-data-entityIdResponse.json',
 				[ 'P31' ],
@@ -351,10 +351,10 @@ class ApiEntitySearchHelperTest extends TestCase {
 					'search' => 'P147',
 					'type' => 'property',
 					'limit' => 10,
-					'strictlanguage' => false
+					'strictlanguage' => false,
 				],
 				'api-entity-search-helper-test-data-multipleEntityIdResponse.json',
-				[ 'P147', 'P160020' ]
+				[ 'P147', 'P160020' ],
 			],
 		];
 	}

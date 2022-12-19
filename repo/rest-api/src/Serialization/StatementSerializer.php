@@ -14,7 +14,7 @@ class StatementSerializer {
 	public const RANK_LABELS = [
 		Statement::RANK_DEPRECATED => 'deprecated',
 		Statement::RANK_NORMAL => 'normal',
-		Statement::RANK_PREFERRED => 'preferred'
+		Statement::RANK_PREFERRED => 'preferred',
 	];
 	private PropertyValuePairSerializer $propertyValuePairSerializer;
 	private ReferenceSerializer $referenceSerializer;

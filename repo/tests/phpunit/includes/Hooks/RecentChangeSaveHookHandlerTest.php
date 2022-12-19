@@ -215,7 +215,7 @@ class RecentChangeSaveHookHandlerTest extends MediaWikiIntegrationTestCase {
 			'time' => '20210906122813',
 			'info' => [
 				'compactDiff' => new EntityDiffChangedAspects( [], [], [], [
-					'some_wiki' => [ null, 'some_page', false, ]
+					'some_wiki' => [ null, 'some_page', false ],
 				], false ),
 				'metadata' => [
 					'page_id' => 3,

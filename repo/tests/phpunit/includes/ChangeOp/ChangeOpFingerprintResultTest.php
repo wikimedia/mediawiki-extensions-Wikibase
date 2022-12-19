@@ -41,7 +41,7 @@ class ChangeOpFingerprintResultTest extends TestCase {
 	public function testGetChangeOpsResults() {
 		$changeOpResults = [
 			$this->createMock( ChangeOpResult::class ),
-			$this->createMock( ChangeOpsResult::class )
+			$this->createMock( ChangeOpsResult::class ),
 		];
 
 		$this->innerChangeOpResult->method( 'getChangeOpsResults' )
@@ -97,7 +97,7 @@ class ChangeOpFingerprintResultTest extends TestCase {
 	public function testValidate_whenUniquenessValidationFails() {
 		$fingerprintUniquenessValidatorMock = $this->createMock( ValueValidator::class );
 		$fingerprintUniquenessValidatorMock->method( 'validate' )->willReturn( Result::newError( [
-			Error::newError( 'foo' )
+			Error::newError( 'foo' ),
 		] ) );
 		$this->termValidatorFactory->method( 'getFingerprintUniquenessValidator' )->willReturn(
 			$fingerprintUniquenessValidatorMock
@@ -139,7 +139,7 @@ class ChangeOpFingerprintResultTest extends TestCase {
 	public function testValidate_whenInnerChangeOpsAndUniquenessValidationFail() {
 		$fingerprintUniquenessValidatorMock = $this->createMock( ValueValidator::class );
 		$fingerprintUniquenessValidatorMock->method( 'validate' )->willReturn( Result::newError( [
-			Error::newError( 'foo' )
+			Error::newError( 'foo' ),
 		] ) );
 		$this->termValidatorFactory->method( 'getFingerprintUniquenessValidator' )->willReturn(
 			$fingerprintUniquenessValidatorMock

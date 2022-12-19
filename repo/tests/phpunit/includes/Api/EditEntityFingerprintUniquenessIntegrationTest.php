@@ -32,7 +32,7 @@ class EditEntityFingerprintUniquenessIntegrationTest extends WikibaseApiTestCase
 			'action' => 'wbeditentity',
 			'data' => json_encode( [
 				'datatype' => 'string',
-				'labels' => [ 'de' => [ 'language' => 'de', 'value' => 'conflict label' ] ]
+				'labels' => [ 'de' => [ 'language' => 'de', 'value' => 'conflict label' ] ],
 			] ),
 			'new' => 'property',
 		];
@@ -53,7 +53,7 @@ class EditEntityFingerprintUniquenessIntegrationTest extends WikibaseApiTestCase
 			'action' => 'wbeditentity',
 			'data' => json_encode( [
 				'datatype' => 'string',
-				'labels' => [ 'de' => [ 'language' => 'de', 'value' => 'conflict label' ] ]
+				'labels' => [ 'de' => [ 'language' => 'de', 'value' => 'conflict label' ] ],
 			] ),
 			'new' => 'property',
 		];
@@ -63,7 +63,7 @@ class EditEntityFingerprintUniquenessIntegrationTest extends WikibaseApiTestCase
 			'action' => 'wbeditentity',
 			'data' => json_encode( [
 				'datatype' => 'string',
-				'labels' => [ 'de' => [ 'language' => 'de', 'value' => 'no conflict label' ] ]
+				'labels' => [ 'de' => [ 'language' => 'de', 'value' => 'no conflict label' ] ],
 			] ),
 			'new' => 'property',
 		];
@@ -89,7 +89,7 @@ class EditEntityFingerprintUniquenessIntegrationTest extends WikibaseApiTestCase
 		$params = [
 			'action' => 'wbeditentity',
 			'data' => json_encode( [
-				'labels' => [ 'de' => [ 'language' => 'de', 'value' => 'no conflict label' ] ]
+				'labels' => [ 'de' => [ 'language' => 'de', 'value' => 'no conflict label' ] ],
 			] ),
 			'new' => 'item',
 		];

@@ -27,9 +27,9 @@ class PermissionsTest extends PermissionsTestCase {
 		yield [
 			'permissions' => [
 				'*'    => [ 'read' => false ],
-				'user' => [ 'read' => false ]
+				'user' => [ 'read' => false ],
 			],
-			'error' => 'readapidenied'
+			'error' => 'readapidenied',
 		];
 	}
 
@@ -39,25 +39,25 @@ class PermissionsTest extends PermissionsTestCase {
 		yield [
 			'permissions' => [
 				'*'    => [ 'edit' => false ],
-				'user' => [ 'edit' => false ]
+				'user' => [ 'edit' => false ],
 			],
-			'error' => 'permissiondenied'
+			'error' => 'permissiondenied',
 		];
 
 		yield [
 			'permissions' => [
 				'*'    => [ 'writeapi' => false ],
-				'user' => [ 'writeapi' => false ]
+				'user' => [ 'writeapi' => false ],
 			],
-			'error' => 'writeapidenied'
+			'error' => 'writeapidenied',
 		];
 
 		yield [
 			'permissions' => [
 				'*'    => [ 'read' => false ],
-				'user' => [ 'read' => false ]
+				'user' => [ 'read' => false ],
 			],
-			'error' => 'readapidenied'
+			'error' => 'readapidenied',
 		];
 	}
 
@@ -79,9 +79,9 @@ class PermissionsTest extends PermissionsTestCase {
 		yield [
 			'permissions' => [
 				'*'    => [ 'createpage' => false ],
-				'user' => [ 'createpage' => false ]
+				'user' => [ 'createpage' => false ],
 			],
-			'error' => 'permissiondenied'
+			'error' => 'permissiondenied',
 		];
 	}
 
@@ -108,9 +108,9 @@ class PermissionsTest extends PermissionsTestCase {
 		yield [
 			'permissions' => [
 				'*'    => [ 'property-create' => false ],
-				'user' => [ 'property-create' => false ]
+				'user' => [ 'property-create' => false ],
 			],
-			'error' => 'permissiondenied'
+			'error' => 'permissiondenied',
 		];
 	}
 
@@ -138,9 +138,9 @@ class PermissionsTest extends PermissionsTestCase {
 		yield [
 			'permissions' => [
 				'*'    => [ 'item-term' => false ],
-				'user' => [ 'item-term' => false ]
+				'user' => [ 'item-term' => false ],
 			],
-			'error' => 'permissiondenied'
+			'error' => 'permissiondenied',
 		];
 	}
 
@@ -178,9 +178,9 @@ class PermissionsTest extends PermissionsTestCase {
 		yield [
 			'permissions' => [
 				'*'    => [ 'item-merge' => false ],
-				'user' => [ 'item-merge' => false ]
+				'user' => [ 'item-merge' => false ],
 			],
-			'error' => 'permissiondenied'
+			'error' => 'permissiondenied',
 		];
 	}
 

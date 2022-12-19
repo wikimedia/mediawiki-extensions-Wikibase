@@ -92,7 +92,7 @@ class ConceptUriSearchHelperTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $property1TermSearchResult->getMatchedTermType(), $results[0]->getMatchedTermType() );
 		$this->assertEquals(
 			array_merge( $property1TermSearchResult->getMetaData(), [
-				ConceptUriSearchHelper::CONCEPTURI_META_DATA_KEY => $property1ConceptUri
+				ConceptUriSearchHelper::CONCEPTURI_META_DATA_KEY => $property1ConceptUri,
 			] ),
 			$results[0]->getMetaData()
 		);
@@ -146,7 +146,7 @@ class ConceptUriSearchHelperTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $property1TermSearchResult->getMatchedTermType(), $results[0]->getMatchedTermType() );
 		$this->assertEquals(
 			array_merge( $property1TermSearchResult->getMetaData(), [
-				ConceptUriSearchHelper::CONCEPTURI_META_DATA_KEY => $property1ConceptUri
+				ConceptUriSearchHelper::CONCEPTURI_META_DATA_KEY => $property1ConceptUri,
 			] ),
 			$results[0]->getMetaData()
 		);

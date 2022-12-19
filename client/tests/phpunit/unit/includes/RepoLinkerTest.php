@@ -58,7 +58,7 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 				],
 				'articlePath' => '/wiki/$1',
 				'scriptPath' => '/w',
-			]
+			],
 		];
 	}
 
@@ -74,7 +74,7 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 						'',
 						'',
 						''
-					)
+					),
 				],
 				new SubEntityTypesMapper( [] )
 			),
@@ -100,7 +100,7 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 
 		return [
 			[ 'Special:EntityPage/Q388', $settings[0], $itemId ],
-			[ 'Special:EntityPage/P472', $settings[0], $propertyId ]
+			[ 'Special:EntityPage/P472', $settings[0], $propertyId ],
 		];
 	}
 
@@ -122,7 +122,7 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 			[ '//www.example.com/wiki/Kategorie:Drei%C3%9Figj%C3%A4hriger_Krieg', $settings[0],
 				'Kategorie:Dreißigjähriger_Krieg' ],
 			[ '//www.example.com/wiki/Why%3F_(American_band)', $settings[0],
-				'Why? (American band)' ]
+				'Why? (American band)' ],
 		];
 	}
 
@@ -144,7 +144,7 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 				$settings[1],
 				'//example.com/wiki/Special:Log/delete',
 				'delete',
-				[]
+				[],
 			],
 			[
 				'<a tabindex="1" class="extiw" href="http://www.example.com/w/index.php'
@@ -153,9 +153,9 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 				'http://www.example.com/w/index.php?title=Item%3AQ60&diff=prev&oldid=778',
 				'diff',
 				[
-					'tabindex' => 1
-				]
-			]
+					'tabindex' => 1,
+				],
+			],
 		];
 	}
 
@@ -176,20 +176,20 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 				'<a class="extiw wb-entity-link" href="//example.com/wiki/Special:EntityPage/Q730">Q730</a>',
 				$settings[1],
 				new ItemId( 'Q730' ),
-				[]
+				[],
 			],
 			[
 				'<a class="extiw wb-entity-link" href="http://www.example.com/wiki/Special:EntityPage/Q730">Q730</a>',
 				$settings[2],
 				new ItemId( 'Q730' ),
-				[]
+				[],
 			],
 			[
 				'<a class="extiw wb-entity-link kittens" href="http://www.example.com/wiki/Special:EntityPage/Q730">Q730</a>',
 				$settings[2],
 				new ItemId( 'Q730' ),
-				[ 'kittens' ]
-			]
+				[ 'kittens' ],
+			],
 		];
 	}
 
@@ -209,13 +209,13 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 			[
 				'//example.com/wiki/Special:EntityPage/Q730',
 				$settings[1],
-				new ItemId( 'Q730' )
+				new ItemId( 'Q730' ),
 			],
 			[
 				'http://www.example.com/wiki/Special:EntityPage/Q1234',
 				$settings[2],
-				new ItemId( 'Q1234' )
-			]
+				new ItemId( 'Q1234' ),
+			],
 		];
 	}
 
@@ -235,13 +235,13 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 			[
 				'http://www.example.com/entity/Q730',
 				$settings[0],
-				new ItemId( 'Q730' )
+				new ItemId( 'Q730' ),
 			],
 			[
 				'http://example.com/entity/Q1234',
 				$settings[1],
-				new ItemId( 'Q1234' )
-			]
+				new ItemId( 'Q1234' ),
+			],
 		];
 	}
 
@@ -294,12 +294,12 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 		return [
 			[
 				'http://www.example.com',
-				$settings[2]
+				$settings[2],
 			],
 			[
 				'//example.com',
-				$settings[1]
-			]
+				$settings[1],
+			],
 		];
 	}
 
@@ -318,8 +318,8 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 		return [
 			[
 				'http://www.example.com/w/api.php',
-				$settings[2]
-			]
+				$settings[2],
+			],
 		];
 	}
 
@@ -338,8 +338,8 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 		return [
 			[
 				'http://www.example.com/w/index.php',
-				$settings[2]
-			]
+				$settings[2],
+			],
 		];
 	}
 
@@ -363,8 +363,8 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 				[
 					'action' => 'query',
 					'prop' => 'revisions',
-					'titles' => 'Item:Q60'
-				]
+					'titles' => 'Item:Q60',
+				],
 			],
 			[
 				'http://www.example.com/w/api.php?action=query&prop=revisions&titles=Q60',
@@ -373,9 +373,9 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 				[
 					'action' => 'query',
 					'prop' => 'revisions',
-					'titles' => 'Q60'
-				]
-			]
+					'titles' => 'Q60',
+				],
+			],
 		];
 	}
 

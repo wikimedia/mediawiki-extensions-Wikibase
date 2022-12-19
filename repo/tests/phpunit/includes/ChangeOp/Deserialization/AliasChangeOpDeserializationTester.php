@@ -19,7 +19,7 @@ trait AliasChangeOpDeserializationTester {
 		$entity = $this->getEntity();
 		$alias = 'foo';
 		$changeOp = $this->getChangeOpDeserializer()->createEntityChangeOp( [
-			'aliases' => [ 'en' => [ 'language' => 'en', 'value' => $alias ] ]
+			'aliases' => [ 'en' => [ 'language' => 'en', 'value' => $alias ] ],
 		] );
 
 		$changeOp->apply( $entity, new Summary() );
@@ -30,7 +30,7 @@ trait AliasChangeOpDeserializationTester {
 		$entity = $this->getEntityWithExistingAliases();
 		$newAlias = 'foo';
 		$changeOp = $this->getChangeOpDeserializer()->createEntityChangeOp( [
-			'aliases' => [ 'en' => [ 'language' => 'en', 'value' => $newAlias ] ]
+			'aliases' => [ 'en' => [ 'language' => 'en', 'value' => $newAlias ] ],
 		] );
 
 		$changeOp->apply( $entity, new Summary() );
@@ -53,7 +53,7 @@ trait AliasChangeOpDeserializationTester {
 		$changeOp = $this->getChangeOpDeserializer()->createEntityChangeOp( [
 			'aliases' => array_map( function( $alias ) {
 				return [ 'language' => 'en', 'value' => $alias, 'remove' => '' ];
-			}, $existingAliases )
+			}, $existingAliases ),
 		] );
 
 		$changeOp->apply( $entity, new Summary() );
@@ -66,8 +66,8 @@ trait AliasChangeOpDeserializationTester {
 		$existingAliases = $entity->getAliasGroups()->getByLanguage( 'en' )->getAliases();
 		$changeOp = $this->getChangeOpDeserializer()->createEntityChangeOp( [
 			'aliases' => [
-				'en' => [ 'language' => 'en', 'value' => $newAlias, 'add' => '' ]
-			]
+				'en' => [ 'language' => 'en', 'value' => $newAlias, 'add' => '' ],
+			],
 		] );
 
 		$changeOp->apply( $entity, new Summary() );

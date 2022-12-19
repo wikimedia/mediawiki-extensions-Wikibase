@@ -33,7 +33,7 @@ class EntityTitleTextLookupTest extends ServiceWiringTestCase {
 			NewDatabaseEntitySource::havingName( 'itemSource' )
 				->withEntityNamespaceIdsAndSlots( [ 'item' => [ 'namespaceId' => 100, 'slot' => SlotRecord::MAIN ] ] )
 				->withConceptBaseUri( 'http://wikidorta.org/schmentity/' )
-				->build()
+				->build(),
 		];
 
 		$this->mockService(

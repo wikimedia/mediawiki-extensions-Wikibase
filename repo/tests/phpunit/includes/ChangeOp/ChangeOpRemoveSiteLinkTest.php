@@ -25,7 +25,7 @@ class ChangeOpRemoveSiteLinkTest extends TestCase {
 
 		$existingSiteLinks = [
 			$deSiteLink,
-			$plSiteLink
+			$plSiteLink,
 		];
 
 		$args = [];
@@ -34,7 +34,7 @@ class ChangeOpRemoveSiteLinkTest extends TestCase {
 		$args[] = [
 			$existingSiteLinks,
 			new ChangeOpRemoveSiteLink( 'dewiki' ),
-			[ $plSiteLink ]
+			[ $plSiteLink ],
 		];
 
 		return $args;

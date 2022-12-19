@@ -34,11 +34,11 @@ class LocalEntityTypesTest extends ServiceWiringTestCase {
 
 	public function testGetsLocalEntityTypes(): void {
 		$this->mockEntityTypes( [
-			'foo' => [ 'namespaceId' => 100, 'slot' => SlotRecord::MAIN ]
+			'foo' => [ 'namespaceId' => 100, 'slot' => SlotRecord::MAIN ],
 		],
 		[
 			'foo' => [],
-			'bar' => []
+			'bar' => [],
 		] );
 
 		$localEntityTypes = $this->getService( 'WikibaseRepo.LocalEntityTypes' );
@@ -49,21 +49,21 @@ class LocalEntityTypesTest extends ServiceWiringTestCase {
 
 	public function testGetsLocalSubEntityTypes(): void {
 		$this->mockEntityTypes( [
-			'foo' => [ 'namespaceId' => 100, 'slot' => SlotRecord::MAIN ]
+			'foo' => [ 'namespaceId' => 100, 'slot' => SlotRecord::MAIN ],
 		],
 		[
 			'foo' => [
 				EntityTypeDefinitions::SUB_ENTITY_TYPES => [
 					'bleep',
-					'bloop'
-				]
+					'bloop',
+				],
 			],
 			'bar' => [
 				EntityTypeDefinitions::SUB_ENTITY_TYPES => [
 					'schmeep',
-					'schmoop'
-				]
-			]
+					'schmoop',
+				],
+			],
 		] );
 
 		$localEntityTypes = $this->getService( 'WikibaseRepo.LocalEntityTypes' );

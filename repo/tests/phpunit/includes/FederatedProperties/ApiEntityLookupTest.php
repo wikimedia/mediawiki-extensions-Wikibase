@@ -170,7 +170,7 @@ class ApiEntityLookupTest extends TestCase {
 			'action' => 'wbgetentities',
 			'ids' => implode( '|', $ids ),
 			'props' => 'labels|descriptions|datatype',
-			'format' => 'json'
+			'format' => 'json',
 		];
 	}
 

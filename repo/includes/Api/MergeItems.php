@@ -235,7 +235,7 @@ class MergeItems extends ApiBase {
 			'token' => [
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => true,
-			]
+			],
 		];
 	}
 

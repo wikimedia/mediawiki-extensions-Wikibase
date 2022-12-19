@@ -57,7 +57,7 @@ class GetItemLabelsRouteHandler extends SimpleHandler {
 				new AuthenticationMiddleware(),
 				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
 					fn( RequestInterface $request ): string => $request->getPathParam( self::ITEM_ID_PATH_PARAM )
-				)
+				),
 			] ),
 			$responseFactory
 		);
@@ -94,7 +94,7 @@ class GetItemLabelsRouteHandler extends SimpleHandler {
 				self::PARAM_SOURCE => 'path',
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => true,
-			]
+			],
 		];
 	}
 

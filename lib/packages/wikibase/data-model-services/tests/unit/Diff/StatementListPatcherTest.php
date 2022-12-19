@@ -33,46 +33,46 @@ class StatementListPatcherTest extends TestCase {
 			[
 				new StatementList(),
 				new Diff(),
-				new StatementList()
+				new StatementList(),
 			],
 			[
 				new StatementList( $statement1 ),
 				new Diff(),
-				new StatementList( $statement1 )
+				new StatementList( $statement1 ),
 			],
 
 			// Add operations
 			[
 				new StatementList(),
 				new Diff( [ new DiffOpAdd( $statement1 ) ], true ),
-				new StatementList( $statement1 )
+				new StatementList( $statement1 ),
 			],
 			[
 				new StatementList(),
 				new Diff( [ new DiffOpAdd( $statement1 ) ], false ),
-				new StatementList( $statement1 )
+				new StatementList( $statement1 ),
 			],
 			[
 				new StatementList(),
 				new Diff( [ new DiffOpAdd( $statement1 ) ] ),
-				new StatementList( $statement1 )
+				new StatementList( $statement1 ),
 			],
 
 			// Remove operations
 			[
 				new StatementList( $statement1 ),
 				new Diff( [ new DiffOpRemove( $statement1 ) ], true ),
-				new StatementList()
+				new StatementList(),
 			],
 			[
 				new StatementList( $statement1 ),
 				new Diff( [ new DiffOpRemove( $statement1 ) ], false ),
-				new StatementList()
+				new StatementList(),
 			],
 			[
 				new StatementList( $statement1 ),
 				new Diff( [ new DiffOpRemove( $statement1 ) ] ),
-				new StatementList()
+				new StatementList(),
 			],
 
 			// Mixed operations
@@ -82,14 +82,14 @@ class StatementListPatcherTest extends TestCase {
 					new DiffOpRemove( $statement1 ),
 					new DiffOpAdd( $statement2 ),
 				] ),
-				new StatementList( $statement2 )
+				new StatementList( $statement2 ),
 			],
 			[
 				new StatementList( $statement1 ),
 				new Diff( [
 					new DiffOpChange( $statement1, $statement2 ),
 				] ),
-				new StatementList( $statement2 )
+				new StatementList( $statement2 ),
 			],
 		];
 	}
@@ -118,28 +118,28 @@ class StatementListPatcherTest extends TestCase {
 				new Diff( [
 					's1' => new DiffOpAdd( $statement1 ),
 				], true ),
-				[ 's1' ]
+				[ 's1' ],
 			],
 			'Simple non-associative add' => [
 				new StatementList(),
 				new Diff( [
 					's1' => new DiffOpAdd( $statement1 ),
 				], false ),
-				[ 's1' ]
+				[ 's1' ],
 			],
 			'Simple associative remove' => [
 				new StatementList( $statement1 ),
 				new Diff( [
 					's1' => new DiffOpRemove( $statement1 ),
 				], true ),
-				[]
+				[],
 			],
 			'Simple non-associative remove' => [
 				new StatementList( $statement1 ),
 				new Diff( [
 					's1' => new DiffOpRemove( $statement1 ),
 				], false ),
-				[]
+				[],
 			],
 
 			// Change operations
@@ -149,7 +149,7 @@ class StatementListPatcherTest extends TestCase {
 					's1' => new DiffOpRemove( $statement1 ),
 					's2' => new DiffOpAdd( $statement2 ),
 				] ),
-				[ 's2' ]
+				[ 's2' ],
 			],
 			'Add and remove' => [
 				new StatementList( $statement1 ),
@@ -157,63 +157,63 @@ class StatementListPatcherTest extends TestCase {
 					's2' => new DiffOpAdd( $statement2 ),
 					's1' => new DiffOpRemove( $statement1 ),
 				] ),
-				[ 's2' ]
+				[ 's2' ],
 			],
 			'Simple associative replace' => [
 				new StatementList( $statement1 ),
 				new Diff( [
 					's1' => new DiffOpChange( $statement1, $statement2 ),
 				], true ),
-				[ 's2' ]
+				[ 's2' ],
 			],
 			'Simple non-associative replace' => [
 				new StatementList( $statement1 ),
 				new Diff( [
 					's1' => new DiffOpChange( $statement1, $statement2 ),
 				], false ),
-				[ 's2' ]
+				[ 's2' ],
 			],
 			'Replacing first element retains order' => [
 				new StatementList( $statement1, $statement2 ),
 				new Diff( [
 					's1' => new DiffOpChange( $statement1, $statement3 ),
 				] ),
-				[ 's3', 's2' ]
+				[ 's3', 's2' ],
 			],
 			'Replacing last element retains order' => [
 				new StatementList( $statement1, $statement2 ),
 				new Diff( [
 					's2' => new DiffOpChange( $statement2, $statement3 ),
 				] ),
-				[ 's1', 's3' ]
+				[ 's1', 's3' ],
 			],
 
 			// No-ops
 			'Empty diff' => [
 				new StatementList( $statement1 ),
 				new Diff(),
-				[ 's1' ]
+				[ 's1' ],
 			],
 			'Adding existing element is no-op' => [
 				new StatementList( $statement1 ),
 				new Diff( [
 					's1' => new DiffOpAdd( $statement1 ),
 				] ),
-				[ 's1' ]
+				[ 's1' ],
 			],
 			'Removing non-existing element is no-op' => [
 				new StatementList( $statement1 ),
 				new Diff( [
 					's2' => new DiffOpRemove( $statement2 ),
 				] ),
-				[ 's1' ]
+				[ 's1' ],
 			],
 			'Replacing non-existing element is no-op' => [
 				new StatementList( $statement1 ),
 				new Diff( [
 					's2' => new DiffOpChange( $statement2, $statement3 ),
 				] ),
-				[ 's1' ]
+				[ 's1' ],
 			],
 		];
 	}
@@ -264,7 +264,7 @@ class StatementListPatcherTest extends TestCase {
 		$patch = new Diff( [
 			's0' => new DiffOpRemove( $statement0 ),
 			's2' => new DiffOpAdd( $statement2 ),
-			's3' => new DiffOpAdd( $statement3 )
+			's3' => new DiffOpAdd( $statement3 ),
 		] );
 
 		$source = new StatementList();

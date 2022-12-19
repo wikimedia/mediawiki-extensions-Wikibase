@@ -346,7 +346,7 @@ class EntityDataRequestHandler {
 		} else {
 			// anything goes
 			$accept = [
-				'*' => 0.1 // just to make extra sure
+				'*' => 0.1, // just to make extra sure
 			];
 
 			$defaultFormat = $this->entityDataFormatProvider->getFormatName( $this->defaultFormat );

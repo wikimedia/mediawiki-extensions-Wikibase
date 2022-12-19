@@ -116,7 +116,7 @@ class SpecialUnconnectedPages extends QueryPage {
 			'join_conds' => [
 				'page_props' => [
 					'INNER JOIN',
-					[ 'page_id = pp_page', 'pp_propname' => 'unexpectedUnconnectedPage' ]
+					[ 'page_id = pp_page', 'pp_propname' => 'unexpectedUnconnectedPage' ],
 				],
 			],
 		];
@@ -191,7 +191,7 @@ class SpecialUnconnectedPages extends QueryPage {
 		return Html::openElement(
 			'form',
 			[
-				'action' => $this->getPageTitle()->getLocalURL()
+				'action' => $this->getPageTitle()->getLocalURL(),
 			]
 		) .
 		$titleInputHtml .
@@ -200,7 +200,7 @@ class SpecialUnconnectedPages extends QueryPage {
 			'selected' => $ns === null ? '' : $ns,
 			'all' => '',
 			'exclude' => $excludeNamespaces,
-			'label' => $this->msg( 'namespace' )->text()
+			'label' => $this->msg( 'namespace' )->text(),
 		] ) . ' ' .
 		Html::submitButton(
 			$this->msg( 'wikibase-unconnectedpages-submit' )->text(),

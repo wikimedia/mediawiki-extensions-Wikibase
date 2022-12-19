@@ -30,7 +30,7 @@ class SpecialListFederatedPropertiesTest extends SpecialPageTestBase {
 	}
 
 	public function testExecute() {
-		[ $output, ] = $this->executeSpecialPage( '' );
+		[ $output ] = $this->executeSpecialPage( '' );
 
 		$this->assertIsString( $output );
 		$this->assertStringContainsString( 'href="http://my.test.url/w/index.php?title=Special:ListProperties"', $output );
@@ -39,7 +39,7 @@ class SpecialListFederatedPropertiesTest extends SpecialPageTestBase {
 	}
 
 	public function testExecute_withDataTypeId() {
-		[ $output, ] = $this->executeSpecialPage( 'string' );
+		[ $output ] = $this->executeSpecialPage( 'string' );
 
 		$this->assertIsString( $output );
 		$this->assertStringContainsString( 'href="http://my.test.url/w/index.php?title=Special:ListProperties/string"', $output );

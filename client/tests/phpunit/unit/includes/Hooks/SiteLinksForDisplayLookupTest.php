@@ -114,7 +114,7 @@ class SiteLinksForDisplayLookupTest extends \MediaWikiUnitTestCase {
 			->with( 'WikibaseClientSiteLinksForItem', [
 				$item,
 				$links->toArray(),
-				$usageAccumulator
+				$usageAccumulator,
 			] )
 			->willReturnCallback( function ( string $hook, array $args ) {
 				$links = &$args[1];

@@ -98,7 +98,7 @@ class StatementTest extends \PHPUnit\Framework\TestCase {
 
 	public function testSetAndGetQualifiers() {
 		$qualifiers = new SnakList( [
-			new PropertyValueSnak( new NumericPropertyId( 'P42' ), new StringValue( 'a' ) )
+			new PropertyValueSnak( new NumericPropertyId( 'P42' ), new StringValue( 'a' ) ),
 		] );
 
 		$statement = new Statement(
@@ -144,7 +144,7 @@ class StatementTest extends \PHPUnit\Framework\TestCase {
 				new PropertyValueSnak(
 					new NumericPropertyId( 'P1' ),
 					new StringValue( 'Qualifier Snak StringValue' )
-				)
+				),
 			] )
 		);
 		yield 'Statement with PropertyNoValueSnak, preferred rank, and Qualifier' => [ $statement ];
@@ -156,8 +156,8 @@ class StatementTest extends \PHPUnit\Framework\TestCase {
 					new PropertyValueSnak(
 						new NumericPropertyId( 'P2' ),
 						new StringValue( 'Reference Snak StringValue' )
-					)
-				] )
+					),
+				] ),
 			] )
 		);
 		yield 'Statement with PropertyNoValueSnak and Reference' => [ $statement ];
@@ -177,7 +177,7 @@ class StatementTest extends \PHPUnit\Framework\TestCase {
 		$references = new ReferenceList( [
 			new Reference( [
 				new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'a' ) ),
-			] )
+			] ),
 		] );
 
 		$statement->setReferences( $references );
@@ -368,7 +368,7 @@ class StatementTest extends \PHPUnit\Framework\TestCase {
 			'qualifiers not equal' => [ $statement, $statementWithoutQualifiers ],
 			'references not equal' => [ $statement, $statementWithoutReferences ],
 			'rank not equal' => [ $statement, $statementWithPreferredRank ],
-			'main snak not equal' => [ $statement, $statementMainSnakNotEqual ]
+			'main snak not equal' => [ $statement, $statementMainSnakNotEqual ],
 		];
 	}
 

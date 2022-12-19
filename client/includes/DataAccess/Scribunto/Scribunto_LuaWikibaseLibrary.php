@@ -439,7 +439,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		}
 
 		return [
-			$this->getLanguageIndependentLuaBindings()->getReferencedEntityId( $fromId, $propertyId, $toIds )
+			$this->getLanguageIndependentLuaBindings()->getReferencedEntityId( $fromId, $propertyId, $toIds ),
 		];
 	}
 
@@ -602,7 +602,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			return [
 				$this->getSnakSerializationRenderer(
 					DataAccessSnakFormatterFactory::TYPE_ESCAPED_PLAINTEXT
-				)->renderSnak( $snakSerialization )
+				)->renderSnak( $snakSerialization ),
 			];
 		} catch ( DeserializationException $e ) {
 			throw new ScribuntoException( 'wikibase-error-deserialize-error' );
@@ -622,7 +622,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			return [
 				$this->getSnakSerializationRenderer(
 					DataAccessSnakFormatterFactory::TYPE_RICH_WIKITEXT
-				)->renderSnak( $snakSerialization )
+				)->renderSnak( $snakSerialization ),
 			];
 		} catch ( DeserializationException $e ) {
 			throw new ScribuntoException( 'wikibase-error-deserialize-error' );
@@ -644,7 +644,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			return [
 				$this->getSnakSerializationRenderer(
 					DataAccessSnakFormatterFactory::TYPE_ESCAPED_PLAINTEXT
-				)->renderSnaks( $snaksSerialization )
+				)->renderSnaks( $snaksSerialization ),
 			];
 		} catch ( DeserializationException $e ) {
 			throw new ScribuntoException( 'wikibase-error-deserialize-error' );
@@ -666,7 +666,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			return [
 				$this->getSnakSerializationRenderer(
 					DataAccessSnakFormatterFactory::TYPE_RICH_WIKITEXT
-				)->renderSnaks( $snaksSerialization )
+				)->renderSnaks( $snaksSerialization ),
 			];
 		} catch ( DeserializationException $e ) {
 			throw new ScribuntoException( 'wikibase-error-deserialize-error' );

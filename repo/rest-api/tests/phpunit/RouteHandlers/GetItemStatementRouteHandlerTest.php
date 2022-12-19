@@ -51,7 +51,7 @@ class GetItemStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 				'pathParams' => [
 					GetItemStatementRouteHandler::ITEM_ID_PATH_PARAM => 'Q123',
 					GetItemStatementRouteHandler::STATEMENT_ID_PATH_PARAM => 'Q123$some-guid',
-				]
+				],
 			] )
 		);
 		$this->validateHandler( $routeHandler );

@@ -52,7 +52,7 @@ class RemoveQualifiersTest extends FederatedPropertiesApiTestCase {
 		$params = [
 			'action' => 'wbremovequalifiers',
 			'claim' => $statement->getGuid(),
-			'qualifiers' => implode( '|', $hashes )
+			'qualifiers' => implode( '|', $hashes ),
 		];
 
 		$this->setExpectedApiException( wfMessage( 'wikibase-federated-properties-federated-property-api-error-message' ) );
@@ -76,7 +76,7 @@ class RemoveQualifiersTest extends FederatedPropertiesApiTestCase {
 		[ $result ] = $this->doApiRequestWithToken( [
 			'action' => 'wbremovequalifiers',
 			'claim' => $statementWithQualifier->getGuid(),
-			'qualifiers' => $statementWithQualifier->getQualifiers()[0]->getHash()
+			'qualifiers' => $statementWithQualifier->getQualifiers()[0]->getHash(),
 		] );
 
 		$this->assertArrayHasKey( 'success', $result );

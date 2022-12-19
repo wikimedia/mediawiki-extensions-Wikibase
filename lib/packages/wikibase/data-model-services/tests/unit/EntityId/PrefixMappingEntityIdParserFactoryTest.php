@@ -19,7 +19,7 @@ class PrefixMappingEntityIdParserFactoryTest extends TestCase {
 	public function testGetIdParser_repositoryWithKnownMapping() {
 		$dummyParser = new ItemIdParser();
 		$idPrefixMapping = [
-			'foo' => [ 'd' => 'de', 'e' => 'en', ],
+			'foo' => [ 'd' => 'de', 'e' => 'en' ],
 		];
 		$factory = new PrefixMappingEntityIdParserFactory( $dummyParser, $idPrefixMapping );
 		$this->assertEquals(
@@ -31,7 +31,7 @@ class PrefixMappingEntityIdParserFactoryTest extends TestCase {
 	public function testGetIdParser_repositoryWithoutKnownMapping() {
 		$dummyParser = new ItemIdParser();
 		$idPrefixMapping = [
-			'foo' => [ 'd' => 'de', 'e' => 'en', ],
+			'foo' => [ 'd' => 'de', 'e' => 'en' ],
 		];
 		$factory = new PrefixMappingEntityIdParserFactory( $dummyParser, $idPrefixMapping );
 		$this->assertEquals(

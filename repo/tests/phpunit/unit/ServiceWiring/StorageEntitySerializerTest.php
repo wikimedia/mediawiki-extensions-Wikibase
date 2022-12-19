@@ -35,7 +35,7 @@ class StorageEntitySerializerTest extends ServiceWiringTestCase {
 		$entityTypeDefinitions = new EntityTypeDefinitions( [
 			'test' => [
 				EntityTypeDefinitions::STORAGE_SERIALIZER_FACTORY_CALLBACK => $callback,
-			]
+			],
 		] );
 		$this->mockService( 'WikibaseRepo.EntityTypeDefinitions', $entityTypeDefinitions );
 

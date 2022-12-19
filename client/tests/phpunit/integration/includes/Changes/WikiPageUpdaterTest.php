@@ -236,9 +236,9 @@ class WikiPageUpdaterTest extends MediaWikiIntegrationTestCase {
 		$updater->setRecentChangesBatchSize( 2 );
 
 		$updater->injectRCRecords(
-			[ $titleFoo, $titleBar, $titleCuzz, ],
+			[ $titleFoo, $titleBar, $titleCuzz ],
 			new EntityChange(),
-			[ 'rootJobTimestamp' => '20202211060708', 'rootJobSignature' => 'Kittens!', ]
+			[ 'rootJobTimestamp' => '20202211060708', 'rootJobSignature' => 'Kittens!' ]
 		);
 
 		// FIXME: Because of the hot fix for T177707 we expect only the first batch.

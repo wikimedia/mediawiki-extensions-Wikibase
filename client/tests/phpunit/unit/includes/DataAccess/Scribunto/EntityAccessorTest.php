@@ -130,7 +130,7 @@ class EntityAccessorTest extends \PHPUnit\Framework\TestCase {
 
 		return [
 			[ [ 'id', 'type', 'descriptions', 'labels', 'sitelinks', 'schemaVersion' ], $item, $entityLookup ],
-			[ [], $item2, $entityLookup ]
+			[ [], $item2, $entityLookup ],
 		];
 	}
 
@@ -159,26 +159,26 @@ class EntityAccessorTest extends \PHPUnit\Framework\TestCase {
 		return [
 			[
 				[ 'nyancat' => [ 0 => 'nyan', 1 => 'cat' ] ],
-				[ 'nyancat' => [ 1 => 'nyan', 2 => 'cat' ] ]
+				[ 'nyancat' => [ 1 => 'nyan', 2 => 'cat' ] ],
 			],
 			[
 				[ [ 'a', 'b' ] ],
-				[ [ 1 => 'a', 2 => 'b' ] ]
+				[ [ 1 => 'a', 2 => 'b' ] ],
 			],
 			[
 				// Nested arrays
 				[ [ 'a', 'b', [ 'c', 'd' ] ] ],
-				[ [ 1 => 'a', 2 => 'b', 3 => [ 1 => 'c', 2 => 'd' ] ] ]
+				[ [ 1 => 'a', 2 => 'b', 3 => [ 1 => 'c', 2 => 'd' ] ] ],
 			],
 			[
 				// Already 1-based
 				[ [ 1 => 'a', 4 => 'c', 3 => 'b' ] ],
-				[ [ 1 => 'a', 4 => 'c', 3 => 'b' ] ]
+				[ [ 1 => 'a', 4 => 'c', 3 => 'b' ] ],
 			],
 			[
 				// Associative array
 				[ [ 'foo' => 'bar', 1337 => 'Wikidata' ] ],
-				[ [ 'foo' => 'bar', 1337 => 'Wikidata' ] ]
+				[ [ 'foo' => 'bar', 1337 => 'Wikidata' ] ],
 			],
 		];
 	}
@@ -202,23 +202,23 @@ class EntityAccessorTest extends \PHPUnit\Framework\TestCase {
 			'Normal Statement, get best Statements' => [
 				$this->getItemWithStatementsClaimClientSerialization( false ),
 				false,
-				'best'
+				'best',
 			],
 			'Normal Statement, get all Statements' => [
 				$this->getItemWithStatementsClaimClientSerialization( false ),
 				false,
-				'all'
+				'all',
 			],
 			'Deprecated Statement, get best Statements' => [
 				[],
 				true,
-				'best'
+				'best',
 			],
 			'Deprecated Statement, get all Statements' => [
 				$this->getItemWithStatementsClaimClientSerialization( true ),
 				true,
-				'all'
-			]
+				'all',
+			],
 		];
 	}
 
@@ -315,12 +315,12 @@ class EntityAccessorTest extends \PHPUnit\Framework\TestCase {
 				'enwiki' => [
 					'site' => 'enwiki',
 					'title' => 'Berlin',
-					'badges' => [ 1 => 'Q333' ]
+					'badges' => [ 1 => 'Q333' ],
 				],
 				'zh_classicalwiki' => [
 					'site' => 'zh_classicalwiki',
 					'title' => 'User:Addshore',
-					'badges' => []
+					'badges' => [],
 				],
 			],
 			'schemaVersion' => 2,
@@ -364,7 +364,7 @@ class EntityAccessorTest extends \PHPUnit\Framework\TestCase {
 					],
 					'rank' => $statementDeprecated ? 'deprecated' : 'normal',
 					'qualifiers-order' => [
-						1 => 'P65'
+						1 => 'P65',
 					],
 					'references' => [
 						1 => [
@@ -375,31 +375,31 @@ class EntityAccessorTest extends \PHPUnit\Framework\TestCase {
 										'snaktype' => 'somevalue',
 										'property' => 'P65',
 										'datatype' => 'structured-cat',
-									]
+									],
 								],
 								'P68' => [
 									1 => [
 										'snaktype' => 'somevalue',
 										'property' => 'P68',
 										'datatype' => 'structured-cat',
-									]
+									],
 								],
 							],
 							'snaks-order' => [
 								1 => 'P65',
-								2 => 'P68'
+								2 => 'P68',
 							],
 						],
 					],
 				],
-			]
+			],
 		];
 	}
 
 	public function bestStatementsOnlyProvider() {
 		return [
 			[ 'best' ],
-			[ 'all' ]
+			[ 'all' ],
 		];
 	}
 
@@ -459,7 +459,7 @@ class EntityAccessorTest extends \PHPUnit\Framework\TestCase {
 			->with(
 				'Unresolved redirect encountered loading {prefixedEntityId}. This is typically cleaned up asynchronously.',
 				[
-					'prefixedEntityId' => $entityId->serialize()
+					'prefixedEntityId' => $entityId->serialize(),
 				]
 			);
 

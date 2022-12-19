@@ -56,7 +56,7 @@ class ClientStatementListSerializerTest extends \PHPUnit\Framework\TestCase {
 					'datatype' => '<DATATYPE>',
 				],
 				'type' => 'statement',
-				'rank' => 'normal'
+				'rank' => 'normal',
 			] ],
 		];
 		$this->assertSame( $expected, $serialization );

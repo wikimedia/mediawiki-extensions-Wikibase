@@ -696,13 +696,13 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 	public function providePageProperties() {
 		yield 'empty' => [
 			$this->newEmptyContent(),
-			[ 'wb-claims' => null ]
+			[ 'wb-claims' => null ],
 		];
 
 		$blankContent = $this->newEntityContent();
 		yield 'blank' => [
 			$blankContent,
-			[ 'wb-claims' => 0 ]
+			[ 'wb-claims' => 0 ],
 		];
 
 		$contentWithLabel = $this->newEntityContent();
@@ -713,7 +713,7 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 
 			yield 'labels' => [
 				$contentWithLabel,
-				[ 'wb-claims' => 0 ]
+				[ 'wb-claims' => 0 ],
 			];
 		}
 	}

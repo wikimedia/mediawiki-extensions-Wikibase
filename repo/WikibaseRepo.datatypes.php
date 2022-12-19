@@ -87,7 +87,7 @@ return call_user_func( function() {
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
 				$factory = WikibaseRepo::getDefaultValueFormatterBuilders();
 				return $factory->newUnDeserializableValueFormatter( $format, $options );
-			}
+			},
 		],
 		'PT:commonsMedia' => [
 			'expert-module' => 'jquery.valueview.experts.CommonsMediaType',
@@ -474,6 +474,6 @@ return call_user_func( function() {
 			'rdf-data-type' => function() {
 				return PropertySpecificComponentsRdfBuilder::OBJECT_PROPERTY;
 			},
-		]
+		],
 	];
 } );

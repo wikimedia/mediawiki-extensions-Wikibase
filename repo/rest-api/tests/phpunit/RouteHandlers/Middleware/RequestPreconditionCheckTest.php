@@ -94,7 +94,7 @@ class RequestPreconditionCheckTest extends TestCase {
 		yield 'If-Unmodified-Since - not modified since specified date' => [
 			'headers' => [ 'If-Unmodified-Since' => wfTimestamp( TS_RFC2822, '20201111070707' ) ],
 			'revisionMetadataResult' => LatestItemRevisionMetadataResult::concreteRevision( 42, '20201111070707' ),
-			'statusCodeToCheck' => null
+			'statusCodeToCheck' => null,
 		];
 	}
 

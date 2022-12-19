@@ -26,7 +26,7 @@ class TermInLangIdsResolverFactoryTest extends MediaWikiIntegrationTestCase {
 	private const MOCK_LANG_LABELS = [
 		'de' => 'Hallo Welt',
 		'en' => 'Hello World',
-		'he' => 'שלום עולם'
+		'he' => 'שלום עולם',
 	];
 
 	private const MOCK_TYPE_LABEL = 1;
@@ -53,23 +53,23 @@ class TermInLangIdsResolverFactoryTest extends MediaWikiIntegrationTestCase {
 
 		$this->db->insert( 'wbt_type', [
 			'wby_id' => self::MOCK_TYPE_LABEL,
-			'wby_name' => 'label'
+			'wby_name' => 'label',
 		] );
 
 		$this->termIds = array_map(
 			function ( string $lang, string $label ): int {
 				$this->db->insert( 'wbt_text', [
-					'wbx_text' => $label
+					'wbx_text' => $label,
 				] );
 
 				$this->db->insert( 'wbt_text_in_lang', [
 					'wbxl_language' => $lang,
-					'wbxl_text_id' => $this->db->insertId()
+					'wbxl_text_id' => $this->db->insertId(),
 				] );
 
 				$this->db->insert( 'wbt_term_in_lang', [
 					'wbtl_type_id' => self::MOCK_TYPE_LABEL,
-					'wbtl_text_in_lang_id' => $this->db->insertId()
+					'wbtl_text_in_lang_id' => $this->db->insertId(),
 				] );
 
 				return $this->db->insertId();
@@ -97,7 +97,7 @@ class TermInLangIdsResolverFactoryTest extends MediaWikiIntegrationTestCase {
 		$resolver = $factory->getResolverForEntitySource( $entitySource );
 
 		$this->assertSame( [
-			'label' => $expectedTerms
+			'label' => $expectedTerms,
 		], $resolver->resolveTermInLangIds( $this->termIds ) );
 	}
 }

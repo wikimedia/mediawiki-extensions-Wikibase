@@ -70,15 +70,15 @@ class MessageSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 		return [
 			[
 				new PropertyValueSnak( $id, new StringValue( 'string' ) ),
-				'parse'
+				'parse',
 			],
 			[
 				new PropertySomeValueSnak( $id ),
-				'<span class="wikibase-snakview-variation-somevaluesnak">parse</span>'
+				'<span class="wikibase-snakview-variation-somevaluesnak">parse</span>',
 			],
 			[
 				new PropertyNoValueSnak( $id ),
-				'<span class="wikibase-snakview-variation-novaluesnak">parse</span>'
+				'<span class="wikibase-snakview-variation-novaluesnak">parse</span>',
 			],
 		];
 	}

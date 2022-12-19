@@ -152,7 +152,7 @@ class SiteLinkTable implements SiteLinkStore {
 			$insert[] = [
 				'ips_item_id' => $item->getId()->getNumericId(),
 				'ips_site_id' => $siteLink->getSiteId(),
-				'ips_site_page' => $siteLink->getPageName()
+				'ips_site_page' => $siteLink->getPageName(),
 			];
 		}
 
@@ -191,7 +191,7 @@ class SiteLinkTable implements SiteLinkStore {
 			$this->table,
 			[
 				'ips_item_id' => $item->getId()->getNumericId(),
-				'ips_site_id' => $siteIds
+				'ips_site_id' => $siteIds,
 			],
 			__METHOD__
 		);
@@ -293,7 +293,7 @@ class SiteLinkTable implements SiteLinkStore {
 				__METHOD__ . ': querying for all links of one or more sites, this is expensive! (T276762)',
 				[
 					'siteIds' => $siteIds,
-					'exception' => new RuntimeException()
+					'exception' => new RuntimeException(),
 				]
 			);
 		}

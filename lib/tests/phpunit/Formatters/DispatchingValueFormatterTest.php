@@ -39,11 +39,11 @@ class DispatchingValueFormatterTest extends \PHPUnit\Framework\TestCase {
 		return [
 			'keys must be strings' => [
 				[ 17 => $stringFormatter ],
-				InvalidArgumentException::class
+				InvalidArgumentException::class,
 			],
 			'keys must have prefix' => [
 				[ 'foo' => $stringFormatter ],
-				InvalidArgumentException::class
+				InvalidArgumentException::class,
 			],
 		];
 	}
@@ -78,25 +78,25 @@ class DispatchingValueFormatterTest extends \PHPUnit\Framework\TestCase {
 			'match PT' => [
 				new EntityIdValue( new ItemId( 'Q13' ) ),
 				$formatters,
-				'VT:wikibase-entityid'
+				'VT:wikibase-entityid',
 			],
 
 			'match VT' => [
 				new StringValue( 'something' ),
 				$formatters,
-				'VT:string'
+				'VT:string',
 			],
 
 			'match PT (lazy)' => [
 				new EntityIdValue( new ItemId( 'Q13' ) ),
 				$lazyFormatters,
-				'VT:wikibase-entityid'
+				'VT:wikibase-entityid',
 			],
 
 			'match VT (lazy)' => [
 				new StringValue( 'something' ),
 				$lazyFormatters,
-				'VT:string'
+				'VT:string',
 			],
 		];
 	}
@@ -132,28 +132,28 @@ class DispatchingValueFormatterTest extends \PHPUnit\Framework\TestCase {
 				new StringValue( 'Foo.jpg' ),
 				'commonsMedia',
 				$formatters,
-				'PT:commonsMedia'
+				'PT:commonsMedia',
 			],
 
 			'match VT' => [
 				new StringValue( 'something' ),
 				'someStuff',
 				$formatters,
-				'VT:string'
+				'VT:string',
 			],
 
 			'match PT (lazy)' => [
 				new StringValue( 'Foo.jpg' ),
 				'commonsMedia',
 				$lazyFormatters,
-				'PT:commonsMedia'
+				'PT:commonsMedia',
 			],
 
 			'match VT (lazy)' => [
 				new StringValue( 'something' ),
 				'someStuff',
 				$lazyFormatters,
-				'VT:string'
+				'VT:string',
 			],
 		];
 	}

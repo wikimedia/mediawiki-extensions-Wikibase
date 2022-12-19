@@ -42,7 +42,7 @@ class EntityTestHelper {
 		'StringProp' => [
 			"new" => "property",
 			"data" => [
-				'datatype' => 'string'
+				'datatype' => 'string',
 			],
 		],
 		'Berlin' => [
@@ -102,7 +102,7 @@ class EntityTestHelper {
 						],
 					],
 				],
-			]
+			],
 		],
 		'London' => [
 			"new" => "item",
@@ -139,7 +139,7 @@ class EntityTestHelper {
 					[ "language" => "nb", "value" => "Hovedsted i England og Storbritannia." ],
 					[ "language" => "nn", "value" => "Hovudstad i England og Storbritannia." ],
 				],
-			]
+			],
 		],
 		'Oslo' => [
 			"new" => "item",
@@ -175,7 +175,7 @@ class EntityTestHelper {
 					[ "language" => "nb", "value" => "Hovedsted i Norge." ],
 					[ "language" => "nn", "value" => "Hovudstad i Noreg." ],
 				],
-			]
+			],
 		],
 		'Episkopi' => [
 			"new" => "item",
@@ -200,15 +200,15 @@ class EntityTestHelper {
 					[ "language" => "en", "value" => "The capital of Akrotiri and Dhekelia." ],
 					[ "language" => "nl", "value" => "Het bestuurlijke centrum van Akrotiri en Dhekelia." ],
 				],
-			]
+			],
 		],
 		'Osaka' => [
 			"new" => "item",
 			"data" => [
 				"labels" => [
-					[ "language" => "en", "value" => "Osaka" ]
-				]
-			]
+					[ "language" => "en", "value" => "Osaka" ],
+				],
+			],
 		],
 		'Leipzig' => [
 			"new" => "item",
@@ -220,7 +220,7 @@ class EntityTestHelper {
 					[ "language" => "de", "value" => "Stadt in Sachsen." ],
 					[ "language" => "en", "value" => "City in Saxony." ],
 				],
-			]
+			],
 		],
 		'Guangzhou' => [
 			"new" => "item",
@@ -234,7 +234,7 @@ class EntityTestHelper {
 					[ "language" => "en", "value" => "Capital of Guangdong." ],
 					[ "language" => "zh-hk", "value" => "廣東的省會。" ],
 				],
-			]
+			],
 		],
 
 	];
@@ -245,7 +245,7 @@ class EntityTestHelper {
 	 * @var string[] An associative array mapping placeholders to default values.
 	 */
 	public static $defaultPlaceholderValues = [
-		'%StringProp%' => 'P56'
+		'%StringProp%' => 'P56',
 	];
 
 	/**

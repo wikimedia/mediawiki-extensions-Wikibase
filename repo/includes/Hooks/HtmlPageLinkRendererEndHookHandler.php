@@ -320,7 +320,7 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 				return true;
 			}
 			$targetText = $target->getText();
-			[ $name, ] = $this->specialPageFactory->resolveAlias( $targetText );
+			[ $name ] = $this->specialPageFactory->resolveAlias( $targetText );
 			if ( $name === null ) {
 				return true;
 			}

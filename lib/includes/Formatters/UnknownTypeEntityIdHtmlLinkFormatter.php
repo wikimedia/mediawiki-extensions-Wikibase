@@ -60,7 +60,7 @@ class UnknownTypeEntityIdHtmlLinkFormatter implements EntityIdFormatter {
 	private function getAttributes( Title $title ) {
 		$attributes = [
 			'title' => $title->getPrefixedText(),
-			'href' => $title->isLocal() ? $title->getLocalURL() : $title->getFullURL()
+			'href' => $title->isLocal() ? $title->getLocalURL() : $title->getFullURL(),
 		];
 
 		if ( $title->isLocal() && $title->isRedirect() ) {

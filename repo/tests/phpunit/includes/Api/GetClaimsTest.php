@@ -180,7 +180,7 @@ class GetClaimsTest extends ApiTestCase {
 	public function testGetInvalidClaims( $guid ) {
 		$params = [
 			'action' => 'wbgetclaims',
-			'claim' => $guid
+			'claim' => $guid,
 		];
 
 		try {
@@ -195,7 +195,7 @@ class GetClaimsTest extends ApiTestCase {
 	public function invalidClaimProvider() {
 		return [
 			[ 'xyz' ],
-			[ 'x$y$z' ]
+			[ 'x$y$z' ],
 		];
 	}
 

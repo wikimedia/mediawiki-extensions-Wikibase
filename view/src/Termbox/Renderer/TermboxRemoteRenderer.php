@@ -75,7 +75,7 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 						'class' => __CLASS__,
 						'status' => $status,
 						'content' => $request->getContent(),
-						'headers' => $request->getResponseHeaders()
+						'headers' => $request->getResponseHeaders(),
 					]
 				);
 				$this->stats->increment( 'wikibase.view.TermboxRemoteRenderer.unsuccessfulResponse' );
@@ -90,7 +90,7 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 	private function reportFailureOfRequest( $message, Exception $exception = null ) {
 		$context = [
 			'errormessage' => $message,
-			'class' => __CLASS__
+			'class' => __CLASS__,
 		];
 		if ( $exception !== null ) {
 			$context[ 'exception' ] = $exception;

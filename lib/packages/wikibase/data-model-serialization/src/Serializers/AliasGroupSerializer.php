@@ -46,7 +46,7 @@ class AliasGroupSerializer implements Serializer {
 		foreach ( $aliasGroup->getAliases() as $value ) {
 			$result = [
 				'language' => $language,
-				'value' => $value
+				'value' => $value,
 			];
 
 			if ( $aliasGroup instanceof AliasGroupFallback ) {

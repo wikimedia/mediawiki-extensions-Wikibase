@@ -19,7 +19,7 @@ class DataTypeFactoryTest extends ServiceWiringTestCase {
 		$mockDataTypeIds = [
 			'some-property',
 			'another-thing',
-			'and-one-more'
+			'and-one-more',
 		];
 
 		$this->mockService( 'WikibaseClient.DataTypeDefinitions',

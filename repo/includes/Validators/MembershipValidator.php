@@ -71,7 +71,7 @@ class MembershipValidator implements ValueValidator {
 					null,
 					$this->errorCode,
 					[ $value ]
-				)
+				),
 			] );
 		}
 

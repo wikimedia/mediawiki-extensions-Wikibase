@@ -45,7 +45,7 @@ class WikibaseServicesTest extends ServiceWiringTestCase {
 				'',
 				'',
 				''
-			)
+			),
 		];
 
 		$this->mockService( 'WikibaseRepo.EntitySourceDefinitions',

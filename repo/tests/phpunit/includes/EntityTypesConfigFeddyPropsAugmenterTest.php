@@ -18,22 +18,22 @@ class EntityTypesConfigFeddyPropsAugmenterTest extends TestCase {
 		$augmenter = new EntityTypesConfigFeddyPropsAugmenter(
 			[
 				'property' => [
-					'some-service' => 'foo'
-				]
+					'some-service' => 'foo',
+				],
 			]
 		);
 		$entityTypeDefinitions = [
 			'property' => [
 				'some-service' => 'bar',
-				'some-other-service' => 'baz'
-			]
+				'some-other-service' => 'baz',
+			],
 		];
 
 		$entityTypeDefinitions = $augmenter->override( $entityTypeDefinitions );
 
 		$this->assertEquals( [ 'property' => [
 			'some-service' => 'foo',
-			'some-other-service' => 'baz'
+			'some-other-service' => 'baz',
 		] ], $entityTypeDefinitions );
 	}
 

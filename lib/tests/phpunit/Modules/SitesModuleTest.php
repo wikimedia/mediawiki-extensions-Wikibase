@@ -87,7 +87,7 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 				'"languageCode":null,"group":"allowedgroup"},' .
 				'"otherwiki":{"shortName":"otherwiki","name":"otherwiki","id":"otherwiki",' .
 				'"pageUrl":"//other.test/wiki/$1","apiUrl":"//other.test/w/api.php",' .
-				'"languageCode":null,"group":"othergroup"}}'
+				'"languageCode":null,"group":"othergroup"}}',
 			],
 			'single site in special group' => [
 				[ $site1 ],
@@ -96,13 +96,13 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 				'{"mywiki":{"shortName":"(wikibase-sitelinks-sitename-mywiki)",' .
 				'"name":"(wikibase-sitelinks-sitename-mywiki)",' .
 				'"id":"mywiki","pageUrl":"//my.test/wiki/$1",' .
-				'"apiUrl":"//my.test/w/api.php","languageCode":null,"group":"special"}}'
+				'"apiUrl":"//my.test/w/api.php","languageCode":null,"group":"special"}}',
 			],
 			'single non-MediaWiki site in sitelinkgroups' => [
 				[ $nonMwSite ],
 				[ 'allowedgroup' ],
 				[],
-				'[]'
+				'[]',
 			],
 		];
 	}
@@ -232,7 +232,7 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 			],
 			'single site with configured group' => [
 				$this->newSitesModule( [ $site ], [ 'allowedgroup' ] ),
-				$this->newSitesModule( [ $site ], [ 'allowedgroup' ] )
+				$this->newSitesModule( [ $site ], [ 'allowedgroup' ] ),
 			],
 		];
 	}
@@ -241,7 +241,7 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 		return new SitesModule(
 			new SettingsArray( [
 				'siteLinkGroups' => $groups,
-				'specialSiteLinkGroups' => $specials
+				'specialSiteLinkGroups' => $specials,
 			] ),
 			null,
 			new HashSiteStore( $sites ),
@@ -260,7 +260,7 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 				null,
 				new HashSiteStore( $sites ),
 				$cache,
-				new LanguageNameLookupFactory( MediaWikiServices::getInstance()->getLanguageNameUtils() )
+				new LanguageNameLookupFactory( MediaWikiServices::getInstance()->getLanguageNameUtils() ),
 			] )
 			->onlyMethods( [ 'makeScript' ] )
 			->getMock();

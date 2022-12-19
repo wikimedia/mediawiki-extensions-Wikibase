@@ -40,17 +40,17 @@ class LiteralValueRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			'plain string' => [
 				null, null,
 				$stringSnak,
-				'<http://www/Q1> <http://acme/testing> "Hello World" .'
+				'<http://www/Q1> <http://acme/testing> "Hello World" .',
 			],
 			'xsd decimal' => [
 				null, 'decimal',
 				$numberSnak,
-				'<http://www/Q1> <http://acme/testing> "15"^^<http://www.w3.org/2001/XMLSchema#decimal> .'
+				'<http://www/Q1> <http://acme/testing> "15"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
 			],
 			'wd id' => [
 				'xx', 'id',
 				$stringSnak,
-				'<http://www/Q1> <http://acme/testing> "Hello World"^^<http://xx/id> .'
+				'<http://www/Q1> <http://acme/testing> "Hello World"^^<http://xx/id> .',
 			],
 		];
 	}

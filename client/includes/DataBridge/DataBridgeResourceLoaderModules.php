@@ -78,7 +78,7 @@ class DataBridgeResourceLoaderModules {
 			[
 				'es6' => true,
 				'scripts' => [
-					'data-bridge.app.js'
+					'data-bridge.app.js',
 				],
 				'styles' => [
 					'css/data-bridge.app.css',

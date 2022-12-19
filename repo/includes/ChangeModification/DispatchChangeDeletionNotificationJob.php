@@ -115,7 +115,7 @@ class DispatchChangeDeletionNotificationJob extends DispatchChangeModificationNo
 			$this->logger->warning( __METHOD__ . ': processed {processed} rows but archived {archived} revisions for {entityId}', [
 				'processed' => $processed,
 				'archived' => $this->archivedRevisionCount - $staleRecords,
-				'entityId' => $entityId->getSerialization()
+				'entityId' => $entityId->getSerialization(),
 			] );
 		}
 

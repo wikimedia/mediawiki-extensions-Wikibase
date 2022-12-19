@@ -40,12 +40,12 @@ class ReplaceItemStatementErrorResponseTest extends TestCase {
 			new ValidationError( ItemIdValidator::CODE_INVALID, [ ItemIdValidator::CONTEXT_VALUE => 'X123' ] ),
 			ErrorResponse::INVALID_ITEM_ID,
 			'Not a valid item ID: X123',
-			null
+			null,
 		];
 
 		$context = [
 			StatementValidator::CONTEXT_FIELD_NAME => 'some-field',
-			StatementValidator::CONTEXT_FIELD_VALUE => 'foo'
+			StatementValidator::CONTEXT_FIELD_VALUE => 'foo',
 		];
 		yield 'from invalid statement field' => [
 			new ValidationError( StatementValidator::CODE_INVALID_FIELD, $context ),
@@ -53,8 +53,8 @@ class ReplaceItemStatementErrorResponseTest extends TestCase {
 			'Invalid input for some-field',
 			[
 				'path' => $context[StatementValidator::CONTEXT_FIELD_NAME],
-				'value' => $context[StatementValidator::CONTEXT_FIELD_VALUE]
-			]
+				'value' => $context[StatementValidator::CONTEXT_FIELD_VALUE],
+			],
 		];
 
 		$context = [ StatementValidator::CONTEXT_FIELD_NAME => 'some-field' ];
@@ -62,7 +62,7 @@ class ReplaceItemStatementErrorResponseTest extends TestCase {
 			new ValidationError( StatementValidator::CODE_MISSING_FIELD, $context ),
 			ErrorResponse::STATEMENT_DATA_MISSING_FIELD,
 			'Mandatory field missing in the statement data: some-field',
-			[ 'path' => $context[StatementValidator::CONTEXT_FIELD_NAME] ]
+			[ 'path' => $context[StatementValidator::CONTEXT_FIELD_NAME] ],
 		];
 
 		yield 'from edit metadata comment too long' => [
@@ -72,7 +72,7 @@ class ReplaceItemStatementErrorResponseTest extends TestCase {
 			),
 			ErrorResponse::COMMENT_TOO_LONG,
 			'Comment must not be longer than a million characters.',
-			null
+			null,
 		];
 
 		yield 'from invalid edit tag' => [
@@ -82,7 +82,7 @@ class ReplaceItemStatementErrorResponseTest extends TestCase {
 			),
 			ErrorResponse::INVALID_EDIT_TAG,
 			'Invalid MediaWiki tag: not-a-valid-tag',
-			null
+			null,
 		];
 	}
 

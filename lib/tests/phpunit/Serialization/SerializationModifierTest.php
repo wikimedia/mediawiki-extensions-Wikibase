@@ -46,13 +46,13 @@ class SerializationModifierTest extends \PHPUnit\Framework\TestCase {
 					'foo' => [
 						[ 'a' => 'a' ],
 						[ 'b' => 'b' ],
-					]
+					],
 				],
 				[
 					'foo' => [
 						[ 'removed' => true, 'new' => 'new' ],
 						[ 'b' => 'b', 'new' => 'new' ],
-					]
+					],
 				],
 			],
 			[

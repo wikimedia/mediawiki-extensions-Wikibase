@@ -37,39 +37,39 @@ class UsageTrackingLanguageFallbackLabelDescriptionLookupTest extends \PHPUnit\F
 			'No term found -> all languages tracked' => [
 				[ "Q2#$usagePrefix.a", "Q2#$usagePrefix.b", "Q2#$usagePrefix.c" ],
 				[ 'a', 'b', 'c' ],
-				null
+				null,
 			],
 			'allowDataAccessInUserLanguage' => [
 				[ "Q2#$usagePrefix" ],
 				[ 'a', 'b', 'c' ],
 				null,
-				true
+				true,
 			],
 			'Only language in chain used' => [
 				[ "Q2#$usagePrefix.en" ],
 				[ 'en' ],
-				new TermFallback( 'en', 'blah blah blah', 'en', null )
+				new TermFallback( 'en', 'blah blah blah', 'en', null ),
 			],
 			'One language in chain used' => [
 				[ "Q2#$usagePrefix.de", "Q2#$usagePrefix.es" ],
 				[ 'de', 'es', 'en' ],
-				new TermFallback( 'de', 'blah blah blah', 'es', null )
+				new TermFallback( 'de', 'blah blah blah', 'es', null ),
 			],
 			'Last language in chain used' => [
 				[ "Q2#$usagePrefix.de", "Q2#$usagePrefix.es", "Q2#$usagePrefix.ru" ],
 				[ 'de', 'es', 'ru' ],
-				new TermFallback( 'de', 'blah blah blah', 'ru', null )
+				new TermFallback( 'de', 'blah blah blah', 'ru', null ),
 			],
 			'Transliteration' => [
 				[
 					"Q2#$usagePrefix.foo",
 					"Q2#$usagePrefix.ku",
 					"Q2#$usagePrefix.ku-arab",
-					"Q2#$usagePrefix.ku-latn"
+					"Q2#$usagePrefix.ku-latn",
 				],
 				[ 'foo', 'ku', 'ku-arab', 'ku-latn', 'en' ],
-				new TermFallback( 'ku', 'blah blah blah', 'ku', 'ku-latn' )
-			]
+				new TermFallback( 'ku', 'blah blah blah', 'ku', 'ku-latn' ),
+			],
 		];
 	}
 

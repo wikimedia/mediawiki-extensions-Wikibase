@@ -28,7 +28,7 @@ class UnitConverterTest extends ServiceWiringTestCase {
 			[
 				'unitStorage' => [
 					'class' => '\\Wikibase\\Lib\\Units\\JsonUnitStorage',
-					'args' => [ 'somedir' ]
+					'args' => [ 'somedir' ],
 				],
 			]
 		);

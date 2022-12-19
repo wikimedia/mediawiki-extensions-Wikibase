@@ -80,7 +80,7 @@ class ItemChangeTest extends EntityChangeTest {
 				'links' => new DiffOpChange(
 					[ 'foowiki' => 'X', 'barwiki' => 'Y' ],
 					[ 'barwiki' => 'Y', 'foowiki' => 'X' ]
-				)
+				),
 			] );
 
 			// make sure we got the right key for sitelinks

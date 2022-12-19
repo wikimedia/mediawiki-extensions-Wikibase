@@ -107,7 +107,7 @@ class SiteLinkTest extends \PHPUnit\Framework\TestCase {
 		$argLists[] = [ $badges, $expected ];
 
 		$badges = [
-			new ItemId( 'Q149' )
+			new ItemId( 'Q149' ),
 		];
 		$expected = array_values( $badges );
 
@@ -117,7 +117,7 @@ class SiteLinkTest extends \PHPUnit\Framework\TestCase {
 		$badges = [
 			new ItemId( 'Q36' ),
 			new ItemId( 'Q149' ),
-			new ItemId( 'Q7' )
+			new ItemId( 'Q7' ),
 		];
 
 		$key = array_search(

@@ -42,7 +42,7 @@ class StatementSerializationRoundtripTest extends TestCase {
 		$statements = [];
 
 		$statements[] = [
-			new Statement( new PropertyNoValueSnak( 42 ) )
+			new Statement( new PropertyNoValueSnak( 42 ) ),
 		];
 
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
@@ -65,7 +65,7 @@ class StatementSerializationRoundtripTest extends TestCase {
 		$statement->setQualifiers( new SnakList( [
 			new PropertySomeValueSnak( 42 ),
 			new PropertyNoValueSnak( 42 ),
-			new PropertySomeValueSnak( 24 )
+			new PropertySomeValueSnak( 24 ),
 		] ) );
 		$statements[] = [ $statement ];
 
@@ -74,8 +74,8 @@ class StatementSerializationRoundtripTest extends TestCase {
 			new Reference( [
 				new PropertySomeValueSnak( 42 ),
 				new PropertyNoValueSnak( 42 ),
-				new PropertySomeValueSnak( 24 )
-			] )
+				new PropertySomeValueSnak( 24 ),
+			] ),
 		] ) );
 		$statements[] = [ $statement ];
 

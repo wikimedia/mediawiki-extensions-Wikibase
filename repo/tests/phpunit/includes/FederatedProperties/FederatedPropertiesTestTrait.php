@@ -44,7 +44,7 @@ trait FederatedPropertiesTestTrait {
 				'interwikiPrefix' => 'wikidatabeta',
 				'rdfNodeNamespacePrefix' => 'fpwd',
 				'rdfPredicateNamespacePrefix' => 'fpwd',
-				'type' => 'api'
+				'type' => 'api',
 			],
 		] );
 		$this->setWbSetting( 'localEntitySourceName', 'local' );

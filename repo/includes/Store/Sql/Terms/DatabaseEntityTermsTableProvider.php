@@ -58,16 +58,16 @@ class DatabaseEntityTermsTableProvider {
 		$joinConditions = [
 			"wbt_term_in_lang" => [
 				'JOIN',
-				"{$this->entityTermsJoinColumn}=wbtl_id"
+				"{$this->entityTermsJoinColumn}=wbtl_id",
 			],
 			"wbt_text_in_lang" => [
 				'JOIN',
-				"wbtl_text_in_lang_id=wbxl_id"
+				"wbtl_text_in_lang_id=wbxl_id",
 			],
 			"wbt_text" => [
 				'JOIN',
-				"wbxl_text_id=wbx_id"
-			]
+				"wbxl_text_id=wbx_id",
+			],
 		];
 
 		return [ $table, $joinConditions, $this->entityIdColumn ];

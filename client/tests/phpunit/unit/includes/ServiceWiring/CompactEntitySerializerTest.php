@@ -34,7 +34,7 @@ class CompactEntitySerializerTest extends ServiceWiringTestCase {
 		$entityTypeDefinitions = new EntityTypeDefinitions( [
 			'test' => [
 				EntityTypeDefinitions::SERIALIZER_FACTORY_CALLBACK => $callback,
-			]
+			],
 		] );
 		$this->mockService( 'WikibaseClient.EntityTypeDefinitions', $entityTypeDefinitions );
 

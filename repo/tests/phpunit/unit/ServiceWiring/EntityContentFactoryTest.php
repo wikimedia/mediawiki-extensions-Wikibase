@@ -19,8 +19,8 @@ class EntityContentFactoryTest extends ServiceWiringTestCase {
 	public function testConstruction(): void {
 		$mockEntityTypeDefs = new EntityTypeDefinitions( [
 			'something' => [
-				EntityTypeDefinitions::CONTENT_MODEL_ID => 'some-item'
-			]
+				EntityTypeDefinitions::CONTENT_MODEL_ID => 'some-item',
+			],
 		] );
 
 		$this->mockService(

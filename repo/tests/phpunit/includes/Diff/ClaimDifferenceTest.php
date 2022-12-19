@@ -24,7 +24,7 @@ class ClaimDifferenceTest extends MediaWikiIntegrationTestCase {
 
 	public function testGetReferenceChanges() {
 		$expected = new Diff( [
-			new DiffOpAdd( new Reference() )
+			new DiffOpAdd( new Reference() ),
 		], false );
 
 		$difference = new ClaimDifference( null, null, $expected );
@@ -37,7 +37,7 @@ class ClaimDifferenceTest extends MediaWikiIntegrationTestCase {
 
 	public function testGetQualifierChanges() {
 		$expected = new Diff( [
-			new DiffOpAdd( new PropertyNoValueSnak( 42 ) )
+			new DiffOpAdd( new PropertyNoValueSnak( 42 ) ),
 		], false );
 
 		$difference = new ClaimDifference( null, $expected );

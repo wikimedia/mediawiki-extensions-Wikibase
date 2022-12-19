@@ -64,7 +64,7 @@ class EntityUsageTest extends \PHPUnit\Framework\TestCase {
 		$expected = [
 			'entityId' => $id->getSerialization(),
 			'aspect' => $aspect,
-			'modifier' => null
+			'modifier' => null,
 		];
 
 		$usage = new EntityUsage( $id, $aspect );

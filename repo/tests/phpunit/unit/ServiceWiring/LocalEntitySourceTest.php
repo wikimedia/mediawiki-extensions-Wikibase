@@ -38,7 +38,7 @@ class LocalEntitySourceTest extends ServiceWiringTestCase {
 				'wd',
 				'wdt',
 				'localwiki'
-			)
+			),
 		];
 		$this->mockService( 'WikibaseRepo.Settings',
 			new SettingsArray( $settingsArray ) );

@@ -100,7 +100,7 @@ class CommonsInlineImageFormatter implements ValueFormatter {
 
 		$transformOptions = [
 			'width' => $this->getThumbWidth( $this->parserOptions->getThumbSize() ),
-			'height' => 1000
+			'height' => 1000,
 		];
 
 		$file = $this->repoGroup->findFile( $fileName );
@@ -129,7 +129,7 @@ class CommonsInlineImageFormatter implements ValueFormatter {
 	private function wrapThumb( Title $title, $thumbHtml ) {
 		$attributes = [
 			'class' => 'image',
-			'href' => 'https://commons.wikimedia.org/wiki/File:' . $title->getPartialURL()
+			'href' => 'https://commons.wikimedia.org/wiki/File:' . $title->getPartialURL(),
 		];
 
 		return Html::rawElement(
@@ -146,7 +146,7 @@ class CommonsInlineImageFormatter implements ValueFormatter {
 	 */
 	private function getCaptionHtml( Title $title, $file = null ) {
 		$attributes = [
-			'href' => 'https://commons.wikimedia.org/wiki/File:' . $title->getPartialURL()
+			'href' => 'https://commons.wikimedia.org/wiki/File:' . $title->getPartialURL(),
 		];
 		$innerHtml = Html::element( 'a', $attributes, $title->getText() );
 
@@ -168,7 +168,7 @@ class CommonsInlineImageFormatter implements ValueFormatter {
 	private function getFileMetaHtml( File $file ) {
 		return $this->language->semicolonList( [
 			$file->getDimensionsString(),
-			htmlspecialchars( $this->language->formatSize( $file->getSize() ) )
+			htmlspecialchars( $this->language->formatSize( $file->getSize() ) ),
 		] );
 	}
 

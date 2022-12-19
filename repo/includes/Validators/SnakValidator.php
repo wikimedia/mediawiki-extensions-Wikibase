@@ -153,7 +153,7 @@ class SnakValidator implements ValueValidator {
 			}
 		} catch ( PropertyDataTypeLookupException $ex ) {
 			$result = Result::newError( [
-				Error::newError( "Property $propertyId not found!", null, 'no-such-property', [ $propertyId ] )
+				Error::newError( "Property $propertyId not found!", null, 'no-such-property', [ $propertyId ] ),
 			] );
 		}
 

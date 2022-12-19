@@ -42,7 +42,7 @@ class UpdateRepoOnDeleteJobTest extends MediaWikiIntegrationTestCase {
 			Title::newMainPage(),
 			[
 				'siteId' => 'SiteID',
-				'title' => 'Test'
+				'title' => 'Test',
 			]
 		);
 
@@ -111,7 +111,7 @@ class UpdateRepoOnDeleteJobTest extends MediaWikiIntegrationTestCase {
 			// The title on client still exists, so don't unlink
 			[ false, true, 'Delete me' ],
 			// The title in the repo item is not the one we want to unlink, don't unlink
-			[ false, false, 'Something changed' ]
+			[ false, false, 'Something changed' ],
 		];
 	}
 
@@ -135,7 +135,7 @@ class UpdateRepoOnDeleteJobTest extends MediaWikiIntegrationTestCase {
 			'siteId' => 'enwiki',
 			'entityId' => $item->getId()->getSerialization(),
 			'title' => $oldTitle,
-			'user' => $user->getName()
+			'user' => $user->getName(),
 		];
 		$tags = [ 'tag 1', 'tag 2' ];
 

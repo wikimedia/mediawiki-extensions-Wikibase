@@ -22,7 +22,7 @@ class DataAccessSettingsTest extends ServiceWiringTestCase {
 		$this->mockService(
 			'WikibaseClient.Settings',
 			new SettingsArray( [
-				'maxSerializedEntitySize' => $mockSizeInKb
+				'maxSerializedEntitySize' => $mockSizeInKb,
 			] )
 		);
 

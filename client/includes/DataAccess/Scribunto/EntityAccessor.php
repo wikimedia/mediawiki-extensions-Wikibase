@@ -256,7 +256,7 @@ class EntityAccessor {
 	private function logPossibleDoubleRedirect( $prefixedEntityId ) {
 		$this->logger->info( 'Unresolved redirect encountered loading {prefixedEntityId}. This is typically cleaned up asynchronously.',
 			[
-				'prefixedEntityId' => $prefixedEntityId
+				'prefixedEntityId' => $prefixedEntityId,
 			]
 		);
 	}

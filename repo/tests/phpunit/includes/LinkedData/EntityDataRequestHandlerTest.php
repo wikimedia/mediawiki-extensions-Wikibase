@@ -140,7 +140,7 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 						'wd',
 						'',
 						''
-					)
+					),
 				], new SubEntityTypesMapper( [] ) ),
 				[ 'test' => 'wd' ],
 				[ 'test' => '' ]
@@ -337,17 +337,17 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 			'No Accept Header' => [
 				$q13,
 				[], // headers
-				'Q13.json'
+				'Q13.json',
 			],
 			'Accept Header without weights' => [
 				$q13,
 				[ 'ACCEPT' => '*/*, text/html, text/x-wiki' ], // headers
-				'Q13'
+				'Q13',
 			],
 			'Accept Header with weights' => [
 				$q13,
 				[ 'ACCEPT' => 'text/*; q=0.5, text/json; q=0.7, application/rdf+xml; q=0.8' ], // headers
-				'Q13.rdf'
+				'Q13.rdf',
 			],
 		];
 	}

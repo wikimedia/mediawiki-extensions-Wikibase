@@ -135,7 +135,7 @@ class WikibaseContentLanguages {
 					'yas', // T263946
 					'yat', // T263946
 					'yav', // T263946
-					'ybb' // T263946
+					'ybb', // T263946
 				]
 			)
 		);

@@ -275,7 +275,7 @@ class DatabaseTermsCollisionDetector implements TermsCollisionDetector {
 			$table,
 			$joinConditions,
 			$this->getTermInLanguageCondition( $typeId, $lang, $text ),
-			$entityIdColumn
+			$entityIdColumn,
 		];
 	}
 
@@ -308,7 +308,7 @@ class DatabaseTermsCollisionDetector implements TermsCollisionDetector {
 		return [
 			"wbtl_type_id" => $typeId,
 			"wbxl_language" => $language,
-			"wbx_text" => $text
+			"wbx_text" => $text,
 		];
 	}
 

@@ -182,7 +182,7 @@ class InjectRCRecordsJobTest extends TestCase {
 						'object_id' => 'Q7',
 						'type' => 'wikibase-item~change',
 						'Test' => 'Kitten',
-						'info' => []
+						'info' => [],
 					]
 				),
 			],
@@ -206,9 +206,9 @@ class InjectRCRecordsJobTest extends TestCase {
 							'compactDiff' => $diff,
 							'stuff' => 'Fun Stuff',
 							'metadata' => [
-								'foo' => 'Kitten'
-							]
-						]
+								'foo' => 'Kitten',
+							],
+						],
 					]
 				),
 			],
@@ -224,10 +224,10 @@ class InjectRCRecordsJobTest extends TestCase {
 							'compactDiff' => $diff,
 							'change-ids' => [ 101, 102 ],
 							'changes' => [ $child1, $child2 ],
-						]
+						],
 					]
 				),
-				[ $child1, $child2 ]
+				[ $child1, $child2 ],
 			],
 		];
 	}
@@ -299,7 +299,7 @@ class InjectRCRecordsJobTest extends TestCase {
 				'object_id' => 'Q7',
 				'type' => 'wikibase-item~change',
 				'Test' => 'Kitten',
-				'info' => []
+				'info' => [],
 			]
 		);
 		$title = $this->getTitleMock( 'Foo', 21 );
@@ -308,7 +308,7 @@ class InjectRCRecordsJobTest extends TestCase {
 			'job spec using change field data' => [
 				[
 					'change' => $change->getFields(),
-					'pages' => $this->getPageSpecData( [ $title ] )
+					'pages' => $this->getPageSpecData( [ $title ] ),
 				],
 				$change,
 				[ $title ],
@@ -402,8 +402,8 @@ class InjectRCRecordsJobTest extends TestCase {
 		$params = [
 			'change' => $change->getFields(),
 			'pages' => [
-				21 => [ 0, 'Foo' ]
-			]
+				21 => [ 0, 'Foo' ],
+			],
 		];
 
 		$dbWrite = $this->createMock( IDatabase::class );

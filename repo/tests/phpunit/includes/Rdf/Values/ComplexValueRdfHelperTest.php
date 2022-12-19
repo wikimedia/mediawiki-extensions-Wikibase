@@ -102,7 +102,7 @@ class ComplexValueRdfHelperTest extends \PHPUnit\Framework\TestCase {
 		$expected = [
 			'<http://www/Q1> <http://acme/statement/value/testing> <http://acme/value/e93b68fef814eb52e813bb72e6867432> .',
 			'<http://www/Q2> <http://acme/statement/value/testing> <http://acme/value/e93b68fef814eb52e813bb72e6867432> .',
-			'<http://www/Q3> <http://acme/statement/value/testing> <http://acme/someNamespace/e93b68fef814eb52e813bb72e6867432> .'
+			'<http://www/Q3> <http://acme/statement/value/testing> <http://acme/someNamespace/e93b68fef814eb52e813bb72e6867432> .',
 		];
 
 		$this->helper->assertNTriplesEquals( $expected, $snakWriter->drain() );

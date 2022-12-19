@@ -136,7 +136,7 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 			'parent_id' => 3,
 			'page_id' => 4,
 			'user_text' => 'RecentChangeFactoryTestUser',
-			'comment' => 'Actual Comment'
+			'comment' => 'Actual Comment',
 		];
 
 		$emptyDiff = new ItemDiff();
@@ -225,28 +225,28 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 				array_merge( $changeAttr, $targetAttr ),
 				$change,
 				$target,
-				null
+				null,
 			],
 
 			'use prepared' => [
 				array_merge( $preparedAttr, $targetAttr ),
 				$change,
 				$target,
-				$preparedAttr
+				$preparedAttr,
 			],
 
 			'sitelink change, affects current page' => [
 				$siteLinkChangeExpected_currentPage,
 				$siteLinkChange,
 				$target,
-				$preparedAttr
+				$preparedAttr,
 			],
 
 			'sitelink change, does not affect current page' => [
 				$siteLinkChangeExpected_otherPage,
 				$siteLinkChange,
 				$this->newTitle( NS_MAIN, 'RecentChangeFactoryTest-OtherPage', 7, 77, 210 ),
-				$preparedAttr
+				$preparedAttr,
 			],
 
 			// 'composite change' => [],
@@ -311,7 +311,7 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 			'parent_id' => 3,
 			'bot' => false,
 			'user_text' => 'RecentChangeFactoryTestUser',
-			'comment' => 'Actual Comment'
+			'comment' => 'Actual Comment',
 		], $metadata );
 
 		if ( isset( $fields['info']['changes'] ) ) {
@@ -377,19 +377,19 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 		//   page disconnected by deletion
 
 		$linksEmpty = [
-			'links' => []
+			'links' => [],
 		];
 
 		$linksDewikiDummy = [
 			'links' => [
-				'dewiki' => [ 'name' => 'Dummy' ]
-			]
+				'dewiki' => [ 'name' => 'Dummy' ],
+			],
 		];
 
 		$linksDewikiBummy = [
 			'links' => [
-				'dewiki' => [ 'name' => 'Bummy' ]
-			]
+				'dewiki' => [ 'name' => 'Bummy' ],
+			],
 		];
 
 		return [
@@ -400,7 +400,7 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 				[ 'user_id' => 1 ],
 				[
 					'comment' => '/* set-de-label:1| */ bla bla',
-				]
+				],
 			],
 			'sitelink update' => [
 				'(wikibase-comment-sitelink-change: dewiki:Dummy, dewiki:Bummy)',
@@ -409,7 +409,7 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 				[ 'user_id' => 1 ],
 				[
 					'comment' => '/* IGNORE-KITTENS:1| */ SILLY KITTENS',
-				]
+				],
 			],
 			'sitelink added' => [
 				'(wikibase-comment-sitelink-add: dewiki:Bummy)',
@@ -418,7 +418,7 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 				[ 'user_id' => 1 ],
 				[
 					'comment' => '/* IGNORE-KITTENS:1| */ SILLY KITTENS',
-				]
+				],
 			],
 			'sitelink removed' => [
 				'(wikibase-comment-sitelink-remove: dewiki:Dummy)',
@@ -427,7 +427,7 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 				[ 'user_id' => 1 ],
 				[
 					'comment' => '/* IGNORE-KITTENS:1| */ SILLY KITTENS',
-				]
+				],
 			],
 			'composite change' => [
 				'/* set-de-description:1| */ Fuh(semicolon-separator)/* set-en-description:1| */ Foo',
@@ -450,7 +450,7 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 					] ],
 					'user_id' => 1,
 				],
-				[]
+				[],
 			],
 		];
 	}
@@ -461,7 +461,7 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 			new ItemDiff(),
 			[],
 			[
-				'comment' => ''  // repo sent no comment
+				'comment' => '',  // repo sent no comment
 			]
 		);
 

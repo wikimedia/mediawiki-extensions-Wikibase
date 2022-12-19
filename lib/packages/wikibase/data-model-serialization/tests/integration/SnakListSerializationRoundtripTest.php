@@ -39,25 +39,25 @@ class SnakListSerializationRoundtripTest extends TestCase {
 	public function snakListProvider() {
 		return [
 			[
-				new SnakList( [] )
-			],
-			[
-				new SnakList( [
-					new PropertyNoValueSnak( 42 )
-				] )
+				new SnakList( [] ),
 			],
 			[
 				new SnakList( [
 					new PropertyNoValueSnak( 42 ),
-					new PropertyNoValueSnak( 43 )
-				] )
+				] ),
+			],
+			[
+				new SnakList( [
+					new PropertyNoValueSnak( 42 ),
+					new PropertyNoValueSnak( 43 ),
+				] ),
 			],
 			[
 				new SnakList( [
 					new PropertyNoValueSnak( 42 ),
 					new PropertySomeValueSnak( 42 ),
 					new PropertyNoValueSnak( 43 ),
-				] )
+				] ),
 			],
 		];
 	}

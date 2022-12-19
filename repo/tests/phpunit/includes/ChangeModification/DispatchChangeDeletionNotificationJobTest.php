@@ -53,7 +53,7 @@ class DispatchChangeDeletionNotificationJobTest extends MediaWikiIntegrationTest
 
 		$params = [ 'archivedRevisionCount' => 1, 'pageId' => $pageId ];
 		$expectedRevIdentifiers = [
-			new RepoRevisionIdentifier( "Q303", $timestamp, $revisionRecordId )
+			new RepoRevisionIdentifier( "Q303", $timestamp, $revisionRecordId ),
 		];
 
 		$logger = $this->createMock( LoggerInterface::class );

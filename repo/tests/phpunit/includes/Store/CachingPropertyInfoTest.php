@@ -77,7 +77,7 @@ class CachingPropertyInfoTest extends MediaWikiIntegrationTestCase {
 
 	private function getInfo( $suffix = '' ) {
 		return [
-			PropertyInfoLookup::KEY_DATA_TYPE => 'type' . $suffix
+			PropertyInfoLookup::KEY_DATA_TYPE => 'type' . $suffix,
 		];
 	}
 

@@ -46,7 +46,7 @@ class UpdateRepoOnMoveTest extends \PHPUnit\Framework\TestCase {
 			'user' => User::newFromName( 'RandomUserWhichDoesntExist' ),
 			'siteId' => 'whatever',
 			'oldTitle' => Title::makeTitle( NS_MAIN, 'ThisOneDoesntExist' ),
-			'newTitle' => Title::makeTitle( NS_MAIN, 'Bar' )
+			'newTitle' => Title::makeTitle( NS_MAIN, 'Bar' ),
 		];
 	}
 

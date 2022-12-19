@@ -29,12 +29,12 @@ class NonExistingEntityIdHtmlBrokenLinkFormatterTest extends MediaWikiIntegratio
 		yield [
 			new ItemId( 'Q1' ),
 			'<a title="(red-link-title: someTitle)" href="http://someurl.com" class="new">Q1</a>'
-			. '(word-separator)<span class="wb-entity-undefinedinfo">(parentheses: (somePrefix-item))</span>'
+			. '(word-separator)<span class="wb-entity-undefinedinfo">(parentheses: (somePrefix-item))</span>',
 		];
 		yield [
 			new NumericPropertyId( 'P99' ),
 			'<a title="(red-link-title: someTitle)" href="http://someurl.com" class="new">P99</a>'
-			. '(word-separator)<span class="wb-entity-undefinedinfo">(parentheses: (somePrefix-property))</span>'
+			. '(word-separator)<span class="wb-entity-undefinedinfo">(parentheses: (somePrefix-property))</span>',
 		];
 	}
 

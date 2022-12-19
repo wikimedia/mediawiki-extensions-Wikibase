@@ -189,7 +189,7 @@ abstract class DatabaseTermStoreWriterBase {
 			$this->getMapping()->getTableName(),
 			[
 				'id' => $this->getMapping()->getRowIdColumn(),
-				'term_in_lang_id' => $this->getMapping()->getTermInLangIdColumn()
+				'term_in_lang_id' => $this->getMapping()->getTermInLangIdColumn(),
 			],
 			[ $this->getMapping()->getEntityIdColumn() => $entityId->getNumericId() ],
 			__METHOD__,

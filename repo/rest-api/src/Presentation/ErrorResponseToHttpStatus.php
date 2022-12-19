@@ -33,7 +33,7 @@ class ErrorResponseToHttpStatus {
 		ErrorResponse::PATCHED_STATEMENT_MISSING_FIELD => 422,
 		ErrorResponse::PATCH_TEST_FAILED => 409,
 		ErrorResponse::PATCH_TARGET_NOT_FOUND => 409,
-		ErrorResponse::UNEXPECTED_ERROR => 500
+		ErrorResponse::UNEXPECTED_ERROR => 500,
 	];
 
 	public static function lookup( ErrorResponse $error ): int {

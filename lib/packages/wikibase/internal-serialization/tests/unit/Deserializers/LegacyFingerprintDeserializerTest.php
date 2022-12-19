@@ -41,7 +41,7 @@ class LegacyFingerprintDeserializerTest extends \PHPUnit\Framework\TestCase {
 		return [
 			[
 				[],
-				new TermList( [] )
+				new TermList( [] ),
 			],
 
 			[
@@ -52,7 +52,7 @@ class LegacyFingerprintDeserializerTest extends \PHPUnit\Framework\TestCase {
 				new TermList( [
 					new Term( 'en', 'foo' ),
 					new Term( 'de', 'bar' ),
-				] )
+				] ),
 			],
 		];
 	}
@@ -94,7 +94,7 @@ class LegacyFingerprintDeserializerTest extends \PHPUnit\Framework\TestCase {
 		return [
 			[
 				[],
-				new TermList( [] )
+				new TermList( [] ),
 			],
 
 			[
@@ -105,7 +105,7 @@ class LegacyFingerprintDeserializerTest extends \PHPUnit\Framework\TestCase {
 				new TermList( [
 					new Term( 'en', 'foo' ),
 					new Term( 'de', 'bar' ),
-				] )
+				] ),
 			],
 		];
 	}
@@ -131,7 +131,7 @@ class LegacyFingerprintDeserializerTest extends \PHPUnit\Framework\TestCase {
 		return [
 			[
 				[],
-				new AliasGroupList( [] )
+				new AliasGroupList( [] ),
 			],
 
 			[
@@ -145,7 +145,7 @@ class LegacyFingerprintDeserializerTest extends \PHPUnit\Framework\TestCase {
 					new AliasGroup( 'en', [ 'foo', 'bar' ] ),
 					new AliasGroup( 'de', [ 'foo', 'bar', 'baz' ] ),
 					new AliasGroup( 'nl', [ 'bah' ] ),
-				] )
+				] ),
 			],
 		];
 	}

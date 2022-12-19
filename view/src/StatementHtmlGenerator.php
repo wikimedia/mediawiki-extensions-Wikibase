@@ -21,7 +21,7 @@ class StatementHtmlGenerator {
 	private const RANK_NAMES = [
 		Statement::RANK_DEPRECATED => 'deprecated',
 		Statement::RANK_NORMAL => 'normal',
-		Statement::RANK_PREFERRED => 'preferred'
+		Statement::RANK_PREFERRED => 'preferred',
 	];
 
 	/**

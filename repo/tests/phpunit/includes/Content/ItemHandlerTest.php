@@ -212,7 +212,7 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 
 		yield 'sitelinks' => [
 			$contentLinkStub,
-			[ 'wb-claims' => 0, 'wb-sitelinks' => 1 ]
+			[ 'wb-claims' => 0, 'wb-sitelinks' => 1 ],
 		];
 
 		$contentWithClaim = $this->newEntityContent();
@@ -222,7 +222,7 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 
 		yield 'claims' => [
 			$contentWithClaim,
-			[ 'wb-claims' => 1 ]
+			[ 'wb-claims' => 1 ],
 		];
 	}
 

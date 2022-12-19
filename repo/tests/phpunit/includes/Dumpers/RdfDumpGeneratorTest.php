@@ -222,7 +222,7 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 					$termsRdfBuilder,
 					$propertySpecificRdfBuilder
 				);
-			}
+			},
 		];
 	}
 
@@ -300,7 +300,7 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 
 		$rdfBuilderFactory = new RdfBuilderFactory(
 			new RdfVocabulary(
-				[ 'test' => self::URI_BASE, 'foreign' => 'http://foreign.test/', ],
+				[ 'test' => self::URI_BASE, 'foreign' => 'http://foreign.test/' ],
 				[ 'test' => self::URI_DATA, 'foreign' => 'http://data.foreign.test/' ],
 				new EntitySourceDefinitions( [
 					new DatabaseEntitySource(
@@ -314,7 +314,7 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 						'wd',
 						'',
 						''
-					)
+					),
 				], new SubEntityTypesMapper( [] ) ),
 				[ 'test' => 'wd', 'foreign' => 'foreign' ],
 				[ 'test' => '', 'foreign' => 'foreign' ],

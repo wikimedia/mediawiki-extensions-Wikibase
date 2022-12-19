@@ -161,7 +161,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 				'class' => HTMLTrimmedTextField::class,
 				'id' => 'wb-newentity-label',
 				'placeholder-message' => 'wikibase-label-edit-placeholder',
-				'label-message' => 'wikibase-newentity-label'
+				'label-message' => 'wikibase-newentity-label',
 			],
 			self::FIELD_DESCRIPTION => [
 				'name' => self::FIELD_DESCRIPTION,
@@ -169,13 +169,13 @@ class SpecialNewProperty extends SpecialNewEntity {
 				'class' => HTMLTrimmedTextField::class,
 				'id' => 'wb-newentity-description',
 				'placeholder-message' => 'wikibase-description-edit-placeholder',
-				'label-message' => 'wikibase-newentity-description'
+				'label-message' => 'wikibase-newentity-description',
 			],
 			self::FIELD_ALIASES => [
 				'name' => self::FIELD_ALIASES,
 				'class' => HTMLAliasesField::class,
 				'id' => 'wb-newentity-aliases',
-			]
+			],
 		];
 
 		$selector = new DataTypeSelector(
@@ -184,7 +184,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 		);
 
 		$options = [
-			$this->msg( 'wikibase-newproperty-pick-data-type' )->text() => ''
+			$this->msg( 'wikibase-newproperty-pick-data-type' )->text() => '',
 		];
 		$formFields[ self::FIELD_DATATYPE ] = [
 			'name' => self::FIELD_DATATYPE,
@@ -199,7 +199,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 
 				return true;
 			},
-			'label-message' => 'wikibase-newproperty-datatype'
+			'label-message' => 'wikibase-newproperty-datatype',
 		];
 
 		return $formFields;

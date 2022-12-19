@@ -38,32 +38,32 @@ class SiteLinkDiffViewTest extends \PHPUnit\Framework\TestCase {
 				'@<a\b[^>]* href="[^"]*\bNEW"[^>]*>NEW</a>@',
 				null,
 				'NEW',
-				$linkPath . '/enwiki'
+				$linkPath . '/enwiki',
 			],
 			'Link has direction' => [
 				'@<a\b[^>]* dir="auto"@',
 				null,
 				'NEW',
-				$linkPath . '/enwiki'
+				$linkPath . '/enwiki',
 			],
 			'Link has hreflang' => [
 				'@<a\b[^>]* hreflang="en"@',
 				null,
 				'NEW',
-				$linkPath . '/enwiki'
+				$linkPath . '/enwiki',
 			],
 			'Link has changed part highlighted' => [
 				'@THE ?<del\b[^>]*> ?OLD ?</del> ?TITLE.*THE ?<ins\b[^>]*> ?NEW ?</ins> ?TITLE@',
 				'THE OLD TITLE',
 				'THE NEW TITLE',
-				$linkPath . '/enwiki'
+				$linkPath . '/enwiki',
 			],
 			'Badge is linked correctly' => [
 				'@FORMATTED BADGE ID@',
 				null,
 				'Q123',
-				$linkPath . '/enwiki/badges'
-			]
+				$linkPath . '/enwiki/badges',
+			],
 		];
 	}
 
@@ -149,7 +149,7 @@ class SiteLinkDiffViewTest extends \PHPUnit\Framework\TestCase {
 		$path = [
 			wfMessage( 'wikibase-diffview-link' )->text(),
 			'enwiki',
-			'badges'
+			'badges',
 		];
 		$diff = new Diff( [ new DiffOpAdd( $badgeId ) ] );
 

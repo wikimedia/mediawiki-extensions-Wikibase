@@ -68,7 +68,7 @@ class ItemPatcherTest extends TestCase {
 			'label' => new Diff( [
 				'en' => new DiffOpChange( 'foo', 'spam' ),
 				'nl' => new DiffOpAdd( 'baz' ),
-			] )
+			] ),
 		] );
 
 		$patchedItem = $this->getPatchedItem( $item, $patch );

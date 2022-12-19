@@ -31,7 +31,7 @@ class ClaimsChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 		ChangeOpDeserializationAssert::assertThrowsChangeOpDeserializationException(
 			function() {
 				$this->newClaimsChangeOpDeserializer()->createEntityChangeOp( [
-					'claims' => [ [ 'remove' => '', ] ]
+					'claims' => [ [ 'remove' => '' ] ],
 				] );
 			},
 			'invalid-claim'
@@ -42,7 +42,7 @@ class ClaimsChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 		ChangeOpDeserializationAssert::assertThrowsChangeOpDeserializationException(
 			function() {
 				$this->newClaimsChangeOpDeserializer()->createEntityChangeOp( [
-					'claims' => [ [ 'foo' ] ]
+					'claims' => [ [ 'foo' ] ],
 				] );
 			},
 			'invalid-claim'

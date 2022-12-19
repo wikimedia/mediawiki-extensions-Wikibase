@@ -16,7 +16,7 @@ use Wikibase\Lib\SettingsArray;
 class EntityTypeDefinitionsIntegrationTest extends MediaWikiIntegrationTestCase {
 	public function testEntityTypeDefinitionsUsesNativeSearch_FedPropsDisabled() {
 		$this->setService( 'WikibaseRepo.Settings', new SettingsArray( [
-			'federatedPropertiesEnabled' => false
+			'federatedPropertiesEnabled' => false,
 		] ) );
 		$this->clearHook( 'WikibaseRepoEntityTypes' );
 		$services = $this->getServiceContainer();

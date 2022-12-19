@@ -113,7 +113,7 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiIntegrationTestCase {
 		$row = [
 			'page_id' => 10,
 			'rd_namespace' => NS_MAIN,
-			'rd_title' => 'Q10'
+			'rd_title' => 'Q10',
 		];
 
 		$entityRedirectLookup = new WikiPageEntityRedirectLookup(

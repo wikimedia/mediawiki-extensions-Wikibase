@@ -52,7 +52,7 @@ class PrefetchingPropertyTermLookupTest extends MediaWikiIntegrationTestCase {
 			'wbt_term_in_lang',
 			'wbt_text_in_lang',
 			'wbt_text',
-			'wbt_type'
+			'wbt_type',
 		];
 
 		$this->tablesUsed = array_merge( $this->tablesUsed, $tables );

@@ -105,7 +105,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 		return [
 			[ 'ku', Parser::OT_PLAIN ],
 			[ 'zh', Parser::OT_WIKI ],
-			[ 'zh', Parser::OT_PREPROCESS ]
+			[ 'zh', Parser::OT_PREPROCESS ],
 		];
 	}
 
@@ -265,7 +265,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 				array $acceptableRanks = null
 			) {
 				return [
-					new PropertyValueSnak( $propertyId, new EntityIdValue( new ItemId( 'Q7' ) ) )
+					new PropertyValueSnak( $propertyId, new EntityIdValue( new ItemId( 'Q7' ) ) ),
 				];
 			} );
 

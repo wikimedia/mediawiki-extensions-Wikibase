@@ -24,8 +24,8 @@ class InMemoryTermStoreTest extends TestCase {
 			],
 			'alias' => [
 				'en' => [ 'alias', 'another alias' ],
-				'de' => 'de alias'
-			]
+				'de' => 'de alias',
+			],
 		] );
 
 		$this->assertNoDuplicates( $ids );
@@ -41,8 +41,8 @@ class InMemoryTermStoreTest extends TestCase {
 			],
 			'alias' => [
 				'en' => [ 'alias', 'another alias' ],
-				'de' => 'de alias'
-			]
+				'de' => 'de alias',
+			],
 		] );
 
 		$newlyAcquiredIds = $termsIdsAcquirer->acquireTermInLangIds( [
@@ -52,8 +52,8 @@ class InMemoryTermStoreTest extends TestCase {
 			],
 			'alias' => [
 				'en' => [ 'alias', 'another alias' ],
-				'de' => 'de alias'
-			]
+				'de' => 'de alias',
+			],
 		] );
 
 		$this->assertEquals(
@@ -69,7 +69,7 @@ class InMemoryTermStoreTest extends TestCase {
 			'label' => [
 				'en' => 'some label',
 				'de' => 'another label',
-			]
+			],
 		] );
 
 		$newlyAcquiredIds = $termsIdsAcquirer->acquireTermInLangIds( [
@@ -79,8 +79,8 @@ class InMemoryTermStoreTest extends TestCase {
 			],
 			'alias' => [
 				'en' => [ 'alias', 'another alias' ],
-				'de' => 'de alias'
-			]
+				'de' => 'de alias',
+			],
 		] );
 
 		$this->assertNoDuplicates( $newlyAcquiredIds );

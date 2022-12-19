@@ -83,9 +83,9 @@ class SummaryParsingPrefetchHelperTest extends TestCase {
 			'wdbeta:Special:EntityPage/P123' => [
 				[
 					(object)[ 'rev_comment_text' => '[[wdbeta:Special:EntityPage/P123]]' ],
-					(object)[ 'rev_comment_text' => '[[Property:P1234]]' ]
+					(object)[ 'rev_comment_text' => '[[Property:P1234]]' ],
 				],
-				[ 'P123', 'P1234' ]
+				[ 'P123', 'P1234' ],
 			],
 			'Some other comment not parsed as link' => [
 				[
@@ -94,7 +94,7 @@ class SummaryParsingPrefetchHelperTest extends TestCase {
 					(object)[ 'rc_comment_text' => 'P31]]' ],
 					(object)[ 'rc_comment_text' => '[P31:P31]' ],
 				],
-				[]
+				[],
 			],
 			'Recentchanges object' => [ [ (object)[ 'rc_comment_text' => '[[Property:P31]]' ] ], [ 'P31' ] ],
 			'RevisionRecord match' => [ [ $this->mockRevisionRecord( 'something [[Property:P31]]' ) ], [ 'P31' ] ],

@@ -48,32 +48,32 @@ class OtherProjectsSitesGeneratorTest extends \PHPUnit\Framework\TestCase {
 			'Same language' => [
 				[ 'wikipedia', 'wikisource' ],
 				'frwikisource',
-				[ 'frwiki' ]
+				[ 'frwiki' ],
 			],
 			'Same language + only one in group' => [
 				[ 'wikipedia', 'wikisource', 'commons' ],
 				'frwikisource',
-				[ 'frwiki', 'commonswiki' ]
+				[ 'frwiki', 'commonswiki' ],
 			],
 			'Only one in group' => [
 				[ 'wikipedia', 'wikisource', 'commons' ],
 				'eswiki',
-				[ 'commonswiki' ]
+				[ 'commonswiki' ],
 			],
 			'Special group' => [
 				[ 'wikipedia', 'wikisource', 'special' ],
 				'eswiki',
-				[ 'wikidatawiki' ]
+				[ 'wikidatawiki' ],
 			],
 			'Special group + language' => [
 				[ 'wikipedia', 'wikisource', 'special' ],
 				'frwiki',
-				[ 'frwikisource', 'wikidatawiki' ]
+				[ 'frwikisource', 'wikidatawiki' ],
 			],
 			'No other sites' => [
 				[ 'wikipedia', 'wikisource' ],
 				'eswiki',
-				[]
+				[],
 			],
 		];
 	}

@@ -33,7 +33,7 @@ class ItemSerializerTest extends DispatchableSerializerTest {
 				}
 
 				return [
-					'en' => [ 'lang' => 'en', 'value' => 'foo' ]
+					'en' => [ 'lang' => 'en', 'value' => 'foo' ],
 				];
 			} ) );
 
@@ -46,7 +46,7 @@ class ItemSerializerTest extends DispatchableSerializerTest {
 				}
 
 				return [
-					'en' => [ 'lang' => 'en', 'values' => [ 'foo', 'bar' ] ]
+					'en' => [ 'lang' => 'en', 'values' => [ 'foo', 'bar' ] ],
 				];
 			} ) );
 
@@ -63,12 +63,12 @@ class ItemSerializerTest extends DispatchableSerializerTest {
 						[
 							'mainsnak' => [
 								'snaktype' => 'novalue',
-								'property' => 'P42'
+								'property' => 'P42',
 							],
 							'type' => 'statement',
-							'rank' => 'normal'
-						]
-					]
+							'rank' => 'normal',
+						],
+					],
 				];
 			} ) );
 
@@ -79,7 +79,7 @@ class ItemSerializerTest extends DispatchableSerializerTest {
 			->will( $this->returnValue( [
 				'site' => 'enwiki',
 				'title' => 'Nyan Cat',
-				'badges' => []
+				'badges' => [],
 			] ) );
 
 		return new ItemSerializer(
@@ -116,7 +116,7 @@ class ItemSerializerTest extends DispatchableSerializerTest {
 					'claims' => [],
 					'sitelinks' => [],
 				],
-				new Item()
+				new Item(),
 			],
 		];
 
@@ -131,7 +131,7 @@ class ItemSerializerTest extends DispatchableSerializerTest {
 				'claims' => [],
 				'sitelinks' => [],
 			],
-			$entity
+			$entity,
 		];
 
 		$entity = new Item();
@@ -142,15 +142,15 @@ class ItemSerializerTest extends DispatchableSerializerTest {
 				'labels' => [
 					'en' => [
 						'lang' => 'en',
-						'value' => 'foo'
-					]
+						'value' => 'foo',
+					],
 				],
 				'descriptions' => [],
 				'aliases' => [],
 				'claims' => [],
 				'sitelinks' => [],
 			],
-			$entity
+			$entity,
 		];
 
 		$entity = new Item();
@@ -162,14 +162,14 @@ class ItemSerializerTest extends DispatchableSerializerTest {
 				'descriptions' => [
 					'en' => [
 						'lang' => 'en',
-						'value' => 'foo'
-					]
+						'value' => 'foo',
+					],
 				],
 				'aliases' => [],
 				'claims' => [],
 				'sitelinks' => [],
 			],
-			$entity
+			$entity,
 		];
 
 		$entity = new Item();
@@ -182,13 +182,13 @@ class ItemSerializerTest extends DispatchableSerializerTest {
 				'aliases' => [
 					'en' => [
 						'lang' => 'en',
-						'values' => [ 'foo', 'bar' ]
-					]
+						'values' => [ 'foo', 'bar' ],
+					],
 				],
 				'claims' => [],
 				'sitelinks' => [],
 			],
-			$entity
+			$entity,
 		];
 
 		$entity = new Item();
@@ -204,16 +204,16 @@ class ItemSerializerTest extends DispatchableSerializerTest {
 						[
 							'mainsnak' => [
 								'snaktype' => 'novalue',
-								'property' => 'P42'
+								'property' => 'P42',
 							],
 							'type' => 'statement',
-							'rank' => 'normal'
-						]
-					]
+							'rank' => 'normal',
+						],
+					],
 				],
 				'sitelinks' => [],
 			],
-			$entity
+			$entity,
 		];
 
 		$item = new Item();
@@ -229,11 +229,11 @@ class ItemSerializerTest extends DispatchableSerializerTest {
 					'enwiki' => [
 						'site' => 'enwiki',
 						'title' => 'Nyan Cat',
-						'badges' => []
-					]
+						'badges' => [],
+					],
 				],
 			],
-			$item
+			$item,
 		];
 
 		return $provider;

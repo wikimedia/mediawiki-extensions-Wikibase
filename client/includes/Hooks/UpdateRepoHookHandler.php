@@ -198,7 +198,7 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 				'{method}: Failed to inject job: "{msg}"!',
 				[
 					'method' => __METHOD__,
-					'msg' => $e->getMessage()
+					'msg' => $e->getMessage(),
 				]
 			);
 

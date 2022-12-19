@@ -49,8 +49,8 @@ class PropertyValuePairSerializerTest extends TestCase {
 				'property' => [
 					'id' => self::STRING_PROPERTY_ID,
 					'data-type' => 'string',
-				]
-			]
+				],
+			],
 		];
 
 		yield 'some value for item id prop' => [
@@ -60,8 +60,8 @@ class PropertyValuePairSerializerTest extends TestCase {
 				'property' => [
 					'id' => self::ITEM_ID_PROPERTY_ID,
 					'data-type' => 'wikibase-item',
-				]
-			]
+				],
+			],
 		];
 
 		yield 'string value' => [
@@ -77,8 +77,8 @@ class PropertyValuePairSerializerTest extends TestCase {
 				'property' => [
 					'id' => self::STRING_PROPERTY_ID,
 					'data-type' => 'string',
-				]
-			]
+				],
+			],
 		];
 
 		yield 'item id value' => [
@@ -94,8 +94,8 @@ class PropertyValuePairSerializerTest extends TestCase {
 				'property' => [
 					'id' => self::ITEM_ID_PROPERTY_ID,
 					'data-type' => 'wikibase-item',
-				]
-			]
+				],
+			],
 		];
 
 		$timestamp = '+2022-11-25T00:00:00Z';
@@ -111,14 +111,14 @@ class PropertyValuePairSerializerTest extends TestCase {
 					'content' => [
 						'time' => $timestamp,
 						'precision' => TimeValue::PRECISION_DAY,
-						'calendarmodel' => $calendar
+						'calendarmodel' => $calendar,
 					],
 				],
 				'property' => [
 					'id' => self::TIME_PROPERTY_ID,
-					'data-type' => 'time'
-				]
-			]
+					'data-type' => 'time',
+				],
+			],
 		];
 
 		yield 'globecoordinate value' => [
@@ -133,14 +133,14 @@ class PropertyValuePairSerializerTest extends TestCase {
 						'latitude' => 52.0,
 						'longitude' => 13.0,
 						'precision' => 1,
-						'globe' => 'http://www.wikidata.org/entity/Q2'
+						'globe' => 'http://www.wikidata.org/entity/Q2',
 					],
 				],
 				'property' => [
 					'id' => self::GLOBECOORDINATE_PROPERTY_ID,
-					'data-type' => 'globe-coordinate'
-				]
-			]
+					'data-type' => 'globe-coordinate',
+				],
+			],
 		];
 	}
 

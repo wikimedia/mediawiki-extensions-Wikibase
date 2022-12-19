@@ -151,7 +151,7 @@ class ParseValueTest extends \PHPUnit\Framework\TestCase {
 				[
 					'values' => 'VALID',
 					'datatype' => 'string',
-					'validate' => ''
+					'validate' => '',
 				],
 				[
 					'0/raw' => 'VALID',
@@ -163,7 +163,7 @@ class ParseValueTest extends \PHPUnit\Framework\TestCase {
 				[
 					'values' => 'INVALID',
 					'datatype' => 'string',
-					'validate' => ''
+					'validate' => '',
 				],
 				[
 					'0/raw' => 'INVALID',
@@ -214,7 +214,7 @@ class ParseValueTest extends \PHPUnit\Framework\TestCase {
 				[
 					'values' => 'VALID',
 					'property' => 'P1',
-					'validate' => ''
+					'validate' => '',
 				],
 				[
 					'0/raw' => 'VALID',
@@ -226,7 +226,7 @@ class ParseValueTest extends \PHPUnit\Framework\TestCase {
 				[
 					'values' => 'INVALID',
 					'property' => 'P1',
-					'validate' => ''
+					'validate' => '',
 				],
 				[
 					'0/raw' => 'INVALID',
@@ -355,19 +355,19 @@ class ParseValueTest extends \PHPUnit\Framework\TestCase {
 			'no datatype' => [
 				[
 					'values' => 'foo',
-				]
+				],
 			],
 			'bad datatype (valid parser name)' => [
 				[
 					'values' => 'foo',
 					'datatype' => 'null',
-				]
+				],
 			],
 			'bad parser' => [
 				[
 					'values' => 'foo',
 					'parser' => 'foo',
-				]
+				],
 			],
 			'bad property ID' => [
 				[

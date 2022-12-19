@@ -146,7 +146,7 @@ class BulkSubscriptionUpdater {
 			$rows,
 			__METHOD__,
 			[
-				'IGNORE'
+				'IGNORE',
 			]
 		);
 
@@ -200,7 +200,7 @@ class BulkSubscriptionUpdater {
 		foreach ( $entities as $id ) {
 			$rows[] = [
 				'cs_entity_id' => $id,
-				'cs_subscriber_id' => $this->subscriberWikiId
+				'cs_subscriber_id' => $this->subscriberWikiId,
 			];
 		}
 

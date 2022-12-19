@@ -21,11 +21,11 @@ class NonLanguageBoundChangesCounterTest extends \PHPUnit\Framework\TestCase {
 		return [
 			'Entity changed' => [
 				new ChangeOpResultStub( $entityId, true ),
-				1
+				1,
 			],
 			'Entity did not change' => [
 				new ChangeOpResultStub( $entityId, false ),
-				0
+				0,
 			],
 			'Changes on different tree levels' => [
 				new ChangeOpsResult( $entityId, [
@@ -34,16 +34,16 @@ class NonLanguageBoundChangesCounterTest extends \PHPUnit\Framework\TestCase {
 						new ChangeOpResultStub( $entityId, true ),
 						new ChangeOpResultStub( $entityId, false ),
 						new LanguageBoundChangeOpResultStub( $entityId, true, 'en' ),
-						new LanguageBoundChangeOpResultStub( $entityId, false, 'en' )
+						new LanguageBoundChangeOpResultStub( $entityId, false, 'en' ),
 					] ),
 					// and count this one too
 					new ChangeOpResultStub( $entityId, true ),
 					new ChangeOpResultStub( $entityId, false ),
 					new LanguageBoundChangeOpResultStub( $entityId, true, 'en' ),
-					new LanguageBoundChangeOpResultStub( $entityId, false, 'en' )
+					new LanguageBoundChangeOpResultStub( $entityId, false, 'en' ),
 				] ),
-				2
-			]
+				2,
+			],
 		];
 	}
 

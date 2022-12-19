@@ -204,18 +204,18 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 				'id' => [
 					'name' => 'id',
 					'type' => 'hidden',
-					'default' => $entity->getId()->getSerialization()
+					'default' => $entity->getId()->getSerialization(),
 				],
 				'language' => [
 					'name' => 'language',
 					'type' => 'hidden',
-					'default' => $this->languageCode
+					'default' => $this->languageCode,
 				],
 				'revid' => [
 					'name' => 'revid',
 					'type' => 'hidden',
 					'default' => $this->getBaseRevision()->getRevisionId(),
-				]
+				],
 			];
 			$formDescriptor = array_merge(
 				$formDescriptor,
@@ -234,7 +234,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 				'default' => $languageCode,
 				'type' => 'text',
 				'id' => $fieldId,
-				'label-message' => 'wikibase-modifyterm-language'
+				'label-message' => 'wikibase-modifyterm-language',
 			];
 		}
 
@@ -264,8 +264,8 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 				'type' => 'text',
 				'id' => $fieldId,
 				'placeholder' => $value,
-				'label-message' => $fieldId . '-label'
-			]
+				'label-message' => $fieldId . '-label',
+			],
 		];
 	}
 

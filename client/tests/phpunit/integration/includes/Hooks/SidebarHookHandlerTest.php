@@ -101,7 +101,7 @@ class SidebarHookHandlerTest extends MediaWikiIntegrationTestCase {
 			[
 				'msg' => 'wikibase-otherprojects-test',
 				'class' => 'wb-otherproject-link wb-otherproject-test',
-				'href' => 'http://acme.tests.com/wiki/Foo'
+				'href' => 'http://acme.tests.com/wiki/Foo',
 			],
 		];
 
@@ -143,7 +143,7 @@ class SidebarHookHandlerTest extends MediaWikiIntegrationTestCase {
 			'en' => [
 				'class' => 'badge-Q3',
 				'label' => 'Lesenswerter Artikel',
-			]
+			],
 		];
 
 		$link = [

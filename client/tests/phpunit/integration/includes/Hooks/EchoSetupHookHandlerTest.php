@@ -34,7 +34,7 @@ class EchoSetupHookHandlerTest extends MediaWikiIntegrationTestCase {
 				'register' => true,
 				'icon' => false,
 				'expectedIcon' => [ 'path' => 'Wikibase/client/resources/images/echoIcon.svg' ],
-			]
+			],
 		];
 	}
 

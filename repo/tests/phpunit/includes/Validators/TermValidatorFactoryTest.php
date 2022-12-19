@@ -68,18 +68,18 @@ class TermValidatorFactoryTest extends \PHPUnit\Framework\TestCase {
 
 			'unsupported type' => [
 				'entityType' => 'mediainfo',
-				'expectedValidatorType' => false // false means null (no validator) is returned
+				'expectedValidatorType' => false, // false means null (no validator) is returned
 			],
 
 			'item is supported' => [
 				'entityType' => Item::ENTITY_TYPE,
-				'expectedValidatorType' => FingerprintUniquenessValidator::class
+				'expectedValidatorType' => FingerprintUniquenessValidator::class,
 			],
 
 			'property is supported' => [
 				'entityType' => Property::ENTITY_TYPE,
-				'expectedValidatorType' => FingerprintUniquenessValidator::class
-			]
+				'expectedValidatorType' => FingerprintUniquenessValidator::class,
+			],
 
 		];
 	}

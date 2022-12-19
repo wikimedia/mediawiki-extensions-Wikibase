@@ -21,8 +21,8 @@ class GenericExceptionLocalizerTest extends \PHPUnit\Framework\TestCase {
 			'RuntimeException' => [
 				new RuntimeException( 'Oops!' ),
 				'wikibase-error-unexpected',
-				[ 'Oops!' ]
-			]
+				[ 'Oops!' ],
+			],
 		];
 	}
 

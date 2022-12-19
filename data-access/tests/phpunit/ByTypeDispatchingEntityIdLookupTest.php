@@ -88,7 +88,7 @@ class ByTypeDispatchingEntityIdLookupTest extends TestCase {
 			[],
 			[],
 			$this->mockEntityIdLookup( [
-				$title->getPrefixedDBkey() => $entityId
+				$title->getPrefixedDBkey() => $entityId,
 			] )
 		);
 
@@ -110,7 +110,7 @@ class ByTypeDispatchingEntityIdLookupTest extends TestCase {
 			[ 'item' => 'wikibase-item' ],
 			[ 'item' => function () use ( $title, $entityId ) {
 				return $this->mockEntityIdLookup( [
-					$title->getPrefixedDBkey() => $entityId
+					$title->getPrefixedDBkey() => $entityId,
 				] );
 			} ],
 			$this->createMock( EntityIdLookup::class )
@@ -135,11 +135,11 @@ class ByTypeDispatchingEntityIdLookupTest extends TestCase {
 			[ 'item' => 'wikibase-item' ],
 			[ 'item' => function () use ( $title, $entityIdSpecific ) {
 				return $this->mockEntityIdLookup( [
-					$title->getPrefixedDBkey() => $entityIdSpecific
+					$title->getPrefixedDBkey() => $entityIdSpecific,
 				] );
 			} ],
 			$this->mockEntityIdLookup( [
-				$title->getPrefixedDBkey() => $entityIdDefault
+				$title->getPrefixedDBkey() => $entityIdDefault,
 			] )
 		);
 
@@ -161,7 +161,7 @@ class ByTypeDispatchingEntityIdLookupTest extends TestCase {
 			[ 'item' => 'wikibase-item' ],
 			[ 'item' => function () use ( $title, $entityId ) {
 				return $this->mockEntityIdLookup( [
-					$title->getPrefixedDBkey() => $entityId
+					$title->getPrefixedDBkey() => $entityId,
 				] );
 			} ],
 			$this->mockEntityIdLookup( [] )

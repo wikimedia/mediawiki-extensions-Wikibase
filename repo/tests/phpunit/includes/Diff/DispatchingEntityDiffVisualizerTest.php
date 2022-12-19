@@ -39,7 +39,7 @@ class DispatchingEntityDiffVisualizerTest extends \PHPUnit\Framework\TestCase {
 			},
 			'property' => function () use ( $propertyVisualizer ) {
 				return $propertyVisualizer;
-			}
+			},
 		] );
 
 		$dispatchingVisualizer = new DispatchingEntityDiffVisualizer( $factory, new RequestContext() );

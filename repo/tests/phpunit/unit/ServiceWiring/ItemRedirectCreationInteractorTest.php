@@ -29,7 +29,7 @@ class ItemRedirectCreationInteractorTest extends ServiceWiringTestCase {
 			'WikibaseRepo.Store',
 			$this->getMockStore( [
 				'getEntityRevisionLookup' => $this->createMock( EntityRevisionLookup::class ),
-				'getEntityRedirectLookup' => $this->createMock( EntityRedirectLookup::class )
+				'getEntityRedirectLookup' => $this->createMock( EntityRedirectLookup::class ),
 			] )
 		);
 

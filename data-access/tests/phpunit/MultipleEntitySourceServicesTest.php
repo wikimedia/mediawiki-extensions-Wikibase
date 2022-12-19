@@ -104,7 +104,7 @@ class MultipleEntitySourceServicesTest extends TestCase {
 					'',
 					'',
 					''
-				)
+				),
 			], new SubEntityTypesMapper( [] ) ),
 			[ 'items' => $itemServices ]
 		);
@@ -233,7 +233,7 @@ class MultipleEntitySourceServicesTest extends TestCase {
 					'',
 					'',
 					''
-				)
+				),
 			], new SubEntityTypesMapper( [] ) ),
 			$perSourceServices
 		);

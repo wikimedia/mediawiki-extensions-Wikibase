@@ -20,7 +20,7 @@ class ContentModelMappingsTest extends ServiceWiringTestCase {
 			new EntityTypeDefinitions( [
 				'test1' => [
 					EntityTypeDefinitions::CONTENT_MODEL_ID => 'test1-content-model',
-				]
+				],
 			] ) );
 
 		$contentModelMappings = $this->getService( 'WikibaseRepo.ContentModelMappings' );

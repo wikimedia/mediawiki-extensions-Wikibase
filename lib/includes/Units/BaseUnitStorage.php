@@ -70,7 +70,7 @@ abstract class BaseUnitStorage implements UnitStorage {
 		} else {
 			return [
 				'factor' => $this->storageData[$unit][0],
-				'unit' => $this->storageData[$unit][1]
+				'unit' => $this->storageData[$unit][1],
 			];
 		}
 	}

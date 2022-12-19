@@ -79,7 +79,7 @@ final class ViewHooks implements UnitTestsListHook, ResourceLoaderRegisterModule
 				'dependencies' => [
 					'wikibase',
 				],
-				'targets' => [ 'desktop', 'mobile' ]
+				'targets' => [ 'desktop', 'mobile' ],
 			],
 		];
 

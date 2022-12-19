@@ -239,7 +239,7 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 				true,  // expected fix
 				[ // expected data
 					'label' => [ 'en' => 'test', 'de' => 'yarrr' ],
-				]
+				],
 			],
 			[ // #3: case IIIb: user was last to edit, but intoduces a new operand
 				[ // input data
@@ -248,7 +248,7 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 				11,     // base rev
 				true,  // expected conflict
 				false, // expected failure, diff operand change
-				null
+				null,
 			],
 			[ // #4: case IV: patch applied
 				[ // input data
@@ -259,7 +259,7 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 				true,  // expected fix
 				[ // expected data
 					'label' => [ 'de' => 'bar', 'en' => 'test', 'nl' => 'test', 'fr' => 'frrrrtt' ],
-				]
+				],
 			],
 			[ // #5: case V: patch failed, expect a conflict
 				[ // input data
@@ -268,7 +268,7 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 				10,     // base rev
 				true,  // expected conflict
 				false, // expected fix
-				null   // expected data
+				null,   // expected data
 			],
 			[ // #6: case VI: patch is empty, keep current (not base)
 				[ // input data
@@ -279,8 +279,8 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 				true,  // expected fix
 				[ // expected data
 					'label' => [ 'en' => 'test', 'de' => 'bar' ],
-					'description' => [ 'en' => 'more testing' ]
-				]
+					'description' => [ 'en' => 'more testing' ],
+				],
 			],
 		];
 	}
@@ -536,24 +536,24 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 					[ 'item' => 'bar', 'label' => 'bar', 'ok' => true ],
 					[ 'item' => 'foo', 'label' => 'Foo', 'ok' => true ],
 					[ 'item' => 'bar', 'label' => 'Bar', 'ok' => true ],
-				]
+				],
 			],
 
 			[ // #1: limits bypassed with noratelimit permission
 				[ // limits:
 					'edit' => [
 						'user' => [ 1, 60 ], // one edit per minute
-					]
+					],
 				],
 				[ // groups:
-					'sysop' // sysop has the noratelimit permission set in the test case
+					'sysop', // sysop has the noratelimit permission set in the test case
 				],
 				[ // edits:
 					[ 'item' => 'foo', 'label' => 'foo', 'ok' => true ],
 					[ 'item' => 'bar', 'label' => 'bar', 'ok' => true ],
 					[ 'item' => 'foo', 'label' => 'Foo', 'ok' => true ],
 					[ 'item' => 'bar', 'label' => 'Bar', 'ok' => true ],
-				]
+				],
 			],
 
 			[ // #2: per-group limit overrides with less restrictive limit
@@ -561,17 +561,17 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 					'edit' => [
 						'user' => [ 1, 60 ], // one edit per minute
 						'kittens' => [ 10, 60 ], // one edit per minute
-					]
+					],
 				],
 				[ // groups:
-					'kittens'
+					'kittens',
 				],
 				[ // edits:
 					[ 'item' => 'foo', 'label' => 'foo', 'ok' => true ],
 					[ 'item' => 'bar', 'label' => 'bar', 'ok' => true ],
 					[ 'item' => 'foo', 'label' => 'Foo', 'ok' => true ],
 					[ 'item' => 'bar', 'label' => 'Bar', 'ok' => true ],
-				]
+				],
 			],
 
 			[ // #3: edit limit applies
@@ -584,7 +584,7 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 				[ // edits:
 					[ 'item' => 'foo', 'label' => 'foo', 'ok' => true ],
 					[ 'item' => 'foo', 'label' => 'Foo', 'ok' => false ],
-				]
+				],
 			],
 
 			[ // #4: edit limit also applies to creations
@@ -601,7 +601,7 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 					[ 'item' => 'foo', 'label' => 'foo', 'ok' => true ],
 					[ 'item' => 'bar', 'label' => 'bar', 'ok' => false ],
 					[ 'item' => 'foo', 'label' => 'Foo', 'ok' => false ],
-				]
+				],
 			],
 
 			[ // #5: creation limit applies in addition to edit limit
@@ -618,8 +618,8 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 					[ 'item' => 'foo', 'label' => 'foo', 'ok' => true ],
 					[ 'item' => 'foo', 'label' => 'Foo', 'ok' => true ],
 					[ 'item' => 'bar', 'label' => 'bar', 'ok' => false ],
-				]
-			]
+				],
+			],
 
 		];
 	}
@@ -639,7 +639,7 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 			'wgGroupPermissions',
 			[
 				'*' => [ 'edit' => true ],
-				'sysop' => [ 'noratelimit' => true ]
+				'sysop' => [ 'noratelimit' => true ],
 			]
 		);
 

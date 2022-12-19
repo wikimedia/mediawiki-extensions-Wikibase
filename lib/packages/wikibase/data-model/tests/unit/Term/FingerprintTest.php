@@ -166,32 +166,32 @@ class FingerprintTest extends \PHPUnit\Framework\TestCase {
 	public function fingerprintProvider() {
 		return [
 			[
-				new Fingerprint()
+				new Fingerprint(),
 			],
 			[
 				new Fingerprint(
 					new TermList( [ new Term( 'en', 'foo' ) ] )
-				)
+				),
 			],
 			[
 				new Fingerprint(
 					new TermList(),
 					new TermList( [ new Term( 'en', 'foo' ) ] )
-				)
+				),
 			],
 			[
 				new Fingerprint(
 					new TermList(),
 					new TermList(),
 					new AliasGroupList( [ new AliasGroup( 'en', [ 'foo' ] ) ] )
-				)
+				),
 			],
 			[
 				new Fingerprint(
 					new TermList( [ new Term( 'nl', 'bar' ), new Term( 'fr', 'le' ) ] ),
 					new TermList( [ new Term( 'de', 'baz' ) ] ),
 					new AliasGroupList( [ new AliasGroup( 'en', [ 'foo' ] ) ] )
-				)
+				),
 			],
 		];
 	}
@@ -209,7 +209,7 @@ class FingerprintTest extends \PHPUnit\Framework\TestCase {
 				new Fingerprint(),
 				new Fingerprint(
 					new TermList( [ new Term( 'en', 'foo' ) ] )
-				)
+				),
 			],
 			[
 				new Fingerprint(
@@ -217,14 +217,14 @@ class FingerprintTest extends \PHPUnit\Framework\TestCase {
 				),
 				new Fingerprint(
 					new TermList( [ new Term( 'en', 'foo' ) ] )
-				)
+				),
 			],
 			[
 				new Fingerprint(),
 				new Fingerprint(
 					new TermList(),
 					new TermList( [ new Term( 'en', 'foo' ) ] )
-				)
+				),
 			],
 			[
 				new Fingerprint(),
@@ -232,7 +232,7 @@ class FingerprintTest extends \PHPUnit\Framework\TestCase {
 					new TermList(),
 					new TermList(),
 					new AliasGroupList( [ new AliasGroup( 'en', [ 'foo' ] ) ] )
-				)
+				),
 			],
 			[
 				new Fingerprint(
@@ -244,7 +244,7 @@ class FingerprintTest extends \PHPUnit\Framework\TestCase {
 					new TermList( [ new Term( 'nl', 'bar' ), new Term( 'fr', 'le' ) ] ),
 					new TermList( [ new Term( 'de', 'baz' ) ] ),
 					new AliasGroupList( [ new AliasGroup( 'en', [ 'foo' ] ) ] )
-				)
+				),
 			],
 		];
 	}
@@ -266,14 +266,14 @@ class FingerprintTest extends \PHPUnit\Framework\TestCase {
 			[
 				new Fingerprint(
 					new TermList( [ new Term( 'en', 'foo' ) ] )
-				)
+				),
 			],
 
 			[
 				new Fingerprint(
 					new TermList(),
 					new TermList( [ new Term( 'en', 'foo' ) ] )
-				)
+				),
 			],
 
 			[
@@ -281,7 +281,7 @@ class FingerprintTest extends \PHPUnit\Framework\TestCase {
 					new TermList(),
 					new TermList(),
 					new AliasGroupList( [ new AliasGroup( 'en', [ 'foo' ] ) ] )
-				)
+				),
 			],
 
 			[
@@ -289,7 +289,7 @@ class FingerprintTest extends \PHPUnit\Framework\TestCase {
 					new TermList( [ new Term( 'nl', 'bar' ), new Term( 'fr', 'le' ) ] ),
 					new TermList( [ new Term( 'de', 'baz' ) ] ),
 					new AliasGroupList( [ new AliasGroup( 'en', [ 'foo' ] ) ] )
-				)
+				),
 			],
 		];
 	}
@@ -299,7 +299,7 @@ class FingerprintTest extends \PHPUnit\Framework\TestCase {
 		$fingerprint->setLabel( 'en', 'foo' );
 
 		$labels = new TermList( [
-			new Term( 'de', 'bar' )
+			new Term( 'de', 'bar' ),
 		] );
 
 		$fingerprint->setLabels( $labels );
@@ -312,7 +312,7 @@ class FingerprintTest extends \PHPUnit\Framework\TestCase {
 		$fingerprint->setDescription( 'en', 'foo' );
 
 		$descriptions = new TermList( [
-			new Term( 'de', 'bar' )
+			new Term( 'de', 'bar' ),
 		] );
 
 		$fingerprint->setDescriptions( $descriptions );
@@ -325,7 +325,7 @@ class FingerprintTest extends \PHPUnit\Framework\TestCase {
 		$fingerprint->setAliasGroup( 'en', [ 'foo' ] );
 
 		$groups = new AliasGroupList( [
-			new AliasGroup( 'de', [ 'bar' ] )
+			new AliasGroup( 'de', [ 'bar' ] ),
 		] );
 
 		$fingerprint->setAliasGroups( $groups );

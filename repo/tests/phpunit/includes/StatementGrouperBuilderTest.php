@@ -72,7 +72,7 @@ class StatementGrouperBuilderTest extends \PHPUnit\Framework\TestCase {
 		$builder = $this->newInstance( [
 			'item' => [
 				'default' => null,
-			]
+			],
 		] );
 		$grouper = $builder->getStatementGrouper();
 		$groups = $grouper->groupStatements( $statements );
@@ -86,7 +86,7 @@ class StatementGrouperBuilderTest extends \PHPUnit\Framework\TestCase {
 		$builder = $this->newInstance( [
 			'item' => [
 				'custom' => [ 'type' => null ],
-			]
+			],
 		] );
 		$grouper = $builder->getStatementGrouper();
 		$groups = $grouper->groupStatements( $statements );
@@ -101,7 +101,7 @@ class StatementGrouperBuilderTest extends \PHPUnit\Framework\TestCase {
 		$builder = $this->newInstance( [
 			'item' => [
 				'custom' => [ 'type' => 'dataType' ],
-			]
+			],
 		] );
 		$this->expectException( InvalidArgumentException::class );
 		$builder->getStatementGrouper();
@@ -113,7 +113,7 @@ class StatementGrouperBuilderTest extends \PHPUnit\Framework\TestCase {
 		$builder = $this->newInstance( [
 			'item' => [
 				'custom' => [ 'type' => 'dataType', 'dataTypes' => [ 'string' ] ],
-			]
+			],
 		] );
 		$grouper = $builder->getStatementGrouper();
 		$groups = $grouper->groupStatements( $statements );
@@ -128,7 +128,7 @@ class StatementGrouperBuilderTest extends \PHPUnit\Framework\TestCase {
 		$builder = $this->newInstance( [
 			'item' => [
 				'custom' => [ 'type' => 'propertySet' ],
-			]
+			],
 		] );
 		$this->expectException( InvalidArgumentException::class );
 		$builder->getStatementGrouper();
@@ -140,7 +140,7 @@ class StatementGrouperBuilderTest extends \PHPUnit\Framework\TestCase {
 		$builder = $this->newInstance( [
 			'item' => [
 				'custom' => [ 'type' => 'propertySet', 'propertyIds' => [ 'P1' ] ],
-			]
+			],
 		] );
 		$grouper = $builder->getStatementGrouper();
 		$groups = $grouper->groupStatements( $statements );
@@ -155,7 +155,7 @@ class StatementGrouperBuilderTest extends \PHPUnit\Framework\TestCase {
 		$builder = $this->newInstance( [
 			'item' => [
 				'custom' => [ 'type' => 'invalid' ],
-			]
+			],
 		] );
 		$this->expectException( InvalidArgumentException::class );
 		$builder->getStatementGrouper();

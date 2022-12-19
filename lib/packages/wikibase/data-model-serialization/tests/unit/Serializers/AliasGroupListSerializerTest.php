@@ -56,28 +56,28 @@ class AliasGroupListSerializerTest extends TestCase {
 			[
 				new AliasGroupList( [ new AliasGroup( 'en', [] ) ] ),
 				true,
-				new \stdClass()
+				new \stdClass(),
 			],
 			[
 				new AliasGroupList( [ new AliasGroup( 'en', [ 'One' ] ) ] ),
 				false,
-				[ 'en' => [ 'One' ] ]
+				[ 'en' => [ 'One' ] ],
 			],
 			[
 				new AliasGroupList( [ new AliasGroup( 'en', [ 'One', 'Pony' ] ) ] ),
 				false,
-				[ 'en' => [ 'One', 'Pony' ] ]
+				[ 'en' => [ 'One', 'Pony' ] ],
 			],
 			[
 				new AliasGroupList( [
 					new AliasGroup( 'en', [ 'One', 'Pony' ] ),
-					new AliasGroup( 'de', [ 'foo', 'bar' ] )
+					new AliasGroup( 'de', [ 'foo', 'bar' ] ),
 				] ),
 				false,
 				[
 					'en' => [ 'One', 'Pony' ],
 					'de' => [ 'foo', 'bar' ],
-				]
+				],
 			],
 		];
 	}

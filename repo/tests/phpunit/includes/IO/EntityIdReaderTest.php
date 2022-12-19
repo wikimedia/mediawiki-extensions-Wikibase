@@ -66,16 +66,16 @@ class EntityIdReaderTest extends \PHPUnit\Framework\TestCase {
 
 		return [
 			'all' => [
-				'EntityIdReaderTest.txt', null, 100, [ $q1, $p2, $q3, $p4 ]
+				'EntityIdReaderTest.txt', null, 100, [ $q1, $p2, $q3, $p4 ],
 			],
 			'just properties' => [
-				'EntityIdReaderTest.txt', Property::ENTITY_TYPE, 100, [ $p2, $p4 ]
+				'EntityIdReaderTest.txt', Property::ENTITY_TYPE, 100, [ $p2, $p4 ],
 			],
 			'limit' => [
-				'EntityIdReaderTest.txt', null, 2, [ $q1, $p2 ]
+				'EntityIdReaderTest.txt', null, 2, [ $q1, $p2 ],
 			],
 			'limit and filter' => [
-				'EntityIdReaderTest.txt', Item::ENTITY_TYPE, 1, [ $q1 ]
+				'EntityIdReaderTest.txt', Item::ENTITY_TYPE, 1, [ $q1 ],
 			],
 		];
 	}
@@ -108,7 +108,7 @@ class EntityIdReaderTest extends \PHPUnit\Framework\TestCase {
 					[ $q1, $p2 ],
 					[ $q3, $p4 ],
 					[],
-				]
+				],
 			],
 			'limit and filter' => [
 				'EntityIdReaderTest.txt',
@@ -118,8 +118,8 @@ class EntityIdReaderTest extends \PHPUnit\Framework\TestCase {
 					[ $q1 ],
 					[ $q3 ],
 					[],
-				]
-			]
+				],
+			],
 		];
 	}
 

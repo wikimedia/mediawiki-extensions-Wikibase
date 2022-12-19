@@ -66,16 +66,16 @@ class JobQueueChangeNotificationSenderTest extends \PHPUnit\Framework\TestCase {
 		return [
 			'no changes' => [
 				100,
-				[]
+				[],
 			],
 			'one batch' => [
 				100,
-				[ $change, $change, $change ]
+				[ $change, $change, $change ],
 			],
 			'three batches' => [
 				2,
-				[ $change, $change, $change, $change, $change ]
-			]
+				[ $change, $change, $change, $change, $change ],
+			],
 		];
 	}
 

@@ -46,7 +46,7 @@ class TermsListViewTest extends \PHPUnit\Framework\TestCase {
 				return [
 					'en' => 'ltr',
 					'arc' => 'rtl',
-					'qqx' => 'ltr'
+					'qqx' => 'ltr',
 				][ $languageCode ];
 			} );
 
@@ -71,10 +71,10 @@ class TermsListViewTest extends \PHPUnit\Framework\TestCase {
 
 		return [
 			[
-				$labels, $descriptions, $aliasGroups, $languageCode, true, true, true
+				$labels, $descriptions, $aliasGroups, $languageCode, true, true, true,
 			],
 			[
-				new TermList(), new TermList(), new AliasGroupList(), 'lkt', false, false, false
+				new TermList(), new TermList(), new AliasGroupList(), 'lkt', false, false, false,
 			],
 			[
 				new TermList(),
@@ -83,8 +83,8 @@ class TermsListViewTest extends \PHPUnit\Framework\TestCase {
 				'en',
 				false,
 				false,
-				false
-			]
+				false,
+			],
 		];
 	}
 

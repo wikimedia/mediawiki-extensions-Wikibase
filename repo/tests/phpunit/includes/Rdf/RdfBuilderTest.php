@@ -203,7 +203,7 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 					$termsRdfBuilder,
 					$propertySpecificRdfBuilder
 				);
-			}
+			},
 		];
 	}
 
@@ -320,8 +320,8 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 					'Q4_version',
 					'Q4_statements_foreignsource_properties',
 					'Q4_direct_foreignsource_properties',
-					'Q4_values_foreignsource_properties'
-				]
+					'Q4_values_foreignsource_properties',
+				],
 			],
 			[ 'Q5', 'Q5_badges' ],
 			[
@@ -332,8 +332,8 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 					'Q6_statements_foreignsource_properties',
 					'Q6_qualifiers_foreignsource_properties',
 					'Q6_values_foreignsource_properties',
-					'Q6_referenced_foreignsource_properties'
-				]
+					'Q6_referenced_foreignsource_properties',
+				],
 			],
 			[
 				'Q7_no_prefixed_ids',
@@ -343,8 +343,8 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 					'Q7_statements_foreignsource_properties',
 					'Q7_reference_refs_foreignsource_properties',
 					'Q7_references_foreignsource_properties',
-					'Q7_values_foreignsource_properties'
-				]
+					'Q7_values_foreignsource_properties',
+				],
 			],
 			[ 'Q8', 'Q8_baddates_foreignsource_properties' ],
 		];
@@ -415,27 +415,27 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 			[
 				'Q4_no_prefixed_ids',
 				RdfProducer::PRODUCE_ALL_STATEMENTS,
-				[ 'Q4_meta', 'Q4_statements_foreignsource_properties' ]
+				[ 'Q4_meta', 'Q4_statements_foreignsource_properties' ],
 			],
 			[
 				'Q4_no_prefixed_ids',
 				RdfProducer::PRODUCE_TRUTHY_STATEMENTS,
-				[ 'Q4_meta', 'Q4_direct_foreignsource_properties' ]
+				[ 'Q4_meta', 'Q4_direct_foreignsource_properties' ],
 			],
 			[
 				'Q6_no_prefixed_ids',
 				RdfProducer::PRODUCE_ALL_STATEMENTS,
-				[ 'Q6_meta', 'Q6_statements_foreignsource_properties' ]
+				[ 'Q6_meta', 'Q6_statements_foreignsource_properties' ],
 			],
 			[
 				'Q6_no_prefixed_ids',
 				RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_QUALIFIERS,
-				[ 'Q6_meta', 'Q6_statements_foreignsource_properties', 'Q6_qualifiers_foreignsource_properties' ]
+				[ 'Q6_meta', 'Q6_statements_foreignsource_properties', 'Q6_qualifiers_foreignsource_properties' ],
 			],
 			[
 				'Q7_no_prefixed_ids',
 				RdfProducer::PRODUCE_ALL_STATEMENTS,
-				[ 'Q7_meta', 'Q7_statements_foreignsource_properties' ]
+				[ 'Q7_meta', 'Q7_statements_foreignsource_properties' ],
 			],
 			[
 				'Q7_no_prefixed_ids',
@@ -444,38 +444,38 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 					'Q7_meta',
 					'Q7_statements_foreignsource_properties',
 					'Q7_reference_refs_foreignsource_properties',
-					'Q7_references_foreignsource_properties'
-				]
+					'Q7_references_foreignsource_properties',
+				],
 			],
 			[
 				'Q3',
 				RdfProducer::PRODUCE_SITELINKS,
-				[ 'Q3_meta', 'Q3_sitelinks' ]
+				[ 'Q3_meta', 'Q3_sitelinks' ],
 			],
 			[
 				'Q4_no_prefixed_ids',
 				RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_PROPERTIES,
-				[ 'Q4_meta', 'Q4_statements_foreignsource_properties', 'Q4_props_foreignsource_properties' ]
+				[ 'Q4_meta', 'Q4_statements_foreignsource_properties', 'Q4_props_foreignsource_properties' ],
 			],
 			[
 				'Q4_no_prefixed_ids',
 				RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_FULL_VALUES,
-				[ 'Q4_meta', 'Q4_values_foreignsource_properties', 'Q4_statements_foreignsource_properties' ]
+				[ 'Q4_meta', 'Q4_values_foreignsource_properties', 'Q4_statements_foreignsource_properties' ],
 			],
 			[
 				'Q1',
 				RdfProducer::PRODUCE_VERSION_INFO,
-				'Q1_info'
+				'Q1_info',
 			],
 			[
 				'Q4_no_prefixed_ids',
 				RdfProducer::PRODUCE_TRUTHY_STATEMENTS | RdfProducer::PRODUCE_RESOLVED_ENTITIES,
-				[ 'Q4_meta', 'Q4_direct_foreignsource_properties', 'Q4_referenced' ]
+				[ 'Q4_meta', 'Q4_direct_foreignsource_properties', 'Q4_referenced' ],
 			],
 			"q10" => [
 				'Q10',
 				RdfProducer::PRODUCE_TRUTHY_STATEMENTS | RdfProducer::PRODUCE_RESOLVED_ENTITIES,
-				'Q10_redirect_foreignsource_properties'
+				'Q10_redirect_foreignsource_properties',
 			],
 		];
 	}
@@ -518,29 +518,29 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 			'simple prop' => [
 				'prop1',
 				[
-					'claims' => [ 'name' => 'rdf-claims' ]
-				]
+					'claims' => [ 'name' => 'rdf-claims' ],
+				],
 			],
 			'two props' => [
 				'prop2',
 				[
 					'claims' => [ 'name' => 'rdf-claims' ],
-					'sitelinks' => [ 'name' => 'rdf-sitelinks' ]
-				]
+					'sitelinks' => [ 'name' => 'rdf-sitelinks' ],
+				],
 			],
 			'unknown prop' => [
 				'prop3',
 				[
 					'Xclaims' => [ 'name' => 'rdf-claims' ],
-					'sitelinks' => [ 'name' => 'rdf-sitelinks' ]
-				]
+					'sitelinks' => [ 'name' => 'rdf-sitelinks' ],
+				],
 			],
 			'types' => [
 				'prop4',
 				[
 					'claims' => [ 'name' => 'rdf-claims', 'type' => 'integer' ],
-					'sitelinks' => [ 'name' => 'rdf-sitelinks', 'type' => 'float' ]
-				]
+					'sitelinks' => [ 'name' => 'rdf-sitelinks', 'type' => 'float' ],
+				],
 			],
 		];
 	}
@@ -571,9 +571,18 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 		$vocab = new RdfVocabulary(
 			[ '' => RdfBuilderTestData::URI_BASE ],
 			[ '' => RdfBuilderTestData::URI_DATA ],
-			new EntitySourceDefinitions( [
-				new DatabaseEntitySource( '', 'somedb', [ 'item' => [ 'namespaceId' => 123, 'slot' => SlotRecord::MAIN ] ], '', '', '', '' )
-			], new SubEntityTypesMapper( [] ) ),
+			new EntitySourceDefinitions(
+				[ new DatabaseEntitySource(
+					'',
+					'somedb',
+					[ 'item' => [ 'namespaceId' => 123, 'slot' => SlotRecord::MAIN ] ],
+					'',
+					'',
+					'',
+					''
+				) ],
+				new SubEntityTypesMapper( [] )
+			),
 			[ '' => '' ],
 			[ '' => '' ],
 			[],
@@ -595,7 +604,7 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 	public function testPagePropsNone(): void {
 		// Props disabled by flag
 		$props = [
-			'claims' => [ 'name' => 'rdf-claims' ]
+			'claims' => [ 'name' => 'rdf-claims' ],
 		];
 		$vocab = new RdfVocabulary(
 			[ '' => RdfBuilderTestData::URI_BASE ],

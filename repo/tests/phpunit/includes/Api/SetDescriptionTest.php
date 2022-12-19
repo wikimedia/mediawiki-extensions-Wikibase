@@ -89,8 +89,8 @@ class SetDescriptionTest extends ModifyTermTestCase {
 		$userWithAllPermissions = $this->createUserWithGroup( 'all-permission' );
 
 		$this->setMwGlobals( 'wgGroupPermissions', [
-			'all-permission' => [ 'item-term' => true, ],
-			'*' => [ 'read' => true, 'edit' => true, 'writeapi' => true ]
+			'all-permission' => [ 'item-term' => true ],
+			'*' => [ 'read' => true, 'edit' => true, 'writeapi' => true ],
 		] );
 
 		$newItem = $this->createItemUsing( $userWithAllPermissions );
@@ -110,8 +110,8 @@ class SetDescriptionTest extends ModifyTermTestCase {
 
 		$this->setMwGlobals( 'wgGroupPermissions', [
 			'no-permission' => [ 'item-term' => false ],
-			'all-permission' => [ 'item-term' => true, ],
-			'*' => [ 'read' => true, 'edit' => true, 'writeapi' => true ]
+			'all-permission' => [ 'item-term' => true ],
+			'*' => [ 'read' => true, 'edit' => true, 'writeapi' => true ],
 		] );
 
 		MediaWikiServices::getInstance()->resetServiceForTesting( 'PermissionManager' );
@@ -122,7 +122,7 @@ class SetDescriptionTest extends ModifyTermTestCase {
 		// Then the request is denied
 		$expected = [
 			'type' => ApiUsageException::class,
-			'code' => 'permissiondenied'
+			'code' => 'permissiondenied',
 		];
 
 		MediaWikiServices::getInstance()->getPermissionManager()->invalidateUsersRightsCache(
@@ -144,7 +144,7 @@ class SetDescriptionTest extends ModifyTermTestCase {
 
 		$this->setMwGlobals( 'wgGroupPermissions', [
 			'all-permission' => [ 'item-term' => true, 'createpage' => true ],
-			'*' => [ 'read' => true, 'edit' => true, 'writeapi' => true ]
+			'*' => [ 'read' => true, 'edit' => true, 'writeapi' => true ],
 		] );
 
 		list( $result, ) = $this->doApiRequestWithToken(
@@ -162,7 +162,7 @@ class SetDescriptionTest extends ModifyTermTestCase {
 
 		$this->setMwGlobals( 'wgGroupPermissions', [
 			'no-permission' => [ 'createpage' => false ],
-			'*' => [ 'read' => true, 'edit' => true, 'item-term' => true, 'writeapi' => true ]
+			'*' => [ 'read' => true, 'edit' => true, 'item-term' => true, 'writeapi' => true ],
 		] );
 
 		MediaWikiServices::getInstance()->resetServiceForTesting( 'PermissionManager' );
@@ -170,7 +170,7 @@ class SetDescriptionTest extends ModifyTermTestCase {
 		// Then the request is denied
 		$expected = [
 			'type' => ApiUsageException::class,
-			'code' => 'permissiondenied'
+			'code' => 'permissiondenied',
 		];
 
 		$this->doTestQueryExceptions(

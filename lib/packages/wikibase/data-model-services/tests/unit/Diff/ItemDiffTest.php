@@ -35,7 +35,7 @@ class ItemDiffTest extends EntityDiffOldTest {
 			'Test',
 			[
 				new ItemId( 'Q42' ),
-				new ItemId( 'Q3' )
+				new ItemId( 'Q3' ),
 			]
 		);
 
@@ -44,7 +44,7 @@ class ItemDiffTest extends EntityDiffOldTest {
 			'dewiki',
 			'Test',
 			[
-				new ItemId( 'Q42' )
+				new ItemId( 'Q42' ),
 			]
 		);
 
@@ -66,7 +66,7 @@ class ItemDiffTest extends EntityDiffOldTest {
 			'Test',
 			[
 				new ItemId( 'Q42' ),
-				new ItemId( 'Q3' )
+				new ItemId( 'Q3' ),
 			]
 		);
 
@@ -79,7 +79,7 @@ class ItemDiffTest extends EntityDiffOldTest {
 			'Test',
 			[
 				new ItemId( 'Q42' ),
-				new ItemId( 'Q3' )
+				new ItemId( 'Q3' ),
 			]
 		);
 
@@ -88,7 +88,7 @@ class ItemDiffTest extends EntityDiffOldTest {
 			'enwiki',
 			'Test',
 			[
-				new ItemId( 'Q42' )
+				new ItemId( 'Q42' ),
 			]
 		);
 
@@ -99,7 +99,7 @@ class ItemDiffTest extends EntityDiffOldTest {
 			'Test',
 			[
 				new ItemId( 'Q41' ),
-				new ItemId( 'Q3' )
+				new ItemId( 'Q3' ),
 			]
 		);
 
@@ -109,7 +109,7 @@ class ItemDiffTest extends EntityDiffOldTest {
 			'Test',
 			[
 				new ItemId( 'Q42' ),
-				new ItemId( 'Q3' )
+				new ItemId( 'Q3' ),
 			]
 		);
 
@@ -121,14 +121,14 @@ class ItemDiffTest extends EntityDiffOldTest {
 			'enwiki',
 			'Test',
 			[
-				new ItemId( 'Q42' )
+				new ItemId( 'Q42' ),
 			]
 		);
 		$a->getSiteLinkList()->addNewSiteLink(
 			'dewiki',
 			'Test',
 			[
-				new ItemId( 'Q3' )
+				new ItemId( 'Q3' ),
 			]
 		);
 
@@ -144,7 +144,7 @@ class ItemDiffTest extends EntityDiffOldTest {
 			'Test',
 			[
 				new ItemId( 'Q42' ),
-				new ItemId( 'Q3' )
+				new ItemId( 'Q3' ),
 			]
 		);
 
@@ -154,7 +154,7 @@ class ItemDiffTest extends EntityDiffOldTest {
 			'Test!!!',
 			[
 				new ItemId( 'Q42' ),
-				new ItemId( 'Q3' )
+				new ItemId( 'Q3' ),
 			]
 		);
 
@@ -198,17 +198,17 @@ class ItemDiffTest extends EntityDiffOldTest {
 
 		$argLists['label changed'] = [
 			[ 'label' => new Diff( [ 'x' => new DiffOpAdd( 'foo' ) ] ) ],
-			false
+			false,
 		];
 
 		$argLists['empty links diff'] = [
 			[ 'links' => new Diff( [], true ) ],
-			true
+			true,
 		];
 
 		$argLists['non-empty links diff'] = [
 			[ 'links' => new Diff( [ new DiffOpAdd( 'foo' ) ], true ) ],
-			false
+			false,
 		];
 
 		return $argLists;

@@ -59,11 +59,11 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 					],
 					'header-basic' => [
 						[ '(wikibase-pageinfo-wb-claims)', '5' ],
-						[ '(wikibase-pageinfo-wb-identifiers)', '4' ]
+						[ '(wikibase-pageinfo-wb-identifiers)', '4' ],
 					],
 				],
 				$context,
-				[ 'dewiki', 'enwiki' ]
+				[ 'dewiki', 'enwiki' ],
 			],
 			'elwiki' => [
 				[
@@ -75,28 +75,28 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 					],
 					'header-basic' => [
 						[ '(wikibase-pageinfo-wb-claims)', '5' ],
-						[ '(wikibase-pageinfo-wb-identifiers)', '4' ]
+						[ '(wikibase-pageinfo-wb-identifiers)', '4' ],
 					],
 				],
 				$context,
-				[ 'elwiki' ]
+				[ 'elwiki' ],
 			],
 			'no subscription' => [
 				[
 					'header-properties' => [
 						[
 							'(wikibase-pageinfo-subscription)',
-							'(wikibase-pageinfo-subscription-none)'
-						]
+							'(wikibase-pageinfo-subscription-none)',
+						],
 					],
 					'header-basic' => [
 						[ '(wikibase-pageinfo-wb-claims)', '5' ],
-						[ '(wikibase-pageinfo-wb-identifiers)', '4' ]
+						[ '(wikibase-pageinfo-wb-identifiers)', '4' ],
 					],
 				],
 				$context,
-				[]
-			]
+				[],
+			],
 		];
 	}
 

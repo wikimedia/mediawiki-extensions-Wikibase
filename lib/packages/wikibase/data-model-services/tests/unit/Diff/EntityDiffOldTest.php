@@ -141,7 +141,7 @@ abstract class EntityDiffOldTest extends TestCase {
 			$base,
 			$current,
 			$new,
-			0 // there should eb no conflicts.
+			0, // there should eb no conflicts.
 		];
 
 		// #1: adding an alias where there was none before
@@ -155,7 +155,7 @@ abstract class EntityDiffOldTest extends TestCase {
 			$base,
 			$current,
 			$new,
-			0 // there should eb no conflicts.
+			0, // there should eb no conflicts.
 		];
 
 		// #2: adding an alias where there already was one before
@@ -170,7 +170,7 @@ abstract class EntityDiffOldTest extends TestCase {
 			$base,
 			$current,
 			$new,
-			0 // there should be no conflicts.
+			0, // there should be no conflicts.
 		];
 
 		// #3: adding an alias where there already was one in another language
@@ -185,7 +185,7 @@ abstract class EntityDiffOldTest extends TestCase {
 			$base,
 			$current,
 			$new,
-			0 // there should be no conflicts.
+			0, // there should be no conflicts.
 		];
 
 		return $cases;

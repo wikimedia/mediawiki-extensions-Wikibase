@@ -23,22 +23,22 @@ class TermIndexSearchCriteriaTest extends \PHPUnit\Framework\TestCase {
 					'termType' => TermIndexEntry::TYPE_LABEL,
 					'termLanguage' => 'en',
 					'termText' => 'foo',
-				]
+				],
 			],
 			[
 				[
 					'termType' => TermIndexEntry::TYPE_LABEL,
 					'termLanguage' => 'en',
-				]
+				],
 			],
 			[
 				[
 					'termText' => 'foo',
-				]
+				],
 			],
 			[
-				[]
-			]
+				[],
+			],
 		];
 	}
 

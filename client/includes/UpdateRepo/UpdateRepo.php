@@ -96,7 +96,7 @@ abstract class UpdateRepo {
 				$this->logger->debug(
 					'Could not find an item for "{titleText}"',
 					[
-						'titleText' => $this->title->getPrefixedText()
+						'titleText' => $this->title->getPrefixedText(),
 					]
 				);
 			}

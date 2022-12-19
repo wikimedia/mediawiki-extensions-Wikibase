@@ -24,194 +24,194 @@ class AliasGroupListPatcherTest extends TestCase {
 			'add aliases (associative)' => [
 				new AliasGroupList(),
 				new Diff( [
-					'en' => new Diff( [ new DiffOpAdd( 'foo' ), new DiffOpAdd( 'bar' ) ] )
+					'en' => new Diff( [ new DiffOpAdd( 'foo' ), new DiffOpAdd( 'bar' ) ] ),
 				], true ),
 				new AliasGroupList( [
-					new AliasGroup( 'en', [ 'foo', 'bar' ] )
-				] )
+					new AliasGroup( 'en', [ 'foo', 'bar' ] ),
+				] ),
 			],
 			'add aliases (non-associative)' => [
 				new AliasGroupList(),
 				new Diff( [
-					'en' => new Diff( [ new DiffOpAdd( 'foo' ), new DiffOpAdd( 'bar' ) ] )
+					'en' => new Diff( [ new DiffOpAdd( 'foo' ), new DiffOpAdd( 'bar' ) ] ),
 				], false ),
 				new AliasGroupList( [
-					new AliasGroup( 'en', [ 'foo', 'bar' ] )
-				] )
+					new AliasGroup( 'en', [ 'foo', 'bar' ] ),
+				] ),
 			],
 			'add aliases (auto-detected)' => [
 				new AliasGroupList(),
 				new Diff( [
-					'en' => new Diff( [ new DiffOpAdd( 'foo' ), new DiffOpAdd( 'bar' ) ] )
+					'en' => new Diff( [ new DiffOpAdd( 'foo' ), new DiffOpAdd( 'bar' ) ] ),
 				] ),
 				new AliasGroupList( [
-					new AliasGroup( 'en', [ 'foo', 'bar' ] )
-				] )
+					new AliasGroup( 'en', [ 'foo', 'bar' ] ),
+				] ),
 			],
 			'add aliases (atomic)' => [
 				new AliasGroupList(),
 				new Diff( [
-					'en' => new DiffOpAdd( [ 'foo', 'bar' ] )
+					'en' => new DiffOpAdd( [ 'foo', 'bar' ] ),
 				] ),
 				new AliasGroupList( [
-					new AliasGroup( 'en', [ 'foo', 'bar' ] )
-				] )
+					new AliasGroup( 'en', [ 'foo', 'bar' ] ),
+				] ),
 			],
 			'change aliase' => [
 				new AliasGroupList( [
-					new AliasGroup( 'en', [ 'foo', 'bar' ] )
+					new AliasGroup( 'en', [ 'foo', 'bar' ] ),
 				] ),
 				new Diff( [
-					'en' => new Diff( [ new DiffOpChange( 'bar', 'baz' ) ] )
+					'en' => new Diff( [ new DiffOpChange( 'bar', 'baz' ) ] ),
 				] ),
 				new AliasGroupList( [
-					new AliasGroup( 'en', [ 'foo', 'baz' ] )
-				] )
+					new AliasGroup( 'en', [ 'foo', 'baz' ] ),
+				] ),
 			],
 			'change aliases (atomic)' => [
 				new AliasGroupList( [
-					new AliasGroup( 'en', [ 'foo', 'bar' ] )
+					new AliasGroup( 'en', [ 'foo', 'bar' ] ),
 				] ),
 				new Diff( [
-					'en' => new DiffOpChange( [ 'foo', 'bar' ], [ 'baz' ] )
+					'en' => new DiffOpChange( [ 'foo', 'bar' ], [ 'baz' ] ),
 				] ),
 				new AliasGroupList( [
-					new AliasGroup( 'en', [ 'baz' ] )
-				] )
+					new AliasGroup( 'en', [ 'baz' ] ),
+				] ),
 			],
 			'remove all aliases' => [
 				new AliasGroupList( [
-					new AliasGroup( 'en', [ 'foo', 'bar' ] )
+					new AliasGroup( 'en', [ 'foo', 'bar' ] ),
 				] ),
 				new Diff( [
-					'en' => new Diff( [ new DiffOpRemove( 'foo' ), new DiffOpRemove( 'bar' ) ] )
+					'en' => new Diff( [ new DiffOpRemove( 'foo' ), new DiffOpRemove( 'bar' ) ] ),
 				] ),
-				new AliasGroupList()
+				new AliasGroupList(),
 			],
 			'remove all aliases (atomic)' => [
 				new AliasGroupList( [
-					new AliasGroup( 'en', [ 'foo', 'bar' ] )
+					new AliasGroup( 'en', [ 'foo', 'bar' ] ),
 				] ),
 				new Diff( [
-					'en' => new DiffOpRemove( [ 'foo', 'bar' ] )
+					'en' => new DiffOpRemove( [ 'foo', 'bar' ] ),
 				] ),
-				new AliasGroupList()
+				new AliasGroupList(),
 			],
 			'remove some aliases' => [
 				new AliasGroupList( [
-					new AliasGroup( 'en', [ 'foo', 'bar', 'baz' ] )
+					new AliasGroup( 'en', [ 'foo', 'bar', 'baz' ] ),
 				] ),
 				new Diff( [
-					'en' => new Diff( [ new DiffOpRemove( 'foo' ), new DiffOpRemove( 'bar' ) ] )
+					'en' => new Diff( [ new DiffOpRemove( 'foo' ), new DiffOpRemove( 'bar' ) ] ),
 				] ),
 				new AliasGroupList( [
-					new AliasGroup( 'en', [ 'baz' ] )
-				] )
+					new AliasGroup( 'en', [ 'baz' ] ),
+				] ),
 			],
 			'remove some aliases is no-op (atomic)' => [
 				new AliasGroupList( [
-					new AliasGroup( 'en', [ 'foo', 'bar', 'baz' ] )
+					new AliasGroup( 'en', [ 'foo', 'bar', 'baz' ] ),
 				] ),
 				new Diff( [
-					'en' => new DiffOpRemove( [ 'foo', 'bar' ] )
+					'en' => new DiffOpRemove( [ 'foo', 'bar' ] ),
 				] ),
 				new AliasGroupList( [
-					new AliasGroup( 'en', [ 'foo', 'bar', 'baz' ] )
-				] )
+					new AliasGroup( 'en', [ 'foo', 'bar', 'baz' ] ),
+				] ),
 			],
 			'add alias to an existing language' => [
 				new AliasGroupList( [
-					new AliasGroup( 'en', [ 'foo', 'bar' ] )
+					new AliasGroup( 'en', [ 'foo', 'bar' ] ),
 				] ),
 				new Diff( [
-					'en' => new Diff( [ new DiffOpAdd( 'baz' ) ] )
+					'en' => new Diff( [ new DiffOpAdd( 'baz' ) ] ),
 				] ),
 				new AliasGroupList( [
-					new AliasGroup( 'en', [ 'foo', 'bar', 'baz' ] )
-				] )
+					new AliasGroup( 'en', [ 'foo', 'bar', 'baz' ] ),
+				] ),
 			],
 			'add an existing language is no-op (atomic)' => [
 				new AliasGroupList( [
-					new AliasGroup( 'en', [ 'foo', 'bar' ] )
+					new AliasGroup( 'en', [ 'foo', 'bar' ] ),
 				] ),
 				new Diff( [
-					'en' => new DiffOpAdd( [ 'baz' ] )
+					'en' => new DiffOpAdd( [ 'baz' ] ),
 				] ),
 				new AliasGroupList( [
-					new AliasGroup( 'en', [ 'foo', 'bar' ] )
-				] )
+					new AliasGroup( 'en', [ 'foo', 'bar' ] ),
+				] ),
 			],
 			'add two alias groups' => [
 				new AliasGroupList( [
-					new AliasGroup( 'en', [ 'foo', 'bar' ] )
+					new AliasGroup( 'en', [ 'foo', 'bar' ] ),
 				] ),
 				new Diff( [
 					'de' => new Diff( [ new DiffOpAdd( 'foo' ), new DiffOpAdd( 'baz' ) ] ),
-					'nl' => new Diff( [ new DiffOpAdd( 'bar' ), new DiffOpAdd( 'baz' ) ] )
+					'nl' => new Diff( [ new DiffOpAdd( 'bar' ), new DiffOpAdd( 'baz' ) ] ),
 				] ),
 				new AliasGroupList( [
 					new AliasGroup( 'en', [ 'foo', 'bar' ] ),
 					new AliasGroup( 'de', [ 'foo', 'baz' ] ),
-					new AliasGroup( 'nl', [ 'bar', 'baz' ] )
-				] )
+					new AliasGroup( 'nl', [ 'bar', 'baz' ] ),
+				] ),
 			],
 			'add two alias groups (atomic)' => [
 				new AliasGroupList( [
-					new AliasGroup( 'en', [ 'foo', 'bar' ] )
+					new AliasGroup( 'en', [ 'foo', 'bar' ] ),
 				] ),
 				new Diff( [
 					'de' => new DiffOpAdd( [ 'foo', 'baz' ] ),
-					'nl' => new DiffOpAdd( [ 'bar', 'baz' ] )
+					'nl' => new DiffOpAdd( [ 'bar', 'baz' ] ),
 				] ),
 				new AliasGroupList( [
 					new AliasGroup( 'en', [ 'foo', 'bar' ] ),
 					new AliasGroup( 'de', [ 'foo', 'baz' ] ),
-					new AliasGroup( 'nl', [ 'bar', 'baz' ] )
-				] )
+					new AliasGroup( 'nl', [ 'bar', 'baz' ] ),
+				] ),
 			],
 			'remove a not existing language is no-op' => [
 				new AliasGroupList( [
-					new AliasGroup( 'en', [ 'foo', 'bar' ] )
+					new AliasGroup( 'en', [ 'foo', 'bar' ] ),
 				] ),
 				new Diff( [
-					'de' => new Diff( [ new DiffOpRemove( 'bar' ) ] )
+					'de' => new Diff( [ new DiffOpRemove( 'bar' ) ] ),
 				] ),
 				new AliasGroupList( [
-					new AliasGroup( 'en', [ 'foo', 'bar' ] )
-				] )
+					new AliasGroup( 'en', [ 'foo', 'bar' ] ),
+				] ),
 			],
 			'remove a not existing language is no-op (atomic)' => [
 				new AliasGroupList( [
-					new AliasGroup( 'en', [ 'foo', 'bar' ] )
+					new AliasGroup( 'en', [ 'foo', 'bar' ] ),
 				] ),
 				new Diff( [
-					'de' => new DiffOpRemove( [ 'bar' ] )
+					'de' => new DiffOpRemove( [ 'bar' ] ),
 				] ),
 				new AliasGroupList( [
-					new AliasGroup( 'en', [ 'foo', 'bar' ] )
-				] )
+					new AliasGroup( 'en', [ 'foo', 'bar' ] ),
+				] ),
 			],
 			'change different aliases is no-op' => [
 				new AliasGroupList( [
-					new AliasGroup( 'en', [ 'foo' ] )
+					new AliasGroup( 'en', [ 'foo' ] ),
 				] ),
 				new Diff( [
-					'en' => new Diff( [ new DiffOpChange( 'bar', 'baz' ) ] )
+					'en' => new Diff( [ new DiffOpChange( 'bar', 'baz' ) ] ),
 				] ),
 				new AliasGroupList( [
-					new AliasGroup( 'en', [ 'foo' ] )
-				] )
+					new AliasGroup( 'en', [ 'foo' ] ),
+				] ),
 			],
 			'change different aliases is no-op (atomic)' => [
 				new AliasGroupList( [
-					new AliasGroup( 'en', [ 'foo', 'bar' ] )
+					new AliasGroup( 'en', [ 'foo', 'bar' ] ),
 				] ),
 				new Diff( [
-					'en' => new DiffOpChange( [ 'foo', 'baz' ], [ 'baz' ] )
+					'en' => new DiffOpChange( [ 'foo', 'baz' ], [ 'baz' ] ),
 				] ),
 				new AliasGroupList( [
-					new AliasGroup( 'en', [ 'foo', 'bar' ] )
-				] )
+					new AliasGroup( 'en', [ 'foo', 'bar' ] ),
+				] ),
 			],
 			'complex diff' => [
 				new AliasGroupList( [
@@ -223,13 +223,13 @@ class AliasGroupListPatcherTest extends TestCase {
 					'en' => new Diff( [ new DiffOpRemove( 'foo' ), new DiffOpAdd( 'baz' ) ] ),
 					'de' => new Diff( [ new DiffOpRemove( 'foo' ), new DiffOpRemove( 'baz' ) ] ),
 					'nl' => new Diff( [ new DiffOpRemove( 'foo' ), new DiffOpRemove( 'bar' ) ] ),
-					'it' => new Diff( [ new DiffOpAdd( 'bar' ), new DiffOpAdd( 'baz' ) ] )
+					'it' => new Diff( [ new DiffOpAdd( 'bar' ), new DiffOpAdd( 'baz' ) ] ),
 				] ),
 				new AliasGroupList( [
 					new AliasGroup( 'en', [ 'bar', 'baz' ] ),
 					new AliasGroup( 'nl', [ 'baz' ] ),
-					new AliasGroup( 'it', [ 'bar', 'baz' ] )
-				] )
+					new AliasGroup( 'it', [ 'bar', 'baz' ] ),
+				] ),
 			],
 		];
 	}

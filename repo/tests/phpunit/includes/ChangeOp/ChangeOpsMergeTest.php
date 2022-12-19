@@ -237,7 +237,7 @@ class ChangeOpsMergeTest extends MediaWikiIntegrationTestCase {
 			$itemWithEnLabel->copy(),
 			$itemWithEnBarLabel->copy(),
 			new Item(),
-			$itemWithLabelAndAlias->copy()
+			$itemWithLabelAndAlias->copy(),
 		];
 
 		$itemWithDescription = NewItem::withDescription( 'en', 'foo' )
@@ -263,7 +263,7 @@ class ChangeOpsMergeTest extends MediaWikiIntegrationTestCase {
 			$itemWithBarDescription->copy(),
 			$itemWithDescription->copy(),
 			$itemWithBarDescription->copy(),
-			[ 'description' ]
+			[ 'description' ],
 		];
 
 		$itemWithFooBarAliases = NewItem::withAliases( 'en', [ 'foo', 'bar' ] )
@@ -323,7 +323,7 @@ class ChangeOpsMergeTest extends MediaWikiIntegrationTestCase {
 			$itemWithStatement->copy(),
 			new Item(),
 			new Item(),
-			$itemWithStatement->copy()
+			$itemWithStatement->copy(),
 		];
 
 		$qualifiedStatement = new Statement(
@@ -339,7 +339,7 @@ class ChangeOpsMergeTest extends MediaWikiIntegrationTestCase {
 			$itemWithQualifiedStatement->copy(),
 			new Item(),
 			new Item(),
-			$itemWithQualifiedStatement->copy()
+			$itemWithQualifiedStatement->copy(),
 		];
 
 		$anotherQualifiedStatement = new Statement(
@@ -410,7 +410,7 @@ class ChangeOpsMergeTest extends MediaWikiIntegrationTestCase {
 			$smallerItem,
 			$smallerMergedItem,
 			$bigMergedItem,
-			[ 'description', 'sitelink', 'statement' ]
+			[ 'description', 'sitelink', 'statement' ],
 		];
 
 		return $testCases;

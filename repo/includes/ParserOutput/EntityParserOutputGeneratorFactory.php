@@ -228,7 +228,7 @@ class EntityParserOutputGeneratorFactory {
 				$this->entityReferenceExtractorDelegator,
 				$this->entityTitleLookup,
 				$this->linkBatchFactory
-			)
+			),
 		];
 
 		// TODO: do not use global state
@@ -236,7 +236,7 @@ class EntityParserOutputGeneratorFactory {
 			'WikibaseRepoOnParserOutputUpdaterConstruction',
 			[
 				$statementUpdater,
-				&$entityUpdaters
+				&$entityUpdaters,
 			]
 		);
 

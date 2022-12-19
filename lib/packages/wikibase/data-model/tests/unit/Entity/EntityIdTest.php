@@ -59,15 +59,15 @@ class EntityIdTest extends \PHPUnit\Framework\TestCase {
 		return [
 			'v05serialization' => [
 				new ItemId( 'q123' ),
-				'C:32:"Wikibase\DataModel\Entity\ItemId":15:{["item","Q123"]}'
+				'C:32:"Wikibase\DataModel\Entity\ItemId":15:{["item","Q123"]}',
 			],
 			'v07serialization' => [
 				new ItemId( 'q123' ),
-				'C:32:"Wikibase\DataModel\Entity\ItemId":4:{Q123}'
+				'C:32:"Wikibase\DataModel\Entity\ItemId":4:{Q123}',
 			],
 			'2022-03 PHP 7.4+' => [
 				new ItemId( 'q123' ),
-				'O:32:"Wikibase\DataModel\Entity\ItemId":1:{s:13:"serialization";s:4:"Q123";}'
+				'O:32:"Wikibase\DataModel\Entity\ItemId":1:{s:13:"serialization";s:4:"Q123";}',
 			],
 		];
 	}

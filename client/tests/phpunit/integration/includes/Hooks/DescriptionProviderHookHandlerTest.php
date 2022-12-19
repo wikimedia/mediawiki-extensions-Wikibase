@@ -49,7 +49,7 @@ class DescriptionProviderHookHandlerTest extends MediaWikiIntegrationTestCase {
 	public function provideDescriptionProviderTestData() {
 		$pageIdentities = [
 			1 => new PageIdentityValue( 1, NS_MAIN, 'One', PageIdentity::LOCAL ),
-			2 => new PageIdentityValue( 2, NS_MAIN, 'Two', PageIdentity::LOCAL )
+			2 => new PageIdentityValue( 2, NS_MAIN, 'Two', PageIdentity::LOCAL ),
 		];
 		yield [
 			$pageIdentities,
@@ -57,7 +57,7 @@ class DescriptionProviderHookHandlerTest extends MediaWikiIntegrationTestCase {
 			false,
 			[ DescriptionLookup::SOURCE_CENTRAL, DescriptionLookup::SOURCE_LOCAL ],
 			[ 1 => 'description' ],
-			[ 1 => 'description', 2 => null ]
+			[ 1 => 'description', 2 => null ],
 		];
 		yield [
 			$pageIdentities,
@@ -65,7 +65,7 @@ class DescriptionProviderHookHandlerTest extends MediaWikiIntegrationTestCase {
 			false,
 			[ DescriptionLookup::SOURCE_CENTRAL ],
 			[ 2 => 'description' ],
-			[ 1 => null, 2 => 'description' ]
+			[ 1 => null, 2 => 'description' ],
 		];
 		yield [
 			$pageIdentities,
@@ -73,7 +73,7 @@ class DescriptionProviderHookHandlerTest extends MediaWikiIntegrationTestCase {
 			true,
 			[ DescriptionLookup::SOURCE_LOCAL ],
 			[ 2 => 'description' ],
-			[ 1 => null, 2 => 'description' ]
+			[ 1 => null, 2 => 'description' ],
 		];
 	}
 }

@@ -60,7 +60,7 @@ class EntityContentFactoryTest extends MediaWikiIntegrationTestCase {
 			[ [ null ], [] ],
 			[ [], [ null ] ],
 			[ [ 1 ], [] ],
-			[ [], [ 'foo' ] ]
+			[ [], [ 'foo' ] ],
 		];
 	}
 
@@ -113,7 +113,7 @@ class EntityContentFactoryTest extends MediaWikiIntegrationTestCase {
 		return new EntityContentFactory(
 			[
 				'item' => ItemContent::CONTENT_MODEL_ID,
-				'property' => PropertyContent::CONTENT_MODEL_ID
+				'property' => PropertyContent::CONTENT_MODEL_ID,
 			],
 			[
 				'item' => function() {
@@ -121,7 +121,7 @@ class EntityContentFactoryTest extends MediaWikiIntegrationTestCase {
 				},
 				'property' => function() {
 					return WikibaseRepo::getPropertyHandler();
-				}
+				},
 			]
 		);
 	}

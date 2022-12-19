@@ -115,14 +115,14 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 			$buffer[0],
 			[
 				LogLevel::DEBUG,
-				'Wikibase\Repo\WikibasePingback::sendPingback: pingback sent OK (' . self::TEST_KEY . ')'
+				'Wikibase\Repo\WikibasePingback::sendPingback: pingback sent OK (' . self::TEST_KEY . ')',
 			]
 		);
 		$this->assertSame(
 			$buffer[1],
 			[
 				LogLevel::DEBUG,
-				'Wikibase\Repo\WikibasePingback::sendPingback: pingback sent OK (' . self::TEST_KEY . ')'
+				'Wikibase\Repo\WikibasePingback::sendPingback: pingback sent OK (' . self::TEST_KEY . ')',
 			]
 		);
 		MWTimestamp::setFakeTime( false );
@@ -178,7 +178,7 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 		$extensions->method( 'getAllThings' )
 			->willReturn( [
 				'Babel' => [],
-				'VisualEditor' => []
+				'VisualEditor' => [],
 			] );
 
 		return new WikibasePingback(

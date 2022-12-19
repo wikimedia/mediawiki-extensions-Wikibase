@@ -63,7 +63,7 @@ trait FindUnusedTermTrait {
 			[ 'wbpt_term_in_lang_id' => $unusedTermInLangIds ],
 			__METHOD__,
 			[
-				'FOR UPDATE'
+				'FOR UPDATE',
 			]
 		);
 		$termInLangIdsUsedInItemsSinceLastLoopRan = $dbw->selectFieldValues(
@@ -72,7 +72,7 @@ trait FindUnusedTermTrait {
 			[ 'wbit_term_in_lang_id' => $unusedTermInLangIds ],
 			__METHOD__,
 			[
-				'FOR UPDATE'
+				'FOR UPDATE',
 			]
 		);
 

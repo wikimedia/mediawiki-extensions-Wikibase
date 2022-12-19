@@ -90,12 +90,12 @@ class DumpJsonTest extends MediaWikiIntegrationTestCase {
 					] ),
 					new AliasGroupList( [
 						new AliasGroup( 'en', [ 'ali1', 'ali2' ] ),
-						new AliasGroup( 'dv', [ 'ali11', 'ali22' ] )
+						new AliasGroup( 'dv', [ 'ali11', 'ali22' ] ),
 					] )
 				),
 				new SiteLinkList( [
 					new SiteLink( 'enwiki', 'Berlin' ),
-					new SiteLink( 'dewiki', 'England', [ new ItemId( 'Q1' ) ] )
+					new SiteLink( 'dewiki', 'England', [ new ItemId( 'Q1' ) ] ),
 				] ),
 				new StatementList(
 					new Statement(
@@ -116,7 +116,7 @@ class DumpJsonTest extends MediaWikiIntegrationTestCase {
 						'GUID2'
 					)
 				)
-			)
+			),
 		];
 
 		foreach ( $testEntities as $testEntity ) {
@@ -165,7 +165,7 @@ class DumpJsonTest extends MediaWikiIntegrationTestCase {
 				],
 				__DIR__ . '/../data/maintenance/dumpJson-limit2-pagemetadata-log.txt',
 				__DIR__ . '/../data/maintenance/dumpJson-limit2-pagemetadata-out.txt',
-			]
+			],
 		];
 	}
 

@@ -50,7 +50,7 @@ class StoreTest extends MediaWikiIntegrationTestCase {
 					'sharedCacheType' => CACHE_NONE,
 					'sharedCacheDuration' => 60 * 60,
 				] )
-			)
+			),
 		];
 
 		return [ $instances ];
@@ -88,7 +88,7 @@ class StoreTest extends MediaWikiIntegrationTestCase {
 		$constants = [
 			Store::LOOKUP_CACHING_ENABLED,
 			Store::LOOKUP_CACHING_DISABLED,
-			Store::LOOKUP_CACHING_RETRIEVE_ONLY
+			Store::LOOKUP_CACHING_RETRIEVE_ONLY,
 		];
 		$this->assertSame( count( $constants ), count( array_unique( $constants ) ) );
 	}

@@ -57,35 +57,35 @@ class FingerprintChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 			'no fingerprint changes' => [
 				'changeRequest' => [ 'claims' => [], 'siteLinks' => [] ],
 				'expectedChangeOpType' => NullChangeOp::class,
-				'expectedLengthOfChangeOps' => 0
+				'expectedLengthOfChangeOps' => 0,
 			],
 
 			'label changes only' => [
 				'changeRequest' => [ 'labels' => [ 'en' => [ 'language' => 'en', 'value' => 'foo' ] ] ],
 				'expectedChangeOpType' => ChangeOpFingerprint::class,
-				'expectedLengthOfChangeOps' => 1
+				'expectedLengthOfChangeOps' => 1,
 			],
 
 			'description changes only' => [
 				'changeRequest' => [ 'descriptions' => [ 'en' => [ 'language' => 'en', 'value' => 'foo' ] ] ],
 				'expectedChangeOpType' => ChangeOpFingerprint::class,
-				'expectedLengthOfChangeOps' => 1
+				'expectedLengthOfChangeOps' => 1,
 			],
 
 			'aliases changes only' => [
 				'changeRequest' => [ 'aliases' => [ 'en' => [ 'language' => 'en', 'value' => 'foo' ] ] ],
 				'expectedChangeOpType' => ChangeOpFingerprint::class,
-				'expectedLengthOfChangeOps' => 1
+				'expectedLengthOfChangeOps' => 1,
 			],
 
 			'various changes' => [
 				'changeRequest' => [
 					'labels' => [ 'en' => [ 'language' => 'en', 'value' => 'foo' ] ],
 					'descriptions' => [ 'en' => [ 'language' => 'en', 'value' => 'foo' ] ],
-					'aliases' => [ 'en' => [ 'language' => 'en', 'value' => 'foo' ] ]
+					'aliases' => [ 'en' => [ 'language' => 'en', 'value' => 'foo' ] ],
 				],
 				'expectedChangeOpType' => ChangeOpFingerprint::class,
-				'expectedLengthOfChangeOps' => 3
+				'expectedLengthOfChangeOps' => 3,
 			],
 		];
 	}
@@ -110,7 +110,7 @@ class FingerprintChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 			->willThrowException( $this->createMock( ChangeOpDeserializationException::class ) );
 
 		$this->createEntityChangeOpWithTestSubject( [
-			'labels' => [ 'en' => [ 'language' => 'en', 'value' => 'foo' ] ]
+			'labels' => [ 'en' => [ 'language' => 'en', 'value' => 'foo' ] ],
 		] );
 	}
 
@@ -121,7 +121,7 @@ class FingerprintChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 			->willThrowException( $this->createMock( ChangeOpDeserializationException::class ) );
 
 		$this->createEntityChangeOpWithTestSubject( [
-			'descriptions' => [ 'en' => [ 'language' => 'en', 'value' => 'foo' ] ]
+			'descriptions' => [ 'en' => [ 'language' => 'en', 'value' => 'foo' ] ],
 		] );
 	}
 
@@ -132,7 +132,7 @@ class FingerprintChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 			->willThrowException( $this->createMock( ChangeOpDeserializationException::class ) );
 
 		$this->createEntityChangeOpWithTestSubject( [
-			'aliases' => [ 'en' => [ 'language' => 'en', 'value' => 'foo' ] ]
+			'aliases' => [ 'en' => [ 'language' => 'en', 'value' => 'foo' ] ],
 		] );
 	}
 

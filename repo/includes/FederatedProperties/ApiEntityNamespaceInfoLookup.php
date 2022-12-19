@@ -54,7 +54,7 @@ class ApiEntityNamespaceInfoLookup {
 			'action' => 'query',
 			'meta' => 'siteinfo',
 			'siprop' => 'namespaces',
-			'format' => 'json'
+			'format' => 'json',
 		] )->getBody()->getContents(), true )['query']['namespaces'];
 	}
 

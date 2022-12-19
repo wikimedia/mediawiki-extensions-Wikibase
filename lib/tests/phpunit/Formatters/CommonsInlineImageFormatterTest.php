@@ -36,25 +36,25 @@ class CommonsInlineImageFormatterTest extends MediaWikiIntegrationTestCase {
 		return [
 			[
 				new StringValue( 'example.jpg' ), // Lower-case file name
-				$exampleJpgHtmlRegex
+				$exampleJpgHtmlRegex,
 			],
 			[
 				new StringValue( 'Example.jpg' ),
-				$exampleJpgHtmlRegex
+				$exampleJpgHtmlRegex,
 			],
 			[
 				new StringValue( 'Example-That-Does-Not-Exist.jpg' ),
-				'@^.*<a[^>]+href="https://commons.wikimedia.org/wiki/File:Example-That-Does-Not-Exist.jpg"[^>]*>@s'
+				'@^.*<a[^>]+href="https://commons.wikimedia.org/wiki/File:Example-That-Does-Not-Exist.jpg"[^>]*>@s',
 			],
 			[
 				new StringValue( 'Dangerous-quotes""' ),
 				'@/""/@s',
-				false
+				false,
 			],
 			[
 				new StringValue( '<eviltag>' ),
 				'@/<eviltag>/@s',
-				false
+				false,
 			],
 		];
 	}
@@ -116,7 +116,7 @@ class CommonsInlineImageFormatterTest extends MediaWikiIntegrationTestCase {
 
 	private function newFormatterOptions() {
 		$options = [
-			ValueFormatter::OPT_LANG => 'en'
+			ValueFormatter::OPT_LANG => 'en',
 		];
 
 		return new FormatterOptions( $options );

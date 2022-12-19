@@ -92,7 +92,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$ranks = [
 			Statement::RANK_DEPRECATED,
 			Statement::RANK_NORMAL,
-			Statement::RANK_PREFERRED
+			Statement::RANK_PREFERRED,
 		];
 
 		$snaks = $this->getSnaks();

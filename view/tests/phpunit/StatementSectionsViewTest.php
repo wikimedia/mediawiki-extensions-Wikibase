@@ -65,17 +65,17 @@ class StatementSectionsViewTest extends \PHPUnit\Framework\TestCase {
 		return [
 			[
 				[],
-				''
+				'',
 			],
 			[
 				[ 'statements' => $empty ],
 				'<HEADING id="claims" class="wikibase-statements">'
-				. '(wikibase-statementsection-statements)</HEADING><LIST>'
+				. '(wikibase-statementsection-statements)</HEADING><LIST>',
 			],
 			[
 				[ 'statements' => $empty, 'identifiers' => $empty ],
 				'<HEADING id="claims" class="wikibase-statements">'
-				. '(wikibase-statementsection-statements)</HEADING><LIST>'
+				. '(wikibase-statementsection-statements)</HEADING><LIST>',
 			],
 			[
 				[ 'statements' => $empty, 'P1' => $statements ],
@@ -83,7 +83,7 @@ class StatementSectionsViewTest extends \PHPUnit\Framework\TestCase {
 				. '(wikibase-statementsection-statements)</HEADING><LIST>'
 				. '<HEADING id="P1" class="wikibase-statements'
 				. ' wikibase-statements-P1">'
-				. '(wikibase-statementsection-p1)</HEADING><LIST>'
+				. '(wikibase-statementsection-p1)</HEADING><LIST>',
 			],
 		];
 	}

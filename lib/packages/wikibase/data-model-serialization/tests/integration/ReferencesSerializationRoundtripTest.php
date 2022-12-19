@@ -39,22 +39,22 @@ class ReferencesSerializationRoundtripTest extends TestCase {
 	public function referencesProvider() {
 		return [
 			[
-				new ReferenceList( [] )
+				new ReferenceList( [] ),
 			],
 			[
 				new ReferenceList( [
-					new Reference()
-				] )
+					new Reference(),
+				] ),
 			],
 			[
 				new ReferenceList( [
 					new Reference( new SnakList( [
-						new PropertyNoValueSnak( 42 )
+						new PropertyNoValueSnak( 42 ),
 					] ) ),
 					new Reference( new SnakList( [
-						new PropertyNoValueSnak( 43 )
-					] ) )
-				] )
+						new PropertyNoValueSnak( 43 ),
+					] ) ),
+				] ),
 			],
 		];
 	}

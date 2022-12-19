@@ -37,7 +37,7 @@ class TokenCheckInteractorTest extends \PHPUnit\Framework\TestCase {
 
 	public function testCheckToken() {
 		$data = [
-			'tokentest' => 'VALID'
+			'tokentest' => 'VALID',
 		];
 
 		$context = new RequestContext();

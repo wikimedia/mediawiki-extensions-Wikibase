@@ -62,7 +62,7 @@ return [
 				$mwServices->getStatsdDataFactory(),
 				[
 					'miss' => 'wikibase.prefetchingPropertyTermLookupCache.miss',
-					'hit' => 'wikibase.prefetchingPropertyTermLookupCache.hit'
+					'hit' => 'wikibase.prefetchingPropertyTermLookupCache.hit',
 				]
 			);
 
@@ -73,5 +73,5 @@ return [
 				WikibaseClient::getTermsLanguages( $mwServices )
 			);
 		},
-	]
+	],
 ];

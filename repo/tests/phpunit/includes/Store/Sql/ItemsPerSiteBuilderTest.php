@@ -78,7 +78,7 @@ class ItemsPerSiteBuilderTest extends MediaWikiIntegrationTestCase {
 			$this->getTestItemId(),
 			$this->getTestItemId(),
 			$this->getTestItemId(),
-			$this->getTestItemId()
+			$this->getTestItemId(),
 		];
 
 		$mock

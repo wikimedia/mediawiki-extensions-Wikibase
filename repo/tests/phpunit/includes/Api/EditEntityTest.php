@@ -104,7 +104,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 					'new' => 'property',
 					'data' => '{"labels":{"en-gb":{"language":"en-gb","value":"Propertylabel"}},'
 						. '"descriptions":{"en-gb":{"language":"en-gb","value":"Propertydescription"}},'
-						. '"datatype":"string"}'
+						. '"datatype":"string"}',
 				],
 				'e' => [
 					'type' => 'property',
@@ -115,17 +115,17 @@ class EditEntityTest extends WikibaseApiTestCase {
 			'add a sitelink..' => [ // make sure if we pass in a valid id it is accepted
 				'p' => [
 					'data' => '{"sitelinks":{"dewiki":{"site":"dewiki",'
-						. '"title":"TestPage!","badges":["%Q42%","%Q149%"]}}}'
+						. '"title":"TestPage!","badges":["%Q42%","%Q149%"]}}}',
 				],
 				'e' => [
 					'sitelinks' => [
 						[
 							'site' => 'dewiki',
 							'title' => 'TestPage!',
-							'badges' => [ '%Q42%', '%Q149%' ]
-						]
-					]
-				]
+							'badges' => [ '%Q42%', '%Q149%' ],
+						],
+					],
+				],
 			],
 			'add a label, (making sure some data fields are ignored)' => [
 				'p' => [
@@ -142,11 +142,11 @@ class EditEntityTest extends WikibaseApiTestCase {
 						[
 							'site' => 'dewiki',
 							'title' => 'TestPage!',
-							'badges' => [ '%Q42%', '%Q149%' ]
-						]
+							'badges' => [ '%Q42%', '%Q149%' ],
+						],
 					],
-					'labels' => [ 'en' => 'A Label' ]
-				]
+					'labels' => [ 'en' => 'A Label' ],
+				],
 			],
 			'add a description..' => [
 				'p' => [ 'data' => '{"descriptions":{"en":{"language":"en","value":"DESC"}}}' ],
@@ -155,18 +155,18 @@ class EditEntityTest extends WikibaseApiTestCase {
 						[
 							'site' => 'dewiki',
 							'title' => 'TestPage!',
-							'badges' => [ '%Q42%', '%Q149%' ]
-						]
+							'badges' => [ '%Q42%', '%Q149%' ],
+						],
 					],
 					'labels' => [ 'en' => 'A Label' ],
-					'descriptions' => [ 'en' => 'DESC' ]
-				]
+					'descriptions' => [ 'en' => 'DESC' ],
+				],
 			],
 			'remove a sitelink..' => [
 				'p' => [ 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":""}}}' ],
 				'e' => [
 					'labels' => [ 'en' => 'A Label' ],
-					'descriptions' => [ 'en' => 'DESC' ] ]
+					'descriptions' => [ 'en' => 'DESC' ] ],
 			],
 			'remove a label..' => [
 				'p' => [ 'data' => '{"labels":{"en":{"language":"en","value":""}}}' ],
@@ -177,7 +177,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 			'clear an item with some new value' => [
 				'p' => [
 					'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"page"}}}',
-					'clear' => ''
+					'clear' => '',
 				],
 				'e' => [
 					'type' => 'item',
@@ -185,10 +185,10 @@ class EditEntityTest extends WikibaseApiTestCase {
 						[
 							'site' => 'dewiki',
 							'title' => 'Page',
-							'badges' => []
-						]
-					]
-				]
+							'badges' => [],
+						],
+					],
+				],
 			],
 			'clear an item with no value' => [
 				'p' => [ 'data' => '{}', 'clear' => '' ],
@@ -218,21 +218,21 @@ class EditEntityTest extends WikibaseApiTestCase {
 						[
 							'site' => 'dewiki',
 							'title' => 'BAA',
-							'badges' => []
+							'badges' => [],
 						],
 						[
 							'site' => 'svwiki',
 							'title' => 'FOO',
-							'badges' => []
-						]
-					]
-				]
+							'badges' => [],
+						],
+					],
+				],
 			],
 			'unset a sitelink using the other sitelink' => [
 				'p' => [
 					'site' => 'svwiki',
 					'title' => 'FOO',
-					'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":""}}}'
+					'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":""}}}',
 				],
 				'e' => [
 					'type' => 'item',
@@ -240,14 +240,14 @@ class EditEntityTest extends WikibaseApiTestCase {
 						[
 							'site' => 'svwiki',
 							'title' => 'FOO',
-							'badges' => []
-						]
-					]
-				]
+							'badges' => [],
+						],
+					],
+				],
 			],
 			'set badges for a existing sitelink, title intact' => [
 				'p' => [
-					'data' => '{"sitelinks":{"svwiki":{"site":"svwiki","badges":["%Q149%","%Q42%"]}}}'
+					'data' => '{"sitelinks":{"svwiki":{"site":"svwiki","badges":["%Q149%","%Q42%"]}}}',
 				],
 				'e' => [
 					'type' => 'item',
@@ -255,10 +255,10 @@ class EditEntityTest extends WikibaseApiTestCase {
 						[
 							'site' => 'svwiki',
 							'title' => 'FOO',
-							'badges' => [ "%Q149%", "%Q42%" ]
-						]
-					]
-				]
+							'badges' => [ "%Q149%", "%Q42%" ],
+						],
+					],
+				],
 			],
 			'set title for a existing sitelink, badges intact' => [
 				'p' => [ 'data' => '{"sitelinks":{"svwiki":{"site":"svwiki","title":"FOO2"}}}' ],
@@ -268,16 +268,16 @@ class EditEntityTest extends WikibaseApiTestCase {
 						[
 							'site' => 'svwiki',
 							'title' => 'FOO2',
-							'badges' => [ "%Q149%", "%Q42%" ]
-						]
-					]
-				]
+							'badges' => [ "%Q149%", "%Q42%" ],
+						],
+					],
+				],
 			],
 			'delete sitelink by providing neither title nor badges' => [
 				'p' => [ 'data' => '{"sitelinks":{"svwiki":{"site":"svwiki"}}}' ],
 				'e' => [
 					'type' => 'item',
-				]
+				],
 			],
 			'add a claim' => [
 				'p' => [ 'data' => '{"claims":[{"mainsnak":{"snaktype":"value",'
@@ -288,12 +288,12 @@ class EditEntityTest extends WikibaseApiTestCase {
 						'mainsnak' => [
 							'snaktype' => 'value',
 							'property' => '%P56%',
-							'datavalue' => [ 'value' => 'imastring', 'type' => 'string' ]
+							'datavalue' => [ 'value' => 'imastring', 'type' => 'string' ],
 						],
 						'type' => 'statement',
-						'rank' => 'normal'
-					]
-				] ]
+						'rank' => 'normal',
+					],
+				] ],
 			],
 			'change the claim' => [
 				'p' => [ 'data' => [
@@ -305,7 +305,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 								'property' => '%P56%',
 								'datavalue' => [
 									'value' => 'diffstring',
-									'type' => 'string'
+									'type' => 'string',
 								],
 							],
 							'type' => 'statement',
@@ -320,13 +320,13 @@ class EditEntityTest extends WikibaseApiTestCase {
 								'value' => 'diffstring',
 								'type' => 'string' ] ],
 						'type' => 'statement',
-						'rank' => 'normal'
-					]
-				] ]
+						'rank' => 'normal',
+					],
+				] ],
 			],
 			'remove the claim' => [
 				'p' => [ 'data' => '{"claims":[{"id":"%lastClaimId%","remove":""}]}' ],
-				'e' => [ 'claims' => [] ]
+				'e' => [ 'claims' => [] ],
 			],
 			'add multiple claims' => [
 				'p' => [ 'data' => '{"claims":['
@@ -351,7 +351,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 								'value' => 'imastring2',
 								'type' => 'string' ] ],
 						'type' => 'statement',
-						'rank' => 'normal' ]
+						'rank' => 'normal' ],
 				] ],
 			],
 			'remove all stuff' => [
@@ -361,8 +361,8 @@ class EditEntityTest extends WikibaseApiTestCase {
 					'descriptions' => [],
 					'aliases' => [],
 					'sitelinks' => [],
-					'claims' => []
-				]
+					'claims' => [],
+				],
 			],
 			'add lots of data again' => [
 				'p' => [ 'data' => '{"claims":['
@@ -374,11 +374,11 @@ class EditEntityTest extends WikibaseApiTestCase {
 					. '"sitelinks":{"dewiki":{"site":"dewiki","title":"page"}},'
 					. '"labels":{"en":{"language":"en","value":"A Label"}},'
 					. '"descriptions":{"en":{"language":"en","value":"A description"}}}' ],
-				'e' => [ 'type' => 'item' ]
+				'e' => [ 'type' => 'item' ],
 			],
 			'make a null edit' => [
 				'p' => [ 'data' => '{}' ],
-				'e' => [ 'nochange' => '' ]
+				'e' => [ 'nochange' => '' ],
 			],
 			'remove all stuff in another way' => [
 				'p' => [ 'clear' => true, 'data' => '{}' ],
@@ -387,8 +387,8 @@ class EditEntityTest extends WikibaseApiTestCase {
 					'descriptions' => [],
 					'aliases' => [],
 					'sitelinks' => [],
-					'claims' => []
-				]
+					'claims' => [],
+				],
 			],
 			'return normalized data' => [
 				'p' => [ 'data' => '{"claims":['
@@ -440,7 +440,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 
 		$this->setMwGlobals( 'wgGroupPermissions', [
 			'all-permission' => [ 'read' => true, 'edit' => true, 'item-term' => true, 'createpage' => true ],
-			'*' => [ 'read' => true, 'edit' => false, 'writeapi' => true ]
+			'*' => [ 'read' => true, 'edit' => false, 'writeapi' => true ],
 		] );
 
 		$newItem = $this->createItemUsing( $userWithAllPermissions );
@@ -454,7 +454,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 		$this->setMwGlobals( 'wgGroupPermissions', [
 			'no-permission' => [ 'read' => true, 'edit' => false ],
 			'all-permission' => [ 'read' => true, 'edit' => true, 'item-term' => true, 'createpage' => true ],
-			'*' => [ 'read' => true, 'edit' => false, 'writeapi' => true ]
+			'*' => [ 'read' => true, 'edit' => false, 'writeapi' => true ],
 		] );
 
 		MediaWikiServices::getInstance()->resetServiceForTesting( 'PermissionManager' );
@@ -465,7 +465,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 		// Then the request is denied
 		$expected = [
 			'type' => ApiUsageException::class,
-			'code' => 'permissiondenied'
+			'code' => 'permissiondenied',
 		];
 
 		MediaWikiServices::getInstance()->getPermissionManager()->invalidateUsersRightsCache(
@@ -487,9 +487,9 @@ class EditEntityTest extends WikibaseApiTestCase {
 		$userWithAllPermissions = $this->createUserWithGroup( 'all-permission' );
 
 		$this->setMwGlobals( 'wgGroupPermissions', [
-			'no-permission' => [ 'read' => true, 'edit' => true, 'item-term' => false, ],
+			'no-permission' => [ 'read' => true, 'edit' => true, 'item-term' => false ],
 			'all-permission' => [ 'read' => true, 'edit' => true, 'item-term' => true, 'createpage' => true ],
-			'*' => [ 'read' => true, 'edit' => false, 'writeapi' => true ]
+			'*' => [ 'read' => true, 'edit' => false, 'writeapi' => true ],
 		] );
 
 		MediaWikiServices::getInstance()->resetServiceForTesting( 'PermissionManager' );
@@ -500,7 +500,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 		// Then the request is denied
 		$expected = [
 			'type' => ApiUsageException::class,
-			'code' => 'permissiondenied'
+			'code' => 'permissiondenied',
 		];
 
 		MediaWikiServices::getInstance()->getPermissionManager()->invalidateUsersRightsCache(
@@ -538,7 +538,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 		return [
 			'action' => 'wbeditentity',
 			'id' => $id,
-			'data' => '{"sitelinks":{"enwiki":{"site":"enwiki","title":"Hello World"}}}'
+			'data' => '{"sitelinks":{"enwiki":{"site":"enwiki","title":"Hello World"}}}',
 		];
 	}
 
@@ -546,7 +546,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 		return [
 			'action' => 'wbeditentity',
 			'id' => $id,
-			'data' => '{"labels":{"en":{"language":"en","value":""}}}'
+			'data' => '{"labels":{"en":{"language":"en","value":""}}}',
 		];
 	}
 
@@ -650,12 +650,12 @@ class EditEntityTest extends WikibaseApiTestCase {
 							[
 								'site' => 'dewiki',
 								'title' => 'Page',
-								'badges' => []
-							]
-						]
-					] )
+								'badges' => [],
+							],
+						],
+					] ),
 				],
-				preg_quote( '/* wbeditentity-update:0| */' )
+				preg_quote( '/* wbeditentity-update:0| */' ),
 			],
 			'only one language changed, no other parts changed' => [
 				[
@@ -663,10 +663,10 @@ class EditEntityTest extends WikibaseApiTestCase {
 					'data' => json_encode( [
 						'labels' => [ 'en' => [ 'language' => 'en', 'value' => 'Foo' ] ],
 						'descriptions' => [],
-						'aliases' => []
-					] )
+						'aliases' => [],
+					] ),
 				],
-				preg_quote( '/* wbeditentity-update-languages-short:0||en */' )
+				preg_quote( '/* wbeditentity-update-languages-short:0||en */' ),
 			],
 			'multiple languages changed, no other parts changed' => [
 				[
@@ -674,10 +674,10 @@ class EditEntityTest extends WikibaseApiTestCase {
 					'data' => json_encode( [
 						'labels' => [ 'en' => [ 'language' => 'en', 'value' => 'Foo' ] ],
 						'descriptions' => [ 'de' => [ 'language' => 'de', 'value' => 'Bar' ] ],
-						'aliases' => [ 'es' => [ [ 'language' => 'es', 'value' => 'ooF' ], [ 'language' => 'es', 'value' => 'raB' ] ] ]
-					] )
+						'aliases' => [ 'es' => [ [ 'language' => 'es', 'value' => 'ooF' ], [ 'language' => 'es', 'value' => 'raB' ] ] ],
+					] ),
 				],
-				preg_quote( '/* wbeditentity-update-languages-short:0||en, de, es */' )
+				preg_quote( '/* wbeditentity-update-languages-short:0||en, de, es */' ),
 			],
 			'some languages changed and other parts changed' => [
 				[
@@ -690,12 +690,12 @@ class EditEntityTest extends WikibaseApiTestCase {
 							[
 								'site' => 'dewiki',
 								'title' => 'Some Page',
-								'badges' => []
-							]
-						]
+								'badges' => [],
+							],
+						],
 					] ),
 				],
-				preg_quote( '/* wbeditentity-update-languages-and-other-short:0||en, de, es */' )
+				preg_quote( '/* wbeditentity-update-languages-and-other-short:0||en, de, es */' ),
 			],
 			'more than 50 languages changed' => [
 				[
@@ -703,10 +703,10 @@ class EditEntityTest extends WikibaseApiTestCase {
 					'data' => json_encode( [
 						'labels' => [ 'en' => [ 'language' => 'en', 'value' => 'Foo' ] ],
 						'descriptions' => [ 'de' => [ 'language' => 'de', 'value' => 'Bar' ] ],
-						'aliases' => $this->generateLanguageValuePairs( 50 )
+						'aliases' => $this->generateLanguageValuePairs( 50 ),
 					] ),
 				],
-				preg_quote( '/* wbeditentity-update-languages:0||52 */' )
+				preg_quote( '/* wbeditentity-update-languages:0||52 */' ),
 			],
 			'more than 50 languages changed and other parts changed' => [
 				[
@@ -719,13 +719,13 @@ class EditEntityTest extends WikibaseApiTestCase {
 							[
 								'site' => 'dewiki',
 								'title' => 'Some other Page',
-								'badges' => []
-							]
-						]
+								'badges' => [],
+							],
+						],
 					] ),
 				],
-				preg_quote( '/* wbeditentity-update-languages-and-other:0||52 */' )
-			]
+				preg_quote( '/* wbeditentity-update-languages-and-other:0||52 */' ),
+			],
 		];
 	}
 
@@ -775,49 +775,49 @@ class EditEntityTest extends WikibaseApiTestCase {
 				'p' => [ 'data' => '{}' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'param-illegal'
+					'code' => 'param-illegal',
 				] ] ],
 			'empty entity id given' => [
 				'p' => [ 'id' => '', 'data' => '{}' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'invalid-entity-id'
+					'code' => 'invalid-entity-id',
 				] ] ],
 			'invalid id' => [
 				'p' => [ 'id' => 'abcde', 'data' => '{}' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'invalid-entity-id'
+					'code' => 'invalid-entity-id',
 				] ] ],
 			'unknown id' => [
 				'p' => [ 'id' => 'Q1234567', 'data' => '{}' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'no-such-entity'
+					'code' => 'no-such-entity',
 				] ] ],
 			'invalid explicit id' => [
 				'p' => [ 'id' => '1234', 'data' => '{}' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'invalid-entity-id'
+					'code' => 'invalid-entity-id',
 				] ] ],
 			'non existent sitelink' => [
 				'p' => [ 'site' => 'dewiki','title' => 'NonExistent', 'data' => '{}' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'no-such-entity-link'
+					'code' => 'no-such-entity-link',
 				] ] ],
 			'missing site (also bad title)' => [
 				'p' => [ 'title' => 'abcde', 'data' => '{}' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'param-missing'
+					'code' => 'param-missing',
 				] ] ],
 			'missing site but id given' => [
 				'p' => [ 'title' => 'abcde', 'id' => 'Q12', 'data' => '{}' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'param-missing'
+					'code' => 'param-missing',
 				] ] ],
 			'cant have id and new' => [
 				'p' => [ 'id' => 'q666', 'new' => 'item', 'data' => '{}' ],
@@ -833,7 +833,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 					'code' => $this->logicalOr(
 						$this->equalTo( 'nodata' ),
 						$this->equalTo( 'missingparam' )
-					)
+					),
 				] ] ],
 			'bad site' => [
 				'p' => [ 'site' => 'abcde', 'data' => '{}' ],
@@ -842,7 +842,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 					'code' => $this->logicalOr(
 						$this->equalTo( 'unknown_site' ),
 						$this->equalTo( 'badvalue' )
-					)
+					),
 				] ] ],
 			'no data provided' => [
 				'p' => [ 'site' => 'enwiki', 'title' => 'Berlin' ],
@@ -851,72 +851,72 @@ class EditEntityTest extends WikibaseApiTestCase {
 					'code' => $this->logicalOr(
 						$this->equalTo( 'nodata' ), // see 'no$1' in ApiBase::$messageMap
 						$this->equalTo( 'missingparam' )
-					)
-				] ]
+					),
+				] ],
 			],
 			'malformed json' => [
 				'p' => [ 'site' => 'enwiki', 'title' => 'Berlin', 'data' => '{{{}' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'invalid-json'
+					'code' => 'invalid-json',
 				] ] ],
 			'must be a json object (json_decode s this an an int)' => [
 				'p' => [ 'site' => 'enwiki', 'title' => 'Berlin', 'data' => '1234' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'not-recognized-array'
+					'code' => 'not-recognized-array',
 				] ] ],
 			'must be a json object (json_decode s this an an indexed array)' => [
 				'p' => [ 'site' => 'enwiki', 'title' => 'Berlin', 'data' => '[ "xyz" ]' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'not-recognized-string'
+					'code' => 'not-recognized-string',
 				] ] ],
 			'must be a json object (json_decode s this an a string)' => [
 				'p' => [ 'site' => 'enwiki', 'title' => 'Berlin', 'data' => '"string"' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'not-recognized-array'
+					'code' => 'not-recognized-array',
 				] ] ],
 			'inconsistent site in json' => [
 				'p' => [
 					'site' => 'enwiki',
 					'title' => 'Berlin',
-					'data' => '{"sitelinks":{"ptwiki":{"site":"svwiki","title":"TestPage!"}}}'
+					'data' => '{"sitelinks":{"ptwiki":{"site":"svwiki","title":"TestPage!"}}}',
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'inconsistent-site'
+					'code' => 'inconsistent-site',
 				] ] ],
 			'inconsistent lang in json' => [
 				'p' => [
 					'site' => 'enwiki',
 					'title' => 'Berlin',
-					'data' => '{"labels":{"de":{"language":"pt","value":"TestPage!"}}}'
+					'data' => '{"labels":{"de":{"language":"pt","value":"TestPage!"}}}',
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'inconsistent-language'
+					'code' => 'inconsistent-language',
 				] ] ],
 			'inconsistent unknown site in json' => [
 				'p' => [
 					'site' => 'enwiki',
 					'title' => 'Berlin',
-					'data' => '{"sitelinks":{"BLUB":{"site":"BLUB","title":"TestPage!"}}}'
+					'data' => '{"sitelinks":{"BLUB":{"site":"BLUB","title":"TestPage!"}}}',
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'not-recognized-site'
+					'code' => 'not-recognized-site',
 				] ] ],
 			'inconsistent unknown languages' => [
 				'p' => [
 					'site' => 'enwiki',
 					'title' => 'Berlin',
-					'data' => '{"labels":{"BLUB":{"language":"BLUB","value":"ImaLabel"}}}'
+					'data' => '{"labels":{"BLUB":{"language":"BLUB","value":"ImaLabel"}}}',
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'not-recognized-language'
+					'code' => 'not-recognized-language',
 				] ] ],
 			// @todo the error codes in the overly long string tests make no sense
 			// and should be corrected...
@@ -925,7 +925,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 					'site' => 'enwiki',
 					'title' => 'Berlin',
 					'data' => '{"labels":{"en":{"language":"en","value":"'
-						. TermTestHelper::makeOverlyLongString() . '"}}}'
+						. TermTestHelper::makeOverlyLongString() . '"}}}',
 				],
 				'e' => [ 'exception' => [ 'type' => ApiUsageException::class ] ] ],
 			'overly long description' => [
@@ -933,32 +933,32 @@ class EditEntityTest extends WikibaseApiTestCase {
 					'site' => 'enwiki',
 					'title' => 'Berlin',
 					'data' => '{"descriptions":{"en":{"language":"en","value":"'
-						. TermTestHelper::makeOverlyLongString() . '"}}}'
+						. TermTestHelper::makeOverlyLongString() . '"}}}',
 				],
 				'e' => [ 'exception' => [ 'type' => ApiUsageException::class ] ] ],
 			'missing language in labels (T54731)' => [
 				'p' => [
 					'site' => 'enwiki',
 					'title' => 'Berlin',
-					'data' => '{"labels":{"de":{"site":"pt","title":"TestString"}}}'
+					'data' => '{"labels":{"de":{"site":"pt","title":"TestString"}}}',
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
 					'code' => 'missing-language',
-					'message' => '\'language\' was not found in term serialization for de'
-				] ]
+					'message' => '\'language\' was not found in term serialization for de',
+				] ],
 			],
 			'removing invalid claim fails' => [
 				'p' => [
 					'site' => 'enwiki',
 					'title' => 'Berlin',
-					'data' => '{"claims":[{"remove":""}]}'
+					'data' => '{"claims":[{"remove":""}]}',
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
 					'code' => 'invalid-claim',
-					'message' => 'Cannot remove a claim with no GUID'
-				] ]
+					'message' => 'Cannot remove a claim with no GUID',
+				] ],
 			],
 			'invalid entity ID in data value' => [
 				'p' => [
@@ -966,13 +966,13 @@ class EditEntityTest extends WikibaseApiTestCase {
 					'data' => '{ "claims": [ {
 						"mainsnak": { "snaktype": "novalue", "property": "P0" },
 						"type": "statement"
-					} ] }'
+					} ] }',
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
 					'code' => 'invalid-claim',
-					'message' => '\'P0\' is not a valid'
-				] ]
+					'message' => '\'P0\' is not a valid',
+				] ],
 			],
 			'invalid statement GUID' => [
 				'p' => [
@@ -981,13 +981,13 @@ class EditEntityTest extends WikibaseApiTestCase {
 						"id": "Q0$GUID",
 						"mainsnak": { "snaktype": "novalue", "property": "%P56%" },
 						"type": "statement"
-					} ] }'
+					} ] }',
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
 					'code' => 'modification-failed',
 					'message' => 'Statement GUID can not be parsed',
-				] ]
+				] ],
 			],
 			'removing valid claim with no guid fails' => [
 				'p' => [
@@ -1004,81 +1004,81 @@ class EditEntityTest extends WikibaseApiTestCase {
 							"type": "statement",
 							"rank": "normal"
 						} ]
-					}'
+					}',
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
 					'code' => 'invalid-claim',
-				] ]
+				] ],
 			],
 			'bad badge id' => [
 				'p' => [
 					'site' => 'enwiki',
 					'title' => 'Berlin',
 					'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"TestPage!",'
-						. '"badges":["abc","%Q149%"]}}}'
+						. '"badges":["abc","%Q149%"]}}}',
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'invalid-entity-id'
-				] ]
+					'code' => 'invalid-entity-id',
+				] ],
 			],
 			'badge id is not an item id' => [
 				'p' => [
 					'site' => 'enwiki',
 					'title' => 'Berlin',
 					'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"TestPage!",'
-						. '"badges":["P2","%Q149%"]}}}'
+						. '"badges":["P2","%Q149%"]}}}',
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'invalid-entity-id'
-				] ]
+					'code' => 'invalid-entity-id',
+				] ],
 			],
 			'badge id is not specified' => [
 				'p' => [
 					'site' => 'enwiki',
 					'title' => 'Berlin',
 					'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"TestPage!",'
-						. '"badges":["%Q149%","%Q32%"]}}}'
+						. '"badges":["%Q149%","%Q32%"]}}}',
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'not-badge'
-				] ]
+					'code' => 'not-badge',
+				] ],
 			],
 			'badge item does not exist' => [
 				'p' => [
 					'site' => 'enwiki',
 					'title' => 'Berlin',
 					'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"TestPage!",'
-						. '"badges":["Q99999","%Q149%"]}}}'
+						. '"badges":["Q99999","%Q149%"]}}}',
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'no-such-entity'
-				] ]
+					'code' => 'no-such-entity',
+				] ],
 			],
 			'no sitelink - cannot change badges' => [
 				'p' => [
 					'site' => 'enwiki',
 					'title' => 'Berlin',
 					'data' => '{"sitelinks":{"svwiki":{"site":"svwiki",'
-						. '"badges":["%Q42%","%Q149%"]}}}'
+						. '"badges":["%Q42%","%Q149%"]}}}',
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
 					'code' => 'no-such-sitelink',
 					'message' => wfMessage( 'wikibase-validator-no-such-sitelink', 'svwiki' )->inLanguage( 'en' )->text(),
-				] ]
+				] ],
 			],
 			'bad id in serialization' => [
 				'p' => [ 'id' => '%Berlin%', 'data' => '{"id":"Q13244"}' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
 					'code' => 'param-invalid',
-					'message' => 'Invalid field used in call: "id", must match id parameter'
-				] ]
+					'message' => 'Invalid field used in call: "id", must match id parameter',
+				] ],
 			],
 			'bad type in serialization' => [
 				'p' => [ 'id' => '%Berlin%', 'data' => '{"id":"%Berlin%","type":"foobar"}' ],
@@ -1086,8 +1086,8 @@ class EditEntityTest extends WikibaseApiTestCase {
 					'type' => ApiUsageException::class,
 					'code' => 'param-invalid',
 					'message' => 'Invalid field used in call: "type", '
-						. 'must match type associated with id'
-				] ]
+						. 'must match type associated with id',
+				] ],
 			],
 			'bad main snak replacement' => [
 				'p' => [ 'id' => '%Berlin%', 'data' => json_encode( [
@@ -1099,7 +1099,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 								'property' => '%P72%',
 								'datavalue' => [
 									'value' => 'anotherstring',
-									'type' => 'string'
+									'type' => 'string',
 								],
 							],
 							'type' => 'statement',
@@ -1135,7 +1135,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
 					'code' => 'not-supported',
-					'message' => 'The requested feature is not supported by the given entity'
+					'message' => 'The requested feature is not supported by the given entity',
 				] ] ],
 			'property with invalid datatype' => [
 				'p' => [
@@ -1144,7 +1144,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'param-illegal'
+					'code' => 'param-illegal',
 				] ] ],
 			'remove key misplaced in data' => [
 				'p' => [
@@ -1159,7 +1159,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 							],
 							'id' => '%BerlinP56%',
 						] ],
-					] )
+					] ),
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
@@ -1305,9 +1305,9 @@ class EditEntityTest extends WikibaseApiTestCase {
 		$params = [
 			'action' => 'wbeditentity',
 			'data' => json_encode( [
-				'labels' => [ 'en' => [ 'value' => 'fooooo', 'language' => 'en' ] ]
+				'labels' => [ 'en' => [ 'value' => 'fooooo', 'language' => 'en' ] ],
 			] ),
-			'new' => 'item'
+			'new' => 'item',
 		];
 
 		try {

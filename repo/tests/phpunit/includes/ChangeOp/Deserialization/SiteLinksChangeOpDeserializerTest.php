@@ -202,7 +202,7 @@ class SiteLinksChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 		$item = new Item( new ItemId( 'Q42' ) );
 
 		$item->setSiteLinkList( new SiteLinkList( [
-			new SiteLink( self::SITE_ID, self::SITE_LINK_TITLE, [ new ItemId( self::BADGE_ITEM_ID ) ] )
+			new SiteLink( self::SITE_ID, self::SITE_LINK_TITLE, [ new ItemId( self::BADGE_ITEM_ID ) ] ),
 		] ) );
 
 		return $item;

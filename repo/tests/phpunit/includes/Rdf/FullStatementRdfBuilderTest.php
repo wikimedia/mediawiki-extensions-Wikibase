@@ -134,7 +134,9 @@ class FullStatementRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$q6_qualifiers = [ 'Q6_statements_foreignsource_properties', 'Q6_qualifiers_foreignsource_properties' ];
 		$q7_no_refs = [ 'Q7_statements_foreignsource_properties' ];
 		$q7_refs = [
-			'Q7_statements_foreignsource_properties', 'Q7_reference_refs_foreignsource_properties', 'Q7_references_foreignsource_properties'
+			'Q7_statements_foreignsource_properties',
+			'Q7_reference_refs_foreignsource_properties',
+			'Q7_references_foreignsource_properties',
 		];
 
 		return [

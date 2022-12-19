@@ -41,7 +41,7 @@ class ItemAndPropertySourceTest extends ServiceWiringTestCase {
 						'',
 						'',
 						'other'
-					)
+					),
 				],
 				new SubEntityTypesMapper( [] )
 			)

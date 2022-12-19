@@ -81,22 +81,22 @@ class SnakFactoryTest extends \PHPUnit\Framework\TestCase {
 			'novalue/badprop' => [
 				'P66', 'novalue', null,
 				PropertyNoValueSnak::class,
-				PropertyDataTypeLookupException::class
+				PropertyDataTypeLookupException::class,
 			],
 			'somevalue/badprop' => [
 				'P66', 'somevalue', null,
 				PropertySomeValueSnak::class,
-				PropertyDataTypeLookupException::class
+				PropertyDataTypeLookupException::class,
 			],
 			'value/badprop' => [
 				'P66', 'value', '"hello"',
 				PropertyValueSnak::class,
-				PropertyDataTypeLookupException::class
+				PropertyDataTypeLookupException::class,
 			],
 			'value/badvalue' => [
 				'P1', 'value', [ 'foo' ],
 				PropertyValueSnak::class,
-				InvalidArgumentException::class
+				InvalidArgumentException::class,
 			],
 		];
 	}

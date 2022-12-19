@@ -58,7 +58,7 @@ class PropertyInfoDataTypeLookupTest extends \PHPUnit\Framework\TestCase {
 				$mockInfoLookup,
 				null,
 				$id,
-				$dataTypeId
+				$dataTypeId,
 			];
 
 			// try with via fallback
@@ -66,7 +66,7 @@ class PropertyInfoDataTypeLookupTest extends \PHPUnit\Framework\TestCase {
 				$emptyInfoLookup,
 				$propertyDataTypeLookup,
 				$id,
-				$dataTypeId
+				$dataTypeId,
 			];
 		}
 
@@ -78,7 +78,7 @@ class PropertyInfoDataTypeLookupTest extends \PHPUnit\Framework\TestCase {
 			$mockInfoLookup,
 			null,
 			$id,
-			false
+			false,
 		];
 
 		// try with via fallback
@@ -86,7 +86,7 @@ class PropertyInfoDataTypeLookupTest extends \PHPUnit\Framework\TestCase {
 			$emptyInfoLookup,
 			$propertyDataTypeLookup,
 			$id,
-			false
+			false,
 		];
 
 		return $argLists;

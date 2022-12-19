@@ -61,8 +61,8 @@ class ReplaceItemStatementValidatorTest extends TestCase {
 				'$isBot' => false,
 				'$comment' => null,
 				'$username' => null,
-				'$itemId' => $itemId
-			]
+				'$itemId' => $itemId,
+			],
 		];
 		yield 'Valid without item ID' => [
 			[
@@ -71,8 +71,8 @@ class ReplaceItemStatementValidatorTest extends TestCase {
 				'$editTags' => [],
 				'$isBot' => false,
 				'$comment' => null,
-				'$username' => null
-			]
+				'$username' => null,
+			],
 		];
 	}
 
@@ -86,7 +86,7 @@ class ReplaceItemStatementValidatorTest extends TestCase {
 				'$isBot' => false,
 				'$comment' => null,
 				'$username' => null,
-				'$itemId' => $itemId
+				'$itemId' => $itemId,
 			] )
 		);
 
@@ -106,7 +106,7 @@ class ReplaceItemStatementValidatorTest extends TestCase {
 				'$isBot' => false,
 				'$comment' => null,
 				'$username' => null,
-				'$itemId' => $itemId
+				'$itemId' => $itemId,
 			] )
 		);
 
@@ -134,7 +134,7 @@ class ReplaceItemStatementValidatorTest extends TestCase {
 				'$isBot' => false,
 				'$comment' => null,
 				'$username' => null,
-				'$itemId' => null
+				'$itemId' => null,
 			] )
 		);
 
@@ -151,7 +151,7 @@ class ReplaceItemStatementValidatorTest extends TestCase {
 				'$isBot' => false,
 				'$comment' => $comment,
 				'$username' => null,
-				'$itemId' => null
+				'$itemId' => null,
 			] )
 		);
 
@@ -174,7 +174,7 @@ class ReplaceItemStatementValidatorTest extends TestCase {
 				'$isBot' => false,
 				'$comment' => null,
 				'$username' => null,
-				'$itemId' => null
+				'$itemId' => null,
 			] )
 		);
 

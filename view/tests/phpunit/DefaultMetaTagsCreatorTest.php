@@ -21,7 +21,7 @@ class DefaultMetaTagsCreatorTest extends EntityMetaTagsCreatorTestCase {
 		yield 'entity meta tags created with Entity that has no id' => [
 			$defaultMetaTagsCreator,
 			$this->createMock( EntityDocument::class ),
-			[]
+			[],
 		];
 
 		yield 'entity meta tags created with Entity that has an id' => [
@@ -29,7 +29,7 @@ class DefaultMetaTagsCreatorTest extends EntityMetaTagsCreatorTestCase {
 			$this->getMockEntityWithId(),
 			[
 				'title' => 'EntityID12345',
-			]
+			],
 		];
 	}
 

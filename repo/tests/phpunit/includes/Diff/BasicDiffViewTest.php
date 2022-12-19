@@ -46,7 +46,7 @@ class BasicDiffViewTest extends \PHPUnit\Framework\TestCase {
 				'@THE ?<del\b[^>]*> ?OLD ?</del> ?WORD.*THE ?<ins\b[^>]*> ?NEW ?</ins> ?WORD@',
 				'THE OLD WORD',
 				'THE NEW WORD',
-			]
+			],
 		];
 	}
 

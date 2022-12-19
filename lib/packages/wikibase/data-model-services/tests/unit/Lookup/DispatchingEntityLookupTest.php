@@ -35,10 +35,10 @@ class DispatchingEntityLookupTest extends TestCase {
 				[ '' => new ItemId( 'Q123' ) ],
 			],
 			'non-string keys' => [
-				[ '' => new InMemoryEntityLookup(), 100 => new InMemoryEntityLookup(), ],
+				[ '' => new InMemoryEntityLookup(), 100 => new InMemoryEntityLookup() ],
 			],
 			'repo name containing colon' => [
-				[ '' => new InMemoryEntityLookup(),	'fo:oo' => new InMemoryEntityLookup(), ],
+				[ '' => new InMemoryEntityLookup(),	'fo:oo' => new InMemoryEntityLookup() ],
 			],
 		];
 	}
@@ -71,7 +71,7 @@ class DispatchingEntityLookupTest extends TestCase {
 	}
 
 	public function testGivenEntityIdFromUnknownRepository_getEntityReturnsNull() {
-		$dispatchingLookup = new DispatchingEntityLookup( [ '' => new InMemoryEntityLookup(), ] );
+		$dispatchingLookup = new DispatchingEntityLookup( [ '' => new InMemoryEntityLookup() ] );
 
 		$this->assertNull( $dispatchingLookup->getEntity( new ItemId( 'foo:Q1' ) ) );
 	}
@@ -121,7 +121,7 @@ class DispatchingEntityLookupTest extends TestCase {
 	}
 
 	public function testGivenEntityIdFromUnknownRepository_hasEntityReturnsFalse() {
-		$dispatchingLookup = new DispatchingEntityLookup( [ '' => $this->createMock( EntityLookup::class ), ] );
+		$dispatchingLookup = new DispatchingEntityLookup( [ '' => $this->createMock( EntityLookup::class ) ] );
 
 		$this->assertFalse( $dispatchingLookup->hasEntity( new ItemId( 'foo:Q1' ) ) );
 	}

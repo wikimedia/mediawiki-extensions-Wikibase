@@ -81,7 +81,7 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 			[ ItemData::FIELD_TYPE ],
 			( new ItemDataBuilder( $item->getId(), [ ItemData::FIELD_TYPE ] ) )
 				->setType( Item::ENTITY_TYPE )
-				->build()
+				->build(),
 		];
 		$fields = [ ItemData::FIELD_LABELS, ItemData::FIELD_DESCRIPTIONS, ItemData::FIELD_ALIASES ];
 		yield 'labels, descriptions, aliases' => [

@@ -112,7 +112,7 @@ class PruneItemsPerSite extends Maintenance {
 		$dbw->delete(
 			'wb_items_per_site',
 			[
-				'ips_row_id' => $rowsToDelete
+				'ips_row_id' => $rowsToDelete,
 			],
 			__METHOD__
 		);

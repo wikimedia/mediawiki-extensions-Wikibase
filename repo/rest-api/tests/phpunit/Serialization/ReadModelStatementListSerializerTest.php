@@ -37,12 +37,12 @@ class ReadModelStatementListSerializerTest extends TestCase {
 			new ArrayObject(
 				[
 					'P123' => [
-						[ 'P123 statement serialization' ]
+						[ 'P123 statement serialization' ],
 					],
 					'P321' => [
 						[ 'P321 statement serialization' ],
 						[ 'P321 statement serialization' ],
-					]
+					],
 				]
 			),
 			$this->newSerializer()->serialize( $statementList )
@@ -61,7 +61,7 @@ class ReadModelStatementListSerializerTest extends TestCase {
 		$statementSerializer->method( 'serialize' )
 			->willReturnCallback(
 				fn( Statement $statement ) => [
-					$statement->getMainSnak()->getPropertyId()->serialize() . ' statement serialization'
+					$statement->getMainSnak()->getPropertyId()->serialize() . ' statement serialization',
 				]
 			);
 		return new ReadModelStatementListSerializer( $statementSerializer );

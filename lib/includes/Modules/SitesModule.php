@@ -175,7 +175,7 @@ class SitesModule extends RL\Module {
 			'',
 			[
 				$site->getPageUrl(),
-				$site->getFileUrl( 'api.php' )
+				$site->getFileUrl( 'api.php' ),
 			]
 		);
 
@@ -186,7 +186,7 @@ class SitesModule extends RL\Module {
 			'pageUrl' => $pageUrl,
 			'apiUrl' => $apiUrl,
 			'languageCode' => $site->getLanguageCode(),
-			'group' => $groupName
+			'group' => $groupName,
 		];
 	}
 

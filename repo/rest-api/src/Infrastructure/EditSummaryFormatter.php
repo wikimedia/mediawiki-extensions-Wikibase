@@ -71,7 +71,7 @@ class EditSummaryFormatter {
 
 		$formatableSummary->setUserSummary( $editSummary->getUserComment() );
 		$formatableSummary->addAutoSummaryArgs( [
-			[ $statement->getPropertyId()->getSerialization() => $statement->getMainSnak() ]
+			[ $statement->getPropertyId()->getSerialization() => $statement->getMainSnak() ],
 		] );
 
 		return $formatableSummary;

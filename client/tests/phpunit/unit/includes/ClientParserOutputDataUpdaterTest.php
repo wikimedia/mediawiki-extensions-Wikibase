@@ -197,23 +197,23 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 			'other project exists, page has site link' => [
 				[ 'project' => 'catswiki' ],
 				[ 'project' => 'catswiki' ],
-				'Foo sr'
+				'Foo sr',
 			],
 			'other project exists, page has no site link' => [
 				[],
 				[ 'project' => 'catswiki' ],
-				'Foo xx'
+				'Foo xx',
 			],
 			'no other projects, page has site link' => [
 				[],
 				[],
-				'Foo sr'
+				'Foo sr',
 			],
 			'no site link for this page' => [
 				[],
 				[],
-				'Foo xx'
-			]
+				'Foo xx',
+			],
 		];
 	}
 

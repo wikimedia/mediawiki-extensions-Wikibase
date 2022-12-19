@@ -86,7 +86,7 @@ class DataTypeFactoryTest extends \PHPUnit\Framework\TestCase {
 			[
 				'data-type',
 				[ 'data-type' => 'valuetype' ],
-				'valuetype'
+				'valuetype',
 			],
 		];
 	}

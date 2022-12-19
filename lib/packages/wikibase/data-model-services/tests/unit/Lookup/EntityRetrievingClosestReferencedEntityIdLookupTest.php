@@ -174,7 +174,7 @@ class EntityRetrievingClosestReferencedEntityIdLookupTest extends TestCase {
 				$referencingEntityStructureLookup,
 				$q1,
 				$pSubclassOf,
-				[]
+				[],
 			],
 			'no such statement' => [
 				null,
@@ -183,7 +183,7 @@ class EntityRetrievingClosestReferencedEntityIdLookupTest extends TestCase {
 				$referencingEntityStructureLookup,
 				$q1,
 				new NumericPropertyId( 'P12345' ),
-				[ $q5 ]
+				[ $q5 ],
 			],
 			'from id does not exist' => [
 				null,
@@ -192,7 +192,7 @@ class EntityRetrievingClosestReferencedEntityIdLookupTest extends TestCase {
 				$referencingEntityStructureLookup,
 				$q404,
 				$pSubclassOf,
-				[ $q5 ]
+				[ $q5 ],
 			],
 			'directly referenced entity #1' => [
 				$q5,
@@ -201,7 +201,7 @@ class EntityRetrievingClosestReferencedEntityIdLookupTest extends TestCase {
 				$referencingEntityStructureLookup,
 				$q1,
 				$pSubclassOf,
-				[ $q5 ]
+				[ $q5 ],
 			],
 			'directly referenced entity #2' => [
 				$q1,
@@ -210,7 +210,7 @@ class EntityRetrievingClosestReferencedEntityIdLookupTest extends TestCase {
 				$circularReferencingEntityStructure,
 				$q5,
 				$pSubclassOf,
-				[ $q12, $q403, $q1, $q404 ]
+				[ $q12, $q403, $q1, $q404 ],
 			],
 			'directly referenced entity, two target ids' => [
 				$q5,
@@ -219,7 +219,7 @@ class EntityRetrievingClosestReferencedEntityIdLookupTest extends TestCase {
 				$referencingEntityStructureLookup,
 				$q1,
 				$pSubclassOf,
-				[ $q5, $q404 ]
+				[ $q5, $q404 ],
 			],
 			'indirectly referenced entity #1' => [
 				$q3,
@@ -228,7 +228,7 @@ class EntityRetrievingClosestReferencedEntityIdLookupTest extends TestCase {
 				$referencingEntityStructureLookup,
 				$q1,
 				$pSubclassOf,
-				[ $q3 ]
+				[ $q3 ],
 			],
 			'indirectly referenced entity #2' => [
 				$q12,
@@ -237,7 +237,7 @@ class EntityRetrievingClosestReferencedEntityIdLookupTest extends TestCase {
 				$referencingEntityStructureLookup,
 				$q1,
 				$pSubclassOf,
-				[ $q12 ]
+				[ $q12 ],
 			],
 			'indirectly referenced entity, multiple target ids' => [
 				$q12,
@@ -246,7 +246,7 @@ class EntityRetrievingClosestReferencedEntityIdLookupTest extends TestCase {
 				$referencingEntityStructureLookup,
 				$q1,
 				$pSubclassOf,
-				[ $q12, $q403, $q404 ]
+				[ $q12, $q403, $q404 ],
 			],
 			'indirectly referenced entity, multiple target ids' => [
 				$q12,
@@ -255,7 +255,7 @@ class EntityRetrievingClosestReferencedEntityIdLookupTest extends TestCase {
 				$referencingEntityStructureLookup,
 				$q1,
 				$pSubclassOf,
-				[ $q12, $q403, $q404 ]
+				[ $q12, $q403, $q404 ],
 			],
 			'circular reference detection' => [
 				null,
@@ -264,7 +264,7 @@ class EntityRetrievingClosestReferencedEntityIdLookupTest extends TestCase {
 				$circularReferencingEntityStructure,
 				$q1,
 				$pSubclassOf,
-				[ $q403, $q404 ]
+				[ $q403, $q404 ],
 			],
 		];
 	}
@@ -415,13 +415,13 @@ class EntityRetrievingClosestReferencedEntityIdLookupTest extends TestCase {
 				$entityLookup,
 				$q42,
 				$p1,
-				[ $q42 ]
+				[ $q42 ],
 			],
 			'wrong datatype' => [
 				$entityLookup,
 				$q42,
 				$p2,
-				[ $q42 ]
+				[ $q42 ],
 			],
 		];
 	}

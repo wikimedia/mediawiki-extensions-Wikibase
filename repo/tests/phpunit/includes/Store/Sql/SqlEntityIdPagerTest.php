@@ -106,7 +106,7 @@ class SqlEntityIdPagerTest extends MediaWikiIntegrationTestCase {
 		return [
 			'rd_from' => $redirectTitle->getArticleID(),
 			'rd_namespace' => $redirectTitle->getNamespace(),
-			'rd_title' => $redirectTitle->getDBkey()
+			'rd_title' => $redirectTitle->getDBkey(),
 		];
 	}
 
@@ -178,7 +178,7 @@ class SqlEntityIdPagerTest extends MediaWikiIntegrationTestCase {
 				100,
 				1,
 				EntityIdPager::NO_REDIRECTS,
-				[ [] ]
+				[ [] ],
 			],
 			'no matches' => [
 				[ Item::ENTITY_TYPE ],
@@ -187,7 +187,7 @@ class SqlEntityIdPagerTest extends MediaWikiIntegrationTestCase {
 				EntityIdPager::NO_REDIRECTS,
 				[ [] ],
 				[ $property ],
-				[ $redirect ]
+				[ $redirect ],
 			],
 			'some entities' => [
 				[],
@@ -196,7 +196,7 @@ class SqlEntityIdPagerTest extends MediaWikiIntegrationTestCase {
 				EntityIdPager::NO_REDIRECTS,
 				[ [ $property, $item ] ],
 				[ $property, $item ],
-				[ $redirect ]
+				[ $redirect ],
 			],
 			'two chunks' => [
 				[],
@@ -205,7 +205,7 @@ class SqlEntityIdPagerTest extends MediaWikiIntegrationTestCase {
 				EntityIdPager::NO_REDIRECTS,
 				[ [ $property ], [ $item ] ],
 				[ $property, $item ],
-				[ $redirect ]
+				[ $redirect ],
 			],
 			'chunks with limit > 1' => [
 				[],
@@ -214,7 +214,7 @@ class SqlEntityIdPagerTest extends MediaWikiIntegrationTestCase {
 				EntityIdPager::INCLUDE_REDIRECTS,
 				[ [ $property, $item ], [ $redirect ], [] ],
 				[ $property, $item ],
-				[ $redirect ]
+				[ $redirect ],
 			],
 			'four chunks (two empty)' => [
 				[],
@@ -223,7 +223,7 @@ class SqlEntityIdPagerTest extends MediaWikiIntegrationTestCase {
 				EntityIdPager::NO_REDIRECTS,
 				[ [ $property ], [ $item ], [], [] ],
 				[ $property, $item ],
-				[ $redirect ]
+				[ $redirect ],
 			],
 			'include redirects' => [
 				[],
@@ -232,7 +232,7 @@ class SqlEntityIdPagerTest extends MediaWikiIntegrationTestCase {
 				EntityIdPager::INCLUDE_REDIRECTS,
 				[ [ $property, $item, $redirect ] ],
 				[ $property, $item ],
-				[ $redirect ]
+				[ $redirect ],
 			],
 			'only redirects' => [
 				[],
@@ -241,7 +241,7 @@ class SqlEntityIdPagerTest extends MediaWikiIntegrationTestCase {
 				EntityIdPager::ONLY_REDIRECTS,
 				[ [ $redirect ] ],
 				[ $property, $item ],
-				[ $redirect ]
+				[ $redirect ],
 			],
 			'just properties' => [
 				[ Property::ENTITY_TYPE ],
@@ -250,7 +250,7 @@ class SqlEntityIdPagerTest extends MediaWikiIntegrationTestCase {
 				EntityIdPager::NO_REDIRECTS,
 				[ [ $property ] ],
 				[ $property, $item ],
-				[ $redirect ]
+				[ $redirect ],
 			],
 			'exactly properties and items' => [
 				[ Property::ENTITY_TYPE, Item::ENTITY_TYPE ],
@@ -259,7 +259,7 @@ class SqlEntityIdPagerTest extends MediaWikiIntegrationTestCase {
 				EntityIdPager::NO_REDIRECTS,
 				[ [ $property, $item ] ],
 				[ $property, $item ],
-				[ $redirect ]
+				[ $redirect ],
 			],
 			'limit' => [
 				[ Property::ENTITY_TYPE ],
@@ -268,8 +268,8 @@ class SqlEntityIdPagerTest extends MediaWikiIntegrationTestCase {
 				EntityIdPager::NO_REDIRECTS,
 				[ [ $property ] ],
 				[ $property, $item ],
-				[ $redirect ]
-			]
+				[ $redirect ],
+			],
 		];
 	}
 
@@ -343,7 +343,7 @@ class SqlEntityIdPagerTest extends MediaWikiIntegrationTestCase {
 			new Property( new NumericPropertyId( 'P1' ), null, 'string' ),
 			new Item( new ItemId( 'Q7' ) ),
 			new Property( new NumericPropertyId( 'P2' ), null, 'string' ),
-			new Item( new ItemId( 'Q8' ) )
+			new Item( new ItemId( 'Q8' ) ),
 		];
 
 		$this->insertEntities( $entities );

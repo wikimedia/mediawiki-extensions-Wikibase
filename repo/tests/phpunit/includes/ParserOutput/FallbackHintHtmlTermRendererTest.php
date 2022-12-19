@@ -41,7 +41,7 @@ class FallbackHintHtmlTermRendererTest extends \PHPUnit\Framework\TestCase {
 					'de'
 				),
 				'<span lang="de" dir="ltr">lkt &amp; term</span><sup '
-					. "class=\"wb-language-fallback-indicator wb-language-fallback-variant\">\u{00A0}</sup>"
+					. "class=\"wb-language-fallback-indicator wb-language-fallback-variant\">\u{00A0}</sup>",
 			],
 			[
 				new TermFallback(
@@ -51,7 +51,7 @@ class FallbackHintHtmlTermRendererTest extends \PHPUnit\Framework\TestCase {
 					'arc'
 				),
 				'<span lang="arc" dir="rtl">arc term</span><sup '
-					. "class=\"wb-language-fallback-indicator\">\u{00A0}</sup>"
+					. "class=\"wb-language-fallback-indicator\">\u{00A0}</sup>",
 			],
 		];
 	}

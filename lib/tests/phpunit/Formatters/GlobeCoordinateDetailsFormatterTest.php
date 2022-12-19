@@ -47,7 +47,7 @@ class GlobeCoordinateDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
 
 	public function quantityFormatProvider() {
 		$options = new FormatterOptions( [
-			ValueFormatter::OPT_LANG => 'en'
+			ValueFormatter::OPT_LANG => 'en',
 		] );
 
 		return [
@@ -62,7 +62,7 @@ class GlobeCoordinateDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
 						'<td[^<>]*>[^<>]*1[^<>]*</td>',
 						'<td[^<>]*>[^<>]*<a[^<>]*>[^<>]*.*formatted-globe-Q2[^<>]*</a>[^<>]*</td>',
 					]
-				) . '@s'
+				) . '@s',
 			],
 		];
 	}

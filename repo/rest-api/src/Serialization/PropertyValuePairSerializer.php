@@ -22,11 +22,11 @@ class PropertyValuePairSerializer {
 		$propertyValuePair = [
 			'property' => [
 				'id' => $propertyId->getSerialization(),
-				'data-type' => $this->dataTypeLookup->getDataTypeIdForProperty( $propertyId )
+				'data-type' => $this->dataTypeLookup->getDataTypeIdForProperty( $propertyId ),
 			],
 			'value' => [
-				'type' => $snak->getType()
-			]
+				'type' => $snak->getType(),
+			],
 		];
 
 		if ( $snak instanceof PropertyValueSnak ) {

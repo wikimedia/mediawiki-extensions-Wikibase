@@ -28,7 +28,7 @@ class LabelUniquenessValidatorTest extends \PHPUnit\Framework\TestCase {
 		yield [
 			$terms,
 			[],
-			[]
+			[],
 		];
 
 		$terms[] = new Term( 'sv', 'derp' );
@@ -36,9 +36,9 @@ class LabelUniquenessValidatorTest extends \PHPUnit\Framework\TestCase {
 		yield [
 			$terms,
 			[
-				new TermList( $terms )
+				new TermList( $terms ),
 			],
-			[] // no conflict
+			[], // no conflict
 		];
 
 		$terms[] = new Term( 'sv', 'derp' );
@@ -46,11 +46,11 @@ class LabelUniquenessValidatorTest extends \PHPUnit\Framework\TestCase {
 		yield [
 			$terms,
 			[
-				new TermList( $terms )
+				new TermList( $terms ),
 			],
 			[
-				'P1' => [ new Term( 'sv', 'derp' ) ]
-			]
+				'P1' => [ new Term( 'sv', 'derp' ) ],
+			],
 		];
 	}
 

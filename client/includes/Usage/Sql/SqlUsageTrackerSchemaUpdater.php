@@ -72,7 +72,7 @@ class SqlUsageTrackerSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 	private function getScriptPath( string $name, string $type ): string {
 		$types = [
 			$type,
-			'mysql'
+			'mysql',
 		];
 
 		foreach ( $types as $type ) {

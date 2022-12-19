@@ -110,7 +110,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		'de',
 		'zh',
 		//multiple languages
-		'de|nn|nb|en|en-gb|it|es|zh|ar'
+		'de|nn|nb|en|en-gb|it|es|zh|ar',
 	];
 
 	/**
@@ -556,7 +556,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 					],
 				],
 				null,
-				[ 'labels' ]
+				[ 'labels' ],
 			],
 		];
 	}

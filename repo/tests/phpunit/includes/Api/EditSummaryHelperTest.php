@@ -25,35 +25,35 @@ class EditSummaryHelperTest extends \PHPUnit\Framework\TestCase {
 				'changedLanguagesCount' => 0,
 				'nonLanguageBoundChangesCount' => 1,
 				'expectedAction' => 'update',
-				'expectedAutoCommentArgs' => []
+				'expectedAutoCommentArgs' => [],
 			],
 			'only terms changed in less than 50 languages' => [
 				'collectChangedLanguages' => [ 'en' ],
 				'changedLanguagesCount' => 1,
 				'nonLanguageBoundChangesCount' => 0,
 				'expectedAction' => 'update-languages-short',
-				'expectedAutoCommentArgs' => [ [ 'en' ] ]
+				'expectedAutoCommentArgs' => [ [ 'en' ] ],
 			],
 			' terms in less than 50 languages and other parts changed' => [
 				'collectChangedLanguages' => [ 'fr' ],
 				'changedLanguagesCount' => 1,
 				'nonLanguageBoundChangesCount' => 1,
 				'expectedAction' => 'update-languages-and-other-short',
-				'expectedAutoCommentArgs' => [ [ 'fr' ] ]
+				'expectedAutoCommentArgs' => [ [ 'fr' ] ],
 			],
 			'terms in more than 50 languages changed' => [
 				'collectChangedLanguages' => [ 'en', '...' ],
 				'changedLanguagesCount' => 51,
 				'nonLanguageBoundChangesCount' => 0,
 				'expectedAction' => 'update-languages',
-				'expectedAutoCommentArgs' => [ 51 ]
+				'expectedAutoCommentArgs' => [ 51 ],
 			],
 			'terms  in more than 50 languages and other parts changed' => [
 				'collectChangedLanguages' => [ 'en', '...' ],
 				'changedLanguagesCount' => 51,
 				'nonLanguageBoundChangesCount' => 3,
 				'expectedAction' => 'update-languages-and-other',
-				'expectedAutoCommentArgs' => [ 51 ]
+				'expectedAutoCommentArgs' => [ 51 ],
 			],
 		];
 	}

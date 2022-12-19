@@ -89,7 +89,7 @@ class WikibaseLuaEntityBindingsTest extends \PHPUnit\Framework\TestCase {
 		$this->assertCount( 1, $usageAccumulator->getUsages() );
 		$this->assertEquals(
 			[
-				'Q2013#C.P1337' => new EntityUsage( $q2013, EntityUsage::STATEMENT_USAGE, 'P1337' )
+				'Q2013#C.P1337' => new EntityUsage( $q2013, EntityUsage::STATEMENT_USAGE, 'P1337' ),
 			],
 			$usageAccumulator->getUsages()
 		);

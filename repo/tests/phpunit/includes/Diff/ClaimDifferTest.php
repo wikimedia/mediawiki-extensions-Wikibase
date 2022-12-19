@@ -36,19 +36,19 @@ class ClaimDifferTest extends \PHPUnit\Framework\TestCase {
 		$argLists[] = [
 			null,
 			null,
-			new ClaimDifference()
+			new ClaimDifference(),
 		];
 
 		$argLists[] = [
 			$noValueForP42,
 			$noValueForP42,
-			new ClaimDifference()
+			new ClaimDifference(),
 		];
 
 		$argLists[] = [
 			$noValueForP42,
 			$noValueForP43,
-			new ClaimDifference( new DiffOpChange( new PropertyNoValueSnak( 42 ), new PropertyNoValueSnak( 43 ) ) )
+			new ClaimDifference( new DiffOpChange( new PropertyNoValueSnak( 42 ), new PropertyNoValueSnak( 43 ) ) ),
 		];
 
 		$qualifiers = new SnakList( [ new PropertyNoValueSnak( 1 ) ] );
@@ -61,9 +61,9 @@ class ClaimDifferTest extends \PHPUnit\Framework\TestCase {
 			new ClaimDifference(
 				null,
 				new Diff( [
-					new DiffOpAdd( new PropertyNoValueSnak( 1 ) )
+					new DiffOpAdd( new PropertyNoValueSnak( 1 ) ),
 				], false )
-			)
+			),
 		];
 
 		$references = new ReferenceList( [ new Reference( [ new PropertyNoValueSnak( 2 ) ] ) ] );
@@ -77,9 +77,9 @@ class ClaimDifferTest extends \PHPUnit\Framework\TestCase {
 				null,
 				null,
 				new Diff( [
-					new DiffOpAdd( new Reference( [ new PropertyNoValueSnak( 2 ) ] ) )
+					new DiffOpAdd( new Reference( [ new PropertyNoValueSnak( 2 ) ] ) ),
 				], false )
-			)
+			),
 		];
 
 		$argLists[] = [
@@ -88,12 +88,12 @@ class ClaimDifferTest extends \PHPUnit\Framework\TestCase {
 			new ClaimDifference(
 				null,
 				new Diff( [
-					new DiffOpRemove( new PropertyNoValueSnak( 1 ) )
+					new DiffOpRemove( new PropertyNoValueSnak( 1 ) ),
 				], false ),
 				new Diff( [
-					new DiffOpAdd( new Reference( [ new PropertyNoValueSnak( 2 ) ] ) )
+					new DiffOpAdd( new Reference( [ new PropertyNoValueSnak( 2 ) ] ) ),
 				], false )
-			)
+			),
 		];
 
 		$argLists[] = [
@@ -103,10 +103,10 @@ class ClaimDifferTest extends \PHPUnit\Framework\TestCase {
 				new DiffOpChange( new PropertyNoValueSnak( 42 ), null ),
 				null,
 				new Diff( [
-					new DiffOpRemove( new Reference( [ new PropertyNoValueSnak( 2 ) ] ) )
+					new DiffOpRemove( new Reference( [ new PropertyNoValueSnak( 2 ) ] ) ),
 				], false ),
 				new DiffOpChange( 1, null )
-			)
+			),
 		];
 
 		$argLists[] = [
@@ -116,10 +116,10 @@ class ClaimDifferTest extends \PHPUnit\Framework\TestCase {
 				new DiffOpChange( null, new PropertyNoValueSnak( 42 ) ),
 				null,
 				new Diff( [
-					new DiffOpAdd( new Reference( [ new PropertyNoValueSnak( 2 ) ] ) )
+					new DiffOpAdd( new Reference( [ new PropertyNoValueSnak( 2 ) ] ) ),
 				], false ),
 				new DiffOpChange( null, 1 )
-			)
+			),
 		];
 
 		$argLists[] = [
@@ -130,7 +130,7 @@ class ClaimDifferTest extends \PHPUnit\Framework\TestCase {
 				null,
 				null,
 				new DiffOpChange( null, 1 )
-			)
+			),
 		];
 
 		$noValueForP42Preferred = clone $noValueForP42;
@@ -144,7 +144,7 @@ class ClaimDifferTest extends \PHPUnit\Framework\TestCase {
 				null,
 				null,
 				new DiffOpChange( Statement::RANK_NORMAL, Statement::RANK_PREFERRED )
-			)
+			),
 		];
 
 		return $argLists;

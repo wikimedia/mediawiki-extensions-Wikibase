@@ -85,8 +85,8 @@ class ParameterizedDescriptionTraitTest extends MediaWikiIntegrationTestCase {
 			'SpecialSetLabelDescriptionAliases' => [
 				$this->newSpecialSpecialSetLabelDescriptionAliases(),
 				'(special-setlabeldescriptionaliases-parameterized: (wikibase-entity-item)' .
-				'(special-parameterized-description-separator)(wikibase-entity-property))'
-			]
+				'(special-parameterized-description-separator)(wikibase-entity-property))',
+			],
 		];
 	}
 
@@ -109,8 +109,8 @@ class ParameterizedDescriptionTraitTest extends MediaWikiIntegrationTestCase {
 			],
 			'SpecialSetLabelDescriptionAliases' => [
 				$this->newSpecialSpecialSetLabelDescriptionAliases(),
-				'(special-setlabeldescriptionaliases-parameterized: (wikibase-entity-item))'
-			]
+				'(special-setlabeldescriptionaliases-parameterized: (wikibase-entity-item))',
+			],
 
 		];
 	}

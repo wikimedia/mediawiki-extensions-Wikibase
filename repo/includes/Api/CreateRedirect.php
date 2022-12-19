@@ -187,7 +187,7 @@ class CreateRedirect extends ApiBase {
 			'bot' => [
 				ParamValidator::PARAM_TYPE => 'boolean',
 				ParamValidator::PARAM_DEFAULT => false,
-			]
+			],
 		];
 	}
 

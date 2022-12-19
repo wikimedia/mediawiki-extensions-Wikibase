@@ -100,7 +100,7 @@ class EntityDeserializerTest extends \PHPUnit\Framework\TestCase {
 
 	private function getLegacyItemSerializationWithoutId() {
 		return [ 'aliases' => [
-			'en' => [ 'foo', 'bar' ]
+			'en' => [ 'foo', 'bar' ],
 		] ];
 	}
 
@@ -125,7 +125,7 @@ class EntityDeserializerTest extends \PHPUnit\Framework\TestCase {
 					'language' => 'en',
 					'value' => 'bar',
 				],
-			]
+			],
 		] ];
 	}
 

@@ -137,8 +137,8 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 			'filtered by language' => [
 				[
 					'label' => [
-						'de' => [ 'Text' ]
-					]
+						'de' => [ 'Text' ],
+					],
 				],
 				null,
 				[ 'nl', 'de', 'es' ],
@@ -423,15 +423,15 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 
 		$this->db->insert( 'wbt_property_terms', [
 			'wbpt_property_id' => 1,
-			'wbpt_term_in_lang_id' => $termInLang1Id
+			'wbpt_term_in_lang_id' => $termInLang1Id,
 		] );
 		$this->db->insert( 'wbt_property_terms', [
 			'wbpt_property_id' => 1,
-			'wbpt_term_in_lang_id' => $termInLang2Id
+			'wbpt_term_in_lang_id' => $termInLang2Id,
 		] );
 		$this->db->insert( 'wbt_property_terms', [
 			'wbpt_property_id' => 2,
-			'wbpt_term_in_lang_id' => $termInLang3Id
+			'wbpt_term_in_lang_id' => $termInLang3Id,
 		] );
 
 		$resolver = new DatabaseTermInLangIdsResolver(
@@ -451,9 +451,9 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 			[
 				1 => [
 					'label' => [ 'en' => [ 'text' ] ],
-					'description' => [ 'en' => [ 'text' ] ]
+					'description' => [ 'en' => [ 'text' ] ],
 				],
-				2 => [ 'label' => [ 'de' => [ 'Text' ] ] ]
+				2 => [ 'label' => [ 'de' => [ 'Text' ] ] ],
 			],
 			$termIds
 		);

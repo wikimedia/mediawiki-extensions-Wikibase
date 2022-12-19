@@ -63,7 +63,7 @@ class EditEntityFactoryTest extends ServiceWiringTestCase {
 		$this->mockService(
 			'WikibaseRepo.Settings',
 			new SettingsArray( [
-				'maxSerializedEntitySize' => 2048
+				'maxSerializedEntitySize' => 2048,
 			] )
 		);
 

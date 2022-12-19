@@ -60,11 +60,11 @@ class FingerprintUniquenessValidatorTest extends TestCase {
 				'valueToValidate' => new ChangeOpFingerprintResult(
 					new ChangeOpsResult( $entityId, [
 						new ChangeOpLabelResult( $entityId, 'en', '', 'new label', true ),
-						new ChangeOpDescriptionResult( $entityId, 'en', 'old description', '', false )
+						new ChangeOpDescriptionResult( $entityId, 'en', 'old description', '', false ),
 					] ),
 					$this->createMock( TermValidatorFactory::class )
 				),
-				'expectedResult' => Result::newSuccess()
+				'expectedResult' => Result::newSuccess(),
 			],
 
 			'old label not in ChangeOpResult - no collisions detected' => [
@@ -80,11 +80,11 @@ class FingerprintUniquenessValidatorTest extends TestCase {
 				},
 				'valueToValidate' => new ChangeOpFingerprintResult(
 					new ChangeOpsResult( $entityId, [
-						new ChangeOpDescriptionResult( $entityId, 'en', '', 'new description', true )
+						new ChangeOpDescriptionResult( $entityId, 'en', '', 'new description', true ),
 					] ),
 					$this->createMock( TermValidatorFactory::class )
 				),
-				'expectedResult' => Result::newSuccess()
+				'expectedResult' => Result::newSuccess(),
 			],
 
 			'old description not in ChangeOpResult - no collisions detected' => [
@@ -104,7 +104,7 @@ class FingerprintUniquenessValidatorTest extends TestCase {
 					] ),
 					$this->createMock( TermValidatorFactory::class )
 				),
-				'expectedResult' => Result::newSuccess()
+				'expectedResult' => Result::newSuccess(),
 			],
 
 			'collision detected' => [
@@ -119,7 +119,7 @@ class FingerprintUniquenessValidatorTest extends TestCase {
 				'valueToValidate' => new ChangeOpFingerprintResult(
 					new ChangeOpsResult( $entityId, [
 						new ChangeOpLabelResult( $entityId, 'en', '', 'new label', true ),
-						new ChangeOpDescriptionResult( $entityId, 'en', 'old description', '', false )
+						new ChangeOpDescriptionResult( $entityId, 'en', 'old description', '', false ),
 					] ),
 					$this->createMock( TermValidatorFactory::class )
 				),
@@ -131,11 +131,11 @@ class FingerprintUniquenessValidatorTest extends TestCase {
 						[
 							'new label',
 							'en',
-							$collidingEntityId
+							$collidingEntityId,
 						]
-					)
-				] )
-			]
+					),
+				] ),
+			],
 		];
 	}
 

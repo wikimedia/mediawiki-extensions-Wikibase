@@ -21,7 +21,7 @@ class LangLinkSiteGroupTest extends ServiceWiringTestCase {
 		$this->mockService(
 			'WikibaseClient.Settings',
 			new SettingsArray( [
-				'languageLinkSiteGroup' => $langListGroup
+				'languageLinkSiteGroup' => $langListGroup,
 			] )
 		);
 
@@ -37,7 +37,7 @@ class LangLinkSiteGroupTest extends ServiceWiringTestCase {
 		$this->mockService(
 			'WikibaseClient.Settings',
 			new SettingsArray( [
-				'languageLinkSiteGroup' => null
+				'languageLinkSiteGroup' => null,
 			] )
 		);
 

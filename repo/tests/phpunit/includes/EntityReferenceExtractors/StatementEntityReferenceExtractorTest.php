@@ -54,9 +54,9 @@ class StatementEntityReferenceExtractorTest extends TestCase {
 				new Statement( new PropertyValueSnak(
 					new NumericPropertyId( 'P321' ),
 					new StringValue( 'foo' )
-				) )
+				) ),
 			],
-			[ new NumericPropertyId( 'P23' ), new ItemId( 'Q42' ), new NumericPropertyId( 'P321' ) ]
+			[ new NumericPropertyId( 'P23' ), new ItemId( 'Q42' ), new NumericPropertyId( 'P321' ) ],
 		];
 
 		yield 'statement with qualifiers' => [
@@ -66,10 +66,10 @@ class StatementEntityReferenceExtractorTest extends TestCase {
 					new PropertyValueSnak(
 						new NumericPropertyId( 'P666' ),
 						new EntityIdValue( new ItemId( 'Q666' ) )
-					)
+					),
 				] )
 			) ],
-			[ new NumericPropertyId( 'P789' ), new NumericPropertyId( 'P666' ), new ItemId( 'Q666' ) ]
+			[ new NumericPropertyId( 'P789' ), new NumericPropertyId( 'P666' ), new ItemId( 'Q666' ) ],
 		];
 
 		yield 'statements with item in quantity value' => [
@@ -81,7 +81,7 @@ class StatementEntityReferenceExtractorTest extends TestCase {
 				new Statement( new PropertyValueSnak(
 					new NumericPropertyId( 'P1' ),
 					QuantityValue::newFromNumber( 1, self::UNIT_PREFIX . 'Q22' )
-				) )
+				) ),
 			],
 			[ new NumericPropertyId( 'P1' ), new ItemId( 'Q21' ), new ItemId( 'Q22' ) ],
 		];

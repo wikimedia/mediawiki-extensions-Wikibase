@@ -24,11 +24,11 @@ class DataTypesModuleTest extends \PHPUnit\Framework\TestCase {
 				'datatypesconfigvarname' => 'foo',
 				'datatypefactory' => function() {
 					return new DataTypeFactory( [] );
-				}
+				},
 			],
 			[
 				'datatypesconfigvarname' => 'bar123',
-				'datatypefactory' => new DataTypeFactory( [ 'url' => 'string' ] )
+				'datatypefactory' => new DataTypeFactory( [ 'url' => 'string' ] ),
 			],
 		];
 
@@ -51,34 +51,34 @@ class DataTypesModuleTest extends \PHPUnit\Framework\TestCase {
 			'datatypesconfigvarname' => 'foo',
 			'datatypefactory' => function() {
 				return new DataTypeFactory( [] );
-			}
+			},
 		];
 
 		return [
 			[
 				[
-					'datatypesconfigvarname' => 'foo'
+					'datatypesconfigvarname' => 'foo',
 				],
-				'missing "datatypefactory" field'
+				'missing "datatypefactory" field',
 			],
 			[
 				[
-					'datatypefactory' => $dataTypeFactory
+					'datatypefactory' => $dataTypeFactory,
 				],
-				'missing "datatypesconfigvarname" field'
+				'missing "datatypesconfigvarname" field',
 			],
 			[
 				[],
-				'all fields missing'
+				'all fields missing',
 			],
 			[
 				array_merge(
 					$validDefinition,
 					[
-						'datatypefactory' => 123
+						'datatypefactory' => 123,
 					]
 				),
-				'"datatypefactory" field has value of wrong type'
+				'"datatypefactory" field has value of wrong type',
 			],
 			[
 				array_merge(
@@ -86,10 +86,10 @@ class DataTypesModuleTest extends \PHPUnit\Framework\TestCase {
 					[
 						'datatypefactory' => function() {
 							return null;
-						}
+						},
 					]
 				),
-				'"datatypefactory" callback does not return a DataTypeFactory instance'
+				'"datatypefactory" callback does not return a DataTypeFactory instance',
 			],
 		];
 	}
@@ -136,12 +136,12 @@ class DataTypesModuleTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetDefinitionSummary_notEqualForDifferentDataTypes() {
 		$definition1 = $this->makeDefinition( [
-			'foo' => 'string'
+			'foo' => 'string',
 		] );
 
 		$definition2 = $this->makeDefinition( [
 			'foo' => 'string',
-			'bar' => 'string'
+			'bar' => 'string',
 		] );
 
 		$module1 = new DataTypesModule( $definition1 );
@@ -158,7 +158,7 @@ class DataTypesModuleTest extends \PHPUnit\Framework\TestCase {
 	private function makeDefinition( array $dataTypes ) {
 		return [
 			'datatypesconfigvarname' => 'foo123',
-			'datatypefactory' => new DataTypeFactory( $dataTypes )
+			'datatypefactory' => new DataTypeFactory( $dataTypes ),
 		];
 	}
 

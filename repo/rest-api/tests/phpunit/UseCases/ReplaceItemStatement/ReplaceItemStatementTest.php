@@ -122,7 +122,7 @@ class ReplaceItemStatementTest extends TestCase {
 				'$editTags' => $editTags,
 				'$isBot' => $isBot,
 				'$comment' => $comment,
-				'$itemId' => $itemId
+				'$itemId' => $itemId,
 			] )
 		);
 
@@ -202,7 +202,7 @@ class ReplaceItemStatementTest extends TestCase {
 		$response = $this->newUseCase()->execute(
 			$this->newUseCaseRequest( [
 				'$statementId' => 'INVALID-STATEMENT-ID',
-				'$statement' => $this->getStatementSerialization( $newStatement )
+				'$statement' => $this->getStatementSerialization( $newStatement ),
 			] )
 		);
 

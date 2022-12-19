@@ -71,7 +71,7 @@ class ApiEntityLookup {
 			'action' => 'wbgetentities',
 			'ids' => implode( '|', $entityIds ),
 			'props' => 'labels|descriptions|datatype',
-			'format' => 'json'
+			'format' => 'json',
 		] );
 
 		// @phan-suppress-next-line PhanTypeArraySuspiciousNullable The API response will be JSON here

@@ -281,7 +281,7 @@ class SearchEntities extends ApiBase {
 			null,
 			'searchinfo',
 			[
-				'search' => $params['search']
+				'search' => $params['search'],
 			]
 		);
 
@@ -341,7 +341,7 @@ class SearchEntities extends ApiBase {
 			],
 			'strictlanguage' => [
 				ParamValidator::PARAM_TYPE => 'boolean',
-				ParamValidator::PARAM_DEFAULT => false
+				ParamValidator::PARAM_DEFAULT => false,
 			],
 			'type' => [
 				ParamValidator::PARAM_TYPE => $this->enabledEntityTypes,
@@ -357,7 +357,7 @@ class SearchEntities extends ApiBase {
 			'continue' => [
 				ParamValidator::PARAM_TYPE => 'integer',
 				ParamValidator::PARAM_REQUIRED => false,
-				ParamValidator::PARAM_DEFAULT => 0
+				ParamValidator::PARAM_DEFAULT => 0,
 			],
 			'props' => [
 				ParamValidator::PARAM_TYPE => [ 'url' ],

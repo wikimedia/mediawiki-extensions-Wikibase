@@ -111,6 +111,12 @@
 	<rule ref="MediaWiki.Usage.ForbiddenFunctions.shell_exec">
 		<exclude-pattern>PidLock\.php</exclude-pattern>
 	</rule>
+	<rule ref="MediaWiki.Arrays.TrailingComma">
+		<properties>
+			<property name="singleLine" value="false" />
+			<property name="multiLine" value="true" />
+		</properties>
+	</rule>
 
 	<rule ref="Generic.Metrics.CyclomaticComplexity">
 		<properties>

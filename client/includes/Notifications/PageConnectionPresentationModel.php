@@ -87,7 +87,7 @@ class PageConnectionPresentationModel extends EchoEventPresentationModel {
 		$title = $this->event->getTitle();
 		return [
 			'url' => $title->getFullURL(),
-			'label' => $title->getFullText()
+			'label' => $title->getFullText(),
 		];
 	}
 

@@ -134,7 +134,7 @@ class GetItemRouteHandler extends SimpleHandler {
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => false,
 				ParamValidator::PARAM_ISMULTI => false,
-				ParamValidator::PARAM_DEFAULT => implode( ',', ItemData::VALID_FIELDS )
+				ParamValidator::PARAM_DEFAULT => implode( ',', ItemData::VALID_FIELDS ),
 			],
 		];
 	}

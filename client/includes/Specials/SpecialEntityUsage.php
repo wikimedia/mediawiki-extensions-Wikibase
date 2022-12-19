@@ -84,7 +84,7 @@ class SpecialEntityUsage extends QueryPage {
 					Html::element(
 						'p',
 						[
-							'class' => 'error'
+							'class' => 'error',
 						],
 						$this->msg( 'wikibase-entityusage-invalid-id', $entity )->text()
 					)
@@ -110,8 +110,8 @@ class SpecialEntityUsage extends QueryPage {
 				'name' => '',
 				'type' => 'submit',
 				'id' => 'wikibase-entityusage-submit',
-				'default' => $this->msg( 'wikibase-entityusage-submit' )->text()
-			]
+				'default' => $this->msg( 'wikibase-entityusage-submit' )->text(),
+			],
 		];
 
 		if ( $this->entityId !== null ) {
@@ -144,7 +144,7 @@ class SpecialEntityUsage extends QueryPage {
 		return [
 			'tables' => [
 				'page',
-				'wbc_entity_usage'
+				'wbc_entity_usage',
 			],
 			'fields' => [
 				'value' => 'page_id',
@@ -155,7 +155,7 @@ class SpecialEntityUsage extends QueryPage {
 			],
 			'conds' => $conds,
 			'options' => [ 'GROUP BY' => 'eu_page_id' ],
-			'join_conds' => $joinConds
+			'join_conds' => $joinConds,
 		];
 	}
 

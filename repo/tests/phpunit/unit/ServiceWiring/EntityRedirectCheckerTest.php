@@ -26,7 +26,7 @@ class EntityRedirectCheckerTest extends ServiceWiringTestCase {
 			->willReturn( [
 				'some-source' => [ 'some-entity-type' => function () {
 					return $this->createStub( EntityRedirectChecker::class );
-				} ]
+				} ],
 			] );
 		$this->mockService( 'WikibaseRepo.EntitySourceAndTypeDefinitions', $sourceAndTypeDefinitions );
 

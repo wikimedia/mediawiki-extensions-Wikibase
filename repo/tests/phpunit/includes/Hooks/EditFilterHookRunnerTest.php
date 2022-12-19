@@ -84,7 +84,7 @@ class EditFilterHookRunnerTest extends MediaWikiIntegrationTestCase {
 					'status' => Status::newGood(),
 					'title' => 'Q444',
 					'namespace' => NS_MAIN,
-				]
+				],
 			],
 			'fatal existing item' => [
 				Status::newFatal( 'foo' ),
@@ -93,7 +93,7 @@ class EditFilterHookRunnerTest extends MediaWikiIntegrationTestCase {
 					'status' => Status::newFatal( 'foo' ),
 					'title' => 'Q444',
 					'namespace' => NS_MAIN,
-				]
+				],
 			],
 			'good new item' => [
 				Status::newGood(),
@@ -102,7 +102,7 @@ class EditFilterHookRunnerTest extends MediaWikiIntegrationTestCase {
 					'status' => Status::newGood(),
 					'title' => 'NewItem',
 					'namespace' => NS_MAIN,
-				]
+				],
 			],
 			'fatal new item' => [
 				Status::newFatal( 'bar' ),
@@ -111,7 +111,7 @@ class EditFilterHookRunnerTest extends MediaWikiIntegrationTestCase {
 					'status' => Status::newFatal( 'bar' ),
 					'title' => 'NewItem',
 					'namespace' => NS_MAIN,
-				]
+				],
 			],
 			'good existing entityredirect' => [
 				Status::newGood(),
@@ -120,7 +120,7 @@ class EditFilterHookRunnerTest extends MediaWikiIntegrationTestCase {
 					'status' => Status::newGood(),
 					'title' => 'Q12',
 					'namespace' => NS_MAIN,
-				]
+				],
 			],
 			'fatal existing entityredirect' => [
 				Status::newFatal( 'baz' ),
@@ -129,7 +129,7 @@ class EditFilterHookRunnerTest extends MediaWikiIntegrationTestCase {
 					'status' => Status::newFatal( 'baz' ),
 					'title' => 'Q12',
 					'namespace' => NS_MAIN,
-				]
+				],
 			],
 		];
 	}

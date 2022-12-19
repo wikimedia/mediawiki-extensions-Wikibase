@@ -92,7 +92,7 @@ class AliasGroupFallbackTest extends \PHPUnit\Framework\TestCase {
 			'language' => [ new AliasGroupFallback( 'en-moo', [ 'foo' ], 'en-actual', 'en-source' ) ],
 			'actualLanguage' => [ new AliasGroupFallback( 'en-real', [ 'foo' ], 'en-moo', 'en-source' ) ],
 			'sourceLanguage' => [ new AliasGroupFallback( 'en-real', [ 'foo' ], 'en-actual', 'en-moo' ) ],
-			'null sourceLanguage' => [ new AliasGroupFallback( 'en-real', [ 'foo', ], 'en-actual', null ) ],
+			'null sourceLanguage' => [ new AliasGroupFallback( 'en-real', [ 'foo' ], 'en-actual', null ) ],
 			'all' => [ new AliasGroupFallback( 'en-moo', [ 'moo' ], 'en-moo', 'en-moo' ) ],
 			'class AliasGroup' => [ new AliasGroup( 'en-real', [ 'foo' ] ) ],
 		];

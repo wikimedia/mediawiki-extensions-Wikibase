@@ -21,7 +21,7 @@ class AvailableBadgesTest extends ApiTestCase {
 
 	private static $badgeItems = [
 		'Q123' => '',
-		'Q999' => ''
+		'Q999' => '',
 	];
 
 	protected function setUp(): void {
@@ -35,7 +35,7 @@ class AvailableBadgesTest extends ApiTestCase {
 
 	public function testExecute() {
 		list( $result,, ) = $this->doApiRequest( [
-			'action' => 'wbavailablebadges'
+			'action' => 'wbavailablebadges',
 		] );
 
 		$this->assertEquals( array_keys( self::$badgeItems ), $result['badges'] );

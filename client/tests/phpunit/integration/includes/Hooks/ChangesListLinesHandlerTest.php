@@ -119,7 +119,7 @@ class ChangesListLinesHandlerTest extends MediaWikiIntegrationTestCase {
 			[ RecentChange::SRC_EDIT ],
 			[ RecentChange::SRC_NEW ],
 			[ RecentChange::SRC_LOG ],
-			[ RecentChange::SRC_CATEGORIZE ]
+			[ RecentChange::SRC_CATEGORIZE ],
 		];
 	}
 
@@ -158,19 +158,19 @@ class ChangesListLinesHandlerTest extends MediaWikiIntegrationTestCase {
 		return [
 			[
 				[],
-				'wikibase-edit'
+				'wikibase-edit',
 			],
 			[
 				[ 'rc_minor' => true, 'rc_bot' => true ],
-				'wikibase-edit,minor,bot'
+				'wikibase-edit,minor,bot',
 			],
 			[
 				[ 'rc_minor' => 0, 'rc_bot' => 1 ],
-				'wikibase-edit,bot'
+				'wikibase-edit,bot',
 			],
 			[
 				[ 'rc_minor' => true, 'rc_bot' => false ],
-				'wikibase-edit,minor'
+				'wikibase-edit,minor',
 			],
 		];
 	}

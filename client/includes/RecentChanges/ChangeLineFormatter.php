@@ -226,7 +226,7 @@ class ChangeLineFormatter {
 		) {
 			return [
 				' <span class="history-deleted">' .
-				wfMessage( 'rev-deleted-user' )->escaped() . '</span>'
+				wfMessage( 'rev-deleted-user' )->escaped() . '</span>',
 			];
 		}
 
@@ -271,7 +271,7 @@ class ChangeLineFormatter {
 
 		$usertools = [
 			$links['usertalk'],
-			$links['contribs']
+			$links['contribs'],
 		];
 
 		$ret[] = wfMessage( 'word-separator' )->plain()
@@ -313,7 +313,7 @@ class ChangeLineFormatter {
 		$params = [
 			'title' => $this->repoLinker->getEntityTitle( $entityId ),
 			'curid' => $rev->getPageId(),
-			'oldid' => $rev->getRevId()
+			'oldid' => $rev->getRevId(),
 		];
 
 		$url = $this->repoLinker->addQueryParams( $this->repoLinker->getIndexUrl(), $params );
@@ -329,7 +329,7 @@ class ChangeLineFormatter {
 			'title' => $this->repoLinker->getEntityTitle( $entityId ),
 			'curid' => $rev->getPageId(),
 			'diff' => $rev->getRevId(),
-			'oldid' => $rev->getParentId()
+			'oldid' => $rev->getParentId(),
 		];
 
 		$url = $this->repoLinker->addQueryParams( $this->repoLinker->getIndexUrl(), $params );
@@ -338,7 +338,7 @@ class ChangeLineFormatter {
 			$url,
 			wfMessage( 'diff' )->text(),
 			[
-				'tabindex' => $count
+				'tabindex' => $count,
 			]
 		);
 	}
@@ -349,7 +349,7 @@ class ChangeLineFormatter {
 		$params = [
 			'title' => $titleText,
 			'curid' => $rev->getPageId(),
-			'action' => 'history'
+			'action' => 'history',
 		];
 
 		$url = $this->repoLinker->addQueryParams( $this->repoLinker->getIndexUrl(), $params );
@@ -366,7 +366,7 @@ class ChangeLineFormatter {
 			$this->repoLinker->getPageUrl( "User:$userName" ),
 			$userName,
 			[
-				'class' => 'mw-userlink'
+				'class' => 'mw-userlink',
 			]
 		);
 	}

@@ -362,7 +362,7 @@ class ResultBuilder {
 	private function addEntityRedirectInfoToRecord( array $record, $sourceEntityIdSerialization, EntityId $entityId ): array {
 		$record['redirects'] = [
 			'from' => $sourceEntityIdSerialization,
-			'to' => $entityId->getSerialization()
+			'to' => $entityId->getSerialization(),
 		];
 		return $record;
 	}
@@ -721,7 +721,7 @@ class ResultBuilder {
 			$language => [
 				'language' => $language,
 				'removed' => '',
-			]
+			],
 		];
 		if ( $this->addMetaData ) {
 			ApiResult::setArrayType( $value, 'kvp', 'language' );
@@ -939,7 +939,7 @@ class ResultBuilder {
 				$this->callbackFactory->getCallbackToIndexTags( 'property' ),
 			],
 			$claimPath . 'references/*/snaks-order' => [
-				$this->callbackFactory->getCallbackToIndexTags( 'property' )
+				$this->callbackFactory->getCallbackToIndexTags( 'property' ),
 			],
 			$claimPath . 'references' => [
 				$this->callbackFactory->getCallbackToIndexTags( 'reference' ),
@@ -952,7 +952,7 @@ class ResultBuilder {
 				$this->callbackFactory->getCallbackToIndexTags( 'property' ),
 			],
 			$claimPath . 'qualifiers-order' => [
-				$this->callbackFactory->getCallbackToIndexTags( 'property' )
+				$this->callbackFactory->getCallbackToIndexTags( 'property' ),
 			],
 			$claimPath . 'mainsnak' => [
 				$this->callbackFactory->getCallbackToAddDataTypeToSnak( $this->dataTypeLookup, $this->entityIdParser ),

@@ -94,7 +94,7 @@ class SnakHtmlGeneratorTest extends \PHPUnit\Framework\TestCase {
 			[
 				new PropertyValueSnak( 3, new StringValue( 'chocolate!' ) ),
 				'wikibase-snakview-variation-value',
-			]
+			],
 		];
 	}
 

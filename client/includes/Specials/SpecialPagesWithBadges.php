@@ -98,7 +98,7 @@ class SpecialPagesWithBadges extends QueryPage {
 					Html::element(
 						'p',
 						[
-							'class' => 'error'
+							'class' => 'error',
 						],
 						$this->msg( 'wikibase-pageswithbadges-invalid-id', $badge )->text()
 					)
@@ -119,14 +119,14 @@ class SpecialPagesWithBadges extends QueryPage {
 				'type' => 'select',
 				'id' => 'wb-pageswithbadges-badge',
 				'label-message' => 'wikibase-pageswithbadges-badge',
-				'options' => $this->getOptionsArray()
+				'options' => $this->getOptionsArray(),
 			],
 			'submit' => [
 				'name' => '',
 				'type' => 'submit',
 				'id' => 'wikibase-pageswithbadges-submit',
-				'default' => $this->msg( 'wikibase-pageswithbadges-submit' )->text()
-			]
+				'default' => $this->msg( 'wikibase-pageswithbadges-submit' )->text(),
+			],
 		];
 
 		if ( $this->badgeId !== null ) {
@@ -178,7 +178,7 @@ class SpecialPagesWithBadges extends QueryPage {
 		return [
 			'tables' => [
 				'page',
-				'page_props'
+				'page_props',
 			],
 			'fields' => [
 				'value' => 'page_id',
@@ -186,12 +186,12 @@ class SpecialPagesWithBadges extends QueryPage {
 				'title' => 'page_title',
 			],
 			'conds' => [
-				'pp_propname' => 'wikibase-badge-' . $this->badgeId->getSerialization()
+				'pp_propname' => 'wikibase-badge-' . $this->badgeId->getSerialization(),
 			],
 			'options' => [], // sorting is determined getOrderFields(), which returns [ 'value' ] per default.
 			'join_conds' => [
-				'page_props' => [ 'JOIN', [ 'page_id = pp_page' ] ]
-			]
+				'page_props' => [ 'JOIN', [ 'page_id = pp_page' ] ],
+			],
 		];
 	}
 

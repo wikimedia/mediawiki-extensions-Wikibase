@@ -48,7 +48,7 @@ class DatabaseEntitySourceTest extends TestCase {
 		$validDatabaseName = 'somedb';
 		$validEntityData = [
 			'item' => [ 'namespaceId' => 100, 'slot' => SlotRecord::MAIN ],
-			'property' => [ 'namespaceId' => 666, 'slot' => 'otherslot' ]
+			'property' => [ 'namespaceId' => 666, 'slot' => 'otherslot' ],
 		];
 		$validRdfNodeNamespacePrefix = 'wd';
 		$validRdfPredicateNamespacePrefix = '';
@@ -170,7 +170,7 @@ class DatabaseEntitySourceTest extends TestCase {
 			$validConceptBaseUri,
 			$validRdfNodeNamespacePrefix,
 			$validRdfPredicateNamespacePrefix,
-			100
+			100,
 		];
 	}
 
@@ -180,7 +180,7 @@ class DatabaseEntitySourceTest extends TestCase {
 			'foodb',
 			[
 				'item' => [ 'namespaceId' => 100, 'slot' => SlotRecord::MAIN ],
-				'property' => [ 'namespaceId' => 200, 'slot' => SlotRecord::MAIN ]
+				'property' => [ 'namespaceId' => 200, 'slot' => SlotRecord::MAIN ],
 			],
 			'concept:',
 			'wd',
@@ -197,7 +197,7 @@ class DatabaseEntitySourceTest extends TestCase {
 			'foodb',
 			[
 				'item' => [ 'namespaceId' => 100, 'slot' => SlotRecord::MAIN ],
-				'property' => [ 'namespaceId' => 200, 'slot' => SlotRecord::MAIN ]
+				'property' => [ 'namespaceId' => 200, 'slot' => SlotRecord::MAIN ],
 			],
 			'concept:',
 			'wd',

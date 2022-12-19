@@ -48,7 +48,7 @@ class PropertyInfoTableBuilderTest extends MediaWikiIntegrationTestCase {
 			[
 				PropertyInfoLookup::KEY_DATA_TYPE => 'string',
 				'test' => 'six',
-				PropertyInfoStore::KEY_CANONICAL_URI => 'zoo'
+				PropertyInfoStore::KEY_CANONICAL_URI => 'zoo',
 			],
 		];
 
@@ -103,7 +103,7 @@ class PropertyInfoTableBuilderTest extends MediaWikiIntegrationTestCase {
 
 		$propertyInfoBuilder = new PropertyInfoBuilder( [
 			PropertyInfoLookup::KEY_FORMATTER_URL => new NumericPropertyId( 'P1630' ),
-			PropertyInfoStore::KEY_CANONICAL_URI => new NumericPropertyId( 'P1640' )
+			PropertyInfoStore::KEY_CANONICAL_URI => new NumericPropertyId( 'P1640' ),
 		] );
 		$builder = new PropertyInfoTableBuilder(
 			$table,

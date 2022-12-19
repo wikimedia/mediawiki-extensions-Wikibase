@@ -210,23 +210,23 @@ class PageTermsTest extends MediaWikiLangTestCase {
 						'label' => [ 'Q11 en label' ],
 						'description' => [ 'Q11 en description' ],
 						'alias' => [ 'Q11 en alias 1', 'Q11 en alias 2' ],
-					]
+					],
 				],
 				22 => [
 					'terms' => [
 						'label' => [ 'Q22 en label' ],
 						'description' => [ 'Q22 en description' ],
 						'alias' => [ 'Q22 en alias 1', 'Q22 en alias 2' ],
-					]
+					],
 				],
 				3333 => [
 					'terms' => [
 						'label' => [ 'P3333 en label' ],
 						'description' => [ 'P3333 en description' ],
 						'alias' => [ 'P3333 en alias 1', 'P3333 en alias 2' ],
-					]
+					],
 				],
-			]
+			],
 		];
 
 		yield 'descriptions only' => [
@@ -241,14 +241,14 @@ class PageTermsTest extends MediaWikiLangTestCase {
 				11 => [
 					'terms' => [
 						'description' => [ 'Q11 en description' ],
-					]
+					],
 				],
 				22 => [
 					'terms' => [
 						'description' => [ 'Q22 en description' ],
-					]
+					],
 				],
-			]
+			],
 		];
 
 		yield 'with language' => [
@@ -265,15 +265,15 @@ class PageTermsTest extends MediaWikiLangTestCase {
 					'terms' => [
 						'label' => [ 'Q11 de label' ],
 						'description' => [ 'Q11 de description' ],
-					]
+					],
 				],
 				22 => [
 					'terms' => [
 						'label' => [ 'Q22 de label' ],
 						'description' => [ 'Q22 de description' ],
-					]
+					],
 				],
-			]
+			],
 		];
 
 		yield 'with uselang' => [
@@ -290,15 +290,15 @@ class PageTermsTest extends MediaWikiLangTestCase {
 					'terms' => [
 						'label' => [ 'Q11 de label' ],
 						'description' => [ 'Q11 de description' ],
-					]
+					],
 				],
 				22 => [
 					'terms' => [
 						'label' => [ 'Q22 de label' ],
 						'description' => [ 'Q22 de description' ],
-					]
+					],
 				],
-			]
+			],
 		];
 
 		yield 'with language and uselang (language overrides uselang)' => [
@@ -316,15 +316,15 @@ class PageTermsTest extends MediaWikiLangTestCase {
 					'terms' => [
 						'label' => [ 'Q11 de label' ],
 						'description' => [ 'Q11 de description' ],
-					]
+					],
 				],
 				22 => [
 					'terms' => [
 						'label' => [ 'Q22 de label' ],
 						'description' => [ 'Q22 de description' ],
-					]
+					],
 				],
-			]
+			],
 		];
 
 		yield 'title without entity' => [
@@ -340,9 +340,9 @@ class PageTermsTest extends MediaWikiLangTestCase {
 					'terms' => [
 						'label' => [ 'Q11 en label' ],
 						'description' => [ 'Q11 en description' ],
-					]
+					],
 				],
-			]
+			],
 		];
 
 		yield 'continue' => [
@@ -359,9 +359,9 @@ class PageTermsTest extends MediaWikiLangTestCase {
 					'terms' => [
 						'label' => [ 'Q22 en label' ],
 						'description' => [ 'Q22 en description' ],
-					]
+					],
 				],
-			]
+			],
 		];
 	}
 

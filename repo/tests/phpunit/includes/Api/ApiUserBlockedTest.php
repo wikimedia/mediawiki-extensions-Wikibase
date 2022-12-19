@@ -140,7 +140,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 			[
 				'new' => 'item',
 				'add' => 'en alias',
-				'language' => 'en'
+				'language' => 'en',
 			],
 			[ 'wikibase-api-permissiondenied', 'apierror-blocked' ],
 		];
@@ -158,7 +158,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 			[
 				'claim' => [ [ self::class, 'getEntityClaimGUID' ], 'Berlin' ],
 				'value' => '"foobar"',
-				'snaktype' => 'value'
+				'snaktype' => 'value',
 			],
 			[ 'wikibase-api-failed-save', 'apierror-blocked', 'permissionserrors' ],
 		];
@@ -168,7 +168,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 			[
 				'id' => [ [ EntityTestHelper::class, 'getId' ], 'Berlin' ],
 				'language' => 'de',
-				'value' => 'FizzBuzz'
+				'value' => 'FizzBuzz',
 			],
 			[ 'wikibase-api-permissiondenied', 'apierror-blocked' ],
 		];
@@ -287,7 +287,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 				'property' => EntityTestHelper::getId( 'StringProp' ),
 				'datavalue' => [
 					'value' => 'City',
-					'type' => 'string'
+					'type' => 'string',
 				],
 			],
 		];

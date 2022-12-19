@@ -128,7 +128,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 				'o',
 				'o',
 				'otherwiki'
-			)
+			),
 		], new SubEntityTypesMapper( [] ) );
 
 		$module = new SearchEntities(
@@ -161,7 +161,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			'search' => 'Foo',
 			'type' => 'item',
 			'language' => 'de-ch',
-			'strictlanguage' => true
+			'strictlanguage' => true,
 		];
 
 		$this->callApiModule( $params );
@@ -376,7 +376,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			'action' => 'wbsearchentities',
 			'search' => 'Foo',
 			'type' => 'item',
-			'language' => 'en'
+			'language' => 'en',
 		], $overrideParams );
 
 		$entitySearchHelper = $this->getMockEntitySearchHelper( $params, $interactorReturn );
@@ -436,7 +436,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 					'',
 					'',
 					''
-				)
+				),
 			],
 			new SubEntityTypesMapper( [] )
 		);
@@ -496,7 +496,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			$params = [
 				'action' => 'wbsearchentities',
 				'search' => 'nyan',
-				'language' => 'en'
+				'language' => 'en',
 			];
 			$this->callApiModule( $params, $entitySearchHelper );
 			$this->fail( "Exception must be thrown" );

@@ -75,82 +75,82 @@ class GeoDataDataUpdaterTest extends MediaWikiIntegrationTestCase {
 			[
 				[],
 				[ $statements['P42-string'] ],
-				'non-geo statement'
+				'non-geo statement',
 			],
 			[
 				[
-					'P625|1' => [ $coords['P625-geo'] ]
+					'P625|1' => [ $coords['P625-geo'] ],
 				],
 				[ $statements['P625-geo'] ],
-				'one normal geo statement'
+				'one normal geo statement',
 			],
 			[
 				[],
 				[ $statements['P17-geo-deprecated'] ],
-				'deprecated geo statement'
+				'deprecated geo statement',
 			],
 			[
 				[
 					'P10|1' => [
 						$coords['P10-geo-A'],
-						$coords['P10-geo-B']
-					]
-				],
-				[
-					$statements['P10-geo-A'],
-					$statements['P10-geo-B']
-				],
-				'multiple normal statements'
-			],
-			[
-				[
-					'P10|1' => [
-						$coords['P10-geo-A']
+						$coords['P10-geo-B'],
 					],
-					'P10|2' => [
-						$coords['P10-geo-preferred-A'],
-						$coords['P10-geo-preferred-B']
-					]
-				],
-				[
-					$statements['P10-geo-A'],
-					$statements['P10-geo-preferred-A'],
-					$statements['P10-geo-preferred-B']
-				],
-				'multiple preferred, one normal'
-			],
-			[
-				[
-					'P10|1' => [
-						$coords['P10-geo-A'],
-						$coords['P10-geo-B']
-					],
-					'P10|2' => [
-						$coords['P10-geo-preferred-A']
-					]
 				],
 				[
 					$statements['P10-geo-A'],
 					$statements['P10-geo-B'],
-					$statements['P10-geo-preferred-A']
 				],
-				'multiple normal, one preferred'
+				'multiple normal statements',
+			],
+			[
+				[
+					'P10|1' => [
+						$coords['P10-geo-A'],
+					],
+					'P10|2' => [
+						$coords['P10-geo-preferred-A'],
+						$coords['P10-geo-preferred-B'],
+					],
+				],
+				[
+					$statements['P10-geo-A'],
+					$statements['P10-geo-preferred-A'],
+					$statements['P10-geo-preferred-B'],
+				],
+				'multiple preferred, one normal',
+			],
+			[
+				[
+					'P10|1' => [
+						$coords['P10-geo-A'],
+						$coords['P10-geo-B'],
+					],
+					'P10|2' => [
+						$coords['P10-geo-preferred-A'],
+					],
+				],
+				[
+					$statements['P10-geo-A'],
+					$statements['P10-geo-B'],
+					$statements['P10-geo-preferred-A'],
+				],
+				'multiple normal, one preferred',
 			],
 			[
 				[],
 				[ $statements['P20-some-value'] ],
-				'geo property with some value snak'
+				'geo property with some value snak',
 			],
 			[
 				[],
 				[ $statements['P404-unknown-property'] ],
-				'statement with unknown property, not in PropertyDataTypeLookup'
+				'statement with unknown property, not in PropertyDataTypeLookup',
 			],
 			[
 				[],
 				[ $statements['P9002-unknown-globe'] ],
-				'statement with unknown globe'
-			]
+				'statement with unknown globe',
+			],
 		];
 	}
 
@@ -262,7 +262,7 @@ class GeoDataDataUpdaterTest extends MediaWikiIntegrationTestCase {
 			$preferredProperties,
 			[
 				'http://www.wikidata.org/entity/Q2' => 'earth',
-				'http://www.wikidata.org/entity/Q111' => 'mars'
+				'http://www.wikidata.org/entity/Q111' => 'mars',
 			]
 		);
 	}
@@ -314,7 +314,7 @@ class GeoDataDataUpdaterTest extends MediaWikiIntegrationTestCase {
 				new PropertyValueSnak(
 					new NumericPropertyId( 'P625' ),
 					$this->newGlobeCoordinateValue( 30.0987, 20.1234 )
-				)
+				),
 			] )
 		);
 
@@ -359,7 +359,7 @@ class GeoDataDataUpdaterTest extends MediaWikiIntegrationTestCase {
 			'P10-geo-preferred-B' => new Coord( 70.0144, 30.0015 ),
 			'P9000-geo-A' => new Coord( 33.643664, 20.464222 ),
 			'P9000-geo-B' => new Coord( 11.1234, 12.5678 ),
-			'P9000-geo-preferred' => new Coord( 77.7777, 33.3333 )
+			'P9000-geo-preferred' => new Coord( 77.7777, 33.3333 ),
 		];
 	}
 

@@ -83,12 +83,12 @@ class LabelDescriptionNotEqualValidatorTest extends \PHPUnit\Framework\TestCase 
 		yield 'label different from description' => [
 			[ 'en' => 'label' ],
 			[ 'en' => 'description' ],
-			[]
+			[],
 		];
 		yield 'label = description in different languages' => [
 			[ 'en' => 'abc' ],
 			[ 'de' => 'abc' ],
-			[]
+			[],
 		];
 
 		yield 'label = description' => [
@@ -96,39 +96,39 @@ class LabelDescriptionNotEqualValidatorTest extends \PHPUnit\Framework\TestCase 
 			[ 'en' => 'foo' ],
 			[
 				new NotEqualViolation( 'label should not be equal to description',
-					'label-equals-description', [ 'en' ] )
-			]
+					'label-equals-description', [ 'en' ] ),
+			],
 		];
 		yield 'label = description in non-English language' => [
 			[ 'de' => 'foo' ],
 			[ 'de' => 'foo' ],
 			[
 				new NotEqualViolation( 'label should not be equal to description',
-					'label-equals-description', [ 'de' ] )
-			]
+					'label-equals-description', [ 'de' ] ),
+			],
 		];
 		yield 'label = description in German and check only German' => [
 			[ 'de' => 'foo' ],
 			[ 'de' => 'foo' ],
 			[
 				new NotEqualViolation( 'label should not be equal to description',
-					'label-equals-description', [ 'de' ] )
+					'label-equals-description', [ 'de' ] ),
 			],
-			[ 'de' ]
+			[ 'de' ],
 		];
 		yield 'label = description in German check only English' => [
 			[ 'de' => 'foo' ],
 			[ 'de' => 'foo' ],
 			[],
-			[ 'en' ]
+			[ 'en' ],
 		];
 		yield 'label = description with extra terms' => [
 			[ 'en' => 'foo', 'de' => 'German label' ],
 			[ 'en' => 'foo', 'sq' => 'Albanian description' ],
 			[
 				new NotEqualViolation( 'label should not be equal to description',
-					'label-equals-description', [ 'en' ] )
-			]
+					'label-equals-description', [ 'en' ] ),
+			],
 		];
 	}
 

@@ -21,7 +21,7 @@ class OtherProjectsSitesProviderTest extends ServiceWiringTestCase {
 			'WikibaseClient.Settings',
 			new SettingsArray( [
 				'siteGlobalID' => 'testwiki',
-				'specialSiteLinkGroups' => []
+				'specialSiteLinkGroups' => [],
 			] )
 		);
 

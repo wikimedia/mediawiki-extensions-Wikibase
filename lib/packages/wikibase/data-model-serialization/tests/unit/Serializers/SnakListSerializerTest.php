@@ -23,7 +23,7 @@ class SnakListSerializerTest extends DispatchableSerializerTest {
 			->with( $this->equalTo( new PropertyNoValueSnak( 42 ) ) )
 			->will( $this->returnValue( [
 				'snaktype' => 'novalue',
-				'property' => "P42"
+				'property' => "P42",
 			] ) );
 
 		return new SnakListSerializer( $snakSerializerMock, false );
@@ -32,12 +32,12 @@ class SnakListSerializerTest extends DispatchableSerializerTest {
 	public function serializableProvider() {
 		return [
 			[
-				new SnakList()
+				new SnakList(),
 			],
 			[
 				new SnakList( [
-					new PropertyNoValueSnak( 42 )
-				] )
+					new PropertyNoValueSnak( 42 ),
+				] ),
 			],
 		];
 	}
@@ -45,13 +45,13 @@ class SnakListSerializerTest extends DispatchableSerializerTest {
 	public function nonSerializableProvider() {
 		return [
 			[
-				5
+				5,
 			],
 			[
-				[]
+				[],
 			],
 			[
-				new PropertyNoValueSnak( 42 )
+				new PropertyNoValueSnak( 42 ),
 			],
 		];
 	}
@@ -60,20 +60,20 @@ class SnakListSerializerTest extends DispatchableSerializerTest {
 		return [
 			[
 				[],
-				new SnakList()
+				new SnakList(),
 			],
 			[
 				[
 					'P42' => [
 						[
 							'snaktype' => 'novalue',
-							'property' => 'P42'
-						]
-					]
+							'property' => 'P42',
+						],
+					],
 				],
 				new SnakList( [
-					new PropertyNoValueSnak( 42 )
-				] )
+					new PropertyNoValueSnak( 42 ),
+				] ),
 			],
 		];
 	}
@@ -85,7 +85,7 @@ class SnakListSerializerTest extends DispatchableSerializerTest {
 			->with( $this->equalTo( new PropertyNoValueSnak( 42 ) ) )
 			->will( $this->returnValue( [
 				'snaktype' => 'novalue',
-				'property' => "P42"
+				'property' => "P42",
 			] ) );
 		$serializer = new SnakListSerializer( $snakSerializerMock, true );
 

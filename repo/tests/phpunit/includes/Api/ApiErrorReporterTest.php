@@ -191,7 +191,7 @@ class ApiErrorReporterTest extends MediaWikiIntegrationTestCase {
 					'messages/0/html' => '/gefunden/', // in German
 					'messages/0/parameters/0' => '/Foo/',
 				],
-			]
+			],
 		];
 	}
 
@@ -368,7 +368,7 @@ class ApiErrorReporterTest extends MediaWikiIntegrationTestCase {
 	 */
 	private function getExceptionLocalizer() {
 		$localizers = [
-			new ParseExceptionLocalizer()
+			new ParseExceptionLocalizer(),
 		];
 
 		return new DispatchingExceptionLocalizer( $localizers );

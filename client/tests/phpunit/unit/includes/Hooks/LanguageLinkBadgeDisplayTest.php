@@ -76,11 +76,11 @@ class LanguageLinkBadgeDisplayTest extends \PHPUnit\Framework\TestCase {
 
 		$badge1 = [
 			'class' => 'badge-Q3 bar badge-Q2',
-			'label' => 'Lesenswerter Artikel'
+			'label' => 'Lesenswerter Artikel',
 		];
 		$badge2 = [
 			'class' => 'badge-Q3 bar badge-Q4 foo',
-			'label' => 'Lesenswerter Artikel, Exzellenter Artikel'
+			'label' => 'Lesenswerter Artikel, Exzellenter Artikel',
 		];
 
 		return [
@@ -88,7 +88,7 @@ class LanguageLinkBadgeDisplayTest extends \PHPUnit\Framework\TestCase {
 			'no badges' => [ [], [ $link0 ] ],
 			'some badges' => [
 				[ 'dewiki' => $badge1, 'enwiki' => $badge2 ],
-				[ 'jawiki' => $link0, 'dewiki' => $link1, 'enwiki' => $link2 ]
+				[ 'jawiki' => $link0, 'dewiki' => $link1, 'enwiki' => $link2 ],
 			],
 		];
 	}
@@ -98,7 +98,7 @@ class LanguageLinkBadgeDisplayTest extends \PHPUnit\Framework\TestCase {
 			'en' => [
 				'class' => 'badge-Q3',
 				'label' => 'Lesenswerter Artikel',
-			]
+			],
 		];
 
 		$link = [

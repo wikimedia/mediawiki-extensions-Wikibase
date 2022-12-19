@@ -59,7 +59,7 @@ class ApiClientInfo extends ApiQueryBase {
 			switch ( $p ) {
 				case 'url':
 					$data['repo'] = [
-						'url' => $this->getRepoUrls()
+						'url' => $this->getRepoUrls(),
 					];
 					break;
 				case 'siteid':
@@ -101,8 +101,8 @@ class ApiClientInfo extends ApiQueryBase {
 				ParamValidator::PARAM_DEFAULT => 'url|siteid',
 				ParamValidator::PARAM_ISMULTI => true,
 				ParamValidator::PARAM_TYPE => [
-					'url', 'siteid'
-				]
+					'url', 'siteid',
+				],
 			],
 		];
 	}

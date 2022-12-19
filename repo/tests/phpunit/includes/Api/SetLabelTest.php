@@ -90,7 +90,7 @@ class SetLabelTest extends ModifyTermTestCase {
 			'action' => 'wbeditentity',
 			'id' => $id,
 			'clear' => true,
-			'data' => '{}'
+			'data' => '{}',
 		];
 		$this->doApiRequestWithToken( $setupParams );
 
@@ -108,7 +108,7 @@ class SetLabelTest extends ModifyTermTestCase {
 			'id' => $id,
 			'language' => 'en',
 			'value' => 'a different label',
-			'baserevid' => $baserevId
+			'baserevid' => $baserevId,
 		];
 		$expectedException = [ 'type' => ApiUsageException::class, 'code' => 'unresolved-redirect' ];
 		$this->doTestQueryExceptions( $params, $expectedException );
@@ -136,8 +136,8 @@ class SetLabelTest extends ModifyTermTestCase {
 		$userWithAllPermissions = $this->createUserWithGroup( 'all-permission' );
 
 		$this->setMwGlobals( 'wgGroupPermissions', [
-			'all-permission' => [ 'item-term' => true, ],
-			'*' => [ 'read' => true, 'edit' => true, 'writeapi' => true ]
+			'all-permission' => [ 'item-term' => true ],
+			'*' => [ 'read' => true, 'edit' => true, 'writeapi' => true ],
 		] );
 
 		$newItem = $this->createItemUsing( $userWithAllPermissions );
@@ -159,8 +159,8 @@ class SetLabelTest extends ModifyTermTestCase {
 
 		$this->setMwGlobals( 'wgGroupPermissions', [
 			'no-permission' => [ 'item-term' => false ],
-			'all-permission' => [ 'item-term' => true, ],
-			'*' => [ 'read' => true, 'edit' => true, 'writeapi' => true ]
+			'all-permission' => [ 'item-term' => true ],
+			'*' => [ 'read' => true, 'edit' => true, 'writeapi' => true ],
 		] );
 
 		// And an item
@@ -169,7 +169,7 @@ class SetLabelTest extends ModifyTermTestCase {
 		// Then the request is denied
 		$expected = [
 			'type' => ApiUsageException::class,
-			'code' => 'permissiondenied'
+			'code' => 'permissiondenied',
 		];
 
 		$this->doTestQueryExceptions(
@@ -184,7 +184,7 @@ class SetLabelTest extends ModifyTermTestCase {
 
 		$this->setMwGlobals( 'wgGroupPermissions', [
 			'all-permission' => [ 'item-term' => true, 'createpage' => true ],
-			'*' => [ 'read' => true, 'edit' => true, 'writeapi' => true ]
+			'*' => [ 'read' => true, 'edit' => true, 'writeapi' => true ],
 		] );
 
 		list( $result, ) = $this->doApiRequestWithToken(
@@ -202,7 +202,7 @@ class SetLabelTest extends ModifyTermTestCase {
 
 		$this->setMwGlobals( 'wgGroupPermissions', [
 			'no-permission' => [ 'createpage' => false ],
-			'*' => [ 'read' => true, 'edit' => true, 'item-term' => true, 'writeapi' => true ]
+			'*' => [ 'read' => true, 'edit' => true, 'item-term' => true, 'writeapi' => true ],
 		] );
 
 		MediaWikiServices::getInstance()->resetServiceForTesting( 'PermissionManager' );
@@ -210,7 +210,7 @@ class SetLabelTest extends ModifyTermTestCase {
 		// Then the request is denied
 		$expected = [
 			'type' => ApiUsageException::class,
-			'code' => 'permissiondenied'
+			'code' => 'permissiondenied',
 		];
 
 		$this->doTestQueryExceptions(

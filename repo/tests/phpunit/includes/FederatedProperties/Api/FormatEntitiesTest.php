@@ -40,10 +40,10 @@ class FormatEntitiesTest extends FederatedPropertiesApiTestCase {
 
 		$this->mockSourceApiRequests( [
 			$this->getSiteInfoNamespaceRequestData(),
-			$this->getGetEntitiesRequestDataForEntityWithLabel( $remotePid, $expectedLabel )
+			$this->getGetEntitiesRequestDataForEntityWithLabel( $remotePid, $expectedLabel ),
 		] );
 
-		[ $resultArray, ] = $this->doApiRequest( [
+		[ $resultArray ] = $this->doApiRequest( [
 			'action' => 'wbformatentities',
 			'ids' => $federatedPropertyId,
 		] );
@@ -73,10 +73,10 @@ class FormatEntitiesTest extends FederatedPropertiesApiTestCase {
 
 		$this->mockSourceApiRequests( [
 			$this->getSiteInfoNamespaceRequestData(),
-			$this->getGetEntitiesRequestDataForEntityWithLabel( $remotePid, $expectedFedPropLabel )
+			$this->getGetEntitiesRequestDataForEntityWithLabel( $remotePid, $expectedFedPropLabel ),
 		] );
 
-		[ $resultArray, ] = $this->doApiRequest( [
+		[ $resultArray ] = $this->doApiRequest( [
 			'action' => 'wbformatentities',
 			'ids' => "$federatedPropertyId|$localPropertyId",
 		] );

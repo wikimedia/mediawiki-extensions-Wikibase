@@ -137,7 +137,7 @@ abstract class ChangeModificationNotificationJob extends Job {
 			->where( [
 				'rc_timestamp' => $timestamps,
 				"rc_params $rcParamPattern",
-				'rc_source' => RecentChangeFactory::SRC_WIKIBASE
+				'rc_source' => RecentChangeFactory::SRC_WIKIBASE,
 			] )
 			->caller( __METHOD__ )
 			->fetchResultSet();

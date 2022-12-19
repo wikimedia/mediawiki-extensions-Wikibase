@@ -70,7 +70,7 @@ class EntityDiffChangedAspectsFactoryTest extends \PHPUnit\Framework\TestCase {
 			'statementChanges' => [ 'P2' ],
 			'siteLinkChanges' => [
 				'dewiki' => [ null, 'Berlin', true ],
-				'enwiki' => [ null, 'Berlin', false ]
+				'enwiki' => [ null, 'Berlin', false ],
 			],
 			'otherChanges' => false,
 		];
@@ -83,7 +83,7 @@ class EntityDiffChangedAspectsFactoryTest extends \PHPUnit\Framework\TestCase {
 			'siteLinkChanges' => [
 				'dewiki' => [ null, 'Paris', true ],
 				'enwiki' => [ null, 'Paris', false ],
-				'ruwiki' => [ null, 'Paris', false ]
+				'ruwiki' => [ null, 'Paris', false ],
 			],
 			'otherChanges' => false,
 		];
@@ -96,7 +96,7 @@ class EntityDiffChangedAspectsFactoryTest extends \PHPUnit\Framework\TestCase {
 			'siteLinkChanges' => [
 				'dewiki' => [ 'Berlin', 'Paris', false ],
 				'enwiki' => [ 'Berlin', 'Paris', false ],
-				'ruwiki' => [ null, 'Paris', false ]
+				'ruwiki' => [ null, 'Paris', false ],
 			],
 			'otherChanges' => false,
 		];
@@ -165,127 +165,127 @@ class EntityDiffChangedAspectsFactoryTest extends \PHPUnit\Framework\TestCase {
 			'$emptyItem === $emptyItem' => [
 				$emptyDiff,
 				$emptyItem,
-				$emptyItem
+				$emptyItem,
 			],
 			'$emptyProperty === $emptyProperty' => [
 				$emptyDiff,
 				$emptyProperty,
-				$emptyProperty
+				$emptyProperty,
 			],
 			'$labelItem === $labelItem' => [
 				$emptyDiff,
 				$labelItem,
-				$labelItem
+				$labelItem,
 			],
 			'$descriptionItem === $descriptionItem' => [
 				$emptyDiff,
 				$descriptionItem,
-				$descriptionItem
+				$descriptionItem,
 			],
 			'$noValueP1StatementItem === $noValueP1StatementItem' => [
 				$emptyDiff,
 				$noValueP1StatementItem,
-				$noValueP1StatementItem
+				$noValueP1StatementItem,
 			],
 			'$noValueP2StatementItem === $noValueP2StatementItem' => [
 				$emptyDiff,
 				$noValueP2StatementItem,
-				$noValueP2StatementItem
+				$noValueP2StatementItem,
 			],
 			'$someValueStatementItem === $someValueStatementItem' => [
 				$emptyDiff,
 				$someValueStatementItem,
-				$someValueStatementItem
+				$someValueStatementItem,
 			],
 			'$siteLinkItem === $siteLinkItem' => [
 				$emptyDiff,
 				$siteLinkItem,
-				$siteLinkItem
+				$siteLinkItem,
 			],
 			'$siteLinkBadgeItem === $siteLinkBadgeItem' => [
 				$emptyDiff,
 				$siteLinkBadgeItem,
-				$siteLinkBadgeItem
+				$siteLinkBadgeItem,
 			],
 			'$berlinItem === $berlinItem' => [
 				$emptyDiff,
 				$berlinItem,
-				$berlinItem
+				$berlinItem,
 			],
 			'$parisItem === $parisItem' => [
 				$emptyDiff,
 				$parisItem,
-				$parisItem
+				$parisItem,
 			],
 			'$noValueP1Property === $noValueP1Property' => [
 				$emptyDiff,
 				$noValueP1Property,
-				$noValueP1Property
+				$noValueP1Property,
 			],
 			'label change' => [
 				$labelDiff,
 				$emptyItem,
-				$labelItem
+				$labelItem,
 			],
 			'description changes' => [
 				$descriptionDiff,
 				$emptyItem,
-				$descriptionItem
+				$descriptionItem,
 			],
 			'item statement change (no value)' => [
 				$statementP1Diff,
 				$emptyItem,
-				$noValueP1StatementItem
+				$noValueP1StatementItem,
 			],
 			'property statement change (no value)' => [
 				$statementP1Diff,
 				$emptyProperty,
-				$noValueP1Property
+				$noValueP1Property,
 			],
 			'statement change (some value)' => [
 				$statementP2Diff,
 				$emptyItem,
-				$someValueStatementItem
+				$someValueStatementItem,
 			],
 			'statement change (other property id + some value <> no value)' => [
 				$statementP1P2Diff,
 				$someValueStatementItem,
-				$noValueP1StatementItem
+				$noValueP1StatementItem,
 			],
 			'statement change (some property id + some value <> no value)' => [
 				$statementP2Diff,
 				$someValueStatementItem,
-				$noValueP2StatementItem
+				$noValueP2StatementItem,
 			],
 			'sitelink changes' => [
 				$siteLinkDiff,
 				$emptyItem,
-				$siteLinkItem
+				$siteLinkItem,
 			],
 			'sitelink change with badge' => [
 				$siteLinkWithBadgeDiff,
 				$emptyItem,
-				$siteLinkBadgeItem
+				$siteLinkBadgeItem,
 			],
 			'sitelink badge only changes' => [
 				$siteLinkBadgeOnlyDiff,
 				$siteLinkItem,
-				$siteLinkBadgeItem
+				$siteLinkBadgeItem,
 			],
 			'berlin item <> empty item' => [
 				$berlinEmptyDiff,
 				$emptyItem,
-				$berlinItem
+				$berlinItem,
 			],
 			'paris item <> empty item' => [
 				$parisEmptyDiff,
 				$emptyItem,
-				$parisItem
+				$parisItem,
 			],
 			'paris item <> berlin item' => [
 				$berlinParisDiff,
 				$berlinItem,
-				$parisItem
+				$parisItem,
 			],
 		];
 
@@ -295,7 +295,7 @@ class EntityDiffChangedAspectsFactoryTest extends \PHPUnit\Framework\TestCase {
 			$reverseTests[$testDescription . ' (reversed)'] = [
 				$this->reverseDiff( $case[0] ),
 				$case[2],
-				$case[1]
+				$case[1],
 			];
 		}
 

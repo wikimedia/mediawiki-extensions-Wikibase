@@ -47,7 +47,7 @@ class FullEntityParserOutputGeneratorTest extends EntityParserOutputGeneratorTes
 				[ 'http://an.url.com', 'https://another.url.org' ],
 				[ 'File:This_is_a_file.pdf', 'File:Selfie.jpg' ],
 			],
-			[ new Item(), null, [], [] ]
+			[ new Item(), null, [], [] ],
 		];
 	}
 
@@ -116,13 +116,13 @@ class FullEntityParserOutputGeneratorTest extends EntityParserOutputGeneratorTes
 				[
 					'rel' => 'alternate',
 					'href' => $jsonHref,
-					'type' => 'application/json'
+					'type' => 'application/json',
 				],
 				[
 					'rel' => 'alternate',
 					'href' => $ntHref,
-					'type' => 'application/n-triples'
-				]
+					'type' => 'application/n-triples',
+				],
 			];
 		}
 
@@ -215,7 +215,7 @@ class FullEntityParserOutputGeneratorTest extends EntityParserOutputGeneratorTes
 				$this->newEntityReferenceExtractor(),
 				$entityTitleLookup,
 				$this->getServiceContainer()->getLinkBatchFactory()
-			)
+			),
 		];
 
 		$cache = $this->createMock( CacheInterface::class );

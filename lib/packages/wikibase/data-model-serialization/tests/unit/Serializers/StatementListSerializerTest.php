@@ -28,10 +28,10 @@ class StatementListSerializerTest extends DispatchableSerializerTest {
 			->will( $this->returnValue( [
 				'mainsnak' => [
 					'snaktype' => 'novalue',
-					'property' => 'P42'
+					'property' => 'P42',
 				],
 				'type' => 'statement',
-				'rank' => 'normal'
+				'rank' => 'normal',
 			] ) );
 
 		return new StatementListSerializer( $statementSerializerMock, false );
@@ -50,13 +50,13 @@ class StatementListSerializerTest extends DispatchableSerializerTest {
 	public function nonSerializableProvider() {
 		return [
 			[
-				5
+				5,
 			],
 			[
-				[]
+				[],
 			],
 			[
-				new Statement( new PropertyNoValueSnak( 42 ) )
+				new Statement( new PropertyNoValueSnak( 42 ) ),
 			],
 		];
 	}
@@ -68,7 +68,7 @@ class StatementListSerializerTest extends DispatchableSerializerTest {
 		return [
 			[
 				[],
-				new StatementList()
+				new StatementList(),
 			],
 			[
 				[
@@ -76,14 +76,14 @@ class StatementListSerializerTest extends DispatchableSerializerTest {
 						[
 							'mainsnak' => [
 								'snaktype' => 'novalue',
-								'property' => 'P42'
+								'property' => 'P42',
 							],
 							'type' => 'statement',
-							'rank' => 'normal'
-						]
-					]
+							'rank' => 'normal',
+						],
+					],
 				],
-				new StatementList( $statement )
+				new StatementList( $statement ),
 			],
 		];
 	}

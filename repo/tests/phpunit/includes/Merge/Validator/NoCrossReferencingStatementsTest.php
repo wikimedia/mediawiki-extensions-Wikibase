@@ -31,7 +31,7 @@ class NoCrossReferencingStatementsTest extends TestCase {
 		yield 'items with no statements' => [
 			true,
 			NewItem::withId( 'Q1' )->build(),
-			NewItem::withId( 'Q2' )->build()
+			NewItem::withId( 'Q2' )->build(),
 		];
 
 		$statement = NewStatement::forProperty( 'P42' )
@@ -46,7 +46,7 @@ class NoCrossReferencingStatementsTest extends TestCase {
 				->build(),
 			NewItem::withId( 'Q77' )
 				->andStatement( $statement )
-				->build()
+				->build(),
 		];
 
 		$statement = NewStatement::forProperty( 'P42' )
@@ -59,7 +59,7 @@ class NoCrossReferencingStatementsTest extends TestCase {
 			NewItem::withId( 'Q1' )
 				->andStatement( $statement )
 				->build(),
-			NewItem::withId( 'Q2' )->build()
+			NewItem::withId( 'Q2' )->build(),
 		];
 
 		$statement = NewStatement::forProperty( 'P42' )
@@ -72,7 +72,7 @@ class NoCrossReferencingStatementsTest extends TestCase {
 			NewItem::withId( 'Q1' )->build(),
 			NewItem::withId( 'Q2' )
 				->andStatement( $statement )
-				->build()
+				->build(),
 		];
 
 		$statementWithReference = NewStatement::forProperty( 'P42' )
@@ -92,7 +92,7 @@ class NoCrossReferencingStatementsTest extends TestCase {
 			NewItem::withId( 'Q1' )
 				->andStatement( $statementWithReference )
 				->build(),
-			NewItem::withId( 'Q2' )->build()
+			NewItem::withId( 'Q2' )->build(),
 		];
 
 		$qualifiedStatement = NewStatement::forProperty( 'P42' )
@@ -106,7 +106,7 @@ class NoCrossReferencingStatementsTest extends TestCase {
 			NewItem::withId( 'Q1' )
 				->andStatement( $qualifiedStatement )
 				->build(),
-			NewItem::withId( 'Q2' )->build()
+			NewItem::withId( 'Q2' )->build(),
 		];
 	}
 

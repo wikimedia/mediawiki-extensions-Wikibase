@@ -138,7 +138,7 @@ class DescriptionTest extends MediaWikiIntegrationTestCase {
 				'expected results' => [
 					1 => [ 'description' => 'L1', 'descriptionsource' => 'local' ],
 					2 => [ 'description' => 'L2', 'descriptionsource' => 'local' ],
-					3 => [ 'description' => 'L3', 'descriptionsource' => 'local' ]
+					3 => [ 'description' => 'L3', 'descriptionsource' => 'local' ],
 				],
 				'expected continuation value' => null,
 			],
@@ -150,7 +150,7 @@ class DescriptionTest extends MediaWikiIntegrationTestCase {
 				'fit limit' => null,
 				'expected page IDs' => [ 1, 2, 3, 4, 5, 6 ],
 				'expected sources' => [ $central, $local ],
-				'actual descriptions by page ID' => [ 1 => 'L1', 2 => 'L2', 3 => 'C3', 4 => 'C4', ],
+				'actual descriptions by page ID' => [ 1 => 'L1', 2 => 'L2', 3 => 'C3', 4 => 'C4' ],
 				'actual sources by page ID' => [ 1 => $local, 2 => $local, 3 => $central, 4 => $central ],
 				'expected results' => [
 					1 => [ 'description' => 'L1', 'descriptionsource' => 'local' ],

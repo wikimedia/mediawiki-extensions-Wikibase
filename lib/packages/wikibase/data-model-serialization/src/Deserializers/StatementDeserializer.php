@@ -25,7 +25,7 @@ class StatementDeserializer implements DispatchableDeserializer {
 	private static $rankIds = [
 		'deprecated' => Statement::RANK_DEPRECATED,
 		'normal' => Statement::RANK_NORMAL,
-		'preferred' => Statement::RANK_PREFERRED
+		'preferred' => Statement::RANK_PREFERRED,
 	];
 
 	/**

@@ -124,7 +124,7 @@ class ItemDisambiguation {
 			[
 				'title' => $title ? $title->getPrefixedText() : '',
 				'href' => $title ? $title->getLocalURL() : '',
-				'class' => 'wb-itemlink-id'
+				'class' => 'wb-itemlink-id',
 			],
 			$entityId->getSerialization()
 		);

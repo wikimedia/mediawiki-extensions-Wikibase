@@ -32,7 +32,7 @@ class NumberValidator implements ValueValidator {
 				null,
 				'bad-type',
 				[ 'number', gettype( $value ) ]
-			)
+			),
 		] );
 	}
 

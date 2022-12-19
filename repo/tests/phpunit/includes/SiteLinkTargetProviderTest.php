@@ -40,54 +40,54 @@ class SiteLinkTargetProviderTest extends \PHPUnit\Framework\TestCase {
 			[
 				[ 'wikipedia' ],
 				[],
-				[ 'dawiki', 'eswiki' ]
+				[ 'dawiki', 'eswiki' ],
 			],
 			[
 				[ 'species' ], [], [ 'specieswiki' ] ],
 			[
 				[ 'wikiquote' ],
 				[],
-				[ 'eswikiquote' ]
+				[ 'eswikiquote' ],
 			],
 			[
 				[ 'qwerty' ],
 				[],
-				[]
+				[],
 			],
 			[
 				[ 'wikipedia', 'species' ],
 				[],
-				[ 'dawiki', 'eswiki', 'specieswiki' ]
+				[ 'dawiki', 'eswiki', 'specieswiki' ],
 			],
 			[
 				[ 'wikipedia', 'wikiquote' ],
 				[],
-				[ 'dawiki', 'eswiki', 'eswikiquote' ]
+				[ 'dawiki', 'eswiki', 'eswikiquote' ],
 			],
 			[
 				[ 'special' ],
 				[ 'species' ],
-				[ 'specieswiki' ]
+				[ 'specieswiki' ],
 			],
 			[
 				[ 'wikipedia' ],
 				[ 'species' ],
-				[ 'dawiki', 'eswiki' ]
+				[ 'dawiki', 'eswiki' ],
 			],
 			[
 				[ 'special', 'wikipedia' ],
 				[ 'species', 'wikiquote' ],
-				[ 'dawiki', 'eswiki', 'eswikiquote', 'specieswiki' ]
+				[ 'dawiki', 'eswiki', 'eswikiquote', 'specieswiki' ],
 			],
 			[
 				[],
 				[ 'wikipedia' ],
-				[]
+				[],
 			],
 			[
 				[],
 				[],
-				[]
+				[],
 			],
 		];
 	}

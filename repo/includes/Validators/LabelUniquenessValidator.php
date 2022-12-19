@@ -84,7 +84,7 @@ class LabelUniquenessValidator implements EntityValidator {
 			[
 				$label,
 				$lang,
-				$collidingEntityId
+				$collidingEntityId,
 			]
 		);
 	}

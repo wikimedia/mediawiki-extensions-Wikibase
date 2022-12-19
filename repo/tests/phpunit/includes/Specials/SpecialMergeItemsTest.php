@@ -261,12 +261,12 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 		$testCases = [];
 		$testCases['labelMerge'] = [
 			[ 'labels' => [
-				'en' => [ 'language' => 'en', 'value' => 'foo' ]
+				'en' => [ 'language' => 'en', 'value' => 'foo' ],
 			] ],
 			[],
 			[],
 			[ 'labels' => [
-				'en' => [ 'language' => 'en', 'value' => 'foo' ]
+				'en' => [ 'language' => 'en', 'value' => 'foo' ],
 			] ],
 		];
 		$testCases['IgnoreConflictSitelinksMerge'] = [
@@ -275,27 +275,27 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 				'enwiki' => [ 'site' => 'enwiki', 'title' => 'PlFrom' ],
 			] ],
 			[ 'sitelinks' => [
-				'dewiki' => [ 'site' => 'dewiki', 'title' => 'RemainTo' ]
+				'dewiki' => [ 'site' => 'dewiki', 'title' => 'RemainTo' ],
 			] ],
 			[ 'sitelinks' => [
-				'dewiki' => [ 'site' => 'dewiki', 'title' => 'RemainFrom' ]
+				'dewiki' => [ 'site' => 'dewiki', 'title' => 'RemainFrom' ],
 			] ],
 			[ 'sitelinks' => [
 				'dewiki' => [ 'site' => 'dewiki', 'title' => 'RemainTo' ],
 				'enwiki' => [ 'site' => 'enwiki', 'title' => 'PlFrom' ],
 			] ],
-			'sitelink|foo'
+			'sitelink|foo',
 		];
 
 		$statement = [
 			'mainsnak' => [
 				'snaktype' => 'value',
 				'property' => 'P1',
-				'datavalue' => [ 'value' => 'imastring', 'type' => 'string' ]
+				'datavalue' => [ 'value' => 'imastring', 'type' => 'string' ],
 			],
 			'type' => 'statement',
 			'rank' => 'normal',
-			'id' => 'deadbeefdeadbeefdeadbeefdeadbeef'
+			'id' => 'deadbeefdeadbeefdeadbeefdeadbeef',
 		];
 
 		$statementWithoutId = $statement;
@@ -408,7 +408,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	public function testMergeNonExistingItem() {
 		$params = [
 			'fromid' => 'Q60457977',
-			'toid' => 'Q60457978'
+			'toid' => 'Q60457978',
 		];
 
 		$html = $this->executeSpecialMergeItems( $params );
@@ -428,7 +428,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	public function testNoSpecialPagePermission() {
 		$params = [
 			'fromid' => 'Q1',
-			'toid' => 'Q2'
+			'toid' => 'Q2',
 		];
 		$this->setMwGlobals( 'wgGroupPermissions', [ '*' => [
 			'item-merge' => false,
@@ -442,7 +442,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	public function testMergePermission() {
 		$params = [
 			'fromid' => 'Q1',
-			'toid' => 'Q2'
+			'toid' => 'Q2',
 		];
 
 		$user = User::newFromName( 'UserWithoutPermission' );

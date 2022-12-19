@@ -89,7 +89,7 @@ class DataType {
 	 */
 	public function toArray() {
 		return [
-			'dataValueType' => $this->dataValueType
+			'dataValueType' => $this->dataValueType,
 		];
 	}
 

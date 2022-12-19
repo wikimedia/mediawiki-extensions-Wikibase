@@ -170,29 +170,29 @@ class RepoHooksTest extends MediaWikiIntegrationTestCase {
 		return [
 			'empty_allowimport' => [
 				[],
-				true
+				true,
 			],
 			'empty_noimport' => [
 				[],
-				true
+				true,
 			],
 			'wikitext_allowimport' => [
 				[ 'model' => CONTENT_MODEL_WIKITEXT ],
-				true
+				true,
 			],
 			'wikitext_noimport' => [
 				[ 'model' => CONTENT_MODEL_WIKITEXT ],
-				false
+				false,
 			],
 			'item_allowimport' => [
 				[ 'model' => ItemContent::CONTENT_MODEL_ID ],
 				false,
-				MWException::class
+				MWException::class,
 			],
 			'item_noimport' => [
 				[ 'model' => ItemContent::CONTENT_MODEL_ID ],
-				true
-			]
+				true,
+			],
 		];
 	}
 
@@ -238,7 +238,7 @@ class RepoHooksTest extends MediaWikiIntegrationTestCase {
  </mediawiki>
 XML
 				,
-				false
+				false,
 			],
 			'item' => [ <<<XML
 <mediawiki>
@@ -260,7 +260,7 @@ XML
 XML
 				,
 				false,
-				MWException::class
+				MWException::class,
 			],
 			'item (allow)' => [ <<<XML
 <mediawiki>
@@ -281,7 +281,7 @@ XML
  </mediawiki>
 XML
 			,
-				true
+				true,
 			],
 		];
 	}
@@ -722,7 +722,7 @@ XML
 			'views' => [
 				'edit' => 'http://foo.com/edit',
 				'viewsource' => 'http://foo.com/viewsource',
-			]
+			],
 		];
 		$expectedLinks = $links;
 		$skinTemplate = $this->createMock( SkinTemplate::class );

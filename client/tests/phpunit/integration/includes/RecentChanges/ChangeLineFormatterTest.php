@@ -51,7 +51,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 		$this->setMwGlobals( [
 			'wgScriptPath' => '',
 			'wgScript' => '/index.php',
-			'wgArticlePath' => '/wiki/$1'
+			'wgArticlePath' => '/wiki/$1',
 		] );
 
 		$this->repoLinker = new RepoLinker(
@@ -305,19 +305,19 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 				$this->getEditSiteLinkPatterns(),
 				$this->getEditSiteLinkRecentChange(
 					'/* wbsetclaim-update:2||1 */ [[Property:P213]]: [[Q850]]'
-				)
+				),
 			],
 			'log-change' => [
 				$this->getLogChangeTagMatchers(),
 				[
 					'/Log Change Comment/',
 				],
-				$this->getLogRecentChange()
+				$this->getLogRecentChange(),
 			],
 			'comment-fallback' => [
 				[],
 				[
-					'/<span class=\"comment\">.*\(Associated .*? item deleted\. Language links removed\.\)/'
+					'/<span class=\"comment\">.*\(Associated .*? item deleted\. Language links removed\.\)/',
 				],
 				$this->getEditSiteLinkRecentChange(
 					'',
@@ -326,16 +326,16 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 						'message' => 'wikibase-comment-remove',
 					],
 					null
-				)
+				),
 			],
 			'comment-injection' => [
 				[],
 				[
-					'/\(&lt;script&gt;evil&lt;\/script&gt;\)/'
+					'/\(&lt;script&gt;evil&lt;\/script&gt;\)/',
 				],
 				$this->getEditSiteLinkRecentChange(
 					'<script>evil</script>'
-				)
+				),
 			],
 			'comment-html' => [
 				[],
@@ -349,7 +349,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 						'message' => 'this-shall-be-ignored',
 					],
 					null
-				)
+				),
 			],
 			'user name hidden' => [
 				[],
@@ -364,7 +364,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 					[],
 					null,
 					RevisionRecord::DELETED_USER
-				)
+				),
 			],
 			'edit summary hidden' => [
 				[],
@@ -379,7 +379,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 					[],
 					null,
 					RevisionRecord::DELETED_COMMENT
-				)
+				),
 			],
 			'user name and edit summary hidden' => [
 				[],
@@ -397,7 +397,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 					[],
 					null,
 					RevisionRecord::DELETED_COMMENT | RevisionRecord::DELETED_USER
-				)
+				),
 			],
 		];
 	}
@@ -497,7 +497,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 				'page_id' => 5,
 				'rev_id' => 92,
 				'parent_id' => 90,
-			]
+			],
 		];
 
 		if ( $legacyComment ) {
@@ -577,8 +577,8 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 				'page_id' => 0,
 				'rev_id' => 0,
 				'parent_id' => 0,
-				'bot' => false
-			]
+				'bot' => false,
+			],
 		];
 
 		$title = $this->makeTitle( NS_MAIN, 'Canada', 12, 53 );

@@ -105,7 +105,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 			false,
 			[
 				'item' => [ 'namespaceId' => 5000, 'slot' => SlotRecord::MAIN ],
-				'property' => [ 'namespaceId' => 6000, 'slot' => SlotRecord::MAIN ]
+				'property' => [ 'namespaceId' => 6000, 'slot' => SlotRecord::MAIN ],
 			],
 			'',
 			'',
@@ -284,14 +284,14 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 				'entity' => $firstItem,
 				'flags' => EDIT_NEW,
 				'baseRevid' => false,
-				'error' => StorageException::class
+				'error' => StorageException::class,
 			],
 
 			'not exists' => [
 				'entity' => $secondItem,
 				'flags' => EDIT_UPDATE,
 				'baseRevid' => false,
-				'error' => StorageException::class
+				'error' => StorageException::class,
 			],
 		];
 	}
@@ -725,13 +725,13 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 			0,
 			0,
 			null,
-			SlotRecord::MAIN
+			SlotRecord::MAIN,
 		];
 		yield 'UPDATE, with no parent revision, throws exception' => [
 			EDIT_UPDATE,
 			new StorageException( 'Can\'t perform an update with no parent revision' ),
 			null,
-			SlotRecord::MAIN
+			SlotRecord::MAIN,
 		];
 		yield 'UPDATE, with no slot to update, throws exception' => [
 			EDIT_UPDATE,
@@ -739,31 +739,31 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 				'Can\'t perform an update when the parent revision doesn\'t have expected slot: main'
 			),
 			$this->getMockRevisionRecord( [ SlotRecord::MAIN => false ] ),
-			SlotRecord::MAIN
+			SlotRecord::MAIN,
 		];
 		yield 'NEW, with no parent revision, no adjustments' => [
 			EDIT_NEW,
 			EDIT_NEW,
 			null,
-			SlotRecord::MAIN
+			SlotRecord::MAIN,
 		];
 		yield 'NEW, with parent revision on main slot, no adjustments' => [
 			EDIT_NEW,
 			EDIT_NEW,
 			$this->getMockRevisionRecord(),
-			SlotRecord::MAIN
+			SlotRecord::MAIN,
 		];
 		yield 'NEW, with parent revision on non existing extra slot, switch to update' => [
 			EDIT_NEW,
 			EDIT_UPDATE,
 			$this->getMockRevisionRecord( [ 'extra' => false ] ),
-			'extra'
+			'extra',
 		];
 		yield 'NEW, with parent revision on existing extra slot, throw exception' => [
 			EDIT_NEW,
 			new StorageException( 'Can\'t create slot, it already exists: extra' ),
 			$this->getMockRevisionRecord( [ 'extra' => true ] ),
-			'extra'
+			'extra',
 		];
 	}
 

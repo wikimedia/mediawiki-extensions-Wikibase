@@ -239,7 +239,7 @@ class ReferenceList implements Countable, IteratorAggregate, Serializable {
 	 */
 	public function __serialize() {
 		return [
-			'references' => array_values( $this->references )
+			'references' => array_values( $this->references ),
 		];
 	}
 

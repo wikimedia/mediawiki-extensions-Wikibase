@@ -21,7 +21,7 @@ class SiteLinkListSerializer {
 				'badges' => array_map(
 					fn( ItemId $badge ) => $badge->getSerialization(),
 					$siteLink->getBadges()
-				)
+				),
 			];
 		}
 

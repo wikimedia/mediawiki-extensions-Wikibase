@@ -128,7 +128,7 @@ class ChangesListSpecialPageHookHandler implements ChangesListSpecialPageQueryHo
 			'cssClassSuffix' => 'src-mw-wikibase',
 			'isRowApplicableCallable' => static function ( $ctx, $rc ) {
 				return RecentChangeFactory::isWikibaseChange( $rc );
-			}
+			},
 		] );
 
 		$significanceGroup = $specialPage->getFilterGroup( 'significance' );

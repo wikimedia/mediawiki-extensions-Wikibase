@@ -41,7 +41,7 @@ class DataValueFactory {
 		try {
 			$value = $this->deserializer->deserialize( [
 				'value' => $data,
-				'type' => $dataValueType
+				'type' => $dataValueType,
 			] );
 		} catch ( DeserializationException $ex ) {
 			throw new InvalidArgumentException( $ex->getMessage(), 0, $ex );

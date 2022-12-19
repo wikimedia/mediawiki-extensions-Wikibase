@@ -76,8 +76,8 @@ class PropertyValuePairDeserializerTest extends TestCase {
 				'value' => [ 'type' => 'novalue' ],
 				'property' => [
 					'id' => self::STRING_PROPERTY_ID,
-				]
-			]
+				],
+			],
 		];
 
 		yield 'some value for item id property' => [
@@ -86,8 +86,8 @@ class PropertyValuePairDeserializerTest extends TestCase {
 				'value' => [ 'type' => 'somevalue' ],
 				'property' => [
 					'id' => self::ITEM_ID_PROPERTY_ID,
-				]
-			]
+				],
+			],
 		];
 
 		yield 'non-numeric property id (e.g. federated property)' => [
@@ -96,8 +96,8 @@ class PropertyValuePairDeserializerTest extends TestCase {
 				'value' => [ 'type' => 'somevalue' ],
 				'property' => [
 					'id' => self::STRING_URI_PROPERTY_ID,
-				]
-			]
+				],
+			],
 		];
 
 		yield 'value for string property' => [
@@ -130,8 +130,8 @@ class PropertyValuePairDeserializerTest extends TestCase {
 				'value' => 42,
 				'property' => [
 					'id' => self::STRING_PROPERTY_ID,
-				]
-			]
+				],
+			],
 		];
 
 		yield 'invalid value type field' => [
@@ -140,7 +140,7 @@ class PropertyValuePairDeserializerTest extends TestCase {
 				'value' => [ 'content' => 'I am goat', 'type' => 'not-a-value-type' ],
 				'property' => [
 					'id' => self::STRING_PROPERTY_ID,
-				]
+				],
 			],
 		];
 
@@ -149,7 +149,7 @@ class PropertyValuePairDeserializerTest extends TestCase {
 			[
 				'value' => [ 'type' => 'novalue' ],
 				'property' => 42,
-			]
+			],
 		];
 
 		yield 'invalid property id field' => [
@@ -157,7 +157,7 @@ class PropertyValuePairDeserializerTest extends TestCase {
 			[
 				'value' => [ 'type' => 'novalue' ],
 				'property' => [ 'id' => 'not-a-property-id' ],
-			]
+			],
 		];
 
 		yield 'invalid value type field type' => [
@@ -166,8 +166,8 @@ class PropertyValuePairDeserializerTest extends TestCase {
 				'value' => [ 'type' => true ],
 				'property' => [
 					'id' => self::STRING_PROPERTY_ID,
-				]
-			]
+				],
+			],
 		];
 
 		yield 'property id is a (valid) item id' => [
@@ -175,7 +175,7 @@ class PropertyValuePairDeserializerTest extends TestCase {
 			[
 				'value' => [ 'type' => 'novalue' ],
 				'property' => [ 'id' => 'Q123' ],
-			]
+			],
 		];
 
 		yield 'property does not exist' => [
@@ -183,7 +183,7 @@ class PropertyValuePairDeserializerTest extends TestCase {
 			[
 				'value' => [ 'type' => 'novalue' ],
 				'property' => [ 'id' => 'P666' ],
-			]
+			],
 		];
 
 		yield 'missing value field' => [
@@ -191,8 +191,8 @@ class PropertyValuePairDeserializerTest extends TestCase {
 			[
 				'property' => [
 					'id' => self::STRING_PROPERTY_ID,
-				]
-			]
+				],
+			],
 		];
 
 		yield 'missing value type field' => [
@@ -201,15 +201,15 @@ class PropertyValuePairDeserializerTest extends TestCase {
 				'value' => [ 'content' => 'I am goat' ],
 				'property' => [
 					'id' => self::STRING_PROPERTY_ID,
-				]
-			]
+				],
+			],
 		];
 
 		yield 'missing property field' => [
 			new MissingFieldException( 'property' ),
 			[
 				'value' => [ 'type' => 'novalue' ],
-			]
+			],
 		];
 
 		yield 'missing property id field' => [
@@ -217,7 +217,7 @@ class PropertyValuePairDeserializerTest extends TestCase {
 			[
 				'value' => [ 'type' => 'novalue' ],
 				'property' => [],
-			]
+			],
 		];
 	}
 

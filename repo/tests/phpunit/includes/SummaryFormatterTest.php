@@ -132,62 +132,62 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 			'empty' => [
 				'', '', '',
 				[],
-				':0|'
+				':0|',
 			],
 			'no args' => [
 				'foo', 'testing', 'en',
 				[],
-				'foo-testing:0|en'
+				'foo-testing:0|en',
 			],
 			'one arg' => [
 				'foo', 'testing', 'en',
 				[ 'one' ],
-				'foo-testing:0|en|one'
+				'foo-testing:0|en|one',
 			],
 			'two args (no action)' => [
 				'foo', '', 'en',
 				[ 'one', 'two' ],
-				'foo:0|en|one|two'
+				'foo:0|en|one|two',
 			],
 			'args contains array (no module)' => [
 				'', 'testing', 'en',
 				[ [ 'one', 'two' ] ],
-				'testing:0|en|one|two'
+				'testing:0|en|one|two',
 			],
 			'args contains map (no module)' => [
 				'', 'testing', 'en',
 				[ [ [ 'one' => 1, 'two' => 2 ] ] ],
-				'testing:0|en|one: 1, two: 2'
+				'testing:0|en|one: 1, two: 2',
 			],
 			'empty arg' => [
 				'foo', 'testing', 'en',
 				[ 'one', '', 'three' ],
-				'foo-testing:0|en|one||three'
+				'foo-testing:0|en|one||three',
 			],
 			'number' => [
 				'foo', 'testing', 'en',
 				[ 23 ],
-				'foo-testing:0|en|23'
+				'foo-testing:0|en|23',
 			],
 			'EntityId' => [
 				'foo', 'testing', 'en',
 				[ $q5 ],
-				'foo-testing:0|en|[[item:Q5]]'
+				'foo-testing:0|en|[[item:Q5]]',
 			],
 			'DataValue' => [
 				'foo', 'testing', 'en',
 				[ $q5Value ],
-				'foo-testing:0|en|[[item:Q5]]'
+				'foo-testing:0|en|[[item:Q5]]',
 			],
 			'Snak' => [
 				'foo', 'testing', 'en',
 				[ $p20q5Snak ],
-				'foo-testing:0|en|[[item:Q5]]'
+				'foo-testing:0|en|[[item:Q5]]',
 			],
 			'property-item-map' => [
 				'', 'testing', 'en',
 				[ [ [ 'P17' => new ItemId( "Q2" ) ] ] ],
-				'testing:0|en|[[property:P17]]: [[item:Q2]]'
+				'testing:0|en|[[property:P17]]: [[item:Q2]]',
 			],
 		];
 	}
@@ -243,49 +243,49 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 			[
 				[],
 				[],
-				'/* foobar:0| */'
+				'/* foobar:0| */',
 			],
 			[
 				[ '' ],
 				[ 'This is a test…' ],
-				'/* foobar:1|| */ This is a test…'
+				'/* foobar:1|| */ This is a test…',
 			],
 			[
 				[ 'one' ],
 				[ 'This is a test…' ],
-				'/* foobar:1||one */ This is a test…'
+				'/* foobar:1||one */ This is a test…',
 			],
 			[
 				[ 'one', 'two' ],
 				[ 'This is a test…' ],
-				'/* foobar:1||one|two */ This is a test…'
+				'/* foobar:1||one|two */ This is a test…',
 			],
 			[
 				[ 'one', 'two', 'three' ],
 				[ 'This is a test…' ],
-				'/* foobar:1||one|two|three */ This is a test…'
+				'/* foobar:1||one|two|three */ This is a test…',
 			],
 			[
 				[ 'one', 'two', 'three', '…' ],
 				[ 'This is a test…' ],
-				'/* foobar:1||one|two|three|… */ This is a test…'
+				'/* foobar:1||one|two|three|… */ This is a test…',
 			],
 			[
 				[ 'one', 'two', 'three', '<>' ],
 				[ 'This is a test…' ],
-				'/* foobar:1||one|two|three|<> */ This is a test…'
+				'/* foobar:1||one|two|three|<> */ This is a test…',
 			],
 			[
 				[ 'one', 'two', 'three', '&lt;&gt;' ],
 				[ 'This is a test…' ],
-				'/* foobar:1||one|two|three|&lt;&gt; */ This is a test…'
+				'/* foobar:1||one|two|three|&lt;&gt; */ This is a test…',
 			],
 			# This comment is "too long", but it will be truncated to an
 			# appropriate length by core's CommentStore (not SummaryFormatter)
 			[
 				[],
 				[ str_repeat( 'a', 512 ) ],
-				'/* foobar:1| */ ' . str_repeat( 'a', 512 )
+				'/* foobar:1| */ ' . str_repeat( 'a', 512 ),
 			],
 		];
 	}
@@ -329,7 +329,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				null,
 				null,
 				null,
-				'/* summarytest:0| */'
+				'/* summarytest:0| */',
 			],
 			[ // #1
 				'summarytest',
@@ -338,7 +338,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				null,
 				null,
 				null,
-				'/* summarytest-testing:0|nl */'
+				'/* summarytest-testing:0|nl */',
 			],
 			[ // #2
 				'summarytest',
@@ -347,7 +347,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				[ 'x' ],
 				null,
 				null,
-				'/* summarytest:0||x */'
+				'/* summarytest:0||x */',
 			],
 			[ // #3
 				'summarytest',
@@ -356,7 +356,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				[ 'x', 'y' ],
 				[ 'A', 'B' ],
 				null,
-				'/* summarytest-testing:2|nl|x|y */ A, B'
+				'/* summarytest-testing:2|nl|x|y */ A, B',
 			],
 			[ // #4
 				'summarytest',
@@ -365,7 +365,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				null,
 				[ 'A', 'B' ],
 				null,
-				'/* summarytest:2| */ A, B'
+				'/* summarytest:2| */ A, B',
 			],
 			'User summary overrides arguments' => [
 				'summarytest',
@@ -374,7 +374,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				[ 'x', 'y' ],
 				[ 'A', 'B' ],
 				'can I haz world domination?',
-				'/* summarytest-testing:2|nl|x|y */ A, B, can I haz world domination?'
+				'/* summarytest-testing:2|nl|x|y */ A, B, can I haz world domination?',
 			],
 			'Trimming' => [
 				'summarytest',
@@ -383,7 +383,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				[ ' autoArg0 ', ' autoArg1 ' ],
 				[ ' userArg0 ', ' userArg1 ' ],
 				' userSummary ',
-				'/* summarytest-testing:2|de| autoArg0 | autoArg1 */ userArg0 ,  userArg1, userSummary'
+				'/* summarytest-testing:2|de| autoArg0 | autoArg1 */ userArg0 ,  userArg1, userSummary',
 			],
 			'User summary only' => [
 				'summarytest',
@@ -392,7 +392,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				null,
 				null,
 				'can I haz world domination?',
-				'/* summarytest:0| */ can I haz world domination?'
+				'/* summarytest:0| */ can I haz world domination?',
 			],
 			'User summary w/o arguments' => [
 				'summarytest',
@@ -401,7 +401,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				[ 'autoArg0', 'autoArg1' ],
 				null,
 				'userSummary',
-				'/* summarytest-testing:0|de|autoArg0|autoArg1 */ userSummary'
+				'/* summarytest-testing:0|de|autoArg0|autoArg1 */ userSummary',
 			],
 			'User summary w/o auto comment arguments' => [
 				'summarytest',
@@ -410,7 +410,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				null,
 				[ 'userArg0', 'userArg1' ],
 				'userSummary',
-				'/* summarytest-testing:2|de */ userArg0, userArg1, userSummary'
+				'/* summarytest-testing:2|de */ userArg0, userArg1, userSummary',
 			],
 			'Array arguments' => [
 				'summarytest',
@@ -419,7 +419,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				[ 'x', [ 1, 2, 3 ] ],
 				[ 'A', [ 1, 2, 3 ] ],
 				null,
-				'/* summarytest-testing:2|nl|x|1, 2, 3 */ A, 1, 2, 3'
+				'/* summarytest-testing:2|nl|x|1, 2, 3 */ A, 1, 2, 3',
 			],
 			'Associative arguments' => [
 				'summarytest',
@@ -428,7 +428,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				[ 'x', [ "foo" => 1, "bar" => 2 ] ],
 				[ 'A', [ "foo" => 1, "bar" => 2 ] ],
 				null,
-				'/* summarytest-testing:2|nl|x|foo: 1, bar: 2 */ A, foo: 1, bar: 2'
+				'/* summarytest-testing:2|nl|x|foo: 1, bar: 2 */ A, foo: 1, bar: 2',
 			],
 		];
 	}
@@ -468,7 +468,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				false, '', false,
 				'Title',
 				false,
-				null
+				null,
 			],
 			[
 				'item',
@@ -476,7 +476,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				false, '', false,
 				'Title',
 				false,
-				null
+				null,
 			],
 			[
 				'item',
@@ -484,7 +484,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				true, 'wbeditentity', true,
 				'Title',
 				false,
-				'!<span dir="auto"><span class="autocomment">.*?: </span></span>!'
+				'!<span dir="auto"><span class="autocomment">.*?: </span></span>!',
 			],
 			[
 				'item',
@@ -492,7 +492,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				true, 'wbsetlabel-set:1|en', true,
 				'Title',
 				false,
-				'!<span dir="auto"><span class="autocomment">.*?\[en\].*?: </span></span>!'
+				'!<span dir="auto"><span class="autocomment">.*?\[en\].*?: </span></span>!',
 			],
 			[
 				'item',
@@ -500,7 +500,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				false, 'wbsetlabel-set:1|<>', false,
 				'Title',
 				false,
-				'!<span dir="auto"><span class="autocomment">.*?\[&#60;&#62;\].*?</span></span>!'
+				'!<span dir="auto"><span class="autocomment">.*?\[&#60;&#62;\].*?</span></span>!',
 			],
 			[
 				'item',
@@ -508,7 +508,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				false, 'wbsetlabel-set:1|&lt;&gt;', false,
 				'Title',
 				false,
-				'!<span dir="auto"><span class="autocomment">.*?\[&#60;&#62;\].*?</span></span>!'
+				'!<span dir="auto"><span class="autocomment">.*?\[&#60;&#62;\].*?</span></span>!',
 			],
 			[
 				'item',
@@ -516,7 +516,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				false, 'wbsetlabel-set:1|&', false,
 				'Title',
 				false,
-				'!<span dir="auto"><span class="autocomment">.*?\[&#38;\].*?</span></span>!'
+				'!<span dir="auto"><span class="autocomment">.*?\[&#38;\].*?</span></span>!',
 			],
 			[
 				'item',
@@ -524,7 +524,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				false, 'wbsetlabel-set:1|&amp;', false,
 				'Title',
 				false,
-				'!<span dir="auto"><span class="autocomment">.*?\[&#38;\].*?</span></span>!'
+				'!<span dir="auto"><span class="autocomment">.*?\[&#38;\].*?</span></span>!',
 			],
 			[
 				'item',
@@ -532,7 +532,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				false, 'wbsetlabel-set:1|…', false,
 				'Title',
 				false,
-				'!<span dir="auto"><span class="autocomment">.*?\[…\].*?</span></span>!'
+				'!<span dir="auto"><span class="autocomment">.*?\[…\].*?</span></span>!',
 			],
 			[
 				'item',
@@ -540,7 +540,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				false, 'wbsetlabel-set:1|\'""\'', false,
 				'Title',
 				false,
-				'!<span dir="auto"><span class="autocomment">.*?\[&#39;&#34;&#34;&#39;\].*?</span></span>!'
+				'!<span dir="auto"><span class="autocomment">.*?\[&#39;&#34;&#34;&#39;\].*?</span></span>!',
 			],
 			[
 				'item',
@@ -548,8 +548,8 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				false, 'wbsetlabel-set:1|&#039;&quot;&quot;&#039;', false,
 				'Title',
 				false,
-				'!<span dir="auto"><span class="autocomment">.*?\[&#39;&#34;&#34;&#39;\].*?</span></span>!'
-			]
+				'!<span dir="auto"><span class="autocomment">.*?\[&#39;&#34;&#34;&#39;\].*?</span></span>!',
+			],
 		];
 	}
 

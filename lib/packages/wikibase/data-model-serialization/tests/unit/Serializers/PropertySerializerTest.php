@@ -31,7 +31,7 @@ class PropertySerializerTest extends DispatchableSerializerTest {
 				}
 
 				return [
-					'en' => [ 'lang' => 'en', 'value' => 'foo' ]
+					'en' => [ 'lang' => 'en', 'value' => 'foo' ],
 				];
 			} ) );
 
@@ -44,7 +44,7 @@ class PropertySerializerTest extends DispatchableSerializerTest {
 				}
 
 				return [
-					'en' => [ 'lang' => 'en', 'values' => [ 'foo', 'bar' ] ]
+					'en' => [ 'lang' => 'en', 'values' => [ 'foo', 'bar' ] ],
 				];
 			} ) );
 
@@ -61,12 +61,12 @@ class PropertySerializerTest extends DispatchableSerializerTest {
 						[
 							'mainsnak' => [
 								'snaktype' => 'novalue',
-								'property' => 'P42'
+								'property' => 'P42',
 							],
 							'type' => 'statement',
-							'rank' => 'normal'
-						]
-					]
+							'rank' => 'normal',
+						],
+					],
 				];
 			} ) );
 
@@ -80,7 +80,7 @@ class PropertySerializerTest extends DispatchableSerializerTest {
 	public function serializableProvider() {
 		return [
 			[
-				Property::newFromType( 'string' )
+				Property::newFromType( 'string' ),
 			],
 		];
 	}
@@ -88,13 +88,13 @@ class PropertySerializerTest extends DispatchableSerializerTest {
 	public function nonSerializableProvider() {
 		return [
 			[
-				5
+				5,
 			],
 			[
-				[]
+				[],
 			],
 			[
-				new Item()
+				new Item(),
 			],
 		];
 	}
@@ -112,7 +112,7 @@ class PropertySerializerTest extends DispatchableSerializerTest {
 					'aliases' => [],
 					'claims' => [],
 				],
-				$property
+				$property,
 			],
 		];
 
@@ -127,7 +127,7 @@ class PropertySerializerTest extends DispatchableSerializerTest {
 				'aliases' => [],
 				'claims' => [],
 			],
-			$property
+			$property,
 		];
 
 		$property = Property::newFromType( 'string' );
@@ -139,14 +139,14 @@ class PropertySerializerTest extends DispatchableSerializerTest {
 				'labels' => [
 					'en' => [
 						'lang' => 'en',
-						'value' => 'foo'
-					]
+						'value' => 'foo',
+					],
 				],
 				'descriptions' => [],
 				'aliases' => [],
 				'claims' => [],
 			],
-			$property
+			$property,
 		];
 
 		$property = Property::newFromType( 'string' );
@@ -159,13 +159,13 @@ class PropertySerializerTest extends DispatchableSerializerTest {
 				'descriptions' => [
 					'en' => [
 						'lang' => 'en',
-						'value' => 'foo'
-					]
+						'value' => 'foo',
+					],
 				],
 				'aliases' => [],
 				'claims' => [],
 			],
-			$property
+			$property,
 		];
 
 		$property = Property::newFromType( 'string' );
@@ -179,12 +179,12 @@ class PropertySerializerTest extends DispatchableSerializerTest {
 				'aliases' => [
 					'en' => [
 						'lang' => 'en',
-						'values' => [ 'foo', 'bar' ]
-					]
+						'values' => [ 'foo', 'bar' ],
+					],
 				],
 				'claims' => [],
 			],
-			$property
+			$property,
 		];
 
 		$property = Property::newFromType( 'string' );
@@ -201,15 +201,15 @@ class PropertySerializerTest extends DispatchableSerializerTest {
 						[
 							'mainsnak' => [
 								'snaktype' => 'novalue',
-								'property' => 'P42'
+								'property' => 'P42',
 							],
 							'type' => 'statement',
-							'rank' => 'normal'
-						]
-					]
+							'rank' => 'normal',
+						],
+					],
 				],
 			],
-			$property
+			$property,
 		];
 
 		return $provider;

@@ -132,7 +132,7 @@ class InfoActionHookHandler {
 			foreach ( $pageProperties as $property => $value ) {
 				$output[] = [
 					$this->context->msg( 'wikibase-pageinfo-' . $property )->parse(),
-					$this->context->getLanguage()->formatNum( (int)$value )
+					$this->context->getLanguage()->formatNum( (int)$value ),
 				];
 			}
 		}
@@ -164,7 +164,7 @@ class InfoActionHookHandler {
 	private function getNoSubscriptionText() {
 		return [
 			$this->context->msg( 'wikibase-pageinfo-subscription' )->parse(),
-			$this->context->msg( 'wikibase-pageinfo-subscription-none' )->parse()
+			$this->context->msg( 'wikibase-pageinfo-subscription-none' )->parse(),
 		];
 	}
 

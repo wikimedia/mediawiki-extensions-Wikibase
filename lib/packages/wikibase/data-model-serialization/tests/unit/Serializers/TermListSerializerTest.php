@@ -43,12 +43,12 @@ class TermListSerializerTest extends TestCase {
 			[
 				new TermList( [] ),
 				false,
-				[]
+				[],
 			],
 			[
 				new TermList( [] ),
 				true,
-				new \stdClass()
+				new \stdClass(),
 			],
 			[
 				new TermList( [
@@ -61,7 +61,7 @@ class TermListSerializerTest extends TestCase {
 					'en' => [ 'language' => 'en', 'value' => 'Water' ],
 					'it' => [ 'language' => 'it', 'value' => 'Lama' ],
 					'pt' => [ 'language' => 'de', 'value' => 'Lama', 'source' => 'zh' ],
-				]
+				],
 			],
 		];
 	}
@@ -81,7 +81,7 @@ class TermListSerializerTest extends TestCase {
 		$serial = new \stdClass();
 		$serial->en = [
 			'language' => 'en',
-			'value' => 'foo'
+			'value' => 'foo',
 		];
 
 		$this->assertEquals( $serial, $serializer->serialize( $terms ) );

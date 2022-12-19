@@ -61,21 +61,21 @@ class EditActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			"$header\n<ul><li>$labeledLink: Sitelink</li></ul></div>",
 			$context,
 			new ItemId( 'Q4' ),
-			'item id link'
+			'item id link',
 		];
 
 		$cases[] = [
 			'',
 			$context,
 			null,
-			'page is not connected to an item'
+			'page is not connected to an item',
 		];
 
 		$cases[] = [
 			"$header\n<ul><li>$q5Link: Sitelink</li></ul></div>",
 			$context,
 			new ItemId( 'Q5' ),
-			'No label for Q5'
+			'No label for Q5',
 		];
 
 		return $cases;

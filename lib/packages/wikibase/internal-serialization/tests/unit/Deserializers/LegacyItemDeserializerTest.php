@@ -52,19 +52,19 @@ class LegacyItemDeserializerTest extends \PHPUnit\Framework\TestCase {
 			[ null ],
 
 			[ [
-				'links' => [ null ]
+				'links' => [ null ],
 			] ],
 
 			[ [
-				'claims' => null
+				'claims' => null,
 			] ],
 
 			[ [
-				'claims' => [ null ]
+				'claims' => [ null ],
 			] ],
 
 			[ [
-				'entity' => 42
+				'entity' => 42,
 			] ],
 		];
 	}
@@ -99,7 +99,7 @@ class LegacyItemDeserializerTest extends \PHPUnit\Framework\TestCase {
 				'links' => [
 					'foo' => 'bar',
 					'baz' => 'bah',
-				]
+				],
 			],
 			$item
 		);
@@ -132,8 +132,8 @@ class LegacyItemDeserializerTest extends \PHPUnit\Framework\TestCase {
 		$this->assertDeserialization(
 			[
 				'claims' => [
-					$this->newStatementSerialization()
-				]
+					$this->newStatementSerialization(),
+				],
 			],
 			$item
 		);
@@ -151,7 +151,7 @@ class LegacyItemDeserializerTest extends \PHPUnit\Framework\TestCase {
 			'q' => [],
 			'g' => 'foo',
 			'rank' => Statement::RANK_NORMAL,
-			'refs' => []
+			'refs' => [],
 		];
 	}
 
@@ -162,8 +162,8 @@ class LegacyItemDeserializerTest extends \PHPUnit\Framework\TestCase {
 		$this->assertDeserialization(
 			[
 				'statements' => [
-					$this->newStatementSerialization()
-				]
+					$this->newStatementSerialization(),
+				],
 			],
 			$item
 		);

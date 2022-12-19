@@ -44,7 +44,7 @@ class DescriptionsChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 
 				$deserializer = $this->newDescriptionsChangeOpDeserializer( $validator );
 				$deserializer->createEntityChangeOp( [
-					'descriptions' => [ 'en' => [ 'language' => 'de', 'value' => 'foo' ] ]
+					'descriptions' => [ 'en' => [ 'language' => 'de', 'value' => 'foo' ] ],
 				] );
 			},
 			'test-error'

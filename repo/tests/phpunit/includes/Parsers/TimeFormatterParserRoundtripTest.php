@@ -193,24 +193,24 @@ class TimeFormatterParserRoundtripTest extends \PHPUnit\Framework\TestCase {
 				'+2013-08-16T00:00:00Z',
 				// Nominative is "Augustus", genitive is "Augusti".
 				'16 Augusti 2013',
-				'la'
+				'la',
 			],
 
 			// Preserve punctuation as given in MessagesXx.php but skip suffixes and words
 			[
 				'+2013-08-16T00:00:00Z',
 				'16 Avgust, 2013',
-				'kaa'
+				'kaa',
 			],
 			[
 				'+2013-08-16T00:00:00Z',
 				'16 agosto 2013',
-				'pt'
+				'pt',
 			],
 			[
 				'+2013-08-16T00:00:00Z',
 				'16 8 2013',
-				'yue'
+				'yue',
 			],
 		];
 
@@ -222,7 +222,7 @@ class TimeFormatterParserRoundtripTest extends \PHPUnit\Framework\TestCase {
 			yield [
 				new TimeValue( $timestamp, 0, 0, 0, TimeValue::PRECISION_DAY, $gregorian ),
 				$formatted,
-				$languageCode
+				$languageCode,
 			];
 		}
 	}

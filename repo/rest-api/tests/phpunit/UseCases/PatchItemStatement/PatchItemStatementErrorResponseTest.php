@@ -41,7 +41,7 @@ class PatchItemStatementErrorResponseTest extends TestCase {
 		yield 'from invalid item ID' => [
 			new ValidationError( ItemIdValidator::CODE_INVALID, [ ItemIdValidator::CONTEXT_VALUE => 'X123' ] ),
 			ErrorResponse::INVALID_ITEM_ID,
-			'Not a valid item ID: X123'
+			'Not a valid item ID: X123',
 		];
 
 		yield 'from invalid statement ID' => [
@@ -50,13 +50,13 @@ class PatchItemStatementErrorResponseTest extends TestCase {
 				[ StatementIdValidator::CONTEXT_VALUE => 'Q123$INVALID_STATEMENT_ID' ]
 			),
 			ErrorResponse::INVALID_STATEMENT_ID,
-			'Not a valid statement ID: Q123$INVALID_STATEMENT_ID'
+			'Not a valid statement ID: Q123$INVALID_STATEMENT_ID',
 		];
 
 		yield 'from invalid patch' => [
 			new ValidationError( JsonPatchValidator::CODE_INVALID ),
 			ErrorResponse::INVALID_PATCH,
-			'The provided patch is invalid'
+			'The provided patch is invalid',
 		];
 
 		$context = [
@@ -67,7 +67,7 @@ class PatchItemStatementErrorResponseTest extends TestCase {
 			new ValidationError( JsonPatchValidator::CODE_MISSING_FIELD, $context ),
 			ErrorResponse::MISSING_JSON_PATCH_FIELD,
 			"Missing 'op' in JSON patch",
-			$context
+			$context,
 		];
 
 		$context = [ JsonPatchValidator::CONTEXT_OPERATION => [ 'op' => 'bad', 'path' => '/a/b/c', 'value' => 'test' ] ];
@@ -75,7 +75,7 @@ class PatchItemStatementErrorResponseTest extends TestCase {
 			new ValidationError( JsonPatchValidator::CODE_INVALID_OPERATION, $context ),
 			ErrorResponse::INVALID_PATCH_OPERATION,
 			"Incorrect JSON patch operation: 'bad'",
-			$context
+			$context,
 		];
 
 		$context = [
@@ -89,7 +89,7 @@ class PatchItemStatementErrorResponseTest extends TestCase {
 			new ValidationError( JsonPatchValidator::CODE_INVALID_FIELD_TYPE, $context ),
 			ErrorResponse::INVALID_PATCH_FIELD_TYPE,
 			"The value of 'op' must be of type string",
-			$context
+			$context,
 		];
 
 		yield 'from comment too long' => [
@@ -98,7 +98,7 @@ class PatchItemStatementErrorResponseTest extends TestCase {
 				[ EditMetadataValidator::CONTEXT_COMMENT_MAX_LENGTH => '500' ]
 			),
 			ErrorResponse::COMMENT_TOO_LONG,
-			'Comment must not be longer than 500 characters.'
+			'Comment must not be longer than 500 characters.',
 		];
 
 		yield 'from invalid tag' => [
@@ -107,7 +107,7 @@ class PatchItemStatementErrorResponseTest extends TestCase {
 				[ EditMetadataValidator::CONTEXT_TAG_VALUE => 'bad tag' ]
 			),
 			ErrorResponse::INVALID_EDIT_TAG,
-			'Invalid MediaWiki tag: bad tag'
+			'Invalid MediaWiki tag: bad tag',
 		];
 
 		yield 'from invalid patched statement (invalid field)' => [
@@ -117,7 +117,7 @@ class PatchItemStatementErrorResponseTest extends TestCase {
 			),
 			ErrorResponse::PATCHED_STATEMENT_INVALID_FIELD,
 			"Invalid input for 'rank' in the patched statement",
-			[ 'path' => 'rank', 'value' => 'not-a-valid-rank' ]
+			[ 'path' => 'rank', 'value' => 'not-a-valid-rank' ],
 		];
 
 		yield 'from invalid patched statement (missing field)' => [
@@ -127,7 +127,7 @@ class PatchItemStatementErrorResponseTest extends TestCase {
 			),
 			ErrorResponse::PATCHED_STATEMENT_MISSING_FIELD,
 			'Mandatory field missing in the patched statement: property',
-			[ 'path' => 'property' ]
+			[ 'path' => 'property' ],
 		];
 	}
 

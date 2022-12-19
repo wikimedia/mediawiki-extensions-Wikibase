@@ -108,7 +108,7 @@ class SerializerFactory {
 	public function newEntitySerializer() {
 		return new DispatchingSerializer( [
 			$this->newItemSerializer(),
-			$this->newPropertySerializer()
+			$this->newPropertySerializer(),
 		] );
 	}
 

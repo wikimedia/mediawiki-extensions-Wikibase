@@ -79,7 +79,7 @@ class EntityUsageTableBuilderTest extends MediaWikiIntegrationTestCase {
 			$this->db->insert( 'page_props', [
 				'pp_page' => (int)$pageId,
 				'pp_propname' => 'wikibase_item',
-				'pp_value' => (string)$entityId
+				'pp_value' => (string)$entityId,
 			], __METHOD__ );
 		}
 

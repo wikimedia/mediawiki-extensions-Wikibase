@@ -261,7 +261,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 				'id' => 'wb-itemdisambiguation-languagename',
 				'size' => 12,
 				'cssclass' => 'wb-language-suggester',
-				'label-message' => 'wikibase-itemdisambiguation-lookup-language'
+				'label-message' => 'wikibase-itemdisambiguation-lookup-language',
 			],
 			'label' => [
 				'name' => 'label',
@@ -270,14 +270,14 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 				'id' => 'labelname',
 				'size' => 36,
 				'autofocus',
-				'label-message' => 'wikibase-itemdisambiguation-lookup-label'
+				'label-message' => 'wikibase-itemdisambiguation-lookup-label',
 			],
 			'submit' => [
 				'name' => '',
 				'default' => $this->msg( 'wikibase-itemdisambiguation-submit' )->text(),
 				'type' => 'submit',
 				'id' => 'wb-itembytitle-submit',
-			]
+			],
 		];
 
 		HTMLForm::factory( 'ooui', $formDescriptor, $this->getContext() )

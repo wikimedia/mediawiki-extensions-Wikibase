@@ -39,7 +39,7 @@ class HtmlUrlFormatterTest extends \PHPUnit\Framework\TestCase {
 			[
 				new StringValue( 'http://acme.com' ),
 				$options,
-				'@<a .*href="http://acme\.com".*>.*http://acme\.com.*</a>@'
+				'@<a .*href="http://acme\.com".*>.*http://acme\.com.*</a>@',
 			],
 		];
 	}

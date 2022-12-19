@@ -98,7 +98,7 @@ class ApiEntitySourceTest extends TestCase {
 			$validConceptBaseUri,
 			$validRdfNodeNamespacePrefix,
 			$validRdfPredicateNamespacePrefix,
-			100
+			100,
 		];
 	}
 

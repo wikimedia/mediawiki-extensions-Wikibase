@@ -310,34 +310,34 @@ class MwTimeIsoFormatterTest extends MediaWikiIntegrationTestCase {
 				'+2013-08-16T00:00:00Z', TimeValue::PRECISION_DAY,
 				// Nominative is "Augustus", genitive is "Augusti".
 				'16 Augusti 2013',
-				'la'
+				'la',
 			],
 
 			// Preserve punctuation as given in MessagesXx.php but skip suffixes and words
 			[
 				'+2013-08-16T00:00:00Z', TimeValue::PRECISION_DAY,
 				'16. augusztus 2013',
-				'hu'
+				'hu',
 			],
 			[
 				'+2013-08-16T00:00:00Z', TimeValue::PRECISION_DAY,
 				'16 Avgust, 2013',
-				'kaa'
+				'kaa',
 			],
 			[
 				'+2013-08-16T00:00:00Z', TimeValue::PRECISION_DAY,
 				'16 agosto 2013',
-				'pt'
+				'pt',
 			],
 			[
 				'+2013-08-16T00:00:00Z', TimeValue::PRECISION_DAY,
 				'16 8 2013',
-				'yue'
+				'yue',
 			],
 			[
 				'+2013-08-16T00:00:00Z', TimeValue::PRECISION_DAY,
 				'16 aŭg. 2013',
-				'eo'
+				'eo',
 			],
 
 			// Valid values with day, month and/or year zero
@@ -369,15 +369,15 @@ class MwTimeIsoFormatterTest extends MediaWikiIntegrationTestCase {
 			// centuries and millenia start with 1, so we can format "low" years just fine
 			[
 				'+100-01-01T00:00:06Z', TimeValue::PRECISION_YEAR1K,
-				'1. millennium'
+				'1. millennium',
 			],
 			[
 				'-100-01-01T00:00:06Z', TimeValue::PRECISION_YEAR1K,
-				'1. millennium BCE'
+				'1. millennium BCE',
 			],
 			[
 				'+10-01-01T00:00:07Z', TimeValue::PRECISION_YEAR100,
-				'1. century'
+				'1. century',
 			],
 
 			// Integer overflows should not happen
@@ -504,24 +504,24 @@ class MwTimeIsoFormatterTest extends MediaWikiIntegrationTestCase {
 			[
 				'-12345678912-01-01T01:01:01Z', TimeValue::PRECISION_YEAR1G,
 				'12 Milliarden Jahre v. Chr.',
-				'de'
+				'de',
 			],
 			[
 				'+12345678112-01-01T01:01:01Z', TimeValue::PRECISION_YEAR1K,
 				'12345679. Jahrtausend',
-				'de'
+				'de',
 			],
 			[
 				'+10000000-01-01T00:00:01Z', TimeValue::PRECISION_YEAR100M,
 				'10000000',
-				'de'
+				'de',
 			],
 
 			// Spanish has no date preferences
 			[
 				'+2017-01-16T00:00:00Z', TimeValue::PRECISION_DAY,
 				'16 ene 2017',
-				'es'
+				'es',
 			],
 		];
 
@@ -534,7 +534,7 @@ class MwTimeIsoFormatterTest extends MediaWikiIntegrationTestCase {
 			yield [
 				$expected,
 				new TimeValue( $timestamp, 0, 0, 0, $precision, $gregorian ),
-				$languageCode
+				$languageCode,
 			];
 		}
 
@@ -557,7 +557,7 @@ class MwTimeIsoFormatterTest extends MediaWikiIntegrationTestCase {
 					TimeValue::PRECISION_YEAR,
 					$gregorian
 				),
-				$languageCode
+				$languageCode,
 			];
 		}
 	}
@@ -575,7 +575,7 @@ class MwTimeIsoFormatterTest extends MediaWikiIntegrationTestCase {
 		$languageCode = 'en'
 	) {
 		$options = new FormatterOptions( [
-			ValueFormatter::OPT_LANG => $languageCode
+			ValueFormatter::OPT_LANG => $languageCode,
 		] );
 		$formatter = new MwTimeIsoFormatter( $this->getServiceContainer()->getLanguageFactory(), $options );
 		$actual = $formatter->format( $timeValue );

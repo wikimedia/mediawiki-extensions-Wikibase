@@ -50,7 +50,7 @@ class SourceAndTypeDispatchingPrefetchingTermLookupTest extends TestCase {
 				},
 				'property' => function () use ( $propertyPrefetchingLookup ) { return $propertyPrefetchingLookup;
 				},
-			]
+			],
 		];
 
 		$lookup = $this->getLookup();
@@ -75,7 +75,7 @@ class SourceAndTypeDispatchingPrefetchingTermLookupTest extends TestCase {
 				},
 				'property' => function () use ( $propertyPrefetchingLookup ) { return $propertyPrefetchingLookup;
 				},
-			]
+			],
 		];
 
 		$lookup = $this->getLookup();
@@ -99,7 +99,7 @@ class SourceAndTypeDispatchingPrefetchingTermLookupTest extends TestCase {
 				},
 				'property' => function () use ( $propertyPrefetchingLookup ) { return $propertyPrefetchingLookup;
 				},
-			]
+			],
 		];
 
 		$lookup = $this->getLookup();
@@ -120,7 +120,7 @@ class SourceAndTypeDispatchingPrefetchingTermLookupTest extends TestCase {
 			'some-source' => [
 				'item' => function () use ( $itemPrefetchingLookup ) { return $itemPrefetchingLookup;
 				},
-			]
+			],
 		];
 
 		$lookup = $this->getLookup();
@@ -138,7 +138,7 @@ class SourceAndTypeDispatchingPrefetchingTermLookupTest extends TestCase {
 			'some-source' => [
 				'item' => function () use ( $innerLookup ) { return $innerLookup;
 				},
-			]
+			],
 		];
 
 		$lookup = $this->getLookup();
@@ -157,7 +157,7 @@ class SourceAndTypeDispatchingPrefetchingTermLookupTest extends TestCase {
 			'some-source' => [
 				'item' => function () use ( $innerLookup ) { return $innerLookup;
 				},
-			]
+			],
 		];
 
 		$lookup = $this->getLookup();
@@ -175,7 +175,7 @@ class SourceAndTypeDispatchingPrefetchingTermLookupTest extends TestCase {
 			'some-source' => [
 				'item' => function () use ( $innerLookup ) { return $innerLookup;
 				},
-			]
+			],
 		];
 
 		$lookup = $this->getLookup();

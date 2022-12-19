@@ -31,7 +31,7 @@ class DataTypeValidatorFactoryTest extends ServiceWiringTestCase {
 
 	public function testReturnsValidatorsFromCallbacks(): void {
 		$fakeValidators = [
-			$this->createMock( ValueValidator::class )
+			$this->createMock( ValueValidator::class ),
 		];
 
 		$dataTypeDefs = new DataTypeDefinitions( [
@@ -39,8 +39,8 @@ class DataTypeValidatorFactoryTest extends ServiceWiringTestCase {
 				'value-type' => 'string',
 				'validator-factory-callback' => function () use ( $fakeValidators ): array {
 					return $fakeValidators;
-				}
-			]
+				},
+			],
 		] );
 
 		$this->mockService(

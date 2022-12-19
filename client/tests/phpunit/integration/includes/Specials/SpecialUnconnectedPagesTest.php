@@ -123,12 +123,12 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 			[
 				'value' => '400',
 				'namespace' => strval( $namespace ),
-				'title' => 'SpecialUnconnectedPagesTest-unconnected2'
+				'title' => 'SpecialUnconnectedPagesTest-unconnected2',
 			],
 			[
 				'value' => '200',
 				'namespace' => strval( $namespace ),
-				'title' => 'SpecialUnconnectedPagesTest-unconnected'
+				'title' => 'SpecialUnconnectedPagesTest-unconnected',
 			],
 		];
 
@@ -181,7 +181,7 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 		$this->assertSame( [
 				'value' => '200',
 				'namespace' => strval( $namespace ),
-				'title' => 'SpecialUnconnectedPagesTest-unconnected'
+				'title' => 'SpecialUnconnectedPagesTest-unconnected',
 			],
 			(array)$res->fetchObject()
 		);

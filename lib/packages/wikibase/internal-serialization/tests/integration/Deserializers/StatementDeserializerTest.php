@@ -51,7 +51,7 @@ class StatementDeserializerTest extends \PHPUnit\Framework\TestCase {
 
 		$statement->setQualifiers( new SnakList( [
 			new PropertyNoValueSnak( 1337 ),
-			new PropertyValueSnak( 23, new NumberValue( 42 ) )
+			new PropertyValueSnak( 23, new NumberValue( 42 ) ),
 		] ) );
 
 		$statement->setGuid( 'some guid be here' );

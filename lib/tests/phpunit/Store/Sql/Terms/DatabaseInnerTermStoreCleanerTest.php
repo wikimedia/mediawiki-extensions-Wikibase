@@ -79,7 +79,7 @@ class DatabaseInnerTermStoreCleanerTest extends MediaWikiIntegrationTestCase {
 		[ $termInLang1Id, $termInLang2Id, $termInLang3Id, $termInLang4Id ] = $this->insertTermsInLang(
 			[
 				$textInLang1Id => [ $type1Id, $type2Id ],
-				$textInLang2Id => [ $type1Id, $type2Id ]
+				$textInLang2Id => [ $type1Id, $type2Id ],
 			]
 		);
 
@@ -112,7 +112,7 @@ class DatabaseInnerTermStoreCleanerTest extends MediaWikiIntegrationTestCase {
 			[
 				$textInLang1Id => $typeId,
 				$textInLang2Id => $typeId,
-				$textInLang3Id => $typeId
+				$textInLang3Id => $typeId,
 			]
 		);
 
@@ -185,7 +185,7 @@ class DatabaseInnerTermStoreCleanerTest extends MediaWikiIntegrationTestCase {
 			[
 				$textInLangIdSingleUse1 => $typeIdLabel,
 				$textInLangIdSingleUse2 => $typeIdLabel,
-				$textInLangIdShared => [ $typeIdLabel, $typeIdDescription ]
+				$textInLangIdShared => [ $typeIdLabel, $typeIdDescription ],
 			]
 		);
 
@@ -212,7 +212,7 @@ class DatabaseInnerTermStoreCleanerTest extends MediaWikiIntegrationTestCase {
 		[ $textInLangIdToDelete1, $textInLangIdToDelete2 ] = $this->insertTextsInLang(
 			[
 				$textIdSingleUse => 'en',
-				$textIdShared => 'de'
+				$textIdShared => 'de',
 			]
 		);
 		[ $textInLangIdToRemain3 ] = $this->insertTextsInLang( [ $textIdShared => 'fr' ] );
@@ -221,7 +221,7 @@ class DatabaseInnerTermStoreCleanerTest extends MediaWikiIntegrationTestCase {
 			[
 				$textInLangIdToDelete1 => $typeIdLabel,
 				$textInLangIdToDelete2 => $typeIdLabel,
-				$textInLangIdToRemain3 => $typeIdLabel
+				$textInLangIdToRemain3 => $typeIdLabel,
 			]
 		);
 

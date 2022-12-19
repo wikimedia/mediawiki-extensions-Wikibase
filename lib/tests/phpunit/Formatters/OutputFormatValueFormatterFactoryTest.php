@@ -50,11 +50,11 @@ class OutputFormatValueFormatterFactoryTest extends \PHPUnit\Framework\TestCase 
 		return [
 			'keys must be strings' => [
 				[ 17 => $stringFormatter ],
-				InvalidArgumentException::class
+				InvalidArgumentException::class,
 			],
 			'builder must be callable' => [
 				[ 'foo' => 17 ],
-				InvalidArgumentException::class
+				InvalidArgumentException::class,
 			],
 		];
 	}
@@ -96,13 +96,13 @@ class OutputFormatValueFormatterFactoryTest extends \PHPUnit\Framework\TestCase 
 				SnakFormatter::FORMAT_PLAIN,
 				new StringValue( '{foo&bar}' ),
 				null,
-				'/^{foo&bar}$/'
+				'/^{foo&bar}$/',
 			],
 			'wikitext url' => [
 				SnakFormatter::FORMAT_WIKI,
 				new StringValue( 'http://acme.com/?foo&bar' ),
 				'url',
-				'!^http://acme.com/\?foo&bar$!'
+				'!^http://acme.com/\?foo&bar$!',
 			],
 		];
 	}
@@ -139,27 +139,27 @@ class OutputFormatValueFormatterFactoryTest extends \PHPUnit\Framework\TestCase 
 			'empty' => [
 				new FormatterOptions( [] ),
 				'en', // determined in OutputFormatValueFormatterFactoryTest::newBuilder()
-				'en'  // derived from language code
+				'en',  // derived from language code
 			],
 			'language code set' => [
 				new FormatterOptions( [ ValueFormatter::OPT_LANG => 'de' ] ),
 				'de', // as given
-				'de'  // derived from language code
+				'de',  // derived from language code
 			],
 			'language fallback set' => [
 				new FormatterOptions( [
-					FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => $languageFallback
+					FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => $languageFallback,
 				] ),
 				'en', // default code is taken from the constructor, not the fallback chain
-				'fr'  // as given
+				'fr',  // as given
 			],
 			'language code and fallback set' => [
 				new FormatterOptions( [
 					ValueFormatter::OPT_LANG => 'de',
-					FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => $languageFallback
+					FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => $languageFallback,
 				] ),
 				'de', // as given
-				'fr'  // as given
+				'fr',  // as given
 			],
 		];
 	}

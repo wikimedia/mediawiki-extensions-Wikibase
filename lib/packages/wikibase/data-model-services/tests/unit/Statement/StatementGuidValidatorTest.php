@@ -35,7 +35,7 @@ class StatementGuidValidatorTest extends TestCase {
 			[ 'q37$a212184b-434c-7e90-dd26-29eda5ee2580' ],
 			[ 'Q60$5083E43C-228B-4E3E-B82A-4CB20A22A3FA' ],
 			[ 'Q604192$5672A3B1-7693-4DF9-ADE8-8FC13E095603' ],
-			[ 'Q37$a212184b-434c-7e90-dd26-29eda5ee2581' ]
+			[ 'Q37$a212184b-434c-7e90-dd26-29eda5ee2581' ],
 		];
 	}
 
@@ -64,7 +64,7 @@ class StatementGuidValidatorTest extends TestCase {
 			[ 'q604192$5672w3B1-6935-4DF9-ADE8-8FC13E09604' ],
 			[ 'q604192$5672A3B1--7693-4DF9-ADE8-8FC13E095604' ],
 			[ 'foo' ],
-			[ 'q12345' ]
+			[ 'q12345' ],
 		];
 	}
 
@@ -92,7 +92,7 @@ class StatementGuidValidatorTest extends TestCase {
 		return [
 			[ 'q12345' ],
 			[ 'q$1$2$3' ],
-			[ '$q60$5083E43C-228B-4E3E-B82A-4CB20A22A3FB' ]
+			[ '$q60$5083E43C-228B-4E3E-B82A-4CB20A22A3FB' ],
 		];
 	}
 
@@ -110,7 +110,7 @@ class StatementGuidValidatorTest extends TestCase {
 	public function validateInvalidPrefixedIdProvider() {
 		return [
 			[ '060$5083E43C-228B-4E3E-B82A-4CB20A22A3FB' ],
-			[ 'a060$5083E43C-228B-4E3E-B82A-4CB20A22A3FB' ]
+			[ 'a060$5083E43C-228B-4E3E-B82A-4CB20A22A3FB' ],
 		];
 	}
 

@@ -229,7 +229,7 @@ return [
 								WikibaseRepo::getPrefetchingTermLookup(),
 								$language->getCode()
 							)
-						)
+						),
 					]
 			);
 		},
@@ -256,7 +256,7 @@ return [
 		Def::ENTITY_REFERENCE_EXTRACTOR_CALLBACK => function() {
 			return new EntityReferenceExtractorCollection( [
 				new SiteLinkBadgeItemReferenceExtractor(),
-				new StatementEntityReferenceExtractor( WikibaseRepo::getItemUrlParser() )
+				new StatementEntityReferenceExtractor( WikibaseRepo::getItemUrlParser() ),
 			] );
 		},
 		Def::PREFETCHING_TERM_LOOKUP_CALLBACK => function ( DatabaseEntitySource $entitySource ) {
@@ -430,7 +430,7 @@ return [
 								WikibaseRepo::getPrefetchingTermLookup(),
 								$language->getCode()
 							)
-						)
+						),
 					]
 				),
 				WikibaseRepo::getPropertyDataTypeLookup()
@@ -484,7 +484,7 @@ return [
 				$mwServices->getStatsdDataFactory(),
 				[
 					'miss' => 'wikibase.prefetchingPropertyTermLookupCache.miss',
-					'hit' => 'wikibase.prefetchingPropertyTermLookupCache.hit'
+					'hit' => 'wikibase.prefetchingPropertyTermLookupCache.hit',
 				]
 			);
 
@@ -513,5 +513,5 @@ return [
 				WikibaseRepo::getEntityTitleLookup()
 			);
 		},
-	]
+	],
 ];

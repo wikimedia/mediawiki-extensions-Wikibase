@@ -219,7 +219,7 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 					SpecialNewProperty::FIELD_ALIASES => '',
 					SpecialNewProperty::FIELD_DATATYPE => 'string',
 				],
-				'(wikibase-newproperty-insufficient-data)'
+				'(wikibase-newproperty-insufficient-data)',
 			],
 			'empty label and description, aliases contain only spaces and pipe symbols' => [
 				[
@@ -312,7 +312,7 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 
 	public function testWhenLabelIsInvalid_ThenHtmlContainsErrorMessage() {
 		$formData = [
-			SpecialNewProperty::FIELD_LABEL => 'TOO_LONG_ERROR'
+			SpecialNewProperty::FIELD_LABEL => 'TOO_LONG_ERROR',
 		];
 
 		$this->assertHtmlContainsErrorTooLongMessage( $formData );
@@ -320,7 +320,7 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 
 	public function testWhenDescriptionIsInvalid_ThenHtmlContainsErrorMessage() {
 		$formData = [
-			SpecialNewProperty::FIELD_DESCRIPTION => 'TOO_LONG_ERROR'
+			SpecialNewProperty::FIELD_DESCRIPTION => 'TOO_LONG_ERROR',
 		];
 
 		$this->assertHtmlContainsErrorTooLongMessage( $formData );
@@ -328,7 +328,7 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 
 	public function testWhenAliasIsInvalid_ThenHtmlContainsErrorMessage() {
 		$formData = [
-			SpecialNewProperty::FIELD_ALIASES => 'TOO_LONG_ERROR'
+			SpecialNewProperty::FIELD_ALIASES => 'TOO_LONG_ERROR',
 		];
 
 		$this->assertHtmlContainsErrorTooLongMessage( $formData );
@@ -336,7 +336,7 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 
 	public function testWhenAliasesAreInvalid_ThenHtmlContainsErrorMessage() {
 		$formData = [
-			SpecialNewProperty::FIELD_ALIASES => 'TOO_LONG_ERROR|TOO_LONG_ERROR'
+			SpecialNewProperty::FIELD_ALIASES => 'TOO_LONG_ERROR|TOO_LONG_ERROR',
 		];
 
 		$this->assertHtmlContainsErrorTooLongMessage( $formData );

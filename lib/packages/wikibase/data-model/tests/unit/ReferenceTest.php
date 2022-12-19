@@ -35,7 +35,7 @@ class ReferenceTest extends \PHPUnit\Framework\TestCase {
 		$snakLists[] = new SnakList( [
 			new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'a' ) ),
 			new PropertySomeValueSnak( new NumericPropertyId( 'P2' ) ),
-			new PropertyNoValueSnak( new NumericPropertyId( 'P3' ) )
+			new PropertyNoValueSnak( new NumericPropertyId( 'P3' ) ),
 		] );
 
 		$argLists = [];
@@ -136,7 +136,7 @@ class ReferenceTest extends \PHPUnit\Framework\TestCase {
 					new PropertyValueSnak( $ids[0], new StringValue( 'a' ) ),
 					new PropertySomeValueSnak( $ids[0] ),
 					new PropertyNoValueSnak( $ids[1] ),
-				] )
+				] ),
 			],
 			[
 				new SnakList( [

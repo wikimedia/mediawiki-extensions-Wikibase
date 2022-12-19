@@ -46,8 +46,8 @@ class StatementSerializerTest extends TestCase {
 				'qualifiers' => [],
 				'references' => [],
 				'property' => 'P123 property',
-				'value' => 'P123 value'
-			]
+				'value' => 'P123 value',
+			],
 		];
 
 		yield 'some value statement with deprecated rank' => [
@@ -61,8 +61,8 @@ class StatementSerializerTest extends TestCase {
 				'qualifiers' => [],
 				'references' => [],
 				'property' => 'P123 property',
-				'value' => 'P123 value'
-			]
+				'value' => 'P123 value',
+			],
 		];
 
 		yield 'no value statement with qualifiers' => [
@@ -80,8 +80,8 @@ class StatementSerializerTest extends TestCase {
 				],
 				'references' => [],
 				'property' => 'P123 property',
-				'value' => 'P123 value'
-			]
+				'value' => 'P123 value',
+			],
 		];
 
 		$ref1 = new Reference( [
@@ -106,8 +106,8 @@ class StatementSerializerTest extends TestCase {
 					[ $ref2->getHash() ],
 				],
 				'property' => 'P123 property',
-				'value' => 'P123 value'
-			]
+				'value' => 'P123 value',
+			],
 		];
 	}
 
@@ -117,7 +117,7 @@ class StatementSerializerTest extends TestCase {
 			->willReturnCallback(
 				fn( Snak $snak ) => [
 					'property' => $snak->getPropertyId() . ' property',
-					'value' => $snak->getPropertyId() . ' value'
+					'value' => $snak->getPropertyId() . ' value',
 				]
 			);
 		$referenceSerializer = $this->createStub( ReferenceSerializer::class );

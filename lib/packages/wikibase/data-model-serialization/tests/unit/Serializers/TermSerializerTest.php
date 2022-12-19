@@ -34,7 +34,7 @@ class TermSerializerTest extends TestCase {
 				[
 					'language' => 'en',
 					'value' => 'SomeValue',
-				]
+				],
 			],
 			[
 				new TermFallback( 'en', 'SomeValue', 'en-gb', 'en' ),
@@ -42,7 +42,7 @@ class TermSerializerTest extends TestCase {
 					'language' => 'en-gb',
 					'value' => 'SomeValue',
 					'source' => 'en',
-				]
+				],
 			],
 		];
 	}

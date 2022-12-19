@@ -101,7 +101,7 @@ abstract class SerializableEntityId implements EntityId {
 		return [
 			is_string( $repoName ) ? $repoName : '',
 			$prefixRemainder,
-			$localPart
+			$localPart,
 		];
 	}
 

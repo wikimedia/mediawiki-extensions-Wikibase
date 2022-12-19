@@ -35,7 +35,7 @@ class MultiPropertyTermStoreWriterTest extends TestCase {
 			new TermList( [ new Term( 'en', 'a label' ) ] ),
 			new TermList( [ new Term( 'en', 'a description' ) ] ),
 			new AliasGroupList( [
-				new AliasGroup( 'en', [ 'an alias', 'another alias' ] )
+				new AliasGroup( 'en', [ 'an alias', 'another alias' ] ),
 			] )
 		);
 	}

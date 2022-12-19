@@ -200,7 +200,7 @@ class RemoveReferencesTest extends WikibaseApiTestCase {
 
 		return [
 			[ 'xyz', $hash ],
-			[ 'x$y$z', $hash ]
+			[ 'x$y$z', $hash ],
 		];
 	}
 

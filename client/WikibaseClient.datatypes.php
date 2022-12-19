@@ -41,7 +41,7 @@ return call_user_func( function() {
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
 				$factory = WikibaseClient::getDefaultValueFormatterBuilders();
 				return $factory->newUnDeserializableValueFormatter( $format, $options );
-			}
+			},
 		],
 		'VT:globecoordinate' => [
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
@@ -106,7 +106,7 @@ return call_user_func( function() {
 		'VT:wikibase-unmapped-entityid' => [
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
 				return new UnmappedEntityIdValueFormatter();
-			}
+			},
 		],
 		'PT:external-id' => [
 			'snak-formatter-factory-callback' => function( $format ) {

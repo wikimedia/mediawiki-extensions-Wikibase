@@ -28,7 +28,7 @@ class CombinedEntitySearchHelperTest extends \PHPUnit\Framework\TestCase {
 
 		new CombinedEntitySearchHelper( [
 			$this->createStub( EntitySearchHelper::class ),
-			'a potato'
+			'a potato',
 		] );
 	}
 

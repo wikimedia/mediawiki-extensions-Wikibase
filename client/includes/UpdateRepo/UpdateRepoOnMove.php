@@ -62,7 +62,7 @@ class UpdateRepoOnMove extends UpdateRepo {
 			'entityId' => $this->getEntityId()->getSerialization(),
 			'oldTitle' => $this->title->getPrefixedText(),
 			'newTitle' => $this->newTitle->getPrefixedText(),
-			'user' => $this->user->getName()
+			'user' => $this->user->getName(),
 		];
 	}
 

@@ -96,7 +96,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 				$entity->getId(),
 				$statement->getGuid(),
 				$value->getArrayValue(),
-				$this->getExpectedSummary( $statement, $value )
+				$this->getExpectedSummary( $statement, $value ),
 			];
 		}
 
@@ -274,7 +274,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 			$options->setOption( 'formatter-builders-text/plain', [
 				'VT:wikibase-entityid' => function() use ( $idFormatter ) {
 					return new EntityIdValueFormatter( $idFormatter );
-				}
+				},
 			] );
 
 			$factory = WikibaseRepo::getValueFormatterFactory();

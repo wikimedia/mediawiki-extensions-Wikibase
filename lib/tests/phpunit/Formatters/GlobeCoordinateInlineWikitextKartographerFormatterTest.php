@@ -35,7 +35,7 @@ class GlobeCoordinateInlineWikitextKartographerFormatterTest extends \PHPUnit\Fr
 					0.1,
 					GlobeCoordinateValue::GLOBE_EARTH
 				),
-				'<maplink latitude="1" longitude="2">{"type":"Feature","geometry":{"type":"Point","coordinates":[2,1]}}</maplink>'
+				'<maplink latitude="1" longitude="2">{"type":"Feature","geometry":{"type":"Point","coordinates":[2,1]}}</maplink>',
 			],
 			'moon' => [
 				new GlobeCoordinateValue(
@@ -43,7 +43,7 @@ class GlobeCoordinateInlineWikitextKartographerFormatterTest extends \PHPUnit\Fr
 					0.1,
 					'http://www.wikidata.org/entity/Q405'
 				),
-				'1, 2'
+				'1, 2',
 			],
 		];
 	}

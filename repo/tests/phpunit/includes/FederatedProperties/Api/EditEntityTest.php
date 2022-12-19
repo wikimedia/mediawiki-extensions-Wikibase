@@ -66,7 +66,7 @@ class EditEntityTest extends FederatedPropertiesApiTestCase {
 	public function testCreatingANewLocalProperty(): void {
 		$expectedLabel = 'local prop';
 
-		[ $result, ] = $this->doApiRequestWithToken( [
+		[ $result ] = $this->doApiRequestWithToken( [
 			'action' => 'wbeditentity',
 			'new' => 'property',
 			'data' => json_encode( [
@@ -114,7 +114,7 @@ class EditEntityTest extends FederatedPropertiesApiTestCase {
 			] ),
 		];
 
-		[ $result, ] = $this->doApiRequestWithToken( $params );
+		[ $result ] = $this->doApiRequestWithToken( $params );
 
 		$this->assertArrayHasKey(
 			'success',

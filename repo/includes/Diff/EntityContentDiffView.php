@@ -107,7 +107,7 @@ class EntityContentDiffView extends DifferenceEngine {
 			) {
 				$editQuery = [
 					'action' => 'edit',
-					'restore' => $rev->getId()
+					'restore' => $rev->getId(),
 				];
 				$msg = $this->msg( 'wikibase-restoreold' )->text();
 				$header .= ' ' . $this->msg( 'parentheses' )->rawParams(

@@ -110,7 +110,7 @@ class MovePageNotice implements SpecialMovepageAfterMoveHook {
 			'div',
 			[
 				'id' => 'wbc-after-page-move',
-				'class' => 'plainlinks'
+				'class' => 'plainlinks',
 			],
 			wfMessage( 'wikibase-after-page-move', $itemLink )->parse()
 		);

@@ -481,7 +481,7 @@ class ReferenceListTest extends \PHPUnit\Framework\TestCase {
 		$snaks = [
 			new PropertyNoValueSnak( 1 ),
 			new PropertyNoValueSnak( 3 ),
-			new PropertyNoValueSnak( 2 )
+			new PropertyNoValueSnak( 2 ),
 		];
 
 		$references->addNewReference( $snaks );

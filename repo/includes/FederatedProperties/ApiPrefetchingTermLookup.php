@@ -166,7 +166,7 @@ class ApiPrefetchingTermLookup extends EntityTermLookupBase implements Prefetchi
 		$termTypeMapping = [
 			TermTypes::TYPE_ALIAS => 'aliases',
 			TermTypes::TYPE_DESCRIPTION => 'descriptions',
-			TermTypes::TYPE_LABEL => 'labels'
+			TermTypes::TYPE_LABEL => 'labels',
 		];
 
 		$translation = [];

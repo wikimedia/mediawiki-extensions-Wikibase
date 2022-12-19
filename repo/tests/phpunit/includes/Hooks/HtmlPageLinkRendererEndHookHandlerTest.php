@@ -372,12 +372,12 @@ class HtmlPageLinkRendererEndHookHandlerTest extends HtmlPageLinkRendererEndHook
 		yield 'existing entity' => [
 			'entityId' => self::ITEM_WITH_LABEL,
 			'expectedUrl' => 'some-wiki/wiki/Item:' . self::ITEM_WITH_LABEL,
-			'isDeleted' => false
+			'isDeleted' => false,
 		];
 		yield 'deleted entity' => [
 			'entityId' => self::ITEM_DELETED,
 			'expectedUrl' => 'some-wiki/wiki/Item:' . self::ITEM_DELETED,
-			'isDeleted' => true
+			'isDeleted' => true,
 		];
 	}
 

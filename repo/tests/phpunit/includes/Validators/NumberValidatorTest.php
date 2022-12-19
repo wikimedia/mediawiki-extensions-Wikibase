@@ -41,7 +41,7 @@ class NumberValidatorTest extends \PHPUnit\Framework\TestCase {
 		$data = [
 			'numeric string' => [ '3.4', 'bad-type', [ 'number', 'string' ] ],
 			'boolean' => [ false, 'bad-type', [ 'number', 'boolean' ] ],
-			'null' => [ null, 'bad-type', [ 'number', 'NULL' ] ]
+			'null' => [ null, 'bad-type', [ 'number', 'NULL' ] ],
 		];
 
 		return $data;

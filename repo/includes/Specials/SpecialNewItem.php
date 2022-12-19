@@ -209,7 +209,7 @@ class SpecialNewItem extends SpecialNewEntity {
 
 					return true;
 				},
-				'label-message' => 'wikibase-newitem-site'
+				'label-message' => 'wikibase-newitem-site',
 			];
 
 			$formFields[ self::FIELD_PAGE ] = [
@@ -238,7 +238,7 @@ class SpecialNewItem extends SpecialNewEntity {
 
 					return true;
 				},
-				'label-message' => 'wikibase-newitem-page'
+				'label-message' => 'wikibase-newitem-page',
 			];
 		}
 

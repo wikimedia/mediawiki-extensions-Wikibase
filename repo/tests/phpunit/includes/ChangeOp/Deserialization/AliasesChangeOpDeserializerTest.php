@@ -66,7 +66,7 @@ class AliasesChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 
 				$deserializer = $this->newAliasesChangeOpDeserializer( $validator );
 				$deserializer->createEntityChangeOp( [
-					'aliases' => [ 'en' => [ 'language' => 'de', 'value' => 'foo' ] ]
+					'aliases' => [ 'en' => [ 'language' => 'de', 'value' => 'foo' ] ],
 				] );
 			},
 			'test-error'

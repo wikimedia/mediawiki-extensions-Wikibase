@@ -122,8 +122,8 @@ class EntityDataTestProvider {
 			'!!', // output regex
 			303,  // http code
 			[ // headers
-				'Location' => '!.+!'
-			]
+				'Location' => '!.+!',
+			],
 		];
 
 		$cases[] = [ // #6: mime type
@@ -136,8 +136,8 @@ class EntityDataTestProvider {
 			'!^\{.*Raarr!s', // output regex
 			200,       // http code
 			[ // headers
-				'Content-Type' => '!^application/json(;|$)!'
-			]
+				'Content-Type' => '!^application/json(;|$)!',
+			],
 		];
 
 		$cases[] = [ // #7: bad format
@@ -161,8 +161,8 @@ class EntityDataTestProvider {
 			'!^\{.*Raarr!s', // output regex
 			200,       // http code
 			[ // headers
-				'Content-Type' => '!^application/json(;|$)!'
-			]
+				'Content-Type' => '!^application/json(;|$)!',
+			],
 		];
 
 		$cases[] = [ // #9: malformed id
@@ -219,8 +219,8 @@ class EntityDataTestProvider {
 			'!!', // output regex
 			200,  // http code
 			[ // headers
-				'Content-Type' => '!^application/json!'
-			]
+				'Content-Type' => '!^application/json!',
+			],
 		];
 
 		// #21: format=html does trigger a 303
@@ -234,8 +234,8 @@ class EntityDataTestProvider {
 			'!!', // output regex
 			303,  // http code
 			[ // headers
-				'Location' => '!Q42$!'
-			]
+				'Location' => '!Q42$!',
+			],
 		];
 
 		// #22: format=html&revision=4242 does trigger a 303 to the correct rev
@@ -250,8 +250,8 @@ class EntityDataTestProvider {
 			'!!', // output regex
 			303,  // http code
 			[ // headers
-				'Location' => '!Q42(\?|&)oldid=4242!'
-			]
+				'Location' => '!Q42(\?|&)oldid=4242!',
+			],
 		];
 
 		// #23: id=q42&format=json does not trigger a redirect
@@ -265,8 +265,8 @@ class EntityDataTestProvider {
 			'!!', // output regex
 			200,  // http code
 			[ // headers
-				'Content-Type' => '!^application/json!'
-			]
+				'Content-Type' => '!^application/json!',
+			],
 		];
 
 		// #24: /Q5 does trigger a 303
@@ -277,8 +277,8 @@ class EntityDataTestProvider {
 			'!!', // output regex
 			303,  // http code
 			[ // headers
-				'Location' => '!/Q42\.[-./\w]+$!'
-			]
+				'Location' => '!/Q42\.[-./\w]+$!',
+			],
 		];
 
 		// #25: /Q5.json does not trigger a redirect
@@ -289,8 +289,8 @@ class EntityDataTestProvider {
 			'!!', // output regex
 			200,  // http code
 			[ // headers
-				'Content-Type' => '!^application/json!'
-			]
+				'Content-Type' => '!^application/json!',
+			],
 		];
 
 		// #26: /q5.json does trigger a 301
@@ -301,8 +301,8 @@ class EntityDataTestProvider {
 			'!!', // output regex
 			301,  // http code
 			[ // headers
-				'Location' => '!/Q42\.json$!'
-			]
+				'Location' => '!/Q42\.json$!',
+			],
 		];
 
 		// #27: /q5:1234.json does trigger a 301 to the correct rev
@@ -313,8 +313,8 @@ class EntityDataTestProvider {
 			'!!', // output regex
 			301,  // http code
 			[ // headers
-				'Location' => '!Q42\.json[\?&]oldid=4242!'
-			]
+				'Location' => '!Q42\.json[\?&]oldid=4242!',
+			],
 		];
 
 		// #28: /Q5.application/json does trigger a 301
@@ -325,8 +325,8 @@ class EntityDataTestProvider {
 			'!!', // output regex
 			301,  // http code
 			[ // headers
-				'Location' => '!Q42\.json!'
-			]
+				'Location' => '!Q42\.json!',
+			],
 		];
 
 		// #29: /Q5.html does trigger a 303
@@ -337,8 +337,8 @@ class EntityDataTestProvider {
 			'!!', // output regex
 			303,  // http code
 			[ // headers
-				'Location' => '!Q42$!'
-			]
+				'Location' => '!Q42$!',
+			],
 		];
 
 		// #30: /Q5.xyz triggers a 415
@@ -356,7 +356,7 @@ class EntityDataTestProvider {
 			'Q42',      // subpage
 			[],
 			[ // headers
-				'Accept' => 'text/foobar'
+				'Accept' => 'text/foobar',
 			],
 			'!!', // output regex
 			406,  // http code
@@ -368,13 +368,13 @@ class EntityDataTestProvider {
 			'Q42',      // subpage
 			[], // parameters
 			[ // headers
-				'Accept' => 'text/HTML'
+				'Accept' => 'text/HTML',
 			],
 			'!!', // output regex
 			303,  // http code
 			[ // headers
-				'Location' => '!Q42$!'
-			]
+				'Location' => '!Q42$!',
+			],
 		];
 
 		// #33: /Q5 with "Accept: application/json" triggers a 303
@@ -382,13 +382,13 @@ class EntityDataTestProvider {
 			'Q42',      // subpage
 			[], // parameters
 			[ // headers
-				'Accept' => 'application/foobar, application/json'
+				'Accept' => 'application/foobar, application/json',
 			],
 			'!!', // output regex
 			303,  // http code
 			[ // headers
-				'Location' => '!/Q42.json$!'
-			]
+				'Location' => '!/Q42.json$!',
+			],
 		];
 
 		// #34: /Q5 with "Accept: text/html; q=0.5, application/json" uses weights for 303
@@ -396,13 +396,13 @@ class EntityDataTestProvider {
 			'Q42',      // subpage
 			[], // parameters
 			[ // headers
-				'Accept' => 'text/html; q=0.5, application/json'
+				'Accept' => 'text/html; q=0.5, application/json',
 			],
 			'!!', // output regex
 			303,  // http code
 			[ // headers
-				'Location' => '!/Q42.json$!'
-			]
+				'Location' => '!/Q42.json$!',
+			],
 		];
 
 		// If-Modified-Since handling
@@ -412,7 +412,7 @@ class EntityDataTestProvider {
 			'Q42.json',	  // subpage
 			[], // parameters
 			[ // headers
-				'If-Modified-Since' => wfTimestamp( TS_RFC2822, '20000101000000' )
+				'If-Modified-Since' => wfTimestamp( TS_RFC2822, '20000101000000' ),
 			],
 			'!!', // output regex
 			200,  // http code
@@ -423,7 +423,7 @@ class EntityDataTestProvider {
 			'Q42.json',	  // subpage
 			[], // parameters
 			[ // headers
-				'If-Modified-Since' => '20131213141516'
+				'If-Modified-Since' => '20131213141516',
 			],
 			'!!', // output regex
 			304,  // http code
@@ -482,8 +482,8 @@ class EntityDataTestProvider {
 			'!!', // output regex
 			303,  // http code
 			[ // headers
-				'Location' => '!/Q42\.json$!'
-			]
+				'Location' => '!/Q42\.json$!',
+			],
 		];
 
 		// #42: /Q42.json with forced redirect
@@ -496,8 +496,8 @@ class EntityDataTestProvider {
 			'!!', // output regex
 			303,  // http code
 			[ // headers
-				'Location' => '!/Q42\.json!'
-			]
+				'Location' => '!/Q42\.json!',
+			],
 		];
 
 		// #43: /q42.json with forced redirect triggers a 301, not a 303
@@ -510,8 +510,8 @@ class EntityDataTestProvider {
 			'!!', // output regex
 			301,  // http code
 			[ // headers
-				'Location' => '!/Q42\.json$!'
-			]
+				'Location' => '!/Q42\.json$!',
+			],
 		];
 
 		$cases['Invalid flavor'] = [

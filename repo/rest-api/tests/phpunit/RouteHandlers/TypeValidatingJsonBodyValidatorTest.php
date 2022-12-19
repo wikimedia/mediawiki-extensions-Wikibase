@@ -108,7 +108,7 @@ class TypeValidatingJsonBodyValidatorTest extends TestCase {
 			[
 				'fieldName' => $fieldName,
 				'expectedType' => $expectedType,
-				'code' => TypeValidatingJsonBodyValidator::TYPE_MISMATCH_CODE
+				'code' => TypeValidatingJsonBodyValidator::TYPE_MISMATCH_CODE,
 			]
 		);
 	}

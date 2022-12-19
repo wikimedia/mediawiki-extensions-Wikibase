@@ -28,8 +28,8 @@ class MessageExceptionLocalizerTest extends \PHPUnit\Framework\TestCase {
 			'MessageException' => [
 				$exception,
 				'wikibase-entitydata-storage-error',
-				[ 'Q1', 123 ]
-			]
+				[ 'Q1', 123 ],
+			],
 		];
 	}
 

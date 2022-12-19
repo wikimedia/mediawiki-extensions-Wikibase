@@ -44,11 +44,11 @@ class EntityIdHtmlLinkFormatterFactoryTest extends ServiceWiringTestCase {
 
 	public function settingsProvider(): iterable {
 		yield 'federated properties disabled' => [ [
-			'federatedPropertiesEnabled' => false
+			'federatedPropertiesEnabled' => false,
 		], EntityIdHtmlLinkFormatterFactory::class ];
 
 		yield 'federated properties enabled' => [ [
-			'federatedPropertiesEnabled' => true
+			'federatedPropertiesEnabled' => true,
 		], WrappingEntityIdFormatterFactory::class ];
 	}
 

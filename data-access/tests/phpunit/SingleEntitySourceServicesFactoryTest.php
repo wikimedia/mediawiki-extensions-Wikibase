@@ -44,7 +44,7 @@ class SingleEntitySourceServicesFactoryTest extends TestCase {
 				LanguageFallbackChainFactory::class,
 				Serializer::class,
 				EntityTypeDefinitions::class,
-				RepoDomainDbFactory::class
+				RepoDomainDbFactory::class,
 			]
 		);
 

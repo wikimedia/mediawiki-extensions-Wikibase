@@ -17,7 +17,7 @@ use Wikibase\Lib\SimpleCacheWithBagOStuff;
 class SimpleCacheWithBagOStuffTest extends SimpleCacheTestCase {
 
 	protected $skippedTests = [
-		'testClear' => 'Not possible to implement for BagOStuff'
+		'testClear' => 'Not possible to implement for BagOStuff',
 	];
 
 	/**

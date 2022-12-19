@@ -398,12 +398,12 @@ class GetEntities extends ApiBase {
 			'sites' => [
 				ParamValidator::PARAM_TYPE => $siteIds,
 				ParamValidator::PARAM_ISMULTI => true,
-				ParamValidator::PARAM_ALLOW_DUPLICATES => true
+				ParamValidator::PARAM_ALLOW_DUPLICATES => true,
 			],
 			'titles' => [
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_ISMULTI => true,
-				ParamValidator::PARAM_ALLOW_DUPLICATES => true
+				ParamValidator::PARAM_ALLOW_DUPLICATES => true,
 			],
 			'redirects' => [
 				ParamValidator::PARAM_TYPE => [ 'yes', 'no' ],
@@ -422,16 +422,16 @@ class GetEntities extends ApiBase {
 			],
 			'languagefallback' => [
 				ParamValidator::PARAM_TYPE => 'boolean',
-				ParamValidator::PARAM_DEFAULT => false
+				ParamValidator::PARAM_DEFAULT => false,
 			],
 			'normalize' => [
 				ParamValidator::PARAM_TYPE => 'boolean',
-				ParamValidator::PARAM_DEFAULT => false
+				ParamValidator::PARAM_DEFAULT => false,
 			],
 			'sitefilter' => [
 				ParamValidator::PARAM_TYPE => $siteIds,
 				ParamValidator::PARAM_ISMULTI => true,
-				ParamValidator::PARAM_ALLOW_DUPLICATES => true
+				ParamValidator::PARAM_ALLOW_DUPLICATES => true,
 			],
 		] );
 	}
@@ -466,7 +466,7 @@ class GetEntities extends ApiBase {
 			'action=wbgetentities&ids=Q42&props=sitelinks'
 			=> 'apihelp-wbgetentities-example-12',
 			'action=wbgetentities&ids=Q42&sitefilter=enwiki'
-			=> 'apihelp-wbgetentities-example-13'
+			=> 'apihelp-wbgetentities-example-13',
 		];
 	}
 

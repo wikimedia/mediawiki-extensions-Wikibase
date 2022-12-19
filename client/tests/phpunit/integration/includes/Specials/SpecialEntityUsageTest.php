@@ -43,7 +43,7 @@ class SpecialEntityUsageTest extends SpecialPageTestBase {
 				'aspects' => 'S',
 				'eu_page_id' => 22,
 				'eu_entity_id' => 'Q3',
-			]
+			],
 		];
 
 		return new FakeResultWrapper( $rows );
@@ -137,7 +137,7 @@ class SpecialEntityUsageTest extends SpecialPageTestBase {
 				$row->value,
 				$row->namespace,
 				$row->title,
-				$row->eu_page_id
+				$row->eu_page_id,
 			];
 
 			$this->assertUsageAspects( $expectedUsages[$i++], $row->aspects );
@@ -174,22 +174,22 @@ class SpecialEntityUsageTest extends SpecialPageTestBase {
 				[
 					'eu_page_id' => 11,
 					'eu_entity_id' => 'Q3',
-					'eu_aspect' => 'S'
+					'eu_aspect' => 'S',
 				],
 				[
 					'eu_page_id' => 11,
 					'eu_entity_id' => 'Q3',
-					'eu_aspect' => 'O'
+					'eu_aspect' => 'O',
 				],
 				[
 					'eu_page_id' => 11,
 					'eu_entity_id' => 'Q4',
-					'eu_aspect' => 'L.en'
+					'eu_aspect' => 'L.en',
 				],
 				[
 					'eu_page_id' => 22,
 					'eu_entity_id' => 'Q3',
-					'eu_aspect' => 'L.de'
+					'eu_aspect' => 'L.de',
 				],
 			],
 		];

@@ -219,7 +219,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 			'id' => 'wb-modifyterm-value',
 			'type' => 'text',
 			'default' => $this->getRequest()->getVal( 'value' ) ?: $this->value,
-			'nodata' => true
+			'nodata' => true,
 		];
 
 		$languageName = $this->languageNameUtils
@@ -239,17 +239,17 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 				'language' => [
 					'name' => 'language',
 					'type' => 'hidden',
-					'default' => $this->languageCode
+					'default' => $this->languageCode,
 				],
 				'id' => [
 					'name' => 'id',
 					'type' => 'hidden',
-					'default' => $entity->getId()->getSerialization()
+					'default' => $entity->getId()->getSerialization(),
 				],
 				'remove' => [
 					'name' => 'remove',
 					'type' => 'hidden',
-					'default' => 'remove'
+					'default' => 'remove',
 				],
 				'value' => $valueinput,
 				'revid' => [
@@ -270,7 +270,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 				'label-message' => 'wikibase-modifyterm-language',
 				'type' => 'text',
 				'default' => $this->languageCode,
-				'id' => 'wb-modifyterm-language'
+				'id' => 'wb-modifyterm-language',
 			];
 			// Messages:
 			// wikibase-setlabel-label

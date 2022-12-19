@@ -42,7 +42,7 @@ class DeleteDispatcherTest extends TestCase {
 		return [
 			'no client databases' => [ 1, [], $wikiPage, $entityIdLookupNotCalled ],
 			'no archive records' => [ 0,  $this->localClientDatabases, $wikiPage, $entityIdLookupNotCalled ],
-			'not an entity page' => [ 1, $this->localClientDatabases, $wikiPage, $entityIdLookup ]
+			'not an entity page' => [ 1, $this->localClientDatabases, $wikiPage, $entityIdLookup ],
 		];
 	}
 

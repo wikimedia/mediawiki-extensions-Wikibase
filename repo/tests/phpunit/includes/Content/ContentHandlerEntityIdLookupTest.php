@@ -53,7 +53,7 @@ class ContentHandlerEntityIdLookupTest extends MediaWikiIntegrationTestCase {
 		return new EntityContentFactory(
 			[
 				'item' => ItemContent::CONTENT_MODEL_ID,
-				'property' => PropertyContent::CONTENT_MODEL_ID
+				'property' => PropertyContent::CONTENT_MODEL_ID,
 			],
 			[
 				'item' => function() {
@@ -61,7 +61,7 @@ class ContentHandlerEntityIdLookupTest extends MediaWikiIntegrationTestCase {
 				},
 				'property' => function() {
 					return WikibaseRepo::getPropertyHandler();
-				}
+				},
 			]
 		);
 	}

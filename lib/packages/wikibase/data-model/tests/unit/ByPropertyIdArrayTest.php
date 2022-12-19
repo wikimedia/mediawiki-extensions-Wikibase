@@ -372,19 +372,19 @@ class ByPropertyIdArrayTest extends \PHPUnit\Framework\TestCase {
 			[ $c[0], $c[1], $c[3] ],
 			$c[5],
 			1,
-			[ $c[0], $c[1], $c[5], $c[3] ]
+			[ $c[0], $c[1], $c[5], $c[3] ],
 		];
 		$argLists[] = [
 			[ $c[0], $c[1], $c[5], $c[3] ],
 			$c[2],
 			2,
-			[ $c[0], $c[1], $c[2], $c[3], $c[5] ]
+			[ $c[0], $c[1], $c[2], $c[3], $c[5] ],
 		];
 		$argLists[] = [
 			[ $c[0], $c[1], $c[2], $c[3], $c[5] ],
 			$c[4],
 			null,
-			[ $c[0], $c[1], $c[2], $c[3], $c[4], $c[5] ]
+			[ $c[0], $c[1], $c[2], $c[3], $c[4], $c[5] ],
 		];
 
 		return $argLists;

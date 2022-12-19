@@ -30,25 +30,25 @@ class UsageUpdaterTest extends \PHPUnit\Framework\TestCase {
 		return [
 			'empty' => [
 				[],
-				[]
+				[],
 			],
 
 			'add usages' => [
 				[ new EntityUsage( $q1, EntityUsage::LABEL_USAGE ),
 					new EntityUsage( $q2, EntityUsage::ALL_USAGE ) ],
-				[ $q1, $q2 ]
+				[ $q1, $q2 ],
 			],
 
 			'add usages, Q1 already subscribed' => [
 				[ new EntityUsage( $q1, EntityUsage::LABEL_USAGE ),
 					new EntityUsage( $q2, EntityUsage::ALL_USAGE ) ],
-				[ $q2 ]
+				[ $q2 ],
 			],
 
 			'add usages, all usages already subscribed' => [
 				[ new EntityUsage( $q1, EntityUsage::LABEL_USAGE ),
 					new EntityUsage( $q2, EntityUsage::ALL_USAGE ) ],
-				[]
+				[],
 			],
 		];
 	}
@@ -168,11 +168,11 @@ class UsageUpdaterTest extends \PHPUnit\Framework\TestCase {
 		$q2 = new ItemId( 'Q2' );
 		$usages = [
 			new EntityUsage( $q1, EntityUsage::LABEL_USAGE ),
-			new EntityUsage( $q2, EntityUsage::ALL_USAGE )
+			new EntityUsage( $q2, EntityUsage::ALL_USAGE ),
 		];
 
 		return [
-			'empty' => [ [], [], [], ],
+			'empty' => [ [], [], [] ],
 
 			'only new usages' => [
 				[],
@@ -183,37 +183,37 @@ class UsageUpdaterTest extends \PHPUnit\Framework\TestCase {
 			'all usages removed' => [
 				$usages,
 				[],
-				[ $q1 ]
+				[ $q1 ],
 			],
 
 			'new and old usages are the same' => [
 				$usages,
 				$usages,
-				[]
+				[],
 			],
 
 			'new and old usages differ (removal)' => [
 				$usages,
 				[ $usages[1] ],
-				[ $q2 ]
+				[ $q2 ],
 			],
 
 			'new and old usages differ (addition)' => [
 				[ $usages[1] ],
 				$usages,
-				[]
+				[],
 			],
 
 			'new and old usages differ (disjoint)' => [
 				[ $usages[1] ],
 				[ $usages[0] ],
-				[]
+				[],
 			],
 
 			'new and old usages differ (disjoint, unsubscribe)' => [
 				[ $usages[1] ],
 				[ $usages[0] ],
-				[ $q1 ]
+				[ $q1 ],
 			],
 		];
 	}

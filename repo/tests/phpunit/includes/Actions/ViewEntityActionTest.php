@@ -102,7 +102,7 @@ class ViewEntityActionTest extends ActionTestCase {
 
 		$params = [
 			'diff' => $latest->getId(),
-			'oldid' => $previous->getId()
+			'oldid' => $previous->getId(),
 		];
 
 		$output = $this->executeViewAction( $page, $params );
@@ -121,7 +121,7 @@ class ViewEntityActionTest extends ActionTestCase {
 			->getPreviousRevision( $latest );
 
 		$params = [
-			'oldid' => $previous->getId()
+			'oldid' => $previous->getId(),
 		];
 
 		$output = $this->executeViewAction( $page, $params );

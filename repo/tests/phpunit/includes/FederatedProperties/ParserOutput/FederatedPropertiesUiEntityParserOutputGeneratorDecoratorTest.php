@@ -110,7 +110,7 @@ class FederatedPropertiesUiEntityParserOutputGeneratorDecoratorTest extends Enti
 					$this->newEntityReferenceExtractor(),
 					$this->getEntityTitleLookupMock(),
 					$this->getServiceContainer()->getLinkBatchFactory()
-				)
+				),
 			];
 		}
 

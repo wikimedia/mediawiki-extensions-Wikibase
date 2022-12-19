@@ -148,15 +148,15 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 					'code' => $this->logicalOr(
 						$this->equalTo( 'unknown_language' ),
 						$this->equalTo( 'badvalue' )
-					)
-				] ]
+					),
+				] ],
 			],
 			[ //1
 				'p' => [ 'language' => 'nl', 'value' => TermTestHelper::makeOverlyLongString() ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'modification-failed'
-				] ]
+					'code' => 'modification-failed',
+				] ],
 			],
 			[ //2
 				'p' => [ 'language' => 'pt', 'value' => 'normalValue' ],
@@ -166,26 +166,26 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 						$this->equalTo( 'notoken' ),
 						$this->equalTo( 'missingparam' )
 					),
-					'message' => 'The "token" parameter must be set'
+					'message' => 'The "token" parameter must be set',
 				] ],
-				'token' => false
+				'token' => false,
 			],
 			[ //3
 				'p' => [ 'language' => 'pt', 'value' => 'normalValue', 'token' => '88888888888888888888888888888888+\\' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
 					'code' => 'badtoken',
-					'message' => 'Invalid CSRF token.'
+					'message' => 'Invalid CSRF token.',
 				] ],
-				'token' => false
+				'token' => false,
 			],
 			[ //4
 				'p' => [ 'id' => 'noANid', 'language' => 'fr', 'value' => 'normalValue' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
 					'code' => 'invalid-entity-id',
-					'message' => 'Invalid entity ID.'
-				] ]
+					'message' => 'Invalid entity ID.',
+				] ],
 			],
 			[ //5
 				'p' => [ 'site' => 'qwerty', 'language' => 'pl', 'value' => 'normalValue' ],
@@ -195,29 +195,29 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 						$this->equalTo( 'unknown_site' ),
 						$this->equalTo( 'badvalue' )
 					),
-					'message' => 'Unrecognized value for parameter "site"'
-				] ]
+					'message' => 'Unrecognized value for parameter "site"',
+				] ],
 			],
 			[ //6
 				'p' => [ 'site' => 'enwiki', 'title' => 'GhskiDYiu2nUd', 'language' => 'en', 'value' => 'normalValue' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
 					'code' => 'no-such-entity-link',
-				] ]
+				] ],
 			],
 			[ //7
 				'p' => [ 'title' => 'Blub', 'language' => 'en', 'value' => 'normalValue' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
 					'code' => 'param-missing',
-				] ]
+				] ],
 			],
 			[ //8
 				'p' => [ 'site' => 'enwiki', 'language' => 'en', 'value' => 'normalValue' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
 					'code' => 'param-missing',
-				] ]
+				] ],
 			],
 		];
 	}

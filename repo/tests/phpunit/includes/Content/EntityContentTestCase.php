@@ -105,7 +105,7 @@ abstract class EntityContentTestCase extends MediaWikiIntegrationTestCase {
 		$this->setLabel( $entityContent->getEntity(), 'en', "cake" );
 
 		return [
-			[ $entityContent, 'cake' ]
+			[ $entityContent, 'cake' ],
 		];
 	}
 
@@ -175,13 +175,13 @@ abstract class EntityContentTestCase extends MediaWikiIntegrationTestCase {
 				$empty,
 				[
 					'wb-claims' => 0,
-				]
+				],
 			],
 			'labels' => [
 				$labeledEntityContent,
 				[
 					'wb-claims' => 0,
-				]
+				],
 			],
 		];
 	}
@@ -229,32 +229,32 @@ abstract class EntityContentTestCase extends MediaWikiIntegrationTestCase {
 			'empty' => [
 				$empty,
 				$empty,
-				new EntityContentDiff( new EntityDiff(), new Diff(), $entityType )
+				new EntityContentDiff( new EntityDiff(), new Diff(), $entityType ),
 			],
 			'blank' => [
 				$blank,
 				$blank,
-				new EntityContentDiff( new EntityDiff(), new Diff(), $entityType )
+				new EntityContentDiff( new EntityDiff(), new Diff(), $entityType ),
 			],
 			'same' => [
 				$ham,
 				$ham,
-				new EntityContentDiff( new EntityDiff(), new Diff(), $entityType )
+				new EntityContentDiff( new EntityDiff(), new Diff(), $entityType ),
 			],
 			'empty to ham' => [
 				$empty,
 				$ham,
-				new EntityContentDiff( $emptyToHamDiff, new Diff(), $entityType )
+				new EntityContentDiff( $emptyToHamDiff, new Diff(), $entityType ),
 			],
 			'blank to ham' => [
 				$blank,
 				$ham,
-				new EntityContentDiff( $blankToHamDiff, new Diff(), $entityType )
+				new EntityContentDiff( $blankToHamDiff, new Diff(), $entityType ),
 			],
 			'spam to ham' => [
 				$spam,
 				$ham,
-				new EntityContentDiff( $spamToHamDiff, new Diff(), $entityType )
+				new EntityContentDiff( $spamToHamDiff, new Diff(), $entityType ),
 			],
 		];
 	}
@@ -304,12 +304,12 @@ abstract class EntityContentTestCase extends MediaWikiIntegrationTestCase {
 			'empty' => [
 				$spam,
 				new EntityContentDiff( new EntityDiff(), new Diff(), $entityType ),
-				$spam
+				$spam,
 			],
 			'spam to ham' => [
 				$spam,
 				new EntityContentDiff( $spamToHamDiff, new Diff(), $entityType ),
-				$ham
+				$ham,
 			],
 		];
 	}

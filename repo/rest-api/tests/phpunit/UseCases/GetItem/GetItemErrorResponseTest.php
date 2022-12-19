@@ -38,13 +38,13 @@ class GetItemErrorResponseTest extends TestCase {
 		yield 'from invalid item ID' => [
 			new ValidationError( ItemIdValidator::CODE_INVALID, [ ItemIdValidator::CONTEXT_VALUE => 'X123' ] ),
 			ErrorResponse::INVALID_ITEM_ID,
-			'Not a valid item ID: X123'
+			'Not a valid item ID: X123',
 		];
 
 		yield 'from invalid field' => [
 			new ValidationError( GetItemValidator::CODE_INVALID_FIELD, [ GetItemValidator::CONTEXT_FIELD_VALUE => 'unknown_field' ] ),
 			ErrorResponse::INVALID_FIELD,
-			'Not a valid field: unknown_field'
+			'Not a valid field: unknown_field',
 		];
 	}
 

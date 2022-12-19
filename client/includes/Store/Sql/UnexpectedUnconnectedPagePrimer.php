@@ -223,11 +223,11 @@ class UnexpectedUnconnectedPagePrimer {
 						'pp_propname IS NULL',
 						$dbr->makeList( [
 							'pp_propname = ' . $dbr->addQuotes( 'unexpectedUnconnectedPage' ),
-							'pp_sortkey > 0'
-						], IDatabase::LIST_AND )
+							'pp_sortkey > 0',
+						], IDatabase::LIST_AND ),
 					],
 					IDatabase::LIST_OR
-				)
+				),
 			],
 			__METHOD__,
 			[
@@ -240,10 +240,10 @@ class UnexpectedUnconnectedPagePrimer {
 					[
 						'page_id = pp_page',
 						'pp_propname' => [
-							'wikibase_item', 'unexpectedUnconnectedPage', 'expectedUnconnectedPage'
-						]
-					]
-				]
+							'wikibase_item', 'unexpectedUnconnectedPage', 'expectedUnconnectedPage',
+						],
+					],
+				],
 			]
 		);
 		$pages = [];

@@ -32,7 +32,7 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 		'p31-en-de' => 'api-prefetching-term-lookup-test-data-p31-en-de.json',
 		'p18-p31-en' => 'api-prefetching-term-lookup-test-data-p18-p31-en.json',
 		'p18-p31-de' => 'api-prefetching-term-lookup-test-data-p18-p31-de.json',
-		'p18-p31-en-de' => 'api-prefetching-term-lookup-test-data-p18-p31-en-de.json'
+		'p18-p31-en-de' => 'api-prefetching-term-lookup-test-data-p18-p31-en-de.json',
 	];
 
 	private $data = [];
@@ -62,25 +62,25 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 				new FederatedPropertyId( 'http://wikidata.org/entity/P18', 'P18' ),
 				[ 'en' ],
 				$this->responseDataFiles[ 'p18-en' ],
-				[ 'en' => 'image' ]
+				[ 'en' => 'image' ],
 			],
 			'p18-en-de' => [
 				new FederatedPropertyId( 'http://wikidata.org/entity/P18', 'P18' ),
 				[ 'en', 'de' ],
 				$this->responseDataFiles[ 'p18-en-de' ],
-				[ 'en' => 'image', 'de' => 'Bild' ]
+				[ 'en' => 'image', 'de' => 'Bild' ],
 			],
 			'p31-en' => [
 				new FederatedPropertyId( 'http://wikidata.org/entity/P31', 'P31' ),
 				[ 'en' ],
 				$this->responseDataFiles[ 'p31-en' ],
-				[ 'en' => 'instance of' ]
+				[ 'en' => 'instance of' ],
 			],
 			'p31-en-de' => [
 				new FederatedPropertyId( 'http://wikidata.org/entity/P31', 'P31' ),
 				[ 'en', 'de' ],
 				$this->responseDataFiles[ 'p31-en-de' ],
-				[ 'en' => 'instance of', 'de' => 'ist ein(e)' ]
+				[ 'en' => 'instance of', 'de' => 'ist ein(e)' ],
 			],
 		];
 	}
@@ -119,13 +119,13 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 			new FederatedPropertyId( 'http://wikidata.org/entity/P18', 'P18' ),
 			[ 'en' ],
 			$this->responseDataFiles[ 'p18-en-de' ],
-			[ 'en' => 'image of relevant illustration of the subject' ]
+			[ 'en' => 'image of relevant illustration of the subject' ],
 		];
 		yield 'en and de descriptions' => [
 			new FederatedPropertyId( 'http://wikidata.org/entity/P18', 'P18' ),
 			[ 'en', 'de' ],
 			$this->responseDataFiles[ 'p18-en-de' ],
-			[ 'en' => 'image of relevant illustration of the subject', 'de' => 'Foto, Grafik etc. des Objekts' ]
+			[ 'en' => 'image of relevant illustration of the subject', 'de' => 'Foto, Grafik etc. des Objekts' ],
 		];
 	}
 
@@ -283,7 +283,7 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 				'action' => 'wbgetentities',
 				'ids' => implode( '|', $ids ),
 				'props' => 'labels|descriptions|datatype',
-				'format' => 'json'
+				'format' => 'json',
 			];
 
 		return $params;

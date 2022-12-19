@@ -49,7 +49,7 @@ class RemoveClaimsTest extends FederatedPropertiesApiTestCase {
 			'action' => 'wbremoveclaims',
 			'claim' => implode( '|', array_map( function( $statement ) {
 				return $statement->getGuid();
-			}, $statements ) )
+			}, $statements ) ),
 		];
 
 		$this->setExpectedApiException( wfMessage( 'wikibase-federated-properties-federated-property-api-error-message' ) );
@@ -71,7 +71,7 @@ class RemoveClaimsTest extends FederatedPropertiesApiTestCase {
 
 		[ $result ] = $this->doApiRequestWithToken( [
 			'action' => 'wbremoveclaims',
-			'claim' => $statementToRemove->getGuid()
+			'claim' => $statementToRemove->getGuid(),
 		] );
 
 		$this->assertArrayHasKey( 'success', $result );

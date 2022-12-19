@@ -157,7 +157,7 @@ class OtherProjectsSidebarGenerator {
 		$attributes = [
 			'msg' => 'wikibase-otherprojects-' . $site->getGroup(),
 			'class' => 'wb-otherproject-link wb-otherproject-' . $site->getGroup(),
-			'href' => $site->getPageUrl( $siteLink->getPageName() )
+			'href' => $site->getPageUrl( $siteLink->getPageName() ),
 		];
 
 		$siteLanguageCode = $site->getLanguageCode();

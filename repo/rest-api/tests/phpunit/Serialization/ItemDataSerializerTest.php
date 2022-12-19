@@ -76,7 +76,7 @@ class ItemDataSerializerTest extends TestCase {
 		$itemData = $this->newItemDataBuilderWithSomeId( [ ItemData::FIELD_LABELS ] )
 			->setLabels( new TermList( [
 				new Term( 'en', $enLabel ),
-				new Term( 'ko', $koLabel )
+				new Term( 'ko', $koLabel ),
 			] ) )
 			->build();
 
@@ -92,7 +92,7 @@ class ItemDataSerializerTest extends TestCase {
 		$itemData = $this->newItemDataBuilderWithSomeId( [ ItemData::FIELD_DESCRIPTIONS ] )
 			->setDescriptions( new TermList( [
 				new Term( 'en', $enDescription ),
-				new Term( 'de', $deDescription )
+				new Term( 'de', $deDescription ),
 			] ) )
 			->build();
 
@@ -169,13 +169,13 @@ class ItemDataSerializerTest extends TestCase {
 	public function itemDataFieldsProvider(): Generator {
 		yield [
 			$this->newItemDataBuilderWithSomeId( [] )->build(),
-			[ 'id' ]
+			[ 'id' ],
 		];
 		yield [
 			$this->newItemDataBuilderWithSomeId( [ ItemData::FIELD_TYPE ] )
 				->setType( Item::ENTITY_TYPE )
 				->build(),
-			[ 'id', 'type' ]
+			[ 'id', 'type' ],
 		];
 		yield [
 			$this->newItemDataBuilderWithSomeId(
@@ -185,13 +185,13 @@ class ItemDataSerializerTest extends TestCase {
 				->setDescriptions( new TermList() )
 				->setAliases( new AliasGroupList() )
 				->build(),
-			[ 'id', 'labels', 'descriptions', 'aliases' ]
+			[ 'id', 'labels', 'descriptions', 'aliases' ],
 		];
 		yield [
 			$this->newItemDataBuilderWithSomeId( [ ItemData::FIELD_STATEMENTS ] )
 				->setStatements( new StatementList() )
 				->build(),
-			[ 'id', 'statements' ]
+			[ 'id', 'statements' ],
 		];
 		yield [
 			$this->newItemDataBuilderWithSomeId( ItemData::VALID_FIELDS )
@@ -202,7 +202,7 @@ class ItemDataSerializerTest extends TestCase {
 				->setStatements( new StatementList() )
 				->setSiteLinks( new SiteLinkList() )
 				->build(),
-			[ 'id', 'type', 'labels', 'descriptions', 'aliases', 'statements', 'sitelinks' ]
+			[ 'id', 'type', 'labels', 'descriptions', 'aliases', 'statements', 'sitelinks' ],
 		];
 	}
 

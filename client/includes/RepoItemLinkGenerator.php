@@ -168,7 +168,7 @@ class RepoItemLinkGenerator {
 	private function getNewItemUrl( Title $title ) {
 		$params = [
 			'site' => $this->siteGlobalId,
-			'page' => $title->getPrefixedText()
+			'page' => $title->getPrefixedText(),
 		];
 
 		$url = $this->repoLinker->getPageUrl( 'Special:NewItem' );
@@ -200,7 +200,7 @@ class RepoItemLinkGenerator {
 		$html = Html::rawElement(
 			'span',
 			[
-				'class' => "wb-langlinks-$action wb-langlinks-link"
+				'class' => "wb-langlinks-$action wb-langlinks-link",
 			],
 			$link
 		);

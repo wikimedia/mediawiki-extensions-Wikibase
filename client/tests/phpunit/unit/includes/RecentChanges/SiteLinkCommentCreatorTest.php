@@ -46,20 +46,20 @@ class SiteLinkCommentCreatorTest extends \PHPUnit\Framework\TestCase {
 			$changes[] = [
 				$update[0],
 				EntityChange::UPDATE,
-				$update[1]
+				$update[1],
 			];
 		}
 
 		$changes[] = [
 			$this->getDeleteDiff(),
 			EntityChange::REMOVE,
-			'(wikibase-comment-remove)'
+			'(wikibase-comment-remove)',
 		];
 
 		$changes[] = [
 			$this->getRestoreDiff(),
 			EntityChange::RESTORE,
-			'(wikibase-comment-restore)'
+			'(wikibase-comment-restore)',
 		];
 
 		return $changes;
@@ -86,28 +86,28 @@ class SiteLinkCommentCreatorTest extends \PHPUnit\Framework\TestCase {
 			'Sitelink change that does affect the current page' => [
 				true,
 				$this->getChangeLinkDiff( 'Foo', 'Foo1' ),
-				$foo
+				$foo,
 			],
 			'Sitelink change that does not affect current page' => [
 				false,
 				$this->getChangeLinkDiff( 'Foo', 'Foo1' ),
-				$bar
+				$bar,
 			],
 			'Badge changes are not target specific' => [
 				false,
 				$this->getBadgeChangeDiff(),
-				$japan
+				$japan,
 			],
 			'Remove link changes are not target specific' => [
 				false,
 				$this->getRemoveLinkDiff(),
-				$japan
+				$japan,
 			],
 			'Add link changes are not target specific' => [
 				false,
 				$this->getAddLinkDiff(),
-				$japan
-			]
+				$japan,
+			],
 		];
 	}
 
@@ -160,7 +160,7 @@ class SiteLinkCommentCreatorTest extends \PHPUnit\Framework\TestCase {
 
 	protected function getOldLinkChangeDiff() {
 		$diff = new Diff( [
-			'enwiki' => new DiffOpChange( 'Japan', 'Tokyo' )
+			'enwiki' => new DiffOpChange( 'Japan', 'Tokyo' ),
 		] );
 
 		return $diff;

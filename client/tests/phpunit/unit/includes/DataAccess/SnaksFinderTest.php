@@ -69,7 +69,7 @@ class SnaksFinderTest extends \PHPUnit\Framework\TestCase {
 
 		$snaksNormal = [
 			new PropertyValueSnak( $propertyId, new StringValue( 'a kitten!' ) ),
-			new PropertyValueSnak( $propertyId, new StringValue( 'two kittens!!' ) )
+			new PropertyValueSnak( $propertyId, new StringValue( 'two kittens!!' ) ),
 		];
 		$snakDeprecated = [ new PropertyValueSnak( $propertyId, new StringValue( 'three kittens!!!' ) ) ];
 
@@ -80,7 +80,7 @@ class SnaksFinderTest extends \PHPUnit\Framework\TestCase {
 				$snakDeprecated,
 				$item,
 				new NumericPropertyId( 'P1337' ),
-				[ Statement::RANK_DEPRECATED ]
+				[ Statement::RANK_DEPRECATED ],
 			],
 		];
 	}

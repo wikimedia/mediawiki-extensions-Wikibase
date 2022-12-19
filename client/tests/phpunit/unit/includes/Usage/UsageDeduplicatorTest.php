@@ -40,23 +40,23 @@ class UsageDeduplicatorTest extends \PHPUnit\Framework\TestCase {
 		return [
 			[
 				[ $q1LabelEn, $q1Label ],
-				[ $q1Label ]
+				[ $q1Label ],
 			],
 			[
 				[ $q1LabelEn ],
-				[ $q1LabelEn ]
+				[ $q1LabelEn ],
 			],
 			[
 				[ $q1Label, $q1LabelEn, $q2Description, $q1All ],
-				[ $q1Label, $q2Description, $q1All ]
+				[ $q1Label, $q2Description, $q1All ],
 			],
 			[
 				[ $q1LabelEn, $q2Label, $q1Statement1 ],
-				[ $q1LabelEn, $q2Label, $q1Statement1 ]
+				[ $q1LabelEn, $q2Label, $q1Statement1 ],
 			],
 			[
 				[ $q2Description, $q2DescriptionFa, $q1All ],
-				[ $q2Description, $q1All ]
+				[ $q2Description, $q1All ],
 			],
 			[
 				[ $q1LabelEn, $q1Statement1, $q1Statement2 ],
@@ -73,7 +73,7 @@ class UsageDeduplicatorTest extends \PHPUnit\Framework\TestCase {
 			[
 				[ $q1LabelEn, $q1LabelDe, $q1LabelRu, $q1LabelPl ],
 				[ $q1Label ],
-			]
+			],
 		];
 	}
 
@@ -90,7 +90,7 @@ class UsageDeduplicatorTest extends \PHPUnit\Framework\TestCase {
 
 		$usageModifierLimits = [
 			EntityUsage::STATEMENT_USAGE => 2,
-			EntityUsage::LABEL_USAGE => 3
+			EntityUsage::LABEL_USAGE => 3,
 		];
 
 		$this->assertEquals( $expected, ( new UsageDeduplicator( $usageModifierLimits ) )->deduplicate( $usages ) );

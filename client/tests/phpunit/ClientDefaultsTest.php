@@ -58,7 +58,7 @@ class ClientDefaultsTest extends MediaWikiIntegrationTestCase {
 						'interwikiPrefix' => 'repo',
 					],
 				],
-			]
+			],
 		];
 
 		yield 'local repo, all values set' => [
@@ -102,7 +102,7 @@ class ClientDefaultsTest extends MediaWikiIntegrationTestCase {
 						'interwikiPrefix' => 'repo',
 					],
 				],
-			]
+			],
 		];
 
 		if ( WikibaseSettings::isRepoEnabled() ) {
@@ -145,14 +145,14 @@ class ClientDefaultsTest extends MediaWikiIntegrationTestCase {
 						],
 					],
 					'sharedCacheKeyPrefix' => 'wikibase_shared/mw_mywiki',
-				]
+				],
 			];
 		}
 
 		if ( WikibaseSettings::isRepoEnabled() ) {
 			yield 'sharedCacheKeyPrefix explicitly set' => [
 				[ // $settings
-					'sharedCacheKeyPrefix' => 'wikibase_shared/wikidata_1_25wmf24'
+					'sharedCacheKeyPrefix' => 'wikibase_shared/wikidata_1_25wmf24',
 				],
 				[ // $wg
 					'wgServer' => 'http://www.acme.com',
@@ -180,7 +180,7 @@ class ClientDefaultsTest extends MediaWikiIntegrationTestCase {
 					'repoScriptPath' => '/mediawiki',
 					'siteGlobalID' => 'mw_mywiki',
 					'sharedCacheKeyPrefix' => 'wikibase_shared/wikidata_1_25wmf24',
-				]
+				],
 			];
 		}
 	}

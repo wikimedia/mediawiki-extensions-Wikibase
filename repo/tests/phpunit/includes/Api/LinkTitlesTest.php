@@ -94,7 +94,7 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 					'tosite' => 'nnwiki',
 					'totitle' => 'Oslo',
 					'fromsite' => 'nowiki',
-					'fromtitle' => 'AnotherPage'
+					'fromtitle' => 'AnotherPage',
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
@@ -102,9 +102,9 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 						$this->equalTo( 'notoken' ),
 						$this->equalTo( 'missingparam' )
 					),
-					'message' => 'The "token" parameter must be set'
+					'message' => 'The "token" parameter must be set',
 				] ],
-				'token' => false
+				'token' => false,
 			],
 			'badtoken' => [
 				'p' => [
@@ -112,110 +112,110 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 					'totitle' => 'Oslo',
 					'fromsite' => 'nowiki',
 					'fromtitle' => 'AnotherPage',
-					'token' => '88888888888888888888888888888888+\\'
+					'token' => '88888888888888888888888888888888+\\',
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
 					'code' => 'badtoken',
-					'message' => 'Invalid CSRF token.'
+					'message' => 'Invalid CSRF token.',
 				] ],
-				'token' => false
+				'token' => false,
 			],
 			'add two links already exist together' => [
 				'p' => [
 					'tosite' => 'nnwiki',
 					'totitle' => 'Oslo',
 					'fromsite' => 'nowiki',
-					'fromtitle' => 'Oslo'
+					'fromtitle' => 'Oslo',
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'common-item'
-				] ]
+					'code' => 'common-item',
+				] ],
 			],
 			'no common item' => [
 				'p' => [
 					'tosite' => 'dewiki',
 					'totitle' => 'Berlin',
 					'fromsite' => 'nlwiki',
-					'fromtitle' => 'Oslo'
+					'fromtitle' => 'Oslo',
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'no-common-item'
-				] ]
+					'code' => 'no-common-item',
+				] ],
 			],
 			'add two links from the same site' => [
 				'p' => [
 					'tosite' => 'nnwiki',
 					'totitle' => 'Hammerfest',
 					'fromsite' => 'nnwiki',
-					'fromtitle' => 'Hammerfest'
+					'fromtitle' => 'Hammerfest',
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'param-illegal'
-				] ]
+					'code' => 'param-illegal',
+				] ],
 			],
 			'missing title' => [
 				'p' => [
 					'tosite' => 'nnwiki',
 					'totitle' => '',
 					'fromsite' => 'dewiki',
-					'fromtitle' => 'Hammerfest'
+					'fromtitle' => 'Hammerfest',
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
 					'code' => $this->logicalOr(
 						$this->equalTo( 'nototitle' ),
 						$this->equalTo( 'missingparam' )
-					)
-				] ]
+					),
+				] ],
 			],
 			'bad tosite' => [
 				'p' => [
 					'tosite' => 'qwerty',
 					'totitle' => 'Hammerfest',
 					'fromsite' => 'nnwiki',
-					'fromtitle' => 'Hammerfest'
+					'fromtitle' => 'Hammerfest',
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
 					'code' => $this->logicalOr(
 						$this->equalTo( 'unknown_tosite' ),
 						$this->equalTo( 'badvalue' )
-					)
-				] ]
+					),
+				] ],
 			],
 			'bad fromsite' => [
 				'p' => [
 					'tosite' => 'nnwiki',
 					'totitle' => 'Hammerfest',
 					'fromsite' => 'qwerty',
-					'fromtitle' => 'Hammerfest'
+					'fromtitle' => 'Hammerfest',
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
 					'code' => $this->logicalOr(
 						$this->equalTo( 'unknown_fromsite' ),
 						$this->equalTo( 'badvalue' )
-					)
-				] ]
+					),
+				] ],
 			],
 			'missing site' => [
 				'p' => [
 					'tosite' => 'nnwiki',
 					'totitle' => 'APage',
 					'fromsite' => '',
-					'fromtitle' => 'Hammerfest'
+					'fromtitle' => 'Hammerfest',
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
 					'code' => $this->logicalOr(
 						$this->equalTo( 'unknown_fromsite' ),
 						$this->equalTo( 'badvalue' )
-					)
-				] ]
+					),
+				] ],
 			],
 		];
 	}

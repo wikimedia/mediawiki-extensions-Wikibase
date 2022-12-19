@@ -36,7 +36,7 @@ class SetQualifierTest extends FederatedPropertiesApiTestCase {
 			'claim' => $guid,
 			'snaktype' => 'value',
 			'property' => 'something cool',
-			'value' => 'mega cool!'
+			'value' => 'mega cool!',
 		];
 
 		$this->setExpectedApiException( wfMessage( 'wikibase-federated-properties-federated-property-api-error-message' ) );

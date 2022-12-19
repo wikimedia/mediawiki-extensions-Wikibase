@@ -100,7 +100,7 @@ class ImageLinksDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 			[
 				$set1,
 				[ '1.jpg' ],
-				[ '1.jpg' => [ 'time' => false, 'sha1' => false ] ]
+				[ '1.jpg' => [ 'time' => false, 'sha1' => false ] ],
 			],
 			[
 				$set2,
@@ -118,8 +118,8 @@ class ImageLinksDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 					'Exists.png' => [
 						'time' => '20121026200049',
 						'sha1' => 'ccde261bb2a1d49e1c9bfd06847f9a8c2b640fe9',
-					]
-				]
+					],
+				],
 			],
 		];
 	}

@@ -207,11 +207,11 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 					'descriptions' => [
 						'pt' => [
 							'language' => 'pt',
-							'value' => 'ptDesc'
+							'value' => 'ptDesc',
 						],
 						'pl' => [
 							'language' => 'pl',
-							'value' => 'Longer Description For An Item'
+							'value' => 'Longer Description For An Item',
 						],
 						'_element' => 'description',
 						'_type' => 'kvp',
@@ -222,11 +222,11 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 					'labels' => [
 						'de' => [
 							'language' => 'de',
-							'value' => 'foo'
+							'value' => 'foo',
 						],
 						'zh_classical' => [
 							'language' => 'zh_classical',
-							'value' => 'Longer Label'
+							'value' => 'Longer Label',
 						],
 						'_element' => 'label',
 						'_type' => 'kvp',
@@ -304,7 +304,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 											'P65',
 											'P68',
 											'_element' => 'property',
-										]
+										],
 									],
 									'_element' => 'reference',
 								],
@@ -322,14 +322,14 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 							'badges' => [
 								'Q333',
 								'_element' => 'badge',
-							]
+							],
 						],
 						'zh_classicalwiki' => [
 							'site' => 'zh_classicalwiki',
 							'title' => 'User:Addshore',
 							'badges' => [
 								'_element' => 'badge',
-							]
+							],
 						],
 						'_element' => 'sitelink',
 						'_type' => 'kvp',
@@ -429,7 +429,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 						'de-formal' => [
 							'language' => 'de',
 							'value' => 'Oslo-de',
-							'for-language' => 'de-formal'
+							'for-language' => 'de-formal',
 						],
 						'es' => [
 							'language' => 'en',
@@ -439,12 +439,12 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 						'qug' => [
 							'language' => 'en',
 							'value' => 'Oslo-en',
-							'for-language' => 'qug'
+							'for-language' => 'qug',
 						],
 						'zh-my' => [
 							'language' => 'en',
 							'value' => 'Oslo-en',
-							'for-language' => 'zh-my'
+							'for-language' => 'zh-my',
 						],
 						'_element' => 'label',
 						'_type' => 'kvp',
@@ -459,7 +459,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 						'qug' => [
 							'language' => 'es',
 							'value' => 'desc-es',
-							'for-language' => 'qug'
+							'for-language' => 'qug',
 						],
 						'zh-my' => [
 							'language' => 'zh-my',
@@ -1250,7 +1250,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 		$result = $this->getDefaultResult();
 		$reference = new Reference(
 			new SnakList( [
-				new PropertyValueSnak( new NumericPropertyId( 'P12' ), new StringValue( 'stringVal' ) )
+				new PropertyValueSnak( new NumericPropertyId( 'P12' ), new StringValue( 'stringVal' ) ),
 			] )
 		);
 
@@ -1302,7 +1302,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 						'_kvpmerge' => true,
 					],
 					'_type' => 'assoc',
-				]
+				],
 			],
 			[
 				[
@@ -1320,7 +1320,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 						'_kvpmerge' => true,
 					],
 					'_type' => 'assoc',
-				]
+				],
 			],
 			[
 				[
@@ -1338,7 +1338,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 						'_kvpmerge' => true,
 					],
 					'_type' => 'assoc',
-				]
+				],
 			],
 			[
 				[
@@ -1363,7 +1363,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 						'_kvpmerge' => true,
 					],
 					'_type' => 'assoc',
-				]
+				],
 			],
 		];
 	}
@@ -1376,7 +1376,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 			'normalized' => [
 				'n' => [
 					'from' => 'berlin',
-					'to' => 'Berlin'
+					'to' => 'Berlin',
 				],
 			],
 			'_type' => 'assoc',
@@ -1416,30 +1416,30 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 	public function provideSetList() {
 		return [
 			'null path' => [ null, 'foo', [], 'letter', false,
-				[ 'foo' => [], '_type' => 'assoc' ]
+				[ 'foo' => [], '_type' => 'assoc' ],
 			],
 			'empty path' => [ [], 'foo', [ 'x', 'y' ], 'letter', false,
 				[
-					'foo' => [ 'x', 'y' ], '_type' => 'assoc'
-				]
+					'foo' => [ 'x', 'y' ], '_type' => 'assoc',
+				],
 			],
 			'string path' => [ 'ROOT', 'foo', [ 'x', 'y' ], 'letter', false,
 				[
 					'ROOT' => [
-						'foo' => [ 'x', 'y' ]
+						'foo' => [ 'x', 'y' ],
 					],
 					'_type' => 'assoc',
-				]
+				],
 			],
 			'actual path' => [ [ 'one', 'two' ], 'foo', [ 'X' => 'x', 'Y' => 'y' ], 'letter', false,
 				[
 					'one' => [
 						'two' => [
-							'foo' => [ 'X' => 'x', 'Y' => 'y' ]
-						]
+							'foo' => [ 'X' => 'x', 'Y' => 'y' ],
+						],
 					],
 					'_type' => 'assoc',
-				]
+				],
 			],
 			'indexed' => [ 'ROOT', 'foo', [ 'X' => 'x', 'Y' => 'y' ], 'letter', true,
 				[
@@ -1452,10 +1452,10 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 			'pre-set element name' => [ 'ROOT', 'foo', [ 'x', 'y', '_element' => '_thingy' ], 'letter', true,
 				[
 					'ROOT' => [
-						'foo' => [ 'x', 'y', '_element' => '_thingy', '_type' => 'array' ]
+						'foo' => [ 'x', 'y', '_element' => '_thingy', '_type' => 'array' ],
 					],
 					'_type' => 'assoc',
-				]
+				],
 			],
 		];
 	}
@@ -1503,29 +1503,29 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 				[
 					'foo' => 'value',
 					'_type' => 'assoc',
-				]
+				],
 			],
 			'string path' => [ 'ROOT', 'foo', 'value', false,
 				[
 					'ROOT' => [ 'foo' => 'value' ],
-					'_type' => 'assoc'
-				]
+					'_type' => 'assoc',
+				],
 			],
 			'actual path' => [ [ 'one', 'two' ], 'foo', [ 'X' => 'x', 'Y' => 'y' ], true,
 				[
 					'one' => [
 						'two' => [
-							'foo' => [ 'X' => 'x', 'Y' => 'y' ]
-						]
+							'foo' => [ 'X' => 'x', 'Y' => 'y' ],
+						],
 					],
-					'_type' => 'assoc'
-				]
+					'_type' => 'assoc',
+				],
 			],
 			'indexed' => [ 'ROOT', 'foo', 'value', true,
 				[
 					'ROOT' => [ 'foo' => 'value' ],
-					'_type' => 'assoc'
-				]
+					'_type' => 'assoc',
+				],
 			],
 		];
 	}
@@ -1570,51 +1570,51 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 				[ 'value', '_type' => 'assoc' ],
 			],
 			'empty path' => [ [], null, 'value', 'letter', false,
-				[ 'value', '_type' => 'assoc' ]
+				[ 'value', '_type' => 'assoc' ],
 			],
 			'string path' => [ 'ROOT', null, 'value', 'letter', false,
 				[
 					'ROOT' => [ 'value' ],
-					'_type' => 'assoc'
-				]
+					'_type' => 'assoc',
+				],
 			],
 			'actual path' => [ [ 'one', 'two' ], null, [ 'X' => 'x', 'Y' => 'y' ], 'letter', false,
 				[
 					'one' => [
 						'two' => [ [ 'X' => 'x', 'Y' => 'y' ] ],
 					],
-					'_type' => 'assoc'
-				]
+					'_type' => 'assoc',
+				],
 			],
 			'int key' => [ 'ROOT', -2, 'value', 'letter', false,
 				[
 					'ROOT' => [ -2 => 'value' ],
 					'_type' => 'assoc',
-				]
+				],
 			],
 			'string key' => [ 'ROOT', 'Q7', 'value', 'letter', false,
 				[
 					'ROOT' => [ 'Q7' => 'value' ],
 					'_type' => 'assoc',
-				]
+				],
 			],
 			'null key indexed' => [ 'ROOT', null, 'value', 'letter', true,
 				[
 					'ROOT' => [ 'value', '_element' => 'letter' ],
 					'_type' => 'assoc',
-				]
+				],
 			],
 			'int key indexed' => [ 'ROOT', -2, 'value', 'letter', true,
 				[
 					'ROOT' => [ -2 => 'value', '_element' => 'letter' ],
 					'_type' => 'assoc',
-				]
+				],
 			],
 			'string key indexed' => [ 'ROOT', 'Q7', 'value', 'letter', true,
 				[
 					'ROOT' => [ 'Q7' => 'value', '_element' => 'letter' ],
 					'_type' => 'assoc',
-				]
+				],
 			],
 		];
 	}
@@ -1668,30 +1668,30 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 					'aliases' => [
 						'_element' => 'language',
 						'_type' => 'kvp',
-						'_kvpkeyname' => 'id'
+						'_kvpkeyname' => 'id',
 					],
 					'descriptions' => [
 						'_element' => 'description',
 						'_type' => 'kvp',
 						'_kvpkeyname' => 'language',
-						'_kvpmerge' => true
+						'_kvpmerge' => true,
 					],
 					'labels' => [
 						'_element' => 'label',
 						'_type' => 'kvp',
 						'_kvpkeyname' => 'language',
-						'_kvpmerge' => true
+						'_kvpmerge' => true,
 					],
 					'claims' => [
 						'_element' => 'property',
 						'_type' => 'kvp',
-						'_kvpkeyname' => 'id'
+						'_kvpkeyname' => 'id',
 					],
 					'sitelinks' => [
 						'_element' => 'sitelink',
 						'_type' => 'kvp',
 						'_kvpkeyname' => 'site',
-						'_kvpmerge' => true
+						'_kvpmerge' => true,
 					],
 				],
 				'_element' => 'entity',

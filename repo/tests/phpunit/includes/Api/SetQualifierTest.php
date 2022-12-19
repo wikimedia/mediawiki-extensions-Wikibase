@@ -111,7 +111,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 		return [
 			[ PropertyNoValueSnak::class ],
 			[ PropertySomeValueSnak::class ],
-			[ PropertyValueSnak::class, new StringValue( 'o_O' ) ]
+			[ PropertyValueSnak::class, new StringValue( 'o_O' ) ],
 		];
 	}
 
@@ -149,7 +149,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 			'claim' => $guid,
 			'snaktype' => $newQualifier->getType(),
 			'property' => $newQualifier->getPropertyId()->getSerialization(),
-			'value' => FormatJson::encode( $newQualifier->getDataValue()->getArrayValue() )
+			'value' => FormatJson::encode( $newQualifier->getDataValue()->getArrayValue() ),
 		] );
 	}
 

@@ -53,7 +53,7 @@ class PropertyDataTypeSearchHelperTest extends \PHPUnit\Framework\TestCase {
 			->with( $searchText, $searchLanguageCode, $searchEntityType, $searchLimit, $searchStrictLanguage )
 			->willReturn( [
 				$property1TermSearchResult,
-				$property2TermSearchResult
+				$property2TermSearchResult,
 			] );
 
 		$dataTypeLookup = $this->createMock( PropertyDataTypeLookup::class );
@@ -79,7 +79,7 @@ class PropertyDataTypeSearchHelperTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $property1TermSearchResult->getMatchedTermType(), $results[0]->getMatchedTermType() );
 		$this->assertEquals(
 			array_merge( $property1TermSearchResult->getMetaData(), [
-				PropertyDataTypeSearchHelper::DATATYPE_META_DATA_KEY => $property1Datatype
+				PropertyDataTypeSearchHelper::DATATYPE_META_DATA_KEY => $property1Datatype,
 			] ),
 			$results[0]->getMetaData()
 		);
@@ -91,7 +91,7 @@ class PropertyDataTypeSearchHelperTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $property2TermSearchResult->getMatchedTermType(), $results[1]->getMatchedTermType() );
 		$this->assertEquals(
 			array_merge( $property2TermSearchResult->getMetaData(), [
-				PropertyDataTypeSearchHelper::DATATYPE_META_DATA_KEY => $property2Datatype
+				PropertyDataTypeSearchHelper::DATATYPE_META_DATA_KEY => $property2Datatype,
 			] ),
 			$results[1]->getMetaData()
 		);

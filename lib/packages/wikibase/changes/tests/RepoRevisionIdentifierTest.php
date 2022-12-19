@@ -37,7 +37,7 @@ class RepoRevisionIdentifierTest extends \PHPUnit\Framework\TestCase {
 		return [
 			'Invalid entityIdSerialization' => $invalidEntityIdSerialization,
 			'Invalid revisionTimestamp' => $invalidRevisionTimestamp,
-			'Invalid revisionId' => $invalidRevisionId
+			'Invalid revisionId' => $invalidRevisionId,
 		];
 	}
 

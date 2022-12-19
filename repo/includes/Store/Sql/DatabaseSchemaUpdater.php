@@ -66,12 +66,12 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 		);
 		if ( !$updater->updateRowExists( __CLASS__ . '::rebuildPropertyTerms' ) ) {
 			$updater->addExtensionUpdate( [
-				[ __CLASS__, 'rebuildPropertyTerms' ]
+				[ __CLASS__, 'rebuildPropertyTerms' ],
 			] );
 		}
 		if ( !$updater->updateRowExists( __CLASS__ . '::rebuildItemTerms' ) ) {
 			$updater->addExtensionUpdate( [
-				[ __CLASS__, 'rebuildItemTerms' ]
+				[ __CLASS__, 'rebuildItemTerms' ],
 			] );
 		}
 
@@ -119,7 +119,7 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 			// for reasons that do not need explaining at this juncture.
 			$dbUpdater->addExtensionUpdate( [
 				[ __CLASS__, 'fillSubscriptionTable' ],
-				$table
+				$table,
 			] );
 		}
 	}
@@ -280,7 +280,7 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 	private function getScriptPath( $name, $type ) {
 		$types = [
 			$type,
-			'mysql'
+			'mysql',
 		];
 
 		foreach ( $types as $type ) {

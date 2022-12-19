@@ -97,7 +97,7 @@ class FederatedPropertiesAwareDispatchingEntityIdParserTest extends TestCase {
 					'',
 					'',
 					''
-				)
+				),
 			],
 			new SubEntityTypesMapper( [] )
 		);

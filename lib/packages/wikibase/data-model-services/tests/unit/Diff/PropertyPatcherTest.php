@@ -116,7 +116,7 @@ class PropertyPatcherTest extends TestCase {
 				'claim' => new Diff( [
 					's42' => new DiffOpRemove( $s42 ),
 					's23' => new DiffOpAdd( $s23 ),
-				] )
+				] ),
 		] );
 
 		$property = Property::newFromType( 'kittens' );

@@ -21,18 +21,18 @@ class FallbackPropertyOrderProviderTest extends \PHPUnit\Framework\TestCase {
 			[
 				null,
 				null,
-				null
+				null,
 			],
 			[
 				'primary-return-value',
 				'primary-return-value',
-				'secondary-return-value'
+				'secondary-return-value',
 			],
 			[
 				'secondary-return-value',
 				null,
-				'secondary-return-value'
-			]
+				'secondary-return-value',
+			],
 		];
 	}
 

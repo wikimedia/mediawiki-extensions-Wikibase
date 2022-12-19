@@ -111,7 +111,7 @@ class PropertyHandlerTest extends EntityHandlerTestCase {
 
 	public function entityIdProvider() {
 		return [
-			[ 'P7' ]
+			[ 'P7' ],
 		];
 	}
 
@@ -179,7 +179,7 @@ class PropertyHandlerTest extends EntityHandlerTestCase {
 
 		yield 'claims' => [
 			$contentWithClaim,
-			[ 'wb-claims' => 1 ]
+			[ 'wb-claims' => 1 ],
 		];
 	}
 

@@ -43,11 +43,11 @@ class MonolingualHtmlFormatterTest extends MediaWikiIntegrationTestCase {
 		return [
 			'formatting' => [
 				new MonolingualTextValue( 'de', 'Hallo Welt' ),
-				'@^<span lang="de".*?>Hallo Welt<\/span>.*\Deutsch.*$@'
+				'@^<span lang="de".*?>Hallo Welt<\/span>.*\Deutsch.*$@',
 			],
 			'html/wikitext escaping' => [
 				new MonolingualTextValue( 'de', '[[Hallo&Welt]]' ),
-				'@^<span .*?>(\[\[|&#91;&#91;)Hallo(&amp;|&#38;)Welt(\]\]|&#93;&#93;)<\/span>.*$@'
+				'@^<span .*?>(\[\[|&#91;&#91;)Hallo(&amp;|&#38;)Welt(\]\]|&#93;&#93;)<\/span>.*$@',
 			],
 			'evil html' => [
 				new MonolingualTextValue(
@@ -56,7 +56,7 @@ class MonolingualHtmlFormatterTest extends MediaWikiIntegrationTestCase {
 						. '<a href="javascript:alert(\'gotcha!\')">evil</a>'
 				),
 				'@ onclick="alert|<script|<a @',
-				'not'
+				'not',
 			],
 		];
 	}

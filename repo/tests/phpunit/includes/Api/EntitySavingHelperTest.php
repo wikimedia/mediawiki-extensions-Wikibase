@@ -126,7 +126,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 			'allowCreation' => true,
 			'params' => $params,
 			'entityId' => new MediaInfoId( 'M7' ),
-			'EntityIdParser' => WikibaseRepo::getEntityIdParser()
+			'EntityIdParser' => WikibaseRepo::getEntityIdParser(),
 		] );
 
 		$return = $helper->loadEntity( $params );
@@ -143,7 +143,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 	public function testLoadEntity_without_creation_support() {
 		$helper = $this->newEntitySavingHelper( [
 			'params' => [ 'new' => 'item' ],
-			'dieErrorCode' => 'no-entity-id'
+			'dieErrorCode' => 'no-entity-id',
 		] );
 
 		$this->expectException( ApiUsageException::class );
@@ -154,19 +154,19 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 		return [
 			'no params' => [
 				[],
-				'no-entity-id'
+				'no-entity-id',
 			],
 			'baserevid but no entity' => [
 				[ 'baserevid' => 17 ],
-				'param-illegal'
+				'param-illegal',
 			],
 			'new bad' => [
 				[ 'new' => 'bad' ],
-				'no-such-entity-type'
+				'no-such-entity-type',
 			],
 			'unknown entity' => [
 				[ 'entity' => 'Q123' ],
-				'no-such-entity'
+				'no-such-entity',
 			],
 		];
 	}
@@ -280,7 +280,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 
 	public function testAttemptSave() {
 		$helper = $this->newEntitySavingHelper( [
-			'newEditEntityCalls' => 1
+			'newEditEntityCalls' => 1,
 		] );
 
 		$entity = new Item();
@@ -299,7 +299,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 	public function testSaveThrowsException_onNonWriteMode() {
 		$helper = $this->newEntitySavingHelper( [
 			'writeMode' => false,
-			'newEditEntityCalls' => 0
+			'newEditEntityCalls' => 0,
 		] );
 
 		$this->expectException( LogicException::class );

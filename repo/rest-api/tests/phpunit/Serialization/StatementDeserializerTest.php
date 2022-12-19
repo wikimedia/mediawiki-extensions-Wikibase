@@ -113,7 +113,7 @@ class StatementDeserializerTest extends TestCase {
 								'property' => [ 'id' => 'P234' ],
 								'value' => [ 'type' => 'somevalue' ],
 							],
-						]
+						],
 					],
 					[
 						'parts' => [
@@ -125,9 +125,9 @@ class StatementDeserializerTest extends TestCase {
 								'property' => [ 'id' => 'P456' ],
 								'value' => [ 'type' => 'somevalue' ],
 							],
-						]
+						],
 					],
-				]
+				],
 			],
 		];
 	}
@@ -151,7 +151,7 @@ class StatementDeserializerTest extends TestCase {
 				'id' => [ 'invalid' ],
 				'property' => [ 'id' => 'P123' ],
 				'value' => [ 'type' => 'somevalue' ],
-			]
+			],
 		];
 
 		yield 'invalid rank' => [

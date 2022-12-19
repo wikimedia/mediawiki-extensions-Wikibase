@@ -121,7 +121,7 @@ class RemoveStatementRouteHandler extends SimpleHandler {
 				self::PARAM_SOURCE => 'path',
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => true,
-			]
+			],
 		];
 	}
 
@@ -135,20 +135,20 @@ class RemoveStatementRouteHandler extends SimpleHandler {
 					self::PARAM_SOURCE => 'body',
 					ParamValidator::PARAM_TYPE => 'array',
 					ParamValidator::PARAM_REQUIRED => false,
-					ParamValidator::PARAM_DEFAULT => self::TAGS_PARAM_DEFAULT
+					ParamValidator::PARAM_DEFAULT => self::TAGS_PARAM_DEFAULT,
 				],
 				self::BOT_BODY_PARAM => [
 					self::PARAM_SOURCE => 'body',
 					ParamValidator::PARAM_TYPE => 'boolean',
 					ParamValidator::PARAM_REQUIRED => false,
-					ParamValidator::PARAM_DEFAULT => self::BOT_PARAM_DEFAULT
+					ParamValidator::PARAM_DEFAULT => self::BOT_PARAM_DEFAULT,
 				],
 				self::COMMENT_BODY_PARAM => [
 					self::PARAM_SOURCE => 'body',
 					ParamValidator::PARAM_TYPE => 'string',
 					ParamValidator::PARAM_REQUIRED => false,
-					ParamValidator::PARAM_DEFAULT => self::COMMENT_PARAM_DEFAULT
-				]
+					ParamValidator::PARAM_DEFAULT => self::COMMENT_PARAM_DEFAULT,
+				],
 			] ) : parent::getBodyValidator( $contentType );
 	}
 

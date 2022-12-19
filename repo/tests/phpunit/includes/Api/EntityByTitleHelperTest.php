@@ -157,13 +157,13 @@ class EntityByTitleHelperTest extends \PHPUnit\Framework\TestCase {
 				'foo_bar',
 				123,
 				// The normalization should be noted
-				1
+				1,
 			],
 			[
 				'Bar',
 				false,
 				// Already normalized
-				0
+				0,
 			],
 		];
 	}
@@ -195,13 +195,13 @@ class EntityByTitleHelperTest extends \PHPUnit\Framework\TestCase {
 				// Request with no sites
 				[],
 				[ 'barfoo' ],
-				false
+				false,
 			],
 			[
 				// Request with no titles
 				[ 'enwiki' ],
 				[],
-				false
+				false,
 			],
 		];
 	}

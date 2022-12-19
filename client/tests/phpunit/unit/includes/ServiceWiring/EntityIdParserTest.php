@@ -33,7 +33,7 @@ class EntityIdParserTest extends ServiceWiringTestCase {
 				'other' => [
 					EntityTypeDefinitions::ENTITY_ID_PATTERN => '/^O[1-9][0-9]*$/',
 					EntityTypeDefinitions::ENTITY_ID_BUILDER => $this->makeIdBuilder( '2000' ),
-				]
+				],
 			] ) );
 
 		$idParser = $this->getService( 'WikibaseClient.EntityIdParser' );

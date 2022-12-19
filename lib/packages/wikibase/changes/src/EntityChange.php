@@ -102,7 +102,7 @@ class EntityChange extends DiffChange {
 			'parent_id',
 			'central_user_id',
 			'user_text',
-			'comment'
+			'comment',
 		];
 
 		// strip extra fields from metadata

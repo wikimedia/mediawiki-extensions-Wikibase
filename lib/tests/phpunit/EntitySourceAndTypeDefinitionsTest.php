@@ -34,17 +34,17 @@ class EntitySourceAndTypeDefinitionsTest extends TestCase {
 				DatabaseEntitySource::TYPE => new EntityTypeDefinitions( [
 					'property' => [
 						EntityTypeDefinitions::ARTICLE_ID_LOOKUP_CALLBACK => $callback1,
-					]
+					],
 				] ),
 				ApiEntitySource::TYPE => new EntityTypeDefinitions( [
 					'property' => [
 						EntityTypeDefinitions::ARTICLE_ID_LOOKUP_CALLBACK => $callback2,
-					]
-				] )
+					],
+				] ),
 			],
 			[
 				NewDatabaseEntitySource::havingName( 'local' )->build(),
-				new ApiEntitySource( 'wikidorta', [ 'property' ], '', '', '', '' )
+				new ApiEntitySource( 'wikidorta', [ 'property' ], '', '', '', '' ),
 			]
 		);
 
@@ -52,11 +52,11 @@ class EntitySourceAndTypeDefinitionsTest extends TestCase {
 		$this->assertEquals(
 			[
 				'local' => [
-					'property' => $callback1
+					'property' => $callback1,
 				],
 				'wikidorta' => [
-					'property' => $callback2
-				]
+					'property' => $callback2,
+				],
 			],
 			$articleIdLookups
 		);

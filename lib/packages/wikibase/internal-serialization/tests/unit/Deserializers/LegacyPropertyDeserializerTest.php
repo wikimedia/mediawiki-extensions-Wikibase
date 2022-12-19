@@ -59,7 +59,7 @@ class LegacyPropertyDeserializerTest extends \PHPUnit\Framework\TestCase {
 		$this->expectDeserializationException();
 		$this->deserializer->deserialize( [
 			'datatype' => 'foo',
-			'entity' => 'spam spam spam'
+			'entity' => 'spam spam spam',
 		] );
 	}
 
@@ -67,7 +67,7 @@ class LegacyPropertyDeserializerTest extends \PHPUnit\Framework\TestCase {
 		$this->expectDeserializationException();
 		$this->deserializer->deserialize( [
 			'datatype' => 'foo',
-			'entity' => 'q42'
+			'entity' => 'q42',
 		] );
 	}
 
@@ -79,7 +79,7 @@ class LegacyPropertyDeserializerTest extends \PHPUnit\Framework\TestCase {
 	public function testGivenValidPropertyIdId_propertyIdIsSet() {
 		$property = $this->deserializer->deserialize( [
 			'datatype' => 'foo',
-			'entity' => 'p42'
+			'entity' => 'p42',
 		] );
 
 		$this->assertEquals( new NumericPropertyId( 'p42' ), $property->getId() );
@@ -92,7 +92,7 @@ class LegacyPropertyDeserializerTest extends \PHPUnit\Framework\TestCase {
 		/** @var Property $property */
 		$property = $this->deserializer->deserialize( [
 			'datatype' => 'foo',
-			'label' => $labels
+			'label' => $labels,
 		] );
 
 		$this->assertEquals( $labels, $property->getFingerprint()->getLabels()->toTextArray() );
@@ -121,7 +121,7 @@ class LegacyPropertyDeserializerTest extends \PHPUnit\Framework\TestCase {
 		/** @var Property $property */
 		$property = $this->deserializer->deserialize( [
 			'datatype' => 'foo',
-			'description' => $descriptions
+			'description' => $descriptions,
 		] );
 
 		$this->assertEquals( $descriptions, $property->getFingerprint()->getDescriptions()->toTextArray() );
@@ -139,7 +139,7 @@ class LegacyPropertyDeserializerTest extends \PHPUnit\Framework\TestCase {
 		/** @var Property $property */
 		$property = $this->deserializer->deserialize( [
 			'datatype' => 'foo',
-			'aliases' => $aliases
+			'aliases' => $aliases,
 		] );
 
 		$this->assertEquals( $aliases, $property->getFingerprint()->getAliasGroups()->toTextArray() );

@@ -21,19 +21,19 @@ class ChangedLanguagesCounterTest extends \PHPUnit\Framework\TestCase {
 		return [
 			'Entity changed' => [
 				new LanguageBoundChangeOpResultStub( $entityId, true, 'en' ),
-				1
+				1,
 			],
 			'Entity did not change' => [
 				new LanguageBoundChangeOpResultStub( $entityId, false, 'en' ),
-				0
+				0,
 			],
 			'Multiple changes in same language' => [
 				new ChangeOpsResult( $entityId, [
 					new LanguageBoundChangeOpResultStub( $entityId, true, 'en' ),
-					new LanguageBoundChangeOpResultStub( $entityId, true, 'en' )
+					new LanguageBoundChangeOpResultStub( $entityId, true, 'en' ),
 				] ),
-				1
-			]
+				1,
+			],
 		];
 	}
 

@@ -20,7 +20,7 @@ class EntityNamespaceLookupTest extends \PHPUnit\Framework\TestCase {
 			'property' => 122,
 			'mediainfo' => NS_FILE,
 		], [
-			'mediainfo' => 'mediainfo'
+			'mediainfo' => 'mediainfo',
 		] );
 	}
 
@@ -39,7 +39,7 @@ class EntityNamespaceLookupTest extends \PHPUnit\Framework\TestCase {
 		$lookup = $this->newInstance();
 
 		$expected = [
-			'mediainfo' => 'mediainfo'
+			'mediainfo' => 'mediainfo',
 		];
 
 		$this->assertSame( $expected, $lookup->getEntitySlots() );
@@ -91,19 +91,19 @@ class EntityNamespaceLookupTest extends \PHPUnit\Framework\TestCase {
 			'item' => 0,
 			'property' => 122,
 			'mediainfo' => NS_FILE,
-			'someentity' => 130
+			'someentity' => 130,
 		];
 
 		$expectedSlots = [
 			'mediainfo' => 'mediainfo',
-			'someentity' => 'fakeslot'
+			'someentity' => 'fakeslot',
 		];
 
 		$result = $lookup->merge( new EntityNamespaceLookup( [
 			'item' => 0,
-			'someentity' => 130
+			'someentity' => 130,
 		], [
-			'someentity' => 'fakeslot'
+			'someentity' => 'fakeslot',
 		] ) );
 
 		$this->assertSame( $expectedNamespaces, $result->getEntityNamespaces() );

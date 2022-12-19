@@ -60,7 +60,7 @@ class ChangeDeletionNotificationJobTest extends RecentChangesModificationTest {
 			[
 				'revisionIdentifiersJson' => $this->revisionIdentifiersToJson( [
 					new RepoRevisionIdentifier( 'Q1', '1', 1 ),
-				] )
+				] ),
 			]
 		);
 
@@ -78,7 +78,7 @@ class ChangeDeletionNotificationJobTest extends RecentChangesModificationTest {
 			$this->getClientDomainDb(),
 			MediaWikiServices::getInstance()->getMainConfig()->get( 'UpdateRowsPerQuery' ),
 			[
-				'revisionIdentifiersJson' => $this->revisionIdentifiersToJson( $revisionIdentifiers )
+				'revisionIdentifiersJson' => $this->revisionIdentifiersToJson( $revisionIdentifiers ),
 			]
 		);
 		$job->run();

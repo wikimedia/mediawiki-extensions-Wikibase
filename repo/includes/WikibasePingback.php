@@ -205,7 +205,7 @@ class WikibasePingback {
 			'SyntaxHighlight' => 'SH',
 			'Babel' => 'BBL',
 			'Auth_remoteuser' => 'AR',
-			'ArticlePlaceholder' => 'AP'
+			'ArticlePlaceholder' => 'AP',
 		];
 
 		$currentExtensions = array_keys( $this->extensionRegistry->getAllThings() );
@@ -240,7 +240,7 @@ class WikibasePingback {
 			'hasEntities'  => $hasEntities,
 			'federation'  => $federation,
 			'extensions'  => $extensions,
-			'termbox' => $this->wikibaseRepoSettings->getSetting( 'termboxEnabled' )
+			'termbox' => $this->wikibaseRepoSettings->getSetting( 'termboxEnabled' ),
 		];
 
 		$limit = ini_get( 'memory_limit' );

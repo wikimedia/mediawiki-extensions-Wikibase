@@ -80,7 +80,7 @@ class EntityDiffVisualizerFactory {
 		$langCode = $context->getLanguage()->getCode();
 		$options = new FormatterOptions( [
 			//TODO: fallback chain
-			ValueFormatter::OPT_LANG => $langCode
+			ValueFormatter::OPT_LANG => $langCode,
 		] );
 		$entityIdFormatter = $this->entityIdFormatterFactory->getEntityIdFormatter( $context->getLanguage() );
 		$diffSnakView = new DifferencesSnakVisualizer(

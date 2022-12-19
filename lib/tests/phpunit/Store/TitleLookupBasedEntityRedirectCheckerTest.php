@@ -42,16 +42,16 @@ class TitleLookupBasedEntityRedirectCheckerTest extends TestCase {
 
 	public function titleProvider() {
 		yield 'title not found' => [
-			null, false
+			null, false,
 		];
 		yield 'title is not local' => [
-			$this->newMockTitle( false, true ), false
+			$this->newMockTitle( false, true ), false,
 		];
 		yield 'local title is not a redirect' => [
-			$this->newMockTitle( true, false ), false
+			$this->newMockTitle( true, false ), false,
 		];
 		yield 'title is a redirect' => [
-			$this->newMockTitle( true, true ), true
+			$this->newMockTitle( true, true ), true,
 		];
 	}
 

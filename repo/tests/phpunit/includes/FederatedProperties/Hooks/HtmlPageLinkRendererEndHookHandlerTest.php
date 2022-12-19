@@ -63,7 +63,7 @@ class HtmlPageLinkRendererEndHookHandlerTest extends HtmlPageLinkRendererEndHook
 		$expectedAttribs = [
 			'href' => 'http://source.wiki/script/index.php?title=Special:EntityData/Q1',
 			'class' => 'another',
-			'title' => 'Q1'
+			'title' => 'Q1',
 		];
 		$this->assertSame( 'Q1', $text );
 		$this->assertEquals( $expectedAttribs, $customAttribs );

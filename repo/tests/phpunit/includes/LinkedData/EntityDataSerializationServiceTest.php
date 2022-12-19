@@ -117,8 +117,8 @@ class EntityDataSerializationServiceTest extends MediaWikiIntegrationTestCase {
 
 		$rdfBuilderFactory = new RdfBuilderFactory(
 			new RdfVocabulary(
-				[ 'items' => self::URI_BASE, 'props' => self::URI_BASE_PROPS, ],
-				[ 'items' => self::URI_DATA, 'props' => self::URI_DATA_PROPS, ],
+				[ 'items' => self::URI_BASE, 'props' => self::URI_BASE_PROPS ],
+				[ 'items' => self::URI_DATA, 'props' => self::URI_DATA_PROPS ],
 				new EntitySourceDefinitions( [
 					new DatabaseEntitySource(
 						'items',
@@ -139,8 +139,8 @@ class EntityDataSerializationServiceTest extends MediaWikiIntegrationTestCase {
 						'p'
 					),
 				], new SubEntityTypesMapper( [] ) ),
-				[ 'items' => 'wd', 'props' => 'pro', ],
-				[ 'items' => '', 'props' => 'pro', ]
+				[ 'items' => 'wd', 'props' => 'pro' ],
+				[ 'items' => '', 'props' => 'pro' ]
 			),
 			WikibaseRepo::getEntityRdfBuilderFactory(),
 			$entityContentFactory,

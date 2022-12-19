@@ -40,7 +40,7 @@ class PopulateUnexpectedUnconnectedPagePagePropTest extends MaintenanceBaseTestC
 					return new SettingsArray( [
 						'tmpUnconnectedPagePagePropMigrationStage' => MIGRATION_WRITE_BOTH,
 					] );
-				}
+				},
 			]
 		);
 

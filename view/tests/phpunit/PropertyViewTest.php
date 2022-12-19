@@ -80,8 +80,8 @@ class PropertyViewTest extends EntityViewTestCase {
 			[
 				$propertyView,
 				$this->newEntityForStatements( [] ),
-				'/wb-property/'
-			]
+				'/wb-property/',
+			],
 		];
 	}
 

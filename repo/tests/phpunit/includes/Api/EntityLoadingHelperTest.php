@@ -247,7 +247,7 @@ class EntityLoadingHelperTest extends MediaWikiIntegrationTestCase {
 		$params = [ 'entity' => 'xyz' ];
 		$helper = $this->newEntityLoadingHelper( [
 			'params' => $params,
-			'dieExceptionCode' => 'invalid-entity-id'
+			'dieExceptionCode' => 'invalid-entity-id',
 		] );
 
 		$this->expectException( ApiUsageException::class );
@@ -257,7 +257,7 @@ class EntityLoadingHelperTest extends MediaWikiIntegrationTestCase {
 	public function testLoadEntity_noId() {
 		$helper = $this->newEntityLoadingHelper( [
 			'params' => [],
-			'dieErrorCode' => 'no-entity-id'
+			'dieErrorCode' => 'no-entity-id',
 		] );
 
 		$this->expectException( ApiUsageException::class );
@@ -269,7 +269,7 @@ class EntityLoadingHelperTest extends MediaWikiIntegrationTestCase {
 
 		$helper = $this->newEntityLoadingHelper( [
 			'entityId' => $id,
-			'dieErrorCode' => 'no-such-entity'
+			'dieErrorCode' => 'no-such-entity',
 		] );
 
 		$this->expectException( ApiUsageException::class );
@@ -285,7 +285,7 @@ class EntityLoadingHelperTest extends MediaWikiIntegrationTestCase {
 				$id,
 				new ItemId( 'Q11' )
 			),
-			'dieExceptionCode' => 'unresolved-redirect'
+			'dieExceptionCode' => 'unresolved-redirect',
 		] );
 
 		$this->expectException( ApiUsageException::class );
@@ -313,7 +313,7 @@ class EntityLoadingHelperTest extends MediaWikiIntegrationTestCase {
 		$helper = $this->newEntityLoadingHelper( [
 			'entityId' => $id,
 			'exception' => new StorageException(),
-			'dieExceptionCode' => 'cant-load-entity-content'
+			'dieExceptionCode' => 'cant-load-entity-content',
 		] );
 
 		$this->expectException( ApiUsageException::class );

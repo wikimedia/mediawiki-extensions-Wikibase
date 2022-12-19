@@ -70,10 +70,10 @@ class SkinAfterBottomScriptsHandlerTest extends \PHPUnit\Framework\TestCase {
 			"publisher" => [
 				"@type" => "Organization",
 				"logo" => [
-					"@type" => "ImageObject"
-				]
+					"@type" => "ImageObject",
+				],
 			],
-			"datePublished" => "2002-05-27T18:26:23Z"
+			"datePublished" => "2002-05-27T18:26:23Z",
 		];
 
 		$image = $this->mockFile(
@@ -90,18 +90,18 @@ class SkinAfterBottomScriptsHandlerTest extends \PHPUnit\Framework\TestCase {
 			"publisher" => [
 				"@type" => "Organization",
 				"logo" => [
-					"@type" => "ImageObject"
-				]
+					"@type" => "ImageObject",
+				],
 			],
 			"datePublished" => "2002-05-27T18:26:23Z",
 			"dateModified" => "2018-09-28T20:16:12Z",
 			"image" => "https://upload.wikimedia.org/wikipedia/commons/c/c0/Douglas_adams_portrait_cropped.jpg",
-			"headline" => "British author and humorist (1952–2001)"
+			"headline" => "British author and humorist (1952–2001)",
 		];
 
 		return [
 			[ null, null, null, $nullExpected ],
-			[ '1538165772', $image, 'British author and humorist (1952–2001)', $nonNullExpected ]
+			[ '1538165772', $image, 'British author and humorist (1952–2001)', $nonNullExpected ],
 		];
 	}
 

@@ -164,7 +164,7 @@ class ChangesSubscriptionTableBuilder {
 				$rows,
 				__METHOD__,
 				[
-					'IGNORE'
+					'IGNORE',
 				]
 			);
 
@@ -260,7 +260,7 @@ class ChangesSubscriptionTableBuilder {
 		foreach ( $subscribers as $subscriber ) {
 			$rows[] = [
 				'cs_entity_id' => $itemId,
-				'cs_subscriber_id' => $subscriber
+				'cs_subscriber_id' => $subscriber,
 			];
 		}
 

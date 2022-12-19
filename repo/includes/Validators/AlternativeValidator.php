@@ -56,7 +56,7 @@ class AlternativeValidator implements ValueValidator {
 					"No validators",
 					null,
 					'no-validators'
-				)
+				),
 			] );
 		}
 

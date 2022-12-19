@@ -132,22 +132,22 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 				'labels' => [
 					'ku-latn' => [
 						'language' => 'ku-latn',
-						'value' => 'Pisîk'
+						'value' => 'Pisîk',
 					],
 					'ku-arab' => [
 						'language' => 'ku-arab',
 						'value' => 'پسیک',
 						'source-language' => 'ku-latn',
-					]
+					],
 				],
 				'schemaVersion' => 2,
 				'descriptions' => [ 'de' =>
 					[
 						'language' => 'de',
-						'value' => 'Description of Q885588'
-					]
-				]
-			]
+						'value' => 'Description of Q885588',
+					],
+				],
+			],
 		];
 
 		$this->assertEquals( $expected, $entityArray, 'getEntity' );
@@ -168,7 +168,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	public function entityExistsProvider() {
 		return [
 			[ true, 'Q885588' ],
-			[ false, 'Q338380281' ]
+			[ false, 'Q338380281' ],
 		];
 	}
 
@@ -208,7 +208,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	public function getEntityUrlProvider() {
 		return [
 			'Valid ID' => [ [ 'this-is-a-URL' ], 'Q1' ],
-			'Invalid ID' => [ [ null ], 'not-an-id' ]
+			'Invalid ID' => [ [ null ], 'not-an-id' ],
 		];
 	}
 
@@ -371,7 +371,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$expected = [ 'A qualifier Snak, Moar qualifiers' ];
 		if ( $allowDataAccessInUserLanguage ) {
 			$expected = [
-				$lang->commaList( [ 'A qualifier Snak', 'Moar qualifiers' ] )
+				$lang->commaList( [ 'A qualifier Snak', 'Moar qualifiers' ] ),
 			];
 		}
 
@@ -438,23 +438,23 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 			'all IDs in the provider' => [
 				[ 'P16', 'P5', 'P4', 'P8' ],
 				[ 'P8' => 0, 'P16' => 1, 'P4' => 2, 'P5' => 3 ],
-				[ [ 1 => 'P8', 2 => 'P16', 3 => 'P4', 4 => 'P5' ] ]
+				[ [ 1 => 'P8', 2 => 'P16', 3 => 'P4', 4 => 'P5' ] ],
 			],
 			'part of the IDs in the provider' => [
 				[ 'P16', 'P5', 'P4', 'P8' ],
 				[ 'P8' => 0, 'P5' => 1 ],
-				[ [ 1 => 'P8', 2 => 'P5', 3 => 'P16', 4 => 'P4' ] ]
+				[ [ 1 => 'P8', 2 => 'P5', 3 => 'P16', 4 => 'P4' ] ],
 			],
 			'not all IDs used' => [
 				[ 'P16', 'P5', 'P4' ],
 				[ 'P8' => 0, 'P5' => 1 ],
-				[ [ 1 => 'P5', 2 => 'P16', 3 => 'P4' ] ]
+				[ [ 1 => 'P5', 2 => 'P16', 3 => 'P4' ] ],
 			],
 			'empty list of property ids' => [
 				[],
 				[ 'P8' => 0, 'P5' => 1 ],
-				[ [] ]
-			]
+				[ [] ],
+			],
 		];
 	}
 
@@ -462,8 +462,8 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		return [
 			'all IDs in the provider' => [
 				[ 'P8' => 0, 'P16' => 1, 'P4' => 2, 'P5' => 3 ],
-				[ [ 'P8' => 0, 'P16' => 1, 'P4' => 2, 'P5' => 3 ] ]
-			]
+				[ [ 'P8' => 0, 'P16' => 1, 'P4' => 2, 'P5' => 3 ] ],
+			],
 		];
 	}
 

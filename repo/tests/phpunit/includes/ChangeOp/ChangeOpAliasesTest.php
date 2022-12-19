@@ -66,22 +66,22 @@ class ChangeOpAliasesTest extends \PHPUnit\Framework\TestCase {
 			'add' => [
 				$item->copy(),
 				new ChangeOpAliases( 'en', $enAliases, 'add', $validatorFactory ),
-				array_merge( $existingEnAliases, $enAliases )
+				array_merge( $existingEnAliases, $enAliases ),
 			],
 			'set' => [
 				$item->copy(),
 				new ChangeOpAliases( 'en', $enAliases, 'set', $validatorFactory ),
-				$enAliases
+				$enAliases,
 			],
 			'set (default)' => [
 				$item->copy(),
 				new ChangeOpAliases( 'en', $enAliases, '', $validatorFactory ),
-				$enAliases
+				$enAliases,
 			],
 			'remove' => [
 				$item->copy(),
 				new ChangeOpAliases( 'en', $existingEnAliases, 'remove', $validatorFactory ),
-				null
+				null,
 			],
 		];
 	}
@@ -124,7 +124,7 @@ class ChangeOpAliasesTest extends \PHPUnit\Framework\TestCase {
 					$existingEnAliases,
 					array_merge( $existingEnAliases, $enAliases ),
 					true
-				)
+				),
 			],
 			'set new aliases' => [
 				$item->copy(),
@@ -135,7 +135,7 @@ class ChangeOpAliasesTest extends \PHPUnit\Framework\TestCase {
 					$existingEnAliases,
 					$enAliases,
 					true
-				)
+				),
 			],
 			'remove existing aliases' => [
 				$item->copy(),
@@ -146,7 +146,7 @@ class ChangeOpAliasesTest extends \PHPUnit\Framework\TestCase {
 					$existingEnAliases,
 					[],
 					true
-				)
+				),
 			],
 			'remove only one existing alias' => [
 				$item->copy(),
@@ -157,7 +157,7 @@ class ChangeOpAliasesTest extends \PHPUnit\Framework\TestCase {
 					$existingEnAliases,
 					[ 'en-existingAlias1' ],
 					true
-				)
+				),
 			],
 			'remove non existing alias' => [
 				$item->copy(),
@@ -168,7 +168,7 @@ class ChangeOpAliasesTest extends \PHPUnit\Framework\TestCase {
 					$existingEnAliases,
 					$existingEnAliases,
 					false
-				)
+				),
 			],
 			'set to no aliases' => [
 				$item->copy(),
@@ -179,7 +179,7 @@ class ChangeOpAliasesTest extends \PHPUnit\Framework\TestCase {
 					$existingEnAliases,
 					[],
 					true
-				)
+				),
 			],
 			'add no aliases' => [
 				$item->copy(),
@@ -190,7 +190,7 @@ class ChangeOpAliasesTest extends \PHPUnit\Framework\TestCase {
 					$existingEnAliases,
 					$existingEnAliases,
 					false
-				)
+				),
 			],
 			'remove none' => [
 				$item->copy(),
@@ -201,7 +201,7 @@ class ChangeOpAliasesTest extends \PHPUnit\Framework\TestCase {
 					$existingEnAliases,
 					$existingEnAliases,
 					false
-				)
+				),
 			],
 		];
 	}
@@ -224,19 +224,19 @@ class ChangeOpAliasesTest extends \PHPUnit\Framework\TestCase {
 
 		return [
 			'set invalid alias' => [
-				new ChangeOpAliases( 'fr', [ 'INVALID' ], 'set', $validatorFactory )
+				new ChangeOpAliases( 'fr', [ 'INVALID' ], 'set', $validatorFactory ),
 			],
 			'add invalid alias' => [
-				new ChangeOpAliases( 'fr', [ 'INVALID' ], 'add', $validatorFactory )
+				new ChangeOpAliases( 'fr', [ 'INVALID' ], 'add', $validatorFactory ),
 			],
 			'set invalid language' => [
-				new ChangeOpAliases( 'INVALID', [ 'valid' ], 'set', $validatorFactory )
+				new ChangeOpAliases( 'INVALID', [ 'valid' ], 'set', $validatorFactory ),
 			],
 			'add invalid language' => [
-				new ChangeOpAliases( 'INVALID', [ 'valid' ], 'add', $validatorFactory )
+				new ChangeOpAliases( 'INVALID', [ 'valid' ], 'add', $validatorFactory ),
 			],
 			'remove invalid language' => [
-				new ChangeOpAliases( 'INVALID', [ 'valid' ], 'remove', $validatorFactory )
+				new ChangeOpAliases( 'INVALID', [ 'valid' ], 'remove', $validatorFactory ),
 			],
 		];
 	}

@@ -26,7 +26,7 @@ class DispatchingExceptionLocalizerTest extends \PHPUnit\Framework\TestCase {
 		$localizers = [
 			'MessageException' => new MessageExceptionLocalizer(),
 			'ParseException' => new ParseExceptionLocalizer(),
-			'Exception' => new GenericExceptionLocalizer()
+			'Exception' => new GenericExceptionLocalizer(),
 		];
 
 		return [
@@ -34,14 +34,14 @@ class DispatchingExceptionLocalizerTest extends \PHPUnit\Framework\TestCase {
 				new RuntimeException( 'Oops!' ),
 				'wikibase-error-unexpected',
 				[ 'Oops!' ],
-				$localizers
+				$localizers,
 			],
 			'ParseException' => [
 				new ParseException( 'Blarg!' ),
 				'wikibase-parse-error',
 				[],
-				$localizers
-			]
+				$localizers,
+			],
 		];
 	}
 

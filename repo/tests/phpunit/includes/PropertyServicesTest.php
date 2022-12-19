@@ -31,7 +31,7 @@ class PropertyServicesTest extends TestCase {
 				DatabaseEntitySource::TYPE => function () {
 					return 'db service';
 				},
-			]
+			],
 		];
 
 		$apiSourceName = 'apisource';

@@ -154,7 +154,7 @@ class PlaceholderEmittingEntityTermsView extends SimpleEntityTermsView implement
 					$entity->getLabels(),
 					$entity->getDescriptions(),
 					$entity->getAliasGroups()
-				)
+				),
 		];
 	}
 

@@ -20,7 +20,7 @@ class PropertyOrderProviderTest extends ServiceWiringTestCase {
 	public function propertyOrderUrlProvider(): array {
 		return [
 			[ 'page-url' ],
-			[ null ]
+			[ null ],
 		];
 	}
 

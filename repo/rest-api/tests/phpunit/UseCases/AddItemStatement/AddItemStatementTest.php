@@ -245,10 +245,10 @@ class AddItemStatementTest extends \PHPUnit\Framework\TestCase {
 	private function getValidNoValueStatementSerialization(): array {
 		return [
 			'property' => [
-				'id' => 'P123'
+				'id' => 'P123',
 			],
 			'value' => [
-				'type' => 'novalue'
+				'type' => 'novalue',
 			],
 		];
 	}

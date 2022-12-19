@@ -28,10 +28,10 @@ class StatementListDeserializerTest extends TestCase {
 			->with( $this->equalTo( [
 				'mainsnak' => [
 					'snaktype' => 'novalue',
-					'property' => 'P42'
+					'property' => 'P42',
 				],
 				'type' => 'statement',
-				'rank' => 'normal'
+				'rank' => 'normal',
 			] ) )
 			->will( $this->returnValue( $statement ) );
 
@@ -51,17 +51,17 @@ class StatementListDeserializerTest extends TestCase {
 	public function nonDeserializableProvider() {
 		return [
 			[
-				42
+				42,
 			],
 			[
 				[
-					'id' => 'P10'
-				]
+					'id' => 'P10',
+				],
 			],
 			[
 				[
-					'type' => '42'
-				]
+					'type' => '42',
+				],
 			],
 		];
 	}
@@ -80,7 +80,7 @@ class StatementListDeserializerTest extends TestCase {
 		return [
 			[
 				new StatementList(),
-				[]
+				[],
 			],
 			[
 				new StatementList( $statement ),
@@ -89,13 +89,13 @@ class StatementListDeserializerTest extends TestCase {
 						[
 							'mainsnak' => [
 								'snaktype' => 'novalue',
-								'property' => 'P42'
+								'property' => 'P42',
 							],
 							'type' => 'statement',
-							'rank' => 'normal'
-						]
-					]
-				]
+							'rank' => 'normal',
+						],
+					],
+				],
 			],
 		];
 	}

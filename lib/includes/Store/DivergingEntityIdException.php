@@ -30,7 +30,7 @@ class DivergingEntityIdException extends BadRevisionException {
 			[
 				'revisionId' => $this->revisionId,
 				'actualEntityId' => $this->entityRevision->getEntity()->getId()->getSerialization(),
-				'entityId' => $this->expectedEntityId
+				'entityId' => $this->expectedEntityId,
 			],
 		];
 	}

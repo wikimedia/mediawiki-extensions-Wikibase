@@ -232,7 +232,7 @@ class TimeParserFactoryTest extends \PHPUnit\Framework\TestCase {
 			yield [
 				(string)$value,
 				new TimeValue( $timestamp, 0, 0, 0, $precision, $calendarModel ),
-				$languageCode
+				$languageCode,
 			];
 		}
 	}
@@ -293,53 +293,53 @@ class TimeParserFactoryTest extends \PHPUnit\Framework\TestCase {
 			// Precision option
 			'2001 1' => [
 				$decadeOption,
-				'+2001-01-00T00:00:00Z', TimeValue::PRECISION_YEAR10
+				'+2001-01-00T00:00:00Z', TimeValue::PRECISION_YEAR10,
 			],
 			'+2002-01-01T00:00:00Z' => [
 				$decadeOption,
-				'+2002-01-01T00:00:00Z', TimeValue::PRECISION_YEAR10
+				'+2002-01-01T00:00:00Z', TimeValue::PRECISION_YEAR10,
 			],
 			'1 January 2003' => [
 				$decadeOption,
-				'+2003-01-01T00:00:00Z', TimeValue::PRECISION_YEAR10
+				'+2003-01-01T00:00:00Z', TimeValue::PRECISION_YEAR10,
 			],
 			'2004 1 1' => [
 				$decadeOption,
-				'+2004-01-01T00:00:00Z', TimeValue::PRECISION_YEAR10
+				'+2004-01-01T00:00:00Z', TimeValue::PRECISION_YEAR10,
 			],
 			'1 Jan 2005' => [
 				$decadeOption,
-				'+2005-01-01T00:00:00Z', TimeValue::PRECISION_YEAR10
+				'+2005-01-01T00:00:00Z', TimeValue::PRECISION_YEAR10,
 			],
 			'2006' => [
 				$decadeOption,
-				'+2006-00-00T00:00:00Z', TimeValue::PRECISION_YEAR10
+				'+2006-00-00T00:00:00Z', TimeValue::PRECISION_YEAR10,
 			],
 
 			// Calendar option
 			'2011 1' => [
 				$julianOption,
-				'+2011-01-00T00:00:00Z', TimeValue::PRECISION_MONTH, TimeValue::CALENDAR_JULIAN
+				'+2011-01-00T00:00:00Z', TimeValue::PRECISION_MONTH, TimeValue::CALENDAR_JULIAN,
 			],
 			'+2012-01-01T00:00:00Z' => [
 				$julianOption,
-				'+2012-01-01T00:00:00Z', TimeValue::PRECISION_DAY, TimeValue::CALENDAR_JULIAN
+				'+2012-01-01T00:00:00Z', TimeValue::PRECISION_DAY, TimeValue::CALENDAR_JULIAN,
 			],
 			'1 January 2013' => [
 				$julianOption,
-				'+2013-01-01T00:00:00Z', TimeValue::PRECISION_DAY, TimeValue::CALENDAR_JULIAN
+				'+2013-01-01T00:00:00Z', TimeValue::PRECISION_DAY, TimeValue::CALENDAR_JULIAN,
 			],
 			'2014 1 1' => [
 				$julianOption,
-				'+2014-01-01T00:00:00Z', TimeValue::PRECISION_DAY, TimeValue::CALENDAR_JULIAN
+				'+2014-01-01T00:00:00Z', TimeValue::PRECISION_DAY, TimeValue::CALENDAR_JULIAN,
 			],
 			'1 Jan 2015' => [
 				$julianOption,
-				'+2015-01-01T00:00:00Z', TimeValue::PRECISION_DAY, TimeValue::CALENDAR_JULIAN
+				'+2015-01-01T00:00:00Z', TimeValue::PRECISION_DAY, TimeValue::CALENDAR_JULIAN,
 			],
 			'2016' => [
 				$julianOption,
-				'+2016-00-00T00:00:00Z', TimeValue::PRECISION_YEAR, TimeValue::CALENDAR_JULIAN
+				'+2016-00-00T00:00:00Z', TimeValue::PRECISION_YEAR, TimeValue::CALENDAR_JULIAN,
 			],
 		];
 
@@ -352,7 +352,7 @@ class TimeParserFactoryTest extends \PHPUnit\Framework\TestCase {
 			yield [
 				(string)$value,
 				$options,
-				new TimeValue( $timestamp, 0, 0, 0, $precision, $calendarModel )
+				new TimeValue( $timestamp, 0, 0, 0, $precision, $calendarModel ),
 			];
 		}
 	}

@@ -147,7 +147,7 @@ class SiteLinksViewTest extends \PHPUnit\Framework\TestCase {
 			$this->newNumberLocalizer(),
 			[
 				'Q42' => 'wb-badge-featuredarticle',
-				'Q12' => 'wb-badge-goodarticle'
+				'Q12' => 'wb-badge-goodarticle',
 			],
 			[ 'special group' ],
 			new DummyLocalizedTextProvider()

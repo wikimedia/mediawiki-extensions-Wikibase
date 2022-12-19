@@ -24,143 +24,143 @@ class TermListPatcherTest extends TestCase {
 			'add a term' => [
 				new TermList(),
 				new Diff( [
-					'en' => new DiffOpAdd( 'foo' )
+					'en' => new DiffOpAdd( 'foo' ),
 				] ),
 				new TermList( [
-					new Term( 'en', 'foo' )
-				] )
+					new Term( 'en', 'foo' ),
+				] ),
 			],
 			'change a term' => [
 				new TermList( [
-					new Term( 'en', 'foo' )
+					new Term( 'en', 'foo' ),
 				] ),
 				new Diff( [
-					'en' => new DiffOpChange( 'foo', 'bar' )
+					'en' => new DiffOpChange( 'foo', 'bar' ),
 				] ),
 				new TermList( [
-					new Term( 'en', 'bar' )
-				] )
+					new Term( 'en', 'bar' ),
+				] ),
 			],
 			'remove a term' => [
 				new TermList( [
-					new Term( 'en', 'foo' )
+					new Term( 'en', 'foo' ),
 				] ),
 				new Diff( [
-					'en' => new DiffOpRemove( 'foo' )
+					'en' => new DiffOpRemove( 'foo' ),
 				] ),
-				new TermList()
+				new TermList(),
 			],
 			'add an existing language is no-op' => [
 				new TermList( [
-					new Term( 'en', 'foo' )
+					new Term( 'en', 'foo' ),
 				] ),
 				new Diff( [
-					'en' => new DiffOpAdd( 'bar' )
+					'en' => new DiffOpAdd( 'bar' ),
 				] ),
 				new TermList( [
-					new Term( 'en', 'foo' )
-				] )
+					new Term( 'en', 'foo' ),
+				] ),
 			],
 			'add two terms' => [
 				new TermList( [
-					new Term( 'en', 'foo' )
+					new Term( 'en', 'foo' ),
 				] ),
 				new Diff( [
 					'de' => new DiffOpAdd( 'bar' ),
-					'nl' => new DiffOpAdd( 'baz' )
+					'nl' => new DiffOpAdd( 'baz' ),
 				] ),
 				new TermList( [
 					new Term( 'en', 'foo' ),
 					new Term( 'de', 'bar' ),
-					new Term( 'nl', 'baz' )
-				] )
+					new Term( 'nl', 'baz' ),
+				] ),
 			],
 			'remove a not existing language is no-op' => [
 				new TermList( [
-					new Term( 'en', 'foo' )
+					new Term( 'en', 'foo' ),
 				] ),
 				new Diff( [
-					'de' => new DiffOpRemove( 'bar' )
+					'de' => new DiffOpRemove( 'bar' ),
 				] ),
 				new TermList( [
-					new Term( 'en', 'foo' )
-				] )
+					new Term( 'en', 'foo' ),
+				] ),
 			],
 			'change a different value is no-op' => [
 				new TermList( [
-					new Term( 'en', 'foo' )
+					new Term( 'en', 'foo' ),
 				] ),
 				new Diff( [
-					'en' => new DiffOpChange( 'bar', 'baz' )
+					'en' => new DiffOpChange( 'bar', 'baz' ),
 				] ),
 				new TermList( [
-					new Term( 'en', 'foo' )
-				] )
+					new Term( 'en', 'foo' ),
+				] ),
 			],
 			'remove a different value is no-op' => [
 				new TermList( [
-					new Term( 'en', 'foo' )
+					new Term( 'en', 'foo' ),
 				] ),
 				new Diff( [
-					'en' => new DiffOpRemove( 'bar' )
+					'en' => new DiffOpRemove( 'bar' ),
 				] ),
 				new TermList( [
-					new Term( 'en', 'foo' )
-				] )
+					new Term( 'en', 'foo' ),
+				] ),
 			],
 			'complex diff (associative)' => [
 				new TermList( [
 					new Term( 'en', 'foo' ),
 					new Term( 'de', 'bar' ),
-					new Term( 'nl', 'baz' )
+					new Term( 'nl', 'baz' ),
 				] ),
 				new Diff( [
 					'en' => new DiffOpChange( 'foo', 'bar' ),
 					'de' => new DiffOpRemove( 'bar' ),
 					'nl' => new DiffOpChange( 'bar', 'foo' ),
-					'it' => new DiffOpAdd( 'foo' )
+					'it' => new DiffOpAdd( 'foo' ),
 				], true ),
 				new TermList( [
 					new Term( 'en', 'bar' ),
 					new Term( 'nl', 'baz' ),
-					new Term( 'it', 'foo' )
-				] )
+					new Term( 'it', 'foo' ),
+				] ),
 			],
 			'complex diff (non-associative)' => [
 				new TermList( [
 					new Term( 'en', 'foo' ),
 					new Term( 'de', 'bar' ),
-					new Term( 'nl', 'baz' )
+					new Term( 'nl', 'baz' ),
 				] ),
 				new Diff( [
 					'en' => new DiffOpChange( 'foo', 'bar' ),
 					'de' => new DiffOpRemove( 'bar' ),
 					'nl' => new DiffOpChange( 'bar', 'foo' ),
-					'it' => new DiffOpAdd( 'foo' )
+					'it' => new DiffOpAdd( 'foo' ),
 				], false ),
 				new TermList( [
 					new Term( 'en', 'bar' ),
 					new Term( 'nl', 'baz' ),
-					new Term( 'it', 'foo' )
-				] )
+					new Term( 'it', 'foo' ),
+				] ),
 			],
 			'complex diff (auto-detected)' => [
 				new TermList( [
 					new Term( 'en', 'foo' ),
 					new Term( 'de', 'bar' ),
-					new Term( 'nl', 'baz' )
+					new Term( 'nl', 'baz' ),
 				] ),
 				new Diff( [
 					'en' => new DiffOpChange( 'foo', 'bar' ),
 					'de' => new DiffOpRemove( 'bar' ),
 					'nl' => new DiffOpChange( 'bar', 'foo' ),
-					'it' => new DiffOpAdd( 'foo' )
+					'it' => new DiffOpAdd( 'foo' ),
 				] ),
 				new TermList( [
 					new Term( 'en', 'bar' ),
 					new Term( 'nl', 'baz' ),
-					new Term( 'it', 'foo' )
-				] )
+					new Term( 'it', 'foo' ),
+				] ),
 			],
 		];
 	}

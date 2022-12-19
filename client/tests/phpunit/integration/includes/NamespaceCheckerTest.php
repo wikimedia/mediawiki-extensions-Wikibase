@@ -22,7 +22,7 @@ class NamespaceCheckerTest extends MediaWikiIntegrationTestCase {
 	public function constructorProvider() {
 		return [
 			[ [], [ NS_MAIN ] ],
-			[ [ NS_USER_TALK ], [] ]
+			[ [ NS_USER_TALK ], [] ],
 		];
 	}
 
@@ -50,7 +50,7 @@ class NamespaceCheckerTest extends MediaWikiIntegrationTestCase {
 			[ NS_USER_TALK, [ NS_CATEGORY ], [ NS_USER_TALK ], true ], // #3
 			[ NS_CATEGORY, [ NS_USER_TALK ], [ NS_MAIN ], false ], // #4
 			[ NS_CATEGORY, [ NS_USER_TALK ], [], true ], // #5
-			[ NS_USER_TALK, [ NS_USER_TALK ], [ NS_USER_TALK ], false ] // #6
+			[ NS_USER_TALK, [ NS_USER_TALK ], [ NS_USER_TALK ], false ], // #6
 		];
 	}
 
@@ -74,7 +74,7 @@ class NamespaceCheckerTest extends MediaWikiIntegrationTestCase {
 
 	public function enabledInvalidProvider() {
 		return [
-			[ 'Item', [], [] ]
+			[ 'Item', [], [] ],
 		];
 	}
 
@@ -101,7 +101,7 @@ class NamespaceCheckerTest extends MediaWikiIntegrationTestCase {
 				);
 			} ], // #2
 			[ [ NS_CATEGORY ], [ NS_USER_TALK ], [ NS_USER_TALK ] ], // #3
-			[ [ NS_USER_TALK ], [ NS_USER_TALK ], [] ] // #4
+			[ [ NS_USER_TALK ], [ NS_USER_TALK ], [] ], // #4
 		];
 	}
 

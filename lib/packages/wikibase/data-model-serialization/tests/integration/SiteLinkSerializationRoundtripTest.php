@@ -37,19 +37,19 @@ class SiteLinkSerializationRoundtripTest extends TestCase {
 	public function siteLinkProvider() {
 		return [
 			[
-				new SiteLink( 'enwiki', 'Nyan Cat' )
+				new SiteLink( 'enwiki', 'Nyan Cat' ),
 			],
 			[
 				new SiteLink( 'enwiki', 'Nyan Cat', [
-					new ItemId( 'Q42' )
-				] )
+					new ItemId( 'Q42' ),
+				] ),
 			],
 			[
 				new SiteLink( 'frwikisource', 'Nyan Cat', [
 					new ItemId( 'Q42' ),
-					new ItemId( 'q43' )
-				] )
-			]
+					new ItemId( 'q43' ),
+				] ),
+			],
 		];
 	}
 

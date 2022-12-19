@@ -35,7 +35,7 @@ class ItemSourceTest extends ServiceWiringTestCase {
 					'',
 					'',
 					''
-				)
+				),
 			],
 			new SubEntityTypesMapper( [] )
 		);

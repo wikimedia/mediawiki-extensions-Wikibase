@@ -206,7 +206,7 @@ class EntityIdSearchHelper implements EntitySearchHelper {
 			$id = $this->idParser->parse( SerializableEntityId::joinSerialization( [
 				$repositoryPrefix,
 				'',
-				$unprefixedIdPart
+				$unprefixedIdPart,
 			] ) );
 		} catch ( EntityIdParsingException $ex ) {
 			return null;

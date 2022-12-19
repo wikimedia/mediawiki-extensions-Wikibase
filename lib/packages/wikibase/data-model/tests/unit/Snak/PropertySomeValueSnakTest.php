@@ -100,11 +100,11 @@ class PropertySomeValueSnakTest extends \PHPUnit\Framework\TestCase {
 		return [
 			[
 				new PropertySomeValueSnak( $p1 ),
-				new PropertySomeValueSnak( new NumericPropertyId( 'P2' ) )
+				new PropertySomeValueSnak( new NumericPropertyId( 'P2' ) ),
 			],
 			[
 				new PropertySomeValueSnak( $p1 ),
-				new PropertyNoValueSnak( $p1 )
+				new PropertyNoValueSnak( $p1 ),
 			],
 		];
 	}

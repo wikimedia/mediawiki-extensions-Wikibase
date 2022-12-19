@@ -206,18 +206,18 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 		$testCases['ignoreConflictLabelMerge'] = [
 			[ 'labels' => [
 				'en' => [ 'language' => 'en', 'value' => 'foo' ],
-				'de' => [ 'language' => 'de', 'value' => 'berlin' ]
+				'de' => [ 'language' => 'de', 'value' => 'berlin' ],
 			] ],
 			[ 'labels' => [ 'en' => [ 'language' => 'en', 'value' => 'bar' ] ] ],
 			[],
 			[
 				'labels' => [
 				'en' => [ 'language' => 'en', 'value' => 'bar' ],
-				'de' => [ 'language' => 'de', 'value' => 'berlin' ]
+				'de' => [ 'language' => 'de', 'value' => 'berlin' ],
 			],
-				'aliases' => [ 'en' => [ [ 'language' => 'en', 'value' => 'foo' ] ] ]
+				'aliases' => [ 'en' => [ [ 'language' => 'en', 'value' => 'foo' ] ] ],
 			],
-			[ 'label' ]
+			[ 'label' ],
 		];
 		$testCases['descriptionMerge'] = [
 			[ 'descriptions' => [ 'de' => [ 'language' => 'de', 'value' => 'foo' ] ] ],
@@ -234,15 +234,15 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 		$testCases['ignoreConflictDescriptionMerge'] = [
 			[ 'descriptions' => [
 				'en' => [ 'language' => 'en', 'value' => 'foo' ],
-				'de' => [ 'language' => 'de', 'value' => 'berlin' ]
+				'de' => [ 'language' => 'de', 'value' => 'berlin' ],
 			] ],
 			[ 'descriptions' => [ 'en' => [ 'language' => 'en', 'value' => 'bar' ] ] ],
 			[ 'descriptions' => [ 'en' => [ 'language' => 'en', 'value' => 'foo' ] ] ],
 			[ 'descriptions' => [
 				'en' => [ 'language' => 'en', 'value' => 'bar' ],
-				'de' => [ 'language' => 'de', 'value' => 'berlin' ]
+				'de' => [ 'language' => 'de', 'value' => 'berlin' ],
 			] ],
-			[ 'description' ]
+			[ 'description' ],
 		];
 		$testCases['aliasesMerge'] = [
 			[ 'aliases' => [ "nl" => [ [ "language" => "nl", "value" => "Dickes B" ] ] ] ],
@@ -256,7 +256,7 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 			[],
 			[ 'aliases' => [ 'nl' => [
 				[ 'language' => 'nl', 'value' => 'Ali2' ],
-				[ 'language' => 'nl', 'value' => 'Ali1' ]
+				[ 'language' => 'nl', 'value' => 'Ali1' ],
 			] ] ],
 		];
 		$testCases['sitelinksMerge'] = [
@@ -276,7 +276,7 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 				'dewiki' => [ 'site' => 'dewiki', 'title' => 'RemainTo' ],
 				'enwiki' => [ 'site' => 'enwiki', 'title' => 'PlFrom' ],
 			] ],
-			[ 'sitelink' ]
+			[ 'sitelink' ],
 		];
 		$testCases['claimMerge'] = [
 			[ 'claims' => [ 'P1' => [ [ 'mainsnak' => [
@@ -289,8 +289,8 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 				'P1' => [
 					[ 'mainsnak' => [
 						'snaktype' => 'value', 'property' => 'P1', 'datavalue' => [ 'value' => 'imastring', 'type' => 'string' ] ],
-						'type' => 'statement', 'rank' => 'normal' ]
-				]
+						'type' => 'statement', 'rank' => 'normal' ],
+				],
 			] ],
 		];
 		$testCases['claimMerge2'] = [
@@ -309,15 +309,15 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 						'mainsnak' => [ 'snaktype' => 'value', 'property' => 'P1',
 							'datavalue' => [ 'value' => 'imastring2', 'type' => 'string' ] ],
 						'type' => 'statement',
-						'rank' => 'normal'
+						'rank' => 'normal',
 					],
 					[
 						'mainsnak' => [ 'snaktype' => 'value', 'property' => 'P1',
 							'datavalue' => [ 'value' => 'imastring1', 'type' => 'string' ] ],
 						'type' => 'statement',
-						'rank' => 'normal'
-					]
-				]
+						'rank' => 'normal',
+					],
+				],
 			] ],
 		];
 
@@ -427,12 +427,12 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 			[
 				[ 'descriptions' => [ 'en' => [ 'language' => 'en', 'value' => 'foo' ] ] ],
 				[ 'descriptions' => [ 'en' => [ 'language' => 'en', 'value' => 'foo2' ] ] ],
-				[]
+				[],
 			],
 			[
 				[ 'sitelinks' => [ 'dewiki' => [ 'site' => 'dewiki', 'title' => 'Foo' ] ] ],
 				[ 'sitelinks' => [ 'dewiki' => [ 'site' => 'dewiki', 'title' => 'Foo2' ] ] ],
-				[]
+				[],
 			],
 		];
 	}

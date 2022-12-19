@@ -127,7 +127,7 @@ class PatchStatementRouteHandler extends SimpleHandler {
 				self::PARAM_SOURCE => 'path',
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => true,
-			]
+			],
 		];
 	}
 
@@ -159,7 +159,7 @@ class PatchStatementRouteHandler extends SimpleHandler {
 					ParamValidator::PARAM_TYPE => 'string',
 					ParamValidator::PARAM_REQUIRED => false,
 					ParamValidator::PARAM_DEFAULT => null,
-				]
+				],
 			] ) : parent::getBodyValidator( $contentType );
 	}
 

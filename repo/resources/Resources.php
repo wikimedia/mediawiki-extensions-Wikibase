@@ -48,11 +48,11 @@ return call_user_func( function() {
 			 // T326405
 			'targets' => [ 'desktop' ],
 			'scripts' => [
-				'__namespace.js'
+				'__namespace.js',
 			],
 			'dependencies' => [
 				'wikibase',
-			]
+			],
 		],
 
 		'wikibase.experts.Entity' => $expertsPaths + [
@@ -139,15 +139,15 @@ return call_user_func( function() {
 					"name" => "config.json",
 					"callback" => function () {
 						return [
-							'entityTypes' => WikibaseRepo::getEntityTypesConfigValue()
+							'entityTypes' => WikibaseRepo::getEntityTypesConfigValue(),
 						];
-					}
+					},
 				],
 			],
 			'dependencies' => [
 				'wikibase',
-				'wikibase.serialization'
-			]
+				'wikibase.serialization',
+			],
 		],
 
 		'wikibase.getUserLanguages' => $moduleTemplate + [
@@ -158,7 +158,7 @@ return call_user_func( function() {
 					'callback' => function () {
 						return WikibaseRepo::getTermsLanguages()->getLanguages();
 					},
-				]
+				],
 			],
 			'dependencies' => [
 				'wikibase',
@@ -210,7 +210,7 @@ return call_user_func( function() {
 							'geoShapeStorageApiEndpoint' => $settings->getSetting( 'geoShapeStorageApiEndpointUrl' ),
 							'tags' => $settings->getSetting( 'viewUiTags' ),
 						];
-					}
+					},
 				],
 			],
 			'styles' => [
@@ -285,7 +285,7 @@ return call_user_func( function() {
 			],
 			'messages' => [
 				'searchsuggest-containing',
-			]
+			],
 		],
 
 		'wikibase.vector.searchClient' => $moduleTemplate + [
@@ -308,8 +308,8 @@ return call_user_func( function() {
 				'wikibase.special/wikibase.special.newEntity.js',
 			],
 			'styles' => [
-				'../../view/resources/wikibase/wikibase.less'
-			]
+				'../../view/resources/wikibase/wikibase.less',
+			],
 		],
 
 		'wikibase.special.mergeItems' => $moduleTemplate + [
@@ -317,13 +317,13 @@ return call_user_func( function() {
 			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'wikibase.special/wikibase.special.mergeItems.js',
-			]
+			],
 		],
 
 		'wikibase.experts.modules' => $moduleTemplate + [
 				'factory' => function () {
 					return WikibaseRepo::getPropertyValueExpertsModule();
-				}
+				},
 		],
 
 		'wikibase.sites' => $moduleTemplate + [
@@ -352,7 +352,7 @@ return call_user_func( function() {
 								PHP_URL_HOST
 							);
 						},
-					]
+					],
 				],
 				'dependencies' => [
 					'oojs-ui',
@@ -362,8 +362,8 @@ return call_user_func( function() {
 					'wikibase-federated-properties-leaving-site-notice-continue',
 					'wikibase-federated-properties-leaving-site-notice-notice',
 					'wikibase-federated-properties-leaving-site-notice-header',
-					'wikibase-federated-properties-leaving-site-notice-checkbox-label'
-				]
+					'wikibase-federated-properties-leaving-site-notice-checkbox-label',
+				],
 		],
 
 		'wikibase.federatedPropertiesEditRequestFailureNotice' => $moduleTemplate + [
@@ -379,7 +379,7 @@ return call_user_func( function() {
 				'wikibase-federated-properties-edit-request-failed-notice-try-again',
 				'wikibase-federated-properties-edit-request-failed-notice-notice',
 				'wikibase-federated-properties-edit-request-failed-notice-header',
-			]
+			],
 		],
 
 	];

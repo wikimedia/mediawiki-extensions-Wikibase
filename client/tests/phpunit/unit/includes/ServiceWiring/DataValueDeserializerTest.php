@@ -28,7 +28,7 @@ class DataValueDeserializerTest extends ServiceWiringTestCase {
 			'monolingualtext',
 			'quantity',
 			'time',
-			'wikibase-entityid'
+			'wikibase-entityid',
 		];
 
 		yield from array_map( function ( $dataValue ) {
@@ -44,7 +44,7 @@ class DataValueDeserializerTest extends ServiceWiringTestCase {
 
 		$this->assertTrue( $dataValueDeserializer->isDeserializerFor( [
 			'type' => $dataValue,
-			'value' => null
+			'value' => null,
 		] ) );
 	}
 

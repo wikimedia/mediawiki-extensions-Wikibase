@@ -50,7 +50,7 @@ class GetItemLabelsRouteHandlerTest extends MediaWikiIntegrationTestCase {
 			$routeHandler,
 			new RequestData( [
 				'headers' => [ 'User-Agent' => 'PHPUnit Test' ],
-				'pathParams' => [ 'item_id' => 'Q123' ]
+				'pathParams' => [ 'item_id' => 'Q123' ],
 			] )
 		);
 		$this->validateHandler( $routeHandler );

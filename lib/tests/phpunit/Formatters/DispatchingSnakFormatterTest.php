@@ -160,22 +160,22 @@ class DispatchingSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 			'novalue' => [
 				'NO VALUE',
 				new PropertyNoValueSnak( $p23 ),
-				'string'
+				'string',
 			],
 			'somevalue' => [
 				'SOME VALUE',
 				new PropertySomeValueSnak( $p23 ),
-				'string'
+				'string',
 			],
 			'string value' => [
 				'STRING VALUE',
 				new PropertyValueSnak( $p23, new StringValue( 'dummy' ) ),
-				'string'
+				'string',
 			],
 			'other value' => [
 				'OTHER VALUE',
 				new PropertyValueSnak( $p23, new StringValue( 'dummy' ) ),
-				'url'
+				'url',
 			],
 		];
 	}

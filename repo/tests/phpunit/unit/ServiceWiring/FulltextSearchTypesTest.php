@@ -18,7 +18,7 @@ class FulltextSearchTypesTest extends ServiceWiringTestCase {
 	private function getEntityTypeDefinitions( array $typesToContexts ): EntityTypeDefinitions {
 		return new EntityTypeDefinitions( array_map( function ( $context ){
 			return [
-				EntityTypeDefinitions::FULLTEXT_SEARCH_CONTEXT => $context
+				EntityTypeDefinitions::FULLTEXT_SEARCH_CONTEXT => $context,
 			];
 		}, $typesToContexts ) );
 	}
@@ -26,7 +26,7 @@ class FulltextSearchTypesTest extends ServiceWiringTestCase {
 	public function testReturnsFullTextSearchContexts(): void {
 		$mockFulltextContextStrings = [
 			'something' => 'test-context',
-			'another' => 'another-context'
+			'another' => 'another-context',
 		];
 
 		$this->mockService(
@@ -45,7 +45,7 @@ class FulltextSearchTypesTest extends ServiceWiringTestCase {
 			'something' => 'test-context',
 			'another' => function () {
 				return 'another-context';
-			}
+			},
 		];
 
 		$this->mockService(
@@ -56,7 +56,7 @@ class FulltextSearchTypesTest extends ServiceWiringTestCase {
 		$this->assertSame(
 			[
 				'something' => 'test-context',
-				'another' => 'another-context'
+				'another' => 'another-context',
 			],
 			$this->getService( 'WikibaseRepo.FulltextSearchTypes' )
 		);

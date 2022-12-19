@@ -85,7 +85,7 @@ class PropertyIdResolverTest extends \PHPUnit\Framework\TestCase {
 		return [
 			[ 'hedgehog' ],
 			[ 'Q100' ],
-			[ 'P1444' ]
+			[ 'P1444' ],
 		];
 	}
 

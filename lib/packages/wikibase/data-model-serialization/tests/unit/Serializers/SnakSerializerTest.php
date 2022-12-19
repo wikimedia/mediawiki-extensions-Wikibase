@@ -26,13 +26,13 @@ class SnakSerializerTest extends DispatchableSerializerTest {
 	public function serializableProvider() {
 		return [
 			[
-				new PropertyNoValueSnak( 42 )
+				new PropertyNoValueSnak( 42 ),
 			],
 			[
-				new PropertySomeValueSnak( 42 )
+				new PropertySomeValueSnak( 42 ),
 			],
 			[
-				new PropertyValueSnak( 42, new StringValue( 'hax' ) )
+				new PropertyValueSnak( 42, new StringValue( 'hax' ) ),
 			],
 		];
 	}
@@ -40,13 +40,13 @@ class SnakSerializerTest extends DispatchableSerializerTest {
 	public function nonSerializableProvider() {
 		return [
 			[
-				5
+				5,
 			],
 			[
-				[]
+				[],
 			],
 			[
-				new ItemId( 'Q42' )
+				new ItemId( 'Q42' ),
 			],
 		];
 	}
@@ -58,14 +58,14 @@ class SnakSerializerTest extends DispatchableSerializerTest {
 					'snaktype' => 'novalue',
 					'property' => 'P42',
 				],
-				new PropertyNoValueSnak( 42 )
+				new PropertyNoValueSnak( 42 ),
 			],
 			[
 				[
 					'snaktype' => 'somevalue',
 					'property' => 'P42',
 				],
-				new PropertySomeValueSnak( 42 )
+				new PropertySomeValueSnak( 42 ),
 			],
 			[
 				[
@@ -74,9 +74,9 @@ class SnakSerializerTest extends DispatchableSerializerTest {
 					'datavalue' => [
 						'value' => 'hax',
 						'type' => 'string',
-					]
+					],
 				],
-				new PropertyValueSnak( 42, new StringValue( 'hax' ) )
+				new PropertyValueSnak( 42, new StringValue( 'hax' ) ),
 			],
 		];
 	}

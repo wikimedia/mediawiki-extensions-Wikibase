@@ -38,8 +38,8 @@ class EntityFactoryTest extends ServiceWiringTestCase {
 				'something' => [
 					EntityTypeDefinitions::ENTITY_FACTORY_CALLBACK => function () use ( $fakeEntity ) {
 						return $fakeEntity;
-					}
-				]
+					},
+				],
 			] )
 		);
 

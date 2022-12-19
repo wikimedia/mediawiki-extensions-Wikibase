@@ -91,7 +91,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 	public function testSiteAndPageInputFieldsWithPredefinedValuesPresent_WhenRenderedWithGetParametersPassed() {
 		$getParameters = [
 			SpecialNewItem::FIELD_SITE => 'some-site',
-			SpecialNewItem::FIELD_PAGE => 'some-page'
+			SpecialNewItem::FIELD_PAGE => 'some-page',
 		];
 
 		list( $html ) = $this->executeSpecialPage( '', new FauxRequest( $getParameters ) );
@@ -206,7 +206,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 					SpecialNewItem::FIELD_DESCRIPTION => '',
 					SpecialNewItem::FIELD_ALIASES => '',
 					SpecialNewItem::FIELD_SITE => 'unknown',
-					SpecialNewItem::FIELD_PAGE => 'some page'
+					SpecialNewItem::FIELD_PAGE => 'some page',
 				],
 				'(wikibase-newitem-not-recognized-siteid)',
 			],
@@ -217,7 +217,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 					SpecialNewItem::FIELD_DESCRIPTION => '',
 					SpecialNewItem::FIELD_ALIASES => '',
 				],
-				'(wikibase-newitem-insufficient-data)'
+				'(wikibase-newitem-insufficient-data)',
 			],
 			'empty label and description, aliases contain only spaces and pipe symbols' => [
 				[
@@ -226,7 +226,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 					SpecialNewItem::FIELD_DESCRIPTION => '',
 					SpecialNewItem::FIELD_ALIASES => ' | || | ',
 				],
-				'(wikibase-newitem-insufficient-data)'
+				'(wikibase-newitem-insufficient-data)',
 			],
 			'label and description are identical' => [
 				[
@@ -235,7 +235,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 					SpecialNewItem::FIELD_DESCRIPTION => 'something',
 					SpecialNewItem::FIELD_ALIASES => '',
 				],
-				'(wikibase-newitem-same-label-and-description)'
+				'(wikibase-newitem-same-label-and-description)',
 			],
 			'mul descriptions' => [
 				[
@@ -271,7 +271,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 			SpecialNewItem::FIELD_DESCRIPTION => 'some description',
 			SpecialNewItem::FIELD_ALIASES => '',
 			SpecialNewItem::FIELD_SITE => $existingSiteId,
-			SpecialNewItem::FIELD_PAGE => 'nonexistent-page'
+			SpecialNewItem::FIELD_PAGE => 'nonexistent-page',
 		];
 		$this->givenSiteWithNoPagesExists( $existingSiteId );
 
@@ -288,7 +288,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 			SpecialNewItem::FIELD_DESCRIPTION => 'some description',
 			SpecialNewItem::FIELD_ALIASES => '',
 			SpecialNewItem::FIELD_SITE => $existingSiteId,
-			SpecialNewItem::FIELD_PAGE => 'nonexistent-page'
+			SpecialNewItem::FIELD_PAGE => 'nonexistent-page',
 		];
 		$this->givenSiteWithWrongGroup( $existingSiteId );
 
@@ -299,7 +299,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 
 	public function testWhenLabelIsInvalid_ThenHtmlContainsErrorMessage() {
 		$formData = [
-				SpecialNewItem::FIELD_LABEL => 'TOO_LONG_ERROR'
+				SpecialNewItem::FIELD_LABEL => 'TOO_LONG_ERROR',
 		];
 
 		$this->assertHtmlContainsErrorTooLongMessage( $formData );
@@ -307,7 +307,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 
 	public function testWhenDescriptionIsInvalid_ThenHtmlContainsErrorMessage() {
 		$formData = [
-				SpecialNewItem::FIELD_DESCRIPTION => 'TOO_LONG_ERROR'
+				SpecialNewItem::FIELD_DESCRIPTION => 'TOO_LONG_ERROR',
 		];
 
 		$this->assertHtmlContainsErrorTooLongMessage( $formData );
@@ -315,7 +315,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 
 	public function testWhenAliasIsInvalid_ThenHtmlContainsErrorMessage() {
 		$formData = [
-				SpecialNewItem::FIELD_ALIASES => 'TOO_LONG_ERROR'
+				SpecialNewItem::FIELD_ALIASES => 'TOO_LONG_ERROR',
 		];
 
 		$this->assertHtmlContainsErrorTooLongMessage( $formData );
@@ -323,7 +323,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 
 	public function testWhenAliasesAreInvalid_ThenHtmlContainsErrorMessage() {
 		$formData = [
-			SpecialNewItem::FIELD_ALIASES => 'TOO_LONG_ERROR|TOO_LONG_ERROR'
+			SpecialNewItem::FIELD_ALIASES => 'TOO_LONG_ERROR|TOO_LONG_ERROR',
 		];
 
 		$this->assertHtmlContainsErrorTooLongMessage( $formData );

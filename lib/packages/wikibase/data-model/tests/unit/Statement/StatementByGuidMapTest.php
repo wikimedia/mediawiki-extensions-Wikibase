@@ -26,7 +26,7 @@ class StatementByGuidMapTest extends \PHPUnit\Framework\TestCase {
 	public function testGivenPresentGuid_hasStatementWithGuidReturnsTrue() {
 
 		$statements = new StatementByGuidMap( [
-			$this->newStatement( 1, 'some guid' )
+			$this->newStatement( 1, 'some guid' ),
 		] );
 
 		$this->assertTrue( $statements->hasStatementWithGuid( 'some guid' ) );
@@ -114,13 +114,13 @@ class StatementByGuidMapTest extends \PHPUnit\Framework\TestCase {
 		$this->expectException( InvalidArgumentException::class );
 
 		new StatementByGuidMap( [
-			$this->newStatement( 1, null )
+			$this->newStatement( 1, null ),
 		] );
 	}
 
 	public function testCanConstructWithStatementTraversable() {
 		$traversable = new ArrayObject( [
-			$this->newStatement( 1, 'some guid' )
+			$this->newStatement( 1, 'some guid' ),
 		] );
 
 		$statementMap = new StatementByGuidMap( $traversable );
@@ -137,7 +137,7 @@ class StatementByGuidMapTest extends \PHPUnit\Framework\TestCase {
 	public function testMapCanBePassedToCount() {
 		$statements = new StatementByGuidMap( [
 			$this->newStatement( 1, 'some guid' ),
-			$this->newStatement( 2, 'other guid' )
+			$this->newStatement( 2, 'other guid' ),
 		] );
 
 		$this->assertCount( 2, $statements );
@@ -157,7 +157,7 @@ class StatementByGuidMapTest extends \PHPUnit\Framework\TestCase {
 
 		$expectedStatements = [
 			'some guid' => $statement1,
-			'other guid' => $statement2
+			'other guid' => $statement2,
 		];
 
 		$this->assertSame( $expectedStatements, $iteratedStatements );
@@ -190,7 +190,7 @@ class StatementByGuidMapTest extends \PHPUnit\Framework\TestCase {
 
 		$expectedStatements = [
 			'some guid' => $statement1,
-			'other guid' => $statement2
+			'other guid' => $statement2,
 		];
 
 		$this->assertSame( $expectedStatements, $statementMap->toArray() );

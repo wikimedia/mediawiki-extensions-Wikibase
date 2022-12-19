@@ -49,7 +49,7 @@ class EntityRetrievingDataTypeLookupTest extends TestCase {
 		foreach ( $this->propertiesAndTypes as $propertyId => $dataTypeId ) {
 			$argLists[] = [
 				new NumericPropertyId( $propertyId ),
-				$dataTypeId
+				$dataTypeId,
 			];
 		}
 

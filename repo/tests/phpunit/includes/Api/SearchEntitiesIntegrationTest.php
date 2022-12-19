@@ -58,33 +58,33 @@ class SearchEntitiesIntegrationTest extends MediaWikiIntegrationTestCase {
 		return [
 			'Exact item ID' => [
 				'Q1',
-				[ 'Q1' ]
+				[ 'Q1' ],
 			],
 			'Lower case item ID' => [
 				'q2',
-				[ 'Q2' ]
+				[ 'Q2' ],
 			],
 
 			'Exact property ID' => [
 				'P1',
-				[ 'P1' ]
+				[ 'P1' ],
 			],
 			'Lower case property ID' => [
 				'p2',
-				[ 'P2' ]
+				[ 'P2' ],
 			],
 
 			'Copy paste with brackets' => [
 				'(Q3)',
-				[ 'Q3' ]
+				[ 'Q3' ],
 			],
 			'Copy pasted concept URI' => [
 				'http://www.wikidata.org/entity/Q4',
-				[ 'Q4' ]
+				[ 'Q4' ],
 			],
 			'Copy pasted page URL' => [
 				'https://www.wikidata.org/wiki/Q5',
-				[ 'Q5' ]
+				[ 'Q5' ],
 			],
 		];
 	}
@@ -103,7 +103,7 @@ class SearchEntitiesIntegrationTest extends MediaWikiIntegrationTestCase {
 				),
 				new EntityTermSearchHelper(
 					$this->newConfigurableTermSearchInteractor()
-				)
+				),
 			]
 		);
 
@@ -147,7 +147,7 @@ class SearchEntitiesIntegrationTest extends MediaWikiIntegrationTestCase {
 				'',
 				'',
 				''
-			)
+			),
 		], new SubEntityTypesMapper( [] ) );
 		$apiModule = new SearchEntities(
 			new ApiMain( $context ),

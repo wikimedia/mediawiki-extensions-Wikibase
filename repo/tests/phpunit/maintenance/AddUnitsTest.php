@@ -71,31 +71,31 @@ class AddUnitsTest extends MediaWikiLangTestCase {
 						'v' => 'http://acme.test/value/testunit',
 						'amount' => '123.45',
 						'upper' => '123.50',
-						'lower' => '123.39'
-					]
+						'lower' => '123.39',
+					],
 				],
 				// statements
 				[
 					[
 						's' => 'Qstatement',
 						'p' => 'http://acme.test/prop/statement/value/P123',
-						'v' => 'http://acme.test/value/testunit'
+						'v' => 'http://acme.test/value/testunit',
 					],
 					[
 						's' => 'Qstatement',
 						'p' => 'http://acme.test/prop/qualifier/value/P123',
-						'v' => 'http://acme.test/value/testunit'
+						'v' => 'http://acme.test/value/testunit',
 					],
 					[
 						's' => 'Qstatement-another',
 						'p' => 'http://acme.test/prop/reference/value/P123',
-						'v' => 'http://acme.test/value/testunit'
+						'v' => 'http://acme.test/value/testunit',
 					],
 				],
 				// convert
 				null,
 				// ttl
-				'base'
+				'base',
 			],
 			'converted unit' => [
 				// values
@@ -104,25 +104,25 @@ class AddUnitsTest extends MediaWikiLangTestCase {
 						'v' => 'http://acme.test/value/testunit',
 						'amount' => '123.45',
 						'upper' => '123.50',
-						'lower' => '123.39'
-					]
+						'lower' => '123.39',
+					],
 				],
 				// statements
 				[
 					[
 						's' => 'Qstatement',
 						'p' => 'http://acme.test/prop/statement/value/P123',
-						'v' => 'http://acme.test/value/testunit'
+						'v' => 'http://acme.test/value/testunit',
 					],
 					[
 						's' => 'Qstatement',
 						'p' => 'http://acme.test/prop/qualifier/value/P123',
-						'v' => 'http://acme.test/value/testunit'
+						'v' => 'http://acme.test/value/testunit',
 					],
 					[
 						's' => 'Qstatement-another',
 						'p' => 'http://acme.test/prop/reference/value/P123',
-						'v' => 'http://acme.test/value/testunit'
+						'v' => 'http://acme.test/value/testunit',
 					],
 				],
 				// convert
@@ -137,15 +137,15 @@ class AddUnitsTest extends MediaWikiLangTestCase {
 						'v' => 'http://acme.test/value/testunit',
 						'amount' => '123.45',
 						'upper' => '123.50',
-						'lower' => '123.39'
-					]
+						'lower' => '123.39',
+					],
 				],
 				// statements
 				[],
 				// convert
 				null,
 				// ttl
-				'onlyvalue'
+				'onlyvalue',
 			],
 		];
 	}

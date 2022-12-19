@@ -41,7 +41,7 @@ class DispatchingValueSnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 
 		$dispatchingBuilder = new DispatchingValueSnakRdfBuilder( [
 			'PT:foo' => $ptBuilder,
-			'VT:string' => $vtBuilder
+			'VT:string' => $vtBuilder,
 		] );
 
 		$dispatchingBuilder->addValue( $writer, $namespace, $lname, 'foo', 'v', $snak );

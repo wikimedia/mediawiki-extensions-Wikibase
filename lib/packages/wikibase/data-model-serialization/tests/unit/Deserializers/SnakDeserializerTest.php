@@ -36,14 +36,14 @@ class SnakDeserializerTest extends DispatchableDeserializerTest {
 			[
 				[
 					'snaktype' => 'novalue',
-					'property' => 'P42'
-				]
+					'property' => 'P42',
+				],
 			],
 			[
 				[
 					'snaktype' => 'somevalue',
-					'property' => 'P42'
-				]
+					'property' => 'P42',
+				],
 			],
 			[
 				[
@@ -51,9 +51,9 @@ class SnakDeserializerTest extends DispatchableDeserializerTest {
 					'property' => 'P42',
 					'datavalue' => [
 						'type' => 'string',
-						'value' => 'hax'
-					]
-				]
+						'value' => 'hax',
+					],
+				],
 			],
 		];
 	}
@@ -61,20 +61,20 @@ class SnakDeserializerTest extends DispatchableDeserializerTest {
 	public function nonDeserializableProvider() {
 		return [
 			[
-				42
+				42,
 			],
 			[
-				[]
-			],
-			[
-				[
-					'id' => 'P10'
-				]
+				[],
 			],
 			[
 				[
-					'snaktype' => '42value'
-				]
+					'id' => 'P10',
+				],
+			],
+			[
+				[
+					'snaktype' => '42value',
+				],
 			],
 		];
 	}
@@ -86,15 +86,15 @@ class SnakDeserializerTest extends DispatchableDeserializerTest {
 				[
 					'snaktype' => 'novalue',
 					'property' => 'P42',
-					'hash' => '5c33520fbfb522444868b4168a35d4b919370018'
-				]
+					'hash' => '5c33520fbfb522444868b4168a35d4b919370018',
+				],
 			],
 			[
 				new PropertySomeValueSnak( 42 ),
 				[
 					'snaktype' => 'somevalue',
-					'property' => 'P42'
-				]
+					'property' => 'P42',
+				],
 			],
 			[
 				new PropertyValueSnak( 42, new StringValue( 'hax' ) ),
@@ -103,17 +103,17 @@ class SnakDeserializerTest extends DispatchableDeserializerTest {
 					'property' => 'P42',
 					'datavalue' => [
 						'type' => 'string',
-						'value' => 'hax'
-					]
-				]
+						'value' => 'hax',
+					],
+				],
 			],
 			[
 				new PropertyNoValueSnak( 42 ),
 				[
 					'snaktype' => 'novalue',
 					'property' => 'P42',
-					'hash' => 'not a valid hash'
-				]
+					'hash' => 'not a valid hash',
+				],
 			],
 		];
 	}
@@ -130,14 +130,14 @@ class SnakDeserializerTest extends DispatchableDeserializerTest {
 		return [
 			[
 				[
-					'snaktype' => 'somevalue'
-				]
+					'snaktype' => 'somevalue',
+				],
 			],
 			[
 				[
 					'snaktype' => 'value',
-					'property' => 'P42'
-				]
+					'property' => 'P42',
+				],
 			],
 		];
 	}
@@ -148,7 +148,7 @@ class SnakDeserializerTest extends DispatchableDeserializerTest {
 		$this->expectException( InvalidAttributeException::class );
 		$deserializer->deserialize( [
 			'snaktype' => 'somevalue',
-			'property' => 'Q42'
+			'property' => 'Q42',
 		] );
 	}
 
@@ -158,7 +158,7 @@ class SnakDeserializerTest extends DispatchableDeserializerTest {
 		$this->expectException( InvalidAttributeException::class );
 		$deserializer->deserialize( [
 			'snaktype' => 'somevalue',
-			'property' => 'xyz'
+			'property' => 'xyz',
 		] );
 	}
 
@@ -168,8 +168,8 @@ class SnakDeserializerTest extends DispatchableDeserializerTest {
 			'property' => 'P42',
 			'datavalue' => [
 				'type' => 'string',
-				'value' => 1337
-			]
+				'value' => 1337,
+			],
 		];
 
 		$snak = $this->buildDeserializer()->deserialize( $serialization );
@@ -185,8 +185,8 @@ class SnakDeserializerTest extends DispatchableDeserializerTest {
 			'datavalue' => [
 				'type' => 'string',
 				'value' => 1337,
-				'error' => 'omg, an error!'
-			]
+				'error' => 'omg, an error!',
+			],
 		];
 
 		$snak = $this->buildDeserializer()->deserialize( $serialization );

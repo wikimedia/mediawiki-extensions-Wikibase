@@ -289,8 +289,8 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 				'default' => $this->getRequest()->getVal( 'page' ) ?: $this->page,
 				'nodata' => true,
 				'cssclass' => 'wb-input wb-input-text',
-				'id' => 'wb-setsitelink-page'
-			]
+				'id' => 'wb-setsitelink-page',
+			],
 		];
 
 		if ( !empty( $this->badgeItems ) ) {
@@ -313,23 +313,23 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 				'site' => [
 					'name' => 'site',
 					'type' => 'hidden',
-					'default' => $this->site
+					'default' => $this->site,
 				],
 				'id' => [
 					'name' => 'id',
 					'type' => 'hidden',
-					'default' => $this->getEntityId()->getSerialization()
+					'default' => $this->getEntityId()->getSerialization(),
 				],
 				'remove' => [
 					'name' => 'remove',
 					'type' => 'hidden',
-					'default' => 'remove'
+					'default' => 'remove',
 				],
 				'revid' => [
 					'name' => 'revid',
 					'type' => 'hidden',
 					'default' => $this->getBaseRevision()->getRevisionId(),
-				]
+				],
 			];
 		} else {
 			$intro = $this->msg( 'wikibase-setsitelink-intro' )->text();
@@ -345,7 +345,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 				'type' => 'text',
 				'default' => $this->getRequest()->getVal( 'site' ) ?: $this->site,
 				'cssclass' => 'wb-input',
-				'id' => 'wb-setsitelink-site'
+				'id' => 'wb-setsitelink-site',
 			];
 		}
 		$formDescriptor = array_merge( $formDescriptor, $pageinput );
@@ -393,7 +393,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			'type' => 'multiselect',
 			'label-message' => 'wikibase-setsitelink-badges',
 			'options' => $options,
-			'default' => $default
+			'default' => $default,
 		];
 	}
 

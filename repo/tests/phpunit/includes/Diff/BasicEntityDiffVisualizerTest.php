@@ -49,7 +49,7 @@ class BasicEntityDiffVisualizerTest extends MediaWikiIntegrationTestCase {
 						new DiffOpAdd( 'daaaah' ),
 						new DiffOpRemove( 'foo' ),
 						new DiffOpRemove( 'bar' ),
-					] )
+					] ),
 				], true ),
 			] ),
 			new Diff(),

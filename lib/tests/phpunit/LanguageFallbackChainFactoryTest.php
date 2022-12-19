@@ -176,7 +176,7 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 		return [
 			[
 				'languageCode' => 'en',
-				'expected' => [ 'en' ]
+				'expected' => [ 'en' ],
 			],
 
 			[
@@ -186,12 +186,12 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 
 			[
 				'languageCode' => 'de-formal',
-				'expected' => [ 'de-formal', 'de', 'en' ]
+				'expected' => [ 'de-formal', 'de', 'en' ],
 			],
 			// Repeated to test caching
 			[
 				'languageCode' => 'de-formal',
-				'expected' => [ 'de-formal', 'de', 'en' ]
+				'expected' => [ 'de-formal', 'de', 'en' ],
 			],
 
 			[
@@ -207,7 +207,7 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 					[ 'zh', 'zh-mo' ],
 					[ 'zh', 'zh-my' ],
 					'en',
-				]
+				],
 			],
 			[
 				'languageCode' => 'zh',
@@ -221,7 +221,7 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 					[ 'zh', 'zh-sg' ],
 					'en',
 				],
-				'disabledVariants' => [ 'zh-mo', 'zh-my' ]
+				'disabledVariants' => [ 'zh-mo', 'zh-my' ],
 			],
 			[
 				'languageCode' => 'zh-cn',
@@ -236,7 +236,7 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 					[ 'zh-cn', 'zh-mo' ],
 					[ 'zh-cn', 'zh-tw' ],
 					'en',
-				]
+				],
 			],
 			[
 				'languageCode' => 'zh-cn',
@@ -250,7 +250,7 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 					'zh-hans',
 					'en',
 				],
-				'disabledVariants' => [ 'zh-mo', 'zh-my', 'zh-hans' ]
+				'disabledVariants' => [ 'zh-mo', 'zh-my', 'zh-hans' ],
 			],
 
 			[
@@ -267,7 +267,7 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 					[ 'zh-cn', 'zh-mo' ],
 					[ 'zh-cn', 'zh-tw' ],
 					'en',
-				]
+				],
 			],
 
 			[
@@ -281,11 +281,11 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 					[ 'kk', 'kk-tr' ],
 					[ 'kk', 'kk-cn' ],
 					'en',
-				]
+				],
 			],
 			[
 				'languageCode' => '⧼Lang⧽',
-				'expected' => [ 'en' ]
+				'expected' => [ 'en' ],
 			],
 
 			'implicit fallback to mul, en' => [
@@ -373,7 +373,7 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 		return [
 			[
 				'babel' => [ 'N' => [ 'de-formal' ] ],
-				'expected' => [ 'de-formal', 'de', 'en' ]
+				'expected' => [ 'de-formal', 'de', 'en' ],
 			],
 			[
 				'babel' => [ 'N' => [ 'de-formal' ] ],
@@ -383,23 +383,23 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 			],
 			[
 				'babel' => [ 'N' => [ ':', 'en' ] ],
-				'expected' => [ 'en' ]
+				'expected' => [ 'en' ],
 			],
 			[
 				'babel' => [ 'N' => [ 'unknown' ] ],
-				'expected' => [ 'unknown', 'en' ]
+				'expected' => [ 'unknown', 'en' ],
 			],
 			[
 				'babel' => [ 'N' => [ 'zh-classical' ] ],
-				'expected' => [ 'lzh', 'en' ]
+				'expected' => [ 'lzh', 'en' ],
 			],
 			[
 				'babel' => [ 'N' => [ 'en', 'de-formal' ] ],
-				'expected' => [ 'en', 'de-formal', 'de' ]
+				'expected' => [ 'en', 'de-formal', 'de' ],
 			],
 			[
 				'babel' => [ 'N' => [ 'de-formal' ], '3' => [ 'en' ] ],
-				'expected' => [ 'de-formal', 'en', 'de' ]
+				'expected' => [ 'de-formal', 'en', 'de' ],
 			],
 			[
 				'babel' => [ 'N' => [ 'zh' ] ],
@@ -445,7 +445,7 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 					[ 'zh-cn', 'zh-tw' ],
 					'en',
 					'de',
-				]
+				],
 			],
 			[
 				'babel' => [ 'N' => [ 'zh-cn', 'zh-hk' ], '3' => [ 'en', 'de-formal' ] ],
@@ -462,7 +462,7 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 					'en',
 					'de-formal',
 					'de',
-				]
+				],
 			],
 			[
 				'babel' => [
@@ -490,7 +490,7 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 					[ 'kk-cn', 'kk-kz' ],
 					[ 'kk-cn', 'kk-tr' ],
 					'de',
-				]
+				],
 			],
 			'T299904' => [
 				'babel' => [ 'N' => [ 'de-formal' ], '4' => [ 'nl-informal' ] ],

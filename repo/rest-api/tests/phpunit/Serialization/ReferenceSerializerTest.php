@@ -41,7 +41,7 @@ class ReferenceSerializerTest extends TestCase {
 				'parts' => [
 					[ 'property' => 'P123 property', 'value' => 'P123 value' ],
 				],
-			]
+			],
 		];
 
 		$ref2 = new Reference( [
@@ -56,7 +56,7 @@ class ReferenceSerializerTest extends TestCase {
 					[ 'property' => 'P234 property', 'value' => 'P234 value' ],
 					[ 'property' => 'P345 property', 'value' => 'P345 value' ],
 				],
-			]
+			],
 		];
 	}
 
@@ -66,7 +66,7 @@ class ReferenceSerializerTest extends TestCase {
 			->willReturnCallback(
 				fn( Snak $snak ) => [
 					'property' => $snak->getPropertyId() . ' property',
-					'value' => $snak->getPropertyId() . ' value'
+					'value' => $snak->getPropertyId() . ' value',
 				]
 			);
 

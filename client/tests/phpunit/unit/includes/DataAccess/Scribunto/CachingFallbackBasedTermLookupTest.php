@@ -147,18 +147,18 @@ class CachingFallbackBasedTermLookupTest extends TestCase {
 			[ // 'finds term in requested language, caches it and returns it'
 				$englishCat,
 				$englishLanguage,
-				'cat'
+				'cat',
 			],
 			[ // 'finds null and caches it, returns null'
 				null,
 				$englishLanguage,
-				null
+				null,
 			],
 			[ // finds term in different language and caches it and returns null
 				$swedishEnglishCat,
 				$englishLanguage,
-				null
-			]
+				null,
+			],
 		];
 
 		$datasetLabels = array_map( function( $testCase ) {

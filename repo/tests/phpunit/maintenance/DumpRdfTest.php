@@ -107,12 +107,12 @@ class DumpRdfTest extends MediaWikiIntegrationTestCase {
 					] ),
 					new AliasGroupList( [
 						new AliasGroup( 'en', [ 'ali1', 'ali2' ] ),
-						new AliasGroup( 'dv', [ 'ali11', 'ali22' ] )
+						new AliasGroup( 'dv', [ 'ali11', 'ali22' ] ),
 					] )
 				),
 				new SiteLinkList( [
 					new SiteLink( 'enwiki', 'Berlin' ),
-					new SiteLink( 'dewiki', 'England', [ new ItemId( 'Q1' ) ] )
+					new SiteLink( 'dewiki', 'England', [ new ItemId( 'Q1' ) ] ),
 				] ),
 				new StatementList(
 					new Statement(
@@ -139,7 +139,7 @@ class DumpRdfTest extends MediaWikiIntegrationTestCase {
 				null,
 				new SiteLinkList( [
 					new SiteLink( 'enwiki', 'Category:San Jose' ),
-					new SiteLink( 'dewiki', 'USA' )
+					new SiteLink( 'dewiki', 'USA' ),
 				] ),
 				null
 			),
@@ -271,12 +271,12 @@ class DumpRdfTest extends MediaWikiIntegrationTestCase {
 		return [
 			[
 				EntityIdPager::INCLUDE_REDIRECTS,
-				false
+				false,
 			],
 			[
 				EntityIdPager::ONLY_REDIRECTS,
-				true
-			]
+				true,
+			],
 		];
 	}
 

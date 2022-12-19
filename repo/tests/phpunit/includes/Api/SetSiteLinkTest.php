@@ -53,65 +53,65 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					'handle' => 'Leipzig',
 					'linksite' => 'dewiki',
 					'linktitle' => 'leipzig',
-					'badges' => '{gaItem}|{faItem}'
+					'badges' => '{gaItem}|{faItem}',
 				],
 				'e' => [
 					'value' => [ 'dewiki' => [
 						'title' => 'Leipzig',
-						'badges' => [ '{gaItem}', '{faItem}' ]
-					] ]
-				]
+						'badges' => [ '{gaItem}', '{faItem}' ],
+					] ],
+				],
 			],
 			'set new link using sitelink' => [
 				'p' => [
 					'site' => 'dewiki',
 					'title' => 'Berlin',
 					'linksite' => 'nowiki',
-					'linktitle' => 'berlin'
+					'linktitle' => 'berlin',
 				],
 				'e' => [
 					'value' => [ 'nowiki' => [
 						'title' => 'Berlin',
-						'badges' => []
+						'badges' => [],
 					] ],
-					'indb' => 5
-				]
+					'indb' => 5,
+				],
 			],
 			'modify link using id' => [
 				'p' => [
 					'handle' => 'Leipzig',
 					'linksite' => 'dewiki',
 					'linktitle' => 'Leipzig_Two',
-					'badges' => ''
+					'badges' => '',
 				],
 				'e' => [
 					'value' => [ 'dewiki' => [
 						'title' => 'Leipzig Two',
-						'badges' => []
-					] ]
-				]
+						'badges' => [],
+					] ],
+				],
 			],
 			'modify link using sitelink' => [
 				'p' => [
 					'site' => 'dewiki',
 					'title' => 'Berlin',
 					'linksite' => 'nowiki',
-					'linktitle' => 'Berlin_Two'
+					'linktitle' => 'Berlin_Two',
 				],
 				'e' => [
 					'value' => [ 'nowiki' => [
 						'title' => 'Berlin Two',
-						'badges' => []
+						'badges' => [],
 					] ],
-					'indb' => 5
-				]
+					'indb' => 5,
+				],
 			],
 			'remove link using id (with a summary)' => [
 				'p' => [
 					'handle' => 'Leipzig',
 					'linksite' => 'dewiki',
 					'linktitle' => '',
-					'summary' => 'WooSummary'
+					'summary' => 'WooSummary',
 				],
 				'e' => [ 'value' => [] ] ],
 			'remove link using sitelink' => [
@@ -119,7 +119,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					'site' => 'dewiki',
 					'title' => 'Berlin',
 					'linksite' => 'nowiki',
-					'linktitle' => ''
+					'linktitle' => '',
 				],
 				'e' => [ 'value' => [], 'indb' => 4 ] ],
 			'add badges to existing sitelink' => [
@@ -128,15 +128,15 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					'title' => 'Berlin',
 					'linksite' => 'dewiki',
 					'linktitle' => 'Berlin',
-					'badges' => '{faItem}|{gaItem}'
+					'badges' => '{faItem}|{gaItem}',
 				],
 				'e' => [
 					'value' => [ 'dewiki' => [
 						'title' => 'Berlin',
-						'badges' => [ '{faItem}', '{gaItem}' ]
+						'badges' => [ '{faItem}', '{gaItem}' ],
 					] ],
-					'indb' => 4
-				]
+					'indb' => 4,
+				],
 			],
 			'add duplicate badges to existing sitelink' => [
 				'p' => [
@@ -144,15 +144,15 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					'title' => 'Berlin',
 					'linksite' => 'dewiki',
 					'linktitle' => 'Berlin',
-					'badges' => '{gaItem}|{gaItem}|{faItem}|{gaItem}'
+					'badges' => '{gaItem}|{gaItem}|{faItem}|{gaItem}',
 				],
 				'e' => [
 					'value' => [ 'dewiki' => [
 						'title' => 'Berlin',
-						'badges' => [ '{gaItem}', '{faItem}' ]
+						'badges' => [ '{gaItem}', '{faItem}' ],
 					] ],
-					'indb' => 4
-				]
+					'indb' => 4,
+				],
 			],
 			'no change' => [
 				'p' => [
@@ -160,30 +160,30 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					'title' => 'Berlin',
 					'linksite' => 'dewiki',
 					'linktitle' => 'Berlin',
-					'badges' => '{gaItem}|{faItem}'
+					'badges' => '{gaItem}|{faItem}',
 				],
 				'e' => [
 					'value' => [ 'dewiki' => [
 						'title' => 'Berlin',
-						'badges' => [ '{gaItem}', '{faItem}' ]
+						'badges' => [ '{gaItem}', '{faItem}' ],
 					] ],
-					'indb' => 4
-				]
+					'indb' => 4,
+				],
 			],
 			'change only title, badges should be intact' => [
 				'p' => [
 					'site' => 'dewiki',
 					'title' => 'Berlin',
 					'linksite' => 'dewiki',
-					'linktitle' => 'Berlin_Two'
+					'linktitle' => 'Berlin_Two',
 				],
 				'e' => [
 					'value' => [ 'dewiki' => [
 						'title' => 'Berlin Two',
-						'badges' => [ '{gaItem}', '{faItem}' ]
+						'badges' => [ '{gaItem}', '{faItem}' ],
 					] ],
-					'indb' => 4
-				]
+					'indb' => 4,
+				],
 			],
 			'change both title and badges' => [
 				'p' => [
@@ -191,48 +191,48 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					'title' => 'Berlin Two',
 					'linksite' => 'dewiki',
 					'linktitle' => 'Berlin',
-					'badges' => '{gaItem}'
+					'badges' => '{gaItem}',
 				],
 				'e' => [
 					'value' => [ 'dewiki' => [
 						'title' => 'Berlin',
-						'badges' => [ '{gaItem}' ]
+						'badges' => [ '{gaItem}' ],
 					] ],
-					'indb' => 4
-				]
+					'indb' => 4,
+				],
 			],
 			'change only badges, title intact' => [
 				'p' => [
 					'site' => 'dewiki',
 					'title' => 'Berlin',
 					'linksite' => 'dewiki',
-					'badges' => '{gaItem}|{faItem}'
+					'badges' => '{gaItem}|{faItem}',
 				],
 				'e' => [
 					'value' => [ 'dewiki' => [
 						'title' => 'Berlin',
-						'badges' => [ '{gaItem}', '{faItem}' ]
+						'badges' => [ '{gaItem}', '{faItem}' ],
 					] ],
-					'indb' => 4
-				]
+					'indb' => 4,
+				],
 			],
 			'set new link using id (without badges)' => [
 				'p' => [
 					'handle' => 'Berlin',
 					'linksite' => 'svwiki',
-					'linktitle' => 'Berlin'
+					'linktitle' => 'Berlin',
 				],
 				'e' => [
 					'value' => [ 'svwiki' => [
 						'title' => 'Berlin',
-						'badges' => []
+						'badges' => [],
 					] ],
-					'indb' => 5
-				]
+					'indb' => 5,
+				],
 			],
 			'delete link by not providing neither title nor badges' => [
 				'p' => [ 'handle' => 'Berlin', 'linksite' => 'svwiki' ],
-				'e' => [ 'value' => [], 'indb' => 4 ]
+				'e' => [ 'value' => [], 'indb' => 4 ],
 			],
 		];
 	}
@@ -244,7 +244,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					'site' => 'dewiki',
 					'title' => 'Berlin',
 					'linksite' => 'svwiki',
-					'linktitle' => 'testSetSiteLinkWithNoToken'
+					'linktitle' => 'testSetSiteLinkWithNoToken',
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
@@ -252,9 +252,9 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 						$this->equalTo( 'notoken' ),
 						$this->equalTo( 'missingparam' )
 					),
-					'message' => 'The "token" parameter must be set'
+					'message' => 'The "token" parameter must be set',
 				] ],
-				'token' => false
+				'token' => false,
 			],
 			'invalid token' => [
 				'p' => [
@@ -262,26 +262,26 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					'title' => 'Berlin',
 					'linksite' => 'svwiki',
 					'linktitle' => 'testSetSiteLinkWithBadToken',
-					'token' => '88888888888888888888888888888888+\\'
+					'token' => '88888888888888888888888888888888+\\',
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
 					'code' => 'badtoken',
-					'message' => 'Invalid CSRF token.'
+					'message' => 'Invalid CSRF token.',
 				] ],
-				'token' => false
+				'token' => false,
 			],
 			'Set SiteLink With No Id' => [
 				'p' => [
 					'linksite' => 'enwiki',
-					'linktitle' => 'testSetSiteLinkWithNoId'
+					'linktitle' => 'testSetSiteLinkWithNoId',
 				],
 				'e' => [ 'exception' => [ 'type' => ApiUsageException::class ] ] ],
 			'Set SiteLink With Bad Id' => [
 				'p' => [
 					'id' => 123456789,
 					'linksite' => 'enwiki',
-					'linktitle' => 'testSetSiteLinkWithNoId'
+					'linktitle' => 'testSetSiteLinkWithNoId',
 				],
 				'e' => [ 'exception' => [ 'type' => ApiUsageException::class ] ] ],
 			'Set SiteLink With Bad Site' => [
@@ -289,7 +289,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					'site' => 'dewiktionary',
 					'title' => 'Berlin',
 					'linksite' => 'enwiki',
-					'linktitle' => 'Berlin'
+					'linktitle' => 'Berlin',
 				],
 				'e' => [ 'exception' => [ 'type' => ApiUsageException::class ] ] ],
 			'Set SiteLink With Bad Title' => [
@@ -297,7 +297,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					'site' => 'dewiki',
 					'title' => 'BadTitle_de',
 					'linksite' => 'enwiki',
-					'linktitle' => 'BadTitle_en'
+					'linktitle' => 'BadTitle_en',
 				],
 				'e' => [ 'exception' => [ 'type' => ApiUsageException::class ] ] ],
 			'Set SiteLink With Bad Target Site' => [
@@ -305,7 +305,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					'site' => 'dewiki',
 					'title' => 'Berlin',
 					'linksite' => 'enwiktionary',
-					'linktitle' => 'Berlin'
+					'linktitle' => 'Berlin',
 				],
 				'e' => [ 'exception' => [ 'type' => ApiUsageException::class ] ] ],
 			'badge item does not exist' => [
@@ -314,25 +314,25 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					'title' => 'Berlin',
 					'linksite' => 'enwiki',
 					'linktitle' => 'Berlin',
-					'badges' => 'Q99999|{faItem}'
+					'badges' => 'Q99999|{faItem}',
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'no-such-entity'
-				] ]
+					'code' => 'no-such-entity',
+				] ],
 			],
 			'no sitelink - cannot change badges' => [
 				'p' => [
 					'site' => 'enwiki',
 					'title' => 'Berlin',
 					'linksite' => 'svwiki',
-					'badges' => '{gaItem}|{faItem}'
+					'badges' => '{gaItem}|{faItem}',
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
 					'code' => 'no-such-sitelink',
 					'message' => wfMessage( 'wikibase-validator-no-such-sitelink', 'svwiki' )->inLanguage( 'en' )->text(),
-				] ]
+				] ],
 			],
 		];
 	}
@@ -344,7 +344,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					'title' => 'Berlin',
 					'linksite' => 'enwiki',
 					'linktitle' => 'Berlin',
-					'badges' => 'abc|{faItem}'
+					'badges' => 'abc|{faItem}',
 				],
 			],
 			'badge id is not an item id' => [
@@ -352,7 +352,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					'title' => 'Berlin',
 					'linksite' => 'enwiki',
 					'linktitle' => 'Berlin',
-					'badges' => 'P2|{faItem}'
+					'badges' => 'P2|{faItem}',
 				],
 			],
 			'badge id is not specified' => [
@@ -360,9 +360,9 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					'title' => 'Berlin',
 					'linksite' => 'enwiki',
 					'linktitle' => 'Berlin',
-					'badges' => '{faItem}|{otherItem}'
-				]
-			]
+					'badges' => '{faItem}|{otherItem}',
+				],
+			],
 		];
 	}
 
@@ -430,7 +430,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 			'id' => EntityTestHelper::getId( 'Leipzig' ),
 			'linksite' => 'dewiki',
 			'linktitle' => 'leipzig',
-			'badges' => self::$gaItemId->getSerialization()
+			'badges' => self::$gaItemId->getSerialization(),
 		];
 
 		$pageNormalizerMock = $this->createMock( SiteLinkPageNormalizer::class );
@@ -465,7 +465,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 		}
 
 		// -- do the request --------------------------------------------------
-		[ $result, , ] = $this->doApiRequestWithToken( $params );
+		[ $result ] = $this->doApiRequestWithToken( $params );
 
 		//@todo all of the below is very similar to the code in ModifyTermTestCase
 		//This might be able to go in the same place
@@ -547,7 +547,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 			'site' => 'dewiki',
 			'title' => 'Berlin',
 			'linksite' => 'nowiki',
-			'linktitle' => 'berlin'
+			'linktitle' => 'berlin',
 		] );
 	}
 
@@ -605,7 +605,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 			);
 		}
 
-		[ $result, ] = $this->doApiRequestWithToken( $params );
+		[ $result ] = $this->doApiRequestWithToken( $params );
 
 		$warning = $result['warnings']['wbsetsitelink']['warnings'];
 		$this->assertStringContainsString( 'Unrecognized value for parameter "badges"', $warning );
@@ -615,13 +615,13 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 		$userWithAllPermissions = $this->createUserWithGroup( 'all-permission' );
 
 		$this->setMwGlobals( 'wgGroupPermissions', [
-			'all-permission' => [ 'edit' => true, ],
-			'*' => [ 'read' => true, 'writeapi' => true ]
+			'all-permission' => [ 'edit' => true ],
+			'*' => [ 'read' => true, 'writeapi' => true ],
 		] );
 
 		$newItem = $this->createItemUsing( $userWithAllPermissions );
 
-		[ $result, ] = $this->doApiRequestWithToken(
+		[ $result ] = $this->doApiRequestWithToken(
 			$this->getSetSiteLinkRequestParams( $newItem->getId() ),
 			null,
 			$userWithAllPermissions
@@ -636,8 +636,8 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 
 		$this->setMwGlobals( 'wgGroupPermissions', [
 			'no-permission' => [ 'edit' => false ],
-			'all-permission' => [ 'edit' => true, ],
-			'*' => [ 'read' => true, 'writeapi' => true ]
+			'all-permission' => [ 'edit' => true ],
+			'*' => [ 'read' => true, 'writeapi' => true ],
 		] );
 
 		MediaWikiServices::getInstance()->resetServiceForTesting( 'PermissionManager' );
@@ -648,7 +648,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 		// Then the request is denied
 		$expected = [
 			'type' => ApiUsageException::class,
-			'code' => 'permissiondenied'
+			'code' => 'permissiondenied',
 		];
 
 		MediaWikiServices::getInstance()->getPermissionManager()->invalidateUsersRightsCache(
@@ -670,10 +670,10 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 
 		$this->setMwGlobals( 'wgGroupPermissions', [
 			'all-permission' => [ 'edit' => true, 'createpage' => true ],
-			'*' => [ 'read' => true, 'writeapi' => true ]
+			'*' => [ 'read' => true, 'writeapi' => true ],
 		] );
 
-		[ $result, ] = $this->doApiRequestWithToken(
+		[ $result ] = $this->doApiRequestWithToken(
 			$this->getCreateItemAndSetSiteLinkRequestParams(),
 			null,
 			$userWithAllPermissions
@@ -688,7 +688,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 
 		$this->setMwGlobals( 'wgGroupPermissions', [
 			'no-permission' => [ 'createpage' => false ],
-			'*' => [ 'read' => true, 'edit' => true, 'writeapi' => true ]
+			'*' => [ 'read' => true, 'edit' => true, 'writeapi' => true ],
 		] );
 
 		MediaWikiServices::getInstance()->resetServiceForTesting( 'PermissionManager' );
@@ -696,7 +696,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 		// Then the request is denied
 		$expected = [
 			'type' => ApiUsageException::class,
-			'code' => 'permissiondenied'
+			'code' => 'permissiondenied',
 		];
 
 		$this->doTestQueryExceptions(

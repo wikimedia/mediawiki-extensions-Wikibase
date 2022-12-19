@@ -34,17 +34,17 @@ class StatementGuidTest extends \PHPUnit\Framework\TestCase {
 			[
 				new ItemId( 'q42' ),
 				'D8404CDA-25E4-4334-AF13-A3290BCD9C0N' ,
-				'Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0N'
+				'Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0N',
 			],
 			[
 				new ItemId( 'Q1234567' ),
 				'D4FDE516-F20C-4154-ADCE-7C5B609DFDFF',
-				'Q1234567$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF'
+				'Q1234567$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF',
 			],
 			[
 				new ItemId( 'Q1' ),
 				'foo',
-				'Q1$foo'
+				'Q1$foo',
 			],
 		];
 	}

@@ -52,21 +52,21 @@ class TermIndexEntryTest extends \PHPUnit\Framework\TestCase {
 					'termType' => TermIndexEntry::TYPE_LABEL,
 					'termLanguage' => 'en',
 					'termText' => 'foo',
-				]
+				],
 			],
 			[
 				[
 					'entityId' => new ItemId( 'Q23' ),
 					'termType' => TermIndexEntry::TYPE_LABEL,
-				]
+				],
 			],
 			[
 				[
 					'entityId' => new ItemId( 'Q23' ),
-				]
+				],
 			],
 			[
-				[]
+				[],
 			],
 		];
 	}
@@ -142,27 +142,27 @@ class TermIndexEntryTest extends \PHPUnit\Framework\TestCase {
 			'clone' => [
 				$term,
 				clone $term,
-				true
+				true,
 			],
 			'other text' => [
 				$term,
 				$this->newInstance( [ 'termText' => 'bar' ] ),
-				false
+				false,
 			],
 			'other entity id' => [
 				$term,
 				$this->newInstance( [ 'entityId' => new NumericPropertyId( 'P11' ) ] ),
-				false
+				false,
 			],
 			'other language' => [
 				$term,
 				$this->newInstance( [ 'termLanguage' => 'fr' ] ),
-				false
+				false,
 			],
 			'other term type' => [
 				$term,
 				$this->newInstance( [ 'termType' => TermIndexEntry::TYPE_DESCRIPTION ] ),
-				false
+				false,
 			],
 		];
 	}

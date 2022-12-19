@@ -296,16 +296,16 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 		$testCases['ignoreConflictStatementMerge'] = [
 			[ 'claims' => [ 'P1' => [ [ 'mainsnak' => [
 				'snaktype' => 'value', 'property' => 'P1', 'datavalue' => [
-					'value' => [ 'entity-type' => 'item', 'numeric-id' => 2 ], 'type' => 'wikibase-entityid' ]
+					'value' => [ 'entity-type' => 'item', 'numeric-id' => 2 ], 'type' => 'wikibase-entityid' ],
 				],
 				'type' => 'statement', 'rank' => 'normal', 'id' => 'deadbeefdeadbeefdeadbeefdeadbeef' ] ] ] ],
 			[],
 			[],
 			[ 'claims' => [ 'P1' => [ [ 'mainsnak' => [
 				'snaktype' => 'value', 'property' => 'P1', 'datavalue' => [
-					'value' => [ 'entity-type' => 'item', 'numeric-id' => 2 ], 'type' => 'wikibase-entityid' ]
+					'value' => [ 'entity-type' => 'item', 'numeric-id' => 2 ], 'type' => 'wikibase-entityid' ],
 				],
-				'type' => 'statement', 'rank' => 'normal' ] ] ]
+				'type' => 'statement', 'rank' => 'normal' ] ] ],
 			],
 			true,
 			'statement',
@@ -407,72 +407,72 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 				'p' => [],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'param-missing'
-				] ]
+					'code' => 'param-missing',
+				] ],
 			],
 			[ //1 only from id
 				'p' => [ 'fromid' => 'Q1' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'param-missing'
-				] ]
+					'code' => 'param-missing',
+				] ],
 			],
 			[ //2 only to id
 				'p' => [ 'toid' => 'Q1' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'param-missing'
-				] ]
+					'code' => 'param-missing',
+				] ],
 			],
 			[ //3 toid bad
 				'p' => [ 'fromid' => 'Q1', 'toid' => 'ABCDE' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'invalid-entity-id'
-				] ]
+					'code' => 'invalid-entity-id',
+				] ],
 			],
 			[ //4 fromid bad
 				'p' => [ 'fromid' => 'ABCDE', 'toid' => 'Q1' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'invalid-entity-id'
-				] ]
+					'code' => 'invalid-entity-id',
+				] ],
 			],
 			[ //5 both same id
 				'p' => [ 'fromid' => 'Q1', 'toid' => 'Q1' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
 					'code' => 'invalid-entity-id',
-					'message' => 'You must provide unique ids'
-				] ]
+					'message' => 'You must provide unique ids',
+				] ],
 			],
 			[ //6 from id is property
 				'p' => [ 'fromid' => 'P1', 'toid' => 'Q1' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'not-item'
-				] ]
+					'code' => 'not-item',
+				] ],
 			],
 			[ //7 to id is property
 				'p' => [ 'fromid' => 'Q1', 'toid' => 'P1' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'not-item'
-				] ]
+					'code' => 'not-item',
+				] ],
 			],
 			[ //8 bad ignoreconficts
 				'p' => [ 'fromid' => 'Q2', 'toid' => 'Q2', 'ignoreconflicts' => 'foo' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'invalid-entity-id'
-				] ]
+					'code' => 'invalid-entity-id',
+				] ],
 			],
 			[ //9 bad ignoreconficts
 				'p' => [ 'fromid' => 'Q2', 'toid' => 'Q2', 'ignoreconflicts' => 'label|foo' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'invalid-entity-id'
-				] ]
+					'code' => 'invalid-entity-id',
+				] ],
 			],
 		];
 	}
@@ -497,19 +497,19 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 			[
 				[ 'descriptions' => [ 'en' => [ 'language' => 'en', 'value' => 'foo' ] ] ],
 				[ 'descriptions' => [ 'en' => [ 'language' => 'en', 'value' => 'foo2' ] ] ],
-				[ 'Conflicting descriptions for language en' ]
+				[ 'Conflicting descriptions for language en' ],
 			],
 			[
 				[ 'sitelinks' => [ 'dewiki' => [ 'site' => 'dewiki', 'title' => 'Foo' ] ] ],
 				[ 'sitelinks' => [ 'dewiki' => [ 'site' => 'dewiki', 'title' => 'Foo2' ] ] ],
-				[ 'Conflicting sitelinks for dewiki' ]
+				[ 'Conflicting sitelinks for dewiki' ],
 			],
 			[
 				[ 'claims' => [ 'P1' => [ [ 'mainsnak' => [
 					'snaktype' => 'value', 'property' => 'P1', 'datavalue' => [
-						'value' => [ 'entity-type' => 'item', 'numeric-id' => 2 ], 'type' => 'wikibase-entityid' ]
+						'value' => [ 'entity-type' => 'item', 'numeric-id' => 2 ], 'type' => 'wikibase-entityid' ],
 					],
-					'type' => 'statement', 'rank' => 'normal' ] ] ]
+					'type' => 'statement', 'rank' => 'normal' ] ] ],
 				],
 				[],
 				[ 'The two items cannot be merged because one of them links to the other using the properties: P1' ],
@@ -518,12 +518,12 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 				[],
 				[ 'claims' => [ 'P1' => [ [ 'mainsnak' => [
 					'snaktype' => 'value', 'property' => 'P1', 'datavalue' => [
-						'value' => [ 'entity-type' => 'item', 'numeric-id' => 1 ], 'type' => 'wikibase-entityid' ]
+						'value' => [ 'entity-type' => 'item', 'numeric-id' => 1 ], 'type' => 'wikibase-entityid' ],
 					],
-					'type' => 'statement', 'rank' => 'normal' ] ] ]
+					'type' => 'statement', 'rank' => 'normal' ] ] ],
 				],
 				[ 'The two items cannot be merged because one of them links to the other using the properties: P1' ],
-			]
+			],
 		];
 	}
 
@@ -533,7 +533,7 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 	public function testMergeItemsConflictsExceptions( $pre1, $pre2, $extraData ) {
 		$expected = [
 			'exception' => [ 'type' => ApiUsageException::class, 'code' => 'failed-save' ],
-			'extradata' => $extraData
+			'extradata' => $extraData,
 		];
 
 		// -- prefill the entities --------------------------------------------
@@ -559,7 +559,7 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 		$params = [
 			'action' => 'wbmergeitems',
 			'fromid' => 'Q60457977',
-			'toid' => 'Q60457978'
+			'toid' => 'Q60457978',
 		];
 
 		try {

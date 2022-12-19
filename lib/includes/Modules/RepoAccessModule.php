@@ -39,14 +39,14 @@ class RepoAccessModule extends RL\Module {
 			$wbRepo = [
 				'url' => $settings->getSetting( 'repoUrl' ),
 				'scriptPath' => $settings->getSetting( 'repoScriptPath' ),
-				'articlePath' => $settings->getSetting( 'repoArticlePath' )
+				'articlePath' => $settings->getSetting( 'repoArticlePath' ),
 			];
 		} else {
 			// just assume we're the repo
 			$wbRepo = [
 				'url' => $wgServer,
 				'scriptPath' => $wgScriptPath,
-				'articlePath' => $wgArticlePath
+				'articlePath' => $wgArticlePath,
 			];
 		}
 

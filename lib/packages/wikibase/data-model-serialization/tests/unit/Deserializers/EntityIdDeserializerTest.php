@@ -40,10 +40,10 @@ class EntityIdDeserializerTest extends TestCase {
 	public function nonDeserializableProvider() {
 		return [
 			[
-				42
+				42,
 			],
 			[
-				[]
+				[],
 			],
 		];
 	}
@@ -60,7 +60,7 @@ class EntityIdDeserializerTest extends TestCase {
 		return [
 			[
 				new ItemId( 'Q42' ),
-				'Q42'
+				'Q42',
 			],
 		];
 	}

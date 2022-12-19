@@ -77,31 +77,31 @@ class ChangeOpDescriptionTest extends \PHPUnit\Framework\TestCase {
 			'set Description is a change' => [
 				$item,
 				new ChangeOpDescription( 'en', 'myNew', $validatorFactory ),
-				new ChangeOpDescriptionResult( $item->getId(), 'en', null, 'myNew', true )
+				new ChangeOpDescriptionResult( $item->getId(), 'en', null, 'myNew', true ),
 			],
 			'update Description is a change' => [
 				$item,
 				new ChangeOpDescription( 'en', 'DUPE', $validatorFactory ),
-				new ChangeOpDescriptionResult( $item->getId(), 'en', 'myNew', 'DUPE', true )
+				new ChangeOpDescriptionResult( $item->getId(), 'en', 'myNew', 'DUPE', true ),
 			],
 			'update to existing Description is a no change' => [
 				$item,
 				new ChangeOpDescription( 'en', 'DUPE', $validatorFactory ),
-				new ChangeOpDescriptionResult( $item->getId(), 'en', 'DUPE', 'DUPE', false )
+				new ChangeOpDescriptionResult( $item->getId(), 'en', 'DUPE', 'DUPE', false ),
 
 			],
 			'set to null is a change' => [
 				$item,
 				new ChangeOpDescription( 'en', null, $validatorFactory ),
-				new ChangeOpDescriptionResult( $item->getId(), 'en', 'DUPE', null, true )
+				new ChangeOpDescriptionResult( $item->getId(), 'en', 'DUPE', null, true ),
 
 			],
 			'set null to null is a no change' => [
 				$item,
 				new ChangeOpDescription( 'en', null, $validatorFactory ),
-				new ChangeOpDescriptionResult( $item->getId(), 'en', null, null, false )
+				new ChangeOpDescriptionResult( $item->getId(), 'en', null, null, false ),
 
-			]
+			],
 		];
 		return $args;
 	}

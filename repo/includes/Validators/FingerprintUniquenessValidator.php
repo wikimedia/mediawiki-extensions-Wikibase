@@ -203,7 +203,7 @@ class FingerprintUniquenessValidator implements ValueValidator {
 			[
 				$label,
 				$lang,
-				$collidingEntityId
+				$collidingEntityId,
 			]
 		);
 	}

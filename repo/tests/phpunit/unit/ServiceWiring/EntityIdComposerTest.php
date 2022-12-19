@@ -25,7 +25,7 @@ class EntityIdComposerTest extends ServiceWiringTestCase {
 					EntityTypeDefinitions::ENTITY_ID_COMPOSER_CALLBACK => function ( $repositoryName, $uniquePart ) {
 						return ItemId::newFromRepositoryAndNumber( $repositoryName, $uniquePart );
 					},
-				]
+				],
 			] ) );
 
 		/** @var EntityIdComposer $entityIdComposer */

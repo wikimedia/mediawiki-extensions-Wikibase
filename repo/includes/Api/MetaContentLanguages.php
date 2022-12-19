@@ -144,7 +144,7 @@ class MetaContentLanguages extends ApiQueryBase {
 					'name',
 				],
 				self::PARAM_HELP_MSG_PER_VALUE => [],
-			]
+			],
 		];
 	}
 

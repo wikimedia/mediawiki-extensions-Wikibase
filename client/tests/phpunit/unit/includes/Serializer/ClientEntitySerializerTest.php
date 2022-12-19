@@ -79,7 +79,7 @@ class ClientEntitySerializerTest extends \PHPUnit\Framework\TestCase {
 						'datatype' => '<DATATYPE>',
 					],
 					'type' => 'statement',
-					'rank' => 'normal'
+					'rank' => 'normal',
 				] ],
 			],
 		];

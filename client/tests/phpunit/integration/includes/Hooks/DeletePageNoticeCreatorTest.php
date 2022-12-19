@@ -74,7 +74,7 @@ class DeletePageNoticeCreatorTest extends MediaWikiIntegrationTestCase {
 
 		return [
 			[ $expected, $title, 'after page delete' ],
-			[ $expected2, $title2, 'page delete queued' ]
+			[ $expected2, $title2, 'page delete queued' ],
 		];
 	}
 

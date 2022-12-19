@@ -136,39 +136,39 @@ class ChangeOpStatementTest extends \PHPUnit\Framework\TestCase {
 		$args[] = [
 			$item777,
 			$statements[7770],
-			[ $statements[777], $statements[7770] ]
+			[ $statements[777], $statements[7770] ],
 		];
 
 		$args[] = [
 			$item666,
 			$statements[6660],
-			[ $statements[666], $statements[6660] ]
+			[ $statements[666], $statements[6660] ],
 		];
 
 		// test adding the same statements with a correct but different guid (these should be added)
 		$args[] = [
 			$item777,
 			$statements[7777],
-			[ $statements[777], $statements[7770], $statements[7777] ]
+			[ $statements[777], $statements[7770], $statements[7777] ],
 		];
 
 		$args[] = [
 			$item666,
 			$statements[6666],
-			[ $statements[666], $statements[6660], $statements[6666] ]
+			[ $statements[666], $statements[6660], $statements[6666] ],
 		];
 
 		// test adding the same statements with and id that already exists (these shouldn't be added)
 		$args[] = [
 			$item777,
 			$statements[7777],
-			[ $statements[777], $statements[7770], $statements[7777] ]
+			[ $statements[777], $statements[7770], $statements[7777] ],
 		];
 
 		$args[] = [
 			$item666,
 			$statements[6666],
-			[ $statements[666], $statements[6660], $statements[6666] ]
+			[ $statements[666], $statements[6660], $statements[6666] ],
 		];
 
 		// test adding a statement at a specific index
@@ -176,7 +176,7 @@ class ChangeOpStatementTest extends \PHPUnit\Framework\TestCase {
 			$item777,
 			$statements[0],
 			[ $statements[0], $statements[777], $statements[7770], $statements[7777] ],
-			0
+			0,
 		];
 
 		// test moving a statement
@@ -184,7 +184,7 @@ class ChangeOpStatementTest extends \PHPUnit\Framework\TestCase {
 			$item666,
 			$statements[6666],
 			[ $statements[666], $statements[6666], $statements[6660] ],
-			1
+			1,
 		];
 
 		// test adding a statement featuring another property id within the boundaries of statements the
@@ -193,7 +193,7 @@ class ChangeOpStatementTest extends \PHPUnit\Framework\TestCase {
 			$item666,
 			$statements[11],
 			[ $statements[666], $statements[6666], $statements[6660], $statements[11] ],
-			1
+			1,
 		];
 
 		// test moving a subset of statements featuring the same property
@@ -205,9 +205,9 @@ class ChangeOpStatementTest extends \PHPUnit\Framework\TestCase {
 				$statements[11],
 				$statements[666],
 				$statements[6666],
-				$statements[6660]
+				$statements[6660],
 			],
-			0
+			0,
 		];
 
 		$args['StatementListProvider support'] = [

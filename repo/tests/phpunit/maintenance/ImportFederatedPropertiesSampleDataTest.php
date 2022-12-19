@@ -48,7 +48,7 @@ class ImportFederatedPropertiesSampleDataTest extends MaintenanceBaseTestCase {
 			'Ailanthus altissima (Mill.) Swingle	Tree of heaven	taxon',
 			'Alopochen aegyptiaca Linnaeus, 1766	Egyptian goose	taxon',
 			'Alternanthera philoxeroides (Mart.) Griseb.	Alligator weed	taxon',
-			''
+			'',
 		];
 		$maintenance = new ImportFederatedPropertiesSampleData();
 		$actualDataLines = $maintenance->getDataToImport( $dataFile );

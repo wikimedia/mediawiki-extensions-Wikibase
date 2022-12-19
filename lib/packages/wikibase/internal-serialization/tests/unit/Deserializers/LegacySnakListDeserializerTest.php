@@ -68,7 +68,7 @@ class LegacySnakListDeserializerTest extends \PHPUnit\Framework\TestCase {
 			[
 				'somevalue',
 				1337,
-			]
+			],
 		];
 
 		$this->assertEquals(

@@ -30,7 +30,7 @@ class UnitConverterTest extends \PHPUnit\Framework\TestCase {
 				'Q1',
 				'+1600000000000000000000000000000000000000000000',
 				'http://acme.test/Q2',
-				'+1975200000000000\d{32}\b'
+				'+1975200000000000\d{32}\b',
 			],
 			[ 'Q1', '+160', 'http://acme.test/Q2', '+19752' ],
 			[ 'Q1', '+1600', 'http://acme.test/Q2', '+197520' ],

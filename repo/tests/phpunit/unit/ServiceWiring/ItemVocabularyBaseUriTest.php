@@ -53,7 +53,7 @@ class ItemVocabularyBaseUriTest extends ServiceWiringTestCase {
 			'WikibaseRepo.EntitySourceDefinitions',
 			$this->getEntitySourceDefinitions( [
 				'test.source/somethings' => [ 'something' ],
-				$baseUri => [ Item::ENTITY_TYPE ]
+				$baseUri => [ Item::ENTITY_TYPE ],
 			] )
 		);
 
@@ -67,7 +67,7 @@ class ItemVocabularyBaseUriTest extends ServiceWiringTestCase {
 		$this->mockService(
 			'WikibaseRepo.EntitySourceDefinitions',
 			$this->getEntitySourceDefinitions( [
-				'test.source/somethings' => [ 'something' ]
+				'test.source/somethings' => [ 'something' ],
 			] )
 		);
 

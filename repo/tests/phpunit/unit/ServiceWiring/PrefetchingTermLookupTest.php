@@ -30,7 +30,7 @@ class PrefetchingTermLookupTest extends ServiceWiringTestCase {
 			->willReturn( [
 				'some-source' => [ 'some-entity-type' => function () {
 					return $this->createStub( PrefetchingTermLookup::class );
-				} ]
+				} ],
 			] );
 		$this->mockService( 'WikibaseRepo.EntitySourceAndTypeDefinitions', $sourceAndTypeDefinitions );
 

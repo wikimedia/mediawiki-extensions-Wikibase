@@ -39,11 +39,11 @@ class ItemSearchTextGeneratorTest extends \PHPUnit\Framework\TestCase {
 			'/^xyz$/',
 			'/^(?!abcde).*$/',
 			'/^Berlin$/',
-			'/^Rome$/'
+			'/^Rome$/',
 		];
 
 		return [
-			[ $item, $patterns ]
+			[ $item, $patterns ],
 		];
 	}
 

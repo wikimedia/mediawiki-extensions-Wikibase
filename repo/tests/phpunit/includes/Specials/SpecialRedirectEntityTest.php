@@ -217,7 +217,7 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 		];
 
 		$targetItemContent = [ 'labels' => [
-			'en' => [ 'language' => 'en', 'value' => 'Item 2' ]
+			'en' => [ 'language' => 'en', 'value' => 'Item 2' ],
 		] ];
 
 		// -- prefill the entities --------------------------------------------
@@ -270,7 +270,7 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 	public function testEntityRedirectNonExistingEntities() {
 		$params = [
 			'fromid' => 'Q60457977',
-			'toid' => 'Q60457978'
+			'toid' => 'Q60457978',
 		];
 
 		$html = $this->executeSpecialEntityRedirect( $params );
@@ -280,7 +280,7 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 	public function testNoPermission() {
 		$params = [
 			'fromid' => 'Q1',
-			'toid' => 'Q2'
+			'toid' => 'Q2',
 		];
 
 		$user = User::newFromName( 'UserWithoutPermission' );

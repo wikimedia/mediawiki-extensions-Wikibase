@@ -66,7 +66,7 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 	public function testAddFilter() {
 		$user = $this->getUser(
 			[
-				[ 'usenewrc' => 0 ]
+				[ 'usenewrc' => 0 ],
 			]
 		);
 
@@ -156,12 +156,12 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 				[
 					$this->getDatabase(),
 					true,
-					$this->getUserOptionsLookup()
+					$this->getUserOptionsLookup(),
 				]
 			)
 			->onlyMethods( [
 					'hasWikibaseChangesEnabled',
-					'addWikibaseConditions'
+					'addWikibaseConditions',
 				] )
 			->getMock();
 
@@ -186,12 +186,12 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 		return [
 			[
 				0,
-				true
+				true,
 			],
 
 			[
 				1,
-				false
+				false,
 			],
 		];
 	}
@@ -217,7 +217,7 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 		return [
 			[
 				'wlshowwikibase',
-				'Watchlist'
+				'Watchlist',
 			],
 
 			[
@@ -227,7 +227,7 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 
 			[
 				'rcshowwikidata',
-				'Recentchangeslinked'
+				'Recentchangeslinked',
 			],
 		];
 	}
@@ -279,37 +279,37 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 				[],
 				[ 'usenewrc' => 1 ],
 				'Watchlist',
-				'enhanced default pref for Watchlist'
+				'enhanced default pref for Watchlist',
 			],
 			[
 				[],
 				[ 'usenewrc' => 1 ],
 				'RecentChanges',
-				'enhanced default pref for RecentChanges'
+				'enhanced default pref for RecentChanges',
 			],
 			[
 				[ 'enhanced' => 1 ],
 				[ 'usenewrc' => 0 ],
 				'Watchlist',
-				'enhanced not default but has enhanced=1 req param'
+				'enhanced not default but has enhanced=1 req param',
 			],
 			[
 				[ 'enhanced' => 1 ],
 				[ 'usenewrc' => 0 ],
 				'RecentChanges',
-				'enhanced not default but has enhanced=1 req param'
+				'enhanced not default but has enhanced=1 req param',
 			],
 			[
 				[ 'enhanced' => 1 ],
 				[ 'usenewrc' => 1 ],
 				'Watchlist',
-				'enhanced default and has enhanced=1 req param'
+				'enhanced default and has enhanced=1 req param',
 			],
 			[
 				[ 'enhanced' => 1 ],
 				[ 'usenewrc' => 1 ],
 				'RecentChangesLinked',
-				'enhanced default and has enhanced=1 req param'
+				'enhanced default and has enhanced=1 req param',
 			],
 		];
 	}
@@ -344,43 +344,43 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 				[ 'usenewrc' => 0 ],
 				'hideWikibase',
 				true,
-				'Watchlist'
+				'Watchlist',
 			],
 			[
 				[ 'enhanced' => 0 ],
 				[ 'usenewrc' => 1 ],
 				'hideWikibase',
 				true,
-				'RecentChanges'
+				'RecentChanges',
 			],
 			[
 				[],
 				[ 'usenewrc' => 0 ],
 				'hideWikibase',
 				true,
-				'RecentChangesLinked'
+				'RecentChangesLinked',
 			],
 			[
 				[ 'action' => 'submit', 'hideWikibase' => 0 ],
 				[ 'usenewrc' => 0 ],
 				'hideWikibase',
 				false,
-				'Watchlist'
+				'Watchlist',
 			],
 			[
 				[ 'action' => 'submit', 'hideWikibase' => 1 ],
 				[ 'usenewrc' => 0 ],
 				'hideWikibase',
 				true,
-				'Watchlist'
+				'Watchlist',
 			],
 			[
 				[ 'action' => 'submit' ],
 				[ 'usenewrc' => 0 ],
 				'hideWikibase',
 				false,
-				'Watchlist'
-			]
+				'Watchlist',
+			],
 		];
 	}
 
@@ -414,36 +414,36 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 				[ 'wlshowwikibase' => 1, 'usenewrc' => 0 ],
 				'hideWikibase',
 				false,
-				'Watchlist'
+				'Watchlist',
 			],
 			[
 				[ 'enhanced' => 0 ],
 				[ 'rcshowwikidata' => 1, 'usenewrc' => 1 ],
 				'hideWikibase',
 				false,
-				'RecentChanges'
+				'RecentChanges',
 			],
 			[
 				[],
 				[ 'rcshowwikidata' => 1, 'usenewrc' => 0 ],
 				'hideWikibase',
 				false,
-				'RecentChangesLinked'
+				'RecentChangesLinked',
 			],
 			[
 				[ 'action' => 'submit', 'hideWikibase' => 0 ],
 				[ 'wlshowwikibase' => 1, 'usenewrc' => 0 ],
 				'hideWikibase',
 				false,
-				'Watchlist'
+				'Watchlist',
 			],
 			[
 				[ 'action' => 'submit' ],
 				[ 'wlshowwikibase' => 1, 'usenewrc' => 0 ],
 				'hideWikibase',
 				false,
-				'Watchlist'
-			]
+				'Watchlist',
+			],
 		];
 	}
 
@@ -468,7 +468,7 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 		return [
 			[ 'Watchlist' ],
 			[ 'Recentchanges' ],
-			[ 'Recentchangeslinked' ]
+			[ 'Recentchangeslinked' ],
 		];
 	}
 

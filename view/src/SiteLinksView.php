@@ -175,7 +175,7 @@ class SiteLinksView {
 					[
 						$this->numberLocalizer->localizeNumber( $count ),
 					]
-				)
+				),
 			] ),
 			$this->templateFactory->render(
 				'wikibase-sitelinklistview',
@@ -233,7 +233,7 @@ class SiteLinksView {
 
 			$siteLinksForTable[] = [
 				'siteLink' => $siteLink,
-				'site' => $site
+				'site' => $site,
 			];
 		}
 

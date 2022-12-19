@@ -990,7 +990,7 @@ return [
 			return new FedPropertiesTypeDispatchingEntitySearchHelper(
 				new CombinedEntitySearchHelper( [
 					$typeDispatchingEntitySearchHelper,
-					WikibaseRepo::getFederatedPropertiesServiceFactory( $services )->newApiEntitySearchHelper()
+					WikibaseRepo::getFederatedPropertiesServiceFactory( $services )->newApiEntitySearchHelper(),
 				] ),
 				$typeDispatchingEntitySearchHelper
 			);
@@ -1119,7 +1119,7 @@ return [
 		return [
 			'types' => $entityTypeDefinitions->getEntityTypes(),
 			'deserializer-factory-functions' => $entityTypeDefinitions
-				->get( EntityTypeDefinitions::JS_DESERIALIZER_FACTORY_FUNCTION )
+				->get( EntityTypeDefinitions::JS_DESERIALIZER_FACTORY_FUNCTION ),
 		];
 	},
 

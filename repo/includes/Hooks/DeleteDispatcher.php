@@ -71,7 +71,7 @@ class DeleteDispatcher implements ArticleDeleteCompleteHook {
 
 		$jobParams = [
 			"pageId" => $id,
-			"archivedRevisionCount" => $archivedRevisionCount
+			"archivedRevisionCount" => $archivedRevisionCount,
 		];
 		$job = new DispatchChangeDeletionNotificationJob( $title, $jobParams );
 

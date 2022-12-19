@@ -24,31 +24,31 @@ class EntityContentDiffTest extends MediaWikiIntegrationTestCase {
 		return [
 			'empty' => [
 				new EntityDiff(),
-				new Diff()
+				new Diff(),
 			],
 			'entity diff' => [
 				new EntityDiff( [
 					'label' => new Diff( [
 						'en' => new DiffOpAdd( 'Spam' ),
-					] )
+					] ),
 				] ),
-				new Diff()
+				new Diff(),
 			],
 			'redirect diff' => [
 				new EntityDiff(),
 				new Diff( [
 					'redirect' => new DiffOpAdd( 'Spam' ),
-				] )
+				] ),
 			],
 			'entity and redirect diff' => [
 				new EntityDiff( [
 					'label' => new Diff( [
 							'en' => new DiffOpAdd( 'Spam' ),
-						] )
+						] ),
 				] ),
 				new Diff( [
 					'redirect' => new DiffOpRemove( 'Spam' ),
-				] )
+				] ),
 			],
 		];
 	}

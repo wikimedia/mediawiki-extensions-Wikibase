@@ -152,7 +152,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 				EntityChange::ADD,
 				null,
 				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ] )
-			)
+			),
 		];
 
 		$cases['unlink item Q1'] = [
@@ -161,7 +161,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 				EntityChange::UPDATE,
 				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ] ),
 				new Item( $q1 )
-			)
+			),
 		];
 
 		$cases['link item Q2'] = [
@@ -170,7 +170,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 				EntityChange::UPDATE,
 				new Item( $q2 ),
 				$this->getItemWithSiteLinks( $q2, [ 'enwiki' => '2' ] )
-			)
+			),
 		];
 
 		$cases['change link of Q1'] = [
@@ -179,7 +179,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 				EntityChange::UPDATE,
 				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ] ),
 				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '2' ] )
-			)
+			),
 		];
 
 		$cases['delete linked item Q2'] = [
@@ -188,7 +188,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 				EntityChange::REMOVE,
 				$this->getItemWithSiteLinks( $q2, [ 'enwiki' => '2' ] ),
 				null
-			)
+			),
 		];
 
 		$cases['add another sitelink to Q2'] = [
@@ -200,7 +200,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 					'enwiki' => '2',
 					'itwiki' => 'DUE',
 				] )
-			)
+			),
 		];
 
 		$cases['alias change on Q1'] = [
@@ -209,7 +209,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 				EntityChange::UPDATE,
 				new Item( $q1 ),
 				$this->getItemWithAliases( $q1, 'de', [ 'EINS' ] )
-			)
+			),
 		];
 
 		$cases['local label change on Q1 (used by Q2)'] = [
@@ -218,7 +218,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 				EntityChange::UPDATE,
 				new Item( $q1 ),
 				$this->getItemWithLabel( $q1, 'en', 'ONE' )
-			)
+			),
 		];
 
 		$badges = [ new ItemId( 'Q34' ) ];
@@ -227,7 +227,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
 				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ] ),
-				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ], $badges ) )
+				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ], $badges ) ),
 		];
 
 		$cases['description only change on Q1'] = [
@@ -235,7 +235,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
 				$this->getItemWithDescriptions( $q1, [ 'en' => 'Hello' ] ),
-				$this->getItemWithDescriptions( $q1, [ 'en' => 'Hallo' ] ) )
+				$this->getItemWithDescriptions( $q1, [ 'en' => 'Hallo' ] ) ),
 		];
 
 		$cases['statement change on Q1'] = [
@@ -244,7 +244,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 				EntityChange::UPDATE,
 				new Item( $q1 ),
 				$this->getItemWithStatement( $q1, new NumericPropertyId( 'P5' ), new StringValue( 'Hello' ) )
-			)
+			),
 		];
 
 		return $cases;
@@ -316,7 +316,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 			$q2SitelinkUsage,
 			$q2OtherUsage,
 			$q2LabelUsage,
-			$q2DescriptionUsage
+			$q2DescriptionUsage,
 		] );
 
 		// Cases
@@ -342,7 +342,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 				EntityChange::ADD,
 				null,
 				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ] )
-			)
+			),
 		];
 
 		$cases['unlink item Q1'] = [
@@ -356,7 +356,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 				EntityChange::UPDATE,
 				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ] ),
 				new Item( $q1 )
-			)
+			),
 		];
 
 		$cases['link item Q2'] = [
@@ -370,7 +370,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 				EntityChange::UPDATE,
 				new Item( $q2 ),
 				$this->getItemWithSiteLinks( $q2, [ 'enwiki' => '2' ] )
-			)
+			),
 		];
 
 		$cases['change link of Q1, with NO prior record'] = [
@@ -384,7 +384,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 				EntityChange::UPDATE,
 				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ] ),
 				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '2' ] )
-			)
+			),
 		];
 
 		$cases['change link of Q1, with prior record'] = [
@@ -398,7 +398,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 				EntityChange::UPDATE,
 				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ] ),
 				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '2' ] )
-			)
+			),
 		];
 
 		$badges = [ new ItemId( 'Q34' ) ];
@@ -411,7 +411,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
 				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ] ),
-				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ], $badges ) )
+				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ], $badges ) ),
 		];
 
 		$cases['delete linked item Q2'] = [
@@ -425,7 +425,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 				EntityChange::REMOVE,
 				$this->getItemWithSiteLinks( $q2, [ 'enwiki' => '2' ] ),
 				null
-			)
+			),
 		];
 
 		$cases['add another sitelink to Q2'] = [
@@ -441,7 +441,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 					'enwiki' => '2',
 					'itwiki' => 'DUE',
 				] )
-			)
+			),
 		];
 
 		$cases['other language label change on Q1 (not used on any page)'] = [
@@ -452,7 +452,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 				EntityChange::UPDATE,
 				new Item( $q1 ),
 				$this->getItemWithLabel( $q1, 'de', 'EINS' )
-			)
+			),
 		];
 
 		$cases['other change on Q2 (used on page 2)'] = [
@@ -465,7 +465,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 				EntityChange::UPDATE,
 				new Item( $q2 ),
 				$this->getItemWithAliases( $q2, 'fr', [ 'X', 'Y' ] )
-			)
+			),
 		];
 
 		$cases['other language label change on Q2 (used on page 1 and 2)'] = [
@@ -479,7 +479,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 				EntityChange::UPDATE,
 				new Item( $q2 ),
 				$this->getItemWithLabel( $q2, 'de', 'EINS' )
-			)
+			),
 		];
 
 		$cases['local label change on Q1 (used by page 2)'] = [
@@ -492,7 +492,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 				EntityChange::UPDATE,
 				new Item( $q1 ),
 				$this->getItemWithLabel( $q1, 'en', 'ONE' )
-			)
+			),
 		];
 
 		$cases['local label change on Q2 (used by page 1 and page 2)'] = [
@@ -506,7 +506,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 				EntityChange::UPDATE,
 				new Item( $q2 ),
 				$this->getItemWithLabel( $q2, 'en', 'TWO' )
-			)
+			),
 		];
 
 		$cases['local description change on Q2 (used by page 2)'] = [
@@ -519,7 +519,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 				EntityChange::UPDATE,
 				new Item( $q2 ),
 				$this->getItemWithDescriptions( $q2, [ 'en' => 'Wow' ] )
-			)
+			),
 		];
 
 		$cases['local statement change on Q2 (used by page 2)'] = [
@@ -532,7 +532,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 				EntityChange::UPDATE,
 				new Item( $q2 ),
 				$this->getItemWithStatement( $q2, new NumericPropertyId( 'P1' ), new StringValue( 'Hello' ) )
-			)
+			),
 		];
 
 		$cases['unrelated statement change on Q2 (used by page 2)'] = [
@@ -543,7 +543,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 				EntityChange::UPDATE,
 				new Item( $q2 ),
 				$this->getItemWithStatement( $q2, new NumericPropertyId( 'P2' ), new StringValue( 'Hello' ) )
-			)
+			),
 		];
 
 		return $cases;

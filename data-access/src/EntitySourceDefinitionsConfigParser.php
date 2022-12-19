@@ -158,7 +158,7 @@ class EntitySourceDefinitionsConfigParser {
 
 		return [
 			$ns,
-			$m[3] ?? SlotRecord::MAIN
+			$m[3] ?? SlotRecord::MAIN,
 		];
 	}
 

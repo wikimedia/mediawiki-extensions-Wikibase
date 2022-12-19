@@ -43,7 +43,7 @@ class ValidatorErrorLocalizerTest extends \PHPUnit\Framework\TestCase {
 		return [
 			'simple' => [
 				Error::newError( 'Bla bla' ),
-				[]
+				[],
 			],
 			'with params' => [
 				Error::newError(
@@ -52,7 +52,7 @@ class ValidatorErrorLocalizerTest extends \PHPUnit\Framework\TestCase {
 					'test',
 					[ 'thingy', [ 'a', 'b', 'c' ] ]
 				),
-				[ 'thingy', 'a|b|c' ]
+				[ 'thingy', 'a|b|c' ],
 			],
 		];
 	}

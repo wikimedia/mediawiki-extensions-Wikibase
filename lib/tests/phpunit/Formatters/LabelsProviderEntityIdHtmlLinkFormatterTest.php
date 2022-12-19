@@ -62,12 +62,12 @@ class LabelsProviderEntityIdHtmlLinkFormatterTest extends MediaWikiIntegrationTe
 			'has a title' => [
 				'expectedPattern' => '@title="A title".*@',
 				'label' => null,
-				'title' => 'A title'
+				'title' => 'A title',
 			],
 			"has no title" => [
 				'expectedPattern' => '@a href="' . self::DEFAULT_URL . '">Q42<@',
 				'label' => null,
-				'title' => null
+				'title' => null,
 			],
 			"doesn't exist, lookup labels" => [
 				'expectedPattern' => '@^Q42' . preg_quote( wfMessage( 'word-separator' )->text(), '@' ) . '.*>' .
@@ -75,7 +75,7 @@ class LabelsProviderEntityIdHtmlLinkFormatterTest extends MediaWikiIntegrationTe
 					'<@',
 				'label' => null,
 				'title' => null,
-				'exists' => false
+				'exists' => false,
 			],
 		];
 	}
@@ -222,7 +222,7 @@ class LabelsProviderEntityIdHtmlLinkFormatterTest extends MediaWikiIntegrationTe
 						'de-at' => 'Österreichisches Deutsch',
 						'de-ch' => 'Schweizer Hochdeutsch',
 						'en' => 'english in german',
-						'en-ca' => 'Canadian English'
+						'en-ca' => 'Canadian English',
 					];
 					return $names[$languageCode];
 				}

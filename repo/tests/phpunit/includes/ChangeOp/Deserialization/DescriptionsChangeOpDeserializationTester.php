@@ -20,7 +20,7 @@ trait DescriptionsChangeOpDeserializationTester {
 		$description = 'foo';
 		$changeOp = $this->getChangeOpDeserializer()->createEntityChangeOp(
 			[
-				'descriptions' => [ 'en' => [ 'language' => 'en', 'value' => $description ] ]
+				'descriptions' => [ 'en' => [ 'language' => 'en', 'value' => $description ] ],
 			]
 		);
 

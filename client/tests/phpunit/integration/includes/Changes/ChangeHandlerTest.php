@@ -175,7 +175,7 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 			'WikibaseHandleChanges' => [ function( array $changes ) use ( $spy ) {
 				$spy->handleChangesCallCount++;
 				return true;
-			} ]
+			} ],
 		];
 
 		$changeHandler = $this->getChangeHandler( [], null, $testHooks );
@@ -432,33 +432,33 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 			[ // #0
 				$changes['property-creation'],
 				[ 'Q100' => [] ],
-				$empty
+				$empty,
 			],
 			[ // #1
 				$changes['property-deletion'],
 				[ 'Q100' => [] ],
-				$empty
+				$empty,
 			],
 			[ // #2
 				$changes['property-set-label'],
 				[ 'Q100' => [] ],
-				$empty
+				$empty,
 			],
 
 			[ // #3
 				$changes['item-creation'],
 				[ 'Q100' => [] ],
-				$empty
+				$empty,
 			],
 			[ // #4
 				$changes['item-deletion'],
 				[ 'Q100' => [] ],
-				$empty
+				$empty,
 			],
 			[ // #5
 				$changes['item-deletion-linked'],
 				[ 'Q100' => [ 'enwiki' => 'Emmy2' ] ],
-				$emmy2UpdateAll
+				$emmy2UpdateAll,
 			],
 
 			[ // #6
@@ -469,12 +469,12 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 			[ // #7
 				$changes['set-en-label'],
 				[ 'Q100' => [ 'enwiki' => 'Emmy2' ] ],
-				$emmy2PurgeParser
+				$emmy2PurgeParser,
 			],
 			[ // #8
 				$changes['set-en-label'],
 				[ 'Q100' => [ 'enwiki' => $userEmmy2 ] ], // user namespace
-				$userEmmy2PurgeParser
+				$userEmmy2PurgeParser,
 			],
 			[ // #9
 				$changes['set-en-aliases'],
@@ -485,29 +485,29 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 			[ // #10
 				$changes['add-claim'],
 				[ 'Q100' => [ 'enwiki' => 'Emmy2' ] ],
-				$empty // statements are ignored
+				$empty, // statements are ignored
 			],
 			[ // #11
 				$changes['remove-claim'],
 				[ 'Q100' => [ 'enwiki' => 'Emmy2' ] ],
-				$empty // statements are ignored
+				$empty, // statements are ignored
 			],
 
 			[ // #12
 				$changes['set-dewiki-sitelink'],
 				[ 'Q100' => [] ],
-				$empty // not yet linked
+				$empty, // not yet linked
 			],
 			[ // #13
 				$changes['set-enwiki-sitelink'],
 				[ 'Q100' => [ 'enwiki' => 'Emmy' ] ],
-				$emmyUpdateLinks
+				$emmyUpdateLinks,
 			],
 
 			[ // #14
 				$changes['change-dewiki-sitelink'],
 				[ 'Q100' => [ 'enwiki' => 'Emmy' ] ],
-				$emmyUpdateLinks
+				$emmyUpdateLinks,
 			],
 			[ // #15
 				$changes['change-enwiki-sitelink'],
@@ -516,23 +516,23 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 					'scheduleRefreshLinks' => [ 'Emmy' => true, 'Emmy2' => true ],
 					'purgeWebCache' => [ 'Emmy' => true, 'Emmy2' => true ],
 					'injectRCRecord' => [ 'Emmy' => true, 'Emmy2' => true ],
-				]
+				],
 			],
 			[ // #16
 				$changes['change-enwiki-sitelink-badges'],
 				[ 'Q100' => [ 'enwiki' => 'Emmy2' ] ],
-				$emmy2UpdateLinks
+				$emmy2UpdateLinks,
 			],
 
 			[ // #17
 				$changes['remove-dewiki-sitelink'],
 				[ 'Q100' => [ 'enwiki' => 'Emmy2' ] ],
-				$emmy2UpdateLinks
+				$emmy2UpdateLinks,
 			],
 			[ // #18
 				$changes['remove-enwiki-sitelink'],
 				[ 'Q100' => [ 'enwiki' => 'Emmy2' ] ],
-				$emmy2UpdateLinks
+				$emmy2UpdateLinks,
 			],
 		];
 	}
@@ -638,7 +638,7 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 			->setConstructorArgs(
 				[
 					$this->db,
-					$pageStore
+					$pageStore,
 				]
 			)
 			->onlyMethods( [ 'fetchPageRecords' ] )

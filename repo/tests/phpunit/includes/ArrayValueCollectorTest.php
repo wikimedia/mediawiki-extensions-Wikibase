@@ -45,8 +45,8 @@ class ArrayValueCollectorTest extends TestCase {
 					'key2' => [
 						'val2',
 						'key3' => 'val3',
-						'key4' => [ 'val4' ]
-					]
+						'key4' => [ 'val4' ],
+					],
 				],
 				[],
 				[
@@ -62,8 +62,8 @@ class ArrayValueCollectorTest extends TestCase {
 					'key2' => [
 						'val2',
 						'key3' => 'val3',
-						'key4' => [ 'val4' ]
-					]
+						'key4' => [ 'val4' ],
+					],
 				],
 				[ 'key1', 'key4' ],
 				[

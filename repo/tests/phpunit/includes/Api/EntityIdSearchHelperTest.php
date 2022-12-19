@@ -167,7 +167,7 @@ class EntityIdSearchHelperTest extends \PHPUnit\Framework\TestCase {
 				new ItemId( self::EXISTING_FOREIGN_ITEM ),
 				new Term( self::DEFAULT_LANGUAGE, self::DEFAULT_LABEL ),
 				new Term( self::DEFAULT_LANGUAGE, self::DEFAULT_DESCRIPTION )
-			)
+			),
 		];
 
 		$entitySearchHelper = $this->newEntitySearchHelper(

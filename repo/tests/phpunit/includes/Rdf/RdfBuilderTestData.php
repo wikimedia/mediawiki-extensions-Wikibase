@@ -322,7 +322,7 @@ class RdfBuilderTestData {
 				new EntityRedirect( new ItemId( $q4242 ),
 					$q42Id ),
 				$revisionNumber
-			)
+			),
 		];
 
 		$entities = [];

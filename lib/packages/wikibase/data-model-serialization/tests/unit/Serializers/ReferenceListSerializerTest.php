@@ -22,7 +22,7 @@ class ReferenceListSerializerTest extends DispatchableSerializerTest {
 			->method( 'serialize' )
 			->will( $this->returnValue( [
 				'hash' => 'da39a3ee5e6b4b0d3255bfef95601890afd80709',
-				'snaks' => []
+				'snaks' => [],
 			] ) );
 
 		return new ReferenceListSerializer( $referenceSerializerFake );
@@ -31,12 +31,12 @@ class ReferenceListSerializerTest extends DispatchableSerializerTest {
 	public function serializableProvider() {
 		return [
 			[
-				new ReferenceList()
+				new ReferenceList(),
 			],
 			[
 				new ReferenceList( [
-					new Reference()
-				] )
+					new Reference(),
+				] ),
 			],
 		];
 	}
@@ -44,13 +44,13 @@ class ReferenceListSerializerTest extends DispatchableSerializerTest {
 	public function nonSerializableProvider() {
 		return [
 			[
-				5
+				5,
 			],
 			[
-				[]
+				[],
 			],
 			[
-				new Reference()
+				new Reference(),
 			],
 		];
 	}
@@ -59,23 +59,23 @@ class ReferenceListSerializerTest extends DispatchableSerializerTest {
 		return [
 			[
 				[],
-				new ReferenceList()
+				new ReferenceList(),
 			],
 			[
 				[
 					[
 						'hash' => 'da39a3ee5e6b4b0d3255bfef95601890afd80709',
-						'snaks' => []
+						'snaks' => [],
 					],
 					[
 						'hash' => 'da39a3ee5e6b4b0d3255bfef95601890afd80709',
-						'snaks' => []
-					]
+						'snaks' => [],
+					],
 				],
 				new ReferenceList( [
 					new Reference( [ new PropertyNoValueSnak( 1 ) ] ),
-					new Reference( [ new PropertyNoValueSnak( 1 ) ] )
-				] )
+					new Reference( [ new PropertyNoValueSnak( 1 ) ] ),
+				] ),
 			],
 		];
 	}

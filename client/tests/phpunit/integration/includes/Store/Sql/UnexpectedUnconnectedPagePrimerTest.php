@@ -119,12 +119,12 @@ class UnexpectedUnconnectedPagePrimerTest extends MediaWikiIntegrationTestCase {
 			'Many unexpectedly unconnected, tiny batch size' => [
 				'expectedPageProps' => $manyUnconnectedExpected,
 				'priorPageProps' => $manyUnconnectedPrior,
-				'batchSize' => 3
+				'batchSize' => 3,
 			],
 			'Many unexpectedly unconnected with legacy (positive) sortkey, tiny batch size' => [
 				'expectedPageProps' => $manyUnconnectedExpected,
 				'priorPageProps' => array_map( $convertToLegacy, $manyUnconnectedExpected ),
-				'batchSize' => 3
+				'batchSize' => 3,
 			],
 			'Many unexpectedly unconnected, tiny batch size, tiny batch size multiplicator' => [
 				'expectedPageProps' => $manyUnconnectedExpected,

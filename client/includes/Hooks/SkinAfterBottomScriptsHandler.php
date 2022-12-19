@@ -90,17 +90,17 @@ class SkinAfterBottomScriptsHandler {
 			'mainEntity' => $entityConceptUri,
 			'author' => [
 				'@type' => 'Organization',
-				'name' => wfMessage( 'wikibase-page-schema-author-name' )->text()
+				'name' => wfMessage( 'wikibase-page-schema-author-name' )->text(),
 			],
 			'publisher' => [
 				'@type' => 'Organization',
 				'name' => wfMessage( 'wikibase-page-schema-publisher-name' )->text(),
 				'logo' => [
 					'@type' => 'ImageObject',
-					'url' => wfMessage( 'wikibase-page-schema-publisher-logo-url' )->text()
-				]
+					'url' => wfMessage( 'wikibase-page-schema-publisher-logo-url' )->text(),
+				],
 			],
-			'datePublished' => wfTimestamp( TS_ISO_8601, $schemaTimestamp )
+			'datePublished' => wfTimestamp( TS_ISO_8601, $schemaTimestamp ),
 		];
 
 		if ( $revisionTimestamp ) {

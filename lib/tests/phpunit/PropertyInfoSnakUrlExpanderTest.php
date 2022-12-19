@@ -34,7 +34,7 @@ class PropertyInfoSnakUrlExpanderTest extends \PHPUnit\Framework\TestCase {
 
 		$infoLookup = new MockPropertyInfoLookup( [
 			$p2->getSerialization() => [
-				PropertyInfoLookup::KEY_DATA_TYPE => 'string'
+				PropertyInfoLookup::KEY_DATA_TYPE => 'string',
 			],
 			$p3->getSerialization() => [
 				PropertyInfoLookup::KEY_DATA_TYPE => 'string',
@@ -62,37 +62,37 @@ class PropertyInfoSnakUrlExpanderTest extends \PHPUnit\Framework\TestCase {
 			'unknown property' => [
 				$infoProvider,
 				new PropertyValueSnak( $p66, $value ),
-				null
+				null,
 			],
 			'no url pattern' => [
 				$infoProvider,
 				new PropertyValueSnak( $p2, $value ),
-				null
+				null,
 			],
 			'url pattern defined' => [
 				$infoProvider,
 				new PropertyValueSnak( $p3, $value ),
-				'http://acme.info/foo/X%26Y'
+				'http://acme.info/foo/X%26Y',
 			],
 			'value with slash' => [
 				$infoProvider,
 				new PropertyValueSnak( $p3, new StringValue( 'X/Y' ) ),
-				'http://acme.info/foo/X/Y'
+				'http://acme.info/foo/X/Y',
 			],
 			'value with spaces' => [
 				$infoProvider,
 				new PropertyValueSnak( $p3, new StringValue( 'X Y Z' ) ),
-				'http://acme.info/foo/X%20Y%20Z'
+				'http://acme.info/foo/X%20Y%20Z',
 			],
 			'pattern with url parameter' => [
 				$infoProvider,
 				new PropertyValueSnak( $p4, $value ),
-				'http://acme.info/foo?m=test&q=X%26Y'
+				'http://acme.info/foo?m=test&q=X%26Y',
 			],
 			'pattern with fragment' => [
 				$infoProvider,
 				new PropertyValueSnak( $p5, $value ),
-				'http://acme.info/foo#X%26Y'
+				'http://acme.info/foo#X%26Y',
 			],
 			'pattern with illegal protocol' => [
 				$infoProvider,
@@ -122,7 +122,7 @@ class PropertyInfoSnakUrlExpanderTest extends \PHPUnit\Framework\TestCase {
 				new PropertyValueSnak(
 					new NumericPropertyId( 'P7' ),
 					new EntityIdValue( new NumericPropertyId( 'P18' ) )
-				)
+				),
 			],
 		];
 	}

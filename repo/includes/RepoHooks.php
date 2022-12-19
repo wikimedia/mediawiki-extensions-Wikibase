@@ -407,15 +407,15 @@ final class RepoHooks {
 	 */
 	public static function onGetPreferences( User $user, array &$preferences ) {
 		$preferences['wb-acknowledgedcopyrightversion'] = [
-			'type' => 'api'
+			'type' => 'api',
 		];
 
 		$preferences['wb-dismissleavingsitenotice'] = [
-			'type' => 'api'
+			'type' => 'api',
 		];
 
 		$preferences['wb-reftabs-mode'] = [
-			'type' => 'api'
+			'type' => 'api',
 		];
 
 		$preferences['wikibase-entitytermsview-showEntitytermslistview'] = [
@@ -472,7 +472,7 @@ final class RepoHooks {
 				[],
 				[
 					'action' => 'edit',
-					'restore' => $revisionRecord->getId()
+					'restore' => $revisionRecord->getId(),
 				]
 			);
 
@@ -532,9 +532,9 @@ final class RepoHooks {
 							),
 							'href' => $title->getLocalURL( [
 								'action' => 'edit',
-								'restore' => $revid
+								'restore' => $revid,
 							] ),
-						]
+						],
 					];
 
 					$links['views'] = array_merge( $head, $neck, $tail );
@@ -657,7 +657,7 @@ final class RepoHooks {
 					// fail
 					$message = [
 						'wikibase-no-direct-editing',
-						$pageObj->getTitle()->getNsText()
+						$pageObj->getTitle()->getNsText(),
 					];
 
 					return false;
@@ -947,7 +947,7 @@ final class RepoHooks {
 									->getLanguages(),
 							];
 						},
-					]
+					],
 				],
 				'dependencies' => [
 					'util.ContentLanguages',

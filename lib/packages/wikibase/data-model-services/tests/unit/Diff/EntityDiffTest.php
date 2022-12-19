@@ -81,7 +81,7 @@ class EntityDiffTest extends TestCase {
 				'en' => new DiffOpAdd( 'foobar' ),
 				'de' => new DiffOpRemove( 'onoez' ),
 				'nl' => new DiffOpChange( 'foo', 'bar' ),
-			], true )
+			], true ),
 		];
 
 		$diffs[] = new EntityDiff( $diffOps );

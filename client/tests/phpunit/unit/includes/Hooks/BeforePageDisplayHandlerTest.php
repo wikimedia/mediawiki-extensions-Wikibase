@@ -48,7 +48,7 @@ class BeforePageDisplayHandlerTest extends \PHPUnit\Framework\TestCase {
 				false, // wikibase not enabled for namespace
 				[ 'de:Rom' ], // local site link
 				null, // not connected item, no prefixed id
-				true // user logged in
+				true, // user logged in
 			],
 			[
 				[],
@@ -56,8 +56,8 @@ class BeforePageDisplayHandlerTest extends \PHPUnit\Framework\TestCase {
 				true, // wikibase enabled for namespace
 				[ 'de:Rom' ],
 				'Q4', // has connected item
-				true // user logged in
-			]
+				true, // user logged in
+			],
 		];
 	}
 
@@ -87,8 +87,8 @@ class BeforePageDisplayHandlerTest extends \PHPUnit\Framework\TestCase {
 				true, // wikibase enabled for namespace
 				[ 'de:Rom' ],
 				'Q4', // has connected item
-				true // user logged in
-			]
+				true, // user logged in
+			],
 		];
 	}
 
@@ -132,8 +132,8 @@ class BeforePageDisplayHandlerTest extends \PHPUnit\Framework\TestCase {
 				true, // wikibase enabled for namespace
 				[], // no lang links
 				null, // no prefixed id
-				true // user logged in
-			]
+				true, // user logged in
+			],
 		];
 	}
 
@@ -163,8 +163,8 @@ class BeforePageDisplayHandlerTest extends \PHPUnit\Framework\TestCase {
 				true, // wikibase enabled for namespace
 				[], // no lang links
 				null, // no prefixed id
-				false // user logged out
-			]
+				false, // user logged out
+			],
 		];
 	}
 
@@ -194,8 +194,8 @@ class BeforePageDisplayHandlerTest extends \PHPUnit\Framework\TestCase {
 				true, // wikibase enabled for namespace
 				[], // no lang links
 				null, // no prefixed id
-				true // user logged in
-			]
+				true, // user logged in
+			],
 		];
 	}
 
@@ -225,8 +225,8 @@ class BeforePageDisplayHandlerTest extends \PHPUnit\Framework\TestCase {
 				true, // wikibase enabled for namespace
 				[], // no lang links
 				null, // no prefixed id
-				true // user logged in
-			]
+				true, // user logged in
+			],
 		];
 	}
 

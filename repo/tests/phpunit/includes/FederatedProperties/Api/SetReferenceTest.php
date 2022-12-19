@@ -71,7 +71,7 @@ class SetReferenceTest extends FederatedPropertiesApiTestCase {
 						'datavalue' => [ 'type' => 'string', 'value' => 'potato' ],
 					],
 				],
-			] )
+			] ),
 		] );
 
 		$this->assertArrayHasKey( 'success', $result );

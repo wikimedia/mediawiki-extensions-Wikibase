@@ -21,7 +21,7 @@ class LangLinkSiteGroupsTest extends ServiceWiringTestCase {
 		$this->mockService(
 			'WikibaseClient.Settings',
 			new SettingsArray( [
-				'languageLinkAllowedSiteGroups' => $langListGroups
+				'languageLinkAllowedSiteGroups' => $langListGroups,
 			] )
 		);
 

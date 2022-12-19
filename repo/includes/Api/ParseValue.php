@@ -255,7 +255,7 @@ class ParseValue extends ApiBase {
 
 	private function parseStringValue( ValueParser $parser, string $value, ?ValueValidator $validator ): array {
 		$result = [
-			'raw' => $value
+			'raw' => $value,
 		];
 
 		try {

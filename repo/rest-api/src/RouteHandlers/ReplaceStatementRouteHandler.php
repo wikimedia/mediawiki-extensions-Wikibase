@@ -119,7 +119,7 @@ class ReplaceStatementRouteHandler extends SimpleHandler {
 				self::PARAM_SOURCE => 'path',
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => true,
-			]
+			],
 		];
 	}
 
@@ -138,13 +138,13 @@ class ReplaceStatementRouteHandler extends SimpleHandler {
 					self::PARAM_SOURCE => 'body',
 					ParamValidator::PARAM_TYPE => 'array',
 					ParamValidator::PARAM_REQUIRED => false,
-					ParamValidator::PARAM_DEFAULT => []
+					ParamValidator::PARAM_DEFAULT => [],
 				],
 				self::BOT_BODY_PARAM => [
 					self::PARAM_SOURCE => 'body',
 					ParamValidator::PARAM_TYPE => 'boolean',
 					ParamValidator::PARAM_REQUIRED => false,
-					ParamValidator::PARAM_DEFAULT => false
+					ParamValidator::PARAM_DEFAULT => false,
 				],
 				self::COMMENT_BODY_PARAM => [
 					self::PARAM_SOURCE => 'body',

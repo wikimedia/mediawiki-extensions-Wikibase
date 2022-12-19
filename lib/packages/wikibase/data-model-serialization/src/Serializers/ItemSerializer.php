@@ -96,7 +96,7 @@ class ItemSerializer implements DispatchableSerializer {
 
 	private function getSerialized( Item $item ) {
 		$serialization = [
-			'type' => $item->getType()
+			'type' => $item->getType(),
 		];
 
 		$this->addIdToSerialization( $item, $serialization );

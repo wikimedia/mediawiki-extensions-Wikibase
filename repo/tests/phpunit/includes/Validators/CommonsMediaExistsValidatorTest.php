@@ -48,14 +48,14 @@ class CommonsMediaExistsValidatorTest extends \PHPUnit\Framework\TestCase {
 	public function provideValidate() {
 		return [
 			"Valid, plain string" => [
-				true, "Foo.png"
+				true, "Foo.png",
 			],
 			"Valid, StringValue" => [
-				true, new StringValue( "Foo.png" )
+				true, new StringValue( "Foo.png" ),
 			],
 			"Invalid, StringValue" => [
-				false, new StringValue( "Foo.NOT-FOUND.png" )
-			]
+				false, new StringValue( "Foo.NOT-FOUND.png" ),
+			],
 		];
 	}
 

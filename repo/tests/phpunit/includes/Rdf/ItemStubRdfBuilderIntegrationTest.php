@@ -86,7 +86,7 @@ class ItemStubRdfBuilderIntegrationTest extends MediaWikiIntegrationTestCase {
 		$entityId = new ItemId( $entityName );
 
 		$this->termLookup->setData( [
-			$this->getTestData()->getEntity( $entityName )
+			$this->getTestData()->getEntity( $entityName ),
 		] );
 
 		$writer = $this->getTestData()->getNTriplesWriter();

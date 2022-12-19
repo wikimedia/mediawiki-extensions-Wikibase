@@ -44,7 +44,7 @@ class TestValidator implements ValueValidator {
 			return Result::newSuccess();
 		} else {
 			return Result::newError( [
-				Error::newError( "doesn't match " . $this->regex )
+				Error::newError( "doesn't match " . $this->regex ),
 			] );
 		}
 	}

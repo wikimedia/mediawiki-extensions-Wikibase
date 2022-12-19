@@ -27,11 +27,11 @@ class EntityIdPlainLinkFormatterTest extends \PHPUnit\Framework\TestCase {
 		return [
 			'ItemId' => [
 				new ItemId( 'Q23' ),
-				'[[ITEM-TEST--Q23]]'
+				'[[ITEM-TEST--Q23]]',
 			],
 			'NumericPropertyId' => [
 				new NumericPropertyId( 'P23' ),
-				'[[PROPERTY-TEST--P23]]'
+				'[[PROPERTY-TEST--P23]]',
 			],
 		];
 	}

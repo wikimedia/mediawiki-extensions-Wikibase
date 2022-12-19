@@ -58,8 +58,8 @@ class EntityLinkFormatterFactoryTest extends ServiceWiringTestCase {
 			'WikibaseRepo.EntityTypeDefinitions',
 			new EntityTypeDefinitions( [
 				'something' => [
-					EntityTypeDefinitions::LINK_FORMATTER_CALLBACK => $callback
-				]
+					EntityTypeDefinitions::LINK_FORMATTER_CALLBACK => $callback,
+				],
 			] )
 		);
 

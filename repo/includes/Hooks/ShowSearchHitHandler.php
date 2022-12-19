@@ -237,7 +237,7 @@ class ShowSearchHitHandler implements ShowSearchHitHook, ShowSearchHitTitleHook 
 		$markedText = HtmlArmor::getHtml( $text['value'] ) . $fallback->getHtml( $termFallback );
 		return [
 			'language' => $text['language'],
-			'value' => new HtmlArmor( $markedText )
+			'value' => new HtmlArmor( $markedText ),
 		];
 	}
 

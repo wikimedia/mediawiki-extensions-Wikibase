@@ -40,7 +40,7 @@ class FormatterLabelDescriptionLookupFactoryTest extends \PHPUnit\Framework\Test
 		$redirectResolvingLatestRevisionLookup->method( 'lookupLatestRevisionResolvingRedirect' )
 			->willReturn( [
 				123, // some non-null revision id
-				$itemId
+				$itemId,
 			] );
 
 		$factory = new FormatterLabelDescriptionLookupFactory(
@@ -91,7 +91,7 @@ class FormatterLabelDescriptionLookupFactoryTest extends \PHPUnit\Framework\Test
 				new FormatterOptions( [
 					ValueFormatter::OPT_LANG => 'de',
 				] ),
-				'Kätzchen'
+				'Kätzchen',
 			],
 			'language and fallback chain' => [
 				$termLookup,
@@ -99,7 +99,7 @@ class FormatterLabelDescriptionLookupFactoryTest extends \PHPUnit\Framework\Test
 					ValueFormatter::OPT_LANG => 'fr',
 					FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => $deChChain,
 				] ),
-				'Kätzchen'
+				'Kätzchen',
 			],
 		];
 	}

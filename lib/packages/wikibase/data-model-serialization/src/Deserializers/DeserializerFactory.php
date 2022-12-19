@@ -48,7 +48,7 @@ class DeserializerFactory {
 	public function newEntityDeserializer(): DispatchingDeserializer {
 		return new DispatchingDeserializer( [
 			$this->newItemDeserializer(),
-			$this->newPropertyDeserializer()
+			$this->newPropertyDeserializer(),
 		] );
 	}
 

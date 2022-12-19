@@ -110,7 +110,7 @@ class SnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 					new NumericPropertyId( 'P9' ),
 					new StringValue( 'http://acme.com' )
 				),
-				'url'
+				'url',
 			],
 		];
 	}

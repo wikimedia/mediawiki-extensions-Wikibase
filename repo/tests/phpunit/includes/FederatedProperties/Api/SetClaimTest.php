@@ -103,8 +103,8 @@ class SetClaimTest extends FederatedPropertiesApiTestCase {
 						$fedPropRemoteId => [
 							'datatype' => 'string',
 						],
-					]
-				]
+					],
+				],
 			],
 			// The following request is made by the ConfirmEdit extension.
 			[
@@ -115,9 +115,9 @@ class SetClaimTest extends FederatedPropertiesApiTestCase {
 					'format' => 'json',
 				],
 				[
-					'query' => [ 'namespaces' => [] ]
-				]
-			]
+					'query' => [ 'namespaces' => [] ],
+				],
+			],
 		] );
 
 		[ $result ] = $this->doApiRequestWithToken( [

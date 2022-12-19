@@ -340,7 +340,7 @@ class EditEntityAction extends ViewEntityAction {
 			'href' => $this->getContext()->getTitle()->getLocalURL(),
 			'label' => $this->msg( 'cancel' )->text(),
 			'framed' => false,
-			'flags' => 'destructive'
+			'flags' => 'destructive',
 		] ) )->toString();
 	}
 

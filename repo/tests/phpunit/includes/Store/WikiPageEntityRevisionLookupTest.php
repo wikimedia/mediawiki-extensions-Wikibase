@@ -429,7 +429,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 					'page_is_redirect' => true,
 					'rev_id' => $revId,
 					'role_name' => $slotRole,
-				]
+				],
 			] );
 
 		$entityDataLoader = $this->createMock( WikiPageEntityDataLoader::class );

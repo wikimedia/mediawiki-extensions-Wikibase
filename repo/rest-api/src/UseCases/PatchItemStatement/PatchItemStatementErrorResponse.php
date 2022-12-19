@@ -90,7 +90,7 @@ class PatchItemStatementErrorResponse extends ErrorResponse {
 					"Invalid input for '{$context[StatementValidator::CONTEXT_FIELD_NAME]}' in the patched statement",
 					[
 						'path' => $context[StatementValidator::CONTEXT_FIELD_NAME],
-						'value' => $context[StatementValidator::CONTEXT_FIELD_VALUE]
+						'value' => $context[StatementValidator::CONTEXT_FIELD_VALUE],
 					]
 				);
 

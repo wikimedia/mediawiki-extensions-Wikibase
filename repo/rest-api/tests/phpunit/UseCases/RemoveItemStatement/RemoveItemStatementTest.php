@@ -87,7 +87,7 @@ class RemoveItemStatementTest extends TestCase {
 			'$isBot' => false,
 			'$comment' => 'statement removed by ' . __method__,
 			'$username' => null,
-			'$itemId' => $itemId
+			'$itemId' => $itemId,
 		];
 
 		$this->revisionMetadataRetriever = $this->newItemMetadataRetriever(
@@ -125,7 +125,7 @@ class RemoveItemStatementTest extends TestCase {
 			'$isBot' => false,
 			'$comment' => null,
 			'$username' => null,
-			'$itemId' => null
+			'$itemId' => null,
 		];
 
 		$response = $this->newUseCase()->execute(

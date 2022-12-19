@@ -212,7 +212,7 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 				$links[] = [
 					'rel' => 'alternate',
 					'href' => $entityDataTitle->getCanonicalURL(),
-					'type' => $entityDataFormatProvider->getMimeType( $format )
+					'type' => $entityDataFormatProvider->getMimeType( $format ),
 				];
 			}
 		}

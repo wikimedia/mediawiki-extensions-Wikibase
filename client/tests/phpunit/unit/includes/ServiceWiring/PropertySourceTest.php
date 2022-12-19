@@ -32,7 +32,7 @@ class PropertySourceTest extends ServiceWiringTestCase {
 					'',
 					'',
 					''
-				)
+				),
 			],
 			new SubEntityTypesMapper( [] )
 		);

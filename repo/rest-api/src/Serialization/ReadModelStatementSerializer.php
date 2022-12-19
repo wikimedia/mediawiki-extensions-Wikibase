@@ -15,7 +15,7 @@ class ReadModelStatementSerializer {
 	public const RANK_LABELS = [
 		DataModelStatement::RANK_DEPRECATED => 'deprecated',
 		DataModelStatement::RANK_NORMAL => 'normal',
-		DataModelStatement::RANK_PREFERRED => 'preferred'
+		DataModelStatement::RANK_PREFERRED => 'preferred',
 	];
 	private PropertyValuePairSerializer $propertyValuePairSerializer;
 	private ReferenceSerializer $referenceSerializer;

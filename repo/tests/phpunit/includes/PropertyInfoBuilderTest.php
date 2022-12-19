@@ -23,7 +23,7 @@ class PropertyInfoBuilderTest extends \PHPUnit\Framework\TestCase {
 	private function getPropertyInfoBuilder() {
 		return new PropertyInfoBuilder( [
 			PropertyInfoLookup::KEY_FORMATTER_URL => new NumericPropertyId( 'P42' ),
-			PropertyInfoStore::KEY_CANONICAL_URI => new NumericPropertyId( 'P142' )
+			PropertyInfoStore::KEY_CANONICAL_URI => new NumericPropertyId( 'P142' ),
 		] );
 	}
 
@@ -33,8 +33,8 @@ class PropertyInfoBuilderTest extends \PHPUnit\Framework\TestCase {
 		$cases[] = [
 			Property::newFromType( 'foo' ),
 			[
-				'type' => 'foo'
-			]
+				'type' => 'foo',
+			],
 		];
 
 		$property = Property::newFromType( 'foo' );
@@ -49,8 +49,8 @@ class PropertyInfoBuilderTest extends \PHPUnit\Framework\TestCase {
 			[
 				'type' => 'foo',
 				'formatterURL' => 'test',
-				'canonicalURI' => 'Heya'
-			]
+				'canonicalURI' => 'Heya',
+			],
 		];
 
 		return $cases;

@@ -29,7 +29,7 @@ class UpdateRepoOnDelete extends UpdateRepo {
 			'siteId' => $this->siteId,
 			'entityId' => $this->getEntityId()->getSerialization(),
 			'title' => $this->title->getPrefixedText(),
-			'user' => $this->user->getName()
+			'user' => $this->user->getName(),
 		];
 	}
 

@@ -23,7 +23,7 @@ class EntityChangeOpProviderTest extends \PHPUnit\Framework\TestCase {
 			'not a callback as a value' => [ [ 'entity-type' => 'foo' ] ],
 			'not a string as a key' => [ [
 				100 => function() {
-				}
+				},
 			] ],
 		];
 	}
@@ -51,7 +51,7 @@ class EntityChangeOpProviderTest extends \PHPUnit\Framework\TestCase {
 		$changeOpProvider = new EntityChangeOpProvider( [
 			'entity-type' => function() use ( $deserializer ) {
 				return $deserializer;
-			}
+			},
 		] );
 
 		$this->expectException( ChangeOpDeserializationException::class );
@@ -63,7 +63,7 @@ class EntityChangeOpProviderTest extends \PHPUnit\Framework\TestCase {
 		$changeOpProvider = new EntityChangeOpProvider( [
 			'entity-type' => function() {
 				return (object)[];
-			}
+			},
 		] );
 
 		$this->expectException( LogicException::class );
@@ -77,7 +77,7 @@ class EntityChangeOpProviderTest extends \PHPUnit\Framework\TestCase {
 		$changeOpProvider = new EntityChangeOpProvider( [
 			'entity-type' => function() use ( $deserializer ) {
 				return $deserializer;
-			}
+			},
 		] );
 
 		$this->assertInstanceOf(

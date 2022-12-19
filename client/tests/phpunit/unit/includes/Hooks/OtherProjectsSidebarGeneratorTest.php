@@ -83,13 +83,13 @@ class OtherProjectsSidebarGeneratorTest extends \PHPUnit\Framework\TestCase {
 			'msg' => 'wikibase-otherprojects-wiktionary',
 			'class' => 'wb-otherproject-link wb-otherproject-wiktionary',
 			'href' => 'https://en.wiktionary.org/wiki/Nyan_Cat',
-			'hreflang' => 'en'
+			'hreflang' => 'en',
 		];
 		$wikiquoteLink = [
 			'msg' => 'wikibase-otherprojects-wikiquote',
 			'class' => 'wb-otherproject-link wb-otherproject-wikiquote',
 			'href' => 'https://en.wikiquote.org/wiki/Nyan_Cat',
-			'hreflang' => 'en'
+			'hreflang' => 'en',
 		];
 		$wikipediaLink = [
 			'msg' => 'wikibase-otherprojects-wikipedia',
@@ -104,28 +104,28 @@ class OtherProjectsSidebarGeneratorTest extends \PHPUnit\Framework\TestCase {
 			[
 				[],
 				[],
-				$this->getSidebarLinkBadgeDisplay()
+				$this->getSidebarLinkBadgeDisplay(),
 			],
 			[
 				[ 'spam', 'spam2' ],
 				[],
-				$this->getSidebarLinkBadgeDisplay()
+				$this->getSidebarLinkBadgeDisplay(),
 			],
 			[
 				[ 'enwiktionary' ],
 				[ $wiktionaryLink ],
-				$this->getSidebarLinkBadgeDisplay()
+				$this->getSidebarLinkBadgeDisplay(),
 			],
 			[
 				[ 'enwiki' ],
 				[ $wikipediaLink ],
-				$this->getSidebarLinkBadgeDisplay()
+				$this->getSidebarLinkBadgeDisplay(),
 			],
 			[
 				// Make sure results are sorted alphabetically by their group names
 				[ 'enwiktionary', 'enwiki', 'enwikiquote' ],
 				[ $wikipediaLink, $wikiquoteLink, $wiktionaryLink ],
-				$this->getSidebarLinkBadgeDisplay()
+				$this->getSidebarLinkBadgeDisplay(),
 			],
 		];
 	}
@@ -156,7 +156,7 @@ class OtherProjectsSidebarGeneratorTest extends \PHPUnit\Framework\TestCase {
 			->willReturn( [
 				'enwikiquote' => new SiteLink( 'enwikiquote', 'Nyan Cat' ),
 				'enwiki' => new SiteLink( 'enwiki', 'Nyan Cat', [ new ItemId( self::BADGE_ITEM_ID ) ] ),
-				'enwiktionary' => new SiteLink( 'enwiktionary', 'Nyan Cat' )
+				'enwiktionary' => new SiteLink( 'enwiktionary', 'Nyan Cat' ),
 			] );
 		return $lookup;
 	}

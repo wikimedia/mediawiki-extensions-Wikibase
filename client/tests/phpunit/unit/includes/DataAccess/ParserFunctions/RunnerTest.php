@@ -54,7 +54,7 @@ class RunnerTest extends \PHPUnit\Framework\TestCase {
 		$expected = [
 			'meow!',
 			'noparse' => false,
-			'nowiki' => false
+			'nowiki' => false,
 		];
 
 		$this->assertEquals( $expected, $result );
@@ -92,7 +92,7 @@ class RunnerTest extends \PHPUnit\Framework\TestCase {
 		$expected = [
 			'meow!',
 			'noparse' => false,
-			'nowiki' => false
+			'nowiki' => false,
 		];
 
 		$this->assertEquals( $expected, $result );
@@ -153,7 +153,7 @@ class RunnerTest extends \PHPUnit\Framework\TestCase {
 		$expected = [
 			'',
 			'noparse' => false,
-			'nowiki' => false
+			'nowiki' => false,
 		];
 
 		$this->assertEquals( $expected, $result );
@@ -183,7 +183,7 @@ class RunnerTest extends \PHPUnit\Framework\TestCase {
 		$expected = [
 			'',
 			'noparse' => false,
-			'nowiki' => false
+			'nowiki' => false,
 		];
 
 		$this->assertEquals( $expected, $result );

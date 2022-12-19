@@ -73,7 +73,7 @@ class AddUsagesForPageJobTest extends \PHPUnit\Framework\TestCase {
 
 		$params = [
 			'pageId' => 18,
-			'usages' => [ $usage->asArray() ]
+			'usages' => [ $usage->asArray() ],
 		];
 
 		$title = Title::makeTitle( NS_MAIN, 'Bar' );
@@ -92,7 +92,7 @@ class AddUsagesForPageJobTest extends \PHPUnit\Framework\TestCase {
 		$usageQ5X = new EntityUsage( new ItemId( 'Q5' ), 'X' );
 		$params = [
 			'pageId' => 17,
-			'usages' => [ $usageQ5X->asArray() ]
+			'usages' => [ $usageQ5X->asArray() ],
 		];
 
 		$usageUpdater = $this->createMock( UsageUpdater::class );

@@ -263,7 +263,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 					$entityId,
 					$propertyLabelOrId,
 					$acceptableRanks
-				)
+				),
 			];
 		} catch ( InvalidArgumentException $e ) {
 			throw new ScribuntoException(
@@ -299,7 +299,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 					$entityId,
 					$propertyLabelOrId,
 					$acceptableRanks
-				)
+				),
 			];
 		} catch ( InvalidArgumentException $e ) {
 			throw new ScribuntoException(

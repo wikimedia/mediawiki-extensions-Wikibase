@@ -111,17 +111,17 @@ class HistoryEntityActionTest extends \PHPUnit\Framework\TestCase {
 			'fallback to parent' => [
 				null,
 				null,
-				'(history-title: Page title)'
+				'(history-title: Page title)',
 			],
 			'without label' => [
 				new ItemId( 'Q1' ),
 				null,
-				'(wikibase-history-title-without-label: Q1)'
+				'(wikibase-history-title-without-label: Q1)',
 			],
 			'with label' => [
 				new ItemId( 'Q2' ),
 				new Term( self::DUMMY_LANGUAGE, 'Label' ),
-				'(wikibase-history-title-with-label: Q2, Label)'
+				'(wikibase-history-title-with-label: Q2, Label)',
 			],
 		];
 	}

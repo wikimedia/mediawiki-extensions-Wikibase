@@ -129,7 +129,7 @@ abstract class RecentChangesModificationTest extends MediaWikiIntegrationTestCas
 
 		$change = RecentChange::newFromRow( (object)$changeData );
 		$change->setExtra( [
-			'pageStatus' => 'changed'
+			'pageStatus' => 'changed',
 		] );
 
 		return $change;
@@ -150,9 +150,9 @@ abstract class RecentChangesModificationTest extends MediaWikiIntegrationTestCas
 					'wikibase-repo-change' => [
 						'parent_id' => 1001,
 						'rev_id' => 1002,
-						'object_id' => 'Q42'
-					]
-				]
+						'object_id' => 'Q42',
+					],
+				],
 			],
 			[
 				'rc_timestamp' => '20111111111111',
@@ -161,9 +161,9 @@ abstract class RecentChangesModificationTest extends MediaWikiIntegrationTestCas
 					'wikibase-repo-change' => [
 						'parent_id' => 1001,
 						'rev_id' => 1002,
-						'object_id' => 'Q24'
-					]
-				]
+						'object_id' => 'Q24',
+					],
+				],
 			],
 			[
 				'rc_timestamp' => '20121212121212',
@@ -173,9 +173,9 @@ abstract class RecentChangesModificationTest extends MediaWikiIntegrationTestCas
 					'wikibase-repo-change' => [
 						'parent_id' => 1001,
 						'rev_id' => 1002,
-						'object_id' => 'Q42'
-					]
-				]
+						'object_id' => 'Q42',
+					],
+				],
 			],
 			[
 				'rc_timestamp' => '20111111111111',
@@ -184,9 +184,9 @@ abstract class RecentChangesModificationTest extends MediaWikiIntegrationTestCas
 					'wikibase-repo-change' => [
 						'parent_id' => 1,
 						'rev_id' => 2,
-						'object_id' => 'Q42'
-					]
-				]
+						'object_id' => 'Q42',
+					],
+				],
 			],
 			[
 				'rc_timestamp' => '20111111111115',
@@ -195,9 +195,9 @@ abstract class RecentChangesModificationTest extends MediaWikiIntegrationTestCas
 					'wikibase-repo-change' => [
 						'parent_id' => 2014,
 						'rev_id' => 2013,
-						'object_id' => 'Q2013'
-					]
-				]
+						'object_id' => 'Q2013',
+					],
+				],
 			],
 			[
 				'rc_timestamp' => '20111111111115',
@@ -206,10 +206,10 @@ abstract class RecentChangesModificationTest extends MediaWikiIntegrationTestCas
 					'wikibase-repo-change' => [
 						'parent_id' => 2014,
 						'rev_id' => 2013,
-						'object_id' => 'Q2013'
-					]
-				]
-			]
+						'object_id' => 'Q2013',
+					],
+				],
+			],
 		];
 
 		foreach ( $changes as $changeData ) {

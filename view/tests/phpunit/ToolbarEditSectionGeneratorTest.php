@@ -64,8 +64,8 @@ class ToolbarEditSectionGeneratorTest extends \PHPUnit\Framework\TestCase {
 			[
 				'en',
 				new NumericPropertyId( 'P1' ),
-				'Special:SetLabelDescriptionAliases/P1/en'
-			]
+				'Special:SetLabelDescriptionAliases/P1/en',
+			],
 		];
 	}
 
@@ -80,7 +80,7 @@ class ToolbarEditSectionGeneratorTest extends \PHPUnit\Framework\TestCase {
 
 	public function getSiteLinksEditSectionProvider() {
 		return [
-			[ new NumericPropertyId( 'P1' ), 'Special:SetSiteLink/P1' ]
+			[ new NumericPropertyId( 'P1' ), 'Special:SetSiteLink/P1' ],
 		];
 	}
 
@@ -98,7 +98,7 @@ class ToolbarEditSectionGeneratorTest extends \PHPUnit\Framework\TestCase {
 
 	public function getStatementEditSection() {
 		return [
-			[ new Statement( new PropertyNoValueSnak( new NumericPropertyId( 'P1' ) ) ) ]
+			[ new Statement( new PropertyNoValueSnak( new NumericPropertyId( 'P1' ) ) ) ],
 		];
 	}
 

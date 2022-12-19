@@ -79,7 +79,7 @@ class ChangeOpStatementRank extends ChangeOpBase {
 			$summary->addAutoCommentArgs(
 				[
 					$statementRankSerializer->serialize( $oldRank ),
-					$statementRankSerializer->serialize( $this->rank )
+					$statementRankSerializer->serialize( $this->rank ),
 				]
 			);
 		}

@@ -285,7 +285,7 @@ class RemoveClaims extends ApiBase {
 		return [
 			'action=wbremoveclaims&claim=' . $guid . '&token=foobar'
 				. '&baserevid=7201010'
-				=> [ 'apihelp-wbremoveclaims-example-1', $guid ]
+				=> [ 'apihelp-wbremoveclaims-example-1', $guid ],
 		];
 	}
 

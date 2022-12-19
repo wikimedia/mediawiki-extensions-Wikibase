@@ -39,7 +39,7 @@ class RemoveItemStatementErrorResponseTest extends TestCase {
 		yield 'from invalid item ID' => [
 			new ValidationError( ItemIdValidator::CODE_INVALID, [ ItemIdValidator::CONTEXT_VALUE => 'X123' ] ),
 			ErrorResponse::INVALID_ITEM_ID,
-			'Not a valid item ID: X123'
+			'Not a valid item ID: X123',
 		];
 
 		yield 'from invalid statement ID' => [
@@ -48,7 +48,7 @@ class RemoveItemStatementErrorResponseTest extends TestCase {
 				[ StatementIdValidator::CONTEXT_VALUE => 'Q123$INVALID_STATEMENT_ID' ]
 			),
 			ErrorResponse::INVALID_STATEMENT_ID,
-			'Not a valid statement ID: Q123$INVALID_STATEMENT_ID'
+			'Not a valid statement ID: Q123$INVALID_STATEMENT_ID',
 		];
 
 		yield 'from comment too long' => [
@@ -57,7 +57,7 @@ class RemoveItemStatementErrorResponseTest extends TestCase {
 				[ EditMetadataValidator::CONTEXT_COMMENT_MAX_LENGTH => '500' ]
 			),
 			ErrorResponse::COMMENT_TOO_LONG,
-			'Comment must not be longer than 500 characters.'
+			'Comment must not be longer than 500 characters.',
 		];
 
 		yield 'from invalid tag' => [
@@ -66,7 +66,7 @@ class RemoveItemStatementErrorResponseTest extends TestCase {
 				[ EditMetadataValidator::CONTEXT_TAG_VALUE => 'bad tag' ]
 			),
 			ErrorResponse::INVALID_EDIT_TAG,
-			'Invalid MediaWiki tag: bad tag'
+			'Invalid MediaWiki tag: bad tag',
 		];
 	}
 

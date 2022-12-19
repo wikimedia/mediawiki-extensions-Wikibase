@@ -25,27 +25,27 @@ class EntityIdSiteLinkFormatterTest extends \PHPUnit\Framework\TestCase {
 			[
 				new SiteLink( 'enwiki', "'PAGE'" ),
 				new Term( 'en', "'LABEL'" ),
-				"[['PAGE'|&#39;LABEL&#39;]]"
+				"[['PAGE'|&#39;LABEL&#39;]]",
 			],
 			[
 				new SiteLink( 'enwiki', "'PAGE'" ),
 				new Term( 'en', '' ),
-				"[['PAGE']]"
+				"[['PAGE']]",
 			],
 			[
 				new SiteLink( 'enwiki', "'PAGE'" ),
 				null,
-				"[['PAGE']]"
+				"[['PAGE']]",
 			],
 			[
 				null,
 				new Term( 'en', "'LABEL'" ),
-				'&#39;LABEL&#39;'
+				'&#39;LABEL&#39;',
 			],
 			[
 				null,
 				null,
-				'Q1'
+				'Q1',
 			],
 		];
 	}

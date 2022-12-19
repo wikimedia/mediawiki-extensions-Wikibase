@@ -70,7 +70,7 @@ class ItemContentTest extends EntityContentTestCase {
 			'redirect' => [
 				null,
 				new EntityRedirect( new ItemId( 'Q1' ), new ItemId( 'Q2' ) ),
-				$this->createMock( Title::class )
+				$this->createMock( Title::class ),
 			],
 		];
 	}
@@ -271,7 +271,7 @@ class ItemContentTest extends EntityContentTestCase {
 		$item = $itemContent->getItem();
 
 		$item->setSiteLinkList( new SiteLinkList( [
-			new SiteLink( 'enwiki', 'Foo' )
+			new SiteLink( 'enwiki', 'Foo' ),
 		] ) );
 
 		return $itemContent;
@@ -291,7 +291,7 @@ class ItemContentTest extends EntityContentTestCase {
 				new EntityRedirect( new ItemId( 'Q1' ), new ItemId( 'Q2' ) ),
 				$this->createMock( Title::class )
 			),
-			[]
+			[],
 		];
 
 		$cases['claims'] = [
@@ -300,7 +300,7 @@ class ItemContentTest extends EntityContentTestCase {
 				'wb-claims' => 1,
 				'wb-identifiers' => 0,
 				'wb-sitelinks' => 0,
-			]
+			],
 		];
 
 		$cases['sitelinks'] = [
@@ -309,7 +309,7 @@ class ItemContentTest extends EntityContentTestCase {
 				'wb-claims' => 0,
 				'wb-identifiers' => 0,
 				'wb-sitelinks' => 1,
-			]
+			],
 		];
 
 		$cases['identifiers'] = [
@@ -318,7 +318,7 @@ class ItemContentTest extends EntityContentTestCase {
 				'wb-claims' => 1,
 				'wb-identifiers' => 1,
 				'wb-sitelinks' => 0,
-			]
+			],
 		];
 
 		return $cases;
@@ -480,7 +480,7 @@ class ItemContentTest extends EntityContentTestCase {
 
 		$cases['redirect'] = [
 			$this->newRedirect( new ItemId( 'Q11' ), new ItemId( 'Q12' ) ),
-			new EntityRedirect( new ItemId( 'Q11' ), new ItemId( 'Q12' ) )
+			new EntityRedirect( new ItemId( 'Q11' ), new ItemId( 'Q12' ) ),
 		];
 
 		return $cases;
@@ -550,9 +550,9 @@ class ItemContentTest extends EntityContentTestCase {
 							new Reference(
 								[
 									new PropertySomeValueSnak( new NumericPropertyId( 'P987' ) ),
-									new PropertyNoValueSnak( new NumericPropertyId( 'P986' ) )
+									new PropertyNoValueSnak( new NumericPropertyId( 'P986' ) ),
 								]
-							)
+							),
 						]
 					),
 					'imaguid'

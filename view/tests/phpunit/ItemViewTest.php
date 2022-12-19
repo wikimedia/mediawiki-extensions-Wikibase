@@ -66,8 +66,8 @@ class ItemViewTest extends EntityViewTestCase {
 			[
 				$itemView,
 				$this->newEntityForStatements( [] ),
-				'/wb-item/'
-			]
+				'/wb-item/',
+			],
 		];
 	}
 

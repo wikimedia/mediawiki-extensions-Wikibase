@@ -33,11 +33,11 @@ class MonolingualTextFormatterTest extends \PHPUnit\Framework\TestCase {
 		return [
 			[
 				new MonolingualTextValue( 'de', 'Hallo Welt' ),
-				'@^Hallo Welt$@'
+				'@^Hallo Welt$@',
 			],
 			[
 				new MonolingualTextValue( 'de', 'Hallo&Welt' ),
-				'@^Hallo&Welt$@'
+				'@^Hallo&Welt$@',
 			],
 		];
 	}

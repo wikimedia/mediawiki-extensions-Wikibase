@@ -26,7 +26,7 @@ class SiteLinkListSerializerTest extends TestCase {
 		$this->assertEquals(
 			new ArrayObject( [
 				'foo' => [ 'title' => 'bar', 'badges' => [] ],
-				'omg' => [ 'title' => 'bbq', 'badges' => [ 'Q42' ] ]
+				'omg' => [ 'title' => 'bbq', 'badges' => [ 'Q42' ] ],
 			] ),
 			$serializer->serialize( new SiteLinkList( [ $siteLink1, $siteLink2 ] ) )
 		);

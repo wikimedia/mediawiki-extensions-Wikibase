@@ -119,7 +119,7 @@ class FormatSnakValueTest extends ApiTestCase {
 					SnakFormatter::FORMAT_PLAIN,
 					[ 'lang' => 'de' ],
 					null,
-					'@^12,33$@' // german decimal separator
+					'@^12,33$@', // german decimal separator
 				];
 			} ],
 			[ function () {

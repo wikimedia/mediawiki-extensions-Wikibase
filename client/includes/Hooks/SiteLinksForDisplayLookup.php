@@ -110,7 +110,7 @@ class SiteLinksForDisplayLookup {
 		$this->hookContainer->run( 'WikibaseClientSiteLinksForItem', [
 			$item,
 			&$siteLinks,
-			$this->usageAccumulator
+			$this->usageAccumulator,
 		] );
 
 		return $siteLinks;

@@ -20,7 +20,7 @@ class LocalEntityNamespaceLookupTest extends ServiceWiringTestCase {
 	public function testConstruction(): void {
 		$nsIds = [
 			'item' => 666,
-			'property' => 777
+			'property' => 777,
 		];
 
 		$this->mockService( 'WikibaseRepo.LocalEntitySource',
@@ -30,7 +30,7 @@ class LocalEntityNamespaceLookupTest extends ServiceWiringTestCase {
 				array_map( function ( $nsId ) {
 					return [
 						'namespaceId' => $nsId,
-						'slot' => SlotRecord::MAIN
+						'slot' => SlotRecord::MAIN,
 					];
 				}, $nsIds ),
 				'http://www.example.com/entity',

@@ -140,7 +140,7 @@ class DispatchChangesJobTest extends MediaWikiIntegrationTestCase {
 			'time' => '20210906122813',
 			'info' => [
 				'compactDiff' => new EntityDiffChangedAspects( [], [], [], [
-					$wiki => [ null, 'some_page', false, ]
+					$wiki => [ null, 'some_page', false ],
 				], false ),
 				'metadata' => [
 					'page_id' => 3,

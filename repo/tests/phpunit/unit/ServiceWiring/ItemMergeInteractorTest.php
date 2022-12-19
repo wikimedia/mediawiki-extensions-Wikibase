@@ -39,7 +39,7 @@ class ItemMergeInteractorTest extends ServiceWiringTestCase {
 			'WikibaseRepo.ItemRedirectCreationInteractor'
 				=> $this->createMock( ItemRedirectCreationInteractor::class ),
 			'WikibaseRepo.EntityTitleStoreLookup'
-				=> $this->createMock( EntityTitleStoreLookup::class )
+				=> $this->createMock( EntityTitleStoreLookup::class ),
 		] );
 
 		$this->serviceContainer

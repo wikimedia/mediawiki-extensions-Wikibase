@@ -23,7 +23,7 @@ class SubEntityTypesMapperTest extends ServiceWiringTestCase {
 				'lexeme' => [
 					EntityTypeDefinitions::SUB_ENTITY_TYPES => [
 						'form',
-						'sense'
+						'sense',
 					],
 				],
 				'item' => [],

@@ -47,7 +47,7 @@ class SiteLinkListPatcherTest extends TestCase {
 						new DiffOpRemove( 'Q42' ),
 					],
 					false
-				)
+				),
 			] ),
 			'frwiki' => new Diff( [
 				'name'   => new DiffOpAdd( 'Berlin' ),
@@ -56,8 +56,8 @@ class SiteLinkListPatcherTest extends TestCase {
 						new DiffOpAdd( 'Q42' ),
 					],
 					false
-				)
-			] )
+				),
+			] ),
 		] );
 
 		$expectedLinks = new SiteLinkList();
@@ -72,8 +72,8 @@ class SiteLinkListPatcherTest extends TestCase {
 		$patcher = new SiteLinkListPatcher();
 		$patch = new Diff( [
 			'dewiki' => new Diff( [
-				'name' => new DiffOpAdd( 'Berlin' )
-			], true )
+				'name' => new DiffOpAdd( 'Berlin' ),
+			], true ),
 		] );
 		$siteLinks = $patcher->getPatchedSiteLinkList( new SiteLinkList(), $patch );
 

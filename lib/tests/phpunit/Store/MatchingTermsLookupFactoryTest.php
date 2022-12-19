@@ -46,7 +46,7 @@ class MatchingTermsLookupFactoryTest extends MediaWikiIntegrationTestCase {
 
 	private const MOCK_ITEM_LABELS = [
 		'Q100' => 'Hello',
-		'Q200' => 'Goodbye'
+		'Q200' => 'Goodbye',
 	];
 
 	protected function setUp(): void {
@@ -97,7 +97,7 @@ class MatchingTermsLookupFactoryTest extends MediaWikiIntegrationTestCase {
 	public function testReturnsWorkingLookup() {
 		$factory = new MatchingTermsLookupFactory(
 			new EntityIdComposer( [
-				Item::ENTITY_TYPE => [ ItemId::class, 'newFromRepositoryAndNumber' ]
+				Item::ENTITY_TYPE => [ ItemId::class, 'newFromRepositoryAndNumber' ],
 			] ),
 			$this->dbFactory,
 			new NullLogger(),
@@ -112,7 +112,7 @@ class MatchingTermsLookupFactoryTest extends MediaWikiIntegrationTestCase {
 		$matchingTermsLookup = $factory->getLookupForSource( $itemSource );
 
 		$criteria = new TermIndexSearchCriteria( [
-			'termText' => self::MOCK_ITEM_LABELS['Q100']
+			'termText' => self::MOCK_ITEM_LABELS['Q100'],
 		] );
 
 		$actual = $matchingTermsLookup->getMatchingTerms( [ $criteria ] );

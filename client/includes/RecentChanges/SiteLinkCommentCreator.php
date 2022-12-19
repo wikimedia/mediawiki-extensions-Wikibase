@@ -215,27 +215,27 @@ class SiteLinkCommentCreator {
 			$params['sitelink'] = [
 				'newlink' => [
 					'site' => $siteId,
-					'page' => $diffOp->getNewValue()
-				]
+					'page' => $diffOp->getNewValue(),
+				],
 			];
 		} elseif ( $diffOp instanceof DiffOpRemove ) {
 			$params['message'] = $messagePrefix . 'remove';
 			$params['sitelink'] = [
 				'oldlink' => [
 					'site' => $siteId,
-					'page' => $diffOp->getOldValue()
-				]
+					'page' => $diffOp->getOldValue(),
+				],
 			];
 		} elseif ( $diffOp instanceof DiffOpChange ) {
 			$params['sitelink'] = [
 				'oldlink' => [
 					'site' => $siteId,
-					'page' => $diffOp->getOldValue()
+					'page' => $diffOp->getOldValue(),
 				],
 				'newlink' => [
 					'site' => $siteId,
-					'page' => $diffOp->getNewValue()
-				]
+					'page' => $diffOp->getNewValue(),
+				],
 			];
 		} else {
 			// whatever
@@ -274,12 +274,12 @@ class SiteLinkCommentCreator {
 				$params['sitelink'] = [
 					'oldlink' => [
 						'site' => $siteId,
-						'page' => $diffOp->getOldValue()
+						'page' => $diffOp->getOldValue(),
 					],
 					'newlink' => [
 						'site' => $siteId,
-						'page' => $diffOp->getNewValue()
-					]
+						'page' => $diffOp->getNewValue(),
+					],
 				];
 			}
 		} else {

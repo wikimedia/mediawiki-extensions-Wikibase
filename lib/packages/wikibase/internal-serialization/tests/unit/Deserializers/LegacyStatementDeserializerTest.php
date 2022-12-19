@@ -47,7 +47,7 @@ class LegacyStatementDeserializerTest extends \PHPUnit\Framework\TestCase {
 				'q' => [],
 				'g' => 9001,
 				'refs' => [],
-				'rank' => Statement::RANK_PREFERRED
+				'rank' => Statement::RANK_PREFERRED,
 			] ],
 			[ [
 				'm' => [ 'novalue', 42 ],
@@ -77,7 +77,7 @@ class LegacyStatementDeserializerTest extends \PHPUnit\Framework\TestCase {
 			'q' => [],
 			'g' => null,
 			'rank' => Statement::RANK_NORMAL,
-			'refs' => []
+			'refs' => [],
 		];
 
 		$this->assertEquals(
@@ -101,11 +101,11 @@ class LegacyStatementDeserializerTest extends \PHPUnit\Framework\TestCase {
 			'm' => [ 'novalue', 42 ],
 			'q' => [
 				[ 'novalue', 23 ],
-				[ 'novalue', 1337 ]
+				[ 'novalue', 1337 ],
 			],
 			'g' => 'foo bar baz',
 			'rank' => Statement::RANK_NORMAL,
-			'refs' => []
+			'refs' => [],
 		];
 
 		$this->assertEquals(
@@ -127,7 +127,7 @@ class LegacyStatementDeserializerTest extends \PHPUnit\Framework\TestCase {
 						new PropertyNoValueSnak( 1 ),
 						new PropertyNoValueSnak( 2 ),
 					] )
-				)
+				),
 			] )
 		);
 
@@ -138,16 +138,16 @@ class LegacyStatementDeserializerTest extends \PHPUnit\Framework\TestCase {
 			'm' => [ 'novalue', 42 ],
 			'q' => [
 				[ 'novalue', 23 ],
-				[ 'novalue', 1337 ]
+				[ 'novalue', 1337 ],
 			],
 			'g' => 'foo bar baz',
 			'rank' => Statement::RANK_PREFERRED,
 			'refs' => [
 				[
 					[ 'novalue', 1 ],
-					[ 'novalue', 2 ]
-				]
-			]
+					[ 'novalue', 2 ],
+				],
+			],
 		];
 
 		$deserialized = $this->deserializer->deserialize( $serialization );

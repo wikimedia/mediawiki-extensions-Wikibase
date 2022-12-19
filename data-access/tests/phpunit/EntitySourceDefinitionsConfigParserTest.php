@@ -26,8 +26,8 @@ class EntitySourceDefinitionsConfigParserTest extends TestCase {
 				'baseUri' => 'http://example.com/entity/',
 				'rdfNodeNamespacePrefix' => 'wd',
 				'rdfPredicateNamespacePrefix' => '',
-				'interwikiPrefix' => 'localwiki'
-			]
+				'interwikiPrefix' => 'localwiki',
+			],
 		];
 
 		$parser = new EntitySourceDefinitionsConfigParser();
@@ -54,7 +54,7 @@ class EntitySourceDefinitionsConfigParserTest extends TestCase {
 				'baseUri' => 'http://wikidata.xyz/entity/',
 				'rdfNodeNamespacePrefix' => 'wd',
 				'rdfPredicateNamespacePrefix' => '',
-				'interwikiPrefix' => 'wikidata'
+				'interwikiPrefix' => 'wikidata',
 			],
 			'commons' => [
 				'entityNamespaces' => [ 'mediainfo' => '100/mediainfo' ],
@@ -62,7 +62,7 @@ class EntitySourceDefinitionsConfigParserTest extends TestCase {
 				'baseUri' => 'http://commons.xyz/entity/',
 				'rdfNodeNamespacePrefix' => 'sdc',
 				'rdfPredicateNamespacePrefix' => 'sdc',
-				'interwikiPrefix' => 'commons'
+				'interwikiPrefix' => 'commons',
 			],
 			'apiSource' => [
 				'entityTypes' => [ 'item', 'property' ],
@@ -70,7 +70,7 @@ class EntitySourceDefinitionsConfigParserTest extends TestCase {
 				'rdfNodeNamespacePrefix' => 'wdo',
 				'rdfPredicateNamespacePrefix' => 'wdo',
 				'interwikiPrefix' => 'wikidorta',
-				'type' => 'api'
+				'type' => 'api',
 			],
 		];
 
@@ -128,14 +128,14 @@ class EntitySourceDefinitionsConfigParserTest extends TestCase {
 					'repoDatabase' => $validDatabaseName,
 					'baseUri' => $validBaseUri,
 					'interwikiPrefix' => $validInterwikiPrefix,
-				]
-			]
+				],
+			],
 		];
 
 		yield 'source data not an array' => [
 			[
-				$validSourceName => 'CONFIG'
-			]
+				$validSourceName => 'CONFIG',
+			],
 		];
 
 		yield 'database not a string neither false (int)' => [
@@ -145,8 +145,8 @@ class EntitySourceDefinitionsConfigParserTest extends TestCase {
 					'repoDatabase' => 11,
 					'baseUri' => $validBaseUri,
 					'interwikiPrefix' => $validInterwikiPrefix,
-				]
-			]
+				],
+			],
 		];
 
 		yield 'database not a string neither false (true)' => [
@@ -156,8 +156,8 @@ class EntitySourceDefinitionsConfigParserTest extends TestCase {
 					'repoDatabase' => true,
 					'baseUri' => $validBaseUri,
 					'interwikiPrefix' => $validInterwikiPrefix,
-				]
-			]
+				],
+			],
 		];
 
 		yield 'no baseUri key' => [
@@ -166,8 +166,8 @@ class EntitySourceDefinitionsConfigParserTest extends TestCase {
 					'entityNamespaces' => $validNamespaces,
 					'repoDatabase' => $validDatabaseName,
 					'interwikiPrefix' => $validInterwikiPrefix,
-				]
-			]
+				],
+			],
 		];
 
 		yield 'Base URI not a string' => [
@@ -177,8 +177,8 @@ class EntitySourceDefinitionsConfigParserTest extends TestCase {
 					'repoDatabase' => $validDatabaseName,
 					'baseUri' => 100,
 					'interwikiPrefix' => $validInterwikiPrefix,
-				]
-			]
+				],
+			],
 		];
 
 		yield 'no interwikiPrefix key' => [
@@ -187,8 +187,8 @@ class EntitySourceDefinitionsConfigParserTest extends TestCase {
 					'entityNamespaces' => $validNamespaces,
 					'repoDatabase' => $validDatabaseName,
 					'baseUri' => $validBaseUri,
-				]
-			]
+				],
+			],
 		];
 
 		yield 'interwiki prefix not a string' => [
@@ -198,8 +198,8 @@ class EntitySourceDefinitionsConfigParserTest extends TestCase {
 					'repoDatabase' => $validDatabaseName,
 					'baseUri' => $validBaseUri,
 					'interwikiPrefix' => 1000,
-				]
-			]
+				],
+			],
 		];
 
 		yield 'no entityNamespaces key' => [
@@ -208,8 +208,8 @@ class EntitySourceDefinitionsConfigParserTest extends TestCase {
 					'repoDatabase' => $validDatabaseName,
 					'baseUri' => $validBaseUri,
 					'interwikiPrefix' => $validInterwikiPrefix,
-				]
-			]
+				],
+			],
 		];
 
 		yield 'entity namespace definition not an array' => [
@@ -219,8 +219,8 @@ class EntitySourceDefinitionsConfigParserTest extends TestCase {
 					'repoDatabase' => $validDatabaseName,
 					'baseUri' => $validBaseUri,
 					'interwikiPrefix' => $validInterwikiPrefix,
-				]
-			]
+				],
+			],
 		];
 
 		yield 'entity namespace definition not index by strings' => [
@@ -230,8 +230,8 @@ class EntitySourceDefinitionsConfigParserTest extends TestCase {
 					'repoDatabase' => $validDatabaseName,
 					'baseUri' => $validBaseUri,
 					'interwikiPrefix' => $validInterwikiPrefix,
-				]
-			]
+				],
+			],
 		];
 
 		yield 'entity namespace not a string neither an integer' => [
@@ -241,8 +241,8 @@ class EntitySourceDefinitionsConfigParserTest extends TestCase {
 					'repoDatabase' => $validDatabaseName,
 					'baseUri' => $validBaseUri,
 					'interwikiPrefix' => $validInterwikiPrefix,
-				]
-			]
+				],
+			],
 		];
 
 		yield 'entity namespace and slot definition in incorrect format' => [
@@ -252,8 +252,8 @@ class EntitySourceDefinitionsConfigParserTest extends TestCase {
 					'repoDatabase' => $validDatabaseName,
 					'baseUri' => $validBaseUri,
 					'interwikiPrefix' => $validInterwikiPrefix,
-				]
-			]
+				],
+			],
 		];
 
 		yield 'entity namespace given with slot but not an integer' => [
@@ -263,8 +263,8 @@ class EntitySourceDefinitionsConfigParserTest extends TestCase {
 					'repoDatabase' => $validDatabaseName,
 					'baseUri' => $validBaseUri,
 					'interwikiPrefix' => $validInterwikiPrefix,
-				]
-			]
+				],
+			],
 		];
 	}
 

@@ -105,7 +105,7 @@ class CachingKartographerEmbeddingHandlerTest extends MediaWikiIntegrationTestCa
 			[
 				$this->newSampleCoordinate(),
 				$this->newSampleMarsCoordinate(),
-				$coordinate
+				$coordinate,
 			],
 			$language
 		);
@@ -125,7 +125,7 @@ class CachingKartographerEmbeddingHandlerTest extends MediaWikiIntegrationTestCa
 
 		$parserOutput = $handler->getParserOutput(
 			[
-				$this->newSampleMarsCoordinate()
+				$this->newSampleMarsCoordinate(),
 			],
 			$language
 		);

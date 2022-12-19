@@ -58,7 +58,7 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 
 		$params = [
 			'action' => 'wbgetentities',
-			'ids' => $entityId
+			'ids' => $entityId,
 		];
 
 		$module = $this->getApiModule( GetEntities::class, 'wbgetentities', $params );
@@ -78,7 +78,7 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 
 		$params = [
 			'action' => 'wbgetclaims',
-			'entity' => $entityId
+			'entity' => $entityId,
 		];
 
 		$module = $this->getApiModule( GetClaims::class, 'wbgetclaims', $params );

@@ -56,7 +56,7 @@ class EntityDiffVisualizerFactoryTest extends \PHPUnit\Framework\TestCase {
 		$factory = $this->newFactory( [
 			'item' => function () {
 				return 'WOOO';
-			}
+			},
 		] );
 
 		$this->expectException( \LogicException::class );
@@ -78,7 +78,7 @@ class EntityDiffVisualizerFactoryTest extends \PHPUnit\Framework\TestCase {
 			[ 'non-string key' => [
 				123 => function () {
 					return $this->createMock( EntityDiffVisualizer::class );
-				}
+				},
 			] ],
 			[ 'not a callable' => [ 'item' => 'WOOO' ] ],
 		];

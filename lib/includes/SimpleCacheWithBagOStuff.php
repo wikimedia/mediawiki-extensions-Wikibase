@@ -411,7 +411,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 		$value = @unserialize(
 			$decodedData,
 			[
-				'allowed_classes' => [ \stdClass::class ]
+				'allowed_classes' => [ \stdClass::class ],
 			]
 		);
 

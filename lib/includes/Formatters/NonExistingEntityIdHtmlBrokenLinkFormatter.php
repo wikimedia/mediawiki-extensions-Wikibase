@@ -49,7 +49,7 @@ class NonExistingEntityIdHtmlBrokenLinkFormatter extends NonExistingEntityIdHtml
 				$this->entityTitleTextLookup->getPrefixedText( $entityId )
 			)->text(),
 			'href' => $this->entityUrlLookup->getLinkUrl( $entityId ),
-			'class' => 'new'
+			'class' => 'new',
 		];
 		$messageSection = $this->getUndefinedInfoMessage( $entityId );
 		return Html::element( 'a', $attributes, $entityId->getSerialization() ) . $messageSection;

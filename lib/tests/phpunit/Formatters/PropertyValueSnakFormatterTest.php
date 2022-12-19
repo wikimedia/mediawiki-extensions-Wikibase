@@ -53,7 +53,7 @@ class PropertyValueSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 		return [
 			'format must be a string' => [
 				17,
-				InvalidArgumentException::class
+				InvalidArgumentException::class,
 			],
 		];
 	}
@@ -144,7 +144,7 @@ class PropertyValueSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 		$formatters = [
 			'VT:bad' => new UnDeserializableValueFormatter( new FormatterOptions() ),
 			'VT:string' => $this->getMockFormatter( 'VT:string' ),
-			'PT:commonsMedia' => $this->getMockFormatter( 'PT:commonsMedia' )
+			'PT:commonsMedia' => $this->getMockFormatter( 'PT:commonsMedia' ),
 		];
 
 		$dispatchingFormatter = new DispatchingValueFormatter( $formatters );
@@ -156,7 +156,7 @@ class PropertyValueSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 				'string',
 				SnakFormatter::FORMAT_PLAIN,
 				$dispatchingFormatter,
-				'/^PT:commonsMedia$/'
+				'/^PT:commonsMedia$/',
 			],
 
 			'match VT' => [
@@ -165,7 +165,7 @@ class PropertyValueSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 				'string',
 				SnakFormatter::FORMAT_WIKI,
 				$dispatchingFormatter,
-				'/^VT:string$/'
+				'/^VT:string$/',
 			],
 
 			'use plain value formatter' => [
@@ -174,7 +174,7 @@ class PropertyValueSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 				'string',
 				SnakFormatter::FORMAT_WIKI,
 				new StringFormatter(),
-				'/^something$/'
+				'/^something$/',
 			],
 
 			'UnDeserializableValue, fail' => [
@@ -186,7 +186,7 @@ class PropertyValueSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 				SnakFormatter::FORMAT_HTML,
 				$dispatchingFormatter,
 				null,
-				MismatchingDataValueTypeException::class
+				MismatchingDataValueTypeException::class,
 			],
 
 			'VT mismatching PT, fail' => [
@@ -196,7 +196,7 @@ class PropertyValueSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 				SnakFormatter::FORMAT_WIKI,
 				$dispatchingFormatter,
 				null,
-				MismatchingDataValueTypeException::class
+				MismatchingDataValueTypeException::class,
 			],
 
 			'property not found, fail' => [
@@ -206,7 +206,7 @@ class PropertyValueSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 				SnakFormatter::FORMAT_HTML,
 				$dispatchingFormatter,
 				null,
-				PropertyDataTypeLookupException::class
+				PropertyDataTypeLookupException::class,
 			],
 
 			'data type not found, fail' => [
@@ -216,7 +216,7 @@ class PropertyValueSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 				SnakFormatter::FORMAT_HTML,
 				$dispatchingFormatter,
 				null,
-				FormattingException::class
+				FormattingException::class,
 			],
 		];
 	}

@@ -25,7 +25,7 @@ class TermSearchResultTest extends \PHPUnit\Framework\TestCase {
 				new ItemId( 'Q1234' ),
 				new Term( 'pt', 'ImaLabel' ),
 				new Term( 'en', 'ImaDescription' ),
-				[]
+				[],
 			],
 			[
 				new Term( 'en-gb', 'FooText' ),
@@ -33,7 +33,7 @@ class TermSearchResultTest extends \PHPUnit\Framework\TestCase {
 				new NumericPropertyId( 'P777' ),
 				null,
 				null,
-				[ 'datatype' => 'some datatype' ]
+				[ 'datatype' => 'some datatype' ],
 			],
 			[
 				new Term( 'en-gb', 'FooText' ),
@@ -41,7 +41,7 @@ class TermSearchResultTest extends \PHPUnit\Framework\TestCase {
 				new NumericPropertyId( 'foo:P777' ),
 				null,
 				null,
-				[ 'datatype' => 'some datatype' ]
+				[ 'datatype' => 'some datatype' ],
 			],
 		];
 	}

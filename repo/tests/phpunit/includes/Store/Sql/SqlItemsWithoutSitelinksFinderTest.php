@@ -82,7 +82,7 @@ class SqlItemsWithoutSitelinksFinderTest extends MediaWikiIntegrationTestCase {
 				[
 					'pp_page' => 'page_id',
 					'pp_propname' => $dbw->addQuotes( 'wb-sitelinks' ),
-					'pp_value' => 0
+					'pp_value' => 0,
 				],
 				'page_title <= ' . $dbw->addQuotes( 'Q105' )
 			);
@@ -93,10 +93,10 @@ class SqlItemsWithoutSitelinksFinderTest extends MediaWikiIntegrationTestCase {
 				[
 					'pp_page' => 'page_id',
 					'pp_propname' => $dbw->addQuotes( 'wb-sitelinks' ),
-					'pp_value' => 12
+					'pp_value' => 12,
 				],
 				[
-					'page_title' => 'Q106'
+					'page_title' => 'Q106',
 				]
 			);
 		}

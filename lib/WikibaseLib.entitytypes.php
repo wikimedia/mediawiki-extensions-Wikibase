@@ -67,5 +67,5 @@ return [
 		Def::ENTITY_PATCHER_STRATEGY_BUILDER => function() {
 			return new PropertyPatcher();
 		},
-	]
+	],
 ];

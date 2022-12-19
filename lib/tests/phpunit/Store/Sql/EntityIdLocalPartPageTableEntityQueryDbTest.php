@@ -55,7 +55,7 @@ class EntityIdLocalPartPageTableEntityQueryDbTest extends MediaWikiIntegrationTe
 			[
 				'rev_id' => 220,
 				'rev_page' => $this->db->insertId(),
-				'rev_timestamp' => $this->db->timestamp()
+				'rev_timestamp' => $this->db->timestamp(),
 			]
 		);
 		$this->db->insert(
@@ -145,7 +145,7 @@ class EntityIdLocalPartPageTableEntityQueryDbTest extends MediaWikiIntegrationTe
 				[],
 				[
 					$this->getMockEntityId( 'entityTypeOne', 'localPartOne' ),
-					$this->getMockEntityId( 'entityTypeTwo', 'localPartTwo' )
+					$this->getMockEntityId( 'entityTypeTwo', 'localPartTwo' ),
 				],
 				[
 					'localPartOne' => (object)[

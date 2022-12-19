@@ -84,12 +84,12 @@ class TermLanguageFallbackChainTest extends MediaWikiIntegrationTestCase {
 		$entityInfoBuilderArray = [
 			'de' => [
 				'language' => 'de',
-				'value' => 'Beispiel'
+				'value' => 'Beispiel',
 			],
 			'zh-cn' => [
 				'language' => 'zh-cn',
-				'value' => '测试'
-			]
+				'value' => '测试',
+			],
 		];
 
 		return [

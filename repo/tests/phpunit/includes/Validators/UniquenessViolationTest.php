@@ -26,7 +26,7 @@ class UniquenessViolationTest extends \PHPUnit\Framework\TestCase {
 			'test',
 			[
 				'stuff',
-				$conflictingEntity
+				$conflictingEntity,
 			]
 		);
 

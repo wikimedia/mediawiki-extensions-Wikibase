@@ -44,7 +44,7 @@ class ChangeHandlerTest extends ServiceWiringTestCase {
 				'purgeCacheBatchSize' => 300,
 				'recentChangesBatchSize' => 300,
 				'siteGlobalID' => 'test',
-				'injectRecentChanges' => true
+				'injectRecentChanges' => true,
 			] )
 		);
 

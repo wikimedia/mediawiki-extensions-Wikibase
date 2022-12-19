@@ -181,7 +181,7 @@ class ReplicaMasterAwareRecordIdsAcquirerTest extends TestCase {
 			[ 'column_value' => 'valueA1', 'column_id' => '1' ],
 			[ 'column_value' => 'valueA2', 'column_id' => '2' ],
 			[ 'column_value' => 'valueA3', 'column_id' => '3' ],
-			[ 'column_value' => 'valueA4', 'column_id' => '4' ]
+			[ 'column_value' => 'valueA4', 'column_id' => '4' ],
 		];
 	}
 
@@ -191,7 +191,7 @@ class ReplicaMasterAwareRecordIdsAcquirerTest extends TestCase {
 			[ 'column_value' => 'valueA2', 'column_id' => '2' ],
 			[ 'column_value' => 'valueA3', 'column_id' => '3' ],
 			[ 'column_value' => 'valueA3', 'column_id' => '3' ],
-			[ 'column_value' => 'valueA4', 'column_id' => '4' ]
+			[ 'column_value' => 'valueA4', 'column_id' => '4' ],
 		];
 	}
 

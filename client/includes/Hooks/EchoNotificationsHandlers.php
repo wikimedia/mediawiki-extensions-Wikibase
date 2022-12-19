@@ -195,7 +195,7 @@ class EchoNotificationsHandlers {
 					'entity' => $entityId->getSerialization(),
 				],
 				'title' => $title,
-				'type' => self::NOTIFICATION_TYPE
+				'type' => self::NOTIFICATION_TYPE,
 			] );
 
 			return true;

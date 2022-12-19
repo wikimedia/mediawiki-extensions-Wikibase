@@ -129,7 +129,7 @@ class EntityUsageTable {
 		foreach ( array_chunk( $usageConditions, $this->batchSize ) as $usageConditionChunk ) {
 			$where = [
 				'eu_page_id' => $pageId,
-				$db->makeList( $usageConditionChunk, LIST_OR )
+				$db->makeList( $usageConditionChunk, LIST_OR ),
 			];
 
 			$rowIds = array_merge(
@@ -167,7 +167,7 @@ class EntityUsageTable {
 			$rows[] = [
 				'eu_page_id' => $pageId,
 				'eu_aspect' => $usage->getAspectKey(),
-				'eu_entity_id' => $usage->getEntityId()->getSerialization()
+				'eu_entity_id' => $usage->getEntityId()->getSerialization(),
 			];
 		}
 

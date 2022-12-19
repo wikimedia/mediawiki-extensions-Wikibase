@@ -60,7 +60,7 @@ class TimeRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 					'<http://www/Q1> '
 						. '<http://acme/statement/P7> '
 						. '"2015-11-11T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
-				]
+				],
 			],
 			'complex' => [
 				$snak,
@@ -87,7 +87,7 @@ class TimeRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 					'<http://acme/value/6a84c07a464062e0f3df0cd1884dbdfd> '
 						. '<http://acme/onto/timeCalendarModel> '
 						. '<http://www.wikidata.org/entity/Q1985727> .',
-				]
+				],
 			],
 			'simple Julian' => [
 				$snakJulian,
@@ -96,7 +96,7 @@ class TimeRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 					'<http://www/Q1> '
 						. '<http://acme/statement/P7> '
 						. '"1345-11-19T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
-				]
+				],
 			],
 			'complex Julian' => [
 				$snakJulian,
@@ -123,7 +123,7 @@ class TimeRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 					'<http://acme/value/b05c66f54b0960e1cb712466b7c192b4> '
 						. '<http://acme/onto/timeCalendarModel> '
 						. '<http://www.wikidata.org/entity/Q1985786> .',
-				]
+				],
 			],
 			'simple Julian out of supported conversion range' => [
 				$snakJulianExtreme,
@@ -132,7 +132,7 @@ class TimeRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 					'<http://www/Q1> '
 						. '<http://acme/statement/P7> '
 						. '"-4713-01-02T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
-				]
+				],
 			],
 			'complex Julian out of supported conversion range' => [
 				$snakJulianExtreme,
@@ -159,7 +159,7 @@ class TimeRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 					'<http://acme/value/c375568301bcaae670fefc22d4adce4b> '
 						. '<http://acme/onto/timeCalendarModel> '
 						. '<http://www.wikidata.org/entity/Q1985786> .',
-				]
+				],
 			],
 		];
 	}

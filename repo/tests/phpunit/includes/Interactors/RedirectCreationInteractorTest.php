@@ -193,51 +193,51 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 				new ItemId( 'Q77' ),
 				new ItemId( 'Q12' ),
 				'no-such-entity',
-				[ 'Q77' ]
+				[ 'Q77' ],
 			],
 			'target not found' => [
 				new ItemId( 'Q11' ),
 				new ItemId( 'Q77' ),
 				'no-such-entity',
-				[ 'Q77' ]
+				[ 'Q77' ],
 			],
 			'target is a redirect' => [
 				new ItemId( 'Q11' ),
 				new ItemId( 'Q22' ),
 				'target-is-redirect',
-				[ 'Q22' ]
+				[ 'Q22' ],
 			],
 			'target is incompatible' => [
 				new ItemId( 'Q11' ),
 				new NumericPropertyId( 'P11' ),
 				'target-is-incompatible',
-				[]
+				[],
 			],
 			'target and source are the same' => [
 				new ItemId( 'Q11' ),
 				new ItemId( 'Q11' ),
 				'source-and-target-are-the-same',
-				[]
+				[],
 			],
 
 			'source not empty' => [
 				new ItemId( 'Q12' ),
 				new ItemId( 'Q11' ),
 				'origin-not-empty',
-				[ 'Q12' ]
+				[ 'Q12' ],
 			],
 			'can\'t redirect' => [
 				new NumericPropertyId( 'P11' ),
 				new NumericPropertyId( 'P12' ),
 				'cant-redirect',
-				[]
+				[],
 			],
 			'can\'t redirect EditFilter' => [
 				new ItemId( 'Q11' ),
 				new ItemId( 'Q12' ),
 				'cant-redirect-due-to-edit-filter-hook',
 				[],
-				Status::newFatal( 'EF' )
+				Status::newFatal( 'EF' ),
 			],
 		];
 	}

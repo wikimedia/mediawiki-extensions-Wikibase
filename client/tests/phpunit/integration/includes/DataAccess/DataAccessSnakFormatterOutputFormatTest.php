@@ -91,7 +91,7 @@ class DataAccessSnakFormatterOutputFormatTest extends MediaWikiIntegrationTestCa
 		$p10 = new NumericPropertyId( 'P10' );
 		$propertyInfo = [
 			PropertyInfoLookup::KEY_DATA_TYPE => 'external-id',
-			PropertyInfoLookup::KEY_FORMATTER_URL => 'https://dataAccessSnakFormatterOutputFormatTest/P10/$1'
+			PropertyInfoLookup::KEY_FORMATTER_URL => 'https://dataAccessSnakFormatterOutputFormatTest/P10/$1',
 		];
 
 		$propertyInfoLookup = new MockPropertyInfoLookup( [
@@ -134,7 +134,7 @@ class DataAccessSnakFormatterOutputFormatTest extends MediaWikiIntegrationTestCa
 				new PropertyValueSnak(
 					new NumericPropertyId( 'P2' ),
 					new GlobeCoordinateValue( new LatLongValue( 12, 34 ), null )
-				)
+				),
 			],
 			'quantity' => [
 				'42±0 a &#91;&#91;b&#93;&#93; c',
@@ -146,7 +146,7 @@ class DataAccessSnakFormatterOutputFormatTest extends MediaWikiIntegrationTestCa
 						new DecimalValue( 42 ),
 						new DecimalValue( 42 )
 					)
-				)
+				),
 			],
 			'quantity with unit' => [
 				'42±0 label &#91;&#91;with&#93;&#93; wikitext',
@@ -158,14 +158,14 @@ class DataAccessSnakFormatterOutputFormatTest extends MediaWikiIntegrationTestCa
 						new DecimalValue( 42 ),
 						new DecimalValue( 42 )
 					)
-				)
+				),
 			],
 			'string including wikitext' => [
 				'a &#91;&#91;b&#93;&#93; c',
 				new PropertyValueSnak(
 					new NumericPropertyId( 'P5' ),
 					new StringValue( 'a [[b]] c' )
-				)
+				),
 			],
 			'time with PRECISION_SECOND' => [
 				'+2013-01-01T00:00:00Z',
@@ -177,7 +177,7 @@ class DataAccessSnakFormatterOutputFormatTest extends MediaWikiIntegrationTestCa
 						TimeValue::PRECISION_SECOND,
 						TimeValue::CALENDAR_GREGORIAN
 					)
-				)
+				),
 			],
 			'time with PRECISION DAY' => [
 				'1 January 2013',
@@ -189,43 +189,43 @@ class DataAccessSnakFormatterOutputFormatTest extends MediaWikiIntegrationTestCa
 						TimeValue::PRECISION_DAY,
 						TimeValue::CALENDAR_GREGORIAN
 					)
-				)
+				),
 			],
 			'url' => [
 				$sampleUrl,
 				new PropertyValueSnak(
 					new NumericPropertyId( 'P7' ),
 					new StringValue( $sampleUrl )
-				)
+				),
 			],
 			'external-id' => [
 				'abc',
 				new PropertyValueSnak(
 					new NumericPropertyId( 'P8' ),
 					new StringValue( 'abc' )
-				)
+				),
 			],
 			'external-id including wikitext' => [
 				'a &#91;&#91;b&#93;&#93; c',
 				new PropertyValueSnak(
 					new NumericPropertyId( 'P8' ),
 					new StringValue( 'a [[b]] c' )
-				)
+				),
 			],
 			'wikibase-entityid without sitelink' => [
 				'label &#91;&#91;with&#93;&#93; wikitext',
 				new PropertyValueSnak(
 					new NumericPropertyId( 'P9' ),
 					new EntityIdValue( new ItemId( 'Q12' ) )
-				)
+				),
 			],
 			'novalue' => [
 				'no value',
-				new PropertyNoValueSnak( $p4 )
+				new PropertyNoValueSnak( $p4 ),
 			],
 			'somevalue' => [
 				'unknown value',
-				new PropertySomeValueSnak( $p4 )
+				new PropertySomeValueSnak( $p4 ),
 			],
 		];
 	}
@@ -255,42 +255,42 @@ class DataAccessSnakFormatterOutputFormatTest extends MediaWikiIntegrationTestCa
 				new PropertyValueSnak(
 					new NumericPropertyId( 'P3' ),
 					new MonolingualTextValue( 'es', 'a [[b]] c' )
-				)
+				),
 			],
 			'commonsMedia' => [
 				'<span>[[' . $namespacedFileName . '|frameless]]</span>',
 				new PropertyValueSnak(
 					new NumericPropertyId( 'P1' ),
 					new StringValue( 'A_file name.jpg' )
-				)
+				),
 			],
 			'external-id with formatter url' => [
 				'<span>[https://dataAccessSnakFormatterOutputFormatTest/P10/a%20b%20c a b c]</span>',
 				new PropertyValueSnak(
 					new NumericPropertyId( 'P10' ),
 					new StringValue( 'a b c' )
-				)
+				),
 			],
 			'wikibase-entityid with sitelink' => [
 				'<span>[[Linked page|This item has a sitelink]]</span>',
 				new PropertyValueSnak(
 					new NumericPropertyId( 'P9' ),
 					new EntityIdValue( new ItemId( 'Q13' ) )
-				)
+				),
 			],
 			'geo-shape' => [
 				'<span>[https://media.something/view/April_2017 April 2017]</span>',
 				new PropertyValueSnak(
 					new NumericPropertyId( 'P11' ),
 					new StringValue( 'April 2017' )
-				)
+				),
 			],
 			'tabular-data' => [
 				'<span>[https://tabular.data/view/In_data_we_trust In data we trust]</span>',
 				new PropertyValueSnak(
 					new NumericPropertyId( 'P12' ),
 					new StringValue( 'In data we trust' )
-				)
+				),
 			],
 		];
 
@@ -324,43 +324,43 @@ class DataAccessSnakFormatterOutputFormatTest extends MediaWikiIntegrationTestCa
 				new PropertyValueSnak(
 					new NumericPropertyId( 'P3' ),
 					new MonolingualTextValue( 'es', 'a [[b]] c' )
-				)
+				),
 			],
 			'commonsMedia' => [
 				'A_file name.jpg',
 				new PropertyValueSnak(
 					new NumericPropertyId( 'P1' ),
 					new StringValue( 'A_file name.jpg' )
-				)
+				),
 			],
 			'external-id with formatter URL' => [
 				'a b c',
 				new PropertyValueSnak(
 					new NumericPropertyId( 'P10' ),
 					new StringValue( 'a b c' )
-				)
+				),
 			],
 			'wikibase-entityid with sitelink' => [
 				'This item has a sitelink',
 				new PropertyValueSnak(
 					new NumericPropertyId( 'P9' ),
 					new EntityIdValue( new ItemId( 'Q13' ) )
-				)
+				),
 			],
 			'geo-shape' => [
 				'April 2017',
 				new PropertyValueSnak(
 					new NumericPropertyId( 'P11' ),
 					new StringValue( 'April 2017' )
-				)
+				),
 			],
 			'tabular-data' => [
 				'In data we trust',
 				new PropertyValueSnak(
 					new NumericPropertyId( 'P12' ),
 					new StringValue( 'In data we trust' )
-				)
-			]
+				),
+			],
 		];
 
 		return $cases + $this->getGenericSnaks();

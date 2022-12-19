@@ -200,7 +200,7 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 				'de',
 				$q2,
 				true,
-				true
+				true,
 			],
 			'Item id valid, but label does not exist' => [
 				[ 'Q2#L.de' ],
@@ -209,7 +209,7 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 				'de',
 				$q2,
 				false,
-				true
+				true,
 			],
 			'Invalid Item Id' => [
 				[],
@@ -218,7 +218,7 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 				'de',
 				null,
 				true,
-				true
+				true,
 			],
 			'Invalid lang' => [
 				[],
@@ -227,7 +227,7 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 				'de',
 				$q2,
 				true,
-				false
+				false,
 			],
 		];
 	}
@@ -416,11 +416,11 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 		return [
 			'Nothing found' => [
 				null,
-				$this->newReferencedEntityIdLookupMock( null )
+				$this->newReferencedEntityIdLookupMock( null ),
 			],
 			'Q2013 found' => [
 				'Q2013',
-				$this->newReferencedEntityIdLookupMock( new ItemId( 'Q2013' ) )
+				$this->newReferencedEntityIdLookupMock( new ItemId( 'Q2013' ) ),
 			],
 			'MaxReferenceDepthExhaustedException' => [
 				false,
@@ -431,7 +431,7 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 						[ new ItemId( 'Q2013' ) ],
 						42
 					)
-				)
+				),
 			],
 			'MaxReferencedEntityVisitsExhaustedException' => [
 				false,
@@ -442,7 +442,7 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 						[ new ItemId( 'Q2013' ) ],
 						42
 					)
-				)
+				),
 			],
 		];
 	}
