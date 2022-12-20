@@ -97,7 +97,7 @@ class PatchItemStatementTest extends TestCase {
 		$this->useCaseValidator = $this->createStub( PatchItemStatementValidator::class );
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
-		$this->revisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
+		$this->revisionMetadataRetriever = $this->newRevisionMetadataRetrieverWithSomeConcreteRevision();
 		$this->permissionChecker = $this->createStub( PermissionChecker::class );
 		$this->permissionChecker->method( 'canEdit' )->willReturn( true );
 
@@ -246,8 +246,6 @@ class PatchItemStatementTest extends TestCase {
 	}
 
 	public function testStatementIdMismatchingItemId_returnsStatementNotFound(): void {
-		$this->revisionMetadataRetriever = $this->newRevisionMetadataRetrieverWithSomeConcreteRevision();
-
 		$response = $this->newUseCase()->execute(
 			$this->newUseCaseRequest( [
 				'$itemId' => 'Q666',
@@ -261,7 +259,6 @@ class PatchItemStatementTest extends TestCase {
 	}
 
 	public function testStatementNotFoundOnItem_returnsStatementNotFound(): void {
-		$this->revisionMetadataRetriever = $this->newRevisionMetadataRetrieverWithSomeConcreteRevision();
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemRetriever->method( 'getItem' )->willReturn( NewItem::withId( 'Q42' )->build() );
 
@@ -282,8 +279,6 @@ class PatchItemStatementTest extends TestCase {
 		$originalStatement = NewStatement::noValueFor( self::STRING_PROPERTY )->withGuid( $guid )->build();
 		$patchedStatement = NewStatement::noValueFor( 'P321' )->withGuid( $guid )->build();
 		$item = NewItem::withId( $itemId )->andStatement( $originalStatement )->build();
-
-		$this->revisionMetadataRetriever = $this->newRevisionMetadataRetrieverWithSomeConcreteRevision();
 
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemRetriever->method( 'getItem' )->willReturn( $item );
@@ -309,8 +304,6 @@ class PatchItemStatementTest extends TestCase {
 		$originalStatement = NewStatement::noValueFor( self::STRING_PROPERTY )->withGuid( $originalGuid )->build();
 		$patchedStatement = NewStatement::noValueFor( self::STRING_PROPERTY )->withGuid( $newGuid )->build();
 		$item = NewItem::withId( $itemId )->andStatement( $originalStatement )->build();
-
-		$this->revisionMetadataRetriever = $this->newRevisionMetadataRetrieverWithSomeConcreteRevision();
 
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemRetriever->method( 'getItem' )->willReturn( $item );
@@ -339,8 +332,6 @@ class PatchItemStatementTest extends TestCase {
 			->with( User::newAnonymous(), $itemId )
 			->willReturn( false );
 
-		$this->revisionMetadataRetriever = $this->newRevisionMetadataRetrieverWithSomeConcreteRevision();
-
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemRetriever->method( 'getItem' )->willReturn(
 			NewItem::withId( $itemId )
@@ -368,8 +359,6 @@ class PatchItemStatementTest extends TestCase {
 	public function testGivenValidInapplicablePatch_returnsErrorResponse( array $patch, string $expectedErrorCode ): void {
 		$statementId = new StatementGuid( new ItemId( 'Q123' ), 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 		$this->itemRetriever = $this->newItemRetrieverForItemWithStringStatement( $statementId );
-		$this->revisionMetadataRetriever = $this->newRevisionMetadataRetrieverWithSomeConcreteRevision();
-
 		$response = $this->newUseCase()->execute(
 			$this->newUseCaseRequest( [
 				'$statementId' => "$statementId",
@@ -413,7 +402,6 @@ class PatchItemStatementTest extends TestCase {
 
 		$statementId = new StatementGuid( new ItemId( 'Q123' ), 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 		$this->itemRetriever = $this->newItemRetrieverForItemWithStringStatement( $statementId );
-		$this->revisionMetadataRetriever = $this->newRevisionMetadataRetrieverWithSomeConcreteRevision();
 
 		$response = $this->newUseCase()->execute(
 			$this->newUseCaseRequest( [
