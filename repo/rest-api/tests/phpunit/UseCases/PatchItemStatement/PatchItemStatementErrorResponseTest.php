@@ -121,9 +121,13 @@ class PatchItemStatementErrorResponseTest extends TestCase {
 		];
 
 		yield 'from invalid patched statement (missing field)' => [
-			new ValidationError( StatementValidator::CODE_MISSING_FIELD ),
-			ErrorResponse::PATCHED_STATEMENT_INVALID,
-			'The patch results in an invalid statement which cannot be stored'
+			new ValidationError(
+				StatementValidator::CODE_MISSING_FIELD,
+				[ 'field' => 'property' ]
+			),
+			ErrorResponse::PATCHED_STATEMENT_MISSING_FIELD,
+			'Mandatory field missing in the patched statement: property',
+			[ 'path' => 'property' ]
 		];
 
 		yield 'from invalid patched statement (unknown reason)' => [

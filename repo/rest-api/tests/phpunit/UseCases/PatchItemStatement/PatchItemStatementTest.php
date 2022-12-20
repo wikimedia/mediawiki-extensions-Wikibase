@@ -422,7 +422,7 @@ class PatchItemStatementTest extends TestCase {
 			] )
 		);
 		$this->assertInstanceOf( PatchItemStatementErrorResponse::class, $response );
-		$this->assertSame( ErrorResponse::PATCHED_STATEMENT_INVALID, $response->getCode() );
+		$this->assertSame( ErrorResponse::PATCHED_STATEMENT_MISSING_FIELD, $response->getCode() );
 	}
 
 	private function newUseCase(): PatchItemStatement {
