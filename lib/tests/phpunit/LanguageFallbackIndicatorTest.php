@@ -58,38 +58,37 @@ class LanguageFallbackIndicatorTest extends \PHPUnit\Framework\TestCase {
 				'term' => $deTermFallback,
 			],
 			'fallback to base' => [
-				'expected' => "\u{00A0}" . '<sup class="wb-language-fallback-'
-					. 'indicator wb-language-fallback-variant">Deutsch</sup>',
+				'expected' => '<sup class="wb-language-fallback-indicator'
+					. ' wb-language-fallback-variant">' . "\u{00A0}Deutsch</sup>",
 				'term' => $deAtTerm,
 			],
 			'fallback to variant' => [
-				'expected' => "\u{00A0}" . '<sup class="wb-language-fallback-'
-					. 'indicator wb-language-fallback-variant">Österreichisches Deutsch</sup>',
+				'expected' => '<sup class="wb-language-fallback-indicator'
+					. ' wb-language-fallback-variant">' . "\u{00A0}Österreichisches Deutsch</sup>",
 				'term' => $atDeTerm,
 			],
 			'transliteration to requested language' => [
-				'expected' => "\u{00A0}" . '<sup class="wb-language-fallback-'
-					. 'indicator wb-language-fallback-transliteration">'
-					. $translitDeCh
+				'expected' => '<sup class="wb-language-fallback-indicator'
+					. ' wb-language-fallback-transliteration">'
+					. "\u{00A0}" . $translitDeCh
 					. '</sup>',
 				'term' => $deChTerm,
 			],
 			'transliteration to other variant' => [
-				'expected' => "\u{00A0}" . '<sup class="wb-language-fallback-'
-					. 'indicator wb-language-fallback-transliteration wb-language-fallback-'
-					. 'variant">'
-					. $translitEnCa
+				'expected' => '<sup class="wb-language-fallback-indicator'
+					. ' wb-language-fallback-transliteration wb-language-fallback-variant">'
+					. "\u{00A0}" . $translitEnCa
 					. '</sup>',
 				'term' => $enGbEnCaTerm,
 			],
 			'fallback to alternative language' => [
-				'expected' => "\u{00A0}" . '<sup class="wb-language-fallback-'
-					. 'indicator">english in german</sup>',
+				'expected' => '<sup class="wb-language-fallback-indicator'
+					. '">' . "\u{00A0}english in german</sup>",
 				'term' => $deEnTerm,
 			],
 			'fallback to multilingual' => [
-				'expected' => "\u{00A0}" . '<sup class="wb-language-fallback-'
-					. 'indicator wb-language-fallback-mul">multilingual</sup>',
+				'expected' => '<sup class="wb-language-fallback-indicator'
+					. ' wb-language-fallback-mul">' . "\u{00A0}multilingual</sup>",
 				'term' => $deMulTerm,
 			],
 		];
