@@ -111,9 +111,13 @@ class PatchItemStatementErrorResponseTest extends TestCase {
 		];
 
 		yield 'from invalid patched statement (invalid field)' => [
-			new ValidationError( StatementValidator::CODE_INVALID_FIELD ),
-			ErrorResponse::PATCHED_STATEMENT_INVALID,
-			'The patch results in an invalid statement which cannot be stored'
+			new ValidationError(
+				StatementValidator::CODE_INVALID_FIELD,
+				[ 'field' => 'rank', 'value' => 'not-a-valid-rank' ]
+			),
+			ErrorResponse::PATCHED_STATEMENT_INVALID_FIELD,
+			"Invalid input for 'rank' in the patched statement",
+			[ 'path' => 'rank', 'value' => 'not-a-valid-rank' ]
 		];
 
 		yield 'from invalid patched statement (missing field)' => [
