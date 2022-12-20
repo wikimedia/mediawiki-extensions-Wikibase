@@ -8,6 +8,9 @@
 	"/entities/items/{item_id}/statements/{statement_id}": {
 		"$ref": "./statements/single-for-item.json"
 	},
+	"/entities/items/{item_id}/labels": {
+		"$ref": "./labels/list.json"
+	},
 	"/statements/{statement_id}": {
 		"$ref": "./statements/single.json"
 	}
