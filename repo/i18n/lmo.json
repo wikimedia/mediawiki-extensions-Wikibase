@@ -342,7 +342,7 @@
 	"wikibase-redirect-permissiondenied": "Permess negad.",
 	"special-mylanguagefallbackchain": "Cadena di lengue de riserva",
 	"wikibase-mylanguagefallbackchain-text": "La cadena di lengov de riserva che te doperet per visualizà i etichete l'è mostrada chì de sota.",
-	"wikibase-mylanguagefallbackchain-babel": "Te podet modificala cont el meter dent <nowiki>{{#babel: }}</nowiki> in la {{GENDER:$1|toa}} [[Special:MyPage|pagina utent]].",
+	"wikibase-mylanguagefallbackchain-babel": "Te podet modificàlla cont el meter dent <nowiki>{{#babel: }}</nowiki> in la {{GENDER:$1|toa}} [[Special:MyPage|pagina utent]].",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, trafsormad da $3 - $4",
 	"wikibase-api-claim-value-missing": "Quand che te créet un'afermazzion cont un element de PropertyValueSnak a gh'è besogn de fornì un valor.",
 	"wikibase-api-claim-value-unexpected": "Quand che te creét un'afermazzion, te podet no fornì un valor senza  PropertyValueSnak come element principal.",

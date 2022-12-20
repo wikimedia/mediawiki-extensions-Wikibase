@@ -4,7 +4,8 @@
 			"Diafol",
 			"Ham II",
 			"Lloffiwr",
-			"Robin Owain"
+			"Robin Owain",
+			"Afalau"
 		]
 	},
 	"tooltip-t-wikibase": "Cysylltu i eitem ystorfa gysylltiedig",
@@ -37,7 +38,7 @@
 	"wikibase-replicationnote": "Dalier sylw: efallai na welwch y newidiadau ar bob wici cyn pen rhai munudau.",
 	"wikibase-watchlist-show-changes-pref": "Dangos golygiadau {{WBREPONAME}} ar eich rhestr wylio",
 	"wikibase-error-invalid-entity-id": "Mae'r ID a roddwyd yn anhysbys i'r system. Defnyddiwch ID dilys i'r endid data.",
-	"wikibase-unconnectedpages-submit": "Gwneler",
+	"wikibase-unconnectedpages-submit": "Dangos tudalennau",
 	"wikibase-pageinfo-entity-id": "ID yr Eitem {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Dim",
 	"wikibase-otherprojects": "Mewn prosiectau eraill",
