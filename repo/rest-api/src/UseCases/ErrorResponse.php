@@ -11,15 +11,11 @@ class ErrorResponse {
 	public const INVALID_FIELD = 'invalid-field';
 	public const INVALID_ITEM_ID = 'invalid-item-id';
 	public const INVALID_STATEMENT_ID = 'invalid-statement-id';
-	public const INVALID_STATEMENT_DATA = 'invalid-statement-data';
 	public const INVALID_OPERATION_CHANGED_STATEMENT_ID = 'invalid-operation-change-statement-id';
 	public const INVALID_OPERATION_CHANGED_PROPERTY = 'invalid-operation-change-property-of-statement';
-	public const PATCHED_STATEMENT_INVALID = 'patched-statement-invalid';
 	public const PATCHED_STATEMENT_INVALID_FIELD = 'patched-statement-invalid-field';
 	public const PATCHED_STATEMENT_MISSING_FIELD = 'patched-statement-missing-field';
-	public const PATCHED_STATEMENT_VALUE_TYPE_MISMATCH = 'patched-statement-value-type-mismatch';
 	public const PATCH_TARGET_NOT_FOUND = 'patch-target-not-found';
-	public const CANNOT_APPLY_PATCH = 'cannot-apply-patch';
 	public const PATCH_TEST_FAILED = 'patch-test-failed';
 	public const INVALID_PATCH = 'invalid-patch';
 	public const INVALID_PATCH_OPERATION = 'invalid-patch-operation';

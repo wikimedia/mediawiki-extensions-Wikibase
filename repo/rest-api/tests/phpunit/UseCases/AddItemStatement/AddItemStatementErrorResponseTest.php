@@ -43,13 +43,6 @@ class AddItemStatementErrorResponseTest extends TestCase {
 			null
 		];
 
-		yield 'from invalid statement data' => [
-			new ValidationError( StatementValidator::CODE_INVALID ),
-			ErrorResponse::INVALID_STATEMENT_DATA,
-			'Invalid statement data provided',
-			null
-		];
-
 		$context = [
 			StatementValidator::CONTEXT_FIELD_NAME => 'some-field',
 			StatementValidator::CONTEXT_FIELD_VALUE => 'foo'
