@@ -102,33 +102,33 @@ class LabelsProviderEntityIdHtmlLinkFormatterTest extends MediaWikiIntegrationTe
 				'term' => $deTermFallback,
 			],
 			'fallback to base' => [
-				'expectedPattern' => "@ lang=\"de\">Kätzchen</a>\u{00A0}"
-					. '<sup class="wb-language-fallback-indicator wb-language-fallback-variant">Deutsch</sup>@',
+				'expectedPattern' => '@ lang="de">Kätzchen</a>'
+					. "<sup class=\"wb-language-fallback-indicator wb-language-fallback-variant\">\u{00A0}Deutsch</sup>@",
 				'term' => $deAtTerm,
 			],
 			'fallback to variant' => [
-				'expectedPattern' => "@ lang=\"de-at\">Kätzchen</a>\u{00A0}"
-					. '<sup class="wb-language-fallback-indicator wb-language-fallback-variant">Österreichisches Deutsch</sup>@',
+				'expectedPattern' => '@ lang="de-at">Kätzchen</a>'
+					. "<sup class=\"wb-language-fallback-indicator wb-language-fallback-variant\">\u{00A0}Österreichisches Deutsch</sup>@",
 				'term' => $atDeTerm,
 			],
 			'transliteration to requested language' => [
-				'expectedPattern' => "@>Frass</a>\u{00A0}"
+				'expectedPattern' => '@>Frass</a>'
 					. '<sup class="wb-language-fallback-indicator wb-language-fallback-transliteration">'
-					. preg_quote( $translitDeCh, '@' )
+					. "\u{00A0}" . preg_quote( $translitDeCh, '@' )
 					. '</sup>@',
 				'term' => $deChTerm,
 			],
 			'transliteration to other variant' => [
-				'expectedPattern' => "@ lang=\"en\">Kitten</a>\u{00A0}"
+				'expectedPattern' => '@ lang="en">Kitten</a>'
 					. '<sup class="wb-language-fallback-indicator wb-language-fallback-transliteration '
 					. 'wb-language-fallback-variant">'
-					. preg_quote( $translitEnCa, '@' )
+					. "\u{00A0}" . preg_quote( $translitEnCa, '@' )
 					. '</sup>@',
 				'term' => $enGbEnCaTerm,
 			],
 			'fallback to alternative language' => [
-				'expectedPattern' => "@ lang=\"en\">Kitten</a>\u{00A0}"
-					. '<sup class="wb-language-fallback-indicator">english in german</sup>@',
+				'expectedPattern' => '@ lang="en">Kitten</a>'
+					. "<sup class=\"wb-language-fallback-indicator\">\u{00A0}english in german</sup>@",
 				'term' => $deEnTerm,
 			],
 		];
