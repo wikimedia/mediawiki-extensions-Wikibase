@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Afalau",
 			"Fitoschido",
 			"Lloffiwr",
 			"Robin Owain"
@@ -28,8 +29,8 @@
 	"datatypes-type-monolingualtext": "Testun uniaith",
 	"datatypes-type-multilingualtext": "Testun amlieithog",
 	"datatypes-type-number": "Rhif",
-	"datatypes-type-mediawiki-title": "Teitl yn MediaWiki",
-	"datatypes-type-unknown": "Heb ei nodi",
+	"datatypes-type-mediawiki-title": "Teitl MediaWici",
+	"datatypes-type-unknown": "Amhenodol",
 	"datatypes-type-boolean": "Boole",
 	"datatypes-type-globe-coordinate": "Cyfesurynnau daearyddol",
 	"datatypes-type-time": "Amser",

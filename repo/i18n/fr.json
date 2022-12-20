@@ -451,7 +451,7 @@
 	"wikibase-api-not-supported": "La fonctionnalité demandée n’est pas prise en charge par l’entité fournie.",
 	"wikibase-api-not-statement": "Pas une déclaration.",
 	"wikibase-api-not-item": "Pas un élément.",
-	"wikibase-api-not-recognized-datatype": "Un type de donnée est attendu, mais il est absent ou non reconnu.",
+	"wikibase-api-not-recognized-datatype": "Un type de donnée est attendu, mais il est manquant ou non reconnu.",
 	"wikibase-api-not-recognized-siteid": "L’identifiant de site fourni n’a pas été reconnu.",
 	"wikibase-api-not-recognized": "Quelque chose n’a pas été reconnu.",
 	"wikibase-api-not-recognized-array": "Un tableau était attendu, mais n’a pas été reconnu.",
