@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Agam Riyandana",
 			"Beeyan",
 			"Daud I.F. Argana",
 			"Farras",
@@ -66,6 +67,7 @@
 	"apihelp-wbformatvalue-param-property": "Penanda atribut yang termasuk nilai data harus dipergunakan alih-alih parameter jenis data.",
 	"apihelp-wbformatvalue-example-1": "Format sebuah nilai untai (''string'') sederhana.",
 	"apihelp-wbformatvalue-example-2": "Format sebuah nilai untai (''string'') sebagai sebuah Lokator Sumber Seragam (URL) dalam Bahasa Markah Hiperteks (HTML).",
+	"apihelp-wbformatvalue-example-3": "Format nilai waktu sebagai teks biasa, secara otomatis menampilkan model kalender jika diperlukan.",
 	"apihelp-wbgetclaims-description": "Dapatkan klaim dari Wikibase.",
 	"apihelp-wbgetclaims-summary": "Mendapatkan klaim Wikibase.",
 	"apihelp-wbgetclaims-param-entity": "Penanda entitas untuk mendapatkan kalim. Dibutuhkan kecuali jika Penanda Unik Global (GUID) klaim tersedia.",

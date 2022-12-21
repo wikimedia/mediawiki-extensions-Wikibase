@@ -1,0 +1,6 @@
+{
+	"@metadata": {
+		"authors": []
+	},
+	"apihelp-query+pageterms-description": "Dobijanje uslova o korišćenju za projekat {{WBREPONAME}} (obično tabele, opisi i pseudonimi) povezan sa stranicom preko veze do sajta."
+}
