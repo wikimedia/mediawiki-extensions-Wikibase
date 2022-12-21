@@ -17,7 +17,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
-use Wikibase\Repo\RestApi\Infrastructure\DataTypeValidatorFactoryDataValueValidator;
+use Wikibase\Repo\RestApi\Infrastructure\DataValuesValueDeserializer;
 use Wikibase\Repo\RestApi\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\RestApi\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\RestApi\Serialization\StatementDeserializer;
@@ -215,12 +215,14 @@ class AddItemStatementTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	private function newValidator(): AddItemStatementValidator {
+		$entityIdParser = WikibaseRepo::getEntityIdParser();
 		$propertyValuePairDeserializer = new PropertyValuePairDeserializer(
-			WikibaseRepo::getEntityIdParser(),
+			$entityIdParser,
 			$this->createStub( PropertyDataTypeLookup::class ),
-			new DataTypeFactoryValueTypeLookup( WikibaseRepo::getDataTypeFactory() ),
-			WikibaseRepo::getDataValueDeserializer(),
-			new DataTypeValidatorFactoryDataValueValidator(
+			new DataValuesValueDeserializer(
+				new DataTypeFactoryValueTypeLookup( WikibaseRepo::getDataTypeFactory() ),
+				$entityIdParser,
+				WikibaseRepo::getDataValueDeserializer(),
 				WikibaseRepo::getDataTypeValidatorFactory()
 			)
 		);

@@ -2,21 +2,14 @@
 
 namespace Wikibase\Repo\RestApi\Serialization;
 
-use DataValues\DataValue;
-use DataValues\Deserializers\DataValueDeserializer;
-use DataValues\TimeValue;
-use Deserializers\Exceptions\DeserializationException;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\Repo\RestApi\Domain\Services\ValueTypeLookup;
-use Wikibase\Repo\RestApi\Validation\DataValueValidator;
 
 /**
  * @license GPL-2.0-or-later
@@ -25,24 +18,22 @@ class PropertyValuePairDeserializer {
 
 	private EntityIdParser $entityIdParser;
 	private PropertyDataTypeLookup $dataTypeLookup;
-	private ValueTypeLookup $valueTypeLookup;
-	private DataValueDeserializer $dataValueDeserializer;
-	private DataValueValidator $dataValueValidator;
+	private ValueDeserializer $valueDeserializer;
 
 	public function __construct(
 		EntityIdParser $entityIdParser,
 		PropertyDataTypeLookup $dataTypeLookup,
-		ValueTypeLookup $valueTypeLookup,
-		DataValueDeserializer $dataValueDeserializer,
-		DataValueValidator $dataValueValidator
+		ValueDeserializer $valueDeserializer
 	) {
 		$this->entityIdParser = $entityIdParser;
 		$this->dataTypeLookup = $dataTypeLookup;
-		$this->valueTypeLookup = $valueTypeLookup;
-		$this->dataValueDeserializer = $dataValueDeserializer;
-		$this->dataValueValidator = $dataValueValidator;
+		$this->valueDeserializer = $valueDeserializer;
 	}
 
+	/**
+	 * @throws MissingFieldException
+	 * @throws InvalidFieldException
+	 */
 	public function deserialize( array $serialization ): Snak {
 		$this->validateSerialization( $serialization );
 
@@ -60,7 +51,7 @@ class PropertyValuePairDeserializer {
 			case 'somevalue':
 				return new PropertySomeValueSnak( $propertyId );
 			case 'value':
-				$dataValue = $this->deserializeValue( $dataTypeId, $serialization['value'] );
+				$dataValue = $this->valueDeserializer->deserialize( $dataTypeId, $serialization['value'] );
 				return new PropertyValueSnak( $propertyId, $dataValue );
 			default: // should be unreachable because of prior validation
 				throw new \LogicException( 'value type must be one of "value", "novalue", "somevalue".' );
@@ -101,68 +92,6 @@ class PropertyValuePairDeserializer {
 		}
 
 		return $propertyId;
-	}
-
-	private function deserializeValue( string $dataTypeId, array $valueSerialization ): DataValue {
-		$this->assertFieldExists( $valueSerialization, 'content' );
-
-		$dataValueType = $this->valueTypeLookup->getValueType( $dataTypeId );
-		switch ( $dataValueType ) {
-			case 'wikibase-entityid':
-				$dataValue = $this->deserializeEntityIdValue( $valueSerialization['content'] );
-				break;
-			case 'time':
-				$dataValue = $this->deserializeTimeValue( $valueSerialization['content'] );
-				break;
-			default:
-				try {
-					$dataValue = $this->dataValueDeserializer->deserialize( [
-						'type' => $dataValueType,
-						'value' => $valueSerialization['content'],
-					] );
-				} catch ( DeserializationException $e ) {
-					throw new InvalidFieldException( 'content', $valueSerialization['content'] );
-				}
-				break;
-		}
-
-		$validationError = $this->dataValueValidator->validate( $dataTypeId, $dataValue );
-		if ( $validationError ) {
-			throw new InvalidFieldException( 'content', $valueSerialization['content'] );
-		}
-
-		return $dataValue;
-	}
-
-	/**
-	 * @param mixed $content
-	 */
-	private function deserializeEntityIdValue( $content ): EntityIdValue {
-		try {
-			$entityId = $this->entityIdParser->parse( $content );
-		} catch ( EntityIdParsingException $e ) {
-			throw new InvalidFieldException( 'content', $content );
-		}
-		return new EntityIdValue( $entityId );
-	}
-
-	/**
-	 * @param mixed $content
-	 */
-	private function deserializeTimeValue( $content ): TimeValue {
-		try {
-			return $this->newTimeValue(
-				$content['time'],
-				$content['precision'],
-				$content['calendarmodel']
-			);
-		} catch ( \Exception $e ) {
-			throw new InvalidFieldException( 'content', $content );
-		}
-	}
-
-	private function newTimeValue( string $timestamp, int $precision, string $calendarmodel ): TimeValue {
-		return new TimeValue( $timestamp, 0, 0, 0, $precision, $calendarmodel );
 	}
 
 	private function assertFieldExists( array $serialization, string $field ): void {

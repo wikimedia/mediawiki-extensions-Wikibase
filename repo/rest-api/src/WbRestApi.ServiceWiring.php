@@ -12,7 +12,7 @@ use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityRevisionLookupItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
-use Wikibase\Repo\RestApi\Infrastructure\DataTypeValidatorFactoryDataValueValidator;
+use Wikibase\Repo\RestApi\Infrastructure\DataValuesValueDeserializer;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatchValidator;
@@ -217,12 +217,14 @@ return [
 	},
 
 	'WbRestApi.StatementDeserializer' => function( MediaWikiServices $services ): StatementDeserializer {
+		$entityIdParser = WikibaseRepo::getEntityIdParser( $services );
 		$propertyValuePairDeserializer = new PropertyValuePairDeserializer(
-			WikibaseRepo::getEntityIdParser( $services ),
+			$entityIdParser,
 			WikibaseRepo::getPropertyDataTypeLookup( $services ),
-			new DataTypeFactoryValueTypeLookup( WikibaseRepo::getDataTypeFactory( $services ) ),
-			WikibaseRepo::getDataValueDeserializer( $services ),
-			new DataTypeValidatorFactoryDataValueValidator(
+			new DataValuesValueDeserializer(
+				new DataTypeFactoryValueTypeLookup( WikibaseRepo::getDataTypeFactory( $services ) ),
+				$entityIdParser,
+				WikibaseRepo::getDataValueDeserializer( $services ),
 				WikibaseRepo::getDataTypeValidatorFactory( $services )
 			)
 		);

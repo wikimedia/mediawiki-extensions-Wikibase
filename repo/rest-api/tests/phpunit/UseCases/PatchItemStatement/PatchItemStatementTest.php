@@ -25,7 +25,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
 use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
-use Wikibase\Repo\RestApi\Infrastructure\DataTypeValidatorFactoryDataValueValidator;
+use Wikibase\Repo\RestApi\Infrastructure\DataValuesValueDeserializer;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\RestApi\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\RestApi\Serialization\PropertyValuePairSerializer;
@@ -487,12 +487,14 @@ class PatchItemStatementTest extends TestCase {
 	}
 
 	private function newStatementValidator(): StatementValidator {
+		$entityIdParser = WikibaseRepo::getEntityIdParser();
 		$propertyValuePairDeserializer = new PropertyValuePairDeserializer(
-			WikibaseRepo::getEntityIdParser(),
+			$entityIdParser,
 			$this->newDataTypeLookup(),
-			new DataTypeFactoryValueTypeLookup( WikibaseRepo::getDataTypeFactory() ),
-			WikibaseRepo::getDataValueDeserializer(),
-			new DataTypeValidatorFactoryDataValueValidator(
+			new DataValuesValueDeserializer(
+				new DataTypeFactoryValueTypeLookup( WikibaseRepo::getDataTypeFactory() ),
+				$entityIdParser,
+				WikibaseRepo::getDataValueDeserializer(),
 				WikibaseRepo::getDataTypeValidatorFactory()
 			)
 		);

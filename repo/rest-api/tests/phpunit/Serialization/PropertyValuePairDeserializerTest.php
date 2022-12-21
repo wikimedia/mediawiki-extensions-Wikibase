@@ -2,19 +2,13 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Serialization;
 
-use DataValues\Geo\Values\GlobeCoordinateValue;
-use DataValues\Geo\Values\LatLongValue;
-use DataValues\StringValue;
-use DataValues\TimeValue;
+use DataValues\DataValue;
 use Generator;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Throwable;
 use ValueValidators\Result;
 use ValueValidators\ValueValidator;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\EntityIdValue;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -24,12 +18,11 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Repo\DataTypeValidatorFactory;
-use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
-use Wikibase\Repo\RestApi\Infrastructure\DataTypeValidatorFactoryDataValueValidator;
 use Wikibase\Repo\RestApi\Serialization\InvalidFieldException;
 use Wikibase\Repo\RestApi\Serialization\MissingFieldException;
 use Wikibase\Repo\RestApi\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\RestApi\Serialization\SerializationException;
+use Wikibase\Repo\RestApi\Serialization\ValueDeserializer;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -61,10 +54,13 @@ class PropertyValuePairDeserializerTest extends TestCase {
 
 		$this->dataTypeValidatorFactory = $this->createStub( DataTypeValidatorFactory::class );
 		$this->dataTypeValidatorFactory->method( 'getValidators' )->willReturn( [ $successValidator ] );
+
+		$this->valueDeserializer = $this->createStub( ValueDeserializer::class );
+		$this->valueDeserializer->method( 'deserialize' )->willReturn( $this->createStub( DataValue::class ) );
 	}
 
 	/**
-	 * @dataProvider serializationProvider
+	 * @dataProvider validSerializationProvider
 	 */
 	public function testDeserialize( Snak $expectedSnak, array $serialization ): void {
 		$this->assertEquals(
@@ -73,8 +69,8 @@ class PropertyValuePairDeserializerTest extends TestCase {
 		);
 	}
 
-	public function serializationProvider(): Generator {
-		yield 'no value for string prop' => [
+	public function validSerializationProvider(): Generator {
+		yield 'no value for string property' => [
 			new PropertyNoValueSnak( new NumericPropertyId( self::STRING_PROPERTY_ID ) ),
 			[
 				'value' => [ 'type' => 'novalue' ],
@@ -84,81 +80,12 @@ class PropertyValuePairDeserializerTest extends TestCase {
 			]
 		];
 
-		yield 'some value for item id prop' => [
+		yield 'some value for item id property' => [
 			new PropertySomeValueSnak( new NumericPropertyId( self::ITEM_ID_PROPERTY_ID ) ),
 			[
 				'value' => [ 'type' => 'somevalue' ],
 				'property' => [
 					'id' => self::ITEM_ID_PROPERTY_ID,
-				]
-			]
-		];
-
-		yield 'value for string prop' => [
-			new PropertyValueSnak(
-				new NumericPropertyId( self::STRING_PROPERTY_ID ),
-				new StringValue( 'I am goat' )
-			),
-			[
-				'value' => [ 'content' => 'I am goat', 'type' => 'value' ],
-				'property' => [
-					'id' => self::STRING_PROPERTY_ID,
-				]
-			]
-		];
-
-		yield 'value for item id prop' => [
-			new PropertyValueSnak(
-				new NumericPropertyId( self::ITEM_ID_PROPERTY_ID ),
-				new EntityIdValue( new ItemId( 'Q123' ) )
-			),
-			[
-				'value' => [
-					'type' => 'value',
-					'content' => 'Q123',
-				],
-				'property' => [
-					'id' => self::ITEM_ID_PROPERTY_ID,
-				]
-			]
-		];
-
-		$gregorian = 'http://www.wikidata.org/entity/Q1985727';
-		yield 'value for time prop' => [
-			new PropertyValueSnak(
-				new NumericPropertyId( self::TIME_PROPERTY_ID ),
-				new TimeValue( '+1-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $gregorian )
-			),
-			[
-				'value' => [
-					'type' => 'value',
-					'content' => [
-						'time' => '+1-00-00T00:00:00Z',
-						'precision' => TimeValue::PRECISION_YEAR,
-						'calendarmodel' => $gregorian
-					],
-				],
-				'property' => [
-					'id' => self::TIME_PROPERTY_ID,
-				]
-			]
-		];
-
-		yield 'value for globecoordinate prop' => [
-			new PropertyValueSnak(
-				new NumericPropertyId( self::GLOBECOORDINATE_PROPERTY_ID ),
-				new GlobeCoordinateValue( new LatLongValue( 100, 100 ) )
-			),
-			[
-				'value' => [
-					'type' => 'value',
-					'content' => [
-						'latitude' => 100,
-						'longitude' => 100
-					],
-				],
-				'property' => [
-					'id' => self::GLOBECOORDINATE_PROPERTY_ID,
 				]
 			]
 		];
@@ -172,6 +99,14 @@ class PropertyValuePairDeserializerTest extends TestCase {
 				]
 			]
 		];
+
+		yield 'value for string property' => [
+			new PropertyValueSnak( new NumericPropertyId( self::STRING_PROPERTY_ID ), $this->createStub( DataValue::class ) ),
+			[
+				'value' => [ 'type' => 'value', 'content' => 'potato' ],
+				'property' => [ 'id' => self::STRING_PROPERTY_ID ],
+			],
+		];
 	}
 
 	/**
@@ -183,7 +118,7 @@ class PropertyValuePairDeserializerTest extends TestCase {
 		try {
 			$this->newDeserializer()->deserialize( $serialization );
 			$this->fail( 'Expected exception was not thrown.' );
-		} catch ( Throwable $e ) {
+		} catch ( SerializationException $e ) {
 			$this->assertEquals( $expectedException, $e );
 		}
 	}
@@ -235,30 +170,7 @@ class PropertyValuePairDeserializerTest extends TestCase {
 			]
 		];
 
-		yield 'invalid value content field for string data-type' => [
-			new InvalidFieldException( 'content', 42 ),
-			[
-				'value' => [ 'type' => 'value', 'content' => 42 ],
-				'property' => [
-					'id' => self::STRING_PROPERTY_ID,
-				]
-			]
-		];
-
-		yield 'invalid value content field for url data-type' => [
-			new InvalidFieldException( 'content', 'not-a-url' ),
-			[
-				'value' => [
-					'type' => 'value',
-					'content' => 'not-a-url',
-				],
-				'property' => [
-					'id' => self::URL_PROPERTY_ID,
-				]
-			]
-		];
-
-		yield 'property id is a valid item id' => [
+		yield 'property id is a (valid) item id' => [
 			new InvalidFieldException( 'id', 'Q123' ),
 			[
 				'value' => [ 'type' => 'novalue' ],
@@ -293,16 +205,6 @@ class PropertyValuePairDeserializerTest extends TestCase {
 			]
 		];
 
-		yield 'missing content field' => [
-			new MissingFieldException( 'content' ),
-			[
-				'value' => [ 'type' => 'value' ],
-				'property' => [
-					'id' => self::STRING_PROPERTY_ID,
-				]
-			]
-		];
-
 		yield 'missing property field' => [
 			new MissingFieldException( 'property' ),
 			[
@@ -316,6 +218,42 @@ class PropertyValuePairDeserializerTest extends TestCase {
 				'value' => [ 'type' => 'novalue' ],
 				'property' => [],
 			]
+		];
+	}
+
+	/**
+	 * @dataProvider valueDeserializerExceptionProvider
+	 */
+	public function testValueDeserializerThrowsException( array $serialization, SerializationException $exception ): void {
+		$this->valueDeserializer = $this->createMock( ValueDeserializer::class );
+		$this->valueDeserializer->expects( $this->once() )
+			->method( 'deserialize' )
+			->with( 'string', $serialization['value'] )
+			->willThrowException( $exception );
+
+		try {
+			$this->newDeserializer()->deserialize( $serialization );
+			$this->fail( 'Expected exception was not thrown.' );
+		} catch ( SerializationException $e ) {
+			$this->assertEquals( $exception, $e );
+		}
+	}
+
+	public function valueDeserializerExceptionProvider(): Generator {
+		yield 'invalid field' => [
+			[
+				'value' => [ 'type' => 'value', 'content' => 42 ],
+				'property' => [ 'id' => self::STRING_PROPERTY_ID ],
+			],
+			new InvalidFieldException( 'content', 42 ),
+		];
+
+		yield 'missing field' => [
+			[
+				'value' => [ 'type' => 'value' ],
+				'property' => [ 'id' => self::STRING_PROPERTY_ID ],
+			],
+			new MissingFieldException( 'content' ),
 		];
 	}
 
@@ -358,9 +296,7 @@ class PropertyValuePairDeserializerTest extends TestCase {
 		return new PropertyValuePairDeserializer(
 			$entityIdParser,
 			$dataTypeLookup,
-			new DataTypeFactoryValueTypeLookup( WikibaseRepo::getDataTypeFactory() ),
-			WikibaseRepo::getDataValueDeserializer(),
-			new DataTypeValidatorFactoryDataValueValidator( $this->dataTypeValidatorFactory )
+			$this->valueDeserializer
 		);
 	}
 
