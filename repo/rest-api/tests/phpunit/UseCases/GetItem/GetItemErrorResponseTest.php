@@ -21,11 +21,17 @@ class GetItemErrorResponseTest extends TestCase {
 	/**
 	 * @dataProvider validationErrorDataProvider
 	 */
-	public function testNewFromValidationError( ValidationError $validationError, string $expectedCode, string $expectedMessage ): void {
+	public function testNewFromValidationError(
+		ValidationError $validationError,
+		string $expectedCode,
+		string $expectedMessage,
+		array $expectedContext = null
+	): void {
 		$response = GetItemErrorResponse::newFromValidationError( $validationError );
 
-		$this->assertEquals( $expectedCode, $response->getCode() );
-		$this->assertEquals( $expectedMessage, $response->getMessage() );
+		$this->assertSame( $expectedCode, $response->getCode() );
+		$this->assertSame( $expectedMessage, $response->getMessage() );
+		$this->assertSame( $expectedContext, $response->getContext() );
 	}
 
 	public function validationErrorDataProvider(): \Generator {

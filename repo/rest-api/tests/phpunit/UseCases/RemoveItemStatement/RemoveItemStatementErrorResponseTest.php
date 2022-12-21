@@ -25,12 +25,14 @@ class RemoveItemStatementErrorResponseTest extends TestCase {
 	public function testNewFromValidationError(
 		ValidationError $validationError,
 		string $expectedCode,
-		string $expectedMessage
+		string $expectedMessage,
+		array $expectedContext = null
 	): void {
 		$response = RemoveItemStatementErrorResponse::newFromValidationError( $validationError );
 
-		$this->assertEquals( $expectedCode, $response->getCode() );
-		$this->assertEquals( $expectedMessage, $response->getMessage() );
+		$this->assertSame( $expectedCode, $response->getCode() );
+		$this->assertSame( $expectedMessage, $response->getMessage() );
+		$this->assertSame( $expectedContext, $response->getContext() );
 	}
 
 	public function provideValidationError(): \Generator {
