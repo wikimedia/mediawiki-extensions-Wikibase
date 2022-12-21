@@ -30,12 +30,6 @@ class ReplaceItemStatementErrorResponse extends ErrorResponse {
 					'Not a valid statement ID: ' . $context[StatementIdValidator::CONTEXT_VALUE]
 				);
 
-			case StatementValidator::CODE_INVALID:
-				return new self(
-					ErrorResponse::INVALID_STATEMENT_DATA,
-					'Invalid statement data provided'
-				);
-
 			case StatementValidator::CODE_INVALID_FIELD:
 				return new self(
 					ErrorResponse::STATEMENT_DATA_INVALID_FIELD,

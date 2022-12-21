@@ -51,12 +51,6 @@ class StatementValidatorTest extends TestCase {
 	}
 
 	public function deserializationErrorProvider(): Generator {
-		yield 'generic exception' => [
-			new SerializationException(),
-			StatementValidator::CODE_INVALID,
-			[],
-		];
-
 		yield 'invalid field exception' => [
 			new InvalidFieldException( 'some-field', 'some-value' ),
 			StatementValidator::CODE_INVALID_FIELD,

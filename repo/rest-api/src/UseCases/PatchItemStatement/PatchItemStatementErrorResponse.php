@@ -75,12 +75,6 @@ class PatchItemStatementErrorResponse extends ErrorResponse {
 					"Comment must not be longer than $commentMaxLength characters."
 				);
 
-			case StatementValidator::CODE_INVALID:
-				return new self(
-					ErrorResponse::PATCHED_STATEMENT_INVALID,
-					'The patch results in an invalid statement which cannot be stored'
-				);
-
 			case StatementValidator::CODE_MISSING_FIELD:
 				return new self(
 					ErrorResponse::PATCHED_STATEMENT_MISSING_FIELD,

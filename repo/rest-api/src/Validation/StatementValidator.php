@@ -12,7 +12,6 @@ use Wikibase\Repo\RestApi\Serialization\StatementDeserializer;
  */
 class StatementValidator {
 
-	public const CODE_INVALID = 'invalid-statement';
 	public const CODE_INVALID_FIELD = 'invalid-statement-field';
 	public const CODE_MISSING_FIELD = 'statement-data-missing-field';
 
@@ -40,8 +39,6 @@ class StatementValidator {
 					self::CONTEXT_FIELD_VALUE => $e->getValue(),
 				]
 			);
-		} catch ( \Exception $e ) {
-			return new ValidationError( self::CODE_INVALID );
 		}
 
 		return null;

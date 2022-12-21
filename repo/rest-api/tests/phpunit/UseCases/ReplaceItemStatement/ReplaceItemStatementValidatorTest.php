@@ -117,7 +117,10 @@ class ReplaceItemStatementValidatorTest extends TestCase {
 
 	public function testValidate_withInvalidStatement(): void {
 		$invalidStatement = [ 'this is' => 'not a valid statement' ];
-		$expectedError = new ValidationError( StatementValidator::CODE_INVALID );
+		$expectedError = new ValidationError(
+			StatementValidator::CODE_MISSING_FIELD,
+			[ StatementValidator::CONTEXT_FIELD_NAME => 'property' ]
+		);
 		$this->statementValidator = $this->createMock( StatementValidator::class );
 		$this->statementValidator->method( 'validate' )
 			->with( $invalidStatement )
