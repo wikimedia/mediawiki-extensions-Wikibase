@@ -18,6 +18,7 @@
 	"wikibase-diffview-reference": "gáldu",
 	"wikibase-diffview-label": "namma",
 	"wikibase-diffview-link": "liŋkkat",
+	"wikibase-remove": "sihko",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|gáldu}}",
 	"wikibase-itembytitle-submit": "Oza",
 	"wikibase-itemdisambiguation-lookup-label": "Namma:",
