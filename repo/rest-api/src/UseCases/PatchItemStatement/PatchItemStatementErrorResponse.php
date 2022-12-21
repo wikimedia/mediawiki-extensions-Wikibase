@@ -76,10 +76,18 @@ class PatchItemStatementErrorResponse extends ErrorResponse {
 				);
 
 			case StatementValidator::CODE_INVALID:
-			case StatementValidator::CODE_MISSING_FIELD:
 				return new self(
 					ErrorResponse::PATCHED_STATEMENT_INVALID,
 					'The patch results in an invalid statement which cannot be stored'
+				);
+
+			case StatementValidator::CODE_MISSING_FIELD:
+				return new self(
+					ErrorResponse::PATCHED_STATEMENT_MISSING_FIELD,
+					"Mandatory field missing in the patched statement: {$context[StatementValidator::CONTEXT_FIELD_NAME]}",
+					[
+						'path' => $context[StatementValidator::CONTEXT_FIELD_NAME],
+					]
 				);
 
 			case StatementValidator::CODE_INVALID_FIELD:

@@ -462,7 +462,8 @@ describe( 'PATCH statement tests', () => {
 						.makeRequest();
 
 					assert.strictEqual( response.statusCode, 422 );
-					assert.strictEqual( response.body.code, 'patched-statement-invalid' );
+					assert.strictEqual( response.body.code, 'patched-statement-missing-field' );
+					assert.strictEqual( response.body.context.path, 'value' );
 				} );
 
 				it( 'incorrect value type', async () => {

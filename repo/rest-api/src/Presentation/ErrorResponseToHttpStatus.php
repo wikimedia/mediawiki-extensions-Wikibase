@@ -32,6 +32,7 @@ class ErrorResponseToHttpStatus {
 		ErrorResponse::STATEMENT_NOT_FOUND => 404,
 		ErrorResponse::PATCHED_STATEMENT_INVALID => 422,
 		ErrorResponse::PATCHED_STATEMENT_INVALID_FIELD => 422,
+		ErrorResponse::PATCHED_STATEMENT_MISSING_FIELD => 422,
 		ErrorResponse::PATCHED_STATEMENT_VALUE_TYPE_MISMATCH => 422,
 		ErrorResponse::CANNOT_APPLY_PATCH => 409,
 		ErrorResponse::PATCH_TEST_FAILED => 409,
