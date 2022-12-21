@@ -40,7 +40,7 @@
 		"requestBody": { "$ref": "../../global/requests.json#/Statement" },
 		"responses": {
 			"200": { "$ref": "../../global/responses.json#/Statement" },
-			"400": { "$ref": "../../global/responses.json#/InvalidReplacedItemStatementInput" },
+			"400": { "$ref": "../../global/responses.json#/InvalidReplaceItemStatementInput" },
 			"404": { "$ref": "../../global/responses.json#/ItemStatementNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"415": { "$ref": "../../global/responses.json#/InvalidMediaType" },

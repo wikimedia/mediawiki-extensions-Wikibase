@@ -29,10 +29,23 @@
 			"message": "Not a valid statement ID: {statement_id}"
 		}
 	},
-	"InvalidStatementDataExample": {
+	"StatementDataMissingFieldExample": {
 		"value": {
-			"code": "invalid-statement-data",
-			"message": "Invalid statement data provided"
+			"code": "statement-data-missing-field",
+			"message": "Mandatory field missing in the statement data: {field}",
+			"context": {
+				"path": "{field}"
+			}
+		}
+	},
+	"StatementDataInvalidFieldExample": {
+		"value": {
+			"code": "statement-data-invalid-field",
+			"message": "Invalid input for {field}",
+			"context": {
+				"path": "{field}",
+				"value": "{value}"
+			}
 		}
 	},
 	"InvalidOperationChangeStatementId": {
@@ -90,12 +103,6 @@
 			}
 		}
 	},
-	"CannotApplyPatchExample": {
-		"value": {
-			"code": "cannot-apply-patch",
-			"message": "The provided patch cannot be applied to the statement {statement_id}"
-		}
-	},
 	"PatchTestFailedExample": {
 		"value": {
 			"code": "patch-test-failed",
@@ -124,30 +131,22 @@
 			}
 		}
 	},
-	"PatchedStatementInvalidExample": {
+	"PatchedStatementMissingFieldExample": {
 		"value": {
-			"code": "patched-statement-invalid",
-			"message": "The patch results in an invalid statement which cannot be stored"
+			"code": "patched-statement-missing-field",
+			"message": "Mandatory field missing in the patched statement: {field}",
+			"context": {
+				"path": "{field}"
+			}
 		}
 	},
-	"PatchedStatementValueTypeMismatchExample": {
+	"PatchedStatementInvalidFieldExample": {
 		"value": {
-			"code": "patched-statement-value-type-mismatch",
-			"message": "Value of '{property-id}' does not match property data type after the changes",
+			"code": "patched-statement-invalid-field",
+			"message": "Invalid input for '{field}' in the patched statement",
 			"context": {
-				"patched-statement": {
-					"id": "Q42$b7526300-4ac5-a529-3a91-c8a0120673be",
-					"mainsnak": {
-						"snaktype": "value",
-						"datatype": "string",
-						"datavalue": {
-							"type": "string",
-							"value": "potato"
-						},
-						"property": "P31"
-					}
-				},
-				"property-id": "P31"
+				"path": "{field}",
+				"value": "{value}"
 			}
 		}
 	},
