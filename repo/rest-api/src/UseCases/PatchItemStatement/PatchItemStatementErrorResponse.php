@@ -18,17 +18,18 @@ class PatchItemStatementErrorResponse extends ErrorResponse {
 
 	public static function newFromValidationError( ValidationError $validationError ): self {
 		$errorCode = $validationError->getCode();
+		$context = $validationError->getContext();
 		switch ( $errorCode ) {
 			case ItemIdValidator::CODE_INVALID:
 				return new self(
 					ErrorResponse::INVALID_ITEM_ID,
-					'Not a valid item ID: ' . $validationError->getContext()[ItemIdValidator::ERROR_CONTEXT_VALUE]
+					'Not a valid item ID: ' . $context[ItemIdValidator::ERROR_CONTEXT_VALUE]
 				);
 
 			case StatementIdValidator::CODE_INVALID:
 				return new self(
 					ErrorResponse::INVALID_STATEMENT_ID,
-					'Not a valid statement ID: ' . $validationError->getContext()[StatementIdValidator::ERROR_CONTEXT_VALUE]
+					'Not a valid statement ID: ' . $context[StatementIdValidator::ERROR_CONTEXT_VALUE]
 				);
 
 			case JsonPatchValidator::CODE_INVALID:
@@ -38,48 +39,57 @@ class PatchItemStatementErrorResponse extends ErrorResponse {
 				);
 
 			case JsonPatchValidator::CODE_INVALID_OPERATION:
-				$op = $validationError->getContext()[JsonPatchValidator::ERROR_CONTEXT_OPERATION]['op'];
+				$op = $context[JsonPatchValidator::ERROR_CONTEXT_OPERATION]['op'];
 				return new self(
 					ErrorResponse::INVALID_PATCH_OPERATION,
 					"Incorrect JSON patch operation: '$op'",
-					$validationError->getContext()
+					$context
 				);
 
 			case JsonPatchValidator::CODE_INVALID_FIELD_TYPE:
-				$field = $validationError->getContext()[JsonPatchValidator::ERROR_CONTEXT_FIELD];
+				$field = $context[JsonPatchValidator::ERROR_CONTEXT_FIELD];
 				return new self(
 					ErrorResponse::INVALID_PATCH_FIELD_TYPE,
 					"The value of '$field' must be of type string",
-					$validationError->getContext()
+					$context
 				);
 
 			case JsonPatchValidator::CODE_MISSING_FIELD:
-				$field = $validationError->getContext()[JsonPatchValidator::ERROR_CONTEXT_FIELD];
+				$field = $context[JsonPatchValidator::ERROR_CONTEXT_FIELD];
 				return new self(
 					ErrorResponse::MISSING_JSON_PATCH_FIELD,
 					"Missing '$field' in JSON patch",
-					$validationError->getContext()
+					$context
 				);
 
 			case EditMetadataValidator::CODE_INVALID_TAG:
 				return new self(
 					ErrorResponse::INVALID_EDIT_TAG,
-					"Invalid MediaWiki tag: {$validationError->getContext()[EditMetadataValidator::ERROR_CONTEXT_TAG_VALUE]}"
+					"Invalid MediaWiki tag: {$context[EditMetadataValidator::ERROR_CONTEXT_TAG_VALUE]}"
 				);
 
 			case EditMetadataValidator::CODE_COMMENT_TOO_LONG:
-				$commentMaxLength = $validationError->getContext()[EditMetadataValidator::ERROR_CONTEXT_COMMENT_MAX_LENGTH];
+				$commentMaxLength = $context[EditMetadataValidator::ERROR_CONTEXT_COMMENT_MAX_LENGTH];
 				return new self(
 					ErrorResponse::COMMENT_TOO_LONG,
 					"Comment must not be longer than $commentMaxLength characters."
 				);
 
 			case StatementValidator::CODE_INVALID:
-			case StatementValidator::CODE_INVALID_FIELD:
 			case StatementValidator::CODE_MISSING_FIELD:
 				return new self(
 					ErrorResponse::PATCHED_STATEMENT_INVALID,
 					'The patch results in an invalid statement which cannot be stored'
+				);
+
+			case StatementValidator::CODE_INVALID_FIELD:
+				return new self(
+					ErrorResponse::PATCHED_STATEMENT_INVALID_FIELD,
+					"Invalid input for '{$context[StatementValidator::CONTEXT_FIELD_NAME]}' in the patched statement",
+					[
+						'path' => $context[StatementValidator::CONTEXT_FIELD_NAME],
+						'value' => $context[StatementValidator::CONTEXT_FIELD_VALUE]
+					]
 				);
 
 			default:

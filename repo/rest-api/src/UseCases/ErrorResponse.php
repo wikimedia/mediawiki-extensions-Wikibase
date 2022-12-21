@@ -15,6 +15,7 @@ class ErrorResponse {
 	public const INVALID_OPERATION_CHANGED_STATEMENT_ID = 'invalid-operation-change-statement-id';
 	public const INVALID_OPERATION_CHANGED_PROPERTY = 'invalid-operation-change-property-of-statement';
 	public const PATCHED_STATEMENT_INVALID = 'patched-statement-invalid';
+	public const PATCHED_STATEMENT_INVALID_FIELD = 'patched-statement-invalid-field';
 	public const PATCHED_STATEMENT_VALUE_TYPE_MISMATCH = 'patched-statement-value-type-mismatch';
 	public const PATCH_TARGET_NOT_FOUND = 'patch-target-not-found';
 	public const CANNOT_APPLY_PATCH = 'cannot-apply-patch';

@@ -485,7 +485,8 @@ describe( 'PATCH statement tests', () => {
 
 					assert.strictEqual( response.statusCode, 422 );
 					const body = response.body;
-					assert.strictEqual( body.code, 'patched-statement-invalid' );
+					assert.strictEqual( body.code, 'patched-statement-invalid-field' );
+					assert.deepEqual( body.context, { path: 'content', value } );
 				} );
 			} );
 
