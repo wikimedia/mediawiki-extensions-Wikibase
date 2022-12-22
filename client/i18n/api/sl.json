@@ -7,5 +7,6 @@
 	"apihelp-query+description-summary": "Pridobi kratek opis oziroma podnaslov, ki pojasnjuje, o čem je ciljna stran.",
 	"apihelp-query+description-extended-description": "Opis je navadno besedilo v eni vrstici, sicer pa je poljuben (lahko vključuje neobdelane značke HTML, ki jih je prav tako treba interpretirati kot navadno besedilo). V HTML-ju se ne sme uporabljati nemaskirano!",
 	"apihelp-query+description-param-prefersource": "Kateremu viru opisa dati prednost, če je prisoten:",
+	"apihelp-query+description-paramvalue-prefersource-local": "Lokalni opisi s funkcijo razčlenjevalnika <code><nowiki>{{SHORTDESC:...}}</nowiki></code> v vikibesedilu strani.",
 	"apihelp-query+description-example-central": "Pridobi opis strani »London«, po možnosti centralni opis, če ta obstaja."
 }
