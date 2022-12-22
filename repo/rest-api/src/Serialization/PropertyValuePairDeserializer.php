@@ -53,31 +53,21 @@ class PropertyValuePairDeserializer {
 			case 'value':
 				$dataValue = $this->valueDeserializer->deserialize( $dataTypeId, $serialization['value'] );
 				return new PropertyValueSnak( $propertyId, $dataValue );
-			default: // should be unreachable because of prior validation
-				throw new \LogicException( 'value type must be one of "value", "novalue", "somevalue".' );
+			default:
+				throw new InvalidFieldException( 'type', $serialization['value']['type'] );
 		}
 	}
 
 	private function validateSerialization( array $serialization ): void {
 		$this->assertFieldExists( $serialization, 'property' );
 		$this->assertFieldIsArray( $serialization, 'property' );
-		$this->validateProperty( $serialization['property'] );
+		$this->assertFieldExists( $serialization['property'], 'id' );
+		$this->assertFieldIsString( $serialization['property'], 'id' );
 
 		$this->assertFieldExists( $serialization, 'value' );
 		$this->assertFieldIsArray( $serialization, 'value' );
-		$this->validateValue( $serialization['value'] );
-	}
-
-	private function validateProperty( array $propertySerialization ): void {
-		$this->assertFieldExists( $propertySerialization, 'id' );
-	}
-
-	private function validateValue( array $valueSerialization ): void {
-		$this->assertFieldExists( $valueSerialization, 'type' );
-
-		if ( !in_array( $valueSerialization['type'], [ 'value', 'novalue', 'somevalue' ], true ) ) {
-			throw new InvalidFieldException( 'type', $valueSerialization['type'] );
-		}
+		$this->assertFieldExists( $serialization['value'], 'type' );
+		$this->assertFieldIsString( $serialization['value'], 'type' );
 	}
 
 	private function parsePropertyId( string $id ): PropertyId {
@@ -102,6 +92,12 @@ class PropertyValuePairDeserializer {
 
 	private function assertFieldIsArray( array $serializationPart, string $field ): void {
 		if ( !is_array( $serializationPart[$field] ) ) {
+			throw new InvalidFieldException( $field, $serializationPart[$field] );
+		}
+	}
+
+	private function assertFieldIsString( array $serializationPart, string $field ): void {
+		if ( !is_string( $serializationPart[$field] ) ) {
 			throw new InvalidFieldException( $field, $serializationPart[$field] );
 		}
 	}
