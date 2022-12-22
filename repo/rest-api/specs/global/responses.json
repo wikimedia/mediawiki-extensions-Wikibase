@@ -162,17 +162,13 @@
 		"description": "The request cannot be processed",
 		"content": {
 			"application/json": {
-				"schema": { "$ref": "./response-parts.json#/Error" },
+				"schema": { "$ref": "./response-parts.json#/ContextError" },
 				"examples": {
 					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
 					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
 					"invalid-bot-flag": { "$ref": "./examples.json#/InvalidBotFlagExample" },
-					"invalid-statement-data": {
-						"value": {
-							"code": "invalid-statement-data",
-							"message": "Invalid statement data provided"
-						}
-					}
+					"statement-data-missing-field": { "$ref": "./examples.json#/StatementDataMissingFieldExample" },
+					"statement-data-invalid-field": { "$ref": "./examples.json#/StatementDataInvalidFieldExample" }
 				}
 			}
 		},
@@ -183,16 +179,17 @@
 			}
 		}
 	},
-	"InvalidReplacedStatementInput": {
+	"InvalidReplaceStatementInput": {
 		"description": "The request cannot be processed",
 		"content": {
 			"application/json": {
-				"schema": { "$ref": "./response-parts.json#/Error" },
+				"schema": { "$ref": "./response-parts.json#/ContextError" },
 				"examples": {
 					"invalid-statement-id": { "$ref": "./examples.json#/InvalidStatementIdExample" },
 					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
 					"invalid-bot-flag": { "$ref": "./examples.json#/InvalidBotFlagExample" },
-					"invalid-statement-data": { "$ref": "./examples.json#/InvalidStatementDataExample" },
+					"statement-data-missing-field": { "$ref": "./examples.json#/StatementDataMissingFieldExample" },
+					"statement-data-invalid-field": { "$ref": "./examples.json#/StatementDataInvalidFieldExample" },
 					"invalid-operation-change-statement-id": {
 						"$ref": "./examples.json#/InvalidOperationChangeStatementId"
 					},
@@ -209,17 +206,18 @@
 			}
 		}
 	},
-	"InvalidReplacedItemStatementInput": {
+	"InvalidReplaceItemStatementInput": {
 		"description": "The request cannot be processed",
 		"content": {
 			"application/json": {
-				"schema": { "$ref": "./response-parts.json#/Error" },
+				"schema": { "$ref": "./response-parts.json#/ContextError" },
 				"examples": {
 					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
 					"invalid-statement-id": { "$ref": "./examples.json#/InvalidStatementIdExample" },
 					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
 					"invalid-bot-flag": { "$ref": "./examples.json#/InvalidBotFlagExample" },
-					"invalid-statement-data": { "$ref": "./examples.json#/InvalidStatementDataExample" },
+					"statement-data-missing-field": { "$ref": "./examples.json#/StatementDataMissingFieldExample" },
+					"statement-data-invalid-field": { "$ref": "./examples.json#/StatementDataInvalidFieldExample" },
 					"invalid-operation-change-statement-id": {
 						"$ref": "./examples.json#/InvalidOperationChangeStatementId"
 					},
@@ -332,7 +330,6 @@
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/ContextError" },
 				"examples": {
-					"cannot-apply-patch": { "$ref": "./examples.json#/CannotApplyPatchExample" },
 					"patch-test-failed": { "$ref": "./examples.json#/PatchTestFailedExample" },
 					"patch-target-not-found": { "$ref": "./examples.json#/PatchTargetNotFoundExample" }
 				}
@@ -353,8 +350,8 @@
 					"$ref": "./response-parts.json#/ContextError"
 				},
 				"examples": {
-					"patched-statement-invalid": { "$ref": "./examples.json#/PatchedStatementInvalidExample" },
-					"patched-statement-value-type-mismatch": { "$ref": "./examples.json#/PatchedStatementValueTypeMismatchExample" }
+					"patched-statement-missing-field": { "$ref": "./examples.json#/PatchedStatementMissingFieldExample" },
+					"patched-statement-invalid-field": { "$ref": "./examples.json#/PatchedStatementInvalidFieldExample" }
 				}
 			}
 		},
