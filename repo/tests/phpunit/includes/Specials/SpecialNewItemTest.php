@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Specials;
 
 use FauxRequest;
 use HashSiteStore;
+use MediaWiki\Languages\LanguageNameUtils;
 use PHPUnit\Framework\MockObject\MockObject;
 use Site;
 use SiteStore;
@@ -18,6 +19,7 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\Specials\SpecialNewItem;
 use Wikibase\Repo\Tests\WikibaseTablesUsed;
+use Wikibase\Repo\Validators\NotMulValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -51,6 +53,8 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 		parent::setUp();
 		$this->markTablesUsedForEntityEditing();
 		$this->siteStore = new HashSiteStore();
+
+		WikibaseRepo::getSettings()->setSetting( 'tmpEnableMulLanguageCode', true );
 	}
 
 	protected function newSpecialPage() {
@@ -232,6 +236,15 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 					SpecialNewItem::FIELD_ALIASES => '',
 				],
 				'(wikibase-newitem-same-label-and-description)'
+			],
+			'mul descriptions' => [
+				[
+					SpecialNewItem::FIELD_LANG => 'mul',
+					SpecialNewItem::FIELD_LABEL => 'blah',
+					SpecialNewItem::FIELD_DESCRIPTION => 'a mul description',
+					SpecialNewItem::FIELD_ALIASES => '',
+				],
+				'(wikibase-validator-no-mul-descriptions: mul-language-name)',
 			],
 		];
 	}
@@ -429,8 +442,17 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 	private function getTermValidatorFactoryMock() {
 		$validatorMock = $this->getValidatorMock();
 
+		$languageNameUtilsMock = $this->createMock( LanguageNameUtils::class );
+		$languageNameUtilsMock->method( 'getLanguageName' )
+			->with( 'mul', 'qqx' )
+			->willReturn( 'mul-language-name' );
+
 		/** @var MockObject|TermValidatorFactory $mock */
-		$mock = $this->createMock( TermValidatorFactory::Class );
+		$mock = $this->createMock( TermValidatorFactory::class );
+		$mock->method( 'getDescriptionLanguageValidator' )
+			->willReturn( new NotMulValidator(
+				$languageNameUtilsMock
+			) );
 		$mock->method( $this->anything() )
 			->willReturn( $validatorMock );
 
