@@ -829,7 +829,9 @@ return [
 	'WikibaseRepo.EntityIdLabelFormatterFactory' => function (
 		MediaWikiServices $services
 	): EntityIdLabelFormatterFactory {
-		return new EntityIdLabelFormatterFactory();
+		return new EntityIdLabelFormatterFactory(
+			WikibaseRepo::getFallbackLabelDescriptionLookupFactory( $services )
+		);
 	},
 
 	'WikibaseRepo.EntityIdLookup' => function ( MediaWikiServices $services ): EntityIdLookup {
