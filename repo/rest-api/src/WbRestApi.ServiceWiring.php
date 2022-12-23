@@ -6,6 +6,7 @@ use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\Repo\RestApi\DataAccess\MediaWikiEditEntityFactoryItemUpdater;
+use Wikibase\Repo\RestApi\DataAccess\TermLookupItemLabelsRetriever;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemDataRetriever;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityRevisionLookupItemRevisionMetadataRetriever;
@@ -24,6 +25,7 @@ use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementValidator;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemValidator;
+use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabels;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatement;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementValidator;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatements;
@@ -74,6 +76,18 @@ return [
 			),
 			new WikibaseEntityLookupItemDataRetriever( WikibaseRepo::getEntityLookup( $services ) ),
 			new GetItemValidator( new ItemIdValidator() )
+		);
+	},
+
+	'WbRestApi.GetItemLabels' => function( MediaWikiServices $services ): GetItemLabels {
+		return new GetItemLabels(
+			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
+				WikibaseRepo::getEntityRevisionLookup( $services )
+			),
+			new TermLookupItemLabelsRetriever(
+				WikibaseRepo::getTermLookup( $services ),
+				WikibaseRepo::getTermsLanguages( $services )
+			)
 		);
 	},
 
