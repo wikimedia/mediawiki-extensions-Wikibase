@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Validators;
 
 use InvalidArgumentException;
+use MediaWiki\Languages\LanguageNameUtils;
 use ValueValidators\ValueValidator;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Item;
@@ -57,7 +58,8 @@ class TermValidatorFactoryTest extends \PHPUnit\Framework\TestCase {
 			$languageCodes,
 			new BasicEntityIdParser(),
 			$this->createMock( TermsCollisionDetectorFactory::class ),
-			$this->createMock( TermLookup::class )
+			$this->createMock( TermLookup::class ),
+			$this->createMock( LanguageNameUtils::class )
 		);
 	}
 
@@ -112,14 +114,33 @@ class TermValidatorFactoryTest extends \PHPUnit\Framework\TestCase {
 		$this->assertFalse( $result->isValid(), 'isValid(bad): label/description' );
 	}
 
-	public function testGetLanguageValidator() {
-		$builders = $this->newFactory( 20, [ 'ja', 'ru' ] );
+	public function testGetLabelLanguageValidator() {
+		$builders = $this->newFactory( 20, [ 'ja', 'ru', 'mul' ] );
 
-		$validator = $builders->getLanguageValidator();
-
-		$this->assertInstanceOf( ValueValidator::class, $validator );
+		$validator = $builders->getLabelLanguageValidator();
 
 		$this->assertTrue( $validator->validate( 'ja' )->isValid() );
+		$this->assertTrue( $validator->validate( 'mul' )->isValid() );
+		$this->assertFalse( $validator->validate( 'xx' )->isValid() );
+	}
+
+	public function testGetAliasLanguageValidator() {
+		$builders = $this->newFactory( 20, [ 'ja', 'ru', 'mul' ] );
+
+		$validator = $builders->getAliasLanguageValidator();
+
+		$this->assertTrue( $validator->validate( 'ja' )->isValid() );
+		$this->assertTrue( $validator->validate( 'mul' )->isValid() );
+		$this->assertFalse( $validator->validate( 'xx' )->isValid() );
+	}
+
+	public function testGetDescriptionLanguageValidator() {
+		$builders = $this->newFactory( 20, [ 'ja', 'ru', 'mul' ] );
+
+		$validator = $builders->getDescriptionLanguageValidator();
+
+		$this->assertTrue( $validator->validate( 'ja' )->isValid() );
+		$this->assertFalse( $validator->validate( 'mul' )->isValid() );
 		$this->assertFalse( $validator->validate( 'xx' )->isValid() );
 	}
 

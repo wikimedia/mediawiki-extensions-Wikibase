@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Specials;
 
 use FauxRequest;
 use FauxResponse;
+use MediaWiki\Languages\LanguageNameUtils;
 use NullStatsdDataFactory;
 use SpecialPageExecutor;
 use Status;
@@ -108,7 +109,8 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 				self::$languageCodes,
 				$this->getIdParser(),
 				$this->createMock( TermsCollisionDetectorFactory::class ),
-				$this->createMock( TermLookup::class )
+				$this->createMock( TermLookup::class ),
+				$this->createMock( LanguageNameUtils::class )
 			)
 		);
 	}

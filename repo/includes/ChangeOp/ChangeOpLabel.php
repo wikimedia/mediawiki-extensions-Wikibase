@@ -146,7 +146,7 @@ class ChangeOpLabel extends ChangeOpBase {
 			throw new InvalidArgumentException( '$entity must be a LabelsProvider' );
 		}
 
-		$languageValidator = $this->termValidatorFactory->getLanguageValidator();
+		$languageValidator = $this->termValidatorFactory->getLabelLanguageValidator();
 		$termValidator = $this->termValidatorFactory->getLabelValidator( $entity->getType() );
 
 		// check that the language is valid

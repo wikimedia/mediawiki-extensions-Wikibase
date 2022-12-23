@@ -144,7 +144,7 @@ class ChangeOpAliases extends ChangeOpBase {
 	 * @return Result
 	 */
 	public function validate( EntityDocument $entity ) {
-		$languageValidator = $this->termValidatorFactory->getLanguageValidator();
+		$languageValidator = $this->termValidatorFactory->getAliasLanguageValidator();
 		$termValidator = $this->termValidatorFactory->getAliasValidator();
 
 		// check that the language is valid

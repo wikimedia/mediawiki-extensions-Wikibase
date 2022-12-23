@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Validators;
 
 use InvalidArgumentException;
+use MediaWiki\Languages\LanguageNameUtils;
 use ValueValidators\ValueValidator;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
@@ -44,11 +45,17 @@ class TermValidatorFactory {
 	private $termLookup;
 
 	/**
+	 * @var LanguageNameUtils
+	 */
+	private $languageNameUtils;
+
+	/**
 	 * @param int $maxLength The maximum length of terms.
 	 * @param string[] $languageCodes A list of valid language codes
 	 * @param EntityIdParser $idParser
 	 * @param TermsCollisionDetectorFactory $termsCollisionDetectorFactory
 	 * @param TermLookup $termLookup
+	 * @param LanguageNameUtils $languageNameUtils
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -57,7 +64,8 @@ class TermValidatorFactory {
 		array $languageCodes,
 		EntityIdParser $idParser,
 		TermsCollisionDetectorFactory $termsCollisionDetectorFactory,
-		TermLookup $termLookup
+		TermLookup $termLookup,
+		LanguageNameUtils $languageNameUtils
 	) {
 		if ( !is_int( $maxLength ) || $maxLength <= 0 ) {
 			throw new InvalidArgumentException( '$maxLength must be a positive integer.' );
@@ -68,6 +76,7 @@ class TermValidatorFactory {
 		$this->idParser = $idParser;
 		$this->termsCollisionDetectorFactory = $termsCollisionDetectorFactory;
 		$this->termLookup = $termLookup;
+		$this->languageNameUtils = $languageNameUtils;
 	}
 
 	/**
@@ -145,16 +154,30 @@ class TermValidatorFactory {
 		return $validators;
 	}
 
+	public function getLabelLanguageValidator(): ValueValidator {
+		return new CompositeValidator( $this->getLanguageValidators(), true ); //Note: each validator is fatal
+	}
+
+	public function getDescriptionLanguageValidator(): ValueValidator {
+		$validators = $this->getLanguageValidators();
+		$validators[] = new NotMulValidator( $this->languageNameUtils );
+
+		return new CompositeValidator( $validators, true ); //Note: each validator is fatal
+	}
+
+	public function getAliasLanguageValidator(): ValueValidator {
+		return new CompositeValidator( $this->getLanguageValidators(), true ); //Note: each validator is fatal
+	}
+
 	/**
-	 * @return ValueValidator
+	 * @return ValueValidator[]
 	 */
-	public function getLanguageValidator() {
+	private function getLanguageValidators(): array {
 		$validators = [];
 		$validators[] = new TypeValidator( 'string' );
 		$validators[] = new MembershipValidator( $this->languageCodes, 'not-a-language' );
 
-		$validator = new CompositeValidator( $validators, true ); //Note: each validator is fatal
-		return $validator;
+		return $validators;
 	}
 
 	public function getLabelUniquenessValidator( $entityType ): LabelUniquenessValidator {
