@@ -182,6 +182,7 @@
 	"wikibase-validator-illegal-entity-schema-title": "Value must start with <code>E</code> and the rest should be only digits.",
 	"wikibase-validator-no-such-media": "The file \"$1\" does not exist on [https://commons.wikimedia.org/ Wikimedia Commons].",
 	"wikibase-validator-no-such-sitelink": "Could not find a sitelink to \"$1\" when trying to edit badges.",
+	"wikibase-validator-no-mul-descriptions": "The language code \"mul\" ($1) can only be used for labels and aliases, not for descriptions.",
 	"wikibase-validator-page-not-exists": "The page \"$1\" does not exist.",
 	"wikibase-validator-not-a-language": "\"$1\" is not a known language code.",
 	"wikibase-itemlink": "$1 $2",

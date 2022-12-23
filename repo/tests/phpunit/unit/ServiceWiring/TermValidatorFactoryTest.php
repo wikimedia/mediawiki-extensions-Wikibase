@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
+use MediaWiki\Languages\LanguageNameUtils;
 use Wikibase\DataAccess\NullPrefetchingTermLookup;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemIdParser;
@@ -34,6 +35,9 @@ class TermValidatorFactoryTest extends ServiceWiringTestCase {
 			$this->createMock( TermsCollisionDetectorFactory::class ) );
 		$this->mockService( 'WikibaseRepo.TermLookup',
 			new NullPrefetchingTermLookup() );
+		$this->serviceContainer->expects( $this->once() )
+			->method( 'getLanguageNameUtils' )
+			->willReturn( $this->createMock( LanguageNameUtils::class ) );
 
 		/** @var TermValidatorFactory $termValidatorFactory */
 		$termValidatorFactory = $this->getService( 'WikibaseRepo.TermValidatorFactory' );

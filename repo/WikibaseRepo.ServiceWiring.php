@@ -1962,7 +1962,8 @@ return [
 			$languages,
 			WikibaseRepo::getEntityIdParser( $services ),
 			WikibaseRepo::getTermsCollisionDetectorFactory( $services ),
-			WikibaseRepo::getTermLookup( $services )
+			WikibaseRepo::getTermLookup( $services ),
+			$services->getLanguageNameUtils()
 		);
 	},
 

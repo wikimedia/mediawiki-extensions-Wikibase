@@ -352,7 +352,17 @@ class ChangeOpTestMockProvider {
 				[ $this, 'getLabelDescriptionNotEqualValidator' ]
 			);
 
-		$mock->method( 'getLanguageValidator' )
+		$mock->method( 'getLabelLanguageValidator' )
+			->willReturnCallback(
+				[ $this, 'getMockTermValidator' ]
+			);
+
+		$mock->method( 'getDescriptionLanguageValidator' )
+			->willReturnCallback(
+				[ $this, 'getMockTermValidator' ]
+			);
+
+		$mock->method( 'getAliasLanguageValidator' )
 			->willReturnCallback(
 				[ $this, 'getMockTermValidator' ]
 			);

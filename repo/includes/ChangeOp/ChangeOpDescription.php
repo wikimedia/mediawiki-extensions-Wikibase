@@ -149,7 +149,7 @@ class ChangeOpDescription extends ChangeOpBase {
 			throw new InvalidArgumentException( '$entity must be a DescriptionsProvider' );
 		}
 
-		$languageValidator = $this->termValidatorFactory->getLanguageValidator();
+		$languageValidator = $this->termValidatorFactory->getDescriptionLanguageValidator();
 		$termValidator = $this->termValidatorFactory->getDescriptionValidator();
 
 		// check that the language is valid

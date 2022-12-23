@@ -8,6 +8,7 @@ use ChangeTags;
 use FauxRequest;
 use HashSiteStore;
 use Language;
+use MediaWiki\Languages\LanguageNameUtils;
 use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use SiteLookup;
@@ -241,7 +242,8 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 			[ 'en', 'de', 'fr' ],
 			new ItemIdParser(),
 			$this->createMock( TermsCollisionDetectorFactory::class ),
-			$this->createMock( TermLookup::class )
+			$this->createMock( TermLookup::class ),
+			$this->createMock( LanguageNameUtils::class )
 		);
 	}
 
