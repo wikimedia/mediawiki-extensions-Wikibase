@@ -16,6 +16,7 @@ use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\LanguageNameLookupFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
+use Wikibase\Repo\EntityIdLabelFormatterFactory;
 use Wikibase\Repo\LocalizedTextProviderFactory;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\View\ViewFactory;
@@ -56,6 +57,11 @@ class ViewFactoryTest extends ServiceWiringTestCase {
 			->willReturn( SnakFormatter::FORMAT_HTML );
 		$this->mockService( 'WikibaseRepo.EntityIdHtmlLinkFormatterFactory',
 			$entityIdHtmlLinkFormatterFactory );
+		$entityIdLabelFormatterFactory = $this->createMock( EntityIdLabelFormatterFactory::class );
+		$entityIdLabelFormatterFactory->method( 'getOutputFormat' )
+			->willReturn( SnakFormatter::FORMAT_PLAIN );
+		$this->mockService( 'WikibaseRepo.EntityIdLabelFormatterFactory',
+			$entityIdLabelFormatterFactory );
 		$this->mockService( 'WikibaseRepo.SnakFormatterFactory',
 			$this->createMock( OutputFormatSnakFormatterFactory::class ) );
 		$this->mockService( 'WikibaseRepo.DataTypeFactory',

@@ -826,6 +826,12 @@ return [
 			: $factory;
 	},
 
+	'WikibaseRepo.EntityIdLabelFormatterFactory' => function (
+		MediaWikiServices $services
+	): EntityIdLabelFormatterFactory {
+		return new EntityIdLabelFormatterFactory();
+	},
+
 	'WikibaseRepo.EntityIdLookup' => function ( MediaWikiServices $services ): EntityIdLookup {
 		return new ContentHandlerEntityIdLookup( WikibaseRepo::getEntityContentFactory( $services ) );
 	},
@@ -2079,7 +2085,7 @@ return [
 
 		return new ViewFactory(
 			WikibaseRepo::getEntityIdHtmlLinkFormatterFactory( $services ),
-			new EntityIdLabelFormatterFactory(),
+			WikibaseRepo::getEntityIdLabelFormatterFactory( $services ),
 			new WikibaseHtmlSnakFormatterFactory(
 				WikibaseRepo::getSnakFormatterFactory( $services )
 			),

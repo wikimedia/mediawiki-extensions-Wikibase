@@ -814,6 +814,13 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.EntityIdHtmlLinkFormatterFactory' );
 	}
 
+	public static function getEntityIdLabelFormatterFactory(
+		ContainerInterface $services = null
+	): EntityIdLabelFormatterFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntityIdLabelFormatterFactory' );
+	}
+
 	public static function getEntityViewFactory( ContainerInterface $services = null ): DispatchingEntityViewFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.EntityViewFactory' );
