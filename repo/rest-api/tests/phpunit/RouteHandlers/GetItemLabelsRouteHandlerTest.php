@@ -7,6 +7,8 @@ use MediaWiki\Rest\RequestData;
 use MediaWiki\Tests\Rest\Handler\HandlerTestTrait;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Repo\RestApi\RouteHandlers\GetItemLabelsRouteHandler;
+use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
+use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabels;
 
 /**
  * @covers \Wikibase\Repo\RestApi\RouteHandlers\GetItemRouteHandler
@@ -24,6 +26,22 @@ class GetItemLabelsRouteHandlerTest extends MediaWikiIntegrationTestCase {
 
 		$this->assertTrue( $routeHandler->needsReadAccess() );
 		$this->assertFalse( $routeHandler->needsWriteAccess() );
+	}
+
+	public function testHandlesUnexpectedErrors(): void {
+		$useCase = $this->createStub( GetItemLabels::class );
+		$useCase->method( 'execute' )->willThrowException( new \RuntimeException() );
+		$this->setService( 'WbRestApi.GetItemLabels', $useCase );
+
+		$routeHandler = $this->newHandlerWithValidRequest();
+
+		$response = $routeHandler->execute();
+		$responseBody = json_decode( $response->getBody()->getContents() );
+		$this->assertSame( [ 'en' ], $response->getHeader( 'Content-Language' ) );
+		$this->assertSame(
+			ErrorResponse::UNEXPECTED_ERROR,
+			$responseBody->code
+		);
 	}
 
 	private function newHandlerWithValidRequest(): Handler {
