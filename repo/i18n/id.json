@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Agam Riyandana",
 			"Ahdan",
 			"Akmaie Ajam",
 			"Bagas Chrisara",
@@ -166,6 +167,7 @@
 	"wikibase-validator-not-allowed": "Nilai tidak sah: $1",
 	"wikibase-validator-no-validators": "Dilarang",
 	"wikibase-validator-sitelink-conflict": "Pranala $1 sudah digunakan oleh butir $2. Anda bisa menghapusnya dari $2 jika memang tidak seharusnya di sana atau gabungkan kedua butir jika memang merupakan topik yang sama.",
+	"wikibase-validator-sitelink-conflict-redirects-supported": "Tautan $1 sudah digunakan oleh Item $2 . Anda dapat menghapusnya dari $2 jika tidak termasuk di sana atau menggabungkan Item jika memiliki topik yang sama persis. Jika situasinya lebih rumit, harap lihat [https://www.wikidata.org/wiki/Special:MyLanguage/Help:Sitelinks#Linking_to_Wikimedia_site_pages Help:Sitelinks].",
 	"wikibase-validator-sitelink-conflict-unknown": "Pranala $1 juga digunakan oleh Butir lain yang sedang disimpan.",
 	"wikibase-validator-label-conflict": "Atribut $3 sudah mempunyai label \"$1\" yang terkait dengan kode bahasa $2.",
 	"wikibase-validator-label-with-description-conflict": "Butir $3 sudah ada pada label \"$1\" yang terkait dengan kode bahasa $2 dan memiliki teks deskripsi yang sama.",
