@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Specials;
 
 use FauxRequest;
+use MediaWiki\Languages\LanguageNameUtils;
 use PHPUnit\Framework\MockObject\MockObject;
 use ValueValidators\Error;
 use ValueValidators\Result;
@@ -13,6 +14,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Specials\SpecialNewProperty;
 use Wikibase\Repo\Tests\WikibaseTablesUsed;
+use Wikibase\Repo\Validators\NotMulValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -40,6 +42,8 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 		parent::setUp();
 		$this->setUserLang( 'qqx' );
 		$this->markTablesUsedForEntityEditing();
+
+		WikibaseRepo::getSettings()->setSetting( 'tmpEnableMulLanguageCode', true );
 	}
 
 	protected function newSpecialPage() {
@@ -247,6 +251,16 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 				],
 				'(wikibase-newproperty-same-label-and-description)',
 			],
+			'mul descriptions' => [
+				[
+					SpecialNewProperty::FIELD_LANG => 'mul',
+					SpecialNewProperty::FIELD_LABEL => 'blah',
+					SpecialNewProperty::FIELD_DESCRIPTION => 'a mul description',
+					SpecialNewProperty::FIELD_ALIASES => '',
+					SpecialNewProperty::FIELD_DATATYPE => 'string',
+				],
+				'(wikibase-validator-no-mul-descriptions: mul-language-name)',
+			],
 		];
 	}
 
@@ -337,8 +351,17 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 	private function getTermValidatorFactoryMock() {
 		$validatorMock = $this->getValidatorMock();
 
+		$languageNameUtilsMock = $this->createMock( LanguageNameUtils::class );
+		$languageNameUtilsMock->method( 'getLanguageName' )
+			->with( 'mul', 'qqx' )
+			->willReturn( 'mul-language-name' );
+
 		/** @var MockObject|TermValidatorFactory $mock */
-		$mock = $this->createMock( TermValidatorFactory::Class );
+		$mock = $this->createMock( TermValidatorFactory::class );
+		$mock->method( 'getDescriptionLanguageValidator' )
+			->willReturn( new NotMulValidator(
+				$languageNameUtilsMock
+			) );
 		$mock->method( $this->anything() )
 			->willReturn( $validatorMock );
 
