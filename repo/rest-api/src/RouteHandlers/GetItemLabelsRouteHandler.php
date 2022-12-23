@@ -14,6 +14,7 @@ use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddlew
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
 use Wikibase\Repo\RestApi\Serialization\LabelsSerializer;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabels;
+use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabelsErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabelsRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabelsSuccessResponse;
 use Wikibase\Repo\RestApi\WbRestApi;
@@ -30,15 +31,18 @@ class GetItemLabelsRouteHandler extends SimpleHandler {
 	private GetItemLabels $useCase;
 	private LabelsSerializer $labelsSerializer;
 	private MiddlewareHandler $middlewareHandler;
+	private ResponseFactory $responseFactory;
 
 	public function __construct(
 		GetItemLabels $useCase,
 		LabelsSerializer $labelsSerializer,
-		MiddlewareHandler $middlewareHandler
+		MiddlewareHandler $middlewareHandler,
+		ResponseFactory $responseFactory
 	) {
 		$this->useCase = $useCase;
 		$this->labelsSerializer = $labelsSerializer;
 		$this->middlewareHandler = $middlewareHandler;
+		$this->responseFactory = $responseFactory;
 	}
 
 	public static function factory(): self {
@@ -53,7 +57,8 @@ class GetItemLabelsRouteHandler extends SimpleHandler {
 				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
 					fn( RequestInterface $request ): string => $request->getPathParam( self::ITEM_ID_PATH_PARAM )
 				)
-			] )
+			] ),
+			$responseFactory
 		);
 	}
 
@@ -70,7 +75,14 @@ class GetItemLabelsRouteHandler extends SimpleHandler {
 
 	public function runUseCase( string $itemId ): Response {
 		$useCaseResponse = $this->useCase->execute( new GetItemLabelsRequest( $itemId ) );
-		return $this->newSuccessHttpResponse( $useCaseResponse );
+
+		if ( $useCaseResponse instanceof GetItemLabelsSuccessResponse ) {
+			return $this->newSuccessHttpResponse( $useCaseResponse );
+		} elseif ( $useCaseResponse instanceof GetItemLabelsErrorResponse ) {
+			return $this->responseFactory->newErrorResponse( $useCaseResponse );
+		} else {
+			throw new \LogicException( 'Received an unexpected use case result in ' . __CLASS__ );
+		}
 	}
 
 	public function getParamSettings(): array {
