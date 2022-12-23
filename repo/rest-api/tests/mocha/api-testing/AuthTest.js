@@ -93,6 +93,9 @@ describe( 'Auth', () => {
 			newRequestBuilder: () => rbf.newGetItemRequestBuilder( itemId )
 		},
 		{
+			newRequestBuilder: () => rbf.newGetItemLabelsRequestBuilder( itemId )
+		},
+		{
 			newRequestBuilder: () => rbf.newGetStatementRequestBuilder( statementId )
 		},
 		...editRequests
