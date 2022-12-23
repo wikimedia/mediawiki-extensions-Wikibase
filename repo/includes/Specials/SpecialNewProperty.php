@@ -255,11 +255,19 @@ class SpecialNewProperty extends SpecialNewEntity {
 			$validator = $this->termValidatorFactory->getLabelValidator( $this->getEntityType() );
 			$result = $validator->validate( $formData[self::FIELD_LABEL] );
 			$status->merge( $this->errorLocalizer->getResultStatus( $result ) );
+
+			$validator = $this->termValidatorFactory->getLabelLanguageValidator();
+			$result = $validator->validate( $formData[self::FIELD_LANG] );
+			$status->merge( $this->errorLocalizer->getResultStatus( $result ) );
 		}
 
 		if ( $formData[self::FIELD_DESCRIPTION] != '' ) {
 			$validator = $this->termValidatorFactory->getDescriptionValidator();
 			$result = $validator->validate( $formData[self::FIELD_DESCRIPTION] );
+			$status->merge( $this->errorLocalizer->getResultStatus( $result ) );
+
+			$validator = $this->termValidatorFactory->getDescriptionLanguageValidator();
+			$result = $validator->validate( $formData[self::FIELD_LANG] );
 			$status->merge( $this->errorLocalizer->getResultStatus( $result ) );
 		}
 
@@ -271,6 +279,10 @@ class SpecialNewProperty extends SpecialNewEntity {
 			}
 
 			$result = $validator->validate( implode( '|', $formData[self::FIELD_ALIASES] ) );
+			$status->merge( $this->errorLocalizer->getResultStatus( $result ) );
+
+			$validator = $this->termValidatorFactory->getAliasLanguageValidator();
+			$result = $validator->validate( $formData[self::FIELD_LANG] );
 			$status->merge( $this->errorLocalizer->getResultStatus( $result ) );
 		}
 
