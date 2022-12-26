@@ -16,7 +16,7 @@
 	"apihelp-query+wbcontentlanguages-paramvalue-context-term": "Pojmovi (oznaka, opis, pseudonimi) entiteta.",
 	"apihelp-query+wbcontentlanguages-paramvalue-context-monolingualtext": "Jednojezična vrednost teksta u izjavi.",
 	"apihelp-query+wbcontentlanguages-param-prop": "Svojstva koja treba de budu vraćena za svaki jezik.",
-	"apihelp-query+wbcontentlanguages-paramvalue-prop-code": "Kôd jezika.",
+	"apihelp-query+wbcontentlanguages-paramvalue-prop-code": "Jezički kod.",
 	"apihelp-query+wbsearch-param-search": "Pretraga za ovaj tekst.",
 	"apihelp-query+wbsearch-param-language": "Pretraga na ovom jeziku.",
 	"apihelp-query+wbsearch-param-limit": "Maksimalni broj rezultata",

@@ -109,5 +109,7 @@
 	"wikibase-client-data-bridge-saving-error-heading": "Хийцамаш Ӏалашбан цало",
 	"wikibase-client-data-bridge-edit-conflict-error-heading": "Тодаран девнаш карийна",
 	"wikibase-client-data-bridge-unknown-error-heading": "Цхьа хӀума нийса дац",
-	"wikibase-client-data-bridge-error-retry-save": "Йуха Ӏалашйе"
+	"wikibase-client-data-bridge-error-go-back": "Йуха гӀо",
+	"wikibase-client-data-bridge-error-retry-save": "Йуха Ӏалашйе",
+	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Кхин дӀа тайе"
 }
