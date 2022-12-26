@@ -168,6 +168,7 @@
 	"wikibase-validator-illegal-entity-schema-title": "Le valor debe comenciar con <code>E</code> e le resto debe esser solmente digitos.",
 	"wikibase-validator-no-such-media": "Le file \"$1\" non existe sur [https://commons.wikimedia.org/ Wikimedia Commons].",
 	"wikibase-validator-no-such-sitelink": "Non poteva trovar un ligamine de sito a \"$1\" durante le tentativa de modificar insignias.",
+	"wikibase-validator-no-mul-descriptions": "Le codice de lingua \"mul\" ($1) pote solmente esser usate pro etiquettas e aliases, non pro descriptiones.",
 	"wikibase-validator-page-not-exists": "Le pagina \"$1\" non existe.",
 	"wikibase-validator-not-a-language": "\"$1\" non es un codice de lingua cognoscite.",
 	"wikibase-item-reference-edit-placeholder": "Insere le ID del elemento, p.ex. Q10",

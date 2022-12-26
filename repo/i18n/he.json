@@ -180,6 +180,7 @@
 	"wikibase-validator-illegal-entity-schema-title": "הערך אמור להתחיל עם <code>E</code> והשאר אמור להיות ספָרות.",
 	"wikibase-validator-no-such-media": "הקובץ \"$1\" אינו קיים באתר [https://commons.wikimedia.org/ ויקישיתוף]",
 	"wikibase-validator-no-such-sitelink": "לא היה אפשר למצוא קישור אתר אל \"$1\" בלי לנסות לערוך סמלים.",
+	"wikibase-validator-no-mul-descriptions": "ניתן להשתמש בקוד השפה \"mul\" ($1) רק עבור תוויות וכינויים, לא עבור תיאורים.",
 	"wikibase-validator-page-not-exists": "הדף \"$1\" אינו קיים.",
 	"wikibase-validator-not-a-language": "\"$1\" הוא לא קוד שפה ידוע.",
 	"wikibase-item-reference-edit-placeholder": "נא להזין מזהה פריט, למשל Q10",

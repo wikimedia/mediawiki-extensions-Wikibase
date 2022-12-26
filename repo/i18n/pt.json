@@ -186,6 +186,7 @@
 	"wikibase-validator-illegal-entity-schema-title": "O valor deve começar por <code>E</code> e o resto devem ser só algarismos.",
 	"wikibase-validator-no-such-media": "O ficheiro \"$1\" não existe na wiki [https://commons.wikimedia.org/ Wikimedia Commons].",
 	"wikibase-validator-no-such-sitelink": "Não foi possível encontrar uma hiperligação intersites para \"$1\" ao tentar editar emblemas.",
+	"wikibase-validator-no-mul-descriptions": "O código de língua \"mul\" ($1) só pode ser usado para etiquetas e nomes alternativos, não para descrições.",
 	"wikibase-validator-page-not-exists": "A página \"$1\" não existe.",
 	"wikibase-validator-not-a-language": "\"$1\" não é um código de língua conhecido.",
 	"wikibase-item-reference-edit-placeholder": "Introduza o identificador do objeto, por exemplo, Q10",

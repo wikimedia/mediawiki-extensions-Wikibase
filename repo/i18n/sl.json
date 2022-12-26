@@ -173,6 +173,7 @@
 	"wikibase-validator-illegal-entity-schema-title": "Vrednost se mora začeti z <code>E</code>, preostalo pa so lahko samo števke.",
 	"wikibase-validator-no-such-media": "Datoteka »$1« v [https://commons.wikimedia.org/ Wikimedijini zbirki] ne obstaja.",
 	"wikibase-validator-no-such-sitelink": "Pri poskusu urejanja značk ni bilo mogoče najti projektne povezave na »$1«.",
+	"wikibase-validator-no-mul-descriptions": "Oznaka jezika »mul« ($1) se lahko uporablja samo za oznake in sopomenke, ne pa za opise.",
 	"wikibase-validator-page-not-exists": "Stran »$1« ne obstaja.",
 	"wikibase-validator-not-a-language": "»$1« ni znana oznaka jezika.",
 	"wikibase-itemlink": "$1 $2",

@@ -227,6 +227,7 @@
 	"wikibase-validator-illegal-entity-schema-title": "La valeur doit commencer par <code>E</code> et le reste ne doit être que des chiffres décimaux.",
 	"wikibase-validator-no-such-media": "Le fichier « $1 » n’existe pas sur [https://commons.wikimedia.org/ Wikimedia Commons].",
 	"wikibase-validator-no-such-sitelink": "Impossible de trouver un lien de site vers « $1 » en essayant de modifier les badges.",
+	"wikibase-validator-no-mul-descriptions": "Le code de langue « mul » ( $1 ) ne peut être utilisé que pour les libellés et les alias, pas pour les descriptions.",
 	"wikibase-validator-page-not-exists": "La page « $1 » n’existe pas.",
 	"wikibase-validator-not-a-language": "« $1 » n’est pas un code de langue connu.",
 	"wikibase-itemlink": "$1 $2",
