@@ -62,6 +62,8 @@ class DefaultValueFormatterBuildersTest extends ServiceWiringTestCase {
 			new InMemoryEntityLookup() );
 		$this->serviceContainer->expects( $this->once() )
 			->method( 'getLinkBatchFactory' );
+		$this->serviceContainer->expects( $this->once() )
+			->method( 'getLanguageNameUtils' );
 		$this->mockService( 'WikibaseClient.KartographerEmbeddingHandler',
 			null );
 		$this->serviceContainer->expects( $this->once() )

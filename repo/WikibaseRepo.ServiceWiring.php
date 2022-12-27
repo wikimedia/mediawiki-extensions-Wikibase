@@ -1398,7 +1398,7 @@ return [
 	},
 
 	'WikibaseRepo.LanguageNameLookupFactory' => function ( MediaWikiServices $services ): LanguageNameLookupFactory {
-		return new LanguageNameLookupFactory();
+		return new LanguageNameLookupFactory( $services->getLanguageNameUtils() );
 	},
 
 	'WikibaseRepo.LegacyFormatDetectorCallback' => function ( MediaWikiServices $services ): ?callable {

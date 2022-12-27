@@ -17,6 +17,8 @@ use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 class LanguageNameLookupFactoryTest extends ServiceWiringTestCase {
 
 	public function testConstruction(): void {
+		$this->serviceContainer->expects( $this->once() )
+			->method( 'getLanguageNameUtils' );
 		$this->assertInstanceOf(
 			LanguageNameLookupFactory::class,
 			$this->getService( 'WikibaseRepo.LanguageNameLookupFactory' )

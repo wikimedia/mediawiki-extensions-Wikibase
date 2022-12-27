@@ -30,7 +30,7 @@ return call_user_func( function() {
 					WikibaseSettings::isRepoEnabled() ? WikibaseRepo::getSettings() : null,
 					MediaWikiServices::getInstance()->getSiteStore(),
 					MediaWikiServices::getInstance()->getLocalServerObjectCache(),
-					new LanguageNameLookupFactory()
+					new LanguageNameLookupFactory( MediaWikiServices::getInstance()->getLanguageNameUtils() )
 				);
 			},
 		],

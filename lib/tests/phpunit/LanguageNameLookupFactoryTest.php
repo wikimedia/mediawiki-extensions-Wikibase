@@ -23,7 +23,9 @@ class LanguageNameLookupFactoryTest extends \MediaWikiIntegrationTestCase {
 		$language->expects( $this->once() )
 			->method( 'getCode' )
 			->willReturn( 'de' );
-		$languageNameLookupFactory = new LanguageNameLookupFactory();
+		$languageNameLookupFactory = new LanguageNameLookupFactory(
+			$this->getServiceContainer()->getLanguageNameUtils()
+		);
 
 		$languageNameLookup = $languageNameLookupFactory->getForLanguage( $language );
 
@@ -33,7 +35,9 @@ class LanguageNameLookupFactoryTest extends \MediaWikiIntegrationTestCase {
 	public function testForLanguageCode(): void {
 		$this->markTestSkippedIfExtensionNotLoaded( 'CLDR' );
 
-		$languageNameLookupFactory = new LanguageNameLookupFactory();
+		$languageNameLookupFactory = new LanguageNameLookupFactory(
+			$this->getServiceContainer()->getLanguageNameUtils()
+		);
 
 		$languageNameLookup = $languageNameLookupFactory->getForLanguageCode( 'de' );
 
@@ -41,7 +45,9 @@ class LanguageNameLookupFactoryTest extends \MediaWikiIntegrationTestCase {
 	}
 
 	public function testForAutonyms(): void {
-		$languageNameLookupFactory = new LanguageNameLookupFactory();
+		$languageNameLookupFactory = new LanguageNameLookupFactory(
+			$this->getServiceContainer()->getLanguageNameUtils()
+		);
 
 		$languageNameLookup = $languageNameLookupFactory->getForAutonyms();
 

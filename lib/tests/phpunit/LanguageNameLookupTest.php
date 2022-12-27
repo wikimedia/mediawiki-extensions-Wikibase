@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests;
 
+use MediaWiki\MediaWikiServices;
 use Wikibase\Lib\LanguageNameLookup;
 
 /**
@@ -46,7 +47,10 @@ class LanguageNameLookupTest extends \PHPUnit\Framework\TestCase {
 			$this->markTestSkipped( 'CLDR extension required for full language name support' );
 		}
 
-		$languageNameLookup = new LanguageNameLookup( $in );
+		$languageNameLookup = new LanguageNameLookup(
+			MediaWikiServices::getInstance()->getLanguageNameUtils(),
+			$in
+		);
 		$name = $languageNameLookup->getName( $lang );
 		$this->assertSame( $expected, $name );
 	}
