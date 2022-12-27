@@ -2,10 +2,10 @@
 
 namespace Wikibase\Client\Tests\Unit\Hooks;
 
-use ConfigFactory;
 use FauxRequest;
 use IContextSource;
 use Language;
+use MediaWiki\MediaWikiServices;
 use MockTitleTrait;
 use OutputPage;
 use PHPUnit\Framework\TestCase;
@@ -154,7 +154,7 @@ class SkinAfterPortletHandlerTest extends TestCase {
 			->willReturn( Language::factory( 'qqx' ) );
 		$context->method( 'getConfig' )
 			->willReturn(
-				ConfigFactory::getDefaultInstance()->makeConfig( 'main' )
+				MediaWikiServices::getInstance()->getMainConfig()
 			);
 		return $context;
 	}
