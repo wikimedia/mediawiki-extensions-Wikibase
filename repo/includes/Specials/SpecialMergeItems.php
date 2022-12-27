@@ -224,8 +224,8 @@ class SpecialMergeItems extends SpecialWikibasePage {
 
 		HTMLForm::factory( 'ooui', $this->getFormElements(), $this->getContext() )
 			->setId( 'wb-mergeitems-form1' )
-			->setPreText( $pre )
-			->setHeaderText( $this->msg( 'wikibase-mergeitems-intro' )->parse() )
+			->setPreHtml( $pre )
+			->setHeaderHtml( $this->msg( 'wikibase-mergeitems-intro' )->parse() )
 			->setSubmitID( 'wb-mergeitems-submit' )
 			->setSubmitName( 'wikibase-mergeitems-submit' )
 			->setSubmitTextMsg( 'wikibase-mergeitems-submit' )

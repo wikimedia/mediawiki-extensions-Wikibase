@@ -230,7 +230,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 		}
 
 		return HTMLForm::factory( 'ooui', $formDescriptor, $this->getContext() )
-			->setHeaderText( Html::rawElement( 'p', [], $intro ) );
+			->setHeaderHtml( Html::rawElement( 'p', [], $intro ) );
 	}
 
 	/**

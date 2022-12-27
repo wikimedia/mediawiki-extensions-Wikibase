@@ -284,7 +284,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 		HTMLForm::factory( 'ooui', $formDescriptor, $this->getContext() )
 			->setId( 'wb-itemdisambiguation-form1' )
 			->setMethod( 'get' )
-			->setFooterText( Html::element(
+			->setFooterHtml( Html::element(
 				'p',
 				[],
 				$this->msg( 'wikibase-itemdisambiguation-form-hints' )->numParams(
