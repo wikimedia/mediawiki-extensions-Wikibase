@@ -7,7 +7,7 @@ namespace Wikibase\Repo\Specials;
 use ExtensionRegistry;
 use Html;
 use IContextSource;
-use Language;
+use MediaWiki\Languages\LanguageNameUtils;
 use SpecialPage;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\TermLanguageFallbackChain;
@@ -26,15 +26,22 @@ class SpecialMyLanguageFallbackChain extends SpecialPage {
 	private $chain;
 
 	/**
+	 * @var LanguageNameUtils
+	 */
+	private $languageNameUtils;
+
+	/**
 	 * @var LanguageFallbackChainFactory
 	 */
 	private $languageFallbackChainFactory;
 
 	public function __construct(
+		LanguageNameUtils $languageNameUtils,
 		LanguageFallbackChainFactory $languageFallbackChainFactory
 	) {
 		parent::__construct( 'MyLanguageFallbackChain' );
 
+		$this->languageNameUtils = $languageNameUtils;
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 	}
 
@@ -91,10 +98,11 @@ class SpecialMyLanguageFallbackChain extends SpecialPage {
 		foreach ( $this->getLanguageFallbackChain()->getFallbackChain() as $lang ) {
 			$language = $lang->getLanguage();
 			$sourceLanguage = $lang->getSourceLanguage();
-			$languageName = Language::fetchLanguageName( $language->getCode(), $inLanguage );
+			$languageName = $this->languageNameUtils->getLanguageName( $language->getCode(), $inLanguage );
 
 			if ( $sourceLanguage ) {
-				$sourceLanguageName = Language::fetchLanguageName( $sourceLanguage->getCode(), $inLanguage );
+				$sourceLanguageName = $this->languageNameUtils
+					->getLanguageName( $sourceLanguage->getCode(), $inLanguage );
 				$msgHtml = $this->msg(
 					'wikibase-mylanguagefallbackchain-converted-item',
 					$language->getHtmlCode(),

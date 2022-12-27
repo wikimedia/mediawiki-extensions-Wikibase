@@ -3,6 +3,7 @@
 declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Specials;
 
+use MediaWiki\Languages\LanguageNameUtils;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Store\EntityTitleLookup;
@@ -123,7 +124,8 @@ class ParameterizedDescriptionTraitTest extends MediaWikiIntegrationTestCase {
 			$this->createMock( EntityTitleLookup::class ),
 			$this->createMock( MediawikiEditEntityFactory::class ),
 			$this->createMock( EntityPermissionChecker::class ),
-			$this->createMock( ContentLanguages::class )
+			$this->createMock( ContentLanguages::class ),
+			$this->createMock( LanguageNameUtils::class )
 		);
 	}
 
@@ -136,7 +138,8 @@ class ParameterizedDescriptionTraitTest extends MediaWikiIntegrationTestCase {
 			$this->createMock( EntityTitleLookup::class ),
 			$this->createMock( MediawikiEditEntityFactory::class ),
 			$this->createMock( EntityPermissionChecker::class ),
-			$this->createMock( ContentLanguages::class )
+			$this->createMock( ContentLanguages::class ),
+			$this->createMock( LanguageNameUtils::class )
 		);
 	}
 
@@ -149,7 +152,8 @@ class ParameterizedDescriptionTraitTest extends MediaWikiIntegrationTestCase {
 			$this->createMock( EntityTitleLookup::class ),
 			$this->createMock( MediawikiEditEntityFactory::class ),
 			$this->createMock( EntityPermissionChecker::class ),
-			$this->createMock( ContentLanguages::class )
+			$this->createMock( ContentLanguages::class ),
+			$this->createMock( LanguageNameUtils::class )
 		);
 	}
 
@@ -162,7 +166,8 @@ class ParameterizedDescriptionTraitTest extends MediaWikiIntegrationTestCase {
 			$this->createMock( MediawikiEditEntityFactory::class ),
 			$this->createMock( FingerprintChangeOpFactory::class ),
 			$this->createMock( ContentLanguages::class ),
-			$this->createMock( EntityPermissionChecker::class )
+			$this->createMock( EntityPermissionChecker::class ),
+			$this->createMock( LanguageNameUtils::class )
 		);
 	}
 

@@ -80,7 +80,8 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 			),
 			$this->getFingerprintChangeOpsFactory(),
 			new StaticContentLanguages( self::$languageCodes ),
-			$this->getEntityPermissionChecker()
+			$this->getEntityPermissionChecker(),
+			$this->getServiceContainer()->getLanguageNameUtils()
 		);
 	}
 
@@ -382,7 +383,8 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 			),
 			$this->getFingerprintChangeOpsFactory(),
 			new StaticContentLanguages( self::$languageCodes ),
-			$permissionChecker
+			$permissionChecker,
+			$this->getServiceContainer()->getLanguageNameUtils()
 		);
 	}
 

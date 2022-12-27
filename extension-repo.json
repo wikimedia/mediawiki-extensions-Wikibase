@@ -396,6 +396,7 @@
 			"class": "Wikibase\\Repo\\Specials\\SpecialSetLabel",
 			"factory": "Wikibase\\Repo\\Specials\\SpecialSetLabel::factory",
 			"services": [
+				"LanguageNameUtils",
 				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EditEntityFactory",
 				"WikibaseRepo.EntityPermissionChecker",
@@ -409,6 +410,7 @@
 			"class": "Wikibase\\Repo\\Specials\\SpecialSetDescription",
 			"factory": "Wikibase\\Repo\\Specials\\SpecialSetDescription::factory",
 			"services": [
+				"LanguageNameUtils",
 				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EditEntityFactory",
 				"WikibaseRepo.EntityPermissionChecker",
@@ -422,6 +424,7 @@
 			"class": "Wikibase\\Repo\\Specials\\SpecialSetAliases",
 			"factory": "Wikibase\\Repo\\Specials\\SpecialSetAliases::factory",
 			"services": [
+				"LanguageNameUtils",
 				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EditEntityFactory",
 				"WikibaseRepo.EntityPermissionChecker",
@@ -435,6 +438,7 @@
 			"class": "Wikibase\\Repo\\Specials\\SpecialSetLabelDescriptionAliases",
 			"factory": "Wikibase\\Repo\\Specials\\SpecialSetLabelDescriptionAliases::factory",
 			"services": [
+				"LanguageNameUtils",
 				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EditEntityFactory",
 				"WikibaseRepo.EntityPermissionChecker",
@@ -496,6 +500,7 @@
 		"MyLanguageFallbackChain": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialMyLanguageFallbackChain",
 			"services": [
+				"LanguageNameUtils",
 				"WikibaseRepo.LanguageFallbackChainFactory"
 			]
 		},
