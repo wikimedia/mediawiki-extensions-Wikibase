@@ -17,6 +17,7 @@ use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabels;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabelsErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabelsRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabelsSuccessResponse;
+use Wikibase\Repo\RestApi\UseCases\ItemRedirectResponse;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\ParamValidator\ParamValidator;
@@ -78,6 +79,8 @@ class GetItemLabelsRouteHandler extends SimpleHandler {
 
 		if ( $useCaseResponse instanceof GetItemLabelsSuccessResponse ) {
 			return $this->newSuccessHttpResponse( $useCaseResponse );
+		} elseif ( $useCaseResponse instanceof ItemRedirectResponse ) {
+			return $this->newRedirectHttpResponse( $useCaseResponse );
 		} elseif ( $useCaseResponse instanceof GetItemLabelsErrorResponse ) {
 			return $this->responseFactory->newErrorResponse( $useCaseResponse );
 		} else {
@@ -101,6 +104,17 @@ class GetItemLabelsRouteHandler extends SimpleHandler {
 		$httpResponse->setHeader( 'Last-Modified', wfTimestamp( TS_RFC2822, $useCaseResponse->getLastModified() ) );
 		$this->setEtagFromRevId( $httpResponse, $useCaseResponse->getRevisionId() );
 		$httpResponse->setBody( new StringStream( json_encode( $this->labelsSerializer->serialize( $useCaseResponse->getLabels() ) ) ) );
+
+		return $httpResponse;
+	}
+
+	private function newRedirectHttpResponse( ItemRedirectResponse $useCaseResponse ): Response {
+		$httpResponse = $this->getResponseFactory()->create();
+		$httpResponse->setHeader(
+			'Location',
+			$this->getRouteUrl( [ self::ITEM_ID_PATH_PARAM => $useCaseResponse->getRedirectTargetId() ] )
+		);
+		$httpResponse->setStatus( 308 );
 
 		return $httpResponse;
 	}

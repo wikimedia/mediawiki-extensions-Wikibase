@@ -6,6 +6,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Domain\Services\ItemLabelsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
+use Wikibase\Repo\RestApi\UseCases\ItemRedirectResponse;
 
 /**
  * @license GPL-2.0-or-later
@@ -24,7 +25,7 @@ class GetItemLabels {
 	}
 
 	/**
-	 * @return GetItemLabelsErrorResponse|GetItemLabelsSuccessResponse
+	 * @return GetItemLabelsErrorResponse|GetItemLabelsSuccessResponse|ItemRedirectResponse
 	 */
 	public function execute( GetItemLabelsRequest $request ) {
 		$itemId = new ItemId( $request->getItemId() );
@@ -35,6 +36,8 @@ class GetItemLabels {
 				ErrorResponse::ITEM_NOT_FOUND,
 				"Could not find an item with the ID: {$request->getItemId()}"
 			);
+		} elseif ( $metaDataResult->isRedirect() ) {
+			return new ItemRedirectResponse( $metaDataResult->getRedirectTarget()->getSerialization() );
 		}
 
 		return new GetItemLabelsSuccessResponse(

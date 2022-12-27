@@ -15,6 +15,7 @@ use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabels;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabelsErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabelsRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabelsSuccessResponse;
+use Wikibase\Repo\RestApi\UseCases\ItemRedirectResponse;
 
 /**
  * @covers \Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabels
@@ -84,6 +85,20 @@ class GetItemLabelsTest extends TestCase {
 
 		$this->assertInstanceOf( GetItemLabelsErrorResponse::class, $response );
 		$this->assertSame( ErrorResponse::ITEM_NOT_FOUND, $response->getCode() );
+	}
+
+	public function testGivenItemRedirect_returnsRedirectResponse(): void {
+		$redirectSource = 'Q123';
+		$redirectTarget = 'Q321';
+
+		$this->itemRevisionMetadataRetriever
+			->method( 'getLatestRevisionMetadata' )
+			->willReturn( LatestItemRevisionMetadataResult::redirect( new ItemId( $redirectTarget ) ) );
+
+		$response = $this->newUseCase()->execute( new GetItemLabelsRequest( $redirectSource ) );
+
+		$this->assertInstanceOf( ItemRedirectResponse::class, $response );
+		$this->assertSame( $redirectTarget, $response->getRedirectTargetId() );
 	}
 
 	private function newUseCase(): GetItemLabels {
