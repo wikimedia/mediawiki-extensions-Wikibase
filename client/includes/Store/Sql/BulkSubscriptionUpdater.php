@@ -136,7 +136,7 @@ class BulkSubscriptionUpdater {
 	 * @return int The number of rows inserted.
 	 */
 	private function insertUpdateBatch( array $entities ) {
-		$dbw = $this->repoConnectionManager->getWriteConnectionRef();
+		$dbw = $this->repoConnectionManager->getWriteConnection();
 		$dbw->startAtomic( __METHOD__ );
 
 		$rows = $this->makeSubscriptionRows( $entities );
@@ -162,7 +162,7 @@ class BulkSubscriptionUpdater {
 	 * @return string[] A list of entity id strings.
 	 */
 	private function getUpdateBatch( array &$continuation = null ) {
-		$dbr = $this->localConnectionManager->getReadConnectionRef();
+		$dbr = $this->localConnectionManager->getReadConnection();
 
 		if ( empty( $continuation ) ) {
 			$continuationCondition = IDatabase::ALL_ROWS;
@@ -333,7 +333,7 @@ class BulkSubscriptionUpdater {
 	 * @param string $maxId Entity id string indicating the last element in the deletion range
 	 */
 	private function deleteSubscriptionRange( $minId, $maxId ) {
-		$dbw = $this->repoConnectionManager->getWriteConnectionRef();
+		$dbw = $this->repoConnectionManager->getWriteConnection();
 		$dbw->startAtomic( __METHOD__ );
 
 		$conditions = [

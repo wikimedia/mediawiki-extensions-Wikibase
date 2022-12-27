@@ -28,7 +28,7 @@ class DispatchStatsTest extends MediaWikiIntegrationTestCase {
 		$dbConnRefMock = $this->createMock( DBConnRef::class );
 		$dbConnRefMock->method( 'newSelectQueryBuilder' )->willReturn( $selectQueryBuilder );
 		$connManagerMock = $this->createMock( ConnectionManager::class );
-		$connManagerMock->method( 'getReadConnectionRef' )->willReturn( $dbConnRefMock );
+		$connManagerMock->method( 'getReadConnection' )->willReturn( $dbConnRefMock );
 		$dbMock = $this->createMock( RepoDomainDb::class );
 		$dbMock->method( 'connections' )->willReturn( $connManagerMock );
 

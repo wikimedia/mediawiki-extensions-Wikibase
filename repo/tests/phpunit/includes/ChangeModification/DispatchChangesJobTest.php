@@ -63,7 +63,7 @@ class DispatchChangesJobTest extends MediaWikiIntegrationTestCase {
 		$changeStore->saveChange( $testItemChange );
 
 		$wiki = WikiMap::getCurrentWikiDbDomain()->getId();
-		$dbw = $repoDb->connections()->getWriteConnectionRef();
+		$dbw = $repoDb->connections()->getWriteConnection();
 		$dbw->insert( 'wb_changes_subscription', [
 			'cs_entity_id' => 'Q1',
 			'cs_subscriber_id' => $wiki,
@@ -99,7 +99,7 @@ class DispatchChangesJobTest extends MediaWikiIntegrationTestCase {
 		$changeStore->saveChange( $testItemChange );
 
 		$wiki = WikiMap::getCurrentWikiDbDomain()->getId();
-		$dbw = WikibaseRepo::getRepoDomainDbFactory()->newRepoDb()->connections()->getWriteConnectionRef();
+		$dbw = WikibaseRepo::getRepoDomainDbFactory()->newRepoDb()->connections()->getWriteConnection();
 		$dbw->insert( 'wb_changes_subscription', [
 			'cs_entity_id' => 'Q1',
 			'cs_subscriber_id' => 'client',
@@ -117,7 +117,7 @@ class DispatchChangesJobTest extends MediaWikiIntegrationTestCase {
 		$this->skipIfClientNotEnabled();
 
 		$wiki = WikiMap::getCurrentWikiDbDomain()->getId();
-		$dbw = WikibaseRepo::getRepoDomainDbFactory()->newRepoDb()->connections()->getWriteConnectionRef();
+		$dbw = WikibaseRepo::getRepoDomainDbFactory()->newRepoDb()->connections()->getWriteConnection();
 		$dbw->insert( 'wb_changes_subscription', [
 			'cs_entity_id' => 'Q1',
 			'cs_subscriber_id' => $wiki,

@@ -108,7 +108,7 @@ class PropertyInfoTableBuilder {
 			throw new RuntimeException( __METHOD__ . ' can not run with no Property namespace defined.' );
 		}
 
-		$dbw = $this->propertyInfoTable->getDomainDb()->connections()->getWriteConnectionRef();
+		$dbw = $this->propertyInfoTable->getDomainDb()->connections()->getWriteConnection();
 
 		$total = 0;
 

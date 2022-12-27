@@ -252,11 +252,11 @@ class PropertyInfoTable implements PropertyInfoLookup, PropertyInfoStore {
 	}
 
 	private function getWriteConnection(): IDatabase {
-		return $this->db->connections()->getWriteConnectionRef();
+		return $this->db->connections()->getWriteConnection();
 	}
 
 	private function getReadConnection(): IDatabase {
-		return $this->db->connections()->getReadConnectionRef();
+		return $this->db->connections()->getReadConnection();
 	}
 
 	/**

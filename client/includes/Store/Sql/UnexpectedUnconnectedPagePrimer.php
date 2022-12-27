@@ -164,7 +164,7 @@ class UnexpectedUnconnectedPagePrimer {
 	private function persistUnexpectedUnconnectedBatch( array $pages ): int {
 		$rows = $this->makeUnexpectedUnconnectedRows( $pages );
 
-		$dbw = $this->localConnectionManager->getWriteConnectionRef();
+		$dbw = $this->localConnectionManager->getWriteConnection();
 		$dbw->startAtomic( __METHOD__ );
 
 		$dbw->replace(
@@ -205,7 +205,7 @@ class UnexpectedUnconnectedPagePrimer {
 	 * @return int[][] Page id, page namespace pairs
 	 */
 	private function getUnexpectedUnconnectedBatch(): array {
-		$dbr = $this->localConnectionManager->getReadConnectionRef();
+		$dbr = $this->localConnectionManager->getReadConnection();
 
 		$lastPosition = $this->position + $this->batchSize * $this->batchSizeSelectMultiplicator;
 		$result = $dbr->select(
@@ -266,7 +266,7 @@ class UnexpectedUnconnectedPagePrimer {
 	private function getMaximumPageIdToCheck(): int {
 		// Pages added now are fine anyway, as we assume the new page prop to be active when this
 		// script is run.
-		return (int)$this->localConnectionManager->getReadConnectionRef()->selectField(
+		return (int)$this->localConnectionManager->getReadConnection()->selectField(
 			'page',
 			'MAX(page_id)',
 			[],

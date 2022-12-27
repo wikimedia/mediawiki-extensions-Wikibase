@@ -258,7 +258,7 @@ class InjectRCRecordsJob extends Job {
 
 		$rcAttribs = $this->rcFactory->prepareChangeAttributes( $change );
 
-		$dbw = $this->db->connections()->getWriteConnectionRef();
+		$dbw = $this->db->connections()->getWriteConnection();
 
 		$dbw->startAtomic( __METHOD__ );
 

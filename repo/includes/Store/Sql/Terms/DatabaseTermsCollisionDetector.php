@@ -313,7 +313,7 @@ class DatabaseTermsCollisionDetector implements TermsCollisionDetector {
 	}
 
 	private function getDbr(): IDatabase {
-		return $this->db->connections()->getReadConnectionRef();
+		return $this->db->connections()->getReadConnection();
 	}
 
 }

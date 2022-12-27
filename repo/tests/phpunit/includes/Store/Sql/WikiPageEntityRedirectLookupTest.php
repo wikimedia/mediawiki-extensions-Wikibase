@@ -151,7 +151,7 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiIntegrationTestCase {
 	private function getMockRepoDomainDb( array $row ): RepoDomainDb {
 		$db = $this->getMockDatabase( $row );
 		$connections = $this->createMock( ConnectionManager::class );
-		$methods = [ 'getReadConnection', 'getWriteConnection', 'getReadConnectionRef', 'getWriteConnectionRef' ];
+		$methods = [ 'getReadConnection', 'getWriteConnection' ];
 		foreach ( $methods as $method ) {
 			$connections->method( $method )
 				->willReturn( $db );

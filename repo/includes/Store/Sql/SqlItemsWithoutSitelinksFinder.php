@@ -42,7 +42,7 @@ class SqlItemsWithoutSitelinksFinder implements ItemsWithoutSitelinksFinder {
 	 * @return ItemId[]
 	 */
 	public function getItemsWithoutSitelinks( $limit = 50, $offset = 0 ) {
-		$dbr = $this->db->connections()->getReadConnectionRef();
+		$dbr = $this->db->connections()->getReadConnection();
 
 		$itemIdSerializations = $dbr->selectFieldValues(
 			[ 'page', 'page_props' ],

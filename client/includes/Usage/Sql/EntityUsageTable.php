@@ -211,7 +211,7 @@ class EntityUsageTable {
 	 * @return EntityUsage[] EntityUsage identity string => EntityUsage
 	 */
 	public function queryUsages( int $pageId ): array {
-		$res = $this->db->connections()->getReadConnectionRef()->select(
+		$res = $this->db->connections()->getReadConnection()->select(
 			$this->tableName,
 			[ 'eu_aspect', 'eu_entity_id' ],
 			[ 'eu_page_id' => $pageId ],
@@ -322,7 +322,7 @@ class EntityUsageTable {
 			$where['eu_aspect'] = $aspects;
 		}
 
-		$res = $this->db->connections()->getReadConnectionRef()->select(
+		$res = $this->db->connections()->getReadConnection()->select(
 			$this->tableName,
 			[ 'eu_page_id', 'eu_entity_id', 'eu_aspect' ],
 			$where,
@@ -404,7 +404,7 @@ class EntityUsageTable {
 	private function getUsedEntityIdStrings( array $idStrings ): array {
 		// Note: We need to use one (sub)query per entity here, per T116404
 		$subQueries = $this->getUsedEntityIdStringsQueries( $idStrings );
-		$readConnection = $this->db->connections()->getReadConnectionRef();
+		$readConnection = $this->db->connections()->getReadConnection();
 
 		if ( $readConnection->getType() === 'mysql' ) {
 			return $this->getUsedEntityIdStringsMySql( $subQueries, $readConnection );
@@ -428,7 +428,7 @@ class EntityUsageTable {
 	 */
 	private function getUsedEntityIdStringsQueries( array $idStrings ): array {
 		$subQueries = [];
-		$readConnection = $this->db->connections()->getReadConnectionRef();
+		$readConnection = $this->db->connections()->getReadConnection();
 
 		foreach ( $idStrings as $idString ) {
 			$subQueries[] = $readConnection->selectSQLText(
@@ -452,7 +452,7 @@ class EntityUsageTable {
 	 * @return int[]
 	 */
 	private function getPrimaryKeys( array $where, string $method ): array {
-		$rowIds = $this->db->connections()->getReadConnectionRef()->selectFieldValues(
+		$rowIds = $this->db->connections()->getReadConnection()->selectFieldValues(
 			$this->tableName,
 			'eu_row_id',
 			$where,

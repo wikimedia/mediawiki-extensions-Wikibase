@@ -97,7 +97,7 @@ class IdGeneratorTest extends ServiceWiringTestCase {
 			->willReturn( 'mysql' );
 		$connections = $this->createMock( ConnectionManager::class );
 		$connections->expects( $this->once() )
-			->method( 'getLazyWriteConnectionRef' )
+			->method( 'getWriteConnection' )
 			->willReturn( $connection );
 		$db = $this->createMock( RepoDomainDb::class );
 		$db->expects( $this->once() )
@@ -133,7 +133,7 @@ class IdGeneratorTest extends ServiceWiringTestCase {
 			->willReturn( 'sqlite' );
 		$connections = $this->createMock( ConnectionManager::class );
 		$connections->expects( $this->once() )
-			->method( 'getLazyWriteConnectionRef' )
+			->method( 'getWriteConnection' )
 			->willReturn( $connection );
 		$db = $this->createMock( RepoDomainDb::class );
 		$db->expects( $this->once() )

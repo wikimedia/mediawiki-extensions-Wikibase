@@ -134,7 +134,7 @@ class SpecialEntityUsage extends QueryPage {
 	public function getQueryInfo() {
 		$joinConds = [ 'wbc_entity_usage' => [ 'JOIN', [ 'page_id = eu_page_id' ] ] ];
 		$conds = [ 'eu_entity_id' => $this->entityId->getSerialization() ];
-		$groupConcat = $this->db->connections()->getReadConnectionRef()->buildGroupConcatField(
+		$groupConcat = $this->db->connections()->getReadConnection()->buildGroupConcatField(
 			'|',
 			'wbc_entity_usage',
 			'eu_aspect',
