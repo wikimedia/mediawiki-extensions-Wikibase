@@ -351,7 +351,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		$formDescriptor = array_merge( $formDescriptor, $pageinput );
 
 		return HTMLForm::factory( 'ooui', $formDescriptor, $this->getContext() )
-			->setHeaderText( Html::rawElement( 'p', [], $intro ) );
+			->setHeaderHtml( Html::rawElement( 'p', [], $intro ) );
 	}
 
 	/**

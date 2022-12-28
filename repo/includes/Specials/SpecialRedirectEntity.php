@@ -154,7 +154,7 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 
 		HTMLForm::factory( 'ooui', $this->getFormElements(), $this->getContext() )
 			->setId( 'wb-redirectentity-form1' )
-			->setPreText( $pre )
+			->setPreHtml( $pre )
 			->setSubmitID( 'wb-redirectentity-submit' )
 			->setSubmitName( 'wikibase-redirectentity-submit' )
 			->setSubmitTextMsg( 'wikibase-redirectentity-submit' )
