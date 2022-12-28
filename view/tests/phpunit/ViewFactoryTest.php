@@ -4,6 +4,7 @@ namespace Wikibase\View\Tests;
 
 use HashSiteStore;
 use InvalidArgumentException;
+use MediaWiki\Languages\LanguageFactory;
 use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Services\Statement\Grouper\NullStatementGrouper;
@@ -85,7 +86,8 @@ class ViewFactoryTest extends \PHPUnit\Framework\TestCase {
 			[],
 			[],
 			$this->createMock( LocalizedTextProviderFactory::class ),
-			$this->createMock( SpecialPageLinker::class )
+			$this->createMock( SpecialPageLinker::class ),
+			$this->createMock( LanguageFactory::class )
 		);
 	}
 

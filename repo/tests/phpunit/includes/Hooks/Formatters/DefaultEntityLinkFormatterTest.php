@@ -6,6 +6,7 @@ namespace Wikibase\Repo\Tests\Hooks\Formatters;
 use HamcrestPHPUnitIntegration;
 use HtmlArmor;
 use Language;
+use MediaWiki\MediaWikiServices;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
@@ -116,7 +117,8 @@ class DefaultEntityLinkFormatterTest extends TestCase {
 	private function newLinkFormatter() {
 		return new DefaultEntityLinkFormatter(
 			$this->language,
-			$this->titleTextLookup
+			$this->titleTextLookup,
+			MediaWikiServices::getInstance()->getLanguageFactory()
 		);
 	}
 

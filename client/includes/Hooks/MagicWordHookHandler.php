@@ -52,11 +52,11 @@ class MagicWordHookHandler implements
 	 * This can either be a message's text, or the raw value from
 	 * settings if that is not a message
 	 *
-	 * @param Language $lang Language to get text in
+	 * @param Language|string $lang Language (code) to get text in
 	 *
 	 * @return string
 	 */
-	protected function getRepoName( Language $lang ) {
+	protected function getRepoName( $lang ) {
 		$repoSiteName = $this->settings->getSetting( 'repoSiteName' );
 
 		$message = new Message( $repoSiteName );
@@ -101,8 +101,7 @@ class MagicWordHookHandler implements
 		RL\Context $context,
 		array &$magicWords
 	): void {
-		$lang = Language::factory( $context->getLanguage() );
-		$magicWords['WBREPONAME'] = $this->getRepoName( $lang );
+		$magicWords['WBREPONAME'] = $this->getRepoName( $context->getLanguage() );
 	}
 
 }

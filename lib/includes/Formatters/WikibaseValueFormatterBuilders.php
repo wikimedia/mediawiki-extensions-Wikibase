@@ -7,7 +7,7 @@ namespace Wikibase\Lib\Formatters;
 use DataValues\Geo\Formatters\GlobeCoordinateFormatter;
 use DataValues\Geo\Formatters\LatLongFormatter;
 use InvalidArgumentException;
-use Language;
+use MediaWiki\Languages\LanguageFactory;
 use RequestContext;
 use ValueFormatters\DecimalFormatter;
 use ValueFormatters\FormatterOptions;
@@ -144,6 +144,11 @@ class WikibaseValueFormatterBuilders {
 	 */
 	private $entityRedirectChecker;
 
+	/**
+	 * @var LanguageFactory
+	 */
+	private $languageFactory;
+
 	public function __construct(
 		FormatterLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		LanguageNameLookup $languageNameLookup,
@@ -158,6 +163,7 @@ class WikibaseValueFormatterBuilders {
 		EntityTitleTextLookup $entityTitleTextLookup,
 		EntityUrlLookup $entityUrlLookup,
 		EntityRedirectChecker $entityRedirectChecker,
+		LanguageFactory $languageFactory,
 		EntityTitleLookup $entityTitleLookup = null,
 		CachingKartographerEmbeddingHandler $kartographerEmbeddingHandler = null,
 		bool $useKartographerMaplinkInWikitext = false,
@@ -181,6 +187,7 @@ class WikibaseValueFormatterBuilders {
 		$this->entityTitleTextLookup = $entityTitleTextLookup;
 		$this->entityUrlLookup = $entityUrlLookup;
 		$this->entityRedirectChecker = $entityRedirectChecker;
+		$this->languageFactory = $languageFactory;
 	}
 
 	private function newPlainEntityIdFormatter( FormatterOptions $options ) {
@@ -331,6 +338,7 @@ class WikibaseValueFormatterBuilders {
 			return new CommonsInlineImageFormatter(
 				RequestContext::getMain()->getOutput()->parserOptions(),
 				$this->thumbLimits,
+				$this->languageFactory,
 				$options
 			);
 		}
@@ -405,13 +413,27 @@ class WikibaseValueFormatterBuilders {
 		if ( $this->snakFormat->isPossibleFormat( SnakFormatter::FORMAT_HTML_DIFF, $format ) ) {
 			return new TimeDetailsFormatter(
 				$options,
-				new HtmlTimeFormatter( $options, new MwTimeIsoFormatter( $options ), new ShowCalendarModelDecider() )
+				new HtmlTimeFormatter(
+					$options,
+					new MwTimeIsoFormatter( $this->languageFactory, $options ),
+					new ShowCalendarModelDecider()
+				)
 			);
 		} elseif ( $this->isHtmlFormat( $format ) ) {
-			return new HtmlTimeFormatter( $options, new MwTimeIsoFormatter( $options ), new ShowCalendarModelDecider() );
+			return new HtmlTimeFormatter(
+				$options,
+				new MwTimeIsoFormatter( $this->languageFactory, $options ),
+				new ShowCalendarModelDecider()
+			);
 		} else {
-			return $this->escapeValueFormatter( $format,
-				new PlaintextTimeFormatter( $options, new MwTimeIsoFormatter( $options ), new ShowCalendarModelDecider() ) );
+			return $this->escapeValueFormatter(
+				$format,
+				new PlaintextTimeFormatter(
+					$options,
+					new MwTimeIsoFormatter( $this->languageFactory, $options ),
+					new ShowCalendarModelDecider()
+				)
+			);
 		}
 	}
 
@@ -421,7 +443,7 @@ class WikibaseValueFormatterBuilders {
 	 * @return MediaWikiNumberLocalizer
 	 */
 	private function getNumberLocalizer( FormatterOptions $options ) {
-		$language = Language::factory( $options->getOption( ValueFormatter::OPT_LANG ) );
+		$language = $this->languageFactory->getLanguage( $options->getOption( ValueFormatter::OPT_LANG ) );
 		return new MediaWikiNumberLocalizer( $language );
 	}
 
@@ -473,6 +495,7 @@ class WikibaseValueFormatterBuilders {
 				$options,
 				$this->newGlobeCoordinateFormatter( SnakFormatter::FORMAT_HTML, $options ),
 				$this->kartographerEmbeddingHandler,
+				$this->languageFactory,
 				$isPreview
 			);
 		}

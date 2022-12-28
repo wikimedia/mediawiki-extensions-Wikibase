@@ -8,6 +8,7 @@ use Html;
 use InvalidArgumentException;
 use Language;
 use Linker;
+use MediaWiki\Languages\LanguageFactory;
 use MediaWiki\MediaWikiServices;
 use ParserOptions;
 use RepoGroup;
@@ -54,6 +55,7 @@ class CommonsInlineImageFormatter implements ValueFormatter {
 	/**
 	 * @param ParserOptions $parserOptions Options for thumbnail size
 	 * @param array $thumbLimits Mapping of thumb number to the limit like [ 0 => 120, 1 => 240, ...]
+	 * @param LanguageFactory $languageFactory
 	 * @param FormatterOptions|null $options
 	 * @param RepoGroup|null $repoGroup
 	 * @throws \MWException
@@ -61,13 +63,14 @@ class CommonsInlineImageFormatter implements ValueFormatter {
 	public function __construct(
 		ParserOptions $parserOptions,
 		array $thumbLimits,
+		LanguageFactory $languageFactory,
 		FormatterOptions $options = null,
 		RepoGroup $repoGroup = null
 	) {
 		$this->options = $options ?: new FormatterOptions();
 
 		$languageCode = $this->options->getOption( ValueFormatter::OPT_LANG );
-		$this->language = Language::factory( $languageCode );
+		$this->language = $languageFactory->getLanguage( $languageCode );
 		$this->repoGroup = $repoGroup ?: MediaWikiServices::getInstance()->getRepoGroup();
 		$this->parserOptions = $parserOptions;
 		$this->thumbLimits = $thumbLimits;

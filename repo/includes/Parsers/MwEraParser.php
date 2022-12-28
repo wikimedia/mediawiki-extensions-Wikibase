@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Parsers;
 
 use Language;
+use MediaWiki\MediaWikiServices;
 use ValueParsers\EraParser;
 use ValueParsers\ParseException;
 use ValueParsers\ParserOptions;
@@ -27,7 +28,7 @@ class MwEraParser extends EraParser {
 	public function __construct( ParserOptions $options ) {
 		parent::__construct( $options );
 
-		$this->lang = Language::factory( $this->getOption( ValueParser::OPT_LANG ) );
+		$this->lang = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( $this->getOption( ValueParser::OPT_LANG ) );
 	}
 
 	/**
@@ -39,7 +40,7 @@ class MwEraParser extends EraParser {
 	protected function stringParse( $value ) {
 		$era = $this->parseEra( $value, $this->lang );
 		if ( $era === null && $this->lang->getCode() !== 'en' ) {
-			$era = $this->parseEra( $value, Language::factory( 'en' ) );
+			$era = $this->parseEra( $value, MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'en' ) );
 		}
 
 		if ( $era !== null ) {

@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Parsers;
 
 use InvalidArgumentException;
 use Language;
+use MediaWiki\MediaWikiServices;
 use ValueParsers\ParserOptions;
 use ValueParsers\ValueParser;
 
@@ -49,7 +50,7 @@ class MwDateFormatParserFactory {
 			throw new InvalidArgumentException( '$dateFormatType must be a non-empty string' );
 		}
 
-		$language = Language::factory( $languageCode );
+		$language = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( $languageCode );
 		$dateFormat = $language->getDateFormatString( $dateFormatType, $dateFormatPreference );
 		$digitTransformTable = $language->digitTransformTable();
 		$monthNames = $this->getCachedMonthNames( $language );

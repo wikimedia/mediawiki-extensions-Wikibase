@@ -6,6 +6,7 @@ namespace Wikibase\Client\DataAccess\ParserFunctions;
 
 use Language;
 use MediaWiki\Languages\LanguageConverterFactory;
+use MediaWiki\Languages\LanguageFactory;
 use Parser;
 use ParserOutput;
 use Title;
@@ -61,6 +62,11 @@ class StatementGroupRendererFactory {
 	private $langConvFactory;
 
 	/**
+	 * @var LanguageFactory
+	 */
+	private $langFactory;
+
+	/**
 	 * @var bool
 	 */
 	private $allowDataAccessInUserLanguage;
@@ -72,6 +78,7 @@ class StatementGroupRendererFactory {
 		DataAccessSnakFormatterFactory $dataAccessSnakFormatterFactory,
 		UsageAccumulatorFactory $usageAccumulatorFactory,
 		LanguageConverterFactory $langConvFactory,
+		LanguageFactory $langFactory,
 		bool $allowDataAccessInUserLanguage
 	) {
 		$this->propertyLabelResolver = $propertyLabelResolver;
@@ -80,6 +87,7 @@ class StatementGroupRendererFactory {
 		$this->dataAccessSnakFormatterFactory = $dataAccessSnakFormatterFactory;
 		$this->usageAccumulatorFactory = $usageAccumulatorFactory;
 		$this->langConvFactory = $langConvFactory;
+		$this->langFactory = $langFactory;
 		$this->allowDataAccessInUserLanguage = $allowDataAccessInUserLanguage;
 	}
 
@@ -185,7 +193,7 @@ class StatementGroupRendererFactory {
 		if ( !isset( $this->languageAwareRenderers[$languageCode] ) ) {
 			$this->languageAwareRenderers[$languageCode] = $this->newLanguageAwareRenderer(
 				$type,
-				Language::factory( $languageCode ),
+				$this->langFactory->getLanguage( $languageCode ),
 				$usageAccumulator,
 				$parserOutput,
 				$title

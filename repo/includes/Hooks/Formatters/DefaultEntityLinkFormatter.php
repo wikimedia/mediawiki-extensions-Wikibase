@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Hooks\Formatters;
 
 use HtmlArmor;
 use Language;
+use MediaWiki\Languages\LanguageFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
 
@@ -23,9 +24,19 @@ class DefaultEntityLinkFormatter implements EntityLinkFormatter {
 	 */
 	private $entityTitleTextLookup;
 
-	public function __construct( Language $pageLanguage, EntityTitleTextLookup $entityTitleTextLookup ) {
+	/**
+	 * @var LanguageFactory
+	 */
+	private $languageFactory;
+
+	public function __construct(
+		Language $pageLanguage,
+		EntityTitleTextLookup $entityTitleTextLookup,
+		LanguageFactory $languageFactory
+	) {
 		$this->pageLanguage = $pageLanguage;
 		$this->entityTitleTextLookup = $entityTitleTextLookup;
+		$this->languageFactory = $languageFactory;
 	}
 
 	/**
@@ -70,7 +81,7 @@ class DefaultEntityLinkFormatter implements EntityLinkFormatter {
 		if ( $termData ) {
 			return [
 				$termData['value'],
-				Language::factory( $termData['language'] )
+				$this->languageFactory->getLanguage( $termData['language'] )
 			];
 		} else {
 			return [

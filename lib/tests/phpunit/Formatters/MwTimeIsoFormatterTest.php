@@ -577,7 +577,7 @@ class MwTimeIsoFormatterTest extends MediaWikiIntegrationTestCase {
 		$options = new FormatterOptions( [
 			ValueFormatter::OPT_LANG => $languageCode
 		] );
-		$formatter = new MwTimeIsoFormatter( $options );
+		$formatter = new MwTimeIsoFormatter( $this->getServiceContainer()->getLanguageFactory(), $options );
 		$actual = $formatter->format( $timeValue );
 
 		$this->assertSame( $expected, $actual, 'Testing ' . $timeValue->getTime() . ', precision ' . $timeValue->getPrecision() );

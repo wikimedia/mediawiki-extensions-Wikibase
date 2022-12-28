@@ -28,6 +28,7 @@ use DataValues\Geo\Parsers\GlobeCoordinateParser;
 use DataValues\StringValue;
 use DataValues\UnboundedQuantityValue;
 use MediaWiki\Logger\LoggerFactory;
+use MediaWiki\MediaWikiServices;
 use ValueFormatters\FormatterOptions;
 use ValueParsers\ParserOptions;
 use ValueParsers\QuantityParser;
@@ -251,7 +252,8 @@ return call_user_func( function() {
 				return $factory->buildQuantityValidators();
 			},
 			'parser-factory-callback' => function( ParserOptions $options ) {
-				$language = Language::factory( $options->getOption( ValueParser::OPT_LANG ) );
+				$language = MediaWikiServices::getInstance()->getLanguageFactory()
+					->getLanguage( $options->getOption( ValueParser::OPT_LANG ) );
 				$unlocalizer = new MediaWikiNumberUnlocalizer( $language );
 				return new QuantityParser( $options, $unlocalizer );
 			},

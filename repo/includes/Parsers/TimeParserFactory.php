@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Parsers;
 
-use Language;
+use MediaWiki\MediaWikiServices;
 use ValueParsers\CalendarModelParser;
 use ValueParsers\DispatchingValueParser;
 use ValueParsers\IsoTimestampParser;
@@ -141,7 +141,7 @@ class TimeParserFactory {
 	 */
 	private function getDigitGroupSeparator() {
 		$languageCode = $this->options->getOption( ValueParser::OPT_LANG );
-		$language = Language::factory( $languageCode );
+		$language = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( $languageCode );
 		$separatorMap = $language->separatorTransformTable();
 		$canonical = YearTimeParser::CANONICAL_DIGIT_GROUP_SEPARATOR;
 

@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Parsers;
 
-use Language;
+use MediaWiki\MediaWikiServices;
 use ValueParsers\MonthNameProvider;
 
 /**
@@ -21,7 +21,7 @@ class MediaWikiMonthNameProvider implements MonthNameProvider {
 	 * @return string[] Array mapping month numbers (1 to 12) to localized month names.
 	 */
 	public function getLocalizedMonthNames( $languageCode ) {
-		$language = Language::factory( $languageCode );
+		$language = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( $languageCode );
 		$monthNames = [];
 
 		for ( $i = 1; $i <= 12; $i++ ) {
@@ -43,7 +43,7 @@ class MediaWikiMonthNameProvider implements MonthNameProvider {
 	 * and abbreviations) to month numbers (1 to 12).
 	 */
 	public function getMonthNumbers( $languageCode ) {
-		$language = Language::factory( $languageCode );
+		$language = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( $languageCode );
 		$numbers = [];
 
 		for ( $i = 1; $i <= 12; $i++ ) {

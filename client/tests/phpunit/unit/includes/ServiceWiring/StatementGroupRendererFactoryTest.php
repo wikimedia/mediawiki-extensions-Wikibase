@@ -31,6 +31,8 @@ class StatementGroupRendererFactoryTest extends ServiceWiringTestCase {
 		$this->mockService( 'WikibaseClient.UsageAccumulatorFactory', $this->createMock( UsageAccumulatorFactory::class ) );
 		$this->serviceContainer->expects( $this->once() )
 			->method( 'getLanguageConverterFactory' );
+		$this->serviceContainer->expects( $this->once() )
+			->method( 'getLanguageFactory' );
 		$this->mockService( 'WikibaseClient.Settings',
 			new SettingsArray( [
 				'allowDataAccessInUserLanguage' => false,

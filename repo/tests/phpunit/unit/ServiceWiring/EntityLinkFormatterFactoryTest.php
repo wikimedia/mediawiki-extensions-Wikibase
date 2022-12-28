@@ -25,6 +25,9 @@ class EntityLinkFormatterFactoryTest extends ServiceWiringTestCase {
 			$this->createMock( EntityTitleTextLookup::class )
 		);
 
+		$this->serviceContainer->expects( $this->once() )
+			->method( 'getLanguageFactory' );
+
 		$this->mockService(
 			'WikibaseRepo.EntityTypeDefinitions',
 			new EntityTypeDefinitions( [] )
