@@ -31,6 +31,18 @@ describe( 'GET /entities/items/{id}/labels', () => {
 		assert.strictEqual( response.header[ 'last-modified' ], testItemCreationMetadata.timestamp );
 	} );
 
+	it( '400 error - bad request, invalid item ID', async () => {
+		const invalidItemId = 'X123';
+		const response = await newGetItemLabelsRequestBuilder( invalidItemId )
+			.assertInvalidRequest()
+			.makeRequest();
+
+		assert.equal( response.status, 400 );
+		assert.header( response, 'Content-Language', 'en' );
+		assert.equal( response.body.code, 'invalid-item-id' );
+		assert.include( response.body.message, invalidItemId );
+	} );
+
 	it( 'responds 404 in case the item does not exist', async () => {
 		const nonExistentItem = 'Q99999999';
 		const response = await newGetItemLabelsRequestBuilder( nonExistentItem ).makeRequest();

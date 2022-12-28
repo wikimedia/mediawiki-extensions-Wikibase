@@ -15,7 +15,9 @@ use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabels;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabelsErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabelsRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabelsSuccessResponse;
+use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabelsValidator;
 use Wikibase\Repo\RestApi\UseCases\ItemRedirectResponse;
+use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 
 /**
  * @covers \Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabels
@@ -70,6 +72,15 @@ class GetItemLabelsTest extends TestCase {
 		$this->assertEquals( new GetItemLabelsSuccessResponse( $labels, $lastModified, $revisionId ), $response );
 	}
 
+	public function testGivenInvalidItemId_returnsErrorResponse(): void {
+		$response = $this->newUseCase()->execute(
+			new GetItemLabelsRequest( 'X321' )
+		);
+
+		$this->assertInstanceOf( GetItemLabelsErrorResponse::class, $response );
+		$this->assertSame( ErrorResponse::INVALID_ITEM_ID, $response->getCode() );
+	}
+
 	public function testGivenRequestedItemDoesNotExist_returnsErrorResponse(): void {
 		$itemId = new ItemId( 'Q10' );
 
@@ -104,7 +115,8 @@ class GetItemLabelsTest extends TestCase {
 	private function newUseCase(): GetItemLabels {
 		return new GetItemLabels(
 			$this->itemRevisionMetadataRetriever,
-			$this->labelsRetriever
+			$this->labelsRetriever,
+			new GetItemLabelsValidator( new ItemIdValidator() )
 		);
 	}
 
