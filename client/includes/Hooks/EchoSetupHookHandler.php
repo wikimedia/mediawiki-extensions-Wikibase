@@ -71,7 +71,7 @@ class EchoSetupHookHandler
 
 		$notifications[EchoNotificationsHandlers::NOTIFICATION_TYPE] = [
 			EchoAttributeManager::ATTR_LOCATORS => [
-				EchoUserLocator::class . '::locateArticleCreator',
+				[ [ EchoUserLocator::class, 'locateArticleCreator' ] ],
 			],
 			'category' => 'wikibase-action',
 			'group' => 'neutral',
