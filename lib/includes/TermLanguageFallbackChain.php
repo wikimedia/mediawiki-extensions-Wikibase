@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Lib;
 
 use InvalidArgumentException;
-use Language;
+use MediaWiki\MediaWikiServices;
 
 /**
  * FIXME: this class is not a language fallback chain. It takes and uses a fallback chain.
@@ -122,8 +122,9 @@ class TermLanguageFallbackChain {
 			return $preferred;
 		}
 
+		$languageNameUtils = MediaWikiServices::getInstance()->getLanguageNameUtils();
 		foreach ( $data as $languageCode => $value ) {
-			if ( Language::isValidCode( $languageCode ) ) {
+			if ( $languageNameUtils->isValidCode( $languageCode ) ) {
 				// We cannot translate here, we do not have a LanguageWithConversion object
 				return $this->getValueArray( $value, $languageCode );
 			}

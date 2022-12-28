@@ -8,6 +8,7 @@ use Html;
 use HtmlArmor;
 use InvalidArgumentException;
 use Language;
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Search\Hook\ShowSearchHitHook;
 use MediaWiki\Search\Hook\ShowSearchHitTitleHook;
 use RequestContext;
@@ -152,7 +153,7 @@ class ShowSearchHitHandler implements ShowSearchHitHook, ShowSearchHitTitleHook 
 	 */
 	public static function addLanguageAttrs( array &$attr, string $displayLanguage, array $text ) {
 		if ( $text['language'] !== $displayLanguage ) {
-			if ( Language::isValidCode( $text['language'] ) ) {
+			if ( MediaWikiServices::getInstance()->getLanguageNameUtils()->isValidCode( $text['language'] ) ) {
 				$language = Language::factory( $text['language'] );
 			} else {
 				// If somebody fed us broken language, ignore it
