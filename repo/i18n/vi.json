@@ -15,7 +15,8 @@
 			"පසිඳු කාවින්ද",
 			"NguoiDungKhongDinhDanh",
 			"CactiStaccingCrane",
-			"Winston Sung"
+			"Winston Sung",
+			"Nguyenphutrong2"
 		]
 	},
 	"wikibase-desc": "Kho dữ liệu có cấu trúc",
@@ -409,6 +410,7 @@
 	"wikibase-pageinfo-subscription-none": "Không có",
 	"wikibase-search-bad-entity-type": "Kiểu thực thể hỏng: $1",
 	"wikibase-search-bad-profile-name": "Tên kiểu tìm kiếm hỏng: $1",
+	"wikibase-refresh-for-missing-datatype": "Không tìm thấy loại dữ liệu $1 trong tập lệnh máy khách cục bộ. Đây có thể là kết quả của tập lệnh được lưu trong bộ nhớ cache đã lỗi thời. Cố gắng làm mới trình duyệt của bạn, bỏ qua bộ nhớ cache cục bộ (Ctrl-Shift-R hoặc Cmd-Shift-R trong hầu hết các trình duyệt) để giải quyết vấn đề.",
 	"wikibase-federated-properties-special-list-of-properties-source-ref": "[$1 Danh sách Thuộc tính của $2]",
 	"wikibase-federated-properties-leaving-site-notice-cancel": "Hủy",
 	"wikibase-federated-properties-leaving-site-notice-continue": "Tiếp tục đi đến wiki nguồn",

@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Jokomarel"
+		]
+	},
+	"wikibase-dataitem": "{{WBREPONAME}} thil",
+	"wikibase-editlinks": "Link-te siam tur",
+	"wikibase-linkitem-addlinks": "Link-te belhchhah tur",
+	"wikibase-linkitem-title": "Phek nen zawm tur",
+	"wikibase-linkitem-linkpage": "Phêk nen inzawm tur",
+	"wikibase-linkitem-selectlink": "Khawngaihin he phek inzawm tur site leh phek pakhat thlang rawh.",
+	"wikibase-linkitem-input-site": "Ṭawng:",
+	"wikibase-linkitem-input-page": "Phêk:",
+	"wikibase-rc-hide-wikidata-hide": "Tihbona",
+	"wikibase-rc-hide-wikidata-show": "Tihlanna",
+	"wikibase-otherprojects": "Project dang ah chuan"
+}
