@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Tests\Formatters;
 
 use DataValues\Geo\Values\GlobeCoordinateValue;
 use DataValues\Geo\Values\LatLongValue;
-use Language;
 use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Parser;
@@ -32,7 +31,7 @@ class CachingKartographerEmbeddingHandlerTest extends MediaWikiIntegrationTestCa
 	public function testGetHtml() {
 		$handler = new CachingKartographerEmbeddingHandler( MediaWikiServices::getInstance()->getParserFactory()->create() );
 
-		$language = Language::factory( 'qqx' );
+		$language = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'qqx' );
 		$result = $handler->getHtml( $this->newSampleCoordinate(), $language );
 
 		$this->assertStringContainsString( 'mw-kartographer-map', $result );
@@ -51,7 +50,7 @@ class CachingKartographerEmbeddingHandlerTest extends MediaWikiIntegrationTestCa
 			->willReturn( $this->createMock( ParserOutput::class ) );
 
 		$handler = new CachingKartographerEmbeddingHandler( $parser );
-		$language = Language::factory( 'qqx' );
+		$language = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'qqx' );
 
 		$handler->getHtml( $this->newSampleCoordinate(), $language );
 
@@ -61,7 +60,7 @@ class CachingKartographerEmbeddingHandlerTest extends MediaWikiIntegrationTestCa
 
 	public function testGetHtml_marsCoordinate() {
 		$handler = new CachingKartographerEmbeddingHandler( MediaWikiServices::getInstance()->getParserFactory()->create() );
-		$language = Language::factory( 'qqx' );
+		$language = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'qqx' );
 
 		$this->assertFalse(
 			$handler->getHtml( $this->newSampleMarsCoordinate(), $language )
@@ -71,7 +70,7 @@ class CachingKartographerEmbeddingHandlerTest extends MediaWikiIntegrationTestCa
 	public function testGetPreviewHtml() {
 		$handler = new CachingKartographerEmbeddingHandler( MediaWikiServices::getInstance()->getParserFactory()->create() );
 
-		$language = Language::factory( 'qqx' );
+		$language = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'qqx' );
 		$value = $this->newSampleCoordinate();
 
 		$plainHtml = $handler->getHtml( $value, $language );
@@ -86,7 +85,7 @@ class CachingKartographerEmbeddingHandlerTest extends MediaWikiIntegrationTestCa
 
 	public function testGetPreviewHtml_marsCoordinate() {
 		$handler = new CachingKartographerEmbeddingHandler( MediaWikiServices::getInstance()->getParserFactory()->create() );
-		$language = Language::factory( 'qqx' );
+		$language = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'qqx' );
 
 		$this->assertFalse(
 			$handler->getPreviewHtml( $this->newSampleMarsCoordinate(), $language )
@@ -95,7 +94,7 @@ class CachingKartographerEmbeddingHandlerTest extends MediaWikiIntegrationTestCa
 
 	public function testGetParserOutput() {
 		$handler = new CachingKartographerEmbeddingHandler( MediaWikiServices::getInstance()->getParserFactory()->create() );
-		$language = Language::factory( 'qqx' );
+		$language = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'qqx' );
 		$coordinate = new GlobeCoordinateValue(
 			new LatLongValue( 12, 34 ),
 			1,
@@ -122,7 +121,7 @@ class CachingKartographerEmbeddingHandlerTest extends MediaWikiIntegrationTestCa
 
 	public function testGetParserOutput_empty() {
 		$handler = new CachingKartographerEmbeddingHandler( MediaWikiServices::getInstance()->getParserFactory()->create() );
-		$language = Language::factory( 'qqx' );
+		$language = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'qqx' );
 
 		$parserOutput = $handler->getParserOutput(
 			[

@@ -5,7 +5,7 @@ namespace Wikibase\Client\Tests\Unit\RecentChanges;
 use Diff\Differ\MapDiffer;
 use Diff\DiffOp\Diff\Diff;
 use ExternalUserNames;
-use Language;
+use MediaWiki\MediaWikiServices;
 use SiteLookup;
 use Title;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
@@ -42,7 +42,7 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 	private function newRecentChangeFactoryHelper( $entitySourceDefinitions, $clientDomainDb, $centralIdLookup ) {
 		$siteLookup = $this->createMock( SiteLookup::class );
 
-		$lang = Language::factory( 'qqx' );
+		$lang = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'qqx' );
 		$siteLinkCommentCreator = new SiteLinkCommentCreator( $lang, $siteLookup, 'testwiki' );
 		return new RecentChangeFactory(
 			$lang,

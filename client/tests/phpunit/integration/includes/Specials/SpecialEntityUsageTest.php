@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Tests\Integration\Specials;
 
-use Language;
 use LanguageQqx;
 use MediaWiki\Languages\LanguageConverterFactory;
 use MediaWiki\MediaWikiServices;
@@ -81,7 +80,7 @@ class SpecialEntityUsageTest extends SpecialPageTestBase {
 	}
 
 	public function testExecuteWithValidParam() {
-		$lang = Language::factory( 'qqx' );
+		$lang = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'qqx' );
 		list( $result, ) = $this->executeSpecialPage( 'Q3', null, $lang );
 		$aspectsTehran = [
 			'(wikibase-pageinfo-entity-usage-O: )',

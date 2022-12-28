@@ -155,7 +155,7 @@ abstract class SpecialWikibaseRepoPageTestBase extends SpecialPageTestBase {
 	 * @return Language
 	 */
 	protected function getLanguage() {
-		return Language::factory( 'qqx' );
+		return $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'qqx' );
 	}
 
 	/**

@@ -10,7 +10,6 @@ use FauxResponse;
 use HashSiteStore;
 use HtmlCacheUpdater;
 use HttpError;
-use Language;
 use OutputPage;
 use Psr\Log\NullLogger;
 use SpecialPage;
@@ -236,7 +235,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 	}
 
 	public function testEntityDataFormatProvider(): void {
-		$this->setContentLang( Language::factory( 'en' ) );
+		$this->setContentLang( 'en' );
 		$request = new FauxRequest();
 		$request->response()->header( 'Status: 200 OK', true, 200 ); // init/reset
 

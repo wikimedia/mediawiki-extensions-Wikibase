@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\Tests\Unit\Hooks;
 
-use Language;
+use MediaWiki\MediaWikiServices;
 use OutputPage;
 use ParserOutput;
 use RequestContext;
@@ -48,7 +48,7 @@ class LanguageLinkBadgeDisplayTest extends \PHPUnit\Framework\TestCase {
 
 		$sidebarLinkBadgeDisplay = new SidebarLinkBadgeDisplay( $labelLookup,
 			$badgeClassNames,
-			Language::factory( 'de' )
+			MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'de' )
 		);
 		return new LanguageLinkBadgeDisplay( $sidebarLinkBadgeDisplay );
 	}

@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\Actions;
 use Article;
 use HashConfig;
 use IContextSource;
-use Language;
+use MediaWiki\MediaWikiServices;
 use OutputPage;
 use PHPUnit\Framework\MockObject\MockObject;
 use Title;
@@ -94,7 +94,7 @@ class HistoryEntityActionTest extends \PHPUnit\Framework\TestCase {
 			->willReturn( $output );
 
 		$context->method( 'getLanguage' )
-			->willReturn( Language::factory( self::DUMMY_LANGUAGE ) );
+			->willReturn( MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( self::DUMMY_LANGUAGE ) );
 
 		$context->method( 'getTitle' )
 			->willReturn( $this->getArticle()->getTitle() );

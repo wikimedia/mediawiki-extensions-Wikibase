@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\Tests\Unit\DataAccess\Scribunto;
 
-use Language;
+use MediaWiki\MediaWikiServices;
 use Wikibase\Client\DataAccess\Scribunto\WikibaseLuaEntityBindings;
 use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
 use Wikibase\Client\Usage\EntityUsage;
@@ -47,7 +47,7 @@ class WikibaseLuaEntityBindingsTest extends \PHPUnit\Framework\TestCase {
 			$richWikitextTransclusionInteractor,
 			new BasicEntityIdParser(),
 			WikibaseClient::getTermsLanguages(),
-			Language::factory( 'es' ),
+			MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'es' ),
 			$usageAccumulator ?: new HashUsageAccumulator(),
 			'enwiki'
 		);

@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests;
 
-use Language;
+use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\ContentLanguages;
@@ -55,7 +55,7 @@ class EntityTypesTest extends \PHPUnit\Framework\TestCase {
 
 		$entityView = call_user_func(
 			$callback,
-			Language::factory( 'en' ),
+			MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'en' ),
 			new TermLanguageFallbackChain( [], $this->createStub( ContentLanguages::class ) ),
 			new Item( new ItemId( 'Q123' ) )
 		);

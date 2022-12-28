@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\ParserOutput\PlaceholderExpander;
 
-use Language;
+use MediaWiki\MediaWikiServices;
 use OutputPage;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -109,7 +109,7 @@ class ExternallyRenderedEntityViewPlaceholderExpanderTest extends TestCase {
 		$revision = 4711;
 		$this->outputPage->expects( $this->once() )
 			->method( 'getLanguage' )
-			->willReturn( Language::factory( $language ) );
+			->willReturn( MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( $language ) );
 
 		$entityId = new ItemId( 'Q123' );
 		$this->entityIdReader = $this->newEntityIdReaderReturningEntityId( $entityId );
@@ -169,7 +169,7 @@ class ExternallyRenderedEntityViewPlaceholderExpanderTest extends TestCase {
 
 		$this->outputPage->expects( $this->once() )
 			->method( 'getLanguage' )
-			->willReturn( Language::factory( 'de' ) );
+			->willReturn( MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'de' ) );
 
 		$this->requestInspector->expects( $this->once() )
 			->method( 'isDefaultRequest' )

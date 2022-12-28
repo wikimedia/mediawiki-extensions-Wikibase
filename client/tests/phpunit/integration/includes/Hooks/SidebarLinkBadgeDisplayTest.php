@@ -3,7 +3,6 @@
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
 use Error;
-use Language;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\DataModel\Entity\ItemId;
@@ -52,7 +51,7 @@ class SidebarLinkBadgeDisplayTest extends MediaWikiIntegrationTestCase {
 		return new SidebarLinkBadgeDisplay(
 			$this->getLabelDescriptionLookup(),
 			$badgeClassNames,
-			Language::factory( 'de' )
+			$this->getServiceContainer()->getLanguageFactory()->getLanguage( 'de' )
 		);
 	}
 

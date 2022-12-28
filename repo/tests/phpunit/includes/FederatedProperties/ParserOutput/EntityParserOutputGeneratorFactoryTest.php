@@ -3,7 +3,6 @@
 declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\FederatedProperties\ParserOutput;
 
-use Language;
 use MediaWiki\Cache\LinkBatchFactory;
 use NullStatsdDataFactory;
 use RepoGroup;
@@ -31,7 +30,8 @@ class EntityParserOutputGeneratorFactoryTest extends FederatedPropertiesTestCase
 
 	public function testGetFederatedPropertiesEntityParserOutputGenerator() {
 		$parserOutputGeneratorFactory = $this->getEntityParserOutputGeneratorFactory();
-		$instance = $parserOutputGeneratorFactory->getEntityParserOutputGenerator( Language::factory( 'en' ) );
+		$lang = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' );
+		$instance = $parserOutputGeneratorFactory->getEntityParserOutputGenerator( $lang );
 
 		$this->assertInstanceOf( FederatedPropertiesUiEntityParserOutputGeneratorDecorator::class, $instance );
 	}

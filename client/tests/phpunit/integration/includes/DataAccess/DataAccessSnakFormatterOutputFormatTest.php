@@ -9,7 +9,6 @@ use DataValues\MonolingualTextValue;
 use DataValues\QuantityValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
-use Language;
 use MediaWikiIntegrationTestCase;
 use Title;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
@@ -238,7 +237,7 @@ class DataAccessSnakFormatterOutputFormatTest extends MediaWikiIntegrationTestCa
 		// This is an integration test, use the global factory
 		$factory = WikibaseClient::getDataAccessSnakFormatterFactory();
 		$formatter = $factory->newWikitextSnakFormatter(
-			Language::factory( 'en' ),
+			$this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' ),
 			$this->createMock( UsageAccumulator::class ),
 			DataAccessSnakFormatterFactory::TYPE_RICH_WIKITEXT
 		);
@@ -311,7 +310,7 @@ class DataAccessSnakFormatterOutputFormatTest extends MediaWikiIntegrationTestCa
 		// This is an integration test, use the global factory
 		$factory = WikibaseClient::getDataAccessSnakFormatterFactory();
 		$formatter = $factory->newWikitextSnakFormatter(
-			Language::factory( 'en' ),
+			$this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' ),
 			$this->createMock( UsageAccumulator::class )
 		);
 

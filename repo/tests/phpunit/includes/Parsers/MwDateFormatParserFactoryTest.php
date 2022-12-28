@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\Parsers;
 
 use DataValues\TimeValue;
 use InvalidArgumentException;
-use Language;
+use MediaWiki\MediaWikiServices;
 use PHPUnit\Framework\TestCase;
 use ValueParsers\ParseException;
 use ValueParsers\ParserOptions;
@@ -91,8 +91,9 @@ class MwDateFormatParserFactoryTest extends TestCase {
 			'both' => null,
 		];
 
+		$languageFactory = MediaWikiServices::getInstance()->getLanguageFactory();
 		foreach ( $this->getLanguageCodes() as $languageCode ) {
-			$language = Language::factory( $languageCode );
+			$language = $languageFactory->getLanguage( $languageCode );
 
 			foreach ( $dateFormatPreferences as $dateFormatPreference => $maximumPrecision ) {
 				foreach ( $dateFormatTypes as $dateFormatType => $precision ) {
@@ -227,7 +228,7 @@ class MwDateFormatParserFactoryTest extends TestCase {
 	 * @dataProvider nonSpecialFormatStringProvider
 	 */
 	public function testNonSpecialFormatStringFeatureParity( $format, $expected ) {
-		$en = Language::factory( 'en' );
+		$en = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'en' );
 		$formatted = $en->sprintfDate( $format, '20140901123040' );
 		$this->assertSame( $expected, $formatted );
 	}

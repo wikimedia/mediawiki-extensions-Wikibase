@@ -5,7 +5,7 @@ namespace Wikibase\Client\Tests\Unit\DataAccess\Scribunto;
 use DataValues\DataValue;
 use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
-use Language;
+use MediaWiki\MediaWikiServices;
 use Wikibase\Client\DataAccess\Scribunto\SnakSerializationRenderer;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdValue;
@@ -67,7 +67,7 @@ class SnakSerializationRendererTest extends \PHPUnit\Framework\TestCase {
 		return new SnakSerializationRenderer(
 			$snakFormatter,
 			$snakDeserializer,
-			Language::factory( 'en' ),
+			MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'en' ),
 			$snaksDeserializer
 		);
 	}

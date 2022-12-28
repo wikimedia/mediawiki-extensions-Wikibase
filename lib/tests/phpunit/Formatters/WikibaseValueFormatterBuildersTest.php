@@ -12,6 +12,7 @@ use DataValues\TimeValue;
 use DataValues\UnboundedQuantityValue;
 use DataValues\UnDeserializableValue;
 use Language;
+use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Psr\SimpleCache\CacheInterface;
 use Title;
@@ -626,7 +627,8 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 			->willReturn( new Term( 'xy', 'Custom LabelDescriptionLookup' ) );
 
 		$fallbackFactory = new LanguageFallbackChainFactory();
-		$fallbackChain = $fallbackFactory->newFromLanguage( Language::factory( 'de-ch' ) );
+		$lang = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'de-ch' );
+		$fallbackChain = $fallbackFactory->newFromLanguage( $lang );
 
 		return [
 			'language option' => [

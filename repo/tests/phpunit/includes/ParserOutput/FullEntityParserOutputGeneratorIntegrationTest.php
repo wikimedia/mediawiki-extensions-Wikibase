@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\ParserOutput;
 
 use DataValues\QuantityValue;
-use Language;
 use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\EntityIdValue;
@@ -107,7 +106,7 @@ class FullEntityParserOutputGeneratorIntegrationTest extends MediaWikiIntegratio
 
 	private function newParserOutputGenerator() {
 		return WikibaseRepo::getEntityParserOutputGeneratorFactory()
-			->getEntityParserOutputGenerator( Language::factory( 'en' ) );
+			->getEntityParserOutputGenerator( $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' ) );
 	}
 
 	private function saveItem( $id ) {

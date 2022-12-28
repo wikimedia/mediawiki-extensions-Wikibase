@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Specials;
 
 use FauxRequest;
-use Language;
 use Message;
 use SpecialPageTestBase;
 use Wikibase\DataModel\Entity\Item;
@@ -134,9 +133,10 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 
 		list( $output, ) = $this->executeSpecialPage( '', $request, self::USER_LANGUAGE );
 
+		$lang = $this->getServiceContainer()->getLanguageFactory()->getLanguage( self::USER_LANGUAGE );
 		$this->assertThatHamcrest( $output, is( htmlPiece( havingChild(
 			both( tagMatchingOutline( "<p class='error'/>" ) )
-			->andAlso( havingTextContents( new Message( 'permissionserrors', [], Language::factory( self::USER_LANGUAGE ) ) ) )
+			->andAlso( havingTextContents( new Message( 'permissionserrors', [], $lang ) ) )
 		) ) ) );
 	}
 

@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests;
 
-use Language;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\LanguageFallbackChainFactory;
@@ -155,7 +154,7 @@ class TermLanguageFallbackChainTest extends MediaWikiIntegrationTestCase {
 	 */
 	public function testExtractPreferredValueOrAny( $languageCode, $data, $expected ) {
 		$factory = new LanguageFallbackChainFactory();
-		$chain = $factory->newFromLanguage( Language::factory( $languageCode ) );
+		$chain = $factory->newFromLanguage( $this->getServiceContainer()->getLanguageFactory()->getLanguage( $languageCode ) );
 
 		$resolved = $chain->extractPreferredValueOrAny( $data );
 

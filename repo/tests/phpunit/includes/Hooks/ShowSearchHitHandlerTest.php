@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\Hooks;
 
 use ContextSource;
 use HtmlArmor;
-use Language;
 use MediaWikiIntegrationTestCase;
 use MWException;
 use RawMessage;
@@ -58,12 +57,13 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 					return new RawMessage( implode( ",", $args ) );
 				}
 			);
+		$lang = $this->getServiceContainer()->getLanguageFactory()->getLanguage( $language );
 		$searchPage->method( 'getLanguage' )
-			->willReturn( Language::factory( $language ) );
+			->willReturn( $lang );
 
 		$context = $this->createMock( ContextSource::class );
 		$context->method( 'getLanguage' )
-			->willReturn( Language::factory( $language ) );
+			->willReturn( $lang );
 		$context->method( 'getUser' )
 			->willReturn( MediaWikiIntegrationTestCase::getTestUser()->getUser() );
 

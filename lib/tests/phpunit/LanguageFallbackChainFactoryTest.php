@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests;
 
-use Language;
 use MediaWiki\Languages\LanguageFallback;
 use MediaWiki\MainConfigNames;
 use MediaWikiIntegrationTestCase;
@@ -153,7 +152,8 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 	) {
 		$this->setupDisabledVariants( $disabledVariants );
 		$factory = $this->getLanguageFallbackChainFactory( $includeMul );
-		$chain = $factory->newFromLanguage( Language::factory( $languageCode ) )->getFallbackChain();
+		$lang = $this->getServiceContainer()->getLanguageFactory()->getLanguage( $languageCode );
+		$chain = $factory->newFromLanguage( $lang )->getFallbackChain();
 		$this->assertChainEquals( $expected, $chain );
 	}
 

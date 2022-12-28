@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\Specials;
 
-use Language;
 use MediaWikiIntegrationTestCase;
 use Message;
 use Wikibase\Repo\CopyrightMessageBuilder;
@@ -23,7 +22,7 @@ class SpecialPageCopyrightViewTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider getHtmlProvider
 	 */
 	public function testGetHtml( $expected, Message $message, $languageCode ) {
-		$lang = Language::factory( $languageCode );
+		$lang = $this->getServiceContainer()->getLanguageFactory()->getLanguage( $languageCode );
 
 		$specialPageCopyrightView = new SpecialPageCopyrightView(
 			$this->getCopyrightMessageBuilder( $message ), 'x', 'y'

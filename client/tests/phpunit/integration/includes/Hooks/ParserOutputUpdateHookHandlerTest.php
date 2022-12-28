@@ -6,7 +6,6 @@ namespace Wikibase\Client\Tests\Integration\Hooks;
 
 use Content;
 use HashSiteStore;
-use Language;
 use MediaWiki\HookContainer\HookContainer;
 use MediaWikiIntegrationTestCase;
 use MediaWikiSite;
@@ -203,7 +202,7 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 			new SidebarLinkBadgeDisplay(
 				$labelDescriptionLookup,
 				[ 'Q17' => 'featured' ],
-				Language::factory( 'en' )
+				$this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' )
 			)
 		);
 	}
@@ -228,7 +227,7 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$sidebarLinkBadgeDisplay = new SidebarLinkBadgeDisplay(
 			$this->createMock( LabelDescriptionLookup::class ),
 			[],
-			Language::factory( 'en' )
+			$this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' )
 		);
 
 		return new OtherProjectsSidebarGeneratorFactory(

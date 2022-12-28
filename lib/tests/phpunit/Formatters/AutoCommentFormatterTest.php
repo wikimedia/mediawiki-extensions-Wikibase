@@ -29,7 +29,7 @@ class AutoCommentFormatterTest extends MediaWikiIntegrationTestCase {
 
 	protected function setUp(): void {
 		parent::setUp();
-		$this->language = Language::factory( 'qqx' );
+		$this->language = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'qqx' );
 	}
 
 	public function provideTestAutoComment() {

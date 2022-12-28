@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
-use Language;
 use MediaWikiIntegrationTestCase;
 use Parser;
 use ParserOutput;
@@ -34,7 +33,7 @@ class MagicWordHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$handler = TestingAccessWrapper::newFromObject( new MagicWordHookHandler( $settings ) );
 
 		$actual = $handler->getRepoName(
-			Language::factory( $langCode )
+			$this->getServiceContainer()->getLanguageFactory()->getLanguage( $langCode )
 		);
 
 		$this->assertEquals(
@@ -74,7 +73,7 @@ class MagicWordHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 		// Configure the stub.
 		$parser->method( 'getTargetLanguage' )
-			->willReturn( Language::factory( 'en' ) );
+			->willReturn( $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' ) );
 
 		$ret = null;
 

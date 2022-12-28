@@ -5,7 +5,7 @@ namespace Wikibase\Client\Tests\Unit\DataAccess\Scribunto;
 use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
 use InvalidArgumentException;
-use Language;
+use MediaWiki\MediaWikiServices;
 use Psr\Log\LoggerInterface;
 use ReflectionMethod;
 use Wikibase\Client\DataAccess\Scribunto\EntityAccessor;
@@ -52,7 +52,7 @@ class EntityAccessorTest extends \PHPUnit\Framework\TestCase {
 		$langCode = 'en',
 		$logger = null
 	) {
-		$language = Language::factory( $langCode );
+		$language = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( $langCode );
 		$serializerFactory = new SerializerFactory(
 			new DataValueSerializer(),
 			SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +

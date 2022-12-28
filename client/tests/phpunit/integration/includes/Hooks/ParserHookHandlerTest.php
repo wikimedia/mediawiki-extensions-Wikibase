@@ -4,7 +4,6 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
-use Language;
 use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use ParserOptions;
@@ -37,7 +36,7 @@ class ParserHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$title = Title::newMainPage();
 		$restrictedEntityLookup = WikibaseClient::getRestrictedEntityLookup();
 
-		$popt = new ParserOptions( User::newFromId( 0 ), Language::factory( 'en' ) );
+		$popt = new ParserOptions( User::newFromId( 0 ), $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' ) );
 
 		$parser = MediaWikiServices::getInstance()->getParserFactory()->create();
 		$parser->parse( '{{#property:P1234|from=Q1}}', $title, $popt );

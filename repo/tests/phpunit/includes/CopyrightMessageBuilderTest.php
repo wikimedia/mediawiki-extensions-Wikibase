@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests;
 
-use Language;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Repo\CopyrightMessageBuilder;
 
@@ -28,7 +27,7 @@ class CopyrightMessageBuilderTest extends MediaWikiIntegrationTestCase {
 	public function testBuildShortCopyrightWarningMessage( $expectedKey, $expectedParams,
 		$rightsUrl, $rightsText
 	) {
-		$language = Language::factory( 'qqx' );
+		$language = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'qqx' );
 		$messageBuilder = new CopyrightMessageBuilder();
 		$message = $messageBuilder->build( $rightsUrl, $rightsText, $language );
 

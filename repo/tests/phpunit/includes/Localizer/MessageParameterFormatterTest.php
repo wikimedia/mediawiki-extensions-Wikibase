@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\Localizer;
 use DataValues\DataValue;
 use DataValues\DecimalValue;
 use HashSiteStore;
-use Language;
+use MediaWiki\MediaWikiServices;
 use Site;
 use SiteLookup;
 use ValueFormatters\ValueFormatter;
@@ -52,7 +52,7 @@ class MessageParameterFormatterTest extends \PHPUnit\Framework\TestCase {
 			$this->getMockValueFormatter(),
 			$this->getMockIdFormatter(),
 			$this->getMockSitesTable(),
-			Language::factory( $lang )
+			MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( $lang )
 		);
 
 		$actual = $formatter->format( $param );

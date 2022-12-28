@@ -29,7 +29,7 @@ class EntityLinkFormatterFactoryTest extends MediaWikiIntegrationTestCase {
 
 		$this->assertInstanceOf(
 			DefaultEntityLinkFormatter::class,
-			$factory->getLinkFormatter( 'item', Language::factory( 'en' ) )
+			$factory->getLinkFormatter( 'item', $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' ) )
 		);
 	}
 
@@ -38,7 +38,7 @@ class EntityLinkFormatterFactoryTest extends MediaWikiIntegrationTestCase {
 
 		$this->assertInstanceOf(
 			DefaultEntityLinkFormatter::class,
-			$factory->getLinkFormatter( 'unknown-type', Language::factory( 'en' ) )
+			$factory->getLinkFormatter( 'unknown-type', $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' ) )
 		);
 	}
 

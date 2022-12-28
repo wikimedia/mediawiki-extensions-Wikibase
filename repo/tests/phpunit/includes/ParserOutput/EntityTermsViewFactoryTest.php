@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\ParserOutput;
 
-use Language;
+use MediaWiki\MediaWikiServices;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -25,7 +25,7 @@ class EntityTermsViewFactoryTest extends TestCase {
 		$termsView = $this->newEntityTermsViewFactory()
 			->newEntityTermsView(
 				new Item( new ItemId( 'Q42' ) ),
-				Language::factory( 'en' ),
+				MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'en' ),
 				new TermLanguageFallbackChain( [], $this->createStub( ContentLanguages::class ) )
 			);
 
@@ -36,7 +36,7 @@ class EntityTermsViewFactoryTest extends TestCase {
 		$termsView = $this->newEntityTermsViewFactory()
 			->newEntityTermsView(
 				new Item( new ItemId( 'Q42' ) ),
-				Language::factory( 'en' ),
+				MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'en' ),
 				new TermLanguageFallbackChain( [], $this->createStub( ContentLanguages::class ) ),
 				true
 			);

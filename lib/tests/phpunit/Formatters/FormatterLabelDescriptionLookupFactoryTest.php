@@ -3,7 +3,7 @@
 namespace Wikibase\Lib\Tests\Formatters;
 
 use InvalidArgumentException;
-use Language;
+use MediaWiki\MediaWikiServices;
 use OutOfBoundsException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
@@ -123,7 +123,7 @@ class FormatterLabelDescriptionLookupFactoryTest extends \PHPUnit\Framework\Test
 		return [
 			'bad language' => [
 				new FormatterOptions( [
-					ValueFormatter::OPT_LANG => Language::factory( 'en' ),
+					ValueFormatter::OPT_LANG => MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'en' ),
 				] ),
 			],
 			'bad fallback chain' => [

@@ -3,7 +3,6 @@
 declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\FederatedProperties\ParserOutput;
 
-use Language;
 use Psr\SimpleCache\CacheInterface;
 use RepoGroup;
 use Wikibase\DataModel\Entity\Item;
@@ -88,7 +87,7 @@ class FederatedPropertiesUiEntityParserOutputGeneratorDecoratorTest extends Enti
 	private function newEntityParserOutputGenerator( $fullGenerator, $languageCode = 'en' ) {
 		return new FederatedPropertiesUiEntityParserOutputGeneratorDecorator(
 			$fullGenerator,
-			Language::factory( $languageCode )
+			$this->getServiceContainer()->getLanguageFactory()->getLanguage( $languageCode )
 		);
 	}
 
@@ -127,7 +126,7 @@ class FederatedPropertiesUiEntityParserOutputGeneratorDecoratorTest extends Enti
 				$this->newLanguageFallbackChain(),
 				$entityDataFormatProvider,
 				$dataUpdaters,
-				Language::factory( $language )
+				$this->getServiceContainer()->getLanguageFactory()->getLanguage( $language )
 			),
 			$this->createStub( ApiEntityLookup::class )
 		);

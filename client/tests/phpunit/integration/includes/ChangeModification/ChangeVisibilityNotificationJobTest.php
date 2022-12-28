@@ -4,7 +4,6 @@ declare( strict_types=1 );
 
 namespace Wikibase\Client\Tests\Integration\ChangeModification;
 
-use Language;
 use MediaWiki\MediaWikiServices;
 use Title;
 use Wikibase\Client\ChangeModification\ChangeVisibilityNotificationJob;
@@ -56,7 +55,7 @@ class ChangeVisibilityNotificationJobTest extends RecentChangesModificationTest 
 		$this->initRecentChanges();
 
 		$recentChangeFactory = new RecentChangeFactory(
-			Language::factory( 'qqx' ),
+			$this->getServiceContainer()->getLanguageFactory()->getLanguage( 'qqx' ),
 			$this->createMock( SiteLinkCommentCreator::class ),
 			new EntitySourceDefinitions( [], new SubEntityTypesMapper( [] ) ),
 			$this->createStub( ClientDomainDb::class )

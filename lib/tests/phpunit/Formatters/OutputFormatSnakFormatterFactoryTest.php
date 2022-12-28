@@ -4,8 +4,8 @@ namespace Wikibase\Lib\Tests\Formatters;
 
 use DataValues\DataValue;
 use DataValues\StringValue;
-use Language;
 use LanguageQqx;
+use MediaWiki\MediaWikiServices;
 use Message;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\StringFormatter;
@@ -52,7 +52,7 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 		];
 		$valueFormatterFactory = new OutputFormatValueFormatterFactory(
 			$valueFormatterCallbacks,
-			Language::factory( 'en' ),
+			MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'en' ),
 			new LanguageFallbackChainFactory()
 		);
 
@@ -224,7 +224,7 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 		];
 		$valueFormatterFactory = new OutputFormatValueFormatterFactory(
 			$callbacks,
-			Language::factory( 'de' ),
+			MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'de' ),
 			new LanguageFallbackChainFactory()
 		);
 

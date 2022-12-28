@@ -3,7 +3,6 @@
 declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\FederatedProperties\ParserOutput;
 
-use Language;
 use Psr\SimpleCache\CacheInterface;
 use RepoGroup;
 use Wikibase\DataModel\Entity\EntityId;
@@ -131,7 +130,7 @@ class FederatedPropertiesPrefetchingEntityParserOutputGeneratorDecoratorTest ext
 			$this->newLanguageFallbackChain(),
 			$entityDataFormatProvider,
 			$dataUpdaters,
-			Language::factory( $language )
+			$this->getServiceContainer()->getLanguageFactory()->getLanguage( $language )
 		);
 	}
 }

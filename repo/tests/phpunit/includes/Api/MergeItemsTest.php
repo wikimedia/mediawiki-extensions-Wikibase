@@ -7,7 +7,6 @@ use ApiUsageException;
 use ChangeTags;
 use FauxRequest;
 use HashSiteStore;
-use Language;
 use MediaWiki\Languages\LanguageNameUtils;
 use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
@@ -186,7 +185,7 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 		$errorReporter = new ApiErrorReporter(
 			$main,
 			WikibaseRepo::getExceptionLocalizer(),
-			Language::factory( 'en' )
+			$this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' )
 		);
 		return new MergeItems(
 			$main,

@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Tests\Integration\RecentChanges;
 
-use Language;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWikiIntegrationTestCase;
 use RecentChange;
@@ -29,7 +28,7 @@ class ExternalChangeFactoryTest extends MediaWikiIntegrationTestCase {
 	private function getExternalChangeFactory() {
 		return new ExternalChangeFactory(
 			'testrepo',
-			Language::factory( 'qqx' ),
+			$this->getServiceContainer()->getLanguageFactory()->getLanguage( 'qqx' ),
 			new BasicEntityIdParser()
 		);
 	}

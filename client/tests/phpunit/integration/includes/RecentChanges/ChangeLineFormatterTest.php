@@ -5,7 +5,6 @@ namespace Wikibase\Client\Tests\Integration\RecentChanges;
 use ChangesList;
 use DerivativeContext;
 use HamcrestPHPUnitIntegration;
-use Language;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWikiLangTestCase;
@@ -74,6 +73,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 	 */
 	public function testFormat( array $expectedTags, array $patterns, RecentChange $recentChange ) {
 		$context = $this->getTestContext();
+		$languageFactory = $this->getServiceContainer()->getLanguageFactory();
 
 		// Use the actual setting, because our handler for the FormatAutocomment hook will check
 		// the wiki id against this setting.
@@ -82,7 +82,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 		$changesList = ChangesList::newFromContext( $context );
 		$changeFactory = new ExternalChangeFactory(
 			$repoWikiId,
-			Language::factory( 'en' ),
+			$languageFactory->getLanguage( 'en' ),
 			new BasicEntityIdParser()
 		);
 		$externalChange = $changeFactory->newFromRecentChange( $recentChange );
@@ -100,7 +100,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 			$title,
 			$recentChange->counter,
 			$changesList->recentChangesFlags( [ 'wikibase-edit' => true ], '' ),
-			Language::factory( 'en' ),
+			$languageFactory->getLanguage( 'en' ),
 			$this->getTestContext()->getUser()
 		);
 
@@ -128,6 +128,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 			$this->linkRenderer,
 			$this->commentFormatter
 		);
+		$languageFactory = $this->getServiceContainer()->getLanguageFactory();
 
 		// Use the actual setting, because out handler for the FormatAutocomment hook will check
 		// the wiki id against this setting.
@@ -135,7 +136,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 
 		$changeFactory = new ExternalChangeFactory(
 			$repoWikiId,
-			Language::factory( 'en' ),
+			$languageFactory->getLanguage( 'en' ),
 			new BasicEntityIdParser()
 		);
 		$externalChange = $changeFactory->newFromRecentChange( $recentChange );
@@ -151,7 +152,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 			$externalChange,
 			$recentChange->getTitle(),
 			$recentChange->counter,
-			Language::factory( 'en' ),
+			$languageFactory->getLanguage( 'en' ),
 			$this->getTestContext()->getUser()
 		);
 
@@ -211,6 +212,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 			$this->linkRenderer,
 			$this->commentFormatter
 		);
+		$languageFactory = $this->getServiceContainer()->getLanguageFactory();
 
 		// Use the actual setting, because out handler for the FormatAutocomment hook will check
 		// the wiki id against this setting.
@@ -218,7 +220,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 
 		$changeFactory = new ExternalChangeFactory(
 			$repoWikiId,
-			Language::factory( 'en' ),
+			$languageFactory->getLanguage( 'en' ),
 			new BasicEntityIdParser()
 		);
 		$externalChange = $changeFactory->newFromRecentChange( $recentChange );
@@ -235,7 +237,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 			$externalChange,
 			$recentChange->getTitle(),
 			$recentChange->counter,
-			Language::factory( 'en' ),
+			$languageFactory->getLanguage( 'en' ),
 			$this->getTestContext()->getUser()
 		);
 
@@ -288,7 +290,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 
 	private function getTestContext() {
 		$context = new DerivativeContext( RequestContext::getMain() );
-		$context->setLanguage( Language::factory( 'en' ) );
+		$context->setLanguage( $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' ) );
 		$context->setUser( User::newFromId( 0 ) );
 
 		return $context;

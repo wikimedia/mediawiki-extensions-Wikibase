@@ -4,7 +4,7 @@ namespace Wikibase\View\Tests;
 
 use HashSiteStore;
 use InvalidArgumentException;
-use Language;
+use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Services\Statement\Grouper\NullStatementGrouper;
 use Wikibase\Lib\ContentLanguages;
@@ -114,7 +114,7 @@ class ViewFactoryTest extends \PHPUnit\Framework\TestCase {
 	public function testNewItemView() {
 		$factory = $this->newViewFactory();
 		$itemView = $factory->newItemView(
-			Language::factory( 'en' ),
+			MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'en' ),
 			new TermLanguageFallbackChain( [], $this->createStub( ContentLanguages::class ) ),
 			$this->createMock( CacheableEntityTermsView::class )
 		);
@@ -125,7 +125,7 @@ class ViewFactoryTest extends \PHPUnit\Framework\TestCase {
 	public function testNewPropertyView() {
 		$factory = $this->newViewFactory();
 		$propertyView = $factory->newPropertyView(
-			Language::factory( 'en' ),
+			MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'en' ),
 			new TermLanguageFallbackChain( [], $this->createStub( ContentLanguages::class ) ),
 			$this->createMock( CacheableEntityTermsView::class )
 		);

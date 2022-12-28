@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Tests\Api;
 use ApiMain;
 use ApiUsageException;
 use FauxRequest;
-use Language;
 use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Status;
@@ -124,7 +123,7 @@ class CreateRedirectTest extends MediaWikiIntegrationTestCase {
 		$errorReporter = new ApiErrorReporter(
 			$main,
 			WikibaseRepo::getExceptionLocalizer(),
-			Language::factory( 'en' )
+			$this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' )
 		);
 
 		if ( !$interactor ) {

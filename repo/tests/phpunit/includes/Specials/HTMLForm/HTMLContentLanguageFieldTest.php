@@ -66,7 +66,7 @@ class HTMLContentLanguageFieldTest extends MediaWikiIntegrationTestCase {
 	private function createNewContextSourceWithLanguage( $langCode ) {
 		$mock = $this->createMock( \IContextSource::class );
 
-		$language = \Language::factory( $langCode );
+		$language = $this->getServiceContainer()->getLanguageFactory()->getLanguage( $langCode );
 
 		$mock->method( 'getLanguage' )->willReturn( $language );
 

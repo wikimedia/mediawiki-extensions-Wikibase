@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\ParserOutput\PlaceholderExpander;
 
 use IContextSource;
-use Language;
+use MediaWiki\MediaWikiServices;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Lib\ContentLanguages;
@@ -30,7 +30,7 @@ class TermboxRequestInspectorTest extends TestCase {
 	}
 
 	public function testGivenContextWithDefaultLanguages_returnsTrue() {
-		$language = Language::factory( 'de' );
+		$language = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'de' );
 		$context = $this->newContextWithLanguage( $language );
 
 		$languageFallbackChainFactory = $this->createMock( LanguageFallbackChainFactory::class );
@@ -56,7 +56,7 @@ class TermboxRequestInspectorTest extends TestCase {
 	}
 
 	public function testGivenContextWithNonDefault_returnFalse() {
-		$language = Language::factory( 'en' );
+		$language = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'en' );
 		$context = $this->newContextWithLanguage( $language );
 
 		$languageFallbackChainFactory = $this->createMock( LanguageFallbackChainFactory::class );

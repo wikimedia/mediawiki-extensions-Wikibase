@@ -3,7 +3,6 @@
 namespace Wikibase\Client\Tests\Unit\Api;
 
 use ApiMain;
-use Language;
 use MediaWikiIntegrationTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use Title;
@@ -359,7 +358,7 @@ class DescriptionTest extends MediaWikiIntegrationTestCase {
 	 * @return Title[] page id => Title
 	 */
 	private function makeTitles( $requestedPageIds ) {
-		$en = Language::factory( 'en' );
+		$en = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' );
 		return array_map( function ( $pageId ) use ( $en ) {
 			$title = $this->createMock( Title::class );
 			$title->method( 'getArticleID' )

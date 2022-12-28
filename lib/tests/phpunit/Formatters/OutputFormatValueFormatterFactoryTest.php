@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Tests\Formatters;
 use DataValues\DataValue;
 use DataValues\StringValue;
 use InvalidArgumentException;
-use Language;
+use MediaWiki\MediaWikiServices;
 use MediaWikiTestCaseTrait;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\FormattingException;
@@ -39,7 +39,7 @@ class OutputFormatValueFormatterFactoryTest extends \PHPUnit\Framework\TestCase 
 	 * @dataProvider constructorErrorsProvider
 	 */
 	public function testConstructorErrors( $builder, $error ) {
-		$language = Language::factory( 'en' );
+		$language = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'en' );
 		$this->expectException( $error );
 		new OutputFormatValueFormatterFactory( $builder, $language, new LanguageFallbackChainFactory() );
 	}
@@ -71,7 +71,7 @@ class OutputFormatValueFormatterFactoryTest extends \PHPUnit\Framework\TestCase 
 
 		return new OutputFormatValueFormatterFactory(
 			$factoryCallbacks,
-			Language::factory( 'en' ),
+			MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'en' ),
 			new LanguageFallbackChainFactory()
 		);
 	}
@@ -132,7 +132,8 @@ class OutputFormatValueFormatterFactoryTest extends \PHPUnit\Framework\TestCase 
 
 	public function provideApplyLanguageDefaults() {
 		$languageFallbackFactory = new LanguageFallbackChainFactory();
-		$languageFallback = $languageFallbackFactory->newFromLanguage( Language::factory( 'fr' ) );
+		$lang = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'fr' );
+		$languageFallback = $languageFallbackFactory->newFromLanguage( $lang );
 
 		return [
 			'empty' => [

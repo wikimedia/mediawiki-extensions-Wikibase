@@ -3,7 +3,7 @@
 namespace Wikibase\Client\Tests\Unit\DataAccess;
 
 use DataValues\StringValue;
-use Language;
+use MediaWiki\MediaWikiServices;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\DataAccess\SnaksFinder;
 use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
@@ -153,7 +153,7 @@ class StatementTransclusionInteractorTest extends \PHPUnit\Framework\TestCase {
 		$format = SnakFormatter::FORMAT_PLAIN,
 		HashUsageAccumulator $usageAccumulator = null
 	) {
-		$targetLanguage = Language::factory( 'en' );
+		$targetLanguage = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'en' );
 
 		return new StatementTransclusionInteractor(
 			$targetLanguage,

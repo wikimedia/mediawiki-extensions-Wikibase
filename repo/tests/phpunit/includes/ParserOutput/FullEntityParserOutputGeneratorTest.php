@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\ParserOutput;
 
-use Language;
 use Psr\SimpleCache\CacheInterface;
 use RepoGroup;
 use SpecialPage;
@@ -230,7 +229,7 @@ class FullEntityParserOutputGeneratorTest extends EntityParserOutputGeneratorTes
 			$this->newLanguageFallbackChain(),
 			$entityDataFormatProvider,
 			$dataUpdaters,
-			Language::factory( 'en' )
+			$this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' )
 		);
 	}
 }

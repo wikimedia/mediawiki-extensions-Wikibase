@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests;
 
-use Language;
+use MediaWiki\MediaWikiServices;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\Lib\Formatters\DispatchingEntityIdHtmlLinkFormatter;
@@ -38,7 +38,7 @@ class EntityIdHtmlLinkFormatterFactoryTest extends TestCase {
 	public function testGetEntityIdFormatter() {
 		$factory = $this->getFormatterFactory();
 
-		$formatter = $factory->getEntityIdFormatter( Language::factory( 'en' ) );
+		$formatter = $factory->getEntityIdFormatter( MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'en' ) );
 		$this->assertInstanceOf( EntityIdFormatter::class, $formatter );
 		$this->assertInstanceOf( DispatchingEntityIdHtmlLinkFormatter::class, $formatter );
 	}
@@ -46,7 +46,7 @@ class EntityIdHtmlLinkFormatterFactoryTest extends TestCase {
 	public function testPassesLanguageToFormatterCallbacks() {
 		$titleLookup = $this->createMock( EntityTitleLookup::class );
 
-		$language = Language::factory( 'en' );
+		$language = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'en' );
 
 		$callbackMock = $this->getMockBuilder( \stdClass::class )
 			->addMethods( [ '__invoke' ] )

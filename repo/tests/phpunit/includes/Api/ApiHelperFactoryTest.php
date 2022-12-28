@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Tests\Api;
 use ApiBase;
 use ApiResult;
 use HashSiteStore;
-use Language;
 use MediaWiki\MediaWikiServices;
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\ItemIdParser;
@@ -63,7 +62,7 @@ class ApiHelperFactoryTest extends \PHPUnit\Framework\TestCase {
 	 * @return ApiBase
 	 */
 	private function newApiModule() {
-		$language = Language::factory( 'en' );
+		$language = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'en' );
 
 		$result = $this->createMock( ApiResult::class );
 

@@ -5,7 +5,6 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
 use IContextSource;
-use Language;
 use MediaWikiIntegrationTestCase;
 use OutputPage;
 use ParserOutput;
@@ -59,7 +58,7 @@ class SidebarHookHandlerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function newSidebarHookHandler() {
-		$en = Language::factory( 'en' );
+		$en = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' );
 		$settings = $this->newSettings();
 
 		$namespaces = $settings->getSetting( 'namespaces' );

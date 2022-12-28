@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests;
 
 use DataValues\DataValue;
-use Language;
 use MediaWikiLangTestCase;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -95,7 +94,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 		$snakFormatter->method( 'getFormat' )
 			->willReturn( SnakFormatter::FORMAT_PLAIN );
 
-		$language = Language::factory( 'en' );
+		$language = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' );
 
 		$formatter = new SummaryFormatter(
 			$idFormatter,

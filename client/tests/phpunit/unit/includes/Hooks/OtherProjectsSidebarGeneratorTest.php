@@ -3,7 +3,7 @@
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
 use HashSiteStore;
-use Language;
+use MediaWiki\MediaWikiServices;
 use MediaWikiSite;
 use SiteLookup;
 use TestSites;
@@ -173,7 +173,7 @@ class OtherProjectsSidebarGeneratorTest extends \PHPUnit\Framework\TestCase {
 		return new SidebarLinkBadgeDisplay(
 			$labelDescriptionLookup,
 			[ self::BADGE_ITEM_ID => self::BADGE_CSS_CLASS ],
-			Language::factory( 'en' )
+			MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'en' )
 		);
 	}
 

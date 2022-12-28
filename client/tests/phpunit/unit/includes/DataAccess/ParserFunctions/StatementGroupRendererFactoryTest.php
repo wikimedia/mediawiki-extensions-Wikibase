@@ -4,7 +4,6 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Tests\Unit\DataAccess\ParserFunctions;
 
-use Language;
 use MediaWiki\Languages\LanguageConverterFactory;
 use MediaWiki\MediaWikiServices;
 use Parser;
@@ -329,8 +328,9 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 	private function getParserOptions( string $languageCode, string $userLanguageCode, bool $interfaceMessage,
 		bool $disableContentConversion, bool $disableTitleConversion
 	): ParserOptions {
-		$language = Language::factory( $languageCode );
-		$userLanguage = Language::factory( $userLanguageCode );
+		$languageFactory = MediaWikiServices::getInstance()->getLanguageFactory();
+		$language = $languageFactory->getLanguage( $languageCode );
+		$userLanguage = $languageFactory->getLanguage( $userLanguageCode );
 
 		$parserOptions = new ParserOptions( User::newFromId( 0 ), $userLanguage );
 		$parserOptions->setTargetLanguage( $language );

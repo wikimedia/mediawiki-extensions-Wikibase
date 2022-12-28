@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Hooks;
 
 use FauxRequest;
-use Language;
 use MediaWiki\User\StaticUserOptionsLookup;
 use MediaWikiIntegrationTestCase;
 use NullHttpRequestFactory;
@@ -88,7 +87,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 	private function newOutputPage() {
 		$mockContext = $this->createMock( RequestContext::class );
 		$mockContext->method( 'getLanguage' )
-			->willReturn( Language::factory( $this->uiLanguageCode ) );
+			->willReturn( $this->getServiceContainer()->getLanguageFactory()->getLanguage( $this->uiLanguageCode ) );
 		$mockContext->method( 'getUser' )->willReturn( new User() );
 		$mockContext->method( 'getRequest' )->willReturn( new FauxRequest() );
 		$mockContext->method( 'getConfig' )->willReturn( RequestContext::getMain()->getConfig() );

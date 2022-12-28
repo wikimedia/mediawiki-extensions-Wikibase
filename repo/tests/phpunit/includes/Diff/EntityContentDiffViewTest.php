@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\Diff;
 
 use Content;
 use DerivativeContext;
-use Language;
 use MediaWikiIntegrationTestCase;
 use RequestContext;
 use Title;
@@ -166,7 +165,7 @@ class EntityContentDiffViewTest extends MediaWikiIntegrationTestCase {
 	 */
 	private function newDiffView() {
 		$context = new DerivativeContext( RequestContext::getMain() );
-		$context->setLanguage( Language::factory( 'en' ) );
+		$context->setLanguage( $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' ) );
 
 		return new EntityContentDiffView( $context );
 	}

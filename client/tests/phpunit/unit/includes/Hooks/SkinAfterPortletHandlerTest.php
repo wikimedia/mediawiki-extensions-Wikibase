@@ -4,7 +4,6 @@ namespace Wikibase\Client\Tests\Unit\Hooks;
 
 use FauxRequest;
 use IContextSource;
-use Language;
 use MediaWiki\MediaWikiServices;
 use MockTitleTrait;
 use OutputPage;
@@ -144,6 +143,7 @@ class SkinAfterPortletHandlerTest extends TestCase {
 		$request = new FauxRequest( [ 'action' => $action ] );
 
 		$title = $this->makeMockTitle( 'Page' );
+		$lang = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'qqx' );
 
 		$context = $this->createMock( IContextSource::class );
 		$context->method( 'getRequest' )
@@ -151,7 +151,7 @@ class SkinAfterPortletHandlerTest extends TestCase {
 		$context->method( 'getTitle' )
 			->willReturn( $title );
 		$context->method( 'getLanguage' )
-			->willReturn( Language::factory( 'qqx' ) );
+			->willReturn( $lang );
 		$context->method( 'getConfig' )
 			->willReturn(
 				MediaWikiServices::getInstance()->getMainConfig()

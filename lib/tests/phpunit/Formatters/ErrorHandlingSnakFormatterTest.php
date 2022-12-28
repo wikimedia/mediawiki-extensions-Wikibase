@@ -5,7 +5,6 @@ namespace Wikibase\Lib\Tests\Formatters;
 use DataValues\StringValue;
 use DataValues\UnDeserializableValue;
 use Exception;
-use Language;
 use MediaWikiIntegrationTestCase;
 use ValueFormatters\Exceptions\MismatchingDataValueTypeException;
 use ValueFormatters\FormattingException;
@@ -135,7 +134,7 @@ class ErrorHandlingSnakFormatterTest extends MediaWikiIntegrationTestCase {
 		$formatter = new ErrorHandlingSnakFormatter(
 			$this->getSnakFormatter( $ex ),
 			$fallbackFormatter,
-			Language::factory( 'qqx' )
+			$this->getServiceContainer()->getLanguageFactory()->getLanguage( 'qqx' )
 		);
 
 		$text = $formatter->formatSnak( $snak );

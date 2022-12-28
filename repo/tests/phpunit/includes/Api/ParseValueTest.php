@@ -6,7 +6,7 @@ use ApiMain;
 use ApiUsageException;
 use DataValues\Geo\Parsers\GlobeCoordinateParser;
 use FauxRequest;
-use Language;
+use MediaWiki\MediaWikiServices;
 use MediaWikiTestCaseTrait;
 use ValueParsers\NullParser;
 use ValueParsers\ParseException;
@@ -50,7 +50,7 @@ class ParseValueTest extends \PHPUnit\Framework\TestCase {
 		$errorReporter = new ApiErrorReporter(
 			$main,
 			$exceptionLocalizer,
-			Language::factory( 'qqq' )
+			MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'qqq' )
 		);
 
 		$dataTypeFactory = new DataTypeFactory( [

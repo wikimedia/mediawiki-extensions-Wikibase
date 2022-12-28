@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests;
 
-use Language;
+use MediaWiki\MediaWikiServices;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\Lib\Formatters\SnakFormatter;
@@ -32,7 +32,7 @@ class EntityIdLabelFormatterFactoryTest extends TestCase {
 	public function testGetEntityIdFormatter() {
 		$factory = $this->getFormatterFactory();
 
-		$formatter = $factory->getEntityIdFormatter( Language::factory( 'en' ) );
+		$formatter = $factory->getEntityIdFormatter( MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'en' ) );
 		$this->assertInstanceOf( EntityIdFormatter::class, $formatter );
 	}
 

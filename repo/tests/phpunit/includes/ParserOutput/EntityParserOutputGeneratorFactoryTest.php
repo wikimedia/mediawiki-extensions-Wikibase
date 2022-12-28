@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\ParserOutput;
 
-use Language;
 use MediaWiki\Cache\LinkBatchFactory;
 use MediaWikiIntegrationTestCase;
 use NullStatsdDataFactory;
@@ -32,7 +31,8 @@ class EntityParserOutputGeneratorFactoryTest extends MediaWikiIntegrationTestCas
 	public function testGetEntityParserOutputGenerator() {
 		$parserOutputGeneratorFactory = $this->getEntityParserOutputGeneratorFactory();
 
-		$instance = $parserOutputGeneratorFactory->getEntityParserOutputGenerator( Language::factory( 'en' ) );
+		$lang = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' );
+		$instance = $parserOutputGeneratorFactory->getEntityParserOutputGenerator( $lang );
 
 		$this->assertInstanceOf( EntityParserOutputGenerator::class, $instance );
 	}

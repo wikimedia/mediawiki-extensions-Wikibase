@@ -4,7 +4,6 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Hooks;
 
 use HtmlArmor;
-use Language;
 use MediaWiki\Linker\LinkRenderer;
 use RequestContext;
 use SpecialPage;
@@ -223,7 +222,7 @@ class HtmlPageLinkRendererEndHookHandlerTest extends HtmlPageLinkRendererEndHook
 			. '<span class="wb-itemlink-label" lang="en" dir="ltr">' . self::DUMMY_LABEL . '</span> '
 			. '<span class="wb-itemlink-id">(' . self::ITEM_LABEL_NO_DESCRIPTION . ')</span></span>';
 
-		$lang = Language::factory( 'en' );
+		$lang = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' );
 		$this->assertTrue( $ret );
 		$this->assertInstanceOf( HtmlArmor::class, $text );
 		$this->assertEquals( $expected, HtmlArmor::getHtml( $text ) );

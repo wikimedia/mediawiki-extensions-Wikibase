@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Parsers;
 
-use Language;
+use MediaWiki\MediaWikiServices;
 use Wikibase\Lib\Formatters\MediaWikiNumberLocalizer;
 use Wikibase\Repo\Parsers\MediaWikiNumberUnlocalizer;
 
@@ -42,7 +42,7 @@ class MediaWikiNumberUnlocalizerTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideUnlocalize
 	 */
 	public function testUnlocalize( $localized, $languageCode, $canonical ) {
-		$language = Language::factory( $languageCode );
+		$language = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( $languageCode );
 		$unlocalizer = new MediaWikiNumberUnlocalizer( $language );
 
 		$unlocalized = $unlocalizer->unlocalizeNumber( $localized );
@@ -76,7 +76,7 @@ class MediaWikiNumberUnlocalizerTest extends \PHPUnit\Framework\TestCase {
 			$canonical = "$number";
 		}
 
-		$language = Language::factory( $languageCode );
+		$language = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( $languageCode );
 
 		$localizer = new MediaWikiNumberLocalizer( $language );
 		$unlocalizer = new MediaWikiNumberUnlocalizer( $language );
@@ -129,7 +129,7 @@ class MediaWikiNumberUnlocalizerTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideGetNumberRegexMatch
 	 */
 	public function testGetNumberRegexMatch( $value, $lang = 'en' ) {
-		$lang = Language::factory( $lang );
+		$lang = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( $lang );
 		$unlocalizer = new MediaWikiNumberUnlocalizer( $lang );
 		$regex = $unlocalizer->getNumberRegex();
 
@@ -188,7 +188,7 @@ class MediaWikiNumberUnlocalizerTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideGetNumberRegexMismatch
 	 */
 	public function testGetNumberRegexMismatch( $value, $lang = 'en' ) {
-		$unlocalizer = new MediaWikiNumberUnlocalizer( Language::factory( $lang ) );
+		$unlocalizer = new MediaWikiNumberUnlocalizer( MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( $lang ) );
 		$regex = $unlocalizer->getNumberRegex();
 
 		$this->assertFalse( (bool)preg_match( "/^($regex)$/u", $value ) );

@@ -5,7 +5,6 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\FederatedProperties\Diff;
 
 use DerivativeContext;
-use Language;
 use RequestContext;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -48,7 +47,7 @@ class EntityContentDiffViewTest extends FederatedPropertiesTestCase {
 	 */
 	private function newDiffView() {
 		$context = new DerivativeContext( RequestContext::getMain() );
-		$context->setLanguage( Language::factory( 'en' ) );
+		$context->setLanguage( $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' ) );
 
 		return new EntityContentDiffView( $context );
 	}

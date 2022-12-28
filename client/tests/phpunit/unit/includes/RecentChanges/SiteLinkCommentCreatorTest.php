@@ -5,7 +5,7 @@ namespace Wikibase\Client\Tests\Unit\RecentChanges;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpChange;
 use HashSiteStore;
-use Language;
+use MediaWiki\MediaWikiServices;
 use TestSites;
 use Title;
 use Wikibase\Client\RecentChanges\SiteLinkCommentCreator;
@@ -30,7 +30,8 @@ class SiteLinkCommentCreatorTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testGetEditComment( Diff $siteLinkDiff, $action, $expected ) {
 		$siteStore = new HashSiteStore( TestSites::getSites() );
-		$commentCreator = new SiteLinkCommentCreator( Language::factory( 'qqx' ), $siteStore, 'enwiki' );
+		$lang = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'qqx' );
+		$commentCreator = new SiteLinkCommentCreator( $lang, $siteStore, 'enwiki' );
 		$comment = $commentCreator->getEditComment( $siteLinkDiff, $action, $this->getTitle( 'A fancy page' ) );
 
 		$this->assertEquals( $expected, $comment );
@@ -69,7 +70,8 @@ class SiteLinkCommentCreatorTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testNeedsTargetSpecificSummary( $expected, Diff $siteLinkDiff, Title $title ) {
 		$siteStore = new HashSiteStore( TestSites::getSites() );
-		$commentCreator = new SiteLinkCommentCreator( Language::factory( 'qqx' ), $siteStore, 'enwiki' );
+		$lang = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'qqx' );
+		$commentCreator = new SiteLinkCommentCreator( $lang, $siteStore, 'enwiki' );
 		$res = $commentCreator->needsTargetSpecificSummary( $siteLinkDiff, $title );
 
 		$this->assertSame( $expected, $res );

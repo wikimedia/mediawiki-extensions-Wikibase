@@ -8,7 +8,6 @@ use ContentHandler;
 use DataValues\Serializers\DataValueSerializer;
 use DummySearchIndexFieldDefinition;
 use InvalidArgumentException;
-use Language;
 use LogicException;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionRecord;
@@ -229,12 +228,12 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $contLang->getCode(), $handler->getPageLanguage( $title )->getCode() );
 
 		// test fr
-		$this->setMwGlobals( 'wgLang', Language::factory( "fr" ) );
+		$this->setUserLang( 'fr' );
 		$handler = $this->getHandler();
 		$this->assertEquals( $contLang->getCode(), $handler->getPageLanguage( $title )->getCode() );
 
 		// test nl
-		$this->setMwGlobals( 'wgLang', Language::factory( "nl" ) );
+		$this->setUserLang( 'nl' );
 		$frCode = 'fr';
 		$this->setMwGlobals( 'wgLanguageCode', $frCode );
 		$handler = $this->getHandler();
@@ -254,12 +253,12 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $wgLang->getCode(), $handler->getPageViewLanguage( $title )->getCode() );
 
 		// test fr
-		$this->setMwGlobals( 'wgLang', Language::factory( "fr" ) );
+		$this->setUserLang( 'fr' );
 		$handler = $this->getHandler();
 		$this->assertEquals( $wgLang->getCode(), $handler->getPageViewLanguage( $title )->getCode() );
 
 		// test nl
-		$this->setMwGlobals( 'wgLang', Language::factory( "nl" ) );
+		$this->setUserLang( 'nl' );
 		$handler = $this->getHandler();
 		$this->assertEquals( $wgLang->getCode(), $handler->getPageViewLanguage( $title )->getCode() );
 	}

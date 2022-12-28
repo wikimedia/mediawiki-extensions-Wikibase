@@ -5,7 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Tests\Unit\DataAccess\ParserFunctions;
 
 use DataValues\StringValue;
-use Language;
+use MediaWiki\MediaWikiServices;
 use MediaWikiTestCaseTrait;
 use ParserOutput;
 use Title;
@@ -55,7 +55,7 @@ class LanguageAwareRendererTest extends \PHPUnit\Framework\TestCase {
 		$languageCode,
 		ParserOutput $parserOutput
 	) {
-		$targetLanguage = Language::factory( $languageCode );
+		$targetLanguage = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( $languageCode );
 
 		$entityStatementsRenderer = new StatementTransclusionInteractor(
 			$targetLanguage,

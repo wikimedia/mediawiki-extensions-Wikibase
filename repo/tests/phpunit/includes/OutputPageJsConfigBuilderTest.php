@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests;
 
-use Language;
 use MediaWikiIntegrationTestCase;
 use OutputPage;
 use Title;
@@ -72,7 +71,7 @@ class OutputPageJsConfigBuilderTest extends MediaWikiIntegrationTestCase {
 	private function getOutputPage() {
 		$out = $this->createMock( OutputPage::class );
 		$out->method( 'getUser' )->willReturn( $this->createMock( User::class ) );
-		$out->method( 'getLanguage' )->willReturn( Language::factory( 'qqx' ) );
+		$out->method( 'getLanguage' )->willReturn( $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'qqx' ) );
 		$out->method( 'getTitle' )->willReturn( $this->createMock( Title::class ) );
 		return $out;
 	}

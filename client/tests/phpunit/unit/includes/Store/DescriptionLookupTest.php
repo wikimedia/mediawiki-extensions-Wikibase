@@ -3,7 +3,7 @@
 namespace Wikibase\Client\Tests\Unit\Store;
 
 use InvalidArgumentException;
-use Language;
+use MediaWiki\MediaWikiServices;
 use PageProps;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -181,7 +181,7 @@ class DescriptionLookupTest extends TestCase {
 	 * @return Title
 	 */
 	private function makeTitle( $pageId, $pageLanguageCode ) {
-		$language = Language::factory( $pageLanguageCode );
+		$language = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( $pageLanguageCode );
 		$title = $this->createMock( Title::class );
 		$title->method( 'getArticleID' )
 			->willReturn( $pageId );

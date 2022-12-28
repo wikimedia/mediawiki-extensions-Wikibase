@@ -4,6 +4,7 @@ namespace Wikibase\Client\Tests\Unit\DataAccess;
 
 use DataValues\StringValue;
 use Language;
+use MediaWiki\MediaWikiServices;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\Usage\UsageAccumulator;
@@ -91,7 +92,7 @@ class DataAccessSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 	public function testNewEscapedPlainTextSnakFormatter() {
 		$factory = $this->getDataAccessSnakFormatterFactory( SnakFormatter::FORMAT_PLAIN );
 		$snakFormatter = $factory->newWikitextSnakFormatter(
-			Language::factory( 'fr' ),
+			MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'fr' ),
 			$this->createMock( UsageAccumulator::class )
 		);
 
@@ -114,7 +115,7 @@ class DataAccessSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 	public function testRichWikitextSnakFormatter( Snak $snak, $expected ) {
 		$factory = $this->getDataAccessSnakFormatterFactory( SnakFormatter::FORMAT_WIKI );
 		$snakFormatter = $factory->newWikitextSnakFormatter(
-			Language::factory( 'fr' ),
+			MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'fr' ),
 			$this->createMock( UsageAccumulator::class ),
 			DataAccessSnakFormatterFactory::TYPE_RICH_WIKITEXT
 		);
