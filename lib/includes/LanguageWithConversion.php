@@ -259,9 +259,9 @@ class LanguageWithConversion {
 		if ( $this->parentLanguage && count( $this->translatePool ) ) {
 			$pieces = array_keys( $this->translatePool );
 			$block = implode( "\0", $pieces );
-			$translatedBlock = $this->parentLanguage->getConverter()->translate(
-				$block, $this->languageCode
-			);
+			$translatedBlock = MediaWikiServices::getInstance()->getLanguageConverterFactory()
+				->getLanguageConverter( $this->parentLanguage )
+				->translate( $block, $this->languageCode );
 			$translatedPieces = explode( "\0", $translatedBlock );
 			$this->translateCache += array_combine( $pieces, $translatedPieces );
 			$this->translatePool = [];
