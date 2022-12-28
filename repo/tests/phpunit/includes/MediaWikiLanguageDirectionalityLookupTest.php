@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests;
 
+use MediaWiki\MediaWikiServices;
 use Wikibase\Repo\MediaWikiLanguageDirectionalityLookup;
 
 /**
@@ -27,7 +28,10 @@ class MediaWikiLanguageDirectionalityLookupTest extends \PHPUnit\Framework\TestC
 	 * @dataProvider provideLanguageCodes
 	 */
 	public function testGetDirectionality( $languageCode, $expected ) {
-		$lookup = new MediaWikiLanguageDirectionalityLookup();
+		$lookup = new MediaWikiLanguageDirectionalityLookup(
+			MediaWikiServices::getInstance()->getLanguageFactory(),
+			MediaWikiServices::getInstance()->getLanguageNameUtils()
+		);
 		$this->assertSame( $expected, $lookup->getDirectionality( $languageCode ) );
 	}
 

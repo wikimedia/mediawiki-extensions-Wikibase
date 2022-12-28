@@ -2090,7 +2090,10 @@ return [
 			WikibaseRepo::getDataTypeFactory( $services ),
 			TemplateFactory::getDefaultInstance(),
 			WikibaseRepo::getLanguageNameLookupFactory( $services ),
-			new MediaWikiLanguageDirectionalityLookup(),
+			new MediaWikiLanguageDirectionalityLookup(
+				$services->getLanguageFactory(),
+				$services->getLanguageNameUtils()
+			),
 			WikibaseRepo::getNumberLocalizerFactory( $services ),
 			$settings->getSetting( 'siteLinkGroups' ),
 			$settings->getSetting( 'specialSiteLinkGroups' ),

@@ -6,6 +6,8 @@ use IBufferingStatsdDataFactory;
 use Language;
 use MediaWiki\Hook\OutputPageBeforeHTMLHook;
 use MediaWiki\Http\HttpRequestFactory;
+use MediaWiki\Languages\LanguageFactory;
+use MediaWiki\Languages\LanguageNameUtils;
 use MediaWiki\User\UserOptionsLookup;
 use OutputPage;
 use Psr\Log\LoggerInterface;
@@ -109,6 +111,12 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 	/** @var LanguageFallbackChainFactory */
 	private $languageFallbackChainFactory;
 
+	/** @var LanguageFactory */
+	private $languageFactory;
+
+	/** @var LanguageNameUtils */
+	private $languageNameUtils;
+
 	/** @var UserOptionsLookup */
 	private $userOptionsLookup;
 
@@ -131,6 +139,8 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		OutputPageEntityViewChecker $entityViewChecker,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		UserOptionsLookup $userOptionsLookup,
+		LanguageFactory $languageFactory,
+		LanguageNameUtils $languageNameUtils,
 		LoggerInterface $logger = null
 	) {
 		$this->httpRequestFactory = $httpRequestFactory;
@@ -148,6 +158,8 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		$this->entityViewChecker = $entityViewChecker;
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 		$this->userOptionsLookup = $userOptionsLookup;
+		$this->languageFactory = $languageFactory;
+		$this->languageNameUtils = $languageNameUtils;
 		$this->logger = $logger ?: new NullLogger();
 	}
 
@@ -157,6 +169,8 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 	public static function factory(
 		Language $contentLanguage,
 		HttpRequestFactory $httpRequestFactory,
+		LanguageFactory $languageFactory,
+		LanguageNameUtils $languageNameUtils,
 		IBufferingStatsdDataFactory $statsdDataFactory,
 		UserOptionsLookup $userOptionsLookup,
 		EntityContentFactory $entityContentFactory,
@@ -195,6 +209,8 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 			$entityViewChecker,
 			$languageFallbackChainFactory,
 			$userOptionsLookup,
+			$languageFactory,
+			$languageNameUtils,
 			$logger
 		);
 	}
@@ -301,7 +317,10 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 			$user,
 			$entity,
 			$this->userPreferredTermsLanguages->getLanguages( $language->getCode(), $user ),
-			new MediaWikiLanguageDirectionalityLookup(),
+			new MediaWikiLanguageDirectionalityLookup(
+				$this->languageFactory,
+				$this->languageNameUtils
+			),
 			$this->languageNameLookup,
 			new MediaWikiLocalizedTextProvider( $language ),
 			$this->userOptionsLookup,

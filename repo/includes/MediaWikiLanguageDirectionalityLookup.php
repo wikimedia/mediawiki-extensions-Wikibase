@@ -2,7 +2,9 @@
 
 namespace Wikibase\Repo;
 
-use Language;
+use MediaWiki\Languages\LanguageFactory;
+use MediaWiki\Languages\LanguageNameUtils;
+use MediaWiki\MediaWikiServices;
 use Wikibase\View\LanguageDirectionalityLookup;
 
 /**
@@ -14,6 +16,18 @@ use Wikibase\View\LanguageDirectionalityLookup;
  */
 class MediaWikiLanguageDirectionalityLookup implements LanguageDirectionalityLookup {
 
+	private LanguageFactory $languageFactory;
+
+	private LanguageNameUtils $languageNameUtils;
+
+	public function __construct(
+		LanguageFactory $languageFactory = null,
+		LanguageNameUtils $languageNameUtils = null
+	) {
+		$this->languageFactory = $languageFactory ?? MediaWikiServices::getInstance()->getLanguageFactory();
+		$this->languageNameUtils = $languageNameUtils ?? MediaWikiServices::getInstance()->getLanguageNameUtils();
+	}
+
 	/**
 	 * @see LanguageDirectionalityLookup::getDirectionality
 	 *
@@ -22,12 +36,11 @@ class MediaWikiLanguageDirectionalityLookup implements LanguageDirectionalityLoo
 	 * @return string|null 'ltr', 'rtl' or null if unknown
 	 */
 	public function getDirectionality( $languageCode ) {
-		if ( Language::isValidCode( $languageCode ) ) {
-			$lang = Language::factory( $languageCode );
-		} else {
+		if ( !$this->languageNameUtils->isValidCode( $languageCode ) ) {
 			return null;
 		}
 
+		$lang = $this->languageFactory->getLanguage( $languageCode );
 		return $lang->getDir();
 	}
 
