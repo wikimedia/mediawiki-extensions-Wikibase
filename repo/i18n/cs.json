@@ -183,6 +183,7 @@
 	"wikibase-validator-illegal-entity-schema-title": "Hodnota musí začínat písmenem <code>E</code> a zbytek mohou být pouze číslice.",
 	"wikibase-validator-no-such-media": "Soubor „$1“ na [https://commons.wikimedia.org/ Wikimedia Commons] neexistuje.",
 	"wikibase-validator-no-such-sitelink": "Při editaci odznaku nebyl nalezen odkaz na článek „$1“.",
+	"wikibase-validator-no-mul-descriptions": "Jazykový kód „mul“ ($1) lze používat pouze pro štítky a aliasy, nikoli pro popisy.",
 	"wikibase-validator-page-not-exists": "Stránka „$1“ neexistuje.",
 	"wikibase-validator-not-a-language": "„$1“ není platný kód jazyka.",
 	"wikibase-item-reference-edit-placeholder": "Vložte ID položky, např. Q10",
