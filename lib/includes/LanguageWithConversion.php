@@ -91,7 +91,7 @@ class LanguageWithConversion {
 			$code = $wgDummyLanguageCodes[$code];
 		}
 
-		if ( !Language::isValidCode( $code )
+		if ( !MediaWikiServices::getInstance()->getLanguageNameUtils()->isValidCode( $code )
 			|| strcspn( $code, ":/\\\000" ) !== strlen( $code )
 		) {
 			throw new MWException( __METHOD__ . ': invalid language code ' . $code );
