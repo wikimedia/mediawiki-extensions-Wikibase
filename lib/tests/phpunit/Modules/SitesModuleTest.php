@@ -11,6 +11,7 @@ use MediaWiki\ResourceLoader\Context;
 use MediaWikiSite;
 use RawMessage;
 use Site;
+use Wikibase\Lib\LanguageNameLookupFactory;
 use Wikibase\Lib\Modules\SitesModule;
 use Wikibase\Lib\SettingsArray;
 
@@ -175,7 +176,8 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 			$clientSettings,
 			$repoSettings,
 			new HashSiteStore( [ $site1, $site2 ] ),
-			new HashBagOStuff()
+			new HashBagOStuff(),
+			new LanguageNameLookupFactory()
 		);
 
 		$script = $module->getScript( $this->getContext() );
@@ -242,7 +244,8 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 			] ),
 			null,
 			new HashSiteStore( $sites ),
-			new HashBagOStuff()
+			new HashBagOStuff(),
+			new LanguageNameLookupFactory()
 		);
 	}
 
@@ -255,7 +258,8 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 				] ),
 				null,
 				new HashSiteStore( $sites ),
-				$cache
+				$cache,
+				new LanguageNameLookupFactory()
 			] )
 			->onlyMethods( [ 'makeScript' ] )
 			->getMock();

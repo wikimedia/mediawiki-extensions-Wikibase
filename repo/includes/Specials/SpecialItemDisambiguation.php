@@ -74,16 +74,15 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	public static function factory(
 		array $entitySearchHelperCallbacks,
 		EntityTitleLookup $entityTitleLookup,
+		LanguageNameLookup $languageNameLookup,
 		ContentLanguages $termsLanguages
 	): self {
 		global $wgLang;
 
-		$languageCode = $wgLang->getCode();
-		$languageNameLookup = new LanguageNameLookup( $languageCode );
 		$itemDisambiguation = new ItemDisambiguation(
 			$entityTitleLookup,
 			$languageNameLookup,
-			$languageCode
+			$wgLang->getCode()
 		);
 		return new self(
 			$termsLanguages,

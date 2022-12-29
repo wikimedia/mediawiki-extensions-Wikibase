@@ -8,6 +8,7 @@ use Psr\Log\LoggerInterface;
 use Site;
 use SiteLookup;
 use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\LanguageNameLookupFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
@@ -95,6 +96,7 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 	public static function factory(
 		SiteLookup $siteLookup,
 		EntityTitleLookup $entityTitleLookup,
+		LanguageNameLookupFactory $languageNameLookupFactory,
 		LoggerInterface $logger,
 		SettingsArray $repoSettings,
 		Store $store
@@ -106,7 +108,7 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 
 		return new self(
 			$entityTitleLookup,
-			new LanguageNameLookup(),
+			$languageNameLookupFactory->getForAutonyms(),
 			$siteLookup,
 			// TODO move SiteLinkStore to service container and inject it directly
 			$store->newSiteLinkStore(),

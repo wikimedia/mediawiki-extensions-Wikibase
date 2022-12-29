@@ -2,6 +2,7 @@
 
 use MediaWiki\MediaWikiServices;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\Lib\LanguageNameLookupFactory;
 use Wikibase\Lib\Modules\RepoAccessModule;
 use Wikibase\Lib\Modules\SitesModule;
 use Wikibase\Lib\WikibaseSettings;
@@ -28,7 +29,8 @@ return call_user_func( function() {
 					WikibaseSettings::isClientEnabled() ? WikibaseClient::getSettings() : null,
 					WikibaseSettings::isRepoEnabled() ? WikibaseRepo::getSettings() : null,
 					MediaWikiServices::getInstance()->getSiteStore(),
-					MediaWikiServices::getInstance()->getLocalServerObjectCache()
+					MediaWikiServices::getInstance()->getLocalServerObjectCache(),
+					new LanguageNameLookupFactory()
 				);
 			},
 		],

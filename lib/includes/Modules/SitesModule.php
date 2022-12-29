@@ -13,7 +13,7 @@ use MediaWikiSite;
 use MessageLocalizer;
 use Site;
 use SiteLookup;
-use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\LanguageNameLookupFactory;
 use Wikibase\Lib\SettingsArray;
 
 /**
@@ -50,21 +50,29 @@ class SitesModule extends RL\Module {
 	private $cache;
 
 	/**
+	 * @var LanguageNameLookupFactory
+	 */
+	private $languageNameLookupFactory;
+
+	/**
 	 * @param SettingsArray|null $clientSettings The Client settings, if Client is enabled, else null.
 	 * @param SettingsArray|null $repoSettings The Repo settings, if Repo is enabled, else null.
 	 * @param SiteLookup $siteLookup
 	 * @param BagOStuff $cache
+	 * @param LanguageNameLookupFactory $languageNameLookupFactory
 	 */
 	public function __construct(
 		?SettingsArray $clientSettings,
 		?SettingsArray $repoSettings,
 		SiteLookup $siteLookup,
-		BagOStuff $cache
+		BagOStuff $cache,
+		LanguageNameLookupFactory $languageNameLookupFactory
 	) {
 		$this->clientSettings = $clientSettings ?: new SettingsArray();
 		$this->repoSettings = $repoSettings ?: new SettingsArray();
 		$this->siteLookup = $siteLookup;
 		$this->cache = $cache;
+		$this->languageNameLookupFactory = $languageNameLookupFactory;
 	}
 
 	/**
@@ -143,7 +151,7 @@ class SitesModule extends RL\Module {
 	 * @return string[]
 	 */
 	private function computeSiteDetails( MediaWikiSite $site, array $specialGroups, MessageLocalizer $localizer ): array {
-		$languageNameLookup = new LanguageNameLookup();
+		$languageNameLookup = $this->languageNameLookupFactory->getForAutonyms();
 
 		// FIXME: quickfix to allow a custom site-name / handling for the site groups which are
 		// special according to the specialSiteLinkGroups setting

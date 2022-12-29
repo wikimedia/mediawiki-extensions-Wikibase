@@ -40,4 +40,12 @@ class LanguageNameLookupFactoryTest extends \MediaWikiIntegrationTestCase {
 		$this->assertSame( 'Englisch', $languageNameLookup->getName( 'en' ) );
 	}
 
+	public function testForAutonyms(): void {
+		$languageNameLookupFactory = new LanguageNameLookupFactory();
+
+		$languageNameLookup = $languageNameLookupFactory->getForAutonyms();
+
+		$this->assertSame( 'English', $languageNameLookup->getName( 'en' ) );
+	}
+
 }

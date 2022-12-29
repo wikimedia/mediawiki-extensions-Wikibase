@@ -178,11 +178,12 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		EntityIdParser $entityIdParser,
 		EntityRevisionLookup $entityRevisionLookup,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
+		LanguageNameLookup $languageNameLookup,
 		LoggerInterface $logger,
 		SettingsArray $settings,
 		ContentLanguages $termsLanguages
 	): self {
-		global $wgLang, $wgCookiePrefix;
+		global $wgCookiePrefix;
 
 		$entityViewChecker = new OutputPageEntityViewChecker( $entityContentFactory );
 
@@ -192,7 +193,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 			$settings,
 			TemplateFactory::getDefaultInstance(),
 			$entityRevisionLookup,
-			new LanguageNameLookup( $wgLang->getCode() ),
+			$languageNameLookup,
 			new OutputPageEntityIdReader(
 				$entityViewChecker,
 				$entityIdParser

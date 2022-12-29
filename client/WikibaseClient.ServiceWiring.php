@@ -95,7 +95,7 @@ use Wikibase\Lib\Formatters\Reference\WellKnownReferenceProperties;
 use Wikibase\Lib\Formatters\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\LanguageFallbackChainFactory;
-use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\LanguageNameLookupFactory;
 use Wikibase\Lib\MediaWikiMessageInLanguageProvider;
 use Wikibase\Lib\MessageInLanguageProvider;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
@@ -301,6 +301,7 @@ return [
 		);
 		$termFallbackCache = WikibaseClient::getTermFallbackCache( $services );
 		$redirectResolvingLatestRevisionLookup = WikibaseClient::getRedirectResolvingLatestRevisionLookup( $services );
+		$languageNameLookupFactory = new LanguageNameLookupFactory();
 
 		return new WikibaseValueFormatterBuilders(
 			new FormatterLabelDescriptionLookupFactory(
@@ -308,7 +309,7 @@ return [
 				$termFallbackCache,
 				$redirectResolvingLatestRevisionLookup
 			),
-			new LanguageNameLookup( WikibaseClient::getUserLanguage( $services )->getCode() ),
+			$languageNameLookupFactory->getForLanguage( WikibaseClient::getUserLanguage( $services ) ),
 			WikibaseClient::getRepoItemUriParser( $services ),
 			$settings->getSetting( 'geoShapeStorageBaseUrl' ),
 			$settings->getSetting( 'tabularDataStorageBaseUrl' ),

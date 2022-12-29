@@ -365,6 +365,7 @@
 			"services": [
 				"SiteLookup",
 				"WikibaseRepo.EntityTitleLookup",
+				"WikibaseRepo.LanguageNameLookupFactory",
 				"WikibaseRepo.Logger",
 				"WikibaseRepo.Settings",
 				"WikibaseRepo.Store"
@@ -386,6 +387,7 @@
 			"services": [
 				"WikibaseRepo.EntitySearchHelperCallbacks",
 				"WikibaseRepo.EntityTitleLookup",
+				"WikibaseRepo.LanguageNameLookup",
 				"WikibaseRepo.TermsLanguages"
 			]
 		},
@@ -864,6 +866,7 @@
 				"WikibaseRepo.EntityIdParser",
 				"WikibaseRepo.EntityRevisionLookup",
 				"WikibaseRepo.LanguageFallbackChainFactory",
+				"WikibaseRepo.LanguageNameLookup",
 				"WikibaseRepo.Logger",
 				"WikibaseRepo.Settings",
 				"WikibaseRepo.TermsLanguages"

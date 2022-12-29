@@ -24,10 +24,10 @@ use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageFallbackIndicator;
-use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Search\ExtendedResult;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Handler to format entities in the search results
@@ -231,7 +231,9 @@ class ShowSearchHitHandler implements ShowSearchHitHook, ShowSearchHitTitleHook 
 		} catch ( InvalidArgumentException $e ) {
 			return $text;
 		}
-		$fallback = new LanguageFallbackIndicator( new LanguageNameLookup( $displayLanguage ) );
+		$fallback = new LanguageFallbackIndicator(
+			WikibaseRepo::getLanguageNameLookupFactory()->getForLanguageCode( $displayLanguage )
+		);
 		$markedText = HtmlArmor::getHtml( $text['value'] ) . $fallback->getHtml( $termFallback );
 		return [
 			'language' => $text['language'],
