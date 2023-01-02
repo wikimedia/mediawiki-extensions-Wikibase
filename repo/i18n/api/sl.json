@@ -5,6 +5,7 @@
 		]
 	},
 	"apihelp-wbavailablebadges-summary": "Razišče razpoložljive predmete značk.",
+	"apihelp-wbcreateredirect-param-from": "ID entitete za ustvaritev preusmeritve",
 	"apihelp-wbeditentity-description": "Ustvari eno novo entiteto Wikibase in jo spremeni s serializiranimi podatki.",
 	"apihelp-wbeditentity-summary": "Ustvari eno novo entiteto Wikibase in jo spremeni s serializiranimi podatki.",
 	"apihelp-wbeditentity-param-id": "Označevalec entitete, vključno s predpono.\nUporabite bodisi <var>id</var> ali <var>site</var> in <var>title</var> skupaj.",

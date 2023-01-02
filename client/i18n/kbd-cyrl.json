@@ -10,5 +10,8 @@
 	"wikibase-linkitem-title": "НапэкӀуэцӀым и епхыныгъэр",
 	"wikibase-linkitem-linkpage": "НапэкӀуэцӀым епхын",
 	"wikibase-linkitem-input-site": "Бзэр:",
-	"wikibase-linkitem-input-page": "НапэкӀуэцӀ:"
+	"wikibase-linkitem-input-page": "НапэкӀуэцӀ:",
+	"wikibase-rc-hide-wikidata-hide": "Ӏухын",
+	"wikibase-rc-hide-wikidata-show": "Къэгъэлъэгъуэн",
+	"wikibase-otherprojects": "НэгъуэщӀ проектхэм"
 }

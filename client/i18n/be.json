@@ -148,7 +148,7 @@
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "Правіць значэнне на {{grammar:genitive|{{WBREPONAME}}}}",
 	"wikibase-client-data-bridge-bailout-suggestion-edit-article": "У залежнасці ад шаблону, які выкарыстоўваецца, можа быць магчымым перазапісаць значэнне лакальна з дапамогай [$1 рэдактару артыкулаў]. Калі гэта магчыма, мы рэкамендуем вам замест гэтага дадаць значэнне ў {{WBREPONAME}} з дапамогай кнопкі вышэй.",
 	"wikibase-client-data-bridge-unsupported-datatype-error-head": "Праўка значэння $1 зараз не падтрымліваецца",
-	"wikibase-client-data-bridge-unsupported-datatype-error-body": "$1 мае тып дадзеных $2 на {{WBREPONAME}}. Праўка гэтага тыпу дадзеных зараз не падтрымліваецца.",
+	"wikibase-client-data-bridge-unsupported-datatype-error-body": "$1 мае тып даных $2 на {{WBREPONAME}}. Праўка гэтага тыпу даных зараз не падтрымліваецца.",
 	"wikibase-client-data-bridge-deprecated-statement-error-head": "Праўка значэння $1 зараз не падтрымліваецца",
 	"wikibase-client-data-bridge-deprecated-statement-error-body": "Значэнне $1 <em>састарэла</em> на {{WBREPONAME}}. Рэдагаванне <em>састарэлых</em> значэнняў зараз не падтрымліваецца.",
 	"wikibase-client-data-bridge-ambiguous-statement-error-head": "Праўка некалькіх значэнняў зараз не падтрымліваецца",
