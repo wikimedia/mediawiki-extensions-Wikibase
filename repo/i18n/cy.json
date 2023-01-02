@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Afalau",
 			"Cymrodor",
 			"Diafol",
 			"Ham II",
@@ -68,7 +69,7 @@
 	"wikibase-itembytitle-lookup-fieldset": "Chwilio am eitemau yn ôl gwefan a theitl",
 	"wikibase-itembytitle-lookup-site": "Wici:",
 	"wikibase-itembytitle-lookup-page": "Tudalen:",
-	"wikibase-itembytitle-submit": "Chwilier",
+	"wikibase-itembytitle-submit": "Chwilio",
 	"wikibase-itemdisambiguation-lookup-fieldset": "Chwilio am eitemau yn ôl iaith a label",
 	"wikibase-itemdisambiguation-lookup-language": "Côd iaith:",
 	"wikibase-itemdisambiguation-lookup-label": "Label:",
@@ -78,7 +79,7 @@
 	"wikibase-newitem-fieldset": "Gwneud eitem newydd",
 	"wikibase-newentity-label": "Label:",
 	"wikibase-newentity-description": "Disgrifiad:",
-	"wikibase-newentity-submit": "Gwneler",
+	"wikibase-newentity-submit": "Creu",
 	"special-setlabel": "Gosod label",
 	"wikibase-setlabel-label": "Label:",
 	"wikibase-setlabel-submit": "Gosoder y label",

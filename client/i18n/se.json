@@ -2,11 +2,12 @@
 	"@metadata": {
 		"authors": [
 			"Jon Harald Søby (WMNO)",
+			"Kimberli Mäkäräinen (WMNO)",
 			"Trondtr",
 			"Yupik"
 		]
 	},
-	"wikibase-editlinks": "Rivdat liŋkkaid",
+	"wikibase-editlinks": "Rievdat liŋkkaid",
 	"wikibase-linkitem-addlinks": "Lasit liŋkkaid",
 	"wikibase-linkitem-title": "Lasit liŋkka siidui",
 	"wikibase-linkitem-linkpage": "Lasit liŋkka siidui",

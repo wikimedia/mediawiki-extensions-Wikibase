@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Brettchenweber",
 			"Inkowik",
 			"Metalhead64",
 			"Tiin"
@@ -30,14 +31,14 @@
 	"apihelp-query+wblistentityusage-param-limit": "Wie viele Objektverwendungen zurückgegeben werden sollen.",
 	"apihelp-query+wblistentityusage-example-simple": "Ruft Seiten ab, die das Objekt <kbd>Q2</kbd> verwenden.",
 	"apihelp-query+wblistentityusage-example-url": "Ruft Seiten ab, die das Objekt <kbd>Q2</kbd> verwenden, inklusive der URL.",
-	"apihelp-query+wblistentityusage-example-aspect": "Ruft Seiten ab, die das Objekt <kbd>Q2</kbd> verwenden und der Aspekt war Websitelink oder Aussage.",
+	"apihelp-query+wblistentityusage-example-aspect": "Ruft Seiten ab, die das Objekt <kbd>Q2</kbd> verwenden, und der Aspekt war Websitelink oder Aussage.",
 	"apihelp-query+pageterms-description": "Ruft die {{WBREPONAME}}-Begriffe ab (typischerweise Bezeichnungen, Beschreibungen und Aliasse), die mit einer Seite über einen Websitelink verknüpft sind.",
 	"apihelp-query+pageterms-summary": "Ruft die {{WBREPONAME}}-Begriffe ab (typischerweise Bezeichnungen, Beschreibungen und Aliasse), die mit einer Seite über einen Link verknüpft sind.",
 	"apihelp-query+pageterms-example-simple": "Ruft alle Begriffe im Zusammenhang mit der Seite „London“ in der Benutzersprache ab.",
 	"apihelp-query+pageterms-example-label-en": "Ruft Bezeichnungen und Aliasse im Zusammenhang mit der Seite „London“ in Englisch ab.",
 	"apihelp-query+pageterms-param-language": "Der Sprachcode, in dem Begriffe abgerufen werden sollen. Wenn nicht angegeben, wird die Benutzersprache verwendet.",
 	"apihelp-query+pageterms-param-terms": "Die Arten der Begriffe, die abgerufen werden sollen, z.&nbsp;B. „Beschreibung“, jede wird als eine Anordnung von Zeichenfolgen zurückgegeben, die nach ihrem Typ kodiert sind, z.&nbsp;B. {\"Beschreibung\": [\"foo\"]}. Falls nicht angegeben, werden alle Typen zurückgegeben.",
-	"apihelp-query+description-summary": "Ruft eine Kurzbeschreibung a.k.a. einen Untertitel ab, der erklärt, über was die Zielseite handelt.",
+	"apihelp-query+description-summary": "Ruft eine Kurzbeschreibung a.k.a. einen Untertitel ab, der erklärt, wovon die Zielseite handelt.",
 	"apihelp-query+description-extended-description": "Die Beschreibung ist einfacher Text, auf einer einzigen Zeile, aber ansonsten beliebig (möglicherweise einschließlich roher HTML-Tags, die ebenfalls als einfacher Text interpretiert werden sollten). Sie darf in HTML nicht unmaskiert verwendet werden!",
 	"apihelp-query+description-param-prefersource": "Welche Beschreibungsquelle bevorzugt werden soll, falls vorhanden:",
 	"apihelp-query+description-paramvalue-prefersource-local": "Lokale Beschreibungen über die Parserfunktion <code><nowiki>{{SHORTDESC:…}}</nowiki></code> im Wikitext der Seite.",

@@ -57,5 +57,11 @@
 	"wikibase-client-data-bridge-references-heading": "Cyfeiriadau",
 	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Rydych chi heb fewngofnodi",
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "Mewngofnodi neu Cofrestru",
-	"wikibase-client-data-bridge-license-heading": "Defnydd a thrwydded"
+	"wikibase-client-data-bridge-license-heading": "Defnydd a thrwydded",
+	"wikibase-client-data-bridge-thank-you-head": "Diolch am eich golygiad!",
+	"wikibase-client-data-bridge-saving-error-assertuser-heading": "Rydych chi heb fewngofnodi",
+	"wikibase-client-data-bridge-saving-error-assertuser-publish": "Cyhoeddi heb fewngofnodi",
+	"wikibase-client-data-bridge-saving-error-assertuser-save": "Cadw heb fewngofnodi",
+	"wikibase-client-data-bridge-saving-error-assertuser-login": "Mewngofnodi (Mewn tab newydd)",
+	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Parhau i olygu"
 }
