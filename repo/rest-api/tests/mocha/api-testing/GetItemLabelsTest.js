@@ -1,11 +1,13 @@
 'use strict';
 
-const { createEntity, getLatestEditMetadata } = require( '../helpers/entityHelper' );
+const { createEntity, getLatestEditMetadata, createRedirectForItem } = require( '../helpers/entityHelper' );
 const { newGetItemLabelsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { assert } = require( 'api-testing' );
 
 describe( 'GET /entities/items/{id}/labels', () => {
-	it( 'can get the labels of an item', async () => {
+	let itemId;
+
+	before( async () => {
 		const createItemResponse = await createEntity( 'item', {
 			labels: {
 				en: {
@@ -15,7 +17,10 @@ describe( 'GET /entities/items/{id}/labels', () => {
 			}
 		} );
 
-		const itemId = createItemResponse.entity.id;
+		itemId = createItemResponse.entity.id;
+	} );
+
+	it( 'can get the labels of an item', async () => {
 		const testItemCreationMetadata = await getLatestEditMetadata( itemId );
 
 		const response = await newGetItemLabelsRequestBuilder( itemId ).makeRequest();
@@ -34,5 +39,21 @@ describe( 'GET /entities/items/{id}/labels', () => {
 		assert.header( response, 'Content-Language', 'en' );
 		assert.strictEqual( response.body.code, 'item-not-found' );
 		assert.include( response.body.message, nonExistentItem );
+	} );
+
+	it( '308 - item redirected', async () => {
+		const redirectTarget = itemId;
+		const redirectSource = await createRedirectForItem( redirectTarget );
+
+		const response = await newGetItemLabelsRequestBuilder( redirectSource )
+			.assertValidRequest()
+			.makeRequest();
+
+		assert.equal( response.status, 308 );
+
+		assert.isTrue(
+			new URL( response.headers.location ).pathname
+				.endsWith( `rest.php/wikibase/v0/entities/items/${redirectTarget}/labels` )
+		);
 	} );
 } );
