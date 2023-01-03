@@ -159,7 +159,7 @@ final class RepoHooks {
 			// XXX: we should probably not just ignore $entityTypes that don't match $contentModelIds.
 			if ( !isset( $wgNamespaceContentModels[$namespace] )
 				&& isset( $contentModelIds[$entityType] )
-				&& $namespaceLookup->getEntitySlotRole( $entityType ) === 'main'
+				&& $namespaceLookup->getEntitySlotRole( $entityType ) === SlotRecord::MAIN
 			) {
 				$wgNamespaceContentModels[$namespace] = $contentModelIds[$entityType];
 			}
@@ -833,7 +833,7 @@ final class RepoHooks {
 		// to add another content type there. We want to actually check per slot type here.
 		// This should be fixed with https://gerrit.wikimedia.org/r/#/c/mediawiki/core/+/434544/
 		$expectedSlot = $namespaceLookup->getEntitySlotRole( $expectedEntityType );
-		if ( $expectedSlot !== 'main' ) {
+		if ( $expectedSlot !== SlotRecord::MAIN ) {
 			return true;
 		}
 

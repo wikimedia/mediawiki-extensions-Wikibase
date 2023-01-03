@@ -8,6 +8,7 @@ use MediaWiki\Page\WikiPageFactory;
 use MediaWiki\Permissions\PermissionManager;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\RevisionStore;
+use MediaWiki\Revision\SlotRecord;
 use MediaWiki\User\ActorNormalization;
 use MediaWiki\Watchlist\WatchlistManager;
 use MWException;
@@ -457,7 +458,7 @@ class WikiPageEntityStore implements EntityStore {
 		 * If we are interacting with the main slot, keep the NEW flag.
 		 * This is consistent with previous behaviour.
 		 */
-		if ( $flags & EDIT_NEW && $parentRevision && $slotRole !== 'main' ) {
+		if ( $flags & EDIT_NEW && $parentRevision && $slotRole !== SlotRecord::MAIN ) {
 			if ( $parentRevision->hasSlot( $slotRole ) ) {
 				throw new StorageException( 'Can\'t create slot, it already exists: ' . $slotRole );
 			}

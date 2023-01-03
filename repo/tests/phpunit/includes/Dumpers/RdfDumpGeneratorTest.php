@@ -6,6 +6,7 @@ namespace Wikibase\Repo\Tests\Dumpers;
 
 use HashSiteStore;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Revision\SlotRecord;
 use MediaWikiIntegrationTestCase;
 use MWException;
 use Site;
@@ -306,8 +307,8 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 						'test',
 						'testdb',
 						[
-							'item' => [ 'namespaceId' => 10000, 'slot' => 'main' ],
-							'property' => [ 'namespaceId' => 30000, 'slot' => 'main' ],
+							'item' => [ 'namespaceId' => 10000, 'slot' => SlotRecord::MAIN ],
+							'property' => [ 'namespaceId' => 30000, 'slot' => SlotRecord::MAIN ],
 						],
 						self::URI_BASE,
 						'wd',

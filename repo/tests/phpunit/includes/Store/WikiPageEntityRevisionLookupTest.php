@@ -80,8 +80,8 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 				'test',
 				false,
 				[
-					'item' => [ 'namespaceId' => 1200, 'slot' => 'main' ],
-					'property' => [ 'namespaceId' => 1210, 'slot' => 'main' ],
+					'item' => [ 'namespaceId' => 1200, 'slot' => SlotRecord::MAIN ],
+					'property' => [ 'namespaceId' => 1210, 'slot' => SlotRecord::MAIN ],
 				],
 				'',
 				'',

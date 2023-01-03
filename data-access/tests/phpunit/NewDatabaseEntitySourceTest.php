@@ -3,6 +3,7 @@ declare( strict_types=1 );
 
 namespace Wikibase\DataAccess\Tests;
 
+use MediaWiki\Revision\SlotRecord;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\DatabaseEntitySource;
 
@@ -48,7 +49,7 @@ class NewDatabaseEntitySourceTest extends TestCase {
 	public function testWithEntityNamespaceIdsAndSlots(): void {
 		$source = NewDatabaseEntitySource::create()
 			->withEntityNamespaceIdsAndSlots( [
-				'item' => [ 'namespaceId' => 100, 'slot' => 'main', ],
+				'item' => [ 'namespaceId' => 100, 'slot' => SlotRecord::MAIN, ],
 			] )
 			->build();
 
@@ -61,7 +62,7 @@ class NewDatabaseEntitySourceTest extends TestCase {
 			$source->getEntityNamespaceIds()
 		);
 		$this->assertEquals(
-			[ 'item' => 'main' ],
+			[ 'item' => SlotRecord::MAIN ],
 			$source->getEntitySlotNames()
 		);
 	}

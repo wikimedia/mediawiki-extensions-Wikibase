@@ -3,6 +3,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
+use MediaWiki\Revision\SlotRecord;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\Lib\Store\PropertyTermStoreWriterAdapter;
 use Wikibase\Lib\Store\Sql\Terms\TermStoreWriterFactory;
@@ -26,7 +27,7 @@ class PropertyTermStoreWriterTest extends ServiceWiringTestCase {
 				false,
 				[ $type => [
 					'namespaceId' => 21,
-					'slot' => 'main'
+					'slot' => SlotRecord::MAIN
 				] ],
 				'',
 				'',

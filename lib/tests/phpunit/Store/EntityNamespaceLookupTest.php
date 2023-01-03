@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Store;
 
+use MediaWiki\Revision\SlotRecord;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 
 /**
@@ -55,7 +56,7 @@ class EntityNamespaceLookupTest extends \PHPUnit\Framework\TestCase {
 	public function testGetEntitySlotRole() {
 		$lookup = $this->newInstance();
 
-		$this->assertSame( 'main', $lookup->getEntitySlotRole( 'item' ), 'found' );
+		$this->assertSame( SlotRecord::MAIN, $lookup->getEntitySlotRole( 'item' ), 'found' );
 		$this->assertSame( 'mediainfo', $lookup->getEntitySlotRole( 'mediainfo' ), 'found' );
 	}
 

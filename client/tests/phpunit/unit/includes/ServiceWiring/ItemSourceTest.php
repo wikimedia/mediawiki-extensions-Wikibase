@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
 use LogicException;
+use MediaWiki\Revision\SlotRecord;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
@@ -28,7 +29,7 @@ class ItemSourceTest extends ServiceWiringTestCase {
 					false,
 					array_fill_keys(
 						$entityTypeNames,
-						[ 'namespaceId' => 42, 'slot' => 'main' ]
+						[ 'namespaceId' => 42, 'slot' => SlotRecord::MAIN ]
 					),
 					'',
 					'',

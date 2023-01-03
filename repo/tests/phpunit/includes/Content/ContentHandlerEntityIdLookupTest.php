@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Content;
 
+use MediaWiki\Revision\SlotRecord;
 use MediaWikiIntegrationTestCase;
 use Title;
 use Wikibase\DataAccess\DatabaseEntitySource;
@@ -29,7 +30,7 @@ class ContentHandlerEntityIdLookupTest extends MediaWikiIntegrationTestCase {
 		return new DatabaseEntitySource(
 			'itemwiki',
 			'itemdb',
-			[ 'item' => [ 'namespaceId' => 5000, 'slot' => 'main' ] ],
+			[ 'item' => [ 'namespaceId' => 5000, 'slot' => SlotRecord::MAIN ] ],
 			'',
 			'',
 			'',
@@ -42,7 +43,7 @@ class ContentHandlerEntityIdLookupTest extends MediaWikiIntegrationTestCase {
 		$propertySource = new DatabaseEntitySource(
 			'propertywiki',
 			'propertydb',
-			[ 'property' => [ 'namespaceId' => 6000, 'slot' => 'main' ] ],
+			[ 'property' => [ 'namespaceId' => 6000, 'slot' => SlotRecord::MAIN ] ],
 			'',
 			'p',
 			'p',

@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Api;
 
 use ApiMain;
 use FauxRequest;
+use MediaWiki\Revision\SlotRecord;
 use RequestContext;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
@@ -113,7 +114,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			new DatabaseEntitySource(
 				'items',
 				false,
-				[ 'item' => [ 'namespaceId' => 10000, 'slot' => 'main' ] ],
+				[ 'item' => [ 'namespaceId' => 10000, 'slot' => SlotRecord::MAIN ] ],
 				'http://items.wiki/concept/',
 				'',
 				'',
@@ -122,7 +123,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			new DatabaseEntitySource(
 				'props',
 				'otherdb',
-				[ 'property' => [ 'namespaceId' => 50000, 'slot' => 'main' ] ],
+				[ 'property' => [ 'namespaceId' => 50000, 'slot' => SlotRecord::MAIN ] ],
 				'http://property.wiki/concept/',
 				'o',
 				'o',
@@ -430,7 +431,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 				new DatabaseEntitySource(
 					'test',
 					'kittendb',
-					[ 'kitten' => [ 'namespaceId' => 1234, 'slot' => 'main' ] ],
+					[ 'kitten' => [ 'namespaceId' => 1234, 'slot' => SlotRecord::MAIN ] ],
 					'http://acme.test/concept/',
 					'',
 					'',

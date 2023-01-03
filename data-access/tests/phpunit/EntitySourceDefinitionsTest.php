@@ -3,6 +3,7 @@
 namespace Wikibase\DataAccess\Tests;
 
 use InvalidArgumentException;
+use MediaWiki\Revision\SlotRecord;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\ApiEntitySource;
 use Wikibase\DataAccess\DatabaseEntitySource;
@@ -29,7 +30,7 @@ class EntitySourceDefinitionsTest extends TestCase {
 		$itemSourceTwo = new DatabaseEntitySource(
 			'dupe test',
 			'foodb',
-			[ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ],
+			[ 'item' => [ 'namespaceId' => 100, 'slot' => SlotRecord::MAIN ] ],
 			'',
 			'',
 			'',
@@ -43,7 +44,7 @@ class EntitySourceDefinitionsTest extends TestCase {
 	public function testTwoSourcesWithSameName_constructorThrowsException() {
 		$sourceOne = new DatabaseEntitySource(
 			'same name',
-			'aaa', [ 'entityOne' => [ 'namespaceId' => 100, 'slot' => 'main' ] ],
+			'aaa', [ 'entityOne' => [ 'namespaceId' => 100, 'slot' => SlotRecord::MAIN ] ],
 			'',
 			'',
 			'',
@@ -173,7 +174,7 @@ class EntitySourceDefinitionsTest extends TestCase {
 		return new DatabaseEntitySource(
 			'items',
 			false,
-			[ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ],
+			[ 'item' => [ 'namespaceId' => 100, 'slot' => SlotRecord::MAIN ] ],
 			'itemsource:',
 			'it',
 			'',
@@ -185,7 +186,7 @@ class EntitySourceDefinitionsTest extends TestCase {
 		return new DatabaseEntitySource(
 			'properties',
 			false,
-			[ 'property' => [ 'namespaceId' => 200, 'slot' => 'main' ] ],
+			[ 'property' => [ 'namespaceId' => 200, 'slot' => SlotRecord::MAIN ] ],
 			'propertysource:',
 			'pro',
 			'pro',

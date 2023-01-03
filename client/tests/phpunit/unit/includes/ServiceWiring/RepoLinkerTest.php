@@ -3,6 +3,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
+use MediaWiki\Revision\SlotRecord;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\DataAccess\DatabaseEntitySource;
@@ -32,7 +33,7 @@ class RepoLinkerTest extends ServiceWiringTestCase {
 				[ new DatabaseEntitySource(
 					'item',
 					'itemdb',
-					[ 'item' => [ 'namespaceId' => 0, 'slot' => 'main' ] ],
+					[ 'item' => [ 'namespaceId' => 0, 'slot' => SlotRecord::MAIN ] ],
 					'https://item.test/entity/',
 					'',
 					'',

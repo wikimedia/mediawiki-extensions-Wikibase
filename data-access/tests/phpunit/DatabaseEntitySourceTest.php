@@ -3,6 +3,7 @@
 namespace Wikibase\DataAccess\Tests;
 
 use InvalidArgumentException;
+use MediaWiki\Revision\SlotRecord;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikimedia\AtEase\AtEase;
@@ -46,7 +47,7 @@ class DatabaseEntitySourceTest extends TestCase {
 		$validSourceName = 'testsource';
 		$validDatabaseName = 'somedb';
 		$validEntityData = [
-			'item' => [ 'namespaceId' => 100, 'slot' => 'main' ],
+			'item' => [ 'namespaceId' => 100, 'slot' => SlotRecord::MAIN ],
 			'property' => [ 'namespaceId' => 666, 'slot' => 'otherslot' ]
 		];
 		$validRdfNodeNamespacePrefix = 'wd';
@@ -84,7 +85,7 @@ class DatabaseEntitySourceTest extends TestCase {
 		yield 'entity type not a string' => [
 			$validSourceName,
 			$validDatabaseName,
-			[ 1 => [ 'namespaceId' => 'foo', 'slot' => 'main' ] ],
+			[ 1 => [ 'namespaceId' => 'foo', 'slot' => SlotRecord::MAIN ] ],
 			$validConceptBaseUri,
 			$validRdfNodeNamespacePrefix,
 			$validRdfPredicateNamespacePrefix,
@@ -102,7 +103,7 @@ class DatabaseEntitySourceTest extends TestCase {
 		yield 'entity namespace ID not defined' => [
 			$validSourceName,
 			$validDatabaseName,
-			[ 'item' => [ 'slot' => 'main' ] ],
+			[ 'item' => [ 'slot' => SlotRecord::MAIN ] ],
 			$validConceptBaseUri,
 			$validRdfNodeNamespacePrefix,
 			$validRdfPredicateNamespacePrefix,
@@ -111,7 +112,7 @@ class DatabaseEntitySourceTest extends TestCase {
 		yield 'entity slot name not defined' => [
 			$validSourceName,
 			$validDatabaseName,
-			[ 'item' => [ 'slot' => 'main' ] ],
+			[ 'item' => [ 'slot' => SlotRecord::MAIN ] ],
 			$validConceptBaseUri,
 			$validRdfNodeNamespacePrefix,
 			$validRdfPredicateNamespacePrefix,
@@ -120,7 +121,7 @@ class DatabaseEntitySourceTest extends TestCase {
 		yield 'entity namespace ID not an int' => [
 			$validSourceName,
 			$validDatabaseName,
-			[ 'item' => [ 'namespaceId' => 'foo', 'slot' => 'main' ] ],
+			[ 'item' => [ 'namespaceId' => 'foo', 'slot' => SlotRecord::MAIN ] ],
 			$validConceptBaseUri,
 			$validRdfNodeNamespacePrefix,
 			$validRdfPredicateNamespacePrefix,
@@ -177,7 +178,10 @@ class DatabaseEntitySourceTest extends TestCase {
 		$source = new DatabaseEntitySource(
 			'test',
 			'foodb',
-			[ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ], 'property' => [ 'namespaceId' => 200, 'slot' => 'main' ] ],
+			[
+				'item' => [ 'namespaceId' => 100, 'slot' => SlotRecord::MAIN ],
+				'property' => [ 'namespaceId' => 200, 'slot' => SlotRecord::MAIN ]
+			],
 			'concept:',
 			'wd',
 			'',
@@ -191,7 +195,10 @@ class DatabaseEntitySourceTest extends TestCase {
 		$source = new DatabaseEntitySource(
 			'test',
 			'foodb',
-			[ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ], 'property' => [ 'namespaceId' => 200, 'slot' => 'main' ] ],
+			[
+				'item' => [ 'namespaceId' => 100, 'slot' => SlotRecord::MAIN ],
+				'property' => [ 'namespaceId' => 200, 'slot' => SlotRecord::MAIN ]
+			],
 			'concept:',
 			'wd',
 			'',
@@ -205,21 +212,21 @@ class DatabaseEntitySourceTest extends TestCase {
 		$source = new DatabaseEntitySource(
 			'test',
 			'foodb',
-			[ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ], 'property' => [ 'namespaceId' => 200, 'slot' => 'other' ] ],
+			[ 'item' => [ 'namespaceId' => 100, 'slot' => SlotRecord::MAIN ], 'property' => [ 'namespaceId' => 200, 'slot' => 'other' ] ],
 			'concept:',
 			'wd',
 			'',
 			'testwiki'
 		);
 
-		$this->assertEquals( [ 'item' => 'main', 'property' => 'other' ], $source->getEntitySlotNames() );
+		$this->assertEquals( [ 'item' => SlotRecord::MAIN, 'property' => 'other' ], $source->getEntitySlotNames() );
 	}
 
 	public function testGetType() {
 		$source = new DatabaseEntitySource(
 			'test',
 			'foodb',
-			[ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ], 'property' => [ 'namespaceId' => 200, 'slot' => 'other' ] ],
+			[ 'item' => [ 'namespaceId' => 100, 'slot' => SlotRecord::MAIN ], 'property' => [ 'namespaceId' => 200, 'slot' => 'other' ] ],
 			'concept:',
 			'wd',
 			'',

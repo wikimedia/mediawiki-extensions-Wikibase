@@ -6,6 +6,7 @@ namespace Wikibase\Repo\Tests\LinkedData;
 
 use DataValues\Serializers\DataValueSerializer;
 use HashSiteStore;
+use MediaWiki\Revision\SlotRecord;
 use MediaWikiIntegrationTestCase;
 use Title;
 use Wikibase\DataAccess\DatabaseEntitySource;
@@ -122,7 +123,7 @@ class EntityDataSerializationServiceTest extends MediaWikiIntegrationTestCase {
 					new DatabaseEntitySource(
 						'items',
 						'itemdb',
-						[ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ],
+						[ 'item' => [ 'namespaceId' => 100, 'slot' => SlotRecord::MAIN ] ],
 						self::URI_BASE,
 						'wd',
 						'',
@@ -131,7 +132,7 @@ class EntityDataSerializationServiceTest extends MediaWikiIntegrationTestCase {
 					new DatabaseEntitySource(
 						'props',
 						'propdb',
-						[ 'property' => [ 'namespaceId' => 600, 'slot' => 'main' ] ],
+						[ 'property' => [ 'namespaceId' => 600, 'slot' => SlotRecord::MAIN ] ],
 						self::URI_BASE_PROPS,
 						'pro',
 						'pro',

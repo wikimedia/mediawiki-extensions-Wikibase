@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
+use MediaWiki\Revision\SlotRecord;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
@@ -26,7 +27,7 @@ class ItemAndPropertySourceTest extends ServiceWiringTestCase {
 					new DatabaseEntitySource(
 						'someSourceName',
 						'repodb',
-						[ 'item' => [ 'namespaceId' => 123, 'slot' => 'main' ] ],
+						[ 'item' => [ 'namespaceId' => 123, 'slot' => SlotRecord::MAIN ] ],
 						'',
 						'',
 						'',
@@ -35,7 +36,7 @@ class ItemAndPropertySourceTest extends ServiceWiringTestCase {
 					new DatabaseEntitySource(
 						'someOtherSourceName',
 						'otherdb',
-						[ 'property' => [ 'namespaceId' => 321, 'slot' => 'main' ] ],
+						[ 'property' => [ 'namespaceId' => 321, 'slot' => SlotRecord::MAIN ] ],
 						'',
 						'',
 						'',

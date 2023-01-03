@@ -3,6 +3,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
+use MediaWiki\Revision\SlotRecord;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
@@ -42,16 +43,16 @@ class EntityNamespaceLookupTest extends ServiceWiringTestCase {
 			$this->getEntitySources( [
 				'something' => [
 					'namespaceId' => 666,
-					'slot' => 'main'
+					'slot' => SlotRecord::MAIN
 				],
 				'another' => [
 					'namespaceId' => 777,
-					'slot' => 'main'
+					'slot' => SlotRecord::MAIN
 				]
 			], [
 				'different-thing' => [
 					'namespaceId' => 42,
-					'slot' => 'main'
+					'slot' => SlotRecord::MAIN
 				]
 			] )
 		);

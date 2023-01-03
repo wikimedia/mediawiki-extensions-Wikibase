@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Store\Sql;
 
+use MediaWiki\Revision\SlotRecord;
 use MediaWiki\Storage\NameTableAccessException;
 use MediaWiki\Storage\NameTableStore;
 use stdClass;
@@ -100,7 +101,7 @@ abstract class PageTableEntityQueryBase implements PageTableEntityQuery {
 			 * This ensures comparability with the pre MCR schema as long as only the
 			 * main slot is used.
 			 */
-			if ( $slotRole !== 'main' ) {
+			if ( $slotRole !== SlotRecord::MAIN ) {
 				try {
 					$slotRoleId = $this->slotRoleStore->getId( $slotRole );
 				} catch ( NameTableAccessException $e ) {

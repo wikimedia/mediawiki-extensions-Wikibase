@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
+use MediaWiki\Revision\SlotRecord;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceLookup;
@@ -31,8 +32,8 @@ class ConceptUriSearchHelperTest extends \PHPUnit\Framework\TestCase {
 				$sourceName,
 				false,
 				[
-					'item' => [ 'namespaceId' => 100, 'slot' => 'main' ],
-					'property' => [ 'namespaceId' => 200, 'slot' => 'main' ],
+					'item' => [ 'namespaceId' => 100, 'slot' => SlotRecord::MAIN ],
+					'property' => [ 'namespaceId' => 200, 'slot' => SlotRecord::MAIN ],
 				],
 				'myConceptUriBase-',
 				'',

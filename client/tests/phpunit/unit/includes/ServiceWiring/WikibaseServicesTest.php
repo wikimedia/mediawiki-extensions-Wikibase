@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
 use DataValues\Deserializers\DataValueDeserializer;
+use MediaWiki\Revision\SlotRecord;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\DatabaseEntitySource;
@@ -30,7 +31,7 @@ class WikibaseServicesTest extends ServiceWiringTestCase {
 				[ new DatabaseEntitySource(
 					'item',
 					'itemdb',
-					[ 'item' => [ 'namespaceId' => 0, 'slot' => 'main' ] ],
+					[ 'item' => [ 'namespaceId' => 0, 'slot' => SlotRecord::MAIN ] ],
 					'https://item.test/entity/',
 					'',
 					'',

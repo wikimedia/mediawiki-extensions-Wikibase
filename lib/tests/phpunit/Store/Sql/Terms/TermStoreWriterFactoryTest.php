@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
 use JobQueueGroup;
 use LogicException;
+use MediaWiki\Revision\SlotRecord;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use WANObjectCache;
@@ -71,7 +72,7 @@ class TermStoreWriterFactoryTest extends TestCase {
 	private function getEntitySourceWithTypes( array $types ) {
 		$entityTypeData = [];
 		foreach ( $types as $typeName ) {
-			$entityTypeData[$typeName] = [ 'namespaceId' => 1, 'slot' => 'main' ];
+			$entityTypeData[$typeName] = [ 'namespaceId' => 1, 'slot' => SlotRecord::MAIN ];
 		}
 		return new DatabaseEntitySource( 'empty', false, $entityTypeData, '', '', '', '' );
 	}

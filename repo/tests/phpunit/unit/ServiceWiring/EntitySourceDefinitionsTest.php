@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
+use MediaWiki\Revision\SlotRecord;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\SettingsArray;
@@ -58,7 +59,7 @@ class EntitySourceDefinitionsTest extends ServiceWiringTestCase {
 			$this->assertSame( 'wd', $itemSource->getRdfNodeNamespacePrefix() );
 			$this->assertSame( 'localwiki', $itemSource->getInterwikiPrefix() );
 			$this->assertSame( [ 'item' => 100, 'property' => 200 ], $itemSource->getEntityNamespaceIds() );
-			$this->assertSame( [ 'item' => 'main', 'property' => 'main' ], $itemSource->getEntitySlotNames() );
+			$this->assertSame( [ 'item' => SlotRecord::MAIN, 'property' => SlotRecord::MAIN ], $itemSource->getEntitySlotNames() );
 			$this->assertSame( [ 'item', 'property' ], $itemSource->getEntityTypes() );
 		}
 	}
@@ -101,8 +102,8 @@ class EntitySourceDefinitionsTest extends ServiceWiringTestCase {
 			$this->assertSame( $propertyNamespaceId, $itemSource->getEntityNamespaceIds()['property'] );
 			$this->assertArrayHasKey( 'item', $itemSource->getEntitySlotNames() );
 			$this->assertArrayHasKey( 'property', $itemSource->getEntitySlotNames() );
-			$this->assertSame( 'main', $itemSource->getEntitySlotNames()['item'] );
-			$this->assertSame( 'main', $itemSource->getEntitySlotNames()['property'] );
+			$this->assertSame( SlotRecord::MAIN, $itemSource->getEntitySlotNames()['item'] );
+			$this->assertSame( SlotRecord::MAIN, $itemSource->getEntitySlotNames()['property'] );
 			$this->assertSame( [ 'item', 'property' ], $itemSource->getEntityTypes() );
 
 			$propertySource = $sourceDefinitions->getApiSourceForEntityType( Property::ENTITY_TYPE );

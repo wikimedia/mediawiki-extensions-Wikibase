@@ -3,6 +3,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
+use MediaWiki\Revision\SlotRecord;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
@@ -29,7 +30,7 @@ class LocalEntityNamespaceLookupTest extends ServiceWiringTestCase {
 				array_map( function ( $nsId ) {
 					return [
 						'namespaceId' => $nsId,
-						'slot' => 'main'
+						'slot' => SlotRecord::MAIN
 					];
 				}, $nsIds ),
 				'http://www.example.com/entity',

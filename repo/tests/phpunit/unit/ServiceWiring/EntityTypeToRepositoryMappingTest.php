@@ -3,6 +3,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
+use MediaWiki\Revision\SlotRecord;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\Lib\SubEntityTypesMapper;
@@ -55,7 +56,7 @@ class EntityTypeToRepositoryMappingTest extends ServiceWiringTestCase {
 					false,
 					array_fill_keys( $types, [
 						'namespaceId' => 0,
-						'slot' => 'main'
+						'slot' => SlotRecord::MAIN
 					] ),
 					'',
 					'',

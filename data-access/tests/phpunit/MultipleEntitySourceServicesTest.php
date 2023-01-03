@@ -3,6 +3,7 @@
 namespace Wikibase\DataAccess\Tests;
 
 use LogicException;
+use MediaWiki\Revision\SlotRecord;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\ApiEntitySource;
 use Wikibase\DataAccess\DatabaseEntitySource;
@@ -98,7 +99,7 @@ class MultipleEntitySourceServicesTest extends TestCase {
 				new DatabaseEntitySource(
 					'items',
 					'itemdb',
-					[ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ],
+					[ 'item' => [ 'namespaceId' => 100, 'slot' => SlotRecord::MAIN ] ],
 					'',
 					'',
 					'',
@@ -137,7 +138,7 @@ class MultipleEntitySourceServicesTest extends TestCase {
 				new DatabaseEntitySource(
 					'items',
 					'itemdb',
-					[ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ],
+					[ 'item' => [ 'namespaceId' => 100, 'slot' => SlotRecord::MAIN ] ],
 					'',
 					'',
 					'',
@@ -210,7 +211,7 @@ class MultipleEntitySourceServicesTest extends TestCase {
 				new DatabaseEntitySource(
 					'items',
 					'itemdb',
-					[ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ],
+					[ 'item' => [ 'namespaceId' => 100, 'slot' => SlotRecord::MAIN ] ],
 					'',
 					'',
 					'',
@@ -219,7 +220,7 @@ class MultipleEntitySourceServicesTest extends TestCase {
 				new DatabaseEntitySource(
 					'props',
 					'propb',
-					[ 'property' => [ 'namespaceId' => 200, 'slot' => 'main' ] ],
+					[ 'property' => [ 'namespaceId' => 200, 'slot' => SlotRecord::MAIN ] ],
 					'',
 					'prop',
 					'prop',

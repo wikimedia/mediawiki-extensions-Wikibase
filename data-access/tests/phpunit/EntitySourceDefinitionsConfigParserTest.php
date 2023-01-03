@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataAccess\Tests;
 
+use MediaWiki\Revision\SlotRecord;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\ApiEntitySource;
 use Wikibase\DataAccess\DatabaseEntitySource;
@@ -42,7 +43,7 @@ class EntitySourceDefinitionsConfigParserTest extends TestCase {
 		$this->assertSame( 'localwiki', $sources[0]->getInterwikiPrefix() );
 		$this->assertSame( 'http://example.com/entity/', $sources[0]->getConceptBaseUri() );
 		$this->assertEquals( [ 'item' => 100, 'property' => 200 ], $sources[0]->getEntityNamespaceIds() );
-		$this->assertEquals( [ 'item' => 'main', 'property' => 'main' ], $sources[0]->getEntitySlotNames() );
+		$this->assertEquals( [ 'item' => SlotRecord::MAIN, 'property' => SlotRecord::MAIN ], $sources[0]->getEntitySlotNames() );
 	}
 
 	public function testGivenMultipleSourceConfig_newDefinitionsFromConfigArrayParsesAllSourceData() {
@@ -88,7 +89,7 @@ class EntitySourceDefinitionsConfigParserTest extends TestCase {
 		$this->assertSame( 'wikidata', $sources[0]->getInterwikiPrefix() );
 		$this->assertSame( 'http://wikidata.xyz/entity/', $sources[0]->getConceptBaseUri() );
 		$this->assertEquals( [ 'item' => 100, 'property' => 200 ], $sources[0]->getEntityNamespaceIds() );
-		$this->assertEquals( [ 'item' => 'main', 'property' => 'main' ], $sources[0]->getEntitySlotNames() );
+		$this->assertEquals( [ 'item' => SlotRecord::MAIN, 'property' => SlotRecord::MAIN ], $sources[0]->getEntitySlotNames() );
 
 		$this->assertSame( 'commons', $sources[1]->getSourceName() );
 		$this->assertInstanceOf( DatabaseEntitySource::class, $sources[1] );

@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Api;
 
 use ApiMain;
 use FauxRequest;
+use MediaWiki\Revision\SlotRecord;
 use MediaWikiIntegrationTestCase;
 use RequestContext;
 use Wikibase\DataAccess\DatabaseEntitySource;
@@ -139,8 +140,8 @@ class SearchEntitiesIntegrationTest extends MediaWikiIntegrationTestCase {
 				'test',
 				'testdb',
 				[
-					'item' => [ 'namespaceId' => 123, 'slot' => 'main' ],
-					'property' => [ 'namespaceId' => 321, 'slot' => 'main' ],
+					'item' => [ 'namespaceId' => 123, 'slot' => SlotRecord::MAIN ],
+					'property' => [ 'namespaceId' => 321, 'slot' => SlotRecord::MAIN ],
 				],
 				'conceptBaseUri:',
 				'',

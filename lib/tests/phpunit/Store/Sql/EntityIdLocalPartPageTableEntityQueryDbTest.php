@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Tests\Store\Sql;
 
 use Error;
+use MediaWiki\Revision\SlotRecord;
 use MediaWiki\Storage\NameTableStore;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\EntityId;
@@ -79,7 +80,7 @@ class EntityIdLocalPartPageTableEntityQueryDbTest extends MediaWikiIntegrationTe
 		$slotRoleStore = $this->createMock( NameTableStore::class );
 		$slotRoleStore->method( 'getId' )
 			->willReturnCallback( static function ( string $name ) {
-				if ( $name === 'main' ) {
+				if ( $name === SlotRecord::MAIN ) {
 					return 0;
 				} elseif ( $name === 'second' ) {
 					return 22;
