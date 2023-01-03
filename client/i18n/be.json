@@ -8,7 +8,8 @@
 			"Tomato Cream",
 			"ZlyiLev",
 			"Дзяніс Тутэйшы",
-			"Чаховіч Уладзіслаў"
+			"Чаховіч Уладзіслаў",
+			"Plaga med"
 		]
 	},
 	"wikibase-client-desc": "Кліент для пашырэння Wikibase",
@@ -97,7 +98,7 @@
 	"wikibase-pageinfo-entity-usage-T": "Загаловак",
 	"wikibase-pageinfo-entity-usage-C": "Некаторыя сцверджанні",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Сцверджанне: $1",
-	"wikibase-pageinfo-entity-usage-X": "Усё дадзеныя сутнасці",
+	"wikibase-pageinfo-entity-usage-X": "Усе даныя аб’екта",
 	"wikibase-pageinfo-entity-usage-O": "Рознае (напр., сінонімы, існаванне сутнасцяў)",
 	"wikibase-property-render-error": "Не ўдалося адлюстраваць уласцівасць $1: $2",
 	"wikibase-otherprojects": "У іншых праектах",

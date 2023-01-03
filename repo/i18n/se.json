@@ -20,12 +20,15 @@
 	"wikibase-diffview-link": "liŋkkat",
 	"wikibase-remove": "sihko",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|gáldu}}",
+	"wikibase-snakview-variations-somevalue-label": "dovdameahttun árvu",
 	"wikibase-itembytitle-submit": "Oza",
+	"wikibase-itemdisambiguation-lookup-language": "Giellakoda:",
 	"wikibase-itemdisambiguation-lookup-label": "Namma:",
 	"wikibase-itemdisambiguation-submit": "Oza",
 	"wikibase-newentity-language": "Giella:",
 	"wikibase-newentity-label": "Namma:",
 	"wikibase-setlabel-label": "Namma:",
 	"wikibase-setlabeldescriptionaliases-label-label": "Namma:",
+	"wikibase-modifyterm-language": "Giellakoda:",
 	"wikibase-federated-properties-edit-request-failed-notice-try-again": "Geahččal fas"
 }
