@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Akakiiri",
+			"Amoramah",
 			"Ayire Adongo",
 			"Dnshitobu"
 		]
@@ -10,6 +11,11 @@
 	"wikibase-editlinks": "Demese tongere",
 	"wikibase-editlinkstitle": "Demese tɔgewɔnɛ tongere",
 	"wikibase-linkitem-addlinks": "Pa’asɛ tongere",
+	"wikibase-linkitem-title": "Dikɛ ta pɛregerɛ",
+	"wikibase-linkitem-linkpage": "Dikɛ ta pɛregerɛ",
+	"wikibase-linkitem-selectlink": "N beleni fu mɛ ti fu loe zi'an la pɛregerɛ ti fu bɔta ti fu dikɛ ta pɛgedina wa",
+	"wikibase-linkitem-input-site": "Yetɔgum",
+	"wikibase-linkitem-input-page": "Pɛregerɛ",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Sugɛ",
 	"wikibase-rc-hide-wikidata-show": "Pa’alɛ",
