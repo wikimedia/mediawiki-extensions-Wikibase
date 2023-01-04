@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Tests\Formatters;
 use DataValues\StringValue;
 use InvalidArgumentException;
 use ValueFormatters\FormatterOptions;
+use ValueFormatters\FormattingException;
 use ValueFormatters\StringFormatter;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityIdValue;
@@ -44,10 +45,6 @@ class DispatchingValueFormatterTest extends \PHPUnit\Framework\TestCase {
 				[ 'foo' => $stringFormatter ],
 				InvalidArgumentException::class
 			],
-			'formatters must be instances of ValueFormatter' => [
-				[ 'novalue' => 17 ],
-				InvalidArgumentException::class
-			],
 		];
 	}
 
@@ -75,6 +72,7 @@ class DispatchingValueFormatterTest extends \PHPUnit\Framework\TestCase {
 			'VT:string' => $stringFormatter,
 			'VT:wikibase-entityid' => $mediaFormatter,
 		];
+		$lazyFormatters = array_map( fn( $formatter ) => fn() => $formatter, $formatters );
 
 		return [
 			'match PT' => [
@@ -86,6 +84,18 @@ class DispatchingValueFormatterTest extends \PHPUnit\Framework\TestCase {
 			'match VT' => [
 				new StringValue( 'something' ),
 				$formatters,
+				'VT:string'
+			],
+
+			'match PT (lazy)' => [
+				new EntityIdValue( new ItemId( 'Q13' ) ),
+				$lazyFormatters,
+				'VT:wikibase-entityid'
+			],
+
+			'match VT (lazy)' => [
+				new StringValue( 'something' ),
+				$lazyFormatters,
 				'VT:string'
 			],
 		];
@@ -115,6 +125,7 @@ class DispatchingValueFormatterTest extends \PHPUnit\Framework\TestCase {
 			'VT:string' => $stringFormatter,
 			'PT:commonsMedia' => $mediaFormatter,
 		];
+		$lazyFormatters = array_map( fn( $formatter ) => fn() => $formatter, $formatters );
 
 		return [
 			'match PT' => [
@@ -130,6 +141,52 @@ class DispatchingValueFormatterTest extends \PHPUnit\Framework\TestCase {
 				$formatters,
 				'VT:string'
 			],
+
+			'match PT (lazy)' => [
+				new StringValue( 'Foo.jpg' ),
+				'commonsMedia',
+				$lazyFormatters,
+				'PT:commonsMedia'
+			],
+
+			'match VT (lazy)' => [
+				new StringValue( 'something' ),
+				'someStuff',
+				$lazyFormatters,
+				'VT:string'
+			],
+		];
+	}
+
+	/** @dataProvider formatValueErrorsProvider */
+	public function testFormatValueErrors( $value, $type, $formatters ): void {
+		$formatter = new DispatchingValueFormatter( $formatters );
+
+		$this->expectException( FormattingException::class );
+		$formatter->formatValue( $value, $type );
+	}
+
+	public function formatValueErrorsProvider(): iterable {
+		yield 'invalid type PT' => [
+			new StringValue( 'Foo.jpg' ),
+			'commonsMedia',
+			[ 'PT:commonsMedia' => 17 ],
+		];
+		yield 'invalid type VT' => [
+			new StringValue( 'Foo.jpg' ),
+			'commonsMedia',
+			[ 'VT:string' => 17 ],
+		];
+
+		yield 'invalid type PT (lazy)' => [
+			new StringValue( 'Foo.jpg' ),
+			'commonsMedia',
+			[ 'PT:commonsMedia' => fn() => 17 ],
+		];
+		yield 'invalid type VT (lazy)' => [
+			new StringValue( 'Foo.jpg' ),
+			'commonsMedia',
+			[ 'VT:string' => fn() => 17 ],
 		];
 	}
 
