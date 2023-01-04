@@ -19,6 +19,7 @@ use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
 use Wikibase\Repo\EntityIdLabelFormatterFactory;
 use Wikibase\Repo\LocalizedTextProviderFactory;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
+use Wikibase\View\LanguageDirectionalityLookup;
 use Wikibase\View\ViewFactory;
 
 /**
@@ -70,10 +71,8 @@ class ViewFactoryTest extends ServiceWiringTestCase {
 			new DataTypeFactory( [] ) );
 		$this->mockService( 'WikibaseRepo.LanguageNameLookupFactory',
 			new LanguageNameLookupFactory() );
-		$this->serviceContainer->expects( $this->once() )
-			->method( 'getLanguageFactory' );
-		$this->serviceContainer->expects( $this->once() )
-			->method( 'getLanguageNameUtils' );
+		$this->mockService( 'WikibaseRepo.LanguageDirectionalityLookup',
+			$this->createMock( LanguageDirectionalityLookup::class ) );
 		$this->mockService(
 			'WikibaseRepo.NumberLocalizerFactory',
 			$this->createMock( NumberLocalizerFactory::class )

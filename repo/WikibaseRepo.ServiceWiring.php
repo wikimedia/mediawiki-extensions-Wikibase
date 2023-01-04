@@ -249,6 +249,7 @@ use Wikibase\Repo\View\RepoSpecialPageLinker;
 use Wikibase\Repo\View\WikibaseHtmlSnakFormatterFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\EntityIdFormatterFactory;
+use Wikibase\View\LanguageDirectionalityLookup;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\ViewFactory;
 use Wikimedia\ObjectFactory\ObjectFactory;
@@ -1374,6 +1375,13 @@ return [
 		}
 	},
 
+	'WikibaseRepo.LanguageDirectionalityLookup' => function ( MediaWikiServices $services ): LanguageDirectionalityLookup {
+		return new MediaWikiLanguageDirectionalityLookup(
+			$services->getLanguageFactory(),
+			$services->getLanguageNameUtils()
+		);
+	},
+
 	'WikibaseRepo.LanguageFallbackChainFactory' => function ( MediaWikiServices $services ): LanguageFallbackChainFactory {
 		return new LanguageFallbackChainFactory(
 			WikibaseRepo::getTermsLanguages( $services ),
@@ -2098,10 +2106,7 @@ return [
 			WikibaseRepo::getDataTypeFactory( $services ),
 			TemplateFactory::getDefaultInstance(),
 			WikibaseRepo::getLanguageNameLookupFactory( $services ),
-			new MediaWikiLanguageDirectionalityLookup(
-				$services->getLanguageFactory(),
-				$services->getLanguageNameUtils()
-			),
+			WikibaseRepo::getLanguageDirectionalityLookup( $services ),
 			WikibaseRepo::getNumberLocalizerFactory( $services ),
 			$settings->getSetting( 'siteLinkGroups' ),
 			$settings->getSetting( 'specialSiteLinkGroups' ),

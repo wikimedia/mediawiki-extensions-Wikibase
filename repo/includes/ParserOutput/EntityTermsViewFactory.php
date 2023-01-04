@@ -9,7 +9,6 @@ use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\TermLanguageFallbackChain;
-use Wikibase\Repo\MediaWikiLanguageDirectionalityLookup;
 use Wikibase\Repo\MediaWikiLocalizedTextProvider;
 use Wikibase\Repo\View\RepoSpecialPageLinker;
 use Wikibase\Repo\WikibaseRepo;
@@ -51,10 +50,7 @@ class EntityTermsViewFactory {
 		$services = MediaWikiServices::getInstance();
 		$textProvider = new MediaWikiLocalizedTextProvider( $language );
 		$templateFactory = TemplateFactory::getDefaultInstance();
-		$languageDirectionalityLookup = new MediaWikiLanguageDirectionalityLookup(
-			$services->getLanguageFactory(),
-			$services->getLanguageNameUtils()
-		);
+		$languageDirectionalityLookup = WikibaseRepo::getLanguageDirectionalityLookup( $services );
 		$languageNameLookup = WikibaseRepo::getLanguageNameLookupFactory()->getForLanguage( $language );
 		$entityLookup = new InMemoryEntityLookup();
 		if ( $entity->getId() !== null ) {
