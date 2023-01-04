@@ -115,8 +115,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 			$this->entityViewChecker,
 			WikibaseRepo::getLanguageFallbackChainFactory(),
 			new StaticUserOptionsLookup( [] ),
-			$this->getServiceContainer()->getLanguageFactory(),
-			$this->getServiceContainer()->getLanguageNameUtils()
+			WikibaseRepo::getLanguageDirectionalityLookup()
 		);
 	}
 

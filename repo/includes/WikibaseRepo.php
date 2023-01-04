@@ -134,6 +134,7 @@ use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\View\EntityIdFormatterFactory;
+use Wikibase\View\LanguageDirectionalityLookup;
 use Wikibase\View\ViewFactory;
 
 /**
@@ -167,6 +168,11 @@ class WikibaseRepo {
 	public static function getKartographerEmbeddingHandler( ContainerInterface $services = null ): ?CachingKartographerEmbeddingHandler {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.KartographerEmbeddingHandler' );
+	}
+
+	public static function getLanguageDirectionalityLookup( ContainerInterface $services = null ): LanguageDirectionalityLookup {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.LanguageDirectionalityLookup' );
 	}
 
 	/**

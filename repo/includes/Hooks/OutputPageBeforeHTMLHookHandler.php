@@ -6,8 +6,6 @@ use IBufferingStatsdDataFactory;
 use Language;
 use MediaWiki\Hook\OutputPageBeforeHTMLHook;
 use MediaWiki\Http\HttpRequestFactory;
-use MediaWiki\Languages\LanguageFactory;
-use MediaWiki\Languages\LanguageNameUtils;
 use MediaWiki\User\UserOptionsLookup;
 use OutputPage;
 use Psr\Log\LoggerInterface;
@@ -28,7 +26,6 @@ use Wikibase\Repo\Hooks\Helpers\OutputPageEditability;
 use Wikibase\Repo\Hooks\Helpers\OutputPageEntityViewChecker;
 use Wikibase\Repo\Hooks\Helpers\OutputPageRevisionIdReader;
 use Wikibase\Repo\Hooks\Helpers\UserPreferredContentLanguagesLookup;
-use Wikibase\Repo\MediaWikiLanguageDirectionalityLookup;
 use Wikibase\Repo\MediaWikiLocalizedTextProvider;
 use Wikibase\Repo\ParserOutput\PlaceholderExpander\EntityViewPlaceholderExpander;
 use Wikibase\Repo\ParserOutput\PlaceholderExpander\ExternallyRenderedEntityViewPlaceholderExpander;
@@ -37,6 +34,7 @@ use Wikibase\Repo\ParserOutput\PlaceholderExpander\TermboxRequestInspector;
 use Wikibase\Repo\ParserOutput\TermboxFlag;
 use Wikibase\Repo\ParserOutput\TextInjector;
 use Wikibase\Repo\View\RepoSpecialPageLinker;
+use Wikibase\View\LanguageDirectionalityLookup;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\Termbox\Renderer\TermboxRemoteRenderer;
 use Wikibase\View\ToolbarEditSectionGenerator;
@@ -111,11 +109,8 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 	/** @var LanguageFallbackChainFactory */
 	private $languageFallbackChainFactory;
 
-	/** @var LanguageFactory */
-	private $languageFactory;
-
-	/** @var LanguageNameUtils */
-	private $languageNameUtils;
+	/** @var LanguageDirectionalityLookup */
+	private $languageDirectionalityLookup;
 
 	/** @var UserOptionsLookup */
 	private $userOptionsLookup;
@@ -139,8 +134,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		OutputPageEntityViewChecker $entityViewChecker,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		UserOptionsLookup $userOptionsLookup,
-		LanguageFactory $languageFactory,
-		LanguageNameUtils $languageNameUtils,
+		LanguageDirectionalityLookup $languageDirectionalityLookup,
 		LoggerInterface $logger = null
 	) {
 		$this->httpRequestFactory = $httpRequestFactory;
@@ -158,8 +152,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		$this->entityViewChecker = $entityViewChecker;
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 		$this->userOptionsLookup = $userOptionsLookup;
-		$this->languageFactory = $languageFactory;
-		$this->languageNameUtils = $languageNameUtils;
+		$this->languageDirectionalityLookup = $languageDirectionalityLookup;
 		$this->logger = $logger ?: new NullLogger();
 	}
 
@@ -169,14 +162,13 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 	public static function factory(
 		Language $contentLanguage,
 		HttpRequestFactory $httpRequestFactory,
-		LanguageFactory $languageFactory,
-		LanguageNameUtils $languageNameUtils,
 		IBufferingStatsdDataFactory $statsdDataFactory,
 		UserOptionsLookup $userOptionsLookup,
 		EntityContentFactory $entityContentFactory,
 		EntityFactory $entityFactory,
 		EntityIdParser $entityIdParser,
 		EntityRevisionLookup $entityRevisionLookup,
+		LanguageDirectionalityLookup $languageDirectionalityLookup,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		LanguageNameLookup $languageNameLookup,
 		LoggerInterface $logger,
@@ -210,8 +202,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 			$entityViewChecker,
 			$languageFallbackChainFactory,
 			$userOptionsLookup,
-			$languageFactory,
-			$languageNameUtils,
+			$languageDirectionalityLookup,
 			$logger
 		);
 	}
@@ -318,10 +309,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 			$user,
 			$entity,
 			$this->userPreferredTermsLanguages->getLanguages( $language->getCode(), $user ),
-			new MediaWikiLanguageDirectionalityLookup(
-				$this->languageFactory,
-				$this->languageNameUtils
-			),
+			$this->languageDirectionalityLookup,
 			$this->languageNameLookup,
 			new MediaWikiLocalizedTextProvider( $language ),
 			$this->userOptionsLookup,

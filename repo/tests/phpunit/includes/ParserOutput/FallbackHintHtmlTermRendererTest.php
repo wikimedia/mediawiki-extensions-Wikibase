@@ -2,12 +2,11 @@
 
 namespace Wikibase\Repo\Tests\ParserOutput;
 
-use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\Repo\MediaWikiLanguageDirectionalityLookup;
 use Wikibase\Repo\ParserOutput\FallbackHintHtmlTermRenderer;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\ParserOutput\FallbackHintHtmlTermRenderer
@@ -20,10 +19,7 @@ use Wikibase\Repo\ParserOutput\FallbackHintHtmlTermRenderer;
 class FallbackHintHtmlTermRendererTest extends \PHPUnit\Framework\TestCase {
 
 	private function newHtmlTermRenderer() {
-		$languageDirectionalityLookup = new MediaWikiLanguageDirectionalityLookup(
-			MediaWikiServices::getInstance()->getLanguageFactory(),
-			MediaWikiServices::getInstance()->getLanguageNameUtils()
-		);
+		$languageDirectionalityLookup = WikibaseRepo::getLanguageDirectionalityLookup();
 		$languageNameLookup = $this->createMock( LanguageNameLookup::class );
 
 		return new FallbackHintHtmlTermRenderer(
