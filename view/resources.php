@@ -60,6 +60,7 @@ return call_user_func( function() {
 		],
 
 		'jquery.wikibase.entityselector' => $moduleTemplate + [
+			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'jquery/wikibase/jquery.wikibase.entityselector.js',
 			],
@@ -78,6 +79,7 @@ return call_user_func( function() {
 		],
 
 		'jquery.wikibase.toolbar.styles' => $moduleTemplate + [
+			'targets' => [ 'desktop' ],
 			'styles' => [
 				'jquery/wikibase/toolbar/themes/default/jquery.wikibase.toolbar.css',
 				'jquery/wikibase/toolbar/themes/default/jquery.wikibase.toolbarbutton.css',
@@ -86,6 +88,7 @@ return call_user_func( function() {
 
 		// Common styles independent from JavaScript being enabled or disabled.
 		'wikibase.common' => $moduleTemplate + [
+			'targets' => [ 'desktop' ],
 			'styles' => [
 				// Order must be hierarchical, do not order alphabetically
 				'wikibase/wikibase.less',
@@ -119,6 +122,8 @@ return call_user_func( function() {
 		],
 
 		'wikibase.entityChangers.EntityChangersFactory' => $moduleTemplate + [
+			 // T326405
+			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'wikibase/entityChangers/namespace.js',
 
@@ -155,6 +160,8 @@ return call_user_func( function() {
 		],
 
 		'wikibase.view.__namespace' => $moduleTemplate + [
+			 // T326405
+			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'wikibase/view/namespace.js'
 			],
@@ -164,6 +171,8 @@ return call_user_func( function() {
 		],
 
 		'wikibase.view.ReadModeViewFactory' => $moduleTemplate + [
+			 // T326405
+			'targets' => [ 'desktop' ],
 			'scripts' => 'wikibase/view/ReadModeViewFactory.js',
 			'dependencies' => [
 				'wikibase.view.__namespace',
@@ -171,6 +180,8 @@ return call_user_func( function() {
 			],
 		],
 		'wikibase.view.ControllerViewFactory' => $moduleBaseTemplate + [
+			 // T326405
+			'targets' => [ 'desktop' ],
 			'packageFiles' => [
 				'resources/wikibase/view/ControllerViewFactory.js',
 
@@ -393,6 +404,8 @@ return call_user_func( function() {
 		],
 
 		'jquery.animateWithEvent' => $wikibaseDatavaluesValueviewLibPaths + [
+			 // T326405
+			'targets' => [ 'desktop' ],
 			'packageFiles' => [
 				'jquery/jquery.animateWithEvent.js',
 				'jquery/jquery.AnimationEvent.js',
@@ -401,6 +414,8 @@ return call_user_func( function() {
 		],
 
 		'jquery.inputautoexpand' => $wikibaseDatavaluesValueviewLibPaths + [
+			 // T326405
+			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'jquery/jquery.inputautoexpand.js',
 			],
@@ -413,6 +428,8 @@ return call_user_func( function() {
 		],
 
 		'jquery.ui.commonssuggester' => $wikibaseDatavaluesValueviewLibPaths + [
+			 // T326405
+			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'jquery.ui/jquery.ui.commonssuggester.js',
 			],
@@ -427,6 +444,8 @@ return call_user_func( function() {
 		],
 
 		'jquery.ui.languagesuggester' => $wikibaseDatavaluesValueviewLibPaths + [
+			 // T326405
+			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'jquery.ui/jquery.ui.languagesuggester.js',
 			],
@@ -447,18 +466,24 @@ return call_user_func( function() {
 		],
 
 		'util.Extendable' => $wikibaseDatavaluesValueviewLibPaths + [
+			 // T326405
+			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'util/util.Extendable.js',
 			],
 		],
 
 		'util.MessageProvider' => $wikibaseDatavaluesValueviewLibPaths + [
+			 // T326405
+			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'util/util.MessageProvider.js',
 			],
 		],
 
 		'util.MessageProviders' => $wikibaseDatavaluesValueviewLibPaths + [
+			 // T326405
+			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'util/util.HashMessageProvider.js',
 				'util/util.CombiningMessageProvider.js',
@@ -467,18 +492,24 @@ return call_user_func( function() {
 		],
 
 		'util.Notifier' => $wikibaseDatavaluesValueviewLibPaths + [
+			 // T326405
+			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'util/util.Notifier.js',
 			],
 		],
 
 		'util.highlightSubstring' => $wikibaseDatavaluesValueviewLibPaths + [
+			 // T326405
+			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'util/util.highlightSubstring.js',
 			],
 		],
 
 		'jquery.ui.suggester' => $wikibaseDatavaluesValueviewLibPaths + [
+			 // T326405
+			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'jquery.ui/jquery.ui.suggester.js',
 				'jquery.ui/jquery.ui.ooMenu.js',
@@ -495,6 +526,8 @@ return call_user_func( function() {
 		],
 
 		'jquery.event.special.eachchange' => $wikibaseDatavaluesValueviewLibPaths + [
+			 // T326405
+			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'jquery.event/jquery.event.special.eachchange.js'
 			],
@@ -549,6 +582,8 @@ return call_user_func( function() {
 		],
 
 		'valueFormatters' => $wikibaseDatavaluesSrcPaths + [
+			 // T326405
+			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'valueFormatters/valueFormatters.js',
 				'valueFormatters/formatters/ValueFormatter.js',
@@ -559,12 +594,16 @@ return call_user_func( function() {
 		],
 
 		'valueParsers' => $wikibaseDatavaluesSrcPaths + [
+			 // T326405
+			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'valueParsers/valueParsers.js',
 			],
 		],
 
 		'valueParsers.ValueParserStore' => $wikibaseDatavaluesSrcPaths + [
+			 // T326405
+			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'valueParsers/ValueParserStore.js',
 			],
@@ -574,6 +613,8 @@ return call_user_func( function() {
 		],
 
 		'valueParsers.parsers' => $wikibaseDatavaluesSrcPaths + [
+			 // T326405
+			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'valueParsers/parsers/ValueParser.js',
 				'valueParsers/parsers/NullParser.js',
@@ -645,6 +686,8 @@ return call_user_func( function() {
 		// Loads the actual valueview widget into jQuery.valueview.valueview and maps
 		// jQuery.valueview to jQuery.valueview.valueview without losing any properties.
 		'jquery.valueview' => $wikibaseDatavaluesValueviewSrcPaths + [
+			 // T326405
+			'targets' => [ 'desktop' ],
 			'packageFiles' => [
 				'jquery.valueview.js',
 				'jquery.valueview.valueview.js',
@@ -665,6 +708,8 @@ return call_user_func( function() {
 		],
 
 		'jquery.valueview.Expert' => $wikibaseDatavaluesValueviewSrcPaths + [
+			 // T326405
+			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'jquery.valueview.experts.js',
 				'jquery.valueview.Expert.js',
@@ -678,6 +723,8 @@ return call_user_func( function() {
 		],
 
 		'jquery.valueview.experts.CommonsMediaType' => $wikibaseDatavaluesValueviewSrcPaths + [
+			 // T326405
+			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'experts/CommonsMediaType.js',
 			],
@@ -690,6 +737,8 @@ return call_user_func( function() {
 		],
 
 		'jquery.valueview.experts.GeoShape' => $wikibaseDatavaluesValueviewSrcPaths + [
+			 // T326405
+			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'experts/GeoShape.js',
 			],
@@ -702,6 +751,8 @@ return call_user_func( function() {
 		],
 
 		'jquery.valueview.experts.TabularData' => $wikibaseDatavaluesValueviewSrcPaths + [
+			 // T326405
+			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'experts/TabularData.js',
 			],
@@ -714,6 +765,8 @@ return call_user_func( function() {
 		],
 
 		'jquery.valueview.experts.EmptyValue' => $wikibaseDatavaluesValueviewSrcPaths + [
+			 // T326405
+			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'experts/EmptyValue.js',
 			],
@@ -729,6 +782,8 @@ return call_user_func( function() {
 		],
 
 		'jquery.valueview.experts.GlobeCoordinateInput' => $wikibaseDatavaluesValueviewSrcPaths + [
+			 // T326405
+			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'experts/GlobeCoordinateInput.js',
 			],
@@ -755,6 +810,8 @@ return call_user_func( function() {
 		],
 
 		'jquery.valueview.experts.MonolingualText' => $wikibaseDatavaluesValueviewSrcPaths + [
+			 // T326405
+			'targets' => [ 'desktop' ],
 			'packageFiles' => [
 				'experts/MonolingualText.js',
 				'ExpertExtender/ExpertExtender.LanguageSelector.js',
@@ -774,6 +831,8 @@ return call_user_func( function() {
 		],
 
 		'jquery.valueview.experts.QuantityInput' => $wikibaseDatavaluesValueviewPaths + [
+			 // T326405
+			'targets' => [ 'desktop' ],
 			'packageFiles' => [
 				'src/experts/QuantityInput.js',
 				'src/ExpertExtender/ExpertExtender.UnitSelector.js',
@@ -795,6 +854,8 @@ return call_user_func( function() {
 		],
 
 		'jquery.valueview.experts.StringValue' => $wikibaseDatavaluesValueviewSrcPaths + [
+			 // T326405
+			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'experts/StringValue.js',
 				'../lib/jquery/jquery.focusAt.js',
@@ -807,6 +868,8 @@ return call_user_func( function() {
 		],
 
 		'jquery.valueview.experts.TimeInput' => $wikibaseDatavaluesValueviewSrcPaths + [
+			 // T326405
+			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'experts/TimeInput.js',
 			],
@@ -843,6 +906,8 @@ return call_user_func( function() {
 		],
 
 		'jquery.valueview.experts.UnDeserializableValue' => $wikibaseDatavaluesValueviewSrcPaths + [
+			 // T326405
+			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'experts/UnDeserializableValue.js'
 			],
@@ -852,6 +917,8 @@ return call_user_func( function() {
 		],
 
 		'jquery.valueview.ExpertStore' => $wikibaseDatavaluesValueviewSrcPaths + [
+			 // T326405
+			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'experts/UnsupportedValue.js',
 				'jquery.valueview.ExpertStore.js',
@@ -869,6 +936,8 @@ return call_user_func( function() {
 		],
 
 		'jquery.valueview.ExpertExtender' => $wikibaseDatavaluesValueviewSrcPaths + [
+			 // T326405
+			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'ExpertExtender/ExpertExtender.js',
 				'../lib/jquery.ui/jquery.ui.inputextender.js',
@@ -939,6 +1008,8 @@ return call_user_func( function() {
 		],
 
 		'wikibase.tainted-ref' => [
+			 // T326405
+			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'tainted-ref.init.js',
 				'tainted-ref.common.js',
@@ -962,6 +1033,8 @@ return call_user_func( function() {
 			'es6' => true,
 		],
 		'jquery.wikibase.wbtooltip' => $moduleTemplate + [
+			 // T326405
+			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'jquery/wikibase/jquery.wikibase.wbtooltip.js',
 			],
@@ -975,6 +1048,8 @@ return call_user_func( function() {
 			],
 		],
 		'wikibase.buildErrorOutput' => $moduleTemplate + [
+			 // T326405
+			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'wikibase/wikibase.buildErrorOutput.js',
 			],
@@ -1012,6 +1087,8 @@ return call_user_func( function() {
 		],
 
 		'wikibase.api.ValueCaller' => $wikibaseApiPaths + [
+			 // T326405
+			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'namespace.js',
 				'ParseValueCaller.js',

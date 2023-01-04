@@ -970,6 +970,8 @@ final class RepoHooks {
 				'targets' => [ 'desktop', 'mobile' ],
 			],
 			'wikibase.special.languageLabelDescriptionAliases' => $moduleTemplate + [
+				// T326405
+				'targets' => [ 'desktop', 'mobile' ],
 				'scripts' => [
 					'resources/wikibase.special/wikibase.special.languageLabelDescriptionAliases.js',
 				],
