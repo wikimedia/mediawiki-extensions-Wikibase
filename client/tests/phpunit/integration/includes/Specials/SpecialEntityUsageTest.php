@@ -160,13 +160,13 @@ class SpecialEntityUsageTest extends SpecialPageTestBase {
 		$dump = [
 			'page' => [
 				[
+					'page_namespace' => NS_MAIN,
 					'page_title' => 'Vienna',
-					'page_namespace' => 0,
 					'page_id' => 11,
 				],
 				[
+					'page_namespace' => NS_MAIN,
 					'page_title' => 'Berlin',
-					'page_namespace' => 0,
 					'page_id' => 22,
 				],
 			],
@@ -200,7 +200,7 @@ class SpecialEntityUsageTest extends SpecialPageTestBase {
 
 			foreach ( $rows as $row ) {
 				if ( $table === 'page' ) {
-					$title = Title::newFromTextThrow( $row['page_title'], $row['page_namespace'] );
+					$title = Title::makeTitle( $row['page_namespace'], $row['page_title'] );
 					$page = $this->getServiceContainer()->getWikiPageFactory()->newFromTitle( $title );
 					$page->insertOn( $this->db, $row['page_id'] );
 				} else {

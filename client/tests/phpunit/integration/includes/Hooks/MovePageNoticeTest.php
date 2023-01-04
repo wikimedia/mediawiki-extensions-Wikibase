@@ -46,8 +46,8 @@ class MovePageNoticeTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testDoSpecialMovepageAfterMove() {
-		$oldTitle = Title::newFromTextThrow( 'New Amsterdam' );
-		$newTitle = Title::newFromTextThrow( 'New York City' );
+		$oldTitle = Title::makeTitle( NS_MAIN, 'New Amsterdam' );
+		$newTitle = Title::makeTitle( NS_MAIN, 'New York City' );
 		$expected = $this->getParsedMessage( 'wikibase-after-page-move' );
 		$siteLinkLookup = $this->createMock( SiteLinkLookup::class );
 

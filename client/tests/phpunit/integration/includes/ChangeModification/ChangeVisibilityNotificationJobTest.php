@@ -78,7 +78,7 @@ class ChangeVisibilityNotificationJobTest extends RecentChangesModificationTest 
 		] );
 		$additionalRecentChange = $recentChangeFactory->newRecentChange(
 			$entityChange,
-			Title::newFromTextThrow( 'UNIQ-FROM-RecentChangeFactory' )
+			Title::makeTitle( NS_MAIN, 'UNIQ-FROM-RecentChangeFactory' )
 		);
 		$additionalRecentChange->save();
 

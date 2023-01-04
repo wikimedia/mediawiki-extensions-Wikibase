@@ -66,7 +66,7 @@ class PageConnectionPresentationModelTest extends MediaWikiIntegrationTestCase {
 			$wgEchoNotifications, $wgEchoNotificationCategories, $wgEchoNotificationIcons
 		);
 
-		$title = Title::newFromTextThrow( 'Connected_page' );
+		$title = Title::makeTitle( NS_MAIN, 'Connected_page' );
 		$event = $this->mockEvent( $title );
 		$this->assertTrue(
 			EchoEventPresentationModel::supportsPresentationModel( $event->getType() ),
@@ -85,7 +85,7 @@ class PageConnectionPresentationModelTest extends MediaWikiIntegrationTestCase {
 			$model->canRender(),
 			"Failed asserting that the notification cannot be rendered"
 		);
-		$this->insertPage( 'Connected_page' );
+		$this->insertPage( $title );
 		$this->assertTrue(
 			$model->canRender(),
 			"Failed asserting that the notification can be rendered"

@@ -33,17 +33,17 @@ class WikiPagePropertyOrderProviderTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider provideGetPropertyOrder
 	 */
 	public function testGetPropertyOrder( $text, $expected ) {
-		$this->makeWikiPage( 'MediaWiki:Wikibase-SortedProperties', $text );
+		$title = Title::makeTitle( NS_MEDIAWIKI, 'Wikibase-SortedProperties' );
+		$this->makeWikiPage( $title, $text );
 		$instance = new WikiPagePropertyOrderProvider(
 			$this->getServiceContainer()->getWikiPageFactory(),
-			Title::newFromTextThrow( 'MediaWiki:Wikibase-SortedProperties' )
+			$title
 		);
 		$propertyOrder = $instance->getPropertyOrder();
 		$this->assertSame( $expected, $propertyOrder );
 	}
 
-	private function makeWikiPage( $name, $text ) {
-		$title = Title::newFromTextThrow( $name );
+	private function makeWikiPage( $title, $text ) {
 		$wikiPage = $this->getServiceContainer()->getWikiPageFactory()->newFromTitle( $title );
 		$wikiPage->doUserEditContent(
 			new WikitextContent( $text ),
@@ -55,7 +55,7 @@ class WikiPagePropertyOrderProviderTest extends MediaWikiIntegrationTestCase {
 	public function testGetPropertyOrder_pageDoesNotExist() {
 		$instance = new WikiPagePropertyOrderProvider(
 			$this->getServiceContainer()->getWikiPageFactory(),
-			Title::newFromTextThrow( 'MediaWiki:WikiPagePropertyOrderProviderTest-DoesNotExist' )
+			Title::makeTitle( NS_MEDIAWIKI, 'WikiPagePropertyOrderProviderTest-DoesNotExist' )
 		);
 		$propertyOrder = $instance->getPropertyOrder();
 		$this->assertSame( null, $propertyOrder );

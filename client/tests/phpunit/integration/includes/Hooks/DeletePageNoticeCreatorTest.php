@@ -65,10 +65,10 @@ class DeletePageNoticeCreatorTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function getPageDeleteNoticeHtmlProvider() {
-		$title = Title::newFromTextThrow( 'New Amsterdam' );
+		$title = Title::makeTitle( NS_MAIN, 'New Amsterdam' );
 		$expected = $this->getParsedMessage( 'wikibase-after-page-delete' );
 
-		$title2 = Title::newFromTextThrow( 'New York' );
+		$title2 = Title::makeTitle( NS_MAIN, 'New York' );
 		$title2->wikibasePushedDeleteToRepo = true;
 		$expected2 = $this->getParsedMessage( 'wikibase-after-page-delete-queued' );
 

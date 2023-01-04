@@ -48,7 +48,7 @@ class MakeGlobalVariablesScriptHookHandlerTest extends MediaWikiIntegrationTestC
 		$outputPage->method( 'getLanguage' )
 			->willReturn( $language );
 		$outputPage->method( 'getTitle' )
-			->willReturn( $services->getTitleFactory()->newFromTextThrow( 'Test' ) );
+			->willReturn( $services->getTitleFactory()->makeTitle( NS_MAIN, 'Test' ) );
 
 		$badgeItems = [ 'Q1' => 'first-item' ];
 		$stringLimit = 42;

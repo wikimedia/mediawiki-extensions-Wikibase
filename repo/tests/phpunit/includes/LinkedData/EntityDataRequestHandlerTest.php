@@ -72,7 +72,7 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->interfaceTitle = Title::newFromTextThrow( "Special:EntityDataRequestHandlerTest" );
+		$this->interfaceTitle = Title::makeTitle( NS_SPECIAL, 'EntityDataRequestHandlerTest' );
 		// ensure the namespace name doesn’t get translated
 		$this->setMwGlobals( 'wgLanguageCode', 'qqx' );
 

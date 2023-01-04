@@ -32,7 +32,7 @@ class EntityDataPurgerTest extends TestCase {
 	}
 
 	public function testGivenEntityIdLookupReturnsNull_handlerDoesNothing() {
-		$title = Title::newFromTextThrow( 'Project:About' );
+		$title = Title::makeTitle( NS_PROJECT, 'About' );
 		$entityIdLookup = $this->createMock( EntityIdLookup::class );
 		$entityIdLookup->expects( $this->once() )
 			->method( 'getEntityIdForTitle' )

@@ -247,7 +247,7 @@ class DataAccessSnakFormatterOutputFormatTest extends MediaWikiIntegrationTestCa
 
 	public function richWikitextSnakProvider() {
 		$genericSnaks = $this->getGenericSnaks();
-		$namespacedFileName = Title::newFromTextThrow( 'A_file name.jpg', NS_FILE )->getPrefixedText();
+		$namespacedFileName = Title::makeTitle( NS_FILE, 'A_file name.jpg' )->getPrefixedText();
 
 		$cases = [
 			'monolingualtext' => [

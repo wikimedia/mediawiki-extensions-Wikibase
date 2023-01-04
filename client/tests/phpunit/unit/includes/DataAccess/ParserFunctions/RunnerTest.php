@@ -272,7 +272,7 @@ class RunnerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	private function getParser() {
-		$title = Title::newFromTextThrow( 'Cat' );
+		$title = Title::makeTitle( NS_MAIN, 'Cat' );
 		$popt = ParserOptions::newFromAnon();
 
 		$parser = MediaWikiServices::getInstance()->getParserFactory()->create();

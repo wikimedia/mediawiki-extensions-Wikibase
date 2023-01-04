@@ -199,7 +199,7 @@ class PropertyHandlerTest extends EntityHandlerTestCase {
 		$content = $this->newEntityContent();
 		$contentRenderer = $this->getServiceContainer()->getContentRenderer();
 
-		$title = Title::newFromTextThrow( 'Foo' );
+		$title = Title::makeTitle( NS_MAIN, 'Foo' );
 		$parserOutput = $contentRenderer->getParserOutput( $content, $title );
 
 		$expectedUsedOptions = [ 'userlang', 'wb', 'termboxVersion' ];
