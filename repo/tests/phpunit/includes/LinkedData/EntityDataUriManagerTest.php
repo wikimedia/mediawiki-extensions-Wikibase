@@ -30,7 +30,7 @@ class EntityDataUriManagerTest extends MediaWikiIntegrationTestCase {
 				return Title::newFromTextThrow( $id->getEntityType() . ':' . $id->getSerialization() );
 			} );
 
-		$title = Title::newFromTextThrow( "Special:EntityDataUriManagerTest" );
+		$title = Title::makeTitle( NS_SPECIAL, 'EntityDataUriManagerTest' );
 
 		$extensions = [
 			'text' => 'txt',
@@ -127,7 +127,7 @@ class EntityDataUriManagerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function provideGetDocTitle() {
-		$title = Title::newFromTextThrow( "Special:EntityDataUriManagerTest" );
+		$title = Title::makeTitle( NS_SPECIAL, 'EntityDataUriManagerTest' );
 		$base = $title->getPrefixedText();
 
 		return [

@@ -43,22 +43,10 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 		// Remove old stray pages.
 		$this->db->delete( 'page', IDatabase::ALL_ROWS, __METHOD__ );
 
-		$expectedUnconnectedTitle = Title::newFromTextThrow(
-			"SpecialUnconnectedPagesTest-expectedUnconnected",
-			$namespace
-		);
-		$unconnectedTitle = Title::newFromTextThrow(
-			"SpecialUnconnectedPagesTest-unconnected",
-			$namespace
-		);
-		$connectedTitle = Title::newFromTextThrow(
-			"SpecialUnconnectedPagesTest-connected",
-			$namespace
-		);
-		$furtherUnconnectedTitle = Title::newFromTextThrow(
-			"SpecialUnconnectedPagesTest-unconnected2",
-			$namespace
-		);
+		$expectedUnconnectedTitle = Title::makeTitle( $namespace, 'SpecialUnconnectedPagesTest-expectedUnconnected' );
+		$unconnectedTitle = Title::makeTitle( $namespace, 'SpecialUnconnectedPagesTest-unconnected' );
+		$connectedTitle = Title::makeTitle( $namespace, 'SpecialUnconnectedPagesTest-connected' );
+		$furtherUnconnectedTitle = Title::makeTitle( $namespace, 'SpecialUnconnectedPagesTest-unconnected2' );
 
 		$page = $this->getServiceContainer()->getWikiPageFactory()->newFromTitle( $expectedUnconnectedTitle );
 		$page->insertOn( $this->db, 100 );

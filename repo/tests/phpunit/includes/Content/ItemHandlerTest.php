@@ -316,7 +316,7 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 		$content = $this->newEntityContent();
 		$contentRenderer = $this->getServiceContainer()->getContentRenderer();
 
-		$title = Title::newFromTextThrow( 'Foo' );
+		$title = Title::makeTitle( NS_MAIN, 'Foo' );
 		$parserOutput = $contentRenderer->getParserOutput( $content, $title );
 
 		$expectedUsedOptions = [ 'userlang', 'wb', 'termboxVersion' ];
@@ -333,7 +333,7 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 	public function testGetParserOutput_redirect() {
 		$content = $this->newRedirectContent( new ItemId( 'Q5' ), new ItemId( 'Q123' ) );
 		$contentRenderer = $this->getServiceContainer()->getContentRenderer();
-		$title = Title::newFromTextThrow( 'Foo' );
+		$title = Title::makeTitle( NS_MAIN, 'Foo' );
 		$parserOutput = $contentRenderer->getParserOutput( $content, $title );
 
 		$html = $parserOutput->getText();

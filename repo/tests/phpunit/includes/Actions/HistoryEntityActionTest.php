@@ -50,7 +50,7 @@ class HistoryEntityActionTest extends \PHPUnit\Framework\TestCase {
 	 * @return Article
 	 */
 	private function getArticle(): Article {
-		$title = Title::newFromTextThrow( 'Page title' );
+		$title = Title::makeTitle( NS_MAIN, 'Page title' );
 		$article = $this->createMock( Article::class );
 		$article->method( 'getTitle' )
 			->willReturn( $title );

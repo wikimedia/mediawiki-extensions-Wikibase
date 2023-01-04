@@ -58,8 +58,8 @@ class RepoItemLinkGeneratorTest extends \PHPUnit\Framework\TestCase {
 		$addLinksRegexItemExists = '/<span.*wb-langlinks-add.*<a.*href="' . $href . '".*>'
 				. $addLinks . '<\/a><\/span>/';
 
-		$title = Title::newFromTextThrow( 'Tokyo', NS_MAIN );
-		$nonExistingTitle = Title::newFromTextThrow( 'pfuwdodx2', NS_MAIN );
+		$title = Title::makeTitle( NS_MAIN, 'Tokyo' );
+		$nonExistingTitle = Title::makeTitle( NS_MAIN, 'Pfuwdodx2' );
 
 		$title->resetArticleID( 9638 ); // Needed so that Title::exists() -> true
 

@@ -174,7 +174,7 @@ class DispatchChangeDeletionNotificationJobTest extends MediaWikiIntegrationTest
 		// insert a wikipage for the item
 		$entityNamespaceLookup = WikibaseRepo::getEntityNamespaceLookup();
 		$namespace = $entityNamespaceLookup->getEntityNamespace( $item->getId()->getEntityType() );
-		$this->insertPage( $title->getText(), '{ "entity": "' . $item->getId()->getSerialization() . '" }', $namespace );
+		$this->insertPage( $title, '{ "entity": "' . $item->getId()->getSerialization() . '" }', $namespace );
 
 		// return page
 		return $store->getWikiPageForEntity( $item->getId() );

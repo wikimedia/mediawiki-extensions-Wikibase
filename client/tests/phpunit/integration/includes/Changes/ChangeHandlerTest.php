@@ -390,7 +390,7 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 
 	public function provideHandleChange() {
 		$changes = TestChanges::getChanges();
-		$userEmmy2 = Title::newFromTextThrow( 'User:Emmy2' )->getPrefixedText();
+		$userEmmy2 = Title::makeTitle( NS_USER, 'Emmy2' )->getPrefixedText();
 
 		$empty = [
 			'scheduleRefreshLinks' => [],

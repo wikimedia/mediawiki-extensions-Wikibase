@@ -387,7 +387,7 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 		$this->expectException( MWException::class );
 
 		$handler = $this->getHandler();
-		$handler->makeRedirectContent( Title::newFromTextThrow( 'X11', $handler->getEntityNamespace() ) );
+		$handler->makeRedirectContent( Title::makeTitle( $handler->getEntityNamespace(), 'X11' ) );
 	}
 
 	public function testMakeEmptyEntity() {
@@ -639,7 +639,7 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 		$title = $this->getTitle( $handler );
 
 		$page = $this->getMockBuilder( WikiPage::class )
-			->setConstructorArgs( [ Title::newFromTextThrow( 'Q1' ) ] )
+			->setConstructorArgs( [ Title::makeTitle( NS_MAIN, 'Q1' ) ] )
 			->getMock();
 
 		// XXX: The RevisionRecord is needed by a WikibaseMediaInfo hook
@@ -721,7 +721,7 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 	 * @dataProvider providePageProperties
 	 */
 	public function testPageProperties( EntityContent $content, array $expectedProps ) {
-		$title = Title::newFromTextThrow( 'Foo' );
+		$title = Title::makeTitle( NS_MAIN, 'Foo' );
 		$contentRenderer = $this->getServiceContainer()->getContentRenderer();
 		$parserOutput = $contentRenderer->getParserOutput( $content, $title, null, null, false );
 

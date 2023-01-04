@@ -171,7 +171,7 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends Scribunto_LuaEngineT
 	 * @return Title
 	 */
 	protected function getTestTitle() {
-		return Title::newFromTextThrow( 'WikibaseClientDataAccessTest' );
+		return Title::makeTitle( NS_MAIN, 'WikibaseClientDataAccessTest' );
 	}
 
 	/**

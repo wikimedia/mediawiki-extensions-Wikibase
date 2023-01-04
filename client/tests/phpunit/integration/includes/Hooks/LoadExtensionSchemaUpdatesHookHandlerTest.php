@@ -36,9 +36,9 @@ class LoadExtensionSchemaUpdatesHookHandlerTest extends MediaWikiIntegrationTest
 		$this->db->delete( 'page', IDatabase::ALL_ROWS, __METHOD__ );
 
 		$titles = [];
-		$titles[10] = Title::newFromTextThrow( "LoadExtensionSchemaUpdatesHookHandlerTest-0", $this->getDefaultWikitextNS() );
-		$titles[20] = Title::newFromTextThrow( "LoadExtensionSchemaUpdatesHookHandlerTest-Non-Wikibase-NS", NS_TALK );
-		$titles[30] = Title::newFromTextThrow( "LoadExtensionSchemaUpdatesHookHandlerTest-1", $this->getDefaultWikitextNS() );
+		$titles[10] = Title::makeTitle( $this->getDefaultWikitextNS(), 'LoadExtensionSchemaUpdatesHookHandlerTest-0' );
+		$titles[20] = Title::makeTitle( NS_TALK, 'LoadExtensionSchemaUpdatesHookHandlerTest-Non-Wikibase-NS' );
+		$titles[30] = Title::makeTitle( $this->getDefaultWikitextNS(), 'LoadExtensionSchemaUpdatesHookHandlerTest-1' );
 
 		foreach ( $titles as $pageId => $title ) {
 			$page = $this->getServiceContainer()->getWikiPageFactory()->newFromTitle( $title );

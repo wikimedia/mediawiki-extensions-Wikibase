@@ -45,7 +45,7 @@ class UpdateRepoOnDeleteTest extends \PHPUnit\Framework\TestCase {
 			'siteLinkLookup' => $siteLinkLookupMock,
 			'user' => User::newFromName( 'RandomUserWhichDoesntExist' ),
 			'siteId' => 'whatever',
-			'title' => Title::newFromTextThrow( 'Delete me' ),
+			'title' => Title::makeTitle( NS_MAIN, 'Delete me' ),
 		];
 	}
 

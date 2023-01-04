@@ -31,7 +31,7 @@ class Scribunto_LuaWikibaseLibraryNoLinkedEntityTest extends Scribunto_LuaWikiba
 	 * @return Title
 	 */
 	protected function getTestTitle() {
-		return Title::newFromTextThrow( 'WikibaseClientDataAccessTest-NotLinkedWithAnyEntity' );
+		return Title::makeTitle( NS_MAIN, 'WikibaseClientDataAccessTest-NotLinkedWithAnyEntity' );
 	}
 
 }

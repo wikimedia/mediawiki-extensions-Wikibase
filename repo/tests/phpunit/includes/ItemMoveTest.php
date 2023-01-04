@@ -68,7 +68,7 @@ class ItemMoveTest extends MediaWikiIntegrationTestCase {
 		$id = $this->entityRevision->getEntity()->getId();
 		$this->itemTitle = WikibaseRepo::getEntityTitleStoreLookup()->getTitleForId( $id );
 
-		$title = Title::newFromTextThrow( 'wbmovetest', $this->getDefaultWikitextNS() );
+		$title = Title::makeTitle( $this->getDefaultWikitextNS(), 'Wbmovetest' );
 		$this->page = MediaWikiServices::getInstance()->getWikiPageFactory()->newFromTitle( $title );
 		$this->page->doUserEditContent(
 			new WikitextContent( 'foobar' ),
@@ -97,7 +97,7 @@ class ItemMoveTest extends MediaWikiIntegrationTestCase {
 	public function testMovePreventionRegularToInvalidData() {
 		$itemNamespace = WikibaseRepo::getEntityNamespaceLookup()
 			->getEntityNamespace( 'item' );
-		$to = Title::newFromTextThrow( $this->page->getTitle()->getText(), $itemNamespace );
+		$to = Title::makeTitle( $itemNamespace, $this->page->getTitle()->getText() );
 		$mp = $this->getServiceContainer()
 			->getMovePageFactory()
 			->newMovePage( $this->page->getTitle(), $to );
@@ -134,7 +134,7 @@ class ItemMoveTest extends MediaWikiIntegrationTestCase {
 	public function testMovePreventionDataToNonExistingRegular() {
 		$mp = $this->getServiceContainer()
 			->getMovePageFactory()
-			->newMovePage( $this->itemTitle, Title::newFromTextThrow( 'wbmovetestitem' ) );
+			->newMovePage( $this->itemTitle, Title::makeTitle( NS_MAIN, 'Wbmovetestitem' ) );
 		$this->assertFalse( $mp->move( $this->getTestUser()->getUser() )->isOK() );
 	}
 
@@ -148,7 +148,7 @@ class ItemMoveTest extends MediaWikiIntegrationTestCase {
 			->getMovePageFactory()
 			->newMovePage(
 				$this->itemTitle,
-				Title::newFromTextThrow( $this->page->getTitle()->getText(), $itemNamespace )
+				Title::makeTitle( $itemNamespace, $this->page->getTitle()->getText() )
 			);
 		$this->assertFalse( $mp->move( $this->getTestUser()->getUser() )->isOK() );
 	}

@@ -32,17 +32,17 @@ class WikiPageItemOrderProviderTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider provideGetItemOrder
 	 */
 	public function testGetItemOrder( string $text, ?array $expected ): void {
-		$this->makeWikiPage( 'MediaWiki:WikibaseLexeme-SortedGrammaticalFeaturesTest', $text );
+		$title = Title::makeTitle( NS_MEDIAWIKI, 'WikibaseLexeme-SortedGrammaticalFeaturesTest' );
+		$this->makeWikiPage( $title, $text );
 		$instance = new WikiPageItemOrderProvider(
 			$this->getServiceContainer()->getWikiPageFactory(),
-			Title::newFromTextThrow( 'MediaWiki:WikibaseLexeme-SortedGrammaticalFeaturesTest' )
+			$title
 		);
 		$itemOrder = $instance->getItemOrder();
 		$this->assertSame( $expected, $itemOrder );
 	}
 
-	private function makeWikiPage( string $name, string $text ): void {
-		$title = Title::newFromTextThrow( $name );
+	private function makeWikiPage( Title $title, string $text ): void {
 		$wikiPage = $this->getServiceContainer()->getWikiPageFactory()->newFromTitle( $title );
 		$wikiPage->doUserEditContent(
 			new WikitextContent( $text ),
@@ -54,7 +54,7 @@ class WikiPageItemOrderProviderTest extends MediaWikiIntegrationTestCase {
 	public function testGetItemOrder_pageDoesNotExist(): void {
 		$instance = new WikiPageItemOrderProvider(
 			$this->getServiceContainer()->getWikiPageFactory(),
-			Title::newFromTextThrow( 'MediaWiki:WikibaseLexeme-SortedGrammaticalFeatures-Test-DoesNotExist' )
+			Title::makeTitle( NS_MEDIAWIKI, 'WikibaseLexeme-SortedGrammaticalFeatures-Test-DoesNotExist' )
 		);
 		$itemOrder = $instance->getItemOrder();
 		$this->assertSame( null, $itemOrder );

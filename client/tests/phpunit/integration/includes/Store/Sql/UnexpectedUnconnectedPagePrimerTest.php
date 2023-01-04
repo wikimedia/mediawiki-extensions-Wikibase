@@ -35,10 +35,10 @@ class UnexpectedUnconnectedPagePrimerTest extends MediaWikiIntegrationTestCase {
 
 		$titles = [];
 		for ( $i = 1; $i < 5; $i++ ) {
-			$titles[$i] = Title::newFromTextThrow( "UnexpectedUnconnectedPagePrimerTest-$i", $this->getDefaultWikitextNS() );
+			$titles[$i] = Title::makeTitle( $this->getDefaultWikitextNS(), "UnexpectedUnconnectedPagePrimerTest-$i" );
 		}
-		$titles[] = Title::newFromTextThrow( "Page outside of a Wikibase NS", NS_TALK );
-		$titles[101] = Title::newFromTextThrow( "UnexpectedUnconnectedPagePrimerTest-High-Page-id", $this->getDefaultWikitextNS() );
+		$titles[] = Title::makeTitle( NS_TALK, 'Page outside of a Wikibase NS' );
+		$titles[101] = Title::makeTitle( $this->getDefaultWikitextNS(), 'UnexpectedUnconnectedPagePrimerTest-High-Page-id' );
 
 		foreach ( $titles as $pageId => $title ) {
 			$page = $this->getServiceContainer()->getWikiPageFactory()->newFromTitle( $title );

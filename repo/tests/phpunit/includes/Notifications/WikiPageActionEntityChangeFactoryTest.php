@@ -241,7 +241,7 @@ class WikiPageActionEntityChangeFactoryTest extends \MediaWikiIntegrationTestCas
 	}
 
 	private function newMinimalRevisionRecordWithContent( EntityContent $content ): MutableRevisionRecord {
-		$revRecord = new MutableRevisionRecord( Title::newFromTextThrow( 'Required workaround' ) );
+		$revRecord = new MutableRevisionRecord( Title::makeTitle( NS_MAIN, 'Required workaround' ) );
 		$revRecord->setContent( SlotRecord::MAIN, $content );
 		$revRecord->setUser( $this->getTestUser()->getUserIdentity() );
 

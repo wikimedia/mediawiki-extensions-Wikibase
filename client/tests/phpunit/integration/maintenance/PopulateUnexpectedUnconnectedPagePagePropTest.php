@@ -53,13 +53,10 @@ class PopulateUnexpectedUnconnectedPagePagePropTest extends MaintenanceBaseTestC
 
 		$titles = [];
 		for ( $i = 1; $i < 5; $i++ ) {
-			$titles[$i] = Title::newFromTextThrow( "PopulateUnexpectedUnconnectedPagePagePropTest-$i", $this->getDefaultWikitextNS() );
+			$titles[$i] = Title::makeTitle( $this->getDefaultWikitextNS(), "PopulateUnexpectedUnconnectedPagePagePropTest-$i" );
 		}
-		$titles[] = Title::newFromTextThrow( "Page outside of a Wikibase NS", NS_TALK );
-		$titles[101] = Title::newFromTextThrow(
-			"PopulateUnexpectedUnconnectedPagePagePropTest-High-Page-id",
-			$this->getDefaultWikitextNS()
-		);
+		$titles[] = Title::makeTitle( NS_TALK, 'Page outside of a Wikibase NS' );
+		$titles[101] = Title::makeTitle( $this->getDefaultWikitextNS(), 'PopulateUnexpectedUnconnectedPagePagePropTest-High-Page-id' );
 		foreach ( $titles as $pageId => $title ) {
 			$page = $this->getServiceContainer()->getWikiPageFactory()->newFromTitle( $title );
 			$page->insertOn( $this->db, $pageId );
