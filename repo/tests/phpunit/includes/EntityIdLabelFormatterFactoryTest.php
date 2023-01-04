@@ -1,11 +1,14 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests;
 
 use MediaWiki\MediaWikiServices;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\Lib\Formatters\SnakFormatter;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 use Wikibase\Repo\EntityIdLabelFormatterFactory;
 
 /**
@@ -19,20 +22,22 @@ use Wikibase\Repo\EntityIdLabelFormatterFactory;
  */
 class EntityIdLabelFormatterFactoryTest extends TestCase {
 
-	private function getFormatterFactory() {
-		return new EntityIdLabelFormatterFactory();
-	}
-
 	public function testGetFormat() {
-		$factory = $this->getFormatterFactory();
+		$lookupFactory = $this->createMock( FallbackLabelDescriptionLookupFactory::class );
+		$formatterFactory = new EntityIdLabelFormatterFactory( $lookupFactory );
 
-		$this->assertEquals( SnakFormatter::FORMAT_PLAIN, $factory->getOutputFormat() );
+		$this->assertSame( SnakFormatter::FORMAT_PLAIN, $formatterFactory->getOutputFormat() );
 	}
 
 	public function testGetEntityIdFormatter() {
-		$factory = $this->getFormatterFactory();
+		$language = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'en' );
+		$lookupFactory = $this->createMock( FallbackLabelDescriptionLookupFactory::class );
+		$lookupFactory->expects( $this->once() )
+			->method( 'newLabelDescriptionLookup' )
+			->with( $language );
+		$formatterFactory = new EntityIdLabelFormatterFactory( $lookupFactory );
 
-		$formatter = $factory->getEntityIdFormatter( MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'en' ) );
+		$formatter = $formatterFactory->getEntityIdFormatter( $language );
 		$this->assertInstanceOf( EntityIdFormatter::class, $formatter );
 	}
 
