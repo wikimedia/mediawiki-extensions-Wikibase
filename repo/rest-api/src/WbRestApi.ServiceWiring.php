@@ -26,6 +26,7 @@ use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementValidator;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemValidator;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabels;
+use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabelsValidator;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatement;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementValidator;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatements;
@@ -87,7 +88,8 @@ return [
 			new TermLookupItemLabelsRetriever(
 				WikibaseRepo::getTermLookup( $services ),
 				WikibaseRepo::getTermsLanguages( $services )
-			)
+			),
+			new GetItemLabelsValidator( new ItemIdValidator() )
 		);
 	},
 

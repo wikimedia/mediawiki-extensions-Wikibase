@@ -15,20 +15,29 @@ class GetItemLabels {
 
 	private ItemRevisionMetadataRetriever $itemRevisionMetadataRetriever;
 	private ItemLabelsRetriever $itemLabelsRetriever;
+	private GetItemLabelsValidator $validator;
 
 	public function __construct(
 		ItemRevisionMetadataRetriever $itemRevisionMetadataRetriever,
-		ItemLabelsRetriever $itemLabelsRetriever
+		ItemLabelsRetriever $itemLabelsRetriever,
+		GetItemLabelsValidator $validator
 	) {
 		$this->itemRevisionMetadataRetriever = $itemRevisionMetadataRetriever;
 		$this->itemLabelsRetriever = $itemLabelsRetriever;
+		$this->validator = $validator;
 	}
 
 	/**
 	 * @return GetItemLabelsErrorResponse|GetItemLabelsSuccessResponse|ItemRedirectResponse
 	 */
 	public function execute( GetItemLabelsRequest $request ) {
+		$validationError = $this->validator->validate( $request );
+		if ( $validationError ) {
+			return GetItemLabelsErrorResponse::newFromValidationError( $validationError );
+		}
+
 		$itemId = new ItemId( $request->getItemId() );
+
 		$metaDataResult = $this->itemRevisionMetadataRetriever->getLatestRevisionMetadata( $itemId );
 
 		if ( !$metaDataResult->itemExists() ) {
