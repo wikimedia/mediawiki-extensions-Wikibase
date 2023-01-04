@@ -8,7 +8,8 @@
 			"Чаховіч Уладзіслаў",
 			"Tomato Cream",
 			"No Sleep till Krupki",
-			"Maksim L."
+			"Maksim L.",
+			"Plaga med"
 		]
 	},
 	"specialpages-group-wikibase": "Вікібаза",
@@ -57,7 +58,7 @@
 	"datatypes-type-wikibase-property": "Уласцівасць",
 	"datatypes-type-commonsMedia": "Медыяфайл з Вікісховішча",
 	"datatypes-type-geo-shape": "Геаграфічная форма",
-	"datatypes-type-tabular-data": "Таблічныя дадзеныя",
+	"datatypes-type-tabular-data": "Таблічныя даныя",
 	"datatypes-type-external-id": "Вонкавы ідэнтыфікатар",
 	"datatypes-type-entity-schema": "Схема сутнасці",
 	"version-wikibase": "Wikibase",
