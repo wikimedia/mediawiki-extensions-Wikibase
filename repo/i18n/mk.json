@@ -171,6 +171,7 @@
 	"wikibase-validator-illegal-entity-schema-title": "Вредноста мора да почнува со <code>E</code>, а остатокот треба да биде само бројки.",
 	"wikibase-validator-no-such-media": "Податотеката „$1“ не постои на [https://commons.wikimedia.org/wiki/Главна_страница?uselang=mk Ризницата].",
 	"wikibase-validator-no-such-sitelink": "Не ја пронајдов викиврската до „$1“ при обидот за измена на значките.",
+	"wikibase-validator-no-mul-descriptions": "Јазичникот код „mul“ ($1) може да се користи за натписи и истозначници, но не и за описи.",
 	"wikibase-validator-page-not-exists": "Страницата „$1“ не постои.",
 	"wikibase-validator-not-a-language": "„$1“ не претставува познат јазичен код.",
 	"wikibase-item-reference-edit-placeholder": "Внесете назнака на предметот, на пр. Q10",

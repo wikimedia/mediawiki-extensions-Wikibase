@@ -50,7 +50,7 @@
 	"apihelp-query+wikibase-example": "Bezieht den URL-Pfad und weitere Informationen über den Wikibase-Client und das Repositorium.",
 	"apihelp-query+wikibase-param-prop": "Zurückzugebende Eigenschaften:\n;<kbd>url</kbd>: Basis-URL, Skript- und Artikelpfad des Wikibase-Repositoriums.\n;<kbd>siteid</kbd>: Die Website-Kennung dieser Website.",
 	"apihelp-wbformatreference-summary": "Formatiert einen Einzelnachweis zur Anzeige für Benutzer.",
-	"apihelp-wbformatreference-example-1": "Formatiert einen leeren Einzelnachweis unter Verwendung des Data-Bridge-Stil in HTML.",
+	"apihelp-wbformatreference-example-1": "Formatiert einen leeren Einzelnachweis unter Verwendung des Data-Bridge-Stils in HTML.",
 	"apihelp-wbformatreference-example-2": "Formatiert einen Einzelnachweis, der eine Zeichenfolge enthält, mit dem Data-Bridge-Stil in HTML.",
 	"apihelp-wbformatreference-param-reference": "Der Einzelnachweis als ein JSON-Objekt.",
 	"apihelp-wbformatreference-param-style": "Der Stil, in dem der Einzelnachweis zu formatieren ist.",
