@@ -2,9 +2,18 @@
 
 ## Configuration
 
-Enable the REST API:
+### Enable the REST API
+
+To enable the production-ready routes add the following line to the `LocalSettings.php` file:
+
 ```php
 $wgRestAPIAdditionalRouteFiles[] = 'extensions/Wikibase/repo/rest-api/routes.json';
+```
+
+To enable routes that are in development and not recommended for production use also add:
+
+```php
+$wgRestAPIAdditionalRouteFiles[] = 'extensions/Wikibase/repo/rest-api/routes.dev.json';
 ```
 
 ## JSON structure changes
