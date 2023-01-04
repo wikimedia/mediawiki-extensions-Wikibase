@@ -49,9 +49,13 @@ class EntityTermsViewFactory {
 		Language $language,
 		TermLanguageFallbackChain $termFallbackChain
 	) {
+		$services = MediaWikiServices::getInstance();
 		$textProvider = new MediaWikiLocalizedTextProvider( $language );
 		$templateFactory = TemplateFactory::getDefaultInstance();
-		$languageDirectionalityLookup = new MediaWikiLanguageDirectionalityLookup();
+		$languageDirectionalityLookup = new MediaWikiLanguageDirectionalityLookup(
+			$services->getLanguageFactory(),
+			$services->getLanguageNameUtils()
+		);
 		$languageNameLookup = new LanguageNameLookup( $language->getCode() );
 		$entityLookup = new InMemoryEntityLookup();
 		if ( $entity->getId() !== null ) {

@@ -64,10 +64,16 @@ class ViewFactoryTest extends ServiceWiringTestCase {
 			$entityIdLabelFormatterFactory );
 		$this->mockService( 'WikibaseRepo.SnakFormatterFactory',
 			$this->createMock( OutputFormatSnakFormatterFactory::class ) );
+		$this->serviceContainer->expects( $this->once() )
+			->method( 'getSiteLookup' );
 		$this->mockService( 'WikibaseRepo.DataTypeFactory',
 			new DataTypeFactory( [] ) );
 		$this->mockService( 'WikibaseRepo.LanguageNameLookupFactory',
 			new LanguageNameLookupFactory() );
+		$this->serviceContainer->expects( $this->once() )
+			->method( 'getLanguageFactory' );
+		$this->serviceContainer->expects( $this->once() )
+			->method( 'getLanguageNameUtils' );
 		$this->mockService(
 			'WikibaseRepo.NumberLocalizerFactory',
 			$this->createMock( NumberLocalizerFactory::class )

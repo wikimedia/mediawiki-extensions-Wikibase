@@ -855,6 +855,8 @@
 			"services": [
 				"ContentLanguage",
 				"HttpRequestFactory",
+				"LanguageFactory",
+				"LanguageNameUtils",
 				"StatsdDataFactory",
 				"UserOptionsLookup",
 				"WikibaseRepo.EntityContentFactory",
