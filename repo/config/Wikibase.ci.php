@@ -32,8 +32,9 @@ $wgWBRepoSettings['dataBridgeEnabled'] = true;
 // enable tainted-refs
 $wgWBRepoSettings['taintedReferencesEnabled'] = true;
 
-// enable Wikibase REST API
+// enable Wikibase REST API (both the production-ready and work-in-progress routes)
 $wgRestAPIAdditionalRouteFiles[] = 'extensions/Wikibase/repo/rest-api/routes.json';
+$wgRestAPIAdditionalRouteFiles[] = 'extensions/Wikibase/repo/rest-api/routes.dev.json';
 
 // enable data value normalization
 $wgWBRepoSettings['tmpNormalizeDataValues'] = true;
