@@ -5,11 +5,6 @@
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetItemRouteHandler::factory"
 	},
 	{
-		"path": "/wikibase/v0/entities/items/{item_id}/labels",
-		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetItemLabelsRouteHandler::factory"
-	},
-	{
 		"path": "/wikibase/v0/entities/items/{item_id}/statements",
 		"method": "GET",
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetItemStatementsRouteHandler::factory"
@@ -48,15 +43,5 @@
 		"path": "/wikibase/v0/statements/{statement_id}",
 		"method": "DELETE",
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\RemoveStatementRouteHandler::factory"
-	},
-	{
-		"path": "/wikibase/v0/entities/items/{item_id}/statements/{statement_id}",
-		"method": "PATCH",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\PatchItemStatementRouteHandler::factory"
-	},
-	{
-		"path": "/wikibase/v0/statements/{statement_id}",
-		"method": "PATCH",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\PatchStatementRouteHandler::factory"
 	}
 ]
