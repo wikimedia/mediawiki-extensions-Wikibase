@@ -21,14 +21,15 @@ use ValueFormatters\ValueFormatter;
 class DispatchingValueFormatter implements ValueFormatter, TypedValueFormatter {
 
 	/**
-	 * @var ValueFormatter[]
+	 * @var (ValueFormatter|callable)[]
 	 */
 	private $formatters;
 
 	/**
-	 * @param ValueFormatter[] $formatters Maps prefixed type ids to ValueFormatter instances.
+	 * @param (ValueFormatter|callable)[] $formatters Maps prefixed type ids to ValueFormatter instances or factories.
 	 *        Each type ID must be prefixed with either "PT:" for property data types
 	 *        or "VT:" for data value types.
+	 *        Callables will be called on-demand with no arguments and must returne a ValueFormatter instance.
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -41,10 +42,6 @@ class DispatchingValueFormatter implements ValueFormatter, TypedValueFormatter {
 			if ( !preg_match( '/^(PT|VT):/', $type ) ) {
 				throw new InvalidArgumentException( 'Type ID must be prefixed with "PT:" or "VT:" to'
 						. ' indicate property data type or data value type, respectively.' );
-			}
-
-			if ( !( $formatter instanceof ValueFormatter ) ) {
-				throw new InvalidArgumentException( '$formatters must contain instances of ValueFormatter' );
 			}
 		}
 
@@ -107,19 +104,26 @@ class DispatchingValueFormatter implements ValueFormatter, TypedValueFormatter {
 	 * @return ValueFormatter
 	 * @throws FormattingException if no appropriate formatter is found
 	 */
-	protected function getFormatter( $dataValueType, $dataTypeId = null ) {
-		/** @var ValueFormatter */
+	protected function getFormatter( $dataValueType, $dataTypeId = null ): ValueFormatter {
 		$formatter = null;
 
 		if ( $dataTypeId !== null ) {
 			if ( isset( $this->formatters["PT:$dataTypeId"] ) ) {
 				$formatter = $this->formatters["PT:$dataTypeId"];
+
+				if ( is_callable( $formatter ) ) {
+					$this->formatters["PT:$dataTypeId"] = $formatter = $formatter();
+				}
 			}
 		}
 
 		if ( $formatter === null ) {
 			if ( isset( $this->formatters["VT:$dataValueType"] ) ) {
 				$formatter = $this->formatters["VT:$dataValueType"];
+
+				if ( is_callable( $formatter ) ) {
+					$this->formatters["VT:$dataValueType"] = $formatter = $formatter();
+				}
 			}
 		}
 
@@ -128,6 +132,16 @@ class DispatchingValueFormatter implements ValueFormatter, TypedValueFormatter {
 				$msg = "No formatter defined for data type $dataTypeId nor for value type $dataValueType.";
 			} else {
 				$msg = "No formatter defined for value type $dataValueType.";
+			}
+
+			throw new FormattingException( $msg );
+		}
+
+		if ( !( $formatter instanceof ValueFormatter ) ) {
+			if ( $dataTypeId !== null ) {
+				$msg = "Formatter defined for data type $dataTypeId and value type $dataValueType is not a ValueFormatter.";
+			} else {
+				$msg = "Formatter defined for value type $dataValueType is not a ValueFormatter.";
 			}
 
 			throw new FormattingException( $msg );

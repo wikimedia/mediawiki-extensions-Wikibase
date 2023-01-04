@@ -235,7 +235,11 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 			new DataTypeFactory( [] ),
 			$this->createMock( MessageInLanguageProvider::class )
 		);
-		$factory->getSnakFormatter( SnakFormatter::FORMAT_PLAIN, new FormatterOptions() );
+		$factory->getSnakFormatter( SnakFormatter::FORMAT_PLAIN, new FormatterOptions() )
+			->formatSnak( new PropertyValueSnak(
+				new NumericPropertyId( 'P1' ),
+				new StringValue( 'S' )
+			) );
 	}
 
 }
