@@ -128,6 +128,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$this->overrideConfigValue( 'RateLimits',
 			[ 'wikibase-idgenerator' => [ '&can-bypass' => true, 'user' => [ 1000, 60 ] ] ] );
 		$store = $this->getEntityStore();
+		$guidGenerator = new GuidGenerator();
 
 		$statements = $this->getStatements();
 
@@ -136,7 +137,6 @@ class SetClaimTest extends WikibaseApiTestCase {
 			$store->saveEntity( $entity, 'setclaimtest', $this->user, EDIT_NEW );
 			$entityId = $entity->getId();
 
-			$guidGenerator = new GuidGenerator();
 			$guid = $guidGenerator->newGuid( $entityId );
 
 			$statement->setGuid( $guid );

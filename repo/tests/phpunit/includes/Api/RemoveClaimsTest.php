@@ -51,10 +51,11 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 			new Statement( new PropertyValueSnak( self::$propertyId, new StringValue( 'o_O' ) ) ),
 		];
 
+		$guidGenerator = new GuidGenerator();
+		$itemStatements = $item->getStatements();
 		foreach ( $statements as $statement ) {
-			$guidGenerator = new GuidGenerator();
 			$statement->setGuid( $guidGenerator->newGuid( $item->getId() ) );
-			$item->getStatements()->addStatement( $statement );
+			$itemStatements->addStatement( $statement );
 		}
 
 		$store->saveEntity( $item, '', $this->user, EDIT_UPDATE );

@@ -72,13 +72,13 @@ class RemoveQualifiersTest extends WikibaseApiTestCase {
 
 	public function testRequests() {
 		$store = $this->getEntityStore();
+		$guidGenerator = new GuidGenerator();
 
 		foreach ( $this->statementProvider() as $statement ) {
 			$item = new Item();
 
 			$store->saveEntity( $item, '', $this->user, EDIT_NEW );
 
-			$guidGenerator = new GuidGenerator();
 			$statement->setGuid( $guidGenerator->newGuid( $item->getId() ) );
 			$item->getStatements()->addStatement( $statement );
 
