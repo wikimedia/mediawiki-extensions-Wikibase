@@ -19,6 +19,7 @@ use Wikibase\Repo\Store\Sql\WikiPageEntityRedirectLookup;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Rdbms\ConnectionManager;
 use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\SelectQueryBuilder;
 
 /**
  * @covers \Wikibase\Repo\Store\Sql\WikiPageEntityRedirectLookup
@@ -163,10 +164,15 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function getMockDatabase( array $row ): IDatabase {
-		$db = $this->createMock( IDatabase::class );
-
-		$db->method( 'selectRow' )
+		$selectQueryBuilder = $this->createMock( SelectQueryBuilder::class );
+		$selectQueryBuilder->method( 'fetchRow' )
 			->willReturn( (object)$row );
+		$selectQueryBuilder->method( $this->anythingBut( 'fetchRow' ) )
+			->willReturnSelf();
+
+		$db = $this->createMock( IDatabase::class );
+		$db->method( 'newSelectQueryBuilder' )
+			->willReturn( $selectQueryBuilder );
 
 		return $db;
 	}

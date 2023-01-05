@@ -117,19 +117,15 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 			throw new EntityRedirectLookupException( $entityId, null, $ex );
 		}
 
-		$row = $db->selectRow(
-			[ 'page', 'redirect' ],
-			[ 'page_id', 'rd_namespace', 'rd_title' ],
-			[
+		$row = $db->newSelectQueryBuilder()
+			->select( [ 'page_id', 'rd_namespace', 'rd_title' ] )
+			->from( 'page' )
+			->leftJoin( 'redirect', null, 'rd_from=page_id' )
+			->where( [
 				'page_title' => $title->getDBkey(),
-				'page_namespace' => $title->getNamespace()
-			],
-			__METHOD__,
-			[],
-			[
-				'redirect' => [ 'LEFT JOIN', 'rd_from=page_id' ]
-			]
-		);
+				'page_namespace' => $title->getNamespace(),
+			] )
+			->caller( __METHOD__ )->fetchRow();
 
 		if ( !$row ) {
 			throw new EntityRedirectLookupException( $entityId );
