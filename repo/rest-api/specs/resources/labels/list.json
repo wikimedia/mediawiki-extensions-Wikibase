@@ -1,7 +1,8 @@
 {
 	"get": {
 		"tags": [ "labels" ],
-		"summary": "Retrieve an Item's labels",
+		"summary": "[WIP] Retrieve an Item's labels",
+		"description": "This endpoint is currently in development and is not recommended for production use.",
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/ItemId" },
 			{ "$ref": "../../global/parameters.json#/IfNoneMatch" },
