@@ -75,13 +75,12 @@ class SqlIdGenerator implements IdGenerator {
 	private function generateNewId( IDatabase $database, $type, $retry = true ) {
 		$database->startAtomic( __METHOD__ );
 
-		$currentId = $database->selectRow(
-			'wb_id_counters',
-			'id_value',
-			[ 'id_type' => $type ],
-			__METHOD__,
-			[ 'FOR UPDATE' ]
-		);
+		$currentId = $database->newSelectQueryBuilder()
+			->select( 'id_value' )
+			->from( 'wb_id_counters' )
+			->where( [ 'id_type' => $type ] )
+			->forUpdate()
+			->caller( __METHOD__ )->fetchRow();
 
 		if ( is_object( $currentId ) ) {
 			$id = $currentId->id_value + 1;
