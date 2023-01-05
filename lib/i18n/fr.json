@@ -88,6 +88,7 @@
 	"version-wikibase": "Wikibase",
 	"wikibase-time-calendar-gregorian": "Grégorien",
 	"wikibase-time-calendar-julian": "Julien",
+	"wikibase-time-with-calendar": "$1 ($2)",
 	"wikibase-time-precision-CE": "$1 EC",
 	"wikibase-time-precision-Gannum": "$1 milliard{{PLURAL:$1||s}} d’années",
 	"wikibase-time-precision-Mannum": "$1 million{{PLURAL:$1||s}} d’années",

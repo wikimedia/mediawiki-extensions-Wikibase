@@ -33,7 +33,7 @@
 	"wikibase-linkitem-failed-modify": "Strani ni bilo mogoče povezati: združitev ustreznih predmetov v {{GRAMMAR:dative|{{WBREPONAME}}}} ni uspela.",
 	"wikibase-linkitem-title": "Poveži s stranjo",
 	"wikibase-linkitem-linkpage": "Poveži s stranjo",
-	"wikibase-linkitem-selectlink": "Prosimo, izberite spletno mesto in stran, ki jo želite povezati s to stranjo.",
+	"wikibase-linkitem-selectlink": "Prosimo, izberite mesto in stran, ki jo želite povezati s to stranjo.",
 	"wikibase-linkitem-input-site": "Jezik:",
 	"wikibase-linkitem-input-page": "Stran:",
 	"wikibase-linkitem-confirmitem-text": "Stran, ki ste jo izbrali, je že povezana s [$1 predmetom v naši centralni shrambi podatkov]. Prosimo, potrdite, da {{PLURAL:$2|je|sta|so}} spodaj {{PLURAL:$2|prikazana|prikazani|prikazane}} {{PLURAL:$2|tista|tisti|tiste}}, ki {{PLURAL:$2|jo|ju|jih}} želite povezati s to stranjo.",
