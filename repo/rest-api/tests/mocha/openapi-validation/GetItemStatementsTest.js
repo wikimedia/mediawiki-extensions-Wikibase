@@ -67,7 +67,7 @@ describe( 'validate GET /entities/items/{id}/statements responses against OpenAP
 	} );
 
 	it( '404 Not Found response is valid for a non-existing item', async () => {
-		const response = await await newGetItemStatementsRequestBuilder( 'Q99999' ).makeRequest();
+		const response = await newGetItemStatementsRequestBuilder( 'Q99999' ).makeRequest();
 
 		expect( response.status ).to.equal( 404 );
 		expect( response ).to.satisfyApiSpec;
