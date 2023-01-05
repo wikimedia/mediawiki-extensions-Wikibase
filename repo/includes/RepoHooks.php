@@ -76,22 +76,10 @@ final class RepoHooks {
 	 * @param Skin $skin
 	 */
 	public static function onBeforePageDisplay( OutputPage $out, Skin $skin ) {
-		global $wgDBname;
 		$settings = WikibaseRepo::getSettings();
 		if ( $settings->getSetting( 'enableEntitySearchUI' ) === true ) {
 
-			/**
-			 * This check for Wikidata corresponds to the same check in Vector's initSearchLoader function
-			 * in resources/skins.vector.js/searchLoader.js
-			 *
-			 * On www.wikidata.org, we want the old search until the new one reached full feature parity.
-			 * Then this check needs to be deleted at the same time as the check in initSearchLoader.
-			 * See I9649cbe6 for that.
-			 *
-			 * Potentially, the code in vector could be changed to check for wikibase.vector.searchClient being loaded.
-			 */
-			$isWikidata = $wgDBname === 'wikidatawiki';
-			if ( !$isWikidata && $skin->getSkinName() === 'vector-2022' ) {
+			if ( $skin->getSkinName() === 'vector-2022' ) {
 				$out->addModules( 'wikibase.vector.searchClient' );
 			} else {
 				$out->addModules( 'wikibase.ui.entitysearch' );
