@@ -5,8 +5,8 @@ namespace Wikibase\Repo\Tests\RestApi\Domain\Serialization;
 use ArrayObject;
 use Generator;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Term\Term;
-use Wikibase\DataModel\Term\TermList;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Serialization\LabelsSerializer;
 
 /**
@@ -21,24 +21,24 @@ class LabelsSerializerTest extends TestCase {
 	/**
 	 * @dataProvider labelsProvider
 	 */
-	public function testSerialize( TermList $labels, ArrayObject $serialization ): void {
+	public function testSerialize( Labels $labels, ArrayObject $serialization ): void {
 		$this->assertEquals(
-			( new LabelsSerializer() )->serialize( $labels ),
-			$serialization
+			$serialization,
+			( new LabelsSerializer() )->serialize( $labels )
 		);
 	}
 
 	public function labelsProvider(): Generator {
 		yield 'empty' => [
-			new TermList(),
+			new Labels(),
 			new ArrayObject( [] ),
 		];
 
 		yield 'multiple labels' => [
-			new TermList( [
-				new Term( 'en', 'potato' ),
-				new Term( 'ko', '감자' ),
-			] ),
+			new Labels(
+				new Label( 'en', 'potato' ),
+				new Label( 'ko', '감자' ),
+			),
 			new ArrayObject( [
 				'en' => 'potato',
 				'ko' => '감자',

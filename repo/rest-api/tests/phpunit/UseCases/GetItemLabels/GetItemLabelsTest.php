@@ -5,9 +5,9 @@ namespace Wikibase\Repo\Tests\RestApi\UseCases\GetItemStatement;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Term\Term;
-use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\Services\ItemLabelsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
@@ -46,10 +46,10 @@ class GetItemLabelsTest extends TestCase {
 	}
 
 	public function testSuccess(): void {
-		$labels = new TermList( [
-			new Term( 'en', 'earth' ),
-			new Term( 'ar', 'أرض' ),
-		] );
+		$labels = new Labels(
+			new Label( 'en', 'earth' ),
+			new Label( 'ar', 'أرض' ),
+		);
 
 		$itemId = new ItemId( 'Q10' );
 		$lastModified = '20201111070707';

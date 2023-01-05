@@ -6,10 +6,10 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookupException;
-use Wikibase\DataModel\Term\Term;
-use Wikibase\DataModel\Term\TermList;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Repo\RestApi\DataAccess\TermLookupItemLabelsRetriever;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 
 /**
  * @covers \Wikibase\Repo\RestApi\DataAccess\TermLookupItemLabelsRetriever
@@ -37,11 +37,11 @@ class TermLookupItemLabelsRetrieverTest extends TestCase {
 
 		$this->assertEquals(
 			( $this->newLabelsRetriever( $termLookup ) )->getLabels( $itemId ),
-			new TermList( [
-				new Term( 'en', 'potato' ),
-				new Term( 'de', 'Kartoffel' ),
-				new Term( 'ko', '감자' ),
-			] )
+			new Labels(
+				new Label( 'en', 'potato' ),
+				new Label( 'de', 'Kartoffel' ),
+				new Label( 'ko', '감자' ),
+			)
 		);
 	}
 
