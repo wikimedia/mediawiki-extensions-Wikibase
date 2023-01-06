@@ -21,6 +21,12 @@ class SerializerFactory {
 		return new StatementSerializer( $propertyValuePairSerializer, $referenceSerializer );
 	}
 
+	public function newReadModelStatementSerializer(): ReadModelStatementSerializer {
+		$propertyValuePairSerializer = new PropertyValuePairSerializer( $this->dataTypeLookup );
+		$referenceSerializer = new ReferenceSerializer( $propertyValuePairSerializer );
+		return new ReadModelStatementSerializer( $propertyValuePairSerializer, $referenceSerializer );
+	}
+
 	public function newStatementListSerializer(): StatementListSerializer {
 		return new StatementListSerializer( $this->newStatementSerializer() );
 	}

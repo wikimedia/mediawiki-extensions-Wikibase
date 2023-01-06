@@ -2,13 +2,19 @@
 
 namespace Wikibase\Repo\Tests\RestApi\UseCases\GetItemStatement;
 
+use DataValues\StringValue;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
+use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikibase\DataModel\ReferenceList;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Snak\SnakList;
+use Wikibase\DataModel\Statement\Statement as DataModelStatement;
 use Wikibase\DataModel\Statement\StatementGuid;
-use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementRetriever;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
@@ -49,11 +55,18 @@ class GetItemStatementTest extends TestCase {
 		$itemId = new ItemId( 'Q123' );
 		$revision = 987;
 		$lastModified = '20201111070707';
-		$statementId = $itemId . StatementGuid::SEPARATOR . 'c48c32c3-42b5-498f-9586-84608b88747c';
-		$expectedStatement = NewStatement::forProperty( 'P123' )
-			->withValue( 'potato' )
-			->withGuid( $statementId )
-			->build();
+		$guidPart = 'c48c32c3-42b5-498f-9586-84608b88747c';
+		$statementId = $itemId . StatementGuid::SEPARATOR . $guidPart;
+		$expectedStatement = new Statement(
+			new StatementGuid( $itemId, $guidPart ),
+			DataModelStatement::RANK_NORMAL,
+			new PropertyValueSnak(
+				new NumericPropertyId( 'P123' ),
+				new StringValue( 'potato' )
+			),
+			new SnakList(),
+			new ReferenceList()
+		);
 
 		$this->itemRevisionMetadataRetriever = $this->createMock( ItemRevisionMetadataRetriever::class );
 		$this->itemRevisionMetadataRetriever->expects( $this->once() )
@@ -68,7 +81,7 @@ class GetItemStatementTest extends TestCase {
 			->willReturn( $expectedStatement );
 
 		$response = $this->newUseCase()->execute(
-			new GetItemStatementRequest( $expectedStatement->getGuid() )
+			new GetItemStatementRequest( (string)$expectedStatement->getGuid() )
 		);
 
 		$this->assertEquals( $expectedStatement, $response->getStatement() );
@@ -162,10 +175,8 @@ class GetItemStatementTest extends TestCase {
 			->willReturn(
 				LatestItemRevisionMetadataResult::concreteRevision( $revision, $lastModified )
 			);
-		$this->statementRetriever = $this->createStub( ItemStatementRetriever::class );
-		$this->statementRetriever
-			->method( 'getStatement' )
-			->willReturn( NewStatement::someValueFor( 'P123' )->build() );
+		$this->statementRetriever = $this->createMock( ItemStatementRetriever::class );
+		$this->statementRetriever->expects( $this->never() )->method( $this->anything() );
 
 		$itemStatementRequest = new GetItemStatementRequest( $statementId, $requestedItemId->getSerialization() );
 		$itemStatementResponse = $this->newUseCase()->execute( $itemStatementRequest );

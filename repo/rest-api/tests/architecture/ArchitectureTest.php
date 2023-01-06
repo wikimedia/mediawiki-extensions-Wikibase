@@ -17,6 +17,7 @@ use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 class ArchitectureTest {
 
 	private const DOMAIN_MODEL = 'Wikibase\Repo\RestApi\Domain\Model';
+	private const DOMAIN_READMODEL = 'Wikibase\Repo\RestApi\Domain\ReadModel';
 	private const DOMAIN_SERVICES = 'Wikibase\Repo\RestApi\Domain\Services';
 	private const VALIDATION = 'Wikibase\Repo\RestApi\Validation';
 	private const SERIALIZATION = 'Wikibase\Repo\RestApi\Serialization';
@@ -29,11 +30,15 @@ class ArchitectureTest {
 	 */
 	public function testDomainModel(): Rule {
 		return PHPat::rule()
-			->classes( Selector::namespace( self::DOMAIN_MODEL ) )
+			->classes(
+				Selector::namespace( self::DOMAIN_MODEL ),
+				Selector::namespace( self::DOMAIN_READMODEL )
+			)
 			->shouldNotDependOn()
 			->classes( Selector::all() )
 			->excluding(
 				Selector::namespace( self::DOMAIN_MODEL ),
+				Selector::namespace( self::DOMAIN_READMODEL ),
 				...$this->dataModelEntityNamespaces(),
 				...$this->phpCoreClasses(),
 			);
@@ -52,6 +57,7 @@ class ArchitectureTest {
 			->classes( Selector::all() )
 			->excluding(
 				Selector::namespace( self::DOMAIN_MODEL ),
+				Selector::namespace( self::DOMAIN_READMODEL ),
 				Selector::namespace( self::DOMAIN_SERVICES ),
 				Selector::namespace( 'Wikibase\Repo\RestApi\Domain\Exceptions' ), // consider moving into services namespace?
 				...$this->dataModelEntityNamespaces(),
@@ -79,6 +85,7 @@ class ArchitectureTest {
 				Selector::namespace( self::SERIALIZATION ),
 				Selector::namespace( self::USE_CASES ),
 				Selector::namespace( self::DOMAIN_MODEL ),
+				Selector::namespace( self::DOMAIN_READMODEL ),
 				Selector::namespace( self::DOMAIN_SERVICES ),
 				Selector::namespace( 'Wikibase\Repo\RestApi\Domain\Exceptions' ), // consider moving into services namespace?
 				...$this->allowedDataModelServices(),

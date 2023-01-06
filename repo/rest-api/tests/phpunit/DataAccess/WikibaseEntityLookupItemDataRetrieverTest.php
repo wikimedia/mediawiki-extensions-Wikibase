@@ -7,6 +7,7 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Statement\Statement as DataModelStatement;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Tests\NewItem;
@@ -14,6 +15,7 @@ use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemDataRetriever;
 use Wikibase\Repo\RestApi\Domain\Model\ItemData;
 use Wikibase\Repo\RestApi\Domain\Model\ItemDataBuilder;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
 
 /**
  * @covers \Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemDataRetriever
@@ -129,7 +131,13 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 		);
 
 		$this->assertEquals(
-			$statement,
+			new Statement(
+				$statementId,
+				DataModelStatement::RANK_NORMAL,
+				$statement->getMainSnak(),
+				$statement->getQualifiers(),
+				$statement->getReferences()
+			),
 			$retriever->getStatement( $statementId )
 		);
 	}

@@ -5,12 +5,12 @@ namespace Wikibase\Repo\RestApi\DataAccess;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
-use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\RestApi\Domain\Model\ItemData;
 use Wikibase\Repo\RestApi\Domain\Model\ItemDataBuilder;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
 use Wikibase\Repo\RestApi\Domain\Services\ItemDataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementRetriever;
@@ -76,8 +76,17 @@ class WikibaseEntityLookupItemDataRetriever implements ItemDataRetriever, ItemSt
 			return null;
 		}
 
-		return $item->getStatements()->getFirstStatementWithGuid(
-			$statementGuid->getSerialization()
+		$statement = $item->getStatements()->getFirstStatementWithGuid( (string)$statementGuid );
+		if ( $statement === null ) {
+			return null;
+		}
+
+		return new Statement(
+			$statementGuid,
+			$statement->getRank(),
+			$statement->getMainSnak(),
+			$statement->getQualifiers(),
+			$statement->getReferences()
 		);
 	}
 
