@@ -4,7 +4,6 @@ namespace Wikibase\Repo;
 
 use MediaWiki\Languages\LanguageFactory;
 use MediaWiki\Languages\LanguageNameUtils;
-use MediaWiki\MediaWikiServices;
 use Wikibase\View\LanguageDirectionalityLookup;
 
 /**
@@ -21,11 +20,11 @@ class MediaWikiLanguageDirectionalityLookup implements LanguageDirectionalityLoo
 	private LanguageNameUtils $languageNameUtils;
 
 	public function __construct(
-		LanguageFactory $languageFactory = null,
-		LanguageNameUtils $languageNameUtils = null
+		LanguageFactory $languageFactory,
+		LanguageNameUtils $languageNameUtils
 	) {
-		$this->languageFactory = $languageFactory ?? MediaWikiServices::getInstance()->getLanguageFactory();
-		$this->languageNameUtils = $languageNameUtils ?? MediaWikiServices::getInstance()->getLanguageNameUtils();
+		$this->languageFactory = $languageFactory;
+		$this->languageNameUtils = $languageNameUtils;
 	}
 
 	/**
