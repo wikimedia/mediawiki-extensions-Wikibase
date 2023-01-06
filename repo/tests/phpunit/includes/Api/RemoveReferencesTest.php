@@ -72,26 +72,20 @@ class RemoveReferencesTest extends WikibaseApiTestCase {
 	}
 
 	public function testRequests() {
+		$guidGenerator = new GuidGenerator();
+		$store = $this->getEntityStore();
+
 		foreach ( $this->statementProvider() as $statement ) {
 			$item = new Item();
 
-			$store = $this->getEntityStore();
 			$store->saveEntity( $item, '', $this->user, EDIT_NEW );
 
-			$guidGenerator = new GuidGenerator();
 			$statement->setGuid( $guidGenerator->newGuid( $item->getId() ) );
 			$item->getStatements()->addStatement( $statement );
 
 			$store->saveEntity( $item, '', $this->user, EDIT_UPDATE );
 
 			$references = $statement->getReferences();
-
-			$hashes = array_map(
-				function( Reference $reference ) {
-					return $reference->getHash();
-				},
-				iterator_to_array( $references )
-			);
 
 			$this->assertIsString( $statement->getGuid() );
 
@@ -102,6 +96,13 @@ class RemoveReferencesTest extends WikibaseApiTestCase {
 					'no-such-reference'
 				);
 			} else {
+				$hashes = array_map(
+					function( Reference $reference ) {
+						return $reference->getHash();
+					},
+					iterator_to_array( $references )
+				);
+
 				$this->makeValidRequest(
 					$statement->getGuid(),
 					$hashes

@@ -38,10 +38,11 @@ class RemoveClaimsTest extends FederatedPropertiesApiTestCase {
 			new Statement( new PropertyValueSnak( $entity->getId(), new StringValue( '^_^' ) ) ),
 		];
 
+		$guidGenerator = new GuidGenerator();
+		$entityStatements = $entity->getStatements();
 		foreach ( $statements as $statement ) {
-			$guidGenerator = new GuidGenerator();
 			$statement->setGuid( $guidGenerator->newGuid( $entity->getId() ) );
-			$entity->getStatements()->addStatement( $statement );
+			$entityStatements->addStatement( $statement );
 		}
 
 		$params = [
