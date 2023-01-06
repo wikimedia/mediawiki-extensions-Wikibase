@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Rdf\Values;
 
+use MediaWiki\Revision\SlotRecord;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityIdValue;
@@ -45,7 +46,7 @@ class EntityIdRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 				new DatabaseEntitySource(
 					'test',
 					'testdb',
-					[ 'item' => [ 'namespaceId' => 3000, 'slot' => 'main' ] ],
+					[ 'item' => [ 'namespaceId' => 3000, 'slot' => SlotRecord::MAIN ] ],
 					'http://test/item/',
 					'',
 					'',

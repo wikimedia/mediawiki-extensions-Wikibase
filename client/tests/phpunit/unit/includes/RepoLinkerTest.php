@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\Unit;
 
+use MediaWiki\Revision\SlotRecord;
 use Wikibase\Client\RepoLinker;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
@@ -68,7 +69,7 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 					new DatabaseEntitySource(
 						'test',
 						'testdb',
-						[ 'item' => [ 'namespaceId' => 123, 'slot' => 'main' ] ],
+						[ 'item' => [ 'namespaceId' => 123, 'slot' => SlotRecord::MAIN ] ],
 						$settings['entitySources']['test']['conceptBaseUri'],
 						'',
 						'',
@@ -251,7 +252,7 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 					new DatabaseEntitySource(
 						'itemwiki',
 						'itemdb',
-						[ 'item' => [ 'namespaceId' => 111, 'slot' => 'main' ] ],
+						[ 'item' => [ 'namespaceId' => 111, 'slot' => SlotRecord::MAIN ] ],
 						'http://www.itemwiki.com/entity',
 						'',
 						'',
@@ -260,7 +261,7 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 					new DatabaseEntitySource(
 						'propertywiki',
 						'propdb',
-						[ 'property' => [ 'namespaceId' => 111, 'slot' => 'main' ] ],
+						[ 'property' => [ 'namespaceId' => 111, 'slot' => SlotRecord::MAIN ] ],
 						'http://www.propertywiki.com/entity',
 						'',
 						'',

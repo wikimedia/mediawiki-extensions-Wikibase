@@ -4,6 +4,7 @@ namespace Wikibase\DataAccess\Tests;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use LogicException;
+use MediaWiki\Revision\SlotRecord;
 use MediaWiki\Storage\NameTableStore;
 use Serializers\DispatchingSerializer;
 use Wikibase\DataAccess\DatabaseEntitySource;
@@ -144,7 +145,15 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			new DataValueDeserializer( [] ),
 			$this->createMock( NameTableStore::class ),
 			DataAccessSettingsFactory::anySettings(),
-			new DatabaseEntitySource( 'source', 'sourcedb', [ 'property' => [ 'namespaceId' => 200, 'slot' => 'main' ] ], '', '', '', '' ),
+			new DatabaseEntitySource(
+				'source',
+				'sourcedb',
+				[ 'property' => [ 'namespaceId' => 200, 'slot' => SlotRecord::MAIN ] ],
+				'',
+				'',
+				'',
+				''
+			),
 			new LanguageFallbackChainFactory(),
 			new DispatchingSerializer(),
 			new RepoDomainDb( $this->createMock( ILBFactory::class ), 'some domain' ),

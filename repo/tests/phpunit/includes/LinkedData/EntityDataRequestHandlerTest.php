@@ -11,6 +11,7 @@ use FauxResponse;
 use HashSiteStore;
 use HtmlCacheUpdater;
 use HttpError;
+use MediaWiki\Revision\SlotRecord;
 use MediaWikiIntegrationTestCase;
 use OutputPage;
 use Psr\Log\NullLogger;
@@ -134,7 +135,7 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 					new DatabaseEntitySource(
 						'test',
 						'testdb',
-						[ 'item' => [ 'namespaceId' => 1200, 'slot' => 'main' ] ],
+						[ 'item' => [ 'namespaceId' => 1200, 'slot' => SlotRecord::MAIN ] ],
 						EntityDataSerializationServiceTest::URI_BASE,
 						'wd',
 						'',

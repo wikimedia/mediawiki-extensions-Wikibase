@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Rdf;
 
 use HashSiteStore;
 use InvalidArgumentException;
+use MediaWiki\Revision\SlotRecord;
 use Site;
 use SiteLookup;
 use Wikibase\DataAccess\DatabaseEntitySource;
@@ -172,7 +173,7 @@ class RdfBuilderTestData {
 					new DatabaseEntitySource(
 						'wikidata',
 						'wikidatadb',
-						[ 'item' => [ 'namespaceId' => 700, 'slot' => 'main' ] ],
+						[ 'item' => [ 'namespaceId' => 700, 'slot' => SlotRecord::MAIN ] ],
 						self::URI_BASE,
 						'wd',
 						'',
@@ -181,7 +182,7 @@ class RdfBuilderTestData {
 					new DatabaseEntitySource(
 						'foreign',
 						'foreigndb',
-						[ 'property' => [ 'namespaceId' => 900, 'slot' => 'main' ] ],
+						[ 'property' => [ 'namespaceId' => 900, 'slot' => SlotRecord::MAIN ] ],
 						self::URI_BASE_FOREIGN,
 						'for',
 						'for',

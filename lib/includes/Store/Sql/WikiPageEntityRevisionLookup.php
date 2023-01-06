@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Store\Sql;
 use IDBAccessObject;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\Revision\RevisionStore;
+use MediaWiki\Revision\SlotRecord;
 use MWContentSerializationException;
 use Psr\Log\LoggerInterface;
 use stdClass;
@@ -30,8 +31,6 @@ use Wikimedia\Assert\Assert;
  * @author Daniel Kinzler
  */
 class WikiPageEntityRevisionLookup implements EntityRevisionLookup {
-
-	private const MAIN_SLOT = 'main';
 
 	/**
 	 * @var WikiPageEntityMetaDataAccessor
@@ -179,7 +178,7 @@ class WikiPageEntityRevisionLookup implements EntityRevisionLookup {
 				list( , $redirect ) = $this->loadEntity( $row, $mode );
 				if ( $redirect === null ) {
 					$revisionId = $row->rev_id;
-					$slot = $row->role_name ?? self::MAIN_SLOT;
+					$slot = $row->role_name ?? SlotRecord::MAIN;
 
 					throw new InconsistentRedirectException(
 						$revisionId,
@@ -222,7 +221,7 @@ class WikiPageEntityRevisionLookup implements EntityRevisionLookup {
 			return [ null, null ];
 		}
 
-		$slotRole = $row->role_name ?? self::MAIN_SLOT;
+		$slotRole = $row->role_name ?? SlotRecord::MAIN;
 
 		return $this->entityDataLoader->loadEntityDataFromWikiPageRevision( $revision, $slotRole, $revStoreFlags );
 	}

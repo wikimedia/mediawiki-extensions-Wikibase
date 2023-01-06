@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
+use MediaWiki\Revision\SlotRecord;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceLookup;
@@ -29,7 +30,7 @@ class EntityUrlLookupTest extends ServiceWiringTestCase {
 		$itemId = new ItemId( 'Q123' );
 		$sources = [
 			NewDatabaseEntitySource::havingName( 'item-source' )
-				->withEntityNamespaceIdsAndSlots( [ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ] )
+				->withEntityNamespaceIdsAndSlots( [ 'item' => [ 'namespaceId' => 100, 'slot' => SlotRecord::MAIN ] ] )
 				->withConceptBaseUri( 'http://wikidata.org/entity/' )
 				->build()
 		];

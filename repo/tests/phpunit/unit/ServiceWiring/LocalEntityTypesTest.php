@@ -3,6 +3,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
+use MediaWiki\Revision\SlotRecord;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
@@ -33,7 +34,7 @@ class LocalEntityTypesTest extends ServiceWiringTestCase {
 
 	public function testGetsLocalEntityTypes(): void {
 		$this->mockEntityTypes( [
-			'foo' => [ 'namespaceId' => 100, 'slot' => 'main' ]
+			'foo' => [ 'namespaceId' => 100, 'slot' => SlotRecord::MAIN ]
 		],
 		[
 			'foo' => [],
@@ -48,7 +49,7 @@ class LocalEntityTypesTest extends ServiceWiringTestCase {
 
 	public function testGetsLocalSubEntityTypes(): void {
 		$this->mockEntityTypes( [
-			'foo' => [ 'namespaceId' => 100, 'slot' => 'main' ]
+			'foo' => [ 'namespaceId' => 100, 'slot' => SlotRecord::MAIN ]
 		],
 		[
 			'foo' => [

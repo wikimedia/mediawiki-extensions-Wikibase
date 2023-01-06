@@ -10,6 +10,7 @@ use FauxResponse;
 use HashSiteStore;
 use HtmlCacheUpdater;
 use HttpError;
+use MediaWiki\Revision\SlotRecord;
 use OutputPage;
 use Psr\Log\NullLogger;
 use SpecialPage;
@@ -102,7 +103,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 					new DatabaseEntitySource(
 						'test',
 						'testdb',
-						[ 'item' => [ 'namespaceId' => 123, 'slot' => 'main' ] ],
+						[ 'item' => [ 'namespaceId' => 123, 'slot' => SlotRecord::MAIN ] ],
 						self::URI_BASE,
 						'',
 						'',

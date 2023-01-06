@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Rdf;
 
 use DataValues\StringValue;
+use MediaWiki\Revision\SlotRecord;
 use OutOfBoundsException;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
@@ -35,7 +36,7 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 				new DatabaseEntitySource(
 					'local',
 					'localdb',
-					[ 'item' => [ 'namespaceId' => 1234, 'slot' => 'main' ] ],
+					[ 'item' => [ 'namespaceId' => 1234, 'slot' => SlotRecord::MAIN ] ],
 					'<BASE>',
 					'wd',
 					'',
@@ -44,7 +45,7 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 				new DatabaseEntitySource(
 					'foo',
 					'otherbd',
-					[ 'property' => [ 'namespaceId' => 4321, 'slot' => 'main' ] ],
+					[ 'property' => [ 'namespaceId' => 4321, 'slot' => SlotRecord::MAIN ] ],
 					'<BASE-foo>',
 					'other',
 					'other',
@@ -66,7 +67,7 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 				new DatabaseEntitySource(
 					'local',
 					'localdb',
-					[ 'item' => [ 'namespaceId' => 1234, 'slot' => 'main' ] ],
+					[ 'item' => [ 'namespaceId' => 1234, 'slot' => SlotRecord::MAIN ] ],
 					'<BASE>',
 					'wd',
 					'',
@@ -75,7 +76,7 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 				new DatabaseEntitySource(
 					'foo',
 					'otherbd',
-					[ 'property' => [ 'namespaceId' => 4321, 'slot' => 'main' ] ],
+					[ 'property' => [ 'namespaceId' => 4321, 'slot' => SlotRecord::MAIN ] ],
 					'<BASE-foo>',
 					'other',
 					'other',
@@ -95,7 +96,7 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 				new DatabaseEntitySource(
 					'localwiki',
 					'localdb',
-					[ 'item' => [ 'namespaceId' => 1234, 'slot' => 'main' ] ],
+					[ 'item' => [ 'namespaceId' => 1234, 'slot' => SlotRecord::MAIN ] ],
 					'<BASE>',
 					'wd',
 					'',
@@ -104,7 +105,7 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 				new DatabaseEntitySource(
 					'otherwiki',
 					'otherdb',
-					[ 'property' => [ 'namespaceId' => 4321, 'slot' => 'main' ] ],
+					[ 'property' => [ 'namespaceId' => 4321, 'slot' => SlotRecord::MAIN ] ],
 					'<BASE-other>',
 					'other',
 					'other',

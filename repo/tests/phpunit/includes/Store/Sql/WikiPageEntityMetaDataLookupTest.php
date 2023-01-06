@@ -6,6 +6,7 @@ namespace Wikibase\Repo\Tests\Store\Sql;
 
 use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Revision\SlotRecord;
 use MediaWikiIntegrationTestCase;
 use stdClass;
 use Wikibase\DataAccess\DatabaseEntitySource;
@@ -104,8 +105,8 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 	private function newEntitySource(): DatabaseEntitySource {
 		$irrelevantItemNamespaceId = 100;
 		$irrelevantPropertyNamespaceId = 200;
-		$irrelevantItemSlotName = 'main';
-		$irrelevantPropertySlotName = 'main';
+		$irrelevantItemSlotName = SlotRecord::MAIN;
+		$irrelevantPropertySlotName = SlotRecord::MAIN;
 
 		return new DatabaseEntitySource(
 			'testsource',
@@ -199,7 +200,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 
 		$this->assertEquals( $entityRevision->getRevisionId(), $result->rev_id );
 		$this->assertEquals( $entityRevision->getRevisionId(), $result->page_latest );
-		$this->assertSame( 'main', $result->role_name );
+		$this->assertSame( SlotRecord::MAIN, $result->role_name );
 	}
 
 	public function testLoadRevisionInformationById_masterFallback(): void {
@@ -316,7 +317,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 		$this->assertRevisionInformation( $entityIds, $result );
 
 		$key = $entityIds[0]->getSerialization();
-		$this->assertSame( 'main', $result[$key]->role_name );
+		$this->assertSame( SlotRecord::MAIN, $result[$key]->role_name );
 	}
 
 	public function testLoadRevisionInformation_masterFallback(): void {
@@ -374,7 +375,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 
 	private function newLookupForEntitySourceProvidingItemsOnly(): WikiPageEntityMetaDataLookup {
 		$irrelevantItemNamespaceId = 100;
-		$irrelevantItemSlotName = 'main';
+		$irrelevantItemSlotName = SlotRecord::MAIN;
 
 		$itemSource = new DatabaseEntitySource(
 			'testsource',

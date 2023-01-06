@@ -103,7 +103,10 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 		$localSource = new DatabaseEntitySource(
 			'local',
 			false,
-			[ 'item' => [ 'namespaceId' => 5000, 'slot' => 'main' ], 'property' => [ 'namespaceId' => 6000, 'slot' => 'main' ] ],
+			[
+				'item' => [ 'namespaceId' => 5000, 'slot' => SlotRecord::MAIN ],
+				'property' => [ 'namespaceId' => 6000, 'slot' => SlotRecord::MAIN ]
+			],
 			'',
 			'',
 			'',
@@ -722,33 +725,33 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 			0,
 			0,
 			null,
-			'main'
+			SlotRecord::MAIN
 		];
 		yield 'UPDATE, with no parent revision, throws exception' => [
 			EDIT_UPDATE,
 			new StorageException( 'Can\'t perform an update with no parent revision' ),
 			null,
-			'main'
+			SlotRecord::MAIN
 		];
 		yield 'UPDATE, with no slot to update, throws exception' => [
 			EDIT_UPDATE,
 			new StorageException(
 				'Can\'t perform an update when the parent revision doesn\'t have expected slot: main'
 			),
-			$this->getMockRevisionRecord( [ 'main' => false ] ),
-			'main'
+			$this->getMockRevisionRecord( [ SlotRecord::MAIN => false ] ),
+			SlotRecord::MAIN
 		];
 		yield 'NEW, with no parent revision, no adjustments' => [
 			EDIT_NEW,
 			EDIT_NEW,
 			null,
-			'main'
+			SlotRecord::MAIN
 		];
 		yield 'NEW, with parent revision on main slot, no adjustments' => [
 			EDIT_NEW,
 			EDIT_NEW,
 			$this->getMockRevisionRecord(),
-			'main'
+			SlotRecord::MAIN
 		];
 		yield 'NEW, with parent revision on non existing extra slot, switch to update' => [
 			EDIT_NEW,
@@ -991,7 +994,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 		$itemSource = new DatabaseEntitySource(
 			'local',
 			false,
-			[ 'item' => [ 'namespaceId' => 5000, 'slot' => 'main' ] ],
+			[ 'item' => [ 'namespaceId' => 5000, 'slot' => SlotRecord::MAIN ] ],
 			'',
 			'',
 			'',
@@ -1034,7 +1037,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 		$customSource = new DatabaseEntitySource(
 			'custom',
 			'customdb',
-			[ 'custom-type' => [ 'namespaceId' => 666, 'slot' => 'main' ] ],
+			[ 'custom-type' => [ 'namespaceId' => 666, 'slot' => SlotRecord::MAIN ] ],
 			'',
 			'',
 			'',

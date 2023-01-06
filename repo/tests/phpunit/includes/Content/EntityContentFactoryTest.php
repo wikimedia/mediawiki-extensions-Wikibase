@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Content;
 
 use InvalidArgumentException;
+use MediaWiki\Revision\SlotRecord;
 use MediaWikiIntegrationTestCase;
 use OutOfBoundsException;
 use Wikibase\DataAccess\DatabaseEntitySource;
@@ -89,7 +90,7 @@ class EntityContentFactoryTest extends MediaWikiIntegrationTestCase {
 		return new DatabaseEntitySource(
 			'itemwiki',
 			'itemdb',
-			[ 'item' => [ 'namespaceId' => 5000, 'slot' => 'main' ] ],
+			[ 'item' => [ 'namespaceId' => 5000, 'slot' => SlotRecord::MAIN ] ],
 			'',
 			'',
 			'',
@@ -102,7 +103,7 @@ class EntityContentFactoryTest extends MediaWikiIntegrationTestCase {
 		$propertySource = new DatabaseEntitySource(
 			'propertywiki',
 			'propertydb',
-			[ 'property' => [ 'namespaceId' => 6000, 'slot' => 'main' ] ],
+			[ 'property' => [ 'namespaceId' => 6000, 'slot' => SlotRecord::MAIN ] ],
 			'',
 			'p',
 			'p',
@@ -139,7 +140,7 @@ class EntityContentFactoryTest extends MediaWikiIntegrationTestCase {
 		$id = new ItemId( 'Q42' );
 
 		$role = $factory->getSlotRoleForType( $id->getEntityType() );
-		$this->assertSame( 'main', $role );
+		$this->assertSame( SlotRecord::MAIN, $role );
 	}
 
 	public function testGetContentHandlerForType() {

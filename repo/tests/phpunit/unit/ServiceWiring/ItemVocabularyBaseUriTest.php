@@ -3,6 +3,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
+use MediaWiki\Revision\SlotRecord;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\Item;
@@ -29,7 +30,7 @@ class ItemVocabularyBaseUriTest extends ServiceWiringTestCase {
 						false,
 						array_fill_keys(
 							$entityTypes,
-							[ 'namespaceId' => $idx, 'slot' => 'main' ]
+							[ 'namespaceId' => $idx, 'slot' => SlotRecord::MAIN ]
 						),
 						$baseUri,
 						'',

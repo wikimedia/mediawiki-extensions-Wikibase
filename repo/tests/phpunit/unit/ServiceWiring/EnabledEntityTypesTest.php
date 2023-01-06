@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
+use MediaWiki\Revision\SlotRecord;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
@@ -33,8 +34,8 @@ class EnabledEntityTypesTest extends ServiceWiringTestCase {
 					'local',
 					false,
 					[
-						'foo' => [ 'namespaceId' => 200, 'slot' => 'main' ],
-						'bar' => [ 'namespaceId' => 220, 'slot' => 'main' ],
+						'foo' => [ 'namespaceId' => 200, 'slot' => SlotRecord::MAIN ],
+						'bar' => [ 'namespaceId' => 220, 'slot' => SlotRecord::MAIN ],
 					],
 					'',
 					'',
@@ -45,7 +46,7 @@ class EnabledEntityTypesTest extends ServiceWiringTestCase {
 					'bazwiki',
 					'bazdb',
 					[
-						'baz' => [ 'namespaceId' => 250, 'slot' => 'main' ],
+						'baz' => [ 'namespaceId' => 250, 'slot' => SlotRecord::MAIN ],
 					],
 					'',
 					'baz',
@@ -56,7 +57,7 @@ class EnabledEntityTypesTest extends ServiceWiringTestCase {
 					'lexemewiki',
 					'bazdb',
 					[
-						'lexeme' => [ 'namespaceId' => 280, 'slot' => 'main' ],
+						'lexeme' => [ 'namespaceId' => 280, 'slot' => SlotRecord::MAIN ],
 					],
 					'',
 					'lex',

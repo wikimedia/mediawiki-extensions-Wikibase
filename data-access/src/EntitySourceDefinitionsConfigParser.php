@@ -4,6 +4,7 @@ namespace Wikibase\DataAccess;
 
 use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Revision\SlotRecord;
 use Wikibase\Lib\SubEntityTypesMapper;
 use Wikimedia\Assert\Assert;
 
@@ -127,7 +128,7 @@ class EntitySourceDefinitionsConfigParser {
 
 	private static function splitNamespaceAndSlot( $namespaceAndSlot ) {
 		if ( is_int( $namespaceAndSlot ) ) {
-			return [ $namespaceAndSlot, 'main' ];
+			return [ $namespaceAndSlot, SlotRecord::MAIN ];
 		}
 
 		if ( !preg_match( '!^(\w*)(/(\w+))?!', $namespaceAndSlot, $m ) ) {
@@ -157,7 +158,7 @@ class EntitySourceDefinitionsConfigParser {
 
 		return [
 			$ns,
-			$m[3] ?? 'main'
+			$m[3] ?? SlotRecord::MAIN
 		];
 	}
 

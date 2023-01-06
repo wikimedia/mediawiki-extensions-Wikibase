@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
+use MediaWiki\Revision\SlotRecord;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceLookup;
@@ -30,7 +31,7 @@ class EntityExistenceCheckerTest extends ServiceWiringTestCase {
 		$itemId = new ItemId( 'Q123' );
 		$sources = [
 			NewDatabaseEntitySource::havingName( 'itemSource' )
-				->withEntityNamespaceIdsAndSlots( [ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ] )
+				->withEntityNamespaceIdsAndSlots( [ 'item' => [ 'namespaceId' => 100, 'slot' => SlotRecord::MAIN ] ] )
 				->withConceptBaseUri( 'http://wikidorta.org/schmentity/' )
 				->build()
 		];

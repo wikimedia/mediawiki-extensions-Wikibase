@@ -11,6 +11,7 @@ use InvalidArgumentException;
 use LogicException;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionRecord;
+use MediaWiki\Revision\SlotRecord;
 use MediaWikiIntegrationTestCase;
 use MWException;
 use RequestContext;
@@ -77,7 +78,7 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 		$entityNamespaceIdsAndSlots = [];
 		$namespaceId = 100;
 		foreach ( $entityTypeDefinitions->getEntityTypes() as $entityType ) {
-			$entityNamespaceIdsAndSlots[$entityType] = [ 'namespaceId' => $namespaceId, 'slot' => 'main' ];
+			$entityNamespaceIdsAndSlots[$entityType] = [ 'namespaceId' => $namespaceId, 'slot' => SlotRecord::MAIN ];
 			$namespaceId += 100;
 		}
 

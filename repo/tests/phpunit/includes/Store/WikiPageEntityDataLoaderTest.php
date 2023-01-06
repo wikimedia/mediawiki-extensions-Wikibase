@@ -31,7 +31,7 @@ class WikiPageEntityDataLoaderTest extends MediaWikiIntegrationTestCase {
 
 	public function testGivenRevisionContainingEntityData_loadEntityDataFromWikiPageRevisionReturnsEntityRevisionAndNull() {
 		$revisionId = 123;
-		$slotRole = 'main';
+		$slotRole = SlotRecord::MAIN;
 
 		$revision = $this->newRevisionRecord( $revisionId, $slotRole );
 
@@ -56,7 +56,7 @@ class WikiPageEntityDataLoaderTest extends MediaWikiIntegrationTestCase {
 
 	public function testGivenRevisionContainingRedirectData_loadEntityDataFromWikiPageRevisionReturnsNullAndEntityRedirect() {
 		$revisionId = 123;
-		$slotRole = 'main';
+		$slotRole = SlotRecord::MAIN;
 
 		$revision = $this->newRevisionRecord( $revisionId, $slotRole );
 
@@ -85,7 +85,7 @@ class WikiPageEntityDataLoaderTest extends MediaWikiIntegrationTestCase {
 
 	public function testGivenRevisionDoesNotContainEntityNorRedirectData_loadEntityDataThrows() {
 		$revisionId = 123;
-		$slotRole = 'main';
+		$slotRole = SlotRecord::MAIN;
 
 		$revision = $this->newRevisionRecord( $revisionId, $slotRole );
 
@@ -109,7 +109,7 @@ class WikiPageEntityDataLoaderTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testGivenRevisionDoesNotContainEntitySlotData_loadEntityDataReturnsNulls() {
-		$slotRole = 'main';
+		$slotRole = SlotRecord::MAIN;
 
 		$revision = $this->createMock( RevisionRecord::class );
 		$revision
@@ -130,7 +130,7 @@ class WikiPageEntityDataLoaderTest extends MediaWikiIntegrationTestCase {
 
 	public function testGivenRevisionCannotBeAccessed_loadEntityDataReturnsNulls() {
 		$revisionId = 123;
-		$slotRole = 'main';
+		$slotRole = SlotRecord::MAIN;
 
 		$revision = $this->newRevisionRecord( $revisionId, $slotRole );
 		$revision = $this->createMock( RevisionRecord::class );
@@ -151,7 +151,7 @@ class WikiPageEntityDataLoaderTest extends MediaWikiIntegrationTestCase {
 
 	public function testGivenSlotCannotBeLoaded_loadEntityDataThrows() {
 		$revisionId = 123;
-		$slotRole = 'main';
+		$slotRole = SlotRecord::MAIN;
 
 		$revision = $this->newRevisionRecord( $revisionId, $slotRole );
 		$revision
@@ -173,7 +173,7 @@ class WikiPageEntityDataLoaderTest extends MediaWikiIntegrationTestCase {
 
 	public function testGivenBlobCannotBeLoaded_loadEntityDataThrows() {
 		$revisionId = 123;
-		$slotRole = 'main';
+		$slotRole = SlotRecord::MAIN;
 
 		$revision = $this->newRevisionRecord( $revisionId, $slotRole );
 

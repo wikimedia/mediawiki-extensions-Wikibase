@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Rdf;
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Revision\SlotRecord;
 use MediaWikiIntegrationTestCase;
 use RequestContext;
 use SiteLookup;
@@ -571,7 +572,7 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 			[ '' => RdfBuilderTestData::URI_BASE ],
 			[ '' => RdfBuilderTestData::URI_DATA ],
 			new EntitySourceDefinitions( [
-				new DatabaseEntitySource( '', 'somedb', [ 'item' => [ 'namespaceId' => 123, 'slot' => 'main' ] ], '', '', '', '' )
+				new DatabaseEntitySource( '', 'somedb', [ 'item' => [ 'namespaceId' => 123, 'slot' => SlotRecord::MAIN ] ], '', '', '', '' )
 			], new SubEntityTypesMapper( [] ) ),
 			[ '' => '' ],
 			[ '' => '' ],

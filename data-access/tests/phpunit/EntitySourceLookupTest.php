@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\DataAccess\Tests;
 
 use LogicException;
+use MediaWiki\Revision\SlotRecord;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\ApiEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
@@ -46,7 +47,7 @@ class EntitySourceLookupTest extends TestCase {
 	public function testGivenUnprefixedEntityId_returnsDbEntitySourceForEntityType() {
 		$id = new NumericPropertyId( 'P123' );
 		$expectedSource = NewDatabaseEntitySource::havingName( 'im a db source!' )
-			->withEntityNamespaceIdsAndSlots( [ 'property' => [ 'namespaceId' => 121, 'slot' => 'main' ] ] )
+			->withEntityNamespaceIdsAndSlots( [ 'property' => [ 'namespaceId' => 121, 'slot' => SlotRecord::MAIN ] ] )
 			->build();
 
 		$lookup = new EntitySourceLookup( $this->newEntitySourceDefinitionsFromSources( [
@@ -60,7 +61,7 @@ class EntitySourceLookupTest extends TestCase {
 	public function testGivenEntityIdWithNoMatchingSource_throwsException() {
 		$lookup = new EntitySourceLookup( $this->newEntitySourceDefinitionsFromSources( [
 			NewDatabaseEntitySource::havingName( 'im a property source' )
-				->withEntityNamespaceIdsAndSlots( [ 'property' => [ 'namespaceId' => 121, 'slot' => 'main' ] ] )
+				->withEntityNamespaceIdsAndSlots( [ 'property' => [ 'namespaceId' => 121, 'slot' => SlotRecord::MAIN ] ] )
 				->build(),
 		] ), new SubEntityTypesMapper( [] ) );
 
@@ -90,7 +91,7 @@ class EntitySourceLookupTest extends TestCase {
 		$subEntityId->method( 'getEntityType' )->willReturn( 'form' );
 
 		$expectedSource = NewDatabaseEntitySource::havingName( 'lexeme source' )
-			->withEntityNamespaceIdsAndSlots( [ 'lexeme' => [ 'namespaceId' => 121, 'slot' => 'main' ] ] )
+			->withEntityNamespaceIdsAndSlots( [ 'lexeme' => [ 'namespaceId' => 121, 'slot' => SlotRecord::MAIN ] ] )
 			->build();
 
 		$lookup = new EntitySourceLookup(

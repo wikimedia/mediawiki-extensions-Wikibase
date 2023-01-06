@@ -6,6 +6,7 @@ use Content;
 use FauxRequest;
 use IContextSource;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Revision\SlotRecord;
 use MediaWikiIntegrationTestCase;
 use RequestContext;
 use Status;
@@ -35,7 +36,7 @@ class EditFilterHookRunnerTest extends MediaWikiIntegrationTestCase {
 
 	public function getEditFilterHookRunner(): MediawikiEditFilterHookRunner {
 		$namespaceLookup = $this->createMock( EntityNamespaceLookup::class );
-		$namespaceLookup->method( 'getEntitySlotRole' )->willReturn( 'main' );
+		$namespaceLookup->method( 'getEntitySlotRole' )->willReturn( SlotRecord::MAIN );
 
 		$entityTitleLookup = $this->createMock( EntityTitleStoreLookup::class );
 		$entityTitleLookup->method( 'getTitleForId' )

@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Store;
 
+use MediaWiki\Revision\SlotRecord;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -69,7 +70,7 @@ class EntityNamespaceLookup {
 	 *         pages.
 	 */
 	public function getEntitySlotRole( $entityType ) {
-		return $this->entitySlots[$entityType] ?? 'main';
+		return $this->entitySlots[$entityType] ?? SlotRecord::MAIN;
 	}
 
 	/**
@@ -100,7 +101,7 @@ class EntityNamespaceLookup {
 	public function isEntityNamespace( $ns ) {
 		$entityType = array_search( $ns, $this->entityNamespaces, true );
 
-		return $entityType !== false && $this->getEntitySlotRole( $entityType ) === 'main';
+		return $entityType !== false && $this->getEntitySlotRole( $entityType ) === SlotRecord::MAIN;
 	}
 
 	/**
