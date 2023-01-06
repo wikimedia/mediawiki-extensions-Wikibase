@@ -109,9 +109,9 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 
 		try {
 			if ( $forUpdate === EntityRedirectLookup::FOR_UPDATE ) {
-				$db = $this->repoDb->connections()->getWriteConnectionRef();
+				$db = $this->repoDb->connections()->getWriteConnection();
 			} else {
-				$db = $this->repoDb->connections()->getReadConnectionRef();
+				$db = $this->repoDb->connections()->getReadConnection();
 			}
 		} catch ( MWException $ex ) {
 			throw new EntityRedirectLookupException( $entityId, null, $ex );

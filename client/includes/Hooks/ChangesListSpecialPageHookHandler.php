@@ -57,7 +57,7 @@ class ChangesListSpecialPageHookHandler implements ChangesListSpecialPageQueryHo
 		SettingsArray $clientSettings
 	): self {
 		return new self(
-			$dbFactory->newLocalDb()->connections()->getLazyReadConnectionRef(),
+			$dbFactory->newLocalDb()->connections()->getReadConnection(),
 			$clientSettings->getSetting( 'showExternalRecentChanges' ),
 			$userOptionsLookup
 		);

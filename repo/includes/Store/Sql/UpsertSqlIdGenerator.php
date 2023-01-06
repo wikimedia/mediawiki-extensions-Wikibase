@@ -85,8 +85,6 @@ class UpsertSqlIdGenerator implements IdGenerator {
 
 		} while ( $this->idIsReserved( $type, $id ) );
 
-		$this->db->connections()->releaseConnection( $database );
-
 		return $id;
 	}
 

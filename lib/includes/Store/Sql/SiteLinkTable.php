@@ -104,7 +104,7 @@ class SiteLinkTable implements SiteLinkStore {
 		}
 
 		$ok = true;
-		$dbw = $this->db->connections()->getWriteConnectionRef();
+		$dbw = $this->db->connections()->getWriteConnection();
 
 		if ( $linksToDelete ) {
 			$this->logger->debug(
@@ -212,7 +212,7 @@ class SiteLinkTable implements SiteLinkStore {
 			throw new MWException( 'Cannot write when in readonly mode' );
 		}
 
-		$dbw = $this->db->connections()->getWriteConnectionRef();
+		$dbw = $this->db->connections()->getWriteConnection();
 
 		$dbw->delete(
 			$this->table,
@@ -241,7 +241,7 @@ class SiteLinkTable implements SiteLinkStore {
 		// We store page titles with spaces instead of underscores
 		$pageTitle = str_replace( '_', ' ', $pageTitle );
 
-		$dbr = $this->db->connections()->getReadConnectionRef();
+		$dbr = $this->db->connections()->getReadConnection();
 
 		$result = $dbr->newSelectQueryBuilder()
 			->select( 'ips_item_id' )
@@ -298,7 +298,7 @@ class SiteLinkTable implements SiteLinkStore {
 			);
 		}
 
-		$dbr = $this->db->connections()->getReadConnectionRef();
+		$dbr = $this->db->connections()->getReadConnection();
 		$links = $dbr->newSelectQueryBuilder()
 			->select( [
 				'ips_site_id',
@@ -334,7 +334,7 @@ class SiteLinkTable implements SiteLinkStore {
 	public function getSiteLinksForItem( ItemId $itemId ): array {
 		$numericId = $itemId->getNumericId();
 
-		$dbr = $this->db->connections()->getReadConnectionRef();
+		$dbr = $this->db->connections()->getReadConnection();
 
 		$rows = $dbr->newSelectQueryBuilder()
 			->select( [ 'ips_site_id', 'ips_site_page' ] )

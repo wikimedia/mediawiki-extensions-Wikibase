@@ -87,7 +87,7 @@ class WikiPageEntityMetaDataLookup implements WikiPageEntityMetaDataAccessor {
 		$this->assertCanHandleEntityIds( $entityIds );
 
 		if ( $mode !== LookupConstants::LATEST_FROM_MASTER ) {
-			$dbReplicaRead = $this->repoDb->connections()->getReadConnectionRef();
+			$dbReplicaRead = $this->repoDb->connections()->getReadConnection();
 			$rows = $this->selectRevisionInformationMultiple( $entityIds, $dbReplicaRead );
 		}
 
@@ -102,7 +102,7 @@ class WikiPageEntityMetaDataLookup implements WikiPageEntityMetaDataAccessor {
 			}
 
 			if ( $loadFromMaster ) {
-				$dbPrimaryRead = $this->repoDb->connections()->getWriteConnectionRef();
+				$dbPrimaryRead = $this->repoDb->connections()->getWriteConnection();
 				$rows = array_merge(
 					$rows,
 					$this->selectRevisionInformationMultiple( $loadFromMaster, $dbPrimaryRead )
@@ -132,7 +132,7 @@ class WikiPageEntityMetaDataLookup implements WikiPageEntityMetaDataAccessor {
 	) {
 		$this->assertCanHandleEntityId( $entityId );
 
-		$dbReplicaRead = $this->repoDb->connections()->getReadConnectionRef();
+		$dbReplicaRead = $this->repoDb->connections()->getReadConnection();
 		$row = $this->selectRevisionInformationById( $entityId, $revisionId, $dbReplicaRead );
 
 		if ( !$row && $mode !== LookupConstants::LATEST_FROM_REPLICA ) {
@@ -146,7 +146,7 @@ class WikiPageEntityMetaDataLookup implements WikiPageEntityMetaDataAccessor {
 				]
 			);
 
-			$dbPrimaryRead = $this->repoDb->connections()->getWriteConnectionRef();
+			$dbPrimaryRead = $this->repoDb->connections()->getWriteConnection();
 			$row = $this->selectRevisionInformationById( $entityId, $revisionId, $dbPrimaryRead );
 		}
 
@@ -171,7 +171,7 @@ class WikiPageEntityMetaDataLookup implements WikiPageEntityMetaDataAccessor {
 		$this->assertCanHandleEntityIds( $entityIds );
 
 		if ( $mode !== LookupConstants::LATEST_FROM_MASTER ) {
-			$dbReplicaRead = $this->repoDb->connections()->getReadConnectionRef();
+			$dbReplicaRead = $this->repoDb->connections()->getReadConnection();
 			$revisionIds = $this->selectLatestRevisionIdsMultiple( $entityIds, $dbReplicaRead );
 		}
 
@@ -186,7 +186,7 @@ class WikiPageEntityMetaDataLookup implements WikiPageEntityMetaDataAccessor {
 			}
 
 			if ( $loadFromMaster ) {
-				$dbPrimaryRead = $this->repoDb->connections()->getWriteConnectionRef();
+				$dbPrimaryRead = $this->repoDb->connections()->getWriteConnection();
 				$revisionIds = array_merge(
 					$revisionIds,
 					$this->selectLatestRevisionIdsMultiple( $loadFromMaster, $dbPrimaryRead )

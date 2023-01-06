@@ -49,12 +49,12 @@ class SqlChangeStore implements ChangeStore {
 	public function deleteChangesByChangeIds( array $changeIds ): void {
 		Assert::parameterElementType( 'integer', $changeIds, '$changeIds' );
 
-		$dbw = $this->repoDomainDb->connections()->getWriteConnectionRef();
+		$dbw = $this->repoDomainDb->connections()->getWriteConnection();
 		$dbw->delete( 'wb_changes', [ 'change_id' => $changeIds ], __METHOD__ );
 	}
 
 	private function updateChange( ChangeRow $change ) {
-		$dbw = $this->repoDomainDb->connections()->getWriteConnectionRef();
+		$dbw = $this->repoDomainDb->connections()->getWriteConnection();
 		$values = $this->getValues( $change, $dbw );
 
 		$dbw->update(
@@ -66,7 +66,7 @@ class SqlChangeStore implements ChangeStore {
 	}
 
 	private function insertChange( ChangeRow $change ) {
-		$dbw = $this->repoDomainDb->connections()->getWriteConnectionRef();
+		$dbw = $this->repoDomainDb->connections()->getWriteConnection();
 		$values = $this->getValues( $change, $dbw );
 
 		$dbw->insert( 'wb_changes', $values, __METHOD__ );

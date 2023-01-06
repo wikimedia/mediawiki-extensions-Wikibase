@@ -24,7 +24,7 @@ class DispatchStats {
 	}
 
 	public function getDispatchStats(): array {
-		$db = $this->db->connections()->getReadConnectionRef();
+		$db = $this->db->connections()->getReadConnection();
 		$limit = 5000;
 
 		$limitedNumberOfChanges = $this->loadLimitedNumberOfChanges( $db, $limit );

@@ -114,7 +114,7 @@ class EntityUsageTableBuilder {
 		$this->domainDb->autoReconfigure();
 
 		$connections = $this->domainDb->connections();
-		$dbw = $connections->getWriteConnectionRef();
+		$dbw = $connections->getWriteConnection();
 
 		$entityPerPage = $this->getUsageBatch( $dbw, $fromPageId );
 

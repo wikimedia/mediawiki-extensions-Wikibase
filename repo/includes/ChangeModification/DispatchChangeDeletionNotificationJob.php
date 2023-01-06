@@ -55,7 +55,7 @@ class DispatchChangeDeletionNotificationJob extends DispatchChangeModificationNo
 	}
 
 	private function getArchiveRows( int &$processed, int &$staleRecords, string $entityIdSerialization ): array {
-		$dbr = $this->db->connections()->getReadConnectionRef();
+		$dbr = $this->db->connections()->getReadConnection();
 
 		$iterator = new BatchRowIterator(
 			$dbr,

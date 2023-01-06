@@ -52,7 +52,7 @@ class SqlSubscriptionManager implements SubscriptionManager {
 	 */
 	public function subscribe( string $subscriber, array $entityIds ): void {
 		$subscriptions = $this->idsToString( $entityIds );
-		$dbw = $this->connectionManager->getWriteConnectionRef();
+		$dbw = $this->connectionManager->getWriteConnection();
 		$dbw->startAtomic( __METHOD__ );
 		$oldSubscriptions = $this->querySubscriptions( $dbw, $subscriber, $subscriptions );
 		$newSubscriptions = array_diff( $subscriptions, $oldSubscriptions );
@@ -71,7 +71,7 @@ class SqlSubscriptionManager implements SubscriptionManager {
 	 */
 	public function unsubscribe( string $subscriber, array $entityIds ): void {
 		$unsubscriptions = $this->idsToString( $entityIds );
-		$dbw = $this->connectionManager->getWriteConnectionRef();
+		$dbw = $this->connectionManager->getWriteConnection();
 		$dbw->startAtomic( __METHOD__ );
 		$oldSubscriptions = $this->querySubscriptions( $dbw, $subscriber, $unsubscriptions );
 		$obsoleteSubscriptions = array_intersect( $unsubscriptions, $oldSubscriptions );

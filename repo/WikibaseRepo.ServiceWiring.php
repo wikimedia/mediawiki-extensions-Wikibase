@@ -1224,7 +1224,7 @@ return [
 		$db = WikibaseRepo::getRepoDomainDbFactory( $services )->newRepoDb();
 
 		if ( $idGeneratorSetting === 'auto' ) {
-			$idGeneratorSetting = $db->connections()->getLazyWriteConnectionRef()->getType() === 'mysql'
+			$idGeneratorSetting = $db->connections()->getWriteConnection()->getType() === 'mysql'
 				? 'mysql-upsert' : 'original';
 		}
 

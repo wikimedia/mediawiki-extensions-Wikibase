@@ -125,14 +125,16 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 	 * This injects a fake load balancer (factory).
 	 *
 	 * @param int $selectCount Number of mocked/lagged IDatabase::select calls
-	 * @param int $getConnectionRefCount Number of ILoadBalancer::getConnectionRef calls
+	 * @param int $getConnectionCount Number of ILoadBalancer::getConnection calls
 	 */
-	private function getLookupWithLaggedConnection( int $selectCount, int $getConnectionRefCount ): WikiPageEntityMetaDataLookup {
+	private function getLookupWithLaggedConnection( int $selectCount, int $getConnectionCount ): WikiPageEntityMetaDataLookup {
 		$nsLookup = $this->getEntityNamespaceLookup();
 
 		$loadBalancer = $this->createMock( ILoadBalancerForOwner::class );
-		$loadBalancer->expects( $this->exactly( $getConnectionRefCount ) )
-			->method( 'getConnectionRef' )
+		$loadBalancer->expects( $this->never() )
+			->method( 'getConnectionRef' );
+		$loadBalancer->expects( $this->exactly( $getConnectionCount ) )
+			->method( 'getConnection' )
 			->willReturnCallback( function( $id ) use ( $selectCount ) {
 				$db = $realDB = $this->db;
 

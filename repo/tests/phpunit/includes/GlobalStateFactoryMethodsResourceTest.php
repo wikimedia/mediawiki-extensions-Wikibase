@@ -189,8 +189,6 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiIntegrationTestCase
 			function() {
 				$lb = $this->createMock( ILoadBalancer::class );
 				$lb->expects( $this->never() )
-					->method( 'getConnection' );
-				$lb->expects( $this->never() )
 					->method( 'getMaintenanceConnectionRef' );
 				$lb->method( 'getLocalDomainID' )
 					->willReturn( 'banana' );
@@ -203,6 +201,8 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiIntegrationTestCase
 					DB_REPLICA
 				);
 				$lb->method( 'getConnectionRef' )
+					->willReturn( $lazyDb );
+				$lb->method( 'getConnection' )
 					->willReturn( $lazyDb );
 
 				$lbFactory = $this->createMock( LBFactory::class );

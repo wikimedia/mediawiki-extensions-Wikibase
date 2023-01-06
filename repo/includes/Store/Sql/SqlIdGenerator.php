@@ -57,7 +57,6 @@ class SqlIdGenerator implements IdGenerator {
 		$flags = ( $this->separateDbConnection === true ) ? ILoadBalancer::CONN_TRX_AUTOCOMMIT : 0;
 		$database = $this->db->connections()->getWriteConnection( $flags );
 		$id = $this->generateNewId( $database, $type );
-		$this->db->connections()->releaseConnection( $database );
 
 		return $id;
 	}

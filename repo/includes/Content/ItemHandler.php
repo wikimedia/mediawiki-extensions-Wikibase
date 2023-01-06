@@ -182,7 +182,7 @@ class ItemHandler extends EntityHandler {
 			$updates[] = new DataUpdateAdapter(
 				function ( Item $item, string $method ) {
 					$this->siteLinkStore->saveLinksOfItem( $item );
-					$this->db->connections()->getWriteConnectionRef()
+					$this->db->connections()->getWriteConnection()
 						->onTransactionCommitOrIdle( function() use ( $item ) {
 							$this->bagOStuffSiteLinkConflictLookup->clearConflictsForItem( $item );
 						}, $method );
