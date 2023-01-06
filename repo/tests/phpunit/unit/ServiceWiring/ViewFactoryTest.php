@@ -70,7 +70,7 @@ class ViewFactoryTest extends ServiceWiringTestCase {
 		$this->mockService( 'WikibaseRepo.DataTypeFactory',
 			new DataTypeFactory( [] ) );
 		$this->mockService( 'WikibaseRepo.LanguageNameLookupFactory',
-			new LanguageNameLookupFactory() );
+			$this->createMock( LanguageNameLookupFactory::class ) );
 		$this->mockService( 'WikibaseRepo.LanguageDirectionalityLookup',
 			$this->createMock( LanguageDirectionalityLookup::class ) );
 		$this->mockService(

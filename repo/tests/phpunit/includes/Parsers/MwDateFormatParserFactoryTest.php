@@ -127,7 +127,7 @@ class MwDateFormatParserFactoryTest extends TestCase {
 	private function getLanguageCodes() {
 		// Focus on a critical subset of languages. Enable the following MediaWiki dependency to
 		// test the full set of all 400+ supported languages. This may take several minutes.
-		// return array_keys( Language::fetchLanguageNames() );
+		// return array_keys( MediaWikiServices::getInstance()->getLanguageNameUtils()->getLanguageNames() );
 		return [
 			'ace',
 			'anp',

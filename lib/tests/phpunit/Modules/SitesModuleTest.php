@@ -7,6 +7,7 @@ namespace Wikibase\Lib\Tests\Modules;
 use BagOStuff;
 use HashBagOStuff;
 use HashSiteStore;
+use MediaWiki\MediaWikiServices;
 use MediaWiki\ResourceLoader\Context;
 use MediaWikiSite;
 use RawMessage;
@@ -177,7 +178,7 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 			$repoSettings,
 			new HashSiteStore( [ $site1, $site2 ] ),
 			new HashBagOStuff(),
-			new LanguageNameLookupFactory()
+			new LanguageNameLookupFactory( MediaWikiServices::getInstance()->getLanguageNameUtils() )
 		);
 
 		$script = $module->getScript( $this->getContext() );
@@ -245,7 +246,7 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 			null,
 			new HashSiteStore( $sites ),
 			new HashBagOStuff(),
-			new LanguageNameLookupFactory()
+			new LanguageNameLookupFactory( MediaWikiServices::getInstance()->getLanguageNameUtils() )
 		);
 	}
 
@@ -259,7 +260,7 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 				null,
 				new HashSiteStore( $sites ),
 				$cache,
-				new LanguageNameLookupFactory()
+				new LanguageNameLookupFactory( MediaWikiServices::getInstance()->getLanguageNameUtils() )
 			] )
 			->onlyMethods( [ 'makeScript' ] )
 			->getMock();
