@@ -11,5 +11,7 @@
 	"wikibase-linkitem-linkpage": "Liŋ ne leɛree",
 	"wikibase-linkitem-selectlink": "Gaafera sɛlɛɛte saite ane leɛree fo naŋ na boɔra ka fo liŋ ne a leɛree ŋa.",
 	"wikibase-linkitem-input-site": "Kɔkɔre:",
-	"wikibase-linkitem-input-page": "Leɛree"
+	"wikibase-linkitem-input-page": "Leɛree",
+	"wikibase-rc-hide-wikidata-hide": "sɔgle",
+	"wikibase-rc-hide-wikidata-show": "wulo"
 }
