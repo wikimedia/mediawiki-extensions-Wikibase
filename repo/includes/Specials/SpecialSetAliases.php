@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Specials;
 
 use InvalidArgumentException;
+use MediaWiki\Languages\LanguageNameUtils;
 use MediaWiki\Logger\LoggerFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\AliasesProvider;
@@ -34,7 +35,8 @@ class SpecialSetAliases extends SpecialModifyTerm {
 		EntityTitleLookup $entityTitleLookup,
 		MediawikiEditEntityFactory $editEntityFactory,
 		EntityPermissionChecker $entityPermissionChecker,
-		ContentLanguages $termsLanguages
+		ContentLanguages $termsLanguages,
+		LanguageNameUtils $languageNameUtils
 	) {
 		parent::__construct(
 			'SetAliases',
@@ -45,11 +47,13 @@ class SpecialSetAliases extends SpecialModifyTerm {
 			$entityTitleLookup,
 			$editEntityFactory,
 			$entityPermissionChecker,
-			$termsLanguages
+			$termsLanguages,
+			$languageNameUtils
 		);
 	}
 
 	public static function factory(
+		LanguageNameUtils $languageNameUtils,
 		ChangeOpFactoryProvider $changeOpFactoryProvider,
 		MediawikiEditEntityFactory $editEntityFactory,
 		EntityPermissionChecker $entityPermissionChecker,
@@ -72,7 +76,8 @@ class SpecialSetAliases extends SpecialModifyTerm {
 			$entityTitleLookup,
 			$editEntityFactory,
 			$entityPermissionChecker,
-			$termsLanguages
+			$termsLanguages,
+			$languageNameUtils
 		);
 	}
 

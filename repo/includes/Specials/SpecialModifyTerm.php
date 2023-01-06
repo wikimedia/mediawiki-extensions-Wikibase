@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Specials;
 
 use Html;
 use HTMLForm;
-use Language;
+use MediaWiki\Languages\LanguageNameUtils;
 use Status;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -59,6 +59,11 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	 */
 	private $permissionChecker;
 
+	/**
+	 * @var LanguageNameUtils
+	 */
+	private $languageNameUtils;
+
 	public function __construct(
 		string $title,
 		array $tags,
@@ -68,7 +73,8 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		EntityTitleLookup $entityTitleLookup,
 		MediawikiEditEntityFactory $editEntityFactory,
 		EntityPermissionChecker $permissionChecker,
-		ContentLanguages $termsLanguages
+		ContentLanguages $termsLanguages,
+		LanguageNameUtils $languageNameUtils
 	) {
 		parent::__construct(
 			$title,
@@ -82,6 +88,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		$this->termChangeOpFactory = $changeOpFactoryProvider->getFingerprintChangeOpFactory();
 		$this->termsLanguages = $termsLanguages;
 		$this->permissionChecker = $permissionChecker;
+		$this->languageNameUtils = $languageNameUtils;
 	}
 
 	public function doesWrites() {
@@ -215,7 +222,8 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 			'nodata' => true
 		];
 
-		$languageName = Language::fetchLanguageName( $this->languageCode, $this->getLanguage()->getCode() );
+		$languageName = $this->languageNameUtils
+			->getLanguageName( $this->languageCode, $this->getLanguage()->getCode() );
 
 		if ( $entity !== null && $this->languageCode !== null && $languageName !== '' ) {
 			// Messages:

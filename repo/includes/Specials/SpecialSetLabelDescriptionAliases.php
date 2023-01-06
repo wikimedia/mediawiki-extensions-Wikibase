@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Specials;
 use Html;
 use HTMLForm;
 use InvalidArgumentException;
-use Language;
+use MediaWiki\Languages\LanguageNameUtils;
 use MediaWiki\Logger\LoggerFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\Fingerprint;
@@ -52,6 +52,11 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	private $permissionChecker;
 
 	/**
+	 * @var LanguageNameUtils
+	 */
+	private $languageNameUtils;
+
+	/**
 	 * @var string
 	 */
 	private $languageCode;
@@ -79,7 +84,8 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 		MediawikiEditEntityFactory $editEntityFactory,
 		FingerprintChangeOpFactory $changeOpFactory,
 		ContentLanguages $termsLanguages,
-		EntityPermissionChecker $permissionChecker
+		EntityPermissionChecker $permissionChecker,
+		LanguageNameUtils $languageNameUtils
 	) {
 		parent::__construct(
 			'SetLabelDescriptionAliases',
@@ -93,9 +99,11 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 		$this->changeOpFactory = $changeOpFactory;
 		$this->termsLanguages = $termsLanguages;
 		$this->permissionChecker = $permissionChecker;
+		$this->languageNameUtils = $languageNameUtils;
 	}
 
 	public static function factory(
+		LanguageNameUtils $languageNameUtils,
 		ChangeOpFactoryProvider $changeOpFactoryProvider,
 		MediawikiEditEntityFactory $editEntityFactory,
 		EntityPermissionChecker $entityPermissionChecker,
@@ -118,7 +126,8 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 			$editEntityFactory,
 			$changeOpFactoryProvider->getFingerprintChangeOpFactory(),
 			$termsLanguages,
-			$entityPermissionChecker
+			$entityPermissionChecker,
+			$languageNameUtils
 		);
 	}
 
@@ -182,7 +191,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	protected function getForm( EntityDocument $entity = null ) {
 		if ( $entity !== null && $this->languageCode !== null ) {
 
-			$languageName = Language::fetchLanguageName(
+			$languageName = $this->languageNameUtils->getLanguageName(
 				$this->languageCode, $this->getLanguage()->getCode()
 			);
 			$intro = $this->msg(

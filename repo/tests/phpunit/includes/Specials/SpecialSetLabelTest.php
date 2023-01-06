@@ -38,7 +38,8 @@ class SpecialSetLabelTest extends SpecialModifyTermTestCase {
 			WikibaseRepo::getEntityTitleLookup(),
 			WikibaseRepo::getEditEntityFactory(),
 			WikibaseRepo::getEntityPermissionChecker(),
-			WikibaseRepo::getTermsLanguages()
+			WikibaseRepo::getTermsLanguages(),
+			$this->getServiceContainer()->getLanguageNameUtils()
 		);
 	}
 

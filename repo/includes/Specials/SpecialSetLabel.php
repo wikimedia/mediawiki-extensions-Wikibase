@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Specials;
 
 use InvalidArgumentException;
+use MediaWiki\Languages\LanguageNameUtils;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Lib\ContentLanguages;
@@ -32,7 +33,8 @@ class SpecialSetLabel extends SpecialModifyTerm {
 		EntityTitleLookup $entityTitleLookup,
 		MediawikiEditEntityFactory $editEntityFactory,
 		EntityPermissionChecker $entityPermissionChecker,
-		ContentLanguages $termsLanguages
+		ContentLanguages $termsLanguages,
+		LanguageNameUtils $languageNameUtils
 	) {
 		parent::__construct(
 			'SetLabel',
@@ -43,11 +45,13 @@ class SpecialSetLabel extends SpecialModifyTerm {
 			$entityTitleLookup,
 			$editEntityFactory,
 			$entityPermissionChecker,
-			$termsLanguages
+			$termsLanguages,
+			$languageNameUtils
 		);
 	}
 
 	public static function factory(
+		LanguageNameUtils $languageNameUtils,
 		ChangeOpFactoryProvider $changeOpFactoryProvider,
 		MediawikiEditEntityFactory $editEntityFactory,
 		EntityPermissionChecker $entityPermissionChecker,
@@ -70,7 +74,8 @@ class SpecialSetLabel extends SpecialModifyTerm {
 			$entityTitleLookup,
 			$editEntityFactory,
 			$entityPermissionChecker,
-			$termsLanguages
+			$termsLanguages,
+			$languageNameUtils
 		);
 	}
 
