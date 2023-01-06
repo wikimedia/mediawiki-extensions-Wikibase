@@ -230,12 +230,11 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 			}
 		);
 
-		$highestId = $updater->getDB()->selectRow(
-				'wb_id_counters',
-				'id_value',
-				[ 'id_type' => 'wikibase-item' ],
-				__METHOD__
-			);
+		$highestId = $updater->getDB()->newSelectQueryBuilder()
+			->select( 'id_value' )
+			->from( 'wb_id_counters' )
+			->where( [ 'id_type' => 'wikibase-item' ] )
+			->caller( __METHOD__ )->fetchRow();
 		if ( $highestId === false ) {
 			// Fresh instance, no need to rebuild anything
 			return;
