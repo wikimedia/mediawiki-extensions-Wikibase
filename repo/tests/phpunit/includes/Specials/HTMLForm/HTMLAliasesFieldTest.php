@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Specials\HTMLForm;
 
+use HTMLForm;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Repo\Specials\HTMLForm\HTMLAliasesField;
 
@@ -16,7 +17,7 @@ class HTMLAliasesFieldTest extends MediaWikiIntegrationTestCase {
 	public function testThrowsExceptionIfFilterCallbackParameterIsSet_WhenCreated() {
 		$this->expectException( \Exception::class );
 
-		new HTMLAliasesField(
+		$this->createField(
 			[
 				'fieldname' => 'some-name',
 				'filter-callback' => function () {
@@ -32,7 +33,7 @@ class HTMLAliasesFieldTest extends MediaWikiIntegrationTestCase {
 	public function testThrowsExceptionIfTypeParameterIsSet_WhenCreated() {
 		$this->expectException( \Exception::class );
 
-		new HTMLAliasesField(
+		$this->createField(
 			[
 				'fieldname' => 'some-name',
 				'type' => 'some-type',
@@ -41,7 +42,7 @@ class HTMLAliasesFieldTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testSetsTypeToText_WhenCreated() {
-		$field = new HTMLAliasesField(
+		$field = $this->createField(
 			[
 				'fieldname' => 'some-name',
 			]
@@ -95,7 +96,17 @@ class HTMLAliasesFieldTest extends MediaWikiIntegrationTestCase {
 	 * @return HTMLAliasesField
 	 */
 	public function createField( array $params = [] ) {
-		$requiredByBaseClass = [ 'fieldname' => 'some-name', ];
+		$htmlFormMock = $this->createMock( HTMLForm::class );
+		$language = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' );
+		$htmlFormMock->method( 'getLanguage' )->willReturn( $language );
+		$htmlFormMock->method( 'msg' )->willReturnCallback( static function( ...$args ) {
+			return call_user_func_array( 'wfMessage', $args );
+		} );
+
+		$requiredByBaseClass = [
+			'fieldname' => 'some-name',
+			'parent' => $htmlFormMock,
+		];
 
 		return new HTMLAliasesField( array_merge( $requiredByBaseClass, $params ) );
 	}

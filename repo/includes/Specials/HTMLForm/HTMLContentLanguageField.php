@@ -30,7 +30,9 @@ class HTMLContentLanguageField extends HTMLComboboxField {
 		if ( isset( $params['parent'] ) && $params['parent'] instanceof \IContextSource ) {
 			/** @var \IContextSource $form */
 			$form = $params['parent'];
-			$params['default'] = $form->getLanguage()->getCode();
+			if ( !isset( $params['default'] ) ) {
+				$params['default'] = $form->getLanguage()->getCode();
+			}
 		}
 
 		if ( isset( $params['options'] )

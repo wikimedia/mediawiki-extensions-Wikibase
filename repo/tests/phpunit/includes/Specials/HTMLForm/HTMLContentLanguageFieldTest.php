@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Specials\HTMLForm;
 
+use HTMLForm;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Repo\Specials\HTMLForm\HTMLContentLanguageField;
 
@@ -45,7 +46,7 @@ class HTMLContentLanguageFieldTest extends MediaWikiIntegrationTestCase {
 
 	public function testSetsDefaultValueToLanguageFromParentElement_WhenCreatedAndDefaultIsNotDefined() {
 		$params = [
-			'parent' => $this->createNewContextSourceWithLanguage( 'some-language' ),
+			'parent' => $this->createNewHTMLFormWithLanguage( 'some-language' ),
 		];
 
 		$field = $this->createField( $params );
@@ -63,8 +64,8 @@ class HTMLContentLanguageFieldTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( 'default-language', $field->getDefault() );
 	}
 
-	private function createNewContextSourceWithLanguage( $langCode ) {
-		$mock = $this->createMock( \IContextSource::class );
+	private function createNewHTMLFormWithLanguage( $langCode ) {
+		$mock = $this->createMock( HTMLForm::class );
 
 		$language = $this->getServiceContainer()->getLanguageFactory()->getLanguage( $langCode );
 
@@ -79,7 +80,10 @@ class HTMLContentLanguageFieldTest extends MediaWikiIntegrationTestCase {
 	 * @return HTMLContentLanguageField
 	 */
 	private function createField( array $params ) {
-		$requiredByBaseClass = [ 'fieldname' => 'some-name', ];
+		$requiredByBaseClass = [
+			'fieldname' => 'some-name',
+			'parent' => $this->createNewHTMLFormWithLanguage( 'en' ),
+		];
 
 		return new HTMLContentLanguageField( array_merge( $requiredByBaseClass, $params ) );
 	}
