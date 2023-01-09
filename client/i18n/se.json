@@ -3,10 +3,11 @@
 		"authors": [
 			"Jon Harald Søby (WMNO)",
 			"Yupik",
-			"Trondtr"
+			"Trondtr",
+			"Kimberli Mäkäräinen (WMNO)"
 		]
 	},
-	"wikibase-editlinks": "Rivdat liŋkkaid",
+	"wikibase-editlinks": "Rievdat liŋkkaid",
 	"wikibase-linkitem-addlinks": "Lasit liŋkkaid",
 	"wikibase-linkitem-title": "Lasit liŋkka siidui",
 	"wikibase-linkitem-linkpage": "Lasit liŋkka siidui",

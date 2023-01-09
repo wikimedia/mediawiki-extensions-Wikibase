@@ -3,7 +3,8 @@
 		"authors": [
 			"Inkowik",
 			"Metalhead64",
-			"Tiin"
+			"Tiin",
+			"Brettchenweber"
 		]
 	},
 	"apihelp-query+wbentityusage-description": "Gibt alle Objektkennungen zurück, die in den angegebenen Seiten verwendet werden.",
@@ -30,13 +31,13 @@
 	"apihelp-query+wblistentityusage-param-limit": "Wie viele Objektverwendungen zurückgegeben werden sollen.",
 	"apihelp-query+wblistentityusage-example-simple": "Ruft Seiten ab, die das Objekt <kbd>Q2</kbd> verwenden.",
 	"apihelp-query+wblistentityusage-example-url": "Ruft Seiten ab, die das Objekt <kbd>Q2</kbd> verwenden, inklusive der URL.",
-	"apihelp-query+wblistentityusage-example-aspect": "Ruft Seiten ab, die das Objekt <kbd>Q2</kbd> verwenden und der Aspekt war Websitelink oder Aussage.",
+	"apihelp-query+wblistentityusage-example-aspect": "Ruft Seiten ab, die das Objekt <kbd>Q2</kbd> verwenden, und der Aspekt war Websitelink oder Aussage.",
 	"apihelp-query+pageterms-description": "Ruft die {{WBREPONAME}}-Begriffe ab (typischerweise Bezeichnungen, Beschreibungen und Aliasse), die mit einer Seite über einen Websitelink verknüpft sind. Auf der Objektseite selber werden die Begriffe direkt verwendet. Vorbehalt: Auf einem Repositoriumswiki funktioniert dieses Modul nur auf Objektseiten direkt, nicht auf Seiten, die mit einem Objekt über einen Websitelink verbunden sind. Dies kann sich in Zukunft ändern.",
 	"apihelp-query+pageterms-summary": "Ruft die {{WBREPONAME}}-Begriffe ab (typischerweise Bezeichnungen, Beschreibungen und Aliasse), die mit einer Seite über einen Link verknüpft sind. Auf der Objektseite selber werden die Begriffe direkt verwendet. Vorbehalt: Auf einem Repositoriumswiki funktioniert dieses Modul direkt auf Objektseiten, nicht auf Seiten, die mit einem Objekt über einen Link verbunden sind. Dies kann sich in Zukunft ändern.",
 	"apihelp-query+pageterms-example-simple": "Ruft alle Begriffe im Zusammenhang mit der Seite „London“ in der Benutzersprache ab.",
 	"apihelp-query+pageterms-example-label-en": "Ruft Bezeichnungen und Aliasse im Zusammenhang mit der Seite „London“ in Englisch ab.",
 	"apihelp-query+pageterms-param-terms": "Die Arten der Begriffe, die abgerufen werden sollen, z.&nbsp;B. „Beschreibung“, jede wird als eine Anordnung von Zeichenfolgen zurückgegeben, die nach ihrem Typ kodiert sind, z.&nbsp;B. {\"Beschreibung\": [\"foo\"]}. Falls nicht angegeben, werden alle Typen zurückgegeben.",
-	"apihelp-query+description-summary": "Ruft eine Kurzbeschreibung a.k.a. einen Untertitel ab, der erklärt, über was die Zielseite handelt.",
+	"apihelp-query+description-summary": "Ruft eine Kurzbeschreibung a.k.a. einen Untertitel ab, der erklärt, wovon die Zielseite handelt.",
 	"apihelp-query+description-extended-description": "Die Beschreibung ist einfacher Text, auf einer einzigen Zeile, aber ansonsten beliebig (möglicherweise einschließlich roher HTML-Tags, die ebenfalls als einfacher Text interpretiert werden sollten). Sie darf in HTML nicht unmaskiert verwendet werden!",
 	"apihelp-query+description-param-prefersource": "Welche Beschreibungsquelle bevorzugt werden soll, falls vorhanden:",
 	"apihelp-query+description-paramvalue-prefersource-local": "Lokale Beschreibungen über die Parserfunktion <code><nowiki>{{SHORTDESC:…}}</nowiki></code> im Wikitext der Seite.",
@@ -48,7 +49,7 @@
 	"apihelp-query+wikibase-example": "Bezieht den URL-Pfad und weitere Informationen über den Wikibase-Client und das Repositorium.",
 	"apihelp-query+wikibase-param-prop": "Zurückzugebende Eigenschaften:\n;<kbd>url</kbd>: Basis-URL, Skript- und Artikelpfad des Wikibase-Repositoriums.\n;<kbd>siteid</kbd>: Die Website-Kennung dieser Website.",
 	"apihelp-wbformatreference-summary": "Formatiert einen Einzelnachweis zur Anzeige für Benutzer.",
-	"apihelp-wbformatreference-example-1": "Formatiert einen leeren Einzelnachweis unter Verwendung des Data-Bridge-Stil in HTML.",
+	"apihelp-wbformatreference-example-1": "Formatiert einen leeren Einzelnachweis unter Verwendung des Data-Bridge-Stils in HTML.",
 	"apihelp-wbformatreference-example-2": "Formatiert einen Einzelnachweis, der eine Zeichenfolge enthält, mit dem Data-Bridge-Stil in HTML.",
 	"apihelp-wbformatreference-param-reference": "Der Einzelnachweis als ein JSON-Objekt.",
 	"apihelp-wbformatreference-param-style": "Der Stil, in dem der Einzelnachweis zu formatieren ist.",

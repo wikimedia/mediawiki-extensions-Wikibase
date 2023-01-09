@@ -8,7 +8,8 @@
 			"Чаховіч Уладзіслаў",
 			"ZlyiLev",
 			"Tomato Cream",
-			"No Sleep till Krupki"
+			"No Sleep till Krupki",
+			"Plaga med"
 		]
 	},
 	"wikibase-client-desc": "Кліент для пашырэння Wikibase",
@@ -97,7 +98,7 @@
 	"wikibase-pageinfo-entity-usage-T": "Загаловак",
 	"wikibase-pageinfo-entity-usage-C": "Некаторыя сцверджанні",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Сцверджанне: $1",
-	"wikibase-pageinfo-entity-usage-X": "Усё дадзеныя сутнасці",
+	"wikibase-pageinfo-entity-usage-X": "Усе даныя аб’екта",
 	"wikibase-property-render-error": "Не ўдалося адлюстраваць уласцівасць $1: $2",
 	"wikibase-otherprojects": "У іншых праектах",
 	"wikibase-otherprojects-beta-message": "Бакавая панэль іншых праектаў",

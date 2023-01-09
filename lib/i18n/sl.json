@@ -18,7 +18,7 @@
 	"wikibase-error-remove-generic": "Odstranitev zaradi napake ni uspela.",
 	"wikibase-error-save-timeout": "Trenutno imamo tehnične težave. Poskusite znova.",
 	"wikibase-error-remove-timeout": "Trenutno imamo tehnične težave. Poskusite znova.",
-	"wikibase-error-ui-no-external-page": "Strani \"$2\" ni mogoče najti na \"$1\".",
+	"wikibase-error-ui-no-external-page": "Strani »$2« ni bilo mogoče najti v »$1«.",
 	"wikibase-error-ui-edit-conflict": "Ista vrednost je bila medtem urejena, kar je povzročilo navzkrižje urejanj. Naložite stran znova.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (prečrkovano)",
 	"wikibase-quantitydetails-amount": "Količina",
