@@ -2,6 +2,8 @@
 
 namespace Wikibase\Repo\Tests\Specials\HTMLForm;
 
+use HTMLForm;
+use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
@@ -14,7 +16,7 @@ use Wikibase\Repo\Specials\HTMLForm\HTMLItemReferenceField;
  *
  * @license GPL-2.0-or-later
  */
-class HTMLItemReferenceFieldTest extends \PHPUnit\Framework\TestCase {
+class HTMLItemReferenceFieldTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @var InMemoryEntityLookup
 	 */
@@ -86,8 +88,16 @@ class HTMLItemReferenceFieldTest extends \PHPUnit\Framework\TestCase {
 	 * @return HTMLItemReferenceField
 	 */
 	protected function createField( $params = [] ) {
+		$htmlFormMock = $this->createMock( HTMLForm::class );
+		$language = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' );
+		$htmlFormMock->method( 'getLanguage' )->willReturn( $language );
+		$htmlFormMock->method( 'msg' )->willReturnCallback( static function( ...$args ) {
+			return call_user_func_array( 'wfMessage', $args );
+		} );
+
 		$paramsRequiredByParentClass = [
 			'fieldname' => 'some-name',
+			'parent' => $htmlFormMock
 		];
 
 		return new HTMLItemReferenceField( array_merge( $paramsRequiredByParentClass, $params ), $this->entityLookup );
