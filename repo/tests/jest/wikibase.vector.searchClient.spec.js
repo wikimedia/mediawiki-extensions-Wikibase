@@ -122,4 +122,150 @@ describe( 'Vector Search Client', () => {
 			]
 		} );
 	} );
+
+	it( 'supports showing a match of a label in a different language', async () => {
+		const mockApiResultWithLabelMatch = [ {
+			id: 'Q6581097',
+			title: 'Q6581097',
+			pageid: 6406677,
+			display: {
+				label: {
+					value: 'male',
+					language: 'en'
+				},
+				description: {
+					value: 'human who is male  (use with P21)',
+					language: 'en'
+				}
+			},
+			repository: 'wikidata',
+			url: '//www.wikidata.org/wiki/Q6581097',
+			concepturi: 'http://www.wikidata.org/entity/Q6581097',
+			label: 'male',
+			description: 'human who is male  (use with P21)',
+			match: {
+				type: 'label',
+				language: 'ga',
+				text: 'fireann'
+			},
+			aliases: [
+				'fireann'
+			]
+		} ];
+		const fakeApiInstance = {
+			get: jest.fn().mockResolvedValue( {
+				search: mockApiResultWithLabelMatch
+			} ),
+			abort: jest.fn()
+		};
+
+		global.mw = getFakeMw(
+			{
+				skin: 'vector-2022',
+				wgUserLanguage: 'en'
+			},
+			fakeApiInstance
+		);
+		require( '../../resources/wikibase.vector.searchClient.js' );
+		expect( global.mw.config.set.mock.calls[ 0 ][ 0 ] ).toBe( 'wgVectorSearchClient' );
+		const vectorSearchClient = global.mw.config.set.mock.calls[ 0 ][ 1 ];
+
+		const apiController = vectorSearchClient.fetchByTitle(
+			'fireann',
+			10,
+			true
+		);
+
+		const actualTransformedResult = await apiController.fetch;
+		expect( actualTransformedResult ).toStrictEqual( {
+			query: 'fireann',
+			results: [
+				{
+					label: 'male',
+					description: 'human who is male  (use with P21)',
+					language: {
+						label: 'en',
+						description: 'en',
+						match: 'ga'
+					},
+					match: 'fireann',
+					url: '//www.wikidata.org/wiki/Q6581097',
+					value: 'Q6581097'
+				}
+			]
+		} );
+	} );
+
+	it( 'doesn\'t show an extra match for a search hit on the label', async () => {
+		const mockApiResultWithLabelMatch = [ {
+			id: 'Q6581097',
+			title: 'Q6581097',
+			pageid: 6406677,
+			display: {
+				label: {
+					value: 'male',
+					language: 'en'
+				},
+				description: {
+					value: 'human who is male  (use with P21)',
+					language: 'en'
+				}
+			},
+			repository: 'wikidata',
+			url: '//www.wikidata.org/wiki/Q6581097',
+			concepturi: 'http://www.wikidata.org/entity/Q6581097',
+			label: 'male',
+			description: 'human who is male  (use with P21)',
+			match: {
+				type: 'label',
+				language: 'en',
+				text: 'male'
+			},
+			aliases: [
+				'fireann'
+			]
+		} ];
+		const fakeApiInstance = {
+			get: jest.fn().mockResolvedValue( {
+				search: mockApiResultWithLabelMatch
+			} ),
+			abort: jest.fn()
+		};
+
+		global.mw = getFakeMw(
+			{
+				skin: 'vector-2022',
+				wgUserLanguage: 'en'
+			},
+			fakeApiInstance
+		);
+		require( '../../resources/wikibase.vector.searchClient.js' );
+		expect( global.mw.config.set.mock.calls[ 0 ][ 0 ] ).toBe( 'wgVectorSearchClient' );
+		const vectorSearchClient = global.mw.config.set.mock.calls[ 0 ][ 1 ];
+
+		const apiController = vectorSearchClient.fetchByTitle(
+			'fireann',
+			10,
+			true
+		);
+
+		const actualTransformedResult = await apiController.fetch;
+		expect( actualTransformedResult ).toStrictEqual( {
+			query: 'fireann',
+			results: [
+				{
+					label: 'male',
+					description: 'human who is male  (use with P21)',
+					language: {
+						label: 'en',
+						description: 'en',
+						match: 'en'
+					},
+					match: '',
+					url: '//www.wikidata.org/wiki/Q6581097',
+					value: 'Q6581097'
+				}
+			]
+		} );
+	} );
 } );

@@ -18,8 +18,12 @@
 		}
 		const getJson = api.get( data );
 
-		function getMatchText( { type, text } ) {
-			if ( type === 'alias' || type === 'entityId' ) {
+		function getMatchText( { type, text, language }, labelText ) {
+			// eslint-disable-next-line no-restricted-syntax
+			if ( [ 'alias', 'entityId' ].includes( type ) ) {
+				return text;
+			}
+			if ( type === 'label' && text !== labelText ) {
 				return text;
 			}
 
@@ -32,12 +36,13 @@
 				results: res.search.map( ( { id, label, url, match, description, display = {} } ) => ( {
 					value: id,
 					label,
-					match: getMatchText( match ),
+					match: getMatchText( match, display.label && display.label.value ),
 					description,
 					url,
 					language: {
 						label: display.label ? display.label.language : undefined,
-						match: match.type === 'alias' ? match.language : undefined,
+						// eslint-disable-next-line no-restricted-syntax
+						match: [ 'alias', 'label' ].includes( match.type ) ? match.language : undefined,
 						description: display.description ? display.description.language : undefined
 					}
 				} ) )
