@@ -22,9 +22,11 @@ use Wikibase\Repo\WikibaseRepo;
 class SpecialMyLanguageFallbackChainTest extends SpecialPageTestBase {
 
 	protected function newSpecialPage(): SpecialMyLanguageFallbackChain {
+		$services = $this->getServiceContainer();
 		return new SpecialMyLanguageFallbackChain(
-			$this->getServiceContainer()->getLanguageNameUtils(),
-			WikibaseRepo::getLanguageFallbackChainFactory()
+			$services->getLanguageFactory(),
+			$services->getLanguageNameUtils(),
+			WikibaseRepo::getLanguageFallbackChainFactory( $services )
 		);
 	}
 

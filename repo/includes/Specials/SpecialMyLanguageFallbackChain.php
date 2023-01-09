@@ -7,6 +7,7 @@ namespace Wikibase\Repo\Specials;
 use ExtensionRegistry;
 use Html;
 use IContextSource;
+use MediaWiki\Languages\LanguageFactory;
 use MediaWiki\Languages\LanguageNameUtils;
 use SpecialPage;
 use Wikibase\Lib\LanguageFallbackChainFactory;
@@ -26,6 +27,11 @@ class SpecialMyLanguageFallbackChain extends SpecialPage {
 	private $chain;
 
 	/**
+	 * @var LanguageFactory
+	 */
+	private $languageFactory;
+
+	/**
 	 * @var LanguageNameUtils
 	 */
 	private $languageNameUtils;
@@ -36,11 +42,13 @@ class SpecialMyLanguageFallbackChain extends SpecialPage {
 	private $languageFallbackChainFactory;
 
 	public function __construct(
+		LanguageFactory $languageFactory,
 		LanguageNameUtils $languageNameUtils,
 		LanguageFallbackChainFactory $languageFallbackChainFactory
 	) {
 		parent::__construct( 'MyLanguageFallbackChain' );
 
+		$this->languageFactory = $languageFactory;
 		$this->languageNameUtils = $languageNameUtils;
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 	}
@@ -96,13 +104,15 @@ class SpecialMyLanguageFallbackChain extends SpecialPage {
 		$this->getOutput()->addHTML( Html::openElement( 'ul' ) );
 
 		foreach ( $this->getLanguageFallbackChain()->getFallbackChain() as $lang ) {
-			$language = $lang->getLanguage();
-			$sourceLanguage = $lang->getSourceLanguage();
-			$languageName = $this->languageNameUtils->getLanguageName( $language->getCode(), $inLanguage );
+			$languageCode = $lang->getLanguageCode();
+			$sourceLanguageCode = $lang->getSourceLanguageCode();
+			$language = $this->languageFactory->getLanguage( $languageCode );
+			$languageName = $this->languageNameUtils->getLanguageName( $languageCode, $inLanguage );
 
-			if ( $sourceLanguage ) {
+			if ( $sourceLanguageCode ) {
+				$sourceLanguage = $this->languageFactory->getLanguage( $sourceLanguageCode );
 				$sourceLanguageName = $this->languageNameUtils
-					->getLanguageName( $sourceLanguage->getCode(), $inLanguage );
+					->getLanguageName( $sourceLanguageCode, $inLanguage );
 				$msgHtml = $this->msg(
 					'wikibase-mylanguagefallbackchain-converted-item',
 					$language->getHtmlCode(),

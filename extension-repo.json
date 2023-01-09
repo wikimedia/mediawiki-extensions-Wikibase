@@ -500,6 +500,7 @@
 		"MyLanguageFallbackChain": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialMyLanguageFallbackChain",
 			"services": [
+				"LanguageFactory",
 				"LanguageNameUtils",
 				"WikibaseRepo.LanguageFallbackChainFactory"
 			]
