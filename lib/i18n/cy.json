@@ -50,7 +50,7 @@
 	"datatypes-type-wikibase-property": "Priodwedd",
 	"datatypes-type-commonsMedia": "Ffeil cyfrwng ar y Comin",
 	"datatypes-type-geo-shape": "Siâp daearyddol",
-	"version-wikibase": "Wikibase",
+	"version-wikibase": "Wicibase",
 	"wikibase-time-precision-annum": "{{PLURAL:$1|$1 blynedd}} CE",
 	"wikibase-time-precision-century": "$1.g",
 	"wikibase-time-precision-10annum": "$1au",

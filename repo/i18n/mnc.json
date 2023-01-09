@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
 			"ChoiChong",
 			"Chulsu463",
 			"Foavi33"
@@ -8,8 +9,8 @@
 	},
 	"wikibase-edit": "banjibume arara",
 	"wikibase-add": "nonggimbi",
-	"wikibase-label-empty": "toktobuhe lature afahari akū",
-	"wikibase-description-empty": "suhe gisun akv",
-	"wikibase-sitelinks-special": "gvwa jan",
-	"wikibase-statementview-rank-normal": "an i tangkan"
+	"wikibase-label-empty": "Toktobuhe lature afahari akū",
+	"wikibase-description-empty": "Suhe gisun akv",
+	"wikibase-sitelinks-special": "Gvwa jan",
+	"wikibase-statementview-rank-normal": "An i tangkan"
 }
