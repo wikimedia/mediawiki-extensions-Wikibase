@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\ParserOutput;
 
 use DataValues\Geo\Values\GlobeCoordinateValue;
-use Language;
 use MediaWiki\MediaWikiServices;
 use ParserOutput;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -66,7 +65,7 @@ class GlobeCoordinateKartographerDataUpdater implements StatementDataUpdater {
 
 		// Hack: Get the language this ParserOutput was parsed in
 		if ( isset( $jsVars['wgUserLanguage'] ) ) {
-			$language = Language::factory( $jsVars['wgUserLanguage'] );
+			$language = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( $jsVars['wgUserLanguage'] );
 		} else {
 			// If this is not the user language, we will (maybe) need to parse this twice.
 			$language = MediaWikiServices::getInstance()->getContentLanguage();

@@ -7,6 +7,7 @@ use DataValues\Geo\Values\LatLongValue;
 use DataValues\StringValue;
 use InvalidArgumentException;
 use Language;
+use MediaWiki\MediaWikiServices;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
@@ -36,6 +37,7 @@ class GlobeCoordinateKartographerFormatterTest extends \PHPUnit\Framework\TestCa
 			new FormatterOptions(),
 			$this->newBaseValueFormatter( 1 ),
 			$this->newCachingKartographerEmbeddingHandler( 1, $emitPreviewHtml ),
+			MediaWikiServices::getInstance()->getLanguageFactory(),
 			$emitPreviewHtml
 		);
 
@@ -51,6 +53,7 @@ class GlobeCoordinateKartographerFormatterTest extends \PHPUnit\Framework\TestCa
 			new FormatterOptions(),
 			$this->newBaseValueFormatter( 1 ),
 			$this->newCachingKartographerEmbeddingHandler( 1, false, false ),
+			MediaWikiServices::getInstance()->getLanguageFactory(),
 			false
 		);
 
@@ -66,6 +69,7 @@ class GlobeCoordinateKartographerFormatterTest extends \PHPUnit\Framework\TestCa
 			new FormatterOptions(),
 			$this->newBaseValueFormatter( 0 ),
 			$this->newCachingKartographerEmbeddingHandler( 0 ),
+			MediaWikiServices::getInstance()->getLanguageFactory(),
 			false
 		);
 

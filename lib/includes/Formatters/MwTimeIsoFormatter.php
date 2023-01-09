@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Formatters;
 use DataValues\TimeValue;
 use InvalidArgumentException;
 use Language;
+use MediaWiki\Languages\LanguageFactory;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 
@@ -29,14 +30,18 @@ class MwTimeIsoFormatter implements ValueFormatter {
 	private $options;
 
 	/**
+	 * @param LanguageFactory $languageFactory
 	 * @param FormatterOptions|null $options
 	 */
-	public function __construct( FormatterOptions $options = null ) {
+	public function __construct(
+		LanguageFactory $languageFactory,
+		FormatterOptions $options = null
+	) {
 		$this->options = $options ?: new FormatterOptions();
 		$this->options->defaultOption( ValueFormatter::OPT_LANG, 'en' );
 
 		$languageCode = $this->options->getOption( ValueFormatter::OPT_LANG );
-		$this->language = Language::factory( $languageCode );
+		$this->language = $languageFactory->getLanguage( $languageCode );
 	}
 
 	/**

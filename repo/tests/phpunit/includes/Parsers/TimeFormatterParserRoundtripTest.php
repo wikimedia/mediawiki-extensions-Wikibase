@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Parsers;
 
 use DataValues\TimeValue;
+use MediaWiki\MediaWikiServices;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use ValueParsers\IsoTimestampParser;
@@ -73,7 +74,7 @@ class TimeFormatterParserRoundtripTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider timeValueProvider
 	 */
 	public function testFormatterParserRoundtrip( TimeValue $expected ) {
-		$formatter = new MwTimeIsoFormatter();
+		$formatter = new MwTimeIsoFormatter( MediaWikiServices::getInstance()->getLanguageFactory() );
 		$factory = $this->newTimeParserFactory();
 		$parser = $factory->getTimeParser();
 
@@ -117,7 +118,7 @@ class TimeFormatterParserRoundtripTest extends \PHPUnit\Framework\TestCase {
 	public function testParserFormatterRoundtrip( $expected ) {
 		$factory = $this->newTimeParserFactory();
 		$parser = $factory->getTimeParser();
-		$formatter = new MwTimeIsoFormatter();
+		$formatter = new MwTimeIsoFormatter( MediaWikiServices::getInstance()->getLanguageFactory() );
 
 		/** @var TimeValue $timeValue */
 		$timeValue = $parser->parse( $expected );
@@ -133,7 +134,7 @@ class TimeFormatterParserRoundtripTest extends \PHPUnit\Framework\TestCase {
 		$formatterOptions = new FormatterOptions( [
 			ValueFormatter::OPT_LANG => $languageCode,
 		] );
-		$formatter = new MwTimeIsoFormatter( $formatterOptions );
+		$formatter = new MwTimeIsoFormatter( MediaWikiServices::getInstance()->getLanguageFactory(), $formatterOptions );
 
 		$parserOptions = new ParserOptions( [
 			ValueParser::OPT_LANG => $languageCode,

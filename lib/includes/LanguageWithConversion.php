@@ -173,7 +173,7 @@ class LanguageWithConversion {
 	 */
 	public function getLanguage() {
 		if ( !$this->language ) {
-			$this->language = Language::factory( $this->languageCode );
+			$this->language = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( $this->languageCode );
 		}
 
 		return $this->language;
@@ -195,7 +195,7 @@ class LanguageWithConversion {
 	 */
 	public function getSourceLanguage() {
 		if ( $this->sourceLanguageCode !== null && !$this->sourceLanguage ) {
-			$this->sourceLanguage = Language::factory( $this->sourceLanguageCode );
+			$this->sourceLanguage = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( $this->sourceLanguageCode );
 		}
 
 		return $this->sourceLanguage;

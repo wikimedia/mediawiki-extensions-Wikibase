@@ -81,6 +81,8 @@ class ViewFactoryTest extends ServiceWiringTestCase {
 			'WikibaseRepo.LocalizedTextProviderFactory',
 			$this->createMock( LocalizedTextProviderFactory::class )
 		);
+		$this->serviceContainer->expects( $this->once() )
+			->method( 'getLanguageFactory' );
 
 		$this->assertInstanceOf(
 			ViewFactory::class,

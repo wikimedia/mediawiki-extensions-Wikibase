@@ -99,6 +99,9 @@ class DefaultValueFormatterBuildersTest extends ServiceWiringTestCase {
 			$this->createMock( EntityRedirectChecker::class )
 		);
 
+		$this->serviceContainer->expects( $this->once() )
+			->method( 'getLanguageFactory' );
+
 		$this->mockService(
 			'WikibaseRepo.EntityTitleLookup',
 			$this->createMock( EntityTitleLookup::class )

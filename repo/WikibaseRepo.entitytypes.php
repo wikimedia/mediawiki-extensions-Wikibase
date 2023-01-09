@@ -234,9 +234,11 @@ return [
 			);
 		},
 		Def::LINK_FORMATTER_CALLBACK => function( Language $language ) {
+			$services = MediaWikiServices::getInstance();
 			return new DefaultEntityLinkFormatter(
 				$language,
-				WikibaseRepo::getEntityTitleTextLookup()
+				WikibaseRepo::getEntityTitleTextLookup( $services ),
+				$services->getLanguageFactory()
 			);
 		},
 		Def::ENTITY_ID_HTML_LINK_FORMATTER_CALLBACK => function( Language $language ) {
@@ -435,9 +437,11 @@ return [
 			);
 		},
 		Def::LINK_FORMATTER_CALLBACK => function( Language $language ) {
+			$services = MediaWikiServices::getInstance();
 			return new DefaultEntityLinkFormatter(
 				$language,
-				WikibaseRepo::getEntityTitleTextLookup()
+				WikibaseRepo::getEntityTitleTextLookup( $services ),
+				$services->getLanguageFactory()
 			);
 		},
 		Def::ENTITY_ID_HTML_LINK_FORMATTER_CALLBACK => function( Language $language ) {

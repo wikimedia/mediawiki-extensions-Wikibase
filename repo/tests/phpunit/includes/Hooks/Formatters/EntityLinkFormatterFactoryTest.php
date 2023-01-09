@@ -5,6 +5,7 @@ declare( strict_types=1 );
 namespace Wikibase\Repo\Tests\Hooks\Formatters;
 
 use Language;
+use MediaWiki\Languages\LanguageFactory;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Repo\Hooks\Formatters\DefaultEntityLinkFormatter;
@@ -21,9 +22,15 @@ use Wikimedia\Assert\ParameterElementTypeException;
 class EntityLinkFormatterFactoryTest extends MediaWikiIntegrationTestCase {
 
 	public function testGivenEntityTypeWithRegisteredCallback_returnsCallbackResult() {
-		$factory = new EntityLinkFormatterFactory( $this->createMock( EntityTitleTextLookup::class ), [
+		$factory = new EntityLinkFormatterFactory(
+			$this->createMock( EntityTitleTextLookup::class ),
+			$this->getServiceContainer()->getLanguageFactory(), [
 			'item' => function ( $language ) {
-				return new DefaultEntityLinkFormatter( $language, $this->createMock( EntityTitleTextLookup::class ) );
+				return new DefaultEntityLinkFormatter(
+					$language,
+					$this->createMock( EntityTitleTextLookup::class ),
+					$this->getServiceContainer()->getLanguageFactory()
+				);
 			},
 		] );
 
@@ -34,7 +41,11 @@ class EntityLinkFormatterFactoryTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testGivenUnknownEntityType_returnsDefaultFormatter() {
-		$factory = new EntityLinkFormatterFactory( $this->createMock( EntityTitleTextLookup::class ),  [] );
+		$factory = new EntityLinkFormatterFactory(
+			$this->createMock( EntityTitleTextLookup::class ),
+			$this->createMock( LanguageFactory::class ),
+			[]
+		);
 
 		$this->assertInstanceOf(
 			DefaultEntityLinkFormatter::class,
@@ -47,13 +58,23 @@ class EntityLinkFormatterFactoryTest extends MediaWikiIntegrationTestCase {
 	 */
 	public function testGivenNotArrayOfCallbacks_throwsException( $notCallbacks ) {
 		$this->expectException( ParameterElementTypeException::class );
-		new EntityLinkFormatterFactory( $this->createMock( EntityTitleTextLookup::class ), $notCallbacks );
+		new EntityLinkFormatterFactory(
+			$this->createMock( EntityTitleTextLookup::class ),
+			$this->createMock( LanguageFactory::class ),
+			$notCallbacks
+		);
 	}
 
 	public function testGivenSameTypeAndLanguage_getLinkFormatterCachesResult() {
-		$factory = new EntityLinkFormatterFactory( $this->createMock( EntityTitleTextLookup::class ), [
+		$factory = new EntityLinkFormatterFactory(
+			$this->createMock( EntityTitleTextLookup::class ),
+			$this->getServiceContainer()->getLanguageFactory(), [
 			'item' => function ( $language ) {
-				return new DefaultEntityLinkFormatter( $language, $this->createMock( EntityTitleTextLookup::class ) );
+				return new DefaultEntityLinkFormatter(
+					$language,
+					$this->createMock( EntityTitleTextLookup::class ),
+					$this->getServiceContainer()->getLanguageFactory()
+				);
 			},
 		] );
 

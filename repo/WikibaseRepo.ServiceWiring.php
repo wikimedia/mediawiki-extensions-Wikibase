@@ -582,6 +582,7 @@ return [
 			WikibaseRepo::getEntityTitleTextLookup( $services ),
 			WikibaseRepo::getEntityUrlLookup( $services ),
 			WikibaseRepo::getEntityRedirectChecker( $services ),
+			$services->getLanguageFactory(),
 			WikibaseRepo::getEntityTitleLookup( $services ),
 			WikibaseRepo::getKartographerEmbeddingHandler( $services ),
 			$settings->getSetting( 'useKartographerMaplinkInWikitext' ),
@@ -860,6 +861,7 @@ return [
 	'WikibaseRepo.EntityLinkFormatterFactory' => function ( MediaWikiServices $services ): EntityLinkFormatterFactory {
 		return new EntityLinkFormatterFactory(
 			WikibaseRepo::getEntityTitleTextLookup( $services ),
+			$services->getLanguageFactory(),
 			WikibaseRepo::getEntityTypeDefinitions( $services )->get( EntityTypeDefinitions::LINK_FORMATTER_CALLBACK )
 		);
 	},
@@ -2112,7 +2114,8 @@ return [
 			$settings->getSetting( 'specialSiteLinkGroups' ),
 			$settings->getSetting( 'badgeItems' ),
 			WikibaseRepo::getLocalizedTextProviderFactory( $services ),
-			new RepoSpecialPageLinker()
+			new RepoSpecialPageLinker(),
+			$services->getLanguageFactory()
 		);
 	},
 

@@ -4,6 +4,7 @@ namespace Wikibase\View;
 
 use InvalidArgumentException;
 use Language;
+use MediaWiki\Languages\LanguageFactory;
 use SiteLookup;
 use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
 use Wikibase\Lib\DataTypeFactory;
@@ -108,6 +109,11 @@ class ViewFactory {
 	private $textProviderFactory;
 
 	/**
+	 * @var LanguageFactory
+	 */
+	private $languageFactory;
+
+	/**
 	 * @param EntityIdFormatterFactory $htmlIdFormatterFactory
 	 * @param EntityIdFormatterFactory $plainTextIdFormatterFactory
 	 * @param HtmlSnakFormatterFactory $htmlSnakFormatterFactory
@@ -124,6 +130,7 @@ class ViewFactory {
 	 * @param string[] $badgeItems
 	 * @param LocalizedTextProviderFactory $textProviderFactory
 	 * @param SpecialPageLinker $specialPageLinker
+	 * @param LanguageFactory $languageFactory
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -143,7 +150,8 @@ class ViewFactory {
 		array $specialSiteLinkGroups,
 		array $badgeItems,
 		LocalizedTextProviderFactory $textProviderFactory,
-		SpecialPageLinker $specialPageLinker
+		SpecialPageLinker $specialPageLinker,
+		LanguageFactory $languageFactory
 	) {
 		if ( !$this->hasValidOutputFormat( $htmlIdFormatterFactory, 'text/html' )
 			|| !$this->hasValidOutputFormat( $plainTextIdFormatterFactory, 'text/plain' )
@@ -167,6 +175,7 @@ class ViewFactory {
 		$this->badgeItems = $badgeItems;
 		$this->textProviderFactory = $textProviderFactory;
 		$this->specialPageLinker = $specialPageLinker;
+		$this->languageFactory = $languageFactory;
 	}
 
 	/**
@@ -315,7 +324,7 @@ class ViewFactory {
 			$termFallbackChain
 		);
 		$propertyIdFormatter = $this->htmlIdFormatterFactory->getEntityIdFormatter(
-			Language::factory( $languageCode )
+			$this->languageFactory->getLanguage( $languageCode )
 		);
 		$snakHtmlGenerator = new SnakHtmlGenerator(
 			$this->templateFactory,

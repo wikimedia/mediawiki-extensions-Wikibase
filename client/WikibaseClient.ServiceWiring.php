@@ -324,6 +324,7 @@ return [
 			new TitleLookupBasedEntityTitleTextLookup( $entityTitleLookup ),
 			new TitleLookupBasedEntityUrlLookup( $entityTitleLookup ),
 			new TitleLookupBasedEntityRedirectChecker( $entityTitleLookup ),
+			$services->getLanguageFactory(),
 			$entityTitleLookup,
 			WikibaseClient::getKartographerEmbeddingHandler( $services ),
 			$settings->getSetting( 'useKartographerMaplinkInWikitext' ),
@@ -940,6 +941,7 @@ return [
 			WikibaseClient::getDataAccessSnakFormatterFactory( $services ),
 			WikibaseClient::getUsageAccumulatorFactory( $services ),
 			$services->getLanguageConverterFactory(),
+			$services->getLanguageFactory(),
 			WikibaseClient::getSettings( $services )
 				->getSetting( 'allowDataAccessInUserLanguage' )
 		);

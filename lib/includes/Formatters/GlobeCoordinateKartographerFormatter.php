@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Formatters;
 use DataValues\Geo\Values\GlobeCoordinateValue;
 use Html;
 use InvalidArgumentException;
-use Language;
+use MediaWiki\Languages\LanguageFactory;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 
@@ -38,15 +38,22 @@ class GlobeCoordinateKartographerFormatter implements ValueFormatter {
 	private $options;
 
 	/**
+	 * @var LanguageFactory
+	 */
+	private $languageFactory;
+
+	/**
 	 * @param FormatterOptions|null $options
 	 * @param ValueFormatter $coordinateFormatter
 	 * @param CachingKartographerEmbeddingHandler $cachingKartographerEmbeddingHandler
+	 * @param LanguageFactory $languageFactory
 	 * @param bool $emitPreviewHtml Whether to emit HTML that can be used for live previews
 	 */
 	public function __construct(
 		?FormatterOptions $options,
 		ValueFormatter $coordinateFormatter,
 		CachingKartographerEmbeddingHandler $cachingKartographerEmbeddingHandler,
+		LanguageFactory $languageFactory,
 		$emitPreviewHtml
 	) {
 		$this->options = $options ?: new FormatterOptions();
@@ -54,6 +61,7 @@ class GlobeCoordinateKartographerFormatter implements ValueFormatter {
 
 		$this->coordinateFormatter = $coordinateFormatter;
 		$this->cachingKartographerEmbeddingHandler = $cachingKartographerEmbeddingHandler;
+		$this->languageFactory = $languageFactory;
 		$this->emitPreviewHtml = $emitPreviewHtml;
 	}
 
@@ -75,7 +83,7 @@ class GlobeCoordinateKartographerFormatter implements ValueFormatter {
 
 		$html = '';
 
-		$lang = Language::factory( $this->options->getOption( ValueFormatter::OPT_LANG ) );
+		$lang = $this->languageFactory->getLanguage( $this->options->getOption( ValueFormatter::OPT_LANG ) );
 
 		if ( !$this->emitPreviewHtml ) {
 			$kartographerHtml = $this->cachingKartographerEmbeddingHandler->getHtml( $value, $lang );

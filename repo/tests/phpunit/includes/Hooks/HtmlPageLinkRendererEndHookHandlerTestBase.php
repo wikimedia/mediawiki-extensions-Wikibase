@@ -125,13 +125,14 @@ abstract class HtmlPageLinkRendererEndHookHandlerTestBase extends MediaWikiLangT
 
 	private function getEntityLinkFormatterFactory( $titleText ) {
 		$titleTextLookup = $this->getEntityTitleTextLookup( $titleText );
+		$languageFactory = $this->getServiceContainer()->getLanguageFactory();
 
-		return new EntityLinkFormatterFactory( $titleTextLookup, [
-			'item' => function( $language ) use ( $titleTextLookup ) {
-				return new DefaultEntityLinkFormatter( $language, $titleTextLookup );
+		return new EntityLinkFormatterFactory( $titleTextLookup, $languageFactory, [
+			'item' => function( $language ) use ( $titleTextLookup, $languageFactory ) {
+				return new DefaultEntityLinkFormatter( $language, $titleTextLookup, $languageFactory );
 			},
-			'property' => function( $language ) use ( $titleTextLookup ) {
-				return new DefaultEntityLinkFormatter( $language, $titleTextLookup );
+			'property' => function( $language ) use ( $titleTextLookup, $languageFactory ) {
+				return new DefaultEntityLinkFormatter( $language, $titleTextLookup, $languageFactory );
 			},
 		] );
 	}

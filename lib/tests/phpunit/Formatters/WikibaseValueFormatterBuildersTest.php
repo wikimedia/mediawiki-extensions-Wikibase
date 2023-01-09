@@ -129,6 +129,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 			$this->createMock( EntityTitleTextLookup::class ),
 			$urlLookup,
 			$this->createMock( EntityRedirectChecker::class ),
+			$this->getServiceContainer()->getLanguageFactory(),
 			$entityTitleLookup,
 			$this->newKartographerEmbeddingHandler(),
 			true,

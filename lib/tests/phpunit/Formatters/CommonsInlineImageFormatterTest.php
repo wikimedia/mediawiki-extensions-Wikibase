@@ -109,6 +109,7 @@ class CommonsInlineImageFormatterTest extends MediaWikiIntegrationTestCase {
 		return new CommonsInlineImageFormatter(
 			$parserOptions,
 			$thumbLimits,
+			$this->getServiceContainer()->getLanguageFactory(),
 			$this->newFormatterOptions()
 		);
 	}
