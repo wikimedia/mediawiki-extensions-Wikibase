@@ -8,7 +8,7 @@
 			"Pickle12"
 		]
 	},
-	"specialpages-group-wikibase": "Wikibaza",
+	"specialpages-group-wikibase": "Wikibase",
 	"wikibase-deletedentity-item": "izbrisan predmet",
 	"wikibase-deletedentity-property": "izbrisana lastnost",
 	"wikibase-deletedentity-query": "izbrisana poizvedba",
@@ -57,7 +57,7 @@
 	"datatypes-type-tabular-data": "Tabularni podatki",
 	"datatypes-type-external-id": "Zunanji identifikator",
 	"datatypes-type-entity-schema": "Shema entitet",
-	"version-wikibase": "Wikibaza",
+	"version-wikibase": "Wikibase",
 	"wikibase-time-calendar-gregorian": "gregorijanski",
 	"wikibase-time-calendar-julian": "julijanski",
 	"wikibase-time-with-calendar": "$1 ($2)",

@@ -90,6 +90,7 @@
 	"wikibase-mergeitems-submit": "वस्तुहरू जोड्नुहोस्",
 	"wikibase-history-title-with-label": "($1) \"$2\"को इतिहास",
 	"wikibase-listproperties-submit": "खोज्नुहोस्",
+	"wikibase-api-not-recognized-language": "दिइएको भाषा कोड \"$1\" पहिचान भएको छैन्।",
 	"wikibase-restoreold": "पूर्वावस्थामा ल्याउनुहोस्",
 	"wikibase-listdatatypes-wikibase-property-head": "गुणधर्म",
 	"wikibase-listdatatypes-quantity-head": "मात्रा",
