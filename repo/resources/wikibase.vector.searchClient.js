@@ -21,10 +21,10 @@
 		function getMatchText( { type, text, language }, labelText ) {
 			// eslint-disable-next-line no-restricted-syntax
 			if ( [ 'alias', 'entityId' ].includes( type ) ) {
-				return text;
+				return `(${text})`;
 			}
 			if ( type === 'label' && text !== labelText ) {
-				return text;
+				return `(${text})`;
 			}
 
 			return '';
