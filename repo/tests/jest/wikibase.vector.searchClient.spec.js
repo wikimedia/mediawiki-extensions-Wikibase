@@ -115,7 +115,7 @@ describe( 'Vector Search Client', () => {
 						description: 'en',
 						match: 'de'
 					},
-					match: 'ABC',
+					match: '(ABC)',
 					url: '//www.wikidata.org/wiki/Q2497232',
 					value: 'Q2497232'
 				}
@@ -188,7 +188,7 @@ describe( 'Vector Search Client', () => {
 						description: 'en',
 						match: 'ga'
 					},
-					match: 'fireann',
+					match: '(fireann)',
 					url: '//www.wikidata.org/wiki/Q6581097',
 					value: 'Q6581097'
 				}
