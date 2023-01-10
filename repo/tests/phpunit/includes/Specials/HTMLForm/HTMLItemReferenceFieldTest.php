@@ -91,9 +91,7 @@ class HTMLItemReferenceFieldTest extends MediaWikiIntegrationTestCase {
 		$htmlFormMock = $this->createMock( HTMLForm::class );
 		$language = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' );
 		$htmlFormMock->method( 'getLanguage' )->willReturn( $language );
-		$htmlFormMock->method( 'msg' )->willReturnCallback( static function( ...$args ) {
-			return call_user_func_array( 'wfMessage', $args );
-		} );
+		$htmlFormMock->method( 'msg' )->willReturnCallback( 'wfMessage' );
 
 		$paramsRequiredByParentClass = [
 			'fieldname' => 'some-name',
