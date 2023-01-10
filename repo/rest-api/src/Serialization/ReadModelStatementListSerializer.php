@@ -1,0 +1,35 @@
+<?php declare( strict_types=1 );
+
+namespace Wikibase\Repo\RestApi\Serialization;
+
+use ArrayObject;
+use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
+
+/**
+ * @license GPL-2.0-or-later
+ */
+class ReadModelStatementListSerializer {
+
+	private ReadModelStatementSerializer $statementSerializer;
+
+	public function __construct( ReadModelStatementSerializer $statementSerializer ) {
+		$this->statementSerializer = $statementSerializer;
+	}
+
+	public function serialize( StatementList $statementList ): ArrayObject {
+		$serialization = new ArrayObject();
+
+		foreach ( $statementList as $statement ) {
+			$propertyId = $statement->getMainSnak()->getPropertyId()->getSerialization();
+
+			if ( !$serialization->offsetExists( $propertyId ) ) {
+				$serialization[$propertyId] = [];
+			}
+
+			$serialization[$propertyId][] = $this->statementSerializer->serialize( $statement );
+		}
+
+		return $serialization;
+	}
+
+}

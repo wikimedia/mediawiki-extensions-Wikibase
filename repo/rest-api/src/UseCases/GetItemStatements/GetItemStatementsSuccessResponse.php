@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\UseCases\GetItemStatements;
 
-use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 
 /**
  * @license GPL-2.0-or-later

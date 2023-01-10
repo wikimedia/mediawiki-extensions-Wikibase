@@ -27,13 +27,13 @@ class SerializerFactory {
 		return new ReadModelStatementSerializer( $propertyValuePairSerializer, $referenceSerializer );
 	}
 
-	public function newStatementListSerializer(): StatementListSerializer {
-		return new StatementListSerializer( $this->newStatementSerializer() );
+	public function newStatementListSerializer(): ReadModelStatementListSerializer {
+		return new ReadModelStatementListSerializer( $this->newReadModelStatementSerializer() );
 	}
 
 	public function newItemDataSerializer(): ItemDataSerializer {
 		return new ItemDataSerializer(
-			$this->newStatementListSerializer(),
+			new StatementListSerializer( $this->newStatementSerializer() ),
 			new SiteLinkListSerializer()
 		);
 	}

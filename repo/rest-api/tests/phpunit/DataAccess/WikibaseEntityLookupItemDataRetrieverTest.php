@@ -9,13 +9,13 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Statement\Statement as DataModelStatement;
 use Wikibase\DataModel\Statement\StatementGuid;
-use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemDataRetriever;
 use Wikibase\Repo\RestApi\Domain\Model\ItemData;
 use Wikibase\Repo\RestApi\Domain\Model\ItemDataBuilder;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
+use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 
 /**
  * @covers \Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemDataRetriever
@@ -131,13 +131,7 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 		);
 
 		$this->assertEquals(
-			new Statement(
-				$statementId,
-				DataModelStatement::RANK_NORMAL,
-				$statement->getMainSnak(),
-				$statement->getQualifiers(),
-				$statement->getReferences()
-			),
+			$this->convertDataModelToReadModel( $statement ),
 			$retriever->getStatement( $statementId )
 		);
 	}
@@ -169,9 +163,11 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 
 	public function testGetStatements(): void {
 		$statement1 = NewStatement::forProperty( 'P123' )
+			->withGuid( 'Q123$c48c32c3-42b5-498f-9586-84608b88747c' )
 			->withValue( 'potato' )
 			->build();
 		$statement2 = NewStatement::forProperty( 'P321' )
+			->withGuid( 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
 			->withValue( 'banana' )
 			->build();
 
@@ -185,7 +181,10 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 		);
 
 		$this->assertEquals(
-			new StatementList( $statement1, $statement2 ),
+			new StatementList(
+				$this->convertDataModelToReadModel( $statement1 ),
+				$this->convertDataModelToReadModel( $statement2 )
+			),
 			$retriever->getStatements( $item->getId() )
 		);
 	}
@@ -226,6 +225,17 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 			->willReturn( $returnValue );
 
 		return $entityLookup;
+	}
+
+	private function convertDataModelToReadModel( DataModelStatement $statement ): Statement {
+		[ $itemId, $guidPart ] = explode( '$', $statement->getGuid() );
+		return new Statement(
+			new StatementGuid( new ItemId( $itemId ), $guidPart ),
+			$statement->getRank(),
+			$statement->getMainSnak(),
+			$statement->getQualifiers(),
+			$statement->getReferences()
+		);
 	}
 
 }
