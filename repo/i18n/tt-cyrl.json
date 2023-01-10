@@ -3,6 +3,7 @@
 		"authors": [
 			"Derslek",
 			"Ladsgroup",
+			"Ильгиз",
 			"Ильнар"
 		]
 	},
@@ -15,5 +16,6 @@
 	"wikibase-statementsection-identifiers": "Идентификаторлар",
 	"wikibase-sitelinks-special": "Башка сайтлар",
 	"wikibase-statementview-rank-normal": "Нормаль ранг",
-	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|чыганак}}"
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|чыганак}}",
+	"wikibase-api-inconsistent-language": "Туры килмәгән \"$1\" тел табылды (\"$2\" көтелгән иде)."
 }
