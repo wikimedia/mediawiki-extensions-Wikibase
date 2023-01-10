@@ -1,10 +1,17 @@
 {
 	"@metadata": {
 		"authors": [
-			"AgnesAbah"
+			"AgnesAbah",
+			"Amire80"
 		]
 	},
-	"wikibase-linkitem-input-site": "íchi",
+	"wikibase-dataitem": "{{WBREPONAME}} éwn",
+	"wikibase-editlinks": "Nnyi línkí chà",
+	"wikibase-linkitem-addlinks": "Dumanyu línkí",
+	"wikibase-linkitem-title": "Ogbá í ché damanyu",
+	"wikibase-linkitem-linkpage": "Ogbá í ché damanyu",
+	"wikibase-linkitem-selectlink": "Tóduojo dí sítí kpaí ogbá ké téné mádu manywu ogbá kí déí",
+	"wikibase-linkitem-input-site": "Íchi:",
 	"wikibase-linkitem-input-page": "Ogbá",
 	"wikibase-rc-hide-wikidata-hide": "dúmája",
 	"wikibase-rc-hide-wikidata-show": "Dunwa",

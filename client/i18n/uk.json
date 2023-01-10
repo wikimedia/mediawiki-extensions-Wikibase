@@ -102,7 +102,7 @@
 	"wikibase-pageinfo-entity-id-none": "Нема",
 	"wikibase-pageinfo-description-local": "Локальний опис",
 	"wikibase-pageinfo-description-central": "Центральний опис",
-	"wikibase-pageinfo-entity-usage": "Сутності на {{WBREPONAME}}, що використовувались на цій сторінці",
+	"wikibase-pageinfo-entity-usage": "Сутності {{Grammar:genitive|{{WBREPONAME}}}}, використані на цій сторінці",
 	"wikibase-pageinfo-entity-usage-S": "Посилання на сайт",
 	"wikibase-pageinfo-entity-usage-L": "Деякі назви",
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "Назва: $1",

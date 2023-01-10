@@ -9,8 +9,8 @@
 	"apihelp-wbeditentity-description": "Ustvari eno novo entiteto Wikibase in jo spremeni s serializiranimi podatki.",
 	"apihelp-wbeditentity-summary": "Ustvari eno novo entiteto Wikibase in jo spremeni s serializiranimi podatki.",
 	"apihelp-wbeditentity-param-id": "Označevalec entitete, vključno s predpono.\nUporabite bodisi <var>id</var> ali <var>site</var> in <var>title</var> skupaj.",
-	"apihelp-wbeditentity-param-site": "Označevalec mesta, v katerem je stran.\nUporabite skupaj s <var>title</var>, da ustvarite popolno projektno povezavo.",
-	"apihelp-wbeditentity-param-title": "Naslov strani za povezavo.\nUporabite skupaj s <var>site</var>; da ustvarite popolno projektno povezavo.",
+	"apihelp-wbeditentity-param-site": "Označevalec mesta, v katerem je stran.\nUporabite skupaj s <var>title</var>, da ustvarite popolno povezavo mesta.",
+	"apihelp-wbeditentity-param-title": "Naslov strani za povezavo.\nUporabite skupaj s <var>site</var>; da ustvarite popolno povezavo mesta.",
 	"apihelp-wbeditentity-param-baserevid": "Številski označevalec redakcije, ki je izhodišče za spremembo.\nTo se uporablja za zaznavanje navzkrižij pri shranjevanju.",
 	"apihelp-wbeditentity-param-summary": "Povzetek za urejanje.\nPredpripet bo samodejno ustvarjenemu komentarju. Omejitev dolžine avtokomentarja skupaj s povzetkom je 260 znakov. Upoštevajte, da bo vse, kar presega to omejitev, odrezano.",
 	"apihelp-wbeditentity-param-bot": "Označi to urejanje kot urejanje bota. Ta URL-zastavica bo upoštevana samo, če uporabnik pripada skupini »{{int:group-bot}}«.",
@@ -34,10 +34,15 @@
 	"apihelp-wbmergeitems-description": "Združitev več predmetov.",
 	"apihelp-wbmergeitems-summary": "Združi več predmetov.",
 	"apihelp-wbmergeitems-param-fromid": "Izvorni ID za združitev",
+	"apihelp-wbsearchentities-param-search": "Poišče to besedilo.",
 	"apihelp-query+wbcontentlanguages-summary": "Vrne informacije o vsebinskih jezikih, ki jih v različnih kontekstih sprejema Wikibase.",
 	"apihelp-query+wbcontentlanguages-param-prop": "Lastnosti, ki naj se vrnejo za vsak jezik.",
 	"apihelp-query+wbcontentlanguages-paramvalue-prop-name": "Ime jezika v trenutnem jeziku (določenem s parametrom <var>uselang</var>), pri čemer se po potrebi uporabi nadomestni jezik. Običajno je za vse vsebinske jezike, ki jih sprejema Wikibase, znano vsaj ime v angleščini.",
+	"apihelp-query+wbsearch-param-search": "Poišče to besedilo.",
+	"apihelp-query+wbsearch-param-language": "Išče v tem jeziku.",
+	"apihelp-query+wbsubscribers-param-prop": "Lastnosti, ki naj se dodajo zadetku",
 	"apihelp-wbsetaliases-description": "Nastavi sopomenke za entiteto Wikibase.",
 	"apihelp-wbsetaliases-summary": "Nastavi sopomenke za entiteto Wikibase.",
-	"apihelp-wbsetaliases-param-language": "Jezik za nastavitev sopomenk"
+	"apihelp-wbsetaliases-param-language": "Jezik za nastavitev sopomenk",
+	"apihelp-wbformatentities-example-3": "Oblikuje ID predmeta, ID lastnosti in ID leksema."
 }

@@ -4,19 +4,20 @@
 			"ChoiChong",
 			"Chulsu463",
 			"Foavi33",
-			"Moon0319"
+			"Moon0319",
+			"Amire80"
 		]
 	},
-	"tooltip-t-wikibase": "data de holbobure namun i jaka",
+	"tooltip-t-wikibase": "Data de holbobure namun i jaka",
 	"wikibase-comment-update": "{{WBREPONAME}} jaka kūbulihebi",
 	"wikibase-dataitem": "{{WBREPONAME}} jaka",
-	"wikibase-editlinks": "banjibusi links",
-	"wikibase-editlinkstitle": "geren gisun i asu be halambi",
-	"wikibase-linkitem-addlinks": "asu be nonggimbi",
+	"wikibase-editlinks": "Banjibusi links",
+	"wikibase-editlinkstitle": "Geren gisun i asu be halambi",
+	"wikibase-linkitem-addlinks": "Asu be nonggimbi",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
-	"wikibase-rc-hide-wikidata-hide": "somire",
-	"wikibase-rc-hide-wikidata-show": "iletulere",
-	"wikibase-rc-wikibase-edit-letter": "ton",
+	"wikibase-rc-hide-wikidata-hide": "Somire",
+	"wikibase-rc-hide-wikidata-show": "Iletulere",
+	"wikibase-rc-wikibase-edit-letter": "T",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} banjibusi",
-	"wikibase-otherprojects": "encu arga de"
+	"wikibase-otherprojects": "Encu arga de"
 }

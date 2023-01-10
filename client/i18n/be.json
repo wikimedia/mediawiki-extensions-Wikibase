@@ -146,7 +146,7 @@
 	"wikibase-client-data-bridge-license-heading": "Выкарыстанне і ліцэнзія",
 	"wikibase-client-data-bridge-license-body": "<p>Змена гэтага значэння таксама зменіць яго на {{WBREPONAME}} і, магчыма, у вікі-сайтах на іншых мовах.</p>\n<p>Пстрыкаючы на «{{int:$1}}», вы згаджаецеся з [$2 умовамі выкарыстання] і беспаваротна згаджаецеся апублікаваць свой унёсак па ўмовам [$3 $4].</p>",
 	"wikibase-client-data-bridge-bailout-heading": "Замест гэтага вы можаце зрабіць наступнае:",
-	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo": "Правіць значэнне на {{WBREPONAME}}. Пстрыкніце кнопку ніжэй, каб змяніць значэнне непасрэдна (спасылка адкрыецца ў новай укладцы).",
+	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo": "Змяніць значэнне на {{WBREPONAME}}. Націсніце кнопку ніжэй, каб змяніць значэнне непасрэдна (спасылка адкрыецца ў новай укладцы).",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "Правіць значэнне на {{grammar:genitive|{{WBREPONAME}}}}",
 	"wikibase-client-data-bridge-bailout-suggestion-edit-article": "У залежнасці ад шаблону, які выкарыстоўваецца, можа быць магчымым перазапісаць значэнне лакальна з дапамогай [$1 рэдактару артыкулаў]. Калі гэта магчыма, мы рэкамендуем вам замест гэтага дадаць значэнне ў {{WBREPONAME}} з дапамогай кнопкі вышэй.",
 	"wikibase-client-data-bridge-unsupported-datatype-error-head": "Праўка значэння $1 зараз не падтрымліваецца",

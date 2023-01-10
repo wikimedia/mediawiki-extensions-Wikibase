@@ -4,6 +4,10 @@
 			"Eleassar"
 		]
 	},
+	"apihelp-query+wbentityusage-paramvalue-aspect-T": "Uporabi se naslov lokalne strani, ki ustreza entiteti",
+	"apihelp-query+wbentityusage-param-prop": "Lastnosti, ki naj bodo dodane zadetku.",
+	"apihelp-query+wbentityusage-example-simple": "Pridobi entitete, ki se uporabljajo na strani <kbd>Main Page</kbd>.",
+	"apihelp-query+wblistentityusage-param-prop": "Lastnosti, ki naj bodo dodane zadetku.",
 	"apihelp-query+description-summary": "Pridobi kratek opis oziroma podnaslov, ki pojasnjuje, o čem je ciljna stran.",
 	"apihelp-query+description-extended-description": "Opis je navadno besedilo v eni vrstici, sicer pa je poljuben (lahko vključuje neobdelane značke HTML, ki jih je prav tako treba interpretirati kot navadno besedilo). V HTML-ju se ne sme uporabljati nemaskirano!",
 	"apihelp-query+description-param-prefersource": "Kateremu viru opisa dati prednost, če je prisoten:",
