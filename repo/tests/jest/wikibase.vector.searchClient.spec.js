@@ -6,6 +6,14 @@ describe( 'Vector Search Client', () => {
 				get: ( key ) => { return fakeConfig[ key ]; },
 				set: jest.fn()
 			},
+			msg: jest.fn().mockImplementation( ( key, ...args ) => {
+				if ( key === 'parentheses' ) {
+					expect( args ).toHaveLength( 1 );
+					return `(${args[ 0 ]})`;
+				} else {
+					throw new Error( `Unknown message ${key}` );
+				}
+			} ),
 			Api: jest.fn().mockImplementation( () => {
 				return fakeApiInstance;
 			} )
@@ -121,6 +129,7 @@ describe( 'Vector Search Client', () => {
 				}
 			]
 		} );
+		expect( mw.msg ).toHaveBeenCalled();
 	} );
 
 	const testCases = [];
