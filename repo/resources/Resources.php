@@ -293,6 +293,9 @@ return call_user_func( function() {
 			'packageFiles' => [
 				'wikibase.vector.searchClient.js',
 			],
+			'messages' => [
+				'parentheses',
+			],
 			'targets' => [ 'desktop', 'mobile' ],
 		],
 
