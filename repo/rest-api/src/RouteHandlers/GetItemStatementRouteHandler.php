@@ -9,11 +9,11 @@ use MediaWiki\Rest\ResponseInterface;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
 use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
-use Wikibase\Repo\RestApi\Presentation\Presenters\StatementJsonPresenter;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
+use Wikibase\Repo\RestApi\Serialization\ReadModelStatementSerializer;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatement;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementRequest;
@@ -32,18 +32,18 @@ class GetItemStatementRouteHandler extends SimpleHandler {
 	public const ROUTE = '/wikibase/v0/entities/items/{item_id}/statements/{statement_id}';
 
 	private GetItemStatement $getItemStatement;
-	private StatementJsonPresenter $successPresenter;
+	private ReadModelStatementSerializer $statementSerializer;
 	private ResponseFactory $responseFactory;
 	private MiddlewareHandler $middlewareHandler;
 
 	public function __construct(
 		GetItemStatement $getItemStatement,
-		StatementJsonPresenter $successPresenter,
+		ReadModelStatementSerializer $statementSerializer,
 		ResponseFactory $responseFactory,
 		MiddlewareHandler $middlewareHandler
 	) {
 		$this->getItemStatement = $getItemStatement;
-		$this->successPresenter = $successPresenter;
+		$this->statementSerializer = $statementSerializer;
 		$this->responseFactory = $responseFactory;
 		$this->middlewareHandler = $middlewareHandler;
 	}
@@ -52,14 +52,14 @@ class GetItemStatementRouteHandler extends SimpleHandler {
 		$responseFactory = new ResponseFactory( new ErrorJsonPresenter() );
 		return new self(
 			WbRestApi::getGetItemStatement(),
-			new StatementJsonPresenter( WbRestApi::getSerializerFactory()->newStatementSerializer() ),
+			WbRestApi::getSerializerFactory()->newReadModelStatementSerializer(),
 			$responseFactory,
 			new MiddlewareHandler( [
 				new UnexpectedErrorHandlerMiddleware( $responseFactory, WikibaseRepo::getLogger() ),
 				new UserAgentCheckMiddleware(),
 				new AuthenticationMiddleware(),
 				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
-					function ( RequestInterface $request ): string {
+					function( RequestInterface $request ): string {
 						return $request->getPathParam( self::ITEM_ID_PATH_PARAM );
 					}
 				),
@@ -128,7 +128,7 @@ class GetItemStatementRouteHandler extends SimpleHandler {
 		$this->setEtagFromRevId( $httpResponse, $useCaseResponse->getRevisionId() );
 		$httpResponse->setBody(
 			new StringStream(
-				$this->successPresenter->getJson( $useCaseResponse->getStatement() )
+				json_encode( $this->statementSerializer->serialize( $useCaseResponse->getStatement() ) )
 			)
 		);
 
