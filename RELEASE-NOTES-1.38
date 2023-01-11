@@ -24,6 +24,9 @@ For the migration, we suggest the following procedure:
 - Run `ResubmitChanges.php`, to move remaining changes into the job queue.
 - Resume automatic job runners, if you have any (now using the new code).
 
+In this 1.38 release, there is one known regression in change dispatching, detailed in https://phabricator.wikimedia.org/T326082.
+This will be fixed in a future version of Wikibase.
+
 For a general manual to upgrade MediaWiki see:
 
 https://www.mediawiki.org/wiki/Manual:Upgrading
