@@ -5,7 +5,8 @@
 			"Growingup",
 			"Janatkg",
 			"Macofe",
-			"Викиней"
+			"Викиней",
+			"Элдин беги"
 		]
 	},
 	"wikibase-edit": "оңдоо",
@@ -21,9 +22,9 @@
 	"wikibase-copyrighttooltip-acknowledge": "Келечектеги түзөтүүлөрүм үчүн бул шарттарды кабыл алам. Муну кайрадан көрсөтпөө.",
 	"wikibase-itembytitle-lookup-site": "Сайт:",
 	"wikibase-itembytitle-lookup-page": "Барак:",
-	"wikibase-itembytitle-submit": "Табуу",
+	"wikibase-itembytitle-submit": "Издөө",
 	"wikibase-itemdisambiguation-lookup-language": "Тилдин коду:",
-	"wikibase-itemdisambiguation-submit": "Табуу",
+	"wikibase-itemdisambiguation-submit": "Издөө",
 	"wikibase-newentity-description": "Баяндама:",
 	"wikibase-modifyterm-language": "Тилдин коду:"
 }
