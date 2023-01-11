@@ -61,10 +61,10 @@ class NewStatement {
 
 	/**
 	 * @param NumericPropertyId|string $propertyId
-	 * @return self
+	 * @return static
 	 */
 	public static function forProperty( $propertyId ) {
-		$result = new self();
+		$result = new static();
 		if ( is_string( $propertyId ) ) {
 			$propertyId = new NumericPropertyId( $propertyId );
 		}
@@ -75,10 +75,10 @@ class NewStatement {
 
 	/**
 	 * @param NumericPropertyId|string $propertyId
-	 * @return self
+	 * @return static
 	 */
 	public static function someValueFor( $propertyId ) {
-		$result = self::forProperty( $propertyId );
+		$result = static::forProperty( $propertyId );
 		$result->type = PropertySomeValueSnak::class;
 
 		return $result;
@@ -86,10 +86,10 @@ class NewStatement {
 
 	/**
 	 * @param NumericPropertyId|string $propertyId
-	 * @return self
+	 * @return static
 	 */
 	public static function noValueFor( $propertyId ) {
-		$result = self::forProperty( $propertyId );
+		$result = static::forProperty( $propertyId );
 		$result->type = PropertyNoValueSnak::class;
 
 		return $result;
@@ -98,7 +98,7 @@ class NewStatement {
 	/**
 	 * @param DataValue|EntityId|string $dataValue If not a DataValue object, the builder tries to
 	 *  guess the type and turns it into a DataValue object.
-	 * @return self
+	 * @return static
 	 */
 	public function withValue( $dataValue ) {
 		if ( $this->type !== null && $this->type !== PropertyValueSnak::class ) {
@@ -115,7 +115,7 @@ class NewStatement {
 
 	/**
 	 * @param int $rank
-	 * @return self
+	 * @return static
 	 */
 	public function withRank( $rank ) {
 		$result = clone $this;
@@ -139,7 +139,7 @@ class NewStatement {
 
 	/**
 	 * @param string $guid
-	 * @return self
+	 * @return static
 	 */
 	public function withGuid( $guid ) {
 		$result = clone $this;
@@ -153,7 +153,7 @@ class NewStatement {
 	}
 
 	/**
-	 * @return self
+	 * @return static
 	 */
 	public function withSomeGuid() {
 		$result = clone $this;
@@ -171,7 +171,7 @@ class NewStatement {
 	 * @param DataValue|EntityId|string $value If not a DataValue object, the builder tries to
 	 *  guess the type and turns it into a DataValue object.
 	 *
-	 * @return self
+	 * @return static
 	 */
 	public function withQualifier( $propertyId, $value ) {
 		$result = clone $this;
@@ -186,7 +186,11 @@ class NewStatement {
 		return $result;
 	}
 
-	public function withReference( Reference $reference ): self {
+	/**
+	 * @param Reference $reference
+	 * @return static
+	 */
+	public function withReference( Reference $reference ) {
 		$result = clone $this;
 
 		$result->references[] = $reference;
