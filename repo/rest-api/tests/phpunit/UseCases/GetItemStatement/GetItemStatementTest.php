@@ -2,19 +2,12 @@
 
 namespace Wikibase\Repo\Tests\RestApi\UseCases\GetItemStatement;
 
-use DataValues\StringValue;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
-use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\DataModel\ReferenceList;
-use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\DataModel\Snak\SnakList;
-use Wikibase\DataModel\Statement\Statement as DataModelStatement;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementRetriever;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
@@ -24,6 +17,7 @@ use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\StatementIdValidator;
+use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
 
 /**
  * @covers \Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatement
@@ -57,16 +51,10 @@ class GetItemStatementTest extends TestCase {
 		$lastModified = '20201111070707';
 		$guidPart = 'c48c32c3-42b5-498f-9586-84608b88747c';
 		$statementId = $itemId . StatementGuid::SEPARATOR . $guidPart;
-		$expectedStatement = new Statement(
-			new StatementGuid( $itemId, $guidPart ),
-			DataModelStatement::RANK_NORMAL,
-			new PropertyValueSnak(
-				new NumericPropertyId( 'P123' ),
-				new StringValue( 'potato' )
-			),
-			new SnakList(),
-			new ReferenceList()
-		);
+		$expectedStatement = NewStatementReadModel::forProperty( 'P123' )
+			->withGuid( $statementId )
+			->withValue( 'potato' )
+			->build();
 
 		$this->itemRevisionMetadataRetriever = $this->createMock( ItemRevisionMetadataRetriever::class );
 		$this->itemRevisionMetadataRetriever->expects( $this->once() )

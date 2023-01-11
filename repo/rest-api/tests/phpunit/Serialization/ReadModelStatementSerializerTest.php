@@ -4,18 +4,16 @@ namespace Wikibase\Repo\Tests\RestApi\Serialization;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement as DataModelStatement;
-use Wikibase\DataModel\Statement\StatementGuid;
-use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
 use Wikibase\Repo\RestApi\Serialization\PropertyValuePairSerializer;
 use Wikibase\Repo\RestApi\Serialization\ReadModelStatementSerializer;
 use Wikibase\Repo\RestApi\Serialization\ReferenceSerializer;
+use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Serialization\ReadModelStatementSerializer
@@ -40,11 +38,9 @@ class ReadModelStatementSerializerTest extends TestCase {
 
 	public function serializationProvider(): Generator {
 		yield 'no value statement' => [
-			$this->convertDataModelToReadModel(
-				NewStatement::noValueFor( 'P123' )
-					->withGuid( self::STATEMENT_ID )
-					->build()
-			),
+			NewStatementReadModel::noValueFor( 'P123' )
+				->withGuid( self::STATEMENT_ID )
+				->build(),
 			[
 				'id' => self::STATEMENT_ID,
 				'rank' => 'normal',
@@ -56,12 +52,10 @@ class ReadModelStatementSerializerTest extends TestCase {
 		];
 
 		yield 'some value statement with deprecated rank' => [
-			$this->convertDataModelToReadModel(
-				NewStatement::someValueFor( 'P123' )
-					->withGuid( self::STATEMENT_ID )
-					->withRank( DataModelStatement::RANK_DEPRECATED )
-					->build()
-			),
+			NewStatementReadModel::someValueFor( 'P123' )
+				->withGuid( self::STATEMENT_ID )
+				->withRank( DataModelStatement::RANK_DEPRECATED )
+				->build(),
 			[
 				'id' => self::STATEMENT_ID,
 				'rank' => 'deprecated',
@@ -73,13 +67,11 @@ class ReadModelStatementSerializerTest extends TestCase {
 		];
 
 		yield 'no value statement with qualifiers' => [
-			$this->convertDataModelToReadModel(
-				NewStatement::noValueFor( 'P123' )
-					->withGuid( self::STATEMENT_ID )
-					->withQualifier( 'P456', 'foo' )
-					->withQualifier( 'P789', 'bar' )
-					->build()
-			),
+			NewStatementReadModel::noValueFor( 'P123' )
+				->withGuid( self::STATEMENT_ID )
+				->withQualifier( 'P456', 'foo' )
+				->withQualifier( 'P789', 'bar' )
+				->build(),
 			[
 				'id' => self::STATEMENT_ID,
 				'rank' => 'normal',
@@ -101,13 +93,11 @@ class ReadModelStatementSerializerTest extends TestCase {
 			new PropertyNoValueSnak( new NumericPropertyId( 'P888' ) ),
 		] );
 		yield 'with references' => [
-			$this->convertDataModelToReadModel(
-				NewStatement::noValueFor( 'P123' )
-					->withGuid( self::STATEMENT_ID )
-					->withReference( $ref1 )
-					->withReference( $ref2 )
-					->build()
-			),
+			NewStatementReadModel::noValueFor( 'P123' )
+				->withGuid( self::STATEMENT_ID )
+				->withReference( $ref1 )
+				->withReference( $ref2 )
+				->build(),
 			[
 				'id' => self::STATEMENT_ID,
 				'rank' => 'normal',
@@ -136,17 +126,6 @@ class ReadModelStatementSerializerTest extends TestCase {
 			->willReturnCallback( fn( Reference $ref ) => [ $ref->getHash() ] );
 
 		return new ReadModelStatementSerializer( $propertyValuePairSerializer, $referenceSerializer );
-	}
-
-	private function convertDataModelToReadModel( DataModelStatement $statement ): Statement {
-		[ $itemId, $guidPart ] = explode( '$', $statement->getGuid() );
-		return new Statement(
-			new StatementGuid( new ItemId( $itemId ), $guidPart ),
-			$statement->getRank(),
-			$statement->getMainSnak(),
-			$statement->getQualifiers(),
-			$statement->getReferences()
-		);
 	}
 
 }

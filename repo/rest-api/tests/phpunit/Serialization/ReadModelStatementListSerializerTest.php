@@ -4,14 +4,11 @@ namespace Wikibase\Repo\Tests\RestApi\Serialization;
 
 use ArrayObject;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Statement\Statement as DataModelStatement;
-use Wikibase\DataModel\Statement\StatementGuid;
-use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Serialization\ReadModelStatementListSerializer;
 use Wikibase\Repo\RestApi\Serialization\ReadModelStatementSerializer;
+use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Serialization\ReadModelStatementListSerializer
@@ -24,22 +21,16 @@ class ReadModelStatementListSerializerTest extends TestCase {
 
 	public function testSerialize(): void {
 		$statementList = new StatementList(
-			$this->convertDataModelToReadModel(
-				NewStatement::forProperty( 'P123' )
-					->withValue( 'potato' )
-					->withGuid( 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
-					->build()
-			),
-			$this->convertDataModelToReadModel(
-				NewStatement::someValueFor( 'P321' )
-					->withGuid( 'Q42$BBBBBBBB-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
-					->build()
-			),
-			$this->convertDataModelToReadModel(
-				NewStatement::noValueFor( 'P321' )
-					->withGuid( 'Q42$CCCCCCCC-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
-					->build()
-			)
+			NewStatementReadModel::forProperty( 'P123' )
+				->withValue( 'potato' )
+				->withGuid( 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
+				->build(),
+			NewStatementReadModel::someValueFor( 'P321' )
+				->withGuid( 'Q42$BBBBBBBB-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
+				->build(),
+			NewStatementReadModel::noValueFor( 'P321' )
+				->withGuid( 'Q42$CCCCCCCC-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
+				->build(),
 		);
 
 		$this->assertEquals(
@@ -74,17 +65,6 @@ class ReadModelStatementListSerializerTest extends TestCase {
 				]
 			);
 		return new ReadModelStatementListSerializer( $statementSerializer );
-	}
-
-	private function convertDataModelToReadModel( DataModelStatement $statement ): Statement {
-		[ $itemId, $guidPart ] = explode( '$', $statement->getGuid() );
-		return new Statement(
-			new StatementGuid( new ItemId( $itemId ), $guidPart ),
-			$statement->getRank(),
-			$statement->getMainSnak(),
-			$statement->getQualifiers(),
-			$statement->getReferences()
-		);
 	}
 
 }
