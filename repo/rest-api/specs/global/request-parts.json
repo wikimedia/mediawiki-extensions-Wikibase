@@ -39,7 +39,7 @@
 									]
 								},
 								"path": {
-									"description": "A JSON-Pointer for the property to manipulate",
+									"description": "A JSON Pointer for the property to manipulate",
 									"type": "string",
 									"example": "/mainsnak/datavalue/value"
 								},

@@ -580,7 +580,7 @@
 				"schema": {
 					"type": "string"
 				},
-				"description": "The URL to which the requested resource has been moved to"
+				"description": "The URL to which the requested resource has been moved"
 			}
 		}
 	}

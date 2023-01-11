@@ -1,7 +1,7 @@
 {
 	"get": {
 		"tags": [ "statements" ],
-		"summary": "Retrieve statements from an Item",
+		"summary": "Retrieve Statements from an Item",
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/ItemId" },
 			{ "$ref": "../../global/parameters.json#/IfNoneMatch" },

@@ -29,7 +29,7 @@
 	"Fields": {
 		"in": "query",
 		"name": "_fields",
-		"description": "Comma separated list of fields to include in each response object.",
+		"description": "Comma-separated list of fields to include in each response object.",
 		"required": false,
 		"schema": {
 			"type": "array",

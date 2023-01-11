@@ -27,7 +27,7 @@
 		}
 	},
 	"Edit": {
-		"description": "Edit payload containing edit meta data",
+		"description": "Edit payload containing edit metadata",
 		"required": false,
 		"content": {
 			"application/json": {
