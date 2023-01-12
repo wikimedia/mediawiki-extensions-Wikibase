@@ -6,11 +6,11 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Statement\StatementGuid;
-use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\RestApi\Domain\Model\ItemData;
 use Wikibase\Repo\RestApi\Domain\Model\ItemDataBuilder;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
+use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemDataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementRetriever;
@@ -71,23 +71,12 @@ class WikibaseEntityLookupItemDataRetriever implements ItemDataRetriever, ItemSt
 		$itemId = $statementGuid->getEntityId();
 		'@phan-var ItemId $itemId';
 
-		$item = $this->getItem( $itemId );
-		if ( $item === null ) {
+		$statements = $this->getStatements( $itemId );
+		if ( $statements === null ) {
 			return null;
 		}
 
-		$statement = $item->getStatements()->getFirstStatementWithGuid( (string)$statementGuid );
-		if ( $statement === null ) {
-			return null;
-		}
-
-		return new Statement(
-			$statementGuid,
-			$statement->getRank(),
-			$statement->getMainSnak(),
-			$statement->getQualifiers(),
-			$statement->getReferences()
-		);
+		return $statements->getStatementById( $statementGuid );
 	}
 
 	/**
@@ -98,7 +87,20 @@ class WikibaseEntityLookupItemDataRetriever implements ItemDataRetriever, ItemSt
 		if ( $item === null ) {
 			return null;
 		}
-		return $item->getStatements();
+
+		return new StatementList( ...array_map(
+			fn( $statement ) => new Statement(
+				new StatementGuid(
+					$itemId,
+					substr( $statement->getGuid(), strlen( (string)$itemId ) + 1 )
+				),
+				$statement->getRank(),
+				$statement->getMainSnak(),
+				$statement->getQualifiers(),
+				$statement->getReferences()
+			),
+			iterator_to_array( $item->getStatements() )
+		) );
 	}
 
 	public function getItem( ItemId $itemId ): ?Item {

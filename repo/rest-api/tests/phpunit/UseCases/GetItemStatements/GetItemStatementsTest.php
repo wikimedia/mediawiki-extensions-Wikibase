@@ -5,9 +5,12 @@ namespace Wikibase\Repo\Tests\RestApi\UseCases\GetItemStatements;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\DataModel\Statement\Statement as DataModelStatement;
+use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
+use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementsRetriever;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
@@ -49,12 +52,17 @@ class GetItemStatementsTest extends TestCase {
 		$revision = 987;
 		$lastModified = '20201111070707';
 		$statements = new StatementList(
-			NewStatement::forProperty( 'P123' )
-				->withValue( 'potato' )
-				->build(),
-			NewStatement::forProperty( 'P321' )
-				->withValue( 'banana' )
-				->build()
+			$this->convertDataModelToReadModel(
+				NewStatement::forProperty( 'P123' )
+					->withValue( 'potato' )
+					->withGuid( 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
+					->build()
+			),
+			$this->convertDataModelToReadModel(
+				NewStatement::someValueFor( 'P321' )
+					->withGuid( 'Q42$BBBBBBBB-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
+					->build()
+			),
 		);
 
 		$this->itemRevisionMetadataRetriever = $this->createMock( ItemRevisionMetadataRetriever::class );
@@ -117,6 +125,17 @@ class GetItemStatementsTest extends TestCase {
 			new GetItemStatementsValidator( new ItemIdValidator() ),
 			$this->statementsRetriever,
 			$this->itemRevisionMetadataRetriever
+		);
+	}
+
+	private function convertDataModelToReadModel( DataModelStatement $statement ): Statement {
+		[ $itemId, $guidPart ] = explode( '$', $statement->getGuid() );
+		return new Statement(
+			new StatementGuid( new ItemId( $itemId ), $guidPart ),
+			$statement->getRank(),
+			$statement->getMainSnak(),
+			$statement->getQualifiers(),
+			$statement->getReferences()
 		);
 	}
 
