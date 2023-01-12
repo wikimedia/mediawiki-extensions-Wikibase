@@ -6,6 +6,7 @@ use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\RequestData;
 use MediaWiki\Tests\Rest\Handler\HandlerTestTrait;
 use MediaWikiIntegrationTestCase;
+use RuntimeException;
 use Wikibase\Repo\RestApi\RouteHandlers\RemoveStatementRouteHandler;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatement;
@@ -23,7 +24,7 @@ class RemoveStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 
 	public function testHandlesUnexpectedErrors(): void {
 		$useCase = $this->createStub( RemoveItemStatement::class );
-		$useCase->method( 'execute' )->willThrowException( new \RuntimeException() );
+		$useCase->method( 'execute' )->willThrowException( new RuntimeException() );
 		$this->setService( 'WbRestApi.RemoveItemStatement', $useCase );
 
 		$routeHandler = $this->newHandlerWithValidRequest();

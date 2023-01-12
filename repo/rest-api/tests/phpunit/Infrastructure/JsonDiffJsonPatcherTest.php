@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Infrastructure;
 
+use Exception;
 use Generator;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
@@ -97,7 +98,7 @@ class JsonDiffJsonPatcherTest extends TestCase {
 
 		try {
 			( new JsonDiffJsonPatcher() )->patch( [ 'foo' => 'bar' ], [ $operation ] );
-		} catch ( \Exception $exception ) {
+		} catch ( Exception $exception ) {
 			$this->assertInstanceOf( PatchPathException::class, $exception );
 			$this->assertSame( 'path', $exception->getField() );
 			$this->assertSame( $operation, $exception->getOperation() );

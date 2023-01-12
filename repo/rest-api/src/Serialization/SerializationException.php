@@ -2,9 +2,11 @@
 
 namespace Wikibase\Repo\RestApi\Serialization;
 
+use RuntimeException;
+
 /**
  * @license GPL-2.0-or-later
  */
-class SerializationException extends \RuntimeException {
+class SerializationException extends RuntimeException {
 
 }

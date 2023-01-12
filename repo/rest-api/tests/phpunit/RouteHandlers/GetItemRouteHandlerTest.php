@@ -6,6 +6,7 @@ use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\RequestData;
 use MediaWiki\Tests\Rest\Handler\HandlerTestTrait;
 use MediaWikiIntegrationTestCase;
+use RuntimeException;
 use Wikibase\Repo\RestApi\RouteHandlers\GetItemRouteHandler;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
@@ -23,7 +24,7 @@ class GetItemRouteHandlerTest extends MediaWikiIntegrationTestCase {
 
 	public function testHandlesUnexpectedErrors(): void {
 		$useCase = $this->createStub( GetItem::class );
-		$useCase->method( 'execute' )->willThrowException( new \RuntimeException() );
+		$useCase->method( 'execute' )->willThrowException( new RuntimeException() );
 		$this->setService( 'WbRestApi.GetItem', $useCase );
 
 		$routeHandler = $this->newHandlerWithValidRequest();

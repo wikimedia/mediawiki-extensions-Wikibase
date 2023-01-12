@@ -6,6 +6,7 @@ use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\RequestData;
 use MediaWiki\Tests\Rest\Handler\HandlerTestTrait;
 use MediaWikiIntegrationTestCase;
+use RuntimeException;
 use Wikibase\Repo\RestApi\RouteHandlers\ReplaceItemStatementRouteHandler;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatement;
@@ -24,7 +25,7 @@ class ReplaceItemStatementRouteHandlerTest extends MediaWikiIntegrationTestCase 
 
 	public function testHandlesUnexpectedErrors(): void {
 		$useCase = $this->createStub( ReplaceItemStatement::class );
-		$useCase->method( 'execute' )->willThrowException( new \RuntimeException() );
+		$useCase->method( 'execute' )->willThrowException( new RuntimeException() );
 		$this->setService( 'WbRestApi.ReplaceItemStatement', $useCase );
 
 		$routeHandler = $this->newRouteHandlerWithValidRequest();

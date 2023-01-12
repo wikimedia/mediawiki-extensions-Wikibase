@@ -5,6 +5,7 @@ namespace Wikibase\Repo\RestApi\DataAccess;
 use IContextSource;
 use MediaWiki\Permissions\PermissionManager;
 use Psr\Log\LoggerInterface;
+use RuntimeException;
 use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\Store\EntityRevision;
@@ -72,7 +73,7 @@ class MediaWikiEditEntityFactoryItemUpdater implements ItemUpdater {
 	private function checkBotRightIfProvided( User $user, bool $isBot ): void {
 		// This is only a low-level safeguard and should be checked and handled properly before using this service.
 		if ( $isBot && !$this->permissionManager->userHasRight( $user, 'bot' ) ) {
-			throw new \RuntimeException( 'Attempted bot edit with insufficient rights' );
+			throw new RuntimeException( 'Attempted bot edit with insufficient rights' );
 		}
 	}
 

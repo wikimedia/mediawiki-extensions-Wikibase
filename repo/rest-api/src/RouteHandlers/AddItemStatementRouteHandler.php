@@ -2,6 +2,8 @@
 
 namespace Wikibase\Repo\RestApi\RouteHandlers;
 
+use Exception;
+use LogicException;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\RequestInterface;
@@ -91,7 +93,7 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 	}
 
 	/**
-	 * @throws \Exception
+	 * @throws Exception
 	 */
 	public function runUseCase( string $itemId ): Response {
 		$jsonBody = $this->getValidatedBody();
@@ -111,7 +113,7 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 		} elseif ( $useCaseResponse instanceof AddItemStatementErrorResponse ) {
 			return $this->responseFactory->newErrorResponse( $useCaseResponse );
 		} else {
-			throw new \LogicException( 'Received an unexpected use case result in ' . __CLASS__ );
+			throw new LogicException( 'Received an unexpected use case result in ' . __CLASS__ );
 		}
 	}
 

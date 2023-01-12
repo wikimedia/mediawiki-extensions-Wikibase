@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\RestApi\UseCases\GetItem;
 
+use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemValidator;
@@ -25,7 +26,7 @@ class GetItemValidatorTest extends TestCase {
 		$this->assertNull( $error );
 	}
 
-	public function dataProviderPass(): \Generator {
+	public function dataProviderPass(): Generator {
 		yield 'valid ID with empty fields' => [
 			new GetItemRequest( 'Q123' ),
 		];
@@ -45,7 +46,7 @@ class GetItemValidatorTest extends TestCase {
 		$this->assertEquals( $expectedCode, $result->getCode() );
 	}
 
-	public function dataProviderFail(): \Generator {
+	public function dataProviderFail(): Generator {
 		yield 'invalid item ID' => [
 			new GetItemRequest( 'X123' ),
 			ItemIdValidator::CODE_INVALID,

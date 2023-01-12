@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\UseCases\GetItem;
 
+use LogicException;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\ValidationError;
@@ -27,7 +28,7 @@ class GetItemErrorResponse extends ErrorResponse {
 				);
 
 			default:
-				throw new \LogicException( "Unexpected validation error code: $errorCode" );
+				throw new LogicException( "Unexpected validation error code: $errorCode" );
 		}
 	}
 }

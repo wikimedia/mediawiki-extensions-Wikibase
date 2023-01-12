@@ -6,6 +6,7 @@ use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\RequestData;
 use MediaWiki\Tests\Rest\Handler\HandlerTestTrait;
 use MediaWikiIntegrationTestCase;
+use RuntimeException;
 use Wikibase\Repo\RestApi\RouteHandlers\PatchItemStatementRouteHandler;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatement;
@@ -23,7 +24,7 @@ class PatchItemStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 
 	public function testHandlesUnexpectedErrors(): void {
 		$useCase = $this->createStub( PatchItemStatement::class );
-		$useCase->method( 'execute' )->willThrowException( new \RuntimeException() );
+		$useCase->method( 'execute' )->willThrowException( new RuntimeException() );
 		$this->setService( 'WbRestApi.PatchItemStatement', $useCase );
 
 		$routeHandler = $this->newHandlerWithValidRequest();

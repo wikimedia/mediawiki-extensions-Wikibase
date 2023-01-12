@@ -2,6 +2,8 @@
 
 namespace Wikibase\Repo\Tests\RestApi\UseCases\ReplaceItemStatement;
 
+use Generator;
+use LogicException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementErrorResponse;
@@ -35,7 +37,7 @@ class ReplaceItemStatementErrorResponseTest extends TestCase {
 		$this->assertSame( $expectedContext, $response->getContext() );
 	}
 
-	public function validationErrorDataProvider(): \Generator {
+	public function validationErrorDataProvider(): Generator {
 		yield 'from invalid item ID' => [
 			new ValidationError( ItemIdValidator::CODE_INVALID, [ ItemIdValidator::CONTEXT_VALUE => 'X123' ] ),
 			ErrorResponse::INVALID_ITEM_ID,
@@ -87,7 +89,7 @@ class ReplaceItemStatementErrorResponseTest extends TestCase {
 	}
 
 	public function testNewFromUnknownCode(): void {
-		$this->expectException( \LogicException::class );
+		$this->expectException( LogicException::class );
 
 		ReplaceItemStatementErrorResponse::newFromValidationError(
 			new ValidationError( 'unknown' )

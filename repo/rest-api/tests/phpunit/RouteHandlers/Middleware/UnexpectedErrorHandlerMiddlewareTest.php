@@ -8,6 +8,9 @@ use MediaWiki\Rest\Response;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
+use RuntimeException;
+use Throwable;
+use TypeError;
 use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\ResponseFactory;
@@ -25,7 +28,7 @@ class UnexpectedErrorHandlerMiddlewareTest extends TestCase {
 	/**
 	 * @dataProvider throwableProvider
 	 */
-	public function testHandlesError( \Throwable $throwable ): void {
+	public function testHandlesError( Throwable $throwable ): void {
 		$middleware = new UnexpectedErrorHandlerMiddleware( new ResponseFactory( new ErrorJsonPresenter() ), new NullLogger() );
 
 		$response = $middleware->run(
@@ -59,7 +62,7 @@ class UnexpectedErrorHandlerMiddlewareTest extends TestCase {
 	}
 
 	public function testLogsExceptions(): void {
-		$exception = new \RuntimeException();
+		$exception = new RuntimeException();
 		$logger = $this->createMock( LoggerInterface::class );
 		$logger->expects( $this->once() )
 			->method( 'debug' )
@@ -75,8 +78,8 @@ class UnexpectedErrorHandlerMiddlewareTest extends TestCase {
 	}
 
 	public function throwableProvider(): Generator {
-		yield [ new \TypeError() ];
-		yield [ new \RuntimeException() ];
+		yield [ new TypeError() ];
+		yield [ new RuntimeException() ];
 	}
 
 }

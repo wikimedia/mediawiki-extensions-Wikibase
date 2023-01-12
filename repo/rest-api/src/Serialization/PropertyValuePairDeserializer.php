@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Serialization;
 
+use Exception;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -41,7 +42,7 @@ class PropertyValuePairDeserializer {
 
 		try {
 			$dataTypeId = $this->dataTypeLookup->getDataTypeIdForProperty( $propertyId );
-		} catch ( \Exception $e ) {
+		} catch ( Exception $e ) {
 			throw new InvalidFieldException( 'id', $serialization['property']['id'] );
 		}
 

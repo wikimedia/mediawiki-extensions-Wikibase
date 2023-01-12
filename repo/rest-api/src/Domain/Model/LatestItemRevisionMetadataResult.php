@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Domain\Model;
 
+use RuntimeException;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
@@ -33,33 +34,33 @@ final class LatestItemRevisionMetadataResult {
 	}
 
 	/**
-	 * @throws \RuntimeException if not a concrete revision result
+	 * @throws RuntimeException if not a concrete revision result
 	 */
 	public function getRevisionId(): int {
 		if ( !$this->revisionId ) {
-			throw new \RuntimeException( __METHOD__ . ' called on a result object that does not contain a revision.' );
+			throw new RuntimeException( __METHOD__ . ' called on a result object that does not contain a revision.' );
 		}
 
 		return $this->revisionId;
 	}
 
 	/**
-	 * @throws \RuntimeException if not a concrete revision result
+	 * @throws RuntimeException if not a concrete revision result
 	 */
 	public function getRevisionTimestamp(): string {
 		if ( !$this->revisionTimestamp ) {
-			throw new \RuntimeException( __METHOD__ . ' called on a result object that does not contain a revision.' );
+			throw new RuntimeException( __METHOD__ . ' called on a result object that does not contain a revision.' );
 		}
 
 		return $this->revisionTimestamp;
 	}
 
 	/**
-	 * @throws \RuntimeException if not a redirect result
+	 * @throws RuntimeException if not a redirect result
 	 */
 	public function getRedirectTarget(): ItemId {
 		if ( !$this->redirectTarget ) {
-			throw new \RuntimeException( __METHOD__ . ' called on a result object that does not contain a redirect.' );
+			throw new RuntimeException( __METHOD__ . ' called on a result object that does not contain a redirect.' );
 		}
 
 		return $this->redirectTarget;

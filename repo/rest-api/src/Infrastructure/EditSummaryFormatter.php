@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Infrastructure;
 
+use LogicException;
 use Wikibase\Lib\FormatableSummary;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
@@ -58,7 +59,7 @@ class EditSummaryFormatter {
 			}
 		}
 
-		throw new \LogicException( "Unknown summary type '{$summary->getEditAction()}' " . get_class( $summary ) );
+		throw new LogicException( "Unknown summary type '{$summary->getEditAction()}' " . get_class( $summary ) );
 	}
 
 	private function newFormatableSummaryForStatementEdit(
