@@ -5,7 +5,6 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
 use ExtensionRegistry;
-use HashConfig;
 use Parser;
 use ParserFactory;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
@@ -23,29 +22,6 @@ class KartographerEmbeddingHandlerTest extends ServiceWiringTestCase {
 
 	public function testKartographerGlobeCoordinateFormatterDisabled(): void {
 		$this->mockClientSettings( false );
-		$this->mockMainConfig( true );
-		$this->mockParserFactory( false );
-
-		$this->assertNull(
-			$this->getService( 'WikibaseClient.KartographerEmbeddingHandler' )
-		);
-	}
-
-	public function testKartographerEnableMapFrameNotConfigured(): void {
-		$this->assumeKartographerIsLoaded();
-		$this->mockClientSettings( true );
-		$this->mockMainConfig( null );
-		$this->mockParserFactory( false );
-
-		$this->assertNull(
-			$this->getService( 'WikibaseClient.KartographerEmbeddingHandler' )
-		);
-	}
-
-	public function testKartographerEnableMapFrameDisabled(): void {
-		$this->assumeKartographerIsLoaded();
-		$this->mockClientSettings( true );
-		$this->mockMainConfig( false );
 		$this->mockParserFactory( false );
 
 		$this->assertNull(
@@ -56,7 +32,6 @@ class KartographerEmbeddingHandlerTest extends ServiceWiringTestCase {
 	public function testConstruction(): void {
 		$this->assumeKartographerIsLoaded();
 		$this->mockClientSettings( true );
-		$this->mockMainConfig( true );
 		$this->mockParserFactory( true );
 
 		$this->assertInstanceOf(
@@ -79,20 +54,6 @@ class KartographerEmbeddingHandlerTest extends ServiceWiringTestCase {
 			new SettingsArray( [
 				'useKartographerGlobeCoordinateFormatter' => $useKartographerGlobeCoordinateFormatter,
 			] ) );
-	}
-
-	/**
-	 * @param bool|null $enableMapFrame true/false to include the setting, null to exclude it
-	 */
-	private function mockMainConfig( ?bool $enableMapFrame ): void {
-		if ( $enableMapFrame !== null ) {
-			$config = [ 'KartographerEnableMapFrame' => $enableMapFrame ];
-		} else {
-			$config = [];
-		}
-		$this->serviceContainer->expects( $this->once() )
-			->method( 'getMainConfig' )
-			->willReturn( new HashConfig( $config ) );
 	}
 
 	private function mockParserFactory( bool $expectCall ): void {

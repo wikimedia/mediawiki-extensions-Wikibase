@@ -533,13 +533,10 @@ return [
 		MediaWikiServices $services
 	): ?CachingKartographerEmbeddingHandler {
 		$settings = WikibaseClient::getSettings( $services );
-		$config = $services->getMainConfig();
 
 		if (
 			$settings->getSetting( 'useKartographerGlobeCoordinateFormatter' ) &&
-			ExtensionRegistry::getInstance()->isLoaded( 'Kartographer' ) && // TODO T257586
-			$config->has( 'KartographerEnableMapFrame' ) &&
-			$config->get( 'KartographerEnableMapFrame' )
+			ExtensionRegistry::getInstance()->isLoaded( 'Kartographer' ) // TODO T257586
 		) {
 			return new CachingKartographerEmbeddingHandler(
 				$services->getParserFactory()->create()

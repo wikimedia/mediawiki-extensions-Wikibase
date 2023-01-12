@@ -4,7 +4,6 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use ExtensionRegistry;
-use HashConfig;
 use Parser;
 use ParserFactory;
 use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
@@ -51,7 +50,6 @@ class KartographerEmbeddingHandlerTest extends ServiceWiringTestCase {
 
 	public function testConstruction(): void {
 		$this->mockRepoSettings( true );
-		$this->mockMainConfig( true );
 		$this->mockParserFactory( true );
 
 		$handler = $this->getService( 'WikibaseRepo.KartographerEmbeddingHandler' );
@@ -61,7 +59,6 @@ class KartographerEmbeddingHandlerTest extends ServiceWiringTestCase {
 
 	public function testWithoutSetting(): void {
 		$this->mockRepoSettings( false );
-		$this->mockMainConfig( true );
 		$this->mockParserFactory( false );
 
 		$handler = $this->getService( 'WikibaseRepo.KartographerEmbeddingHandler' );
@@ -71,29 +68,8 @@ class KartographerEmbeddingHandlerTest extends ServiceWiringTestCase {
 
 	public function testWithoutExtension(): void {
 		$this->mockRepoSettings( true );
-		$this->mockMainConfig( true );
 		$this->mockParserFactory( false );
 		$this->extensionRegistry->loaded = [];
-
-		$handler = $this->getService( 'WikibaseRepo.KartographerEmbeddingHandler' );
-
-		$this->assertNull( $handler );
-	}
-
-	public function testWithoutConfigPresent(): void {
-		$this->mockRepoSettings( true );
-		$this->mockMainConfig( null );
-		$this->mockParserFactory( false );
-
-		$handler = $this->getService( 'WikibaseRepo.KartographerEmbeddingHandler' );
-
-		$this->assertNull( $handler );
-	}
-
-	public function testWithoutConfigTrue(): void {
-		$this->mockRepoSettings( true );
-		$this->mockMainConfig( false );
-		$this->mockParserFactory( false );
 
 		$handler = $this->getService( 'WikibaseRepo.KartographerEmbeddingHandler' );
 
@@ -105,20 +81,6 @@ class KartographerEmbeddingHandlerTest extends ServiceWiringTestCase {
 			new SettingsArray( [
 				'useKartographerGlobeCoordinateFormatter' => $useKartographerGlobeCoordinateFormatter,
 			] ) );
-	}
-
-	/**
-	 * @param bool|null $enableMapFrame true/false to include the setting, null to exclude it
-	 */
-	private function mockMainConfig( ?bool $enableMapFrame ): void {
-		if ( $enableMapFrame !== null ) {
-			$config = [ 'KartographerEnableMapFrame' => $enableMapFrame ];
-		} else {
-			$config = [];
-		}
-		$this->serviceContainer->expects( $this->once() )
-			->method( 'getMainConfig' )
-			->willReturn( new HashConfig( $config ) );
 	}
 
 	private function mockParserFactory( bool $expectCall ): void {
