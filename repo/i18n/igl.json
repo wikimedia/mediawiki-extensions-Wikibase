@@ -1,11 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"AgnesAbah"
+			"AgnesAbah",
+			"Amire80"
 		]
 	},
 	"wikibase-edit": "nwọ́cha",
-	"wikibase-add": "Dumanú",
+	"wikibase-add": "dumanú",
 	"wikibase-label-empty": "Má ké ewn dù lugbó labelù nwu",
 	"wikibase-description-empty": "Má ké ewn dù lugbó Ujuwé jí",
 	"wikibase-sitelinks-special": "Amī siti omune"
