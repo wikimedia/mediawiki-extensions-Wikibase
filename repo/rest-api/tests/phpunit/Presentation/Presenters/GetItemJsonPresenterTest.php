@@ -10,8 +10,8 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\ItemData;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemDataBuilder;
 use Wikibase\Repo\RestApi\Presentation\Presenters\GetItemJsonPresenter;
 use Wikibase\Repo\RestApi\Serialization\ItemDataSerializer;
-use Wikibase\Repo\RestApi\Serialization\ReadModelStatementListSerializer;
 use Wikibase\Repo\RestApi\Serialization\SiteLinkListSerializer;
+use Wikibase\Repo\RestApi\Serialization\StatementListSerializer;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemSuccessResponse;
 
 /**
@@ -55,7 +55,7 @@ class GetItemJsonPresenterTest extends TestCase {
 			->build();
 
 		$presenter = new GetItemJsonPresenter( new ItemDataSerializer(
-			$this->createStub( ReadModelStatementListSerializer::class ),
+			$this->createStub( StatementListSerializer::class ),
 			$this->createStub( SiteLinkListSerializer::class )
 		) );
 

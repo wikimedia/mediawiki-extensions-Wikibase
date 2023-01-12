@@ -5,8 +5,8 @@ namespace Wikibase\Repo\Tests\RestApi\Serialization;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Repo\RestApi\Serialization\ItemDataSerializer;
-use Wikibase\Repo\RestApi\Serialization\ReadModelStatementListSerializer;
 use Wikibase\Repo\RestApi\Serialization\SerializerFactory;
+use Wikibase\Repo\RestApi\Serialization\StatementListSerializer;
 use Wikibase\Repo\RestApi\Serialization\StatementSerializer;
 
 /**
@@ -27,7 +27,7 @@ class SerializerFactoryTest extends TestCase {
 
 	public function testNewStatementListSerializer(): void {
 		$this->assertInstanceOf(
-			ReadModelStatementListSerializer::class,
+			StatementListSerializer::class,
 			$this->newSerializerFactory()->newStatementListSerializer()
 		);
 	}

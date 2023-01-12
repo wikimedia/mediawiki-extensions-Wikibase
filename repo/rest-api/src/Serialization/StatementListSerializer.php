@@ -3,24 +3,24 @@
 namespace Wikibase\Repo\RestApi\Serialization;
 
 use ArrayObject;
-use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 
 /**
  * @license GPL-2.0-or-later
  */
 class StatementListSerializer {
 
-	private StatementSerializer $statementSerializer;
+	private ReadModelStatementSerializer $statementSerializer;
 
-	public function __construct( StatementSerializer $statementSerializer ) {
+	public function __construct( ReadModelStatementSerializer $statementSerializer ) {
 		$this->statementSerializer = $statementSerializer;
 	}
 
 	public function serialize( StatementList $statementList ): ArrayObject {
 		$serialization = new ArrayObject();
 
-		foreach ( $statementList->toArray() as $statement ) {
-			$propertyId = $statement->getPropertyId()->getSerialization();
+		foreach ( $statementList as $statement ) {
+			$propertyId = $statement->getMainSnak()->getPropertyId()->getSerialization();
 			$serialization[$propertyId][] = $this->statementSerializer->serialize( $statement );
 		}
 

@@ -13,7 +13,7 @@ use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
-use Wikibase\Repo\RestApi\Serialization\ReadModelStatementListSerializer;
+use Wikibase\Repo\RestApi\Serialization\StatementListSerializer;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatements;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatementsErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatementsRequest;
@@ -31,7 +31,7 @@ class GetItemStatementsRouteHandler extends SimpleHandler {
 
 	private GetItemStatements $getItemStatements;
 
-	private ReadModelStatementListSerializer $statementListSerializer;
+	private StatementListSerializer $statementListSerializer;
 
 	private ResponseFactory $responseFactory;
 
@@ -39,7 +39,7 @@ class GetItemStatementsRouteHandler extends SimpleHandler {
 
 	public function __construct(
 		GetItemStatements $getItemStatements,
-		ReadModelStatementListSerializer $statementListSerializer,
+		StatementListSerializer $statementListSerializer,
 		ResponseFactory $responseFactory,
 		MiddlewareHandler $middlewareHandler
 	) {

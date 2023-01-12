@@ -17,8 +17,8 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\ItemData;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemDataBuilder;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Serialization\ItemDataSerializer;
-use Wikibase\Repo\RestApi\Serialization\ReadModelStatementListSerializer;
 use Wikibase\Repo\RestApi\Serialization\SiteLinkListSerializer;
+use Wikibase\Repo\RestApi\Serialization\StatementListSerializer;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Serialization\ItemDataSerializer
@@ -30,7 +30,7 @@ use Wikibase\Repo\RestApi\Serialization\SiteLinkListSerializer;
 class ItemDataSerializerTest extends TestCase {
 
 	/**
-	 * @var MockObject|ReadModelStatementListSerializer
+	 * @var MockObject|StatementListSerializer
 	 */
 	private $statementsSerializer;
 
@@ -40,7 +40,7 @@ class ItemDataSerializerTest extends TestCase {
 	private $siteLinkListSerializer;
 
 	protected function setUp(): void {
-		$this->statementsSerializer = $this->createMock( ReadModelStatementListSerializer::class );
+		$this->statementsSerializer = $this->createMock( StatementListSerializer::class );
 		$this->statementsSerializer
 			->method( 'serialize' )
 			->willReturn( new ArrayObject( [ 'some' => 'serialization' ] ) );
@@ -126,7 +126,7 @@ class ItemDataSerializerTest extends TestCase {
 			->setStatements( $statements )
 			->build();
 
-		$this->statementsSerializer = $this->createMock( ReadModelStatementListSerializer::class );
+		$this->statementsSerializer = $this->createMock( StatementListSerializer::class );
 		$this->statementsSerializer->expects( $this->once() )
 			->method( 'serialize' )
 			->with( $statements )

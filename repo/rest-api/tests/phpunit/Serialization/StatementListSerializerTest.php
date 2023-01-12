@@ -4,11 +4,11 @@ namespace Wikibase\Repo\Tests\RestApi\Serialization;
 
 use ArrayObject;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Statement\Statement;
-use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\DataModel\Tests\NewStatement;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
+use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
+use Wikibase\Repo\RestApi\Serialization\ReadModelStatementSerializer;
 use Wikibase\Repo\RestApi\Serialization\StatementListSerializer;
-use Wikibase\Repo\RestApi\Serialization\StatementSerializer;
+use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Serialization\StatementListSerializer
@@ -21,13 +21,16 @@ class StatementListSerializerTest extends TestCase {
 
 	public function testSerialize(): void {
 		$statementList = new StatementList(
-			NewStatement::forProperty( 'P123' )
+			NewStatementReadModel::forProperty( 'P123' )
 				->withValue( 'potato' )
+				->withGuid( 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
 				->build(),
-			NewStatement::someValueFor( 'P321' )
+			NewStatementReadModel::someValueFor( 'P321' )
+				->withGuid( 'Q42$BBBBBBBB-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
 				->build(),
-			NewStatement::noValueFor( 'P321' )
-				->build()
+			NewStatementReadModel::noValueFor( 'P321' )
+				->withGuid( 'Q42$CCCCCCCC-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
+				->build(),
 		);
 
 		$this->assertEquals(
@@ -54,11 +57,11 @@ class StatementListSerializerTest extends TestCase {
 	}
 
 	private function newSerializer(): StatementListSerializer {
-		$statementSerializer = $this->createStub( StatementSerializer::class );
+		$statementSerializer = $this->createStub( ReadModelStatementSerializer::class );
 		$statementSerializer->method( 'serialize' )
 			->willReturnCallback(
 				fn( Statement $statement ) => [
-					$statement->getPropertyId()->serialize() . ' statement serialization',
+					$statement->getMainSnak()->getPropertyId()->serialize() . ' statement serialization',
 				]
 			);
 		return new StatementListSerializer( $statementSerializer );

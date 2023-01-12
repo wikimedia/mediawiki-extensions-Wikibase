@@ -10,10 +10,10 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\ItemData;
  */
 class ItemDataSerializer {
 
-	private ReadModelStatementListSerializer $statementsSerializer;
+	private StatementListSerializer $statementsSerializer;
 	private SiteLinkListSerializer $siteLinksSerializer;
 
-	public function __construct( ReadModelStatementListSerializer $statementsSerializer, SiteLinkListSerializer $siteLinksSerializer ) {
+	public function __construct( StatementListSerializer $statementsSerializer, SiteLinkListSerializer $siteLinksSerializer ) {
 		$this->statementsSerializer = $statementsSerializer;
 		$this->siteLinksSerializer = $siteLinksSerializer;
 	}
