@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\UseCases\GetItem;
 
-use Wikibase\Repo\RestApi\Domain\Model\ItemData;
+use Wikibase\Repo\RestApi\Domain\ReadModel\ItemData;
 
 /**
  * @license GPL-2.0-or-later

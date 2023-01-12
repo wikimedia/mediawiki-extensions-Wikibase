@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Domain\Model;
+namespace Wikibase\Repo\Tests\RestApi\Domain\ReadModel;
 
 use Generator;
 use LogicException;
@@ -12,12 +12,12 @@ use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\Repo\RestApi\Domain\Model\ItemData;
-use Wikibase\Repo\RestApi\Domain\Model\ItemDataBuilder;
+use Wikibase\Repo\RestApi\Domain\ReadModel\ItemData;
+use Wikibase\Repo\RestApi\Domain\ReadModel\ItemDataBuilder;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Domain\Model\ItemDataBuilder
- * @covers \Wikibase\Repo\RestApi\Domain\Model\ItemData
+ * @covers \Wikibase\Repo\RestApi\Domain\ReadModel\ItemDataBuilder
+ * @covers \Wikibase\Repo\RestApi\Domain\ReadModel\ItemData
  *
  * @group Wikibase
  *
