@@ -1362,12 +1362,10 @@ return [
 
 	'WikibaseRepo.KartographerEmbeddingHandler' => function ( MediaWikiServices $services ): ?CachingKartographerEmbeddingHandler {
 		$settings = WikibaseRepo::getSettings( $services );
-		$config = $services->getMainConfig();
+
 		if (
 			$settings->getSetting( 'useKartographerGlobeCoordinateFormatter' ) &&
-			ExtensionRegistry::getInstance()->isLoaded( 'Kartographer' ) &&
-			$config->has( 'KartographerEnableMapFrame' ) &&
-			$config->get( 'KartographerEnableMapFrame' )
+			ExtensionRegistry::getInstance()->isLoaded( 'Kartographer' )
 		) {
 			return new CachingKartographerEmbeddingHandler(
 				$services->getParserFactory()->create()
