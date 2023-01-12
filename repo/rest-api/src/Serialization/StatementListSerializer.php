@@ -20,13 +20,8 @@ class StatementListSerializer {
 		$serialization = new ArrayObject();
 
 		foreach ( $statementList->toArray() as $statement ) {
-			$idSerialization = $statement->getPropertyId()->getSerialization();
-
-			if ( !$serialization->offsetExists( $idSerialization ) ) {
-				$serialization[$idSerialization] = [];
-			}
-
-			$serialization[$idSerialization][] = $this->statementSerializer->serialize( $statement );
+			$propertyId = $statement->getPropertyId()->getSerialization();
+			$serialization[$propertyId][] = $this->statementSerializer->serialize( $statement );
 		}
 
 		return $serialization;

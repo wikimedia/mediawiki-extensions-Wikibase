@@ -21,11 +21,6 @@ class ReadModelStatementListSerializer {
 
 		foreach ( $statementList as $statement ) {
 			$propertyId = $statement->getMainSnak()->getPropertyId()->getSerialization();
-
-			if ( !$serialization->offsetExists( $propertyId ) ) {
-				$serialization[$propertyId] = [];
-			}
-
 			$serialization[$propertyId][] = $this->statementSerializer->serialize( $statement );
 		}
 
