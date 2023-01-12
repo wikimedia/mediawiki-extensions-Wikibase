@@ -10,11 +10,11 @@ use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemData;
 use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
-use Wikibase\Repo\RestApi\Presentation\Presenters\GetItemJsonPresenter;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
+use Wikibase\Repo\RestApi\Serialization\ItemDataSerializer;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemRequest;
@@ -33,7 +33,7 @@ class GetItemRouteHandler extends SimpleHandler {
 
 	private GetItem $getItem;
 
-	private GetItemJsonPresenter $successPresenter;
+	private ItemDataSerializer $itemDataSerializer;
 
 	private ResponseFactory $responseFactory;
 
@@ -41,12 +41,12 @@ class GetItemRouteHandler extends SimpleHandler {
 
 	public function __construct(
 		GetItem $getItem,
-		GetItemJsonPresenter $presenter,
+		ItemDataSerializer $itemDataSerializer,
 		ResponseFactory $responseFactory,
 		MiddlewareHandler $middlewareHandler
 	) {
 		$this->getItem = $getItem;
-		$this->successPresenter = $presenter;
+		$this->itemDataSerializer = $itemDataSerializer;
 		$this->responseFactory = $responseFactory;
 		$this->middlewareHandler = $middlewareHandler;
 	}
@@ -55,7 +55,7 @@ class GetItemRouteHandler extends SimpleHandler {
 		$responseFactory = new ResponseFactory( new ErrorJsonPresenter() );
 		return new self(
 			WbRestApi::getGetItem(),
-			new GetItemJsonPresenter( WbRestApi::getSerializerFactory()->newItemDataSerializer() ),
+			WbRestApi::getSerializerFactory()->newItemDataSerializer(),
 			$responseFactory,
 			new MiddlewareHandler( [
 				new UnexpectedErrorHandlerMiddleware( $responseFactory, WikibaseRepo::getLogger() ),
@@ -99,7 +99,9 @@ class GetItemRouteHandler extends SimpleHandler {
 		$httpResponse->setHeader( 'Content-Type', 'application/json' );
 		$httpResponse->setHeader( 'Last-Modified', wfTimestamp( TS_RFC2822, $useCaseResponse->getLastModified() ) );
 		$this->setEtagFromRevId( $httpResponse, $useCaseResponse->getRevisionId() );
-		$httpResponse->setBody( new StringStream( $this->successPresenter->getJson( $useCaseResponse ) ) );
+		$httpResponse->setBody( new StringStream(
+			json_encode( $this->itemDataSerializer->serialize( $useCaseResponse->getItemData() ) )
+		) );
 
 		return $httpResponse;
 	}
