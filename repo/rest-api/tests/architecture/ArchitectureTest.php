@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Architecture;
 
+use ArrayObject;
 use PHPat\Selector\Selector;
 use PHPat\Test\Builder\Rule;
 use PHPat\Test\PHPat;
@@ -130,6 +131,7 @@ class ArchitectureTest {
 
 	private function phpCoreClasses(): array {
 		return [
+			Selector::classname( ArrayObject::class ),
 			Selector::classname( '/^\w*Exception$/', true ),
 		];
 	}

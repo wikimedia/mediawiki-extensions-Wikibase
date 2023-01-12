@@ -2,24 +2,24 @@
 
 namespace Wikibase\Repo\RestApi\UseCases\GetItemLabels;
 
-use Wikibase\DataModel\Term\TermList;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 
 /**
  * @license GPL-2.0-or-later
  */
 class GetItemLabelsSuccessResponse {
 
-	private TermList $labels;
+	private Labels $labels;
 	private string $lastModified;
 	private int $revisionId;
 
-	public function __construct( TermList $labels, string $lastModified, int $revisionId ) {
+	public function __construct( Labels $labels, string $lastModified, int $revisionId ) {
 		$this->labels = $labels;
 		$this->lastModified = $lastModified;
 		$this->revisionId = $revisionId;
 	}
 
-	public function getLabels(): TermList {
+	public function getLabels(): Labels {
 		return $this->labels;
 	}
 

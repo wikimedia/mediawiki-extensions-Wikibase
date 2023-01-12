@@ -3,13 +3,13 @@
 namespace Wikibase\Repo\RestApi\Domain\Services;
 
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Term\TermList;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 
 /**
  * @license GPL-2.0-or-later
  */
 interface ItemLabelsRetriever {
 
-	public function getLabels( ItemId $itemId ): ?TermList;
+	public function getLabels( ItemId $itemId ): ?Labels;
 
 }

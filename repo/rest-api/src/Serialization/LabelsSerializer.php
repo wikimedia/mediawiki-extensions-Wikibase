@@ -3,15 +3,19 @@
 namespace Wikibase\Repo\RestApi\Serialization;
 
 use ArrayObject;
-use Wikibase\DataModel\Term\TermList;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 
 /**
  * @license GPL-2.0-or-later
  */
 class LabelsSerializer {
 
-	public function serialize( TermList $labels ): ArrayObject {
-		return new ArrayObject( $labels->toTextArray() );
+	public function serialize( Labels $labels ): ArrayObject {
+		$serialization = [];
+		foreach ( $labels as $languageCode => $label ) {
+			$serialization[$languageCode] = $label->getText();
+		}
+		return new ArrayObject( $serialization );
 	}
 
 }

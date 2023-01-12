@@ -5,9 +5,9 @@ namespace Wikibase\Repo\RestApi\DataAccess;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookupException;
-use Wikibase\DataModel\Term\Term;
-use Wikibase\DataModel\Term\TermList;
 use Wikibase\Lib\ContentLanguages;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\Services\ItemLabelsRetriever;
 
 /**
@@ -23,7 +23,7 @@ class TermLookupItemLabelsRetriever implements ItemLabelsRetriever {
 		$this->termLanguages = $termLanguages;
 	}
 
-	public function getLabels( ItemId $itemId ): ?TermList {
+	public function getLabels( ItemId $itemId ): ?Labels {
 		try {
 			$labels = $this->termLookup->getLabels( $itemId, $this->termLanguages->getLanguages() );
 		} catch ( TermLookupException $e ) {
@@ -31,10 +31,10 @@ class TermLookupItemLabelsRetriever implements ItemLabelsRetriever {
 			return null;
 		}
 
-		return new TermList( array_map(
-			fn( string $language, string $label ) => new Term( $language, $label ),
-			array_keys( $labels ),
-			$labels
+		return new Labels( ...array_map(
+			fn( $text, $language ) => new Label( $language, $text ),
+			$labels,
+			array_keys( $labels )
 		) );
 	}
 
