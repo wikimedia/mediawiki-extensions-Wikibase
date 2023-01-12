@@ -28,7 +28,12 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 
 	public function testGetItemData(): void {
 		$itemId = new ItemId( 'Q123' );
-		$item = NewItem::withId( $itemId )->build();
+		$expectedStatement = NewStatement::someValueFor( 'P123' )
+			->withGuid( 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
+			->build();
+		$item = NewItem::withId( $itemId )
+			->andStatement( $expectedStatement )
+			->build();
 
 		$retriever = new WikibaseEntityLookupItemDataRetriever(
 			$this->newEntityLookupForIdWithReturnValue( $itemId, $item )
@@ -40,7 +45,10 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 		$this->assertSame( $item->getLabels(), $itemData->getLabels() );
 		$this->assertSame( $item->getDescriptions(), $itemData->getDescriptions() );
 		$this->assertSame( $item->getAliasGroups(), $itemData->getAliases() );
-		$this->assertSame( $item->getStatements(), $itemData->getStatements() );
+		$this->assertEquals(
+			new StatementList( $this->convertDataModelToReadModel( $expectedStatement ) ),
+			$itemData->getStatements()
+		);
 		$this->assertSame( $item->getSiteLinkList(), $itemData->getSiteLinks() );
 	}
 
@@ -68,11 +76,15 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 	}
 
 	public function itemDataWithFieldsProvider(): Generator {
+		$statement = NewStatement::someValueFor( 'P123' )
+			->withGuid( 'Q666$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
+			->build();
+
 		$item = NewItem::withId( 'Q666' )
 			->andLabel( 'en', 'potato' )
 			->andDescription( 'en', 'root vegetable' )
 			->andAliases( 'en', [ 'spud', 'tater' ] )
-			->andStatement( NewStatement::someValueFor( 'P123' ) )
+			->andStatement( $statement )
 			->andSiteLink( 'dewiki', 'Kartoffel' )
 			->build();
 
@@ -97,7 +109,7 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 			$item,
 			[ ItemData::FIELD_STATEMENTS ],
 			( new ItemDataBuilder( $item->getId(), [ ItemData::FIELD_STATEMENTS ] ) )
-				->setStatements( $item->getStatements() )
+				->setStatements( new StatementList( $this->convertDataModelToReadModel( $statement ) ) )
 				->build(),
 		];
 		yield 'all fields' => [
@@ -108,7 +120,7 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 				->setLabels( $item->getLabels() )
 				->setDescriptions( $item->getDescriptions() )
 				->setAliases( $item->getAliasGroups() )
-				->setStatements( $item->getStatements() )
+				->setStatements( new StatementList( $this->convertDataModelToReadModel( $statement ) ) )
 				->setSiteLinks( $item->getSiteLinkList() )
 				->build(),
 		];

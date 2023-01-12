@@ -6,6 +6,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Statement\StatementGuid;
+use Wikibase\DataModel\Statement\StatementList as DataModelStatementList;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemData;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemDataBuilder;
@@ -54,7 +55,10 @@ class WikibaseEntityLookupItemDataRetriever implements ItemDataRetriever, ItemSt
 			$itemData->setAliases( $item->getAliasGroups() );
 		}
 		if ( in_array( ItemData::FIELD_STATEMENTS, $fields ) ) {
-			$itemData->setStatements( $item->getStatements() );
+			$itemData->setStatements( $this->convertDataModelStatementListToReadModel(
+				$item->getId(),
+				$item->getStatements()
+			) );
 		}
 		if ( in_array( ItemData::FIELD_SITELINKS, $fields ) ) {
 			$itemData->setSiteLinks( $item->getSiteLinkList() );
@@ -88,6 +92,18 @@ class WikibaseEntityLookupItemDataRetriever implements ItemDataRetriever, ItemSt
 			return null;
 		}
 
+		return $this->convertDataModelStatementListToReadModel( $itemId, $item->getStatements() );
+	}
+
+	public function getItem( ItemId $itemId ): ?Item {
+		/** @var Item $item */
+		$item = $this->entityLookup->getEntity( $itemId );
+		'@phan-var Item $item';
+
+		return $item;
+	}
+
+	private function convertDataModelStatementListToReadModel( ItemId $itemId, DataModelStatementList $list ): StatementList {
 		return new StatementList( ...array_map(
 			fn( $statement ) => new Statement(
 				new StatementGuid(
@@ -99,15 +115,7 @@ class WikibaseEntityLookupItemDataRetriever implements ItemDataRetriever, ItemSt
 				$statement->getQualifiers(),
 				$statement->getReferences()
 			),
-			iterator_to_array( $item->getStatements() )
+			iterator_to_array( $list )
 		) );
-	}
-
-	public function getItem( ItemId $itemId ): ?Item {
-		/** @var Item $item */
-		$item = $this->entityLookup->getEntity( $itemId );
-		'@phan-var Item $item';
-
-		return $item;
 	}
 }

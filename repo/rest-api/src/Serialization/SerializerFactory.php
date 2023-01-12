@@ -33,7 +33,7 @@ class SerializerFactory {
 
 	public function newItemDataSerializer(): ItemDataSerializer {
 		return new ItemDataSerializer(
-			new StatementListSerializer( $this->newStatementSerializer() ),
+			new ReadModelStatementListSerializer( $this->newReadModelStatementSerializer() ),
 			new SiteLinkListSerializer()
 		);
 	}
