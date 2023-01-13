@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\UseCases\GetItem;
 
-use Wikibase\Repo\RestApi\Domain\Model\ItemData;
+use Wikibase\Repo\RestApi\Domain\ReadModel\ItemData;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\ValidationError;
 

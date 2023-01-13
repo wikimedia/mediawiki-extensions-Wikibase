@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\RestApi\Serialization;
 
 use ArrayObject;
-use Wikibase\Repo\RestApi\Domain\Model\ItemData;
+use Wikibase\Repo\RestApi\Domain\ReadModel\ItemData;
 
 /**
  * @license GPL-2.0-or-later
