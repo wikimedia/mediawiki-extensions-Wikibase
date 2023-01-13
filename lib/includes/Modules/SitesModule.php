@@ -24,6 +24,8 @@ use Wikibase\Lib\SettingsArray;
  */
 class SitesModule extends RL\Module {
 
+	protected $targets = [ 'desktop' ]; // T326405
+
 	/**
 	 * How many seconds the result of getSiteDetails() is cached.
 	 */
