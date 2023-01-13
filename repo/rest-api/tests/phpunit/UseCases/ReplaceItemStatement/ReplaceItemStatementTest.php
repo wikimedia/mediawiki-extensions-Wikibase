@@ -17,7 +17,9 @@ use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
 use Wikibase\Repo\RestApi\Domain\Model\User;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Item as ReadModelItem;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
+use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
@@ -41,6 +43,7 @@ use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\StatementIdValidator;
 use Wikibase\Repo\RestApi\Validation\StatementValidator;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
+use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -92,7 +95,7 @@ class ReplaceItemStatementTest extends TestCase {
 
 	public function testReplaceStatement(): void {
 		$itemId = 'Q123';
-		$statementId = $itemId . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+		$statementId = new StatementGuid( new ItemId( $itemId ), 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 		$oldStatement = NewStatement::noValueFor( 'P123' )->withGuid( $statementId )->build();
 		$newStatement = NewStatement::forProperty( 'P123' )
 			->withGuid( $statementId )
@@ -112,13 +115,15 @@ class ReplaceItemStatementTest extends TestCase {
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemRetriever->method( 'getItem' )->willReturn( $item );
 
-		$updatedItem = NewItem::withStatement( clone $newStatement )->build();
+		$updatedItem = new ReadModelItem( new StatementList(
+			NewStatementReadModel::someValueFor( 'P123' )->withGuid( $statementId )->build()
+		) );
 		$this->itemUpdater = $this->createMock( ItemUpdater::class );
 		$this->itemUpdater->expects( $this->once() )
 			->method( 'update' )
 			->with(
 				$this->callback(
-					fn( Item $item ) => $item->getStatements()->getFirstStatementWithGuid( $statementId )->equals( $newStatement )
+					fn( Item $item ) => $item->getStatements()->getFirstStatementWithGuid( (string)$statementId )->equals( $newStatement )
 				),
 				$this->expectEquivalentMetadata( $editTags, $isBot, $comment, EditSummary::REPLACE_ACTION )
 			)
@@ -126,7 +131,7 @@ class ReplaceItemStatementTest extends TestCase {
 
 		$response = $this->newUseCase()->execute(
 			$this->newUseCaseRequest( [
-				'$statementId' => $statementId,
+				'$statementId' => (string)$statementId,
 				'$statement' => $this->serializeStatement( $newStatement ),
 				'$editTags' => $editTags,
 				'$isBot' => $isBot,
@@ -137,7 +142,7 @@ class ReplaceItemStatementTest extends TestCase {
 
 		$this->assertInstanceOf( ReplaceItemStatementSuccessResponse::class, $response );
 		$this->assertSame(
-			$updatedItem->getStatements()->getFirstStatementWithGuid( $statementId ),
+			$updatedItem->getStatements()->getStatementById( $statementId ),
 			$response->getStatement()
 		);
 		$this->assertSame( $modificationRevisionId, $response->getRevisionId() );

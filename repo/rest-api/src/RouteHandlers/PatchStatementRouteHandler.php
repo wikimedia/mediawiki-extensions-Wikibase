@@ -11,7 +11,6 @@ use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
 use MediaWiki\Rest\Validator\BodyValidator;
 use Wikibase\Repo\RestApi\Presentation\Presenters\PatchItemStatementErrorJsonPresenter;
-use Wikibase\Repo\RestApi\Presentation\Presenters\StatementJsonPresenter;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\BotRightCheckMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\ContentTypeCheckMiddleware;
@@ -19,6 +18,7 @@ use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\RequestPreconditionCheck;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
+use Wikibase\Repo\RestApi\Serialization\ReadModelStatementSerializer;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatement;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementRequest;
@@ -40,18 +40,18 @@ class PatchStatementRouteHandler extends SimpleHandler {
 
 	private PatchItemStatement $useCase;
 	private MiddlewareHandler $middlewareHandler;
-	private StatementJsonPresenter $successPresenter;
+	private ReadModelStatementSerializer $statementSerializer;
 	private ResponseFactory $responseFactory;
 
 	public function __construct(
 		PatchItemStatement $useCase,
 		MiddlewareHandler $middlewareHandler,
-		StatementJsonPresenter $successPresenter,
+		ReadModelStatementSerializer $statementSerializer,
 		ResponseFactory $responseFactory
 	) {
 		$this->useCase = $useCase;
 		$this->middlewareHandler = $middlewareHandler;
-		$this->successPresenter = $successPresenter;
+		$this->statementSerializer = $statementSerializer;
 		$this->responseFactory = $responseFactory;
 	}
 
@@ -78,7 +78,7 @@ class PatchStatementRouteHandler extends SimpleHandler {
 					}
 				),
 			] ),
-			new StatementJsonPresenter( WbRestApi::getSerializerFactory()->newStatementSerializer() ),
+			WbRestApi::getSerializerFactory()->newReadModelStatementSerializer(),
 			$responseFactory
 		);
 	}
@@ -173,9 +173,9 @@ class PatchStatementRouteHandler extends SimpleHandler {
 			wfTimestamp( TS_RFC2822, $useCaseResponse->getLastModified() )
 		);
 		$httpResponse->setHeader( 'ETag', "\"{$useCaseResponse->getRevisionId()}\"" );
-		$httpResponse->setBody( new StringStream(
-			$this->successPresenter->getJson( $useCaseResponse->getStatement() )
-		) );
+		$httpResponse->setBody( new StringStream( json_encode(
+			$this->statementSerializer->serialize( $useCaseResponse->getStatement() )
+		) ) );
 
 		return $httpResponse;
 	}

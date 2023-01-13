@@ -2,8 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\Domain\ReadModel;
 
-use Wikibase\DataModel\Entity\Item;
-
 /**
  * @license GPL-2.0-or-later
  */

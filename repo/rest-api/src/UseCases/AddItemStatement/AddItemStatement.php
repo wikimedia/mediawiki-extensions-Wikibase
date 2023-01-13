@@ -74,9 +74,8 @@ class AddItemStatement {
 			);
 		}
 
-		$newStatementGuid = $this->guidGenerator->newGuid( $itemId );
-		$statement->setGuid( $newStatementGuid );
-
+		$newStatementGuid = $this->guidGenerator->newStatementId( $itemId );
+		$statement->setGuid( (string)$newStatementGuid );
 		$item = $this->itemRetriever->getItem( $itemId );
 		$item->getStatements()->addStatement( $statement );
 
@@ -88,7 +87,7 @@ class AddItemStatement {
 		$newRevision = $this->itemUpdater->update( $item, $editMetadata );
 
 		return new AddItemStatementSuccessResponse(
-			$newRevision->getItem()->getStatements()->getFirstStatementWithGuid( $newStatementGuid ),
+			$newRevision->getItem()->getStatements()->getStatementById( $newStatementGuid ),
 			$newRevision->getLastModified(),
 			$newRevision->getRevisionId()
 		);

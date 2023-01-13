@@ -7,11 +7,16 @@ use MediaWiki\Permissions\PermissionManager;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
 use User;
-use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Item as DataModelItem;
+use Wikibase\DataModel\Services\Statement\StatementGuidParser;
+use Wikibase\DataModel\Statement\Statement as DataModelStatement;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Item;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
+use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdateFailed;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
@@ -26,22 +31,25 @@ class MediaWikiEditEntityFactoryItemUpdater implements ItemUpdater {
 	private LoggerInterface $logger;
 	private EditSummaryFormatter $summaryFormatter;
 	private PermissionManager $permissionManager;
+	private StatementGuidParser $statementIdParser;
 
 	public function __construct(
 		IContextSource $context,
 		MediawikiEditEntityFactory $editEntityFactory,
 		LoggerInterface $logger,
 		EditSummaryFormatter $summaryFormatter,
-		PermissionManager $permissionManager
+		PermissionManager $permissionManager,
+		StatementGuidParser $statementIdParser
 	) {
 		$this->context = $context;
 		$this->editEntityFactory = $editEntityFactory;
 		$this->logger = $logger;
 		$this->summaryFormatter = $summaryFormatter;
 		$this->permissionManager = $permissionManager;
+		$this->statementIdParser = $statementIdParser;
 	}
 
-	public function update( Item $item, EditMetadata $editMetadata ): ItemRevision {
+	public function update( DataModelItem $item, EditMetadata $editMetadata ): ItemRevision {
 		$this->checkBotRightIfProvided( $this->context->getUser(), $editMetadata->isBot() );
 
 		$editEntity = $this->editEntityFactory->newEditEntity( $this->context, $item->getId() );
@@ -63,11 +71,15 @@ class MediaWikiEditEntityFactoryItemUpdater implements ItemUpdater {
 
 		/** @var EntityRevision $entityRevision */
 		$entityRevision = $status->getValue()['revision'];
-		/** @var Item $savedItem */
+		/** @var DataModelItem $savedItem */
 		$savedItem = $entityRevision->getEntity();
-		'@phan-var Item $savedItem';
+		'@phan-var DataModelItem $savedItem';
 
-		return new ItemRevision( $savedItem, $entityRevision->getTimestamp(), $entityRevision->getRevisionId() );
+		return new ItemRevision(
+			$this->convertDataModelItemToReadModel( $savedItem ),
+			$entityRevision->getTimestamp(),
+			$entityRevision->getRevisionId()
+		);
 	}
 
 	private function checkBotRightIfProvided( User $user, bool $isBot ): void {
@@ -75,6 +87,19 @@ class MediaWikiEditEntityFactoryItemUpdater implements ItemUpdater {
 		if ( $isBot && !$this->permissionManager->userHasRight( $user, 'bot' ) ) {
 			throw new RuntimeException( 'Attempted bot edit with insufficient rights' );
 		}
+	}
+
+	private function convertDataModelItemToReadModel( DataModelItem $item ): Item {
+		return new Item( new StatementList( ...array_map(
+			fn( DataModelStatement $statement ) => new Statement(
+				$this->statementIdParser->parse( $statement->getGuid() ),
+				$statement->getRank(),
+				$statement->getMainSnak(),
+				$statement->getQualifiers(),
+				$statement->getReferences()
+			),
+			iterator_to_array( $item->getStatements() )
+		) ) );
 	}
 
 }

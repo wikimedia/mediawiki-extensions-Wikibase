@@ -12,16 +12,22 @@ use RuntimeException;
 use Status;
 use User;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemIdParser;
+use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Tests\NewItem;
+use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\EditEntity\EditEntity;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\RestApi\DataAccess\MediaWikiEditEntityFactoryItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Item as ReadModelItem;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
+use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdateFailed;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
+use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
 
 /**
  * @covers \Wikibase\Repo\RestApi\DataAccess\MediaWikiEditEntityFactoryItemUpdater
@@ -73,10 +79,10 @@ class MediaWikiEditEntityFactoryItemUpdaterTest extends TestCase {
 	 * @dataProvider editMetadataProvider
 	 */
 	public function testUpdate( EditMetadata $editMetadata ): void {
-		$itemToUpdate = NewItem::withId( 'Q123' )->build();
+		[ $itemToUpdate, $expectedResultingItem ] = $this->newEquivalentWriteAndReadModelItem();
 		$expectedRevisionId = 234;
 		$expectedRevisionTimestamp = '20221111070707';
-		$expectedRevisionItem = $this->createStub( Item::class );
+		$expectedRevisionItem = $itemToUpdate->copy();
 		$expectedFormattedSummary = 'FORMATTED SUMMARY';
 
 		$this->summaryFormatter = $this->createMock( EditSummaryFormatter::class );
@@ -110,7 +116,7 @@ class MediaWikiEditEntityFactoryItemUpdaterTest extends TestCase {
 
 		$itemRevision = $this->newItemUpdater()->update( $itemToUpdate, $editMetadata );
 
-		$this->assertSame( $expectedRevisionItem, $itemRevision->getItem() );
+		$this->assertEquals( $expectedResultingItem, $itemRevision->getItem() );
 		$this->assertSame( $expectedRevisionId, $itemRevision->getRevisionId() );
 		$this->assertSame( $expectedRevisionTimestamp, $itemRevision->getLastModified() );
 	}
@@ -191,8 +197,23 @@ class MediaWikiEditEntityFactoryItemUpdaterTest extends TestCase {
 			$this->editEntityFactory,
 			$this->logger,
 			$this->summaryFormatter,
-			$this->permissionManager
+			$this->permissionManager,
+			new StatementGuidParser( new ItemIdParser() )
 		);
+	}
+
+	private function newEquivalentWriteAndReadModelItem(): array {
+		$writeModelStatement = NewStatement::someValueFor( 'P123' )
+			->withGuid( 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
+			->build();
+		$readModelStatement = NewStatementReadModel::someValueFor( 'P123' )
+			->withGuid( 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
+			->build();
+
+		return [
+			NewItem::withId( 'Q123' )->andStatement( $writeModelStatement )->build(),
+			new ReadModelItem( new StatementList( $readModelStatement ) ),
+		];
 	}
 
 }
