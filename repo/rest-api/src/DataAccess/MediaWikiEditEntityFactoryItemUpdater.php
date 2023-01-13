@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
-use Wikibase\Repo\RestApi\Domain\Model\ItemRevision;
+use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdateFailed;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
