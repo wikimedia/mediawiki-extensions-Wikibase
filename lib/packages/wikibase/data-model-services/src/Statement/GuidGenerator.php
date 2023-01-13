@@ -37,4 +37,8 @@ class GuidGenerator {
 		return $entityId->getSerialization() . StatementGuid::SEPARATOR . $this->baseGenerator->newGuid();
 	}
 
+	public function newStatementId( EntityId $entityId ): StatementGuid {
+		return new StatementGuid( $entityId, $this->baseGenerator->newGuid() );
+	}
+
 }

@@ -27,6 +27,17 @@ class GuidGeneratorTest extends TestCase {
 		$this->assertIsGuidForId( $guidGen->newGuid( $id ), $id );
 	}
 
+	/**
+	 * @dataProvider entityIdProvider
+	 */
+	public function testGetStatementId( EntityId $id ) {
+		$guidGen = new GuidGenerator();
+
+		$this->assertIsGuidForId( (string)$guidGen->newStatementId( $id ), $id );
+		$this->assertIsGuidForId( (string)$guidGen->newStatementId( $id ), $id );
+		$this->assertIsGuidForId( (string)$guidGen->newStatementId( $id ), $id );
+	}
+
 	public function entityIdProvider() {
 		$argLists = [];
 
