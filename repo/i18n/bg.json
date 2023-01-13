@@ -214,7 +214,7 @@
 	"special-redirectentity": "Пренасочване на единица",
 	"wikibase-redirect-permissiondenied": "Достъпът отказан",
 	"wikibase-api-no-external-page": "Външният клиентски сайт „$1“ не предостави информация за страница „$2“.",
-	"wikibase-api-not-recognized-language": "Въведеният езиков код не е разпознат.",
+	"wikibase-api-not-recognized-language": "Въведеният езиков код „$1“ не е разпознат.",
 	"wikibase-restoreold": "възстановяване",
 	"wikibase-entity-summary-restore": "Възстановена версия $3 на [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-entity-summary-undo": "Премахната редакция $3 на [[Special:Contributions/$4|$4]] ([[User talk:$4|беседа]])",
