@@ -54,6 +54,16 @@ https://www.mediawiki.org/wiki/Manual:Upgrading
 * (repo) (T292604) dispatchLagToMaxLagFactor has been removed.
 * (repo) (T292604) dispatchingLockManager has been removed.
 
+=== Languages updated in 1.38 ===
+
+Wikibase supports over 300 languages. Many localisations are updated regularly.
+Below only new and removed languages are listed, as well as changes to languages
+because of Phabricator reports.
+New monolingual support:
+
+* (T288335) Aghem agq
+* (T293884) Massa mcn
+
 == Online documentation ==
 
 Installation instructions and FAQ
