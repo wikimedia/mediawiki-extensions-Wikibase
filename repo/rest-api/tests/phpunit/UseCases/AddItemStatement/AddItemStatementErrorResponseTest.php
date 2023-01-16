@@ -50,7 +50,7 @@ class AddItemStatementErrorResponseTest extends TestCase {
 		yield 'from invalid statement field' => [
 			new ValidationError( StatementValidator::CODE_INVALID_FIELD, $context ),
 			ErrorResponse::STATEMENT_DATA_INVALID_FIELD,
-			'Invalid input for some-field',
+			"Invalid input for 'some-field'",
 			[
 				'path' => $context[StatementValidator::CONTEXT_FIELD_NAME],
 				'value' => $context[StatementValidator::CONTEXT_FIELD_VALUE],
