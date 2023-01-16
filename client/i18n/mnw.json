@@ -22,5 +22,7 @@
 	"wikibase-rc-hide-wikidata-show": "ထ္ၜး",
 	"wikibase-rc-wikibase-edit-letter": "ပလေဝ်",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} ပလေဝ်ဒါန်",
-	"wikibase-otherprojects": "နကဵု ပရဝ်ဂျေတ် တၞဟ်"
+	"wikibase-otherprojects": "နကဵု ပရဝ်ဂျေတ် တၞဟ်",
+	"wikibase-client-data-bridge-error-reload-bridge": "ကလေၚ်ကော်ကေတ်",
+	"wikibase-client-data-bridge-error-reload-page": "ကလေၚ်ကော်ကေတ်မုက်လိက်"
 }
