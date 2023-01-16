@@ -95,8 +95,7 @@ class WikiPageUpdater implements PageUpdater {
 		$pages = $this->getPageParamForRefreshLinksJob( $titles );
 
 		/**
-		 * @see JobQueueChangeNotificationSender::getJobSpecification for relevant root job
-		 * parameters.
+		 * @see ChangeHandler::handleChange for relevant root job parameters.
 		 */
 		if ( isset( $rootJobParams['rootJobSignature'] ) ) {
 			$signature = $rootJobParams['rootJobSignature'];

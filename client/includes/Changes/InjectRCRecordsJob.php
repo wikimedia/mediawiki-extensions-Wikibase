@@ -103,7 +103,7 @@ class InjectRCRecordsJob extends Job {
 		$changeData = $change->getFields();
 		$changeData[ChangeRow::INFO] = $change->getSerializedInfo( [ 'changes' ] );
 
-		// See JobQueueChangeNotificationSender::getJobSpecification for relevant root job parameters.
+		// See WikiPageUpdater::buildJobParams and ChangeHandler::handleChange for relevant root job parameters.
 		$params = array_merge( $rootJobParams, [
 			'change' => $changeData,
 			'pages' => $pages,
