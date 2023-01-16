@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\RestApi\UseCases\ReplaceItemStatement;
 use CommentStore;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
@@ -111,15 +112,22 @@ class ReplaceItemStatementTest extends TestCase {
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemRetriever->method( 'getItem' )->willReturn( $item );
 
+		$updatedItem = NewItem::withStatement( clone $newStatement )->build();
 		$this->itemUpdater = $this->createMock( ItemUpdater::class );
-		$this->itemUpdater->method( 'update' )
-			->with( $item, $this->expectEquivalentMetadata( $editTags, $isBot, $comment, EditSummary::REPLACE_ACTION ) )
-			->willReturn( new ItemRevision( $item, $modificationTimestamp, $modificationRevisionId ) );
+		$this->itemUpdater->expects( $this->once() )
+			->method( 'update' )
+			->with(
+				$this->callback(
+					fn( Item $item ) => $item->getStatements()->getFirstStatementWithGuid( $statementId )->equals( $newStatement )
+				),
+				$this->expectEquivalentMetadata( $editTags, $isBot, $comment, EditSummary::REPLACE_ACTION )
+			)
+			->willReturn( new ItemRevision( $updatedItem, $modificationTimestamp, $modificationRevisionId ) );
 
 		$response = $this->newUseCase()->execute(
 			$this->newUseCaseRequest( [
 				'$statementId' => $statementId,
-				'$statement' => $this->getStatementSerialization( $newStatement ),
+				'$statement' => $this->serializeStatement( $newStatement ),
 				'$editTags' => $editTags,
 				'$isBot' => $isBot,
 				'$comment' => $comment,
@@ -128,8 +136,10 @@ class ReplaceItemStatementTest extends TestCase {
 		);
 
 		$this->assertInstanceOf( ReplaceItemStatementSuccessResponse::class, $response );
-		$this->assertSame( $statementId, $response->getStatement()->getGuid() );
-		$this->assertEquals( $newStatement, $response->getStatement() );
+		$this->assertSame(
+			$updatedItem->getStatements()->getFirstStatementWithGuid( $statementId ),
+			$response->getStatement()
+		);
 		$this->assertSame( $modificationRevisionId, $response->getRevisionId() );
 		$this->assertSame( $modificationTimestamp, $response->getLastModified() );
 	}
@@ -156,7 +166,7 @@ class ReplaceItemStatementTest extends TestCase {
 		$response = $this->newUseCase()->execute(
 			$this->newUseCaseRequest( [
 				'$statementId' => (string)$originalStatementId,
-				'$statement' => $this->getStatementSerialization( $newStatement ),
+				'$statement' => $this->serializeStatement( $newStatement ),
 			] )
 		);
 
@@ -187,7 +197,7 @@ class ReplaceItemStatementTest extends TestCase {
 		$response = $this->newUseCase()->execute(
 			$this->newUseCaseRequest( [
 				'$statementId' => (string)$statementId,
-				'$statement' => $this->getStatementSerialization( $newStatement ),
+				'$statement' => $this->serializeStatement( $newStatement ),
 			] )
 		);
 
@@ -203,7 +213,7 @@ class ReplaceItemStatementTest extends TestCase {
 		$response = $this->newUseCase()->execute(
 			$this->newUseCaseRequest( [
 				'$statementId' => 'INVALID-STATEMENT-ID',
-				'$statement' => $this->getStatementSerialization( $newStatement ),
+				'$statement' => $this->serializeStatement( $newStatement ),
 			] )
 		);
 
@@ -361,7 +371,7 @@ class ReplaceItemStatementTest extends TestCase {
 		);
 	}
 
-	private function getStatementSerialization( Statement $statement ): array {
+	private function serializeStatement( Statement $statement ): array {
 		$propertyValuePairSerializer = new PropertyValuePairSerializer(
 			$this->propertyDataTypeLookup
 		);
@@ -373,7 +383,7 @@ class ReplaceItemStatementTest extends TestCase {
 	}
 
 	private function getValidStatementSerialization(): array {
-		return $this->getStatementSerialization( NewStatement::noValueFor( 'P666' )->build() );
+		return $this->serializeStatement( NewStatement::noValueFor( 'P666' )->build() );
 	}
 
 	private function newItemMetadataRetriever( LatestItemRevisionMetadataResult $result ): ItemRevisionMetadataRetriever {

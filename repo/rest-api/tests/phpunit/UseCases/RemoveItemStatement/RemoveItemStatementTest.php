@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\RestApi\UseCases\RemoveItemStatement;
 use CommentStore;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
@@ -15,7 +16,6 @@ use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
 use Wikibase\Repo\RestApi\Domain\Model\User;
-use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
@@ -102,20 +102,18 @@ class RemoveItemStatementTest extends TestCase {
 		$this->itemUpdater->expects( $this->once() )
 			->method( 'update' )
 			->with(
-				$item,
+				$this->callback( fn( Item $item ) => $item->getStatements()->isEmpty() ),
 				$this->expectEquivalentMetadata(
 					$requestData['$editTags'],
 					$requestData['$isBot'],
 					$requestData['$comment'],
 					EditSummary::REMOVE_ACTION
 				)
-			)
-			->willReturn( new ItemRevision( $item, '20220809030405', 322 ) );
+			);
 
 		$response = $this->newUseCase()->execute( $this->newUseCaseRequest( $requestData ) );
 
 		$this->assertInstanceOf( RemoveItemStatementSuccessResponse::class, $response );
-		$this->assertTrue( $item->getStatements()->isEmpty() );
 	}
 
 	public function testRemoveStatement_invalidRequest(): void {
