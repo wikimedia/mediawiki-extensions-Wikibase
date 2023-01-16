@@ -86,6 +86,8 @@
 	"wikibase-sitelinks-link-columnheading": "Linket side",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Forbindelse|Forbindelser}} til {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Giv mig besked, når nogen forbinder en side som {{GENDER:|jeg oprettede}} til et {{WBREPONAME}}-emne.",
+	"notification-header-page-connection": "Siden <strong>$3</strong> blev {{GENDER:$2|forbundet}} til {{PLURAL:$4|-1=et {{WBREPONAME\n}}-emne|{{WBREPONAME}}-emnet $4}}, hvor relevante data om emnet kan samles.",
+	"notification-bundle-header-page-connection": "Siden <strong>$3</strong> og {{PLURAL:$4|en anden side|$4 andre sider|100=100 eller flere andre sider}} blev {{GENDER:$2|forbundet}} til {{WBREPONAME}}-emner, hvor relevante data om emnerne kan samles.",
 	"unresolved-property-category": "Sider med uløste egenskaber",
 	"wikibase-client-data-bridge-permissions-error-info": "Flere detaljer",
 	"wikibase-client-data-bridge-references-heading": "Referencer",
