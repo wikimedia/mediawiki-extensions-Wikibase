@@ -164,7 +164,7 @@
 	"wikibase-validator-label-equals-description": "Метка і апісанне для кода мовы $1 не могуць мець аднолькавае значэнне.",
 	"wikibase-validator-label-no-entityid": "Метка не мусіць супадаць з дзейным ідэнтыфікатарам сутнасці.",
 	"wikibase-validator-illegal-file-chars": "Назвы файлаў не могуць змяшчаць такія сімвалы, як двухкроп’е і слэшы.",
-	"wikibase-validator-check-file-type": "Адсутнічае пашырэнне файла.",
+	"wikibase-validator-check-file-type": "Нестае пашырэння файла.",
 	"wikibase-validator-illegal-geo-shape-title": "Значэнне мусіць пачынацца з <code>Data:</code> і канчаецца на <code>.map</code>. Дадаткова загаловак не мусіць утрымліваць такія сімвалы як двукроп’е, краты ці вертыкальная рыса.",
 	"wikibase-validator-illegal-tabular-data-title": "Значэнне мусіць пачынацца з <code>Data:</code> і канчаецца на <code>.tab</code>. Дадаткова загаловак не мусіць утрымліваць такія сімвалы як двукроп’е, краты ці вертыкальная рыса.",
 	"wikibase-validator-illegal-entity-schema-title": "Значэнне павінна пачынацца з <code>E</code>, а астатнія сімвалы павінны быць толькі лічбамі.",

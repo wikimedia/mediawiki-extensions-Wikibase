@@ -273,7 +273,7 @@
 	"apihelp-wbsetlabel-param-language": "Lingua del etiquetta",
 	"apihelp-wbsetlabel-param-value": "Le valor del etiquetta",
 	"apihelp-wbsetlabel-param-tags": "Etiquettas de modification a applicar al version.",
-	"apihelp-wbsetlabel-example-1": "Fixar le catena \"Wikimedia\" pro le pagina con ID \"<samp>$1</samp>\" como un etiquetta in le lingua anglese e reportar lo como JSON in formato imbellite.",
+	"apihelp-wbsetlabel-example-1": "Fixar le catena \"Wikimedia\" pro le pagina con ID \"<samp>$1</samp>\" como un etiquetta in le lingua anglese e reportar lo in JSON con coloration syntactic.",
 	"apihelp-wbsetlabel-example-2": "Fixar le etiquetta in lingua anglese a \"<var>Earth</var>\" pro le elemento con ligamine de sito <var>enwiki</var> => \"<var>Earth</var>\".",
 	"apihelp-wbsetqualifier-description": "Crea un qualificator o fixa le valor de un existente.",
 	"apihelp-wbsetqualifier-summary": "Crea un qualificator o fixa le valor de un existente.",

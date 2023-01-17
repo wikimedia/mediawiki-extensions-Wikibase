@@ -44,5 +44,6 @@
 	"apihelp-wbsetaliases-description": "Nastavi sopomenke za entiteto Wikibase.",
 	"apihelp-wbsetaliases-summary": "Nastavi sopomenke za entiteto Wikibase.",
 	"apihelp-wbsetaliases-param-language": "Jezik za nastavitev sopomenk",
+	"apihelp-wbsetdescription-param-language": "Jezik opisa",
 	"apihelp-wbformatentities-example-3": "Oblikuje ID predmeta, ID lastnosti in ID leksema."
 }

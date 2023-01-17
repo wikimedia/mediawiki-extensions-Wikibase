@@ -2,8 +2,10 @@
 	"@metadata": {
 		"authors": [
 			"Patriot Kur",
-			"Гусейн"
+			"Гусейн",
+			"Patriot Kor"
 		]
 	},
-	"wikibase-sitelinks-wikipedia": "Vikipedia"
+	"wikibase-sitelinks-wikipedia": "Vikipedia",
+	"datatypes-type-number": "Aşmard"
 }
