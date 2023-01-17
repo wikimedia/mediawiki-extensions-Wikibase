@@ -391,7 +391,7 @@
 	"wikibase-api-not-recognized-siteid": "El identificador del sitio suministrado no fue reconocido.",
 	"wikibase-api-not-recognized": "Se solicitó una propiedad no válida: $1.",
 	"wikibase-api-not-recognized-array": "Se esperaba una matriz pero no se encontró.",
-	"wikibase-api-not-recognized-language": "El identificador de idioma suministrado no fue reconocido.",
+	"wikibase-api-not-recognized-language": "No se reconoció el identificador de idioma suministrado, «$1».",
 	"wikibase-api-not-recognized-string": "Se esperaba una secuencia de comandos (string) pero no se encontró.",
 	"wikibase-api-wrong-class": "El contenido de la página encontrada no es del tipo correcto.",
 	"wikibase-api-target-not-empty": "Solo se puede crear la redirección sobre una entidad vacía o eliminada.",
