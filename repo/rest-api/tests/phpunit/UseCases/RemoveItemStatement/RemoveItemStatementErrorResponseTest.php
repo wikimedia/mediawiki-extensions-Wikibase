@@ -2,6 +2,8 @@
 
 namespace Wikibase\Repo\Tests\RestApi\UseCases\RemoveItemStatement;
 
+use Generator;
+use LogicException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatementErrorResponse;
@@ -35,7 +37,7 @@ class RemoveItemStatementErrorResponseTest extends TestCase {
 		$this->assertSame( $expectedContext, $response->getContext() );
 	}
 
-	public function provideValidationError(): \Generator {
+	public function provideValidationError(): Generator {
 		yield 'from invalid item ID' => [
 			new ValidationError( ItemIdValidator::CODE_INVALID, [ ItemIdValidator::CONTEXT_VALUE => 'X123' ] ),
 			ErrorResponse::INVALID_ITEM_ID,
@@ -71,7 +73,7 @@ class RemoveItemStatementErrorResponseTest extends TestCase {
 	}
 
 	public function testNewFromUnknownCode(): void {
-		$this->expectException( \LogicException::class );
+		$this->expectException( LogicException::class );
 
 		RemoveItemStatementErrorResponse::newFromValidationError(
 			new ValidationError( 'unknown' )

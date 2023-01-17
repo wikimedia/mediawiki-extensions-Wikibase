@@ -2,6 +2,8 @@
 
 namespace Wikibase\Repo\Tests\RestApi\UseCases\PatchItemStatement;
 
+use Generator;
+use LogicException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementErrorResponse;
@@ -37,7 +39,7 @@ class PatchItemStatementErrorResponseTest extends TestCase {
 		$this->assertSame( $expectedContext, $response->getContext() );
 	}
 
-	public function provideValidationError(): \Generator {
+	public function provideValidationError(): Generator {
 		yield 'from invalid item ID' => [
 			new ValidationError( ItemIdValidator::CODE_INVALID, [ ItemIdValidator::CONTEXT_VALUE => 'X123' ] ),
 			ErrorResponse::INVALID_ITEM_ID,
@@ -132,7 +134,7 @@ class PatchItemStatementErrorResponseTest extends TestCase {
 	}
 
 	public function testNewFromUnknownCode(): void {
-		$this->expectException( \LogicException::class );
+		$this->expectException( LogicException::class );
 
 		PatchItemStatementErrorResponse::newFromValidationError(
 			new ValidationError( 'unknown' )

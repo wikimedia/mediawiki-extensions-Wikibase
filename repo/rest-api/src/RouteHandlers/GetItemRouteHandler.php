@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\RouteHandlers;
 
+use LogicException;
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\RequestInterface;
 use MediaWiki\Rest\Response;
@@ -88,7 +89,7 @@ class GetItemRouteHandler extends SimpleHandler {
 		} elseif ( $useCaseResponse instanceof GetItemErrorResponse ) {
 			$httpResponse = $this->responseFactory->newErrorResponse( $useCaseResponse );
 		} else {
-			throw new \LogicException( 'Received an unexpected use case result in ' . __CLASS__ );
+			throw new LogicException( 'Received an unexpected use case result in ' . __CLASS__ );
 		}
 
 		return $httpResponse;

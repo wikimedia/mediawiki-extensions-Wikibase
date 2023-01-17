@@ -5,6 +5,7 @@ namespace Wikibase\Repo\RestApi\RouteHandlers\Middleware;
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Response;
 use Psr\Log\LoggerInterface;
+use Throwable;
 use Wikibase\Repo\RestApi\RouteHandlers\ResponseFactory;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 
@@ -24,7 +25,7 @@ class UnexpectedErrorHandlerMiddleware implements Middleware {
 	public function run( Handler $routeHandler, callable $runNext ): Response {
 		try {
 			return $runNext();
-		} catch ( \Throwable $exception ) {
+		} catch ( Throwable $exception ) {
 			$this->logger->debug( (string)$exception );
 
 			return $this->responseFactory->newErrorResponse(

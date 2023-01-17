@@ -8,6 +8,7 @@ use MediaWiki\Permissions\PermissionManager;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
+use RuntimeException;
 use Status;
 use User;
 use Wikibase\DataModel\Entity\Item;
@@ -176,7 +177,7 @@ class MediaWikiEditEntityFactoryItemUpdaterTest extends TestCase {
 			->with( $this->context->getUser(), 'bot' )
 			->willReturn( false );
 
-		$this->expectException( \RuntimeException::class );
+		$this->expectException( RuntimeException::class );
 
 		$this->newItemUpdater()->update(
 			$this->createStub( Item::class ),

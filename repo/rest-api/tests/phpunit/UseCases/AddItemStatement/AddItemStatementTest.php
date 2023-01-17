@@ -2,7 +2,9 @@
 
 namespace Wikibase\Repo\Tests\RestApi\UseCases\AddItemStatement;
 
+use CommentStore;
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
@@ -40,7 +42,7 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @license GPL-2.0-or-later
  */
-class AddItemStatementTest extends \PHPUnit\Framework\TestCase {
+class AddItemStatementTest extends TestCase {
 
 	use EditMetadataHelper;
 
@@ -236,7 +238,7 @@ class AddItemStatementTest extends \PHPUnit\Framework\TestCase {
 			new ItemIdValidator(),
 			new StatementValidator( $statementDeserializer ),
 			new EditMetadataValidator(
-				\CommentStore::COMMENT_CHARACTER_LIMIT,
+				CommentStore::COMMENT_CHARACTER_LIMIT,
 				self::ALLOWED_TAGS
 			)
 		);

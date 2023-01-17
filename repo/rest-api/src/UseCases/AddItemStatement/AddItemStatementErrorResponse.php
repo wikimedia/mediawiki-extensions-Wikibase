@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\UseCases\AddItemStatement;
 
+use LogicException;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
@@ -54,7 +55,7 @@ class AddItemStatementErrorResponse extends ErrorResponse {
 				);
 
 			default:
-				throw new \LogicException( "Unexpected validation error code: {$validationError->getCode()}" );
+				throw new LogicException( "Unexpected validation error code: {$validationError->getCode()}" );
 		}
 	}
 }

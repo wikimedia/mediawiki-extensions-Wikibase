@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\RestApi\UseCases\ReplaceItemStatement;
 
+use CommentStore;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
@@ -356,7 +357,7 @@ class ReplaceItemStatementTest extends TestCase {
 			new ItemIdValidator(),
 			new StatementIdValidator( new ItemIdParser() ),
 			new StatementValidator( $statementDeserializer ),
-			new EditMetadataValidator( \CommentStore::COMMENT_CHARACTER_LIMIT, self::ALLOWED_TAGS )
+			new EditMetadataValidator( CommentStore::COMMENT_CHARACTER_LIMIT, self::ALLOWED_TAGS )
 		);
 	}
 
