@@ -10,7 +10,7 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
 use MediaWiki\Rest\Validator\BodyValidator;
-use Wikibase\Repo\RestApi\Presentation\Presenters\PatchItemStatementErrorJsonPresenter;
+use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\BotRightCheckMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\ContentTypeCheckMiddleware;
@@ -56,9 +56,8 @@ class PatchItemStatementRouteHandler extends SimpleHandler {
 	}
 
 	public static function factory(): Handler {
-		$responseFactory = new ResponseFactory(
-			new PatchItemStatementErrorJsonPresenter( WbRestApi::getSerializerFactory()->newStatementSerializer() )
-		);
+		$responseFactory = new ResponseFactory( new ErrorJsonPresenter() );
+
 		return new self(
 			WbRestApi::getPatchItemStatement(),
 			new MiddlewareHandler( [
