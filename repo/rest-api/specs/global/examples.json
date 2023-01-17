@@ -41,7 +41,7 @@
 	"StatementDataInvalidFieldExample": {
 		"value": {
 			"code": "statement-data-invalid-field",
-			"message": "Invalid input for {field}",
+			"message": "Invalid input for '{field}'",
 			"context": {
 				"path": "{field}",
 				"value": "{value}"
