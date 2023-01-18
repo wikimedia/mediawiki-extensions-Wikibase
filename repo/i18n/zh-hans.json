@@ -42,7 +42,10 @@
 			"神樂坂秀吉",
 			"科劳",
 			"落花有意12138",
-			"Stang"
+			"Stang",
+			"Hehua",
+			"Lakejason0",
+			"Winston Sung"
 		]
 	},
 	"wikibase-desc": "结构化数据仓库",
@@ -113,7 +116,7 @@
 	"wikibase-remove": "移除",
 	"wikibase-undo-title": "撤销“$1”的编辑",
 	"wikibase-restore-title": "还原“$1”的旧版本",
-	"wikibase-partial-undo": "该编辑可以部分撤消。",
+	"wikibase-partial-undo": "该编辑可以部分撤销。",
 	"wikibase-omitted-undo-ops": "$1次更改不能取消因为值已经同时更改。",
 	"wikibase-empty-undo": "这里没有可以撤销的更改。",
 	"wikibase-undo-revision-error": "撤销失败",

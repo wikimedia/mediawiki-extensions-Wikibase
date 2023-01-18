@@ -410,7 +410,7 @@
 	"wikibase-pageinfo-subscription-none": "Không có",
 	"wikibase-search-bad-entity-type": "Kiểu thực thể hỏng: $1",
 	"wikibase-search-bad-profile-name": "Tên kiểu tìm kiếm hỏng: $1",
-	"wikibase-refresh-for-missing-datatype": "Không tìm thấy loại dữ liệu $1 trong tập lệnh máy khách cục bộ. Đây có thể là kết quả của tập lệnh được lưu trong bộ nhớ cache đã lỗi thời. Cố gắng làm mới trình duyệt của bạn, bỏ qua bộ nhớ cache cục bộ (Ctrl-Shift-R hoặc Cmd-Shift-R trong hầu hết các trình duyệt) để giải quyết vấn đề.",
+	"wikibase-refresh-for-missing-datatype": "Không tìm thấy loại dữ liệu $1 trong tập lệnh máy khách cục bộ. Điều này có thể vì tập lệnh được lưu trong vùng bộ nhớ đệm đã lỗi thời. Hãy cố làm mới trình duyệt của bạn, bỏ qua vùng bộ nhớ đệm cục bộ (Ctrl-Shift-R hoặc Cmd-Shift-R trong hầu hết các trình duyệt) để khắc phục vấn đề.",
 	"wikibase-federated-properties-special-list-of-properties-source-ref": "[$1 Danh sách Thuộc tính của $2]",
 	"wikibase-federated-properties-leaving-site-notice-cancel": "Hủy",
 	"wikibase-federated-properties-leaving-site-notice-continue": "Tiếp tục đi đến wiki nguồn",
