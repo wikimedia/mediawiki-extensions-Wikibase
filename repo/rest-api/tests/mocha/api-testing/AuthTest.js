@@ -17,6 +17,7 @@ describe( 'Auth', () => {
 	let itemId;
 	let statementId;
 	let stringPropertyId;
+	let user;
 
 	before( async () => {
 		stringPropertyId = ( await createUniqueStringProperty() ).entity.id;
@@ -25,6 +26,7 @@ describe( 'Auth', () => {
 		] );
 		itemId = createEntityResponse.entity.id;
 		statementId = createEntityResponse.entity.claims[ stringPropertyId ][ 0 ].id;
+		user = await action.mindy();
 	} );
 
 	const editRequests = [
@@ -112,12 +114,10 @@ describe( 'Auth', () => {
 			} );
 
 			it( 'has an X-Authenticated-User header with the logged in user', async () => {
-				const mindy = await action.mindy();
-
-				const response = await newRequestBuilder().withUser( mindy ).makeRequest();
+				const response = await newRequestBuilder().withUser( user ).makeRequest();
 
 				assert.strictEqual( response.statusCode, expectedStatusCode );
-				assert.header( response, 'X-Authenticated-User', mindy.username );
+				assert.header( response, 'X-Authenticated-User', user.username );
 			} );
 
 			// eslint-disable-next-line mocha/no-skipped-tests
@@ -155,6 +155,28 @@ describe( 'Auth', () => {
 
 				it( `Permission denied - ${newRequestBuilder().getRouteDescription()}`, async () => {
 					assertPermissionDenied( await newRequestBuilder().makeRequest() );
+				} );
+			} );
+
+			describe( 'Blocked user', () => {
+				before( async () => {
+					await user.action( 'block', {
+						user: user.username,
+						reason: 'testing',
+						token: await user.token()
+					}, 'POST' );
+				} );
+
+				after( async () => {
+					await user.action( 'unblock', {
+						user: user.username,
+						token: await user.token()
+					}, 'POST' );
+				} );
+
+				it( 'can not edit if blocked', async () => {
+					const response = await newRequestBuilder().withUser( user ).makeRequest();
+					assert.strictEqual( response.statusCode, 403 );
 				} );
 			} );
 
