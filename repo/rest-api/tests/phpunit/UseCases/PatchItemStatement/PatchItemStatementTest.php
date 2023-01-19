@@ -6,6 +6,7 @@ use Generator;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Swaggest\JsonDiff\JsonDiff;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\NumericPropertyId;
@@ -114,16 +115,8 @@ class PatchItemStatementTest extends TestCase {
 			->withGuid( $statementId )
 			->withValue( $oldStatementValue )
 			->build();
-
-		$patchedStatement = NewStatement::forProperty( self::STRING_PROPERTY )
-			->withGuid( $statementId )
-			->withValue( $newStatementValue )
-			->build();
 		$item = NewItem::withId( $itemId )
 			->andStatement( $statement )
-			->build();
-		$updatedItem = NewItem::withId( $itemId )
-			->andStatement( $patchedStatement )
 			->build();
 		$postModificationRevisionId = 567;
 		$modificationTimestamp = '20221111070707';
@@ -151,10 +144,22 @@ class PatchItemStatementTest extends TestCase {
 			->with( $itemId )
 			->willReturn( $item );
 
+		$updatedItem = NewItem::withStatement(
+			NewStatement::forProperty( 'P123' )->withGuid( $statementId )->withValue( $newStatementValue )
+		)->build();
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
-		$this->itemUpdater
+		$this->itemUpdater->expects( $this->once() )
 			->method( 'update' )
-			->with( $item, $this->expectEquivalentMetadata( $editTags, $isBot, $comment, EditSummary::PATCH_ACTION ) )
+			->with(
+				$this->callback(
+					fn( Item $item ) => $item->getStatements()
+							->getFirstStatementWithGuid( $statementId )
+							->getMainSnak()
+							->getDataValue()
+							->getValue() === $newStatementValue
+				),
+				$this->expectEquivalentMetadata( $editTags, $isBot, $comment, EditSummary::PATCH_ACTION )
+			)
 			->willReturn( new ItemRevision( $updatedItem, $modificationTimestamp, $postModificationRevisionId ) );
 
 		$this->revisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
@@ -165,10 +170,9 @@ class PatchItemStatementTest extends TestCase {
 		$response = $this->newUseCase()->execute( $request );
 
 		$this->assertInstanceOf( PatchItemStatementSuccessResponse::class, $response );
-		$this->assertEquals( $patchedStatement, $response->getStatement() );
-		$this->assertEquals(
-			$item->getStatements()->getFirstStatementWithGuid( $statementId ),
-			$patchedStatement
+		$this->assertSame(
+			$updatedItem->getStatements()->getFirstStatementWithGuid( $statementId ),
+			$response->getStatement()
 		);
 		$this->assertSame( $modificationTimestamp, $response->getLastModified() );
 		$this->assertSame( $postModificationRevisionId, $response->getRevisionId() );

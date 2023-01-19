@@ -5,11 +5,13 @@ namespace Wikibase\Repo\Tests\RestApi\UseCases\AddItemStatement;
 use CommentStore;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Tests\NewItem;
+use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
@@ -106,10 +108,16 @@ class AddItemStatementTest extends TestCase {
 		$this->guidGenerator = $this->createStub( GuidGenerator::class );
 		$this->guidGenerator->method( 'newGuid' )->willReturn( $newGuid );
 
+		$updatedItem = NewItem::withStatement(
+			NewStatement::noValueFor( 'P123' )->withGuid( $newGuid )
+		)->build();
 		$this->itemUpdater = $this->createMock( ItemUpdater::class );
 		$this->itemUpdater->method( 'update' )
-			->with( $item, $this->expectEquivalentMetadata( $editTags, $isBot, $comment, EditSummary::ADD_ACTION ) )
-			->willReturn( new ItemRevision( $item, $modificationTimestamp, $postModificationRevisionId ) );
+			->with(
+				$this->callback( fn( Item $item ) => $item->getStatements()->getFirstStatementWithGuid( $newGuid ) !== null ),
+				$this->expectEquivalentMetadata( $editTags, $isBot, $comment, EditSummary::ADD_ACTION )
+			)
+			->willReturn( new ItemRevision( $updatedItem, $modificationTimestamp, $postModificationRevisionId ) );
 
 		$this->permissionChecker = $this->createStub( WikibaseEntityPermissionChecker::class );
 		$this->permissionChecker->method( 'canEdit' )->willReturn( true );
@@ -119,8 +127,10 @@ class AddItemStatementTest extends TestCase {
 		$response = $useCase->execute( $request );
 
 		$this->assertInstanceOf( AddItemStatementSuccessResponse::class, $response );
-		$this->assertNotNull( $item->getStatements()->getFirstStatementWithGuid( $newGuid ) );
-		$this->assertSame( $newGuid, $response->getStatement()->getGuid() );
+		$this->assertSame(
+			$updatedItem->getStatements()->getFirstStatementWithGuid( $newGuid ),
+			$response->getStatement()
+		);
 		$this->assertSame( $postModificationRevisionId, $response->getRevisionId() );
 		$this->assertSame( $modificationTimestamp, $response->getLastModified() );
 	}
