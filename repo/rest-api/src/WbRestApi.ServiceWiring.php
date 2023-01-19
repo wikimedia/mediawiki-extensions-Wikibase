@@ -130,6 +130,8 @@ return [
 	},
 
 	'WbRestApi.PatchItemStatement' => function( MediaWikiServices $services ): PatchItemStatement {
+		$itemDataRetriever = new WikibaseEntityLookupItemDataRetriever( WikibaseRepo::getEntityLookup( $services ) );
+
 		return new PatchItemStatement(
 			new PatchItemStatementValidator(
 				new ItemIdValidator(),
@@ -141,10 +143,11 @@ return [
 				)
 			),
 			new JsonDiffJsonPatcher(),
-			WbRestApi::getSerializerFactory( $services )->newStatementSerializer(),
+			WbRestApi::getSerializerFactory( $services )->newReadModelStatementSerializer(),
 			new StatementValidator( WbRestApi::getStatementDeserializer( $services ) ),
 			new StatementGuidParser( new ItemIdParser() ),
-			new WikibaseEntityLookupItemDataRetriever( WikibaseRepo::getEntityLookup( $services ) ),
+			$itemDataRetriever,
+			$itemDataRetriever,
 			WbRestApi::getItemUpdater( $services ),
 			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
 				WikibaseRepo::getEntityRevisionLookup( $services )

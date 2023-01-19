@@ -14,10 +14,11 @@ use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\ItemStatementRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\JsonPatcher;
 use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
-use Wikibase\Repo\RestApi\Serialization\StatementSerializer;
+use Wikibase\Repo\RestApi\Serialization\ReadModelStatementSerializer;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\Validation\StatementValidator;
 
@@ -28,9 +29,10 @@ class PatchItemStatement {
 
 	private PatchItemStatementValidator $useCaseValidator;
 	private JsonPatcher $jsonPatcher;
-	private StatementSerializer $statementSerializer;
+	private ReadModelStatementSerializer $statementSerializer;
 	private StatementValidator $statementValidator;
 	private StatementGuidParser $statementIdParser;
+	private ItemStatementRetriever $statementRetriever;
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
 	private ItemRevisionMetadataRetriever $revisionMetadataRetriever;
@@ -39,9 +41,10 @@ class PatchItemStatement {
 	public function __construct(
 		PatchItemStatementValidator $useCaseValidator,
 		JsonPatcher $jsonPatcher,
-		StatementSerializer $statementSerializer,
+		ReadModelStatementSerializer $statementSerializer,
 		StatementValidator $statementValidator,
 		StatementGuidParser $statementIdParser,
+		ItemStatementRetriever $statementRetriever,
 		ItemRetriever $itemRetriever,
 		ItemUpdater $itemUpdater,
 		ItemRevisionMetadataRetriever $revisionMetadataRetriever,
@@ -50,6 +53,7 @@ class PatchItemStatement {
 		$this->useCaseValidator = $useCaseValidator;
 		$this->statementSerializer = $statementSerializer;
 		$this->statementValidator = $statementValidator;
+		$this->statementRetriever = $statementRetriever;
 		$this->jsonPatcher = $jsonPatcher;
 		$this->statementIdParser = $statementIdParser;
 		$this->itemRetriever = $itemRetriever;
@@ -85,8 +89,7 @@ class PatchItemStatement {
 			return $this->newStatementNotFoundErrorResponse( $statementId );
 		}
 
-		$item = $this->itemRetriever->getItem( $itemId );
-		$statementToPatch = $item->getStatements()->getFirstStatementWithGuid( (string)$statementId );
+		$statementToPatch = $this->statementRetriever->getStatement( $statementId );
 
 		if ( !$statementToPatch ) {
 			return $this->newStatementNotFoundErrorResponse( $statementId );
@@ -131,6 +134,7 @@ class PatchItemStatement {
 		}
 
 		$patchedStatement = $this->statementValidator->getValidatedStatement();
+		$item = $this->itemRetriever->getItem( $itemId );
 
 		try {
 			$item->getStatements()->replaceStatement( $statementId, $patchedStatement );

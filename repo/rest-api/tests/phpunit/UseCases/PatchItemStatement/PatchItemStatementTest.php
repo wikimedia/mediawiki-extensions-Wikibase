@@ -25,6 +25,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\ItemStatementRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
 use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
@@ -32,10 +33,10 @@ use Wikibase\Repo\RestApi\Infrastructure\DataValuesValueDeserializer;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\RestApi\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\RestApi\Serialization\PropertyValuePairSerializer;
+use Wikibase\Repo\RestApi\Serialization\ReadModelStatementSerializer;
 use Wikibase\Repo\RestApi\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\RestApi\Serialization\ReferenceSerializer;
 use Wikibase\Repo\RestApi\Serialization\StatementDeserializer;
-use Wikibase\Repo\RestApi\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatement;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementErrorResponse;
@@ -67,9 +68,14 @@ class PatchItemStatementTest extends TestCase {
 	 */
 	private $useCaseValidator;
 
-	private StatementSerializer $statementSerializer;
+	private ReadModelStatementSerializer $statementSerializer;
 
 	private StatementValidator $statementValidator;
+
+	/**
+	 * @var MockObject|ItemStatementRetriever
+	 */
+	private $statementRetriever;
 
 	/**
 	 * @var MockObject|ItemRetriever
@@ -99,6 +105,7 @@ class PatchItemStatementTest extends TestCase {
 		}
 
 		$this->useCaseValidator = $this->createStub( PatchItemStatementValidator::class );
+		$this->statementRetriever = $this->createStub( ItemStatementRetriever::class );
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
 		$this->revisionMetadataRetriever = $this->newRevisionMetadataRetrieverWithSomeConcreteRevision();
@@ -114,12 +121,12 @@ class PatchItemStatementTest extends TestCase {
 		$statementId = new StatementGuid( new ItemId( $itemId ), 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 		$oldStatementValue = 'old statement value';
 		$newStatementValue = 'new statement value';
-		$statement = NewStatement::forProperty( self::STRING_PROPERTY )
+		[ $statementToPatch, $originalStatementWriteModel ] = NewStatementReadModel::forProperty( self::STRING_PROPERTY )
 			->withGuid( $statementId )
 			->withValue( $oldStatementValue )
-			->build();
-		$item = NewItem::withId( $itemId )
-			->andStatement( $statement )
+			->buildReadAndWriteModel();
+		$itemToUpdate = NewItem::withId( $itemId )
+			->andStatement( $originalStatementWriteModel )
 			->build();
 		$postModificationRevisionId = 567;
 		$modificationTimestamp = '20221111070707';
@@ -141,11 +148,14 @@ class PatchItemStatementTest extends TestCase {
 
 		$request = $this->newUseCaseRequest( $requestData );
 
+		$this->statementRetriever = $this->createStub( ItemStatementRetriever::class );
+		$this->statementRetriever->method( 'getStatement' )->willReturn( $statementToPatch );
+
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemRetriever
 			->method( 'getItem' )
 			->with( $itemId )
-			->willReturn( $item );
+			->willReturn( $itemToUpdate );
 
 		$updatedItem = new ReadModelItem( new StatementList(
 			NewStatementReadModel::forProperty( 'P123' )->withGuid( $statementId )->withValue( $newStatementValue )->build()
@@ -283,19 +293,24 @@ class PatchItemStatementTest extends TestCase {
 	public function testRejectsPropertyIdChange(): void {
 		$itemId = 'Q123';
 		$guid = $itemId . '$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-		$originalStatement = NewStatement::noValueFor( self::STRING_PROPERTY )->withGuid( $guid )->build();
+		[ $statementToPatch, $originalStatementWriteModel ] = NewStatementReadModel::noValueFor( self::STRING_PROPERTY )
+			->withGuid( $guid )
+			->buildReadAndWriteModel();
+		$item = NewItem::withId( $itemId )->andStatement( $originalStatementWriteModel )->build();
 		$patchedStatement = NewStatement::noValueFor( 'P321' )->withGuid( $guid )->build();
-		$item = NewItem::withId( $itemId )->andStatement( $originalStatement )->build();
 
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemRetriever->method( 'getItem' )->willReturn( $item );
+
+		$this->statementRetriever = $this->createStub( ItemStatementRetriever::class );
+		$this->statementRetriever->method( 'getStatement' )->willReturn( $statementToPatch );
 
 		$this->statementValidator = $this->createStub( StatementValidator::class );
 		$this->statementValidator->method( 'getValidatedStatement' )->willReturn( $patchedStatement );
 
 		$response = $this->newUseCase()->execute(
 			$this->newUseCaseRequest( [
-				'$statementId' => $originalStatement->getGuid(),
+				'$statementId' => $guid,
 				'$patch' => [ [ 'op' => 'replace', 'path' => '/property/id', 'value' => 'P321' ] ],
 			] )
 		);
@@ -308,19 +323,24 @@ class PatchItemStatementTest extends TestCase {
 		$itemId = 'Q123';
 		$originalGuid = $itemId . '$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 		$newGuid = $itemId . '$FFFFFFFF-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-		$originalStatement = NewStatement::noValueFor( self::STRING_PROPERTY )->withGuid( $originalGuid )->build();
+		[ $statementToPatch, $originalStatementWriteModel ] = NewStatementReadModel::noValueFor( self::STRING_PROPERTY )
+			->withGuid( $originalGuid )
+			->buildReadAndWriteModel();
 		$patchedStatement = NewStatement::noValueFor( self::STRING_PROPERTY )->withGuid( $newGuid )->build();
-		$item = NewItem::withId( $itemId )->andStatement( $originalStatement )->build();
+		$item = NewItem::withId( $itemId )->andStatement( $originalStatementWriteModel )->build();
 
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemRetriever->method( 'getItem' )->willReturn( $item );
+
+		$this->statementRetriever = $this->createStub( ItemStatementRetriever::class );
+		$this->statementRetriever->method( 'getStatement' )->willReturn( $statementToPatch );
 
 		$this->statementValidator = $this->createStub( StatementValidator::class );
 		$this->statementValidator->method( 'getValidatedStatement' )->willReturn( $patchedStatement );
 
 		$response = $this->newUseCase()->execute(
 			$this->newUseCaseRequest( [
-				'$statementId' => $originalStatement->getGuid(),
+				'$statementId' => $originalGuid,
 				'$patch' => [ [ 'op' => 'replace', 'path' => '/id', 'value' => $newGuid ] ],
 			] )
 		);
@@ -332,6 +352,10 @@ class PatchItemStatementTest extends TestCase {
 	public function testGivenProtectedItem_returnsErrorResponse(): void {
 		$itemId = new ItemId( 'Q123' );
 		$statementId = "$itemId\$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE";
+		[ $statementReadModel, $statementWriteModel ] = NewStatementReadModel::forProperty( self::STRING_PROPERTY )
+			->withGuid( $statementId )
+			->withValue( 'abc' )
+			->buildReadAndWriteModel();
 
 		$this->permissionChecker = $this->createMock( WikibaseEntityPermissionChecker::class );
 		$this->permissionChecker->expects( $this->once() )
@@ -341,14 +365,11 @@ class PatchItemStatementTest extends TestCase {
 
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemRetriever->method( 'getItem' )->willReturn(
-			NewItem::withId( $itemId )
-				->andStatement(
-					NewStatement::forProperty( self::STRING_PROPERTY )
-						->withGuid( $statementId )
-						->withValue( 'abc' )
-						->build()
-				)->build()
+			NewItem::withId( $itemId )->andStatement( $statementWriteModel )->build()
 		);
+
+		$this->statementRetriever = $this->createStub( ItemStatementRetriever::class );
+		$this->statementRetriever->method( 'getStatement' )->willReturn( $statementReadModel );
 
 		$response = $this->newUseCase()->execute(
 			$this->newUseCaseRequest( [
@@ -365,7 +386,7 @@ class PatchItemStatementTest extends TestCase {
 	 */
 	public function testGivenValidInapplicablePatch_returnsErrorResponse( array $patch, string $expectedErrorCode ): void {
 		$statementId = new StatementGuid( new ItemId( 'Q123' ), 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
-		$this->itemRetriever = $this->newItemRetrieverForItemWithStringStatement( $statementId );
+		$this->setRetrieversForItemWithStringStatement( $statementId );
 		$response = $this->newUseCase()->execute(
 			$this->newUseCaseRequest( [
 				'$statementId' => "$statementId",
@@ -408,7 +429,7 @@ class PatchItemStatementTest extends TestCase {
 		];
 
 		$statementId = new StatementGuid( new ItemId( 'Q123' ), 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
-		$this->itemRetriever = $this->newItemRetrieverForItemWithStringStatement( $statementId );
+		$this->setRetrieversForItemWithStringStatement( $statementId );
 
 		$response = $this->newUseCase()->execute(
 			$this->newUseCaseRequest( [
@@ -427,6 +448,7 @@ class PatchItemStatementTest extends TestCase {
 			$this->statementSerializer,
 			$this->statementValidator,
 			new StatementGuidParser( new ItemIdParser() ),
+			$this->statementRetriever,
 			$this->itemRetriever,
 			$this->itemUpdater,
 			$this->revisionMetadataRetriever,
@@ -453,19 +475,20 @@ class PatchItemStatementTest extends TestCase {
 		return $metadataRetriever;
 	}
 
-	private function newItemRetrieverForItemWithStringStatement( StatementGuid $statementId ): ItemRetriever {
-		$retriever = $this->createStub( ItemRetriever::class );
-		$retriever->method( 'getItem' )->willReturn(
+	private function setRetrieversForItemWithStringStatement( StatementGuid $statementId ): void {
+		[ $statementReadModel, $statementWriteModel ] = NewStatementReadModel::forProperty( self::STRING_PROPERTY )
+			->withGuid( $statementId )
+			->withValue( 'abc' )
+			->buildReadAndWriteModel();
+
+		$this->itemRetriever = $this->createStub( ItemRetriever::class );
+		$this->itemRetriever->method( 'getItem' )->willReturn(
 			NewItem::withId( $statementId->getEntityId() )
-				->andStatement(
-					NewStatement::forProperty( self::STRING_PROPERTY )
-						->withGuid( $statementId )
-						->withValue( 'abc' )
-						->build()
-				)->build()
+				->andStatement( $statementWriteModel )->build()
 		);
 
-		return $retriever;
+		$this->statementRetriever = $this->createStub( ItemStatementRetriever::class );
+		$this->statementRetriever->method( 'getStatement' )->willReturn( $statementReadModel );
 	}
 
 	private function getValidValueReplacingPatch( string $newStatementValue = '' ): array {
@@ -484,10 +507,10 @@ class PatchItemStatementTest extends TestCase {
 		);
 	}
 
-	private function newStatementSerializer(): StatementSerializer {
+	private function newStatementSerializer(): ReadModelStatementSerializer {
 		$propertyValuePairSerializer = new PropertyValuePairSerializer( $this->newDataTypeLookup() );
 
-		return new StatementSerializer(
+		return new ReadModelStatementSerializer(
 			$propertyValuePairSerializer,
 			new ReferenceSerializer( $propertyValuePairSerializer )
 		);
