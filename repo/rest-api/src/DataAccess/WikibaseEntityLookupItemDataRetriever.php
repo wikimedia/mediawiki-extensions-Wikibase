@@ -7,7 +7,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Statement\StatementList as DataModelStatementList;
-use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemData;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemDataBuilder;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
@@ -28,9 +27,6 @@ class WikibaseEntityLookupItemDataRetriever implements ItemDataRetriever, ItemSt
 		$this->entityLookup = $entityLookup;
 	}
 
-	/**
-	 * @throws StorageException
-	 */
 	public function getItemData( ItemId $itemId, array $fields ): ?ItemData {
 		$item = $this->getItem( $itemId );
 		if ( $item === null ) {
@@ -67,9 +63,6 @@ class WikibaseEntityLookupItemDataRetriever implements ItemDataRetriever, ItemSt
 		return $itemData->build();
 	}
 
-	/**
-	 * @throws StorageException
-	 */
 	public function getStatement( StatementGuid $statementGuid ): ?Statement {
 		/** @var ItemId $itemId */
 		$itemId = $statementGuid->getEntityId();
@@ -83,9 +76,6 @@ class WikibaseEntityLookupItemDataRetriever implements ItemDataRetriever, ItemSt
 		return $statements->getStatementById( $statementGuid );
 	}
 
-	/**
-	 * @throws StorageException
-	 */
 	public function getStatements( ItemId $itemId ): ?StatementList {
 		$item = $this->getItem( $itemId );
 		if ( $item === null ) {
