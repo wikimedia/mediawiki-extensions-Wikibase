@@ -19,12 +19,20 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemStatementsRetriever;
 /**
  * @license GPL-2.0-or-later
  */
-class WikibaseEntityLookupItemDataRetriever implements ItemDataRetriever, ItemStatementsRetriever, ItemStatementRetriever, ItemRetriever {
+class WikibaseEntityLookupItemDataRetriever	implements ItemRetriever, ItemDataRetriever, ItemStatementsRetriever, ItemStatementRetriever {
 
 	private EntityLookup $entityLookup;
 
 	public function __construct( EntityLookup $entityLookup ) {
 		$this->entityLookup = $entityLookup;
+	}
+
+	public function getItem( ItemId $itemId ): ?Item {
+		/** @var Item $item */
+		$item = $this->entityLookup->getEntity( $itemId );
+		'@phan-var Item $item';
+
+		return $item;
 	}
 
 	public function getItemData( ItemId $itemId, array $fields ): ?ItemData {
@@ -63,19 +71,6 @@ class WikibaseEntityLookupItemDataRetriever implements ItemDataRetriever, ItemSt
 		return $itemData->build();
 	}
 
-	public function getStatement( StatementGuid $statementGuid ): ?Statement {
-		/** @var ItemId $itemId */
-		$itemId = $statementGuid->getEntityId();
-		'@phan-var ItemId $itemId';
-
-		$statements = $this->getStatements( $itemId );
-		if ( $statements === null ) {
-			return null;
-		}
-
-		return $statements->getStatementById( $statementGuid );
-	}
-
 	public function getStatements( ItemId $itemId ): ?StatementList {
 		$item = $this->getItem( $itemId );
 		if ( $item === null ) {
@@ -83,14 +78,6 @@ class WikibaseEntityLookupItemDataRetriever implements ItemDataRetriever, ItemSt
 		}
 
 		return $this->convertDataModelStatementListToReadModel( $itemId, $item->getStatements() );
-	}
-
-	public function getItem( ItemId $itemId ): ?Item {
-		/** @var Item $item */
-		$item = $this->entityLookup->getEntity( $itemId );
-		'@phan-var Item $item';
-
-		return $item;
 	}
 
 	private function convertDataModelStatementListToReadModel( ItemId $itemId, DataModelStatementList $list ): StatementList {
@@ -107,5 +94,18 @@ class WikibaseEntityLookupItemDataRetriever implements ItemDataRetriever, ItemSt
 			),
 			iterator_to_array( $list )
 		) );
+	}
+
+	public function getStatement( StatementGuid $statementGuid ): ?Statement {
+		/** @var ItemId $itemId */
+		$itemId = $statementGuid->getEntityId();
+		'@phan-var ItemId $itemId';
+
+		$statements = $this->getStatements( $itemId );
+		if ( $statements === null ) {
+			return null;
+		}
+
+		return $statements->getStatementById( $statementGuid );
 	}
 }
