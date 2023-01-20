@@ -55,7 +55,7 @@ class FederatedPropertiesError extends ErrorPageError {
 			parent::report();
 		} else {
 			global $wgOut;
-			$wgOut->addModuleStyles( [ 'wikibase.common' ] );
+			$wgOut->addModuleStyles( [ 'wikibase.alltargets', 'wikibase.desktop' ] );
 			parent::report( $action );
 		}
 	}
