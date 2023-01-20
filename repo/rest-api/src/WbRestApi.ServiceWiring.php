@@ -124,7 +124,8 @@ return [
 			WikibaseRepo::getEditEntityFactory( $services ),
 			WikibaseRepo::getLogger( $services ),
 			new EditSummaryFormatter( WikibaseRepo::getSummaryFormatter( $services ) ),
-			$services->getPermissionManager()
+			$services->getPermissionManager(),
+			new StatementGuidParser( new ItemIdParser() )
 		);
 	},
 

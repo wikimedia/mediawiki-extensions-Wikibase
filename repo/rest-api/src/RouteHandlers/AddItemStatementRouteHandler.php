@@ -12,13 +12,13 @@ use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
 use MediaWiki\Rest\Validator\BodyValidator;
 use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
-use Wikibase\Repo\RestApi\Presentation\Presenters\StatementJsonPresenter;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\BotRightCheckMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\ContentTypeCheckMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
+use Wikibase\Repo\RestApi\Serialization\ReadModelStatementSerializer;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementRequest;
@@ -39,18 +39,18 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 	public const COMMENT_BODY_PARAM = 'comment';
 
 	private AddItemStatement $addItemStatement;
-	private StatementJsonPresenter $successPresenter;
+	private ReadModelStatementSerializer $statementSerializer;
 	private ResponseFactory $responseFactory;
 	private MiddlewareHandler $middlewareHandler;
 
 	public function __construct(
 		AddItemStatement $addItemStatement,
-		StatementJsonPresenter $successPresenter,
+		ReadModelStatementSerializer $statementSerializer,
 		ResponseFactory $responseFactory,
 		MiddlewareHandler $middlewareHandler
 	) {
 		$this->addItemStatement = $addItemStatement;
-		$this->successPresenter = $successPresenter;
+		$this->statementSerializer = $statementSerializer;
 		$this->responseFactory = $responseFactory;
 		$this->middlewareHandler = $middlewareHandler;
 	}
@@ -59,7 +59,7 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 		$responseFactory = new ResponseFactory( new ErrorJsonPresenter() );
 		return new self(
 			WbRestApi::getAddItemStatement(),
-			new StatementJsonPresenter( WbRestApi::getSerializerFactory()->newStatementSerializer() ),
+			WbRestApi::getSerializerFactory()->newReadModelStatementSerializer(),
 			$responseFactory,
 			new MiddlewareHandler( [
 				new UnexpectedErrorHandlerMiddleware( $responseFactory, WikibaseRepo::getLogger() ),
@@ -167,12 +167,10 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 			wfTimestamp( TS_RFC2822, $useCaseResponse->getLastModified() )
 		);
 		$this->setEtagFromRevId( $httpResponse, $useCaseResponse->getRevisionId() );
-		$this->setLocationHeader( $httpResponse, $itemId, $useCaseResponse->getStatement()->getGuid() );
-		$httpResponse->setBody(
-			new StringStream(
-				$this->successPresenter->getJson( $useCaseResponse->getStatement() )
-			)
-		);
+		$this->setLocationHeader( $httpResponse, $itemId, (string)$useCaseResponse->getStatement()->getGuid() );
+		$httpResponse->setBody( new StringStream( json_encode(
+			$this->statementSerializer->serialize( $useCaseResponse->getStatement() )
+		) ) );
 
 		return $httpResponse;
 	}

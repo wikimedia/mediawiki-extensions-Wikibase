@@ -106,7 +106,7 @@ class ReplaceItemStatement {
 		$newRevision = $this->itemUpdater->update( $item, $editMetadata );
 
 		return new ReplaceItemStatementSuccessResponse(
-			$newRevision->getItem()->getStatements()->getFirstStatementWithGuid( (string)$statementId ),
+			$newRevision->getItem()->getStatements()->getStatementById( $statementId ),
 			$newRevision->getLastModified(),
 			$newRevision->getRevisionId()
 		);

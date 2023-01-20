@@ -20,7 +20,9 @@ use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
 use Wikibase\Repo\RestApi\Domain\Model\User;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Item as ReadModelItem;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
+use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
@@ -44,6 +46,7 @@ use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Validation\ValidationError;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
+use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -108,7 +111,7 @@ class PatchItemStatementTest extends TestCase {
 
 	public function testPatchItemStatement_success(): void {
 		$itemId = 'Q123';
-		$statementId = $itemId . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+		$statementId = new StatementGuid( new ItemId( $itemId ), 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 		$oldStatementValue = 'old statement value';
 		$newStatementValue = 'new statement value';
 		$statement = NewStatement::forProperty( self::STRING_PROPERTY )
@@ -127,7 +130,7 @@ class PatchItemStatementTest extends TestCase {
 		$patch = $this->getValidValueReplacingPatch( $newStatementValue );
 
 		$requestData = [
-			'$statementId' => $statementId,
+			'$statementId' => (string)$statementId,
 			'$patch' => $patch,
 			'$editTags' => $editTags,
 			'$isBot' => $isBot,
@@ -144,16 +147,16 @@ class PatchItemStatementTest extends TestCase {
 			->with( $itemId )
 			->willReturn( $item );
 
-		$updatedItem = NewItem::withStatement(
-			NewStatement::forProperty( 'P123' )->withGuid( $statementId )->withValue( $newStatementValue )
-		)->build();
+		$updatedItem = new ReadModelItem( new StatementList(
+			NewStatementReadModel::forProperty( 'P123' )->withGuid( $statementId )->withValue( $newStatementValue )->build()
+		) );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
 		$this->itemUpdater->expects( $this->once() )
 			->method( 'update' )
 			->with(
 				$this->callback(
 					fn( Item $item ) => $item->getStatements()
-							->getFirstStatementWithGuid( $statementId )
+							->getFirstStatementWithGuid( (string)$statementId )
 							->getMainSnak()
 							->getDataValue()
 							->getValue() === $newStatementValue
@@ -171,7 +174,7 @@ class PatchItemStatementTest extends TestCase {
 
 		$this->assertInstanceOf( PatchItemStatementSuccessResponse::class, $response );
 		$this->assertSame(
-			$updatedItem->getStatements()->getFirstStatementWithGuid( $statementId ),
+			$updatedItem->getStatements()->getStatementById( $statementId ),
 			$response->getStatement()
 		);
 		$this->assertSame( $modificationTimestamp, $response->getLastModified() );

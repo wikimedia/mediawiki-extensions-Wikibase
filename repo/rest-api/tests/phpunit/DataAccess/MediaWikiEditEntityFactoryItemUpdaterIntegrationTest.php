@@ -8,12 +8,13 @@ use Psr\Log\NullLogger;
 use RequestContext;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\ItemIdParser;
+use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\DataAccess\MediaWikiEditEntityFactoryItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
-use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
 use Wikibase\Repo\WikibaseRepo;
@@ -27,26 +28,6 @@ use Wikibase\Repo\WikibaseRepo;
  * @license GPL-2.0-or-later
  */
 class MediaWikiEditEntityFactoryItemUpdaterIntegrationTest extends MediaWikiIntegrationTestCase {
-
-	public function testUpdate_ItemLabelUpdated(): void {
-		$itemToUpdate = new Item();
-		$this->saveNewItem( $itemToUpdate );
-
-		$newLabel = 'potato';
-		$newLabelLanguageCode = 'en';
-		$itemToUpdate->setLabel( $newLabelLanguageCode, $newLabel );
-		$editSummary = $this->createMock( EditSummary::class );
-
-		$newRevision = $this->newItemUpdater()->update(
-			$itemToUpdate,
-			new EditMetadata( [], false, $editSummary )
-		);
-
-		$this->assertSame(
-			$newLabel,
-			$newRevision->getItem()->getLabels()->getByLanguage( $newLabelLanguageCode )->getText()
-		);
-	}
 
 	public function testUpdate_StatementRemovedFromItem(): void {
 		$itemId = 'Q123';
@@ -66,7 +47,7 @@ class MediaWikiEditEntityFactoryItemUpdaterIntegrationTest extends MediaWikiInte
 			new EditMetadata( [], false, StatementEditSummary::newRemoveSummary( null, $statementToRemove ) )
 		);
 
-		$this->assertTrue( $newRevision->getItem()->getStatements()->isEmpty() );
+		$this->assertCount( 0, $newRevision->getItem()->getStatements() );
 	}
 
 	public function testUpdate_replaceStatementOnItem(): void {
@@ -76,9 +57,10 @@ class MediaWikiEditEntityFactoryItemUpdaterIntegrationTest extends MediaWikiInte
 			->withGuid( $statementGuid )
 			->withValue( 'old statement value' )
 			->build();
+		$newValue = 'new statement value';
 		$newStatement = NewStatement::forProperty( 'P123' )
 			->withGuid( $statementGuid )
-			->withValue( 'new statement value' )
+			->withValue( $newValue )
 			->build();
 		$itemToUpdate = NewItem::withId( $itemId )->andStatement( $oldStatement )->build();
 
@@ -90,9 +72,12 @@ class MediaWikiEditEntityFactoryItemUpdaterIntegrationTest extends MediaWikiInte
 			$itemToUpdate,
 			new EditMetadata( [], false, StatementEditSummary::newReplaceSummary( null, $newStatement ) )
 		);
+
 		$statementList = $newRevision->getItem()->getStatements();
-		$this->assertNotContains( $oldStatement, $statementList );
-		$this->assertContains( $newStatement, $statementList );
+		$this->assertSame(
+			$newValue,
+			$statementList->getStatementById( $statementGuid )->getMainSnak()->getDataValue()->getValue()
+		);
 	}
 
 	private function saveNewItem( Item $item ): void {
@@ -113,7 +98,8 @@ class MediaWikiEditEntityFactoryItemUpdaterIntegrationTest extends MediaWikiInte
 			WikibaseRepo::getEditEntityFactory(),
 			new NullLogger(),
 			$this->createStub( EditSummaryFormatter::class ),
-			$permissionManager
+			$permissionManager,
+			new StatementGuidParser( new ItemIdParser() )
 		);
 	}
 

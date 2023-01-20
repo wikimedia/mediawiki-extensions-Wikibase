@@ -11,12 +11,13 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Tests\NewItem;
-use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
 use Wikibase\Repo\RestApi\Domain\Model\User;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Item as ReadModelItem;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
+use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
@@ -35,6 +36,7 @@ use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\StatementValidator;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
+use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -85,7 +87,7 @@ class AddItemStatementTest extends TestCase {
 		$item = NewItem::withId( 'Q123' )->build();
 		$postModificationRevisionId = 322;
 		$modificationTimestamp = '20221111070707';
-		$newGuid = $item->getId() . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+		$newGuid = new StatementGuid( $item->getId(), 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 		$editTags = [ 'some', 'tags' ];
 		$isBot = false;
 		$comment = 'potato';
@@ -106,15 +108,15 @@ class AddItemStatementTest extends TestCase {
 		$this->itemRetriever->method( 'getItem' )->willReturn( $item );
 
 		$this->guidGenerator = $this->createStub( GuidGenerator::class );
-		$this->guidGenerator->method( 'newGuid' )->willReturn( $newGuid );
+		$this->guidGenerator->method( 'newStatementId' )->willReturn( $newGuid );
 
-		$updatedItem = NewItem::withStatement(
-			NewStatement::noValueFor( 'P123' )->withGuid( $newGuid )
-		)->build();
+		$updatedItem = new ReadModelItem( new StatementList(
+			NewStatementReadModel::noValueFor( 'P123' )->withGuid( $newGuid )->build()
+		) );
 		$this->itemUpdater = $this->createMock( ItemUpdater::class );
 		$this->itemUpdater->method( 'update' )
 			->with(
-				$this->callback( fn( Item $item ) => $item->getStatements()->getFirstStatementWithGuid( $newGuid ) !== null ),
+				$this->callback( fn( Item $item ) => $item->getStatements()->getFirstStatementWithGuid( (string)$newGuid ) !== null ),
 				$this->expectEquivalentMetadata( $editTags, $isBot, $comment, EditSummary::ADD_ACTION )
 			)
 			->willReturn( new ItemRevision( $updatedItem, $modificationTimestamp, $postModificationRevisionId ) );
@@ -128,7 +130,7 @@ class AddItemStatementTest extends TestCase {
 
 		$this->assertInstanceOf( AddItemStatementSuccessResponse::class, $response );
 		$this->assertSame(
-			$updatedItem->getStatements()->getFirstStatementWithGuid( $newGuid ),
+			$updatedItem->getStatements()->getStatementById( $newGuid ),
 			$response->getStatement()
 		);
 		$this->assertSame( $postModificationRevisionId, $response->getRevisionId() );
