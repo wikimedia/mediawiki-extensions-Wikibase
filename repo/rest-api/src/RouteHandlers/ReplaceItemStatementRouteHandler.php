@@ -17,7 +17,7 @@ use Wikibase\Repo\RestApi\RouteHandlers\Middleware\ContentTypeCheckMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
-use Wikibase\Repo\RestApi\Serialization\ReadModelStatementSerializer;
+use Wikibase\Repo\RestApi\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatement;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementRequest;
@@ -39,13 +39,13 @@ class ReplaceItemStatementRouteHandler extends SimpleHandler {
 	public const COMMENT_BODY_PARAM = 'comment';
 
 	private ReplaceItemStatement $replaceItemStatement;
-	private ReadModelStatementSerializer $statementSerializer;
+	private StatementSerializer $statementSerializer;
 	private MiddlewareHandler $middlewareHandler;
 	private ResponseFactory $responseFactory;
 
 	public function __construct(
 		ReplaceItemStatement $replaceItemStatement,
-		ReadModelStatementSerializer $statementSerializer,
+		StatementSerializer $statementSerializer,
 		MiddlewareHandler $middlewareHandler,
 		ResponseFactory $responseFactory
 	) {
@@ -59,7 +59,7 @@ class ReplaceItemStatementRouteHandler extends SimpleHandler {
 		$responseFactory = new ResponseFactory( new ErrorJsonPresenter() );
 		return new self(
 			WbRestApi::getReplaceItemStatement(),
-			WbRestApi::getSerializerFactory()->newReadModelStatementSerializer(),
+			WbRestApi::getSerializerFactory()->newStatementSerializer(),
 			new MiddlewareHandler( [
 				new UnexpectedErrorHandlerMiddleware( $responseFactory, WikibaseRepo::getLogger() ),
 				new UserAgentCheckMiddleware(),

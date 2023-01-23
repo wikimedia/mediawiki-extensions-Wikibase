@@ -6,8 +6,8 @@ use ArrayObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
-use Wikibase\Repo\RestApi\Serialization\ReadModelStatementSerializer;
 use Wikibase\Repo\RestApi\Serialization\StatementListSerializer;
+use Wikibase\Repo\RestApi\Serialization\StatementSerializer;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
 
 /**
@@ -57,7 +57,7 @@ class StatementListSerializerTest extends TestCase {
 	}
 
 	private function newSerializer(): StatementListSerializer {
-		$statementSerializer = $this->createStub( ReadModelStatementSerializer::class );
+		$statementSerializer = $this->createStub( StatementSerializer::class );
 		$statementSerializer->method( 'serialize' )
 			->willReturnCallback(
 				fn( Statement $statement ) => [

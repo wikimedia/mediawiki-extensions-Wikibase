@@ -14,7 +14,7 @@ use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
-use Wikibase\Repo\RestApi\Serialization\ReadModelStatementSerializer;
+use Wikibase\Repo\RestApi\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatement;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementRequest;
@@ -33,13 +33,13 @@ class GetItemStatementRouteHandler extends SimpleHandler {
 	public const ROUTE = '/wikibase/v0/entities/items/{item_id}/statements/{statement_id}';
 
 	private GetItemStatement $getItemStatement;
-	private ReadModelStatementSerializer $statementSerializer;
+	private StatementSerializer $statementSerializer;
 	private ResponseFactory $responseFactory;
 	private MiddlewareHandler $middlewareHandler;
 
 	public function __construct(
 		GetItemStatement $getItemStatement,
-		ReadModelStatementSerializer $statementSerializer,
+		StatementSerializer $statementSerializer,
 		ResponseFactory $responseFactory,
 		MiddlewareHandler $middlewareHandler
 	) {
@@ -53,7 +53,7 @@ class GetItemStatementRouteHandler extends SimpleHandler {
 		$responseFactory = new ResponseFactory( new ErrorJsonPresenter() );
 		return new self(
 			WbRestApi::getGetItemStatement(),
-			WbRestApi::getSerializerFactory()->newReadModelStatementSerializer(),
+			WbRestApi::getSerializerFactory()->newStatementSerializer(),
 			$responseFactory,
 			new MiddlewareHandler( [
 				new UnexpectedErrorHandlerMiddleware( $responseFactory, WikibaseRepo::getLogger() ),
