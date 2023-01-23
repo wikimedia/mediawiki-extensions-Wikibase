@@ -47,7 +47,7 @@
 	"datatypes-type-number": "Število",
 	"datatypes-type-mediawiki-title": "MediaWiki naslov",
 	"datatypes-type-unknown": "Nedoločeno",
-	"datatypes-type-boolean": "Boolean",
+	"datatypes-type-boolean": "Bool",
 	"datatypes-type-globe-coordinate": "Geografski koordinati",
 	"datatypes-type-time": "Točka v času",
 	"datatypes-type-wikibase-item": "Predmet",
