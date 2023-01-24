@@ -369,6 +369,19 @@
 				"wikibase.client.changeslist.css"
 			]
 		},
+		"wikibase.client.vector-2022": {
+			"targets": [ "desktop", "mobile" ],
+			"skinScripts": {
+				"vector-2022": "wikibase.client.vector-2022.js"
+			},
+			"messages": [
+				"wikibase-editlinkstitle"
+			],
+			"dependencies": [
+				"mw.config.values.wbRepo",
+				"oojs-ui.styles.icons-editing-core"
+			]
+		},
 		"wikibase.client.linkitem.init": {
 			"targets": [ "desktop" ],
 			"packageFiles": [

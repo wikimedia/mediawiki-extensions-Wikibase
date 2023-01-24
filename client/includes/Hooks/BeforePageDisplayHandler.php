@@ -50,14 +50,14 @@ class BeforePageDisplayHandler implements BeforePageDisplayHook {
 	 */
 	public function onBeforePageDisplay( $out, $skin ): void {
 		$actionName = $out->getActionName();
-		$this->addModules( $out, $actionName );
+		$this->addModules( $out, $actionName, $skin );
 	}
 
 	/**
 	 * @param OutputPage $out
 	 * @param string $actionName
 	 */
-	public function addModules( OutputPage $out, $actionName ) {
+	public function addModules( OutputPage $out, $actionName, Skin $skin ) {
 		$title = $out->getTitle();
 
 		if ( !$title || !$this->namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
@@ -65,7 +65,7 @@ class BeforePageDisplayHandler implements BeforePageDisplayHook {
 		}
 
 		$this->addStyleModules( $out, $title, $actionName );
-		$this->addJsModules( $out, $title, $actionName );
+		$this->addJsModules( $out, $title, $actionName, $skin );
 	}
 
 	private function addStyleModules( OutputPage $out, Title $title, $actionName ) {
@@ -79,13 +79,17 @@ class BeforePageDisplayHandler implements BeforePageDisplayHook {
 		}
 	}
 
-	private function addJsModules( OutputPage $out, Title $title, $actionName ) {
+	private function addJsModules( OutputPage $out, Title $title, $actionName, Skin $skin ) {
 		$user = $out->getUser();
 
 		if ( $this->hasLinkItemWidget( $user, $out, $title, $actionName ) ) {
 			// Add the JavaScript which lazy-loads the link item widget
 			// (needed as jquery.wikibase.linkitem has pretty heavy dependencies)
 			$out->addModules( 'wikibase.client.linkitem.init' );
+		}
+
+		if ( $skin->getSkinName() === 'vector-2022' && $out->getProperty( 'wikibase_item' ) !== null ) {
+			$out->addModules( 'wikibase.client.vector-2022' );
 		}
 
 		if ( $this->dataBridgeEnabled ) {

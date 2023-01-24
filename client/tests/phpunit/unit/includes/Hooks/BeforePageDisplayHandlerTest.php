@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\Unit\Hooks;
 
+use PHPUnit\Framework\TestCase;
 use RequestContext;
 use Skin;
 use SkinFallback;
@@ -20,7 +21,7 @@ use Wikibase\Client\NamespaceChecker;
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class BeforePageDisplayHandlerTest extends \PHPUnit\Framework\TestCase {
+class BeforePageDisplayHandlerTest extends TestCase {
 
 	/**
 	 * @dataProvider wikibaseForNamespaceProvider
@@ -34,7 +35,7 @@ class BeforePageDisplayHandlerTest extends \PHPUnit\Framework\TestCase {
 		$namespaceChecker = $this->getNamespaceChecker( $enabledForNamespace );
 
 		$handler = new BeforePageDisplayHandler( $namespaceChecker, false );
-		$handler->addModules( $output, 'view' );
+		$handler->addModules( $output, 'view', $skin );
 
 		$this->assertEquals( $expectedJsModules, $output->getModules(), 'js modules' );
 		$this->assertEquals( $expectedCssModules, $output->getModuleStyles(), 'css modules' );
@@ -73,7 +74,7 @@ class BeforePageDisplayHandlerTest extends \PHPUnit\Framework\TestCase {
 		$namespaceChecker = $this->getNamespaceChecker( $enabledForNamespace );
 
 		$handler = new BeforePageDisplayHandler( $namespaceChecker, false );
-		$handler->addModules( $output, 'view' );
+		$handler->addModules( $output, 'view', $skin );
 
 		$this->assertEquals( $expectedJsModules, $output->getModules(), 'js modules' );
 		$this->assertEquals( $expectedCssModules, $output->getModuleStyles(), 'css modules' );
@@ -100,7 +101,7 @@ class BeforePageDisplayHandlerTest extends \PHPUnit\Framework\TestCase {
 		$namespaceChecker = $this->getNamespaceChecker( true );
 
 		$handler = new BeforePageDisplayHandler( $namespaceChecker, false );
-		$handler->addModules( $output, 'view' );
+		$handler->addModules( $output, 'view', $skin );
 
 		$this->assertEquals( [], $output->getModules(), 'js modules' );
 		$this->assertEquals( [], $output->getModuleStyles(), 'css modules' );
@@ -118,7 +119,7 @@ class BeforePageDisplayHandlerTest extends \PHPUnit\Framework\TestCase {
 		$namespaceChecker = $this->getNamespaceChecker( $enabledForNamespace );
 
 		$handler = new BeforePageDisplayHandler( $namespaceChecker, false );
-		$handler->addModules( $output, 'view' );
+		$handler->addModules( $output, 'view', $skin );
 
 		$this->assertEquals( $expectedJsModules, $output->getModules(), 'js modules' );
 		$this->assertEquals( $expectedCssModules, $output->getModuleStyles(), 'css modules' );
@@ -149,7 +150,7 @@ class BeforePageDisplayHandlerTest extends \PHPUnit\Framework\TestCase {
 		$namespaceChecker = $this->getNamespaceChecker( $enabledForNamespace );
 
 		$handler = new BeforePageDisplayHandler( $namespaceChecker, false );
-		$handler->addModules( $output, 'view' );
+		$handler->addModules( $output, 'view', $skin );
 
 		$this->assertEquals( $expectedJsModules, $output->getModules(), 'js modules' );
 		$this->assertEquals( $expectedCssModules, $output->getModuleStyles(), 'css modules' );
@@ -180,7 +181,7 @@ class BeforePageDisplayHandlerTest extends \PHPUnit\Framework\TestCase {
 		$namespaceChecker = $this->getNamespaceChecker( $enabledForNamespace );
 
 		$handler = new BeforePageDisplayHandler( $namespaceChecker, false );
-		$handler->addModules( $output, 'view' );
+		$handler->addModules( $output, 'view', $skin );
 
 		$this->assertEquals( $expectedJsModules, $output->getModules(), 'js modules' );
 		$this->assertEquals( $expectedCssModules, $output->getModuleStyles(), 'css modules' );
@@ -211,7 +212,7 @@ class BeforePageDisplayHandlerTest extends \PHPUnit\Framework\TestCase {
 		$namespaceChecker = $this->getNamespaceChecker( $enabledForNamespace );
 
 		$handler = new BeforePageDisplayHandler( $namespaceChecker, false );
-		$handler->addModules( $output, 'history' );
+		$handler->addModules( $output, 'history', $skin );
 
 		$this->assertEquals( $expectedJsModules, $output->getModules(), 'js modules' );
 		$this->assertEquals( $expectedCssModules, $output->getModuleStyles(), 'css modules' );
@@ -242,7 +243,7 @@ class BeforePageDisplayHandlerTest extends \PHPUnit\Framework\TestCase {
 		$namespaceChecker = $this->getNamespaceChecker( $wikibaseEnabled );
 
 		$handler = new BeforePageDisplayHandler( $namespaceChecker, $dataBridgeEnabled );
-		$handler->addModules( $output, 'view' );
+		$handler->addModules( $output, 'view', $skin );
 
 		$this->assertSame( $expectedJsModules, $output->getModules(), 'js modules' );
 		$this->assertSame( $expectedCssModules, $output->getModuleStyles(), 'css modules' );
