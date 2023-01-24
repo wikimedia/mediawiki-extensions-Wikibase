@@ -244,6 +244,53 @@ class RecentChangeSaveHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->assertFalse( $jobQueueGroup->get( 'DispatchChanges' )->isEmpty() );
 	}
 
+	public function logTypeProvider(): array {
+		return [
+			'Entity deletion' => [ true, 'delete', 'delete' ],
+			'Entity undeletion' => [ true, 'delete', 'restore' ],
+			'Revision deletion' => [ false, 'delete', 'revision' ],
+			'Misc. log action' => [ false, 'blah', 'blah' ],
+		];
+	}
+
+	/**
+	 * @dataProvider logTypeProvider
+	 */
+	public function testGivenRecentChangeForLogType( bool $changeUpdated, string $logType, string $logAction ) {
+		$recentChangeAttrs = [
+			'rc_timestamp' => 1234567890,
+			'rc_bot' => 1,
+			'rc_cur_id' => 42,
+			'rc_last_oldid' => 0,
+			'rc_this_oldid' => 0,
+			'rc_comment' => 'summary',
+			'rc_user' => 321,
+			'rc_user_text' => 'some_user',
+			'rc_log_type' => $logType,
+			'rc_log_action' => $logAction,
+		];
+		$recentChange = $this->newStubRecentChangeWithAttributes( $recentChangeAttrs );
+		$entityChange = $this->newEntityChange();
+
+		$this->changeHolder->transmitChange( $entityChange );
+		$this->subscriptionLookup->method( 'getSubscribers' )
+			->willReturn( [ 'enwiki' ] );
+
+		$this->newHookHandler()->onRecentChange_save( $recentChange );
+
+		$changeMetaData = $entityChange->getMetadata();
+		if ( !$changeUpdated ) {
+			$this->assertSame( [], $changeMetaData );
+		} else {
+			$this->assertSame( $recentChangeAttrs['rc_timestamp'], $entityChange->getTime() );
+			$this->assertSame( $recentChangeAttrs['rc_bot'], $changeMetaData['bot'] );
+			$this->assertSame( $recentChangeAttrs['rc_cur_id'], $changeMetaData['page_id'] );
+			$this->assertSame( $recentChangeAttrs['rc_this_oldid'], $changeMetaData['rev_id'] );
+			$this->assertSame( $recentChangeAttrs['rc_last_oldid'], $changeMetaData['parent_id'] );
+			$this->assertSame( $recentChangeAttrs['rc_comment'], $changeMetaData['comment'] );
+		}
+	}
+
 	private function newHookHandler(): RecentChangeSaveHookHandler {
 		return new RecentChangeSaveHookHandler(
 			$this->changeStore,

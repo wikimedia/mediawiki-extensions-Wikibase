@@ -67,13 +67,12 @@ class RecentChangeSaveHookHandler {
 		$logType = $recentChange->getAttribute( 'rc_log_type' );
 		$logAction = $recentChange->getAttribute( 'rc_log_action' );
 
-		if ( $recentChange->getAttribute( 'rc_this_oldid' ) <= 0 ) {
-			// If we don't have a revision ID, we have no chance to find the right change to update.
-			// NOTE: As of February 2015, RC entries for undeletion have rc_this_oldid = 0.
-			return;
-		}
-
-		if ( $logType === null || ( $logType === 'delete' && $logAction === 'restore' ) ) {
+		if (
+			$logType === null ||
+			( $logType === 'delete' && ( $logAction === 'restore' || $logAction === 'delete' ) )
+		) {
+			// Create a wikibase change either on edit or if the whole entity was (un)deleted.
+			// Note: As entities can't be moved, we don't need to consider log action delete_redir/delete_redir2 here.
 			foreach ( $this->changeHolder->getChanges() as $change ) {
 				$this->handleChange( $change, $recentChange );
 			}
