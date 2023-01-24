@@ -8,11 +8,12 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\DataModel\Statement\Statement;
-use Wikibase\DataModel\Tests\NewStatement;
+use Wikibase\DataModel\Statement\Statement as DataModelStatement;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
 use Wikibase\Repo\RestApi\Serialization\PropertyValuePairSerializer;
 use Wikibase\Repo\RestApi\Serialization\ReferenceSerializer;
 use Wikibase\Repo\RestApi\Serialization\StatementSerializer;
+use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Serialization\StatementSerializer
@@ -37,7 +38,7 @@ class StatementSerializerTest extends TestCase {
 
 	public function serializationProvider(): Generator {
 		yield 'no value statement' => [
-			NewStatement::noValueFor( 'P123' )
+			NewStatementReadModel::noValueFor( 'P123' )
 				->withGuid( self::STATEMENT_ID )
 				->build(),
 			[
@@ -51,9 +52,9 @@ class StatementSerializerTest extends TestCase {
 		];
 
 		yield 'some value statement with deprecated rank' => [
-			NewStatement::someValueFor( 'P123' )
+			NewStatementReadModel::someValueFor( 'P123' )
 				->withGuid( self::STATEMENT_ID )
-				->withRank( Statement::RANK_DEPRECATED )
+				->withRank( DataModelStatement::RANK_DEPRECATED )
 				->build(),
 			[
 				'id' => self::STATEMENT_ID,
@@ -66,7 +67,7 @@ class StatementSerializerTest extends TestCase {
 		];
 
 		yield 'no value statement with qualifiers' => [
-			NewStatement::noValueFor( 'P123' )
+			NewStatementReadModel::noValueFor( 'P123' )
 				->withGuid( self::STATEMENT_ID )
 				->withQualifier( 'P456', 'foo' )
 				->withQualifier( 'P789', 'bar' )
@@ -92,7 +93,7 @@ class StatementSerializerTest extends TestCase {
 			new PropertyNoValueSnak( new NumericPropertyId( 'P888' ) ),
 		] );
 		yield 'with references' => [
-			NewStatement::noValueFor( 'P123' )
+			NewStatementReadModel::noValueFor( 'P123' )
 				->withGuid( self::STATEMENT_ID )
 				->withReference( $ref1 )
 				->withReference( $ref2 )

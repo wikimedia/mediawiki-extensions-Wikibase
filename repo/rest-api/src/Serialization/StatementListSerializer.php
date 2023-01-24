@@ -10,9 +10,9 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
  */
 class StatementListSerializer {
 
-	private ReadModelStatementSerializer $statementSerializer;
+	private StatementSerializer $statementSerializer;
 
-	public function __construct( ReadModelStatementSerializer $statementSerializer ) {
+	public function __construct( StatementSerializer $statementSerializer ) {
 		$this->statementSerializer = $statementSerializer;
 	}
 

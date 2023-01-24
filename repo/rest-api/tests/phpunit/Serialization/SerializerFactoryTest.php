@@ -7,7 +7,6 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Repo\RestApi\Serialization\ItemDataSerializer;
 use Wikibase\Repo\RestApi\Serialization\SerializerFactory;
 use Wikibase\Repo\RestApi\Serialization\StatementListSerializer;
-use Wikibase\Repo\RestApi\Serialization\StatementSerializer;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Serialization\SerializerFactory
@@ -17,13 +16,6 @@ use Wikibase\Repo\RestApi\Serialization\StatementSerializer;
  * @license GPL-2.0-or-later
  */
 class SerializerFactoryTest extends TestCase {
-
-	public function testNewStatementSerializer(): void {
-		$this->assertInstanceOf(
-			StatementSerializer::class,
-			$this->newSerializerFactory()->newStatementSerializer()
-		);
-	}
 
 	public function testNewStatementListSerializer(): void {
 		$this->assertInstanceOf(

@@ -33,10 +33,10 @@ use Wikibase\Repo\RestApi\Infrastructure\DataValuesValueDeserializer;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\RestApi\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\RestApi\Serialization\PropertyValuePairSerializer;
-use Wikibase\Repo\RestApi\Serialization\ReadModelStatementSerializer;
 use Wikibase\Repo\RestApi\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\RestApi\Serialization\ReferenceSerializer;
 use Wikibase\Repo\RestApi\Serialization\StatementDeserializer;
+use Wikibase\Repo\RestApi\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatement;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementErrorResponse;
@@ -68,7 +68,7 @@ class PatchItemStatementTest extends TestCase {
 	 */
 	private $useCaseValidator;
 
-	private ReadModelStatementSerializer $statementSerializer;
+	private StatementSerializer $statementSerializer;
 
 	private StatementValidator $statementValidator;
 
@@ -507,10 +507,10 @@ class PatchItemStatementTest extends TestCase {
 		);
 	}
 
-	private function newStatementSerializer(): ReadModelStatementSerializer {
+	private function newStatementSerializer(): StatementSerializer {
 		$propertyValuePairSerializer = new PropertyValuePairSerializer( $this->newDataTypeLookup() );
 
-		return new ReadModelStatementSerializer(
+		return new StatementSerializer(
 			$propertyValuePairSerializer,
 			new ReferenceSerializer( $propertyValuePairSerializer )
 		);

@@ -4,7 +4,8 @@ namespace Wikibase\Repo\RestApi\Serialization;
 
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\Statement as DataModelStatement;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
 
 /**
  * @license GPL-2.0-or-later
@@ -12,9 +13,9 @@ use Wikibase\DataModel\Statement\Statement;
 class StatementSerializer {
 
 	public const RANK_LABELS = [
-		Statement::RANK_DEPRECATED => 'deprecated',
-		Statement::RANK_NORMAL => 'normal',
-		Statement::RANK_PREFERRED => 'preferred',
+		DataModelStatement::RANK_DEPRECATED => 'deprecated',
+		DataModelStatement::RANK_NORMAL => 'normal',
+		DataModelStatement::RANK_PREFERRED => 'preferred',
 	];
 	private PropertyValuePairSerializer $propertyValuePairSerializer;
 	private ReferenceSerializer $referenceSerializer;
@@ -28,7 +29,7 @@ class StatementSerializer {
 
 		return array_merge(
 			[
-				'id' => $statement->getGuid(),
+				'id' => (string)$statement->getGuid(),
 				'rank' => self::RANK_LABELS[ $statement->getRank() ],
 				'qualifiers' => array_map(
 					fn( Snak $qualifier ) => $this->propertyValuePairSerializer->serialize( $qualifier ),

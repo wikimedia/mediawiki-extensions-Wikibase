@@ -143,7 +143,7 @@ return [
 				)
 			),
 			new JsonDiffJsonPatcher(),
-			WbRestApi::getSerializerFactory( $services )->newReadModelStatementSerializer(),
+			WbRestApi::getSerializerFactory( $services )->newStatementSerializer(),
 			new StatementValidator( WbRestApi::getStatementDeserializer( $services ) ),
 			new StatementGuidParser( new ItemIdParser() ),
 			$itemDataRetriever,

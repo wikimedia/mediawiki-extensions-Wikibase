@@ -18,7 +18,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemStatementRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\JsonPatcher;
 use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
-use Wikibase\Repo\RestApi\Serialization\ReadModelStatementSerializer;
+use Wikibase\Repo\RestApi\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\Validation\StatementValidator;
 
@@ -29,7 +29,7 @@ class PatchItemStatement {
 
 	private PatchItemStatementValidator $useCaseValidator;
 	private JsonPatcher $jsonPatcher;
-	private ReadModelStatementSerializer $statementSerializer;
+	private StatementSerializer $statementSerializer;
 	private StatementValidator $statementValidator;
 	private StatementGuidParser $statementIdParser;
 	private ItemStatementRetriever $statementRetriever;
@@ -41,7 +41,7 @@ class PatchItemStatement {
 	public function __construct(
 		PatchItemStatementValidator $useCaseValidator,
 		JsonPatcher $jsonPatcher,
-		ReadModelStatementSerializer $statementSerializer,
+		StatementSerializer $statementSerializer,
 		StatementValidator $statementValidator,
 		StatementGuidParser $statementIdParser,
 		ItemStatementRetriever $statementRetriever,

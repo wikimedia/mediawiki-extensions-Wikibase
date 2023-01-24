@@ -18,7 +18,7 @@ use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\RequestPreconditionCheck;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
-use Wikibase\Repo\RestApi\Serialization\ReadModelStatementSerializer;
+use Wikibase\Repo\RestApi\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatement;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementRequest;
@@ -40,13 +40,13 @@ class PatchStatementRouteHandler extends SimpleHandler {
 
 	private PatchItemStatement $useCase;
 	private MiddlewareHandler $middlewareHandler;
-	private ReadModelStatementSerializer $statementSerializer;
+	private StatementSerializer $statementSerializer;
 	private ResponseFactory $responseFactory;
 
 	public function __construct(
 		PatchItemStatement $useCase,
 		MiddlewareHandler $middlewareHandler,
-		ReadModelStatementSerializer $statementSerializer,
+		StatementSerializer $statementSerializer,
 		ResponseFactory $responseFactory
 	) {
 		$this->useCase = $useCase;
@@ -77,7 +77,7 @@ class PatchStatementRouteHandler extends SimpleHandler {
 					}
 				),
 			] ),
-			WbRestApi::getSerializerFactory()->newReadModelStatementSerializer(),
+			WbRestApi::getSerializerFactory()->newStatementSerializer(),
 			$responseFactory
 		);
 	}
