@@ -23,4 +23,8 @@ class NewStatementReadModel extends NewStatement {
 		);
 	}
 
+	public function buildReadAndWriteModel(): array {
+		return [ $this->build(), parent::build() ];
+	}
+
 }
