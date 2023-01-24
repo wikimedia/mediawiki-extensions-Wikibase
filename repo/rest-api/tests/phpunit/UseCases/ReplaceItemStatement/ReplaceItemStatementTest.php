@@ -9,7 +9,6 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
@@ -27,11 +26,8 @@ use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
 use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
 use Wikibase\Repo\RestApi\Infrastructure\DataValuesValueDeserializer;
 use Wikibase\Repo\RestApi\Serialization\PropertyValuePairDeserializer;
-use Wikibase\Repo\RestApi\Serialization\PropertyValuePairSerializer;
 use Wikibase\Repo\RestApi\Serialization\ReferenceDeserializer;
-use Wikibase\Repo\RestApi\Serialization\ReferenceSerializer;
 use Wikibase\Repo\RestApi\Serialization\StatementDeserializer;
-use Wikibase\Repo\RestApi\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatement;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementErrorResponse;
@@ -97,10 +93,14 @@ class ReplaceItemStatementTest extends TestCase {
 		$itemId = 'Q123';
 		$statementId = new StatementGuid( new ItemId( $itemId ), 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 		$oldStatement = NewStatement::noValueFor( 'P123' )->withGuid( $statementId )->build();
-		$newStatement = NewStatement::forProperty( 'P123' )
-			->withGuid( $statementId )
-			->withValue( 'new statement value' )
-			->build();
+		$newStatementSerialization = [
+			'id' => (string)$statementId,
+			'property' => [ 'id' => 'P123' ],
+			'value' => [
+				'type' => 'value',
+				'content' => 'new statement value',
+			],
+		];
 		$item = NewItem::withId( $itemId )->andStatement( $oldStatement )->build();
 		$modificationRevisionId = 322;
 		$modificationTimestamp = '20221111070707';
@@ -123,7 +123,8 @@ class ReplaceItemStatementTest extends TestCase {
 			->method( 'update' )
 			->with(
 				$this->callback(
-					fn( Item $item ) => $item->getStatements()->getFirstStatementWithGuid( (string)$statementId )->equals( $newStatement )
+					fn( Item $item ) => $item->getStatements()->getFirstStatementWithGuid( (string)$statementId )
+						->equals( $this->newDeserializer()->deserialize( $newStatementSerialization ) )
 				),
 				$this->expectEquivalentMetadata( $editTags, $isBot, $comment, EditSummary::REPLACE_ACTION )
 			)
@@ -132,7 +133,7 @@ class ReplaceItemStatementTest extends TestCase {
 		$response = $this->newUseCase()->execute(
 			$this->newUseCaseRequest( [
 				'$statementId' => (string)$statementId,
-				'$statement' => $this->serializeStatement( $newStatement ),
+				'$statement' => $newStatementSerialization,
 				'$editTags' => $editTags,
 				'$isBot' => $isBot,
 				'$comment' => $comment,
@@ -155,9 +156,11 @@ class ReplaceItemStatementTest extends TestCase {
 		$originalStatement = NewStatement::noValueFor( 'P123' )
 			->withGuid( (string)$originalStatementId )
 			->build();
-		$newStatement = NewStatement::someValueFor( 'P123' )
-			->withGuid( $itemId . '$LLLLLLL-MMMM-NNNN-OOOO-PPPPPPPPPPPP' )
-			->build();
+		$newStatementSerialization = [
+			'id' => $itemId . '$LLLLLLL-MMMM-NNNN-OOOO-PPPPPPPPPPPP',
+			'property' => [ 'id' => 'P123' ],
+			'value' => [ 'type' => 'somevalue' ],
+		];
 
 		$item = NewItem::withId( $itemId )->andStatement( $originalStatement )->build();
 
@@ -171,7 +174,7 @@ class ReplaceItemStatementTest extends TestCase {
 		$response = $this->newUseCase()->execute(
 			$this->newUseCaseRequest( [
 				'$statementId' => (string)$originalStatementId,
-				'$statement' => $this->serializeStatement( $newStatement ),
+				'$statement' => $newStatementSerialization,
 			] )
 		);
 
@@ -188,7 +191,10 @@ class ReplaceItemStatementTest extends TestCase {
 		$originalStatement = NewStatement::noValueFor( 'P123' )
 			->withGuid( (string)$statementId )
 			->build();
-		$newStatement = NewStatement::noValueFor( 'P321' )->build();
+		$newStatementSerialization = [
+			'property' => [ 'id' => 'P321' ],
+			'value' => [ 'type' => 'somevalue' ],
+		];
 
 		$item = NewItem::withId( $itemId )->andStatement( $originalStatement )->build();
 
@@ -202,7 +208,7 @@ class ReplaceItemStatementTest extends TestCase {
 		$response = $this->newUseCase()->execute(
 			$this->newUseCaseRequest( [
 				'$statementId' => (string)$statementId,
-				'$statement' => $this->serializeStatement( $newStatement ),
+				'$statement' => $newStatementSerialization,
 			] )
 		);
 
@@ -214,11 +220,13 @@ class ReplaceItemStatementTest extends TestCase {
 	}
 
 	public function testInvalidStatementId_returnsInvalidStatementId(): void {
-		$newStatement = NewStatement::noValueFor( 'P123' )->build();
 		$response = $this->newUseCase()->execute(
 			$this->newUseCaseRequest( [
 				'$statementId' => 'INVALID-STATEMENT-ID',
-				'$statement' => $this->serializeStatement( $newStatement ),
+				'$statement' => [
+					'property' => [ 'id' => 'P123' ],
+					'value' => [ 'type' => 'novalue' ],
+				],
 			] )
 		);
 
@@ -351,6 +359,15 @@ class ReplaceItemStatementTest extends TestCase {
 	}
 
 	private function newValidator(): ReplaceItemStatementValidator {
+		return new ReplaceItemStatementValidator(
+			new ItemIdValidator(),
+			new StatementIdValidator( new ItemIdParser() ),
+			new StatementValidator( $this->newDeserializer() ),
+			new EditMetadataValidator( CommentStore::COMMENT_CHARACTER_LIMIT, self::ALLOWED_TAGS )
+		);
+	}
+
+	private function newDeserializer(): StatementDeserializer {
 		$entityIdParser = WikibaseRepo::getEntityIdParser();
 		$propertyValuePairDeserializer = new PropertyValuePairDeserializer(
 			$entityIdParser,
@@ -363,32 +380,17 @@ class ReplaceItemStatementTest extends TestCase {
 			)
 		);
 
-		$statementDeserializer = new StatementDeserializer(
+		return new StatementDeserializer(
 			$propertyValuePairDeserializer,
 			new ReferenceDeserializer( $propertyValuePairDeserializer )
 		);
-
-		return new ReplaceItemStatementValidator(
-			new ItemIdValidator(),
-			new StatementIdValidator( new ItemIdParser() ),
-			new StatementValidator( $statementDeserializer ),
-			new EditMetadataValidator( CommentStore::COMMENT_CHARACTER_LIMIT, self::ALLOWED_TAGS )
-		);
-	}
-
-	private function serializeStatement( Statement $statement ): array {
-		$propertyValuePairSerializer = new PropertyValuePairSerializer(
-			$this->propertyDataTypeLookup
-		);
-		$statementSerializer = new StatementSerializer(
-			$propertyValuePairSerializer,
-			new ReferenceSerializer( $propertyValuePairSerializer )
-		);
-		return $statementSerializer->serialize( $statement );
 	}
 
 	private function getValidStatementSerialization(): array {
-		return $this->serializeStatement( NewStatement::noValueFor( 'P666' )->build() );
+		return [
+			'property' => [ 'id' => 'P666' ],
+			'value' => [ 'type' => 'novalue' ],
+		];
 	}
 
 	private function newItemMetadataRetriever( LatestItemRevisionMetadataResult $result ): ItemRevisionMetadataRetriever {
