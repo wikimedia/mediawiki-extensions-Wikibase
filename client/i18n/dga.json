@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Zakaria Tunsung"
+			"Zakaria Tunsung",
+			"Linus Konkor"
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}} Bonne",
@@ -13,5 +14,6 @@
 	"wikibase-linkitem-input-site": "Kɔkɔre:",
 	"wikibase-linkitem-input-page": "Leɛree",
 	"wikibase-rc-hide-wikidata-hide": "sɔgle",
-	"wikibase-rc-hide-wikidata-show": "wulo"
+	"wikibase-rc-hide-wikidata-show": "wulo",
+	"wikibase-otherprojects": "Be tonnɔɛ mine"
 }
