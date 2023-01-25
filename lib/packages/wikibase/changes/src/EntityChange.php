@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Lib\Changes;
 
 use Exception;
@@ -22,22 +24,13 @@ class EntityChange extends DiffChange {
 	public const REMOVE = 'remove';
 	public const RESTORE = 'restore';
 
-	/**
-	 * @var EntityId|null
-	 */
-	private $entityId = null;
+	private ?EntityId $entityId = null;
 
-	/**
-	 * @return string
-	 */
-	public function getType() {
+	public function getType(): string {
 		return $this->getField( ChangeRow::TYPE );
 	}
 
-	/**
-	 * @return EntityId
-	 */
-	public function getEntityId() {
+	public function getEntityId(): EntityId {
 		if ( !$this->entityId && $this->hasField( ChangeRow::OBJECT_ID ) ) {
 			// FIXME: this should not happen
 			$this->logger->warning( 'object_id set in EntityChange, but not entityId' );
@@ -50,17 +43,13 @@ class EntityChange extends DiffChange {
 
 	/**
 	 * Set the Change's entity id (as returned by getEntityId) and the object_id field
-	 * @param EntityId $entityId
 	 */
-	public function setEntityId( EntityId $entityId ) {
+	public function setEntityId( EntityId $entityId ): void {
 		$this->entityId = $entityId;
 		$this->setField( ChangeRow::OBJECT_ID, $entityId->getSerialization() );
 	}
 
-	/**
-	 * @return string
-	 */
-	public function getAction() {
+	public function getAction(): string {
 		list( , $action ) = explode( '~', $this->getType(), 2 );
 
 		return $action;
@@ -69,9 +58,9 @@ class EntityChange extends DiffChange {
 	/**
 	 * @param string $cache set to 'cache' to cache the unserialized diff.
 	 *
-	 * @return array false if no meta data could be found in the info array
+	 * @return array
 	 */
-	public function getMetadata( $cache = 'no' ) {
+	public function getMetadata( string $cache = 'no' ): array {
 		$info = $this->getInfo( $cache );
 
 		if ( array_key_exists( ChangeRow::METADATA, $info ) ) {
@@ -91,10 +80,8 @@ class EntityChange extends DiffChange {
 	/**
 	 * Sets metadata fields. Unknown fields are ignored. New metadata is merged into
 	 * the current metadata array.
-	 *
-	 * @param array $metadata
 	 */
-	public function setMetadata( array $metadata ) {
+	public function setMetadata( array $metadata ): void {
 		$validKeys = [
 			'page_id',
 			'bot',
@@ -121,10 +108,7 @@ class EntityChange extends DiffChange {
 		$this->setField( ChangeRow::INFO, $info );
 	}
 
-	/**
-	 * @return string
-	 */
-	public function getComment() {
+	public function getComment(): string {
 		$metadata = $this->getMetadata();
 
 		// TODO: get rid of this awkward fallback and messages. Comments and messages
@@ -149,7 +133,7 @@ class EntityChange extends DiffChange {
 	 * @param int $centralUserId Central user ID, or 0 if unknown or not applicable
 	 *   (see docs/change-propagation.wiki)
 	 */
-	public function addUserMetadata( int $repoUserId, string $repoUserText, int $centralUserId ) {
+	public function addUserMetadata( int $repoUserId, string $repoUserText, int $centralUserId ): void {
 		$this->setFields( [
 			ChangeRow::USER_ID => $repoUserId,
 		] );
@@ -165,7 +149,7 @@ class EntityChange extends DiffChange {
 	/**
 	 * @param string $timestamp Timestamp in TS_MW format
 	 */
-	public function setTimestamp( $timestamp ) {
+	public function setTimestamp( string $timestamp ): void {
 		$this->setField( ChangeRow::TIME, $timestamp );
 	}
 
@@ -176,7 +160,7 @@ class EntityChange extends DiffChange {
 	 *
 	 * @return string JSON
 	 */
-	public function getSerializedInfo( $skipKeys = [] ) {
+	public function getSerializedInfo( $skipKeys = [] ): string {
 		$info = $this->getInfo();
 
 		$info = array_diff_key( $info, array_flip( $skipKeys ) );
@@ -215,7 +199,7 @@ class EntityChange extends DiffChange {
 	 * @param string $serialization
 	 * @return array the info array
 	 */
-	protected function unserializeInfo( $serialization ) {
+	protected function unserializeInfo( $serialization ): array {
 		static $factory = null;
 
 		$info = parent::unserializeInfo( $serialization );
