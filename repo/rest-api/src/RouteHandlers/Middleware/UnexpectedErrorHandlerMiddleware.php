@@ -26,7 +26,7 @@ class UnexpectedErrorHandlerMiddleware implements Middleware {
 		try {
 			return $runNext();
 		} catch ( Throwable $exception ) {
-			$this->logger->debug( (string)$exception );
+			$this->logger->error( (string)$exception );
 
 			return $this->responseFactory->newErrorResponse(
 				new ErrorResponse( ErrorResponse::UNEXPECTED_ERROR, 'Unexpected error' )

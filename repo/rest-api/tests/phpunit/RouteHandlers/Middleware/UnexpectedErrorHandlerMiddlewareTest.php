@@ -65,7 +65,7 @@ class UnexpectedErrorHandlerMiddlewareTest extends TestCase {
 		$exception = new RuntimeException();
 		$logger = $this->createMock( LoggerInterface::class );
 		$logger->expects( $this->once() )
-			->method( 'debug' )
+			->method( 'error' )
 			->with( (string)$exception );
 
 		$middleware = new UnexpectedErrorHandlerMiddleware( new ResponseFactory( new ErrorJsonPresenter() ), $logger );
