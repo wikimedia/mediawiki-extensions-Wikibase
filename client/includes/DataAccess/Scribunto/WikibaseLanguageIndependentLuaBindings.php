@@ -202,9 +202,9 @@ class WikibaseLanguageIndependentLuaBindings {
 	 * @param string $prefixedEntityId
 	 * @param string $languageCode
 	 *
-	 * @return string|null Null if language code invalid or entity couldn't be found/ no label present.
+	 * @return ?string|null Null if language code invalid or entity couldn't be found/ no label present.
 	 */
-	public function getLabelByLanguage( $prefixedEntityId, $languageCode ) {
+	public function getLabelByLanguage( string $prefixedEntityId, string $languageCode ) {
 		if ( !$this->termsLanguages->hasLanguage( $languageCode ) ) {
 			// Directly abort: Only track label usages for valid languages
 			return null;
@@ -224,6 +224,35 @@ class WikibaseLanguageIndependentLuaBindings {
 		}
 
 		return $label;
+	}
+
+	/**
+	 * @param string $prefixedEntityId
+	 * @param string $languageCode
+	 *
+	 * @return ?string|null Null if language code invalid or entity couldn't be found/ no description present.
+	 */
+	public function getDescriptionByLanguage( string $prefixedEntityId, string $languageCode ) {
+		if ( !$this->termsLanguages->hasLanguage( $languageCode ) ) {
+			// Directly abort: Only track description usages for valid languages
+			return null;
+		}
+
+		try {
+			$entityId = $this->entityIdParser->parse( $prefixedEntityId );
+		} catch ( EntityIdParsingException $e ) {
+			return null;
+		}
+
+		$this->usageAccumulator->addDescriptionUsage( $entityId, $languageCode );
+
+		try {
+			$description = $this->termLookup->getDescription( $entityId, $languageCode );
+		} catch ( TermLookupException $ex ) {
+			return null;
+		}
+
+		return $description;
 	}
 
 	/**

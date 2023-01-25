@@ -285,6 +285,19 @@ function wikibase.setupInterface( settings )
 		return php.getLabelByLanguage( id, languageCode )
 	end
 
+	-- Get the description in languageCode for the given entity id.
+	--
+	-- @param {string} id
+	-- @param {string} languageCode
+	function wikibase.getDescriptionByLang( id, languageCode )
+		incrementStatsKey( 'wikibase.client.scribunto.wikibase.getDescriptionByLang.call' )
+
+		checkType( 'getDescriptionByLang', 1, id, 'string' )
+		checkType( 'getDescriptionByLang', 2, languageCode, 'string' )
+
+		return php.getDescriptionByLanguage( id, languageCode )
+	end
+
 	-- Get the description, description language for the given entity id, if specified,
 	-- or of the connected entity, if exists.
 	--
