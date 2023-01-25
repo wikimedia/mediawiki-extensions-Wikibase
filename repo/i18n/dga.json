@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Zakaria Tunsung"
+			"Zakaria Tunsung",
+			"Linus Konkor"
 		]
 	},
 	"wikibase-edit": "maaleŋ e",
-	"wikibase-add": "paahi"
+	"wikibase-add": "paahi",
+	"wikibase-sitelinks-special": "Ziirimine"
 }
