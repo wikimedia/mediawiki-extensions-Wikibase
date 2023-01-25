@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\RestApi\RouteHandlers;
 
 use MediaWiki\Rest\Handler;
+use MediaWiki\Rest\Reporter\ErrorReporter;
 use MediaWiki\Rest\RequestData;
 use MediaWiki\Tests\Rest\Handler\HandlerTestTrait;
 use MediaWikiIntegrationTestCase;
@@ -26,6 +27,7 @@ class GetItemStatementsRouteHandlerTest extends MediaWikiIntegrationTestCase {
 		$useCase = $this->createStub( GetItemStatements::class );
 		$useCase->method( 'execute' )->willThrowException( new RuntimeException() );
 		$this->setService( 'WbRestApi.GetItemStatements', $useCase );
+		$this->setService( 'WbRestApi.ErrorReporter', $this->createStub( ErrorReporter::class ) );
 
 		$response = $this->newHandlerWithValidRequest()->execute();
 		$responseBody = json_decode( $response->getBody()->getContents() );
