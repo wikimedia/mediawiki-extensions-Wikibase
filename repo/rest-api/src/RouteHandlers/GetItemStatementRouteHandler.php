@@ -12,7 +12,6 @@ use MediaWiki\Rest\StringStream;
 use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
-use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
 use Wikibase\Repo\RestApi\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatement;
@@ -20,7 +19,6 @@ use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementErrorRespons
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementSuccessResponse;
 use Wikibase\Repo\RestApi\WbRestApi;
-use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\ParamValidator\ParamValidator;
 
 /**
@@ -56,7 +54,7 @@ class GetItemStatementRouteHandler extends SimpleHandler {
 			WbRestApi::getSerializerFactory()->newStatementSerializer(),
 			$responseFactory,
 			new MiddlewareHandler( [
-				new UnexpectedErrorHandlerMiddleware( $responseFactory, WikibaseRepo::getLogger() ),
+				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
 				new UserAgentCheckMiddleware(),
 				new AuthenticationMiddleware(),
 				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(

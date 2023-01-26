@@ -16,7 +16,10 @@ use Wikibase\Repo\RestApi\Infrastructure\DataValuesValueDeserializer;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatchValidator;
+use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\ResponseFactory;
 use Wikibase\Repo\RestApi\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\RestApi\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\RestApi\Serialization\SerializerFactory;
@@ -235,6 +238,13 @@ return [
 		return new StatementDeserializer(
 			$propertyValuePairDeserializer,
 			new ReferenceDeserializer( $propertyValuePairDeserializer )
+		);
+	},
+
+	'WbRestApi.UnexpectedErrorHandlerMiddleware' => function( MediaWikiServices $services ): UnexpectedErrorHandlerMiddleware {
+		return new UnexpectedErrorHandlerMiddleware(
+			new ResponseFactory( new ErrorJsonPresenter() ),
+			WikibaseRepo::getLogger( $services )
 		);
 	},
 

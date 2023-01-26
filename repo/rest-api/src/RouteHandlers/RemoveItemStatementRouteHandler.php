@@ -15,14 +15,12 @@ use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\BotRightCheckMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\ContentTypeCheckMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
-use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
 use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatement;
 use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatementErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatementRequest;
 use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatementSuccessResponse;
 use Wikibase\Repo\RestApi\WbRestApi;
-use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\ParamValidator\ParamValidator;
 
 /**
@@ -60,7 +58,7 @@ class RemoveItemStatementRouteHandler extends SimpleHandler {
 			WbRestApi::getRemoveItemStatement(),
 			new ResponseFactory( new ErrorJsonPresenter() ),
 			new MiddlewareHandler( [
-				new UnexpectedErrorHandlerMiddleware( $responseFactory, WikibaseRepo::getLogger() ),
+				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
 				new UserAgentCheckMiddleware(),
 				new AuthenticationMiddleware(),
 				new ContentTypeCheckMiddleware( [

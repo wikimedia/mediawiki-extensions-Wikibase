@@ -11,7 +11,6 @@ use MediaWiki\Rest\StringStream;
 use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
-use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
 use Wikibase\Repo\RestApi\Serialization\LabelsSerializer;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabels;
@@ -20,7 +19,6 @@ use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabelsRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabelsSuccessResponse;
 use Wikibase\Repo\RestApi\UseCases\ItemRedirectResponse;
 use Wikibase\Repo\RestApi\WbRestApi;
-use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\ParamValidator\ParamValidator;
 
 /**
@@ -53,7 +51,7 @@ class GetItemLabelsRouteHandler extends SimpleHandler {
 			WbRestApi::getGetItemLabels(),
 			new LabelsSerializer(),
 			new MiddlewareHandler( [
-				new UnexpectedErrorHandlerMiddleware( $responseFactory, WikibaseRepo::getLogger() ),
+				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
 				new UserAgentCheckMiddleware(),
 				new AuthenticationMiddleware(),
 				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
