@@ -382,7 +382,7 @@ class EditEntityAction extends ViewEntityAction {
 		$tableClass = 'diff diff-contentalign-' . $this->getTitle()->getPageLanguage()->alignStart();
 
 		// add Wikibase styles, the diff may include entity links with labels, including fallback indicators
-		$this->getOutput()->addModuleStyles( [ 'wikibase.alltargets', 'wikibase.desktop' ] );
+		$this->getOutput()->addModuleStyles( [ 'wikibase.alltargets' ] );
 
 		$this->getOutput()->addHTML( Html::openElement( 'table', [ 'class' => $tableClass ] ) );
 
