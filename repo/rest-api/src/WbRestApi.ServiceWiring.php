@@ -10,6 +10,7 @@ use Wikibase\Repo\RestApi\DataAccess\TermLookupItemLabelsRetriever;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemDataRetriever;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityRevisionLookupItemRevisionMetadataRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\ItemDataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
@@ -61,7 +62,7 @@ return [
 			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
 				WikibaseRepo::getEntityRevisionLookup( $services )
 			),
-			new WikibaseEntityLookupItemDataRetriever( WikibaseRepo::getEntityLookup( $services ) ),
+			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getItemUpdater( $services ),
 			new GuidGenerator(),
 			new WikibaseEntityPermissionChecker(
@@ -76,7 +77,7 @@ return [
 			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
 				WikibaseRepo::getEntityRevisionLookup( $services )
 			),
-			new WikibaseEntityLookupItemDataRetriever( WikibaseRepo::getEntityLookup( $services ) ),
+			WbRestApi::getItemDataRetriever( $services ),
 			new GetItemValidator( new ItemIdValidator() )
 		);
 	},
@@ -100,9 +101,7 @@ return [
 				new StatementIdValidator( new ItemIdParser() ),
 				new ItemIdValidator()
 			),
-			new WikibaseEntityLookupItemDataRetriever(
-				WikibaseRepo::getEntityLookup( $services )
-			),
+			WbRestApi::getItemDataRetriever( $services ),
 			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
 				WikibaseRepo::getEntityRevisionLookup( $services )
 			)
@@ -112,10 +111,17 @@ return [
 	'WbRestApi.GetItemStatements' => function( MediaWikiServices $services ): GetItemStatements {
 		return new GetItemStatements(
 			new GetItemStatementsValidator( new ItemIdValidator() ),
-			new WikibaseEntityLookupItemDataRetriever( WikibaseRepo::getEntityLookup( $services ) ),
+			WbRestApi::getItemDataRetriever( $services ),
 			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
 				WikibaseRepo::getEntityRevisionLookup( $services )
 			)
+		);
+	},
+
+	'WbRestApi.ItemDataRetriever' => function( MediaWikiServices $services ): ItemDataRetriever {
+		return new WikibaseEntityLookupItemDataRetriever(
+			WikibaseRepo::getEntityLookup( $services ),
+			new StatementReadModelConverter( WikibaseRepo::getStatementGuidParser( $services ) )
 		);
 	},
 
@@ -131,7 +137,7 @@ return [
 	},
 
 	'WbRestApi.PatchItemStatement' => function( MediaWikiServices $services ): PatchItemStatement {
-		$itemDataRetriever = new WikibaseEntityLookupItemDataRetriever( WikibaseRepo::getEntityLookup( $services ) );
+		$itemDataRetriever = WbRestApi::getItemDataRetriever( $services );
 
 		return new PatchItemStatement(
 			new PatchItemStatementValidator(
@@ -183,7 +189,7 @@ return [
 				WikibaseRepo::getEntityRevisionLookup( $services )
 			),
 			new StatementGuidParser( new ItemIdParser() ),
-			new WikibaseEntityLookupItemDataRetriever( WikibaseRepo::getEntityLookup( $services ) ),
+			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getItemUpdater( $services ),
 			new WikibaseEntityPermissionChecker(
 				WikibaseRepo::getEntityPermissionChecker( $services ),
@@ -206,7 +212,7 @@ return [
 			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
 				WikibaseRepo::getEntityRevisionLookup( $services )
 			),
-			new WikibaseEntityLookupItemDataRetriever( WikibaseRepo::getEntityLookup( $services ) ),
+			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getItemUpdater( $services ),
 			new WikibaseEntityPermissionChecker(
 				WikibaseRepo::getEntityPermissionChecker( $services ),

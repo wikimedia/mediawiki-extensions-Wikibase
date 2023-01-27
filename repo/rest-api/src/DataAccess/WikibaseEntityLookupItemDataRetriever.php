@@ -15,6 +15,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemDataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementsRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 
 /**
  * @license GPL-2.0-or-later
@@ -22,9 +23,11 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemStatementsRetriever;
 class WikibaseEntityLookupItemDataRetriever	implements ItemRetriever, ItemDataRetriever, ItemStatementsRetriever, ItemStatementRetriever {
 
 	private EntityLookup $entityLookup;
+	private StatementReadModelConverter $statementReadModelConverter;
 
-	public function __construct( EntityLookup $entityLookup ) {
+	public function __construct( EntityLookup $entityLookup, StatementReadModelConverter $statementReadModelConverter ) {
 		$this->entityLookup = $entityLookup;
+		$this->statementReadModelConverter = $statementReadModelConverter;
 	}
 
 	public function getItem( ItemId $itemId ): ?Item {
@@ -82,16 +85,7 @@ class WikibaseEntityLookupItemDataRetriever	implements ItemRetriever, ItemDataRe
 
 	private function convertDataModelStatementListToReadModel( ItemId $itemId, DataModelStatementList $list ): StatementList {
 		return new StatementList( ...array_map(
-			fn( $statement ) => new Statement(
-				new StatementGuid(
-					$itemId,
-					substr( $statement->getGuid(), strlen( (string)$itemId ) + 1 )
-				),
-				$statement->getRank(),
-				$statement->getMainSnak(),
-				$statement->getQualifiers(),
-				$statement->getReferences()
-			),
+			[ $this->statementReadModelConverter, 'convert' ],
 			iterator_to_array( $list )
 		) );
 	}
