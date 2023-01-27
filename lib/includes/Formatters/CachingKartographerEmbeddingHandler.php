@@ -12,7 +12,6 @@ use Parser;
 use ParserOptions;
 use ParserOutput;
 use RequestContext;
-use Title;
 
 /**
  * Service for embedding Kartographer mapframes for GlobeCoordinateValues.
@@ -60,7 +59,7 @@ class CachingKartographerEmbeddingHandler {
 		if ( !$this->cache->has( $cacheKey ) ) {
 			$parserOutput = $this->parser->parse(
 				$this->getWikiText( $value ),
-				Title::newFromText( 'Special:BlankPage' ),
+				RequestContext::getMain()->getTitle(),
 				$this->getParserOptions( $language )
 			);
 			$this->cache->set( $this->getCacheKey( $value, $language ), $parserOutput->getText() );
@@ -119,7 +118,7 @@ class CachingKartographerEmbeddingHandler {
 
 		return $this->parser->parse(
 			$wikiText,
-			Title::newFromText( 'Special:BlankPage' ),
+			RequestContext::getMain()->getTitle(),
 			$this->getParserOptions( $language )
 		);
 	}
