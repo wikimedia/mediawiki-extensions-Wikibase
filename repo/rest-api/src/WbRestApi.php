@@ -6,6 +6,7 @@ use MediaWiki\MediaWikiServices;
 use Psr\Container\ContainerInterface;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\RestApi\Serialization\SerializerFactory;
 use Wikibase\Repo\RestApi\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatement;
@@ -80,6 +81,11 @@ class WbRestApi {
 	public static function getStatementDeserializer( ContainerInterface $services = null ): StatementDeserializer {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.StatementDeserializer' );
+	}
+
+	public static function getUnexpectedErrorHandlerMiddleware( ContainerInterface $services = null ): UnexpectedErrorHandlerMiddleware {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.UnexpectedErrorHandlerMiddleware' );
 	}
 
 }
