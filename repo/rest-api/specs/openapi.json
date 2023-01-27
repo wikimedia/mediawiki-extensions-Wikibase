@@ -58,5 +58,8 @@
 				"url": "https://www.mediawiki.org/wiki/Wikibase/DataModel#Statements"
 			}
 		}
+	],
+	"servers": [
+		{ "url": "https://wikibase.example/w/rest.php/wikibase/v0" }
 	]
 }
