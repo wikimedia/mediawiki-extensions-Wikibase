@@ -27,12 +27,4 @@
 			</property>
 		</properties>
 	</rule>
-	<rule ref="MediaWiki.Classes.FullQualifiedClassName">
-		<severity>5</severity>
-		<properties>
-			<property name="allowMainNamespace" value="false" />
-			<property name="allowInheritance" value="false" />
-			<property name="allowFunctions" value="false" />
-		</properties>
-	</rule>
 </ruleset>
