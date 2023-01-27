@@ -8,17 +8,15 @@ use Psr\Log\LoggerInterface;
 use RuntimeException;
 use User;
 use Wikibase\DataModel\Entity\Item as DataModelItem;
-use Wikibase\DataModel\Services\Statement\StatementGuidParser;
-use Wikibase\DataModel\Statement\Statement as DataModelStatement;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Item;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdateFailed;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
 
 /**
@@ -31,7 +29,7 @@ class MediaWikiEditEntityFactoryItemUpdater implements ItemUpdater {
 	private LoggerInterface $logger;
 	private EditSummaryFormatter $summaryFormatter;
 	private PermissionManager $permissionManager;
-	private StatementGuidParser $statementIdParser;
+	private StatementReadModelConverter $statementReadModelConverter;
 
 	public function __construct(
 		IContextSource $context,
@@ -39,14 +37,14 @@ class MediaWikiEditEntityFactoryItemUpdater implements ItemUpdater {
 		LoggerInterface $logger,
 		EditSummaryFormatter $summaryFormatter,
 		PermissionManager $permissionManager,
-		StatementGuidParser $statementIdParser
+		StatementReadModelConverter $statementReadModelConverter
 	) {
 		$this->context = $context;
 		$this->editEntityFactory = $editEntityFactory;
 		$this->logger = $logger;
 		$this->summaryFormatter = $summaryFormatter;
 		$this->permissionManager = $permissionManager;
-		$this->statementIdParser = $statementIdParser;
+		$this->statementReadModelConverter = $statementReadModelConverter;
 	}
 
 	public function update( DataModelItem $item, EditMetadata $editMetadata ): ItemRevision {
@@ -91,13 +89,7 @@ class MediaWikiEditEntityFactoryItemUpdater implements ItemUpdater {
 
 	private function convertDataModelItemToReadModel( DataModelItem $item ): Item {
 		return new Item( new StatementList( ...array_map(
-			fn( DataModelStatement $statement ) => new Statement(
-				$this->statementIdParser->parse( $statement->getGuid() ),
-				$statement->getRank(),
-				$statement->getMainSnak(),
-				$statement->getQualifiers(),
-				$statement->getReferences()
-			),
+			[ $this->statementReadModelConverter, 'convert' ],
 			iterator_to_array( $item->getStatements() )
 		) ) );
 	}

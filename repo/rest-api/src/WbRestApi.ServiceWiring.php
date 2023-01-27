@@ -11,6 +11,7 @@ use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemDataRetriever;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityRevisionLookupItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
 use Wikibase\Repo\RestApi\Infrastructure\DataValuesValueDeserializer;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
@@ -125,7 +126,7 @@ return [
 			WikibaseRepo::getLogger( $services ),
 			new EditSummaryFormatter( WikibaseRepo::getSummaryFormatter( $services ) ),
 			$services->getPermissionManager(),
-			new StatementGuidParser( new ItemIdParser() )
+			new StatementReadModelConverter( new StatementGuidParser( new ItemIdParser() ) )
 		);
 	},
 

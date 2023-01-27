@@ -26,6 +26,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Item as ReadModelItem;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdateFailed;
+use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
 
@@ -198,7 +199,7 @@ class MediaWikiEditEntityFactoryItemUpdaterTest extends TestCase {
 			$this->logger,
 			$this->summaryFormatter,
 			$this->permissionManager,
-			new StatementGuidParser( new ItemIdParser() )
+			new StatementReadModelConverter( new StatementGuidParser( new ItemIdParser() ) )
 		);
 	}
 
