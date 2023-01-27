@@ -23,10 +23,6 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
-use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
-use Wikibase\Repo\RestApi\Infrastructure\DataValuesValueDeserializer;
-use Wikibase\Repo\RestApi\Serialization\PropertyValuePairDeserializer;
-use Wikibase\Repo\RestApi\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\RestApi\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatement;
@@ -40,7 +36,7 @@ use Wikibase\Repo\RestApi\Validation\StatementIdValidator;
 use Wikibase\Repo\RestApi\Validation\StatementValidator;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\RestApi\Serialization\DeserializerFactory;
 
 /**
  * @covers \Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatement
@@ -53,10 +49,6 @@ class ReplaceItemStatementTest extends TestCase {
 
 	use EditMetadataHelper;
 
-	/**
-	 * @var MockObject|PropertyDataTypeLookup
-	 */
-	private $propertyDataTypeLookup;
 	/**
 	 * @var MockObject|ItemRevisionMetadataRetriever
 	 */
@@ -78,9 +70,6 @@ class ReplaceItemStatementTest extends TestCase {
 
 	protected function setUp(): void {
 		parent::setUp();
-
-		$this->propertyDataTypeLookup = $this->createStub( PropertyDataTypeLookup::class );
-		$this->propertyDataTypeLookup->method( 'getDataTypeIdForProperty' )->willReturn( 'string' );
 
 		$this->revisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
@@ -368,22 +357,10 @@ class ReplaceItemStatementTest extends TestCase {
 	}
 
 	private function newDeserializer(): StatementDeserializer {
-		$entityIdParser = WikibaseRepo::getEntityIdParser();
-		$propertyValuePairDeserializer = new PropertyValuePairDeserializer(
-			$entityIdParser,
-			$this->propertyDataTypeLookup,
-			new DataValuesValueDeserializer(
-				new DataTypeFactoryValueTypeLookup( WikibaseRepo::getDataTypeFactory() ),
-				$entityIdParser,
-				WikibaseRepo::getDataValueDeserializer(),
-				WikibaseRepo::getDataTypeValidatorFactory()
-			)
-		);
+		$propertyDataTypeLookup = $this->createStub( PropertyDataTypeLookup::class );
+		$propertyDataTypeLookup->method( 'getDataTypeIdForProperty' )->willReturn( 'string' );
 
-		return new StatementDeserializer(
-			$propertyValuePairDeserializer,
-			new ReferenceDeserializer( $propertyValuePairDeserializer )
-		);
+		return DeserializerFactory::newStatementDeserializer( $propertyDataTypeLookup );
 	}
 
 	private function getValidStatementSerialization(): array {

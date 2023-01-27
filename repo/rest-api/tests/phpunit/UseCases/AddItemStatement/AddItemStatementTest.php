@@ -21,11 +21,6 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
-use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
-use Wikibase\Repo\RestApi\Infrastructure\DataValuesValueDeserializer;
-use Wikibase\Repo\RestApi\Serialization\PropertyValuePairDeserializer;
-use Wikibase\Repo\RestApi\Serialization\ReferenceDeserializer;
-use Wikibase\Repo\RestApi\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementRequest;
@@ -37,7 +32,7 @@ use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\StatementValidator;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\RestApi\Serialization\DeserializerFactory;
 
 /**
  * @covers \Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatement
@@ -229,26 +224,11 @@ class AddItemStatementTest extends TestCase {
 	}
 
 	private function newValidator(): AddItemStatementValidator {
-		$entityIdParser = WikibaseRepo::getEntityIdParser();
-		$propertyValuePairDeserializer = new PropertyValuePairDeserializer(
-			$entityIdParser,
-			$this->createStub( PropertyDataTypeLookup::class ),
-			new DataValuesValueDeserializer(
-				new DataTypeFactoryValueTypeLookup( WikibaseRepo::getDataTypeFactory() ),
-				$entityIdParser,
-				WikibaseRepo::getDataValueDeserializer(),
-				WikibaseRepo::getDataTypeValidatorFactory()
-			)
-		);
-
-		$statementDeserializer = new StatementDeserializer(
-			$propertyValuePairDeserializer,
-			new ReferenceDeserializer( $propertyValuePairDeserializer )
-		);
-
 		return new AddItemStatementValidator(
 			new ItemIdValidator(),
-			new StatementValidator( $statementDeserializer ),
+			new StatementValidator( DeserializerFactory::newStatementDeserializer(
+				$this->createStub( PropertyDataTypeLookup::class )
+			) ),
 			new EditMetadataValidator(
 				CommentStore::COMMENT_CHARACTER_LIMIT,
 				self::ALLOWED_TAGS

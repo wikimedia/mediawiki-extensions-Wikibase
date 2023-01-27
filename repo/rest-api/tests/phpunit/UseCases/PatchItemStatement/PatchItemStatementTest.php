@@ -28,14 +28,9 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
-use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
-use Wikibase\Repo\RestApi\Infrastructure\DataValuesValueDeserializer;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
-use Wikibase\Repo\RestApi\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\RestApi\Serialization\PropertyValuePairSerializer;
-use Wikibase\Repo\RestApi\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\RestApi\Serialization\ReferenceSerializer;
-use Wikibase\Repo\RestApi\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatement;
@@ -48,7 +43,7 @@ use Wikibase\Repo\RestApi\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Validation\ValidationError;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\RestApi\Serialization\DeserializerFactory;
 
 /**
  * @covers \Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatement
@@ -517,22 +512,9 @@ class PatchItemStatementTest extends TestCase {
 	}
 
 	private function newStatementValidator(): StatementValidator {
-		$entityIdParser = WikibaseRepo::getEntityIdParser();
-		$propertyValuePairDeserializer = new PropertyValuePairDeserializer(
-			$entityIdParser,
-			$this->newDataTypeLookup(),
-			new DataValuesValueDeserializer(
-				new DataTypeFactoryValueTypeLookup( WikibaseRepo::getDataTypeFactory() ),
-				$entityIdParser,
-				WikibaseRepo::getDataValueDeserializer(),
-				WikibaseRepo::getDataTypeValidatorFactory()
-			)
+		return new StatementValidator(
+			DeserializerFactory::newStatementDeserializer( $this->newDataTypeLookup() )
 		);
-
-		return new StatementValidator( new StatementDeserializer(
-			$propertyValuePairDeserializer,
-			new ReferenceDeserializer( $propertyValuePairDeserializer )
-		) );
 	}
 
 	private function newDataTypeLookup(): PropertyDataTypeLookup {
