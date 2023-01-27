@@ -38,22 +38,23 @@ class ImportFederatedPropertiesSampleData extends Maintenance {
 		$lineDelimiter = $this->getOption( 'delimiter', "\t" );
 
 		$entityStore = WikibaseRepo::getEntityStore();
+		$user = User::newSystemUser( User::MAINTENANCE_SCRIPT_USER, [ 'steal' => true ] );
 
 		foreach ( $this->getDataToImport( $dataFile ) as $dataline ) {
 			if ( $dataline !== '' ) {
 				$dataArray = explode( $lineDelimiter, $dataline );
-				$this->storeNewItemWithTermData( $dataArray, $entityStore );
+				$this->storeNewItemWithTermData( $dataArray, $entityStore, $user );
 			}
 		}
 		$this->output( 'Created new Items from data file:' . $dataFile . "\n" );
 	}
 
-	public function storeNewItemWithTermData( array $data, EntityStore $entityStore ) {
+	public function storeNewItemWithTermData( array $data, EntityStore $entityStore, User $user ) {
 		$item = new Item();
 		$item->setLabel( 'en', $data[0] );
 		$item->setDescription( 'en', $data[1] );
 
-		$entityStore->saveEntity( $item, 'Create new Item', User::newFromName( 'Maintenance script' ), EDIT_NEW );
+		$entityStore->saveEntity( $item, 'Create new Item', $user, EDIT_NEW );
 
 		return $item;
 	}

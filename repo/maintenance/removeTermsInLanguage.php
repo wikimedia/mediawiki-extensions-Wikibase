@@ -41,6 +41,7 @@ class RemoveTermsInLanguage extends Maintenance {
 		$entityIdParser = WikibaseRepo::getEntityIdParser();
 		$entityRevisionLookup = WikibaseRepo::getEntityRevisionLookup();
 		$entityStore = WikibaseRepo::getEntityStore();
+		$user = User::newSystemUser( User::MAINTENANCE_SCRIPT_USER, [ 'steal' => true ] );
 
 		foreach ( $idSerializations as $idSerialization ) {
 
@@ -76,7 +77,7 @@ class RemoveTermsInLanguage extends Maintenance {
 			$entityStore->saveEntity(
 				$entity,
 				'Removed terms in language ' . $language,
-				User::newFromName( 'Maintenance script' ),
+				$user,
 				EDIT_UPDATE,
 				$entityRevision->getRevisionId()
 			);
