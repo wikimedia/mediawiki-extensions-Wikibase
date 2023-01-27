@@ -49,7 +49,7 @@
 	"wikibase-rc-hide-wikidata-show": "Prikaži",
 	"wikibase-rc-show-wikidata-pref": "V zadnjih spremembah prikaži urejanja projekta {{WBREPONAME}}",
 	"wikibase-rc-wikibase-edit-letter": "P",
-	"wikibase-rc-wikibase-edit-title": "Urejanje v {{WBREPONAME}}",
+	"wikibase-rc-wikibase-edit-title": "Urejanje v projektu {{WBREPONAME}}",
 	"wikibase-rcfilters-hide-wikibase-label": "Urejanja v {{GRAMMAR:mestnik|{{WBREPONAME}}}}",
 	"wikibase-rcfilters-hide-wikibase-description": "Urejanja, ki izvirajo iz projekta {{WBREPONAME}}.",
 	"wikibase-rcfilters-hide-wikibase-conflicts-ores": "Ta filter je v navzkrižju z enim ali več filtri kakovosti prispevka ali namena uporabnika. Predvidevanje kakovosti in namena za urejanja projekta {{WBREPONAME}} ni na voljo.",
