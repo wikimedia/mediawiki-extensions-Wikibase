@@ -376,10 +376,6 @@
 			},
 			"messages": [
 				"wikibase-editlinkstitle"
-			],
-			"dependencies": [
-				"mw.config.values.wbRepo",
-				"oojs-ui.styles.icons-editing-core"
 			]
 		},
 		"wikibase.client.linkitem.init": {
