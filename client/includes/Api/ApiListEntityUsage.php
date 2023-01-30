@@ -88,6 +88,7 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 
 			if ( $resultPageSet !== null ) {
 				$resultPageSet->processDbRow( $row );
+				continue;
 			}
 
 			if ( $previousRow !== null && $row->eu_page_id !== $previousRow->eu_page_id ) {

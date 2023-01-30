@@ -5,6 +5,7 @@ declare( strict_types=1 );
 namespace Wikibase\Client\Tests\Integration\Api;
 
 use ApiMain;
+use ApiPageSet;
 use FauxRequest;
 use MediaWikiLangTestCase;
 use RequestContext;
@@ -130,6 +131,15 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 		return $data;
 	}
 
+	private function callApiModuleAsGenerator( array $params ): ApiPageSet {
+		$module = $this->getListEntityUsageModule( $params );
+		$pageSet = new ApiPageSet( $module );
+
+		$module->executeGenerator( $pageSet );
+
+		return $pageSet;
+	}
+
 	public function entityUsageProvider(): array {
 		return [
 			'only Q3' => [
@@ -231,6 +241,19 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 		$this->assertArrayHasKey( 'query', $result );
 		$this->assertArrayHasKey( 'pages', $result['query'] );
 		$this->assertSame( $expected, $result['query']['pages'] );
+	}
+
+	/** @dataProvider entityUsageProvider */
+	public function testEntityUsageAsGenerator( array $params, array $expected ): void {
+		$pageSet = $this->callApiModuleAsGenerator( $params );
+
+		$pages = $pageSet->getGoodPages();
+		$this->assertCount( count( $expected ), $pages );
+		foreach ( $pages as $page ) {
+			$expectedPage = $expected[$page->getId()];
+			$this->assertSame( $expectedPage['ns'], $page->getNamespace() );
+			$this->assertSame( $expectedPage['title'], $page->getDBkey() );
+		}
 	}
 
 }
