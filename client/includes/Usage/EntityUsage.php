@@ -19,12 +19,9 @@ use Wikibase\DataModel\Entity\EntityId;
 class EntityUsage {
 
 	/**
-	 * Usage flag indicating that the entity's sitelinks were used as links.
-	 * This would be the case when generating language links or sister links from
-	 * an entity's sitelinks, for display in the sidebar.
-	 *
-	 * @note: This does NOT cover sitelinks used in wikitext (e.g. via Lua).
-	 *        Use OTHER_USAGE for that.
+	 * Usage flag indicating that the entity's sitelinks (including badges) were used.
+	 * This would, for example, be the case when generating language links or sister links
+	 * from an entity's sitelinks, for display in the sidebar.
 	 */
 	public const SITELINK_USAGE = 'S';
 
