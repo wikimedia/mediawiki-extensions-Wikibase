@@ -87,10 +87,19 @@ return call_user_func( function() {
 		],
 
 		// Common styles independent from JavaScript being enabled or disabled.
-		'wikibase.common' => $moduleTemplate + [
+
+		// all targets (desktop+mobile)
+		'wikibase.alltargets' => $moduleTemplate + [
+			'targets' => [ 'desktop', 'mobile' ],
+			'styles' => [
+				'wikibase/wikibase.badgedisplay.less',
+			],
+		],
+
+		// desktop-only (though some of these should be on mobile too, see T326428)
+		'wikibase.desktop' => $moduleTemplate + [
 			'targets' => [ 'desktop' ],
 			'styles' => [
-				// Order must be hierarchical, do not order alphabetically
 				'wikibase/wikibase.less',
 				'jquery/wikibase/themes/default/jquery.wikibase.aliasesview.css',
 				'jquery/wikibase/themes/default/jquery.wikibase.descriptionview.css',
@@ -107,6 +116,7 @@ return call_user_func( function() {
 			],
 		],
 
+		// mobile-only
 		'wikibase.mobile' => $moduleTemplate + [
 			'styles' => [
 				'wikibase/wikibase.mobile.css',
@@ -114,6 +124,30 @@ return call_user_func( function() {
 			],
 			'targets' => 'mobile',
 		],
+
+		// deprecated: this is effectively wikibase.alltargets + wikibase.desktop, use those instead
+		'wikibase.common' => $moduleTemplate + [
+			'targets' => [ 'desktop' ],
+			'styles' => [
+				// Order must be hierarchical, do not order alphabetically
+				'wikibase/wikibase.less',
+				'jquery/wikibase/themes/default/jquery.wikibase.aliasesview.css',
+				'jquery/wikibase/themes/default/jquery.wikibase.descriptionview.css',
+				'jquery/wikibase/themes/default/jquery.wikibase.entityview.less',
+				'jquery/wikibase/themes/default/jquery.wikibase.entitytermsview.css',
+				'jquery/wikibase/themes/default/jquery.wikibase.entitytermsforlanguagelistview.css',
+				'jquery/wikibase/themes/default/jquery.wikibase.entitytermsforlanguageview.css',
+				'jquery/wikibase/themes/default/jquery.wikibase.labelview.css',
+				'jquery/wikibase/themes/default/jquery.wikibase.sitelinkgrouplistview.css',
+				'jquery/wikibase/themes/default/jquery.wikibase.sitelinkgroupview.css',
+				'jquery/wikibase/themes/default/jquery.wikibase.sitelinklistview.css',
+				'wikibase/wikibase.badgedisplay.less',
+				'jquery/wikibase/themes/default/jquery.wikibase.sitelinkview.css',
+				'jquery/wikibase/themes/default/jquery.wikibase.statementgroupview.css',
+			],
+		],
+
+		// end of common styles independent from JavaScript being enabled or disabled
 
 		'wikibase.templates' => $moduleTemplate + [
 			'class' => TemplateModule::class,

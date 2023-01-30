@@ -1,0 +1,32 @@
+/**
+ * Badge styles for desktop and mobile:
+ * used in wikibase-sitelinkview, but also Special:AvailableBadges.
+ *
+ * Note that jquery.wikibase.sitelinkview.css has another style for the empty badge,
+ * which is only shown when editing and not needed on Special:AvailableBadges.
+ *
+ * @license GNU GPL v2+
+ */
+
+.wb-badge {
+	/* SVG support using a transparent gradient to guarantee cross-browser
+	 * compatibility (browsers able to understand gradient syntax support also SVG).
+	 * http://pauginer.tumblr.com/post/36614680636/invisible-gradient-technique */
+	background-image: url( ../jquery/wikibase/themes/default/images/wb-badges-default.png );
+	/* @embed */
+	background-image: linear-gradient( transparent, transparent ), url( ../jquery/wikibase/themes/default/images/wb-badges-default.svg );
+	background-repeat: no-repeat;
+	background-position: 0 center;
+	display: inline-block;
+	height: 19px;
+	vertical-align: middle;
+	width: 12px;
+}
+
+.wb-badge:first-child {
+	margin-left: 0.4em;
+}
+
+.wb-badge:not( :last-child ) {
+	margin-right: 4px;
+}
