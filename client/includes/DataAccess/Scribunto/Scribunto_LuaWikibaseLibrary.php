@@ -385,8 +385,6 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 * @throws ScribuntoException
 	 */
 	public function getEntity( string $prefixedEntityId ): array {
-		$this->checkType( 'getEntity', 1, $prefixedEntityId, 'string' );
-
 		try {
 			$entityArr = $this->getEntityAccessor()->getEntity( $prefixedEntityId );
 			return [ $entityArr ];
@@ -424,10 +422,6 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			);
 		}
 
-		$this->checkType( 'getReferencedEntityId', 1, $prefixedFromEntityId, 'string' );
-		$this->checkType( 'getReferencedEntityId', 2, $prefixedPropertyId, 'string' );
-		$this->checkType( 'getReferencedEntityId', 3, $prefixedToIds, 'table' );
-
 		$fromId = $this->parseUserGivenEntityId( $prefixedFromEntityId );
 		$propertyId = $this->parseUserGivenEntityId( $prefixedPropertyId );
 		$toIds = array_map(
@@ -451,8 +445,6 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 * @return bool[]
 	 */
 	public function entityExists( string $prefixedEntityId ): array {
-		$this->checkType( 'entityExists', 1, $prefixedEntityId, 'string' );
-
 		try {
 			return [ $this->getEntityAccessor()->entityExists( $prefixedEntityId ) ];
 		} catch ( EntityIdParsingException $ex ) {
@@ -471,10 +463,6 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 * @throws ScribuntoException
 	 */
 	public function getEntityStatements( string $prefixedEntityId, string $propertyId, string $rank ): array {
-		$this->checkType( 'getEntityStatements', 1, $prefixedEntityId, 'string' );
-		$this->checkType( 'getEntityStatements', 2, $propertyId, 'string' );
-		$this->checkType( 'getEntityStatements', 3, $rank, 'string' );
-
 		try {
 			$statements = $this->getEntityAccessor()->getEntityStatements( $prefixedEntityId, $propertyId, $rank );
 		} catch ( EntityAccessLimitException $ex ) {
@@ -494,9 +482,6 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 * Wrapper for getEntityId in WikibaseLanguageIndependentLuaBindings
 	 */
 	public function getEntityId( string $pageTitle, string $globalSiteId = null ): array {
-		$this->checkType( 'getEntityId', 1, $pageTitle, 'string' );
-		$this->checkTypeOptional( 'getEntityId', 2, $globalSiteId, 'string', null );
-
 		return [ $this->getLanguageIndependentLuaBindings()->getEntityId( $pageTitle, $globalSiteId ) ];
 	}
 
@@ -506,8 +491,6 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 * @return string[]|null[]
 	 */
 	public function getEntityUrl( string $entityIdSerialization ): array {
-		$this->checkType( 'getEntityUrl', 1, $entityIdSerialization, 'string' );
-
 		try {
 			$url = $this->getRepoLinker()->getEntityUrl(
 				$this->getEntityIdParser()->parse( $entityIdSerialization )
@@ -536,8 +519,6 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 * @return string[]|null[]
 	 */
 	public function getLabel( string $prefixedEntityId ): array {
-		$this->checkType( 'getLabel', 1, $prefixedEntityId, 'string' );
-
 		return $this->getLanguageDependentLuaBindings()->getLabel( $prefixedEntityId );
 	}
 
@@ -548,9 +529,6 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 * @return string[]|null[]
 	 */
 	public function getLabelByLanguage( string $prefixedEntityId, string $languageCode ): array {
-		$this->checkType( 'getLabelByLanguage', 1, $prefixedEntityId, 'string' );
-		$this->checkType( 'getLabelByLanguage', 2, $languageCode, 'string' );
-
 		return [ $this->getLanguageIndependentLuaBindings()->getLabelByLanguage( $prefixedEntityId, $languageCode ) ];
 	}
 
@@ -561,8 +539,6 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 * @return string[]|null[]
 	 */
 	public function getDescription( string $prefixedEntityId ): array {
-		$this->checkType( 'getDescription', 1, $prefixedEntityId, 'string' );
-
 		return $this->getLanguageDependentLuaBindings()->getDescription( $prefixedEntityId );
 	}
 
@@ -573,9 +549,6 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 * @return string[]|null[]
 	 */
 	public function getDescriptionByLanguage( string $prefixedEntityId, string $languageCode ): array {
-		$this->checkType( 'getDescriptionByLanguage', 1, $prefixedEntityId, 'string' );
-		$this->checkType( 'getDescriptionByLanguage', 2, $languageCode, 'string' );
-
 		return [ $this->getLanguageIndependentLuaBindings()->getDescriptionByLanguage( $prefixedEntityId, $languageCode ) ];
 	}
 
@@ -585,9 +558,6 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 * @return string[]
 	 */
 	public function getSiteLinkPageName( string $prefixedItemId, ?string $globalSiteId ): array {
-		$this->checkType( 'getSiteLinkPageName', 1, $prefixedItemId, 'string' );
-		$this->checkTypeOptional( 'getSiteLinkPageName', 2, $globalSiteId, 'string', null );
-
 		return [ $this->getLanguageIndependentLuaBindings()->getSiteLinkPageName( $prefixedItemId, $globalSiteId ) ];
 	}
 
@@ -598,8 +568,6 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 * @return bool[] One bool telling whether the entity id is valid (parseable).
 	 */
 	public function isValidEntityId( string $entityIdSerialization ): array {
-		$this->checkType( 'isValidEntityId', 1, $entityIdSerialization, 'string' );
-
 		return [ $this->getLanguageIndependentLuaBindings()->isValidEntityId( $entityIdSerialization ) ];
 	}
 
@@ -610,8 +578,6 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 * @return string[] Wikitext
 	 */
 	public function renderSnak( array $snakSerialization ): array {
-		$this->checkType( 'renderSnak', 1, $snakSerialization, 'table' );
-
 		try {
 			return [
 				$this->getSnakSerializationRenderer(
@@ -630,8 +596,6 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 * @return string[] Wikitext
 	 */
 	public function formatValue( array $snakSerialization ): array {
-		$this->checkType( 'formatValue', 1, $snakSerialization, 'table' );
-
 		try {
 			return [
 				$this->getSnakSerializationRenderer(
@@ -652,8 +616,6 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 * @return string[] Wikitext
 	 */
 	public function renderSnaks( array $snaksSerialization ): array {
-		$this->checkType( 'renderSnaks', 1, $snaksSerialization, 'table' );
-
 		try {
 			return [
 				$this->getSnakSerializationRenderer(
@@ -674,8 +636,6 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 * @return string[] Wikitext
 	 */
 	public function formatValues( array $snaksSerialization ): array {
-		$this->checkType( 'formatValues', 1, $snaksSerialization, 'table' );
-
 		try {
 			return [
 				$this->getSnakSerializationRenderer(
@@ -693,7 +653,6 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 * @return string[]|null[]
 	 */
 	public function resolvePropertyId( string $propertyLabelOrId ): array {
-		$this->checkType( 'resolvePropertyId', 1, $propertyLabelOrId, 'string' );
 		try {
 			$propertyId = $this->getPropertyIdResolver()->resolvePropertyId(
 				$propertyLabelOrId,
@@ -758,8 +717,6 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 * @return string[]
 	 */
 	public function getEntityModuleName( string $prefixedEntityId ): array {
-		$this->checkType( 'getEntityModuleName', 1, $prefixedEntityId, 'string' );
-
 		try {
 			$entityId = $this->getEntityIdParser()->parse( $prefixedEntityId );
 			$type = $entityId->getEntityType();
