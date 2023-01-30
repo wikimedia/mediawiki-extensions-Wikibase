@@ -19,7 +19,7 @@
 		var itemUrl = repoConfig.url + repoConfig.articlePath.replace( '$1', 'Special:EntityPage/' + itemId ) + '#sitelinks';
 
 		mw.uls.ActionsMenuItemsRegistry.register( {
-			name: 'cxTranslate',
+			name: 'wikibaseItemLink',
 			icon: 'edit',
 			text: mw.msg( 'wikibase-editlinkstitle' ),
 			href: itemUrl
