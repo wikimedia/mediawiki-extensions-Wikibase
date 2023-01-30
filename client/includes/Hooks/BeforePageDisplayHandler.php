@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Hooks;
 
 use MediaWiki\Hook\BeforePageDisplayHook;
@@ -19,17 +21,11 @@ use Wikibase\Lib\SettingsArray;
  */
 class BeforePageDisplayHandler implements BeforePageDisplayHook {
 
-	/**
-	 * @var NamespaceChecker
-	 */
-	private $namespaceChecker;
+	private NamespaceChecker $namespaceChecker;
 
-	/**
-	 * @var bool
-	 */
-	private $dataBridgeEnabled;
+	private bool $dataBridgeEnabled;
 
-	public function __construct( NamespaceChecker $namespaceChecker, $dataBridgeEnabled ) {
+	public function __construct( NamespaceChecker $namespaceChecker, bool $dataBridgeEnabled ) {
 		$this->namespaceChecker = $namespaceChecker;
 		$this->dataBridgeEnabled = $dataBridgeEnabled;
 	}
@@ -53,11 +49,7 @@ class BeforePageDisplayHandler implements BeforePageDisplayHook {
 		$this->addModules( $out, $actionName, $skin );
 	}
 
-	/**
-	 * @param OutputPage $out
-	 * @param string $actionName
-	 */
-	public function addModules( OutputPage $out, $actionName, Skin $skin ) {
+	public function addModules( OutputPage $out, string $actionName, Skin $skin ): void {
 		$title = $out->getTitle();
 
 		if ( !$title || !$this->namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
@@ -68,7 +60,7 @@ class BeforePageDisplayHandler implements BeforePageDisplayHook {
 		$this->addJsModules( $out, $title, $actionName, $skin );
 	}
 
-	private function addStyleModules( OutputPage $out, Title $title, $actionName ) {
+	private function addStyleModules( OutputPage $out, Title $title, string $actionName ): void {
 		// styles are not appropriate for cologne blue and should leave styling up to other skins
 		if ( $this->hasEditOrAddLinks( $out, $title, $actionName ) ) {
 			$out->addModuleStyles( 'wikibase.client.init' );
@@ -79,7 +71,7 @@ class BeforePageDisplayHandler implements BeforePageDisplayHook {
 		}
 	}
 
-	private function addJsModules( OutputPage $out, Title $title, $actionName, Skin $skin ) {
+	private function addJsModules( OutputPage $out, Title $title, $actionName, Skin $skin ): void {
 		$user = $out->getUser();
 
 		if ( $this->hasLinkItemWidget( $user, $out, $title, $actionName ) ) {
@@ -97,7 +89,7 @@ class BeforePageDisplayHandler implements BeforePageDisplayHook {
 		}
 	}
 
-	private function hasEditOrAddLinks( OutputPage $out, Title $title, $actionName ) {
+	private function hasEditOrAddLinks( OutputPage $out, Title $title, string $actionName ): bool {
 		if (
 			!in_array( $actionName, [ 'view', 'submit' ] ) ||
 			$this->allLinksAreSuppressed( $out ) ||
@@ -109,7 +101,7 @@ class BeforePageDisplayHandler implements BeforePageDisplayHook {
 		return true;
 	}
 
-	private function allLinksAreSuppressed( OutputPage $outputPage ) {
+	private function allLinksAreSuppressed( OutputPage $outputPage ): bool {
 		$noexternallanglinks = $outputPage->getProperty( 'noexternallanglinks' );
 
 		if ( $noexternallanglinks !== null ) {
@@ -119,7 +111,7 @@ class BeforePageDisplayHandler implements BeforePageDisplayHook {
 		return false;
 	}
 
-	private function hasLinkItemWidget( User $user, OutputPage $outputPage, Title $title, $actionName ) {
+	private function hasLinkItemWidget( User $user, OutputPage $outputPage, Title $title, string $actionName ): bool {
 		if (
 			$outputPage->getLanguageLinks() !== [] || !$user->isRegistered()
 			|| !$this->hasEditOrAddLinks( $outputPage, $title, $actionName )
