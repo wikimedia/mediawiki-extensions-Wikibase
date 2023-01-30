@@ -347,7 +347,7 @@
 	"wikibase-api-not-recognized-siteid": "지정한 사이트 식별자는 인식하지 않았습니다.",
 	"wikibase-api-not-recognized": "잘못된 속성을 요청했습니다: $1.",
 	"wikibase-api-not-recognized-array": "배열을 예상했지만 찾을 수 없습니다.",
-	"wikibase-api-not-recognized-language": "지정한 언어 식별자는 인식하지 않았습니다.",
+	"wikibase-api-not-recognized-language": "지정한 언어 코드 \"$1\"는 인식되지 않았습니다.",
 	"wikibase-api-not-recognized-string": "문자열을 예상했지만 찾을 수 없습니다.",
 	"wikibase-api-permissiondenied": "이 작업의 수행에 필요한 권한이 없습니다.",
 	"wikibase-api-wrong-class": "찾은 페이지의 내용은 올바른 형식이 아닙니다.",

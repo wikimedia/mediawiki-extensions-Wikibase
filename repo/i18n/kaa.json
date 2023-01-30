@@ -17,5 +17,6 @@
 	"wikibase-label-empty": "Belgilenbegen",
 	"wikibase-description-empty": "Heshqanday minezleme belgilenbegen",
 	"wikibase-sitelinks-special": "Basqa saytlar",
-	"wikibase-validator-illegal-string-chars": "Qatar boslıq penen baslanbawı yamasa tawsılmawı, sonıń menen birge, vertikal boslıq yamasa qosımsha betlerdi óz ishine almawı tiyis: $1"
+	"wikibase-validator-illegal-string-chars": "Qatar boslıq penen baslanbawı yamasa tawsılmawı, sonıń menen birge, vertikal boslıq yamasa qosımsha betlerdi óz ishine almawı tiyis: $1",
+	"wikibase-gotolinkedpage-submit": "Ótiw"
 }
