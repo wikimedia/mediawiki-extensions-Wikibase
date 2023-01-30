@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\DataAccess\Scribunto;
 
 use InvalidArgumentException;
@@ -11,8 +13,10 @@ use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\MaxReferencedEntityVisitsExhaustedException;
 use Wikibase\DataModel\Services\Lookup\MaxReferenceDepthExhaustedException;
 use Wikibase\DataModel\Services\Lookup\ReferencedEntityIdLookup;
@@ -97,6 +101,8 @@ class WikibaseLanguageIndependentLuaBindings {
 	 */
 	private $redirectTargetLookup;
 
+	private EntityLookup $entityLookup;
+
 	public function __construct(
 		SiteLinkLookup $siteLinkLookup,
 		EntityIdLookup $entityIdLookup,
@@ -109,7 +115,8 @@ class WikibaseLanguageIndependentLuaBindings {
 		TitleFormatter $titleFormatter,
 		TitleParser $titleParser,
 		string $siteId,
-		RevisionBasedEntityRedirectTargetLookup $redirectTargetLookup
+		RevisionBasedEntityRedirectTargetLookup $redirectTargetLookup,
+		EntityLookup $entityLookup
 	) {
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->entityIdLookup = $entityIdLookup;
@@ -123,6 +130,7 @@ class WikibaseLanguageIndependentLuaBindings {
 		$this->titleParser = $titleParser;
 		$this->siteId = $siteId;
 		$this->redirectTargetLookup = $redirectTargetLookup;
+		$this->entityLookup = $entityLookup;
 	}
 
 	/**
@@ -298,6 +306,51 @@ class WikibaseLanguageIndependentLuaBindings {
 		}
 
 		return null;
+	}
+
+	/**
+	 * @param string $prefixedItemId
+	 * @param string|null $globalSiteId
+	 *
+	 * @return string[]
+	 */
+	public function getBadges( string $prefixedItemId, ?string $globalSiteId ): array {
+		$globalSiteId = $globalSiteId ?: $this->siteId;
+
+		try {
+			$itemId = new ItemId( $prefixedItemId );
+		} catch ( InvalidArgumentException $e ) {
+			return [];
+		}
+
+		$itemIdAfterRedirectResolution = $this->redirectTargetLookup->getRedirectForEntityId( $itemId ) ?? $itemId;
+
+		$this->usageAccumulator->addSiteLinksUsage( $itemIdAfterRedirectResolution );
+		if ( !$itemId->equals( $itemIdAfterRedirectResolution ) ) {
+			// it's a redirect. We want to know if anything happens to it.
+			$this->usageAccumulator->addAllUsage( $itemId );
+		}
+
+		/** @var Item|null */
+		$item = $this->entityLookup->getEntity( $itemIdAfterRedirectResolution );
+		'@phan-var Item|null $item';
+		if ( !$item || !$item->hasLinkToSite( $globalSiteId ) ) {
+			return [];
+		}
+		$siteLink = $item->getSiteLink( $globalSiteId );
+
+		$badges = array_map( static function ( ItemId $itemId ): string {
+			return $itemId->getSerialization();
+		}, $siteLink->getBadges() );
+
+		if ( !$badges ) {
+			return [];
+		}
+
+		// Lua tables start at 1
+		return array_combine(
+			range( 1, count( $badges ) ), $badges
+		);
 	}
 
 	/**

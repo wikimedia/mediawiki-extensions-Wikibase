@@ -119,7 +119,8 @@ class WikibaseDataAccessTestItemSetUpHelper {
 		$siteLinks = [ $siteLink ];
 		$siteLinks[] = new SiteLink(
 			'fooSiteId',
-			'FooBarFoo'
+			'FooBarFoo',
+			[ new ItemId( 'Q10001' ), new ItemId( 'Q10002' ) ]
 		);
 
 		$labels = [

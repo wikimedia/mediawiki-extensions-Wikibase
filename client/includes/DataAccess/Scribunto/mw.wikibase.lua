@@ -371,6 +371,27 @@ function wikibase.setupInterface( settings )
 		return php.entityExists( entityId )
 	end
 
+	-- Return a list of badges from an item for a certain site (or the local wiki).
+	--
+	-- @param {string} itemId
+	-- @param {string} [globalSiteId]
+	function wikibase.getBadges( itemId, globalSiteId )
+		incrementStatsKey( 'wikibase.client.scribunto.wikibase.getBadges.call' )
+
+		checkType( 'getBadges', 1, itemId, 'string' )
+		checkTypeMulti( 'getBadges', 2, globalSiteId, { 'string', 'nil' } )
+
+		if itemId ~= wikibase.getEntityIdForCurrentPage() then
+			if not settings.allowArbitraryDataAccess then
+				error( 'Access to arbitrary entities has been disabled.', 2 )
+			end
+			-- Currently the whole entity needs to be loaded (PHP side), thus making this expensive.
+			php.incrementExpensiveFunctionCount()
+		end
+
+		return php.getBadges( itemId, globalSiteId )
+	end
+
 	-- Render a Snak value from its serialization as wikitext escaped plain text.
 	--
 	-- @param {table} snakSerialization

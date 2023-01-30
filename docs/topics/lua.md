@@ -14,6 +14,7 @@ On multilingual wikis accessing labels is based on user's language rather than W
 |Label by language, without fallbacks|[getLabelByLang](#mw.wikibase.getLabelByLang "wikilink")|NA|
 |Description by language, without fallbacks|[getDescriptionByLang](#mw.wikibase.getDescriptionByLang "wikilink")|NA|
 |Sitelinks|[getSitelink](#mw.wikibase.getSitelink "wikilink")|[getSitelink](#mw.wikibase.entity:getSitelink "wikilink")|
+|Badges|[getBadges](#mw.wikibase.getBadges "wikilink")|NA|
 |Descriptions|[getDescription](#mw.wikibase.getDescription "wikilink")/[getDescriptionWithLang](#mw.wikibase.getDescriptionWithLang "wikilink")|[getDescription](#mw.wikibase.entity:getDescription "wikilink")/[getDescriptionWithLang](#mw.wikibase.entity:getDescriptionWithLang "wikilink")|
 |Statements|[getBestStatements](#mw.wikibase.getBestStatements "wikilink")|[getBestStatements](#mw.wikibase.entity:getBestStatements "wikilink")|
 ||[getAllStatements](#mw.wikibase.getAllStatements "wikilink")|[getAllStatements](#mw.wikibase.entity:getAllStatements "wikilink")|
@@ -143,9 +144,23 @@ When `globalSiteId` is given, the page title on the specified wiki is returned, 
 An example call might look like this:
 
 ``` {.lua}
-mw.wikibase.getSitelink( 'Q42' ) -- Returns the given item's page title in the current Wiki as a string, like "Berlin".
+mw.wikibase.getSitelink( 'Q42' ) -- Returns the given item's page title in the current Wiki as a string, like "Berlin"..
 ```
 
+### mw.wikibase.getBadges
+
+`wikibase.getBadges( itemId )`  
+`wikibase.getBadges( itemId, globalSiteId )`
+
+Takes an item ID and returns a list of all badges assigned to a site link.
+
+When `globalSiteId` is given, the badges for the site link to the specified wiki are returned. This defaults to the local wiki.
+
+An example call might look like this:
+
+``` {.lua}
+mw.wikibase.getBadges( 'Q64', 'dewiki' ) -- Returns the badges set on the site link to dewiki as a list, like { 'Q17437798' }
+```
 ### mw.wikibase.getDescription
 
 `wikibase.getDescription()`  

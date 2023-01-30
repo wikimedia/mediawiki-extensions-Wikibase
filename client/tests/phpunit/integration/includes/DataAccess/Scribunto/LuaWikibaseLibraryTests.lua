@@ -367,6 +367,22 @@ local tests = {
 	  args = { 'Q32487', 'does-not-exist' },
 	  expect = { nil }
 	},
+	{ name = 'mw.wikibase.getBadges', func = mw.wikibase.getBadges,
+	  args = { 'Q32487' },
+	  expect = { {} }
+	},
+	{ name = 'mw.wikibase.getBadges (with global site id)', func = mw.wikibase.getBadges,
+	  args = { 'Q32487', 'fooSiteId' },
+	  expect = { { 'Q10001', 'Q10002' } }
+	},
+	{ name = 'mw.wikibase.getBadges (global site id not found)', func = mw.wikibase.getBadges,
+	  args = { 'Q32487', 'does-not-exist' },
+	  expect = { {} }
+	},
+	{ name = 'mw.wikibase.getBadges (no such item)', func = mw.wikibase.getBadges,
+	  args = { 'Q404' },
+	  expect = { {} }
+	},
 	{ name = 'mw.wikibase.renderSnak', func = testRenderSnak, type='ToString',
 	  expect = { 'A qualifier Snak' }
 	},
