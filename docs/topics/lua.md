@@ -10,14 +10,14 @@ On multilingual wikis accessing labels is based on user's language rather than W
 
 |Aspect|mw.wikibase.FUNCTION|entity:FUNCTION|
 |------|--------------------|---------------|
-|Label in content or user language|[getLabel](#mw_wikibase_getLabel "wikilink")/[getLabelWithLang](#mw_wikibase_getLabelWithLang "wikilink")|[getLabel](#mw_wikibase_entity_getLabel "wikilink")/[getLabelWithLang](#mw_wikibase_entity_getLabelWithLang "wikilink")|
-|Label by language, without fallbacks|[getLabelByLang](#mw_wikibase_getLabelByLang "wikilink")|NA|
-|Description by language, without fallbacks|[getDescriptionByLang](#mw_wikibase_getDescriptionByLang "wikilink")|NA|
-|Sitelinks|[getSitelink](#mw_wikibase_getSitelink "wikilink")|[getSitelink](#mw_wikibase_entity_getSitelink "wikilink")|
-|Badges|[getBadges](#mw_wikibase_getBadges "wikilink")|NA|
-|Descriptions|[getDescription](#mw_wikibase_getDescription "wikilink")/[getDescriptionWithLang](#mw_wikibase_getDescriptionWithLang "wikilink")|[getDescription](#mw_wikibase_entity_getDescription "wikilink")/[getDescriptionWithLang](#mw_wikibase_entity_getDescriptionWithLang "wikilink")|
-|Statements|[getBestStatements](#mw_wikibase_getBestStatements "wikilink")|[getBestStatements](#mw_wikibase_entity_getBestStatements "wikilink")|
-||[getAllStatements](#mw_wikibase_getAllStatements "wikilink")|[getAllStatements](#mw_wikibase_entity_getAllStatements "wikilink")|
+|Label in content or user language|[getLabel](#mw_wikibase_getLabel)/[getLabelWithLang](#mw_wikibase_getLabelWithLang)|[getLabel](#mw_wikibase_entity_getLabel)/[getLabelWithLang](#mw_wikibase_entity_getLabelWithLang)|
+|Label by language, without fallbacks|[getLabelByLang](#mw_wikibase_getLabelByLang)|NA|
+|Description by language, without fallbacks|[getDescriptionByLang](#mw_wikibase_getDescriptionByLang)|NA|
+|Sitelinks|[getSitelink](#mw_wikibase_getSitelink)|[getSitelink](#mw_wikibase_entity_getSitelink)|
+|Badges|[getBadges](#mw_wikibase_getBadges)|NA|
+|Descriptions|[getDescription](#mw_wikibase_getDescription)/[getDescriptionWithLang](#mw_wikibase_getDescriptionWithLang)|[getDescription](#mw_wikibase_entity_getDescription)/[getDescriptionWithLang](#mw_wikibase_entity_getDescriptionWithLang)|
+|Statements|[getBestStatements](#mw_wikibase_getBestStatements)|[getBestStatements](#mw_wikibase_entity_getBestStatements)|
+||[getAllStatements](#mw_wikibase_getAllStatements)|[getAllStatements](#mw_wikibase_entity_getAllStatements)|
 
 mw.wikibase
 -----------
@@ -31,7 +31,7 @@ mw.wikibase
 
 <span style="color: red;">This function is [expensive](https://www.mediawiki.org/wiki/Manual:\$wgExpensiveParserFunctionLimit) when called with the ID of an entity not connected to the current page.</span> Loading entities doesn't count as expensive if the same entity is loaded twice during a module run. However, due to restrictions in the caching, if more than 14 other entities are loaded inbetween, the entity must be fetched again, which then counts as expensive.
 
-Gets a [mw.wikibase.entity](#mw_wikibase_entity "wikilink") table with data of the Wikibase item requested by id. If no id was given, the item connected to the current page will be returned. Requesting an item by id is only supported if arbitrary access is enabled.
+Gets a [mw.wikibase.entity](#mw_wikibase_entity) table with data of the Wikibase item requested by id. If no id was given, the item connected to the current page will be returned. Requesting an item by id is only supported if arbitrary access is enabled.
 
 An example call might look like this:
 
@@ -83,7 +83,7 @@ mw.wikibase.getEntityUrl( 'Q42' ) -- Returns the URL to the item as a string, li
 
 Takes an item ID and returns the label in the language of the local Wiki.
 
-If no ID was specified, then the label of the item connected to the current page will be returned, if the page is indeed connected and a label exists. The label will either be in the Wiki's language (on monolingual wikis) or the user's language (on multilingual Wikis), furthermore language fallbacks will be applied. See also [`mw.wikibase.getLabelWithLang`](#mw_wikibase_getLabelWithLang "wikilink").
+If no ID was specified, then the label of the item connected to the current page will be returned, if the page is indeed connected and a label exists. The label will either be in the Wiki's language (on monolingual wikis) or the user's language (on multilingual Wikis), furthermore language fallbacks will be applied. See also [`mw.wikibase.getLabelWithLang`](#mw_wikibase_getLabelWithLang).
 
 An example call might look like this:
 
@@ -96,7 +96,7 @@ mw.wikibase.getLabel( 'Q42' ) -- Returns the label of the item as a string, like
 `wikibase.getLabelWithLang()`  
 `wikibase.getLabelWithLang( id )`
 
-Like [`mw.wikibase.getLabel`](#mw_wikibase_getLabel "wikilink"), but has the language the returned label is in as an additional second return parameter.
+Like [`mw.wikibase.getLabel`](#mw_wikibase_getLabel), but has the language the returned label is in as an additional second return parameter.
 
 An example call might look like this:
 
@@ -110,7 +110,7 @@ local label, lang = mw.wikibase.getLabelWithLang( 'Q42' ) -- label contains the 
 
 Get the label from an entity for a specific language, returns the label as string or nil if it couldn't be found. This doesn't apply any language fallbacks.
 
-**Note**: This should not be used to get the label in the user's language on multilingual wikis, use [`mw.wikibase.getLabel`](#mw_wikibase_getLabel "wikilink") for that if by any means possible.
+**Note**: This should not be used to get the label in the user's language on multilingual wikis, use [`mw.wikibase.getLabel`](#mw_wikibase_getLabel) for that if by any means possible.
 
 An example call might look like this:
 
@@ -124,7 +124,7 @@ mw.wikibase.getLabelByLang( 'Q42', 'es' ) -- Returns the Spanish label of the it
 
 Get the description from an entity for a specific language, returns the label as string or nil if it couldn't be found. This doesn't apply any language fallbacks.
 
-**Note**: This should not be used to get the description in the user's language on multilingual wikis, use [`mw.wikibase.getDescription`](#mw_wikibase_getDescription "wikilink") for that if by any means possible.
+**Note**: This should not be used to get the description in the user's language on multilingual wikis, use [`mw.wikibase.getDescription`](#mw_wikibase_getDescription) for that if by any means possible.
 
 An example call might look like this:
 
@@ -168,7 +168,7 @@ mw.wikibase.getBadges( 'Q64', 'dewiki' ) -- Returns the badges set on the site l
 
 Takes an item ID and returns the description in the language of the local Wiki.
 
-If no ID was specified, then the description of the item connected to the current page will be returned, if the page is indeed connected and a description exists. The description will either be in the Wiki's language (on monolingual wikis) or the user's language (on multilingual Wikis), furthermore language fallbacks will be applied. See also [`mw.wikibase.getDescriptionWithLang`](#mw_wikibase_getDescriptionWithLang "wikilink").
+If no ID was specified, then the description of the item connected to the current page will be returned, if the page is indeed connected and a description exists. The description will either be in the Wiki's language (on monolingual wikis) or the user's language (on multilingual Wikis), furthermore language fallbacks will be applied. See also [`mw.wikibase.getDescriptionWithLang`](#mw_wikibase_getDescriptionWithLang).
 
 An example call might look like this:
 
@@ -181,7 +181,7 @@ mw.wikibase.getDescription( 'Q42' ) -- Returns the description of the item as a 
 `wikibase.getDescriptionWithLang()`  
 `wikibase.getDescriptionWithLang( id )`
 
-Like [`mw.wikibase.getDescription`](#mw_wikibase_getDescription "wikilink"), but has the language the returned description is in as an additional second return parameter.
+Like [`mw.wikibase.getDescription`](#mw_wikibase_getDescription), but has the language the returned description is in as an additional second return parameter.
 
 An example call might look like this:
 
@@ -327,7 +327,7 @@ mw.wikibase.getBestStatements( 'Q1', 'P12' ) -- Returns a table containing the s
 
 #### Structure
 
-The returned structure is very similar to the [Wikibase DataModel JSON schema for statements](https://www.mediawiki.org/wiki/Wikibase/DataModel/JSON#Claims_and_Statements), and equivalent to the statement structures in [mw.wikibase.entity](#mw_wikibase_entity "wikilink").
+The returned structure is very similar to the [Wikibase DataModel JSON schema for statements](https://www.mediawiki.org/wiki/Wikibase/DataModel/JSON#Claims_and_Statements), and equivalent to the statement structures in [mw.wikibase.entity](#mw_wikibase_entity).
 
 An example might look like this:
 
@@ -427,7 +427,7 @@ An example call might look like this:
 mw.wikibase.getAllStatements( 'Q1', 'P12' ) -- Returns a table containing the serialization of P12 statements from Q1
 ```
 
-The structure of the returned table is identical to those obtained via [mw.wikibase.getBestStatements](#mw_wikibase_getBestStatements "wikilink").
+The structure of the returned table is identical to those obtained via [mw.wikibase.getBestStatements](#mw_wikibase_getBestStatements).
 
 If statements with the requested property ID exist, the table returned is equivalent to the content of `mw.wikibase.getEntity( entityId ).claims[propertyId]`.
 
@@ -464,26 +464,26 @@ These functions exist solely for backward compatibility, they should not be used
 
 #### mw.wikibase.getEntityObject {#mw_wikibase_getEntityObject}
 
-Alias for [mw.wikibase.getEntity](#mw_wikibase_getEntity "wikilink").
+Alias for [mw.wikibase.getEntity](#mw_wikibase_getEntity).
 
 #### mw.wikibase.label {#mw_wikibase_label}
 
-Alias for [mw.wikibase.getLabel](#mw_wikibase_getLabel "wikilink").
+Alias for [mw.wikibase.getLabel](#mw_wikibase_getLabel).
 
 #### mw.wikibase.description {#mw_wikibase_description}
 
-Alias for [mw.wikibase.getDescription](#mw_wikibase_getDescription "wikilink").
+Alias for [mw.wikibase.getDescription](#mw_wikibase_getDescription).
 
 #### mw.wikibase.sitelink {#mw_wikibase_sitelink}
 
-Alias for [mw.wikibase.getSitelink](#mw_wikibase_getSitelink "wikilink").
+Alias for [mw.wikibase.getSitelink](#mw_wikibase_getSitelink).
 
 mw.wikibase.entity {#mw_wikibase_entity}
 ------------------
 
-`mw.wikibase.entity` represents a Wikibase entity in Lua. A `mw.wikibase.entity` table for the item which is linked with the current page can be obtained with [`mw.wikibase.getEntity`](#mw_wikibase_getEntity "wikilink").
+`mw.wikibase.entity` represents a Wikibase entity in Lua. A `mw.wikibase.entity` table for the item which is linked with the current page can be obtained with [`mw.wikibase.getEntity`](#mw_wikibase_getEntity).
 
-Functions documented as `mw.wikibase.entity.name` are available on the global `mw.wikibase.entity` table; functions documented as `mw.wikibase.entity:name` are methods of an `mw.wikibase.entity` object (see [`mw.wikibase.entity.create`](#mw_wikibase_entity.create "wikilink")).
+Functions documented as `mw.wikibase.entity.name` are available on the global `mw.wikibase.entity` table; functions documented as `mw.wikibase.entity:name` are methods of an `mw.wikibase.entity` object (see [`mw.wikibase.entity.create`](#mw_wikibase_entity.create)).
 
 ### Structure
 
@@ -571,7 +571,7 @@ entity:getId() -- Returns a string like "Q123"
 
 `entity:getLabel()`
 `entity:getLabel( langCode )`
-Returns the label of the entity in the language given as `langCode` or in the Wiki's content language (on monolingual wikis) or the user's language (on multilingual wikis). See also [`mw.wikibase.entity:getLabelWithLang`](#mw_wikibase_entity_getLabelWithLang "wikilink").
+Returns the label of the entity in the language given as `langCode` or in the Wiki's content language (on monolingual wikis) or the user's language (on multilingual wikis). See also [`mw.wikibase.entity:getLabelWithLang`](#mw_wikibase_entity_getLabelWithLang).
 
 An example call might look like this:
 
@@ -584,7 +584,7 @@ entity:getLabel( 'de' ) -- Returns a string like "Berlin"
 `entity:getDescription()`  
 `entity:getDescription( langCode )`
 
-Returns the description of the entity in the language given as `langCode` or in the Wiki's content language (on monolingual wikis) or the user's language (on multilingual wikis). See also [`mw.wikibase.entity:getDescriptionWithLang`](#mw_wikibase_entity_getDescriptionWithLang "wikilink").
+Returns the description of the entity in the language given as `langCode` or in the Wiki's content language (on monolingual wikis) or the user's language (on multilingual wikis). See also [`mw.wikibase.entity:getDescriptionWithLang`](#mw_wikibase_entity_getDescriptionWithLang).
 
 An example call might look like this:
 
@@ -597,7 +597,7 @@ entity:getDescription( 'de' ) -- Returns a string like "capital and city-state o
 `entity:getLabelWithLang()`  
 `entity:getLabelWithLang( langCode )`
 
-Like [`mw.wikibase.entity:getLabel`](#mw_wikibase_entity_getLabel "wikilink"), but has the language the returned label is in as an additional second return parameter.
+Like [`mw.wikibase.entity:getLabel`](#mw_wikibase_entity_getLabel), but has the language the returned label is in as an additional second return parameter.
 
 An example call might look like this:
 
@@ -610,7 +610,7 @@ local label, lang = entity:getLabelWithLang( 'de' ) -- label contains the text o
 `entity:getDescriptionWithLang()`  
 `entity:getDescriptionWithLang( langCode )`
 
-Like [`mw.wikibase.entity:getDescription`](#mw_wikibase_entity_getDescription "wikilink"), but has the language the returned description is in as an additional second return parameter.
+Like [`mw.wikibase.entity:getDescription`](#mw_wikibase_entity_getDescription), but has the language the returned description is in as an additional second return parameter.
 
 An example call might look like this:
 
@@ -687,7 +687,7 @@ entity:getAllStatements( 'instance of' ) -- Returns a table containing the seria
 `entity:formatPropertyValues( propertyLabelOrId )`  
 `entity:formatPropertyValues( propertyLabelOrId, acceptableRanks )`
 
-Get the values of the Statements with the given property (which is either identified by a property id, or by the label of the property), formatted as wikitext escaped plain text. Per default only the best claims will be returned. Alternatively a table with acceptable ranks can be given as second parameter (a mapping table with all ranks can be found in [`mw.wikibase.entity.claimRanks`](#mw_wikibase_entity.claimRanks "wikilink")).
+Get the values of the Statements with the given property (which is either identified by a property id, or by the label of the property), formatted as wikitext escaped plain text. Per default only the best claims will be returned. Alternatively a table with acceptable ranks can be given as second parameter (a mapping table with all ranks can be found in [`mw.wikibase.entity.claimRanks`](#mw_wikibase_entity.claimRanks)).
 
 An example call might look like this:
 
@@ -709,7 +709,7 @@ entity:formatPropertyValues( 'P42', { mw.wikibase.entity.claimRanks.RANK_NORMAL 
 `entity:formatStatements( propertyLabelOrId )`  
 `entity:formatStatements( propertyLabelOrId, acceptableRanks )`
 
- Like [`mw.wikibase.entity:formatPropertyValues`](#mw_wikibase_entity_formatPropertyValues "wikilink"), but the returned values will be formatted as rich wikitext, rather than just wikitext escaped plain text.
+ Like [`mw.wikibase.entity:formatPropertyValues`](#mw_wikibase_entity_formatPropertyValues), but the returned values will be formatted as rich wikitext, rather than just wikitext escaped plain text.
 
 ### mw.wikibase.entity.claimRanks {#mw_wikibase_entity.claimRanks}
 
