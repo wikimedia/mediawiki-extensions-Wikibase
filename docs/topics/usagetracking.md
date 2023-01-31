@@ -17,9 +17,7 @@ The “aspect” is used to decide which kind of change is relevant for the give
 Among others the following aspects are defined:
 
  - **sitelinks**
-   - Only an item's sitelinks are used.
-   - This would be the case for a client page that is connected to an item on the repo via an incoming sitelink, but does not access any data of the item directly.
-   - A change to the sitelinks may be applied without re-parsing the page, by overwriting the sitelinks in the cached ParserOutput object.
+   - Only an item's sitelinks (including badges) are used.
  - **label**
    - Only the entity's label is used.
    - This would be the case when a localized reference to the entity is shown on a page.
