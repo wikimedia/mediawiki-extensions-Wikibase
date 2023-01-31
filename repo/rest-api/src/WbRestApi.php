@@ -4,6 +4,7 @@ namespace Wikibase\Repo\RestApi;
 
 use MediaWiki\MediaWikiServices;
 use Psr\Container\ContainerInterface;
+use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemDataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
@@ -76,6 +77,11 @@ class WbRestApi {
 	public static function getItemUpdater( ContainerInterface $services = null ): ItemUpdater {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.ItemUpdater' );
+	}
+
+	public static function getItemDataRetriever( ContainerInterface $services = null ): WikibaseEntityLookupItemDataRetriever {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.ItemDataRetriever' );
 	}
 
 	public static function getStatementDeserializer( ContainerInterface $services = null ): StatementDeserializer {
