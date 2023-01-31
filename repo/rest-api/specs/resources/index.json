@@ -2,6 +2,9 @@
 	"/entities/items/{item_id}": {
 		"$ref": "./items/single.json"
 	},
+	"/entities/items/{item_id}/descriptions": {
+		"$ref": "./descriptions/list.json"
+	},
 	"/entities/items/{item_id}/statements": {
 		"$ref": "./statements/list.json"
 	},

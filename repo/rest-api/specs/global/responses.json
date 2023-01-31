@@ -141,6 +141,23 @@
 			}
 		}
 	},
+	"InvalidItemDescriptionMapInput": {
+		"description": "The request cannot be processed",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/Error" },
+				"examples": {
+					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
 	"InvalidStatementListInput": {
 		"description": "The request cannot be processed",
 		"content": {
@@ -455,6 +472,36 @@
 			"application/json": {
 				"schema": {
 					"$ref": "./schemas.json#/Labels"
+				}
+			}
+		}
+	},
+	"ItemDescriptionMap": {
+		"description": "Item's descriptions by language",
+		"headers": {
+			"ETag": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Last entity revision number"
+			},
+			"Last-Modified": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Last modified date"
+			},
+			"X-Authenticated-User": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Optional username of the user making the request"
+			}
+		},
+		"content": {
+			"application/json": {
+				"schema": {
+					"$ref": "./schemas.json#/Descriptions"
 				}
 			}
 		}
