@@ -1,9 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Robin van der Vliet"
+			"Robin van der Vliet",
+			"Tbodt"
 		]
 	},
 	"wikibase-timedetails-time": "tenpo",
-	"wikibase-sitelinks-wikipedia": "Wikipesija"
+	"wikibase-sitelinks-wikipedia": "lipu Wikipesija"
 }

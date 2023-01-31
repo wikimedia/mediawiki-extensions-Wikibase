@@ -6,9 +6,9 @@
 			"Vlad5250"
 		]
 	},
-	"apihelp-wbavailablebadges-description": "Бара расположиви значки.",
-	"apihelp-wbavailablebadges-summary": "Бара расположиви значки.",
-	"apihelp-wbavailablebadges-example-1": "Ги бара сите расположиви значки",
+	"apihelp-wbavailablebadges-description": "Бара расположливи значки.",
+	"apihelp-wbavailablebadges-summary": "Бара расположливи значки.",
+	"apihelp-wbavailablebadges-example-1": "Ги бара сите расположливи значки",
 	"apihelp-wbcreateclaim-description": "Создава тврдења во Викибазата.",
 	"apihelp-wbcreateclaim-summary": "Создава тврдења во Викибазата.",
 	"apihelp-wbcreateclaim-param-baserevid": "Бројчената назнака на преработката на која ќе се заснова измената.\nОва се користи за пронаоѓање на спротиставености при зачувувањето.",

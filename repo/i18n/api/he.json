@@ -131,7 +131,7 @@
 	"apihelp-wbremoveclaims-summary": "הסרת טענות ויקיבייס.",
 	"apihelp-wbremoveclaims-param-baserevid": "מזהה מספרי לגרסה שעליה יתבסס השינוי.\nזה משמש לזיהוי התנגשויות בזמן השמירה.",
 	"apihelp-wbremoveclaims-param-bot": "לסמן את העריכה כעריכת בוט. דגל ה־URL יכובד רק עם המשתמש שייך לקבוצה \"bot\".",
-	"apihelp-wbremoveclaims-param-claim": "GUID אחת או יותר (מופרדים בפסיקים) שמזהים את הטענות שיש להסיר.\nכל הטענות צריכים להיות שייכות לאותה הישות.",
+	"apihelp-wbremoveclaims-param-claim": "GUID אחת או יותר (מופרדים בקווים ניצבים) שמזהים את הטענות שיש להסיר.\nכל הטענות צריכים להיות שייכות לאותה הישות.",
 	"apihelp-wbremoveclaims-param-summary": "תקציר העריכה.\nלתחילתו תצורף הערה שמיוצרת אוטומטית. מגבלת האורך של ההערה האוטומטית יחד עם תקציר העריכה היא 260 תווים. יש לשים לב לכך שכל דבר מעבר לכך ייחתך.",
 	"apihelp-wbremoveclaims-param-tags": "אילו תגי שינוי להחיל על הגרסה.",
 	"apihelp-wbremoveclaims-example-1": "הסרת טענה שה־GUID שלה הוא \"$1\"",

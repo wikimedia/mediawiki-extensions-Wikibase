@@ -2,12 +2,14 @@
 	"@metadata": {
 		"authors": [
 			"Inabat Allanova",
-			"Nurlan"
+			"Nurlan",
+			"Ajiniyaz Nurniyazov"
 		]
 	},
 	"wikibase-edit": "redaktorlaw",
 	"wikibase-add": "qosıw",
 	"wikibase-label-empty": "Belgilenbegen",
 	"wikibase-description-empty": "Heshqanday minezleme belgilenbegen",
-	"wikibase-sitelinks-special": "Basqa saytlar"
+	"wikibase-sitelinks-special": "Basqa saytlar",
+	"wikibase-gotolinkedpage-submit": "Ótiw"
 }

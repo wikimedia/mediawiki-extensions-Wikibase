@@ -83,6 +83,7 @@
 	"wikibase-pageswithbadges-legend": "バッジを受け取ったページ一覧",
 	"wikibase-pageswithbadges-badge": "バッジ:",
 	"wikibase-pageswithbadges-submit": "ページを表示",
+	"entityusage": "エンティティの使用",
 	"entityusage-summary": "このページは、入力したエンティティを使用しているページが一覧表示されます（例：Q42）。リストはページIDの降順で並べ替えられ、新しいページが一番上になります。",
 	"wikibase-entityusage-invalid-id": "$1 は、有効なエンティティIDではありません。",
 	"wikibase-entityusage-legend": "入力されたエンティティを使用するページの一覧",
