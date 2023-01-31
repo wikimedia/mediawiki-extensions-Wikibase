@@ -128,12 +128,12 @@ Get the description from an entity for a specific language, returns the label as
 An example call might look like this:
 
 ``` {.lua}
-mw.wikibase.getDescriptionByLang( 'Q42', 'es' ) -- Returns the Spanish description of the item as a string, like "capital of Germany".
+mw.wikibase.getDescriptionByLang( 'Q42', 'es' ) -- Returns the Spanish description of the item as a string, like "capital de Alemania".
 ```
 
 ### mw.wikibase.getSitelink
 
-`wikibase.getSitelink( itemId )`
+`wikibase.getSitelink( itemId )`  
 `wikibase.getSitelink( itemId, globalSiteId )`
 
 Takes an item ID and returns the title of the corresponding page on the local Wiki or nil if it doesn't exist. This page title can be used to link to the given page.
