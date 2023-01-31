@@ -17,6 +17,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 use Wikibase\DataModel\Services\Lookup\MaxReferencedEntityVisitsExhaustedException;
 use Wikibase\DataModel\Services\Lookup\MaxReferenceDepthExhaustedException;
 use Wikibase\DataModel\Services\Lookup\ReferencedEntityIdLookup;
@@ -67,6 +68,11 @@ class WikibaseLanguageIndependentLuaBindingsTest extends TestCase {
 	 */
 	private $entityIdLookup;
 
+	/**
+	 * @var InMemoryEntityLookup
+	 */
+	private $entityLookup;
+
 	protected function setUp(): void {
 		parent::setUp();
 
@@ -75,6 +81,7 @@ class WikibaseLanguageIndependentLuaBindingsTest extends TestCase {
 		$this->usageAccumulator = new HashUsageAccumulator();
 		$this->referencedEntityIdLookup = $this->createStub( ReferencedEntityIdLookup::class );
 		$this->redirectTargetLookup = $this->newMockRevisionBasedEntityRedirectTargetLookup();
+		$this->entityLookup = new InMemoryEntityLookup();
 	}
 
 	public function testConstructor() {
@@ -98,7 +105,8 @@ class WikibaseLanguageIndependentLuaBindingsTest extends TestCase {
 			$mediaWikiServices->getTitleFormatter(),
 			$mediaWikiServices->getTitleParser(),
 			'enwiki',
-			$this->redirectTargetLookup
+			$this->redirectTargetLookup,
+			$this->entityLookup
 		);
 	}
 
@@ -124,7 +132,8 @@ class WikibaseLanguageIndependentLuaBindingsTest extends TestCase {
 			$this->createMock( TitleFormatter::class ),
 			$this->createMock( TitleParser::class ),
 			'enwiki',
-			$this->newMockRevisionBasedEntityRedirectTargetLookup()
+			$this->newMockRevisionBasedEntityRedirectTargetLookup(),
+			$this->entityLookup
 		);
 
 		$this->assertSame(
@@ -265,7 +274,8 @@ class WikibaseLanguageIndependentLuaBindingsTest extends TestCase {
 			$this->createMock( TitleFormatter::class ),
 			$this->createMock( TitleParser::class ),
 			'enwiki',
-			$this->newMockRevisionBasedEntityRedirectTargetLookup()
+			$this->newMockRevisionBasedEntityRedirectTargetLookup(),
+			$this->entityLookup
 		);
 
 		$this->assertSame( $expected, $bindings->getLabelByLanguage( $prefixedEntityId, $languageCode ) );
@@ -347,7 +357,8 @@ class WikibaseLanguageIndependentLuaBindingsTest extends TestCase {
 			$this->createMock( TitleFormatter::class ),
 			$this->createMock( TitleParser::class ),
 			'enwiki',
-			$this->newMockRevisionBasedEntityRedirectTargetLookup()
+			$this->newMockRevisionBasedEntityRedirectTargetLookup(),
+			$this->entityLookup
 		);
 
 		$this->assertSame( $expected, $bindings->getDescriptionByLanguage( $prefixedEntityId, $languageCode ) );
@@ -542,6 +553,86 @@ class WikibaseLanguageIndependentLuaBindingsTest extends TestCase {
 		);
 	}
 
+	public function globalSiteIdProvider(): array {
+		return [
+			[ 'enwiki' ],
+			'default to the local wiki (enwiki)' => [ null ],
+		];
+	}
+
+	/**
+	 * @dataProvider globalSiteIdProvider
+	 */
+	public function testGetBadges( ?string $globalSiteId ) {
+		$this->entityLookup->addEntity( $this->getItem() );
+
+		$badges = $this->getWikibaseLanguageIndependentLuaBindings()->getBadges( 'Q666', $globalSiteId );
+		$this->assertSame(
+			[ 1 => 'Q101', 2 => 'Q102' ],
+			$badges
+		);
+
+		$this->assertSame( [ 'Q666#S' ], array_keys( $this->usageAccumulator->getUsages() ) );
+	}
+
+	public function testGetBadges_redirect() {
+		$item = $this->getItem();
+		$this->entityLookup->addEntity( $item );
+
+		$redirectItemId = new ItemId( 'Q321' );
+
+		$this->redirectTargetLookup = $this->createMock( RevisionBasedEntityRedirectTargetLookup::class );
+		$this->redirectTargetLookup->expects( $this->once() )
+			->method( 'getRedirectForEntityId' )
+			->with( $redirectItemId )
+			->willReturn( $item->getId() );
+
+		$badges = $this->getWikibaseLanguageIndependentLuaBindings()->getBadges( $redirectItemId->getSerialization(), 'enwiki' );
+		$this->assertSame(
+			[ 1 => 'Q101', 2 => 'Q102' ],
+			$badges
+		);
+
+		// Both the redirect and its target should be tracked.
+		$this->assertSame( [ 'Q666#S', 'Q321#X' ], array_keys( $this->usageAccumulator->getUsages() ) );
+	}
+
+	public function testGetBadges_noBadges() {
+		$this->entityLookup->addEntity( $this->getItem() );
+
+		$badges = $this->getWikibaseLanguageIndependentLuaBindings()->getBadges( 'Q666', 'dewiki' );
+		$this->assertSame( [], $badges );
+
+		$this->assertSame( [ 'Q666#S' ], array_keys( $this->usageAccumulator->getUsages() ) );
+	}
+
+	public function testGetBadges_siteLinkDoesntExist() {
+		$this->entityLookup->addEntity( $this->getItem() );
+
+		$badges = $this->getWikibaseLanguageIndependentLuaBindings()->getBadges( 'Q666', 'abcdefg' );
+		$this->assertSame( [], $badges );
+
+		$this->assertSame( [ 'Q666#S' ], array_keys( $this->usageAccumulator->getUsages() ) );
+	}
+
+	public function testGetBadges_itemDoesntExist() {
+		$this->entityLookup->addEntity( $this->getItem() );
+
+		$badges = $this->getWikibaseLanguageIndependentLuaBindings()->getBadges( 'Q404', 'enwiki' );
+		$this->assertSame( [], $badges );
+
+		$this->assertSame( [ 'Q404#S' ], array_keys( $this->usageAccumulator->getUsages() ) );
+	}
+
+	public function testGetBadges_invalidItemId() {
+		$this->entityLookup->addEntity( $this->getItem() );
+
+		$badges = $this->getWikibaseLanguageIndependentLuaBindings()->getBadges( 'Kuh666', 'enwiki' );
+		$this->assertSame( [], $badges );
+
+		$this->assertSame( [], array_keys( $this->usageAccumulator->getUsages() ) );
+	}
+
 	/**
 	 * @return Item
 	 */
@@ -549,7 +640,7 @@ class WikibaseLanguageIndependentLuaBindingsTest extends TestCase {
 		$item = new Item( new ItemId( 'Q666' ) );
 		$item->setLabel( 'en', 'Beer' );
 		$item->setDescription( 'en', 'yummy beverage' );
-		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Beer' );
+		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Beer', [ new ItemId( 'Q101' ), new ItemId( 'Q102' ) ] );
 		$item->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Bier' );
 
 		return $item;

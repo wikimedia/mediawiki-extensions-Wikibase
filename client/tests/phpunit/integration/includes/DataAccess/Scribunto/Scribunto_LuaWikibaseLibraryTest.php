@@ -265,6 +265,20 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$this->assertSame( $allowDataAccessInUserLanguage, $cacheSplit );
 	}
 
+	public function testGetBadges() {
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$badges = $luaWikibaseLibrary->getBadges( 'Q32487', 'fooSiteId' );
+
+		$this->assertSame( [ [ 1 => 'Q10001', 2 => 'Q10002' ] ], $badges );
+	}
+
+	public function testGetBadges_empty() {
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$badges = $luaWikibaseLibrary->getBadges( 'Q32487', 'nosuchwiki' );
+
+		$this->assertSame( [ [] ], $badges );
+	}
+
 	public function provideIsValidEntityId() {
 		return [
 			[ true, 'Q12' ],

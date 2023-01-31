@@ -26,6 +26,10 @@ local tests = {
 	  args = { 'Q42' },
 	  expect = 'Access to arbitrary entities has been disabled.'
 	},
+	{ name = "mw.wikibase.getBadges (foreign access)", func = mw.wikibase.getBadges,
+	  args = { 'Q42' },
+	  expect = 'Access to arbitrary entities has been disabled.'
+	},
 	{ name = "mw.wikibase.getReferencedEntityId", func = mw.wikibase.getReferencedEntityId,
 	  args = { 'Q42', 'P42', { 'Q2' } },
 	  expect = 'Access to arbitrary entities has been disabled.'

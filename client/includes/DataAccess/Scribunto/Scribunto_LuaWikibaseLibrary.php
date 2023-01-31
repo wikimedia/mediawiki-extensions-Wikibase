@@ -306,7 +306,9 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			$mediaWikiServices->getTitleParser(),
 			$settings->getSetting( 'siteGlobalID' ),
 			new RevisionBasedEntityRedirectTargetLookup(
-				WikibaseClient::getEntityRevisionLookup( $mediaWikiServices ) )
+				WikibaseClient::getEntityRevisionLookup( $mediaWikiServices )
+			),
+			$store->getEntityLookup()
 		);
 	}
 
@@ -346,6 +348,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			'getDescriptionByLanguage' => [ $this, 'getDescriptionByLanguage' ],
 			'getEntity' => [ $this, 'getEntity' ],
 			'entityExists' => [ $this, 'entityExists' ],
+			'getBadges' => [ $this, 'getBadges' ],
 			'getEntityStatements' => [ $this, 'getEntityStatements' ],
 			'getEntityUrl' => [ $this, 'getEntityUrl' ],
 			'renderSnak' => [ $this, 'renderSnak' ],
@@ -557,7 +560,6 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	/**
 	 * Wrapper for getDescription in WikibaseLanguageDependentLuaBindings
 	 *
-	 *
 	 * @return string[]|null[]
 	 */
 	public function getDescription( string $prefixedEntityId ): array {
@@ -589,6 +591,15 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		$this->checkTypeOptional( 'getSiteLinkPageName', 2, $globalSiteId, 'string', null );
 
 		return [ $this->getLanguageIndependentLuaBindings()->getSiteLinkPageName( $prefixedItemId, $globalSiteId ) ];
+	}
+
+	/**
+	 * Wrapper for getBadges in WikibaseLanguageIndependentLuaBindings
+	 *
+	 * @return string[][]
+	 */
+	public function getBadges( string $prefixedEntityId, ?string $globalSiteId ): array {
+		return [ $this->getLanguageIndependentLuaBindings()->getBadges( $prefixedEntityId, $globalSiteId ) ];
 	}
 
 	/**
