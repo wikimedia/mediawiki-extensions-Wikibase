@@ -41,58 +41,58 @@ class BeforePageDisplayHandler implements BeforePageDisplayHook {
 	}
 
 	/**
-	 * @param OutputPage $out
+	 * @param OutputPage $outputPage
 	 * @param Skin $skin
 	 */
-	public function onBeforePageDisplay( $out, $skin ): void {
-		$actionName = $out->getActionName();
-		$this->addModules( $out, $actionName, $skin );
+	public function onBeforePageDisplay( $outputPage, $skin ): void {
+		$actionName = $outputPage->getActionName();
+		$this->addModules( $outputPage, $actionName, $skin );
 	}
 
-	public function addModules( OutputPage $out, string $actionName, Skin $skin ): void {
-		$title = $out->getTitle();
+	public function addModules( OutputPage $outputPage, string $actionName, Skin $skin ): void {
+		$title = $outputPage->getTitle();
 
 		if ( !$title || !$this->namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
 			return;
 		}
 
-		$this->addStyleModules( $out, $title, $actionName );
-		$this->addJsModules( $out, $title, $actionName, $skin );
+		$this->addStyleModules( $outputPage, $title, $actionName );
+		$this->addJsModules( $outputPage, $title, $actionName, $skin );
 	}
 
-	private function addStyleModules( OutputPage $out, Title $title, string $actionName ): void {
+	private function addStyleModules( OutputPage $outputPage, Title $title, string $actionName ): void {
 		// styles are not appropriate for cologne blue and should leave styling up to other skins
-		if ( $this->hasEditOrAddLinks( $out, $title, $actionName ) ) {
-			$out->addModuleStyles( 'wikibase.client.init' );
+		if ( $this->hasEditOrAddLinks( $outputPage, $title, $actionName ) ) {
+			$outputPage->addModuleStyles( 'wikibase.client.init' );
 		}
 
 		if ( $this->dataBridgeEnabled ) {
-			$out->addModuleStyles( 'wikibase.client.data-bridge.externalModifiers' );
+			$outputPage->addModuleStyles( 'wikibase.client.data-bridge.externalModifiers' );
 		}
 	}
 
-	private function addJsModules( OutputPage $out, Title $title, $actionName, Skin $skin ): void {
-		$user = $out->getUser();
+	private function addJsModules( OutputPage $outputPage, Title $title, $actionName, Skin $skin ): void {
+		$user = $outputPage->getUser();
 
-		if ( $this->hasLinkItemWidget( $user, $out, $title, $actionName ) ) {
+		if ( $this->hasLinkItemWidget( $user, $outputPage, $title, $actionName ) ) {
 			// Add the JavaScript which lazy-loads the link item widget
 			// (needed as jquery.wikibase.linkitem has pretty heavy dependencies)
-			$out->addModules( 'wikibase.client.linkitem.init' );
+			$outputPage->addModules( 'wikibase.client.linkitem.init' );
 		}
 
-		if ( $skin->getSkinName() === 'vector-2022' && $out->getProperty( 'wikibase_item' ) !== null ) {
-			$out->addModules( 'wikibase.client.vector-2022' );
+		if ( $skin->getSkinName() === 'vector-2022' && $outputPage->getProperty( 'wikibase_item' ) !== null ) {
+			$outputPage->addModules( 'wikibase.client.vector-2022' );
 		}
 
 		if ( $this->dataBridgeEnabled ) {
-			$out->addModules( 'wikibase.client.data-bridge.init' );
+			$outputPage->addModules( 'wikibase.client.data-bridge.init' );
 		}
 	}
 
-	private function hasEditOrAddLinks( OutputPage $out, Title $title, string $actionName ): bool {
+	private function hasEditOrAddLinks( OutputPage $outputPage, Title $title, string $actionName ): bool {
 		if (
 			!in_array( $actionName, [ 'view', 'submit' ] ) ||
-			$this->allLinksAreSuppressed( $out ) ||
+			$this->allLinksAreSuppressed( $outputPage ) ||
 			!$title->exists()
 		) {
 			return false;
