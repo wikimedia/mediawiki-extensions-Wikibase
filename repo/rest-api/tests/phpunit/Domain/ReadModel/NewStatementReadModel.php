@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\RestApi\Domain\ReadModel;
 
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
+use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -12,15 +13,8 @@ use Wikibase\Repo\WikibaseRepo;
 class NewStatementReadModel extends NewStatement {
 
 	public function build(): Statement {
-		$dataModelStatement = parent::build();
-
-		return new Statement(
-			WikibaseRepo::getStatementGuidParser()->parse( $dataModelStatement->getGuid() ),
-			$dataModelStatement->getRank(),
-			$dataModelStatement->getMainSnak(),
-			$dataModelStatement->getQualifiers(),
-			$dataModelStatement->getReferences()
-		);
+		return ( new StatementReadModelConverter( WikibaseRepo::getStatementGuidParser() ) )
+			->convert( parent::build() );
 	}
 
 	public function buildReadAndWriteModel(): array {

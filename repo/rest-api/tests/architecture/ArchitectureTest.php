@@ -50,6 +50,7 @@ class ArchitectureTest {
 	 * Domain services may depend on:
 	 *  - domain models
 	 *  - DataModel namespaces containing entities and their parts
+	 *  - some hand-picked DataModel services
 	 *  - other classes from their own namespace
 	 */
 	public function testDomainServices(): Rule {
@@ -62,6 +63,7 @@ class ArchitectureTest {
 				Selector::namespace( self::DOMAIN_READMODEL ),
 				Selector::namespace( self::DOMAIN_SERVICES ),
 				Selector::namespace( 'Wikibase\Repo\RestApi\Domain\Exceptions' ), // consider moving into services namespace?
+				...$this->allowedDataModelServices(),
 				...$this->dataModelEntityNamespaces(),
 				...$this->phpCoreClasses(),
 			);

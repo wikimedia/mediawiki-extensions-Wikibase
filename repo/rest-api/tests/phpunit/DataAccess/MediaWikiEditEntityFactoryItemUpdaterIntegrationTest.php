@@ -16,6 +16,7 @@ use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\DataAccess\MediaWikiEditEntityFactoryItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
+use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -99,7 +100,7 @@ class MediaWikiEditEntityFactoryItemUpdaterIntegrationTest extends MediaWikiInte
 			new NullLogger(),
 			$this->createStub( EditSummaryFormatter::class ),
 			$permissionManager,
-			new StatementGuidParser( new ItemIdParser() )
+			new StatementReadModelConverter( new StatementGuidParser( new ItemIdParser() ) )
 		);
 	}
 
