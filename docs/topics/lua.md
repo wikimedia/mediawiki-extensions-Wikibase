@@ -12,6 +12,7 @@ On multilingual wikis accessing labels is based on user's language rather than W
 |------|--------------------|---------------|
 |Label in content or user language|[getLabel](#mw.wikibase.getLabel "wikilink")/[getLabelWithLang](#mw.wikibase.getLabelWithLang "wikilink")|[getLabel](#mw.wikibase.entity:getLabel "wikilink")/[getLabelWithLang](#mw.wikibase.entity:getLabelWithLang "wikilink")|
 |Label by language, without fallbacks|[getLabelByLang](#mw.wikibase.getLabelByLang "wikilink")|NA|
+|Description by language, without fallbacks|[getDescriptionByLang](#mw.wikibase.getDescriptionByLang "wikilink")|NA|
 |Sitelinks|[getSitelink](#mw.wikibase.getSitelink "wikilink")|[getSitelink](#mw.wikibase.entity:getSitelink "wikilink")|
 |Descriptions|[getDescription](#mw.wikibase.getDescription "wikilink")/[getDescriptionWithLang](#mw.wikibase.getDescriptionWithLang "wikilink")|[getDescription](#mw.wikibase.entity:getDescription "wikilink")/[getDescriptionWithLang](#mw.wikibase.entity:getDescriptionWithLang "wikilink")|
 |Statements|[getBestStatements](#mw.wikibase.getBestStatements "wikilink")|[getBestStatements](#mw.wikibase.entity:getBestStatements "wikilink")|
@@ -116,9 +117,23 @@ An example call might look like this:
 mw.wikibase.getLabelByLang( 'Q42', 'es' ) -- Returns the Spanish label of the item as a string, like "Berlín".
 ```
 
+### mw.wikibase.getDescriptionByLang
+
+`wikibase.getDescriptionByLang( id, languageCode )`
+
+Get the description from an entity for a specific language, returns the label as string or nil if it couldn't be found. This doesn't apply any language fallbacks.
+
+**Note**: This should not be used to get the description in the user's language on multilingual wikis, use [`mw.wikibase.getDescription`](#mw.wikibase.getDescription "wikilink") for that if by any means possible.
+
+An example call might look like this:
+
+``` {.lua}
+mw.wikibase.getDescriptionByLang( 'Q42', 'es' ) -- Returns the Spanish description of the item as a string, like "capital of Germany".
+```
+
 ### mw.wikibase.getSitelink
 
-`wikibase.getSitelink( itemId )`  
+`wikibase.getSitelink( itemId )`
 `wikibase.getSitelink( itemId, globalSiteId )`
 
 Takes an item ID and returns the title of the corresponding page on the local Wiki or nil if it doesn't exist. This page title can be used to link to the given page.

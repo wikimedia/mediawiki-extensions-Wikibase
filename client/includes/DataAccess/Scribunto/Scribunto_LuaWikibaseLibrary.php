@@ -343,6 +343,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		$lib = [
 			'getLabel' => [ $this, 'getLabel' ],
 			'getLabelByLanguage' => [ $this, 'getLabelByLanguage' ],
+			'getDescriptionByLanguage' => [ $this, 'getDescriptionByLanguage' ],
 			'getEntity' => [ $this, 'getEntity' ],
 			'entityExists' => [ $this, 'entityExists' ],
 			'getEntityStatements' => [ $this, 'getEntityStatements' ],
@@ -563,6 +564,19 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		$this->checkType( 'getDescription', 1, $prefixedEntityId, 'string' );
 
 		return $this->getLanguageDependentLuaBindings()->getDescription( $prefixedEntityId );
+	}
+
+	/**
+	 * Wrapper for getDescriptionByLanguage in WikibaseLanguageIndependentLuaBindings
+	 *
+	 *
+	 * @return string[]|null[]
+	 */
+	public function getDescriptionByLanguage( string $prefixedEntityId, string $languageCode ): array {
+		$this->checkType( 'getDescriptionByLanguage', 1, $prefixedEntityId, 'string' );
+		$this->checkType( 'getDescriptionByLanguage', 2, $languageCode, 'string' );
+
+		return [ $this->getLanguageIndependentLuaBindings()->getDescriptionByLanguage( $prefixedEntityId, $languageCode ) ];
 	}
 
 	/**

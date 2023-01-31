@@ -5,6 +5,7 @@ namespace Wikibase\Client\Tests\Unit\DataAccess\Scribunto;
 use Exception;
 use MediaWiki\MediaWikiServices;
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 use TitleFormatter;
 use TitleParser;
 use Wikibase\Client\DataAccess\Scribunto\WikibaseLanguageIndependentLuaBindings;
@@ -39,7 +40,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Marius Hoch < hoo@online.de >
  */
-class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\TestCase {
+class WikibaseLanguageIndependentLuaBindingsTest extends TestCase {
 
 	/**
 	 * @var MockObject|SiteLinkLookup
@@ -268,6 +269,88 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 		);
 
 		$this->assertSame( $expected, $bindings->getLabelByLanguage( $prefixedEntityId, $languageCode ) );
+		$this->assertSame( $expectedUsages, array_keys( $usages->getUsages() ) );
+	}
+
+	public function getDescriptionByLanguageProvider() {
+		$q2 = new ItemId( 'Q2' );
+
+		return [
+			'Item and description exist' => [
+				[ 'Q2#D.de' ],
+				'Q2-de',
+				'Q2',
+				'de',
+				$q2,
+				true,
+				true,
+			],
+			'Item id valid, but description does not exist' => [
+				[ 'Q2#D.de' ],
+				null,
+				'Q2',
+				'de',
+				$q2,
+				false,
+				true,
+			],
+			'Invalid Item Id' => [
+				[],
+				null,
+				'dsfa',
+				'de',
+				null,
+				true,
+				true,
+			],
+			'Invalid lang' => [
+				[],
+				null,
+				'Q2',
+				'de',
+				$q2,
+				true,
+				false,
+			],
+		];
+	}
+
+	/**
+	 * @dataProvider getDescriptionByLanguageProvider
+	 */
+	public function testGetDescriptionByLanguage(
+		array $expectedUsages,
+		$expected,
+		$prefixedEntityId,
+		$languageCode,
+		?EntityId $entityId,
+		$hasDescription,
+		$hasLang
+	) {
+		$usages = new HashUsageAccumulator();
+
+		$termLookup = $this->createMock( TermLookup::class );
+		$termLookup->expects( $this->exactly( $hasLang && $entityId ? 1 : 0 ) )
+			->method( 'getDescription' )
+			->with( $entityId )
+			->willReturn( $hasDescription ? "$prefixedEntityId-$languageCode" : null );
+
+		$bindings = new WikibaseLanguageIndependentLuaBindings(
+			$this->createMock( SiteLinkLookup::class ),
+			$this->createMock( EntityIdLookup::class ),
+			new SettingsArray(),
+			$usages,
+			new BasicEntityIdParser,
+			$termLookup,
+			new StaticContentLanguages( $hasLang ? [ $languageCode ] : [] ),
+			$this->createMock( ReferencedEntityIdLookup::class ),
+			$this->createMock( TitleFormatter::class ),
+			$this->createMock( TitleParser::class ),
+			'enwiki',
+			$this->newMockRevisionBasedEntityRedirectTargetLookup()
+		);
+
+		$this->assertSame( $expected, $bindings->getDescriptionByLanguage( $prefixedEntityId, $languageCode ) );
 		$this->assertSame( $expectedUsages, array_keys( $usages->getUsages() ) );
 	}
 

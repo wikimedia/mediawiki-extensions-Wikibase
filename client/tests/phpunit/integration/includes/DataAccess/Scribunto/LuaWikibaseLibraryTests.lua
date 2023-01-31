@@ -126,12 +126,12 @@ local tests = {
 	  expect = { nil }
 	},
 	{ name = 'mw.wikibase.getEntityIdForTitle with existing page and site id', func = mw.wikibase.getEntityIdForTitle,
-		args = { 'FooBarFoo', 'fooSiteId' },
-		expect = { 'Q32487' }
+	  args = { 'FooBarFoo', 'fooSiteId' },
+	  expect = { 'Q32487' }
 	},
 	{ name = 'mw.wikibase.getEntityIdForTitle with non existing site id', func = mw.wikibase.getEntityIdForTitle,
-		args = { 'FooBarFoo', 'bar' },
-		expect = { nil }
+	  args = { 'FooBarFoo', 'bar' },
+	  expect = { nil }
 	},
 	{ name = 'mw.wikibase.getEntity (type)', func = testGetEntityType, type='ToString',
 	  expect = { 'table' }
@@ -273,6 +273,38 @@ local tests = {
 	},
 	{ name = 'mw.wikibase.getLabelByLang (no label)', func = mw.wikibase.getLabelByLang, type='ToString',
 	  args = { 'Q32488', 'de' },
+	  expect = { nil }
+	},
+	{ name = 'mw.wikibase.getDescriptionByLang (invalid id type)', func = mw.wikibase.getDescriptionByLang, type='ToString',
+	  args = { 1, 'de' },
+	  expect = "bad argument #1 to 'getDescriptionByLang' (string expected, got number)"
+	},
+	{ name = 'mw.wikibase.getDescriptionByLang (invalid languageCode type)', func = mw.wikibase.getDescriptionByLang, type='ToString',
+	  args = { "Q42", 1.2 },
+	  expect = "bad argument #2 to 'getDescriptionByLang' (string expected, got number)"
+	},
+	{ name = 'mw.wikibase.getDescriptionByLang (invalid id)', func = mw.wikibase.getDescriptionByLang, type='ToString',
+	  args = { '-1', 'de' },
+	  expect = { nil }
+	},
+	{ name = 'mw.wikibase.getDescriptionByLang', func = mw.wikibase.getDescriptionByLang, type='ToString',
+	  args = { 'Q32487', 'de' },
+	  expect = { 'Description of Q32487' }
+	},
+	{ name = 'mw.wikibase.getDescriptionByLang (no such item)', func = mw.wikibase.getDescriptionByLang, type='ToString',
+	  args = { 'Q1224342342', 'de' },
+	  expect = { nil }
+	},
+	{ name = 'mw.wikibase.getDescriptionByLang (no such lang)', func = mw.wikibase.getDescriptionByLang, type='ToString',
+	  args = { 'Q32487', 'blahblahblah' },
+	  expect = { nil }
+	},
+	{ name = 'mw.wikibase.getDescriptionByLang (invalid lang)', func = mw.wikibase.getDescriptionByLang, type='ToString',
+	  args = { 'Q32487', ':!/<>' },
+	  expect = { nil }
+	},
+	{ name = 'mw.wikibase.getDescriptionByLang (no description)', func = mw.wikibase.getDescriptionByLang, type='ToString',
+	  args = { 'Q32488', 'en' },
 	  expect = { nil }
 	},
 	{ name = 'mw.wikibase.description (legacy alias)', func = mw.wikibase.description, type='ToString',
