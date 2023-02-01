@@ -46,7 +46,8 @@ class HtmlPageLinkRendererEndHookHandlerTest extends HtmlPageLinkRendererEndHook
 		$this->assertStringContainsString( self::DUMMY_LABEL, $customAttribs['title'] );
 		$this->assertStringContainsString( self::DUMMY_DESCRIPTION, $customAttribs['title'] );
 
-		$this->assertContains( 'wikibase.common', $context->getOutput()->getModuleStyles() );
+		$this->assertContains( 'wikibase.alltargets', $context->getOutput()->getModuleStyles() );
+		$this->assertContains( 'wikibase.desktop', $context->getOutput()->getModuleStyles() );
 	}
 
 	/**
