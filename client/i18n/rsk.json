@@ -4,6 +4,9 @@
 			"Keresturec"
 		]
 	},
+	"wikibase-client-desc": "Клиєнт за преширенє Wikibase",
+	"tooltip-t-wikibase": "Вяза ґу повязаней ставки складзиска податкох",
+	"wikibase-after-page-move": "Вашо премесцанє би ше тераз требало [$1 одражиц на язичну вязу ставки на Википодаткох]. Модлїме ва, преверце чи ше то збуло.",
 	"wikibase-dataitem": "{{WBREPONAME}} Елемент",
 	"wikibase-editlinks": "Ушор вязи",
 	"wikibase-linkitem-addlinks": "Додай вязи",

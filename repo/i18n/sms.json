@@ -39,7 +39,7 @@
 	"wikibase-sitelinks-special": "Jeeʹres seiddõõzz",
 	"wikibase-remove": "jaukkâd",
 	"wikibase-undo-revision-error": "Kååmtummuš ij oʹnnstam",
-	"wikibase-statementview-references-counter": "{{PLURAL:$1|$1 teâttkääiv|$1 teâttkäivvad|0=Teâttkäivv ij leäkku|1=teâttkäivv}}",
+	"wikibase-statementview-references-counter": "{{PLURAL:$1|$1 teâttkääiv|$1 teâttkäivvad|0=Teâttkäivv ij leäkku|1=1 teâttkäivv}}",
 	"wikibase-snakview-variations-somevalue-label": "toobdteʹmes ärvv",
 	"wikibase-entityselector-notfound": "Ni mâiʹd ij käunnʼjam",
 	"wikibase-anonymouseditwarning-heading": "Jiõk leäkku ǩeeʹrjtõõttâm sizz",
