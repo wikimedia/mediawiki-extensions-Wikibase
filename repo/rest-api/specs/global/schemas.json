@@ -21,7 +21,11 @@
 				"$ref": "./schema-parts.json#/Sitelinks"
 			},
 			"statements": {
-				"$ref": "./schema-parts.json#/Statements"
+				"type": "object",
+				"additionalProperties": {
+					"type": "array",
+					"items": { "$ref": "#/Statement" }
+				}
 			}
 		},
 		"discriminator": {

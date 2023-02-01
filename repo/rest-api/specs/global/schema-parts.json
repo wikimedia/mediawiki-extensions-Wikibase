@@ -1,10 +1,4 @@
 {
-	"Statements": {
-		"additionalProperties": {
-			"type": "array",
-			"items": { "$ref": "./schemas.json#/Statement" }
-		}
-	},
 	"Sitelinks": {
 		"type": "object",
 		"additionalProperties": {
