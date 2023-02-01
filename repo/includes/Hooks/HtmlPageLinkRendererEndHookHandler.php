@@ -377,7 +377,7 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 
 		// add wikibase styles in all cases, so we can format the link properly:
 		$out = $context->getOutput();
-		$out->addModuleStyles( [ 'wikibase.alltargets', 'wikibase.desktop' ] );
+		$out->addModuleStyles( [ 'wikibase.alltargets' ] );
 		if ( $this->federatedPropertiesEnabled && $entityId instanceof PropertyId ) {
 			$customAttribs[ 'class' ] = $customAttribs[ 'class' ] == '' ? 'fedprop' : $customAttribs[ 'class' ] . ' fedprop';
 			$out->addModules( 'wikibase.federatedPropertiesLeavingSiteNotice' );

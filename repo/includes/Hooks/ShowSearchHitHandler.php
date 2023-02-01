@@ -170,7 +170,7 @@ class ShowSearchHitHandler implements ShowSearchHitHook, ShowSearchHitTitleHook 
 	 * @param SpecialSearch $searchPage
 	 */
 	public static function addDescription( string &$html, array $description, SpecialSearch $searchPage ) {
-		RequestContext::getMain()->getOutput()->addModuleStyles( [ 'wikibase.alltargets', 'wikibase.desktop' ] );
+		RequestContext::getMain()->getOutput()->addModuleStyles( [ 'wikibase.alltargets' ] );
 		$displayLanguage = $searchPage->getLanguage()->getCode();
 		$description = self::withLanguage( $description, $displayLanguage );
 		$attr = [ 'class' => 'wb-itemlink-description' ];

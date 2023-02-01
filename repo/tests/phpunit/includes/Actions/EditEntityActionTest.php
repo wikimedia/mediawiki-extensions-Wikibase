@@ -108,7 +108,7 @@ class EditEntityActionTest extends ActionTestCase {
 			null, // user
 			'/undo-success/', // htmlPattern: should be a success
 			[ // expectedProps
-				'moduleStyles' => [ 'wikibase.alltargets', 'wikibase.desktop' ],
+				'moduleStyles' => [ 'wikibase.alltargets' ],
 			],
 		];
 
@@ -123,7 +123,7 @@ class EditEntityActionTest extends ActionTestCase {
 			null, // user
 			'/undo-success/', // htmlPattern: should be a success
 			[ // expectedProps
-				'moduleStyles' => [ 'wikibase.alltargets', 'wikibase.desktop' ],
+				'moduleStyles' => [ 'wikibase.alltargets' ],
 			],
 		];
 
@@ -149,7 +149,7 @@ class EditEntityActionTest extends ActionTestCase {
 			null, // user
 			'/undo-success/', // htmlPattern: should be a success
 			[ // expectedProps
-				'moduleStyles' => [ 'wikibase.alltargets', 'wikibase.desktop' ],
+				'moduleStyles' => [ 'wikibase.alltargets' ],
 			],
 		];
 
@@ -186,7 +186,7 @@ class EditEntityActionTest extends ActionTestCase {
 			null, // user
 			'/class="diff/', // htmlPattern: should be a success and contain a diff (undo-success is not shown for restore)
 			[ // expectedProps
-				'moduleStyles' => [ 'wikibase.alltargets', 'wikibase.desktop' ],
+				'moduleStyles' => [ 'wikibase.alltargets' ],
 			],
 		];
 
@@ -303,7 +303,7 @@ class EditEntityActionTest extends ActionTestCase {
 			null, // user
 			'/undo-success/', // htmlPattern: should be a success
 			[ // expectedProps
-				'moduleStyles' => [ 'wikibase.alltargets', 'wikibase.desktop' ],
+				'moduleStyles' => [ 'wikibase.alltargets' ],
 			],
 		];
 
@@ -329,7 +329,7 @@ class EditEntityActionTest extends ActionTestCase {
 			null, // user
 			'/undo-success.*USA<\/del>/s', // htmlPattern: should be a success and remove German description (/s = PCRE_DOTALL)
 			[ // expectedProps
-				'moduleStyles' => [ 'wikibase.alltargets', 'wikibase.desktop' ],
+				'moduleStyles' => [ 'wikibase.alltargets' ],
 			],
 		];
 

@@ -155,7 +155,6 @@ class EntityContentDiffViewTest extends MediaWikiIntegrationTestCase {
 
 		$this->assertIsString( $html );
 		$this->assertContains( 'wikibase.alltargets', $diffView->getOutput()->getModuleStyles() );
-		$this->assertContains( 'wikibase.desktop', $diffView->getOutput()->getModuleStyles() );
 		foreach ( $matchers as $name => $matcher ) {
 			$this->assertStringContainsString( $matcher, $html, $name );
 		}

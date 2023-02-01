@@ -93,6 +93,7 @@ return call_user_func( function() {
 			'targets' => [ 'desktop', 'mobile' ],
 			'styles' => [
 				'wikibase/wikibase.badgedisplay.less',
+				'wikibase/wikibase.itemlink.less',
 			],
 		],
 
@@ -131,6 +132,7 @@ return call_user_func( function() {
 			'styles' => [
 				// Order must be hierarchical, do not order alphabetically
 				'wikibase/wikibase.less',
+				'wikibase/wikibase.itemlink.less',
 				'jquery/wikibase/themes/default/jquery.wikibase.aliasesview.css',
 				'jquery/wikibase/themes/default/jquery.wikibase.descriptionview.css',
 				'jquery/wikibase/themes/default/jquery.wikibase.entityview.less',
