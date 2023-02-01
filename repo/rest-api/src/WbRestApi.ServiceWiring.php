@@ -2,6 +2,8 @@
 
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\ConditionalHeaderUtil;
+use MediaWiki\Rest\Reporter\ErrorReporter;
+use MediaWiki\Rest\Reporter\MWErrorReporter;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
@@ -73,6 +75,10 @@ return [
 				$services->getUserFactory()
 			)
 		);
+	},
+
+	'WbRestApi.ErrorReporter' => function( MediaWikiServices $services ): ErrorReporter {
+		return new MWErrorReporter();
 	},
 
 	'WbRestApi.GetItem' => function( MediaWikiServices $services ): GetItem {
@@ -251,7 +257,7 @@ return [
 	'WbRestApi.UnexpectedErrorHandlerMiddleware' => function( MediaWikiServices $services ): UnexpectedErrorHandlerMiddleware {
 		return new UnexpectedErrorHandlerMiddleware(
 			new ResponseFactory( new ErrorJsonPresenter() ),
-			WikibaseRepo::getLogger( $services )
+			$services->get( 'WbRestApi.ErrorReporter' )
 		);
 	},
 

@@ -4,10 +4,9 @@ namespace Wikibase\Repo\Tests\RestApi\RouteHandlers\Middleware;
 
 use Generator;
 use MediaWiki\Rest\Handler;
+use MediaWiki\Rest\Reporter\ErrorReporter;
 use MediaWiki\Rest\Response;
 use PHPUnit\Framework\TestCase;
-use Psr\Log\LoggerInterface;
-use Psr\Log\NullLogger;
 use RuntimeException;
 use Throwable;
 use TypeError;
@@ -29,7 +28,10 @@ class UnexpectedErrorHandlerMiddlewareTest extends TestCase {
 	 * @dataProvider throwableProvider
 	 */
 	public function testHandlesError( Throwable $throwable ): void {
-		$middleware = new UnexpectedErrorHandlerMiddleware( new ResponseFactory( new ErrorJsonPresenter() ), new NullLogger() );
+		$middleware = new UnexpectedErrorHandlerMiddleware(
+			new ResponseFactory( new ErrorJsonPresenter() ),
+			$this->createStub( ErrorReporter::class )
+		);
 
 		$response = $middleware->run(
 			$this->createStub( Handler::class ),
@@ -49,7 +51,10 @@ class UnexpectedErrorHandlerMiddlewareTest extends TestCase {
 	public function testGivenNoError_returnsRouteResponse(): void {
 		$expectedResponse = $this->createStub( Response::class );
 
-		$middleware = new UnexpectedErrorHandlerMiddleware( new ResponseFactory( new ErrorJsonPresenter() ), new NullLogger() );
+		$middleware = new UnexpectedErrorHandlerMiddleware(
+			new ResponseFactory( new ErrorJsonPresenter() ),
+			$this->createStub( ErrorReporter::class )
+		);
 
 		$response = $middleware->run(
 			$this->createStub( Handler::class ),
@@ -62,15 +67,20 @@ class UnexpectedErrorHandlerMiddlewareTest extends TestCase {
 	}
 
 	public function testLogsExceptions(): void {
+		$routeHandler = $this->createStub( Handler::class );
 		$exception = new RuntimeException();
-		$logger = $this->createMock( LoggerInterface::class );
+		$logger = $this->createMock( ErrorReporter::class );
 		$logger->expects( $this->once() )
-			->method( 'error' )
-			->with( (string)$exception );
+			->method( 'reportError' )
+			->with(
+				$exception,
+				$routeHandler,
+				$this->anything()
+			);
 
 		$middleware = new UnexpectedErrorHandlerMiddleware( new ResponseFactory( new ErrorJsonPresenter() ), $logger );
 		$middleware->run(
-			$this->createStub( Handler::class ),
+			$routeHandler,
 			function () use ( $exception ): void {
 				throw $exception;
 			}
