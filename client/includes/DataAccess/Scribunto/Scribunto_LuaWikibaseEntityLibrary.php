@@ -251,12 +251,6 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	 * @return string[]|null[]
 	 */
 	public function formatPropertyValues( string $entityId, string $propertyLabelOrId, array $acceptableRanks = null ): array {
-		$this->checkType( 'formatPropertyValues', 0, $entityId, 'string' );
-		// Use 1 as index for the property id, as the first parameter comes from
-		// internals of mw.wikibase.entity (an index of 2 might confuse users
-		// as they only gave one parameter themselves)
-		$this->checkType( 'formatPropertyValues', 1, $propertyLabelOrId, 'string' );
-		$this->checkTypeOptional( 'formatPropertyValues', 2, $acceptableRanks, 'table', null );
 		try {
 			return [
 				$this->getImplementation()->formatPropertyValues(
@@ -287,12 +281,6 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	 * @return string[]|null[]
 	 */
 	public function formatStatements( string $entityId, string $propertyLabelOrId, array $acceptableRanks = null ): array {
-		$this->checkType( 'formatStatements', 0, $entityId, 'string' );
-		// Use 1 as index for the property id, as the first parameter comes from
-		// internals of mw.wikibase.entity (an index of 2 might confuse users
-		// as they only gave one parameter themselves)
-		$this->checkType( 'formatStatements', 1, $propertyLabelOrId, 'string' );
-		$this->checkTypeOptional( 'formatStatements', 2, $acceptableRanks, 'table', null );
 		try {
 			return [
 				$this->getImplementation()->formatStatements(
