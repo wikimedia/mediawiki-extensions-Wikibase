@@ -60,7 +60,9 @@ class SpecialAvailableBadges extends SpecialWikibasePage {
 	public function execute( $subPage ) {
 		parent::execute( $subPage );
 
-		$this->getOutput()->addHTML( $this->makeAllBadgesHtml() );
+		$outputPage = $this->getOutput();
+		$outputPage->addHTML( $this->makeAllBadgesHtml() );
+		$outputPage->addModuleStyles( 'wikibase.alltargets' );
 	}
 
 	/**
