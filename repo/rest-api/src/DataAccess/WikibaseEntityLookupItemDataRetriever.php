@@ -7,8 +7,10 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Statement\StatementList as DataModelStatementList;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemData;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemDataBuilder;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemDataRetriever;
@@ -53,10 +55,10 @@ class WikibaseEntityLookupItemDataRetriever	implements ItemRetriever, ItemDataRe
 			$itemData->setType( $item->getType() );
 		}
 		if ( in_array( ItemData::FIELD_LABELS, $fields ) ) {
-			$itemData->setLabels( $item->getLabels() );
+			$itemData->setLabels( Labels::fromTermList( $item->getLabels() ) );
 		}
 		if ( in_array( ItemData::FIELD_DESCRIPTIONS, $fields ) ) {
-			$itemData->setDescriptions( $item->getDescriptions() );
+			$itemData->setDescriptions( Descriptions::fromTermList( $item->getDescriptions() ) );
 		}
 		if ( in_array( ItemData::FIELD_ALIASES, $fields ) ) {
 			$itemData->setAliases( $item->getAliasGroups() );

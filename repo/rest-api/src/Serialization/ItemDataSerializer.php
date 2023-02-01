@@ -10,10 +10,19 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\ItemData;
  */
 class ItemDataSerializer {
 
+	private LabelsSerializer $labelsSerializer;
+	private DescriptionsSerializer $descriptionsSerializer;
 	private StatementListSerializer $statementsSerializer;
 	private SiteLinkListSerializer $siteLinksSerializer;
 
-	public function __construct( StatementListSerializer $statementsSerializer, SiteLinkListSerializer $siteLinksSerializer ) {
+	public function __construct(
+		LabelsSerializer $labelsSerializer,
+		DescriptionsSerializer $descriptionsSerializer,
+		StatementListSerializer $statementsSerializer,
+		SiteLinkListSerializer $siteLinksSerializer
+	) {
+		$this->labelsSerializer = $labelsSerializer;
+		$this->descriptionsSerializer = $descriptionsSerializer;
 		$this->statementsSerializer = $statementsSerializer;
 		$this->siteLinksSerializer = $siteLinksSerializer;
 	}
@@ -21,8 +30,8 @@ class ItemDataSerializer {
 	public function serialize( ItemData $itemData ): array {
 		$fieldSerializers = [
 			ItemData::FIELD_TYPE => fn() => $itemData->getType(),
-			ItemData::FIELD_LABELS => fn() => new ArrayObject( $itemData->getLabels()->toTextArray() ),
-			ItemData::FIELD_DESCRIPTIONS => fn() => new ArrayObject( $itemData->getDescriptions()->toTextArray() ),
+			ItemData::FIELD_LABELS => fn() => $this->labelsSerializer->serialize( $itemData->getLabels() ),
+			ItemData::FIELD_DESCRIPTIONS => fn() => $this->descriptionsSerializer->serialize( $itemData->getDescriptions() ),
 			ItemData::FIELD_ALIASES => fn() => new ArrayObject( $itemData->getAliases()->toTextArray() ),
 			ItemData::FIELD_STATEMENTS => fn() => $this->statementsSerializer->serialize( $itemData->getStatements() ),
 			ItemData::FIELD_SITELINKS => fn() => $this->siteLinksSerializer->serialize( $itemData->getSiteLinks() ),

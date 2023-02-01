@@ -5,7 +5,6 @@ namespace Wikibase\Repo\RestApi\Domain\ReadModel;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Term\AliasGroupList;
-use Wikibase\DataModel\Term\TermList;
 
 /**
  * @license GPL-2.0-or-later
@@ -29,8 +28,8 @@ class ItemData {
 	private ItemId $id;
 	private array $requestedFields;
 	private ?string $type;
-	private ?TermList $labels;
-	private ?TermList $descriptions;
+	private ?Labels $labels;
+	private ?Descriptions $descriptions;
 	private ?AliasGroupList $aliases;
 	private ?StatementList $statements;
 	private ?SiteLinkList $siteLinks;
@@ -39,8 +38,8 @@ class ItemData {
 		ItemId $id,
 		array $requestedFields,
 		?string $type,
-		?TermList $labels,
-		?TermList $descriptions,
+		?Labels $labels,
+		?Descriptions $descriptions,
 		?AliasGroupList $aliases,
 		?StatementList $statements,
 		?SiteLinkList $siteLinks
@@ -63,11 +62,11 @@ class ItemData {
 		return $this->type;
 	}
 
-	public function getLabels(): ?TermList {
+	public function getLabels(): ?Labels {
 		return $this->labels;
 	}
 
-	public function getDescriptions(): ?TermList {
+	public function getDescriptions(): ?Descriptions {
 		return $this->descriptions;
 	}
 

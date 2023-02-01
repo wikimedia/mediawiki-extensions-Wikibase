@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\RestApi\Domain\ReadModel;
 
 use ArrayObject;
+use Wikibase\DataModel\Term\TermList;
 
 /**
  * @license GPL-2.0-or-later
@@ -17,4 +18,13 @@ class Descriptions extends ArrayObject {
 			)
 		);
 	}
+
+	public static function fromTermList( TermList $list ): self {
+		$descriptions = [];
+		foreach ( $list->getIterator() as $term ) {
+			$descriptions[] = Description::fromTerm( $term );
+		}
+		return new self( ...$descriptions );
+	}
+
 }

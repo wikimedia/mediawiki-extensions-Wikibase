@@ -6,7 +6,6 @@ use LogicException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Term\AliasGroupList;
-use Wikibase\DataModel\Term\TermList;
 
 /**
  * @license GPL-2.0-or-later
@@ -15,8 +14,8 @@ class ItemDataBuilder {
 
 	private ItemId $id;
 	private ?string $type = null;
-	private ?TermList $labels = null;
-	private ?TermList $descriptions = null;
+	private ?Labels $labels = null;
+	private ?Descriptions $descriptions = null;
 	private ?AliasGroupList $aliases = null;
 	private ?StatementList $statements = null;
 	private ?SiteLinkList $siteLinks = null;
@@ -34,14 +33,14 @@ class ItemDataBuilder {
 		return $this;
 	}
 
-	public function setLabels( TermList $labels ): self {
+	public function setLabels( Labels $labels ): self {
 		$this->checkRequested( ItemData::FIELD_LABELS );
 		$this->labels = $labels;
 
 		return $this;
 	}
 
-	public function setDescriptions( TermList $descriptions ): self {
+	public function setDescriptions( Descriptions $descriptions ): self {
 		$this->checkRequested( ItemData::FIELD_DESCRIPTIONS );
 		$this->descriptions = $descriptions;
 

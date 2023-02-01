@@ -11,12 +11,16 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
-use Wikibase\DataModel\Term\Term;
-use Wikibase\DataModel\Term\TermList;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemData;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemDataBuilder;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
+use Wikibase\Repo\RestApi\Serialization\DescriptionsSerializer;
 use Wikibase\Repo\RestApi\Serialization\ItemDataSerializer;
+use Wikibase\Repo\RestApi\Serialization\LabelsSerializer;
 use Wikibase\Repo\RestApi\Serialization\SiteLinkListSerializer;
 use Wikibase\Repo\RestApi\Serialization\StatementListSerializer;
 
@@ -30,6 +34,16 @@ use Wikibase\Repo\RestApi\Serialization\StatementListSerializer;
 class ItemDataSerializerTest extends TestCase {
 
 	/**
+	 * @var MockObject|LabelsSerializer
+	 */
+	private $labelsSerializer;
+
+	/**
+	 * @var MockObject|DescriptionsSerializer
+	 */
+	private $descriptionsSerializer;
+
+	/**
 	 * @var MockObject|StatementListSerializer
 	 */
 	private $statementsSerializer;
@@ -40,6 +54,9 @@ class ItemDataSerializerTest extends TestCase {
 	private $siteLinkListSerializer;
 
 	protected function setUp(): void {
+		$this->labelsSerializer = $this->createStub( LabelsSerializer::class );
+		$this->descriptionsSerializer = $this->createStub( DescriptionsSerializer::class );
+
 		$this->statementsSerializer = $this->createMock( StatementListSerializer::class );
 		$this->statementsSerializer
 			->method( 'serialize' )
@@ -73,33 +90,48 @@ class ItemDataSerializerTest extends TestCase {
 	public function testSerializeLabels(): void {
 		$enLabel = 'potato';
 		$koLabel = '감자';
+		$expectedSerialization = new ArrayObject( [
+			[ 'en' => $enLabel ], [ 'de' => $koLabel ],
+		] );
+		$this->labelsSerializer = $this->createMock( LabelsSerializer::class );
+		$this->labelsSerializer
+			->method( 'serialize' )
+			->willReturn( new ArrayObject( $expectedSerialization ) );
+
 		$itemData = $this->newItemDataBuilderWithSomeId( [ ItemData::FIELD_LABELS ] )
-			->setLabels( new TermList( [
-				new Term( 'en', $enLabel ),
-				new Term( 'ko', $koLabel ),
-			] ) )
+			->setLabels( new Labels(
+				new Label( 'en', $enLabel ),
+				new Label( 'ko', $koLabel ),
+			) )
 			->build();
 
 		$serialization = $this->newSerializer()->serialize( $itemData );
 
-		$this->assertSame( $enLabel, $serialization['labels']['en'] );
-		$this->assertSame( $koLabel, $serialization['labels']['ko'] );
+		$this->assertEquals( $expectedSerialization, $serialization['labels'] );
 	}
 
 	public function testSerializeDescriptions(): void {
 		$enDescription = 'root vegetable';
 		$deDescription = 'Art der Gattung Nachtschatten (Solanum)';
+		$expectedSerialization = new ArrayObject( [
+			[ 'en' => $enDescription ],
+			[ 'de' => $deDescription ],
+		] );
+		$this->descriptionsSerializer = $this->createMock( DescriptionsSerializer::class );
+		$this->descriptionsSerializer
+			->method( 'serialize' )
+			->willReturn( new ArrayObject( $expectedSerialization ) );
+
 		$itemData = $this->newItemDataBuilderWithSomeId( [ ItemData::FIELD_DESCRIPTIONS ] )
-			->setDescriptions( new TermList( [
-				new Term( 'en', $enDescription ),
-				new Term( 'de', $deDescription ),
-			] ) )
+			->setDescriptions( new Descriptions(
+				new Description( 'en', $enDescription ),
+				new Description( 'de', $deDescription ),
+			) )
 			->build();
 
 		$serialization = $this->newSerializer()->serialize( $itemData );
 
-		$this->assertSame( $enDescription, $serialization['descriptions']['en'] );
-		$this->assertSame( $deDescription, $serialization['descriptions']['de'] );
+		$this->assertEquals( $expectedSerialization, $serialization['descriptions'] );
 	}
 
 	public function testSerializeAliases(): void {
@@ -181,8 +213,8 @@ class ItemDataSerializerTest extends TestCase {
 			$this->newItemDataBuilderWithSomeId(
 				[ ItemData::FIELD_LABELS, ItemData::FIELD_DESCRIPTIONS, ItemData::FIELD_ALIASES ]
 			)
-				->setLabels( new TermList() )
-				->setDescriptions( new TermList() )
+				->setLabels( new Labels() )
+				->setDescriptions( new Descriptions() )
 				->setAliases( new AliasGroupList() )
 				->build(),
 			[ 'id', 'labels', 'descriptions', 'aliases' ],
@@ -196,8 +228,8 @@ class ItemDataSerializerTest extends TestCase {
 		yield [
 			$this->newItemDataBuilderWithSomeId( ItemData::VALID_FIELDS )
 				->setType( Item::ENTITY_TYPE )
-				->setLabels( new TermList() )
-				->setDescriptions( new TermList() )
+				->setLabels( new Labels() )
+				->setDescriptions( new Descriptions() )
 				->setAliases( new AliasGroupList() )
 				->setStatements( new StatementList() )
 				->setSiteLinks( new SiteLinkList() )
@@ -207,7 +239,12 @@ class ItemDataSerializerTest extends TestCase {
 	}
 
 	private function newSerializer(): ItemDataSerializer {
-		return new ItemDataSerializer( $this->statementsSerializer, $this->siteLinkListSerializer );
+		return new ItemDataSerializer(
+			$this->labelsSerializer,
+			$this->descriptionsSerializer,
+			$this->statementsSerializer,
+			$this->siteLinkListSerializer
+		);
 	}
 
 	private function newItemDataBuilderWithSomeId( array $requestedFields ): ItemDataBuilder {
