@@ -10,6 +10,8 @@
 	"wikibase-editlinks": "Тайантыларды тӱзедери",
 	"wikibase-editlinkstitle": "Башка тилдер ортодо тайантыларын тӱзедери",
 	"wikibase-linkitem-addlinks": "Тайантылар кожоры",
+	"wikibase-linkitem-input-site": "Тили:",
+	"wikibase-linkitem-input-page": "Бӱк:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Јажырар",
 	"wikibase-rc-hide-wikidata-show": "Кӧргӱзер",

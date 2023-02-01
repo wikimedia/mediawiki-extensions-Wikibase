@@ -2,10 +2,14 @@
 	"@metadata": {
 		"authors": [
 			"Zakaria Tunsung",
-			"Linus Konkor"
+			"Linus Konkor",
+			"Kuukye",
+			"Yirkang"
 		]
 	},
 	"wikibase-edit": "maaleŋ e",
 	"wikibase-add": "paahi",
+	"wikibase-label-empty": "Boŋ zaa kye/ yele zaa kye",
+	"wikibase-description-empty": "Bigiruu zaa kyebe",
 	"wikibase-sitelinks-special": "Ziirimine"
 }
