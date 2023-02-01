@@ -550,14 +550,11 @@
 		"content": {
 			"application/json": {
 				"schema": {
-					"allOf": [
-						{ "$ref": "./schema-parts.json#/Statements" },
-						{
-							"additionalProperties": {
-								"items": { "$ref": "./response-parts.json#/StatementResponse" }
-							}
-						}
-					]
+					"type": "object",
+					"additionalProperties": {
+						"type": "array",
+						"items": { "$ref": "./response-parts.json#/StatementResponse" }
+					}
 				}
 			}
 		}
