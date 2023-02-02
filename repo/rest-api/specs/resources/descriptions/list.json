@@ -12,7 +12,7 @@
 			{ "$ref": "../../global/parameters.json#/Authorization" }
 		],
 		"responses": {
-			"200": { "$ref": "../../global/responses.json#/ItemDescriptionMap" },
+			"200": { "$ref": "../../global/responses.json#/ItemDescriptions" },
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
 			"308": { "$ref": "../../global/responses.json#/Moved" },
 			"400": { "$ref": "../../global/responses.json#/InvalidItemIdInput" },
