@@ -14,7 +14,7 @@
 			"200": { "$ref": "../../global/responses.json#/Statements" },
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
 			"308": { "$ref": "../../global/responses.json#/Moved" },
-			"400": { "$ref": "../../global/responses.json#/InvalidStatementListInput" },
+			"400": { "$ref": "../../global/responses.json#/InvalidItemIdInput" },
 			"404": { "$ref": "../../global/responses.json#/ItemNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
