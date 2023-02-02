@@ -412,7 +412,7 @@
 			}
 		}
 	},
-	"ItemLabelList": {
+	"ItemLabels": {
 		"description": "Item's labels by language",
 		"headers": {
 			"Last-Modified": {
@@ -442,7 +442,7 @@
 			}
 		}
 	},
-	"ItemDescriptionMap": {
+	"ItemDescriptions": {
 		"description": "Item's descriptions by language",
 		"headers": {
 			"ETag": {
