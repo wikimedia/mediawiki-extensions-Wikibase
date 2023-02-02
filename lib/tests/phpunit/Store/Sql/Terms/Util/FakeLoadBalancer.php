@@ -39,10 +39,6 @@ class FakeLoadBalancer extends LoadBalancer {
 		}
 	}
 
-	public function forEachOpenPrimaryConnection( $callback, array $params = [] ) {
-		( $callback )( $this->dbw, ...$params );
-	}
-
 	public function getLocalDomainID(): string {
 		return $this->dbw->getDomainID();
 	}
