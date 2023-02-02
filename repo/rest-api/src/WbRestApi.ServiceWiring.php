@@ -32,6 +32,7 @@ use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementValidator;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemValidator;
+use Wikibase\Repo\RestApi\UseCases\GetItemDescriptions\GetItemDescriptions;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabels;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabelsValidator;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatement;
@@ -88,6 +89,18 @@ return [
 			),
 			WbRestApi::getItemDataRetriever( $services ),
 			new GetItemValidator( new ItemIdValidator() )
+		);
+	},
+
+	'WbRestApi.GetItemDescriptions' => function( MediaWikiServices $services ): GetItemDescriptions {
+		return new GetItemDescriptions(
+			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
+				WikibaseRepo::getEntityRevisionLookup( $services )
+			),
+			new TermLookupItemDataRetriever(
+				WikibaseRepo::getTermLookup( $services ),
+				WikibaseRepo::getTermsLanguages( $services )
+			)
 		);
 	},
 
