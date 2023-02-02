@@ -124,41 +124,7 @@
 			}
 		}
 	},
-	"InvalidItemLabelListInput": {
-		"description": "The request cannot be processed",
-		"content": {
-			"application/json": {
-				"schema": { "$ref": "./response-parts.json#/Error" },
-				"examples": {
-					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" }
-				}
-			}
-		},
-		"headers": {
-			"Content-Language": {
-				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
-			}
-		}
-	},
-	"InvalidItemDescriptionMapInput": {
-		"description": "The request cannot be processed",
-		"content": {
-			"application/json": {
-				"schema": { "$ref": "./response-parts.json#/Error" },
-				"examples": {
-					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" }
-				}
-			}
-		},
-		"headers": {
-			"Content-Language": {
-				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
-			}
-		}
-	},
-	"InvalidStatementListInput": {
+	"InvalidItemIdInput": {
 		"description": "The request cannot be processed",
 		"content": {
 			"application/json": {
