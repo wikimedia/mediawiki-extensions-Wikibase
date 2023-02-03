@@ -9,7 +9,7 @@ use MediaWikiIntegrationTestCase;
 use Wikibase\Repo\RestApi\RouteHandlers\GetItemDescriptionsRouteHandler;
 
 /**
- * @covers \Wikibase\Repo\RestApi\RouteHandlers\GetItemRouteHandler
+ * @covers \Wikibase\Repo\RestApi\RouteHandlers\GetItemDescriptionsRouteHandler
  *
  * @group Wikibase
  *

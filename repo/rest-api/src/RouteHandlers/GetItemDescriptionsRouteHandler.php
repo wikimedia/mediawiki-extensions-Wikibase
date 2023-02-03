@@ -7,6 +7,7 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Rest\ResponseInterface;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
+use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
@@ -14,6 +15,7 @@ use Wikibase\Repo\RestApi\Serialization\DescriptionsSerializer;
 use Wikibase\Repo\RestApi\UseCases\GetItemDescriptions\GetItemDescriptions;
 use Wikibase\Repo\RestApi\UseCases\GetItemDescriptions\GetItemDescriptionsRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemDescriptions\GetItemDescriptionsSuccessResponse;
+use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -26,15 +28,18 @@ class GetItemDescriptionsRouteHandler extends SimpleHandler {
 
 	private GetItemDescriptions $useCase;
 	private DescriptionsSerializer $descriptionsSerializer;
+	private ResponseFactory $responseFactory;
 	private MiddlewareHandler $middlewareHandler;
 
 	public function __construct(
 		GetItemDescriptions $useCase,
 		DescriptionsSerializer $descriptionsSerializer,
+		ResponseFactory $responseFactory,
 		MiddlewareHandler $middlewareHandler
 	) {
 		$this->useCase = $useCase;
 		$this->descriptionsSerializer = $descriptionsSerializer;
+		$this->responseFactory = $responseFactory;
 		$this->middlewareHandler = $middlewareHandler;
 	}
 
@@ -42,6 +47,7 @@ class GetItemDescriptionsRouteHandler extends SimpleHandler {
 		return new self(
 			WbRestApi::getGetItemDescriptions(),
 			new DescriptionsSerializer(),
+			new ResponseFactory( new ErrorJsonPresenter() ),
 			new MiddlewareHandler( [
 				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
 				new UserAgentCheckMiddleware(),
@@ -65,8 +71,14 @@ class GetItemDescriptionsRouteHandler extends SimpleHandler {
 	}
 
 	public function runUseCase( string $itemId ): Response {
-		$useCaseResponse = $this->useCase->execute( new GetItemDescriptionsRequest( $itemId ) );
-		return $this->newSuccessHttpResponse( $useCaseResponse );
+		try {
+			$useCaseResponse = $this->useCase->execute( new GetItemDescriptionsRequest( $itemId ) );
+			$httpResponse = $this->newSuccessHttpResponse( $useCaseResponse );
+		} catch ( UseCaseException $e ) {
+			$httpResponse = $this->responseFactory->newErrorResponseFromException( $e );
+		}
+
+		return $httpResponse;
 	}
 
 	public function getParamSettings(): array {
