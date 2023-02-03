@@ -3,16 +3,3 @@ div.after-portlet-lang:after {
 	clear: both;
 	display: block;
 }
-
-/* Can be removed when edit language links is part of ULS */
-.skin-vector:not( .skin-vector-legacy ) .wb-langlinks-link {
-	text-align: left;
-	float: none;
-}
-
-/* Can be removed when edit language links is part of ULS */
-.skin-vector:not( .skin-vector-legacy ) .wb-langlinks-link a {
-	/* Must use !important to override !important already used in Wikibase */
-	/* stylelint-disable-next-line declaration-no-important */
-	color: #0645ad !important;
-}
