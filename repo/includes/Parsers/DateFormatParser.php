@@ -224,10 +224,12 @@ class DateFormatParser extends StringValueParser {
 					}
 					break;
 
-				// Textual representation of the day of the week. Redundant, just continue as if
-				// it's not in the format string.
+				// Textual representation of the day of the week. Redundant, can be ignored.
 				case 'D':
 				case 'l':
+					$pattern .= '\p{L}*' . $optionalPunctuation . $separation;
+					break;
+
 				// We can ignore "raw" and "raw toggle" when parsing, because we always accept
 				// canonical digits.
 				case 'xN':
