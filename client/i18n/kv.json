@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Enye Lav"
+		]
+	},
+	"wikibase-dataitem": "{{grammar:genitive|{{WBREPONAME}}}}лӧн тор",
+	"wikibase-editlinks": "Вежны ыстӧгъяс",
+	"wikibase-linkitem-addlinks": "Содтыны ыстӧгъяс",
+	"wikibase-linkitem-title": "Лист бок вылӧ ыстӧг",
+	"wikibase-linkitem-linkpage": "Лист бок вылӧ ыстӧг",
+	"wikibase-linkitem-selectlink": "Бӧрйы сайт да лист бок, кытчӧ ті кӧсъян вӧчны ыстӧг тайӧ лист боксянь.",
+	"wikibase-linkitem-input-site": "Кыв:",
+	"wikibase-linkitem-input-page": "Лист бок:",
+	"wikibase-otherprojects": "Мукӧд проектын"
+}

@@ -203,6 +203,7 @@
 	"wikibase-api-permissiondenied": "Хьан бакъо йац дешдерг кхочушдан.",
 	"wikibase-restoreold": "меттахӀоттайе",
 	"wikibase-entity-summary-restore": "МеттахӀоьттина {{GENDER:$4|декъашхочуьнан}} $3 верси  [[Special:Contributions/$4|$4]]",
+	"wikibase-noentity": "Иштта хӀума йац. Хьан йиш йу [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} тептарш чохь дӀайаздарш лаха], цуьнах хилларг хаархьама.",
 	"wikibase-listdatatypes-wikibase-item-head": "Элемент",
 	"wikibase-listdatatypes-wikibase-property-head": "Билгало",
 	"wikibase-listdatatypes-commonsmedia-head": "Викигуламера медиа",
