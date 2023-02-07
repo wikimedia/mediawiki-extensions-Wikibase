@@ -31,7 +31,8 @@
 			"Umherirrender",
 			"Vogone",
 			"Yellowcard",
-			"Zolo"
+			"Zolo",
+			"Nikki"
 		]
 	},
 	"wikibase-desc": "Ermöglicht ein Repositorium strukturierter Daten",
@@ -41,7 +42,7 @@
 	"wikibase-entity-query": "Abfrage",
 	"wikibase-edit": "bearbeiten",
 	"wikibase-save": "speichern",
-	"wikibase-publish": "Veröffentlichen",
+	"wikibase-publish": "veröffentlichen",
 	"wikibase-cancel": "abbrechen",
 	"wikibase-add": "hinzufügen",
 	"wikibase-addqualifier": "Qualifikator hinzufügen",
@@ -463,7 +464,7 @@
 	"wikibase-listdatatypes-external-id-head": "Externer Identifikator",
 	"wikibase-listdatatypes-external-id-body": "Literale Datenfelder für einen externen Identifikator. Externe Identifikatoren können automatisch mit einer zuverlässigen Quelle zur Anzeige verknüpft werden.",
 	"wikibase-listdatavaluetypes-name-string": "Zeichenfolge",
-	"wikibase-listdatavaluetypes-name-globecoordinate": "Erdkoordinate",
+	"wikibase-listdatavaluetypes-name-globecoordinate": "Koordinate",
 	"wikibase-listdatavaluetypes-name-monolingualtext": "einsprachiger Text",
 	"wikibase-listdatavaluetypes-name-quantity": "Menge",
 	"wikibase-listdatavaluetypes-name-time": "Zeit",

@@ -288,7 +288,7 @@
 	"wikibase-itemmerge-not-item": "Thực thể được chỉ định không phải là một khoản mục.",
 	"wikibase-itemmerge-failed-save": "Không thể lưu khoản mục.",
 	"wikibase-itemmerge-permissiondenied": "Không cho phép.",
-	"wikibase-itemmerge-failed-modify": "Thất bại trong việc sát nhập khoản mục. Xin vui lòng giải quyết bất kỳ xung đột hệ thống nào trước tiên.",
+	"wikibase-itemmerge-failed-modify": "Thất bại trong việc hợp nhất khoản mục. Xin vui lòng giải quyết bất kỳ mâu thuẫn nào trước tiên.",
 	"wikibase-itemmerge-no-such-entity": "Không tìm thấy khoản mục.",
 	"wikibase-itemmerge-cant-load-entity-content": "Không thể tải khoản mục.",
 	"wikibase-itemmerge-cant-merge-self": "Không thể nhập một khoản mục vào chính nó.",

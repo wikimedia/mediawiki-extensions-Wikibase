@@ -50,5 +50,11 @@
 	"apihelp-wbsetaliases-summary": "Nastavi sopomenke za entiteto Wikibase.",
 	"apihelp-wbsetaliases-param-language": "Jezik za nastavitev sopomenk",
 	"apihelp-wbsetdescription-param-language": "Jezik opisa",
+	"apihelp-wbsetlabel-example-2": "Nastavitev oznake v angleščini na »<var>Earth</var>« za predmet s povezavo spletišča <var>enwiki</var> => »<var>Earth</var>«.",
+	"apihelp-wbsetsitelink-example-1": "Dodajanje povezave spletišča na angleško stran »Hydrogen« predmetu z ID-jem <samp>$1</samp>, če povezava do spletišča ne obstaja",
+	"apihelp-wbsetsitelink-example-2": "Dodajte povezavo spletišča na angleško stran »Hydrogen« elementu z ID-jem <samp>$1</samp>, če povezava spletišča ne obstaja. Povzetku urejanja doda tudi »Ljubi kisik«.",
+	"apihelp-wbsetsitelink-example-3": "Dodajanje povezave spletišča na predmet, povezan z angleško stranjo »Hydrogen«, nemški strani »Wasserstoff«, če povezava spletišča ne obstaja",
+	"apihelp-wbsetsitelink-example-4": "Odstrani nemško povezavo spletišča s predmeta",
+	"apihelp-wbsetsitelink-example-5": "Dodajanje povezave spletišča do poljske strani »Wodór« predmetu, ki je povezan z angleško stranjo »Hydrogen«, z eno značko, ki kaže na element z ID-jem »Q149«",
 	"apihelp-wbformatentities-example-3": "Oblikuje ID predmeta, ID lastnosti in ID leksema."
 }

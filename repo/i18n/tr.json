@@ -514,7 +514,7 @@
 	"wikibase-federated-properties-leaving-site-notice-checkbox-label": "Bana bu mesajı bir daha gösterme",
 	"wikibase-federated-properties-edit-request-failed-notice-try-again": "Tekrar dene",
 	"wikibase-federated-properties-edit-request-failed-notice-notice": "Federasyon kaynak vikisine yapılan başarısız bir istek nedeniyle bu ifadeyi düzenleyemezsiniz.",
-	"wikibase-federated-properties-edit-request-failed-notice-header": "Düzenleme başarısız oldu",
+	"wikibase-federated-properties-edit-request-failed-notice-header": "Değişiklik başarısız oldu",
 	"special-setaliases-parameterized": "$1 takma adlarına bakın",
 	"special-setlabel-parameterized": "$1 etiketine bakın",
 	"special-setdescription-parameterized": "$1 açıklamasına bakın",
