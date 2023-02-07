@@ -13,24 +13,34 @@ function makeEtag( ...revisionIds ) {
 
 describe( 'GET statement', () => {
 	let testItemId;
+
 	let testStatement;
+	let testStatementWithDeletedProperty;
+
 	let testLastModified;
 	let testRevisionId;
 
-	function assertValid200Response( response ) {
+	function assertValid200Response( response, statement ) {
 		assert.equal( response.status, 200 );
-		assert.equal( response.body.id, testStatement.id );
+		assert.equal( response.body.id, statement.id );
 		assert.equal( response.header[ 'last-modified' ], testLastModified );
 		assert.equal( response.header.etag, makeEtag( testRevisionId ) );
 	}
 
 	before( async () => {
-		const statementPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+		const testPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+		const testPropertyIdToDelete = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+
 		const createItemResponse = await entityHelper.createItemWithStatements( [
-			entityHelper.newLegacyStatementWithRandomStringValue( statementPropertyId )
+			entityHelper.newLegacyStatementWithRandomStringValue( testPropertyId ),
+			entityHelper.newLegacyStatementWithRandomStringValue( testPropertyIdToDelete )
 		] );
+
 		testItemId = createItemResponse.entity.id;
-		testStatement = createItemResponse.entity.claims[ statementPropertyId ][ 0 ];
+		testStatement = createItemResponse.entity.claims[ testPropertyId ][ 0 ];
+
+		testStatementWithDeletedProperty = createItemResponse.entity.claims[ testPropertyIdToDelete ][ 0 ];
+		await entityHelper.deleteProperty( testPropertyIdToDelete );
 
 		const testItemCreationMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 		testLastModified = testItemCreationMetadata.timestamp;
@@ -47,11 +57,19 @@ describe( 'GET statement', () => {
 					.assertValidRequest()
 					.makeRequest();
 
-				assertValid200Response( response );
+				assertValid200Response( response, testStatement );
+			} );
+
+			it( 'can get a statement with a deleted property', async () => {
+				const response = await newGetStatementRequestBuilder( testStatementWithDeletedProperty.id )
+					.assertValidRequest()
+					.makeRequest();
+
+				assertValid200Response( response, testStatementWithDeletedProperty );
+				assert.equal( response.body.property[ 'data-type' ], null );
 			} );
 
 			describe( '400 error response', () => {
-
 				it( 'statement ID contains invalid entity ID', async () => {
 					const statementId = 'X123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 					const response = await newRequestBuilder( statementId )

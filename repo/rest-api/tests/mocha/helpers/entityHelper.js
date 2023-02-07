@@ -10,6 +10,14 @@ async function createEntity( type, entity ) {
 	}, 'POST' );
 }
 
+async function deleteProperty( propertyId ) {
+	const admin = await action.mindy();
+	return admin.action( 'delete', {
+		title: `Property:${propertyId}`,
+		token: await admin.token()
+	}, 'POST' );
+}
+
 async function createUniqueStringProperty() {
 	return await createEntity( 'property', {
 		labels: { en: { language: 'en', value: `string-property-${utils.uniq()}` } },
@@ -104,6 +112,7 @@ function newStatementWithRandomStringValue( propertyId ) {
 
 module.exports = {
 	createEntity,
+	deleteProperty,
 	createItemWithStatements,
 	createUniqueStringProperty,
 	createRedirectForItem,
