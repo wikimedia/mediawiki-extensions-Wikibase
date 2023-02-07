@@ -8,7 +8,6 @@ const {
 	newLegacyStatementWithRandomStringValue,
 	newStatementWithRandomStringValue
 } = require( '../helpers/entityHelper' );
-const hasJsonDiffLib = require( '../helpers/hasJsonDiffLib' );
 
 function assertValid400Response( response ) {
 	assert.equal( response.status, 400 );
@@ -46,11 +45,8 @@ describe( 'User-Agent requests', () => {
 			newStatementWithRandomStringValue( stringPropertyId )
 		),
 		() => rbf.newRemoveItemStatementRequestBuilder( itemId, statementId ),
-		() => rbf.newRemoveStatementRequestBuilder( statementId )
-	];
-
-	if ( hasJsonDiffLib() ) { // awaiting security review (T316245)
-		editRequests.push( () => rbf.newPatchItemStatementRequestBuilder(
+		() => rbf.newRemoveStatementRequestBuilder( statementId ),
+		() => rbf.newPatchItemStatementRequestBuilder(
 			itemId,
 			statementId,
 			[ {
@@ -58,16 +54,16 @@ describe( 'User-Agent requests', () => {
 				path: '/mainsnak/datavalue/value',
 				value: 'random-string-value-' + utils.uniq()
 			} ]
-		) );
-		editRequests.push( () => rbf.newPatchStatementRequestBuilder(
+		),
+		() => rbf.newPatchStatementRequestBuilder(
 			statementId,
 			[ {
 				op: 'replace',
 				path: '/mainsnak/datavalue/value',
 				value: 'random-string-value-' + utils.uniq()
 			} ]
-		) );
-	}
+		)
+	];
 
 	[
 		() => rbf.newGetItemStatementsRequestBuilder( itemId ),

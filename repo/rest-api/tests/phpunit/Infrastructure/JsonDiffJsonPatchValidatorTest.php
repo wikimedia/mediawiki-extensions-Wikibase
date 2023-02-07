@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\RestApi\Infrastructure;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
-use Swaggest\JsonDiff\JsonDiff;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatchValidator;
 use Wikibase\Repo\RestApi\Validation\JsonPatchValidator;
 
@@ -16,13 +15,6 @@ use Wikibase\Repo\RestApi\Validation\JsonPatchValidator;
  * @license GPL-2.0-or-later
  */
 class JsonDiffJsonPatchValidatorTest extends TestCase {
-
-	protected function setUp(): void {
-		parent::setUp();
-		if ( !class_exists( JsonDiff::class ) ) {
-			$this->markTestSkipped( 'Skipping while swaggest/json-diff has not made it to mediawiki/vendor yet (T316245).' );
-		}
-	}
 
 	public function testInvalidJsonPatch(): void {
 		$error = ( new JsonDiffJsonPatchValidator() )->validate( [ 'invalid JSON Patch' ] );

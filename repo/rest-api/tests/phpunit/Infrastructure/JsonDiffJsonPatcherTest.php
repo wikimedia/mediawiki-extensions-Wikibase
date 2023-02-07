@@ -6,7 +6,6 @@ use Exception;
 use Generator;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use Swaggest\JsonDiff\JsonDiff;
 use Wikibase\Repo\RestApi\Domain\Exceptions\PatchPathException;
 use Wikibase\Repo\RestApi\Domain\Exceptions\PatchTestConditionFailedException;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
@@ -19,14 +18,6 @@ use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
  * @license GPL-2.0-or-later
  */
 class JsonDiffJsonPatcherTest extends TestCase {
-
-	protected function setUp(): void {
-		parent::setUp();
-
-		if ( !class_exists( JsonDiff::class ) ) {
-			$this->markTestSkipped( 'Skipping while swaggest/json-diff has not made it to mediawiki/vendor yet (T316245).' );
-		}
-	}
 
 	/**
 	 * @dataProvider validPatchProvider
