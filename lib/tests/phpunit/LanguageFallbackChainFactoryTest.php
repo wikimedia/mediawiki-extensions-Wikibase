@@ -58,11 +58,11 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( count( $expectedItems ), count( $chain ) );
 		foreach ( $expectedItems as $i => $expected ) {
 			if ( is_array( $expected ) ) {
-				$this->assertSame( $expected[0], $chain[$i]->getLanguage()->getCode() );
-				$this->assertSame( $expected[1], $chain[$i]->getSourceLanguage()->getCode() );
+				$this->assertSame( $expected[0], $chain[$i]->getLanguageCode() );
+				$this->assertSame( $expected[1], $chain[$i]->getSourceLanguageCode() );
 			} else {
-				$this->assertSame( $expected, $chain[$i]->getLanguage()->getCode() );
-				$this->assertNull( $chain[$i]->getSourceLanguage() );
+				$this->assertSame( $expected, $chain[$i]->getLanguageCode() );
+				$this->assertNull( $chain[$i]->getSourceLanguageCode() );
 			}
 		}
 	}

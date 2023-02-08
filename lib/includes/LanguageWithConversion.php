@@ -21,19 +21,9 @@ class LanguageWithConversion {
 	private static $objectCache = [];
 
 	/**
-	 * @var Language|null
-	 */
-	private $language;
-
-	/**
 	 * @var string
 	 */
 	private $languageCode;
-
-	/**
-	 * @var Language|null
-	 */
-	private $sourceLanguage;
 
 	/**
 	 * @var string|null
@@ -56,22 +46,16 @@ class LanguageWithConversion {
 	private $translatePool = [];
 
 	/**
-	 * @param null|Language $language
 	 * @param string $languageCode
-	 * @param null|Language $sourceLanguage
 	 * @param null|string $sourceLanguageCode
 	 * @param null|Language $parentLanguage
 	 */
 	private function __construct(
-		?Language $language,
 		$languageCode,
-		Language $sourceLanguage = null,
 		$sourceLanguageCode = null,
 		Language $parentLanguage = null
 	) {
-		$this->language = $language;
 		$this->languageCode = $languageCode;
-		$this->sourceLanguage = $sourceLanguage;
 		$this->sourceLanguageCode = $sourceLanguageCode;
 		$this->parentLanguage = $parentLanguage;
 	}
@@ -113,14 +97,12 @@ class LanguageWithConversion {
 	public static function factory( $language, $sourceLanguage = null ) {
 		if ( is_string( $language ) ) {
 			$languageCode = self::validateLanguageCode( $language );
-			$language = null;
 		} else {
 			$languageCode = $language->getCode();
 		}
 
 		if ( is_string( $sourceLanguage ) ) {
 			$sourceLanguageCode = self::validateLanguageCode( $sourceLanguage );
-			$sourceLanguage = null;
 		} elseif ( $sourceLanguage === null ) {
 			$sourceLanguageCode = null;
 		} else {
@@ -136,10 +118,7 @@ class LanguageWithConversion {
 			$services = MediaWikiServices::getInstance();
 			$langFactory = $services->getLanguageFactory();
 			$langConvFactory = $services->getLanguageConverterFactory();
-			if ( !$language ) {
-				$language = $langFactory->getLanguage( $languageCode );
-			}
-			$parentLanguage = $langFactory->getParentLanguage( $language->getCode() );
+			$parentLanguage = $langFactory->getParentLanguage( $languageCode );
 
 			if ( !$parentLanguage ) {
 				throw new MWException( __METHOD__ . ': $language does not support conversion' );
@@ -152,7 +131,7 @@ class LanguageWithConversion {
 			$parentLanguage = null;
 		}
 
-		$object = new self( $language, $languageCode, $sourceLanguage, $sourceLanguageCode, $parentLanguage );
+		$object = new self( $languageCode, $sourceLanguageCode, $parentLanguage );
 		self::$objectCache[$languageCode][$sourceLanguageKey] = $object;
 		return $object;
 	}
@@ -167,38 +146,12 @@ class LanguageWithConversion {
 	}
 
 	/**
-	 * Get the language this object wraps.
-	 *
-	 * @return Language
-	 */
-	public function getLanguage() {
-		if ( !$this->language ) {
-			$this->language = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( $this->languageCode );
-		}
-
-		return $this->language;
-	}
-
-	/**
 	 * Get the code of the source language defined.
 	 *
 	 * @return string|null
 	 */
 	public function getSourceLanguageCode() {
 		return $this->sourceLanguageCode;
-	}
-
-	/**
-	 * Get the source language defined.
-	 *
-	 * @return Language
-	 */
-	public function getSourceLanguage() {
-		if ( $this->sourceLanguageCode !== null && !$this->sourceLanguage ) {
-			$this->sourceLanguage = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( $this->sourceLanguageCode );
-		}
-
-		return $this->sourceLanguage;
 	}
 
 	/**

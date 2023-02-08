@@ -124,7 +124,7 @@ class OutputFormatValueFormatterFactoryTest extends \PHPUnit\Framework\TestCase 
 			/** @var TermLanguageFallbackChain $languageFallback */
 			$languageFallback = $options->getOption( FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN );
 			$languages = $languageFallback->getFallbackChain();
-			$lang = $languages[0]->getLanguage()->getCode();
+			$lang = $languages[0]->getLanguageCode();
 
 			$this->assertEquals( $expectedFallback, $lang, 'OPT_LANGUAGE_FALLBACK_CHAIN' );
 		}

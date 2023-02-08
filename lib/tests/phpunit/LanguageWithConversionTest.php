@@ -28,13 +28,10 @@ class LanguageWithConversionTest extends MediaWikiIntegrationTestCase {
 		$expectedSourceLangCode,
 		$expectedFetchLangCode
 	) {
-		$this->assertEquals( $expectedLangCode, $obj->getLanguage()->getCode() );
 		$this->assertEquals( $expectedLangCode, $obj->getLanguageCode() );
 		if ( $expectedSourceLangCode === null ) {
-			$this->assertNull( $obj->getSourceLanguage() );
 			$this->assertNull( $obj->getSourceLanguageCode() );
 		} else {
-			$this->assertEquals( $expectedSourceLangCode, $obj->getSourceLanguage()->getCode() );
 			$this->assertEquals( $expectedSourceLangCode, $obj->getSourceLanguageCode() );
 		}
 		$this->assertEquals( $expectedFetchLangCode, $obj->getFetchLanguageCode() );
