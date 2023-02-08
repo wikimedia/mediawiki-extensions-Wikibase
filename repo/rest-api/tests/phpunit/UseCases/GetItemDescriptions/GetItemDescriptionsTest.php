@@ -15,6 +15,7 @@ use Wikibase\Repo\RestApi\UseCases\GetItemDescriptions\GetItemDescriptions;
 use Wikibase\Repo\RestApi\UseCases\GetItemDescriptions\GetItemDescriptionsRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemDescriptions\GetItemDescriptionsSuccessResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemDescriptions\GetItemDescriptionsValidator;
+use Wikibase\Repo\RestApi\UseCases\ItemRedirectException;
 use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 
@@ -80,6 +81,44 @@ class GetItemDescriptionsTest extends TestCase {
 			$this->assertSame( ErrorResponse::INVALID_ITEM_ID, $useCaseEx->getErrorCode() );
 			$this->assertSame( 'Not a valid item ID: X321', $useCaseEx->getErrorMessage() );
 			$this->assertNull( $useCaseEx->getErrorContext() );
+		}
+	}
+
+	public function testGivenRequestedItemDoesNotExist_throwsUseCaseException(): void {
+		$itemId = new ItemId( 'Q10' );
+
+		$this->itemRevisionMetadataRetriever = $this->createMock( ItemRevisionMetadataRetriever::class );
+		$this->itemRevisionMetadataRetriever->expects( $this->once() )
+			->method( 'getLatestRevisionMetadata' )
+			->with( $itemId )
+			->willReturn( LatestItemRevisionMetadataResult::itemNotFound() );
+
+		try {
+			$this->newUseCase()->execute(
+				new GetItemDescriptionsRequest( $itemId->getSerialization() )
+			);
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( ErrorResponse::ITEM_NOT_FOUND, $e->getErrorCode() );
+			$this->assertSame( 'Could not find an item with the ID: Q10', $e->getErrorMessage() );
+			$this->assertNull( $e->getErrorContext() );
+		}
+	}
+
+	public function testGivenItemRedirect_throwsItemRedirectException(): void {
+		$redirectSource = 'Q123';
+		$redirectTarget = 'Q321';
+
+		$this->itemRevisionMetadataRetriever
+			->method( 'getLatestRevisionMetadata' )
+			->with( new ItemId( $redirectSource ) )
+			->willReturn( LatestItemRevisionMetadataResult::redirect( new ItemId( $redirectTarget ) ) );
+
+		try {
+			$this->newUseCase()->execute(
+				new GetItemDescriptionsRequest( $redirectSource )
+			);
+		} catch ( ItemRedirectException $e ) {
+			$this->assertSame( $redirectTarget, $e->getRedirectTargetId() );
 		}
 	}
 
