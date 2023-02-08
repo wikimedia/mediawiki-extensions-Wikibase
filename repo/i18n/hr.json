@@ -113,7 +113,7 @@
 	"wikibase-entityselector-notfound": "Podudarnost nije pronađena",
 	"wikibase-anonymouseditwarning": "Upozorenje: niste prijavljeni. Vaša [https://hr.wikipedia.org/wiki/IP_broj IP-adresa] bit će javno vidljiva, ako načinite i jedno uređivanje. Ako ste <strong>[[Special:UserLogin|prijavljeni]]</strong> ili <strong>[[Special:CreateAccount|stvorite račun]]</strong>, Vaša će uređivanja biti pripisana Vašemu suradničkom imenu uz druge koristi.",
 	"wikibase-anonymouseditwarning-heading": "Trenutačno niste prijavljeni",
-	"wikibase-anonymouseditwarning-message": "Trenutačno Vaša IP-adresa bit će javno vidljiva, ukoliko načinite bilo koje uređivanje. Ako se prijavite ili stvorite račun, Vaša će uređivanja biti pripisana Vašemu suradničkom imenu, uz druge blagodati.",
+	"wikibase-anonymouseditwarning-message": "Vaša internetska adresa bit će javno vidljiva ako načinite bilo koje uređivanje. Ako se prijavite ili stvorite račun, Vaša će uređivanja biti pripisana Vašemu suradničkom imenu, uz druge blagodati.",
 	"wikibase-anonymouseditwarning-dismiss-persist": "Upozori me kad god nisam prijavljen.",
 	"wikibase-anonymouseditwarning-dismiss-button": "Želim uređivati bez prijave",
 	"wikibase-validator-invalid": "Vrijednost nije valjana",

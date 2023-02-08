@@ -13,7 +13,7 @@
 	"apihelp-wbeditentity-param-title": "Naslov strani za povezavo.\nUporabite skupaj s <var>site</var>; da ustvarite popolno povezavo mesta.",
 	"apihelp-wbeditentity-param-baserevid": "Številski označevalec redakcije, ki je izhodišče za spremembo.\nTo se uporablja za zaznavanje navzkrižij pri shranjevanju.",
 	"apihelp-wbeditentity-param-summary": "Povzetek za urejanje.\nPredpripet bo samodejno ustvarjenemu komentarju. Omejitev dolžine avtokomentarja skupaj s povzetkom je 260 znakov. Upoštevajte, da bo vse, kar presega to omejitev, odrezano.",
-	"apihelp-wbeditentity-param-bot": "Označi to urejanje kot urejanje bota. Ta URL-zastavica bo upoštevana samo, če uporabnik pripada skupini »{{int:group-bot}}«.",
+	"apihelp-wbeditentity-param-bot": "To urejanje označi kot urejanje bota. Ta URL-zastavica bo upoštevana samo, če uporabnik pripada skupini »{{int:group-bot}}«.",
 	"apihelp-wbeditentity-param-data": "Serializirani objekt, ki se uporablja kot vir podatkov \nNovoustvarjeni entiteti bo dodeljen »ID«.",
 	"apihelp-wbeditentity-param-clear": "Če je nastavljeno, se celotna entiteta pred nadaljevanjem izprazni.\nEntiteta ne bo shranjena, preden bo izpolnjena z »<code>data</code>«, morda z izključenimi deli.",
 	"apihelp-wbeditentity-param-new": "Če je nastavljeno, bo ustvarjena nova entiteta.\nTo nastavite na vrsto entitete, ki jo želite ustvariti.\nTega ni dovoljeno nastavljati, kadar je nastavljen tudi <var>id</var>.",
