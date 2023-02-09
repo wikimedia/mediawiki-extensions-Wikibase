@@ -26,6 +26,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Item as ReadModelItem;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdateFailed;
+use Wikibase\Repo\RestApi\Domain\Services\ItemUpdatePrevented;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
@@ -131,7 +132,7 @@ class MediaWikiEditEntityFactoryItemUpdaterTest extends TestCase {
 		];
 	}
 
-	public function testGivenSavingFails_throwsException(): void {
+	public function testGivenSavingFails_throwsGenericException(): void {
 		$itemToUpdate = NewItem::withId( 'Q123' )->build();
 		$editMeta = new EditMetadata( [ 'tag', 'also a tag' ], false, $this->createStub( EditSummary::class ) );
 		$errorStatus = Status::newFatal( 'failed to save. sad times.' );
@@ -148,6 +149,35 @@ class MediaWikiEditEntityFactoryItemUpdaterTest extends TestCase {
 		$this->expectErrorMessage( (string)$errorStatus );
 
 		$updater->update( $itemToUpdate, $editMeta );
+	}
+
+	/**
+	 * @dataProvider editPreventedStatusProvider
+	 */
+	public function testGivenEditPrevented_throwsCorrespondingException( Status $errorStatus ): void {
+		$itemToUpdate = NewItem::withId( 'Q123' )->build();
+		$editMeta = new EditMetadata( [ 'tag', 'also a tag' ], false, $this->createStub( EditSummary::class ) );
+
+		$editEntity = $this->createStub( EditEntity::class );
+		$editEntity->method( 'attemptSave' )->willReturn( $errorStatus );
+
+		$this->editEntityFactory = $this->createStub( MediawikiEditEntityFactory::class );
+		$this->editEntityFactory->method( 'newEditEntity' )->willReturn( $editEntity );
+
+		$updater = $this->newItemUpdater();
+
+		$this->expectException( ItemUpdatePrevented::class );
+		$this->expectErrorMessage( (string)$errorStatus );
+
+		$updater->update( $itemToUpdate, $editMeta );
+	}
+
+	public function editPreventedStatusProvider(): Generator {
+		yield [ Status::newFatal( 'actionthrottledtext' ) ];
+		yield [ Status::newFatal( wfMessage( 'actionthrottledtext' ) ) ];
+		yield [ Status::newFatal( 'abusefilter-disallowed' ) ];
+		yield [ Status::newFatal( 'spam-blacklisted-link' ) ];
+		yield [ Status::newFatal( 'spam-blacklisted-email' ) ];
 	}
 
 	public function testGivenSavingSucceedsWithErrors_logsErrors(): void {
