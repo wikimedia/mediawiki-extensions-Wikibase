@@ -15,6 +15,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Item;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdateFailed;
+use Wikibase\Repo\RestApi\Domain\Services\ItemUpdatePrevented;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
@@ -62,6 +63,10 @@ class MediaWikiEditEntityFactoryItemUpdater implements ItemUpdater {
 		);
 
 		if ( !$status->isOK() ) {
+			if ( $this->isPreventedEdit( $status ) ) {
+				throw new ItemUpdatePrevented( (string)$status );
+			}
+
 			throw new ItemUpdateFailed( (string)$status );
 		} elseif ( !$status->isGood() ) {
 			$this->logger->warning( (string)$status );
@@ -78,6 +83,15 @@ class MediaWikiEditEntityFactoryItemUpdater implements ItemUpdater {
 			$entityRevision->getTimestamp(),
 			$entityRevision->getRevisionId()
 		);
+	}
+
+	private function isPreventedEdit( \Status $status ): bool {
+		$errorMessage = $status->getErrors()[0]['message'];
+		$errorCode = is_string( $errorMessage ) ? $errorMessage : $errorMessage->getKey();
+
+		return $errorCode === 'actionthrottledtext'
+			|| strpos( $errorCode, 'spam-blacklisted' ) === 0
+			|| strpos( $errorCode, 'abusefilter' ) === 0;
 	}
 
 	private function checkBotRightIfProvided( User $user, bool $isBot ): void {
