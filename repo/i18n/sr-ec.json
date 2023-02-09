@@ -122,7 +122,6 @@
 	"wikibase-copyrighttooltip-acknowledge": "Прихватам ове услове за своје будуће измене. Не приказуј ову поруку поново.",
 	"wikibase-entityselector-more": "још",
 	"wikibase-entityselector-notfound": "Нема подударања",
-	"wikibase-anonymouseditwarning": "Напомена: Нисте пријављени.\nВаша IP адреса ће бити забележена у историји измена овог ентитета.",
 	"wikibase-anonymouseditwarning-heading": "Нисте пријављени",
 	"wikibase-anonymouseditwarning-dismiss-persist": "Упозори ме када нисам пријављен/а.",
 	"wikibase-anonymouseditwarning-dismiss-button": "Уреди без пријаве",
