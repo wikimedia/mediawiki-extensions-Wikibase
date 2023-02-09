@@ -1,7 +1,15 @@
 /**
  * @license GNU GPL v2+
  */
+.wikibase-sitelinkgroupview .wikibase-sitelinkgroupview-heading-section {
+	margin-right: 24px;
+}
+
 .wikibase-sitelinkgroupview > .mw-collapsible-toggle {
+	position: sticky;
+	top: 0;
+	margin-bottom: 0.3em;
+	background-color: #fff;
 	background-position: right;
 	background-repeat: no-repeat;
 	height: 24px;
