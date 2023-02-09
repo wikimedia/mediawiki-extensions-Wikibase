@@ -9,6 +9,7 @@ use FauxRequest;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
+use MultiHttpClient;
 use ReflectionClass;
 use ReflectionMethod;
 use Wikibase\Client\Hooks\EchoNotificationsHandlers;
@@ -225,6 +226,8 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiIntegrationTestCase
 					->method( 'get' );
 				$factory->expects( $this->never() )
 					->method( 'post' );
+				$factory->method( 'createMultiClient' )
+					->willReturn( $this->createMock( MultiHttpClient::class ) );
 				return $factory;
 			}
 		);
