@@ -90,13 +90,13 @@ class TimeParserFactory {
 			$this->options->getOption( ValueParser::OPT_LANG ),
 			$dateFormatPreference,
 			'date',
-			$this->options
+			clone $this->options
 		);
 		$parsers[] = $mwDateFormatParserFactory->getMwDateFormatParser(
 			$this->options->getOption( ValueParser::OPT_LANG ),
 			$dateFormatPreference,
 			'monthonly',
-			$this->options
+			clone $this->options
 		);
 
 		$parsers[] = new PhpDateTimeParser(

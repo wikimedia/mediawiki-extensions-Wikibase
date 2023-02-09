@@ -105,11 +105,14 @@ class MwDateFormatParserFactoryTest extends TestCase {
 					if ( $precision === null ) {
 						$precision = $maximumPrecision;
 					}
+					$calendarModel = intval( substr( $mwTimestamp, 0, 4 ) ) <= 1582
+						? TimeValue::CALENDAR_JULIAN
+						: TimeValue::CALENDAR_GREGORIAN;
 					$expected = new TimeValue(
 						$this->getIsoTimestamp( $mwTimestamp, $precision ),
 						0, 0, 0,
 						$precision,
-						TimeValue::CALENDAR_GREGORIAN
+						$calendarModel
 					);
 
 					yield [
