@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\RestApi\Serialization;
 
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 
@@ -19,10 +20,17 @@ class PropertyValuePairSerializer {
 
 	public function serialize( Snak $snak ): array {
 		$propertyId = $snak->getPropertyId();
+
+		try {
+			$propertyDataType = $this->dataTypeLookup->getDataTypeIdForProperty( $propertyId );
+		} catch ( PropertyDataTypeLookupException $exception ) {
+			$propertyDataType = null;
+		}
+
 		$propertyValuePair = [
 			'property' => [
 				'id' => $propertyId->getSerialization(),
-				'data-type' => $this->dataTypeLookup->getDataTypeIdForProperty( $propertyId ),
+				'data-type' => $propertyDataType,
 			],
 			'value' => [
 				'type' => $snak->getType(),

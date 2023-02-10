@@ -30,6 +30,7 @@ class PropertyValuePairSerializerTest extends TestCase {
 	private const ITEM_ID_PROPERTY_ID = 'P321';
 	private const TIME_PROPERTY_ID = 'P456';
 	private const GLOBECOORDINATE_PROPERTY_ID = 'P678';
+	private const DELETED_PROPERTY_ID = 'P987';
 
 	/**
 	 * @dataProvider serializationProvider
@@ -139,6 +140,17 @@ class PropertyValuePairSerializerTest extends TestCase {
 				'property' => [
 					'id' => self::GLOBECOORDINATE_PROPERTY_ID,
 					'data-type' => 'globe-coordinate',
+				],
+			],
+		];
+
+		yield 'null data type for some property value' => [
+			new PropertySomeValueSnak( new NumericPropertyId( self::DELETED_PROPERTY_ID ) ),
+			[
+				'value' => [ 'type' => 'somevalue' ],
+				'property' => [
+					'id' => self::DELETED_PROPERTY_ID,
+					'data-type' => null,
 				],
 			],
 		];
