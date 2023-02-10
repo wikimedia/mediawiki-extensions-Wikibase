@@ -1,6 +1,6 @@
 <?php declare( strict_types = 1 );
 
-namespace Wikibase\Repo\Tests\RestApi\UseCases\GetItemStatement;
+namespace Wikibase\Repo\Tests\RestApi\UseCases\GetItemDescriptions;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -10,9 +10,13 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\Services\ItemDescriptionsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
+use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemDescriptions\GetItemDescriptions;
 use Wikibase\Repo\RestApi\UseCases\GetItemDescriptions\GetItemDescriptionsRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemDescriptions\GetItemDescriptionsSuccessResponse;
+use Wikibase\Repo\RestApi\UseCases\GetItemDescriptions\GetItemDescriptionsValidator;
+use Wikibase\Repo\RestApi\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 
 /**
  * @covers \Wikibase\Repo\RestApi\UseCases\GetItemDescriptions\GetItemDescriptions
@@ -67,10 +71,23 @@ class GetItemDescriptionsTest extends TestCase {
 		$this->assertEquals( new GetItemDescriptionsSuccessResponse( $descriptions, $lastModified, $revisionId ), $response );
 	}
 
+	public function testGivenInvalidItemId_throws(): void {
+		try {
+			$this->newUseCase()->execute( new GetItemDescriptionsRequest( 'X321' ) );
+
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $useCaseEx ) {
+			$this->assertSame( ErrorResponse::INVALID_ITEM_ID, $useCaseEx->getErrorCode() );
+			$this->assertSame( 'Not a valid item ID: X321', $useCaseEx->getErrorMessage() );
+			$this->assertNull( $useCaseEx->getErrorContext() );
+		}
+	}
+
 	private function newUseCase(): GetItemDescriptions {
 		return new GetItemDescriptions(
 			$this->itemRevisionMetadataRetriever,
-			$this->descriptionsRetriever
+			$this->descriptionsRetriever,
+			new GetItemDescriptionsValidator( new ItemIdValidator() )
 		);
 	}
 
