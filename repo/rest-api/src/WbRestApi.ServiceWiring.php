@@ -270,7 +270,8 @@ return [
 	'WbRestApi.UnexpectedErrorHandlerMiddleware' => function( MediaWikiServices $services ): UnexpectedErrorHandlerMiddleware {
 		return new UnexpectedErrorHandlerMiddleware(
 			new ResponseFactory( new ErrorJsonPresenter() ),
-			$services->get( 'WbRestApi.ErrorReporter' )
+			$services->get( 'WbRestApi.ErrorReporter' ),
+			WikibaseRepo::getLogger( $services )
 		);
 	},
 
