@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Maintenance;
 
 use MediaWiki\Tests\Maintenance\MaintenanceBaseTestCase;
+use User;
 use Wikibase\Repo\Maintenance\ImportFederatedPropertiesSampleData;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -25,9 +26,10 @@ class ImportFederatedPropertiesSampleDataTest extends MaintenanceBaseTestCase {
 
 	public function testStoreEntityWithTermData() {
 		$entityStore = WikibaseRepo::getEntityStore();
+		$user = User::newSystemUser( User::MAINTENANCE_SCRIPT_USER, [ 'steal' => true ] );
 
 		$maintenance = new ImportFederatedPropertiesSampleData();
-		$item = $maintenance->storeNewItemWithTermData( [ 'somelabel', 'somedescription' ], $entityStore );
+		$item = $maintenance->storeNewItemWithTermData( [ 'somelabel', 'somedescription' ], $entityStore, $user );
 
 		$this->assertFalse( $item->isEmpty() );
 		$this->assertTrue( $item->getLabels()->hasTermForLanguage( "en" ) );

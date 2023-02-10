@@ -70,8 +70,7 @@ class ChangePropertyDataType extends Maintenance {
 			WikibaseRepo::getDataTypeFactory()
 		);
 
-		// "Maintenance script" is in MediaWiki's $wgReservedUsernames
-		$user = User::newFromName( 'Maintenance script' );
+		$user = User::newSystemUser( User::MAINTENANCE_SCRIPT_USER, [ 'steal' => true ] );
 		$summary = $this->getOption( 'summary', '' );
 		try {
 			$propertyDataTypeChanger->changeDataType( $propertyId, $user, $newDataType, $summary );
