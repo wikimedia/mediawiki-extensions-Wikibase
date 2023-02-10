@@ -8,6 +8,7 @@ use MediaWiki\Rest\StringStream;
 use Wikibase\Repo\RestApi\Presentation\ErrorResponseToHttpStatus;
 use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
+use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 
 /**
  * @license GPL-2.0-or-later
@@ -18,6 +19,13 @@ class ResponseFactory {
 
 	public function __construct( ErrorJsonPresenter $errorPresenter ) {
 		$this->errorPresenter = $errorPresenter;
+	}
+
+	public function newErrorResponseFromException( UseCaseException $e ): Response {
+		// quick hack for now while we test UseCaseException vs ErrorResponse
+		return $this->newErrorResponse(
+			new ErrorResponse( $e->getErrorCode(), $e->getErrorMessage(), $e->getErrorContext() )
+		);
 	}
 
 	public function newErrorResponse( ErrorResponse $useCaseResponse ): Response {

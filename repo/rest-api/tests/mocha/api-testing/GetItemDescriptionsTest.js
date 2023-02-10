@@ -26,4 +26,14 @@ describe( 'GET /entities/items/{id}/descriptions', () => {
 		assert.strictEqual( response.header.etag, `"${testItemCreationMetadata.revid}"` );
 		assert.strictEqual( response.header[ 'last-modified' ], testItemCreationMetadata.timestamp );
 	} );
+
+	it( '400 error - bad request, invalid item ID', async () => {
+		const itemId = 'X123';
+		const response = await newGetItemDescriptionsRequestBuilder( itemId ).assertInvalidRequest().makeRequest();
+
+		assert.strictEqual( response.status, 400 );
+		assert.header( response, 'Content-Language', 'en' );
+		assert.strictEqual( response.body.code, 'invalid-item-id' );
+		assert.include( response.body.message, itemId );
+	} );
 } );
