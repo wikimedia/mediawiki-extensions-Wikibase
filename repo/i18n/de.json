@@ -510,7 +510,7 @@
 	"wikibase-refresh-for-missing-datatype": "Der Datentyp $1 wurde nicht im lokalen Skript des Clients gefunden. Dies könnte ein Ergebnis eines veralteten gecachten Skriptes sein. Versuche, deinen Browser durch Umgehung des lokalen Caches (Strg-Shift-R oder Cmd-Shift-R in den meisten Browsern) komplett zu aktualisieren, um das Problem zu lösen.",
 	"wikibase-outdated-client-script": "Hoppla, es ist eine harte Aktualisierung fällig!",
 	"wikibase-shortcopyrightwarning-heading": "Lizenzzuschreibung",
-	"wikibase-entity-save-error-heading": "Etwas ist schief gelaufen",
+	"wikibase-entity-save-error-heading": "Etwas ist schiefgelaufen",
 	"wikibase-entity-save-error-message": "Deine Änderung konnte nicht veröffentlicht werden. Du kannst erneut versuchen, auf die Schaltfläche \"Veröffentlichen\" zu klicken.",
 	"wikibase-tainted-ref-popper-text": "Der Wert dieser Aussage wurde geändert, aber der Beleg blieb gleich. Du kannst diese Warnung entfernen, falls der Beleg noch korrekt ist.",
 	"wikibase-tainted-ref-popper-title": "Möglicherweise Diskrepanz zwischen Einzelnachweis und Wert",

@@ -1,10 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"Keenan Pepper",
 			"LesVisages",
 			"Robin van der Vliet"
 		]
 	},
+	"wikibase-dataitem": "ijo lon {{WBREPONAME}}",
 	"wikibase-editlinks": "o ante e linja",
 	"wikibase-linkitem-addlinks": "o pana e linja",
 	"wikibase-linkitem-title": "o linja e lipu ante",
