@@ -104,14 +104,12 @@ class RemoveStatementRouteHandler extends SimpleHandler {
 		) );
 
 		if ( $useCaseResponse instanceof RemoveItemStatementSuccessResponse ) {
-			$httpResponse = $this->newSuccessHttpResponse();
+			return $this->newSuccessHttpResponse();
 		} elseif ( $useCaseResponse instanceof RemoveItemStatementErrorResponse ) {
-			$httpResponse = $this->responseFactory->newErrorResponse( $useCaseResponse );
+			return $this->responseFactory->newErrorResponse( $useCaseResponse );
 		} else {
 			throw new LogicException( 'Received an unexpected use case result in ' . __CLASS__ );
 		}
-
-		return $httpResponse;
 	}
 
 	public function getParamSettings(): array {

@@ -109,14 +109,12 @@ class PatchStatementRouteHandler extends SimpleHandler {
 		) );
 
 		if ( $useCaseResponse instanceof PatchItemStatementSuccessResponse ) {
-			$httpResponse = $this->newSuccessHttpResponse( $useCaseResponse );
+			return $this->newSuccessHttpResponse( $useCaseResponse );
 		} elseif ( $useCaseResponse instanceof PatchItemStatementErrorResponse ) {
-			$httpResponse = $this->responseFactory->newErrorResponse( $useCaseResponse );
+			return $this->responseFactory->newErrorResponse( $useCaseResponse );
 		} else {
 			throw new LogicException( 'Received an unexpected use case result in ' . __CLASS__ );
 		}
-
-		return $httpResponse;
 	}
 
 	public function getParamSettings(): array {

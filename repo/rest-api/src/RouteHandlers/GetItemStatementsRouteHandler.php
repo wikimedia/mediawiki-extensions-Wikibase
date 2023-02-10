@@ -78,16 +78,14 @@ class GetItemStatementsRouteHandler extends SimpleHandler {
 		$useCaseResponse = $this->getItemStatements->execute( new GetItemStatementsRequest( $itemId ) );
 
 		if ( $useCaseResponse instanceof GetItemStatementsSuccessResponse ) {
-			$httpResponse = $this->newSuccessHttpResponse( $useCaseResponse );
+			return $this->newSuccessHttpResponse( $useCaseResponse );
 		} elseif ( $useCaseResponse instanceof ItemRedirectResponse ) {
-			$httpResponse = $this->newRedirectHttpResponse( $useCaseResponse );
+			return $this->newRedirectHttpResponse( $useCaseResponse );
 		} elseif ( $useCaseResponse instanceof GetItemStatementsErrorResponse ) {
-			$httpResponse = $this->responseFactory->newErrorResponse( $useCaseResponse );
+			return $this->responseFactory->newErrorResponse( $useCaseResponse );
 		} else {
 			throw new LogicException( 'Received an unexpected use case result in ' . __CLASS__ );
 		}
-
-		return $httpResponse;
 	}
 
 	private function newSuccessHttpResponse( GetItemStatementsSuccessResponse $useCaseResponse ): Response {
