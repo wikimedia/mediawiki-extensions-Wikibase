@@ -5,6 +5,8 @@ namespace Wikibase\Repo\RestApi\UseCases\GetItemDescriptions;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Domain\Services\ItemDescriptionsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
+use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
+use Wikibase\Repo\RestApi\UseCases\ItemRedirectException;
 use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 
 /**
@@ -35,6 +37,19 @@ class GetItemDescriptions {
 		$itemId = new ItemId( $request->getItemId() );
 
 		$metaDataResult = $this->itemRevisionMetadataRetriever->getLatestRevisionMetadata( $itemId );
+
+		if ( !$metaDataResult->itemExists() ) {
+			throw new UseCaseException(
+				ErrorResponse::ITEM_NOT_FOUND,
+				"Could not find an item with the ID: {$request->getItemId()}"
+			);
+		}
+
+		if ( $metaDataResult->isRedirect() ) {
+			throw new ItemRedirectException(
+				$metaDataResult->getRedirectTarget()->getSerialization()
+			);
+		}
 
 		return new GetItemDescriptionsSuccessResponse(
 			$this->itemDescriptionsRetriever->getDescriptions( $itemId ),
