@@ -107,7 +107,7 @@
 	"notification-link-text-view-item": "{{GENDER:$1|Погледај}} ставку",
 	"notification-subject-page-connection": "{{GENDER:$2|Корисник|Корисница|Корисник}} $2 је страницу <strong>$3</strong> коју сте Ви {{GENDER:$3|направили}} на пројекту {{SITENAME}} {{GENDER:$2|повезао|повезала|повезао}} на ставку на Википодацима",
 	"connected-redirect-category": "Преусмерења која су повезана на Википодацима",
-	"connected-redirect-category-desc": "Ова категорија приказује списак преусмерења која су повезана на Википодацима.",
+	"connected-redirect-category-desc": "Преусмерења која су повезана на Википодатке.",
 	"wikibase-client-data-bridge-dialog-title": "$1 — уређивање",
 	"wikibase-client-data-bridge-permissions-error-info": "Више детаља",
 	"wikibase-client-data-bridge-references-heading": "Референце",

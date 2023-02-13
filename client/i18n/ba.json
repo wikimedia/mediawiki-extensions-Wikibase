@@ -3,6 +3,7 @@
 		"authors": [
 			"Comp1089",
 			"Kareyac",
+			"Roustammr",
 			"Ләйсән",
 			"Рустам Нурыев"
 		]
@@ -13,6 +14,7 @@
 	"wikibase-editlinks": "Һылтанмаларҙы төҙәт",
 	"wikibase-editlinkstitle": "Башҡа телдәргә һылтанмаларҙы төҙәтеү",
 	"wikibase-linkitem-addlinks": "Һылтанмалар өҫтәү",
+	"wikibase-linkitem-input-site": "Тел:",
 	"wikibase-linkitem-input-page": "Бит:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Йәшерергә",
