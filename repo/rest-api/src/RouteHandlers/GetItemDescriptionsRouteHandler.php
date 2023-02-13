@@ -75,10 +75,10 @@ class GetItemDescriptionsRouteHandler extends SimpleHandler {
 		try {
 			$useCaseResponse = $this->useCase->execute( new GetItemDescriptionsRequest( $itemId ) );
 			 return $this->newSuccessHttpResponse( $useCaseResponse );
-		} catch ( ItemRedirectException $e2 ) {
-			 return $this->newRedirectHttpResponse( $e2 );
-		} catch ( UseCaseException $e1 ) {
-			 return $this->responseFactory->newErrorResponseFromException( $e1 );
+		} catch ( ItemRedirectException $e ) {
+			 return $this->newRedirectHttpResponse( $e );
+		} catch ( UseCaseException $e ) {
+			 return $this->responseFactory->newErrorResponseFromException( $e );
 		}
 	}
 
