@@ -9,7 +9,6 @@ const {
 	newLegacyStatementWithRandomStringValue,
 	changeItemProtectionStatus
 } = require( '../helpers/entityHelper' );
-const hasJsonDiffLib = require( '../helpers/hasJsonDiffLib' );
 const { requireExtensions } = require( '../../../../../tests/api-testing/utils' );
 
 describe( 'Auth', () => {
@@ -57,11 +56,8 @@ describe( 'Auth', () => {
 		{
 			newRequestBuilder: () => rbf.newRemoveStatementRequestBuilder( statementId ),
 			isDestructive: true
-		}
-	];
-
-	if ( hasJsonDiffLib() ) { // awaiting security review (T316245)
-		editRequests.push( {
+		},
+		{
 			newRequestBuilder: () => rbf.newPatchItemStatementRequestBuilder(
 				itemId,
 				statementId,
@@ -71,8 +67,8 @@ describe( 'Auth', () => {
 					value: 'random-string-value-' + utils.uniq()
 				} ]
 			)
-		} );
-		editRequests.push( {
+		},
+		{
 			newRequestBuilder: () => rbf.newPatchStatementRequestBuilder(
 				statementId,
 				[ {
@@ -81,8 +77,8 @@ describe( 'Auth', () => {
 					value: 'random-string-value-' + utils.uniq()
 				} ]
 			)
-		} );
-	}
+		}
+	];
 
 	[
 		{

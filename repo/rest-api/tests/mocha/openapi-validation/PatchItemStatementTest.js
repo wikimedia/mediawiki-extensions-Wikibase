@@ -5,7 +5,6 @@ const {
 	createItemWithStatements,
 	newLegacyStatementWithRandomStringValue
 } = require( '../helpers/entityHelper' );
-const hasJsonDiffLib = require( '../helpers/hasJsonDiffLib' );
 const {
 	newPatchItemStatementRequestBuilder,
 	newPatchStatementRequestBuilder
@@ -18,10 +17,6 @@ describe( 'validate PATCH endpoints against OpenAPI definition', () => {
 	let stringPropertyId;
 
 	before( async function () {
-		if ( !hasJsonDiffLib() ) {
-			this.skip(); // awaiting security review (T316245)
-		}
-
 		stringPropertyId = ( await createUniqueStringProperty() ).entity.id;
 		const createEntityResponse = await createItemWithStatements( [
 			newLegacyStatementWithRandomStringValue( stringPropertyId )

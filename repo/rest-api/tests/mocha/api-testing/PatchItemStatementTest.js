@@ -2,7 +2,6 @@
 
 const { assert, action } = require( 'api-testing' );
 const entityHelper = require( '../helpers/entityHelper' );
-const hasJsonDiffLib = require( '../helpers/hasJsonDiffLib' );
 const formatStatementEditSummary = require( '../helpers/formatStatementEditSummary' );
 const {
 	newAddItemStatementRequestBuilder,
@@ -41,10 +40,6 @@ describe( 'PATCH statement tests', () => {
 	let previousEtag;
 
 	before( async function () {
-		if ( !hasJsonDiffLib() ) {
-			this.skip(); // awaiting security review (T316245)
-		}
-
 		testPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
 		testItemId = ( await entityHelper.createItemWithStatements( [] ) ).entity.id;
 

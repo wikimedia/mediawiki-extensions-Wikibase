@@ -9,7 +9,6 @@ const {
 	createUniqueStringProperty,
 	createItemWithStatements
 } = require( '../helpers/entityHelper' );
-const hasJsonDiffLib = require( '../helpers/hasJsonDiffLib' );
 const { newAddItemStatementRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
 function makeEtag( ...revisionIds ) {
@@ -329,11 +328,8 @@ describe( 'Conditional requests', () => {
 			() => rbf.newAddItemStatementRequestBuilder(
 				itemId,
 				newStatementWithRandomStringValue( statementPropertyId )
-			)
-		];
-
-		if ( hasJsonDiffLib() ) { // awaiting security review (T316245)
-			editRoutes.push( () => rbf.newPatchItemStatementRequestBuilder(
+			),
+			() => rbf.newPatchItemStatementRequestBuilder(
 				itemId,
 				statementId,
 				[ {
@@ -341,16 +337,16 @@ describe( 'Conditional requests', () => {
 					path: '/value/content',
 					value: 'random-string-value-' + utils.uniq()
 				} ]
-			) );
-			editRoutes.push( () => rbf.newPatchStatementRequestBuilder(
+			),
+			() => rbf.newPatchStatementRequestBuilder(
 				statementId,
 				[ {
 					op: 'replace',
 					path: '/value/content',
 					value: 'random-string-value-' + utils.uniq()
 				} ]
-			) );
-		}
+			)
+		];
 
 		editRoutes.forEach( ( newRequestBuilder ) => {
 			describe( `If-Match - ${newRequestBuilder().getRouteDescription()}`, () => {

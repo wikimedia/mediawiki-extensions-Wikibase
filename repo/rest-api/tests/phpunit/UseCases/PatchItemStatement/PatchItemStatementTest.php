@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Tests\RestApi\UseCases\PatchItemStatement;
 use Generator;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Swaggest\JsonDiff\JsonDiff;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
@@ -94,10 +93,6 @@ class PatchItemStatementTest extends TestCase {
 
 	protected function setUp(): void {
 		parent::setUp();
-
-		if ( !class_exists( JsonDiff::class ) ) {
-			$this->markTestSkipped( 'Skipping while swaggest/json-diff has not made it to mediawiki/vendor yet (T316245).' );
-		}
 
 		$this->useCaseValidator = $this->createStub( PatchItemStatementValidator::class );
 		$this->statementRetriever = $this->createStub( ItemStatementRetriever::class );
