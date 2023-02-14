@@ -50,6 +50,12 @@ Autodocs can be generated from the API specification using the npm `build:docs` 
 docker run --rm --user $(id -u):$(id -g) -v $PWD:/app -w /app node:16 npm run build:docs
 ```
 
+The base URL of the API can be configured by passing an `API_URL` environment variable:
+
+```
+docker run --rm --user $(id -u):$(id -g) -v $PWD:/app -w /app -e API_URL='https://wikidata.org/w/rest.php' node:16 npm run build:docs
+```
+
 The autodocs and the bundled OpenAPI specification files are generated in the `../../docs/rest-api/` directory.
 
 ## Development
