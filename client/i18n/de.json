@@ -8,7 +8,8 @@
 			"Metalhead64",
 			"Purodha",
 			"Tiin",
-			"Umherirrender"
+			"Umherirrender",
+			"Brettchenweber"
 		]
 	},
 	"wikibase-client-desc": "Stellt einen Client für die Erweiterung Wikibase bereit",
@@ -163,7 +164,7 @@
 	"wikibase-client-data-bridge-saving-error-message": "Deine Änderungen konnten nicht gespeichert werden.Bitte versuche es erneut.",
 	"wikibase-client-data-bridge-edit-conflict-error-heading": "Bearbeitungskonflikt entdeckt",
 	"wikibase-client-data-bridge-edit-conflict-error-message": "Ein anderer Benutzer hat gerade diesen Wert bearbeitet und seine Änderungen zuerst veröffentlicht. Deine Änderungen konnten nicht übernommen werden. Bitte laden die Seite neu, um den neuen Wert abzurufen.",
-	"wikibase-client-data-bridge-unknown-error-heading": "Etwas ist schief gelaufen",
+	"wikibase-client-data-bridge-unknown-error-heading": "Etwas ist schiefgelaufen",
 	"wikibase-client-data-bridge-unknown-error-message": "Es ist ein Fehler aufgetreten, und der ausgewählte Wert kann im Moment nicht bearbeitet werden. Bitte versuche neu zu laden.",
 	"wikibase-client-data-bridge-error-report": "<p>Wenn der Fehler weiterhin besteht, [$1 schreibe bitte eine Fehlermeldung] mit deinen Arbeitsschritten und füge die folgenden Informationen hinzu:</p>\n<ul>\n<li>$2</li>\n<li>$3 von $4</li>\n<li>Fehlercode: $5</li>\n</ul>",
 	"wikibase-client-data-bridge-error-reload-bridge": "Neu laden",

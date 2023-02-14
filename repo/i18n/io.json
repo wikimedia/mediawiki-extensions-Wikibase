@@ -72,5 +72,6 @@
 	"wikibase-noentity": "Ca ento ne existas. Vu povas [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} searchar l'etiketi asociita] por deskovrar ube ol povas renkontresar.",
 	"wikibase-listdatatypes-time-head": "Horo",
 	"wikibase-pageinfo-subscription-none": "Nula",
+	"wikibase-entity-save-error-heading": "Ulu faliis",
 	"wikibase-federated-properties-leaving-site-notice-cancel": "Nuligar"
 }
