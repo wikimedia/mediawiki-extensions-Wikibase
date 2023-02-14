@@ -4,6 +4,7 @@
 		"summary": "Retrieve Statements from an Item",
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/ItemId" },
+			{ "$ref": "../../global/parameters.json#/Property" },
 			{ "$ref": "../../global/parameters.json#/IfNoneMatch" },
 			{ "$ref": "../../global/parameters.json#/IfModifiedSince" },
 			{ "$ref": "../../global/parameters.json#/IfMatch" },
