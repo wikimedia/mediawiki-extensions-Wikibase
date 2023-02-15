@@ -98,7 +98,7 @@ describe( 'GET /entities/items/{id}/statements', () => {
 		const propertyId = 'X123';
 		const response = await newGetItemStatementsRequestBuilder( testItemId )
 			.withQueryParam( 'property', propertyId )
-			// TODO .assertInvalidRequest()?
+			.assertInvalidRequest()
 			.makeRequest();
 
 		assert.equal( response.status, 400 );
