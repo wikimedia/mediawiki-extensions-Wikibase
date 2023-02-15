@@ -9,10 +9,12 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Term\AliasGroupList;
-use Wikibase\DataModel\Term\Term;
-use Wikibase\DataModel\Term\TermList;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemData;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemDataBuilder;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 
 /**
@@ -42,7 +44,7 @@ class ItemDataBuilderTest extends TestCase {
 	}
 
 	public function testLabels(): void {
-		$labels = new TermList( [ new Term( 'en', 'potato' ) ] );
+		$labels = new Labels( new Label( 'en', 'potato' ) );
 		$itemData = $this->newBuilderWithSomeId( [ ItemData::FIELD_LABELS ] )
 			->setLabels( $labels )
 			->build();
@@ -50,7 +52,7 @@ class ItemDataBuilderTest extends TestCase {
 	}
 
 	public function testDescriptions(): void {
-		$descriptions = new TermList( [ new Term( 'en', 'root vegetable' ) ] );
+		$descriptions = new Descriptions( new Description( 'en', 'root vegetable' ) );
 		$itemData = $this->newBuilderWithSomeId( [ ItemData::FIELD_DESCRIPTIONS ] )
 			->setDescriptions( $descriptions )
 			->build();
@@ -83,8 +85,8 @@ class ItemDataBuilderTest extends TestCase {
 
 	public function testAll(): void {
 		$type = Item::ENTITY_TYPE;
-		$labels = new TermList( [ new Term( 'en', 'potato' ) ] );
-		$descriptions = new TermList( [ new Term( 'en', 'root vegetable' ) ] );
+		$labels = new Labels( new Label( 'en', 'potato' ) );
+		$descriptions = new Descriptions( new Description( 'en', 'root vegetable' ) );
 		$aliases = new AliasGroupList();
 		$statements = new StatementList();
 		$siteLinks = new SiteLinkList();
@@ -129,13 +131,13 @@ class ItemDataBuilderTest extends TestCase {
 		yield 'labels' => [
 			ItemData::FIELD_LABELS,
 			'setLabels',
-			new TermList( [ new Term( 'en', 'potato' ) ] ),
+			new Labels( new Label( 'en', 'potato' ) ),
 		];
 
 		yield 'descriptions' => [
 			ItemData::FIELD_DESCRIPTIONS,
 			'setDescriptions',
-			new TermList( [ new Term( 'en', 'root vegetable' ) ] ),
+			new Descriptions( new Description( 'en', 'root vegetable' ) ),
 		];
 
 		yield 'aliases' => [

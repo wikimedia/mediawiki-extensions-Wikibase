@@ -4,11 +4,11 @@ namespace Wikibase\Repo\Tests\RestApi\UseCases\GetItem;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Term\Term;
-use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemData;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemDataBuilder;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemDataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
@@ -38,7 +38,7 @@ class GetItemTest extends TestCase {
 		$revisionId = 42;
 		$requestedFields = [ ItemData::FIELD_LABELS, ItemData::FIELD_STATEMENTS ];
 		$expectedItemData = ( new ItemDataBuilder( new ItemId( self::ITEM_ID ), $requestedFields ) )
-			->setLabels( new TermList( [ new Term( 'en', self::ITEM_LABEL ) ] ) )
+			->setLabels( new Labels( new Label( 'en', self::ITEM_LABEL ) ) )
 			->setStatements( new StatementList() )
 			->build();
 

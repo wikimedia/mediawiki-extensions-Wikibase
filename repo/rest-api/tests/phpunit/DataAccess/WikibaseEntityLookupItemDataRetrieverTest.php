@@ -12,8 +12,10 @@ use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemDataRetriever;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemData;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemDataBuilder;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\WikibaseRepo;
@@ -51,8 +53,8 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 		$itemData = $this->newRetriever()->getItemData( $itemId, ItemData::VALID_FIELDS );
 
 		$this->assertSame( $itemId, $itemData->getId() );
-		$this->assertSame( $item->getLabels(), $itemData->getLabels() );
-		$this->assertSame( $item->getDescriptions(), $itemData->getDescriptions() );
+		$this->assertEquals( Labels::fromTermList( $item->getLabels() ), $itemData->getLabels() );
+		$this->assertEquals( Descriptions::fromTermList( $item->getDescriptions() ), $itemData->getDescriptions() );
 		$this->assertSame( $item->getAliasGroups(), $itemData->getAliases() );
 		$this->assertEquals(
 			new StatementList( $this->newStatementReadModelConverter()->convert( $expectedStatement ) ),
@@ -105,8 +107,8 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 			$item,
 			$fields,
 			( new ItemDataBuilder( $item->getId(), $fields ) )
-				->setLabels( $item->getLabels() )
-				->setDescriptions( $item->getDescriptions() )
+				->setLabels( Labels::fromTermList( $item->getLabels() ) )
+				->setDescriptions( Descriptions::fromTermList( $item->getDescriptions() ) )
 				->setAliases( $item->getAliasGroups() )
 				->build(),
 		];
@@ -122,8 +124,8 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 			ItemData::VALID_FIELDS,
 			( new ItemDataBuilder( $item->getId(), ItemData::VALID_FIELDS ) )
 				->setType( Item::ENTITY_TYPE )
-				->setLabels( $item->getLabels() )
-				->setDescriptions( $item->getDescriptions() )
+				->setLabels( Labels::fromTermList( $item->getLabels() ) )
+				->setDescriptions( Descriptions::fromTermList( $item->getDescriptions() ) )
 				->setAliases( $item->getAliasGroups() )
 				->setStatements( new StatementList( $this->newStatementReadModelConverter()->convert( $statement ) ) )
 				->setSiteLinks( $item->getSiteLinkList() )

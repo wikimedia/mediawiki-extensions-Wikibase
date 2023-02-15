@@ -3,6 +3,8 @@
 namespace Wikibase\Repo\Tests\RestApi\Domain\ReadModel;
 
 use PHPUnit\Framework\TestCase;
+use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 
@@ -22,6 +24,20 @@ class DescriptionsTest extends TestCase {
 
 		$this->assertSame( $enDescription, $descriptions['en'] );
 		$this->assertSame( $deDescription, $descriptions['de'] );
+	}
+
+	public function testFromTermList(): void {
+		$deText = 'Kartoffel';
+		$enText = 'potato';
+		$list = new TermList( [
+			new Term( 'en', $enText ),
+			new Term( 'de', $deText ),
+		] );
+
+		$descriptions = Descriptions::fromTermList( $list );
+
+		$this->assertEquals( new Description( 'de', $deText ), $descriptions['de'] );
+		$this->assertEquals( new Description( 'en', $enText ), $descriptions['en'] );
 	}
 
 }

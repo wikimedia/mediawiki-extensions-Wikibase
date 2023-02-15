@@ -2,6 +2,8 @@
 
 namespace Wikibase\Repo\RestApi\Domain\ReadModel;
 
+use Wikibase\DataModel\Term\Term;
+
 /**
  * @license GPL-2.0-or-later
  */
@@ -13,6 +15,10 @@ class Description {
 	public function __construct( string $languageCode, string $text ) {
 		$this->languageCode = $languageCode;
 		$this->text = $text;
+	}
+
+	public static function fromTerm( Term $term ): self {
+		return new self( $term->getLanguageCode(), $term->getText() );
 	}
 
 	public function getLanguageCode(): string {
