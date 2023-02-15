@@ -4,6 +4,7 @@ namespace Wikibase\Repo\RestApi\DataAccess;
 
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Statement\StatementList as DataModelStatementList;
@@ -73,13 +74,15 @@ class WikibaseEntityLookupItemDataRetriever	implements ItemRetriever, ItemDataRe
 		return $itemData->build();
 	}
 
-	public function getStatements( ItemId $itemId ): ?StatementList {
+	public function getStatements( ItemId $itemId, ?PropertyId $propertyId = null ): ?StatementList {
 		$item = $this->getItem( $itemId );
 		if ( $item === null ) {
 			return null;
 		}
 
-		return $this->convertDataModelStatementListToReadModel( $item->getStatements() );
+		return $this->convertDataModelStatementListToReadModel(
+			$propertyId ? $item->getStatements()->getByPropertyId( $propertyId ) : $item->getStatements()
+		);
 	}
 
 	private function convertDataModelStatementListToReadModel( DataModelStatementList $list ): StatementList {

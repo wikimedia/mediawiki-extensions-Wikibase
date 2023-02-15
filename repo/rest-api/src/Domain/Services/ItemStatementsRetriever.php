@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\RestApi\Domain\Services;
 
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 
 /**
@@ -10,6 +11,6 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
  */
 interface ItemStatementsRetriever {
 
-	public function getStatements( ItemId $itemId ): ?StatementList;
+	public function getStatements( ItemId $itemId, ?PropertyId $propertyId = null ): ?StatementList;
 
 }

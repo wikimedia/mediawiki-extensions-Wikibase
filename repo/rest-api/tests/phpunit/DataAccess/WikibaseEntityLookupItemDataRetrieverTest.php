@@ -7,6 +7,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Tests\NewItem;
@@ -196,6 +197,29 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 				$this->newStatementReadModelConverter()->convert( $statement2 )
 			),
 			$this->newRetriever()->getStatements( $item->getId() )
+		);
+	}
+
+	public function testGivenProperty_getStatementsReturnsStatementGroup(): void {
+		$statement1 = NewStatement::forProperty( 'P123' )
+			->withGuid( 'Q123$c48c32c3-42b5-498f-9586-84608b88747c' )
+			->withValue( 'potato' )
+			->build();
+		$statement2 = NewStatement::forProperty( 'P321' )
+			->withGuid( 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
+			->withValue( 'banana' )
+			->build();
+
+		$item = NewItem::withId( 'Q123' )
+			->andStatement( $statement1 )
+			->andStatement( $statement2 )
+			->build();
+
+		$this->entityLookup = $this->newEntityLookupForIdWithReturnValue( $item->getId(), $item );
+
+		$this->assertEquals(
+			new StatementList( $this->newStatementReadModelConverter()->convert( $statement1 ) ),
+			$this->newRetriever()->getStatements( $item->getId(), new NumericPropertyId( 'P123' ) )
 		);
 	}
 
