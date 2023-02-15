@@ -64,10 +64,7 @@ class WikibaseEntityLookupItemDataRetriever	implements ItemRetriever, ItemDataRe
 			$itemData->setAliases( $item->getAliasGroups() );
 		}
 		if ( in_array( ItemData::FIELD_STATEMENTS, $fields ) ) {
-			$itemData->setStatements( $this->convertDataModelStatementListToReadModel(
-				$item->getId(),
-				$item->getStatements()
-			) );
+			$itemData->setStatements( $this->convertDataModelStatementListToReadModel( $item->getStatements() ) );
 		}
 		if ( in_array( ItemData::FIELD_SITELINKS, $fields ) ) {
 			$itemData->setSiteLinks( $item->getSiteLinkList() );
@@ -82,10 +79,10 @@ class WikibaseEntityLookupItemDataRetriever	implements ItemRetriever, ItemDataRe
 			return null;
 		}
 
-		return $this->convertDataModelStatementListToReadModel( $itemId, $item->getStatements() );
+		return $this->convertDataModelStatementListToReadModel( $item->getStatements() );
 	}
 
-	private function convertDataModelStatementListToReadModel( ItemId $itemId, DataModelStatementList $list ): StatementList {
+	private function convertDataModelStatementListToReadModel( DataModelStatementList $list ): StatementList {
 		return new StatementList( ...array_map(
 			[ $this->statementReadModelConverter, 'convert' ],
 			iterator_to_array( $list )
