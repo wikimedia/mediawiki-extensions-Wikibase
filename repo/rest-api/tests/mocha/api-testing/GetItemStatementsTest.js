@@ -19,16 +19,19 @@ describe( 'GET /entities/items/{id}/statements', () => {
 
 	let testItemId;
 	let testPropertyId;
+	let testPropertyId2;
 	let testModified;
 	let testRevisionId;
 	let testStatements;
 
 	before( async () => {
 		testPropertyId = ( await createUniqueStringProperty() ).entity.id;
+		testPropertyId2 = ( await createUniqueStringProperty() ).entity.id;
 
 		testStatements = [
 			newLegacyStatementWithRandomStringValue( testPropertyId ),
-			newLegacyStatementWithRandomStringValue( testPropertyId )
+			newLegacyStatementWithRandomStringValue( testPropertyId ),
+			newLegacyStatementWithRandomStringValue( testPropertyId2 )
 		];
 		const createItemResponse = await createItemWithStatements( testStatements );
 		testItemId = createItemResponse.entity.id;
@@ -55,6 +58,16 @@ describe( 'GET /entities/items/{id}/statements', () => {
 		);
 		assert.equal( response.header[ 'last-modified' ], testModified );
 		assert.equal( response.header.etag, makeEtag( testRevisionId ) );
+	} );
+
+	it( 'can filter statements by property', async () => {
+		const response = await newGetItemStatementsRequestBuilder( testItemId )
+			.withQueryParam( 'property', testPropertyId )
+			.assertValidRequest()
+			.makeRequest();
+
+		assert.deepEqual( Object.keys( response.body ), [ testPropertyId ] );
+		assert.strictEqual( response.body[ testPropertyId ].length, 2 );
 	} );
 
 	it( 'can GET empty statements list', async () => {

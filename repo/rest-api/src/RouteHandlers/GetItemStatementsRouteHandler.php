@@ -27,6 +27,7 @@ use Wikimedia\ParamValidator\ParamValidator;
  */
 class GetItemStatementsRouteHandler extends SimpleHandler {
 	private const ITEM_ID_PATH_PARAM = 'item_id';
+	private const PROPERTY_QUERY_PARAM = 'property';
 
 	private GetItemStatements $getItemStatements;
 
@@ -75,7 +76,10 @@ class GetItemStatementsRouteHandler extends SimpleHandler {
 	}
 
 	public function runUseCase( string $itemId ): Response {
-		$useCaseResponse = $this->getItemStatements->execute( new GetItemStatementsRequest( $itemId ) );
+		$useCaseResponse = $this->getItemStatements->execute( new GetItemStatementsRequest(
+			$itemId,
+			$this->getRequest()->getQueryParams()[self::PROPERTY_QUERY_PARAM] ?? null
+		) );
 
 		if ( $useCaseResponse instanceof GetItemStatementsSuccessResponse ) {
 			return $this->newSuccessHttpResponse( $useCaseResponse );
@@ -121,6 +125,11 @@ class GetItemStatementsRouteHandler extends SimpleHandler {
 				self::PARAM_SOURCE => 'path',
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => true,
+			],
+			self::PROPERTY_QUERY_PARAM => [
+				self::PARAM_SOURCE => 'query',
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_REQUIRED => false,
 			],
 		];
 	}
