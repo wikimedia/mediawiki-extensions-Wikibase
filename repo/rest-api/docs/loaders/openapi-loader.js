@@ -15,6 +15,13 @@ module.exports = function ( _ ) {
 				}
 			}
 		)
-		.then( spec => done( null, JSON.stringify( spec ) ) )
+		.then( ( spec ) => {
+			const baseUrl = process.env.API_URL || 'https://wikibase.example/w/rest.php';
+
+			done( null, JSON.stringify( {
+				...spec,
+				servers: [ { url: baseUrl + '/wikibase/v0'} ]
+			} ) )
+		} )
 		.catch( ( { message } ) => done( message ) );
 };
