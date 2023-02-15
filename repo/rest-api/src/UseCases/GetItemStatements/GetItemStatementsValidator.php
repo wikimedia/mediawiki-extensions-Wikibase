@@ -2,6 +2,8 @@
 
 namespace Wikibase\Repo\RestApi\UseCases\GetItemStatements;
 
+use InvalidArgumentException;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\ValidationError;
 
@@ -10,6 +12,9 @@ use Wikibase\Repo\RestApi\Validation\ValidationError;
  */
 class GetItemStatementsValidator {
 
+	public const CODE_INVALID_PROPERTY_ID = 'invalid-property-id';
+	public const CONTEXT_PROPERTY_ID_VALUE = 'property-id-value';
+
 	private ItemIdValidator $itemIdValidator;
 
 	public function __construct( ItemIdValidator $itemIdValidator ) {
@@ -17,7 +22,25 @@ class GetItemStatementsValidator {
 	}
 
 	public function validate( GetItemStatementsRequest $request ): ?ValidationError {
-		return $this->itemIdValidator->validate( $request->getItemId() );
+		return $this->itemIdValidator->validate( $request->getItemId() )
+			?: $this->validatePropertyId( $request->getStatementPropertyId() );
+	}
+
+	private function validatePropertyId( ?string $propertyId ): ?ValidationError {
+		if ( !$propertyId ) {
+			return null;
+		}
+
+		try {
+			// @phan-suppress-next-line PhanNoopNew
+			new NumericPropertyId( $propertyId );
+			return null;
+		} catch ( InvalidArgumentException $e ) {
+			return new ValidationError(
+				self::CODE_INVALID_PROPERTY_ID,
+				[ self::CONTEXT_PROPERTY_ID_VALUE => $propertyId ]
+			);
+		}
 	}
 
 }

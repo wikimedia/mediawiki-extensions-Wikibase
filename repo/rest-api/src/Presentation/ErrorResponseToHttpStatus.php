@@ -13,6 +13,7 @@ class ErrorResponseToHttpStatus {
 	 */
 	private static array $lookupTable = [
 		ErrorResponse::INVALID_ITEM_ID => 400,
+		ErrorResponse::INVALID_PROPERTY_ID => 400,
 		ErrorResponse::INVALID_STATEMENT_ID => 400,
 		ErrorResponse::INVALID_FIELD => 400,
 		ErrorResponse::COMMENT_TOO_LONG => 400,

@@ -20,6 +20,11 @@ class GetItemStatementsErrorResponse extends ErrorResponse {
 					ErrorResponse::INVALID_ITEM_ID,
 					'Not a valid item ID: ' . $validationError->getContext()[ItemIdValidator::CONTEXT_VALUE]
 				);
+			case GetItemStatementsValidator::CODE_INVALID_PROPERTY_ID:
+				return new self(
+					ErrorResponse::INVALID_PROPERTY_ID,
+					'Not a valid property ID: ' . $validationError->getContext()[GetItemStatementsValidator::CONTEXT_PROPERTY_ID_VALUE]
+				);
 
 			default:
 				throw new LogicException( "Unexpected validation error code: $errorCode" );
