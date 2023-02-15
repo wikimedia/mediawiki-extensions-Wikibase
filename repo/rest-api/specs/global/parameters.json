@@ -41,6 +41,17 @@
 		"explode": false,
 		"style": "form"
 	},
+	"Property": {
+		"in": "query",
+		"name": "property",
+		"description": "Single property ID to filter statements by.",
+		"required": false,
+		"schema": {
+			"type": "string"
+		},
+		"style": "form",
+		"example": "P31"
+	},
 	"IfNoneMatch": {
 		"name": "If-None-Match",
 		"in": "header",
