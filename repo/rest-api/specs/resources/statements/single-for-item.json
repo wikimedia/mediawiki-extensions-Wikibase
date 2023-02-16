@@ -49,8 +49,8 @@
 	},
 	"patch": {
 		"tags": [ "statements" ],
-		"summary": "[WIP] Change elements of a single Statement of an Item",
-		"description": "This endpoint is currently not available on wikidata.org.\n\nThis endpoint is also accessible through `/statements/{statement_id}`.",
+		"summary": "Change elements of a single Statement of an Item",
+		"description": "This endpoint is also accessible through `/statements/{statement_id}`.",
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/ItemId" },
 			{ "$ref": "../../global/parameters.json#/StatementId" },
