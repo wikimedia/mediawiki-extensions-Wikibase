@@ -65,14 +65,16 @@
 			"tags": {
 				"type": "array",
 				"items": { "type": "string" },
-				"default": [ ]
+				"default": [ ],
+				"example": [ "mobile edit", "external tool edit" ]
 			},
 			"bot": {
 				"type": "boolean",
 				"default": false
 			},
 			"comment": {
-				"type": "string"
+				"type": "string",
+				"example": "API edit fixing the modelling as discussed in ..."
 			}
 		}
 	},
