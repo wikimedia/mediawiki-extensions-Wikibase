@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\RestApi\UseCases\GetItemStatements;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
@@ -77,6 +78,28 @@ class GetItemStatementsTest extends TestCase {
 		$this->assertSame( $statements, $response->getStatements() );
 		$this->assertSame( $revision, $response->getRevisionId() );
 		$this->assertSame( $lastModified, $response->getLastModified() );
+	}
+
+	public function testGivenPropertyIdInRequest_retrievesOnlyRequestedStatements(): void {
+		$requestedProperty = 'P123';
+		$itemId = new ItemId( 'Q123' );
+
+		$expectedStatements = $this->createStub( StatementList::class );
+		$this->statementsRetriever = $this->createMock( ItemStatementsRetriever::class );
+		$this->statementsRetriever->expects( $this->once() )
+			->method( 'getStatements' )
+			->with( $itemId, new NumericPropertyId( $requestedProperty ) )
+			->willReturn( $expectedStatements );
+
+		$this->itemRevisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
+		$this->itemRevisionMetadataRetriever->method( 'getLatestRevisionMetadata' )
+			->willReturn( LatestItemRevisionMetadataResult::concreteRevision( 123, '20230111070707' ) );
+
+		$response = $this->newUseCase()->execute(
+			new GetItemStatementsRequest( $itemId->getSerialization(), $requestedProperty )
+		);
+
+		$this->assertSame( $expectedStatements, $response->getStatements() );
 	}
 
 	public function testGivenInvalidItemId_returnsErrorResponse(): void {

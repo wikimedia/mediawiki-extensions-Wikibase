@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\RestApi\UseCases\GetItemStatements;
 
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementsRetriever;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
@@ -37,6 +38,9 @@ class GetItemStatements {
 		}
 
 		$itemId = new ItemId( $request->getItemId() );
+		$requestedStatementPropertyId = $request->getStatementPropertyId()
+			? new NumericPropertyId( $request->getStatementPropertyId() )
+			: null;
 
 		$latestRevisionMetadata = $this->revisionMetadataRetriever->getLatestRevisionMetadata( $itemId );
 
@@ -50,7 +54,7 @@ class GetItemStatements {
 		}
 
 		return new GetItemStatementsSuccessResponse(
-			$this->statementsRetriever->getStatements( $itemId ),
+			$this->statementsRetriever->getStatements( $itemId, $requestedStatementPropertyId ),
 			$latestRevisionMetadata->getRevisionTimestamp(),
 			$latestRevisionMetadata->getRevisionId()
 		);
