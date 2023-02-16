@@ -161,6 +161,7 @@
 	"wikibase-validator-bad-value": "Data value corrupt: $1",
 	"wikibase-validator-bad-value-type": "Bad value type $1, expected $2",
 	"wikibase-validator-bad-data-type": "Bad data type: $1",
+	"wikibase-validator-bad-prefix": "Bad value $1, expected it to begin with $2",
 	"wikibase-validator-bad-url": "URLs are not allowed to contain certain characters like spaces or square brackets: $1",
 	"wikibase-validator-url-scheme-missing": "This URL misses a scheme like \"https://\": $1",
 	"wikibase-validator-bad-url-scheme": "An URL scheme \"$1\" is not supported.",

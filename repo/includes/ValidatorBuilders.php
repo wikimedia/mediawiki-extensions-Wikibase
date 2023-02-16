@@ -21,6 +21,7 @@ use Wikibase\Repo\Validators\CompositeValidator;
 use Wikibase\Repo\Validators\DataFieldValidator;
 use Wikibase\Repo\Validators\DataValueValidator;
 use Wikibase\Repo\Validators\EntityExistsValidator;
+use Wikibase\Repo\Validators\EntityUriValidator;
 use Wikibase\Repo\Validators\InterWikiLinkExistsValidator;
 use Wikibase\Repo\Validators\MembershipValidator;
 use Wikibase\Repo\Validators\NumberRangeValidator;
@@ -328,7 +329,7 @@ class ValidatorBuilders {
 		$validators[] = new TypeValidator( 'array' );
 
 		// Expected to be a short IRI, see TimeFormatter and TimeParser.
-		$urlValidator = $this->getUrlValidator( [ 'http', 'https' ], $this->wikidataBaseUri, 255 );
+		$urlValidator = $this->getEntityUriValidator( $this->wikidataBaseUri, 255, 'item' );
 		//TODO: enforce well known calendar models from config
 
 		$validators[] = new DataFieldValidator( 'calendarmodel', $urlValidator );
@@ -373,7 +374,7 @@ class ValidatorBuilders {
 		$validators[] = new TypeValidator( 'array' );
 
 		// Expected to be a short IRI, see GlobeCoordinateValue and GlobeCoordinateParser.
-		$urlValidator = $this->getUrlValidator( [ 'http', 'https' ], $this->wikidataBaseUri, 255 );
+		$urlValidator = $this->getEntityUriValidator( $this->wikidataBaseUri, 255, 'item' );
 		//TODO: enforce well known reference globes from config
 
 		$validators[] = new DataFieldValidator( 'precision', new NumberValidator() );
@@ -389,18 +390,10 @@ class ValidatorBuilders {
 
 	/**
 	 * @param string[] $urlSchemes List of URL schemes, e.g. 'http'
-	 * @param string|null $prefix a required prefix
-	 * @param int $maxLength Defaults to 500 characters. Even if URLs are unlimited in theory they
-	 * should be limited to about 2000. About 500 is a reasonable compromise.
-	 * @see http://stackoverflow.com/a/417184
-	 *
-	 * @return ValueValidator
+	 * @param int $maxLength Maximum length in bytes; compare https://stackoverflow.com/a/417184
+	 * @return ValueValidator[]
 	 */
-	private function getUrlValidator(
-		array $urlSchemes,
-		string $prefix = null,
-		int $maxLength = 500
-	): ValueValidator {
+	private function getUrlValidators( array $urlSchemes, int $maxLength ): array {
 		$validators = [];
 		$validators[] = new TypeValidator( 'string' );
 		$validators[] = new StringLengthValidator( 2, $maxLength );
@@ -409,17 +402,17 @@ class ValidatorBuilders {
 		$urlValidators = $urlValidatorsBuilder->getValidators( $urlSchemes );
 		$validators[] = new UrlValidator( $urlValidators );
 
-		if ( $prefix !== null ) {
-			// FIXME: It's currently not possible to allow both http and https at this point.
-			$validators[] = $this->getPrefixValidator( $prefix, 'bad-prefix' );
-		}
-
-		return new CompositeValidator( $validators ); //Note: each validator is fatal
+		return $validators;
 	}
 
-	private function getPrefixValidator( string $prefix, string $errorCode ): ValueValidator {
-		$regex = '/^' . preg_quote( $prefix, '/' ) . '/';
-		return new RegexValidator( $regex, false, $errorCode );
+	private function getEntityUriValidator(
+		string $prefix,
+		int $maxLength,
+		?string $entityType = null
+	): ValueValidator {
+		$validators = $this->getUrlValidators( [ 'http', 'https' ], $maxLength );
+		$validators[] = new EntityUriValidator( $this->entityIdParser, $prefix, $entityType );
+		return new CompositeValidator( $validators );
 	}
 
 	/**
@@ -427,7 +420,9 @@ class ValidatorBuilders {
 	 * @return ValueValidator[]
 	 */
 	public function buildUrlValidators( int $maxLength = 500 ): array {
-		$urlValidator = $this->getUrlValidator( $this->urlSchemes, null, $maxLength );
+		$urlValidator = new CompositeValidator(
+			$this->getUrlValidators( $this->urlSchemes, $maxLength )
+		);
 
 		$topValidator = new DataValueValidator(
 			$urlValidator
@@ -451,7 +446,7 @@ class ValidatorBuilders {
 			// since we use it to represent "unitless" quantities. We could also use
 			// http://qudt.org/vocab/unit#Unitless or http://www.wikidata.org/entity/Q199
 			new MembershipValidator( [ '1' ] ),
-			$this->getUrlValidator( [ 'http', 'https' ], $this->itemVocabularyBaseUri, 255 ),
+			$this->getEntityUriValidator( $this->itemVocabularyBaseUri, 255, 'item' ),
 		] );
 		$validators[] = new DataFieldValidator( 'unit', $unitValidators );
 

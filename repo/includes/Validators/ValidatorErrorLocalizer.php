@@ -66,7 +66,7 @@ class ValidatorErrorLocalizer {
 		// wikibase-validator-no-such-property, wikibase-validator-no-validators, wikibase-validator-not-allowed,
 		// wikibase-validator-too-high, wikibase-validator-too-long, wikibase-validator-too-low,
 		// wikibase-validator-too-short, wikibase-validator-unknown-unit, wikibase-validator-url-scheme-missing,
-		// wikibase-validator-no-mul-descriptions
+		// wikibase-validator-no-mul-descriptions, wikibase-validator-bad-prefix
 		$key = 'wikibase-validator-' . $error->getCode();
 		$params = $error->getParameters();
 

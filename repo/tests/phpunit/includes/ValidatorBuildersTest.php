@@ -54,7 +54,7 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 			$this->getEntityLookup(),
 			new ItemIdParser(),
 			[ 'http', 'https', 'ftp', 'mailto' ],
-			'http://qudt.org/vocab/',
+			'http://example.org/entity/',
 			new StaticContentLanguages( [ 'contentlanguage' ] ),
 			$this->getCachingCommonsMediaFileNameLookup(),
 			$this->getMediaWikiPageNameNormalizer(),
@@ -276,8 +276,9 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 			'Valid globe' => [ 1, $wikidataUri . 'Q2', true ],
 			'Untrimmed globe' => [ 1, ' ' . $wikidataUri . 'Q2 ', false ],
 			'Bad URL scheme' => [ 1, ' javascript:alert(1) ', false ],
+			'Non-Wikidata globe' => [ 1, 'http://example.org/entity/Q2', false ],
+			'Non-Item globe' => [ 1, $wikidataUri . 'P1', false ],
 
-			// TODO: Globe must be an item reference
 			// TODO: Globe must be from a list of configured values
 		];
 	}
@@ -366,6 +367,18 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 				'+2013-06-06T00:00:00Z',
 				TimeValue::PRECISION_DAY,
 				' javascript:alert(1)',
+				false,
+			],
+			'Non-Wikidata calendar model' => [
+				'+2023-02-16T00:00:00Z',
+				TimeValue::PRECISION_DAY,
+				'http://example.org/entity/Q1985727',
+				false,
+			],
+			'Non-Item calendar model' => [
+				'+2023-02-16T00:00:00Z',
+				TimeValue::PRECISION_DAY,
+				$wikidataUri . 'P1',
 				false,
 			],
 
@@ -526,7 +539,9 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 			//quantity
 			'Unbounded' => [ 'quantity', UnboundedQuantityValue::newFromNumber( 5 ), true ],
 			'Simple integer' => [ 'quantity', QuantityValue::newFromNumber( 5 ), true ],
-			'Vocabulary URI' => [ 'quantity', QuantityValue::newFromNumber( 5, 'http://qudt.org/vocab/unit#Meter' ), true ],
+			'Vocabulary Item URI' => [ 'quantity', QuantityValue::newFromNumber( 5, 'http://example.org/entity/Q1' ), true ],
+			'Vocabulary Property URI' => [ 'quantity', QuantityValue::newFromNumber( 5, 'http://example.org/entity/P1' ), false ],
+			'Vocabulary non-Entity URI' => [ 'quantity', QuantityValue::newFromNumber( 5, 'http://example.org/entity/Meter' ), false ],
 			'Wikidata URI' => [ 'quantity', QuantityValue::newFromNumber( 5, $wikidataUri . 'Q11573' ), false ],
 			'1 means unitless' => [ 'quantity', QuantityValue::newFromNumber( 5, '1' ), true ],
 			'Bad unit URI' => [ 'quantity', QuantityValue::newFromNumber( 5, 'kittens' ), false ],
