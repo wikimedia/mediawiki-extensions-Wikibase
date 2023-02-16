@@ -27,8 +27,8 @@ class DescriptionsTest extends TestCase {
 	}
 
 	public function testFromTermList(): void {
-		$deText = 'Kartoffel';
-		$enText = 'potato';
+		$deText = 'unterirdische Knollen der Kartoffel (Solanum tuberosum)';
+		$enText = 'staple food';
 		$list = new TermList( [
 			new Term( 'en', $enText ),
 			new Term( 'de', $deText ),
