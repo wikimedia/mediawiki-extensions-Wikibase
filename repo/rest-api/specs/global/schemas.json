@@ -3,10 +3,12 @@
 		"type": "object",
 		"properties": {
 			"id": {
-				"type": "string"
+				"type": "string",
+				"example": "Q42"
 			},
 			"type": {
-				"type": "string"
+				"type": "string",
+				"example": "item"
 			},
 			"labels": {
 				"$ref": "#/Labels"
