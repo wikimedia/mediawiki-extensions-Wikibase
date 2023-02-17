@@ -7,7 +7,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 /**
  * @license GPL-2.0-or-later
  */
-class GetItemDescriptionsSuccessResponse {
+class GetItemDescriptionsResponse {
 
 	private Descriptions $descriptions;
 	private string $lastModified;

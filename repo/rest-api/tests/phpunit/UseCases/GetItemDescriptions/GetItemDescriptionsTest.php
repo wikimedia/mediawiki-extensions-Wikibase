@@ -13,7 +13,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemDescriptions\GetItemDescriptions;
 use Wikibase\Repo\RestApi\UseCases\GetItemDescriptions\GetItemDescriptionsRequest;
-use Wikibase\Repo\RestApi\UseCases\GetItemDescriptions\GetItemDescriptionsSuccessResponse;
+use Wikibase\Repo\RestApi\UseCases\GetItemDescriptions\GetItemDescriptionsResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemDescriptions\GetItemDescriptionsValidator;
 use Wikibase\Repo\RestApi\UseCases\ItemRedirectException;
 use Wikibase\Repo\RestApi\UseCases\UseCaseException;
@@ -69,7 +69,7 @@ class GetItemDescriptionsTest extends TestCase {
 
 		$request = new GetItemDescriptionsRequest( 'Q2' );
 		$response = $this->newUseCase()->execute( $request );
-		$this->assertEquals( new GetItemDescriptionsSuccessResponse( $descriptions, $lastModified, $revisionId ), $response );
+		$this->assertEquals( new GetItemDescriptionsResponse( $descriptions, $lastModified, $revisionId ), $response );
 	}
 
 	public function testGivenInvalidItemId_throws(): void {
