@@ -2,8 +2,9 @@
 
 namespace Wikibase\Repo\RestApi\UseCases\GetItemLabels;
 
+use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
+use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
-use Wikibase\Repo\RestApi\Validation\ValidationError;
 
 /**
  * @license GPL-2.0-or-later
@@ -16,7 +17,17 @@ class GetItemLabelsValidator {
 		$this->itemIdValidator = $itemIdValidator;
 	}
 
-	public function validate( GetItemLabelsRequest $request ): ?ValidationError {
-		return $this->itemIdValidator->validate( $request->getItemId() );
+	/**
+	 * @throws UseCaseException
+	 */
+	public function assertValidRequest( GetItemLabelsRequest $request ): void {
+		$validationError = $this->itemIdValidator->validate( $request->getItemId() );
+
+		if ( $validationError ) {
+			throw new UseCaseException(
+				ErrorResponse::INVALID_ITEM_ID,
+				'Not a valid item ID: ' . $validationError->getContext()[ItemIdValidator::CONTEXT_VALUE]
+			);
+		}
 	}
 }

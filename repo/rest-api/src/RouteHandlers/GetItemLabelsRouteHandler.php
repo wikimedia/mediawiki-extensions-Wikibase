@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\RouteHandlers;
 
-use LogicException;
 use MediaWiki\Rest\RequestInterface;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\ResponseInterface;
@@ -14,10 +13,10 @@ use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
 use Wikibase\Repo\RestApi\Serialization\LabelsSerializer;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabels;
-use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabelsErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabelsRequest;
-use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabelsSuccessResponse;
-use Wikibase\Repo\RestApi\UseCases\ItemRedirectResponse;
+use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabelsResponse;
+use Wikibase\Repo\RestApi\UseCases\ItemRedirectException;
+use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -74,16 +73,14 @@ class GetItemLabelsRouteHandler extends SimpleHandler {
 	}
 
 	public function runUseCase( string $itemId ): Response {
-		$useCaseResponse = $this->useCase->execute( new GetItemLabelsRequest( $itemId ) );
-
-		if ( $useCaseResponse instanceof GetItemLabelsSuccessResponse ) {
-			return $this->newSuccessHttpResponse( $useCaseResponse );
-		} elseif ( $useCaseResponse instanceof ItemRedirectResponse ) {
-			return $this->newRedirectHttpResponse( $useCaseResponse );
-		} elseif ( $useCaseResponse instanceof GetItemLabelsErrorResponse ) {
-			return $this->responseFactory->newErrorResponse( $useCaseResponse );
-		} else {
-			throw new LogicException( 'Received an unexpected use case result in ' . __CLASS__ );
+		try {
+			return $this->newSuccessHttpResponse(
+				$this->useCase->execute( new GetItemLabelsRequest( $itemId ) )
+			);
+		} catch ( ItemRedirectException $e ) {
+			return $this->newRedirectHttpResponse( $e );
+		} catch ( UseCaseException $e ) {
+			return $this->responseFactory->newErrorResponseFromException( $e );
 		}
 	}
 
@@ -97,7 +94,7 @@ class GetItemLabelsRouteHandler extends SimpleHandler {
 		];
 	}
 
-	private function newSuccessHttpResponse( GetItemLabelsSuccessResponse $useCaseResponse ): Response {
+	private function newSuccessHttpResponse( GetItemLabelsResponse $useCaseResponse ): Response {
 		$httpResponse = $this->getResponseFactory()->create();
 		$httpResponse->setHeader( 'Content-Type', 'application/json' );
 		$httpResponse->setHeader( 'Last-Modified', wfTimestamp( TS_RFC2822, $useCaseResponse->getLastModified() ) );
@@ -107,11 +104,11 @@ class GetItemLabelsRouteHandler extends SimpleHandler {
 		return $httpResponse;
 	}
 
-	private function newRedirectHttpResponse( ItemRedirectResponse $useCaseResponse ): Response {
+	private function newRedirectHttpResponse( ItemRedirectException $e ): Response {
 		$httpResponse = $this->getResponseFactory()->create();
 		$httpResponse->setHeader(
 			'Location',
-			$this->getRouteUrl( [ self::ITEM_ID_PATH_PARAM => $useCaseResponse->getRedirectTargetId() ] )
+			$this->getRouteUrl( [ self::ITEM_ID_PATH_PARAM => $e->getRedirectTargetId() ] )
 		);
 		$httpResponse->setStatus( 308 );
 

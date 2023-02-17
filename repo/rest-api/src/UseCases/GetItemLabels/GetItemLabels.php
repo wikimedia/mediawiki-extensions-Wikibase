@@ -6,7 +6,8 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Domain\Services\ItemLabelsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
-use Wikibase\Repo\RestApi\UseCases\ItemRedirectResponse;
+use Wikibase\Repo\RestApi\UseCases\ItemRedirectException;
+use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 
 /**
  * @license GPL-2.0-or-later
@@ -28,28 +29,30 @@ class GetItemLabels {
 	}
 
 	/**
-	 * @return GetItemLabelsErrorResponse|GetItemLabelsSuccessResponse|ItemRedirectResponse
+	 * @throws UseCaseException
+	 * @throws ItemRedirectException
 	 */
-	public function execute( GetItemLabelsRequest $request ) {
-		$validationError = $this->validator->validate( $request );
-		if ( $validationError ) {
-			return GetItemLabelsErrorResponse::newFromValidationError( $validationError );
-		}
+	public function execute( GetItemLabelsRequest $request ): GetItemLabelsResponse {
+		$this->validator->assertValidRequest( $request );
 
 		$itemId = new ItemId( $request->getItemId() );
 
 		$metaDataResult = $this->itemRevisionMetadataRetriever->getLatestRevisionMetadata( $itemId );
 
 		if ( !$metaDataResult->itemExists() ) {
-			return new GetItemLabelsErrorResponse(
+			throw new UseCaseException(
 				ErrorResponse::ITEM_NOT_FOUND,
 				"Could not find an item with the ID: {$request->getItemId()}"
 			);
-		} elseif ( $metaDataResult->isRedirect() ) {
-			return new ItemRedirectResponse( $metaDataResult->getRedirectTarget()->getSerialization() );
 		}
 
-		return new GetItemLabelsSuccessResponse(
+		if ( $metaDataResult->isRedirect() ) {
+			throw new ItemRedirectException(
+				$metaDataResult->getRedirectTarget()->getSerialization()
+			);
+		}
+
+		return new GetItemLabelsResponse(
 			$this->itemLabelsRetriever->getLabels( $itemId ),
 			$metaDataResult->getRevisionTimestamp(),
 			$metaDataResult->getRevisionId(),
