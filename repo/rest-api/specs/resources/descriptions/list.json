@@ -1,8 +1,7 @@
 {
 	"get": {
 		"tags": [ "descriptions" ],
-		"summary": "[WIP] Retrieve an Item's descriptions",
-		"description": "This endpoint is currently in development and is not recommended for production use.",
+		"summary": "Retrieve an Item's descriptions",
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/ItemId" },
 			{ "$ref": "../../global/parameters.json#/IfNoneMatch" },
