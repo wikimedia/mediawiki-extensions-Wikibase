@@ -47,7 +47,8 @@
 		"description": "Single property ID to filter statements by.",
 		"required": false,
 		"schema": {
-			"type": "string"
+			"type": "string",
+			"pattern": "^P[1-9]\\d{0,9}$"
 		},
 		"style": "form",
 		"example": "P31"
