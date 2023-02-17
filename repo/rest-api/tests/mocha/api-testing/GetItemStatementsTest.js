@@ -94,6 +94,19 @@ describe( 'GET /entities/items/{id}/statements', () => {
 		assert.include( response.body.message, itemId );
 	} );
 
+	it( '400 error - bad request, invalid property ID', async () => {
+		const propertyId = 'X123';
+		const response = await newGetItemStatementsRequestBuilder( testItemId )
+			.withQueryParam( 'property', propertyId )
+			// TODO .assertInvalidRequest()?
+			.makeRequest();
+
+		assert.equal( response.status, 400 );
+		assert.header( response, 'Content-Language', 'en' );
+		assert.equal( response.body.code, 'invalid-property-id' );
+		assert.include( response.body.message, propertyId );
+	} );
+
 	it( '404 error - item not found', async () => {
 		const itemId = 'Q999999';
 		const response = await newGetItemStatementsRequestBuilder( itemId )

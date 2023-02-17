@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\RestApi\UseCases\GetItemStatements;
 
+use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatementsRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatementsValidator;
@@ -26,11 +27,28 @@ class GetItemStatementsValidatorTest extends TestCase {
 		$this->assertSame( $invalidId, $error->getContext()[ItemIdValidator::CONTEXT_VALUE] );
 	}
 
-	public function testWithValidId(): void {
+	public function testWithInvalidPropertyFilter(): void {
+		$invalidPropertyId = 'X123';
+
+		$error = $this->newStatementsValidator()
+			->validate( new GetItemStatementsRequest( 'Q123', $invalidPropertyId ) );
+
+		$this->assertSame( GetItemStatementsValidator::CODE_INVALID_PROPERTY_ID, $error->getCode() );
+	}
+
+	/**
+	 * @dataProvider validRequestProvider
+	 */
+	public function testWithValidRequest( GetItemStatementsRequest $request ): void {
 		$this->assertNull(
 			$this->newStatementsValidator()
-				->validate( new GetItemStatementsRequest( 'Q321' ) )
+				->validate( $request )
 		);
+	}
+
+	public function validRequestProvider(): Generator {
+		yield [ new GetItemStatementsRequest( 'Q321' ) ];
+		yield [ new GetItemStatementsRequest( 'Q321', 'P123' ) ];
 	}
 
 	private function newStatementsValidator(): GetItemStatementsValidator {
