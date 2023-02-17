@@ -29,31 +29,31 @@ The specification can be "built" (i.e., compiled into a single JSON OpenAPI spec
 To modify API specs, install npm dependencies first, using a command like the following:
 
 ```
-docker run --rm --user $(id -u):$(id -g) -v $PWD:/app -w /app node:16 npm install
+npm install
 ```
 
 API specs can be validated using the npm `test` script, using a command like the following:
 
 ```
-docker run --rm --user $(id -u):$(id -g) -v $PWD:/app -w /app node:16 npm test
+npm test
 ```
 
 API specs can be bundled into a single file using the npm `build:spec` script, using a command like the following:
 
 ```
-docker run --rm --user $(id -u):$(id -g) -v $PWD:/app -w /app node:16 npm run build:spec
+npm run build:spec
 ```
 
 Autodocs can be generated from the API specification using the npm `build:docs` script, using a command like the following:
 
 ```
-docker run --rm --user $(id -u):$(id -g) -v $PWD:/app -w /app node:16 npm run build:docs
+npm run build:docs
 ```
 
 The base URL of the API can be configured by passing an `API_URL` environment variable:
 
 ```
-docker run --rm --user $(id -u):$(id -g) -v $PWD:/app -w /app -e API_URL='https://wikidata.org/w/rest.php' node:16 npm run build:docs
+API_URL='https://wikidata.org/w/rest.php' npm run build:docs
 ```
 
 The autodocs and the bundled OpenAPI specification files are generated in the `../../docs/rest-api/` directory.
