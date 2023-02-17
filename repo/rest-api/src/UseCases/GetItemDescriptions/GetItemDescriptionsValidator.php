@@ -17,6 +17,9 @@ class GetItemDescriptionsValidator {
 		$this->itemIdValidator = $itemIdValidator;
 	}
 
+	/**
+	 * @throws UseCaseException
+	 */
 	public function assertValidRequest( GetItemDescriptionsRequest $request ): void {
 		$validationError = $this->itemIdValidator->validate( $request->getItemId() );
 
