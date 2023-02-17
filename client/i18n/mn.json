@@ -13,6 +13,7 @@
 	"wikibase-addlinkstitle": "Өөр хэлтэй холбох",
 	"wikibase-linkitem-addlinks": "Холбоос нэмэх",
 	"wikibase-linkitem-title": "Хуудастай холбох",
+	"wikibase-linkitem-linkpage": "Хуудастай холбох",
 	"wikibase-linkitem-input-site": "Хэл:",
 	"wikibase-linkitem-input-page": "Хуудас:",
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
