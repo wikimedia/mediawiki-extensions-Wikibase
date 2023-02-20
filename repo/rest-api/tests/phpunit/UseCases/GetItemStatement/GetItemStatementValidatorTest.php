@@ -7,6 +7,7 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementValidator;
+use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\StatementIdValidator;
 
@@ -23,12 +24,19 @@ class GetItemStatementValidatorTest extends TestCase {
 	 * @dataProvider invalidStatementIdDataProvider
 	 */
 	public function testWithInvalidStatementId( string $statementId ): void {
-		$error = $this->newStatementValidator()->validate(
-			new GetItemStatementRequest( $statementId )
-		);
+		try {
+			$this->newStatementValidator()->assertValidRequest(
+				new GetItemStatementRequest( $statementId )
+			);
 
-		$this->assertSame( StatementIdValidator::CODE_INVALID, $error->getCode() );
-		$this->assertSame( $statementId, $error->getContext()[StatementIdValidator::CONTEXT_VALUE] );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( StatementIdValidator::CODE_INVALID, $e->getErrorCode() );
+			$this->assertSame(
+				'Not a valid statement ID: ' . $statementId,
+				$e->getErrorMessage()
+			);
+		}
 	}
 
 	public function invalidStatementIdDataProvider(): Generator {
@@ -40,32 +48,38 @@ class GetItemStatementValidatorTest extends TestCase {
 
 	public function testWithInvalidItemId(): void {
 		$itemId = 'X123';
-		$error = $this->newStatementValidator()->validate(
-			new GetItemStatementRequest(
-				'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
-				$itemId
-			)
-		);
-
-		$this->assertSame( ItemIdValidator::CODE_INVALID, $error->getCode() );
-		$this->assertSame( $itemId, $error->getContext()[ItemIdValidator::CONTEXT_VALUE] );
-	}
-
-	public function testWithValidStatementId(): void {
-		$this->assertNull(
-			$this->newStatementValidator()->validate(
-				new GetItemStatementRequest( 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
-			)
-		);
-	}
-
-	public function testWithValidStatementIdAndItemId(): void {
-		$this->assertNull(
-			$this->newStatementValidator()->validate(
+		try {
+			$this->newStatementValidator()->assertValidRequest(
 				new GetItemStatementRequest(
 					'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
-					'Q123'
+					$itemId
 				)
+			);
+
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( ItemIdValidator::CODE_INVALID, $e->getErrorCode() );
+			$this->assertSame( 'Not a valid item ID: ' . $itemId, $e->getErrorMessage() );
+		}
+	}
+
+	/**
+	 * @doesNotPerformAssertions
+	 */
+	public function testWithValidStatementId(): void {
+		$this->newStatementValidator()->assertValidRequest(
+			new GetItemStatementRequest( 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
+		);
+	}
+
+	/**
+	 * @doesNotPerformAssertions
+	 */
+	public function testWithValidStatementIdAndItemId(): void {
+		$this->newStatementValidator()->assertValidRequest(
+			new GetItemStatementRequest(
+				'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+				'Q123'
 			)
 		);
 	}

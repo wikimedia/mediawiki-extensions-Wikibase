@@ -8,6 +8,7 @@ use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementRetriever;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
+use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 
 /**
  * @license GPL-2.0-or-later
@@ -29,13 +30,10 @@ class GetItemStatement {
 	}
 
 	/**
-	 * @return GetItemStatementSuccessResponse | GetItemStatementErrorResponse
+	 * @throws UseCaseException
 	 */
-	public function execute( GetItemStatementRequest $statementRequest ) {
-		$validationError = $this->validator->validate( $statementRequest );
-		if ( $validationError ) {
-			return GetItemStatementErrorResponse::newFromValidationError( $validationError );
-		}
+	public function execute( GetItemStatementRequest $statementRequest ): GetItemStatementResponse {
+		$this->validator->assertValidRequest( $statementRequest );
 
 		$statementIdParser = new StatementGuidParser( new ItemIdParser() );
 		$statementId = $statementIdParser->parse( $statementRequest->getStatementId() );
@@ -46,31 +44,38 @@ class GetItemStatement {
 
 		$latestRevisionMetadata = $this->revisionMetadataRetriever
 			->getLatestRevisionMetadata( $itemId );
+
 		if ( !$latestRevisionMetadata->itemExists() ) {
-			return $requestedItemId ? new GetItemStatementErrorResponse(
-				ErrorResponse::ITEM_NOT_FOUND,
-				"Could not find an item with the ID: {$itemId}"
-			) : $this->newStatementNotFoundError( $statementRequest->getStatementId() );
+			if ( $requestedItemId ) {
+				throw new UseCaseException(
+					ErrorResponse::ITEM_NOT_FOUND,
+					"Could not find an item with the ID: {$itemId}"
+				);
+			}
+			$this->newStatementNotFoundError( $statementRequest->getStatementId() );
 		}
 
 		if ( !$itemId->equals( $statementId->getEntityId() ) ) {
-			return $this->newStatementNotFoundError( $statementRequest->getStatementId() );
+			$this->newStatementNotFoundError( $statementRequest->getStatementId() );
 		}
 
 		$statement = $this->statementRetriever->getStatement( $statementId );
 		if ( !$statement ) {
-			return $this->newStatementNotFoundError( $statementRequest->getStatementId() );
+			$this->newStatementNotFoundError( $statementRequest->getStatementId() );
 		}
 
-		return new GetItemStatementSuccessResponse(
+		return new GetItemStatementResponse(
 			$statement,
 			$latestRevisionMetadata->getRevisionTimestamp(),
 			$latestRevisionMetadata->getRevisionId()
 		);
 	}
 
-	private function newStatementNotFoundError( string $statementId ): GetItemStatementErrorResponse {
-		return new GetItemStatementErrorResponse(
+	/**
+	 * @throws UseCaseException
+	 */
+	private function newStatementNotFoundError( string $statementId ): void {
+		throw new UseCaseException(
 			ErrorResponse::STATEMENT_NOT_FOUND,
 			"Could not find a statement with the ID: $statementId"
 		);

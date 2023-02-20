@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\RouteHandlers;
 
-use LogicException;
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\RequestInterface;
 use MediaWiki\Rest\Response;
@@ -16,9 +15,9 @@ use Wikibase\Repo\RestApi\RouteHandlers\Middleware\RequestPreconditionCheck;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
 use Wikibase\Repo\RestApi\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatement;
-use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementRequest;
-use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementSuccessResponse;
+use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementResponse;
+use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -75,16 +74,14 @@ class GetStatementRouteHandler extends SimpleHandler {
 	}
 
 	public function runUseCase( string $statementId ): Response {
-		$useCaseResponse = $this->getItemStatement->execute(
-			new GetItemStatementRequest( $statementId )
-		);
-
-		if ( $useCaseResponse instanceof GetItemStatementSuccessResponse ) {
-			return $this->newSuccessHttpResponse( $useCaseResponse );
-		} elseif ( $useCaseResponse instanceof GetItemStatementErrorResponse ) {
-			return $this->responseFactory->newErrorResponse( $useCaseResponse );
-		} else {
-			throw new LogicException( 'Received an unexpected use case result in ' . __CLASS__ );
+		try {
+			return $this->newSuccessHttpResponse(
+				$this->getItemStatement->execute(
+					new GetItemStatementRequest( $statementId )
+				)
+			);
+		} catch ( UseCaseException $e ) {
+			return $this->responseFactory->newErrorResponseFromException( $e );
 		}
 	}
 
@@ -111,7 +108,7 @@ class GetStatementRouteHandler extends SimpleHandler {
 		return null;
 	}
 
-	private function newSuccessHttpResponse( GetItemStatementSuccessResponse $useCaseResponse ): Response {
+	private function newSuccessHttpResponse( GetItemStatementResponse $useCaseResponse ): Response {
 		$httpResponse = $this->getResponseFactory()->create();
 		$httpResponse->setHeader( 'Content-Type', 'application/json' );
 		$httpResponse->setHeader(
