@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests;
 
 use DataValues\Geo\Values\GlobeCoordinateValue;
@@ -47,7 +49,7 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 	private const EXISTING_PROPERTY_ID = 'P8';
 	private const NON_EXISTING_PROPERTY_ID = 'P3';
 
-	private function newValidatorBuilders() {
+	private function newValidatorBuilders(): ValidatorBuilders {
 		return new ValidatorBuilders(
 			$this->getEntityLookup(),
 			new ItemIdParser(),
@@ -61,7 +63,7 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	private function getEntityLookup() {
+	private function getEntityLookup(): EntityLookup {
 		$q8 = new Item( new ItemId( 'Q8' ) );
 
 		$p8 = Property::newFromType( 'string' );
@@ -86,10 +88,7 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 		] );
 	}
 
-	/**
-	 * @return MediaWikiPageNameNormalizer
-	 */
-	private function getMediaWikiPageNameNormalizer() {
+	private function getMediaWikiPageNameNormalizer(): MediaWikiPageNameNormalizer {
 		$pageNormalizer = $this->createMock( MediaWikiPageNameNormalizer::class );
 
 		$pageNormalizer->method( 'normalizePageName' )
@@ -100,10 +99,7 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 		return $pageNormalizer;
 	}
 
-	/**
-	 * @return CachingCommonsMediaFileNameLookup
-	 */
-	private function getCachingCommonsMediaFileNameLookup() {
+	private function getCachingCommonsMediaFileNameLookup(): CachingCommonsMediaFileNameLookup {
 		$fileNameLookup = $this->createMock( CachingCommonsMediaFileNameLookup::class );
 
 		$fileNameLookup->method( 'lookupFileName' )
@@ -125,7 +121,7 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider commonsFileNamesWithIllegalCharactersProvider
 	 */
-	public function testCommonsMediaValidationFailsWithIllegalFileCharsCode( $fileName ) {
+	public function testCommonsMediaValidationFailsWithIllegalFileCharsCode( string $fileName ) {
 		$validator = $this->newValidatorBuilders()->buildMediaValidators()[1];
 
 		$this->assertResultContainsErrorCode(
@@ -166,9 +162,8 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider invalidCommonsFileNamesProvider
-	 * @param string $fileName
 	 */
-	public function testCommonsMediaValidationFailureCases( $fileName ) {
+	public function testCommonsMediaValidationFailureCases( string $fileName ) {
 		$validator = $this->newValidatorBuilders()->buildMediaValidators()[1];
 
 		$this->assertFalse( $validator->validate( new StringValue( $fileName ) )->isValid() );
@@ -185,11 +180,7 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 		];
 	}
 
-	/**
-	 * @param string $errorCode
-	 * @param Result $result
-	 */
-	private function assertResultContainsErrorCode( $errorCode, Result $result ) {
+	private function assertResultContainsErrorCode( string $errorCode, Result $result ): void {
 		$errors = $result->getErrors();
 		$this->assertNotEmpty( $errors );
 
@@ -230,7 +221,7 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider provideGeoShapeValidation
 	 */
-	public function testGeoShapeValidation( $geoShapeTitle, $expected ) {
+	public function testGeoShapeValidation( string $geoShapeTitle, bool $expected ) {
 		$value = new StringValue( $geoShapeTitle );
 		$validators = $this->newValidatorBuilders()->buildGeoShapeValidators();
 
@@ -265,7 +256,7 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider provideTabularDataValidation
 	 */
-	public function testTabularDataValidation( $tabularDataTitle, $expected ) {
+	public function testTabularDataValidation( string $tabularDataTitle, bool $expected ) {
 		$value = new StringValue( $tabularDataTitle );
 		$validators = $this->newValidatorBuilders()->buildTabularDataValidators();
 
@@ -294,7 +285,11 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider provideGlobeCoordinateValueValidation
 	 */
-	public function testGlobeCoordinateValueValidation( $precision, $globe, $expected ) {
+	public function testGlobeCoordinateValueValidation(
+		?float $precision,
+		string $globe,
+		bool $expected
+	) {
 		$value = new GlobeCoordinateValue( new LatLongValue( 0, 0 ), $precision, $globe );
 		$validators = $this->newValidatorBuilders()->buildCoordinateValidators();
 
@@ -332,7 +327,7 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider provideStringValueValidation
 	 */
-	public function testStringValueValidation( $string, $expected ) {
+	public function testStringValueValidation( string $string, bool $expected ) {
 		$value = new StringValue( $string );
 		$validators = $this->newValidatorBuilders()->buildStringValidators();
 
@@ -414,7 +409,12 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider provideTimeValueValidation
 	 */
-	public function testTimeValueValidation( $timestamp, $precision, $calendarModel, $expected ) {
+	public function testTimeValueValidation(
+		string $timestamp,
+		int $precision,
+		string $calendarModel,
+		bool $expected
+	) {
 		$value = new TimeValue( $timestamp, 0, 0, 0, $precision, $calendarModel );
 		$validators = $this->newValidatorBuilders()->buildTimeValidators();
 
@@ -444,7 +444,7 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider provideUrlValidation
 	 */
-	public function testUrlValidation( $string, $expected ) {
+	public function testUrlValidation( string $string, bool $expected ) {
 		$value = new StringValue( $string );
 		$validators = $this->newValidatorBuilders()->buildUrlValidators();
 
@@ -543,7 +543,7 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider provideDataTypeValidation
 	 */
-	public function testDataTypeValidation( $typeId, $value, $expected ) {
+	public function testDataTypeValidation( string $typeId, $value, bool $expected ) {
 		$builders = $this->newValidatorBuilders();
 
 		$validatorMap = [
@@ -571,7 +571,7 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 	 * @param ValueValidator[] $validators
 	 * @param mixed $value
 	 */
-	private function assertValidation( $expected, array $validators, $value ) {
+	private function assertValidation( bool $expected, array $validators, $value ) {
 		$result = Result::newSuccess();
 		foreach ( $validators as $validator ) {
 			$result = $validator->validate( $value );

@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo;
 
 use DataValues\DataValue;
@@ -42,26 +44,20 @@ use Wikibase\Repo\Validators\WikiLinkExistsValidator;
  */
 class ValidatorBuilders {
 
-	/**
-	 * @var EntityLookup
-	 */
-	private $entityLookup;
+	private EntityLookup $entityLookup;
 
-	/**
-	 * @var EntityIdParser
-	 */
-	private $entityIdParser;
+	private EntityIdParser $entityIdParser;
 
 	/**
 	 * @var string[]
 	 */
-	private $urlSchemes;
+	private array $urlSchemes;
 
 	/**
 	 * @var string The base URI for the vocabulary to use for units (and in the
 	 * future, globes and calendars).
 	 */
-	private $itemVocabularyBaseUri;
+	private string $itemVocabularyBaseUri;
 
 	/**
 	 * @var string The base URI wikibase concepts, for use with the validators for time and globe
@@ -71,32 +67,17 @@ class ValidatorBuilders {
 	 * @todo use a configurable vocabulary for calendars and reference globes, instead of
 	 * hardcoding wikidata. Then replace usages of $wikidataBaseUri with $vocabularyBaseUri.
 	 */
-	private $wikidataBaseUri = 'http://www.wikidata.org/entity/';
+	private string $wikidataBaseUri = 'http://www.wikidata.org/entity/';
 
-	/**
-	 * @var ContentLanguages
-	 */
-	private $contentLanguages;
+	private ContentLanguages $contentLanguages;
 
-	/**
-	 * @var CachingCommonsMediaFileNameLookup
-	 */
-	private $mediaFileNameLookup;
+	private CachingCommonsMediaFileNameLookup $mediaFileNameLookup;
 
-	/**
-	 * @var MediaWikiPageNameNormalizer
-	 */
-	private $mediaWikiPageNameNormalizer;
+	private MediaWikiPageNameNormalizer $mediaWikiPageNameNormalizer;
 
-	/**
-	 * @var string
-	 */
-	private $geoShapeStorageApiUrl;
+	private string $geoShapeStorageApiUrl;
 
-	/**
-	 * @var string
-	 */
-	private $tabularDataStorageApiUrl;
+	private string $tabularDataStorageApiUrl;
 
 	/**
 	 * @param EntityLookup $lookup
@@ -113,12 +94,12 @@ class ValidatorBuilders {
 		EntityLookup $lookup,
 		EntityIdParser $idParser,
 		array $urlSchemes,
-		$itemVocabularyBaseUri,
+		string $itemVocabularyBaseUri,
 		ContentLanguages $contentLanguages,
 		CachingCommonsMediaFileNameLookup $cachingCommonsMediaFileNameLookup,
 		MediaWikiPageNameNormalizer $mediaWikiPageNameNormalizer,
-		$geoShapeStorageApiUrl,
-		$tabularDataStorageApiUrl
+		string $geoShapeStorageApiUrl,
+		string $tabularDataStorageApiUrl
 	) {
 		$this->entityLookup = $lookup;
 		$this->entityIdParser = $idParser;
@@ -134,21 +115,21 @@ class ValidatorBuilders {
 	/**
 	 * @return ValueValidator[]
 	 */
-	public function buildItemValidators() {
+	public function buildItemValidators(): array {
 		return $this->getEntityValidators( Item::ENTITY_TYPE );
 	}
 
 	/**
 	 * @return ValueValidator[]
 	 */
-	public function buildPropertyValidators() {
+	public function buildPropertyValidators(): array {
 		return $this->getEntityValidators( Property::ENTITY_TYPE );
 	}
 
 	/**
 	 * @return ValueValidator[]
 	 */
-	public function buildEntityValidators() {
+	public function buildEntityValidators(): array {
 		return $this->getEntityValidators();
 	}
 
@@ -157,7 +138,7 @@ class ValidatorBuilders {
 	 *
 	 * @return ValueValidator[]
 	 */
-	public function getEntityValidators( $entityType = null ) {
+	public function getEntityValidators( string $entityType = null ): array {
 		$typeValidator = new TypeValidator( EntityIdValue::class );
 		$entityExistsValidator = new EntityExistsValidator( $this->entityLookup, $entityType );
 
@@ -173,7 +154,7 @@ class ValidatorBuilders {
 	 *
 	 * @return ValueValidator[]
 	 */
-	private function getCommonStringValidators( $maxLength = 400 ) {
+	private function getCommonStringValidators( int $maxLength = 400 ): array {
 		$validators = [];
 
 		$validators[] = new TypeValidator( 'string' );
@@ -194,7 +175,7 @@ class ValidatorBuilders {
 	 *
 	 * @return ValueValidator[]
 	 */
-	public function buildMediaValidators( $checkExistence = 'checkExistence' ) {
+	public function buildMediaValidators( string $checkExistence = 'checkExistence' ): array {
 		// oi_archive_name is max 255 bytes, which include a timestamp and an exclamation mark,
 		// so restrict file name to 240 bytes (see UploadBase::getTitle).
 		$validators = $this->getCommonStringValidators( 240 );
@@ -229,7 +210,7 @@ class ValidatorBuilders {
 	 *
 	 * @return ValueValidator[]
 	 */
-	public function buildGeoShapeValidators( $checkExistence = 'checkExistence' ) {
+	public function buildGeoShapeValidators( string $checkExistence = 'checkExistence' ): array {
 		$validators = $this->getCommonStringValidators( 240 );
 		//Don't forget to change message `wikibase-validator-illegal-geo-shape-title` modifying this
 		// Check for 'Data:' prefix, '.map' extension and illegal characters
@@ -257,7 +238,7 @@ class ValidatorBuilders {
 	 *
 	 * @return ValueValidator[]
 	 */
-	public function buildTabularDataValidators( $checkExistence = 'checkExistence' ) {
+	public function buildTabularDataValidators( string $checkExistence = 'checkExistence' ): array {
 		$validators = $this->getCommonStringValidators( 240 );
 		$validators[] = new RegexValidator(
 			'/^Data:[^\\[\\]#\\\:{|}]+\.tab$/u',
@@ -281,7 +262,7 @@ class ValidatorBuilders {
 	/**
 	 * @return ValueValidator[]
 	 */
-	public function buildEntitySchemaValidators() {
+	public function buildEntitySchemaValidators(): array {
 		$validators = [];
 		$validators[] = new RegexValidator(
 			'/^E\d+$/u',
@@ -303,7 +284,7 @@ class ValidatorBuilders {
 	 * @param int $maxLength
 	 * @return ValueValidator[]
 	 */
-	public function buildStringValidators( $maxLength = 400 ) {
+	public function buildStringValidators( int $maxLength = 400 ): array {
 		$validators = $this->getCommonStringValidators( $maxLength );
 
 		$topValidator = new DataValueValidator(
@@ -319,7 +300,7 @@ class ValidatorBuilders {
 	 *
 	 * @return ValueValidator[]
 	 */
-	public function buildMonolingualTextValidators( $maxLength = 400 ) {
+	public function buildMonolingualTextValidators( int $maxLength = 400 ): array {
 		$validators = [];
 
 		$validators[] = new DataFieldValidator(
@@ -342,7 +323,7 @@ class ValidatorBuilders {
 	/**
 	 * @return ValueValidator[]
 	 */
-	public function buildTimeValidators() {
+	public function buildTimeValidators(): array {
 		$validators = [];
 		$validators[] = new TypeValidator( 'array' );
 
@@ -387,7 +368,7 @@ class ValidatorBuilders {
 	/**
 	 * @return ValueValidator[]
 	 */
-	public function buildCoordinateValidators() {
+	public function buildCoordinateValidators(): array {
 		$validators = [];
 		$validators[] = new TypeValidator( 'array' );
 
@@ -413,9 +394,13 @@ class ValidatorBuilders {
 	 * should be limited to about 2000. About 500 is a reasonable compromise.
 	 * @see http://stackoverflow.com/a/417184
 	 *
-	 * @return CompositeValidator
+	 * @return ValueValidator
 	 */
-	private function getUrlValidator( array $urlSchemes, $prefix = null, $maxLength = 500 ) {
+	private function getUrlValidator(
+		array $urlSchemes,
+		string $prefix = null,
+		int $maxLength = 500
+	): ValueValidator {
 		$validators = [];
 		$validators[] = new TypeValidator( 'string' );
 		$validators[] = new StringLengthValidator( 2, $maxLength );
@@ -432,13 +417,7 @@ class ValidatorBuilders {
 		return new CompositeValidator( $validators ); //Note: each validator is fatal
 	}
 
-	/**
-	 * @param string $prefix
-	 * @param string $errorCode
-	 *
-	 * @return RegexValidator
-	 */
-	private function getPrefixValidator( $prefix, $errorCode ) {
+	private function getPrefixValidator( string $prefix, string $errorCode ): ValueValidator {
 		$regex = '/^' . preg_quote( $prefix, '/' ) . '/';
 		return new RegexValidator( $regex, false, $errorCode );
 	}
@@ -447,7 +426,7 @@ class ValidatorBuilders {
 	 * @param int $maxLength
 	 * @return ValueValidator[]
 	 */
-	public function buildUrlValidators( $maxLength = 500 ) {
+	public function buildUrlValidators( int $maxLength = 500 ): array {
 		$urlValidator = $this->getUrlValidator( $this->urlSchemes, null, $maxLength );
 
 		$topValidator = new DataValueValidator(
@@ -460,7 +439,7 @@ class ValidatorBuilders {
 	/**
 	 * @return ValueValidator[]
 	 */
-	public function buildQuantityValidators() {
+	public function buildQuantityValidators(): array {
 		$validators = [];
 		$validators[] = new TypeValidator( 'array' );
 
