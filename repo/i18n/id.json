@@ -370,7 +370,7 @@
 	"wikibase-api-illegal-entity-remove": "Entitas tidak bisa dihapus dengan memberikan kunci <var>remove</var> tingkat teratas.",
 	"wikibase-api-illegal-id-or-site-page-selector": "Anda harus memberikan salah satu antara <var>id</var> entitas, atau kombinasi <var>site</var> dan <var>page</var>, tetapi tidak keduanya.",
 	"wikibase-api-illegal-ids-or-sites-titles-selector": "Berikan \"ids\" butir atau pasangan \"sites\" dan \"titles\" dari halaman yang sesuai",
-	"wikibase-api-inconsistent-language": "Terdeteksi bahasa yang tidak konsisten.",
+	"wikibase-api-inconsistent-language": "Bahasa yang tidak konsisten \" $1 \" terdeteksi (diharapkan \"$2\").",
 	"wikibase-api-inconsistent-site": "Terdeteksi situs yang tidak konsisten.",
 	"wikibase-api-invalid-json": "Json dalam permintaan tidak valid.",
 	"wikibase-api-invalid-snak": "Data snak tidak valid.",
