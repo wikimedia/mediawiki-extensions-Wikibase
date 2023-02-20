@@ -29,7 +29,7 @@ class GetItemDescriptions {
 	}
 
 	/**
-	 * @throws UseCaseException
+	 * @throws UseCaseException|ItemRedirectException
 	 */
 	public function execute( GetItemDescriptionsRequest $request ): GetItemDescriptionsSuccessResponse {
 		$this->validator->assertValidRequest( $request );
