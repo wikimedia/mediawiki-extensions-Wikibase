@@ -2,9 +2,10 @@
 
 namespace Wikibase\Repo\RestApi\UseCases\GetItemStatement;
 
+use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
+use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\StatementIdValidator;
-use Wikibase\Repo\RestApi\Validation\ValidationError;
 
 /**
  * @license GPL-2.0-or-later
@@ -22,14 +23,40 @@ class GetItemStatementValidator {
 		$this->itemIdValidator = $itemIdValidator;
 	}
 
-	public function validate( GetItemStatementRequest $statementRequest ): ?ValidationError {
-		return $this->statementIdValidator->validate(
+	/**
+	 * @throws UseCaseException
+	 */
+	public function assertValidRequest( GetItemStatementRequest $statementRequest ): void {
+		$statementIdValidationError = $this->statementIdValidator->validate(
 			$statementRequest->getStatementId()
-		) ?: $this->validateItemId( $statementRequest->getItemId() );
+		);
+
+		if ( $statementIdValidationError ) {
+			throw new UseCaseException(
+				ErrorResponse::INVALID_STATEMENT_ID,
+				'Not a valid statement ID: ' . $statementIdValidationError->getContext()[StatementIdValidator::CONTEXT_VALUE]
+			);
+		}
+
+		$this->validateItemId( $statementRequest->getItemId() );
 	}
 
-	private function validateItemId( ?string $itemId ): ?ValidationError {
-		return $itemId ? $this->itemIdValidator->validate( $itemId ) : null;
+	/**
+	 * @throws UseCaseException
+	 */
+	private function validateItemId( ?string $itemId ): void {
+		if ( !isset( $itemId ) ) {
+			return;
+		}
+
+		$validationError = $this->itemIdValidator->validate( $itemId );
+
+		if ( $validationError ) {
+			throw new UseCaseException(
+				ErrorResponse::INVALID_ITEM_ID,
+				'Not a valid item ID: ' . $validationError->getContext()[ItemIdValidator::CONTEXT_VALUE]
+			);
+		}
 	}
 
 }
