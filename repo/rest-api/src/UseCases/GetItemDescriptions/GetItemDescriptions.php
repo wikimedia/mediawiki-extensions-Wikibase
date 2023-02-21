@@ -31,7 +31,7 @@ class GetItemDescriptions {
 	/**
 	 * @throws UseCaseException|ItemRedirectException
 	 */
-	public function execute( GetItemDescriptionsRequest $request ): GetItemDescriptionsSuccessResponse {
+	public function execute( GetItemDescriptionsRequest $request ): GetItemDescriptionsResponse {
 		$this->validator->assertValidRequest( $request );
 
 		$itemId = new ItemId( $request->getItemId() );
@@ -51,7 +51,7 @@ class GetItemDescriptions {
 			);
 		}
 
-		return new GetItemDescriptionsSuccessResponse(
+		return new GetItemDescriptionsResponse(
 			$this->itemDescriptionsRetriever->getDescriptions( $itemId ),
 			$metaDataResult->getRevisionTimestamp(),
 			$metaDataResult->getRevisionId(),
