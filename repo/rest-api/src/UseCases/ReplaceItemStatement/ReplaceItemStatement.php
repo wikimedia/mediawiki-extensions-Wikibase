@@ -17,6 +17,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
+use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 
 /**
  * @license GPL-2.0-or-later
@@ -44,13 +45,10 @@ class ReplaceItemStatement {
 	}
 
 	/**
-	 * @return ReplaceItemStatementSuccessResponse|ReplaceItemStatementErrorResponse
+	 * @throws UseCaseException
 	 */
-	public function execute( ReplaceItemStatementRequest $request ) {
-		$validationError = $this->validator->validate( $request );
-		if ( $validationError ) {
-			return ReplaceItemStatementErrorResponse::newFromValidationError( $validationError );
-		}
+	public function execute( ReplaceItemStatementRequest $request ): ReplaceItemStatementResponse {
+		$this->validator->assertValidRequest( $request );
 
 		$requestedItemId = $request->getItemId();
 		$statementIdParser = new StatementGuidParser( new ItemIdParser() );
@@ -61,19 +59,19 @@ class ReplaceItemStatement {
 
 		$latestRevision = $this->revisionMetadataRetriever->getLatestRevisionMetadata( $itemId );
 		if ( $requestedItemId && !$latestRevision->itemExists() ) {
-			return new ReplaceItemStatementErrorResponse(
+			throw new UseCaseException(
 				ErrorResponse::ITEM_NOT_FOUND,
 				"Could not find an item with the ID: {$itemId}"
 			);
 		} elseif ( !$latestRevision->itemExists()
 				   || $latestRevision->isRedirect()
 				   || !$itemId->equals( $statementId->getEntityId() ) ) {
-			return $this->newStatementNotFoundErrorResponse( $statementId );
+			$this->throwStatementNotFoundException( $statementId );
 		}
 
 		$user = $request->hasUser() ? User::withUsername( $request->getUsername() ) : User::newAnonymous();
 		if ( !$this->permissionChecker->canEdit( $user, $itemId ) ) {
-			return new ReplaceItemStatementErrorResponse(
+			throw new UseCaseException(
 				ErrorResponse::PERMISSION_DENIED,
 				'You have no permission to edit this item.'
 			);
@@ -85,14 +83,14 @@ class ReplaceItemStatement {
 		try {
 			$item->getStatements()->replaceStatement( $statementId, $newStatement );
 		} catch ( StatementNotFoundException $e ) {
-			return $this->newStatementNotFoundErrorResponse( $statementId );
+			$this->throwStatementNotFoundException( $statementId );
 		} catch ( StatementGuidChangedException $e ) {
-			return new ReplaceItemStatementErrorResponse(
+			throw new UseCaseException(
 				ErrorResponse::INVALID_OPERATION_CHANGED_STATEMENT_ID,
 				'Cannot change the ID of the existing statement'
 			);
 		} catch ( PropertyChangedException $e ) {
-			return new ReplaceItemStatementErrorResponse(
+			throw new UseCaseException(
 				ErrorResponse::INVALID_OPERATION_CHANGED_PROPERTY,
 				'Cannot change the property of the existing statement'
 			);
@@ -105,15 +103,18 @@ class ReplaceItemStatement {
 		);
 		$newRevision = $this->itemUpdater->update( $item, $editMetadata );
 
-		return new ReplaceItemStatementSuccessResponse(
+		return new ReplaceItemStatementResponse(
 			$newRevision->getItem()->getStatements()->getStatementById( $statementId ),
 			$newRevision->getLastModified(),
 			$newRevision->getRevisionId()
 		);
 	}
 
-	private function newStatementNotFoundErrorResponse( StatementGuid $statementId ): ReplaceItemStatementErrorResponse {
-		return new ReplaceItemStatementErrorResponse(
+	/**
+	 * @throws UseCaseException
+	 */
+	private function throwStatementNotFoundException( StatementGuid $statementId ): void {
+		throw new UseCaseException(
 			ErrorResponse::STATEMENT_NOT_FOUND,
 			"Could not find a statement with the ID: $statementId"
 		);

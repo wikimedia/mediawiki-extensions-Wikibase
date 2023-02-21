@@ -8,8 +8,10 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Statement\StatementGuid;
+use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementRequest;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementValidator;
+use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\StatementIdValidator;
@@ -41,13 +43,12 @@ class ReplaceItemStatementValidatorTest extends TestCase {
 
 	/**
 	 * @dataProvider provideValidRequest
+	 * @doesNotPerformAssertions
 	 */
 	public function testValidate_withValidRequest( array $requestData ): void {
-		$error = $this->newReplaceItemStatementValidator()->validate(
+		$this->newReplaceItemStatementValidator()->assertValidRequest(
 			$this->newUseCaseRequest( $requestData )
 		);
-
-		$this->assertNull( $error );
 	}
 
 	public function provideValidRequest(): Generator {
@@ -78,44 +79,84 @@ class ReplaceItemStatementValidatorTest extends TestCase {
 
 	public function testValidate_withInvalidItemId(): void {
 		$itemId = 'X123';
-		$error = $this->newReplaceItemStatementValidator()->validate(
-			$this->newUseCaseRequest( [
-				'$statementId' => 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
-				'$statement' => [ 'valid' => 'statement' ],
-				'$editTags' => [],
-				'$isBot' => false,
-				'$comment' => null,
-				'$username' => null,
-				'$itemId' => $itemId,
-			] )
-		);
 
-		$this->assertNotNull( $error );
-		$this->assertSame( ItemIdValidator::CODE_INVALID, $error->getCode() );
-		$this->assertSame( $itemId, $error->getContext()[ItemIdValidator::CONTEXT_VALUE] );
+		try {
+			$this->newReplaceItemStatementValidator()->assertValidRequest(
+				$this->newUseCaseRequest( [
+					'$statementId' => 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+					'$statement' => [ 'valid' => 'statement' ],
+					'$editTags' => [],
+					'$isBot' => false,
+					'$comment' => null,
+					'$username' => null,
+					'$itemId' => $itemId,
+				] )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( ErrorResponse::INVALID_ITEM_ID, $e->getErrorCode() );
+			$this->assertSame( 'Not a valid item ID: X123', $e->getErrorMessage() );
+		}
 	}
 
 	public function testValidate_withInvalidStatementId(): void {
 		$itemId = 'Q123';
 		$statementId = $itemId . StatementGuid::SEPARATOR . 'INVALID-STATEMENT-ID';
-		$error = $this->newReplaceItemStatementValidator()->validate(
-			$this->newUseCaseRequest( [
-				'$statementId' => $statementId,
-				'$statement' => [ 'valid' => 'statement' ],
-				'$editTags' => [],
-				'$isBot' => false,
-				'$comment' => null,
-				'$username' => null,
-				'$itemId' => $itemId,
-			] )
-		);
 
-		$this->assertNotNull( $error );
-		$this->assertSame( StatementIdValidator::CODE_INVALID, $error->getCode() );
-		$this->assertSame( $statementId, $error->getContext()[StatementIdValidator::CONTEXT_VALUE] );
+		try {
+			$this->newReplaceItemStatementValidator()->assertValidRequest(
+				$this->newUseCaseRequest( [
+					'$statementId' => $statementId,
+					'$statement' => [ 'valid' => 'statement' ],
+					'$editTags' => [],
+					'$isBot' => false,
+					'$comment' => null,
+					'$username' => null,
+					'$itemId' => $itemId,
+				] )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( ErrorResponse::INVALID_STATEMENT_ID, $e->getErrorCode() );
+			$this->assertSame( 'Not a valid statement ID: ' . $statementId, $e->getErrorMessage() );
+		}
 	}
 
-	public function testValidate_withInvalidStatement(): void {
+	public function testValidate_withStatementInvalidField(): void {
+		$invalidStatement = [ 'this is' => 'not a valid statement' ];
+		$expectedError = new ValidationError(
+			StatementValidator::CODE_INVALID_FIELD,
+			[
+				StatementValidator::CONTEXT_FIELD_NAME => 'property',
+				StatementValidator::CONTEXT_FIELD_VALUE => 'id',
+			]
+		);
+		$this->statementValidator = $this->createMock( StatementValidator::class );
+		$this->statementValidator->method( 'validate' )
+			->with( $invalidStatement )
+			->willReturn( $expectedError );
+
+		try {
+			$this->newReplaceItemStatementValidator()->assertValidRequest(
+				$this->newUseCaseRequest( [
+					'$statementId' => 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+					'$statement' => $invalidStatement,
+					'$editTags' => [],
+					'$isBot' => false,
+					'$comment' => null,
+					'$username' => null,
+					'$itemId' => null,
+				] )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( ErrorResponse::STATEMENT_DATA_INVALID_FIELD, $e->getErrorCode() );
+			$this->assertSame( 'Invalid input for \'property\'', $e->getErrorMessage() );
+			$this->assertSame( [ 'path' => 'property', 'value' => 'id' ], $e->getErrorContext() );
+		}
+	}
+
+	public function testValidate_withStatementMissingField(): void {
 		$invalidStatement = [ 'this is' => 'not a valid statement' ];
 		$expectedError = new ValidationError(
 			StatementValidator::CODE_MISSING_FIELD,
@@ -126,65 +167,73 @@ class ReplaceItemStatementValidatorTest extends TestCase {
 			->with( $invalidStatement )
 			->willReturn( $expectedError );
 
-		$error = $this->newReplaceItemStatementValidator()->validate(
-			$this->newUseCaseRequest( [
-				'$statementId' => 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
-				'$statement' => $invalidStatement,
-				'$editTags' => [],
-				'$isBot' => false,
-				'$comment' => null,
-				'$username' => null,
-				'$itemId' => null,
-			] )
-		);
-
-		$this->assertSame( $expectedError, $error );
+		try {
+			$this->newReplaceItemStatementValidator()->assertValidRequest(
+				$this->newUseCaseRequest( [
+					'$statementId' => 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+					'$statement' => $invalidStatement,
+					'$editTags' => [],
+					'$isBot' => false,
+					'$comment' => null,
+					'$username' => null,
+					'$itemId' => null,
+				] )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( ErrorResponse::STATEMENT_DATA_MISSING_FIELD, $e->getErrorCode() );
+			$this->assertSame(
+				'Mandatory field missing in the statement data: property',
+				$e->getErrorMessage()
+			);
+			$this->assertSame( [ 'path' => 'property' ], $e->getErrorContext() );
+		}
 	}
 
 	public function testValidate_withCommentTooLong(): void {
 		$comment = str_repeat( 'x', CommentStore::COMMENT_CHARACTER_LIMIT + 1 );
-		$error = $this->newReplaceItemStatementValidator()->validate(
-			$this->newUseCaseRequest( [
-				'$statementId' => 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
-				'$statement' => [ 'valid' => 'statement' ],
-				'$editTags' => [],
-				'$isBot' => false,
-				'$comment' => $comment,
-				'$username' => null,
-				'$itemId' => null,
-			] )
-		);
-
-		$this->assertEquals(
-			new ValidationError(
-				EditMetadataValidator::CODE_COMMENT_TOO_LONG,
-				[ EditMetadataValidator::CONTEXT_COMMENT_MAX_LENGTH => '500' ]
-			),
-			$error
-		);
+		try {
+			$this->newReplaceItemStatementValidator()->assertValidRequest(
+				$this->newUseCaseRequest( [
+					'$statementId' => 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+					'$statement' => [ 'valid' => 'statement' ],
+					'$editTags' => [],
+					'$isBot' => false,
+					'$comment' => $comment,
+					'$username' => null,
+					'$itemId' => null,
+				] )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( ErrorResponse::COMMENT_TOO_LONG, $e->getErrorCode() );
+			$this->assertSame(
+				'Comment must not be longer than ' . CommentStore::COMMENT_CHARACTER_LIMIT . ' characters.',
+				$e->getErrorMessage()
+			);
+		}
 	}
 
 	public function testValidate_withInvalidEditTags(): void {
 		$invalid = 'invalid';
-		$error = $this->newReplaceItemStatementValidator()->validate(
-			$this->newUseCaseRequest( [
-				'$statementId' => 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
-				'$statement' => [ 'valid' => 'statement' ],
-				'$editTags' => [ 'some', 'tags', 'are', $invalid ],
-				'$isBot' => false,
-				'$comment' => null,
-				'$username' => null,
-				'$itemId' => null,
-			] )
-		);
 
-		$this->assertEquals(
-			new ValidationError(
-				EditMetadataValidator::CODE_INVALID_TAG,
-				[ EditMetadataValidator::CONTEXT_TAG_VALUE => json_encode( $invalid ) ]
-			),
-			$error
-		);
+		try {
+			$this->newReplaceItemStatementValidator()->assertValidRequest(
+				$this->newUseCaseRequest( [
+					'$statementId' => 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+					'$statement' => [ 'valid' => 'statement' ],
+					'$editTags' => [ 'some', 'tags', 'are', $invalid ],
+					'$isBot' => false,
+					'$comment' => null,
+					'$username' => null,
+					'$itemId' => null,
+				] )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( ErrorResponse::INVALID_EDIT_TAG, $e->getErrorCode() );
+			$this->assertSame( 'Invalid MediaWiki tag: "invalid"', $e->getErrorMessage() );
+		}
 	}
 
 	private function newReplaceItemStatementValidator(): ReplaceItemStatementValidator {

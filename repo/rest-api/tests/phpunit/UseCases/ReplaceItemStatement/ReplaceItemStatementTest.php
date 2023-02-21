@@ -26,10 +26,10 @@ use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
 use Wikibase\Repo\RestApi\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatement;
-use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementRequest;
-use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementSuccessResponse;
+use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementResponse;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementValidator;
+use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\StatementIdValidator;
@@ -130,7 +130,7 @@ class ReplaceItemStatementTest extends TestCase {
 			] )
 		);
 
-		$this->assertInstanceOf( ReplaceItemStatementSuccessResponse::class, $response );
+		$this->assertInstanceOf( ReplaceItemStatementResponse::class, $response );
 		$this->assertSame(
 			$updatedItem->getStatements()->getStatementById( $statementId ),
 			$response->getStatement()
@@ -139,7 +139,7 @@ class ReplaceItemStatementTest extends TestCase {
 		$this->assertSame( $modificationTimestamp, $response->getLastModified() );
 	}
 
-	public function testRejectsStatementIdChange(): void {
+	public function testRejectsStatementIdChange_throws(): void {
 		$itemId = new ItemId( 'Q123' );
 		$originalStatementId = new StatementGuid( $itemId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 		$originalStatement = NewStatement::noValueFor( 'P123' )
@@ -160,21 +160,23 @@ class ReplaceItemStatementTest extends TestCase {
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemRetriever->method( 'getItem' )->willReturn( $item );
 
-		$response = $this->newUseCase()->execute(
-			$this->newUseCaseRequest( [
-				'$statementId' => (string)$originalStatementId,
-				'$statement' => $newStatementSerialization,
-			] )
-		);
-
-		$this->assertInstanceOf( ReplaceItemStatementErrorResponse::class, $response );
-		$this->assertSame(
-			ReplaceItemStatementErrorResponse::INVALID_OPERATION_CHANGED_STATEMENT_ID,
-			$response->getCode()
-		);
+		try {
+			$this->newUseCase()->execute(
+				$this->newUseCaseRequest( [
+					'$statementId' => (string)$originalStatementId,
+					'$statement' => $newStatementSerialization,
+				] )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame(
+				ErrorResponse::INVALID_OPERATION_CHANGED_STATEMENT_ID,
+				$e->getErrorCode()
+			);
+		}
 	}
 
-	public function testRejectsPropertyIdChange(): void {
+	public function testRejectsPropertyIdChange_throwsUseCaseException(): void {
 		$itemId = new ItemId( 'Q123' );
 		$statementId = new StatementGuid( $itemId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 		$originalStatement = NewStatement::noValueFor( 'P123' )
@@ -194,116 +196,148 @@ class ReplaceItemStatementTest extends TestCase {
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemRetriever->method( 'getItem' )->willReturn( $item );
 
-		$response = $this->newUseCase()->execute(
-			$this->newUseCaseRequest( [
-				'$statementId' => (string)$statementId,
-				'$statement' => $newStatementSerialization,
-			] )
-		);
-
-		$this->assertInstanceOf( ReplaceItemStatementErrorResponse::class, $response );
-		$this->assertSame(
-			ReplaceItemStatementErrorResponse::INVALID_OPERATION_CHANGED_PROPERTY,
-			$response->getCode()
-		);
+		try {
+			$this->newUseCase()->execute(
+				$this->newUseCaseRequest( [
+					'$statementId' => (string)$statementId,
+					'$statement' => $newStatementSerialization,
+				] )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame(
+				ErrorResponse::INVALID_OPERATION_CHANGED_PROPERTY,
+				$e->getErrorCode()
+			);
+		}
 	}
 
-	public function testInvalidStatementId_returnsInvalidStatementId(): void {
-		$response = $this->newUseCase()->execute(
-			$this->newUseCaseRequest( [
-				'$statementId' => 'INVALID-STATEMENT-ID',
-				'$statement' => [
-					'property' => [ 'id' => 'P123' ],
-					'value' => [ 'type' => 'novalue' ],
-				],
-			] )
-		);
-
-		$this->assertInstanceOf( ReplaceItemStatementErrorResponse::class, $response );
-		$this->assertSame( ErrorResponse::INVALID_STATEMENT_ID, $response->getCode() );
+	public function testInvalidStatementId_throwsUseCaseException(): void {
+		try {
+			$this->newUseCase()->execute(
+				$this->newUseCaseRequest( [
+					'$statementId' => 'INVALID-STATEMENT-ID',
+					'$statement' => [
+						'property' => [ 'id' => 'P123' ],
+						'value' => [ 'type' => 'novalue' ],
+					],
+				] )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame(
+				ErrorResponse::INVALID_STATEMENT_ID,
+				$e->getErrorCode()
+			);
+		}
 	}
 
-	public function testRequestedItemNotFound_returnsItemNotFound(): void {
+	public function testRequestedItemNotFound_throwsUseCaseException(): void {
 		$this->revisionMetadataRetriever = $this->newItemMetadataRetriever( LatestItemRevisionMetadataResult::itemNotFound() );
 
-		$response = $this->newUseCase()->execute(
-			$this->newUseCaseRequest( [
-				'$itemId' => 'Q42',
-				'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
-				'$statement' => $this->getValidStatementSerialization(),
-			] )
-		);
-
-		$this->assertInstanceOf( ReplaceItemStatementErrorResponse::class, $response );
-		$this->assertSame( ErrorResponse::ITEM_NOT_FOUND, $response->getCode() );
+		try {
+			$this->newUseCase()->execute(
+				$this->newUseCaseRequest( [
+					'$itemId' => 'Q42',
+					'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+					'$statement' => $this->getValidStatementSerialization(),
+				] )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame(
+				ErrorResponse::ITEM_NOT_FOUND,
+				$e->getErrorCode()
+			);
+		}
 	}
 
-	public function testItemForStatementNotFound_returnsStatementNotFound(): void {
+	public function testItemForStatementNotFound_throwsUseCaseException(): void {
 		$this->revisionMetadataRetriever = $this->newItemMetadataRetriever( LatestItemRevisionMetadataResult::itemNotFound() );
 
-		$response = $this->newUseCase()->execute(
-			$this->newUseCaseRequest( [
-				'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
-				'$statement' => $this->getValidStatementSerialization(),
-			] )
-		);
-
-		$this->assertInstanceOf( ReplaceItemStatementErrorResponse::class, $response );
-		$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $response->getCode() );
+		try {
+			$this->newUseCase()->execute(
+				$this->newUseCaseRequest( [
+					'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+					'$statement' => $this->getValidStatementSerialization(),
+				] )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame(
+				ErrorResponse::STATEMENT_NOT_FOUND,
+				$e->getErrorCode()
+			);
+		}
 	}
 
-	public function testItemForStatementIsRedirect_returnsStatementNotFound(): void {
+	public function testItemForStatementIsRedirect_throwsUseCaseException(): void {
 		$this->revisionMetadataRetriever = $this->newItemMetadataRetriever(
 			LatestItemRevisionMetadataResult::redirect( new ItemId( 'Q321' ) )
 		);
 
-		$response = $this->newUseCase()->execute(
-			$this->newUseCaseRequest( [
-				'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
-				'$statement' => $this->getValidStatementSerialization(),
-			] )
-		);
-
-		$this->assertInstanceOf( ReplaceItemStatementErrorResponse::class, $response );
-		$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $response->getCode() );
+		try {
+			$this->newUseCase()->execute(
+				$this->newUseCaseRequest( [
+					'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+					'$statement' => $this->getValidStatementSerialization(),
+				] )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame(
+				ErrorResponse::STATEMENT_NOT_FOUND,
+				$e->getErrorCode()
+			);
+		}
 	}
 
-	public function testStatementIdMismatchingItemId_returnsStatementNotFound(): void {
+	public function testStatementIdMismatchingItemId_throwsUseCaseException(): void {
 		$this->revisionMetadataRetriever = $this->newItemMetadataRetriever(
 			LatestItemRevisionMetadataResult::concreteRevision( 123, '20220708030405' )
 		);
 
-		$response = $this->newUseCase()->execute(
-			$this->newUseCaseRequest( [
-				'$itemId' => 'Q666',
-				'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
-				'$statement' => $this->getValidStatementSerialization(),
-			] )
-		);
-
-		$this->assertInstanceOf( ReplaceItemStatementErrorResponse::class, $response );
-		$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $response->getCode() );
+		try {
+			$this->newUseCase()->execute(
+				$this->newUseCaseRequest( [
+					'$itemId' => 'Q666',
+					'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+					'$statement' => $this->getValidStatementSerialization(),
+				] )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame(
+				ErrorResponse::STATEMENT_NOT_FOUND,
+				$e->getErrorCode()
+			);
+		}
 	}
 
-	public function testStatementNotFoundOnItem_returnsStatementNotFound(): void {
+	public function testStatementNotFoundOnItem_throwsUseCaseException(): void {
 		$this->revisionMetadataRetriever = $this->newItemMetadataRetriever(
 			LatestItemRevisionMetadataResult::concreteRevision( 123, '20220708030405' )
 		);
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemRetriever->method( 'getItem' )->willReturn( NewItem::withId( 'Q42' )->build() );
 
-		$response = $this->newUseCase()->execute(
-			$this->newUseCaseRequest( [
-				'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
-				'$statement' => $this->getValidStatementSerialization(),
-			] )
-		);
-
-		$this->assertInstanceOf( ReplaceItemStatementErrorResponse::class, $response );
-		$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $response->getCode() );
+		try {
+			$this->newUseCase()->execute(
+				$this->newUseCaseRequest( [
+					'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+					'$statement' => $this->getValidStatementSerialization(),
+				] )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame(
+				ErrorResponse::STATEMENT_NOT_FOUND,
+				$e->getErrorCode()
+			);
+		}
 	}
 
-	public function testProtectedItem_returnsErrorResponse(): void {
+	public function testProtectedItem_throwsUseCaseException(): void {
 		$itemId = new ItemId( 'Q123' );
 		$this->revisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
 		$this->revisionMetadataRetriever->method( 'getLatestRevisionMetadata' )
@@ -315,14 +349,20 @@ class ReplaceItemStatementTest extends TestCase {
 			->with( User::newAnonymous(), $itemId )
 			->willReturn( false );
 
-		$response = $this->newUseCase()->execute(
-			$this->newUseCaseRequest( [
-				'$statementId' => "$itemId\$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
-				'$statement' => $this->getValidStatementSerialization(),
-			] )
-		);
-		$this->assertInstanceOf( ReplaceItemStatementErrorResponse::class, $response );
-		$this->assertSame( ErrorResponse::PERMISSION_DENIED, $response->getCode() );
+		try {
+			$this->newUseCase()->execute(
+				$this->newUseCaseRequest( [
+					'$statementId' => "$itemId\$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+					'$statement' => $this->getValidStatementSerialization(),
+				] )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame(
+				ErrorResponse::PERMISSION_DENIED,
+				$e->getErrorCode()
+			);
+		}
 	}
 
 	private function newUseCase(): ReplaceItemStatement {
