@@ -211,12 +211,11 @@ class EntityUsageTable {
 	 * @return EntityUsage[] EntityUsage identity string => EntityUsage
 	 */
 	public function queryUsages( int $pageId ): array {
-		$res = $this->db->connections()->getReadConnection()->select(
-			$this->tableName,
-			[ 'eu_aspect', 'eu_entity_id' ],
-			[ 'eu_page_id' => $pageId ],
-			__METHOD__
-		);
+		$res = $this->db->connections()->getReadConnection()->newSelectQueryBuilder()
+			->select( [ 'eu_aspect', 'eu_entity_id' ] )
+			->from( $this->tableName )
+			->where( [ 'eu_page_id' => $pageId ] )
+			->caller( __METHOD__ )->fetchResultSet();
 
 		return $this->convertRowsToUsages( $res );
 	}
@@ -315,20 +314,18 @@ class EntityUsageTable {
 			return new ArrayIterator();
 		}
 
-		$idStrings = $this->getEntityIdStrings( $entityIds );
-		$where = [ 'eu_entity_id' => $idStrings ];
-
+		$queryBuilder = $this->db->connections()->getReadConnection()->newSelectQueryBuilder()
+			->select( [ 'eu_page_id', 'eu_entity_id', 'eu_aspect' ] )
+			->from( $this->tableName )
+			->where( [
+				'eu_entity_id' => $this->getEntityIdStrings( $entityIds ),
+			] );
 		if ( !empty( $aspects ) ) {
-			$where['eu_aspect'] = $aspects;
+			$queryBuilder->andWhere( [ 'eu_aspect' => $aspects ] );
 		}
-
-		$res = $this->db->connections()->getReadConnection()->select(
-			$this->tableName,
-			[ 'eu_page_id', 'eu_entity_id', 'eu_aspect' ],
-			$where,
-			__METHOD__,
-			[ 'ORDER BY' => 'eu_page_id' ]
-		);
+		$res = $queryBuilder
+			->orderBy( 'eu_page_id' )
+			->caller( __METHOD__ )->fetchResultSet();
 
 		$pages = $this->foldRowsIntoPageEntityUsages( $res );
 
@@ -431,13 +428,12 @@ class EntityUsageTable {
 		$readConnection = $this->db->connections()->getReadConnection();
 
 		foreach ( $idStrings as $idString ) {
-			$subQueries[] = $readConnection->selectSQLText(
-				$this->tableName,
-				'eu_entity_id',
-				[ 'eu_entity_id' => $idString ],
-				'',
-				[ 'LIMIT' => 1 ]
-			);
+			$subQueries[] = $readConnection->newSelectQueryBuilder()
+				->select( 'eu_entity_id' )
+				->from( $this->tableName )
+				->where( [ 'eu_entity_id' => $idString ] )
+				->limit( 1 )
+				->getSQL();
 		}
 
 		return $subQueries;
@@ -452,12 +448,11 @@ class EntityUsageTable {
 	 * @return int[]
 	 */
 	private function getPrimaryKeys( array $where, string $method ): array {
-		$rowIds = $this->db->connections()->getReadConnection()->selectFieldValues(
-			$this->tableName,
-			'eu_row_id',
-			$where,
-			$method
-		);
+		$rowIds = $this->db->connections()->getReadConnection()->newSelectQueryBuilder()
+			->select( [ 'eu_row_id' ] )
+			->from( $this->tableName )
+			->where( $where )
+			->caller( $method )->fetchFieldValues();
 
 		return array_map( 'intval', $rowIds ?: [] );
 	}
