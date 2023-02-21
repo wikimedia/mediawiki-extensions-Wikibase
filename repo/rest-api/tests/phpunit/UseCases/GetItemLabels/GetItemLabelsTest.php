@@ -12,11 +12,11 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemLabelsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabels;
-use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabelsErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabelsRequest;
-use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabelsSuccessResponse;
+use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabelsResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabelsValidator;
-use Wikibase\Repo\RestApi\UseCases\ItemRedirectResponse;
+use Wikibase\Repo\RestApi\UseCases\ItemRedirectException;
+use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 
 /**
@@ -69,19 +69,24 @@ class GetItemLabelsTest extends TestCase {
 
 		$request = new GetItemLabelsRequest( 'Q10' );
 		$response = $this->newUseCase()->execute( $request );
-		$this->assertEquals( new GetItemLabelsSuccessResponse( $labels, $lastModified, $revisionId ), $response );
+		$this->assertEquals( new GetItemLabelsResponse( $labels, $lastModified, $revisionId ), $response );
 	}
 
-	public function testGivenInvalidItemId_returnsErrorResponse(): void {
-		$response = $this->newUseCase()->execute(
-			new GetItemLabelsRequest( 'X321' )
-		);
+	public function testGivenInvalidItemId_throws(): void {
+		try {
+			$this->newUseCase()->execute(
+				new GetItemLabelsRequest( 'X321' )
+			);
 
-		$this->assertInstanceOf( GetItemLabelsErrorResponse::class, $response );
-		$this->assertSame( ErrorResponse::INVALID_ITEM_ID, $response->getCode() );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( ErrorResponse::INVALID_ITEM_ID, $e->getErrorCode() );
+			$this->assertSame( 'Not a valid item ID: X321', $e->getErrorMessage() );
+			$this->assertNull( $e->getErrorContext() );
+		}
 	}
 
-	public function testGivenRequestedItemDoesNotExist_returnsErrorResponse(): void {
+	public function testGivenRequestedItemDoesNotExist_throwsUseCaseException(): void {
 		$itemId = new ItemId( 'Q10' );
 
 		$this->itemRevisionMetadataRetriever = $this->createMock( ItemRevisionMetadataRetriever::class );
@@ -90,26 +95,35 @@ class GetItemLabelsTest extends TestCase {
 			->with( $itemId )
 			->willReturn( LatestItemRevisionMetadataResult::itemNotFound() );
 
-		$response = $this->newUseCase()->execute(
-			new GetItemLabelsRequest( $itemId->getSerialization() )
-		);
+		try {
+			$this->newUseCase()->execute(
+				new GetItemLabelsRequest( $itemId->getSerialization() )
+			);
 
-		$this->assertInstanceOf( GetItemLabelsErrorResponse::class, $response );
-		$this->assertSame( ErrorResponse::ITEM_NOT_FOUND, $response->getCode() );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( ErrorResponse::ITEM_NOT_FOUND, $e->getErrorCode() );
+			$this->assertSame( 'Could not find an item with the ID: Q10', $e->getErrorMessage() );
+			$this->assertNull( $e->getErrorContext() );
+		}
 	}
 
-	public function testGivenItemRedirect_returnsRedirectResponse(): void {
+	public function testGivenItemRedirect_throwsItemRedirectException(): void {
 		$redirectSource = 'Q123';
 		$redirectTarget = 'Q321';
 
 		$this->itemRevisionMetadataRetriever
 			->method( 'getLatestRevisionMetadata' )
+			->with( new ItemId( $redirectSource ) )
 			->willReturn( LatestItemRevisionMetadataResult::redirect( new ItemId( $redirectTarget ) ) );
 
-		$response = $this->newUseCase()->execute( new GetItemLabelsRequest( $redirectSource ) );
+		try {
+			$this->newUseCase()->execute( new GetItemLabelsRequest( $redirectSource ) );
 
-		$this->assertInstanceOf( ItemRedirectResponse::class, $response );
-		$this->assertSame( $redirectTarget, $response->getRedirectTargetId() );
+			$this->fail( 'this should not be reached' );
+		} catch ( ItemRedirectException $e ) {
+			$this->assertSame( $redirectTarget, $e->getRedirectTargetId() );
+		}
 	}
 
 	private function newUseCase(): GetItemLabels {

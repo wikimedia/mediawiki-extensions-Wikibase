@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\RestApi\UseCases\GetItemLabels;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabelsRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabelsValidator;
+use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 
 /**
@@ -19,18 +20,23 @@ class GetItemLabelsValidatorTest extends TestCase {
 	public function testWithInvalidId(): void {
 		$invalidId = 'X123';
 
-		$error = $this->newLabelsValidator()
-			->validate( new GetItemLabelsRequest( $invalidId ) );
+		try {
+			$this->newLabelsValidator()
+				->assertValidRequest( new GetItemLabelsRequest( $invalidId ) );
 
-		$this->assertSame( ItemIdValidator::CODE_INVALID, $error->getCode() );
-		$this->assertSame( $invalidId, $error->getContext()[ItemIdValidator::CONTEXT_VALUE] );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $useCaseEx ) {
+			$this->assertSame( ItemIdValidator::CODE_INVALID, $useCaseEx->getErrorCode() );
+			$this->assertSame( 'Not a valid item ID: ' . $invalidId, $useCaseEx->getErrorMessage() );
+		}
 	}
 
+	/**
+	 * @doesNotPerformAssertions
+	 */
 	public function testWithValidId(): void {
-		$this->assertNull(
-			$this->newLabelsValidator()
-				->validate( new GetItemLabelsRequest( 'Q321' ) )
-		);
+		$this->newLabelsValidator()
+			->assertValidRequest( new GetItemLabelsRequest( 'Q321' ) );
 	}
 
 	private function newLabelsValidator(): GetItemLabelsValidator {

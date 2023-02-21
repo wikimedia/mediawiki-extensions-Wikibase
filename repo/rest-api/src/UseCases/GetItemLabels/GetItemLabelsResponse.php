@@ -7,7 +7,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 /**
  * @license GPL-2.0-or-later
  */
-class GetItemLabelsSuccessResponse {
+class GetItemLabelsResponse {
 
 	private Labels $labels;
 	private string $lastModified;
