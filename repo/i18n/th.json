@@ -5,7 +5,8 @@
 			"Ans",
 			"Horus",
 			"Karit",
-			"Pon44695"
+			"Pon44695",
+			"Trisorn Triboon"
 		]
 	},
 	"wikibase-desc": "คลังข้อมูลแบบมีโครงสร้าง",
@@ -70,7 +71,7 @@
 	"wikibase-sitelinkgroupview-input-help-message": "เพิ่มการเชื่อมโยงข้ามไซต์โดยระบุไซต์และหน้าที่อยู่ในไซต์นั้น รวมทั้งแก้ไขหรือลบการเชื่อมโยงข้ามไซต์ที่มีอยู่แล้ว",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|รายการ}}",
 	"wikibase-sitelinks-empty": "ไม่มีหน้าที่เชื่อมโยงมายังรายการนี้",
-	"wikibase-sitelinks-special": "ไซต์อื่นๆ",
+	"wikibase-sitelinks-special": "ไซต์อื่น ๆ",
 	"wikibase-badgeselector-badge-placeholder-title": "คลิกเพื่อกำหนดเครื่องหมาย",
 	"wikibase-remove": "ลบออก",
 	"wikibase-undo-title": "ย้อนการแก้ไขกลับไปเป็น \"$1\"",
