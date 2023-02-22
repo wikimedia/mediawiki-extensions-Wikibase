@@ -74,7 +74,7 @@
 	"wikibase-error-invalid-entity-id": "L'ID «$2» és desconegut al sistema. Utilitzeu un ID d'entitat vàlid.",
 	"wikibase-error-exceeded-entity-access-limit": "S'ha accedit a massa entitats de {{WBREPONAME}}.",
 	"unconnectedpages": "Pàgines no connectades a elements",
-	"unconnectedpages-summary": "Aquesta pàgina llista pàgina sense cap element de dades connectat (en els espais de noms que permeten elements connectats). La llista està ordenada per ID de pàgina descendent, per tal que les pàgines noves es llistin primer.",
+	"unconnectedpages-summary": "Aquesta pàgina mostra pàgines sense cap element de dades connectat (en els espais de noms que permeten elements connectats).",
 	"wikibase-unconnectedpages-submit": "Mostra les pàgines",
 	"pageswithbadges": "Pàgines amb insígnies",
 	"pageswithbadges-summary": "Aquesta pàgina llista pàgines amb insígnies (p. ex., un article bo o destacat). La llista està ordenada per ID de pàgina descendent, per tal que les pàgines noves es llistin primer.",

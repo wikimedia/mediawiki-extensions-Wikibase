@@ -114,5 +114,6 @@
 	"wikibase-client-data-bridge-thank-you-head": "Paldies par tavu labojumu!",
 	"wikibase-client-data-bridge-saving-error-assertuser-publish": "Publicēt bez pieslēgšanās",
 	"wikibase-client-data-bridge-saving-error-assertuser-save": "Saglabāt bez pieslēgšanās",
+	"wikibase-client-data-bridge-saving-error-assertuser-login": "Pieslēgties (atveras jaunā cilnē)",
 	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Turpināt labošanu"
 }
