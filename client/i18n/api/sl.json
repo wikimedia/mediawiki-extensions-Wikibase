@@ -34,7 +34,7 @@
 	"apihelp-query+pageterms-example-simple": "Pridobitev vseh pogojev, povezanih s stranjo »London«, v jeziku uporabnika.",
 	"apihelp-query+pageterms-example-label-en": "Pridobitev oznak in sopomenk, povezanih s stranjo »London«, v angleščini.",
 	"apihelp-query+pageterms-param-language": "Oznaka jezika, za katerega naj se pridobijo izrazi. Če ni določeno, se uporabi uporabniški jezik.",
-	"apihelp-query+pageterms-param-terms": "Vrste izrazov, ki naj se pridobijo, npr. »description«; vsak od njih je vrnjen kot polje nizov s ključem glede na vrsto, npr. {\"description\": [\"foo\"]}. Če ni določeno, so vrnjene vse vrste.",
+	"apihelp-query+pageterms-param-terms": "Vrste izrazov, ki naj se pridobijo, npr. »description«; vsak od njih je vrnjen kot matrika nizov s ključem glede na vrsto, npr. {\"opis\": [\"foo\"]}. Če ni določeno, se vrnejo vse vrste.",
 	"apihelp-query+description-summary": "Pridobi kratek opis oziroma podnaslov, ki pojasnjuje, o čem je ciljna stran.",
 	"apihelp-query+description-extended-description": "Opis je navadno besedilo v eni vrstici, sicer pa je poljuben (lahko vključuje neobdelane značke HTML, ki jih je prav tako treba interpretirati kot navadno besedilo). V HTML-ju se ne sme uporabljati nemaskirano!",
 	"apihelp-query+description-param-prefersource": "Kateremu viru opisa dati prednost, če je prisoten:",
