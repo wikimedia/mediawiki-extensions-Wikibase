@@ -7,7 +7,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 /**
  * @license GPL-2.0-or-later
  */
-class GetItemStatementsSuccessResponse {
+class GetItemStatementsResponse {
 
 	private StatementList $statements;
 

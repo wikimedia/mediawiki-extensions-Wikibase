@@ -7,7 +7,8 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementsRetriever;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
-use Wikibase\Repo\RestApi\UseCases\ItemRedirectResponse;
+use Wikibase\Repo\RestApi\UseCases\ItemRedirectException;
+use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 
 /**
  * @license GPL-2.0-or-later
@@ -29,13 +30,11 @@ class GetItemStatements {
 	}
 
 	/**
-	 * @return GetItemStatementsSuccessResponse|ItemRedirectResponse|GetItemStatementsErrorResponse
+	 * @throws ItemRedirectException
+	 * @throws UseCaseException
 	 */
-	public function execute( GetItemStatementsRequest $request ) {
-		$validationError = $this->validator->validate( $request );
-		if ( $validationError ) {
-			return GetItemStatementsErrorResponse::newFromValidationError( $validationError );
-		}
+	public function execute( GetItemStatementsRequest $request ): GetItemStatementsResponse {
+		$this->validator->assertValidRequest( $request );
 
 		$itemId = new ItemId( $request->getItemId() );
 		$requestedStatementPropertyId = $request->getStatementPropertyId()
@@ -45,15 +44,15 @@ class GetItemStatements {
 		$latestRevisionMetadata = $this->revisionMetadataRetriever->getLatestRevisionMetadata( $itemId );
 
 		if ( !$latestRevisionMetadata->itemExists() ) {
-			return new GetItemStatementsErrorResponse(
+			throw new UseCaseException(
 				ErrorResponse::ITEM_NOT_FOUND,
 				"Could not find an item with the ID: {$request->getItemId()}"
 			);
 		} elseif ( $latestRevisionMetadata->isRedirect() ) {
-			return new ItemRedirectResponse( $latestRevisionMetadata->getRedirectTarget()->getSerialization() );
+			throw new ItemRedirectException( $latestRevisionMetadata->getRedirectTarget()->getSerialization() );
 		}
 
-		return new GetItemStatementsSuccessResponse(
+		return new GetItemStatementsResponse(
 			$this->statementsRetriever->getStatements( $itemId, $requestedStatementPropertyId ),
 			$latestRevisionMetadata->getRevisionTimestamp(),
 			$latestRevisionMetadata->getRevisionId()
