@@ -20,6 +20,7 @@ use Wikibase\Repo\RestApi\Domain\Services\JsonPatcher;
 use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
 use Wikibase\Repo\RestApi\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
+use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Validation\StatementValidator;
 
 /**
@@ -63,13 +64,10 @@ class PatchItemStatement {
 	}
 
 	/**
-	 * @return PatchItemStatementSuccessResponse|PatchItemStatementErrorResponse
+	 * @throws UseCaseException
 	 */
-	public function execute( PatchItemStatementRequest $request ) {
-		$validationError = $this->useCaseValidator->validate( $request );
-		if ( $validationError ) {
-			return PatchItemStatementErrorResponse::newFromValidationError( $validationError );
-		}
+	public function execute( PatchItemStatementRequest $request ): PatchItemStatementResponse {
+		$this->useCaseValidator->assertValidRequest( $request );
 
 		$requestedItemId = $request->getItemId();
 		$statementId = $this->statementIdParser->parse( $request->getStatementId() );
@@ -79,25 +77,25 @@ class PatchItemStatement {
 
 		$latestRevision = $this->revisionMetadataRetriever->getLatestRevisionMetadata( $itemId );
 		if ( $requestedItemId && !$latestRevision->itemExists() ) {
-			return new PatchItemStatementErrorResponse(
+			throw new UseCaseException(
 				ErrorResponse::ITEM_NOT_FOUND,
 				"Could not find an item with the ID: {$itemId}"
 			);
 		} elseif ( !$latestRevision->itemExists()
 				   || $latestRevision->isRedirect()
 				   || !$itemId->equals( $statementId->getEntityId() ) ) {
-			return $this->newStatementNotFoundErrorResponse( $statementId );
+			$this->throwStatementNotFoundException( $statementId );
 		}
 
 		$statementToPatch = $this->statementRetriever->getStatement( $statementId );
 
 		if ( !$statementToPatch ) {
-			return $this->newStatementNotFoundErrorResponse( $statementId );
+			$this->throwStatementNotFoundException( $statementId );
 		}
 
 		$user = $request->getUsername() ? User::withUsername( $request->getUsername() ) : User::newAnonymous();
 		if ( !$this->permissionChecker->canEdit( $user, $itemId ) ) {
-			return new PatchItemStatementErrorResponse(
+			throw new UseCaseException(
 				ErrorResponse::PERMISSION_DENIED,
 				'You have no permission to edit this item.'
 			);
@@ -108,7 +106,7 @@ class PatchItemStatement {
 		try {
 			$patchedSerialization = $this->jsonPatcher->patch( $serialization, $request->getPatch() );
 		} catch ( PatchPathException $e ) {
-			return new PatchItemStatementErrorResponse(
+			throw new UseCaseException(
 				ErrorResponse::PATCH_TARGET_NOT_FOUND,
 				"Target '{$e->getOperation()[$e->getField()]}' not found on the resource",
 				[
@@ -118,7 +116,7 @@ class PatchItemStatement {
 			);
 		} catch ( PatchTestConditionFailedException $e ) {
 			$operation = $e->getOperation();
-			return new PatchItemStatementErrorResponse(
+			throw new UseCaseException(
 				ErrorResponse::PATCH_TEST_FAILED,
 				'Test operation in the provided patch failed. ' .
 				"At path '" . $operation['path'] .
@@ -130,7 +128,7 @@ class PatchItemStatement {
 
 		$postPatchValidationError = $this->statementValidator->validate( $patchedSerialization );
 		if ( $postPatchValidationError ) {
-			return PatchItemStatementErrorResponse::newFromValidationError( $postPatchValidationError );
+			 PatchItemStatementValidator::throwUseCaseExceptionFromValidationError( $postPatchValidationError );
 		}
 
 		$patchedStatement = $this->statementValidator->getValidatedStatement();
@@ -139,12 +137,12 @@ class PatchItemStatement {
 		try {
 			$item->getStatements()->replaceStatement( $statementId, $patchedStatement );
 		} catch ( PropertyChangedException $e ) {
-			return new PatchItemStatementErrorResponse(
+			throw new UseCaseException(
 				ErrorResponse::INVALID_OPERATION_CHANGED_PROPERTY,
 				'Cannot change the property of the existing statement'
 			);
 		} catch ( StatementGuidChangedException $e ) {
-			return new PatchItemStatementErrorResponse(
+			throw new UseCaseException(
 				ErrorResponse::INVALID_OPERATION_CHANGED_STATEMENT_ID,
 				'Cannot change the ID of the existing statement'
 			);
@@ -157,15 +155,18 @@ class PatchItemStatement {
 		);
 		$newRevision = $this->itemUpdater->update( $item, $editMetadata );
 
-		return new PatchItemStatementSuccessResponse(
+		return new PatchItemStatementResponse(
 			$newRevision->getItem()->getStatements()->getStatementById( $statementId ),
 			$newRevision->getLastModified(),
 			$newRevision->getRevisionId()
 		);
 	}
 
-	private function newStatementNotFoundErrorResponse( StatementGuid $statementId ): PatchItemStatementErrorResponse {
-		return new PatchItemStatementErrorResponse(
+	/**
+	 * @throws UseCaseException
+	 */
+	private function throwStatementNotFoundException( StatementGuid $statementId ): void {
+		throw new UseCaseException(
 			ErrorResponse::STATEMENT_NOT_FOUND,
 			"Could not find a statement with the ID: $statementId"
 		);

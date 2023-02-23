@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\RouteHandlers;
 
-use LogicException;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\RequestInterface;
@@ -18,9 +17,9 @@ use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
 use Wikibase\Repo\RestApi\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatement;
-use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementRequest;
-use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementSuccessResponse;
+use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementResponse;
+use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -97,22 +96,22 @@ class PatchItemStatementRouteHandler extends SimpleHandler {
 	public function runUseCase( string $itemId, string $statementId ): Response {
 		$requestBody = $this->getValidatedBody();
 
-		$useCaseResponse = $this->useCase->execute( new PatchItemStatementRequest(
-			$statementId,
-			$requestBody[self::PATCH_BODY_PARAM],
-			$requestBody[self::TAGS_BODY_PARAM],
-			$requestBody[self::BOT_BODY_PARAM],
-			$requestBody[self::COMMENT_BODY_PARAM],
-			$this->getUsername(),
-			$itemId
-		) );
-
-		if ( $useCaseResponse instanceof PatchItemStatementSuccessResponse ) {
-			return $this->newSuccessHttpResponse( $useCaseResponse );
-		} elseif ( $useCaseResponse instanceof PatchItemStatementErrorResponse ) {
-			return $this->responseFactory->newErrorResponse( $useCaseResponse );
-		} else {
-			throw new LogicException( 'Received an unexpected use case result in ' . __CLASS__ );
+		try {
+			return $this->newSuccessHttpResponse(
+				$this->useCase->execute(
+					new PatchItemStatementRequest(
+						$statementId,
+						$requestBody[self::PATCH_BODY_PARAM],
+						$requestBody[self::TAGS_BODY_PARAM],
+						$requestBody[self::BOT_BODY_PARAM],
+						$requestBody[self::COMMENT_BODY_PARAM],
+						$this->getUsername(),
+						$itemId
+					)
+				)
+			);
+		} catch ( UseCaseException $e ) {
+			return $this->responseFactory->newErrorResponseFromException( $e );
 		}
 	}
 
@@ -163,7 +162,7 @@ class PatchItemStatementRouteHandler extends SimpleHandler {
 			] ) : parent::getBodyValidator( $contentType );
 	}
 
-	private function newSuccessHttpResponse( PatchItemStatementSuccessResponse $useCaseResponse ): Response {
+	private function newSuccessHttpResponse( PatchItemStatementResponse $useCaseResponse ): Response {
 		$httpResponse = $this->getResponseFactory()->create();
 		$httpResponse->setStatus( 200 );
 		$httpResponse->setHeader( 'Content-Type', 'application/json' );
