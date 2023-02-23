@@ -16,7 +16,7 @@
 		"install:bridge": "npm --prefix client/data-bridge ci",
 		"install:tainted-ref": "npm --prefix view/lib/wikibase-tainted-ref ci",
 		"install:rest-api": "npm --prefix repo/rest-api ci",
-		"postinstall": "npm-run-all -p install:*",
+		"postinstall": "npm-run-all -p install:* && bash rm-node16-incompatible-packages.sh",
 		"selenium": "killall -0 chromedriver 2>/dev/null || chromedriver --url-base=/wd/hub --port=4444 & npm run selenium-test; killall chromedriver",
 		"selenium-daily": "MEDIAWIKI_USER='Selenium user' MW_SERVER=https://wikidata.beta.wmflabs.org:443 MW_SCRIPT_PATH=/w WIKIBASE_PROPERTY_STRING=P443 npm run selenium-test",
 		"selenium-test": "npm-run-all --continue-on-error selenium-test:*",
