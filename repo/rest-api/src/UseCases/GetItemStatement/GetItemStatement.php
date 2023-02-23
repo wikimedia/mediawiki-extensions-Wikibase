@@ -52,16 +52,16 @@ class GetItemStatement {
 					"Could not find an item with the ID: {$itemId}"
 				);
 			}
-			$this->newStatementNotFoundError( $statementRequest->getStatementId() );
+			$this->throwStatementNotFoundException( $statementRequest->getStatementId() );
 		}
 
 		if ( !$itemId->equals( $statementId->getEntityId() ) ) {
-			$this->newStatementNotFoundError( $statementRequest->getStatementId() );
+			$this->throwStatementNotFoundException( $statementRequest->getStatementId() );
 		}
 
 		$statement = $this->statementRetriever->getStatement( $statementId );
 		if ( !$statement ) {
-			$this->newStatementNotFoundError( $statementRequest->getStatementId() );
+			$this->throwStatementNotFoundException( $statementRequest->getStatementId() );
 		}
 
 		return new GetItemStatementResponse(
@@ -74,7 +74,7 @@ class GetItemStatement {
 	/**
 	 * @throws UseCaseException
 	 */
-	private function newStatementNotFoundError( string $statementId ): void {
+	private function throwStatementNotFoundException( string $statementId ): void {
 		throw new UseCaseException(
 			ErrorResponse::STATEMENT_NOT_FOUND,
 			"Could not find a statement with the ID: $statementId"
