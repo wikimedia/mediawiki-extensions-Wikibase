@@ -2,10 +2,11 @@
 
 namespace Wikibase\Repo\RestApi\UseCases\RemoveItemStatement;
 
+use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
+use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\StatementIdValidator;
-use Wikibase\Repo\RestApi\Validation\ValidationError;
 
 /**
  * @license GPL-2.0-or-later
@@ -26,14 +27,57 @@ class RemoveItemStatementValidator {
 		$this->editMetadataValidator = $editMetadataValidator;
 	}
 
-	public function validate( RemoveItemStatementRequest $request ): ?ValidationError {
-		return $this->validateItemId( $request->getItemId() ) ?:
-			$this->statementIdValidator->validate( $request->getStatementId() ) ?:
-				$this->editMetadataValidator->validateComment( $request->getComment() ) ?:
-					$this->editMetadataValidator->validateEditTags( $request->getEditTags() );
+	public function assertValidRequest( RemoveItemStatementRequest $request ): void {
+		if ( $request->getItemId() ) {
+			$this->assertValidItemId( $request->getItemId() );
+		}
+		$this->assertValidStatementId( $request->getStatementId() );
+		$this->assertValidComment( $request->getComment() );
+		$this->assertValidEditTags( $request->getEditTags() );
 	}
 
-	private function validateItemId( ?string $itemId ): ?ValidationError {
-		return $itemId ? $this->itemIdValidator->validate( $itemId ) : null;
+	private function assertValidItemId( string $itemId ): void {
+		$validationError = $this->itemIdValidator->validate( $itemId );
+
+		if ( $validationError ) {
+			throw new UseCaseException(
+				ErrorResponse::INVALID_ITEM_ID,
+				'Not a valid item ID: ' . $validationError->getContext()[ItemIdValidator::CONTEXT_VALUE]
+			);
+		}
+	}
+
+	private function assertValidStatementId( string $statementId ): void {
+		$validationError = $this->statementIdValidator->validate( $statementId );
+
+		if ( $validationError ) {
+			throw new UseCaseException(
+				ErrorResponse::INVALID_STATEMENT_ID,
+				'Not a valid statement ID: ' . $validationError->getContext()[StatementIdValidator::CONTEXT_VALUE]
+			);
+		}
+	}
+
+	private function assertValidComment( ?string $comment ): void {
+		$validationError = $this->editMetadataValidator->validateComment( $comment );
+
+		if ( $validationError ) {
+			$commentMaxLength = $validationError->getContext()[ EditMetadataValidator::CONTEXT_COMMENT_MAX_LENGTH ];
+			throw new UseCaseException(
+				ErrorResponse::COMMENT_TOO_LONG,
+				"Comment must not be longer than $commentMaxLength characters."
+			);
+		}
+	}
+
+	private function assertValidEditTags( array $editTags ): void {
+		$validationError = $this->editMetadataValidator->validateEditTags( $editTags );
+
+		if ( $validationError ) {
+			throw new UseCaseException(
+				ErrorResponse::INVALID_EDIT_TAG,
+				"Invalid MediaWiki tag: {$validationError->getContext()[EditMetadataValidator::CONTEXT_TAG_VALUE]}"
+			);
+		}
 	}
 }

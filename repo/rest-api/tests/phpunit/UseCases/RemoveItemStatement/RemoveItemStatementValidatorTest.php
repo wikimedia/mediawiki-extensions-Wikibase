@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatementRequest;
 use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatementValidator;
+use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\StatementIdValidator;
@@ -26,26 +27,28 @@ class RemoveItemStatementValidatorTest extends TestCase {
 
 	/**
 	 * @dataProvider provideValidRequest
+	 * @doesNotPerformAssertions
 	 */
 	public function testValidatePass( array $requestData ): void {
-		$error = $this->newRemoveItemStatementValidator()->validate(
+		$this->newRemoveItemStatementValidator()->assertValidRequest(
 			$this->newUseCaseRequest( $requestData )
 		);
-
-		$this->assertNull( $error );
 	}
 
 	/**
 	 * @dataProvider provideInvalidRequest
 	 */
-	public function testValidateFails( array $requestData, array $errorContext, string $errorCode ): void {
-		$error = $this->newRemoveItemStatementValidator()->validate(
-			$this->newUseCaseRequest( $requestData )
-		);
+	public function testValidateFails( array $requestData, string $errorCode, string $errorMessage ): void {
+		try {
+			$this->newRemoveItemStatementValidator()->assertValidRequest(
+				$this->newUseCaseRequest( $requestData )
+			);
 
-		$this->assertNotNull( $error );
-		$this->assertSame( $errorContext, $error->getContext() );
-		$this->assertSame( $errorCode, $error->getCode() );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( $errorCode, $e->getErrorCode() );
+			$this->assertSame( $errorMessage, $e->getErrorMessage() );
+		}
 	}
 
 	public function provideValidRequest(): Generator {
@@ -83,8 +86,8 @@ class RemoveItemStatementValidatorTest extends TestCase {
 				'$username' => null,
 				'$itemId' => $itemId,
 			],
-			[ ItemIdValidator::CONTEXT_VALUE => $itemId ],
 			ItemIdValidator::CODE_INVALID,
+			"Not a valid item ID: $itemId",
 		];
 
 		$itemId = 'Q123';
@@ -98,8 +101,8 @@ class RemoveItemStatementValidatorTest extends TestCase {
 				'$username' => null,
 				'$itemId' => $itemId,
 			],
-			[ StatementIdValidator::CONTEXT_VALUE => $statementId ],
 			StatementIdValidator::CODE_INVALID,
+			"Not a valid statement ID: $statementId",
 		];
 		yield 'Invalid statement ID (without item ID)' => [
 			[
@@ -110,8 +113,8 @@ class RemoveItemStatementValidatorTest extends TestCase {
 				'$username' => null,
 				'$itemId' => null,
 			],
-			[ StatementIdValidator::CONTEXT_VALUE => $statementId ],
 			StatementIdValidator::CODE_INVALID,
+			"Not a valid statement ID: $statementId",
 		];
 
 		$itemId = 'Q42';
@@ -125,8 +128,8 @@ class RemoveItemStatementValidatorTest extends TestCase {
 				'$username' => null,
 				'$itemId' => $itemId,
 			],
-			[ EditMetadataValidator::CONTEXT_COMMENT_MAX_LENGTH => strval( CommentStore::COMMENT_CHARACTER_LIMIT ) ],
 			EditMetadataValidator::CODE_COMMENT_TOO_LONG,
+			'Comment must not be longer than ' . CommentStore::COMMENT_CHARACTER_LIMIT . ' characters.',
 		];
 
 		$itemId = 'Q24';
@@ -140,8 +143,8 @@ class RemoveItemStatementValidatorTest extends TestCase {
 				'$username' => null,
 				'$itemId' => null,
 			],
-			[ EditMetadataValidator::CONTEXT_TAG_VALUE => json_encode( $invalidTag ) ],
 			EditMetadataValidator::CODE_INVALID_TAG,
+			"Invalid MediaWiki tag: \"$invalidTag\"",
 		];
 	}
 
