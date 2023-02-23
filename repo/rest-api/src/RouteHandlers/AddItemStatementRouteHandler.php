@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\RestApi\RouteHandlers;
 
 use Exception;
-use LogicException;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\RequestInterface;
@@ -19,9 +18,9 @@ use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
 use Wikibase\Repo\RestApi\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatement;
-use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementRequest;
-use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementSuccessResponse;
+use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementResponse;
+use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -95,23 +94,20 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 	 */
 	public function runUseCase( string $itemId ): Response {
 		$jsonBody = $this->getValidatedBody();
-		$useCaseResponse = $this->addItemStatement->execute(
-			new AddItemStatementRequest(
-				$itemId,
-				$jsonBody[self::STATEMENT_BODY_PARAM],
-				$jsonBody[self::TAGS_BODY_PARAM],
-				$jsonBody[self::BOT_BODY_PARAM],
-				$jsonBody[self::COMMENT_BODY_PARAM],
-				$this->getUsername()
-			)
-		);
-
-		if ( $useCaseResponse instanceof AddItemStatementSuccessResponse ) {
+		try {
+			$useCaseResponse = $this->addItemStatement->execute(
+				new AddItemStatementRequest(
+					$itemId,
+					$jsonBody[self::STATEMENT_BODY_PARAM],
+					$jsonBody[self::TAGS_BODY_PARAM],
+					$jsonBody[self::BOT_BODY_PARAM],
+					$jsonBody[self::COMMENT_BODY_PARAM],
+					$this->getUsername()
+				)
+			);
 			return $this->newSuccessHttpResponse( $useCaseResponse, $itemId );
-		} elseif ( $useCaseResponse instanceof AddItemStatementErrorResponse ) {
-			return $this->responseFactory->newErrorResponse( $useCaseResponse );
-		} else {
-			throw new LogicException( 'Received an unexpected use case result in ' . __CLASS__ );
+		} catch ( UseCaseException $e ) {
+			return $this->responseFactory->newErrorResponseFromException( $e );
 		}
 	}
 
@@ -156,7 +152,7 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 			] ) : parent::getBodyValidator( $contentType );
 	}
 
-	private function newSuccessHttpResponse( AddItemStatementSuccessResponse $useCaseResponse, string $itemId ): Response {
+	private function newSuccessHttpResponse( AddItemStatementResponse $useCaseResponse, string $itemId ): Response {
 		$httpResponse = $this->getResponseFactory()->create();
 		$httpResponse->setStatus( 201 );
 		$httpResponse->setHeader( 'Content-Type', 'application/json' );

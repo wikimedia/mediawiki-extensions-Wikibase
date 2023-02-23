@@ -12,6 +12,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
+use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 
 /**
  * @license GPL-2.0-or-later
@@ -42,33 +43,29 @@ class AddItemStatement {
 	}
 
 	/**
-	 * @return AddItemStatementSuccessResponse | AddItemStatementErrorResponse
+	 * @throws UseCaseException
 	 */
-	public function execute( AddItemStatementRequest $request ) {
-		$validationError = $this->validator->validate( $request );
-
-		if ( $validationError ) {
-			return AddItemStatementErrorResponse::newFromValidationError( $validationError );
-		}
+	public function execute( AddItemStatementRequest $request ): AddItemStatementResponse {
+		$this->validator->assertValidRequest( $request );
 
 		$statement = $this->validator->getValidatedStatement();
 		$itemId = new ItemId( $request->getItemId() );
 
 		$latestRevision = $this->revisionMetadataRetriever->getLatestRevisionMetadata( $itemId );
 		if ( $latestRevision->isRedirect() ) {
-			return new AddItemStatementErrorResponse(
+			throw new UseCaseException(
 				ErrorResponse::ITEM_REDIRECTED,
 				"Item {$request->getItemId()} has been merged into {$latestRevision->getRedirectTarget()}."
 			);
 		} elseif ( !$latestRevision->itemExists() ) {
-			return new AddItemStatementErrorResponse(
+			throw new UseCaseException(
 				ErrorResponse::ITEM_NOT_FOUND,
 				"Could not find an item with the ID: {$request->getItemId()}"
 			);
 		}
 		$user = $request->hasUser() ? User::withUsername( $request->getUsername() ) : User::newAnonymous();
 		if ( !$this->permissionChecker->canEdit( $user, $itemId ) ) {
-			return new AddItemStatementErrorResponse(
+			throw new UseCaseException(
 				ErrorResponse::PERMISSION_DENIED,
 				'You have no permission to edit this item.'
 			);
@@ -86,7 +83,7 @@ class AddItemStatement {
 		);
 		$newRevision = $this->itemUpdater->update( $item, $editMetadata );
 
-		return new AddItemStatementSuccessResponse(
+		return new AddItemStatementResponse(
 			$newRevision->getItem()->getStatements()->getStatementById( $newStatementGuid ),
 			$newRevision->getLastModified(),
 			$newRevision->getRevisionId()
