@@ -23,13 +23,6 @@ class GetItemLabelsRouteHandlerTest extends MediaWikiIntegrationTestCase {
 
 	use HandlerTestTrait;
 
-	public function testReadWriteAccess(): void {
-		$routeHandler = $this->newHandlerWithValidRequest();
-
-		$this->assertTrue( $routeHandler->needsReadAccess() );
-		$this->assertFalse( $routeHandler->needsWriteAccess() );
-	}
-
 	public function testHandlesUnexpectedErrors(): void {
 		$useCase = $this->createStub( GetItemLabels::class );
 		$useCase->method( 'execute' )->willThrowException( new RuntimeException() );
@@ -41,10 +34,14 @@ class GetItemLabelsRouteHandlerTest extends MediaWikiIntegrationTestCase {
 		$response = $routeHandler->execute();
 		$responseBody = json_decode( $response->getBody()->getContents() );
 		$this->assertSame( [ 'en' ], $response->getHeader( 'Content-Language' ) );
-		$this->assertSame(
-			ErrorResponse::UNEXPECTED_ERROR,
-			$responseBody->code
-		);
+		$this->assertSame( ErrorResponse::UNEXPECTED_ERROR, $responseBody->code );
+	}
+
+	public function testReadWriteAccess(): void {
+		$routeHandler = $this->newHandlerWithValidRequest();
+
+		$this->assertTrue( $routeHandler->needsReadAccess() );
+		$this->assertFalse( $routeHandler->needsWriteAccess() );
 	}
 
 	private function newHandlerWithValidRequest(): Handler {
@@ -60,4 +57,5 @@ class GetItemLabelsRouteHandlerTest extends MediaWikiIntegrationTestCase {
 
 		return $routeHandler;
 	}
+
 }

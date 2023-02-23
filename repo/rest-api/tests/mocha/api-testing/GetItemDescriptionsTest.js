@@ -24,7 +24,9 @@ describe( 'GET /entities/items/{id}/descriptions', () => {
 	it( 'can get the descriptions of an item', async () => {
 		const testItemCreationMetadata = await getLatestEditMetadata( itemId );
 
-		const response = await newGetItemDescriptionsRequestBuilder( itemId ).makeRequest();
+		const response = await newGetItemDescriptionsRequestBuilder( itemId )
+			.assertValidRequest()
+			.makeRequest();
 
 		assert.strictEqual( response.status, 200 );
 		assert.deepEqual( response.body, { en: 'English science fiction writer and humorist' } );
