@@ -202,10 +202,13 @@ wikibase.view.ControllerViewFactory = ( function ( wb ) {
 
 	// dynamically load wikibase.tainted-ref, originally added as dependency of this module in change I9a244a36fe (commit 5fed25ce15);
 	// it’s not directly related to ControllerViewFactory, but we want to load it at the same time,
-	// and the dependency can’t be in resources.php because then TR’s es6-ness “infects” regular Wikibase (T298001)
-	mw.loader.using( 'wikibase.tainted-ref' ).catch( function () {
-		// ignore errors (but avoid unhandled promise rejection)
-	} );
+	// and the dependency can’t be in resources.php because then TR’s es6-ness “infects” regular Wikibase (T298001);
+	// however, don’t load TR during QUnit tests, we don’t need it there and it causes problems (T330293)
+	if ( !window.QUnit ) {
+		mw.loader.using( 'wikibase.tainted-ref' ).catch( function () {
+			// ignore errors (but avoid unhandled promise rejection)
+		} );
+	}
 
 	return SELF;
 
