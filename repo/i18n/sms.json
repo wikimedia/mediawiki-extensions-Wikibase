@@ -35,7 +35,7 @@
 	"wikibase-label-input-help-message": "Ǩeeʹrjet tän teeʹm nõõm ǩiõʹlle $1",
 	"wikibase-statementsection-identifiers": "Tobdstõõǥǥ",
 	"wikibase-sitelinks": "Seiddõõzz liiŋk",
-	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|$1 liŋkkâd|0=Ni õhtt liŋkk|1=1 liŋkk|2=2 liiŋk|3=3 liiŋk|4=4 liiŋk|5=5 liiŋk|6=6 liiŋk}}",
+	"wikibase-sitelinks-counter": "{{PLURAL:$1|$1 liŋkkâd|0=Ni õhtt liŋkk|1=1 liŋkk|2=2 liiŋk|3=3 liiŋk|4=4 liiŋk|5=5 liiŋk|6=6 liiŋk}}",
 	"wikibase-sitelinks-special": "Jeeʹres seiddõõzz",
 	"wikibase-remove": "jaukkâd",
 	"wikibase-undo-revision-error": "Kååmtummuš ij oʹnnstam",

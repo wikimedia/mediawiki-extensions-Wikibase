@@ -177,6 +177,7 @@
 	"wikibase-validator-bad-value": "Datenwert beschädigt: $1",
 	"wikibase-validator-bad-value-type": "Ungültiger Wertetyp $1, erwartet $2",
 	"wikibase-validator-bad-data-type": "Ungültiger Datentyp: $1",
+	"wikibase-validator-bad-prefix": "Fehlerhafter Wert $1; es wird erwartet, dass er mit $2 beginnt",
 	"wikibase-validator-bad-url": "URLs dürfen bestimmte Zeichen wie Leerzeichen oder eckige Klammern nicht enthalten: $1",
 	"wikibase-validator-url-scheme-missing": "Dieser URL fehlt ein Schema wie „https://“: $1",
 	"wikibase-validator-bad-url-scheme": "Ein URL-Schema „$1“ wird nicht unterstützt.",

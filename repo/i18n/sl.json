@@ -152,6 +152,7 @@
 	"wikibase-validator-bad-value": "Vrednost podatkov je poškodovana: $1",
 	"wikibase-validator-bad-value-type": "Napačen tip vrednosti $1, pričakovano $2",
 	"wikibase-validator-bad-data-type": "Napačen tip podatkov: $1",
+	"wikibase-validator-bad-prefix": "Neveljavna vrednost $1, začela naj bi se z $2",
 	"wikibase-validator-bad-url": "URL-ji ne smejo vsebovati določenih znakov, kot so presledki ali oglati oklepaji: $1",
 	"wikibase-validator-url-scheme-missing": "Temu URL-ju manjka shema, npr. »https://\": $1«",
 	"wikibase-validator-bad-url-scheme": "URL-shema »$1« ni podprta.",
