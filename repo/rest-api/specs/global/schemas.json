@@ -73,9 +73,6 @@
 	"Sitelink": {
 		"type": "object",
 		"properties": {
-			"site": {
-				"type": "string"
-			},
 			"title": {
 				"type": "string"
 			},

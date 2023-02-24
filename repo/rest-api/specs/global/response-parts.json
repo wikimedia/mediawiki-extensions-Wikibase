@@ -5,6 +5,11 @@
 			{
 				"required": [ "id", "type", "labels", "descriptions", "aliases", "statements", "sitelinks" ],
 				"properties": {
+					"sitelinks": {
+						"additionalProperties": {
+							"required": [ "title", "badges" ]
+						}
+					},
 					"statements": {
 						"additionalProperties": {
 							"items": { "$ref": "#/StatementResponseRequired" }

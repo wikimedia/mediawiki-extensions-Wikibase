@@ -6,16 +6,12 @@
 		},
 		"example": {
 			"afwiki": {
-				"site": "afwiki",
 				"title": "Douglas Adams",
-				"badges": [ "Q17437798" ],
-				"url": "https://af.wikipedia.org/wiki/Douglas_Adams"
+				"badges": [ "Q17437798" ]
 			},
 			"arwiki": {
-				"site": "arwiki",
 				"title": "دوغلاس آدمز",
-				"badges": [ ],
-				"url": "https://ar.wikipedia.org/wiki/%D8%AF%D9%88%D8%BA%D9%84%D8%A7%D8%B3_%D8%A2%D8%AF%D9%85%D8%B2"
+				"badges": [ ]
 			}
 		}
 	},
