@@ -3,16 +3,16 @@
 namespace Wikibase\Repo\RestApi\UseCases\GetItem;
 
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemData;
+use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
+use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
-use Wikibase\Repo\RestApi\Validation\ValidationError;
 
 /**
  * @license GPL-2.0-or-later
  */
 class GetItemValidator {
-	public const CODE_INVALID_FIELD = 'invalid-field';
 
-	public const CONTEXT_FIELD_VALUE = 'field-value';
+	public const CODE_INVALID_FIELD = 'invalid-field';
 
 	private ItemIdValidator $itemIdValidator;
 
@@ -20,17 +20,33 @@ class GetItemValidator {
 		$this->itemIdValidator = $itemIdValidator;
 	}
 
-	public function validate( GetItemRequest $request ): ?ValidationError {
-		return $this->itemIdValidator->validate( $request->getItemId() )
-			?: $this->validateFields( $request->getFields() );
+	/**
+	 * @throws UseCaseException
+	 */
+	public function assertValidRequest( GetItemRequest $request ): void {
+		$validationError = $this->itemIdValidator->validate( $request->getItemId() );
+
+		if ( $validationError ) {
+			throw new UseCaseException(
+				ErrorResponse::INVALID_ITEM_ID,
+				'Not a valid item ID: ' . $validationError->getContext()[ItemIdValidator::CONTEXT_VALUE]
+			);
+		}
+
+		$this->validateFields( $request->getFields() );
 	}
 
-	private function validateFields( array $fields ): ?ValidationError {
+	/**
+	 * @throws UseCaseException
+	 */
+	private function validateFields( array $fields ): void {
 		foreach ( $fields as $field ) {
 			if ( !in_array( $field, ItemData::VALID_FIELDS ) ) {
-				return new ValidationError( self::CODE_INVALID_FIELD, [ self::CONTEXT_FIELD_VALUE => $field ] );
+				throw new UseCaseException(
+					ErrorResponse::INVALID_FIELD,
+					'Not a valid field: ' . $field
+				);
 			}
 		}
-		return null;
 	}
 }

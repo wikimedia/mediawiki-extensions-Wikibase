@@ -14,11 +14,11 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemDataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
-use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemRequest;
-use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemSuccessResponse;
+use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemValidator;
-use Wikibase\Repo\RestApi\UseCases\ItemRedirectResponse;
+use Wikibase\Repo\RestApi\UseCases\ItemRedirectException;
+use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 
 /**
@@ -58,40 +58,45 @@ class GetItemTest extends TestCase {
 			new GetItemValidator( new ItemIdValidator() )
 		) )->execute( new GetItemRequest( self::ITEM_ID, $requestedFields ) );
 
-		$this->assertInstanceOf( GetItemSuccessResponse::class, $itemResponse );
+		$this->assertInstanceOf( GetItemResponse::class, $itemResponse );
 		$this->assertSame( $expectedItemData, $itemResponse->getItemData() );
 		$this->assertSame( $lastModifiedTimestamp, $itemResponse->getLastModified() );
 		$this->assertSame( $revisionId, $itemResponse->getRevisionId() );
 	}
 
-	public function testItemNotFound(): void {
+	public function testItemNotFound_throws(): void {
 		$itemId = 'Q123';
 
 		$revisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
 		$revisionMetadataRetriever->method( 'getLatestRevisionMetadata' )
 			->willReturn( LatestItemRevisionMetadataResult::itemNotFound() );
-		$itemRequest = new GetItemRequest( $itemId );
-		$itemResponse = ( new GetItem(
-			$revisionMetadataRetriever,
-			$this->createStub( ItemDataRetriever::class ),
-			new GetItemValidator( new ItemIdValidator() )
-		) )->execute( $itemRequest );
-		$this->assertInstanceOf( GetItemErrorResponse::class, $itemResponse );
-		$this->assertSame( ErrorResponse::ITEM_NOT_FOUND, $itemResponse->getCode() );
+
+		try {
+			( new GetItem(
+				$revisionMetadataRetriever,
+				$this->createStub( ItemDataRetriever::class ),
+				new GetItemValidator( new ItemIdValidator() )
+			) )->execute( new GetItemRequest( $itemId ) );
+
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( ErrorResponse::ITEM_NOT_FOUND, $e->getErrorCode() );
+		}
 	}
 
 	public function testInvalidItemId(): void {
 		$itemId = 'X123';
+		try {
+			( new GetItem(
+				$this->createStub( ItemRevisionMetadataRetriever::class ),
+				$this->createStub( ItemDataRetriever::class ),
+				new GetItemValidator( new ItemIdValidator() )
+			) )->execute( new GetItemRequest( $itemId ) );
 
-		$itemRequest = new GetItemRequest( $itemId );
-		$itemResponse = ( new GetItem(
-			$this->createStub( ItemRevisionMetadataRetriever::class ),
-			$this->createStub( ItemDataRetriever::class ),
-			new GetItemValidator( new ItemIdValidator() )
-		) )->execute( $itemRequest );
-
-		$this->assertInstanceOf( GetItemErrorResponse::class, $itemResponse );
-		$this->assertSame( ErrorResponse::INVALID_ITEM_ID, $itemResponse->getCode() );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( ErrorResponse::INVALID_ITEM_ID, $e->getErrorCode() );
+		}
 	}
 
 	public function testRedirect(): void {
@@ -102,14 +107,17 @@ class GetItemTest extends TestCase {
 		$revisionMetadataRetriever->method( 'getLatestRevisionMetadata' )
 			->willReturn( LatestItemRevisionMetadataResult::redirect( new ItemId( $redirectTarget ) ) );
 
-		$response = ( new GetItem(
-			$revisionMetadataRetriever,
-			$this->createStub( ItemDataRetriever::class ),
-			new GetItemValidator( new ItemIdValidator() )
-		) )->execute( $request );
+		try {
+			( new GetItem(
+				$revisionMetadataRetriever,
+				$this->createStub( ItemDataRetriever::class ),
+				new GetItemValidator( new ItemIdValidator() )
+			) )->execute( $request );
 
-		$this->assertInstanceOf( ItemRedirectResponse::class, $response );
-		$this->assertSame( $redirectTarget, $response->getRedirectTargetId() );
+			$this->fail( 'this should not be reached' );
+		} catch ( ItemRedirectException $e ) {
+			$this->assertSame( $redirectTarget, $e->getRedirectTargetId() );
+		}
 	}
 
 }

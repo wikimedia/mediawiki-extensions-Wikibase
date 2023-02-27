@@ -4,8 +4,10 @@ namespace Wikibase\Repo\Tests\RestApi\UseCases\GetItem;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
+use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemValidator;
+use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 
 /**
@@ -19,11 +21,10 @@ class GetItemValidatorTest extends TestCase {
 
 	/**
 	 * @dataProvider dataProviderPass
+	 * @doesNotPerformAssertions
 	 */
 	public function testValidatePass( GetItemRequest $request ): void {
-		$error = ( new GetItemValidator( new ItemIdValidator() ) )->validate( $request );
-
-		$this->assertNull( $error );
+		( new GetItemValidator( new ItemIdValidator() ) )->assertValidRequest( $request );
 	}
 
 	public function dataProviderPass(): Generator {
@@ -39,27 +40,34 @@ class GetItemValidatorTest extends TestCase {
 	/**
 	 * @dataProvider dataProviderFail
 	 */
-	public function testValidateFail( GetItemRequest $request, string $expectedCode ): void {
-		$result = ( new GetItemValidator( new ItemIdValidator() ) )->validate( $request );
-
-		$this->assertNotNull( $result );
-		$this->assertEquals( $expectedCode, $result->getCode() );
+	public function testValidateFail(
+		GetItemRequest $request,
+		string $expectedCode,
+		string $expectedMessage
+	): void {
+		try {
+			( new GetItemValidator( new ItemIdValidator() ) )->assertValidRequest( $request );
+		} catch ( UseCaseException $e ) {
+			$this->assertEquals( $expectedCode, $e->getErrorCode() );
+			$this->assertEquals( $expectedMessage, $e->getErrorMessage() );
+		}
 	}
 
 	public function dataProviderFail(): Generator {
 		yield 'invalid item ID' => [
 			new GetItemRequest( 'X123' ),
-			ItemIdValidator::CODE_INVALID,
+			ErrorResponse::INVALID_ITEM_ID,
+			'Not a valid item ID: X123',
 		];
-
 		yield 'invalid field' => [
 			new GetItemRequest( 'Q123', [ 'type', 'unknown_field' ] ),
-			GetItemValidator::CODE_INVALID_FIELD,
+			ErrorResponse::INVALID_FIELD,
+			'Not a valid field: unknown_field',
 		];
-
 		yield 'invalid item ID and invalid field' => [
 			new GetItemRequest( 'X123', [ 'type', 'unknown_field' ] ),
-			ItemIdValidator::CODE_INVALID,
+			ErrorResponse::INVALID_ITEM_ID,
+			'Not a valid item ID: X123',
 		];
 	}
 }

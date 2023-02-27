@@ -7,7 +7,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\ItemData;
 /**
  * @license GPL-2.0-or-later
  */
-class GetItemSuccessResponse {
+class GetItemResponse {
 
 	private ItemData $itemData;
 
