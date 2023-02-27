@@ -22,11 +22,11 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatement;
-use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementRequest;
-use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementSuccessResponse;
+use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementResponse;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementValidator;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
+use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\StatementValidator;
@@ -123,7 +123,7 @@ class AddItemStatementTest extends TestCase {
 
 		$response = $useCase->execute( $request );
 
-		$this->assertInstanceOf( AddItemStatementSuccessResponse::class, $response );
+		$this->assertInstanceOf( AddItemStatementResponse::class, $response );
 		$this->assertSame(
 			$updatedItem->getStatements()->getStatementById( $newGuid ),
 			$response->getStatement()
@@ -132,38 +132,43 @@ class AddItemStatementTest extends TestCase {
 		$this->assertSame( $modificationTimestamp, $response->getLastModified() );
 	}
 
-	public function testGivenItemNotFound_returnsErrorResponse(): void {
+	public function testGivenItemNotFound_throws(): void {
 		$itemId = 'Q321';
 
 		$this->revisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
 		$this->revisionMetadataRetriever->method( 'getLatestRevisionMetadata' )
 			->willReturn( LatestItemRevisionMetadataResult::itemNotFound() );
 
-		$response = $this->newUseCase()->execute(
-			new AddItemStatementRequest(
-				$itemId,
-				$this->getValidNoValueStatementSerialization(),
-				[],
-				false,
-				null,
-				null
-			)
-		);
-
-		$this->assertInstanceOf( AddItemStatementErrorResponse::class, $response );
-		$this->assertSame( ErrorResponse::ITEM_NOT_FOUND, $response->getCode() );
-		$this->assertStringContainsString( $itemId, $response->getMessage() );
+		try {
+			$this->newUseCase()->execute(
+				new AddItemStatementRequest(
+					$itemId,
+					$this->getValidNoValueStatementSerialization(),
+					[],
+					false,
+					null,
+					null
+				)
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( ErrorResponse::ITEM_NOT_FOUND, $e->getErrorCode() );
+			$this->assertStringContainsString( $itemId, $e->getErrorMessage() );
+		}
 	}
 
-	public function testValidationError_returnsErrorResponse(): void {
-		$request = new AddItemStatementRequest( 'X123', [], [], false, null, null );
-
-		$response = $this->newUseCase()->execute( $request );
-		$this->assertInstanceOf( AddItemStatementErrorResponse::class, $response );
-		$this->assertSame( ErrorResponse::INVALID_ITEM_ID, $response->getCode() );
+	public function testValidationError_throwsUseCaseException(): void {
+		try {
+			$this->newUseCase()->execute(
+				new AddItemStatementRequest( 'X123', [], [], false, null, null )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( ErrorResponse::INVALID_ITEM_ID, $e->getErrorCode() );
+		}
 	}
 
-	public function testRedirect(): void {
+	public function testRedirect_throwsUseCaseException(): void {
 		$redirectSource = 'Q321';
 		$redirectTarget = 'Q123';
 
@@ -171,32 +176,27 @@ class AddItemStatementTest extends TestCase {
 		$this->revisionMetadataRetriever->method( 'getLatestRevisionMetadata' )
 			->willReturn( LatestItemRevisionMetadataResult::redirect( new ItemId( $redirectTarget ) ) );
 
-		$response = $this->newUseCase()->execute(
-			new AddItemStatementRequest(
-				$redirectSource,
-				$this->getValidNoValueStatementSerialization(),
-				[],
-				false,
-				null,
-				null
-			)
-		);
-
-		$this->assertInstanceOf( AddItemStatementErrorResponse::class, $response );
-		$this->assertSame( ErrorResponse::ITEM_REDIRECTED, $response->getCode() );
-		$this->assertStringContainsString( $redirectTarget, $response->getMessage() );
+		try {
+			$this->newUseCase()->execute(
+				new AddItemStatementRequest(
+					$redirectSource,
+					$this->getValidNoValueStatementSerialization(),
+					[],
+					false,
+					null,
+					null
+				)
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( ErrorResponse::ITEM_REDIRECTED, $e->getErrorCode() );
+			$this->assertStringContainsString( $redirectTarget, $e->getErrorMessage() );
+		}
 	}
 
-	public function testProtectedItem_returnsErrorResponse(): void {
+	public function testProtectedItem_throwsUseCaseException(): void {
 		$itemId = new ItemId( 'Q123' );
-		$request = new AddItemStatementRequest(
-			$itemId->getSerialization(),
-			$this->getValidNoValueStatementSerialization(),
-			[],
-			false,
-			null,
-			null
-		);
+
 		$this->revisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
 		$this->revisionMetadataRetriever->method( 'getLatestRevisionMetadata' )
 			->willReturn( LatestItemRevisionMetadataResult::concreteRevision( 321, '20201111070707' ) );
@@ -207,9 +207,20 @@ class AddItemStatementTest extends TestCase {
 			->with( User::newAnonymous(), $itemId )
 			->willReturn( false );
 
-		$response = $this->newUseCase()->execute( $request );
-		$this->assertInstanceOf( AddItemStatementErrorResponse::class, $response );
-		$this->assertSame( ErrorResponse::PERMISSION_DENIED, $response->getCode() );
+		try {
+			$request = new AddItemStatementRequest(
+				$itemId->getSerialization(),
+				$this->getValidNoValueStatementSerialization(),
+				[],
+				false,
+				null,
+				null
+			);
+			$this->newUseCase()->execute( $request );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( ErrorResponse::PERMISSION_DENIED, $e->getErrorCode() );
+		}
 	}
 
 	private function newUseCase(): AddItemStatement {
