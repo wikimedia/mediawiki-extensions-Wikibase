@@ -3,7 +3,8 @@
 		"authors": [
 			"Ganbarzada",
 			"Patriot Kur",
-			"Гусейн"
+			"Гусейн",
+			"Patriot Kor"
 		]
 	},
 	"tooltip-t-wikibase": "Link bə elementon repozitoriyə rımuz",
@@ -15,9 +16,10 @@
 	"wikibase-linkitem-input-site": "Zıvon:",
 	"wikibase-linkitem-input-page": "Səhifə:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
-	"wikibase-rc-hide-wikidata-hide": "Niyo bıkə",
+	"wikibase-rc-hide-wikidata-hide": "Niyon karde",
 	"wikibase-rc-hide-wikidata-show": "Нишо дој",
 	"wikibase-rc-wikibase-edit-letter": "Д",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} redaktə kardə",
-	"wikibase-otherprojects": "Ҹо нахшонәдә"
+	"wikibase-otherprojects": "Ҹо нахшонәдә",
+	"wikibase-client-data-bridge-references-heading": "Ğeydon"
 }

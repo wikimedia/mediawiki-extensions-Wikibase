@@ -3,7 +3,8 @@
 		"authors": [
 			"Les Meloures",
 			"Robby",
-			"Soued031"
+			"Soued031",
+			"Volvox"
 		]
 	},
 	"wikibase-entity": "Objet",
@@ -42,7 +43,7 @@
 	"wikibase-aliases-edit-placeholder": "gitt e puer Aliasen an",
 	"wikibase-aliases-edit-placeholder-language-aware": "gitt e puer Aliasen op $1 an",
 	"wikibase-content-language-edit-label": "Sprooch:",
-	"wikibase-content-language-edit-not-recognized-language": "De Sproochcode deen Dir uginn hutt gouf net erkannt.",
+	"wikibase-content-language-edit-not-recognized-language": "De Sproochcode, deen Dir uginn hutt, gouf net erkannt.",
 	"wikibase-diffview-reference": "Referenz",
 	"wikibase-diffview-rank": "Bewäertung",
 	"wikibase-diffview-rank-preferred": "Prioritär Bewäertung",

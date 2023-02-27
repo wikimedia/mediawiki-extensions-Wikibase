@@ -44,7 +44,7 @@
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|件の変更}}",
 	"wikibase-dataitem": "{{WBREPONAME}}項目",
 	"wikibase-editlinks": "リンクを編集",
-	"wikibase-editlinkstitle": "言語間リンクを編集する",
+	"wikibase-editlinkstitle": "言語間リンクを編集",
 	"wikibase-addlinkstitle": "言語間リンクを追加する",
 	"wikibase-linkitem-addlinks": "リンクを追加",
 	"wikibase-linkitem-alreadylinked": "あなたがリンクしようとしたページは既に中央データリポジトリの[$1 項目]と結びついており、このサイトの[[$2]]へリンクしています。項目には1つのサイトにつき1つのページしか結びつけることができません。別のページを選んでください。",
