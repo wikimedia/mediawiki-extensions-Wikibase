@@ -112,18 +112,18 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 		$buffer = $logger->getBuffer();
 		$this->assertCount( 2, $buffer );
 		$this->assertSame(
-			$buffer[0],
 			[
 				LogLevel::DEBUG,
 				'Wikibase\Repo\WikibasePingback::sendPingback: pingback sent OK (' . self::TEST_KEY . ')',
-			]
+			],
+			$buffer[0]
 		);
 		$this->assertSame(
-			$buffer[1],
 			[
 				LogLevel::DEBUG,
 				'Wikibase\Repo\WikibasePingback::sendPingback: pingback sent OK (' . self::TEST_KEY . ')',
-			]
+			],
+			$buffer[1]
 		);
 		MWTimestamp::setFakeTime( false );
 		$logger->clearBuffer();

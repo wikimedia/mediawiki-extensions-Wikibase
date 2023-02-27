@@ -306,7 +306,7 @@ class PatchItemStatementTest extends TestCase {
 		);
 
 		$this->assertInstanceOf( PatchItemStatementErrorResponse::class, $response );
-		$this->assertSame( $response->getCode(), ErrorResponse::INVALID_OPERATION_CHANGED_PROPERTY );
+		$this->assertSame( ErrorResponse::INVALID_OPERATION_CHANGED_PROPERTY, $response->getCode() );
 	}
 
 	public function testRejectsStatementIdChange(): void {
@@ -336,7 +336,7 @@ class PatchItemStatementTest extends TestCase {
 		);
 
 		$this->assertInstanceOf( PatchItemStatementErrorResponse::class, $response );
-		$this->assertSame( $response->getCode(), ErrorResponse::INVALID_OPERATION_CHANGED_STATEMENT_ID );
+		$this->assertSame( ErrorResponse::INVALID_OPERATION_CHANGED_STATEMENT_ID, $response->getCode() );
 	}
 
 	public function testGivenProtectedItem_returnsErrorResponse(): void {

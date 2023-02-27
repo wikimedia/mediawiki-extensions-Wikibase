@@ -52,7 +52,7 @@ class DispatchStatsTest extends MediaWikiIntegrationTestCase {
 
 		$actualStats = $dispatchStats->getDispatchStats();
 
-		$this->assertSame( $actualStats, [ 'numberOfChanges' => 0 ] );
+		$this->assertSame( [ 'numberOfChanges' => 0 ], $actualStats );
 	}
 
 	public function testGetDispatchStats_exact(): void {
@@ -67,12 +67,12 @@ class DispatchStatsTest extends MediaWikiIntegrationTestCase {
 
 		$actualStats = $dispatchStats->getDispatchStats();
 
-		$this->assertSame( $actualStats, [
+		$this->assertSame( [
 			'numberOfChanges' => 3,
 			'numberOfEntities' => 2,
 			'freshestTime' => '20211018155646',
 			'stalestTime' => '20211018155100',
-		] );
+		], $actualStats );
 	}
 
 	public function testGetDispatchStats_estimated(): void {
@@ -87,11 +87,11 @@ class DispatchStatsTest extends MediaWikiIntegrationTestCase {
 
 		$actualStats = $dispatchStats->getDispatchStats();
 
-		$this->assertSame( $actualStats, [
+		$this->assertSame( [
 			'estimatedNumberOfChanges' => 30000,
 			'freshestTime' => '20211018155646',
 			'stalestTime' => '20211018155100',
-		] );
+		], $actualStats );
 	}
 
 	public function testGetDispatchStats_estimateOutdated(): void {
@@ -106,11 +106,11 @@ class DispatchStatsTest extends MediaWikiIntegrationTestCase {
 
 		$actualStats = $dispatchStats->getDispatchStats();
 
-		$this->assertSame( $actualStats, [
+		$this->assertSame( [
 			'minimumNumberOfChanges' => 5001,
 			'freshestTime' => '20211018155646',
 			'stalestTime' => '20211018155100',
-		] );
+		], $actualStats );
 	}
 
 }

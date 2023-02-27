@@ -52,7 +52,7 @@ class TermFallbackCacheFacadeTest extends TestCase {
 			->willReturn( TermFallbackCacheFacade::NO_VALUE );
 
 		$value = $facade->get( $entityId, self::REVISION_ID, 'en', TermTypes::TYPE_LABEL );
-		$this->assertEquals( $value, TermFallbackCacheFacade::NO_VALUE );
+		$this->assertEquals( TermFallbackCacheFacade::NO_VALUE, $value );
 	}
 
 	public function setProvider() {
