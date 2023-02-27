@@ -51,7 +51,7 @@ class CallbackFactory {
 	public function getCallbackToAddDataTypeToSnaksGroupedByProperty(
 		PropertyDataTypeLookup $dataTypeLookup,
 		EntityIdParser $entityIdParser
-	) {
+	): callable {
 		return function ( $array ) use ( $dataTypeLookup, $entityIdParser ) {
 			if ( !is_array( $array ) ) {
 				return $array;
@@ -73,7 +73,7 @@ class CallbackFactory {
 		};
 	}
 
-	public function getCallbackToAddDataTypeToSnak( PropertyDataTypeLookup $dataTypeLookup, EntityIdParser $entityIdParser ) {
+	public function getCallbackToAddDataTypeToSnak( PropertyDataTypeLookup $dataTypeLookup, EntityIdParser $entityIdParser ): callable {
 		return function ( $array ) use ( $dataTypeLookup, $entityIdParser ) {
 			if ( is_array( $array ) ) {
 				try {

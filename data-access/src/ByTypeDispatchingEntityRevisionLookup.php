@@ -40,6 +40,7 @@ class ByTypeDispatchingEntityRevisionLookup implements EntityRevisionLookup {
 		$this->lookups = $lookups;
 	}
 
+	/** @inheritDoc */
 	public function getEntityRevision(
 		EntityId $entityId,
 		$revisionId = 0,
@@ -54,6 +55,7 @@ class ByTypeDispatchingEntityRevisionLookup implements EntityRevisionLookup {
 		return $lookup->getEntityRevision( $entityId, $revisionId, $mode );
 	}
 
+	/** @inheritDoc */
 	public function getLatestRevisionId( EntityId $entityId, $mode = LookupConstants::LATEST_FROM_REPLICA ) {
 		$lookup = $this->getLookupForEntity( $entityId );
 

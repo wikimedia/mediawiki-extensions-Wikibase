@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Lib\Store;
 
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\FederatedProperties\FederatedPropertyId;
 
 /**
@@ -45,11 +46,11 @@ class DispatchingFallbackLabelDescriptionLookup implements FallbackLabelDescript
 		$this->federatedPropertiesLookup = $federatedPropertiesLookup;
 	}
 
-	public function getLabel( EntityId $entityId ) {
+	public function getLabel( EntityId $entityId ): ?TermFallback {
 		return $this->getLookup( $entityId )->getLabel( $entityId );
 	}
 
-	public function getDescription( EntityId $entityId ) {
+	public function getDescription( EntityId $entityId ): ?TermFallback {
 		return $this->getLookup( $entityId )->getDescription( $entityId );
 	}
 

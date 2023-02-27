@@ -50,6 +50,9 @@ class MultipleEntitySourceServices implements WikibaseServices, EntityStoreWatch
 		$this->singleSourceServices = $singleSourceServices;
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function getEntityRevisionLookup() {
 		if ( $this->entityRevisionLookup === null ) {
 			$lookupsPerType = [];
@@ -65,6 +68,9 @@ class MultipleEntitySourceServices implements WikibaseServices, EntityStoreWatch
 		return $this->entityRevisionLookup;
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function getEntityPrefetcher() {
 		if ( $this->entityPrefetcher === null ) {
 			$prefetchersByType = [];
@@ -80,6 +86,9 @@ class MultipleEntitySourceServices implements WikibaseServices, EntityStoreWatch
 		return $this->entityPrefetcher;
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function getPropertyInfoLookup() {
 		$source = $this->entitySourceDefinitions->getDatabaseSourceForEntityType( Property::ENTITY_TYPE );
 		if ( $source === null ) {
@@ -88,10 +97,16 @@ class MultipleEntitySourceServices implements WikibaseServices, EntityStoreWatch
 		return $this->singleSourceServices[$source->getSourceName()]->getPropertyInfoLookup();
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function getEntityStoreWatcher() {
 		return $this;
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function entityUpdated( EntityRevision $entityRevision ) {
 		$source = $this->entitySourceDefinitions->getDatabaseSourceForEntityType( $entityRevision->getEntity()->getType() );
 		if ( $source !== null ) {
@@ -99,6 +114,9 @@ class MultipleEntitySourceServices implements WikibaseServices, EntityStoreWatch
 		}
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function redirectUpdated( EntityRedirect $entityRedirect, $revisionId ) {
 		$source = $this->entitySourceDefinitions->getDatabaseSourceForEntityType( $entityRedirect->getEntityId()->getEntityType() );
 		if ( $source !== null ) {
@@ -106,6 +124,9 @@ class MultipleEntitySourceServices implements WikibaseServices, EntityStoreWatch
 		}
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function entityDeleted( EntityId $entityId ) {
 		$source = $this->entitySourceDefinitions->getDatabaseSourceForEntityType( $entityId->getEntityType() );
 		if ( $source !== null ) {

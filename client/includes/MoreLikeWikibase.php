@@ -13,10 +13,16 @@ use Elastica\Query\Exists;
 class MoreLikeWikibase extends MoreLikeFeature {
 	private const MORE_LIKE_THIS_JUST_WIKIBASE = 'morelikewithwikibase';
 
+	/**
+	 * @inheritDoc
+	 */
 	protected function getKeywords() {
 		return [ self::MORE_LIKE_THIS_JUST_WIKIBASE ];
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	protected function doApply( SearchContext $context, $key, $value, $quotedValue, $negated ) {
 		parent::doApply( $context, $key, $value, $quotedValue, $negated );
 		$wbFilter = new Exists( 'wikibase_item' );

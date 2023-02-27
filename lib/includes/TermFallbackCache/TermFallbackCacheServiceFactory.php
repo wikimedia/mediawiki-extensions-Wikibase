@@ -17,6 +17,13 @@ use Wikimedia\Stats\IBufferingStatsdDataFactory;
  */
 class TermFallbackCacheServiceFactory {
 
+	/**
+	 * Get a cached instance of the specified type of cache object.
+	 *
+	 * @param string|int $termFallbackCacheType A key in $wgObjectCaches.
+	 * @param ObjectCacheFactory $objectCacheFactory
+	 * @return BagOStuff
+	 */
 	public function newSharedCache( $termFallbackCacheType, ObjectCacheFactory $objectCacheFactory ): BagOStuff {
 		return $objectCacheFactory->getInstance( $termFallbackCacheType );
 	}

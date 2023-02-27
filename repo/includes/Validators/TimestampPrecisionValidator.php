@@ -35,6 +35,11 @@ class TimestampPrecisionValidator implements ValueValidator {
 		$this->precisionDayValidator = new RegexValidator( $dayPattern, true );
 	}
 
+	/**
+	 * @param mixed $value The value to validate
+	 *
+	 * @return Result
+	 */
 	public function validate( $value ): Result {
 		if ( $value['precision'] === TimeValue::PRECISION_MONTH ) {
 			return $this->precisionMonthValidator->validate( $value['time'] );

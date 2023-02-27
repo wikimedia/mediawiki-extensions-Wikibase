@@ -52,6 +52,7 @@ class FederatedPropertiesError extends ErrorPageError {
 		parent::__construct( new RawMessage( $html ), $errorBody, [] );
 	}
 
+	/** @inheritDoc */
 	public function report( $action = self::SEND_OUTPUT ) {
 		if ( self::isCommandLine() || defined( 'MW_API' ) ) {
 			parent::report();

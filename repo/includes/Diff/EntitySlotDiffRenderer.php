@@ -26,6 +26,7 @@ class EntitySlotDiffRenderer extends SlotDiffRenderer {
 		$this->langCode = $langCode;
 	}
 
+	/** @inheritDoc */
 	public function getDiff( ?Content $oldContent = null, ?Content $newContent = null ) {
 		$this->normalizeContents( $oldContent, $newContent, [ EntityContent::class ] );
 		'@phan-var EntityContent $oldContent'; /** @var EntityContent $oldContent */
@@ -40,6 +41,7 @@ class EntitySlotDiffRenderer extends SlotDiffRenderer {
 		$output->addModuleStyles( [ 'wikibase.alltargets' ] );
 	}
 
+	/** @inheritDoc */
 	public function getExtraCacheKeys() {
 		return [ "lang-{$this->langCode}" ];
 	}

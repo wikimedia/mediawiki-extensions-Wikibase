@@ -13,7 +13,10 @@ class CompositeStatementDataUpdater implements StatementDataUpdater {
 	/** @var array */
 	private $updaters;
 
-	public function __construct( /* StatementDataUpdater */ ...$updaters ) {
+	/**
+	 * @param StatementDataUpdater ...$updaters
+	 */
+	public function __construct( ...$updaters ) {
 		$this->updaters = $updaters;
 	}
 

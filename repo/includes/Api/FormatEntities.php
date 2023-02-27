@@ -145,6 +145,9 @@ class FormatEntities extends ApiBase {
 	private static function makeLinksAbsolute( string $html ): string {
 		$formatter = new class extends HtmlFormatter {
 
+			/**
+			 * @inheritDoc
+			 */
 			public function element( SerializerNode $parent, SerializerNode $node, $contents ) {
 				if ( $node->namespace === HTMLData::NS_HTML
 					&& $node->name === 'a'
@@ -157,6 +160,9 @@ class FormatEntities extends ApiBase {
 				return parent::element( $parent, $node, $contents );
 			}
 
+			/**
+			 * @inheritDoc
+			 */
 			public function startDocument( $fragmentNamespace, $fragmentName ) {
 				return '';
 			}

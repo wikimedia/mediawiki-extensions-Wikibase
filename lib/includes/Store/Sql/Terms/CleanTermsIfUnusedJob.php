@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Store\Sql\Terms;
 use Job;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Page\PageReference;
 use MediaWiki\Title\Title;
 
 /**
@@ -53,6 +54,10 @@ class CleanTermsIfUnusedJob extends Job {
 		return new self( $cleaner, $params );
 	}
 
+	/**
+	 * @param TermStoreCleaner $cleaner
+	 * @param array|PageReference|null $params
+	 */
 	public function __construct( TermStoreCleaner $cleaner, $params ) {
 		parent::__construct( self::JOB_NAME, $params );
 		$this->termInLangIdsCleaner = $cleaner;

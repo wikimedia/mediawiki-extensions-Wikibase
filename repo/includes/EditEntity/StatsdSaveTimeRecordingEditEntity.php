@@ -33,38 +33,65 @@ class StatsdSaveTimeRecordingEditEntity implements EditEntity {
 		$this->timingPrefix = $timingPrefix;
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function getEntityId() {
 		return $this->inner->getEntityId();
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function getLatestRevision() {
 		return $this->inner->getLatestRevision();
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function getBaseRevision() {
 		return $this->inner->getBaseRevision();
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function getStatus() {
 		return $this->inner->getStatus();
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function isSuccess() {
 		return $this->inner->isSuccess();
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function hasError( $errorType = self::ANY_ERROR ) {
 		return $this->inner->hasError( $errorType );
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function hasEditConflict() {
 		return $this->inner->hasEditConflict();
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function isTokenOK( $token ) {
 		return $this->inner->isTokenOK( $token );
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function attemptSave(
 		EntityDocument $newEntity,
 		string $summary,

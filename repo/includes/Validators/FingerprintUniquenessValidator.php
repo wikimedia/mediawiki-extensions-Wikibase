@@ -57,6 +57,11 @@ class FingerprintUniquenessValidator implements ValueValidator {
 		// noop
 	}
 
+	/**
+	 * @param mixed $value The value to validate
+	 *
+	 * @return Result
+	 */
 	public function validate( $value ) {
 		if ( !$value instanceof ChangeOpFingerprintResult ) {
 			throw new InvalidArgumentException( '$value can only be of type ChangeOpFingerprintResult' );

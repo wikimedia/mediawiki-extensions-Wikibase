@@ -23,6 +23,7 @@ class HTMLTrimmedTextField extends HTMLTextField {
 		$this->stringNormalizer = new StringNormalizer();
 	}
 
+	/** @inheritDoc */
 	public function filter( $value, $alldata ) {
 		if ( is_string( $value ) ) {
 			$value = $this->stringNormalizer->trimToNFC( $value );

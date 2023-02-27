@@ -11,6 +11,7 @@ use JobSpecification;
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use MediaWiki\JobQueue\JobQueueGroupFactory;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Title\Title;
 use Psr\Log\LoggerInterface;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -110,7 +111,7 @@ class DispatchChangesJob extends Job {
 		parent::__construct( 'DispatchChanges', $params );
 	}
 
-	public static function newFromGlobalState( $unused, array $params ): self {
+	public static function newFromGlobalState( ?Title $unused, array $params ): self {
 		return new self(
 			new SqlSubscriptionLookup(
 				WikibaseRepo::getRepoDomainDbFactory()->newRepoDb()

@@ -54,6 +54,7 @@ class TermboxView implements CacheableEntityTermsView {
 		$this->textInjector = $textInjector;
 	}
 
+	/** @inheritDoc */
 	public function getHtml(
 		$mainLanguageCode,
 		TermList $labels,
@@ -64,6 +65,7 @@ class TermboxView implements CacheableEntityTermsView {
 		return $this->textInjector->newMarker( self::TERMBOX_PLACEHOLDER );
 	}
 
+	/** @inheritDoc */
 	public function getTitleHtml( ?EntityId $entityId ) {
 		return $this->textProvider->getEscaped( 'parentheses', [ $entityId->getSerialization() ] );
 	}

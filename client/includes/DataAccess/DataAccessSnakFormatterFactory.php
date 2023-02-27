@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\DataAccess;
 
-use InvalidArgumentException;
 use MediaWiki\Language\Language;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Client\Usage\UsageAccumulator;
@@ -81,12 +80,8 @@ class DataAccessSnakFormatterFactory {
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		EntityIdParser $repoItemUriParser,
 		FallbackLabelDescriptionLookupFactory $fallbackLabelDescriptionLookupFactory,
-		$trackUsagesInAllLanguages = false
+		bool $trackUsagesInAllLanguages = false
 	) {
-		if ( !is_bool( $trackUsagesInAllLanguages ) ) {
-			throw new InvalidArgumentException( '$trackUsagesInAllLanguages must be a bool' );
-		}
-
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 		$this->snakFormatterFactory = $snakFormatterFactory;
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;

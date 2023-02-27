@@ -33,6 +33,9 @@ class DescriptionProviderHookHandler implements SearchResultProvideDescriptionHo
 		$this->descriptionLookup = $descriptionLookup;
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function onSearchResultProvideDescription(
 		array $pageIdentities,
 		&$descriptions

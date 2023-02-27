@@ -18,6 +18,10 @@ class SiteLinkListSerializer extends MapSerializer {
 		$this->siteLinkSerializer = $siteLinkSerializer;
 	}
 
+	/**
+	 * @param SiteLinkList $siteLinkList
+	 * @return array|\stdClass
+	 */
 	public function serialize( SiteLinkList $siteLinkList ) {
 		return $this->serializeMap( $this->generateSerializedArrayRepresentation( $siteLinkList ) );
 	}

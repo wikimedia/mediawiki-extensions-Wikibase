@@ -25,22 +25,27 @@ class ChangeOpFingerprint extends ChangeOps {
 		$this->termValidatorFactory = $termValidatorFactory;
 	}
 
+	/** @inheritDoc */
 	public function add( $changeOps ) {
 		$this->innerChangeOps->add( $changeOps );
 	}
 
+	/** @inheritDoc */
 	public function getChangeOps() {
 		return $this->innerChangeOps->getChangeOps();
 	}
 
+	/** @inheritDoc */
 	public function validate( EntityDocument $entity ) {
 		return $this->innerChangeOps->validate( $entity );
 	}
 
+	/** @inheritDoc */
 	public function getActions() {
 		return $this->innerChangeOps->getActions();
 	}
 
+	/** @inheritDoc */
 	public function apply( EntityDocument $entity, ?Summary $summary = null ) {
 		$result = $this->innerChangeOps->apply( $entity, $summary );
 

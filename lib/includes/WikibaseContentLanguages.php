@@ -51,7 +51,7 @@ class WikibaseContentLanguages {
 	public static function getDefaultInstance(
 		?HookContainer $hookContainer = null,
 		?LanguageNameUtils $languageNameUtils = null
-	) {
+	): WikibaseContentLanguages {
 		$hookContainer ??= MediaWikiServices::getInstance()->getHookContainer();
 
 		$contentLanguages = [];
@@ -67,7 +67,7 @@ class WikibaseContentLanguages {
 		return new self( $contentLanguages );
 	}
 
-	public static function getDefaultTermsLanguages( ?LanguageNameUtils $languageNameUtils = null ) {
+	public static function getDefaultTermsLanguages( ?LanguageNameUtils $languageNameUtils = null ): ContentLanguages {
 		// Note: this list is also the basis of getDefaultMonolingualTextLanguages(); custom
 		// (non-MediaWikiContentLanguages) terms languages also become monolingual text languages.
 		return new UnionContentLanguages(
@@ -148,7 +148,7 @@ class WikibaseContentLanguages {
 		);
 	}
 
-	public static function getDefaultMonolingualTextLanguages( ?LanguageNameUtils $languageNameUtils = null ) {
+	public static function getDefaultMonolingualTextLanguages( ?LanguageNameUtils $languageNameUtils = null ): ContentLanguages {
 		return new DifferenceContentLanguages(
 			new UnionContentLanguages(
 				self::getDefaultTermsLanguages( $languageNameUtils ),

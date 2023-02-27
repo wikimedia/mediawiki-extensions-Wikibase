@@ -17,6 +17,11 @@ use Wikimedia\Assert\Assert;
  */
 class StatsdRecordingSimpleCache implements CacheInterface {
 
+	// Functions here throw \Psr\SimpleCache\InvalidArgumentException
+	// per the CacheInterface interface definition, so we need to
+	// @phan-file-suppress PhanTypeInvalidThrowsIsInterface
+	// here
+
 	private const DEFAULT_VALUE = __CLASS__ . '-default';
 
 	/** @var CacheInterface */
@@ -59,6 +64,12 @@ class StatsdRecordingSimpleCache implements CacheInterface {
 		$this->stats->updateCount( $this->statsKeys['hit'], $count );
 	}
 
+	/**
+	 * @param string $key
+	 * @param mixed $default
+	 * @return mixed
+	 * @throws \Psr\SimpleCache\InvalidArgumentException
+	 */
 	public function get( $key, $default = null ) {
 		$value = $this->inner->get( $key, self::DEFAULT_VALUE );
 		if ( $value === self::DEFAULT_VALUE ) {
@@ -70,18 +81,39 @@ class StatsdRecordingSimpleCache implements CacheInterface {
 		return $value;
 	}
 
+	/**
+	 * @param string $key
+	 * @param mixed $value
+	 * @param null|int|\DateInterval $ttl
+	 * @return bool
+	 * @throws \Psr\SimpleCache\InvalidArgumentException
+	 */
 	public function set( $key, $value, $ttl = null ) {
 		return $this->inner->set( $key, $value, $ttl );
 	}
 
+	/**
+	 * @param string $key
+	 * @return bool
+	 * @throws \Psr\SimpleCache\InvalidArgumentException
+	 */
 	public function delete( $key ) {
 		return $this->inner->delete( $key );
 	}
 
+	/**
+	 * @return bool
+	 */
 	public function clear() {
 		return $this->inner->clear();
 	}
 
+	/**
+	 * @param iterable $keys
+	 * @param mixed $default
+	 * @return iterable
+	 * @throws \Psr\SimpleCache\InvalidArgumentException
+	 */
 	public function getMultiple( $keys, $default = null ) {
 		$values = $this->inner->getMultiple( $keys, self::DEFAULT_VALUE );
 		$misses = 0;
@@ -108,14 +140,30 @@ class StatsdRecordingSimpleCache implements CacheInterface {
 		return $values;
 	}
 
+	/**
+	 * @param iterable $values
+	 * @param null|int|\DateInterval $ttl
+	 * @return bool
+	 * @throws \Psr\SimpleCache\InvalidArgumentException
+	 */
 	public function setMultiple( $values, $ttl = null ) {
 		return $this->inner->setMultiple( $values, $ttl );
 	}
 
+	/**
+	 * @param iterable $keys
+	 * @return bool
+	 * @throws \Psr\SimpleCache\InvalidArgumentException
+	 */
 	public function deleteMultiple( $keys ) {
 		return $this->inner->deleteMultiple( $keys );
 	}
 
+	/**
+	 * @param string $key
+	 * @return bool
+	 * @throws \Psr\SimpleCache\InvalidArgumentException
+	 */
 	public function has( $key ) {
 		return $this->inner->has( $key );
 	}

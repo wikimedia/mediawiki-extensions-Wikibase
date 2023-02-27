@@ -39,10 +39,16 @@ class MetaDataBridgeConfig extends ApiQueryBase {
 		$this->resolveTitleStringToUrl = $resolveTitleStringToUrl;
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function isInternal() {
 		return true;
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function execute() {
 		$result = $this->getResult();
 		$path = [
@@ -72,6 +78,9 @@ class MetaDataBridgeConfig extends ApiQueryBase {
 		$result->addValue( $stringLimitsPath, 'maxLength', $stringMaxLength );
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function getCacheMode( $params ) {
 		return 'public';
 	}

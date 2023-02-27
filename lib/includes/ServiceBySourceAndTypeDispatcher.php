@@ -59,6 +59,9 @@ class ServiceBySourceAndTypeDispatcher {
 		);
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function getServiceForSourceAndType( string $sourceName, string $entityType, array $callbackArgs = [] ) {
 		return $this->services[$sourceName][$entityType] ?? $this->createService( $sourceName, $entityType, $callbackArgs );
 	}

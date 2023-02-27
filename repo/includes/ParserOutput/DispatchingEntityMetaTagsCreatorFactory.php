@@ -29,9 +29,9 @@ class DispatchingEntityMetaTagsCreatorFactory {
 	}
 
 	public function newEntityMetaTags(
-		$entityType,
+		string $entityType,
 		Language $userLanguage
-	) {
+	): EntityMetaTagsCreator {
 		if ( !isset( $this->entityMetaTagsFactoryCallbacks[$entityType] ) ) {
 			return new DefaultMetaTagsCreator();
 		}

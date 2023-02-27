@@ -39,6 +39,7 @@ class HttpUrlPropertyOrderProvider extends WikiTextPropertyOrderProvider impleme
 		$this->logger = $logger;
 	}
 
+	/** @inheritDoc */
 	protected function getPropertyOrderWikitext() {
 		$options = [ 'timeout' => 3 ];
 

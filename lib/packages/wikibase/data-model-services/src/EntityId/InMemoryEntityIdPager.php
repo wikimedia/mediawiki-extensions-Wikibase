@@ -50,10 +50,12 @@ class InMemoryEntityIdPager implements SeekableEntityIdPager {
 		return $entityIds;
 	}
 
+	/** @inheritDoc */
 	public function getPosition() {
 		return $this->offset;
 	}
 
+	/** @inheritDoc */
 	public function setPosition( $position ) {
 		$this->offset = $position;
 	}

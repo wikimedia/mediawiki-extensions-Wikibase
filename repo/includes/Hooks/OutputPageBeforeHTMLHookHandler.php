@@ -78,7 +78,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		OutputPageEntityIdReader $outputPageEntityIdReader,
 		EntityFactory $entityFactory,
 		OutputPageEditability $editability,
-		$isExternallyRendered,
+		bool $isExternallyRendered,
 		UserPreferredContentLanguagesLookup $userPreferredTermsLanguages,
 		OutputPageEntityViewChecker $entityViewChecker,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,

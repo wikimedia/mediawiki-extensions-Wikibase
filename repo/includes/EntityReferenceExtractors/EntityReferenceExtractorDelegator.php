@@ -33,6 +33,9 @@ class EntityReferenceExtractorDelegator implements EntityReferenceExtractor {
 		$this->statementEntityReferenceExtractor = $statementEntityReferenceExtractor;
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function extractEntityIds( EntityDocument $entity ) {
 		if ( array_key_exists( $entity->getType(), $this->callbacks ) ) {
 			return $this->callbacks[$entity->getType()]()->extractEntityIds( $entity );

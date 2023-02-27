@@ -41,7 +41,7 @@ class ChangeVisibilityNotificationJob extends ChangeModificationNotificationJob 
 		$this->batchSize = $batchSize;
 	}
 
-	public static function newFromGlobalState( Title $unused, array $params ) {
+	public static function newFromGlobalState( Title $unused, array $params ): self {
 		$mwServices = MediaWikiServices::getInstance();
 
 		return new self(

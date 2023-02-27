@@ -28,6 +28,13 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 	private $ssrServerTimeout;
 	public const HTTP_STATUS_OK = 200;
 
+	/**
+	 * @param HttpRequestFactory $requestFactory
+	 * @param string|null $ssrServerUrl
+	 * @param int|float $ssrServerTimeout
+	 * @param LoggerInterface $logger
+	 * @param StatsdDataFactoryInterface $stats
+	 */
 	public function __construct(
 		HttpRequestFactory $requestFactory,
 		?string $ssrServerUrl,

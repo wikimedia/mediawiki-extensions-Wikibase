@@ -30,6 +30,7 @@ class PropertyDataTypeSearchHelper implements EntitySearchHelper {
 		$this->dataTypeLookup = $dataTypeLookup;
 	}
 
+	/** @inheritDoc */
 	public function getRankedSearchResults(
 		$text,
 		$languageCode,

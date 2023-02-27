@@ -148,6 +148,9 @@ class DataTypeDefinitions {
 		return array_keys( $ptDefinitions );
 	}
 
+	/**
+	 * @return array
+	 */
 	public function getExpertModules() {
 		return $this->resolveValueTypeFallback(
 			$this->getMapForDefinitionField( 'expert-module' )

@@ -180,7 +180,7 @@ class TermValidatorFactory {
 		return $validators;
 	}
 
-	public function getLabelUniquenessValidator( $entityType ): LabelUniquenessValidator {
+	public function getLabelUniquenessValidator( string $entityType ): LabelUniquenessValidator {
 		return new LabelUniquenessValidator(
 			$this->termsCollisionDetectorFactory->getTermsCollisionDetector( $entityType )
 		);

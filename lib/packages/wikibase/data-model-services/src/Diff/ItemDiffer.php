@@ -62,7 +62,7 @@ class ItemDiffer implements EntityDifferStrategy {
 		return $item;
 	}
 
-	public function diffItems( Item $from, Item $to ) {
+	public function diffItems( Item $from, Item $to ): ItemDiff {
 		$diffOps = $this->recursiveMapDiffer->doDiff(
 			$this->toDiffArray( $from ),
 			$this->toDiffArray( $to )

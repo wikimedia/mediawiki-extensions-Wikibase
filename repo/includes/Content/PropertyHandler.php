@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Content;
 
+use Action;
 use Article;
 use MediaWiki\Content\Content;
 use MediaWiki\Context\IContextSource;
@@ -104,6 +105,11 @@ class PropertyHandler extends EntityHandler {
 		$this->entityTermStoreWriter = $entityTermStoreWriter;
 	}
 
+	/**
+	 * @see Action::factory
+	 *
+	 * @return array<string,class-string|callable|false|Action|array>
+	 */
 	public function getActionOverrides() {
 		return [
 			'history' => function ( Article $article, IContextSource $context ) {
@@ -138,6 +144,7 @@ class PropertyHandler extends EntityHandler {
 		return Property::ENTITY_TYPE;
 	}
 
+	/** @inheritDoc */
 	public function getSecondaryDataUpdates(
 		Title $title,
 		Content $content,
@@ -172,6 +179,7 @@ class PropertyHandler extends EntityHandler {
 		return $updates;
 	}
 
+	/** @inheritDoc */
 	public function getDeletionUpdates( Title $title, $role ) {
 		$updates = parent::getDeletionUpdates( $title, $role );
 

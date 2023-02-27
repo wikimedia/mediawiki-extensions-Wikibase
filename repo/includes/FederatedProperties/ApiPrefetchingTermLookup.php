@@ -200,6 +200,7 @@ class ApiPrefetchingTermLookup extends EntityTermLookupBase implements Prefetchi
 	/**
 	 * @param EntityId $entityId
 	 * @param string $languageCode
+	 *
 	 * @return never
 	 */
 	public function getPrefetchedAliases( EntityId $entityId, $languageCode ) {

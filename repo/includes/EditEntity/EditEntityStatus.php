@@ -6,6 +6,7 @@ namespace Wikibase\Repo\EditEntity;
 
 use ArrayAccess;
 use MediaWiki\Context\IContextSource;
+use MediaWiki\Status\Status;
 use MediaWiki\User\UserIdentity;
 use StatusValue;
 use Wikibase\Lib\Store\EntityRevision;
@@ -30,7 +31,7 @@ class EditEntityStatus extends TempUserStatus {
 	}
 
 	/**
-	 * @param StatusValue $sv
+	 * @param StatusValue|Status $sv
 	 * @return static
 	 */
 	public static function wrap( $sv ) {

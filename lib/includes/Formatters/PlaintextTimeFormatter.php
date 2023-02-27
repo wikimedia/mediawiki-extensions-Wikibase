@@ -48,7 +48,8 @@ class PlaintextTimeFormatter implements ValueFormatter {
 		$this->decider = $decider;
 	}
 
-	public function format( $value ): string {
+	/** @inheritDoc */
+	public function format( $value ) {
 		$formatted = $this->dateTimeFormatter->format( $value );
 
 		if ( $this->decider->showCalendarModel( $value, $this->options ) ) {

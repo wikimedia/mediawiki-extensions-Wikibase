@@ -31,11 +31,11 @@ class ChangeOpDeserializationException extends \InvalidArgumentException {
 		$this->params = $params;
 	}
 
-	public function getErrorCode() {
+	public function getErrorCode(): string {
 		return $this->errorCode;
 	}
 
-	public function getParams() {
+	public function getParams(): array {
 		return $this->params;
 	}
 

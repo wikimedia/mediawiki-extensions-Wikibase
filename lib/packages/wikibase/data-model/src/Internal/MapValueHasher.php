@@ -18,7 +18,7 @@ class MapValueHasher {
 
 	private bool $isOrdered;
 
-	public function __construct( $holdOrderIntoAccount = false ) {
+	public function __construct( bool $holdOrderIntoAccount = false ) {
 		$this->isOrdered = $holdOrderIntoAccount;
 	}
 

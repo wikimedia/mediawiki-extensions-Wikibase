@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Client;
 
 use Job;
+use MediaWiki\Title\Title;
 use Psr\Log\LoggerInterface;
 use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -37,6 +38,12 @@ class EntityChangeNotificationJob extends Job {
 	 */
 	private $logger;
 
+	/**
+	 * @param ChangeHandler $changeHandler
+	 * @param EntityIdParser $entityIdParser
+	 * @param LoggerInterface $logger
+	 * @param array|null $params
+	 */
 	public function __construct(
 		ChangeHandler $changeHandler,
 		EntityIdParser $entityIdParser,
@@ -48,10 +55,13 @@ class EntityChangeNotificationJob extends Job {
 		$this->changeHandler = $changeHandler;
 		$this->entityIdParser = $entityIdParser;
 		$this->logger = $logger;
-		$this->changes = array_map( [ $this, 'reconstructChangeFromFields' ], $params['changes'] );
+		$this->changes = [];
+		if ( $params && array_key_exists( 'changes', $params ) ) {
+			$this->changes = array_map( [ $this, 'reconstructChangeFromFields' ], $params['changes'] );
+		}
 	}
 
-	public static function newFromGlobalState( $unused, array $params ): self {
+	public static function newFromGlobalState( Title $unused, array $params ): self {
 		return new self(
 			WikibaseClient::getChangeHandler(),
 			WikibaseClient::getEntityIdParser(),

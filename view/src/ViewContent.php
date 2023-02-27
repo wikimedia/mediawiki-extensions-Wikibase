@@ -24,7 +24,7 @@ class ViewContent {
 	 */
 	private $placeholders;
 
-	public function __construct( $html, array $placeholders = [] ) {
+	public function __construct( string $html, array $placeholders = [] ) {
 		$this->html = $html;
 		$this->placeholders = $placeholders;
 	}

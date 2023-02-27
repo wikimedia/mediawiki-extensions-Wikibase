@@ -297,7 +297,7 @@ class Item implements
 	 *
 	 * @param StatementList $statements
 	 */
-	public function setStatements( StatementList $statements ) {
+	public function setStatements( StatementList $statements ): void {
 		$this->statements = $statements;
 	}
 

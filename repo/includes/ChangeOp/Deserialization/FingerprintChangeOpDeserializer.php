@@ -40,6 +40,7 @@ class FingerprintChangeOpDeserializer implements ChangeOpDeserializer {
 		$this->fingerprintChangeOpFactory = $fingerprintChangeOpFactory;
 	}
 
+	/** @inheritDoc */
 	public function createEntityChangeOp( array $changeRequest ) {
 		$changeOps = [];
 

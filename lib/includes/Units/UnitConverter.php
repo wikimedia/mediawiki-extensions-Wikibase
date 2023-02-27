@@ -37,7 +37,7 @@ class UnitConverter {
 	 */
 	private $prefix;
 
-	public function __construct( UnitStorage $store, $entityPrefix ) {
+	public function __construct( UnitStorage $store, string $entityPrefix ) {
 		$this->store = $store;
 		$this->prefix = $entityPrefix;
 		$this->math = new DecimalMath();

@@ -9,6 +9,9 @@ use DataValues\UnknownValue;
  */
 class UnmappedEntityIdValue extends UnknownValue {
 
+	/**
+	 * @return string
+	 */
 	public static function getType() {
 		return 'wikibase-unmapped-entityid';
 	}

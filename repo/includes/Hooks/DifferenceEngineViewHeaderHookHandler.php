@@ -3,6 +3,7 @@
 declare( strict_types = 1 );
 namespace Wikibase\Repo\Hooks;
 
+use DifferenceEngine;
 use MediaWiki\Diff\Hook\DifferenceEngineViewHeaderHook;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Term\TermTypes;
@@ -44,6 +45,10 @@ class DifferenceEngineViewHeaderHookHandler implements DifferenceEngineViewHeade
 		);
 	}
 
+	/**
+	 * @param DifferenceEngine $differenceEngine
+	 * @return void True or no return value to continue or false to abort
+	 */
 	public function onDifferenceEngineViewHeader( $differenceEngine ) {
 		$differenceEngine->loadRevisionData();
 		$entityId = $this->linkLookup->getEntityId( $differenceEngine->getTitle() );

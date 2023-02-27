@@ -107,6 +107,7 @@ abstract class PrefetchingEntityTermLookupBase extends EntityTermLookupBase impl
 		);
 	}
 
+	/** @inheritDoc */
 	public function getPrefetchedTerm( EntityId $entityId, $termType, $languageCode ) {
 		if ( !( $entityId instanceof $this->entityIdClass ) ) {
 			throw new InvalidArgumentException( "Not an {$this->entityIdClass}: " . $entityId->getSerialization() );
@@ -120,6 +121,7 @@ abstract class PrefetchingEntityTermLookupBase extends EntityTermLookupBase impl
 		return $this->getFromBuffer( $entityId, $termType, $languageCode )[0] ?? false;
 	}
 
+	/** @inheritDoc */
 	public function getPrefetchedAliases( EntityId $entityId, $languageCode ) {
 		if ( !( $entityId instanceof $this->entityIdClass ) ) {
 			throw new InvalidArgumentException( "Not a {$this->entityIdClass}: " . $entityId->getSerialization() );
@@ -140,6 +142,7 @@ abstract class PrefetchingEntityTermLookupBase extends EntityTermLookupBase impl
 		return $this->terms[$entityId->getNumericId()][$termType][$languageCode] ?? null;
 	}
 
+	/** @inheritDoc */
 	protected function getTermsOfType( EntityId $entityId, $termType, array $languageCodes ) {
 		$this->prefetchTerms( [ $entityId ], [ $termType ], $languageCodes );
 

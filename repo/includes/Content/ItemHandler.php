@@ -111,6 +111,7 @@ class ItemHandler extends EntityHandler {
 		$this->db = $db;
 	}
 
+	/** @inheritDoc */
 	public function getActionOverrides() {
 		return [
 			'history' => function ( Article $article, IContextSource $context ) {
@@ -145,6 +146,7 @@ class ItemHandler extends EntityHandler {
 		return Item::ENTITY_TYPE;
 	}
 
+	/** @inheritDoc */
 	public function getSecondaryDataUpdates(
 		Title $title,
 		Content $content,
@@ -192,6 +194,7 @@ class ItemHandler extends EntityHandler {
 		return $updates;
 	}
 
+	/** @inheritDoc */
 	public function getDeletionUpdates( Title $title, $role ) {
 		$updates = parent::getDeletionUpdates( $title, $role );
 

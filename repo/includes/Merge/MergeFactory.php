@@ -70,7 +70,7 @@ class MergeFactory {
 		);
 	}
 
-	public function getStatementsMerger() {
+	public function getStatementsMerger(): StatementsMerger {
 		return new StatementsMerger( $this->factoryProvider->getStatementChangeOpFactory() );
 	}
 

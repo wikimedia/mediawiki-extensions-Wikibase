@@ -17,7 +17,7 @@ class EntitySourceDocumentUrlProvider {
 		$this->titleFactory = $titleFactory;
 	}
 
-	public function getCanonicalDocumentsUrls( EntitySourceDefinitions $sourceDefinitions ) {
+	public function getCanonicalDocumentsUrls( EntitySourceDefinitions $sourceDefinitions ): array {
 		$documentUrls = [];
 
 		$sources = $sourceDefinitions->getSources();

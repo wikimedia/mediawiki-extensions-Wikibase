@@ -25,6 +25,10 @@ class PropertyValueExpertsModule extends RL\Module {
 		$this->dataTypeDefinitions = $dataTypeDefinitions;
 	}
 
+	/**
+	 * @param RL\Context $context
+	 * @return string
+	 */
 	public function getScript( RL\Context $context ) {
 		$expertModuleMap = Html::encodeJsVar( $this->dataTypeDefinitions->getExpertModules() );
 
@@ -38,6 +42,10 @@ JS;
 		return $js;
 	}
 
+	/**
+	 * @param RL\Context|null $context
+	 * @return array|string[]
+	 */
 	public function getDependencies( ?RL\Context $context = null ) {
 		return array_values( $this->dataTypeDefinitions->getExpertModules() );
 	}

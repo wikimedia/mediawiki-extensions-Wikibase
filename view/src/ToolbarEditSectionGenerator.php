@@ -53,6 +53,10 @@ class ToolbarEditSectionGenerator implements EditSectionGenerator {
 		}
 	}
 
+	/**
+	 * @param EntityId|null $entityId
+	 * @return string
+	 */
 	public function getSiteLinksEditSection( ?EntityId $entityId = null ) {
 		$specialPageUrlParams = [];
 
@@ -145,6 +149,11 @@ class ToolbarEditSectionGenerator implements EditSectionGenerator {
 		);
 	}
 
+	/**
+	 * @param PropertyId $propertyId
+	 * @param EntityId|null $entityId
+	 * @return string
+	 */
 	public function getAddStatementToGroupSection( PropertyId $propertyId, ?EntityId $entityId = null ) {
 		// This is just an empty toolbar wrapper. It's used as a marker to the JavaScript so that it places
 		// the toolbar at the right position in the DOM. Without this, the JavaScript would just append the
@@ -153,6 +162,10 @@ class ToolbarEditSectionGenerator implements EditSectionGenerator {
 		return $this->getToolbarContainer( '' );
 	}
 
+	/**
+	 * @param Statement $statement
+	 * @return string
+	 */
 	public function getStatementEditSection( Statement $statement ) {
 		// This is just an empty toolbar wrapper. It's used as a marker to the JavaScript so that it places
 		// the toolbar at the right position in the DOM. Without this, the JavaScript would just append the

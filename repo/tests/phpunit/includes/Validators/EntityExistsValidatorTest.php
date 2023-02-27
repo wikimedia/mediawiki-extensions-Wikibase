@@ -90,7 +90,6 @@ class EntityExistsValidatorTest extends \PHPUnit\Framework\TestCase {
 	public static function provideValidate_exception() {
 		return [
 			"Not an EntityId" => [ 'Q3', null ],
-			"Type is not a string" => [ new ItemId( 'Q8' ), [ 'foo' ] ],
 		];
 	}
 

@@ -46,7 +46,8 @@ class SnakFactory {
 	 *
 	 * @param PropertyId $propertyId
 	 * @param string $snakType
-	 * @param mixed|null $rawValue
+	 * @param mixed $rawValue
+	 *
 	 * @throws PropertyDataTypeLookupException from getDataTypeIdForProperty
 	 * @throws OutOfBoundsException from getType
 	 * @throws InvalidArgumentException from newDataValue, newDataValue and newSnak
@@ -73,6 +74,7 @@ class SnakFactory {
 	/**
 	 * @param DataType $dataType
 	 * @param mixed $rawValue
+	 *
 	 * @throws InvalidArgumentException
 	 */
 	private function deserializeValue( DataType $dataType, $rawValue ): DataValue {

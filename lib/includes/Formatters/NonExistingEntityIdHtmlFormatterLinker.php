@@ -49,7 +49,7 @@ class NonExistingEntityIdHtmlFormatterLinker implements EntityIdFormatter {
 		);
 	}
 
-	public function formatEntityId( EntityId $entityId ) {
+	public function formatEntityId( EntityId $entityId ): string {
 		if ( $entityId instanceof PropertyId ) {
 			return $this->entityIdHtmlBrokenLinkFormatter->formatEntityId( $entityId );
 		}

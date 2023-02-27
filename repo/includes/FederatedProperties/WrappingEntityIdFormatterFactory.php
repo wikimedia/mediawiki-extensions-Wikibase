@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\FederatedProperties;
 
 use MediaWiki\Language\Language;
+use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\View\EntityIdFormatterFactory;
 
 /**
@@ -20,10 +21,18 @@ class WrappingEntityIdFormatterFactory implements EntityIdFormatterFactory {
 		$this->inner = $inner;
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getOutputFormat() {
 		return $this->inner->getOutputFormat();
 	}
 
+	/**
+	 * @param Language $language
+	 *
+	 * @return EntityIdFormatter
+	 */
 	public function getEntityIdFormatter( Language $language ) {
 		return new FederatedPropertiesEntityIdFormatter(
 			$this->inner->getEntityIdFormatter( $language )

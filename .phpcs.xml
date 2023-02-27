@@ -1,13 +1,19 @@
 <?xml version="1.0"?>
 <ruleset>
-	<rule ref="./vendor/mediawiki/mediawiki-codesniffer/MediaWiki">
-		<exclude name="MediaWiki.Commenting.FunctionComment.MissingDocumentationProtected" />
-		<exclude name="MediaWiki.Commenting.FunctionComment.MissingDocumentationPublic" />
-	</rule>
+
+	<rule ref="./vendor/mediawiki/mediawiki-codesniffer/MediaWiki" />
 
     <!-- Setting here so that LibraryUpgrader doesn't try to auto-convert, as it's very noisy. -->
 	<rule ref="MediaWiki.Usage.StaticClosure.StaticClosure">
 	    <severity>0</severity>
+	</rule>
+
+	<rule ref="MediaWiki.Commenting.FunctionComment">
+		<exclude-pattern>/tests/</exclude-pattern>
+	</rule>
+
+	<rule ref="MediaWiki.Commenting.PropertyDocumentation">
+		<exclude-pattern>/tests/</exclude-pattern>
 	</rule>
 
 	<!-- Starting a function's body with an empty line can be helpful after a very large header.

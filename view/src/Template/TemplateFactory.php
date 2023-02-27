@@ -19,7 +19,7 @@ class TemplateFactory {
 	 */
 	private $templateRegistry;
 
-	public static function getDefaultInstance() {
+	public static function getDefaultInstance(): self {
 		if ( self::$instance === null ) {
 			self::$instance = new self(
 				new TemplateRegistry( require __DIR__ . '/../../resources/templates.php' )

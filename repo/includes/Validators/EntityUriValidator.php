@@ -30,6 +30,7 @@ class EntityUriValidator implements ValueValidator {
 		$this->entityType = $entityType;
 	}
 
+	/** @inheritDoc */
 	public function validate( $value ): Result {
 		if ( !is_string( $value ) ) {
 			throw new InvalidArgumentException( 'Expected a string' );

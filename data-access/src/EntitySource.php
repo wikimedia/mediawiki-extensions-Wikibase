@@ -12,17 +12,17 @@ namespace Wikibase\DataAccess;
  */
 interface EntitySource {
 
-	public function getSourceName();
+	public function getSourceName(): string;
 
-	public function getEntityTypes();
+	public function getEntityTypes(): array;
 
-	public function getConceptBaseUri();
+	public function getConceptBaseUri(): string;
 
-	public function getRdfNodeNamespacePrefix();
+	public function getRdfNodeNamespacePrefix(): string;
 
-	public function getRdfPredicateNamespacePrefix();
+	public function getRdfPredicateNamespacePrefix(): string;
 
-	public function getInterwikiPrefix();
+	public function getInterwikiPrefix(): string;
 
-	public function getType();
+	public function getType(): string;
 }

@@ -29,7 +29,7 @@ class UserPreferredContentLanguagesLookup {
 	public function __construct(
 		ContentLanguages $contentLanguages,
 		UserLanguageLookup $userLanguageLookup,
-		$wikiDefaultContentLanguage
+		string $wikiDefaultContentLanguage
 	) {
 		$this->userLanguageLookup = $userLanguageLookup;
 		$this->contentLanguages = $contentLanguages;

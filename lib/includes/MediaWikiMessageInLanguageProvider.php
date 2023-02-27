@@ -11,6 +11,7 @@ use MediaWiki\Message\Message;
  */
 class MediaWikiMessageInLanguageProvider implements MessageInLanguageProvider {
 
+	/** @inheritDoc */
 	public function msgInLang( $key, $language, ...$params ): Message {
 		return wfMessage( $key, ...$params )->inLanguage( $language );
 	}
