@@ -159,6 +159,7 @@
 	"wikibase-validator-bad-value": "ערך נתונים בלתי־תקין: $1",
 	"wikibase-validator-bad-value-type": "סוג הערך $1 אינו נכון, זה היה אמור להיות $2",
 	"wikibase-validator-bad-data-type": "סוג נתונים שגוי: $1",
+	"wikibase-validator-bad-prefix": "ערך שגוי $1, מצופה להתחיל בתחילית $2",
 	"wikibase-validator-bad-url": "כתובות URL לא יכולות להכיל תווים מסוימים, למשל רווחים או סוגריים מרובעים: $1",
 	"wikibase-validator-url-scheme-missing": "בכתובת ה־URL הזאת חסר פרוטוקול, למשל \"<span dir=\"ltr\">http://</span>\" או \"<span dir=\"ltr\">https://</span>\": $1",
 	"wikibase-validator-bad-url-scheme": "פרוטוקול ה־URL&rlm; \"$1\" אינו נתמך.",

@@ -147,6 +147,7 @@
 	"wikibase-validator-bad-value": "Valor de datos corrumpite: $1",
 	"wikibase-validator-bad-value-type": "Typo de valor $1 incorrecte; expectava $2",
 	"wikibase-validator-bad-data-type": "Mal typo de datos: $1",
+	"wikibase-validator-bad-prefix": "Mal valor $1, expectava que illo comencia con $2",
 	"wikibase-validator-bad-url": "URLs non pote continer certe characteres como spatios o parentheses quadrate: $1",
 	"wikibase-validator-url-scheme-missing": "In iste URL manca un schema como \"https://\": $1",
 	"wikibase-validator-bad-url-scheme": "Le schema de URL \"$1\" non es supportate.",

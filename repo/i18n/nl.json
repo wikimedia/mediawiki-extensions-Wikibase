@@ -175,6 +175,7 @@
 	"wikibase-validator-bad-value": "Gegevenswaarde beschadigd: $1",
 	"wikibase-validator-bad-value-type": "Onjuist waardetype $1, verwacht was $2",
 	"wikibase-validator-bad-data-type": "Ongeldig gegevenstype: $1",
+	"wikibase-validator-bad-prefix": "Foute waarde $1, moest beginnen met $2",
 	"wikibase-validator-bad-url": "URL's mogen bepaalde tekens zoals spaties en vierkante haken niet bevatten: $1",
 	"wikibase-validator-url-scheme-missing": "Deze URL mist een protocol zoals \"https://\" of \"mailto:\": $1",
 	"wikibase-validator-bad-url-scheme": "Het URL-protocol \"$1\" wordt niet ondersteund.",

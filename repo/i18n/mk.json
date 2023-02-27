@@ -150,6 +150,7 @@
 	"wikibase-validator-bad-value": "Податочната вредност е оштетена: $1",
 	"wikibase-validator-bad-value-type": "Погрешен тип на вредност $1; се очкеува $2",
 	"wikibase-validator-bad-data-type": "Грешен податочен тип: $1",
+	"wikibase-validator-bad-prefix": "Неисправна вредност $1. Се очекуваше да почнува со $2",
 	"wikibase-validator-bad-url": "URL-адресите не смеат да содржат извесни знаци како што се празните места и квадратните загради: $1",
 	"wikibase-validator-url-scheme-missing": "На оваа URL ѝ недостасува шема како „https://“: $1",
 	"wikibase-validator-bad-url-scheme": "URL-шемата „$1“ не е поддржана.",
