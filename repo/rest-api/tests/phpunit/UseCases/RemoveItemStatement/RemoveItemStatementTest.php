@@ -22,10 +22,9 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatement;
-use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatementErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatementRequest;
-use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatementSuccessResponse;
 use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatementValidator;
+use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\StatementIdValidator;
@@ -111,9 +110,7 @@ class RemoveItemStatementTest extends TestCase {
 				)
 			);
 
-		$response = $this->newUseCase()->execute( $this->newUseCaseRequest( $requestData ) );
-
-		$this->assertInstanceOf( RemoveItemStatementSuccessResponse::class, $response );
+		$this->newUseCase()->execute( $this->newUseCaseRequest( $requestData ) );
 	}
 
 	public function testRemoveStatement_invalidRequest(): void {
@@ -126,90 +123,101 @@ class RemoveItemStatementTest extends TestCase {
 			'$itemId' => null,
 		];
 
-		$response = $this->newUseCase()->execute(
-			$this->newUseCaseRequest( $requestData )
-		);
-
-		$this->assertInstanceOf( RemoveItemStatementErrorResponse::class, $response );
-		$this->assertSame( ErrorResponse::INVALID_STATEMENT_ID, $response->getCode() );
+		try {
+			$this->newUseCase()->execute(
+				$this->newUseCaseRequest( $requestData )
+			);
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( ErrorResponse::INVALID_STATEMENT_ID, $e->getErrorCode() );
+			$this->assertSame( 'Not a valid statement ID: INVALID-STATEMENT-ID', $e->getErrorMessage() );
+		}
 	}
 
-	public function testRequestedItemNotFound_returnsItemNotFound(): void {
+	public function testRequestedItemNotFound_throwsItemNotFound(): void {
 		$this->revisionMetadataRetriever = $this->newItemMetadataRetriever( LatestItemRevisionMetadataResult::itemNotFound() );
-
-		$response = $this->newUseCase()->execute(
+		try {
+		$this->newUseCase()->execute(
 			$this->newUseCaseRequest( [
-				'$itemId' => 'Q42',
-				'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+				'$itemId' => 'Q999999',
+				'$statementId' => 'Q999999$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
 			] )
 		);
-
-		$this->assertInstanceOf( RemoveItemStatementErrorResponse::class, $response );
-		$this->assertSame( ErrorResponse::ITEM_NOT_FOUND, $response->getCode() );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( ErrorResponse::ITEM_NOT_FOUND, $e->getErrorCode() );
+			$this->assertSame( 'Could not find an item with the ID: Q999999', $e->getErrorMessage() );
+		}
 	}
 
-	public function testItemForStatementNotFound_returnsStatementNotFound(): void {
+	public function testItemForStatementNotFound_throwsStatementNotFound(): void {
 		$this->revisionMetadataRetriever = $this->newItemMetadataRetriever( LatestItemRevisionMetadataResult::itemNotFound() );
-
-		$response = $this->newUseCase()->execute(
-			$this->newUseCaseRequest( [
-				'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
-			] )
-		);
-
-		$this->assertInstanceOf( RemoveItemStatementErrorResponse::class, $response );
-		$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $response->getCode() );
+		$statementId = 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+		try {
+			$this->newUseCase()->execute(
+				$this->newUseCaseRequest( [
+					'$statementId' => $statementId,
+				] )
+			);
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $e->getErrorCode() );
+			$this->assertSame( "Could not find a statement with the ID: $statementId", $e->getErrorMessage() );
+		}
 	}
 
-	public function testItemForStatementIsRedirect_returnsStatementNotFound(): void {
+	public function testItemForStatementIsRedirect_throws(): void {
 		$this->revisionMetadataRetriever = $this->newItemMetadataRetriever(
 			LatestItemRevisionMetadataResult::redirect( new ItemId( 'Q321' ) )
 		);
-
-		$response = $this->newUseCase()->execute(
-			$this->newUseCaseRequest( [
-				'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
-			] )
-		);
-
-		$this->assertInstanceOf( RemoveItemStatementErrorResponse::class, $response );
-		$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $response->getCode() );
+		$statementId = 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+		try {
+			$this->newUseCase()->execute(
+				$this->newUseCaseRequest( [
+					'$statementId' => $statementId,
+				] )
+			);
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $e->getErrorCode() );
+			$this->assertSame( "Could not find a statement with the ID: $statementId", $e->getErrorMessage() );
+		}
 	}
 
-	public function testStatementIdMismatchingItemId_returnsStatementNotFound(): void {
+	public function testStatementIdMismatchingItemId_throws(): void {
 		$this->revisionMetadataRetriever = $this->newItemMetadataRetriever(
 			LatestItemRevisionMetadataResult::concreteRevision( 123, '20220708030405' )
 		);
-
-		$response = $this->newUseCase()->execute(
-			$this->newUseCaseRequest( [
-				'$itemId' => 'Q666',
-				'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
-			] )
-		);
-
-		$this->assertInstanceOf( RemoveItemStatementErrorResponse::class, $response );
-		$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $response->getCode() );
+		$statementId = 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+		try {
+			$this->newUseCase()->execute(
+				$this->newUseCaseRequest( [
+					'$itemId' => 'Q666',
+					'$statementId' => $statementId,
+				] )
+			);
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $e->getErrorCode() );
+			$this->assertSame( "Could not find a statement with the ID: $statementId", $e->getErrorMessage() );
+		}
 	}
 
-	public function testStatementNotFoundOnItem_returnsStatementNotFound(): void {
+	public function testStatementNotFoundOnItem_throws(): void {
 		$this->revisionMetadataRetriever = $this->newItemMetadataRetriever(
 			LatestItemRevisionMetadataResult::concreteRevision( 123, '20220708030405' )
 		);
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemRetriever->method( 'getItem' )->willReturn( NewItem::withId( 'Q42' )->build() );
-
-		$response = $this->newUseCase()->execute(
-			$this->newUseCaseRequest( [
-				'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
-			] )
-		);
-
-		$this->assertInstanceOf( RemoveItemStatementErrorResponse::class, $response );
-		$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $response->getCode() );
+		$statementId = 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+		try {
+			$this->newUseCase()->execute(
+				$this->newUseCaseRequest( [
+					'$statementId' => $statementId,
+				] )
+			);
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $e->getErrorCode() );
+			$this->assertSame( "Could not find a statement with the ID: $statementId", $e->getErrorMessage() );
+		}
 	}
 
-	public function testProtectedItem_returnsErrorResponse(): void {
+	public function testProtectedItem_throws(): void {
 		$itemId = new ItemId( 'Q123' );
 
 		$this->revisionMetadataRetriever = $this->newItemMetadataRetriever(
@@ -222,13 +230,16 @@ class RemoveItemStatementTest extends TestCase {
 			->with( User::newAnonymous(), $itemId )
 			->willReturn( false );
 
-		$response = $this->newUseCase()->execute(
-			$this->newUseCaseRequest( [
-				'$statementId' => "$itemId\$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
-			] )
-		);
-		$this->assertInstanceOf( RemoveItemStatementErrorResponse::class, $response );
-		$this->assertSame( ErrorResponse::PERMISSION_DENIED, $response->getCode() );
+		try {
+			$this->newUseCase()->execute(
+				$this->newUseCaseRequest( [
+					'$statementId' => "$itemId\$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+				] )
+			);
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( ErrorResponse::PERMISSION_DENIED, $e->getErrorCode() );
+			$this->assertSame( 'You have no permission to edit this item.', $e->getErrorMessage() );
+		}
 	}
 
 	private function newUseCase(): RemoveItemStatement {

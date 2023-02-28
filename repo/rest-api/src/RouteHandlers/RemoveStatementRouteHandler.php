@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\RouteHandlers;
 
-use LogicException;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\RequestInterface;
@@ -18,9 +17,8 @@ use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\RequestPreconditionCheck;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
 use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatement;
-use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatementErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatementRequest;
-use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatementSuccessResponse;
+use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -95,21 +93,21 @@ class RemoveStatementRouteHandler extends SimpleHandler {
 
 	public function runUseCase( string $statementId ): Response {
 		$requestBody = $this->getValidatedBody();
-		$useCaseResponse = $this->removeItemStatement->execute( new RemoveItemStatementRequest(
-			$statementId,
-			$requestBody[self::TAGS_BODY_PARAM] ?? self::TAGS_PARAM_DEFAULT,
-			$requestBody[self::BOT_BODY_PARAM] ?? self::BOT_PARAM_DEFAULT,
-			$requestBody[self::COMMENT_BODY_PARAM] ?? self::COMMENT_PARAM_DEFAULT,
-			$this->getUsername()
-		) );
-
-		if ( $useCaseResponse instanceof RemoveItemStatementSuccessResponse ) {
-			return $this->newSuccessHttpResponse();
-		} elseif ( $useCaseResponse instanceof RemoveItemStatementErrorResponse ) {
-			return $this->responseFactory->newErrorResponse( $useCaseResponse );
-		} else {
-			throw new LogicException( 'Received an unexpected use case result in ' . __CLASS__ );
+		try {
+			$this->removeItemStatement->execute(
+				new RemoveItemStatementRequest(
+					$statementId,
+					$requestBody[self::TAGS_BODY_PARAM] ?? self::TAGS_PARAM_DEFAULT,
+					$requestBody[self::BOT_BODY_PARAM] ?? self::BOT_PARAM_DEFAULT,
+					$requestBody[self::COMMENT_BODY_PARAM] ?? self::COMMENT_PARAM_DEFAULT,
+					$this->getUsername()
+				)
+			);
+		} catch ( UseCaseException $exception ) {
+			return $this->responseFactory->newErrorResponseFromException( $exception );
 		}
+
+		return $this->newSuccessHttpResponse();
 	}
 
 	public function getParamSettings(): array {
