@@ -127,8 +127,8 @@ class ReplaceItemStatementValidatorTest extends TestCase {
 		$expectedError = new ValidationError(
 			StatementValidator::CODE_INVALID_FIELD,
 			[
-				StatementValidator::CONTEXT_FIELD_NAME => 'property',
-				StatementValidator::CONTEXT_FIELD_VALUE => 'id',
+				StatementValidator::CONTEXT_FIELD_NAME => 'some-field',
+				StatementValidator::CONTEXT_FIELD_VALUE => 'foo',
 			]
 		);
 		$this->statementValidator = $this->createMock( StatementValidator::class );
@@ -151,8 +151,8 @@ class ReplaceItemStatementValidatorTest extends TestCase {
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
 			$this->assertSame( ErrorResponse::STATEMENT_DATA_INVALID_FIELD, $e->getErrorCode() );
-			$this->assertSame( 'Invalid input for \'property\'', $e->getErrorMessage() );
-			$this->assertSame( [ 'path' => 'property', 'value' => 'id' ], $e->getErrorContext() );
+			$this->assertSame( "Invalid input for 'some-field'", $e->getErrorMessage() );
+			$this->assertSame( [ 'path' => 'some-field', 'value' => 'foo' ], $e->getErrorContext() );
 		}
 	}
 
@@ -160,7 +160,7 @@ class ReplaceItemStatementValidatorTest extends TestCase {
 		$invalidStatement = [ 'this is' => 'not a valid statement' ];
 		$expectedError = new ValidationError(
 			StatementValidator::CODE_MISSING_FIELD,
-			[ StatementValidator::CONTEXT_FIELD_NAME => 'property' ]
+			[ StatementValidator::CONTEXT_FIELD_NAME => 'some-field' ]
 		);
 		$this->statementValidator = $this->createMock( StatementValidator::class );
 		$this->statementValidator->method( 'validate' )
@@ -183,10 +183,10 @@ class ReplaceItemStatementValidatorTest extends TestCase {
 		} catch ( UseCaseException $e ) {
 			$this->assertSame( ErrorResponse::STATEMENT_DATA_MISSING_FIELD, $e->getErrorCode() );
 			$this->assertSame(
-				'Mandatory field missing in the statement data: property',
+				'Mandatory field missing in the statement data: some-field',
 				$e->getErrorMessage()
 			);
-			$this->assertSame( [ 'path' => 'property' ], $e->getErrorContext() );
+			$this->assertSame( [ 'path' => 'some-field' ], $e->getErrorContext() );
 		}
 	}
 
