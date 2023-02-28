@@ -12,10 +12,10 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementsRetriever;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatements;
-use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatementsErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatementsRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatementsValidator;
-use Wikibase\Repo\RestApi\UseCases\ItemRedirectResponse;
+use Wikibase\Repo\RestApi\UseCases\ItemRedirectException;
+use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
 
@@ -102,27 +102,32 @@ class GetItemStatementsTest extends TestCase {
 		$this->assertSame( $expectedStatements, $response->getStatements() );
 	}
 
-	public function testGivenInvalidItemId_returnsErrorResponse(): void {
-		$response = $this->newUseCase()->execute(
-			new GetItemStatementsRequest( 'X321' )
-		);
+	public function testGivenInvalidItemId_throwsException(): void {
+		try {
+			$this->newUseCase()->execute( new GetItemStatementsRequest( 'X321' ) );
 
-		$this->assertInstanceOf( GetItemStatementsErrorResponse::class, $response );
-		$this->assertSame( ErrorResponse::INVALID_ITEM_ID, $response->getCode() );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( ErrorResponse::INVALID_ITEM_ID, $e->getErrorCode() );
+			$this->assertSame( 'Not a valid item ID: X321', $e->getErrorMessage() );
+		}
 	}
 
-	public function testItemNotFound_returnsErrorResponse(): void {
-		$itemId = 'Q123';
-
+	public function testItemNotFound_throwsException(): void {
 		$this->itemRevisionMetadataRetriever->method( 'getLatestRevisionMetadata' )
 			->willReturn( LatestItemRevisionMetadataResult::itemNotFound() );
-		$itemStatementsRequest = new GetItemStatementsRequest( $itemId );
-		$itemStatementsResponse = $this->newUseCase()->execute( $itemStatementsRequest );
-		$this->assertInstanceOf( GetItemStatementsErrorResponse::class, $itemStatementsResponse );
-		$this->assertSame( ErrorResponse::ITEM_NOT_FOUND, $itemStatementsResponse->getCode() );
+
+		try {
+			$this->newUseCase()->execute( new GetItemStatementsRequest( 'Q123' ) );
+
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( ErrorResponse::ITEM_NOT_FOUND, $e->getErrorCode() );
+			$this->assertSame( 'Could not find an item with the ID: Q123', $e->getErrorMessage() );
+		}
 	}
 
-	public function testGivenItemRedirect_returnsRedirectResponse(): void {
+	public function testGivenItemRedirect_throwsException(): void {
 		$redirectSource = 'Q123';
 		$redirectTarget = 'Q321';
 
@@ -130,10 +135,11 @@ class GetItemStatementsTest extends TestCase {
 			->method( 'getLatestRevisionMetadata' )
 			->willReturn( LatestItemRevisionMetadataResult::redirect( new ItemId( $redirectTarget ) ) );
 
-		$response = $this->newUseCase()->execute( new GetItemStatementsRequest( $redirectSource ) );
-
-		$this->assertInstanceOf( ItemRedirectResponse::class, $response );
-		$this->assertSame( $redirectTarget, $response->getRedirectTargetId() );
+		try{
+			$this->newUseCase()->execute( new GetItemStatementsRequest( $redirectSource ) );
+		} catch ( ItemRedirectException $e ) {
+			$this->assertSame( $redirectTarget, $e->getRedirectTargetId() );
+		}
 	}
 
 	private function newUseCase(): GetItemStatements {

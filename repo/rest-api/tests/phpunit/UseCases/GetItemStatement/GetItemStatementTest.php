@@ -77,17 +77,18 @@ class GetItemStatementTest extends TestCase {
 		$this->assertSame( $lastModified, $response->getLastModified() );
 	}
 
-	public function testGivenInvalidStatementId_throws(): void {
+	public function testGivenInvalidStatementId_throwsUseCaseException(): void {
+		$statementId = 'X123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 		try {
 			$this->newUseCase()->execute(
-				new GetItemStatementRequest( 'X123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
+				new GetItemStatementRequest( $statementId )
 			);
 
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
 			$this->assertSame( ErrorResponse::INVALID_STATEMENT_ID, $e->getErrorCode() );
 			$this->assertSame(
-				'Not a valid statement ID: X123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+				"Not a valid statement ID: {$statementId}",
 				$e->getErrorMessage()
 			);
 		}
