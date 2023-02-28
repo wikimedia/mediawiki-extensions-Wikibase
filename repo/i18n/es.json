@@ -358,7 +358,7 @@
 	"wikibase-entitypage-title": "Página de entidad",
 	"wikibase-entitypage-text": "Esta página redirige a la página de entidad en el repositorio al que pertenece. Proporcione el ID de la entidad en el URL, utilizando la sintaxis de subpágina.",
 	"wikibase-entitypage-bad-id": "Identificador no válido: $1.",
-	"wikibase-error-entity-too-big": "La entidad es demasiado grande. El tamáño máximo permitido es de $1.",
+	"wikibase-error-entity-too-big": "La entidad es demasiado grande. El tamaño máximo permitido es de $1.",
 	"wikibase-parse-error": "Valor con formato incorrecto.",
 	"wikibase-parse-error-coordinate": "El valor de coordenadas es incorrecto.",
 	"wikibase-parse-error-entity-id": "El identificador de la entidad es incorrecto.",

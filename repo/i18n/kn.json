@@ -5,6 +5,7 @@
 			"Omshivaprakash",
 			"Stryn",
 			"VASANTH S.N.",
+			"~aanzx",
 			"రహ్మానుద్దీన్"
 		]
 	},
@@ -13,6 +14,7 @@
 	"wikibase-cancel": "ರದ್ಧುಮಾಡು",
 	"wikibase-add": "ಸೇರಿಸು",
 	"wikibase-label-empty": "ಲೇಬಲ್ ಉಲ್ಲೇಖಿಸಲ್ಪಟ್ಟಿಲ್ಲ",
+	"wikibase-description-empty": "ಯಾವುದೇ ವಿವರಣೆಯನ್ನು ವಿವರಿಸಲಾಗಿಲ್ಲ",
 	"wikibase-diffview-rank": "ಶ್ರೇಣಿ",
 	"wikibase-diffview-label": "ಗುರುತು ಪಟ್ಟಿ",
 	"wikibase-diffview-description": "ವಿವರ",

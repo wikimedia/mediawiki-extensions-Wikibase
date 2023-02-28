@@ -79,7 +79,7 @@
 	"wikibase-error-invalid-entity-id": "El sistema no reconoce el identificador «$2». Utiliza un identificador de entidad válido.",
 	"wikibase-error-exceeded-entity-access-limit": "Se accedieron a demasiadas entidades de {{WBREPONAME}}.",
 	"unconnectedpages": "Páginas no conectadas a elementos",
-	"unconnectedpages-summary": "Esta página muestra páginas sin ningún elemento de datos conectado (en los espacios de nombres que admiten elementos conectados). La lista está ordenada por identificador de página de forma descendente, por lo que las páginas más nuevas se muestran primero.",
+	"unconnectedpages-summary": "Esta página muestra páginas sin ningún elemento de datos conectado (en los espacios de nombres que admiten elementos conectados).",
 	"wikibase-unconnectedpages-submit": "Mostrar páginas",
 	"pageswithbadges": "Páginas con insignias",
 	"pageswithbadges-summary": "Esta página muestra las páginas con insignias (p. ej., artículo bueno o artículo destacado). La lista está ordenada por identificador de página de forma descendente, por lo que las páginas nuevas se muestran primero.",
