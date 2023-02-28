@@ -412,7 +412,7 @@
 	"wikibase-entity-summary-undo": "razveljavitev redakcije $3 {{gender:$4|avtorja|avtorice|avtorja_ice}} [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|pogovor]])",
 	"wikibase-non-entity-diff": "Ni mogoče primerjati entitete z vsebino, ki ni entiteta.",
 	"wikibase-no-direct-editing": "Neposredno urejanje je v imenskem prostoru $1 onemogočeno",
-	"wikibase-noentity": "Ta predmet ne obstaja. Ali je kam izginil, lahko ugotovite s [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} pregledom povezanih dnevnikov].",
+	"wikibase-noentity": "Ta predmet ne obstaja. Kam je izginil, lahko ugotovite s [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} pregledom povezanih dnevnikov].",
 	"wikibase-noentity-createone": "Lahko tudi [[$1|ustvarite novega]].",
 	"wikibase-special-mergeitems-error-prefix": "Predmetov ni bilo mogoče združiti. Prišlo je do naslednje napake:",
 	"wikibase-listdatatypes-wikibase-item-head": "Predmet",
