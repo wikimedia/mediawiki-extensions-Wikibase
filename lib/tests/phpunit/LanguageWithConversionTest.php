@@ -2,8 +2,8 @@
 
 namespace Wikibase\Lib\Tests;
 
+use InvalidArgumentException;
 use MediaWikiIntegrationTestCase;
-use MWException;
 use Wikibase\Lib\LanguageWithConversion;
 
 /**
@@ -77,7 +77,7 @@ class LanguageWithConversionTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider provideFactoryException
 	 */
 	public function testFactoryCodeException( $langCode, $sourceLangCode ) {
-		$this->expectException( MWException::class );
+		$this->expectException( InvalidArgumentException::class );
 		LanguageWithConversion::factory( $langCode, $sourceLangCode );
 	}
 
@@ -85,7 +85,7 @@ class LanguageWithConversionTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider provideFactoryException
 	 */
 	public function testFactoryException( $langCode, $sourceLangCode ) {
-		$this->expectException( MWException::class );
+		$this->expectException( InvalidArgumentException::class );
 		LanguageWithConversion::factory( $langCode, $sourceLangCode );
 	}
 

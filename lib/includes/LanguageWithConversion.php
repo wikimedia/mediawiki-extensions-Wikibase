@@ -2,9 +2,9 @@
 
 namespace Wikibase\Lib;
 
+use InvalidArgumentException;
 use Language;
 use MediaWiki\MediaWikiServices;
-use MWException;
 
 /**
  * Object representing either a verbatim language or a converted language.
@@ -66,7 +66,7 @@ class LanguageWithConversion {
 	 * @param string $code Language code
 	 *
 	 * @return string Validated and normalized code.
-	 * @throws MWException on invalid code
+	 * @throws InvalidArgumentException on invalid code
 	 */
 	public static function validateLanguageCode( $code ) {
 		global $wgDummyLanguageCodes;
@@ -78,7 +78,7 @@ class LanguageWithConversion {
 		if ( !MediaWikiServices::getInstance()->getLanguageNameUtils()->isValidCode( $code )
 			|| strcspn( $code, ":/\\\000" ) !== strlen( $code )
 		) {
-			throw new MWException( __METHOD__ . ': invalid language code ' . $code );
+			throw new InvalidArgumentException( __METHOD__ . ': Invalid language code ' . $code );
 		}
 
 		return $code;
@@ -91,7 +91,7 @@ class LanguageWithConversion {
 	 * @param Language|string|null $sourceLanguage
 	 *          Source language (code) if this is a converted language, or null
 	 *
-	 * @throws MWException
+	 * @throws InvalidArgumentException
 	 * @return self
 	 */
 	public static function factory( $language, $sourceLanguage = null ) {
@@ -121,11 +121,11 @@ class LanguageWithConversion {
 			$parentLanguage = $langFactory->getParentLanguage( $languageCode );
 
 			if ( !$parentLanguage ) {
-				throw new MWException( __METHOD__ . ': $language does not support conversion' );
+				throw new InvalidArgumentException( __METHOD__ . ': $language does not support conversion' );
 			}
 
 			if ( !$langConvFactory->getLanguageConverter( $parentLanguage )->hasVariant( $sourceLanguageCode ) ) {
-				throw new MWException( __METHOD__ . ': given languages do not have the same parent language' );
+				throw new InvalidArgumentException( __METHOD__ . ': given languages do not have the same parent language' );
 			}
 		} else {
 			$parentLanguage = null;

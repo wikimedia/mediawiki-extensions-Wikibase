@@ -2,10 +2,10 @@
 
 namespace Wikibase\Lib\Tests;
 
+use InvalidArgumentException;
 use MediaWiki\Languages\LanguageFallback;
 use MediaWiki\MainConfigNames;
 use MediaWikiIntegrationTestCase;
-use MWException;
 use RequestContext;
 use User;
 use Wikibase\Lib\LanguageFallbackChainFactory;
@@ -309,7 +309,7 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 	 */
 	public function testNewFromLanguageCodeException( $languageCode ) {
 		$factory = $this->getLanguageFallbackChainFactory();
-		$this->expectException( MWException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$factory->newFromLanguageCode( $languageCode );
 	}
 
