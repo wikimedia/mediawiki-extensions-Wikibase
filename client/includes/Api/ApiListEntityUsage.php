@@ -71,7 +71,7 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 		IResultWrapper $res,
 		int $limit,
 		array $prop,
-		ApiPageSet $resultPageSet = null
+		?ApiPageSet $resultPageSet
 	): void {
 		$entry = [];
 		$count = 0;
@@ -93,7 +93,7 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 
 			if ( $previousRow !== null && $row->eu_page_id !== $previousRow->eu_page_id ) {
 				// finish previous entry: Let's add the data and check if it needs continuation
-				$fit = $this->formatPageData( $previousRow, $previousRow->eu_page_id, $entry, $result );
+				$fit = $this->formatPageData( $previousRow, intval( $previousRow->eu_page_id ), $entry, $result );
 				if ( !$fit ) {
 					$this->setContinueFromRow( $row );
 					break;
@@ -111,7 +111,7 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 
 		}
 		if ( $entry ) {
-			$this->formatPageData( $previousRow, $previousRow->eu_page_id, $entry, $result );
+			$this->formatPageData( $previousRow, intval( $previousRow->eu_page_id ), $entry, $result );
 		}
 	}
 
@@ -127,12 +127,9 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 		ApiResult::setArrayType( $entry, 'kvp', 'id' );
 	}
 
-	/**
-	 * @param int|string $pageId
-	 */
-	private function formatPageData( object $row, $pageId, array $entry, object $result ): bool {
+	private function formatPageData( object $row, int $pageId, array $entry, object $result ): bool {
 		$pageData = $this->addPageData( $row );
-		$result->addValue( [ 'query', 'pages' ], intval( $pageId ), $pageData );
+		$result->addValue( [ 'query', 'pages' ], $pageId, $pageData );
 		$fit = $this->addPageSubItems( $pageId, $entry );
 		return $fit;
 	}
