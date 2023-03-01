@@ -4,7 +4,7 @@ Date: 2022-05-09
 
 ## Status
 
-accepted
+superseded - The headline "Don't use serialized entities in response objects" still applies, but in [ADR 9] we changed to what is described as option 2 here.
 
 ## Context
 
@@ -27,3 +27,5 @@ Option 4 seems like the most practical approach. While we acknowledge that domai
 ## Consequences
 
 We will refactor the existing use cases to return (wrapped) entities instead of serialized entities. Serialization will happen in the presentation layer.
+
+[ADR 9]: @ref rest_adr_0009
