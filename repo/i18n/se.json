@@ -9,6 +9,7 @@
 	"wikibase-entity-property": "Iešvuohta",
 	"wikibase-edit": "rievdat",
 	"wikibase-save": "vurke",
+	"wikibase-cancel": "šluhtte",
 	"wikibase-add": "lasit",
 	"wikibase-addreference": "lasit gáldu",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Eará gielaide",
@@ -33,5 +34,7 @@
 	"wikibase-setlabeldescriptionaliases-label-label": "Namma:",
 	"wikibase-modifyterm-language": "Giellakoda:",
 	"wikibase-listdatatypes-wikibase-property-head": "Iešvuohta",
+	"wikibase-federated-properties-leaving-site-notice-cancel": "Šluhtte",
+	"wikibase-federated-properties-leaving-site-notice-checkbox-label": "Ale čájet dán dieđu fas",
 	"wikibase-federated-properties-edit-request-failed-notice-try-again": "Geahččal fas"
 }
