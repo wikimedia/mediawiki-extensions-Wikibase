@@ -50,6 +50,8 @@
 	"apihelp-query+wblistentityusage-example-simple": "{{doc-apihelp-example|query+wblistentityusage}}",
 	"apihelp-query+wblistentityusage-example-url": "{{doc-apihelp-example|query+wblistentityusage}}",
 	"apihelp-query+wblistentityusage-example-aspect": "{{doc-apihelp-example|query+wblistentityusage}}",
+	"apihelp-query+wblistentityusage-format-migration": "{{Technical}}\nAPI help message for deprecated wblistentityusage query API module parameters.\n\nParameters:\n* $1 - New name of the parameter in question.",
+	"wikibase-client-wblistentityusage-param-format-mix": "{{Technical}}\nAPI error message used by the wblistentityusage query API module.",
 	"apihelp-query+pageterms-description": "{{doc-apihelp-description|query+pageterms}}",
 	"apihelp-query+pageterms-summary": "{{doc-apihelp-summary|query+pageterms}}",
 	"apihelp-query+pageterms-example-simple": "{{doc-apihelp-example|query+pageterms}}",
