@@ -4,9 +4,10 @@ declare( strict_types=1 );
 
 namespace Wikibase\Client\Tests\Integration\Api;
 
+use ApiContinuationManager;
 use ApiMain;
 use ApiPageSet;
-use FauxRequest;
+use MediaWiki\Request\FauxRequest;
 use MediaWikiLangTestCase;
 use RequestContext;
 use Title;
@@ -27,14 +28,12 @@ use Wikibase\Client\WikibaseClient;
  */
 class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 
-	protected function setUp(): void {
-		$this->tablesUsed[] = 'wbc_entity_usage';
-		parent::setUp();
-
+	public function addDBDataOnce(): void {
+		$this->insertPages();
 		$this->insertEntityUsageData();
 	}
 
-	public function addDBDataOnce(): void {
+	private function insertPages(): void {
 		$dump = [
 			'page' => [
 				[
@@ -111,7 +110,7 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 			$repoLinker
 		);
 
-		$continuationManager = new \ApiContinuationManager( $main, [ $listEntityUsageModule ] );
+		$continuationManager = new ApiContinuationManager( $main, [ $listEntityUsageModule ] );
 		$main->setContinuationManager( $continuationManager );
 
 		return $listEntityUsageModule;
@@ -144,8 +143,6 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 		return [
 			'only Q3' => [
 				[
-					'action' => 'query',
-					'list' => 'wblistentityusage',
 					'wbeuentities' => 'Q3',
 				],
 				[ "11" => [
@@ -159,8 +156,6 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 			],
 			'two entities in two pages' => [
 				[
-					'action' => 'query',
-					'list' => 'wblistentityusage',
 					'wbeuentities' => 'Q3|Q5',
 				],
 				[ "11" => [
@@ -182,8 +177,6 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 			],
 			'continue' => [
 				[
-					'action' => 'query',
-					'list' => 'wblistentityusage',
 					'wbeuentities' => 'Q3|Q5',
 					'wbeucontinue' => '11|Q3|S',
 				],
@@ -206,8 +199,6 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 			],
 			'correctly finish pageination step between two pages' => [
 				[
-					'action' => 'query',
-					'list' => 'wblistentityusage',
 					'wbeuentities' => 'Q3|Q4|Q5',
 					'wbeulimit' => 2,
 				],
