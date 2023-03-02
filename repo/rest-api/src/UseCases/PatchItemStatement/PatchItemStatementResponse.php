@@ -7,7 +7,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
 /**
  * @license GPL-2.0-or-later
  */
-class PatchItemStatementSuccessResponse {
+class PatchItemStatementResponse {
 
 	private Statement $statement;
 	private string $lastModified;

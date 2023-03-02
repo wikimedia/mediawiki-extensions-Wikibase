@@ -33,13 +33,11 @@ use Wikibase\Repo\RestApi\Serialization\ReferenceSerializer;
 use Wikibase\Repo\RestApi\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatement;
-use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementRequest;
-use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementSuccessResponse;
+use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementResponse;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementValidator;
-use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
+use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Validation\StatementValidator;
-use Wikibase\Repo\RestApi\Validation\ValidationError;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
 use Wikibase\Repo\Tests\RestApi\Serialization\DeserializerFactory;
@@ -172,7 +170,7 @@ class PatchItemStatementTest extends TestCase {
 
 		$response = $this->newUseCase()->execute( $request );
 
-		$this->assertInstanceOf( PatchItemStatementSuccessResponse::class, $response );
+		$this->assertInstanceOf( PatchItemStatementResponse::class, $response );
 		$this->assertSame(
 			$updatedItem->getStatements()->getStatementById( $statementId ),
 			$response->getStatement()
@@ -181,103 +179,104 @@ class PatchItemStatementTest extends TestCase {
 		$this->assertSame( $postModificationRevisionId, $response->getRevisionId() );
 	}
 
-	public function testGivenInvalidRequest_returnsErrorResponse(): void {
-		$requestData = [
-			'$statementId' => 'INVALID-STATEMENT-ID',
-			'$patch' => [ 'INVALID-PATCH' ],
-			'$editTags' => [],
-			'$isBot' => false,
-			'$comment' => null,
-			'$username' => null,
-			'$itemId' => null,
-		];
+	public function testRequestedItemNotFound_throwsUseCaseException(): void {
+		$this->revisionMetadataRetriever = $this->newItemRevisionMetadataRetriever( LatestItemRevisionMetadataResult::itemNotFound() );
 
-		$request = $this->newUseCaseRequest( $requestData );
-		$this->useCaseValidator = $this->createStub( PatchItemStatementValidator::class );
-		$this->useCaseValidator
-			->method( 'validate' )
-			->with( $request )
-			->willReturn(
-				new ValidationError( ItemIdValidator::CODE_INVALID, [ ItemIdValidator::CONTEXT_VALUE => 'INVALID-ID' ] )
+		try {
+			$this->newUseCase()->execute(
+				$this->newUseCaseRequest( [
+					'$itemId' => 'Q42',
+					'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+					'$patch' => $this->getValidValueReplacingPatch(),
+				] )
 			);
-
-		$response = $this->newUseCase()->execute( $request );
-
-		$this->assertInstanceOf( PatchItemStatementErrorResponse::class, $response );
-		$this->assertSame( ErrorResponse::INVALID_ITEM_ID, $response->getCode() );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( ErrorResponse::ITEM_NOT_FOUND, $e->getErrorCode() );
+			$this->assertSame( 'Could not find an item with the ID: Q42', $e->getErrorMessage() );
+		}
 	}
 
-	public function testRequestedItemNotFound_returnsItemNotFound(): void {
+	public function testItemForStatementNotFound_throwsUseCaseException(): void {
 		$this->revisionMetadataRetriever = $this->newItemRevisionMetadataRetriever( LatestItemRevisionMetadataResult::itemNotFound() );
 
-		$response = $this->newUseCase()->execute(
-			$this->newUseCaseRequest( [
-				'$itemId' => 'Q42',
-				'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
-				'$patch' => $this->getValidValueReplacingPatch(),
-			] )
-		);
-
-		$this->assertInstanceOf( PatchItemStatementErrorResponse::class, $response );
-		$this->assertSame( ErrorResponse::ITEM_NOT_FOUND, $response->getCode() );
+		try {
+			$this->newUseCase()->execute(
+				$this->newUseCaseRequest( [
+					'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+					'$patch' => $this->getValidValueReplacingPatch(),
+				] )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $e->getErrorCode() );
+			$this->assertSame(
+				'Could not find a statement with the ID: Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+				$e->getErrorMessage()
+			);
+		}
 	}
 
-	public function testItemForStatementNotFound_returnsStatementNotFound(): void {
-		$this->revisionMetadataRetriever = $this->newItemRevisionMetadataRetriever( LatestItemRevisionMetadataResult::itemNotFound() );
-
-		$response = $this->newUseCase()->execute(
-			$this->newUseCaseRequest( [
-				'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
-				'$patch' => $this->getValidValueReplacingPatch(),
-			] )
-		);
-
-		$this->assertInstanceOf( PatchItemStatementErrorResponse::class, $response );
-		$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $response->getCode() );
-	}
-
-	public function testItemForStatementIsRedirect_returnsStatementNotFound(): void {
+	public function testItemForStatementIsRedirect_throwsUseCaseException(): void {
 		$this->revisionMetadataRetriever = $this->newItemRevisionMetadataRetriever(
 			LatestItemRevisionMetadataResult::redirect( new ItemId( 'Q321' ) )
 		);
 
-		$response = $this->newUseCase()->execute(
-			$this->newUseCaseRequest( [
-				'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
-				'$patch' => $this->getValidValueReplacingPatch(),
-			] )
-		);
-
-		$this->assertInstanceOf( PatchItemStatementErrorResponse::class, $response );
-		$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $response->getCode() );
+		try {
+			$this->newUseCase()->execute(
+				$this->newUseCaseRequest( [
+					'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+					'$patch' => $this->getValidValueReplacingPatch(),
+				] )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $e->getErrorCode() );
+			$this->assertSame(
+				'Could not find a statement with the ID: Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+				$e->getErrorMessage()
+			);
+		}
 	}
 
-	public function testStatementIdMismatchingItemId_returnsStatementNotFound(): void {
-		$response = $this->newUseCase()->execute(
-			$this->newUseCaseRequest( [
-				'$itemId' => 'Q666',
-				'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
-				'$patch' => $this->getValidValueReplacingPatch(),
-			] )
-		);
-
-		$this->assertInstanceOf( PatchItemStatementErrorResponse::class, $response );
-		$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $response->getCode() );
+	public function testStatementIdMismatchingItemId_throwsUseCaseException(): void {
+		try {
+			$this->newUseCase()->execute(
+				$this->newUseCaseRequest( [
+					'$itemId' => 'Q666',
+					'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+					'$patch' => $this->getValidValueReplacingPatch(),
+				] )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $e->getErrorCode() );
+			$this->assertSame(
+				'Could not find a statement with the ID: Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+				$e->getErrorMessage()
+			);
+		}
 	}
 
-	public function testStatementNotFoundOnItem_returnsStatementNotFound(): void {
+	public function testStatementNotFoundOnItem_throwsUseCaseException(): void {
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemRetriever->method( 'getItem' )->willReturn( NewItem::withId( 'Q42' )->build() );
 
-		$response = $this->newUseCase()->execute(
-			$this->newUseCaseRequest( [
-				'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
-				'$patch' => $this->getValidValueReplacingPatch(),
-			] )
-		);
-
-		$this->assertInstanceOf( PatchItemStatementErrorResponse::class, $response );
-		$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $response->getCode() );
+		try {
+			$this->newUseCase()->execute(
+				$this->newUseCaseRequest( [
+					'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+					'$patch' => $this->getValidValueReplacingPatch(),
+				] )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $e->getErrorCode() );
+			$this->assertSame(
+				'Could not find a statement with the ID: Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+				$e->getErrorMessage()
+			);
+		}
 	}
 
 	public function testRejectsPropertyIdChange(): void {
@@ -298,15 +297,21 @@ class PatchItemStatementTest extends TestCase {
 		$this->statementValidator = $this->createStub( StatementValidator::class );
 		$this->statementValidator->method( 'getValidatedStatement' )->willReturn( $patchedStatement );
 
-		$response = $this->newUseCase()->execute(
-			$this->newUseCaseRequest( [
-				'$statementId' => $guid,
-				'$patch' => [ [ 'op' => 'replace', 'path' => '/property/id', 'value' => 'P321' ] ],
-			] )
-		);
-
-		$this->assertInstanceOf( PatchItemStatementErrorResponse::class, $response );
-		$this->assertSame( ErrorResponse::INVALID_OPERATION_CHANGED_PROPERTY, $response->getCode() );
+		try {
+			$this->newUseCase()->execute(
+				$this->newUseCaseRequest( [
+					'$statementId' => $guid,
+					'$patch' => [ [ 'op' => 'replace', 'path' => '/property/id', 'value' => 'P321' ] ],
+				] )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( ErrorResponse::INVALID_OPERATION_CHANGED_PROPERTY, $e->getErrorCode() );
+			$this->assertSame(
+				'Cannot change the property of the existing statement',
+				$e->getErrorMessage()
+			);
+		}
 	}
 
 	public function testRejectsStatementIdChange(): void {
@@ -328,18 +333,24 @@ class PatchItemStatementTest extends TestCase {
 		$this->statementValidator = $this->createStub( StatementValidator::class );
 		$this->statementValidator->method( 'getValidatedStatement' )->willReturn( $patchedStatement );
 
-		$response = $this->newUseCase()->execute(
-			$this->newUseCaseRequest( [
-				'$statementId' => $originalGuid,
-				'$patch' => [ [ 'op' => 'replace', 'path' => '/id', 'value' => $newGuid ] ],
-			] )
-		);
-
-		$this->assertInstanceOf( PatchItemStatementErrorResponse::class, $response );
-		$this->assertSame( ErrorResponse::INVALID_OPERATION_CHANGED_STATEMENT_ID, $response->getCode() );
+		try {
+			$this->newUseCase()->execute(
+				$this->newUseCaseRequest( [
+					'$statementId' => $originalGuid,
+					'$patch' => [ [ 'op' => 'replace', 'path' => '/id', 'value' => $newGuid ] ],
+				] )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( ErrorResponse::INVALID_OPERATION_CHANGED_STATEMENT_ID, $e->getErrorCode() );
+			$this->assertSame(
+				'Cannot change the ID of the existing statement',
+				$e->getErrorMessage()
+			);
+		}
 	}
 
-	public function testGivenProtectedItem_returnsErrorResponse(): void {
+	public function testGivenProtectedItem_throwsUseCaseException(): void {
 		$itemId = new ItemId( 'Q123' );
 		$statementId = "$itemId\$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE";
 		[ $statementReadModel, $statementWriteModel ] = NewStatementReadModel::forProperty( self::STRING_PROPERTY )
@@ -361,30 +372,38 @@ class PatchItemStatementTest extends TestCase {
 		$this->statementRetriever = $this->createStub( ItemStatementRetriever::class );
 		$this->statementRetriever->method( 'getStatement' )->willReturn( $statementReadModel );
 
-		$response = $this->newUseCase()->execute(
-			$this->newUseCaseRequest( [
-				'$statementId' => $statementId,
-				'$patch' => $this->getValidValueReplacingPatch(),
-			] )
-		);
-		$this->assertInstanceOf( PatchItemStatementErrorResponse::class, $response );
-		$this->assertSame( ErrorResponse::PERMISSION_DENIED, $response->getCode() );
+		try {
+			$this->newUseCase()->execute(
+				$this->newUseCaseRequest( [
+					'$statementId' => $statementId,
+					'$patch' => $this->getValidValueReplacingPatch(),
+				] )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( ErrorResponse::PERMISSION_DENIED, $e->getErrorCode() );
+			$this->assertSame( 'You have no permission to edit this item.', $e->getErrorMessage() );
+		}
 	}
 
 	/**
 	 * @dataProvider inapplicablePatchProvider
 	 */
-	public function testGivenValidInapplicablePatch_returnsErrorResponse( array $patch, string $expectedErrorCode ): void {
+	public function testGivenValidInapplicablePatch_throwsUseCaseException( array $patch, string $expectedErrorCode ): void {
 		$statementId = new StatementGuid( new ItemId( 'Q123' ), 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 		$this->setRetrieversForItemWithStringStatement( $statementId );
-		$response = $this->newUseCase()->execute(
-			$this->newUseCaseRequest( [
-				'$statementId' => "$statementId",
-				'$patch' => $patch,
-			] )
-		);
-		$this->assertInstanceOf( PatchItemStatementErrorResponse::class, $response );
-		$this->assertSame( $expectedErrorCode, $response->getCode() );
+
+		try {
+			$this->newUseCase()->execute(
+				$this->newUseCaseRequest( [
+					'$statementId' => "$statementId",
+					'$patch' => $patch,
+				] )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( $expectedErrorCode, $e->getErrorCode() );
+		}
 	}
 
 	public function inapplicablePatchProvider(): Generator {
@@ -410,7 +429,7 @@ class PatchItemStatementTest extends TestCase {
 		];
 	}
 
-	public function testGivenPatchedStatementInvalid_returnsErrorResponse(): void {
+	public function testGivenPatchedStatementInvalid_throwsUseCaseException(): void {
 		$patch = [
 			[
 				'op' => 'remove',
@@ -421,14 +440,22 @@ class PatchItemStatementTest extends TestCase {
 		$statementId = new StatementGuid( new ItemId( 'Q123' ), 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 		$this->setRetrieversForItemWithStringStatement( $statementId );
 
-		$response = $this->newUseCase()->execute(
-			$this->newUseCaseRequest( [
-				'$statementId' => "$statementId",
-				'$patch' => $patch,
-			] )
-		);
-		$this->assertInstanceOf( PatchItemStatementErrorResponse::class, $response );
-		$this->assertSame( ErrorResponse::PATCHED_STATEMENT_MISSING_FIELD, $response->getCode() );
+		try {
+			$this->newUseCase()->execute(
+				$this->newUseCaseRequest( [
+					'$statementId' => "$statementId",
+					'$patch' => $patch,
+				] )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( ErrorResponse::PATCHED_STATEMENT_MISSING_FIELD, $e->getErrorCode() );
+			$this->assertSame(
+				'Mandatory field missing in the patched statement: property',
+				$e->getErrorMessage()
+			);
+			$this->assertSame( [ 'path' => 'property' ], $e->getErrorContext() );
+		}
 	}
 
 	private function newUseCase(): PatchItemStatement {
