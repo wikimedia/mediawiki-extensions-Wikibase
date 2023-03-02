@@ -15,7 +15,6 @@ use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\JsonPatchValidator;
 use Wikibase\Repo\RestApi\Validation\StatementIdValidator;
-use Wikibase\Repo\RestApi\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Validation\ValidationError;
 
 /**
@@ -46,7 +45,7 @@ class PatchItemStatementValidatorTest extends TestCase {
 	 *
 	 * @doesNotPerformAssertions
 	 */
-	public function testValidate_withValidRequest( array $requestData ): void {
+	public function testAssertValidRequest_withValidRequest( array $requestData ): void {
 		$this->newPatchItemStatementValidator()->assertValidRequest(
 			$this->newUseCaseRequest( $requestData )
 		);
@@ -78,25 +77,98 @@ class PatchItemStatementValidatorTest extends TestCase {
 		];
 	}
 
-	/**
-	 * @dataProvider provideValidationError
-	 */
-	public function testNewFromValidationError(
-		ValidationError $validationError,
-		string $expectedCode,
-		string $expectedMessage,
-		array $expectedContext
-	): void {
+	public function testAssertValidRequest_withInvalidItemId(): void {
+		$itemId = 'X123';
 		try {
-			PatchItemStatementValidator::throwUseCaseExceptionFromValidationError( $validationError );
+			$this->newPatchItemStatementValidator()->assertValidRequest(
+				$this->newUseCaseRequest( [
+					'$statementId' => 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+					'$patch' => [ 'valid' => 'patch' ],
+					'$editTags' => [],
+					'$isBot' => false,
+					'$comment' => null,
+					'$username' => null,
+					'$itemId' => $itemId,
+				] )
+			);
+			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
-			$this->assertSame( $expectedCode, $e->getErrorCode() );
-			$this->assertSame( $expectedMessage, $e->getErrorMessage() );
-			$this->assertSame( $expectedContext, $e->getErrorContext() );
+			$this->assertSame( UseCaseException::INVALID_ITEM_ID, $e->getErrorCode() );
+			$this->assertSame(
+				'Not a valid item ID: ' . $itemId,
+				$e->getErrorMessage()
+			);
 		}
 	}
 
-	public function provideValidationError(): Generator {
+	public function testAssertValidRequest_withInvalidStatementId(): void {
+		$itemId = 'Q123';
+		$statementId = $itemId . StatementGuid::SEPARATOR . 'INVALID-STATEMENT-ID';
+		try {
+			$this->newPatchItemStatementValidator()->assertValidRequest(
+				$this->newUseCaseRequest( [
+					'$statementId' => $statementId,
+					'$patch' => [ 'valid' => 'patch' ],
+					'$editTags' => [],
+					'$isBot' => false,
+					'$comment' => null,
+					'$username' => null,
+					'$itemId' => $itemId,
+				] )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( UseCaseException::INVALID_STATEMENT_ID, $e->getErrorCode() );
+			$this->assertSame(
+				'Not a valid statement ID: ' . $statementId,
+				$e->getErrorMessage()
+			);
+		}
+	}
+
+	/**
+	 * @dataProvider invalidPatchProvider
+	 */
+	public function testAssertValidRequest_withInvalidPatch(
+		ValidationError $validationError,
+		string $expectedErrorCode,
+		string $expectedErrorMessage,
+		?array $expectedErrorContext
+	): void {
+		$invalidPatch = [ 'this is' => 'not a valid patch' ];
+		$this->jsonPatchValidator = $this->createMock( JsonPatchValidator::class );
+		$this->jsonPatchValidator->method( 'validate' )
+			->with( $invalidPatch )
+			->willReturn( $validationError );
+
+		try {
+			$this->newPatchItemStatementValidator()->assertValidRequest(
+				$this->newUseCaseRequest( [
+					'$statementId' => 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+					'$patch' => $invalidPatch,
+					'$editTags' => [],
+					'$isBot' => false,
+					'$comment' => null,
+					'$username' => null,
+					'$itemId' => null,
+				] )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( $expectedErrorCode, $e->getErrorCode() );
+			$this->assertSame( $expectedErrorMessage, $e->getErrorMessage() );
+			$this->assertSame( $expectedErrorContext, $e->getErrorContext() );
+		}
+	}
+
+	public function invalidPatchProvider(): Generator {
+		yield 'from invalid patch' => [
+			new ValidationError( JsonPatchValidator::CODE_INVALID ),
+			UseCaseException::INVALID_PATCH,
+			'The provided patch is invalid',
+			null,
+		];
+
 		$context = [
 			JsonPatchValidator::CONTEXT_OPERATION => [ 'path' => '/a/b/c', 'value' => 'test' ],
 			JsonPatchValidator::CONTEXT_FIELD => 'op',
@@ -130,105 +202,9 @@ class PatchItemStatementValidatorTest extends TestCase {
 			"The value of 'op' must be of type string",
 			$context,
 		];
-
-		yield 'from invalid patched statement (invalid field)' => [
-			new ValidationError(
-				StatementValidator::CODE_INVALID_FIELD,
-				[ 'field' => 'rank', 'value' => 'not-a-valid-rank' ]
-			),
-			UseCaseException::PATCHED_STATEMENT_INVALID_FIELD,
-			"Invalid input for 'rank' in the patched statement",
-			[ 'path' => 'rank', 'value' => 'not-a-valid-rank' ],
-		];
-
-		yield 'from invalid patched statement (missing field)' => [
-			new ValidationError(
-				StatementValidator::CODE_MISSING_FIELD,
-				[ 'field' => 'property' ]
-			),
-			UseCaseException::PATCHED_STATEMENT_MISSING_FIELD,
-			'Mandatory field missing in the patched statement: property',
-			[ 'path' => 'property' ],
-		];
 	}
 
-	public function testValidate_withInvalidItemId(): void {
-		$itemId = 'X123';
-		try {
-			$this->newPatchItemStatementValidator()->assertValidRequest(
-				$this->newUseCaseRequest( [
-					'$statementId' => 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
-					'$patch' => [ 'valid' => 'patch' ],
-					'$editTags' => [],
-					'$isBot' => false,
-					'$comment' => null,
-					'$username' => null,
-					'$itemId' => $itemId,
-				] )
-			);
-			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
-			$this->assertSame( UseCaseException::INVALID_ITEM_ID, $e->getErrorCode() );
-			$this->assertSame(
-				'Not a valid item ID: ' . $itemId,
-				$e->getErrorMessage()
-			);
-		}
-	}
-
-	public function testValidate_withInvalidStatementId(): void {
-		$itemId = 'Q123';
-		$statementId = $itemId . StatementGuid::SEPARATOR . 'INVALID-STATEMENT-ID';
-		try {
-			$this->newPatchItemStatementValidator()->assertValidRequest(
-				$this->newUseCaseRequest( [
-					'$statementId' => $statementId,
-					'$patch' => [ 'valid' => 'patch' ],
-					'$editTags' => [],
-					'$isBot' => false,
-					'$comment' => null,
-					'$username' => null,
-					'$itemId' => $itemId,
-				] )
-			);
-			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
-			$this->assertSame( UseCaseException::INVALID_STATEMENT_ID, $e->getErrorCode() );
-			$this->assertSame(
-				'Not a valid statement ID: ' . $statementId,
-				$e->getErrorMessage()
-			);
-		}
-	}
-
-	public function testValidate_withInvalidPatch(): void {
-		$invalidPatch = [ 'this is' => 'not a valid patch' ];
-		$expectedError = new ValidationError( JsonPatchValidator::CODE_INVALID );
-		$this->jsonPatchValidator = $this->createMock( JsonPatchValidator::class );
-		$this->jsonPatchValidator->method( 'validate' )
-			->with( $invalidPatch )
-			->willReturn( $expectedError );
-
-		try {
-			$this->newPatchItemStatementValidator()->assertValidRequest(
-				$this->newUseCaseRequest( [
-					'$statementId' => 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
-					'$patch' => $invalidPatch,
-					'$editTags' => [],
-					'$isBot' => false,
-					'$comment' => null,
-					'$username' => null,
-					'$itemId' => null,
-				] )
-			);
-			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
-			$this->assertSame( UseCaseException::INVALID_PATCH, $e->getErrorCode() );
-			$this->assertSame( 'The provided patch is invalid', $e->getErrorMessage() );
-		}
-	}
-
-	public function testValidate_withCommentTooLong(): void {
+	public function testAssertValidRequest_withCommentTooLong(): void {
 		$comment = str_repeat( 'x', CommentStore::COMMENT_CHARACTER_LIMIT + 1 );
 		try {
 			$this->newPatchItemStatementValidator()->assertValidRequest(
@@ -252,7 +228,7 @@ class PatchItemStatementValidatorTest extends TestCase {
 		}
 	}
 
-	public function testValidate_withInvalidEditTags(): void {
+	public function testAssertValidRequest_withInvalidEditTags(): void {
 		$invalid = 'invalid';
 		try {
 			$this->newPatchItemStatementValidator()->assertValidRequest(

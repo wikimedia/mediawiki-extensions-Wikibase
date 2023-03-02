@@ -43,6 +43,7 @@ use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatement;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementValidator;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatements;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatementsValidator;
+use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchedStatementValidator;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatement;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementValidator;
 use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatement;
@@ -190,9 +191,9 @@ return [
 					ChangeTags::listExplicitlyDefinedTags()
 				)
 			),
+			new PatchedStatementValidator( new StatementValidator( WbRestApi::getStatementDeserializer( $services ) ) ),
 			new JsonDiffJsonPatcher(),
 			WbRestApi::getSerializerFactory( $services )->newStatementSerializer(),
-			new StatementValidator( WbRestApi::getStatementDeserializer( $services ) ),
 			new StatementGuidParser( new ItemIdParser() ),
 			$itemDataRetriever,
 			$itemDataRetriever,

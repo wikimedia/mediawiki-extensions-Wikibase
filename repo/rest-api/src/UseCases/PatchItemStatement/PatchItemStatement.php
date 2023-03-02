@@ -20,7 +20,6 @@ use Wikibase\Repo\RestApi\Domain\Services\JsonPatcher;
 use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
 use Wikibase\Repo\RestApi\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\UseCases\UseCaseException;
-use Wikibase\Repo\RestApi\Validation\StatementValidator;
 
 /**
  * @license GPL-2.0-or-later
@@ -28,9 +27,9 @@ use Wikibase\Repo\RestApi\Validation\StatementValidator;
 class PatchItemStatement {
 
 	private PatchItemStatementValidator $useCaseValidator;
+	private PatchedStatementValidator $patchedStatementValidator;
 	private JsonPatcher $jsonPatcher;
 	private StatementSerializer $statementSerializer;
-	private StatementValidator $statementValidator;
 	private StatementGuidParser $statementIdParser;
 	private ItemStatementRetriever $statementRetriever;
 	private ItemRetriever $itemRetriever;
@@ -40,9 +39,9 @@ class PatchItemStatement {
 
 	public function __construct(
 		PatchItemStatementValidator $useCaseValidator,
+		PatchedStatementValidator $patchedStatementValidator,
 		JsonPatcher $jsonPatcher,
 		StatementSerializer $statementSerializer,
-		StatementValidator $statementValidator,
 		StatementGuidParser $statementIdParser,
 		ItemStatementRetriever $statementRetriever,
 		ItemRetriever $itemRetriever,
@@ -51,8 +50,8 @@ class PatchItemStatement {
 		PermissionChecker $permissionChecker
 	) {
 		$this->useCaseValidator = $useCaseValidator;
+		$this->patchedStatementValidator = $patchedStatementValidator;
 		$this->statementSerializer = $statementSerializer;
-		$this->statementValidator = $statementValidator;
 		$this->statementRetriever = $statementRetriever;
 		$this->jsonPatcher = $jsonPatcher;
 		$this->statementIdParser = $statementIdParser;
@@ -125,12 +124,8 @@ class PatchItemStatement {
 			);
 		}
 
-		$postPatchValidationError = $this->statementValidator->validate( $patchedSerialization );
-		if ( $postPatchValidationError ) {
-			 PatchItemStatementValidator::throwUseCaseExceptionFromValidationError( $postPatchValidationError );
-		}
+		$patchedStatement = $this->patchedStatementValidator->validateAndDeserializeStatement( $patchedSerialization );
 
-		$patchedStatement = $this->statementValidator->getValidatedStatement();
 		$item = $this->itemRetriever->getItem( $itemId );
 
 		try {
