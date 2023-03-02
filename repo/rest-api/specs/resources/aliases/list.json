@@ -1,0 +1,24 @@
+{
+	"get": {
+		"tags": [ "aliases" ],
+		"summary": "[WIP] Retrieve an Item's aliases",
+		"description": "This endpoint is currently in development and is not recommended for production use.",
+		"parameters": [
+			{ "$ref": "../../global/parameters.json#/ItemId" },
+			{ "$ref": "../../global/parameters.json#/IfNoneMatch" },
+			{ "$ref": "../../global/parameters.json#/IfModifiedSince" },
+			{ "$ref": "../../global/parameters.json#/IfMatch" },
+			{ "$ref": "../../global/parameters.json#/IfUnmodifiedSince" },
+			{ "$ref": "../../global/parameters.json#/Authorization" }
+		],
+		"responses": {
+			"200": { "$ref": "../../global/responses.json#/ItemAliases" },
+			"304": { "$ref": "../../global/responses.json#/NotModified" },
+			"308": { "$ref": "../../global/responses.json#/Moved" },
+			"400": { "$ref": "../../global/responses.json#/InvalidItemIdInput" },
+			"404": { "$ref": "../../global/responses.json#/ItemNotFound" },
+			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
+			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
+		}
+	}
+}
