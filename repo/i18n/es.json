@@ -384,7 +384,7 @@
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, convertido desde $3 - $4",
 	"wikibase-api-failed-add-sitelink": "No se pudo guardar el enlace de sitio.",
 	"wikibase-api-failed-save": "Ha fallado el guardado.",
-	"wikibase-api-no-data": "No se ha encontrado ningún dato sobre el que operar",
+	"wikibase-api-no-data": "No hay datos para operar.",
 	"wikibase-api-no-external-page": "El sitio externo $1 no proporcionó información de la página \"$2\".",
 	"wikibase-api-no-such-entity": "No se encontró ninguna entidad con el identificador «$1».",
 	"wikibase-api-no-such-sitelink": "No se pudo encontrar un enlace de sitio a «$1» al tratar de editar insignias.",
