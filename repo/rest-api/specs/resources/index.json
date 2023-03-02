@@ -14,6 +14,9 @@
 	"/entities/items/{item_id}/labels": {
 		"$ref": "./labels/list.json"
 	},
+	"/entities/items/{item_id}/aliases": {
+		"$ref": "./aliases/list.json"
+	},
 	"/statements/{statement_id}": {
 		"$ref": "./statements/single.json"
 	}
