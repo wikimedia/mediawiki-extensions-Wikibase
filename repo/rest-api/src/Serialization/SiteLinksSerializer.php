@@ -9,7 +9,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\SiteLinks;
 /**
  * @license GPL-2.0-or-later
  */
-class SiteLinkListSerializer {
+class SiteLinksSerializer {
 
 	public function serialize( SiteLinks $siteLinks ): ArrayObject {
 		$serialization = new ArrayObject();
@@ -21,6 +21,7 @@ class SiteLinkListSerializer {
 					fn( ItemId $badge ) => $badge->getSerialization(),
 					$siteLink->getBadges()
 				),
+				'url' => $siteLink->getUrl(),
 			];
 		}
 

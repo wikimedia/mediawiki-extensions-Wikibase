@@ -13,14 +13,14 @@ class ItemDataSerializer {
 	private DescriptionsSerializer $descriptionsSerializer;
 	private AliasesSerializer $aliasesSerializer;
 	private StatementListSerializer $statementsSerializer;
-	private SiteLinkListSerializer $siteLinksSerializer;
+	private SiteLinksSerializer $siteLinksSerializer;
 
 	public function __construct(
 		LabelsSerializer $labelsSerializer,
 		DescriptionsSerializer $descriptionsSerializer,
 		AliasesSerializer $aliasesSerializer,
 		StatementListSerializer $statementsSerializer,
-		SiteLinkListSerializer $siteLinksSerializer
+		SiteLinksSerializer $siteLinksSerializer
 	) {
 		$this->labelsSerializer = $labelsSerializer;
 		$this->descriptionsSerializer = $descriptionsSerializer;

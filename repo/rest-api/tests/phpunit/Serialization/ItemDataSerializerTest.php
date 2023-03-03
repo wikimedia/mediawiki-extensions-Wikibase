@@ -22,7 +22,7 @@ use Wikibase\Repo\RestApi\Serialization\AliasesSerializer;
 use Wikibase\Repo\RestApi\Serialization\DescriptionsSerializer;
 use Wikibase\Repo\RestApi\Serialization\ItemDataSerializer;
 use Wikibase\Repo\RestApi\Serialization\LabelsSerializer;
-use Wikibase\Repo\RestApi\Serialization\SiteLinkListSerializer;
+use Wikibase\Repo\RestApi\Serialization\SiteLinksSerializer;
 use Wikibase\Repo\RestApi\Serialization\StatementListSerializer;
 
 /**
@@ -55,7 +55,7 @@ class ItemDataSerializerTest extends TestCase {
 	private $statementsSerializer;
 
 	/**
-	 * @var MockObject|SiteLinkListSerializer
+	 * @var MockObject|SiteLinksSerializer
 	 */
 	private $siteLinkListSerializer;
 
@@ -64,7 +64,7 @@ class ItemDataSerializerTest extends TestCase {
 		$this->descriptionsSerializer = $this->createStub( DescriptionsSerializer::class );
 		$this->aliasesSerializer = $this->createStub( AliasesSerializer::class );
 		$this->statementsSerializer = $this->createStub( StatementListSerializer::class );
-		$this->siteLinkListSerializer = $this->createStub( SiteLinkListSerializer::class );
+		$this->siteLinkListSerializer = $this->createStub( SiteLinksSerializer::class );
 	}
 
 	public function testSerializeId(): void {
@@ -179,7 +179,7 @@ class ItemDataSerializerTest extends TestCase {
 			->setSiteLinks( $siteLinks )
 			->build();
 
-		$this->siteLinkListSerializer = $this->createMock( SiteLinkListSerializer::class );
+		$this->siteLinkListSerializer = $this->createMock( SiteLinksSerializer::class );
 		$this->siteLinkListSerializer->expects( $this->once() )
 			->method( 'serialize' )
 			->with( $siteLinks )

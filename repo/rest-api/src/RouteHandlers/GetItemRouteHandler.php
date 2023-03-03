@@ -95,7 +95,7 @@ class GetItemRouteHandler extends SimpleHandler {
 		$httpResponse->setHeader( 'Last-Modified', wfTimestamp( TS_RFC2822, $useCaseResponse->getLastModified() ) );
 		$this->setEtagFromRevId( $httpResponse, $useCaseResponse->getRevisionId() );
 		$httpResponse->setBody( new StringStream(
-			json_encode( $this->itemDataSerializer->serialize( $useCaseResponse->getItemData() ) )
+			json_encode( $this->itemDataSerializer->serialize( $useCaseResponse->getItemData() ), JSON_UNESCAPED_SLASHES )
 		) );
 
 		return $httpResponse;
