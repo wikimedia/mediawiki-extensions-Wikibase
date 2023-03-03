@@ -3,6 +3,7 @@
 		"authors": [
 			"Babanwalia",
 			"Bgo eiu",
+			"Jagseer S Sidhu",
 			"Satdeep gill",
 			"Sony dandiwal",
 			"Tow"
@@ -16,6 +17,7 @@
 	"wikibase-linkitem-addlinks": "ਲਿੰਕ ਸ਼ਾਮਲ ਕਰੋ",
 	"wikibase-linkitem-title": "ਸਾਫ਼ੇ ਨਾਲ ਜੋੜੋ",
 	"wikibase-linkitem-linkpage": "ਸਾਫ਼ੇ ਨਾਲ ਜੋੜੋ",
+	"wikibase-linkitem-selectlink": "ਕਿਰਪਾ ਕਰਕੇ ਸਾਈਟ ਅਤੇ ਪੰਨਾ ਚੁਣੋ ਜਿਸਨੂੰ ਤੁਸੀਂ ਇਸ ਪੰਨੇ ਨਾਲ ਲਿੰਕ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ।",
 	"wikibase-linkitem-input-site": "ਭਾਸ਼ਾ:",
 	"wikibase-linkitem-input-page": "ਸਫ਼ਾ:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
