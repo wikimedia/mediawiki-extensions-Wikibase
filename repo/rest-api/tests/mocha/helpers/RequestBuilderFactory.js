@@ -9,6 +9,12 @@ module.exports = {
 			.withPathParam( 'item_id', itemId );
 	},
 
+	newGetItemAliasesRequestBuilder( itemId ) {
+		return new RequestBuilder()
+			.withRoute( 'GET', '/entities/items/{item_id}/aliases' )
+			.withPathParam( 'item_id', itemId );
+	},
+
 	newGetItemDescriptionsRequestBuilder( itemId ) {
 		return new RequestBuilder()
 			.withRoute( 'GET', '/entities/items/{item_id}/descriptions' )

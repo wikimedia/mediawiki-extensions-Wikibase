@@ -57,6 +57,7 @@ describe( 'Conditional requests', () => {
 
 	[
 		() => rbf.newGetItemRequestBuilder( itemId ),
+		() => rbf.newGetItemAliasesRequestBuilder( itemId ),
 		() => rbf.newGetItemDescriptionsRequestBuilder( itemId ),
 		() => rbf.newGetItemLabelsRequestBuilder( itemId ),
 		() => rbf.newGetItemStatementsRequestBuilder( itemId ),
