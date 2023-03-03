@@ -5,6 +5,8 @@ namespace Wikibase\Repo\Tests\RestApi\DataAccess;
 use Generator;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Site;
+use SiteLookup;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
@@ -19,6 +21,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\ItemDataBuilder;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
+use Wikibase\Repo\RestApi\Infrastructure\SiteLinksReadModelConverter;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -61,7 +64,10 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 			new StatementList( $this->newStatementReadModelConverter()->convert( $expectedStatement ) ),
 			$itemData->getStatements()
 		);
-		$this->assertSame( $item->getSiteLinkList(), $itemData->getSiteLinks() );
+		$this->assertEquals(
+			$this->newSiteLinksReadModelConverter()->convert( $item->getSiteLinkList() ),
+			$itemData->getSiteLinks()
+		);
 	}
 
 	public function testGivenItemDoesNotExist_getItemDataReturnsNull(): void {
@@ -129,7 +135,7 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 				->setDescriptions( Descriptions::fromTermList( $item->getDescriptions() ) )
 				->setAliases( $item->getAliasGroups() )
 				->setStatements( new StatementList( $this->newStatementReadModelConverter()->convert( $statement ) ) )
-				->setSiteLinks( $item->getSiteLinkList() )
+				->setSiteLinks( $this->newSiteLinksReadModelConverter()->convert( $item->getSiteLinkList() ) )
 				->build(),
 		];
 	}
@@ -248,7 +254,8 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 	private function newRetriever(): WikibaseEntityLookupItemDataRetriever {
 		return new WikibaseEntityLookupItemDataRetriever(
 			$this->entityLookup,
-			$this->newStatementReadModelConverter()
+			$this->newStatementReadModelConverter(),
+			$this->newSiteLinksReadModelConverter()
 		);
 	}
 
@@ -264,6 +271,16 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 
 	private function newStatementReadModelConverter(): StatementReadModelConverter {
 		return new StatementReadModelConverter( WikibaseRepo::getStatementGuidParser() );
+	}
+
+	private function newSiteLinksReadModelConverter(): SiteLinksReadModelConverter {
+		$site = new Site();
+		$site->setLinkPath( 'https://example.com/wiki/$1' );
+
+		$siteLookup = $this->createStub( SiteLookup::class );
+		$siteLookup->method( 'getSite' )->willReturn( $site );
+
+		return new SiteLinksReadModelConverter( $siteLookup );
 	}
 
 }

@@ -4,7 +4,6 @@ namespace Wikibase\Repo\RestApi\Domain\ReadModel;
 
 use LogicException;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Term\AliasGroupList;
 
 /**
@@ -18,7 +17,7 @@ class ItemDataBuilder {
 	private ?Descriptions $descriptions = null;
 	private ?AliasGroupList $aliases = null;
 	private ?StatementList $statements = null;
-	private ?SiteLinkList $siteLinks = null;
+	private ?SiteLinks $siteLinks = null;
 	private array $requestedFields;
 
 	public function __construct( ItemId $id, array $requestedFields ) {
@@ -61,7 +60,7 @@ class ItemDataBuilder {
 		return $this;
 	}
 
-	public function setSiteLinks( SiteLinkList $siteLinks ): self {
+	public function setSiteLinks( SiteLinks $siteLinks ): self {
 		$this->checkRequested( ItemData::FIELD_SITELINKS );
 		$this->siteLinks = $siteLinks;
 

@@ -5,8 +5,8 @@ namespace Wikibase\Repo\RestApi\Serialization;
 use ArrayObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\SiteLink;
-use Wikibase\DataModel\SiteLinkList;
+use Wikibase\Repo\RestApi\Domain\ReadModel\SiteLink;
+use Wikibase\Repo\RestApi\Domain\ReadModel\SiteLinks;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Serialization\SiteLinkListSerializer
@@ -18,17 +18,27 @@ use Wikibase\DataModel\SiteLinkList;
 class SiteLinkListSerializerTest extends TestCase {
 
 	public function testSerialize(): void {
-		$siteLink1 = new SiteLink( 'foo', 'bar' );
-		$siteLink2 = new SiteLink( 'omg', 'bbq', [ new ItemId( 'Q42' ) ] );
+		$siteLink1 = new SiteLink(
+			'dewiki',
+			'Kartoffel',
+			[],
+			'https://de.wikipedia.org/wiki/Kartoffel'
+		);
+		$siteLink2 = new SiteLink(
+			'enwiki',
+			'potato',
+			[ new ItemId( 'Q42' ) ],
+			'https://en.wikipedia.org/wiki/Potato'
+		);
 
 		$serializer = new SiteLinkListSerializer();
 
 		$this->assertEquals(
 			new ArrayObject( [
-				'foo' => [ 'title' => 'bar', 'badges' => [] ],
-				'omg' => [ 'title' => 'bbq', 'badges' => [ 'Q42' ] ],
+				'dewiki' => [ 'title' => 'Kartoffel', 'badges' => [] ],
+				'enwiki' => [ 'title' => 'potato', 'badges' => [ 'Q42' ] ],
 			] ),
-			$serializer->serialize( new SiteLinkList( [ $siteLink1, $siteLink2 ] ) )
+			$serializer->serialize( new SiteLinks( $siteLink1, $siteLink2 ) )
 		);
 	}
 
@@ -36,7 +46,7 @@ class SiteLinkListSerializerTest extends TestCase {
 		$serializer = new SiteLinkListSerializer();
 		$this->assertEquals(
 			new ArrayObject(),
-			$serializer->serialize( new SiteLinkList() )
+			$serializer->serialize( new SiteLinks() )
 		);
 	}
 

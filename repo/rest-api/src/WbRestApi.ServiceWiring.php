@@ -20,6 +20,7 @@ use Wikibase\Repo\RestApi\Infrastructure\DataValuesValueDeserializer;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatchValidator;
+use Wikibase\Repo\RestApi\Infrastructure\SiteLinksReadModelConverter;
 use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
@@ -145,7 +146,8 @@ return [
 	'WbRestApi.ItemDataRetriever' => function( MediaWikiServices $services ): ItemDataRetriever {
 		return new WikibaseEntityLookupItemDataRetriever(
 			WikibaseRepo::getEntityLookup( $services ),
-			new StatementReadModelConverter( WikibaseRepo::getStatementGuidParser( $services ) )
+			new StatementReadModelConverter( WikibaseRepo::getStatementGuidParser( $services ) ),
+			new SiteLinksReadModelConverter( $services->getSiteLookup() )
 		);
 	},
 

@@ -33,10 +33,12 @@ class SiteLinksReadModelConverter {
 		);
 	}
 
-	private function buildUrl( string $site, string $title ): string {
-		$site = $this->siteLookup->getSite( $site );
+	private function buildUrl( string $siteId, string $title ): string {
+		$site = $this->siteLookup->getSite( $siteId );
 
-		return $site->getPageUrl( $title );
+		// Defaulting to '' here is a temporary hack in case the site doesn't have a URL configured. This shouldn't happen in reality but is
+		// currently the case in our CI wiki.
+		return $site->getPageUrl( $title ) ?? '';
 	}
 
 }

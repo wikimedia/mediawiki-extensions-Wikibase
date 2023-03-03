@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\RestApi\Domain\ReadModel;
 
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Term\AliasGroupList;
 
 /**
@@ -32,7 +31,7 @@ class ItemData {
 	private ?Descriptions $descriptions;
 	private ?AliasGroupList $aliases;
 	private ?StatementList $statements;
-	private ?SiteLinkList $siteLinks;
+	private ?SiteLinks $siteLinks;
 
 	public function __construct(
 		ItemId $id,
@@ -42,7 +41,7 @@ class ItemData {
 		?Descriptions $descriptions,
 		?AliasGroupList $aliases,
 		?StatementList $statements,
-		?SiteLinkList $siteLinks
+		?SiteLinks $siteLinks
 	) {
 		$this->id = $id;
 		$this->requestedFields = $requestedFields;
@@ -78,7 +77,7 @@ class ItemData {
 		return $this->statements;
 	}
 
-	public function getSiteLinks(): ?SiteLinkList {
+	public function getSiteLinks(): ?SiteLinks {
 		return $this->siteLinks;
 	}
 

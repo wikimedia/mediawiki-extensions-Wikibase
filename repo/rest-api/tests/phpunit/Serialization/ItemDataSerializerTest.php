@@ -8,7 +8,6 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
@@ -17,6 +16,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\ItemData;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemDataBuilder;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
+use Wikibase\Repo\RestApi\Domain\ReadModel\SiteLinks;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Serialization\DescriptionsSerializer;
 use Wikibase\Repo\RestApi\Serialization\ItemDataSerializer;
@@ -170,7 +170,7 @@ class ItemDataSerializerTest extends TestCase {
 	}
 
 	public function testSerializeSiteLinks(): void {
-		$siteLinks = $this->createStub( SiteLinkList::class );
+		$siteLinks = $this->createStub( SiteLinks::class );
 		$expectedSerialization = new ArrayObject( [ 'some' => 'serialization' ] );
 
 		$itemData = $this->newItemDataBuilderWithSomeId( [ ItemData::FIELD_SITELINKS ] )
@@ -232,7 +232,7 @@ class ItemDataSerializerTest extends TestCase {
 				->setDescriptions( new Descriptions() )
 				->setAliases( new AliasGroupList() )
 				->setStatements( new StatementList() )
-				->setSiteLinks( new SiteLinkList() )
+				->setSiteLinks( new SiteLinks() )
 				->build(),
 			[ 'id', 'type', 'labels', 'descriptions', 'aliases', 'statements', 'sitelinks' ],
 		];
