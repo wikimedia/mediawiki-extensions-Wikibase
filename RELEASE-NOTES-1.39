@@ -1,53 +1,23 @@
 = Wikibase 1.39 =
 
-This is not a release yet!
-
 == Upgrading notes for 1.39 ==
 
 Don't forget to always back up your database before upgrading!
-Some specific notes for Wikibase 1.39 upgrades are below:
-
-...
 
 For a general manual to upgrade MediaWiki see:
 
 https://www.mediawiki.org/wiki/Manual:Upgrading
 
-=== Configuration changes for system administrators in 1.39 ===
-
-==== New configuration ====
-
-* ...
-
-==== Changed configuration ====
-
-* ...
-
-==== Removed configuration ====
-
-* ...
-
-=== New user-facing features in 1.39 ===
-
-* ...
-
 === External library changes in 1.39 ===
 
 ==== New external libraries ====
 
-* ...
+* "symfony/polyfill-php73": "^1.26.0"
+* "swaggest/json-diff": "^3.9"
 
 ==== Changed external libraries ====
 
-* ...
-
-==== Removed external libraries ====
-
-* (T12345) ...
-
-=== Bug fixes in 1.39 ===
-
-* (T12345) ...
+* "wikimedia/timestamp": "^4.0.0"
 
 === Action API changes in 1.39 ===
 
@@ -56,38 +26,22 @@ Each of those will contain a `text` and a `language` key with the respective dat
 The top-level `label`, `description` and `aliases` keys of each result are now considered deprecated and should no longer be used.
 See also the official [https://lists.wikimedia.org/hyperkitty/list/wikidata-tech@lists.wikimedia.org/thread/3LA6FDOZGSK6HSQY73XCFNT4BTYWOY64/ significant change announcement].
 
-* (T12345) ...
-
 === Languages updated in 1.39 ===
 
 Wikibase supports over 300 languages. Many localisations are updated regularly.
 Below only new and removed languages are listed, as well as changes to languages
 because of Phabricator reports.
-New monolingual support:
-
-* (T12345) ...
-
-Monolingual entries removed as they are now natively supported by MediaWiki:
-
-* (T12345) ...
 
 === Breaking changes in 1.39 ===
 
 * (T114577) The maintenance script populateInterwiki.php was removed, use the same script from core.
 * (T140850) The php entry point were removed, use wfLoadExtension instead.
-* (T12345) ...
 
 === Deprecations in 1.39 ===
 
 * (T312222) The LanguageFallbackLabelDescriptionLookupFactory service is deprecated.
 Use the new FallbackLabelDescriptionLookupFactory service instead:
 it has a very similar interface, but returns lookups that also resolve redirects.
-
-* (T12345) ...
-
-=== Other changes in 1.39 ===
-
-* (T12345) ...
 
 == Online documentation ==
 
