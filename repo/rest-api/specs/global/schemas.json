@@ -79,6 +79,9 @@
 			"badges": {
 				"type": "array",
 				"items": { "type": "string" }
+			},
+			"url": {
+				"type": "string"
 			}
 		}
 	},

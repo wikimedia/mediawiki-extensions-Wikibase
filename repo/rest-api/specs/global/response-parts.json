@@ -7,7 +7,7 @@
 				"properties": {
 					"sitelinks": {
 						"additionalProperties": {
-							"required": [ "title", "badges" ]
+							"required": [ "title", "badges", "url" ]
 						}
 					},
 					"statements": {
