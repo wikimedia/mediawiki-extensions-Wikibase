@@ -11,11 +11,11 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 class LabelsSerializer {
 
 	public function serialize( Labels $labels ): ArrayObject {
-		$serialization = [];
+		$serialization = new ArrayObject();
 		foreach ( $labels as $languageCode => $label ) {
 			$serialization[$languageCode] = $label->getText();
 		}
-		return new ArrayObject( $serialization );
+		return $serialization;
 	}
 
 }

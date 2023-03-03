@@ -11,11 +11,11 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 class AliasesSerializer {
 
 	public function serialize( Aliases $aliases ): ArrayObject {
-		$serialization = [];
+		$serialization = new ArrayObject();
 		foreach ( $aliases as $languageCode => $aliasesInLanguage ) {
 			$serialization[$languageCode] = $aliasesInLanguage->getAliases();
 		}
-		return new ArrayObject( $serialization );
+		return $serialization;
 	}
 
 }
