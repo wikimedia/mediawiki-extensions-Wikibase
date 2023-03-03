@@ -11,11 +11,11 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 class DescriptionsSerializer {
 
 	public function serialize( Descriptions $descriptions ): ArrayObject {
-		$serialization = [];
+		$serialization = new ArrayObject();
 		foreach ( $descriptions as $languageCode => $description ) {
 			$serialization[$languageCode] = $description->getText();
 		}
-		return new ArrayObject( $serialization );
+		return $serialization;
 	}
 
 }

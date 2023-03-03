@@ -26,7 +26,6 @@ class StatementSerializer {
 	}
 
 	public function serialize( Statement $statement ): array {
-
 		return array_merge(
 			[
 				'id' => (string)$statement->getGuid(),
