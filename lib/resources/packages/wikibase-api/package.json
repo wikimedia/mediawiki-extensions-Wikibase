@@ -28,7 +28,7 @@
 		"wikibase-data-values": "^0.10.0"
 	},
 	"devDependencies": {
-		"eslint-config-wikimedia": "0.20.0",
+		"eslint-config-wikimedia": "0.24.0",
 		"grunt": "1.6.1",
 		"grunt-contrib-qunit": "^5.1.0",
 		"grunt-eslint": "24.0.1",
