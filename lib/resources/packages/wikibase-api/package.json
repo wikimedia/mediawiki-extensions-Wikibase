@@ -34,6 +34,6 @@
 		"grunt-eslint": "24.0.1",
 		"phantomjs-prebuilt": "^2.1.16",
 		"qunit": "^2.16.0",
-		"sinon": "^13.0.0"
+		"sinon": "^15.0.1"
 	}
 }
