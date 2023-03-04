@@ -26,20 +26,20 @@ Style/Encoding:
 # Configuration parameters: MinBodyLength.
 Style/GuardClause:
   Exclude:
-    - 'tests/browser/features/support/modules/uls_module.rb'
-    - 'tests/browser/features/support/pages/login_page.rb'
+    - "tests/browser/features/support/modules/uls_module.rb"
+    - "tests/browser/features/support/pages/login_page.rb"
 
 # Offense count: 7
 # Cop supports --auto-correct.
 # Configuration parameters: MaxLineLength.
 Style/IfUnlessModifier:
   Exclude:
-    - 'tests/browser/features/support/env.rb'
-    - 'tests/browser/features/support/modules/alias_module.rb'
-    - 'tests/browser/features/support/modules/entity_module.rb'
-    - 'tests/browser/features/support/modules/reference_module.rb'
-    - 'tests/browser/features/support/modules/sitelink_module.rb'
-    - 'tests/browser/features/support/pages/login_page.rb'
+    - "tests/browser/features/support/env.rb"
+    - "tests/browser/features/support/modules/alias_module.rb"
+    - "tests/browser/features/support/modules/entity_module.rb"
+    - "tests/browser/features/support/modules/reference_module.rb"
+    - "tests/browser/features/support/modules/sitelink_module.rb"
+    - "tests/browser/features/support/pages/login_page.rb"
 
 # Offense count: 2
 # Cop supports --auto-correct.
@@ -47,6 +47,6 @@ Style/IfUnlessModifier:
 # SupportedStyles: predicate, comparison
 Style/NumericPredicate:
   Exclude:
-    - 'spec/**/*'
-    - 'tests/browser/features/step_definitions/aliases_steps.rb'
-    - 'tests/browser/features/support/modules/entity_module.rb'
+    - "spec/**/*"
+    - "tests/browser/features/step_definitions/aliases_steps.rb"
+    - "tests/browser/features/support/modules/entity_module.rb"
