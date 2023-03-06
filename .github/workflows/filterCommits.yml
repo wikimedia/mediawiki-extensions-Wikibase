@@ -38,7 +38,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: git-monorepo-splice
-        uses: wmde/git-monorepo-splice-docker-action@v1
+        uses: wmde/git-monorepo-splice-docker-action@v2
         with:
           privateKey: ${{ secrets.SSH_PRIVATE_KEY_DATAMODEL }}
           targetOrg: wmde
@@ -57,7 +57,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: git-monorepo-splice
-        uses: wmde/git-monorepo-splice-docker-action@v1
+        uses: wmde/git-monorepo-splice-docker-action@v2
         with:
           privateKey: ${{ secrets.SSH_PRIVATE_KEY_DATAMODEL_SERVICES }}
           targetOrg: wmde
@@ -76,7 +76,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: git-monorepo-splice
-        uses: wmde/git-monorepo-splice-docker-action@v1
+        uses: wmde/git-monorepo-splice-docker-action@v2
         with:
           privateKey: ${{ secrets.SSH_PRIVATE_KEY_DATAMODEL_SERIALIZATION }}
           targetOrg: wmde
@@ -95,7 +95,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: git-monorepo-splice
-        uses: wmde/git-monorepo-splice-docker-action@v1
+        uses: wmde/git-monorepo-splice-docker-action@v2
         with:
           privateKey: ${{ secrets.SSH_PRIVATE_KEY_INTERNAL_SERIALIZATION }}
           targetOrg: wmde
