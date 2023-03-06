@@ -43,7 +43,7 @@
 		"eslint-config-wikimedia": "0.22.1",
 		"grunt": "1.6.1",
 		"grunt-banana-checker": "0.10.0",
-		"grunt-eslint": "24.0.0",
+		"grunt-eslint": "24.0.1",
 		"grunt-stylelint": "^0.18.0",
 		"jest": "^29.3.1",
 		"mocha": "^10.2.0",
