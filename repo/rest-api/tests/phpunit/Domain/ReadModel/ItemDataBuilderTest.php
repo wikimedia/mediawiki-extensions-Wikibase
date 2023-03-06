@@ -7,7 +7,7 @@ use LogicException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Term\AliasGroupList;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemData;
@@ -60,7 +60,7 @@ class ItemDataBuilderTest extends TestCase {
 	}
 
 	public function testAliases(): void {
-		$aliases = new AliasGroupList();
+		$aliases = new Aliases();
 		$itemData = $this->newBuilderWithSomeId( [ ItemData::FIELD_ALIASES ] )
 			->setAliases( $aliases )
 			->build();
@@ -87,7 +87,7 @@ class ItemDataBuilderTest extends TestCase {
 		$type = Item::ENTITY_TYPE;
 		$labels = new Labels( new Label( 'en', 'potato' ) );
 		$descriptions = new Descriptions( new Description( 'en', 'root vegetable' ) );
-		$aliases = new AliasGroupList();
+		$aliases = new Aliases();
 		$statements = new StatementList();
 		$siteLinks = new SiteLinks();
 
@@ -143,7 +143,7 @@ class ItemDataBuilderTest extends TestCase {
 		yield 'aliases' => [
 			ItemData::FIELD_ALIASES,
 			'setAliases',
-			new AliasGroupList(),
+			new Aliases(),
 		];
 
 		yield 'statements' => [

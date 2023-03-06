@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\RestApi\Domain\ReadModel;
 
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Term\AliasGroupList;
 
 /**
  * @license GPL-2.0-or-later
@@ -29,7 +28,7 @@ class ItemData {
 	private ?string $type;
 	private ?Labels $labels;
 	private ?Descriptions $descriptions;
-	private ?AliasGroupList $aliases;
+	private ?Aliases $aliases;
 	private ?StatementList $statements;
 	private ?SiteLinks $siteLinks;
 
@@ -39,7 +38,7 @@ class ItemData {
 		?string $type,
 		?Labels $labels,
 		?Descriptions $descriptions,
-		?AliasGroupList $aliases,
+		?Aliases $aliases,
 		?StatementList $statements,
 		?SiteLinks $siteLinks
 	) {
@@ -69,7 +68,7 @@ class ItemData {
 		return $this->descriptions;
 	}
 
-	public function getAliases(): ?AliasGroupList {
+	public function getAliases(): ?Aliases {
 		return $this->aliases;
 	}
 

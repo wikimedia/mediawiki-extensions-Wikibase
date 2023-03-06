@@ -8,8 +8,8 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Term\AliasGroup;
-use Wikibase\DataModel\Term\AliasGroupList;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
+use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemData;
@@ -18,6 +18,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\SiteLinks;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
+use Wikibase\Repo\RestApi\Serialization\AliasesSerializer;
 use Wikibase\Repo\RestApi\Serialization\DescriptionsSerializer;
 use Wikibase\Repo\RestApi\Serialization\ItemDataSerializer;
 use Wikibase\Repo\RestApi\Serialization\LabelsSerializer;
@@ -44,6 +45,11 @@ class ItemDataSerializerTest extends TestCase {
 	private $descriptionsSerializer;
 
 	/**
+	 * @var MockObject|AliasesSerializer
+	 */
+	private $aliasesSerializer;
+
+	/**
 	 * @var MockObject|StatementListSerializer
 	 */
 	private $statementsSerializer;
@@ -56,6 +62,7 @@ class ItemDataSerializerTest extends TestCase {
 	protected function setUp(): void {
 		$this->labelsSerializer = $this->createStub( LabelsSerializer::class );
 		$this->descriptionsSerializer = $this->createStub( DescriptionsSerializer::class );
+		$this->aliasesSerializer = $this->createStub( AliasesSerializer::class );
 		$this->statementsSerializer = $this->createStub( StatementListSerializer::class );
 		$this->siteLinkListSerializer = $this->createStub( SiteLinkListSerializer::class );
 	}
@@ -130,16 +137,19 @@ class ItemDataSerializerTest extends TestCase {
 		$enAliases = [ 'spud', 'tater' ];
 		$deAliases = [ 'Erdapfel' ];
 		$itemData = $this->newItemDataBuilderWithSomeId( [ ItemData::FIELD_ALIASES ] )
-			->setAliases( new AliasGroupList( [
-				new AliasGroup( 'en', $enAliases ),
-				new AliasGroup( 'de', $deAliases ),
-			] ) )
+			->setAliases( new Aliases(
+				new AliasesInLanguage( 'en', $enAliases ),
+				new AliasesInLanguage( 'de', $deAliases ),
+			) )
 			->build();
+
+		$expectedAliasesSerialization = new ArrayObject( [ 'en' => $enAliases, 'de' => $deAliases ] );
+		$this->aliasesSerializer = $this->createStub( AliasesSerializer::class );
+		$this->aliasesSerializer->method( 'serialize' )->willReturn( $expectedAliasesSerialization );
 
 		$serialization = $this->newSerializer()->serialize( $itemData );
 
-		$this->assertSame( $enAliases, $serialization['aliases']['en'] );
-		$this->assertSame( $deAliases, $serialization['aliases']['de'] );
+		$this->assertSame( $expectedAliasesSerialization, $serialization['aliases'] );
 	}
 
 	public function testSerializeStatements(): void {
@@ -207,7 +217,7 @@ class ItemDataSerializerTest extends TestCase {
 			)
 				->setLabels( new Labels() )
 				->setDescriptions( new Descriptions() )
-				->setAliases( new AliasGroupList() )
+				->setAliases( new Aliases() )
 				->build(),
 			[ 'id', 'labels', 'descriptions', 'aliases' ],
 		];
@@ -222,7 +232,7 @@ class ItemDataSerializerTest extends TestCase {
 				->setType( Item::ENTITY_TYPE )
 				->setLabels( new Labels() )
 				->setDescriptions( new Descriptions() )
-				->setAliases( new AliasGroupList() )
+				->setAliases( new Aliases() )
 				->setStatements( new StatementList() )
 				->setSiteLinks( new SiteLinks() )
 				->build(),
@@ -234,6 +244,7 @@ class ItemDataSerializerTest extends TestCase {
 		return new ItemDataSerializer(
 			$this->labelsSerializer,
 			$this->descriptionsSerializer,
+			$this->aliasesSerializer,
 			$this->statementsSerializer,
 			$this->siteLinkListSerializer
 		);

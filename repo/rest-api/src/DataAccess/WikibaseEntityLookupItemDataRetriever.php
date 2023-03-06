@@ -8,6 +8,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Statement\StatementList as DataModelStatementList;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemData;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemDataBuilder;
@@ -69,7 +70,7 @@ class WikibaseEntityLookupItemDataRetriever	implements ItemRetriever, ItemDataRe
 			$itemData->setDescriptions( Descriptions::fromTermList( $item->getDescriptions() ) );
 		}
 		if ( in_array( ItemData::FIELD_ALIASES, $fields ) ) {
-			$itemData->setAliases( $item->getAliasGroups() );
+			$itemData->setAliases( Aliases::fromAliasGroupList( $item->getAliasGroups() ) );
 		}
 		if ( in_array( ItemData::FIELD_STATEMENTS, $fields ) ) {
 			$itemData->setStatements( $this->convertDataModelStatementListToReadModel( $item->getStatements() ) );

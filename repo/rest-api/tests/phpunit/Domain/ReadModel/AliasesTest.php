@@ -3,6 +3,8 @@
 namespace Wikibase\Repo\Tests\RestApi\Domain\ReadModel;
 
 use PHPUnit\Framework\TestCase;
+use Wikibase\DataModel\Term\AliasGroup;
+use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
 
@@ -22,6 +24,20 @@ class AliasesTest extends TestCase {
 
 		$this->assertSame( $enAliases, $aliases['en'] );
 		$this->assertSame( $deAliases, $aliases['de'] );
+	}
+
+	public function testFromAliasGroupList(): void {
+		$enAliases = [ 'spud', 'tater' ];
+		$deAliases = [ 'Erdapfel' ];
+		$aliasGroupList = new AliasGroupList( [
+			new AliasGroup( 'en', $enAliases ),
+			new AliasGroup( 'de', $deAliases ),
+		] );
+
+		$aliases = Aliases::fromAliasGroupList( $aliasGroupList );
+
+		$this->assertSame( $enAliases, $aliases['en']->getAliases() );
+		$this->assertSame( $deAliases, $aliases['de']->getAliases() );
 	}
 
 }

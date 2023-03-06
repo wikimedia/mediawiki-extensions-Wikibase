@@ -4,7 +4,6 @@ namespace Wikibase\Repo\RestApi\Domain\ReadModel;
 
 use LogicException;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Term\AliasGroupList;
 
 /**
  * @license GPL-2.0-or-later
@@ -15,7 +14,7 @@ class ItemDataBuilder {
 	private ?string $type = null;
 	private ?Labels $labels = null;
 	private ?Descriptions $descriptions = null;
-	private ?AliasGroupList $aliases = null;
+	private ?Aliases $aliases = null;
 	private ?StatementList $statements = null;
 	private ?SiteLinks $siteLinks = null;
 	private array $requestedFields;
@@ -46,7 +45,7 @@ class ItemDataBuilder {
 		return $this;
 	}
 
-	public function setAliases( AliasGroupList $aliases ): self {
+	public function setAliases( Aliases $aliases ): self {
 		$this->checkRequested( ItemData::FIELD_ALIASES );
 		$this->aliases = $aliases;
 

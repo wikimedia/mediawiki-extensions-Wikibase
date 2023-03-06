@@ -15,6 +15,7 @@ use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityLookupItemDataRetriever;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemData;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemDataBuilder;
@@ -59,7 +60,7 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 		$this->assertSame( $itemId, $itemData->getId() );
 		$this->assertEquals( Labels::fromTermList( $item->getLabels() ), $itemData->getLabels() );
 		$this->assertEquals( Descriptions::fromTermList( $item->getDescriptions() ), $itemData->getDescriptions() );
-		$this->assertSame( $item->getAliasGroups(), $itemData->getAliases() );
+		$this->assertEquals( Aliases::fromAliasGroupList( $item->getAliasGroups() ), $itemData->getAliases() );
 		$this->assertEquals(
 			new StatementList( $this->newStatementReadModelConverter()->convert( $expectedStatement ) ),
 			$itemData->getStatements()
@@ -116,7 +117,7 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 			( new ItemDataBuilder( $item->getId(), $fields ) )
 				->setLabels( Labels::fromTermList( $item->getLabels() ) )
 				->setDescriptions( Descriptions::fromTermList( $item->getDescriptions() ) )
-				->setAliases( $item->getAliasGroups() )
+				->setAliases( Aliases::fromAliasGroupList( $item->getAliasGroups() ) )
 				->build(),
 		];
 		yield 'statements only' => [
@@ -133,7 +134,7 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 				->setType( Item::ENTITY_TYPE )
 				->setLabels( Labels::fromTermList( $item->getLabels() ) )
 				->setDescriptions( Descriptions::fromTermList( $item->getDescriptions() ) )
-				->setAliases( $item->getAliasGroups() )
+				->setAliases( Aliases::fromAliasGroupList( $item->getAliasGroups() ) )
 				->setStatements( new StatementList( $this->newStatementReadModelConverter()->convert( $statement ) ) )
 				->setSiteLinks( $this->newSiteLinksReadModelConverter()->convert( $item->getSiteLinkList() ) )
 				->build(),

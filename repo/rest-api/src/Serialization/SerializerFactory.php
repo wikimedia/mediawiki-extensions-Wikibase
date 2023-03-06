@@ -29,6 +29,7 @@ class SerializerFactory {
 		return new ItemDataSerializer(
 			new LabelsSerializer(),
 			new DescriptionsSerializer(),
+			new AliasesSerializer(),
 			new StatementListSerializer( $this->newStatementSerializer() ),
 			new SiteLinkListSerializer()
 		);
