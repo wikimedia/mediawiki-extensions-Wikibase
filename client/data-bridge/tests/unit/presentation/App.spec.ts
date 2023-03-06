@@ -27,7 +27,13 @@ import License from '@/presentation/components/License.vue';
 import AppHeader from '@/presentation/components/AppHeader.vue';
 import newMockTracker from '../../util/newMockTracker';
 
-config.renderStubDefaultSlot = true;
+beforeAll( () => {
+	config.global.renderStubDefaultSlot = true;
+} );
+
+afterAll( () => {
+	config.global.renderStubDefaultSlot = false;
+} );
 
 describe( 'App.vue', () => {
 	let store: Store<Application>;

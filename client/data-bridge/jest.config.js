@@ -1,5 +1,4 @@
 module.exports = {
-	preset: '@vue/cli-plugin-unit-jest/presets/typescript-and-babel',
 	moduleFileExtensions: [
 		'js',
 		'jsx',
@@ -21,10 +20,13 @@ module.exports = {
 		'jest-serializer-vue',
 	],
 	testEnvironment: '<rootDir>/tests/config/JestCustomEnvironment.js',
+	testEnvironmentOptions: {
+		customExportConditions: [ 'node', 'node-addons' ],
+		url: 'https://data-bridge.test/jest',
+	},
 	testMatch: [
 		'**/tests/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)',
 	],
-	testURL: 'https://data-bridge.test/jest',
 	transform: {
 		'^.+\\.vue$': '@vue/vue3-jest',
 		'.+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',

@@ -9,7 +9,13 @@ import EventEmittingButton from '@/presentation/components/EventEmittingButton.v
 import IconMessageBox from '@/presentation/components/IconMessageBox.vue';
 import ReportIssue from '@/presentation/components/ReportIssue.vue';
 
-config.renderStubDefaultSlot = true;
+beforeAll( () => {
+	config.global.renderStubDefaultSlot = true;
+} );
+
+afterAll( () => {
+	config.global.renderStubDefaultSlot = false;
+} );
 
 describe( 'ErrorSaving', () => {
 	const $messages = {
