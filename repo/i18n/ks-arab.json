@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Iflaq"
+			"Iflaq",
+			"Tajamul9"
 		]
 	},
 	"wikibase-edit": "اؠڈِٹ",
@@ -12,6 +13,7 @@
 	"wikibase-save-inprogress": "مَحفوٗظ کَرن...",
 	"wikibase-publish-inprogress": "شایع کَرن...",
 	"wikibase-remove-inprogress": "ہَٹاوَن...",
+	"wikibase-description-empty": "کانٛہہ تِہ تفصیٖل چھنہٕ آمٕژ واضح کرنہٕ",
 	"wikibase-diffview-link-name": "ناو",
 	"wikibase-sitelink-site-edit-placeholder": "وِکی",
 	"wikibase-sitelink-page-edit-placeholder": "صَفہٕ",

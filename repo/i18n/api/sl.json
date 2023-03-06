@@ -31,6 +31,7 @@
 	"apihelp-wbeditentity-example-12": "Odstrani oznako",
 	"apihelp-wbformatvalue-description": "Oblikuje podatkovne vrednosti.",
 	"apihelp-wbformatvalue-summary": "Oblikuje podatkovne vrednosti.",
+	"apihelp-wbformatvalue-param-options": "Možnosti, ki naj jih uporablja oblikovalnik. Na voljo kot JSON-objekt.",
 	"apihelp-wbformatvalue-example-3": "Oblikuje časovno vrednost kot golo besedilo in po potrebi samodejno prikažete model koledarja.",
 	"apihelp-wbmergeitems-description": "Združitev več predmetov.",
 	"apihelp-wbmergeitems-summary": "Združi več predmetov.",

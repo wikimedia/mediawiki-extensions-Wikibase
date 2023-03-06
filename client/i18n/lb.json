@@ -51,7 +51,7 @@
 	"wikibase-rcfilters-hide-wikibase-conflicts-major-global": "All {{WBREPONAME}}-Ännerunge sinn als \"kleng\" markéiert, esou ass de Filter {{WBREPONAME}}-Ännerunge a Konflikt mam Filter \"Keng kleng Ännerungen\".",
 	"wikibase-rcfilters-major-conflicts-hide-wikibase": "All {{WBREPONAME}}-Ännerunge sinn als \"kleng\" markéiert, esou ass de Filter {{WBREPONAME}}-Ännerunge a Konflikt mam Filter \"Keng kleng Ännerungen\".",
 	"wikibase-rcfilters-hide-wikibase-conflicts-major": "All {{WBREPONAME}}-Ännerunge sinn als \"kleng\" markéiert, esou ass de Filter {{WBREPONAME}}-Ännerunge a Konflikt mam Filter \"Keng kleng Ännerungen\".",
-	"wikibase-replicationnote": "Denkt wgl. dorun datt et e puer Minutten dauere ka bis d'Ännerungen op alle Wikien ze gesi sinn.",
+	"wikibase-replicationnote": "Denkt wgl. dorun, datt et e puer Minutten dauere kann, bis d'Ännerungen op alle Wikien ze gesi sinn.",
 	"wikibase-watchlist-show-changes-pref": "{{WBREPONAME}}-Ännerungen an Ärer Iwwerwaachungslëscht weisen",
 	"wikibase-error-invalid-entity-id": "D'ID \"$2\" déi ass am System net bekannt. Benotzt wgl. eng valabel ID.",
 	"unconnectedpages": "Säiten, déi net mat Elementer verbonne sinn",
