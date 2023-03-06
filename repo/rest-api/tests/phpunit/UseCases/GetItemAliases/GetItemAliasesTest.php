@@ -10,9 +10,13 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
 use Wikibase\Repo\RestApi\Domain\Services\ItemAliasesRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
+use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemAliases\GetItemAliases;
 use Wikibase\Repo\RestApi\UseCases\GetItemAliases\GetItemAliasesRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemAliases\GetItemAliasesResponse;
+use Wikibase\Repo\RestApi\UseCases\GetItemAliases\GetItemAliasesValidator;
+use Wikibase\Repo\RestApi\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 
 /**
  * @covers \Wikibase\Repo\RestApi\UseCases\GetItemAliases\GetItemAliases
@@ -79,10 +83,23 @@ class GetItemAliasesTest extends TestCase {
 		$this->assertEquals( new GetItemAliasesResponse( $aliases, $lastModified, $revisionId ), $response );
 	}
 
+	public function testGivenInvalidItemId_throws(): void {
+		try {
+			$this->newUseCase()->execute( new GetItemAliasesRequest( 'X321' ) );
+
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $useCaseEx ) {
+			$this->assertSame( ErrorResponse::INVALID_ITEM_ID, $useCaseEx->getErrorCode() );
+			$this->assertSame( 'Not a valid item ID: X321', $useCaseEx->getErrorMessage() );
+			$this->assertNull( $useCaseEx->getErrorContext() );
+		}
+	}
+
 	private function newUseCase(): GetItemAliases {
 		return new GetItemAliases(
 			$this->itemRevisionMetadataRetriever,
-			$this->aliasesRetriever
+			$this->aliasesRetriever,
+			new GetItemAliasesValidator( new ItemIdValidator() )
 		);
 	}
 

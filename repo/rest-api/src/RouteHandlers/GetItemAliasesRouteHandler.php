@@ -7,6 +7,7 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Rest\ResponseInterface;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
+use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
@@ -14,6 +15,7 @@ use Wikibase\Repo\RestApi\Serialization\AliasesSerializer;
 use Wikibase\Repo\RestApi\UseCases\GetItemAliases\GetItemAliases;
 use Wikibase\Repo\RestApi\UseCases\GetItemAliases\GetItemAliasesRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemAliases\GetItemAliasesResponse;
+use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -27,18 +29,22 @@ class GetItemAliasesRouteHandler extends SimpleHandler {
 	private GetItemAliases $useCase;
 	private AliasesSerializer $aliasesSerializer;
 	private MiddlewareHandler $middlewareHandler;
+	private ResponseFactory $responseFactory;
 
 	public function __construct(
 		GetItemAliases $useCase,
 		AliasesSerializer $aliasesSerializer,
-		MiddlewareHandler $middlewareHandler
+		MiddlewareHandler $middlewareHandler,
+		ResponseFactory $responseFactory
 	) {
 		$this->useCase = $useCase;
 		$this->aliasesSerializer = $aliasesSerializer;
 		$this->middlewareHandler = $middlewareHandler;
+		$this->responseFactory = $responseFactory;
 	}
 
 	public static function factory(): self {
+		$responseFactory = new ResponseFactory( new ErrorJsonPresenter() );
 		return new self(
 			WbRestApi::getGetItemAliases(),
 			new AliasesSerializer(),
@@ -50,6 +56,7 @@ class GetItemAliasesRouteHandler extends SimpleHandler {
 					fn( RequestInterface $request ): string => $request->getPathParam( self::ITEM_ID_PATH_PARAM )
 				),
 			] ),
+			$responseFactory
 		);
 	}
 
@@ -65,8 +72,13 @@ class GetItemAliasesRouteHandler extends SimpleHandler {
 	}
 
 	public function runUseCase( string $itemId ): Response {
-		$useCaseResponse = $this->useCase->execute( new GetItemAliasesRequest( $itemId ) );
-		return $this->newSuccessHttpResponse( $useCaseResponse );
+		try {
+			return $this->newSuccessHttpResponse(
+				$this->useCase->execute( new GetItemAliasesRequest( $itemId ) )
+			);
+		} catch ( UseCaseException $e ) {
+			return $this->responseFactory->newErrorResponseFromException( $e );
+		}
 	}
 
 	public function getParamSettings(): array {

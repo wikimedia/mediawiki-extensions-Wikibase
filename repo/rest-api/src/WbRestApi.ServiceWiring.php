@@ -34,6 +34,7 @@ use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementValidator;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemValidator;
 use Wikibase\Repo\RestApi\UseCases\GetItemAliases\GetItemAliases;
+use Wikibase\Repo\RestApi\UseCases\GetItemAliases\GetItemAliasesValidator;
 use Wikibase\Repo\RestApi\UseCases\GetItemDescriptions\GetItemDescriptions;
 use Wikibase\Repo\RestApi\UseCases\GetItemDescriptions\GetItemDescriptionsValidator;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabels;
@@ -103,7 +104,8 @@ return [
 			new PrefetchingTermLookupAliasesRetriever(
 				WikibaseRepo::getPrefetchingTermLookup( $services ),
 				WikibaseRepo::getTermsLanguages( $services )
-			)
+			),
+			new GetItemAliasesValidator( new ItemIdValidator() )
 		);
 	},
 
