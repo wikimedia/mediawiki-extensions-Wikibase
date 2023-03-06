@@ -34,6 +34,7 @@
 	"apihelp-wbmergeitems-param-ignoreconflicts": "Matrika elementov predmeta, za katere naj se prezrejo navzkrižja. Vsebuje lahko samo vrednosti »<var>description</var>«, »<var>sitelink</var>« in »<var>statement</var>«",
 	"apihelp-wbsearchentities-param-search": "Poišče to besedilo.",
 	"apihelp-wbsearchentities-param-strictlanguage": "Ali naj bo nadomestni jezik onemogočen",
+	"apihelp-wbsearchentities-param-props": "Vrne te lastnosti za vsako entiteto.",
 	"apihelp-wbsearchentities-param-limit": "Največje število zadetkov",
 	"apihelp-query+entityterms-param-terms": "Vrste izrazov, ki naj se pridobijo, npr. »description«; vsak od njih je vrnjen kot matrika nizov s ključem glede na vrsto, npr. {\"opis\": [\"foo\"]}. Če ni določeno, se vrnejo vse vrste.",
 	"apihelp-query+wbcontentlanguages-summary": "Vrne informacije o vsebinskih jezikih, ki jih v različnih kontekstih sprejema Wikibase.",

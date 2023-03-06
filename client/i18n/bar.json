@@ -2,13 +2,16 @@
 	"@metadata": {
 		"authors": [
 			"Alexx",
-			"Joe Watzmo"
+			"Joe Watzmo",
+			"Mucalexx"
 		]
 	},
 	"wikibase-comment-update": "Des {{WBREPONAME}}-Objekt is gendad worn.",
 	"wikibase-dataitem": "{{WBREPONAME}}-Item",
 	"wikibase-editlinks": "Links beorwatn",
 	"wikibase-editlinkstitle": "Links a Artiken in andane Sprochn beorwatn",
+	"wikibase-linkitem-linkpage": "Mid da Seiten valinken",
+	"wikibase-linkitem-input-page": "Seiten:",
 	"wikibase-rc-hide-wikidata-show": "oozoang",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-Beorwatung"
 }
