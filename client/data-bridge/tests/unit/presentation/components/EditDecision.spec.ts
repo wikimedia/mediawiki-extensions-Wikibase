@@ -13,7 +13,13 @@ import { Store } from 'vuex';
 import { createTestStore } from '../../../util/store';
 import newMockServiceContainer from '../../services/newMockServiceContainer';
 
-config.renderStubDefaultSlot = true;
+beforeAll( () => {
+	config.global.renderStubDefaultSlot = true;
+} );
+
+afterAll( () => {
+	config.global.renderStubDefaultSlot = false;
+} );
 
 /**
  * Array.filter callback to return unique elements of an array.

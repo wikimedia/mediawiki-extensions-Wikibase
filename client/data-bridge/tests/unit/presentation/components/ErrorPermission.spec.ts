@@ -16,7 +16,13 @@ import { createTestStore } from '../../../util/store';
 
 const entityTitle = 'Q42';
 
-config.renderStubDefaultSlot = true;
+beforeAll( () => {
+	config.global.renderStubDefaultSlot = true;
+} );
+
+afterAll( () => {
+	config.global.renderStubDefaultSlot = false;
+} );
 
 /**
  * A router that should never be called by a test.

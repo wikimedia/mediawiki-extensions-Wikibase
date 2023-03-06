@@ -3,7 +3,13 @@ import EventEmittingButton from '@/presentation/components/EventEmittingButton.v
 import WarningAnonymousEdit from '@/presentation/components/WarningAnonymousEdit.vue';
 import { shallowMount, config } from '@vue/test-utils';
 
-config.renderStubDefaultSlot = true;
+beforeAll( () => {
+	config.global.renderStubDefaultSlot = true;
+} );
+
+afterAll( () => {
+	config.global.renderStubDefaultSlot = false;
+} );
 
 describe( 'WarningAnonymousEdit', () => {
 	it( 'matches the snapshot', () => {

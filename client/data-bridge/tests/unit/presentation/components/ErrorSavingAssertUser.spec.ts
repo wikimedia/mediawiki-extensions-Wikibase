@@ -8,7 +8,13 @@ import { createTestStore } from '../../../util/store';
 import { BridgeConfig } from '@/store/Application';
 import { nextTick } from 'vue';
 
-config.renderStubDefaultSlot = true;
+beforeAll( () => {
+	config.global.renderStubDefaultSlot = true;
+} );
+
+afterAll( () => {
+	config.global.renderStubDefaultSlot = false;
+} );
 
 describe( 'ErrorSavingAssertUser', () => {
 	const stopAssertingUserWhenSaving = jest.fn();
