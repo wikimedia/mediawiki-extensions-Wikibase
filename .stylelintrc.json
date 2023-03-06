@@ -3,7 +3,8 @@
 	"rules": {
 		"selector-max-id": null,
 		"no-duplicate-selectors": null,
-		"no-descending-specificity": null
+		"no-descending-specificity": null,
+		"selector-pseudo-element-colon-notation": null
 	},
 	"ignoreFiles": [
 		"lib/resources/lib/**"
