@@ -1,7 +1,6 @@
 import {
 	DataValue,
 	Snak,
-	StatementMap,
 } from '@wmde/wikibase-datamodel-types';
 import { PathToStatement } from '@/store/statements/PathToStatement';
 import { inject } from 'vuex-smart-module';
@@ -9,21 +8,22 @@ import { StatementGetters } from '@/store/statements/getters';
 import newStatementState from './newStatementState';
 import { PathToSnak } from '@/store/statements/PathToSnak';
 import { PathToStatementGroup } from '@/store/statements/PathToStatementGroup';
+import { StatementState } from '../../../../src/store/statements/StatementState';
 
 describe( 'statements/Getters', () => {
 	it( 'determines if statements are present for are given entity id', () => {
-		const statements = { Q42: {
+		const statements: StatementState = { Q42: {
 			P23: [ {
 				type: 'statement',
 				id: 'Q60$6f832804-4c3f-6185-38bd-ca00b8517765',
 				rank: 'normal',
 				mainsnak: {} as Snak,
 			} ],
-		} as StatementMap };
+		} };
 
 		const entityId = 'Q42';
 
-		const getters = inject( StatementGetters, {
+		const getters: StatementGetters = inject( StatementGetters, {
 			state: statements,
 		} );
 
@@ -41,7 +41,7 @@ describe( 'statements/Getters', () => {
 				resolveStatementGroup,
 			};
 
-			const state: any = {};
+			const state: StatementState = {};
 			const getters = inject( StatementGetters, {
 				state,
 			} );
@@ -55,7 +55,7 @@ describe( 'statements/Getters', () => {
 				resolveStatementGroup,
 			};
 
-			const state: any = {};
+			const state: StatementState = {};
 			const getters = inject( StatementGetters, {
 				state,
 			} );
@@ -71,7 +71,7 @@ describe( 'statements/Getters', () => {
 				resolveStatementGroup,
 			};
 
-			const state: any = {};
+			const state: StatementState = {};
 			const getters = inject( StatementGetters, {
 				state,
 			} );
@@ -85,7 +85,7 @@ describe( 'statements/Getters', () => {
 				resolveStatementGroup,
 			};
 
-			const state: any = {};
+			const state: StatementState = {};
 			const getters = inject( StatementGetters, {
 				state,
 			} );
@@ -99,7 +99,7 @@ describe( 'statements/Getters', () => {
 				resolveStatementGroup,
 			};
 
-			const state: any = {};
+			const state: StatementState = {};
 			const getters = inject( StatementGetters, {
 				state,
 			} );
