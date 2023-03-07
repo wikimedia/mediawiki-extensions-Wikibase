@@ -27,19 +27,13 @@ use WikitextContent;
  */
 class UsageTrackingIntegrationTest extends MediaWikiIntegrationTestCase {
 
-	/**
-	 * @var Title
-	 */
+	/** @var Title */
 	private $articleTitle;
 
-	/**
-	 * @var Title
-	 */
+	/** @var Title */
 	private $templateTitle;
 
-	/**
-	 * @var bool
-	 */
+	/** @var bool */
 	private $oldAllowDataTransclusion;
 
 	protected function setUp(): void {
@@ -49,6 +43,9 @@ class UsageTrackingIntegrationTest extends MediaWikiIntegrationTestCase {
 
 		parent::setUp();
 		$this->tablesUsed[] = 'page';
+
+		// Disable caching to avoid Q33 vs Q22 mixup
+		$this->setMainCache( CACHE_NONE );
 
 		$settings = WikibaseClient::getSettings();
 		$this->oldAllowDataTransclusion = $settings->getSetting( 'allowDataTransclusion' );
