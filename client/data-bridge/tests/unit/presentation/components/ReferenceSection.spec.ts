@@ -59,7 +59,7 @@ describe( 'ReferenceSection', () => {
 		const references = wrapper.findAll( REFERENCE_ITEM_SELECTOR );
 		expect( references ).toHaveLength( renderedTargetReferences.length );
 		renderedTargetReferences.forEach( ( referenceHTML, index ) => {
-			expect( references.at( index ).element.innerHTML ).toBe( referenceHTML );
+			expect( references[ index ].element.innerHTML ).toBe( referenceHTML );
 		} );
 	} );
 
