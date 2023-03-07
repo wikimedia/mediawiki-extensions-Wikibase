@@ -56,16 +56,8 @@ class ItemDataSerializerTest extends TestCase {
 	protected function setUp(): void {
 		$this->labelsSerializer = $this->createStub( LabelsSerializer::class );
 		$this->descriptionsSerializer = $this->createStub( DescriptionsSerializer::class );
-
-		$this->statementsSerializer = $this->createMock( StatementListSerializer::class );
-		$this->statementsSerializer
-			->method( 'serialize' )
-			->willReturn( new ArrayObject( [ 'some' => 'serialization' ] ) );
-
-		$this->siteLinkListSerializer = $this->createMock( SiteLinkListSerializer::class );
-		$this->siteLinkListSerializer
-			->method( 'serialize' )
-			->willReturn( new ArrayObject( [ 'some' => 'serialization' ] ) );
+		$this->statementsSerializer = $this->createStub( StatementListSerializer::class );
+		$this->siteLinkListSerializer = $this->createStub( SiteLinkListSerializer::class );
 	}
 
 	public function testSerializeId(): void {
@@ -93,10 +85,10 @@ class ItemDataSerializerTest extends TestCase {
 		$expectedSerialization = new ArrayObject( [
 			[ 'en' => $enLabel ], [ 'de' => $koLabel ],
 		] );
-		$this->labelsSerializer = $this->createMock( LabelsSerializer::class );
+		$this->labelsSerializer = $this->createStub( LabelsSerializer::class );
 		$this->labelsSerializer
 			->method( 'serialize' )
-			->willReturn( new ArrayObject( $expectedSerialization ) );
+			->willReturn( $expectedSerialization );
 
 		$itemData = $this->newItemDataBuilderWithSomeId( [ ItemData::FIELD_LABELS ] )
 			->setLabels( new Labels(
@@ -107,7 +99,7 @@ class ItemDataSerializerTest extends TestCase {
 
 		$serialization = $this->newSerializer()->serialize( $itemData );
 
-		$this->assertEquals( $expectedSerialization, $serialization['labels'] );
+		$this->assertSame( $expectedSerialization, $serialization['labels'] );
 	}
 
 	public function testSerializeDescriptions(): void {
@@ -117,10 +109,10 @@ class ItemDataSerializerTest extends TestCase {
 			[ 'en' => $enDescription ],
 			[ 'de' => $deDescription ],
 		] );
-		$this->descriptionsSerializer = $this->createMock( DescriptionsSerializer::class );
+		$this->descriptionsSerializer = $this->createStub( DescriptionsSerializer::class );
 		$this->descriptionsSerializer
 			->method( 'serialize' )
-			->willReturn( new ArrayObject( $expectedSerialization ) );
+			->willReturn( $expectedSerialization );
 
 		$itemData = $this->newItemDataBuilderWithSomeId( [ ItemData::FIELD_DESCRIPTIONS ] )
 			->setDescriptions( new Descriptions(
@@ -131,7 +123,7 @@ class ItemDataSerializerTest extends TestCase {
 
 		$serialization = $this->newSerializer()->serialize( $itemData );
 
-		$this->assertEquals( $expectedSerialization, $serialization['descriptions'] );
+		$this->assertSame( $expectedSerialization, $serialization['descriptions'] );
 	}
 
 	public function testSerializeAliases(): void {
