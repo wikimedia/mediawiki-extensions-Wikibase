@@ -19,6 +19,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
+use Wikibase\Repo\RestApi\Infrastructure\SiteLinksReadModelConverter;
 
 /**
  * @license GPL-2.0-or-later
@@ -27,10 +28,16 @@ class WikibaseEntityLookupItemDataRetriever	implements ItemRetriever, ItemDataRe
 
 	private EntityLookup $entityLookup;
 	private StatementReadModelConverter $statementReadModelConverter;
+	private SiteLinksReadModelConverter $siteLinksReadModelConverter;
 
-	public function __construct( EntityLookup $entityLookup, StatementReadModelConverter $statementReadModelConverter ) {
+	public function __construct(
+		EntityLookup $entityLookup,
+		StatementReadModelConverter $statementReadModelConverter,
+		SiteLinksReadModelConverter $siteLinksReadModelConverter
+	) {
 		$this->entityLookup = $entityLookup;
 		$this->statementReadModelConverter = $statementReadModelConverter;
+		$this->siteLinksReadModelConverter = $siteLinksReadModelConverter;
 	}
 
 	public function getItem( ItemId $itemId ): ?Item {
@@ -68,7 +75,7 @@ class WikibaseEntityLookupItemDataRetriever	implements ItemRetriever, ItemDataRe
 			$itemData->setStatements( $this->convertDataModelStatementListToReadModel( $item->getStatements() ) );
 		}
 		if ( in_array( ItemData::FIELD_SITELINKS, $fields ) ) {
-			$itemData->setSiteLinks( $item->getSiteLinkList() );
+			$itemData->setSiteLinks( $this->siteLinksReadModelConverter->convert( $item->getSiteLinkList() ) );
 		}
 
 		return $itemData->build();

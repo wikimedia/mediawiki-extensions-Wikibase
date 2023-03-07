@@ -7,7 +7,6 @@ use LogicException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
@@ -15,6 +14,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\ItemData;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemDataBuilder;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
+use Wikibase\Repo\RestApi\Domain\ReadModel\SiteLinks;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 
 /**
@@ -76,7 +76,7 @@ class ItemDataBuilderTest extends TestCase {
 	}
 
 	public function testSiteLinks(): void {
-		$siteLinks = new SiteLinkList();
+		$siteLinks = new SiteLinks();
 		$itemData = $this->newBuilderWithSomeId( [ ItemData::FIELD_SITELINKS ] )
 			->setSiteLinks( $siteLinks )
 			->build();
@@ -89,7 +89,7 @@ class ItemDataBuilderTest extends TestCase {
 		$descriptions = new Descriptions( new Description( 'en', 'root vegetable' ) );
 		$aliases = new AliasGroupList();
 		$statements = new StatementList();
-		$siteLinks = new SiteLinkList();
+		$siteLinks = new SiteLinks();
 
 		$itemData = $this->newBuilderWithSomeId( ItemData::VALID_FIELDS )
 			->setType( $type )
@@ -155,7 +155,7 @@ class ItemDataBuilderTest extends TestCase {
 		yield 'sitelinks' => [
 			ItemData::FIELD_SITELINKS,
 			'setSiteLinks',
-			new SiteLinkList(),
+			new SiteLinks(),
 		];
 	}
 
