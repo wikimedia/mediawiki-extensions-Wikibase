@@ -7,6 +7,7 @@ import EventEmittingButton from '@/presentation/components/EventEmittingButton.v
 import IconMessageBox from '@/presentation/components/IconMessageBox.vue';
 import ReportIssue from '@/presentation/components/ReportIssue.vue';
 import { createTestStore } from '../../../util/store';
+import { ComponentOptions } from 'vue';
 
 describe( 'ErrorUnknown', () => {
 	const $messages = {
@@ -58,7 +59,7 @@ describe( 'ErrorUnknown', () => {
 
 	it( 'repeats relaunch button\'s "click" event as "relaunch"', () => {
 		const wrapper = shallowMount( ErrorUnknown, { global: { plugins: [ store ] } } );
-		wrapper.findComponent( '.wb-db-error-unknown__relaunch' ).vm.$emit( 'click' );
+		wrapper.findComponent<ComponentOptions>( '.wb-db-error-unknown__relaunch' ).vm.$emit( 'click' );
 		expect( wrapper.emitted( 'relaunch' ) ).toHaveLength( 1 );
 	} );
 } );
