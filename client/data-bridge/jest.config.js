@@ -7,11 +7,6 @@ module.exports = {
 		'ts',
 		'tsx',
 	],
-	globals: {
-		'ts-jest': {
-			diagnostics: false,
-		},
-	},
 	moduleNameMapper: {
 		'^@/(.*)$': '<rootDir>/src/$1',
 	},
