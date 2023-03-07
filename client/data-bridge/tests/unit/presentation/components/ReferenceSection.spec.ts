@@ -1,15 +1,15 @@
 import ReferenceSection from '@/presentation/components/ReferenceSection.vue';
 import { shallowMount } from '@vue/test-utils';
 import { createStore } from '@/store';
-import { Store } from 'vuex';
 import Application from '@/store/Application';
 import newMockServiceContainer from '../../services/newMockServiceContainer';
 import MessageKeys from '@/definitions/MessageKeys';
+import { MutableStore } from '../../../util/store';
 
 const REFERENCE_ITEM_SELECTOR = '.wb-db-references__listItem';
 
 describe( 'ReferenceSection', () => {
-	let store: Store<Application>;
+	let store: MutableStore<Application>;
 
 	beforeEach( () => {
 		store = createStore( newMockServiceContainer( {} ) );

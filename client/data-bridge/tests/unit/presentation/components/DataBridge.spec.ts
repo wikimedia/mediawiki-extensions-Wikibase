@@ -3,14 +3,14 @@ import {
 	shallowMount,
 } from '@vue/test-utils';
 import { createStore } from '@/store';
-import { Store } from 'vuex';
 import StringDataValue from '@/presentation/components/StringDataValue.vue';
 import ReferenceSection from '@/presentation/components/ReferenceSection.vue';
 import EditDecision from '@/presentation/components/EditDecision.vue';
 import Application from '@/store/Application';
 import newMockServiceContainer from '../../services/newMockServiceContainer';
+import { MutableStore } from '../../../util/store';
 
-let store: Store<Application>;
+let store: MutableStore<Application>;
 
 describe( 'DataBridge', () => {
 	beforeEach( () => {

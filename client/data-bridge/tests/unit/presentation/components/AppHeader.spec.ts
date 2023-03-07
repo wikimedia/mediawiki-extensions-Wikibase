@@ -4,7 +4,6 @@ import ProcessDialogHeader from '@/presentation/components/ProcessDialogHeader.v
 import TermLabel from '@/presentation/components/TermLabel.vue';
 import { calledWithHTMLElement } from '../../../util/assertions';
 import AppHeader from '@/presentation/components/AppHeader.vue';
-import { Store } from 'vuex';
 import Application from '@/store/Application';
 import { createStore } from '@/store';
 import newMockServiceContainer from '../../services/newMockServiceContainer';
@@ -14,9 +13,10 @@ import { initEvents } from '@/events';
 import { ErrorTypes } from '@/definitions/ApplicationError';
 import { ComponentOptions, nextTick } from 'vue';
 import newMockTracker from '../../../util/newMockTracker';
+import { MutableStore } from '../../../util/store';
 
 describe( 'AppHeader', () => {
-	let store: Store<Application>;
+	let store: MutableStore<Application>;
 
 	beforeEach( () => {
 		store = createStore( newMockServiceContainer( { tracker: newMockTracker() } ) );

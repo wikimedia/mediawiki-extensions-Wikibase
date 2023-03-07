@@ -19,6 +19,12 @@ afterEach( () => {
 	rootModule.options.modules![ NS_ENTITY ].options.state = EntityState;
 } );
 
+type Mutable<T> = {
+	-readonly [P in keyof T]: T[P];
+};
+
+export type MutableStore<T> = Mutable<Store<T>>;
+
 export function createTestStore( { state, actions, getters, entityState }: {
 	state?: Partial<Application>;
 	actions?: Partial<RootActions>;
