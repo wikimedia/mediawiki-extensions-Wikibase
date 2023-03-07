@@ -8,7 +8,7 @@
 		]
 	},
 	"wikibase-client-desc": "Client fir d'Wikibase Erweiderung",
-	"tooltip-t-wikibase": "Link op dat Element aus der Datebank mat deem et verbonn ass",
+	"tooltip-t-wikibase": "Link op dat Element aus der Datebank, mat deem et verbonnen ass",
 	"wikibase-after-page-move": "Äert Réckele misst elo op den Interwikilinke vu(n) [$1 am {{WBREPONAME}}-Element ze gesi sinn]. Kuckt wgl. no ob dat sou funktionéiert huet.",
 	"wikibase-comment-add": "Ee {{WBREPONAME}}-Element gouf ugeluecht.",
 	"wikibase-comment-remove": "Associéiert {{WBREPONAME}}-Element geläscht. Sproochlinken ewechgeholl.",
@@ -51,7 +51,7 @@
 	"wikibase-rcfilters-hide-wikibase-conflicts-major-global": "All {{WBREPONAME}}-Ännerunge sinn als \"kleng\" markéiert, esou ass de Filter {{WBREPONAME}}-Ännerunge a Konflikt mam Filter \"Keng kleng Ännerungen\".",
 	"wikibase-rcfilters-major-conflicts-hide-wikibase": "All {{WBREPONAME}}-Ännerunge sinn als \"kleng\" markéiert, esou ass de Filter {{WBREPONAME}}-Ännerunge a Konflikt mam Filter \"Keng kleng Ännerungen\".",
 	"wikibase-rcfilters-hide-wikibase-conflicts-major": "All {{WBREPONAME}}-Ännerunge sinn als \"kleng\" markéiert, esou ass de Filter {{WBREPONAME}}-Ännerunge a Konflikt mam Filter \"Keng kleng Ännerungen\".",
-	"wikibase-replicationnote": "Denkt wgl. dorun datt et e puer Minutten dauere ka bis d'Ännerungen op alle Wikien ze gesi sinn.",
+	"wikibase-replicationnote": "Denkt wgl. dorun, datt et e puer Minutten dauere kann, bis d'Ännerungen op alle Wikien ze gesi sinn.",
 	"wikibase-watchlist-show-changes-pref": "{{WBREPONAME}}-Ännerungen an Ärer Iwwerwaachungslëscht weisen",
 	"wikibase-error-invalid-entity-id": "D'ID \"$2\" déi ass am System net bekannt. Benotzt wgl. eng valabel ID.",
 	"unconnectedpages": "Säiten, déi net mat Elementer verbonne sinn",
