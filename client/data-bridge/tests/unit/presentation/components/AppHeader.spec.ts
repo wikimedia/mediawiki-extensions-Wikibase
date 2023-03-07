@@ -12,7 +12,7 @@ import EventEmittingButton from '@/presentation/components/EventEmittingButton.v
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 import { initEvents } from '@/events';
 import { ErrorTypes } from '@/definitions/ApplicationError';
-import { nextTick } from 'vue';
+import { ComponentOptions, nextTick } from 'vue';
 import newMockTracker from '../../../util/newMockTracker';
 
 describe( 'AppHeader', () => {
@@ -80,8 +80,9 @@ describe( 'AppHeader', () => {
 			} );
 
 			expect( messageGet ).toHaveBeenCalledWith( MessageKeys.SAVE_CHANGES );
-			// @ts-ignore
-			const button = wrapper.findComponent( '.wb-ui-event-emitting-button--primaryProgressive' );
+			const button = wrapper.findComponent<ComponentOptions>(
+				'.wb-ui-event-emitting-button--primaryProgressive',
+			);
 			expect( button.props( 'message' ) ).toBe( saveMessage );
 		} );
 
@@ -113,8 +114,9 @@ describe( 'AppHeader', () => {
 			} );
 
 			expect( messageGet ).toHaveBeenCalledWith( MessageKeys.PUBLISH_CHANGES );
-			// @ts-ignore
-			const button = wrapper.findComponent( '.wb-ui-event-emitting-button--primaryProgressive' );
+			const button = wrapper.findComponent<ComponentOptions>(
+				'.wb-ui-event-emitting-button--primaryProgressive',
+			);
 			expect( button.props( 'message' ) ).toBe( publishMessage );
 		} );
 
@@ -190,8 +192,7 @@ describe( 'AppHeader', () => {
 			} );
 
 			expect( messageGet ).toHaveBeenCalledWith( MessageKeys.CANCEL );
-			// @ts-ignore
-			const button = wrapper.findComponent( '.wb-ui-event-emitting-button--close' );
+			const button = wrapper.findComponent<ComponentOptions>( '.wb-ui-event-emitting-button--close' );
 			expect( button.props( 'message' ) ).toBe( cancelMessage );
 		} );
 
@@ -274,8 +275,7 @@ describe( 'AppHeader', () => {
 			} );
 
 			expect( messageGet ).toHaveBeenCalledWith( MessageKeys.ERROR_GO_BACK );
-			// @ts-ignore
-			const backButton = wrapper.findComponent( '.wb-ui-event-emitting-button--back' );
+			const backButton = wrapper.findComponent<ComponentOptions>( '.wb-ui-event-emitting-button--back' );
 			expect( backButton.exists() ).toBe( true );
 			expect( backButton.props( 'message' ) ).toBe( backMessage );
 		} );
@@ -294,7 +294,6 @@ describe( 'AppHeader', () => {
 				},
 			} );
 
-			// @ts-ignore
 			expect( wrapper.findComponent( '.wb-ui-event-emitting-button--back' ).exists() ).toBe( false );
 		} );
 	} );
@@ -309,8 +308,9 @@ describe( 'AppHeader', () => {
 				},
 			} );
 
-			// @ts-ignore
-			const saveButton = wrapper.findComponent( '.wb-ui-event-emitting-button--primaryProgressive' );
+			const saveButton = wrapper.findComponent<ComponentOptions>(
+				'.wb-ui-event-emitting-button--primaryProgressive',
+			);
 			saveButton.vm.$emit( 'click' );
 
 			expect( wrapper.emitted( 'save' ) ).toHaveLength( 1 );
@@ -324,8 +324,7 @@ describe( 'AppHeader', () => {
 				},
 			} );
 
-			// @ts-ignore
-			const closeButton = wrapper.findComponent( '.wb-ui-event-emitting-button--close' );
+			const closeButton = wrapper.findComponent<ComponentOptions>( '.wb-ui-event-emitting-button--close' );
 			closeButton.vm.$emit( 'click' );
 
 			expect( wrapper.emitted( 'close' ) ).toHaveLength( 1 );
@@ -344,8 +343,7 @@ describe( 'AppHeader', () => {
 				},
 			} );
 
-			// @ts-ignore
-			const backButton = wrapper.findComponent( '.wb-ui-event-emitting-button--back' );
+			const backButton = wrapper.findComponent<ComponentOptions>( '.wb-ui-event-emitting-button--back' );
 			backButton.vm.$emit( 'click' );
 
 			expect( wrapper.emitted( 'back' ) ).toHaveLength( 1 );
