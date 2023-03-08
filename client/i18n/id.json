@@ -136,6 +136,7 @@
 	"wikibase-client-data-bridge-bailout-heading": "Sebagai gantinya, Anda dapat melakukan hal berikut:",
 	"wikibase-client-data-bridge-saving-error-heading": "Tidak dapat menyimpan perubahan",
 	"wikibase-client-data-bridge-edit-conflict-error-heading": "Konflik penyuntingan terdeteksi",
+	"wikibase-client-data-bridge-edit-conflict-error-message": "Pengguna lain baru saja menyunting nilai ini dan memublikasikan perubahannya terlebih dahulu. Perubahan Anda tak dapat diterapkan. Muat ulang halaman untuk mengambil nilai baru.",
 	"wikibase-client-data-bridge-unknown-error-heading": "Ada yang tidak beres",
 	"wikibase-client-data-bridge-error-reload-bridge": "Muat ulang",
 	"wikibase-client-data-bridge-error-reload-page": "Muat ulang halaman",

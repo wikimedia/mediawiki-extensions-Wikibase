@@ -274,7 +274,7 @@
 	"apihelp-wbsetdescription-param-tags": "Modifier les balises à appliquer à la version.",
 	"apihelp-wbsetdescription-example-1": "Définir la chaîne « <var>Une encyclopédie que chacun peut éditer</var> » pour la page avec l’ID « <samp>$1</samp> » comme une description en langue anglaise",
 	"apihelp-wbsetdescription-example-2": "Définir la chaîne « <var>An encyclopedia that everyone can edit</var> » comme une description en langue anglaise de la page avec un lien de site à <var>enwiki:Wikipedia</var>",
-	"apihelp-wbsetlabel-description": "Définit un label pour une seule entité Wikibase.",
+	"apihelp-wbsetlabel-description": "Définit un libellé pour une seule entité Wikibase.",
 	"apihelp-wbsetlabel-summary": "Définit une étiquette pour une entité Wikibase unique.",
 	"apihelp-wbsetlabel-param-id": "Identificateur de l’entité, y compris le préfixe.\nUtiliser soit <var>id</var>, soit <var>site</var> et <var>title</var> ensemble.",
 	"apihelp-wbsetlabel-param-new": "Si elle est définie, une nouvelle entité sera créée. \nLa valeur indiquée doit correspondre au type d'entité que vous souhaitez créer.",

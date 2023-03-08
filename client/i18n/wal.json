@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ella Lachow"
+		]
+	},
+	"wikibase-editlinks": "Gayttiyageeta harumma",
+	"wikibase-linkitem-addlinks": "Gattiyaageta gujja",
+	"wikibase-linkitem-title": "Hara sinttaara gatta",
+	"wikibase-linkitem-linkpage": "Sinttaara gatta",
+	"wikibase-linkitem-selectlink": "Hayyanaa ha sinttaara ne gattanawu koyyiyo sohuwaanne sinttaa dooraa.",
+	"wikibase-linkitem-input-site": "Doonaa:",
+	"wikibase-linkitem-input-page": "Sinttaa:",
+	"wikibase-rc-hide-wikidata-hide": "Gentta",
+	"wikibase-rc-hide-wikidata-show": "Bessa",
+	"wikibase-otherprojects": "Hara proojektetun"
+}

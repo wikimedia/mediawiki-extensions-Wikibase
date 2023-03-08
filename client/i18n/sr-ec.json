@@ -12,7 +12,8 @@
 			"Srdjan m",
 			"Zoranzoki21",
 			"Милан Јелисавчић",
-			"Сербијана"
+			"Сербијана",
+			"Zenfiric"
 		]
 	},
 	"wikibase-client-desc": "Клијент за додатак Wikibase",
@@ -77,7 +78,7 @@
 	"wikibase-pageswithbadges-legend": "Списак страница са датом значком",
 	"wikibase-pageswithbadges-badge": "Значка:",
 	"wikibase-pageswithbadges-submit": "Прикажи странице",
-	"entityusage": "Употреба јединица",
+	"entityusage": "Употреба ентитета",
 	"wikibase-entityusage-entity": "Ентитет:",
 	"wikibase-entityusage-submit": "Прикажи странице",
 	"wikibase-pageinfo-entity-id": "ID ставке на Википодацима",
