@@ -12,6 +12,8 @@
 	"valueview-expert-timevalue-calendar-gregorian": "גרעגאריאניש",
 	"valueview-expert-timevalue-calendar-julian": "יוליאניש",
 	"valueview-expert-timeinput-precision": "גענויקייט:",
+	"valueview-expert-timeinput-precision-year100": "יאָרהונדערט",
+	"valueview-expert-timeinput-precision-year": "יאָר",
 	"valueview-expert-timeinput-calendar": "קאַלענדאַר:",
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
 	"valueview-expertextender-languageselector-label": "שפראך (פֿליכטלעך)",
