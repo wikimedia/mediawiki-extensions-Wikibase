@@ -4,7 +4,6 @@ namespace Wikibase\Repo\RestApi\UseCases\GetItemStatements;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 
@@ -29,7 +28,7 @@ class GetItemStatementsValidator {
 		$validationError = $this->itemIdValidator->validate( $request->getItemId() );
 		if ( $validationError ) {
 			throw new UseCaseException(
-				ErrorResponse::INVALID_ITEM_ID,
+				UseCaseException::INVALID_ITEM_ID,
 				'Not a valid item ID: ' . $validationError->getContext()[ItemIdValidator::CONTEXT_VALUE]
 			);
 		}
@@ -50,7 +49,7 @@ class GetItemStatementsValidator {
 			new NumericPropertyId( $propertyId );
 		} catch ( InvalidArgumentException $e ) {
 			throw new UseCaseException(
-				ErrorResponse::INVALID_PROPERTY_ID,
+				UseCaseException::INVALID_PROPERTY_ID,
 				"Not a valid property ID: {$propertyId}",
 				[ self::CONTEXT_PROPERTY_ID_VALUE => $propertyId ]
 			);

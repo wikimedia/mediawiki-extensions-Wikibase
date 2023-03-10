@@ -10,7 +10,6 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
 use Wikibase\Repo\RestApi\Domain\Services\ItemAliasesRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
-use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemAliases\GetItemAliases;
 use Wikibase\Repo\RestApi\UseCases\GetItemAliases\GetItemAliasesRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemAliases\GetItemAliasesResponse;
@@ -90,7 +89,7 @@ class GetItemAliasesTest extends TestCase {
 
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $useCaseEx ) {
-			$this->assertSame( ErrorResponse::INVALID_ITEM_ID, $useCaseEx->getErrorCode() );
+			$this->assertSame( UseCaseException::INVALID_ITEM_ID, $useCaseEx->getErrorCode() );
 			$this->assertSame( 'Not a valid item ID: X321', $useCaseEx->getErrorMessage() );
 			$this->assertNull( $useCaseEx->getErrorContext() );
 		}
@@ -110,7 +109,7 @@ class GetItemAliasesTest extends TestCase {
 				new GetItemAliasesRequest( $itemId->getSerialization() )
 			);
 		} catch ( UseCaseException $e ) {
-			$this->assertSame( ErrorResponse::ITEM_NOT_FOUND, $e->getErrorCode() );
+			$this->assertSame( UseCaseException::ITEM_NOT_FOUND, $e->getErrorCode() );
 			$this->assertSame( 'Could not find an item with the ID: Q10', $e->getErrorMessage() );
 			$this->assertNull( $e->getErrorContext() );
 		}

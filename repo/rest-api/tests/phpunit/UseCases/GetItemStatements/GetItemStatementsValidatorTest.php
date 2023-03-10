@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\RestApi\UseCases\GetItemStatements;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatementsRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatementsValidator;
 use Wikibase\Repo\RestApi\UseCases\UseCaseException;
@@ -25,7 +24,7 @@ class GetItemStatementsValidatorTest extends TestCase {
 
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
-			$this->assertSame( ErrorResponse::INVALID_ITEM_ID, $e->getErrorCode() );
+			$this->assertSame( UseCaseException::INVALID_ITEM_ID, $e->getErrorCode() );
 			$this->assertSame( 'Not a valid item ID: X123', $e->getErrorMessage() );
 		}
 	}
@@ -36,7 +35,7 @@ class GetItemStatementsValidatorTest extends TestCase {
 
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
-			$this->assertSame( ErrorResponse::INVALID_PROPERTY_ID, $e->getErrorCode() );
+			$this->assertSame( UseCaseException::INVALID_PROPERTY_ID, $e->getErrorCode() );
 			$this->assertSame( 'Not a valid property ID: X123', $e->getErrorMessage() );
 			$this->assertSame( [ GetItemStatementsValidator::CONTEXT_PROPERTY_ID_VALUE => 'X123' ], $e->getErrorContext() );
 		}

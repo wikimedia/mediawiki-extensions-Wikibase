@@ -25,7 +25,6 @@ use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementRequest;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementResponse;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementValidator;
-use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
@@ -152,7 +151,7 @@ class AddItemStatementTest extends TestCase {
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
-			$this->assertSame( ErrorResponse::ITEM_NOT_FOUND, $e->getErrorCode() );
+			$this->assertSame( UseCaseException::ITEM_NOT_FOUND, $e->getErrorCode() );
 			$this->assertStringContainsString( $itemId, $e->getErrorMessage() );
 		}
 	}
@@ -164,7 +163,7 @@ class AddItemStatementTest extends TestCase {
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
-			$this->assertSame( ErrorResponse::INVALID_ITEM_ID, $e->getErrorCode() );
+			$this->assertSame( UseCaseException::INVALID_ITEM_ID, $e->getErrorCode() );
 		}
 	}
 
@@ -189,7 +188,7 @@ class AddItemStatementTest extends TestCase {
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
-			$this->assertSame( ErrorResponse::ITEM_REDIRECTED, $e->getErrorCode() );
+			$this->assertSame( UseCaseException::ITEM_REDIRECTED, $e->getErrorCode() );
 			$this->assertStringContainsString( $redirectTarget, $e->getErrorMessage() );
 		}
 	}
@@ -219,7 +218,7 @@ class AddItemStatementTest extends TestCase {
 			$this->newUseCase()->execute( $request );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
-			$this->assertSame( ErrorResponse::PERMISSION_DENIED, $e->getErrorCode() );
+			$this->assertSame( UseCaseException::PERMISSION_DENIED, $e->getErrorCode() );
 		}
 	}
 

@@ -7,7 +7,6 @@ use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementRetriever;
-use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 
 /**
@@ -48,7 +47,7 @@ class GetItemStatement {
 		if ( !$latestRevisionMetadata->itemExists() ) {
 			if ( $requestedItemId ) {
 				throw new UseCaseException(
-					ErrorResponse::ITEM_NOT_FOUND,
+					UseCaseException::ITEM_NOT_FOUND,
 					"Could not find an item with the ID: {$itemId}"
 				);
 			}
@@ -76,7 +75,7 @@ class GetItemStatement {
 	 */
 	private function throwStatementNotFoundException( string $statementId ): void {
 		throw new UseCaseException(
-			ErrorResponse::STATEMENT_NOT_FOUND,
+			UseCaseException::STATEMENT_NOT_FOUND,
 			"Could not find a statement with the ID: $statementId"
 		);
 	}

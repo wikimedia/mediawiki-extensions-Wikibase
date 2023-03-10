@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\UseCases\GetItemDescriptions;
 
-use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 
@@ -25,7 +24,7 @@ class GetItemDescriptionsValidator {
 
 		if ( $validationError ) {
 			throw new UseCaseException(
-				ErrorResponse::INVALID_ITEM_ID,
+				UseCaseException::INVALID_ITEM_ID,
 				'Not a valid item ID: ' . $validationError->getContext()[ItemIdValidator::CONTEXT_VALUE]
 			);
 		}

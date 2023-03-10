@@ -9,8 +9,8 @@ use MediaWiki\Tests\Rest\Handler\HandlerTestTrait;
 use MediaWikiIntegrationTestCase;
 use RuntimeException;
 use Wikibase\Repo\RestApi\RouteHandlers\GetItemAliasesRouteHandler;
-use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemAliases\GetItemAliases;
+use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 
 /**
  * @covers \Wikibase\Repo\RestApi\RouteHandlers\GetItemRouteHandler
@@ -34,7 +34,7 @@ class GetItemAliasesRouteHandlerTest extends MediaWikiIntegrationTestCase {
 		$response = $routeHandler->execute();
 		$responseBody = json_decode( $response->getBody()->getContents() );
 		$this->assertSame( [ 'en' ], $response->getHeader( 'Content-Language' ) );
-		$this->assertSame( ErrorResponse::UNEXPECTED_ERROR, $responseBody->code );
+		$this->assertSame( UseCaseException::UNEXPECTED_ERROR, $responseBody->code );
 	}
 
 	public function testReadWriteAccess(): void {
