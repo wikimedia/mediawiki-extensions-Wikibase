@@ -11,5 +11,8 @@
 	"wikibase-linkitem-linkpage": "पृष्ठ सी जोडैं",
 	"wikibase-linkitem-selectlink": "ऐं पृष्ठ सी जोड़न खातर कृपया एक साइट और एक पृष्ठ चुनैं।",
 	"wikibase-linkitem-input-site": "भाषा:",
-	"wikibase-linkitem-input-page": "पृष्ठ:"
+	"wikibase-linkitem-input-page": "पृष्ठ:",
+	"wikibase-rc-hide-wikidata-hide": "छिपाएँ",
+	"wikibase-rc-hide-wikidata-show": "दिखाएँ",
+	"wikibase-otherprojects": "दूसरे परियोजनाओं में"
 }
