@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\RestApi\RouteHandlers;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 use Wikibase\Repo\RestApi\RouteHandlers\ResponseFactory;
 use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 
@@ -22,17 +21,14 @@ class ResponseFactoryTest extends TestCase {
 	 * @dataProvider errorCodeToHttpStatusCodeProvider
 	 */
 	public function testNewErrorResponse( string $errorCode, int $httpStatus ): void {
-		$errorMessage = 'some-message';
-		$responseBody = '{"some": "json"}';
-		$errorPresenter = $this->createMock( ErrorJsonPresenter::class );
-		$errorPresenter->expects( $this->once() )
-			->method( 'getJson' )
-			->with( $errorCode, $errorMessage )
-			->willReturn( $responseBody );
+		$errorMessage = 'testNewErrorResponse error message';
 
-		$httpResponse = ( new ResponseFactory( $errorPresenter ) )->newErrorResponse( $errorCode, $errorMessage );
+		$httpResponse = ( new ResponseFactory() )->newErrorResponse( $errorCode, $errorMessage );
 
-		$this->assertSame( $responseBody, $httpResponse->getBody()->getContents() );
+		$this->assertJsonStringEqualsJsonString(
+			"{ \"code\": \"{$errorCode}\", \"message\": \"{$errorMessage}\" }",
+			$httpResponse->getBody()->getContents()
+		);
 		$this->assertSame( $httpStatus, $httpResponse->getStatusCode() );
 	}
 
@@ -47,10 +43,8 @@ class ResponseFactoryTest extends TestCase {
 	}
 
 	public function testGivenAuthorizationError_newErrorResponseReturnsRestWriteDenied(): void {
-		$errorPresenter = $this->createMock( ErrorJsonPresenter::class );
-		$errorPresenter->expects( $this->never() )->method( $this->anything() );
 
-		$httpResponse = ( new ResponseFactory( $errorPresenter ) )
+		$httpResponse = ( new ResponseFactory() )
 			->newErrorResponse( UseCaseException::PERMISSION_DENIED, 'item protected' );
 
 		$this->assertSame( 403, $httpResponse->getStatusCode() );

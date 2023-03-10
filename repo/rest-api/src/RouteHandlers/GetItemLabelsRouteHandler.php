@@ -7,7 +7,6 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Rest\ResponseInterface;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
-use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
@@ -45,7 +44,7 @@ class GetItemLabelsRouteHandler extends SimpleHandler {
 	}
 
 	public static function factory(): self {
-		$responseFactory = new ResponseFactory( new ErrorJsonPresenter() );
+		$responseFactory = new ResponseFactory();
 		return new self(
 			WbRestApi::getGetItemLabels(),
 			new LabelsSerializer(),

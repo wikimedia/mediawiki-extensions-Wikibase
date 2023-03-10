@@ -9,7 +9,6 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
 use MediaWiki\Rest\Validator\BodyValidator;
-use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\BotRightCheckMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\ContentTypeCheckMiddleware;
@@ -51,10 +50,10 @@ class RemoveStatementRouteHandler extends SimpleHandler {
 	}
 
 	public static function factory(): Handler {
-		$responseFactory = new ResponseFactory( new ErrorJsonPresenter() );
+		$responseFactory = new ResponseFactory();
 		return new self(
 			WbRestApi::getRemoveItemStatement(),
-			new ResponseFactory( new ErrorJsonPresenter() ),
+			new ResponseFactory(),
 			new MiddlewareHandler( [
 				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
 				new UserAgentCheckMiddleware(),

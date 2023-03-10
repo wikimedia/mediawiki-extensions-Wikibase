@@ -13,7 +13,6 @@ use RuntimeException;
 use Throwable;
 use TypeError;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdatePrevented;
-use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\ResponseFactory;
 use Wikibase\Repo\RestApi\UseCases\UseCaseException;
@@ -116,7 +115,7 @@ class UnexpectedErrorHandlerMiddlewareTest extends TestCase {
 
 	private function newMiddleware(): UnexpectedErrorHandlerMiddleware {
 		return new UnexpectedErrorHandlerMiddleware(
-			new ResponseFactory( new ErrorJsonPresenter() ),
+			new ResponseFactory(),
 			$this->errorReporter,
 			$this->logger
 		);
