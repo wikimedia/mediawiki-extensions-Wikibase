@@ -37,7 +37,7 @@ class ErrorResponseToHttpStatus {
 		ErrorResponse::UNEXPECTED_ERROR => 500,
 	];
 
-	public static function lookup( ErrorResponse $error ): int {
-		return self::$lookupTable[ $error->getCode() ];
+	public static function lookup( string $errorCode ): int {
+		return self::$lookupTable[ $errorCode ];
 	}
 }

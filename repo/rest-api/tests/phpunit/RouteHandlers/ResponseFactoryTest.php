@@ -22,17 +22,15 @@ class ResponseFactoryTest extends TestCase {
 	 * @dataProvider errorCodeToHttpStatusCodeProvider
 	 */
 	public function testNewErrorResponse( string $errorCode, int $httpStatus ): void {
-		$useCaseResponse = $this->createStub( ErrorResponse::class );
-		$useCaseResponse->method( 'getCode' )->willReturn( $errorCode );
-
+		$errorMessage = 'some-message';
 		$responseBody = '{"some": "json"}';
 		$errorPresenter = $this->createMock( ErrorJsonPresenter::class );
 		$errorPresenter->expects( $this->once() )
 			->method( 'getJson' )
-			->with( $useCaseResponse )
+			->with( $errorCode, $errorMessage )
 			->willReturn( $responseBody );
 
-		$httpResponse = ( new ResponseFactory( $errorPresenter ) )->newErrorResponse( $useCaseResponse );
+		$httpResponse = ( new ResponseFactory( $errorPresenter ) )->newErrorResponse( $errorCode, $errorMessage );
 
 		$this->assertSame( $responseBody, $httpResponse->getBody()->getContents() );
 		$this->assertSame( $httpStatus, $httpResponse->getStatusCode() );
@@ -49,12 +47,11 @@ class ResponseFactoryTest extends TestCase {
 	}
 
 	public function testGivenAuthorizationError_newErrorResponseReturnsRestWriteDenied(): void {
-		$useCaseResponse = new ErrorResponse( ErrorResponse::PERMISSION_DENIED, 'item protected' );
-
 		$errorPresenter = $this->createMock( ErrorJsonPresenter::class );
 		$errorPresenter->expects( $this->never() )->method( $this->anything() );
 
-		$httpResponse = ( new ResponseFactory( $errorPresenter ) )->newErrorResponse( $useCaseResponse );
+		$httpResponse = ( new ResponseFactory( $errorPresenter ) )
+			->newErrorResponse( ErrorResponse::PERMISSION_DENIED, 'item protected' );
 
 		$this->assertSame( 403, $httpResponse->getStatusCode() );
 		$this->assertStringContainsString( 'rest-write-denied', $httpResponse->getBody()->getContents() );

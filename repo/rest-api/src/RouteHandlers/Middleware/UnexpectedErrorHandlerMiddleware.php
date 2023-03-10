@@ -40,7 +40,8 @@ class UnexpectedErrorHandlerMiddleware implements Middleware {
 		}
 
 		return $this->responseFactory->newErrorResponse(
-			new ErrorResponse( ErrorResponse::UNEXPECTED_ERROR, 'Unexpected error' )
+			ErrorResponse::UNEXPECTED_ERROR,
+			'Unexpected error'
 		);
 	}
 
