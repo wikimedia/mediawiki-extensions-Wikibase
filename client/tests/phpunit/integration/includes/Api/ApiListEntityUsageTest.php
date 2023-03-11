@@ -28,7 +28,12 @@ use Wikibase\Client\WikibaseClient;
  */
 class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 
-	public function addDBDataOnce(): void {
+	protected $tablesUsed = [
+		'page',
+		'wbc_entity_usage',
+	];
+
+	public function addDBData(): void {
 		$this->insertPages();
 		$this->insertEntityUsageData();
 	}
@@ -50,9 +55,6 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 		];
 
 		foreach ( $dump as $table => $rows ) {
-			// Clean everything
-			$this->db->delete( $table, '*' );
-
 			foreach ( $rows as $row ) {
 				$title = Title::makeTitle( $row['page_namespace'], $row['page_title'] );
 				$page = $this->getServiceContainer()->getWikiPageFactory()->newFromTitle( $title );
@@ -88,9 +90,6 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 		];
 
 		foreach ( $dump as $table => $rows ) {
-			// Clean everything
-			$this->db->delete( $table, '*' );
-
 			foreach ( $rows as $row ) {
 				$this->db->insert( $table, $row );
 			}
