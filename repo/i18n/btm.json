@@ -1,11 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
 			"Simartampua"
 		]
 	},
-	"wikibase-edit": "Pature",
-	"wikibase-add": "Manambaon",
+	"wikibase-edit": "pature",
+	"wikibase-add": "manambaon",
 	"wikibase-label-empty": "Indadong label naitontuon",
 	"wikibase-description-empty": "Inda adong deskripsi naidefenision",
 	"wikibase-sitelinks-special": "Situs lain",
