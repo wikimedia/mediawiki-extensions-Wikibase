@@ -1,15 +1,7 @@
 /**
  * @license GNU GPL v2+
  */
-.wikibase-sitelinkgroupview .wikibase-sitelinkgroupview-heading-section {
-	margin-right: 24px;
-}
-
-.wikibase-sitelinkgroupview > .mw-collapsible-toggle {
-	position: sticky;
-	top: 0;
-	margin-bottom: 0.3em;
-	background-color: #fff;
+.wikibase-sitelinkgroupview .mw-collapsible-toggle {
 	background-position: right;
 	background-repeat: no-repeat;
 	height: 24px;
@@ -18,8 +10,8 @@
 	width: 24px;
 }
 
-.wikibase-sitelinkgroupview > .mw-collapsible-toggle,
-.wikibase-sitelinkgroupview > .mw-collapsible-toggle-expanded {
+.wikibase-sitelinkgroupview .mw-collapsible-toggle,
+.wikibase-sitelinkgroupview .mw-collapsible-toggle-expanded {
 	/* SVG support using a transparent gradient to guarantee cross-browser
 	 * compatibility (browsers able to understand gradient syntax support also SVG).
 	 * http://pauginer.tumblr.com/post/36614680636/invisible-gradient-technique */
@@ -28,7 +20,7 @@
 	background-image: linear-gradient( transparent, transparent ), url( images/collapse.svg );
 }
 
-.wikibase-sitelinkgroupview > .mw-collapsible-toggle-collapsed {
+.wikibase-sitelinkgroupview .mw-collapsible-toggle-collapsed {
 	/* SVG support using a transparent gradient to guarantee cross-browser
 	 * compatibility (browsers able to understand gradient syntax support also SVG).
 	 * http://pauginer.tumblr.com/post/36614680636/invisible-gradient-technique */
