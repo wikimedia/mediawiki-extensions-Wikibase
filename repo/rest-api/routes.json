@@ -63,5 +63,10 @@
 		"path": "/wikibase/v0/entities/items/{item_id}/descriptions",
 		"method": "GET",
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetItemDescriptionsRouteHandler::factory"
+	},
+	{
+		"path": "/wikibase/v0/entities/items/{item_id}/aliases",
+		"method": "GET",
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetItemAliasesRouteHandler::factory"
 	}
 ]
