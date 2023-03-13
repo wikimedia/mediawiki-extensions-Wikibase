@@ -65,7 +65,7 @@
 	"wikibase-property-render-error": "האט נישט געקענט רענדערן אייגנשאפט  $1: $2",
 	"wikibase-otherprojects": "אין אנדערע פראיעקטן",
 	"wikibase-otherprojects-beta-message": "אנדערע פראיעקטן זייטפאס",
-	"wikibase-sitelinks-sitename-columnheading": "שפראַך",
+	"wikibase-sitelinks-sitename-columnheading": "שפּראַך",
 	"wikibase-sitelinks-link-columnheading": "פארלינקטער בלאט",
 	"notification-header-page-connection": "דער בלאט <strong>$3</strong> איז געווארן {{GENDER:$2|פֿארבונדן}} מיט {{PLURAL:$4|-1=א {{WBREPONAME}} אביעקט|דעם {{WBREPONAME}} אביעקט $4}}, וואו קען ווערן געזאמלט דאטן רעלעוואנט צו דער טעמע.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> און נאך {{PLURAL:$4|איין בלאַט|$4 בלעטער|100=99+ בלעטער}} זענען {{GENDER:$2|פֿאַרבונדן געווארן}} מיט {{WBREPONAME}}-אביעקטן.",

@@ -105,7 +105,7 @@
 	"apihelp-wbmergeitems-summary": "Voegt meerdere items samen.",
 	"apihelp-wbmergeitems-param-fromid": "Het ID waarvan samen te voegen",
 	"apihelp-wbmergeitems-param-toid": "Het ID waarnaar samen te voegen",
-	"apihelp-wbmergeitems-param-ignoreconflicts": "Reeks van elementen van het item waarvoor conflicten worden genegeerd, kan alleen waarden bevatten voor \"<var>beschrijving</var>\", \"<var>sitekoppeling</var>\" en \"<var>verklaring</var>\"",
+	"apihelp-wbmergeitems-param-ignoreconflicts": "Array van elementen van het item waarvoor conflicten moeten worden genegeerd. Kan alleen de waarden \"<var>description</var>\", \"<var>sitelink</var>\" en \"<var>statement</var>\" bevatten.",
 	"apihelp-wbmergeitems-param-summary": "Samenvatting van de bewerking.\nZal worden voorafgegaan door automatisch gegenereerd commentaar. De maximale lengte van het automatisch gegenereerde commentaar plus de samenvatting is 260 tekens. Wees u ervan bewust dat alles boven die limiet zal worden afgeknipt.",
 	"apihelp-wbmergeitems-param-bot": "Deze bewerking als botbewerking markeren. Deze URL-markering zal alleen in acht worden genomen indien de gebruiker tot de groep \"bot\" behoort.",
 	"apihelp-wbmergeitems-example-1": "Voegt gegevens van <samp>Q42</samp> samen naar <samp>Q222</samp>",

@@ -147,7 +147,7 @@
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "Uredite vrednost v projektu {{WBREPONAME}}",
 	"wikibase-client-data-bridge-bailout-suggestion-edit-article": "Odvisno od uporabljene predloge je mogoče vrednost z [$1 urejevalnikom člankov] lokalno prepisati. Če je le mogoče, vam priporočamo, da dodate vrednost z uporabo zgornjega gumba v projektu {{WBREPONAME}}.",
 	"wikibase-client-data-bridge-unsupported-datatype-error-head": "Urejanje vrednosti lastnosti $1 trenutno ni podprto",
-	"wikibase-client-data-bridge-unsupported-datatype-error-body": "$1 je podatkovna vrsta $2 v projektu {{WBREPONAME}}. Urejanje te podatkovne vrste trenutno ni podprto.",
+	"wikibase-client-data-bridge-unsupported-datatype-error-body": "$1 je podatkovni tip $2 v projektu {{WBREPONAME}}. Urejanje tega podatkovnega tipa trenutno ni podprto.",
 	"wikibase-client-data-bridge-deprecated-statement-error-head": "Urejanje vrednosti lastnosti $1 trenutno ni podprto",
 	"wikibase-client-data-bridge-deprecated-statement-error-body": "Vrednost lastnosti $1 je v projektu {{WBREPONAME}} <em>opuščena</em>. Urejanje <em>opuščenih</em> vrednosti trenutno ni podprto.",
 	"wikibase-client-data-bridge-ambiguous-statement-error-head": "Urejanje več vrednosti trenutno ni podprto",
