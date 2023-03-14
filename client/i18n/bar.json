@@ -10,8 +10,13 @@
 	"wikibase-dataitem": "{{WBREPONAME}}-Item",
 	"wikibase-editlinks": "Links beorwatn",
 	"wikibase-editlinkstitle": "Links a Artiken in andane Sprochn beorwatn",
+	"wikibase-linkitem-addlinks": "Links dazuafiang",
+	"wikibase-linkitem-title": "Mid da Seiten valinken",
 	"wikibase-linkitem-linkpage": "Mid da Seiten valinken",
+	"wikibase-linkitem-selectlink": "Biddschen suach da'ra Nétzseiten und a Seiten aus, dé du mid dera Seiten valinken wüjst.",
+	"wikibase-linkitem-input-site": "Sprooch:",
 	"wikibase-linkitem-input-page": "Seiten:",
+	"wikibase-rc-hide-wikidata-hide": "Ausblénden",
 	"wikibase-rc-hide-wikidata-show": "oozoang",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-Beorwatung"
 }
