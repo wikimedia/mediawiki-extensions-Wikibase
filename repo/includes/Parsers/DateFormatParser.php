@@ -224,6 +224,10 @@ class DateFormatParser extends StringValueParser {
 					}
 					break;
 
+				// Textual representation of the day of the week. Redundant, just continue as if
+				// it's not in the format string.
+				case 'D':
+				case 'l':
 				// We can ignore "raw" and "raw toggle" when parsing, because we always accept
 				// canonical digits.
 				case 'xN':
@@ -239,9 +243,7 @@ class DateFormatParser extends StringValueParser {
 				case 'c':
 				case 'r':
 				case 'U':
-				// Day of the week
-				case 'D':
-				case 'l':
+				// Numeric representation of the day of the week
 				case 'N':
 				case 'w':
 				// Timezone
