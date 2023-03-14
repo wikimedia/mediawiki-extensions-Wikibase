@@ -6,7 +6,6 @@ use HttpStatus;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\StringStream;
 use Wikibase\Repo\RestApi\Presentation\ErrorResponseToHttpStatus;
-use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 
 /**
@@ -14,29 +13,25 @@ use Wikibase\Repo\RestApi\UseCases\UseCaseException;
  */
 class ResponseFactory {
 
-	private ErrorJsonPresenter $errorPresenter;
-
-	public function __construct( ErrorJsonPresenter $errorPresenter ) {
-		$this->errorPresenter = $errorPresenter;
-	}
-
 	public function newErrorResponseFromException( UseCaseException $e ): Response {
 		return $this->newErrorResponse( $e->getErrorCode(), $e->getErrorMessage(), $e->getErrorContext() );
 	}
 
-	public function newErrorResponse( string $errorCode, string $errorMessage, array $errorContext = null ): Response {
+	public function newErrorResponse( string $code, string $message, array $context = null ): Response {
 		// respond with framework error, when user cannot edit the Item
-		if ( $errorCode === UseCaseException::PERMISSION_DENIED ) {
+		if ( $code === UseCaseException::PERMISSION_DENIED ) {
 			return $this->newFrameworkAlikePermissionDeniedResponse();
 		}
 
 		$httpResponse = new Response();
 		$httpResponse->setHeader( 'Content-Type', 'application/json' );
 		$httpResponse->setHeader( 'Content-Language', 'en' );
-		$httpResponse->setStatus( ErrorResponseToHttpStatus::lookup( $errorCode ) );
-		$httpResponse->setBody( new StringStream(
-			$this->errorPresenter->getJson( $errorCode, $errorMessage, $errorContext )
-		) );
+		$httpResponse->setStatus( ErrorResponseToHttpStatus::lookup( $code ) );
+		$httpResponse->setBody( new StringStream( json_encode(
+			// use array_filter to remove 'context' from array if $context is NULL
+			array_filter( [ 'code' => $code, 'message' => $message, 'context' => $context ] ),
+			JSON_UNESCAPED_SLASHES
+		) ) );
 
 		return $httpResponse;
 	}

@@ -7,7 +7,6 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Rest\ResponseInterface;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
-use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
@@ -48,7 +47,7 @@ class GetItemDescriptionsRouteHandler extends SimpleHandler {
 		return new self(
 			WbRestApi::getGetItemDescriptions(),
 			new DescriptionsSerializer(),
-			new ResponseFactory( new ErrorJsonPresenter() ),
+			new ResponseFactory(),
 			new MiddlewareHandler( [
 				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
 				new UserAgentCheckMiddleware(),

@@ -8,7 +8,6 @@ use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Response;
 use MediaWiki\User\UserIdentity;
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\BotRightCheckMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\ResponseFactory;
 
@@ -75,7 +74,7 @@ class BotRightCheckMiddlewareTest extends TestCase {
 	private function newMiddleware( PermissionManager $permissionManager = null ): BotRightCheckMiddleware {
 		return new BotRightCheckMiddleware(
 			$permissionManager ?? $this->createStub( PermissionManager::class ),
-			new ResponseFactory( new ErrorJsonPresenter() )
+			new ResponseFactory()
 		);
 	}
 
