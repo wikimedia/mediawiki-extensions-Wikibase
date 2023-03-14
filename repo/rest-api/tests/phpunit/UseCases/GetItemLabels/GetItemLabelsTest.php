@@ -10,7 +10,6 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\Services\ItemLabelsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
-use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabels;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabelsRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabelsResponse;
@@ -80,7 +79,7 @@ class GetItemLabelsTest extends TestCase {
 
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
-			$this->assertSame( ErrorResponse::INVALID_ITEM_ID, $e->getErrorCode() );
+			$this->assertSame( UseCaseException::INVALID_ITEM_ID, $e->getErrorCode() );
 			$this->assertSame( 'Not a valid item ID: X321', $e->getErrorMessage() );
 			$this->assertNull( $e->getErrorContext() );
 		}
@@ -102,7 +101,7 @@ class GetItemLabelsTest extends TestCase {
 
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
-			$this->assertSame( ErrorResponse::ITEM_NOT_FOUND, $e->getErrorCode() );
+			$this->assertSame( UseCaseException::ITEM_NOT_FOUND, $e->getErrorCode() );
 			$this->assertSame( 'Could not find an item with the ID: Q10', $e->getErrorMessage() );
 			$this->assertNull( $e->getErrorContext() );
 		}

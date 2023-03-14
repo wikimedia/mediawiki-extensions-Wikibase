@@ -10,7 +10,6 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\Services\ItemDescriptionsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
-use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemDescriptions\GetItemDescriptions;
 use Wikibase\Repo\RestApi\UseCases\GetItemDescriptions\GetItemDescriptionsRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemDescriptions\GetItemDescriptionsResponse;
@@ -78,7 +77,7 @@ class GetItemDescriptionsTest extends TestCase {
 
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $useCaseEx ) {
-			$this->assertSame( ErrorResponse::INVALID_ITEM_ID, $useCaseEx->getErrorCode() );
+			$this->assertSame( UseCaseException::INVALID_ITEM_ID, $useCaseEx->getErrorCode() );
 			$this->assertSame( 'Not a valid item ID: X321', $useCaseEx->getErrorMessage() );
 			$this->assertNull( $useCaseEx->getErrorContext() );
 		}
@@ -98,7 +97,7 @@ class GetItemDescriptionsTest extends TestCase {
 				new GetItemDescriptionsRequest( $itemId->getSerialization() )
 			);
 		} catch ( UseCaseException $e ) {
-			$this->assertSame( ErrorResponse::ITEM_NOT_FOUND, $e->getErrorCode() );
+			$this->assertSame( UseCaseException::ITEM_NOT_FOUND, $e->getErrorCode() );
 			$this->assertSame( 'Could not find an item with the ID: Q10', $e->getErrorMessage() );
 			$this->assertNull( $e->getErrorContext() );
 		}

@@ -8,7 +8,6 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Statement\StatementGuid;
-use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementRequest;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementValidator;
 use Wikibase\Repo\RestApi\UseCases\UseCaseException;
@@ -104,7 +103,7 @@ class PatchItemStatementValidatorTest extends TestCase {
 		];
 		yield 'from missing patch field' => [
 			new ValidationError( JsonPatchValidator::CODE_MISSING_FIELD, $context ),
-			ErrorResponse::MISSING_JSON_PATCH_FIELD,
+			UseCaseException::MISSING_JSON_PATCH_FIELD,
 			"Missing 'op' in JSON patch",
 			$context,
 		];
@@ -112,7 +111,7 @@ class PatchItemStatementValidatorTest extends TestCase {
 		$context = [ JsonPatchValidator::CONTEXT_OPERATION => [ 'op' => 'bad', 'path' => '/a/b/c', 'value' => 'test' ] ];
 		yield 'from invalid patch operation' => [
 			new ValidationError( JsonPatchValidator::CODE_INVALID_OPERATION, $context ),
-			ErrorResponse::INVALID_PATCH_OPERATION,
+			UseCaseException::INVALID_PATCH_OPERATION,
 			"Incorrect JSON patch operation: 'bad'",
 			$context,
 		];
@@ -127,7 +126,7 @@ class PatchItemStatementValidatorTest extends TestCase {
 		];
 		yield 'from invalid patch field type' => [
 			new ValidationError( JsonPatchValidator::CODE_INVALID_FIELD_TYPE, $context ),
-			ErrorResponse::INVALID_PATCH_FIELD_TYPE,
+			UseCaseException::INVALID_PATCH_FIELD_TYPE,
 			"The value of 'op' must be of type string",
 			$context,
 		];
@@ -137,7 +136,7 @@ class PatchItemStatementValidatorTest extends TestCase {
 				StatementValidator::CODE_INVALID_FIELD,
 				[ 'field' => 'rank', 'value' => 'not-a-valid-rank' ]
 			),
-			ErrorResponse::PATCHED_STATEMENT_INVALID_FIELD,
+			UseCaseException::PATCHED_STATEMENT_INVALID_FIELD,
 			"Invalid input for 'rank' in the patched statement",
 			[ 'path' => 'rank', 'value' => 'not-a-valid-rank' ],
 		];
@@ -147,7 +146,7 @@ class PatchItemStatementValidatorTest extends TestCase {
 				StatementValidator::CODE_MISSING_FIELD,
 				[ 'field' => 'property' ]
 			),
-			ErrorResponse::PATCHED_STATEMENT_MISSING_FIELD,
+			UseCaseException::PATCHED_STATEMENT_MISSING_FIELD,
 			'Mandatory field missing in the patched statement: property',
 			[ 'path' => 'property' ],
 		];
@@ -169,7 +168,7 @@ class PatchItemStatementValidatorTest extends TestCase {
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
-			$this->assertSame( ErrorResponse::INVALID_ITEM_ID, $e->getErrorCode() );
+			$this->assertSame( UseCaseException::INVALID_ITEM_ID, $e->getErrorCode() );
 			$this->assertSame(
 				'Not a valid item ID: ' . $itemId,
 				$e->getErrorMessage()
@@ -194,7 +193,7 @@ class PatchItemStatementValidatorTest extends TestCase {
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
-			$this->assertSame( ErrorResponse::INVALID_STATEMENT_ID, $e->getErrorCode() );
+			$this->assertSame( UseCaseException::INVALID_STATEMENT_ID, $e->getErrorCode() );
 			$this->assertSame(
 				'Not a valid statement ID: ' . $statementId,
 				$e->getErrorMessage()
@@ -224,7 +223,7 @@ class PatchItemStatementValidatorTest extends TestCase {
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
-			$this->assertSame( ErrorResponse::INVALID_PATCH, $e->getErrorCode() );
+			$this->assertSame( UseCaseException::INVALID_PATCH, $e->getErrorCode() );
 			$this->assertSame( 'The provided patch is invalid', $e->getErrorMessage() );
 		}
 	}
@@ -269,7 +268,7 @@ class PatchItemStatementValidatorTest extends TestCase {
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
-			$this->assertSame( ErrorResponse::INVALID_EDIT_TAG, $e->getErrorCode() );
+			$this->assertSame( UseCaseException::INVALID_EDIT_TAG, $e->getErrorCode() );
 			$this->assertSame(
 				'Invalid MediaWiki tag: "invalid"',
 				$e->getErrorMessage()

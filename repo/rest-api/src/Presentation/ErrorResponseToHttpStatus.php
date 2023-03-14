@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Presentation;
 
-use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
+use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 
 /**
  * @license GPL-2.0-or-later
@@ -12,29 +12,29 @@ class ErrorResponseToHttpStatus {
 	 * @var array
 	 */
 	private static array $lookupTable = [
-		ErrorResponse::INVALID_ITEM_ID => 400,
-		ErrorResponse::INVALID_PROPERTY_ID => 400,
-		ErrorResponse::INVALID_STATEMENT_ID => 400,
-		ErrorResponse::INVALID_FIELD => 400,
-		ErrorResponse::COMMENT_TOO_LONG => 400,
-		ErrorResponse::INVALID_EDIT_TAG => 400,
-		ErrorResponse::STATEMENT_DATA_INVALID_FIELD => 400,
-		ErrorResponse::STATEMENT_DATA_MISSING_FIELD => 400,
-		ErrorResponse::INVALID_OPERATION_CHANGED_STATEMENT_ID => 400,
-		ErrorResponse::INVALID_OPERATION_CHANGED_PROPERTY => 400,
-		ErrorResponse::INVALID_PATCH => 400,
-		ErrorResponse::INVALID_PATCH_OPERATION => 400,
-		ErrorResponse::INVALID_PATCH_FIELD_TYPE => 400,
-		ErrorResponse::MISSING_JSON_PATCH_FIELD => 400,
-		ErrorResponse::PERMISSION_DENIED => 403,
-		ErrorResponse::ITEM_NOT_FOUND => 404,
-		ErrorResponse::ITEM_REDIRECTED => 409,
-		ErrorResponse::STATEMENT_NOT_FOUND => 404,
-		ErrorResponse::PATCHED_STATEMENT_INVALID_FIELD => 422,
-		ErrorResponse::PATCHED_STATEMENT_MISSING_FIELD => 422,
-		ErrorResponse::PATCH_TEST_FAILED => 409,
-		ErrorResponse::PATCH_TARGET_NOT_FOUND => 409,
-		ErrorResponse::UNEXPECTED_ERROR => 500,
+		UseCaseException::INVALID_ITEM_ID => 400,
+		UseCaseException::INVALID_PROPERTY_ID => 400,
+		UseCaseException::INVALID_STATEMENT_ID => 400,
+		UseCaseException::INVALID_FIELD => 400,
+		UseCaseException::COMMENT_TOO_LONG => 400,
+		UseCaseException::INVALID_EDIT_TAG => 400,
+		UseCaseException::STATEMENT_DATA_INVALID_FIELD => 400,
+		UseCaseException::STATEMENT_DATA_MISSING_FIELD => 400,
+		UseCaseException::INVALID_OPERATION_CHANGED_STATEMENT_ID => 400,
+		UseCaseException::INVALID_OPERATION_CHANGED_PROPERTY => 400,
+		UseCaseException::INVALID_PATCH => 400,
+		UseCaseException::INVALID_PATCH_OPERATION => 400,
+		UseCaseException::INVALID_PATCH_FIELD_TYPE => 400,
+		UseCaseException::MISSING_JSON_PATCH_FIELD => 400,
+		UseCaseException::PERMISSION_DENIED => 403,
+		UseCaseException::ITEM_NOT_FOUND => 404,
+		UseCaseException::ITEM_REDIRECTED => 409,
+		UseCaseException::STATEMENT_NOT_FOUND => 404,
+		UseCaseException::PATCHED_STATEMENT_INVALID_FIELD => 422,
+		UseCaseException::PATCHED_STATEMENT_MISSING_FIELD => 422,
+		UseCaseException::PATCH_TEST_FAILED => 409,
+		UseCaseException::PATCH_TARGET_NOT_FOUND => 409,
+		UseCaseException::UNEXPECTED_ERROR => 500,
 	];
 
 	public static function lookup( string $errorCode ): int {

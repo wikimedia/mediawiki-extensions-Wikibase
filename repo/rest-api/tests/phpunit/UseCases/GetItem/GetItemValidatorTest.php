@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\RestApi\UseCases\GetItem;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemValidator;
 use Wikibase\Repo\RestApi\UseCases\UseCaseException;
@@ -56,17 +55,17 @@ class GetItemValidatorTest extends TestCase {
 	public function dataProviderFail(): Generator {
 		yield 'invalid item ID' => [
 			new GetItemRequest( 'X123' ),
-			ErrorResponse::INVALID_ITEM_ID,
+			UseCaseException::INVALID_ITEM_ID,
 			'Not a valid item ID: X123',
 		];
 		yield 'invalid field' => [
 			new GetItemRequest( 'Q123', [ 'type', 'unknown_field' ] ),
-			ErrorResponse::INVALID_FIELD,
+			UseCaseException::INVALID_FIELD,
 			'Not a valid field: unknown_field',
 		];
 		yield 'invalid item ID and invalid field' => [
 			new GetItemRequest( 'X123', [ 'type', 'unknown_field' ] ),
-			ErrorResponse::INVALID_ITEM_ID,
+			UseCaseException::INVALID_ITEM_ID,
 			'Not a valid item ID: X123',
 		];
 	}

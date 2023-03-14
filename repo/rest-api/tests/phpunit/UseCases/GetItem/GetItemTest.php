@@ -12,7 +12,6 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemDataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
-use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemResponse;
@@ -80,7 +79,7 @@ class GetItemTest extends TestCase {
 
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
-			$this->assertSame( ErrorResponse::ITEM_NOT_FOUND, $e->getErrorCode() );
+			$this->assertSame( UseCaseException::ITEM_NOT_FOUND, $e->getErrorCode() );
 		}
 	}
 
@@ -95,7 +94,7 @@ class GetItemTest extends TestCase {
 
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
-			$this->assertSame( ErrorResponse::INVALID_ITEM_ID, $e->getErrorCode() );
+			$this->assertSame( UseCaseException::INVALID_ITEM_ID, $e->getErrorCode() );
 		}
 	}
 

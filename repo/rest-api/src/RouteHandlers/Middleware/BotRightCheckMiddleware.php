@@ -6,7 +6,7 @@ use MediaWiki\Permissions\PermissionManager;
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Response;
 use Wikibase\Repo\RestApi\RouteHandlers\ResponseFactory;
-use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
+use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 
 /**
  * This middleware errors for bot edit requests given the user doesn't have the 'bot' right.
@@ -29,7 +29,7 @@ class BotRightCheckMiddleware implements Middleware {
 
 		if ( isset( $jsonBody['bot'] ) && $jsonBody['bot'] && !$this->permissionManager->userHasRight( $user, 'bot' ) ) {
 			return $this->responseFactory->newErrorResponse(
-				ErrorResponse::PERMISSION_DENIED,
+				UseCaseException::PERMISSION_DENIED,
 				'Unauthorized bot edit'
 			);
 		}

@@ -10,7 +10,6 @@ use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementRetriever;
-use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatement;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementValidator;
@@ -86,7 +85,7 @@ class GetItemStatementTest extends TestCase {
 
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
-			$this->assertSame( ErrorResponse::INVALID_STATEMENT_ID, $e->getErrorCode() );
+			$this->assertSame( UseCaseException::INVALID_STATEMENT_ID, $e->getErrorCode() );
 			$this->assertSame(
 				"Not a valid statement ID: {$statementId}",
 				$e->getErrorMessage()
@@ -111,7 +110,7 @@ class GetItemStatementTest extends TestCase {
 
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
-			$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $e->getErrorCode() );
+			$this->assertSame( UseCaseException::STATEMENT_NOT_FOUND, $e->getErrorCode() );
 		}
 	}
 
@@ -134,7 +133,7 @@ class GetItemStatementTest extends TestCase {
 
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
-			$this->assertSame( ErrorResponse::ITEM_NOT_FOUND, $e->getErrorCode() );
+			$this->assertSame( UseCaseException::ITEM_NOT_FOUND, $e->getErrorCode() );
 		}
 	}
 
@@ -161,7 +160,7 @@ class GetItemStatementTest extends TestCase {
 
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
-			$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $e->getErrorCode() );
+			$this->assertSame( UseCaseException::STATEMENT_NOT_FOUND, $e->getErrorCode() );
 		}
 	}
 
@@ -191,7 +190,7 @@ class GetItemStatementTest extends TestCase {
 
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
-			$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $e->getErrorCode() );
+			$this->assertSame( UseCaseException::STATEMENT_NOT_FOUND, $e->getErrorCode() );
 		}
 	}
 

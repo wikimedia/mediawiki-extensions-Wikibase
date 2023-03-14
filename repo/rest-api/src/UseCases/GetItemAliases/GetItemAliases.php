@@ -5,7 +5,6 @@ namespace Wikibase\Repo\RestApi\UseCases\GetItemAliases;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Domain\Services\ItemAliasesRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
-use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\ItemRedirectException;
 use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 
@@ -42,7 +41,7 @@ class GetItemAliases {
 
 		if ( !$metaDataResult->itemExists() ) {
 			throw new UseCaseException(
-				ErrorResponse::ITEM_NOT_FOUND,
+				UseCaseException::ITEM_NOT_FOUND,
 				"Could not find an item with the ID: {$request->getItemId()}"
 			);
 		}

@@ -9,7 +9,7 @@ use Psr\Log\LoggerInterface;
 use Throwable;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdatePrevented;
 use Wikibase\Repo\RestApi\RouteHandlers\ResponseFactory;
-use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
+use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 
 /**
  * @license GPL-2.0-or-later
@@ -40,7 +40,7 @@ class UnexpectedErrorHandlerMiddleware implements Middleware {
 		}
 
 		return $this->responseFactory->newErrorResponse(
-			ErrorResponse::UNEXPECTED_ERROR,
+			UseCaseException::UNEXPECTED_ERROR,
 			'Unexpected error'
 		);
 	}

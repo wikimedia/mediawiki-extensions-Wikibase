@@ -6,7 +6,7 @@ use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
 use Wikibase\Repo\RestApi\RouteHandlers\ResponseFactory;
-use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
+use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 
 /**
  * @covers \Wikibase\Repo\RestApi\RouteHandlers\ResponseFactory
@@ -37,13 +37,13 @@ class ResponseFactoryTest extends TestCase {
 	}
 
 	public function errorCodeToHttpStatusCodeProvider(): Generator {
-		yield [ ErrorResponse::INVALID_FIELD, 400 ];
-		yield [ ErrorResponse::INVALID_ITEM_ID,  400 ];
-		yield [ ErrorResponse::INVALID_STATEMENT_ID,  400 ];
-		yield [ ErrorResponse::INVALID_FIELD,  400 ];
-		yield [ ErrorResponse::ITEM_NOT_FOUND,  404 ];
-		yield [ ErrorResponse::STATEMENT_NOT_FOUND,  404 ];
-		yield [ ErrorResponse::UNEXPECTED_ERROR,  500 ];
+		yield [ UseCaseException::INVALID_FIELD, 400 ];
+		yield [ UseCaseException::INVALID_ITEM_ID,  400 ];
+		yield [ UseCaseException::INVALID_STATEMENT_ID,  400 ];
+		yield [ UseCaseException::INVALID_FIELD,  400 ];
+		yield [ UseCaseException::ITEM_NOT_FOUND,  404 ];
+		yield [ UseCaseException::STATEMENT_NOT_FOUND,  404 ];
+		yield [ UseCaseException::UNEXPECTED_ERROR,  500 ];
 	}
 
 	public function testGivenAuthorizationError_newErrorResponseReturnsRestWriteDenied(): void {
@@ -51,7 +51,7 @@ class ResponseFactoryTest extends TestCase {
 		$errorPresenter->expects( $this->never() )->method( $this->anything() );
 
 		$httpResponse = ( new ResponseFactory( $errorPresenter ) )
-			->newErrorResponse( ErrorResponse::PERMISSION_DENIED, 'item protected' );
+			->newErrorResponse( UseCaseException::PERMISSION_DENIED, 'item protected' );
 
 		$this->assertSame( 403, $httpResponse->getStatusCode() );
 		$this->assertStringContainsString( 'rest-write-denied', $httpResponse->getBody()->getContents() );

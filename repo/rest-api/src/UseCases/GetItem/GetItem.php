@@ -5,7 +5,6 @@ namespace Wikibase\Repo\RestApi\UseCases\GetItem;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Domain\Services\ItemDataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
-use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\ItemRedirectException;
 use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 
@@ -40,7 +39,7 @@ class GetItem {
 
 		if ( !$latestRevisionMetadata->itemExists() ) {
 			throw new UseCaseException(
-				ErrorResponse::ITEM_NOT_FOUND,
+				UseCaseException::ITEM_NOT_FOUND,
 				"Could not find an item with the ID: {$itemRequest->getItemId()}"
 			);
 		}

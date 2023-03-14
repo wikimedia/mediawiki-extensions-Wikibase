@@ -7,7 +7,6 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Rest\StringStream;
 use Wikibase\Repo\RestApi\Presentation\ErrorResponseToHttpStatus;
 use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
-use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 
 /**
@@ -27,7 +26,7 @@ class ResponseFactory {
 
 	public function newErrorResponse( string $errorCode, string $errorMessage, array $errorContext = null ): Response {
 		// respond with framework error, when user cannot edit the Item
-		if ( $errorCode === ErrorResponse::PERMISSION_DENIED ) {
+		if ( $errorCode === UseCaseException::PERMISSION_DENIED ) {
 			return $this->newFrameworkAlikePermissionDeniedResponse();
 		}
 

@@ -24,7 +24,6 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
 use Wikibase\Repo\RestApi\Serialization\StatementDeserializer;
-use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatement;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementRequest;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementResponse;
@@ -170,7 +169,7 @@ class ReplaceItemStatementTest extends TestCase {
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
 			$this->assertSame(
-				ErrorResponse::INVALID_OPERATION_CHANGED_STATEMENT_ID,
+				UseCaseException::INVALID_OPERATION_CHANGED_STATEMENT_ID,
 				$e->getErrorCode()
 			);
 		}
@@ -206,7 +205,7 @@ class ReplaceItemStatementTest extends TestCase {
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
 			$this->assertSame(
-				ErrorResponse::INVALID_OPERATION_CHANGED_PROPERTY,
+				UseCaseException::INVALID_OPERATION_CHANGED_PROPERTY,
 				$e->getErrorCode()
 			);
 		}
@@ -226,7 +225,7 @@ class ReplaceItemStatementTest extends TestCase {
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
 			$this->assertSame(
-				ErrorResponse::INVALID_STATEMENT_ID,
+				UseCaseException::INVALID_STATEMENT_ID,
 				$e->getErrorCode()
 			);
 		}
@@ -246,7 +245,7 @@ class ReplaceItemStatementTest extends TestCase {
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
 			$this->assertSame(
-				ErrorResponse::ITEM_NOT_FOUND,
+				UseCaseException::ITEM_NOT_FOUND,
 				$e->getErrorCode()
 			);
 		}
@@ -265,7 +264,7 @@ class ReplaceItemStatementTest extends TestCase {
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
 			$this->assertSame(
-				ErrorResponse::STATEMENT_NOT_FOUND,
+				UseCaseException::STATEMENT_NOT_FOUND,
 				$e->getErrorCode()
 			);
 		}
@@ -286,7 +285,7 @@ class ReplaceItemStatementTest extends TestCase {
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
 			$this->assertSame(
-				ErrorResponse::STATEMENT_NOT_FOUND,
+				UseCaseException::STATEMENT_NOT_FOUND,
 				$e->getErrorCode()
 			);
 		}
@@ -308,7 +307,7 @@ class ReplaceItemStatementTest extends TestCase {
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
 			$this->assertSame(
-				ErrorResponse::STATEMENT_NOT_FOUND,
+				UseCaseException::STATEMENT_NOT_FOUND,
 				$e->getErrorCode()
 			);
 		}
@@ -331,7 +330,7 @@ class ReplaceItemStatementTest extends TestCase {
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
 			$this->assertSame(
-				ErrorResponse::STATEMENT_NOT_FOUND,
+				UseCaseException::STATEMENT_NOT_FOUND,
 				$e->getErrorCode()
 			);
 		}
@@ -359,7 +358,7 @@ class ReplaceItemStatementTest extends TestCase {
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
 			$this->assertSame(
-				ErrorResponse::PERMISSION_DENIED,
+				UseCaseException::PERMISSION_DENIED,
 				$e->getErrorCode()
 			);
 		}

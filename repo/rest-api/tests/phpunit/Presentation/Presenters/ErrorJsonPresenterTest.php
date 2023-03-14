@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\RestApi\Presentation\Presenters;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter;
-use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
+use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Presentation\Presenters\ErrorJsonPresenter
@@ -20,8 +20,8 @@ class ErrorJsonPresenterTest extends TestCase {
 		$presenter = new ErrorJsonPresenter();
 
 		$this->assertJsonStringEqualsJsonString(
-			'{"code":"' . ErrorResponse::ITEM_NOT_FOUND . '","message":"Could not find an item with the ID Q123"}',
-			$presenter->getJson( ErrorResponse::ITEM_NOT_FOUND, $errorMessage )
+			'{"code":"' . UseCaseException::ITEM_NOT_FOUND . '","message":"Could not find an item with the ID Q123"}',
+			$presenter->getJson( UseCaseException::ITEM_NOT_FOUND, $errorMessage )
 		);
 	}
 

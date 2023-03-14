@@ -9,8 +9,8 @@ use MediaWiki\Tests\Rest\Handler\HandlerTestTrait;
 use MediaWikiIntegrationTestCase;
 use RuntimeException;
 use Wikibase\Repo\RestApi\RouteHandlers\GetStatementRouteHandler;
-use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatement;
+use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 
 /**
  * @covers \Wikibase\Repo\RestApi\RouteHandlers\GetStatementRouteHandler
@@ -33,7 +33,7 @@ class GetStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 		$responseBody = json_decode( $response->getBody()->getContents() );
 		$this->assertSame( [ 'en' ], $response->getHeader( 'Content-Language' ) );
 		$this->assertSame(
-			ErrorResponse::UNEXPECTED_ERROR,
+			UseCaseException::UNEXPECTED_ERROR,
 			$responseBody->code
 		);
 	}

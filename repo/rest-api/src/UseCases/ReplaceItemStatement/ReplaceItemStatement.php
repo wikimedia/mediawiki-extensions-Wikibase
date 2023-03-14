@@ -16,7 +16,6 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
-use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 
 /**
@@ -60,7 +59,7 @@ class ReplaceItemStatement {
 		$latestRevision = $this->revisionMetadataRetriever->getLatestRevisionMetadata( $itemId );
 		if ( $requestedItemId && !$latestRevision->itemExists() ) {
 			throw new UseCaseException(
-				ErrorResponse::ITEM_NOT_FOUND,
+				UseCaseException::ITEM_NOT_FOUND,
 				"Could not find an item with the ID: {$itemId}"
 			);
 		} elseif ( !$latestRevision->itemExists()
@@ -72,7 +71,7 @@ class ReplaceItemStatement {
 		$user = $request->hasUser() ? User::withUsername( $request->getUsername() ) : User::newAnonymous();
 		if ( !$this->permissionChecker->canEdit( $user, $itemId ) ) {
 			throw new UseCaseException(
-				ErrorResponse::PERMISSION_DENIED,
+				UseCaseException::PERMISSION_DENIED,
 				'You have no permission to edit this item.'
 			);
 		}
@@ -86,12 +85,12 @@ class ReplaceItemStatement {
 			$this->throwStatementNotFoundException( $statementId );
 		} catch ( StatementGuidChangedException $e ) {
 			throw new UseCaseException(
-				ErrorResponse::INVALID_OPERATION_CHANGED_STATEMENT_ID,
+				UseCaseException::INVALID_OPERATION_CHANGED_STATEMENT_ID,
 				'Cannot change the ID of the existing statement'
 			);
 		} catch ( PropertyChangedException $e ) {
 			throw new UseCaseException(
-				ErrorResponse::INVALID_OPERATION_CHANGED_PROPERTY,
+				UseCaseException::INVALID_OPERATION_CHANGED_PROPERTY,
 				'Cannot change the property of the existing statement'
 			);
 		}
@@ -115,7 +114,7 @@ class ReplaceItemStatement {
 	 */
 	private function throwStatementNotFoundException( StatementGuid $statementId ): void {
 		throw new UseCaseException(
-			ErrorResponse::STATEMENT_NOT_FOUND,
+			UseCaseException::STATEMENT_NOT_FOUND,
 			"Could not find a statement with the ID: $statementId"
 		);
 	}

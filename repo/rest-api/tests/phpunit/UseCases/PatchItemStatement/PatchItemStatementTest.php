@@ -31,7 +31,6 @@ use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\RestApi\Serialization\PropertyValuePairSerializer;
 use Wikibase\Repo\RestApi\Serialization\ReferenceSerializer;
 use Wikibase\Repo\RestApi\Serialization\StatementSerializer;
-use Wikibase\Repo\RestApi\UseCases\ErrorResponse;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatement;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementRequest;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementResponse;
@@ -192,7 +191,7 @@ class PatchItemStatementTest extends TestCase {
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
-			$this->assertSame( ErrorResponse::ITEM_NOT_FOUND, $e->getErrorCode() );
+			$this->assertSame( UseCaseException::ITEM_NOT_FOUND, $e->getErrorCode() );
 			$this->assertSame( 'Could not find an item with the ID: Q42', $e->getErrorMessage() );
 		}
 	}
@@ -209,7 +208,7 @@ class PatchItemStatementTest extends TestCase {
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
-			$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $e->getErrorCode() );
+			$this->assertSame( UseCaseException::STATEMENT_NOT_FOUND, $e->getErrorCode() );
 			$this->assertSame(
 				'Could not find a statement with the ID: Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
 				$e->getErrorMessage()
@@ -231,7 +230,7 @@ class PatchItemStatementTest extends TestCase {
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
-			$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $e->getErrorCode() );
+			$this->assertSame( UseCaseException::STATEMENT_NOT_FOUND, $e->getErrorCode() );
 			$this->assertSame(
 				'Could not find a statement with the ID: Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
 				$e->getErrorMessage()
@@ -250,7 +249,7 @@ class PatchItemStatementTest extends TestCase {
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
-			$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $e->getErrorCode() );
+			$this->assertSame( UseCaseException::STATEMENT_NOT_FOUND, $e->getErrorCode() );
 			$this->assertSame(
 				'Could not find a statement with the ID: Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
 				$e->getErrorMessage()
@@ -271,7 +270,7 @@ class PatchItemStatementTest extends TestCase {
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
-			$this->assertSame( ErrorResponse::STATEMENT_NOT_FOUND, $e->getErrorCode() );
+			$this->assertSame( UseCaseException::STATEMENT_NOT_FOUND, $e->getErrorCode() );
 			$this->assertSame(
 				'Could not find a statement with the ID: Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
 				$e->getErrorMessage()
@@ -306,7 +305,7 @@ class PatchItemStatementTest extends TestCase {
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
-			$this->assertSame( ErrorResponse::INVALID_OPERATION_CHANGED_PROPERTY, $e->getErrorCode() );
+			$this->assertSame( UseCaseException::INVALID_OPERATION_CHANGED_PROPERTY, $e->getErrorCode() );
 			$this->assertSame(
 				'Cannot change the property of the existing statement',
 				$e->getErrorMessage()
@@ -342,7 +341,7 @@ class PatchItemStatementTest extends TestCase {
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
-			$this->assertSame( ErrorResponse::INVALID_OPERATION_CHANGED_STATEMENT_ID, $e->getErrorCode() );
+			$this->assertSame( UseCaseException::INVALID_OPERATION_CHANGED_STATEMENT_ID, $e->getErrorCode() );
 			$this->assertSame(
 				'Cannot change the ID of the existing statement',
 				$e->getErrorMessage()
@@ -381,7 +380,7 @@ class PatchItemStatementTest extends TestCase {
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
-			$this->assertSame( ErrorResponse::PERMISSION_DENIED, $e->getErrorCode() );
+			$this->assertSame( UseCaseException::PERMISSION_DENIED, $e->getErrorCode() );
 			$this->assertSame( 'You have no permission to edit this item.', $e->getErrorMessage() );
 		}
 	}
@@ -415,7 +414,7 @@ class PatchItemStatementTest extends TestCase {
 					'value' => 'these are not the droids you are looking for',
 				],
 			],
-			ErrorResponse::PATCH_TEST_FAILED,
+			UseCaseException::PATCH_TEST_FAILED,
 		];
 
 		yield 'non-existent path' => [
@@ -425,7 +424,7 @@ class PatchItemStatementTest extends TestCase {
 					'path' => '/this/path/does/not/exist',
 				],
 			],
-			ErrorResponse::PATCH_TARGET_NOT_FOUND,
+			UseCaseException::PATCH_TARGET_NOT_FOUND,
 		];
 	}
 
@@ -449,7 +448,7 @@ class PatchItemStatementTest extends TestCase {
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
-			$this->assertSame( ErrorResponse::PATCHED_STATEMENT_MISSING_FIELD, $e->getErrorCode() );
+			$this->assertSame( UseCaseException::PATCHED_STATEMENT_MISSING_FIELD, $e->getErrorCode() );
 			$this->assertSame(
 				'Mandatory field missing in the patched statement: property',
 				$e->getErrorMessage()
