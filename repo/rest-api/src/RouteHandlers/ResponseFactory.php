@@ -22,23 +22,22 @@ class ResponseFactory {
 	}
 
 	public function newErrorResponseFromException( UseCaseException $e ): Response {
-		// quick hack for now while we test UseCaseException vs ErrorResponse
-		return $this->newErrorResponse(
-			new ErrorResponse( $e->getErrorCode(), $e->getErrorMessage(), $e->getErrorContext() )
-		);
+		return $this->newErrorResponse( $e->getErrorCode(), $e->getErrorMessage(), $e->getErrorContext() );
 	}
 
-	public function newErrorResponse( ErrorResponse $useCaseResponse ): Response {
+	public function newErrorResponse( string $errorCode, string $errorMessage, array $errorContext = null ): Response {
 		// respond with framework error, when user cannot edit the Item
-		if ( $useCaseResponse->getCode() === ErrorResponse::PERMISSION_DENIED ) {
+		if ( $errorCode === ErrorResponse::PERMISSION_DENIED ) {
 			return $this->newFrameworkAlikePermissionDeniedResponse();
 		}
 
 		$httpResponse = new Response();
 		$httpResponse->setHeader( 'Content-Type', 'application/json' );
 		$httpResponse->setHeader( 'Content-Language', 'en' );
-		$httpResponse->setStatus( ErrorResponseToHttpStatus::lookup( $useCaseResponse ) );
-		$httpResponse->setBody( new StringStream( $this->errorPresenter->getJson( $useCaseResponse ) ) );
+		$httpResponse->setStatus( ErrorResponseToHttpStatus::lookup( $errorCode ) );
+		$httpResponse->setBody( new StringStream(
+			$this->errorPresenter->getJson( $errorCode, $errorMessage, $errorContext )
+		) );
 
 		return $httpResponse;
 	}
