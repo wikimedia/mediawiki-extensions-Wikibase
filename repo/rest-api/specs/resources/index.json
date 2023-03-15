@@ -5,6 +5,9 @@
 	"/entities/items/{item_id}/descriptions": {
 		"$ref": "./descriptions/list.json"
 	},
+	"/entities/items/{item_id}/descriptions/{language_code}": {
+		"$ref": "./descriptions/description-in-language.json"
+	},
 	"/entities/items/{item_id}/statements": {
 		"$ref": "./statements/list.json"
 	},
