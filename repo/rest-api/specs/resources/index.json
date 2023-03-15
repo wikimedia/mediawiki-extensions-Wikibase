@@ -14,6 +14,9 @@
 	"/entities/items/{item_id}/labels": {
 		"$ref": "./labels/list.json"
 	},
+	"/entities/items/{item_id}/labels/{language_code}": {
+		"$ref": "./labels/label-in-language.json"
+	},
 	"/entities/items/{item_id}/aliases": {
 		"$ref": "./aliases/list.json"
 	},
