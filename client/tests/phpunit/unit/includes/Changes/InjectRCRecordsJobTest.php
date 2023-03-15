@@ -19,10 +19,7 @@ use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Changes\EntityDiffChangedAspectsFactory;
 use Wikibase\Lib\Changes\ItemChange;
-use Wikibase\Lib\Rdbms\ClientDomainDb;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
-use Wikimedia\Rdbms\ConnectionManager;
-use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\TestingAccessWrapper;
 
 /**
@@ -142,17 +139,6 @@ class InjectRCRecordsJobTest extends TestCase {
 		return $change;
 	}
 
-	private function getClientDomainDbMock( IDatabase $dbWrite = null ): ClientDomainDb {
-		$dbWrite = $dbWrite ?: $this->createMock( IDatabase::class );
-
-		$connectionManager = $this->createMock( ConnectionManager::class );
-		$connectionManager->method( 'getWriteConnection' )->willReturn( $dbWrite );
-		$mock = $this->createMock( ClientDomainDb::class );
-		$mock->method( 'connections' )->willReturn( $connectionManager );
-
-		return $mock;
-	}
-
 	public function provideMakeJobSpecification(): array {
 		$title = $this->getTitleMock( 'Foo', 21 );
 		$changeFactory = $this->getEntityChangeFactory();
@@ -246,7 +232,6 @@ class InjectRCRecordsJobTest extends TestCase {
 
 		/** @var InjectRCRecordsJob $job */
 		$job = TestingAccessWrapper::newFromObject( new InjectRCRecordsJob(
-			$this->getClientDomainDbMock(),
 			$changeLookup,
 			$changeFactory,
 			$rcFactory,
@@ -346,7 +331,6 @@ class InjectRCRecordsJobTest extends TestCase {
 
 		/** @var InjectRCRecordsJob $job */
 		$job = TestingAccessWrapper::newFromObject( new InjectRCRecordsJob(
-			$this->getClientDomainDbMock(),
 			$changeLookup,
 			$changeFactory,
 			$rcFactory,
@@ -406,16 +390,7 @@ class InjectRCRecordsJobTest extends TestCase {
 			],
 		];
 
-		$dbWrite = $this->createMock( IDatabase::class );
-
-		$dbWrite->expects( $this->once() )
-			->method( 'startAtomic' );
-
-		$dbWrite->expects( $this->once() )
-			->method( 'endAtomic' );
-
 		$job = new InjectRCRecordsJob(
-			$this->getClientDomainDbMock( $dbWrite ),
 			$changeLookup,
 			$changeFactory,
 			$rcFactory,
