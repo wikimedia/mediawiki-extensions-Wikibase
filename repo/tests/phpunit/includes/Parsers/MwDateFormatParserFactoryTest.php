@@ -75,7 +75,8 @@ class MwDateFormatParserFactoryTest extends TestCase {
 			$dateFormatType
 		);
 		$parsed = $parser->parse( $input );
-		$this->assertTrue( $expected->equals( $parsed ), $input . ' became ' . $parsed );
+		$this->assertTrue( $expected->equals( $parsed ),
+			"'$input' in $languageCode became $parsed instead of $expected" );
 	}
 
 	public function validInputProvider() {
