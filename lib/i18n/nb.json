@@ -76,7 +76,7 @@
 	"wikibase-time-precision-BCE-annum": "{{PLURAL:$1|$1 år}} f.Kr.",
 	"wikibase-time-precision-BCE-millennium": "$1. årtusen f.Kr.",
 	"wikibase-time-precision-BCE-century": "$1. århundre f.Kr.",
-	"wikibase-time-precision-BCE-10annum": "$1-tallet f.Kr.",
+	"wikibase-time-precision-BCE-10annum": "$1-årene f.Kr.",
 	"wikibase-snakformatter-valuetype-mismatch": "Verdiens type «$1» matcher ikke egenskapens type «$2».",
 	"wikibase-snakformatter-property-not-found": "Egenskapen $1 ble ikke funnet, kan ikke avgjøre hvilken datatype som skal brukes.",
 	"wikibase-snakformatter-formatting-exception": "Formateringsfeil: $1.",
