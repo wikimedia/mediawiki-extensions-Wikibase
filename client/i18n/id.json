@@ -51,7 +51,7 @@
 	"wikibase-linkitem-not-loggedin": "Anda harus masuk log pada wiki ini dan pada [$1 pusat penyimpanan data] untuk menggunakan fitur ini.",
 	"wikibase-linkitem-success-link": "Laman telah berhasil ditautkan. Anda dapat menemukan butir berisi pranala tersebut pada [$1 ruang penyimpanan data terpusat] kami.",
 	"limitreport-entityaccesscount": "Banyak entitas Wikibase yang telah dimuat",
-	"wikibase-property-notfound": "Properti $1 tidak ditemukan.",
+	"wikibase-property-notfound": "Atribut $1 tidak ditemukan",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Sembunyikan",
 	"wikibase-rc-hide-wikidata-show": "Tampilkan",

@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Simartampua",
-			"IHLubis"
+			"IHLubis",
+			"Amire80"
 		]
 	},
 	"tooltip-t-wikibase": "Tautkon tu item repositori data na tarsambung",
@@ -10,12 +11,12 @@
 	"wikibase-dataitem": "{{WBREPONAME}} item",
 	"wikibase-editlinks": "Pature tautan",
 	"wikibase-editlinkstitle": "Pature tautan antar saro",
-	"wikibase-linkitem-addlinks": "tambai tautan nai",
+	"wikibase-linkitem-addlinks": "Tambai tautan nai",
 	"wikibase-linkitem-title": "Ilokotkon dohot alaman",
 	"wikibase-linkitem-linkpage": "Ilokotkon dohot alaman nai",
-	"wikibase-linkitem-selectlink": "Imuloima mamili situs dohot alaman nanget hamu naget ilokotkon tu alaman on",
-	"wikibase-linkitem-input-site": "Saro",
-	"wikibase-linkitem-input-page": "Alaman",
+	"wikibase-linkitem-selectlink": "Imuloima mamili situs dohot alaman nanget hamu naget ilokotkon tu alaman on.",
+	"wikibase-linkitem-input-site": "Saro:",
+	"wikibase-linkitem-input-page": "Alaman:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Bunion",
 	"wikibase-rc-hide-wikidata-show": "Patidaon",
