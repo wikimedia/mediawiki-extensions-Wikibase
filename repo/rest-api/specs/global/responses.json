@@ -130,6 +130,30 @@
 			}
 		}
 	},
+	"ItemAliasesInLanguageNotFound": {
+		"description": "The specified resource was not found",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/Error" },
+				"examples": {
+					"item-not-found": {
+						"$ref": "./examples.json#/ItemNotFoundExample"
+					},
+					"alias-not-defined": {
+						"$ref": "./examples.json#/ItemAliasNotDefinedExample"
+					}
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
 	"InvalidItemInput": {
 		"description": "The request cannot be processed",
 		"content": {
@@ -276,7 +300,7 @@
 			}
 		}
 	},
-	"InvalidItemLabelInput": {
+	"InvalidItemTermByLanguageInput": {
 		"description": "The request cannot be processed",
 		"content": {
 			"application/json": {
@@ -571,6 +595,41 @@
 			"application/json": {
 				"schema": {
 					"$ref": "./schemas.json#/Aliases"
+				}
+			}
+		}
+	},
+	"ItemAliasesInLanguage": {
+		"description": "Item's aliases in a specific language",
+		"headers": {
+			"ETag": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Last entity revision number"
+			},
+			"Last-Modified": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Last modified date"
+			},
+			"X-Authenticated-User": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Optional username of the user making the request"
+			}
+		},
+		"content": {
+			"application/json": {
+				"schema": {
+					"type": "array",
+					"items": { "type": "string" },
+					"example": [
+						"Douglas Noel Adams",
+						"Douglas Noël Adams"
+					]
 				}
 			}
 		}
