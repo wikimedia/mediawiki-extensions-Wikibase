@@ -164,7 +164,9 @@ class CachingKartographerEmbeddingHandler {
 		// Require all needed RL modules, then call initMapframeFromElement with the injected mapframe HTML
 		$javaScript .= "mw.loader.using( $rlModulesJson ).then( " .
 				"function( require ) { require( 'ext.kartographer.frame' ).initMapframeFromElement( " .
-				"\$( $jsMapPreviewId ).find( '.mw-kartographer-map[data-mw=\"interface\"]' ).get( 0 ) ); } );";
+				// TODO: remove data-mw='interface' when the new version of the attributes is merged
+				"\$( $jsMapPreviewId ).find( '.mw-kartographer-map[data-mw=\"interface\"], " .
+				".mw-kartographer-map[data-mw-kartographer]' ).get( 0 ) ); } );";
 
 		return Html::inlineScript( $javaScript );
 	}
