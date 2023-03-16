@@ -173,5 +173,11 @@
 			"code": "label-not-defined",
 			"message": "Item with the ID {item_id} does not have a label in the language: {language_code}"
 		}
+	},
+	"ItemAliasNotDefinedExample": {
+		"value": {
+			"code": "alias-not-defined",
+			"message": "Item with the ID {item_id} does not have an alias in the language: {language_code}"
+		}
 	}
 }
