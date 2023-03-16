@@ -26,6 +26,17 @@
 		},
 		"example": "Q42$F078E5B3-F9A8-480E-B7AC-D97778CBBEF9"
 	},
+	"LanguageCode": {
+		"in": "path",
+		"name": "language_code",
+		"description": "The requested resource language",
+		"required": true,
+		"schema": {
+			"type": "string",
+			"pattern": "^[a-z]{2}[a-z0-9-]*$"
+		},
+		"example": "en"
+	},
 	"Fields": {
 		"in": "query",
 		"name": "_fields",

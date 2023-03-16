@@ -29,6 +29,12 @@
 			"message": "Not a valid statement ID: {statement_id}"
 		}
 	},
+	"InvalidLanguageCodeExample": {
+		"value": {
+			"code": "invalid-language-code",
+			"message": "Not a valid language code: {language_code}"
+		}
+	},
 	"StatementDataMissingFieldExample": {
 		"value": {
 			"code": "statement-data-missing-field",
@@ -160,6 +166,12 @@
 		"value": {
 			"code": "statement-not-found",
 			"message": "Could not find a statement with the ID: {statement_id}"
+		}
+	},
+	"ItemLabelNotDefinedExample": {
+		"value": {
+			"code": "label-not-defined",
+			"message": "Item with the ID {item_id} does not have a label in the language: {language_code}"
 		}
 	}
 }
