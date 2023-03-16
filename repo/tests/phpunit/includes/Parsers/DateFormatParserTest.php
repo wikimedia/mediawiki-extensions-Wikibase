@@ -77,6 +77,11 @@ class DateFormatParserTest extends \PHPUnit\Framework\TestCase {
 				'Y年n月j日 (D)', null, null,
 				'+2014-09-01T00:00:00Z',
 			],
+			'Day of the week is redundant and can be ignored' => [
+				'2014年09月01日 (一)',
+				'Y年n月j日 (D)', null, null,
+				'+2014-09-01T00:00:00Z',
+			],
 			'Escapes' => [
 				'1s 9s 2014\\',
 				'd\\s M\\s Y\\', null, null,
