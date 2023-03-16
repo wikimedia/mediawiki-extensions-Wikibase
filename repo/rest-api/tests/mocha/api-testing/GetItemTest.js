@@ -1,7 +1,13 @@
 'use strict';
 
-const { createEntity, createRedirectForItem, getLatestEditMetadata } = require( '../helpers/entityHelper' );
-const { assert, utils } = require( 'api-testing' );
+const {
+	createEntity,
+	createRedirectForItem,
+	getLatestEditMetadata,
+	newLegacyStatementWithRandomStringValue,
+	createUniqueStringProperty
+} = require( '../helpers/entityHelper' );
+const { assert, utils, action } = require( 'api-testing' );
 const { newGetItemRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
 function makeEtag( ...revisionIds ) {
@@ -16,20 +22,25 @@ describe( 'GET /entities/items/{id}', () => {
 	let testItemId;
 	let testModified;
 	let testRevisionId;
+	let siteId;
+	let testPropertyId;
+	let testStatement;
+	const linkedArticle = utils.title( 'Article-linked-to-test-item' );
 
 	function newValidRequestBuilderWithTestItem() {
 		return newGetItemRequestBuilder( testItemId ).assertValidRequest();
 	}
 
-	function assertValid200Response( response ) {
-		assert.equal( response.status, 200 );
-		assert.equal( response.body.id, testItemId );
-		assert.deepEqual( response.body.aliases, {} ); // expect {}, not []
-		assert.equal( response.header[ 'last-modified' ], testModified );
-		assert.equal( response.header.etag, makeEtag( testRevisionId ) );
-	}
-
 	before( async () => {
+		siteId = ( await action.getAnon().meta(
+			'wikibase',
+			{ wbprop: 'siteid' }
+		) ).siteid;
+		await action.getAnon().edit( linkedArticle, { text: 'sitelink test' } );
+
+		testPropertyId = ( await createUniqueStringProperty() ).entity.id;
+		testStatement = newLegacyStatementWithRandomStringValue( testPropertyId );
+
 		const createItemResponse = await createEntity( 'item', {
 			labels: {
 				de: { language: 'de', value: germanLabel },
@@ -37,7 +48,14 @@ describe( 'GET /entities/items/{id}', () => {
 			},
 			descriptions: {
 				en: { language: 'en', value: englishDescription }
-			}
+			},
+			sitelinks: {
+				[ siteId ]: {
+					site: siteId,
+					title: linkedArticle
+				}
+			},
+			claims: [ testStatement ]
 		} );
 		testItemId = createItemResponse.entity.id;
 
@@ -46,10 +64,28 @@ describe( 'GET /entities/items/{id}', () => {
 		testRevisionId = testItemCreationMetadata.revid;
 	} );
 
-	it( 'can GET an item with metadata', async () => {
+	it( 'can GET all item data including metadata', async () => {
 		const response = await newValidRequestBuilderWithTestItem().makeRequest();
 
-		assertValid200Response( response );
+		assert.equal( response.status, 200 );
+
+		assert.equal( response.body.id, testItemId );
+		assert.deepEqual( response.body.aliases, {} ); // expect {}, not []
+		assert.deepEqual( response.body.labels, {
+			de: germanLabel,
+			en: englishLabel
+		} );
+		assert.deepEqual( response.body.descriptions, { en: englishDescription } );
+
+		assert.strictEqual(
+			response.body.statements[ testPropertyId ][ 0 ].value.content,
+			testStatement.mainsnak.datavalue.value
+		);
+
+		assert.include( response.body.sitelinks[ siteId ].url, linkedArticle );
+
+		assert.equal( response.header[ 'last-modified' ], testModified );
+		assert.equal( response.header.etag, makeEtag( testRevisionId ) );
 	} );
 
 	it( 'can GET a partial item with single _fields param', async () => {
