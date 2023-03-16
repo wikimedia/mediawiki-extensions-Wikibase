@@ -25,10 +25,9 @@ class PrefetchingTermLookupAliasesRetrieverTest extends TestCase {
 
 	public function testGetAliases(): void {
 		$itemId = new ItemId( self::ITEM_ID );
-		$fakePrefetchingTermLookup = new FakePrefetchingTermLookup();
 
 		$aliasesRetriever = new PrefetchingTermLookupAliasesRetriever(
-			$fakePrefetchingTermLookup,
+			new FakePrefetchingTermLookup(),
 			new StaticContentLanguages( self::ALL_TERM_LANGUAGES )
 		);
 
@@ -64,6 +63,23 @@ class PrefetchingTermLookupAliasesRetrieverTest extends TestCase {
 		$this->assertCount( 1, $aliases );
 		$this->assertArrayHasKey( 'en', $aliases );
 		$this->assertArrayNotHasKey( 'de', $aliases );
+	}
+
+	public function testGetAliasesInLanguage(): void {
+		$itemId = new ItemId( self::ITEM_ID );
+		$languageCode = 'en';
+
+		$aliasesRetriever = new PrefetchingTermLookupAliasesRetriever(
+			new FakePrefetchingTermLookup(),
+			new StaticContentLanguages( [ $languageCode ] )
+		);
+
+		$aliasesInLanguage = $aliasesRetriever->getAliasesInLanguage( $itemId, $languageCode );
+
+		$this->assertEquals(
+			new AliasesInLanguage( 'en', [ 'Q123 en alias 1', 'Q123 en alias 2' ] ),
+			$aliasesInLanguage
+		);
 	}
 
 }

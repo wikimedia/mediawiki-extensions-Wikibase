@@ -8,12 +8,13 @@ use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
+use Wikibase\Repo\RestApi\Domain\Services\ItemAliasesInLanguageRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemAliasesRetriever;
 
 /**
  * @license GPL-2.0-or-later
  */
-class PrefetchingTermLookupAliasesRetriever implements ItemAliasesRetriever {
+class PrefetchingTermLookupAliasesRetriever implements ItemAliasesRetriever, ItemAliasesInLanguageRetriever {
 
 	private PrefetchingTermLookup $prefetchingTermLookup;
 	private ContentLanguages $termLanguages;
@@ -42,4 +43,21 @@ class PrefetchingTermLookupAliasesRetriever implements ItemAliasesRetriever {
 
 		return $aliases;
 	}
+
+	public function getAliasesInLanguage( ItemId $itemId, string $languageCode ): ?AliasesInLanguage {
+		$this->prefetchingTermLookup->prefetchTerms(
+			[ $itemId ],
+			[ TermTypes::TYPE_ALIAS ],
+			[ $languageCode ]
+		);
+
+		$prefetchedAliases = $this->prefetchingTermLookup->getPrefetchedAliases( $itemId, $languageCode );
+
+		if ( $prefetchedAliases ) {
+			return new AliasesInLanguage( $languageCode, $prefetchedAliases );
+		}
+
+		return null;
+	}
+
 }
