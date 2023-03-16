@@ -58,6 +58,22 @@ class TermLookupItemDataRetrieverTest extends TestCase {
 		$this->assertNull( $this->newTermRetriever( $termLookup )->getLabels( $itemId ) );
 	}
 
+	public function testGetLabel(): void {
+		$itemId = new ItemId( self::ITEM_ID );
+		$languageCode = 'en';
+
+		$termLookup = $this->createMock( TermLookup::class );
+		$termLookup->expects( $this->once() )
+			->method( 'getLabel' )
+			->with( $itemId, $languageCode )
+			->willReturn( 'potato' );
+
+		$this->assertEquals(
+			( $this->newTermRetriever( $termLookup ) )->getLabel( $itemId, $languageCode ),
+			new Label( $languageCode, 'potato' )
+		);
+	}
+
 	public function testGetDescriptions(): void {
 		$itemId = new ItemId( self::ITEM_ID );
 

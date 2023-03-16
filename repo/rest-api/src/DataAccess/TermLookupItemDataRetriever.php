@@ -12,12 +12,13 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\Services\ItemDescriptionRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemDescriptionsRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\ItemLabelRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemLabelsRetriever;
 
 /**
  * @license GPL-2.0-or-later
  */
-class TermLookupItemDataRetriever implements ItemLabelsRetriever, ItemDescriptionsRetriever, ItemDescriptionRetriever {
+class TermLookupItemDataRetriever implements ItemLabelRetriever, ItemLabelsRetriever, ItemDescriptionRetriever, ItemDescriptionsRetriever {
 
 	private TermLookup $termLookup;
 	private ContentLanguages $termLanguages;
@@ -25,6 +26,17 @@ class TermLookupItemDataRetriever implements ItemLabelsRetriever, ItemDescriptio
 	public function __construct( TermLookup $termLookup, ContentLanguages $termLanguages ) {
 		$this->termLookup = $termLookup;
 		$this->termLanguages = $termLanguages;
+	}
+
+	public function getLabel( ItemId $itemId, string $languageCode ): ?Label {
+		try {
+			$labelText = $this->termLookup->getLabel( $itemId, $languageCode );
+		} catch ( TermLookupException $e ) {
+			// this probably means that the item does not exist, which should be checked prior to calling this method
+			return null;
+		}
+
+		return new Label( $languageCode, $labelText );
 	}
 
 	public function getLabels( ItemId $itemId ): ?Labels {
