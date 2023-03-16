@@ -98,4 +98,18 @@ class TermLookupItemDataRetrieverTest extends TestCase {
 		);
 	}
 
+	public function testGetDescription(): void {
+		$itemId = new ItemId( self::ITEM_ID );
+
+		$termLookup = $this->createMock( TermLookup::class );
+		$termLookup->expects( $this->once() )
+			->method( 'getDescription' )
+			->with( $itemId, 'en' )
+			->willReturn( 'English science fiction writer and humourist' );
+
+		$this->assertEquals(
+			( $this->newTermRetriever( $termLookup ) )->getDescription( $itemId, 'en' ),
+			new Description( 'en', 'English science fiction writer and humourist' ),
+		);
+	}
 }

@@ -10,13 +10,14 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
+use Wikibase\Repo\RestApi\Domain\Services\ItemDescriptionRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemDescriptionsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemLabelsRetriever;
 
 /**
  * @license GPL-2.0-or-later
  */
-class TermLookupItemDataRetriever implements ItemLabelsRetriever, ItemDescriptionsRetriever {
+class TermLookupItemDataRetriever implements ItemLabelsRetriever, ItemDescriptionsRetriever, ItemDescriptionRetriever {
 
 	private TermLookup $termLookup;
 	private ContentLanguages $termLanguages;
@@ -39,6 +40,16 @@ class TermLookupItemDataRetriever implements ItemLabelsRetriever, ItemDescriptio
 			$labels,
 			array_keys( $labels )
 		) );
+	}
+
+	public function getDescription( ItemId $itemId, string $languageCode ): ?Description {
+		try {
+			$descriptionText = $this->termLookup->getDescription( $itemId, $languageCode );
+		} catch ( TermLookupException $e ) {
+			// this probably means that the item does not exist, which should be checked prior to calling this method
+			return null;
+		}
+		return new Description( $languageCode, $descriptionText );
 	}
 
 	public function getDescriptions( ItemId $itemId ): ?Descriptions {
