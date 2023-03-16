@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\RestApi\UseCases\PatchItemStatement;
 
+use Exception;
 use Generator;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -31,15 +32,14 @@ use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\RestApi\Serialization\PropertyValuePairSerializer;
 use Wikibase\Repo\RestApi\Serialization\ReferenceSerializer;
 use Wikibase\Repo\RestApi\Serialization\StatementSerializer;
+use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchedStatementValidator;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatement;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementRequest;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementResponse;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementValidator;
 use Wikibase\Repo\RestApi\UseCases\UseCaseException;
-use Wikibase\Repo\RestApi\Validation\StatementValidator;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
-use Wikibase\Repo\Tests\RestApi\Serialization\DeserializerFactory;
 
 /**
  * @covers \Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatement
@@ -59,9 +59,12 @@ class PatchItemStatementTest extends TestCase {
 	 */
 	private $useCaseValidator;
 
-	private StatementSerializer $statementSerializer;
+	/**
+	 * @var MockObject|PatchedStatementValidator
+	 */
+	private $patchedStatementValidator;
 
-	private StatementValidator $statementValidator;
+	private StatementSerializer $statementSerializer;
 
 	/**
 	 * @var MockObject|ItemStatementRetriever
@@ -92,6 +95,7 @@ class PatchItemStatementTest extends TestCase {
 		parent::setUp();
 
 		$this->useCaseValidator = $this->createStub( PatchItemStatementValidator::class );
+		$this->patchedStatementValidator = $this->createStub( PatchedStatementValidator::class );
 		$this->statementRetriever = $this->createStub( ItemStatementRetriever::class );
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
@@ -100,7 +104,6 @@ class PatchItemStatementTest extends TestCase {
 		$this->permissionChecker->method( 'canEdit' )->willReturn( true );
 
 		$this->statementSerializer = $this->newStatementSerializer();
-		$this->statementValidator = $this->newStatementValidator();
 	}
 
 	public function testPatchItemStatement_success(): void {
@@ -123,6 +126,11 @@ class PatchItemStatementTest extends TestCase {
 
 		$patch = $this->getValidValueReplacingPatch( $newStatementValue );
 
+		$patchedStatement = NewStatement::forProperty( self::STRING_PROPERTY )
+			->withGuid( $statementId )
+			->withValue( $newStatementValue )
+			->build();
+
 		$requestData = [
 			'$statementId' => (string)$statementId,
 			'$patch' => $patch,
@@ -143,6 +151,9 @@ class PatchItemStatementTest extends TestCase {
 			->method( 'getItem' )
 			->with( $itemId )
 			->willReturn( $itemToUpdate );
+
+		$this->patchedStatementValidator = $this->createStub( PatchedStatementValidator::class );
+		$this->patchedStatementValidator->method( 'validateAndDeserializeStatement' )->willReturn( $patchedStatement );
 
 		$updatedItem = new ReadModelItem( new StatementList(
 			NewStatementReadModel::forProperty( 'P123' )->withGuid( $statementId )->withValue( $newStatementValue )->build()
@@ -293,8 +304,8 @@ class PatchItemStatementTest extends TestCase {
 		$this->statementRetriever = $this->createStub( ItemStatementRetriever::class );
 		$this->statementRetriever->method( 'getStatement' )->willReturn( $statementToPatch );
 
-		$this->statementValidator = $this->createStub( StatementValidator::class );
-		$this->statementValidator->method( 'getValidatedStatement' )->willReturn( $patchedStatement );
+		$this->patchedStatementValidator = $this->createStub( PatchedStatementValidator::class );
+		$this->patchedStatementValidator->method( 'validateAndDeserializeStatement' )->willReturn( $patchedStatement );
 
 		try {
 			$this->newUseCase()->execute(
@@ -329,8 +340,8 @@ class PatchItemStatementTest extends TestCase {
 		$this->statementRetriever = $this->createStub( ItemStatementRetriever::class );
 		$this->statementRetriever->method( 'getStatement' )->willReturn( $statementToPatch );
 
-		$this->statementValidator = $this->createStub( StatementValidator::class );
-		$this->statementValidator->method( 'getValidatedStatement' )->willReturn( $patchedStatement );
+		$this->patchedStatementValidator = $this->createStub( PatchedStatementValidator::class );
+		$this->patchedStatementValidator->method( 'validateAndDeserializeStatement' )->willReturn( $patchedStatement );
 
 		try {
 			$this->newUseCase()->execute(
@@ -439,6 +450,12 @@ class PatchItemStatementTest extends TestCase {
 		$statementId = new StatementGuid( new ItemId( 'Q123' ), 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 		$this->setRetrieversForItemWithStringStatement( $statementId );
 
+		$expectedException = new UseCaseException( 'fail', 'message' );
+		$this->patchedStatementValidator = $this->createStub( PatchedStatementValidator::class );
+		$this->patchedStatementValidator
+			->method( 'validateAndDeserializeStatement' )
+			->willThrowException( $expectedException );
+
 		try {
 			$this->newUseCase()->execute(
 				$this->newUseCaseRequest( [
@@ -446,23 +463,17 @@ class PatchItemStatementTest extends TestCase {
 					'$patch' => $patch,
 				] )
 			);
-			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
-			$this->assertSame( UseCaseException::PATCHED_STATEMENT_MISSING_FIELD, $e->getErrorCode() );
-			$this->assertSame(
-				'Mandatory field missing in the patched statement: property',
-				$e->getErrorMessage()
-			);
-			$this->assertSame( [ 'path' => 'property' ], $e->getErrorContext() );
+		} catch ( Exception $e ) {
+			$this->assertSame( $expectedException, $e );
 		}
 	}
 
 	private function newUseCase(): PatchItemStatement {
 		return new PatchItemStatement(
 			$this->useCaseValidator,
+			$this->patchedStatementValidator,
 			new JsonDiffJsonPatcher(),
 			$this->statementSerializer,
-			$this->statementValidator,
 			new StatementGuidParser( new ItemIdParser() ),
 			$this->statementRetriever,
 			$this->itemRetriever,
@@ -529,12 +540,6 @@ class PatchItemStatementTest extends TestCase {
 		return new StatementSerializer(
 			$propertyValuePairSerializer,
 			new ReferenceSerializer( $propertyValuePairSerializer )
-		);
-	}
-
-	private function newStatementValidator(): StatementValidator {
-		return new StatementValidator(
-			DeserializerFactory::newStatementDeserializer( $this->newDataTypeLookup() )
 		);
 	}
 
