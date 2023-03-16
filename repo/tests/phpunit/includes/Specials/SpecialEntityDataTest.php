@@ -186,7 +186,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 	/**
 	 * @dataProvider provideExecute
 	 *
-	 * @param string $subpage The subpage to request (or '')
+	 * @param string|null $subpage The subpage to request
 	 * @param array $params Request parameters
 	 * @param array $headers Request headers
 	 * @param string $expRegExp Regex to match the output against.
@@ -194,7 +194,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 	 * @param array $expHeaders Expected HTTP response headers
 	 */
 	public function testExecute(
-		string $subpage,
+		?string $subpage,
 		array $params,
 		array $headers,
 		string $expRegExp,

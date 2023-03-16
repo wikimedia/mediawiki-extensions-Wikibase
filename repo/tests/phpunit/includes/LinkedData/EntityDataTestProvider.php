@@ -73,8 +73,16 @@ class EntityDataTestProvider {
 			400,       // http code
 		];
 
-		$cases[] = [ // #1: valid item ID
+		$cases[] = [ // #1: valid item ID, subpage as empty string
 			'',      // subpage
+			[ 'id' => 'Q42', 'format' => 'json' ], // parameters
+			[], // headers
+			'!^\{.*Raarrr!s', // output regex
+			200,       // http code
+		];
+
+		$cases[] = [ // #1: valid item ID, subpage as null
+			null,      // subpage
 			[ 'id' => 'Q42', 'format' => 'json' ], // parameters
 			[], // headers
 			'!^\{.*Raarrr!s', // output regex
