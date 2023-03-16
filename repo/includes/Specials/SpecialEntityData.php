@@ -109,7 +109,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 			return;
 		}
 
-		$this->requestHandler->handleRequest( $subPage, $this->getRequest(), $this->getOutput() );
+		$this->requestHandler->handleRequest( $subPage ?? '', $this->getRequest(), $this->getOutput() );
 	}
 
 	/**
