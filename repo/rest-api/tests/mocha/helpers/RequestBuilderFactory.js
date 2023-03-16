@@ -34,6 +34,13 @@ module.exports = {
 			.withPathParam( 'item_id', itemId );
 	},
 
+	newGetItemLabelRequestBuilder( itemId, languageCode ) {
+		return new RequestBuilder()
+			.withRoute( 'GET', '/entities/items/{item_id}/labels/{language_code}' )
+			.withPathParam( 'item_id', itemId )
+			.withPathParam( 'language_code', languageCode );
+	},
+
 	newGetItemStatementsRequestBuilder( itemId ) {
 		return new RequestBuilder()
 			.withRoute( 'GET', '/entities/items/{item_id}/statements' )

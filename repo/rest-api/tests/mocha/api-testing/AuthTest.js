@@ -108,6 +108,9 @@ describe( 'Auth', () => {
 			newRequestBuilder: () => rbf.newGetItemDescriptionsRequestBuilder( itemId )
 		},
 		{
+			newRequestBuilder: () => rbf.newGetItemLabelRequestBuilder( itemId, 'en' )
+		},
+		{
 			newRequestBuilder: () => rbf.newGetItemLabelsRequestBuilder( itemId )
 		},
 		{
