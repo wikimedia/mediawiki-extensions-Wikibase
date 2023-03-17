@@ -14,8 +14,8 @@ use Wikibase\Repo\RestApi\Serialization\AliasesSerializer;
 use Wikibase\Repo\RestApi\UseCases\GetItemAliases\GetItemAliases;
 use Wikibase\Repo\RestApi\UseCases\GetItemAliases\GetItemAliasesRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemAliases\GetItemAliasesResponse;
-use Wikibase\Repo\RestApi\UseCases\ItemRedirectException;
-use Wikibase\Repo\RestApi\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\UseCases\ItemRedirect;
+use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -76,9 +76,9 @@ class GetItemAliasesRouteHandler extends SimpleHandler {
 			return $this->newSuccessHttpResponse(
 				$this->useCase->execute( new GetItemAliasesRequest( $itemId ) )
 			);
-		} catch ( ItemRedirectException $e ) {
+		} catch ( ItemRedirect $e ) {
 			return $this->newRedirectHttpResponse( $e );
-		} catch ( UseCaseException $e ) {
+		} catch ( UseCaseError $e ) {
 			return $this->responseFactory->newErrorResponseFromException( $e );
 		}
 	}
@@ -105,7 +105,7 @@ class GetItemAliasesRouteHandler extends SimpleHandler {
 		return $httpResponse;
 	}
 
-	private function newRedirectHttpResponse( ItemRedirectException $e ): Response {
+	private function newRedirectHttpResponse( ItemRedirect $e ): Response {
 		$httpResponse = $this->getResponseFactory()->create();
 		$httpResponse->setHeader(
 			'Location',

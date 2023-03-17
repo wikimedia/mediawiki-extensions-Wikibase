@@ -6,7 +6,7 @@ use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchedStatementValidator;
-use Wikibase\Repo\RestApi\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Validation\ValidationError;
 
@@ -56,7 +56,7 @@ class PatchedStatementValidatorTest extends TestCase {
 		try {
 			( new PatchedStatementValidator( $statementValidator ) )->validateAndDeserializeStatement( $patchedStatement );
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
+		} catch ( UseCaseError $e ) {
 			$this->assertSame( $expectedErrorCode, $e->getErrorCode() );
 			$this->assertSame( $expectedErrorMessage, $e->getErrorMessage() );
 			$this->assertSame( $expectedErrorContext, $e->getErrorContext() );
@@ -69,7 +69,7 @@ class PatchedStatementValidatorTest extends TestCase {
 				StatementValidator::CODE_MISSING_FIELD,
 				[ 'field' => 'property' ]
 			),
-			UseCaseException::PATCHED_STATEMENT_MISSING_FIELD,
+			UseCaseError::PATCHED_STATEMENT_MISSING_FIELD,
 			'Mandatory field missing in the patched statement: property',
 			[ 'path' => 'property' ],
 		];
@@ -79,7 +79,7 @@ class PatchedStatementValidatorTest extends TestCase {
 				StatementValidator::CODE_INVALID_FIELD,
 				[ 'field' => 'rank', 'value' => 'not-a-valid-rank' ]
 			),
-			UseCaseException::PATCHED_STATEMENT_INVALID_FIELD,
+			UseCaseError::PATCHED_STATEMENT_INVALID_FIELD,
 			"Invalid input for 'rank' in the patched statement",
 			[ 'path' => 'rank', 'value' => 'not-a-valid-rank' ],
 		];

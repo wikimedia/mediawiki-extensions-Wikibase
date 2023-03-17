@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\RestApi\UseCases\GetItemAliases;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\UseCases\GetItemAliases\GetItemAliasesRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemAliases\GetItemAliasesValidator;
-use Wikibase\Repo\RestApi\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 
 /**
@@ -23,7 +23,7 @@ class GetItemAliasesValidatorTest extends TestCase {
 		try {
 			$this->newAliasesValidator()
 				->assertValidRequest( new GetItemAliasesRequest( $invalidId ) );
-		} catch ( UseCaseException $useCaseEx ) {
+		} catch ( UseCaseError $useCaseEx ) {
 			$this->assertSame( ItemIdValidator::CODE_INVALID, $useCaseEx->getErrorCode() );
 			$this->assertSame( 'Not a valid item ID: ' . $invalidId, $useCaseEx->getErrorMessage() );
 		}

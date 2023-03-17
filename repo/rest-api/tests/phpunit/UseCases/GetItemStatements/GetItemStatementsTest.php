@@ -13,8 +13,8 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemStatementsRetriever;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatements;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatementsRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatementsValidator;
-use Wikibase\Repo\RestApi\UseCases\ItemRedirectException;
-use Wikibase\Repo\RestApi\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\UseCases\ItemRedirect;
+use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
 
@@ -106,8 +106,8 @@ class GetItemStatementsTest extends TestCase {
 			$this->newUseCase()->execute( new GetItemStatementsRequest( 'X321' ) );
 
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
-			$this->assertSame( UseCaseException::INVALID_ITEM_ID, $e->getErrorCode() );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::INVALID_ITEM_ID, $e->getErrorCode() );
 			$this->assertSame( 'Not a valid item ID: X321', $e->getErrorMessage() );
 		}
 	}
@@ -120,8 +120,8 @@ class GetItemStatementsTest extends TestCase {
 			$this->newUseCase()->execute( new GetItemStatementsRequest( 'Q123' ) );
 
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
-			$this->assertSame( UseCaseException::ITEM_NOT_FOUND, $e->getErrorCode() );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::ITEM_NOT_FOUND, $e->getErrorCode() );
 			$this->assertSame( 'Could not find an item with the ID: Q123', $e->getErrorMessage() );
 		}
 	}
@@ -136,7 +136,7 @@ class GetItemStatementsTest extends TestCase {
 
 		try{
 			$this->newUseCase()->execute( new GetItemStatementsRequest( $redirectSource ) );
-		} catch ( ItemRedirectException $e ) {
+		} catch ( ItemRedirect $e ) {
 			$this->assertSame( $redirectTarget, $e->getRedirectTargetId() );
 		}
 	}

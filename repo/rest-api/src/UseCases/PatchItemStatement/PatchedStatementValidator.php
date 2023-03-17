@@ -4,7 +4,7 @@ namespace Wikibase\Repo\RestApi\UseCases\PatchItemStatement;
 
 use LogicException;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Repo\RestApi\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Validation\StatementValidator;
 
 /**
@@ -19,7 +19,7 @@ class PatchedStatementValidator {
 	}
 
 	/**
-	 * @throws UseCaseException
+	 * @throws UseCaseError
 	 */
 	public function validateAndDeserializeStatement( array $patchedStatement ): Statement {
 		$validationError = $this->statementValidator->validate( $patchedStatement );
@@ -28,8 +28,8 @@ class PatchedStatementValidator {
 			$context = $validationError->getContext();
 			switch ( $errorCode ) {
 				case StatementValidator::CODE_MISSING_FIELD:
-					throw new UseCaseException(
-						UseCaseException::PATCHED_STATEMENT_MISSING_FIELD,
+					throw new UseCaseError(
+						UseCaseError::PATCHED_STATEMENT_MISSING_FIELD,
 						"Mandatory field missing in the patched statement: {$context[StatementValidator::CONTEXT_FIELD_NAME]}",
 						[
 							'path' => $context[StatementValidator::CONTEXT_FIELD_NAME],
@@ -37,8 +37,8 @@ class PatchedStatementValidator {
 					);
 
 				case StatementValidator::CODE_INVALID_FIELD:
-					throw new UseCaseException(
-						UseCaseException::PATCHED_STATEMENT_INVALID_FIELD,
+					throw new UseCaseError(
+						UseCaseError::PATCHED_STATEMENT_INVALID_FIELD,
 						"Invalid input for '{$context[StatementValidator::CONTEXT_FIELD_NAME]}' in the patched statement",
 						[
 							'path' => $context[StatementValidator::CONTEXT_FIELD_NAME],

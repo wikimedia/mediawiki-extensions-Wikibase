@@ -17,7 +17,7 @@ use Wikibase\Repo\RestApi\RouteHandlers\Middleware\RequestPreconditionCheck;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
 use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatement;
 use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatementRequest;
-use Wikibase\Repo\RestApi\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -102,7 +102,7 @@ class RemoveStatementRouteHandler extends SimpleHandler {
 					$this->getUsername()
 				)
 			);
-		} catch ( UseCaseException $exception ) {
+		} catch ( UseCaseError $exception ) {
 			return $this->responseFactory->newErrorResponseFromException( $exception );
 		}
 

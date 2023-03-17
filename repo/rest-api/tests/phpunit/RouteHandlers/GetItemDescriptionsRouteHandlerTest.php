@@ -10,7 +10,7 @@ use MediaWikiIntegrationTestCase;
 use RuntimeException;
 use Wikibase\Repo\RestApi\RouteHandlers\GetItemDescriptionsRouteHandler;
 use Wikibase\Repo\RestApi\UseCases\GetItemDescriptions\GetItemDescriptions;
-use Wikibase\Repo\RestApi\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 
 /**
  * @covers \Wikibase\Repo\RestApi\RouteHandlers\GetItemDescriptionsRouteHandler
@@ -34,7 +34,7 @@ class GetItemDescriptionsRouteHandlerTest extends MediaWikiIntegrationTestCase {
 		$response = $routeHandler->execute();
 		$responseBody = json_decode( $response->getBody()->getContents() );
 		$this->assertSame( [ 'en' ], $response->getHeader( 'Content-Language' ) );
-		$this->assertSame( UseCaseException::UNEXPECTED_ERROR, $responseBody->code );
+		$this->assertSame( UseCaseError::UNEXPECTED_ERROR, $responseBody->code );
 	}
 
 	public function testReadWriteAccess(): void {

@@ -15,7 +15,7 @@ use TypeError;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdatePrevented;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\ResponseFactory;
-use Wikibase\Repo\RestApi\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 
 /**
  * @covers \Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware
@@ -50,7 +50,7 @@ class UnexpectedErrorHandlerMiddlewareTest extends TestCase {
 		$this->assertSame( [ 'en' ], $response->getHeader( 'Content-Language' ) );
 		$responseBody = json_decode( $response->getBody()->getContents() );
 		$this->assertSame(
-			UseCaseException::UNEXPECTED_ERROR,
+			UseCaseError::UNEXPECTED_ERROR,
 			$responseBody->code
 		);
 	}

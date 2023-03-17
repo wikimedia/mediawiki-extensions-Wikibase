@@ -23,7 +23,7 @@ use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
 use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatement;
 use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatementRequest;
 use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatementValidator;
-use Wikibase\Repo\RestApi\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\StatementIdValidator;
@@ -126,8 +126,8 @@ class RemoveItemStatementTest extends TestCase {
 			$this->newUseCase()->execute(
 				$this->newUseCaseRequest( $requestData )
 			);
-		} catch ( UseCaseException $e ) {
-			$this->assertSame( UseCaseException::INVALID_STATEMENT_ID, $e->getErrorCode() );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::INVALID_STATEMENT_ID, $e->getErrorCode() );
 			$this->assertSame( 'Not a valid statement ID: INVALID-STATEMENT-ID', $e->getErrorMessage() );
 		}
 	}
@@ -141,8 +141,8 @@ class RemoveItemStatementTest extends TestCase {
 				'$statementId' => 'Q999999$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
 			] )
 		);
-		} catch ( UseCaseException $e ) {
-			$this->assertSame( UseCaseException::ITEM_NOT_FOUND, $e->getErrorCode() );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::ITEM_NOT_FOUND, $e->getErrorCode() );
 			$this->assertSame( 'Could not find an item with the ID: Q999999', $e->getErrorMessage() );
 		}
 	}
@@ -156,8 +156,8 @@ class RemoveItemStatementTest extends TestCase {
 					'$statementId' => $statementId,
 				] )
 			);
-		} catch ( UseCaseException $e ) {
-			$this->assertSame( UseCaseException::STATEMENT_NOT_FOUND, $e->getErrorCode() );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::STATEMENT_NOT_FOUND, $e->getErrorCode() );
 			$this->assertSame( "Could not find a statement with the ID: $statementId", $e->getErrorMessage() );
 		}
 	}
@@ -173,8 +173,8 @@ class RemoveItemStatementTest extends TestCase {
 					'$statementId' => $statementId,
 				] )
 			);
-		} catch ( UseCaseException $e ) {
-			$this->assertSame( UseCaseException::STATEMENT_NOT_FOUND, $e->getErrorCode() );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::STATEMENT_NOT_FOUND, $e->getErrorCode() );
 			$this->assertSame( "Could not find a statement with the ID: $statementId", $e->getErrorMessage() );
 		}
 	}
@@ -191,8 +191,8 @@ class RemoveItemStatementTest extends TestCase {
 					'$statementId' => $statementId,
 				] )
 			);
-		} catch ( UseCaseException $e ) {
-			$this->assertSame( UseCaseException::STATEMENT_NOT_FOUND, $e->getErrorCode() );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::STATEMENT_NOT_FOUND, $e->getErrorCode() );
 			$this->assertSame( "Could not find a statement with the ID: $statementId", $e->getErrorMessage() );
 		}
 	}
@@ -210,8 +210,8 @@ class RemoveItemStatementTest extends TestCase {
 					'$statementId' => $statementId,
 				] )
 			);
-		} catch ( UseCaseException $e ) {
-			$this->assertSame( UseCaseException::STATEMENT_NOT_FOUND, $e->getErrorCode() );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::STATEMENT_NOT_FOUND, $e->getErrorCode() );
 			$this->assertSame( "Could not find a statement with the ID: $statementId", $e->getErrorMessage() );
 		}
 	}
@@ -235,8 +235,8 @@ class RemoveItemStatementTest extends TestCase {
 					'$statementId' => "$itemId\$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
 				] )
 			);
-		} catch ( UseCaseException $e ) {
-			$this->assertSame( UseCaseException::PERMISSION_DENIED, $e->getErrorCode() );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::PERMISSION_DENIED, $e->getErrorCode() );
 			$this->assertSame( 'You have no permission to edit this item.', $e->getErrorMessage() );
 		}
 	}

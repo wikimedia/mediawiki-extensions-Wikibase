@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatementRequest;
 use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatementValidator;
-use Wikibase\Repo\RestApi\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\StatementIdValidator;
@@ -45,7 +45,7 @@ class RemoveItemStatementValidatorTest extends TestCase {
 			);
 
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
+		} catch ( UseCaseError $e ) {
 			$this->assertSame( $errorCode, $e->getErrorCode() );
 			$this->assertSame( $errorMessage, $e->getErrorMessage() );
 		}

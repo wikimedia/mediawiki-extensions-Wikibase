@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\UseCases\GetItemLabel;
 
-use Wikibase\Repo\RestApi\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\LanguageCodeValidator;
 
@@ -23,7 +23,7 @@ class GetItemLabelValidator {
 	}
 
 	/**
-	 * @throws UseCaseException
+	 * @throws UseCaseError
 	 */
 	public function assertValidRequest( GetItemLabelRequest $request ): void {
 		$this->validateItemId( $request->getItemId() );
@@ -31,28 +31,28 @@ class GetItemLabelValidator {
 	}
 
 	/**
-	 * @throws UseCaseException
+	 * @throws UseCaseError
 	 */
 	private function validateItemId( string $itemId ): void {
 		$validationError = $this->itemIdValidator->validate( $itemId );
 
 		if ( $validationError ) {
-			throw new UseCaseException(
-				UseCaseException::INVALID_ITEM_ID,
+			throw new UseCaseError(
+				UseCaseError::INVALID_ITEM_ID,
 				'Not a valid item ID: ' . $validationError->getContext()[ItemIdValidator::CONTEXT_VALUE]
 			);
 		}
 	}
 
 	/**
-	 * @throws UseCaseException
+	 * @throws UseCaseError
 	 */
 	private function validateLanguageCode( string $languageCode ): void {
 		$validationError = $this->languageCodeValidator->validate( $languageCode );
 
 		if ( $validationError ) {
-			throw new UseCaseException(
-				UseCaseException::INVALID_LANGUAGE_CODE,
+			throw new UseCaseError(
+				UseCaseError::INVALID_LANGUAGE_CODE,
 				'Not a valid language code: ' . $validationError->getContext()[LanguageCodeValidator::CONTEXT_LANGUAGE_CODE_VALUE]
 			);
 		}

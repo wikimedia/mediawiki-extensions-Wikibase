@@ -14,8 +14,8 @@ use Wikibase\Repo\RestApi\Serialization\DescriptionsSerializer;
 use Wikibase\Repo\RestApi\UseCases\GetItemDescriptions\GetItemDescriptions;
 use Wikibase\Repo\RestApi\UseCases\GetItemDescriptions\GetItemDescriptionsRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemDescriptions\GetItemDescriptionsResponse;
-use Wikibase\Repo\RestApi\UseCases\ItemRedirectException;
-use Wikibase\Repo\RestApi\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\UseCases\ItemRedirect;
+use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -74,9 +74,9 @@ class GetItemDescriptionsRouteHandler extends SimpleHandler {
 		try {
 			$useCaseResponse = $this->useCase->execute( new GetItemDescriptionsRequest( $itemId ) );
 			 return $this->newSuccessHttpResponse( $useCaseResponse );
-		} catch ( ItemRedirectException $e ) {
+		} catch ( ItemRedirect $e ) {
 			 return $this->newRedirectHttpResponse( $e );
-		} catch ( UseCaseException $e ) {
+		} catch ( UseCaseError $e ) {
 			 return $this->responseFactory->newErrorResponseFromException( $e );
 		}
 	}
@@ -103,7 +103,7 @@ class GetItemDescriptionsRouteHandler extends SimpleHandler {
 		return $httpResponse;
 	}
 
-	private function newRedirectHttpResponse( ItemRedirectException $e ): Response {
+	private function newRedirectHttpResponse( ItemRedirect $e ): Response {
 		$httpResponse = $this->getResponseFactory()->create();
 		$httpResponse->setHeader(
 			'Location',

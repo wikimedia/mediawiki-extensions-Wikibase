@@ -13,7 +13,7 @@ use Wikibase\Repo\RestApi\UseCases\GetItemLabel\GetItemLabel;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabel\GetItemLabelRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabel\GetItemLabelResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabel\GetItemLabelValidator;
-use Wikibase\Repo\RestApi\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\LanguageCodeValidator;
 use Wikibase\Repo\WikibaseRepo;
@@ -73,8 +73,8 @@ class GetItemLabelTest extends TestCase {
 			$this->newUseCase()->execute( new GetItemLabelRequest( 'X321', 'en' ) );
 
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
-			$this->assertSame( UseCaseException::INVALID_ITEM_ID, $e->getErrorCode() );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::INVALID_ITEM_ID, $e->getErrorCode() );
 			$this->assertSame( 'Not a valid item ID: X321', $e->getErrorMessage() );
 			$this->assertNull( $e->getErrorContext() );
 		}
@@ -85,10 +85,10 @@ class GetItemLabelTest extends TestCase {
 			$this->newUseCase()->execute( new GetItemLabelRequest( 'Q123', '1e' ) );
 
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $useCaseEx ) {
-			$this->assertSame( UseCaseException::INVALID_LANGUAGE_CODE, $useCaseEx->getErrorCode() );
-			$this->assertSame( 'Not a valid language code: 1e', $useCaseEx->getErrorMessage() );
-			$this->assertNull( $useCaseEx->getErrorContext() );
+		} catch ( UseCaseError $error ) {
+			$this->assertSame( UseCaseError::INVALID_LANGUAGE_CODE, $error->getErrorCode() );
+			$this->assertSame( 'Not a valid language code: 1e', $error->getErrorMessage() );
+			$this->assertNull( $error->getErrorContext() );
 		}
 	}
 

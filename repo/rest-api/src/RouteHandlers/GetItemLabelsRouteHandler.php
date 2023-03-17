@@ -14,8 +14,8 @@ use Wikibase\Repo\RestApi\Serialization\LabelsSerializer;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabels;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabelsRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabelsResponse;
-use Wikibase\Repo\RestApi\UseCases\ItemRedirectException;
-use Wikibase\Repo\RestApi\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\UseCases\ItemRedirect;
+use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -76,9 +76,9 @@ class GetItemLabelsRouteHandler extends SimpleHandler {
 			return $this->newSuccessHttpResponse(
 				$this->useCase->execute( new GetItemLabelsRequest( $itemId ) )
 			);
-		} catch ( ItemRedirectException $e ) {
+		} catch ( ItemRedirect $e ) {
 			return $this->newRedirectHttpResponse( $e );
-		} catch ( UseCaseException $e ) {
+		} catch ( UseCaseError $e ) {
 			return $this->responseFactory->newErrorResponseFromException( $e );
 		}
 	}
@@ -103,7 +103,7 @@ class GetItemLabelsRouteHandler extends SimpleHandler {
 		return $httpResponse;
 	}
 
-	private function newRedirectHttpResponse( ItemRedirectException $e ): Response {
+	private function newRedirectHttpResponse( ItemRedirect $e ): Response {
 		$httpResponse = $this->getResponseFactory()->create();
 		$httpResponse->setHeader(
 			'Location',

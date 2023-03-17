@@ -5,8 +5,8 @@ namespace Wikibase\Repo\RestApi\UseCases\GetItem;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Domain\Services\ItemDataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
-use Wikibase\Repo\RestApi\UseCases\ItemRedirectException;
-use Wikibase\Repo\RestApi\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\UseCases\ItemRedirect;
+use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 
 /**
  * @license GPL-2.0-or-later
@@ -28,8 +28,8 @@ class GetItem {
 	}
 
 	/**
-	 * @throws UseCaseException
-	 * @throws ItemRedirectException
+	 * @throws UseCaseError
+	 * @throws ItemRedirect
 	 */
 	public function execute( GetItemRequest $itemRequest ): GetItemResponse {
 		$this->validator->assertValidRequest( $itemRequest );
@@ -38,14 +38,14 @@ class GetItem {
 		$latestRevisionMetadata = $this->revisionMetadataRetriever->getLatestRevisionMetadata( $itemId );
 
 		if ( !$latestRevisionMetadata->itemExists() ) {
-			throw new UseCaseException(
-				UseCaseException::ITEM_NOT_FOUND,
+			throw new UseCaseError(
+				UseCaseError::ITEM_NOT_FOUND,
 				"Could not find an item with the ID: {$itemRequest->getItemId()}"
 			);
 		}
 
 		if ( $latestRevisionMetadata->isRedirect() ) {
-			throw new ItemRedirectException(
+			throw new ItemRedirect(
 				$latestRevisionMetadata->getRedirectTarget()->getSerialization()
 			);
 		}

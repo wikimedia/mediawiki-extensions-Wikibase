@@ -13,7 +13,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemStatementRetriever;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatement;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementValidator;
-use Wikibase\Repo\RestApi\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\StatementIdValidator;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
@@ -76,7 +76,7 @@ class GetItemStatementTest extends TestCase {
 		$this->assertSame( $lastModified, $response->getLastModified() );
 	}
 
-	public function testGivenInvalidStatementId_throwsUseCaseException(): void {
+	public function testGivenInvalidStatementId_throwsUseCaseError(): void {
 		$statementId = 'X123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 		try {
 			$this->newUseCase()->execute(
@@ -84,8 +84,8 @@ class GetItemStatementTest extends TestCase {
 			);
 
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
-			$this->assertSame( UseCaseException::INVALID_STATEMENT_ID, $e->getErrorCode() );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::INVALID_STATEMENT_ID, $e->getErrorCode() );
 			$this->assertSame(
 				"Not a valid statement ID: {$statementId}",
 				$e->getErrorMessage()
@@ -93,7 +93,7 @@ class GetItemStatementTest extends TestCase {
 		}
 	}
 
-	public function testItemForStatementIdNotFound_throwsUseCaseException(): void {
+	public function testItemForStatementIdNotFound_throwsUseCaseError(): void {
 		$itemId = new ItemId( 'Q123' );
 		$statementId = $itemId . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 
@@ -109,12 +109,12 @@ class GetItemStatementTest extends TestCase {
 			$this->newUseCase()->execute( new GetItemStatementRequest( $statementId ) );
 
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
-			$this->assertSame( UseCaseException::STATEMENT_NOT_FOUND, $e->getErrorCode() );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::STATEMENT_NOT_FOUND, $e->getErrorCode() );
 		}
 	}
 
-	public function testRequestedItemIdNotFound_throwsUseCaseException(): void {
+	public function testRequestedItemIdNotFound_throwsUseCaseError(): void {
 		$itemId = new ItemId( 'Q123' );
 		$statementId = $itemId . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 
@@ -132,12 +132,12 @@ class GetItemStatementTest extends TestCase {
 			);
 
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
-			$this->assertSame( UseCaseException::ITEM_NOT_FOUND, $e->getErrorCode() );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::ITEM_NOT_FOUND, $e->getErrorCode() );
 		}
 	}
 
-	public function testStatementNotFound_throwsUseCaseException(): void {
+	public function testStatementNotFound_throwsUseCaseError(): void {
 		$itemId = new ItemId( 'Q321' );
 		$revision = 987;
 		$lastModified = '20201111070707';
@@ -159,12 +159,12 @@ class GetItemStatementTest extends TestCase {
 			);
 
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
-			$this->assertSame( UseCaseException::STATEMENT_NOT_FOUND, $e->getErrorCode() );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::STATEMENT_NOT_FOUND, $e->getErrorCode() );
 		}
 	}
 
-	public function testStatementIdNotMatchingItemId_throwsUseCaseException(): void {
+	public function testStatementIdNotMatchingItemId_throwsUseCaseError(): void {
 		$requestedItemId = new ItemId( 'Q123' );
 		$statementItemId = new ItemId( 'Q321' );
 		$revision = 987;
@@ -189,8 +189,8 @@ class GetItemStatementTest extends TestCase {
 			);
 
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
-			$this->assertSame( UseCaseException::STATEMENT_NOT_FOUND, $e->getErrorCode() );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::STATEMENT_NOT_FOUND, $e->getErrorCode() );
 		}
 	}
 

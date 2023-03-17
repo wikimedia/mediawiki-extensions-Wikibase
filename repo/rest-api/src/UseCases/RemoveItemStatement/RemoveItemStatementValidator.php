@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\UseCases\RemoveItemStatement;
 
-use Wikibase\Repo\RestApi\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\StatementIdValidator;
@@ -39,8 +39,8 @@ class RemoveItemStatementValidator {
 		$validationError = $this->itemIdValidator->validate( $itemId );
 
 		if ( $validationError ) {
-			throw new UseCaseException(
-				UseCaseException::INVALID_ITEM_ID,
+			throw new UseCaseError(
+				UseCaseError::INVALID_ITEM_ID,
 				'Not a valid item ID: ' . $validationError->getContext()[ItemIdValidator::CONTEXT_VALUE]
 			);
 		}
@@ -50,8 +50,8 @@ class RemoveItemStatementValidator {
 		$validationError = $this->statementIdValidator->validate( $statementId );
 
 		if ( $validationError ) {
-			throw new UseCaseException(
-				UseCaseException::INVALID_STATEMENT_ID,
+			throw new UseCaseError(
+				UseCaseError::INVALID_STATEMENT_ID,
 				'Not a valid statement ID: ' . $validationError->getContext()[StatementIdValidator::CONTEXT_VALUE]
 			);
 		}
@@ -62,8 +62,8 @@ class RemoveItemStatementValidator {
 
 		if ( $validationError ) {
 			$commentMaxLength = $validationError->getContext()[ EditMetadataValidator::CONTEXT_COMMENT_MAX_LENGTH ];
-			throw new UseCaseException(
-				UseCaseException::COMMENT_TOO_LONG,
+			throw new UseCaseError(
+				UseCaseError::COMMENT_TOO_LONG,
 				"Comment must not be longer than $commentMaxLength characters."
 			);
 		}
@@ -73,8 +73,8 @@ class RemoveItemStatementValidator {
 		$validationError = $this->editMetadataValidator->validateEditTags( $editTags );
 
 		if ( $validationError ) {
-			throw new UseCaseException(
-				UseCaseException::INVALID_EDIT_TAG,
+			throw new UseCaseError(
+				UseCaseError::INVALID_EDIT_TAG,
 				"Invalid MediaWiki tag: {$validationError->getContext()[EditMetadataValidator::CONTEXT_TAG_VALUE]}"
 			);
 		}

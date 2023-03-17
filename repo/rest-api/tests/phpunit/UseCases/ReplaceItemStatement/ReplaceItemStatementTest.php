@@ -28,7 +28,7 @@ use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatement;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementRequest;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementResponse;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementValidator;
-use Wikibase\Repo\RestApi\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\StatementIdValidator;
@@ -167,15 +167,15 @@ class ReplaceItemStatementTest extends TestCase {
 				] )
 			);
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
+		} catch ( UseCaseError $e ) {
 			$this->assertSame(
-				UseCaseException::INVALID_OPERATION_CHANGED_STATEMENT_ID,
+				UseCaseError::INVALID_OPERATION_CHANGED_STATEMENT_ID,
 				$e->getErrorCode()
 			);
 		}
 	}
 
-	public function testRejectsPropertyIdChange_throwsUseCaseException(): void {
+	public function testRejectsPropertyIdChange_throwsUseCaseError(): void {
 		$itemId = new ItemId( 'Q123' );
 		$statementId = new StatementGuid( $itemId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 		$originalStatement = NewStatement::noValueFor( 'P123' )
@@ -203,15 +203,15 @@ class ReplaceItemStatementTest extends TestCase {
 				] )
 			);
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
+		} catch ( UseCaseError $e ) {
 			$this->assertSame(
-				UseCaseException::INVALID_OPERATION_CHANGED_PROPERTY,
+				UseCaseError::INVALID_OPERATION_CHANGED_PROPERTY,
 				$e->getErrorCode()
 			);
 		}
 	}
 
-	public function testInvalidStatementId_throwsUseCaseException(): void {
+	public function testInvalidStatementId_throwsUseCaseError(): void {
 		try {
 			$this->newUseCase()->execute(
 				$this->newUseCaseRequest( [
@@ -223,15 +223,15 @@ class ReplaceItemStatementTest extends TestCase {
 				] )
 			);
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
+		} catch ( UseCaseError $e ) {
 			$this->assertSame(
-				UseCaseException::INVALID_STATEMENT_ID,
+				UseCaseError::INVALID_STATEMENT_ID,
 				$e->getErrorCode()
 			);
 		}
 	}
 
-	public function testRequestedItemNotFound_throwsUseCaseException(): void {
+	public function testRequestedItemNotFound_throwsUseCaseError(): void {
 		$this->revisionMetadataRetriever = $this->newItemMetadataRetriever( LatestItemRevisionMetadataResult::itemNotFound() );
 
 		try {
@@ -243,15 +243,15 @@ class ReplaceItemStatementTest extends TestCase {
 				] )
 			);
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
+		} catch ( UseCaseError $e ) {
 			$this->assertSame(
-				UseCaseException::ITEM_NOT_FOUND,
+				UseCaseError::ITEM_NOT_FOUND,
 				$e->getErrorCode()
 			);
 		}
 	}
 
-	public function testItemForStatementNotFound_throwsUseCaseException(): void {
+	public function testItemForStatementNotFound_throwsUseCaseError(): void {
 		$this->revisionMetadataRetriever = $this->newItemMetadataRetriever( LatestItemRevisionMetadataResult::itemNotFound() );
 
 		try {
@@ -262,15 +262,15 @@ class ReplaceItemStatementTest extends TestCase {
 				] )
 			);
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
+		} catch ( UseCaseError $e ) {
 			$this->assertSame(
-				UseCaseException::STATEMENT_NOT_FOUND,
+				UseCaseError::STATEMENT_NOT_FOUND,
 				$e->getErrorCode()
 			);
 		}
 	}
 
-	public function testItemForStatementIsRedirect_throwsUseCaseException(): void {
+	public function testItemForStatementIsRedirect_throwsUseCaseError(): void {
 		$this->revisionMetadataRetriever = $this->newItemMetadataRetriever(
 			LatestItemRevisionMetadataResult::redirect( new ItemId( 'Q321' ) )
 		);
@@ -283,15 +283,15 @@ class ReplaceItemStatementTest extends TestCase {
 				] )
 			);
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
+		} catch ( UseCaseError $e ) {
 			$this->assertSame(
-				UseCaseException::STATEMENT_NOT_FOUND,
+				UseCaseError::STATEMENT_NOT_FOUND,
 				$e->getErrorCode()
 			);
 		}
 	}
 
-	public function testStatementIdMismatchingItemId_throwsUseCaseException(): void {
+	public function testStatementIdMismatchingItemId_throwsUseCaseError(): void {
 		$this->revisionMetadataRetriever = $this->newItemMetadataRetriever(
 			LatestItemRevisionMetadataResult::concreteRevision( 123, '20220708030405' )
 		);
@@ -305,15 +305,15 @@ class ReplaceItemStatementTest extends TestCase {
 				] )
 			);
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
+		} catch ( UseCaseError $e ) {
 			$this->assertSame(
-				UseCaseException::STATEMENT_NOT_FOUND,
+				UseCaseError::STATEMENT_NOT_FOUND,
 				$e->getErrorCode()
 			);
 		}
 	}
 
-	public function testStatementNotFoundOnItem_throwsUseCaseException(): void {
+	public function testStatementNotFoundOnItem_throwsUseCaseError(): void {
 		$this->revisionMetadataRetriever = $this->newItemMetadataRetriever(
 			LatestItemRevisionMetadataResult::concreteRevision( 123, '20220708030405' )
 		);
@@ -328,15 +328,15 @@ class ReplaceItemStatementTest extends TestCase {
 				] )
 			);
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
+		} catch ( UseCaseError $e ) {
 			$this->assertSame(
-				UseCaseException::STATEMENT_NOT_FOUND,
+				UseCaseError::STATEMENT_NOT_FOUND,
 				$e->getErrorCode()
 			);
 		}
 	}
 
-	public function testProtectedItem_throwsUseCaseException(): void {
+	public function testProtectedItem_throwsUseCaseError(): void {
 		$itemId = new ItemId( 'Q123' );
 		$this->revisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
 		$this->revisionMetadataRetriever->method( 'getLatestRevisionMetadata' )
@@ -356,9 +356,9 @@ class ReplaceItemStatementTest extends TestCase {
 				] )
 			);
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
+		} catch ( UseCaseError $e ) {
 			$this->assertSame(
-				UseCaseException::PERMISSION_DENIED,
+				UseCaseError::PERMISSION_DENIED,
 				$e->getErrorCode()
 			);
 		}

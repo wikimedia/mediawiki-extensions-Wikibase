@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\RestApi\UseCases\GetItem;
 
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemData;
-use Wikibase\Repo\RestApi\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 
 /**
@@ -20,14 +20,14 @@ class GetItemValidator {
 	}
 
 	/**
-	 * @throws UseCaseException
+	 * @throws UseCaseError
 	 */
 	public function assertValidRequest( GetItemRequest $request ): void {
 		$validationError = $this->itemIdValidator->validate( $request->getItemId() );
 
 		if ( $validationError ) {
-			throw new UseCaseException(
-				UseCaseException::INVALID_ITEM_ID,
+			throw new UseCaseError(
+				UseCaseError::INVALID_ITEM_ID,
 				'Not a valid item ID: ' . $validationError->getContext()[ItemIdValidator::CONTEXT_VALUE]
 			);
 		}
@@ -36,13 +36,13 @@ class GetItemValidator {
 	}
 
 	/**
-	 * @throws UseCaseException
+	 * @throws UseCaseError
 	 */
 	private function validateFields( array $fields ): void {
 		foreach ( $fields as $field ) {
 			if ( !in_array( $field, ItemData::VALID_FIELDS ) ) {
-				throw new UseCaseException(
-					UseCaseException::INVALID_FIELD,
+				throw new UseCaseError(
+					UseCaseError::INVALID_FIELD,
 					'Not a valid field: ' . $field
 				);
 			}

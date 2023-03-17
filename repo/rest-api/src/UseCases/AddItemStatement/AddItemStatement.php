@@ -11,7 +11,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
-use Wikibase\Repo\RestApi\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 
 /**
  * @license GPL-2.0-or-later
@@ -42,7 +42,7 @@ class AddItemStatement {
 	}
 
 	/**
-	 * @throws UseCaseException
+	 * @throws UseCaseError
 	 */
 	public function execute( AddItemStatementRequest $request ): AddItemStatementResponse {
 		$this->validator->assertValidRequest( $request );
@@ -52,20 +52,20 @@ class AddItemStatement {
 
 		$latestRevision = $this->revisionMetadataRetriever->getLatestRevisionMetadata( $itemId );
 		if ( $latestRevision->isRedirect() ) {
-			throw new UseCaseException(
-				UseCaseException::ITEM_REDIRECTED,
+			throw new UseCaseError(
+				UseCaseError::ITEM_REDIRECTED,
 				"Item {$request->getItemId()} has been merged into {$latestRevision->getRedirectTarget()}."
 			);
 		} elseif ( !$latestRevision->itemExists() ) {
-			throw new UseCaseException(
-				UseCaseException::ITEM_NOT_FOUND,
+			throw new UseCaseError(
+				UseCaseError::ITEM_NOT_FOUND,
 				"Could not find an item with the ID: {$request->getItemId()}"
 			);
 		}
 		$user = $request->hasUser() ? User::withUsername( $request->getUsername() ) : User::newAnonymous();
 		if ( !$this->permissionChecker->canEdit( $user, $itemId ) ) {
-			throw new UseCaseException(
-				UseCaseException::PERMISSION_DENIED,
+			throw new UseCaseError(
+				UseCaseError::PERMISSION_DENIED,
 				'You have no permission to edit this item.'
 			);
 		}
