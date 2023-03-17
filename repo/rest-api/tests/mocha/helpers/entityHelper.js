@@ -90,7 +90,8 @@ function newLegacyStatementWithRandomStringValue( propertyId ) {
 				value: 'random-string-value-' + utils.uniq()
 			},
 			property: propertyId
-		}
+		},
+		type: 'statement'
 	};
 }
 

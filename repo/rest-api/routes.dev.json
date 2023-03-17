@@ -1,2 +1,7 @@
 [
+	{
+		"path": "/wikibase/v0/entities/items/{item_id}/descriptions/{language_code}",
+		"method": "GET",
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetItemDescriptionRouteHandler::factory"
+	}
 ]

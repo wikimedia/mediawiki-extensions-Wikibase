@@ -7,7 +7,7 @@ const {
 	newStatementWithRandomStringValue,
 	newLegacyStatementWithRandomStringValue,
 	createUniqueStringProperty,
-	createItemWithStatements
+	createEntity
 } = require( '../helpers/entityHelper' );
 const { newAddItemStatementRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
@@ -44,9 +44,17 @@ describe( 'Conditional requests', () => {
 
 	before( async () => {
 		statementPropertyId = ( await createUniqueStringProperty() ).entity.id;
-		const createItemResponse = await createItemWithStatements( [
-			newLegacyStatementWithRandomStringValue( statementPropertyId )
-		] );
+		const createItemResponse = await createEntity(
+			'item',
+			{
+				claims: [ newLegacyStatementWithRandomStringValue( statementPropertyId ) ],
+				descriptions: { en: { language: 'en', value: `item-with-statements-${utils.uniq()}` } },
+				labels: { en: { language: 'en', value: `item-with-statements-${utils.uniq()}` } },
+				aliases: {
+					en: [ { language: 'en', value: 'Douglas Noël Adams' }, { language: 'en', value: 'DNA' } ]
+				}
+			}
+		);
 		itemId = createItemResponse.entity.id;
 		statementId = createItemResponse.entity.claims[ statementPropertyId ][ 0 ].id;
 
@@ -58,6 +66,7 @@ describe( 'Conditional requests', () => {
 	[
 		() => rbf.newGetItemRequestBuilder( itemId ),
 		() => rbf.newGetItemAliasesRequestBuilder( itemId ),
+		() => rbf.newGetItemDescriptionRequestBuilder( itemId, 'en' ),
 		() => rbf.newGetItemDescriptionsRequestBuilder( itemId ),
 		() => rbf.newGetItemLabelsRequestBuilder( itemId ),
 		() => rbf.newGetItemStatementsRequestBuilder( itemId ),
