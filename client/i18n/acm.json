@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ahmedadeljaff"
+			"Ahmedadeljaff",
+			"MRidhaAJ"
 		]
 	},
 	"wikibase-dataitem": "عنـصر {{WBREPONAME}}",
@@ -13,5 +14,6 @@
 	"wikibase-linkitem-input-site": "لغة:",
 	"wikibase-linkitem-input-page": "صفحه:",
 	"wikibase-rc-hide-wikidata-hide": "ضم",
-	"wikibase-rc-hide-wikidata-show": "طلعها"
+	"wikibase-rc-hide-wikidata-show": "طلعها",
+	"wikibase-otherprojects": "بمشاريع غير"
 }
