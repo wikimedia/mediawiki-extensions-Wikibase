@@ -5,6 +5,7 @@ namespace Wikibase\Repo\RestApi\UseCases\GetItemLabel;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Domain\Services\ItemLabelRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
+use Wikibase\Repo\RestApi\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 
 /**
@@ -35,6 +36,19 @@ class GetItemLabel {
 		$itemId = new ItemId( $request->getItemId() );
 
 		$metaDataResult = $this->itemRevisionMetadataRetriever->getLatestRevisionMetadata( $itemId );
+
+		if ( !$metaDataResult->itemExists() ) {
+			throw new UseCaseError(
+				UseCaseError::ITEM_NOT_FOUND,
+				"Could not find an item with the ID: {$request->getItemId()}"
+			);
+		}
+
+		if ( $metaDataResult->isRedirect() ) {
+			throw new ItemRedirect(
+				$metaDataResult->getRedirectTarget()->getSerialization()
+			);
+		}
 
 		return new GetItemLabelResponse(
 			$this->itemLabelRetriever->getLabel( $itemId, $request->getLanguageCode() ),

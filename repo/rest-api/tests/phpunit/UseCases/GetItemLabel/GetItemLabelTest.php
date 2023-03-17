@@ -13,6 +13,7 @@ use Wikibase\Repo\RestApi\UseCases\GetItemLabel\GetItemLabel;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabel\GetItemLabelRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabel\GetItemLabelResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabel\GetItemLabelValidator;
+use Wikibase\Repo\RestApi\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\LanguageCodeValidator;
@@ -66,6 +67,46 @@ class GetItemLabelTest extends TestCase {
 		$request = new GetItemLabelRequest( 'Q2', 'en' );
 		$response = $this->newUseCase()->execute( $request );
 		$this->assertEquals( new GetItemLabelResponse( $label, $lastModified, $revisionId ), $response );
+	}
+
+	public function testGivenRequestedItemDoesNotExist_throwsUseCaseError(): void {
+		$itemId = new ItemId( 'Q10' );
+
+		$this->itemRevisionMetadataRetriever = $this->createMock( ItemRevisionMetadataRetriever::class );
+		$this->itemRevisionMetadataRetriever->expects( $this->once() )
+			->method( 'getLatestRevisionMetadata' )
+			->with( $itemId )
+			->willReturn( LatestItemRevisionMetadataResult::itemNotFound() );
+
+		try {
+			$this->newUseCase()->execute(
+				new GetItemLabelRequest( $itemId->getSerialization(), 'en' )
+			);
+
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::ITEM_NOT_FOUND, $e->getErrorCode() );
+			$this->assertSame( 'Could not find an item with the ID: Q10', $e->getErrorMessage() );
+			$this->assertNull( $e->getErrorContext() );
+		}
+	}
+
+	public function testGivenItemRedirect_throwsItemRedirectException(): void {
+		$redirectSource = 'Q123';
+		$redirectTarget = 'Q321';
+
+		$this->itemRevisionMetadataRetriever
+			->method( 'getLatestRevisionMetadata' )
+			->with( new ItemId( $redirectSource ) )
+			->willReturn( LatestItemRevisionMetadataResult::redirect( new ItemId( $redirectTarget ) ) );
+
+		try {
+			$this->newUseCase()->execute( new GetItemLabelRequest( $redirectSource, 'en' ) );
+
+			$this->fail( 'this should not be reached' );
+		} catch ( ItemRedirect $e ) {
+			$this->assertSame( $redirectTarget, $e->getRedirectTargetId() );
+		}
 	}
 
 	public function testGivenInvalidItemId_throws(): void {

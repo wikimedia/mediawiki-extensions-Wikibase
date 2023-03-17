@@ -42,7 +42,9 @@ describe( 'GET /entities/items/{id}/labels', () => {
 
 	it( 'responds 404 in case the item does not exist', async () => {
 		const nonExistentItem = 'Q99999999';
-		const response = await newGetItemLabelsRequestBuilder( nonExistentItem ).makeRequest();
+		const response = await newGetItemLabelsRequestBuilder( nonExistentItem )
+			.assertValidRequest()
+			.makeRequest();
 
 		assert.strictEqual( response.status, 404 );
 		assert.header( response, 'Content-Language', 'en' );
