@@ -99,6 +99,9 @@ describe( 'Auth', () => {
 			newRequestBuilder: () => rbf.newGetItemRequestBuilder( itemId )
 		},
 		{
+			newRequestBuilder: () => rbf.newGetItemAliasesInLanguageRequestBuilder( itemId, 'en' )
+		},
+		{
 			newRequestBuilder: () => rbf.newGetItemAliasesRequestBuilder( itemId )
 		},
 		{
