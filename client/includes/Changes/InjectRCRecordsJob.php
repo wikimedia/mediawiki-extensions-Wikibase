@@ -20,7 +20,6 @@ use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Changes\ChangeRow;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
-use Wikibase\Lib\Rdbms\ClientDomainDb;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikimedia\Assert\Assert;
 
@@ -33,11 +32,6 @@ use Wikimedia\Assert\Assert;
  * @author Daniel Kinzler
  */
 class InjectRCRecordsJob extends Job {
-
-	/**
-	 * @var ClientDomainDb
-	 */
-	private $db;
 
 	/**
 	 * @var EntityChangeLookup
@@ -119,7 +113,6 @@ class InjectRCRecordsJob extends Job {
 	 * Constructs an InjectRCRecordsJob for injecting a change into the recentchanges feed
 	 * for the given pages.
 	 *
-	 * @param ClientDomainDb $domainDb
 	 * @param EntityChangeLookup $changeLookup
 	 * @param EntityChangeFactory $changeFactory
 	 * @param RecentChangeFactory $rcFactory
@@ -130,7 +123,6 @@ class InjectRCRecordsJob extends Job {
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
-		ClientDomainDb $domainDb,
 		EntityChangeLookup $changeLookup,
 		EntityChangeFactory $changeFactory,
 		RecentChangeFactory $rcFactory,
@@ -163,7 +155,6 @@ class InjectRCRecordsJob extends Job {
 			'$params[\'pages\']'
 		);
 
-		$this->db = $domainDb;
 		$this->changeLookup = $changeLookup;
 		$this->changeFactory = $changeFactory;
 		$this->rcFactory = $rcFactory;
@@ -177,7 +168,6 @@ class InjectRCRecordsJob extends Job {
 		$store = WikibaseClient::getStore( $mwServices );
 
 		$job = new self(
-			WikibaseClient::getClientDomainDbFactory( $mwServices )->newLocalDb(),
 			WikibaseClient::getEntityChangeLookup( $mwServices ),
 			WikibaseClient::getEntityChangeFactory( $mwServices ),
 			WikibaseClient::getRecentChangeFactory( $mwServices ),
@@ -258,10 +248,6 @@ class InjectRCRecordsJob extends Job {
 
 		$rcAttribs = $this->rcFactory->prepareChangeAttributes( $change );
 
-		$dbw = $this->db->connections()->getWriteConnection();
-
-		$dbw->startAtomic( __METHOD__ );
-
 		foreach ( $titles as $title ) {
 			if ( !$title->exists() ) {
 				continue;
@@ -291,7 +277,6 @@ class InjectRCRecordsJob extends Job {
 			}
 		}
 
-		$dbw->endAtomic( __METHOD__ );
 		$this->incrementStats( 'InjectRCRecords.run.titles', count( $titles ) );
 		$this->recordDelay( $change->getAge() );
 
