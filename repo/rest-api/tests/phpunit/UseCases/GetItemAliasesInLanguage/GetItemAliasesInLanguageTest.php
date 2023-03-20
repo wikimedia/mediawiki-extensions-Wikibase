@@ -12,6 +12,11 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\UseCases\GetItemAliasesInLanguage\GetItemAliasesInLanguage;
 use Wikibase\Repo\RestApi\UseCases\GetItemAliasesInLanguage\GetItemAliasesInLanguageRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemAliasesInLanguage\GetItemAliasesInLanguageResponse;
+use Wikibase\Repo\RestApi\UseCases\GetItemAliasesInLanguage\GetItemAliasesInLanguageValidator;
+use Wikibase\Repo\RestApi\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
+use Wikibase\Repo\RestApi\Validation\LanguageCodeValidator;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\RestApi\UseCases\GetItemAliases\GetItemAliasesInLanguage
@@ -68,10 +73,38 @@ class GetItemAliasesInLanguageTest extends TestCase {
 		$this->assertEquals( new GetItemAliasesInLanguageResponse( $aliasesInLanguage, $lastModified, $revisionId ), $response );
 	}
 
+	public function testGivenInvalidItemId_throws(): void {
+		try {
+			$this->newUseCase()->execute( new GetItemAliasesInLanguageRequest( 'X321', 'en' ) );
+
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::INVALID_ITEM_ID, $e->getErrorCode() );
+			$this->assertSame( 'Not a valid item ID: X321', $e->getErrorMessage() );
+			$this->assertNull( $e->getErrorContext() );
+		}
+	}
+
+	public function testGivenInvalidLanguageCode_throwsUseCaseException(): void {
+		try {
+			$this->newUseCase()->execute( new GetItemAliasesInLanguageRequest( 'Q123', '1e' ) );
+
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $useCaseEx ) {
+			$this->assertSame( UseCaseError::INVALID_LANGUAGE_CODE, $useCaseEx->getErrorCode() );
+			$this->assertSame( 'Not a valid language code: 1e', $useCaseEx->getErrorMessage() );
+			$this->assertNull( $useCaseEx->getErrorContext() );
+		}
+	}
+
 	private function newUseCase(): GetItemAliasesInLanguage {
 		return new GetItemAliasesInLanguage(
 			$this->itemRevisionMetadataRetriever,
-			$this->aliasesInLanguageRetriever
+			$this->aliasesInLanguageRetriever,
+			new GetItemAliasesInLanguageValidator(
+				new ItemIdValidator(),
+				new LanguageCodeValidator( WikibaseRepo::getTermsLanguages()->getLanguages() )
+			)
 		);
 	}
 

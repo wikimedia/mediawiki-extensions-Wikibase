@@ -13,6 +13,7 @@ use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
 use Wikibase\Repo\RestApi\UseCases\GetItemAliasesInLanguage\GetItemAliasesInLanguage;
 use Wikibase\Repo\RestApi\UseCases\GetItemAliasesInLanguage\GetItemAliasesInLanguageRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemAliasesInLanguage\GetItemAliasesInLanguageResponse;
+use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -26,16 +27,20 @@ class GetItemAliasesInLanguageRouteHandler extends SimpleHandler {
 
 	private GetItemAliasesInLanguage $useCase;
 	private MiddlewareHandler $middlewareHandler;
+	private ResponseFactory $responseFactory;
 
 	public function __construct(
 		GetItemAliasesInLanguage $useCase,
-		MiddlewareHandler $middlewareHandler
+		MiddlewareHandler $middlewareHandler,
+		ResponseFactory $responseFactory
 	) {
 		$this->useCase = $useCase;
 		$this->middlewareHandler = $middlewareHandler;
+		$this->responseFactory = $responseFactory;
 	}
 
 	public static function factory(): self {
+		$responseFactory = new ResponseFactory();
 		return new self(
 			WbRestApi::getGetItemAliasesInLanguage(),
 			new MiddlewareHandler( [
@@ -45,7 +50,8 @@ class GetItemAliasesInLanguageRouteHandler extends SimpleHandler {
 				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
 					fn( RequestInterface $request ): string => $request->getPathParam( self::ITEM_ID_PATH_PARAM )
 				),
-			] )
+			] ),
+			$responseFactory
 		);
 	}
 
@@ -61,9 +67,13 @@ class GetItemAliasesInLanguageRouteHandler extends SimpleHandler {
 	}
 
 	public function runUseCase( string $itemId, string $languageCode ): Response {
-		return $this->newSuccessHttpResponse(
-			$this->useCase->execute( new GetItemAliasesInLanguageRequest( $itemId, $languageCode ) )
-		);
+		try {
+			return $this->newSuccessHttpResponse(
+				$this->useCase->execute( new GetItemAliasesInLanguageRequest( $itemId, $languageCode ) )
+			);
+		} catch ( UseCaseError $e ) {
+			return $this->responseFactory->newErrorResponseFromException( $e );
+		}
 	}
 
 	public function getParamSettings(): array {
