@@ -4,5 +4,12 @@
 			"Bgo eiu"
 		]
 	},
-	"wikibase-linkitem-input-site": "زبان:"
+	"wikibase-dataitem": "{{WBREPONAME}} تے شے",
+	"wikibase-editlinks": "جوڑاں بچ تبدیل کرو",
+	"wikibase-linkitem-addlinks": "جوڑ شامل کرو",
+	"wikibase-linkitem-title": "ورقے کول جڑو",
+	"wikibase-linkitem-linkpage": "ورقے کول جڑو",
+	"wikibase-linkitem-input-site": "زبان:",
+	"wikibase-linkitem-input-page": "ورقہ –",
+	"wikibase-rc-hide-wikidata-hide": "چھپو"
 }

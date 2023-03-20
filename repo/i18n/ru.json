@@ -44,7 +44,8 @@
 			"Facenapalm",
 			"WindEwriX",
 			"WhatamIdoing",
-			"Pacha Tchernof"
+			"Pacha Tchernof",
+			"Winston Sung"
 		]
 	},
 	"wikibase-desc": "Хранилище структурированных данных",
@@ -406,6 +407,9 @@
 	"wikibase-listdatatypes-url-body": "Символьное поле данных для URL-адреса. URL-адреса имеют ограничения, относящиеся к различным протоколам, также используемым в качестве внешних ссылок в вики-тексте.",
 	"wikibase-listdatatypes-external-id-head": "Внешний идентификатор",
 	"wikibase-listdatavaluetypes-name-string": "строка",
+	"wikibase-listdatavaluetypes-name-monolingualtext": "моноязычный текст",
+	"wikibase-listdatavaluetypes-name-quantity": "количество",
+	"wikibase-listdatavaluetypes-name-time": "время",
 	"wikibase-concept-uri": "URI концепта",
 	"wikibase-concept-uri-tooltip": "URI, идентифицирующий концепт, описанный этим элементом",
 	"wikibase-pageimage-helptext": "Это изображение взято из утверждений предмета. Вы можете настроить изображение, изменив утверждение.",
@@ -427,6 +431,7 @@
 	"wikibase-pageinfo-wb-claims": "Количестве утверждений в этом объекте",
 	"wikibase-pageinfo-wb-identifiers": "количестве внешних идентификаторов в этом объекте",
 	"wikibase-search-bad-entity-type": "Некорректный тип сущности: $1",
+	"wikibase-shortcopyrightwarning-heading": "Атрибуция лицензии",
 	"wikibase-entity-save-error-heading": "Что-то пошло не так",
 	"wikibase-tainted-ref-popper-help-link-text": "Справка",
 	"wikibase-tainted-ref-popper-remove-warning": "Убрать предупреждение",
