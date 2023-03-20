@@ -19,7 +19,7 @@ use Wikibase\Repo\RestApi\Validation\LanguageCodeValidator;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers \Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabel
+ * @covers \Wikibase\Repo\RestApi\UseCases\GetItemLabel\GetItemLabel
  *
  * @group Wikibase
  *

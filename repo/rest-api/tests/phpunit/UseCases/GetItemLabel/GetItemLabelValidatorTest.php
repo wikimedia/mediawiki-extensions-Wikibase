@@ -11,7 +11,7 @@ use Wikibase\Repo\RestApi\Validation\LanguageCodeValidator;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers \Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabelsValidator
+ * @covers \Wikibase\Repo\RestApi\UseCases\GetItemLabel\GetItemLabelValidator
  *
  * @group Wikibase
  *

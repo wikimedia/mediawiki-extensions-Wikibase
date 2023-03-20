@@ -13,7 +13,7 @@ use Wikibase\Repo\RestApi\UseCases\GetItemAliases\GetItemAliases;
 use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 
 /**
- * @covers \Wikibase\Repo\RestApi\RouteHandlers\GetItemRouteHandler
+ * @covers \Wikibase\Repo\RestApi\RouteHandlers\GetItemAliasesRouteHandler
  *
  * @group Wikibase
  *
