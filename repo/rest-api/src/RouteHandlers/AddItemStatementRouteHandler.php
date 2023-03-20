@@ -19,7 +19,7 @@ use Wikibase\Repo\RestApi\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementRequest;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementResponse;
-use Wikibase\Repo\RestApi\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -105,7 +105,7 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 				)
 			);
 			return $this->newSuccessHttpResponse( $useCaseResponse, $itemId );
-		} catch ( UseCaseException $e ) {
+		} catch ( UseCaseError $e ) {
 			return $this->responseFactory->newErrorResponseFromException( $e );
 		}
 	}

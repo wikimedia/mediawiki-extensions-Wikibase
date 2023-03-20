@@ -7,7 +7,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementRequest;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementValidator;
-use Wikibase\Repo\RestApi\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\StatementValidator;
@@ -58,8 +58,8 @@ class AddItemStatementValidatorTest extends TestCase {
 				new AddItemStatementRequest( $itemId, [ 'valid' => 'statement' ], [], false, null, null )
 			);
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
-			$this->assertSame( UseCaseException::INVALID_ITEM_ID, $e->getErrorCode() );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::INVALID_ITEM_ID, $e->getErrorCode() );
 			$this->assertSame( 'Not a valid item ID: X123', $e->getErrorMessage() );
 		}
 	}
@@ -83,8 +83,8 @@ class AddItemStatementValidatorTest extends TestCase {
 				new AddItemStatementRequest( 'Q42', $invalidStatement, [], false, null, null )
 			);
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
-			$this->assertSame( UseCaseException::STATEMENT_DATA_INVALID_FIELD, $e->getErrorCode() );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::STATEMENT_DATA_INVALID_FIELD, $e->getErrorCode() );
 			$this->assertSame( "Invalid input for 'some-field'", $e->getErrorMessage() );
 			$this->assertSame( [ 'path' => 'some-field', 'value' => 'foo' ], $e->getErrorContext() );
 		}
@@ -106,8 +106,8 @@ class AddItemStatementValidatorTest extends TestCase {
 				new AddItemStatementRequest( 'Q42', $invalidStatement, [], false, null, null )
 			);
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
-			$this->assertSame( UseCaseException::STATEMENT_DATA_MISSING_FIELD, $e->getErrorCode() );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::STATEMENT_DATA_MISSING_FIELD, $e->getErrorCode() );
 			$this->assertSame(
 				'Mandatory field missing in the statement data: some-field',
 				$e->getErrorMessage()
@@ -133,8 +133,8 @@ class AddItemStatementValidatorTest extends TestCase {
 				new AddItemStatementRequest( 'Q42', [ 'valid' => 'statement' ], [], false, $comment, null )
 			);
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
-			$this->assertSame( UseCaseException::COMMENT_TOO_LONG, $e->getErrorCode() );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::COMMENT_TOO_LONG, $e->getErrorCode() );
 			$this->assertSame(
 				'Comment must not be longer than ' . CommentStore::COMMENT_CHARACTER_LIMIT . ' characters.',
 				$e->getErrorMessage()
@@ -159,8 +159,8 @@ class AddItemStatementValidatorTest extends TestCase {
 				new AddItemStatementRequest( 'Q42', [ 'valid' => 'statement' ], $invalidTags, false, null, null )
 			);
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
-			$this->assertSame( UseCaseException::INVALID_EDIT_TAG, $e->getErrorCode() );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::INVALID_EDIT_TAG, $e->getErrorCode() );
 			$this->assertSame( 'Invalid MediaWiki tag: ["bad","tags"]', $e->getErrorMessage() );
 		}
 	}

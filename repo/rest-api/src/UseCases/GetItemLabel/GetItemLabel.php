@@ -5,7 +5,7 @@ namespace Wikibase\Repo\RestApi\UseCases\GetItemLabel;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Domain\Services\ItemLabelRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
-use Wikibase\Repo\RestApi\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 
 /**
  * @license GPL-2.0-or-later
@@ -27,7 +27,7 @@ class GetItemLabel {
 	}
 
 	/**
-	 * @throws UseCaseException
+	 * @throws UseCaseError
 	 */
 	public function execute( GetItemLabelRequest $request ): GetItemLabelResponse {
 		$this->validator->assertValidRequest( $request );

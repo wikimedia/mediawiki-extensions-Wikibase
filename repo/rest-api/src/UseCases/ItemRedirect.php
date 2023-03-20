@@ -2,12 +2,10 @@
 
 namespace Wikibase\Repo\RestApi\UseCases;
 
-use RuntimeException;
-
 /**
  * @license GPL-2.0-or-later
  */
-class ItemRedirectException extends RuntimeException {
+class ItemRedirect extends UseCaseException {
 	private string $redirectTargetId;
 
 	public function __construct( string $redirectTargetId ) {

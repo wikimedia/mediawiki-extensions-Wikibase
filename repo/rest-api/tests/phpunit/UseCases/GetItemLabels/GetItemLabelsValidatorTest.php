@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\RestApi\UseCases\GetItemLabels;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabelsRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabelsValidator;
-use Wikibase\Repo\RestApi\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 
 /**
@@ -25,7 +25,7 @@ class GetItemLabelsValidatorTest extends TestCase {
 				->assertValidRequest( new GetItemLabelsRequest( $invalidId ) );
 
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $useCaseEx ) {
+		} catch ( UseCaseError $useCaseEx ) {
 			$this->assertSame( ItemIdValidator::CODE_INVALID, $useCaseEx->getErrorCode() );
 			$this->assertSame( 'Not a valid item ID: ' . $invalidId, $useCaseEx->getErrorMessage() );
 		}

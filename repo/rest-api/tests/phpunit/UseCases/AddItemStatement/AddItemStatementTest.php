@@ -25,7 +25,7 @@ use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementRequest;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementResponse;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatementValidator;
-use Wikibase\Repo\RestApi\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\StatementValidator;
@@ -150,24 +150,24 @@ class AddItemStatementTest extends TestCase {
 				)
 			);
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
-			$this->assertSame( UseCaseException::ITEM_NOT_FOUND, $e->getErrorCode() );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::ITEM_NOT_FOUND, $e->getErrorCode() );
 			$this->assertStringContainsString( $itemId, $e->getErrorMessage() );
 		}
 	}
 
-	public function testValidationError_throwsUseCaseException(): void {
+	public function testValidationError_throwsUseCaseError(): void {
 		try {
 			$this->newUseCase()->execute(
 				new AddItemStatementRequest( 'X123', [], [], false, null, null )
 			);
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
-			$this->assertSame( UseCaseException::INVALID_ITEM_ID, $e->getErrorCode() );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::INVALID_ITEM_ID, $e->getErrorCode() );
 		}
 	}
 
-	public function testRedirect_throwsUseCaseException(): void {
+	public function testRedirect_throwsUseCaseError(): void {
 		$redirectSource = 'Q321';
 		$redirectTarget = 'Q123';
 
@@ -187,13 +187,13 @@ class AddItemStatementTest extends TestCase {
 				)
 			);
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
-			$this->assertSame( UseCaseException::ITEM_REDIRECTED, $e->getErrorCode() );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::ITEM_REDIRECTED, $e->getErrorCode() );
 			$this->assertStringContainsString( $redirectTarget, $e->getErrorMessage() );
 		}
 	}
 
-	public function testProtectedItem_throwsUseCaseException(): void {
+	public function testProtectedItem_throwsUseCaseError(): void {
 		$itemId = new ItemId( 'Q123' );
 
 		$this->revisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
@@ -217,8 +217,8 @@ class AddItemStatementTest extends TestCase {
 			);
 			$this->newUseCase()->execute( $request );
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
-			$this->assertSame( UseCaseException::PERMISSION_DENIED, $e->getErrorCode() );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::PERMISSION_DENIED, $e->getErrorCode() );
 		}
 	}
 

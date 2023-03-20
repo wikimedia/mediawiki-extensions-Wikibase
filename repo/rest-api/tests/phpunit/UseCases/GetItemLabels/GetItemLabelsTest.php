@@ -14,8 +14,8 @@ use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabels;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabelsRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabelsResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabelsValidator;
-use Wikibase\Repo\RestApi\UseCases\ItemRedirectException;
-use Wikibase\Repo\RestApi\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\UseCases\ItemRedirect;
+use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 
 /**
@@ -78,14 +78,14 @@ class GetItemLabelsTest extends TestCase {
 			);
 
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
-			$this->assertSame( UseCaseException::INVALID_ITEM_ID, $e->getErrorCode() );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::INVALID_ITEM_ID, $e->getErrorCode() );
 			$this->assertSame( 'Not a valid item ID: X321', $e->getErrorMessage() );
 			$this->assertNull( $e->getErrorContext() );
 		}
 	}
 
-	public function testGivenRequestedItemDoesNotExist_throwsUseCaseException(): void {
+	public function testGivenRequestedItemDoesNotExist_throwsUseCaseError(): void {
 		$itemId = new ItemId( 'Q10' );
 
 		$this->itemRevisionMetadataRetriever = $this->createMock( ItemRevisionMetadataRetriever::class );
@@ -100,8 +100,8 @@ class GetItemLabelsTest extends TestCase {
 			);
 
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
-			$this->assertSame( UseCaseException::ITEM_NOT_FOUND, $e->getErrorCode() );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::ITEM_NOT_FOUND, $e->getErrorCode() );
 			$this->assertSame( 'Could not find an item with the ID: Q10', $e->getErrorMessage() );
 			$this->assertNull( $e->getErrorContext() );
 		}
@@ -120,7 +120,7 @@ class GetItemLabelsTest extends TestCase {
 			$this->newUseCase()->execute( new GetItemLabelsRequest( $redirectSource ) );
 
 			$this->fail( 'this should not be reached' );
-		} catch ( ItemRedirectException $e ) {
+		} catch ( ItemRedirect $e ) {
 			$this->assertSame( $redirectTarget, $e->getRedirectTargetId() );
 		}
 	}

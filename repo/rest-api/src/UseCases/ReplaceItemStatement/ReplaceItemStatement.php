@@ -16,7 +16,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
-use Wikibase\Repo\RestApi\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 
 /**
  * @license GPL-2.0-or-later
@@ -44,7 +44,7 @@ class ReplaceItemStatement {
 	}
 
 	/**
-	 * @throws UseCaseException
+	 * @throws UseCaseError
 	 */
 	public function execute( ReplaceItemStatementRequest $request ): ReplaceItemStatementResponse {
 		$this->validator->assertValidRequest( $request );
@@ -58,8 +58,8 @@ class ReplaceItemStatement {
 
 		$latestRevision = $this->revisionMetadataRetriever->getLatestRevisionMetadata( $itemId );
 		if ( $requestedItemId && !$latestRevision->itemExists() ) {
-			throw new UseCaseException(
-				UseCaseException::ITEM_NOT_FOUND,
+			throw new UseCaseError(
+				UseCaseError::ITEM_NOT_FOUND,
 				"Could not find an item with the ID: {$itemId}"
 			);
 		} elseif ( !$latestRevision->itemExists()
@@ -70,8 +70,8 @@ class ReplaceItemStatement {
 
 		$user = $request->hasUser() ? User::withUsername( $request->getUsername() ) : User::newAnonymous();
 		if ( !$this->permissionChecker->canEdit( $user, $itemId ) ) {
-			throw new UseCaseException(
-				UseCaseException::PERMISSION_DENIED,
+			throw new UseCaseError(
+				UseCaseError::PERMISSION_DENIED,
 				'You have no permission to edit this item.'
 			);
 		}
@@ -84,13 +84,13 @@ class ReplaceItemStatement {
 		} catch ( StatementNotFoundException $e ) {
 			$this->throwStatementNotFoundException( $statementId );
 		} catch ( StatementGuidChangedException $e ) {
-			throw new UseCaseException(
-				UseCaseException::INVALID_OPERATION_CHANGED_STATEMENT_ID,
+			throw new UseCaseError(
+				UseCaseError::INVALID_OPERATION_CHANGED_STATEMENT_ID,
 				'Cannot change the ID of the existing statement'
 			);
 		} catch ( PropertyChangedException $e ) {
-			throw new UseCaseException(
-				UseCaseException::INVALID_OPERATION_CHANGED_PROPERTY,
+			throw new UseCaseError(
+				UseCaseError::INVALID_OPERATION_CHANGED_PROPERTY,
 				'Cannot change the property of the existing statement'
 			);
 		}
@@ -110,11 +110,11 @@ class ReplaceItemStatement {
 	}
 
 	/**
-	 * @throws UseCaseException
+	 * @throws UseCaseError
 	 */
 	private function throwStatementNotFoundException( StatementGuid $statementId ): void {
-		throw new UseCaseException(
-			UseCaseException::STATEMENT_NOT_FOUND,
+		throw new UseCaseError(
+			UseCaseError::STATEMENT_NOT_FOUND,
 			"Could not find a statement with the ID: $statementId"
 		);
 	}

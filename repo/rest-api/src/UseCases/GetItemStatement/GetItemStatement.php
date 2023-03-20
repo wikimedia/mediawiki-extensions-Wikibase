@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementRetriever;
-use Wikibase\Repo\RestApi\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 
 /**
  * @license GPL-2.0-or-later
@@ -29,7 +29,7 @@ class GetItemStatement {
 	}
 
 	/**
-	 * @throws UseCaseException
+	 * @throws UseCaseError
 	 */
 	public function execute( GetItemStatementRequest $statementRequest ): GetItemStatementResponse {
 		$this->validator->assertValidRequest( $statementRequest );
@@ -46,8 +46,8 @@ class GetItemStatement {
 
 		if ( !$latestRevisionMetadata->itemExists() ) {
 			if ( $requestedItemId ) {
-				throw new UseCaseException(
-					UseCaseException::ITEM_NOT_FOUND,
+				throw new UseCaseError(
+					UseCaseError::ITEM_NOT_FOUND,
 					"Could not find an item with the ID: {$itemId}"
 				);
 			}
@@ -71,11 +71,11 @@ class GetItemStatement {
 	}
 
 	/**
-	 * @throws UseCaseException
+	 * @throws UseCaseError
 	 */
 	private function throwStatementNotFoundException( string $statementId ): void {
-		throw new UseCaseException(
-			UseCaseException::STATEMENT_NOT_FOUND,
+		throw new UseCaseError(
+			UseCaseError::STATEMENT_NOT_FOUND,
 			"Could not find a statement with the ID: $statementId"
 		);
 	}

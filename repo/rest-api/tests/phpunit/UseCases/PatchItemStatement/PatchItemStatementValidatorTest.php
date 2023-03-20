@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementRequest;
 use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatementValidator;
-use Wikibase\Repo\RestApi\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\JsonPatchValidator;
@@ -92,8 +92,8 @@ class PatchItemStatementValidatorTest extends TestCase {
 				] )
 			);
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
-			$this->assertSame( UseCaseException::INVALID_ITEM_ID, $e->getErrorCode() );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::INVALID_ITEM_ID, $e->getErrorCode() );
 			$this->assertSame(
 				'Not a valid item ID: ' . $itemId,
 				$e->getErrorMessage()
@@ -117,8 +117,8 @@ class PatchItemStatementValidatorTest extends TestCase {
 				] )
 			);
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
-			$this->assertSame( UseCaseException::INVALID_STATEMENT_ID, $e->getErrorCode() );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::INVALID_STATEMENT_ID, $e->getErrorCode() );
 			$this->assertSame(
 				'Not a valid statement ID: ' . $statementId,
 				$e->getErrorMessage()
@@ -154,7 +154,7 @@ class PatchItemStatementValidatorTest extends TestCase {
 				] )
 			);
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
+		} catch ( UseCaseError $e ) {
 			$this->assertSame( $expectedErrorCode, $e->getErrorCode() );
 			$this->assertSame( $expectedErrorMessage, $e->getErrorMessage() );
 			$this->assertSame( $expectedErrorContext, $e->getErrorContext() );
@@ -164,7 +164,7 @@ class PatchItemStatementValidatorTest extends TestCase {
 	public function invalidPatchProvider(): Generator {
 		yield 'from invalid patch' => [
 			new ValidationError( JsonPatchValidator::CODE_INVALID ),
-			UseCaseException::INVALID_PATCH,
+			UseCaseError::INVALID_PATCH,
 			'The provided patch is invalid',
 			null,
 		];
@@ -175,7 +175,7 @@ class PatchItemStatementValidatorTest extends TestCase {
 		];
 		yield 'from missing patch field' => [
 			new ValidationError( JsonPatchValidator::CODE_MISSING_FIELD, $context ),
-			UseCaseException::MISSING_JSON_PATCH_FIELD,
+			UseCaseError::MISSING_JSON_PATCH_FIELD,
 			"Missing 'op' in JSON patch",
 			$context,
 		];
@@ -183,7 +183,7 @@ class PatchItemStatementValidatorTest extends TestCase {
 		$context = [ JsonPatchValidator::CONTEXT_OPERATION => [ 'op' => 'bad', 'path' => '/a/b/c', 'value' => 'test' ] ];
 		yield 'from invalid patch operation' => [
 			new ValidationError( JsonPatchValidator::CODE_INVALID_OPERATION, $context ),
-			UseCaseException::INVALID_PATCH_OPERATION,
+			UseCaseError::INVALID_PATCH_OPERATION,
 			"Incorrect JSON patch operation: 'bad'",
 			$context,
 		];
@@ -198,7 +198,7 @@ class PatchItemStatementValidatorTest extends TestCase {
 		];
 		yield 'from invalid patch field type' => [
 			new ValidationError( JsonPatchValidator::CODE_INVALID_FIELD_TYPE, $context ),
-			UseCaseException::INVALID_PATCH_FIELD_TYPE,
+			UseCaseError::INVALID_PATCH_FIELD_TYPE,
 			"The value of 'op' must be of type string",
 			$context,
 		];
@@ -219,7 +219,7 @@ class PatchItemStatementValidatorTest extends TestCase {
 				] )
 			);
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
+		} catch ( UseCaseError $e ) {
 			$this->assertSame( EditMetadataValidator::CODE_COMMENT_TOO_LONG, $e->getErrorCode() );
 			$this->assertSame(
 				'Comment must not be longer than ' . CommentStore::COMMENT_CHARACTER_LIMIT . ' characters.',
@@ -243,8 +243,8 @@ class PatchItemStatementValidatorTest extends TestCase {
 				] )
 			);
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
-			$this->assertSame( UseCaseException::INVALID_EDIT_TAG, $e->getErrorCode() );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::INVALID_EDIT_TAG, $e->getErrorCode() );
 			$this->assertSame(
 				'Invalid MediaWiki tag: "invalid"',
 				$e->getErrorMessage()

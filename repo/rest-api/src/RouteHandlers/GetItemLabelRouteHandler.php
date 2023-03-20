@@ -13,7 +13,7 @@ use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabel\GetItemLabel;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabel\GetItemLabelRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabel\GetItemLabelResponse;
-use Wikibase\Repo\RestApi\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -71,7 +71,7 @@ class GetItemLabelRouteHandler extends SimpleHandler {
 			return $this->newSuccessHttpResponse(
 				$this->useCase->execute( new GetItemLabelRequest( $itemId, $languageCode ) )
 			);
-		} catch ( UseCaseException $e ) {
+		} catch ( UseCaseError $e ) {
 			return $this->responseFactory->newErrorResponseFromException( $e );
 		}
 	}

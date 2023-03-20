@@ -11,7 +11,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
-use Wikibase\Repo\RestApi\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 
 /**
  * @license GPL-2.0-or-later
@@ -42,7 +42,7 @@ class RemoveItemStatement {
 	}
 
 	/**
-	 * @throws UseCaseException
+	 * @throws UseCaseError
 	 */
 	public function execute( RemoveItemStatementRequest $request ): void {
 		$this->validator->assertValidRequest( $request );
@@ -55,8 +55,8 @@ class RemoveItemStatement {
 
 		$revisionMetadata = $this->revisionMetadataRetriever->getLatestRevisionMetadata( $itemId );
 		if ( $requestedItemId && !$revisionMetadata->itemExists() ) {
-			throw new UseCaseException(
-				UseCaseException::ITEM_NOT_FOUND,
+			throw new UseCaseError(
+				UseCaseError::ITEM_NOT_FOUND,
 				"Could not find an item with the ID: {$itemId}"
 			);
 		} elseif ( !$revisionMetadata->itemExists()
@@ -68,8 +68,8 @@ class RemoveItemStatement {
 
 		$user = $request->hasUser() ? User::withUsername( $request->getUsername() ) : User::newAnonymous();
 		if ( !$this->permissionChecker->canEdit( $user, $itemId ) ) {
-			throw new UseCaseException(
-				UseCaseException::PERMISSION_DENIED,
+			throw new UseCaseError(
+				UseCaseError::PERMISSION_DENIED,
 				'You have no permission to edit this item.'
 			);
 		}
@@ -91,11 +91,11 @@ class RemoveItemStatement {
 	}
 
 	/**
-	 * @throws UseCaseException
+	 * @throws UseCaseError
 	 */
 	private function throwStatementNotFoundException( string $statementId ): void {
-		throw new UseCaseException(
-			UseCaseException::STATEMENT_NOT_FOUND,
+		throw new UseCaseError(
+			UseCaseError::STATEMENT_NOT_FOUND,
 			"Could not find a statement with the ID: $statementId"
 		);
 	}

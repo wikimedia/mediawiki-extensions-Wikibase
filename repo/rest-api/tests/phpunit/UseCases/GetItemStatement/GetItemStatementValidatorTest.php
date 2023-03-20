@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatementValidator;
-use Wikibase\Repo\RestApi\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\StatementIdValidator;
 
@@ -30,7 +30,7 @@ class GetItemStatementValidatorTest extends TestCase {
 			);
 
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
+		} catch ( UseCaseError $e ) {
 			$this->assertSame( StatementIdValidator::CODE_INVALID, $e->getErrorCode() );
 			$this->assertSame(
 				'Not a valid statement ID: ' . $statementId,
@@ -57,7 +57,7 @@ class GetItemStatementValidatorTest extends TestCase {
 			);
 
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
+		} catch ( UseCaseError $e ) {
 			$this->assertSame( ItemIdValidator::CODE_INVALID, $e->getErrorCode() );
 			$this->assertSame( 'Not a valid item ID: ' . $itemId, $e->getErrorMessage() );
 		}

@@ -16,8 +16,8 @@ use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemValidator;
-use Wikibase\Repo\RestApi\UseCases\ItemRedirectException;
-use Wikibase\Repo\RestApi\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\UseCases\ItemRedirect;
+use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 
 /**
@@ -78,8 +78,8 @@ class GetItemTest extends TestCase {
 			) )->execute( new GetItemRequest( $itemId ) );
 
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
-			$this->assertSame( UseCaseException::ITEM_NOT_FOUND, $e->getErrorCode() );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::ITEM_NOT_FOUND, $e->getErrorCode() );
 		}
 	}
 
@@ -93,8 +93,8 @@ class GetItemTest extends TestCase {
 			) )->execute( new GetItemRequest( $itemId ) );
 
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
-			$this->assertSame( UseCaseException::INVALID_ITEM_ID, $e->getErrorCode() );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::INVALID_ITEM_ID, $e->getErrorCode() );
 		}
 	}
 
@@ -114,7 +114,7 @@ class GetItemTest extends TestCase {
 			) )->execute( $request );
 
 			$this->fail( 'this should not be reached' );
-		} catch ( ItemRedirectException $e ) {
+		} catch ( ItemRedirect $e ) {
 			$this->assertSame( $redirectTarget, $e->getRedirectTargetId() );
 		}
 	}

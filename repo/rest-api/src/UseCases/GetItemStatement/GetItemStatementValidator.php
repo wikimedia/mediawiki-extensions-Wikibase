@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\UseCases\GetItemStatement;
 
-use Wikibase\Repo\RestApi\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\StatementIdValidator;
 
@@ -23,7 +23,7 @@ class GetItemStatementValidator {
 	}
 
 	/**
-	 * @throws UseCaseException
+	 * @throws UseCaseError
 	 */
 	public function assertValidRequest( GetItemStatementRequest $statementRequest ): void {
 		$statementIdValidationError = $this->statementIdValidator->validate(
@@ -31,8 +31,8 @@ class GetItemStatementValidator {
 		);
 
 		if ( $statementIdValidationError ) {
-			throw new UseCaseException(
-				UseCaseException::INVALID_STATEMENT_ID,
+			throw new UseCaseError(
+				UseCaseError::INVALID_STATEMENT_ID,
 				'Not a valid statement ID: ' . $statementIdValidationError->getContext()[StatementIdValidator::CONTEXT_VALUE]
 			);
 		}
@@ -41,7 +41,7 @@ class GetItemStatementValidator {
 	}
 
 	/**
-	 * @throws UseCaseException
+	 * @throws UseCaseError
 	 */
 	private function validateItemId( ?string $itemId ): void {
 		if ( !isset( $itemId ) ) {
@@ -51,8 +51,8 @@ class GetItemStatementValidator {
 		$validationError = $this->itemIdValidator->validate( $itemId );
 
 		if ( $validationError ) {
-			throw new UseCaseException(
-				UseCaseException::INVALID_ITEM_ID,
+			throw new UseCaseError(
+				UseCaseError::INVALID_ITEM_ID,
 				'Not a valid item ID: ' . $validationError->getContext()[ItemIdValidator::CONTEXT_VALUE]
 			);
 		}

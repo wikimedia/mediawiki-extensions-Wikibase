@@ -14,8 +14,8 @@ use Wikibase\Repo\RestApi\UseCases\GetItemDescriptions\GetItemDescriptions;
 use Wikibase\Repo\RestApi\UseCases\GetItemDescriptions\GetItemDescriptionsRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemDescriptions\GetItemDescriptionsResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemDescriptions\GetItemDescriptionsValidator;
-use Wikibase\Repo\RestApi\UseCases\ItemRedirectException;
-use Wikibase\Repo\RestApi\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\UseCases\ItemRedirect;
+use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 
 /**
@@ -76,14 +76,14 @@ class GetItemDescriptionsTest extends TestCase {
 			$this->newUseCase()->execute( new GetItemDescriptionsRequest( 'X321' ) );
 
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $useCaseEx ) {
-			$this->assertSame( UseCaseException::INVALID_ITEM_ID, $useCaseEx->getErrorCode() );
+		} catch ( UseCaseError $useCaseEx ) {
+			$this->assertSame( UseCaseError::INVALID_ITEM_ID, $useCaseEx->getErrorCode() );
 			$this->assertSame( 'Not a valid item ID: X321', $useCaseEx->getErrorMessage() );
 			$this->assertNull( $useCaseEx->getErrorContext() );
 		}
 	}
 
-	public function testGivenRequestedItemDoesNotExist_throwsUseCaseException(): void {
+	public function testGivenRequestedItemDoesNotExist_throwsUseCaseError(): void {
 		$itemId = new ItemId( 'Q10' );
 
 		$this->itemRevisionMetadataRetriever = $this->createMock( ItemRevisionMetadataRetriever::class );
@@ -96,8 +96,8 @@ class GetItemDescriptionsTest extends TestCase {
 			$this->newUseCase()->execute(
 				new GetItemDescriptionsRequest( $itemId->getSerialization() )
 			);
-		} catch ( UseCaseException $e ) {
-			$this->assertSame( UseCaseException::ITEM_NOT_FOUND, $e->getErrorCode() );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::ITEM_NOT_FOUND, $e->getErrorCode() );
 			$this->assertSame( 'Could not find an item with the ID: Q10', $e->getErrorMessage() );
 			$this->assertNull( $e->getErrorContext() );
 		}
@@ -116,7 +116,7 @@ class GetItemDescriptionsTest extends TestCase {
 			$this->newUseCase()->execute(
 				new GetItemDescriptionsRequest( $redirectSource )
 			);
-		} catch ( ItemRedirectException $e ) {
+		} catch ( ItemRedirect $e ) {
 			$this->assertSame( $redirectTarget, $e->getRedirectTargetId() );
 		}
 	}

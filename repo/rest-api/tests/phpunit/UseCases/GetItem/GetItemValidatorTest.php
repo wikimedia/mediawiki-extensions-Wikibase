@@ -6,7 +6,7 @@ use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemValidator;
-use Wikibase\Repo\RestApi\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 
 /**
@@ -46,7 +46,7 @@ class GetItemValidatorTest extends TestCase {
 	): void {
 		try {
 			( new GetItemValidator( new ItemIdValidator() ) )->assertValidRequest( $request );
-		} catch ( UseCaseException $e ) {
+		} catch ( UseCaseError $e ) {
 			$this->assertEquals( $expectedCode, $e->getErrorCode() );
 			$this->assertEquals( $expectedMessage, $e->getErrorMessage() );
 		}
@@ -55,17 +55,17 @@ class GetItemValidatorTest extends TestCase {
 	public function dataProviderFail(): Generator {
 		yield 'invalid item ID' => [
 			new GetItemRequest( 'X123' ),
-			UseCaseException::INVALID_ITEM_ID,
+			UseCaseError::INVALID_ITEM_ID,
 			'Not a valid item ID: X123',
 		];
 		yield 'invalid field' => [
 			new GetItemRequest( 'Q123', [ 'type', 'unknown_field' ] ),
-			UseCaseException::INVALID_FIELD,
+			UseCaseError::INVALID_FIELD,
 			'Not a valid field: unknown_field',
 		];
 		yield 'invalid item ID and invalid field' => [
 			new GetItemRequest( 'X123', [ 'type', 'unknown_field' ] ),
-			UseCaseException::INVALID_ITEM_ID,
+			UseCaseError::INVALID_ITEM_ID,
 			'Not a valid item ID: X123',
 		];
 	}

@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\UseCases\PatchItemStatement;
 
-use Wikibase\Repo\RestApi\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\JsonPatchValidator;
@@ -31,7 +31,7 @@ class PatchItemStatementValidator {
 	}
 
 	/**
-	 * @throws UseCaseException
+	 * @throws UseCaseError
 	 */
 	public function assertValidRequest( PatchItemStatementRequest $request ): void {
 		$this->validateItemId( $request->getItemId() );
@@ -42,7 +42,7 @@ class PatchItemStatementValidator {
 	}
 
 	/**
-	 * @throws UseCaseException
+	 * @throws UseCaseError
 	 */
 	private function validateItemId( ?string $itemId ): void {
 		if ( !isset( $itemId ) ) {
@@ -52,29 +52,29 @@ class PatchItemStatementValidator {
 		$validationError = $this->itemIdValidator->validate( $itemId );
 
 		if ( $validationError ) {
-			throw new UseCaseException(
-				UseCaseException::INVALID_ITEM_ID,
+			throw new UseCaseError(
+				UseCaseError::INVALID_ITEM_ID,
 				'Not a valid item ID: ' . $validationError->getContext()[ItemIdValidator::CONTEXT_VALUE]
 			);
 		}
 	}
 
 	/**
-	 * @throws UseCaseException
+	 * @throws UseCaseError
 	 */
 	private function validateStatementId( string $statementId ): void {
 		$validationError = $this->statementIdValidator->validate( $statementId );
 
 		if ( $validationError ) {
-			throw new UseCaseException(
-				UseCaseException::INVALID_STATEMENT_ID,
+			throw new UseCaseError(
+				UseCaseError::INVALID_STATEMENT_ID,
 				'Not a valid statement ID: ' . $validationError->getContext()[StatementIdValidator::CONTEXT_VALUE]
 			);
 		}
 	}
 
 	/**
-	 * @throws UseCaseException
+	 * @throws UseCaseError
 	 */
 	private function validatePatch( array $patch ): void {
 		$validationError = $this->jsonPatchValidator->validate( $patch );
@@ -85,31 +85,31 @@ class PatchItemStatementValidator {
 
 			switch ( $errorCode ) {
 				case JsonPatchValidator::CODE_INVALID:
-					throw new UseCaseException(
-						UseCaseException::INVALID_PATCH,
+					throw new UseCaseError(
+						UseCaseError::INVALID_PATCH,
 						'The provided patch is invalid'
 					);
 
 				case JsonPatchValidator::CODE_INVALID_OPERATION:
 					$op = $context[JsonPatchValidator::CONTEXT_OPERATION]['op'];
-					throw new UseCaseException(
-						UseCaseException::INVALID_PATCH_OPERATION,
+					throw new UseCaseError(
+						UseCaseError::INVALID_PATCH_OPERATION,
 						"Incorrect JSON patch operation: '$op'",
 						$context
 					);
 
 				case JsonPatchValidator::CODE_INVALID_FIELD_TYPE:
 					$field = $context[JsonPatchValidator::CONTEXT_FIELD];
-					throw new UseCaseException(
-						UseCaseException::INVALID_PATCH_FIELD_TYPE,
+					throw new UseCaseError(
+						UseCaseError::INVALID_PATCH_FIELD_TYPE,
 						"The value of '$field' must be of type string",
 						$context
 					);
 
 				case JsonPatchValidator::CODE_MISSING_FIELD:
 					$field = $context[JsonPatchValidator::CONTEXT_FIELD];
-					throw new UseCaseException(
-						UseCaseException::MISSING_JSON_PATCH_FIELD,
+					throw new UseCaseError(
+						UseCaseError::MISSING_JSON_PATCH_FIELD,
 						"Missing '$field' in JSON patch",
 						$context
 					);
@@ -118,21 +118,21 @@ class PatchItemStatementValidator {
 	}
 
 	/**
-	 * @throws UseCaseException
+	 * @throws UseCaseError
 	 */
 	private function validateEditTags( array $editTags ): void {
 		$validationError = $this->editMetadataValidator->validateEditTags( $editTags );
 
 		if ( $validationError ) {
-			throw new UseCaseException(
-				UseCaseException::INVALID_EDIT_TAG,
+			throw new UseCaseError(
+				UseCaseError::INVALID_EDIT_TAG,
 				"Invalid MediaWiki tag: {$validationError->getContext()[EditMetadataValidator::CONTEXT_TAG_VALUE]}"
 			);
 		}
 	}
 
 	/**
-	 * @throws UseCaseException
+	 * @throws UseCaseError
 	 */
 	private function validateComment( ?string $comment ): void {
 		if ( !isset( $comment ) ) {
@@ -143,8 +143,8 @@ class PatchItemStatementValidator {
 
 		if ( $validationError ) {
 			$commentMaxLength = $validationError->getContext()[EditMetadataValidator::CONTEXT_COMMENT_MAX_LENGTH];
-			throw new UseCaseException(
-				UseCaseException::COMMENT_TOO_LONG,
+			throw new UseCaseError(
+				UseCaseError::COMMENT_TOO_LONG,
 				"Comment must not be longer than $commentMaxLength characters."
 			);
 		}

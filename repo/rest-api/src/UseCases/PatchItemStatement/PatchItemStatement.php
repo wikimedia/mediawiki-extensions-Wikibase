@@ -19,7 +19,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\JsonPatcher;
 use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
 use Wikibase\Repo\RestApi\Serialization\StatementSerializer;
-use Wikibase\Repo\RestApi\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 
 /**
  * @license GPL-2.0-or-later
@@ -62,7 +62,7 @@ class PatchItemStatement {
 	}
 
 	/**
-	 * @throws UseCaseException
+	 * @throws UseCaseError
 	 */
 	public function execute( PatchItemStatementRequest $request ): PatchItemStatementResponse {
 		$this->useCaseValidator->assertValidRequest( $request );
@@ -75,8 +75,8 @@ class PatchItemStatement {
 
 		$latestRevision = $this->revisionMetadataRetriever->getLatestRevisionMetadata( $itemId );
 		if ( $requestedItemId && !$latestRevision->itemExists() ) {
-			throw new UseCaseException(
-				UseCaseException::ITEM_NOT_FOUND,
+			throw new UseCaseError(
+				UseCaseError::ITEM_NOT_FOUND,
 				"Could not find an item with the ID: {$itemId}"
 			);
 		} elseif ( !$latestRevision->itemExists()
@@ -93,8 +93,8 @@ class PatchItemStatement {
 
 		$user = $request->getUsername() ? User::withUsername( $request->getUsername() ) : User::newAnonymous();
 		if ( !$this->permissionChecker->canEdit( $user, $itemId ) ) {
-			throw new UseCaseException(
-				UseCaseException::PERMISSION_DENIED,
+			throw new UseCaseError(
+				UseCaseError::PERMISSION_DENIED,
 				'You have no permission to edit this item.'
 			);
 		}
@@ -104,8 +104,8 @@ class PatchItemStatement {
 		try {
 			$patchedSerialization = $this->jsonPatcher->patch( $serialization, $request->getPatch() );
 		} catch ( PatchPathException $e ) {
-			throw new UseCaseException(
-				UseCaseException::PATCH_TARGET_NOT_FOUND,
+			throw new UseCaseError(
+				UseCaseError::PATCH_TARGET_NOT_FOUND,
 				"Target '{$e->getOperation()[$e->getField()]}' not found on the resource",
 				[
 					'operation' => $e->getOperation(),
@@ -114,8 +114,8 @@ class PatchItemStatement {
 			);
 		} catch ( PatchTestConditionFailedException $e ) {
 			$operation = $e->getOperation();
-			throw new UseCaseException(
-				UseCaseException::PATCH_TEST_FAILED,
+			throw new UseCaseError(
+				UseCaseError::PATCH_TEST_FAILED,
 				'Test operation in the provided patch failed. ' .
 				"At path '" . $operation['path'] .
 				"' expected '" . json_encode( $operation['value'] ) .
@@ -131,13 +131,13 @@ class PatchItemStatement {
 		try {
 			$item->getStatements()->replaceStatement( $statementId, $patchedStatement );
 		} catch ( PropertyChangedException $e ) {
-			throw new UseCaseException(
-				UseCaseException::INVALID_OPERATION_CHANGED_PROPERTY,
+			throw new UseCaseError(
+				UseCaseError::INVALID_OPERATION_CHANGED_PROPERTY,
 				'Cannot change the property of the existing statement'
 			);
 		} catch ( StatementGuidChangedException $e ) {
-			throw new UseCaseException(
-				UseCaseException::INVALID_OPERATION_CHANGED_STATEMENT_ID,
+			throw new UseCaseError(
+				UseCaseError::INVALID_OPERATION_CHANGED_STATEMENT_ID,
 				'Cannot change the ID of the existing statement'
 			);
 		}
@@ -157,11 +157,11 @@ class PatchItemStatement {
 	}
 
 	/**
-	 * @throws UseCaseException
+	 * @throws UseCaseError
 	 */
 	private function throwStatementNotFoundException( StatementGuid $statementId ): void {
-		throw new UseCaseException(
-			UseCaseException::STATEMENT_NOT_FOUND,
+		throw new UseCaseError(
+			UseCaseError::STATEMENT_NOT_FOUND,
 			"Could not find a statement with the ID: $statementId"
 		);
 	}
