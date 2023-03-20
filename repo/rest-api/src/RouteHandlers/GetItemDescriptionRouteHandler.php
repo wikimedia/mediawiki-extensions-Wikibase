@@ -13,6 +13,7 @@ use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
 use Wikibase\Repo\RestApi\UseCases\GetItemDescription\GetItemDescription;
 use Wikibase\Repo\RestApi\UseCases\GetItemDescription\GetItemDescriptionRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemDescription\GetItemDescriptionResponse;
+use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -26,16 +27,20 @@ class GetItemDescriptionRouteHandler extends SimpleHandler {
 
 	private GetItemDescription $useCase;
 	private MiddlewareHandler $middlewareHandler;
+	private ResponseFactory $responseFactory;
 
 	public function __construct(
 		GetItemDescription $useCase,
-		MiddlewareHandler $middlewareHandler
+		MiddlewareHandler $middlewareHandler,
+		ResponseFactory $responseFactory
 	) {
 		$this->useCase = $useCase;
 		$this->middlewareHandler = $middlewareHandler;
+		$this->responseFactory = $responseFactory;
 	}
 
 	public static function factory(): self {
+		$responseFactory = new ResponseFactory();
 		return new self(
 			WbRestApi::getGetItemDescription(),
 			new MiddlewareHandler( [
@@ -45,7 +50,8 @@ class GetItemDescriptionRouteHandler extends SimpleHandler {
 				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
 					fn( RequestInterface $request ): string => $request->getPathParam( self::ITEM_ID_PATH_PARAM )
 				),
-			] )
+			] ),
+			$responseFactory
 		);
 	}
 
@@ -61,9 +67,13 @@ class GetItemDescriptionRouteHandler extends SimpleHandler {
 	}
 
 	public function runUseCase( string $itemId, string $languageCode ): Response {
-		return $this->newSuccessHttpResponse(
-			$this->useCase->execute( new GetItemDescriptionRequest( $itemId, $languageCode ) )
-		);
+		try {
+			return $this->newSuccessHttpResponse(
+				$this->useCase->execute( new GetItemDescriptionRequest( $itemId, $languageCode ) )
+			);
+		} catch ( UseCaseError $e ) {
+			return $this->responseFactory->newErrorResponseFromException( $e );
+		}
 	}
 
 	public function getParamSettings(): array {

@@ -13,16 +13,21 @@ class GetItemDescription {
 
 	private ItemRevisionMetadataRetriever $itemRevisionMetadataRetriever;
 	private ItemDescriptionRetriever $itemDescriptionRetriever;
+	private GetItemDescriptionValidator $validator;
 
 	public function __construct(
 		ItemRevisionMetadataRetriever $itemRevisionMetadataRetriever,
-		ItemDescriptionRetriever $itemDescriptionRetriever
+		ItemDescriptionRetriever $itemDescriptionRetriever,
+		GetItemDescriptionValidator $validator
 	) {
 		$this->itemRevisionMetadataRetriever = $itemRevisionMetadataRetriever;
 		$this->itemDescriptionRetriever = $itemDescriptionRetriever;
+		$this->validator = $validator;
 	}
 
 	public function execute( GetItemDescriptionRequest $request ): GetItemDescriptionResponse {
+		$this->validator->assertValidRequest( $request );
+
 		$itemId = new ItemId( $request->getItemId() );
 
 		$metaDataResult = $this->itemRevisionMetadataRetriever->getLatestRevisionMetadata( $itemId );

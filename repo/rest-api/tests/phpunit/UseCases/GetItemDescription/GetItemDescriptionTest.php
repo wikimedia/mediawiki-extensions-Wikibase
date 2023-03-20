@@ -12,6 +12,11 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\UseCases\GetItemDescription\GetItemDescription;
 use Wikibase\Repo\RestApi\UseCases\GetItemDescription\GetItemDescriptionRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemDescription\GetItemDescriptionResponse;
+use Wikibase\Repo\RestApi\UseCases\GetItemDescription\GetItemDescriptionValidator;
+use Wikibase\Repo\RestApi\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
+use Wikibase\Repo\RestApi\Validation\LanguageCodeValidator;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\RestApi\UseCases\GetItemDescription\GetItemDescription
@@ -67,10 +72,38 @@ class GetItemDescriptionTest extends TestCase {
 		$this->assertEquals( new GetItemDescriptionResponse( $description, $lastModified, $revisionId ), $response );
 	}
 
+	public function testGivenInvalidItemId_throws(): void {
+		try {
+			$this->newUseCase()->execute( new GetItemDescriptionRequest( 'X321', 'en' ) );
+
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::INVALID_ITEM_ID, $e->getErrorCode() );
+			$this->assertSame( 'Not a valid item ID: X321', $e->getErrorMessage() );
+			$this->assertNull( $e->getErrorContext() );
+		}
+	}
+
+	public function testGivenInvalidLanguageCode_throwsUseCaseException(): void {
+		try {
+			$this->newUseCase()->execute( new GetItemDescriptionRequest( 'Q123', '1e' ) );
+
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $useCaseEx ) {
+			$this->assertSame( UseCaseError::INVALID_LANGUAGE_CODE, $useCaseEx->getErrorCode() );
+			$this->assertSame( 'Not a valid language code: 1e', $useCaseEx->getErrorMessage() );
+			$this->assertNull( $useCaseEx->getErrorContext() );
+		}
+	}
+
 	private function newUseCase(): GetItemDescription {
 		return new GetItemDescription(
 			$this->itemRevisionMetadataRetriever,
-			$this->descriptionRetriever
+			$this->descriptionRetriever,
+			new GetItemDescriptionValidator(
+				new ItemIdValidator(),
+				new LanguageCodeValidator( WikibaseRepo::getTermsLanguages()->getLanguages() )
+			)
 		);
 	}
 

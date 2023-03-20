@@ -36,6 +36,7 @@ use Wikibase\Repo\RestApi\UseCases\GetItem\GetItemValidator;
 use Wikibase\Repo\RestApi\UseCases\GetItemAliases\GetItemAliases;
 use Wikibase\Repo\RestApi\UseCases\GetItemAliases\GetItemAliasesValidator;
 use Wikibase\Repo\RestApi\UseCases\GetItemDescription\GetItemDescription;
+use Wikibase\Repo\RestApi\UseCases\GetItemDescription\GetItemDescriptionValidator;
 use Wikibase\Repo\RestApi\UseCases\GetItemDescriptions\GetItemDescriptions;
 use Wikibase\Repo\RestApi\UseCases\GetItemDescriptions\GetItemDescriptionsValidator;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabel\GetItemLabel;
@@ -122,6 +123,10 @@ return [
 			new TermLookupItemDataRetriever(
 				WikibaseRepo::getTermLookup( $services ),
 				WikibaseRepo::getTermsLanguages( $services )
+			),
+			new GetItemDescriptionValidator(
+				new ItemIdValidator(),
+				new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() )
 			)
 		);
 	},
