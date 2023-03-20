@@ -19,8 +19,11 @@
 	"wikibase-sitelink-site-edit-placeholder": "وِکی",
 	"wikibase-sitelink-page-edit-placeholder": "صَفہٕ",
 	"wikibase-sitelinks-special": "باقٕے وؠب سائٹ",
+	"wikibase-snakview-variations-somevalue-label": "نامَعلوم اَندراج",
+	"wikibase-snakview-variations-novalue-label": "نامَعلوم اَندراج",
 	"wikibase-itembytitle-lookup-site": "ویب سائٹ:",
 	"wikibase-itembytitle-lookup-page": "صَفہٕ:",
+	"wikibase-itemdisambiguation-lookup-language": "زَبان کوڑ:",
 	"wikibase-tainted-ref-popper-help-link-text": "مَدَتھ",
 	"wikibase-federated-properties-leaving-site-notice-cancel": "مَنسوٗخ"
 }

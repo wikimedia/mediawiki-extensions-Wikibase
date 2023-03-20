@@ -1,8 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Crucifunked"
+			"Crucifunked",
+			"HackerPunki"
 		]
 	},
+	"wikibase-linkitem-addlinks": "Añidil enlacis",
+	"wikibase-linkitem-input-site": "Luenga:",
+	"wikibase-linkitem-input-page": "Página:",
 	"wikibase-rc-hide-wikidata-show": "Muestral"
 }

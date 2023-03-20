@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ahmedadeljaff"
+			"Ahmedadeljaff",
+			"MRidhaAJ"
 		]
 	},
 	"wikibase-edit": "تعديل",
-	"wikibase-add": "ضيف"
+	"wikibase-add": "ضيف",
+	"wikibase-sitelinks-special": "مواقع غيرها"
 }
