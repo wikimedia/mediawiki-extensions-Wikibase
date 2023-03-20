@@ -3,11 +3,11 @@
 const { assert, action, utils } = require( 'api-testing' );
 const rbf = require( '../helpers/RequestBuilderFactory' );
 const {
-	createItemWithStatements,
 	createUniqueStringProperty,
 	newStatementWithRandomStringValue,
 	newLegacyStatementWithRandomStringValue,
-	changeItemProtectionStatus
+	changeItemProtectionStatus,
+	createEntity
 } = require( '../helpers/entityHelper' );
 const { requireExtensions } = require( '../../../../../tests/api-testing/utils' );
 
@@ -20,9 +20,17 @@ describe( 'Auth', () => {
 
 	before( async () => {
 		stringPropertyId = ( await createUniqueStringProperty() ).entity.id;
-		const createEntityResponse = await createItemWithStatements( [
-			newLegacyStatementWithRandomStringValue( stringPropertyId )
-		] );
+		const createEntityResponse = await createEntity(
+			'item',
+			{
+				claims: [ newLegacyStatementWithRandomStringValue( stringPropertyId ) ],
+				descriptions: { en: { language: 'en', value: `item-with-statements-${utils.uniq()}` } },
+				labels: { en: { language: 'en', value: `item-with-statements-${utils.uniq()}` } },
+				aliases: {
+					en: [ { language: 'en', value: 'Douglas Noël Adams' }, { language: 'en', value: 'DNA' } ]
+				}
+			}
+		);
 		itemId = createEntityResponse.entity.id;
 		statementId = createEntityResponse.entity.claims[ stringPropertyId ][ 0 ].id;
 		user = await action.mindy();
@@ -92,6 +100,9 @@ describe( 'Auth', () => {
 		},
 		{
 			newRequestBuilder: () => rbf.newGetItemAliasesRequestBuilder( itemId )
+		},
+		{
+			newRequestBuilder: () => rbf.newGetItemDescriptionRequestBuilder( itemId, 'en' )
 		},
 		{
 			newRequestBuilder: () => rbf.newGetItemDescriptionsRequestBuilder( itemId )

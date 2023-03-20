@@ -70,6 +70,7 @@ describe( 'User-Agent requests', () => {
 		() => rbf.newGetItemStatementRequestBuilder( itemId, statementId ),
 		() => rbf.newGetItemRequestBuilder( itemId ),
 		() => rbf.newGetItemAliasesRequestBuilder( itemId ),
+		() => rbf.newGetItemDescriptionRequestBuilder( itemId, 'en' ),
 		() => rbf.newGetItemDescriptionsRequestBuilder( itemId ),
 		() => rbf.newGetItemLabelsRequestBuilder( itemId ),
 		() => rbf.newGetStatementRequestBuilder( statementId ),
