@@ -30,4 +30,27 @@ describe( 'GET /entities/items/{id}/labels/{language_code}', () => {
 		assert.strictEqual( response.header[ 'last-modified' ], testItemCreationMetadata.timestamp );
 	} );
 
+	it( '400 error - bad request, invalid item ID', async () => {
+		const invalidItemId = 'X123';
+		const response = await newGetItemLabelRequestBuilder( invalidItemId, 'en' )
+			.assertInvalidRequest()
+			.makeRequest();
+
+		assert.strictEqual( response.status, 400 );
+		assert.header( response, 'Content-Language', 'en' );
+		assert.strictEqual( response.body.code, 'invalid-item-id' );
+		assert.include( response.body.message, invalidItemId );
+	} );
+
+	it( '400 error - bad request, invalid language code', async () => {
+		const invalidLanguageCode = '1e';
+		const response = await newGetItemLabelRequestBuilder( 'Q123', invalidLanguageCode )
+			.assertInvalidRequest()
+			.makeRequest();
+
+		assert.strictEqual( response.status, 400 );
+		assert.header( response, 'Content-Language', 'en' );
+		assert.strictEqual( response.body.code, 'invalid-language-code' );
+		assert.include( response.body.message, invalidLanguageCode );
+	} );
 } );

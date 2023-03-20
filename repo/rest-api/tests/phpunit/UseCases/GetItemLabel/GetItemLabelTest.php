@@ -12,6 +12,11 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabel\GetItemLabel;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabel\GetItemLabelRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabel\GetItemLabelResponse;
+use Wikibase\Repo\RestApi\UseCases\GetItemLabel\GetItemLabelValidator;
+use Wikibase\Repo\RestApi\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
+use Wikibase\Repo\RestApi\Validation\LanguageCodeValidator;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabel
@@ -63,10 +68,38 @@ class GetItemLabelTest extends TestCase {
 		$this->assertEquals( new GetItemLabelResponse( $label, $lastModified, $revisionId ), $response );
 	}
 
+	public function testGivenInvalidItemId_throws(): void {
+		try {
+			$this->newUseCase()->execute( new GetItemLabelRequest( 'X321', 'en' ) );
+
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( UseCaseException::INVALID_ITEM_ID, $e->getErrorCode() );
+			$this->assertSame( 'Not a valid item ID: X321', $e->getErrorMessage() );
+			$this->assertNull( $e->getErrorContext() );
+		}
+	}
+
+	public function testGivenInvalidLanguageCode_throwsUseCaseException(): void {
+		try {
+			$this->newUseCase()->execute( new GetItemLabelRequest( 'Q123', '1e' ) );
+
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $useCaseEx ) {
+			$this->assertSame( UseCaseException::INVALID_LANGUAGE_CODE, $useCaseEx->getErrorCode() );
+			$this->assertSame( 'Not a valid language code: 1e', $useCaseEx->getErrorMessage() );
+			$this->assertNull( $useCaseEx->getErrorContext() );
+		}
+	}
+
 	private function newUseCase(): GetItemLabel {
 		return new GetItemLabel(
 			$this->itemRevisionMetadataRetriever,
-			$this->labelRetriever
+			$this->labelRetriever,
+			new GetItemLabelValidator(
+				new ItemIdValidator(),
+				new LanguageCodeValidator( WikibaseRepo::getTermsLanguages()->getLanguages() )
+			)
 		);
 	}
 

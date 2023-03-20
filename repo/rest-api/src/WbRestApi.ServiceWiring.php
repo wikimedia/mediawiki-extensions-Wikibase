@@ -39,6 +39,7 @@ use Wikibase\Repo\RestApi\UseCases\GetItemDescription\GetItemDescription;
 use Wikibase\Repo\RestApi\UseCases\GetItemDescriptions\GetItemDescriptions;
 use Wikibase\Repo\RestApi\UseCases\GetItemDescriptions\GetItemDescriptionsValidator;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabel\GetItemLabel;
+use Wikibase\Repo\RestApi\UseCases\GetItemLabel\GetItemLabelValidator;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabels;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabelsValidator;
 use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatement;
@@ -54,6 +55,7 @@ use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatement;
 use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatementValidator;
 use Wikibase\Repo\RestApi\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
+use Wikibase\Repo\RestApi\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Validation\StatementIdValidator;
 use Wikibase\Repo\RestApi\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\WbRestApi;
@@ -145,6 +147,10 @@ return [
 			new TermLookupItemDataRetriever(
 				WikibaseRepo::getTermLookup( $services ),
 				WikibaseRepo::getTermsLanguages( $services )
+			),
+			new GetItemLabelValidator(
+				new ItemIdValidator(),
+				new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() )
 			)
 		);
 	},

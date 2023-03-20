@@ -13,6 +13,7 @@ use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabel\GetItemLabel;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabel\GetItemLabelRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabel\GetItemLabelResponse;
+use Wikibase\Repo\RestApi\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -26,16 +27,20 @@ class GetItemLabelRouteHandler extends SimpleHandler {
 
 	private GetItemLabel $useCase;
 	private MiddlewareHandler $middlewareHandler;
+	private ResponseFactory $responseFactory;
 
 	public function __construct(
 		GetItemLabel $useCase,
-		MiddlewareHandler $middlewareHandler
+		MiddlewareHandler $middlewareHandler,
+		ResponseFactory $responseFactory
 	) {
 		$this->useCase = $useCase;
 		$this->middlewareHandler = $middlewareHandler;
+		$this->responseFactory = $responseFactory;
 	}
 
 	public static function factory(): self {
+		$responseFactory = new ResponseFactory();
 		return new self(
 			WbRestApi::getGetItemLabel(),
 			new MiddlewareHandler( [
@@ -45,7 +50,8 @@ class GetItemLabelRouteHandler extends SimpleHandler {
 				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
 					fn( RequestInterface $request ): string => $request->getPathParam( self::ITEM_ID_PATH_PARAM )
 				),
-			] )
+			] ),
+			$responseFactory
 		);
 	}
 
@@ -61,9 +67,13 @@ class GetItemLabelRouteHandler extends SimpleHandler {
 	}
 
 	public function runUseCase( string $itemId, string $languageCode ): Response {
-		return $this->newSuccessHttpResponse(
-			$this->useCase->execute( new GetItemLabelRequest( $itemId, $languageCode ) )
-		);
+		try {
+			return $this->newSuccessHttpResponse(
+				$this->useCase->execute( new GetItemLabelRequest( $itemId, $languageCode ) )
+			);
+		} catch ( UseCaseException $e ) {
+			return $this->responseFactory->newErrorResponseFromException( $e );
+		}
 	}
 
 	public function getParamSettings(): array {
