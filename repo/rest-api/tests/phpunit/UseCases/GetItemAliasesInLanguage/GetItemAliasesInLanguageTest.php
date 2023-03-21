@@ -13,6 +13,7 @@ use Wikibase\Repo\RestApi\UseCases\GetItemAliasesInLanguage\GetItemAliasesInLang
 use Wikibase\Repo\RestApi\UseCases\GetItemAliasesInLanguage\GetItemAliasesInLanguageRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemAliasesInLanguage\GetItemAliasesInLanguageResponse;
 use Wikibase\Repo\RestApi\UseCases\GetItemAliasesInLanguage\GetItemAliasesInLanguageValidator;
+use Wikibase\Repo\RestApi\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Validation\LanguageCodeValidator;
@@ -94,6 +95,46 @@ class GetItemAliasesInLanguageTest extends TestCase {
 			$this->assertSame( UseCaseError::INVALID_LANGUAGE_CODE, $useCaseEx->getErrorCode() );
 			$this->assertSame( 'Not a valid language code: 1e', $useCaseEx->getErrorMessage() );
 			$this->assertNull( $useCaseEx->getErrorContext() );
+		}
+	}
+
+	public function testGivenRequestedItemDoesNotExist_throwsUseCaseError(): void {
+		$itemId = new ItemId( 'Q10' );
+
+		$this->itemRevisionMetadataRetriever = $this->createMock( ItemRevisionMetadataRetriever::class );
+		$this->itemRevisionMetadataRetriever->expects( $this->once() )
+			->method( 'getLatestRevisionMetadata' )
+			->with( $itemId )
+			->willReturn( LatestItemRevisionMetadataResult::itemNotFound() );
+
+		try {
+			$this->newUseCase()->execute(
+				new GetItemAliasesInLanguageRequest( $itemId->getSerialization(), 'en' )
+			);
+
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::ITEM_NOT_FOUND, $e->getErrorCode() );
+			$this->assertSame( 'Could not find an item with the ID: Q10', $e->getErrorMessage() );
+			$this->assertNull( $e->getErrorContext() );
+		}
+	}
+
+	public function testGivenItemRedirect_throwsItemRedirectException(): void {
+		$redirectSource = 'Q123';
+		$redirectTarget = 'Q321';
+
+		$this->itemRevisionMetadataRetriever
+			->method( 'getLatestRevisionMetadata' )
+			->with( new ItemId( $redirectSource ) )
+			->willReturn( LatestItemRevisionMetadataResult::redirect( new ItemId( $redirectTarget ) ) );
+
+		try {
+			$this->newUseCase()->execute( new GetItemAliasesInLanguageRequest( $redirectSource, 'en' ) );
+
+			$this->fail( 'this should not be reached' );
+		} catch ( ItemRedirect $e ) {
+			$this->assertSame( $redirectTarget, $e->getRedirectTargetId() );
 		}
 	}
 

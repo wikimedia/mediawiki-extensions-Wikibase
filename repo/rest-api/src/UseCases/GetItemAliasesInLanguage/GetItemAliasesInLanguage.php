@@ -5,7 +5,8 @@ namespace Wikibase\Repo\RestApi\UseCases\GetItemAliasesInLanguage;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Domain\Services\ItemAliasesInLanguageRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
-use Wikibase\Repo\RestApi\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\UseCases\ItemRedirect;
+use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 
 /**
  * @license GPL-2.0-or-later
@@ -27,7 +28,9 @@ class GetItemAliasesInLanguage {
 	}
 
 	/**
-	 * @throws UseCaseException
+	 * @throws UseCaseError
+	 *
+	 * @throws ItemRedirect
 	 */
 	public function execute( GetItemAliasesInLanguageRequest $request ): GetItemAliasesInLanguageResponse {
 		$this->validator->assertValidRequest( $request );
@@ -35,6 +38,19 @@ class GetItemAliasesInLanguage {
 		$itemId = new ItemId( $request->getItemId() );
 
 		$metaDataResult = $this->itemRevisionMetadataRetriever->getLatestRevisionMetadata( $itemId );
+
+		if ( !$metaDataResult->itemExists() ) {
+			throw new UseCaseError(
+				UseCaseError::ITEM_NOT_FOUND,
+				"Could not find an item with the ID: {$request->getItemId()}"
+			);
+		}
+
+		if ( $metaDataResult->isRedirect() ) {
+			throw new ItemRedirect(
+				$metaDataResult->getRedirectTarget()->getSerialization()
+			);
+		}
 
 		return new GetItemAliasesInLanguageResponse(
 			$this->itemAliasesInLanguageRetriever->getAliasesInLanguage( $itemId, $request->getLanguageCode() ),
