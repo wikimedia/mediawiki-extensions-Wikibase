@@ -1,0 +1,69 @@
+'use strict';
+
+const { utils } = require( 'api-testing' );
+const chai = require( 'chai' );
+const { createEntity, createRedirectForItem } = require( '../helpers/entityHelper' );
+const { newGetItemAliasesInLanguageRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const expect = chai.expect;
+
+describe( newGetItemAliasesInLanguageRequestBuilder().getRouteDescription(), () => {
+
+	let itemId;
+	let lastRevisionId;
+	const languageCode = 'en';
+
+	before( async () => {
+		const createItemResponse = await createEntity( 'item', {
+			aliases: {
+				en: [
+					{ language: 'en', value: 'an-English-alias-' + utils.uniq() },
+					{ language: 'en', value: 'another-English-alias-' + utils.uniq() }
+				]
+			}
+		} );
+
+		itemId = createItemResponse.entity.id;
+		lastRevisionId = createItemResponse.entity.lastrevid;
+	} );
+
+	it( '200 OK response is valid', async () => {
+		const response = await newGetItemAliasesInLanguageRequestBuilder( itemId, languageCode ).makeRequest();
+		expect( response.status ).to.equal( 200 );
+		expect( response ).to.satisfyApiSpec;
+	} );
+
+	it( '304 Not Modified response is valid', async () => {
+		const response = await newGetItemAliasesInLanguageRequestBuilder( itemId, languageCode )
+			.withHeader( 'If-None-Match', `"${lastRevisionId}"` )
+			.makeRequest();
+		expect( response.status ).to.equal( 304 );
+		expect( response ).to.satisfyApiSpec;
+	} );
+
+	it( '308 Permanent Redirect response is valid for a redirected item', async () => {
+		const redirectSourceId = await createRedirectForItem( itemId );
+		const response = await newGetItemAliasesInLanguageRequestBuilder( redirectSourceId, languageCode )
+			.makeRequest();
+		expect( response.status ).to.equal( 308 );
+		expect( response ).to.satisfyApiSpec;
+	} );
+
+	it( '400 Bad Request response is valid for an invalid item ID', async () => {
+		const response = await newGetItemAliasesInLanguageRequestBuilder( 'X123', languageCode ).makeRequest();
+		expect( response.status ).to.equal( 400 );
+		expect( response ).to.satisfyApiSpec;
+	} );
+
+	it( '404 Not Found response is valid for a non-existing item', async () => {
+		const response = await newGetItemAliasesInLanguageRequestBuilder( 'Q99999', languageCode ).makeRequest();
+		expect( response.status ).to.equal( 404 );
+		expect( response ).to.satisfyApiSpec;
+	} );
+
+	it( '404 Not Found response is valid if there is no aliases in the requested language', async () => {
+		const response = await newGetItemAliasesInLanguageRequestBuilder( itemId, 'de' ).makeRequest();
+		expect( response.status ).to.equal( 404 );
+		expect( response ).to.satisfyApiSpec;
+	} );
+
+} );
