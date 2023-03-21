@@ -52,8 +52,17 @@ class GetItemAliasesInLanguage {
 			);
 		}
 
+		$aliases = $this->itemAliasesInLanguageRetriever->getAliasesInLanguage( $itemId, $request->getLanguageCode() );
+
+		if ( !$aliases ) {
+			throw new UseCaseError(
+				UseCaseError::ALIAS_NOT_DEFINED,
+				"Item with the ID {$request->getItemId()} does not have an alias in the language: {$request->getLanguageCode()}"
+			);
+		}
+
 		return new GetItemAliasesInLanguageResponse(
-			$this->itemAliasesInLanguageRetriever->getAliasesInLanguage( $itemId, $request->getLanguageCode() ),
+			$aliases,
 			$metaDataResult->getRevisionTimestamp(),
 			$metaDataResult->getRevisionId(),
 		);

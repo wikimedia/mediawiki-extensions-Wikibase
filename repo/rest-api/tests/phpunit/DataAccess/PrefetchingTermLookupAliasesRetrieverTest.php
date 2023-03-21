@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\RestApi\DataAccess;
 
 use PHPUnit\Framework\TestCase;
+use Wikibase\DataAccess\NullPrefetchingTermLookup;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataAccess\Tests\FakePrefetchingTermLookup;
 use Wikibase\DataModel\Entity\ItemId;
@@ -63,6 +64,19 @@ class PrefetchingTermLookupAliasesRetrieverTest extends TestCase {
 		$this->assertCount( 1, $aliases );
 		$this->assertArrayHasKey( 'en', $aliases );
 		$this->assertArrayNotHasKey( 'de', $aliases );
+	}
+
+	public function testGivenLanguageCodeWithNoAliasesFor_getAliasesInLanguageReturnsNull(): void {
+		$itemId = new ItemId( self::ITEM_ID );
+		$languageCode = 'de';
+
+		$aliasesRetriever = new PrefetchingTermLookupAliasesRetriever(
+			new NullPrefetchingTermLookup(),
+			new StaticContentLanguages( [ $languageCode ] )
+		);
+
+		$aliasesInLanguage = $aliasesRetriever->getAliasesInLanguage( $itemId, $languageCode );
+		$this->assertNull( $aliasesInLanguage );
 	}
 
 	public function testGetAliasesInLanguage(): void {
