@@ -15,6 +15,13 @@ module.exports = {
 			.withPathParam( 'item_id', itemId );
 	},
 
+	newGetItemAliasesInLanguageRequestBuilder( itemId, languageCode ) {
+		return new RequestBuilder()
+			.withRoute( 'GET', '/entities/items/{item_id}/aliases/{language_code}' )
+			.withPathParam( 'item_id', itemId )
+			.withPathParam( 'language_code', languageCode );
+	},
+
 	newGetItemDescriptionRequestBuilder( itemId, languageCode ) {
 		return new RequestBuilder()
 			.withRoute( 'GET', '/entities/items/{item_id}/descriptions/{language_code}' )

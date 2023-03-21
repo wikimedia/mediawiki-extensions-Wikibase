@@ -13,6 +13,7 @@ use Wikibase\Repo\RestApi\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\UseCases\GetItemAliases\GetItemAliases;
+use Wikibase\Repo\RestApi\UseCases\GetItemAliasesInLanguage\GetItemAliasesInLanguage;
 use Wikibase\Repo\RestApi\UseCases\GetItemDescription\GetItemDescription;
 use Wikibase\Repo\RestApi\UseCases\GetItemDescriptions\GetItemDescriptions;
 use Wikibase\Repo\RestApi\UseCases\GetItemLabel\GetItemLabel;
@@ -36,6 +37,11 @@ class WbRestApi {
 	public static function getGetItemAliases( ContainerInterface $services = null ): GetItemAliases {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.GetItemAliases' );
+	}
+
+	public static function getGetItemAliasesInLanguage( ContainerInterface $services = null ): GetItemAliasesInLanguage {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.GetItemAliasesInLanguage' );
 	}
 
 	public static function getGetItemDescription( ContainerInterface $services = null ): GetItemDescription {
