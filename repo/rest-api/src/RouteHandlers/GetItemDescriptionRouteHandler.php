@@ -13,6 +13,7 @@ use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
 use Wikibase\Repo\RestApi\UseCases\GetItemDescription\GetItemDescription;
 use Wikibase\Repo\RestApi\UseCases\GetItemDescription\GetItemDescriptionRequest;
 use Wikibase\Repo\RestApi\UseCases\GetItemDescription\GetItemDescriptionResponse;
+use Wikibase\Repo\RestApi\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
@@ -40,7 +41,6 @@ class GetItemDescriptionRouteHandler extends SimpleHandler {
 	}
 
 	public static function factory(): self {
-		$responseFactory = new ResponseFactory();
 		return new self(
 			WbRestApi::getGetItemDescription(),
 			new MiddlewareHandler( [
@@ -51,7 +51,7 @@ class GetItemDescriptionRouteHandler extends SimpleHandler {
 					fn( RequestInterface $request ): string => $request->getPathParam( self::ITEM_ID_PATH_PARAM )
 				),
 			] ),
-			$responseFactory
+			new ResponseFactory()
 		);
 	}
 
@@ -73,6 +73,8 @@ class GetItemDescriptionRouteHandler extends SimpleHandler {
 			);
 		} catch ( UseCaseError $e ) {
 			return $this->responseFactory->newErrorResponseFromException( $e );
+		} catch ( ItemRedirect $redirect ) {
+			return $this->newRedirectHttpResponse( $redirect, $languageCode );
 		}
 	}
 
@@ -100,6 +102,19 @@ class GetItemDescriptionRouteHandler extends SimpleHandler {
 			new StringStream( json_encode( $useCaseResponse->getDescription()->getText() ) )
 		);
 
+		return $httpResponse;
+	}
+
+	private function newRedirectHttpResponse( ItemRedirect $e, string $languageCode ): Response {
+		$httpResponse = $this->getResponseFactory()->create();
+		$httpResponse->setHeader(
+			'Location',
+			$this->getRouteUrl( [
+				self::ITEM_ID_PATH_PARAM => $e->getRedirectTargetId(),
+				self::LANGUAGE_CODE_PATH_PARAM => $languageCode,
+			] )
+		);
+		$httpResponse->setStatus( 308 );
 		return $httpResponse;
 	}
 
