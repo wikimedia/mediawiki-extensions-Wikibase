@@ -98,6 +98,28 @@ class GetItemAliasesInLanguageTest extends TestCase {
 		}
 	}
 
+	public function testGivenLanguageCodeWithNoAliasesFor_throwsUseCaseError(): void {
+		$itemId = new ItemId( 'Q2' );
+
+		$this->itemRevisionMetadataRetriever = $this->createMock( ItemRevisionMetadataRetriever::class );
+		$this->itemRevisionMetadataRetriever->expects( $this->once() )
+			->method( 'getLatestRevisionMetadata' )
+			->with( $itemId )
+			->willReturn( LatestItemRevisionMetadataResult::concreteRevision( 2, '20201111070707' ) );
+
+		try {
+			$this->newUseCase()->execute(
+				new GetItemAliasesInLanguageRequest( $itemId->getSerialization(), 'de' )
+			);
+
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::ALIAS_NOT_DEFINED, $e->getErrorCode() );
+			$this->assertSame( 'Item with the ID Q2 does not have an alias in the language: de', $e->getErrorMessage() );
+			$this->assertNull( $e->getErrorContext() );
+		}
+	}
+
 	public function testGivenRequestedItemDoesNotExist_throwsUseCaseError(): void {
 		$itemId = new ItemId( 'Q10' );
 

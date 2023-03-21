@@ -90,4 +90,16 @@ describe( 'GET /entities/items/{id}/aliases/{language_code}', () => {
 		assert.strictEqual( response.body.code, 'item-not-found' );
 		assert.include( response.body.message, nonExistentItem );
 	} );
+
+	it( 'responds 404 in case the item has no aliases in the requested language', async () => {
+		const languageCode = 'de';
+		const response = await newGetItemAliasesInLanguageRequestBuilder( itemId, languageCode )
+			.assertValidRequest()
+			.makeRequest();
+
+		assert.strictEqual( response.status, 404 );
+		assert.header( response, 'Content-Language', 'en' );
+		assert.strictEqual( response.body.code, 'alias-not-defined' );
+		assert.include( response.body.message, languageCode );
+	} );
 } );
