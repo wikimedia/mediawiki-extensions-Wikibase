@@ -1,6 +1,6 @@
 'use strict';
 
-const { createEntity, getLatestEditMetadata } = require( '../helpers/entityHelper' );
+const { createEntity, getLatestEditMetadata, createRedirectForItem } = require( '../helpers/entityHelper' );
 const { newGetItemLabelRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { assert } = require( 'api-testing' );
 
@@ -28,6 +28,34 @@ describe( 'GET /entities/items/{id}/labels/{language_code}', () => {
 		assert.deepEqual( response.body, 'potato' );
 		assert.strictEqual( response.header.etag, `"${testItemCreationMetadata.revid}"` );
 		assert.strictEqual( response.header[ 'last-modified' ], testItemCreationMetadata.timestamp );
+	} );
+
+	it( 'responds 404 in case the item does not exist', async () => {
+		const nonExistentItem = 'Q99999999';
+		const response = await newGetItemLabelRequestBuilder( nonExistentItem, 'en' )
+			.assertValidRequest()
+			.makeRequest();
+
+		assert.strictEqual( response.status, 404 );
+		assert.header( response, 'Content-Language', 'en' );
+		assert.strictEqual( response.body.code, 'item-not-found' );
+		assert.include( response.body.message, nonExistentItem );
+	} );
+
+	it( '308 - item redirected', async () => {
+		const redirectTarget = itemId;
+		const redirectSource = await createRedirectForItem( redirectTarget );
+
+		const response = await newGetItemLabelRequestBuilder( redirectSource, 'en' )
+			.assertValidRequest()
+			.makeRequest();
+
+		assert.strictEqual( response.status, 308 );
+
+		assert.isTrue(
+			new URL( response.headers.location ).pathname
+				.endsWith( `rest.php/wikibase/v0/entities/items/${redirectTarget}/labels/en` )
+		);
 	} );
 
 	it( '400 error - bad request, invalid item ID', async () => {
