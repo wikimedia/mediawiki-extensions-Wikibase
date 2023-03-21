@@ -31,7 +31,7 @@ class GetItemStatementValidatorTest extends TestCase {
 
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame( StatementIdValidator::CODE_INVALID, $e->getErrorCode() );
+			$this->assertSame( UseCaseError::INVALID_STATEMENT_ID, $e->getErrorCode() );
 			$this->assertSame(
 				'Not a valid statement ID: ' . $statementId,
 				$e->getErrorMessage()
@@ -58,7 +58,7 @@ class GetItemStatementValidatorTest extends TestCase {
 
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame( ItemIdValidator::CODE_INVALID, $e->getErrorCode() );
+			$this->assertSame( UseCaseError::INVALID_ITEM_ID, $e->getErrorCode() );
 			$this->assertSame( 'Not a valid item ID: ' . $itemId, $e->getErrorMessage() );
 		}
 	}

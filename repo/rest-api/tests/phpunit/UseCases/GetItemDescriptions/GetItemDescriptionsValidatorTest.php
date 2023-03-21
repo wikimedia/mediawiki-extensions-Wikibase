@@ -24,7 +24,7 @@ class GetItemDescriptionsValidatorTest extends TestCase {
 			$this->newDescriptionsValidator()
 				->assertValidRequest( new GetItemDescriptionsRequest( $invalidId ) );
 		} catch ( UseCaseError $useCaseEx ) {
-			$this->assertSame( ItemIdValidator::CODE_INVALID, $useCaseEx->getErrorCode() );
+			$this->assertSame( UseCaseError::INVALID_ITEM_ID, $useCaseEx->getErrorCode() );
 			$this->assertSame( 'Not a valid item ID: ' . $invalidId, $useCaseEx->getErrorMessage() );
 		}
 	}

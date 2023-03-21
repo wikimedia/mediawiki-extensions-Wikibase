@@ -26,7 +26,7 @@ class GetItemLabelsValidatorTest extends TestCase {
 
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $useCaseEx ) {
-			$this->assertSame( ItemIdValidator::CODE_INVALID, $useCaseEx->getErrorCode() );
+			$this->assertSame( UseCaseError::INVALID_ITEM_ID, $useCaseEx->getErrorCode() );
 			$this->assertSame( 'Not a valid item ID: ' . $invalidId, $useCaseEx->getErrorMessage() );
 		}
 	}
