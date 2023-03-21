@@ -36,7 +36,7 @@ class GetItemLabelValidatorTest extends TestCase {
 
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $error ) {
-			$this->assertSame( ItemIdValidator::CODE_INVALID, $error->getErrorCode() );
+			$this->assertSame( UseCaseError::INVALID_ITEM_ID, $error->getErrorCode() );
 			$this->assertSame( 'Not a valid item ID: ' . $invalidId, $error->getErrorMessage() );
 		}
 	}
@@ -50,7 +50,7 @@ class GetItemLabelValidatorTest extends TestCase {
 
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $error ) {
-			$this->assertSame( LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE, $error->getErrorCode() );
+			$this->assertSame( UseCaseError::INVALID_LANGUAGE_CODE, $error->getErrorCode() );
 			$this->assertSame( 'Not a valid language code: ' . $invalidLanguageCode, $error->getErrorMessage() );
 		}
 	}

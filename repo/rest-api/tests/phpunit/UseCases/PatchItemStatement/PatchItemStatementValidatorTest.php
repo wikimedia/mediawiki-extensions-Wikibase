@@ -220,7 +220,7 @@ class PatchItemStatementValidatorTest extends TestCase {
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame( EditMetadataValidator::CODE_COMMENT_TOO_LONG, $e->getErrorCode() );
+			$this->assertSame( UseCaseError::COMMENT_TOO_LONG, $e->getErrorCode() );
 			$this->assertSame(
 				'Comment must not be longer than ' . CommentStore::COMMENT_CHARACTER_LIMIT . ' characters.',
 				$e->getErrorMessage()
