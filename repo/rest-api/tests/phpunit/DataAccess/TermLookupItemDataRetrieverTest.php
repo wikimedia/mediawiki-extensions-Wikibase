@@ -74,6 +74,13 @@ class TermLookupItemDataRetrieverTest extends TestCase {
 		);
 	}
 
+	public function testGivenNoLabelInRequestedLanguage_getLabelReturnsNull(): void {
+		$this->assertNull(
+			( $this->newTermRetriever( $this->createStub( TermLookup::class ) ) )
+				->getLabel( new ItemId( 'Q321' ), 'ko' )
+		);
+	}
+
 	public function testGetDescriptions(): void {
 		$itemId = new ItemId( self::ITEM_ID );
 

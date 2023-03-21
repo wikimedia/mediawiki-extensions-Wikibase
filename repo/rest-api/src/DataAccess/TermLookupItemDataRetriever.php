@@ -36,7 +36,7 @@ class TermLookupItemDataRetriever implements ItemLabelRetriever, ItemLabelsRetri
 			return null;
 		}
 
-		return new Label( $languageCode, $labelText );
+		return $labelText !== null ? new Label( $languageCode, $labelText ) : null;
 	}
 
 	public function getLabels( ItemId $itemId ): ?Labels {

@@ -42,6 +42,18 @@ describe( 'GET /entities/items/{id}/labels/{language_code}', () => {
 		assert.include( response.body.message, nonExistentItem );
 	} );
 
+	it( 'responds 404 in case the item has no label in the requested language', async () => {
+		const languageCode = 'ko';
+		const response = await newGetItemLabelRequestBuilder( itemId, languageCode )
+			.assertValidRequest()
+			.makeRequest();
+
+		assert.strictEqual( response.status, 404 );
+		assert.header( response, 'Content-Language', 'en' );
+		assert.strictEqual( response.body.code, 'label-not-defined' );
+		assert.include( response.body.message, languageCode );
+	} );
+
 	it( '308 - item redirected', async () => {
 		const redirectTarget = itemId;
 		const redirectSource = await createRedirectForItem( redirectTarget );

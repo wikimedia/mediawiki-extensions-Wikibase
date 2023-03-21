@@ -91,6 +91,28 @@ class GetItemLabelTest extends TestCase {
 		}
 	}
 
+	public function testGivenLabelInRequestedLanguageDoesNotExist_throwsUseCaseError(): void {
+		$itemId = new ItemId( 'Q11' );
+
+		$this->itemRevisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
+		$this->itemRevisionMetadataRetriever->method( 'getLatestRevisionMetadata' )
+			->willReturn( LatestItemRevisionMetadataResult::concreteRevision( 123, '20201111070707' ) );
+
+		$this->labelRetriever = $this->createStub( ItemLabelRetriever::class );
+
+		try {
+			$this->newUseCase()->execute(
+				new GetItemLabelRequest( $itemId->getSerialization(), 'en' )
+			);
+
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::LABEL_NOT_FOUND, $e->getErrorCode() );
+			$this->assertSame( 'Item with the ID Q11 does not have a label in the language: en', $e->getErrorMessage() );
+			$this->assertNull( $e->getErrorContext() );
+		}
+	}
+
 	public function testGivenItemRedirect_throwsItemRedirectException(): void {
 		$redirectSource = 'Q123';
 		$redirectTarget = 'Q321';

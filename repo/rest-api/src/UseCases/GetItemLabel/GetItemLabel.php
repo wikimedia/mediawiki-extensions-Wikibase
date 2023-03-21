@@ -50,8 +50,16 @@ class GetItemLabel {
 			);
 		}
 
+		$label = $this->itemLabelRetriever->getLabel( $itemId, $request->getLanguageCode() );
+		if ( !$label ) {
+			throw new UseCaseError(
+				UseCaseError::LABEL_NOT_FOUND,
+				"Item with the ID {$request->getItemId()} does not have a label in the language: {$request->getLanguageCode()}"
+			);
+		}
+
 		return new GetItemLabelResponse(
-			$this->itemLabelRetriever->getLabel( $itemId, $request->getLanguageCode() ),
+			$label,
 			$metaDataResult->getRevisionTimestamp(),
 			$metaDataResult->getRevisionId(),
 		);
