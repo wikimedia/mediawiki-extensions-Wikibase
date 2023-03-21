@@ -12,7 +12,8 @@
 			"Srđan",
 			"Zoranzoki21",
 			"Милан Јелисавчић",
-			"Сербијана"
+			"Сербијана",
+			"Zenfiric"
 		]
 	},
 	"wikibase-desc": "Складиште структуираних података",
@@ -83,6 +84,7 @@
 	"wikibase-undo-title": "Поништавање измене на „$1”",
 	"wikibase-restore-title": "Враћање старије измене на страници „$1”",
 	"wikibase-partial-undo": "Измена се може делимично поништити.",
+	"wikibase-omitted-undo-ops": "$1 {{PLURAL:$1|измена није могла бити поништена|измене нису могле бити поништене}} јер {{PLURAL:$1|је промењена вредност|су промењене вредности}} у међувремену.",
 	"wikibase-empty-undo": "Не постоји ништа што може бити поништено овде.",
 	"wikibase-undo-revision-error": "Поништавање није успело",
 	"wikibase-undo-samerev": "Две различите измене морају да се наведу за поништавање измене.",
@@ -297,6 +299,9 @@
 	"wikibase-api-no-such-entity": "Није могуће пронаћи ентитет са ID-ом „$1”",
 	"wikibase-api-not-statement": "Није изјава.",
 	"wikibase-api-not-item": "Није ставка.",
+	"wikibase-api-not-recognized": "Нешто није препознато.",
+	"wikibase-api-wrong-class": "Погрешан тип класе је декетован.",
+	"wikibase-api-tags-invalid": "Параметар ознака није исправан.",
 	"wikibase-restoreold": "врати",
 	"wikibase-entity-summary-restore": "Враћена измена $3 корисника [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-non-entity-diff": "Није могуће упоредити ентитет са неентитетским садржајем.",

@@ -25,6 +25,7 @@
 	"wikibase-dataitem": "Обект в {{WBREPONAME}}",
 	"wikibase-editlinks": "Редактиране",
 	"wikibase-editlinkstitle": "Редактиране на междуезиковите препратки",
+	"wikibase-addlinkstitle": "Добавяне на междуезикови препратки",
 	"wikibase-linkitem-addlinks": "Добавяне на препратки",
 	"wikibase-linkitem-close": "Затваряне на диалога и презареждане на страницата",
 	"wikibase-linkitem-failure": "При опита за свързване с дадената страница възникна неизвестна грешка.",
