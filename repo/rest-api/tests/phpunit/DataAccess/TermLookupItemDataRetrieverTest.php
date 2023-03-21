@@ -135,4 +135,11 @@ class TermLookupItemDataRetrieverTest extends TestCase {
 			new Description( 'en', 'English science fiction writer and humourist' ),
 		);
 	}
+
+	public function testGivenNoDescriptionInRequestedLanguage_getDescriptionReturnsNull(): void {
+		$this->assertNull(
+			( $this->newTermRetriever( $this->createStub( TermLookup::class ) ) )
+				->getDescription( new ItemId( 'Q321' ), 'ko' )
+		);
+	}
 }

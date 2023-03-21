@@ -61,7 +61,7 @@ class TermLookupItemDataRetriever implements ItemLabelRetriever, ItemLabelsRetri
 			// this probably means that the item does not exist, which should be checked prior to calling this method
 			return null;
 		}
-		return new Description( $languageCode, $descriptionText );
+		return $descriptionText !== null ? new Description( $languageCode, $descriptionText ) : null;
 	}
 
 	public function getDescriptions( ItemId $itemId ): ?Descriptions {

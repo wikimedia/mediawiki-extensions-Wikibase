@@ -92,6 +92,30 @@ class GetItemDescriptionTest extends TestCase {
 		}
 	}
 
+	public function testGivenDescriptionNotDefined_throwsUseCaseError(): void {
+		$itemId = new ItemId( 'Q2' );
+
+		$this->itemRevisionMetadataRetriever = $this->createMock( ItemRevisionMetadataRetriever::class );
+		$this->itemRevisionMetadataRetriever->expects( $this->once() )
+			->method( 'getLatestRevisionMetadata' )
+			->with( $itemId )
+			->willReturn( LatestItemRevisionMetadataResult::concreteRevision( 42, '20201111070707' ) );
+
+		$this->descriptionRetriever = $this->createStub( ItemDescriptionRetriever::class );
+
+		try {
+			$this->newUseCase()->execute(
+				new GetItemDescriptionRequest( $itemId->getSerialization(), 'en' )
+			);
+
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::DESCRIPTION_NOT_DEFINED, $e->getErrorCode() );
+			$this->assertSame( 'Item with the ID Q2 does not have a description in the language: en', $e->getErrorMessage() );
+			$this->assertNull( $e->getErrorContext() );
+		}
+	}
+
 	public function testGivenItemRedirect_throwsItemRedirectException(): void {
 		$redirectSource = 'Q123';
 		$redirectTarget = 'Q321';

@@ -50,8 +50,16 @@ class GetItemDescription {
 			);
 		}
 
+		$description = $this->itemDescriptionRetriever->getDescription( $itemId, $request->getLanguageCode() );
+		if ( $description === null ) {
+			throw new UseCaseError(
+				UseCaseError::DESCRIPTION_NOT_DEFINED,
+				"Item with the ID {$itemId} does not have a description in the language: {$request->getLanguageCode()}"
+			);
+		}
+
 		return new GetItemDescriptionResponse(
-			$this->itemDescriptionRetriever->getDescription( $itemId, $request->getLanguageCode() ),
+			$description,
 			$metaDataResult->getRevisionTimestamp(),
 			$metaDataResult->getRevisionId(),
 		);

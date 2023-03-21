@@ -68,6 +68,17 @@ describe( 'GET /entities/items/{id}/descriptions/{language_code}', () => {
 		assert.include( response.body.message, nonExistentItem );
 	} );
 
+	it( 'responds 404 in case the item has no description in the requested language', async () => {
+		const languageCode = 'ko';
+		const response = await newGetItemDescriptionRequestBuilder( itemId, languageCode )
+			.assertValidRequest()
+			.makeRequest();
+		assert.strictEqual( response.status, 404 );
+		assert.header( response, 'Content-Language', 'en' );
+		assert.strictEqual( response.body.code, 'description-not-defined' );
+		assert.include( response.body.message, languageCode );
+	} );
+
 	it( '308 - item redirected', async () => {
 		const redirectTarget = itemId;
 		const redirectSource = await createRedirectForItem( redirectTarget );

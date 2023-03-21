@@ -31,6 +31,7 @@ class ErrorResponseToHttpStatus {
 		UseCaseError::ITEM_NOT_FOUND => 404,
 		UseCaseError::LABEL_NOT_DEFINED => 404,
 		UseCaseError::ALIASES_NOT_DEFINED => 404,
+		UseCaseError::DESCRIPTION_NOT_DEFINED => 404,
 		UseCaseError::ITEM_REDIRECTED => 409,
 		UseCaseError::STATEMENT_NOT_FOUND => 404,
 		UseCaseError::PATCHED_STATEMENT_INVALID_FIELD => 422,
