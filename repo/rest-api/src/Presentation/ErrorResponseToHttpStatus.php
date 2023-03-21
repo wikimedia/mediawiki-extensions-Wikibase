@@ -29,7 +29,7 @@ class ErrorResponseToHttpStatus {
 		UseCaseError::MISSING_JSON_PATCH_FIELD => 400,
 		UseCaseError::PERMISSION_DENIED => 403,
 		UseCaseError::ITEM_NOT_FOUND => 404,
-		UseCaseError::LABEL_NOT_FOUND => 404,
+		UseCaseError::LABEL_NOT_DEFINED => 404,
 		UseCaseError::ALIAS_NOT_DEFINED => 404,
 		UseCaseError::ITEM_REDIRECTED => 409,
 		UseCaseError::STATEMENT_NOT_FOUND => 404,

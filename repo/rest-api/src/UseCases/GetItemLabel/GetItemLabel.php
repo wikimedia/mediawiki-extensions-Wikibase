@@ -53,7 +53,7 @@ class GetItemLabel {
 		$label = $this->itemLabelRetriever->getLabel( $itemId, $request->getLanguageCode() );
 		if ( !$label ) {
 			throw new UseCaseError(
-				UseCaseError::LABEL_NOT_FOUND,
+				UseCaseError::LABEL_NOT_DEFINED,
 				"Item with the ID {$request->getItemId()} does not have a label in the language: {$request->getLanguageCode()}"
 			);
 		}
