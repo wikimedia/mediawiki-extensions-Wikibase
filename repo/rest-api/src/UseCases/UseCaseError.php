@@ -25,7 +25,7 @@ class UseCaseError extends UseCaseException {
 	public const INVALID_PATCH_FIELD_TYPE = 'invalid-patch-field-type';
 	public const MISSING_JSON_PATCH_FIELD = 'missing-json-patch-field';
 	public const ITEM_NOT_FOUND = 'item-not-found';
-	public const LABEL_NOT_FOUND = 'label-not-defined';
+	public const LABEL_NOT_DEFINED = 'label-not-defined';
 	public const ALIAS_NOT_DEFINED = 'alias-not-defined';
 	public const ITEM_REDIRECTED = 'redirected-item';
 	public const PERMISSION_DENIED = 'permission-denied';
