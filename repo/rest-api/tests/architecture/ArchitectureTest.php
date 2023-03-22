@@ -25,11 +25,6 @@ class ArchitectureTest {
 	private const SERIALIZATION = 'Wikibase\Repo\RestApi\Serialization';
 	private const USE_CASES = 'Wikibase\Repo\RestApi\UseCases';
 
-	/**
-	 * Domain models may depend on:
-	 *  - DataModel namespaces containing entities and their parts
-	 *  - other classes from their own namespace
-	 */
 	public function testDomainModel(): Rule {
 		return PHPat::rule()
 			->classes(
@@ -38,64 +33,66 @@ class ArchitectureTest {
 			)
 			->shouldNotDependOn()
 			->classes( Selector::all() )
-			->excluding(
-				Selector::namespace( self::DOMAIN_MODEL ),
-				Selector::namespace( self::DOMAIN_READMODEL ),
-				...$this->dataModelEntityNamespaces(),
-				...$this->phpCoreClasses(),
-			);
+			->excluding( ...$this->allowedDomainModelDependencies() );
 	}
 
 	/**
-	 * Domain services may depend on:
-	 *  - domain models
+	 * Domain models may depend on:
 	 *  - DataModel namespaces containing entities and their parts
-	 *  - some hand-picked DataModel services
 	 *  - other classes from their own namespace
 	 */
+	private function allowedDomainModelDependencies(): array {
+		return [
+			...$this->dataModelEntityNamespaces(),
+			Selector::namespace( self::DOMAIN_MODEL ),
+			Selector::namespace( self::DOMAIN_READMODEL ),
+			...$this->phpCoreClasses(),
+		];
+	}
+
 	public function testDomainServices(): Rule {
 		return PHPat::rule()
 			->classes( Selector::namespace( self::DOMAIN_SERVICES ) )
 			->shouldNotDependOn()
 			->classes( Selector::all() )
-			->excluding(
-				Selector::namespace( self::DOMAIN_MODEL ),
-				Selector::namespace( self::DOMAIN_READMODEL ),
-				Selector::namespace( self::DOMAIN_SERVICES ),
-				Selector::namespace( 'Wikibase\Repo\RestApi\Domain\Exceptions' ), // consider moving into services namespace?
-				...$this->allowedDataModelServices(),
-				...$this->dataModelEntityNamespaces(),
-				...$this->phpCoreClasses(),
-			);
+			->excluding( ...$this->allowedDomainServicesDependencies() );
 	}
 
 	/**
-	 * Use cases may depend on:
-	 *  - validation
-	 *  - serialization
-	 *  - domain services
-	 *  - domain models
-	 *  - DataModel namespaces containing entities and their parts
+	 * Domain services may depend on:
+	 *  - the domain models namespace and everything it depends on
 	 *  - some hand-picked DataModel services
 	 *  - other classes from their own namespace
 	 */
+	private function allowedDomainServicesDependencies(): array {
+		return array_merge( $this->allowedDomainModelDependencies(), [
+			...$this->allowedDataModelServices(),
+			Selector::namespace( 'Wikibase\Repo\RestApi\Domain\Exceptions' ), // consider moving into services namespace?
+			Selector::namespace( self::DOMAIN_SERVICES ),
+		] );
+	}
+
 	public function testUseCases(): Rule {
 		return PHPat::rule()
 			->classes( Selector::namespace( self::USE_CASES ) )
 			->shouldNotDependOn()
 			->classes( Selector::all() )
-			->excluding(
-				Selector::namespace( self::VALIDATION ),
-				Selector::namespace( self::SERIALIZATION ),
-				Selector::namespace( self::USE_CASES ),
-				Selector::namespace( self::DOMAIN_MODEL ),
-				Selector::namespace( self::DOMAIN_READMODEL ),
-				Selector::namespace( self::DOMAIN_SERVICES ),
-				Selector::namespace( 'Wikibase\Repo\RestApi\Domain\Exceptions' ), // consider moving into services namespace?
-				...$this->allowedDataModelServices(),
-				...$this->dataModelEntityNamespaces(),
-				...$this->phpCoreClasses(),
-			);
+			->excluding( ...$this->allowedUseCasesDependencies() );
+	}
+
+	/**
+	 * Use cases may depend on:
+	 *  - the domain services namespace and everything it depends on
+	 *  - validation
+	 *  - serialization
+	 *  - other classes from their own namespace
+	 */
+	private function allowedUseCasesDependencies(): array {
+		return array_merge( $this->allowedDomainServicesDependencies(), [
+			Selector::namespace( self::VALIDATION ),
+			Selector::namespace( self::SERIALIZATION ),
+			Selector::namespace( self::USE_CASES ),
+		] );
 	}
 
 	// TODO validation
