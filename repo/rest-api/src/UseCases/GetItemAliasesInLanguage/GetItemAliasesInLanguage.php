@@ -56,8 +56,8 @@ class GetItemAliasesInLanguage {
 
 		if ( !$aliases ) {
 			throw new UseCaseError(
-				UseCaseError::ALIAS_NOT_DEFINED,
-				"Item with the ID {$request->getItemId()} does not have an alias in the language: {$request->getLanguageCode()}"
+				UseCaseError::ALIASES_NOT_DEFINED,
+				"Item with the ID {$request->getItemId()} does not have aliases in the language: {$request->getLanguageCode()}"
 			);
 		}
 

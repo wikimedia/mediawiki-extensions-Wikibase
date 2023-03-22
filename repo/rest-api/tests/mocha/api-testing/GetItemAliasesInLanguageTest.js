@@ -99,7 +99,7 @@ describe( 'GET /entities/items/{id}/aliases/{language_code}', () => {
 
 		assert.strictEqual( response.status, 404 );
 		assert.header( response, 'Content-Language', 'en' );
-		assert.strictEqual( response.body.code, 'alias-not-defined' );
+		assert.strictEqual( response.body.code, 'aliases-not-defined' );
 		assert.include( response.body.message, languageCode );
 	} );
 } );

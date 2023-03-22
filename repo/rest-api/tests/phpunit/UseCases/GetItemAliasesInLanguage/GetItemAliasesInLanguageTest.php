@@ -114,8 +114,8 @@ class GetItemAliasesInLanguageTest extends TestCase {
 
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::ALIAS_NOT_DEFINED, $e->getErrorCode() );
-			$this->assertSame( 'Item with the ID Q2 does not have an alias in the language: de', $e->getErrorMessage() );
+			$this->assertSame( UseCaseError::ALIASES_NOT_DEFINED, $e->getErrorCode() );
+			$this->assertSame( 'Item with the ID Q2 does not have aliases in the language: de', $e->getErrorMessage() );
 			$this->assertNull( $e->getErrorContext() );
 		}
 	}
