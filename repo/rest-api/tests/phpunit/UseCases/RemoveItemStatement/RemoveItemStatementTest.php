@@ -135,12 +135,12 @@ class RemoveItemStatementTest extends TestCase {
 	public function testRequestedItemNotFound_throwsItemNotFound(): void {
 		$this->revisionMetadataRetriever = $this->newItemMetadataRetriever( LatestItemRevisionMetadataResult::itemNotFound() );
 		try {
-		$this->newUseCase()->execute(
-			$this->newUseCaseRequest( [
-				'$itemId' => 'Q999999',
-				'$statementId' => 'Q999999$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
-			] )
-		);
+			$this->newUseCase()->execute(
+				$this->newUseCaseRequest( [
+					'$itemId' => 'Q999999',
+					'$statementId' => 'Q999999$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+				] )
+			);
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::ITEM_NOT_FOUND, $e->getErrorCode() );
 			$this->assertSame( 'Could not find an item with the ID: Q999999', $e->getErrorMessage() );
