@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Danmichaelo",
+			"EdoAug",
 			"Jon Harald Søby"
 		]
 	},
@@ -111,9 +112,9 @@
 	"apihelp-wbmergeitems-param-ignoreconflicts": "Tabell over elementer av det gitte elementet konflikter skal ignoreres for, kan kun inneholde verdier for «<var>description</var>» og/eller «<var>sitelink</var>» og/eller «<var>statement</var>»",
 	"apihelp-wbmergeitems-param-summary": "Sammendrag for redigeringen.\nVil legges til en automatisk generert kommentar. Lengdebegrensningen for den automatiske kommentaren sammen med dette sammendraget er 260 tegn. Vær oppmerksom på at alt over den grensa vil kuttes vekk.",
 	"apihelp-wbmergeitems-param-bot": "Merk denne redigeringen som en botredigering. Dette URL-flagget vil bare respekteres om brukeren tilhører brukergruppa «bot».",
-	"apihelp-wbmergeitems-example-1": "Slår sammen data fra <samp>Q42</samp> til <samp>Q222</samp>",
+	"apihelp-wbmergeitems-example-1": "Fletter sammen data fra <samp>$1</samp> til <samp>$2</samp>",
 	"apihelp-wbmergeitems-example-3": "Slår sammen data fra <samp>Q66</samp> til <samp>Q99</samp> og ignorerer konflikterende sidelenker",
-	"apihelp-wbmergeitems-example-4": "Slår sammen data fra <samp>Q66</samp> til <samp>Q99</samp> og ignorerer konflikterende sidelenker og beskrivelser",
+	"apihelp-wbmergeitems-example-4": "Fletter sammen data fra <samp>$1</samp> til <samp>$2</samp> og ignorerer konfliktfylte sidelenker og beskrivelser",
 	"apihelp-wbparsevalue-description": "Parser verdier med en <code>ValueParser</code>.",
 	"apihelp-wbparsevalue-summary": "Parser verdier med en <code>ValueParser</code>.",
 	"apihelp-wbparsevalue-param-parser": "ID fra <code>ValueParser</code> som brukes. <span class=\"apihelp-deprecated\">Avskrevet</span>. Bruk heller parameteren <var>datatype</var>.",
