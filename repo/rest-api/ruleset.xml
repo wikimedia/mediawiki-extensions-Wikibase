@@ -4,6 +4,7 @@
 		config, from which it is loaded. -->
 
 	<rule ref="Generic.PHP.RequireStrictTypes" />
+	<rule ref="Generic.WhiteSpace.ScopeIndent" />
 	<rule ref="Generic.Arrays.ArrayIndent" />
 	<rule ref="PEAR.Functions.FunctionCallSignature.Indent" />
 	<rule ref="Squiz.Strings.DoubleQuoteUsage">
