@@ -21,8 +21,8 @@ class ArchitectureTest {
 	private const DOMAIN_MODEL = 'Wikibase\Repo\RestApi\Domain\Model';
 	private const DOMAIN_READMODEL = 'Wikibase\Repo\RestApi\Domain\ReadModel';
 	private const DOMAIN_SERVICES = 'Wikibase\Repo\RestApi\Domain\Services';
-	private const VALIDATION = 'Wikibase\Repo\RestApi\Validation';
 	private const SERIALIZATION = 'Wikibase\Repo\RestApi\Serialization';
+	private const VALIDATION = 'Wikibase\Repo\RestApi\Validation';
 	private const USE_CASES = 'Wikibase\Repo\RestApi\UseCases';
 
 	public function testDomainModel(): Rule {
@@ -71,6 +71,27 @@ class ArchitectureTest {
 		] );
 	}
 
+	public function testSerialization(): Rule {
+		return PHPat::rule()
+			->classes( Selector::namespace( self::SERIALIZATION ) )
+			->shouldNotDependOn()
+			->classes( Selector::all() )
+			->excluding( ...$this->allowedSerializationDependencies() );
+	}
+
+	/**
+	 * Serialization may depend on:
+	 *  - the domain services namespace and everything it depends on
+	 *  - the DataValues namespace
+	 *  - other classes from its own namespace
+	 */
+	private function allowedSerializationDependencies(): array {
+		return array_merge( $this->allowedDomainServicesDependencies(), [
+			Selector::namespace( 'DataValues' ),
+			Selector::namespace( self::SERIALIZATION ),
+		] );
+	}
+
 	public function testUseCases(): Rule {
 		return PHPat::rule()
 			->classes( Selector::namespace( self::USE_CASES ) )
@@ -81,22 +102,18 @@ class ArchitectureTest {
 
 	/**
 	 * Use cases may depend on:
-	 *  - the domain services namespace and everything it depends on
+	 *  - the serialization namespace and everything it depends on
 	 *  - validation
-	 *  - serialization
 	 *  - other classes from their own namespace
 	 */
 	private function allowedUseCasesDependencies(): array {
-		return array_merge( $this->allowedDomainServicesDependencies(), [
+		return array_merge( $this->allowedSerializationDependencies(), [
 			Selector::namespace( self::VALIDATION ),
-			Selector::namespace( self::SERIALIZATION ),
 			Selector::namespace( self::USE_CASES ),
 		] );
 	}
 
 	// TODO validation
-
-	// TODO serialization
 
 	// TODO presentation
 
@@ -132,6 +149,7 @@ class ArchitectureTest {
 		return [
 			Selector::classname( ArrayObject::class ),
 			Selector::classname( ArrayIterator::class ),
+			Selector::classname( \Throwable::class ),
 			Selector::classname( '/^\w*Exception$/', true ),
 		];
 	}
