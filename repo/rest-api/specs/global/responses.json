@@ -139,8 +139,8 @@
 					"item-not-found": {
 						"$ref": "./examples.json#/ItemNotFoundExample"
 					},
-					"alias-not-defined": {
-						"$ref": "./examples.json#/ItemAliasNotDefinedExample"
+					"aliases-not-defined": {
+						"$ref": "./examples.json#/ItemAliasesNotDefinedExample"
 					}
 				}
 			}

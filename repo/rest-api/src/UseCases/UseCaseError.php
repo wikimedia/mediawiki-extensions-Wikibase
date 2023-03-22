@@ -26,7 +26,7 @@ class UseCaseError extends UseCaseException {
 	public const MISSING_JSON_PATCH_FIELD = 'missing-json-patch-field';
 	public const ITEM_NOT_FOUND = 'item-not-found';
 	public const LABEL_NOT_DEFINED = 'label-not-defined';
-	public const ALIAS_NOT_DEFINED = 'alias-not-defined';
+	public const ALIASES_NOT_DEFINED = 'aliases-not-defined';
 	public const ITEM_REDIRECTED = 'redirected-item';
 	public const PERMISSION_DENIED = 'permission-denied';
 	public const STATEMENT_DATA_INVALID_FIELD = 'statement-data-invalid-field';
