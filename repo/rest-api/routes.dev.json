@@ -1,17 +1,3 @@
 [
-	{
-		"path": "/wikibase/v0/entities/items/{item_id}/aliases/{language_code}",
-		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetItemAliasesInLanguageRouteHandler::factory"
-	},
-	{
-		"path": "/wikibase/v0/entities/items/{item_id}/labels/{language_code}",
-		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetItemLabelRouteHandler::factory"
-	},
-	{
-		"path": "/wikibase/v0/entities/items/{item_id}/descriptions/{language_code}",
-		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetItemDescriptionRouteHandler::factory"
-	}
+
 ]
