@@ -111,6 +111,7 @@ class RecentChangeFactory {
 			'rc_comment_data' => null,
 		];
 
+		// @phan-suppress-next-line SecurityCheck-DoubleEscaped
 		$rc = RecentChange::newFromRow( (object)$attribs );
 		$rc->setExtra( [ 'pageStatus' => 'changed' ] );
 
