@@ -6,8 +6,8 @@ use Exception;
 use Generator;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\RestApi\Domain\Exceptions\PatchPathException;
-use Wikibase\Repo\RestApi\Domain\Exceptions\PatchTestConditionFailedException;
+use Wikibase\Repo\RestApi\Domain\Services\Exceptions\PatchPathException;
+use Wikibase\Repo\RestApi\Domain\Services\Exceptions\PatchTestConditionFailedException;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 
 /**

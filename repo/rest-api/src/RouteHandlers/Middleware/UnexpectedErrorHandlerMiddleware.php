@@ -7,7 +7,7 @@ use MediaWiki\Rest\Reporter\ErrorReporter;
 use MediaWiki\Rest\Response;
 use Psr\Log\LoggerInterface;
 use Throwable;
-use Wikibase\Repo\RestApi\Domain\Services\ItemUpdatePrevented;
+use Wikibase\Repo\RestApi\Domain\Services\Exceptions\ItemUpdatePrevented;
 use Wikibase\Repo\RestApi\RouteHandlers\ResponseFactory;
 use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 

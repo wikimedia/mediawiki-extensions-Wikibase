@@ -7,8 +7,8 @@ use InvalidArgumentException;
 use Swaggest\JsonDiff\JsonPatch;
 use Swaggest\JsonDiff\PatchTestOperationFailedException;
 use Swaggest\JsonDiff\PathException;
-use Wikibase\Repo\RestApi\Domain\Exceptions\PatchPathException;
-use Wikibase\Repo\RestApi\Domain\Exceptions\PatchTestConditionFailedException;
+use Wikibase\Repo\RestApi\Domain\Services\Exceptions\PatchPathException;
+use Wikibase\Repo\RestApi\Domain\Services\Exceptions\PatchTestConditionFailedException;
 use Wikibase\Repo\RestApi\Domain\Services\JsonPatcher;
 
 /**

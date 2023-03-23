@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\RestApi\Domain\Services;
 
 use InvalidArgumentException;
-use Wikibase\Repo\RestApi\Domain\Exceptions\PatchPathException;
-use Wikibase\Repo\RestApi\Domain\Exceptions\PatchTestConditionFailedException;
+use Wikibase\Repo\RestApi\Domain\Services\Exceptions\PatchPathException;
+use Wikibase\Repo\RestApi\Domain\Services\Exceptions\PatchTestConditionFailedException;
 
 /**
  * @license GPL-2.0-or-later

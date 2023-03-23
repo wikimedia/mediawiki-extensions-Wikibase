@@ -67,7 +67,6 @@ class ArchitectureTest {
 	private function allowedDomainServicesDependencies(): array {
 		return array_merge( $this->allowedDomainModelDependencies(), [
 			...$this->allowedDataModelServices(),
-			Selector::namespace( 'Wikibase\Repo\RestApi\Domain\Exceptions' ), // consider moving into services namespace?
 			Selector::namespace( self::DOMAIN_SERVICES ),
 		] );
 	}
