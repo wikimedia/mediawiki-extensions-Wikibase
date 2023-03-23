@@ -228,8 +228,8 @@
 		var $div = $( '<div>' ).addClass( 'my-class' );
 		$div.applyTemplate( templateName );
 
-		assert.assertTrue( $div.hasClass( 'my-class' ) );
-		assert.assertTrue( $div.hasClass( 'class-from-template' ) );
+		assert.true( $div.hasClass( 'my-class' ) );
+		assert.true( $div.hasClass( 'class-from-template' ) );
 	} );
 
 	QUnit.test(
