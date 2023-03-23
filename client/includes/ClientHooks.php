@@ -111,6 +111,7 @@ final class ClientHooks {
 
 			return [
 				'id' => 't-wikibase',
+				'icon' => 'wikidata',
 				'text' => $skin->msg( 'wikibase-dataitem' )->text(),
 				'href' => $repoLinker->getEntityUrl( $entityId ),
 			];
