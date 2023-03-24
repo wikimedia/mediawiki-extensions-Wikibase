@@ -16,6 +16,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyValuePair;
 use Wikibase\Repo\RestApi\Serialization\PropertyValuePairSerializer;
 
 /**
@@ -35,16 +36,25 @@ class PropertyValuePairSerializerTest extends TestCase {
 	/**
 	 * @dataProvider serializationProvider
 	 */
-	public function testSerialize( Snak $snak, array $expectedSerialization ): void {
+	public function testSerialize( Snak $snak, PropertyValuePair $propertyValuePair, array $expectedSerialization ): void {
 		$this->assertEquals(
 			$expectedSerialization,
-			$this->newSerializer()->serialize( $snak )
+			$this->newSerializer()->serializeSnak( $snak )
+		);
+		$this->assertEquals(
+			$expectedSerialization,
+			$this->newSerializer()->serialize( $propertyValuePair )
 		);
 	}
 
 	public function serializationProvider(): Generator {
 		yield 'no value for string prop' => [
 			new PropertyNoValueSnak( new NumericPropertyId( self::STRING_PROPERTY_ID ) ),
+			new PropertyValuePair(
+				new NumericPropertyId( self::STRING_PROPERTY_ID ),
+				'string',
+				PropertyValuePair::TYPE_NO_VALUE
+			),
 			[
 				'value' => [ 'type' => 'novalue' ],
 				'property' => [
@@ -56,6 +66,11 @@ class PropertyValuePairSerializerTest extends TestCase {
 
 		yield 'some value for item id prop' => [
 			new PropertySomeValueSnak( new NumericPropertyId( self::ITEM_ID_PROPERTY_ID ) ),
+			new PropertyValuePair(
+				new NumericPropertyId( self::ITEM_ID_PROPERTY_ID ),
+				'wikibase-item',
+				PropertyValuePair::TYPE_SOME_VALUE
+			),
 			[
 				'value' => [ 'type' => 'somevalue' ],
 				'property' => [
@@ -68,6 +83,12 @@ class PropertyValuePairSerializerTest extends TestCase {
 		yield 'string value' => [
 			new PropertyValueSnak(
 				new NumericPropertyId( self::STRING_PROPERTY_ID ),
+				new StringValue( 'potato' )
+			),
+			new PropertyValuePair(
+				new NumericPropertyId( self::STRING_PROPERTY_ID ),
+				'string',
+				PropertyValuePair::TYPE_VALUE,
 				new StringValue( 'potato' )
 			),
 			[
@@ -87,6 +108,12 @@ class PropertyValuePairSerializerTest extends TestCase {
 				new NumericPropertyId( self::ITEM_ID_PROPERTY_ID ),
 				new EntityIdValue( new ItemId( 'Q123' ) )
 			),
+			new PropertyValuePair(
+				new NumericPropertyId( self::ITEM_ID_PROPERTY_ID ),
+				'wikibase-item',
+				PropertyValuePair::TYPE_VALUE,
+				new EntityIdValue( new ItemId( 'Q123' ) )
+			),
 			[
 				'value' => [
 					'type' => 'value',
@@ -104,6 +131,12 @@ class PropertyValuePairSerializerTest extends TestCase {
 		yield 'time value' => [
 			new PropertyValueSnak(
 				new NumericPropertyId( self::TIME_PROPERTY_ID ),
+				new TimeValue( $timestamp, 0, 0, 0, TimeValue::PRECISION_DAY, $calendar )
+			),
+			new PropertyValuePair(
+				new NumericPropertyId( self::TIME_PROPERTY_ID ),
+				'time',
+				PropertyValuePair::TYPE_VALUE,
 				new TimeValue( $timestamp, 0, 0, 0, TimeValue::PRECISION_DAY, $calendar )
 			),
 			[
@@ -127,6 +160,12 @@ class PropertyValuePairSerializerTest extends TestCase {
 				new NumericPropertyId( self::GLOBECOORDINATE_PROPERTY_ID ),
 				new GlobeCoordinateValue( new LatLongValue( 52.0, 13.0 ), 1 )
 			),
+			new PropertyValuePair(
+				new NumericPropertyId( self::GLOBECOORDINATE_PROPERTY_ID ),
+				'globe-coordinate',
+				PropertyValuePair::TYPE_VALUE,
+				new GlobeCoordinateValue( new LatLongValue( 52.0, 13.0 ), 1 )
+			),
 			[
 				'value' => [
 					'type' => 'value',
@@ -146,6 +185,11 @@ class PropertyValuePairSerializerTest extends TestCase {
 
 		yield 'null data type for some property value' => [
 			new PropertySomeValueSnak( new NumericPropertyId( self::DELETED_PROPERTY_ID ) ),
+			new PropertyValuePair(
+				new NumericPropertyId( self::DELETED_PROPERTY_ID ),
+				null,
+				PropertyValuePair::TYPE_SOME_VALUE
+			),
 			[
 				'value' => [ 'type' => 'somevalue' ],
 				'property' => [
