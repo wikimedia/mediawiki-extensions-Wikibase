@@ -10,6 +10,7 @@ use PHPat\Test\PHPat;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
+use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 
 /**
  * @coversNothing
@@ -92,6 +93,25 @@ class ArchitectureTest {
 		] );
 	}
 
+	public function testValidation(): Rule {
+		return PHPat::rule()
+			->classes( Selector::namespace( self::VALIDATION ) )
+			->shouldNotDependOn()
+			->classes( Selector::all() )
+			->excluding( ...$this->allowedValidationDependencies() );
+	}
+
+	/**
+	 * Validation may depend on:
+	 *  - the serialization namespace and everything it depends on
+	 *  - other classes from its own namespace
+	 */
+	private function allowedValidationDependencies(): array {
+		return array_merge( $this->allowedSerializationDependencies(), [
+			Selector::namespace( self::VALIDATION ),
+		] );
+	}
+
 	public function testUseCases(): Rule {
 		return PHPat::rule()
 			->classes( Selector::namespace( self::USE_CASES ) )
@@ -102,18 +122,14 @@ class ArchitectureTest {
 
 	/**
 	 * Use cases may depend on:
-	 *  - the serialization namespace and everything it depends on
-	 *  - validation
+	 *  - the validation namespace and everything it depends on
 	 *  - other classes from their own namespace
 	 */
 	private function allowedUseCasesDependencies(): array {
-		return array_merge( $this->allowedSerializationDependencies(), [
-			Selector::namespace( self::VALIDATION ),
+		return array_merge( $this->allowedValidationDependencies(), [
 			Selector::namespace( self::USE_CASES ),
 		] );
 	}
-
-	// TODO validation
 
 	// TODO presentation
 
@@ -121,6 +137,7 @@ class ArchitectureTest {
 		return [
 			Selector::classname( PropertyDataTypeLookup::class ),
 			Selector::classname( StatementGuidParser::class ),
+			Selector::classname( StatementGuidValidator::class ),
 			Selector::classname( GuidGenerator::class ),
 		];
 	}
