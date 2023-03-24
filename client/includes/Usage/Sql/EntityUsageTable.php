@@ -20,6 +20,7 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\Rdbms\ClientDomainDb;
 use Wikimedia\Rdbms\DBUnexpectedError;
 use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\Platform\ISQLPlatform;
 
 /**
  * Helper class for updating the wbc_entity_usage table.
@@ -471,7 +472,7 @@ class EntityUsageTable {
 		// On MySQL we can UNION up queries and run them at once
 		foreach ( array_chunk( $subQueries, $this->batchSize ) as $queryChunks ) {
 			$sql = $readConnection->unionQueries( $queryChunks, true );
-			$res = $readConnection->query( $sql, __METHOD__ );
+			$res = $readConnection->query( $sql, __METHOD__, ISQLPlatform::QUERY_CHANGE_NONE );
 			foreach ( $res as $row ) {
 				$values[] = $row->eu_entity_id;
 			}
