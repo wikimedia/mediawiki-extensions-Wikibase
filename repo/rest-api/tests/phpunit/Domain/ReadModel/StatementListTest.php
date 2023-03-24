@@ -7,8 +7,8 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
-use Wikibase\DataModel\Statement\Statement as DataModelStatement;
 use Wikibase\DataModel\Statement\StatementGuid;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Rank;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 
@@ -44,7 +44,7 @@ class StatementListTest extends TestCase {
 	private function newStatementWithId( StatementGuid $id ): Statement {
 		return new Statement(
 			$id,
-			DataModelStatement::RANK_NORMAL,
+			Rank::normal(),
 			$this->createStub( Snak::class ),
 			new SnakList(),
 			new ReferenceList()

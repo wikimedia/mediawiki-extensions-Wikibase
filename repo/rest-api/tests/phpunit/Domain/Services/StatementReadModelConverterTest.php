@@ -28,7 +28,7 @@ class StatementReadModelConverterTest extends TestCase {
 			->convert( $dataModelStatement );
 
 		$this->assertEquals( $id, $readModel->getGuid() );
-		$this->assertSame( $dataModelStatement->getRank(), $readModel->getRank() );
+		$this->assertSame( $dataModelStatement->getRank(), $readModel->getRank()->asInt() );
 		$this->assertSame( $dataModelStatement->getMainSnak(), $readModel->getMainSnak() );
 		$this->assertSame( $dataModelStatement->getQualifiers(), $readModel->getQualifiers() );
 		$this->assertSame( $dataModelStatement->getReferences(), $readModel->getReferences() );

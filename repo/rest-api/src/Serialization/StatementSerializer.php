@@ -29,7 +29,7 @@ class StatementSerializer {
 		return array_merge(
 			[
 				'id' => (string)$statement->getGuid(),
-				'rank' => self::RANK_LABELS[ $statement->getRank() ],
+				'rank' => self::RANK_LABELS[ $statement->getRank()->asInt() ],
 				'qualifiers' => array_map(
 					fn( Snak $qualifier ) => $this->propertyValuePairSerializer->serialize( $qualifier ),
 					iterator_to_array( $statement->getQualifiers() )
