@@ -87,7 +87,6 @@ class ArchitectureTest {
 	 */
 	private function allowedSerializationDependencies(): array {
 		return array_merge( $this->allowedDomainServicesDependencies(), [
-			Selector::namespace( 'DataValues' ),
 			Selector::namespace( self::SERIALIZATION ),
 		] );
 	}
@@ -125,24 +124,25 @@ class ArchitectureTest {
 		];
 	}
 
-	/**
-	 * These are listed in such a complicated way so that only DataModel entities and their parts are allowed without the
-	 * namespaces nested within DataModel like e.g. Wikibase\DataModel\Serializers.
-	 */
 	private function dataModelEntityNamespaces(): array {
-		return array_map(
-			fn( string $escapedNamespace ) => Selector::classname(
-				'/^' . preg_quote( $escapedNamespace ) . '\\\\\w+$/',
-				true
+		return [
+			// These are listed in such a complicated way so that only DataModel entities and their parts are allowed without the
+			// namespaces nested within DataModel like e.g. Wikibase\DataModel\Serializers.
+			...array_map(
+				fn( string $escapedNamespace ) => Selector::classname(
+					'/^' . preg_quote( $escapedNamespace ) . '\\\\\w+$/',
+					true
+				),
+				[
+					'Wikibase\DataModel',
+					'Wikibase\DataModel\Entity',
+					'Wikibase\DataModel\Snak',
+					'Wikibase\DataModel\Statement',
+					'Wikibase\DataModel\Term',
+				]
 			),
-			[
-				'Wikibase\DataModel',
-				'Wikibase\DataModel\Entity',
-				'Wikibase\DataModel\Snak',
-				'Wikibase\DataModel\Statement',
-				'Wikibase\DataModel\Term',
-			]
-		);
+			Selector::namespace( 'DataValues' ),
+		];
 	}
 
 	private function phpCoreClasses(): array {
