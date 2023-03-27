@@ -20,7 +20,7 @@ class ReferenceSerializer {
 		return [
 			'hash' => $reference->getHash(),
 			'parts' => array_map(
-				fn( Snak $part ) => $this->propertyValuePairSerializer->serialize( $part ),
+				fn( Snak $part ) => $this->propertyValuePairSerializer->serializeSnak( $part ),
 				iterator_to_array( $reference->getSnaks() )
 			),
 		];

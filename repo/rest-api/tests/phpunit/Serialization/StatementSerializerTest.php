@@ -114,7 +114,7 @@ class StatementSerializerTest extends TestCase {
 
 	private function newSerializer(): StatementSerializer {
 		$propertyValuePairSerializer = $this->createStub( PropertyValuePairSerializer::class );
-		$propertyValuePairSerializer->method( 'serialize' )
+		$propertyValuePairSerializer->method( 'serializeSnak' )
 			->willReturnCallback(
 				fn( Snak $snak ) => [
 					'property' => $snak->getPropertyId() . ' property',

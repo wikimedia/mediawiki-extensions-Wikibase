@@ -2,10 +2,12 @@
 
 namespace Wikibase\Repo\RestApi\Serialization;
 
+use DataValues\DataValue;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyValuePair;
 
 /**
  * @license GPL-2.0-or-later
@@ -18,7 +20,25 @@ class PropertyValuePairSerializer {
 		$this->dataTypeLookup = $dataTypeLookup;
 	}
 
-	public function serialize( Snak $snak ): array {
+	public function serialize( PropertyValuePair $propertyValuePair ): array {
+		$serialization = [
+			'property' => [
+				'id' => $propertyValuePair->getPropertyId()->getSerialization(),
+				'data-type' => $propertyValuePair->getPropertyDataType(),
+			],
+			'value' => [
+				'type' => $propertyValuePair->getValueType(),
+			],
+		];
+
+		if ( $propertyValuePair->getValueType() === PropertyValuePair::TYPE_VALUE ) {
+			$serialization['value']['content'] = $this->serializeValueContent( $propertyValuePair->getValue() );
+		}
+
+		return $serialization;
+	}
+
+	public function serializeSnak( Snak $snak ): array {
 		$propertyId = $snak->getPropertyId();
 
 		try {
@@ -38,24 +58,31 @@ class PropertyValuePairSerializer {
 		];
 
 		if ( $snak instanceof PropertyValueSnak ) {
-			$content = $snak->getDataValue()->getArrayValue();
-			switch ( $snak->getDataValue()->getType() ) {
-				case 'wikibase-entityid':
-					$content = $content['id'];
-					break;
-				case 'time':
-					foreach ( [ 'before', 'after', 'timezone' ] as $key ) {
-						unset( $content[$key] );
-					}
-					break;
-				case 'globecoordinate':
-					unset( $content['altitude'] );
-					break;
-			}
-			$propertyValuePair['value']['content'] = $content;
+			$propertyValuePair['value']['content'] = $this->serializeValueContent( $snak->getDataValue() );
 		}
 
 		return $propertyValuePair;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	private function serializeValueContent( DataValue $value ) {
+		$content = $value->getArrayValue();
+		switch ( $value->getType() ) {
+			case 'wikibase-entityid':
+				return $content['id'];
+			case 'time':
+				foreach ( [ 'before', 'after', 'timezone' ] as $key ) {
+					unset( $content[$key] );
+				}
+				break;
+			case 'globecoordinate':
+				unset( $content['altitude'] );
+				break;
+		}
+
+		return $content;
 	}
 
 }

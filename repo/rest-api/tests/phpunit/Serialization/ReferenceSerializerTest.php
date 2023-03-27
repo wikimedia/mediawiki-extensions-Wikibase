@@ -62,7 +62,7 @@ class ReferenceSerializerTest extends TestCase {
 
 	private function newSerializer(): ReferenceSerializer {
 		$propertyValuePairSerializer = $this->createStub( PropertyValuePairSerializer::class );
-		$propertyValuePairSerializer->method( 'serialize' )
+		$propertyValuePairSerializer->method( 'serializeSnak' )
 			->willReturnCallback(
 				fn( Snak $snak ) => [
 					'property' => $snak->getPropertyId() . ' property',

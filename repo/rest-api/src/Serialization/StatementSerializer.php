@@ -31,7 +31,7 @@ class StatementSerializer {
 				'id' => (string)$statement->getGuid(),
 				'rank' => self::RANK_LABELS[ $statement->getRank() ],
 				'qualifiers' => array_map(
-					fn( Snak $qualifier ) => $this->propertyValuePairSerializer->serialize( $qualifier ),
+					fn( Snak $qualifier ) => $this->propertyValuePairSerializer->serializeSnak( $qualifier ),
 					iterator_to_array( $statement->getQualifiers() )
 				),
 				'references' => array_map(
@@ -39,7 +39,7 @@ class StatementSerializer {
 					iterator_to_array( $statement->getReferences() )
 				),
 			],
-			$this->propertyValuePairSerializer->serialize( $statement->getMainSnak() )
+			$this->propertyValuePairSerializer->serializeSnak( $statement->getMainSnak() )
 		);
 	}
 
