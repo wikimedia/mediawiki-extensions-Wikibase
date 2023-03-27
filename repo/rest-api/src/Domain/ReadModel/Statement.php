@@ -13,14 +13,14 @@ use Wikibase\DataModel\Statement\StatementGuid;
 class Statement {
 
 	private StatementGuid $guid;
-	private int $rank;
+	private Rank $rank;
 	private Snak $mainSnak;
 	private SnakList $qualifiers;
 	private ReferenceList $references;
 
 	public function __construct(
 		StatementGuid $guid,
-		int $rank,
+		Rank $rank,
 		Snak $mainSnak,
 		SnakList $qualifiers,
 		ReferenceList $references
@@ -36,7 +36,7 @@ class Statement {
 		return $this->guid;
 	}
 
-	public function getRank(): int {
+	public function getRank(): Rank {
 		return $this->rank;
 	}
 

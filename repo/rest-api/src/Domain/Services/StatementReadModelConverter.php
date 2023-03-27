@@ -4,6 +4,7 @@ namespace Wikibase\Repo\RestApi\Domain\Services;
 
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Statement\Statement as DataModelStatement;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Rank;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Statement as ReadModelStatement;
 
 /**
@@ -20,7 +21,7 @@ class StatementReadModelConverter {
 	public function convert( DataModelStatement $inputStatement ): ReadModelStatement {
 		return new ReadModelStatement(
 			$this->statementIdParser->parse( $inputStatement->getGuid() ),
-			$inputStatement->getRank(),
+			new Rank( $inputStatement->getRank() ),
 			$inputStatement->getMainSnak(),
 			$inputStatement->getQualifiers(),
 			$inputStatement->getReferences()
