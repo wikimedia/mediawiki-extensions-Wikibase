@@ -34,6 +34,9 @@
 	"wikibase-setlabeldescriptionaliases-label-label": "Namma:",
 	"wikibase-modifyterm-language": "Giellakoda:",
 	"wikibase-listdatatypes-wikibase-property-head": "Iešvuohta",
+	"wikibase-listdatatypes-string-head": "Streaŋga",
+	"wikibase-listdatatypes-url-head": "URL",
+	"datatypes-type-url": "URL",
 	"wikibase-federated-properties-leaving-site-notice-cancel": "Šluhtte",
 	"wikibase-federated-properties-leaving-site-notice-checkbox-label": "Ale čájet dán dieđu fas",
 	"wikibase-federated-properties-edit-request-failed-notice-try-again": "Geahččal fas"

@@ -13,7 +13,8 @@
 			"Daud I.F. Argana",
 			"RXerself",
 			"Rachmat04",
-			"Veracious"
+			"Veracious",
+			"Agam Riyandana"
 		]
 	},
 	"wikibase-client-desc": "Klien untuk ekstensi Wikibase",
@@ -135,7 +136,7 @@
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "Masuk log atau Buat akun",
 	"wikibase-client-data-bridge-license-heading": "Penggunaan dan lisensi",
 	"wikibase-client-data-bridge-bailout-heading": "Sebagai gantinya, Anda dapat melakukan hal berikut:",
-	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "Sunting nilai di {{WBREPONAME}}",
+	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "Edit nilai pada {{WBREPONAME}}",
 	"wikibase-client-data-bridge-saving-error-heading": "Tidak dapat menyimpan perubahan",
 	"wikibase-client-data-bridge-edit-conflict-error-heading": "Konflik penyuntingan terdeteksi",
 	"wikibase-client-data-bridge-edit-conflict-error-message": "Pengguna lain baru saja menyunting nilai ini dan memublikasikan perubahannya terlebih dahulu. Perubahan Anda tak dapat diterapkan. Muat ulang halaman untuk mengambil nilai baru.",
