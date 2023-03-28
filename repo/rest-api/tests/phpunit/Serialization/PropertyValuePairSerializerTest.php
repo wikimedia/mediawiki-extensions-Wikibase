@@ -16,7 +16,9 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Property;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyValuePair;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Value;
 use Wikibase\Repo\RestApi\Serialization\PropertyValuePairSerializer;
 
 /**
@@ -51,9 +53,11 @@ class PropertyValuePairSerializerTest extends TestCase {
 		yield 'no value for string prop' => [
 			new PropertyNoValueSnak( new NumericPropertyId( self::STRING_PROPERTY_ID ) ),
 			new PropertyValuePair(
-				new NumericPropertyId( self::STRING_PROPERTY_ID ),
-				'string',
-				PropertyValuePair::TYPE_NO_VALUE
+				new Property(
+					new NumericPropertyId( self::STRING_PROPERTY_ID ),
+					'string'
+				),
+				new Value( Value::TYPE_NO_VALUE )
 			),
 			[
 				'value' => [ 'type' => 'novalue' ],
@@ -67,9 +71,11 @@ class PropertyValuePairSerializerTest extends TestCase {
 		yield 'some value for item id prop' => [
 			new PropertySomeValueSnak( new NumericPropertyId( self::ITEM_ID_PROPERTY_ID ) ),
 			new PropertyValuePair(
-				new NumericPropertyId( self::ITEM_ID_PROPERTY_ID ),
-				'wikibase-item',
-				PropertyValuePair::TYPE_SOME_VALUE
+				new Property(
+					new NumericPropertyId( self::ITEM_ID_PROPERTY_ID ),
+					'wikibase-item'
+				),
+				new Value( Value::TYPE_SOME_VALUE )
 			),
 			[
 				'value' => [ 'type' => 'somevalue' ],
@@ -86,10 +92,14 @@ class PropertyValuePairSerializerTest extends TestCase {
 				new StringValue( 'potato' )
 			),
 			new PropertyValuePair(
-				new NumericPropertyId( self::STRING_PROPERTY_ID ),
-				'string',
-				PropertyValuePair::TYPE_VALUE,
-				new StringValue( 'potato' )
+				new Property(
+					new NumericPropertyId( self::STRING_PROPERTY_ID ),
+					'string'
+				),
+				new Value(
+					Value::TYPE_VALUE,
+					new StringValue( 'potato' )
+				)
 			),
 			[
 				'value' => [
@@ -109,10 +119,14 @@ class PropertyValuePairSerializerTest extends TestCase {
 				new EntityIdValue( new ItemId( 'Q123' ) )
 			),
 			new PropertyValuePair(
-				new NumericPropertyId( self::ITEM_ID_PROPERTY_ID ),
-				'wikibase-item',
-				PropertyValuePair::TYPE_VALUE,
-				new EntityIdValue( new ItemId( 'Q123' ) )
+				new Property(
+					new NumericPropertyId( self::ITEM_ID_PROPERTY_ID ),
+					'wikibase-item'
+				),
+				new Value(
+					Value::TYPE_VALUE,
+					new EntityIdValue( new ItemId( 'Q123' ) )
+				)
 			),
 			[
 				'value' => [
@@ -134,10 +148,14 @@ class PropertyValuePairSerializerTest extends TestCase {
 				new TimeValue( $timestamp, 0, 0, 0, TimeValue::PRECISION_DAY, $calendar )
 			),
 			new PropertyValuePair(
-				new NumericPropertyId( self::TIME_PROPERTY_ID ),
-				'time',
-				PropertyValuePair::TYPE_VALUE,
-				new TimeValue( $timestamp, 0, 0, 0, TimeValue::PRECISION_DAY, $calendar )
+				new Property(
+					new NumericPropertyId( self::TIME_PROPERTY_ID ),
+					'time'
+				),
+				new Value(
+					Value::TYPE_VALUE,
+					new TimeValue( $timestamp, 0, 0, 0, TimeValue::PRECISION_DAY, $calendar )
+				)
 			),
 			[
 				'value' => [
@@ -161,10 +179,14 @@ class PropertyValuePairSerializerTest extends TestCase {
 				new GlobeCoordinateValue( new LatLongValue( 52.0, 13.0 ), 1 )
 			),
 			new PropertyValuePair(
-				new NumericPropertyId( self::GLOBECOORDINATE_PROPERTY_ID ),
-				'globe-coordinate',
-				PropertyValuePair::TYPE_VALUE,
-				new GlobeCoordinateValue( new LatLongValue( 52.0, 13.0 ), 1 )
+				new Property(
+					new NumericPropertyId( self::GLOBECOORDINATE_PROPERTY_ID ),
+					'globe-coordinate'
+				),
+				new Value(
+					Value::TYPE_VALUE,
+					new GlobeCoordinateValue( new LatLongValue( 52.0, 13.0 ), 1 )
+				)
 			),
 			[
 				'value' => [
@@ -186,9 +208,11 @@ class PropertyValuePairSerializerTest extends TestCase {
 		yield 'null data type for some property value' => [
 			new PropertySomeValueSnak( new NumericPropertyId( self::DELETED_PROPERTY_ID ) ),
 			new PropertyValuePair(
-				new NumericPropertyId( self::DELETED_PROPERTY_ID ),
-				null,
-				PropertyValuePair::TYPE_SOME_VALUE
+				new Property(
+					new NumericPropertyId( self::DELETED_PROPERTY_ID ),
+					null
+				),
+				new Value( Value::TYPE_SOME_VALUE )
 			),
 			[
 				'value' => [ 'type' => 'somevalue' ],
