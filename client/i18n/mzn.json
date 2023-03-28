@@ -14,5 +14,6 @@
 	"wikibase-rc-hide-wikidata-show": "سِراق هاده",
 	"wikibase-rc-wikibase-edit-letter": "د",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} دچی‌یه",
-	"wikibase-otherprojects": "دیگه پروژه‌ئون"
+	"wikibase-otherprojects": "دیگه پروژه‌ئون",
+	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "ونه پارامتر ره {{WBREPONAME}} دله دچی‌ین"
 }
