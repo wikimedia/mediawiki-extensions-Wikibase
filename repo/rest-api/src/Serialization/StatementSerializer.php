@@ -5,6 +5,7 @@ namespace Wikibase\Repo\RestApi\Serialization;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement as DataModelStatement;
+use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyValuePair;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
 
 /**
@@ -39,7 +40,7 @@ class StatementSerializer {
 					iterator_to_array( $statement->getReferences() )
 				),
 			],
-			$this->propertyValuePairSerializer->serializeSnak( $statement->getMainSnak() )
+			$this->propertyValuePairSerializer->serialize( new PropertyValuePair( $statement->getProperty(), $statement->getValue() ) )
 		);
 	}
 

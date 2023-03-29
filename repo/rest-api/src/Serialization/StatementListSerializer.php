@@ -20,7 +20,7 @@ class StatementListSerializer {
 		$serialization = new ArrayObject();
 
 		foreach ( $statementList as $statement ) {
-			$propertyId = $statement->getMainSnak()->getPropertyId()->getSerialization();
+			$propertyId = $statement->getProperty()->getId()->getSerialization();
 			$serialization[$propertyId][] = $this->statementSerializer->serialize( $statement );
 		}
 
