@@ -49,7 +49,7 @@
 		"mocha": "^10.2.0",
 		"npm-run-all": "^4.1.5",
 		"postcss-less": "^6.0.0",
-		"stylelint-config-wikimedia": "0.13.1",
+		"stylelint-config-wikimedia": "0.14.0",
 		"wdio-mediawiki": "^1.2.0",
 		"wdio-wikibase": "^5.2.0"
 	},
