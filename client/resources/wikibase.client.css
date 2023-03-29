@@ -11,7 +11,7 @@
 	padding-right: 0.5em !important;
 }
 
-.wb-langlinks-link > a:before {
+.wb-langlinks-link > a::before {
 	content: '';
 	background-image: url( images/edit.svg );
 	background-position: left top;
@@ -30,8 +30,8 @@
 	color: #54595d !important;
 }
 
-.wb-langlinks-link > a:link:before,
-.wb-langlinks-link > a:visited:before {
+.wb-langlinks-link > a:link::before,
+.wb-langlinks-link > a:visited::before {
 	-webkit-filter: grayscale( 1 );
 	filter: grayscale( 1 );
 	opacity: 0.73;
@@ -42,7 +42,7 @@
 	color: #0645ad !important;
 }
 
-.wb-langlinks-link > a:hover:before {
+.wb-langlinks-link > a:hover::before {
 	-webkit-filter: none;
 	filter: none;
 	opacity: 1;

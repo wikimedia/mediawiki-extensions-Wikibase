@@ -1,4 +1,4 @@
-div.after-portlet-lang:after {
+div.after-portlet-lang::after {
 	content: '';
 	clear: both;
 	display: block;

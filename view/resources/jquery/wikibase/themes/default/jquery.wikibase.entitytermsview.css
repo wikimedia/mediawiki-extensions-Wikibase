@@ -15,7 +15,7 @@
 	word-wrap: break-word;
 }
 
-.wikibase-entitytermsview .wikibase-entitytermsview-heading .wikibase-entitytermsview-heading-aliases ul:after {
+.wikibase-entitytermsview .wikibase-entitytermsview-heading .wikibase-entitytermsview-heading-aliases ul::after {
 	content: '';
 	clear: left;
 	display: block;
@@ -26,12 +26,12 @@
 	float: left;
 }
 
-.wikibase-entitytermsview .wikibase-entitytermsview-heading .wikibase-entitytermsview-heading-aliases li:before {
+.wikibase-entitytermsview .wikibase-entitytermsview-heading .wikibase-entitytermsview-heading-aliases li::before {
 	content: attr( data-aliases-separator );
 	padding: 0 0.4em;
 }
 
-.wikibase-entitytermsview .wikibase-entitytermsview-heading .wikibase-entitytermsview-heading-aliases li:first-child:before {
+.wikibase-entitytermsview .wikibase-entitytermsview-heading .wikibase-entitytermsview-heading-aliases li:first-child::before {
 	content: '';
 	padding: 0;
 }
