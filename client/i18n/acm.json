@@ -5,6 +5,9 @@
 			"MRidhaAJ"
 		]
 	},
+	"wikibase-client-desc": "عميل امتداد Wikibase",
+	"tooltip-t-wikibase": "اربط بعنصر مرتبط في مستودع البيانات",
+	"wikibase-after-page-move": "لازم يكون نقلك هسه [$1 منعكس بوصلة لغة عنصر {{WBREPONAME}}]. نطلب منك التحقق من حدوث هاذ.",
 	"wikibase-dataitem": "عنـصر {{WBREPONAME}}",
 	"wikibase-editlinks": "عدل الوصلات",
 	"wikibase-linkitem-addlinks": "ضيف وصلات",

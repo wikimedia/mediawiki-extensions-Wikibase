@@ -8,7 +8,9 @@
 			"Kingu",
 			"Kjetil r",
 			"Macofe",
-			"Njardarlogar"
+			"Njardarlogar",
+			"EdoAug",
+			"Winston Sung"
 		]
 	},
 	"wikibase-desc": "Tjenertutvidelse for Wikibase, det strukturerte datalageret",
@@ -270,7 +272,7 @@
 	"wikibase-setsitelink-remove-failed": "Nettstedlenken kunne ikke fjernes.",
 	"wikibase-modifyentity-id": "ID:",
 	"wikibase-modifyterm-language": "Språkkode:",
-	"special-mergeitems": "Fletter to elementer",
+	"special-mergeitems": "Flett to elementer",
 	"wikibase-mergeitems-intro": "Hvis du fletter to elementer, vil alle etiketter, beskrivelser, alias og utsagn bli flyttet fra det ene elementet over til det andre.",
 	"wikibase-mergeitems-fromid": "Id-en det flettes fra",
 	"wikibase-mergeitems-toid": "Id-en det flettes til",

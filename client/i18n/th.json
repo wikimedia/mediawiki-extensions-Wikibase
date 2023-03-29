@@ -8,7 +8,8 @@
 			"Octahedron80",
 			"Pilarbini",
 			"Pon44695",
-			"Thas Tayapongsak"
+			"Thas Tayapongsak",
+			"Ekminarin"
 		]
 	},
 	"wikibase-client-desc": "ไคลเอนต์สำหรับส่วนขยาย Wikibase",
@@ -26,7 +27,7 @@
 	"wikibase-comment-sitelink-change": "เปลี่ยนลิงก์ข้ามภาษาจาก $1 เป็น $2 แล้ว",
 	"wikibase-comment-sitelink-remove": "ลบลิงก์ข้ามภาษาแล้ว: $1",
 	"wikibase-comment-multi": "$1 การเปลี่ยนแปลง",
-	"wikibase-dataitem": "สิ่งนี้ใน {{WBREPONAME}}",
+	"wikibase-dataitem": "สิ่งนี้ใน{{WBREPONAME}}",
 	"wikibase-editlinks": "แก้ไขลิงก์",
 	"wikibase-editlinkstitle": "แก้ไขลิงก์ข้ามภาษา",
 	"wikibase-addlinkstitle": "เพิ่มลิงก์ข้ามภาษา",

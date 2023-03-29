@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Frhdkazan"
+			"Frhdkazan",
+			"TayfunEt."
 		]
 	},
 	"tooltip-t-wikibase": "Bäyle mäğlümatlar saqlağıçı elementına sıltama",
@@ -9,6 +10,8 @@
 	"wikibase-dataitem": "{{WBREPONAME}} elementı",
 	"wikibase-editlinks": "Sıltama bäyläneşlärne üzgärtü",
 	"wikibase-editlinkstitle": "İnterwiki bäyläneşlärne üzgärtü",
+	"wikibase-linkitem-input-site": "Tel:",
+	"wikibase-linkitem-input-page": "Bit:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Yäşerü",
 	"wikibase-rc-hide-wikidata-show": "Kürsätü",
