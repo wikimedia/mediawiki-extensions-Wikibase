@@ -13,6 +13,7 @@ use Status;
 use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemIdParser;
+use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
@@ -229,7 +230,7 @@ class MediaWikiEditEntityFactoryItemUpdaterTest extends TestCase {
 			$this->logger,
 			$this->summaryFormatter,
 			$this->permissionManager,
-			new StatementReadModelConverter( new StatementGuidParser( new ItemIdParser() ) )
+			new StatementReadModelConverter( new StatementGuidParser( new ItemIdParser() ), new InMemoryDataTypeLookup() )
 		);
 	}
 

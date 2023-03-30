@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
@@ -271,7 +272,7 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 	}
 
 	private function newStatementReadModelConverter(): StatementReadModelConverter {
-		return new StatementReadModelConverter( WikibaseRepo::getStatementGuidParser() );
+		return new StatementReadModelConverter( WikibaseRepo::getStatementGuidParser(), new InMemoryDataTypeLookup() );
 	}
 
 	private function newSiteLinksReadModelConverter(): SiteLinksReadModelConverter {

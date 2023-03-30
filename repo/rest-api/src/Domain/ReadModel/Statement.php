@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\RestApi\Domain\ReadModel;
 
 use Wikibase\DataModel\ReferenceList;
-use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\StatementGuid;
 
@@ -13,21 +12,24 @@ use Wikibase\DataModel\Statement\StatementGuid;
 class Statement {
 
 	private StatementGuid $guid;
+	private Property $property;
+	private Value $value;
 	private Rank $rank;
-	private Snak $mainSnak;
 	private SnakList $qualifiers;
 	private ReferenceList $references;
 
 	public function __construct(
 		StatementGuid $guid,
+		Property $property,
+		Value $value,
 		Rank $rank,
-		Snak $mainSnak,
 		SnakList $qualifiers,
 		ReferenceList $references
 	) {
 		$this->guid = $guid;
+		$this->property = $property;
+		$this->value = $value;
 		$this->rank = $rank;
-		$this->mainSnak = $mainSnak;
 		$this->qualifiers = $qualifiers;
 		$this->references = $references;
 	}
@@ -36,12 +38,16 @@ class Statement {
 		return $this->guid;
 	}
 
-	public function getRank(): Rank {
-		return $this->rank;
+	public function getProperty(): Property {
+		return $this->property;
 	}
 
-	public function getMainSnak(): Snak {
-		return $this->mainSnak;
+	public function getValue(): Value {
+		return $this->value;
+	}
+
+	public function getRank(): Rank {
+		return $this->rank;
 	}
 
 	public function getQualifiers(): SnakList {

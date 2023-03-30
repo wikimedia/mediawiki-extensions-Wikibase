@@ -217,7 +217,10 @@ return [
 	'WbRestApi.ItemDataRetriever' => function( MediaWikiServices $services ): ItemDataRetriever {
 		return new WikibaseEntityLookupItemDataRetriever(
 			WikibaseRepo::getEntityLookup( $services ),
-			new StatementReadModelConverter( WikibaseRepo::getStatementGuidParser( $services ) ),
+			new StatementReadModelConverter(
+				WikibaseRepo::getStatementGuidParser( $services ),
+				WikibaseRepo::getPropertyDataTypeLookup()
+			),
 			new SiteLinksReadModelConverter( $services->getSiteLookup() )
 		);
 	},
@@ -229,7 +232,10 @@ return [
 			WikibaseRepo::getLogger( $services ),
 			new EditSummaryFormatter( WikibaseRepo::getSummaryFormatter( $services ) ),
 			$services->getPermissionManager(),
-			new StatementReadModelConverter( new StatementGuidParser( new ItemIdParser() ) )
+			new StatementReadModelConverter(
+				WikibaseRepo::getStatementGuidParser( $services ),
+				WikibaseRepo::getPropertyDataTypeLookup()
+			)
 		);
 	},
 

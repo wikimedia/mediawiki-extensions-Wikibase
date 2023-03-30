@@ -4,13 +4,15 @@ namespace Wikibase\Repo\Tests\RestApi\Domain\ReadModel;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\ReferenceList;
-use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\StatementGuid;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Property;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Rank;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Value;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Domain\ReadModel\StatementList
@@ -44,8 +46,9 @@ class StatementListTest extends TestCase {
 	private function newStatementWithId( StatementGuid $id ): Statement {
 		return new Statement(
 			$id,
+			new Property( new NumericPropertyId( 'P123' ), 'string' ),
+			new Value( Value::TYPE_SOME_VALUE ),
 			Rank::normal(),
-			$this->createStub( Snak::class ),
 			new SnakList(),
 			new ReferenceList()
 		);

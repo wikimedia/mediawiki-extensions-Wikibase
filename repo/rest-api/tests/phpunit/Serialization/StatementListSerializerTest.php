@@ -61,7 +61,7 @@ class StatementListSerializerTest extends TestCase {
 		$statementSerializer->method( 'serialize' )
 			->willReturnCallback(
 				fn( Statement $statement ) => [
-					$statement->getMainSnak()->getPropertyId()->serialize() . ' statement serialization',
+					$statement->getProperty()->getId()->getSerialization() . ' statement serialization',
 				]
 			);
 		return new StatementListSerializer( $statementSerializer );

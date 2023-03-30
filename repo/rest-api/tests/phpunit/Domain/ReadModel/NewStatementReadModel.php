@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Domain\ReadModel;
 
+use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
@@ -13,7 +14,7 @@ use Wikibase\Repo\WikibaseRepo;
 class NewStatementReadModel extends NewStatement {
 
 	public function build(): Statement {
-		return ( new StatementReadModelConverter( WikibaseRepo::getStatementGuidParser() ) )
+		return ( new StatementReadModelConverter( WikibaseRepo::getStatementGuidParser(), new InMemoryDataTypeLookup() ) )
 			->convert( parent::build() );
 	}
 

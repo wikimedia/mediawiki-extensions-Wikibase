@@ -9,6 +9,7 @@ use RequestContext;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
+use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Tests\NewItem;
@@ -77,7 +78,7 @@ class MediaWikiEditEntityFactoryItemUpdaterIntegrationTest extends MediaWikiInte
 		$statementList = $newRevision->getItem()->getStatements();
 		$this->assertSame(
 			$newValue,
-			$statementList->getStatementById( $statementGuid )->getMainSnak()->getDataValue()->getValue()
+			$statementList->getStatementById( $statementGuid )->getValue()->getContent()->getValue()
 		);
 	}
 
@@ -100,7 +101,7 @@ class MediaWikiEditEntityFactoryItemUpdaterIntegrationTest extends MediaWikiInte
 			new NullLogger(),
 			$this->createStub( EditSummaryFormatter::class ),
 			$permissionManager,
-			new StatementReadModelConverter( new StatementGuidParser( new ItemIdParser() ) )
+			new StatementReadModelConverter( new StatementGuidParser( new ItemIdParser() ), new InMemoryDataTypeLookup() )
 		);
 	}
 
