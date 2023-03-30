@@ -369,7 +369,7 @@
 	"wikibase-api-common-item": "Zaznan skupni predmet.",
 	"wikibase-api-badtoken": "Zaznan slab žeton.",
 	"wikibase-api-cant-load-entity-content": "Do vsebine ni mogoče dostopati, redakcija je bila morda izbrisana.",
-	"wikibase-api-unresolved-redirect": "Podani ID entitete se nanaša na preusmeritev, ki v tem kontekstu ni podprta.",
+	"wikibase-api-unresolved-redirect": "Predloženi ID entitete se nanaša na preusmeritev, ki v tem kontekstu ni podprta.",
 	"wikibase-api-editconflict": "Navzkrižje urejanj. Trenutne redakcije ni bilo mogoče popraviti.",
 	"wikibase-api-failed-add-sitelink": "Povezave mesta ni bilo mogoče shraniti.",
 	"wikibase-api-failed-modify": "Poskus spremembe predmeta ni uspel.",
