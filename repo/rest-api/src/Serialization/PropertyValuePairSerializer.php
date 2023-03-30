@@ -8,6 +8,7 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyValuePair;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Value;
 
 /**
  * @license GPL-2.0-or-later
@@ -23,16 +24,16 @@ class PropertyValuePairSerializer {
 	public function serialize( PropertyValuePair $propertyValuePair ): array {
 		$serialization = [
 			'property' => [
-				'id' => $propertyValuePair->getPropertyId()->getSerialization(),
-				'data-type' => $propertyValuePair->getPropertyDataType(),
+				'id' => $propertyValuePair->getProperty()->getId()->getSerialization(),
+				'data-type' => $propertyValuePair->getProperty()->getDataType(),
 			],
 			'value' => [
-				'type' => $propertyValuePair->getValueType(),
+				'type' => $propertyValuePair->getValue()->getType(),
 			],
 		];
 
-		if ( $propertyValuePair->getValueType() === PropertyValuePair::TYPE_VALUE ) {
-			$serialization['value']['content'] = $this->serializeValueContent( $propertyValuePair->getValue() );
+		if ( $propertyValuePair->getValue()->getType() === Value::TYPE_VALUE ) {
+			$serialization['value']['content'] = $this->serializeValueContent( $propertyValuePair->getValue()->getContent() );
 		}
 
 		return $serialization;

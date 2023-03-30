@@ -11,7 +11,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyValuePair;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Value;
 
 /**
  * @license GPL-2.0-or-later
@@ -48,11 +48,11 @@ class PropertyValuePairDeserializer {
 		}
 
 		switch ( $serialization['value']['type'] ) {
-			case PropertyValuePair::TYPE_NO_VALUE:
+			case Value::TYPE_NO_VALUE:
 				return new PropertyNoValueSnak( $propertyId );
-			case PropertyValuePair::TYPE_SOME_VALUE:
+			case Value::TYPE_SOME_VALUE:
 				return new PropertySomeValueSnak( $propertyId );
-			case PropertyValuePair::TYPE_VALUE:
+			case Value::TYPE_VALUE:
 				$dataValue = $this->valueDeserializer->deserialize( $dataTypeId, $serialization['value'] );
 				return new PropertyValueSnak( $propertyId, $dataValue );
 			default:
