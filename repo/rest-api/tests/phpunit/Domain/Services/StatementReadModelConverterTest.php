@@ -21,12 +21,15 @@ use Wikibase\Repo\WikibaseRepo;
 class StatementReadModelConverterTest extends TestCase {
 
 	private const STRING_PROPERTY = 'P123';
+	private const ITEM_ID_PROPERTY_ID = 'P456';
 
 	public function testConvert(): void {
 		$id = new StatementGuid( new ItemId( 'Q123' ), 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 		$dataModelStatement = NewStatement::forProperty( 'P123' )
 			->withGuid( (string)$id )
 			->withValue( 'potato' )
+			->withQualifier( self::STRING_PROPERTY, 'my P123 qualifier value' )
+			->withQualifier( self::ITEM_ID_PROPERTY_ID, new ItemId( 'Q456' ) )
 			->build();
 
 		$readModel = $this->newConverter()->convert( $dataModelStatement );
@@ -36,13 +39,25 @@ class StatementReadModelConverterTest extends TestCase {
 		$this->assertSame( $dataModelStatement->getPropertyId(), $readModel->getProperty()->getId() );
 		$this->assertSame( 'string', $readModel->getProperty()->getDataType() );
 		$this->assertSame( $dataModelStatement->getMainSnak()->getDataValue(), $readModel->getValue()->getContent() );
-		$this->assertSame( $dataModelStatement->getQualifiers(), $readModel->getQualifiers() );
+
+		$dataModelQualifier = $dataModelStatement->getQualifiers()[0];
+		$readModelQualifier = $readModel->getQualifiers()[0];
+
+		$this->assertEquals(
+			$dataModelQualifier->getPropertyId(),
+			$readModelQualifier->getProperty()->getId()
+		);
+		$this->assertSame( 'string', $readModelQualifier->getProperty()->getDataType() );
+		$this->assertEquals( $dataModelQualifier->getDataValue(), $readModelQualifier->getValue()->getContent() );
+		$this->assertSame( 'wikibase-item', $readModel->getQualifiers()[1]->getProperty()->getDataType() );
+
 		$this->assertSame( $dataModelStatement->getReferences(), $readModel->getReferences() );
 	}
 
 	private function newConverter(): StatementReadModelConverter {
 		$dataTypeLookup = new InMemoryDataTypeLookup();
 		$dataTypeLookup->setDataTypeForProperty( new NumericPropertyId( self::STRING_PROPERTY ), 'string' );
+		$dataTypeLookup->setDataTypeForProperty( new NumericPropertyId( self::ITEM_ID_PROPERTY_ID ), 'wikibase-item' );
 
 		return new StatementReadModelConverter(
 			WikibaseRepo::getStatementGuidParser(),
