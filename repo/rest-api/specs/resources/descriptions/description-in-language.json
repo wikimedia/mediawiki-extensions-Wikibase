@@ -20,5 +20,37 @@
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
 		}
+	},
+	"put": {
+		"tags": [ "descriptions" ],
+		"summary": "[WIP] Add / Replace an Item's description in a specific language",
+		"description": "This endpoint is currently in development and is not recommended for production use.",
+		"parameters": [
+			{ "$ref": "../../global/parameters.json#/ItemId" },
+			{ "$ref": "../../global/parameters.json#/LanguageCode" },
+			{ "$ref": "../../global/parameters.json#/IfNoneMatch" },
+			{ "$ref": "../../global/parameters.json#/IfModifiedSince" },
+			{ "$ref": "../../global/parameters.json#/IfMatch" },
+			{ "$ref": "../../global/parameters.json#/IfUnmodifiedSince" },
+			{ "$ref": "../../global/parameters.json#/Authorization" }
+		],
+		"requestBody": { "$ref": "../../global/requests.json#/Description" },
+		"responses": {
+			"200": {
+				"$ref": "../../global/responses.json#/ItemDescription",
+				"description": "The updated Description in a specific language"
+			},
+			"201": {
+				"$ref": "../../global/responses.json#/ItemDescription",
+				"description": "The newly added Description in a specific language"
+			},
+			"304": { "$ref": "../../global/responses.json#/NotModified" },
+			"400": { "$ref": "../../global/responses.json#/InvalidItemDescriptionInput" },
+			"404": { "$ref": "../../global/responses.json#/ItemNotFound" },
+			"409": { "$ref": "../../global/responses.json#/ItemRedirected" },
+			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
+			"415": { "$ref": "../../global/responses.json#/InvalidMediaType" },
+			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
+		}
 	}
 }
