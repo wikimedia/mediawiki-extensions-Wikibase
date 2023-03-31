@@ -409,7 +409,7 @@ class EntityUsageTable {
 		} else {
 			$values = [];
 			foreach ( $subQueries as $sql ) {
-				$res = $readConnection->query( $sql, __METHOD__ );
+				$res = $readConnection->query( $sql, __METHOD__, ISQLPlatform::QUERY_CHANGE_NONE );
 				if ( $res->numRows() ) {
 					$values[] = $res->current()->eu_entity_id;
 				}
