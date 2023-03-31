@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\Domain\ReadModel;
 
-use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Statement\StatementGuid;
 
 /**
@@ -15,7 +14,7 @@ class Statement {
 	private Value $value;
 	private Rank $rank;
 	private Qualifiers $qualifiers;
-	private ReferenceList $references;
+	private References $references;
 
 	public function __construct(
 		StatementGuid $guid,
@@ -23,7 +22,7 @@ class Statement {
 		Value $value,
 		Rank $rank,
 		Qualifiers $qualifiers,
-		ReferenceList $references
+		References $references
 	) {
 		$this->guid = $guid;
 		$this->property = $property;
@@ -53,7 +52,7 @@ class Statement {
 		return $this->qualifiers;
 	}
 
-	public function getReferences(): ReferenceList {
+	public function getReferences(): References {
 		return $this->references;
 	}
 

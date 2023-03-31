@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\RestApi\Application\Serialization;
 
-use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Statement\Statement as DataModelStatement;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyValuePair;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Reference;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
 
 /**

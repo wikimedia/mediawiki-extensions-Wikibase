@@ -13,6 +13,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyValuePair;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Reference as ReadModelReference;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
 
@@ -138,7 +139,7 @@ class StatementSerializerTest extends TestCase {
 			);
 		$referenceSerializer = $this->createStub( ReferenceSerializer::class );
 		$referenceSerializer->method( 'serialize' )
-			->willReturnCallback( fn( Reference $ref ) => [ $ref->getHash() ] );
+			->willReturnCallback( fn( ReadModelReference $ref ) => [ $ref->getHash() ] );
 
 		return new StatementSerializer( $propertyValuePairSerializer, $referenceSerializer );
 	}

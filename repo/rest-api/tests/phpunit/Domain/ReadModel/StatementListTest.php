@@ -5,11 +5,11 @@ namespace Wikibase\Repo\Tests\RestApi\Domain\ReadModel;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Property;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Qualifiers;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Rank;
+use Wikibase\Repo\RestApi\Domain\ReadModel\References;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Value;
@@ -50,7 +50,7 @@ class StatementListTest extends TestCase {
 			new Value( Value::TYPE_SOME_VALUE ),
 			Rank::normal(),
 			new Qualifiers(),
-			new ReferenceList()
+			new References()
 		);
 	}
 }
