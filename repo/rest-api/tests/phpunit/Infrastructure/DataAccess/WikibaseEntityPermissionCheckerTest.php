@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\DataAccess;
+namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
 
 use Generator;
 use MediaWiki\User\UserFactory;
@@ -8,12 +8,12 @@ use PHPUnit\Framework\TestCase;
 use Status;
 use User as MediaWikiUser;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\RestApi\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\RestApi\Domain\Model\User;
+use Wikibase\Repo\RestApi\Infrastructure\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 
 /**
- * @covers \Wikibase\Repo\RestApi\DataAccess\WikibaseEntityPermissionChecker
+ * @covers \Wikibase\Repo\RestApi\Infrastructure\DataAccess\WikibaseEntityPermissionChecker
  *
  * @group Wikibase
  *

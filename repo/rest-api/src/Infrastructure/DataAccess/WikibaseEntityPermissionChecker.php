@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\DataAccess;
+namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
 
 use MediaWiki\User\UserFactory;
 use Wikibase\DataModel\Entity\ItemId;

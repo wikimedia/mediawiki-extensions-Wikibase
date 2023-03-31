@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\DataAccess;
+namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\NullPrefetchingTermLookup;
@@ -8,12 +8,12 @@ use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataAccess\Tests\FakePrefetchingTermLookup;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\StaticContentLanguages;
-use Wikibase\Repo\RestApi\DataAccess\PrefetchingTermLookupAliasesRetriever;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
+use Wikibase\Repo\RestApi\Infrastructure\DataAccess\PrefetchingTermLookupAliasesRetriever;
 
 /**
- * @covers \Wikibase\Repo\RestApi\DataAccess\PrefetchingTermLookupAliasesRetriever
+ * @covers \Wikibase\Repo\RestApi\Infrastructure\DataAccess\PrefetchingTermLookupAliasesRetriever
  *
  * @group Wikibase
  *

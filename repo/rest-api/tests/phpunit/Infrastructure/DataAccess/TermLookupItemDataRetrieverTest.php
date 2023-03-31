@@ -1,20 +1,20 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\DataAccess;
+namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookupException;
 use Wikibase\Lib\StaticContentLanguages;
-use Wikibase\Repo\RestApi\DataAccess\TermLookupItemDataRetriever;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
+use Wikibase\Repo\RestApi\Infrastructure\DataAccess\TermLookupItemDataRetriever;
 
 /**
- * @covers \Wikibase\Repo\RestApi\DataAccess\TermLookupItemDataRetriever
+ * @covers \Wikibase\Repo\RestApi\Infrastructure\DataAccess\TermLookupItemDataRetriever
  *
  * @group Wikibase
  *

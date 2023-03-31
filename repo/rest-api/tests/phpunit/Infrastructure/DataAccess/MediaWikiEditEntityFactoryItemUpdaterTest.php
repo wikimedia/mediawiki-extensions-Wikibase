@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\DataAccess;
+namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
 
 use Generator;
 use IContextSource;
@@ -20,7 +20,6 @@ use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\EditEntity\EditEntity;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
-use Wikibase\Repo\RestApi\DataAccess\MediaWikiEditEntityFactoryItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Item as ReadModelItem;
@@ -29,11 +28,12 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\ItemUpdateFailed;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\ItemUpdatePrevented;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
+use Wikibase\Repo\RestApi\Infrastructure\DataAccess\MediaWikiEditEntityFactoryItemUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
 
 /**
- * @covers \Wikibase\Repo\RestApi\DataAccess\MediaWikiEditEntityFactoryItemUpdater
+ * @covers \Wikibase\Repo\RestApi\Infrastructure\DataAccess\MediaWikiEditEntityFactoryItemUpdater
  *
  * @group Wikibase
  *
