@@ -201,5 +201,21 @@
 				"character-limit": "{limit}"
 			}
 		}
+	},
+	"DescriptionEmptyExample": {
+		"value": {
+			"code": "description-empty",
+			"message": "Description must not be empty"
+		}
+	},
+	"DescriptionTooLongExample": {
+		"value": {
+			"code": "description-too-long",
+			"message": "Description must be no more than {limit} characters long",
+			"context": {
+				"value": "{description}",
+				"character-limit": "{limit}"
+			}
+		}
 	}
 }

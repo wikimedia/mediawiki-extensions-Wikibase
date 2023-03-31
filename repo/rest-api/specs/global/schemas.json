@@ -50,8 +50,8 @@
 			"type": "string"
 		},
 		"example": {
-			"en": "Science-fiction writer",
-			"fr": "écrivain de science-fiction"
+			"en": "English science fiction writer and humourist",
+			"fr": "écrivain de science-fiction et humoriste anglais"
 		}
 	},
 	"Aliases": {

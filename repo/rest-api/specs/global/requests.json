@@ -22,6 +22,29 @@
 			}
 		}
 	},
+	"Description": {
+		"description": "Payload containing a Wikibase description in the specified language and edit metadata",
+		"required": true,
+		"content": {
+			"application/json": {
+				"schema": {
+					"allOf": [
+						{
+							"type": "object",
+							"properties": {
+								"description": {
+									"type": "string",
+									"example": "English science fiction writer and humourist"
+								}
+							},
+							"required": [ "description" ]
+						},
+						{ "$ref": "./request-parts.json#/MediawikiEdit" }
+					]
+				}
+			}
+		}
+	},
 	"Statement": {
 		"description": "Payload containing a Wikibase Statement object and edit metadata",
 		"required": true,

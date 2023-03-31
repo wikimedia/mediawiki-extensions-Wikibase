@@ -344,6 +344,26 @@
 			}
 		}
 	},
+	"InvalidItemDescriptionInput": {
+		"description": "The request cannot be processed",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/ContextError" },
+				"examples": {
+					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
+					"invalid-language-code": { "$ref": "./examples.json#/InvalidLanguageCodeExample" },
+					"description-empty": { "$ref": "./examples.json#/DescriptionEmptyExample" },
+					"description-too-long": { "$ref": "./examples.json#/DescriptionTooLongExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
 	"InvalidItemTermByLanguageInput": {
 		"description": "The request cannot be processed",
 		"content": {
@@ -639,7 +659,7 @@
 			"application/json": {
 				"schema": {
 					"type": "string",
-					"example": "Science-fiction writer"
+					"example": "English science fiction writer and humourist"
 				}
 			}
 		}
