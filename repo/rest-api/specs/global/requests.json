@@ -1,4 +1,27 @@
 {
+	"Label": {
+		"description": "Payload containing a Wikibase label in the specified language and edit metadata",
+		"required": true,
+		"content": {
+			"application/json": {
+				"schema": {
+					"allOf": [
+						{
+							"type": "object",
+							"properties": {
+								"label": {
+									"type": "string",
+									"example": "Douglas Adams"
+								}
+							},
+							"required": [ "label" ]
+						},
+						{ "$ref": "./request-parts.json#/MediawikiEdit" }
+					]
+				}
+			}
+		}
+	},
 	"Statement": {
 		"description": "Payload containing a Wikibase Statement object and edit metadata",
 		"required": true,
