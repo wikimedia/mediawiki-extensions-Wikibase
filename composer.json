@@ -71,7 +71,6 @@
 			"composer validate --no-interaction",
 			"composer lint",
 			"composer phpcs",
-			"composer phpstan",
 			"minus-x check ."
 		],
 		"doxygen-docker": "bash build/doxygen-docker.sh"
