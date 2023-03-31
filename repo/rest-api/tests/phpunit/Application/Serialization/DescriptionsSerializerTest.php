@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Domain\Application\Serialization;
+namespace Wikibase\Repo\Tests\RestApi\Application\Serialization;
 
 use ArrayObject;
 use Generator;
