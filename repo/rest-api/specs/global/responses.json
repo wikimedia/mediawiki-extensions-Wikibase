@@ -324,6 +324,26 @@
 			}
 		}
 	},
+	"InvalidItemLabelInput": {
+		"description": "The request cannot be processed",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/ContextError" },
+				"examples": {
+					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
+					"invalid-language-code": { "$ref": "./examples.json#/InvalidLanguageCodeExample" },
+					"label-empty": { "$ref": "./examples.json#/LabelEmptyExample" },
+					"label-too-long": { "$ref": "./examples.json#/LabelTooLongExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
 	"InvalidItemTermByLanguageInput": {
 		"description": "The request cannot be processed",
 		"content": {

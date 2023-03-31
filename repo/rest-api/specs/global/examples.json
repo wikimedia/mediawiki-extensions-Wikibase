@@ -185,5 +185,21 @@
 			"code": "aliases-not-defined",
 			"message": "Item with the ID {item_id} does not have aliases in the language: {language_code}"
 		}
+	},
+	"LabelEmptyExample": {
+		"value": {
+			"code": "label-empty",
+			"message": "Label must not be empty"
+		}
+	},
+	"LabelTooLongExample": {
+		"value": {
+			"code": "label-too-long",
+			"message": "Label must be no more than {limit} characters long",
+			"context": {
+				"value": "{label}",
+				"character-limit": "{limit}"
+			}
+		}
 	}
 }
