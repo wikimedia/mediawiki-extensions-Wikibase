@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Presentation;
 
-use Wikibase\Repo\RestApi\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 
 /**
  * @license GPL-2.0-or-later

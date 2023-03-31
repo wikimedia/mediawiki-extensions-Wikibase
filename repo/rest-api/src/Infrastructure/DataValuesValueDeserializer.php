@@ -11,10 +11,10 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\Repo\DataTypeValidatorFactory;
+use Wikibase\Repo\RestApi\Application\Serialization\InvalidFieldException;
+use Wikibase\Repo\RestApi\Application\Serialization\MissingFieldException;
+use Wikibase\Repo\RestApi\Application\Serialization\ValueDeserializer;
 use Wikibase\Repo\RestApi\Domain\Services\ValueTypeLookup;
-use Wikibase\Repo\RestApi\Serialization\InvalidFieldException;
-use Wikibase\Repo\RestApi\Serialization\MissingFieldException;
-use Wikibase\Repo\RestApi\Serialization\ValueDeserializer;
 
 /**
  * @license GPL-2.0-or-later

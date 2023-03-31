@@ -5,8 +5,8 @@ namespace Wikibase\Repo\RestApi\RouteHandlers;
 use HttpStatus;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\StringStream;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Presentation\ErrorResponseToHttpStatus;
-use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 
 /**
  * @license GPL-2.0-or-later

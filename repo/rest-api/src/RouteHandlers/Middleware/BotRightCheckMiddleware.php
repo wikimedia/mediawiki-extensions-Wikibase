@@ -5,8 +5,8 @@ namespace Wikibase\Repo\RestApi\RouteHandlers\Middleware;
 use MediaWiki\Permissions\PermissionManager;
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Response;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\RouteHandlers\ResponseFactory;
-use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 
 /**
  * This middleware errors for bot edit requests given the user doesn't have the 'bot' right.

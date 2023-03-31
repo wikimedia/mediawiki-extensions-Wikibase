@@ -14,11 +14,11 @@ use ValueValidators\ValueValidator;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\DataTypeValidatorFactory;
+use Wikibase\Repo\RestApi\Application\Serialization\InvalidFieldException;
+use Wikibase\Repo\RestApi\Application\Serialization\MissingFieldException;
+use Wikibase\Repo\RestApi\Application\Serialization\SerializationException;
 use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
 use Wikibase\Repo\RestApi\Infrastructure\DataValuesValueDeserializer;
-use Wikibase\Repo\RestApi\Serialization\InvalidFieldException;
-use Wikibase\Repo\RestApi\Serialization\MissingFieldException;
-use Wikibase\Repo\RestApi\Serialization\SerializationException;
 use Wikibase\Repo\WikibaseRepo;
 
 /**

@@ -8,9 +8,9 @@ use MediaWiki\Rest\RequestData;
 use MediaWiki\Tests\Rest\Handler\HandlerTestTrait;
 use MediaWikiIntegrationTestCase;
 use RuntimeException;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItem;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\RouteHandlers\GetItemRouteHandler;
-use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
-use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 
 /**
  * @covers \Wikibase\Repo\RestApi\RouteHandlers\GetItemRouteHandler

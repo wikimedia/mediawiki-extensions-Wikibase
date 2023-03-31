@@ -4,8 +4,8 @@ namespace Wikibase\Repo\Tests\RestApi\RouteHandlers;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\RouteHandlers\ResponseFactory;
-use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 
 /**
  * @covers \Wikibase\Repo\RestApi\RouteHandlers\ResponseFactory

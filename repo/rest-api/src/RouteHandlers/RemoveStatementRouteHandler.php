@@ -9,15 +9,15 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
 use MediaWiki\Rest\Validator\BodyValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatementRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\BotRightCheckMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\ContentTypeCheckMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\RequestPreconditionCheck;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
-use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatement;
-use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatementRequest;
-use Wikibase\Repo\RestApi\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 

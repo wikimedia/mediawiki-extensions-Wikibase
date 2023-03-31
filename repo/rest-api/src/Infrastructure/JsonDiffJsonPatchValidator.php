@@ -7,8 +7,8 @@ use Swaggest\JsonDiff\InvalidFieldTypeException;
 use Swaggest\JsonDiff\JsonPatch;
 use Swaggest\JsonDiff\MissingFieldException;
 use Swaggest\JsonDiff\UnknownOperationException;
-use Wikibase\Repo\RestApi\Validation\JsonPatchValidator;
-use Wikibase\Repo\RestApi\Validation\ValidationError;
+use Wikibase\Repo\RestApi\Application\Validation\JsonPatchValidator;
+use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 
 /**
  * @license GPL-2.0-or-later

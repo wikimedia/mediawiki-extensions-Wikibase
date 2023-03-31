@@ -22,9 +22,9 @@ class ArchitectureTest {
 	private const DOMAIN_MODEL = 'Wikibase\Repo\RestApi\Domain\Model';
 	private const DOMAIN_READMODEL = 'Wikibase\Repo\RestApi\Domain\ReadModel';
 	private const DOMAIN_SERVICES = 'Wikibase\Repo\RestApi\Domain\Services';
-	private const SERIALIZATION = 'Wikibase\Repo\RestApi\Serialization';
-	private const VALIDATION = 'Wikibase\Repo\RestApi\Validation';
-	private const USE_CASES = 'Wikibase\Repo\RestApi\UseCases';
+	private const SERIALIZATION = 'Wikibase\Repo\RestApi\Application\Serialization';
+	private const VALIDATION = 'Wikibase\Repo\RestApi\Application\Validation';
+	private const USE_CASES = 'Wikibase\Repo\RestApi\Application\UseCases';
 	private const PRESENTATION = 'Wikibase\Repo\RestApi\Presentation';
 
 	public function testDomainModel(): Rule {

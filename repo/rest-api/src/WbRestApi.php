@@ -4,25 +4,25 @@ namespace Wikibase\Repo\RestApi;
 
 use MediaWiki\MediaWikiServices;
 use Psr\Container\ContainerInterface;
+use Wikibase\Repo\RestApi\Application\Serialization\SerializerFactory;
+use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItem;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliases\GetItemAliases;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliasesInLanguage\GetItemAliasesInLanguage;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescription\GetItemDescription;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\GetItemDescriptions;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\GetItemLabel;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabels;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\GetItemStatements;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatement;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\WikibaseEntityLookupItemDataRetriever;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
-use Wikibase\Repo\RestApi\Serialization\SerializerFactory;
-use Wikibase\Repo\RestApi\Serialization\StatementDeserializer;
-use Wikibase\Repo\RestApi\UseCases\AddItemStatement\AddItemStatement;
-use Wikibase\Repo\RestApi\UseCases\GetItem\GetItem;
-use Wikibase\Repo\RestApi\UseCases\GetItemAliases\GetItemAliases;
-use Wikibase\Repo\RestApi\UseCases\GetItemAliasesInLanguage\GetItemAliasesInLanguage;
-use Wikibase\Repo\RestApi\UseCases\GetItemDescription\GetItemDescription;
-use Wikibase\Repo\RestApi\UseCases\GetItemDescriptions\GetItemDescriptions;
-use Wikibase\Repo\RestApi\UseCases\GetItemLabel\GetItemLabel;
-use Wikibase\Repo\RestApi\UseCases\GetItemLabels\GetItemLabels;
-use Wikibase\Repo\RestApi\UseCases\GetItemStatement\GetItemStatement;
-use Wikibase\Repo\RestApi\UseCases\GetItemStatements\GetItemStatements;
-use Wikibase\Repo\RestApi\UseCases\PatchItemStatement\PatchItemStatement;
-use Wikibase\Repo\RestApi\UseCases\RemoveItemStatement\RemoveItemStatement;
-use Wikibase\Repo\RestApi\UseCases\ReplaceItemStatement\ReplaceItemStatement;
 
 /**
  * @license GPL-2.0-or-later
