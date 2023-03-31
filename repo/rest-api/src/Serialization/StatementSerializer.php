@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\RestApi\Serialization;
 
 use Wikibase\DataModel\Reference;
-use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement as DataModelStatement;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyValuePair;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
@@ -32,7 +31,7 @@ class StatementSerializer {
 				'id' => (string)$statement->getGuid(),
 				'rank' => self::RANK_LABELS[ $statement->getRank()->asInt() ],
 				'qualifiers' => array_map(
-					fn( Snak $qualifier ) => $this->propertyValuePairSerializer->serializeSnak( $qualifier ),
+					fn( PropertyValuePair $qualifier ) => $this->propertyValuePairSerializer->serialize( $qualifier ),
 					iterator_to_array( $statement->getQualifiers() )
 				),
 				'references' => array_map(
