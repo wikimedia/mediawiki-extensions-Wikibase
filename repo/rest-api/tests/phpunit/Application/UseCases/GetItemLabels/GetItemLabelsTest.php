@@ -1,6 +1,6 @@
 <?php declare( strict_types = 1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\GetItemStatement;
+namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\GetItemLabels;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
