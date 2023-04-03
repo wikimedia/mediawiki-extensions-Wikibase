@@ -5,11 +5,12 @@ namespace Wikibase\Repo\Tests\RestApi\Application\Serialization;
 use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\DataModel\Reference;
-use Wikibase\DataModel\Snak\PropertyNoValueSnak;
-use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceSerializer;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Property;
+use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyValuePair;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Reference;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Value;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\Serialization\ReferenceSerializer
@@ -31,8 +32,11 @@ class ReferenceSerializerTest extends TestCase {
 	}
 
 	public function serializationProvider(): Generator {
-		$ref1 = new Reference( [
-			new PropertyNoValueSnak( new NumericPropertyId( 'P123' ) ),
+		$ref1 = new Reference( 'some-hash-1', [
+			new PropertyValuePair(
+				new Property( new NumericPropertyId( 'P123' ), 'string' ),
+				new Value( Value::TYPE_SOME_VALUE )
+			),
 		] );
 		yield 'reference with one prop value pair' => [
 			$ref1,
@@ -44,9 +48,15 @@ class ReferenceSerializerTest extends TestCase {
 			],
 		];
 
-		$ref2 = new Reference( [
-			new PropertyNoValueSnak( new NumericPropertyId( 'P234' ) ),
-			new PropertyNoValueSnak( new NumericPropertyId( 'P345' ) ),
+		$ref2 = new Reference( 'some-hash-2', [
+			new PropertyValuePair(
+				new Property( new NumericPropertyId( 'P234' ), 'string' ),
+				new Value( Value::TYPE_SOME_VALUE )
+			),
+			new PropertyValuePair(
+				new Property( new NumericPropertyId( 'P345' ), 'string' ),
+				new Value( Value::TYPE_SOME_VALUE )
+			),
 		] );
 		yield 'reference with multiple prop value pairs' => [
 			$ref2,
@@ -62,11 +72,11 @@ class ReferenceSerializerTest extends TestCase {
 
 	private function newSerializer(): ReferenceSerializer {
 		$propertyValuePairSerializer = $this->createStub( PropertyValuePairSerializer::class );
-		$propertyValuePairSerializer->method( 'serializeSnak' )
+		$propertyValuePairSerializer->method( 'serialize' )
 			->willReturnCallback(
-				fn( Snak $snak ) => [
-					'property' => $snak->getPropertyId() . ' property',
-					'value' => $snak->getPropertyId() . ' value',
+				fn( PropertyValuePair $propertyValuePair ) => [
+					'property' => $propertyValuePair->getProperty()->getId() . ' property',
+					'value' => $propertyValuePair->getProperty()->getId() . ' value',
 				]
 			);
 

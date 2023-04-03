@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\RestApi\Application\Serialization;
 
-use Wikibase\DataModel\Reference;
-use Wikibase\DataModel\Snak\Snak;
+use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyValuePair;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Reference;
 
 /**
  * @license GPL-2.0-or-later
@@ -20,8 +20,8 @@ class ReferenceSerializer {
 		return [
 			'hash' => $reference->getHash(),
 			'parts' => array_map(
-				fn( Snak $part ) => $this->propertyValuePairSerializer->serializeSnak( $part ),
-				iterator_to_array( $reference->getSnaks() )
+				fn( PropertyValuePair $part ) => $this->propertyValuePairSerializer->serialize( $part ),
+				$reference->getParts()
 			),
 		];
 	}
