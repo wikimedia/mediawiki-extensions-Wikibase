@@ -16,7 +16,7 @@ class SerializerFactory {
 	}
 
 	public function newStatementSerializer(): StatementSerializer {
-		$propertyValuePairSerializer = new PropertyValuePairSerializer( $this->dataTypeLookup );
+		$propertyValuePairSerializer = new PropertyValuePairSerializer();
 		$referenceSerializer = new ReferenceSerializer( $propertyValuePairSerializer );
 		return new StatementSerializer( $propertyValuePairSerializer, $referenceSerializer );
 	}

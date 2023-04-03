@@ -7,7 +7,6 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
-use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement as DataModelStatement;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceSerializer;
@@ -121,20 +120,6 @@ class StatementSerializerTest extends TestCase {
 				fn( PropertyValuePair $pvp ) => [
 					'property' => $pvp->getProperty()->getId() . ' property',
 					'value' => $pvp->getProperty()->getId() . ' value',
-				]
-			);
-		$propertyValuePairSerializer->method( 'serializeSnak' )
-			->willReturnCallback(
-				fn( Snak $snak ) => [
-					'property' => $snak->getPropertyId() . ' property',
-					'value' => $snak->getPropertyId() . ' value',
-				]
-			);
-		$propertyValuePairSerializer->method( 'serialize' )
-			->willReturnCallback(
-				fn( PropertyValuePair $propertyValuePair ) => [
-					'property' => $propertyValuePair->getProperty()->getId() . ' property',
-					'value' => $propertyValuePair->getProperty()->getId() . ' value',
 				]
 			);
 		$referenceSerializer = $this->createStub( ReferenceSerializer::class );

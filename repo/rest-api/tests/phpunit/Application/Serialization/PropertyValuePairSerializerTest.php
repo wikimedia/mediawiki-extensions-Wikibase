@@ -11,11 +11,6 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
-use Wikibase\DataModel\Snak\PropertyNoValueSnak;
-use Wikibase\DataModel\Snak\PropertySomeValueSnak;
-use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairSerializer;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Property;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyValuePair;
@@ -38,11 +33,7 @@ class PropertyValuePairSerializerTest extends TestCase {
 	/**
 	 * @dataProvider serializationProvider
 	 */
-	public function testSerialize( Snak $snak, PropertyValuePair $propertyValuePair, array $expectedSerialization ): void {
-		$this->assertEquals(
-			$expectedSerialization,
-			$this->newSerializer()->serializeSnak( $snak )
-		);
+	public function testSerialize( PropertyValuePair $propertyValuePair, array $expectedSerialization ): void {
 		$this->assertEquals(
 			$expectedSerialization,
 			$this->newSerializer()->serialize( $propertyValuePair )
@@ -51,7 +42,6 @@ class PropertyValuePairSerializerTest extends TestCase {
 
 	public function serializationProvider(): Generator {
 		yield 'no value for string prop' => [
-			new PropertyNoValueSnak( new NumericPropertyId( self::STRING_PROPERTY_ID ) ),
 			new PropertyValuePair(
 				new Property(
 					new NumericPropertyId( self::STRING_PROPERTY_ID ),
@@ -69,7 +59,6 @@ class PropertyValuePairSerializerTest extends TestCase {
 		];
 
 		yield 'some value for item id prop' => [
-			new PropertySomeValueSnak( new NumericPropertyId( self::ITEM_ID_PROPERTY_ID ) ),
 			new PropertyValuePair(
 				new Property(
 					new NumericPropertyId( self::ITEM_ID_PROPERTY_ID ),
@@ -87,10 +76,6 @@ class PropertyValuePairSerializerTest extends TestCase {
 		];
 
 		yield 'string value' => [
-			new PropertyValueSnak(
-				new NumericPropertyId( self::STRING_PROPERTY_ID ),
-				new StringValue( 'potato' )
-			),
 			new PropertyValuePair(
 				new Property(
 					new NumericPropertyId( self::STRING_PROPERTY_ID ),
@@ -114,10 +99,6 @@ class PropertyValuePairSerializerTest extends TestCase {
 		];
 
 		yield 'item id value' => [
-			new PropertyValueSnak(
-				new NumericPropertyId( self::ITEM_ID_PROPERTY_ID ),
-				new EntityIdValue( new ItemId( 'Q123' ) )
-			),
 			new PropertyValuePair(
 				new Property(
 					new NumericPropertyId( self::ITEM_ID_PROPERTY_ID ),
@@ -143,10 +124,6 @@ class PropertyValuePairSerializerTest extends TestCase {
 		$timestamp = '+2022-11-25T00:00:00Z';
 		$calendar = 'Q12345';
 		yield 'time value' => [
-			new PropertyValueSnak(
-				new NumericPropertyId( self::TIME_PROPERTY_ID ),
-				new TimeValue( $timestamp, 0, 0, 0, TimeValue::PRECISION_DAY, $calendar )
-			),
 			new PropertyValuePair(
 				new Property(
 					new NumericPropertyId( self::TIME_PROPERTY_ID ),
@@ -174,10 +151,6 @@ class PropertyValuePairSerializerTest extends TestCase {
 		];
 
 		yield 'globecoordinate value' => [
-			new PropertyValueSnak(
-				new NumericPropertyId( self::GLOBECOORDINATE_PROPERTY_ID ),
-				new GlobeCoordinateValue( new LatLongValue( 52.0, 13.0 ), 1 )
-			),
 			new PropertyValuePair(
 				new Property(
 					new NumericPropertyId( self::GLOBECOORDINATE_PROPERTY_ID ),
@@ -206,7 +179,6 @@ class PropertyValuePairSerializerTest extends TestCase {
 		];
 
 		yield 'null data type for some property value' => [
-			new PropertySomeValueSnak( new NumericPropertyId( self::DELETED_PROPERTY_ID ) ),
 			new PropertyValuePair(
 				new Property(
 					new NumericPropertyId( self::DELETED_PROPERTY_ID ),
@@ -225,25 +197,7 @@ class PropertyValuePairSerializerTest extends TestCase {
 	}
 
 	private function newSerializer(): PropertyValuePairSerializer {
-		$dataTypeLookup = new InMemoryDataTypeLookup();
-		$dataTypeLookup->setDataTypeForProperty(
-			new NumericPropertyId( self::STRING_PROPERTY_ID ),
-			'string'
-		);
-		$dataTypeLookup->setDataTypeForProperty(
-			new NumericPropertyId( self::ITEM_ID_PROPERTY_ID ),
-			'wikibase-item'
-		);
-		$dataTypeLookup->setDataTypeForProperty(
-			new NumericPropertyId( self::TIME_PROPERTY_ID ),
-			'time'
-		);
-		$dataTypeLookup->setDataTypeForProperty(
-			new NumericPropertyId( self::GLOBECOORDINATE_PROPERTY_ID ),
-			'globe-coordinate'
-		);
-
-		return new PropertyValuePairSerializer( $dataTypeLookup );
+		return new PropertyValuePairSerializer();
 	}
 
 }

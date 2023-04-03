@@ -3,10 +3,6 @@
 namespace Wikibase\Repo\RestApi\Application\Serialization;
 
 use DataValues\DataValue;
-use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
-use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyValuePair;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Value;
 
@@ -14,12 +10,6 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Value;
  * @license GPL-2.0-or-later
  */
 class PropertyValuePairSerializer {
-
-	private PropertyDataTypeLookup $dataTypeLookup;
-
-	public function __construct( PropertyDataTypeLookup $dataTypeLookup ) {
-		$this->dataTypeLookup = $dataTypeLookup;
-	}
 
 	public function serialize( PropertyValuePair $propertyValuePair ): array {
 		$serialization = [
@@ -37,32 +27,6 @@ class PropertyValuePairSerializer {
 		}
 
 		return $serialization;
-	}
-
-	public function serializeSnak( Snak $snak ): array {
-		$propertyId = $snak->getPropertyId();
-
-		try {
-			$propertyDataType = $this->dataTypeLookup->getDataTypeIdForProperty( $propertyId );
-		} catch ( PropertyDataTypeLookupException $exception ) {
-			$propertyDataType = null;
-		}
-
-		$propertyValuePair = [
-			'property' => [
-				'id' => $propertyId->getSerialization(),
-				'data-type' => $propertyDataType,
-			],
-			'value' => [
-				'type' => $snak->getType(),
-			],
-		];
-
-		if ( $snak instanceof PropertyValueSnak ) {
-			$propertyValuePair['value']['content'] = $this->serializeValueContent( $snak->getDataValue() );
-		}
-
-		return $propertyValuePair;
 	}
 
 	/**

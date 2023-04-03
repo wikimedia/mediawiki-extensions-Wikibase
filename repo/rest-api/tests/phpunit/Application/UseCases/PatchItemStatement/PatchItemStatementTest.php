@@ -9,9 +9,6 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
-use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
-use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Tests\NewItem;
@@ -535,19 +532,12 @@ class PatchItemStatementTest extends TestCase {
 	}
 
 	private function newStatementSerializer(): StatementSerializer {
-		$propertyValuePairSerializer = new PropertyValuePairSerializer( $this->newDataTypeLookup() );
+		$propertyValuePairSerializer = new PropertyValuePairSerializer();
 
 		return new StatementSerializer(
 			$propertyValuePairSerializer,
 			new ReferenceSerializer( $propertyValuePairSerializer )
 		);
-	}
-
-	private function newDataTypeLookup(): PropertyDataTypeLookup {
-		$dataTypeLookup = new InMemoryDataTypeLookup();
-		$dataTypeLookup->setDataTypeForProperty( new NumericPropertyId( self::STRING_PROPERTY ), 'string' );
-
-		return $dataTypeLookup;
 	}
 
 }
