@@ -9,15 +9,15 @@
 	"tooltip-t-wikibase": "Zdi i isfka imzadayen",
 	"wikibase-comment-update": "{{WBREPONAME}} item tbuddel",
 	"wikibase-dataitem": "{{WBREPONAME}} taɣawsa",
-	"wikibase-editlinks": "Snfl ilikn",
+	"wikibase-editlinks": "Snfl isɣwan",
 	"wikibase-editlinkstitle": "Snfl ilinkn igrutlayn",
-	"wikibase-linkitem-addlinks": "Zayd izdayn nɣ ilikitn",
+	"wikibase-linkitem-addlinks": "Rnu isɣwan",
 	"wikibase-linkitem-input-site": "Tutlayt:",
 	"wikibase-linkitem-input-page": "Tasna:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
-	"wikibase-rc-hide-wikidata-hide": "Ḥbu",
+	"wikibase-rc-hide-wikidata-hide": "Ssntl",
 	"wikibase-rc-hide-wikidata-show": "Ml",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Asnfl n {{WBREPONAME}}",
-	"wikibase-otherprojects": "Ɣ isnta yaḍni"
+	"wikibase-otherprojects": "Ɣ isnta yaḍnin"
 }
