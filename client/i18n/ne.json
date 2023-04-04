@@ -41,6 +41,7 @@
 	"wikibase-linkitem-not-loggedin-title": "तपाईंलाई प्रवेश गर्नु आवश्यक छ",
 	"wikibase-linkitem-not-loggedin": "यो सुविधाको उपयोग गर्नका लागि तपाईं यो विकि तथा [$1 केन्द्रीय डाटा रिपोजिटरी] मा प्रवेश गर्नु आवश्यक छ ।",
 	"wikibase-linkitem-success-link": "पृष्ठ सफलतापूर्वक जोडिएको छ। तपाईं लिङ्क जोडिएको आइटम आफ्नो [$1 केन्द्रीय डाटा रिपोजिटरी] मा खोज्न सक्नुहुन्छ।",
+	"limitreport-entityaccesscount-value": "$1/$2",
 	"wikibase-property-notfound": "$1 वस्तु भेटिएन।",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "लुकाउनुहोस्",
@@ -62,6 +63,11 @@
 	"wikibase-otherprojects": "अन्य परियोजनाहरू",
 	"wikibase-otherprojects-beta-message": "अन्य प्रोजेक्ट साइडबार",
 	"wikibase-sitelinks-sitename-columnheading": "भाषा",
+	"notification-header-page-connection": "<strong>$3</strong> पृष्ठलाई विकिडाटा {{PLURAL:$4|-1= {{WBREPONAME}} वस्तु|{{WBREPONAME}} वस्तु $4}}मा {{GENDER:$2|जडान}} गरिएको थियो, जहाँ विषयसँग सम्बन्धित डाटा सङ्कलन गर्न सकिन्छ।",
+	"notification-bundle-header-page-connection": "<strong>$3</strong> र {{PLURAL:$4|एउटा अर्को पृष्ठ|$4 अन्य पृष्ठहरू|100=९९+ अन्य पृष्ठहरू}}लाई {{WBREPONAME}} वस्तुहरूमा {{GENDER:$2|जडान}} गरिएको थियो, जहाँ विषयहरूसँग सान्दर्भिक डाटा सङ्कलन गर्न सकिन्छ।",
+	"notification-link-text-view-item": "वस्तु {{GENDER:$1|हेर्नुहोस्}}",
+	"notification-subject-page-connection": "{{SITENAME}}मा तपाईंले {{GENDER:$3|सिर्जित}} एउटा पृष्ठ {{WBREPONAME}} वस्तुसँग {{GENDER:$2|जडान}} गरिएको थियो",
 	"wikibase-client-data-bridge-dialog-title": "$1 सम्पादन गर्नुहोस्",
+	"wikibase-client-data-bridge-permissions-error-info": "थप विवरण",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "{{WBREPONAME}}मा मान सम्पादन गर्नुहाेस्"
 }
