@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Masiziva"
+		]
+	},
+	"wikibase-dataitem": "{{WBREPONAME}} chinhu",
+	"wikibase-editlinks": "Chinjirudza zvikochekero",
+	"wikibase-linkitem-addlinks": "Wedzera zvikochekero",
+	"wikibase-linkitem-title": "Kochekera ne zanhi",
+	"wikibase-linkitem-linkpage": "Kochekera ne zanhi",
+	"wikibase-linkitem-selectlink": "Sarurai sayiti kana zanhi ramunodaka kuchokedza zanhi rinori naro.",
+	"wikibase-linkitem-input-site": "Mutauro:",
+	"wikibase-linkitem-input-page": "Zanhi:",
+	"wikibase-rc-hide-wikidata-hide": "Viga",
+	"wikibase-rc-hide-wikidata-show": "Rakidza",
+	"wikibase-otherprojects": "Mumimwe mwishumo"
+}

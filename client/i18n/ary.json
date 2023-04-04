@@ -26,6 +26,7 @@
 	"wikibase-rc-wikibase-edit-letter": "د",
 	"wikibase-rc-wikibase-edit-title": "تعديل {{WBREPONAME}}",
 	"unconnectedpages": "صفاحي مامربوطينش",
+	"wikibase-pageinfo-entity-usage": "ستونات {{WBREPONAME}} لي مخدمة ف هاد الصفحة",
 	"wikibase-otherprojects": "ف مشاريع خرة",
 	"notification-header-page-connection": "صفحة <strong>$3</strong> {{GENDER:$2|تربطات}} ب {{PLURAL:$4|-1=a {{WBREPONAME}} item|دخلة {{WBREPONAME}} $4}}، فين كيتجمع ڭاع لمعلومات لي عندها علاقة ب لموضوع."
 }
