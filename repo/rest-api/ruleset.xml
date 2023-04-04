@@ -25,6 +25,7 @@
 			<property name="rootNamespaces" type="array">
 				<element key="src" value="Wikibase\Repo\RestApi"/>
 				<element key="tests/phpunit" value="Wikibase\Repo\Tests\RestApi"/>
+				<element key="tests/architecture" value="Wikibase\Repo\Tests\RestApi\Architecture"/>
 			</property>
 		</properties>
 	</rule>
