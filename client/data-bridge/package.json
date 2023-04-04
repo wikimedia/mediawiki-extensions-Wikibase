@@ -20,7 +20,7 @@
     "test:distnodiff": "npm run build -- --dest /tmp/dist && diff -q ./dist/data-bridge.app.js /tmp/dist/data-bridge.app.js && diff -q ./dist/css/data-bridge.app.css /tmp/dist/css/data-bridge.app.css && diff -q ./dist/data-bridge.init.js /tmp/dist/data-bridge.init.js && diff -q ./dist/data-bridge.chunk-vendors.js /tmp/dist/data-bridge.chunk-vendors.js",
     "test:storybook": "CHOKIDAR_USEPOLLING=1 start-storybook --ci --smoke-test --quiet",
     "test:mwlibs": "echo 'disabled (T297381)' # ZUUL_BRANCH=${ZUUL_BRANCH:-master} lib-version-check",
-    "test-unit-coverage": "vue-cli-service test:unit -c ./jest.config.unit.js --coverage && sed -i 's|SF:/src/client/data-bridge/|SF:|g' coverage/lcov.info",
+    "test-unit-coverage": "jest -c ./jest.config.unit.js --coverage && sed -i 's|SF:/src/client/data-bridge/|SF:|g' coverage/lcov.info",
     "selenium-test": "wdio tests/selenium/wdio.conf.js",
     "storybook": "start-storybook",
     "build-storybook": "build-storybook"
