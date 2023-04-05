@@ -4,7 +4,8 @@
 			"Abdeaitali",
 			"Anass Sedrati",
 			"Reda Benkhadra",
-			"SADIQUI"
+			"SADIQUI",
+			"Ideophagous"
 		]
 	},
 	"wikibase-edit": "بدل",
@@ -21,5 +22,9 @@
 	"wikibase-description-empty": "ما كاين حتى شي وصف",
 	"wikibase-sitelinks-special": "مواقع أخرى",
 	"wikibase-statementview-rank-normal": "ترتيب طبيعي",
-	"wikibase-entityselector-more": "كتر"
+	"wikibase-entityselector-more": "كتر",
+	"wikibase-setsitelink-introfull": "راك كاتقاد الليان ديال $2 ل [[:$1]].",
+	"wikibase-setsitelink-intro": "هاد لفورم كاتسمح ليك باش تقاد الليان ديال عنصر. راك محتاج ل توفير النمرة د لعنصر (متلاً Q23)، الرمز د السيت (مثلا \"enwiki\") و الليان د السيت باش يتقادّ عليه.",
+	"wikibase-setsitelink-label": "ليان د السيت:",
+	"wikibase-setsitelink-submit": "زيد ليان د السيت"
 }

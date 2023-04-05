@@ -4,6 +4,11 @@
 			"Han4299"
 		]
 	},
+	"wikibase-editlinks": "Pakabajiki sepakna",
+	"wikibase-linkitem-title": "Pasepaki siagang barambang",
+	"wikibase-linkitem-input-site": "Basa:",
 	"wikibase-linkitem-input-page": "Barambang:",
-	"wikibase-rc-hide-wikidata-show": "Pacinikang"
+	"wikibase-rc-hide-wikidata-hide": "Pacokkoi",
+	"wikibase-rc-hide-wikidata-show": "Pacinikang",
+	"wikibase-otherprojects": "Ilalang bala-bala maraenga"
 }
