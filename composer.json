@@ -49,7 +49,7 @@
 		"php-parallel-lint/php-parallel-lint": "1.3.2",
 		"slevomat/coding-standard": "^6.4",
 		"phpstan/phpstan": "^1.9",
-		"phpat/phpat": "^0.10.0"
+		"phpat/phpat": "^0.10.5"
 	},
 	"suggest": {
 		"ext-calendar": "Needed for dumpRdf script"

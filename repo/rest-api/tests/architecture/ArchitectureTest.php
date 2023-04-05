@@ -2,8 +2,6 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Architecture;
 
-use ArrayIterator;
-use ArrayObject;
 use PHPat\Selector\Selector;
 use PHPat\Test\Builder\Rule;
 use PHPat\Test\PHPat;
@@ -48,7 +46,6 @@ class ArchitectureTest {
 			...$this->dataModelEntityNamespaces(),
 			Selector::namespace( self::DOMAIN_MODEL ),
 			Selector::namespace( self::DOMAIN_READMODEL ),
-			...$this->phpCoreClasses(),
 		];
 	}
 
@@ -177,15 +174,6 @@ class ArchitectureTest {
 				]
 			),
 			Selector::namespace( 'DataValues' ),
-		];
-	}
-
-	private function phpCoreClasses(): array {
-		return [
-			Selector::classname( ArrayObject::class ),
-			Selector::classname( ArrayIterator::class ),
-			Selector::classname( \Throwable::class ),
-			Selector::classname( '/^\w*Exception$/', true ),
 		];
 	}
 

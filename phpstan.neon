@@ -6,6 +6,8 @@ services:
 
 parameters:
 	level: 1
+	phpat:
+		ignore_built_in_classes: true
 	paths:
 		- ./repo/rest-api/src/
 		- ./repo/rest-api/tests/architecture/
