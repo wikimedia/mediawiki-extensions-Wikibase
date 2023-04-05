@@ -27,42 +27,22 @@ class EditSummaryFormatter {
 		);
 	}
 
-	private function convertToFormattableSummary( EditSummary $summary ): FormatableSummary {
-		if ( $summary instanceof LabelEditSummary ) {
-			return $this->newSummaryForLabelEdit( $summary, 'wbsetlabel', 'set' );
-		} elseif ( $summary instanceof StatementEditSummary ) {
-			switch ( $summary->getEditAction() ) {
+	private function convertToFormattableSummary( EditSummary $editSummary ): FormatableSummary {
+		if ( $editSummary instanceof LabelEditSummary ) {
+			return $this->newSummaryForLabelEdit( $editSummary, 'wbsetlabel', 'set' );
+		} elseif ( $editSummary instanceof StatementEditSummary ) {
+			switch ( $editSummary->getEditAction() ) {
 				case EditSummary::ADD_ACTION:
-					$formatableSummary = $this->newFormatableSummaryForStatementEdit(
-						$summary,
-						'wbsetclaim',
-						'create'
-					);
-					// the "1" signifies the number of edited statements in wbsetclaim-related messages
-					$formatableSummary->addAutoCommentArgs( 1 );
-
-					return $formatableSummary;
+					return $this->newSummaryForStatementEdit( $editSummary, 'wbsetclaim', 'create', 1 );
 				case EditSummary::REMOVE_ACTION:
-					return $this->newFormatableSummaryForStatementEdit(
-						$summary,
-						'wbremoveclaims',
-						'remove'
-					);
+					return $this->newSummaryForStatementEdit( $editSummary, 'wbremoveclaims', 'remove' );
 				case EditSummary::REPLACE_ACTION:
 				case EditSummary::PATCH_ACTION:
-					$formatableSummary = $this->newFormatableSummaryForStatementEdit(
-						$summary,
-						'wbsetclaim',
-						'update'
-					);
-					// the "1" signifies the number of edited statements in wbsetclaim-related messages
-					$formatableSummary->addAutoCommentArgs( 1 );
-
-					return $formatableSummary;
+					return $this->newSummaryForStatementEdit( $editSummary, 'wbsetclaim', 'update', 1 );
 			}
 		}
 
-		throw new LogicException( "Unknown summary type '{$summary->getEditAction()}' " . get_class( $summary ) );
+		throw new LogicException( "Unknown summary type '{$editSummary->getEditAction()}' " . get_class( $editSummary ) );
 	}
 
 	private function newSummaryForLabelEdit(
@@ -78,20 +58,25 @@ class EditSummaryFormatter {
 		return $summary;
 	}
 
-	private function newFormatableSummaryForStatementEdit(
+	private function newSummaryForStatementEdit(
 		StatementEditSummary $editSummary,
 		string $moduleName,
-		string $actionName
+		string $actionName,
+		int $autoCommentArgs = null
 	): Summary {
 		$statement = $editSummary->getStatement();
-		$formatableSummary = new Summary( $moduleName, $actionName );
 
-		$formatableSummary->setUserSummary( $editSummary->getUserComment() );
-		$formatableSummary->addAutoSummaryArgs( [
+		$summary = new Summary( $moduleName, $actionName );
+		$summary->setUserSummary( $editSummary->getUserComment() );
+		$summary->addAutoSummaryArgs( [
 			[ $statement->getPropertyId()->getSerialization() => $statement->getMainSnak() ],
 		] );
+		if ( $autoCommentArgs !== null ) {
+			// the number of edited statements in wbsetclaim-related messages
+			$summary->addAutoCommentArgs( $autoCommentArgs );
+		}
 
-		return $formatableSummary;
+		return $summary;
 	}
 
 }
