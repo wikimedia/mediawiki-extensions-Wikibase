@@ -2,7 +2,7 @@
 
 const { assert, action, utils } = require( 'api-testing' );
 const entityHelper = require( '../helpers/entityHelper' );
-const formatStatementEditSummary = require( '../helpers/formatStatementEditSummary' );
+const { formatStatementEditSummary } = require( '../helpers/formatEditSummaries' );
 const { newAddItemStatementRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
 function makeEtag( ...revisionIds ) {

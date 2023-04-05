@@ -2,7 +2,7 @@
 
 const { assert, action } = require( 'api-testing' );
 const entityHelper = require( '../helpers/entityHelper' );
-const formatStatementEditSummary = require( '../helpers/formatStatementEditSummary' );
+const { formatStatementEditSummary } = require( '../helpers/formatEditSummaries' );
 const {
 	newAddItemStatementRequestBuilder,
 	newPatchItemStatementRequestBuilder,
