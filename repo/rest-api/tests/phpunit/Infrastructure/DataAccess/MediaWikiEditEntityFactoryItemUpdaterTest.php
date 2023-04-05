@@ -24,6 +24,8 @@ use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Item as ReadModelItem;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\ItemUpdateFailed;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\ItemUpdatePrevented;
@@ -243,8 +245,14 @@ class MediaWikiEditEntityFactoryItemUpdaterTest extends TestCase {
 			->build();
 
 		return [
-			NewItem::withId( 'Q123' )->andStatement( $writeModelStatement )->build(),
-			new ReadModelItem( new StatementList( $readModelStatement ) ),
+			NewItem::withId( 'Q123' )
+				->andLabel( 'en', 'English Label' )
+				->andStatement( $writeModelStatement )
+				->build(),
+			new ReadModelItem(
+				new Labels( new Label( 'en', 'English Label' ) ),
+				new StatementList( $readModelStatement )
+			),
 		];
 	}
 

@@ -7,10 +7,16 @@ namespace Wikibase\Repo\RestApi\Domain\ReadModel;
  */
 class Item {
 
+	private Labels $labels;
 	private StatementList $statements;
 
-	public function __construct( StatementList $statements ) {
+	public function __construct( Labels $labels, StatementList $statements ) {
+		$this->labels = $labels;
 		$this->statements = $statements;
+	}
+
+	public function getLabels(): Labels {
+		return $this->labels;
 	}
 
 	public function getStatements(): StatementList {

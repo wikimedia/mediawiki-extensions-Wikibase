@@ -24,6 +24,7 @@ use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
 use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Item as ReadModelItem;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
@@ -104,9 +105,10 @@ class AddItemStatementTest extends TestCase {
 		$this->guidGenerator = $this->createStub( GuidGenerator::class );
 		$this->guidGenerator->method( 'newStatementId' )->willReturn( $newGuid );
 
-		$updatedItem = new ReadModelItem( new StatementList(
-			NewStatementReadModel::noValueFor( 'P123' )->withGuid( $newGuid )->build()
-		) );
+		$updatedItem = new ReadModelItem(
+			new Labels(),
+			new StatementList( NewStatementReadModel::noValueFor( 'P123' )->withGuid( $newGuid )->build() )
+		);
 		$this->itemUpdater = $this->createMock( ItemUpdater::class );
 		$this->itemUpdater->method( 'update' )
 			->with(
@@ -118,9 +120,7 @@ class AddItemStatementTest extends TestCase {
 		$this->permissionChecker = $this->createStub( WikibaseEntityPermissionChecker::class );
 		$this->permissionChecker->method( 'canEdit' )->willReturn( true );
 
-		$useCase = $this->newUseCase();
-
-		$response = $useCase->execute( $request );
+		$response = $this->newUseCase()->execute( $request );
 
 		$this->assertInstanceOf( AddItemStatementResponse::class, $response );
 		$this->assertSame(

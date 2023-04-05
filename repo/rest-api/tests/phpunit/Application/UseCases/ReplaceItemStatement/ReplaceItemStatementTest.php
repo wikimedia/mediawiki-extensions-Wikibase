@@ -27,6 +27,7 @@ use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
 use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Item as ReadModelItem;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
@@ -103,9 +104,10 @@ class ReplaceItemStatementTest extends TestCase {
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemRetriever->method( 'getItem' )->willReturn( $item );
 
-		$updatedItem = new ReadModelItem( new StatementList(
-			NewStatementReadModel::someValueFor( 'P123' )->withGuid( $statementId )->build()
-		) );
+		$updatedItem = new ReadModelItem(
+			new Labels(),
+			new StatementList( NewStatementReadModel::someValueFor( 'P123' )->withGuid( $statementId )->build() )
+		);
 		$this->itemUpdater = $this->createMock( ItemUpdater::class );
 		$this->itemUpdater->expects( $this->once() )
 			->method( 'update' )

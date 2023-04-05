@@ -8,11 +8,14 @@ use Psr\Log\LoggerInterface;
 use RuntimeException;
 use User;
 use Wikibase\DataModel\Entity\Item as DataModelItem;
+use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Item;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\ItemUpdateFailed;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\ItemUpdatePrevented;
@@ -102,10 +105,20 @@ class MediaWikiEditEntityFactoryItemUpdater implements ItemUpdater {
 	}
 
 	private function convertDataModelItemToReadModel( DataModelItem $item ): Item {
-		return new Item( new StatementList( ...array_map(
-			[ $this->statementReadModelConverter, 'convert' ],
-			iterator_to_array( $item->getStatements() )
-		) ) );
+		return new Item(
+			new Labels(
+				...array_map(
+					fn( Term $term ) => new Label( $term->getLanguageCode(), $term->getText() ),
+					array_values( iterator_to_array( $item->getLabels() ) )
+				)
+			),
+			new StatementList(
+				...array_map(
+					[ $this->statementReadModelConverter, 'convert' ],
+					iterator_to_array( $item->getStatements() )
+				)
+			)
+		);
 	}
 
 }
