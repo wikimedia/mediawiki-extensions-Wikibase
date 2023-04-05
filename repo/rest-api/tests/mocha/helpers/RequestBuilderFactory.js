@@ -56,6 +56,14 @@ module.exports = {
 			.withJsonBodyParam( 'label', label );
 	},
 
+	newSetItemDescriptionRequestBuilder( itemId, languageCode, description ) {
+		return new RequestBuilder()
+			.withRoute( 'PUT', '/entities/items/{item_id}/descriptions/{language_code}' )
+			.withPathParam( 'item_id', itemId )
+			.withPathParam( 'language_code', languageCode )
+			.withJsonBodyParam( 'description', description );
+	},
+
 	newGetItemStatementsRequestBuilder( itemId ) {
 		return new RequestBuilder()
 			.withRoute( 'GET', '/entities/items/{item_id}/statements' )
