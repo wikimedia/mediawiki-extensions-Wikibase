@@ -1,3 +1,7 @@
 [
-
+	{
+		"path": "/wikibase/v0/entities/items/{item_id}/labels/{language_code}",
+		"method": "PUT",
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\SetItemLabelRouteHandler::factory"
+	}
 ]
