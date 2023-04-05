@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <ruleset name="rest-api">
-	<!-- This is not a standalone ruleset, but an extension of Wikibase's main phpcs
-		config, from which it is loaded. -->
+	<!-- This is not a standalone ruleset, but an extension of Wikibase's main phpcs config.
+		It is invoked separately to prevent the two rule sets from interfering with each other. -->
 
 	<rule ref="Generic.PHP.RequireStrictTypes" />
 	<rule ref="Generic.WhiteSpace.ScopeIndent" />
@@ -23,10 +23,14 @@
 	<rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
 		<properties>
 			<property name="rootNamespaces" type="array">
-				<element key="src" value="Wikibase\Repo\RestApi"/>
-				<element key="tests/phpunit" value="Wikibase\Repo\Tests\RestApi"/>
-				<element key="tests/architecture" value="Wikibase\Repo\Tests\RestApi\Architecture"/>
+				<element key="repo/rest-api/src" value="Wikibase\Repo\RestApi"/>
+				<element key="repo/rest-api/tests/phpunit" value="Wikibase\Repo\Tests\RestApi"/>
+				<element key="repo/rest-api/tests/architecture" value="Wikibase\Repo\Tests\RestApi\Architecture"/>
 			</property>
 		</properties>
 	</rule>
+
+	<arg name="tab-width" value="4" />
+	<arg name="extensions" value="php" />
+	<exclude-pattern>node_modules/*</exclude-pattern>
 </ruleset>

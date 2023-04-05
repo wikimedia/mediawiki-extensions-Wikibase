@@ -57,11 +57,13 @@
 	"scripts": {
 		"lint": "parallel-lint . --exclude vendor --exclude node_modules --exclude .git --exclude lib/packages/*/*/vendor",
 		"phpcs": "phpcs -p -s",
+		"phpcs:rest-api": "phpcs -p -s --standard=./repo/rest-api/ruleset.xml repo/rest-api/",
 		"phpcs-modified": "bash build/phpcsGitModified.sh",
 		"phpcs-committed": "bash build/phpcsGitCommitted.sh",
 		"fix": [
 			"minus-x fix .",
-			"phpcbf"
+			"phpcbf",
+			"phpcbf --standard=./repo/rest-api/ruleset.xml repo/rest-api/"
 		],
 		"fix-modified": "bash build/phpcbfGitModified.sh",
 		"fix-committed": "bash build/phpcbfGitCommitted.sh",
@@ -71,6 +73,7 @@
 			"composer validate --no-interaction",
 			"composer lint",
 			"composer phpcs",
+			"composer phpcs:rest-api",
 			"composer phpstan",
 			"minus-x check ."
 		],
