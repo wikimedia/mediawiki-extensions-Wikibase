@@ -8,8 +8,8 @@
 	},
 	"wikibase-edit": "snfl",
 	"wikibase-add": "rnu",
-	"wikibase-label-empty": "Ur illi ḥta yan yism unmil",
-	"wikibase-description-empty": "Ur ittufki ḥta yan uglam",
-	"wikibase-sitelinks-special": "Ssitat yaḍni",
+	"wikibase-label-empty": "Ur illi ism unmil",
+	"wikibase-description-empty": "Ur illi aglam",
+	"wikibase-sitelinks-special": "Asitn yaḍnin",
 	"wikibase-statementview-rank-normal": "Adaru afrar"
 }

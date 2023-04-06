@@ -2,9 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Alexx",
-			"Joe Watzmo"
+			"Joe Watzmo",
+			"Mucalexx"
 		]
 	},
 	"wikibase-edit": "weakln",
-	"wikibase-add": "dazuaschreim"
+	"wikibase-add": "dazuaschreim",
+	"wikibase-sitelinks-special": "Ándre Nétzseiten"
 }

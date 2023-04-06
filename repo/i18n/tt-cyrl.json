@@ -4,7 +4,8 @@
 			"Derslek",
 			"Ladsgroup",
 			"Ильгиз",
-			"Ильнар"
+			"Ильнар",
+			"Blackisnewyellow"
 		]
 	},
 	"wikibase-edit": "үзгәртү",
@@ -17,5 +18,7 @@
 	"wikibase-sitelinks-special": "Башка сайтлар",
 	"wikibase-statementview-rank-normal": "Нормаль ранг",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|чыганак}}",
+	"special-newitem": "Яңа элемент ясарга",
+	"wikibase-newitem-fieldset": "Яңа элемент ясарга",
 	"wikibase-api-inconsistent-language": "Туры килмәгән \"$1\" тел табылды (\"$2\" көтелгән иде)."
 }

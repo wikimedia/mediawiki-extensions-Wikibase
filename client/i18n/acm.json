@@ -1,9 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ahmedadeljaff"
+			"Ahmedadeljaff",
+			"MRidhaAJ"
 		]
 	},
+	"wikibase-client-desc": "عميل امتداد Wikibase",
+	"tooltip-t-wikibase": "اربط بعنصر مرتبط في مستودع البيانات",
+	"wikibase-after-page-move": "لازم يكون نقلك هسه [$1 منعكس بوصلة لغة عنصر {{WBREPONAME}}]. نطلب منك التحقق من حدوث هاذ.",
+	"wikibase-after-page-delete": "ينبغي أن تكون الوصلة إلى هاي الصفحة من [$1 عنصر {{WBREPONAME}} المرتبط] محذوفه. نطلب منك التحقق من حدوث هاذ.",
+	"wikibase-after-page-delete-queued": "[$1 عنصر {{WBREPONAME}}] المرتبط بهاي الصفحة راح يتحدث تلقائيًا. اعرف هاذ يمكن ما يتحدث فورًا.",
+	"wikibase-comment-add": "سويت عنصر {{WBREPONAME}}.",
 	"wikibase-dataitem": "عنـصر {{WBREPONAME}}",
 	"wikibase-editlinks": "عدل الوصلات",
 	"wikibase-linkitem-addlinks": "ضيف وصلات",
@@ -13,5 +20,6 @@
 	"wikibase-linkitem-input-site": "لغة:",
 	"wikibase-linkitem-input-page": "صفحه:",
 	"wikibase-rc-hide-wikidata-hide": "ضم",
-	"wikibase-rc-hide-wikidata-show": "طلعها"
+	"wikibase-rc-hide-wikidata-show": "طلعها",
+	"wikibase-otherprojects": "بمشاريع غير"
 }

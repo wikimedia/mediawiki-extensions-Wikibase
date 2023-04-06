@@ -87,7 +87,7 @@
 	"wikibase-error-exceeded-entity-access-limit": "Çok fazla {{WBREPONAME}} varlığa erişildi.",
 	"wikibase-error-exceeded-referenced-entity-id-limit": "Çok fazla \"mw.wikibase.getReferencedEntityId\" araması, yalnızca $2 taneye kadar {{PLURAL:$2|izin verildi}}.",
 	"unconnectedpages": "Ögelere bağlı olmayan sayfalar",
-	"unconnectedpages-summary": "Bu sayfa, (bağlı ögeleri destekleyen ad alanlarında) bağlı veri ögesi içermeyen sayfaları listeler. Liste, azalan sayfa kimliğine göre sıralanır, böylece daha önce yeni sayfalar listelenir.",
+	"unconnectedpages-summary": "Bu sayfa, (bağlı ögeleri destekleyen ad alanlarında) bağlı veri ögesi içermeyen sayfaları listeler.",
 	"wikibase-unconnectedpages-submit": "Sayfaları göster",
 	"pageswithbadges": "Rozetli sayfalar",
 	"pageswithbadges-summary": "Burada rozetli sayfalar (kaliteli veya seçkin maddeler gibi...) listelenebilir. Yeni sayfalar başta olmak üzere azalan sırada sayfalar listelenmektedir.",

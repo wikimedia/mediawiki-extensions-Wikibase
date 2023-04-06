@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Khanmarat",
-			"TayfunEt."
+			"TayfunEt.",
+			"Sorbat"
 		]
 	},
 	"tooltip-t-wikibase": "Пелешмәле репозиторийтағы пәйләнкән элементҡа ссылка",
@@ -10,6 +11,10 @@
 	"wikibase-dataitem": "{{WBREPONAME}}ның элементы",
 	"wikibase-editlinks": "Ссылкаларны төсәткәле",
 	"wikibase-editlinkstitle": "Пашҡа телләртәге ссылкаларны төсәткәле",
+	"wikibase-linkitem-addlinks": "Сылтамалар ҡушҡалы",
+	"wikibase-linkitem-title": "Пит пелән пәйләү",
+	"wikibase-linkitem-linkpage": "Пит пелән пәйләгәле",
+	"wikibase-linkitem-selectlink": "Сайлаң ҡайсы сайт ма пит пелән олағалы итәсес пы питне.",
 	"wikibase-linkitem-input-site": "Тел:",
 	"wikibase-linkitem-input-page": "Пит:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
