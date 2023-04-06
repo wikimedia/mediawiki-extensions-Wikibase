@@ -20,7 +20,7 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\Rdbms\ClientDomainDb;
 use Wikimedia\Rdbms\DBUnexpectedError;
 use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\Platform\ISQLPlatform;
+use Wikimedia\Rdbms\SelectQueryBuilder;
 
 /**
  * Helper class for updating the wbc_entity_usage table.
@@ -408,10 +408,10 @@ class EntityUsageTable {
 			return $this->getUsedEntityIdStringsMySql( $subQueries, $readConnection );
 		} else {
 			$values = [];
-			foreach ( $subQueries as $sql ) {
-				$res = $readConnection->query( $sql, __METHOD__, ISQLPlatform::QUERY_CHANGE_NONE );
-				if ( $res->numRows() ) {
-					$values[] = $res->current()->eu_entity_id;
+			foreach ( $subQueries as $query ) {
+				$row = $query->caller( __METHOD__ )->fetchRow();
+				if ( $row !== false ) {
+					$values[] = $row->eu_entity_id;
 				}
 			}
 		}
@@ -422,7 +422,7 @@ class EntityUsageTable {
 	/**
 	 * @param string[] $idStrings
 	 *
-	 * @return string[]
+	 * @return SelectQueryBuilder[]
 	 */
 	private function getUsedEntityIdStringsQueries( array $idStrings ): array {
 		$subQueries = [];
@@ -433,8 +433,7 @@ class EntityUsageTable {
 				->select( 'eu_entity_id' )
 				->from( $this->tableName )
 				->where( [ 'eu_entity_id' => $idString ] )
-				->limit( 1 )
-				->getSQL();
+				->limit( 1 );
 		}
 
 		return $subQueries;
@@ -459,7 +458,7 @@ class EntityUsageTable {
 	}
 
 	/**
-	 * @param string[] $subQueries
+	 * @param SelectQueryBuilder[] $subQueries
 	 * @param IDatabase $readConnection must have type MySQL
 	 * @return string[]
 	 */
@@ -471,8 +470,11 @@ class EntityUsageTable {
 
 		// On MySQL we can UNION up queries and run them at once
 		foreach ( array_chunk( $subQueries, $this->batchSize ) as $queryChunks ) {
-			$sql = $readConnection->unionQueries( $queryChunks, true );
-			$res = $readConnection->query( $sql, __METHOD__, ISQLPlatform::QUERY_CHANGE_NONE );
+			$uqb = $readConnection->newUnionQueryBuilder();
+			foreach ( $queryChunks as $query ) {
+				$uqb->add( $query );
+			}
+			$res = $uqb->all()->caller( __METHOD__ )->fetchResultSet();
 			foreach ( $res as $row ) {
 				$values[] = $row->eu_entity_id;
 			}
