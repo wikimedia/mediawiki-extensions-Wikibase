@@ -176,7 +176,7 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @deprecated use @{link LanguageNameLookupFactory} or {@link LanguageNameUtils} instead
+	 * @deprecated use {@link LanguageNameLookupFactory} or {@link LanguageNameUtils} instead
 	 */
 	public static function getLanguageNameLookup( ContainerInterface $services = null ): LanguageNameLookup {
 		return ( $services ?: MediaWikiServices::getInstance() )
