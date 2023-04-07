@@ -31,6 +31,11 @@ class EditSummaryFormatterTest extends MediaWikiLangTestCase {
 	}
 
 	public function labelEditSummaryProvider(): Generator {
+		yield 'add' => [
+			LabelEditSummary::newAddSummary( 'add user comment', new Term( 'en', 'LABEL-TEXT' ) ),
+			'/* wbsetlabel-add:1|en */ LABEL-TEXT, add user comment',
+		];
+
 		yield 'replace' => [
 			LabelEditSummary::newReplaceSummary( 'replace user comment', new Term( 'en', 'LABEL-TEXT' ) ),
 			'/* wbsetlabel-set:1|en */ LABEL-TEXT, replace user comment',

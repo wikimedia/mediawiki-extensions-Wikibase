@@ -27,19 +27,21 @@ class SetItemLabel {
 		$term = new Term( $request->getLanguageCode(), $request->getLabel() );
 
 		$item = $this->itemRetriever->getItem( $itemId );
+		$labelExists = $item->getLabels()->hasTermForLanguage( $request->getLanguageCode() );
 		$item->getLabels()->setTerm( $term );
 
-		$editMetadata = new EditMetadata(
-			$request->getEditTags(),
-			$request->isBot(),
-			LabelEditSummary::newReplaceSummary( $request->getComment(), $term )
-		);
+		$editSummary = $labelExists
+			? LabelEditSummary::newReplaceSummary( $request->getComment(), $term )
+			: LabelEditSummary::newAddSummary( $request->getComment(), $term );
+
+		$editMetadata = new EditMetadata( $request->getEditTags(), $request->isBot(), $editSummary );
 		$newRevision = $this->itemUpdater->update( $item, $editMetadata );
 
 		return new SetItemLabelResponse(
 			$newRevision->getItem()->getLabels()[$request->getLanguageCode()],
 			$newRevision->getLastModified(),
-			$newRevision->getRevisionId()
+			$newRevision->getRevisionId(),
+			$labelExists
 		);
 	}
 

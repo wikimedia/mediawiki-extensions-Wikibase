@@ -19,6 +19,10 @@ class LabelEditSummary implements EditSummary {
 		$this->term = $term;
 	}
 
+	public static function newAddSummary( ?string $userComment, Term $term ): self {
+		return new self( self::ADD_ACTION, $userComment, $term );
+	}
+
 	public static function newReplaceSummary( ?string $userComment, Term $term ): self {
 		return new self( self::REPLACE_ACTION, $userComment, $term );
 	}

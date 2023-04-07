@@ -29,7 +29,12 @@ class EditSummaryFormatter {
 
 	private function convertToFormattableSummary( EditSummary $editSummary ): FormatableSummary {
 		if ( $editSummary instanceof LabelEditSummary ) {
-			return $this->newSummaryForLabelEdit( $editSummary, 'wbsetlabel', 'set' );
+			switch ( $editSummary->getEditAction() ) {
+				case EditSummary::ADD_ACTION:
+					return $this->newSummaryForLabelEdit( $editSummary, 'wbsetlabel', 'add' );
+				case EditSummary::REPLACE_ACTION:
+					return $this->newSummaryForLabelEdit( $editSummary, 'wbsetlabel', 'set' );
+			}
 		} elseif ( $editSummary instanceof StatementEditSummary ) {
 			switch ( $editSummary->getEditAction() ) {
 				case EditSummary::ADD_ACTION:

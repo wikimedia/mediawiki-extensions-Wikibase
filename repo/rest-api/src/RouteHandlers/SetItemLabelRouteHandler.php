@@ -56,7 +56,7 @@ class SetItemLabelRouteHandler extends SimpleHandler {
 				$jsonBody[self::COMMENT_BODY_PARAM]
 			)
 		);
-		return $this->newSuccessHttpResponse( $useCaseResponse );
+		return $this->newSuccessHttpResponse( $useCaseResponse, $itemId );
 	}
 
 	/**
@@ -115,9 +115,9 @@ class SetItemLabelRouteHandler extends SimpleHandler {
 		return null;
 	}
 
-	private function newSuccessHttpResponse( SetItemLabelResponse $useCaseResponse ): Response {
+	private function newSuccessHttpResponse( SetItemLabelResponse $useCaseResponse, string $itemId ): Response {
 		$httpResponse = $this->getResponseFactory()->create();
-		$httpResponse->setStatus( 200 );
+		$httpResponse->setStatus( $useCaseResponse->wasReplaced() ? 200 : 201 );
 		$httpResponse->setHeader( 'Content-Type', 'application/json' );
 		$httpResponse->setHeader( 'ETag', "\"{$useCaseResponse->getRevisionId()}\"" );
 		$httpResponse->setHeader(
