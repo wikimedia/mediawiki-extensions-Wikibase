@@ -333,6 +333,7 @@ return [
 
 	'WbRestApi.SetItemLabel' => function( MediaWikiServices $services ): SetItemLabel {
 		return new SetItemLabel(
+			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever( WikibaseRepo::getEntityRevisionLookup() ),
 			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getItemUpdater( $services )
 		);

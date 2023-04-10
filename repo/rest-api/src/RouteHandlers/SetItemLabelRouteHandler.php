@@ -11,6 +11,7 @@ use MediaWiki\Rest\Validator\BodyValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabelRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabelResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -28,13 +29,15 @@ class SetItemLabelRouteHandler extends SimpleHandler {
 	public const COMMENT_BODY_PARAM = 'comment';
 
 	private SetItemLabel $setItemLabel;
+	private ResponseFactory $responseFactory;
 
-	public function __construct( SetItemLabel $setItemLabel ) {
+	public function __construct( SetItemLabel $setItemLabel, ResponseFactory $responseFactory ) {
 		$this->setItemLabel = $setItemLabel;
+		$this->responseFactory = $responseFactory;
 	}
 
 	public static function factory(): Handler {
-		return new self( WbRestApi::getSetItemLabel() );
+		return new self( WbRestApi::getSetItemLabel(), new ResponseFactory() );
 	}
 
 	/**
@@ -46,17 +49,21 @@ class SetItemLabelRouteHandler extends SimpleHandler {
 
 	public function runUseCase( string $itemId, string $languageCode ): Response {
 		$jsonBody = $this->getValidatedBody();
-		$useCaseResponse = $this->setItemLabel->execute(
-			new SetItemLabelRequest(
-				$itemId,
-				$languageCode,
-				$jsonBody[self::LABEL_BODY_PARAM],
-				$jsonBody[self::TAGS_BODY_PARAM],
-				$jsonBody[self::BOT_BODY_PARAM],
-				$jsonBody[self::COMMENT_BODY_PARAM]
-			)
-		);
-		return $this->newSuccessHttpResponse( $useCaseResponse, $itemId );
+		try {
+			$useCaseResponse = $this->setItemLabel->execute(
+				new SetItemLabelRequest(
+					$itemId,
+					$languageCode,
+					$jsonBody[self::LABEL_BODY_PARAM],
+					$jsonBody[self::TAGS_BODY_PARAM],
+					$jsonBody[self::BOT_BODY_PARAM],
+					$jsonBody[self::COMMENT_BODY_PARAM]
+				)
+			);
+			return $this->newSuccessHttpResponse( $useCaseResponse, $itemId );
+		} catch ( UseCaseError $e ) {
+			return $this->responseFactory->newErrorResponseFromException( $e );
+		}
 	}
 
 	/**
