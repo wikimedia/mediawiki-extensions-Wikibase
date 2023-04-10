@@ -348,6 +348,7 @@
 	"wikibase-mylanguagefallbackchain-verbatim-item": "$1 – $2",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 – $2, konverditud valikust $3 – $4",
 	"wikibase-api-unresolved-redirect": "See üksuse identifikaator viitab ümbersuunamisele, mida siin ei toetata.",
+	"wikibase-api-failed-save": "Salvestamine ei õnnestunud.",
 	"wikibase-api-no-external-page": "Väline klientvõrgukoht \"$1\" ei pakkunud andmeid lehekülje \"$2\" kohta.",
 	"wikibase-api-no-such-sitelink": "Äramärkimiste muutmisel ei leitud linki võrgukohta \"$1\".",
 	"wikibase-api-not-recognized-siteid": "Ette antud võrgukohaidentifikaatorit ei tuntud ära.",
