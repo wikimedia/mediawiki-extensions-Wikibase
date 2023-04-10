@@ -2,9 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Servien",
-			"Slomox"
+			"Slomox",
+			"Wikiundeplattsnacker"
 		]
 	},
 	"wikibase-edit": "ännern",
+	"wikibase-add": "tofögen",
 	"wikibase-tainted-ref-popper-help-link-text": "Hülp"
 }
