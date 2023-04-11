@@ -45,8 +45,6 @@ return call_user_func( function() {
 		],
 
 		'wikibase.experts.__namespace' => $expertsPaths + [
-			 // T326405
-			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'__namespace.js',
 			],
@@ -56,8 +54,6 @@ return call_user_func( function() {
 		],
 
 		'wikibase.experts.Entity' => $expertsPaths + [
-			 // T326405
-			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'Entity.js',
 			],
@@ -327,8 +323,6 @@ return call_user_func( function() {
 		],
 
 		'wikibase.sites' => $moduleTemplate + [
-			 // T326405
-			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'wikibase.sites.js',
 			],
