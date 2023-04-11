@@ -6,6 +6,7 @@ use LogicException;
 use Wikibase\Lib\FormatableSummary;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\LabelEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
 use Wikibase\Repo\SummaryFormatter;
 
@@ -27,7 +28,9 @@ class EditSummaryFormatter {
 	}
 
 	private function convertToFormattableSummary( EditSummary $summary ): FormatableSummary {
-		if ( $summary instanceof StatementEditSummary ) {
+		if ( $summary instanceof LabelEditSummary ) {
+			return $this->newSummaryForLabelEdit( $summary, 'wbsetlabel', 'set' );
+		} elseif ( $summary instanceof StatementEditSummary ) {
 			switch ( $summary->getEditAction() ) {
 				case EditSummary::ADD_ACTION:
 					$formatableSummary = $this->newFormatableSummaryForStatementEdit(
@@ -60,6 +63,19 @@ class EditSummaryFormatter {
 		}
 
 		throw new LogicException( "Unknown summary type '{$summary->getEditAction()}' " . get_class( $summary ) );
+	}
+
+	private function newSummaryForLabelEdit(
+		LabelEditSummary $editSummary,
+		string $moduleName,
+		string $actionName
+	): Summary {
+		$summary = new Summary( $moduleName, $actionName );
+		$summary->setLanguage( $editSummary->getTerm()->getLanguageCode() );
+		$summary->addAutoSummaryArgs( [ $editSummary->getTerm()->getText() ] );
+		$summary->setUserSummary( $editSummary->getUserComment() );
+
+		return $summary;
 	}
 
 	private function newFormatableSummaryForStatementEdit(

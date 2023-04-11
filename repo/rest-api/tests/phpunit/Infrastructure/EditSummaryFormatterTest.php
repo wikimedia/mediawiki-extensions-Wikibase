@@ -4,8 +4,10 @@ namespace Wikibase\Repo\Tests\RestApi\Infrastructure;
 
 use Generator;
 use MediaWikiLangTestCase;
+use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\LabelEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
 use Wikibase\Repo\WikibaseRepo;
@@ -20,7 +22,8 @@ use Wikibase\Repo\WikibaseRepo;
 class EditSummaryFormatterTest extends MediaWikiLangTestCase {
 
 	/**
-	 * @dataProvider editSummaryProvider
+	 * @dataProvider labelEditSummaryProvider
+	 * @dataProvider statementEditSummaryProvider
 	 */
 	public function testFormat( EditSummary $editSummary, string $formattedSummary ): void {
 		$this->assertSame(
@@ -30,7 +33,19 @@ class EditSummaryFormatterTest extends MediaWikiLangTestCase {
 		);
 	}
 
-	public function editSummaryProvider(): Generator {
+	public function labelEditSummaryProvider(): Generator {
+		yield 'replace' => [
+			LabelEditSummary::newReplaceSummary( 'replace user comment', new Term( 'en', 'LABEL-TEXT' ) ),
+			'/* wbsetlabel-set:1|en */ LABEL-TEXT, replace user comment',
+		];
+
+		yield 'no user comment' => [
+			LabelEditSummary::newReplaceSummary( null, new Term( 'en', 'LABEL-TEXT' ) ),
+			'/* wbsetlabel-set:1|en */ LABEL-TEXT',
+		];
+	}
+
+	public function statementEditSummaryProvider(): Generator {
 		// not using statements with values here because in order to format them, SummaryFormatter needs to look up the Property's data type
 		// which means it needs to be persisted. This is unnecessary here, since we're testing the summary conversion and can assume that
 		// the inner SummaryFormatter works fine.
