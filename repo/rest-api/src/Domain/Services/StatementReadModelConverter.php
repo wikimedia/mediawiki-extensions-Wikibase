@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Domain\Services;
 
-use Wikibase\DataModel\Reference as DataModelRefrence;
+use Wikibase\DataModel\Reference as DataModelReference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
@@ -58,7 +58,7 @@ class StatementReadModelConverter {
 	private function convertReferences( ReferenceList $references ): References {
 		return new References(
 			...array_map(
-				fn ( DataModelRefrence $ref ) => new ReadModelReference(
+				fn ( DataModelReference $ref ) => new ReadModelReference(
 					$ref->getHash(),
 					array_map(
 						[ $this, 'convertSnakToPropertyValuePair' ],
