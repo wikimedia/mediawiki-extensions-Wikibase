@@ -10,12 +10,9 @@ const {
 	createItemWithStatements
 } = require( '../helpers/entityHelper' );
 const { newGetItemStatementsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { makeEtag } = require( '../helpers/httpHelper' );
 
 describe( 'GET /entities/items/{id}/statements', () => {
-
-	function makeEtag( ...revisionIds ) {
-		return revisionIds.map( ( revId ) => `"${revId}"` ).join( ',' );
-	}
 
 	let testItemId;
 	let testPropertyId;

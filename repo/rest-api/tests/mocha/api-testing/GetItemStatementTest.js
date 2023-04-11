@@ -6,10 +6,7 @@ const {
 	newGetItemStatementRequestBuilder,
 	newGetStatementRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
-
-function makeEtag( ...revisionIds ) {
-	return revisionIds.map( ( revId ) => `"${revId}"` ).join( ',' );
-}
+const { makeEtag } = require( '../helpers/httpHelper' );
 
 describe( 'GET statement', () => {
 	let testItemId;

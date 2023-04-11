@@ -4,10 +4,7 @@ const { assert, action, utils } = require( 'api-testing' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { formatStatementEditSummary } = require( '../helpers/formatEditSummaries' );
 const { newAddItemStatementRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
-
-function makeEtag( ...revisionIds ) {
-	return revisionIds.map( ( revId ) => `"${revId}"` ).join( ',' );
-}
+const { makeEtag } = require( '../helpers/httpHelper' );
 
 describe( 'POST /entities/items/{item_id}/statements', () => {
 	let testItemId;

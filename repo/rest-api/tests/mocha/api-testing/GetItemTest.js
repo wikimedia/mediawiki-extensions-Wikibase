@@ -9,10 +9,7 @@ const {
 } = require( '../helpers/entityHelper' );
 const { assert, utils, action } = require( 'api-testing' );
 const { newGetItemRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
-
-function makeEtag( ...revisionIds ) {
-	return revisionIds.map( ( revId ) => `"${revId}"` ).join( ',' );
-}
+const { makeEtag } = require( '../helpers/httpHelper' );
 
 const germanLabel = 'a-German-label-' + utils.uniq();
 const englishLabel = 'an-English-label-' + utils.uniq();

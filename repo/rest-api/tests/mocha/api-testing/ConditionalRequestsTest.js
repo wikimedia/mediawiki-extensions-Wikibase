@@ -10,10 +10,7 @@ const {
 	createEntity
 } = require( '../helpers/entityHelper' );
 const { newAddItemStatementRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
-
-function makeEtag( ...revisionIds ) {
-	return revisionIds.map( ( revId ) => `"${revId}"` ).join( ',' );
-}
+const { makeEtag } = require( '../helpers/httpHelper' );
 
 function assertValid304Response( response, revisionId ) {
 	assert.equal( response.status, 304 );

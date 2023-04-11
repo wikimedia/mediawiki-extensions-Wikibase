@@ -9,10 +9,7 @@ const {
 	newPatchStatementRequestBuilder,
 	newReplaceStatementRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
-
-function makeEtag( ...revisionIds ) {
-	return revisionIds.map( ( revId ) => `"${revId}"` ).join( ',' );
-}
+const { makeEtag } = require( '../helpers/httpHelper' );
 
 function assertValid400Response( response, responseBodyErrorCode, context = null ) {
 	assert.strictEqual( response.status, 400 );
