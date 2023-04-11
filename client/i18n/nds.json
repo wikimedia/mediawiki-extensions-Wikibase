@@ -17,5 +17,6 @@
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
 	"wikibase-rc-hide-wikidata-hide": "Verstek",
 	"wikibase-rc-hide-wikidata-show": "wiesen",
-	"wikibase-rc-wikibase-edit-title": "Ännern vun {{WBREPONAME}}"
+	"wikibase-rc-wikibase-edit-title": "Ännern vun {{WBREPONAME}}",
+	"wikibase-otherprojects": " In anner Projekten"
 }
