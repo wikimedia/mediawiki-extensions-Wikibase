@@ -21,7 +21,8 @@
 			"Smigles",
 			"Stjn",
 			"Vlad5250",
-			"Александр Сигачёв"
+			"Александр Сигачёв",
+			"WindEwriX"
 		]
 	},
 	"specialpages-group-wikibase": "Вики-база",
@@ -105,7 +106,7 @@
 	"wikibase-entity-summary-wbsetreference-set": "Изменена ссылка на заявление",
 	"wikibase-entity-summary-wbsetlabel-add": "Добавлена метка [$2]",
 	"wikibase-entity-summary-wbsetlabel-set": "Изменено название [$2]",
-	"wikibase-entity-summary-wbsetlabel-remove": "Удалено название [$2]",
+	"wikibase-entity-summary-wbsetlabel-remove": "Удалена метка [$2]",
 	"wikibase-entity-summary-wbsetdescription-add": "Добавлено описание [$2]",
 	"wikibase-entity-summary-wbsetdescription-set": "Изменено описание [$2]",
 	"wikibase-entity-summary-wbsetdescription-remove": "Удалено описание [$2]",

@@ -6,7 +6,8 @@
 		]
 	},
 	"wikibase-comment-update": "{{WBREPONAME}} вуайхма",
-	"wikibase-dataitem": "{{WBREPONAME}} элеме̄ннт",
+	"wikibase-comment-multi": "$1 {{PLURAL:$1|вуайхэсс|вуайхэз|вуайхэссэ}}",
+	"wikibase-dataitem": "{{WBREPONAME}} элеменнт",
 	"wikibase-editlinks": "Вуайхэ ужэтҍ",
 	"wikibase-editlinkstitle": "Вуайхэ кӣлкэскса вӯлкхэллмужэнҍ",
 	"wikibase-linkitem-addlinks": "Лажьхэ ужэтҍ",

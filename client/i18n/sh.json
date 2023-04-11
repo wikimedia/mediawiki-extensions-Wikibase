@@ -23,8 +23,8 @@
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Sakrij",
 	"wikibase-rc-hide-wikidata-show": "Prikaži",
-	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "Izmjena na Wikipodacima",
+	"wikibase-rc-wikibase-edit-letter": "P",
+	"wikibase-rc-wikibase-edit-title": "Ova izmjena načinjena je na Wikipodacima",
 	"wikibase-otherprojects": "Na drugim projektima",
 	"wikibase-otherprojects-beta-message": "Bočna traka drugih projekata"
 }

@@ -24,6 +24,7 @@
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|gáldu}}",
 	"wikibase-snakview-property-input-placeholder": "Iešvuohta",
 	"wikibase-snakview-variations-somevalue-label": "dovdameahttun árvu",
+	"wikibase-entityselector-notfound": "Eai bohtosat",
 	"wikibase-itembytitle-submit": "Oza",
 	"wikibase-itemdisambiguation-lookup-language": "Giellakoda:",
 	"wikibase-itemdisambiguation-lookup-label": "Namma:",
