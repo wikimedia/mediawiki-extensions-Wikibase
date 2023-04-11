@@ -26,6 +26,11 @@ describe( 'PUT /entities/items/{item_id}/labels/{language_code}', () => {
 		assertValidResponse( response, labelText );
 	}
 
+	function assertValid201Response( response, labelText ) {
+		assert.strictEqual( response.status, 201 );
+		assertValidResponse( response, labelText );
+	}
+
 	before( async () => {
 		const createEntityResponse = await entityHelper.createEntity( 'item', {
 			labels: {
@@ -46,7 +51,31 @@ describe( 'PUT /entities/items/{item_id}/labels/{language_code}', () => {
 	} );
 
 	describe( '20x success response ', () => {
-		it( 'can replace a label', async () => {
+		it( 'can add a label with edit metadata omitted', async () => {
+			const languageCode = 'de';
+			const newLabel = `neues deutsches Label ${utils.uniq()}`;
+			const comment = 'omg look, i added a new label';
+			const response = await newSetItemLabelRequestBuilder( testItemId, languageCode, newLabel )
+				.withJsonBodyParam( 'comment', comment )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValid201Response( response, newLabel );
+
+			const editMetadata = await entityHelper.getLatestEditMetadata( testItemId );
+			assert.strictEqual(
+				editMetadata.comment,
+				formatTermEditSummary(
+					'wbsetlabel',
+					'add',
+					languageCode,
+					newLabel,
+					comment
+				)
+			);
+		} );
+
+		it( 'can replace a label with edit metadata provided', async () => {
 			const languageCode = 'en';
 			const newLabel = `new english label ${utils.uniq()}`;
 			const user = await action.robby(); // robby is a bot

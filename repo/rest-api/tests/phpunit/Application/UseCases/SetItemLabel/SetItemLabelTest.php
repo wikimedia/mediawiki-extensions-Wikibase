@@ -36,6 +36,38 @@ class SetItemLabelTest extends TestCase {
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
 	}
 
+	public function testAddLabel(): void {
+		$itemId = 'Q123';
+		$langCode = 'en';
+		$newLabelText = 'New label';
+		$editTags = [ 'some', 'tags' ];
+		$isBot = false;
+		$comment = "{$this->getName()} Comment";
+		$revisionId = 657;
+		$lastModified = '20221212040506';
+		$item = NewItem::withId( $itemId )->build();
+
+		$this->itemRetriever = $this->createMock( ItemRetriever::class );
+		$this->itemRetriever->expects( $this->once() )->method( 'getItem' )->with( $itemId )->willReturn( $item );
+
+		$updatedItem = new Item( new Labels( new Label( $langCode, $newLabelText ) ), new StatementList() );
+		$this->itemUpdater = $this->createMock( ItemUpdater::class );
+		$this->itemUpdater->expects( $this->once() )->method( 'update' )
+			->with(
+				$this->callback( fn( DataModelItem $item ) => $item->getLabels()->toTextArray() === [ $langCode => $newLabelText ] ),
+				$this->expectEquivalentMetadata( $editTags, $isBot, $comment, EditSummary::ADD_ACTION )
+			)
+			->willReturn( new ItemRevision( $updatedItem, $lastModified, $revisionId ) );
+
+		$request = new SetItemLabelRequest( $itemId, $langCode, $newLabelText, $editTags, $isBot, $comment );
+		$response = $this->newUseCase()->execute( $request );
+
+		$this->assertEquals( new Label( $langCode, $newLabelText ), $response->getLabel() );
+		$this->assertSame( $revisionId, $response->getRevisionId() );
+		$this->assertSame( $lastModified, $response->getLastModified() );
+		$this->assertFalse( $response->wasReplaced() );
+	}
+
 	public function testReplaceLabel(): void {
 		$itemId = 'Q123';
 		$langCode = 'en';
@@ -65,6 +97,7 @@ class SetItemLabelTest extends TestCase {
 		$this->assertEquals( new Label( $langCode, $updatedLabelText ), $response->getLabel() );
 		$this->assertSame( $revisionId, $response->getRevisionId() );
 		$this->assertSame( $lastModified, $response->getLastModified() );
+		$this->assertTrue( $response->wasReplaced() );
 	}
 
 	private function newUseCase(): SetItemLabel {
