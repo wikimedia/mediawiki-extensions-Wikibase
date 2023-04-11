@@ -108,4 +108,34 @@ describe( 'PUT /entities/items/{item_id}/labels/{language_code}', () => {
 		} );
 	} );
 
+	describe( '404 error response', () => {
+		it( 'item not found', async () => {
+			const itemId = 'Q999999';
+			const response = await newSetItemLabelRequestBuilder( itemId, 'en', 'test label' )
+				.assertValidRequest()
+				.makeRequest();
+
+			assert.strictEqual( response.status, 404 );
+			assert.strictEqual( response.header[ 'content-language' ], 'en' );
+			assert.strictEqual( response.body.code, 'item-not-found' );
+			assert.include( response.body.message, itemId );
+		} );
+	} );
+
+	describe( '409 error response', () => {
+		it( 'item is a redirect', async () => {
+			const redirectTarget = testItemId;
+			const redirectSource = await entityHelper.createRedirectForItem( redirectTarget );
+
+			const response = await newSetItemLabelRequestBuilder( redirectSource, 'en', 'test label' )
+				.assertValidRequest()
+				.makeRequest();
+
+			assert.strictEqual( response.status, 409 );
+			assert.include( response.body.message, redirectSource );
+			assert.include( response.body.message, redirectTarget );
+			assert.strictEqual( response.body.code, 'redirected-item' );
+		} );
+	} );
+
 } );
