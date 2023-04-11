@@ -26,11 +26,8 @@ class EditSummaryFormatterTest extends MediaWikiLangTestCase {
 	 * @dataProvider statementEditSummaryProvider
 	 */
 	public function testFormat( EditSummary $editSummary, string $formattedSummary ): void {
-		$this->assertSame(
-			$formattedSummary,
-			( new EditSummaryFormatter( WikibaseRepo::getSummaryFormatter() ) )
-				->format( $editSummary )
-		);
+		$editSummaryFormatter = new EditSummaryFormatter( WikibaseRepo::getSummaryFormatter() );
+		$this->assertSame( $formattedSummary, $editSummaryFormatter->format( $editSummary ) );
 	}
 
 	public function labelEditSummaryProvider(): Generator {
