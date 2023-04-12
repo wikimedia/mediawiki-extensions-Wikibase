@@ -11,6 +11,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabelRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Item;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
@@ -60,7 +61,11 @@ class SetItemLabelTest extends TestCase {
 		$this->itemRetriever = $this->createMock( ItemRetriever::class );
 		$this->itemRetriever->expects( $this->once() )->method( 'getItem' )->with( $itemId )->willReturn( $item );
 
-		$updatedItem = new Item( new Labels( new Label( $langCode, $newLabelText ) ), new StatementList() );
+		$updatedItem = new Item(
+			new Labels( new Label( $langCode, $newLabelText ) ),
+			new Descriptions(),
+			new StatementList()
+		);
 		$this->itemUpdater = $this->createMock( ItemUpdater::class );
 		$this->itemUpdater->expects( $this->once() )->method( 'update' )
 			->with(
@@ -96,7 +101,11 @@ class SetItemLabelTest extends TestCase {
 		$this->itemRetriever = $this->createMock( ItemRetriever::class );
 		$this->itemRetriever->expects( $this->once() )->method( 'getItem' )->with( $itemId )->willReturn( $item );
 
-		$updatedItem = new Item( new Labels( new Label( $langCode, $updatedLabelText ) ), new StatementList() );
+		$updatedItem = new Item(
+			new Labels( new Label( $langCode, $updatedLabelText ) ),
+			new Descriptions(),
+			new StatementList()
+		);
 		$this->itemUpdater = $this->createMock( ItemUpdater::class );
 		$this->itemUpdater->expects( $this->once() )->method( 'update' )
 			->with(
