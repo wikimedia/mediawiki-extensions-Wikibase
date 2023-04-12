@@ -24,8 +24,12 @@ class SetItemDescription {
 	public function execute( SetItemDescriptionRequest $request ): SetItemDescriptionResponse {
 		$item = $this->itemRetriever->getItem( new ItemId( $request->getItemId() ) );
 		$item->setDescription( $request->getLanguageCode(), $request->getDescription() );
-		$this->itemUpdater->update( $item, new EditMetadata( [], false, new DescriptionEditSummary() ) );
+		$revision = $this->itemUpdater->update( $item, new EditMetadata( [], false, new DescriptionEditSummary() ) );
 
-		return new SetItemDescriptionResponse( $request->getDescription() );    // @Fixme Use description from new revision.
+		return new SetItemDescriptionResponse(
+			$revision->getItem()->getDescriptions()[$request->getLanguageCode()],
+			$revision->getLastModified(),
+			$revision->getRevisionId()
+		);
 	}
 }
