@@ -3,12 +3,16 @@
 		"authors": [
 			"Bosogo",
 			"Growingup",
-			"Janatkg"
+			"Janatkg",
+			"Элдин беги"
 		]
 	},
 	"wikibase-editlinks": "Шилтемелерди оңдоо",
 	"wikibase-editlinkstitle": "Тилдер аралык шилтемелерди түзөтүү",
 	"wikibase-linkitem-addlinks": "Шилтемелерди кошуу",
+	"wikibase-linkitem-title": "Баракка шилтеме",
+	"wikibase-linkitem-linkpage": "Баракка шилтеме",
+	"wikibase-linkitem-selectlink": "Сураныч, бул баракка шилтеме кылууну каалаган сайтты жана баракты тандаңыз.",
 	"wikibase-linkitem-input-site": "Тил:",
 	"wikibase-linkitem-input-page": "Барак:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
