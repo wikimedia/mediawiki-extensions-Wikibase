@@ -33,7 +33,13 @@ class SetItemDescriptionRouteHandler extends SimpleHandler {
 
 	public function run( string $itemId, string $languageCode ): Response {
 		$jsonBody = $this->getValidatedBody();
-		$useCaseResponse = $this->useCase->execute( new SetItemDescriptionRequest( $itemId, $languageCode, $jsonBody['description'] ) );
+		$useCaseResponse = $this->useCase->execute( new SetItemDescriptionRequest(
+			$itemId,
+			$languageCode,
+			$jsonBody['description'],
+			$jsonBody['tags'] ?? [],
+			$jsonBody['bot'] ?? false
+		) );
 		$httpResponse = $this->getResponseFactory()->create();
 		$httpResponse->setStatus( 200 );
 		$httpResponse->setHeader( 'Content-Type', 'application/json' );
