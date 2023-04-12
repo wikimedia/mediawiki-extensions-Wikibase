@@ -8,6 +8,8 @@
 	},
 	"wikibase-edit": "ännern",
 	"wikibase-add": "tofögen",
+	"wikibase-label-empty": "Keen Beschrievung vörhannen",
+	"wikibase-description-empty": "Keen Beschrievung vörhannen",
 	"wikibase-sitelinks-special": "Anner Websteeden",
 	"wikibase-tainted-ref-popper-help-link-text": "Hülp"
 }
