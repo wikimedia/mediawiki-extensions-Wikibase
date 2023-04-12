@@ -328,6 +328,7 @@ class MwTimeIsoFormatter implements ValueFormatter {
 			return $number;
 		}
 
+		$number = (int)$number;
 		switch ( $function ) {
 			case 'ceil':
 				$shifted = ceil( $number / $shift ) * $unshift;

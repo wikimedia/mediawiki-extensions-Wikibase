@@ -107,9 +107,11 @@ class GlobeCoordinateRdfBuilder implements ValueSnakRdfBuilder {
 		$valueWriter = $this->complexValueHelper->getValueNodeWriter();
 
 		$valueWriter->say( RdfVocabulary::NS_ONTOLOGY, 'geoLatitude' )
+			// @phan-suppress-next-line PhanTypeMismatchArgument T302667
 			->value( $value->getLatitude(), 'xsd', 'double' );
 
 		$valueWriter->say( RdfVocabulary::NS_ONTOLOGY, 'geoLongitude' )
+			// @phan-suppress-next-line PhanTypeMismatchArgument T302667
 			->value( $value->getLongitude(), 'xsd', 'double' );
 
 		// Disallow nulls in precision, see T123392
@@ -120,6 +122,7 @@ class GlobeCoordinateRdfBuilder implements ValueSnakRdfBuilder {
 			$precision = 1 / 3600;
 		}
 		$valueWriter->say( RdfVocabulary::NS_ONTOLOGY, 'geoPrecision' )
+			// @phan-suppress-next-line PhanTypeMismatchArgument T302667
 			->value( $precision, 'xsd', 'double' );
 
 		$valueWriter->say( RdfVocabulary::NS_ONTOLOGY, 'geoGlobe' )

@@ -2,7 +2,6 @@
 
 $cfg = require __DIR__ . '/../vendor/mediawiki/mediawiki-phan-config/src/config.php';
 
-$cfg['scalar_implicit_cast'] = true;
 $cfg['null_casts_as_any_type'] = true;
 
 $cfg['file_list'] = array_merge(

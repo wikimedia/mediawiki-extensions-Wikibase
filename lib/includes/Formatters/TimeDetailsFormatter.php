@@ -77,9 +77,9 @@ class TimeDetailsFormatter implements ValueFormatter {
 			$beforeHtml = $this->getAmountAndPrecisionHtml( $precision, $before );
 			$afterHtml = $this->getAmountAndPrecisionHtml( $precision, $after );
 		} else {
-			$precisionHtml = htmlspecialchars( $precision );
-			$beforeHtml = htmlspecialchars( $value->getBefore() );
-			$afterHtml = htmlspecialchars( $value->getAfter() );
+			$precisionHtml = htmlspecialchars( (string)$precision );
+			$beforeHtml = htmlspecialchars( (string)$value->getBefore() );
+			$afterHtml = htmlspecialchars( (string)$value->getAfter() );
 		}
 
 		$html = '';

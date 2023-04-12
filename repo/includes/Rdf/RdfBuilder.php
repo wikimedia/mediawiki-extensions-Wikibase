@@ -233,6 +233,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityStubRdfBuilder, EntityMentio
 				->say( RdfVocabulary::NS_SCHEMA_ORG, 'softwareVersion' )->value( RdfVocabulary::FORMAT_VERSION );
 		}
 
+		// @phan-suppress-next-line PhanTypeMismatchArgumentProbablyReal T302667
 		$this->writer->say( RdfVocabulary::NS_SCHEMA_ORG, 'version' )->value( $revision, 'xsd', 'integer' )
 			->say( RdfVocabulary::NS_SCHEMA_ORG, 'dateModified' )->value( $timestamp, 'xsd', 'dateTime' );
 	}

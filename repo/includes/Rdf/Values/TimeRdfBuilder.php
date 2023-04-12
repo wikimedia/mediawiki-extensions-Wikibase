@@ -117,9 +117,11 @@ class TimeRdfBuilder implements ValueSnakRdfBuilder {
 		$this->sayDateLiteral( $valueWriter, $value );
 
 		$valueWriter->say( RdfVocabulary::NS_ONTOLOGY, 'timePrecision' )
+			// @phan-suppress-next-line PhanTypeMismatchArgument T302667
 			->value( $value->getPrecision(), 'xsd', 'integer' ); //TODO: use identifiers
 
 		$valueWriter->say( RdfVocabulary::NS_ONTOLOGY, 'timeTimezone' )
+			// @phan-suppress-next-line PhanTypeMismatchArgument T302667
 			->value( $value->getTimezone(), 'xsd', 'integer' ); //XXX: underspecified
 
 		$valueWriter->say( RdfVocabulary::NS_ONTOLOGY, 'timeCalendarModel' )

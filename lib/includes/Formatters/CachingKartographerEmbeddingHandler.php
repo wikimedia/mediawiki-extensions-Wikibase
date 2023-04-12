@@ -85,7 +85,7 @@ class CachingKartographerEmbeddingHandler {
 
 		$parserOutput = $this->getParserOutput( [ $value ], $language );
 
-		$containerDivId = 'wb-globeCoordinateValue-preview-' . base_convert( mt_rand( 1, PHP_INT_MAX ), 10, 36 );
+		$containerDivId = 'wb-globeCoordinateValue-preview-' . base_convert( (string)mt_rand( 1, PHP_INT_MAX ), 10, 36 );
 
 		$html = '<div id="' . $containerDivId . '">' . $parserOutput->getText() . '</div>';
 		$html .= $this->getMapframeInitJS(
