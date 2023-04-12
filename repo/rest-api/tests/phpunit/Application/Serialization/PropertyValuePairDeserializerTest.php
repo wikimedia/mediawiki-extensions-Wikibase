@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Application\Serialization;
 
-use DataValues\DataValue;
+use DataValues\StringValue;
 use Generator;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -56,17 +56,14 @@ class PropertyValuePairDeserializerTest extends TestCase {
 		$this->dataTypeValidatorFactory->method( 'getValidators' )->willReturn( [ $successValidator ] );
 
 		$this->valueDeserializer = $this->createStub( ValueDeserializer::class );
-		$this->valueDeserializer->method( 'deserialize' )->willReturn( $this->createStub( DataValue::class ) );
+		$this->valueDeserializer->method( 'deserialize' )->willReturn( $this->createStub( StringValue::class ) );
 	}
 
 	/**
 	 * @dataProvider validSerializationProvider
 	 */
 	public function testDeserialize( Snak $expectedSnak, array $serialization ): void {
-		$this->assertEquals(
-			$expectedSnak,
-			$this->newDeserializer()->deserialize( $serialization )
-		);
+		$this->assertEquals( $expectedSnak, $this->newDeserializer()->deserialize( $serialization ) );
 	}
 
 	public function validSerializationProvider(): Generator {
@@ -101,7 +98,10 @@ class PropertyValuePairDeserializerTest extends TestCase {
 		];
 
 		yield 'value for string property' => [
-			new PropertyValueSnak( new NumericPropertyId( self::STRING_PROPERTY_ID ), $this->createStub( DataValue::class ) ),
+			new PropertyValueSnak(
+				new NumericPropertyId( self::STRING_PROPERTY_ID ),
+				$this->createStub( StringValue::class )
+			),
 			[
 				'value' => [ 'type' => 'value', 'content' => 'potato' ],
 				'property' => [ 'id' => self::STRING_PROPERTY_ID ],
