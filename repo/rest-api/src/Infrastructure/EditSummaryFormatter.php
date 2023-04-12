@@ -5,6 +5,7 @@ namespace Wikibase\Repo\RestApi\Infrastructure;
 use LogicException;
 use Wikibase\Lib\FormatableSummary;
 use Wikibase\Lib\Summary;
+use Wikibase\Repo\RestApi\Domain\Model\DescriptionEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\LabelEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
@@ -35,6 +36,8 @@ class EditSummaryFormatter {
 				case EditSummary::REPLACE_ACTION:
 					return $this->newSummaryForLabelEdit( $editSummary, 'wbsetlabel', 'set' );
 			}
+		} elseif ( $editSummary instanceof DescriptionEditSummary ) {
+			return new Summary();
 		} elseif ( $editSummary instanceof StatementEditSummary ) {
 			switch ( $editSummary->getEditAction() ) {
 				case EditSummary::ADD_ACTION:
