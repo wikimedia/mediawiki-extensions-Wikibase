@@ -157,8 +157,7 @@ class MediawikiEditEntity implements EditEntity {
 	 * @param string[] $localEntityTypes
 	 * @param int $baseRevId the base revision ID for conflict checking.
 	 *        Use 0 to indicate that the current revision should be used as the base revision,
-	 *        effectively disabling conflict detections. true and false will be accepted for
-	 *        backwards compatibility, but both will be treated like 0. Note that the behavior
+	 *        effectively disabling conflict detections. Note that the behavior
 	 *        of this class changed so that "late" conflicts that arise between edit conflict
 	 *        detection and database update are always detected, and result in the update to fail.
 	 * @param bool $allowMasterConnection
@@ -176,18 +175,10 @@ class MediawikiEditEntity implements EditEntity {
 		UserOptionsLookup $userOptionsLookup,
 		$maxSerializedEntitySize,
 		array $localEntityTypes,
-		$baseRevId = 0,
+		int $baseRevId = 0,
 		$allowMasterConnection = true
 	) {
 		$this->entityId = $entityId;
-
-		if ( is_string( $baseRevId ) ) {
-			$baseRevId = (int)$baseRevId;
-		}
-
-		if ( is_bool( $baseRevId ) ) {
-			$baseRevId = 0;
-		}
 
 		$this->context = $context;
 		$this->user = $context->getUser();

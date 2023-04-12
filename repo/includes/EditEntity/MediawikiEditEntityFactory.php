@@ -101,10 +101,9 @@ class MediawikiEditEntityFactory {
 	/**
 	 * @param IContextSource $context The request context for the edit.
 	 * @param EntityId|null $entityId the id of the entity to edit
-	 * @param bool|int|null $baseRevId the base revision ID for conflict checking.
+	 * @param int $baseRevId the base revision ID for conflict checking.
 	 *        Use 0 to indicate that the current revision should be used as the base revision,
-	 *        effectively disabling conflict detections. true and false will be accepted for
-	 *        backwards compatibility, but both will be treated like 0. Note that the behavior
+	 *        effectively disabling conflict detections. Note that the behavior
 	 *        of EditEntity was changed so that "late" conflicts that arise between edit conflict
 	 *        detection and database update are always detected, and result in the update to fail.
 	 * @param bool $allowMasterConnection Can use a master connection or not
@@ -114,7 +113,7 @@ class MediawikiEditEntityFactory {
 	public function newEditEntity(
 		IContextSource $context,
 		EntityId $entityId = null,
-		$baseRevId = false,
+		int $baseRevId = 0,
 		$allowMasterConnection = true
 	) {
 		$statsTimingPrefix = "wikibase.repo.EditEntity.timing";
