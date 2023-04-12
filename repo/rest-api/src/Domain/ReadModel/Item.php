@@ -9,10 +9,12 @@ class Item {
 
 	private Labels $labels;
 	private StatementList $statements;
+	private Descriptions $descriptions;
 
-	public function __construct( Labels $labels, StatementList $statements ) {
+	public function __construct( Labels $labels, Descriptions $descriptions, StatementList $statements ) {
 		$this->labels = $labels;
 		$this->statements = $statements;
+		$this->descriptions = $descriptions;
 	}
 
 	public function getLabels(): Labels {
@@ -21,6 +23,10 @@ class Item {
 
 	public function getStatements(): StatementList {
 		return $this->statements;
+	}
+
+	public function getDescriptions(): Descriptions {
+		return $this->descriptions;
 	}
 
 }

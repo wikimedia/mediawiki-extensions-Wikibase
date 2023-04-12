@@ -22,6 +22,7 @@ use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
 use Wikibase\Repo\RestApi\Domain\Model\User;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Item as ReadModelItem;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
@@ -107,6 +108,7 @@ class AddItemStatementTest extends TestCase {
 
 		$updatedItem = new ReadModelItem(
 			new Labels(),
+			new Descriptions(),
 			new StatementList( NewStatementReadModel::noValueFor( 'P123' )->withGuid( $newGuid )->build() )
 		);
 		$this->itemUpdater = $this->createMock( ItemUpdater::class );
