@@ -70,7 +70,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	/**
 	 * The page of the site link.
 	 *
-	 * @var string
+	 * @var string|null
 	 */
 	private $page;
 

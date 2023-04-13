@@ -87,7 +87,7 @@ class SitesBuilder {
 	 * @param Site[] $sites
 	 * @param string $wikiId
 	 *
-	 * @return string
+	 * @return string|null
 	 */
 	private function getInterwikiGroup( array $sites, $wikiId ) {
 		if ( !array_key_exists( $wikiId, $sites ) ) {

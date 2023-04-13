@@ -22,7 +22,7 @@ use Wikibase\Lib\TermLanguageFallbackChain;
 class SpecialMyLanguageFallbackChain extends SpecialPage {
 
 	/**
-	 * @var TermLanguageFallbackChain
+	 * @var TermLanguageFallbackChain|null
 	 */
 	private $chain;
 

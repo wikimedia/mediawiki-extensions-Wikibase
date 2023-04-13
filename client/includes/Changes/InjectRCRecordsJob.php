@@ -69,7 +69,7 @@ class InjectRCRecordsJob extends Job {
 	private $stats = null;
 
 	/**
-	 * @var StatsdDataFactoryInterface
+	 * @var StatsdDataFactoryInterface|null
 	 */
 	private $perWikiStats = null;
 

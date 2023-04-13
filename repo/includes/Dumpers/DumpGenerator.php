@@ -61,7 +61,7 @@ abstract class DumpGenerator {
 	protected $entityPrefetcher;
 
 	/**
-	 * @var int[] String to int map of types to include.
+	 * @var int[]|null String to int map of types to include.
 	 */
 	protected $entityTypes;
 
