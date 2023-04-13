@@ -35,7 +35,7 @@ class LabelEditSummary implements EditSummary {
 		return $this->userComment;
 	}
 
-	public function getTerm(): Term {
+	public function getLabel(): Term {
 		return $this->term;
 	}
 

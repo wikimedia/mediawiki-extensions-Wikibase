@@ -37,7 +37,12 @@ class EditSummaryFormatter {
 					return $this->newSummaryForLabelEdit( $editSummary, 'wbsetlabel', 'set' );
 			}
 		} elseif ( $editSummary instanceof DescriptionEditSummary ) {
-			return new Summary();
+			$summary = new Summary( 'wbsetdescription', 'set' );
+			$summary->setLanguage( $editSummary->getDescription()->getLanguageCode() );
+			$summary->addAutoSummaryArgs( [ $editSummary->getDescription()->getText() ] );
+			$summary->setUserSummary( $editSummary->getUserComment() );
+
+			return $summary;
 		} elseif ( $editSummary instanceof StatementEditSummary ) {
 			switch ( $editSummary->getEditAction() ) {
 				case EditSummary::ADD_ACTION:
@@ -59,8 +64,8 @@ class EditSummaryFormatter {
 		string $actionName
 	): Summary {
 		$summary = new Summary( $moduleName, $actionName );
-		$summary->setLanguage( $editSummary->getTerm()->getLanguageCode() );
-		$summary->addAutoSummaryArgs( [ $editSummary->getTerm()->getText() ] );
+		$summary->setLanguage( $editSummary->getLabel()->getLanguageCode() );
+		$summary->addAutoSummaryArgs( [ $editSummary->getLabel()->getText() ] );
 		$summary->setUserSummary( $editSummary->getUserComment() );
 
 		return $summary;
