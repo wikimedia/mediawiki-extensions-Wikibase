@@ -211,6 +211,7 @@ class ChangesSubscriptionTableBuilder {
 				. $continuationMsg );
 		}
 
+		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable False positive Pass-by-ref
 		return $this->getSubscriptionsPerItemFromRows( $res, $continuation );
 	}
 
@@ -228,7 +229,7 @@ class ChangesSubscriptionTableBuilder {
 		$subscriptionsPerItem = [];
 
 		$currentItemId = 0;
-		$itemId = null;
+		$itemId = '';
 
 		foreach ( $res as $row ) {
 			if ( $row->ips_item_id != $currentItemId ) {

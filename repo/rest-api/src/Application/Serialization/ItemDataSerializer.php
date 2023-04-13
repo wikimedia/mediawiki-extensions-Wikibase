@@ -32,10 +32,15 @@ class ItemDataSerializer {
 	public function serialize( ItemData $itemData ): array {
 		$fieldSerializers = [
 			ItemData::FIELD_TYPE => fn() => $itemData->getType(),
+			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
 			ItemData::FIELD_LABELS => fn() => $this->labelsSerializer->serialize( $itemData->getLabels() ),
+			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
 			ItemData::FIELD_DESCRIPTIONS => fn() => $this->descriptionsSerializer->serialize( $itemData->getDescriptions() ),
+			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
 			ItemData::FIELD_ALIASES => fn() => $this->aliasesSerializer->serialize( $itemData->getAliases() ),
+			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
 			ItemData::FIELD_STATEMENTS => fn() => $this->statementsSerializer->serialize( $itemData->getStatements() ),
+			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
 			ItemData::FIELD_SITELINKS => fn() => $this->siteLinksSerializer->serialize( $itemData->getSiteLinks() ),
 		];
 

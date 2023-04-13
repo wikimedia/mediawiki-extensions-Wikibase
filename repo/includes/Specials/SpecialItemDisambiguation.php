@@ -151,6 +151,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 			$languageCode = $this->getLanguage()->getCode();
 		}
 
+		// @phan-suppress-next-line PhanTypeMismatchReturnNullable False positive getRawVal not return null here
 		return $languageCode;
 	}
 

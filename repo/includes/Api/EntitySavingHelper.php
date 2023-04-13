@@ -468,7 +468,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 	 * If $status->isOK() is false, this method will terminate with an ApiUsageException.
 	 *
 	 * @param Status $status The status to report
-	 * @param string  $errorCode The API error code to use in case $status->isOK() returns false
+	 * @param string|null $errorCode The API error code to use in case $status->isOK() returns false
 	 *
 	 * @throws ApiUsageException If $status->isOK() returns false.
 	 */

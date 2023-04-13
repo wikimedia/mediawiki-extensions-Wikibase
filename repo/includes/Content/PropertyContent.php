@@ -77,6 +77,7 @@ class PropertyContent extends EntityContent {
 			throw new LogicException( 'This content object is empty' );
 		}
 
+		// @phan-suppress-next-line PhanTypeMismatchReturnSuperType
 		return $this->propertyHolder->getEntity( Property::class );
 	}
 

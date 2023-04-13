@@ -313,6 +313,7 @@ class EntityDataSerializationService {
 				return RdfProducer::PRODUCE_ALL;
 		}
 
+		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable name is not-null here
 		throw new UnknownFlavorException( $flavorName, [ 'simple', 'dump', 'long', 'full' ] );
 	}
 

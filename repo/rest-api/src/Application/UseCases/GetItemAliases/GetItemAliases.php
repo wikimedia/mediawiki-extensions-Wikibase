@@ -53,6 +53,7 @@ class GetItemAliases {
 		}
 
 		return new GetItemAliasesResponse(
+			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Item validated and exists
 			$this->itemAliasesRetriever->getAliases( $itemId ),
 			$metaDataResult->getRevisionTimestamp(),
 			$metaDataResult->getRevisionId(),

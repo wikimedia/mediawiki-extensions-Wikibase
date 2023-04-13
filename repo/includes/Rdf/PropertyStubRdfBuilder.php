@@ -90,6 +90,7 @@ class PropertyStubRdfBuilder implements PrefetchingEntityStubRdfBuilder {
 			$this->getLabelPredicates( $entityId )
 		);
 		$this->addDescriptions( $entityNamespace, $entityLName, $propertyDescriptions );
+		// @phan-suppress-next-line PhanTypeMismatchArgumentSuperType
 		$this->addProperty( $entityId );
 	}
 

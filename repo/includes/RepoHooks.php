@@ -279,6 +279,7 @@ final class RepoHooks {
 
 		if ( $entityContentFactory->isEntityContentModel( $wikiPage->getContent()->getModel() ) ) {
 			self::notifyEntityStoreWatcherOnUpdate(
+				// @phan-suppress-next-line PhanTypeMismatchArgumentSuperType Content model is checked
 				$revisionRecord->getContent( SlotRecord::MAIN ),
 				$revisionRecord
 			);
@@ -385,8 +386,11 @@ final class RepoHooks {
 		$revisionRecord = MediaWikiServices::getInstance()
 			->getRevisionLookup()
 			->getRevisionById( $revisionId );
-		$content = $revisionRecord ? $revisionRecord->getContent( SlotRecord::MAIN ) : null;
+		if ( !$revisionRecord ) {
+			return;
+		}
 
+		$content = $revisionRecord->getContent( SlotRecord::MAIN );
 		if ( !( $content instanceof EntityContent ) ) {
 			return;
 		}

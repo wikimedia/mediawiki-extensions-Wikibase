@@ -258,6 +258,7 @@ class EntityLoadingHelper {
 			);
 		}
 
+		// @phan-suppress-next-line PhanTypeMismatchReturnNullable entity id is not-null here
 		return $entityId;
 	}
 

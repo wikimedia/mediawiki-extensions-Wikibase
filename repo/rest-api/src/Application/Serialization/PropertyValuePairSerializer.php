@@ -23,6 +23,7 @@ class PropertyValuePairSerializer {
 		];
 
 		if ( $propertyValuePair->getValue()->getType() === Value::TYPE_VALUE ) {
+			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Check with ::TYPE_VALUE makes this safe
 			$serialization['value']['content'] = $this->serializeValueContent( $propertyValuePair->getValue()->getContent() );
 		}
 

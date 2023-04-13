@@ -33,6 +33,7 @@ class SetItemDescription {
 			: DescriptionEditSummary::newAddSummary( $request->getComment(), $description );
 
 		$revision = $this->itemUpdater->update(
+			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Item validated and exists
 			$item,
 			new EditMetadata(
 				$request->getEditTags(),

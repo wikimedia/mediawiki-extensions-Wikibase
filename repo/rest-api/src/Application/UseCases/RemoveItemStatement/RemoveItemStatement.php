@@ -66,6 +66,7 @@ class RemoveItemStatement {
 			$this->throwStatementNotFoundException( $request->getStatementId() );
 		}
 
+		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable hasUser checks for null
 		$user = $request->hasUser() ? User::withUsername( $request->getUsername() ) : User::newAnonymous();
 		if ( !$this->permissionChecker->canEdit( $user, $itemId ) ) {
 			throw new UseCaseError(
@@ -87,6 +88,7 @@ class RemoveItemStatement {
 			$request->isBot(),
 			StatementEditSummary::newRemoveSummary( $request->getComment(), $statement )
 		);
+		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Item validated and exists
 		$this->itemUpdater->update( $item, $editMetadata );
 	}
 

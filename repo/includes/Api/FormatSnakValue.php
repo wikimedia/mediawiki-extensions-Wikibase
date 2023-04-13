@@ -245,6 +245,7 @@ class FormatSnakValue extends ApiBase {
 		}
 
 		try {
+			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable False positive, handled by is_array
 			$value = $this->dataValueFactory->newFromArray( $data );
 			return $value;
 		} catch ( IllegalValueException $ex ) {

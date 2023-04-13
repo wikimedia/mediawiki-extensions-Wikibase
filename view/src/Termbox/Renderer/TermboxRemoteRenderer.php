@@ -59,7 +59,7 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 			throw $e;
 		} catch ( Exception $e ) {
 			$this->reportFailureOfRequest( $e->getMessage(), $e );
-			throw new TermboxRenderingException( 'Encountered request problem', null, $e );
+			throw new TermboxRenderingException( 'Encountered request problem', 0, $e );
 		}
 
 		$status = $request->getStatus();

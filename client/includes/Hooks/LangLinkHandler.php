@@ -334,11 +334,11 @@ class LangLinkHandler {
 	public function getInterwikiCodeFromSite( Site $site ) {
 		// FIXME: We should use $site->getInterwikiIds, but the interwiki ids in
 		// the sites table are wrong currently, see T137537.
-		$id = $site->getGlobalId();
+		$id = $site->getGlobalId() ?? '';
 		$id = preg_replace( '/(wiki\w*|wiktionary)$/', '', $id );
 		$id = strtr( $id, [ '_' => '-' ] );
 		if ( !$id ) {
-			$id = $site->getLanguageCode();
+			$id = $site->getLanguageCode() ?? '';
 		}
 		return $id;
 	}

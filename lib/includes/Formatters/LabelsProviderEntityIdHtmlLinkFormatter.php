@@ -110,7 +110,7 @@ class LabelsProviderEntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 	 * @param EntityId $entityId
 	 * @param Term|null $term
 	 *
-	 * @return string[]
+	 * @return array
 	 */
 	private function getAttributes( EntityId $entityId, Term $term = null ) {
 		$attributes = [

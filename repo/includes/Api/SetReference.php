@@ -222,6 +222,7 @@ class SetReference extends ApiBase {
 			);
 		}
 
+		// @phan-suppress-next-line PhanTypeMismatchReturnNullable null handled as !is_array
 		return $rawArray;
 	}
 

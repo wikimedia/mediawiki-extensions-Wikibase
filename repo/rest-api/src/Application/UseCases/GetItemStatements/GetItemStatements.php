@@ -53,6 +53,7 @@ class GetItemStatements {
 		}
 
 		return new GetItemStatementsResponse(
+			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Item validated and exists
 			$this->statementsRetriever->getStatements( $itemId, $requestedStatementPropertyId ),
 			$latestRevisionMetadata->getRevisionTimestamp(),
 			$latestRevisionMetadata->getRevisionId()

@@ -52,6 +52,7 @@ class GetItemLabels {
 		}
 
 		return new GetItemLabelsResponse(
+			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Item validated and exists
 			$this->itemLabelsRetriever->getLabels( $itemId ),
 			$metaDataResult->getRevisionTimestamp(),
 			$metaDataResult->getRevisionId(),

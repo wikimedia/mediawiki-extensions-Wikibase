@@ -104,6 +104,7 @@ class FingerprintUniquenessValidator implements ValueValidator {
 		$labelDescriptionPairsPerLanguage = $this->generateLabelDescriptionPairs(
 			$newTerms,
 			$oldTerms,
+			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Validated via ::ENTITY_TYPE
 			$changeOpsResult->getEntityId()
 		);
 

@@ -104,6 +104,7 @@ class PropertyTermsRebuilder {
 
 	private function saveTerms( Property $property ) {
 		try {
+			// @phan-suppress-next-line PhanTypeMismatchArgumentSuperType
 			$this->propertyTermStoreWriter->storeTerms( $property->getId(), $property->getFingerprint() );
 		} catch ( Exception $ex ) {
 			$this->errorReporter->reportMessage(

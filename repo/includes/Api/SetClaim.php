@@ -179,6 +179,7 @@ class SetClaim extends ApiBase {
 		}
 
 		try {
+			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable guid is not-null
 			$statementGuid = $this->guidParser->parse( $guid );
 		} catch ( StatementGuidParsingException $ex ) {
 			$this->errorReporter->dieException( $ex, 'invalid-claim' );
@@ -214,6 +215,7 @@ class SetClaim extends ApiBase {
 		$status = $this->entitySavingHelper->attemptSaveEntity( $entity, $summary, $params, $this->getContext() );
 		$this->resultBuilder->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
 		$this->resultBuilder->markSuccess();
+		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable statement given, guid already validated
 		$this->resultBuilder->addStatement( $statement );
 
 		$this->stats->increment( 'wikibase.repo.api.wbsetclaim.total' );

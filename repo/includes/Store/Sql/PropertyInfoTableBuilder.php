@@ -187,6 +187,7 @@ class PropertyInfoTableBuilder {
 		$info = $this->propertyInfoBuilder->buildPropertyInfo( $property );
 
 		$this->propertyInfoTable->setPropertyInfo(
+			// @phan-suppress-next-line PhanTypeMismatchArgumentSuperType
 			$property->getId(),
 			$info
 		);

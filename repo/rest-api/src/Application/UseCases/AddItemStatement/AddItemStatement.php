@@ -62,6 +62,7 @@ class AddItemStatement {
 				"Could not find an item with the ID: {$request->getItemId()}"
 			);
 		}
+		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable hasUser checks for null
 		$user = $request->hasUser() ? User::withUsername( $request->getUsername() ) : User::newAnonymous();
 		if ( !$this->permissionChecker->canEdit( $user, $itemId ) ) {
 			throw new UseCaseError(
@@ -73,16 +74,20 @@ class AddItemStatement {
 		$newStatementGuid = $this->guidGenerator->newStatementId( $itemId );
 		$statement->setGuid( (string)$newStatementGuid );
 		$item = $this->itemRetriever->getItem( $itemId );
+		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Statement is validated and exists
 		$item->getStatements()->addStatement( $statement );
 
 		$editMetadata = new EditMetadata(
 			$request->getEditTags(),
 			$request->isBot(),
+			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Statement is validated and exists
 			StatementEditSummary::newAddSummary( $request->getComment(), $statement )
 		);
+		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Item validated and exists
 		$newRevision = $this->itemUpdater->update( $item, $editMetadata );
 
 		return new AddItemStatementResponse(
+			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Item validated and exists
 			$newRevision->getItem()->getStatements()->getStatementById( $newStatementGuid ),
 			$newRevision->getLastModified(),
 			$newRevision->getRevisionId()

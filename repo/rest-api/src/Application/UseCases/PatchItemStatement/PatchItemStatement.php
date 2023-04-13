@@ -91,6 +91,7 @@ class PatchItemStatement {
 			$this->throwStatementNotFoundException( $statementId );
 		}
 
+		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable hasUser checks for null
 		$user = $request->getUsername() ? User::withUsername( $request->getUsername() ) : User::newAnonymous();
 		if ( !$this->permissionChecker->canEdit( $user, $itemId ) ) {
 			throw new UseCaseError(
@@ -147,9 +148,11 @@ class PatchItemStatement {
 			$request->isBot(),
 			StatementEditSummary::newPatchSummary( $request->getComment(), $patchedStatement )
 		);
+		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Item validated and exists
 		$newRevision = $this->itemUpdater->update( $item, $editMetadata );
 
 		return new PatchItemStatementResponse(
+			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Statement validated and exists
 			$newRevision->getItem()->getStatements()->getStatementById( $statementId ),
 			$newRevision->getLastModified(),
 			$newRevision->getRevisionId()

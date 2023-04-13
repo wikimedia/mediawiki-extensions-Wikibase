@@ -195,7 +195,7 @@ class InfoActionHookHandler implements InfoActionHook {
 	}
 
 	/**
-	 * @param string[][] $aspects
+	 * @param array[] $aspects
 	 * @param IContextSource $context
 	 * @return string
 	 */

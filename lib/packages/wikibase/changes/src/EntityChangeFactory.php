@@ -152,6 +152,7 @@ class EntityChangeFactory {
 
 		if ( $oldEntity === null ) {
 			$id = $newEntity->getId();
+			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable false positive
 			$diff = $this->entityDiffer->getConstructionDiff( $newEntity );
 		} elseif ( $newEntity === null ) {
 			$id = $oldEntity->getId();

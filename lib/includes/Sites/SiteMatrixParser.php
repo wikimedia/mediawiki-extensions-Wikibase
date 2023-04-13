@@ -54,7 +54,7 @@ class SiteMatrixParser {
 	 * @return Site[]
 	 */
 	public function sitesFromJson( $json ) {
-		$specials = null;
+		$specials = [];
 
 		$data = json_decode( $json, true );
 

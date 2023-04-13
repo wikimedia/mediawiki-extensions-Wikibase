@@ -89,6 +89,7 @@ class StatementModificationHelper {
 			$this->errorReporter->dieError( 'Could not find the statement', 'no-such-claim' );
 		}
 
+		// @phan-suppress-next-line PhanTypeMismatchReturnNullable not-null here
 		return $statement;
 	}
 

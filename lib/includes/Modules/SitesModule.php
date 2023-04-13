@@ -150,7 +150,7 @@ class SitesModule extends RL\Module {
 	 * @param MediaWikiSite $site
 	 * @param string[] $specialGroups
 	 * @param MessageLocalizer $localizer
-	 * @return string[]
+	 * @return array
 	 */
 	private function computeSiteDetails( MediaWikiSite $site, array $specialGroups, MessageLocalizer $localizer ): array {
 		$languageNameLookup = $this->languageNameLookupFactory->getForAutonyms();

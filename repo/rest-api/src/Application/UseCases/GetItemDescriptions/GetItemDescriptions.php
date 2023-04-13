@@ -51,6 +51,7 @@ class GetItemDescriptions {
 		}
 
 		return new GetItemDescriptionsResponse(
+			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Item validated and exists
 			$this->itemDescriptionsRetriever->getDescriptions( $itemId ),
 			$metaDataResult->getRevisionTimestamp(),
 			$metaDataResult->getRevisionId(),

@@ -2,8 +2,6 @@
 
 $cfg = require __DIR__ . '/../vendor/mediawiki/mediawiki-phan-config/src/config.php';
 
-$cfg['null_casts_as_any_type'] = true;
-
 $cfg['file_list'] = array_merge(
 	$cfg['file_list'],
 	[
@@ -83,10 +81,6 @@ $cfg['exclude_analysis_directory_list'] = array_merge(
 $cfg['suppress_issue_types'] = array_merge(
 	$cfg['suppress_issue_types'],
 	[
-		// Disabled when upgrading to 0.11.1
-		'PhanTypeMismatchArgumentSuperType',
-		'PhanTypeMismatchReturnSuperType',
-
 		// Both local and global vendor directories have to be analysed
 		"PhanRedefinedClassReference",
 		"PhanRedefinedExtendedClass",

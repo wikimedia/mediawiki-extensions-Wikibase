@@ -272,6 +272,7 @@ class ApiErrorReporter {
 			$msg = wfMessage( [ $messageKey, 'rawmessage' ], $params );
 		}
 
+		// @phan-suppress-next-line PhanTypeMismatchReturnSuperType
 		return ApiMessage::create( $msg, $errorCode, $extraData );
 	}
 

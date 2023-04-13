@@ -87,6 +87,7 @@ class PropertyIdResolver {
 		$propertyId = $propertyIds[$propertyLabel];
 		$this->usageAccumulator->addLabelUsage( $propertyId, $languageCode );
 
+		// @phan-suppress-next-line PhanTypeMismatchReturnSuperType
 		return $propertyId;
 	}
 

@@ -115,6 +115,7 @@ class ChangeOpStatement extends ChangeOpBase {
 			$statements = $this->addStatementToGroup( $entityStatements, $this->index );
 			$entityStatements->clear();
 			foreach ( $statements as $statement ) {
+				// @phan-suppress-next-line PhanTypeMismatchArgumentSuperType
 				$entityStatements->addStatement( $statement );
 			}
 		} else {

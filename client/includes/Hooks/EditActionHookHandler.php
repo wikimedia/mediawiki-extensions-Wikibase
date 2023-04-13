@@ -94,7 +94,7 @@ class EditActionHookHandler implements EditPage__showStandardInputs_optionsHook 
 	}
 
 	/**
-	 * @param string[][] $rowAspects
+	 * @param array[] $rowAspects
 	 * @param IContextSource $context
 	 *
 	 * @return string HTML

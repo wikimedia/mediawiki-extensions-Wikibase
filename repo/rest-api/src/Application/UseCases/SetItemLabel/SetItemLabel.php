@@ -56,6 +56,7 @@ class SetItemLabel {
 			: LabelEditSummary::newAddSummary( $request->getComment(), $term );
 
 		$editMetadata = new EditMetadata( $request->getEditTags(), $request->isBot(), $editSummary );
+		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Item validated and exists
 		$newRevision = $this->itemUpdater->update( $item, $editMetadata );
 
 		return new SetItemLabelResponse(
