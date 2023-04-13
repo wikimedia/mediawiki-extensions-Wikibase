@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Adriendelucca",
 			"Fohanno",
 			"Fulup",
 			"Gwenn-Ael",
@@ -140,5 +141,6 @@
 	"wikibase-client-data-bridge-saving-error-assertuser-heading": "N'oc'h ket kevreet",
 	"wikibase-client-data-bridge-saving-error-assertuser-publish": "Embann hep kevreañ",
 	"wikibase-client-data-bridge-saving-error-assertuser-save": "Enrollañ hep kevreañ",
+	"wikibase-client-data-bridge-saving-error-assertuser-login": "Kevreañ (en un ivinell nevez)",
 	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Kenderc'hel da aozañ"
 }
