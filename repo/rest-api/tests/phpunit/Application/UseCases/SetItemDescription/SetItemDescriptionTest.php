@@ -13,6 +13,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescription
@@ -23,14 +24,17 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
  */
 class SetItemDescriptionTest extends \PHPUnit\Framework\TestCase {
 
+	use EditMetadataHelper;
+
 	public function testExecute_happyPath(): void {
 		$language = 'en';
 		$description = 'Hello world again.';
 		$itemId = 'Q123';
-		$item = new DataModelItem();
+		$editTags = [ 'some', 'tags' ];
+		$isBot = false;
 
 		$itemRetriever = $this->createStub( ItemRetriever::class );
-		$itemRetriever->method( 'getItem' )->willReturn( $item );
+		$itemRetriever->method( 'getItem' )->willReturn( new DataModelItem() );
 
 		$updatedItem = new ReadModelItem(
 			new Labels(),
@@ -43,13 +47,14 @@ class SetItemDescriptionTest extends \PHPUnit\Framework\TestCase {
 		$itemUpdater = $this->createMock( ItemUpdater::class );
 		$itemUpdater->expects( $this->once() )
 			->method( 'update' )
-			->with( $this->callback(
-				fn( DataModelItem $item ) => $item->getDescriptions()->toTextArray() === [ $language => $description ]
-			) )
+			->with(
+				$this->callback( fn( DataModelItem $item ) => $item->getDescriptions()->toTextArray() === [ $language => $description ] ),
+				$this->expectEquivalentMetadata( $editTags, $isBot, '', '' )
+			)
 			->willReturn( new ItemRevision( $updatedItem, $lastModified, $revisionId ) );
 
 		$useCase = new SetItemDescription( $itemRetriever, $itemUpdater );
-		$response = $useCase->execute( new SetItemDescriptionRequest( $itemId, $language, $description ) );
+		$response = $useCase->execute( new SetItemDescriptionRequest( $itemId, $language, $description, $editTags, $isBot ) );
 
 		$this->assertEquals( new Description( $language, $description ), $response->getDescription() );
 		$this->assertSame( $revisionId, $response->getRevisionId() );
