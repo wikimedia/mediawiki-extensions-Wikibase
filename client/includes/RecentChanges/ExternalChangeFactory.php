@@ -255,7 +255,7 @@ class ExternalChangeFactory {
 			return $this->formatComment( $comment );
 		} else {
 			// no override
-			return false;
+			return '';
 		}
 	}
 

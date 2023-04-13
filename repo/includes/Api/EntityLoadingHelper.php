@@ -228,14 +228,12 @@ class EntityLoadingHelper {
 	 * @throws ApiUsageException
 	 * @return EntityId
 	 */
-	private function getEntityIdFromString( $id ) {
+	private function getEntityIdFromString( $id ): EntityId {
 		try {
 			return $this->idParser->parse( $id );
 		} catch ( EntityIdParsingException $ex ) {
 			$this->errorReporter->dieException( $ex, 'invalid-entity-id' );
 		}
-
-		return null;
 	}
 
 	/**

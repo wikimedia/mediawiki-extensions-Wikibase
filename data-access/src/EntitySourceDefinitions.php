@@ -111,6 +111,7 @@ class EntitySourceDefinitions {
 
 		foreach ( $this->sources as $source ) {
 			if ( $source->getType() === ApiEntitySource::TYPE && in_array( $entityType, $source->getEntityTypes() ) ) {
+				// @phan-suppress-next-line PhanTypeMismatchReturn Checked by compare with ::TYPE
 				return $source;
 			}
 		}

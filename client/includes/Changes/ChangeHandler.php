@@ -278,7 +278,7 @@ class ChangeHandler {
 			}
 		}
 
-		return $change->getId();
+		return (string)$change->getId();
 	}
 
 }

@@ -191,7 +191,7 @@ abstract class EntityContent extends AbstractContent {
 	}
 
 	/**
-	 * @return string The wikitext to include when another page includes this  content, or false if
+	 * @return string|false The wikitext to include when another page includes this  content, or false if
 	 *         the content is not includable in a wikitext page.
 	 */
 	public function getWikitextForTransclusion() {

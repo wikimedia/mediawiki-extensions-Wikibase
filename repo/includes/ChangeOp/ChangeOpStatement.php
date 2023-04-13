@@ -8,6 +8,7 @@ use ValueValidators\Result;
 use Wikibase\DataModel\ByPropertyIdArray;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\PropertyIdProvider;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidParsingException;
@@ -198,7 +199,7 @@ class ChangeOpStatement extends ChangeOpBase {
 	 * @param StatementList $statements
 	 * @param int $index
 	 *
-	 * @return Statement[]
+	 * @return PropertyIdProvider[]
 	 */
 	private function addStatementToGroup( StatementList $statements, $index ) {
 		// If we fail with the user supplied index and the index is greater than or equal 0

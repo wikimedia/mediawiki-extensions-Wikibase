@@ -132,7 +132,7 @@ class ChangeRunCoalescer {
 	 * @param EntityChange[] $changes The changes to combine.
 	 *
 	 * @throws MWException
-	 * @return Change a combined change representing the activity from all the original changes.
+	 * @return EntityChange a combined change representing the activity from all the original changes.
 	 */
 	private function mergeChanges( EntityId $entityId, array $changes ) {
 		if ( count( $changes ) === 1 ) {
@@ -235,7 +235,7 @@ class ChangeRunCoalescer {
 	 * @param EntityId $entityId
 	 * @param EntityChange[] $changes
 	 *
-	 * @return Change[] grouped changes
+	 * @return EntityChange[] grouped changes
 	 */
 	private function coalesceRuns( EntityId $entityId, array $changes ) {
 		$coalesced = [];

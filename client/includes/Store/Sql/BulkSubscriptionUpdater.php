@@ -281,7 +281,7 @@ class BulkSubscriptionUpdater {
 	 *
 	 * @param array|null &$continuation
 	 *
-	 * @return bool|string[] list( $minId, $maxId, $count ), or false if there is nothing to delete
+	 * @return array|false list( $minId, $maxId, $count ), or false if there is nothing to delete
 	 */
 	private function getDeletionRange( array &$continuation = null ) {
 		/**

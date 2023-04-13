@@ -77,6 +77,7 @@ class FederatedPropertiesAwareDispatchingEntityIdParser implements EntityIdParse
 			$sources = $this->entitySourceDefinitions->getSources();
 			foreach ( $sources as $source ) {
 				if ( $source->getSourceName() === $conceptBaseURIsToSources[ $baseUri ] ) {
+					// @phan-suppress-next-line PhanTypeMismatchReturn Checked by compare with ::TYPE
 					return $source->getType() === ApiEntitySource::TYPE ? $source : null;
 				}
 			}
