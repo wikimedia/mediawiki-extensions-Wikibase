@@ -113,6 +113,8 @@ class MergeItems extends ApiBase {
 			return new ItemId( $value );
 		} catch ( InvalidArgumentException $ex ) {
 			$this->errorReporter->dieError( $ex->getMessage(), 'invalid-entity-id' );
+
+			// @phan-suppress-next-line PhanPluginUnreachableCode Wanted
 			throw new LogicException( 'ApiErrorReporter::dieError did not throw an exception' );
 		}
 	}

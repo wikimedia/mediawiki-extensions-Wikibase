@@ -210,6 +210,7 @@ class SubmitEntityAction extends EditEntityAction {
 	 * @throws MWException
 	 */
 	public function execute() {
+		// @phan-suppress-previous-line PhanPluginNeverReturnMethod
 		throw new MWException( 'Not applicable.' );
 	}
 

@@ -287,6 +287,7 @@ abstract class EntityHandler extends ContentHandler {
 	 * @return EntityContent|null
 	 */
 	public function makeRedirectContent( Title $title, $text = '' ) {
+		// @phan-suppress-previous-line PhanPluginNeverReturnMethod
 		throw new MWException( 'EntityContent does not support plain title based redirects.'
 			. ' Use makeEntityRedirectContent() instead.' );
 	}

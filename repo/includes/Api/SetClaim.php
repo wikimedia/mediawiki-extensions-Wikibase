@@ -182,6 +182,8 @@ class SetClaim extends ApiBase {
 			$statementGuid = $this->guidParser->parse( $guid );
 		} catch ( StatementGuidParsingException $ex ) {
 			$this->errorReporter->dieException( $ex, 'invalid-claim' );
+
+			// @phan-suppress-next-line PhanPluginUnreachableCode Wanted
 			throw new LogicException( 'ApiErrorReporter::dieError did not throw an exception' );
 		}
 
@@ -191,6 +193,8 @@ class SetClaim extends ApiBase {
 
 		if ( !( $entity instanceof StatementListProvidingEntity ) ) {
 			$this->errorReporter->dieError( 'The given entity cannot contain statements', 'not-supported' );
+
+			// @phan-suppress-next-line PhanPluginUnreachableCode Wanted
 			throw new LogicException( 'ApiErrorReporter::dieError did not throw an exception' );
 		}
 

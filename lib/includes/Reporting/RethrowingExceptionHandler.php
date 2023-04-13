@@ -20,6 +20,7 @@ class RethrowingExceptionHandler implements ExceptionHandler {
 	 * @param Exception $exception
 	 * @param string $errorCode
 	 * @param string $explanation
+	 * @return never
 	 *
 	 * @throws Exception
 	 */

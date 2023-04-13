@@ -268,6 +268,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 				'no-entity-type'
 			);
 
+			// @phan-suppress-next-line PhanPluginUnreachableCode Wanted
 			throw new LogicException( 'ApiErrorReporter::dieError did not throw an exception' );
 		}
 
@@ -279,6 +280,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 				'no-such-entity-type'
 			);
 
+			// @phan-suppress-next-line PhanPluginUnreachableCode Wanted
 			throw new LogicException( 'ApiErrorReporter::dieError did not throw an exception' );
 		}
 
@@ -289,6 +291,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 					'bad-entity-id'
 				);
 
+				// @phan-suppress-next-line PhanPluginUnreachableCode Wanted
 				throw new LogicException( 'ApiErrorReporter::dieError did not throw an exception' );
 			}
 
@@ -302,6 +305,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 					'no-automatic-entity-id'
 				);
 
+				// @phan-suppress-next-line PhanPluginUnreachableCode Wanted
 				throw new LogicException( 'ApiErrorReporter::dieError did not throw an exception' );
 			}
 

@@ -155,6 +155,8 @@ class SearchEntities extends ApiBase {
 			);
 		} catch ( EntitySearchException $ese ) {
 			$this->dieStatus( $ese->getStatus() );
+
+			// @phan-suppress-next-line PhanPluginUnreachableCode Wanted
 			throw new InvariantException( "dieStatus() must throw an exception" );
 		}
 

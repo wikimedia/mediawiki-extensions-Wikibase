@@ -157,6 +157,7 @@ class PatchItemStatement {
 	}
 
 	/**
+	 * @return never
 	 * @throws UseCaseError
 	 */
 	private function throwStatementNotFoundException( StatementGuid $statementId ): void {

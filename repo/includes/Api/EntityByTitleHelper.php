@@ -161,6 +161,7 @@ class EntityByTitleHelper {
 	/**
 	 * @param string $message
 	 * @param string $code
+	 * @return never
 	 *
 	 * @throws ApiUsageException always
 	 */

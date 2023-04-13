@@ -33,6 +33,7 @@ class ForbiddenSerializer implements Serializer {
 	 * @return array
 	 */
 	public function serialize( $object ) {
+		// @phan-suppress-previous-line PhanPluginNeverReturnMethod
 		throw new RuntimeException( $this->message );
 	}
 

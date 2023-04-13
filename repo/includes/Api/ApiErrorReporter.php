@@ -113,6 +113,7 @@ class ApiErrorReporter {
 	 * @param StatusValue $status The status to report. $status->getMessage() will be used
 	 * to generate the error's free form description.
 	 * @param string $errorCode A code identifying the error.
+	 * @return never
 	 *
 	 * @throws ApiUsageException
 	 * @throws LogicException
@@ -169,6 +170,7 @@ class ApiErrorReporter {
 	 * @param string $errorCode A code identifying the error.
 	 * @param int $httpRespCode The HTTP error code to send to the client
 	 * @param array|null $extraData Any extra data to include in the error report
+	 * @return never
 	 *
 	 * @throws ApiUsageException
 	 * @throws LogicException
@@ -187,6 +189,7 @@ class ApiErrorReporter {
 
 		$this->dieError( $ex->getMessage(), $errorCode, $httpRespCode, $extraData );
 
+		// @phan-suppress-next-line PhanPluginUnreachableCode Wanted to guarantee return never at the language level
 		throw new LogicException( 'ApiUsageException not thrown' );
 	}
 
@@ -197,6 +200,7 @@ class ApiErrorReporter {
 	 * @param string $errorCode A code identifying the error.
 	 * @param int $httpRespCode The HTTP error code to send to the client
 	 * @param array|null $extraData Any extra data to include in the error report
+	 * @return never
 	 *
 	 * @throws ApiUsageException always
 	 * @throws LogicException
@@ -211,6 +215,8 @@ class ApiErrorReporter {
 		$this->addMessageToResult( $msg, $extraData );
 
 		$this->apiModule->getMain()->dieWithError( $msg, $errorCode, $extraData, $httpRespCode );
+
+		// @phan-suppress-next-line PhanPluginUnreachableCode Wanted to guarantee return never at the language level
 		throw new LogicException( 'ApiUsageException not thrown' );
 	}
 
@@ -230,6 +236,7 @@ class ApiErrorReporter {
 	 * @param string $errorCode A code identifying the error
 	 * @param int $httpRespCode The HTTP error code to send to the client
 	 * @param array|null $extraData Any extra data to include in the error report
+	 * @return never
 	 *
 	 * @throws ApiUsageException always
 	 * @throws LogicException
@@ -242,6 +249,7 @@ class ApiErrorReporter {
 
 		$this->apiModule->getMain()->dieWithError( $msg, $errorCode, $extraData, $httpRespCode );
 
+		// @phan-suppress-next-line PhanPluginUnreachableCode Wanted to guarantee return never at the language level
 		throw new LogicException( 'ApiUsageException not thrown' );
 	}
 
