@@ -8,7 +8,7 @@ use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
 use Wikibase\Repo\Store\Sql\DispatchStats;
 use Wikimedia\Rdbms\ConnectionManager;
-use Wikimedia\Rdbms\DBConnRef;
+use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\SelectQueryBuilder;
 
 /**
@@ -25,10 +25,10 @@ class DispatchStatsTest extends MediaWikiIntegrationTestCase {
 	use LocalRepoDbTestHelper;
 
 	private function getRepoDomainDbMock( SelectQueryBuilder $selectQueryBuilder ): RepoDomainDb {
-		$dbConnRefMock = $this->createMock( DBConnRef::class );
-		$dbConnRefMock->method( 'newSelectQueryBuilder' )->willReturn( $selectQueryBuilder );
+		$connectionMock = $this->createMock( IDatabase::class );
+		$connectionMock->method( 'newSelectQueryBuilder' )->willReturn( $selectQueryBuilder );
 		$connManagerMock = $this->createMock( ConnectionManager::class );
-		$connManagerMock->method( 'getReadConnection' )->willReturn( $dbConnRefMock );
+		$connManagerMock->method( 'getReadConnection' )->willReturn( $connectionMock );
 		$dbMock = $this->createMock( RepoDomainDb::class );
 		$dbMock->method( 'connections' )->willReturn( $connManagerMock );
 
