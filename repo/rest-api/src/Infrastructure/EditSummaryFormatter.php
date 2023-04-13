@@ -37,12 +37,12 @@ class EditSummaryFormatter {
 					return $this->newSummaryForLabelEdit( $editSummary, 'wbsetlabel', 'set' );
 			}
 		} elseif ( $editSummary instanceof DescriptionEditSummary ) {
-			$summary = new Summary( 'wbsetdescription', 'set' );
-			$summary->setLanguage( $editSummary->getDescription()->getLanguageCode() );
-			$summary->addAutoSummaryArgs( [ $editSummary->getDescription()->getText() ] );
-			$summary->setUserSummary( $editSummary->getUserComment() );
-
-			return $summary;
+			switch ( $editSummary->getEditAction() ) {
+				case EditSummary::ADD_ACTION:
+					return $this->newSummaryForDescriptionEdit( $editSummary, 'wbsetdescription', 'add' );
+				case EditSummary::REPLACE_ACTION:
+					return $this->newSummaryForDescriptionEdit( $editSummary, 'wbsetdescription', 'set' );
+			}
 		} elseif ( $editSummary instanceof StatementEditSummary ) {
 			switch ( $editSummary->getEditAction() ) {
 				case EditSummary::ADD_ACTION:
@@ -66,6 +66,19 @@ class EditSummaryFormatter {
 		$summary = new Summary( $moduleName, $actionName );
 		$summary->setLanguage( $editSummary->getLabel()->getLanguageCode() );
 		$summary->addAutoSummaryArgs( [ $editSummary->getLabel()->getText() ] );
+		$summary->setUserSummary( $editSummary->getUserComment() );
+
+		return $summary;
+	}
+
+	private function newSummaryForDescriptionEdit(
+		DescriptionEditSummary $editSummary,
+		string $moduleName,
+		string $actionName
+	): Summary {
+		$summary = new Summary( $moduleName, $actionName );
+		$summary->setLanguage( $editSummary->getDescription()->getLanguageCode() );
+		$summary->addAutoSummaryArgs( [ $editSummary->getDescription()->getText() ] );
 		$summary->setUserSummary( $editSummary->getUserComment() );
 
 		return $summary;

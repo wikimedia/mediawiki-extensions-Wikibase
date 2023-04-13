@@ -42,7 +42,7 @@ class SetItemDescriptionRouteHandler extends SimpleHandler {
 			$jsonBody['comment'] ?? null
 		) );
 		$httpResponse = $this->getResponseFactory()->create();
-		$httpResponse->setStatus( 200 );
+		$httpResponse->setStatus( $useCaseResponse->wasReplaced() ? 200 : 201 );
 		$httpResponse->setHeader( 'Content-Type', 'application/json' );
 		$httpResponse->setHeader( 'ETag', "\"{$useCaseResponse->getRevisionId()}\"" );
 		$httpResponse->setHeader(

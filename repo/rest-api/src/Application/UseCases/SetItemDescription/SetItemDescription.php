@@ -24,22 +24,28 @@ class SetItemDescription {
 
 	public function execute( SetItemDescriptionRequest $request ): SetItemDescriptionResponse {
 		$item = $this->itemRetriever->getItem( new ItemId( $request->getItemId() ) );
+		$descriptionExists = $item->getDescriptions()->hasTermForLanguage( $request->getLanguageCode() );
 		$description = new Term( $request->getLanguageCode(), $request->getDescription() );
 		$item->getDescriptions()->setTerm( $description );
+
+		$editSummary = $descriptionExists
+			? DescriptionEditSummary::newReplaceSummary( $request->getComment(), $description )
+			: DescriptionEditSummary::newAddSummary( $request->getComment(), $description );
 
 		$revision = $this->itemUpdater->update(
 			$item,
 			new EditMetadata(
 				$request->getEditTags(),
 				$request->isBot(),
-				new DescriptionEditSummary( $description, $request->getComment() )
+				$editSummary
 			)
 		);
 
 		return new SetItemDescriptionResponse(
 			$revision->getItem()->getDescriptions()[$request->getLanguageCode()],
 			$revision->getLastModified(),
-			$revision->getRevisionId()
+			$revision->getRevisionId(),
+			$descriptionExists
 		);
 	}
 }

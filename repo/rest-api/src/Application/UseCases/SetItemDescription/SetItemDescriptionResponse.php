@@ -12,11 +12,13 @@ class SetItemDescriptionResponse {
 	private Description $description;
 	private string $lastModified;
 	private int $revisionId;
+	private bool $replaced;
 
-	public function __construct( Description $description, string $lastModified, int $revisionId ) {
+	public function __construct( Description $description, string $lastModified, int $revisionId, bool $replaced ) {
 		$this->description = $description;
 		$this->lastModified = $lastModified;
 		$this->revisionId = $revisionId;
+		$this->replaced = $replaced;
 	}
 
 	public function getDescription(): Description {
@@ -29,6 +31,10 @@ class SetItemDescriptionResponse {
 
 	public function getRevisionId(): int {
 		return $this->revisionId;
+	}
+
+	public function wasReplaced(): bool {
+		return $this->replaced;
 	}
 
 }

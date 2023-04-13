@@ -9,16 +9,26 @@ use Wikibase\DataModel\Term\Term;
  */
 class DescriptionEditSummary implements EditSummary {
 
+	private string $editAction;
 	private ?string $userComment;
 	private Term $description;
 
-	public function __construct( Term $description, ?string $userComment ) {
+	public function __construct( string $editAction, ?string $userComment, Term $description ) {
+		$this->editAction = $editAction;
 		$this->userComment = $userComment;
 		$this->description = $description;
 	}
 
+	public static function newAddSummary( ?string $userComment, Term $description ): self {
+		return new self( self::ADD_ACTION, $userComment, $description );
+	}
+
+	public static function newReplaceSummary( ?string $userComment, Term $description ): self {
+		return new self( self::REPLACE_ACTION, $userComment, $description );
+	}
+
 	public function getEditAction(): string {
-		return self::REPLACE_ACTION;
+		return $this->editAction;
 	}
 
 	public function getUserComment(): ?string {

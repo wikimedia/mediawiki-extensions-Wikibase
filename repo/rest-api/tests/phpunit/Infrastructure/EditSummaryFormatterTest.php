@@ -50,13 +50,23 @@ class EditSummaryFormatterTest extends MediaWikiLangTestCase {
 	}
 
 	public function descriptionEditSummaryProvider(): Generator {
+		yield 'add description' => [
+			DescriptionEditSummary::newAddSummary( 'add user comment', new Term( 'en', 'DESCRIPTION-TEXT' ) ),
+			'/* wbsetdescription-add:1|en */ DESCRIPTION-TEXT, add user comment',
+		];
+
+		yield 'add description with no user comment' => [
+			DescriptionEditSummary::newAddSummary( null, new Term( 'en', 'DESCRIPTION-TEXT' ) ),
+			'/* wbsetdescription-add:1|en */ DESCRIPTION-TEXT',
+		];
+
 		yield 'replace description' => [
-			new DescriptionEditSummary( new Term( 'en', 'DESCRIPTION-TEXT' ), 'replace user comment' ),
+			DescriptionEditSummary::newReplaceSummary( 'replace user comment', new Term( 'en', 'DESCRIPTION-TEXT' ) ),
 			'/* wbsetdescription-set:1|en */ DESCRIPTION-TEXT, replace user comment',
 		];
 
 		yield 'replace description with no user comment' => [
-			new DescriptionEditSummary( new Term( 'en', 'DESCRIPTION-TEXT' ), null ),
+			DescriptionEditSummary::newReplaceSummary( null, new Term( 'en', 'DESCRIPTION-TEXT' ) ),
 			'/* wbsetdescription-set:1|en */ DESCRIPTION-TEXT',
 		];
 	}
