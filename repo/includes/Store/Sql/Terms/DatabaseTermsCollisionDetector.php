@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Store\Sql\Terms;
 
 use InvalidArgumentException;
@@ -22,17 +24,13 @@ use Wikimedia\Rdbms\IDatabase;
  */
 class DatabaseTermsCollisionDetector implements TermsCollisionDetector {
 
-	/** @var string */
-	private $entityType;
+	private string $entityType;
 
-	/** @var RepoDomainDb */
-	private $db;
+	private RepoDomainDb $db;
 
-	/** @var TypeIdsLookup */
-	private $typeIdsLookup;
+	private TypeIdsLookup $typeIdsLookup;
 
-	/** @var DatabaseEntityTermsTableProvider */
-	private $databaseEntityTermsTableProvider;
+	private DatabaseEntityTermsTableProvider $databaseEntityTermsTableProvider;
 
 	/**
 	 * @param string $entityType one of the two supported types: Item::ENTITY_TYPE or Property::ENTITY_TYPE
@@ -60,9 +58,6 @@ class DatabaseTermsCollisionDetector implements TermsCollisionDetector {
 
 	/**
 	 * Returns an entity id that collides with given label in given language, if any
-	 * @param string $lang
-	 * @param string $label
-	 * @return EntityId|null
 	 */
 	public function detectLabelCollision(
 		string $lang,
@@ -81,10 +76,6 @@ class DatabaseTermsCollisionDetector implements TermsCollisionDetector {
 
 	/**
 	 * Returns an entity id that collides with given label and description in given languages, if any
-	 * @param string $lang
-	 * @param string $label
-	 * @param string $description
-	 * @return EntityId|null numeric entity id of colliding entity, if any
 	 */
 	public function detectLabelAndDescriptionCollision(
 		string $lang,
@@ -258,13 +249,7 @@ class DatabaseTermsCollisionDetector implements TermsCollisionDetector {
 		return $values;
 	}
 
-	/**
-	 * @param int $typeId
-	 * @param string $lang
-	 * @param string $text
-	 * @return array
-	 */
-	private function getTermQueryParams( $typeId, $lang, $text ) {
+	private function getTermQueryParams( int $typeId, string $lang, string $text ): array {
 		list(
 			$table,
 			$joinConditions,
@@ -279,13 +264,7 @@ class DatabaseTermsCollisionDetector implements TermsCollisionDetector {
 		];
 	}
 
-	/**
-	 * @param int $typeId
-	 * @param array $languages
-	 * @param array $texts
-	 * @return array
-	 */
-	private function getMultiTermQueryParams( $typeId, $languages, $texts ) {
+	private function getMultiTermQueryParams( int $typeId, array $languages, array $texts ): array {
 		list(
 			$table,
 			$joinConditions,

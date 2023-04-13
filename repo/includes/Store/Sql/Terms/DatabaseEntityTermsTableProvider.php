@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Store\Sql\Terms;
 
 use InvalidArgumentException;
@@ -13,14 +15,11 @@ use Wikibase\DataModel\Entity\Property;
  */
 class DatabaseEntityTermsTableProvider {
 
-	/** @var string */
-	private $entityTermsTable;
+	private string $entityTermsTable;
 
-	/** @var string */
-	private $entityTermsJoinColumn;
+	private string $entityTermsJoinColumn;
 
-	/** @var string */
-	private $entityIdColumn;
+	private string $entityIdColumn;
 
 	/**
 	 * @param string $entityType one of the supported types: Item::ENTITY_TYPE or Property::ENTITY_TYPE
@@ -47,7 +46,7 @@ class DatabaseEntityTermsTableProvider {
 	 *  - join conditions
 	 *  - entity id column: the column name that contains the entity id within the top-most entity terms table
 	 */
-	public function getEntityTermsTableAndJoinConditions() {
+	public function getEntityTermsTableAndJoinConditions(): array {
 		$table = [
 			$this->entityTermsTable,
 			'wbt_term_in_lang',

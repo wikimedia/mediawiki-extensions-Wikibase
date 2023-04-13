@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests\Store\Sql\Terms;
 
 use MediaWikiIntegrationTestCase;
@@ -29,8 +31,7 @@ class DatabaseTermsCollisionDetectorTest extends MediaWikiIntegrationTestCase {
 	private const TYPE_LABEL = 1;
 	private const TYPE_DESCRIPTION = 2;
 
-	/** @var TypeIdsLookup */
-	private $typeIdsLookup;
+	private TypeIdsLookup $typeIdsLookup;
 
 	/**
 	 * Following *TermInLangId are ids of records in
@@ -40,25 +41,17 @@ class DatabaseTermsCollisionDetectorTest extends MediaWikiIntegrationTestCase {
 	 *
 	 * They will be setup before each test, in setUpTerms()
 	 */
-	/** @var int */
-	private $enFooLabelTermInLangId;
-	/** @var int */
-	private $enBarLabelTermInLangId;
+	private int $enFooLabelTermInLangId;
+	private int $enBarLabelTermInLangId;
 
-	/** @var int */
-	private $deFooLabelTermInLangId;
-	/** @var int */
-	private $deBarLabelTermInLangId;
+	private int $deFooLabelTermInLangId;
+	private int $deBarLabelTermInLangId;
 
-	/** @var int */
-	private $enFooDescriptionTermInLangId;
-	/** @var int */
-	private $enBarDescriptionTermInLangId;
+	private int $enFooDescriptionTermInLangId;
+	private int $enBarDescriptionTermInLangId;
 
-	/** @var int */
-	private $deFooDescriptionTermInLangId;
-	/** @var int */
-	private $deBarDescriptionTermInLangId;
+	private int $deFooDescriptionTermInLangId;
+	private int $deBarDescriptionTermInLangId;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -76,7 +69,7 @@ class DatabaseTermsCollisionDetectorTest extends MediaWikiIntegrationTestCase {
 	 * label => [ en => [ 'foo', 'bar' ], de => [ 'foo', 'bar' ] ]
 	 * description => [ en => [ 'foo', 'bar' ], de => [ 'foo', 'bar' ] ]
 	 */
-	private function setUpTerms() {
+	private function setUpTerms(): void {
 		$this->db->truncate( [
 				'wbt_text',
 				'wbt_type',
@@ -137,7 +130,7 @@ class DatabaseTermsCollisionDetectorTest extends MediaWikiIntegrationTestCase {
 		$this->deBarDescriptionTermInLangId = $this->db->insertId();
 	}
 
-	private function makeTestSubject( $entityType ) {
+	private function makeTestSubject( string $entityType ): DatabaseTermsCollisionDetector {
 		return new DatabaseTermsCollisionDetector(
 			$entityType,
 			$this->getRepoDomainDb(),
@@ -145,7 +138,7 @@ class DatabaseTermsCollisionDetectorTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	public function testGivenPropertyLabelTest_whenCollisionExists_returnsCollidingProperyId() {
+	public function testGivenPropertyLabelTest_whenCollisionExists_returnsCollidingProperyId(): void {
 		$this->db->insert( 'wbt_property_terms', [
 			[ 'wbpt_term_in_lang_id' => $this->enBarLabelTermInLangId, 'wbpt_property_id' => 1 ],
 			[ 'wbpt_term_in_lang_id' => $this->deFooLabelTermInLangId, 'wbpt_property_id' => 1 ],
@@ -162,7 +155,7 @@ class DatabaseTermsCollisionDetectorTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( NumericPropertyId::newFromNumber( 2 ), $propertyId );
 	}
 
-	public function testGivenPropertyLabelTest_whenNoCollisionsExists_returnsNull() {
+	public function testGivenPropertyLabelTest_whenNoCollisionsExists_returnsNull(): void {
 		$this->db->insert( 'wbt_property_terms', [
 			[ 'wbpt_term_in_lang_id' => $this->deFooLabelTermInLangId, 'wbpt_property_id' => 1 ],
 			[ 'wbpt_term_in_lang_id' => $this->enBarLabelTermInLangId, 'wbpt_property_id' => 2 ],
@@ -177,7 +170,7 @@ class DatabaseTermsCollisionDetectorTest extends MediaWikiIntegrationTestCase {
 		$this->assertNull( $propertyId );
 	}
 
-	public function testGivenItemLabelTest_whenCollisionExists_returnsCollidingProperyId() {
+	public function testGivenItemLabelTest_whenCollisionExists_returnsCollidingProperyId(): void {
 		$this->db->insert( 'wbt_item_terms', [
 			[ 'wbit_term_in_lang_id' => $this->enBarLabelTermInLangId, 'wbit_item_id' => 1 ],
 			[ 'wbit_term_in_lang_id' => $this->deFooLabelTermInLangId, 'wbit_item_id' => 1 ],
@@ -194,7 +187,7 @@ class DatabaseTermsCollisionDetectorTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( ItemId::newFromNumber( 2 ), $itemId );
 	}
 
-	public function testGivenItemLabelTest_whenNoCollisionsExists_returnsNull() {
+	public function testGivenItemLabelTest_whenNoCollisionsExists_returnsNull(): void {
 		$this->db->insert( 'wbt_item_terms', [
 			[ 'wbit_term_in_lang_id' => $this->deFooLabelTermInLangId, 'wbit_item_id' => 1 ],
 			[ 'wbit_term_in_lang_id' => $this->enBarLabelTermInLangId, 'wbit_item_id' => 2 ],
@@ -209,7 +202,7 @@ class DatabaseTermsCollisionDetectorTest extends MediaWikiIntegrationTestCase {
 		$this->assertNull( $itemId );
 	}
 
-	public function testGivenPropertyLabelDescriptionTest_whenCollisionExists_returnsCollidingProperyId() {
+	public function testGivenPropertyLabelDescriptionTest_whenCollisionExists_returnsCollidingProperyId(): void {
 		$this->db->insert( 'wbt_property_terms', [
 			// labels
 			[ 'wbpt_term_in_lang_id' => $this->enBarLabelTermInLangId, 'wbpt_property_id' => 1 ],
@@ -239,7 +232,7 @@ class DatabaseTermsCollisionDetectorTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( NumericPropertyId::newFromNumber( 3 ), $propertyId );
 	}
 
-	public function testGivenPropertyLabelDescriptionTest_whenNoCollisionsExists_returnsNull() {
+	public function testGivenPropertyLabelDescriptionTest_whenNoCollisionsExists_returnsNull(): void {
 		$this->db->insert( 'wbt_property_terms', [
 			// labels
 			[ 'wbpt_term_in_lang_id' => $this->enBarLabelTermInLangId, 'wbpt_property_id' => 1 ],
@@ -266,7 +259,7 @@ class DatabaseTermsCollisionDetectorTest extends MediaWikiIntegrationTestCase {
 		$this->assertNull( $propertyId );
 	}
 
-	public function testGivenItemLabelDescriptionTest_whenCollisionExists_returnsCollidingProperyId() {
+	public function testGivenItemLabelDescriptionTest_whenCollisionExists_returnsCollidingProperyId(): void {
 		$this->db->insert( 'wbt_item_terms', [
 			// labels
 			[ 'wbit_term_in_lang_id' => $this->enBarLabelTermInLangId, 'wbit_item_id' => 1 ],
@@ -296,7 +289,7 @@ class DatabaseTermsCollisionDetectorTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( ItemId::newFromNumber( 3 ), $itemId );
 	}
 
-	public function testGivenItemLabelDescriptionTest_whenNoCollisionsExists_returnsNull() {
+	public function testGivenItemLabelDescriptionTest_whenNoCollisionsExists_returnsNull(): void {
 		$this->db->insert( 'wbt_item_terms', [
 			// labels
 			[ 'wbit_term_in_lang_id' => $this->enBarLabelTermInLangId, 'wbit_item_id' => 1 ],
@@ -326,7 +319,7 @@ class DatabaseTermsCollisionDetectorTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider termListProvider
 	 */
-	public function testDetectLabelsCollision( array $databaseRecords, TermList $termsList, array $expectedResults ) {
+	public function testDetectLabelsCollision( array $databaseRecords, TermList $termsList, array $expectedResults ): void {
 		$records = [];
 		foreach ( $databaseRecords as $key => $propertyRecords ) {
 			foreach ( $propertyRecords as $record ) {
@@ -343,7 +336,7 @@ class DatabaseTermsCollisionDetectorTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $expectedResults, $properties );
 	}
 
-	public function termListProvider() {
+	public function termListProvider(): iterable {
 
 		$deFoo = new Term( 'de', 'foo' );
 		$enFoo = new Term( 'en', 'foo' );

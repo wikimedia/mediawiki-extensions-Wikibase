@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests\Store\Sql\Terms;
 
 use PHPUnit\Framework\TestCase;
@@ -12,7 +14,7 @@ use Wikibase\Repo\Store\Sql\Terms\DatabaseEntityTermsTableProvider;
  */
 class DatabaseEntityTermsTableProviderTest extends TestCase {
 
-	public function provideEntityTypeAndExpectedOutput() {
+	public function provideEntityTypeAndExpectedOutput(): iterable {
 		return [
 			'item' => [
 				'entityType' => 'item',
@@ -74,9 +76,9 @@ class DatabaseEntityTermsTableProviderTest extends TestCase {
 
 	/** @dataProvider provideEntityTypeAndExpectedOutput */
 	public function testGetEntityTermsTableAndJoinConditions(
-		$entityType,
-		$expected
-	) {
+		string $entityType,
+		array $expected
+	): void {
 		$databaseEntityTermsTableProvider = new DatabaseEntityTermsTableProvider( $entityType );
 		$actual = $databaseEntityTermsTableProvider->getEntityTermsTableAndJoinConditions();
 
