@@ -259,7 +259,7 @@ class DatabaseTermsCollisionDetector implements TermsCollisionDetector {
 	}
 
 	/**
-	 * @param string $typeId
+	 * @param int $typeId
 	 * @param string $lang
 	 * @param string $text
 	 * @return array
@@ -280,7 +280,7 @@ class DatabaseTermsCollisionDetector implements TermsCollisionDetector {
 	}
 
 	/**
-	 * @param string $typeId
+	 * @param int $typeId
 	 * @param array $languages
 	 * @param array $texts
 	 * @return array
@@ -304,7 +304,7 @@ class DatabaseTermsCollisionDetector implements TermsCollisionDetector {
 		return [ $table, $joinConditions, $conditions, $entityIdColumn ];
 	}
 
-	private function getTermInLanguageCondition( string $typeId, string $language, string $text ): array {
+	private function getTermInLanguageCondition( int $typeId, string $language, string $text ): array {
 		return [
 			"wbtl_type_id" => $typeId,
 			"wbxl_language" => $language,
