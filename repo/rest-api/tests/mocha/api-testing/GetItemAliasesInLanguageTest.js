@@ -1,8 +1,9 @@
 'use strict';
 
+const { assert } = require( 'api-testing' );
+const { expect } = require( '../helpers/chaiHelper' );
 const { createEntity, getLatestEditMetadata, createRedirectForItem } = require( '../helpers/entityHelper' );
 const { newGetItemAliasesInLanguageRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
-const { assert } = require( 'api-testing' );
 
 describe( 'GET /entities/items/{id}/aliases/{language_code}', () => {
 	let itemId;
@@ -33,7 +34,7 @@ describe( 'GET /entities/items/{id}/aliases/{language_code}', () => {
 			.assertValidRequest()
 			.makeRequest();
 
-		assert.strictEqual( response.status, 200 );
+		expect( response ).to.have.status( 200 );
 		assert.deepEqual( response.body, [ 'Douglas Noël Adams', 'DNA' ] );
 		assert.strictEqual( response.header.etag, `"${testItemCreationMetadata.revid}"` );
 		assert.strictEqual( response.header[ 'last-modified' ], testItemCreationMetadata.timestamp );
@@ -47,7 +48,7 @@ describe( 'GET /entities/items/{id}/aliases/{language_code}', () => {
 			.assertValidRequest()
 			.makeRequest();
 
-		assert.strictEqual( response.status, 308 );
+		expect( response ).to.have.status( 308 );
 
 		assert.isTrue(
 			new URL( response.headers.location ).pathname
@@ -61,7 +62,7 @@ describe( 'GET /entities/items/{id}/aliases/{language_code}', () => {
 			.assertInvalidRequest()
 			.makeRequest();
 
-		assert.strictEqual( response.status, 400 );
+		expect( response ).to.have.status( 400 );
 		assert.header( response, 'Content-Language', 'en' );
 		assert.strictEqual( response.body.code, 'invalid-item-id' );
 		assert.include( response.body.message, invalidItemId );
@@ -73,7 +74,7 @@ describe( 'GET /entities/items/{id}/aliases/{language_code}', () => {
 			.assertInvalidRequest()
 			.makeRequest();
 
-		assert.strictEqual( response.status, 400 );
+		expect( response ).to.have.status( 400 );
 		assert.header( response, 'Content-Language', 'en' );
 		assert.strictEqual( response.body.code, 'invalid-language-code' );
 		assert.include( response.body.message, invalidLanguageCode );
@@ -85,7 +86,7 @@ describe( 'GET /entities/items/{id}/aliases/{language_code}', () => {
 			.assertValidRequest()
 			.makeRequest();
 
-		assert.strictEqual( response.status, 404 );
+		expect( response ).to.have.status( 404 );
 		assert.header( response, 'Content-Language', 'en' );
 		assert.strictEqual( response.body.code, 'item-not-found' );
 		assert.include( response.body.message, nonExistentItem );
@@ -97,7 +98,7 @@ describe( 'GET /entities/items/{id}/aliases/{language_code}', () => {
 			.assertValidRequest()
 			.makeRequest();
 
-		assert.strictEqual( response.status, 404 );
+		expect( response ).to.have.status( 404 );
 		assert.header( response, 'Content-Language', 'en' );
 		assert.strictEqual( response.body.code, 'aliases-not-defined' );
 		assert.include( response.body.message, languageCode );

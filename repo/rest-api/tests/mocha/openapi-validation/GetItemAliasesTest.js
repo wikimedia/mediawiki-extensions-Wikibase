@@ -1,10 +1,9 @@
 'use strict';
 
 const { utils } = require( 'api-testing' );
-const chai = require( 'chai' );
+const { expect } = require( '../helpers/chaiHelper' );
 const { createEntity, createRedirectForItem } = require( '../helpers/entityHelper' );
 const { newGetItemAliasesRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
-const expect = chai.expect;
 
 describe( 'validate GET /entities/items/{id}/aliases responses against OpenAPI spec', () => {
 
@@ -32,7 +31,7 @@ describe( 'validate GET /entities/items/{id}/aliases responses against OpenAPI s
 	it( '200 OK response is valid for an Item with two aliases', async () => {
 		const response = await newGetItemAliasesRequestBuilder( testItemId ).makeRequest();
 
-		expect( response.status ).to.equal( 200 );
+		expect( response ).to.have.status( 200 );
 		expect( response ).to.satisfyApiSpec;
 	} );
 
@@ -41,7 +40,7 @@ describe( 'validate GET /entities/items/{id}/aliases responses against OpenAPI s
 
 		const response = await newGetItemAliasesRequestBuilder( createItemResponse.entity.id ).makeRequest();
 
-		expect( response.status ).to.equal( 200 );
+		expect( response ).to.have.status( 200 );
 		expect( response ).to.satisfyApiSpec;
 	} );
 
@@ -50,7 +49,7 @@ describe( 'validate GET /entities/items/{id}/aliases responses against OpenAPI s
 			.withHeader( 'If-None-Match', `"${lastRevisionId}"` )
 			.makeRequest();
 
-		expect( response.status ).to.equal( 304 );
+		expect( response ).to.have.status( 304 );
 		expect( response ).to.satisfyApiSpec;
 	} );
 
@@ -59,21 +58,21 @@ describe( 'validate GET /entities/items/{id}/aliases responses against OpenAPI s
 
 		const response = await newGetItemAliasesRequestBuilder( redirectSourceId ).makeRequest();
 
-		expect( response.status ).to.equal( 308 );
+		expect( response ).to.have.status( 308 );
 		expect( response ).to.satisfyApiSpec;
 	} );
 
 	it( '400 Bad Request response is valid for an invalid item ID', async () => {
 		const response = await newGetItemAliasesRequestBuilder( 'X123' ).makeRequest();
 
-		expect( response.status ).to.equal( 400 );
+		expect( response ).to.have.status( 400 );
 		expect( response ).to.satisfyApiSpec;
 	} );
 
 	it( '404 Not Found response is valid for a non-existing item', async () => {
 		const response = await newGetItemAliasesRequestBuilder( 'Q99999' ).makeRequest();
 
-		expect( response.status ).to.equal( 404 );
+		expect( response ).to.have.status( 404 );
 		expect( response ).to.satisfyApiSpec;
 	} );
 

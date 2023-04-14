@@ -1,12 +1,11 @@
 'use strict';
 
-const chai = require( 'chai' );
+const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const {
 	newGetItemStatementRequestBuilder,
 	newGetStatementRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
-const expect = chai.expect;
 
 describe( 'validate GET statement responses', () => {
 
@@ -33,7 +32,7 @@ describe( 'validate GET statement responses', () => {
 				const response = await newRequestBuilder( testStatementId )
 					.makeRequest();
 
-				expect( response.status ).to.equal( 200 );
+				expect( response ).to.have.status( 200 );
 				expect( response ).to.satisfyApiSpec;
 			} );
 
@@ -42,7 +41,7 @@ describe( 'validate GET statement responses', () => {
 					.withHeader( 'If-None-Match', `"${lastRevId}"` )
 					.makeRequest();
 
-				expect( response.status ).to.equal( 304 );
+				expect( response ).to.have.status( 304 );
 				expect( response ).to.satisfyApiSpec;
 			} );
 
@@ -51,7 +50,7 @@ describe( 'validate GET statement responses', () => {
 				const response = await newRequestBuilder( invalidStatementId )
 					.makeRequest();
 
-				expect( response.status ).to.equal( 400 );
+				expect( response ).to.have.status( 400 );
 				expect( response ).to.satisfyApiSpec;
 			} );
 
@@ -61,7 +60,7 @@ describe( 'validate GET statement responses', () => {
 				const response = await newRequestBuilder( nonexistentStatement )
 					.makeRequest();
 
-				expect( response.status ).to.equal( 404 );
+				expect( response ).to.have.status( 404 );
 				expect( response ).to.satisfyApiSpec;
 			} );
 
@@ -70,7 +69,7 @@ describe( 'validate GET statement responses', () => {
 				const response = await newRequestBuilder( `${nonexistentItem}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE` )
 					.makeRequest();
 
-				expect( response.status ).to.equal( 404 );
+				expect( response ).to.have.status( 404 );
 				expect( response ).to.satisfyApiSpec;
 			} );
 		} );

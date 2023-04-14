@@ -1,6 +1,7 @@
 'use strict';
 
 const { assert } = require( 'api-testing' );
+const { expect } = require( '../helpers/chaiHelper' );
 const {
 	createEntity,
 	createRedirectForItem,
@@ -43,7 +44,7 @@ describe( 'GET /entities/items/{id}/statements', () => {
 			.assertValidRequest()
 			.makeRequest();
 
-		assert.equal( response.status, 200 );
+		expect( response ).to.have.status( 200 );
 		assert.exists( response.body[ testPropertyId ] );
 		assert.equal(
 			response.body[ testPropertyId ][ 0 ].value.content,
@@ -63,6 +64,7 @@ describe( 'GET /entities/items/{id}/statements', () => {
 			.assertValidRequest()
 			.makeRequest();
 
+		expect( response ).to.have.status( 200 );
 		assert.deepEqual( Object.keys( response.body ), [ testPropertyId ] );
 		assert.strictEqual( response.body[ testPropertyId ].length, 2 );
 	} );
@@ -75,7 +77,7 @@ describe( 'GET /entities/items/{id}/statements', () => {
 			.assertValidRequest()
 			.makeRequest();
 
-		assert.equal( response.status, 200 );
+		expect( response ).to.have.status( 200 );
 		assert.empty( response.body );
 	} );
 
@@ -85,7 +87,7 @@ describe( 'GET /entities/items/{id}/statements', () => {
 			.assertInvalidRequest()
 			.makeRequest();
 
-		assert.equal( response.status, 400 );
+		expect( response ).to.have.status( 400 );
 		assert.header( response, 'Content-Language', 'en' );
 		assert.equal( response.body.code, 'invalid-item-id' );
 		assert.include( response.body.message, itemId );
@@ -98,7 +100,7 @@ describe( 'GET /entities/items/{id}/statements', () => {
 			.assertInvalidRequest()
 			.makeRequest();
 
-		assert.equal( response.status, 400 );
+		expect( response ).to.have.status( 400 );
 		assert.header( response, 'Content-Language', 'en' );
 		assert.equal( response.body.code, 'invalid-property-id' );
 		assert.include( response.body.message, propertyId );
@@ -110,7 +112,7 @@ describe( 'GET /entities/items/{id}/statements', () => {
 			.assertValidRequest()
 			.makeRequest();
 
-		assert.equal( response.status, 404 );
+		expect( response ).to.have.status( 404 );
 		assert.header( response, 'Content-Language', 'en' );
 		assert.equal( response.body.code, 'item-not-found' );
 		assert.include( response.body.message, itemId );
@@ -124,7 +126,7 @@ describe( 'GET /entities/items/{id}/statements', () => {
 			.assertValidRequest()
 			.makeRequest();
 
-		assert.equal( response.status, 308 );
+		expect( response ).to.have.status( 308 );
 
 		assert.isTrue(
 			new URL( response.headers.location ).pathname

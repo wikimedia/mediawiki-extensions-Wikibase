@@ -1,5 +1,7 @@
 'use strict';
 
+const { assert, utils, action } = require( 'api-testing' );
+const { expect } = require( '../helpers/chaiHelper' );
 const {
 	createEntity,
 	createRedirectForItem,
@@ -7,7 +9,6 @@ const {
 	newLegacyStatementWithRandomStringValue,
 	createUniqueStringProperty
 } = require( '../helpers/entityHelper' );
-const { assert, utils, action } = require( 'api-testing' );
 const { newGetItemRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 
@@ -64,7 +65,7 @@ describe( 'GET /entities/items/{id}', () => {
 	it( 'can GET all item data including metadata', async () => {
 		const response = await newValidRequestBuilderWithTestItem().makeRequest();
 
-		assert.equal( response.status, 200 );
+		expect( response ).to.have.status( 200 );
 
 		assert.equal( response.body.id, testItemId );
 		assert.deepEqual( response.body.aliases, {} ); // expect {}, not []
@@ -90,7 +91,7 @@ describe( 'GET /entities/items/{id}', () => {
 			.withQueryParam( '_fields', 'labels' )
 			.makeRequest();
 
-		assert.equal( response.status, 200 );
+		expect( response ).to.have.status( 200 );
 		assert.deepEqual( response.body, {
 			id: testItemId,
 			labels: {
@@ -107,7 +108,7 @@ describe( 'GET /entities/items/{id}', () => {
 			.withQueryParam( '_fields', 'labels,descriptions,aliases' )
 			.makeRequest();
 
-		assert.equal( response.status, 200 );
+		expect( response ).to.have.status( 200 );
 		assert.deepEqual( response.body, {
 			id: testItemId,
 			labels: {
@@ -128,7 +129,7 @@ describe( 'GET /entities/items/{id}', () => {
 		const response = await newGetItemRequestBuilder( itemId )
 			.makeRequest();
 
-		assert.equal( response.status, 400 );
+		expect( response ).to.have.status( 400 );
 		assert.header( response, 'Content-Language', 'en' );
 		assert.equal( response.body.code, 'invalid-item-id' );
 		assert.include( response.body.message, itemId );
@@ -141,7 +142,7 @@ describe( 'GET /entities/items/{id}', () => {
 			.assertInvalidRequest()
 			.makeRequest();
 
-		assert.equal( response.status, 400 );
+		expect( response ).to.have.status( 400 );
 		assert.header( response, 'Content-Language', 'en' );
 		assert.equal( response.body.code, 'invalid-field' );
 		assert.include( response.body.message, 'unknown_field' );
@@ -151,7 +152,7 @@ describe( 'GET /entities/items/{id}', () => {
 		const itemId = 'Q999999';
 		const response = await newGetItemRequestBuilder( itemId ).makeRequest();
 
-		assert.equal( response.status, 404 );
+		expect( response ).to.have.status( 404 );
 		assert.header( response, 'Content-Language', 'en' );
 		assert.equal( response.body.code, 'item-not-found' );
 		assert.include( response.body.message, itemId );
@@ -167,7 +168,7 @@ describe( 'GET /entities/items/{id}', () => {
 		it( 'responds with a 308 including the redirect target location', async () => {
 			const response = await newGetItemRequestBuilder( redirectSourceId ).makeRequest();
 
-			assert.equal( response.status, 308 );
+			expect( response ).to.have.status( 308 );
 
 			const redirectLocation = new URL( response.headers.location );
 			assert.isTrue( redirectLocation.pathname.endsWith( `rest.php/wikibase/v0/entities/items/${testItemId}` ) );
@@ -180,7 +181,7 @@ describe( 'GET /entities/items/{id}', () => {
 				.withQueryParam( '_fields', fields )
 				.makeRequest();
 
-			assert.equal( response.status, 308 );
+			expect( response ).to.have.status( 308 );
 
 			const redirectLocation = new URL( response.headers.location );
 			assert.equal(

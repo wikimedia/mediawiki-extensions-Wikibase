@@ -1,6 +1,7 @@
 'use strict';
 
 const { assert, utils } = require( 'api-testing' );
+const { expect } = require( '../helpers/chaiHelper' );
 const rbf = require( '../helpers/RequestBuilderFactory' );
 const {
 	createItemWithStatements,
@@ -10,7 +11,7 @@ const {
 } = require( '../helpers/entityHelper' );
 
 function assertValid400Response( response ) {
-	assert.equal( response.status, 400 );
+	expect( response ).to.have.status( 400 );
 	assert.strictEqual( response.body.code, 'missing-user-agent' );
 	assert.include( response.body.message, 'User-Agent' );
 }

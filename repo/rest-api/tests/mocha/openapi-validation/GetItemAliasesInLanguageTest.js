@@ -28,7 +28,7 @@ describe( newGetItemAliasesInLanguageRequestBuilder().getRouteDescription(), () 
 
 	it( '200 OK response is valid', async () => {
 		const response = await newGetItemAliasesInLanguageRequestBuilder( itemId, languageCode ).makeRequest();
-		expect( response.status ).to.equal( 200 );
+		expect( response ).to.have.status( 200 );
 		expect( response ).to.satisfyApiSpec;
 	} );
 
@@ -36,7 +36,7 @@ describe( newGetItemAliasesInLanguageRequestBuilder().getRouteDescription(), () 
 		const response = await newGetItemAliasesInLanguageRequestBuilder( itemId, languageCode )
 			.withHeader( 'If-None-Match', `"${lastRevisionId}"` )
 			.makeRequest();
-		expect( response.status ).to.equal( 304 );
+		expect( response ).to.have.status( 304 );
 		expect( response ).to.satisfyApiSpec;
 	} );
 
@@ -44,25 +44,25 @@ describe( newGetItemAliasesInLanguageRequestBuilder().getRouteDescription(), () 
 		const redirectSourceId = await createRedirectForItem( itemId );
 		const response = await newGetItemAliasesInLanguageRequestBuilder( redirectSourceId, languageCode )
 			.makeRequest();
-		expect( response.status ).to.equal( 308 );
+		expect( response ).to.have.status( 308 );
 		expect( response ).to.satisfyApiSpec;
 	} );
 
 	it( '400 Bad Request response is valid for an invalid item ID', async () => {
 		const response = await newGetItemAliasesInLanguageRequestBuilder( 'X123', languageCode ).makeRequest();
-		expect( response.status ).to.equal( 400 );
+		expect( response ).to.have.status( 400 );
 		expect( response ).to.satisfyApiSpec;
 	} );
 
 	it( '404 Not Found response is valid for a non-existing item', async () => {
 		const response = await newGetItemAliasesInLanguageRequestBuilder( 'Q99999', languageCode ).makeRequest();
-		expect( response.status ).to.equal( 404 );
+		expect( response ).to.have.status( 404 );
 		expect( response ).to.satisfyApiSpec;
 	} );
 
 	it( '404 Not Found response is valid if there is no aliases in the requested language', async () => {
 		const response = await newGetItemAliasesInLanguageRequestBuilder( itemId, 'de' ).makeRequest();
-		expect( response.status ).to.equal( 404 );
+		expect( response ).to.have.status( 404 );
 		expect( response ).to.satisfyApiSpec;
 	} );
 

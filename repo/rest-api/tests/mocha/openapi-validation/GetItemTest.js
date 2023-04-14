@@ -1,10 +1,9 @@
 'use strict';
 
-const chai = require( 'chai' );
-const entityHelper = require( '../helpers/entityHelper' );
 const { action, utils } = require( 'api-testing' );
+const { expect } = require( '../helpers/chaiHelper' );
+const entityHelper = require( '../helpers/entityHelper' );
 const { newGetItemRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
-const expect = chai.expect;
 
 async function createItemWithAllFields() {
 	const stringPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
@@ -73,7 +72,7 @@ describe( 'validate GET /entities/items/{id} responses against OpenAPI document'
 	it( '200 OK response is valid for an "empty" item', async () => {
 		const response = await newGetItemRequestBuilder( itemId ).makeRequest();
 
-		expect( response.status ).to.equal( 200 );
+		expect( response ).to.have.status( 200 );
 		expect( response ).to.satisfyApiSpec;
 	} );
 
@@ -81,7 +80,7 @@ describe( 'validate GET /entities/items/{id} responses against OpenAPI document'
 		const { entity: { id } } = await createItemWithAllFields();
 		const response = await newGetItemRequestBuilder( id ).makeRequest();
 
-		expect( response.status ).to.equal( 200 );
+		expect( response ).to.have.status( 200 );
 		expect( response ).to.satisfyApiSpec;
 	} );
 
@@ -90,7 +89,7 @@ describe( 'validate GET /entities/items/{id} responses against OpenAPI document'
 
 		const response = await newGetItemRequestBuilder( redirectSourceId ).makeRequest();
 
-		expect( response.status ).to.equal( 308 );
+		expect( response ).to.have.status( 308 );
 		expect( response ).to.satisfyApiSpec;
 	} );
 
@@ -99,14 +98,14 @@ describe( 'validate GET /entities/items/{id} responses against OpenAPI document'
 			.withHeader( 'If-None-Match', `"${latestRevisionId}"` )
 			.makeRequest();
 
-		expect( response.status ).to.equal( 304 );
+		expect( response ).to.have.status( 304 );
 		expect( response ).to.satisfyApiSpec;
 	} );
 
 	it( '400 Bad Request response is valid for an invalid item ID', async () => {
 		const response = await newGetItemRequestBuilder( 'X123' ).makeRequest();
 
-		expect( response.status ).to.equal( 400 );
+		expect( response ).to.have.status( 400 );
 		expect( response ).to.satisfyApiSpec;
 	} );
 
@@ -115,14 +114,14 @@ describe( 'validate GET /entities/items/{id} responses against OpenAPI document'
 			.withQueryParam( '_fields', 'unknown_field' )
 			.makeRequest();
 
-		expect( response.status ).to.equal( 400 );
+		expect( response ).to.have.status( 400 );
 		expect( response ).to.satisfyApiSpec;
 	} );
 
 	it( '404 Not Found response is valid for a non-existing item', async () => {
 		const response = await newGetItemRequestBuilder( 'Q99999' ).makeRequest();
 
-		expect( response.status ).to.equal( 404 );
+		expect( response ).to.have.status( 404 );
 		expect( response ).to.satisfyApiSpec;
 	} );
 

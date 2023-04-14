@@ -1,6 +1,7 @@
 'use strict';
 
 const { assert, action, utils } = require( 'api-testing' );
+const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { formatStatementEditSummary } = require( '../helpers/formatEditSummaries' );
 const { newAddItemStatementRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
@@ -13,7 +14,7 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 	let testStatement;
 
 	function assertValid201Response( response, propertyId = null, content = null ) {
-		assert.strictEqual( response.status, 201 );
+		expect( response ).to.have.status( 201 );
 		assert.strictEqual( response.header[ 'content-type' ], 'application/json' );
 		assert.isAbove( new Date( response.header[ 'last-modified' ] ), originalLastModified );
 		assert.notStrictEqual( response.header.etag, makeEtag( originalRevisionId ) );
@@ -158,7 +159,7 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			assert.strictEqual( response.status, 400 );
+			expect( response ).to.have.status( 400 );
 			assert.strictEqual( response.header[ 'content-language' ], 'en' );
 			assert.strictEqual( response.body.code, 'invalid-item-id' );
 			assert.include( response.body.message, itemId );
@@ -170,7 +171,7 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assert.strictEqual( response.status, 400 );
+			expect( response ).to.have.status( 400 );
 			assert.strictEqual( response.header[ 'content-language' ], 'en' );
 			assert.strictEqual( response.body.code, 'comment-too-long' );
 			assert.include( response.body.message, '500' );
@@ -183,7 +184,7 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assert.strictEqual( response.status, 400 );
+			expect( response ).to.have.status( 400 );
 			assert.strictEqual( response.header[ 'content-language' ], 'en' );
 			assert.strictEqual( response.body.code, 'invalid-edit-tag' );
 			assert.include( response.body.message, invalidEditTag );
@@ -195,7 +196,7 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			assert.strictEqual( response.status, 400 );
+			expect( response ).to.have.status( 400 );
 			assert.strictEqual( response.body.code, 'invalid-request-body' );
 			assert.strictEqual( response.body.fieldName, 'bot' );
 			assert.strictEqual( response.body.expectedType, 'boolean' );
@@ -207,7 +208,7 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			assert.strictEqual( response.status, 400 );
+			expect( response ).to.have.status( 400 );
 			assert.strictEqual( response.body.code, 'invalid-request-body' );
 			assert.strictEqual( response.body.fieldName, 'comment' );
 			assert.strictEqual( response.body.expectedType, 'string' );
@@ -223,7 +224,7 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			assert.strictEqual( response.status, 400 );
+			expect( response ).to.have.status( 400 );
 			assert.strictEqual( response.body.code, 'statement-data-invalid-field' );
 			assert.deepEqual( response.body.context, { path: invalidField, value: invalidValue } );
 			assert.include( response.body.message, invalidField );
@@ -238,7 +239,7 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			assert.strictEqual( response.status, 400 );
+			expect( response ).to.have.status( 400 );
 			assert.strictEqual( response.body.code, 'statement-data-missing-field' );
 			assert.deepEqual( response.body.context, { path: missingField } );
 			assert.include( response.body.message, missingField );
@@ -252,7 +253,7 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assert.strictEqual( response.status, 404 );
+			expect( response ).to.have.status( 404 );
 			assert.strictEqual( response.header[ 'content-language' ], 'en' );
 			assert.strictEqual( response.body.code, 'item-not-found' );
 			assert.include( response.body.message, itemId );
@@ -266,7 +267,7 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 				.withHeader( 'content-type', contentType )
 				.makeRequest();
 
-			assert.strictEqual( response.status, 415 );
+			expect( response ).to.have.status( 415 );
 			assert.strictEqual( response.body.message, `Unsupported Content-Type: '${contentType}'` );
 		} );
 	} );
@@ -281,7 +282,7 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 				testStatement
 			).makeRequest();
 
-			assert.strictEqual( response.status, 409 );
+			expect( response ).to.have.status( 409 );
 			assert.include( response.body.message, redirectSource );
 			assert.include( response.body.message, redirectTarget );
 			assert.strictEqual( response.body.code, 'redirected-item' );

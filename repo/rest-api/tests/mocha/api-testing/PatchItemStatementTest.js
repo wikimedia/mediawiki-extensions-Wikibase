@@ -1,6 +1,7 @@
 'use strict';
 
 const { assert, action } = require( 'api-testing' );
+const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { formatStatementEditSummary } = require( '../helpers/formatEditSummaries' );
 const {
@@ -12,7 +13,7 @@ const {
 const { makeEtag } = require( '../helpers/httpHelper' );
 
 function assertValid400Response( response, responseBodyErrorCode, context = null ) {
-	assert.strictEqual( response.status, 400 );
+	expect( response ).to.have.status( 400 );
 	assert.header( response, 'Content-Language', 'en' );
 	assert.strictEqual( response.body.code, responseBodyErrorCode );
 	if ( context === null ) {
@@ -23,7 +24,7 @@ function assertValid400Response( response, responseBodyErrorCode, context = null
 }
 
 function assertValid404Response( response, responseBodyErrorCode ) {
-	assert.strictEqual( response.status, 404 );
+	expect( response ).to.have.status( 404 );
 	assert.header( response, 'Content-Language', 'en' );
 	assert.strictEqual( response.body.code, responseBodyErrorCode );
 }
@@ -44,8 +45,7 @@ describe( 'PATCH statement tests', () => {
 			testItemId,
 			entityHelper.newStatementWithRandomStringValue( testPropertyId )
 		).assertValidRequest().makeRequest();
-		const errMsg = `Add Statement failed with error code: '${addStatementResponse.body.code}'`;
-		assert.strictEqual( addStatementResponse.status, 201, errMsg );
+		expect( addStatementResponse ).to.have.status( 201 );
 		testStatement = addStatementResponse.body;
 		testStatementId = testStatement.id;
 
@@ -66,7 +66,7 @@ describe( 'PATCH statement tests', () => {
 		describe( newPatchRequestBuilder().getRouteDescription(), () => {
 
 			function assertValid200Response( response ) {
-				assert.strictEqual( response.status, 200 );
+				expect( response ).to.have.status( 200 );
 				assert.strictEqual( response.body.id, testStatementId );
 				assert.strictEqual( response.header[ 'content-type' ], 'application/json' );
 				assert.isAbove( new Date( response.header[ 'last-modified' ] ), previousLastModified );
@@ -83,7 +83,7 @@ describe( 'PATCH statement tests', () => {
 						testStatementId, testStatement
 					).makeRequest();
 					const errMsg = `Cleanup failed with error code: '${response.body.code}'`;
-					assert.strictEqual( response.status, 200, errMsg );
+					expect( response ).to.have.status( 200, errMsg );
 					assert.deepStrictEqual( response.body, testStatement );
 
 					// wait 1s before next test to ensure the last-modified timestamps are different
@@ -319,7 +319,7 @@ describe( 'PATCH statement tests', () => {
 					const response = await newPatchRequestBuilder( testStatementId, [] )
 						.withJsonBodyParam( 'tags', 'not an array' ).assertInvalidRequest().makeRequest();
 
-					assert.strictEqual( response.status, 400 );
+					expect( response ).to.have.status( 400 );
 					assert.strictEqual( response.body.code, 'invalid-request-body' );
 					assert.strictEqual( response.body.fieldName, 'tags' );
 					assert.strictEqual( response.body.expectedType, 'array' );
@@ -329,7 +329,7 @@ describe( 'PATCH statement tests', () => {
 					const response = await newPatchRequestBuilder( testStatementId, [] )
 						.withJsonBodyParam( 'bot', 'not boolean' ).assertInvalidRequest().makeRequest();
 
-					assert.strictEqual( response.status, 400 );
+					expect( response ).to.have.status( 400 );
 					assert.strictEqual( response.body.code, 'invalid-request-body' );
 					assert.strictEqual( response.body.fieldName, 'bot' );
 					assert.strictEqual( response.body.expectedType, 'boolean' );
@@ -339,7 +339,7 @@ describe( 'PATCH statement tests', () => {
 					const response = await newPatchRequestBuilder( testStatementId, [] )
 						.withJsonBodyParam( 'comment', 1234 ).assertInvalidRequest().makeRequest();
 
-					assert.strictEqual( response.status, 400 );
+					expect( response ).to.have.status( 400 );
 					assert.strictEqual( response.body.code, 'invalid-request-body' );
 					assert.strictEqual( response.body.fieldName, 'comment' );
 					assert.strictEqual( response.body.expectedType, 'string' );
@@ -397,7 +397,7 @@ describe( 'PATCH statement tests', () => {
 						.assertValidRequest()
 						.makeRequest();
 
-					assert.strictEqual( response.statusCode, 409 );
+					expect( response ).to.have.status( 409 );
 					assert.strictEqual( response.body.code, 'patch-target-not-found' );
 					assert.include( response.body.message, operation.path );
 					assert.strictEqual( response.body.context.field, 'path' );
@@ -414,7 +414,7 @@ describe( 'PATCH statement tests', () => {
 						.assertValidRequest()
 						.makeRequest();
 
-					assert.strictEqual( response.statusCode, 409 );
+					expect( response ).to.have.status( 409 );
 					assert.strictEqual( response.body.code, 'patch-target-not-found' );
 					assert.include( response.body.message, operation.from );
 					assert.strictEqual( response.body.context.field, 'from' );
@@ -431,7 +431,7 @@ describe( 'PATCH statement tests', () => {
 						.assertValidRequest()
 						.makeRequest();
 
-					assert.strictEqual( response.statusCode, 409 );
+					expect( response ).to.have.status( 409 );
 
 					assert.strictEqual( response.body.code, 'patch-test-failed' );
 					assert.deepEqual( response.body.context.operation, patchOperation );
@@ -453,7 +453,7 @@ describe( 'PATCH statement tests', () => {
 						.assertValidRequest()
 						.makeRequest();
 
-					assert.strictEqual( response.statusCode, 422 );
+					expect( response ).to.have.status( 422 );
 					assert.strictEqual( response.body.code, 'patched-statement-missing-field' );
 					assert.strictEqual( response.body.context.path, 'value' );
 				} );
@@ -476,7 +476,7 @@ describe( 'PATCH statement tests', () => {
 						.assertValidRequest()
 						.makeRequest();
 
-					assert.strictEqual( response.statusCode, 422 );
+					expect( response ).to.have.status( 422 );
 					const body = response.body;
 					assert.strictEqual( body.code, 'patched-statement-invalid-field' );
 					assert.deepEqual( body.context, { path: 'content', value } );

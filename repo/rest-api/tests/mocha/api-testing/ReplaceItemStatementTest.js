@@ -1,6 +1,7 @@
 'use strict';
 
 const { assert, action } = require( 'api-testing' );
+const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { formatStatementEditSummary } = require( '../helpers/formatEditSummaries' );
 const {
@@ -11,13 +12,13 @@ const {
 const { makeEtag } = require( '../helpers/httpHelper' );
 
 function assertValid400Response( response, responseBodyErrorCode ) {
-	assert.strictEqual( response.status, 400 );
+	expect( response ).to.have.status( 400 );
 	assert.header( response, 'Content-Language', 'en' );
 	assert.strictEqual( response.body.code, responseBodyErrorCode );
 }
 
 function assertValid404Response( response, responseBodyErrorCode ) {
-	assert.strictEqual( response.status, 404 );
+	expect( response ).to.have.status( 404 );
 	assert.header( response, 'Content-Language', 'en' );
 	assert.strictEqual( response.body.code, responseBodyErrorCode );
 }
@@ -54,7 +55,7 @@ describe( 'PUT statement tests', () => {
 		describe( newReplaceRequestBuilder().getRouteDescription(), () => {
 
 			function assertValid200Response( response ) {
-				assert.strictEqual( response.status, 200 );
+				expect( response ).to.have.status( 200 );
 				assert.strictEqual( response.body.id, testStatementId );
 				assert.strictEqual( response.header[ 'content-type' ], 'application/json' );
 				assert.isAbove( new Date( response.header[ 'last-modified' ] ), originalLastModified );
@@ -275,7 +276,7 @@ describe( 'PUT statement tests', () => {
 					).withJsonBodyParam( 'tags', 'not an array' )
 						.assertInvalidRequest().makeRequest();
 
-					assert.strictEqual( response.status, 400 );
+					expect( response ).to.have.status( 400 );
 					assert.strictEqual( response.body.code, 'invalid-request-body' );
 					assert.strictEqual( response.body.fieldName, 'tags' );
 					assert.strictEqual( response.body.expectedType, 'array' );
@@ -290,7 +291,7 @@ describe( 'PUT statement tests', () => {
 					).withJsonBodyParam( 'bot', 'should be a boolean' )
 						.assertInvalidRequest().makeRequest();
 
-					assert.strictEqual( response.status, 400 );
+					expect( response ).to.have.status( 400 );
 					assert.strictEqual( response.body.code, 'invalid-request-body' );
 					assert.strictEqual( response.body.fieldName, 'bot' );
 					assert.strictEqual( response.body.expectedType, 'boolean' );
@@ -305,7 +306,7 @@ describe( 'PUT statement tests', () => {
 					).withJsonBodyParam( 'comment', 1234 )
 						.assertInvalidRequest().makeRequest();
 
-					assert.strictEqual( response.status, 400 );
+					expect( response ).to.have.status( 400 );
 					assert.strictEqual( response.body.code, 'invalid-request-body' );
 					assert.strictEqual( response.body.fieldName, 'comment' );
 					assert.strictEqual( response.body.expectedType, 'string' );
@@ -315,7 +316,7 @@ describe( 'PUT statement tests', () => {
 					const response = await newReplaceRequestBuilder( testItemId, testStatementId, 'invalid' )
 						.assertInvalidRequest().makeRequest();
 
-					assert.strictEqual( response.status, 400 );
+					expect( response ).to.have.status( 400 );
 					assert.strictEqual( response.body.code, 'invalid-request-body' );
 					assert.strictEqual( response.body.fieldName, 'statement' );
 					assert.strictEqual( response.body.expectedType, 'object' );
@@ -333,7 +334,7 @@ describe( 'PUT statement tests', () => {
 						statementSerialization
 					).assertInvalidRequest().makeRequest();
 
-					assert.strictEqual( response.status, 400 );
+					expect( response ).to.have.status( 400 );
 					assert.strictEqual( response.body.code, 'statement-data-invalid-field' );
 					assert.deepEqual( response.body.context, { path: invalidField, value: invalidValue } );
 					assert.include( response.body.message, invalidField );
@@ -350,7 +351,7 @@ describe( 'PUT statement tests', () => {
 						statementSerialization
 					).assertInvalidRequest().makeRequest();
 
-					assert.strictEqual( response.status, 400 );
+					expect( response ).to.have.status( 400 );
 					assert.strictEqual( response.body.code, 'statement-data-missing-field' );
 					assert.deepEqual( response.body.context, { path: missingField } );
 					assert.include( response.body.message, missingField );
@@ -368,7 +369,7 @@ describe( 'PUT statement tests', () => {
 							entityHelper.newStatementWithRandomStringValue( testPropertyId )
 						).assertValidRequest().makeRequest();
 
-					assert.equal( response.status, 404 );
+					expect( response ).to.have.status( 404 );
 					assert.header( response, 'Content-Language', 'en' );
 					assert.equal( response.body.code, 'statement-not-found' );
 					assert.include( response.body.message, statementId );
@@ -386,7 +387,7 @@ describe( 'PUT statement tests', () => {
 						entityHelper.newStatementWithRandomStringValue( testPropertyId )
 					).withHeader( 'content-type', contentType ).makeRequest();
 
-					assert.strictEqual( response.status, 415 );
+					expect( response ).to.have.status( 415 );
 					assert.strictEqual( response.body.message, `Unsupported Content-Type: '${contentType}'` );
 				} );
 			} );

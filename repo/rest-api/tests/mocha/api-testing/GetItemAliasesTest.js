@@ -1,8 +1,9 @@
 'use strict';
 
+const { assert } = require( 'api-testing' );
+const { expect } = require( '../helpers/chaiHelper' );
 const { createEntity, getLatestEditMetadata, createRedirectForItem } = require( '../helpers/entityHelper' );
 const { newGetItemAliasesRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
-const { assert } = require( 'api-testing' );
 
 describe( 'GET /entities/items/{id}/aliases', () => {
 	let itemId;
@@ -33,7 +34,7 @@ describe( 'GET /entities/items/{id}/aliases', () => {
 			.assertValidRequest()
 			.makeRequest();
 
-		assert.strictEqual( response.status, 200 );
+		expect( response ).to.have.status( 200 );
 		assert.deepEqual( response.body, { en: [ 'Douglas Noël Adams', 'DNA' ] } );
 		assert.strictEqual( response.header.etag, `"${testItemCreationMetadata.revid}"` );
 		assert.strictEqual( response.header[ 'last-modified' ], testItemCreationMetadata.timestamp );
@@ -45,7 +46,7 @@ describe( 'GET /entities/items/{id}/aliases', () => {
 			.assertInvalidRequest()
 			.makeRequest();
 
-		assert.strictEqual( response.status, 400 );
+		expect( response ).to.have.status( 400 );
 		assert.header( response, 'Content-Language', 'en' );
 		assert.strictEqual( response.body.code, 'invalid-item-id' );
 		assert.include( response.body.message, invalidItemId );
@@ -56,7 +57,7 @@ describe( 'GET /entities/items/{id}/aliases', () => {
 		const response = await newGetItemAliasesRequestBuilder( nonExistentItemId )
 			.makeRequest();
 
-		assert.strictEqual( response.status, 404 );
+		expect( response ).to.have.status( 404 );
 		assert.header( response, 'Content-Language', 'en' );
 		assert.strictEqual( response.body.code, 'item-not-found' );
 		assert.include( response.body.message, nonExistentItemId );
@@ -70,7 +71,7 @@ describe( 'GET /entities/items/{id}/aliases', () => {
 			.assertValidRequest()
 			.makeRequest();
 
-		assert.equal( response.status, 308 );
+		expect( response ).to.have.status( 308 );
 
 		assert.isTrue(
 			new URL( response.headers.location ).pathname

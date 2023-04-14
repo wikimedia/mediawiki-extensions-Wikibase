@@ -1,10 +1,9 @@
 'use strict';
 
 const { utils } = require( 'api-testing' );
-const chai = require( 'chai' );
+const { expect } = require( '../helpers/chaiHelper' );
 const { createEntity, createRedirectForItem } = require( '../helpers/entityHelper' );
 const { newGetItemLabelRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
-const expect = chai.expect;
 
 describe( newGetItemLabelRequestBuilder().getRouteDescription(), () => {
 
@@ -24,7 +23,7 @@ describe( newGetItemLabelRequestBuilder().getRouteDescription(), () => {
 	it( '200 OK response is valid', async () => {
 		const response = await newGetItemLabelRequestBuilder( itemId, languageCode ).makeRequest();
 
-		expect( response.status ).to.equal( 200 );
+		expect( response ).to.have.status( 200 );
 		expect( response ).to.satisfyApiSpec;
 	} );
 
@@ -33,7 +32,7 @@ describe( newGetItemLabelRequestBuilder().getRouteDescription(), () => {
 			.withHeader( 'If-None-Match', `"${lastRevisionId}"` )
 			.makeRequest();
 
-		expect( response.status ).to.equal( 304 );
+		expect( response ).to.have.status( 304 );
 		expect( response ).to.satisfyApiSpec;
 	} );
 
@@ -42,28 +41,28 @@ describe( newGetItemLabelRequestBuilder().getRouteDescription(), () => {
 
 		const response = await newGetItemLabelRequestBuilder( redirectSourceId, languageCode ).makeRequest();
 
-		expect( response.status ).to.equal( 308 );
+		expect( response ).to.have.status( 308 );
 		expect( response ).to.satisfyApiSpec;
 	} );
 
 	it( '400 Bad Request response is valid for an invalid item ID', async () => {
 		const response = await newGetItemLabelRequestBuilder( 'X123', languageCode ).makeRequest();
 
-		expect( response.status ).to.equal( 400 );
+		expect( response ).to.have.status( 400 );
 		expect( response ).to.satisfyApiSpec;
 	} );
 
 	it( '404 Not Found response is valid for a non-existing item', async () => {
 		const response = await newGetItemLabelRequestBuilder( 'Q99999', languageCode ).makeRequest();
 
-		expect( response.status ).to.equal( 404 );
+		expect( response ).to.have.status( 404 );
 		expect( response ).to.satisfyApiSpec;
 	} );
 
 	it( '404 Not Found response is valid if there is no label in the requested language', async () => {
 		const response = await newGetItemLabelRequestBuilder( itemId, 'ko' ).makeRequest();
 
-		expect( response.status ).to.equal( 404 );
+		expect( response ).to.have.status( 404 );
 		expect( response ).to.satisfyApiSpec;
 	} );
 

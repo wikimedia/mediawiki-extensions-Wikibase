@@ -1,5 +1,6 @@
 'use strict';
 
+const { expect } = require( '../helpers/chaiHelper' );
 const {
 	createUniqueStringProperty,
 	createItemWithStatements,
@@ -9,7 +10,6 @@ const {
 	newPatchItemStatementRequestBuilder,
 	newPatchStatementRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
-const expect = require( 'chai' ).expect;
 
 describe( 'validate PATCH endpoints against OpenAPI definition', () => {
 	let testItemId;
@@ -39,7 +39,7 @@ describe( 'validate PATCH endpoints against OpenAPI definition', () => {
 					]
 				).makeRequest();
 
-				expect( response.status ).to.equal( 200 );
+				expect( response ).to.have.status( 200 );
 				expect( response ).to.satisfyApiSpec;
 			} );
 
@@ -49,7 +49,7 @@ describe( 'validate PATCH endpoints against OpenAPI definition', () => {
 					{ invalid: 'patch document' }
 				).makeRequest();
 
-				expect( response.status ).to.equal( 400 );
+				expect( response ).to.have.status( 400 );
 				expect( response ).to.satisfyApiSpec;
 			} );
 
@@ -61,7 +61,7 @@ describe( 'validate PATCH endpoints against OpenAPI definition', () => {
 					]
 				).makeRequest();
 
-				expect( response.status ).to.equal( 404 );
+				expect( response ).to.have.status( 404 );
 				expect( response ).to.satisfyApiSpec;
 			} );
 
@@ -73,7 +73,7 @@ describe( 'validate PATCH endpoints against OpenAPI definition', () => {
 					]
 				).makeRequest();
 
-				expect( response.status ).to.equal( 409 );
+				expect( response ).to.have.status( 409 );
 				expect( response ).to.satisfyApiSpec;
 			} );
 
@@ -88,7 +88,7 @@ describe( 'validate PATCH endpoints against OpenAPI definition', () => {
 					.withHeader( 'If-Unmodified-Since', yesterday )
 					.makeRequest();
 
-				expect( response.status ).to.equal( 412 );
+				expect( response ).to.have.status( 412 );
 				expect( response ).to.satisfyApiSpec;
 			} );
 
@@ -102,7 +102,7 @@ describe( 'validate PATCH endpoints against OpenAPI definition', () => {
 					.withHeader( 'Content-Type', 'text/plain' )
 					.makeRequest();
 
-				expect( response.status ).to.equal( 415 );
+				expect( response ).to.have.status( 415 );
 				expect( response ).to.satisfyApiSpec;
 			} );
 
@@ -118,7 +118,7 @@ describe( 'validate PATCH endpoints against OpenAPI definition', () => {
 					]
 				).makeRequest();
 
-				expect( response.status ).to.equal( 422 );
+				expect( response ).to.have.status( 422 );
 				expect( response ).to.satisfyApiSpec;
 			} );
 

@@ -1,6 +1,7 @@
 'use strict';
 
 const { assert } = require( 'api-testing' );
+const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const {
 	newGetItemStatementRequestBuilder,
@@ -18,7 +19,7 @@ describe( 'GET statement', () => {
 	let testRevisionId;
 
 	function assertValid200Response( response, statement ) {
-		assert.equal( response.status, 200 );
+		expect( response ).to.have.status( 200 );
 		assert.equal( response.body.id, statement.id );
 		assert.equal( response.header[ 'last-modified' ], testLastModified );
 		assert.equal( response.header.etag, makeEtag( testRevisionId ) );
@@ -73,7 +74,7 @@ describe( 'GET statement', () => {
 						.assertInvalidRequest()
 						.makeRequest();
 
-					assert.equal( response.status, 400 );
+					expect( response ).to.have.status( 400 );
 					assert.header( response, 'Content-Language', 'en' );
 					assert.equal( response.body.code, 'invalid-statement-id' );
 					assert.include( response.body.message, statementId );
@@ -85,7 +86,7 @@ describe( 'GET statement', () => {
 						.assertInvalidRequest()
 						.makeRequest();
 
-					assert.equal( response.status, 400 );
+					expect( response ).to.have.status( 400 );
 					assert.header( response, 'Content-Language', 'en' );
 					assert.equal( response.body.code, 'invalid-statement-id' );
 					assert.include( response.body.message, statementId );
@@ -97,7 +98,7 @@ describe( 'GET statement', () => {
 						.assertValidRequest()
 						.makeRequest();
 
-					assert.equal( response.status, 400 );
+					expect( response ).to.have.status( 400 );
 					assert.header( response, 'Content-Language', 'en' );
 					assert.equal( response.body.code, 'invalid-statement-id' );
 					assert.include( response.body.message, statementId );
@@ -111,7 +112,7 @@ describe( 'GET statement', () => {
 						.assertValidRequest()
 						.makeRequest();
 
-					assert.equal( response.status, 404 );
+					expect( response ).to.have.status( 404 );
 					assert.header( response, 'Content-Language', 'en' );
 					assert.equal( response.body.code, 'statement-not-found' );
 					assert.include( response.body.message, statementId );
@@ -128,7 +129,7 @@ describe( 'GET statement', () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			assert.equal( response.status, 400 );
+			expect( response ).to.have.status( 400 );
 			assert.header( response, 'Content-Language', 'en' );
 			assert.equal( response.body.code, 'invalid-item-id' );
 			assert.include( response.body.message, itemId );
@@ -141,7 +142,7 @@ describe( 'GET statement', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assert.equal( response.status, 404 );
+			expect( response ).to.have.status( 404 );
 			assert.header( response, 'Content-Language', 'en' );
 			assert.equal( response.body.code, 'item-not-found' );
 			assert.include( response.body.message, itemId );
@@ -154,7 +155,7 @@ describe( 'GET statement', () => {
 				testStatement.id
 			).assertValidRequest().makeRequest();
 
-			assert.equal( response.status, 404 );
+			expect( response ).to.have.status( 404 );
 			assert.equal( response.body.code, 'statement-not-found' );
 			assert.include( response.body.message, testStatement.id );
 		} );
@@ -167,7 +168,7 @@ describe( 'GET statement', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assert.equal( response.status, 404 );
+			expect( response ).to.have.status( 404 );
 			assert.header( response, 'Content-Language', 'en' );
 			assert.equal( response.body.code, 'statement-not-found' );
 			assert.include( response.body.message, statementId );

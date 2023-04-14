@@ -1,6 +1,7 @@
 'use strict';
 
 const { assert, action, utils } = require( 'api-testing' );
+const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { newSetItemLabelRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { formatTermEditSummary } = require( '../helpers/formatEditSummaries' );
@@ -19,12 +20,12 @@ describe( 'PUT /entities/items/{item_id}/labels/{language_code}', () => {
 	}
 
 	function assertValid200Response( response, labelText ) {
-		assert.strictEqual( response.status, 200 );
+		expect( response ).to.have.status( 200 );
 		assertValidResponse( response, labelText );
 	}
 
 	function assertValid201Response( response, labelText ) {
-		assert.strictEqual( response.status, 201 );
+		expect( response ).to.have.status( 201 );
 		assertValidResponse( response, labelText );
 	}
 
@@ -112,7 +113,7 @@ describe( 'PUT /entities/items/{item_id}/labels/{language_code}', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assert.strictEqual( response.status, 404 );
+			expect( response ).to.have.status( 404 );
 			assert.strictEqual( response.header[ 'content-language' ], 'en' );
 			assert.strictEqual( response.body.code, 'item-not-found' );
 			assert.include( response.body.message, itemId );
@@ -128,7 +129,7 @@ describe( 'PUT /entities/items/{item_id}/labels/{language_code}', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assert.strictEqual( response.status, 409 );
+			expect( response ).to.have.status( 409 );
 			assert.include( response.body.message, redirectSource );
 			assert.include( response.body.message, redirectTarget );
 			assert.strictEqual( response.body.code, 'redirected-item' );
@@ -144,7 +145,7 @@ describe( 'PUT /entities/items/{item_id}/labels/{language_code}', () => {
 				'test label'
 			).withHeader( 'content-type', contentType ).makeRequest();
 
-			assert.strictEqual( response.status, 415 );
+			expect( response ).to.have.status( 415 );
 			assert.strictEqual( response.body.message, `Unsupported Content-Type: '${contentType}'` );
 		} );
 	} );

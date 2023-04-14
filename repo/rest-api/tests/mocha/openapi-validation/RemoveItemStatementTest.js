@@ -1,13 +1,12 @@
 'use strict';
 
-const chai = require( 'chai' );
+const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const {
 	newRemoveItemStatementRequestBuilder,
 	newRemoveStatementRequestBuilder,
 	newAddItemStatementRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
-const expect = chai.expect;
 
 describe( 'validate DELETE endpoints against OpenAPI definition', () => {
 	let testItemId;
@@ -39,7 +38,7 @@ describe( 'validate DELETE endpoints against OpenAPI definition', () => {
 					const response = await newRemoveRequestBuilder( testStatementId )
 						.makeRequest();
 
-					expect( response.status ).to.equal( 200 );
+					expect( response ).to.have.status( 200 );
 					expect( response ).to.satisfyApiSpec;
 				} );
 
@@ -48,7 +47,7 @@ describe( 'validate DELETE endpoints against OpenAPI definition', () => {
 						.withHeader( 'If-Match', '"1"' )
 						.makeRequest();
 
-					expect( response.status ).to.equal( 412 );
+					expect( response ).to.have.status( 412 );
 					expect( response ).to.satisfyApiSpec;
 				} );
 			} );
@@ -58,7 +57,7 @@ describe( 'validate DELETE endpoints against OpenAPI definition', () => {
 				const response = await newRemoveRequestBuilder( invalidStatementId )
 					.makeRequest();
 
-				expect( response.status ).to.equal( 400 );
+				expect( response ).to.have.status( 400 );
 				expect( response ).to.satisfyApiSpec;
 			} );
 
@@ -68,7 +67,7 @@ describe( 'validate DELETE endpoints against OpenAPI definition', () => {
 				const response = await newRemoveRequestBuilder( nonexistentStatementId )
 					.makeRequest();
 
-				expect( response.status ).to.equal( 404 );
+				expect( response ).to.have.status( 404 );
 				expect( response ).to.satisfyApiSpec;
 			} );
 
@@ -78,7 +77,7 @@ describe( 'validate DELETE endpoints against OpenAPI definition', () => {
 					.withHeader( 'Content-Type', 'text/plain' )
 					.makeRequest();
 
-				expect( response.status ).to.equal( 415 );
+				expect( response ).to.have.status( 415 );
 				expect( response ).to.satisfyApiSpec;
 			} );
 		} );

@@ -1,8 +1,8 @@
 'use strict';
 
+const { expect } = require( '../helpers/chaiHelper' );
 const { createUniqueStringProperty, createEntity, createRedirectForItem } = require( '../helpers/entityHelper' );
 const { newAddItemStatementRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
-const expect = require( 'chai' ).expect;
 
 describe( 'validate POST /entities/items/{id}/statements', () => {
 
@@ -24,7 +24,7 @@ describe( 'validate POST /entities/items/{id}/statements', () => {
 			validStatementSerialization
 		).makeRequest();
 
-		expect( response.status ).to.equal( 201 );
+		expect( response ).to.have.status( 201 );
 		expect( response ).to.satisfyApiSpec;
 	} );
 
@@ -32,7 +32,7 @@ describe( 'validate POST /entities/items/{id}/statements', () => {
 		const response = await newAddItemStatementRequestBuilder( 'Q9999999', validStatementSerialization )
 			.makeRequest();
 
-		expect( response.status ).to.equal( 404 );
+		expect( response ).to.have.status( 404 );
 		expect( response ).to.satisfyApiSpec;
 	} );
 
@@ -42,7 +42,7 @@ describe( 'validate POST /entities/items/{id}/statements', () => {
 			{ invalid: 'statement' }
 		).makeRequest();
 
-		expect( response.status ).to.equal( 400 );
+		expect( response ).to.have.status( 400 );
 		expect( response ).to.satisfyApiSpec;
 	} );
 
@@ -52,7 +52,7 @@ describe( 'validate POST /entities/items/{id}/statements', () => {
 			'invalid statement param type'
 		).makeRequest();
 
-		expect( response.status ).to.equal( 400 );
+		expect( response ).to.have.status( 400 );
 		expect( response ).to.satisfyApiSpec;
 	} );
 
@@ -63,7 +63,7 @@ describe( 'validate POST /entities/items/{id}/statements', () => {
 			validStatementSerialization
 		).makeRequest();
 
-		expect( response.status ).to.equal( 409 );
+		expect( response ).to.have.status( 409 );
 		expect( response ).to.satisfyApiSpec;
 	} );
 
@@ -73,7 +73,7 @@ describe( 'validate POST /entities/items/{id}/statements', () => {
 			.withHeader( 'If-Unmodified-Since', yesterday )
 			.makeRequest();
 
-		expect( response.status ).to.equal( 412 );
+		expect( response ).to.have.status( 412 );
 		expect( response ).to.satisfyApiSpec;
 	} );
 

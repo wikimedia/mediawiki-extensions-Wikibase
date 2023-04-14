@@ -1,6 +1,7 @@
 'use strict';
 
 const { assert, action, utils } = require( 'api-testing' );
+const { expect } = require( '../helpers/chaiHelper' );
 const rbf = require( '../helpers/RequestBuilderFactory' );
 const {
 	createUniqueStringProperty,
@@ -148,7 +149,7 @@ describe( 'Auth', () => {
 			it( 'has an X-Authenticated-User header with the logged in user', async () => {
 				const response = await newRequestBuilder().withUser( user ).makeRequest();
 
-				assert.strictEqual( response.statusCode, expectedStatusCode );
+				expect( response ).to.have.status( expectedStatusCode );
 				assert.header( response, 'X-Authenticated-User', user.username );
 			} );
 
@@ -161,7 +162,7 @@ describe( 'Auth', () => {
 						.withHeader( 'Authorization', 'Bearer this-is-an-invalid-token' )
 						.makeRequest();
 
-					assert.strictEqual( response.status, 403 );
+					expect( response ).to.have.status( 403 );
 				} );
 			} );
 		} );
@@ -169,7 +170,7 @@ describe( 'Auth', () => {
 
 	describe( 'Authorization', () => {
 		function assertPermissionDenied( response ) {
-			assert.strictEqual( response.status, 403 );
+			expect( response ).to.have.status( 403 );
 			assert.strictEqual( response.body.httpCode, 403 );
 			assert.strictEqual( response.body.httpReason, 'Forbidden' );
 			assert.strictEqual( response.body.error, 'rest-write-denied' );
@@ -208,7 +209,7 @@ describe( 'Auth', () => {
 
 				it( 'can not edit if blocked', async () => {
 					const response = await newRequestBuilder().withUser( user ).makeRequest();
-					assert.strictEqual( response.statusCode, 403 );
+					expect( response ).to.have.status( 403 );
 				} );
 			} );
 

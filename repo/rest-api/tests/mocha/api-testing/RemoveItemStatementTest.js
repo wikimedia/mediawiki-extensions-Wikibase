@@ -1,6 +1,7 @@
 'use strict';
 
 const { assert, action } = require( 'api-testing' );
+const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { formatStatementEditSummary } = require( '../helpers/formatEditSummaries' );
 const {
@@ -39,12 +40,12 @@ describe( 'DELETE statement', () => {
 				async function verifyStatementDeleted( statementId ) {
 					const verifyStatement = await newGetStatementRequestBuilder( statementId ).makeRequest();
 
-					assert.equal( verifyStatement.status, 404 );
+					expect( verifyStatement ).to.have.status( 404 );
 
 				}
 
 				function assertValid200Response( response ) {
-					assert.equal( response.status, 200 );
+					expect( response ).to.have.status( 200 );
 					assert.equal( response.body, 'Statement deleted' );
 				}
 
@@ -111,7 +112,7 @@ describe( 'DELETE statement', () => {
 						.assertInvalidRequest()
 						.makeRequest();
 
-					assert.equal( response.status, 400 );
+					expect( response ).to.have.status( 400 );
 					assert.header( response, 'Content-Language', 'en' );
 					assert.equal( response.body.code, 'invalid-statement-id' );
 					assert.include( response.body.message, statementId );
@@ -123,7 +124,7 @@ describe( 'DELETE statement', () => {
 						.assertInvalidRequest()
 						.makeRequest();
 
-					assert.equal( response.status, 400 );
+					expect( response ).to.have.status( 400 );
 					assert.header( response, 'Content-Language', 'en' );
 					assert.equal( response.body.code, 'invalid-statement-id' );
 					assert.include( response.body.message, statementId );
@@ -135,7 +136,7 @@ describe( 'DELETE statement', () => {
 						.assertValidRequest()
 						.makeRequest();
 
-					assert.equal( response.status, 400 );
+					expect( response ).to.have.status( 400 );
 					assert.header( response, 'Content-Language', 'en' );
 					assert.equal( response.body.code, 'invalid-statement-id' );
 					assert.include( response.body.message, statementId );
@@ -149,7 +150,7 @@ describe( 'DELETE statement', () => {
 						.assertValidRequest()
 						.makeRequest();
 
-					assert.equal( response.status, 404 );
+					expect( response ).to.have.status( 404 );
 					assert.header( response, 'Content-Language', 'en' );
 					assert.equal( response.body.code, 'statement-not-found' );
 					assert.include( response.body.message, statementId );
@@ -164,7 +165,7 @@ describe( 'DELETE statement', () => {
 						.withHeader( 'content-type', contentType )
 						.makeRequest();
 
-					assert.strictEqual( response.status, 415 );
+					expect( response ).to.have.status( 415 );
 					assert.strictEqual( response.body.message, `Unsupported Content-Type: '${contentType}'` );
 				} );
 			} );
@@ -181,7 +182,7 @@ describe( 'DELETE statement', () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			assert.equal( response.status, 400 );
+			expect( response ).to.have.status( 400 );
 			assert.header( response, 'Content-Language', 'en' );
 			assert.equal( response.body.code, 'invalid-item-id' );
 			assert.include( response.body.message, itemId );
@@ -194,7 +195,7 @@ describe( 'DELETE statement', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assert.equal( response.status, 404 );
+			expect( response ).to.have.status( 404 );
 			assert.header( response, 'Content-Language', 'en' );
 			assert.equal( response.body.code, 'item-not-found' );
 			assert.include( response.body.message, itemId );
@@ -207,7 +208,7 @@ describe( 'DELETE statement', () => {
 					.assertValidRequest()
 					.makeRequest();
 
-			assert.equal( response.status, 404 );
+			expect( response ).to.have.status( 404 );
 			assert.header( response, 'Content-Language', 'en' );
 			assert.equal( response.body.code, 'statement-not-found' );
 			assert.include( response.body.message, statementId );
@@ -221,7 +222,7 @@ describe( 'DELETE statement', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assert.equal( response.status, 404 );
+			expect( response ).to.have.status( 404 );
 			assert.header( response, 'Content-Language', 'en' );
 			assert.equal( response.body.code, 'statement-not-found' );
 			assert.include( response.body.message, statementId );

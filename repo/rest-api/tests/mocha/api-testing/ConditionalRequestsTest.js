@@ -1,6 +1,7 @@
 'use strict';
 
 const { assert, utils } = require( 'api-testing' );
+const { expect } = require( '../helpers/chaiHelper' );
 const rbf = require( '../helpers/RequestBuilderFactory' );
 const {
 	getLatestEditMetadata,
@@ -13,20 +14,20 @@ const { newAddItemStatementRequestBuilder } = require( '../helpers/RequestBuilde
 const { makeEtag } = require( '../helpers/httpHelper' );
 
 function assertValid304Response( response, revisionId ) {
-	assert.equal( response.status, 304 );
+	expect( response ).to.have.status( 304 );
 	assert.equal( response.header.etag, makeEtag( revisionId ) );
 	assert.equal( response.text, '' );
 }
 
 function assertValid412Response( response ) {
-	assert.equal( response.status, 412 );
+	expect( response ).to.have.status( 412 );
 	assert.isUndefined( response.header.etag );
 	assert.isUndefined( response.header[ 'last-modified' ] );
 	assert.isEmpty( response.text );
 }
 
 function assertValid200Response( response, revisionId, lastModified ) {
-	assert.equal( response.status, 200 );
+	expect( response ).to.have.status( 200 );
 	assert.equal( response.header[ 'last-modified' ], lastModified );
 	assert.equal( response.header.etag, makeEtag( revisionId ) );
 }
@@ -386,10 +387,7 @@ describe( 'Conditional requests', () => {
 							.withHeader( 'If-Match', makeEtag( latestRevisionId ) )
 							.makeRequest();
 
-						assert.ok(
-							response.status >= 200 && response.status < 300,
-							`expected 2xx status, but got ${response.status}`
-						);
+						expect( response ).status.to.be.within( 200, 299 );
 					} );
 				} );
 
@@ -407,10 +405,7 @@ describe( 'Conditional requests', () => {
 							.withHeader( 'If-Unmodified-Since', lastModifiedDate )
 							.makeRequest();
 
-						assert.ok(
-							response.status >= 200 && response.status < 300,
-							`expected 2xx status, but got ${response.status}`
-						);
+						expect( response ).status.to.be.within( 200, 299 );
 					} );
 				} );
 
@@ -421,10 +416,7 @@ describe( 'Conditional requests', () => {
 							.withHeader( 'If-None-Match', makeEtag( latestRevisionId - 1 ) )
 							.makeRequest();
 
-						assert.ok(
-							response.status >= 200 && response.status < 300,
-							`expected 2xx status, but got ${response.status}`
-						);
+						expect( response ).status.to.be.within( 200, 299 );
 					} );
 
 					describe( '412 response', () => {
@@ -455,10 +447,7 @@ describe( 'Conditional requests', () => {
 								.withHeader( 'If-Modified-Since', lastModifiedDate )
 								.makeRequest();
 
-							assert.ok(
-								response.status >= 200 && response.status < 300,
-								`expected 2xx status, but got ${response.status}`
-							);
+							expect( response ).status.to.be.within( 200, 299 );
 						} );
 
 						it( 'If-Modified-Since header is after current revision', async () => {
@@ -468,10 +457,7 @@ describe( 'Conditional requests', () => {
 								.withHeader( 'If-Modified-Since', tomorrow )
 								.makeRequest();
 
-							assert.ok(
-								response.status >= 200 && response.status < 300,
-								`expected 2xx status, but got ${response.status}`
-							);
+							expect( response ).status.to.be.within( 200, 299 );
 						} );
 
 						it( 'If-Modified-Since header is before the current revision', async () => {
@@ -481,10 +467,7 @@ describe( 'Conditional requests', () => {
 								.withHeader( 'If-Modified-Since', yesterday )
 								.makeRequest();
 
-							assert.ok(
-								response.status >= 200 && response.status < 300,
-								`expected 2xx status, but got ${response.status}`
-							);
+							expect( response ).status.to.be.within( 200, 299 );
 						} );
 					} );
 				} );

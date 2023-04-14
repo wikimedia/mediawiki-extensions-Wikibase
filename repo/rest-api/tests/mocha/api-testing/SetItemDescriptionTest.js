@@ -1,6 +1,7 @@
 'use strict';
 
 const { assert, utils, action } = require( 'api-testing' );
+const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { newSetItemDescriptionRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
@@ -34,12 +35,12 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 	}
 
 	function assertValid200Response( response, description ) {
-		assert.strictEqual( response.status, 200 );
+		expect( response ).to.have.status( 200 );
 		assertValidResponse( response, description );
 	}
 
 	function assertValid201Response( response, description ) {
-		assert.strictEqual( response.status, 201 );
+		expect( response ).to.have.status( 201 );
 		assertValidResponse( response, description );
 	}
 
@@ -138,7 +139,7 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 				'test description'
 			).assertValidRequest().makeRequest();
 
-			assert.strictEqual( response.status, 404 );
+			expect( response ).to.have.status( 404 );
 			assert.strictEqual( response.header[ 'content-language' ], 'en' );
 			assert.strictEqual( response.body.code, 'item-not-found' );
 			assert.include( response.body.message, itemId );
@@ -156,7 +157,7 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 				'test description'
 			).assertValidRequest().makeRequest();
 
-			assert.strictEqual( response.status, 409 );
+			expect( response ).to.have.status( 409 );
 			assert.include( response.body.message, redirectSource );
 			assert.include( response.body.message, redirectTarget );
 			assert.strictEqual( response.body.code, 'redirected-item' );
@@ -172,7 +173,7 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 				'test description'
 			).withHeader( 'content-type', contentType ).makeRequest();
 
-			assert.strictEqual( response.status, 415 );
+			expect( response ).to.have.status( 415 );
 			assert.strictEqual( response.body.message, `Unsupported Content-Type: '${contentType}'` );
 		} );
 	} );
