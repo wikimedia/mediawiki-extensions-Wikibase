@@ -80,10 +80,12 @@ class FederatedPropertyId implements PropertyId {
 	}
 
 	public function getLocalPart() {
+		// @phan-suppress-previous-line PhanPluginNeverReturnMethod
 		throw new LogicException( 'Not implemented for FederatedPropertyId' );
 	}
 
 	public function getRepositoryName() {
+		// @phan-suppress-previous-line PhanPluginNeverReturnMethod
 		throw new LogicException( 'Not implemented for FederatedPropertyId' );
 	}
 

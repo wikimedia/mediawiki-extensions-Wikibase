@@ -71,6 +71,7 @@ class GetItemStatement {
 	}
 
 	/**
+	 * @return never
 	 * @throws UseCaseError
 	 */
 	private function throwStatementNotFoundException( string $statementId ): void {

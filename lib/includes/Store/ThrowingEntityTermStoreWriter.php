@@ -19,10 +19,12 @@ use Wikibase\DataModel\Entity\EntityId;
 class ThrowingEntityTermStoreWriter implements EntityTermStoreWriter {
 
 	public function saveTermsOfEntity( EntityDocument $entity ) {
+		// @phan-suppress-previous-line PhanPluginNeverReturnMethod
 		throw new RuntimeException( "Should never be called" );
 	}
 
 	public function deleteTermsOfEntity( EntityId $entityId ) {
+		// @phan-suppress-previous-line PhanPluginNeverReturnMethod
 		throw new RuntimeException( "Should never be called" );
 	}
 }

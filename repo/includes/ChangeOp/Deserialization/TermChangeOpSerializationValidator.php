@@ -80,6 +80,7 @@ class TermChangeOpSerializationValidator {
 	 * @param string $message
 	 * @param string $errorCode
 	 * @param array $params
+	 * @return never
 	 *
 	 * @throws ChangeOpDeserializationException
 	 */

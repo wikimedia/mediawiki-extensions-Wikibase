@@ -190,6 +190,7 @@ class ApiPrefetchingTermLookup extends EntityTermLookupBase implements Prefetchi
 	 * @throws BadMethodCallException always
 	 */
 	public function getPrefetchedAliases( EntityId $entityId, $languageCode ) {
+		// @phan-suppress-previous-line PhanPluginNeverReturnMethod
 		throw new BadMethodCallException( 'Cannot get Aliases. Only labels' );
 	}
 }

@@ -227,6 +227,7 @@ class SiteLinksChangeOpDeserializer implements ChangeOpDeserializer {
 	/**
 	 * @param string $message
 	 * @param string $errorCode
+	 * @return never
 	 *
 	 * @throws ChangeOpDeserializationException
 	 */

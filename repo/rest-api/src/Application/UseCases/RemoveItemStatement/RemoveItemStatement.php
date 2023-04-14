@@ -91,6 +91,7 @@ class RemoveItemStatement {
 	}
 
 	/**
+	 * @return never
 	 * @throws UseCaseError
 	 */
 	private function throwStatementNotFoundException( string $statementId ): void {

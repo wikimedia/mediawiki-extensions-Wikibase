@@ -213,6 +213,8 @@ class ParseValue extends ApiBase {
 				'wikibase-api-not-recognized-datatype',
 				'unknown-datatype'
 			);
+
+			// @phan-suppress-next-line PhanPluginUnreachableCode Wanted
 			throw new LogicException( 'dieError() did not throw an exception' );
 		}
 	}
