@@ -275,8 +275,12 @@ final class CachingPrefetchingTermLookup implements PrefetchingTermLookup {
 	 */
 	private function bufferAndCacheExistingTerm( EntityId $entityId, string $termType, string $languageCode, $freshTerm ): void {
 		$this->setPrefetchedTermBuffer( $entityId, $termType, $languageCode, $freshTerm );
+		$cacheKey = $this->getCacheKey( $entityId, $languageCode, $termType );
+		if ( $cacheKey === null ) {
+			return;
+		}
 		$this->cache->set(
-			$this->getCacheKey( $entityId, $languageCode, $termType ),
+			$cacheKey,
 			$freshTerm,
 			$this->cacheEntryTTL
 		);
