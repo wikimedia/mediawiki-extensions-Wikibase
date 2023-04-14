@@ -33,14 +33,14 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	/**
 	 * The language the value is set in.
 	 *
-	 * @var string
+	 * @var string|null
 	 */
 	private $languageCode;
 
 	/**
 	 * The value to set.
 	 *
-	 * @var string
+	 * @var string|null
 	 */
 	private $value;
 

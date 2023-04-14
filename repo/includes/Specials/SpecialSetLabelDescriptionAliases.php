@@ -57,7 +57,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	private $languageNameUtils;
 
 	/**
-	 * @var string
+	 * @var string|null
 	 */
 	private $languageCode;
 

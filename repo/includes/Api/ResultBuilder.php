@@ -654,7 +654,7 @@ class ResultBuilder {
 	 * Get serialized labels and add them to result
 	 *
 	 * @param TermList $labels the labels to insert in the result
-	 * @param array|string $path where the data is located
+	 * @param array|string|null $path where the data is located
 	 */
 	public function addLabels( TermList $labels, $path ) {
 		$this->addTermList( $labels, 'labels', 'label', $path );
@@ -664,7 +664,7 @@ class ResultBuilder {
 	 * Adds fake serialization to show a label has been removed
 	 *
 	 * @param string $language
-	 * @param array|string $path where the data is located
+	 * @param array|string|null $path where the data is located
 	 */
 	public function addRemovedLabel( $language, $path ) {
 		$this->addRemovedTerm( $language, 'labels', 'label', $path );
@@ -674,7 +674,7 @@ class ResultBuilder {
 	 * Get serialized descriptions and add them to result
 	 *
 	 * @param TermList $descriptions the descriptions to insert in the result
-	 * @param array|string $path where the data is located
+	 * @param array|string|null $path where the data is located
 	 */
 	public function addDescriptions( TermList $descriptions, $path ) {
 		$this->addTermList( $descriptions, 'descriptions', 'description', $path );
@@ -684,7 +684,7 @@ class ResultBuilder {
 	 * Adds fake serialization to show a label has been removed
 	 *
 	 * @param string $language
-	 * @param array|string $path where the data is located
+	 * @param array|string|null $path where the data is located
 	 */
 	public function addRemovedDescription( $language, $path ) {
 		$this->addRemovedTerm( $language, 'descriptions', 'description', $path );
@@ -696,7 +696,7 @@ class ResultBuilder {
 	 * @param TermList $termList
 	 * @param string $name
 	 * @param string $tag
-	 * @param array|string $path where the data is located
+	 * @param array|string|null $path where the data is located
 	 */
 	private function addTermList( TermList $termList, $name, $tag, $path ) {
 		$serializer = $this->serializerFactory->newTermListSerializer();
@@ -714,7 +714,7 @@ class ResultBuilder {
 	 * @param string $language
 	 * @param string $name
 	 * @param string $tag
-	 * @param array|string $path where the data is located
+	 * @param array|string|null $path where the data is located
 	 */
 	private function addRemovedTerm( $language, $name, $tag, $path ) {
 		$value = [
@@ -734,7 +734,7 @@ class ResultBuilder {
 	 * Get serialized AliasGroupList and add it to result
 	 *
 	 * @param AliasGroupList $aliasGroupList the AliasGroupList to set in the result
-	 * @param array|string $path where the data is located
+	 * @param array|string|null $path where the data is located
 	 */
 	public function addAliasGroupList( AliasGroupList $aliasGroupList, $path ) {
 		$serializer = $this->serializerFactory->newAliasGroupListSerializer();
@@ -760,7 +760,7 @@ class ResultBuilder {
 	 * @todo use a SiteLinkListSerializer when created in DataModelSerialization here
 	 *
 	 * @param SiteLinkList $siteLinkList the site links to insert in the result
-	 * @param array|string $path where the data is located
+	 * @param array|string|null $path where the data is located
 	 * @param bool $addUrl
 	 */
 	public function addSiteLinkList( SiteLinkList $siteLinkList, $path, $addUrl = false ) {
@@ -809,7 +809,7 @@ class ResultBuilder {
 	 * Adds fake serialization to show a sitelink has been removed
 	 *
 	 * @param SiteLinkList $siteLinkList
-	 * @param array|string $path where the data is located
+	 * @param array|string|null $path where the data is located
 	 */
 	public function addRemovedSiteLinks( SiteLinkList $siteLinkList, $path ) {
 		$serializer = $this->serializerFactory->newSiteLinkSerializer();
@@ -833,7 +833,7 @@ class ResultBuilder {
 	 * Get serialized claims and add them to result
 	 *
 	 * @param StatementList $statements the labels to set in the result
-	 * @param array|string $path where the data is located
+	 * @param array|string|null $path where the data is located
 	 * @param array|string $props a list of fields to include, or "all"
 	 */
 	public function addStatements( StatementList $statements, $path, $props = 'all' ) {

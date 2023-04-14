@@ -38,7 +38,7 @@ class ContentHandlerEntityTitleLookup implements EntityTitleStoreLookup {
 	private $localEntitySource;
 
 	/**
-	 * @var InterwikiLookup
+	 * @var InterwikiLookup|null
 	 */
 	private $interwikiLookup;
 

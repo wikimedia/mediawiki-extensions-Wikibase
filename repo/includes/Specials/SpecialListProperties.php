@@ -41,7 +41,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	private $propertyInfoLookup;
 
 	/**
-	 * @var string
+	 * @var string|null
 	 */
 	private $dataType;
 
