@@ -119,6 +119,9 @@ class MediawikiEditFilterHookRunner implements EditFilterHookRunner {
 		if ( $entityId !== null ) {
 			$title = $this->titleLookup->getTitleForId( $entityId );
 		} else {
+			$title = null;
+		}
+		if ( $title === null ) {
 			// This constructs a "fake" title of the form Property:NewProperty,
 			// where the title text is assumed to be name of the special page used
 			// to create entities of the given type. This is used by the
