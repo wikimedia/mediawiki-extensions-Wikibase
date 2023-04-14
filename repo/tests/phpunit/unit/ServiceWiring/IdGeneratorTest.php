@@ -11,7 +11,7 @@ use Wikibase\Repo\Store\Sql\SqlIdGenerator;
 use Wikibase\Repo\Store\Sql\UpsertSqlIdGenerator;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 use Wikimedia\Rdbms\ConnectionManager;
-use Wikimedia\Rdbms\DBConnRef;
+use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\TestingAccessWrapper;
 
 /**
@@ -91,7 +91,7 @@ class IdGeneratorTest extends ServiceWiringTestCase {
 				'reservedIds' => [],
 				'idGeneratorSeparateDbConnection' => false,
 			] ) );
-		$connection = $this->createMock( DBConnRef::class );
+		$connection = $this->createMock( IDatabase::class );
 		$connection->expects( $this->once() )
 			->method( 'getType' )
 			->willReturn( 'mysql' );
@@ -127,7 +127,7 @@ class IdGeneratorTest extends ServiceWiringTestCase {
 				'reservedIds' => [],
 				'idGeneratorSeparateDbConnection' => false,
 			] ) );
-		$connection = $this->createMock( DBConnRef::class );
+		$connection = $this->createMock( IDatabase::class );
 		$connection->expects( $this->once() )
 			->method( 'getType' )
 			->willReturn( 'sqlite' );

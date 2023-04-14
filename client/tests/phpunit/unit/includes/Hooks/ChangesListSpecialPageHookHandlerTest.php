@@ -10,7 +10,6 @@ use MediaWiki\User\UserOptionsLookup;
 use SpecialRecentChanges;
 use User;
 use Wikibase\Client\Hooks\ChangesListSpecialPageHookHandler;
-use Wikimedia\Rdbms\DBConnRef;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\TestingAccessWrapper;
 
@@ -495,10 +494,10 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 	}
 
 	/**
-	 * @return DBConnRef
+	 * @return IDatabase
 	 */
 	private function getDatabase() {
-		$databaseBase = $this->createMock( DBConnRef::class );
+		$databaseBase = $this->createMock( IDatabase::class );
 
 		$databaseBase->method( 'addQuotes' )
 			->willReturnCallback( static function ( $input ) {
