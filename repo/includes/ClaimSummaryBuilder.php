@@ -66,10 +66,10 @@ class ClaimSummaryBuilder {
 			if ( $claimDifference->isAtomic() ) {
 				if ( $claimDifference->getMainSnakChange() !== null ) {
 					$summary->setAction( 'update' );
-				} elseif ( $claimDifference->getQualifierChanges()->isEmpty() === false ) {
+				} elseif ( !$claimDifference->getQualifierChanges()->isEmpty() ) {
 					$summary->addAutoCommentArgs( $claimDifference->getQualifierChanges()->count() );
 					$summary->setAction( 'update-qualifiers' );
-				} elseif ( $claimDifference->getReferenceChanges()->isEmpty() === false ) {
+				} elseif ( !$claimDifference->getReferenceChanges()->isEmpty() ) {
 					$summary->addAutoCommentArgs( $claimDifference->getReferenceChanges()->count() );
 					$summary->setAction( 'update-references' );
 				} elseif ( $claimDifference->getRankChange() !== null ) {

@@ -178,7 +178,7 @@ class DatabaseTermsCollisionDetector implements TermsCollisionDetector {
 
 		$dbr = $this->getDbr();
 
-		if ( $firstMatchOnly === true ) {
+		if ( $firstMatchOnly ) {
 
 			$match = $dbr->selectField(
 				$table,
