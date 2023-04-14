@@ -86,7 +86,7 @@ abstract class SpecialWikibasePage extends SpecialPage {
 	protected function checkBlocked() {
 		$block = $this->getUser()->getBlock();
 		if ( $block && $block->isSitewide() ) {
-			throw new UserBlockedError( $this->getUser()->getBlock() );
+			throw new UserBlockedError( $block );
 		}
 	}
 

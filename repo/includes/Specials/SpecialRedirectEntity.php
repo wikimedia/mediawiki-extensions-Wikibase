@@ -119,8 +119,9 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 		$this->showErrorHTML( $msg->parse() );
 
 		// Report chained exceptions recursively
-		if ( $ex->getPrevious() ) {
-			$this->showExceptionMessage( $ex->getPrevious() );
+		$previousEx = $ex->getPrevious();
+		if ( $previousEx ) {
+			$this->showExceptionMessage( $previousEx );
 		}
 	}
 
