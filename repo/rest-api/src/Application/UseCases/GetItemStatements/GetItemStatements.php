@@ -36,8 +36,9 @@ class GetItemStatements {
 		$this->validator->assertValidRequest( $request );
 
 		$itemId = new ItemId( $request->getItemId() );
-		$requestedStatementPropertyId = $request->getStatementPropertyId()
-			? new NumericPropertyId( $request->getStatementPropertyId() )
+		$statementPropertyId = $request->getStatementPropertyId();
+		$requestedStatementPropertyId = $statementPropertyId
+			? new NumericPropertyId( $statementPropertyId )
 			: null;
 
 		$latestRevisionMetadata = $this->revisionMetadataRetriever->getLatestRevisionMetadata( $itemId );

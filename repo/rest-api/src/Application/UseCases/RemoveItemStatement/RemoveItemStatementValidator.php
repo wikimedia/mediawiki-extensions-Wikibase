@@ -27,8 +27,9 @@ class RemoveItemStatementValidator {
 	}
 
 	public function assertValidRequest( RemoveItemStatementRequest $request ): void {
-		if ( $request->getItemId() ) {
-			$this->assertValidItemId( $request->getItemId() );
+		$itemId = $request->getItemId();
+		if ( $itemId ) {
+			$this->assertValidItemId( $itemId );
 		}
 		$this->assertValidStatementId( $request->getStatementId() );
 		$this->assertValidComment( $request->getComment() );
