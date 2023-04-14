@@ -65,7 +65,10 @@ class DeletePageNoticeCreator implements ArticleDeleteAfterSuccessHook {
 	 * @param OutputPage $outputPage
 	 */
 	public function onArticleDeleteAfterSuccess( $title, $outputPage ): void {
-		$outputPage->addHTML( $this->getPageDeleteNoticeHtml( $title ) );
+		$notice = $this->getPageDeleteNoticeHtml( $title );
+		if ( $notice !== null ) {
+			$outputPage->addHTML( $notice );
+		}
 	}
 
 	/**
