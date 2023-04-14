@@ -106,6 +106,107 @@ describe( 'PUT /entities/items/{item_id}/labels/{language_code}', () => {
 		} );
 	} );
 
+	describe( '400 error response', () => {
+		it( 'invalid item id', async () => {
+			const itemId = 'X123';
+			const response = await newSetItemLabelRequestBuilder( itemId, 'en', 'test label' )
+				.assertInvalidRequest()
+				.makeRequest();
+
+			assert.strictEqual( response.status, 400 );
+			assert.strictEqual( response.header[ 'content-language' ], 'en' );
+			assert.strictEqual( response.body.code, 'invalid-item-id' );
+			assert.include( response.body.message, itemId );
+		} );
+
+		it( 'invalid language code', async () => {
+			const invalidLanguageCode = '1e';
+			const response = await newSetItemLabelRequestBuilder( testItemId, invalidLanguageCode, 'test label' )
+				.assertInvalidRequest()
+				.makeRequest();
+
+			assert.strictEqual( response.status, 400 );
+			assert.strictEqual( response.header[ 'content-language' ], 'en' );
+			assert.strictEqual( response.body.code, 'invalid-language-code' );
+			assert.include( response.body.message, invalidLanguageCode );
+		} );
+
+		it( 'label empty', async () => {
+			const comment = 'Empty label';
+			const emptyLabel = '';
+			const response = await newSetItemLabelRequestBuilder( testItemId, 'en', emptyLabel )
+				.withJsonBodyParam( 'comment', comment )
+				.assertValidRequest()
+				.makeRequest();
+
+			assert.strictEqual( response.status, 400 );
+			assert.strictEqual( response.header[ 'content-language' ], 'en' );
+			assert.strictEqual( response.body.code, 'label-empty' );
+			assert.strictEqual( response.body.message, 'Label must not be empty' );
+		} );
+
+		it( 'label too long', async () => {
+			// this assumes the default value of 250 from Wikibase.default.php is in place and
+			// may fail if $wgWBRepoSettings['string-limits']['multilang']['length'] is overwritten
+			const maxLabelLength = 250;
+			const labelTooLong = 'x'.repeat( maxLabelLength + 1 );
+			const comment = 'Label too long';
+			const response = await newSetItemLabelRequestBuilder( testItemId, 'en', labelTooLong )
+				.withJsonBodyParam( 'comment', comment )
+				.assertValidRequest()
+				.makeRequest();
+
+			assert.strictEqual( response.status, 400 );
+			assert.strictEqual( response.header[ 'content-language' ], 'en' );
+			assert.strictEqual( response.body.code, 'label-too-long' );
+			assert.strictEqual( response.body.message, 'Label must be no more than ' + maxLabelLength +
+				' characters long' );
+			assert.deepEqual(
+				response.body.context,
+				{ value: labelTooLong, 'character-limit': maxLabelLength }
+			);
+
+		} );
+
+		it( 'comment too long', async () => {
+			const comment = 'x'.repeat( 501 );
+			const response = await newSetItemLabelRequestBuilder( testItemId, 'en', 'test label' )
+				.withJsonBodyParam( 'comment', comment )
+				.assertValidRequest()
+				.makeRequest();
+
+			assert.strictEqual( response.status, 400 );
+			assert.strictEqual( response.header[ 'content-language' ], 'en' );
+			assert.strictEqual( response.body.code, 'comment-too-long' );
+			assert.include( response.body.message, '500' );
+		} );
+
+		it( 'invalid edit tag', async () => {
+			const invalidEditTag = 'invalid tag';
+			const response = await newSetItemLabelRequestBuilder( testItemId, 'en', 'test label' )
+				.withJsonBodyParam( 'tags', [ invalidEditTag ] )
+				.assertValidRequest()
+				.makeRequest();
+
+			assert.strictEqual( response.status, 400 );
+			assert.strictEqual( response.header[ 'content-language' ], 'en' );
+			assert.strictEqual( response.body.code, 'invalid-edit-tag' );
+			assert.include( response.body.message, invalidEditTag );
+		} );
+
+		it( 'invalid bot flag', async () => {
+			const response = await newSetItemLabelRequestBuilder( testItemId, 'en', 'test label' )
+				.withJsonBodyParam( 'bot', 'should be a boolean' )
+				.assertInvalidRequest()
+				.makeRequest();
+
+			assert.strictEqual( response.status, 400 );
+			assert.strictEqual( response.body.code, 'invalid-request-body' );
+			assert.strictEqual( response.body.fieldName, 'bot' );
+			assert.strictEqual( response.body.expectedType, 'boolean' );
+		} );
+	} );
+
 	describe( '404 error response', () => {
 		it( 'item not found', async () => {
 			const itemId = 'Q999999';

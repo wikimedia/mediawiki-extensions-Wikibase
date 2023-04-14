@@ -8,7 +8,9 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabelRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
 use Wikibase\Repo\RestApi\Domain\Model\User;
@@ -34,6 +36,7 @@ class SetItemLabelTest extends TestCase {
 
 	use EditMetadataHelper;
 
+	private SetItemLabelValidator $validator;
 	private ItemRevisionMetadataRetriever $metadataRetriever;
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
@@ -42,6 +45,7 @@ class SetItemLabelTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
+		$this->validator = $this->createStub( SetItemLabelValidator::class );
 		$this->metadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
@@ -129,20 +133,17 @@ class SetItemLabelTest extends TestCase {
 		$this->assertTrue( $response->wasReplaced() );
 	}
 
-	public function testGivenItemNotFound_throwsUseCaseError(): void {
-		$itemId = 'Q789';
-		$this->metadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
-		$this->metadataRetriever->method( 'getLatestRevisionMetadata' )
-			->willReturn( LatestItemRevisionMetadataResult::itemNotFound() );
-
+	public function testGivenInvalidRequest_throwsUseCaseException(): void {
+		$expectedException = new UseCaseException( 'invalid-label-test' );
+		$this->validator = $this->createStub( SetItemLabelValidator::class );
+		$this->validator->method( 'assertValidRequest' )->willThrowException( $expectedException );
 		try {
 			$this->newUseCase()->execute(
-				new SetItemLabelRequest( $itemId, 'en', 'test label', [], false, null, null )
+				new SetItemLabelRequest( 'Q123', 'en', 'label', [], false, null, null )
 			);
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::ITEM_NOT_FOUND, $e->getErrorCode() );
-			$this->assertStringContainsString( $itemId, $e->getErrorMessage() );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( $expectedException, $e );
 		}
 	}
 
@@ -192,7 +193,13 @@ class SetItemLabelTest extends TestCase {
 	}
 
 	private function newUseCase(): SetItemLabel {
-		return new SetItemLabel( $this->metadataRetriever, $this->itemRetriever, $this->itemUpdater, $this->permissionChecker );
+		return new SetItemLabel(
+			$this->validator,
+			$this->metadataRetriever,
+			$this->itemRetriever,
+			$this->itemUpdater,
+			$this->permissionChecker
+		);
 	}
 
 }

@@ -41,8 +41,10 @@ use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemS
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel;
+use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
+use Wikibase\Repo\RestApi\Application\Validation\LabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
@@ -363,7 +365,20 @@ return [
 	},
 
 	'WbRestApi.SetItemLabel' => function( MediaWikiServices $services ): SetItemLabel {
+		$settings = WikibaseRepo::getSettings( $services );
+		$constraints = $settings->getSetting( 'string-limits' )['multilang'];
+		$maxLabelLength = $constraints['length'];
+
 		return new SetItemLabel(
+			new SetItemLabelValidator(
+				new ItemIdValidator(),
+				new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() ),
+				new EditMetadataValidator(
+					CommentStore::COMMENT_CHARACTER_LIMIT,
+					ChangeTags::listExplicitlyDefinedTags(),
+				),
+				new LabelValidator( $maxLabelLength )
+			),
 			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever( WikibaseRepo::getEntityRevisionLookup() ),
 			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getItemUpdater( $services ),

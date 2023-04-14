@@ -22,13 +22,16 @@ class SetItemLabel {
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
 	private PermissionChecker $permissionChecker;
+	private SetItemLabelValidator $validator;
 
 	public function __construct(
+		SetItemLabelValidator $validator,
 		ItemRevisionMetadataRetriever $metadataRetriever,
 		ItemRetriever $itemRetriever,
 		ItemUpdater $itemUpdater,
 		PermissionChecker $permissionChecker
 	) {
+		$this->validator = $validator;
 		$this->metadataRetriever = $metadataRetriever;
 		$this->itemRetriever = $itemRetriever;
 		$this->itemUpdater = $itemUpdater;
@@ -36,6 +39,8 @@ class SetItemLabel {
 	}
 
 	public function execute( SetItemLabelRequest $request ): SetItemLabelResponse {
+		$this->validator->assertValidRequest( $request );
+
 		$itemId = new ItemId( $request->getItemId() );
 		$term = new Term( $request->getLanguageCode(), $request->getLabel() );
 

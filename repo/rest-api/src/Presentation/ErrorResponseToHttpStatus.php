@@ -32,6 +32,8 @@ class ErrorResponseToHttpStatus {
 		UseCaseError::INVALID_DESCRIPTION => 400,
 		UseCaseError::LABEL_DESCRIPTION_SAME_VALUE => 400,
 		UseCaseError::ITEM_LABEL_DESCRIPTION_DUPLICATE => 400,
+		UseCaseError::LABEL_EMPTY => 400,
+		UseCaseError::LABEL_TOO_LONG => 400,
 		UseCaseError::PERMISSION_DENIED => 403,
 		UseCaseError::ITEM_NOT_FOUND => 404,
 		UseCaseError::LABEL_NOT_DEFINED => 404,
