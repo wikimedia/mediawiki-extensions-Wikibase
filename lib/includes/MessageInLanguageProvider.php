@@ -5,10 +5,10 @@ declare( strict_types = 1 );
 namespace Wikibase\Lib;
 
 use Language;
+use MediaWiki\StubObject\StubUserLang;
 use Message;
 use MessageLocalizer;
 use MessageSpecifier;
-use StubUserLang;
 
 /**
  * A provider for messages in a particular language.
