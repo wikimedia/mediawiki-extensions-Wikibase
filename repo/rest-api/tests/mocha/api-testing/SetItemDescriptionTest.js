@@ -4,6 +4,7 @@ const { assert, utils, action } = require( 'api-testing' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { newSetItemDescriptionRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
+const { formatTermEditSummary } = require( '../helpers/formatEditSummaries' );
 
 describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 	let testItemId;
@@ -49,10 +50,12 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 			const languageCode = 'en';
 			const user = await action.robby(); // robby is a bot
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test' );
+			const comment = 'omg i replaced a description!!1';
 
 			const response = await newSetItemDescriptionRequestBuilder( testItemId, languageCode, description )
 				.withJsonBodyParam( 'tags', [ tag ] )
 				.withJsonBodyParam( 'bot', true )
+				.withJsonBodyParam( 'comment', comment )
 				.withUser( user )
 				.assertValidRequest()
 				.makeRequest();
@@ -62,6 +65,16 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 			const editMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 			assert.deepEqual( editMetadata.tags, [ tag ] );
 			assert.property( editMetadata, 'bot' );
+			assert.strictEqual(
+				editMetadata.comment,
+				formatTermEditSummary(
+					'wbsetdescription',
+					'set',
+					languageCode,
+					description,
+					comment
+				)
+			);
 		} );
 	} );
 

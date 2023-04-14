@@ -38,7 +38,8 @@ class SetItemDescriptionRouteHandler extends SimpleHandler {
 			$languageCode,
 			$jsonBody['description'],
 			$jsonBody['tags'] ?? [],
-			$jsonBody['bot'] ?? false
+			$jsonBody['bot'] ?? false,
+			$jsonBody['comment'] ?? null
 		) );
 		$httpResponse = $this->getResponseFactory()->create();
 		$httpResponse->setStatus( 200 );

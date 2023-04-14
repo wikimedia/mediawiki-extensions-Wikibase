@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\SetItemDescription;
 use Wikibase\DataModel\Entity\Item as DataModelItem;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescriptionRequest;
+use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Item as ReadModelItem;
@@ -32,6 +33,7 @@ class SetItemDescriptionTest extends \PHPUnit\Framework\TestCase {
 		$itemId = 'Q123';
 		$editTags = [ 'some', 'tags' ];
 		$isBot = false;
+		$comment = 'replace description edit comment';
 
 		$itemRetriever = $this->createStub( ItemRetriever::class );
 		$itemRetriever->method( 'getItem' )->willReturn( new DataModelItem() );
@@ -49,12 +51,12 @@ class SetItemDescriptionTest extends \PHPUnit\Framework\TestCase {
 			->method( 'update' )
 			->with(
 				$this->callback( fn( DataModelItem $item ) => $item->getDescriptions()->toTextArray() === [ $language => $description ] ),
-				$this->expectEquivalentMetadata( $editTags, $isBot, '', '' )
+				$this->expectEquivalentMetadata( $editTags, $isBot, $comment, EditSummary::REPLACE_ACTION )
 			)
 			->willReturn( new ItemRevision( $updatedItem, $lastModified, $revisionId ) );
 
 		$useCase = new SetItemDescription( $itemRetriever, $itemUpdater );
-		$response = $useCase->execute( new SetItemDescriptionRequest( $itemId, $language, $description, $editTags, $isBot ) );
+		$response = $useCase->execute( new SetItemDescriptionRequest( $itemId, $language, $description, $editTags, $isBot, $comment ) );
 
 		$this->assertEquals( new Description( $language, $description ), $response->getDescription() );
 		$this->assertSame( $revisionId, $response->getRevisionId() );

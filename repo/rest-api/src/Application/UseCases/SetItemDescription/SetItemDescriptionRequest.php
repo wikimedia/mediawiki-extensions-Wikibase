@@ -12,19 +12,22 @@ class SetItemDescriptionRequest {
 	private string $description;
 	private array $editTags;
 	private bool $isBot;
+	private ?string $comment;
 
 	public function __construct(
 		string $itemId,
 		string $languageCode,
 		string $description,
 		array $editTags,
-		bool $isBot
+		bool $isBot,
+		?string $comment
 	) {
 		$this->itemId = $itemId;
 		$this->languageCode = $languageCode;
 		$this->description = $description;
 		$this->editTags = $editTags;
 		$this->isBot = $isBot;
+		$this->comment = $comment;
 	}
 
 	public function getItemId(): string {
@@ -45,5 +48,9 @@ class SetItemDescriptionRequest {
 
 	public function isBot(): bool {
 		return $this->isBot;
+	}
+
+	public function getComment(): ?string {
+		return $this->comment;
 	}
 }

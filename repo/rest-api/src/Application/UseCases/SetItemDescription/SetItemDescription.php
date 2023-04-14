@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription;
 
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Term\Term;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
@@ -23,11 +24,16 @@ class SetItemDescription {
 
 	public function execute( SetItemDescriptionRequest $request ): SetItemDescriptionResponse {
 		$item = $this->itemRetriever->getItem( new ItemId( $request->getItemId() ) );
-		$item->setDescription( $request->getLanguageCode(), $request->getDescription() );
+		$description = new Term( $request->getLanguageCode(), $request->getDescription() );
+		$item->getDescriptions()->setTerm( $description );
 
 		$revision = $this->itemUpdater->update(
 			$item,
-			new EditMetadata( $request->getEditTags(), $request->isBot(), new DescriptionEditSummary() )
+			new EditMetadata(
+				$request->getEditTags(),
+				$request->isBot(),
+				new DescriptionEditSummary( $description, $request->getComment() )
+			)
 		);
 
 		return new SetItemDescriptionResponse(
