@@ -178,7 +178,7 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 		$localEntitySourceName = WikibaseRepo::getSettings()->getSetting( 'localEntitySourceName' );
 		$propertySource = WikibaseRepo::getEntitySourceDefinitions()
 			->getDatabaseSourceForEntityType( 'property' );
-		if ( $propertySource->getSourceName() !== $localEntitySourceName ) {
+		if ( $propertySource === null || $propertySource->getSourceName() !== $localEntitySourceName ) {
 			// Foreign properties, skip this part
 			return;
 		}
@@ -219,7 +219,7 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 		$localEntitySourceName = WikibaseRepo::getSettings()->getSetting( 'localEntitySourceName' );
 		$itemSource = WikibaseRepo::getEntitySourceDefinitions()
 			->getDatabaseSourceForEntityType( 'item' );
-		if ( $itemSource->getSourceName() !== $localEntitySourceName ) {
+		if ( $itemSource === null || $itemSource->getSourceName() !== $localEntitySourceName ) {
 			// Foreign items, skip this part
 			return;
 		}

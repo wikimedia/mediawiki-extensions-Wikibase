@@ -208,6 +208,12 @@ return [
 			);
 		},
 		Def::ENTITY_SEARCH_CALLBACK => function ( WebRequest $request ) {
+			$itemSource = WikibaseRepo::getEntitySourceDefinitions()
+				->getDatabaseSourceForEntityType( Item::ENTITY_TYPE );
+			if ( $itemSource === null ) {
+				throw new LogicException( 'No source providing Items configured!' );
+			}
+
 			$languageFallbackChainFactory = WikibaseRepo::getLanguageFallbackChainFactory();
 			$language = WikibaseRepo::getUserLanguage();
 			return new CombinedEntitySearchHelper(
@@ -221,10 +227,7 @@ return [
 						),
 						new EntityTermSearchHelper(
 							new MatchingTermsLookupSearchInteractor(
-								WikibaseRepo::getMatchingTermsLookupFactory()->getLookupForSource(
-									WikibaseRepo::getEntitySourceDefinitions()
-										->getDatabaseSourceForEntityType( Item::ENTITY_TYPE )
-								),
+								WikibaseRepo::getMatchingTermsLookupFactory()->getLookupForSource( $itemSource ),
 								$languageFallbackChainFactory,
 								WikibaseRepo::getPrefetchingTermLookup(),
 								$language->getCode()
@@ -407,6 +410,12 @@ return [
 			);
 		},
 		Def::ENTITY_SEARCH_CALLBACK => function ( WebRequest $request ) {
+			$propertySource = WikibaseRepo::getEntitySourceDefinitions()
+				->getDatabaseSourceForEntityType( Property::ENTITY_TYPE );
+			if ( $propertySource === null ) {
+				throw new LogicException( 'No source providing Properties configured!' );
+			}
+
 			$languageFallbackChainFactory = WikibaseRepo::getLanguageFallbackChainFactory();
 			$language = WikibaseRepo::getUserLanguage();
 			return new PropertyDataTypeSearchHelper(
@@ -422,10 +431,7 @@ return [
 						),
 						new EntityTermSearchHelper(
 							new MatchingTermsLookupSearchInteractor(
-								WikibaseRepo::getMatchingTermsLookupFactory()->getLookupForSource(
-									WikibaseRepo::getEntitySourceDefinitions()
-										->getDatabaseSourceForEntityType( Property::ENTITY_TYPE )
-								),
+								WikibaseRepo::getMatchingTermsLookupFactory()->getLookupForSource( $propertySource ),
 								$languageFallbackChainFactory,
 								WikibaseRepo::getPrefetchingTermLookup(),
 								$language->getCode()
