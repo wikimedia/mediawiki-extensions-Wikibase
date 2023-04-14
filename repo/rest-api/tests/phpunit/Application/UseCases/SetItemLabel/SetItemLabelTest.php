@@ -155,6 +155,7 @@ class SetItemLabelTest extends TestCase {
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::ITEM_REDIRECTED, $e->getErrorCode() );
+			$this->assertStringContainsString( $redirectSource, $e->getErrorMessage() );
 			$this->assertStringContainsString( $redirectTarget, $e->getErrorMessage() );
 		}
 	}
