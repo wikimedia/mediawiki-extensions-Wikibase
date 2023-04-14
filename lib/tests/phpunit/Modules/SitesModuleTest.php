@@ -238,7 +238,7 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	private function newSitesModule( array $sites, array $groups, array $specials = [] ) {
-		return new SitesModule(
+		$module = new SitesModule(
 			new SettingsArray( [
 				'siteLinkGroups' => $groups,
 				'specialSiteLinkGroups' => $specials,
@@ -248,6 +248,8 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 			new HashBagOStuff(),
 			new LanguageNameLookupFactory( MediaWikiServices::getInstance()->getLanguageNameUtils() )
 		);
+		$module->setName( 'test' );
+		return $module;
 	}
 
 	private function newMockModule( array $sites, array $groups, BagOStuff $cache ) {
