@@ -83,8 +83,12 @@ class DispatchingEntityTypeStatementGrouper implements StatementGrouper {
 	 * @return string|null
 	 */
 	private function getEntityType( Statement $statement ) {
+		$statementGuid = $statement->getGuid();
+		if ( $statementGuid === null ) {
+			return null;
+		}
 		try {
-			$guid = $this->guidParser->parse( $statement->getGuid() );
+			$guid = $this->guidParser->parse( $statementGuid );
 		} catch ( StatementGuidParsingException $ex ) {
 			// FIXME: Fail when there is a statement with no GUID?
 			return null;

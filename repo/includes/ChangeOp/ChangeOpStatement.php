@@ -132,8 +132,12 @@ class ChangeOpStatement extends ChangeOpBase {
 	 * @throws ChangeOpException
 	 */
 	private function validateStatementGuid( EntityId $entityId ) {
+		$statementGuid = $this->statement->getGuid();
+		if ( $statementGuid === null ) {
+			throw new ChangeOpException( 'Statement does not have a GUID' );
+		}
 		try {
-			$guid = $this->guidParser->parse( $this->statement->getGuid() );
+			$guid = $this->guidParser->parse( $statementGuid );
 		} catch ( StatementGuidParsingException $ex ) {
 			throw new ChangeOpException( 'Statement GUID can not be parsed' );
 		}

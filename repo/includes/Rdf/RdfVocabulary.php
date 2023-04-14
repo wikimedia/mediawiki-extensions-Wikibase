@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Rdf;
 
 use DataValues\DataValue;
+use InvalidArgumentException;
 use OutOfBoundsException;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Assert\RepositoryNameAssert;
@@ -394,7 +395,11 @@ class RdfVocabulary {
 	 * @return string
 	 */
 	public function getStatementLName( Statement $statement ) {
-		return preg_replace( '/[^\w-]/', '-', $statement->getGuid() );
+		$guid = $statement->getGuid();
+		if ( $guid === null ) {
+			throw new InvalidArgumentException( 'Can only process statements that have a non-null GUID' );
+		}
+		return preg_replace( '/[^\w-]/', '-', $guid );
 	}
 
 	/**

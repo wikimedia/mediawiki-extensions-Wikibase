@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Merge;
 
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Statement\Statement;
@@ -107,8 +108,12 @@ class StatementsMerger {
 		/** @var Reference $reference */
 		foreach ( $fromStatement->getReferences() as $reference ) {
 			if ( !$toStatement->getReferences()->hasReferenceHash( $reference->getHash() ) ) {
+				$guid = $toStatement->getGuid();
+				if ( $guid === null ) {
+					throw new InvalidArgumentException( 'Can only process statements that have a non-null GUID' );
+				}
 				$changeOps->add( $this->changeOpFactory->newSetReferenceOp(
-					$toStatement->getGuid(),
+					$guid,
 					$reference,
 					''
 				) );

@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Domain\Services;
 
+use InvalidArgumentException;
 use Wikibase\DataModel\Reference as DataModelReference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
@@ -34,10 +35,14 @@ class StatementReadModelConverter {
 	}
 
 	public function convert( DataModelStatement $inputStatement ): ReadModelStatement {
+		$guid = $inputStatement->getGuid();
+		if ( $guid === null ) {
+			throw new InvalidArgumentException( 'Can only convert statements that have a non-null GUID' );
+		}
 		$mainPropertyValuePair = $this->convertSnakToPropertyValuePair( $inputStatement->getMainSnak() );
 
 		return new ReadModelStatement(
-			$this->statementIdParser->parse( $inputStatement->getGuid() ),
+			$this->statementIdParser->parse( $guid ),
 			$mainPropertyValuePair->getProperty(),
 			$mainPropertyValuePair->getValue(),
 			new Rank( $inputStatement->getRank() ),
