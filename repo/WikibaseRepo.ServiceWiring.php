@@ -503,8 +503,13 @@ return [
 					try {
 						return new EntityIdValue( WikibaseRepo::getEntityIdParser( $services )->parse( $value['id'] ) );
 					} catch ( EntityIdParsingException $parsingException ) {
+						if ( is_string( $value['id'] ) ) {
+							$message = 'Can not parse id \'' . $value['id'] . '\' to build EntityIdValue with';
+						} else {
+							$message = 'Can not parse id of type ' . gettype( $value['id'] ) . ' to build EntityIdValue with';
+						}
 						throw new InvalidArgumentException(
-							'Can not parse id \'' . $value['id'] . '\' to build EntityIdValue with',
+							$message,
 							0,
 							$parsingException
 						);
