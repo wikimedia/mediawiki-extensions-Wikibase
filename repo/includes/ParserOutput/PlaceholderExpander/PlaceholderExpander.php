@@ -12,6 +12,6 @@ interface PlaceholderExpander {
 	 *
 	 * @return string html
 	 */
-	public function getHtmlForPlaceholder( $placeholderName );
+	public function getHtmlForPlaceholder( $placeholderName ): string;
 
 }

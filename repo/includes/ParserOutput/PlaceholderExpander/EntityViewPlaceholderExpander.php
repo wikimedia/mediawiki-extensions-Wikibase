@@ -129,14 +129,14 @@ class EntityViewPlaceholderExpander implements PlaceholderExpander {
 	 *
 	 * @return string HTML to be substituted for the placeholder in the output.
 	 */
-	public function getHtmlForPlaceholder( $name ) {
+	public function getHtmlForPlaceholder( $name ): string {
 		try {
 			return $this->expandPlaceholder( $name );
 		} catch ( MWException | RuntimeException $ex ) {
 			wfWarn( "Expansion of $name failed: " . $ex->getMessage() );
 		}
 
-		return false;
+		return '';
 	}
 
 	/**
