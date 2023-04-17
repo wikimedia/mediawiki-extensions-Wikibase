@@ -39,6 +39,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemSta
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescription;
+use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
@@ -60,6 +61,8 @@ use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatchValidator;
 use Wikibase\Repo\RestApi\Infrastructure\SiteLinksReadModelConverter;
+use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoDescriptionLanguageCodeValidator;
+use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoItemDescriptionValidator;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\ResponseFactory;
@@ -333,9 +336,24 @@ return [
 	},
 
 	'WbRestApi.SetItemDescription' => function( MediaWikiServices $services ): SetItemDescription {
+		$itemDataRetriever = WbRestApi::getItemDataRetriever( $services );
+		$termValidatorFactory = WikibaseRepo::getTermValidatorFactory( $services );
 		return new SetItemDescription(
+			new SetItemDescriptionValidator(
+				new ItemIdValidator(),
+				new WikibaseRepoDescriptionLanguageCodeValidator( $termValidatorFactory ),
+				new WikibaseRepoItemDescriptionValidator(
+					$termValidatorFactory,
+					WikibaseRepo::getItemTermsCollisionDetector( $services ),
+					$itemDataRetriever
+				),
+				new EditMetadataValidator(
+					CommentStore::COMMENT_CHARACTER_LIMIT,
+					ChangeTags::listExplicitlyDefinedTags()
+				)
+			),
 			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever( WikibaseRepo::getEntityRevisionLookup() ),
-			WbRestApi::getItemDataRetriever( $services ),
+			$itemDataRetriever,
 			WbRestApi::getItemUpdater( $services ),
 			new WikibaseEntityPermissionChecker(
 				WikibaseRepo::getEntityPermissionChecker( $services ),

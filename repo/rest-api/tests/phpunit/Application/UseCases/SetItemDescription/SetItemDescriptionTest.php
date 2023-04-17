@@ -7,7 +7,9 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescriptionRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
 use Wikibase\Repo\RestApi\Domain\Model\User;
@@ -34,6 +36,7 @@ class SetItemDescriptionTest extends \PHPUnit\Framework\TestCase {
 
 	use EditMetadataHelper;
 
+	private SetItemDescriptionValidator $validator;
 	private ItemRevisionMetadataRetriever $metadataRetriever;
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
@@ -42,6 +45,7 @@ class SetItemDescriptionTest extends \PHPUnit\Framework\TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
+		$this->validator = $this->createStub( SetItemDescriptionValidator::class );
 		$this->metadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
 		$this->metadataRetriever->method( 'getLatestRevisionMetadata' )
 			->willReturn( LatestItemRevisionMetadataResult::concreteRevision( 123, '20221212040505' ) );
@@ -134,6 +138,23 @@ class SetItemDescriptionTest extends \PHPUnit\Framework\TestCase {
 		$this->assertTrue( $response->wasReplaced() );
 	}
 
+	public function testGivenInvalidRequest_throwsUseCaseException(): void {
+		$expectedException = new UseCaseException( 'invalid-description-test' );
+
+		$this->validator = $this->createStub( SetItemDescriptionValidator::class );
+		$this->validator->method( 'assertValidRequest' )->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase()->execute(
+				new SetItemDescriptionRequest( 'Q123', 'en', 'description', [], false, null, null )
+			);
+
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
 	public function testGivenItemNotFound_throwsUseCaseError(): void {
 		$itemId = 'Q789';
 		$this->metadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
@@ -215,6 +236,13 @@ class SetItemDescriptionTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	private function newUseCase(): SetItemDescription {
-		return new SetItemDescription( $this->metadataRetriever, $this->itemRetriever, $this->itemUpdater, $this->permissionChecker );
+		return new SetItemDescription(
+			$this->validator,
+			$this->metadataRetriever,
+			$this->itemRetriever,
+			$this->itemUpdater,
+			$this->permissionChecker
+		);
 	}
+
 }
