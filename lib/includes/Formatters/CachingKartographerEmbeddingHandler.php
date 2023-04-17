@@ -60,7 +60,7 @@ class CachingKartographerEmbeddingHandler {
 		if ( !$this->cache->has( $cacheKey ) ) {
 			$parserOutput = $this->parser->parse(
 				$this->getWikiText( $value ),
-				RequestContext::getMain()->getTitle() ?? Title::newFromText( 'Special:BlankPage' ),
+				RequestContext::getMain()->getTitle() ?? Title::makeTitle( NS_SPECIAL, 'BlankPage' ),
 				$this->getParserOptions( $language )
 			);
 			$this->cache->set( $this->getCacheKey( $value, $language ), $parserOutput->getText() );
@@ -119,7 +119,7 @@ class CachingKartographerEmbeddingHandler {
 
 		return $this->parser->parse(
 			$wikiText,
-			RequestContext::getMain()->getTitle() ?? Title::newFromText( 'Special:BlankPage' ),
+			RequestContext::getMain()->getTitle() ?? Title::makeTitle( NS_SPECIAL, 'BlankPage' ),
 			$this->getParserOptions( $language )
 		);
 	}
