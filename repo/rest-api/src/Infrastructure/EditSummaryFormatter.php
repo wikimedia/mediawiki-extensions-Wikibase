@@ -32,16 +32,16 @@ class EditSummaryFormatter {
 		if ( $editSummary instanceof LabelEditSummary ) {
 			switch ( $editSummary->getEditAction() ) {
 				case EditSummary::ADD_ACTION:
-					return $this->newSummaryForLabelEdit( $editSummary, 'wbsetlabel', 'add' );
+					return $this->newSummaryForLabelEdit( $editSummary, 'add' );
 				case EditSummary::REPLACE_ACTION:
-					return $this->newSummaryForLabelEdit( $editSummary, 'wbsetlabel', 'set' );
+					return $this->newSummaryForLabelEdit( $editSummary, 'set' );
 			}
 		} elseif ( $editSummary instanceof DescriptionEditSummary ) {
 			switch ( $editSummary->getEditAction() ) {
 				case EditSummary::ADD_ACTION:
-					return $this->newSummaryForDescriptionEdit( $editSummary, 'wbsetdescription', 'add' );
+					return $this->newSummaryForDescriptionEdit( $editSummary, 'add' );
 				case EditSummary::REPLACE_ACTION:
-					return $this->newSummaryForDescriptionEdit( $editSummary, 'wbsetdescription', 'set' );
+					return $this->newSummaryForDescriptionEdit( $editSummary, 'set' );
 			}
 		} elseif ( $editSummary instanceof StatementEditSummary ) {
 			switch ( $editSummary->getEditAction() ) {
@@ -58,12 +58,8 @@ class EditSummaryFormatter {
 		throw new LogicException( "Unknown summary type '{$editSummary->getEditAction()}' " . get_class( $editSummary ) );
 	}
 
-	private function newSummaryForLabelEdit(
-		LabelEditSummary $editSummary,
-		string $moduleName,
-		string $actionName
-	): Summary {
-		$summary = new Summary( $moduleName, $actionName );
+	private function newSummaryForLabelEdit( LabelEditSummary $editSummary, string $actionName ): Summary {
+		$summary = new Summary( 'wbsetlabel', $actionName );
 		$summary->setLanguage( $editSummary->getLabel()->getLanguageCode() );
 		$summary->addAutoSummaryArgs( [ $editSummary->getLabel()->getText() ] );
 		$summary->setUserSummary( $editSummary->getUserComment() );
@@ -71,12 +67,8 @@ class EditSummaryFormatter {
 		return $summary;
 	}
 
-	private function newSummaryForDescriptionEdit(
-		DescriptionEditSummary $editSummary,
-		string $moduleName,
-		string $actionName
-	): Summary {
-		$summary = new Summary( $moduleName, $actionName );
+	private function newSummaryForDescriptionEdit( DescriptionEditSummary $editSummary, string $actionName ): Summary {
+		$summary = new Summary( 'wbsetdescription', $actionName );
 		$summary->setLanguage( $editSummary->getDescription()->getLanguageCode() );
 		$summary->addAutoSummaryArgs( [ $editSummary->getDescription()->getText() ] );
 		$summary->setUserSummary( $editSummary->getUserComment() );
