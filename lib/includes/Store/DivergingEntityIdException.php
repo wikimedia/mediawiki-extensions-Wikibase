@@ -29,14 +29,6 @@ class DivergingEntityIdException extends BadRevisionException implements INormal
 		parent::__construct( self::getMessageFromNormalizedMessage( $this->normalizedMessage, $this->messageContext ) );
 	}
 
-	/**
-	 * @return array
-	 * @phan-return non-empty-array
-	 */
-	public function getNormalizedDataForLogging(): array {
-		return [ $this->normalizedMessage, $this->messageContext ];
-	}
-
 	public function getEntityRevision(): EntityRevision {
 		return $this->entityRevision;
 	}
