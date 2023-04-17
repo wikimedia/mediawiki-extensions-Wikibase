@@ -461,11 +461,10 @@ class PatchItemStatementTest extends TestCase {
 
 		try {
 			$this->newUseCase()->execute(
-				$this->newUseCaseRequest( [
-					'$statementId' => "$statementId",
-					'$patch' => $patch,
-				] )
+				$this->newUseCaseRequest( [ '$statementId' => "$statementId", '$patch' => $patch ] )
 			);
+
+			$this->fail( 'this should not be reached' );
 		} catch ( Exception $e ) {
 			$this->assertSame( $expectedException, $e );
 		}

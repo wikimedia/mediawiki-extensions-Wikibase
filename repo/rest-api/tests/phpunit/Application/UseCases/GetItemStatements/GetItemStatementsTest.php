@@ -136,6 +136,8 @@ class GetItemStatementsTest extends TestCase {
 
 		try{
 			$this->newUseCase()->execute( new GetItemStatementsRequest( $redirectSource ) );
+
+			$this->fail( 'Exception was not thrown.' );
 		} catch ( ItemRedirect $e ) {
 			$this->assertSame( $redirectTarget, $e->getRedirectTargetId() );
 		}

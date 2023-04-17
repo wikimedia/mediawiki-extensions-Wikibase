@@ -96,6 +96,8 @@ class GetItemDescriptionsTest extends TestCase {
 			$this->newUseCase()->execute(
 				new GetItemDescriptionsRequest( $itemId->getSerialization() )
 			);
+
+			$this->fail( 'Exception was not thrown.' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::ITEM_NOT_FOUND, $e->getErrorCode() );
 			$this->assertSame( 'Could not find an item with the ID: Q10', $e->getErrorMessage() );
@@ -113,9 +115,9 @@ class GetItemDescriptionsTest extends TestCase {
 			->willReturn( LatestItemRevisionMetadataResult::redirect( new ItemId( $redirectTarget ) ) );
 
 		try {
-			$this->newUseCase()->execute(
-				new GetItemDescriptionsRequest( $redirectSource )
-			);
+			$this->newUseCase()->execute( new GetItemDescriptionsRequest( $redirectSource ) );
+
+			$this->fail( 'Exception was not thrown.' );
 		} catch ( ItemRedirect $e ) {
 			$this->assertSame( $redirectTarget, $e->getRedirectTargetId() );
 		}

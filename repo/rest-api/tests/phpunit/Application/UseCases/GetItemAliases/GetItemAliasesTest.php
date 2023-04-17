@@ -105,9 +105,9 @@ class GetItemAliasesTest extends TestCase {
 			->willReturn( LatestItemRevisionMetadataResult::itemNotFound() );
 
 		try {
-			$this->newUseCase()->execute(
-				new GetItemAliasesRequest( $itemId->getSerialization() )
-			);
+			$this->newUseCase()->execute( new GetItemAliasesRequest( $itemId->getSerialization() ) );
+
+			$this->fail( 'Exception was not thrown.' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::ITEM_NOT_FOUND, $e->getErrorCode() );
 			$this->assertSame( 'Could not find an item with the ID: Q10', $e->getErrorMessage() );
@@ -125,9 +125,9 @@ class GetItemAliasesTest extends TestCase {
 			->willReturn( LatestItemRevisionMetadataResult::redirect( new ItemId( $redirectTarget ) ) );
 
 		try {
-			$this->newUseCase()->execute(
-				new GetItemAliasesRequest( $redirectSource )
-			);
+			$this->newUseCase()->execute( new GetItemAliasesRequest( $redirectSource ) );
+
+			$this->fail( 'Exception was not thrown.' );
 		} catch ( ItemRedirect $e ) {
 			$this->assertSame( $redirectTarget, $e->getRedirectTargetId() );
 		}

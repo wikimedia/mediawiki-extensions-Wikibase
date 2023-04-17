@@ -123,9 +123,9 @@ class RemoveItemStatementTest extends TestCase {
 		];
 
 		try {
-			$this->newUseCase()->execute(
-				$this->newUseCaseRequest( $requestData )
-			);
+			$this->newUseCase()->execute( $this->newUseCaseRequest( $requestData ) );
+
+			$this->fail( 'Exception was not thrown.' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::INVALID_STATEMENT_ID, $e->getErrorCode() );
 			$this->assertSame( 'Not a valid statement ID: INVALID-STATEMENT-ID', $e->getErrorMessage() );
@@ -141,6 +141,8 @@ class RemoveItemStatementTest extends TestCase {
 					'$statementId' => 'Q999999$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
 				] )
 			);
+
+			$this->fail( 'Exception was not thrown.' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::ITEM_NOT_FOUND, $e->getErrorCode() );
 			$this->assertSame( 'Could not find an item with the ID: Q999999', $e->getErrorMessage() );
@@ -156,6 +158,8 @@ class RemoveItemStatementTest extends TestCase {
 					'$statementId' => $statementId,
 				] )
 			);
+
+			$this->fail( 'Exception was not thrown.' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::STATEMENT_NOT_FOUND, $e->getErrorCode() );
 			$this->assertSame( "Could not find a statement with the ID: $statementId", $e->getErrorMessage() );
@@ -169,10 +173,10 @@ class RemoveItemStatementTest extends TestCase {
 		$statementId = 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 		try {
 			$this->newUseCase()->execute(
-				$this->newUseCaseRequest( [
-					'$statementId' => $statementId,
-				] )
+				$this->newUseCaseRequest( [ '$statementId' => $statementId ] )
 			);
+
+			$this->fail( 'Exception was not thrown.' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::STATEMENT_NOT_FOUND, $e->getErrorCode() );
 			$this->assertSame( "Could not find a statement with the ID: $statementId", $e->getErrorMessage() );
@@ -191,6 +195,8 @@ class RemoveItemStatementTest extends TestCase {
 					'$statementId' => $statementId,
 				] )
 			);
+
+			$this->fail( 'Exception was not thrown.' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::STATEMENT_NOT_FOUND, $e->getErrorCode() );
 			$this->assertSame( "Could not find a statement with the ID: $statementId", $e->getErrorMessage() );
@@ -206,10 +212,10 @@ class RemoveItemStatementTest extends TestCase {
 		$statementId = 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 		try {
 			$this->newUseCase()->execute(
-				$this->newUseCaseRequest( [
-					'$statementId' => $statementId,
-				] )
+				$this->newUseCaseRequest( [ '$statementId' => $statementId ] )
 			);
+
+			$this->fail( 'Exception was not thrown.' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::STATEMENT_NOT_FOUND, $e->getErrorCode() );
 			$this->assertSame( "Could not find a statement with the ID: $statementId", $e->getErrorMessage() );
@@ -235,6 +241,8 @@ class RemoveItemStatementTest extends TestCase {
 					'$statementId' => "$itemId\$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
 				] )
 			);
+
+			$this->fail( 'Exception was not thrown.' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::PERMISSION_DENIED, $e->getErrorCode() );
 			$this->assertSame( 'You have no permission to edit this item.', $e->getErrorMessage() );

@@ -23,6 +23,8 @@ class GetItemAliasesValidatorTest extends TestCase {
 		try {
 			$this->newAliasesValidator()
 				->assertValidRequest( new GetItemAliasesRequest( $invalidId ) );
+
+			$this->fail( 'Exception was not thrown.' );
 		} catch ( UseCaseError $useCaseEx ) {
 			$this->assertSame( UseCaseError::INVALID_ITEM_ID, $useCaseEx->getErrorCode() );
 			$this->assertSame( 'Not a valid item ID: ' . $invalidId, $useCaseEx->getErrorMessage() );
