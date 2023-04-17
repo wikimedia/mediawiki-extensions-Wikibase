@@ -103,7 +103,7 @@ class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 			if ( $entityType === null ) {
 				$termQueries[] = $this->getTermMatchQueries( $dbr, $mask, 'item', $termType, $options );
 				$termQueries[] = $this->getTermMatchQueries( $dbr, $mask, 'property', $termType, $options );
-			} elseif ( is_array( $entityType ) === true ) {
+			} elseif ( is_array( $entityType ) ) {
 				foreach ( $entityType as $entityTypeCase ) {
 					$termQueries[] = $this->getTermMatchQueries( $dbr, $mask, $entityTypeCase, $termType, $options );
 				}

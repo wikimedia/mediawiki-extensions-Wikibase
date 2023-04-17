@@ -84,7 +84,6 @@ $cfg['suppress_issue_types'] = array_merge(
 	$cfg['suppress_issue_types'],
 	[
 		// Disabled when upgrading to 0.11.1
-		'PhanPluginSimplifyExpressionBool',
 		'PhanTypeMismatchReturn',
 		'PhanTypeMismatchArgumentSuperType',
 		'PhanTypeMismatchReturnSuperType',
