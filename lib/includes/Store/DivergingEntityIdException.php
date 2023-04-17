@@ -2,10 +2,14 @@
 
 namespace Wikibase\Lib\Store;
 
+use Wikimedia\NormalizedException\INormalizedException;
+use Wikimedia\NormalizedException\NormalizedExceptionTrait;
+
 /**
  * @license GPL-2.0-or-later
  */
-class DivergingEntityIdException extends BadRevisionException {
+class DivergingEntityIdException extends BadRevisionException implements INormalizedException {
+	use NormalizedExceptionTrait;
 
 	private EntityRevision $entityRevision;
 	private string $expectedEntityId;
@@ -15,9 +19,14 @@ class DivergingEntityIdException extends BadRevisionException {
 		$this->revisionId = $revisionId;
 		$this->entityRevision = $entityRevision;
 		$this->expectedEntityId = $expectedEntityId;
-		$actualEntityId = $entityRevision->getEntity()->getId()->getSerialization();
 
-		parent::__construct( "Revision $revisionId belongs to $actualEntityId instead of expected $expectedEntityId" );
+		$this->normalizedMessage = 'Revision {revisionId} belongs to {actualEntityId} instead of expected {entityId}';
+		$this->messageContext = [
+			'revisionId' => $this->revisionId,
+			'actualEntityId' => $this->entityRevision->getEntity()->getId()->getSerialization(),
+			'entityId' => $this->expectedEntityId,
+		];
+		parent::__construct( self::getMessageFromNormalizedMessage( $this->normalizedMessage, $this->messageContext ) );
 	}
 
 	/**
@@ -25,14 +34,7 @@ class DivergingEntityIdException extends BadRevisionException {
 	 * @phan-return non-empty-array
 	 */
 	public function getNormalizedDataForLogging(): array {
-		return [
-			'Revision {revisionId} belongs to {actualEntityId} instead of expected {entityId}',
-			[
-				'revisionId' => $this->revisionId,
-				'actualEntityId' => $this->entityRevision->getEntity()->getId()->getSerialization(),
-				'entityId' => $this->expectedEntityId,
-			],
-		];
+		return [ $this->normalizedMessage, $this->messageContext ];
 	}
 
 	public function getEntityRevision(): EntityRevision {
