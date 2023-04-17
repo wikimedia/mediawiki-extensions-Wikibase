@@ -2,8 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Angpradesh",
+			"IND-ANP",
 			"Proabscorp!"
 		]
 	},
+	"wikibase-error-save-timeout": "हम्मँ सिनी तकनीकी समस्या क सामना करी रहलौ छियै। कृपया फेरु सँ प्रयास करौ।",
+	"wikibase-error-remove-timeout": "हम्मँ सिनी तकनीकी समस्या क सामना करी रहलौ छियै। कृपया फेरु सँ प्रयास करौ।",
 	"wikibase-sitelinks-wikipedia": "विकिपीडिया"
 }
