@@ -80,8 +80,9 @@ class ContentHandlerEntityTitleLookup implements EntityTitleStoreLookup {
 	 * If the EntityId is federated, return a Title for it. Otherwise return null
 	 */
 	private function getTitleForFederatedId( EntityId $id ): ?Title {
-		if ( $this->entityNotFromLocalEntitySource( $id ) ) {
-			$interwiki = $this->entitySourceDefinitions->getDatabaseSourceForEntityType( $id->getEntityType() )->getInterwikiPrefix();
+		$entitySource = $this->entitySourceDefinitions->getDatabaseSourceForEntityType( $id->getEntityType() );
+		if ( $entitySource !== null && $entitySource->getSourceName() !== $this->localEntitySource->getSourceName() ) {
+			$interwiki = $entitySource->getInterwikiPrefix();
 			if ( $this->interwikiLookup && $this->interwikiLookup->isValidInterwiki( $interwiki ) ) {
 				$pageName = 'EntityPage/' . $id->getSerialization();
 
@@ -135,11 +136,6 @@ class ContentHandlerEntityTitleLookup implements EntityTitleStoreLookup {
 		}
 
 		return $titles;
-	}
-
-	private function entityNotFromLocalEntitySource( EntityId $id ): bool {
-		$entitySource = $this->entitySourceDefinitions->getDatabaseSourceForEntityType( $id->getEntityType() );
-		return $entitySource->getSourceName() !== $this->localEntitySource->getSourceName();
 	}
 
 }

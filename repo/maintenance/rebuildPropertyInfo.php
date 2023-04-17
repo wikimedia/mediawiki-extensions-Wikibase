@@ -42,7 +42,11 @@ class RebuildPropertyInfo extends LoggedUpdateMaintenance {
 			$this->output( "You need to have Wikibase enabled in order to use this maintenance script!\n\n" );
 			exit;
 		}
-		if ( !in_array( Property::ENTITY_TYPE, WikibaseRepo::getLocalEntitySource()->getEntityTypes() ) ) {
+		$propertySource = WikibaseRepo::getEntitySourceDefinitions()
+			->getDatabaseSourceForEntityType( 'property' );
+		if ( !in_array( Property::ENTITY_TYPE, WikibaseRepo::getLocalEntitySource()->getEntityTypes() )
+			|| $propertySource === null
+		) {
 			$this->fatalError(
 				"You can't run this maintenance script on foreign properties!",
 				1
@@ -53,9 +57,6 @@ class RebuildPropertyInfo extends LoggedUpdateMaintenance {
 		$reporter->registerReporterCallback(
 			[ $this, 'report' ]
 		);
-
-		$propertySource = WikibaseRepo::getEntitySourceDefinitions()
-			->getDatabaseSourceForEntityType( 'property' );
 
 		$builder = new PropertyInfoTableBuilder(
 			new PropertyInfoTable(
