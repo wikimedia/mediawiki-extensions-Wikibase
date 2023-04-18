@@ -123,7 +123,6 @@ return call_user_func( function() {
 				'wikibase/wikibase.mobile.css',
 				'jquery/wikibase/themes/default/jquery.wikibase.statementview.RankSelector.css',
 			],
-			'targets' => 'mobile',
 		],
 
 		// deprecated: this is effectively wikibase.alltargets + wikibase.desktop, use those instead
@@ -1018,7 +1017,6 @@ return call_user_func( function() {
 				],
 			],
 			'es6' => true,
-			'targets' => [ 'mobile', 'desktop' ],
 			'dependencies' => [
 				'wikibase.termbox.styles',
 				'wikibase.getLanguageNameByCode',
@@ -1037,9 +1035,6 @@ return call_user_func( function() {
 			],
 			'skinStyles' => [
 				'minerva' => '../../resources/wikibase/termbox/minerva.less',
-			],
-			'targets' => [
-				'mobile', 'desktop',
 			],
 		],
 
