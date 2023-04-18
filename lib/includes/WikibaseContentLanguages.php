@@ -159,6 +159,7 @@ class WikibaseContentLanguages {
 					'bdr', // T234330
 					'bnn', // T174230
 					'brx', // T155369
+					'bzs', // T323440
 					'cal', // T266423
 					'ccp', // T210311
 					'cdo-hani', // T180771
@@ -232,6 +233,7 @@ class WikibaseContentLanguages {
 					'pi-sidd', // T230881
 					'pjt', // T155426
 					'ppu', // T174233
+					'pqm', // T328890
 					'pyu', // T174227
 					'quc', // T155376
 					'qya', // T185194
