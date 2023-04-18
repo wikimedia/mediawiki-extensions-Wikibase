@@ -13,6 +13,7 @@ class SetItemLabelRequest {
 	private array $editTags;
 	private bool $isBot;
 	private ?string $comment;
+	private ?string $username;
 
 	public function __construct(
 		string $itemId,
@@ -20,7 +21,8 @@ class SetItemLabelRequest {
 		string $label,
 		array $editTags,
 		bool $isBot,
-		?string $comment
+		?string $comment,
+		?string $username
 	) {
 
 		$this->itemId = $itemId;
@@ -29,6 +31,7 @@ class SetItemLabelRequest {
 		$this->editTags = $editTags;
 		$this->isBot = $isBot;
 		$this->comment = $comment;
+		$this->username = $username;
 	}
 
 	public function getItemId(): string {
@@ -53,6 +56,10 @@ class SetItemLabelRequest {
 
 	public function getComment(): ?string {
 		return $this->comment;
+	}
+
+	public function getUsername(): ?string {
+		return $this->username;
 	}
 
 }

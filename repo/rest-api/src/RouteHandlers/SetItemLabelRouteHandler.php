@@ -57,7 +57,8 @@ class SetItemLabelRouteHandler extends SimpleHandler {
 					$jsonBody[self::LABEL_BODY_PARAM],
 					$jsonBody[self::TAGS_BODY_PARAM],
 					$jsonBody[self::BOT_BODY_PARAM],
-					$jsonBody[self::COMMENT_BODY_PARAM]
+					$jsonBody[self::COMMENT_BODY_PARAM],
+					$this->getUsername()
 				)
 			);
 			return $this->newSuccessHttpResponse( $useCaseResponse );
@@ -134,6 +135,11 @@ class SetItemLabelRouteHandler extends SimpleHandler {
 		$httpResponse->setBody( new StringStream( json_encode( $useCaseResponse->getLabel()->getText() ) ) );
 
 		return $httpResponse;
+	}
+
+	private function getUsername(): ?string {
+		$mwUser = $this->getAuthority()->getUser();
+		return $mwUser->isRegistered() ? $mwUser->getName() : null;
 	}
 
 }

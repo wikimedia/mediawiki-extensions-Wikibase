@@ -344,7 +344,11 @@ return [
 		return new SetItemLabel(
 			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever( WikibaseRepo::getEntityRevisionLookup() ),
 			WbRestApi::getItemDataRetriever( $services ),
-			WbRestApi::getItemUpdater( $services )
+			WbRestApi::getItemUpdater( $services ),
+			new WikibaseEntityPermissionChecker(
+				WikibaseRepo::getEntityPermissionChecker( $services ),
+				$services->getUserFactory()
+			)
 		);
 	},
 

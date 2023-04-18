@@ -11,6 +11,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabelRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
+use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Item;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
@@ -20,6 +21,8 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
+use Wikibase\Repo\RestApi\Infrastructure\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 
 /**
@@ -34,6 +37,7 @@ class SetItemLabelTest extends TestCase {
 	private ItemRevisionMetadataRetriever $metadataRetriever;
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
+	private PermissionChecker $permissionChecker;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -41,6 +45,8 @@ class SetItemLabelTest extends TestCase {
 		$this->metadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
+		$this->permissionChecker = $this->createStub( PermissionChecker::class );
+		$this->permissionChecker->method( 'canEdit' )->willReturn( true );
 	}
 
 	public function testAddLabel(): void {
@@ -74,7 +80,7 @@ class SetItemLabelTest extends TestCase {
 			)
 			->willReturn( new ItemRevision( $updatedItem, $lastModified, $revisionId ) );
 
-		$request = new SetItemLabelRequest( $itemId, $langCode, $newLabelText, $editTags, $isBot, $comment );
+		$request = new SetItemLabelRequest( $itemId, $langCode, $newLabelText, $editTags, $isBot, $comment, null );
 		$response = $this->newUseCase()->execute( $request );
 
 		$this->assertEquals( new Label( $langCode, $newLabelText ), $response->getLabel() );
@@ -114,7 +120,7 @@ class SetItemLabelTest extends TestCase {
 			)
 			->willReturn( new ItemRevision( $updatedItem, $lastModified, $revisionId ) );
 
-		$request = new SetItemLabelRequest( $itemId, $langCode, $updatedLabelText, $editTags, $isBot, $comment );
+		$request = new SetItemLabelRequest( $itemId, $langCode, $updatedLabelText, $editTags, $isBot, $comment, null );
 		$response = $this->newUseCase()->execute( $request );
 
 		$this->assertEquals( new Label( $langCode, $updatedLabelText ), $response->getLabel() );
@@ -131,7 +137,7 @@ class SetItemLabelTest extends TestCase {
 
 		try {
 			$this->newUseCase()->execute(
-				new SetItemLabelRequest( $itemId, 'en', 'test label', [], false, null )
+				new SetItemLabelRequest( $itemId, 'en', 'test label', [], false, null, null )
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
@@ -150,7 +156,7 @@ class SetItemLabelTest extends TestCase {
 
 		try {
 			$this->newUseCase()->execute(
-				new SetItemLabelRequest( $redirectSource, 'en', 'test label', [], false, null )
+				new SetItemLabelRequest( $redirectSource, 'en', 'test label', [], false, null, null )
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
@@ -160,8 +166,33 @@ class SetItemLabelTest extends TestCase {
 		}
 	}
 
+	public function testGivenEditIsUnauthorized_throwsUseCaseError(): void {
+		$itemId = new ItemId( 'Q123' );
+		$this->metadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
+		$this->metadataRetriever->method( 'getLatestRevisionMetadata' )
+			->willReturn( LatestItemRevisionMetadataResult::concreteRevision( 321, '20201111070707' ) );
+
+		$this->permissionChecker = $this->createMock( WikibaseEntityPermissionChecker::class );
+		$this->permissionChecker->expects( $this->once() )
+			->method( 'canEdit' )
+			->with( User::newAnonymous(), $itemId )
+			->willReturn( false );
+
+		try {
+			$this->newUseCase()->execute(
+				new SetItemLabelRequest( "$itemId", 'en', 'test label', [], false, null, null )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame(
+				UseCaseError::PERMISSION_DENIED,
+				$e->getErrorCode()
+			);
+		}
+	}
+
 	private function newUseCase(): SetItemLabel {
-		return new SetItemLabel( $this->metadataRetriever, $this->itemRetriever, $this->itemUpdater );
+		return new SetItemLabel( $this->metadataRetriever, $this->itemRetriever, $this->itemUpdater, $this->permissionChecker );
 	}
 
 }
