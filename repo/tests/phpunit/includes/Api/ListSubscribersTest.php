@@ -9,6 +9,7 @@ use HashSiteStore;
 use MediaWikiLangTestCase;
 use RequestContext;
 use Wikibase\DataModel\Entity\ItemIdParser;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\Api\ListSubscribers;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -89,10 +90,11 @@ class ListSubscribersTest extends MediaWikiLangTestCase {
 			->getErrorReporter( $apiMain );
 		$module = new ListSubscribers(
 			$apiMain,
-			'subscribers',
+			'wbsubscribers',
 			$errorReporter,
 			new ItemIdParser(),
-			new HashSiteStore()
+			new HashSiteStore(),
+			new SettingsArray( [ 'tmpWbsubscribersSensibleOutput' => true ] )
 		);
 
 		$module->execute();
@@ -182,8 +184,9 @@ class ListSubscribersTest extends MediaWikiLangTestCase {
 		}
 
 		$this->assertArrayHasKey( 'query', $result );
-		$this->assertArrayHasKey( 'subscribers', $result['query'] );
-		$this->assertSame( $expected, $result['query']['subscribers'] );
+		$this->assertArrayHasKey( 'wbsubscribers', $result['query'] );
+		$this->assertArrayNotHasKey( 'subscribers', $result['query'] ); // T300458
+		$this->assertSame( $expected, $result['query']['wbsubscribers'] );
 	}
 
 }
