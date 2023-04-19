@@ -38,6 +38,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemSta
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
@@ -328,6 +329,14 @@ return [
 	'WbRestApi.SerializerFactory' => function( MediaWikiServices $services ): SerializerFactory {
 		return new SerializerFactory(
 			WikibaseRepo::getPropertyDataTypeLookup( $services )
+		);
+	},
+
+	'WbRestApi.SetItemDescription' => function( MediaWikiServices $services ): SetItemDescription {
+		return new SetItemDescription(
+			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever( WikibaseRepo::getEntityRevisionLookup() ),
+			WbRestApi::getItemDataRetriever( $services ),
+			WbRestApi::getItemUpdater( $services )
 		);
 	},
 

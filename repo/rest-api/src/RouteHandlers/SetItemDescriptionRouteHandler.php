@@ -10,9 +10,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescrip
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescriptionRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescriptionResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\WikibaseEntityRevisionLookupItemRevisionMetadataRetriever;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\WbRestApi;
-use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\ParamValidator\ParamValidator;
 
 /**
@@ -24,26 +23,34 @@ class SetItemDescriptionRouteHandler extends SimpleHandler {
 
 	private SetItemDescription $useCase;
 	private ResponseFactory $responseFactory;
+	private MiddlewareHandler $middlewareHandler;
 
-	public function __construct( SetItemDescription $useCase, ResponseFactory $responseFactory ) {
+	public function __construct(
+		SetItemDescription $useCase,
+		ResponseFactory $responseFactory,
+		MiddlewareHandler $middlewareHandler
+	) {
 		$this->useCase = $useCase;
 		$this->responseFactory = $responseFactory;
+		$this->middlewareHandler = $middlewareHandler;
 	}
 
 	public static function factory(): self {
 		return new self(
-			new SetItemDescription(
-				new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
-					WikibaseRepo::getEntityRevisionLookup()
-				),
-				WbRestApi::getItemDataRetriever(),
-				WbRestApi::getItemUpdater()
-			),
-			new ResponseFactory()
+			WbRestApi::getSetItemDescription(),
+			new ResponseFactory(),
+			new MiddlewareHandler( [ WbRestApi::getUnexpectedErrorHandlerMiddleware() ] )
 		);
 	}
 
-	public function run( string $itemId, string $languageCode ): Response {
+	/**
+	 * @param mixed ...$args
+	 */
+	public function run( ...$args ): Response {
+		return $this->middlewareHandler->run( $this, [ $this, 'runUseCase' ], $args );
+	}
+
+	public function runUseCase( string $itemId, string $languageCode ): Response {
 		$jsonBody = $this->getValidatedBody();
 
 		try {
