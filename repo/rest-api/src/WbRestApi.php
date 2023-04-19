@@ -19,6 +19,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\GetItemStatemen
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\WikibaseEntityLookupItemDataRetriever;
@@ -53,6 +54,11 @@ class WbRestApi {
 	public static function getGetItemDescriptions( ContainerInterface $services = null ): GetItemDescriptions {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.GetItemDescriptions' );
+	}
+
+	public static function getSetItemDescription( ContainerInterface $services = null ): SetItemDescription {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.SetItemDescription' );
 	}
 
 	public static function getGetItemLabel( ContainerInterface $services = null ): GetItemLabel {
