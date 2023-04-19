@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Maintenance;
 
 use Maintenance;
+use MediaWiki\Maintenance\OrderedStreamingForkController;
 use MWException;
-use OrderedStreamingForkController;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\WikibaseRepo;
 
