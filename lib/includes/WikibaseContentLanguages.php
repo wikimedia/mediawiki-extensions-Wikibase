@@ -156,6 +156,7 @@ class WikibaseContentLanguages {
 					'aec', // T321644
 					'alc', // T190981
 					'alq', // T295738
+					'apc', // T332264
 					'bdr', // T234330
 					'bnn', // T174230
 					'brx', // T155369
@@ -261,6 +262,7 @@ class WikibaseContentLanguages {
 					'tlb', // T216798
 					'tli', // T230145
 					'tnq', // T220284
+					'txg', // T331094
 					'tzl', // T98314
 					'uga', // T155431
 					'umu', // T160531
