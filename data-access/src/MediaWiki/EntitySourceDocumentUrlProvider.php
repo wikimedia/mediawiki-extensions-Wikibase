@@ -2,7 +2,7 @@
 
 namespace Wikibase\DataAccess\MediaWiki;
 
-use TitleFactory;
+use MediaWiki\Title\TitleFactory;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 
 /**

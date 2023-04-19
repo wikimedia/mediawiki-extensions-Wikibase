@@ -3,10 +3,10 @@
 namespace Wikibase\Client\Specials;
 
 use Html;
+use MediaWiki\Title\TitleFactory;
 use NamespaceInfo;
 use QueryPage;
 use Skin;
-use TitleFactory;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Lib\Rdbms\ClientDomainDb;
 use Wikibase\Lib\Rdbms\ClientDomainDbFactory;

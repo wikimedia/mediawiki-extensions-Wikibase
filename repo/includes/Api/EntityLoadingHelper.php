@@ -7,7 +7,7 @@ namespace Wikibase\Repo\Api;
 use ApiUsageException;
 use LogicException;
 use MediaWiki\Revision\RevisionLookup;
-use TitleFactory;
+use MediaWiki\Title\TitleFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;

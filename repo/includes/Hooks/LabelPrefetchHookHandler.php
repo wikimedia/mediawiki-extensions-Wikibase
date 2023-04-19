@@ -4,8 +4,8 @@ namespace Wikibase\Repo\Hooks;
 
 use ChangesList;
 use MediaWiki\Hook\ChangesListInitRowsHook;
+use MediaWiki\Title\TitleFactory;
 use Title;
-use TitleFactory;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\LanguageFallbackChainFactory;

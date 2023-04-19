@@ -4,10 +4,10 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Tests\Unit\Changes;
 
+use MediaWiki\Title\TitleFactory;
 use PHPUnit\Framework\TestCase;
 use RecentChange;
 use Title;
-use TitleFactory;
 use Wikibase\Client\Changes\InjectRCRecordsJob;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\RecentChanges\RecentChangesFinder;

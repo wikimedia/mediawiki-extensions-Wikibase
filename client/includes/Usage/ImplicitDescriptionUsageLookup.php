@@ -5,7 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Usage;
 
 use MediaWiki\Cache\LinkBatchFactory;
-use TitleFactory;
+use MediaWiki\Title\TitleFactory;
 use Traversable;
 use Wikibase\Client\Store\DescriptionLookup;
 use Wikibase\DataModel\Entity\EntityId;
