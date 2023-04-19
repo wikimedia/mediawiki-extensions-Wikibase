@@ -62,6 +62,11 @@ describe( 'User-Agent requests', () => {
 				path: '/mainsnak/datavalue/value',
 				value: 'random-string-value-' + utils.uniq()
 			} ]
+		),
+		() => rbf.newSetItemDescriptionRequestBuilder(
+			itemId,
+			'en',
+			'random-test-description-' + utils.uniq()
 		)
 	];
 
