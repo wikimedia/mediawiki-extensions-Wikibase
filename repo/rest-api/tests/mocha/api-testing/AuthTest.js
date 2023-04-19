@@ -85,6 +85,9 @@ describe( 'Auth', () => {
 					value: 'random-string-value-' + utils.uniq()
 				} ]
 			)
+		},
+		{
+			newRequestBuilder: () => rbf.newSetItemLabelRequestBuilder( itemId, 'en', `english label ${utils.uniq()}` )
 		}
 	];
 

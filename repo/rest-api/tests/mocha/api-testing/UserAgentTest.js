@@ -63,6 +63,7 @@ describe( 'User-Agent requests', () => {
 				value: 'random-string-value-' + utils.uniq()
 			} ]
 		),
+		() => rbf.newSetItemLabelRequestBuilder( itemId, 'en', `english label ${utils.uniq()}` ),
 		() => rbf.newSetItemDescriptionRequestBuilder(
 			itemId,
 			'en',

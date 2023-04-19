@@ -354,7 +354,8 @@ describe( 'Conditional requests', () => {
 					path: '/value/content',
 					value: 'random-string-value-' + utils.uniq()
 				} ]
-			)
+			),
+			() => rbf.newSetItemLabelRequestBuilder( itemId, 'en', `english label ${utils.uniq()}` )
 		];
 
 		editRoutes.forEach( ( newRequestBuilder ) => {
