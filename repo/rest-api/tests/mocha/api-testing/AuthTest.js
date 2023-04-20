@@ -91,6 +91,14 @@ describe( 'Auth', () => {
 		}
 	];
 
+	const setDescriptionRequest = {
+		newRequestBuilder: () => rbf.newSetItemDescriptionRequestBuilder(
+			itemId,
+			'en',
+			'random-test-description-' + utils.uniq()
+		)
+	};
+
 	[
 		{
 			newRequestBuilder: () => rbf.newGetItemStatementsRequestBuilder( itemId )
@@ -123,13 +131,7 @@ describe( 'Auth', () => {
 			newRequestBuilder: () => rbf.newGetStatementRequestBuilder( statementId )
 		},
 		// TODO: move into editRequests, once Authorization works
-		{
-			newRequestBuilder: () => rbf.newSetItemDescriptionRequestBuilder(
-				itemId,
-				'en',
-				'random-test-description-' + utils.uniq()
-			)
-		},
+		setDescriptionRequest,
 		...editRequests
 	].forEach( ( { newRequestBuilder, expectedStatusCode = 200, isDestructive } ) => {
 		describe( `Authentication - ${newRequestBuilder().getRouteDescription()}`, () => {
@@ -217,6 +219,16 @@ describe( 'Auth', () => {
 						.makeRequest()
 				);
 			} );
+		} );
+
+		// TODO remove, once Authorization works
+		it( 'Unauthorized bot edit - PUT /entities/items/{item_id}/descriptions/{language_code}', async () => {
+			assertPermissionDenied(
+				await setDescriptionRequest
+					.newRequestBuilder()
+					.withJsonBodyParam( 'bot', true )
+					.makeRequest()
+			);
 		} );
 	} );
 } );
