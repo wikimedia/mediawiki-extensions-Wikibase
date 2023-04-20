@@ -11,20 +11,19 @@ const {
 	createEntity
 } = require( '../helpers/entityHelper' );
 const { requireExtensions } = require( '../../../../../tests/api-testing/utils' );
+const { editRequests, getRequests } = require( '../helpers/happyPathRequestBuilders' );
 
 describe( 'Auth', () => {
 
-	let itemId;
-	let statementId;
-	let stringPropertyId;
+	const requestInputs = {};
 	let user;
 
 	before( async () => {
-		stringPropertyId = ( await createUniqueStringProperty() ).entity.id;
+		requestInputs.stringPropertyId = ( await createUniqueStringProperty() ).entity.id;
 		const createEntityResponse = await createEntity(
 			'item',
 			{
-				claims: [ newLegacyStatementWithRandomStringValue( stringPropertyId ) ],
+				claims: [ newLegacyStatementWithRandomStringValue( requestInputs.stringPropertyId ) ],
 				descriptions: { en: { language: 'en', value: `item-with-statements-${utils.uniq()}` } },
 				labels: { en: { language: 'en', value: `item-with-statements-${utils.uniq()}` } },
 				aliases: {
@@ -32,82 +31,37 @@ describe( 'Auth', () => {
 				}
 			}
 		);
-		itemId = createEntityResponse.entity.id;
-		statementId = createEntityResponse.entity.claims[ stringPropertyId ][ 0 ].id;
+		requestInputs.itemId = createEntityResponse.entity.id;
+		requestInputs.statementId = createEntityResponse.entity.claims[ requestInputs.stringPropertyId ][ 0 ].id;
 		user = await action.mindy();
 	} );
 
-	const editRequests = [
-		() => rbf.newAddItemStatementRequestBuilder(
-			itemId,
-			newStatementWithRandomStringValue( stringPropertyId )
-		),
-		() => rbf.newReplaceItemStatementRequestBuilder(
-			itemId,
-			statementId,
-			newStatementWithRandomStringValue( stringPropertyId )
-		),
-		() => rbf.newReplaceStatementRequestBuilder(
-			statementId,
-			newStatementWithRandomStringValue( stringPropertyId )
-		),
-		() => rbf.newRemoveItemStatementRequestBuilder( itemId, statementId ),
-		() => rbf.newRemoveStatementRequestBuilder( statementId ),
-		() => rbf.newPatchItemStatementRequestBuilder(
-			itemId,
-			statementId,
-			[ {
-				op: 'replace',
-				path: '/value/content',
-				value: 'random-string-value-' + utils.uniq()
-			} ]
-		),
-		() => rbf.newPatchStatementRequestBuilder(
-			statementId,
-			[ {
-				op: 'replace',
-				path: '/value/content',
-				value: 'random-string-value-' + utils.uniq()
-			} ]
-		),
-		() => rbf.newSetItemLabelRequestBuilder( itemId, 'en', `english label ${utils.uniq()}` )
-	];
-
 	const setDescriptionRequest = () => rbf.newSetItemDescriptionRequestBuilder(
-		itemId,
+		requestInputs.itemId,
 		'en',
 		'random-test-description-' + utils.uniq()
 	);
 
 	[
-		() => rbf.newGetItemStatementsRequestBuilder( itemId ),
-		() => rbf.newGetItemStatementRequestBuilder( itemId, statementId ),
-		() => rbf.newGetItemRequestBuilder( itemId ),
-		() => rbf.newGetItemAliasesInLanguageRequestBuilder( itemId, 'en' ),
-		() => rbf.newGetItemAliasesRequestBuilder( itemId ),
-		() => rbf.newGetItemDescriptionRequestBuilder( itemId, 'en' ),
-		() => rbf.newGetItemDescriptionsRequestBuilder( itemId ),
-		() => rbf.newGetItemLabelRequestBuilder( itemId, 'en' ),
-		() => rbf.newGetItemLabelsRequestBuilder( itemId ),
-		() => rbf.newGetStatementRequestBuilder( statementId ),
+		...getRequests,
+		...editRequests,
 
 		// TODO: move into editRequests, once Authorization works
-		setDescriptionRequest,
-		...editRequests
+		setDescriptionRequest
 	].forEach( ( newRequestBuilder ) => {
-		describe( `Authentication - ${newRequestBuilder().getRouteDescription()}`, () => {
+		describe( `Authentication - ${newRequestBuilder( requestInputs ).getRouteDescription()}`, () => {
 
 			afterEach( async () => {
-				if ( newRequestBuilder().getMethod() === 'DELETE' ) {
-					statementId = ( await rbf.newAddItemStatementRequestBuilder(
-						itemId,
-						newStatementWithRandomStringValue( stringPropertyId )
+				if ( newRequestBuilder( requestInputs ).getMethod() === 'DELETE' ) {
+					requestInputs.statementId = ( await rbf.newAddItemStatementRequestBuilder(
+						requestInputs.itemId,
+						newStatementWithRandomStringValue( requestInputs.stringPropertyId )
 					).makeRequest() ).body.id;
 				}
 			} );
 
 			it( 'has an X-Authenticated-User header with the logged in user', async () => {
-				const response = await newRequestBuilder().withUser( user ).makeRequest();
+				const response = await newRequestBuilder( requestInputs ).withUser( user ).makeRequest();
 
 				expect( response ).status.to.be.within( 200, 299 );
 				assert.header( response, 'X-Authenticated-User', user.username );
@@ -118,7 +72,7 @@ describe( 'Auth', () => {
 				before( requireExtensions( [ 'OAuth' ] ) );
 
 				it( 'responds with an error given an invalid bearer token', async () => {
-					const response = newRequestBuilder()
+					const response = newRequestBuilder( requestInputs )
 						.withHeader( 'Authorization', 'Bearer this-is-an-invalid-token' )
 						.makeRequest();
 
@@ -139,15 +93,15 @@ describe( 'Auth', () => {
 		editRequests.forEach( ( newRequestBuilder ) => {
 			describe( 'Protected item', () => {
 				before( async () => {
-					await changeItemProtectionStatus( itemId, 'sysop' ); // protect
+					await changeItemProtectionStatus( requestInputs.itemId, 'sysop' ); // protect
 				} );
 
 				after( async () => {
-					await changeItemProtectionStatus( itemId, 'all' ); // unprotect
+					await changeItemProtectionStatus( requestInputs.itemId, 'all' ); // unprotect
 				} );
 
-				it( `Permission denied - ${newRequestBuilder().getRouteDescription()}`, async () => {
-					assertPermissionDenied( await newRequestBuilder().makeRequest() );
+				it( `Permission denied - ${newRequestBuilder( requestInputs ).getRouteDescription()}`, async () => {
+					assertPermissionDenied( await newRequestBuilder( requestInputs ).makeRequest() );
 				} );
 			} );
 
@@ -168,14 +122,14 @@ describe( 'Auth', () => {
 				} );
 
 				it( 'can not edit if blocked', async () => {
-					const response = await newRequestBuilder().withUser( user ).makeRequest();
+					const response = await newRequestBuilder( requestInputs ).withUser( user ).makeRequest();
 					expect( response ).to.have.status( 403 );
 				} );
 			} );
 
-			it( `Unauthorized bot edit - ${newRequestBuilder().getRouteDescription()}`, async () => {
+			it( `Unauthorized bot edit - ${newRequestBuilder( requestInputs ).getRouteDescription()}`, async () => {
 				assertPermissionDenied(
-					await newRequestBuilder()
+					await newRequestBuilder( requestInputs )
 						.withJsonBodyParam( 'bot', true )
 						.makeRequest()
 				);

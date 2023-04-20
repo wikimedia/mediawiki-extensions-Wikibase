@@ -2,13 +2,13 @@
 
 const { assert, utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const rbf = require( '../helpers/RequestBuilderFactory' );
 const {
 	createItemWithStatements,
 	createUniqueStringProperty,
-	newLegacyStatementWithRandomStringValue,
-	newStatementWithRandomStringValue
+	newLegacyStatementWithRandomStringValue
 } = require( '../helpers/entityHelper' );
+const { editRequests, getRequests } = require( '../helpers/happyPathRequestBuilders' );
+const rbf = require( '../helpers/RequestBuilderFactory' );
 
 function assertValid400Response( response ) {
 	expect( response ).to.have.status( 400 );
@@ -18,77 +18,32 @@ function assertValid400Response( response ) {
 
 describe( 'User-Agent requests', () => {
 
-	let itemId;
-	let statementId;
-	let stringPropertyId;
+	let requestInputs = {};
 
 	before( async () => {
-		stringPropertyId = ( await createUniqueStringProperty() ).entity.id;
+		const stringPropertyId = ( await createUniqueStringProperty() ).entity.id;
 		const createEntityResponse = await createItemWithStatements( [
 			newLegacyStatementWithRandomStringValue( stringPropertyId )
 		] );
-		itemId = createEntityResponse.entity.id;
-		statementId = createEntityResponse.entity.claims[ stringPropertyId ][ 0 ].id;
+		const itemId = createEntityResponse.entity.id;
+		const statementId = createEntityResponse.entity.claims[ stringPropertyId ][ 0 ].id;
+
+		requestInputs = { itemId, statementId, stringPropertyId };
 	} );
 
-	const editRequests = [
-		() => rbf.newAddItemStatementRequestBuilder(
-			itemId,
-			newStatementWithRandomStringValue( stringPropertyId )
-		),
-		() => rbf.newReplaceItemStatementRequestBuilder(
-			itemId,
-			statementId,
-			newStatementWithRandomStringValue( stringPropertyId )
-		),
-		() => rbf.newReplaceStatementRequestBuilder(
-			statementId,
-			newStatementWithRandomStringValue( stringPropertyId )
-		),
-		() => rbf.newRemoveItemStatementRequestBuilder( itemId, statementId ),
-		() => rbf.newRemoveStatementRequestBuilder( statementId ),
-		() => rbf.newPatchItemStatementRequestBuilder(
-			itemId,
-			statementId,
-			[ {
-				op: 'replace',
-				path: '/mainsnak/datavalue/value',
-				value: 'random-string-value-' + utils.uniq()
-			} ]
-		),
-		() => rbf.newPatchStatementRequestBuilder(
-			statementId,
-			[ {
-				op: 'replace',
-				path: '/mainsnak/datavalue/value',
-				value: 'random-string-value-' + utils.uniq()
-			} ]
-		),
-		() => rbf.newSetItemLabelRequestBuilder( itemId, 'en', `english label ${utils.uniq()}` ),
-		() => rbf.newSetItemDescriptionRequestBuilder(
+	[
+		...getRequests,
+		...editRequests,
+		( { itemId } ) => rbf.newSetItemDescriptionRequestBuilder(
 			itemId,
 			'en',
 			'random-test-description-' + utils.uniq()
 		)
-	];
-
-	[
-		() => rbf.newGetItemStatementsRequestBuilder( itemId ),
-		() => rbf.newGetItemStatementRequestBuilder( itemId, statementId ),
-		() => rbf.newGetItemRequestBuilder( itemId ),
-		() => rbf.newGetItemAliasesInLanguageRequestBuilder( itemId, 'en' ),
-		() => rbf.newGetItemAliasesRequestBuilder( itemId ),
-		() => rbf.newGetItemDescriptionRequestBuilder( itemId, 'en' ),
-		() => rbf.newGetItemDescriptionsRequestBuilder( itemId ),
-		() => rbf.newGetItemLabelRequestBuilder( itemId, 'en' ),
-		() => rbf.newGetItemLabelsRequestBuilder( itemId ),
-		() => rbf.newGetStatementRequestBuilder( statementId ),
-		...editRequests
 	].forEach( ( newRequestBuilder ) => {
-		describe( newRequestBuilder().getRouteDescription(), () => {
+		describe( newRequestBuilder( requestInputs ).getRouteDescription(), () => {
 
 			it( 'No User-Agent header provided', async () => {
-				const requestBuilder = newRequestBuilder();
+				const requestBuilder = newRequestBuilder( requestInputs );
 				delete requestBuilder.headers[ 'user-agent' ];
 				const response = await requestBuilder
 					.assertValidRequest()
@@ -98,7 +53,7 @@ describe( 'User-Agent requests', () => {
 			} );
 
 			it( 'Empty User-Agent header provided', async () => {
-				const response = await newRequestBuilder()
+				const response = await newRequestBuilder( requestInputs )
 					.withHeader( 'user-agent', '' )
 					.assertValidRequest()
 					.makeRequest();

@@ -12,6 +12,7 @@ const {
 } = require( '../helpers/entityHelper' );
 const { newAddItemStatementRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
+const { getRequests, editRequests } = require( '../helpers/happyPathRequestBuilders' );
 
 function assertValid304Response( response, revisionId ) {
 	expect( response ).to.have.status( 304 );
@@ -34,18 +35,16 @@ function assertValid200Response( response, revisionId, lastModified ) {
 
 describe( 'Conditional requests', () => {
 
-	let itemId;
-	let statementId;
-	let statementPropertyId;
+	const requestInputs = {};
 	let latestRevisionId;
 	let lastModifiedDate;
 
 	before( async () => {
-		statementPropertyId = ( await createUniqueStringProperty() ).entity.id;
+		requestInputs.stringPropertyId = ( await createUniqueStringProperty() ).entity.id;
 		const createItemResponse = await createEntity(
 			'item',
 			{
-				claims: [ newLegacyStatementWithRandomStringValue( statementPropertyId ) ],
+				claims: [ newLegacyStatementWithRandomStringValue( requestInputs.stringPropertyId ) ],
 				descriptions: { en: { language: 'en', value: `item-with-statements-${utils.uniq()}` } },
 				labels: { en: { language: 'en', value: `item-with-statements-${utils.uniq()}` } },
 				aliases: {
@@ -53,30 +52,19 @@ describe( 'Conditional requests', () => {
 				}
 			}
 		);
-		itemId = createItemResponse.entity.id;
-		statementId = createItemResponse.entity.claims[ statementPropertyId ][ 0 ].id;
+		requestInputs.itemId = createItemResponse.entity.id;
+		requestInputs.statementId = createItemResponse.entity.claims[ requestInputs.stringPropertyId ][ 0 ].id;
 
-		const testItemCreationMetadata = await getLatestEditMetadata( itemId );
+		const testItemCreationMetadata = await getLatestEditMetadata( requestInputs.itemId );
 		lastModifiedDate = testItemCreationMetadata.timestamp;
 		latestRevisionId = testItemCreationMetadata.revid;
 	} );
 
-	[
-		() => rbf.newGetItemRequestBuilder( itemId ),
-		() => rbf.newGetItemAliasesInLanguageRequestBuilder( itemId, 'en' ),
-		() => rbf.newGetItemAliasesRequestBuilder( itemId ),
-		() => rbf.newGetItemDescriptionRequestBuilder( itemId, 'en' ),
-		() => rbf.newGetItemDescriptionsRequestBuilder( itemId ),
-		() => rbf.newGetItemLabelRequestBuilder( itemId, 'en' ),
-		() => rbf.newGetItemLabelsRequestBuilder( itemId ),
-		() => rbf.newGetItemStatementsRequestBuilder( itemId ),
-		() => rbf.newGetItemStatementRequestBuilder( itemId, statementId ),
-		() => rbf.newGetStatementRequestBuilder( statementId )
-	].forEach( ( newRequestBuilder ) => {
-		describe( `If-None-Match - ${newRequestBuilder().getRouteDescription()}`, () => {
+	getRequests.forEach( ( newRequestBuilder ) => {
+		describe( `If-None-Match - ${newRequestBuilder( requestInputs ).getRouteDescription()}`, () => {
 			describe( '200 response', () => {
 				it( 'if the current item revision is newer than the ID provided', async () => {
-					const response = await newRequestBuilder()
+					const response = await newRequestBuilder( requestInputs )
 						.withHeader( 'If-None-Match', makeEtag( latestRevisionId - 1 ) )
 						.assertValidRequest()
 						.makeRequest();
@@ -84,7 +72,7 @@ describe( 'Conditional requests', () => {
 				} );
 
 				it( 'if the current revision is newer than any of the IDs provided', async () => {
-					const response = await newRequestBuilder()
+					const response = await newRequestBuilder( requestInputs )
 						.withHeader( 'If-None-Match', makeEtag( latestRevisionId - 1, latestRevisionId - 2 ) )
 						.assertValidRequest()
 						.makeRequest();
@@ -92,7 +80,7 @@ describe( 'Conditional requests', () => {
 				} );
 
 				it( 'if the provided ETag is not a valid revision ID', async () => {
-					const response = await newRequestBuilder()
+					const response = await newRequestBuilder( requestInputs )
 						.withHeader( 'If-None-Match', '"foo"' )
 						.assertValidRequest()
 						.makeRequest();
@@ -100,7 +88,7 @@ describe( 'Conditional requests', () => {
 				} );
 
 				it( 'if all the provided ETags are not valid revision IDs', async () => {
-					const response = await newRequestBuilder()
+					const response = await newRequestBuilder( requestInputs )
 						.withHeader( 'If-None-Match', makeEtag( 'foo', 'bar' ) )
 						.assertValidRequest()
 						.makeRequest();
@@ -109,7 +97,7 @@ describe( 'Conditional requests', () => {
 
 				it( 'if the current revision is newer than any IDs provided (while others are invalid IDs)',
 					async () => {
-						const response = await newRequestBuilder()
+						const response = await newRequestBuilder( requestInputs )
 							.withHeader( 'If-None-Match', makeEtag( 'foo', latestRevisionId - 1, 'bar' ) )
 							.assertValidRequest()
 							.makeRequest();
@@ -118,7 +106,7 @@ describe( 'Conditional requests', () => {
 				);
 
 				it( 'if the header is invalid', async () => {
-					const response = await newRequestBuilder()
+					const response = await newRequestBuilder( requestInputs )
 						.withHeader( 'If-None-Match', 'not in spec for a If-None-Match header - 200 response' )
 						.assertInvalidRequest()
 						.makeRequest();
@@ -126,7 +114,7 @@ describe( 'Conditional requests', () => {
 				} );
 
 				it( 'If-None-Match takes precedence over If-Modified-Since', async () => {
-					const response = await newRequestBuilder()
+					const response = await newRequestBuilder( requestInputs )
 						.withHeader( 'If-Modified-Since', lastModifiedDate ) // this header on its own would return 304
 						.withHeader( 'If-None-Match', makeEtag( latestRevisionId - 1 ) )
 						.assertValidRequest()
@@ -138,7 +126,7 @@ describe( 'Conditional requests', () => {
 
 			describe( '304 response', () => {
 				it( 'if the current revision ID is the same as the one provided', async () => {
-					const response = await newRequestBuilder()
+					const response = await newRequestBuilder( requestInputs )
 						.withHeader( 'If-None-Match', makeEtag( latestRevisionId ) )
 						.assertValidRequest()
 						.makeRequest();
@@ -146,7 +134,7 @@ describe( 'Conditional requests', () => {
 				} );
 
 				it( 'if the current revision ID is the same as one of the IDs provided', async () => {
-					const response = await newRequestBuilder()
+					const response = await newRequestBuilder( requestInputs )
 						.withHeader( 'If-None-Match', makeEtag( latestRevisionId - 1, latestRevisionId ) )
 						.assertValidRequest()
 						.makeRequest();
@@ -155,7 +143,7 @@ describe( 'Conditional requests', () => {
 
 				it( 'if the current revision ID is the same as one of the IDs provided (while others are invalid IDs)',
 					async () => {
-						const response = await newRequestBuilder()
+						const response = await newRequestBuilder( requestInputs )
 							.withHeader( 'If-None-Match', makeEtag( 'foo', latestRevisionId ) )
 							.assertValidRequest()
 							.makeRequest();
@@ -164,7 +152,7 @@ describe( 'Conditional requests', () => {
 				);
 
 				it( 'if the header is *', async () => {
-					const response = await newRequestBuilder()
+					const response = await newRequestBuilder( requestInputs )
 						.withHeader( 'If-None-Match', '*' )
 						.assertValidRequest()
 						.makeRequest();
@@ -172,7 +160,7 @@ describe( 'Conditional requests', () => {
 				} );
 
 				it( 'If-None-Match takes precedence over If-Modified-Since', async () => {
-					const response = await newRequestBuilder()
+					const response = await newRequestBuilder( requestInputs )
 						// this header on its own would return 200
 						.withHeader( 'If-Modified-Since', 'Fri, 1 Apr 2022 12:00:00 GMT' )
 						.withHeader( 'If-None-Match', makeEtag( latestRevisionId ) )
@@ -183,10 +171,10 @@ describe( 'Conditional requests', () => {
 			} );
 		} );
 
-		describe( `If-Match - ${newRequestBuilder().getRouteDescription()}`, () => {
+		describe( `If-Match - ${newRequestBuilder( requestInputs ).getRouteDescription()}`, () => {
 			describe( '200 response', () => {
 				it( 'if the current item revision matches the ID provided', async () => {
-					const response = await newRequestBuilder()
+					const response = await newRequestBuilder( requestInputs )
 						.withHeader( 'If-Match', makeEtag( latestRevisionId ) )
 						.assertValidRequest()
 						.makeRequest();
@@ -194,7 +182,7 @@ describe( 'Conditional requests', () => {
 				} );
 
 				it( 'if the header is *', async () => {
-					const response = await newRequestBuilder()
+					const response = await newRequestBuilder( requestInputs )
 						.withHeader( 'If-Match', '*' )
 						.assertValidRequest()
 						.makeRequest();
@@ -202,7 +190,7 @@ describe( 'Conditional requests', () => {
 				} );
 
 				it( 'if the current revision matches one of the IDs provided', async () => {
-					const response = await newRequestBuilder()
+					const response = await newRequestBuilder( requestInputs )
 						.withHeader( 'If-Match', makeEtag( latestRevisionId - 1, latestRevisionId ) )
 						.assertValidRequest()
 						.makeRequest();
@@ -213,7 +201,7 @@ describe( 'Conditional requests', () => {
 
 			describe( '412 response', () => {
 				it( 'if the provided revision ID is outdated', async () => {
-					const response = await newRequestBuilder()
+					const response = await newRequestBuilder( requestInputs )
 						.withHeader( 'If-Match', makeEtag( latestRevisionId - 1 ) )
 						.assertValidRequest()
 						.makeRequest();
@@ -221,7 +209,7 @@ describe( 'Conditional requests', () => {
 				} );
 
 				it( 'if all of the provided revision IDs are outdated', async () => {
-					const response = await newRequestBuilder()
+					const response = await newRequestBuilder( requestInputs )
 						.withHeader( 'If-Match', makeEtag( latestRevisionId - 1, latestRevisionId - 2 ) )
 						.assertValidRequest()
 						.makeRequest();
@@ -229,7 +217,7 @@ describe( 'Conditional requests', () => {
 				} );
 
 				it( 'if the provided ETag is not a valid revision ID', async () => {
-					const response = await newRequestBuilder()
+					const response = await newRequestBuilder( requestInputs )
 						.withHeader( 'If-Match', '"foo"' )
 						.assertValidRequest()
 						.makeRequest();
@@ -239,10 +227,10 @@ describe( 'Conditional requests', () => {
 			} );
 		} );
 
-		describe( `If-Modified-Since - ${newRequestBuilder().getRouteDescription()}`, () => {
+		describe( `If-Modified-Since - ${newRequestBuilder( requestInputs ).getRouteDescription()}`, () => {
 			describe( '200 response', () => {
 				it( 'If-Modified-Since header is older than current revision', async () => {
-					const response = await newRequestBuilder()
+					const response = await newRequestBuilder( requestInputs )
 						.assertValidRequest()
 						.withHeader( 'If-Modified-Since', 'Fri, 1 Apr 2022 12:00:00 GMT' )
 						.makeRequest();
@@ -252,7 +240,7 @@ describe( 'Conditional requests', () => {
 
 			describe( '304 response', () => {
 				it( 'If-Modified-Since header is same as current revision', async () => {
-					const response = await newRequestBuilder()
+					const response = await newRequestBuilder( requestInputs )
 						.assertValidRequest()
 						.withHeader( 'If-Modified-Since', lastModifiedDate )
 						.makeRequest();
@@ -263,7 +251,7 @@ describe( 'Conditional requests', () => {
 					const futureDate = new Date(
 						new Date( lastModifiedDate ).getTime() + 5000
 					).toUTCString();
-					const response = await newRequestBuilder()
+					const response = await newRequestBuilder( requestInputs )
 						.assertValidRequest()
 						.withHeader( 'If-Modified-Since', futureDate )
 						.makeRequest();
@@ -273,10 +261,10 @@ describe( 'Conditional requests', () => {
 			} );
 		} );
 
-		describe( `If-Unmodified-Since - ${newRequestBuilder().getRouteDescription()}`, () => {
+		describe( `If-Unmodified-Since - ${newRequestBuilder( requestInputs ).getRouteDescription()}`, () => {
 			describe( '200 response', () => {
 				it( 'If-Unmodified-Since header is same as current revision', async () => {
-					const response = await newRequestBuilder()
+					const response = await newRequestBuilder( requestInputs )
 						.assertValidRequest()
 						.withHeader( 'If-Unmodified-Since', lastModifiedDate )
 						.makeRequest();
@@ -288,7 +276,7 @@ describe( 'Conditional requests', () => {
 					const futureDate = new Date(
 						new Date( lastModifiedDate ).getTime() + 5000
 					).toUTCString();
-					const response = await newRequestBuilder()
+					const response = await newRequestBuilder( requestInputs )
 						.assertValidRequest()
 						.withHeader( 'If-Unmodified-Since', futureDate )
 						.makeRequest();
@@ -299,7 +287,7 @@ describe( 'Conditional requests', () => {
 
 			it( 'responds 412 given the specified date is older than current revision', async () => {
 				const yesterday = new Date( Date.now() - 24 * 60 * 60 * 1000 ).toUTCString();
-				const response = await newRequestBuilder()
+				const response = await newRequestBuilder( requestInputs )
 					.withHeader( 'If-Unmodified-Since', yesterday )
 					.assertValidRequest()
 					.makeRequest();
@@ -312,69 +300,38 @@ describe( 'Conditional requests', () => {
 	describe( 'Conditional edit requests', () => {
 
 		const editRoutes = [
-			() => rbf.newReplaceStatementRequestBuilder(
-				statementId,
-				newStatementWithRandomStringValue( statementPropertyId )
-			),
-			() => rbf.newReplaceItemStatementRequestBuilder(
-				itemId,
-				statementId,
-				newStatementWithRandomStringValue( statementPropertyId )
-			),
-			() => rbf.newRemoveStatementRequestBuilder( statementId ),
-			() => rbf.newRemoveItemStatementRequestBuilder( itemId, statementId ),
-			() => rbf.newAddItemStatementRequestBuilder(
-				itemId,
-				newStatementWithRandomStringValue( statementPropertyId )
-			),
-			() => rbf.newPatchItemStatementRequestBuilder(
-				itemId,
-				statementId,
-				[ {
-					op: 'replace',
-					path: '/value/content',
-					value: 'random-string-value-' + utils.uniq()
-				} ]
-			),
-			() => rbf.newPatchStatementRequestBuilder(
-				statementId,
-				[ {
-					op: 'replace',
-					path: '/value/content',
-					value: 'random-string-value-' + utils.uniq()
-				} ]
-			),
-			() => rbf.newSetItemLabelRequestBuilder( itemId, 'en', `english label ${utils.uniq()}` ),
+			...editRequests,
+
 			() => rbf.newSetItemDescriptionRequestBuilder(
-				itemId,
+				requestInputs.itemId,
 				'en',
 				'random-test-description-' + utils.uniq()
 			)
 		];
 
 		editRoutes.forEach( ( newRequestBuilder ) => {
-			const routeDescription = newRequestBuilder().getRouteDescription();
+			const routeDescription = newRequestBuilder( requestInputs ).getRouteDescription();
 			describe( routeDescription, () => {
 
 				beforeEach( async () => {
-					const testItemCreationMetadata = await getLatestEditMetadata( itemId );
+					const testItemCreationMetadata = await getLatestEditMetadata( requestInputs.itemId );
 					lastModifiedDate = new Date( testItemCreationMetadata.timestamp );
 					latestRevisionId = testItemCreationMetadata.revid;
 				} );
 
 				afterEach( async () => {
-					if ( newRequestBuilder().getMethod() === 'DELETE' ) {
+					if ( newRequestBuilder( requestInputs ).getMethod() === 'DELETE' ) {
 						// restore the item state in between tests that removed the statement
-						statementId = ( await newAddItemStatementRequestBuilder(
-							itemId,
-							newStatementWithRandomStringValue( statementPropertyId )
+						requestInputs.statementId = ( await newAddItemStatementRequestBuilder(
+							requestInputs.itemId,
+							newStatementWithRandomStringValue( requestInputs.stringPropertyId )
 						).makeRequest() ).body.id;
 					}
 				} );
 
 				describe( 'If-Match', () => {
 					it( 'responds with 412 given an outdated revision id', async () => {
-						const response = await newRequestBuilder()
+						const response = await newRequestBuilder( requestInputs )
 							.withHeader( 'If-Match', makeEtag( latestRevisionId - 1 ) )
 							.makeRequest();
 
@@ -382,7 +339,7 @@ describe( 'Conditional requests', () => {
 					} );
 
 					it( 'responds with 2xx and makes the edit given the latest revision id', async () => {
-						const response = await newRequestBuilder()
+						const response = await newRequestBuilder( requestInputs )
 							.withHeader( 'If-Match', makeEtag( latestRevisionId ) )
 							.makeRequest();
 
@@ -392,7 +349,7 @@ describe( 'Conditional requests', () => {
 
 				describe( 'If-Unmodified-Since', () => {
 					it( 'responds with 412 given an outdated last modified date', async () => {
-						const response = await newRequestBuilder()
+						const response = await newRequestBuilder( requestInputs )
 							.withHeader( 'If-Unmodified-Since', 'Wed, 27 Jul 2022 08:24:29 GMT' )
 							.makeRequest();
 
@@ -400,7 +357,7 @@ describe( 'Conditional requests', () => {
 					} );
 
 					it( 'responds with 2xx and makes the edit given the latest modified date', async () => {
-						const response = await newRequestBuilder()
+						const response = await newRequestBuilder( requestInputs )
 							.withHeader( 'If-Unmodified-Since', lastModifiedDate )
 							.makeRequest();
 
@@ -410,7 +367,7 @@ describe( 'Conditional requests', () => {
 
 				describe( 'If-None-Match', () => {
 					it( 'responds 2xx if the header does not match the current revision id', async () => {
-						const response = await newRequestBuilder()
+						const response = await newRequestBuilder( requestInputs )
 							.assertValidRequest()
 							.withHeader( 'If-None-Match', makeEtag( latestRevisionId - 1 ) )
 							.makeRequest();
@@ -420,7 +377,7 @@ describe( 'Conditional requests', () => {
 
 					describe( '412 response', () => {
 						it( 'If-None-Match header is same as current revision', async () => {
-							const response = await newRequestBuilder()
+							const response = await newRequestBuilder( requestInputs )
 								.assertValidRequest()
 								.withHeader( 'If-None-Match', makeEtag( latestRevisionId ) )
 								.makeRequest();
@@ -429,7 +386,7 @@ describe( 'Conditional requests', () => {
 						} );
 
 						it( 'If-None-Match header is a wildcard', async () => {
-							const response = await newRequestBuilder()
+							const response = await newRequestBuilder( requestInputs )
 								.withHeader( 'If-None-Match', '*' )
 								.makeRequest();
 
@@ -441,7 +398,7 @@ describe( 'Conditional requests', () => {
 				describe( 'If-Modified-Since', () => {
 					describe( 'header ignored - 2xx response', () => {
 						it( 'If-Modified-Since header is same as current revision', async () => {
-							const response = await newRequestBuilder()
+							const response = await newRequestBuilder( requestInputs )
 								.assertValidRequest()
 								.withHeader( 'If-Modified-Since', lastModifiedDate )
 								.makeRequest();
@@ -451,7 +408,7 @@ describe( 'Conditional requests', () => {
 
 						it( 'If-Modified-Since header is after current revision', async () => {
 							const tomorrow = new Date( Date.now() + 24 * 60 * 60 * 1000 ).toUTCString();
-							const response = await newRequestBuilder()
+							const response = await newRequestBuilder( requestInputs )
 								.assertValidRequest()
 								.withHeader( 'If-Modified-Since', tomorrow )
 								.makeRequest();
@@ -461,7 +418,7 @@ describe( 'Conditional requests', () => {
 
 						it( 'If-Modified-Since header is before the current revision', async () => {
 							const yesterday = new Date( Date.now() - 24 * 60 * 60 * 1000 ).toUTCString();
-							const response = await newRequestBuilder()
+							const response = await newRequestBuilder( requestInputs )
 								.assertValidRequest()
 								.withHeader( 'If-Modified-Since', yesterday )
 								.makeRequest();
