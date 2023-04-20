@@ -67,7 +67,6 @@
 	"datatypes-type-geo-shape": "The name of a data type for geo-shapes\n{{related|Datatypes-type}}",
 	"datatypes-type-tabular-data": "The name of a data type for tabular-data\n{{related|Datatypes-type}}\n{{Identical|Tabular data}}",
 	"datatypes-type-external-id": "The name of a data type for external identifiers in Wikibase.\n{{related|Datatypes-type}}",
-	"datatypes-type-entity-schema": "The name of a data type for entity schemas in Wikibase.\n{{related|Datatypes-type}}",
 	"version-wikibase": "Name of the Wikibase extension collection, used on [[Special:Version]]\n{{Identical|Wikibase}}",
 	"wikibase-time-calendar-gregorian": "Label displayed with the formatted dates referring to the Gregorian calendar model.\n{{Identical|Gregorian}}",
 	"wikibase-time-calendar-julian": "Label displayed with the formatted dates referring to the Julian calendar model.\n{{Identical|Julian}}",
