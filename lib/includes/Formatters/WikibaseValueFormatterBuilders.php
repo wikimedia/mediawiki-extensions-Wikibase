@@ -115,11 +115,6 @@ class WikibaseValueFormatterBuilders {
 	private $useKartographerMaplinkInWikitext;
 
 	/**
-	 * @var int
-	 */
-	private $entitySchemaNamespace;
-
-	/**
 	 * @var array
 	 */
 	private $thumbLimits;
@@ -158,7 +153,6 @@ class WikibaseValueFormatterBuilders {
 		TermFallbackCacheFacade $termFallbackCacheFacade,
 		EntityLookup $entityLookup,
 		RedirectResolvingLatestRevisionLookup $redirectResolvingLatestRevisionLookup,
-		int $entitySchemaNamespace,
 		EntityExistenceChecker $entityExistenceChecker,
 		EntityTitleTextLookup $entityTitleTextLookup,
 		EntityUrlLookup $entityUrlLookup,
@@ -181,7 +175,6 @@ class WikibaseValueFormatterBuilders {
 		$this->snakFormat = new SnakFormat();
 		$this->kartographerEmbeddingHandler = $kartographerEmbeddingHandler;
 		$this->useKartographerMaplinkInWikitext = $useKartographerMaplinkInWikitext;
-		$this->entitySchemaNamespace = $entitySchemaNamespace;
 		$this->thumbLimits = $thumbLimits;
 		$this->entityExistenceChecker = $entityExistenceChecker;
 		$this->entityTitleTextLookup = $entityTitleTextLookup;
@@ -381,23 +374,6 @@ class WikibaseValueFormatterBuilders {
 				return new InterWikiLinkHtmlFormatter( $this->tabularDataStorageBaseUrl );
 			case SnakFormatter::FORMAT_WIKI:
 				return new InterWikiLinkWikitextFormatter( $this->tabularDataStorageBaseUrl );
-			default:
-				return $this->newStringFormatter( $format );
-		}
-	}
-
-	/**
-	 * @param string $format The desired target format, see SnakFormatter::FORMAT_XXX
-	 * @param FormatterOptions $options
-	 *
-	 * @return ValueFormatter
-	 */
-	public function newEntitySchemaFormatter( $format, FormatterOptions $options ) {
-		switch ( $this->snakFormat->getBaseFormat( $format ) ) {
-			case SnakFormatter::FORMAT_HTML:
-				return new WikiLinkHtmlFormatter( $this->entitySchemaNamespace );
-			case SnakFormatter::FORMAT_WIKI:
-				return new WikiLinkWikitextFormatter( $this->entitySchemaNamespace );
 			default:
 				return $this->newStringFormatter( $format );
 		}

@@ -39,7 +39,6 @@ class DefaultValueFormatterBuildersTest extends ServiceWiringTestCase {
 				'geoShapeStorageBaseUrl' => '',
 				'tabularDataStorageBaseUrl' => '',
 				'sharedCacheDuration' => 0,
-				'entitySchemaNamespace' => 0,
 				'useKartographerMaplinkInWikitext' => false,
 			] ) );
 		$this->serviceContainer->expects( $this->never() )

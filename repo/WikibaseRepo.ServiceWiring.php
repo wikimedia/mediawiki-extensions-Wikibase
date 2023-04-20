@@ -582,7 +582,6 @@ return [
 			$termFallbackCache,
 			WikibaseRepo::getEntityLookup( $services ),
 			$redirectResolvingLatestRevisionLookup,
-			$settings->getSetting( 'entitySchemaNamespace' ),
 			WikibaseRepo::getEntityExistenceChecker( $services ),
 			WikibaseRepo::getEntityTitleTextLookup( $services ),
 			WikibaseRepo::getEntityUrlLookup( $services ),

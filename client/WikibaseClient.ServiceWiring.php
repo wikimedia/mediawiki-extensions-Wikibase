@@ -316,7 +316,6 @@ return [
 			$termFallbackCache,
 			WikibaseClient::getEntityLookup( $services ),
 			$redirectResolvingLatestRevisionLookup,
-			$settings->getSetting( 'entitySchemaNamespace' ),
 			new TitleLookupBasedEntityExistenceChecker(
 				$entityTitleLookup,
 				$services->getLinkBatchFactory()

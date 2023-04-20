@@ -32,7 +32,6 @@ use Wikibase\Repo\Validators\TimestampPrecisionValidator;
 use Wikibase\Repo\Validators\TypeValidator;
 use Wikibase\Repo\Validators\UrlSchemeValidators;
 use Wikibase\Repo\Validators\UrlValidator;
-use Wikibase\Repo\Validators\WikiLinkExistsValidator;
 
 /**
  * Defines validators for the basic well known data types supported by Wikibase.
@@ -252,27 +251,6 @@ class ValidatorBuilders {
 				$this->tabularDataStorageApiUrl
 			);
 		}
-
-		$topValidator = new DataValueValidator(
-			new CompositeValidator( $validators )
-		);
-
-		return [ new TypeValidator( DataValue::class ), $topValidator ];
-	}
-
-	/**
-	 * @return ValueValidator[]
-	 */
-	public function buildEntitySchemaValidators(): array {
-		$validators = [];
-		$validators[] = new RegexValidator(
-			'/^E\d+$/u',
-			false,
-			'illegal-entity-schema-title'
-		);
-		$validators[] = new WikiLinkExistsValidator(
-			640
-		);
 
 		$topValidator = new DataValueValidator(
 			new CompositeValidator( $validators )

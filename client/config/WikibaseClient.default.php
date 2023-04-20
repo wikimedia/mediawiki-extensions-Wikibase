@@ -278,9 +278,6 @@ return call_user_func( function() {
 	// characters (e.g. space, percent, etc.) should NOT be encoded.
 	$defaults['tabularDataStorageBaseUrl'] = 'https://commons.wikimedia.org/wiki/';
 
-	// Namespace id for entity schema data type
-	$defaults['entitySchemaNamespace'] = 640;
-
 	// Disabled entity access
 	$defaults['disabledAccessEntityTypes'] = [];
 

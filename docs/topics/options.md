@@ -840,11 +840,6 @@ An array of client namespace ids defaulting to empty (disabled)
 
 Pages with a matching namespace will include a JSON-LD schema script for search engine optimization (SEO).
 
-#### entitySchemaNamespace
-Namespace id for entity schema data type
-
-DEFAULT: ```640```
-
 #### disabledUsageAspects
 Array of usage aspects that should not be saved in the [wbc_entity_usage] table.
 

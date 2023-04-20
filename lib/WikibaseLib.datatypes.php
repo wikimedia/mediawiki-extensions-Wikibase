@@ -23,7 +23,6 @@ return [
 	'PT:quantity'          => [ 'value-type' => 'quantity' ],
 	'PT:string'            => [ 'value-type' => 'string' ],
 	'PT:tabular-data'      => [ 'value-type' => 'string' ],
-	'PT:entity-schema'     => [ 'value-type' => 'string' ],
 	'PT:time'              => [ 'value-type' => 'time' ],
 	'PT:url'               => [ 'value-type' => 'string' ],
 	'PT:external-id'       => [ 'value-type' => 'string' ],

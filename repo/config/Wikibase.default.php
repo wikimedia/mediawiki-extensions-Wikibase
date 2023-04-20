@@ -383,9 +383,6 @@ return [
 	// using the script there.
 	'enablePopulateWithRandomEntitiesAndTermsScript' => false,
 
-	// Namespace id for entity schema data type
-	'entitySchemaNamespace' => 640,
-
 	'dataBridgeEnabled' => false,
 
 	'changeVisibilityNotificationClientRCMaxAge' => $GLOBALS['wgRCMaxAge'],
