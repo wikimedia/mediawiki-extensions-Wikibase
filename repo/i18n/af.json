@@ -5,7 +5,8 @@
 			"Joris Darlington Quarshie",
 			"Ladsgroup",
 			"Macofe",
-			"Naudefj"
+			"Naudefj",
+			"Rooiratel"
 		]
 	},
 	"wikibase-desc": "Databank vir gestruktureerde data",
@@ -54,7 +55,7 @@
 	"wikibase-snakview-variations-somevalue-label": "onbekende waarde",
 	"wikibase-snakview-variations-novalue-label": "geen waarde",
 	"wikibase-snakview-snaktypeselector-value": "aangepaste waarde",
-	"wikibase-shortcopyrightwarning": "Deur op \"$1\" te kliek stem u tot die [[$2|voorwaardes]] in en gee u onherroeplik toestemming om die bydrae onder die \"[$3 $4]\" te publiseer.",
+	"wikibase-shortcopyrightwarning": "Deur op \"$1\" te kliek stem u tot die [[$2|voorwaardes]] in, en gee u onherroeplik toestemming om u bydrae onder die \"[$3 $4]\" te publiseer.",
 	"wikibase-copyrighttooltip-acknowledge": "Ek aanvaar die voorwaardes vir al my toekomstige wysigings. Moenie die boodskap weer wys nie.",
 	"wikibase-entityselector-more": "meer",
 	"wikibase-wikibaserepopage-pipe-in-alias": "Aliasse wat pype bevat, kan slegs op die bladsy van die entiteit self (met JavaScript geaktiveer) of via die API geredigeer word",

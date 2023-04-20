@@ -37,6 +37,7 @@
 	"wikibase-sitelinks-special": "ٻيون سرزمينون",
 	"wikibase-statementview-rank-normal": "عام درجو",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|حوالو|حوالا}}",
+	"wikibase-shortcopyrightwarning": "\"$1\" کي ڪلڪ ڪرڻ سان توھان [[$2|استعمال جي شرطن]] سان راضپو ڏيکاريو ٿا، ۽ توھان پنھنجي ڀاڱيداري ناقابل واپسي طور [$3 $4] ھيٺ جاري ڪريو ٿا.",
 	"wikibase-validator-label-no-entityid": "ليبل لازمي طور ڪارگر انٽٽي آئڊي نہ ھجي.",
 	"wikibase-wikibaserepopage-not-itemid": "\"$1\" ڪا ڪارگر آئٽم آئڊي نہ آھي.",
 	"wikibase-itembytitle-lookup-page": "صفحو:",

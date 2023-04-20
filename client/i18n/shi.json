@@ -12,6 +12,8 @@
 	"wikibase-editlinks": "Snfl isɣwan",
 	"wikibase-editlinkstitle": "Snfl ilinkn igrutlayn",
 	"wikibase-linkitem-addlinks": "Rnu isɣwan",
+	"wikibase-linkitem-title": "Zdi d tasna",
+	"wikibase-linkitem-linkpage": "Zdi d tasna",
 	"wikibase-linkitem-input-site": "Tutlayt:",
 	"wikibase-linkitem-input-page": "Tasna:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",

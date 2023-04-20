@@ -1,12 +1,22 @@
 {
 	"@metadata": {
 		"authors": [
-			"Servien"
+			"Servien",
+			"Wikiundeplattsnacker"
 		]
 	},
-	"wikibase-editlinks": "Lenken ännern",
+	"wikibase-dataitem": "{{WBREPONAME}} Saak",
+	"wikibase-editlinks": "Linken ännern",
 	"wikibase-editlinkstitle": "Interspraaklenken ännern",
+	"wikibase-linkitem-addlinks": "Links toföögen",
+	"wikibase-linkitem-title": "Link setten",
+	"wikibase-linkitem-linkpage": "Sett Link to Siet:",
+	"wikibase-linkitem-selectlink": "Wähl een Siet ut, to de Du een Link setten willst.",
+	"wikibase-linkitem-input-site": "Spraak:",
+	"wikibase-linkitem-input-page": "Siet:",
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
+	"wikibase-rc-hide-wikidata-hide": "Verstek",
 	"wikibase-rc-hide-wikidata-show": "wiesen",
-	"wikibase-rc-wikibase-edit-title": "Ännern vun {{WBREPONAME}}"
+	"wikibase-rc-wikibase-edit-title": "Ännern vun {{WBREPONAME}}",
+	"wikibase-otherprojects": " In anner Projekten"
 }

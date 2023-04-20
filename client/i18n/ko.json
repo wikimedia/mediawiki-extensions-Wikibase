@@ -118,6 +118,7 @@
 	"notification-bundle-header-page-connection": "<strong>$3</strong> 및 {{PLURAL:$4|다른 문서 1개가|다른 문서 $4개가|100=다른 문서 99개 이상이}} {{WBREPONAME}} 항목에 {{GENDER:$2|연결되었습니다}}.",
 	"notification-link-text-view-item": "항목 {{GENDER:$1|보기}}",
 	"unresolved-property-category": "해결되지 않은 속성이 있는 문서",
+	"unresolved-property-category-desc": "이 분류는 분류의 속성 ID나 레이블로 찾을 수 없는 {{WBREPONAME}} 속성을 참조하는 문서를 나열합니다.",
 	"connected-redirect-category": "{{WBREPONAME}} 항목에 연결된 넘겨주기",
 	"connected-redirect-category-desc": "이 분류는 {{WBREPONAME}} 항목에 연결된 넘겨주기 문서들을 나열합니다.",
 	"wikibase-client-data-bridge-dialog-title": "$1 편집",
