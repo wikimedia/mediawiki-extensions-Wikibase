@@ -363,8 +363,7 @@ describe( 'Conditional requests', () => {
 				} );
 
 				afterEach( async () => {
-					// use requestBuilder.getMethod() once Ic74323223326cc5826b9ff1177dc06100c8e80bb is merged
-					if ( routeDescription.startsWith( 'DELETE' ) ) {
+					if ( newRequestBuilder().getMethod() === 'DELETE' ) {
 						// restore the item state in between tests that removed the statement
 						statementId = ( await newAddItemStatementRequestBuilder(
 							itemId,

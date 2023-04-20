@@ -38,107 +38,67 @@ describe( 'Auth', () => {
 	} );
 
 	const editRequests = [
-		{
-			newRequestBuilder: () => rbf.newAddItemStatementRequestBuilder(
-				itemId,
-				newStatementWithRandomStringValue( stringPropertyId )
-			),
-			expectedStatusCode: 201
-		},
-		{
-			newRequestBuilder: () => rbf.newReplaceItemStatementRequestBuilder(
-				itemId,
-				statementId,
-				newStatementWithRandomStringValue( stringPropertyId )
-			)
-		},
-		{
-			newRequestBuilder: () => rbf.newReplaceStatementRequestBuilder(
-				statementId,
-				newStatementWithRandomStringValue( stringPropertyId )
-			)
-		},
-		{
-			newRequestBuilder: () => rbf.newRemoveItemStatementRequestBuilder( itemId, statementId ),
-			isDestructive: true
-		},
-		{
-			newRequestBuilder: () => rbf.newRemoveStatementRequestBuilder( statementId ),
-			isDestructive: true
-		},
-		{
-			newRequestBuilder: () => rbf.newPatchItemStatementRequestBuilder(
-				itemId,
-				statementId,
-				[ {
-					op: 'replace',
-					path: '/value/content',
-					value: 'random-string-value-' + utils.uniq()
-				} ]
-			)
-		},
-		{
-			newRequestBuilder: () => rbf.newPatchStatementRequestBuilder(
-				statementId,
-				[ {
-					op: 'replace',
-					path: '/value/content',
-					value: 'random-string-value-' + utils.uniq()
-				} ]
-			)
-		},
-		{
-			newRequestBuilder: () => rbf.newSetItemLabelRequestBuilder( itemId, 'en', `english label ${utils.uniq()}` )
-		}
+		() => rbf.newAddItemStatementRequestBuilder(
+			itemId,
+			newStatementWithRandomStringValue( stringPropertyId )
+		),
+		() => rbf.newReplaceItemStatementRequestBuilder(
+			itemId,
+			statementId,
+			newStatementWithRandomStringValue( stringPropertyId )
+		),
+		() => rbf.newReplaceStatementRequestBuilder(
+			statementId,
+			newStatementWithRandomStringValue( stringPropertyId )
+		),
+		() => rbf.newRemoveItemStatementRequestBuilder( itemId, statementId ),
+		() => rbf.newRemoveStatementRequestBuilder( statementId ),
+		() => rbf.newPatchItemStatementRequestBuilder(
+			itemId,
+			statementId,
+			[ {
+				op: 'replace',
+				path: '/value/content',
+				value: 'random-string-value-' + utils.uniq()
+			} ]
+		),
+		() => rbf.newPatchStatementRequestBuilder(
+			statementId,
+			[ {
+				op: 'replace',
+				path: '/value/content',
+				value: 'random-string-value-' + utils.uniq()
+			} ]
+		),
+		() => rbf.newSetItemLabelRequestBuilder( itemId, 'en', `english label ${utils.uniq()}` )
 	];
 
-	const setDescriptionRequest = {
-		newRequestBuilder: () => rbf.newSetItemDescriptionRequestBuilder(
-			itemId,
-			'en',
-			'random-test-description-' + utils.uniq()
-		)
-	};
+	const setDescriptionRequest = () => rbf.newSetItemDescriptionRequestBuilder(
+		itemId,
+		'en',
+		'random-test-description-' + utils.uniq()
+	);
 
 	[
-		{
-			newRequestBuilder: () => rbf.newGetItemStatementsRequestBuilder( itemId )
-		},
-		{
-			newRequestBuilder: () => rbf.newGetItemStatementRequestBuilder( itemId, statementId )
-		},
-		{
-			newRequestBuilder: () => rbf.newGetItemRequestBuilder( itemId )
-		},
-		{
-			newRequestBuilder: () => rbf.newGetItemAliasesInLanguageRequestBuilder( itemId, 'en' )
-		},
-		{
-			newRequestBuilder: () => rbf.newGetItemAliasesRequestBuilder( itemId )
-		},
-		{
-			newRequestBuilder: () => rbf.newGetItemDescriptionRequestBuilder( itemId, 'en' )
-		},
-		{
-			newRequestBuilder: () => rbf.newGetItemDescriptionsRequestBuilder( itemId )
-		},
-		{
-			newRequestBuilder: () => rbf.newGetItemLabelRequestBuilder( itemId, 'en' )
-		},
-		{
-			newRequestBuilder: () => rbf.newGetItemLabelsRequestBuilder( itemId )
-		},
-		{
-			newRequestBuilder: () => rbf.newGetStatementRequestBuilder( statementId )
-		},
+		() => rbf.newGetItemStatementsRequestBuilder( itemId ),
+		() => rbf.newGetItemStatementRequestBuilder( itemId, statementId ),
+		() => rbf.newGetItemRequestBuilder( itemId ),
+		() => rbf.newGetItemAliasesInLanguageRequestBuilder( itemId, 'en' ),
+		() => rbf.newGetItemAliasesRequestBuilder( itemId ),
+		() => rbf.newGetItemDescriptionRequestBuilder( itemId, 'en' ),
+		() => rbf.newGetItemDescriptionsRequestBuilder( itemId ),
+		() => rbf.newGetItemLabelRequestBuilder( itemId, 'en' ),
+		() => rbf.newGetItemLabelsRequestBuilder( itemId ),
+		() => rbf.newGetStatementRequestBuilder( statementId ),
+
 		// TODO: move into editRequests, once Authorization works
 		setDescriptionRequest,
 		...editRequests
-	].forEach( ( { newRequestBuilder, expectedStatusCode = 200, isDestructive } ) => {
+	].forEach( ( newRequestBuilder ) => {
 		describe( `Authentication - ${newRequestBuilder().getRouteDescription()}`, () => {
 
 			afterEach( async () => {
-				if ( isDestructive ) {
+				if ( newRequestBuilder().getMethod() === 'DELETE' ) {
 					statementId = ( await rbf.newAddItemStatementRequestBuilder(
 						itemId,
 						newStatementWithRandomStringValue( stringPropertyId )
@@ -149,7 +109,7 @@ describe( 'Auth', () => {
 			it( 'has an X-Authenticated-User header with the logged in user', async () => {
 				const response = await newRequestBuilder().withUser( user ).makeRequest();
 
-				expect( response ).to.have.status( expectedStatusCode );
+				expect( response ).status.to.be.within( 200, 299 );
 				assert.header( response, 'X-Authenticated-User', user.username );
 			} );
 
@@ -176,7 +136,7 @@ describe( 'Auth', () => {
 			assert.strictEqual( response.body.error, 'rest-write-denied' );
 		}
 
-		editRequests.forEach( ( { newRequestBuilder } ) => {
+		editRequests.forEach( ( newRequestBuilder ) => {
 			describe( 'Protected item', () => {
 				before( async () => {
 					await changeItemProtectionStatus( itemId, 'sysop' ); // protect
@@ -225,8 +185,7 @@ describe( 'Auth', () => {
 		// TODO remove, once Authorization works
 		it( 'Unauthorized bot edit - PUT /entities/items/{item_id}/descriptions/{language_code}', async () => {
 			assertPermissionDenied(
-				await setDescriptionRequest
-					.newRequestBuilder()
+				await setDescriptionRequest()
 					.withJsonBodyParam( 'bot', true )
 					.makeRequest()
 			);

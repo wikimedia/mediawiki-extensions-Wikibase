@@ -36,7 +36,7 @@ class RequestBuilder {
 	 * @return {this}
 	 */
 	withRoute( method, route ) {
-		this.method = method;
+		this.method = method.toUpperCase();
 		this.route = route;
 		return this;
 	}
@@ -191,6 +191,10 @@ class RequestBuilder {
 
 	getRouteDescription() {
 		return `${this.method} ${this.route}`;
+	}
+
+	getMethod() {
+		return this.method;
 	}
 
 }
