@@ -11,6 +11,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescrip
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescriptionResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -39,7 +40,10 @@ class SetItemDescriptionRouteHandler extends SimpleHandler {
 		return new self(
 			WbRestApi::getSetItemDescription(),
 			new ResponseFactory(),
-			new MiddlewareHandler( [ WbRestApi::getUnexpectedErrorHandlerMiddleware() ] )
+			new MiddlewareHandler( [
+				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
+				new UserAgentCheckMiddleware(),
+			] )
 		);
 	}
 
