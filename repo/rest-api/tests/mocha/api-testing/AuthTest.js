@@ -119,6 +119,14 @@ describe( 'Auth', () => {
 		{
 			newRequestBuilder: () => rbf.newGetStatementRequestBuilder( statementId )
 		},
+		// TODO: move into editRequests, once Authorization works
+		{
+			newRequestBuilder: () => rbf.newSetItemDescriptionRequestBuilder(
+				itemId,
+				'en',
+				'random-test-description-' + utils.uniq()
+			)
+		},
 		...editRequests
 	].forEach( ( { newRequestBuilder, expectedStatusCode = 200, isDestructive } ) => {
 		describe( `Authentication - ${newRequestBuilder().getRouteDescription()}`, () => {
