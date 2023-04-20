@@ -65,3 +65,6 @@ $wgWBRepoSettings['redirectBadgeItems'] = static function () use ( $originalRedi
 };
 unset( $originalBadgeItems );
 unset( $originalRedirectBadgeItems );
+
+// T327062, to be removed again in T335107
+$wgWBRepoSettings['tmpEnableLabelsInApiSummaries'] = true;

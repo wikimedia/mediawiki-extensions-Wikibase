@@ -469,4 +469,13 @@ return [
 	 * @see https://phabricator.wikimedia.org/T297393
 	 */
 	'tmpEnableMulLanguageCode' => false,
+
+	/**
+	 * @note: this config option is primarily added for the Wikidata transition use-case and is planned
+	 * to be removed with no warning after the feature has been rolled out successfully. See T335107.
+	 *
+	 * @var bool Whether to render the labels in the parsed edit summaries in API requests
+	 * @see https://phabricator.wikimedia.org/T327062
+	 */
+	'tmpEnableLabelsInApiSummaries' => false,
 ];
