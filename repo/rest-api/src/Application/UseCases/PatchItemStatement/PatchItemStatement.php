@@ -91,8 +91,8 @@ class PatchItemStatement {
 			$this->throwStatementNotFoundException( $statementId );
 		}
 
-		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable hasUser checks for null
-		$user = $request->getUsername() ? User::withUsername( $request->getUsername() ) : User::newAnonymous();
+		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
+		$user = $request->getUsername() !== null ? User::withUsername( $request->getUsername() ) : User::newAnonymous();
 		if ( !$this->permissionChecker->canEdit( $user, $itemId ) ) {
 			throw new UseCaseError(
 				UseCaseError::PERMISSION_DENIED,
