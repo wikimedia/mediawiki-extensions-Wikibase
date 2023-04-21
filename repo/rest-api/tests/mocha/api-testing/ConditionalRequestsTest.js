@@ -310,18 +310,6 @@ describe( 'Conditional requests', () => {
 
 	describe( 'Conditional edit requests', () => {
 
-		beforeEach( async () => {
-			// restore the item state in between tests that may or may not edit its data
-			statementId = ( await newAddItemStatementRequestBuilder(
-				itemId,
-				newStatementWithRandomStringValue( statementPropertyId )
-			).makeRequest() ).body.id;
-
-			const testItemCreationMetadata = await getLatestEditMetadata( itemId );
-			lastModifiedDate = new Date( testItemCreationMetadata.timestamp );
-			latestRevisionId = testItemCreationMetadata.revid;
-		} );
-
 		const editRoutes = [
 			() => rbf.newReplaceStatementRequestBuilder(
 				statementId,
@@ -359,87 +347,73 @@ describe( 'Conditional requests', () => {
 		];
 
 		editRoutes.forEach( ( newRequestBuilder ) => {
-			describe( `If-Match - ${newRequestBuilder().getRouteDescription()}`, () => {
-				it( 'responds with 412 given an outdated revision id', async () => {
-					const response = await newRequestBuilder()
-						.withHeader( 'If-Match', makeEtag( latestRevisionId - 1 ) )
-						.makeRequest();
+			const routeDescription = newRequestBuilder().getRouteDescription();
+			describe( routeDescription, () => {
 
-					assertValid412Response( response );
+				beforeEach( async () => {
+					const testItemCreationMetadata = await getLatestEditMetadata( itemId );
+					lastModifiedDate = new Date( testItemCreationMetadata.timestamp );
+					latestRevisionId = testItemCreationMetadata.revid;
 				} );
 
-				it( 'responds with 2xx and makes the edit given the latest revision id', async () => {
-					const response = await newRequestBuilder()
-						.withHeader( 'If-Match', makeEtag( latestRevisionId ) )
-						.makeRequest();
-
-					assert.ok(
-						response.status >= 200 && response.status < 300,
-						`expected 2xx status, but got ${response.status}`
-					);
-				} );
-			} );
-
-			describe( `If-Unmodified-Since - ${newRequestBuilder().getRouteDescription()}`, () => {
-				it( 'responds with 412 given an outdated last modified date', async () => {
-					const response = await newRequestBuilder()
-						.withHeader( 'If-Unmodified-Since', 'Wed, 27 Jul 2022 08:24:29 GMT' )
-						.makeRequest();
-
-					assertValid412Response( response );
+				afterEach( async () => {
+					// use requestBuilder.getMethod() once Ic74323223326cc5826b9ff1177dc06100c8e80bb is merged
+					if ( routeDescription.startsWith( 'DELETE' ) ) {
+						// restore the item state in between tests that removed the statement
+						statementId = ( await newAddItemStatementRequestBuilder(
+							itemId,
+							newStatementWithRandomStringValue( statementPropertyId )
+						).makeRequest() ).body.id;
+					}
 				} );
 
-				it( 'responds with 2xx and makes the edit given the latest modified date', async () => {
-					const response = await newRequestBuilder()
-						.withHeader( 'If-Unmodified-Since', lastModifiedDate )
-						.makeRequest();
-
-					assert.ok(
-						response.status >= 200 && response.status < 300,
-						`expected 2xx status, but got ${response.status}`
-					);
-				} );
-			} );
-
-			describe( `If-None-Match - ${newRequestBuilder().getRouteDescription()}`, () => {
-				it( 'responds 2xx if the header does not match the current revision id', async () => {
-					const response = await newRequestBuilder()
-						.assertValidRequest()
-						.withHeader( 'If-None-Match', makeEtag( latestRevisionId - 1 ) )
-						.makeRequest();
-
-					assert.ok(
-						response.status >= 200 && response.status < 300,
-						`expected 2xx status, but got ${response.status}`
-					);
-				} );
-
-				describe( '412 response', () => {
-					it( 'If-None-Match header is same as current revision', async () => {
+				describe( 'If-Match', () => {
+					it( 'responds with 412 given an outdated revision id', async () => {
 						const response = await newRequestBuilder()
-							.assertValidRequest()
-							.withHeader( 'If-None-Match', makeEtag( latestRevisionId ) )
+							.withHeader( 'If-Match', makeEtag( latestRevisionId - 1 ) )
 							.makeRequest();
 
 						assertValid412Response( response );
 					} );
 
-					it( 'If-None-Match header is a wildcard', async () => {
+					it( 'responds with 2xx and makes the edit given the latest revision id', async () => {
 						const response = await newRequestBuilder()
-							.withHeader( 'If-None-Match', '*' )
+							.withHeader( 'If-Match', makeEtag( latestRevisionId ) )
+							.makeRequest();
+
+						assert.ok(
+							response.status >= 200 && response.status < 300,
+							`expected 2xx status, but got ${response.status}`
+						);
+					} );
+				} );
+
+				describe( 'If-Unmodified-Since', () => {
+					it( 'responds with 412 given an outdated last modified date', async () => {
+						const response = await newRequestBuilder()
+							.withHeader( 'If-Unmodified-Since', 'Wed, 27 Jul 2022 08:24:29 GMT' )
 							.makeRequest();
 
 						assertValid412Response( response );
 					} );
+
+					it( 'responds with 2xx and makes the edit given the latest modified date', async () => {
+						const response = await newRequestBuilder()
+							.withHeader( 'If-Unmodified-Since', lastModifiedDate )
+							.makeRequest();
+
+						assert.ok(
+							response.status >= 200 && response.status < 300,
+							`expected 2xx status, but got ${response.status}`
+						);
+					} );
 				} );
-			} );
 
-			describe( `If-Modified-Since - ${newRequestBuilder().getRouteDescription()}`, () => {
-				describe( 'header ignored - 2xx response', () => {
-					it( 'If-Modified-Since header is same as current revision', async () => {
+				describe( 'If-None-Match', () => {
+					it( 'responds 2xx if the header does not match the current revision id', async () => {
 						const response = await newRequestBuilder()
 							.assertValidRequest()
-							.withHeader( 'If-Modified-Since', lastModifiedDate )
+							.withHeader( 'If-None-Match', makeEtag( latestRevisionId - 1 ) )
 							.makeRequest();
 
 						assert.ok(
@@ -448,35 +422,69 @@ describe( 'Conditional requests', () => {
 						);
 					} );
 
-					it( 'If-Modified-Since header is after current revision', async () => {
-						const tomorrow = new Date( Date.now() + 24 * 60 * 60 * 1000 ).toUTCString();
-						const response = await newRequestBuilder()
-							.assertValidRequest()
-							.withHeader( 'If-Modified-Since', tomorrow )
-							.makeRequest();
+					describe( '412 response', () => {
+						it( 'If-None-Match header is same as current revision', async () => {
+							const response = await newRequestBuilder()
+								.assertValidRequest()
+								.withHeader( 'If-None-Match', makeEtag( latestRevisionId ) )
+								.makeRequest();
 
-						assert.ok(
-							response.status >= 200 && response.status < 300,
-							`expected 2xx status, but got ${response.status}`
-						);
+							assertValid412Response( response );
+						} );
+
+						it( 'If-None-Match header is a wildcard', async () => {
+							const response = await newRequestBuilder()
+								.withHeader( 'If-None-Match', '*' )
+								.makeRequest();
+
+							assertValid412Response( response );
+						} );
 					} );
+				} );
 
-					it( 'If-Modified-Since header is before the current revision', async () => {
-						const yesterday = new Date( Date.now() - 24 * 60 * 60 * 1000 ).toUTCString();
-						const response = await newRequestBuilder()
-							.assertValidRequest()
-							.withHeader( 'If-Modified-Since', yesterday )
-							.makeRequest();
+				describe( 'If-Modified-Since', () => {
+					describe( 'header ignored - 2xx response', () => {
+						it( 'If-Modified-Since header is same as current revision', async () => {
+							const response = await newRequestBuilder()
+								.assertValidRequest()
+								.withHeader( 'If-Modified-Since', lastModifiedDate )
+								.makeRequest();
 
-						assert.ok(
-							response.status >= 200 && response.status < 300,
-							`expected 2xx status, but got ${response.status}`
-						);
+							assert.ok(
+								response.status >= 200 && response.status < 300,
+								`expected 2xx status, but got ${response.status}`
+							);
+						} );
+
+						it( 'If-Modified-Since header is after current revision', async () => {
+							const tomorrow = new Date( Date.now() + 24 * 60 * 60 * 1000 ).toUTCString();
+							const response = await newRequestBuilder()
+								.assertValidRequest()
+								.withHeader( 'If-Modified-Since', tomorrow )
+								.makeRequest();
+
+							assert.ok(
+								response.status >= 200 && response.status < 300,
+								`expected 2xx status, but got ${response.status}`
+							);
+						} );
+
+						it( 'If-Modified-Since header is before the current revision', async () => {
+							const yesterday = new Date( Date.now() - 24 * 60 * 60 * 1000 ).toUTCString();
+							const response = await newRequestBuilder()
+								.assertValidRequest()
+								.withHeader( 'If-Modified-Since', yesterday )
+								.makeRequest();
+
+							assert.ok(
+								response.status >= 200 && response.status < 300,
+								`expected 2xx status, but got ${response.status}`
+							);
+						} );
 					} );
 				} );
 			} );
 		} );
-
 	} );
 
 } );
