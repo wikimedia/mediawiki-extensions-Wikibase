@@ -343,7 +343,12 @@ describe( 'Conditional requests', () => {
 					value: 'random-string-value-' + utils.uniq()
 				} ]
 			),
-			() => rbf.newSetItemLabelRequestBuilder( itemId, 'en', `english label ${utils.uniq()}` )
+			() => rbf.newSetItemLabelRequestBuilder( itemId, 'en', `english label ${utils.uniq()}` ),
+			() => rbf.newSetItemDescriptionRequestBuilder(
+				itemId,
+				'en',
+				'random-test-description-' + utils.uniq()
+			)
 		];
 
 		editRoutes.forEach( ( newRequestBuilder ) => {

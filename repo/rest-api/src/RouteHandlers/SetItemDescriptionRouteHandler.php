@@ -3,7 +3,9 @@
 namespace Wikibase\Repo\RestApi\RouteHandlers;
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Rest\RequestInterface;
 use MediaWiki\Rest\Response;
+use MediaWiki\Rest\ResponseInterface;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
 use MediaWiki\Rest\Validator\BodyValidator;
@@ -51,6 +53,11 @@ class SetItemDescriptionRouteHandler extends SimpleHandler {
 				new AuthenticationMiddleware(),
 				new ContentTypeCheckMiddleware( [ ContentTypeCheckMiddleware::TYPE_APPLICATION_JSON ] ),
 				new BotRightCheckMiddleware( MediaWikiServices::getInstance()->getPermissionManager(), $responseFactory ),
+				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
+					function ( RequestInterface $request ): string {
+						return $request->getPathParam( self::ITEM_ID_PATH_PARAM );
+					}
+				),
 			] )
 		);
 	}
@@ -86,6 +93,13 @@ class SetItemDescriptionRouteHandler extends SimpleHandler {
 	 */
 	public function getBodyValidator( $contentType ): BodyValidator {
 		return new TypeValidatingJsonBodyValidator( [] );
+	}
+
+	/**
+	 * Preconditions are checked via {@link PreconditionMiddleware}
+	 */
+	public function checkPreconditions(): ?ResponseInterface {
+		return null;
 	}
 
 	public function getParamSettings(): array {
