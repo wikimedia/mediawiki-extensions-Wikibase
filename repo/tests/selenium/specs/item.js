@@ -87,4 +87,28 @@ describe( 'item', function () {
 		browser.pause( 1000 );
 		assert( !ItemPage.editButton.isExisting() );
 	} );
+
+	it( 'has its label not rendered when linked on a Wikipage', function () {
+		const itemId = browser.call( () => WikibaseApi.createItem( Util.getTestString( 'T111346-' ) ) );
+		EntityPage.open( itemId );
+
+		const { wgPageName: itemTitle, wgFormattedNamespaces, wgNamespaceNumber } = browser.execute(
+			// eslint-disable-next-line no-undef
+			() => window.mw.config.get( [ 'wgPageName', 'wgFormattedNamespaces', 'wgNamespaceNumber' ] )
+		);
+		const talkPageTitle = wgFormattedNamespaces[ wgNamespaceNumber + 1 ] + ':' + itemTitle;
+
+		( new Page() ).openTitle( talkPageTitle, { action: 'submit', vehidebetadialog: 1, hidewelcomedialog: 1 } );
+
+		$( '#wpTextbox1' ).waitForExist();
+		$( '#wpTextbox1' ).setValue( `[[${itemTitle}]]` );
+
+		// Now the actual action happens: an api request with action=stashedit that caused T111346
+		$( '#wpSummary' ).click();
+		browser.keys( 'typing some letters so the action=stashedit API request can finish' );
+
+		$( '#wpSave' ).click();
+		$( '#mw-content-text' ).waitForExist();
+		expect( $( '#mw-content-text' ).getText() ).toBe( itemTitle );
+	} );
 } );
