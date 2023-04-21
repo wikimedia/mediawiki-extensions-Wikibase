@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Hooks;
 
 use HtmlArmor;
@@ -46,70 +48,19 @@ use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
  */
 class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook {
 
-	/**
-	 * @var EntityExistenceChecker
-	 */
-	private $entityExistenceChecker;
-
-	/**
-	 * @var EntityIdParser
-	 */
-	private $entityIdParser;
-
-	/**
-	 * @var TermLookup
-	 */
-	private $termLookup;
-
-	/**
-	 * @var EntityNamespaceLookup
-	 */
-	private $localEntityNamespaceLookup;
-
-	/**
-	 * @var InterwikiLookup
-	 */
-	private $interwikiLookup;
-
-	/**
-	 * @var EntityLinkFormatterFactory
-	 */
-	private $linkFormatterFactory;
-
-	/**
-	 * @var SpecialPageFactory
-	 */
-	private $specialPageFactory;
-
-	/**
-	 * @var LanguageFallbackChainFactory
-	 */
-	private $languageFallbackChainFactory;
-
-	/**
-	 * @var LabelDescriptionLookup|null
-	 */
-	private $labelDescriptionLookup;
-
-	/**
-	 * @var EntityUrlLookup
-	 */
-	private $entityUrlLookup;
-
-	/**
-	 * @var LinkTargetEntityIdLookup
-	 */
-	private $linkTargetEntityIdLookup;
-
-	/**
-	 * @var string|null
-	 */
-	private $federatedPropertiesSourceScriptUrl;
-
-	/**
-	 * @var bool
-	 */
-	private $federatedPropertiesEnabled;
+	private EntityExistenceChecker $entityExistenceChecker;
+	private EntityIdParser $entityIdParser;
+	private TermLookup $termLookup;
+	private EntityNamespaceLookup $localEntityNamespaceLookup;
+	private InterwikiLookup $interwikiLookup;
+	private EntityLinkFormatterFactory $linkFormatterFactory;
+	private SpecialPageFactory $specialPageFactory;
+	private LanguageFallbackChainFactory $languageFallbackChainFactory;
+	private ?LabelDescriptionLookup $labelDescriptionLookup = null;
+	private EntityUrlLookup $entityUrlLookup;
+	private LinkTargetEntityIdLookup $linkTargetEntityIdLookup;
+	private ?string $federatedPropertiesSourceScriptUrl;
+	private bool $federatedPropertiesEnabled;
 	private bool $enableLabelsInApiSummaries;
 
 	public static function factory(
@@ -227,8 +178,8 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 		&$text,
 		array &$customAttribs,
 		RequestContext $context,
-		&$html = null
-	) {
+		?string &$html = null
+	): bool {
 		$outTitle = $context->getOutput()->getTitle();
 
 		// For good measure: Don't do anything in case the OutputPage has no Title set.
@@ -277,7 +228,7 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 		LinkTarget $linkTarget,
 		&$text,
 		array &$customAttribs
-		): void {
+	): void {
 		$entityId = $this->linkTargetEntityIdLookup->getEntityId( $linkTarget );
 		$text = $entityId->getSerialization();
 
@@ -310,8 +261,8 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 		&$text,
 		array &$customAttribs,
 		RequestContext $context,
-		&$html = null
-	) {
+		?string &$html = null
+	): bool {
 		$foreignEntityId = $this->parseForeignEntityId( $target );
 		$isLocalEntityNamespace = $target->getInterwiki() === ''
 			&& $this->localEntityNamespaceLookup->isEntityNamespace( $target->getNamespace() );
@@ -398,9 +349,6 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 
 	/**
 	 * Remove the new class from a space separated list of classes.
-	 *
-	 * @param string $classes
-	 * @return string
 	 */
 	private function removeNewClass( string $classes ): string {
 		return implode( ' ', array_filter(
@@ -415,7 +363,7 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 	 * @param TermFallback|null $term
 	 * @return string[]|null
 	 */
-	private function termFallbackToTermData( TermFallback $term = null ) {
+	private function termFallbackToTermData( TermFallback $term = null ): ?array {
 		if ( $term ) {
 			return [
 				'value' => $term->getText(),
@@ -426,12 +374,7 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 		return null;
 	}
 
-	/**
-	 * @param LinkTarget $target
-	 *
-	 * @return EntityId|null
-	 */
-	private function parseForeignEntityId( LinkTarget $target ) {
+	private function parseForeignEntityId( LinkTarget $target ): ?EntityId {
 		$interwiki = $target->getInterwiki();
 
 		if ( $interwiki === '' || !$this->interwikiLookup->isValidInterwiki( $interwiki ) ) {
@@ -489,11 +432,6 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 		return null;
 	}
 
-	/**
-	 * Whether this is an API request.
-	 *
-	 * @return bool
-	 */
 	private function isApiRequest(): bool {
 		return defined( 'MW_API' )
 			&& MW_API !== 'TEST'; // T269608
@@ -501,14 +439,8 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 
 	/**
 	 * Whether we should try to convert links on this page.
-	 *
-	 * @param Title|null $currentTitle
-	 * @param LinkRenderer $linkRenderer
-	 *
-	 * @return bool
-	 * @suppress PhanTypeMismatchDeclaredParam
 	 */
-	private function shouldConvert( Title $currentTitle, LinkRenderer $linkRenderer ) {
+	private function shouldConvert( Title $currentTitle, LinkRenderer $linkRenderer ): bool {
 		return $linkRenderer->isForComment() ||
 			// Note: this may not work right with special page transclusion. If $out->getTitle()
 			// doesn't return the transcluded special page's title, the transcluded text will
@@ -516,7 +448,7 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 			$currentTitle->isSpecialPage();
 	}
 
-	private function shouldConvertNoBadTitle( Title $currentTitle, LinkRenderer $linkRenderer ) {
+	private function shouldConvertNoBadTitle( Title $currentTitle, LinkRenderer $linkRenderer ): bool {
 		return $linkRenderer->isForComment() ||
 			// Note: this may not work right with special page transclusion. If $out->getTitle()
 			// doesn't return the transcluded special page's title, the transcluded text will
