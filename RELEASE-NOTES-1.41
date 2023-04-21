@@ -1,0 +1,96 @@
+= Wikibase 1.41 =
+
+This is not a release yet!
+
+== Upgrading notes for 1.41 ==
+
+Don't forget to always back up your database before upgrading!
+Some specific notes for Wikibase 1.41 upgrades are below:
+
+...
+
+For a general manual to upgrade MediaWiki see:
+
+https://www.mediawiki.org/wiki/Manual:Upgrading
+
+=== Configuration changes for system administrators in 1.41 ===
+
+==== New configuration ====
+
+* ...
+
+==== Changed configuration ====
+
+* ...
+
+==== Removed configuration ====
+
+* ...
+
+=== New user-facing features in 1.41 ===
+
+* ...
+
+=== External library changes in 1.41 ===
+
+==== New external libraries ====
+
+* ...
+
+==== Changed external libraries ====
+
+* ...
+
+==== Removed external libraries ====
+
+* (T12345) ...
+
+=== Bug fixes in 1.41 ===
+
+* (T12345) ...
+
+=== Action API changes in 1.41 ===
+
+* (T12345) ...
+
+=== Languages updated in 1.41 ===
+
+Wikibase supports over 300 languages. Many localisations are updated regularly.
+Below only new and removed languages are listed, as well as changes to languages
+because of Phabricator reports.
+New monolingual support:
+
+* (T12345) ...
+
+Monolingual entries removed as they are now natively supported by MediaWiki:
+
+* (T12345) ...
+
+=== Breaking changes in 1.41 ===
+
+* (T12345) ...
+
+=== Deprecations in 1.41 ===
+
+* (T12345) ...
+
+=== Other changes in 1.41 ===
+
+* (T12345) ...
+
+== Online documentation ==
+
+Installation instructions and FAQ
+		https://www.mediawiki.org/wiki/Wikibase
+
+Developer documentation of Wikibase 1.41
+		https://doc.wikimedia.org/Wikibase/REL1_41/
+
+== Mailing list ==
+
+Discussion regarding the development of Wikidata
+		https://lists.wikimedia.org/mailman/listinfo/wikidata-tech
+
+== IRC help ==
+
+Questions related to wikibase and wikidata can be asked in #wikidata on irc.libera.chat.
