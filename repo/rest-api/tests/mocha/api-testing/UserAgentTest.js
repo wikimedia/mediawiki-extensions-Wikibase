@@ -1,6 +1,6 @@
 'use strict';
 
-const { assert, utils } = require( 'api-testing' );
+const { assert } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const {
 	createItemWithStatements,
@@ -8,7 +8,6 @@ const {
 	newLegacyStatementWithRandomStringValue
 } = require( '../helpers/entityHelper' );
 const { editRequests, getRequests } = require( '../helpers/happyPathRequestBuilders' );
-const rbf = require( '../helpers/RequestBuilderFactory' );
 
 function assertValid400Response( response ) {
 	expect( response ).to.have.status( 400 );
@@ -33,12 +32,7 @@ describe( 'User-Agent requests', () => {
 
 	[
 		...getRequests,
-		...editRequests,
-		( { itemId } ) => rbf.newSetItemDescriptionRequestBuilder(
-			itemId,
-			'en',
-			'random-test-description-' + utils.uniq()
-		)
+		...editRequests
 	].forEach( ( newRequestBuilder ) => {
 		describe( newRequestBuilder( requestInputs ).getRouteDescription(), () => {
 

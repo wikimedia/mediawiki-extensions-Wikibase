@@ -36,18 +36,9 @@ describe( 'Auth', () => {
 		user = await action.mindy();
 	} );
 
-	const setDescriptionRequest = () => rbf.newSetItemDescriptionRequestBuilder(
-		requestInputs.itemId,
-		'en',
-		'random-test-description-' + utils.uniq()
-	);
-
 	[
 		...getRequests,
-		...editRequests,
-
-		// TODO: move into editRequests, once Authorization works
-		setDescriptionRequest
+		...editRequests
 	].forEach( ( newRequestBuilder ) => {
 		describe( `Authentication - ${newRequestBuilder( requestInputs ).getRouteDescription()}`, () => {
 
@@ -134,15 +125,6 @@ describe( 'Auth', () => {
 						.makeRequest()
 				);
 			} );
-		} );
-
-		// TODO remove, once Authorization works
-		it( 'Unauthorized bot edit - PUT /entities/items/{item_id}/descriptions/{language_code}', async () => {
-			assertPermissionDenied(
-				await setDescriptionRequest()
-					.withJsonBodyParam( 'bot', true )
-					.makeRequest()
-			);
 		} );
 	} );
 } );

@@ -2,7 +2,6 @@
 
 const { assert, utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const rbf = require( '../helpers/RequestBuilderFactory' );
 const {
 	getLatestEditMetadata,
 	newStatementWithRandomStringValue,
@@ -299,17 +298,7 @@ describe( 'Conditional requests', () => {
 
 	describe( 'Conditional edit requests', () => {
 
-		const editRoutes = [
-			...editRequests,
-
-			() => rbf.newSetItemDescriptionRequestBuilder(
-				requestInputs.itemId,
-				'en',
-				'random-test-description-' + utils.uniq()
-			)
-		];
-
-		editRoutes.forEach( ( newRequestBuilder ) => {
+		editRequests.forEach( ( newRequestBuilder ) => {
 			const routeDescription = newRequestBuilder( requestInputs ).getRouteDescription();
 			describe( routeDescription, () => {
 

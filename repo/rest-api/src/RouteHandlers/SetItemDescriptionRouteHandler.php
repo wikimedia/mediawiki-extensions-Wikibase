@@ -80,7 +80,8 @@ class SetItemDescriptionRouteHandler extends SimpleHandler {
 					$jsonBody['description'],
 					$jsonBody['tags'] ?? [],
 					$jsonBody['bot'] ?? false,
-					$jsonBody['comment'] ?? null
+					$jsonBody['comment'] ?? null,
+					$this->getUsername()
 				) )
 			);
 		} catch ( UseCaseError $e ) {
@@ -135,5 +136,10 @@ class SetItemDescriptionRouteHandler extends SimpleHandler {
 		);
 
 		return $httpResponse;
+	}
+
+	private function getUsername(): ?string {
+		$mwUser = $this->getAuthority()->getUser();
+		return $mwUser->isRegistered() ? $mwUser->getName() : null;
 	}
 }
