@@ -19,14 +19,12 @@ use ValueParsers\ParseException;
 class ParseExceptionLocalizer implements ExceptionLocalizer {
 
 	public function getExceptionMessage( Exception $exception ): Message {
-		if ( !$this->hasExceptionMessage( $exception ) ) {
+		if ( !( $exception instanceof ParseException ) ) {
 			throw new InvalidArgumentException( '$exception is not a ParseException' );
 		}
 
 		$msg = null;
 
-		/** @var ParseException $exception */
-		'@phan-var ParseException $exception';
 		$expectedFormat = $exception->getExpectedFormat();
 		if ( $expectedFormat !== null ) {
 			// Messages:

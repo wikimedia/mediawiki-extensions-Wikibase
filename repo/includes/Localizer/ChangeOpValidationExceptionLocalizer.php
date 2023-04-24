@@ -29,12 +29,10 @@ class ChangeOpValidationExceptionLocalizer implements ExceptionLocalizer {
 	}
 
 	public function getExceptionMessage( Exception $exception ): Message {
-		if ( !$this->hasExceptionMessage( $exception ) ) {
+		if ( !( $exception instanceof ChangeOpValidationException ) ) {
 			throw new InvalidArgumentException( '$exception is not a ChangeOpValidationException.' );
 		}
 
-		/** @var ChangeOpValidationException $exception */
-		'@phan-var ChangeOpValidationException $exception';
 		$result = $exception->getValidationResult();
 
 		foreach ( $result->getErrors() as $error ) {
