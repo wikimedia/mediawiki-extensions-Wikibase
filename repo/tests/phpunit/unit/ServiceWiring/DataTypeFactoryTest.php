@@ -18,7 +18,7 @@ use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 class DataTypeFactoryTest extends ServiceWiringTestCase {
 
 	public function testConstruction(): void {
-		$testDataType = 'entity-schema';
+		$testDataType = 'external-id';
 		$testDataValueType = 'string';
 		$this->mockService( 'WikibaseRepo.DataTypeDefinitions',
 			new DataTypeDefinitions( [

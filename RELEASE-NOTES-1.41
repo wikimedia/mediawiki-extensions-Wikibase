@@ -7,6 +7,17 @@ This is not a release yet!
 Don't forget to always back up your database before upgrading!
 Some specific notes for Wikibase 1.41 upgrades are below:
 
+* (T333662) The `entity-schema` property data type,
+  which was unintentionally enabled by default for several Wikibase releases
+  despite being disabled as incomplete on Wikidata,
+  has been removed from Wikibase.
+  We expect that no other installations were using it;
+  however, if you need this data type to exist
+  (e.g. if you created any properties with this data type),
+  you can install the EntitySchema extension,
+  which now contains an `entity-schema` data type that is fully compatible
+  with the one previously included in Wikibase.
+
 ...
 
 For a general manual to upgrade MediaWiki see:
@@ -25,6 +36,8 @@ https://www.mediawiki.org/wiki/Manual:Upgrading
 
 ==== Removed configuration ====
 
+* (T333662) The entitySchemaNamespace repo and client setting has been removed;
+  see the note about the disabled `entity-schema` data type above.
 * ...
 
 === New user-facing features in 1.41 ===

@@ -174,26 +174,6 @@ return call_user_func( function() {
 				return PropertySpecificComponentsRdfBuilder::OBJECT_PROPERTY;
 			},
 		],
-		'PT:entity-schema' => [
-			'validator-factory-callback' => function() {
-				$factory = WikibaseRepo::getDefaultValidatorBuilders();
-				// Don't go for commons during unit tests.
-				return $factory->buildEntitySchemaValidators();
-			},
-			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
-				$factory = WikibaseRepo::getDefaultValueFormatterBuilders();
-				return $factory->newEntitySchemaFormatter( $format, $options );
-			},
-			'rdf-builder-factory-callback' => function (
-				$flags,
-				RdfVocabulary $vocab,
-				RdfWriter $writer,
-				EntityMentionListener $tracker,
-				DedupeBag $dedupe
-			) {
-				return new LiteralValueRdfBuilder( null, null );
-			},
-		],
 		'VT:globecoordinate' => [
 			'expert-module' => 'jquery.valueview.experts.GlobeCoordinateInput',
 			'validator-factory-callback' => function() {
