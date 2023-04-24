@@ -68,7 +68,7 @@ class HtmlPageLinkRendererEndHookHandlerTest extends HtmlPageLinkRendererEndHook
 		$this->assertEquals( [], $customAttribs );
 	}
 
-	public function overrideSpecialNewEntityLinkProvider() {
+	public function overrideSpecialNewEntityLinkProvider(): iterable {
 		$entityContentFactory = WikibaseRepo::getEntityContentFactory();
 		$namespaceLookup = $this->getEntityNamespaceLookup();
 
@@ -85,10 +85,11 @@ class HtmlPageLinkRendererEndHookHandlerTest extends HtmlPageLinkRendererEndHook
 
 	/**
 	 * @dataProvider overrideSpecialNewEntityLinkProvider
-	 * @param string $linkTitle
-	 * @param int $ns
 	 */
-	public function testDoHtmlPageLinkRendererBegin_overrideSpecialNewEntityLink( $linkTitle, $ns ) {
+	public function testDoHtmlPageLinkRendererBegin_overrideSpecialNewEntityLink(
+		string $linkTitle,
+		int $ns
+	) {
 		$handler = $this->newInstance();
 
 		$title = Title::makeTitle( $ns, $linkTitle );
@@ -110,7 +111,7 @@ class HtmlPageLinkRendererEndHookHandlerTest extends HtmlPageLinkRendererEndHook
 		$this->assertStringContainsString( $specialPageTitle->getFullText(), $html );
 	}
 
-	public function noOverrideSpecialNewEntityLinkProvider() {
+	public function noOverrideSpecialNewEntityLinkProvider(): iterable {
 		$lookup = $this->getEntityNamespaceLookup();
 		$itemNs = $lookup->getEntityNamespace( 'item' );
 		$propertyNs = $lookup->getEntityNamespace( 'property' );
@@ -126,11 +127,12 @@ class HtmlPageLinkRendererEndHookHandlerTest extends HtmlPageLinkRendererEndHook
 
 	/**
 	 * @dataProvider noOverrideSpecialNewEntityLinkProvider
-	 * @param string $linkText
-	 * @param int $ns
-	 * @param string $interwiki
 	 */
-	public function testDoHtmlPageLinkRendererBegin_avoidSpecialPageReplacement( $linkText, $ns, $interwiki = '' ) {
+	public function testDoHtmlPageLinkRendererBegin_avoidSpecialPageReplacement(
+		string $linkText,
+		int $ns,
+		string $interwiki = ''
+	) {
 		$handler = $this->newInstance();
 
 		$title = Title::makeTitle( $ns, $linkText, '', $interwiki );
@@ -368,7 +370,7 @@ class HtmlPageLinkRendererEndHookHandlerTest extends HtmlPageLinkRendererEndHook
 		$this->assertEquals( $expectedUrl, $customAttribs['href'] );
 	}
 
-	public function entityUrlProvider() {
+	public function entityUrlProvider(): iterable {
 		yield 'existing entity' => [
 			'entityId' => self::ITEM_WITH_LABEL,
 			'expectedUrl' => 'some-wiki/wiki/Item:' . self::ITEM_WITH_LABEL,
@@ -399,7 +401,11 @@ class HtmlPageLinkRendererEndHookHandlerTest extends HtmlPageLinkRendererEndHook
 	/**
 	 * @dataProvider linkTargetProvider
 	 */
-	public function testExtractForeignIdString( ?int $namespace, string $linkTargetText, $expectedOutput ) {
+	public function testExtractForeignIdString(
+		?int $namespace,
+		string $linkTargetText,
+		?string $expectedOutput
+	) {
 		$wrapper = TestingAccessWrapper::newFromObject( $this->newInstance() );
 		$this->db->insert(
 			'interwiki',
@@ -423,7 +429,7 @@ class HtmlPageLinkRendererEndHookHandlerTest extends HtmlPageLinkRendererEndHook
 		$this->assertSame( $expectedOutput, $output );
 	}
 
-	public function linkTargetProvider() {
+	public function linkTargetProvider(): iterable {
 		return [
 			'NS=MAIN, title=null' => [ NS_MAIN, 'ignored', null ], // T260853
 			'NS=SPECIAL, title=null' => [ NS_SPECIAL, 'ignored', null ],
