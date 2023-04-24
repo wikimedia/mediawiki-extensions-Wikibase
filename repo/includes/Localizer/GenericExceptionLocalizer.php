@@ -18,10 +18,6 @@ class GenericExceptionLocalizer implements ExceptionLocalizer {
 		return wfMessage( 'wikibase-error-unexpected', $exception->getMessage() );
 	}
 
-	/**
-	 * @return bool Always true, since DispatchingExceptionLocalizer is able to provide
-	 *         a Message for any kind of exception.
-	 */
 	public function hasExceptionMessage( Exception $exception ): bool {
 		return true;
 	}

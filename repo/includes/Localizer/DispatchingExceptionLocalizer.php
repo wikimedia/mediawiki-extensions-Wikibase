@@ -40,10 +40,6 @@ class DispatchingExceptionLocalizer implements ExceptionLocalizer {
 		throw new InvalidArgumentException( 'ExceptionLocalizer not registered for exception type.' );
 	}
 
-	/**
-	 * @return bool Always true, since DispatchingExceptionLocalizer is able to provide
-	 *         a Message for any kind of exception.
-	 */
 	public function hasExceptionMessage( Exception $exception ): bool {
 		$localizer = $this->getLocalizerForException( $exception );
 
