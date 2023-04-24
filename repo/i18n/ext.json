@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Crucifunked"
+			"Crucifunked",
+			"HackerPunki"
 		]
 	},
+	"wikibase-edit": "edital",
 	"wikibase-add": "azeñil"
 }

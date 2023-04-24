@@ -48,7 +48,7 @@
 	"wikibase-dataitem": "{{WBREPONAME}}項目",
 	"wikibase-editlinks": "編輯連結",
 	"wikibase-editlinkstitle": "編輯跨語言連結",
-	"wikibase-addlinkstitle": "加入跨語言連結",
+	"wikibase-addlinkstitle": "新增跨語言連結",
 	"wikibase-linkitem-addlinks": "新增連結",
 	"wikibase-linkitem-alreadylinked": "您欲連結的頁面已與於中央資料儲存庫的 [$1 項目] 關聯，於本站的連結為 [[$2]]。 \n每個項目僅可以關聯網站的一個頁面，請選擇其他要連結頁面。",
 	"wikibase-linkitem-close": "關閉對話方塊並重新整理頁面",

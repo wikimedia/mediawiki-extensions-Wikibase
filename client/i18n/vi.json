@@ -8,7 +8,8 @@
 			"Nghiemtrongdai VN",
 			"NguoiDungKhongDinhDanh",
 			"Thienhau2003",
-			"Vinhtantran"
+			"Vinhtantran",
+			"Phjtieudoc"
 		]
 	},
 	"wikibase-client-desc": "Trình khách của phần mở rộng Wikibase",
@@ -46,6 +47,7 @@
 	"wikibase-linkitem-not-loggedin": "Bạn cần đăng nhập vào cả wiki này lẫn [$1 kho dữ liệu chung] để sử dụng tính năng này.",
 	"wikibase-linkitem-success-link": "Các trang đã được liên kết với nhau. Xem khoản mục chứa các liên kết trong [$1 kho dữ liệu chung].",
 	"limitreport-entityaccesscount": "Số thực thể Wikibase được tải",
+	"limitreport-entityaccesscount-value": "$1/$2",
 	"wikibase-property-notfound": "Không tìm thấy thuộc tính $1.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Ẩn",

@@ -1,10 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Meerrahtar"
+			"Meerrahtar",
+			"Merrahtar"
 		]
 	},
 	"wikibase-edit": "вуайхэ",
 	"wikibase-add": "лажьхэ",
-	"wikibase-sitelinks-special": "Мудта сайт"
+	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Мудта кӣлэнҍ",
+	"wikibase-sitelinks-special": "Мудта сайт",
+	"wikibase-referenceview-tabs-manual": "Выгкмушш"
 }
