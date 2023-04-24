@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Localizer;
 
 use Exception;
@@ -14,15 +16,7 @@ use Wikibase\Lib\MessageException;
  */
 class MessageExceptionLocalizer implements ExceptionLocalizer {
 
-	/**
-	 * @see ExceptionLocalizer::getExceptionMessage()
-	 *
-	 * @param Exception $exception
-	 *
-	 * @return Message
-	 * @throws InvalidArgumentException
-	 */
-	public function getExceptionMessage( Exception $exception ) {
+	public function getExceptionMessage( Exception $exception ): Message {
 		if ( !$this->hasExceptionMessage( $exception ) ) {
 			throw new InvalidArgumentException( '$exception is not a MessageException.' );
 		}
@@ -32,14 +26,7 @@ class MessageExceptionLocalizer implements ExceptionLocalizer {
 		return new Message( $exception->getKey(), $exception->getParams() );
 	}
 
-	/**
-	 * @see ExceptionLocalizer::hasExceptionMessage()
-	 *
-	 * @param Exception $exception
-	 *
-	 * @return bool
-	 */
-	public function hasExceptionMessage( Exception $exception ) {
+	public function hasExceptionMessage( Exception $exception ): bool {
 		return $exception instanceof MessageException;
 	}
 
