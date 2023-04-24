@@ -119,7 +119,8 @@ abstract class HtmlPageLinkRendererEndHookHandlerTestBase extends MediaWikiLangT
 				$this->newMockEntitySource()
 			),
 			'http://source.wiki/script/',
-			$federatedPropertiesEnabled
+			$federatedPropertiesEnabled,
+			true
 		);
 	}
 
@@ -274,9 +275,12 @@ abstract class HtmlPageLinkRendererEndHookHandlerTestBase extends MediaWikiLangT
 		$diffContext = $this->newContext( 'Foo' );
 		$diffContext->getRequest()->setVal( 'diff', 123 );
 
+		$specialBadTitleContext = $this->newContext( 'Special:Badtitle' );
+
 		return [
 			'normal link, normal view' => [ $linkRenderer, $viewContext ],
 			'normal link, diff view' => [ $linkRenderer, $diffContext ],
+			'normal link, Special:BadTitle' => [ $linkRenderer, $specialBadTitleContext ],
 		];
 	}
 
