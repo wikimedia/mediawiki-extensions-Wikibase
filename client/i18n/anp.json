@@ -3,7 +3,8 @@
 		"authors": [
 			"Angpradesh",
 			"Proabscorp!",
-			"Samyo"
+			"Samyo",
+			"IND-ANP"
 		]
 	},
 	"tooltip-t-wikibase": "सम्बद्ध डाटा भण्डार प्रविष्टि केरऽ कड़ी",
@@ -17,6 +18,7 @@
 	"wikibase-linkitem-selectlink": "कृपा करी क एगो साइट आरू एगो पेज चुनौ जेकरा आपनै इ पेज सँ लिंक करै ल चाहै छियै।",
 	"wikibase-linkitem-input-site": "भाषा",
 	"wikibase-linkitem-input-page": "पन्ना:",
+	"wikibase-linkitem-success-link": "पृष्ठ सफलतापूर्वक जुड़ी गलौ छौं। तोंय कड़ी युक्त आयटम क हमरौ सिनी के [$1 केंद्रीय डेटा रिपोज़िटरी] मँ देखै सकै छौ।",
 	"wikibase-rc-hide-wikidata": "विकिडेटा $1",
 	"wikibase-rc-hide-wikidata-hide": "नुकाबौ",
 	"wikibase-rc-hide-wikidata-show": "देखाबौ",

@@ -12,5 +12,6 @@
 	"wikibase-undo-firstrev": "Kada kawa maupauakan paulahan laman",
 	"wikibase-undo-nocontent": "Kada kawa mamuat isi paubahan $2 matan laman $1",
 	"wikibase-statementview-rank-normal": "Paringkat nurmal",
-	"wikibase-itembytitle-summary": "Special:ItemByTitle dipakai gasan mahaga butir nang rasuk gasan laman khusus pada situs tahubung.<br />Isian panambaian, \"{{int:wikibase-itembytitle-lookup-site}}\", adalah wadah Pian mamasukakan basa dan kode situs.<br />Pada isian kadua, \"{{int:wikibase-itembytitle-lookup-page}}\", Pian musti mamasukakan judul nang sama bujur wan rasuk lawan tampaian nang ada pada situs tahubung."
+	"wikibase-itembytitle-summary": "Special:ItemByTitle dipakai gasan mahaga butir nang rasuk gasan laman khusus pada situs tahubung.<br />Isian panambaian, \"{{int:wikibase-itembytitle-lookup-site}}\", adalah wadah Pian mamasukakan basa dan kode situs.<br />Pada isian kadua, \"{{int:wikibase-itembytitle-lookup-page}}\", Pian musti mamasukakan judul nang sama bujur wan rasuk lawan tampaian nang ada pada situs tahubung.",
+	"wikibase-api-editconflict": "Pambabakan bacakut. Kada kawa manyimpan ralatan pahanyarnya."
 }

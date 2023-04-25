@@ -164,6 +164,7 @@
 	"wikibase-validator-bad-type": "$2 вместо $1",
 	"wikibase-validator-too-long": "Длина должна быть не более чем $1 {{PLURAL:$1|символ|символа|символов}}",
 	"wikibase-validator-description-too-long": "Длина описания должна быть не более чем $1 {{PLURAL:$1|символ|символа|символов}}",
+	"wikibase-validator-alias-too-short": "Каждый псевдоним должен быть длинной как минимум в {{PLURAL:$1|один символ|$1 символа|$1 символов}}",
 	"wikibase-validator-too-short": "Длина должна быть не менее чем $1 {{PLURAL:$1|символ|символа|символов}}",
 	"wikibase-validator-too-high": "Вне диапазона, должно быть не больше, чем $1",
 	"wikibase-validator-too-low": "Вне диапазона, должно быть не меньше, чем $1",

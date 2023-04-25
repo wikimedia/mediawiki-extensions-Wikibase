@@ -6,7 +6,7 @@
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}} Saak",
-	"wikibase-editlinks": "Lenken ännern",
+	"wikibase-editlinks": "Linken ännern",
 	"wikibase-editlinkstitle": "Interspraaklenken ännern",
 	"wikibase-linkitem-addlinks": "Links toföögen",
 	"wikibase-linkitem-title": "Link setten",
@@ -17,5 +17,6 @@
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
 	"wikibase-rc-hide-wikidata-hide": "Verstek",
 	"wikibase-rc-hide-wikidata-show": "wiesen",
-	"wikibase-rc-wikibase-edit-title": "Ännern vun {{WBREPONAME}}"
+	"wikibase-rc-wikibase-edit-title": "Ännern vun {{WBREPONAME}}",
+	"wikibase-otherprojects": " In anner Projekten"
 }
