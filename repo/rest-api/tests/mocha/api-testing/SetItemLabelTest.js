@@ -131,6 +131,18 @@ describe( 'PUT /entities/items/{item_id}/labels/{language_code}', () => {
 			assert.include( response.body.message, invalidLanguageCode );
 		} );
 
+		it( 'invalid label', async () => {
+			const invalidLabel = 'tab characters \t not allowed';
+			const response = await newSetItemLabelRequestBuilder( testItemId, 'en', invalidLabel )
+				.assertValidRequest()
+				.makeRequest();
+
+			assert.strictEqual( response.status, 400 );
+			assert.strictEqual( response.header[ 'content-language' ], 'en' );
+			assert.strictEqual( response.body.code, 'invalid-label' );
+			assert.include( response.body.message, invalidLabel );
+		} );
+
 		it( 'label empty', async () => {
 			const comment = 'Empty label';
 			const emptyLabel = '';
@@ -159,13 +171,79 @@ describe( 'PUT /entities/items/{item_id}/labels/{language_code}', () => {
 			assert.strictEqual( response.status, 400 );
 			assert.strictEqual( response.header[ 'content-language' ], 'en' );
 			assert.strictEqual( response.body.code, 'label-too-long' );
-			assert.strictEqual( response.body.message, 'Label must be no more than ' + maxLabelLength +
-				' characters long' );
+			assert.strictEqual(
+				response.body.message,
+				`Label must be no more than ${maxLabelLength} characters long`
+			);
 			assert.deepEqual(
 				response.body.context,
 				{ value: labelTooLong, 'character-limit': maxLabelLength }
 			);
 
+		} );
+
+		it( 'label equals description', async () => {
+			const language = 'en';
+			const description = `some-description-${utils.uniq()}`;
+			const createEntityResponse = await entityHelper.createEntity( 'item', {
+				labels: [ { language: language, value: `some-label-${utils.uniq()}` } ],
+				descriptions: [ { language: language, value: description } ]
+			} );
+			testItemId = createEntityResponse.entity.id;
+
+			const comment = 'Label equals description';
+			const response = await newSetItemLabelRequestBuilder(
+				testItemId,
+				language,
+				description
+			).withJsonBodyParam( 'comment', comment )
+				.assertValidRequest()
+				.makeRequest();
+
+			assert.strictEqual( response.status, 400 );
+			assert.strictEqual( response.header[ 'content-language' ], 'en' );
+			assert.strictEqual( response.body.code, 'label-description-same-value' );
+			assert.strictEqual(
+				response.body.message,
+				`Label and description for language code '${language}' can not have the same value.`
+			);
+			assert.deepEqual( response.body.context, { language: language } );
+		} );
+
+		it( 'item with same label and description already exists', async () => {
+			const languageCode = 'en';
+			const label = `test-label-${utils.uniq()}`;
+			const description = `test-description-${utils.uniq()}`;
+			const existingEntityResponse = await entityHelper.createEntity( 'item', {
+				labels: [ { language: languageCode, value: label } ],
+				descriptions: [ { language: languageCode, value: description } ]
+			} );
+			const existingItemId = existingEntityResponse.entity.id;
+			const createEntityResponse = await entityHelper.createEntity( 'item', {
+				labels: [ { language: languageCode, value: `label-to-be-replaced-${utils.uniq()}` } ],
+				descriptions: [ { language: languageCode, value: description } ]
+			} );
+			testItemId = createEntityResponse.entity.id;
+
+			const response = await newSetItemLabelRequestBuilder( testItemId, languageCode, label )
+				.assertValidRequest().makeRequest();
+			assert.strictEqual( response.status, 400 );
+			assert.strictEqual( response.header[ 'content-language' ], 'en' );
+			assert.strictEqual( response.body.code, 'item-label-description-duplicate' );
+			assert.strictEqual(
+				response.body.message,
+				`Item ${existingItemId} already has label '${label}' associated with ` +
+				`language code '${languageCode}', using the same description text.`
+			);
+			assert.deepEqual(
+				response.body.context,
+				{
+					language: languageCode,
+					label: label,
+					description: description,
+					'matching-item-id': existingItemId
+				}
+			);
 		} );
 
 		it( 'comment too long', async () => {

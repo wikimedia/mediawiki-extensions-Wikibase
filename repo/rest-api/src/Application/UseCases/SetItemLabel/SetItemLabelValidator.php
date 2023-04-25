@@ -3,10 +3,11 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel;
 
 use LogicException;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
-use Wikibase\Repo\RestApi\Application\Validation\LabelValidator;
+use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 
 /**
@@ -17,13 +18,13 @@ class SetItemLabelValidator {
 	private ItemIdValidator $itemIdValidator;
 	private LanguageCodeValidator $languageCodeValidator;
 	private EditMetadataValidator $editMetadataValidator;
-	private LabelValidator $labelValidator;
+	private ItemLabelValidator $labelValidator;
 
 	public function __construct(
 		ItemIdValidator $itemIdValidator,
 		LanguageCodeValidator $languageCodeValidator,
 		EditMetadataValidator $editMetadataValidator,
-		LabelValidator $labelValidator
+		ItemLabelValidator $labelValidator
 	) {
 		$this->itemIdValidator = $itemIdValidator;
 		$this->languageCodeValidator = $languageCodeValidator;
@@ -37,7 +38,7 @@ class SetItemLabelValidator {
 	public function assertValidRequest( SetItemLabelRequest $request ): void {
 		$this->validateItemId( $request->getItemId() );
 		$this->validateLanguageCode( $request->getLanguageCode() );
-		$this->validateLabel( $request->getLabel() );
+		$this->validateLabel( $request->getItemId(), $request->getLanguageCode(), $request->getLabel() );
 		$this->validateEditTags( $request->getEditTags() );
 		$this->validateComment( $request->getComment() );
 	}
@@ -73,23 +74,46 @@ class SetItemLabelValidator {
 	/**
 	 * @throws UseCaseError
 	 */
-	private function validateLabel( string $label ): void {
-		$validationError = $this->labelValidator->validate( $label );
+	private function validateLabel( string $itemId, string $languageCode, string $label ): void {
+		$itemId = new ItemId( $itemId );
+		$validationError = $this->labelValidator->validate( $itemId, $languageCode, $label );
 		if ( $validationError ) {
 			$errorCode = $validationError->getCode();
 			$context = $validationError->getContext();
 
 			switch ( $errorCode ) {
-				case LabelValidator::LABEL_EMPTY:
+				case ItemLabelValidator::CODE_INVALID:
+					throw new UseCaseError(
+						UseCaseError::INVALID_LABEL,
+						"Not a valid label: {$context[ItemLabelValidator::CONTEXT_VALUE]}"
+					);
+				case ItemLabelValidator::CODE_EMPTY:
 					throw new UseCaseError(
 						UseCaseError::LABEL_EMPTY,
 						'Label must not be empty'
 					);
-				case LabelValidator::LABEL_TOO_LONG:
-					$maxLabelLength = $context[LabelValidator::CONTEXT_LIMIT];
+				case ItemLabelValidator::CODE_TOO_LONG:
+					$maxLabelLength = $context[ItemLabelValidator::CONTEXT_LIMIT];
 					throw new UseCaseError(
 						UseCaseError::LABEL_TOO_LONG,
 						"Label must be no more than $maxLabelLength characters long",
+						$context
+					);
+				case ItemLabelValidator::CODE_LABEL_DESCRIPTION_EQUAL:
+					$language = $context[ItemLabelValidator::CONTEXT_LANGUAGE];
+					throw new UseCaseError(
+						UseCaseError::LABEL_DESCRIPTION_SAME_VALUE,
+						"Label and description for language code '$language' can not have the same value.",
+						$context
+					);
+				case ItemLabelValidator::CODE_LABEL_DESCRIPTION_DUPLICATE:
+					$language = $context[ItemLabelValidator::CONTEXT_LANGUAGE];
+					$matchingItemId = $context[ItemLabelValidator::CONTEXT_MATCHING_ITEM_ID];
+					$label = $context[ItemLabelValidator::CONTEXT_LABEL];
+					throw new UseCaseError(
+						UseCaseError::ITEM_LABEL_DESCRIPTION_DUPLICATE,
+						"Item $matchingItemId already has label '$label' associated with " .
+						"language code '$language', using the same description text.",
 						$context
 					);
 				default:

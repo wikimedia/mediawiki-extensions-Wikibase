@@ -44,7 +44,6 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
-use Wikibase\Repo\RestApi\Application\Validation\LabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
@@ -65,6 +64,7 @@ use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatchValidator;
 use Wikibase\Repo\RestApi\Infrastructure\SiteLinksReadModelConverter;
 use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoDescriptionLanguageCodeValidator;
 use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoItemDescriptionValidator;
+use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoItemLabelValidator;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\ResponseFactory;
@@ -365,10 +365,6 @@ return [
 	},
 
 	'WbRestApi.SetItemLabel' => function( MediaWikiServices $services ): SetItemLabel {
-		$settings = WikibaseRepo::getSettings( $services );
-		$constraints = $settings->getSetting( 'string-limits' )['multilang'];
-		$maxLabelLength = $constraints['length'];
-
 		return new SetItemLabel(
 			new SetItemLabelValidator(
 				new ItemIdValidator(),
@@ -377,7 +373,11 @@ return [
 					CommentStore::COMMENT_CHARACTER_LIMIT,
 					ChangeTags::listExplicitlyDefinedTags(),
 				),
-				new LabelValidator( $maxLabelLength )
+				new WikibaseRepoItemLabelValidator(
+					WikibaseRepo::getTermValidatorFactory( $services ),
+					WikibaseRepo::getItemTermsCollisionDetector( $services ),
+					WbRestApi::getItemDataRetriever( $services )
+				)
 			),
 			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever( WikibaseRepo::getEntityRevisionLookup() ),
 			WbRestApi::getItemDataRetriever( $services ),
