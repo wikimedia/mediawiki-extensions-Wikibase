@@ -6,6 +6,7 @@ namespace Wikibase\Repo\Tests\Hooks;
 
 use CentralIdLookup;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\WikiMap\WikiMap;
 use MediaWikiIntegrationTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use RecentChange;
@@ -16,7 +17,6 @@ use Wikibase\Lib\Changes\ItemChange;
 use Wikibase\Repo\Hooks\RecentChangeSaveHookHandler;
 use Wikibase\Repo\Notifications\ChangeHolder;
 use Wikibase\Repo\Store\SubscriptionLookup;
-use WikiMap;
 
 /**
  * @covers \Wikibase\Repo\Hooks\RecentChangeSaveHookHandler
