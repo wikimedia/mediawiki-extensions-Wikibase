@@ -62,7 +62,6 @@
 	"datatypes-type-geo-shape": "Geografische Form",
 	"datatypes-type-tabular-data": "Tabellarische Daten",
 	"datatypes-type-external-id": "Externer Identifikator",
-	"datatypes-type-entity-schema": "Entitäten-Schema",
 	"version-wikibase": "Wikibase-Erweiterungen",
 	"wikibase-time-calendar-gregorian": "Gregorianisch",
 	"wikibase-time-calendar-julian": "Julianisch",

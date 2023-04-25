@@ -68,7 +68,6 @@
 	"datatypes-type-geo-shape": "地理形狀",
 	"datatypes-type-tabular-data": "表格資料",
 	"datatypes-type-external-id": "外部辨識",
-	"datatypes-type-entity-schema": "實體架構",
 	"version-wikibase": "Wikibase",
 	"wikibase-time-calendar-gregorian": "格里曆",
 	"wikibase-time-calendar-julian": "儒略曆",

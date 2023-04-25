@@ -157,7 +157,6 @@
 	"wikibase-validator-check-file-type": "Falta la estensión del ficheru.",
 	"wikibase-validator-illegal-geo-shape-title": "El valor tien de principiar con <code>Data:</code> y acabar con <code>.map</code>. Amás, el títulu nun puede tener caráuteres como dos puntos, almuhadina o tubería («:» «#» «|»).",
 	"wikibase-validator-illegal-tabular-data-title": "El valor tien d'empezar con <code>Data:</code> y terminar con <code>.tab</code>. Amás, el títulu nun tien de contener carauteres especiales como dos puntos, almuhadina o tubería.",
-	"wikibase-validator-illegal-entity-schema-title": "El valor tien d'empezar con <code>E</code> ya'l restu tienen de ser sólo díxitos.",
 	"wikibase-validator-no-such-media": "El ficheru «$1» nun esiste'n [https://commons.wikimedia.org/ Wikimedia Commons].",
 	"wikibase-validator-no-such-sitelink": "Nun pudo alcontrase l'enllaz a «$1» al intentar editar insinies.",
 	"wikibase-validator-page-not-exists": "La páxina «$1» nun esiste.",

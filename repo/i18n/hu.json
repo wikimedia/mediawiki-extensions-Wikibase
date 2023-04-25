@@ -168,7 +168,6 @@
 	"wikibase-validator-check-file-type": "A fájlkiterjesztés hiányzik.",
 	"wikibase-validator-illegal-geo-shape-title": "Az értéknek a <code>Data:</code> szöveggel kell kezdődnie és <code>.map</code>-pel végződnie. Ezen kívül a cím nem tartalmazhat olyan karaktereket, mint a vessző, kettőskereszt vagy függőleges vonal.",
 	"wikibase-validator-illegal-tabular-data-title": "Az értéknek a <code>Data:</code> szöveggel kell kezdődnie és <code>.tab</code>-bel végződnie. Ezen kívül a cím nem tartalmazhat olyan karaktereket, mint a vessző, kettőskereszt vagy függőleges vonal.",
-	"wikibase-validator-illegal-entity-schema-title": "Az értéknek <code>E</code>-vel kell kezdődnie, és számjegyekkel kell folytatódnia.",
 	"wikibase-validator-no-such-media": "A(z) „$1” fájl nem létezik a [https://commons.wikimedia.org/ Wikimédia Commonsban].",
 	"wikibase-validator-no-such-sitelink": "Nem található a(z) „$1” oldalhoz tartozó oldalhivatkozás, aminek lehetne szerkeszteni a jelvényeit.",
 	"wikibase-validator-page-not-exists": "A(z) „$1” lap nem létezik.",

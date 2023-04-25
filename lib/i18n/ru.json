@@ -73,7 +73,6 @@
 	"datatypes-type-geo-shape": "Географическая форма",
 	"datatypes-type-tabular-data": "Табличные данные",
 	"datatypes-type-external-id": "Внешний идентификатор",
-	"datatypes-type-entity-schema": "Схема элемента",
 	"version-wikibase": "Вики-база",
 	"wikibase-time-calendar-gregorian": "Григорианский",
 	"wikibase-time-calendar-julian": "Юлианский",

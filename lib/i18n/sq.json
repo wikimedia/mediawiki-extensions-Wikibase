@@ -56,7 +56,6 @@
 	"datatypes-type-geo-shape": "Formë gjeografike",
 	"datatypes-type-tabular-data": "Të dhëna tabelash",
 	"datatypes-type-external-id": "Identifikues i jashtëm",
-	"datatypes-type-entity-schema": "Skema e entitetit",
 	"version-wikibase": "Wikibase",
 	"wikibase-time-calendar-gregorian": "Gregorian",
 	"wikibase-time-calendar-julian": "Julian",

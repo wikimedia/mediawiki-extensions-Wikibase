@@ -60,7 +60,6 @@
 	"datatypes-type-geo-shape": "Forma geogràfica",
 	"datatypes-type-tabular-data": "Dades tabulars",
 	"datatypes-type-external-id": "Identificador extern",
-	"datatypes-type-entity-schema": "Esquema d'entitat",
 	"version-wikibase": "Wikibase",
 	"wikibase-time-calendar-gregorian": "Gregorià",
 	"wikibase-time-calendar-julian": "Julià",

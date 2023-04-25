@@ -56,7 +56,6 @@
 	"datatypes-type-geo-shape": "Geografska oblika",
 	"datatypes-type-tabular-data": "Tabularni podatki",
 	"datatypes-type-external-id": "Zunanji identifikator",
-	"datatypes-type-entity-schema": "Shema entitet",
 	"version-wikibase": "Wikibase",
 	"wikibase-time-calendar-gregorian": "gregorijanski",
 	"wikibase-time-calendar-julian": "julijanski",

@@ -174,7 +174,6 @@
 	"wikibase-validator-check-file-type": "Phần mở rộng tập tin bị thiếu.",
 	"wikibase-validator-illegal-geo-shape-title": "Giá trị phải bắt đầu bằng <code>Data:</code> và kết thúc bằng <code>.map</code>. Ngoài ra, tên không thể chứa ký tự như dấu hai chấm, dấu thăng, hoặc dấu sổ thẳng.",
 	"wikibase-validator-illegal-tabular-data-title": "Giá trị phải bắt đầu bằng <code>Data:</code> và kết thúc bằng <code>.tab</code>. Ngoài ra, tên không thể chứa ký tự như dấu hai chấm, dấu thăng, hoặc dấu sổ thẳng.",
-	"wikibase-validator-illegal-entity-schema-title": "Giá trị phải bắt đầu bằng <code>E</code> và nối tiếp bằng các con số.",
 	"wikibase-validator-no-such-media": "Tập tin “$1” không tồn tại trên [https://commons.wikimedia.org/wiki/Special:MyLanguage Wikimedia Commons].",
 	"wikibase-validator-no-such-sitelink": "Không tìm thấy trang dịch vụ “$1” khi sửa đổi các phù hiệu.",
 	"wikibase-validator-page-not-exists": "Trang “$1” không tồn tại.",

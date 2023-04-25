@@ -148,7 +148,6 @@
 	"wikibase-validator-check-file-type": "Datajowe rozšěrjenje faluje.",
 	"wikibase-validator-illegal-geo-shape-title": "Hódnota dyrbi z <code>Data:</code> započeć a z <code>.map</code> kónčić. Přidatnje njeměł titul wěste znamješka kaž dwójne dypki abo padorune smužki wobsahować.",
 	"wikibase-validator-illegal-tabular-data-title": "Hódnota dyrbi z <code>Data:</code> započeć a z <code>.tab</code> kónčić. Přidatnje njeměł titul wěste znamješka kaž dwójne dypki abo padorune smužki wobsahować.",
-	"wikibase-validator-illegal-entity-schema-title": "Hódnota dyrbi z <code>E</code> započeć a zbytk měł jeničce z ličbow wobstać.",
 	"wikibase-validator-no-such-media": "Dataja „$1“ njeeksistuje na [https://commons.wikimedia.org/ Wikimedia Commons].",
 	"wikibase-validator-page-not-exists": "Strona „$1“ njeeksistuje.",
 	"wikibase-validator-not-a-language": "„$1“ njeje znaty rěčny kod.",

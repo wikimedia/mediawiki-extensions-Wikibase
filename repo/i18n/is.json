@@ -155,7 +155,6 @@
 	"wikibase-validator-check-file-type": "Skráarendinguna vantar.",
 	"wikibase-validator-illegal-geo-shape-title": "Gildið verður að byrja á <code>Data:</code> og enda á  <code>.map</code>. Auk þess má titilinn ekki innihalda stafi eins og punkt, myllumerki og pípumerki.",
 	"wikibase-validator-illegal-tabular-data-title": "Gildið verður að byrja á <code>Data:</code> og enda á  <code>.tab</code>. Auk þess má titilinn ekki innihalda stafi eins og punkt, myllumerki og pípumerki.",
-	"wikibase-validator-illegal-entity-schema-title": "Gildi verður að byrja á <code>E</code> og restin á að vera eingöngu tölustafir.",
 	"wikibase-validator-no-such-media": "Skráin \"$1\" er ekki til á [https://commons.wikimedia.org/ Wikimedia Commons].",
 	"wikibase-validator-no-such-sitelink": "Fann ekki vefsvæðistengil á „$1“ þegar merki var bætt við.",
 	"wikibase-validator-page-not-exists": "Síðan „$1“ er ekki til.",

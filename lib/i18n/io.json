@@ -17,7 +17,6 @@
 	"datatypes-type-boolean": "Booleana*",
 	"datatypes-type-commonsMedia": "Arkivo de Commons",
 	"datatypes-type-external-id": "Extera identifikero",
-	"datatypes-type-entity-schema": "Ento-skemo",
 	"wikibase-entity-summary-wbsetitem": "Kreita nova elemento",
 	"wikibase-entity-summary-wbcreate-new": "Kreita nova ento",
 	"wikibase-entity-summary-wbcreateredirect": "Ridirektita a ̩$4",

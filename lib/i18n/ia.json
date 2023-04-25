@@ -52,7 +52,6 @@
 	"datatypes-type-geo-shape": "Forma geographic",
 	"datatypes-type-tabular-data": "Datos tabular",
 	"datatypes-type-external-id": "Identificator externe",
-	"datatypes-type-entity-schema": "Schema de entitate",
 	"version-wikibase": "Wikibase",
 	"wikibase-time-calendar-gregorian": "Gregorian",
 	"wikibase-time-calendar-julian": "Julian",

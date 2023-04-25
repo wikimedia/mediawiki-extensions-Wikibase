@@ -62,7 +62,6 @@
 	"datatypes-type-geo-shape": "지리 형태",
 	"datatypes-type-tabular-data": "표 형식 데이터",
 	"datatypes-type-external-id": "외부 식별자",
-	"datatypes-type-entity-schema": "엔티티 스키마",
 	"version-wikibase": "위키베이스",
 	"wikibase-time-calendar-gregorian": "그레고리력",
 	"wikibase-time-calendar-julian": "율리우스력",

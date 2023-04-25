@@ -60,7 +60,6 @@
 	"datatypes-type-geo-shape": "地理形状",
 	"datatypes-type-tabular-data": "表形式データ",
 	"datatypes-type-external-id": "外部識別子",
-	"datatypes-type-entity-schema": "スキーマ",
 	"version-wikibase": "ウィキベース",
 	"wikibase-time-calendar-gregorian": "グレゴリオ暦",
 	"wikibase-time-calendar-julian": "ユリウス暦",
