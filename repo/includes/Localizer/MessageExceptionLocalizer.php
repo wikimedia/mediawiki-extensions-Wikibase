@@ -17,12 +17,10 @@ use Wikibase\Lib\MessageException;
 class MessageExceptionLocalizer implements ExceptionLocalizer {
 
 	public function getExceptionMessage( Exception $exception ): Message {
-		if ( !$this->hasExceptionMessage( $exception ) ) {
+		if ( !( $exception instanceof MessageException ) ) {
 			throw new InvalidArgumentException( '$exception is not a MessageException.' );
 		}
 
-		/** @var MessageException $exception */
-		'@phan-var MessageException $exception';
 		return new Message( $exception->getKey(), $exception->getParams() );
 	}
 
