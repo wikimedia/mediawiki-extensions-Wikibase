@@ -4,11 +4,11 @@ namespace Wikibase\Repo\Tests\Maintenance;
 
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Tests\Maintenance\MaintenanceBaseTestCase;
+use MediaWiki\WikiMap\WikiMap;
 use Wikibase\Lib\Changes\ChangeRow;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Repo\Maintenance\ResubmitChanges;
 use Wikibase\Repo\WikibaseRepo;
-use WikiMap;
 use Wikimedia\Timestamp\ConvertibleTimestamp;
 
 // files in maintenance/ are not autoloaded to avoid accidental usage, so load explicitly

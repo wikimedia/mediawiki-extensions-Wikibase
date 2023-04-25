@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\ChangeModification;
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\WikiMap\WikiMap;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Changes\EntityChange;
@@ -14,7 +15,6 @@ use Wikibase\Lib\Store\Sql\SqlChangeStore;
 use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\ChangeModification\DispatchChangesJob;
 use Wikibase\Repo\WikibaseRepo;
-use WikiMap;
 
 /**
  * @covers \Wikibase\Repo\ChangeModification\DispatchChangesJob
