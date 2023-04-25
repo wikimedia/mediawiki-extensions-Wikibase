@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Localizer;
 
 use Exception;
@@ -12,26 +14,15 @@ use Message;
  */
 class GenericExceptionLocalizer implements ExceptionLocalizer {
 
-	/**
-	 * @see ExceptionLocalizer::getExceptionMessage()
-	 *
-	 * @param Exception $exception
-	 *
-	 * @return Message
-	 */
-	public function getExceptionMessage( Exception $exception ) {
+	public function getExceptionMessage( Exception $exception ): Message {
 		return wfMessage( 'wikibase-error-unexpected', $exception->getMessage() );
 	}
 
 	/**
-	 * @see ExceptionLocalizer::getExceptionMessage()
-	 *
-	 * @param Exception $exception
-	 *
 	 * @return bool Always true, since DispatchingExceptionLocalizer is able to provide
 	 *         a Message for any kind of exception.
 	 */
-	public function hasExceptionMessage( Exception $exception ) {
+	public function hasExceptionMessage( Exception $exception ): bool {
 		return true;
 	}
 

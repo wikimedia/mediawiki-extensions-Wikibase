@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Localizer;
 
 use DataValues\DataValue;
@@ -22,30 +24,11 @@ use Wikibase\Lib\Formatters\MediaWikiNumberLocalizer;
  */
 class MessageParameterFormatter implements ValueFormatter {
 
-	/**
-	 * @var ValueFormatter
-	 */
-	private $dataValueFormatter;
-
-	/**
-	 * @var EntityIdFormatter
-	 */
-	private $entityIdFormatter;
-
-	/**
-	 * @var SiteLookup
-	 */
-	private $sites;
-
-	/**
-	 * @var Language
-	 */
-	private $language;
-
-	/**
-	 * @var NumberLocalizer
-	 */
-	private $valueLocalizer;
+	private ValueFormatter $dataValueFormatter;
+	private EntityIdFormatter $entityIdFormatter;
+	private SiteLookup $sites;
+	private Language $language;
+	private NumberLocalizer $valueLocalizer;
 
 	/**
 	 * @param ValueFormatter $dataValueFormatter A formatter for turning DataValues into wikitext.
@@ -75,7 +58,7 @@ class MessageParameterFormatter implements ValueFormatter {
 	 * @return string The formatted value (as wikitext).
 	 * @throws FormattingException
 	 */
-	public function format( $value ) {
+	public function format( $value ): string {
 		if ( is_int( $value ) || is_float( $value ) ) {
 			return $this->valueLocalizer->localizeNumber( $value );
 		} elseif ( $value instanceof DataValue ) {
@@ -89,12 +72,7 @@ class MessageParameterFormatter implements ValueFormatter {
 		return wfEscapeWikiText( strval( $value ) );
 	}
 
-	/**
-	 * @param array $values
-	 *
-	 * @return string
-	 */
-	private function formatValueList( array $values ) {
+	private function formatValueList( array $values ): string {
 		$formatted = [];
 
 		foreach ( $values as $key => $value ) {
@@ -106,11 +84,9 @@ class MessageParameterFormatter implements ValueFormatter {
 	}
 
 	/**
-	 * @param object $value
-	 *
 	 * @return string The formatted value (as wikitext).
 	 */
-	private function formatObject( $value ) {
+	private function formatObject( object $value ): string {
 		if ( $value instanceof EntityId ) {
 			return $this->formatEntityId( $value );
 		} elseif ( $value instanceof SiteLink ) {
@@ -122,20 +98,16 @@ class MessageParameterFormatter implements ValueFormatter {
 	}
 
 	/**
-	 * @param EntityId $entityId
-	 *
 	 * @return string The formatted ID (as a wikitext link).
 	 */
-	private function formatEntityId( EntityId $entityId ) {
+	private function formatEntityId( EntityId $entityId ): string {
 		return $this->entityIdFormatter->formatEntityId( $entityId );
 	}
 
 	/**
-	 * @param SiteLink $link
-	 *
 	 * @return string The formatted link (as a wikitext link).
 	 */
-	private function formatSiteLink( SiteLink $link ) {
+	private function formatSiteLink( SiteLink $link ): string {
 		$siteId = $link->getSiteId();
 		$page = $link->getPageName();
 

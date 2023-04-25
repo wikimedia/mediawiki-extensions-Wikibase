@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Localizer;
 
 use Exception;
@@ -16,10 +18,7 @@ use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
  */
 class ChangeOpValidationExceptionLocalizer implements ExceptionLocalizer {
 
-	/**
-	 * @var ValidatorErrorLocalizer
-	 */
-	private $validatorErrorLocalizer;
+	private ValidatorErrorLocalizer $validatorErrorLocalizer;
 
 	/**
 	 * @param ValueFormatter $paramFormatter A formatter for formatting message parameters
@@ -29,15 +28,7 @@ class ChangeOpValidationExceptionLocalizer implements ExceptionLocalizer {
 		$this->validatorErrorLocalizer = new ValidatorErrorLocalizer( $paramFormatter );
 	}
 
-	/**
-	 * @see ExceptionLocalizer::getExceptionMessage()
-	 *
-	 * @param Exception $exception
-	 *
-	 * @throws InvalidArgumentException
-	 * @return Message
-	 */
-	public function getExceptionMessage( Exception $exception ) {
+	public function getExceptionMessage( Exception $exception ): Message {
 		if ( !$this->hasExceptionMessage( $exception ) ) {
 			throw new InvalidArgumentException( '$exception is not a ChangeOpValidationException.' );
 		}
@@ -54,14 +45,7 @@ class ChangeOpValidationExceptionLocalizer implements ExceptionLocalizer {
 		return wfMessage( 'wikibase-validator-invalid' );
 	}
 
-	/**
-	 * @see ExceptionLocalizer::getExceptionMessage()
-	 *
-	 * @param Exception $exception
-	 *
-	 * @return bool
-	 */
-	public function hasExceptionMessage( Exception $exception ) {
+	public function hasExceptionMessage( Exception $exception ): bool {
 		return $exception instanceof ChangeOpValidationException;
 	}
 
