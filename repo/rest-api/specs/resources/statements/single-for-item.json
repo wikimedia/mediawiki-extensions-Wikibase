@@ -20,7 +20,7 @@
 				"description": "A single Wikibase Statement. Please note that the value of the `ETag` header field refers to the Item's revision ID."
 			},
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
-			"400": { "$ref": "../../global/responses.json#/InvalidItemStatementInput" },
+			"400": { "$ref": "../../global/responses.json#/InvalidRetrieveItemStatementInput" },
 			"404": { "$ref": "../../global/responses.json#/ItemStatementNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
@@ -84,7 +84,7 @@
 		"requestBody": { "$ref": "../../global/requests.json#/Edit" },
 		"responses": {
 			"200": { "$ref": "../../global/responses.json#/ResourceDeleted" },
-			"400": { "$ref": "../../global/responses.json#/InvalidItemStatementInput" },
+			"400": { "$ref": "../../global/responses.json#/InvalidRemoveItemStatementInput" },
 			"404": { "$ref": "../../global/responses.json#/ItemStatementNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"415": { "$ref": "../../global/responses.json#/InvalidMediaType" },

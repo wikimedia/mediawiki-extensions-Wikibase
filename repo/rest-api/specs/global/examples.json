@@ -1,14 +1,14 @@
 {
-	"InvalidBotFlagExample": {
-		"value": {
-			"code": "invalid-bot-flag",
-			"message": "Invalid bot flag value: Must be 'true' or 'false'"
-		}
-	},
 	"InvalidEditTagExample": {
 		"value": {
 			"code": "invalid-edit-tag",
 			"message": "Invalid MediaWiki tag: {tag}"
+		}
+	},
+	"CommentTooLongExample": {
+		"value": {
+			"code": "comment-too-long",
+			"message": "Comment must not be longer than 500 characters"
 		}
 	},
 	"InvalidFieldExample": {
@@ -186,6 +186,12 @@
 			"message": "Item with the ID {item_id} does not have aliases in the language: {language_code}"
 		}
 	},
+	"InvalidLabelExample": {
+		"value": {
+			"code": "invalid-label",
+			"message": "Not a valid label: {label}"
+		}
+	},
 	"LabelEmptyExample": {
 		"value": {
 			"code": "label-empty",
@@ -202,6 +208,12 @@
 			}
 		}
 	},
+	"InvalidDescriptionExample": {
+		"value": {
+			"code": "invalid-description",
+			"message": "Not a valid description: {description}"
+		}
+	},
 	"DescriptionEmptyExample": {
 		"value": {
 			"code": "description-empty",
@@ -215,6 +227,27 @@
 			"context": {
 				"value": "{description}",
 				"character-limit": "{limit}"
+			}
+		}
+	},
+	"LabelDescriptionSameValueExample": {
+		"value": {
+			"code": "label-description-same-value",
+			"message": "Label and description for language code '{language}' can not have the same value",
+			"context": {
+				"language": "{language}"
+			}
+		}
+	},
+	"ItemLabelDescriptionDuplicateExample": {
+		"value": {
+			"code": "item-label-description-duplicate",
+			"message": "Item '{duplicate_item_id}' already has label '{label}' associated with language code '{language}', using the same description text",
+			"context": {
+				"language": "{language}",
+				"label": "{label}",
+				"description": "{description}",
+				"matching-item-id": "{duplicate_item_id}"
 			}
 		}
 	}

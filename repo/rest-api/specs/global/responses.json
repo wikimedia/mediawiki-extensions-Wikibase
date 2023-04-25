@@ -213,6 +213,41 @@
 			}
 		}
 	},
+	"InvalidRetrieveStatementInput": {
+		"description": "The request cannot be processed",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/Error" },
+				"examples": {
+					"invalid-statement-id": { "$ref": "./examples.json#/InvalidStatementIdExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
+	"InvalidRetrieveItemStatementInput": {
+		"description": "The request cannot be processed",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/Error" },
+				"examples": {
+					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
+					"invalid-statement-id": { "$ref": "./examples.json#/InvalidStatementIdExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
 	"InvalidNewStatementInput": {
 		"description": "The request cannot be processed",
 		"content": {
@@ -221,7 +256,7 @@
 				"examples": {
 					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
 					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
-					"invalid-bot-flag": { "$ref": "./examples.json#/InvalidBotFlagExample" },
+					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
 					"statement-data-missing-field": { "$ref": "./examples.json#/StatementDataMissingFieldExample" },
 					"statement-data-invalid-field": { "$ref": "./examples.json#/StatementDataInvalidFieldExample" }
 				}
@@ -242,7 +277,7 @@
 				"examples": {
 					"invalid-statement-id": { "$ref": "./examples.json#/InvalidStatementIdExample" },
 					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
-					"invalid-bot-flag": { "$ref": "./examples.json#/InvalidBotFlagExample" },
+					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
 					"statement-data-missing-field": { "$ref": "./examples.json#/StatementDataMissingFieldExample" },
 					"statement-data-invalid-field": { "$ref": "./examples.json#/StatementDataInvalidFieldExample" },
 					"invalid-operation-change-statement-id": {
@@ -270,7 +305,7 @@
 					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
 					"invalid-statement-id": { "$ref": "./examples.json#/InvalidStatementIdExample" },
 					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
-					"invalid-bot-flag": { "$ref": "./examples.json#/InvalidBotFlagExample" },
+					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
 					"statement-data-missing-field": { "$ref": "./examples.json#/StatementDataMissingFieldExample" },
 					"statement-data-invalid-field": { "$ref": "./examples.json#/StatementDataInvalidFieldExample" },
 					"invalid-operation-change-statement-id": {
@@ -289,13 +324,15 @@
 			}
 		}
 	},
-	"InvalidStatementInput": {
+	"InvalidRemoveStatementInput": {
 		"description": "The request cannot be processed",
 		"content": {
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"invalid-statement-id": { "$ref": "./examples.json#/InvalidStatementIdExample" }
+					"invalid-statement-id": { "$ref": "./examples.json#/InvalidStatementIdExample" },
+					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" }
 				}
 			}
 		},
@@ -306,14 +343,16 @@
 			}
 		}
 	},
-	"InvalidItemStatementInput": {
+	"InvalidRemoveItemStatementInput": {
 		"description": "The request cannot be processed",
 		"content": {
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
-					"invalid-statement-id": { "$ref": "./examples.json#/InvalidStatementIdExample" }
+					"invalid-statement-id": { "$ref": "./examples.json#/InvalidStatementIdExample" },
+					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" }
 				}
 			}
 		},
@@ -324,7 +363,7 @@
 			}
 		}
 	},
-	"InvalidItemLabelInput": {
+	"InvalidSetItemLabelInput": {
 		"description": "The request cannot be processed",
 		"content": {
 			"application/json": {
@@ -332,8 +371,17 @@
 				"examples": {
 					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
 					"invalid-language-code": { "$ref": "./examples.json#/InvalidLanguageCodeExample" },
+					"invalid-label": { "$ref": "./examples.json#/InvalidLabelExample" },
 					"label-empty": { "$ref": "./examples.json#/LabelEmptyExample" },
-					"label-too-long": { "$ref": "./examples.json#/LabelTooLongExample" }
+					"label-too-long": { "$ref": "./examples.json#/LabelTooLongExample" },
+					"label-description-same-value": {
+						"$ref": "./examples.json#/LabelDescriptionSameValueExample"
+					},
+					"item-label-description-duplicate": {
+						"$ref": "./examples.json#/ItemLabelDescriptionDuplicateExample"
+					},
+					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" }
 				}
 			}
 		},
@@ -344,7 +392,7 @@
 			}
 		}
 	},
-	"InvalidItemDescriptionInput": {
+	"InvalidSetItemDescriptionInput": {
 		"description": "The request cannot be processed",
 		"content": {
 			"application/json": {
@@ -352,8 +400,17 @@
 				"examples": {
 					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
 					"invalid-language-code": { "$ref": "./examples.json#/InvalidLanguageCodeExample" },
+					"invalid-description": { "$ref": "./examples.json#/InvalidDescriptionExample" },
 					"description-empty": { "$ref": "./examples.json#/DescriptionEmptyExample" },
-					"description-too-long": { "$ref": "./examples.json#/DescriptionTooLongExample" }
+					"description-too-long": { "$ref": "./examples.json#/DescriptionTooLongExample" },
+					"label-description-same-value": {
+						"$ref": "./examples.json#/LabelDescriptionSameValueExample"
+					},
+					"item-label-description-duplicate": {
+						"$ref": "./examples.json#/ItemLabelDescriptionDuplicateExample"
+					},
+					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" }
 				}
 			}
 		},

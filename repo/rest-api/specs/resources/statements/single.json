@@ -16,7 +16,7 @@
 		"responses": {
 			"200": { "$ref": "../../global/responses.json#/Statement" },
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
-			"400": { "$ref": "../../global/responses.json#/InvalidStatementInput" },
+			"400": { "$ref": "../../global/responses.json#/InvalidRetrieveStatementInput" },
 			"404": { "$ref": "../../global/responses.json#/StatementNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
@@ -77,7 +77,7 @@
 		"requestBody": { "$ref": "../../global/requests.json#/Edit" },
 		"responses": {
 			"200": { "$ref": "../../global/responses.json#/ResourceDeleted" },
-			"400": { "$ref": "../../global/responses.json#/InvalidStatementInput" },
+			"400": { "$ref": "../../global/responses.json#/InvalidRemoveStatementInput" },
 			"404": { "$ref": "../../global/responses.json#/StatementNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"415": { "$ref": "../../global/responses.json#/InvalidMediaType" },
