@@ -46,6 +46,8 @@ class GetItemValidatorTest extends TestCase {
 	): void {
 		try {
 			( new GetItemValidator( new ItemIdValidator() ) )->assertValidRequest( $request );
+
+			$this->fail( 'Exception was not thrown.' );
 		} catch ( UseCaseError $e ) {
 			$this->assertEquals( $expectedCode, $e->getErrorCode() );
 			$this->assertEquals( $expectedMessage, $e->getErrorMessage() );

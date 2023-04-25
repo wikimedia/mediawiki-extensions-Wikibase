@@ -78,6 +78,8 @@ class JsonDiffJsonPatcherTest extends TestCase {
 
 		try {
 			( new JsonDiffJsonPatcher() )->patch( [ 'foo' => [ 'bar' => 42 ] ], [ $testOperation ] );
+
+			$this->fail( 'Exception was not thrown.' );
 		} catch ( PatchTestConditionFailedException $exception ) {
 			$this->assertEquals( $testOperation, $exception->getOperation() );
 			$this->assertEquals( 42, $exception->getActualValue() );
@@ -89,6 +91,8 @@ class JsonDiffJsonPatcherTest extends TestCase {
 
 		try {
 			( new JsonDiffJsonPatcher() )->patch( [ 'foo' => 'bar' ], [ $operation ] );
+
+			$this->fail( 'Exception was not thrown.' );
 		} catch ( Exception $exception ) {
 			$this->assertInstanceOf( PatchPathException::class, $exception );
 			$this->assertSame( 'path', $exception->getField() );
