@@ -214,6 +214,7 @@ class ImplicitDescriptionUsageLookup implements UsageLookup {
 		$links = $this->siteLinkLookup->getLinks( $numericItemIds, [ $this->globalSiteId ] );
 		// preload the titles in bulk (page ID and language)
 		$titles = array_map( [ $this->titleFactory, 'newFromDBkey' ], array_column( $links, 1 ) );
+		$titles = array_values( array_filter( $titles ) ); // filter out null titles (if any)
 		$linkBatch = $this->linkBatchFactory->newLinkBatch( $titles );
 		$linkBatch->setCaller( __METHOD__ );
 		$linkBatch->execute();
