@@ -18,7 +18,8 @@
 			"Paxt",
 			"Utar",
 			"Vks",
-			"Vogone"
+			"Vogone",
+			"Winston Sung"
 		]
 	},
 	"wikibase-desc": "Strukturované úložiště dat",
@@ -164,6 +165,7 @@
 	"wikibase-validator-not-allowed": "Neplatná hodnota: $1",
 	"wikibase-validator-no-validators": "Zakázáno",
 	"wikibase-validator-sitelink-conflict": "Odkaz na stránku $1 se už používá v položce $2. Pokud do položky $2 nepatří, můžete ho odtamtud odstranit; pokud jsou položky o totožném tématu, můžete je sloučit.",
+	"wikibase-validator-sitelink-conflict-unknown": "Odkaz na stránku $1 se už používá v jiné právě ukládané položce.",
 	"wikibase-validator-label-conflict": "Štítek „$1“ pro jazykový kód $2 již má vlastnost $3.",
 	"wikibase-validator-label-with-description-conflict": "Štítek „$1“ se stejným popisem pro jazykový kód $2 již má položka $3.",
 	"wikibase-validator-label-equals-description": "Štítek a popis v jazyce s kódem $1 nemohou mít stejnou hodnotu.",
@@ -298,7 +300,14 @@
 	"wikibase-tokencheck-mustposttoken": "Editace je možná pouze prostřednictvím požadavků POST.",
 	"wikibase-tokencheck-badtoken": "Špatný editační token (možná vypršela vaše relace).",
 	"special-dispatchstats": "Statistika distribuce změn",
-	"wikibase-dispatchstats-intro": "Tato stránka poskytuje statistiky o distribuci změn klientům.\nKlientská wiki se o změně na {{grammar:6sg|{{SITENAME}}}} dozví, jakmile byla změna na tuto wiki distribuována a fronta úloh na této wiki tuto notifikaci zpracovala.\n* {{int:wikibase-dispatchstats-changes}} zobrazuje číslo a datum nejstarší a nejaktuálnější položky, které jsou momentálně ve frontě.\n* {{int:wikibase-dispatchstats-stats}} poskytuje informace o nejvíce a nejméně zpožděné klientské wiki a mediánovou hodnotu mezi nimi. U každé wiki jsou zobrazeny následující informace:\n** „{{int:wikibase-dispatchstats-site-id}}“ je interní ID klientské wiki.\n** „{{int:wikibase-dispatchstats-pos}}“ je ID poslední změny, která byla na tuto wiki odeslána.\n** „{{int:wikibase-dispatchstats-lag-num}}“ je počet změn, které dosud nebyly na tuto wiki odeslány.\n** „{{int:wikibase-dispatchstats-lag-time}}“ je čas mezi poslední změnou odeslanou na tuto wiki a poslední změnou provedenou na {{grammar:6sg|{{SITENAME}}}}.\n** „{{int:wikibase-dispatchstats-touched}}“ je čas odeslání poslední dávky změn na tuto wiki.",
+	"wikibase-dispatchstats-intro": "Tato stránka poskytuje statistiky o distribuci změn klientům.\nKlientská wiki se o změně na {{grammar:6sg|{{SITENAME}}}} dozví, jakmile byla změna na tuto wiki distribuována a fronta úloh na této wiki tuto notifikaci zpracovala.",
+	"wikibase-dispatchstats-empty-queue": "Ve frontě distribuce změn nejsou žádné změny.",
+	"wikibase-dispatchstats-oldest": "Nejstarší neodeslaná změna je z $1.",
+	"wikibase-dispatchstats-newest": "Nejnovější neodeslaná změna je z $1.",
+	"wikibase-dispatchstats-estimate": "Ve frontě {{PLURAL:$1|je přibližně $1 neodeslaná změna|jsou přibližně $1 neodeslané změny|je přibližně $1 neodeslaných změn}}.",
+	"wikibase-dispatchstats-above": "Ve frontě {{PLURAL:$1|je více než $1 změna|jsou více než $1 změny|je více než $1 změn}}.",
+	"wikibase-dispatchstats-number-of-changes-in-queue": "Počet změn ve frontě: {{PLURAL:$1|$1}}",
+	"wikibase-dispatchstats-number-of-entities-in-queue": "Počet entit ve frontě: {{PLURAL:$1|$1}}",
 	"special-listdatatypes": "Seznam dostupných datových typů",
 	"wikibase-listdatatypes-intro": "Toto je seznam všech datových typů s odpovídajícími typy hodnot dostupných na této instalaci:",
 	"wikibase-listdatatypes-listproperties": "Seznam vlastností s tímto datovým typem",
