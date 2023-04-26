@@ -3,6 +3,7 @@
 use MediaWiki\MediaWikiServices;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\LanguageNameLookupFactory;
+use Wikibase\Lib\Modules\CurrentSiteModule;
 use Wikibase\Lib\Modules\RepoAccessModule;
 use Wikibase\Lib\Modules\SitesModule;
 use Wikibase\Lib\WikibaseSettings;
@@ -22,6 +23,18 @@ return call_user_func( function() {
 	];
 
 	$modules = [
+
+		'mw.config.values.wbCurrentSiteDetails' => $moduleTemplate + [
+			'factory' => function () {
+				return new CurrentSiteModule(
+					WikibaseSettings::isClientEnabled() ? WikibaseClient::getSettings() : null,
+					WikibaseSettings::isRepoEnabled() ? WikibaseRepo::getSettings() : null,
+					MediaWikiServices::getInstance()->getSiteStore(),
+					MediaWikiServices::getInstance()->getLocalServerObjectCache(),
+					new LanguageNameLookupFactory( MediaWikiServices::getInstance()->getLanguageNameUtils() )
+				);
+			},
+		],
 
 		'mw.config.values.wbSiteDetails' => $moduleTemplate + [
 			'factory' => function () {

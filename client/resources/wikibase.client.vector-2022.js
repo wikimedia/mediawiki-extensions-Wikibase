@@ -15,15 +15,17 @@
 	// and lazy-load the other dependencies now that we know they're needed
 	mw.loader.using( [
 		'mw.config.values.wbRepo',
-		'mw.config.values.wbSiteDetails',
+		'mw.config.values.wbCurrentSiteDetails',
 		'ext.uls.interface',
 		'oojs-ui.styles.icons-editing-core'
 	], function () {
 		var repoConfig = mw.config.get( 'wbRepo' );
-		var clientConfig = mw.config.get( 'wbSiteDetails' )[ mw.config.get( 'wgWikiID' ) ];
+		var clientConfig = mw.config.get( 'wbCurrentSiteDetails' );
 		var itemUrl = repoConfig.url
-			+ repoConfig.articlePath.replace( '$1', 'Special:EntityPage/' + itemId )
-			+ '#sitelinks-' + clientConfig.group;
+			+ repoConfig.articlePath.replace( '$1', 'Special:EntityPage/' + itemId );
+		if ( clientConfig.group ) {
+			itemUrl += '#sitelinks-' + clientConfig.group;
+		}
 
 		mw.uls.ActionsMenuItemsRegistry.register( {
 			name: 'wikibaseItemLink',
