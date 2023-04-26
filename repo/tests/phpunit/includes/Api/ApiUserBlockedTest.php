@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
+use ApiTestCase;
 use ApiUsageException;
 use MediaWiki\Block\DatabaseBlock;
 use Wikibase\DataModel\Entity\ItemId;
@@ -49,7 +50,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 				'property' => [ [ EntityTestHelper::class, 'getId' ], 'StringProp' ],
 				'value' => '"abc"',
 			],
-			[ 'wikibase-api-failed-save', 'apierror-blocked', 'permissionserrors' ],
+			[ 'failed-save', 'blocked' ],
 		];
 
 		yield [
@@ -58,7 +59,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 				'to' => [ [ EntityTestHelper::class, 'getId' ], 'Berlin' ],
 				'from' => 'Q123456',
 			],
-			[ 'wikibase-api-permissiondenied' ],
+			[ 'permissiondenied' ],
 		];
 
 		yield [
@@ -67,7 +68,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 				'new' => 'item',
 				'data' => json_encode( [] ),
 			],
-			[ 'wikibase-api-permissiondenied', 'apierror-blocked' ],
+			[ 'blocked' ],
 		];
 
 		yield [
@@ -76,7 +77,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 				'id' => [ [ EntityTestHelper::class, 'getId' ], 'Berlin' ],
 				'data' => json_encode( [] ),
 			],
-			[ 'wikibase-api-failed-save', 'apierror-blocked', 'permissionserrors' ],
+			[ 'failed-save', 'blocked' ],
 		];
 
 		yield [
@@ -87,7 +88,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 				'tosite' => 'dewiki',
 				'totitle' => 'Wasserstoff',
 			],
-			[ 'wikibase-api-failed-save', 'apierror-blocked', 'permissionserrors' ],
+			[ 'failed-save', 'blocked' ],
 		];
 
 		yield [
@@ -96,7 +97,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 				'fromid' => [ [ EntityTestHelper::class, 'getId' ], 'Berlin' ],
 				'toid' => [ [ EntityTestHelper::class, 'getId' ], 'Oslo' ],
 			],
-			[ 'wikibase-itemmerge-permissiondenied' ],
+			[ 'permissiondenied' ],
 		];
 
 		yield [
@@ -104,7 +105,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 			[
 				'claim' => [ [ self::class, 'getEntityClaimGUID' ], 'Berlin' ],
 			],
-			[ 'wikibase-api-failed-save', 'apierror-blocked', 'permissionserrors' ],
+			[ 'failed-save', 'blocked' ],
 		];
 
 		yield [
@@ -113,7 +114,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 				'claim' => [ [ self::class, 'getEntityClaimGUID' ], 'Berlin' ],
 				'qualifiers' => [ [ self::class, 'getEntityClaimQualifierHash' ], 'Berlin' ],
 			],
-			[ 'wikibase-api-failed-save', 'apierror-blocked', 'permissionserrors' ],
+			[ 'failed-save', 'blocked' ],
 		];
 
 		yield [
@@ -122,7 +123,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 				'statement' => [ [ self::class, 'getEntityClaimGUID' ], 'Berlin' ],
 				'references' => [ [ self::class, 'getEntityClaimReferenceHash' ], 'Berlin' ],
 			],
-			[ 'wikibase-api-failed-save', 'apierror-blocked', 'permissionserrors' ],
+			[ 'failed-save', 'blocked' ],
 		];
 
 		yield [
@@ -132,7 +133,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 				'add' => 'foo',
 				'language' => 'en',
 			],
-			[ 'wikibase-api-permissiondenied', 'apierror-blocked' ],
+			[ 'blocked' ],
 		];
 
 		yield [
@@ -142,7 +143,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 				'add' => 'en alias',
 				'language' => 'en',
 			],
-			[ 'wikibase-api-permissiondenied', 'apierror-blocked' ],
+			[ 'blocked' ],
 		];
 
 		yield [
@@ -150,7 +151,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 			[
 				'claim' => [ [ self::class , 'buildTestClaimJSON' ], 'Oslo' ],
 			],
-			[ 'wikibase-api-failed-save', 'apierror-blocked', 'permissionserrors' ],
+			[ 'failed-save', 'blocked' ],
 		];
 
 		yield [
@@ -160,7 +161,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 				'value' => '"foobar"',
 				'snaktype' => 'value',
 			],
-			[ 'wikibase-api-failed-save', 'apierror-blocked', 'permissionserrors' ],
+			[ 'failed-save', 'blocked' ],
 		];
 
 		yield [
@@ -170,7 +171,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 				'language' => 'de',
 				'value' => 'FizzBuzz',
 			],
-			[ 'wikibase-api-permissiondenied', 'apierror-blocked' ],
+			[ 'blocked' ],
 		];
 
 		yield [
@@ -180,7 +181,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 				'language' => 'de',
 				'value' => 'Bärlin',
 			],
-			[ 'wikibase-api-permissiondenied', 'apierror-blocked' ],
+			[ 'blocked' ],
 		];
 
 		yield [
@@ -191,7 +192,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 				'snaktype' => 'value',
 				'value' => '"baz"',
 			],
-			[ 'wikibase-api-failed-save', 'apierror-blocked', 'permissionserrors' ],
+			[ 'failed-save', 'blocked' ],
 		];
 
 		yield [
@@ -200,7 +201,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 				'statement' => [ [ self::class, 'getEntityClaimGUID' ], 'Berlin' ],
 				'snaks' => [ [ self::class , 'buildTestReferenceSnakJSON' ] ],
 			],
-			[ 'wikibase-api-failed-save', 'apierror-blocked', 'permissionserrors' ],
+			[ 'failed-save', 'blocked' ],
 		];
 
 		yield [
@@ -210,7 +211,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 				'linksite' => 'enwiki',
 				'linktitle' => 'Berlin',
 			],
-			[ 'wikibase-api-permissiondenied', 'apierror-blocked' ],
+			[ 'blocked' ],
 		];
 	}
 
@@ -220,7 +221,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 		$this->assertNotNull( $testuser->getBlock(), 'User is expected to be blocked' );
 
 		foreach ( $this->blockCases() as $case ) {
-			list( $apiKey, $otherApiData, $expectedMessages ) = $case;
+			list( $apiKey, $otherApiData, $expectedErrors ) = $case;
 
 			foreach ( $otherApiData as $key => &$value ) {
 				if ( !is_array( $value ) ) {
@@ -236,11 +237,11 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 						[ 'action' => $apiKey ],
 						$otherApiData
 					), null, $testuser );
-				$this->fail( 'Expected api error to be raised' );
+				$this->fail( "$apiKey: Expected API error to be raised" );
 			} catch ( ApiUsageException $exception ) {
-				foreach ( $expectedMessages as $message ) {
-					$this->assertTrue( $exception->getStatusValue()->hasMessage( $message ),
-						'Expected message ' . $message );
+				foreach ( $expectedErrors as $code ) {
+					$this->assertTrue( ApiTestCase::apiExceptionHasCode( $exception, $code ),
+						"$apiKey: Expected error code $code" );
 				}
 			}
 		}
