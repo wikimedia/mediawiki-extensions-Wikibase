@@ -9,7 +9,7 @@ use Wikibase\Repo\RestApi\RouteHandlers\ResponseFactory;
 
 /**
  * @covers \Wikibase\Repo\RestApi\RouteHandlers\ResponseFactory
- * @covers \Wikibase\Repo\RestApi\Presentation\ErrorResponseToHttpStatus
+ * @covers \Wikibase\Repo\RestApi\RouteHandlers\ErrorResponseToHttpStatus
  *
  * @group Wikibase
  *

@@ -23,7 +23,6 @@ class ArchitectureTest {
 	private const SERIALIZATION = 'Wikibase\Repo\RestApi\Application\Serialization';
 	private const VALIDATION = 'Wikibase\Repo\RestApi\Application\Validation';
 	private const USE_CASES = 'Wikibase\Repo\RestApi\Application\UseCases';
-	private const PRESENTATION = 'Wikibase\Repo\RestApi\Presentation';
 
 	public function testDomainModel(): Rule {
 		return PHPat::rule()
@@ -125,25 +124,6 @@ class ArchitectureTest {
 	private function allowedUseCasesDependencies(): array {
 		return array_merge( $this->allowedValidationDependencies(), [
 			Selector::namespace( self::USE_CASES ),
-		] );
-	}
-
-	public function testPresentation(): Rule {
-		return PHPat::rule()
-			->classes( Selector::namespace( self::PRESENTATION ) )
-			->shouldNotDependOn()
-			->classes( Selector::all() )
-			->excluding( ...$this->allowedPresentationDependencies() );
-	}
-
-	/**
-	 * Presentation may depend on:
-	 *  - the use cases namespace and everything it depends on
-	 *  - other classes from its own namespace
-	 */
-	private function allowedPresentationDependencies(): array {
-		return array_merge( $this->allowedUseCasesDependencies(), [
-			Selector::namespace( self::PRESENTATION ),
 		] );
 	}
 

@@ -76,7 +76,6 @@ This REST API follows the [Hexagonal Architecture](https://alistair.cockburn.us/
 - `src/`
   - `DataAccess/`: implementations of services that bind to persistent storage
   - `Domain/`: domain models and services
-  - `Presentation/`: presenter and converter classes to manipulate the output as part of the transport layer
   - `RouteHandlers/` classes that create and pass request DTO into use cases and return HTTP responses
   - `UseCases/`: one directory per use case
 - `tests/`

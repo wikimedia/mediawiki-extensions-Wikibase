@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Presentation;
+namespace Wikibase\Repo\RestApi\RouteHandlers;
 
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 
@@ -8,9 +8,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
  * @license GPL-2.0-or-later
  */
 class ErrorResponseToHttpStatus {
-	/**
-	 * @var array
-	 */
+
 	private static array $lookupTable = [
 		UseCaseError::INVALID_ITEM_ID => 400,
 		UseCaseError::INVALID_PROPERTY_ID => 400,

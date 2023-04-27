@@ -6,7 +6,6 @@ use HttpStatus;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\StringStream;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Presentation\ErrorResponseToHttpStatus;
 
 /**
  * @license GPL-2.0-or-later
