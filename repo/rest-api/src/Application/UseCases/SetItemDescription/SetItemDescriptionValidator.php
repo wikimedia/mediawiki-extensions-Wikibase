@@ -111,8 +111,8 @@ class SetItemDescriptionValidator {
 					$label = $context[ItemDescriptionValidator::CONTEXT_LABEL];
 					throw new UseCaseError(
 						UseCaseError::ITEM_LABEL_DESCRIPTION_DUPLICATE,
-						"Item '$matchingItemId' already has label '$label' associated with language
-						code '$language', using the same description text",
+						"Item '$matchingItemId' already has label '$label' associated with "
+						. "language code '$language', using the same description text",
 						$context
 					);
 				default:
