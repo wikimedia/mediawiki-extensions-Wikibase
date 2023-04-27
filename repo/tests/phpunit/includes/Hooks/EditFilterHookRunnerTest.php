@@ -55,7 +55,8 @@ class EditFilterHookRunnerTest extends MediaWikiIntegrationTestCase {
 		return new MediawikiEditFilterHookRunner(
 			$namespaceLookup,
 			$entityTitleLookup,
-			$entityContentFactory
+			$entityContentFactory,
+			$this->getServiceContainer()->getHookContainer()
 		);
 	}
 

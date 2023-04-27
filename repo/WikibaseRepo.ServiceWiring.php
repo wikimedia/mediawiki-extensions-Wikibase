@@ -621,7 +621,8 @@ return [
 		return new MediawikiEditFilterHookRunner(
 			WikibaseRepo::getEntityNamespaceLookup( $services ),
 			WikibaseRepo::getEntityTitleStoreLookup( $services ),
-			WikibaseRepo::getEntityContentFactory( $services )
+			WikibaseRepo::getEntityContentFactory( $services ),
+			$services->getHookContainer()
 		);
 	},
 
