@@ -841,7 +841,10 @@ return [
 	},
 
 	'WikibaseRepo.EntityIdLookup' => function ( MediaWikiServices $services ): EntityIdLookup {
-		return new ContentHandlerEntityIdLookup( WikibaseRepo::getEntityContentFactory( $services ) );
+		return new ContentHandlerEntityIdLookup(
+			WikibaseRepo::getEntityContentFactory( $services ),
+			$services->getHookContainer()
+		);
 	},
 
 	'WikibaseRepo.EntityIdParser' => function ( MediaWikiServices $services ): EntityIdParser {
@@ -932,6 +935,7 @@ return [
 			$services->getStatsdDataFactory(),
 			$services->getRepoGroup(),
 			$services->getLinkBatchFactory(),
+			$services->getHookContainer(),
 			$settings->getSetting( 'preferredGeoDataProperties' ),
 			$settings->getSetting( 'preferredPageImagesProperties' ),
 			$settings->getSetting( 'globeUris' )
@@ -1820,6 +1824,7 @@ return [
 			WikibaseRepo::getEntityNamespaceLookup( $services ),
 			WikibaseRepo::getIdGenerator( $services ),
 			WikibaseRepo::getWikibaseServices( $services ),
+			$services->getHookContainer(),
 			WikibaseRepo::getLocalEntitySource( $services ),
 			WikibaseRepo::getSettings( $services )
 		);

@@ -66,6 +66,7 @@ class SqlStoreTest extends MediaWikiIntegrationTestCase {
 			new EntityNamespaceLookup( [] ),
 			$this->createMock( IdGenerator::class ),
 			$wikibaseServices,
+			$this->getServiceContainer()->getHookContainer(),
 			new DatabaseEntitySource( 'testsource', 'testdb', [], '', '', '', '' ),
 			new SettingsArray( [
 				'sharedCacheKeyPrefix' => 'wikibase_shared/testdb',

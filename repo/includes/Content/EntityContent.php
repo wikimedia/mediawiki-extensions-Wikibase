@@ -8,7 +8,6 @@ use Diff\Differ\MapDiffer;
 use Diff\DiffOp\Diff\Diff;
 use Diff\Patcher\MapPatcher;
 use Diff\Patcher\PatcherException;
-use Hooks;
 use LogicException;
 use MediaWiki\MediaWikiServices;
 use MWException;
@@ -145,7 +144,9 @@ abstract class EntityContent extends AbstractContent {
 		$searchTextGenerator = new FingerprintSearchTextGenerator();
 		$text = $searchTextGenerator->generate( $this->getEntity() );
 
-		if ( !Hooks::run( 'WikibaseTextForSearchIndex', [ $this, &$text ] ) ) {
+		if ( !MediaWikiServices::getInstance()->getHookContainer()
+			->run( 'WikibaseTextForSearchIndex', [ $this, &$text ] )
+		) {
 			return '';
 		}
 

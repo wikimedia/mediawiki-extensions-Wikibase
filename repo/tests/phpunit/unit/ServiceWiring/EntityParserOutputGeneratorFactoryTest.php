@@ -55,6 +55,10 @@ class EntityParserOutputGeneratorFactoryTest extends ServiceWiringTestCase {
 			->method( 'getStatsdDataFactory' );
 		$this->serviceContainer->expects( $this->once() )
 			->method( 'getRepoGroup' );
+		$this->serviceContainer->expects( $this->once() )
+			->method( 'getLinkBatchFactory' );
+		$this->serviceContainer->expects( $this->once() )
+			->method( 'getHookContainer' );
 
 		$this->assertInstanceOf(
 			EntityParserOutputGeneratorFactory::class,

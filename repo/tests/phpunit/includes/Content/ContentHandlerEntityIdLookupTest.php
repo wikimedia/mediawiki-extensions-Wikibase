@@ -68,7 +68,10 @@ class ContentHandlerEntityIdLookupTest extends MediaWikiIntegrationTestCase {
 
 	public function testGetEntityIdForTitle() {
 		$factory = $this->newFactory();
-		$entityIdLookup = new ContentHandlerEntityIdLookup( $factory );
+		$entityIdLookup = new ContentHandlerEntityIdLookup(
+			$factory,
+			$this->getServiceContainer()->getHookContainer()
+		);
 
 		$title = Title::makeTitle( $factory->getNamespaceForType( Item::ENTITY_TYPE ), 'Q42' );
 		$title->resetArticleID( 42 );
@@ -79,7 +82,10 @@ class ContentHandlerEntityIdLookupTest extends MediaWikiIntegrationTestCase {
 
 	public function testGetEntityIds() {
 		$factory = $this->newFactory();
-		$entityIdLookup = new ContentHandlerEntityIdLookup( $factory );
+		$entityIdLookup = new ContentHandlerEntityIdLookup(
+			$factory,
+			$this->getServiceContainer()->getHookContainer()
+		);
 
 		/** @var Title[] $titles */
 		$titles = [

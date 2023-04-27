@@ -52,7 +52,10 @@ abstract class DispatchChangeModificationNotificationJob extends Job {
 		$this->localClientDatabases = $repoSettings->getSetting( 'localClientDatabases' );
 
 		$this->initServices(
-			new ContentHandlerEntityIdLookup( WikibaseRepo::getEntityContentFactory( $mwServices ) ),
+			new ContentHandlerEntityIdLookup(
+				WikibaseRepo::getEntityContentFactory( $mwServices ),
+				$mwServices->getHookContainer()
+			),
 			WikibaseRepo::getLogger( $mwServices ),
 			$mwServices->getJobQueueGroupFactory()
 		);

@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\ParserOutput;
 
 use MediaWiki\Cache\LinkBatchFactory;
+use MediaWiki\HookContainer\HookContainer;
 use MediaWikiIntegrationTestCase;
 use NullStatsdDataFactory;
 use RepoGroup;
@@ -49,7 +50,8 @@ class EntityParserOutputGeneratorFactoryTest extends MediaWikiIntegrationTestCas
 			$this->createMock( CachingKartographerEmbeddingHandler::class ),
 			new NullStatsdDataFactory(),
 			$this->createMock( RepoGroup::class ),
-			$this->createMock( LinkBatchFactory::class )
+			$this->createMock( LinkBatchFactory::class ),
+			$this->createMock( HookContainer::class )
 		);
 	}
 
