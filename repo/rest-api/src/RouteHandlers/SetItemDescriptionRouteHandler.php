@@ -25,8 +25,13 @@ use Wikimedia\ParamValidator\ParamValidator;
  * @license GPL-2.0-or-later
  */
 class SetItemDescriptionRouteHandler extends SimpleHandler {
+
 	private const ITEM_ID_PATH_PARAM = 'item_id';
 	private const LANGUAGE_CODE_PATH_PARAM = 'language_code';
+	private const DESCRIPTION_BODY_PARAM = 'description';
+	private const TAGS_BODY_PARAM = 'tags';
+	private const BOT_BODY_PARAM = 'bot';
+	private const COMMENT_BODY_PARAM = 'comment';
 
 	private SetItemDescription $useCase;
 	private ResponseFactory $responseFactory;
@@ -78,9 +83,9 @@ class SetItemDescriptionRouteHandler extends SimpleHandler {
 					$itemId,
 					$languageCode,
 					$jsonBody['description'],
-					$jsonBody['tags'] ?? [],
-					$jsonBody['bot'] ?? false,
-					$jsonBody['comment'] ?? null,
+					$jsonBody['tags'],
+					$jsonBody['bot'],
+					$jsonBody['comment'],
 					$this->getUsername()
 				) )
 			);
@@ -93,7 +98,31 @@ class SetItemDescriptionRouteHandler extends SimpleHandler {
 	 * @inheritDoc
 	 */
 	public function getBodyValidator( $contentType ): BodyValidator {
-		return new TypeValidatingJsonBodyValidator( [] );
+		return $contentType === 'application/json' ?
+			new TypeValidatingJsonBodyValidator( [
+				self::DESCRIPTION_BODY_PARAM => [
+					self::PARAM_SOURCE => 'body',
+					ParamValidator::PARAM_TYPE => 'string',
+					ParamValidator::PARAM_REQUIRED => true,
+				],
+				self::TAGS_BODY_PARAM => [
+					self::PARAM_SOURCE => 'body',
+					ParamValidator::PARAM_TYPE => 'array',
+					ParamValidator::PARAM_REQUIRED => false,
+					ParamValidator::PARAM_DEFAULT => [],
+				],
+				self::BOT_BODY_PARAM => [
+					self::PARAM_SOURCE => 'body',
+					ParamValidator::PARAM_TYPE => 'boolean',
+					ParamValidator::PARAM_REQUIRED => false,
+					ParamValidator::PARAM_DEFAULT => false,
+				],
+				self::COMMENT_BODY_PARAM => [
+					self::PARAM_SOURCE => 'body',
+					ParamValidator::PARAM_TYPE => 'string',
+					ParamValidator::PARAM_REQUIRED => false,
+				],
+			] ) : parent::getBodyValidator( $contentType );
 	}
 
 	/**
@@ -128,11 +157,7 @@ class SetItemDescriptionRouteHandler extends SimpleHandler {
 			wfTimestamp( TS_RFC2822, $useCaseResponse->getLastModified() )
 		);
 		$httpResponse->setBody(
-			new StringStream(
-				json_encode(
-					$useCaseResponse->getDescription()->getText()
-				)
-			)
+			new StringStream( json_encode( $useCaseResponse->getDescription()->getText() ) )
 		);
 
 		return $httpResponse;
@@ -142,4 +167,5 @@ class SetItemDescriptionRouteHandler extends SimpleHandler {
 		$mwUser = $this->getAuthority()->getUser();
 		return $mwUser->isRegistered() ? $mwUser->getName() : null;
 	}
+
 }

@@ -18,17 +18,20 @@ use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
  */
 class SetItemDescription {
 
+	private SetItemDescriptionValidator $validator;
 	private ItemRevisionMetadataRetriever $metadataRetriever;
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
 	private PermissionChecker $permissionChecker;
 
 	public function __construct(
+		SetItemDescriptionValidator $validator,
 		ItemRevisionMetadataRetriever $metadataRetriever,
 		ItemRetriever $itemRetriever,
 		ItemUpdater $itemUpdater,
 		PermissionChecker $permissionChecker
 	) {
+		$this->validator = $validator;
 		$this->metadataRetriever = $metadataRetriever;
 		$this->itemRetriever = $itemRetriever;
 		$this->itemUpdater = $itemUpdater;
@@ -36,6 +39,8 @@ class SetItemDescription {
 	}
 
 	public function execute( SetItemDescriptionRequest $request ): SetItemDescriptionResponse {
+		$this->validator->assertValidRequest( $request );
+
 		$itemId = new ItemId( $request->getItemId() );
 		$description = new Term( $request->getLanguageCode(), $request->getDescription() );
 
