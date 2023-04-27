@@ -90,6 +90,7 @@ class WikibaseContentLanguages {
 					'bqz', // T263946
 					'byv', // T263946
 					'cak', // T278854
+					'cal', // T308062
 					'cnh', // T278853
 					'dua', // T263946
 					'en-us', // T154589
@@ -128,6 +129,7 @@ class WikibaseContentLanguages {
 					'smj', // T146707
 					'sms', // T220118, T223544
 					'srq', // T113408
+					'tpv', // T308062
 					'tvu', // T263946
 					'vut', // T263946
 					'wes', // T263946
