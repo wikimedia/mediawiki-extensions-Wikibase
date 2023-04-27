@@ -45,7 +45,12 @@ describe( newSetItemLabelRequestBuilder().getRouteDescription(), () => {
 		expect( response ).to.satisfyApiSpec;
 	} );
 
-	// TODO: 400 validation errors
+	it( '400 - invalid (empty) label', async () => {
+		const response = await newSetItemLabelRequestBuilder( itemId, 'de', '' )
+			.makeRequest();
+		expect( response ).to.have.status( 400 );
+		expect( response ).to.satisfyApiSpec;
+	} );
 
 	it( '404 - item does not exist', async () => {
 		const response = await newSetItemLabelRequestBuilder(
