@@ -26,8 +26,8 @@ class SetItemLabelRequest {
 	) {
 
 		$this->itemId = $itemId;
-		$this->languageCode = $languageCode;
-		$this->label = $label;
+		$this->languageCode = strtolower( trim( $languageCode ) );
+		$this->label = trim( $label );
 		$this->editTags = $editTags;
 		$this->isBot = $isBot;
 		$this->comment = $comment;

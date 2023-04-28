@@ -13,6 +13,7 @@ class UseCaseError extends UseCaseException {
 	public const INVALID_ITEM_ID = 'invalid-item-id';
 	public const INVALID_PROPERTY_ID = 'invalid-property-id';
 	public const INVALID_STATEMENT_ID = 'invalid-statement-id';
+	public const INVALID_LABEL = 'invalid-label';
 	public const INVALID_LANGUAGE_CODE = 'invalid-language-code';
 	public const LABEL_EMPTY = 'label-empty';
 	public const LABEL_TOO_LONG = 'label-too-long';
