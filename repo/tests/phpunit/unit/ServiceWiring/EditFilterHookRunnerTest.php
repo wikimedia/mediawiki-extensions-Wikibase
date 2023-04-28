@@ -34,6 +34,10 @@ class EditFilterHookRunnerTest extends ServiceWiringTestCase {
 			$this->createMock( EntityContentFactory::class )
 		);
 
+		$this->serviceContainer
+			->expects( $this->once() )
+			->method( 'getHookContainer' );
+
 		$this->assertInstanceOf(
 			EditFilterHookRunner::class,
 			$this->getService( 'WikibaseRepo.EditFilterHookRunner' )

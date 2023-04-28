@@ -3,9 +3,9 @@
 namespace Wikibase\Repo\EditEntity;
 
 use DerivativeContext;
-use Hooks;
 use IContextSource;
 use InvalidArgumentException;
+use MediaWiki\HookContainer\HookContainer;
 use RuntimeException;
 use Status;
 use Title;
@@ -39,14 +39,21 @@ class MediawikiEditFilterHookRunner implements EditFilterHookRunner {
 	 */
 	private $entityContentFactory;
 
+	/**
+	 * @var HookContainer
+	 */
+	private $hookContainer;
+
 	public function __construct(
 		EntityNamespaceLookup $namespaceLookup,
 		EntityTitleStoreLookup $titleLookup,
-		EntityContentFactory $entityContentFactory
+		EntityContentFactory $entityContentFactory,
+		HookContainer $hookContainer
 	) {
 		$this->namespaceLookup = $namespaceLookup;
 		$this->titleLookup = $titleLookup;
 		$this->entityContentFactory = $entityContentFactory;
+		$this->hookContainer = $hookContainer;
 	}
 
 	/**
@@ -63,7 +70,7 @@ class MediawikiEditFilterHookRunner implements EditFilterHookRunner {
 	public function run( $new, IContextSource $context, string $summary ) {
 		$filterStatus = Status::newGood();
 
-		if ( !Hooks::isRegistered( 'EditFilterMergedContent' ) ) {
+		if ( !$this->hookContainer->isRegistered( 'EditFilterMergedContent' ) ) {
 			return $filterStatus;
 		}
 
@@ -99,7 +106,7 @@ class MediawikiEditFilterHookRunner implements EditFilterHookRunner {
 
 		$slotRole = $this->namespaceLookup->getEntitySlotRole( $entityType );
 
-		if ( !Hooks::run(
+		if ( !$this->hookContainer->run(
 			'EditFilterMergedContent',
 			[ $context, $entityContent, &$filterStatus, $summary, $context->getUser(), false, $slotRole ]
 		) ) {
