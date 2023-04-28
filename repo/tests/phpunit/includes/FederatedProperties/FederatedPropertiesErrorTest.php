@@ -29,7 +29,7 @@ class FederatedPropertiesErrorTest extends MediaWikiIntegrationTestCase {
 		$this->assertInstanceOf( RawMessage::class, $e->msg );
 
 		$this->assertSame( Html::errorBox( '⧼key⧽' ),
-			$e->msg->parse() );
+			str_replace( '&#95;', '_', $e->msg->parse() ) );
 
 		$this->assertStringContainsString(
 			'<span class="wikibase-title-id">(Q1)</span>',
@@ -51,7 +51,7 @@ class FederatedPropertiesErrorTest extends MediaWikiIntegrationTestCase {
 		$e = new FederatedPropertiesError( $languageCode, $item, 'key', $params );
 
 		$this->assertSame( Html::errorBox( '⧼key⧽' ),
-			$e->msg->parse() );
+		str_replace( '&#95;', '_', $e->msg->parse() ) );
 
 		$this->assertStringContainsString(
 			'<span class="wikibase-title-label">' . wfMessage( 'wikibase-label-empty' )->parse() . '</span>',
