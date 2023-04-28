@@ -3,6 +3,7 @@
 declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\FederatedProperties;
 
+use Html;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -26,7 +27,7 @@ class FederatedPropertiesErrorTest extends MediaWikiIntegrationTestCase {
 		$e = new FederatedPropertiesError( $languageCode, $item, 'key', $params );
 		$this->assertInstanceOf( \RawMessage::class, $e->msg );
 
-		$this->assertSame( '<div class="mw-message-box-error mw-message-box">⧼key⧽</div>',
+		$this->assertSame( Html::errorBox( '⧼key⧽' ),
 			$e->msg->parse() );
 
 		$this->assertStringContainsString(
@@ -48,7 +49,7 @@ class FederatedPropertiesErrorTest extends MediaWikiIntegrationTestCase {
 
 		$e = new FederatedPropertiesError( $languageCode, $item, 'key', $params );
 
-		$this->assertSame( '<div class="mw-message-box-error mw-message-box">⧼key⧽</div>',
+		$this->assertSame( Html::errorBox( '⧼key⧽' ),
 			$e->msg->parse() );
 
 		$this->assertStringContainsString(
