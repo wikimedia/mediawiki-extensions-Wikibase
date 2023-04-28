@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Store\Sql;
 
 use HashBagOStuff;
-use Hooks;
+use MediaWiki\HookContainer\HookContainer;
 use MediaWiki\MediaWikiServices;
 use ObjectCache;
 use Wikibase\DataAccess\DatabaseEntitySource;
@@ -137,6 +137,11 @@ class SqlStore implements Store {
 	private $wikibaseServices;
 
 	/**
+	 * @var HookContainer
+	 */
+	private $hookContainer;
+
+	/**
 	 * @var string
 	 */
 	private $cacheKeyPrefix;
@@ -173,6 +178,7 @@ class SqlStore implements Store {
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
 	 * @param IdGenerator $idGenerator
 	 * @param WikibaseServices $wikibaseServices Service container providing data access services
+	 * @param HookContainer $hookContainer Service container providing data access services
 	 * @param DatabaseEntitySource $entitySource
 	 * @param SettingsArray $settings
 	 */
@@ -185,6 +191,7 @@ class SqlStore implements Store {
 		EntityNamespaceLookup $entityNamespaceLookup,
 		IdGenerator $idGenerator,
 		WikibaseServices $wikibaseServices,
+		HookContainer $hookContainer,
 		DatabaseEntitySource $entitySource,
 		SettingsArray $settings
 	) {
@@ -196,6 +203,7 @@ class SqlStore implements Store {
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
 		$this->idGenerator = $idGenerator;
 		$this->wikibaseServices = $wikibaseServices;
+		$this->hookContainer = $hookContainer;
 		$this->entitySource = $entitySource;
 
 		$this->cacheKeyPrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
@@ -225,7 +233,7 @@ class SqlStore implements Store {
 	public function getEntityByLinkedTitleLookup() {
 		$lookup = $this->newSiteLinkStore();
 
-		Hooks::run( 'GetEntityByLinkedTitleLookup', [ &$lookup ] );
+		$this->hookContainer->run( 'GetEntityByLinkedTitleLookup', [ &$lookup ] );
 
 		return $lookup;
 	}

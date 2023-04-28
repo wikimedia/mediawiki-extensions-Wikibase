@@ -389,7 +389,8 @@ return [
 			new PagePropsEntityIdLookup(
 				$services->getPageProps(),
 				WikibaseClient::getEntityIdParser( $services )
-			)
+			),
+			$services->getHookContainer()
 		);
 	},
 

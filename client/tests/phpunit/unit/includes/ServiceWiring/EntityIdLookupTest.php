@@ -27,6 +27,8 @@ class EntityIdLookupTest extends ServiceWiringTestCase {
 			'WikibaseClient.EntityIdParser',
 			$this->createMock( EntityIdParser::class )
 		);
+		$this->serviceContainer->expects( $this->once() )
+			->method( 'getHookContainer' );
 		$this->assertInstanceOf(
 			EntityIdLookup::class,
 			$this->getService( 'WikibaseClient.EntityIdLookup' )

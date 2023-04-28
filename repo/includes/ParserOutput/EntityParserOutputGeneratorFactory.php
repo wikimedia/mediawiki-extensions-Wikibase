@@ -3,11 +3,11 @@
 namespace Wikibase\Repo\ParserOutput;
 
 use ExtensionRegistry;
-use Hooks;
 use Language;
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use MediaWiki\Cache\LinkBatchFactory;
 use MediaWiki\Extension\Math\MathDataUpdater;
+use MediaWiki\HookContainer\HookContainer;
 use PageImages\PageImages;
 use RepoGroup;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
@@ -100,6 +100,11 @@ class EntityParserOutputGeneratorFactory {
 	private $linkBatchFactory;
 
 	/**
+	 * @var HookContainer
+	 */
+	private $hookContainer;
+
+	/**
 	 * @param DispatchingEntityViewFactory $entityViewFactory
 	 * @param DispatchingEntityMetaTagsCreatorFactory $entityMetaTagsCreatorFactory
 	 * @param EntityTitleLookup $entityTitleLookup
@@ -111,6 +116,7 @@ class EntityParserOutputGeneratorFactory {
 	 * @param StatsdDataFactoryInterface $stats
 	 * @param RepoGroup $repoGroup
 	 * @param LinkBatchFactory $linkBatchFactory
+	 * @param HookContainer $hookContainer
 	 * @param string[] $preferredGeoDataProperties
 	 * @param string[] $preferredPageImagesProperties
 	 * @param string[] $globeUris Mapping of globe URIs to canonical globe names, as recognized by
@@ -128,6 +134,7 @@ class EntityParserOutputGeneratorFactory {
 		StatsdDataFactoryInterface $stats,
 		RepoGroup $repoGroup,
 		LinkBatchFactory $linkBatchFactory,
+		HookContainer $hookContainer,
 		array $preferredGeoDataProperties = [],
 		array $preferredPageImagesProperties = [],
 		array $globeUris = []
@@ -143,6 +150,7 @@ class EntityParserOutputGeneratorFactory {
 		$this->stats = $stats;
 		$this->repoGroup = $repoGroup;
 		$this->linkBatchFactory = $linkBatchFactory;
+		$this->hookContainer = $hookContainer;
 		$this->preferredGeoDataProperties = $preferredGeoDataProperties;
 		$this->preferredPageImagesProperties = $preferredPageImagesProperties;
 		$this->globeUris = $globeUris;
@@ -231,8 +239,7 @@ class EntityParserOutputGeneratorFactory {
 			),
 		];
 
-		// TODO: do not use global state
-		Hooks::run(
+		$this->hookContainer->run(
 			'WikibaseRepoOnParserOutputUpdaterConstruction',
 			[
 				$statementUpdater,

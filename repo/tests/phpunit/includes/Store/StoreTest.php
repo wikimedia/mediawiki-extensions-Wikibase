@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Store;
 
+use MediaWiki\HookContainer\HookContainer;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\WikibaseServices;
@@ -43,6 +44,7 @@ class StoreTest extends MediaWikiIntegrationTestCase {
 				new EntityNamespaceLookup( [] ),
 				$this->createMock( IdGenerator::class ),
 				$this->createMock( WikibaseServices::class ),
+				$this->createMock( HookContainer::class ),
 				new DatabaseEntitySource( 'testsource', 'testdb', [], '', '', '', '' ),
 				new SettingsArray( [
 					'sharedCacheKeyPrefix' => 'wikibase_shared/testdb',

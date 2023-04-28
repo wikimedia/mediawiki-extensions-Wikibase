@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Content;
 
-use Hooks;
 use InvalidArgumentException;
 use LogicException;
+use MediaWiki\MediaWikiServices;
 use MWException;
 use Title;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -192,7 +192,9 @@ class ItemContent extends EntityContent {
 		$searchTextGenerator = new ItemSearchTextGenerator();
 		$text = $searchTextGenerator->generate( $this->getItem() );
 
-		if ( !Hooks::run( 'WikibaseTextForSearchIndex', [ $this, &$text ] ) ) {
+		if ( !MediaWikiServices::getInstance()->getHookContainer()
+			->run( 'WikibaseTextForSearchIndex', [ $this, &$text ] )
+		) {
 			return '';
 		}
 

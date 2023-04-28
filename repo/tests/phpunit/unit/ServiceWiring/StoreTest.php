@@ -43,6 +43,8 @@ class StoreTest extends ServiceWiringTestCase {
 			$this->createMock( IdGenerator::class ) );
 		$this->mockService( 'WikibaseRepo.WikibaseServices',
 			$this->createMock( WikibaseServices::class ) );
+		$this->serviceContainer->expects( $this->once() )
+			->method( 'getHookContainer' );
 		$this->mockService( 'WikibaseRepo.LocalEntitySource',
 			$this->createMock( DatabaseEntitySource::class ) );
 		$this->mockService( 'WikibaseRepo.Settings',

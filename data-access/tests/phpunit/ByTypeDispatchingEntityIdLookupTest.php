@@ -3,6 +3,7 @@
 namespace Wikibase\DataAccess\Tests;
 
 use InvalidArgumentException;
+use MediaWiki\HookContainer\HookContainer;
 use PHPUnit\Framework\TestCase;
 use Title;
 use Wikibase\DataAccess\ByTypeDispatchingEntityIdLookup;
@@ -23,7 +24,8 @@ class ByTypeDispatchingEntityIdLookupTest extends TestCase {
 		new ByTypeDispatchingEntityIdLookup(
 			[ 'item' => 123 ],
 			[],
-			$this->createMock( EntityIdLookup::class )
+			$this->createMock( EntityIdLookup::class ),
+			$this->createMock( HookContainer::class )
 		);
 	}
 
@@ -32,7 +34,8 @@ class ByTypeDispatchingEntityIdLookupTest extends TestCase {
 		new ByTypeDispatchingEntityIdLookup(
 			[ 'wikibase-item' ],
 			[],
-			$this->createMock( EntityIdLookup::class )
+			$this->createMock( EntityIdLookup::class ),
+			$this->createMock( HookContainer::class )
 		);
 	}
 
@@ -41,7 +44,8 @@ class ByTypeDispatchingEntityIdLookupTest extends TestCase {
 		new ByTypeDispatchingEntityIdLookup(
 			[ 'item' => 'wikibase-item' ],
 			[ 'item' => 'BADVALUE' ],
-			$this->createMock( EntityIdLookup::class )
+			$this->createMock( EntityIdLookup::class ),
+			$this->createMock( HookContainer::class )
 		);
 	}
 
@@ -52,7 +56,8 @@ class ByTypeDispatchingEntityIdLookupTest extends TestCase {
 			[ function () {
 				return $this->createMock( EntityIdLookup::class );
 			} ],
-			$this->createMock( EntityIdLookup::class )
+			$this->createMock( EntityIdLookup::class ),
+			$this->createMock( HookContainer::class )
 		);
 	}
 
@@ -89,7 +94,8 @@ class ByTypeDispatchingEntityIdLookupTest extends TestCase {
 			[],
 			$this->mockEntityIdLookup( [
 				$title->getPrefixedDBkey() => $entityId,
-			] )
+			] ),
+			$this->createMock( HookContainer::class )
 		);
 
 		$result = $lookup->getEntityIdForTitle( $title );
@@ -113,7 +119,8 @@ class ByTypeDispatchingEntityIdLookupTest extends TestCase {
 					$title->getPrefixedDBkey() => $entityId,
 				] );
 			} ],
-			$this->createMock( EntityIdLookup::class )
+			$this->createMock( EntityIdLookup::class ),
+			$this->createMock( HookContainer::class )
 		);
 
 		$result = $lookup->getEntityIdForTitle( $title );
@@ -140,7 +147,8 @@ class ByTypeDispatchingEntityIdLookupTest extends TestCase {
 			} ],
 			$this->mockEntityIdLookup( [
 				$title->getPrefixedDBkey() => $entityIdDefault,
-			] )
+			] ),
+			$this->createMock( HookContainer::class )
 		);
 
 		$result = $lookup->getEntityIdForTitle( $title );
@@ -164,7 +172,8 @@ class ByTypeDispatchingEntityIdLookupTest extends TestCase {
 					$title->getPrefixedDBkey() => $entityId,
 				] );
 			} ],
-			$this->mockEntityIdLookup( [] )
+			$this->mockEntityIdLookup( [] ),
+			$this->createMock( HookContainer::class )
 		);
 
 		// lookup is for `wikibase-item`, but Title is `wikitext` & default will come up empty...
@@ -184,7 +193,8 @@ class ByTypeDispatchingEntityIdLookupTest extends TestCase {
 		$lookup = new ByTypeDispatchingEntityIdLookup(
 			[],
 			[],
-			$this->mockEntityIdLookup( [ $title->getPrefixedDBkey() => $entityId ] )
+			$this->mockEntityIdLookup( [ $title->getPrefixedDBkey() => $entityId ] ),
+			$this->createMock( HookContainer::class )
 		);
 
 		// lookup is for `wikibase-item`, but Title is `wikitext` & default will come up empty...
