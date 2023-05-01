@@ -496,7 +496,7 @@
 	"wikibase-tainted-ref-popper-remove-warning": "Прыбраць папярэджанне",
 	"wikibase-tainted-ref-tainted-icon-title": "У гэтага сцвярджэння выяўлены шэраг магчымых праблемаў.",
 	"wikibase-setclaim-warning-duplicatemainsnak": "Выяўлены дублікатны галоўны снак. Заява не дададзена.",
-	"wikibase-editentity-warning-serializeresult": "Немагчыма серыялізаваць дадзеныя сутнасці для выніку.",
+	"wikibase-editentity-warning-serializeresult": "Немагчыма серыялізаваць даныя сутнасці для выніку.",
 	"wikibase-federated-properties-search-api-error-message": "Уласцівасці часова недаступныя.",
 	"wikibase-federated-properties-save-api-error-message": "Ваша захаванне не атрымалася з-за няўдалага запыту да крыніцы федэрацыі вікі.",
 	"wikibase-federated-properties-source-wiki-api-error-message": "Сцвярджэння пра гэты элемент часова недаступныя з-за няўдалага запыту да крыніцы федэрацыі вікі. Калі ласка, абнавіце старонку.",
