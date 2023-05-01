@@ -37,6 +37,7 @@
 	"wikibase-sitelinks-special": "ٻيون سرزمينون",
 	"wikibase-statementview-rank-normal": "عام درجو",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|حوالو|حوالا}}",
+	"wikibase-entityselector-more": "وڌيڪ",
 	"wikibase-validator-label-no-entityid": "ليبل لازمي طور ڪارگر انٽٽي آئڊي نہ ھجي.",
 	"wikibase-wikibaserepopage-not-itemid": "\"$1\" ڪا ڪارگر آئٽم آئڊي نہ آھي.",
 	"wikibase-itembytitle-lookup-page": "صفحو:",
