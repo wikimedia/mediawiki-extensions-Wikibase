@@ -67,6 +67,8 @@ This REST API follows the [Hexagonal Architecture](https://alistair.cockburn.us/
 
 ![Hexagonal Architecture Diagram](./hexagonal_architecture.drawio.svg)
 
+The code is divided into three layers: Domain, Application, and Infrastructure. Domain and Application define the core business and application logic of the software, whereas the infrastructure layer deals with any external dependencies and concepts, such as transport or persistence details.
+
 #### Directory structure
 
 - `docs/`
@@ -74,17 +76,26 @@ This REST API follows the [Hexagonal Architecture](https://alistair.cockburn.us/
 - `../../docs/rest-api/`: the built OpenAPI specification and swagger documentation
 - `specs/`: OpenAPI specification source
 - `src/`
-  - `DataAccess/`: implementations of services that bind to persistent storage
-  - `Domain/`: domain models and services
-  - `RouteHandlers/` classes that create and pass request DTO into use cases and return HTTP responses
-  - `UseCases/`: one directory per use case
-- `tests/`
+  - `Domain/`
+    - `Model/`: Entities and value objects used when persisting data
+    - `ReadModel/`: Entities and value objects used when retrieving data
+    - `Services/`: Secondary ports, i.e. persistence interfaces such as retrievers and updaters
+  - `Application/`
+    - `Serialization/`: Deserializers used for turning user input into write models, serializers used for turning read models into JSON-serializable objects
+    - `Validation/`: Generic (not use cases specific) classes for validating user input
+    - `UseCases/`: Primary ports of the application core
+  - `Infrastructure/`: Secondary adapters, i.e. implementations of interfaces defined in the application core
+    - `DataAccess/`: Implementations of persistence services
+  - `RouteHandlers/`: Web controllers acting as primary adapters
+- `tests/` @anchor restApiTestDirs
   - `mocha/`: tests using the mocha framework
     - `api-testing/`: end-to-end tests using [MediaWiki's api-testing][1] library
-	- `openapi-validation/`: tests against the OpenAPI spec
+    - `openapi-validation/`: tests against the OpenAPI spec
   - `phpunit/`: integration and unit tests using the phpunit framework
 
 ### Tests
+
+Descriptions of the different kinds of tests can be found in the @ref restApiTestDirs "respective section of the directory structure overview" above.
 
 #### e2e and schema tests
 
