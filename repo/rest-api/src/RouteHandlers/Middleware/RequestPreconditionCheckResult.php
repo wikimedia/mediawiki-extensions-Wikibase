@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\RouteHandlers\Middleware;
 
-use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
+use Wikibase\Repo\RestApi\Domain\ReadModel\LatestItemRevisionMetadataResult;
 
 /**
  * @license GPL-2.0-or-later

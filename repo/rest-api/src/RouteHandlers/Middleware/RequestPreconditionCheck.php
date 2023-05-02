@@ -6,7 +6,7 @@ use Exception;
 use MediaWiki\Rest\ConditionalHeaderUtil;
 use MediaWiki\Rest\RequestInterface;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
+use Wikibase\Repo\RestApi\Domain\ReadModel\LatestItemRevisionMetadataResult;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 
 /**

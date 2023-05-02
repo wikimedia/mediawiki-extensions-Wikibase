@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\RestApi\Domain\Services;
 
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
+use Wikibase\Repo\RestApi\Domain\ReadModel\LatestItemRevisionMetadataResult;
 
 /**
  * @license GPL-2.0-or-later
