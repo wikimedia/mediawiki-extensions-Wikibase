@@ -30,7 +30,7 @@ class WikibaseRepoItemDescriptionValidator implements ItemDescriptionValidator {
 
 	public function validate( ItemId $itemId, string $language, string $description ): ?ValidationError {
 		return $this->validateDescription( $description )
-			   ?? $this->detectCollision( $itemId, $language, $description );
+			   ?? $this->validateItem( $itemId, $language, $description );
 	}
 
 	private function validateDescription( string $description ): ?ValidationError {
@@ -61,31 +61,46 @@ class WikibaseRepoItemDescriptionValidator implements ItemDescriptionValidator {
 		return null;
 	}
 
-	private function detectCollision( ItemId $itemId, string $language, string $description ): ?ValidationError {
+	private function validateItem( ItemId $itemId, string $language, string $description ): ?ValidationError {
 		$item = $this->itemRetriever->getItem( $itemId );
-		if ( $item && $item->getLabels()->hasTermForLanguage( $language ) ) {
-			$label = $item->getLabels()->getByLanguage( $language )->getText();
 
-			if ( $label === $description ) {
-				return new ValidationError(
-					self::CODE_LABEL_DESCRIPTION_EQUAL,
-					[ self::CONTEXT_LANGUAGE => $language ]
-				);
-			}
+		// skip if Item does not exist or is a redirect
+		if ( $item === null ) {
+			return null;
+		}
 
-			$entityId = $this->termsCollisionDetector
-				->detectLabelAndDescriptionCollision( $language, $label, $description );
-			if ( $entityId instanceof ItemId ) {
-				return new ValidationError(
-					self::CODE_LABEL_DESCRIPTION_DUPLICATE,
-					[
-						self::CONTEXT_LANGUAGE => $language,
-						self::CONTEXT_LABEL => $label,
-						self::CONTEXT_DESCRIPTION => $description,
-						self::CONTEXT_MATCHING_ITEM_ID => (string)$entityId,
-					]
-				);
-			}
+		// skip if description is unchanged
+		if ( $item->getDescriptions()->hasTermForLanguage( $language ) &&
+			 $item->getDescriptions()->getByLanguage( $language )->getText() === $description
+		) {
+			return null;
+		}
+
+		// skip if Item does not have a label
+		if ( !$item->getLabels()->hasTermForLanguage( $language ) ) {
+			return null;
+		}
+
+		$label = $item->getLabels()->getByLanguage( $language )->getText();
+		if ( $label === $description ) {
+			return new ValidationError(
+				self::CODE_LABEL_DESCRIPTION_EQUAL,
+				[ self::CONTEXT_LANGUAGE => $language ]
+			);
+		}
+
+		$entityId = $this->termsCollisionDetector
+			->detectLabelAndDescriptionCollision( $language, $label, $description );
+		if ( $entityId instanceof ItemId ) {
+			return new ValidationError(
+				self::CODE_LABEL_DESCRIPTION_DUPLICATE,
+				[
+					self::CONTEXT_LANGUAGE => $language,
+					self::CONTEXT_LABEL => $label,
+					self::CONTEXT_DESCRIPTION => $description,
+					self::CONTEXT_MATCHING_ITEM_ID => (string)$entityId,
+				]
+			);
 		}
 
 		return null;

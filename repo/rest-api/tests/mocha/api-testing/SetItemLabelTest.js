@@ -106,6 +106,25 @@ describe( 'PUT /entities/items/{item_id}/labels/{language_code}', () => {
 		} );
 	} );
 
+	it( 'idempotency check: can set the same label twice', async () => {
+		const languageCode = 'en';
+		const newLabel = `new English Label ${utils.uniq()}`;
+		const comment = 'omg look, i can set a new label';
+		let response = await newSetItemLabelRequestBuilder( testItemId, languageCode, newLabel )
+			.withJsonBodyParam( 'comment', comment )
+			.assertValidRequest()
+			.makeRequest();
+
+		assertValid200Response( response, newLabel );
+
+		response = await newSetItemLabelRequestBuilder( testItemId, languageCode, newLabel )
+			.withJsonBodyParam( 'comment', 'omg look, i can set the same label again' )
+			.assertValidRequest()
+			.makeRequest();
+
+		assertValid200Response( response, newLabel );
+	} );
+
 	describe( '400 error response', () => {
 		it( 'invalid item id', async () => {
 			const itemId = 'X123';
