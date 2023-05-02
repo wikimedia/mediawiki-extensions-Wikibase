@@ -290,6 +290,27 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 			assert.include( response.body.message, redirectTarget );
 			assert.strictEqual( response.body.code, 'redirected-item' );
 		} );
+
+		it( 'item is a redirect and item label+description collision', async () => {
+			const redirectTarget = testItemId;
+			const redirectSource = await entityHelper.createRedirectForItem( redirectTarget );
+			const description = `some-description-${utils.uniq()}`;
+			await entityHelper.createEntity( 'item', {
+				labels: [ { language: 'en', value: testEnLabel } ],
+				descriptions: [ { language: 'en', value: description } ]
+			} );
+
+			const response = await newSetItemDescriptionRequestBuilder(
+				redirectSource,
+				'en',
+				description
+			).assertValidRequest().makeRequest();
+
+			expect( response ).to.have.status( 409 );
+			assertValidErrorResponse( response, 'redirected-item' );
+			assert.include( response.body.message, redirectSource );
+			assert.include( response.body.message, redirectTarget );
+		} );
 	} );
 
 	describe( '415 error response', () => {

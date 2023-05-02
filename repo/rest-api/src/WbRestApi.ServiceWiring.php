@@ -50,10 +50,10 @@ use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Domain\Services\ItemDataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
+use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupItemDataRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\MediaWikiEditEntityFactoryItemUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\PrefetchingTermLookupAliasesRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\TermLookupItemDataRetriever;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\WikibaseEntityLookupItemDataRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\WikibaseEntityRevisionLookupItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
@@ -222,8 +222,8 @@ return [
 	},
 
 	'WbRestApi.ItemDataRetriever' => function( MediaWikiServices $services ): ItemDataRetriever {
-		return new WikibaseEntityLookupItemDataRetriever(
-			WikibaseRepo::getEntityLookup( $services ),
+		return new EntityRevisionLookupItemDataRetriever(
+			WikibaseRepo::getEntityRevisionLookup( $services ),
 			new StatementReadModelConverter(
 				WikibaseRepo::getStatementGuidParser( $services ),
 				WikibaseRepo::getPropertyDataTypeLookup()
