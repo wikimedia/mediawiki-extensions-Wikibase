@@ -29,6 +29,8 @@
 	"apihelp-query+wblistentityusage-example-simple": "Pridobitev strani, ki uporablja entiteto <kbd>Q2</kbd>.",
 	"apihelp-query+wblistentityusage-example-url": "Pridobitev strani, ki uporablja entiteto <kbd>Q2</kbd>, z vključenim URL-jem.",
 	"apihelp-query+wblistentityusage-example-aspect": "Pridobitev strani, ki uporabljajo entiteto <kbd>Q2</kbd>, in je bil aspekt povezava mesta ali izjava.",
+	"apihelp-query+wblistentityusage-format-migration": "Ta modul ima novo obliko parametrov. Ta parameter je bil nadomeščen s parametrom »$1«.",
+	"wikibase-client-wblistentityusage-param-format-mix": "Podedovanih parametrov »wblistentityusage« (predpona wbeu) in novih (predpona wbleu) ni dovoljeno uporabljati sočasno v enem zahtevku.",
 	"apihelp-query+pageterms-description": "Pridobitev izrazov {{WBREPONAME}} (običajno oznak, opisov in vzdevkov), povezanih s stranjo prek povezave mesta.",
 	"apihelp-query+pageterms-summary": "Pridobitev izrazov {{WBREPONAME}} (običajno oznak, opisov in sopomenk), povezanih s stranjo prek povezave mesta.",
 	"apihelp-query+pageterms-example-simple": "Pridobitev vseh pogojev, povezanih s stranjo »London«, v jeziku uporabnika.",
