@@ -76,7 +76,7 @@
 	"wikibase-pageswithbadges-legend": "Luettelo sivuista tietyn arvomerkin mukaan",
 	"wikibase-pageswithbadges-badge": "Arvomerkki:",
 	"wikibase-pageswithbadges-submit": "Näytä sivut",
-	"entityusage": "Yksikön käyttö",
+	"entityusage": "Kohteen käyttö",
 	"wikibase-entityusage-submit": "Näytä sivut",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}}-kohteen tunniste",
 	"wikibase-pageinfo-entity-id-none": "Ei mitään",

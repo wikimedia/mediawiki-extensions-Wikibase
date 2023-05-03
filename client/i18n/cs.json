@@ -131,5 +131,6 @@
 	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>Varování:</strong> Nejste přihlášen(a). Pokud uložíte jakoukoli editaci, bude vaše IP adresa veřejně viditelná. Pokud se <strong>přihlásíte</strong> nebo si <strong>vytvoříte účet</strong>, budou vaše editace připsány vašemu uživatelskému jménu a získáte i další výhody.",
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Editovat bez přihlášení",
 	"wikibase-client-data-bridge-unsupported-datatype-error-head": "Editovat hodnotu vlastnosti $1 není momentálně umožněno.",
-	"wikibase-client-data-bridge-unsupported-datatype-error-body": "$1 má na {{GRAMMAR:6sg|{{WBREPONAME}}}} datový typ $2. Editace tohoto datového typu není v současnosti podporována."
+	"wikibase-client-data-bridge-unsupported-datatype-error-body": "$1 má na {{GRAMMAR:6sg|{{WBREPONAME}}}} datový typ $2. Editace tohoto datového typu není v současnosti podporována.",
+	"wikibase-client-data-bridge-saving-error-assertuser-heading": "Nejste přihlášen(a)"
 }
