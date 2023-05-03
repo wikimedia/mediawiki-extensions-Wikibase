@@ -13,7 +13,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatement
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
-use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
+use Wikibase\Repo\RestApi\Domain\ReadModel\LatestItemRevisionMetadataResult;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementRetriever;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;

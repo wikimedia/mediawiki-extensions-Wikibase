@@ -6,7 +6,7 @@ use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\ResponseFactory;
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
+use Wikibase\Repo\RestApi\Domain\ReadModel\LatestItemRevisionMetadataResult;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\RequestPreconditionCheck;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\RequestPreconditionCheckResult;

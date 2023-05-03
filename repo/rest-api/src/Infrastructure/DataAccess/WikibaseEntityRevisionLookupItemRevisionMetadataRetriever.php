@@ -4,7 +4,7 @@ namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
 
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
+use Wikibase\Repo\RestApi\Domain\ReadModel\LatestItemRevisionMetadataResult;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 
 /**

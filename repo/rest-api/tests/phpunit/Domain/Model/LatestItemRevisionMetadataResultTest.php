@@ -6,10 +6,10 @@ use Generator;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult;
+use Wikibase\Repo\RestApi\Domain\ReadModel\LatestItemRevisionMetadataResult;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Domain\Model\LatestItemRevisionMetadataResult
+ * @covers \Wikibase\Repo\RestApi\Domain\ReadModel\LatestItemRevisionMetadataResult
  *
  * @group Wikibase
  *
