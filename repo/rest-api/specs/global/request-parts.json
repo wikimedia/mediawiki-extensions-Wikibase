@@ -1,4 +1,26 @@
 {
+	"LabelsPatchRequest": {
+		"allOf": [
+			{ "$ref": "#/PatchDocument" },
+			{
+				"properties": {
+					"patch": {
+						"items": {
+							"properties": {
+								"path": {
+									"example": "/en"
+								},
+								"value": {
+									"example": "patched label"
+								}
+							}
+						}
+					}
+				}
+			},
+			{ "$ref": "#/MediawikiEdit" }
+		]
+	},
 	"StatementRequest": {
 		"allOf": [
 			{
@@ -16,67 +38,28 @@
 			{ "$ref": "./request-parts.json#/MediawikiEdit" }
 		]
 	},
+	"example": "/value/content",
 	"StatementPatchRequest": {
 		"allOf": [
+			{ "$ref": "#/PatchDocument" },
 			{
-				"type": "object",
 				"properties": {
 					"patch": {
-						"description": "A JSON Patch document as defined by RFC 6902",
-						"type": "array",
 						"items": {
 							"properties": {
-								"op": {
-									"description": "The operation to perform",
-									"type": "string",
-									"enum": [
-										"add",
-										"copy",
-										"move",
-										"remove",
-										"replace",
-										"test"
-									]
-								},
 								"path": {
-									"description": "A JSON Pointer for the property to manipulate",
-									"type": "string",
-									"example": "/mainsnak/datavalue/value"
+									"example": "/value/content"
 								},
 								"value": {
-									"description": "The value to be used within the operation",
 									"example": "patched value"
 								}
-							},
-							"required": [
-								"op",
-								"path"
-							]
+							}
 						}
 					}
 				}
 			},
-			{ "$ref": "./request-parts.json#/MediawikiEdit" }
+			{ "$ref": "#/MediawikiEdit" }
 		]
-	},
-	"MediawikiEdit": {
-		"type": "object",
-		"properties": {
-			"tags": {
-				"type": "array",
-				"items": { "type": "string" },
-				"default": [ ],
-				"example": [ "mobile edit", "external tool edit" ]
-			},
-			"bot": {
-				"type": "boolean",
-				"default": false
-			},
-			"comment": {
-				"type": "string",
-				"example": "API edit fixing the modelling as discussed in ..."
-			}
-		}
 	},
 	"StatementRequestRequired": {
 		"allOf": [
@@ -120,5 +103,60 @@
 				"required": [ "type" ]
 			}
 		}
+	},
+	"MediawikiEdit": {
+		"type": "object",
+		"properties": {
+			"tags": {
+				"type": "array",
+				"items": { "type": "string" },
+				"default": [ ],
+				"example": [ "mobile edit", "external tool edit" ]
+			},
+			"bot": {
+				"type": "boolean",
+				"default": false
+			},
+			"comment": {
+				"type": "string",
+				"example": "API edit fixing the modelling as discussed in ..."
+			}
+		}
+	},
+	"PatchDocument": {
+		"type": "object",
+		"properties": {
+			"patch": {
+				"description": "A JSON Patch document as defined by RFC 6902",
+				"type": "array",
+				"items": {
+					"type": "object",
+					"properties": {
+						"op": {
+							"description": "The operation to perform",
+							"type": "string",
+							"enum": [
+								"add",
+								"copy",
+								"move",
+								"remove",
+								"replace",
+								"test"
+							],
+							"example": "replace"
+						},
+						"path": {
+							"description": "A JSON Pointer for the property to manipulate",
+							"type": "string"
+						},
+						"value": {
+							"description": "The value to be used within the operation"
+						}
+					},
+					"required": [ "op", "path" ]
+				}
+			}
+		},
+		"required": [ "patch" ]
 	}
 }

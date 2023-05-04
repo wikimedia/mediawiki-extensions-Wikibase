@@ -19,5 +19,27 @@
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
 		}
+	},
+	"patch": {
+		"tags": [ "labels" ],
+		"summary": "[WIP] Change an Item's Labels",
+		"description": "This endpoint is currently in development and is not recommended for production use.",
+		"parameters": [
+			{ "$ref": "../../global/parameters.json#/ItemId" },
+			{ "$ref": "../../global/parameters.json#/IfMatch" },
+			{ "$ref": "../../global/parameters.json#/IfNoneMatch" },
+			{ "$ref": "../../global/parameters.json#/IfUnmodifiedSince" }
+		],
+		"requestBody": { "$ref": "../../global/requests.json#/LabelsPatch" },
+		"responses": {
+			"200": { "$ref": "../../global/responses.json#/ItemLabels" },
+			"400": { "$ref": "../../global/responses.json#/InvalidLabelsPatchRequest" },
+			"404": { "$ref": "../../global/responses.json#/ItemNotFound" },
+			"409": { "$ref": "../../global/responses.json#/CannotApplyLabelsPatch" },
+			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
+			"415": { "$ref": "../../global/responses.json#/InvalidMediaType" },
+			"422": { "$ref": "../../global/responses.json#/InvalidPatchedLabels" },
+			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
+		}
 	}
 }

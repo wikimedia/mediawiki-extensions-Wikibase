@@ -439,6 +439,68 @@
 			}
 		}
 	},
+	"InvalidLabelsPatchRequest": {
+		"description": "The provided JSON Patch request is invalid",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/ContextError" },
+				"examples": {
+					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
+					"invalid-patch": { "$ref": "./examples.json#/InvalidPatchExample" },
+					"invalid-patch-operation": { "$ref": "./examples.json#/InvalidPatchOperationExample" },
+					"invalid-patch-field-type": { "$ref": "./examples.json#/InvalidPatchFieldTypeExample" },
+					"missing-json-patch-field": { "$ref": "./examples.json#/MissingJsonPatchFieldExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
+	"CannotApplyLabelsPatch": {
+		"description": "The provided JSON Patch cannot be applied to the Labels of the given Item",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/ContextError" },
+				"examples": {
+					"patch-test-failed": { "$ref": "./examples.json#/PatchTestFailedExample" },
+					"patch-target-not-found": { "$ref": "./examples.json#/PatchTargetNotFoundExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
+	"InvalidPatchedLabels": {
+		"description": "Applying the provided JSON Patch results in invalid Labels",
+		"content": {
+			"application/json": {
+				"schema": {
+					"$ref": "./response-parts.json#/ContextError"
+				},
+				"examples": {
+					"patched-labels-invalid-language-code": {
+						"$ref": "./examples.json#/PatchedLabelsInvalidLanguageCodeExample"
+					},
+					"patched-label-empty": { "$ref": "./examples.json#/PatchedLabelEmptyExample" },
+					"patched-label-too-long": { "$ref": "./examples.json#/PatchedLabelTooLongExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
 	"InvalidStatementPatch": {
 		"description": "The provided JSON Patch is invalid",
 		"content": {
