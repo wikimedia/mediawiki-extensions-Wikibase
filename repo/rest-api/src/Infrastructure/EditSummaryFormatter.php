@@ -8,6 +8,7 @@ use Wikibase\Lib\Summary;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\LabelEditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
 use Wikibase\Repo\SummaryFormatter;
 
@@ -29,6 +30,9 @@ class EditSummaryFormatter {
 	}
 
 	private function convertToFormattableSummary( EditSummary $editSummary ): FormatableSummary {
+		if ( $editSummary instanceof LabelsEditSummary ) {
+			return new Summary();
+		}
 		if ( $editSummary instanceof LabelEditSummary ) {
 			switch ( $editSummary->getEditAction() ) {
 				case EditSummary::ADD_ACTION:

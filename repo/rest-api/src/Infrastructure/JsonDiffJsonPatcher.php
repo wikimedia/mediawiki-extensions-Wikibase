@@ -40,7 +40,8 @@ class JsonDiffJsonPatcher implements JsonPatcher {
 			throw new PatchPathException( $e->getMessage(), (array)$e->getOperation(), $e->getField() );
 		}
 
-		return $target;
+		// TODO investigate. Casting to array is necessary if $target starts out as an empty array.
+		return (array)$target;
 	}
 
 }
