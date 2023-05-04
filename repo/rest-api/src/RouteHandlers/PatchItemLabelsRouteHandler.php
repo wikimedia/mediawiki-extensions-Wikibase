@@ -64,6 +64,11 @@ class PatchItemLabelsRouteHandler extends SimpleHandler {
 		$httpResponse = $this->getResponseFactory()->create();
 		$httpResponse->setStatus( 200 );
 		$httpResponse->setHeader( 'Content-Type', 'application/json' );
+		$httpResponse->setHeader( 'ETag', "\"{$useCaseResponse->getRevisionId()}\"" );
+		$httpResponse->setHeader(
+			'Last-Modified',
+			wfTimestamp( TS_RFC2822, $useCaseResponse->getLastModified() )
+		);
 		$httpResponse->setBody( new StringStream( json_encode(
 			$this->serializer->serialize( $useCaseResponse->getLabels() )
 		) ) );

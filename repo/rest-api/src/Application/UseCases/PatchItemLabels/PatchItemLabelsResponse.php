@@ -10,13 +10,25 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 class PatchItemLabelsResponse {
 
 	private Labels $labels;
+	private string $lastModified;
+	private int $revisionId;
 
-	public function __construct( Labels $labels ) {
+	public function __construct( Labels $labels, string $lastModified, int $revisionId ) {
 		$this->labels = $labels;
+		$this->lastModified = $lastModified;
+		$this->revisionId = $revisionId;
 	}
 
 	public function getLabels(): Labels {
 		return $this->labels;
+	}
+
+	public function getLastModified(): string {
+		return $this->lastModified;
+	}
+
+	public function getRevisionId(): int {
+		return $this->revisionId;
 	}
 
 }

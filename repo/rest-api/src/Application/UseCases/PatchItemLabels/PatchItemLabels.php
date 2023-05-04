@@ -57,7 +57,7 @@ class PatchItemLabels {
 			new EditMetadata( [], false, new LabelsEditSummary() )
 		);
 
-		return new PatchItemLabelsResponse( $revision->getItem()->getLabels() );
+		return new PatchItemLabelsResponse( $revision->getItem()->getLabels(), $revision->getLastModified(), $revision->getRevisionId() );
 	}
 
 }
