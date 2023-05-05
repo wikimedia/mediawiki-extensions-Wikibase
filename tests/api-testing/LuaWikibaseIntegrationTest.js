@@ -143,11 +143,15 @@ describe( 'Lua Wikibase integration', () => {
 		const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
 		await writeTextToPage( mindy, `{{#invoke:${module}|getLabel|${testItemId}}}`, pageTitle );
 		const pageText = await parsePage( pageTitle );
+		// eslint-disable-next-line security/detect-non-literal-regexp -- labels (uniq()) are regex-safe
 		assert.match( pageText, new RegExp( englishLabel + '|' + germanLabel ) );
 		const usageAspects = await getUsageAspects( pageTitle, testItemId );
 		assert.isNotEmpty( usageAspects );
 		for ( const usageAspect of usageAspects ) {
-			assert.match( usageAspect, /^L(\..*)?$/ );
+			assert.isOk(
+				usageAspect === 'L' || usageAspect.startsWith( 'L.' ),
+				`Usage aspect '${usageAspect}' should be 'L' or start with 'L.'`,
+			);
 		}
 	} );
 
@@ -155,6 +159,7 @@ describe( 'Lua Wikibase integration', () => {
 		const pageTitle = utils.title( 'WikibaseTestPageForRedirectsToParse-' );
 		await writeTextToPage( mindy, `{{#invoke:${module}|getLabel|${redirectedItemId}}}`, pageTitle );
 		const pageText = await parsePage( pageTitle );
+		// eslint-disable-next-line security/detect-non-literal-regexp -- labels (uniq()) are regex-safe
 		assert.match( pageText, new RegExp( englishLabel + '|' + germanLabel ) );
 		const usageAspects = await getUsageAspects( pageTitle, redirectedItemId );
 		assert.isNotEmpty( usageAspects );
@@ -261,7 +266,10 @@ describe( 'Lua Wikibase integration', () => {
 		const usageAspects = await getUsageAspects( pageTitle, testItemId );
 		assert.isNotEmpty( usageAspects );
 		for ( const usageAspect of usageAspects ) {
-			assert.match( usageAspect, /^D(\..*)?$/ );
+			assert.isOk(
+				usageAspect === 'D' || usageAspect.startsWith( 'D.' ),
+				`Usage aspect '${usageAspect}' should be 'D' or start with 'D.'`,
+			);
 		}
 	} );
 
@@ -269,13 +277,17 @@ describe( 'Lua Wikibase integration', () => {
 		const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
 		await writeTextToPage( mindy, `{{#invoke:${module}|formatItemIdValue|${testItemId}}}`, pageTitle );
 		const pageText = await parsePage( pageTitle );
+		// eslint-disable-next-line security/detect-non-literal-regexp -- labels (uniq()) are regex-safe
 		assert.match( pageText, new RegExp( englishLabel + '|' + germanLabel ) );
 		const usageAspects = await getUsageAspects( pageTitle, testItemId );
 		assert.include( usageAspects, 'T' );
 		const otherUsageAspects = usageAspects.filter( ( usageAspect ) => usageAspect !== 'T' );
 		assert.isNotEmpty( otherUsageAspects );
 		for ( const usageAspect of otherUsageAspects ) {
-			assert.match( usageAspect, /^L(\..*)?$/ );
+			assert.isOk(
+				usageAspect === 'L' || usageAspect.startsWith( 'L.' ),
+				`Usage aspect '${usageAspect}' should be 'L' or start with 'L.'`,
+			);
 		}
 	} );
 
@@ -283,6 +295,7 @@ describe( 'Lua Wikibase integration', () => {
 		const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
 		await writeTextToPage( mindy, `{{#invoke:${module}|formatItemIdValue|${redirectedItemId}}}`, pageTitle );
 		const pageText = await parsePage( pageTitle );
+		// eslint-disable-next-line security/detect-non-literal-regexp -- labels (uniq()) are regex-safe
 		assert.match( pageText, new RegExp( englishLabel + '|' + germanLabel ) );
 		// TODO usage tracking for redirects: T280910
 	} );

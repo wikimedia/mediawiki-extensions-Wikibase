@@ -679,6 +679,7 @@
 		_getSuggestionsFromArray: function ( term, source ) {
 			var deferred = $.Deferred();
 
+			// eslint-disable-next-line security/detect-non-literal-regexp
 			var matcher = new RegExp( this._escapeRegex( term ), 'i' );
 
 			// eslint-disable-next-line no-jquery/no-grep

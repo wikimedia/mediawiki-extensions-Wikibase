@@ -53,6 +53,7 @@
 
 		for ( var dataType in registeredExperts ) {
 			if ( Object.prototype.hasOwnProperty.call( registeredExperts, dataType ) ) {
+				// eslint-disable-next-line security/detect-non-literal-require
 				constructors[ dataType ] = require( registeredExperts[ dataType ] );
 			}
 		}

@@ -22,5 +22,6 @@ module.exports = {
 		'es-x/no-property-shorthands': 'off',
 		'es-x/no-template-literals': 'off',
 		'es-x/no-trailing-function-commas': 'off',
+		'security/detect-non-literal-fs-filename': 'off',
 	},
 };
