@@ -3,18 +3,19 @@
 namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
 
 use Generator;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Site;
 use SiteLookup;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
+use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemData;
@@ -22,28 +23,25 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\ItemDataBuilder;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\WikibaseEntityLookupItemDataRetriever;
+use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupItemDataRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\SiteLinksReadModelConverter;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Infrastructure\DataAccess\WikibaseEntityLookupItemDataRetriever
+ * @covers \Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupItemDataRetriever
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
+class EntityRevisionLookupItemDataRetrieverTest extends TestCase {
 
-	/**
-	 * @var MockObject|EntityLookup
-	 */
-	private $entityLookup;
+	private EntityRevisionLookup $entityRevisionLookup;
 
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->entityLookup = $this->createStub( EntityLookup::class );
+		$this->entityRevisionLookup = $this->createStub( EntityRevisionLookup::class );
 	}
 
 	public function testGetItemData(): void {
@@ -54,7 +52,7 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 		$item = NewItem::withId( $itemId )
 			->andStatement( $expectedStatement )
 			->build();
-		$this->entityLookup = $this->newEntityLookupForIdWithReturnValue( $itemId, $item );
+		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $itemId, $item );
 
 		$itemData = $this->newRetriever()->getItemData( $itemId, ItemData::VALID_FIELDS );
 
@@ -74,7 +72,14 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 
 	public function testGivenItemDoesNotExist_getItemDataReturnsNull(): void {
 		$itemId = new ItemId( 'Q321' );
-		$this->entityLookup = $this->newEntityLookupForIdWithReturnValue( $itemId, null );
+		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $itemId, null );
+
+		$this->assertNull( $this->newRetriever()->getItemData( $itemId, ItemData::VALID_FIELDS ) );
+	}
+
+	public function testGivenItemRedirected_getItemDataReturnsNull(): void {
+		$itemId = new ItemId( 'Q321' );
+		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithRedirect( $itemId );
 
 		$this->assertNull( $this->newRetriever()->getItemData( $itemId, ItemData::VALID_FIELDS ) );
 	}
@@ -83,7 +88,7 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 	 * @dataProvider itemDataWithFieldsProvider
 	 */
 	public function testGivenFields_getItemDataReturnsItemDataOnlyWithRequestFields( Item $item, array $fields, ItemData $itemData ): void {
-		$this->entityLookup = $this->newEntityLookupForIdWithReturnValue( $item->getId(), $item );
+		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $item->getId(), $item );
 
 		$this->assertEquals(
 			$itemData,
@@ -154,7 +159,7 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 			->andStatement( $statement )
 			->build();
 
-		$this->entityLookup = $this->newEntityLookupForIdWithReturnValue( $itemId, $item );
+		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $itemId, $item );
 
 		$this->assertEquals(
 			$this->newStatementReadModelConverter()->convert( $statement ),
@@ -165,7 +170,15 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 	public function testGivenItemDoesNotExist_getStatementReturnsNull(): void {
 		$itemId = new ItemId( 'Q321' );
 		$statementId = new StatementGuid( $itemId, 'c48c32c3-42b5-498f-9586-84608b88747c' );
-		$this->entityLookup = $this->newEntityLookupForIdWithReturnValue( $itemId, null );
+		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $itemId, null );
+
+		$this->assertNull( $this->newRetriever()->getStatement( $statementId ) );
+	}
+
+	public function testGivenItemRedirected_getStatementReturnsNull(): void {
+		$itemId = new ItemId( 'Q321' );
+		$statementId = new StatementGuid( $itemId, 'c48c32c3-42b5-498f-9586-84608b88747c' );
+		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithRedirect( $itemId );
 
 		$this->assertNull( $this->newRetriever()->getStatement( $statementId ) );
 	}
@@ -177,7 +190,7 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 		$item = NewItem::withId( $itemId )
 			->build();
 
-		$this->entityLookup = $this->newEntityLookupForIdWithReturnValue( $itemId, $item );
+		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $itemId, $item );
 
 		$this->assertNull( $this->newRetriever()->getStatement( $statementId ) );
 	}
@@ -197,7 +210,7 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 			->andStatement( $statement2 )
 			->build();
 
-		$this->entityLookup = $this->newEntityLookupForIdWithReturnValue( $item->getId(), $item );
+		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $item->getId(), $item );
 
 		$this->assertEquals(
 			new StatementList(
@@ -223,7 +236,7 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 			->andStatement( $statement2 )
 			->build();
 
-		$this->entityLookup = $this->newEntityLookupForIdWithReturnValue( $item->getId(), $item );
+		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $item->getId(), $item );
 
 		$this->assertEquals(
 			new StatementList( $this->newStatementReadModelConverter()->convert( $statement1 ) ),
@@ -233,42 +246,66 @@ class WikibaseEntityLookupItemDataRetrieverTest extends TestCase {
 
 	public function testGivenItemDoesNotExist_getStatementsReturnsNull(): void {
 		$nonexistentItemId = new ItemId( 'Q321' );
-		$this->entityLookup = $this->newEntityLookupForIdWithReturnValue( $nonexistentItemId, null );
+		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $nonexistentItemId, null );
 
 		$this->assertNull( $this->newRetriever()->getStatements( $nonexistentItemId ) );
+	}
+
+	public function testGivenItemRedirected_getStatementsReturnsNull(): void {
+		$itemId = new ItemId( 'Q321' );
+		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithRedirect( $itemId );
+
+		$this->assertNull( $this->newRetriever()->getStatements( $itemId ) );
 	}
 
 	public function testGetItem(): void {
 		$itemId = new ItemId( 'Q321' );
 		$item = NewItem::withId( $itemId )->build();
-		$this->entityLookup = $this->newEntityLookupForIdWithReturnValue( $itemId, $item );
+		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $itemId, $item );
 
 		$this->assertSame( $item, $this->newRetriever()->getItem( $itemId ) );
 	}
 
 	public function testGivenItemDoesNotExist_getItemReturnsNull(): void {
 		$itemId = new ItemId( 'Q666' );
-		$this->entityLookup = $this->newEntityLookupForIdWithReturnValue( $itemId, null );
+		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $itemId, null );
 
 		$this->assertNull( $this->newRetriever()->getItem( $itemId ) );
 	}
 
-	private function newRetriever(): WikibaseEntityLookupItemDataRetriever {
-		return new WikibaseEntityLookupItemDataRetriever(
-			$this->entityLookup,
+	public function testGivenItemRedirected_getItemReturnsNull(): void {
+		$itemId = new ItemId( 'Q666' );
+		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithRedirect( $itemId );
+
+		$this->assertNull( $this->newRetriever()->getItem( $itemId ) );
+	}
+
+	private function newRetriever(): EntityRevisionLookupItemDataRetriever {
+		return new EntityRevisionLookupItemDataRetriever(
+			$this->entityRevisionLookup,
 			$this->newStatementReadModelConverter(),
 			$this->newSiteLinksReadModelConverter()
 		);
 	}
 
-	private function newEntityLookupForIdWithReturnValue( ItemId $id, ?Item $returnValue ): EntityLookup {
-		$entityLookup = $this->createMock( EntityLookup::class );
-		$entityLookup->expects( $this->once() )
-			->method( 'getEntity' )
+	private function newEntityRevisionLookupForIdWithReturnValue( ItemId $id, ?Item $returnValue ): EntityRevisionLookup {
+		$entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );
+		$entityRevisionLookup->expects( $this->once() )
+			->method( 'getEntityRevision' )
 			->with( $id )
-			->willReturn( $returnValue );
+			->willReturn( $returnValue ? new EntityRevision( $returnValue ) : null );
 
-		return $entityLookup;
+		return $entityRevisionLookup;
+	}
+
+	private function newEntityRevisionLookupForIdWithRedirect( ItemId $id ): EntityRevisionLookup {
+		$entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );
+		$entityRevisionLookup->expects( $this->once() )
+			->method( 'getEntityRevision' )
+			->with( $id )
+			->willThrowException( $this->createStub( RevisionedUnresolvedRedirectException::class ) );
+
+		return $entityRevisionLookup;
 	}
 
 	private function newStatementReadModelConverter(): StatementReadModelConverter {

@@ -22,7 +22,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemS
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\WikibaseEntityLookupItemDataRetriever;
+use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupItemDataRetriever;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
 
@@ -121,7 +121,7 @@ class WbRestApi {
 			->get( 'WbRestApi.ItemUpdater' );
 	}
 
-	public static function getItemDataRetriever( ContainerInterface $services = null ): WikibaseEntityLookupItemDataRetriever {
+	public static function getItemDataRetriever( ContainerInterface $services = null ): EntityRevisionLookupItemDataRetriever {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.ItemDataRetriever' );
 	}

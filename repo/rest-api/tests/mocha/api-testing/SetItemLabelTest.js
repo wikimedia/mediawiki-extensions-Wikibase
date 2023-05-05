@@ -9,6 +9,7 @@ const { makeEtag } = require( '../helpers/httpHelper' );
 
 describe( 'PUT /entities/items/{item_id}/labels/{language_code}', () => {
 	let testItemId;
+	let testEnDescription;
 	let originalLastModified;
 	let originalRevisionId;
 
@@ -30,10 +31,14 @@ describe( 'PUT /entities/items/{item_id}/labels/{language_code}', () => {
 	}
 
 	before( async () => {
+		testEnDescription = `english description ${utils.uniq()}`;
 		const createEntityResponse = await entityHelper.createEntity( 'item', {
 			labels: {
 				en: { language: 'en', value: `english label ${utils.uniq()}` },
 				fr: { language: 'fr', value: `étiquette française ${utils.uniq()}` }
+			},
+			descriptions: {
+				en: { language: 'en', value: testEnDescription }
 			}
 		} );
 		testItemId = createEntityResponse.entity.id;
@@ -305,6 +310,20 @@ describe( 'PUT /entities/items/{item_id}/labels/{language_code}', () => {
 			const redirectSource = await entityHelper.createRedirectForItem( redirectTarget );
 
 			const response = await newSetItemLabelRequestBuilder( redirectSource, 'en', 'test label' )
+				.assertValidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 409 );
+			assert.include( response.body.message, redirectSource );
+			assert.include( response.body.message, redirectTarget );
+			assert.strictEqual( response.body.code, 'redirected-item' );
+		} );
+
+		it( 'item is a redirect and label equals description', async () => {
+			const redirectTarget = testItemId;
+			const redirectSource = await entityHelper.createRedirectForItem( redirectTarget );
+
+			const response = await newSetItemLabelRequestBuilder( redirectSource, 'en', testEnDescription )
 				.assertValidRequest()
 				.makeRequest();
 

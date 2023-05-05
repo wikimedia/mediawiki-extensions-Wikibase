@@ -5,9 +5,10 @@ namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Statement\StatementList as DataModelStatementList;
+use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemData;
@@ -25,28 +26,35 @@ use Wikibase\Repo\RestApi\Infrastructure\SiteLinksReadModelConverter;
 /**
  * @license GPL-2.0-or-later
  */
-class WikibaseEntityLookupItemDataRetriever	implements ItemRetriever, ItemDataRetriever, ItemStatementsRetriever, ItemStatementRetriever {
+class EntityRevisionLookupItemDataRetriever implements ItemRetriever, ItemDataRetriever, ItemStatementsRetriever, ItemStatementRetriever {
 
-	private EntityLookup $entityLookup;
+	private EntityRevisionLookup $entityRevisionLookup;
 	private StatementReadModelConverter $statementReadModelConverter;
 	private SiteLinksReadModelConverter $siteLinksReadModelConverter;
 
 	public function __construct(
-		EntityLookup $entityLookup,
+		EntityRevisionLookup $entityRevisionLookup,
 		StatementReadModelConverter $statementReadModelConverter,
 		SiteLinksReadModelConverter $siteLinksReadModelConverter
 	) {
-		$this->entityLookup = $entityLookup;
+		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->statementReadModelConverter = $statementReadModelConverter;
 		$this->siteLinksReadModelConverter = $siteLinksReadModelConverter;
 	}
 
 	public function getItem( ItemId $itemId ): ?Item {
-		/** @var Item $item */
-		$item = $this->entityLookup->getEntity( $itemId );
-		'@phan-var Item $item';
+		try {
+			$entityRevision = $this->entityRevisionLookup->getEntityRevision( $itemId );
+		} catch ( RevisionedUnresolvedRedirectException $e ) {
+			return null;
+		}
 
-		return $item;
+		if ( !$entityRevision ) {
+			return null;
+		}
+
+		// @phan-suppress-next-line PhanTypeMismatchReturn
+		return $entityRevision->getEntity();
 	}
 
 	public function getItemData( ItemId $itemId, array $fields ): ?ItemData {
