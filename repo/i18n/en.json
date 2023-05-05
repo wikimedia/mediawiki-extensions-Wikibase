@@ -275,6 +275,7 @@
 	"wikibase-setlabeldescriptionaliases-label-label": "Label:",
 	"wikibase-setlabeldescriptionaliases-description-label": "Description:",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "Aliases:",
+	"wikibase-setlabeldescriptionaliases-description-not-supported": "Descriptions are not supported for this language.",
 	"wikibase-setlabeldescriptionaliases-submit": "Set label, description and aliases",
 	"special-setsitelink": "Set Item sitelink",
 	"wikibase-setsitelink-introfull": "You are setting the sitelink of $2 for [[:$1]].",
