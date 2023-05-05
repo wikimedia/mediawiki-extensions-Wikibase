@@ -57,6 +57,7 @@
 	"wikibase-description-empty": "No description defined",
 	"wikibase-description-edit-placeholder": "enter a description",
 	"wikibase-description-edit-placeholder-language-aware": "enter a description in $1",
+	"wikibase-description-edit-not-supported": "Descriptions are not supported for this language. Please provide a description in another language once the Item is created.",
 	"wikibase-aliases-edit-placeholder": "enter some aliases",
 	"wikibase-aliases-edit-placeholder-language-aware": "enter some aliases in $1",
 	"wikibase-aliases-edit-label": "Aliases, pipe-separated:",

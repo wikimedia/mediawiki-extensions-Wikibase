@@ -99,6 +99,7 @@
 	"wikibase-description-empty": "Placeholder message displayed instead of the item's description in case no description has been specified yet.  This message is displayed only when the user has JavaScript disabled. (When JavaScript is enabled, an input box will be displayed instead.)",
 	"wikibase-description-edit-placeholder": "[[File:Screenshot WikidataRepo 2012-05-13 G.png|right|0x150px]]\nThis is a generic text used as a placeholder while editing a new description. See also the Wikidata glossary on [[d:Wikidata:Glossary#languageattribute-description|description]].",
 	"wikibase-description-edit-placeholder-language-aware": "Like {{msg-mw|Wikibase-description-edit-placeholder}}, but language ($1) aware.",
+	"wikibase-description-edit-not-supported": "Message shown on special pages as notice indicating that descriptions are not supported for the current language.",
 	"wikibase-aliases-edit-placeholder": "This is a generic text used as a placeholder while editing a new list of pipe-separated aliases.",
 	"wikibase-aliases-edit-placeholder-language-aware": "Like {{msg-mw|Wikibase-aliases-edit-placeholder}}, but language ($1) aware.",
 	"wikibase-aliases-edit-label": "Generic label for the \"aliases\" text field holding the pipe-separated aliases.",
