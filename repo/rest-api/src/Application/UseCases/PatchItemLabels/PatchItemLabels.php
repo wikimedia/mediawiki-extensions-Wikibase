@@ -51,10 +51,16 @@ class PatchItemLabels {
 		$item = $this->itemRetriever->getItem( $itemId );
 		$item->getFingerprint()->setLabels( $labelsTermList );
 
+		$editMetadata = new EditMetadata(
+			$request->getEditTags(),
+			$request->isBot(),
+			LabelsEditSummary::newPatchSummary( $request->getComment(), $labelsTermList )
+		);
+
 		$revision = $this->itemUpdater->update(
 			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
 			$item,
-			new EditMetadata( [], false, new LabelsEditSummary() )
+			$editMetadata
 		);
 
 		return new PatchItemLabelsResponse( $revision->getItem()->getLabels(), $revision->getLastModified(), $revision->getRevisionId() );

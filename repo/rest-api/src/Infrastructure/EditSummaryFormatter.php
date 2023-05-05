@@ -31,9 +31,10 @@ class EditSummaryFormatter {
 
 	private function convertToFormattableSummary( EditSummary $editSummary ): FormatableSummary {
 		if ( $editSummary instanceof LabelsEditSummary ) {
-			return new Summary();
-		}
-		if ( $editSummary instanceof LabelEditSummary ) {
+			$summary = new Summary();
+			$summary->setUserSummary( $editSummary->getUserComment() );
+			return $summary;
+		} elseif ( $editSummary instanceof LabelEditSummary ) {
 			switch ( $editSummary->getEditAction() ) {
 				case EditSummary::ADD_ACTION:
 					return $this->newSummaryForLabelEdit( $editSummary, 'add' );
