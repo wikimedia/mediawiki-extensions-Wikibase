@@ -22,6 +22,22 @@
 			}
 		}
 	},
+	"LabelsPatch": {
+		"description": "Payload containing a JSON Patch document to be applied to a Item's Labels and edit metadata",
+		"required": true,
+		"content": {
+			"application/json-patch+json": {
+				"schema": {
+					"$ref": "./request-parts.json#/LabelsPatchRequest"
+				}
+			},
+			"application/json": {
+				"schema": {
+					"$ref": "./request-parts.json#/LabelsPatchRequest"
+				}
+			}
+		}
+	},
 	"Description": {
 		"description": "Payload containing a Wikibase description in the specified language and edit metadata",
 		"required": true,

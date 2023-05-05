@@ -208,6 +208,35 @@
 			}
 		}
 	},
+	"PatchedLabelsInvalidLanguageCodeExample": {
+		"value": {
+			"code": "patched-labels-invalid-language-code",
+			"message": "Not a valid language code '{language_code}' in changed labels",
+			"context": {
+				"language": "<language_code>"
+			}
+		}
+	},
+	"PatchedLabelEmptyExample": {
+		"value": {
+			"code": "patched-label-empty",
+			"message": "Changed label for '{language_code}' cannot be empty",
+			"context": {
+				"language": "<language_code>"
+			}
+		}
+	},
+	"PatchedLabelTooLongExample": {
+		"value": {
+			"code": "patched-label-too-long",
+			"message": "Changed label for '{language_code}' must not be more than '{limit}' characters long",
+			"context": {
+				"language": "<language_code>",
+				"label": "<label>",
+				"limit": 250
+			}
+		}
+	},
 	"InvalidDescriptionExample": {
 		"value": {
 			"code": "invalid-description",
