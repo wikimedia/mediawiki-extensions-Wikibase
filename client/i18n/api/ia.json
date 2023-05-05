@@ -29,6 +29,8 @@
 	"apihelp-query+wblistentityusage-example-simple": "Obtener paginas que usa le entitate <kbd>Q2</kbd>.",
 	"apihelp-query+wblistentityusage-example-url": "Obtener paginas que usa le entitate <kbd>Q2</kbd> con URL includite.",
 	"apihelp-query+wblistentityusage-example-aspect": "Obtener paginas que usa le entitate <kbd>Q2</kbd> e le aspecto esseva un ligamine de sito o un declaration.",
+	"apihelp-query+wblistentityusage-format-migration": "Iste modulo ha un nove formato de parametros. Iste parametro ha essite reimplaciate per \"$1\".",
+	"wikibase-client-wblistentityusage-param-format-mix": "Parametros \"wblistentityusage\" ancian (prefixo wbeu) e nove (prefixo wbleu) non debe esser usate simultaneemente in un mesme requesta.",
 	"apihelp-query+pageterms-description": "Obtener le terminos de {{WBREPONAME}} (typicamente etiquettas, descriptiones e aliases) associate a un pagina per un ligamine de sito.",
 	"apihelp-query+pageterms-summary": "Obtener le terminos de {{WBREPONAME}} (typicamente etiquettas, descriptiones e aliases) associate a un pagina per un ligamine de sito.",
 	"apihelp-query+pageterms-example-simple": "Obtener tote le terminos associate al pagina 'London', in le lingua del usator.",
