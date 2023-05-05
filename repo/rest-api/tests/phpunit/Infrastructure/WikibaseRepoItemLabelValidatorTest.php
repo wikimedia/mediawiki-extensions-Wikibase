@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\RestApi\Infrastructure;
 use MediaWiki\Languages\LanguageNameUtils;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
@@ -44,16 +45,28 @@ class WikibaseRepoItemLabelValidatorTest extends TestCase {
 		$item = NewItem::withId( $itemId )
 			->andLabel( 'en', $itemLabel )
 			->build();
-		$this->itemRetriever = $this->createMock( ItemRetriever::class );
-		$this->itemRetriever
-			->expects( $this->once() )
-			->method( 'getItem' )
-			->with( $itemId )
-			->willReturn( $item );
+
+		$this->createItemRetrieverMock( $itemId, $item );
 
 		$this->assertNull(
 			$this->newValidator()->validate( $itemId, 'en', 'valid label' )
 		);
+	}
+
+	public function testUnchangedLabel_willNotPerformValidation(): void {
+		$itemId = new ItemId( 'Q123' );
+		$languageCode = 'en';
+		$label = 'some label';
+
+		$item = NewItem::withId( $itemId )->andLabel( $languageCode, $label )->build();
+		$this->createItemRetrieverMock( $itemId, $item );
+
+		$this->termsCollisionDetector = $this->createMock( TermsCollisionDetector::class );
+		$this->termsCollisionDetector
+			->expects( $this->never() )
+			->method( 'detectLabelAndDescriptionCollision' );
+
+		$this->assertNull( $this->newValidator()->validate( $itemId, $languageCode, $label ) );
 	}
 
 	public function testEmptyLabel_willThrow(): void {
@@ -106,12 +119,8 @@ class WikibaseRepoItemLabelValidatorTest extends TestCase {
 		$item = NewItem::withId( $itemId )
 			->andDescription( 'en', $description )
 			->build();
-		$this->itemRetriever = $this->createMock( ItemRetriever::class );
-		$this->itemRetriever
-			->expects( $this->once() )
-			->method( 'getItem' )
-			->with( $itemId )
-			->willReturn( $item );
+
+		$this->createItemRetrieverMock( $itemId, $item );
 
 		$this->assertEquals(
 			new ValidationError(
@@ -132,12 +141,7 @@ class WikibaseRepoItemLabelValidatorTest extends TestCase {
 		$item = NewItem::withId( $itemId )
 			->andDescription( $languageCode, $description )
 			->build();
-		$this->itemRetriever = $this->createMock( ItemRetriever::class );
-		$this->itemRetriever
-			->expects( $this->once() )
-			->method( 'getItem' )
-			->with( $itemId )
-			->willReturn( $item );
+		$this->createItemRetrieverMock( $itemId, $item );
 
 		$this->termsCollisionDetector = $this->createMock( TermsCollisionDetector::class );
 		$this->termsCollisionDetector
@@ -179,4 +183,14 @@ class WikibaseRepoItemLabelValidatorTest extends TestCase {
 			$this->createStub( LanguageNameUtils::class )
 		);
 	}
+
+	private function createItemRetrieverMock( ItemId $itemId, ?Item $item ): void {
+		$this->itemRetriever = $this->createMock( ItemRetriever::class );
+		$this->itemRetriever
+			->expects( $this->once() )
+			->method( 'getItem' )
+			->with( $itemId )
+			->willReturn( $item );
+	}
+
 }

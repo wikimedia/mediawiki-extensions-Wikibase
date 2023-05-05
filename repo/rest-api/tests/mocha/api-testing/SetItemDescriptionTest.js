@@ -141,6 +141,26 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 				)
 			);
 		} );
+
+		it( 'idempotency check: can set the same description twice', async () => {
+			const languageCode = 'en';
+			const newDescription = `new English description ${utils.uniq()}`;
+			const comment = 'omg look, i can set a new description';
+			let response = await newSetItemDescriptionRequestBuilder( testItemId, languageCode, newDescription )
+				.withJsonBodyParam( 'comment', comment )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValid200Response( response, newDescription );
+
+			response = await newSetItemDescriptionRequestBuilder( testItemId, languageCode, newDescription )
+				.withJsonBodyParam( 'comment', 'omg look, i can set the same description again' )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValid200Response( response, newDescription );
+		} );
+
 	} );
 
 	describe( '400 error response', () => {

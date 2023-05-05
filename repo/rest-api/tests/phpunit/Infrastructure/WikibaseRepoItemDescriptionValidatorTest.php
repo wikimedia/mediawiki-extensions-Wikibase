@@ -159,6 +159,25 @@ class WikibaseRepoItemDescriptionValidatorTest extends TestCase {
 		);
 	}
 
+	public function testUnchangedDescription_willNotPerformValidation(): void {
+		$itemId = new ItemId( 'Q123' );
+		$language = 'en';
+		$description = 'Item Description';
+		$item = NewItem::withId( $itemId )
+			->andLabel( $language, 'New Label' )
+			->andDescription( $language, $description )
+			->build();
+
+		$this->createItemRetrieverMock( $itemId, $item );
+
+		$this->termsCollisionDetector = $this->createMock( TermsCollisionDetector::class );
+		$this->termsCollisionDetector
+			->expects( $this->never() )
+			->method( 'detectLabelAndDescriptionCollision' );
+
+		$this->assertNull( $this->newValidator()->validate( $itemId, $language, $description ) );
+	}
+
 	private function newValidator(): WikibaseRepoItemDescriptionValidator {
 		return new WikibaseRepoItemDescriptionValidator(
 			$this->newTermValidatorFactory(),

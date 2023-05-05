@@ -30,10 +30,8 @@ class WikibaseRepoItemLabelValidator implements ItemLabelValidator {
 	}
 
 	public function validate( ItemId $itemId, string $language, string $label ): ?ValidationError {
-		$item = $this->itemRetriever->getItem( $itemId );
-
 		return $this->validateLabel( $label )
-			   ?? $this->detectCollision( $item, $language, $label );
+			   ?? $this->validateItem( $itemId, $language, $label );
 	}
 
 	private function validateLabel( string $label ): ?ValidationError {
@@ -64,29 +62,46 @@ class WikibaseRepoItemLabelValidator implements ItemLabelValidator {
 		return null;
 	}
 
-	private function detectCollision( ?Item $item, string $language, string $label ): ?ValidationError {
-		if ( $item && $item->getDescriptions()->hasTermForLanguage( $language ) ) {
-			$description = $item->getDescriptions()->getByLanguage( $language )->getText();
-			if ( $label === $description ) {
-				return new ValidationError(
-					ItemLabelValidator::CODE_LABEL_DESCRIPTION_EQUAL,
-					[ ItemLabelValidator::CONTEXT_LANGUAGE => $language ],
-				);
-			}
+	private function validateItem( ItemId $itemId, string $language, string $label ): ?ValidationError {
+		$item = $this->itemRetriever->getItem( $itemId );
 
-			$entityId = $this->termsCollisionDetector
-				->detectLabelAndDescriptionCollision( $language, $label, $description );
-			if ( $entityId instanceof ItemId ) {
-				return new ValidationError(
-					ItemLabelValidator::CODE_LABEL_DESCRIPTION_DUPLICATE,
-					[
-						ItemLabelValidator::CONTEXT_LANGUAGE => $language,
-						ItemLabelValidator::CONTEXT_LABEL => $label,
-						ItemLabelValidator::CONTEXT_DESCRIPTION => $description,
-						ItemLabelValidator::CONTEXT_MATCHING_ITEM_ID => (string)$entityId,
-					]
-				);
-			}
+		// skip if Item does not exist or is a redirect
+		if ( $item === null ) {
+			return null;
+		}
+
+		// skip if label is unchanged
+		if ( $item->getLabels()->hasTermForLanguage( $language ) &&
+			 $item->getLabels()->getByLanguage( $language )->getText() === $label
+		) {
+			return null;
+		}
+
+		// skip if Item does not have a description
+		if ( !$item->getDescriptions()->hasTermForLanguage( $language ) ) {
+			return null;
+		}
+
+		$description = $item->getDescriptions()->getByLanguage( $language )->getText();
+		if ( $label === $description ) {
+			return new ValidationError(
+				ItemLabelValidator::CODE_LABEL_DESCRIPTION_EQUAL,
+				[ ItemLabelValidator::CONTEXT_LANGUAGE => $language ],
+			);
+		}
+
+		$entityId = $this->termsCollisionDetector
+			->detectLabelAndDescriptionCollision( $language, $label, $description );
+		if ( $entityId instanceof ItemId ) {
+			return new ValidationError(
+				ItemLabelValidator::CODE_LABEL_DESCRIPTION_DUPLICATE,
+				[
+					ItemLabelValidator::CONTEXT_LANGUAGE => $language,
+					ItemLabelValidator::CONTEXT_LABEL => $label,
+					ItemLabelValidator::CONTEXT_DESCRIPTION => $description,
+					ItemLabelValidator::CONTEXT_MATCHING_ITEM_ID => (string)$entityId,
+				]
+			);
 		}
 
 		return null;
