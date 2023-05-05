@@ -5,6 +5,7 @@ namespace Wikibase\Client\Hooks;
 use ChangesListBooleanFilter;
 use ChangesListSpecialPage;
 use ExtensionRegistry;
+use MediaWiki\Html\FormOptions;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\SpecialPage\Hook\ChangesListSpecialPageQueryHook;
 use MediaWiki\User\UserOptionsLookup;
@@ -73,7 +74,7 @@ class ChangesListSpecialPageHookHandler implements ChangesListSpecialPageQueryHo
 	 * @param array &$conds Array of WHERE conditionals for query
 	 * @param array &$query_options Array of options for the database request
 	 * @param array &$join_conds Join conditions for the tables
-	 * @param \FormOptions $opts FormOptions for this request
+	 * @param FormOptions $opts FormOptions for this request
 	 */
 	public function onChangesListSpecialPageQuery( $name, &$tables, &$fields,
 			&$conds, &$query_options, &$join_conds, $opts ) {
