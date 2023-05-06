@@ -352,7 +352,7 @@ class EditEntityAction extends ViewEntityAction {
 	}
 
 	/**
-	 * Generate standard summary input and label (wgSummary), compatible to EditPage.
+	 * Generate standard summary input and label (wgSummary), compatible to \MediaWiki\EditPage\EditPage.
 	 *
 	 * @param string $labelText The html to place inside the label
 	 *

@@ -512,7 +512,7 @@ class WikiPageEntityStore implements EntityStore {
 	 * Check if no edits were made by other users since the given revision.
 	 * This makes the assumption that revision ids are monotonically increasing.
 	 *
-	 * @see EditPage::userWasLastToEdit()
+	 * @see \MediaWiki\EditPage\EditPage::userWasLastToEdit()
 	 *
 	 * @param User $user
 	 * @param EntityId $id the entity to check (ignored by this implementation)
@@ -561,7 +561,7 @@ class WikiPageEntityStore implements EntityStore {
 	 * @throws InvalidArgumentException
 	 * @throws MWException
 	 *
-	 * @note keep in sync with logic in EditPage
+	 * @note keep in sync with logic in \MediaWiki\EditPage\EditPage
 	 */
 	public function updateWatchlist( User $user, EntityId $id, $watch ) {
 		$this->assertCanStoreEntity( $id );

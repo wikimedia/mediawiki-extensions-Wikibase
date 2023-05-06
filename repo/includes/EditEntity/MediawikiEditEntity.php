@@ -800,7 +800,7 @@ class MediawikiEditEntity implements EditEntity {
 	 * This uses the user's watchdefault and watchcreations settings
 	 * and considers whether the entity is already watched by the user.
 	 *
-	 * @note Keep in sync with logic in EditPage!
+	 * @note Keep in sync with logic in \MediaWiki\EditPage\EditPage!
 	 *
 	 * @return bool
 	 */
@@ -821,7 +821,7 @@ class MediawikiEditEntity implements EditEntity {
 	/**
 	 * Watches or unwatches the entity.
 	 *
-	 * @note Keep in sync with logic in EditPage!
+	 * @note Keep in sync with logic in \MediaWiki\EditPage\EditPage!
 	 * @todo move to separate service
 	 *
 	 * @param bool $watch whether to watch or unwatch the page.
