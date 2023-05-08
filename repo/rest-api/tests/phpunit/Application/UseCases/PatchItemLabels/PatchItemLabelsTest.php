@@ -10,7 +10,9 @@ use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Item;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
@@ -21,6 +23,8 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemLabelsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\JsonPatcher;
+use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
+use Wikibase\Repo\RestApi\Infrastructure\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 
@@ -41,6 +45,7 @@ class PatchItemLabelsTest extends TestCase {
 	private LabelsDeserializer $labelsDeserializer;
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
+	private PermissionChecker $permissionChecker;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -51,6 +56,8 @@ class PatchItemLabelsTest extends TestCase {
 		$this->labelsDeserializer = new LabelsDeserializer();
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
+		$this->permissionChecker = $this->createStub( PermissionChecker::class );
+		$this->permissionChecker->method( 'canEdit' )->willReturn( true );
 	}
 
 	public function testHappyPath(): void {
@@ -100,13 +107,48 @@ class PatchItemLabelsTest extends TestCase {
 				],
 				$editTags,
 				$isBot,
-				$comment
+				$comment,
+				null
 			)
 		);
 
 		$this->assertSame( $response->getLabels(), $updatedItem->getLabels() );
 		$this->assertSame( $lastModified, $response->getLastModified() );
 		$this->assertSame( $revisionId, $response->getRevisionId() );
+	}
+
+	public function testGivenEditIsUnauthorized_throwsUseCaseError(): void {
+		$itemId = new ItemId( 'Q123' );
+
+		$this->permissionChecker = $this->createMock( WikibaseEntityPermissionChecker::class );
+		$this->permissionChecker->expects( $this->once() )
+			->method( 'canEdit' )
+			->with( User::newAnonymous(), $itemId )
+			->willReturn( false );
+
+		try {
+			$this->newUseCase()->execute(
+				new PatchItemLabelsRequest(
+					"$itemId",
+					[
+						[
+							'op' => 'remove',
+							'path' => '/en',
+						],
+					],
+					[],
+					false,
+					null,
+					null
+				)
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame(
+				UseCaseError::PERMISSION_DENIED,
+				$e->getErrorCode()
+			);
+		}
 	}
 
 	private function newUseCase(): PatchItemLabels {
@@ -116,7 +158,8 @@ class PatchItemLabelsTest extends TestCase {
 			$this->patcher,
 			$this->labelsDeserializer,
 			$this->itemRetriever,
-			$this->itemUpdater
+			$this->itemUpdater,
+			$this->permissionChecker
 		);
 	}
 

@@ -5,12 +5,15 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\Services\ItemLabelsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\JsonPatcher;
+use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
 
 /**
  * @license GPL-2.0-or-later
@@ -23,6 +26,7 @@ class PatchItemLabels {
 	private LabelsDeserializer $labelsDeserializer;
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
+	private PermissionChecker $permissionChecker;
 
 	public function __construct(
 		ItemLabelsRetriever $labelsRetriever,
@@ -30,7 +34,8 @@ class PatchItemLabels {
 		JsonPatcher $patcher,
 		LabelsDeserializer $labelsDeserializer,
 		ItemRetriever $itemRetriever,
-		ItemUpdater $itemUpdater
+		ItemUpdater $itemUpdater,
+		PermissionChecker $permissionChecker
 	) {
 		$this->labelsRetriever = $labelsRetriever;
 		$this->labelsSerializer = $labelsSerializer;
@@ -38,10 +43,21 @@ class PatchItemLabels {
 		$this->labelsDeserializer = $labelsDeserializer;
 		$this->itemRetriever = $itemRetriever;
 		$this->itemUpdater = $itemUpdater;
+		$this->permissionChecker = $permissionChecker;
 	}
 
 	public function execute( PatchItemLabelsRequest $request ): PatchItemLabelsResponse {
 		$itemId = new ItemId( $request->getItemId() );
+
+		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
+		$user = $request->getUsername() !== null ? User::withUsername( $request->getUsername() ) : User::newAnonymous();
+		if ( !$this->permissionChecker->canEdit( $user, $itemId ) ) {
+			throw new UseCaseError(
+				UseCaseError::PERMISSION_DENIED,
+				'You have no permission to edit this item.'
+			);
+		}
+
 		$labels = $this->labelsRetriever->getLabels( $itemId );
 		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
 		$serialization = $this->labelsSerializer->serialize( $labels );
