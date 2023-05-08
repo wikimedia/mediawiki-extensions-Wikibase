@@ -397,7 +397,7 @@
 	"wikibase-parse-error-coordinate": "La valeur de la coordonnée n’a pas le bon format.",
 	"wikibase-parse-error-entity-id": "L’ID de l’entité n’a pas le bon format.",
 	"wikibase-parse-error-quantity": "La valeur de la quantité n’a pas le bon format.",
-	"wikibase-parse-error-time": "La valeur temporelle n’a pas le bon format.",
+	"wikibase-parse-error-time": "La valeur d’horodatage n’a pas le bon format.",
 	"special-redirectentity": "Redirection d’une entité",
 	"wikibase-redirectentity-success": "$1 a été redirigé vers $2.",
 	"wikibase-redirectentity-fromid": "L’ID depuis lequel rediriger",
