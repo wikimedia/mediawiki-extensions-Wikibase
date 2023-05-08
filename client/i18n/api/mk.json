@@ -30,6 +30,8 @@
 	"apihelp-query+wblistentityusage-example-simple": "Дај ги страниците што ја користат единицата <kbd>Q2</kbd>.",
 	"apihelp-query+wblistentityusage-example-url": "Дај ги страниците што ја користат единицата <kbd>Q2</kbd> со вклучена URL.",
 	"apihelp-query+wblistentityusage-example-aspect": "Дај ги страниците што ја користат единицата <kbd>Q2</kbd> и каде аспектот е викиврска или исказ.",
+	"apihelp-query+wblistentityusage-format-migration": "Овој модул има нов параметарски формат. Овој параметар е заменет со „$1“.",
+	"wikibase-client-wblistentityusage-param-format-mix": "Старите параметри „wblistentityusage“ (претставка wbeu) и новите (претставка wbleu) не смеат да се користат заедно во исто барање.",
 	"apihelp-query+pageterms-description": "Дај поими од {{WBREPONAME}} (обично натписи, описи и истозначници) поврзани со страница преку викиврска.",
 	"apihelp-query+pageterms-summary": "Дај поими од {{WBREPONAME}} (обично натписи, описи и истозначници) поврзани со страница преку викиврска.",
 	"apihelp-query+pageterms-example-simple": "Дај ги сите поими поврзани со страницата „Лондон“, во корисничката страница.",
