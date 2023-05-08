@@ -69,6 +69,7 @@
 	"wikibase-sitelinks-link-columnheading": "ڳنڍيل صفحو",
 	"echo-category-title-wikibase-action": "{{WBREPONAME}} سان {{PLURAL:$1|ڳانڍاپو|ڳانڍاپا}}",
 	"connected-redirect-category": "چورڻا جيڪي ڪنھن {{WBREPONAME}} آئٽم سان ڳنڍيل آھن",
+	"connected-redirect-category-desc": "ھن زمري ۾ انھن چوريل صفحن جي فھرست آھي جيڪي ڪنھن {{WBREPONAME}} آئٽم سان ڳنڍيل آھن.",
 	"wikibase-client-data-bridge-references-heading": "حوالا",
 	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "توھان داخل ٿيل نہ آھيو",
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "داخل ٿيو يا شامل ٿيو",

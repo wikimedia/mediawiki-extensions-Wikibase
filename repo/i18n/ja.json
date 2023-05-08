@@ -27,7 +27,10 @@
 			"아라",
 			"LaMagiaaa",
 			"Tmv",
-			"Yamagata Yusuke"
+			"Yamagata Yusuke",
+			"Kokage si",
+			"MathXplore",
+			"Winston Sung"
 		]
 	},
 	"wikibase-desc": "構造化データのリポジトリ",
@@ -450,11 +453,11 @@
 	"wikibase-entity-not-viewable": "指定されたコンテンツのタイプ「$1」はエンティティではないため、Wikibaseで表示できません。",
 	"wikibase-pageinfo-subscription": "このエンティティを使用しているウィキ",
 	"wikibase-pageinfo-subscription-none": "なし",
-	"wikibase-search-bad-entity-type": "不正なエンティティタイプ: $1",
-	"wikibase-search-bad-profile-name": "不正な検索プロファイル名: $1",
+	"wikibase-search-bad-entity-type": "無効なエンティティタイプ: $1",
+	"wikibase-search-bad-profile-name": "無効な検索プロファイル名: $1",
 	"wikibase-search-namespace-mix": "現在、エンティティとそれ以外の名前空間を同時に検索することができません。エンティティの検索結果のみを示しています。",
 	"wikibase-search-config-notfound": "全文検索設定が見つかりません: $1",
-	"wikibase-search-config-badclass": "不正なクエリビルダーのクラス: $1",
+	"wikibase-search-config-badclass": "無効なクエリビルダーのクラス: $1",
 	"wikibase-refresh-for-missing-datatype": "データ型 $1 はクライアントのスクリプトで見つかりませんでした。キャッシュされたスクリプトが古くなっている可能性があります。キャッシュをクリアしてブラウザーを再読み込みしてください (多くのブラウザーで Ctrl-Shift-R または Cmd-Shift-R)。",
 	"wikibase-outdated-client-script": "ページをスーパーリロードしてください",
 	"wikibase-shortcopyrightwarning-heading": "ライセンスの帰属",
