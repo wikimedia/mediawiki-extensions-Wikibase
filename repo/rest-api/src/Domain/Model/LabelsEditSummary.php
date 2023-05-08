@@ -8,15 +8,18 @@ use Wikibase\DataModel\Term\TermList;
  * @license GPL-2.0-or-later
  */
 class LabelsEditSummary implements EditSummary {
+
 	private string $editAction;
 	private ?string $userComment;
-	private TermList $labels;
+	private TermList $originalLabels;
+	private TermList $modifiedLabels;
 
-	public static function newPatchSummary( ?string $userComment, TermList $labels ): self {
+	public static function newPatchSummary( ?string $userComment, TermList $originalLabels, TermList $modifiedLabels ): self {
 		$summary = new self();
 		$summary->editAction = self::PATCH_ACTION;
 		$summary->userComment = $userComment;
-		$summary->labels = $labels;
+		$summary->originalLabels = $originalLabels;
+		$summary->modifiedLabels = $modifiedLabels;
 
 		return $summary;
 	}
@@ -29,7 +32,12 @@ class LabelsEditSummary implements EditSummary {
 		return $this->userComment;
 	}
 
-	public function getLabels(): TermList {
-		return $this->labels;
+	public function getOriginalLabels(): TermList {
+		return $this->originalLabels;
 	}
+
+	public function getModifiedLabels(): TermList {
+		return $this->modifiedLabels;
+	}
+
 }

@@ -18,9 +18,14 @@ use Wikibase\Repo\SummaryFormatter;
 class EditSummaryFormatter {
 
 	private SummaryFormatter $summaryFormatter;
+	private LabelsEditSummaryToFormattableSummaryConverter $summaryConverter;
 
-	public function __construct( SummaryFormatter $summaryFormatter ) {
+	public function __construct(
+		SummaryFormatter $summaryFormatter,
+		LabelsEditSummaryToFormattableSummaryConverter $summaryConverter
+	) {
 		$this->summaryFormatter = $summaryFormatter;
+		$this->summaryConverter = $summaryConverter;
 	}
 
 	public function format( EditSummary $summary ): string {
@@ -31,9 +36,7 @@ class EditSummaryFormatter {
 
 	private function convertToFormattableSummary( EditSummary $editSummary ): FormatableSummary {
 		if ( $editSummary instanceof LabelsEditSummary ) {
-			$summary = new Summary();
-			$summary->setUserSummary( $editSummary->getUserComment() );
-			return $summary;
+			return $this->summaryConverter->convert( $editSummary );
 		} elseif ( $editSummary instanceof LabelEditSummary ) {
 			switch ( $editSummary->getEditAction() ) {
 				case EditSummary::ADD_ACTION:

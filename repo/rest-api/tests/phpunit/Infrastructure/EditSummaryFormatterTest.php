@@ -6,11 +6,14 @@ use Generator;
 use MediaWikiLangTestCase;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Tests\NewStatement;
+use Wikibase\Lib\Summary;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\LabelEditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
+use Wikibase\Repo\RestApi\Infrastructure\LabelsEditSummaryToFormattableSummaryConverter;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -28,7 +31,10 @@ class EditSummaryFormatterTest extends MediaWikiLangTestCase {
 	 * @dataProvider statementEditSummaryProvider
 	 */
 	public function testFormat( EditSummary $editSummary, string $formattedSummary ): void {
-		$editSummaryFormatter = new EditSummaryFormatter( WikibaseRepo::getSummaryFormatter() );
+		$editSummaryFormatter = new EditSummaryFormatter(
+			WikibaseRepo::getSummaryFormatter(),
+			new LabelsEditSummaryToFormattableSummaryConverter()
+		);
 		$this->assertSame( $formattedSummary, $editSummaryFormatter->format( $editSummary ) );
 	}
 
@@ -115,6 +121,25 @@ class EditSummaryFormatterTest extends MediaWikiLangTestCase {
 			),
 			'/* wbsetclaim-create:1||1 */ [[Property:P123]]: no value',
 		];
+	}
+
+	public function testGivenLabelsEditSummary_usesEditSummaryConverter(): void {
+		$labelsEditSummary = $this->createStub( LabelsEditSummary::class );
+		$converter = $this->createMock( LabelsEditSummaryToFormattableSummaryConverter::class );
+		$converter->expects( $this->once() )
+			->method( 'convert' )
+			->with( $labelsEditSummary )
+			->willReturn(
+				new Summary( 'wbeditentity', 'update-languages-short', null, [ 'en, de' ] )
+			);
+		$editSummaryFormatter = new EditSummaryFormatter(
+			WikibaseRepo::getSummaryFormatter(),
+			$converter
+		);
+		$this->assertSame(
+			'/* wbeditentity-update-languages-short:0||en, de */',
+			$editSummaryFormatter->format( $labelsEditSummary )
+		);
 	}
 
 }

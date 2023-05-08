@@ -45,16 +45,19 @@ class PatchItemLabels {
 		$labels = $this->labelsRetriever->getLabels( $itemId );
 		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
 		$serialization = $this->labelsSerializer->serialize( $labels );
-		$patchedLabels = $this->patcher->patch( iterator_to_array( $serialization ), $request->getPatch() );
-		$labelsTermList = $this->labelsDeserializer->deserialize( $patchedLabels );
+		$patchResult = $this->patcher->patch( iterator_to_array( $serialization ), $request->getPatch() );
+		$modifiedLabels = $this->labelsDeserializer->deserialize( $patchResult );
 
 		$item = $this->itemRetriever->getItem( $itemId );
-		$item->getFingerprint()->setLabels( $labelsTermList );
+
+		$originalLabels = $item->getLabels();
+
+		$item->getFingerprint()->setLabels( $modifiedLabels );
 
 		$editMetadata = new EditMetadata(
 			$request->getEditTags(),
 			$request->isBot(),
-			LabelsEditSummary::newPatchSummary( $request->getComment(), $labelsTermList )
+			LabelsEditSummary::newPatchSummary( $request->getComment(), $originalLabels, $modifiedLabels )
 		);
 
 		$revision = $this->itemUpdater->update(
