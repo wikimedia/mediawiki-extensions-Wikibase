@@ -10,7 +10,6 @@ use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsResponse;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Item;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
@@ -93,8 +92,9 @@ class PatchItemLabelsTest extends TestCase {
 			)
 		);
 
-		$this->assertInstanceOf( PatchItemLabelsResponse::class, $response );
 		$this->assertSame( $response->getLabels(), $updatedItem->getLabels() );
+		$this->assertSame( $lastModified, $response->getLastModified() );
+		$this->assertSame( $revisionId, $response->getRevisionId() );
 	}
 
 	private function newUseCase(): PatchItemLabels {
