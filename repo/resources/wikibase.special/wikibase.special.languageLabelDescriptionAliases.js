@@ -42,7 +42,8 @@
 
 		langWidget = OO.ui.infuse( $lang );
 		fields.forEach( function ( field ) {
-			field.$input = OO.ui.infuse( field.$element ).$input;
+			field.fieldLayoutWidget = OO.ui.infuse( field.$element.closest( '.oo-ui-fieldLayout' ) );
+			field.widget = OO.ui.infuse( field.$element );
 		} );
 
 		function updatePlaceholders( languageCode ) {
@@ -50,21 +51,42 @@
 				langDir = $.uls ? $.uls.data.getDir( languageCode ) : null;
 
 			fields.forEach( function ( field ) {
+				var $input = field.widget.$input;
 				// The following messages can be used here:
 				// * wikibase-label-edit-placeholder-language-aware
 				// * wikibase-description-edit-placeholder-language-aware
 				// * wikibase-aliases-edit-placeholder-language-aware
-				field.$input.prop( 'placeholder', mw.msg( field.msgAware, languageName ) );
+				$input.prop( 'placeholder', mw.msg( field.msgAware, languageName ) );
 
 				if ( langDir ) {
-					field.$input.prop( 'dir', langDir );
-					field.$input.addClass( 'wb-placeholder-dir-' + $.uls.data.getDir( userLang ) );
+					$input.prop( 'dir', langDir );
+					$input.addClass( 'wb-placeholder-dir-' + $.uls.data.getDir( userLang ) );
+				}
+			} );
+		}
+
+		function indicateDescriptionSupport( languageCode ) {
+			var disabled = languageCode === 'mul';
+
+			fields.forEach( function ( field ) {
+				if ( field.name !== 'description' ) {
+					return;
+				}
+				field.widget.setDisabled( disabled );
+				field.fieldLayoutWidget.setNotices(
+					disabled ? [ mw.msg( 'wikibase-description-edit-not-supported' ) ] : []
+				);
+				if ( disabled ) {
+					// Clear the previous input if "mul" is selected.
+					field.widget.$input.val( '' );
 				}
 			} );
 		}
 
 		updatePlaceholders( langWidget.getValue() );
+		indicateDescriptionSupport( langWidget.getValue() );
 		langWidget.on( 'change', updatePlaceholders );
+		langWidget.on( 'change', indicateDescriptionSupport );
 	} );
 
 }( mw.config.values.wgUserLanguage, wikibase.getLanguageNameByCode ) );
