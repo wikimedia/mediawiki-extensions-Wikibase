@@ -603,6 +603,14 @@ return [
 		return new MediaWikiMessageInLanguageProvider();
 	},
 
+	'WikibaseClient.MobileSite' => function ( MediaWikiServices $services ): bool {
+		if ( $services->hasService( 'MobileFrontend.Context' ) ) {
+			$mobileContext = $services->getService( 'MobileFrontend.Context' );
+			return $mobileContext->shouldDisplayMobileView();
+		}
+		return false;
+	},
+
 	'WikibaseClient.NamespaceChecker' => function ( MediaWikiServices $services ): NamespaceChecker {
 		$settings = WikibaseClient::getSettings( $services );
 		return new NamespaceChecker(
