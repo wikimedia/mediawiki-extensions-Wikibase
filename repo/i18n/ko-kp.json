@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Delim",
+			"Garam"
+		]
+	},
+	"wikibase-edit": "편집",
+	"wikibase-add": "추가",
+	"wikibase-entitytermsforlanguagelistview-language": "언어",
+	"wikibase-label-empty": "정의한 표식이 없습니다.",
+	"wikibase-description-empty": "설명이 없습니다.",
+	"wikibase-content-language-edit-label": "언어:",
+	"wikibase-sitelinks-special": "다른 싸이트",
+	"wikibase-statementview-rank-normal": "일반 등급",
+	"wikibase-newentity-language": "언어:"
+}

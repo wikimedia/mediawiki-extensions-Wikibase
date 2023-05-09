@@ -106,7 +106,7 @@
 	"pageswithbadges-summary": "Cette page liste les pages avec des badges (par ex. bon article ou article en vedette). La liste est triée par ID de page descendant, de sorte que les pages les plus récentes soient listées en premier.",
 	"wikibase-pageswithbadges-invalid-id": "$1 n’est pas un identifiant d’élément valide",
 	"wikibase-pageswithbadges-legend": "Liste des pages avec un badge donné",
-	"wikibase-pageswithbadges-badge": "Badge :",
+	"wikibase-pageswithbadges-badge": "Insigne :",
 	"wikibase-pageswithbadges-submit": "Afficher les pages",
 	"entityusage": "Utilisation de l’entité",
 	"entityusage-summary": "Cette page liste les pages qui utilisent l’élément Wikidata fourni (par ex. Q42). La liste est triée par ID de page décroissant, de sorte que les pages les plus récentes soient listées en premier.",
