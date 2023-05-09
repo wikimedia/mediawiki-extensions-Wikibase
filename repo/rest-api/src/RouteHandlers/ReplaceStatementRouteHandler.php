@@ -63,11 +63,9 @@ class ReplaceStatementRouteHandler extends SimpleHandler {
 				new ContentTypeCheckMiddleware( [ ContentTypeCheckMiddleware::TYPE_APPLICATION_JSON ] ),
 				new BotRightCheckMiddleware( MediaWikiServices::getInstance()->getPermissionManager(), $responseFactory ),
 				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
-					function ( RequestInterface $request ): string {
-						return RequestPreconditionCheck::getItemIdPrefixFromStatementId(
-							$request->getPathParam( self::STATEMENT_ID_PATH_PARAM )
-						);
-					}
+					fn( RequestInterface $request ): string => RequestPreconditionCheck::getItemIdPrefixFromStatementId(
+						$request->getPathParam( self::STATEMENT_ID_PATH_PARAM )
+					)
 				),
 			] ),
 			$responseFactory

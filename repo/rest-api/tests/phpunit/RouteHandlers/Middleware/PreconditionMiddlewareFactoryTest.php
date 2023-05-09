@@ -31,9 +31,7 @@ class PreconditionMiddlewareFactoryTest extends TestCase {
 			->willReturn( LatestItemRevisionMetadataResult::itemNotFound() );
 
 		$middleware = ( new PreconditionMiddlewareFactory( $metadataRetriever, new ConditionalHeaderUtil() ) )
-			->newPreconditionMiddleware( function () use ( $itemId ) {
-				return $itemId->getSerialization();
-			} );
+			->newPreconditionMiddleware( fn () => $itemId->getSerialization() );
 
 		$middleware->run( $this->newRouteHandler(), function () {
 			return $this->createStub( Response::class );

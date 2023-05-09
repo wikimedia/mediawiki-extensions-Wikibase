@@ -66,11 +66,9 @@ class PatchStatementRouteHandler extends SimpleHandler {
 				] ),
 				new BotRightCheckMiddleware( MediaWikiServices::getInstance()->getPermissionManager(), $responseFactory ),
 				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
-					function ( RequestInterface $request ): string {
-						return RequestPreconditionCheck::getItemIdPrefixFromStatementId(
-							$request->getPathParam( self::STATEMENT_ID_PATH_PARAM )
-						);
-					}
+					fn ( RequestInterface $request ): string => RequestPreconditionCheck::getItemIdPrefixFromStatementId(
+						$request->getPathParam( self::STATEMENT_ID_PATH_PARAM )
+					)
 				),
 			] ),
 			WbRestApi::getSerializerFactory()->newStatementSerializer(),
