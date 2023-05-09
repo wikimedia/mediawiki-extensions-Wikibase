@@ -420,7 +420,7 @@
 			"dependencies": [
 				"jquery.spinner",
 				"jquery.ui",
-				"jquery.tipsy",
+				"jquery.wikibase.wbtooltip",
 				"mediawiki.api",
 				"mediawiki.user",
 				"mediawiki.util",

@@ -1015,13 +1015,14 @@ return call_user_func( function() {
 		],
 		'jquery.wikibase.wbtooltip' => $moduleTemplate + [
 			'scripts' => [
+				'jquery/wikibase/jquery.tipsy/jquery.tipsy.js',
 				'jquery/wikibase/jquery.wikibase.wbtooltip.js',
 			],
 			'styles' => [
+				'jquery/wikibase/jquery.tipsy/jquery.tipsy.css',
 				'jquery/wikibase/themes/default/jquery.wikibase.wbtooltip.css',
 			],
 			'dependencies' => [
-				'jquery.tipsy',
 				'jquery.ui',
 				'wikibase.buildErrorOutput',
 			],
