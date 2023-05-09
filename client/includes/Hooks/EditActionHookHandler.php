@@ -8,6 +8,7 @@ use EditPage;
 use Html;
 use IContextSource;
 use MediaWiki\Hook\EditPage__showStandardInputs_optionsHook;
+use MediaWiki\MediaWikiServices;
 use MessageLocalizer;
 use OutputPage;
 use Wikibase\Client\RepoLinker;
@@ -90,7 +91,10 @@ class EditActionHookHandler implements EditPage__showStandardInputs_optionsHook 
 			$editor->editFormTextAfterTools .= $output;
 		}
 
-		$out->addModules( 'wikibase.client.action.edit.collapsibleFooter' );
+		// T324991
+		if ( !MediaWikiServices::getInstance()->getService( 'WikibaseClient.MobileSite' ) ) {
+			$out->addModules( 'wikibase.client.action.edit.collapsibleFooter' );
+		}
 	}
 
 	/**

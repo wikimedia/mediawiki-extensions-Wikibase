@@ -109,8 +109,12 @@ class ChangesListSpecialPageHookHandler implements ChangesListSpecialPageQueryHo
 		$filterName = $this->getFilterName();
 		$changeTypeGroup = $specialPage->getFilterGroup( 'changeType' );
 
-		$specialPage->getOutput()->addModules( 'wikibase.client.jqueryMsg' );
-		$specialPage->getOutput()->addModuleStyles( 'wikibase.client.miscStyles' );
+		$out = $specialPage->getOutput();
+		$out->addModules( 'wikibase.client.jqueryMsg' );
+		// T324991
+		if ( !MediaWikiServices::getInstance()->getService( 'WikibaseClient.MobileSite' ) ) {
+			$out->addModuleStyles( 'wikibase.client.miscStyles' );
+		}
 
 		$wikidataFilter = new ChangesListBooleanFilter( [
 			'name' => $filterName,
