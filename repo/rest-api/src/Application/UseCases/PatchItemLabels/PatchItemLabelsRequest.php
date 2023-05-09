@@ -9,13 +9,22 @@ class PatchItemLabelsRequest {
 
 	private string $itemId;
 	private array $patch;
+	private array $editTags;
+	private bool $isBot;
+	private ?string $comment;
 
 	public function __construct(
 		string $itemId,
-		array $patch
+		array $patch,
+		array $editTags,
+		bool $isBot,
+		?string $comment
 	) {
 		$this->itemId = $itemId;
 		$this->patch = $patch;
+		$this->editTags = $editTags;
+		$this->isBot = $isBot;
+		$this->comment = $comment;
 	}
 
 	public function getItemId(): string {
@@ -24,6 +33,18 @@ class PatchItemLabelsRequest {
 
 	public function getPatch(): array {
 		return $this->patch;
+	}
+
+	public function getEditTags(): array {
+		return $this->editTags;
+	}
+
+	public function isBot(): bool {
+		return $this->isBot;
+	}
+
+	public function getComment(): ?string {
+		return $this->comment;
 	}
 
 }

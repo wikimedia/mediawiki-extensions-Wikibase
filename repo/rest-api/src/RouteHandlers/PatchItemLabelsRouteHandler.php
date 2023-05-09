@@ -24,6 +24,10 @@ use Wikimedia\ParamValidator\ParamValidator;
 class PatchItemLabelsRouteHandler extends SimpleHandler {
 
 	private const ITEM_ID_PATH_PARAM = 'item_id';
+	public const PATCH_BODY_PARAM = 'patch';
+	public const TAGS_BODY_PARAM = 'tags';
+	public const BOT_BODY_PARAM = 'bot';
+	public const COMMENT_BODY_PARAM = 'comment';
 
 	private PatchItemLabels $useCase;
 	private LabelsSerializer $serializer;
@@ -57,7 +61,10 @@ class PatchItemLabelsRouteHandler extends SimpleHandler {
 		$useCaseResponse = $this->useCase->execute(
 			new PatchItemLabelsRequest(
 				$itemId,
-				$jsonBody['patch']
+				$jsonBody[self::PATCH_BODY_PARAM],
+				$jsonBody[self::TAGS_BODY_PARAM] ?? [],
+				$jsonBody[self::BOT_BODY_PARAM] ?? false,
+				$jsonBody[self::COMMENT_BODY_PARAM] ?? '',
 			)
 		);
 
@@ -92,5 +99,4 @@ class PatchItemLabelsRouteHandler extends SimpleHandler {
 	public function getBodyValidator( $contentType ): BodyValidator {
 		return new JsonBodyValidator( [] );
 	}
-
 }
