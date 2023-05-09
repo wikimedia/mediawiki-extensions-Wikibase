@@ -49,26 +49,6 @@
 	}
 
 	/**
-	 * Assigns a namespace to a string of one or more event names separated by a space character.
-	 *
-	 * @ignore
-	 *
-	 * @param {string} eventNames
-	 * @param {string} namespace
-	 * @return {string}
-	 */
-	function assignNamespace( eventNames, namespace ) {
-		var names = eventNames.split( ' ' ),
-			namespacedNames = [];
-
-		for ( var i = 0; i < names.length; i++ ) {
-			namespacedNames.push( names[ i ] + '.' + namespace );
-		}
-
-		return namespacedNames.join( ' ' );
-	}
-
-	/**
 	 * eachchange jQuery event
 	 *
 	 * The `eachchange` event catches all designated input events. In recent browsers, it basically
@@ -96,7 +76,7 @@
 			var eventData = $.data( this, EVENT_ID + handleObj.namespace ),
 				$elem = $( this ),
 				eventId = EVENT_ID + handleObj.namespace,
-				eventNameString = assignNamespace( 'input', eventId );
+				eventNameString = 'input.' + eventId;
 
 			if ( !eventData ) {
 				eventData = { handlers: [], prevVal: getValue( $elem ) };
