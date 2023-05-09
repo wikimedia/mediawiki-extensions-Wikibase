@@ -7,13 +7,23 @@ const { newPatchItemLabelsRequestBuilder } = require( '../helpers/RequestBuilder
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { formatLabelsEditSummary } = require( '../helpers/formatEditSummaries' );
 
+function assertValidErrorResponse( response, statusCode, responseBodyErrorCode ) {
+	expect( response ).to.have.status( statusCode );
+	assert.header( response, 'Content-Language', 'en' );
+	assert.strictEqual( response.body.code, responseBodyErrorCode );
+}
+
 describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 	let testItemId;
+	let testEnLabel;
 	let originalLastModified;
 	let originalRevisionId;
 
 	before( async function () {
-		testItemId = ( await entityHelper.createEntity( 'item', {} ) ).entity.id;
+		testEnLabel = `English Label ${utils.uniq()}`;
+		testItemId = ( await entityHelper.createEntity( 'item', {
+			labels: { en: { language: 'en', value: testEnLabel } }
+		} ) ).entity.id;
 
 		const testItemCreationMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 		originalLastModified = new Date( testItemCreationMetadata.timestamp );
@@ -27,16 +37,16 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 
 	describe( '200 OK', () => {
 		it( 'can add a label', async () => {
-			const label = `new english label ${utils.uniq()}`;
+			const label = `neues deutsches label ${utils.uniq()}`;
 			const response = await newPatchItemLabelsRequestBuilder(
 				testItemId,
 				[
-					{ op: 'add', path: '/en', value: label }
+					{ op: 'add', path: '/de', value: label }
 				]
 			).makeRequest();
 
 			expect( response ).to.have.status( 200 );
-			assert.strictEqual( response.body.en, label );
+			assert.strictEqual( response.body.de, label );
 			assert.strictEqual( response.header[ 'content-type' ], 'application/json' );
 			assert.isAbove( new Date( response.header[ 'last-modified' ] ), originalLastModified );
 			assert.notStrictEqual( response.header.etag, makeEtag( originalRevisionId ) );
@@ -115,10 +125,49 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 				]
 			).assertValidRequest().makeRequest();
 
-			assert.strictEqual( response.status, 409 );
+			assertValidErrorResponse( response, 409, 'redirected-item' );
 			assert.include( response.body.message, redirectSource );
 			assert.include( response.body.message, redirectTarget );
-			assert.strictEqual( response.body.code, 'redirected-item' );
+		} );
+
+		it( '"path" field target does not exist', async () => {
+			const operation = { op: 'remove', path: '/path/does/not/exist' };
+
+			const response = await newPatchItemLabelsRequestBuilder( testItemId, [ operation ] )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValidErrorResponse( response, 409, 'patch-target-not-found' );
+			assert.include( response.body.message, operation.path );
+			assert.strictEqual( response.body.context.field, 'path' );
+			assert.deepEqual( response.body.context.operation, operation );
+		} );
+
+		it( '"from" field target does not exist', async () => {
+			const operation = { op: 'copy', from: '/path/does/not/exist', path: '/en' };
+
+			const response = await newPatchItemLabelsRequestBuilder( testItemId, [ operation ] )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValidErrorResponse( response, 409, 'patch-target-not-found' );
+			assert.include( response.body.message, operation.from );
+			assert.strictEqual( response.body.context.field, 'from' );
+			assert.deepEqual( response.body.context.operation, operation );
+		} );
+
+		it( 'patch test condition failed', async () => {
+			const operation = { op: 'test', path: '/en', value: 'potato' };
+			const response = await newPatchItemLabelsRequestBuilder( testItemId, [ operation ] )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValidErrorResponse( response, 409, 'patch-test-failed' );
+			assert.deepEqual( response.body.context.operation, operation );
+			assert.deepEqual( response.body.context[ 'actual-value' ], testEnLabel );
+			assert.include( response.body.message, operation.path );
+			assert.include( response.body.message, JSON.stringify( operation.value ) );
+			assert.include( response.body.message, testEnLabel );
 		} );
 	} );
 
