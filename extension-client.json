@@ -347,7 +347,6 @@
 	},
 	"ResourceModules": {
 		"wikibase.client.init": {
-			"targets": [ "desktop", "mobile" ],
 			"skinStyles": {
 				"modern": "wikibase.client.css",
 				"monobook": "wikibase.client.css",
@@ -359,14 +358,12 @@
 			}
 		},
 		"wikibase.client.miscStyles": {
-			"targets": [ "desktop" ],
 			"styles": [
 				"wikibase.client.page-move.css",
 				"wikibase.client.changeslist.css"
 			]
 		},
 		"wikibase.client.vector-2022": {
-			"targets": [ "desktop", "mobile" ],
 			"skinScripts": {
 				"vector-2022": "wikibase.client.vector-2022.js"
 			},
@@ -375,7 +372,6 @@
 			]
 		},
 		"wikibase.client.linkitem.init": {
-			"targets": [ "desktop" ],
 			"packageFiles": [
 				"wikibase.client.linkitem.init.js",
 				{
@@ -391,7 +387,6 @@
 			]
 		},
 		"jquery.wikibase.linkitem": {
-			"targets": [ "desktop" ],
 			"packageFiles": [
 				"client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
 				"client/resources/wikibase.client.PageConnector.js",
@@ -462,7 +457,6 @@
 			"remoteExtPath": "Wikibase/"
 		},
 		"wikibase.client.action.edit.collapsibleFooter": {
-			"targets": [ "desktop" ],
 			"scripts": "wikibase.client.action.edit.collapsibleFooter.js",
 			"dependencies": [
 				"jquery.makeCollapsible",

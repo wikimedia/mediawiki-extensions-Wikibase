@@ -4,6 +4,7 @@ namespace Wikibase\Client\Hooks;
 
 use Html;
 use MediaWiki\Hook\SpecialMovepageAfterMoveHook;
+use MediaWiki\MediaWikiServices;
 use MovePageForm;
 use Title;
 use Wikibase\Client\RepoLinker;
@@ -68,7 +69,10 @@ class MovePageNotice implements SpecialMovepageAfterMoveHook {
 	 */
 	public function onSpecialMovepageAfterMove( $movePage, $oldTitle, $newTitle ) {
 		$out = $movePage->getOutput();
-		$out->addModules( 'wikibase.client.miscStyles' );
+		// T324991
+		if ( !MediaWikiServices::getInstance()->getService( 'WikibaseClient.MobileSite' ) ) {
+			$out->addModules( 'wikibase.client.miscStyles' );
+		}
 		$out->addHTML( $this->getPageMoveNoticeHtml( $oldTitle, $newTitle ) );
 	}
 

@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Hooks;
 
 use MediaWiki\Hook\BeforePageDisplayHook;
+use MediaWiki\MediaWikiServices;
 use OutputPage;
 use Skin;
 use Title;
@@ -77,7 +78,10 @@ class BeforePageDisplayHandler implements BeforePageDisplayHook {
 		if ( $this->hasLinkItemWidget( $user, $outputPage, $title, $actionName ) ) {
 			// Add the JavaScript which lazy-loads the link item widget
 			// (needed as jquery.wikibase.linkitem has pretty heavy dependencies)
-			$outputPage->addModules( 'wikibase.client.linkitem.init' );
+			// T324991
+			if ( !MediaWikiServices::getInstance()->getService( 'WikibaseClient.MobileSite' ) ) {
+				$outputPage->addModules( 'wikibase.client.linkitem.init' );
+			}
 		}
 
 		if ( $skin->getSkinName() === 'vector-2022' && $outputPage->getProperty( 'wikibase_item' ) !== null ) {
