@@ -490,7 +490,10 @@
 						"$ref": "./examples.json#/PatchedLabelsInvalidLanguageCodeExample"
 					},
 					"patched-label-empty": { "$ref": "./examples.json#/PatchedLabelEmptyExample" },
-					"patched-label-too-long": { "$ref": "./examples.json#/PatchedLabelTooLongExample" }
+					"patched-label-too-long": { "$ref": "./examples.json#/PatchedLabelTooLongExample" },
+					"patched-item-label-description-duplicate": {
+						"$ref": "./examples.json#/PatchedItemLabelDescriptionDuplicateExample"
+					}
 				}
 			}
 		},
