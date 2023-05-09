@@ -51,6 +51,7 @@
 	"wikibase-description-empty": "opredeljen ni noben opis",
 	"wikibase-description-edit-placeholder": "vnesite opis",
 	"wikibase-description-edit-placeholder-language-aware": "vnesite opis v jeziku $1",
+	"wikibase-description-edit-not-supported": "Za ta jezik opisi niso podprti. Prosimo, navedite opis v drugem jeziku, ko je predmet ustvarjen.",
 	"wikibase-aliases-edit-placeholder": "vnesite nekaj sopomenk",
 	"wikibase-aliases-edit-placeholder-language-aware": "vnesite nekaj sopomenk v jeziku $1",
 	"wikibase-aliases-edit-label": "Sopomenke, ločene z navpičnico:",

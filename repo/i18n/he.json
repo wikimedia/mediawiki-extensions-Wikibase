@@ -59,6 +59,7 @@
 	"wikibase-description-empty": "לא הוגדר תיאור",
 	"wikibase-description-edit-placeholder": "נא להקליד תיאור",
 	"wikibase-description-edit-placeholder-language-aware": "נא להקליד תיאור ב{{GRAMMAR:תחילית|$1}}",
+	"wikibase-description-edit-not-supported": "אין תמיכה בתיאורים בשפה הזאת. נא לספק תיאור בשפה אחרת לאחר יצירת הפריט.",
 	"wikibase-aliases-edit-placeholder": "נא להזין כמה כינויים",
 	"wikibase-aliases-edit-placeholder-language-aware": "נא להקליד כמה כינויים ב{{GRAMMAR:תחילית|$1}}",
 	"wikibase-aliases-edit-label": "כינויים, מופרדים בקו ניצב:",

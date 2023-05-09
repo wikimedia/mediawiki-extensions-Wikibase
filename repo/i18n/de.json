@@ -76,6 +76,7 @@
 	"wikibase-description-empty": "Keine Beschreibung vorhanden",
 	"wikibase-description-edit-placeholder": "Beschreibung eingeben",
 	"wikibase-description-edit-placeholder-language-aware": "Beschreibung auf $1 eingeben",
+	"wikibase-description-edit-not-supported": "Beschreibungen werden für diese Sprache nicht unterstützt. Bitte gib eine Beschreibung in einer anderen Sprache an, sobald das Objekt erstellt wurde.",
 	"wikibase-aliases-edit-placeholder": "Einige Aliasse eingeben",
 	"wikibase-aliases-edit-placeholder-language-aware": "Einige Aliasse auf $1 angeben",
 	"wikibase-aliases-edit-label": "Aliasse, mit „|“ getrennt:",

@@ -105,6 +105,7 @@
 	"wikibase-description-empty": "Aucune description fournie",
 	"wikibase-description-edit-placeholder": "saisir une description",
 	"wikibase-description-edit-placeholder-language-aware": "entrer une description en $1",
+	"wikibase-description-edit-not-supported": "Les descriptions ne sont pas prises en charge pour cette langue. Veuillez fournir une description dans une autre langue une fois l’élément créé.",
 	"wikibase-aliases-edit-placeholder": "saisissez des alias",
 	"wikibase-aliases-edit-placeholder-language-aware": "entrer quelques alias en $1",
 	"wikibase-aliases-edit-label": "Alias, séparés par une barre verticale (''pipe'') :",
