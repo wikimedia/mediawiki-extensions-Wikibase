@@ -53,6 +53,12 @@ abstract class ServiceWiringTestCase extends TestCase {
 			} );
 		$this->serviceContainer->expects( $this->never() )
 			->method( 'getService' ); // get() should be used instead
+		$this->serviceContainer->method( 'has' )
+			->willReturnCallback( function ( string $name ) {
+				return array_key_exists( $name, $this->mockedServices );
+			} );
+		$this->serviceContainer->expects( $this->never() )
+			->method( 'hasService' ); // has() should be used instead
 		// WikibaseClient service getters should never access the database or do http requests
 		// https://phabricator.wikimedia.org/T243729
 		$this->disallowDbAccess();
