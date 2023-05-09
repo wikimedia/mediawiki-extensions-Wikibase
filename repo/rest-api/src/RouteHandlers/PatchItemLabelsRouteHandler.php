@@ -9,7 +9,6 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
 use MediaWiki\Rest\Validator\BodyValidator;
-use MediaWiki\Rest\Validator\JsonBodyValidator;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsRequest;
@@ -54,6 +53,7 @@ class PatchItemLabelsRouteHandler extends SimpleHandler {
 	public static function factory(): Handler {
 		$serializer = new LabelsSerializer();
 		$responseFactory = new ResponseFactory();
+
 		return new self(
 			WbRestApi::getPatchItemLabels(),
 			$serializer,
@@ -90,9 +90,9 @@ class PatchItemLabelsRouteHandler extends SimpleHandler {
 					new PatchItemLabelsRequest(
 						$itemId,
 						$jsonBody[self::PATCH_BODY_PARAM],
-						$jsonBody[self::TAGS_BODY_PARAM] ?? [],
-						$jsonBody[self::BOT_BODY_PARAM] ?? false,
-						$jsonBody[self::COMMENT_BODY_PARAM] ?? '',
+						$jsonBody[self::TAGS_BODY_PARAM],
+						$jsonBody[self::BOT_BODY_PARAM],
+						$jsonBody[self::COMMENT_BODY_PARAM],
 						$this->getUsername()
 					)
 				)
@@ -142,8 +142,31 @@ class PatchItemLabelsRouteHandler extends SimpleHandler {
 	 */
 	public function getBodyValidator( $contentType ): BodyValidator {
 		return $contentType === 'application/json' || $contentType === 'application/json-patch+json' ?
-			new JsonBodyValidator( [] ) :
-			parent::getBodyValidator( $contentType );
+			new TypeValidatingJsonBodyValidator( [
+				self::PATCH_BODY_PARAM => [
+					self::PARAM_SOURCE => 'body',
+					ParamValidator::PARAM_TYPE => 'array',
+					ParamValidator::PARAM_REQUIRED => true,
+				],
+				self::TAGS_BODY_PARAM => [
+					self::PARAM_SOURCE => 'body',
+					ParamValidator::PARAM_TYPE => 'array',
+					ParamValidator::PARAM_REQUIRED => false,
+					ParamValidator::PARAM_DEFAULT => [],
+				],
+				self::BOT_BODY_PARAM => [
+					self::PARAM_SOURCE => 'body',
+					ParamValidator::PARAM_TYPE => 'boolean',
+					ParamValidator::PARAM_REQUIRED => false,
+					ParamValidator::PARAM_DEFAULT => false,
+				],
+				self::COMMENT_BODY_PARAM => [
+					self::PARAM_SOURCE => 'body',
+					ParamValidator::PARAM_TYPE => 'string',
+					ParamValidator::PARAM_REQUIRED => false,
+					ParamValidator::PARAM_DEFAULT => null,
+				],
+			] ) : parent::getBodyValidator( $contentType );
 	}
 
 	/**

@@ -12,7 +12,9 @@ use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchedLabelsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelTextValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
@@ -53,6 +55,7 @@ class PatchItemLabelsTest extends TestCase {
 	private ItemUpdater $itemUpdater;
 	private ItemRevisionMetadataRetriever $metadataRetriever;
 	private PermissionChecker $permissionChecker;
+	private PatchItemLabelsValidator $validator;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -72,6 +75,7 @@ class PatchItemLabelsTest extends TestCase {
 			->willReturn( LatestItemRevisionMetadataResult::concreteRevision( 321, '20201111070707' ) );
 		$this->permissionChecker = $this->createStub( PermissionChecker::class );
 		$this->permissionChecker->method( 'canEdit' )->willReturn( true );
+		$this->validator = $this->createStub( PatchItemLabelsValidator::class );
 	}
 
 	public function testHappyPath(): void {
@@ -129,6 +133,18 @@ class PatchItemLabelsTest extends TestCase {
 		$this->assertSame( $response->getLabels(), $updatedItem->getLabels() );
 		$this->assertSame( $lastModified, $response->getLastModified() );
 		$this->assertSame( $revisionId, $response->getRevisionId() );
+	}
+
+	public function testInvalidRequest_throwsException(): void {
+		$expectedException = new UseCaseException( 'invalid-label-patch-test' );
+		$this->validator = $this->createStub( PatchItemLabelsValidator::class );
+		$this->validator->method( 'assertValidRequest' )->willThrowException( $expectedException );
+		try {
+			$this->newUseCase()->execute( $this->createStub( PatchItemLabelsRequest::class ) );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
 	}
 
 	public function testGivenItemNotFound_throwsUseCaseError(): void {
@@ -319,7 +335,8 @@ class PatchItemLabelsTest extends TestCase {
 			$this->itemRetriever,
 			$this->itemUpdater,
 			$this->metadataRetriever,
-			$this->permissionChecker
+			$this->permissionChecker,
+			$this->validator
 		);
 	}
 
