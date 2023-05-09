@@ -4,22 +4,23 @@ namespace Wikibase\Repo\RestApi\RouteHandlers;
 
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Handler;
+use MediaWiki\Rest\RequestInterface;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
 use MediaWiki\Rest\Validator\BodyValidator;
 use MediaWiki\Rest\Validator\JsonBodyValidator;
-use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\TermLookupItemDataRetriever;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\WikibaseEntityPermissionChecker;
-use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\BotRightCheckMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\ContentTypeCheckMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
 use Wikibase\Repo\RestApi\WbRestApi;
-use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\ParamValidator\ParamValidator;
 
 /**
@@ -35,38 +36,54 @@ class PatchItemLabelsRouteHandler extends SimpleHandler {
 
 	private PatchItemLabels $useCase;
 	private LabelsSerializer $serializer;
+	private MiddlewareHandler $middlewareHandler;
 	private ResponseFactory $responseFactory;
 
-	public function __construct( PatchItemLabels $useCase, LabelsSerializer $serializer, ResponseFactory $responseFactory ) {
+	public function __construct(
+		PatchItemLabels $useCase,
+		LabelsSerializer $serializer,
+		MiddlewareHandler $middlewareHandler,
+		ResponseFactory $responseFactory
+	) {
 		$this->useCase = $useCase;
 		$this->serializer = $serializer;
+		$this->middlewareHandler = $middlewareHandler;
 		$this->responseFactory = $responseFactory;
 	}
 
 	public static function factory(): Handler {
 		$serializer = new LabelsSerializer();
+		$responseFactory = new ResponseFactory();
 		return new self(
-			new PatchItemLabels(
-				new TermLookupItemDataRetriever(
-					WikibaseRepo::getTermLookup(),
-					WikibaseRepo::getTermsLanguages()
-				),
-				$serializer,
-				new JsonDiffJsonPatcher(),
-				new LabelsDeserializer(),
-				WbRestApi::getItemDataRetriever(),
-				WbRestApi::getItemUpdater(),
-				new WikibaseEntityPermissionChecker(
-					WikibaseRepo::getEntityPermissionChecker(),
-					MediaWikiServices::getInstance()->getUserFactory()
-				)
-			),
+			WbRestApi::getPatchItemLabels(),
 			$serializer,
-			new ResponseFactory()
+			new MiddlewareHandler( [
+				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
+				new UserAgentCheckMiddleware(),
+				new AuthenticationMiddleware(),
+				new ContentTypeCheckMiddleware( [
+					ContentTypeCheckMiddleware::TYPE_JSON_PATCH,
+					ContentTypeCheckMiddleware::TYPE_APPLICATION_JSON,
+				] ),
+				new BotRightCheckMiddleware( MediaWikiServices::getInstance()->getPermissionManager(), $responseFactory ),
+				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
+					function ( RequestInterface $request ): string {
+						return $request->getPathParam( self::ITEM_ID_PATH_PARAM );
+					}
+				),
+			] ),
+			$responseFactory
 		);
 	}
 
-	public function run( string $itemId ): Response {
+	/**
+	 * @param mixed ...$args
+	 */
+	public function run( ...$args ): Response {
+		return $this->middlewareHandler->run( $this, [ $this, 'runUseCase' ], $args );
+	}
+
+	public function runUseCase( string $itemId ): Response {
 		$jsonBody = $this->getValidatedBody();
 
 		try {
@@ -126,6 +143,18 @@ class PatchItemLabelsRouteHandler extends SimpleHandler {
 	 * @inheritDoc
 	 */
 	public function getBodyValidator( $contentType ): BodyValidator {
-		return new JsonBodyValidator( [] );
+		return $contentType === 'application/json' || $contentType === 'application/json-patch+json' ?
+			new JsonBodyValidator( [] ) :
+			parent::getBodyValidator( $contentType );
 	}
+
+	/**
+	 * Preconditions are checked via {@link PreconditionMiddleware}
+	 *
+	 * @inheritDoc
+	 */
+	public function checkPreconditions() {
+		return null;
+	}
+
 }
