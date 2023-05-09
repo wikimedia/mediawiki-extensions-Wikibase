@@ -5,6 +5,7 @@ namespace Wikibase\Repo\FederatedProperties;
 
 use ErrorPageError;
 use Html;
+use MediaWiki\MediaWikiServices;
 use RawMessage;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\View\Template\TemplateFactory;
@@ -55,7 +56,11 @@ class FederatedPropertiesError extends ErrorPageError {
 			parent::report();
 		} else {
 			global $wgOut;
-			$wgOut->addModuleStyles( [ 'wikibase.alltargets', 'wikibase.desktop' ] );
+			$wgOut->addModuleStyles( [ 'wikibase.alltargets' ] );
+			// T324991
+			if ( !MediaWikiServices::getInstance()->getService( 'WikibaseRepo.MobileSite' ) ) {
+				$wgOut->addModuleStyles( [ 'wikibase.desktop' ] );
+			}
 			parent::report( $action );
 		}
 	}

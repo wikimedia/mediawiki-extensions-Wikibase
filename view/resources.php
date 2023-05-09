@@ -77,7 +77,6 @@ return call_user_func( function() {
 		],
 
 		'jquery.wikibase.toolbar.styles' => $moduleTemplate + [
-			'targets' => [ 'desktop' ],
 			'styles' => [
 				'jquery/wikibase/toolbar/themes/default/jquery.wikibase.toolbar.css',
 				'jquery/wikibase/toolbar/themes/default/jquery.wikibase.toolbarbutton.css',
@@ -95,7 +94,6 @@ return call_user_func( function() {
 
 		// desktop-only (though some of these should be on mobile too, see T326428)
 		'wikibase.desktop' => $moduleTemplate + [
-			'targets' => [ 'desktop' ],
 			'styles' => [
 				'wikibase/wikibase.less',
 				'jquery/wikibase/themes/default/jquery.wikibase.aliasesview.css',
@@ -123,7 +121,6 @@ return call_user_func( function() {
 
 		// deprecated: this is effectively wikibase.alltargets + wikibase.desktop, use those instead
 		'wikibase.common' => $moduleTemplate + [
-			'targets' => [ 'desktop' ],
 			'styles' => [
 				// Order must be hierarchical, do not order alphabetically
 				'wikibase/wikibase.less',
@@ -598,8 +595,6 @@ return call_user_func( function() {
 		],
 
 		'valueParsers.parsers' => $wikibaseDatavaluesSrcPaths + [
-			 // T326405
-			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'valueParsers/parsers/ValueParser.js',
 				'valueParsers/parsers/NullParser.js',
@@ -1048,8 +1043,6 @@ return call_user_func( function() {
 		],
 
 		'wikibase.api.ValueCaller' => $wikibaseApiPaths + [
-			 // T326405
-			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'namespace.js',
 				'ParseValueCaller.js',

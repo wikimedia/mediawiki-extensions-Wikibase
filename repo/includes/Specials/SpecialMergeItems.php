@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Specials;
 use Exception;
 use Html;
 use HTMLForm;
+use MediaWiki\MediaWikiServices;
 use Message;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -209,7 +210,10 @@ class SpecialMergeItems extends SpecialWikibasePage {
 	 * Creates the HTML form for merging two items.
 	 */
 	protected function createForm() {
-		$this->getOutput()->addModules( 'wikibase.special.mergeItems' );
+		// T324991
+		if ( !MediaWikiServices::getInstance()->getService( 'WikibaseRepo.MobileSite' ) ) {
+			$this->getOutput()->addModules( 'wikibase.special.mergeItems' );
+		}
 
 		$pre = '';
 		if ( !$this->getUser()->isRegistered() ) {

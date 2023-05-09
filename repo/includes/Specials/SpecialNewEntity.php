@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Specials;
 
 use Html;
 use HTMLForm;
+use MediaWiki\MediaWikiServices;
 use Message;
 use OutputPage;
 use Status;
@@ -198,7 +199,10 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	abstract protected function createSummary( EntityDocument $entity );
 
 	protected function displayBeforeForm( OutputPage $output ) {
-		$output->addModules( 'wikibase.special.newEntity' );
+		// T324991
+		if ( !MediaWikiServices::getInstance()->getService( 'WikibaseRepo.MobileSite' ) ) {
+			$output->addModules( 'wikibase.special.newEntity' );
+		}
 
 		$output->addHTML( $this->getCopyrightHTML() );
 

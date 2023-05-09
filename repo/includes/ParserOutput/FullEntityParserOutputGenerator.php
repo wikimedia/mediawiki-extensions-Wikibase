@@ -4,6 +4,7 @@ namespace Wikibase\Repo\ParserOutput;
 
 use InvalidArgumentException;
 use Language;
+use MediaWiki\MediaWikiServices;
 use ParserOutput;
 use SpecialPage;
 use Wikibase\DataModel\Entity\EntityId;
@@ -177,18 +178,29 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 		// make css available for JavaScript-less browsers
 		$parserOutput->addModuleStyles( [
 			'wikibase.alltargets',
-			'wikibase.desktop',
-			'jquery.wikibase.toolbar.styles',
 		] );
+		$isDesktopView = !MediaWikiServices::getInstance()->getService( 'WikibaseRepo.MobileSite' );
+		// T324991
+		if ( $isDesktopView ) {
+			$parserOutput->addModuleStyles( [
+				'wikibase.desktop',
+				'jquery.wikibase.toolbar.styles',
+			] );
+		}
 
 		$parserOutput->addModules( [
 			// fire the entityLoaded hook which got configured through $this->configBuilder
 			'wikibase.entityPage.entityLoaded',
+		] );
+		// T324991
+		if ( $isDesktopView ) {
 			// make sure required client-side resources will be loaded
 			// FIXME: Separate the JavaScript that is also needed in read-only mode from
 			// the JavaScript that is only necessary for editing.
-			'wikibase.ui.entityViewInit',
-		] );
+			$parserOutput->addModules( [
+				'wikibase.ui.entityViewInit',
+			] );
+		}
 	}
 
 	/**

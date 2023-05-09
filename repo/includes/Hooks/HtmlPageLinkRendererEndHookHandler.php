@@ -9,6 +9,7 @@ use MediaWiki\Interwiki\InterwikiLookup;
 use MediaWiki\Linker\Hook\HtmlPageLinkRendererEndHook;
 use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\Linker\LinkTarget;
+use MediaWiki\MediaWikiServices;
 use MediaWiki\SpecialPage\SpecialPageFactory;
 use RequestContext;
 use Title;
@@ -340,7 +341,8 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 		// add wikibase styles in all cases, so we can format the link properly:
 		$out = $context->getOutput();
 		$out->addModuleStyles( [ 'wikibase.alltargets' ] );
-		if ( $this->federatedPropertiesEnabled && $entityId instanceof PropertyId ) {
+		$isMobileSite = MediaWikiServices::getInstance()->getService( 'WikibaseRepo.MobileSite' );
+		if ( !$isMobileSite && $this->federatedPropertiesEnabled && $entityId instanceof PropertyId ) {
 			$customAttribs[ 'class' ] = $customAttribs[ 'class' ] == '' ? 'fedprop' : $customAttribs[ 'class' ] . ' fedprop';
 			$out->addModules( 'wikibase.federatedPropertiesLeavingSiteNotice' );
 		}

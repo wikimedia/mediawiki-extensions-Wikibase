@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\FederatedProperties;
 
 use Language;
+use MediaWiki\MediaWikiServices;
 use ParserOutput;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Lib\Store\EntityRevision;
@@ -49,10 +50,13 @@ class FederatedPropertiesUiEntityParserOutputGeneratorDecorator implements Entit
 		try {
 			$parserOutput = $this->inner->getParserOutput( $entityRevision, $generateHtml );
 			$parserOutput->setEnableOOUI( true );
-			$parserOutput->addModules( [
-				'wikibase.federatedPropertiesEditRequestFailureNotice',
-				'wikibase.federatedPropertiesLeavingSiteNotice',
-			] );
+			// T324991
+			if ( !MediaWikiServices::getInstance()->getService( 'WikibaseRepo.MobileSite' ) ) {
+				$parserOutput->addModules( [
+					'wikibase.federatedPropertiesEditRequestFailureNotice',
+					'wikibase.federatedPropertiesLeavingSiteNotice',
+				] );
+			}
 
 		} catch ( FederatedPropertiesException $ex ) {
 			$entity = $entityRevision->getEntity();

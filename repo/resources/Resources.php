@@ -32,8 +32,6 @@ return call_user_func( function() {
 
 	$modules = [
 		'wikibase.formatters.ApiValueFormatter' => $formattersPaths + [
-			 // T326405
-			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'ApiValueFormatter.js',
 			],
@@ -125,8 +123,6 @@ return call_user_func( function() {
 		],
 
 		'wikibase.EntityInitializer' => $moduleTemplate + [
-			 // T326405
-			'targets' => [ 'desktop' ],
 			'packageFiles' => [
 				'wikibase.EntityInitializer.js',
 
@@ -295,8 +291,6 @@ return call_user_func( function() {
 		/* Wikibase special pages */
 
 		'wikibase.special.newEntity' => $moduleTemplate + [
-			 // T326405
-			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'wikibase.special/wikibase.special.newEntity.js',
 			],
@@ -306,8 +300,6 @@ return call_user_func( function() {
 		],
 
 		'wikibase.special.mergeItems' => $moduleTemplate + [
-			 // T326405
-			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'wikibase.special/wikibase.special.mergeItems.js',
 			],
@@ -331,8 +323,6 @@ return call_user_func( function() {
 		],
 
 		'wikibase.federatedPropertiesLeavingSiteNotice' => $moduleTemplate + [
-				 // T326405
-				'targets' => [ 'desktop' ],
 				'packageFiles' => [
 					'wikibase.federatedPropertiesLeavingSiteNotice.js',
 					[
@@ -358,8 +348,6 @@ return call_user_func( function() {
 		],
 
 		'wikibase.federatedPropertiesEditRequestFailureNotice' => $moduleTemplate + [
-			 // T326405
-			'targets' => [ 'desktop' ],
 			'packageFiles' => [
 				'wikibase.federatedPropertiesEditRequestFailureNotice.js',
 			],

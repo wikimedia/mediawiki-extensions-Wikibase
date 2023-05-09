@@ -1556,6 +1556,14 @@ return [
 		);
 	},
 
+	'WikibaseRepo.MobileSite' => function ( MediaWikiServices $services ): bool {
+		if ( $services->has( 'MobileFrontend.Context' ) ) {
+			$mobileContext = $services->get( 'MobileFrontend.Context' );
+			return $mobileContext->shouldDisplayMobileView();
+		}
+		return false;
+	},
+
 	'WikibaseRepo.MonolingualTextLanguages' => function ( MediaWikiServices $services ): ContentLanguages {
 		return WikibaseRepo::getWikibaseContentLanguages( $services )
 			->getContentLanguages( WikibaseContentLanguages::CONTEXT_MONOLINGUAL_TEXT );
