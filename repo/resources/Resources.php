@@ -118,7 +118,6 @@ return call_user_func( function() {
 			'scripts' => [
 				'wikibase.entityPage.entityLoaded.js',
 			],
-			'targets' => [ 'desktop', 'mobile' ],
 			'dependencies' => [
 				'wikibase',
 				'mediawiki.Uri',
@@ -159,7 +158,6 @@ return call_user_func( function() {
 			'dependencies' => [
 				'wikibase',
 			],
-			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.ui.entityViewInit' => [
@@ -292,7 +290,6 @@ return call_user_func( function() {
 			'messages' => [
 				'parentheses',
 			],
-			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		/* Wikibase special pages */

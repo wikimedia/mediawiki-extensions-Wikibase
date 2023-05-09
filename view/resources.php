@@ -56,7 +56,6 @@ return call_user_func( function() {
 			'scripts' => [
 				'wikibase.js',
 			],
-			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'jquery.wikibase.entityselector' => $moduleTemplate + [
@@ -87,9 +86,7 @@ return call_user_func( function() {
 
 		// Common styles independent from JavaScript being enabled or disabled.
 
-		// all targets (desktop+mobile)
 		'wikibase.alltargets' => $moduleTemplate + [
-			'targets' => [ 'desktop', 'mobile' ],
 			'styles' => [
 				'wikibase/wikibase.badgedisplay.less',
 				'wikibase/wikibase.itemlink.less',
@@ -152,7 +149,6 @@ return call_user_func( function() {
 		'wikibase.templates' => $moduleTemplate + [
 			'class' => TemplateModule::class,
 			'scripts' => 'wikibase/templates.js',
-			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.entityChangers.EntityChangersFactory' => $moduleTemplate + [
@@ -185,7 +181,6 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase',
 			],
-			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.view.__namespace' => $moduleTemplate + [
@@ -411,7 +406,6 @@ return call_user_func( function() {
 				'util.inherit',
 				'dataValues.DataValue',
 			],
-			'targets' => [ 'desktop', 'mobile' ],
 			'localBasePath' => __DIR__ . '/lib/wikibase-data-model/src',
 			'remoteExtPath' => 'Wikibase/view/lib/wikibase-data-model/src',
 		],
@@ -420,7 +414,6 @@ return call_user_func( function() {
 			'scripts' => [
 				'dataValues.js',
 			],
-			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'jquery.animateWithEvent' => $wikibaseDatavaluesValueviewLibPaths + [
@@ -476,7 +469,6 @@ return call_user_func( function() {
 			'dependencies' => [
 				'util.inherit',
 			],
-			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'util.Extendable' => $wikibaseDatavaluesValueviewLibPaths + [
@@ -543,7 +535,6 @@ return call_user_func( function() {
 				'dataValues',
 				'util.inherit',
 			],
-			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'dataValues.values' => $wikibaseDatavaluesPaths + [
@@ -569,7 +560,6 @@ return call_user_func( function() {
 				'dataValues.TimeValue',
 				'util.inherit',
 			],
-			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'dataValues.TimeValue' => $wikibaseDatavaluesSrcPaths + [
@@ -580,7 +570,6 @@ return call_user_func( function() {
 				'dataValues.DataValue',
 				'util.inherit',
 			],
-			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'valueFormatters' => $wikibaseDatavaluesSrcPaths + [
@@ -666,7 +655,6 @@ return call_user_func( function() {
 				'dataValues',
 				'dataValues.values',
 			],
-			'targets' => [ 'desktop', 'mobile' ],
 			'localBasePath' => __DIR__ . '/lib/wikibase-serialization/src',
 			'remoteExtPath' => 'Wikibase/view/lib/wikibase-serialization/src',
 		],
@@ -675,7 +663,6 @@ return call_user_func( function() {
 			'scripts' => [
 				'lib/util/util.inherit.js',
 			],
-			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		// Loads the actual valueview widget into jQuery.valueview.valueview and maps
@@ -1056,10 +1043,6 @@ return call_user_func( function() {
 				'wikibase-error-remove-timeout',
 				'wikibase-error-ui-no-external-page',
 				'wikibase-error-ui-edit-conflict',
-			],
-			'targets' => [
-				'desktop',
-				'mobile',
 			],
 		],
 
