@@ -74,6 +74,50 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 		} );
 	} );
 
+	describe( '404 error response', () => {
+		it( 'item not found', async () => {
+			const itemId = 'Q999999';
+			const response = await newPatchItemLabelsRequestBuilder(
+				itemId,
+				[
+					{
+						op: 'replace',
+						path: '/en',
+						value: utils.uniq()
+					}
+				]
+			).assertValidRequest().makeRequest();
+
+			assert.strictEqual( response.status, 404 );
+			assert.strictEqual( response.header[ 'content-language' ], 'en' );
+			assert.strictEqual( response.body.code, 'item-not-found' );
+			assert.include( response.body.message, itemId );
+		} );
+	} );
+
+	describe( '409 error response', () => {
+		it( 'item is a redirect', async () => {
+			const redirectTarget = testItemId;
+			const redirectSource = await entityHelper.createRedirectForItem( redirectTarget );
+
+			const response = await newPatchItemLabelsRequestBuilder(
+				redirectSource,
+				[
+					{
+						op: 'replace',
+						path: '/en',
+						value: utils.uniq()
+					}
+				]
+			).assertValidRequest().makeRequest();
+
+			assert.strictEqual( response.status, 409 );
+			assert.include( response.body.message, redirectSource );
+			assert.include( response.body.message, redirectTarget );
+			assert.strictEqual( response.body.code, 'redirected-item' );
+		} );
+	} );
+
 	describe( '415 error response', () => {
 		it( 'unsupported media type', async () => {
 			const contentType = 'multipart/form-data';
