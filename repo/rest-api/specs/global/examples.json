@@ -237,6 +237,18 @@
 			}
 		}
 	},
+	"PatchedItemLabelDescriptionDuplicateExample": {
+		"value": {
+			"code": "patched-item-label-description-duplicate",
+			"message": "Item '{duplicate_id}' already has label '{label}' associated with language code '{language}', using the same description text",
+			"context": {
+				"language": "<language_code>",
+				"label": "<label>",
+				"description": "<description>",
+				"matching-item-id": "<duplicate_id>"
+			}
+		}
+	},
 	"InvalidDescriptionExample": {
 		"value": {
 			"code": "invalid-description",
