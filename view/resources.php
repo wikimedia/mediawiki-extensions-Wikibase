@@ -144,8 +144,14 @@ return call_user_func( function() {
 		// end of common styles independent from JavaScript being enabled or disabled
 
 		'wikibase.templates' => $moduleTemplate + [
-			'class' => TemplateModule::class,
-			'scripts' => 'wikibase/templates.js',
+			'scripts' => [
+				[
+					'name' => 'wikibase/templates.config.js',
+					'callback' => [ TemplateModule::class, 'getScript' ],
+					'versionCallback' => [ TemplateModule::class, 'getVersion' ],
+				],
+				'wikibase/templates.js',
+			],
 		],
 
 		'wikibase.entityChangers.EntityChangersFactory' => $moduleTemplate + [
