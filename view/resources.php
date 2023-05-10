@@ -949,8 +949,6 @@ return call_user_func( function() {
 		],
 
 		'wikibase.tainted-ref' => [
-			 // T326405
-			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'tainted-ref.init.js',
 				'tainted-ref.common.js',
