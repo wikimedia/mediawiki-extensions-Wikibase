@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Abanima",
+			"Alshamiri1",
 			"Asaifm",
 			"Aude",
 			"BAB ZAA",
@@ -72,6 +73,7 @@
 	"wikibase-description-empty": "لا يوجد وصف",
 	"wikibase-description-edit-placeholder": "أدخل وصفاً",
 	"wikibase-description-edit-placeholder-language-aware": "أدخل وصفًا بـ$1",
+	"wikibase-description-edit-not-supported": "الأوصاف غير مدعومة لهذه اللغة. يرجى تقديم وصف بلغة أخرى بمجرد إنشاء العنصر.",
 	"wikibase-aliases-edit-placeholder": "أدخل بعض الأسماء المستعارة",
 	"wikibase-aliases-edit-placeholder-language-aware": "أدخل بعض الأسماء المستعارة في $1",
 	"wikibase-aliases-edit-label": "الأسماء المستعارة، مفصولة بpipe:",
