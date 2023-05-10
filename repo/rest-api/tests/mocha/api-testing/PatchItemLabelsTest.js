@@ -5,6 +5,7 @@ const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { newPatchItemLabelsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
+const { formatLabelsEditSummary } = require( '../helpers/formatEditSummaries' );
 
 describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 	let testItemId;
@@ -70,7 +71,10 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 			const editMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 			assert.include( editMetadata.tags, tag );
 			assert.property( editMetadata, 'bot' );
-			// comment assertion to be added when editing comments
+			assert.strictEqual(
+				editMetadata.comment,
+				formatLabelsEditSummary( 'update-languages-short', 'ar', editSummary )
+			);
 		} );
 	} );
 

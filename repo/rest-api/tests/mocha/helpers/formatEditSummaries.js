@@ -13,5 +13,9 @@ module.exports = {
 		const autoSummary = `/* ${module}-${action}:${commentArgs} */ [[Property:${property}]]: ${value}`;
 
 		return userComment ? `${autoSummary}, ${userComment}` : autoSummary;
+	},
+
+	formatLabelsEditSummary( action, autoCommentArgs, userComment ) {
+		return `/* wbeditentity-${action}:0||${autoCommentArgs} */ ${userComment}`;
 	}
 };
