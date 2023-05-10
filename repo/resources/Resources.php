@@ -153,8 +153,6 @@ return call_user_func( function() {
 		],
 
 		'wikibase.ui.entityViewInit' => [
-			 // T326405
-			'targets' => [ 'desktop' ],
 			'packageFiles' => [
 				'repo/resources/wikibase.ui.entityViewInit.js',
 
