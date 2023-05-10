@@ -11,6 +11,7 @@ use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\Services\ItemLabelsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\JsonPatcher;
 use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
@@ -26,6 +27,7 @@ class PatchItemLabels {
 	private LabelsDeserializer $labelsDeserializer;
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
+	private ItemRevisionMetadataRetriever $revisionMetadataRetriever;
 	private PermissionChecker $permissionChecker;
 
 	public function __construct(
@@ -35,6 +37,7 @@ class PatchItemLabels {
 		LabelsDeserializer $labelsDeserializer,
 		ItemRetriever $itemRetriever,
 		ItemUpdater $itemUpdater,
+		ItemRevisionMetadataRetriever $revisionMetadataRetriever,
 		PermissionChecker $permissionChecker
 	) {
 		$this->labelsRetriever = $labelsRetriever;
@@ -43,11 +46,25 @@ class PatchItemLabels {
 		$this->labelsDeserializer = $labelsDeserializer;
 		$this->itemRetriever = $itemRetriever;
 		$this->itemUpdater = $itemUpdater;
+		$this->revisionMetadataRetriever = $revisionMetadataRetriever;
 		$this->permissionChecker = $permissionChecker;
 	}
 
 	public function execute( PatchItemLabelsRequest $request ): PatchItemLabelsResponse {
 		$itemId = new ItemId( $request->getItemId() );
+
+		$latestRevision = $this->revisionMetadataRetriever->getLatestRevisionMetadata( $itemId );
+		if ( $latestRevision->isRedirect() ) {
+			throw new UseCaseError(
+				UseCaseError::ITEM_REDIRECTED,
+				"Item {$request->getItemId()} has been merged into {$latestRevision->getRedirectTarget()}."
+			);
+		} elseif ( !$latestRevision->itemExists() ) {
+			throw new UseCaseError(
+				UseCaseError::ITEM_NOT_FOUND,
+				"Could not find an item with the ID: {$request->getItemId()}"
+			);
+		}
 
 		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
 		$user = $request->getUsername() !== null ? User::withUsername( $request->getUsername() ) : User::newAnonymous();

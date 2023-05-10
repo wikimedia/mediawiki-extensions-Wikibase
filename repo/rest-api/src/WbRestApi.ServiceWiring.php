@@ -264,6 +264,7 @@ return [
 			new LabelsDeserializer(),
 			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getItemUpdater( $services ),
+			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever( WikibaseRepo::getEntityRevisionLookup() ),
 			new WikibaseEntityPermissionChecker(
 				WikibaseRepo::getEntityPermissionChecker( $services ),
 				$services->getUserFactory()
