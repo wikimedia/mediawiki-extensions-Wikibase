@@ -7,6 +7,8 @@ use MediaWiki\Rest\Reporter\MWErrorReporter;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
+use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SerializerFactory;
@@ -31,6 +33,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatement
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\GetItemStatements;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\GetItemStatementsValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchedStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatementValidator;
@@ -241,7 +244,25 @@ return [
 			$services->getPermissionManager(),
 			new StatementReadModelConverter(
 				WikibaseRepo::getStatementGuidParser( $services ),
-				WikibaseRepo::getPropertyDataTypeLookup()
+				WikibaseRepo::getPropertyDataTypeLookup( $services )
+			)
+		);
+	},
+
+	'WbRestApi.PatchItemLabels' => function( MediaWikiServices $services ): PatchItemLabels {
+		return new PatchItemLabels(
+			new TermLookupItemDataRetriever(
+				WikibaseRepo::getTermLookup( $services ),
+				WikibaseRepo::getTermsLanguages( $services )
+			),
+			new LabelsSerializer(),
+			new JsonDiffJsonPatcher(),
+			new LabelsDeserializer(),
+			WbRestApi::getItemDataRetriever( $services ),
+			WbRestApi::getItemUpdater( $services ),
+			new WikibaseEntityPermissionChecker(
+				WikibaseRepo::getEntityPermissionChecker( $services ),
+				$services->getUserFactory()
 			)
 		);
 	},

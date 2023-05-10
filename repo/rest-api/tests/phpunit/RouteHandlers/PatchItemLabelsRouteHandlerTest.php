@@ -3,9 +3,13 @@
 namespace Wikibase\Repo\Tests\RestApi\RouteHandlers;
 
 use MediaWiki\Rest\Handler;
+use MediaWiki\Rest\Reporter\ErrorReporter;
 use MediaWiki\Rest\RequestData;
 use MediaWiki\Tests\Rest\Handler\HandlerTestTrait;
 use MediaWikiIntegrationTestCase;
+use RuntimeException;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\RouteHandlers\PatchItemLabelsRouteHandler;
 
 /**
@@ -18,6 +22,21 @@ use Wikibase\Repo\RestApi\RouteHandlers\PatchItemLabelsRouteHandler;
 class PatchItemLabelsRouteHandlerTest extends MediaWikiIntegrationTestCase {
 
 	use HandlerTestTrait;
+
+	public function testHandlesUnexpectedErrors(): void {
+		$useCase = $this->createStub( PatchItemLabels::class );
+		$useCase->method( 'execute' )->willThrowException( new RuntimeException() );
+		$this->setService( 'WbRestApi.PatchItemLabels', $useCase );
+		$this->setService( 'WbRestApi.ErrorReporter', $this->createStub( ErrorReporter::class ) );
+
+		$routeHandler = $this->newHandlerWithValidRequest();
+		$this->validateHandler( $routeHandler );
+
+		$response = $routeHandler->execute();
+		$responseBody = json_decode( $response->getBody()->getContents() );
+		$this->assertSame( [ 'en' ], $response->getHeader( 'Content-Language' ) );
+		$this->assertSame( UseCaseError::UNEXPECTED_ERROR, $responseBody->code );
+	}
 
 	public function testReadWriteAccess(): void {
 		$routeHandler = $this->newHandlerWithValidRequest();

@@ -50,10 +50,18 @@ module.exports.editRequests = [
 			value: 'random-string-value-' + utils.uniq()
 		} ]
 	),
-	( { itemId } ) => rbf.newSetItemLabelRequestBuilder( itemId, 'en', `english label ${utils.uniq()}` ),
+	( { itemId } ) => rbf.newSetItemLabelRequestBuilder( itemId, 'en', 'random-test-label-' + utils.uniq() ),
 	( { itemId } ) => rbf.newSetItemDescriptionRequestBuilder(
 		itemId,
 		'en',
 		'random-test-description-' + utils.uniq()
+	),
+	( { itemId } ) => rbf.newPatchItemLabelsRequestBuilder(
+		itemId,
+		[ {
+			op: 'replace',
+			path: '/en',
+			value: 'random-test-label-' + utils.uniq()
+		} ]
 	)
 ];
