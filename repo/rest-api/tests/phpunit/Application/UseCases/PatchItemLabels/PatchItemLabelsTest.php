@@ -9,9 +9,11 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchedLabelsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\Validation\ItemLabelTextValidator;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
@@ -45,7 +47,7 @@ class PatchItemLabelsTest extends TestCase {
 	private ItemLabelsRetriever $labelsRetriever;
 	private LabelsSerializer $labelsSerializer;
 	private JsonPatcher $patcher;
-	private LabelsDeserializer $labelsDeserializer;
+	private PatchedLabelsValidator $patchedLabelsValidator;
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
 	private ItemRevisionMetadataRetriever $metadataRetriever;
@@ -57,7 +59,10 @@ class PatchItemLabelsTest extends TestCase {
 		$this->labelsRetriever = $this->createStub( ItemLabelsRetriever::class );
 		$this->labelsSerializer = new LabelsSerializer();
 		$this->patcher = new JsonDiffJsonPatcher();
-		$this->labelsDeserializer = new LabelsDeserializer();
+		$this->patchedLabelsValidator = new PatchedLabelsValidator(
+			new LabelsDeserializer(),
+			$this->createStub( ItemLabelTextValidator::class )
+		);
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
 		$this->metadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
@@ -263,12 +268,52 @@ class PatchItemLabelsTest extends TestCase {
 		];
 	}
 
+	public function testGivenPatchedLabelsInvalid_throwsUseCaseError(): void {
+		$item = NewItem::withId( 'Q123' )->build();
+		$patchResult = [ 'ar' => '' ];
+
+		$this->itemRetriever = $this->createStub( ItemRetriever::class );
+		$this->itemRetriever->method( 'getItem' )->willReturn( $item );
+
+		$this->labelsRetriever = $this->createStub( ItemLabelsRetriever::class );
+		$this->labelsRetriever->method( 'getLabels' )->willReturn( new Labels() );
+
+		$expectedUseCaseError = $this->createStub( UseCaseError::class );
+		$this->patchedLabelsValidator = $this->createMock( PatchedLabelsValidator::class );
+		$this->patchedLabelsValidator->expects( $this->once() )
+			->method( 'validateAndDeserialize' )
+			->with( $patchResult )
+			->willThrowException( $expectedUseCaseError );
+
+		try {
+			$this->newUseCase()->execute(
+				new PatchItemLabelsRequest(
+					$item->getId()->getSerialization(),
+					[
+						[
+							'op' => 'add',
+							'path' => '/ar',
+							'value' => '',
+						],
+					],
+					[],
+					false,
+					null,
+					null
+				)
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedUseCaseError, $e );
+		}
+	}
+
 	private function newUseCase(): PatchItemLabels {
 		return new PatchItemLabels(
 			$this->labelsRetriever,
 			$this->labelsSerializer,
 			$this->patcher,
-			$this->labelsDeserializer,
+			$this->patchedLabelsValidator,
 			$this->itemRetriever,
 			$this->itemUpdater,
 			$this->metadataRetriever,
