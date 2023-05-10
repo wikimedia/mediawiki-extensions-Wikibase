@@ -313,6 +313,9 @@
 	"wikibase-tokencheck-badtoken": "Kötü anahtar düzenlemesi (belki de oturumunuzun süresi doldu).",
 	"special-dispatchstats": "Gönderim istatistiklerini değiştir",
 	"wikibase-dispatchstats-intro": "Bu sayfa, değişiklikleri istemcilere göndermeyle ilgili istatistikler sağlar.\nDeğişiklik o vikide gönderildiğinde ve o vikideki iş kuyruğu bu bildirimi işledikten sonra, bir istemci vikisine {{SITENAME}} sitesindeki bir değişiklik bildirilir.",
+	"wikibase-dispatchstats-above": "{{PLURAL:$1|En az $1 tane değişiklik}} var.",
+	"wikibase-dispatchstats-number-of-changes-in-queue": "Sıradaki değişiklik sayısı: {{PLURAL:$1|$1}}",
+	"wikibase-dispatchstats-number-of-entities-in-queue": "Sıradaki Varlık sayısı: {{PLURAL:$1|$1}}",
 	"special-listdatatypes": "Kullanılabilen tüm veri türleri listesi",
 	"wikibase-listdatatypes-intro": "Bu, bu kurulumda mevcut olan ilgili değer tiplerine sahip tüm veri tiplerinin bir listesidir:",
 	"wikibase-listdatatypes-listproperties": "Bu veri türüne sahip özelliklerin listesi",
@@ -519,5 +522,6 @@
 	"special-setlabel-parameterized": "$1 etiketine bakın",
 	"special-setdescription-parameterized": "$1 açıklamasına bakın",
 	"special-setlabeldescriptionaliases-parameterized": "$1 etiketini, açıklamayı ve takma adlarına bakın",
+	"wikibase-federated-properties-federated-property-api-error-message": "Bu API'yi kullanarak Birleşik Özelliklerle etkileşim kuramazsınız.",
 	"wikibase-federated-properties-failed-request-api-error-message": "Federasyon kaynak vikisine yapılan başarısız bir istek nedeniyle istek başarısız oldu."
 }

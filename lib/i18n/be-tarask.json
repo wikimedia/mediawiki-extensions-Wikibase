@@ -65,7 +65,7 @@
 	"wikibase-time-precision-Mannum": "$1 мільён{{PLURAL:$1||ы|аў}} гадоў",
 	"wikibase-time-precision-annum": "$1 {{PLURAL:$1|год|гады|гадоў}}",
 	"wikibase-time-precision-millennium": "$1-га тысячагодзьдзя",
-	"wikibase-time-precision-century": "$1-га стагодзьдзя",
+	"wikibase-time-precision-century": "$1 стагодзьдзе",
 	"wikibase-time-precision-10annum": "$1-я",
 	"wikibase-time-precision-BCE": "$1 да н. э.",
 	"wikibase-time-precision-BCE-Gannum": "$1 мільярд{{PLURAL:$1||ы|аў}} гадоў да н. э.",
