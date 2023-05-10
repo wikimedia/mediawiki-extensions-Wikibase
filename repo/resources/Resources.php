@@ -67,8 +67,6 @@ return call_user_func( function() {
 		],
 
 		'wikibase.experts.Item' => $expertsPaths + [
-			 // T326405
-			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'Item.js',
 			],
@@ -80,8 +78,6 @@ return call_user_func( function() {
 		],
 
 		'wikibase.experts.Property' => $expertsPaths + [
-			 // T326405
-			'targets' => [ 'desktop' ],
 			'scripts' => [
 				'Property.js',
 			],
