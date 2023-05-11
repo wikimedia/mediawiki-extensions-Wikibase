@@ -9,6 +9,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\User;
+use Wikibase\Repo\RestApi\Domain\Services\Exceptions\PatchPathException;
+use Wikibase\Repo\RestApi\Domain\Services\Exceptions\PatchTestConditionFailedException;
 use Wikibase\Repo\RestApi\Domain\Services\ItemLabelsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
@@ -78,7 +80,27 @@ class PatchItemLabels {
 		$labels = $this->labelsRetriever->getLabels( $itemId );
 		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
 		$serialization = $this->labelsSerializer->serialize( $labels );
-		$patchResult = $this->patcher->patch( iterator_to_array( $serialization ), $request->getPatch() );
+
+		try {
+			$patchResult = $this->patcher->patch( iterator_to_array( $serialization ), $request->getPatch() );
+		} catch ( PatchPathException $e ) {
+			throw new UseCaseError(
+				UseCaseError::PATCH_TARGET_NOT_FOUND,
+				"Target '{$e->getOperation()[$e->getField()]}' not found on the resource",
+				[ 'operation' => $e->getOperation(), 'field' => $e->getField() ]
+			);
+		} catch ( PatchTestConditionFailedException $e ) {
+			$operation = $e->getOperation();
+			throw new UseCaseError(
+				UseCaseError::PATCH_TEST_FAILED,
+				'Test operation in the provided patch failed. ' .
+				"At path '" . $operation['path'] .
+				"' expected '" . json_encode( $operation['value'] ) .
+				"', actual: '" . json_encode( $e->getActualValue() ) . "'",
+				[ 'operation' => $operation, 'actual-value' => $e->getActualValue() ]
+			);
+		}
+
 		$modifiedLabels = $this->labelsDeserializer->deserialize( $patchResult );
 
 		$item = $this->itemRetriever->getItem( $itemId );

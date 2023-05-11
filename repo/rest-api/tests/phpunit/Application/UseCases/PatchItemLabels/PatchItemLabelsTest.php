@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\PatchItemLabels;
 
+use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item as DataModelItem;
 use Wikibase\DataModel\Entity\ItemId;
@@ -60,6 +61,8 @@ class PatchItemLabelsTest extends TestCase {
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
 		$this->metadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
+		$this->metadataRetriever->method( 'getLatestRevisionMetadata' )
+			->willReturn( LatestItemRevisionMetadataResult::concreteRevision( 321, '20201111070707' ) );
 		$this->permissionChecker = $this->createStub( PermissionChecker::class );
 		$this->permissionChecker->method( 'canEdit' )->willReturn( true );
 	}
@@ -76,10 +79,6 @@ class PatchItemLabelsTest extends TestCase {
 
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemRetriever->method( 'getItem' )->willReturn( $item );
-
-		$this->metadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
-		$this->metadataRetriever->method( 'getLatestRevisionMetadata' )
-			->willReturn( LatestItemRevisionMetadataResult::concreteRevision( 321, '20201111070707' ) );
 
 		$revisionId = 657;
 		$lastModified = '20221212040506';
@@ -190,10 +189,6 @@ class PatchItemLabelsTest extends TestCase {
 	public function testGivenEditIsUnauthorized_throwsUseCaseError(): void {
 		$itemId = new ItemId( 'Q123' );
 
-		$this->metadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
-		$this->metadataRetriever->method( 'getLatestRevisionMetadata' )
-			->willReturn( LatestItemRevisionMetadataResult::concreteRevision( 321, '20201111070707' ) );
-
 		$this->permissionChecker = $this->createMock( WikibaseEntityPermissionChecker::class );
 		$this->permissionChecker->expects( $this->once() )
 			->method( 'canEdit' )
@@ -225,6 +220,49 @@ class PatchItemLabelsTest extends TestCase {
 		}
 	}
 
+	/**
+	 * @dataProvider provideInapplicablePatch
+	 */
+	public function testGivenValidInapplicablePatch_throwsUseCaseError(
+		array $patch,
+		string $expectedErrorCode,
+		array $expectedContext
+	): void {
+		$this->labelsRetriever = $this->createStub( ItemLabelsRetriever::class );
+		$this->labelsRetriever->method( 'getLabels' )->willReturn( new Labels( new Label( 'en', 'English Label' ) ) );
+
+		try {
+			$this->newUseCase()->execute( $this->newUseCaseRequest( 'Q123', $patch ) );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedErrorCode, $e->getErrorCode() );
+			$this->assertEquals( $expectedContext, $e->getErrorContext() );
+		}
+	}
+
+	public function provideInapplicablePatch(): Generator {
+		$patchOperation = [ 'op' => 'remove', 'path' => '/path/does/not/exist' ];
+		yield 'non-existent path' => [
+			[ $patchOperation ],
+			UseCaseError::PATCH_TARGET_NOT_FOUND,
+			[ 'operation' => $patchOperation, 'field' => 'path' ],
+		];
+
+		$patchOperation = [ 'op' => 'copy', 'from' => '/path/does/not/exist', 'path' => '/en' ];
+		yield 'non-existent from' => [
+			[ $patchOperation ],
+			UseCaseError::PATCH_TARGET_NOT_FOUND,
+			[ 'operation' => $patchOperation, 'field' => 'from' ],
+		];
+
+		$patchOperation = [ 'op' => 'test', 'path' => '/en', 'value' => 'incorrect value' ];
+		yield 'patch test operation failed' => [
+			[ $patchOperation ],
+			UseCaseError::PATCH_TEST_FAILED,
+			[ 'operation' => $patchOperation, 'actual-value' => 'English Label' ],
+		];
+	}
+
 	private function newUseCase(): PatchItemLabels {
 		return new PatchItemLabels(
 			$this->labelsRetriever,
@@ -236,6 +274,10 @@ class PatchItemLabelsTest extends TestCase {
 			$this->metadataRetriever,
 			$this->permissionChecker
 		);
+	}
+
+	private function newUseCaseRequest( string $itemId, array $patch ): PatchItemLabelsRequest {
+		return new PatchItemLabelsRequest( $itemId, $patch, [], false, '', null );
 	}
 
 }
