@@ -126,6 +126,9 @@
 		"LibHooks": {
 			"class": "\\Wikibase\\Lib\\LibHooks"
 		},
+		"DataBridgeResourceLoaderModules": {
+			"class": "\\Wikibase\\Client\\DataBridge\\DataBridgeResourceLoaderModules"
+		},
 		"DescriptionProvider": {
 			"class": "\\Wikibase\\Client\\Hooks\\DescriptionProviderHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\DescriptionProviderHookHandler::factory",
@@ -274,7 +277,10 @@
 		"ParserGetVariableValueSwitch": "Magic",
 		"ParserLimitReportPrepare": "Parser",
 		"ResourceLoaderJqueryMsgModuleMagicWords": "Magic",
-		"ResourceLoaderRegisterModules": "LibHooks",
+		"ResourceLoaderRegisterModules": [
+			"LibHooks",
+			"DataBridgeResourceLoaderModules"
+		],
 		"ScribuntoExternalLibraries": "\\Wikibase\\Client\\ClientHooks::onScribuntoExternalLibraries",
 		"SearchDataForIndex": {
 			"handler": "Trivial",
@@ -463,18 +469,6 @@
 				"mediawiki.storage",
 				"mediawiki.icon"
 			]
-		},
-		"wikibase.client.data-bridge.init": {
-			"factory": "\\Wikibase\\Client\\DataBridge\\DataBridgeResourceLoaderModules::initModule"
-		},
-		"wikibase.client.data-bridge.externalModifiers": {
-			"factory": "\\Wikibase\\Client\\DataBridge\\DataBridgeResourceLoaderModules::externalModifiersModule"
-		},
-		"mw.config.values.wbDataBridgeConfig": {
-			"factory": "\\Wikibase\\Client\\DataBridge\\DataBridgeResourceLoaderModules::configModule"
-		},
-		"wikibase.client.data-bridge.app": {
-			"factory": "\\Wikibase\\Client\\DataBridge\\DataBridgeResourceLoaderModules::appModule"
 		}
 	},
 	"SpecialPages": {

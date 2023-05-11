@@ -1,10 +1,13 @@
 <?php
 
 declare( strict_types = 1 );
+
 namespace Wikibase\Client\DataBridge;
 
 use MediaWiki\MediaWikiServices;
 use MediaWiki\ResourceLoader\FileModule;
+use MediaWiki\ResourceLoader\Hook\ResourceLoaderRegisterModulesHook;
+use MediaWiki\ResourceLoader\ResourceLoader;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Modules\MediaWikiConfigModule;
 
@@ -14,7 +17,30 @@ use Wikibase\Lib\Modules\MediaWikiConfigModule;
  *
  * @license GPL-2.0-or-later
  */
-class DataBridgeResourceLoaderModules {
+class DataBridgeResourceLoaderModules implements ResourceLoaderRegisterModulesHook {
+
+	public function onResourceLoaderRegisterModules( ResourceLoader $rl ): void {
+		$clientSettings = WikibaseClient::getSettings();
+		if ( !$clientSettings->getSetting( 'dataBridgeEnabled' ) ) {
+			return;
+		}
+
+		$rl->register( [
+			'wikibase.client.data-bridge.init' => [
+				'factory' => '\Wikibase\Client\DataBridge\DataBridgeResourceLoaderModules::initModule',
+			],
+			'wikibase.client.data-bridge.externalModifiers' => [
+				'factory' => '\Wikibase\Client\DataBridge\DataBridgeResourceLoaderModules::externalModifiersModule',
+			],
+			'mw.config.values.wbDataBridgeConfig' => [
+				'factory' => '\Wikibase\Client\DataBridge\DataBridgeResourceLoaderModules::configModule',
+			],
+			'wikibase.client.data-bridge.app' => [
+				'factory' => '\Wikibase\Client\DataBridge\DataBridgeResourceLoaderModules::appModule',
+			],
+		] );
+	}
+
 	public static function initModule() {
 		$clientSettings = WikibaseClient::getSettings();
 		return new FileModule(
@@ -24,9 +50,6 @@ class DataBridgeResourceLoaderModules {
 					'data-bridge.chunk-vendors.js',
 					'data-bridge.init.js',
 				],
-				'targets' => $clientSettings->getSetting( 'dataBridgeEnabled' ) ?
-					[ 'desktop', 'mobile' ] :
-					[],
 				'dependencies' => [
 					'oojs-ui-windows',
 					'mw.config.values.wbDataBridgeConfig',
@@ -45,9 +68,6 @@ class DataBridgeResourceLoaderModules {
 					'edit-links.css',
 					'box-layout.css',
 				],
-				'targets' => $clientSettings->getSetting( 'dataBridgeEnabled' ) ?
-					[ 'desktop', 'mobile' ] :
-					[],
 				'remoteExtPath' => 'Wikibase/client/data-bridge/modules/externalModifiers',
 			],
 			__DIR__ . '/../../data-bridge/modules/externalModifiers'
@@ -65,9 +85,6 @@ class DataBridgeResourceLoaderModules {
 						MediaWikiServices::getInstance()->getMainConfig()->get( 'EditSubmitButtonLabelPublish' )
 					);
 				},
-				'targets' => $clientSettings->getSetting( 'dataBridgeEnabled' ) ?
-					[ 'desktop', 'mobile' ] :
-					[],
 			]
 		);
 	}
@@ -83,9 +100,6 @@ class DataBridgeResourceLoaderModules {
 				'styles' => [
 					'css/data-bridge.app.css',
 				],
-				'targets' => $clientSettings->getSetting( 'dataBridgeEnabled' ) ?
-					[ 'desktop', 'mobile' ] :
-					[],
 				'remoteExtPath' => 'Wikibase/client/data-bridge/dist',
 				'dependencies' => [
 					'vue',
