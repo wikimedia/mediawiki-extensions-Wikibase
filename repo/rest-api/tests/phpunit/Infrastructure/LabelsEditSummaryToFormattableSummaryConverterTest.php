@@ -69,7 +69,7 @@ class LabelsEditSummaryToFormattableSummaryConverterTest extends TestCase {
 			),
 			$this->constructSummary(
 				'update-languages-short',
-				'en, de',
+				'de, en',
 				'patch user comment'
 			),
 		];

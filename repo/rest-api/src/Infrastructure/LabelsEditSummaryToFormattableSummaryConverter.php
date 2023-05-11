@@ -55,6 +55,8 @@ class LabelsEditSummaryToFormattableSummaryConverter {
 			}
 		}
 
+		sort( $modifiedLabelsLanguages );
+
 		return $modifiedLabelsLanguages;
 	}
 

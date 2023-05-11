@@ -130,14 +130,14 @@ class EditSummaryFormatterTest extends MediaWikiLangTestCase {
 			->method( 'convert' )
 			->with( $labelsEditSummary )
 			->willReturn(
-				new Summary( 'wbeditentity', 'update-languages-short', null, [ 'en, de' ] )
+				new Summary( 'wbeditentity', 'update-languages-short', null, [ 'de, en' ] )
 			);
 		$editSummaryFormatter = new EditSummaryFormatter(
 			WikibaseRepo::getSummaryFormatter(),
 			$converter
 		);
 		$this->assertSame(
-			'/* wbeditentity-update-languages-short:0||en, de */',
+			'/* wbeditentity-update-languages-short:0||de, en */',
 			$editSummaryFormatter->format( $labelsEditSummary )
 		);
 	}
