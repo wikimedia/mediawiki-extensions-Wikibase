@@ -482,15 +482,16 @@
 		"description": "Applying the provided JSON Patch results in invalid Labels",
 		"content": {
 			"application/json": {
-				"schema": {
-					"$ref": "./response-parts.json#/ContextError"
-				},
+				"schema": { "$ref": "./response-parts.json#/ContextError" },
 				"examples": {
 					"patched-labels-invalid-language-code": {
 						"$ref": "./examples.json#/PatchedLabelsInvalidLanguageCodeExample"
 					},
 					"patched-label-empty": { "$ref": "./examples.json#/PatchedLabelEmptyExample" },
 					"patched-label-too-long": { "$ref": "./examples.json#/PatchedLabelTooLongExample" },
+					"patched-item-label-description-same-value": {
+						"$ref": "./examples.json#/PatchedItemLabelDescriptionSameValueExample"
+					},
 					"patched-item-label-description-duplicate": {
 						"$ref": "./examples.json#/PatchedItemLabelDescriptionDuplicateExample"
 					}

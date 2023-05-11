@@ -237,6 +237,15 @@
 			}
 		}
 	},
+	"PatchedItemLabelDescriptionSameValueExample": {
+		"value": {
+			"code": "patched-item-label-description-same-value",
+			"message": "Label and description for language code '{language}' can not have the same value",
+			"context": {
+				"language": "<language_code>"
+			}
+		}
+	},
 	"PatchedItemLabelDescriptionDuplicateExample": {
 		"value": {
 			"code": "patched-item-label-description-duplicate",
