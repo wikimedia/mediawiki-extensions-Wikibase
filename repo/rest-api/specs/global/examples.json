@@ -162,6 +162,12 @@
 			"message": "Could not find an item with the ID: {item_id}"
 		}
 	},
+	"RedirectedItemExample": {
+		"value": {
+			"code": "redirected-item",
+			"message": "Item {item_id} has been merged into {other_id}"
+		}
+	},
 	"StatementNotFoundExample": {
 		"value": {
 			"code": "statement-not-found",
