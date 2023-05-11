@@ -1,0 +1,29 @@
+{
+	"@metadata": {
+		"authors": [
+			"Delim",
+			"Garam",
+			"孟天皓"
+		]
+	},
+	"tooltip-t-wikibase": "자료저장고에 접속된 항목을 가리키는 련결",
+	"wikibase-comment-update": "{{WBREPONAME}} 항목을 바꿈",
+	"wikibase-dataitem": "{{WBREPONAME}} 항목",
+	"wikibase-editlinks": "련결 편집",
+	"wikibase-editlinkstitle": "언어내부위키련결 편집",
+	"wikibase-linkitem-addlinks": "링크 추가",
+	"wikibase-linkitem-title": "문서에 링크",
+	"wikibase-linkitem-linkpage": "문서에 링크",
+	"wikibase-linkitem-selectlink": "이 문서로 링크할 사이트와 문서를 선택하세요.",
+	"wikibase-linkitem-input-site": "언어:",
+	"wikibase-linkitem-input-page": "문서:",
+	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
+	"wikibase-rc-hide-wikidata-hide": "숨기기",
+	"wikibase-rc-hide-wikidata-show": "보이기",
+	"wikibase-rc-wikibase-edit-letter": "자",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} 편집",
+	"wikibase-otherprojects": "다른 과제",
+	"wikibase-otherprojects-beta-message": "옆띠의 다른 과제",
+	"wikibase-otherprojects-beta-description": "{{WBREPONAME}} 자료에 기반한 다른 위키매체 과제로 련결하는 옆띠에 {{int:wikibase-otherprojects}} 문단을 추가하세요.",
+	"wikibase-sitelinks-sitename-columnheading": "언어"
+}

@@ -35,6 +35,7 @@
 	"wikibase-statementsection-statements": "بيانات",
 	"wikibase-sitelinks": "سائيٽ-ڳنڍڻا",
 	"wikibase-sitelinks-special": "ٻيون سرزمينون",
+	"wikibase-restore-title": "\"$1\" جي پراڻي ورجاءَ کي بحال ڪندي",
 	"wikibase-statementview-rank-normal": "عام درجو",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|حوالو|حوالا}}",
 	"wikibase-shortcopyrightwarning": "\"$1\" کي ڪلڪ ڪرڻ سان توھان [[$2|استعمال جي شرطن]] سان راضپو ڏيکاريو ٿا، ۽ توھان پنھنجي ڀاڱيداري ناقابل واپسي طور [$3 $4] ھيٺ جاري ڪريو ٿا.",
@@ -62,7 +63,9 @@
 	"wikibase-listdatatypes-wikibase-item-head": "جزو",
 	"wikibase-listdatatypes-monolingualtext-head": "يڪ-لساني متن",
 	"wikibase-listdatatypes-multilingualtext-head": "گهڻ-لساني متن",
+	"wikibase-listdatatypes-url-head": "يوآرايل",
 	"wikibase-listdatavaluetypes-name-monolingualtext": "يڪ-لساني متن",
+	"datatypes-type-url": "يوآرايل",
 	"wikibase-pageinfo-subscription-none": "ڪوبہ نہ",
 	"wikibase-search-bad-profile-name": "کوٽو ڳولها پروفائل نالو: $1",
 	"wikibase-search-config-badclass": "کوٽو ڪيوري بلڊر ڪلاس: $1"
