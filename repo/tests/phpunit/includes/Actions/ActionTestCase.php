@@ -35,7 +35,6 @@ class ActionTestCase extends MediaWikiIntegrationTestCase {
 
 		$testUser = new \TestUser( 'ActionTestUser' );
 		$user = $testUser->getUser();
-		$user->setId( 123456789 );
 		$this->user = $user;
 
 		$this->setRequest( new FauxRequest() );
@@ -313,6 +312,7 @@ class ActionTestCase extends MediaWikiIntegrationTestCase {
 	 * @param string $handle
 	 */
 	protected function resetTestItem( $handle ) {
+		$this->initTestItems();
 		if ( isset( self::$testItems[ $handle ] ) ) {
 			$item = self::$testItems[ $handle ];
 
