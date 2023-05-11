@@ -79,9 +79,11 @@ final class RepoHooks {
 		$settings = WikibaseRepo::getSettings();
 		if ( $settings->getSetting( 'enableEntitySearchUI' ) === true ) {
 
-			if ( $skin->getSkinName() === 'vector-2022' ) {
+			$skinName = $skin->getSkinName();
+			if ( $skinName === 'vector-2022' ) {
 				$out->addModules( 'wikibase.vector.searchClient' );
-			} else {
+			} elseif ( $skinName !== 'minerva' ) {
+				// Minerva uses its own search widget.
 				$out->addModules( 'wikibase.ui.entitysearch' );
 			}
 		}

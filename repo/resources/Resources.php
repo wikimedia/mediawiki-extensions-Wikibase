@@ -252,8 +252,6 @@ return call_user_func( function() {
 		],
 
 		'wikibase.ui.entitysearch' => $moduleTemplate + [
-			 // T326405
-			'targets' => [ 'desktop' ],
 			'packageFiles' => [
 				'wikibase.ui.entitysearch.js',
 
