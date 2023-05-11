@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels;
 
 use Wikibase\DataModel\Term\TermList;
+use Wikibase\Repo\RestApi\Application\Serialization\EmptyLabelException;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelTextValidator;
@@ -27,7 +28,16 @@ class PatchedLabelsValidator {
 	 * @throws UseCaseError
 	 */
 	public function validateAndDeserialize( array $labelsSerialization ): TermList {
-		$labels = $this->labelsDeserializer->deserialize( $labelsSerialization );
+		try {
+			$labels = $this->labelsDeserializer->deserialize( $labelsSerialization );
+		} catch ( EmptyLabelException $e ) {
+			$languageCode = $e->getField();
+			throw new UseCaseError(
+				UseCaseError::PATCHED_LABEL_EMPTY,
+				"Changed label for '$languageCode' cannot be empty",
+				[ self::CONTEXT_LANGUAGE => $languageCode ]
+			);
+		}
 
 		foreach ( $labels as $label ) {
 			$validationError = $this->labelTextValidator->validate( $label->getText() );

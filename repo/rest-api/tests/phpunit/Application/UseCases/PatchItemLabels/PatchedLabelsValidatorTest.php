@@ -109,4 +109,18 @@ class PatchedLabelsValidatorTest extends TestCase {
 		];
 	}
 
+	public function testGivenEmptyLabel_throwsEmptyLabelError(): void {
+		try {
+			( new PatchedLabelsValidator(
+				new LabelsDeserializer(),
+				$this->createStub( ItemLabelTextValidator::class )
+			) )->validateAndDeserialize( [ 'en' => '' ] );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::PATCHED_LABEL_EMPTY, $e->getErrorCode() );
+			$this->assertSame( "Changed label for 'en' cannot be empty", $e->getErrorMessage() );
+			$this->assertEquals( [ 'language' => 'en' ], $e->getErrorContext() );
+		}
+	}
+
 }

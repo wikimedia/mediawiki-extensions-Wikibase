@@ -6,6 +6,7 @@ use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
+use Wikibase\Repo\RestApi\Application\Serialization\EmptyLabelException;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 
 /**
@@ -43,6 +44,15 @@ class LabelsDeserializerTest extends TestCase {
 				new Term( 'de', 'Kartoffel' ),
 			] ),
 		];
+	}
+
+	public function testGivenEmptyLabel_throwsException(): void {
+		try {
+			( new LabelsDeserializer() )->deserialize( [ 'en' => '' ] );
+			$this->fail( 'this should not be reached' );
+		} catch ( EmptyLabelException $e ) {
+			$this->assertSame( 'en', $e->getField() );
+		}
 	}
 
 }

@@ -114,7 +114,17 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 			);
 		} );
 
-		// TODO handle empty label
+		it( 'empty label', async () => {
+			const response = await newPatchItemLabelsRequestBuilder(
+				testItemId,
+				[ makeReplaceExistingLabelPatchOp( '' ) ]
+			)
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValidErrorResponse( response, 422, 'patched-label-empty' );
+			assert.strictEqual( response.body.context.language, languageWithExistingLabel );
+		} );
 
 		it( 'label too long', async () => {
 			// this assumes the default value of 250 from Wikibase.default.php is in place and
