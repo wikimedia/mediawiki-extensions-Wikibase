@@ -24,11 +24,6 @@ use Wikibase\Lib\DataTypeFactory;
 class DataTypesModule extends RL\Module {
 
 	/**
-	 * @var string[]
-	 */
-	protected $targets = [ 'desktop', 'mobile' ];
-
-	/**
 	 * @var DataType[]
 	 */
 	protected $dataTypes;
