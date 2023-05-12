@@ -43,12 +43,7 @@
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"item-redirected": {
-						"value": {
-							"code": "redirected-item",
-							"message": "Item {item_id} has been merged into {other_id}."
-						}
-					}
+					"redirected-item": { "$ref": "./examples.json#/RedirectedItemExample" }
 				}
 			}
 		},
@@ -466,6 +461,7 @@
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/ContextError" },
 				"examples": {
+					"redirected-item": { "$ref": "./examples.json#/RedirectedItemExample" },
 					"patch-test-failed": { "$ref": "./examples.json#/PatchTestFailedExample" },
 					"patch-target-not-found": { "$ref": "./examples.json#/PatchTargetNotFoundExample" }
 				}
