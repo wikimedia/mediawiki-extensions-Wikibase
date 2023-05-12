@@ -150,6 +150,24 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 				{ value: tooLongLabel, 'character-limit': maxLength, language: languageWithExistingLabel }
 			);
 		} );
+
+		it( 'invalid language code', async () => {
+			const invalidLanguage = 'invalid-language-code';
+			const response = await newPatchItemLabelsRequestBuilder(
+				testItemId,
+				[ {
+					op: 'add',
+					path: `/${invalidLanguage}`,
+					value: 'potato'
+				} ]
+			)
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValidErrorResponse( response, 422, 'patched-labels-invalid-language-code' );
+			assert.include( response.body.message, invalidLanguage );
+			assert.deepEqual( response.body.context, { language: invalidLanguage } );
+		} );
 	} );
 
 	describe( '404 error response', () => {

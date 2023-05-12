@@ -10,6 +10,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchedLabelsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelTextValidator;
+use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 
 /**
@@ -21,17 +22,23 @@ use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
  */
 class PatchedLabelsValidatorTest extends TestCase {
 
+	private ItemLabelTextValidator $labelTextValidator;
+	private LanguageCodeValidator $languageCodeValidator;
+
+	protected function setUp(): void {
+		parent::setUp();
+
+		$this->labelTextValidator = $this->createStub( ItemLabelTextValidator::class );
+		$this->languageCodeValidator = $this->createStub( LanguageCodeValidator::class );
+	}
+
 	/**
 	 * @dataProvider validLabelsProvider
 	 */
 	public function testWithValidLabels( array $labelsSerialization, TermList $expectedResult ): void {
 		$this->assertEquals(
 			$expectedResult,
-			( new PatchedLabelsValidator(
-				new LabelsDeserializer(),
-				$this->createStub( ItemLabelTextValidator::class )
-			)
-			)->validateAndDeserialize( $labelsSerialization )
+			$this->newValidator()->validateAndDeserialize( $labelsSerialization )
 		);
 	}
 
@@ -59,12 +66,11 @@ class PatchedLabelsValidatorTest extends TestCase {
 		string $expectedErrorMessage,
 		array $expectedContext = null
 	): void {
-		$labelTextValidator = $this->createStub( ItemLabelTextValidator::class );
-		$labelTextValidator->method( 'validate' )->willReturn( $validationError );
+		$this->labelTextValidator = $this->createStub( ItemLabelTextValidator::class );
+		$this->labelTextValidator->method( 'validate' )->willReturn( $validationError );
 
 		try {
-			( new PatchedLabelsValidator( new LabelsDeserializer(), $labelTextValidator ) )
-				->validateAndDeserialize( $labelsSerialization );
+			$this->newValidator()->validateAndDeserialize( $labelsSerialization );
 
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $error ) {
@@ -111,16 +117,41 @@ class PatchedLabelsValidatorTest extends TestCase {
 
 	public function testGivenEmptyLabel_throwsEmptyLabelError(): void {
 		try {
-			( new PatchedLabelsValidator(
-				new LabelsDeserializer(),
-				$this->createStub( ItemLabelTextValidator::class )
-			) )->validateAndDeserialize( [ 'en' => '' ] );
+			$this->newValidator()->validateAndDeserialize( [ 'en' => '' ] );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::PATCHED_LABEL_EMPTY, $e->getErrorCode() );
 			$this->assertSame( "Changed label for 'en' cannot be empty", $e->getErrorMessage() );
 			$this->assertEquals( [ 'language' => 'en' ], $e->getErrorContext() );
 		}
+	}
+
+	public function testGivenInvalidLanguageCode_throwsUseCaseError(): void {
+		$invalidLanguage = 'not-a-valid-language-code';
+		$this->languageCodeValidator = $this->createStub( LanguageCodeValidator::class );
+		$this->languageCodeValidator->method( 'validate' )->willReturn(
+			new ValidationError(
+				LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
+				[ LanguageCodeValidator::CONTEXT_LANGUAGE_CODE_VALUE => $invalidLanguage ]
+			)
+		);
+
+		try {
+			$this->newValidator()->validateAndDeserialize( [ $invalidLanguage => 'potato' ] );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::PATCHED_LABEL_INVALID_LANGUAGE_CODE, $e->getErrorCode() );
+			$this->assertSame( "Not a valid language code '$invalidLanguage' in changed labels", $e->getErrorMessage() );
+			$this->assertEquals( [ PatchedLabelsValidator::CONTEXT_LANGUAGE => $invalidLanguage ], $e->getErrorContext() );
+		}
+	}
+
+	private function newValidator(): PatchedLabelsValidator {
+		return new PatchedLabelsValidator(
+			new LabelsDeserializer(),
+			$this->labelTextValidator,
+			$this->languageCodeValidator
+		);
 	}
 
 }

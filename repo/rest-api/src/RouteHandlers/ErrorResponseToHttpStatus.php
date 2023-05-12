@@ -15,6 +15,7 @@ class ErrorResponseToHttpStatus {
 		UseCaseError::INVALID_STATEMENT_ID => 400,
 		UseCaseError::INVALID_FIELD => 400,
 		UseCaseError::INVALID_LANGUAGE_CODE => 400,
+		UseCaseError::PATCHED_LABEL_INVALID_LANGUAGE_CODE => 422,
 		UseCaseError::COMMENT_TOO_LONG => 400,
 		UseCaseError::INVALID_EDIT_TAG => 400,
 		UseCaseError::STATEMENT_DATA_INVALID_FIELD => 400,

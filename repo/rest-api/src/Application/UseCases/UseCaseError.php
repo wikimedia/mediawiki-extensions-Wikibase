@@ -16,6 +16,7 @@ class UseCaseError extends UseCaseException {
 	public const INVALID_LABEL = 'invalid-label';
 	public const PATCHED_LABEL_INVALID = 'patched-label-invalid';
 	public const INVALID_LANGUAGE_CODE = 'invalid-language-code';
+	public const PATCHED_LABEL_INVALID_LANGUAGE_CODE = 'patched-labels-invalid-language-code';
 	public const LABEL_EMPTY = 'label-empty';
 	public const LABEL_TOO_LONG = 'label-too-long';
 	public const PATCHED_LABEL_EMPTY = 'patched-label-empty';
