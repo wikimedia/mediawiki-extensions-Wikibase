@@ -36,6 +36,7 @@ class UseCaseError extends UseCaseException {
 	public const PATCHED_ITEM_LABEL_DESCRIPTION_DUPLICATE = 'patched-item-label-description-duplicate';
 	public const LABEL_NOT_DEFINED = 'label-not-defined';
 	public const LABEL_DESCRIPTION_SAME_VALUE = 'label-description-same-value';
+	public const PATCHED_ITEM_LABEL_DESCRIPTION_SAME_VALUE = 'patched-item-label-description-same-value';
 	public const ALIASES_NOT_DEFINED = 'aliases-not-defined';
 	public const DESCRIPTION_NOT_DEFINED = 'description-not-defined';
 	public const DESCRIPTION_EMPTY = 'description-empty';

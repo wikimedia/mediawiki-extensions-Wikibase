@@ -111,6 +111,14 @@ class PatchedLabelsValidator {
 					$validationError->getContext()
 				);
 
+			case ItemLabelValidator::CODE_LABEL_DESCRIPTION_EQUAL:
+				$language = $validationError->getContext()[ItemLabelValidator::CONTEXT_LANGUAGE];
+				throw new UseCaseError(
+					UseCaseError::PATCHED_ITEM_LABEL_DESCRIPTION_SAME_VALUE,
+					"Label and description for language code {$language} can not have the same value.",
+					$validationError->getContext()
+				);
+
 			default:
 				throw new LogicException( 'Unknown validation error: ' . $validationError->getCode() );
 		}
