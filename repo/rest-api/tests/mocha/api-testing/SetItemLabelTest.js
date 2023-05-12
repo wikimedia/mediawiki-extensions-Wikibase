@@ -137,7 +137,7 @@ describe( 'PUT /entities/items/{item_id}/labels/{language_code}', () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			assert.strictEqual( response.status, 400 );
+			expect( response ).to.have.status( 400 );
 			assert.strictEqual( response.header[ 'content-language' ], 'en' );
 			assert.strictEqual( response.body.code, 'invalid-item-id' );
 			assert.include( response.body.message, itemId );
@@ -149,7 +149,7 @@ describe( 'PUT /entities/items/{item_id}/labels/{language_code}', () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			assert.strictEqual( response.status, 400 );
+			expect( response ).to.have.status( 400 );
 			assert.strictEqual( response.header[ 'content-language' ], 'en' );
 			assert.strictEqual( response.body.code, 'invalid-language-code' );
 			assert.include( response.body.message, invalidLanguageCode );
@@ -161,7 +161,7 @@ describe( 'PUT /entities/items/{item_id}/labels/{language_code}', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assert.strictEqual( response.status, 400 );
+			expect( response ).to.have.status( 400 );
 			assert.strictEqual( response.header[ 'content-language' ], 'en' );
 			assert.strictEqual( response.body.code, 'invalid-label' );
 			assert.include( response.body.message, invalidLabel );
@@ -175,7 +175,7 @@ describe( 'PUT /entities/items/{item_id}/labels/{language_code}', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assert.strictEqual( response.status, 400 );
+			expect( response ).to.have.status( 400 );
 			assert.strictEqual( response.header[ 'content-language' ], 'en' );
 			assert.strictEqual( response.body.code, 'label-empty' );
 			assert.strictEqual( response.body.message, 'Label must not be empty' );
@@ -192,7 +192,7 @@ describe( 'PUT /entities/items/{item_id}/labels/{language_code}', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assert.strictEqual( response.status, 400 );
+			expect( response ).to.have.status( 400 );
 			assert.strictEqual( response.header[ 'content-language' ], 'en' );
 			assert.strictEqual( response.body.code, 'label-too-long' );
 			assert.strictEqual(
@@ -224,7 +224,7 @@ describe( 'PUT /entities/items/{item_id}/labels/{language_code}', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assert.strictEqual( response.status, 400 );
+			expect( response ).to.have.status( 400 );
 			assert.strictEqual( response.header[ 'content-language' ], 'en' );
 			assert.strictEqual( response.body.code, 'label-description-same-value' );
 			assert.strictEqual(
@@ -251,7 +251,7 @@ describe( 'PUT /entities/items/{item_id}/labels/{language_code}', () => {
 
 			const response = await newSetItemLabelRequestBuilder( testItemId, languageCode, label )
 				.assertValidRequest().makeRequest();
-			assert.strictEqual( response.status, 400 );
+			expect( response ).to.have.status( 400 );
 			assert.strictEqual( response.header[ 'content-language' ], 'en' );
 			assert.strictEqual( response.body.code, 'item-label-description-duplicate' );
 			assert.strictEqual(
@@ -277,7 +277,7 @@ describe( 'PUT /entities/items/{item_id}/labels/{language_code}', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assert.strictEqual( response.status, 400 );
+			expect( response ).to.have.status( 400 );
 			assert.strictEqual( response.header[ 'content-language' ], 'en' );
 			assert.strictEqual( response.body.code, 'comment-too-long' );
 			assert.include( response.body.message, '500' );
@@ -290,7 +290,7 @@ describe( 'PUT /entities/items/{item_id}/labels/{language_code}', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assert.strictEqual( response.status, 400 );
+			expect( response ).to.have.status( 400 );
 			assert.strictEqual( response.header[ 'content-language' ], 'en' );
 			assert.strictEqual( response.body.code, 'invalid-edit-tag' );
 			assert.include( response.body.message, invalidEditTag );
@@ -302,7 +302,7 @@ describe( 'PUT /entities/items/{item_id}/labels/{language_code}', () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			assert.strictEqual( response.status, 400 );
+			expect( response ).to.have.status( 400 );
 			assert.strictEqual( response.body.code, 'invalid-request-body' );
 			assert.strictEqual( response.body.fieldName, 'bot' );
 			assert.strictEqual( response.body.expectedType, 'boolean' );
