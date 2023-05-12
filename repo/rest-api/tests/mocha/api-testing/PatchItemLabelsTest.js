@@ -18,11 +18,12 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 	let testEnLabel;
 	let originalLastModified;
 	let originalRevisionId;
+	const languageWithExistingLabel = 'en';
 
 	before( async function () {
 		testEnLabel = `English Label ${utils.uniq()}`;
 		testItemId = ( await entityHelper.createEntity( 'item', {
-			labels: { en: { language: 'en', value: testEnLabel } }
+			labels: [ { language: languageWithExistingLabel, value: testEnLabel } ]
 		} ) ).entity.id;
 
 		const testItemCreationMetadata = await entityHelper.getLatestEditMetadata( testItemId );
@@ -88,6 +89,59 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 		} );
 	} );
 
+	describe( '422 error response', () => {
+		const makeReplaceExistingLabelPatchOp = ( newLabel ) => ( {
+			op: 'replace',
+			path: `/${languageWithExistingLabel}`,
+			value: newLabel
+		} );
+
+		it( 'invalid label', async () => {
+			const invalidLabel = 'tab characters \t not allowed';
+			const response = await newPatchItemLabelsRequestBuilder(
+				testItemId,
+				[ makeReplaceExistingLabelPatchOp( invalidLabel ) ]
+			)
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValidErrorResponse( response, 422, 'patched-label-invalid' );
+			assert.include( response.body.message, invalidLabel );
+			assert.include( response.body.message, `'${languageWithExistingLabel}'` );
+			assert.deepEqual(
+				response.body.context,
+				{ language: languageWithExistingLabel, value: invalidLabel }
+			);
+		} );
+
+		// TODO handle empty label
+
+		it( 'label too long', async () => {
+			// this assumes the default value of 250 from Wikibase.default.php is in place and
+			// may fail if $wgWBRepoSettings['string-limits']['multilang']['length'] is overwritten
+			const maxLength = 250;
+			const tooLongLabel = 'x'.repeat( maxLength + 1 );
+			const comment = 'Label too long';
+			const response = await newPatchItemLabelsRequestBuilder(
+				testItemId,
+				[ makeReplaceExistingLabelPatchOp( tooLongLabel ) ]
+			)
+				.withJsonBodyParam( 'comment', comment )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValidErrorResponse( response, 422, 'patched-label-too-long' );
+			assert.strictEqual(
+				response.body.message,
+				`Changed label for '${languageWithExistingLabel}' must not be more than ${maxLength} characters long`
+			);
+			assert.deepEqual(
+				response.body.context,
+				{ value: tooLongLabel, 'character-limit': maxLength, language: languageWithExistingLabel }
+			);
+		} );
+	} );
+
 	describe( '404 error response', () => {
 		it( 'item not found', async () => {
 			const itemId = 'Q999999';
@@ -102,7 +156,7 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 				]
 			).assertValidRequest().makeRequest();
 
-			assert.strictEqual( response.status, 404 );
+			expect( response ).to.have.status( 404 );
 			assert.strictEqual( response.header[ 'content-language' ], 'en' );
 			assert.strictEqual( response.body.code, 'item-not-found' );
 			assert.include( response.body.message, itemId );

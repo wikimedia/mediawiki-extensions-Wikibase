@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels;
 
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
@@ -26,7 +25,7 @@ class PatchItemLabels {
 	private ItemLabelsRetriever $labelsRetriever;
 	private LabelsSerializer $labelsSerializer;
 	private JsonPatcher $patcher;
-	private LabelsDeserializer $labelsDeserializer;
+	private PatchedLabelsValidator $patchedLabelsValidator;
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
 	private ItemRevisionMetadataRetriever $revisionMetadataRetriever;
@@ -36,7 +35,7 @@ class PatchItemLabels {
 		ItemLabelsRetriever $labelsRetriever,
 		LabelsSerializer $labelsSerializer,
 		JsonPatcher $patcher,
-		LabelsDeserializer $labelsDeserializer,
+		PatchedLabelsValidator $patchedLabelsValidator,
 		ItemRetriever $itemRetriever,
 		ItemUpdater $itemUpdater,
 		ItemRevisionMetadataRetriever $revisionMetadataRetriever,
@@ -45,7 +44,7 @@ class PatchItemLabels {
 		$this->labelsRetriever = $labelsRetriever;
 		$this->labelsSerializer = $labelsSerializer;
 		$this->patcher = $patcher;
-		$this->labelsDeserializer = $labelsDeserializer;
+		$this->patchedLabelsValidator = $patchedLabelsValidator;
 		$this->itemRetriever = $itemRetriever;
 		$this->itemUpdater = $itemUpdater;
 		$this->revisionMetadataRetriever = $revisionMetadataRetriever;
@@ -101,7 +100,7 @@ class PatchItemLabels {
 			);
 		}
 
-		$modifiedLabels = $this->labelsDeserializer->deserialize( $patchResult );
+		$modifiedLabels = $this->patchedLabelsValidator->validateAndDeserialize( $patchResult );
 
 		$item = $this->itemRetriever->getItem( $itemId );
 

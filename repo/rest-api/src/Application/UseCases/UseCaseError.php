@@ -14,9 +14,11 @@ class UseCaseError extends UseCaseException {
 	public const INVALID_PROPERTY_ID = 'invalid-property-id';
 	public const INVALID_STATEMENT_ID = 'invalid-statement-id';
 	public const INVALID_LABEL = 'invalid-label';
+	public const PATCHED_LABEL_INVALID = 'patched-label-invalid';
 	public const INVALID_LANGUAGE_CODE = 'invalid-language-code';
 	public const LABEL_EMPTY = 'label-empty';
 	public const LABEL_TOO_LONG = 'label-too-long';
+	public const PATCHED_LABEL_TOO_LONG = 'patched-label-too-long';
 	public const INVALID_OPERATION_CHANGED_STATEMENT_ID = 'invalid-operation-change-statement-id';
 	public const INVALID_OPERATION_CHANGED_PROPERTY = 'invalid-operation-change-property-of-statement';
 	public const PATCHED_STATEMENT_INVALID_FIELD = 'patched-statement-invalid-field';
