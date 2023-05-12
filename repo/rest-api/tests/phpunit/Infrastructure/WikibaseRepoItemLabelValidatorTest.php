@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Infrastructure;
 
-use MediaWiki\Languages\LanguageNameUtils;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
@@ -11,10 +10,9 @@ use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
+use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryLabelTextValidator;
 use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoItemLabelValidator;
 use Wikibase\Repo\Store\TermsCollisionDetector;
-use Wikibase\Repo\Validators\TermValidatorFactory;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoItemLabelValidator
@@ -25,17 +23,18 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class WikibaseRepoItemLabelValidatorTest extends TestCase {
 
-	private const MAX_LENGTH = 50;
-
 	/** @var ItemRetriever|MockObject */
 	private $itemRetriever;
 	/** @var TermsCollisionDetector|MockObject */
 	private $termsCollisionDetector;
+	/** @var TermValidatorFactoryLabelTextValidator|MockObject */
+	private $labelTextValidator;
 
 	protected function setUp(): void {
 		parent::setUp();
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->termsCollisionDetector = $this->createStub( TermsCollisionDetector::class );
+		$this->labelTextValidator = $this->createStub( TermValidatorFactoryLabelTextValidator::class );
 	}
 
 	public function testValid(): void {
@@ -69,49 +68,23 @@ class WikibaseRepoItemLabelValidatorTest extends TestCase {
 		$this->assertNull( $this->newValidator()->validate( $itemId, $languageCode, $label ) );
 	}
 
-	public function testEmptyLabel_willThrow(): void {
-		$this->assertEquals(
-			new ValidationError( ItemLabelValidator::CODE_EMPTY ),
-			$this->newValidator()->validate( new ItemId( 'Q123' ), 'en', '' )
+	public function testGivenInvalidLabelText_returnsValidationError(): void {
+		$invalidLabel = '';
+		$expectedError = $this->createStub( ValidationError::class );
+
+		$this->labelTextValidator = $this->createMock( TermValidatorFactoryLabelTextValidator::class );
+		$this->labelTextValidator->expects( $this->once() )
+			->method( 'validate' )
+			->with( $invalidLabel )
+			->willReturn( $expectedError );
+
+		$this->assertSame(
+			$expectedError,
+			$this->newValidator()->validate( new ItemId( 'Q123' ), 'en', $invalidLabel )
 		);
 	}
 
-	public function testLabelTooLong_willThrow(): void {
-		$tooLonglabel = str_repeat( 'a', self::MAX_LENGTH + 1 );
-		$this->assertEquals(
-			new ValidationError(
-				ItemLabelValidator::CODE_TOO_LONG,
-				[
-					ItemLabelValidator::CONTEXT_VALUE => $tooLonglabel,
-					ItemLabelValidator::CONTEXT_LIMIT => self::MAX_LENGTH,
-				]
-			),
-			$this->newValidator()
-				->validate(
-					new ItemId( 'Q123' ),
-					'en',
-					$tooLonglabel
-				)
-		);
-	}
-
-	public function testInvalidLabel_willThrow(): void {
-		$invalidLabel = "item with tab character \t not allowed";
-		$this->assertEquals(
-			new ValidationError(
-				ItemLabelValidator::CODE_INVALID,
-				[ ItemLabelValidator::CONTEXT_VALUE => $invalidLabel ]
-			),
-			$this->newValidator()
-				->validate(
-					new ItemId( 'Q123' ),
-					'en',
-					$invalidLabel
-				)
-		);
-	}
-
-	public function testLabelEqualsDescription_willThrow(): void {
+	public function testLabelEqualsDescription_returnsValidationError(): void {
 		$itemId = new ItemId( 'Q123' );
 		$language = 'en';
 		$description = 'some description';
@@ -131,7 +104,7 @@ class WikibaseRepoItemLabelValidatorTest extends TestCase {
 		);
 	}
 
-	public function testLabelDescriptionCollision_willThrow(): void {
+	public function testLabelDescriptionCollision_returnsValidationError(): void {
 		$itemId = new ItemId( 'Q123' );
 		$languageCode = 'en';
 		$label = 'some label';
@@ -167,20 +140,9 @@ class WikibaseRepoItemLabelValidatorTest extends TestCase {
 
 	private function newValidator(): WikibaseRepoItemLabelValidator {
 		return new WikibaseRepoItemLabelValidator(
-			$this->newTermValidatorFactory(),
+			$this->labelTextValidator,
 			$this->termsCollisionDetector,
 			$this->itemRetriever
-		);
-	}
-
-	private function newTermValidatorFactory(): TermValidatorFactory {
-		return new TermValidatorFactory(
-			self::MAX_LENGTH,
-			WikibaseRepo::getTermsLanguages()->getLanguages(),
-			WikibaseRepo::getEntityIdParser(),
-			WikibaseRepo::getTermsCollisionDetectorFactory(),
-			WikibaseRepo::getTermLookup(),
-			$this->createStub( LanguageNameUtils::class )
 		);
 	}
 

@@ -66,6 +66,7 @@ use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatchValidator;
 use Wikibase\Repo\RestApi\Infrastructure\LabelsEditSummaryToFormattableSummaryConverter;
 use Wikibase\Repo\RestApi\Infrastructure\SiteLinksReadModelConverter;
+use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryLabelTextValidator;
 use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoDescriptionLanguageCodeValidator;
 use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoItemLabelValidator;
@@ -400,7 +401,7 @@ return [
 					ChangeTags::listExplicitlyDefinedTags(),
 				),
 				new WikibaseRepoItemLabelValidator(
-					WikibaseRepo::getTermValidatorFactory( $services ),
+					new TermValidatorFactoryLabelTextValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
 					WikibaseRepo::getItemTermsCollisionDetector( $services ),
 					WbRestApi::getItemDataRetriever( $services )
 				)

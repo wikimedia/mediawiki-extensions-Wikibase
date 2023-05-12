@@ -9,14 +9,9 @@ use Wikibase\DataModel\Entity\ItemId;
  */
 interface ItemLabelValidator {
 
-	public const CODE_INVALID = 'invalid-label';
-	public const CODE_EMPTY = 'label-empty';
-	public const CODE_TOO_LONG = 'label-too-long';
 	public const CODE_LABEL_DESCRIPTION_EQUAL = 'label-description-same-value';
 	public const CODE_LABEL_DESCRIPTION_DUPLICATE = 'item-label-description-duplicate';
 
-	public const CONTEXT_VALUE = 'value';
-	public const CONTEXT_LIMIT = 'character-limit';
 	public const CONTEXT_LANGUAGE = 'language';
 	public const CONTEXT_LABEL = 'label';
 	public const CONTEXT_DESCRIPTION = 'description';
