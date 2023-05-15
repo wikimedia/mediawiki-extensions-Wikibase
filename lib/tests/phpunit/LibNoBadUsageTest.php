@@ -19,6 +19,15 @@ class LibNoBadUsageTest extends NoBadUsageTest {
 				'includes/WikibaseSettings.php' => true, // loads settings for both
 				'resources/Resources.php' => 1, // guarded by isRepoEnabled()
 			],
+			'WikibaseRepo.' => [
+				/*
+				 * This job only runs on the repo, and arguably its code belongs there,
+				 * but moving it is tricky; see previous discussions:
+				 * https://gerrit.wikimedia.org/r/c/mediawiki/extensions/Wikibase/+/699771#message-0710d319bfe2922bb8a6b88909fcaa037b18edfd
+				 * https://gerrit.wikimedia.org/r/c/mediawiki/extensions/Wikibase/+/917375#message-e4fbee904f4acee047d00b8e969377995ba80f38
+				 */
+				'includes/Store/Sql/Terms/CleanTermsIfUnusedJob.php' => 1,
+			],
 			'Wikibase\\Repo\\' => [
 				'resources/Resources.php' => 1, // see above
 			],
@@ -27,6 +36,9 @@ class LibNoBadUsageTest extends NoBadUsageTest {
 				'includes/Modules/RepoAccessModule.php' => 1, // guarded by isClientEnabled()
 				'includes/WikibaseSettings.php' => true, // loads settings for both
 				'resources/Resources.php' => 1, // guarded by isClientEnabled()
+			],
+			'WikibaseClient.' => [
+				'includes/WikibaseSettings.php' => true, // loads settings for both
 			],
 			'Wikibase\\Client\\' => [
 				'includes/Modules/RepoAccessModule.php' => 1, // see above
