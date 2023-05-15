@@ -4,9 +4,9 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Hooks;
 
-use EditPage;
 use Html;
 use IContextSource;
+use MediaWiki\EditPage\EditPage;
 use MediaWiki\Hook\EditPage__showStandardInputs_optionsHook;
 use MediaWiki\MediaWikiServices;
 use MessageLocalizer;

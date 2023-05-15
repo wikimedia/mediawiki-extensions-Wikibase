@@ -530,7 +530,7 @@ class MockRepository implements
 	 * Check if no edits were made by other users since the given revision.
 	 * This makes the assumption that revision ids are monotonically increasing.
 	 *
-	 * @see EditPage::userWasLastToEdit
+	 * @see \MediaWiki\EditPage\EditPage::userWasLastToEdit
 	 *
 	 * @param User $user
 	 * @param EntityId $entityId the entity to check

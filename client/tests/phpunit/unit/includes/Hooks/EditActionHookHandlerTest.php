@@ -2,9 +2,9 @@
 
 namespace Wikibase\Client\Tests\Unit\Hooks;
 
-use EditPage;
 use Html;
 use IContextSource;
+use MediaWiki\EditPage\EditPage;
 use OutputPage;
 use RequestContext;
 use Title;
