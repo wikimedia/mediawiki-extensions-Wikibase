@@ -116,10 +116,10 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 		$out->addHTML( Html::openElement( 'div', [ 'class' => 'mw-spcontent' ] ) );
 
 		if ( $this->numRows > 0 ) {
-			$out->addHTML( $this->msg( 'showingresults' )->numParams(
+			$out->addHTML( $this->msg( 'showingresultsinrange' )->numParams(
 				// do not format the one extra row, if exist
 				min( $this->numRows, $this->limit ),
-				$this->offset + 1 )->parseAsBlock() );
+				$this->offset + 1, min( $this->numRows, $this->limit ) + $this->offset )->parseAsBlock() );
 			// Disable the "next" link when we reach the end
 			$paging = $this->buildPrevNextNavigation(
 				$this->offset,
