@@ -8,6 +8,7 @@
 	"tooltip-t-wikibase": "Tautan gasan mahubungakan butir pada wadah panyimpanan data",
 	"wikibase-after-page-move": "Pamindahan Pian mustinya [$1 talihat di tautan basa item {{WBREPONAME}}]. Kami maminta Pian mamariksa apakah ngini sudah kajadian.",
 	"wikibase-comment-update": "Item {{WBREPONAME}} baubah",
+	"wikibase-comment-multi": "$1 {{PLURAL:$1|paubahan}}",
 	"wikibase-dataitem": "Item di {{WBREPONAME}}",
 	"wikibase-editlinks": "Babak interwiki",
 	"wikibase-editlinkstitle": "Babak tautan interwiki",
