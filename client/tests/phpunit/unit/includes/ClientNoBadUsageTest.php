@@ -20,6 +20,7 @@ class ClientNoBadUsageTest extends NoBadUsageTest {
 			'WikibaseRepo::' => [
 				'config/WikibaseClient.default.php' => 2, // all guarded by thisWikiIsTheRepo
 			],
+			'WikibaseRepo.' => [],
 			'Wikibase\\Repo\\' => [
 				'config/WikibaseClient.default.php' => 1, // see above
 			],
