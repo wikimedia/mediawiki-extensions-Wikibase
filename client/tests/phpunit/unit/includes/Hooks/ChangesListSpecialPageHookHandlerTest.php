@@ -4,7 +4,7 @@ namespace Wikibase\Client\Tests\Unit\Hooks;
 
 use ChangesListBooleanFilter;
 use ExtensionRegistry;
-use FormOptions;
+use MediaWiki\Html\FormOptions;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\User\UserOptionsLookup;
 use SpecialRecentChanges;
