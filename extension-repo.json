@@ -440,6 +440,7 @@
 			"factory": "Wikibase\\Repo\\Specials\\SpecialSetLabelDescriptionAliases::factory",
 			"services": [
 				"LanguageNameUtils",
+				"MainConfig",
 				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EditEntityFactory",
 				"WikibaseRepo.EntityPermissionChecker",

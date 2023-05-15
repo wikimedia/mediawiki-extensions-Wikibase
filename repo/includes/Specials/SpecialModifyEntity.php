@@ -277,8 +277,10 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	 * @param EntityDocument|null $entity
 	 */
 	private function setForm( EntityDocument $entity = null ) {
-		$this->getOutput()->addHTML( $this->getCopyrightHTML() );
-
+		$submitKey = $this->getSubmitKey( $entity );
+		if ( $this->showCopyrightNotice( $entity ) ) {
+			$this->getOutput()->addHTML( $this->getCopyrightHTML( $submitKey ) );
+		}
 		if ( !$this->getUser()->isRegistered() ) {
 			$this->getOutput()->addHTML( Html::rawElement(
 				'p',
@@ -289,8 +291,6 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 				)->parse()
 			) );
 		}
-
-		$submitKey = 'wikibase-' . strtolower( $this->getName() ) . '-submit';
 
 		$this->getForm( $entity )
 			->setId( 'wb-' . strtolower( $this->getName() ) . '-form1' )
@@ -393,4 +393,21 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 		$changeOp->apply( $entity, $summary );
 	}
 
+	/**
+	 * @param EntityDocument|null $entity
+	 *
+	 * @return string submit message key
+	 */
+	protected function getSubmitKey( EntityDocument $entity = null ) {
+		return 'wikibase-' . strtolower( $this->getName() ) . '-submit';
+	}
+
+	/**
+	 * @param EntityDocument|null $entity
+	 *
+	 * @return bool
+	 */
+	protected function showCopyrightNotice( EntityDocument $entity = null ) {
+		return true;
+	}
 }

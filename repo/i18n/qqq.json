@@ -319,6 +319,7 @@
 	"wikibase-setlabeldescriptionaliases-description-label": "{{Identical|Description}}",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "{{Identical|Alias}}",
 	"wikibase-setlabeldescriptionaliases-submit": "Label for the button that activates the action.",
+	"wikibase-setlabeldescriptionaliases-continue": "Label for the button that moves to the second part of the SetLabelDescriptionAliases form.",
 	"special-setsitelink": "{{doc-special|SetSiteLink}}\nThe special page allows the user to set a sitelink for an item.",
 	"wikibase-setsitelink-introfull": "Intro text when a sitelink is to be set. Parameters:\n* $1 - the ID that links to the item\n* $2 - the site id the sitelink is to be set to",
 	"wikibase-setsitelink-intro": "A short text at the top of the page that allows users to set the sitelink of an item, explaining the form.",

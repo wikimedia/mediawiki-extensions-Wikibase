@@ -47,8 +47,11 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 
 	private static $languageCodes = [ 'en', 'de', 'de-ch', 'ii', 'zh' ];
 
+	private $submitButtonMessage;
+
 	protected function setUp(): void {
 		parent::setUp();
+		$this->submitButtonMessage = '';
 		$this->setUserLang( 'qqx' );
 	}
 
@@ -81,7 +84,8 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 			$this->getFingerprintChangeOpsFactory(),
 			new StaticContentLanguages( self::$languageCodes ),
 			$this->getEntityPermissionChecker(),
-			$this->getServiceContainer()->getLanguageNameUtils()
+			$this->getServiceContainer()->getLanguageNameUtils(),
+			$this->submitButtonMessage
 		);
 	}
 
@@ -262,6 +266,31 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 		$this->assertHtmlContainsSubmitControl( $output );
 	}
 
+	public function testSubmitButtonMessages() {
+		list( $output ) = $this->executeSpecialPage( '' );
+
+		$this->assertStringContainsString( 'wikibase-setlabeldescriptionaliases-continue', $output );
+
+		$item = new Item();
+		$this->mockRepository->putEntity( $item );
+
+		// Submit button copy is "Save changes"
+		$this->submitButtonMessage = 'savechanges';
+		list( $output ) = $this->executeSpecialPage( $item->getId()->getSerialization() );
+
+		$this->assertThatHamcrest( $output, is( htmlPiece( havingChild(
+			havingTextContents( containsString( 'savechanges' )
+		) ) ) ) );
+
+		// Submit button copy is "Publish changes"
+		$this->submitButtonMessage = 'publishchanges';
+		list( $output ) = $this->executeSpecialPage( $item->getId()->getSerialization() );
+
+		$this->assertThatHamcrest( $output, is( htmlPiece( havingChild(
+			havingTextContents( containsString( 'publishchanges' )
+		) ) ) ) );
+	}
+
 	public function testFormForEditingDataInUserLanguageIsDisplayed_WhenPageRenderedWithItemIdAsFirstSubPagePart() {
 		$item = new Item();
 		$this->mockRepository->putEntity( $item );
@@ -379,12 +408,13 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 				new NullStatsdDataFactory(),
 				$this->getServiceContainer()->getUserOptionsLookup(),
 				PHP_INT_MAX,
-				[ 'item', 'property' ]
+				[ 'item', 'property' ],
 			),
 			$this->getFingerprintChangeOpsFactory(),
 			new StaticContentLanguages( self::$languageCodes ),
 			$permissionChecker,
-			$this->getServiceContainer()->getLanguageNameUtils()
+			$this->getServiceContainer()->getLanguageNameUtils(),
+			true
 		);
 	}
 
