@@ -4,7 +4,9 @@ declare( strict_types = 1 );
 
 namespace Wikibase\View\Tests\Module;
 
-use MediaWiki\ResourceLoader\Context;
+use HashConfig;
+// phpcs:disable MediaWiki.Classes.FullQualifiedClassName -- T308814
+use MediaWiki\ResourceLoader as RL;
 use Wikibase\View\Module\TemplateModule;
 
 /**
@@ -22,42 +24,34 @@ use Wikibase\View\Module\TemplateModule;
 class TemplateModuleTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetScript() {
-		$instance = new TemplateModule();
-		$script = $instance->getScript( $this->getResourceLoaderContext() );
+		$script = TemplateModule::getScript( $this->getResourceLoaderContext() );
 		$this->assertIsString( $script );
 		$this->assertStringContainsString( 'wbTemplates', $script );
 		$this->assertStringContainsString( 'set( {', $script );
 	}
 
-	public function testSupportsURLLoading() {
-		$instance = new TemplateModule();
-		$this->assertFalse( $instance->supportsURLLoading() );
-	}
-
 	public function testGetDefinitionSummary() {
+		$resources = require __DIR__ . '/../../../resources.php';
 		$context = $this->getResourceLoaderContext();
-		$file = __DIR__ . '/../../../resources/templates.php';
-
-		$instance = new TemplateModule();
-		$oldSummary = $instance->getDefinitionSummary( $context );
-		$this->assertIsArray( $oldSummary );
-		$this->assertIsString( $oldSummary['mtime'] );
-
-		if ( !is_writable( $file ) || !touch( $file, mt_rand( 0, time() ) ) ) {
-			$this->markTestSkipped( "Can't test the modified hash, if we can't touch the file" );
-		}
-
-		clearstatcache();
-		$newSummary = $instance->getDefinitionSummary( $context );
-
-		$this->assertNotEquals( $oldSummary['mtime'], $newSummary['mtime'] );
+		$module = new RL\FileModule( $resources['wikibase.templates'] );
+		$module->setConfig( new HashConfig() );
+		$summary = $module->getDefinitionSummary( $context );
+		$this->assertIsArray( $summary );
+		$this->assertSame(
+			hash(
+				'md4',
+				hash_file( 'md4', __DIR__ . '/../../../resources/templates.php' ) .
+				hash_file( 'md4', __DIR__ . '/../../../resources/wikibase/templates.js' )
+			),
+			$summary[0]['fileHashes']
+		);
 	}
 
 	/**
-	 * @return Context
+	 * @return RL\Context
 	 */
 	private function getResourceLoaderContext() {
-		$context = $this->createMock( Context::class );
+		$context = $this->createMock( RL\Context::class );
 		$context->method( 'getLanguage' )
 			->willReturn( 'en' );
 		return $context;
