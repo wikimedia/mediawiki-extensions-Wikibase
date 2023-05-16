@@ -178,6 +178,7 @@
 	"wikibase-validator-not-allowed": "Geçersiz değer: $1",
 	"wikibase-validator-no-validators": "Yasak",
 	"wikibase-validator-sitelink-conflict": "$1 bağlantısı zaten $2 tarafından kullanılmaktadır. Eğer bu bağlantı buraya ait değilse $2 sayfasından bağlantıyı kaldırabilir veya aynı konu hakkındalarsa bu iki öğeyi birleştirebilirsiniz.",
+	"wikibase-validator-sitelink-conflict-unknown": "$1 bağlantısı, şu anda kaydedilmekte olan başka bir Öge tarafından da kullanılıyor.",
 	"wikibase-validator-label-conflict": "$3 özelliğinde zaten $2 diliyle ilişkili \"$1\" etiketi bulunuyor.",
 	"wikibase-validator-label-with-description-conflict": "$3 ögesi zaten $2 dil koduyla aynı açıklama metnini kullanan \"$1\" etiketi bulunuyor.",
 	"wikibase-validator-label-equals-description": "$1 dil kodu için etiket ve açıklama aynı değere sahip olamaz.",
@@ -313,6 +314,9 @@
 	"wikibase-tokencheck-badtoken": "Kötü anahtar düzenlemesi (belki de oturumunuzun süresi doldu).",
 	"special-dispatchstats": "Gönderim istatistiklerini değiştir",
 	"wikibase-dispatchstats-intro": "Bu sayfa, değişiklikleri istemcilere göndermeyle ilgili istatistikler sağlar.\nDeğişiklik o vikide gönderildiğinde ve o vikideki iş kuyruğu bu bildirimi işledikten sonra, bir istemci vikisine {{SITENAME}} sitesindeki bir değişiklik bildirilir.",
+	"wikibase-dispatchstats-above": "{{PLURAL:$1|En az $1 tane değişiklik}} var.",
+	"wikibase-dispatchstats-number-of-changes-in-queue": "Sıradaki değişiklik sayısı: {{PLURAL:$1|$1}}",
+	"wikibase-dispatchstats-number-of-entities-in-queue": "Sıradaki Varlık sayısı: {{PLURAL:$1|$1}}",
 	"special-listdatatypes": "Kullanılabilen tüm veri türleri listesi",
 	"wikibase-listdatatypes-intro": "Bu, bu kurulumda mevcut olan ilgili değer tiplerine sahip tüm veri tiplerinin bir listesidir:",
 	"wikibase-listdatatypes-listproperties": "Bu veri türüne sahip özelliklerin listesi",
@@ -341,6 +345,7 @@
 	"wikibase-entitypage-title": "Varlık Sayfası",
 	"wikibase-entitypage-text": "Bu sayfa ait olduğu depodaki varlık sayfasına yönlendirilecektir. Lütfen alt sayfa söz dizimini kullanarak URL için kimlik numarasını sağlayın.",
 	"wikibase-entitypage-bad-id": "Geçersiz kimlik: $1.",
+	"wikibase-error-entity-not-local": "$1 varlık türü bu vikide düzenlenemez.",
 	"wikibase-error-entity-too-big": "Bu varlık çok büyük. İzin verilen maksimum varlık boyutu $1.",
 	"wikibase-parse-error": "Hatalı biçimlendirilmiş değer.",
 	"wikibase-parse-error-coordinate": "Koordinat değeri hatalı biçimlendirilmiş.",
@@ -519,5 +524,6 @@
 	"special-setlabel-parameterized": "$1 etiketine bakın",
 	"special-setdescription-parameterized": "$1 açıklamasına bakın",
 	"special-setlabeldescriptionaliases-parameterized": "$1 etiketini, açıklamayı ve takma adlarına bakın",
+	"wikibase-federated-properties-federated-property-api-error-message": "Bu API'yi kullanarak Birleşik Özelliklerle etkileşim kuramazsınız.",
 	"wikibase-federated-properties-failed-request-api-error-message": "Federasyon kaynak vikisine yapılan başarısız bir istek nedeniyle istek başarısız oldu."
 }
