@@ -7,10 +7,15 @@ const { newPatchItemLabelsRequestBuilder } = require( '../helpers/RequestBuilder
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { formatLabelsEditSummary } = require( '../helpers/formatEditSummaries' );
 
-function assertValidErrorResponse( response, statusCode, responseBodyErrorCode ) {
+function assertValidErrorResponse( response, statusCode, responseBodyErrorCode, context = null ) {
 	expect( response ).to.have.status( statusCode );
 	assert.header( response, 'Content-Language', 'en' );
 	assert.strictEqual( response.body.code, responseBodyErrorCode );
+	if ( context === null ) {
+		assert.notProperty( response.body, 'context' );
+	} else {
+		assert.deepStrictEqual( response.body.context, context );
+	}
 }
 
 describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
@@ -105,13 +110,17 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidErrorResponse( response, 422, 'patched-label-invalid' );
+			assertValidErrorResponse(
+				response,
+				422,
+				'patched-label-invalid',
+				{
+					language: languageWithExistingLabel,
+					value: invalidLabel
+				}
+			);
 			assert.include( response.body.message, invalidLabel );
 			assert.include( response.body.message, `'${languageWithExistingLabel}'` );
-			assert.deepEqual(
-				response.body.context,
-				{ language: languageWithExistingLabel, value: invalidLabel }
-			);
 		} );
 
 		it( 'empty label', async () => {
@@ -122,8 +131,14 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidErrorResponse( response, 422, 'patched-label-empty' );
-			assert.strictEqual( response.body.context.language, languageWithExistingLabel );
+			assertValidErrorResponse(
+				response,
+				422,
+				'patched-label-empty',
+				{
+					language: languageWithExistingLabel
+				}
+			);
 		} );
 
 		it( 'label too long', async () => {
@@ -140,14 +155,19 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidErrorResponse( response, 422, 'patched-label-too-long' );
+			assertValidErrorResponse(
+				response,
+				422,
+				'patched-label-too-long',
+				{
+					value: tooLongLabel,
+					'character-limit': maxLength,
+					language: languageWithExistingLabel
+				}
+			);
 			assert.strictEqual(
 				response.body.message,
 				`Changed label for '${languageWithExistingLabel}' must not be more than ${maxLength} characters long`
-			);
-			assert.deepEqual(
-				response.body.context,
-				{ value: tooLongLabel, 'character-limit': maxLength, language: languageWithExistingLabel }
 			);
 		} );
 
@@ -164,9 +184,13 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidErrorResponse( response, 422, 'patched-labels-invalid-language-code' );
+			assertValidErrorResponse(
+				response,
+				422,
+				'patched-labels-invalid-language-code',
+				{ language: invalidLanguage }
+			);
 			assert.include( response.body.message, invalidLanguage );
-			assert.deepEqual( response.body.context, { language: invalidLanguage } );
 		} );
 	} );
 
@@ -219,10 +243,16 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidErrorResponse( response, 409, 'patch-target-not-found' );
+			assertValidErrorResponse(
+				response,
+				409,
+				'patch-target-not-found',
+				{
+					field: 'path',
+					operation: operation
+				}
+			);
 			assert.include( response.body.message, operation.path );
-			assert.strictEqual( response.body.context.field, 'path' );
-			assert.deepEqual( response.body.context.operation, operation );
 		} );
 
 		it( '"from" field target does not exist', async () => {
@@ -232,10 +262,16 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidErrorResponse( response, 409, 'patch-target-not-found' );
+			assertValidErrorResponse(
+				response,
+				409,
+				'patch-target-not-found',
+				{
+					field: 'from',
+					operation: operation
+				}
+			);
 			assert.include( response.body.message, operation.from );
-			assert.strictEqual( response.body.context.field, 'from' );
-			assert.deepEqual( response.body.context.operation, operation );
 		} );
 
 		it( 'patch test condition failed', async () => {
@@ -244,12 +280,194 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidErrorResponse( response, 409, 'patch-test-failed' );
-			assert.deepEqual( response.body.context.operation, operation );
-			assert.deepEqual( response.body.context[ 'actual-value' ], testEnLabel );
+			assertValidErrorResponse(
+				response,
+				409,
+				'patch-test-failed',
+				{
+					operation: operation,
+					'actual-value': testEnLabel
+				}
+			);
 			assert.include( response.body.message, operation.path );
 			assert.include( response.body.message, JSON.stringify( operation.value ) );
 			assert.include( response.body.message, testEnLabel );
+		} );
+	} );
+
+	describe( '400 error response', () => {
+
+		it( 'invalid item id', async () => {
+			const itemId = testItemId.replace( 'Q', 'P' );
+			const response = await newPatchItemLabelsRequestBuilder( itemId, [] )
+				.assertInvalidRequest().makeRequest();
+
+			assertValidErrorResponse( response, 400, 'invalid-item-id' );
+			assert.include( response.body.message, itemId );
+		} );
+
+		it( 'invalid patch', async () => {
+			const invalidPatch = { foo: 'this is not a valid JSON Patch' };
+			const response = await newPatchItemLabelsRequestBuilder( testItemId, invalidPatch )
+				.assertInvalidRequest().makeRequest();
+
+			assertValidErrorResponse( response, 400, 'invalid-patch' );
+		} );
+
+		it( "invalid patch - missing 'op' field", async () => {
+			const invalidOperation = { path: '/a/b/c', value: 'test' };
+			const response = await newPatchItemLabelsRequestBuilder( testItemId, [ invalidOperation ] )
+				.assertInvalidRequest().makeRequest();
+
+			assertValidErrorResponse(
+				response,
+				400,
+				'missing-json-patch-field',
+				{ operation: invalidOperation, field: 'op' }
+			);
+			assert.include( response.body.message, "'op'" );
+		} );
+
+		it( "invalid patch - missing 'path' field", async () => {
+			const invalidOperation = { op: 'remove' };
+			const response = await newPatchItemLabelsRequestBuilder( testItemId, [ invalidOperation ] )
+				.assertInvalidRequest().makeRequest();
+			assertValidErrorResponse(
+				response,
+				400,
+				'missing-json-patch-field',
+				{ operation: invalidOperation, field: 'path' }
+			);
+			assert.include( response.body.message, "'path'" );
+		} );
+
+		it( "invalid patch - missing 'value' field", async () => {
+			const invalidOperation = { op: 'add', path: '/a/b/c' };
+			const response = await newPatchItemLabelsRequestBuilder( testItemId, [ invalidOperation ] )
+				.makeRequest();
+
+			assertValidErrorResponse(
+				response,
+				400,
+				'missing-json-patch-field',
+				{ operation: invalidOperation, field: 'value' }
+			);
+			assert.include( response.body.message, "'value'" );
+		} );
+
+		it( "invalid patch - missing 'from' field", async () => {
+			const invalidOperation = { op: 'move', path: '/a/b/c' };
+			const response = await newPatchItemLabelsRequestBuilder( testItemId, [ invalidOperation ] )
+				.makeRequest();
+
+			assertValidErrorResponse(
+				response,
+				400,
+				'missing-json-patch-field',
+				{ operation: invalidOperation, field: 'from' }
+			);
+			assert.include( response.body.message, "'from'" );
+		} );
+
+		it( "invalid patch - invalid 'op' field", async () => {
+			const invalidOperation = { op: 'foobar', path: '/a/b/c', value: 'test' };
+			const response = await newPatchItemLabelsRequestBuilder( testItemId, [ invalidOperation ] )
+				.assertInvalidRequest().makeRequest();
+
+			assertValidErrorResponse( response, 400, 'invalid-patch-operation', { operation: invalidOperation } );
+			assert.include( response.body.message, "'foobar'" );
+		} );
+
+		it( "invalid patch - 'op' is not a string", async () => {
+			const invalidOperation = { op: { foo: [ 'bar' ], baz: 42 }, path: '/a/b/c', value: 'test' };
+			const response = await newPatchItemLabelsRequestBuilder( testItemId, [ invalidOperation ] )
+				.assertInvalidRequest().makeRequest();
+
+			assertValidErrorResponse(
+				response,
+				400,
+				'invalid-patch-field-type',
+				{ operation: invalidOperation, field: 'op' }
+			);
+			assert.include( response.body.message, "'op'" );
+			assert.deepEqual( response.body.context.operation, invalidOperation );
+			assert.strictEqual( response.body.context.field, 'op' );
+		} );
+
+		it( "invalid patch - 'path' is not a string", async () => {
+			const invalidOperation = { op: 'add', path: { foo: [ 'bar' ], baz: 42 }, value: 'test' };
+			const response = await newPatchItemLabelsRequestBuilder( testItemId, [ invalidOperation ] )
+				.assertInvalidRequest().makeRequest();
+
+			assertValidErrorResponse(
+				response,
+				400,
+				'invalid-patch-field-type',
+				{ operation: invalidOperation, field: 'path' }
+			);
+			assert.include( response.body.message, "'path'" );
+		} );
+
+		it( "invalid patch - 'from' is not a string", async () => {
+			const invalidOperation = { op: 'move', from: { foo: [ 'bar' ], baz: 42 }, path: '/a/b/c' };
+			const response = await newPatchItemLabelsRequestBuilder( testItemId, [ invalidOperation ] )
+				.makeRequest();
+
+			assertValidErrorResponse(
+				response,
+				400,
+				'invalid-patch-field-type',
+				{ operation: invalidOperation, field: 'from' }
+			);
+			assert.include( response.body.message, "'from'" );
+		} );
+
+		it( 'invalid edit tag', async () => {
+			const invalidEditTag = 'invalid tag';
+			const response = await newPatchItemLabelsRequestBuilder( testItemId, [] )
+				.withJsonBodyParam( 'tags', [ invalidEditTag ] ).assertValidRequest().makeRequest();
+
+			assertValidErrorResponse( response, 400, 'invalid-edit-tag' );
+			assert.include( response.body.message, invalidEditTag );
+		} );
+
+		it( 'invalid edit tag type', async () => {
+			const response = await newPatchItemLabelsRequestBuilder( testItemId, [] )
+				.withJsonBodyParam( 'tags', 'not an array' ).assertInvalidRequest().makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assert.strictEqual( response.body.code, 'invalid-request-body' );
+			assert.strictEqual( response.body.fieldName, 'tags' );
+			assert.strictEqual( response.body.expectedType, 'array' );
+		} );
+
+		it( 'invalid bot flag type', async () => {
+			const response = await newPatchItemLabelsRequestBuilder( testItemId, [] )
+				.withJsonBodyParam( 'bot', 'not boolean' ).assertInvalidRequest().makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assert.strictEqual( response.body.code, 'invalid-request-body' );
+			assert.strictEqual( response.body.fieldName, 'bot' );
+			assert.strictEqual( response.body.expectedType, 'boolean' );
+		} );
+
+		it( 'comment too long', async () => {
+			const comment = 'x'.repeat( 501 );
+			const response = await newPatchItemLabelsRequestBuilder( testItemId, [] )
+				.withJsonBodyParam( 'comment', comment ).assertValidRequest().makeRequest();
+
+			assertValidErrorResponse( response, 400, 'comment-too-long' );
+			assert.include( response.body.message, '500' );
+		} );
+
+		it( 'invalid comment type', async () => {
+			const response = await newPatchItemLabelsRequestBuilder( testItemId, [] )
+				.withJsonBodyParam( 'comment', 1234 ).assertInvalidRequest().makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assert.strictEqual( response.body.code, 'invalid-request-body' );
+			assert.strictEqual( response.body.fieldName, 'comment' );
+			assert.strictEqual( response.body.expectedType, 'string' );
 		} );
 	} );
 

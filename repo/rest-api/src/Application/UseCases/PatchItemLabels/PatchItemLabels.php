@@ -30,6 +30,7 @@ class PatchItemLabels {
 	private ItemUpdater $itemUpdater;
 	private ItemRevisionMetadataRetriever $revisionMetadataRetriever;
 	private PermissionChecker $permissionChecker;
+	private PatchItemLabelsValidator $useCaseValidator;
 
 	public function __construct(
 		ItemLabelsRetriever $labelsRetriever,
@@ -39,7 +40,8 @@ class PatchItemLabels {
 		ItemRetriever $itemRetriever,
 		ItemUpdater $itemUpdater,
 		ItemRevisionMetadataRetriever $revisionMetadataRetriever,
-		PermissionChecker $permissionChecker
+		PermissionChecker $permissionChecker,
+		PatchItemLabelsValidator $useCaseValidator
 	) {
 		$this->labelsRetriever = $labelsRetriever;
 		$this->labelsSerializer = $labelsSerializer;
@@ -49,9 +51,12 @@ class PatchItemLabels {
 		$this->itemUpdater = $itemUpdater;
 		$this->revisionMetadataRetriever = $revisionMetadataRetriever;
 		$this->permissionChecker = $permissionChecker;
+		$this->useCaseValidator = $useCaseValidator;
 	}
 
 	public function execute( PatchItemLabelsRequest $request ): PatchItemLabelsResponse {
+		$this->useCaseValidator->assertValidRequest( $request );
+
 		$itemId = new ItemId( $request->getItemId() );
 
 		$latestRevision = $this->revisionMetadataRetriever->getLatestRevisionMetadata( $itemId );
