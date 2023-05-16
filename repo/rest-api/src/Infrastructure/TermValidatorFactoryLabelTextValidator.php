@@ -3,14 +3,14 @@
 namespace Wikibase\Repo\RestApi\Infrastructure;
 
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\Repo\RestApi\Application\Validation\ItemLabelTextValidator;
+use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 
 /**
  * @license GPL-2.0-or-later
  */
-class TermValidatorFactoryLabelTextValidator implements ItemLabelTextValidator {
+class TermValidatorFactoryLabelTextValidator {
 
 	private TermValidatorFactory $termValidatorFactory;
 
@@ -26,19 +26,19 @@ class TermValidatorFactoryLabelTextValidator implements ItemLabelTextValidator {
 			$error = $result->getErrors()[0];
 			switch ( $error->getCode() ) {
 				case 'label-too-short':
-					return new ValidationError( self::CODE_EMPTY );
+					return new ValidationError( ItemLabelValidator::CODE_EMPTY );
 				case 'label-too-long':
 					return new ValidationError(
-						self::CODE_TOO_LONG,
+						ItemLabelValidator::CODE_TOO_LONG,
 						[
-							self::CONTEXT_VALUE => $labelText,
-							self::CONTEXT_LIMIT => $error->getParameters()[0],
+							ItemLabelValidator::CONTEXT_VALUE => $labelText,
+							ItemLabelValidator::CONTEXT_LIMIT => $error->getParameters()[0],
 						]
 					);
 				default:
 					return new ValidationError(
-						self::CODE_INVALID,
-						[ self::CONTEXT_VALUE => $labelText ]
+						ItemLabelValidator::CODE_INVALID,
+						[ ItemLabelValidator::CONTEXT_VALUE => $labelText ]
 					);
 			}
 		}

@@ -2,12 +2,14 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels;
 
+use LogicException;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Application\Serialization\EmptyLabelException;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\ItemLabelTextValidator;
+use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 
 /**
@@ -19,23 +21,34 @@ class PatchedLabelsValidator {
 	public const CONTEXT_VALUE = 'value';
 
 	private LabelsDeserializer $labelsDeserializer;
-	private ItemLabelTextValidator $labelTextValidator;
+	private ItemLabelValidator $labelValidator;
 	private LanguageCodeValidator $languageCodeValidator;
 
 	public function __construct(
 		LabelsDeserializer $labelsDeserializer,
-		ItemLabelTextValidator $labelTextValidator,
+		ItemLabelValidator $labelValidator,
 		LanguageCodeValidator $languageCodeValidator
 	) {
 		$this->labelsDeserializer = $labelsDeserializer;
-		$this->labelTextValidator = $labelTextValidator;
+		$this->labelValidator = $labelValidator;
 		$this->languageCodeValidator = $languageCodeValidator;
 	}
 
 	/**
 	 * @throws UseCaseError
 	 */
-	public function validateAndDeserialize( array $labelsSerialization ): TermList {
+	public function validateAndDeserialize( ItemId $itemId, TermList $originalLabels, array $labelsSerialization ): TermList {
+		$patchedLabels = $this->deserializeLabels( $labelsSerialization );
+
+		foreach ( $this->getModifiedLabels( $originalLabels, $patchedLabels ) as $label ) {
+			$this->validateLabel( $itemId, $label );
+			$this->validateLanguageCode( $label );
+		}
+
+		return $patchedLabels;
+	}
+
+	private function deserializeLabels( array $labelsSerialization ): TermList {
 		try {
 			$labels = $this->labelsDeserializer->deserialize( $labelsSerialization );
 		} catch ( EmptyLabelException $e ) {
@@ -47,22 +60,31 @@ class PatchedLabelsValidator {
 			);
 		}
 
-		foreach ( $labels as $label ) {
-			$this->validateLabelText( $label );
-			$this->validateLanguageCode( $label );
-		}
-
 		return $labels;
 	}
 
-	private function validateLabelText( Term $label ): void {
-		$validationError = $this->labelTextValidator->validate( $label->getText() );
+	private function getModifiedLabels( TermList $original, TermList $modified ): array {
+		$modifiedLabels = [];
+
+		foreach ( $modified as $label ) {
+			if ( !$original->hasTermForLanguage( $label->getLanguageCode() ) ) {
+				$modifiedLabels[] = $label;
+			} elseif ( $original->getByLanguage( $label->getLanguageCode() )->getText() != $label->getText() ) {
+				$modifiedLabels[] = $label;
+			}
+		}
+
+		return $modifiedLabels;
+	}
+
+	private function validateLabel( ItemId $itemId, Term $label ): void {
+		$validationError = $this->labelValidator->validate( $itemId, $label->getLanguageCode(), $label->getText() );
 		if ( !$validationError ) {
 			return;
 		}
 
 		switch ( $validationError->getCode() ) {
-			case ItemLabelTextValidator::CODE_INVALID:
+			case ItemLabelValidator::CODE_INVALID:
 				throw new UseCaseError(
 					UseCaseError::PATCHED_LABEL_INVALID,
 					"Changed label for '{$label->getLanguageCode()}' is invalid: {$label->getText()}",
@@ -71,13 +93,26 @@ class PatchedLabelsValidator {
 						self::CONTEXT_VALUE => $label->getText(),
 					]
 				);
-			case ItemLabelTextValidator::CODE_TOO_LONG:
-				$maxLabelLength = $validationError->getContext()[ItemLabelTextValidator::CONTEXT_LIMIT];
+			case ItemLabelValidator::CODE_TOO_LONG:
+				$maxLabelLength = $validationError->getContext()[ItemLabelValidator::CONTEXT_LIMIT];
 				throw new UseCaseError(
 					UseCaseError::PATCHED_LABEL_TOO_LONG,
 					"Changed label for '{$label->getLanguageCode()}' must not be more than $maxLabelLength characters long",
 					array_merge( $validationError->getContext(), [ self::CONTEXT_LANGUAGE => $label->getLanguageCode() ] )
 				);
+			case ItemLabelValidator::CODE_LABEL_DESCRIPTION_DUPLICATE:
+				$languageCode = $validationError->getContext()[ItemLabelValidator::CONTEXT_LANGUAGE];
+				$label = $validationError->getContext()[ItemLabelValidator::CONTEXT_LABEL];
+				$duplicateItemId = $validationError->getContext()[ItemLabelValidator::CONTEXT_MATCHING_ITEM_ID];
+				throw new UseCaseError(
+					UseCaseError::PATCHED_ITEM_LABEL_DESCRIPTION_DUPLICATE,
+					"Item {$duplicateItemId} already has label '{$label}' associated with language code {$languageCode}, " .
+					'using the same description text.',
+					$validationError->getContext()
+				);
+
+			default:
+				throw new LogicException( 'Unknown validation error: ' . $validationError->getCode() );
 		}
 	}
 

@@ -266,7 +266,11 @@ return [
 			new JsonDiffJsonPatcher(),
 			new PatchedLabelsValidator(
 				new LabelsDeserializer(),
-				new TermValidatorFactoryLabelTextValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
+				new WikibaseRepoItemLabelValidator(
+					new TermValidatorFactoryLabelTextValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
+					WikibaseRepo::getItemTermsCollisionDetector( $services ),
+					WbRestApi::getItemDataRetriever( $services )
+				),
 				new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() )
 			),
 			WbRestApi::getItemDataRetriever( $services ),

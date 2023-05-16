@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\RestApi\Infrastructure;
 
 use MediaWiki\Languages\LanguageNameUtils;
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\RestApi\Application\Validation\ItemLabelTextValidator;
+use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryLabelTextValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
@@ -27,7 +27,7 @@ class TermValidatorFactoryLabelTextValidatorTest extends TestCase {
 
 	public function testEmptyLabel_returnsValidationError(): void {
 		$this->assertEquals(
-			new ValidationError( ItemLabelTextValidator::CODE_EMPTY ),
+			new ValidationError( ItemLabelValidator::CODE_EMPTY ),
 			$this->newValidator()->validate( '' )
 		);
 	}
@@ -36,10 +36,10 @@ class TermValidatorFactoryLabelTextValidatorTest extends TestCase {
 		$tooLonglabel = str_repeat( 'a', self::MAX_LENGTH + 1 );
 		$this->assertEquals(
 			new ValidationError(
-				ItemLabelTextValidator::CODE_TOO_LONG,
+				ItemLabelValidator::CODE_TOO_LONG,
 				[
-					ItemLabelTextValidator::CONTEXT_VALUE => $tooLonglabel,
-					ItemLabelTextValidator::CONTEXT_LIMIT => self::MAX_LENGTH,
+					ItemLabelValidator::CONTEXT_VALUE => $tooLonglabel,
+					ItemLabelValidator::CONTEXT_LIMIT => self::MAX_LENGTH,
 				]
 			),
 			$this->newValidator()->validate( $tooLonglabel )
@@ -50,8 +50,8 @@ class TermValidatorFactoryLabelTextValidatorTest extends TestCase {
 		$invalidLabel = "item with tab character \t not allowed";
 		$this->assertEquals(
 			new ValidationError(
-				ItemLabelTextValidator::CODE_INVALID,
-				[ ItemLabelTextValidator::CONTEXT_VALUE => $invalidLabel ]
+				ItemLabelValidator::CODE_INVALID,
+				[ ItemLabelValidator::CONTEXT_VALUE => $invalidLabel ]
 			),
 			$this->newValidator()->validate( $invalidLabel )
 		);

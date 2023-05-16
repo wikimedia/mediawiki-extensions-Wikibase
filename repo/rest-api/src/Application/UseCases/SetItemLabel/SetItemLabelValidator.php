@@ -7,7 +7,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ItemLabelTextValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 
@@ -83,18 +82,18 @@ class SetItemLabelValidator {
 			$context = $validationError->getContext();
 
 			switch ( $errorCode ) {
-				case ItemLabelTextValidator::CODE_INVALID:
+				case ItemLabelValidator::CODE_INVALID:
 					throw new UseCaseError(
 						UseCaseError::INVALID_LABEL,
-						"Not a valid label: {$context[ItemLabelTextValidator::CONTEXT_VALUE]}"
+						"Not a valid label: {$context[ItemLabelValidator::CONTEXT_VALUE]}"
 					);
-				case ItemLabelTextValidator::CODE_EMPTY:
+				case ItemLabelValidator::CODE_EMPTY:
 					throw new UseCaseError(
 						UseCaseError::LABEL_EMPTY,
 						'Label must not be empty'
 					);
-				case ItemLabelTextValidator::CODE_TOO_LONG:
-					$maxLabelLength = $context[ItemLabelTextValidator::CONTEXT_LIMIT];
+				case ItemLabelValidator::CODE_TOO_LONG:
+					$maxLabelLength = $context[ItemLabelValidator::CONTEXT_LIMIT];
 					throw new UseCaseError(
 						UseCaseError::LABEL_TOO_LONG,
 						"Label must be no more than $maxLabelLength characters long",

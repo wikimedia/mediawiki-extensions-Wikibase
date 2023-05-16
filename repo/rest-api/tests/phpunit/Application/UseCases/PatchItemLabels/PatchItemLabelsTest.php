@@ -6,6 +6,7 @@ use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item as DataModelItem;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Term\TermList;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
@@ -15,7 +16,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsRe
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
-use Wikibase\Repo\RestApi\Application\Validation\ItemLabelTextValidator;
+use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\User;
@@ -65,7 +66,7 @@ class PatchItemLabelsTest extends TestCase {
 		$this->patcher = new JsonDiffJsonPatcher();
 		$this->patchedLabelsValidator = new PatchedLabelsValidator(
 			new LabelsDeserializer(),
-			$this->createStub( ItemLabelTextValidator::class ),
+			$this->createStub( ItemLabelValidator::class ),
 			$this->createStub( LanguageCodeValidator::class )
 		);
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
@@ -300,7 +301,7 @@ class PatchItemLabelsTest extends TestCase {
 		$this->patchedLabelsValidator = $this->createMock( PatchedLabelsValidator::class );
 		$this->patchedLabelsValidator->expects( $this->once() )
 			->method( 'validateAndDeserialize' )
-			->with( $patchResult )
+			->with( $item->getId(), new TermList(), $patchResult )
 			->willThrowException( $expectedUseCaseError );
 
 		try {

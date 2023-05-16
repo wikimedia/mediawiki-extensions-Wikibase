@@ -86,7 +86,7 @@ class PatchItemLabels {
 		$serialization = $this->labelsSerializer->serialize( $labels );
 
 		try {
-			$patchResult = $this->patcher->patch( iterator_to_array( $serialization ), $request->getPatch() );
+			$patchedLabels = $this->patcher->patch( iterator_to_array( $serialization ), $request->getPatch() );
 		} catch ( PatchPathException $e ) {
 			throw new UseCaseError(
 				UseCaseError::PATCH_TARGET_NOT_FOUND,
@@ -105,11 +105,11 @@ class PatchItemLabels {
 			);
 		}
 
-		$modifiedLabels = $this->patchedLabelsValidator->validateAndDeserialize( $patchResult );
-
 		$item = $this->itemRetriever->getItem( $itemId );
 
 		$originalLabels = $item->getLabels();
+
+		$modifiedLabels = $this->patchedLabelsValidator->validateAndDeserialize( $itemId, $originalLabels, $patchedLabels );
 
 		$item->getFingerprint()->setLabels( $modifiedLabels );
 
