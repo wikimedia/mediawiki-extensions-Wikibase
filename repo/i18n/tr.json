@@ -178,6 +178,7 @@
 	"wikibase-validator-not-allowed": "Geçersiz değer: $1",
 	"wikibase-validator-no-validators": "Yasak",
 	"wikibase-validator-sitelink-conflict": "$1 bağlantısı zaten $2 tarafından kullanılmaktadır. Eğer bu bağlantı buraya ait değilse $2 sayfasından bağlantıyı kaldırabilir veya aynı konu hakkındalarsa bu iki öğeyi birleştirebilirsiniz.",
+	"wikibase-validator-sitelink-conflict-unknown": "$1 bağlantısı, şu anda kaydedilmekte olan başka bir Öge tarafından da kullanılıyor.",
 	"wikibase-validator-label-conflict": "$3 özelliğinde zaten $2 diliyle ilişkili \"$1\" etiketi bulunuyor.",
 	"wikibase-validator-label-with-description-conflict": "$3 ögesi zaten $2 dil koduyla aynı açıklama metnini kullanan \"$1\" etiketi bulunuyor.",
 	"wikibase-validator-label-equals-description": "$1 dil kodu için etiket ve açıklama aynı değere sahip olamaz.",
