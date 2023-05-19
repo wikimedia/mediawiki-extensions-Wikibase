@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiMain;
-use FauxRequest;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Request\FauxRequest;
 use MediaWikiIntegrationTestCase;
 use User;
 use Wikibase\DataModel\Entity\Item;

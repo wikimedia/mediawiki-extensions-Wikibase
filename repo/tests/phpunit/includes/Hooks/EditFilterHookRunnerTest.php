@@ -3,9 +3,9 @@
 namespace Wikibase\Repo\Tests\Hooks;
 
 use Content;
-use FauxRequest;
 use IContextSource;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Request\FauxRequest;
 use MediaWiki\Revision\SlotRecord;
 use MediaWikiIntegrationTestCase;
 use RequestContext;

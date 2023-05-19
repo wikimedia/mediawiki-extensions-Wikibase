@@ -6,7 +6,7 @@ use ApiMain;
 use ApiUsageException;
 use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
-use FauxRequest;
+use MediaWiki\Request\FauxRequest;
 use MediaWikiIntegrationTestCase;
 use Parser;
 use ParserOutput;

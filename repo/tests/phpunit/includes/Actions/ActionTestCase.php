@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\Actions;
 use Action;
 use Article;
 use Exception;
-use FauxRequest;
+use MediaWiki\Request\FauxRequest;
 use MediaWikiIntegrationTestCase;
 use MWException;
 use OutputPage;

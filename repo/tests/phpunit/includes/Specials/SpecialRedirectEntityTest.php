@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\Specials;
 
 use Exception;
-use FauxRequest;
+use MediaWiki\Request\FauxRequest;
 use PHPUnit\Framework\Error\Error;
 use RawMessage;
 use SpecialPageTestBase;

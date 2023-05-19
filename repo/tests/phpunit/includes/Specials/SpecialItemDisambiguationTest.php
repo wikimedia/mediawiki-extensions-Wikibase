@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Tests\Specials;
 
-use FauxRequest;
 use InvalidArgumentException;
+use MediaWiki\Request\FauxRequest;
 use SpecialPageTestBase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;

@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Specials;
 
+use MediaWiki\Request\FauxRequest;
 use SpecialPageTestBase;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
@@ -115,7 +116,7 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 	}
 
 	public function testOffsetAndLimit() {
-		$request = new \FauxRequest( [ 'limit' => '1', 'offset' => '1' ] );
+		$request = new FauxRequest( [ 'limit' => '1', 'offset' => '1' ] );
 		list( $output, ) = $this->executeSpecialPage( '', $request, 'qqx' );
 
 		$this->assertStringNotContainsString( 'P45', $output );

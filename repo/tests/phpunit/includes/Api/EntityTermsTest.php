@@ -7,7 +7,7 @@ namespace Wikibase\Repo\Tests\Api;
 use ApiMain;
 use ApiPageSet;
 use ApiQuery;
-use FauxRequest;
+use MediaWiki\Request\FauxRequest;
 use MediaWikiLangTestCase;
 use RequestContext;
 use Title;

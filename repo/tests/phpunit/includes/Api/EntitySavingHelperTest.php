@@ -3,10 +3,10 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiUsageException;
-use FauxRequest;
 use LogicException;
 use MediaWiki\Debug\DeprecatablePropertyArray;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Request\FauxRequest;
 use MediaWiki\Revision\RevisionRecord;
 use RequestContext;
 use Status;

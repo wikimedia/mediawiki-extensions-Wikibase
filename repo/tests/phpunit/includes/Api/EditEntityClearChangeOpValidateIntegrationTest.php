@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiUsageException;
+use MediaWiki\Request\FauxRequest;
 use MediaWikiIntegrationTestCase;
 use ReflectionClass;
 use RuntimeException;
@@ -115,7 +116,7 @@ class EditEntityClearChangeOpValidateIntegrationTest extends MediaWikiIntegratio
 	}
 
 	private function newApi( array $params ) {
-		$request = new \FauxRequest( $params );
+		$request = new FauxRequest( $params );
 
 		return new EditEntity(
 			new \ApiMain( $request ),

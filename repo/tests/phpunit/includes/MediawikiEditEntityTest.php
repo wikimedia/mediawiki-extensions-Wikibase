@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests;
 
-use FauxRequest;
+use MediaWiki\Request\FauxRequest;
 use MediaWiki\User\UserIdentity;
 use MediaWikiIntegrationTestCase;
 use ObjectCache;

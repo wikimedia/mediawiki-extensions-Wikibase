@@ -6,7 +6,7 @@ use ApiBase;
 use ApiMain;
 use ApiUsageException;
 use Exception;
-use FauxRequest;
+use MediaWiki\Request\FauxRequest;
 use PHPUnit\Framework\Assert;
 use User;
 use Wikimedia\TestingAccessWrapper;

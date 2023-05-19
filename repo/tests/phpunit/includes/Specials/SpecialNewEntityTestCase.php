@@ -4,9 +4,9 @@ namespace Wikibase\Repo\Tests\Specials;
 
 use ChangeTags;
 use CommentStoreComment;
-use FauxRequest;
 use MediaWiki\Block\AbstractBlock;
 use MediaWiki\Block\BlockManager;
+use MediaWiki\Request\FauxRequest;
 use PHPUnit\Framework\MockObject\MockObject;
 use RequestContext;
 use SpecialPageTestBase;

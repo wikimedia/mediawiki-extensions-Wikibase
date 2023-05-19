@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Tests\Specials;
 
-use FauxRequest;
 use HashSiteStore;
 use MediaWiki\Languages\LanguageNameUtils;
+use MediaWiki\Request\FauxRequest;
 use PHPUnit\Framework\MockObject\MockObject;
 use Site;
 use SiteStore;
