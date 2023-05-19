@@ -18,7 +18,7 @@ use Wikibase\Client\Hooks\WikibaseClientHookRunner;
  */
 class WikibaseClientHookRunnerTest extends HookRunnerTestBase {
 
-	public function provideHookRunners(): iterable {
+	public static function provideHookRunners(): iterable {
 		yield WikibaseClientHookRunner::class => [ WikibaseClientHookRunner::class ];
 	}
 
