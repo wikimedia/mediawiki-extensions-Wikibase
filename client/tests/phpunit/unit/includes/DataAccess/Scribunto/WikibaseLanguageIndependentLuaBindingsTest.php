@@ -21,6 +21,7 @@ use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 use Wikibase\DataModel\Services\Lookup\MaxReferencedEntityVisitsExhaustedException;
 use Wikibase\DataModel\Services\Lookup\MaxReferenceDepthExhaustedException;
 use Wikibase\DataModel\Services\Lookup\ReferencedEntityIdLookup;
+use Wikibase\DataModel\Services\Lookup\ReferencedEntityIdLookupException;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\StaticContentLanguages;
@@ -535,6 +536,16 @@ class WikibaseLanguageIndependentLuaBindingsTest extends TestCase {
 						new NumericPropertyId( 'P1366' ),
 						[ new ItemId( 'Q2013' ) ],
 						42
+					)
+				),
+			],
+			'ReferencedEntityIdLookupException' => [
+				false,
+				$this->newReferencedEntityIdLookupMock(
+					new ReferencedEntityIdLookupException(
+						new ItemId( 'Q2013' ),
+						new NumericPropertyId( 'P1366' ),
+						[ new ItemId( 'Q2013' ) ]
 					)
 				),
 			],

@@ -437,7 +437,7 @@ If statements with the requested property ID exist, the table returned is equiva
 
 Get one referenced entity (out of toIds), from a given entity. The starting entity, and the target entities are (potentially indirectly, via intermediate entities) linked by statements with the given property ID, pointing from the starting entity to one of the target entities.
 
-Returns one id of a referenced entity id, if it could be found. Returns nil if none of the given entities is referenced. Returns false if the search for a referenced entity had to be aborted due to resource limits, thus the result is inconclusive.
+Returns one id of a referenced entity id, if it could be found. Returns nil if none of the given entities is referenced. Returns false if the search for a referenced entity had to be aborted due to resource limits or errors, thus the result is inconclusive.
 
 Example calls might look like this:
 
