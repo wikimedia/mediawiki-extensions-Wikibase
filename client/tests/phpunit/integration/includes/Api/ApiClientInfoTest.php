@@ -4,7 +4,7 @@ namespace Wikibase\Client\Tests\Integration\Api;
 
 use ApiMain;
 use ApiTestContext;
-use FauxRequest;
+use MediaWiki\Request\FauxRequest;
 use MediaWikiIntegrationTestCase;
 use User;
 use Wikibase\Client\Api\ApiClientInfo;

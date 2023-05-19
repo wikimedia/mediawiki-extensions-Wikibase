@@ -2,9 +2,9 @@
 
 namespace Wikibase\Client\Tests\Unit\Hooks;
 
-use FauxRequest;
 use IContextSource;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Request\FauxRequest;
 use MockTitleTrait;
 use OutputPage;
 use PHPUnit\Framework\TestCase;

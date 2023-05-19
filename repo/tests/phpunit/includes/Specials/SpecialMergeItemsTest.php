@@ -6,6 +6,7 @@ use Exception;
 use HashSiteStore;
 use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Request\FauxRequest;
 use PermissionsError;
 use PHPUnit\Framework\Error\Error;
 use RawMessage;
@@ -207,7 +208,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 			$params['wpEditToken'] = $user->getEditToken();
 		}
 
-		$request = new \FauxRequest( $params, true );
+		$request = new FauxRequest( $params, true );
 
 		list( $html, ) = $this->executeSpecialPage( '', $request, 'qqx', $user );
 		return $html;

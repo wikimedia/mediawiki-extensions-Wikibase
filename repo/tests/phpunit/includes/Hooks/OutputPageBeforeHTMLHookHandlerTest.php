@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Hooks;
 
-use FauxRequest;
+use MediaWiki\Request\FauxRequest;
 use MediaWiki\User\StaticUserOptionsLookup;
 use MediaWikiIntegrationTestCase;
 use NullHttpRequestFactory;

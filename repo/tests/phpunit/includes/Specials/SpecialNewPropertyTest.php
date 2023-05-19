@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Tests\Specials;
 
-use FauxRequest;
 use MediaWiki\Languages\LanguageNameUtils;
+use MediaWiki\Request\FauxRequest;
 use PHPUnit\Framework\MockObject\MockObject;
 use ValueValidators\Error;
 use ValueValidators\Result;

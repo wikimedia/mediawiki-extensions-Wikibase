@@ -4,9 +4,9 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Specials;
 
-use FauxRequest;
 use FauxResponse;
 use HttpError;
+use MediaWiki\Request\FauxRequest;
 use SpecialPageExecutor;
 use SpecialPageTestBase;
 use Title;

@@ -4,8 +4,8 @@ namespace Wikibase\Repo\Tests\Api;
 
 use ApiMain;
 use ApiUsageException;
-use FauxRequest;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Request\FauxRequest;
 use MediaWikiIntegrationTestCase;
 use Status;
 use Title;

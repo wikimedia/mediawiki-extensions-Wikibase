@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\Api;
 
 use ApiBase;
 use ApiMain;
-use FauxRequest;
+use MediaWiki\Request\FauxRequest;
 use MediaWikiIntegrationTestCase;
 use Message;
 use ReflectionMethod;

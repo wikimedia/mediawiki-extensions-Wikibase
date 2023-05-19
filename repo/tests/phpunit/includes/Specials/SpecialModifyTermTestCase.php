@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Specials;
 
-use FauxRequest;
+use MediaWiki\Request\FauxRequest;
 use Message;
 use SpecialPageTestBase;
 use Wikibase\DataModel\Entity\Item;

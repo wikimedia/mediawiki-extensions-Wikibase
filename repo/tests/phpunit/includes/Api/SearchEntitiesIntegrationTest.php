@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiMain;
-use FauxRequest;
+use MediaWiki\Request\FauxRequest;
 use MediaWiki\Revision\SlotRecord;
 use MediaWikiIntegrationTestCase;
 use RequestContext;

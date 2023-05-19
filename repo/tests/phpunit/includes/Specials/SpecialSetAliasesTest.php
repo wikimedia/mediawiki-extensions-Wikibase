@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Specials;
 
+use MediaWiki\Request\FauxRequest;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Repo\CopyrightMessageBuilder;
 use Wikibase\Repo\Specials\SpecialPageCopyrightView;
@@ -51,7 +52,7 @@ class SpecialSetAliasesTest extends SpecialModifyTermTestCase {
 		$store = WikibaseRepo::getEntityStore();
 		$store->saveEntity( $item, __METHOD__, $this->getTestUser()->getUser(), EDIT_NEW );
 		$id = $item->getId();
-		$editRequest = new \FauxRequest( [ 'id' => $id, 'language' => $languageCode, 'value' => 'test' ], true );
+		$editRequest = new FauxRequest( [ 'id' => $id, 'language' => $languageCode, 'value' => 'test' ], true );
 		list( $output, ) = $this->executeSpecialPage(
 			$id->getSerialization() . '/' . $languageCode,
 			$editRequest,

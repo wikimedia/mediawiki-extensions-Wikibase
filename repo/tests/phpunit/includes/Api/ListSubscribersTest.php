@@ -4,8 +4,8 @@ namespace Wikibase\Repo\Tests\Api;
 
 use ApiMain;
 use ApiQuery;
-use FauxRequest;
 use HashSiteStore;
+use MediaWiki\Request\FauxRequest;
 use MediaWikiLangTestCase;
 use RequestContext;
 use Wikibase\DataModel\Entity\ItemIdParser;

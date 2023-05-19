@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Tests\Interactors;
 
-use FauxRequest;
 use IContextSource;
+use MediaWiki\Request\FauxRequest;
 use PHPUnit\Framework\MockObject\Matcher\InvokedRecorder;
 use RequestContext;
 use Status;
