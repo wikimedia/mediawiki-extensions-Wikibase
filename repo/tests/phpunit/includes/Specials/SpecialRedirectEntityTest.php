@@ -3,9 +3,9 @@
 namespace Wikibase\Repo\Tests\Specials;
 
 use Exception;
+use MediaWiki\Language\RawMessage;
 use MediaWiki\Request\FauxRequest;
 use PHPUnit\Framework\Error\Error;
-use RawMessage;
 use SpecialPageTestBase;
 use Status;
 use Title;

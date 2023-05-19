@@ -4,12 +4,12 @@ namespace Wikibase\Repo\Tests\Specials;
 
 use Exception;
 use HashSiteStore;
+use MediaWiki\Language\RawMessage;
 use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Request\FauxRequest;
 use PermissionsError;
 use PHPUnit\Framework\Error\Error;
-use RawMessage;
 use SpecialPageTestBase;
 use Status;
 use TestSites;

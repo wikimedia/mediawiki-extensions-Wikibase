@@ -5,8 +5,8 @@ namespace Wikibase\Repo\FederatedProperties;
 
 use ErrorPageError;
 use Html;
+use MediaWiki\Language\RawMessage;
 use MediaWiki\MediaWikiServices;
-use RawMessage;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\View\Template\TemplateFactory;
 

@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\FederatedProperties;
 
 use Html;
+use MediaWiki\Language\RawMessage;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -25,7 +26,7 @@ class FederatedPropertiesErrorTest extends MediaWikiIntegrationTestCase {
 		$params = [];
 
 		$e = new FederatedPropertiesError( $languageCode, $item, 'key', $params );
-		$this->assertInstanceOf( \RawMessage::class, $e->msg );
+		$this->assertInstanceOf( RawMessage::class, $e->msg );
 
 		$this->assertSame( Html::errorBox( '⧼key⧽' ),
 			$e->msg->parse() );

@@ -4,9 +4,9 @@ namespace Wikibase\Repo\Tests\Hooks;
 
 use ContextSource;
 use HtmlArmor;
+use MediaWiki\Language\RawMessage;
 use MediaWikiIntegrationTestCase;
 use MWException;
-use RawMessage;
 use SearchResult;
 use SpecialSearch;
 use Title;
