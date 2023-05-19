@@ -17,9 +17,8 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
-use Wikibase\DataModel\Services\Lookup\MaxReferencedEntityVisitsExhaustedException;
-use Wikibase\DataModel\Services\Lookup\MaxReferenceDepthExhaustedException;
 use Wikibase\DataModel\Services\Lookup\ReferencedEntityIdLookup;
+use Wikibase\DataModel\Services\Lookup\ReferencedEntityIdLookupException;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookupException;
 use Wikibase\DataModel\SiteLink;
@@ -360,12 +359,12 @@ class WikibaseLanguageIndependentLuaBindings {
 	 *
 	 * @return string|null|bool Serialization of the referenced entity id, if one could be found.
 	 *  Null if none of the given entities is referenced.
-	 *  False if the search for a referenced entity had to be aborted due to resource limits.
+	 *  False if the search for a referenced entity had to be aborted due to resource limits, or an error.
 	 */
 	public function getReferencedEntityId( EntityId $fromId, PropertyId $propertyId, array $toIds ) {
 		try {
 			$res = $this->referencedEntityIdLookup->getReferencedEntityId( $fromId, $propertyId, $toIds );
-		} catch ( MaxReferenceDepthExhaustedException | MaxReferencedEntityVisitsExhaustedException $e ) {
+		} catch ( ReferencedEntityIdLookupException $e ) {
 			return false;
 		}
 
