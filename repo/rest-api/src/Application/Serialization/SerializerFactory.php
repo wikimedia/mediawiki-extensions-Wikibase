@@ -25,8 +25,8 @@ class SerializerFactory {
 		return new StatementListSerializer( $this->newStatementSerializer() );
 	}
 
-	public function newItemDataSerializer(): ItemDataSerializer {
-		return new ItemDataSerializer(
+	public function newItemPartsSerializer(): ItemPartsSerializer {
+		return new ItemPartsSerializer(
 			new LabelsSerializer(),
 			new DescriptionsSerializer(),
 			new AliasesSerializer(),

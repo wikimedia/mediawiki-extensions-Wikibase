@@ -11,12 +11,12 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
-use Wikibase\Repo\RestApi\Domain\ReadModel\ItemData;
-use Wikibase\Repo\RestApi\Domain\ReadModel\ItemDataBuilder;
+use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
+use Wikibase\Repo\RestApi\Domain\ReadModel\ItemPartsBuilder;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
-use Wikibase\Repo\RestApi\Domain\Services\ItemDataRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\ItemPartsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementsRetriever;
@@ -26,7 +26,7 @@ use Wikibase\Repo\RestApi\Infrastructure\SiteLinksReadModelConverter;
 /**
  * @license GPL-2.0-or-later
  */
-class EntityRevisionLookupItemDataRetriever implements ItemRetriever, ItemDataRetriever, ItemStatementsRetriever, ItemStatementRetriever {
+class EntityRevisionLookupItemDataRetriever implements ItemRetriever, ItemPartsRetriever, ItemStatementsRetriever, ItemStatementRetriever {
 
 	private EntityRevisionLookup $entityRevisionLookup;
 	private StatementReadModelConverter $statementReadModelConverter;
@@ -57,34 +57,34 @@ class EntityRevisionLookupItemDataRetriever implements ItemRetriever, ItemDataRe
 		return $entityRevision->getEntity();
 	}
 
-	public function getItemData( ItemId $itemId, array $fields ): ?ItemData {
+	public function getItemParts( ItemId $itemId, array $fields ): ?ItemParts {
 		$item = $this->getItem( $itemId );
 		if ( $item === null ) {
 			return null;
 		}
-		return $this->itemDataFromRequestedFields( $fields, $item );
+		return $this->itemPartsFromRequestedFields( $fields, $item );
 	}
 
-	private function itemDataFromRequestedFields( array $fields, Item $item ): ItemData {
-		$itemData = ( new ItemDataBuilder( $item->getId(), $fields ) );
+	private function itemPartsFromRequestedFields( array $fields, Item $item ): ItemParts {
+		$itemParts = ( new ItemPartsBuilder( $item->getId(), $fields ) );
 
-		if ( in_array( ItemData::FIELD_LABELS, $fields ) ) {
-			$itemData->setLabels( Labels::fromTermList( $item->getLabels() ) );
+		if ( in_array( ItemParts::FIELD_LABELS, $fields ) ) {
+			$itemParts->setLabels( Labels::fromTermList( $item->getLabels() ) );
 		}
-		if ( in_array( ItemData::FIELD_DESCRIPTIONS, $fields ) ) {
-			$itemData->setDescriptions( Descriptions::fromTermList( $item->getDescriptions() ) );
+		if ( in_array( ItemParts::FIELD_DESCRIPTIONS, $fields ) ) {
+			$itemParts->setDescriptions( Descriptions::fromTermList( $item->getDescriptions() ) );
 		}
-		if ( in_array( ItemData::FIELD_ALIASES, $fields ) ) {
-			$itemData->setAliases( Aliases::fromAliasGroupList( $item->getAliasGroups() ) );
+		if ( in_array( ItemParts::FIELD_ALIASES, $fields ) ) {
+			$itemParts->setAliases( Aliases::fromAliasGroupList( $item->getAliasGroups() ) );
 		}
-		if ( in_array( ItemData::FIELD_STATEMENTS, $fields ) ) {
-			$itemData->setStatements( $this->convertDataModelStatementListToReadModel( $item->getStatements() ) );
+		if ( in_array( ItemParts::FIELD_STATEMENTS, $fields ) ) {
+			$itemParts->setStatements( $this->convertDataModelStatementListToReadModel( $item->getStatements() ) );
 		}
-		if ( in_array( ItemData::FIELD_SITELINKS, $fields ) ) {
-			$itemData->setSiteLinks( $this->siteLinksReadModelConverter->convert( $item->getSiteLinkList() ) );
+		if ( in_array( ItemParts::FIELD_SITELINKS, $fields ) ) {
+			$itemParts->setSiteLinks( $this->siteLinksReadModelConverter->convert( $item->getSiteLinkList() ) );
 		}
 
-		return $itemData->build();
+		return $itemParts->build();
 	}
 
 	public function getStatements( ItemId $itemId, ?PropertyId $propertyId = null ): ?StatementList {

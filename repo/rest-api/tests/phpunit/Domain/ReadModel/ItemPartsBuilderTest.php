@@ -9,68 +9,68 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
-use Wikibase\Repo\RestApi\Domain\ReadModel\ItemData;
-use Wikibase\Repo\RestApi\Domain\ReadModel\ItemDataBuilder;
+use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
+use Wikibase\Repo\RestApi\Domain\ReadModel\ItemPartsBuilder;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\SiteLinks;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Domain\ReadModel\ItemDataBuilder
- * @covers \Wikibase\Repo\RestApi\Domain\ReadModel\ItemData
+ * @covers \Wikibase\Repo\RestApi\Domain\ReadModel\ItemPartsBuilder
+ * @covers \Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class ItemDataBuilderTest extends TestCase {
+class ItemPartsBuilderTest extends TestCase {
 
 	public function testId(): void {
 		$id = new ItemId( 'Q123' );
-		$itemData = ( new ItemDataBuilder( $id, [] ) )
+		$itemParts = ( new ItemPartsBuilder( $id, [] ) )
 			->build();
-		$this->assertSame( $id, $itemData->getId() );
+		$this->assertSame( $id, $itemParts->getId() );
 	}
 
 	public function testLabels(): void {
 		$labels = new Labels( new Label( 'en', 'potato' ) );
-		$itemData = $this->newBuilderWithSomeId( [ ItemData::FIELD_LABELS ] )
+		$itemParts = $this->newBuilderWithSomeId( [ ItemParts::FIELD_LABELS ] )
 			->setLabels( $labels )
 			->build();
-		$this->assertSame( $labels, $itemData->getLabels() );
+		$this->assertSame( $labels, $itemParts->getLabels() );
 	}
 
 	public function testDescriptions(): void {
 		$descriptions = new Descriptions( new Description( 'en', 'root vegetable' ) );
-		$itemData = $this->newBuilderWithSomeId( [ ItemData::FIELD_DESCRIPTIONS ] )
+		$itemParts = $this->newBuilderWithSomeId( [ ItemParts::FIELD_DESCRIPTIONS ] )
 			->setDescriptions( $descriptions )
 			->build();
-		$this->assertSame( $descriptions, $itemData->getDescriptions() );
+		$this->assertSame( $descriptions, $itemParts->getDescriptions() );
 	}
 
 	public function testAliases(): void {
 		$aliases = new Aliases();
-		$itemData = $this->newBuilderWithSomeId( [ ItemData::FIELD_ALIASES ] )
+		$itemParts = $this->newBuilderWithSomeId( [ ItemParts::FIELD_ALIASES ] )
 			->setAliases( $aliases )
 			->build();
-		$this->assertSame( $aliases, $itemData->getAliases() );
+		$this->assertSame( $aliases, $itemParts->getAliases() );
 	}
 
 	public function testStatements(): void {
 		$statements = new StatementList();
-		$itemData = $this->newBuilderWithSomeId( [ ItemData::FIELD_STATEMENTS ] )
+		$itemParts = $this->newBuilderWithSomeId( [ ItemParts::FIELD_STATEMENTS ] )
 			->setStatements( $statements )
 			->build();
-		$this->assertSame( $statements, $itemData->getStatements() );
+		$this->assertSame( $statements, $itemParts->getStatements() );
 	}
 
 	public function testSiteLinks(): void {
 		$siteLinks = new SiteLinks();
-		$itemData = $this->newBuilderWithSomeId( [ ItemData::FIELD_SITELINKS ] )
+		$itemParts = $this->newBuilderWithSomeId( [ ItemParts::FIELD_SITELINKS ] )
 			->setSiteLinks( $siteLinks )
 			->build();
-		$this->assertSame( $siteLinks, $itemData->getSiteLinks() );
+		$this->assertSame( $siteLinks, $itemParts->getSiteLinks() );
 	}
 
 	public function testAll(): void {
@@ -80,7 +80,7 @@ class ItemDataBuilderTest extends TestCase {
 		$statements = new StatementList();
 		$siteLinks = new SiteLinks();
 
-		$itemData = $this->newBuilderWithSomeId( ItemData::VALID_FIELDS )
+		$itemParts = $this->newBuilderWithSomeId( ItemParts::VALID_FIELDS )
 			->setLabels( $labels )
 			->setDescriptions( $descriptions )
 			->setAliases( $aliases )
@@ -88,11 +88,11 @@ class ItemDataBuilderTest extends TestCase {
 			->setSiteLinks( $siteLinks )
 			->build();
 
-		$this->assertSame( $labels, $itemData->getLabels() );
-		$this->assertSame( $descriptions, $itemData->getDescriptions() );
-		$this->assertSame( $aliases, $itemData->getAliases() );
-		$this->assertSame( $statements, $itemData->getStatements() );
-		$this->assertSame( $siteLinks, $itemData->getSiteLinks() );
+		$this->assertSame( $labels, $itemParts->getLabels() );
+		$this->assertSame( $descriptions, $itemParts->getDescriptions() );
+		$this->assertSame( $aliases, $itemParts->getAliases() );
+		$this->assertSame( $statements, $itemParts->getStatements() );
+		$this->assertSame( $siteLinks, $itemParts->getSiteLinks() );
 	}
 
 	/**
@@ -104,43 +104,43 @@ class ItemDataBuilderTest extends TestCase {
 		$builder = $this->newBuilderWithSomeId( [] );
 
 		$this->expectException( LogicException::class );
-		$this->expectExceptionMessage( "cannot set unrequested ItemData field '$field'" );
+		$this->expectExceptionMessage( 'cannot set unrequested ' . ItemParts::class . " field '$field'" );
 		$builder->$setterFunction( $param )->build();
 	}
 
 	public function nonRequiredFields(): Generator {
 		yield 'labels' => [
-			ItemData::FIELD_LABELS,
+			ItemParts::FIELD_LABELS,
 			'setLabels',
 			new Labels( new Label( 'en', 'potato' ) ),
 		];
 
 		yield 'descriptions' => [
-			ItemData::FIELD_DESCRIPTIONS,
+			ItemParts::FIELD_DESCRIPTIONS,
 			'setDescriptions',
 			new Descriptions( new Description( 'en', 'root vegetable' ) ),
 		];
 
 		yield 'aliases' => [
-			ItemData::FIELD_ALIASES,
+			ItemParts::FIELD_ALIASES,
 			'setAliases',
 			new Aliases(),
 		];
 
 		yield 'statements' => [
-			ItemData::FIELD_STATEMENTS,
+			ItemParts::FIELD_STATEMENTS,
 			'setStatements',
 			new StatementList(),
 		];
 
 		yield 'sitelinks' => [
-			ItemData::FIELD_SITELINKS,
+			ItemParts::FIELD_SITELINKS,
 			'setSiteLinks',
 			new SiteLinks(),
 		];
 	}
 
-	private function newBuilderWithSomeId( array $requestedFields ): ItemDataBuilder {
-		return ( new ItemDataBuilder( new ItemId( 'Q666' ), $requestedFields ) );
+	private function newBuilderWithSomeId( array $requestedFields ): ItemPartsBuilder {
+		return ( new ItemPartsBuilder( new ItemId( 'Q666' ), $requestedFields ) );
 	}
 }

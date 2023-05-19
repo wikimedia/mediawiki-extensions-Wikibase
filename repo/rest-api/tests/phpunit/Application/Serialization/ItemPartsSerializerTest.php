@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
-use Wikibase\Repo\RestApi\Application\Serialization\ItemDataSerializer;
+use Wikibase\Repo\RestApi\Application\Serialization\ItemPartsSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SiteLinksSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementListSerializer;
@@ -18,21 +18,21 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
-use Wikibase\Repo\RestApi\Domain\ReadModel\ItemData;
-use Wikibase\Repo\RestApi\Domain\ReadModel\ItemDataBuilder;
+use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
+use Wikibase\Repo\RestApi\Domain\ReadModel\ItemPartsBuilder;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\SiteLinks;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\Serialization\ItemDataSerializer
+ * @covers \Wikibase\Repo\RestApi\Application\Serialization\ItemPartsSerializer
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class ItemDataSerializerTest extends TestCase {
+class ItemPartsSerializerTest extends TestCase {
 
 	/**
 	 * @var MockObject|LabelsSerializer
@@ -68,18 +68,18 @@ class ItemDataSerializerTest extends TestCase {
 	}
 
 	public function testSerializeId(): void {
-		$itemData = ( new ItemDataBuilder( new ItemId( 'Q123' ), [] ) )
+		$itemParts = ( new ItemPartsBuilder( new ItemId( 'Q123' ), [] ) )
 			->build();
 
-		$serialization = $this->newSerializer()->serialize( $itemData );
+		$serialization = $this->newSerializer()->serialize( $itemParts );
 
-		$this->assertSame( $serialization['id'], $itemData->getId()->getSerialization() );
+		$this->assertSame( $serialization['id'], $itemParts->getId()->getSerialization() );
 	}
 
 	public function testSerializeType(): void {
-		$itemData = $this->newItemDataBuilderWithSomeId( [ ItemData::FIELD_TYPE ] )->build();
+		$itemParts = $this->newItemPartsBuilderWithSomeId( [ ItemParts::FIELD_TYPE ] )->build();
 
-		$serialization = $this->newSerializer()->serialize( $itemData );
+		$serialization = $this->newSerializer()->serialize( $itemParts );
 
 		$this->assertSame( Item::ENTITY_TYPE, $serialization['type'] );
 	}
@@ -95,14 +95,14 @@ class ItemDataSerializerTest extends TestCase {
 			->method( 'serialize' )
 			->willReturn( $expectedSerialization );
 
-		$itemData = $this->newItemDataBuilderWithSomeId( [ ItemData::FIELD_LABELS ] )
+		$itemParts = $this->newItemPartsBuilderWithSomeId( [ ItemParts::FIELD_LABELS ] )
 			->setLabels( new Labels(
 				new Label( 'en', $enLabel ),
 				new Label( 'ko', $koLabel ),
 			) )
 			->build();
 
-		$serialization = $this->newSerializer()->serialize( $itemData );
+		$serialization = $this->newSerializer()->serialize( $itemParts );
 
 		$this->assertSame( $expectedSerialization, $serialization['labels'] );
 	}
@@ -119,14 +119,14 @@ class ItemDataSerializerTest extends TestCase {
 			->method( 'serialize' )
 			->willReturn( $expectedSerialization );
 
-		$itemData = $this->newItemDataBuilderWithSomeId( [ ItemData::FIELD_DESCRIPTIONS ] )
+		$itemParts = $this->newItemPartsBuilderWithSomeId( [ ItemParts::FIELD_DESCRIPTIONS ] )
 			->setDescriptions( new Descriptions(
 				new Description( 'en', $enDescription ),
 				new Description( 'de', $deDescription ),
 			) )
 			->build();
 
-		$serialization = $this->newSerializer()->serialize( $itemData );
+		$serialization = $this->newSerializer()->serialize( $itemParts );
 
 		$this->assertSame( $expectedSerialization, $serialization['descriptions'] );
 	}
@@ -134,7 +134,7 @@ class ItemDataSerializerTest extends TestCase {
 	public function testSerializeAliases(): void {
 		$enAliases = [ 'spud', 'tater' ];
 		$deAliases = [ 'Erdapfel' ];
-		$itemData = $this->newItemDataBuilderWithSomeId( [ ItemData::FIELD_ALIASES ] )
+		$itemParts = $this->newItemPartsBuilderWithSomeId( [ ItemParts::FIELD_ALIASES ] )
 			->setAliases( new Aliases(
 				new AliasesInLanguage( 'en', $enAliases ),
 				new AliasesInLanguage( 'de', $deAliases ),
@@ -145,7 +145,7 @@ class ItemDataSerializerTest extends TestCase {
 		$this->aliasesSerializer = $this->createStub( AliasesSerializer::class );
 		$this->aliasesSerializer->method( 'serialize' )->willReturn( $expectedAliasesSerialization );
 
-		$serialization = $this->newSerializer()->serialize( $itemData );
+		$serialization = $this->newSerializer()->serialize( $itemParts );
 
 		$this->assertSame( $expectedAliasesSerialization, $serialization['aliases'] );
 	}
@@ -154,7 +154,7 @@ class ItemDataSerializerTest extends TestCase {
 		$statements = $this->createStub( StatementList::class );
 		$expectedSerialization = new ArrayObject( [ 'some' => 'serialization' ] );
 
-		$itemData = $this->newItemDataBuilderWithSomeId( [ ItemData::FIELD_STATEMENTS ] )
+		$itemParts = $this->newItemPartsBuilderWithSomeId( [ ItemParts::FIELD_STATEMENTS ] )
 			->setStatements( $statements )
 			->build();
 
@@ -164,7 +164,7 @@ class ItemDataSerializerTest extends TestCase {
 			->with( $statements )
 			->willReturn( $expectedSerialization );
 
-		$serialization = $this->newSerializer()->serialize( $itemData );
+		$serialization = $this->newSerializer()->serialize( $itemParts );
 
 		$this->assertSame( $expectedSerialization, $serialization['statements'] );
 	}
@@ -173,7 +173,7 @@ class ItemDataSerializerTest extends TestCase {
 		$siteLinks = $this->createStub( SiteLinks::class );
 		$expectedSerialization = new ArrayObject( [ 'some' => 'serialization' ] );
 
-		$itemData = $this->newItemDataBuilderWithSomeId( [ ItemData::FIELD_SITELINKS ] )
+		$itemParts = $this->newItemPartsBuilderWithSomeId( [ ItemParts::FIELD_SITELINKS ] )
 			->setSiteLinks( $siteLinks )
 			->build();
 
@@ -183,33 +183,33 @@ class ItemDataSerializerTest extends TestCase {
 			->with( $siteLinks )
 			->willReturn( $expectedSerialization );
 
-		$serialization = $this->newSerializer()->serialize( $itemData );
+		$serialization = $this->newSerializer()->serialize( $itemParts );
 
 		$this->assertSame( $expectedSerialization, $serialization['sitelinks'] );
 	}
 
 	/**
-	 * @dataProvider itemDataFieldsProvider
+	 * @dataProvider itemPartsFieldsProvider
 	 */
-	public function testSkipsFieldsThatAreNotSet( ItemData $itemData, array $fields ): void {
-		$serialization = $this->newSerializer()->serialize( $itemData );
+	public function testSkipsFieldsThatAreNotSet( ItemParts $itemParts, array $fields ): void {
+		$serialization = $this->newSerializer()->serialize( $itemParts );
 		$serializationFields = array_keys( $serialization );
 
 		$this->assertEqualsCanonicalizing( $fields, $serializationFields );
 	}
 
-	public function itemDataFieldsProvider(): Generator {
+	public function itemPartsFieldsProvider(): Generator {
 		yield [
-			$this->newItemDataBuilderWithSomeId( [] )->build(),
+			$this->newItemPartsBuilderWithSomeId( [] )->build(),
 			[ 'id' ],
 		];
 		yield [
-			$this->newItemDataBuilderWithSomeId( [ ItemData::FIELD_TYPE ] )->build(),
+			$this->newItemPartsBuilderWithSomeId( [ ItemParts::FIELD_TYPE ] )->build(),
 			[ 'id', 'type' ],
 		];
 		yield [
-			$this->newItemDataBuilderWithSomeId(
-				[ ItemData::FIELD_LABELS, ItemData::FIELD_DESCRIPTIONS, ItemData::FIELD_ALIASES ]
+			$this->newItemPartsBuilderWithSomeId(
+				[ ItemParts::FIELD_LABELS, ItemParts::FIELD_DESCRIPTIONS, ItemParts::FIELD_ALIASES ]
 			)
 				->setLabels( new Labels() )
 				->setDescriptions( new Descriptions() )
@@ -218,13 +218,13 @@ class ItemDataSerializerTest extends TestCase {
 			[ 'id', 'labels', 'descriptions', 'aliases' ],
 		];
 		yield [
-			$this->newItemDataBuilderWithSomeId( [ ItemData::FIELD_STATEMENTS ] )
+			$this->newItemPartsBuilderWithSomeId( [ ItemParts::FIELD_STATEMENTS ] )
 				->setStatements( new StatementList() )
 				->build(),
 			[ 'id', 'statements' ],
 		];
 		yield [
-			$this->newItemDataBuilderWithSomeId( ItemData::VALID_FIELDS )
+			$this->newItemPartsBuilderWithSomeId( ItemParts::VALID_FIELDS )
 				->setLabels( new Labels() )
 				->setDescriptions( new Descriptions() )
 				->setAliases( new Aliases() )
@@ -235,8 +235,8 @@ class ItemDataSerializerTest extends TestCase {
 		];
 	}
 
-	private function newSerializer(): ItemDataSerializer {
-		return new ItemDataSerializer(
+	private function newSerializer(): ItemPartsSerializer {
+		return new ItemPartsSerializer(
 			$this->labelsSerializer,
 			$this->descriptionsSerializer,
 			$this->aliasesSerializer,
@@ -245,8 +245,8 @@ class ItemDataSerializerTest extends TestCase {
 		);
 	}
 
-	private function newItemDataBuilderWithSomeId( array $requestedFields ): ItemDataBuilder {
-		return new ItemDataBuilder( new ItemId( 'Q666' ), $requestedFields );
+	private function newItemPartsBuilderWithSomeId( array $requestedFields ): ItemPartsBuilder {
+		return new ItemPartsBuilder( new ItemId( 'Q666' ), $requestedFields );
 	}
 
 }

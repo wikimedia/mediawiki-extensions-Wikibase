@@ -4,7 +4,7 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\GetItem;
 
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
-use Wikibase\Repo\RestApi\Domain\ReadModel\ItemData;
+use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
 
 /**
  * @license GPL-2.0-or-later
@@ -40,7 +40,7 @@ class GetItemValidator {
 	 */
 	private function validateFields( array $fields ): void {
 		foreach ( $fields as $field ) {
-			if ( !in_array( $field, ItemData::VALID_FIELDS ) ) {
+			if ( !in_array( $field, ItemParts::VALID_FIELDS ) ) {
 				throw new UseCaseError(
 					UseCaseError::INVALID_FIELD,
 					'Not a valid field: ' . $field

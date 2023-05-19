@@ -2,12 +2,12 @@
 
 namespace Wikibase\Repo\RestApi\Application\Serialization;
 
-use Wikibase\Repo\RestApi\Domain\ReadModel\ItemData;
+use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
 
 /**
  * @license GPL-2.0-or-later
  */
-class ItemDataSerializer {
+class ItemPartsSerializer {
 
 	private LabelsSerializer $labelsSerializer;
 	private DescriptionsSerializer $descriptionsSerializer;
@@ -29,32 +29,32 @@ class ItemDataSerializer {
 		$this->siteLinksSerializer = $siteLinksSerializer;
 	}
 
-	public function serialize( ItemData $itemData ): array {
+	public function serialize( ItemParts $itemParts ): array {
 		$fieldSerializers = [
-			ItemData::FIELD_TYPE => fn() => ItemData::TYPE,
+			ItemParts::FIELD_TYPE => fn() => ItemParts::TYPE,
 			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-			ItemData::FIELD_LABELS => fn() => $this->labelsSerializer->serialize( $itemData->getLabels() ),
+			ItemParts::FIELD_LABELS => fn() => $this->labelsSerializer->serialize( $itemParts->getLabels() ),
 			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-			ItemData::FIELD_DESCRIPTIONS => fn() => $this->descriptionsSerializer->serialize( $itemData->getDescriptions() ),
+			ItemParts::FIELD_DESCRIPTIONS => fn() => $this->descriptionsSerializer->serialize( $itemParts->getDescriptions() ),
 			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-			ItemData::FIELD_ALIASES => fn() => $this->aliasesSerializer->serialize( $itemData->getAliases() ),
+			ItemParts::FIELD_ALIASES => fn() => $this->aliasesSerializer->serialize( $itemParts->getAliases() ),
 			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-			ItemData::FIELD_STATEMENTS => fn() => $this->statementsSerializer->serialize( $itemData->getStatements() ),
+			ItemParts::FIELD_STATEMENTS => fn() => $this->statementsSerializer->serialize( $itemParts->getStatements() ),
 			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-			ItemData::FIELD_SITELINKS => fn() => $this->siteLinksSerializer->serialize( $itemData->getSiteLinks() ),
+			ItemParts::FIELD_SITELINKS => fn() => $this->siteLinksSerializer->serialize( $itemParts->getSiteLinks() ),
 		];
 
-		// serialize all $itemData fields, filtered by isRequested()
+		// serialize all fields, filtered by isRequested()
 		$serialization = array_map(
 			fn( callable $serializeField ) => $serializeField(),
 			array_filter(
 				$fieldSerializers,
-				fn ( string $fieldName ) => $itemData->isRequested( $fieldName ),
+				fn ( string $fieldName ) => $itemParts->isRequested( $fieldName ),
 				ARRAY_FILTER_USE_KEY
 			)
 		);
 
-		$serialization['id'] = $itemData->getId()->getSerialization();
+		$serialization['id'] = $itemParts->getId()->getSerialization();
 
 		return $serialization;
 	}

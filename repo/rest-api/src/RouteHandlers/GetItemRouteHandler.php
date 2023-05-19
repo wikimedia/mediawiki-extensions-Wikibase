@@ -8,13 +8,13 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Rest\ResponseInterface;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
-use Wikibase\Repo\RestApi\Application\Serialization\ItemDataSerializer;
+use Wikibase\Repo\RestApi\Application\Serialization\ItemPartsSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItemRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItemResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\ReadModel\ItemData;
+use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
@@ -30,7 +30,7 @@ class GetItemRouteHandler extends SimpleHandler {
 
 	private GetItem $getItem;
 
-	private ItemDataSerializer $itemDataSerializer;
+	private ItemPartsSerializer $itemPartsSerializer;
 
 	private ResponseFactory $responseFactory;
 
@@ -38,12 +38,12 @@ class GetItemRouteHandler extends SimpleHandler {
 
 	public function __construct(
 		GetItem $getItem,
-		ItemDataSerializer $itemDataSerializer,
+		ItemPartsSerializer $itemPartsSerializer,
 		ResponseFactory $responseFactory,
 		MiddlewareHandler $middlewareHandler
 	) {
 		$this->getItem = $getItem;
-		$this->itemDataSerializer = $itemDataSerializer;
+		$this->itemPartsSerializer = $itemPartsSerializer;
 		$this->responseFactory = $responseFactory;
 		$this->middlewareHandler = $middlewareHandler;
 	}
@@ -52,7 +52,7 @@ class GetItemRouteHandler extends SimpleHandler {
 		$responseFactory = new ResponseFactory();
 		return new self(
 			WbRestApi::getGetItem(),
-			WbRestApi::getSerializerFactory()->newItemDataSerializer(),
+			WbRestApi::getSerializerFactory()->newItemPartsSerializer(),
 			$responseFactory,
 			new MiddlewareHandler( [
 				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
@@ -92,7 +92,7 @@ class GetItemRouteHandler extends SimpleHandler {
 		$httpResponse->setHeader( 'Last-Modified', wfTimestamp( TS_RFC2822, $useCaseResponse->getLastModified() ) );
 		$this->setEtagFromRevId( $httpResponse, $useCaseResponse->getRevisionId() );
 		$httpResponse->setBody( new StringStream(
-			json_encode( $this->itemDataSerializer->serialize( $useCaseResponse->getItemData() ), JSON_UNESCAPED_SLASHES )
+			json_encode( $this->itemPartsSerializer->serialize( $useCaseResponse->getItemParts() ), JSON_UNESCAPED_SLASHES )
 		) );
 
 		return $httpResponse;
@@ -128,7 +128,7 @@ class GetItemRouteHandler extends SimpleHandler {
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => false,
 				ParamValidator::PARAM_ISMULTI => false,
-				ParamValidator::PARAM_DEFAULT => implode( ',', ItemData::VALID_FIELDS ),
+				ParamValidator::PARAM_DEFAULT => implode( ',', ItemParts::VALID_FIELDS ),
 			],
 		];
 	}
