@@ -51,7 +51,7 @@ class TermChangeOpSerializationValidatorTest extends \PHPUnit\Framework\TestCase
 		$this->assertNull( $exception );
 	}
 
-	public function invalidTermSerializationProvider() {
+	public static function invalidTermSerializationProvider() {
 		return [
 			'no language key' => [ [], 'en', 'missing-language' ],
 			'language not a string (bool)' => [ [ 'language' => false ], 'en', 'not-recognized-string' ],
@@ -70,7 +70,7 @@ class TermChangeOpSerializationValidatorTest extends \PHPUnit\Framework\TestCase
 		];
 	}
 
-	public function validTermSerializationProvider() {
+	public static function validTermSerializationProvider() {
 		return [
 			'normal language code' => [
 				[ 'language' => 'en', 'value' => 'foo' ],

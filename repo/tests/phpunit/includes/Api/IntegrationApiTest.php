@@ -42,7 +42,7 @@ class IntegrationApiTest extends ApiTestCase {
 		MediaWikiServices::getInstance()->resetServiceForTesting( 'SiteLookup' );
 	}
 
-	public function apiRequestProvider() {
+	public static function apiRequestProvider() {
 		return [
 			'wbgetentities-id' => [
 				[

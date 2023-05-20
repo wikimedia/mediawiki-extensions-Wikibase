@@ -25,7 +25,7 @@ class NonExistingEntityIdHtmlBrokenLinkFormatterTest extends MediaWikiIntegratio
 		$this->setUserLang( 'qqx' );
 	}
 
-	public function provideTestFormatEntityIdBrokenLink() {
+	public static function provideTestFormatEntityIdBrokenLink() {
 		yield [
 			new ItemId( 'Q1' ),
 			'<a title="(red-link-title: someTitle)" href="http://someurl.com" class="new">Q1</a>'

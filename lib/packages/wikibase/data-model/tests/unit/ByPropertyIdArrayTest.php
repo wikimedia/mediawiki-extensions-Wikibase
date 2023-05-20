@@ -75,7 +75,7 @@ class ByPropertyIdArrayTest extends \PHPUnit\Framework\TestCase {
 		return $method;
 	}
 
-	public function listProvider() {
+	public static function listProvider() {
 		$lists = [];
 
 		$snaks = [
@@ -107,7 +107,7 @@ class ByPropertyIdArrayTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @return Statement[]
 	 */
-	protected function statementsProvider() {
+	protected static function statementsProvider() {
 		$snaks = [
 			new PropertyNoValueSnak( new NumericPropertyId( 'P1' ) ),
 			new PropertySomeValueSnak( new NumericPropertyId( 'P1' ) ),

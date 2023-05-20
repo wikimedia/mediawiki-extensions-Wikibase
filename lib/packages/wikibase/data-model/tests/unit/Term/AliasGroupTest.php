@@ -104,7 +104,7 @@ class AliasGroupTest extends \PHPUnit\Framework\TestCase {
 		new AliasGroup( $languageCode, [ 'foo' ] );
 	}
 
-	public function invalidLanguageCodeProvider() {
+	public static function invalidLanguageCodeProvider() {
 		return [
 			[ null ],
 			[ 21 ],

@@ -39,7 +39,7 @@ class SnaksFinderTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $snakList );
 	}
 
-	public function findSnaksProvider() {
+	public static function findSnaksProvider() {
 		$propertyId = new NumericPropertyId( 'P1337' );
 
 		$statement1 = new Statement( new PropertyValueSnak(

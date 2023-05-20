@@ -22,7 +22,7 @@ use Wikibase\Lib\Formatters\CommonsLinkFormatter;
  */
 class CommonsLinkFormatterTest extends MediaWikiIntegrationTestCase {
 
-	public function commonsLinkFormatProvider() {
+	public static function commonsLinkFormatProvider() {
 		return [
 			[
 				new StringValue( 'example.jpg' ), // Lower-case file name

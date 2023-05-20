@@ -22,7 +22,7 @@ use Wikibase\Lib\Tests\MockRepository;
  */
 class RevisionBasedEntityLookupTest extends \PHPUnit\Framework\TestCase {
 
-	public function getEntityProvider() {
+	public static function getEntityProvider() {
 		$q10 = new ItemId( 'Q10' );
 		$q11 = new ItemId( 'Q11' );
 

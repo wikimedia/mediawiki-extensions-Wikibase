@@ -19,7 +19,7 @@ use Wikibase\DataModel\Term\TermList;
  */
 class TermListPatcherTest extends TestCase {
 
-	public function providePatchTermList() {
+	public static function providePatchTermList() {
 		return [
 			'add a term' => [
 				new TermList(),

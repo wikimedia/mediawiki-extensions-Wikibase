@@ -18,7 +18,7 @@ use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
  */
 class EntityChangeOpProviderTest extends \PHPUnit\Framework\TestCase {
 
-	public function provideInvalidDeserializerInstantiators() {
+	public static function provideInvalidDeserializerInstantiators() {
 		return [
 			'not a callback as a value' => [ [ 'entity-type' => 'foo' ] ],
 			'not a string as a key' => [ [

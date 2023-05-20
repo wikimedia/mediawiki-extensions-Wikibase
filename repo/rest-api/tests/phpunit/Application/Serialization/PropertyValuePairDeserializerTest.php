@@ -123,7 +123,7 @@ class PropertyValuePairDeserializerTest extends TestCase {
 		}
 	}
 
-	public function invalidSerializationProvider(): Generator {
+	public static function invalidSerializationProvider(): Generator {
 		yield 'invalid value field type' => [
 			new InvalidFieldException( 'value', 42 ),
 			[
@@ -239,7 +239,7 @@ class PropertyValuePairDeserializerTest extends TestCase {
 		}
 	}
 
-	public function valueDeserializerExceptionProvider(): Generator {
+	public static function valueDeserializerExceptionProvider(): Generator {
 		yield 'invalid field' => [
 			[
 				'value' => [ 'type' => 'value', 'content' => 42 ],

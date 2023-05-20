@@ -34,7 +34,7 @@ class SourceAndTypeDispatchingUrlLookupTest extends TestCase {
 		$this->entitySourceLookup = $this->createStub( EntitySourceLookup::class );
 	}
 
-	public function provideGetUrlMethods(): array {
+	public static function provideGetUrlMethods(): array {
 		return [
 			[ 'getFullUrl' ],
 			[ 'getLinkUrl' ],

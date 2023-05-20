@@ -45,7 +45,7 @@ class GlobeCoordinateDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
 		$this->assertMatchesRegularExpression( $pattern, $html );
 	}
 
-	public function quantityFormatProvider() {
+	public static function quantityFormatProvider() {
 		$options = new FormatterOptions( [
 			ValueFormatter::OPT_LANG => 'en',
 		] );

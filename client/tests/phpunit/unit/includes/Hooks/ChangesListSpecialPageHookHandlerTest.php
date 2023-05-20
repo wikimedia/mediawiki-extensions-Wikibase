@@ -181,7 +181,7 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 			$conds, $query_options, $join_conds, new FormOptions() );
 	}
 
-	public function addWikibaseConditionsIfFilterUnavailableProvider() {
+	public static function addWikibaseConditionsIfFilterUnavailableProvider() {
 		return [
 			[
 				0,
@@ -212,7 +212,7 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 		);
 	}
 
-	public function getOptionNameProvider() {
+	public static function getOptionNameProvider() {
 		return [
 			[
 				'wlshowwikibase',
@@ -272,7 +272,7 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 		);
 	}
 
-	public function hasWikibaseChangesEnabledWhenUsingEnhancedChangesProvider() {
+	public static function hasWikibaseChangesEnabledWhenUsingEnhancedChangesProvider() {
 		return [
 			[
 				[],
@@ -336,7 +336,7 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 		);
 	}
 
-	public function hasWikibaseChangesEnabled_withoutShowWikibaseEditsByDefaultPreferenceProvider() {
+	public static function hasWikibaseChangesEnabled_withoutShowWikibaseEditsByDefaultPreferenceProvider() {
 		return [
 			[
 				[],
@@ -406,7 +406,7 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 		);
 	}
 
-	public function hasWikibaseChangesEnabled_withShowWikibaseEditsByDefaultPreferenceProvider() {
+	public static function hasWikibaseChangesEnabled_withShowWikibaseEditsByDefaultPreferenceProvider() {
 		return [
 			[
 				[],
@@ -463,7 +463,7 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 		);
 	}
 
-	public function hasWikibaseChangesEnabledWhenExternalRecentChangesDisabledProvider() {
+	public static function hasWikibaseChangesEnabledWhenExternalRecentChangesDisabledProvider() {
 		return [
 			[ 'Watchlist' ],
 			[ 'Recentchanges' ],

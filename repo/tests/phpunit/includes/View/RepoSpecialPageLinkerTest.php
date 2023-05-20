@@ -49,7 +49,7 @@ class RepoSpecialPageLinkerTest extends MediaWikiLangTestCase {
 		$this->assertMatchesRegularExpression( $expectedMatch, $link );
 	}
 
-	public function getLinkProvider() {
+	public static function getLinkProvider() {
 		return [
 			[ 'SetLabel', [], '/Special:SetLabel\/?$/' ],
 			[ 'SetLabel', [ 'en' ], '/Special:SetLabel\/en\/?$/' ],

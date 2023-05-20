@@ -47,7 +47,7 @@ class DataTypeStatementFilterTest extends TestCase {
 		$this->assertSame( $expected, $filter->statementMatches( $statement ) );
 	}
 
-	public function statementProvider() {
+	public static function statementProvider() {
 		$identifier = new Statement( new PropertyNoValueSnak( 1 ) );
 		$string = new Statement( new PropertyNoValueSnak( 2 ) );
 		$deleted = new Statement( new PropertyNoValueSnak( 3 ) );

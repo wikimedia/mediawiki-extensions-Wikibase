@@ -166,7 +166,7 @@ class RepoHooksTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	public function revisionInfoProvider() {
+	public static function revisionInfoProvider() {
 		return [
 			'empty_allowimport' => [
 				[],
@@ -217,7 +217,7 @@ class RepoHooksTest extends MediaWikiIntegrationTestCase {
 		$this->assertTrue( true ); // make PHPUnit happy
 	}
 
-	public function importProvider() {
+	public static function importProvider() {
 		return [
 			'wikitext' => [ <<<XML
 <mediawiki>
@@ -384,7 +384,7 @@ XML
 		);
 	}
 
-	public function provideOnContentModelCanBeUsedOn() {
+	public static function provideOnContentModelCanBeUsedOn() {
 		// true
 		yield 'Wikitext on a talk page' => [ CONTENT_MODEL_WIKITEXT, new TitleValue( NS_TALK, 'Foo' ), true ];
 		yield 'Item on an item' => [ ItemContent::CONTENT_MODEL_ID, new TitleValue( WB_NS_ITEM, 'Q123' ), true ];

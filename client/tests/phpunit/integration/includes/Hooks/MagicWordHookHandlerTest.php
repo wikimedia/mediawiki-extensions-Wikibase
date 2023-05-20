@@ -46,7 +46,7 @@ class MagicWordHookHandlerTest extends MediaWikiIntegrationTestCase {
 	// is not in ServiceWiring (yet), so these are real messsages,
 	// except non-existent-message to test that feature.
 
-	public function provideGetRepoName() {
+	public static function provideGetRepoName() {
 		return [
 			[
 				'Client for the Wikibase extension',

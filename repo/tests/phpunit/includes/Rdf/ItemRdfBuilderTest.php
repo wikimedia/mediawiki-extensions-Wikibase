@@ -85,7 +85,7 @@ class ItemRdfBuilderTest extends TestCase {
 		$builder->addEntity( $item );
 	}
 
-	public function provideAddEntity(): array {
+	public static function provideAddEntity(): array {
 		return [
 			"No flavors selected" => [ 0, new Item() ],
 			"Just sitelinks requested" => [ RdfProducer::PRODUCE_SITELINKS, new Item(), true ],

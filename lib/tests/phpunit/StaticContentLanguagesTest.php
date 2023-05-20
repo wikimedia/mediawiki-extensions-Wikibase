@@ -26,7 +26,7 @@ class StaticContentLanguagesTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $expected, $result );
 	}
 
-	public function provideTestGetLanguages() {
+	public static function provideTestGetLanguages() {
 		return [
 			[ [] ],
 			[ [ 'one' ] ],
@@ -44,7 +44,7 @@ class StaticContentLanguagesTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $expected, $result );
 	}
 
-	public function provideTestHasLanguage() {
+	public static function provideTestHasLanguage() {
 		return [
 			[ [], 'one', false ],
 			[ [ 'one' ], 'two', false ],

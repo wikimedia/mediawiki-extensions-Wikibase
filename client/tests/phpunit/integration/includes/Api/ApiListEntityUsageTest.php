@@ -139,7 +139,7 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 		return $pageSet;
 	}
 
-	public function entityUsageProvider(): iterable {
+	public static function entityUsageProvider(): iterable {
 		$cases = [
 			'only Q3' => [
 				[

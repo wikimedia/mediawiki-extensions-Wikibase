@@ -108,7 +108,7 @@ class ApiEntitySearchHelperTest extends TestCase {
 		$this->assertEquals( $expectedResultsEntityIds, array_keys( $results ) );
 	}
 
-	public function filteringResultsResponseProvider() {
+	public static function filteringResultsResponseProvider() {
 
 		$file = 'api-entity-search-helper-test-data-filteredResult.json';
 		$defaultParams = [
@@ -262,7 +262,7 @@ class ApiEntitySearchHelperTest extends TestCase {
 	/**
 	 * @return array [ searchlang, searchParams[], responseDataFile, responseStatusCode ]
 	 */
-	public function invalidParamsAndUnexpectedResponseProvider() {
+	public static function invalidParamsAndUnexpectedResponseProvider() {
 		return [
 			'errorResponse' => [
 				'xyz',
@@ -294,7 +294,7 @@ class ApiEntitySearchHelperTest extends TestCase {
 	/**
 	 * @return array [ searchlang, searchParams[], responseDataFile, expectedResultEntityIds[] ]
 	 */
-	public function paramsAndExpectedResponseProvider() {
+	public static function paramsAndExpectedResponseProvider() {
 		return [
 			'emptyResponse' => [
 				'en',

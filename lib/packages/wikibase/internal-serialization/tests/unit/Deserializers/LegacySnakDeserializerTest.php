@@ -37,7 +37,7 @@ class LegacySnakDeserializerTest extends \PHPUnit\Framework\TestCase {
 		$this->deserializer = new LegacySnakDeserializer( $dataValueDeserializer );
 	}
 
-	public function invalidSerializationProvider() {
+	public static function invalidSerializationProvider() {
 		return [
 			[ null ],
 			[ [] ],

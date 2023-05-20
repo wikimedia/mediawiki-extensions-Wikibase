@@ -63,7 +63,7 @@ class SetItemDescriptionValidatorTest extends TestCase {
 		}
 	}
 
-	public function provideInvalidRequest(): Generator {
+	public static function provideInvalidRequest(): Generator {
 		yield 'invalid item id' => [
 			[ '$itemId' => 'X123' ],
 			UseCaseError::INVALID_ITEM_ID,
@@ -112,7 +112,7 @@ class SetItemDescriptionValidatorTest extends TestCase {
 		}
 	}
 
-	public function provideInvalidDescription(): Generator {
+	public static function provideInvalidDescription(): Generator {
 		yield 'description empty' => [
 			new ValidationError( ItemDescriptionValidator::CODE_EMPTY ),
 			UseCaseError::DESCRIPTION_EMPTY,

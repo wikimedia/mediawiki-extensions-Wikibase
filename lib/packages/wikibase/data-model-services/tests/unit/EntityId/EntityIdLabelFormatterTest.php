@@ -24,7 +24,7 @@ class EntityIdLabelFormatterTest extends TestCase {
 	/**
 	 * @return array
 	 */
-	public function validProvider() {
+	public static function validProvider() {
 		$argLists = [];
 
 		$argLists[] = [ new ItemId( 'Q42' ), 'es', 'foo' ];

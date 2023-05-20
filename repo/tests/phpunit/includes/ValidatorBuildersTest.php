@@ -130,7 +130,7 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function commonsFileNamesWithIllegalCharactersProvider() {
+	public static function commonsFileNamesWithIllegalCharactersProvider() {
 		yield [ 'Illegal character: open square bracket' => 'a[a.jpg' ];
 		yield [ 'Illegal character: close square bracket' => 'a]a.jpg' ];
 		yield [ 'Illegal character: open curly bracket' => 'a{a.jpg' ];
@@ -169,7 +169,7 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 		$this->assertFalse( $validator->validate( new StringValue( $fileName ) )->isValid() );
 	}
 
-	public function invalidCommonsFileNamesProvider() {
+	public static function invalidCommonsFileNamesProvider() {
 		return [
 			'Should not be empty' => [ '' ],
 			'Too long' => [ str_repeat( 'x', 237 ) . '.jpg' ],
@@ -193,7 +193,7 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 		$this->fail( $errors[0]->getText() );
 	}
 
-	public function provideGeoShapeValidation() {
+	public static function provideGeoShapeValidation() {
 		return [
 			'Should not be empty' => [ '', false ],
 			'Too long' => [ 'Data:' . str_repeat( 'x', 232 ) . '.map', false ],
@@ -228,7 +228,7 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 		$this->assertValidation( $expected, $validators, $value );
 	}
 
-	public function provideTabularDataValidation() {
+	public static function provideTabularDataValidation() {
 		return [
 			'Should not be empty' => [ '', false ],
 			'Too long' => [ 'Data:' . str_repeat( 'x', 232 ) . '.tab', false ],
@@ -263,7 +263,7 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 		$this->assertValidation( $expected, $validators, $value );
 	}
 
-	public function provideGlobeCoordinateValueValidation() {
+	public static function provideGlobeCoordinateValueValidation() {
 		$wikidataUri = 'http://www.wikidata.org/entity/';
 
 		return [
@@ -297,7 +297,7 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 		$this->assertValidation( $expected, $validators, $value );
 	}
 
-	public function provideStringValueValidation() {
+	public static function provideStringValueValidation() {
 		return [
 			'Space' => [ 'x x', true ],
 			'Unicode support' => [ 'Äöü', true ],
@@ -335,7 +335,7 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 		$this->assertValidation( $expected, $validators, $value );
 	}
 
-	public function provideTimeValueValidation() {
+	public static function provideTimeValueValidation() {
 		$wikidataUri = 'http://www.wikidata.org/entity/';
 
 		return [
@@ -434,7 +434,7 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 		$this->assertValidation( $expected, $validators, $value );
 	}
 
-	public function provideUrlValidation() {
+	public static function provideUrlValidation() {
 		return [
 			'Simple HTTP URL' => [ 'http://acme.com', true ],
 			'Simple HTTPS URL' => [ 'https://acme.com', true ],
@@ -464,7 +464,7 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 		$this->assertValidation( $expected, $validators, $value );
 	}
 
-	public function provideDataTypeValidation() {
+	public static function provideDataTypeValidation() {
 		$wikidataUri = 'http://www.wikidata.org/entity/';
 
 		$cases = [

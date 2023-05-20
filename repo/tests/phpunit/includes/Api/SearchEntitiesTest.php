@@ -167,7 +167,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 		$this->callApiModule( $params );
 	}
 
-	public function provideTestSearchEntities() {
+	public static function provideTestSearchEntities() {
 		$q111Match = new TermSearchResult(
 			new Term( 'qid', 'Q111' ),
 			'entityId',

@@ -26,7 +26,7 @@ class DiffOpValueFormatterTest extends \PHPUnit\Framework\TestCase {
 		$this->assertMatchesRegularExpression( $pattern, $html );
 	}
 
-	public function provideGenerateHtml() {
+	public static function provideGenerateHtml() {
 		return [
 			[ 'null', null, null, '@<tr>.*</tr>@' ],
 			[ 'empty strings', '', '', '@<tr>.*</tr>@' ],

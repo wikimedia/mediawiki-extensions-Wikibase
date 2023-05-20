@@ -38,7 +38,7 @@ class GlobeCoordinateRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$this->helper = new NTriplesRdfTestHelper();
 	}
 
-	public function provideAddValue() {
+	public static function provideAddValue() {
 		$value = new GlobeCoordinateValue(
 			new LatLongValue( 12.25, -45.5 ),
 			0.025,

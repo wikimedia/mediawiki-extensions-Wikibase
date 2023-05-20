@@ -68,7 +68,7 @@ class TermsRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$this->helper->assertNTriplesEqualsDataset( $dataSetName, $actual );
 	}
 
-	public function provideAddEntity() {
+	public static function provideAddEntity() {
 		return [
 			[ 'Q2', 'Q2_terms' ],
 			[ 'Q2', 'Q2_terms_ru', [ 'ru' ] ],
@@ -87,7 +87,7 @@ class TermsRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$this->assertOrCreateNTriples( $dataSetName, $writer );
 	}
 
-	public function provideAddLabels() {
+	public static function provideAddLabels() {
 		return [
 			[ 'Q2', 'Q2_terms_labels' ],
 			[ 'Q2', 'Q2_terms_labels_ru', [ 'ru' ] ],
@@ -118,7 +118,7 @@ class TermsRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$this->assertOrCreateNTriples( $dataSetName, $writer );
 	}
 
-	public function provideAddDescriptions() {
+	public static function provideAddDescriptions() {
 		return [
 			[ 'Q2', 'Q2_terms_descriptions' ],
 			[ 'Q2', 'Q2_terms_descriptions_ru', [ 'ru' ] ],
@@ -142,7 +142,7 @@ class TermsRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$this->assertOrCreateNTriples( $dataSetName, $writer );
 	}
 
-	public function provideAddAliases() {
+	public static function provideAddAliases() {
 		return [
 			[ 'Q2', 'Q2_terms_aliases' ],
 			[ 'Q2', 'Q2_terms_aliases_ru', [ 'ru' ] ],

@@ -78,7 +78,7 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiIntegrationTestCase
 		$this->assertInstanceOf( StatsdRecordingSimpleCache::class, $factory->getTermFallbackCache() );
 	}
 
-	public function cacheTypeProvider(): array {
+	public static function cacheTypeProvider(): array {
 		return [
 			[ CACHE_ANYTHING ],
 			[ CACHE_NONE ],

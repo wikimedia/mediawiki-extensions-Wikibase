@@ -20,7 +20,7 @@ use Wikibase\Lib\Formatters\VocabularyUriFormatter;
  */
 class VocabularyUriFormatterTest extends \PHPUnit\Framework\TestCase {
 
-	public function unitProvider() {
+	public static function unitProvider() {
 		return [
 			'empty unit' => [ '', null ],
 			'unit is 1' => [ '1', null ],

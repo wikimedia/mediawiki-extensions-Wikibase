@@ -16,7 +16,7 @@ use Wikibase\Repo\ChangeOp\NonLanguageBoundChangesCounter;
  */
 class NonLanguageBoundChangesCounterTest extends \PHPUnit\Framework\TestCase {
 
-	public function changeOpResultsAndCountsProvider() {
+	public static function changeOpResultsAndCountsProvider() {
 		$entityId = new ItemId( 'Q123' );
 		return [
 			'Entity changed' => [

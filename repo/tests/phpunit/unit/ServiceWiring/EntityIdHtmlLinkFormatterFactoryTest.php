@@ -42,7 +42,7 @@ class EntityIdHtmlLinkFormatterFactoryTest extends ServiceWiringTestCase {
 		);
 	}
 
-	public function settingsProvider(): iterable {
+	public static function settingsProvider(): iterable {
 		yield 'federated properties disabled' => [ [
 			'federatedPropertiesEnabled' => false,
 		], EntityIdHtmlLinkFormatterFactory::class ];

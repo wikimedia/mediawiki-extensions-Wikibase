@@ -33,7 +33,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 		$this->assertTrue( true );
 	}
 
-	public function provideSimpleServiceGetters() {
+	public static function provideSimpleServiceGetters() {
 		return [
 			[ 'getEntityRevisionLookup', EntityRevisionLookup::class, true ],
 			[ 'getEntityPrefetcher', EntityPrefetcher::class, true ],

@@ -16,7 +16,7 @@ use Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationVal
  */
 class SiteLinkBadgeChangeOpSerializationValidatorTest extends \PHPUnit\Framework\TestCase {
 
-	public function provideNonStringBadgeSerilization() {
+	public static function provideNonStringBadgeSerilization() {
 		return [
 			[ [ 100 ] ],
 			[ [ new ItemId( 'Q100' ) ] ],
@@ -40,7 +40,7 @@ class SiteLinkBadgeChangeOpSerializationValidatorTest extends \PHPUnit\Framework
 		);
 	}
 
-	public function provideNonItemIdSerialization() {
+	public static function provideNonItemIdSerialization() {
 		return [
 			[ [ '100' ] ],
 			[ [ 'AAA' ] ],

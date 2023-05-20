@@ -50,7 +50,7 @@ class QuantityDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
 		$this->assertMatchesRegularExpression( $pattern, $html );
 	}
 
-	public function quantityFormatProvider() {
+	public static function quantityFormatProvider() {
 		return [
 			[
 				QuantityValue::newFromNumber( '+5', '1', '+6', '+4' ),

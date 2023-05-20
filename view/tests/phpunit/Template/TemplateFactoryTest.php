@@ -50,7 +50,7 @@ class TemplateFactoryTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $expected, $rendered );
 	}
 
-	public function renderParamsProvider() {
+	public static function renderParamsProvider() {
 		return [
 			[ '<PARAM>', '<PARAM>' ],
 			[ [], '$1' ],

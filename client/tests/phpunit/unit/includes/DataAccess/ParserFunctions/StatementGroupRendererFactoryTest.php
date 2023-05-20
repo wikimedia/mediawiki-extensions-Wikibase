@@ -64,7 +64,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 		$this->assertInstanceOf( LanguageAwareRenderer::class, $renderer );
 	}
 
-	public function wikitextTypeProvider(): iterable {
+	public static function wikitextTypeProvider(): iterable {
 		return [
 			[ DataAccessSnakFormatterFactory::TYPE_ESCAPED_PLAINTEXT ],
 			[ DataAccessSnakFormatterFactory::TYPE_RICH_WIKITEXT ],
@@ -101,7 +101,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 		$this->assertInstanceOf( LanguageAwareRenderer::class, $renderer );
 	}
 
-	public function newRenderer_forParserFormatProvider(): array {
+	public static function newRenderer_forParserFormatProvider(): array {
 		return [
 			[ 'ku', Parser::OT_PLAIN ],
 			[ 'zh', Parser::OT_WIKI ],
@@ -153,7 +153,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $titleUsageExpected, array_key_exists( 'Q7#T', $usages ) );
 	}
 
-	public function provideWikitextTypes(): array {
+	public static function provideWikitextTypes(): array {
 		return [
 			[ DataAccessSnakFormatterFactory::TYPE_ESCAPED_PLAINTEXT, 'Kittens!', false ],
 			[ DataAccessSnakFormatterFactory::TYPE_RICH_WIKITEXT, '<span><span>Kittens!</span></span>', true ],
@@ -219,7 +219,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 		$factory->newRendererFromParser( $this->getParser( 'de', 'es' ) );
 	}
 
-	public function allowDataAccessInUserLanguageProvider(): array {
+	public static function allowDataAccessInUserLanguageProvider(): array {
 		return [
 			[ true ],
 			[ false ],

@@ -31,7 +31,7 @@ class ReferenceSerializerTest extends TestCase {
 		);
 	}
 
-	public function serializationProvider(): Generator {
+	public static function serializationProvider(): Generator {
 		$ref1 = new Reference( 'some-hash-1', [
 			new PropertyValuePair(
 				new Property( new NumericPropertyId( 'P123' ), 'string' ),

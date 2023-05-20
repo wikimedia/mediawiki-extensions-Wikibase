@@ -57,7 +57,7 @@ class StatementSectionsViewTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $expected, $html );
 	}
 
-	public function statementListsProvider() {
+	public static function statementListsProvider() {
 		$empty = new StatementList();
 		$statements = new StatementList();
 		$statements->addNewStatement( new PropertyNoValueSnak( 1 ) );
@@ -97,7 +97,7 @@ class StatementSectionsViewTest extends \PHPUnit\Framework\TestCase {
 		$view->getHtml( new StatementList() );
 	}
 
-	public function invalidArrayProvider() {
+	public static function invalidArrayProvider() {
 		return [
 			[ [ 'statements' => [] ] ],
 			[ [ [] ] ],

@@ -200,7 +200,7 @@ class WikibaseLanguageIndependentLuaBindingsTest extends TestCase {
 		);
 	}
 
-	public function getLabelByLanguageProvider() {
+	public static function getLabelByLanguageProvider() {
 		$q2 = new ItemId( 'Q2' );
 
 		return [
@@ -283,7 +283,7 @@ class WikibaseLanguageIndependentLuaBindingsTest extends TestCase {
 		$this->assertSame( $expectedUsages, array_keys( $usages->getUsages() ) );
 	}
 
-	public function getDescriptionByLanguageProvider() {
+	public static function getDescriptionByLanguageProvider() {
 		$q2 = new ItemId( 'Q2' );
 
 		return [
@@ -366,7 +366,7 @@ class WikibaseLanguageIndependentLuaBindingsTest extends TestCase {
 		$this->assertSame( $expectedUsages, array_keys( $usages->getUsages() ) );
 	}
 
-	public function getSiteLinkPageNameProvider() {
+	public static function getSiteLinkPageNameProvider() {
 		return [
 			[ 'Beer', 'Q666', null ],
 			[ 'Bier', 'Q666', 'dewiki' ],
@@ -390,7 +390,7 @@ class WikibaseLanguageIndependentLuaBindingsTest extends TestCase {
 		);
 	}
 
-	public function provideGlobalSiteId() {
+	public static function provideGlobalSiteId() {
 		return [
 			[ [ 'Q666#T' ], null ],
 			[ [ 'Q666#T' ], 'enwiki' ],
@@ -468,7 +468,7 @@ class WikibaseLanguageIndependentLuaBindingsTest extends TestCase {
 		);
 	}
 
-	public function provideIsValidEntityId() {
+	public static function provideIsValidEntityId() {
 		return [
 			[ true, 'Q12' ],
 			[ true, 'P12' ],
@@ -564,7 +564,7 @@ class WikibaseLanguageIndependentLuaBindingsTest extends TestCase {
 		);
 	}
 
-	public function globalSiteIdProvider(): array {
+	public static function globalSiteIdProvider(): array {
 		return [
 			[ 'enwiki' ],
 			'default to the local wiki (enwiki)' => [ null ],

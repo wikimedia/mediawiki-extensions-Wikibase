@@ -33,7 +33,7 @@ class BaseUriExtractorTest extends TestCase {
 		$baseUri = $extractor->getBaseUriFromSerialization( $serialization );
 	}
 
-	public function provideNonWikibaseUris() {
+	public static function provideNonWikibaseUris() {
 	return [
 		'Has a Query' => [ 'http://www.wikdiata.org/entity/P12?action=catdog' ],
 		'Has a Fragment' => [ 'http://www.wikdiata.org/entity/P12#catdog' ],

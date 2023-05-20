@@ -114,7 +114,7 @@ class EntitySourceDefinitionsConfigParserTest extends TestCase {
 		$parser->newDefinitionsFromConfigArray( $config, new SubEntityTypesMapper( [] ) );
 	}
 
-	public function provideInvalidConfig() {
+	public static function provideInvalidConfig() {
 		$validNamespaces = [ 'item' => 100, 'property' => '200/boo' ];
 		$validDatabaseName = 'testdb';
 		$validBaseUri = 'http://example.com/entity/';

@@ -37,7 +37,7 @@ class StatementSerializerTest extends TestCase {
 		);
 	}
 
-	public function serializationProvider(): Generator {
+	public static function serializationProvider(): Generator {
 		yield 'no value statement' => [
 			NewStatementReadModel::noValueFor( 'P123' )
 				->withGuid( self::STATEMENT_ID )

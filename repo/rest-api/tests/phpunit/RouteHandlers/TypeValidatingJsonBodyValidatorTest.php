@@ -30,7 +30,7 @@ class TypeValidatingJsonBodyValidatorTest extends TestCase {
 		);
 	}
 
-	public function validPayloadProvider(): Generator {
+	public static function validPayloadProvider(): Generator {
 		$payload = [
 			'someString' => 'potato',
 			'someInt' => 123,

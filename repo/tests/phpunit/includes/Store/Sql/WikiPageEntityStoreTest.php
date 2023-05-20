@@ -162,7 +162,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 		return [ $store, $lookup ];
 	}
 
-	public function simpleEntityParameterProvider() {
+	public static function simpleEntityParameterProvider() {
 		$item = new Item();
 		$item->setLabel( 'en', 'Item' );
 		$item->setDescription( 'en', 'Item description' );
@@ -271,7 +271,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 		$this->fail( 'Expected StorageException to be thrown.' );
 	}
 
-	public function provideSaveEntityError() {
+	public static function provideSaveEntityError() {
 		$firstItem = new Item();
 		$firstItem->setLabel( 'en', 'one' );
 
@@ -446,7 +446,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $expected, $targetId );
 	}
 
-	public function unsupportedRedirectProvider() {
+	public static function unsupportedRedirectProvider() {
 		$p1 = new NumericPropertyId( 'P1' );
 		$p2 = new NumericPropertyId( 'P2' );
 

@@ -45,7 +45,7 @@ class DataTypeSelectorTest extends \PHPUnit\Framework\TestCase {
 		new DataTypeSelector( $dataTypes, $languageCode );
 	}
 
-	public function invalidConstructorArgumentsProvider() {
+	public static function invalidConstructorArgumentsProvider() {
 		return [
 			[ [], null ],
 			[ [], false ],

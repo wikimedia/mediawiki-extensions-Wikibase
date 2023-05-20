@@ -41,7 +41,7 @@ class ReferenceListDeserializerTest extends TestCase {
 		$deserializer->deserialize( $nonDeserializable );
 	}
 
-	public function nonDeserializableProvider() {
+	public static function nonDeserializableProvider() {
 		return [
 			[
 				42,
@@ -59,7 +59,7 @@ class ReferenceListDeserializerTest extends TestCase {
 		);
 	}
 
-	public function deserializationProvider() {
+	public static function deserializationProvider() {
 		return [
 			[
 				new ReferenceList(),

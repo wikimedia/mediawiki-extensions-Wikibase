@@ -60,7 +60,7 @@ class UserAgentCheckMiddlewareTest extends TestCase {
 		$this->assertStringContainsString( 'User-Agent', $response->getBody()->getContents() );
 	}
 
-	public function provideUserAgent(): array {
+	public static function provideUserAgent(): array {
 		return [
 			'CoolBot example' => [ 'CoolBot/0.0 (https://example.org/coolbot/; coolbot@example.org) generic-library/0.0' ],
 			'Linux-based PC using Firefox browser' => [ 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0) Gecko/20100101 Firefox/15.0.1' ],

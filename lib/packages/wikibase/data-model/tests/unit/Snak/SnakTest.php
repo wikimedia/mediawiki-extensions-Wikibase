@@ -29,7 +29,7 @@ use Wikibase\DataModel\Snak\Snak;
  */
 class SnakTest extends \PHPUnit\Framework\TestCase {
 
-	public function snakProvider() {
+	public static function snakProvider() {
 		$snaks = [];
 
 		$id42 = new NumericPropertyId( 'p42' );

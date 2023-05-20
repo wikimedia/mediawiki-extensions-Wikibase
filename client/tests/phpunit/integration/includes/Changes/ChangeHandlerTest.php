@@ -140,7 +140,7 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 		return $repo;
 	}
 
-	public function provideHandleChanges() {
+	public static function provideHandleChanges() {
 		$empty = new Item( new ItemId( 'Q55668877' ) );
 
 		$changeFactory = TestChanges::getEntityChangeFactory();
@@ -388,7 +388,7 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	public function provideHandleChange() {
+	public static function provideHandleChange() {
 		$changes = TestChanges::getChanges();
 		$userEmmy2 = Title::makeTitle( NS_USER, 'Emmy2' )->getPrefixedText();
 

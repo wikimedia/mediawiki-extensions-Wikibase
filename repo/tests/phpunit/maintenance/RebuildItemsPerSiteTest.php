@@ -44,7 +44,7 @@ class RebuildItemsPerSiteTest extends MaintenanceBaseTestCase {
 		}
 	}
 
-	public function pageIdProvider() {
+	public static function pageIdProvider() {
 		return [
 			'Rebuild all' => [
 				[ 'Cat', 'Katze', 'Кошка' ],

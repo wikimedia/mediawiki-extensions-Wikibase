@@ -60,7 +60,7 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function provideNewExternalIdentifierFormatter() {
+	public static function provideNewExternalIdentifierFormatter() {
 		$p1 = new NumericPropertyId( 'P1' );
 		$snak = new PropertyValueSnak( $p1, new StringValue( 'AB123' ) );
 

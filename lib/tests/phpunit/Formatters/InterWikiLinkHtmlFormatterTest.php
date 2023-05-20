@@ -22,7 +22,7 @@ class InterWikiLinkHtmlFormatterTest extends \PHPUnit\Framework\TestCase {
 	use MediaWikiCoversValidator;
 	use MediaWikiTestCaseTrait;
 
-	public function linkFormatProvider() {
+	public static function linkFormatProvider() {
 		return [
 			'simple case' => [
 				new StringValue( 'LINK' ),

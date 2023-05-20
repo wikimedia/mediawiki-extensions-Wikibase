@@ -17,7 +17,7 @@ use Wikibase\Repo\Localizer\ParseExceptionLocalizer;
  */
 class ParseExceptionLocalizerTest extends \PHPUnit\Framework\TestCase {
 
-	public function provideGetExceptionMessage() {
+	public static function provideGetExceptionMessage() {
 		return [
 			'ParseException' => [ new ParseException( 'Blarg!' ), 'wikibase-parse-error', [] ],
 		];

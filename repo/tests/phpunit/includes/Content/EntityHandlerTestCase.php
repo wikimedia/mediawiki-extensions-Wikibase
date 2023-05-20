@@ -498,7 +498,7 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	public function forCreationParamProvider() {
+	public static function forCreationParamProvider() {
 		return [
 			[ true ],
 			[ false ],

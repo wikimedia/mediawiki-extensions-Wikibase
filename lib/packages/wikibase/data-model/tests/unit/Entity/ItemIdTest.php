@@ -28,7 +28,7 @@ class ItemIdTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function idSerializationProvider() {
+	public static function idSerializationProvider() {
 		return [
 			[ 'q1', 'Q1' ],
 			[ 'q100', 'Q100' ],
@@ -51,7 +51,7 @@ class ItemIdTest extends \PHPUnit\Framework\TestCase {
 		new ItemId( $invalidSerialization );
 	}
 
-	public function invalidIdSerializationProvider() {
+	public static function invalidIdSerializationProvider() {
 		return [
 			[ "Q1\n" ],
 			[ 'q' ],
@@ -102,7 +102,7 @@ class ItemIdTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $expected, $id->getSerialization() );
 	}
 
-	public function serializationProvider() {
+	public static function serializationProvider() {
 		return [
 			[ 'Q2', 'Q2' ],
 			[ '["item","Q2"]', 'Q2' ],
@@ -125,7 +125,7 @@ class ItemIdTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( 'Q' . $number, $id->getSerialization() );
 	}
 
-	public function numericIdProvider() {
+	public static function numericIdProvider() {
 		return [
 			[ 42 ],
 			[ '42' ],
@@ -144,7 +144,7 @@ class ItemIdTest extends \PHPUnit\Framework\TestCase {
 		ItemId::newFromNumber( $number );
 	}
 
-	public function invalidNumericIdProvider() {
+	public static function invalidNumericIdProvider() {
 		return [
 			[ 'Q1' ],
 			[ '42.1' ],

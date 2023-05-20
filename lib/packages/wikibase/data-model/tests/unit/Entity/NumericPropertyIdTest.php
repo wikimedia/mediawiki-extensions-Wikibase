@@ -27,7 +27,7 @@ class NumericPropertyIdTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function idSerializationProvider() {
+	public static function idSerializationProvider() {
 		return [
 			[ 'p1', 'P1' ],
 			[ 'p100', 'P100' ],
@@ -50,7 +50,7 @@ class NumericPropertyIdTest extends \PHPUnit\Framework\TestCase {
 		new NumericPropertyId( $invalidSerialization );
 	}
 
-	public function invalidIdSerializationProvider() {
+	public static function invalidIdSerializationProvider() {
 		return [
 			[ "P1\n" ],
 			[ 'p' ],
@@ -101,7 +101,7 @@ class NumericPropertyIdTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $expected, $id->getSerialization() );
 	}
 
-	public function serializationProvider() {
+	public static function serializationProvider() {
 		return [
 			[ 'P2', 'P2' ],
 			[ '["property","P2"]', 'P2' ],
@@ -124,7 +124,7 @@ class NumericPropertyIdTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( 'P' . $number, $id->getSerialization() );
 	}
 
-	public function numericIdProvider() {
+	public static function numericIdProvider() {
 		return [
 			[ 42 ],
 			[ '42' ],
@@ -143,7 +143,7 @@ class NumericPropertyIdTest extends \PHPUnit\Framework\TestCase {
 		NumericPropertyId::newFromNumber( $number );
 	}
 
-	public function invalidNumericIdProvider() {
+	public static function invalidNumericIdProvider() {
 		return [
 			[ 'P1' ],
 			[ '42.1' ],

@@ -32,7 +32,7 @@ class EntityPatcherTest extends TestCase {
 		$this->assertEquals( $item, $patchedEntity );
 	}
 
-	public function itemProvider() {
+	public static function itemProvider() {
 		$argLists = [];
 
 		$nonEmptyItem = new Item( new ItemId( 'Q2' ) );

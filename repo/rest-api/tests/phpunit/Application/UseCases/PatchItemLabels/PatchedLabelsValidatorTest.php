@@ -42,7 +42,7 @@ class PatchedLabelsValidatorTest extends TestCase {
 		);
 	}
 
-	public function validLabelsProvider(): Generator {
+	public static function validLabelsProvider(): Generator {
 		yield 'no labels' => [
 			[],
 			new TermList(),
@@ -80,7 +80,7 @@ class PatchedLabelsValidatorTest extends TestCase {
 		}
 	}
 
-	public function invalidLabelsProvider(): Generator {
+	public static function invalidLabelsProvider(): Generator {
 		$language = 'en';
 		$label = "tab characters \t not allowed";
 		yield 'invalid label' => [

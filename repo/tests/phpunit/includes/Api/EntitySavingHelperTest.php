@@ -150,7 +150,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 		$helper->loadEntity( [ 'new' => 'item' ] );
 	}
 
-	public function provideLoadEntity_fail() {
+	public static function provideLoadEntity_fail() {
 		return [
 			'no params' => [
 				[],
@@ -323,7 +323,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 		$helper->attemptSaveEntity( new Item(), '', [], $this->newContext( [] ) );
 	}
 
-	public function errorStatusProvider() {
+	public static function errorStatusProvider() {
 		yield 'with errorFlags' => [
 			[ 'errorFlags' => EditEntity::SAVE_ERROR ],
 			'failed-save',

@@ -27,7 +27,7 @@ class LegacyEntityIdDeserializerTest extends \PHPUnit\Framework\TestCase {
 		$this->deserializer = new LegacyEntityIdDeserializer( new BasicEntityIdParser() );
 	}
 
-	public function invalidSerializationProvider() {
+	public static function invalidSerializationProvider() {
 		return [
 			[ null ],
 			[ 42 ],
@@ -56,7 +56,7 @@ class LegacyEntityIdDeserializerTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expectedId, $actualId );
 	}
 
-	public function legacyIdProvider() {
+	public static function legacyIdProvider() {
 		return [
 			[
 				new ItemId( 'Q42' ),
@@ -78,7 +78,7 @@ class LegacyEntityIdDeserializerTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expectedId, $actualId );
 	}
 
-	public function newIdProvider() {
+	public static function newIdProvider() {
 		return [
 			[ new ItemId( 'Q1' ), 'Q1' ],
 			[ new ItemId( 'Q42' ), 'q42' ],

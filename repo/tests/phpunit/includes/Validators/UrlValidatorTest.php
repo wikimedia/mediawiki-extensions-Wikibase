@@ -28,7 +28,7 @@ class UrlValidatorTest extends MediaWikiIntegrationTestCase {
 		new UrlValidator( $validators );
 	}
 
-	public function invalidConstructorArgumentProvider() {
+	public static function invalidConstructorArgumentProvider() {
 		return [
 			[ [ new RegexValidator( '/.*/' ) ] ],
 			[ [ 'scheme' => '/.*/' ] ],
@@ -41,7 +41,7 @@ class UrlValidatorTest extends MediaWikiIntegrationTestCase {
 		$validator->validate( null );
 	}
 
-	public function provideValidate() {
+	public static function provideValidate() {
 		$yes = new RegexValidator( '/.*/', false, 'oops' );
 		$no  = new RegexValidator( '/.*/', true, 'bad-url' );
 

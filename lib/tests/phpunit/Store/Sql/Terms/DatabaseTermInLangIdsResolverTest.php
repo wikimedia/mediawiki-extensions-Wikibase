@@ -86,7 +86,7 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 		], $terms );
 	}
 
-	public function resolveFilteredProvider() {
+	public static function resolveFilteredProvider() {
 		$fullResult = [
 			'label' => [
 				'en' => [ 'text' ],

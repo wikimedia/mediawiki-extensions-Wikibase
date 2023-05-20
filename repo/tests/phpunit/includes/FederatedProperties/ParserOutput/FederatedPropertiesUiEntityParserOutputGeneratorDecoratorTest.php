@@ -77,7 +77,7 @@ class FederatedPropertiesUiEntityParserOutputGeneratorDecoratorTest extends Enti
 		$this->assertContains( 'wikibase.federatedPropertiesEditRequestFailureNotice', $resourceLoaderModules );
 	}
 
-	public function errorPageProvider() {
+	public static function errorPageProvider() {
 		return [
 			[ 'en', 'en' ],
 			[ 'de', 'en' ],

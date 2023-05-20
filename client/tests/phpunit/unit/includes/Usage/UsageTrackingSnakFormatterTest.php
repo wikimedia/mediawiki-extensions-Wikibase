@@ -101,7 +101,7 @@ class UsageTrackingSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 		return $parser;
 	}
 
-	public function formatSnakQuantityProvider() {
+	public static function formatSnakQuantityProvider() {
 		return [
 			[ '1', null ],
 			[ 'Q1', new ItemId( 'Q1' ) ],

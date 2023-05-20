@@ -46,7 +46,7 @@ class DescriptionProviderHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $hookResults, $results );
 	}
 
-	public function provideDescriptionProviderTestData() {
+	public static function provideDescriptionProviderTestData() {
 		$pageIdentities = [
 			1 => new PageIdentityValue( 1, NS_MAIN, 'One', PageIdentity::LOCAL ),
 			2 => new PageIdentityValue( 2, NS_MAIN, 'Two', PageIdentity::LOCAL ),

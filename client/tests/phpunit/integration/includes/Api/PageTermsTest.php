@@ -163,7 +163,7 @@ class PageTermsTest extends MediaWikiLangTestCase {
 		return $data;
 	}
 
-	public function pageTermsProvider() {
+	public static function pageTermsProvider() {
 		$terms = [
 			11 => [
 				'label' => [

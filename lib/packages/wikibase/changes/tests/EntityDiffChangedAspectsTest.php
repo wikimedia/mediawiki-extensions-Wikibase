@@ -17,7 +17,7 @@ use Wikibase\Lib\Changes\EntityDiffChangedAspects;
  */
 class EntityDiffChangedAspectsTest extends \PHPUnit\Framework\TestCase {
 
-	public function invalidConstructionProvider() {
+	public static function invalidConstructionProvider() {
 		$validParams = [
 			'labelChanges' => [ 'a', '1' ],
 			'descriptionChanges' => [ 'b', '2' ],
@@ -153,7 +153,7 @@ class EntityDiffChangedAspectsTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function wrongArrayFormatVersionProvider() {
+	public static function wrongArrayFormatVersionProvider() {
 		// NOTE: If you remove versions here, make sure all good ones can be unserialized!
 		return [
 			[ -1 ],

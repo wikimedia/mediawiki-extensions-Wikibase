@@ -76,7 +76,7 @@ class ClaimDifferenceVisualizerTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @todo Come up with a better way of testing this.... EWW at all the html...
 	 */
-	public function provideDifferenceAndClaim() {
+	public static function provideDifferenceAndClaim() {
 		return [
 			'no change' => [
 				new ClaimDifference(),

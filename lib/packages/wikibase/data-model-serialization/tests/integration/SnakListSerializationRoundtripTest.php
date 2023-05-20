@@ -36,7 +36,7 @@ class SnakListSerializationRoundtripTest extends TestCase {
 		$this->assertEquals( $snaks, $newSnaks );
 	}
 
-	public function snakListProvider() {
+	public static function snakListProvider() {
 		return [
 			[
 				new SnakList( [] ),

@@ -393,7 +393,7 @@ class EntityRetrievingClosestReferencedEntityIdLookupTest extends TestCase {
 		$this->fail( 'No exception thrown!' );
 	}
 
-	public function provideGetReferencedEntityIdTestInvalidSnak() {
+	public static function provideGetReferencedEntityIdTestInvalidSnak() {
 		$q42 = new ItemId( 'Q42' );
 		$p1 = new NumericPropertyId( 'P1' );
 		$p2 = new NumericPropertyId( 'P2' );

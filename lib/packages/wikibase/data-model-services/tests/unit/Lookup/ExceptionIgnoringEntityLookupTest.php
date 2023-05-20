@@ -79,7 +79,7 @@ class ExceptionIgnoringEntityLookupTest extends TestCase {
 		$this->assertSame( $expected, $actual );
 	}
 
-	public function provideBooleans() {
+	public static function provideBooleans() {
 		return [
 			[ true ],
 			[ false ],

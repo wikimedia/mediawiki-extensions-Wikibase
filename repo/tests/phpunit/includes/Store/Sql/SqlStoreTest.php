@@ -87,7 +87,7 @@ class SqlStoreTest extends MediaWikiIntegrationTestCase {
 		$this->assertInstanceOf( EntityRedirectLookup::class, $service );
 	}
 
-	public function entityLoookupCacheProvider() {
+	public static function entityLoookupCacheProvider() {
 		return [
 			[ Store::LOOKUP_CACHING_ENABLED ],
 			[ Store::LOOKUP_CACHING_DISABLED ],

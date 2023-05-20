@@ -47,7 +47,7 @@ class BinaryOptionDispatchingSnakFormatterTest extends \PHPUnit\Framework\TestCa
 		);
 	}
 
-	public function formatSnakProvider() {
+	public static function formatSnakProvider() {
 		$pSpecial = new NumericPropertyId( 'P1' );
 		$pRegular = new NumericPropertyId( 'P2' );
 		$value = new StringValue( '' );

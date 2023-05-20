@@ -32,7 +32,7 @@ class UsageTrackingLanguageFallbackLabelDescriptionLookupTest extends \PHPUnit\F
 		return $this->provideGetTermFallback( 'D' );
 	}
 
-	private function provideGetTermFallback( $usagePrefix ) {
+	private static function provideGetTermFallback( $usagePrefix ) {
 		return [
 			'No term found -> all languages tracked' => [
 				[ "Q2#$usagePrefix.a", "Q2#$usagePrefix.b", "Q2#$usagePrefix.c" ],

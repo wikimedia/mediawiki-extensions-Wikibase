@@ -48,7 +48,7 @@ class TermValidatorFactoryTest extends ServiceWiringTestCase {
 		$this->assertFalse( $itemLabelValidator->validate( '1234' )->isValid() );
 	}
 
-	public function provideSettingsWithLengthLimit3(): iterable {
+	public static function provideSettingsWithLengthLimit3(): iterable {
 		yield 'modern settings' => [ [
 			'string-limits' => [
 				'multilang' => [ 'length' => 3 ],

@@ -58,7 +58,7 @@ class RedirectResolvingEntityLookupTest extends TestCase {
 		return $mock;
 	}
 
-	public function getEntityProvider() {
+	public static function getEntityProvider() {
 		return [
 			'no redirect' => [ new ItemId( 'Q10' ), new ItemId( 'Q10' ) ],
 			'one redirect' => [ new ItemId( 'Q11' ), new ItemId( 'Q10' ) ],
@@ -103,7 +103,7 @@ class RedirectResolvingEntityLookupTest extends TestCase {
 		$lookup->getEntity( $id );
 	}
 
-	public function hasEntityProvider() {
+	public static function hasEntityProvider() {
 		return [
 			'unknown entity' => [ new ItemId( 'Q7' ), false ],
 			'no redirect' => [ new ItemId( 'Q10' ), true ],

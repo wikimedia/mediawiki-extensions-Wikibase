@@ -46,7 +46,7 @@ class BotEditTest extends WikibaseApiTestCase {
 		self::$hasSetup = true;
 	}
 
-	public function provideData() {
+	public static function provideData() {
 		return [
 			[ //0
 				'p' => [ 'handle' => 'Empty', 'bot' => '', 'action' => 'wbsetlabel',

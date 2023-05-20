@@ -142,7 +142,7 @@ class LangLinkHandlerTest extends MediaWikiIntegrationTestCase {
 		return $badgesByPrefix;
 	}
 
-	public function provideGetNoExternalLangLinks() {
+	public static function provideGetNoExternalLangLinks() {
 		return [
 			[ // #0
 				[],
@@ -180,7 +180,7 @@ class LangLinkHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $noExternalLangLinks, $nel );
 	}
 
-	public function provideExcludeRepoLinks() {
+	public static function provideExcludeRepoLinks() {
 		return [
 			[ // #0
 				[],
@@ -205,7 +205,7 @@ class LangLinkHandlerTest extends MediaWikiIntegrationTestCase {
 		];
 	}
 
-	public function provideUseRepoLinks() {
+	public static function provideUseRepoLinks() {
 		return [
 			[ // #0
 				'Foo_sr',
@@ -246,7 +246,7 @@ class LangLinkHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $expected, $useRepoLinks, "use repository links" );
 	}
 
-	public function provideGetEffectiveRepoLinks() {
+	public static function provideGetEffectiveRepoLinks() {
 		return [
 			[ // #0: local overrides remote
 				'Foo_sr', // title
@@ -423,7 +423,7 @@ class LangLinkHandlerTest extends MediaWikiIntegrationTestCase {
 		return $links;
 	}
 
-	public function provideFilterRepoLinksByGroup() {
+	public static function provideFilterRepoLinksByGroup() {
 		return [
 			[ // #0: nothing
 				[], [], [],
@@ -475,7 +475,7 @@ class LangLinkHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $expectedLinks, $actualLinks );
 	}
 
-	public function provideSuppressRepoLinks() {
+	public static function provideSuppressRepoLinks() {
 		return [
 			[ // #0: nothing
 				[], [], [],
@@ -537,7 +537,7 @@ class LangLinkHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $expected, $interwikiCode, 'interwiki code matches' );
 	}
 
-	public function getInterwikiCodeFromSiteProvider() {
+	public static function getInterwikiCodeFromSiteProvider() {
 		$enwiki = new Site();
 		$enwiki->setGlobalId( 'enwiki' );
 		$enwiki->setLanguageCode( 'en' );

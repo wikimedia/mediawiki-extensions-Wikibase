@@ -20,7 +20,7 @@ class DataValueDeserializerTest extends ServiceWiringTestCase {
 		$this->assertInstanceOf( DataValueDeserializer::class, $dataValueDeserializer );
 	}
 
-	public function dataValueProvider(): iterable {
+	public static function dataValueProvider(): iterable {
 		$dataValues = [
 			'string',
 			'unknown',

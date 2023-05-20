@@ -23,7 +23,7 @@ use Wikibase\DataModel\Snak\SnakList;
  */
 class ReferenceListTest extends \PHPUnit\Framework\TestCase {
 
-	public function instanceProvider() {
+	public static function instanceProvider() {
 		return [
 			[ new ReferenceList( [] ) ],
 			[ new ReferenceList( [
@@ -63,7 +63,7 @@ class ReferenceListTest extends \PHPUnit\Framework\TestCase {
 		new ReferenceList( $input );
 	}
 
-	public function invalidConstructorArgumentsProvider() {
+	public static function invalidConstructorArgumentsProvider() {
 		$id1 = new NumericPropertyId( 'P1' );
 
 		return [

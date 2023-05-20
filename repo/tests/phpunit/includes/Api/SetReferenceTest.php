@@ -372,7 +372,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		$this->doApiRequestWithToken( $params );
 	}
 
-	public function provideInvalidSerializations(): iterable {
+	public static function provideInvalidSerializations(): iterable {
 		return [
 			[ '{
 				 "P813":[
@@ -456,7 +456,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		}
 	}
 
-	public function invalidRequestProvider(): iterable {
+	public static function invalidRequestProvider(): iterable {
 		return [
 			'bad guid 1' =>
 				[ 'Berlin', 'xyz', 'good', '', 'invalid-guid' ],

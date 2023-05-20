@@ -250,7 +250,7 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 		return $output;
 	}
 
-	public function handleRequestProvider() {
+	public static function handleRequestProvider() {
 		return EntityDataTestProvider::provideHandleRequest();
 	}
 
@@ -331,7 +331,7 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( '*', $response->getHeader( 'Access-Control-Allow-Origin' ) );
 	}
 
-	public function provideHttpContentNegotiation(): iterable {
+	public static function provideHttpContentNegotiation(): iterable {
 		$q13 = new ItemId( 'Q13' );
 		return [
 			'No Accept Header' => [

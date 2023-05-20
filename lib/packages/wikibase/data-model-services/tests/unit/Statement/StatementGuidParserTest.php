@@ -30,7 +30,7 @@ class StatementGuidParserTest extends TestCase {
 		return new StatementGuidParser( new ItemIdParser() );
 	}
 
-	public function guidProvider() {
+	public static function guidProvider() {
 		return [
 			[ new StatementGuid( new ItemId( 'q42' ), 'D8404CDA-25E4-4334-AF13-A3290BCD9C0N' ) ],
 			[ new StatementGuid( new ItemId( 'Q1234567' ), 'D4FDE516-F20C-4154-ADCE-7C5B609DFDFF' ) ],
@@ -48,7 +48,7 @@ class StatementGuidParserTest extends TestCase {
 		$this->newParser()->parse( $invalidIdSerialization );
 	}
 
-	public function invalidIdSerializationProvider() {
+	public static function invalidIdSerializationProvider() {
 		return [
 			[ 'FOO' ],
 			[ null ],

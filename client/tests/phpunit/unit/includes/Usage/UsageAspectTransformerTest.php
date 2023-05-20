@@ -35,7 +35,7 @@ class UsageAspectTransformerTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( [], $transformer->getRelevantAspects( $q99 ) );
 	}
 
-	public function provideGetFilteredUsages() {
+	public static function provideGetFilteredUsages() {
 		$q1 = new ItemId( 'Q1' );
 
 		return [
@@ -119,7 +119,7 @@ class UsageAspectTransformerTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, array_keys( $usages ) );
 	}
 
-	public function provideTransformPageEntityUsages() {
+	public static function provideTransformPageEntityUsages() {
 		$q1 = new ItemId( 'Q1' );
 		$q2 = new ItemId( 'Q2' );
 

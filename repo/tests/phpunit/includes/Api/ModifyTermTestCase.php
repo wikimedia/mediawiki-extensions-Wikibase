@@ -28,7 +28,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 		self::$hasSetup = true;
 	}
 
-	public function provideData() {
+	public static function provideData() {
 		return [
 			// p => params, e => expected
 

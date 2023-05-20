@@ -40,7 +40,7 @@ class DescriptionLookupTest extends TestCase {
 		$this->assertSame( $expectedActualSources, $actualSources );
 	}
 
-	public function provideGetDescriptions() {
+	public static function provideGetDescriptions() {
 		$local = DescriptionLookup::SOURCE_LOCAL;
 		$central = DescriptionLookup::SOURCE_CENTRAL;
 		return [
@@ -115,7 +115,7 @@ class DescriptionLookupTest extends TestCase {
 		$this->assertSame( $expectedSource, $actualSource );
 	}
 
-	public function provideGetDescription() {
+	public static function provideGetDescription() {
 		$local = DescriptionLookup::SOURCE_LOCAL;
 		$central = DescriptionLookup::SOURCE_CENTRAL;
 		return [

@@ -142,7 +142,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function provideMarkResultSuccess() {
+	public static function provideMarkResultSuccess() {
 		return [
 			[ true, 1 ],
 			[ 1, 1 ],
@@ -162,7 +162,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 		$resultBuilder->markSuccess( $param );
 	}
 
-	public function provideMarkResultSuccessExceptions() {
+	public static function provideMarkResultSuccessExceptions() {
 		return [ [ 3 ], [ -1 ] ];
 	}
 
@@ -1283,7 +1283,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $data );
 	}
 
-	public function provideMissingEntity() {
+	public static function provideMissingEntity() {
 		return [
 			[
 				[
@@ -1413,7 +1413,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $data );
 	}
 
-	public function provideSetList() {
+	public static function provideSetList() {
 		return [
 			'null path' => [ null, 'foo', [], 'letter', false,
 				[ 'foo' => [], '_type' => 'assoc' ],
@@ -1473,7 +1473,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $data );
 	}
 
-	public function provideSetList_InvalidArgument() {
+	public static function provideSetList_InvalidArgument() {
 		return [
 			'null name' => [ 'ROOT', null, [ 10, 20 ], 'Q' ],
 			'int name' => [ 'ROOT', 6, [ 10, 20 ], 'Q' ],
@@ -1496,7 +1496,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 		$builder->setList( $path, $name, $values, $tag );
 	}
 
-	public function provideSetValue() {
+	public static function provideSetValue() {
 		return [
 			'null path' => [ null, 'foo', 'value', false, [ 'foo' => 'value', '_type' => 'assoc' ] ],
 			'empty path' => [ [], 'foo', 'value', false,
@@ -1543,7 +1543,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $data );
 	}
 
-	public function provideSetValue_InvalidArgument() {
+	public static function provideSetValue_InvalidArgument() {
 		return [
 			'null name' => [ 'ROOT', null, 'X' ],
 			'int name' => [ 'ROOT', 6, 'X' ],
@@ -1564,7 +1564,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 		$builder->setValue( $path, $name, $value );
 	}
 
-	public function provideAppendValue() {
+	public static function provideAppendValue() {
 		return [
 			'null path' => [ null, null, 'value', 'letter', false,
 				[ 'value', '_type' => 'assoc' ],
@@ -1632,7 +1632,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $data );
 	}
 
-	public function provideAppendValue_InvalidArgument() {
+	public static function provideAppendValue_InvalidArgument() {
 		return [
 			'list value' => [ 'ROOT', null, [ 1, 2, 3 ], 'Q' ],
 			'array key' => [ 'ROOT', [ 'x' ], 'value', 'Q' ],

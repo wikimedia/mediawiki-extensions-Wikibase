@@ -25,7 +25,7 @@ class SiteLinkListTest extends \PHPUnit\Framework\TestCase {
 		new SiteLinkList( $notSiteLinks );
 	}
 
-	public function notSiteLinksProvider() {
+	public static function notSiteLinksProvider() {
 		return [
 			[
 				[
@@ -57,7 +57,7 @@ class SiteLinkListTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $siteLinkArray, array_values( iterator_to_array( $list ) ) );
 	}
 
-	public function siteLinkArrayProvider() {
+	public static function siteLinkArrayProvider() {
 		return [
 			[
 				[
@@ -93,7 +93,7 @@ class SiteLinkListTest extends \PHPUnit\Framework\TestCase {
 		new SiteLinkList( $siteLinkArray );
 	}
 
-	public function siteLinkArrayWithDuplicateSiteIdProvider() {
+	public static function siteLinkArrayWithDuplicateSiteIdProvider() {
 		return [
 			[
 				[

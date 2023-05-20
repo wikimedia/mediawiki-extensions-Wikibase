@@ -229,7 +229,7 @@ class CachingPrefetchingTermLookupTest extends TestCase {
 		);
 	}
 
-	public function getTermDataProvider() {
+	public static function getTermDataProvider() {
 		return [ [ TermTypes::TYPE_LABEL, 'getLabel' ], [ TermTypes::TYPE_DESCRIPTION, 'getDescription' ] ];
 	}
 
@@ -603,7 +603,7 @@ class CachingPrefetchingTermLookupTest extends TestCase {
 		);
 	}
 
-	public function getMultipleTermsByLanguageDataProvider() {
+	public static function getMultipleTermsByLanguageDataProvider() {
 		return [ [ TermTypes::TYPE_LABEL, 'getLabels' ], [ TermTypes::TYPE_DESCRIPTION, 'getDescriptions' ] ];
 	}
 

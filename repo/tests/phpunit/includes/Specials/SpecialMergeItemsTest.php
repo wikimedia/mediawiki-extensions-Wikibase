@@ -258,7 +258,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 		$this->assertStringNotContainsString( 'class="error"', $html );
 	}
 
-	public function mergeRequestProvider() {
+	public static function mergeRequestProvider() {
 		$testCases = [];
 		$testCases['labelMerge'] = [
 			[ 'labels' => [
@@ -344,7 +344,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 		$this->entityModificationTestHelper->assertEntityEquals( $toAfter, $actualTo );
 	}
 
-	public function provideExceptionParamsData() {
+	public static function provideExceptionParamsData() {
 		return [
 			[ //3 toid bad
 				'p' => [ 'fromid' => 'Q1', 'toid' => 'ABCDE' ],
@@ -375,7 +375,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 		$this->assertError( $expected, $html );
 	}
 
-	public function provideExceptionConflictsData() {
+	public static function provideExceptionConflictsData() {
 		return [
 			[
 				[ 'descriptions' => [ 'en' => [ 'language' => 'en', 'value' => 'foo' ] ] ],

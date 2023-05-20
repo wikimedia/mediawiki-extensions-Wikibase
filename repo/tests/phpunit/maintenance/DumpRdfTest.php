@@ -182,7 +182,7 @@ class DumpRdfTest extends MediaWikiIntegrationTestCase {
 		return $dumpScript;
 	}
 
-	public function dumpParameterProvider(): iterable {
+	public static function dumpParameterProvider(): iterable {
 		return [
 			'dump everything' => [
 				[ 'item', 'property' ],
@@ -267,7 +267,7 @@ class DumpRdfTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( $expected, $dumpScript->getRedirectMode() );
 	}
 
-	public function getRedirectModeProvider(): iterable {
+	public static function getRedirectModeProvider(): iterable {
 		return [
 			[
 				EntityIdPager::INCLUDE_REDIRECTS,

@@ -28,7 +28,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
  */
 class ChangeOpSiteLinkTest extends TestCase {
 
-	public function invalidConstructorProvider(): array {
+	public static function invalidConstructorProvider(): array {
 		$argLists = [];
 
 		$argLists[] = [ 'plwiki', 'Warszawa', [ 'FA', 'GA' ] ];
@@ -46,7 +46,7 @@ class ChangeOpSiteLinkTest extends TestCase {
 		new ChangeOpSiteLink( $siteId, $linkPage, $badges );
 	}
 
-	public function changeOpSiteLinkProvider(): array {
+	public static function changeOpSiteLinkProvider(): array {
 		$deSiteLink = new SiteLink( 'dewiki', 'Berlin' );
 		$enSiteLink = new SiteLink( 'enwiki', 'Berlin', [ new ItemId( 'Q149' ) ] );
 		$plSiteLink = new SiteLink( 'plwiki', 'Berlin', [ new ItemId( 'Q42' ) ] );
@@ -124,7 +124,7 @@ class ChangeOpSiteLinkTest extends TestCase {
 		$this->assertTrue( $changeOpResult->isEntityChanged() );
 	}
 
-	public function summaryTestProvider(): array {
+	public static function summaryTestProvider(): array {
 		$sitelinks = [
 			new SiteLink( 'dewiki', 'Berlin' ),
 			new SiteLink( 'ruwiki', 'Берлин', [ new ItemId( 'Q42' ) ] ),

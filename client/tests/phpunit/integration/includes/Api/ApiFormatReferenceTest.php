@@ -57,7 +57,7 @@ class ApiFormatReferenceTest extends ApiTestCase {
 		}
 	}
 
-	public function provideValidFormatReferenceParameters() {
+	public static function provideValidFormatReferenceParameters() {
 		yield [
 			[
 				'action' => 'wbformatreference',
@@ -93,7 +93,7 @@ class ApiFormatReferenceTest extends ApiTestCase {
 		];
 	}
 
-	public function provideBadFormatReferenceParameters() {
+	public static function provideBadFormatReferenceParameters() {
 		yield [
 			[ 'action' => 'wbformatreference' ],
 			'paramvalidator-missingparam',

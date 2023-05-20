@@ -74,7 +74,7 @@ class DescriptionTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( $expectedContinue, $this->continueEnumParameter );
 	}
 
-	public function provideExecute() {
+	public static function provideExecute() {
 		$local = DescriptionLookup::SOURCE_LOCAL;
 		$central = DescriptionLookup::SOURCE_CENTRAL;
 		return [

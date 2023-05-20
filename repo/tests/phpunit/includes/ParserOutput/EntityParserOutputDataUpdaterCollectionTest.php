@@ -48,7 +48,7 @@ class EntityParserOutputDataUpdaterCollectionTest extends \PHPUnit\Framework\Tes
 		new EntityParserOutputDataUpdaterCollection( new ParserOutput(), $argument );
 	}
 
-	public function invalidConstructorArgumentProvider() {
+	public static function invalidConstructorArgumentProvider() {
 		return [
 			[ [ null ] ],
 			[ [ 'notAnObject' ] ],

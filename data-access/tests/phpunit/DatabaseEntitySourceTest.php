@@ -43,7 +43,7 @@ class DatabaseEntitySourceTest extends TestCase {
 		AtEase::restoreWarnings();
 	}
 
-	public function provideInvalidConstructorArguments() {
+	public static function provideInvalidConstructorArguments() {
 		$validSourceName = 'testsource';
 		$validDatabaseName = 'somedb';
 		$validEntityData = [

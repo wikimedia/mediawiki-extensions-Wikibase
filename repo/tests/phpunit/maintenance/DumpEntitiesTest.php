@@ -51,7 +51,7 @@ class DumpEntitiesTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $expected, $accessibleDumper->getEntityTypes() );
 	}
 
-	public function provideEntityTypeData() {
+	public static function provideEntityTypeData() {
 		yield [
 			[ 'item', 'property' ],
 			'',

@@ -38,7 +38,7 @@ class StatementSerializationRoundtripTest extends TestCase {
 		$this->assertEquals( $statement->getHash(), $newStatement->getHash() );
 	}
 
-	public function snaksProvider() {
+	public static function snaksProvider() {
 		$statements = [];
 
 		$statements[] = [

@@ -32,7 +32,7 @@ class ResponseFactoryTest extends TestCase {
 		$this->assertSame( $httpStatus, $httpResponse->getStatusCode() );
 	}
 
-	public function errorCodeToHttpStatusCodeProvider(): Generator {
+	public static function errorCodeToHttpStatusCodeProvider(): Generator {
 		yield [ UseCaseError::INVALID_FIELD, 400 ];
 		yield [ UseCaseError::INVALID_ITEM_ID,  400 ];
 		yield [ UseCaseError::INVALID_STATEMENT_ID,  400 ];

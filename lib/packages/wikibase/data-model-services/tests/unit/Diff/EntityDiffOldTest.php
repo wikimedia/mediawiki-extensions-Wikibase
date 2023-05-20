@@ -127,7 +127,7 @@ abstract class EntityDiffOldTest extends TestCase {
 		return $tests;
 	}
 
-	public function provideConflictDetection() {
+	public static function provideConflictDetection() {
 		$cases = [];
 
 		// #0: adding a label where there was none before

@@ -29,7 +29,7 @@ class ValueParserFactoryTest extends \PHPUnit\Framework\TestCase {
 		new ValueParserFactory( $valueParsers );
 	}
 
-	public function provideInvalidConstructorArgument() {
+	public static function provideInvalidConstructorArgument() {
 		return [
 			'value is not a callable' => [ [
 				'id' => 'not a callable',
@@ -68,7 +68,7 @@ class ValueParserFactoryTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( array_keys( $factoryFunctions ), $returnValue );
 	}
 
-	public function provideFactoryFunctions() {
+	public static function provideFactoryFunctions() {
 		return [
 			[
 				[

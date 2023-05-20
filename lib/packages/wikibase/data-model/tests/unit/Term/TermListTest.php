@@ -157,7 +157,7 @@ class TermListTest extends \PHPUnit\Framework\TestCase {
 		$this->assertFalse( $list->hasTermForLanguage( $languageCode ) );
 	}
 
-	public function invalidLanguageCodeProvider() {
+	public static function invalidLanguageCodeProvider() {
 		return [
 			[ null ],
 			[ 21 ],

@@ -172,7 +172,7 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 		$this->assertChainEquals( $expected, $chain );
 	}
 
-	public function providerNewFromLanguage() {
+	public static function providerNewFromLanguage() {
 		return [
 			[
 				'languageCode' => 'en',
@@ -313,7 +313,7 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 		$factory->newFromLanguageCode( $languageCode );
 	}
 
-	public function provideNewFromLanguageCodeException() {
+	public static function provideNewFromLanguageCodeException() {
 		return [
 			[ ':' ],
 			[ '/' ],
@@ -369,7 +369,7 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 		$this->assertChainEquals( $expected, $chain );
 	}
 
-	public function provideTestFromBabel() {
+	public static function provideTestFromBabel() {
 		return [
 			[
 				'babel' => [ 'N' => [ 'de-formal' ] ],

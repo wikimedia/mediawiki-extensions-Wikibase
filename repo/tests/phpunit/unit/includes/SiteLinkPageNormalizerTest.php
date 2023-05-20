@@ -27,7 +27,7 @@ class SiteLinkPageNormalizerTest extends MediaWikiUnitTestCase {
 		self::BADGE_INTENTIONAL_SITELINK_TO_REDIRECT,
 	];
 
-	public function provideBadgesAndFlags(): iterable {
+	public static function provideBadgesAndFlags(): iterable {
 		yield 'no badges' => [
 			'badges' => [],
 			'followFlag' => MediaWikiPageNameNormalizer::FOLLOW_REDIRECT,

@@ -28,7 +28,7 @@ class AliasesSerializerTest extends TestCase {
 		);
 	}
 
-	public function aliasesProvider(): Generator {
+	public static function aliasesProvider(): Generator {
 		yield 'empty' => [
 			new Aliases(),
 			new ArrayObject( [] ),

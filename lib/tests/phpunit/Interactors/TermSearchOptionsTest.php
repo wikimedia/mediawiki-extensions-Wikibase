@@ -15,7 +15,7 @@ use Wikibase\Lib\Interactors\TermSearchOptions;
  */
 class TermSearchOptionsTest extends \PHPUnit\Framework\TestCase {
 
-	public function provideLimitInputAndExpected() {
+	public static function provideLimitInputAndExpected() {
 		return [
 			[ 1, 1 ],
 			[ 2500, 2500 ],
@@ -32,7 +32,7 @@ class TermSearchOptionsTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $options->getLimit() );
 	}
 
-	public function provideBooleanOptions() {
+	public static function provideBooleanOptions() {
 		return [
 			[ true ],
 			[ false ],

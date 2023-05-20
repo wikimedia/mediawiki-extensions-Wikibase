@@ -166,7 +166,7 @@ class MockRepositoryTest extends TestCase {
 		$this->assertNull( $this->repo->getItemIdForLink( 'enwiki', 'Bar' ) );
 	}
 
-	public function provideGetLinks() {
+	public static function provideGetLinks() {
 		$a = new Item( new ItemId( 'Q1' ) );
 		$a->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
 		$a->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Bar' );
@@ -258,7 +258,7 @@ class MockRepositoryTest extends TestCase {
 		$this->assertEquals( $expectedLinks, $links );
 	}
 
-	public function provideGetEntities() {
+	public static function provideGetEntities() {
 		return [
 			'empty' => [
 				'itemIds' => [],
@@ -379,7 +379,7 @@ class MockRepositoryTest extends TestCase {
 		$this->assertSame( [], $this->repo->getSiteLinksForItem( new ItemId( 'q123' ) ) );
 	}
 
-	public function provideSaveEntity() {
+	public static function provideSaveEntity() {
 		$item = new Item();
 		$item->setLabel( 'en', 'one' );
 

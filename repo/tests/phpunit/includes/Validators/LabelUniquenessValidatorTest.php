@@ -22,7 +22,7 @@ use Wikibase\Repo\Validators\LabelUniquenessValidator;
  */
 class LabelUniquenessValidatorTest extends \PHPUnit\Framework\TestCase {
 
-	public function provideErrors() {
+	public static function provideErrors() {
 		$terms = [];
 
 		yield [

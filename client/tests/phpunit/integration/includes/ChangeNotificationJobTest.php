@@ -22,7 +22,7 @@ class ChangeNotificationJobTest extends MediaWikiIntegrationTestCase {
 	// TODO: testGetChanges
 	// TODO: testRun
 
-	public function provideToString() {
+	public static function provideToString() {
 		return [
 			'empty' => [
 				[],

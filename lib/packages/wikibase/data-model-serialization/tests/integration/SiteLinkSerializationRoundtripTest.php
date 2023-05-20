@@ -34,7 +34,7 @@ class SiteLinkSerializationRoundtripTest extends TestCase {
 		$this->assertEquals( $siteLink, $newSiteLink );
 	}
 
-	public function siteLinkProvider() {
+	public static function siteLinkProvider() {
 		return [
 			[
 				new SiteLink( 'enwiki', 'Nyan Cat' ),

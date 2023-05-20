@@ -25,7 +25,7 @@ class WikibaseRepoDescriptionLanguageCodeValidatorTest extends TestCase {
 		$this->assertNull( $this->newValidator()->validate( $language ) );
 	}
 
-	public function provideValidDescriptionLanguageCode(): Generator {
+	public static function provideValidDescriptionLanguageCode(): Generator {
 		yield 'English' => [ 'en' ];
 		yield 'German' => [ 'de' ];
 		yield 'Arabic' => [ 'ar' ];
@@ -44,7 +44,7 @@ class WikibaseRepoDescriptionLanguageCodeValidatorTest extends TestCase {
 		$this->assertEquals( $expectedValidationError, $validationError );
 	}
 
-	public function provideInvalidDescriptionLanguageCode(): Generator {
+	public static function provideInvalidDescriptionLanguageCode(): Generator {
 		yield 'xyz not a language code' => [ 'xyz' ];
 		yield 'en-uk not a language code' => [ 'en-uk' ];
 		yield "mul can't be used as a description language code" => [ 'mul' ];

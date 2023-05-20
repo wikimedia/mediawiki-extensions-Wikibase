@@ -45,7 +45,7 @@ class MediaWikiNumberLocalizerTest extends TestCase {
 		);
 	}
 
-	public function provideLocalizeNumberCases() {
+	public static function provideLocalizeNumberCases() {
 		$languageFactory = MediaWikiServices::getInstance()->getLanguageFactory();
 		$languageEn = $languageFactory->getLanguage( 'en' );
 		$languageAr = $languageFactory->getLanguage( 'ar' );

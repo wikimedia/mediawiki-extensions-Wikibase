@@ -16,7 +16,7 @@ use Wikibase\Repo\ChangeOp\ChangeOpsResult;
  */
 class ChangedLanguagesCounterTest extends \PHPUnit\Framework\TestCase {
 
-	public function changeOpResultsProvider() {
+	public static function changeOpResultsProvider() {
 		$entityId = new ItemId( 'Q123' );
 		return [
 			'Entity changed' => [

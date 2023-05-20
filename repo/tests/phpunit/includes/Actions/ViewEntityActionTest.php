@@ -44,7 +44,7 @@ class ViewEntityActionTest extends ActionTestCase {
 		$this->assertInstanceOf( ViewEntityAction::class, $action );
 	}
 
-	public function provideShow() {
+	public static function provideShow() {
 		return [
 			[ 'Berlin', 'Hauptstadt von Deutschland' ],
 			[ 'Berlin2', 'redirectMsg' ],

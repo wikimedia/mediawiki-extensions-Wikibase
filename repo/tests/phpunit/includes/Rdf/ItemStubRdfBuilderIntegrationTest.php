@@ -72,7 +72,7 @@ class ItemStubRdfBuilderIntegrationTest extends MediaWikiIntegrationTestCase {
 		$this->helper->assertNTriplesEqualsDataset( $dataSetName, $actual );
 	}
 
-	public function provideAddEntityStub() {
+	public static function provideAddEntityStub() {
 		return [
 			[ 'Q2', 'Q2_terms_stubs', [ 'en', 'ru' ] ],
 			[ 'Q2', 'Q2_terms_stubs_ru', [ 'ru' ] ],

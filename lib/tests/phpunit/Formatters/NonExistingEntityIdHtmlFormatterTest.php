@@ -18,7 +18,7 @@ use Wikibase\Lib\Formatters\NonExistingEntityIdHtmlFormatter;
  */
 class NonExistingEntityIdHtmlFormatterTest extends TestCase {
 
-	public function provideTestFormatEntityId() {
+	public static function provideTestFormatEntityId() {
 		yield [ new ItemId( 'Q1' ), 'Q1 <span class="wb-entity-undefinedinfo">(⧼somePrefix-item⧽)</span>' ];
 		yield [ new NumericPropertyId( 'P99' ), 'P99 <span class="wb-entity-undefinedinfo">(⧼somePrefix-property⧽)</span>' ];
 	}

@@ -23,7 +23,7 @@ class SubEntityTypesMapperTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $parent, $map->getParentEntityType( $givenType ) );
 	}
 
-	public function parentTypeProvider() {
+	public static function parentTypeProvider() {
 		yield 'top level type without a parent' => [
 			'typeMap' => [ 'property' => [] ],
 			'givenType' => 'property',
@@ -52,7 +52,7 @@ class SubEntityTypesMapperTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $subTypes, $map->getSubEntityTypes( $givenType ) );
 	}
 
-	public function subTypesProvider() {
+	public static function subTypesProvider() {
 		yield 'top level type without sub types' => [
 			'typeMap' => [ 'property' => [] ],
 			'givenType' => 'property',

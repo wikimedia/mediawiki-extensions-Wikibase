@@ -25,7 +25,7 @@ class WikiPagePropertyOrderProviderTest extends MediaWikiIntegrationTestCase {
 		$this->tablesUsed[] = 'page';
 	}
 
-	public function provideGetPropertyOrder() {
+	public static function provideGetPropertyOrder() {
 		return WikiTextPropertyOrderProviderTestHelper::provideGetPropertyOrder();
 	}
 

@@ -28,7 +28,7 @@ class LegacyIdInterpreterTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $actual );
 	}
 
-	public function idProvider() {
+	public static function idProvider() {
 		return [
 			[ new ItemId( 'Q42' ), 'item', 42 ],
 			[ new NumericPropertyId( 'P42' ), 'property', 42 ],
@@ -43,7 +43,7 @@ class LegacyIdInterpreterTest extends \PHPUnit\Framework\TestCase {
 		LegacyIdInterpreter::newIdFromTypeAndNumber( $type, $number );
 	}
 
-	public function invalidInputProvider() {
+	public static function invalidInputProvider() {
 		return [
 			[ 'kittens', 42 ],
 			[ 'item', [ 'kittens' ] ],

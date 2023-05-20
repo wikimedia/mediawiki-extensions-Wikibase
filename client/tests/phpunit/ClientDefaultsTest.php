@@ -16,7 +16,7 @@ use Wikibase\Lib\WikibaseSettings;
  */
 class ClientDefaultsTest extends MediaWikiIntegrationTestCase {
 
-	public function settingsProvider(): iterable {
+	public static function settingsProvider(): iterable {
 		yield 'no local repo, all values set' => [
 			[ // $settings
 				'repoUrl' => 'http://acme.com',

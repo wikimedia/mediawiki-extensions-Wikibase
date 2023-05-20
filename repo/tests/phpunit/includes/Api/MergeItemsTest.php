@@ -259,7 +259,7 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 		return $data;
 	}
 
-	public function provideData() {
+	public static function provideData() {
 		$testCases = [];
 		$testCases['labelMerge'] = [
 			[ 'labels' => [ 'en' => [ 'language' => 'en', 'value' => 'foo' ] ] ],
@@ -401,7 +401,7 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 		$this->assertContains( $tag, $this->mockRepository->getLogEntry( $result['to']['lastrevid'] )['tags'] );
 	}
 
-	public function provideExceptionParamsData() {
+	public static function provideExceptionParamsData() {
 		return [
 			[ //0 no ids given
 				'p' => [],
@@ -492,7 +492,7 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	public function provideExceptionConflictsData() {
+	public static function provideExceptionConflictsData() {
 		return [
 			[
 				[ 'descriptions' => [ 'en' => [ 'language' => 'en', 'value' => 'foo' ] ] ],

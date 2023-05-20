@@ -48,7 +48,7 @@ class ChangeOpReferenceTest extends \PHPUnit\Framework\TestCase {
 		$this->mockProvider = new ChangeOpTestMockProvider( $this );
 	}
 
-	public function invalidArgumentProvider() {
+	public static function invalidArgumentProvider() {
 		$item = new Item( new ItemId( 'Q42' ) );
 
 		$guidGenerator = new GuidGenerator();
@@ -264,7 +264,7 @@ class ChangeOpReferenceTest extends \PHPUnit\Framework\TestCase {
 		return $item;
 	}
 
-	public function provideApplyInvalid() {
+	public static function provideApplyInvalid() {
 		$p11 = new NumericPropertyId( 'P11' );
 		$q17 = new ItemId( 'Q17' );
 
@@ -311,7 +311,7 @@ class ChangeOpReferenceTest extends \PHPUnit\Framework\TestCase {
 		$changeOpReference->apply( $entity );
 	}
 
-	public function provideValidate() {
+	public static function provideValidate() {
 		$p11 = new NumericPropertyId( 'P11' );
 		$q17 = new ItemId( 'Q17' );
 

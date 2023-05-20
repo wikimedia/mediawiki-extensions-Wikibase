@@ -336,7 +336,7 @@ class DatabaseTermsCollisionDetectorTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $expectedResults, $properties );
 	}
 
-	public function termListProvider(): iterable {
+	public static function termListProvider(): iterable {
 
 		$deFoo = new Term( 'de', 'foo' );
 		$enFoo = new Term( 'en', 'foo' );

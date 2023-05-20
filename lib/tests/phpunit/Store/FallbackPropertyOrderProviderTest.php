@@ -16,7 +16,7 @@ use Wikibase\Lib\Store\PropertyOrderProvider;
  */
 class FallbackPropertyOrderProviderTest extends \PHPUnit\Framework\TestCase {
 
-	public function getPropertyOrderProvider() {
+	public static function getPropertyOrderProvider() {
 		return [
 			[
 				null,

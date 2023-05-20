@@ -44,7 +44,7 @@ class SiteLinkTableTest extends MediaWikiIntegrationTestCase {
 		$this->tablesUsed[] = 'wb_items_per_site';
 	}
 
-	public function itemProvider() {
+	public static function itemProvider() {
 		$items = [];
 
 		$item = new Item( new ItemId( 'Q1' ) );

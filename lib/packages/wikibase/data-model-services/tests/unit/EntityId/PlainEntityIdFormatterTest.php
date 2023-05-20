@@ -16,7 +16,7 @@ use Wikibase\DataModel\Services\EntityId\PlainEntityIdFormatter;
  */
 class PlainEntityIdFormatterTest extends TestCase {
 
-	public function validProvider() {
+	public static function validProvider() {
 		$argLists = [];
 
 		$argLists[] = [ new ItemId( 'q42' ), 'Q42' ];

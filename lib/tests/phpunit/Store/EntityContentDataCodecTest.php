@@ -41,7 +41,7 @@ class EntityContentDataCodecTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	public function entityIdProvider() {
+	public static function entityIdProvider() {
 		$p1 = new NumericPropertyId( 'P1' );
 		$q11 = new ItemId( 'Q11' );
 
@@ -60,7 +60,7 @@ class EntityContentDataCodecTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $id, $entity->getId() );
 	}
 
-	public function entityProvider() {
+	public static function entityProvider() {
 		$empty = new Item( new ItemId( 'Q1' ) );
 
 		$simple = new Item( new ItemId( 'Q1' ) );
@@ -102,7 +102,7 @@ class EntityContentDataCodecTest extends MediaWikiIntegrationTestCase {
 		$this->getCodec( 6 )->decodeEntity( $blob, CONTENT_FORMAT_JSON );
 	}
 
-	public function redirectProvider() {
+	public static function redirectProvider() {
 		$q6 = new ItemId( 'Q6' );
 		$q8 = new ItemId( 'Q8' );
 

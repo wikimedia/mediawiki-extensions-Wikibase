@@ -192,7 +192,7 @@ class GetClaimsTest extends ApiTestCase {
 		}
 	}
 
-	public function invalidClaimProvider() {
+	public static function invalidClaimProvider() {
 		return [
 			[ 'xyz' ],
 			[ 'x$y$z' ],
@@ -226,7 +226,7 @@ class GetClaimsTest extends ApiTestCase {
 		}
 	}
 
-	public function getInvalidIdsProvider() {
+	public static function getInvalidIdsProvider() {
 		return [
 			[ null, 'nopeNopeNope' ],
 			[ 'whatTheFuck', 'P42' ],

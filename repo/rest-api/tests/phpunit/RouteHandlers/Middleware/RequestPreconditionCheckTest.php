@@ -53,7 +53,7 @@ class RequestPreconditionCheckTest extends TestCase {
 		}
 	}
 
-	public function headersAndRevisionMetadataProvider(): Generator {
+	public static function headersAndRevisionMetadataProvider(): Generator {
 		yield 'If-None-Match - revision id match' => [
 			'headers' => [ 'If-None-Match' => '"42"' ],
 			'revisionMetadataResult' => LatestItemRevisionMetadataResult::concreteRevision( 42, '20201111070707' ),
@@ -140,7 +140,7 @@ class RequestPreconditionCheckTest extends TestCase {
 		);
 	}
 
-	public function redirectOrNotExistMetadataProvider(): Generator {
+	public static function redirectOrNotExistMetadataProvider(): Generator {
 		yield 'item redirect' => [
 			LatestItemRevisionMetadataResult::redirect( new ItemId( 'Q24' ) ),
 		];

@@ -45,7 +45,7 @@ class TimeParsingIntegrationTest extends TestCase {
 		$this->assertSame( $expected->getArrayValue(), $actual->getArrayValue() );
 	}
 
-	public function validInputProvider(): iterable {
+	public static function validInputProvider(): iterable {
 		$gregorian = TimeValue::CALENDAR_GREGORIAN;
 		$day = TimeValue::PRECISION_DAY;
 

@@ -61,7 +61,7 @@ class LanguageWithConversionTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	public function provideFactory() {
+	public static function provideFactory() {
 		return [
 			[ 'en', null, 'en', null, 'en' ],
 			[ 'zh', null, 'zh', null, 'zh' ],
@@ -89,7 +89,7 @@ class LanguageWithConversionTest extends MediaWikiIntegrationTestCase {
 		LanguageWithConversion::factory( $langCode, $sourceLangCode );
 	}
 
-	public function provideFactoryException() {
+	public static function provideFactoryException() {
 		return [
 			[ ':', null ],
 			[ '/', null ],
@@ -127,7 +127,7 @@ class LanguageWithConversionTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	public function provideTranslate() {
+	public static function provideTranslate() {
 		return [
 			[ 'de', null, [
 				'foo' => 'foo',

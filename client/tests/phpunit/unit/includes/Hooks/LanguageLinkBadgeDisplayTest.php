@@ -65,7 +65,7 @@ class LanguageLinkBadgeDisplayTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $parserOutput->getExtensionData( 'wikibase_badges' ) );
 	}
 
-	public function attachBadgesToOutputProvider() {
+	public static function attachBadgesToOutputProvider() {
 		$q2 = new ItemId( 'Q2' );
 		$q3 = new ItemId( 'Q3' );
 		$q4 = new ItemId( 'Q4' );

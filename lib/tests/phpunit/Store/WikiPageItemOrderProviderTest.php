@@ -24,7 +24,7 @@ class WikiPageItemOrderProviderTest extends MediaWikiIntegrationTestCase {
 		$this->tablesUsed[] = 'page';
 	}
 
-	public function provideGetItemOrder(): iterable {
+	public static function provideGetItemOrder(): iterable {
 		return WikiPageItemOrderProviderTestHelper::provideGetItemOrder();
 	}
 

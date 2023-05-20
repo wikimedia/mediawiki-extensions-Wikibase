@@ -207,7 +207,7 @@ class ChangeOpsMergeTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @return array 1=>from 2=>to 3=>expectedFrom 4=>expectedTo
 	 */
-	public function provideData() {
+	public static function provideData() {
 		$testCases = [];
 
 		$itemWithEnLabel = NewItem::withLabel( 'en', 'foo' )

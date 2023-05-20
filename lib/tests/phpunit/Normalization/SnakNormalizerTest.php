@@ -73,7 +73,7 @@ class SnakNormalizerTest extends TestCase {
 		$this->assertSame( $snak, $normalizer->normalize( $snak ) );
 	}
 
-	public function provideNonValueSnak(): iterable {
+	public static function provideNonValueSnak(): iterable {
 		$propertyId = new NumericPropertyId( self::STRING_PROPERTY );
 		yield 'somevalue' => [ new PropertySomeValueSnak( $propertyId ) ];
 		yield 'novalue' => [ new PropertyNoValueSnak( $propertyId ) ];

@@ -18,7 +18,7 @@ use Wikibase\Client\Hooks\EchoSetupHookHandler;
  */
 class EchoSetupHookHandlerTest extends MediaWikiIntegrationTestCase {
 
-	public function beforeCreateEchoEventProvider() {
+	public static function beforeCreateEchoEventProvider() {
 		return [
 			'no registration' => [
 				'register' => false,

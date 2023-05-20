@@ -144,7 +144,7 @@ class DumpJsonTest extends MediaWikiIntegrationTestCase {
 		return $dumpScript;
 	}
 
-	public function dumpParameterProvider() {
+	public static function dumpParameterProvider() {
 		return [
 			'dump everything' => [
 				[],

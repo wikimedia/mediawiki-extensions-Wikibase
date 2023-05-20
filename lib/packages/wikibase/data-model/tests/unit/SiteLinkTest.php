@@ -34,7 +34,7 @@ class SiteLinkTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $siteId, $siteLink->getSiteId() );
 	}
 
-	public function siteIdProvider() {
+	public static function siteIdProvider() {
 		$argLists = [];
 
 		$argLists[] = [ 'enwiki' ];
@@ -52,7 +52,7 @@ class SiteLinkTest extends \PHPUnit\Framework\TestCase {
 		new SiteLink( $invalidSiteId, 'Wikidata' );
 	}
 
-	public function invalidStringIdentifierProvider() {
+	public static function invalidStringIdentifierProvider() {
 		return [
 			[ null ],
 			[ true ],
@@ -70,7 +70,7 @@ class SiteLinkTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $pageName, $siteLink->getPageName() );
 	}
 
-	public function pageNameProvider() {
+	public static function pageNameProvider() {
 		$argLists = [];
 
 		$argLists[] = [ 'Wikidata' ];
@@ -96,7 +96,7 @@ class SiteLinkTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $siteLink->getBadges() );
 	}
 
-	public function badgesProvider() {
+	public static function badgesProvider() {
 		$argLists = [];
 
 		$argLists[] = [ null, [] ];
@@ -141,7 +141,7 @@ class SiteLinkTest extends \PHPUnit\Framework\TestCase {
 		new SiteLink( 'enwiki', 'Wikidata', $invalidBadges );
 	}
 
-	public function invalidBadgesProvider() {
+	public static function invalidBadgesProvider() {
 		return [
 			// Stuff that's not an array
 			[ true ],
@@ -167,7 +167,7 @@ class SiteLinkTest extends \PHPUnit\Framework\TestCase {
 		$this->assertTrue( $linkCopy->equals( $link ) );
 	}
 
-	public function linkProvider() {
+	public static function linkProvider() {
 		return [
 			[ new SiteLink( 'foo', 'Bar' ) ],
 			[ new SiteLink( 'foo', 'Bar', [ new ItemId( 'Q42' ), new ItemId( 'Q9001' ) ] ) ],
@@ -183,7 +183,7 @@ class SiteLinkTest extends \PHPUnit\Framework\TestCase {
 		$this->assertFalse( $linkTwo->equals( $linkOne ) );
 	}
 
-	public function nonEqualityProvider() {
+	public static function nonEqualityProvider() {
 		return [
 			[
 				new SiteLink( 'foo', 'bar' ),

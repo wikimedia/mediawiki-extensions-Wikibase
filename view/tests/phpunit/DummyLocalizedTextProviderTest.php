@@ -25,7 +25,7 @@ class DummyLocalizedTextProviderTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function dummyLocalizedTextProviderProvider() {
+	public static function dummyLocalizedTextProviderProvider() {
 		yield [
 			'messageKey' => 'parentheses',
 			'params' => [ 'VALUE' ],
@@ -49,7 +49,7 @@ class DummyLocalizedTextProviderTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function escapedMessageProvider() {
+	public static function escapedMessageProvider() {
 		yield [
 			'messageKey' => 'parentheses',
 			'params' => [ 'VALUE' ],

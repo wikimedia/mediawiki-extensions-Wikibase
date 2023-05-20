@@ -77,7 +77,7 @@ class DirectSqlStoreTest extends MediaWikiIntegrationTestCase {
 		$this->assertInstanceOf( $expectedType, $obj );
 	}
 
-	public function provideGetters() {
+	public static function provideGetters() {
 		return [
 			[ 'getSiteLinkLookup', SiteLinkLookup::class ],
 			[ 'getEntityLookup', EntityLookup::class ],
@@ -116,7 +116,7 @@ class DirectSqlStoreTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	public function provideBooleans() {
+	public static function provideBooleans() {
 		yield [ true ];
 		yield [ false ];
 	}

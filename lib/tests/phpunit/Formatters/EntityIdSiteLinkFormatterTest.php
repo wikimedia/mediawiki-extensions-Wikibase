@@ -20,7 +20,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
  */
 class EntityIdSiteLinkFormatterTest extends \PHPUnit\Framework\TestCase {
 
-	public function formatEntityIdProvider() {
+	public static function formatEntityIdProvider() {
 		return [
 			[
 				new SiteLink( 'enwiki', "'PAGE'" ),

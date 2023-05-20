@@ -27,7 +27,7 @@ class MonolingualWikitextFormatterTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $expected, $wikitext );
 	}
 
-	public function monolingualWikitextProvider() {
+	public static function monolingualWikitextProvider() {
 		return [
 			'formatting' => [
 				new MonolingualTextValue( 'de', 'Hallo Welt' ),

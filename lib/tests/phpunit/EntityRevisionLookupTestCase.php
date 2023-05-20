@@ -81,7 +81,7 @@ abstract class EntityRevisionLookupTestCase extends MediaWikiIntegrationTestCase
 	 */
 	abstract protected function newEntityRevisionLookup( array $entityRevisions, array $entityRedirects );
 
-	public function provideGetEntityRevision() {
+	public static function provideGetEntityRevision() {
 		$cases = [
 			[ // #0: any revision
 				new ItemId( 'q42' ), 0, true,
@@ -157,7 +157,7 @@ abstract class EntityRevisionLookupTestCase extends MediaWikiIntegrationTestCase
 		}
 	}
 
-	public function provideGetLatestRevisionId() {
+	public static function provideGetLatestRevisionId() {
 		$cases = [
 			[ // #0
 				new ItemId( 'q42' ), 12,

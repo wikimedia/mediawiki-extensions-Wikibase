@@ -58,7 +58,7 @@ class EntityTypeDefinitionsTest extends \PHPUnit\Framework\TestCase {
 		}
 	}
 
-	public function provideFieldNames() {
+	public static function provideFieldNames() {
 		$class = new ReflectionClass( EntityTypeDefinitions::class );
 		// TODO PHP8: use $class->getConstants( ReflectionClassConstant::IS_PUBLIC )
 		foreach ( $class->getReflectionConstants() as $constant ) {

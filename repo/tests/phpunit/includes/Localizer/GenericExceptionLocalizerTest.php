@@ -16,7 +16,7 @@ use Wikibase\Repo\Localizer\GenericExceptionLocalizer;
  */
 class GenericExceptionLocalizerTest extends \PHPUnit\Framework\TestCase {
 
-	public function provideGetExceptionMessage() {
+	public static function provideGetExceptionMessage() {
 		return [
 			'RuntimeException' => [
 				new RuntimeException( 'Oops!' ),

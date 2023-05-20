@@ -74,7 +74,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$this->setAllowDataAccessInUserLanguage( $this->oldAllowDataAccessInUserLanguage );
 	}
 
-	public function allowDataAccessInUserLanguageProvider() {
+	public static function allowDataAccessInUserLanguageProvider() {
 		return [
 			[ true ],
 			[ false ],
@@ -165,7 +165,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$luaWikibaseLibrary->getEntity( 'X888' );
 	}
 
-	public function entityExistsProvider() {
+	public static function entityExistsProvider() {
 		return [
 			[ true, 'Q885588' ],
 			[ false, 'Q338380281' ],
@@ -205,7 +205,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$this->assertFalse( $cacheSplit );
 	}
 
-	public function getEntityUrlProvider() {
+	public static function getEntityUrlProvider() {
 		return [
 			'Valid ID' => [ [ 'this-is-a-URL' ], 'Q1' ],
 			'Invalid ID' => [ [ null ], 'not-an-id' ],
@@ -279,7 +279,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$this->assertSame( [ [] ], $badges );
 	}
 
-	public function provideIsValidEntityId() {
+	public static function provideIsValidEntityId() {
 		return [
 			[ true, 'Q12' ],
 			[ true, 'P12' ],
@@ -447,7 +447,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		);
 	}
 
-	public function provideOrderProperties() {
+	public static function provideOrderProperties() {
 		return [
 			'all IDs in the provider' => [
 				[ 'P16', 'P5', 'P4', 'P8' ],
@@ -472,7 +472,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		];
 	}
 
-	public function provideGetPropertyOrder() {
+	public static function provideGetPropertyOrder() {
 		return [
 			'all IDs in the provider' => [
 				[ 'P8' => 0, 'P16' => 1, 'P4' => 2, 'P5' => 3 ],

@@ -32,7 +32,7 @@ class HtmlUrlFormatterTest extends \PHPUnit\Framework\TestCase {
 		$this->assertMatchesRegularExpression( $pattern, $html );
 	}
 
-	public function urlFormatProvider() {
+	public static function urlFormatProvider() {
 		$options = new FormatterOptions();
 
 		return [

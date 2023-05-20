@@ -39,7 +39,7 @@ class EntityConstraintProviderTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function provideTestGetUpdateValidators() {
+	public static function provideTestGetUpdateValidators() {
 		return [
 			'for items' => [
 				'entityType' => Item::ENTITY_TYPE,
@@ -70,7 +70,7 @@ class EntityConstraintProviderTest extends \PHPUnit\Framework\TestCase {
 		$this->assertValidators( $expectedValidatorTypes, $validators );
 	}
 
-	public function provideTestGetCreationValidators() {
+	public static function provideTestGetCreationValidators() {
 		return [
 			// Property
 			'for properties' => [

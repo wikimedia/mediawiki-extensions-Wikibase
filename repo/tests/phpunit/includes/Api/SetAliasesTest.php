@@ -115,7 +115,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 		] );
 	}
 
-	public function provideData() {
+	public static function provideData() {
 		return [
 			// p => params, e => expected
 

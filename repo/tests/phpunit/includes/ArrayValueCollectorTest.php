@@ -14,7 +14,7 @@ use Wikibase\Repo\ArrayValueCollector;
  */
 class ArrayValueCollectorTest extends TestCase {
 
-	public function provideCollectValues() {
+	public static function provideCollectValues() {
 		return [
 			'simple array, nothing ignored' => [
 				[

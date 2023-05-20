@@ -33,7 +33,7 @@ class JsonDiffJsonPatchValidatorTest extends TestCase {
 		$this->assertSame( $context, $error->getContext() );
 	}
 
-	public function provideInvalidJsonPatch(): Generator {
+	public static function provideInvalidJsonPatch(): Generator {
 		$invalidOperationObject = [ 'path' => '/a/b/c', 'value' => 'foo' ];
 		yield 'missing "op" field' => [
 			JsonPatchValidator::CODE_MISSING_FIELD,

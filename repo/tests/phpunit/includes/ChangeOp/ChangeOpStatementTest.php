@@ -66,7 +66,7 @@ class ChangeOpStatementTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function invalidIndexProvider() {
+	public static function invalidIndexProvider() {
 		return [
 			[ false ],
 			[ -1 ],
@@ -347,7 +347,7 @@ class ChangeOpStatementTest extends \PHPUnit\Framework\TestCase {
 		return $item;
 	}
 
-	public function validateProvider() {
+	public static function validateProvider() {
 		$p11 = new NumericPropertyId( 'P11' );
 		$q17 = new ItemId( 'Q17' );
 

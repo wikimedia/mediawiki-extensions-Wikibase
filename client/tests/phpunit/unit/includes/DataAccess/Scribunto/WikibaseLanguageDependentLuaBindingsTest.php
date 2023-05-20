@@ -62,7 +62,7 @@ class WikibaseLanguageDependentLuaBindingsTest extends \PHPUnit\Framework\TestCa
 		return $labelDescriptionLookup;
 	}
 
-	public function getLabelProvider() {
+	public static function getLabelProvider() {
 		return [
 			[ [ 'LabelString', 'lang-code' ], 'Q123' ],
 			[ [ null, null ], 'DoesntExist' ],
@@ -83,7 +83,7 @@ class WikibaseLanguageDependentLuaBindingsTest extends \PHPUnit\Framework\TestCa
 		$this->assertSame( $expected, $wikibaseLuaBindings->getLabel( $itemId ) );
 	}
 
-	public function getDescriptionProvider() {
+	public static function getDescriptionProvider() {
 		return [
 			[ [ 'DescriptionString', 'lang-code' ], 'Q123' ],
 			[ [ null, null ], 'DoesntExist' ],

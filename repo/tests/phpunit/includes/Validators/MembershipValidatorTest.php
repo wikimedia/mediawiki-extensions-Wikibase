@@ -27,7 +27,7 @@ class MembershipValidatorTest extends \PHPUnit\Framework\TestCase {
 		new MembershipValidator( [], $errorCode, $normalizer );
 	}
 
-	public function invalidConstructorArgumentsProvider() {
+	public static function invalidConstructorArgumentsProvider() {
 		return [
 			[ null, null ],
 			[ 1, null ],
@@ -36,7 +36,7 @@ class MembershipValidatorTest extends \PHPUnit\Framework\TestCase {
 		];
 	}
 
-	public function provideValidate() {
+	public static function provideValidate() {
 		return [
 			'contained' => [ [ 'apple', 'pear' ], null, 'apple', true ],
 			'not contained' => [ [ 'apple', 'pear' ], null, 'nuts', false ],

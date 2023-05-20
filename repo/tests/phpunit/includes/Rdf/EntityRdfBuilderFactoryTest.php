@@ -27,7 +27,7 @@ use Wikimedia\Purtle\RdfWriter;
  */
 class EntityRdfBuilderFactoryTest extends \PHPUnit\Framework\TestCase {
 
-	public function provideBuilderFlags() {
+	public static function provideBuilderFlags() {
 		return [
 			[ 0 ], // simple values
 			[ RdfProducer::PRODUCE_FULL_VALUES ], // complex values

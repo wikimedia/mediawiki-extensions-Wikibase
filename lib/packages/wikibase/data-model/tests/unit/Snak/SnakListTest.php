@@ -20,7 +20,7 @@ use Wikibase\DataModel\Snak\SnakList;
  */
 class SnakListTest extends \PHPUnit\Framework\TestCase {
 
-	public function elementInstancesProvider() {
+	public static function elementInstancesProvider() {
 		$id42 = new NumericPropertyId( 'P42' );
 
 		$argLists = [];
@@ -32,7 +32,7 @@ class SnakListTest extends \PHPUnit\Framework\TestCase {
 		return $argLists;
 	}
 
-	public function instanceProvider() {
+	public static function instanceProvider() {
 		$id42 = new NumericPropertyId( 'P42' );
 		$id9001 = new NumericPropertyId( 'P9001' );
 
@@ -61,7 +61,7 @@ class SnakListTest extends \PHPUnit\Framework\TestCase {
 		new SnakList( $input );
 	}
 
-	public function invalidConstructorArgumentsProvider() {
+	public static function invalidConstructorArgumentsProvider() {
 		$id1 = new NumericPropertyId( 'P1' );
 
 		return [
@@ -156,7 +156,7 @@ class SnakListTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $elementCount, $array->count() );
 	}
 
-	public function orderByPropertyProvider() {
+	public static function orderByPropertyProvider() {
 		$id1 = new NumericPropertyId( 'P1' );
 		$id2 = new NumericPropertyId( 'P2' );
 		$id3 = new NumericPropertyId( 'P3' );
@@ -308,7 +308,7 @@ class SnakListTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $expected, $list1->equals( $list2 ) );
 	}
 
-	public function equalsProvider() {
+	public static function equalsProvider() {
 		$empty = new SnakList();
 		$oneSnak = new SnakList( [ new PropertyNoValueSnak( 1 ) ] );
 
@@ -372,7 +372,7 @@ class SnakListTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $self->getHash(), $other->getHash() );
 	}
 
-	public function provideEqualSnakLists() {
+	public static function provideEqualSnakLists() {
 		$empty = new SnakList();
 		$oneSnak = new SnakList( [ new PropertyNoValueSnak( 1 ) ] );
 

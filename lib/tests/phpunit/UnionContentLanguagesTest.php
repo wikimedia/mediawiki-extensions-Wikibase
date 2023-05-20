@@ -26,7 +26,7 @@ class UnionContentLanguagesTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $expected, $result );
 	}
 
-	public function provideTestGetLanguages() {
+	public static function provideTestGetLanguages() {
 		$empty = new StaticContentLanguages( [] );
 		$one = new StaticContentLanguages( [ 'one' ] );
 		$two = new StaticContentLanguages( [ 'one', 'two' ] );
@@ -52,7 +52,7 @@ class UnionContentLanguagesTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $expected, $result );
 	}
 
-	public function provideTestHasLanguage() {
+	public static function provideTestHasLanguage() {
 		$empty = new StaticContentLanguages( [] );
 		$one = new StaticContentLanguages( [ 'one' ] );
 		$two = new StaticContentLanguages( [ 'one', 'two' ] );

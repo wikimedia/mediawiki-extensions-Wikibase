@@ -70,7 +70,7 @@ class SiteLinkUniquenessValidatorTest extends \PHPUnit\Framework\TestCase {
 		$this->assertNull( $errors[1]->getConflictingEntity() );
 	}
 
-	public function provideRedirectsSupported(): iterable {
+	public static function provideRedirectsSupported(): iterable {
 		yield 'sitelinks to redirects not supported' => [ [], 'sitelink-conflict' ];
 		yield 'sitelinks to redirects supported' => [ [ 'Q1' ], 'sitelink-conflict-redirects-supported' ];
 	}

@@ -40,7 +40,7 @@ class ToolbarEditSectionGeneratorTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function getAddStatementToGroupSectionProvider() {
+	public static function getAddStatementToGroupSectionProvider() {
 		return [
 			[ new NumericPropertyId( 'P1' ) ],
 		];
@@ -59,7 +59,7 @@ class ToolbarEditSectionGeneratorTest extends \PHPUnit\Framework\TestCase {
 		$this->assertStringContainsString( $expected, $html );
 	}
 
-	public function getLabelDescriptionAliasesEditSectionProvider() {
+	public static function getLabelDescriptionAliasesEditSectionProvider() {
 		return [
 			[
 				'en',
@@ -78,7 +78,7 @@ class ToolbarEditSectionGeneratorTest extends \PHPUnit\Framework\TestCase {
 		$this->assertStringContainsString( $expected, $html );
 	}
 
-	public function getSiteLinksEditSectionProvider() {
+	public static function getSiteLinksEditSectionProvider() {
 		return [
 			[ new NumericPropertyId( 'P1' ), 'Special:SetSiteLink/P1' ],
 		];

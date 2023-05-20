@@ -14,7 +14,7 @@ use Wikibase\Repo\Store\Sql\Terms\DatabaseEntityTermsTableProvider;
  */
 class DatabaseEntityTermsTableProviderTest extends TestCase {
 
-	public function provideEntityTypeAndExpectedOutput(): iterable {
+	public static function provideEntityTypeAndExpectedOutput(): iterable {
 		return [
 			'item' => [
 				'entityType' => 'item',

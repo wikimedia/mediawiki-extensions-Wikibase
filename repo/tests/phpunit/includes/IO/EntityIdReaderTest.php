@@ -58,7 +58,7 @@ class EntityIdReaderTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEqualIds( $expected, $actual );
 	}
 
-	public function listEntitiesProvider() {
+	public static function listEntitiesProvider() {
 		$q1 = new ItemId( 'Q1' );
 		$p2 = new NumericPropertyId( 'P2' );
 		$q3 = new ItemId( 'Q3' );

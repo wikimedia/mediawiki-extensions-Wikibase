@@ -19,7 +19,7 @@ use Wikibase\Repo\ChangeOp\ChangeOpRemoveSiteLink;
  */
 class ChangeOpRemoveSiteLinkTest extends TestCase {
 
-	public function changeOpSiteLinkProvider() {
+	public static function changeOpSiteLinkProvider() {
 		$deSiteLink = new SiteLink( 'dewiki', 'Berlin' );
 		$plSiteLink = new SiteLink( 'plwiki', 'Berlin', [ new ItemId( 'Q42' ) ] );
 

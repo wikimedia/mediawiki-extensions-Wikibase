@@ -45,7 +45,7 @@ class HashSiteLinkStoreTest extends \PHPUnit\Framework\TestCase {
 		$this->assertNull( $siteLinkStore->getEntityIdForLinkedTitle( 'xywiki', 'Foo' ) );
 	}
 
-	public function provideGetLinks() {
+	public static function provideGetLinks() {
 		$cases = [];
 
 		$item1 = new Item( new ItemId( 'Q1' ) );

@@ -33,7 +33,7 @@ class FormatSnakValueTest extends ApiTestCase {
 	/** @var Property */
 	protected $testingProperty;
 
-	public function provideApiRequest() {
+	public static function provideApiRequest() {
 		$november11 = new TimeValue(
 			'+2013-11-11T01:02:03Z',
 			0, 0, 0,
@@ -293,7 +293,7 @@ class FormatSnakValueTest extends ApiTestCase {
 		$this->doApiRequest( $params );
 	}
 
-	public function provideInvalidParameters() {
+	public static function provideInvalidParameters() {
 		yield 'FORMAT_TYPE_MISMATCH' => [ [
 			'action' => 'wbformatvalue',
 			'generate' => SnakFormatter::FORMAT_HTML,

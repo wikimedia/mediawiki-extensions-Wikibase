@@ -63,7 +63,7 @@ class PatchedStatementValidatorTest extends TestCase {
 		}
 	}
 
-	public function invalidPatchedStatementProvider(): Generator {
+	public static function invalidPatchedStatementProvider(): Generator {
 		yield 'from invalid patched statement (missing field)' => [
 			new ValidationError(
 				StatementValidator::CODE_MISSING_FIELD,

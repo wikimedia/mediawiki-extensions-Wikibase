@@ -57,7 +57,7 @@ class ByCertainPropertyIdGrouperTest extends TestCase {
 		$snaks->getByPropertyId( $propertyId );
 	}
 
-	public function provideKnownAndUnknownPropertyId(): iterable {
+	public static function provideKnownAndUnknownPropertyId(): iterable {
 		yield 'known' => [ new NumericPropertyId( 'P1' ) ];
 		yield 'unknown' => [ null ];
 	}

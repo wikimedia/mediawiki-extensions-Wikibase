@@ -42,7 +42,7 @@ class SiteLinkBadgeItemReferenceExtractorTest extends TestCase {
 		$instance->extractEntityIds( $entity );
 	}
 
-	public function siteLinksProvider() {
+	public static function siteLinksProvider() {
 		yield 'no sitelinks' => [
 			[],
 			[],
@@ -58,7 +58,7 @@ class SiteLinkBadgeItemReferenceExtractorTest extends TestCase {
 		];
 	}
 
-	public function nonItemProvider() {
+	public static function nonItemProvider() {
 		yield 'property' => [ new Property( null, null, 'string' ) ];
 	}
 

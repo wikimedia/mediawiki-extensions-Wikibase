@@ -29,7 +29,7 @@ class StatementGuidTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $guid, $statementGuid->getGuidPart() );
 	}
 
-	public function provideConstructionData() {
+	public static function provideConstructionData() {
 		return [
 			[
 				new ItemId( 'q42' ),
@@ -57,7 +57,7 @@ class StatementGuidTest extends \PHPUnit\Framework\TestCase {
 		new StatementGuid( $entityId, $guid );
 	}
 
-	public function provideBadConstruction() {
+	public static function provideBadConstruction() {
 		$id = new ItemId( 'Q1' );
 
 		return [

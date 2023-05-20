@@ -60,21 +60,21 @@ class StatementIdValidatorTest extends TestCase {
 	/**
 	 * Valid data provider for StatementIdValidators that can parse ItemIds
 	 */
-	public function validItemStatementIdDataProvider(): Generator {
+	public static function validItemStatementIdDataProvider(): Generator {
 		yield 'valid with ItemId' => [ 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' ];
 	}
 
 	/**
 	 * Valid data provider for StatementIdValidators that can parse StatementIds
 	 */
-	public function validPropertyStatementIdDataProvider(): Generator {
+	public static function validPropertyStatementIdDataProvider(): Generator {
 		yield 'valid with ItemId' => [ 'P123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' ];
 	}
 
 	/**
 	 * Invalid data provider for StatementIdValidators with any EntityIdParser
 	 */
-	public function invalidStatementIdDataProvider(): Generator {
+	public static function invalidStatementIdDataProvider(): Generator {
 		yield 'invalid format' => [ 'not-a-valid-statement-id' ];
 		yield 'invalid EntityId' => [ 'X123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' ];
 		yield 'invalid UUID part (with ItemId)' => [ 'Q123$INVALID-UUID-PART' ];
@@ -84,7 +84,7 @@ class StatementIdValidatorTest extends TestCase {
 	/**
 	 * Invalid data provider for StatementIdValidators with ItemIdParser
 	 */
-	public function invalidItemStatementIdDataProvider(): Generator {
+	public static function invalidItemStatementIdDataProvider(): Generator {
 		yield 'statement not on an item' => [ 'P123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' ];
 	}
 

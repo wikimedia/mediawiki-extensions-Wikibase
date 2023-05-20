@@ -502,7 +502,7 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	//  * central = -1, repo = 1, client = 2
 
-	public function providePrepareChangeAttributes_rc_user() {
+	public static function providePrepareChangeAttributes_rc_user() {
 		$centralIdLookup = new MockRepoClientCentralIdLookup(
 			/** isRepo= */ false
 		);

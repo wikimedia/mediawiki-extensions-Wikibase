@@ -19,7 +19,7 @@ use Wikibase\Lib\Formatters\CommonsThumbnailFormatter;
  */
 class CommonsThumbnailFormatterTest extends MediaWikiIntegrationTestCase {
 
-	public function fileNameProvider() {
+	public static function fileNameProvider() {
 		$titleFormatter = MediaWikiServices::getInstance()->getTitleFormatter();
 		$nsName = $titleFormatter->getNamespaceName( NS_FILE, 'foo' );
 

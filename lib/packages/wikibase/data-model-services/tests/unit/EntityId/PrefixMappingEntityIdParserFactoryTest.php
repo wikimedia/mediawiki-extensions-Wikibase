@@ -69,7 +69,7 @@ class PrefixMappingEntityIdParserFactoryTest extends TestCase {
 		new PrefixMappingEntityIdParserFactory( new ItemIdParser(), $mapping );
 	}
 
-	public function provideInvalidIdPrefixMapping() {
+	public static function provideInvalidIdPrefixMapping() {
 		return [
 			'id prefix mapping values are not arrays' => [ [ 'foo' => 'bar' ] ],
 			'non-string keys in id prefix mapping' => [ [ 0 => [ 'd' => 'wd' ] ] ],

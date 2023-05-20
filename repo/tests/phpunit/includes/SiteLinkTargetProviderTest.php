@@ -35,7 +35,7 @@ class SiteLinkTargetProviderTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $expectedGlobalIds, $globalIds );
 	}
 
-	public function getSiteListProvider() {
+	public static function getSiteListProvider() {
 		return [
 			[
 				[ 'wikipedia' ],

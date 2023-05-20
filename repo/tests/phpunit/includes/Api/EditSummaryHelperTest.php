@@ -18,7 +18,7 @@ use Wikibase\Repo\ChangeOp\NonLanguageBoundChangesCounter;
  * @license GPL-2.0-or-later
  */
 class EditSummaryHelperTest extends \PHPUnit\Framework\TestCase {
-	public function provideChangeOpResultsForPrepareEditSummary() {
+	public static function provideChangeOpResultsForPrepareEditSummary() {
 		return [
 			'no terms changed' => [
 				'collectChangedLanguages' => [],

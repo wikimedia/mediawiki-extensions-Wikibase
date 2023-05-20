@@ -32,7 +32,7 @@ class EntityFactoryTest extends \PHPUnit\Framework\TestCase {
 		return new EntityFactory( $instantiators );
 	}
 
-	public function provideNewEmpty() {
+	public static function provideNewEmpty() {
 		return [
 			[ 'item', Item::class ],
 			[ 'property', Property::class ],

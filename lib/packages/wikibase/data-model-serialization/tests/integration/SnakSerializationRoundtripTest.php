@@ -54,7 +54,7 @@ class SnakSerializationRoundtripTest extends TestCase {
 		$this->assertEquals( $snak, $newSnak );
 	}
 
-	public function snakProvider() {
+	public static function snakProvider() {
 		return [
 			[
 				new PropertyNoValueSnak( 42 ),

@@ -17,7 +17,7 @@ use Wikibase\Client\DataAccess\Scribunto\LuaFunctionCallTracker;
  */
 class LuaFunctionCallTrackerTest extends \PHPUnit\Framework\TestCase {
 
-	public function incrementKeyProvider() {
+	public static function incrementKeyProvider() {
 		return [
 			'logging disabled' => [
 				[],

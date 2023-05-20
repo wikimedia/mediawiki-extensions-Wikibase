@@ -47,7 +47,7 @@ class ChangeOpQualifierTest extends \PHPUnit\Framework\TestCase {
 		$this->mockProvider = new ChangeOpTestMockProvider( $this );
 	}
 
-	public function invalidArgumentProvider() {
+	public static function invalidArgumentProvider() {
 		$item = new Item( new ItemId( 'Q42' ) );
 
 		$guidGenerator = new GuidGenerator();
@@ -163,7 +163,7 @@ class ChangeOpQualifierTest extends \PHPUnit\Framework\TestCase {
 		return $item;
 	}
 
-	public function applyInvalidProvider() {
+	public static function applyInvalidProvider() {
 		$p11 = new NumericPropertyId( 'P11' );
 		$q17 = new ItemId( 'Q17' );
 
@@ -207,7 +207,7 @@ class ChangeOpQualifierTest extends \PHPUnit\Framework\TestCase {
 		$changeOpQualifier->apply( $entity );
 	}
 
-	public function validateProvider() {
+	public static function validateProvider() {
 		$p11 = new NumericPropertyId( 'P11' );
 		$q17 = new ItemId( 'Q17' );
 

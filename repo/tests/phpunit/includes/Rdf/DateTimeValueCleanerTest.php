@@ -27,7 +27,7 @@ class DateTimeValueCleanerTest extends \PHPUnit\Framework\TestCase {
 		$this->assertNull( $cleaner->getStandardValue( $value ) );
 	}
 
-	public function illegalTimeValueProvider() {
+	public static function illegalTimeValueProvider() {
 		$day = TimeValue::PRECISION_DAY;
 		$year0 = '+0000-01-01T00:00:00Z';
 		$year0Greg = new TimeValue( $year0, 0, 0, 0, $day, TimeValue::CALENDAR_GREGORIAN );

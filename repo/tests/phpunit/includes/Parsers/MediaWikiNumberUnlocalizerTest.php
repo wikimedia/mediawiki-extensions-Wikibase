@@ -22,7 +22,7 @@ class MediaWikiNumberUnlocalizerTest extends \PHPUnit\Framework\TestCase {
 	 * @return array[] Array of arrays of three strings: localized value, language code and expected
 	 * canonical value
 	 */
-	public function provideUnlocalize() {
+	public static function provideUnlocalize() {
 		return [
 			[ '1', 'en', '1' ],
 			[ '-1.1', 'en', '-1.1' ],
@@ -54,7 +54,7 @@ class MediaWikiNumberUnlocalizerTest extends \PHPUnit\Framework\TestCase {
 	 * @return array[] Array of arrays of two or three values: number, language code and optional
 	 * expected canonical value
 	 */
-	public function provideLocalizationRoundTrip() {
+	public static function provideLocalizationRoundTrip() {
 		$numbers = [ 12, -4.111, 12345678 ];
 		$languages = [
 			'en', 'es', 'pt', 'fr', 'de', 'sv', 'ru',  // western arabic numerals, but different separators
@@ -90,7 +90,7 @@ class MediaWikiNumberUnlocalizerTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @return array[] Array of arrays of one or two strings: value and optional language code
 	 */
-	public function provideGetNumberRegexMatch() {
+	public static function provideGetNumberRegexMatch() {
 		return [
 			[ '5' ],
 			[ '+3' ],
@@ -143,7 +143,7 @@ class MediaWikiNumberUnlocalizerTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @return array[] Array of arrays of one or two strings: value and optional language code
 	 */
-	public function provideGetNumberRegexMismatch() {
+	public static function provideGetNumberRegexMismatch() {
 		return [
 			[ '' ],
 			[ ' ' ],

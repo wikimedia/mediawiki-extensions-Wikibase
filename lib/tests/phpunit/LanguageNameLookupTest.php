@@ -14,7 +14,7 @@ use Wikibase\Lib\LanguageNameLookup;
  */
 class LanguageNameLookupTest extends \PHPUnit\Framework\TestCase {
 
-	public function getNameProvider() {
+	public static function getNameProvider() {
 		return [
 			[ // #0
 				'en',

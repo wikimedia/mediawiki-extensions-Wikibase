@@ -142,7 +142,7 @@ class EntityDeserializerTest extends \PHPUnit\Framework\TestCase {
 		$deserializer->deserialize( $serialization );
 	}
 
-	public function invalidSerializationProvider() {
+	public static function invalidSerializationProvider() {
 		return [
 			[ null ],
 			[ 5 ],

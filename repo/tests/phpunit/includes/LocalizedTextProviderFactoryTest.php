@@ -41,7 +41,7 @@ class LocalizedTextProviderFactoryTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( $langCode, $localizer->getLanguageOf( '' ) );
 	}
 
-	public function languageCodeProvider(): iterable {
+	public static function languageCodeProvider(): iterable {
 		yield 'Creates localizer for English' => [ 'en' ];
 		yield 'Creates localizer for German' => [ 'de' ];
 	}

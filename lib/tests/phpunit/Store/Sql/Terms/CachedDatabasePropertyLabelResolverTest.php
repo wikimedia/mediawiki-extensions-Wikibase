@@ -54,7 +54,7 @@ class CachedDatabasePropertyLabelResolverTest extends MediaWikiIntegrationTestCa
 		$this->assertArrayEquals( $expected, $actual, false, true );
 	}
 
-	public function provideGetPropertyIdsForLabels() {
+	public static function provideGetPropertyIdsForLabels() {
 		$p1TermsArray = [
 			'label' => [
 				'de' => [ 'Eins' ],

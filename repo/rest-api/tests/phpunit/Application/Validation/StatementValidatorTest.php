@@ -50,7 +50,7 @@ class StatementValidatorTest extends TestCase {
 		$this->assertSame( $expectedContext, $error->getContext() );
 	}
 
-	public function deserializationErrorProvider(): Generator {
+	public static function deserializationErrorProvider(): Generator {
 		yield 'invalid field exception' => [
 			new InvalidFieldException( 'some-field', 'some-value' ),
 			StatementValidator::CODE_INVALID_FIELD,

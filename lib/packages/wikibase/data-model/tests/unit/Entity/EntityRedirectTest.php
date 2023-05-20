@@ -46,7 +46,7 @@ class EntityRedirectTest extends \PHPUnit\Framework\TestCase {
 		new EntityRedirect( $entityId, $targetId );
 	}
 
-	public function equalsProvider() {
+	public static function equalsProvider() {
 		$q123 = new ItemId( 'Q123' );
 		$q345 = new ItemId( 'Q345' );
 		$q567 = new ItemId( 'Q567' );

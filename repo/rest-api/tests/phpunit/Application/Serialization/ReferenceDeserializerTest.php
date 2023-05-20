@@ -33,7 +33,7 @@ class ReferenceDeserializerTest extends TestCase {
 		);
 	}
 
-	public function serializationProvider(): Generator {
+	public static function serializationProvider(): Generator {
 		yield 'empty reference' => [
 			new Reference(),
 			[ 'parts' => [] ],
@@ -71,7 +71,7 @@ class ReferenceDeserializerTest extends TestCase {
 		}
 	}
 
-	public function invalidSerializationProvider(): Generator {
+	public static function invalidSerializationProvider(): Generator {
 		yield 'missing parts' => [
 			new MissingFieldException( 'parts' ),
 			[],

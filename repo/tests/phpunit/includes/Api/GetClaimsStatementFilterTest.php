@@ -55,7 +55,7 @@ class GetClaimsStatementFilterTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $expected, $filter->statementMatches( $statement ) );
 	}
 
-	public function statementProvider() {
+	public static function statementProvider() {
 		$statement = new Statement( new PropertyNoValueSnak( 1 ) );
 
 		return [

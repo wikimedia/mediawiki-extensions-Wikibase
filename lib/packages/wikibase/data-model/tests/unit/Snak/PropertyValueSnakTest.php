@@ -36,7 +36,7 @@ class PropertyValueSnakTest extends \PHPUnit\Framework\TestCase {
 		$this->assertInstanceOf( PropertyValueSnak::class, $snak );
 	}
 
-	public function validConstructorArgumentsProvider() {
+	public static function validConstructorArgumentsProvider() {
 		return [
 			[ 1, new StringValue( 'a' ) ],
 			[ new NumericPropertyId( 'P1' ), new StringValue( 'a' ) ],
@@ -55,7 +55,7 @@ class PropertyValueSnakTest extends \PHPUnit\Framework\TestCase {
 		new PropertyValueSnak( $propertyId, $dataValue );
 	}
 
-	public function invalidConstructorArgumentsProvider() {
+	public static function invalidConstructorArgumentsProvider() {
 		$stringValue = new StringValue( 'a' );
 
 		return [
@@ -107,7 +107,7 @@ class PropertyValueSnakTest extends \PHPUnit\Framework\TestCase {
 		$this->assertFalse( $snak2->equals( $snak1 ) );
 	}
 
-	public function notEqualsProvider() {
+	public static function notEqualsProvider() {
 		return [
 			[
 				new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'a' ) ),
@@ -120,7 +120,7 @@ class PropertyValueSnakTest extends \PHPUnit\Framework\TestCase {
 		];
 	}
 
-	public function provideDataToSerialize() {
+	public static function provideDataToSerialize() {
 		$p2 = new NumericPropertyId( 'P2' );
 		$p2foo = new NumericPropertyId( 'foo:P2' );
 		$value = new StringValue( 'b' );
@@ -149,7 +149,7 @@ class PropertyValueSnakTest extends \PHPUnit\Framework\TestCase {
 		$this->assertTrue( $snak->equals( $snak2 ), 'round trip' );
 	}
 
-	public function provideDataToUnserialize() {
+	public static function provideDataToUnserialize() {
 		$p2 = new NumericPropertyId( 'P2' );
 		$p2foo = new NumericPropertyId( 'foo:P2' );
 		$value = new StringValue( 'b' );

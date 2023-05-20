@@ -38,7 +38,7 @@ class EntityIdValueTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $id, $newId );
 	}
 
-	public function instanceProvider() {
+	public static function instanceProvider() {
 		/** @var EntityId[] $ids */
 		$ids = [
 			new ItemId( 'Q1' ),
@@ -79,7 +79,7 @@ class EntityIdValueTest extends \PHPUnit\Framework\TestCase {
 		$this->assertIsString( $id->getSortKey() );
 	}
 
-	public function provideGetArrayValue() {
+	public static function provideGetArrayValue() {
 		return [
 			'Q2147483647' => [
 				new ItemId( 'Q2147483647' ),
@@ -135,7 +135,7 @@ class EntityIdValueTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function provideDeserializationCompatibility() {
+	public static function provideDeserializationCompatibility() {
 		$local = new EntityIdValue( new ItemId( 'Q31337' ) );
 		$foreign = new EntityIdValue( new NumericPropertyId( 'foo:P678' ) );
 		$custom = new EntityIdValue( new CustomEntityId( 'X567' ) );
@@ -189,7 +189,7 @@ class EntityIdValueTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $id, EntityIdValue::newFromArray( $array ) );
 	}
 
-	public function validArrayProvider() {
+	public static function validArrayProvider() {
 		return [
 			'Legacy format' => [ [
 				'entity-type' => 'item',
@@ -212,7 +212,7 @@ class EntityIdValueTest extends \PHPUnit\Framework\TestCase {
 		EntityIdValue::newFromArray( $invalidArray );
 	}
 
-	public function invalidArrayProvider() {
+	public static function invalidArrayProvider() {
 		return [
 			[ null ],
 

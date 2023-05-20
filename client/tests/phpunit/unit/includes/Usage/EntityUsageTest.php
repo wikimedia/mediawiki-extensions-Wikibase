@@ -75,7 +75,7 @@ class EntityUsageTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $expected, $usage->asArray() );
 	}
 
-	public function aspectKeyProvider() {
+	public static function aspectKeyProvider() {
 		return [
 			[ 'L', [ 'L', null ] ],
 			[ 'L.x', [ 'L', 'x' ] ],
@@ -99,7 +99,7 @@ class EntityUsageTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $expectedParts, $parts );
 	}
 
-	public function provideMakeAspectKey() {
+	public static function provideMakeAspectKey() {
 		return [
 			[ 'L', null, 'L' ],
 			[ 'L', 'x', 'L.x' ],

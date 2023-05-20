@@ -39,7 +39,7 @@ class SiteLinkDeserializerTest extends TestCase {
 		$deserializer->deserialize( $nonDeserializable );
 	}
 
-	public function nonDeserializableProvider() {
+	public static function nonDeserializableProvider() {
 		return [
 			[
 				42,
@@ -72,7 +72,7 @@ class SiteLinkDeserializerTest extends TestCase {
 		$this->assertEquals( $object, $this->buildDeserializer()->deserialize( $serialization ) );
 	}
 
-	public function deserializationProvider() {
+	public static function deserializationProvider() {
 		return [
 			[
 				new SiteLink( 'enwiki', 'Nyan Cat' ),

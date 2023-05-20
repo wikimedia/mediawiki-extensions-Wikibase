@@ -26,7 +26,7 @@ use Wikibase\Lib\Formatters\CommonsInlineImageFormatter;
  */
 class CommonsInlineImageFormatterTest extends MediaWikiIntegrationTestCase {
 
-	public function commonsInlineImageFormatterProvider() {
+	public static function commonsInlineImageFormatterProvider() {
 		$fileUrl = '.*//upload\.wikimedia\.org/wikipedia/commons/.*/120px-Example\.jpg';
 		$pageUrl = 'https://commons\.wikimedia\.org/wiki/File:Example\.jpg';
 		$exampleJpgHtmlRegex = '@<div .*<a[^>]+href="' . $pageUrl . '"[^>]*>' .

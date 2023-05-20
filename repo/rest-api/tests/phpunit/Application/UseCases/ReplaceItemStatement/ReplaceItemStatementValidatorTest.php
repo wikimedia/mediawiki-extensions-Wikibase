@@ -50,7 +50,7 @@ class ReplaceItemStatementValidatorTest extends TestCase {
 		);
 	}
 
-	public function provideValidRequest(): Generator {
+	public static function provideValidRequest(): Generator {
 		$itemId = 'Q123';
 		$statementId = $itemId . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 		yield 'Valid with item ID' => [

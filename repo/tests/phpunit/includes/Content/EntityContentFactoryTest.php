@@ -49,13 +49,13 @@ class EntityContentFactoryTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	public function contentModelsProvider() {
+	public static function contentModelsProvider() {
 		yield [ [], [] ];
 		yield [ [ 'Foo' => 'Bar' ], [] ];
 		yield [ WikibaseRepo::getContentModelMappings(), [] ];
 	}
 
-	public function provideInvalidConstructorArguments() {
+	public static function provideInvalidConstructorArguments() {
 		return [
 			[ [ null ], [] ],
 			[ [], [ null ] ],
@@ -173,7 +173,7 @@ class EntityContentFactoryTest extends MediaWikiIntegrationTestCase {
 		$factory->getEntityHandlerForContentModel( 'foo' );
 	}
 
-	public function newFromEntityProvider() {
+	public static function newFromEntityProvider() {
 		$item = new Item();
 		$property = Property::newFromType( 'string' );
 
@@ -194,7 +194,7 @@ class EntityContentFactoryTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( $entity, $content->getEntity() );
 	}
 
-	public function newFromRedirectProvider() {
+	public static function newFromRedirectProvider() {
 		$q1 = new ItemId( 'Q1' );
 		$q2 = new ItemId( 'Q2' );
 

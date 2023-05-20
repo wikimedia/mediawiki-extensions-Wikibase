@@ -47,7 +47,7 @@ class AliasGroupFallbackTest extends \PHPUnit\Framework\TestCase {
 		new AliasGroupFallback( 'en-real', [], $languageCode, 'en-source' );
 	}
 
-	public function invalidLanguageCodeProvider() {
+	public static function invalidLanguageCodeProvider() {
 		return [
 			[ null ],
 			[ 21 ],
@@ -63,7 +63,7 @@ class AliasGroupFallbackTest extends \PHPUnit\Framework\TestCase {
 		new AliasGroupFallback( 'en-real', [], 'en-actual', $languageCode );
 	}
 
-	public function invalidSourceLanguageCodeProvider() {
+	public static function invalidSourceLanguageCodeProvider() {
 		return [
 			[ 21 ],
 			[ '' ],
@@ -86,7 +86,7 @@ class AliasGroupFallbackTest extends \PHPUnit\Framework\TestCase {
 		$this->assertFalse( $group->equals( $inequalGroup ) );
 	}
 
-	public function inequalAliasGroupProvider() {
+	public static function inequalAliasGroupProvider() {
 		return [
 			'aliases' => [ new AliasGroupFallback( 'en-real', [ 'moo' ], 'en-actual', 'en-source' ) ],
 			'language' => [ new AliasGroupFallback( 'en-moo', [ 'foo' ], 'en-actual', 'en-source' ) ],

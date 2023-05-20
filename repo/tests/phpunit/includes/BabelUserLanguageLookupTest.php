@@ -64,7 +64,7 @@ class BabelUserLanguageLookupTest extends MediaWikiIntegrationTestCase {
 			$userLanguageLookup->getUserSpecifiedLanguages( $user ), $message . '5' );
 	}
 
-	public function userLanguagesProvider() {
+	public static function userLanguagesProvider() {
 		return [
 			// 0. Language from the users settings
 			// 1. List of languages from the users babel box (as returned by the Babel extension)

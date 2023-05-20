@@ -28,7 +28,7 @@ class DataFieldValidatorTest extends \PHPUnit\Framework\TestCase {
 		new DataFieldValidator( $field, new StringLengthValidator( 0, 0 ) );
 	}
 
-	public function invalidConstructorArgumentProvider() {
+	public static function invalidConstructorArgumentProvider() {
 		return [
 			[ null ],
 			[ 1.0 ],
@@ -36,7 +36,7 @@ class DataFieldValidatorTest extends \PHPUnit\Framework\TestCase {
 		];
 	}
 
-	public function provideValidate() {
+	public static function provideValidate() {
 		$validator = new StringLengthValidator( 1, 10 );
 
 		return [

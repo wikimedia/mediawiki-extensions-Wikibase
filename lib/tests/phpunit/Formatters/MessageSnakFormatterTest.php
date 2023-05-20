@@ -64,7 +64,7 @@ class MessageSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $formatter->formatSnak( $snak ) );
 	}
 
-	public function snakProvider() {
+	public static function snakProvider() {
 		$id = new NumericPropertyId( 'P1' );
 
 		return [
@@ -93,7 +93,7 @@ class MessageSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $formatter->formatSnak( $snak ) );
 	}
 
-	public function formatProvider() {
+	public static function formatProvider() {
 		return [
 			[ SnakFormatter::FORMAT_PLAIN, 'plain' ],
 			[ SnakFormatter::FORMAT_WIKI, 'text' ],

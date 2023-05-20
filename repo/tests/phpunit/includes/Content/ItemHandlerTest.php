@@ -268,7 +268,7 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 		$this->assertSame( $expected, $handler->getIdentifiersCount( $statementList ) );
 	}
 
-	public function provideGetIdentifiersCount() {
+	public static function provideGetIdentifiersCount() {
 
 		$statementIdentifier = new Statement(
 			new PropertyValueSnak( new NumericPropertyId( 'P11' ), new StringValue( 'xyz123' ) )

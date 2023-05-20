@@ -33,7 +33,7 @@ class DateFormatParserTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @inheritDoc
 	 */
-	public function validInputProvider() {
+	public static function validInputProvider() {
 		$monthNames = [ 9 => [ 'Sep', 'September' ] ];
 
 		$valid = [
@@ -177,7 +177,7 @@ class DateFormatParserTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @inheritDoc
 	 */
-	public function invalidInputProvider() {
+	public static function invalidInputProvider() {
 		$invalid = [
 			'',
 			'1',
@@ -213,7 +213,7 @@ class DateFormatParserTest extends \PHPUnit\Framework\TestCase {
 		$parser->parse( '' );
 	}
 
-	public function unsupportedDateFormatProvider() {
+	public static function unsupportedDateFormatProvider() {
 		return [
 			[ 'A' ],
 			[ 'a' ],
@@ -289,7 +289,7 @@ class DateFormatParserTest extends \PHPUnit\Framework\TestCase {
 		$parser->parse( $input );
 	}
 
-	public function nonContinuousDateFormatProvider() {
+	public static function nonContinuousDateFormatProvider() {
 		return [
 			'Day' => [ '1', 'j' ],
 			'Month' => [ '9', 'F' ],

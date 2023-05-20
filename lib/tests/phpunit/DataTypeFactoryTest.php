@@ -26,7 +26,7 @@ class DataTypeFactoryTest extends \PHPUnit\Framework\TestCase {
 		$this->assertInstanceOf( DataTypeFactory::class, $instance );
 	}
 
-	public function valueTypesProvider() {
+	public static function valueTypesProvider() {
 		return [
 			[ [] ],
 			[ [ 'string' => 'string' ] ],
@@ -42,7 +42,7 @@ class DataTypeFactoryTest extends \PHPUnit\Framework\TestCase {
 		new DataTypeFactory( $argument );
 	}
 
-	public function invalidConstructorArgumentProvider() {
+	public static function invalidConstructorArgumentProvider() {
 		return [
 			[ [ 'string' => '' ] ],
 			[ [ 'string' => 1 ] ],

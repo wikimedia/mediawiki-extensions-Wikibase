@@ -47,7 +47,7 @@ class EntityDataUriManagerTest extends MediaWikiIntegrationTestCase {
 		return $uriManager;
 	}
 
-	public function provideGetExtension() {
+	public static function provideGetExtension() {
 		return [
 			[ 'text', 'txt' ],
 			[ 'rdfxml', 'rdf' ],
@@ -66,7 +66,7 @@ class EntityDataUriManagerTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $expected, $actual );
 	}
 
-	public function provideGetFormatName() {
+	public static function provideGetFormatName() {
 		return [
 			[ 'txt', 'text' ],
 			[ 'text', 'text' ],
@@ -86,7 +86,7 @@ class EntityDataUriManagerTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $expected, $actual );
 	}
 
-	public function provideParseDocName() {
+	public static function provideParseDocName() {
 		return [
 			[ '', [ '', '' ] ],
 			[ 'foo', [ 'foo', '' ] ],
@@ -106,7 +106,7 @@ class EntityDataUriManagerTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $expected, $actual );
 	}
 
-	public function provideGetDocName() {
+	public static function provideGetDocName() {
 		return [
 			[ 'Q12', '', 'Q12' ],
 			[ 'q12', null, 'Q12' ],
@@ -126,7 +126,7 @@ class EntityDataUriManagerTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $expected, $actual );
 	}
 
-	public function provideGetDocTitle() {
+	public static function provideGetDocTitle() {
 		$title = Title::makeTitle( NS_SPECIAL, 'EntityDataUriManagerTest' );
 		$base = $title->getPrefixedText();
 
@@ -149,7 +149,7 @@ class EntityDataUriManagerTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $expected, $actual->getPrefixedText() );
 	}
 
-	public function provideGetDocUrl() {
+	public static function provideGetDocUrl() {
 		return [
 			[ 'Q12', '', 0, '!Q12$!' ],
 			[ 'q12', null, 0, '!Q12$!' ],

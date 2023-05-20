@@ -35,7 +35,7 @@ class SiteLinksChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 
 	private const BADGE_ITEM_ID = 'Q3000';
 
-	private function newSiteLinkTargetProvider() {
+	private static function newSiteLinkTargetProvider() {
 		$wiki = new Site();
 		$wiki->setGlobalId( self::SITE_ID );
 		$wiki->setGroup( 'testwikis' );
@@ -74,7 +74,7 @@ class SiteLinksChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function provideInvalidSerialization() {
+	public static function provideInvalidSerialization() {
 		return [
 			'serialization is not an array' => [ 'BAD', 'not-recognized-array' ],
 			'no site in serialization' => [ [], 'no-site' ],

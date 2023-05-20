@@ -32,7 +32,7 @@ class AutoCommentFormatterTest extends MediaWikiIntegrationTestCase {
 		$this->language = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'qqx' );
 	}
 
-	public function provideTestAutoComment() {
+	public static function provideTestAutoComment() {
 		return [
 			'Empty comment' => [ [ '' ], '', null ],
 			'Non existant message' => [ [ 'wikibase' ], '##########', null ],
@@ -63,7 +63,7 @@ class AutoCommentFormatterTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $expected, $value );
 	}
 
-	public function provideWrapAutoComment() {
+	public static function provideWrapAutoComment() {
 		return [
 			'Pre and Post set to false' => [
 				false,

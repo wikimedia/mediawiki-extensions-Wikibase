@@ -114,7 +114,7 @@ class MwTimeIsoParserTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @inheritDoc
 	 */
-	public function validInputProvider() {
+	public static function validInputProvider() {
 		$gregorian = 'http://www.wikidata.org/entity/Q1985727';
 		$julian = 'http://www.wikidata.org/entity/Q1985786';
 
@@ -270,7 +270,7 @@ class MwTimeIsoParserTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @inheritDoc
 	 */
-	public function invalidInputProvider() {
+	public static function invalidInputProvider() {
 
 		$invalid = [
 			//These are just wrong!

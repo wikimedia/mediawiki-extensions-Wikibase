@@ -15,7 +15,7 @@ use Wikibase\Repo\MediaWikiLanguageDirectionalityLookup;
  */
 class MediaWikiLanguageDirectionalityLookupTest extends \PHPUnit\Framework\TestCase {
 
-	public function provideLanguageCodes() {
+	public static function provideLanguageCodes() {
 		return [
 			'Known LTR language' => [ 'en', 'ltr' ],
 			'Known RTL language' => [ 'fa', 'rtl' ],

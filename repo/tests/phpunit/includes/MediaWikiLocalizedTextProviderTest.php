@@ -26,7 +26,7 @@ class MediaWikiLocalizedTextProviderTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function mediaWikiLocalizedTextProviderProvider() {
+	public static function mediaWikiLocalizedTextProviderProvider() {
 		yield 'message param without markup' => [
 			'messageKey' => 'parentheses',
 			'params' => [ 'VALUE' ],
@@ -50,7 +50,7 @@ class MediaWikiLocalizedTextProviderTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function escapedMessageProvider() {
+	public static function escapedMessageProvider() {
 		yield 'message param without markup' => [
 			'messageKey' => 'parentheses',
 			'params' => [ 'VALUE' ],
@@ -81,7 +81,7 @@ class MediaWikiLocalizedTextProviderTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	private function newEnglishMediaWikiLocalizedTextProvider() {
+	private static function newEnglishMediaWikiLocalizedTextProvider() {
 		return new MediaWikiLocalizedTextProvider(
 			MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'en' )
 		);

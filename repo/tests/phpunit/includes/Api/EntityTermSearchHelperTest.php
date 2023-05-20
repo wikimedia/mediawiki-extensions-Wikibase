@@ -51,7 +51,7 @@ class EntityTermSearchHelperTest extends \PHPUnit\Framework\TestCase {
 		return $mock;
 	}
 
-	public function provideStrictLanguageValues() {
+	public static function provideStrictLanguageValues() {
 		return [
 			[ true ],
 			[ false ],
@@ -75,7 +75,7 @@ class EntityTermSearchHelperTest extends \PHPUnit\Framework\TestCase {
 		$entitySearchHelper->getRankedSearchResults( 'Foo', 'de-ch', 'item', 10, $strictLanguage, null );
 	}
 
-	public function provideTestGetRankedSearchResults() {
+	public static function provideTestGetRankedSearchResults() {
 		$q222Result = new TermSearchResult(
 			new Term( 'en-gb', 'Fooooo' ),
 			'label',

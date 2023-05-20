@@ -28,7 +28,7 @@ class LabelsDeserializerTest extends TestCase {
 		);
 	}
 
-	public function labelsProvider(): Generator {
+	public static function labelsProvider(): Generator {
 		yield 'no labels' => [
 			[],
 			new TermList(),

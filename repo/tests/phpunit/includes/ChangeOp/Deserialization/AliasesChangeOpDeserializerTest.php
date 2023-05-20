@@ -32,7 +32,7 @@ class AliasesChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function provideInvalidAliasesArray() {
+	public static function provideInvalidAliasesArray() {
 		return [
 			[ null ],
 			[ false ],

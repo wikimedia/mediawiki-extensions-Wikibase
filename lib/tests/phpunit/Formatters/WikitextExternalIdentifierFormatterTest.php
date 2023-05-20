@@ -72,7 +72,7 @@ class WikitextExternalIdentifierFormatterTest extends \PHPUnit\Framework\TestCas
 		$this->assertEquals( $expected, $text );
 	}
 
-	public function provideFormatSnak_ParameterTypeException() {
+	public static function provideFormatSnak_ParameterTypeException() {
 		return [
 			'bad snak type' => [
 				new PropertyNoValueSnak( new NumericPropertyId( 'P7' ) ),

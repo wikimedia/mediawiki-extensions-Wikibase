@@ -29,7 +29,7 @@ class ChangeOpAliasesTest extends \PHPUnit\Framework\TestCase {
 		return $mockProvider->getMockTermValidatorFactory();
 	}
 
-	public function invalidConstructorProvider() {
+	public static function invalidConstructorProvider() {
 		$args = [];
 		$args[] = [ 42, [ 'myNewAlias' ], 'add' ];
 		$args[] = [ 'en', [ 'myNewAlias' ], 1234 ];

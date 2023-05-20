@@ -64,7 +64,7 @@ class SidebarLinkBadgeDisplayTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $expected, $sidebarLinkBadgeDisplay->getBadgeInfo( $badges ) );
 	}
 
-	public function getBadgeInfoProvider() {
+	public static function getBadgeInfoProvider() {
 		$q2 = new ItemId( 'Q2' );
 		$q3 = new ItemId( 'Q3' );
 		$q4 = new ItemId( 'Q4' );

@@ -171,7 +171,7 @@ class QuerySearchEntitiesTest extends MediaWikiIntegrationTestCase {
 		] );
 	}
 
-	public function provideTestQuerySearchEntities() {
+	public static function provideTestQuerySearchEntities() {
 		$q111Match = new TermSearchResult(
 			new Term( 'qid', 'Q111' ),
 			'entityId',

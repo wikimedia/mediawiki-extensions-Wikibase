@@ -48,7 +48,7 @@ class TitleLookupBasedEntityExistenceCheckerTest extends TestCase {
 		);
 	}
 
-	public function existenceProvider() {
+	public static function existenceProvider() {
 		return [
 			'title is null' => [
 				'isNull' => true,

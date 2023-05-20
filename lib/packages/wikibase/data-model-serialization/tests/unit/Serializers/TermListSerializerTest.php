@@ -38,7 +38,7 @@ class TermListSerializerTest extends TestCase {
 		$this->assertEquals( $expected, $output );
 	}
 
-	public function serializationProvider() {
+	public static function serializationProvider() {
 		return [
 			[
 				new TermList( [] ),

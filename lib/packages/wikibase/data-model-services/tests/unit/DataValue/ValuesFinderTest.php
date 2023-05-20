@@ -28,7 +28,7 @@ class ValuesFinderTest extends TestCase {
 		'P44' => 'boolean',
 	];
 
-	public function snaksProvider() {
+	public static function snaksProvider() {
 		$argLists = [];
 
 		$p23 = new NumericPropertyId( 'p23' );

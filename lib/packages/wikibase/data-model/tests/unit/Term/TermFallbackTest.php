@@ -35,7 +35,7 @@ class TermFallbackTest extends \PHPUnit\Framework\TestCase {
 		new TermFallback( 'foor', 'bar', $languageCode, 'foos' );
 	}
 
-	public function invalidLanguageCodeProvider() {
+	public static function invalidLanguageCodeProvider() {
 		return [
 			[ null ],
 			[ 21 ],
@@ -51,7 +51,7 @@ class TermFallbackTest extends \PHPUnit\Framework\TestCase {
 		new TermFallback( 'foor', 'bar', 'fooa', $languageCode );
 	}
 
-	public function invalidSourceLanguageCodeProvider() {
+	public static function invalidSourceLanguageCodeProvider() {
 		return [
 			[ 21 ],
 			[ '' ],
@@ -74,7 +74,7 @@ class TermFallbackTest extends \PHPUnit\Framework\TestCase {
 		$this->assertFalse( $term->equals( $inequalTerm ) );
 	}
 
-	public function inequalTermProvider() {
+	public static function inequalTermProvider() {
 		return [
 			'text' => [ new TermFallback( 'foor', 'spam', 'fooa', 'foos' ) ],
 			'language' => [ new TermFallback( 'spam', 'bar', 'fooa', 'foos' ) ],

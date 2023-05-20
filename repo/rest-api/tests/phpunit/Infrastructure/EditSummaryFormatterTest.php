@@ -38,7 +38,7 @@ class EditSummaryFormatterTest extends MediaWikiLangTestCase {
 		$this->assertSame( $formattedSummary, $editSummaryFormatter->format( $editSummary ) );
 	}
 
-	public function labelEditSummaryProvider(): Generator {
+	public static function labelEditSummaryProvider(): Generator {
 		yield 'add label' => [
 			LabelEditSummary::newAddSummary( 'add user comment', new Term( 'en', 'LABEL-TEXT' ) ),
 			'/* wbsetlabel-add:1|en */ LABEL-TEXT, add user comment',
@@ -55,7 +55,7 @@ class EditSummaryFormatterTest extends MediaWikiLangTestCase {
 		];
 	}
 
-	public function descriptionEditSummaryProvider(): Generator {
+	public static function descriptionEditSummaryProvider(): Generator {
 		yield 'add description' => [
 			DescriptionEditSummary::newAddSummary( 'add user comment', new Term( 'en', 'DESCRIPTION-TEXT' ) ),
 			'/* wbsetdescription-add:1|en */ DESCRIPTION-TEXT, add user comment',
@@ -77,7 +77,7 @@ class EditSummaryFormatterTest extends MediaWikiLangTestCase {
 		];
 	}
 
-	public function statementEditSummaryProvider(): Generator {
+	public static function statementEditSummaryProvider(): Generator {
 		// not using statements with values here because in order to format them, SummaryFormatter needs to look up the Property's data type
 		// which means it needs to be persisted. This is unnecessary here, since we're testing the summary conversion and can assume that
 		// the inner SummaryFormatter works fine.

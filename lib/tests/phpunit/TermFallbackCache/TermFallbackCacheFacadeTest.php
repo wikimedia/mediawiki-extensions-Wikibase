@@ -55,7 +55,7 @@ class TermFallbackCacheFacadeTest extends TestCase {
 		$this->assertEquals( TermFallbackCacheFacade::NO_VALUE, $value );
 	}
 
-	public function setProvider() {
+	public static function setProvider() {
 		return [
 			'TermFallback' => [ new TermFallback( 'en', 'label', 'en', null ) ],
 			'null' => [ null ],

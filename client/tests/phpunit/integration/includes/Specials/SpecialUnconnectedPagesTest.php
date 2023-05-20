@@ -202,7 +202,7 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 		$this->assertSame( $expected, $page->buildNamespaceConditionals() );
 	}
 
-	public function provideBuildNamespaceConditionals(): Iterator {
+	public static function provideBuildNamespaceConditionals(): Iterator {
 		yield 'no namespace' => [
 			null,
 			[ 'pp_sortkey' => [ 0, -4 ] ],

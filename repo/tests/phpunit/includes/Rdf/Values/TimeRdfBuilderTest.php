@@ -37,7 +37,7 @@ class TimeRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$this->helper = new NTriplesRdfTestHelper();
 	}
 
-	public function provideAddValue() {
+	public static function provideAddValue() {
 		$greg = TimeValue::CALENDAR_GREGORIAN;
 		$jul = TimeValue::CALENDAR_JULIAN;
 		$day = TimeValue::PRECISION_DAY;

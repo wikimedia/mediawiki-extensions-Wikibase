@@ -19,7 +19,7 @@ use Wikibase\Lib\Formatters\MwTimeIsoFormatter;
  */
 class MwTimeIsoFormatterTest extends MediaWikiIntegrationTestCase {
 
-	public function formatProvider() {
+	public static function formatProvider() {
 		$gregorian = 'http://www.wikidata.org/entity/Q1985727';
 
 		$tests = [

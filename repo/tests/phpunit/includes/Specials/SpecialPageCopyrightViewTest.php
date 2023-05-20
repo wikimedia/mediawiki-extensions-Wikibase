@@ -46,7 +46,7 @@ class SpecialPageCopyrightViewTest extends MediaWikiIntegrationTestCase {
 		return $copyrightMessageBuilder;
 	}
 
-	public function getHtmlProvider() {
+	public static function getHtmlProvider() {
 		return [
 			[
 				'<div>(wikibase-shortcopyrightwarning: wikibase-submit, copyrightpage, copyrightlink)</div>',

@@ -23,7 +23,7 @@ use Wikibase\DataModel\Entity\ItemId;
  */
 class UsageUpdaterTest extends \PHPUnit\Framework\TestCase {
 
-	public function addUsagesForPageProvider() {
+	public static function addUsagesForPageProvider() {
 		$q1 = new ItemId( 'Q1' );
 		$q2 = new ItemId( 'Q2' );
 
@@ -98,7 +98,7 @@ class UsageUpdaterTest extends \PHPUnit\Framework\TestCase {
 		$updater->addUsagesForPage( 23, $newUsage );
 	}
 
-	public function pruneUsagesForPageProvider() {
+	public static function pruneUsagesForPageProvider() {
 		$q1 = new ItemId( 'Q1' );
 		$q2 = new ItemId( 'Q2' );
 
@@ -163,7 +163,7 @@ class UsageUpdaterTest extends \PHPUnit\Framework\TestCase {
 		$updater->pruneUsagesForPage( 23 );
 	}
 
-	public function replaceUsagesForPageProvider() {
+	public static function replaceUsagesForPageProvider() {
 		$q1 = new ItemId( 'Q1' );
 		$q2 = new ItemId( 'Q2' );
 		$usages = [

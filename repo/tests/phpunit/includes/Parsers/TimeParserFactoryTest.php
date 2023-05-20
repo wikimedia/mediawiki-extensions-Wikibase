@@ -83,7 +83,7 @@ class TimeParserFactoryTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $expected->getArrayValue(), $actual->getArrayValue() );
 	}
 
-	public function validInputProvider() {
+	public static function validInputProvider() {
 		$gregorian = 'http://www.wikidata.org/entity/Q1985727';
 		$julian = 'http://www.wikidata.org/entity/Q1985786';
 
@@ -248,7 +248,7 @@ class TimeParserFactoryTest extends \PHPUnit\Framework\TestCase {
 		$parser->parse( $value );
 	}
 
-	public function invalidInputProvider() {
+	public static function invalidInputProvider() {
 		return [
 			// Strings that should not be recognozed as date time values
 			[ 'June June June' ],
@@ -285,7 +285,7 @@ class TimeParserFactoryTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $expected->getArrayValue(), $actual->getArrayValue() );
 	}
 
-	public function parserOptionsProvider() {
+	public static function parserOptionsProvider() {
 		$decadeOption = [ IsoTimestampParser::OPT_PRECISION => TimeValue::PRECISION_YEAR10 ];
 		$julianOption = [ IsoTimestampParser::OPT_CALENDAR => TimeValue::CALENDAR_JULIAN ];
 
@@ -367,7 +367,7 @@ class TimeParserFactoryTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $expected, $unlocalizer->unlocalize( $date ) );
 	}
 
-	public function localizedMonthNameProvider() {
+	public static function localizedMonthNameProvider() {
 		yield from [
 			// Nominative month names.
 			[ '1 deMonth7 2013', 'de', '1 enMonth7 2013' ],
@@ -449,7 +449,7 @@ class TimeParserFactoryTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $expected, $date );
 	}
 
-	public function localizedMonthName_withLanguageChainProvider() {
+	public static function localizedMonthName_withLanguageChainProvider() {
 		return [
 			// First language contains the word.
 			[ 'deMonth2', [ 'de', 'la' ], 'enMonth2' ],
