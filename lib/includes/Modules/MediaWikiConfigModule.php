@@ -16,6 +16,11 @@ use MediaWiki\ResourceLoader\ResourceLoader;
 class MediaWikiConfigModule extends RL\Module {
 
 	/**
+	 * @var string[]
+	 */
+	protected $targets;
+
+	/**
 	 * @var callable
 	 */
 	private $getConfigValueProvider;
@@ -23,10 +28,11 @@ class MediaWikiConfigModule extends RL\Module {
 	/**
 	 * @param array $options ResourceLoader module options. Must include a "getconfigvalueprovider"
 	 *  callable that returns a MediaWikiConfigValueProvider when called.
-	 *  No other options supported yet.
+	 *  May include 'targets'. No other options supported yet.
 	 */
 	public function __construct( array $options ) {
 		$this->getConfigValueProvider = $options['getconfigvalueprovider'];
+		$this->targets = $options['targets'] ?? [ 'desktop', 'mobile' ];
 	}
 
 	/**
