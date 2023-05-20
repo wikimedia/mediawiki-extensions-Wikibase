@@ -58,8 +58,11 @@
 					} );
 				} );
 			},
-			function () {
-				// Failure: This isn't very likely, but who knows
+			function ( error ) {
+				// Loading failed, log an error to the console and tell the user.
+				/* eslint-disable-next-line no-console */
+				console.error( error );
+
 				$spinner.remove();
 				$linkItemLink.show();
 				mw.notify( mw.msg( 'unknown-error' ) );
