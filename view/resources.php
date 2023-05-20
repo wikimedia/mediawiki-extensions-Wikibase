@@ -52,12 +52,6 @@ return call_user_func( function() {
 	];
 
 	$modules = [
-		'wikibase' => $moduleTemplate + [
-			'scripts' => [
-				'wikibase.js',
-			],
-		],
-
 		'jquery.wikibase.entityselector' => $moduleTemplate + [
 			'scripts' => [
 				'jquery/wikibase/jquery.wikibase.entityselector.js',
@@ -976,28 +970,6 @@ return call_user_func( function() {
 			'remoteExtPath' => 'Wikibase/view/lib/wikibase-tainted-ref/dist',
 			'localBasePath' => __DIR__ . '/lib/wikibase-tainted-ref/dist',
 			'es6' => true,
-		],
-		'jquery.wikibase.wbtooltip' => $moduleTemplate + [
-			'scripts' => [
-				'jquery/wikibase/jquery.tipsy/jquery.tipsy.js',
-				'jquery/wikibase/jquery.wikibase.wbtooltip.js',
-			],
-			'styles' => [
-				'jquery/wikibase/jquery.tipsy/jquery.tipsy.css',
-				'jquery/wikibase/themes/default/jquery.wikibase.wbtooltip.css',
-			],
-			'dependencies' => [
-				'jquery.ui',
-				'wikibase.buildErrorOutput',
-			],
-		],
-		'wikibase.buildErrorOutput' => $moduleTemplate + [
-			'scripts' => [
-				'wikibase/wikibase.buildErrorOutput.js',
-			],
-			'dependencies' => [
-				'wikibase',
-			],
 		],
 
 		'wikibase.api.RepoApi' => $wikibaseApiPaths + [
