@@ -13,7 +13,7 @@ class LoginPage
   text_field(:password, id: 'wpPassword1')
   button(:login, id: 'wpLoginAttempt')
   link(:logout, xpath: "//li[@id='pt-logout']/a")
-  li(:userpage, id: 'pt-userpage')
+  li(:userpage, id: 'pt-userpage-2')
 
   def login_with(username, password)
     self.username = username
