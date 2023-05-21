@@ -48,7 +48,7 @@ class StatementByGuidMapTest extends \PHPUnit\Framework\TestCase {
 		$statements->hasStatementWithGuid( $nonString );
 	}
 
-	public function nonStringProvider() {
+	public static function nonStringProvider() {
 		return [
 			[ null ],
 			[ 42 ],

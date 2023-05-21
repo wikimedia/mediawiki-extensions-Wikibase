@@ -28,7 +28,7 @@ class FallbackHintHtmlTermRendererTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function provideRenderTerm() {
+	public static function provideRenderTerm() {
 		return [
 			[ new Term( 'lkt', 'lkt term' ), 'lkt term' ],
 			[ new Term( 'lkt', 'lkt & term' ), 'lkt &amp; term' ],

@@ -36,7 +36,7 @@ class ApiEntitySourceTest extends TestCase {
 		);
 	}
 
-	public function provideInvalidConstructorArguments() {
+	public static function provideInvalidConstructorArguments() {
 		$validSourceName = 'testsource';
 		$validEntityData = [ 'item', 'property' ];
 		$validRdfNodeNamespacePrefix = 'wd';

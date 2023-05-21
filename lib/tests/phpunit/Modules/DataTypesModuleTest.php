@@ -18,7 +18,7 @@ use Wikibase\Lib\Modules\DataTypesModule;
  */
 class DataTypesModuleTest extends \PHPUnit\Framework\TestCase {
 
-	public function provideDataTypesModuleAndResourceDefinition() {
+	public static function provideDataTypesModuleAndResourceDefinition() {
 		$validResourceDefinitions = [
 			[
 				'datatypesconfigvarname' => 'foo',
@@ -44,7 +44,7 @@ class DataTypesModuleTest extends \PHPUnit\Framework\TestCase {
 		$this->assertInstanceOf( DataTypeFactory::class, $module->getDataTypeFactory() );
 	}
 
-	public function provideInvalidResourceDefinition() {
+	public static function provideInvalidResourceDefinition() {
 		$dataTypeFactory = new DataTypeFactory( [] );
 
 		$validDefinition = [

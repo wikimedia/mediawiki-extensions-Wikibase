@@ -38,7 +38,7 @@ class EntityContentDiffViewTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( '', $html );
 	}
 
-	public function provideEmptyDiffs() {
+	public static function provideEmptyDiffs() {
 		$item = new Item( new ItemId( 'Q1' ) );
 		$emptyContent1 = ItemContent::newFromItem( clone $item );
 		$emptyContent2 = ItemContent::newFromItem( clone $item );

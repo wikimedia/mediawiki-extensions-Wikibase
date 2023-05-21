@@ -31,7 +31,7 @@ class LiteralValueRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$this->helper = new NTriplesRdfTestHelper();
 	}
 
-	public function provideAddValue() {
+	public static function provideAddValue() {
 		$p11 = new NumericPropertyId( 'P11' );
 		$stringSnak = new PropertyValueSnak( $p11, new StringValue( 'Hello World' ) );
 		$numberSnak = new PropertyValueSnak( $p11, new StringValue( '15' ) );

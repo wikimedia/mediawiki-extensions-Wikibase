@@ -91,7 +91,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 	/**
 	 * Provide data for a sequence of requests that will work when run in order
 	 */
-	public function provideData() {
+	public static function provideData() {
 		return [
 			'new item' => [
 				'p' => [ 'new' => 'item', 'data' => '{}' ],

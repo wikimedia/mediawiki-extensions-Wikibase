@@ -45,7 +45,7 @@ class ByPropertyIdGrouperTest extends TestCase {
 		new ByPropertyIdGrouper( $argument );
 	}
 
-	public function invalidConstructorArgumentProvider() {
+	public static function invalidConstructorArgumentProvider() {
 		return [
 			[ null ],
 			[ 'notAnObject' ],

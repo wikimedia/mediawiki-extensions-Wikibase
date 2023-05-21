@@ -23,7 +23,7 @@ class DataTypeTest extends \PHPUnit\Framework\TestCase {
 		new DataType( $propertyType, $valueType );
 	}
 
-	public function invalidConstructorArgumentsProvider() {
+	public static function invalidConstructorArgumentsProvider() {
 		return [
 			[ 'propertyType', '' ],
 			[ 'propertyType', null ],

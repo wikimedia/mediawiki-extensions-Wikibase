@@ -192,7 +192,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $extensionData );
 	}
 
-	public function updateOtherProjectsLinksDataProvider(): array {
+	public static function updateOtherProjectsLinksDataProvider(): array {
 		return [
 			'other project exists, page has site link' => [
 				[ 'project' => 'catswiki' ],
@@ -308,7 +308,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( LogLevel::WARNING, $logs[0][0] );
 	}
 
-	public function updateTrackingCategoriesDataProvider(): array {
+	public static function updateTrackingCategoriesDataProvider(): array {
 		return [
 			[ 'Foo sr', false, 0 ],
 			[ 'Foo sr', true, 1 ],
@@ -331,7 +331,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 		$instance->updateTrackingCategories( $title, $parserOutput );
 	}
 
-	public function updateUnconnectedPagePropertyProvider() {
+	public static function updateUnconnectedPagePropertyProvider() {
 		return [
 			'Linked page, nothing to do' => [
 				'expectedPageProps' => [],

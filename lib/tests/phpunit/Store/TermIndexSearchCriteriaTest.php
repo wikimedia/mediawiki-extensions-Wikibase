@@ -16,7 +16,7 @@ use Wikimedia\Assert\ParameterAssertionException;
  */
 class TermIndexSearchCriteriaTest extends \PHPUnit\Framework\TestCase {
 
-	public function provideFieldsForConstructor() {
+	public static function provideFieldsForConstructor() {
 		return [
 			[
 				[
@@ -63,7 +63,7 @@ class TermIndexSearchCriteriaTest extends \PHPUnit\Framework\TestCase {
 		] );
 	}
 
-	public function provideInvalidValues() {
+	public static function provideInvalidValues() {
 		$goodFields = [
 			'termType' => TermIndexEntry::TYPE_LABEL,
 			'termLanguage' => 'en',

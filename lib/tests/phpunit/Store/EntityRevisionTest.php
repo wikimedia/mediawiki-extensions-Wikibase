@@ -43,7 +43,7 @@ class EntityRevisionTest extends \PHPUnit\Framework\TestCase {
 		new EntityRevision( new Item(), $revisionId, $mwTimestamp );
 	}
 
-	public function invalidConstructorArgumentsProvider() {
+	public static function invalidConstructorArgumentsProvider() {
 		return [
 			[ -1, '20150211000000' ],
 			[ 1, '20150211' ],

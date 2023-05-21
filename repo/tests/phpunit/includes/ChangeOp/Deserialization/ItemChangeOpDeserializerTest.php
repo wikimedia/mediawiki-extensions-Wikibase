@@ -111,7 +111,7 @@ class ItemChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 		) );
 	}
 
-	private function newSiteLinkTargetProvider() {
+	private static function newSiteLinkTargetProvider() {
 		$wiki = new Site();
 		$wiki->setGlobalId( self::SITE_ID );
 		$wiki->setGroup( self::SITELINK_GROUP );

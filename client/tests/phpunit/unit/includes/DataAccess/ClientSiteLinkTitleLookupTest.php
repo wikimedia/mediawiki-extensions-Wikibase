@@ -46,7 +46,7 @@ class ClientSiteLinkTitleLookupTest extends \PHPUnit\Framework\TestCase {
 		}
 	}
 
-	public function getTitleForIdProvider() {
+	public static function getTitleForIdProvider() {
 		return [
 			[ new NumericPropertyId( 'P1' ), 'enwiki', null ],
 			[ new ItemId( 'Q1' ), 'enwiki', null ],

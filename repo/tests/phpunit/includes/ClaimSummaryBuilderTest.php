@@ -30,7 +30,7 @@ class ClaimSummaryBuilderTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @return Snak[]
 	 */
-	protected function snakProvider() {
+	protected static function snakProvider() {
 		$snaks = [];
 
 		$snaks[] = new PropertyNoValueSnak( 42 );

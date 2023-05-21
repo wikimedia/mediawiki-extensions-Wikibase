@@ -41,7 +41,7 @@ class SnakListDeserializerTest extends TestCase {
 		$deserializer->deserialize( $nonDeserializable );
 	}
 
-	public function nonDeserializableProvider() {
+	public static function nonDeserializableProvider() {
 		return [
 			[
 				42,
@@ -66,7 +66,7 @@ class SnakListDeserializerTest extends TestCase {
 		$this->assertEquals( $object, $this->buildDeserializer()->deserialize( $serialization ) );
 	}
 
-	public function deserializationProvider() {
+	public static function deserializationProvider() {
 		return [
 			[
 				new SnakList(),

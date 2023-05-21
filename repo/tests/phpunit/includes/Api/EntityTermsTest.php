@@ -162,7 +162,7 @@ class EntityTermsTest extends MediaWikiLangTestCase {
 		return $data;
 	}
 
-	public function entityTermsProvider() {
+	public static function entityTermsProvider() {
 		$terms = [
 			11 => [
 				'label' => [

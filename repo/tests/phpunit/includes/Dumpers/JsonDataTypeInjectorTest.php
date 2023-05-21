@@ -67,7 +67,7 @@ class JsonDataTypeInjectorTest extends TestCase {
 		$this->assertSame( 'DtIdFor_P12', $serializedData['claims']['P12'][1]['references'][0]['snaks']['P12'][0]['datatype'] );
 	}
 
-	public function entityProvider() {
+	public static function entityProvider() {
 		$snakList = new SnakList();
 		$snakList->addSnak( new PropertySomeValueSnak( new NumericPropertyId( 'P12' ) ) );
 		$snakList->addSnak( new PropertyValueSnak( new NumericPropertyId( 'P12' ), new StringValue( 'stringVal' ) ) );

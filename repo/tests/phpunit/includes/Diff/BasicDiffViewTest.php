@@ -23,7 +23,7 @@ use Wikibase\Repo\Diff\BasicDiffView;
 class BasicDiffViewTest extends \PHPUnit\Framework\TestCase {
 	use MediaWikiTestCaseTrait;
 
-	public function diffOpProvider(): iterable {
+	public static function diffOpProvider(): iterable {
 		return [
 			'Empty' => [
 				'@^$@',

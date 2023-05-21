@@ -23,7 +23,7 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
  */
 class EntityUsageFactoryTest extends \PHPUnit\Framework\TestCase {
 
-	public function newFromIdentityRoundtripProvider() {
+	public static function newFromIdentityRoundtripProvider() {
 		return [
 			[ new EntityUsage( new ItemId( 'Q21' ), EntityUsage::ALL_USAGE ) ],
 			[ new EntityUsage( new NumericPropertyId( 'P12' ), EntityUsage::LABEL_USAGE, 'blah' ) ],
@@ -42,7 +42,7 @@ class EntityUsageFactoryTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function newFromIdentityInvalidIdentityProvider() {
+	public static function newFromIdentityInvalidIdentityProvider() {
 		return [
 			'Invalid format' => [ 'banana' ],
 			'Invalid entity id' => [ 'banana#X' ],

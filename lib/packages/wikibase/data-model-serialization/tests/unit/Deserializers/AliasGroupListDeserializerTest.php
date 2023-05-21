@@ -30,7 +30,7 @@ class AliasGroupListDeserializerTest extends TestCase {
 	/**
 	 * @return array[] things that aren't deserialized by the deserializer
 	 */
-	public function nonDeserializableProvider() {
+	public static function nonDeserializableProvider() {
 		return [
 			'must be an array' => [ new \stdClass() ],
 			'must be an array of arrays' => [ [
@@ -68,7 +68,7 @@ class AliasGroupListDeserializerTest extends TestCase {
 	/**
 	 * @return array[] an array of array( object deserialized, serialization )
 	 */
-	public function deserializationProvider() {
+	public static function deserializationProvider() {
 		return [
 			[
 				new AliasGroupList( [ new AliasGroup( 'en', [] ) ] ),

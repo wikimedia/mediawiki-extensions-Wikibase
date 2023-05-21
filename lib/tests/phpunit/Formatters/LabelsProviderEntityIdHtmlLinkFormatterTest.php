@@ -49,7 +49,7 @@ class LabelsProviderEntityIdHtmlLinkFormatterTest extends MediaWikiIntegrationTe
 		$this->redirectChecker = $this->newMockRedirectChecker();
 	}
 
-	public function formatProvider() {
+	public static function formatProvider() {
 		return [
 			'has a label' => [
 				'expectedPattern' => '@href="' . self::DEFAULT_URL . '".*>A label<@',

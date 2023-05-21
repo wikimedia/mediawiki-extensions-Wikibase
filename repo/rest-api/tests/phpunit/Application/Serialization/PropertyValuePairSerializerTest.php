@@ -40,7 +40,7 @@ class PropertyValuePairSerializerTest extends TestCase {
 		);
 	}
 
-	public function serializationProvider(): Generator {
+	public static function serializationProvider(): Generator {
 		yield 'no value for string prop' => [
 			new PropertyValuePair(
 				new Property(

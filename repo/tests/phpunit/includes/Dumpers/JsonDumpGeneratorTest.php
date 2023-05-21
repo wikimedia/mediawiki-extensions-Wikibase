@@ -278,7 +278,7 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 		return $entityRevisionLookup;
 	}
 
-	public function idProvider() {
+	public static function idProvider() {
 		$p10 = new NumericPropertyId( 'P10' );
 		$q30 = new ItemId( 'Q30' );
 
@@ -334,7 +334,7 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function typeFilterProvider() {
+	public static function typeFilterProvider() {
 		$p10 = new NumericPropertyId( 'P10' );
 		$q30 = new ItemId( 'Q30' );
 
@@ -391,7 +391,7 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expectedIds, $actualIds, 'bad sharding' );
 	}
 
-	public function shardingProvider() {
+	public static function shardingProvider() {
 		$ids = [];
 
 		for ( $i = 10; $i < 20; $i++ ) {
@@ -425,7 +425,7 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 		$dumper->setShardingFilter( $shardingFactor, $shard );
 	}
 
-	public function badShardingProvider() {
+	public static function badShardingProvider() {
 		return [
 			[ 0, 0 ],
 			[ 1, 1 ],
@@ -454,7 +454,7 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $data, $actual );
 	}
 
-	public function dataProvider() {
+	public static function dataProvider() {
 		return [
 			'string' => [ 'bla' ],
 			'list' => [ [ 'a', 'b', 'c' ] ],
@@ -539,7 +539,7 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 		$this->assertStringEndsWith( '}', $json, 'Snippet ends with }' );
 	}
 
-	public function useSnippetsProvider() {
+	public static function useSnippetsProvider() {
 		$ids = [];
 
 		for ( $i = 1; $i < 5; $i++ ) {

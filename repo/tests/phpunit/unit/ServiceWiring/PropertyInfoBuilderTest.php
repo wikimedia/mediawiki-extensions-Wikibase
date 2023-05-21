@@ -32,7 +32,7 @@ class PropertyInfoBuilderTest extends ServiceWiringTestCase {
 		$this->assertEqualsCanonicalizing( $expectedPropertyIdMap, $propertyInfoBuilder->getPropertyIdMap() );
 	}
 
-	public function provideSettingsWithPropertyIdMap(): iterable {
+	public static function provideSettingsWithPropertyIdMap(): iterable {
 		yield 'default' => [
 			'settings' => [
 				'formatterUrlProperty' => null,

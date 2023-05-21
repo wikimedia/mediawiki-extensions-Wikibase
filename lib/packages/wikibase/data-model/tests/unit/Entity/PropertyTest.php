@@ -207,7 +207,7 @@ class PropertyTest extends \PHPUnit\Framework\TestCase {
 		$this->assertFalse( $property->isEmpty() );
 	}
 
-	public function cloneProvider() {
+	public static function cloneProvider() {
 		$property = new Property( new NumericPropertyId( 'P1' ), null, 'string' );
 		$property->setLabel( 'en', 'original' );
 		$property->getStatements()->addNewStatement( new PropertyNoValueSnak( 1 ) );
@@ -267,7 +267,7 @@ class PropertyTest extends \PHPUnit\Framework\TestCase {
 
 	// Below are tests copied from EntityTest
 
-	public function labelProvider() {
+	public static function labelProvider() {
 		return [
 			[ 'en', 'spam' ],
 			[ 'en', 'spam', 'spam' ],
@@ -293,7 +293,7 @@ class PropertyTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $moarText, $entity->getFingerprint()->getLabel( $languageCode )->getText() );
 	}
 
-	public function descriptionProvider() {
+	public static function descriptionProvider() {
 		return [
 			[ 'en', 'spam' ],
 			[ 'en', 'spam', 'spam' ],
@@ -319,7 +319,7 @@ class PropertyTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $moarText, $entity->getFingerprint()->getDescription( $languageCode )->getText() );
 	}
 
-	public function aliasesProvider() {
+	public static function aliasesProvider() {
 		return [
 			[ [
 				'en' => [ [ 'spam' ] ],

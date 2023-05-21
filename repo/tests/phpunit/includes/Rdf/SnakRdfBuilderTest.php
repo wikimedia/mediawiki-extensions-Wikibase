@@ -94,7 +94,7 @@ class SnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		return $builder;
 	}
 
-	public function provideAddSnakValue() {
+	public static function provideAddSnakValue() {
 		// NOTE: data types must match $this->getTestData()->getMockRepository();
 
 		return [

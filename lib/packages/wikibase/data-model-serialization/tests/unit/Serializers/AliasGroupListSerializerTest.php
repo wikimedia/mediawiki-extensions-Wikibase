@@ -46,7 +46,7 @@ class AliasGroupListSerializerTest extends TestCase {
 		$this->assertEquals( $expected, $output );
 	}
 
-	public function serializationProvider() {
+	public static function serializationProvider() {
 		return [
 			[
 				new AliasGroupList( [ new AliasGroup( 'en', [] ) ] ),

@@ -18,7 +18,7 @@ use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
  */
 class SiteLinkChangeOpFactoryTest extends \PHPUnit\Framework\TestCase {
 
-	public function provideInvalidBadgeItemIdList() {
+	public static function provideInvalidBadgeItemIdList() {
 		return [
 			[ [ 123 ] ],
 			[ [ null ] ],

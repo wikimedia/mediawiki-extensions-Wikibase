@@ -23,7 +23,7 @@ class HTMLContentLanguageFieldTest extends MediaWikiIntegrationTestCase {
 		$this->createField( $params );
 	}
 
-	public function provideVariantsToDefineOptionsForTheField() {
+	public static function provideVariantsToDefineOptionsForTheField() {
 		return [
 			'options' => [
 				[

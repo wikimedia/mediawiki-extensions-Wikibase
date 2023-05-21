@@ -28,7 +28,7 @@ class EntityReferenceExtractorCollectionTest extends TestCase {
 		new EntityReferenceExtractorCollection( $extractors );
 	}
 
-	public function nonEntityReferenceExtractorsProvider() {
+	public static function nonEntityReferenceExtractorsProvider() {
 		return [
 			[ [ 1, 2, 3 ] ],
 			[ [ 'foo' ] ],

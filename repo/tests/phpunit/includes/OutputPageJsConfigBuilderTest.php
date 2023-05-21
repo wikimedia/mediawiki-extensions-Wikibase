@@ -58,7 +58,7 @@ class OutputPageJsConfigBuilderTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $expected, $configVars );
 	}
 
-	public function provideBooleans(): iterable {
+	public static function provideBooleans(): iterable {
 		yield 'save, no tainted refs' => [ false, false ];
 		yield 'save, tainted refs' => [ false, true ];
 		yield 'publish, no tainted refs' => [ true, false ];

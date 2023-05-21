@@ -28,7 +28,7 @@ class JsonDiffJsonPatcherTest extends TestCase {
 		$this->assertEquals( $expected, $result );
 	}
 
-	public function validPatchProvider(): Generator {
+	public static function validPatchProvider(): Generator {
 		yield 'add a field' => [
 			[ 'foo' => 'bar', 'baz' => 42 ],
 			[ [ 'op' => 'add', 'path' => '/new', 'value' => 'value' ] ],
@@ -63,7 +63,7 @@ class JsonDiffJsonPatcherTest extends TestCase {
 		( new JsonDiffJsonPatcher() )->patch( [ 'potato' => 'chips' ], $patch );
 	}
 
-	public function invalidPatchProvider(): Generator {
+	public static function invalidPatchProvider(): Generator {
 		yield 'patch operation is not an array' => [
 			[ 'potato' ],
 		];

@@ -21,7 +21,7 @@ use Wikibase\Repo\StatementRankSerializer;
  */
 class StatementRankSerializerTest extends \PHPUnit\Framework\TestCase {
 
-	public function rankProvider() {
+	public static function rankProvider() {
 		return [
 			[ Statement::RANK_DEPRECATED, 'deprecated' ],
 			[ Statement::RANK_NORMAL, 'normal' ],

@@ -18,7 +18,7 @@ use Wikibase\Repo\Validators\TimestampPrecisionValidator;
  */
 class TimestampPrecisionValidatorTest extends TestCase {
 
-	public function provideValid(): iterable {
+	public static function provideValid(): iterable {
 		yield 'day precision, 09-16' => [ [
 			'precision' => TimeValue::PRECISION_DAY,
 			'time' => '+2015-09-16T00:00:00Z',
@@ -37,7 +37,7 @@ class TimestampPrecisionValidatorTest extends TestCase {
 		] ];
 	}
 
-	public function provideInvalid(): iterable {
+	public static function provideInvalid(): iterable {
 		yield 'day precision, 00-00' => [ [
 			'precision' => TimeValue::PRECISION_DAY,
 			'time' => '+2015-00-00T00:00:00Z',

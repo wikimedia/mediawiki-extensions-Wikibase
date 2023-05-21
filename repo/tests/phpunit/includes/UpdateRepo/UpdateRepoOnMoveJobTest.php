@@ -108,7 +108,7 @@ class UpdateRepoOnMoveJobTest extends MediaWikiIntegrationTestCase {
 		return $runner;
 	}
 
-	public function runProvider(): iterable {
+	public static function runProvider(): iterable {
 		return [
 			[ 'New page name', 'New page name', 'Old page name' ],
 			// Client normalization gets applied

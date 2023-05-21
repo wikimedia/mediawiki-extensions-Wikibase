@@ -48,7 +48,7 @@ class ChangeOpMainSnakTest extends \PHPUnit\Framework\TestCase {
 		$this->mockProvider = new ChangeOpTestMockProvider( $this );
 	}
 
-	public function invalidArgumentProvider() {
+	public static function invalidArgumentProvider() {
 		$validSnak = new PropertyValueSnak( 7201010, new StringValue( 'o_O' ) );
 
 		$args = [];
@@ -200,7 +200,7 @@ class ChangeOpMainSnakTest extends \PHPUnit\Framework\TestCase {
 		}
 	}
 
-	public function validateProvider() {
+	public static function validateProvider() {
 		$p11 = new NumericPropertyId( 'P11' );
 		$q17 = new ItemId( 'Q17' );
 

@@ -39,7 +39,7 @@ class StatementDeserializerTest extends TestCase {
 		);
 	}
 
-	public function serializationProvider(): Generator {
+	public static function serializationProvider(): Generator {
 		yield 'without id' => [
 			NewStatement::someValueFor( 'P123' )->build(),
 			[
@@ -144,7 +144,7 @@ class StatementDeserializerTest extends TestCase {
 		}
 	}
 
-	public function invalidSerializationProvider(): Generator {
+	public static function invalidSerializationProvider(): Generator {
 		yield 'invalid id field type' => [
 			new InvalidFieldException( 'id', [ 'invalid' ] ),
 			[

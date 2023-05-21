@@ -168,7 +168,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 		);
 	}
 
-	public function provideExecute(): iterable {
+	public static function provideExecute(): iterable {
 		$cases = EntityDataTestProvider::provideHandleRequest();
 
 		foreach ( $cases as $n => $case ) {
@@ -228,7 +228,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 		}
 	}
 
-	private function newEntityDataFormatProvider(): EntityDataFormatProvider {
+	private static function newEntityDataFormatProvider(): EntityDataFormatProvider {
 		$entityDataFormatProvider = new EntityDataFormatProvider();
 		$entityDataFormatProvider->setAllowedFormats( [ 'json', 'rdfxml', 'ntriples' ] );
 

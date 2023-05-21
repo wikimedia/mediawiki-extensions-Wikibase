@@ -151,7 +151,7 @@ class EntityByTitleHelperTest extends \PHPUnit\Framework\TestCase {
 		$entityByTitleHelper->getEntityIds( $sites, $titles, true );
 	}
 
-	public function normalizeTitleProvider() {
+	public static function normalizeTitleProvider() {
 		return [
 			[
 				'foo_bar',
@@ -189,7 +189,7 @@ class EntityByTitleHelperTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( Title::newFromTextThrow( $title )->getPrefixedText(), $title );
 	}
 
-	public function notEnoughInputProvider() {
+	public static function notEnoughInputProvider() {
 		return [
 			[
 				// Request with no sites

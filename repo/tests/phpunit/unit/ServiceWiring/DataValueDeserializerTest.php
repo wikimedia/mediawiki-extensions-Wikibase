@@ -39,7 +39,7 @@ class DataValueDeserializerTest extends ServiceWiringTestCase {
 		] );
 	}
 
-	public function provideInvalidId(): iterable {
+	public static function provideInvalidId(): iterable {
 		yield 'empty string' => [ '' ];
 		yield 'T334719' => [ [ 'array' => true ] ];
 	}

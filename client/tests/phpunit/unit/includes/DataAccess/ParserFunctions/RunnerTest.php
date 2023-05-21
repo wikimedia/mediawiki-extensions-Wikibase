@@ -61,7 +61,7 @@ class RunnerTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( 0, $parser->mExpensiveFunctionCount );
 	}
 
-	public function wikitextTypeProvider() {
+	public static function wikitextTypeProvider() {
 		return [
 			[ DataAccessSnakFormatterFactory::TYPE_ESCAPED_PLAINTEXT ],
 			[ DataAccessSnakFormatterFactory::TYPE_RICH_WIKITEXT ],

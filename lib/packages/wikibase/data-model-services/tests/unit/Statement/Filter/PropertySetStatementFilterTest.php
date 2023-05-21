@@ -23,7 +23,7 @@ class PropertySetStatementFilterTest extends TestCase {
 		$this->assertSame( $expected, $filter->statementMatches( $statement ) );
 	}
 
-	public function statementProvider() {
+	public static function statementProvider() {
 		$p1 = new Statement( new PropertyNoValueSnak( 1 ) );
 		$p2 = new Statement( new PropertyNoValueSnak( 2 ) );
 

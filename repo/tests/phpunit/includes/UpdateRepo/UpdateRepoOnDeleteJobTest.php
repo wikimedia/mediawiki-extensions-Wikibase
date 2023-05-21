@@ -105,7 +105,7 @@ class UpdateRepoOnDeleteJobTest extends MediaWikiIntegrationTestCase {
 		return $runner;
 	}
 
-	public function runProvider(): iterable {
+	public static function runProvider(): iterable {
 		return [
 			[ true, false, 'Delete me' ],
 			// The title on client still exists, so don't unlink

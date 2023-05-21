@@ -38,7 +38,7 @@ class ShortDescHandlerTest extends TestCase {
 		$this->assertSame( $isValid, $this->handler->isValid( $shortDesc ) );
 	}
 
-	public function provideIsValid() {
+	public static function provideIsValid() {
 		return [
 			// sanitized parser function parameter, is valid
 			'empty' => [ '', false ],
@@ -61,7 +61,7 @@ class ShortDescHandlerTest extends TestCase {
 		$this->assertSame( $sanitized, $this->handler->sanitize( $raw ) );
 	}
 
-	public function provideSanitize() {
+	public static function provideSanitize() {
 		return [
 			// expanded parser function parameter, sanitized value
 			'trim' => [ ' foo ', 'foo' ],
@@ -97,7 +97,7 @@ class ShortDescHandlerTest extends TestCase {
 		$this->handler->doHandle( $parser, $inputString, '' );
 	}
 
-	public function provideDoHandle() {
+	public static function provideDoHandle() {
 		return [
 			// expanded parser function parameter, expected page property
 			'invalid' => [ '', null ],

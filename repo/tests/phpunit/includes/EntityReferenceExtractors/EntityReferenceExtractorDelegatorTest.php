@@ -78,7 +78,7 @@ class EntityReferenceExtractorDelegatorTest extends TestCase {
 		$this->assertEquals( [], $delegator->extractEntityIds( $mockEntity ) );
 	}
 
-	public function nonCallableArrayProvider() {
+	public static function nonCallableArrayProvider() {
 		return [
 			[ [ 'string', 'string' ] ],
 			[ [ 1, 2, 3 ] ],

@@ -239,7 +239,7 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 		$this->entityModificationTestHelper->assertEntityEquals( $targetItemContent, $actualTo );
 	}
 
-	public function provideExceptionParamsData() {
+	public static function provideExceptionParamsData() {
 		return [
 			[ //toid bad
 				'p' => [ 'fromid' => 'Q1', 'toid' => 'ABCDE' ],

@@ -66,7 +66,7 @@ class SiteLinksRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$this->helper->assertNTriplesEqualsDataset( $dataSetName, $actual );
 	}
 
-	public function provideAddEntity() {
+	public static function provideAddEntity() {
 		return [
 			[ 'Q3', 'Q3_sitelinks' ],
 			[ 'Q3', 'Q3_sitelinks_ruwiki', [ 'ruwiki' ] ],

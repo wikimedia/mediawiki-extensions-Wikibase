@@ -44,7 +44,7 @@ class TimeFormatterParserRoundtripTest extends \PHPUnit\Framework\TestCase {
 		return new TimeParserFactory( $options, $monthNameProvider );
 	}
 
-	public function isoTimestampProvider() {
+	public static function isoTimestampProvider() {
 		return [
 			// Going up the precision chain
 			[ '+0000001987654321-12-31T00:00:00Z', TimeValue::PRECISION_DAY ],
@@ -87,7 +87,7 @@ class TimeFormatterParserRoundtripTest extends \PHPUnit\Framework\TestCase {
 		$this->assertTrue( $expected->equals( $timeValue ) );
 	}
 
-	public function formattedTimeProvider() {
+	public static function formattedTimeProvider() {
 		return [
 			// Basic day, month and year formats that currently do not have a message
 			[ '31 January 1987654321' ],
@@ -148,7 +148,7 @@ class TimeFormatterParserRoundtripTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $timeValue, $parser->parse( $formatted ) );
 	}
 
-	public function precisionDayProvider() {
+	public static function precisionDayProvider() {
 		$gregorian = 'http://www.wikidata.org/entity/Q1985727';
 
 		$tests = [

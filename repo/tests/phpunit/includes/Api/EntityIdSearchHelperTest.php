@@ -71,7 +71,7 @@ class EntityIdSearchHelperTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function provideTestGetRankedSearchResults() {
+	public static function provideTestGetRankedSearchResults() {
 		$existingLocalItemResult = new TermSearchResult(
 			new Term( 'qid', self::EXISTING_LOCAL_ITEM ),
 			'entityId',

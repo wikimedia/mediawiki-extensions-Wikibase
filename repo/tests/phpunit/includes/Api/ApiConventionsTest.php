@@ -22,7 +22,7 @@ use ReflectionMethod;
  */
 class ApiConventionsTest extends MediaWikiIntegrationTestCase {
 
-	public function wikibaseApiModuleProvider() {
+	public static function wikibaseApiModuleProvider() {
 		foreach ( $GLOBALS['wgAPIModules'] as $moduleName => $moduleClass ) {
 			// Make sure to only test Wikibase Api modules
 			// This works as long as Wikibase modules are always defined as a class name string.

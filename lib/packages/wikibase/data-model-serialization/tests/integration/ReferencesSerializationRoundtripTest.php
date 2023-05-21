@@ -36,7 +36,7 @@ class ReferencesSerializationRoundtripTest extends TestCase {
 		$this->assertReferenceListEquals( $references, $newReferences );
 	}
 
-	public function referencesProvider() {
+	public static function referencesProvider() {
 		return [
 			[
 				new ReferenceList( [] ),

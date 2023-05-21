@@ -69,7 +69,7 @@ class ItemTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function simpleSiteLinkProvider() {
+	public static function simpleSiteLinkProvider() {
 		$argLists = [];
 
 		$argLists[] = [
@@ -111,7 +111,7 @@ class ItemTest extends \PHPUnit\Framework\TestCase {
 		return $argLists;
 	}
 
-	public function simpleSiteLinksProvider() {
+	public static function simpleSiteLinksProvider() {
 		$argLists = [];
 
 		$argLists[] = [];
@@ -243,7 +243,7 @@ class ItemTest extends \PHPUnit\Framework\TestCase {
 		$this->assertTrue( $item->getStatements()->isEmpty() );
 	}
 
-	public function equalsProvider() {
+	public static function equalsProvider() {
 		$firstItem = new Item();
 		$firstItem->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ) );
 
@@ -324,7 +324,7 @@ class ItemTest extends \PHPUnit\Framework\TestCase {
 		$this->assertFalse( $secondItem->equals( $firstItem ) );
 	}
 
-	public function cloneProvider() {
+	public static function cloneProvider() {
 		$item = new Item( new ItemId( 'Q1' ) );
 		$item->setLabel( 'en', 'original' );
 		$item->getStatements()->addNewStatement( new PropertyNoValueSnak( 1 ) );
@@ -393,7 +393,7 @@ class ItemTest extends \PHPUnit\Framework\TestCase {
 
 	// Below are tests copied from EntityTest
 
-	public function labelProvider() {
+	public static function labelProvider() {
 		return [
 			[ 'en', 'spam' ],
 			[ 'en', 'spam', 'spam' ],
@@ -419,7 +419,7 @@ class ItemTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $moarText, $entity->getFingerprint()->getLabel( $languageCode )->getText() );
 	}
 
-	public function descriptionProvider() {
+	public static function descriptionProvider() {
 		return [
 			[ 'en', 'spam' ],
 			[ 'en', 'spam', 'spam' ],
@@ -445,7 +445,7 @@ class ItemTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $moarText, $entity->getFingerprint()->getDescription( $languageCode )->getText() );
 	}
 
-	public function aliasesProvider() {
+	public static function aliasesProvider() {
 		return [
 			[ [
 				'en' => [ [ 'spam' ] ],

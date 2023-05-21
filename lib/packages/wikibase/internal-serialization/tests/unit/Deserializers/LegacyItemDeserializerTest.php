@@ -47,7 +47,7 @@ class LegacyItemDeserializerTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function invalidSerializationProvider() {
+	public static function invalidSerializationProvider() {
 		return [
 			[ null ],
 
@@ -178,7 +178,7 @@ class LegacyItemDeserializerTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $labels, $item->getFingerprint()->getLabels()->toTextArray() );
 	}
 
-	public function TermListProvider() {
+	public static function TermListProvider() {
 		return [
 			[ [] ],
 
@@ -217,7 +217,7 @@ class LegacyItemDeserializerTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $aliases, $item->getFingerprint()->getAliasGroups()->toTextArray() );
 	}
 
-	public function aliasesListProvider() {
+	public static function aliasesListProvider() {
 		return [
 			[ [] ],
 

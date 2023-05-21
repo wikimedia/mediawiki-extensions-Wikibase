@@ -18,7 +18,7 @@ use Wikibase\Lib\Changes\RepoRevisionIdentifier;
  */
 class RepoRevisionIdentifierTest extends \PHPUnit\Framework\TestCase {
 
-	public function invalidConstructionProvider() {
+	public static function invalidConstructionProvider() {
 		$validParams = [
 			'entityIdSerialization' => 'Q12',
 			'revisionTimestamp' => '20200302125300',
@@ -120,7 +120,7 @@ class RepoRevisionIdentifierTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function wrongArrayFormatVersionProvider() {
+	public static function wrongArrayFormatVersionProvider() {
 		// NOTE: If you remove versions here, make sure all good ones can be unserialized!
 		return [
 			[ -1 ],

@@ -173,7 +173,7 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 		$this->doApiRequestWithToken( $params );
 	}
 
-	public function invalidClaimProvider(): iterable {
+	public static function invalidClaimProvider(): iterable {
 		return [
 			[ 'xyz' ], //wrong guid
 			[ 'x$y$z' ], //wrong guid

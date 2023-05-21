@@ -20,7 +20,7 @@ use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
  */
 class TypeValidatorTest extends \PHPUnit\Framework\TestCase {
 
-	public function provideValidate() {
+	public static function provideValidate() {
 		return [
 			[ 'integer', 1, true, "integer" ],
 			[ 'integer', 1.1, false, "not an integer" ],

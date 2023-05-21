@@ -19,7 +19,7 @@ use Wikibase\DataModel\Term\AliasGroupList;
  */
 class AliasGroupListPatcherTest extends TestCase {
 
-	public function providePatchAliasGroupList() {
+	public static function providePatchAliasGroupList() {
 		return [
 			'add aliases (associative)' => [
 				new AliasGroupList(),

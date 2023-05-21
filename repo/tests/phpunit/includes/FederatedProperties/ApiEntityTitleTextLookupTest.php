@@ -19,7 +19,7 @@ use Wikibase\Repo\FederatedProperties\ApiEntityTitleTextLookup;
  */
 class ApiEntityTitleTextLookupTest extends TestCase {
 
-	public function provideTestGetPrefixedText() {
+	public static function provideTestGetPrefixedText() {
 		return [
 			[ 'Property', new FederatedPropertyId( 'http://wikidata.org/entity/P789', 'P789' ), 'Property:P789' ],
 			[ null, new FederatedPropertyId( 'http://wikidata.org/entity/P666', 'P666' ), null ],

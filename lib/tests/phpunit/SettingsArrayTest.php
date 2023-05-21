@@ -28,7 +28,7 @@ class SettingsArrayTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSameSize( $settings, $settingsArray );
 	}
 
-	public function settingProvider() {
+	public static function settingProvider() {
 		$argLists = [];
 
 		$argLists[] = [ [] ];

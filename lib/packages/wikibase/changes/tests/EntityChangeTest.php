@@ -168,7 +168,7 @@ class EntityChangeTest extends ChangeRowTest {
 
 	// See MockRepoClientCentralIdLookup
 
-	public function provideTestAddUserMetadata() {
+	public static function provideTestAddUserMetadata() {
 		return [
 			[
 				3,

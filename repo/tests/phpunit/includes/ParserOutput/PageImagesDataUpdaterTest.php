@@ -58,7 +58,7 @@ class PageImagesDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 		$this->assertInstanceOf( PageImagesDataUpdater::class, $instance );
 	}
 
-	public function constructorArgumentsProvider() {
+	public static function constructorArgumentsProvider() {
 		return [
 			'Empty' => [ [] ],
 			'Property ids' => [ [ 'P1', 'P9999' ] ],

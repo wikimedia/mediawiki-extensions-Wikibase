@@ -28,7 +28,7 @@ class DescriptionsSerializerTest extends TestCase {
 		);
 	}
 
-	public function descriptionsProvider(): Generator {
+	public static function descriptionsProvider(): Generator {
 		yield 'empty' => [
 			new Descriptions(),
 			new ArrayObject( [] ),

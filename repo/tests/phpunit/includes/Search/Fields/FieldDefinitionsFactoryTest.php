@@ -66,7 +66,7 @@ class FieldDefinitionsFactoryTest extends TestCase {
 			$fieldDefinitionsFactory->getFieldDefinitionsByType( 'test' ) );
 	}
 
-	public function provideEntityTypeDefinitionsWithoutSearchFieldDefinitions(): iterable {
+	public static function provideEntityTypeDefinitionsWithoutSearchFieldDefinitions(): iterable {
 		yield 'search field definitions set to null' => [ [
 			EntityTypeDefinitions::SEARCH_FIELD_DEFINITIONS => null,
 		] ];

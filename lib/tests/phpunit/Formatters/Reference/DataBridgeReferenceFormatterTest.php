@@ -395,7 +395,7 @@ class DataBridgeReferenceFormatterTest extends TestCase {
 		);
 	}
 
-	public function provideOtherSnakTypesAndClasses(): iterable {
+	public static function provideOtherSnakTypesAndClasses(): iterable {
 		yield 'some/unknown value' => [ 'somevalue', PropertySomeValueSnak::class ];
 		yield 'no value' => [ 'novalue', PropertyNoValueSnak::class ];
 	}

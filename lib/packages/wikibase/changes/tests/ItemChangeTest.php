@@ -30,7 +30,7 @@ class ItemChangeTest extends EntityChangeTest {
 		return ItemChange::class;
 	}
 
-	public function itemChangeProvider() {
+	public static function itemChangeProvider() {
 		$changes = array_filter(
 			TestChanges::getChanges(),
 			function( EntityChange $change ) {
@@ -54,7 +54,7 @@ class ItemChangeTest extends EntityChangeTest {
 		$this->assertInstanceOf( Diff::class, $siteLinkDiff, 'getSiteLinkDiff must return a Diff' );
 	}
 
-	public function changeBackwardsCompatProvider() {
+	public static function changeBackwardsCompatProvider() {
 		//NOTE: Disable developer warnings that may get triggered by
 		//      the B/C code path.
 		AtEase::suppressWarnings();

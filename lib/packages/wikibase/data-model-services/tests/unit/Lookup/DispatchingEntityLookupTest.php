@@ -28,7 +28,7 @@ class DispatchingEntityLookupTest extends TestCase {
 		new DispatchingEntityLookup( $lookups );
 	}
 
-	public function provideInvalidForeignLookups() {
+	public static function provideInvalidForeignLookups() {
 		return [
 			'no lookups given' => [ [] ],
 			'not an implementation of EntityLookup given as a lookup' => [

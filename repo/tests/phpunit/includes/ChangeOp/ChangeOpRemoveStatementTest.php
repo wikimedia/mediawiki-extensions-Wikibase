@@ -23,7 +23,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
  */
 class ChangeOpRemoveStatementTest extends \PHPUnit\Framework\TestCase {
 
-	public function invalidConstructorProvider() {
+	public static function invalidConstructorProvider() {
 		$args = [];
 		$args[] = [ [ 'foo' ] ];
 		$args[] = [ '' ];

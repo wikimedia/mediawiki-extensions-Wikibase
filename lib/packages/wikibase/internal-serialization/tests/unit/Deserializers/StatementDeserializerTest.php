@@ -34,7 +34,7 @@ class StatementDeserializerTest extends \PHPUnit\Framework\TestCase {
 		$this->deserializer->deserialize( $serialization );
 	}
 
-	public function invalidSerializationProvider() {
+	public static function invalidSerializationProvider() {
 		return [
 			[ null ],
 			[ 5 ],

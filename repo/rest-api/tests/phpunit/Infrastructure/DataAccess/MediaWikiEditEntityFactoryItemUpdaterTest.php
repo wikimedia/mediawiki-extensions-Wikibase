@@ -177,7 +177,7 @@ class MediaWikiEditEntityFactoryItemUpdaterTest extends TestCase {
 		$updater->update( $itemToUpdate, $editMeta );
 	}
 
-	public function editPreventedStatusProvider(): Generator {
+	public static function editPreventedStatusProvider(): Generator {
 		yield [ Status::newFatal( 'actionthrottledtext' ) ];
 		yield [ Status::newFatal( wfMessage( 'actionthrottledtext' ) ) ];
 		yield [ Status::newFatal( 'abusefilter-disallowed' ) ];

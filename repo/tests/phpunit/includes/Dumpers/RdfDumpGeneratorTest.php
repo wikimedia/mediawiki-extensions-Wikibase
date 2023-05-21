@@ -337,7 +337,7 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	public function idProvider(): iterable {
+	public static function idProvider(): iterable {
 		$p10 = new NumericPropertyId( 'P10' );
 		$q30 = new ItemId( 'Q30' );
 		$q40 = new ItemId( 'Q40' );

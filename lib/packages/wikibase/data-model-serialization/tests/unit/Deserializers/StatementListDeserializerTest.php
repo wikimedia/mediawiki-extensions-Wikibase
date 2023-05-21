@@ -48,7 +48,7 @@ class StatementListDeserializerTest extends TestCase {
 		$deserializer->deserialize( $nonDeserializable );
 	}
 
-	public function nonDeserializableProvider() {
+	public static function nonDeserializableProvider() {
 		return [
 			[
 				42,
@@ -73,7 +73,7 @@ class StatementListDeserializerTest extends TestCase {
 		$this->assertEquals( $object, $this->buildDeserializer()->deserialize( $serialization ) );
 	}
 
-	public function deserializationProvider() {
+	public static function deserializationProvider() {
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( 'test' );
 

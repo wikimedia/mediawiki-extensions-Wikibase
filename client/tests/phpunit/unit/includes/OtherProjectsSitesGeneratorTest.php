@@ -43,7 +43,7 @@ class OtherProjectsSitesGeneratorTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function otherProjectSitesProvider() {
+	public static function otherProjectSitesProvider() {
 		return [
 			'Same language' => [
 				[ 'wikipedia', 'wikisource' ],

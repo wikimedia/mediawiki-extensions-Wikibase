@@ -226,7 +226,7 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 		return $linksUpdate;
 	}
 
-	public function provideEntityUsages(): array {
+	public static function provideEntityUsages(): array {
 		return [
 			'usage' => [
 				[

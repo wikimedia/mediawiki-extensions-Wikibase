@@ -263,7 +263,7 @@ class PatchItemLabelsTest extends TestCase {
 		}
 	}
 
-	public function provideInapplicablePatch(): Generator {
+	public static function provideInapplicablePatch(): Generator {
 		$patchOperation = [ 'op' => 'remove', 'path' => '/path/does/not/exist' ];
 		yield 'non-existent path' => [
 			[ $patchOperation ],

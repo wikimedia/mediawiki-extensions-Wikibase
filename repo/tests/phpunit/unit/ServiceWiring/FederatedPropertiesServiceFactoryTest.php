@@ -62,7 +62,7 @@ class FederatedPropertiesServiceFactoryTest extends ServiceWiringTestCase {
 		$this->getService( 'WikibaseRepo.FederatedPropertiesServiceFactory' );
 	}
 
-	public function provideSettingsWithoutFederatedProperties(): iterable {
+	public static function provideSettingsWithoutFederatedProperties(): iterable {
 		yield 'federated properties not enabled' => [ [
 			'federatedPropertiesEnabled' => false,
 		] ];

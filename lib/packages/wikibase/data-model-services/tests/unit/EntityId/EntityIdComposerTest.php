@@ -28,7 +28,7 @@ class EntityIdComposerTest extends TestCase {
 		] );
 	}
 
-	public function invalidConstructorArgumentProvider() {
+	public static function invalidConstructorArgumentProvider() {
 		$callable = static function() {
 		};
 
@@ -58,7 +58,7 @@ class EntityIdComposerTest extends TestCase {
 		$composer->composeEntityId( '', 'item', 1 );
 	}
 
-	public function validUniquePartProvider() {
+	public static function validUniquePartProvider() {
 		return [
 			'int' => [ 'numeric-item', 3, new ItemId( 'Q3' ) ],
 			'float' => [ 'numeric-item', 4.0, new ItemId( 'Q4' ) ],
@@ -76,7 +76,7 @@ class EntityIdComposerTest extends TestCase {
 		$this->assertEquals( $expected, $id );
 	}
 
-	public function invalidUniquePartProvider() {
+	public static function invalidUniquePartProvider() {
 		return [
 			[ null, 1 ],
 			[ 'unknown', 2 ],

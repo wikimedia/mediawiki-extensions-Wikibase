@@ -176,7 +176,7 @@ class EchoNotificationsHandlersTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	public function localUserCreatedProvider() {
+	public static function localUserCreatedProvider() {
 		return [
 			'disabled no auto' => [
 				'enabled' => false,

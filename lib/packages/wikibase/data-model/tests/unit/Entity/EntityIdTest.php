@@ -23,7 +23,7 @@ use Wikibase\DataModel\Entity\SerializableEntityId;
  */
 class EntityIdTest extends \PHPUnit\Framework\TestCase {
 
-	public function instanceProvider() {
+	public static function instanceProvider() {
 		$ids = [];
 
 		$ids[] = [ new ItemId( 'Q1' ), '' ];
@@ -55,7 +55,7 @@ class EntityIdTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $id, unserialize( serialize( $id ) ) );
 	}
 
-	public function deserializationCompatibilityProvider(): array {
+	public static function deserializationCompatibilityProvider(): array {
 		return [
 			'v05serialization' => [
 				new ItemId( 'q123' ),
@@ -119,7 +119,7 @@ class EntityIdTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $repoName, $id->getRepositoryName() );
 	}
 
-	public function serializationSplitProvider() {
+	public static function serializationSplitProvider() {
 		return [
 			[ 'Q42', [ '', '', 'Q42' ] ],
 			[ 'foo:Q42', [ 'foo', '', 'Q42' ] ],
@@ -158,7 +158,7 @@ class EntityIdTest extends \PHPUnit\Framework\TestCase {
 		SerializableEntityId::joinSerialization( $parts );
 	}
 
-	public function invalidJoinSerializationDataProvider() {
+	public static function invalidJoinSerializationDataProvider() {
 		return [
 			[ [ 'Q42', '', '' ] ],
 			[ [ '', 'Q42', '' ] ],
@@ -171,7 +171,7 @@ class EntityIdTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( [ 'foo', 'bar', 'Q42' ], SerializableEntityId::splitSerialization( ':foo:bar:Q42' ) );
 	}
 
-	public function localPartDataProvider() {
+	public static function localPartDataProvider() {
 		return [
 			[ 'Q42', 'Q42' ],
 			[ ':Q42', 'Q42' ],
@@ -188,7 +188,7 @@ class EntityIdTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $localPart, $id->getLocalPart() );
 	}
 
-	public function invalidSerializationProvider() {
+	public static function invalidSerializationProvider() {
 		return [
 			[ 's p a c e s:Q42' ],
 			[ '::Q42' ],

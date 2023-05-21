@@ -100,7 +100,7 @@ class DataAccessSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( SnakFormatter::FORMAT_PLAIN, $snakFormatter->getFormat() );
 	}
 
-	public function richWikitextSnakFormatterProvider() {
+	public static function richWikitextSnakFormatterProvider() {
 		$id = new NumericPropertyId( 'P1' );
 
 		return [

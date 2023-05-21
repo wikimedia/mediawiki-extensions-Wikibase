@@ -245,7 +245,7 @@ class StatementDeserializerTest extends DispatchableDeserializerTest {
 		$this->buildDeserializer()->deserialize( $serialization );
 	}
 
-	public function invalidDeserializationProvider() {
+	public static function invalidDeserializationProvider() {
 		return [
 			[
 				[

@@ -45,7 +45,7 @@ class TermIndexEntryTest extends \PHPUnit\Framework\TestCase {
 		] );
 	}
 
-	public function provideIncompleteFields() {
+	public static function provideIncompleteFields() {
 		return [
 			[
 				[
@@ -79,7 +79,7 @@ class TermIndexEntryTest extends \PHPUnit\Framework\TestCase {
 		new TermIndexEntry( $fields );
 	}
 
-	public function provideInvalidValues() {
+	public static function provideInvalidValues() {
 		$goodFields = [
 			'entityId' => new ItemId( 'Q23' ),
 			'termType' => TermIndexEntry::TYPE_LABEL,

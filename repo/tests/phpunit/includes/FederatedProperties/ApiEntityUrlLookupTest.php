@@ -20,7 +20,7 @@ use Wikibase\Repo\FederatedProperties\ApiEntityUrlLookup;
  */
 class ApiEntityUrlLookupTest extends TestCase {
 
-	public function provideTestGetUrl() {
+	public static function provideTestGetUrl() {
 		yield [
 			'P123',
 			new FederatedPropertyId( 'https://pretend.url/entity/P123', 'P123' ),

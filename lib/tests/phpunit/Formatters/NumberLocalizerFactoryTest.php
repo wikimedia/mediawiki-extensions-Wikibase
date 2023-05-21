@@ -40,7 +40,7 @@ class NumberLocalizerFactoryTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( $expected, $localizer->localizeNumber( 13.4 ) );
 	}
 
-	public function languageCodeProvider(): iterable {
+	public static function languageCodeProvider(): iterable {
 		yield 'Localizes numbers for English'
 			=> [ 'en', '13.4' ];
 		yield 'Localizes numbers for German'

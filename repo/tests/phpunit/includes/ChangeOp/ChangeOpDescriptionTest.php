@@ -167,7 +167,7 @@ class ChangeOpDescriptionTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @return Item
 	 */
-	private function provideNewEntity() {
+	private static function provideNewEntity() {
 		$item = new Item( new ItemId( 'Q23' ) );
 		$item->setLabel( 'en', 'DUPE' );
 		$item->setDescription( 'en', 'DUPE' );

@@ -27,7 +27,7 @@ class AliasGroupSerializerTest extends TestCase {
 		$serializer->serialize( $nonSerializable );
 	}
 
-	public function nonSerializableProvider() {
+	public static function nonSerializableProvider() {
 		return [
 			[
 				5,
@@ -49,7 +49,7 @@ class AliasGroupSerializerTest extends TestCase {
 		$this->assertSame( $serialization, $serializer->serialize( $object ) );
 	}
 
-	public function serializationProvider() {
+	public static function serializationProvider() {
 		return [
 			[
 				[],

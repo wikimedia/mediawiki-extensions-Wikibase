@@ -38,7 +38,7 @@ class MediaWikiMonthNameProviderTest extends \PHPUnit\Framework\TestCase {
 		$this->assertGreaterThanOrEqual( 12, count( $actual ) );
 	}
 
-	public function languageCodeProvider() {
+	public static function languageCodeProvider() {
 		return [
 			[ 'en' ],
 			[ 'de' ],

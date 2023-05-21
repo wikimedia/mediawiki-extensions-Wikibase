@@ -89,7 +89,7 @@ class MwEraParserTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @see ValueParserTestBase::validInputProvider
 	 */
-	public function validInputProvider() {
+	public static function validInputProvider() {
 		return [
 			[ '2019 BCE', [ '-', '2019' ] ],
 			[ 'September 2019 BCE', [ '-', 'September 2019' ] ],

@@ -44,7 +44,7 @@ class WikibaseSettingsTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $expected, $actual->getArrayCopy() );
 	}
 
-	public function provideSettingsTriples() {
+	public static function provideSettingsTriples() {
 		$default = [ 'key' => 'x' ];
 		$custom['key'] = 'y';
 		$expected = [ 'key' => 'y' ];
@@ -126,7 +126,7 @@ class WikibaseSettingsTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $expected, $actual->getArrayCopy() );
 	}
 
-	public function provideSettingsComplexMerges() {
+	public static function provideSettingsComplexMerges() {
 		$default = [ 'key' => [ 'one', 'two' ] ];
 		$custom['key']['two'] = false;
 		$expected = [ 'key' => [ 'one' ] ];

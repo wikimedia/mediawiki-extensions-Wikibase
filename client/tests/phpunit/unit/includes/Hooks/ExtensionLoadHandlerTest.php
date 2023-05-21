@@ -101,7 +101,7 @@ class ExtensionLoadHandlerTest extends TestCase {
 		$this->assertNull( $spec );
 	}
 
-	public function provideNotTrueDataBridgeEnabledSettings(): iterable {
+	public static function provideNotTrueDataBridgeEnabledSettings(): iterable {
 		yield 'false' => [ [ 'dataBridgeEnabled' => false ] ];
 		yield 'absent' => [ [] ];
 	}

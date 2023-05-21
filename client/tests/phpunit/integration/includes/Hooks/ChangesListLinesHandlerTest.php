@@ -114,7 +114,7 @@ class ChangesListLinesHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( [], $classes );
 	}
 
-	public function nonWikibaseChangeProvider() {
+	public static function nonWikibaseChangeProvider() {
 		return [
 			[ RecentChange::SRC_EDIT ],
 			[ RecentChange::SRC_NEW ],
@@ -154,7 +154,7 @@ class ChangesListLinesHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( [], $classes );
 	}
 
-	public function oldChangesListLineFlagsProvider() {
+	public static function oldChangesListLineFlagsProvider() {
 		return [
 			[
 				[],

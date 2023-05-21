@@ -37,7 +37,7 @@ class LegacyFingerprintDeserializerTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $fingerprint->getLabels() );
 	}
 
-	public function TermListProvider() {
+	public static function TermListProvider() {
 		return [
 			[
 				[],
@@ -90,7 +90,7 @@ class LegacyFingerprintDeserializerTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $fingerprint->getDescriptions() );
 	}
 
-	public function descriptionListProvider() {
+	public static function descriptionListProvider() {
 		return [
 			[
 				[],
@@ -127,7 +127,7 @@ class LegacyFingerprintDeserializerTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $fingerprint->getAliasGroups() );
 	}
 
-	public function aliasesListProvider() {
+	public static function aliasesListProvider() {
 		return [
 			[
 				[],

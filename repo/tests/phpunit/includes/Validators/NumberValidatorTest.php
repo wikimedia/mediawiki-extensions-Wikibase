@@ -16,7 +16,7 @@ use Wikibase\Repo\Validators\NumberValidator;
  */
 class NumberValidatorTest extends \PHPUnit\Framework\TestCase {
 
-	public function validValueProvider() {
+	public static function validValueProvider() {
 		$data = [
 			'int' => [ 2 ],
 			'float' => [ 3.5 ],
@@ -37,7 +37,7 @@ class NumberValidatorTest extends \PHPUnit\Framework\TestCase {
 		$this->assertTrue( $result->isValid(), 'isValid' );
 	}
 
-	public function invalidValueProvider() {
+	public static function invalidValueProvider() {
 		$data = [
 			'numeric string' => [ '3.4', 'bad-type', [ 'number', 'string' ] ],
 			'boolean' => [ false, 'bad-type', [ 'number', 'boolean' ] ],

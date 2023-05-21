@@ -175,7 +175,7 @@ class TermFallbackCacheFactoryTest extends TestCase {
 		$this->assertInstanceOf( StatsdRecordingSimpleCache::class, $factory->getTermFallbackCache() );
 	}
 
-	public function provideVersionTestData(): Iterator {
+	public static function provideVersionTestData(): Iterator {
 		yield 'no version' => [ null, 'wikibase.repo.formatter.' ];
 		yield 'with version' => [ 5, 'wikibase.repo.formatter.5.' ];
 	}

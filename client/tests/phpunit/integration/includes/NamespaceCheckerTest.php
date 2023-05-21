@@ -19,7 +19,7 @@ use Wikibase\Client\NamespaceChecker;
  */
 class NamespaceCheckerTest extends MediaWikiIntegrationTestCase {
 
-	public function constructorProvider() {
+	public static function constructorProvider() {
 		return [
 			[ [], [ NS_MAIN ] ],
 			[ [ NS_USER_TALK ], [] ],
@@ -35,7 +35,7 @@ class NamespaceCheckerTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $excluded, $namespaceChecker->getExcludedNamespaces() );
 	}
 
-	public function enabledProvider() {
+	public static function enabledProvider() {
 		// Edge cases:
 		// * empty "exclude" matches nothing
 		// * empty "include" matches everything
@@ -72,13 +72,13 @@ class NamespaceCheckerTest extends MediaWikiIntegrationTestCase {
 		$namespaceChecker->isWikibaseEnabled( $namespace );
 	}
 
-	public function enabledInvalidProvider() {
+	public static function enabledInvalidProvider() {
 		return [
 			[ 'Item', [], [] ],
 		];
 	}
 
-	public function wikibaseNamespacesProvider() {
+	public static function wikibaseNamespacesProvider() {
 		// Edge cases:
 		// * empty "exclude" matches nothing
 		// * empty "include" matches everything

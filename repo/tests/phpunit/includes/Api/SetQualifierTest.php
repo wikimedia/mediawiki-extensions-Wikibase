@@ -107,7 +107,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 		return $item;
 	}
 
-	public function provideAddRequests(): iterable {
+	public static function provideAddRequests(): iterable {
 		return [
 			[ PropertyNoValueSnak::class ],
 			[ PropertySomeValueSnak::class ],
@@ -173,7 +173,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 		$this->assertSame( 'A STRING', $responseSnak['datavalue']['value'] );
 	}
 
-	public function provideChangeRequests(): iterable {
+	public static function provideChangeRequests(): iterable {
 		return [ [ PropertyValueSnak::class, new StringValue( 'o_O' ) ] ];
 	}
 

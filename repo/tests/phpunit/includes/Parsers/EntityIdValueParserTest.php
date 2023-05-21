@@ -34,7 +34,7 @@ class EntityIdValueParserTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @inheritDoc
 	 */
-	public function validInputProvider() {
+	public static function validInputProvider() {
 		$valid = [
 			'q1' => new EntityIdValue( new ItemId( 'q1' ) ),
 			'p1' => new EntityIdValue( new NumericPropertyId( 'p1' ) ),
@@ -48,7 +48,7 @@ class EntityIdValueParserTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @inheritDoc
 	 */
-	public function invalidInputProvider() {
+	public static function invalidInputProvider() {
 		$invalid = [
 			'foo',
 			'c2',

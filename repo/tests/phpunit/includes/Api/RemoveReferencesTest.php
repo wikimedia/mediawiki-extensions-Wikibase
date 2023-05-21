@@ -36,7 +36,7 @@ class RemoveReferencesTest extends WikibaseApiTestCase {
 	/**
 	 * @return Snak[]
 	 */
-	protected function snakProvider(): iterable {
+	protected static function snakProvider(): iterable {
 		$snaks = [];
 
 		$snaks[] = new PropertyNoValueSnak( 42 );
@@ -194,7 +194,7 @@ class RemoveReferencesTest extends WikibaseApiTestCase {
 		}
 	}
 
-	public function invalidGuidProvider(): iterable {
+	public static function invalidGuidProvider(): iterable {
 		$snak = new PropertyValueSnak( 722, new StringValue( 'abc' ) );
 		$hash = $snak->getHash();
 

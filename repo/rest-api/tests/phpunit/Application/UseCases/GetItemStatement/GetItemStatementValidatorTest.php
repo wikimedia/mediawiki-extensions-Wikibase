@@ -39,7 +39,7 @@ class GetItemStatementValidatorTest extends TestCase {
 		}
 	}
 
-	public function invalidStatementIdDataProvider(): Generator {
+	public static function invalidStatementIdDataProvider(): Generator {
 		yield 'invalid format' => [ 'not-a-valid-statement-id' ];
 		yield 'invalid ItemId' => [ 'X123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' ];
 		yield 'invalid UUID part' => [ 'Q123$INVALID-UUID-PART' ];

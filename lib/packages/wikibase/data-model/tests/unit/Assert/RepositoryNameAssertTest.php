@@ -12,7 +12,7 @@ use Wikimedia\Assert\ParameterAssertionException;
  */
 class RepositoryNameAssertTest extends \PHPUnit\Framework\TestCase {
 
-	public function provideInvalidRepositoryNames() {
+	public static function provideInvalidRepositoryNames() {
 		return [
 			[ 'fo:o' ],
 			[ 'foo:' ],
@@ -37,7 +37,7 @@ class RepositoryNameAssertTest extends \PHPUnit\Framework\TestCase {
 		RepositoryNameAssert::assertParameterIsValidRepositoryName( $value, 'test' );
 	}
 
-	public function provideValidRepositoryNames() {
+	public static function provideValidRepositoryNames() {
 		return [
 			[ '' ],
 			[ 'foo' ],
@@ -53,7 +53,7 @@ class RepositoryNameAssertTest extends \PHPUnit\Framework\TestCase {
 		$this->addToAssertionCount( 1 );
 	}
 
-	public function provideInvalidRepositoryNameIndexedArrays() {
+	public static function provideInvalidRepositoryNameIndexedArrays() {
 		return [
 			[ 'foo' ],
 			[ [ 0 => 'foo' ] ],
@@ -71,7 +71,7 @@ class RepositoryNameAssertTest extends \PHPUnit\Framework\TestCase {
 		RepositoryNameAssert::assertParameterKeysAreValidRepositoryNames( $values, 'test' );
 	}
 
-	public function provideValidRepositoryNameIndexedArrays() {
+	public static function provideValidRepositoryNameIndexedArrays() {
 		return [
 			[ [ 'foo' => 'bar' ] ],
 			[ [ '' => 'bar' ] ],

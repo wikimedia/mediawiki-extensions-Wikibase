@@ -23,7 +23,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
  */
 class ChangeOpStatementRankTest extends \PHPUnit\Framework\TestCase {
 
-	public function invalidArgumentProvider() {
+	public static function invalidArgumentProvider() {
 		$item = new Item( new ItemId( 'Q42' ) );
 
 		$guidGenerator = new GuidGenerator();

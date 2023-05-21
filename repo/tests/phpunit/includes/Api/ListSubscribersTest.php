@@ -108,7 +108,7 @@ class ListSubscribersTest extends MediaWikiLangTestCase {
 		return $data;
 	}
 
-	public function subscribersProvider() {
+	public static function subscribersProvider() {
 		return [
 			'only Q3' => [
 				[

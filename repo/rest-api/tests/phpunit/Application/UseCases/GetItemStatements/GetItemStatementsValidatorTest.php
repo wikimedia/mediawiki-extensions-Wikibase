@@ -49,7 +49,7 @@ class GetItemStatementsValidatorTest extends TestCase {
 		$this->newStatementsValidator()->assertValidRequest( $request );
 	}
 
-	public function validRequestProvider(): Generator {
+	public static function validRequestProvider(): Generator {
 		yield [ new GetItemStatementsRequest( 'Q321' ) ];
 		yield [ new GetItemStatementsRequest( 'Q321', 'P123' ) ];
 	}

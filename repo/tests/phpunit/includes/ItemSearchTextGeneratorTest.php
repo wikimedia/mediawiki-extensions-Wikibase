@@ -18,7 +18,7 @@ use Wikibase\Repo\ItemSearchTextGenerator;
 class ItemSearchTextGeneratorTest extends \PHPUnit\Framework\TestCase {
 	use MediaWikiTestCaseTrait;
 
-	public function generateProvider() {
+	public static function generateProvider() {
 		$item = new Item();
 
 		$item->setLabel( 'en', 'Test' );

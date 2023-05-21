@@ -21,7 +21,7 @@ class SerializationModifierTest extends \PHPUnit\Framework\TestCase {
 		return new SerializationModifier();
 	}
 
-	public function providePathAndCallback(): iterable {
+	public static function providePathAndCallback(): iterable {
 		return [
 			[
 				'',
@@ -190,7 +190,7 @@ class SerializationModifierTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expectedArray, $alteredArray );
 	}
 
-	public function provideCallbacks(): iterable {
+	public static function provideCallbacks(): iterable {
 		$typeEntityCallback = function ( $value ) {
 			$value['type'] = 'entity';
 			return $value;

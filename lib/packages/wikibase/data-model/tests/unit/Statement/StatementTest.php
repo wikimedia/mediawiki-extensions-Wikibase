@@ -52,7 +52,7 @@ class StatementTest extends \PHPUnit\Framework\TestCase {
 	 * @return array array of arrays:
 	 * [ [ Snak $mainSnak, ?SnakList $qualifiers, ?ReferenceList $references, ?string $guid ], ... ]
 	 */
-	public function provideValidConstructorArguments(): array {
+	public static function provideValidConstructorArguments(): array {
 		$snak = new PropertyNoValueSnak( 1 );
 		$qualifiers = new SnakList( [ $snak ] );
 		$references = new ReferenceList( [ new Reference( [ $snak ] ) ] );
@@ -128,7 +128,7 @@ class StatementTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $statement0->getHash(), $statement1->getHash() );
 	}
 
-	public function provideStatement(): Generator {
+	public static function provideStatement(): Generator {
 		$propertyId = new NumericPropertyId( 'P42' );
 		$baseStatement = new Statement( new PropertyNoValueSnak( $propertyId ) );
 

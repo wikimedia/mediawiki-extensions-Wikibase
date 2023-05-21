@@ -33,7 +33,7 @@ class GlobalStateFactoryMethodsResourceTest extends ExtensionJsonTestBase {
 		$this->addToAssertionCount( 1 );
 	}
 
-	public function provideWikibaseServicesMethods(): iterable {
+	public static function provideWikibaseServicesMethods(): iterable {
 		$reflectionClass = new ReflectionClass( WikibaseServices::class );
 		foreach ( $reflectionClass->getMethods( ReflectionMethod::IS_PUBLIC ) as $method ) {
 			yield $method->getName() => [ $method->getName() ];

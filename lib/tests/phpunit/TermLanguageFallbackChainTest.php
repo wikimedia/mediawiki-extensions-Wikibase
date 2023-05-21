@@ -73,7 +73,7 @@ class TermLanguageFallbackChainTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( $expected, $resolved );
 	}
 
-	public function provideExtractPreferredValue() {
+	public static function provideExtractPreferredValue() {
 		$data = [
 			'en' => 'foo',
 			'nl' => 'bar',
@@ -161,7 +161,7 @@ class TermLanguageFallbackChainTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $expected, $resolved );
 	}
 
-	public function provideExtractPreferredValueOrAny() {
+	public static function provideExtractPreferredValueOrAny() {
 		$data = [
 			'en' => 'foo',
 			'nl' => 'bar',
@@ -218,7 +218,7 @@ class TermLanguageFallbackChainTest extends MediaWikiIntegrationTestCase {
 		];
 	}
 
-	public function provideFetchLanguageCodes() {
+	public static function provideFetchLanguageCodes() {
 		return [
 			'empty' => [ [] ],
 			'de-ch' => [ [ 'de-ch', 'de', 'en' ] ],

@@ -30,7 +30,7 @@ class ItemIdSetTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $expected, $set->getSerializations() );
 	}
 
-	public function serializationsProvider() {
+	public static function serializationsProvider() {
 		return [
 			[ [], [] ],
 			[ [ new ItemId( 'Q1' ) ], [ 'Q1' ] ],
@@ -99,7 +99,7 @@ class ItemIdSetTest extends \PHPUnit\Framework\TestCase {
 		$this->assertTrue( $set->equals( clone $set ) );
 	}
 
-	public function itemIdSetProvider() {
+	public static function itemIdSetProvider() {
 		return [
 			[
 				new ItemIdSet(),

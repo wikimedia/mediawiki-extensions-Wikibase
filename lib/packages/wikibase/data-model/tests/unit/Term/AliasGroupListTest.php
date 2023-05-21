@@ -271,7 +271,7 @@ class AliasGroupListTest extends \PHPUnit\Framework\TestCase {
 		$this->assertFalse( $list->hasGroupForLanguage( $languageCode ) );
 	}
 
-	public function invalidLanguageCodeProvider() {
+	public static function invalidLanguageCodeProvider() {
 		return [
 			[ null ],
 			[ 21 ],

@@ -38,7 +38,7 @@ class TermValidatorFactoryTest extends \PHPUnit\Framework\TestCase {
 		$this->newFactory( $maxLength );
 	}
 
-	public function invalidConstructorArgumentProvider() {
+	public static function invalidConstructorArgumentProvider() {
 		return [
 			[ null ],
 			[ 1.0 ],
@@ -63,7 +63,7 @@ class TermValidatorFactoryTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function entityTypeToFingerprintUniquenessValidatorProvider() {
+	public static function entityTypeToFingerprintUniquenessValidatorProvider() {
 		return [
 
 			'unsupported type' => [
@@ -161,7 +161,7 @@ class TermValidatorFactoryTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $expected, $result->isValid() );
 	}
 
-	public function provideCommonTerms() {
+	public static function provideCommonTerms() {
 		return [
 			'Space' => [ 'x x', true ],
 			'Unicode support' => [ 'Äöü', true ],

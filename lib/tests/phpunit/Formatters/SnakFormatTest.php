@@ -17,7 +17,7 @@ use Wikibase\Lib\Formatters\SnakFormatter;
  */
 class SnakFormatTest extends \PHPUnit\Framework\TestCase {
 
-	public function baseFormatProvider(): iterable {
+	public static function baseFormatProvider(): iterable {
 		yield [ SnakFormatter::FORMAT_HTML, SnakFormatter::FORMAT_HTML_VERBOSE ];
 		yield [ SnakFormatter::FORMAT_HTML, SnakFormatter::FORMAT_HTML_VERBOSE_PREVIEW ];
 		yield [ SnakFormatter::FORMAT_WIKI, SnakFormatter::FORMAT_WIKI ];
@@ -46,7 +46,7 @@ class SnakFormatTest extends \PHPUnit\Framework\TestCase {
 		}
 	}
 
-	public function possibleFormatProvider(): iterable {
+	public static function possibleFormatProvider(): iterable {
 		yield [ true, SnakFormatter::FORMAT_HTML, SnakFormatter::FORMAT_HTML ];
 		yield [ true, SnakFormatter::FORMAT_HTML, SnakFormatter::FORMAT_HTML_VERBOSE ];
 		yield [ true, SnakFormatter::FORMAT_HTML, SnakFormatter::FORMAT_HTML_VERBOSE_PREVIEW ];

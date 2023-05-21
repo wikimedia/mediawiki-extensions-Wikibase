@@ -86,7 +86,7 @@ class FormatEntitiesTest extends ApiTestCase {
 	/**
 	 * returns the input HTML snippet and the expected result
 	 */
-	public function provideHtmlSnippets() {
+	public static function provideHtmlSnippets() {
 		$foo = self::BASE_URL . '/foo';
 
 		return [

@@ -75,7 +75,7 @@ class DispatchingSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 		$this->assertTrue( true );
 	}
 
-	public function constructorProvider() {
+	public static function constructorProvider() {
 		$formatter = new MessageSnakFormatter(
 			'novalue',
 			wfMessage( 'wikibase-snakview-snaktypeselector-novalue' ),
@@ -112,7 +112,7 @@ class DispatchingSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function constructorErrorsProvider() {
+	public static function constructorErrorsProvider() {
 		$formatter = new MessageSnakFormatter(
 			'novalue',
 			wfMessage( 'wikibase-snakview-snaktypeselector-novalue' ),
@@ -153,7 +153,7 @@ class DispatchingSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 		];
 	}
 
-	public function provideFormatSnak() {
+	public static function provideFormatSnak() {
 		$p23 = new NumericPropertyId( 'P23' );
 
 		return [

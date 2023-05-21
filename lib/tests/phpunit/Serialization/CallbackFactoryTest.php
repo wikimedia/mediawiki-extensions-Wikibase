@@ -52,7 +52,7 @@ class CallbackFactoryTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $expected, $array );
 	}
 
-	public function kvpKeyNameProvider() {
+	public static function kvpKeyNameProvider() {
 		return [
 			[ null, [ '_type' => 'default' ] ],
 			[ 'kvpKeyName', [ '_type' => 'default', '_kvpkeyname' => 'kvpKeyName' ] ],

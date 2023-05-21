@@ -22,7 +22,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
  */
 class EntitySerializationRoundtripTest extends TestCase {
 
-	public function itemProvider() {
+	public static function itemProvider() {
 		$empty = new Item( new ItemId( 'Q42' ) );
 
 		$withLabels = new Item();
@@ -68,7 +68,7 @@ class EntitySerializationRoundtripTest extends TestCase {
 		$this->assertTrue( $item->equals( $newEntity ) );
 	}
 
-	public function propertyProvider() {
+	public static function propertyProvider() {
 		return [
 			[ Property::newFromType( 'string' ) ],
 		];

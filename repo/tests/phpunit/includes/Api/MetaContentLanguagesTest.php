@@ -104,7 +104,7 @@ class MetaContentLanguagesTest extends TestCase {
 		return $languageNameUtils;
 	}
 
-	public function provideParamsAndExpectedResults() {
+	public static function provideParamsAndExpectedResults() {
 		yield 'default' => [
 			[],
 			[

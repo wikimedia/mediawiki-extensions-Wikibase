@@ -419,7 +419,7 @@ class PatchItemStatementTest extends TestCase {
 		}
 	}
 
-	public function inapplicablePatchProvider(): Generator {
+	public static function inapplicablePatchProvider(): Generator {
 		yield 'patch test operation failed' => [
 			[
 				[

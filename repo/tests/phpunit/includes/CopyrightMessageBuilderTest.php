@@ -35,7 +35,7 @@ class CopyrightMessageBuilderTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $expectedParams, $message->getParams() );
 	}
 
-	public function buildShortCopyrightWarningMessageProvider() {
+	public static function buildShortCopyrightWarningMessageProvider() {
 		return [
 			[
 				'wikibase-shortcopyrightwarning',

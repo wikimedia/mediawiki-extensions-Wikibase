@@ -49,7 +49,7 @@ class PropertyValueSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 		$this->getDummyPropertyValueSnakFormatter( $format );
 	}
 
-	public function constructorErrorsProvider() {
+	public static function constructorErrorsProvider() {
 		return [
 			'format must be a string' => [
 				17,

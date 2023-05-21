@@ -168,7 +168,7 @@ class SetItemLabelValidatorTest extends TestCase {
 		}
 	}
 
-	public function invalidLabelProvider(): Generator {
+	public static function invalidLabelProvider(): Generator {
 		$label = "tab characters \t not allowed";
 		yield 'invalid label' => [
 			new ValidationError(

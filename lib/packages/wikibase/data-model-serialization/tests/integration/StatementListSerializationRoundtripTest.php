@@ -36,7 +36,7 @@ class StatementListSerializationRoundtripTest extends TestCase {
 		$this->assertEquals( $statements, $newStatements );
 	}
 
-	public function snaksProvider() {
+	public static function snaksProvider() {
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( 'test' );
 

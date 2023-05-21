@@ -121,7 +121,7 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 		return $mock;
 	}
 
-	public function getSnakFormatterProvider() {
+	public static function getSnakFormatterProvider() {
 		return [
 			'plain value' => [
 				SnakFormatter::FORMAT_PLAIN,

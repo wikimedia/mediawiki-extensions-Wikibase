@@ -75,7 +75,7 @@ class DispatchingFallbackLabelDescriptionLookupTest extends TestCase {
 		$this->assertSame( $description, $lookup->getDescription( $entityId ) );
 	}
 
-	public function provideOtherEntityIds(): iterable {
+	public static function provideOtherEntityIds(): iterable {
 		yield 'item' => [ new ItemId( 'Q1' ) ];
 		yield 'non-federated property' => [ new NumericPropertyId( 'P1' ) ];
 	}

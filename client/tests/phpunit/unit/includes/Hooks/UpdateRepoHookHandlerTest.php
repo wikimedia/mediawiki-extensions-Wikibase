@@ -31,7 +31,7 @@ use WikiPage;
  */
 class UpdateRepoHookHandlerTest extends TestCase {
 
-	public function doArticleDeleteCompleteProvider() {
+	public static function doArticleDeleteCompleteProvider() {
 		yield 'Success' => [
 			'expectsSuccess' => true,
 			'propagateChangesToRepo' => true,
@@ -81,7 +81,7 @@ class UpdateRepoHookHandlerTest extends TestCase {
 		);
 	}
 
-	public function doPageMoveCompleteProvider() {
+	public static function doPageMoveCompleteProvider() {
 		yield 'Regular move with redirect' => [
 			'jobName' => 'UpdateRepoOnMove',
 			'isWikibaseEnabled' => true,

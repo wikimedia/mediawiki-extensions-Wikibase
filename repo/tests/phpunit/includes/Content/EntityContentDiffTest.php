@@ -20,7 +20,7 @@ use Wikibase\Repo\Content\EntityContentDiff;
  */
 class EntityContentDiffTest extends MediaWikiIntegrationTestCase {
 
-	public function provideConstruction() {
+	public static function provideConstruction() {
 		return [
 			'empty' => [
 				new EntityDiff(),

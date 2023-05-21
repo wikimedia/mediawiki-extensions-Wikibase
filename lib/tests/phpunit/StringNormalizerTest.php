@@ -25,7 +25,7 @@ class StringNormalizerTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $normalizer->trimBadChars( $string ) );
 	}
 
-	public function providerTrimBadChars(): iterable {
+	public static function providerTrimBadChars(): iterable {
 		return [
 			[ // #7: empty
 				"",
@@ -78,7 +78,7 @@ class StringNormalizerTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $normalizer->trimWhitespace( $string ) );
 	}
 
-	public function providerTrimWhitespace(): iterable {
+	public static function providerTrimWhitespace(): iterable {
 		return [
 			[
 				'foo bar',
@@ -126,7 +126,7 @@ class StringNormalizerTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $expected, $normalizer->cleanupToNFC( $string ) );
 	}
 
-	public function providerCleanupToNFC(): iterable {
+	public static function providerCleanupToNFC(): iterable {
 		return [
 			[ "\xC3\x85land", 'Åland' ],
 			[ "A\xCC\x8Aland", 'Åland' ],
@@ -142,7 +142,7 @@ class StringNormalizerTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $dst, $normalizer->trimToNFC( $src ), "String '$src' is not the same as the expected '$dst'" );
 	}
 
-	public function providerTrimToNFC(): iterable {
+	public static function providerTrimToNFC(): iterable {
 		return [
 			[ "  \xC3\x85land  øyene  ", 'Åland  øyene' ], // #0
 			[ "  A\xCC\x8Aland  øyene  ", 'Åland  øyene' ], // #1

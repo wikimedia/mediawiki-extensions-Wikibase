@@ -126,7 +126,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 	/**
 	 * This method builds an array of test cases using the data provided in the static arrays above
 	 */
-	public function provideData() {
+	public static function provideData() {
 		// Test cases for props filter
 		foreach ( self::$goodProps  as $propData ) {
 			foreach ( self::$goodItems as $testCase ) {
@@ -372,7 +372,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		);
 	}
 
-	public function provideExceptionData() {
+	public static function provideExceptionData() {
 		// TODO: More exception checks should be added once bug T55038 is resolved.
 		return [
 			[ //0 no params
@@ -425,7 +425,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		$this->doTestQueryExceptions( $params, $expected['exception'] );
 	}
 
-	public function provideLanguageFallback() {
+	public static function provideLanguageFallback() {
 		return [
 			'Guangzhou Fallback' => [
 				'Guangzhou',

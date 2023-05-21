@@ -208,7 +208,7 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 		return $repo;
 	}
 
-	public function provideEditConflict() {
+	public static function provideEditConflict() {
 		/*
 		 * Test Revisions:
 		 * #10: label: [ 'en' => 'foo' ];
@@ -677,7 +677,7 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 		ObjectCache::clear();
 	}
 
-	public function provideIsTokenOk() {
+	public static function provideIsTokenOk() {
 		return [
 			[ // 0
 				true, // use a newly generated valid token
@@ -720,7 +720,7 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 		$this->assertNotEquals( $shouldWork, $edit->hasError( EditEntity::TOKEN_ERROR ) );
 	}
 
-	public function provideAttemptSaveWatch() {
+	public static function provideAttemptSaveWatch() {
 		// $watchdefault, $watchcreations, $new, $watched, $watch, $expected
 
 		return [
@@ -814,7 +814,7 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 		$this->assertFalse( $isNew->invoke( $edit ), "Entity exists" );
 	}
 
-	public function provideHookRunnerReturnStatus() {
+	public static function provideHookRunnerReturnStatus() {
 		return [
 			[ Status::newGood() ],
 			[ Status::newFatal( 'OMG' ) ],

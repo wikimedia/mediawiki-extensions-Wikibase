@@ -22,7 +22,7 @@ use Wikibase\Repo\Localizer\ParseExceptionLocalizer;
  */
 class DispatchingExceptionLocalizerTest extends \PHPUnit\Framework\TestCase {
 
-	public function provideGetExceptionMessage() {
+	public static function provideGetExceptionMessage() {
 		$localizers = [
 			'MessageException' => new MessageExceptionLocalizer(),
 			'ParseException' => new ParseExceptionLocalizer(),

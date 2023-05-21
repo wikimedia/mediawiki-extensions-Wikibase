@@ -244,7 +244,7 @@ class RecentChangeSaveHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->assertFalse( $jobQueueGroup->get( 'DispatchChanges' )->isEmpty() );
 	}
 
-	public function logTypeProvider(): array {
+	public static function logTypeProvider(): array {
 		return [
 			'Entity deletion' => [ true, 'delete', 'delete' ],
 			'Entity undeletion' => [ true, 'delete', 'restore' ],

@@ -62,7 +62,7 @@ class PropertyIdResolverTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $expectedUsages, array_keys( $usageAccumulator->getUsages() ) );
 	}
 
-	public function resolvePropertyIdProvider() {
+	public static function resolvePropertyIdProvider() {
 		return [
 			[ 'a kitten!', 'P1337', [ 'P1337#L.en' ] ],
 			[ 'p1337', 'P1337', [] ],
@@ -81,7 +81,7 @@ class PropertyIdResolverTest extends \PHPUnit\Framework\TestCase {
 		$propertyIdResolver->resolvePropertyId( $propertyLabelOrId, 'en' );
 	}
 
-	public function resolvePropertyIdWithInvalidInput_throwsExceptionProvider() {
+	public static function resolvePropertyIdWithInvalidInput_throwsExceptionProvider() {
 		return [
 			[ 'hedgehog' ],
 			[ 'Q100' ],

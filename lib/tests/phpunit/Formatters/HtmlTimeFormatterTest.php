@@ -140,7 +140,7 @@ class HtmlTimeFormatterTest extends \PHPUnit\Framework\TestCase {
 		$formatter->format( $value );
 	}
 
-	public function invalidValueProvider() {
+	public static function invalidValueProvider() {
 		return [
 			[ null ],
 			[ false ],

@@ -27,7 +27,7 @@ use Wikibase\Repo\Diff\ClaimDifference;
  */
 class ClaimDifferTest extends \PHPUnit\Framework\TestCase {
 
-	public function diffClaimsProvider() {
+	public static function diffClaimsProvider() {
 		$argLists = [];
 
 		$noValueForP42 = new Statement( new PropertyNoValueSnak( 42 ) );

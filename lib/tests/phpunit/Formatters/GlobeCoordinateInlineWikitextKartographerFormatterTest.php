@@ -27,7 +27,7 @@ class GlobeCoordinateInlineWikitextKartographerFormatterTest extends \PHPUnit\Fr
 		$this->assertEquals( $output, $formatter->format( $value ) );
 	}
 
-	public function globeCoordinateFormatProvider() {
+	public static function globeCoordinateFormatProvider() {
 		return [
 			'earth' => [
 				new GlobeCoordinateValue(

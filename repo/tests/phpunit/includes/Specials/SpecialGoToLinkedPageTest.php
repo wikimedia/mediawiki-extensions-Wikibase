@@ -122,7 +122,7 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 		);
 	}
 
-	public function requestWithoutRedirectProvider() {
+	public static function requestWithoutRedirectProvider() {
 		return [
 			'empty' => [ '', null, '', '', '' ],
 			'invalidItemID' => [
@@ -163,7 +163,7 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 		}
 	}
 
-	public function requestWithRedirectProvider() {
+	public static function requestWithRedirectProvider() {
 		return [
 			'found' => [ 'dewiki/Q23', 'http://dewiki.com/TestPageName' ],
 			'foundEntityRedirect' => [ 'dewiki/Q24', 'http://dewiki.com/TestPageName' ],

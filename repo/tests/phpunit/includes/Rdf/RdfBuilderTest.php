@@ -308,7 +308,7 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 		return $this->getTestData()->getEntity( $idString );
 	}
 
-	public function provideAddEntity(): iterable {
+	public static function provideAddEntity(): iterable {
 		$rdfTests = [
 			[ 'Q1', 'Q1_info' ],
 			[ 'Q2', [ 'Q2_meta', 'Q2_version', 'Q2_stub', 'Q2_aliases' ] ],

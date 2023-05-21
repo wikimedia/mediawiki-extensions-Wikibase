@@ -17,7 +17,7 @@ use Wikibase\Lib\Store\CachingPropertyOrderProvider;
  * @license GPL-2.0-or-later
  */
 class PropertyOrderProviderTest extends ServiceWiringTestCase {
-	public function propertyOrderUrlProvider(): array {
+	public static function propertyOrderUrlProvider(): array {
 		return [
 			[ 'page-url' ],
 			[ null ],

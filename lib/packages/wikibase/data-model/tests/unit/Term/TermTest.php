@@ -28,7 +28,7 @@ class TermTest extends \PHPUnit\Framework\TestCase {
 		new Term( $languageCode, 'bar' );
 	}
 
-	public function invalidLanguageCodeProvider() {
+	public static function invalidLanguageCodeProvider() {
 		return [
 			[ null ],
 			[ 21 ],
@@ -44,7 +44,7 @@ class TermTest extends \PHPUnit\Framework\TestCase {
 		new Term( 'foo', $nonString );
 	}
 
-	public function nonStringProvider() {
+	public static function nonStringProvider() {
 		return [
 			[ null ],
 			[ [] ],

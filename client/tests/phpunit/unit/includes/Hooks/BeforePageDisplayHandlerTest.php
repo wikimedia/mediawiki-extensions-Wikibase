@@ -41,7 +41,7 @@ class BeforePageDisplayHandlerTest extends TestCase {
 		$this->assertEquals( $expectedCssModules, $output->getModuleStyles(), 'css modules' );
 	}
 
-	public function wikibaseForNamespaceProvider() {
+	public static function wikibaseForNamespaceProvider() {
 		return [
 			[
 				[],
@@ -80,7 +80,7 @@ class BeforePageDisplayHandlerTest extends TestCase {
 		$this->assertEquals( $expectedCssModules, $output->getModuleStyles(), 'css modules' );
 	}
 
-	public function pageConnectedToWikibaseProvider() {
+	public static function pageConnectedToWikibaseProvider() {
 		return [
 			[
 				[],
@@ -125,7 +125,7 @@ class BeforePageDisplayHandlerTest extends TestCase {
 		$this->assertEquals( $expectedCssModules, $output->getModuleStyles(), 'css modules' );
 	}
 
-	public function pageNotConnectedToWikibaseProvider() {
+	public static function pageNotConnectedToWikibaseProvider() {
 		return [
 			[
 				[ 'wikibase.client.linkitem.init' ],
@@ -156,7 +156,7 @@ class BeforePageDisplayHandlerTest extends TestCase {
 		$this->assertEquals( $expectedCssModules, $output->getModuleStyles(), 'css modules' );
 	}
 
-	public function handleUserLoggedOutWithEmptyLangLinksProvider() {
+	public static function handleUserLoggedOutWithEmptyLangLinksProvider() {
 		return [
 			[
 				[],
@@ -187,7 +187,7 @@ class BeforePageDisplayHandlerTest extends TestCase {
 		$this->assertEquals( $expectedCssModules, $output->getModuleStyles(), 'css modules' );
 	}
 
-	public function handleTitleNotExist_NoWikibaseLinksProvider() {
+	public static function handleTitleNotExist_NoWikibaseLinksProvider() {
 		return [
 			[
 				[],
@@ -218,7 +218,7 @@ class BeforePageDisplayHandlerTest extends TestCase {
 		$this->assertEquals( $expectedCssModules, $output->getModuleStyles(), 'css modules' );
 	}
 
-	public function handleHistoryActionWithEmptyLangLinksProvider() {
+	public static function handleHistoryActionWithEmptyLangLinksProvider() {
 		return [
 			[
 				[],
@@ -249,7 +249,7 @@ class BeforePageDisplayHandlerTest extends TestCase {
 		$this->assertSame( $expectedCssModules, $output->getModuleStyles(), 'css modules' );
 	}
 
-	public function handleDataBridgeEnabledProvider() {
+	public static function handleDataBridgeEnabledProvider() {
 		yield 'disabled' => [
 			[],
 			[],

@@ -33,7 +33,7 @@ class BasicEntityDiffVisualizerTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( '', $html );
 	}
 
-	public function diffProvider() {
+	public static function diffProvider() {
 		$fingerprintDiff = new EntityContentDiff(
 			new EntityDiff( [
 				'label' => new Diff( [

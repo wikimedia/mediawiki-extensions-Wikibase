@@ -50,7 +50,7 @@ class InterWikiLinkExistsValidatorTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function provideValidate() {
+	public static function provideValidate() {
 		return [
 			"Valid, plain string" => [
 				true, self::EXISTING_PAGE,

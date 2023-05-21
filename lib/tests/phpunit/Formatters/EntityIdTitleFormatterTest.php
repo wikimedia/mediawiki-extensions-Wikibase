@@ -24,7 +24,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
  */
 class EntityIdTitleFormatterTest extends \PHPUnit\Framework\TestCase {
 
-	public function formatEntityIdProvider() {
+	public static function formatEntityIdProvider() {
 		return [
 			'ItemId' => [
 				new ItemId( 'Q23' ),

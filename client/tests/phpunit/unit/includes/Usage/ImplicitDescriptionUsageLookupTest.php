@@ -298,7 +298,7 @@ class ImplicitDescriptionUsageLookupTest extends TestCase {
 		}
 	}
 
-	public function provideRelatedAspects() {
+	public static function provideRelatedAspects() {
 		yield 'description' => [
 			'aspects' => [ EntityUsage::DESCRIPTION_USAGE ],
 			'expect456' => true,
@@ -360,7 +360,7 @@ class ImplicitDescriptionUsageLookupTest extends TestCase {
 		);
 	}
 
-	public function provideUnrelatedAspects() {
+	public static function provideUnrelatedAspects() {
 		yield 'statement' => [ [ EntityUsage::STATEMENT_USAGE ] ];
 		yield 'label' => [ [ EntityUsage::LABEL_USAGE ] ];
 		yield 'other' => [ [ EntityUsage::OTHER_USAGE ] ];

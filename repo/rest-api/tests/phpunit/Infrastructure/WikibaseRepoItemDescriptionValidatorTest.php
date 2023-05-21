@@ -87,7 +87,7 @@ class WikibaseRepoItemDescriptionValidatorTest extends TestCase {
 		);
 	}
 
-	public function provideInvalidDescription(): Generator {
+	public static function provideInvalidDescription(): Generator {
 		yield 'description too short' => [ '', ItemDescriptionValidator::CODE_EMPTY ];
 
 		$description = str_repeat( 'a', self::MAX_LENGTH + 1 );

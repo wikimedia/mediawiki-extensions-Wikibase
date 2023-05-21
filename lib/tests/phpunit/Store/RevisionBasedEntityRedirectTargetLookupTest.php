@@ -40,7 +40,7 @@ class RevisionBasedEntityRedirectTargetLookupTest extends TestCase {
 		);
 	}
 
-	public function latestRevisionResultProvider() {
+	public static function latestRevisionResultProvider() {
 		yield 'concrete revision -> no redirect' => [
 			LatestRevisionIdResult::concreteRevision( 666, '20220101001122' ),
 			null,

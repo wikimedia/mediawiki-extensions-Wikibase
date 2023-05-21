@@ -122,7 +122,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 		$this->assertSame( $expected, $result, 'Not the expected result' );
 	}
 
-	public function providerFormatAutoComment() {
+	public static function providerFormatAutoComment() {
 		$p20 = new NumericPropertyId( 'P20' );
 		$q5 = new ItemId( 'Q5' );
 		$q5Value = new EntityIdValue( $q5 );
@@ -204,7 +204,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 		$this->assertSame( $expected, $result, 'Not the expected result' );
 	}
 
-	public function providerFormatAutoSummary() {
+	public static function providerFormatAutoSummary() {
 		$p20 = new NumericPropertyId( 'P20' );
 		$q5 = new ItemId( 'Q5' );
 		$q5Value = new EntityIdValue( $q5 );
@@ -238,7 +238,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 		$this->assertSame( $expected, $formatter->formatSummary( $summary ) );
 	}
 
-	public function provideToStringArgs() {
+	public static function provideToStringArgs() {
 		return [
 			[
 				[],
@@ -320,7 +320,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 		$this->assertSame( $expected, $formatter->formatSummary( $summary ) );
 	}
 
-	public function provideFormatSummary() {
+	public static function provideFormatSummary() {
 		return [
 			[ // #0
 				'summarytest',
@@ -460,7 +460,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 		}
 	}
 
-	public function providerOnFormat() {
+	public static function providerOnFormat() {
 		return [ //@todo: test other types of entities too!
 			[
 				'item',

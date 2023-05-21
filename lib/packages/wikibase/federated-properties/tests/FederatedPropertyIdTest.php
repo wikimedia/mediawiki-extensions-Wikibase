@@ -49,7 +49,7 @@ class FederatedPropertyIdTest extends TestCase {
 		$this->assertSame( $pid, $id->getRemoteIdSerialization() );
 	}
 
-	public function remoteIdProvider() {
+	public static function remoteIdProvider() {
 		yield [ 'http://www.wikidata.org/entity/P31', 'P31' ];
 		yield [ 'http://www.wikidata.org/w/index.php?title=Property:P279', 'P279' ];
 	}

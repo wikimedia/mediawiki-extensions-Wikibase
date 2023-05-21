@@ -38,7 +38,7 @@ class ApiEntityNamespaceInfoLookupTest extends TestCase {
 		}
 	}
 
-	public function provideTestGetNamespaceNameForEntityType() {
+	public static function provideTestGetNamespaceNameForEntityType() {
 		return [
 			[ 'query-siteinfo-namespaces-wikidata.json', Item::ENTITY_TYPE, '' ],
 			[ 'query-siteinfo-namespaces-wikidata.json', Property::ENTITY_TYPE, 'Property' ],

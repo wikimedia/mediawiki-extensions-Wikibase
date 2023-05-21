@@ -27,7 +27,7 @@ class NoCrossReferencingStatementsTest extends TestCase {
 		$this->assertSame( $expected, $validator->validate( $source, $target ) );
 	}
 
-	public function provideSamples() {
+	public static function provideSamples() {
 		yield 'items with no statements' => [
 			true,
 			NewItem::withId( 'Q1' )->build(),

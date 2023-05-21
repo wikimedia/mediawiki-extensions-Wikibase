@@ -76,7 +76,7 @@ class ApiErrorReporterTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	public function exceptionProvider() {
+	public static function exceptionProvider() {
 		return [
 			// Reporting an unknown / generic exception with an unknown error
 			// code should result in the error code and being used directly,
@@ -159,7 +159,7 @@ class ApiErrorReporterTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	public function messageProvider() {
+	public static function messageProvider() {
 		$code = 'no-such-sitelink';
 
 		return [
@@ -218,7 +218,7 @@ class ApiErrorReporterTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	public function statusProvider() {
+	public static function statusProvider() {
 		$status = Status::newFatal( 'wikibase-api-no-such-sitelink' );
 		$status->fatal( 'wikibase-noentity', 'Q123' );
 
@@ -274,7 +274,7 @@ class ApiErrorReporterTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	public function errorProvider() {
+	public static function errorProvider() {
 		return [
 			// The provided description and code should be present
 			// in the result.
@@ -326,7 +326,7 @@ class ApiErrorReporterTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	public function warningProvider() {
+	public static function warningProvider() {
 		$status = Status::newGood();
 		$status->warning( 'wikibase-conflict-patched' );
 		$status->warning( 'undo-nochange' );

@@ -191,7 +191,7 @@ class ItemDiffTest extends EntityDiffOldTest {
 		}
 	}
 
-	public function isEmptyProvider() {
+	public static function isEmptyProvider() {
 		$argLists = [];
 
 		$argLists['no ops'] = [ [], true ];

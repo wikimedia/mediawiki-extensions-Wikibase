@@ -22,7 +22,7 @@ class ChangeOpDeserializationExceptionTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $message, $exception->getMessage() );
 	}
 
-	public function exceptionMessageProvider() {
+	public static function exceptionMessageProvider() {
 		return [ [ 'foo' ], [ 'bar' ] ];
 	}
 
@@ -35,7 +35,7 @@ class ChangeOpDeserializationExceptionTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $errorCode, $exception->getErrorCode() );
 	}
 
-	public function errorCodeProvider() {
+	public static function errorCodeProvider() {
 		return [ [ 'error-foo' ], [ 'error-bar' ] ];
 	}
 

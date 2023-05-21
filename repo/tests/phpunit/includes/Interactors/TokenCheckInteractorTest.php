@@ -50,7 +50,7 @@ class TokenCheckInteractorTest extends \PHPUnit\Framework\TestCase {
 		$this->assertTrue( true ); // make PHPUnit happy
 	}
 
-	public function tokenFailureProvider() {
+	public static function tokenFailureProvider() {
 		return [
 			'missingtoken' => [ [ 'foo' => 'VALID' ], true, 'missingtoken' ],
 			'mustposttoken' => [ [ 'tokentest' => 'VALID' ], false, 'mustposttoken' ],

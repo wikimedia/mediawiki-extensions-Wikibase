@@ -33,7 +33,7 @@ class DispatchingValueFormatterTest extends \PHPUnit\Framework\TestCase {
 		new DispatchingValueFormatter( $formatters );
 	}
 
-	public function constructorErrorsProvider() {
+	public static function constructorErrorsProvider() {
 		$stringFormatter = new StringFormatter( new FormatterOptions() );
 
 		return [
@@ -166,7 +166,7 @@ class DispatchingValueFormatterTest extends \PHPUnit\Framework\TestCase {
 		$formatter->formatValue( $value, $type );
 	}
 
-	public function formatValueErrorsProvider(): iterable {
+	public static function formatValueErrorsProvider(): iterable {
 		yield 'invalid type PT' => [
 			new StringValue( 'Foo.jpg' ),
 			'commonsMedia',

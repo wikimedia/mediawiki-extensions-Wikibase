@@ -38,7 +38,7 @@ class ItemDiffVisualizerTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( '', $html );
 	}
 
-	public function diffProvider() {
+	public static function diffProvider() {
 		$sitelinkDiff = new EntityContentDiff(
 			new ItemDiff( [
 				'links' => new Diff( [

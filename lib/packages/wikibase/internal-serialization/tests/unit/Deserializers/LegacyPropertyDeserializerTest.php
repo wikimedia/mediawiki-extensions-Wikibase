@@ -98,7 +98,7 @@ class LegacyPropertyDeserializerTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $labels, $property->getFingerprint()->getLabels()->toTextArray() );
 	}
 
-	public function TermListProvider() {
+	public static function TermListProvider() {
 		return [
 			[ [] ],
 
@@ -145,7 +145,7 @@ class LegacyPropertyDeserializerTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $aliases, $property->getFingerprint()->getAliasGroups()->toTextArray() );
 	}
 
-	public function aliasesListProvider() {
+	public static function aliasesListProvider() {
 		return [
 			[ [] ],
 

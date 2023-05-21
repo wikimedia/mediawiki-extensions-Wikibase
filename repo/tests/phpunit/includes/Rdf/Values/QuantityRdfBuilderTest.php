@@ -41,7 +41,7 @@ class QuantityRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$this->helper = new NTriplesRdfTestHelper();
 	}
 
-	public function provideAddValue() {
+	public static function provideAddValue() {
 		$unboundedValue = UnboundedQuantityValue::newFromNumber( '+23.5', '1' );
 		$unboundedSnak = new PropertyValueSnak( new NumericPropertyId( 'P7' ), $unboundedValue );
 		$value = QuantityValue::newFromNumber( '+23.5', '1', '+23.6', '+23.4' );

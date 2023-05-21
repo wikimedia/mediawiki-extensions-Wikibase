@@ -87,7 +87,7 @@ class FingerprintPatcherTest extends TestCase {
 		$this->assertFingerprintResultsFromPatch( $expectedFingerprint, $fingerprint, $patch );
 	}
 
-	public function aliasDiffProvider() {
+	public static function aliasDiffProvider() {
 		return [
 			'diffs containing add/remove ops (default)' => [ [
 				'de' => new Diff( [ new DiffOpAdd( 'foo' ) ], false ),
@@ -136,7 +136,7 @@ class FingerprintPatcherTest extends TestCase {
 		$this->assertFingerprintResultsFromPatch( $expectedFingerprint, $fingerprint, $patch );
 	}
 
-	public function conflictingEditProvider() {
+	public static function conflictingEditProvider() {
 		return [
 			'does not add existing label language' => [ [
 				'label' => new Diff( [

@@ -24,7 +24,7 @@ use Wikibase\DataModel\Statement\StatementList;
  */
 class StatementListPatcherTest extends TestCase {
 
-	public function patchStatementListProvider() {
+	public static function patchStatementListProvider() {
 		$statement1 = new Statement( new PropertyNoValueSnak( 1 ) );
 		$statement2 = new Statement( new PropertyNoValueSnak( 2 ) );
 
@@ -107,7 +107,7 @@ class StatementListPatcherTest extends TestCase {
 		$this->assertEquals( $expected, $statements );
 	}
 
-	public function statementOrderProvider() {
+	public static function statementOrderProvider() {
 		$statement1 = new Statement( new PropertyNoValueSnak( 1 ), null, null, 's1' );
 		$statement2 = new Statement( new PropertyNoValueSnak( 2 ), null, null, 's2' );
 		$statement3 = new Statement( new PropertyNoValueSnak( 3 ), null, null, 's3' );

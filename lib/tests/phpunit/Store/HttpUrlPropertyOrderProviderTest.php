@@ -18,7 +18,7 @@ use Wikibase\Lib\Store\HttpUrlPropertyOrderProvider;
  */
 class HttpUrlPropertyOrderProviderTest extends \PHPUnit\Framework\TestCase {
 
-	public function provideGetPropertyOrder() {
+	public static function provideGetPropertyOrder() {
 		yield from WikiTextPropertyOrderProviderTestHelper::provideGetPropertyOrder();
 		yield [ false, null ];
 	}

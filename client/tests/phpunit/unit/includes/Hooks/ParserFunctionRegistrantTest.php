@@ -17,7 +17,7 @@ use Wikibase\Client\Hooks\ParserFunctionRegistrant;
  */
 class ParserFunctionRegistrantTest extends \PHPUnit\Framework\TestCase {
 
-	public function parserFunctionsProvider() {
+	public static function parserFunctionsProvider() {
 		return [
 			[
 				[

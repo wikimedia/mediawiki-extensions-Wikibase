@@ -35,7 +35,7 @@ class RemoveQualifiersTest extends WikibaseApiTestCase {
 	/**
 	 * @return Snak[]
 	 */
-	protected function snakProvider(): iterable {
+	protected static function snakProvider(): iterable {
 		$snaks = [];
 
 		$snaks[] = new PropertyNoValueSnak( 42 );
@@ -202,7 +202,7 @@ class RemoveQualifiersTest extends WikibaseApiTestCase {
 		}
 	}
 
-	public function invalidGuidProvider() {
+	public static function invalidGuidProvider() {
 		$qualifierSnak = new PropertyValueSnak( 722, new StringValue( 'abc' ) );
 		$hash = $qualifierSnak->getHash();
 

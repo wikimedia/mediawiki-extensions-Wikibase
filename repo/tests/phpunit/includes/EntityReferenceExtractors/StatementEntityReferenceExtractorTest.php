@@ -42,7 +42,7 @@ class StatementEntityReferenceExtractorTest extends TestCase {
 		);
 	}
 
-	public function statementsAndExtractedIdsProvider() {
+	public static function statementsAndExtractedIdsProvider() {
 		yield 'no statements' => [ [], [] ];
 
 		yield 'two statements, one referencing an item' => [

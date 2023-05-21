@@ -30,7 +30,7 @@ class RedirectRevisionTest extends \PHPUnit\Framework\TestCase {
 		new RedirectRevision( $this->newRedirect(), $revisionId, $mwTimestamp );
 	}
 
-	public function invalidConstructorArgumentsProvider() {
+	public static function invalidConstructorArgumentsProvider() {
 		return [
 			[ -1, '' ],
 			[ 0, '20141231' ],

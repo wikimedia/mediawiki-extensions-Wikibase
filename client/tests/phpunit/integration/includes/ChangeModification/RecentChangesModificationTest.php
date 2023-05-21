@@ -40,7 +40,7 @@ abstract class RecentChangesModificationTest extends MediaWikiIntegrationTestCas
 		);
 	}
 
-	public function revisionIdentifierProvider() {
+	public static function revisionIdentifierProvider() {
 		return [
 			'redact nothing' => [
 				[],

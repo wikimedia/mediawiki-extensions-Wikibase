@@ -304,7 +304,7 @@ class CachingFallbackBasedTermLookupTest extends TestCase {
 		);
 	}
 
-	public function provideTermTypes() {
+	public static function provideTermTypes() {
 		yield [ TermTypes::TYPE_LABEL ];
 		yield [ TermTypes::TYPE_DESCRIPTION ];
 	}

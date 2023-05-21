@@ -17,7 +17,7 @@ class ChangeOpResultTraversalTest extends \PHPUnit\Framework\TestCase {
 
 	use ChangeOpResultTraversal;
 
-	public function changeOpResultTreesProvider() {
+	public static function changeOpResultTreesProvider() {
 		// visual view of the constructed tree below (numeric suffixes used):
 		//       7
 		//      / \

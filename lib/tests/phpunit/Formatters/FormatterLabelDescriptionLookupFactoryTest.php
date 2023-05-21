@@ -119,7 +119,7 @@ class FormatterLabelDescriptionLookupFactoryTest extends \PHPUnit\Framework\Test
 		$factory->getLabelDescriptionLookup( $options );
 	}
 
-	public function provideGetLabelDescriptionLookup_failure() {
+	public static function provideGetLabelDescriptionLookup_failure() {
 		return [
 			'bad language' => [
 				new FormatterOptions( [

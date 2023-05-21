@@ -34,7 +34,7 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 		self::$hasSetup = true;
 	}
 
-	public function provideLinkTitles(): iterable {
+	public static function provideLinkTitles(): iterable {
 		return [
 			[ //0 add nowiki as fromsite
 				'p' => [ 'tosite' => 'nnwiki', 'totitle' => 'Oslo', 'fromsite' => 'nowiki', 'fromtitle' => 'Oslo' ],

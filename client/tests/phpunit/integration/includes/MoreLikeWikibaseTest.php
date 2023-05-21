@@ -35,7 +35,7 @@ class MoreLikeWikibaseTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	public function applyProvider() {
+	public static function applyProvider() {
 		if (
 			!ExtensionRegistry::getInstance()->isLoaded( 'CirrusSearch' )
 			|| !class_exists( BoolQuery::class )

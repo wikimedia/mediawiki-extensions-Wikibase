@@ -23,7 +23,7 @@ use Wikimedia\Assert\ParameterTypeException;
  */
 class PropertyInfoSnakUrlExpanderTest extends \PHPUnit\Framework\TestCase {
 
-	public function provideExpandUrl() {
+	public static function provideExpandUrl() {
 		$p66 = new NumericPropertyId( 'P66' );
 		$p2 = new NumericPropertyId( 'P2' );
 		$p3 = new NumericPropertyId( 'P3' );
@@ -116,7 +116,7 @@ class PropertyInfoSnakUrlExpanderTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $url );
 	}
 
-	public function provideExpandUrl_ParameterTypeException() {
+	public static function provideExpandUrl_ParameterTypeException() {
 		return [
 			'bad value type' => [
 				new PropertyValueSnak(

@@ -133,7 +133,7 @@ class StatementHtmlGeneratorTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function referencesProvider() {
+	public static function referencesProvider() {
 		$snak = new PropertyNoValueSnak( 1 );
 		$statement = new Statement( $snak );
 		$referencedStatement = clone $statement;

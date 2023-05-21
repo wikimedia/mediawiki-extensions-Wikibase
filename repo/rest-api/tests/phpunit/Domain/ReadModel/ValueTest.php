@@ -38,7 +38,7 @@ class ValueTest extends TestCase {
 		$v = new Value( $valueType, $content );
 	}
 
-	public function invalidConstructorArgsProvider(): Generator {
+	public static function invalidConstructorArgsProvider(): Generator {
 		yield 'unknown value type' => [
 			'not-a-valid-value-type',
 		];

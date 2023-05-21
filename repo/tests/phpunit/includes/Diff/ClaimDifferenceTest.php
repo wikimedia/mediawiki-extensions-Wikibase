@@ -76,7 +76,7 @@ class ClaimDifferenceTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $expected, $actual );
 	}
 
-	public function atomicClaimDifferenceProvider() {
+	public static function atomicClaimDifferenceProvider() {
 		$changeOp = new DiffOpChange( "old", "new" );
 		$diff = new Diff( [ $changeOp ] );
 
@@ -88,7 +88,7 @@ class ClaimDifferenceTest extends MediaWikiIntegrationTestCase {
 		];
 	}
 
-	public function nonAtomicClaimDifferenceProvider() {
+	public static function nonAtomicClaimDifferenceProvider() {
 		$changeOp = new DiffOpChange( "old", "new" );
 		$diff = new Diff( [ $changeOp ] );
 

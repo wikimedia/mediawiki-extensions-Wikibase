@@ -17,7 +17,7 @@ use Wikibase\Lib\Interactors\TermSearchResult;
  */
 class TermSearchResultTest extends \PHPUnit\Framework\TestCase {
 
-	public function provideGoodConstruction() {
+	public static function provideGoodConstruction() {
 		return [
 			[
 				new Term( 'br', 'FooText' ),

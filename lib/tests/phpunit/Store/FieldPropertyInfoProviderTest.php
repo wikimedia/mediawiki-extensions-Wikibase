@@ -33,7 +33,7 @@ class FieldPropertyInfoProviderTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $expected, $instance->getPropertyInfo( $propertyId ) );
 	}
 
-	public function provideGetPropertyInfo() {
+	public static function provideGetPropertyInfo() {
 		return [
 			'no info array' => [ null, 'foo', null ],
 			'empty info array' => [ [], 'foo', null ],

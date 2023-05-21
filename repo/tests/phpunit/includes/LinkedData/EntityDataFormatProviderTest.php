@@ -91,7 +91,7 @@ class EntityDataFormatProviderTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @return EntityDataFormatProvider
 	 */
-	private function getProvider() {
+	private static function getProvider() {
 		$provider = new EntityDataFormatProvider();
 
 		$provider->setAllowedFormats(
@@ -232,7 +232,7 @@ class EntityDataFormatProviderTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	public function rfdFormatProvider() {
+	public static function rfdFormatProvider() {
 		return [
 			[ 'rdf', true ],
 			[ 'n3', true ],

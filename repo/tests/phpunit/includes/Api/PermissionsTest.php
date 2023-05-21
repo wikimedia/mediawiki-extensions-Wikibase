@@ -21,7 +21,7 @@ use FormatJson;
  */
 class PermissionsTest extends PermissionsTestCase {
 
-	public function provideReadPermissions() {
+	public static function provideReadPermissions() {
 		yield 'normal permissions, no error' => [ null, null ];
 
 		yield [

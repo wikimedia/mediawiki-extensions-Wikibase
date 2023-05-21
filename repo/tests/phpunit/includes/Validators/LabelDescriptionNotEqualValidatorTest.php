@@ -76,7 +76,7 @@ class LabelDescriptionNotEqualValidatorTest extends \PHPUnit\Framework\TestCase 
 		$this->assertResult( $result, $expectedErrors );
 	}
 
-	public function provideLabelsDescriptionsAndExpectedErrors() {
+	public static function provideLabelsDescriptionsAndExpectedErrors() {
 		yield 'no data' => [ [], [], [] ];
 		yield 'no label' => [ [], [ 'en' => 'description' ], [] ];
 		yield 'no description' => [ [ 'en' => 'label' ], [], [] ];

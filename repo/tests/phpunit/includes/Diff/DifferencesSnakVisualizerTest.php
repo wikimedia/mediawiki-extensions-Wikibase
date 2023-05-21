@@ -94,7 +94,7 @@ class DifferencesSnakVisualizerTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $expected, $result );
 	}
 
-	public function provideGetPropertyAndDetailedValue() {
+	public static function provideGetPropertyAndDetailedValue() {
 		$expected = '<a>PID</a>: <i>DETAILED SNAK</i>';
 		return [
 			[ new PropertySomeValueSnak( new NumericPropertyId( 'P1' ) ), $expected ],
@@ -112,7 +112,7 @@ class DifferencesSnakVisualizerTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $expected, $result );
 	}
 
-	public function provideGetDetailedValue() {
+	public static function provideGetDetailedValue() {
 		$expected = '<i>DETAILED SNAK</i>';
 		return [
 			[ new PropertySomeValueSnak( new NumericPropertyId( 'P1' ) ), $expected ],
@@ -131,7 +131,7 @@ class DifferencesSnakVisualizerTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $expected, $result );
 	}
 
-	public function provideGetPropertyAndValueHeader() {
+	public static function provideGetPropertyAndValueHeader() {
 		$expected = 'Property / <a>PID</a>: <i>SNAK</i>';
 		return [
 			[ new PropertySomeValueSnak( new NumericPropertyId( 'P1' ) ), $expected ],
@@ -149,7 +149,7 @@ class DifferencesSnakVisualizerTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $expected, $result );
 	}
 
-	public function provideGetPropertyHeader() {
+	public static function provideGetPropertyHeader() {
 		$expected = 'Property / <a>PID</a>';
 		return [
 			[ new PropertySomeValueSnak( new NumericPropertyId( 'P1' ) ), $expected ],

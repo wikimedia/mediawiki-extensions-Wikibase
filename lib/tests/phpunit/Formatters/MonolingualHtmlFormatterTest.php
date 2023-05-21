@@ -39,7 +39,7 @@ class MonolingualHtmlFormatterTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	public function monolingualHtmlFormatProvider() {
+	public static function monolingualHtmlFormatProvider() {
 		return [
 			'formatting' => [
 				new MonolingualTextValue( 'de', 'Hallo Welt' ),

@@ -55,7 +55,7 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 		$this->setAllowDataAccessInUserLanguage( $this->oldAllowDataAccessInUserLanguage );
 	}
 
-	public function allowDataAccessInUserLanguageProvider() {
+	public static function allowDataAccessInUserLanguageProvider() {
 		return [
 			[ true ],
 			[ false ],

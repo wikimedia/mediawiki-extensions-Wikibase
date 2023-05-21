@@ -29,7 +29,7 @@ class MonolingualTextFormatterTest extends \PHPUnit\Framework\TestCase {
 		$this->assertMatchesRegularExpression( $pattern, $text );
 	}
 
-	public function monolingualTextFormatProvider() {
+	public static function monolingualTextFormatProvider() {
 		return [
 			[
 				new MonolingualTextValue( 'de', 'Hallo Welt' ),

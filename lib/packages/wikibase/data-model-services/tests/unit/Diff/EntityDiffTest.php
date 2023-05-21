@@ -30,14 +30,14 @@ class EntityDiffTest extends TestCase {
 		$this->assertInstanceOf( $expected, $diff );
 	}
 
-	public function newForTypeProvider() {
+	public static function newForTypeProvider() {
 		return [
 			[ 'item', ItemDiff::class ],
 			[ 'anything', EntityDiff::class ],
 		];
 	}
 
-	public function isEmptyProvider() {
+	public static function isEmptyProvider() {
 		$argLists = [];
 
 		$argLists[] = [ [], true ];
@@ -73,7 +73,7 @@ class EntityDiffTest extends TestCase {
 		$this->assertEquals( $isEmpty, $diff->isEmpty() );
 	}
 
-	public function diffProvider() {
+	public static function diffProvider() {
 		$diffs = [];
 
 		$diffOps = [

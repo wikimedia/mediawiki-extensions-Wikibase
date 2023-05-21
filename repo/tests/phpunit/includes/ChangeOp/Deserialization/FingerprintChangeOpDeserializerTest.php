@@ -51,7 +51,7 @@ class FingerprintChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 			->willReturnCallback( $createNullChangeOpCallback );
 	}
 
-	public function provideSubjectTestData() {
+	public static function provideSubjectTestData() {
 		return [
 
 			'no fingerprint changes' => [

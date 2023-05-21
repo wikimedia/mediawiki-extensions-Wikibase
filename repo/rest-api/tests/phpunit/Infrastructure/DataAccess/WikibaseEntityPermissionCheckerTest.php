@@ -69,7 +69,7 @@ class WikibaseEntityPermissionCheckerTest extends TestCase {
 		$this->assertSame( $canEdit, $permissionChecker->canEdit( User::newAnonymous(), $itemToEdit ) );
 	}
 
-	public function permissionStatusProvider(): Generator {
+	public static function permissionStatusProvider(): Generator {
 		yield [
 			Status::newFatal( 'insufficient permissions' ),
 			false,

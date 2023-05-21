@@ -17,7 +17,7 @@ use Wikibase\Repo\Localizer\MessageExceptionLocalizer;
  */
 class MessageExceptionLocalizerTest extends \PHPUnit\Framework\TestCase {
 
-	public function provideGetExceptionMessage() {
+	public static function provideGetExceptionMessage() {
 		$exception = new MessageException(
 			'wikibase-entitydata-storage-error',
 			[ 'Q1', 123 ],

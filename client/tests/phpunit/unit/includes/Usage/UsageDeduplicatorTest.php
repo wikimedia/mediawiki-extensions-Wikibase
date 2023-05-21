@@ -18,7 +18,7 @@ use Wikibase\DataModel\Entity\ItemId;
  */
 class UsageDeduplicatorTest extends \PHPUnit\Framework\TestCase {
 
-	public function provideDeduplicate() {
+	public static function provideDeduplicate() {
 		$q1 = new ItemId( 'Q1' );
 		$q1Label = new EntityUsage( $q1, EntityUsage::LABEL_USAGE );
 		$q1LabelEn = new EntityUsage( $q1, EntityUsage::LABEL_USAGE, 'en' );

@@ -38,7 +38,7 @@ class RepoItemLinkGeneratorTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function getLinksProvider() {
+	public static function getLinksProvider() {
 		$prefixedId = 'q9000';
 
 		$href = preg_quote(

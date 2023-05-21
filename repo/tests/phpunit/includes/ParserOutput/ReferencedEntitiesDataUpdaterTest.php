@@ -93,7 +93,7 @@ class ReferencedEntitiesDataUpdaterTest extends MediaWikiIntegrationTestCase {
 		$this->assertArrayEquals( $expectedEntityIdStrings, $actual );
 	}
 
-	public function entityIdProvider() {
+	public static function entityIdProvider() {
 		return [
 			[ [] ],
 			[ [ new NumericPropertyId( 'P1' ), new ItemId( 'Q1' ) ] ],

@@ -57,7 +57,7 @@ class EditMetadataValidatorTest extends TestCase {
 		$this->assertSame( $invalidTag, $result->getContext()[EditMetadataValidator::CONTEXT_TAG_VALUE] );
 	}
 
-	public function invalidEditTagsProvider(): Generator {
+	public static function invalidEditTagsProvider(): Generator {
 		yield 'disallowed tag' => [
 			[ 'bad tag' ],
 			'"bad tag"',

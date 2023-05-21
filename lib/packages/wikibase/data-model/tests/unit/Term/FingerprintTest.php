@@ -163,7 +163,7 @@ class FingerprintTest extends \PHPUnit\Framework\TestCase {
 		$this->assertTrue( $fingerprint->equals( clone $fingerprint ) );
 	}
 
-	public function fingerprintProvider() {
+	public static function fingerprintProvider() {
 		return [
 			[
 				new Fingerprint(),
@@ -203,7 +203,7 @@ class FingerprintTest extends \PHPUnit\Framework\TestCase {
 		$this->assertFalse( $one->equals( $two ) );
 	}
 
-	public function differentFingerprintsProvider() {
+	public static function differentFingerprintsProvider() {
 		return [
 			[
 				new Fingerprint(),
@@ -261,7 +261,7 @@ class FingerprintTest extends \PHPUnit\Framework\TestCase {
 		$this->assertFalse( $nonEmptyFingerprint->isEmpty() );
 	}
 
-	public function nonEmptyFingerprintProvider() {
+	public static function nonEmptyFingerprintProvider() {
 		return [
 			[
 				new Fingerprint(

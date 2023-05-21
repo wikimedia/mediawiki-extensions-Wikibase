@@ -70,7 +70,7 @@ class SpecialEntityPageTest extends SpecialPageTestBase {
 		);
 	}
 
-	public function provideLocalEntityIdArgumentsToSpecialPage() {
+	public static function provideLocalEntityIdArgumentsToSpecialPage() {
 		return [
 			'id as a sub page' => [ 'Q100', [] ],
 			'id as a request parameter' => [ null, [ 'id' => 'Q100' ] ],
@@ -93,7 +93,7 @@ class SpecialEntityPageTest extends SpecialPageTestBase {
 		$this->assertSame( self::LOCAL_ENTITY_PAGE_URL, $response->getHeader( 'Location' ) );
 	}
 
-	public function provideQueryArgumentsToSpecialPage() {
+	public static function provideQueryArgumentsToSpecialPage() {
 		return [
 			'no query arguments' => [ [], '' ],
 			'supported query argument' => [ [ 'oldid' => 123 ], '?oldid=123' ],
@@ -119,7 +119,7 @@ class SpecialEntityPageTest extends SpecialPageTestBase {
 		$this->assertSame( $expectedUrl, $response->getHeader( 'Location' ) );
 	}
 
-	public function provideForeignEntityIdArgumentsToSpecialPage() {
+	public static function provideForeignEntityIdArgumentsToSpecialPage() {
 		return [
 			'id as a sub page' => [ 'foo:Q100', [] ],
 			'id as a request parameter' => [ null, [ 'id' => 'foo:Q100' ] ],
@@ -142,7 +142,7 @@ class SpecialEntityPageTest extends SpecialPageTestBase {
 		$this->assertSame( self::FOREIGN_ENTITY_PAGE_URL, $response->getHeader( 'Location' ) );
 	}
 
-	public function provideInvalidEntityIdArgumentsToSpecialPage() {
+	public static function provideInvalidEntityIdArgumentsToSpecialPage() {
 		return [
 			'id as a sub page' => [ 'ABCDEF', [], 'ABCDEF' ],
 			'id as a request parameter' => [ null, [ 'id' => 'ABCDEF' ], 'ABCDEF' ],
@@ -188,7 +188,7 @@ class SpecialEntityPageTest extends SpecialPageTestBase {
 		}
 	}
 
-	public function provideNoEntityIdArgumentsToSpecialPage() {
+	public static function provideNoEntityIdArgumentsToSpecialPage() {
 		return [
 			'no sub page' => [ '' ],
 			'empty id as a request parameter' => [ null, [ 'id' => '' ] ],

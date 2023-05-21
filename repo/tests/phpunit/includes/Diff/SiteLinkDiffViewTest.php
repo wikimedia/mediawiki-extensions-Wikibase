@@ -27,7 +27,7 @@ use Wikibase\Repo\Diff\SiteLinkDiffView;
 class SiteLinkDiffViewTest extends \PHPUnit\Framework\TestCase {
 	use MediaWikiTestCaseTrait;
 
-	public function diffOpProvider(): iterable {
+	public static function diffOpProvider(): iterable {
 		$linkPath = 'LINKS'; // like wikibase-diffview-link message, but class shouldn’t care!
 
 		return [
@@ -159,7 +159,7 @@ class SiteLinkDiffViewTest extends \PHPUnit\Framework\TestCase {
 		$this->assertStringContainsString( htmlspecialchars( $badgeId ), $html );
 	}
 
-	public function invalidBadgeIdProvider(): iterable {
+	public static function invalidBadgeIdProvider(): iterable {
 		return [
 			[ 'invalidBadgeId' ],
 			[ '<a>injection</a>' ],

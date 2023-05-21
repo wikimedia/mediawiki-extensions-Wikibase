@@ -155,7 +155,7 @@ class EntityAccessorTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $expected, $array );
 	}
 
-	public function provideZeroIndexedArray() {
+	public static function provideZeroIndexedArray() {
 		return [
 			[
 				[ 'nyancat' => [ 0 => 'nyan', 1 => 'cat' ] ],
@@ -396,7 +396,7 @@ class EntityAccessorTest extends \PHPUnit\Framework\TestCase {
 		];
 	}
 
-	public function bestStatementsOnlyProvider() {
+	public static function bestStatementsOnlyProvider() {
 		return [
 			[ 'best' ],
 			[ 'all' ],
@@ -473,7 +473,7 @@ class EntityAccessorTest extends \PHPUnit\Framework\TestCase {
 		$entityAccessor->$methodName( ...$methodParameters );
 	}
 
-	public function doubleRedirectMethodProvider() {
+	public static function doubleRedirectMethodProvider() {
 		$entityId = new ItemId( 'Q1' );
 		$serialization = $entityId->getSerialization();
 		return [

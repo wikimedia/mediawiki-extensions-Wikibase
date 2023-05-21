@@ -28,7 +28,7 @@ class StatementGuidValidatorTest extends TestCase {
 		$this->assertTrue( $isValid, "Assert that statement guid $guid is valid" );
 	}
 
-	public function validateProvider() {
+	public static function validateProvider() {
 		return [
 			[ 'q60$5083E43C-228B-4E3E-B82A-4CB20A22A3FB' ],
 			[ 'q604192$5672A3B1-7693-4DF9-ADE8-8FC13E095604' ],
@@ -49,7 +49,7 @@ class StatementGuidValidatorTest extends TestCase {
 		$this->assertFalse( $isValid, "Assert that statement guid $guid is invalid" );
 	}
 
-	public function validateInvalidProvider() {
+	public static function validateInvalidProvider() {
 		return [
 			[ "Q1$00000000-0000-0000-0000-000000000000\n" ],
 			[ 'q60$5083E43C-228B-4E3E-B82A-4CB20A22A3F' ],
@@ -88,7 +88,7 @@ class StatementGuidValidatorTest extends TestCase {
 		$this->assertFalse( $isValid, "Assert that statement guid $guid has an invalid format." );
 	}
 
-	public function invalidFormatProvider() {
+	public static function invalidFormatProvider() {
 		return [
 			[ 'q12345' ],
 			[ 'q$1$2$3' ],
@@ -107,7 +107,7 @@ class StatementGuidValidatorTest extends TestCase {
 		$this->assertFalse( $isValid, 'Assert that statement guid prefix is invalid' );
 	}
 
-	public function validateInvalidPrefixedIdProvider() {
+	public static function validateInvalidPrefixedIdProvider() {
 		return [
 			[ '060$5083E43C-228B-4E3E-B82A-4CB20A22A3FB' ],
 			[ 'a060$5083E43C-228B-4E3E-B82A-4CB20A22A3FB' ],

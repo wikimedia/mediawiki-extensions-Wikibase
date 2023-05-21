@@ -51,7 +51,7 @@ class PatchItemStatementValidatorTest extends TestCase {
 		);
 	}
 
-	public function provideValidRequest(): Generator {
+	public static function provideValidRequest(): Generator {
 		$itemId = 'Q123';
 		$statementId = $itemId . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 		yield 'Valid with item ID' => [
@@ -161,7 +161,7 @@ class PatchItemStatementValidatorTest extends TestCase {
 		}
 	}
 
-	public function invalidPatchProvider(): Generator {
+	public static function invalidPatchProvider(): Generator {
 		yield 'from invalid patch' => [
 			new ValidationError( JsonPatchValidator::CODE_INVALID ),
 			UseCaseError::INVALID_PATCH,

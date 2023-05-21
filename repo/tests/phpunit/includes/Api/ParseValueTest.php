@@ -121,7 +121,7 @@ class ParseValueTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @return array[]
 	 */
-	public function provideValid() {
+	public static function provideValid() {
 		return [
 			'datatype=string' => [
 				[
@@ -350,7 +350,7 @@ class ParseValueTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @return array[]
 	 */
-	public function provideInvalid() {
+	public static function provideInvalid() {
 		return [
 			'no datatype' => [
 				[

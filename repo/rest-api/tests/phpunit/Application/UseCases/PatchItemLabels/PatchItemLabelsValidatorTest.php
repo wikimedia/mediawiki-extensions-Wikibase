@@ -89,7 +89,7 @@ class PatchItemLabelsValidatorTest extends TestCase {
 		}
 	}
 
-	public function invalidPatchProvider(): Generator {
+	public static function invalidPatchProvider(): Generator {
 		yield 'from invalid patch' => [
 			new ValidationError( JsonPatchValidator::CODE_INVALID ),
 			UseCaseError::INVALID_PATCH,

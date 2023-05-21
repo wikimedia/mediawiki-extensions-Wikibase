@@ -18,7 +18,7 @@ use Wikibase\Repo\Parsers\MonolingualTextParser;
  */
 class MonolingualTextParserTest extends \PHPUnit\Framework\TestCase {
 
-	public function textProvider() {
+	public static function textProvider() {
 		return [
 			'empty' => [ 'en', '' ],
 			'space' => [ 'en', ' ' ],
@@ -48,7 +48,7 @@ class MonolingualTextParserTest extends \PHPUnit\Framework\TestCase {
 		$parser->parse( 'Text' );
 	}
 
-	public function invalidLanguageCodeProvider() {
+	public static function invalidLanguageCodeProvider() {
 		return [
 			[ null ],
 			[ '' ],

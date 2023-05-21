@@ -184,7 +184,7 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 		return $interactor;
 	}
 
-	public function provideSearchForEntitiesTest() {
+	public static function provideSearchForEntitiesTest() {
 		$allTermTypes = [
 			TermIndexEntry::TYPE_LABEL,
 			TermIndexEntry::TYPE_DESCRIPTION,

@@ -215,7 +215,7 @@ class MwDateFormatParserFactoryTest extends TestCase {
 		$parser->parse( $input );
 	}
 
-	public function invalidInputProvider() {
+	public static function invalidInputProvider() {
 		return [
 			[ null ],
 			[ true ],
@@ -252,7 +252,7 @@ class MwDateFormatParserFactoryTest extends TestCase {
 		$this->assertInstanceOf( TimeValue::class, $timeValue );
 	}
 
-	public function nonSpecialFormatStringProvider() {
+	public static function nonSpecialFormatStringProvider() {
 		return [
 			[
 				'B C E J K Q R S V X',

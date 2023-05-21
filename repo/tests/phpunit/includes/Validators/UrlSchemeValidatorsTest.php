@@ -44,7 +44,7 @@ class UrlSchemeValidatorsTest extends MediaWikiIntegrationTestCase {
 		$this->assertErrorCodeLocalization( $result );
 	}
 
-	public function validUrlProvider() {
+	public static function validUrlProvider() {
 		return [
 			[ 'http', 'http://acme.com' ],
 			[ 'http', 'http://foo:bar@acme.com/stuff/thingy.php?foo=bar#part' ],
@@ -69,7 +69,7 @@ class UrlSchemeValidatorsTest extends MediaWikiIntegrationTestCase {
 		];
 	}
 
-	public function invalidUrlProvider() {
+	public static function invalidUrlProvider() {
 		return [
 			// Trailing newlines
 			[ 'http', "http://example.com\n" ],

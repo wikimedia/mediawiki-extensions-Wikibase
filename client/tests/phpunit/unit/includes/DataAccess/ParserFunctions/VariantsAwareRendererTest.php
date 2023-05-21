@@ -44,7 +44,7 @@ class VariantsAwareRendererTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $expected, $result );
 	}
 
-	public function renderProvider() {
+	public static function renderProvider() {
 		$itemId = new ItemId( 'Q3' );
 
 		return [

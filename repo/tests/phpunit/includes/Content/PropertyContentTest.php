@@ -42,7 +42,7 @@ use Wikibase\Repo\Content\PropertyContent;
  */
 class PropertyContentTest extends EntityContentTestCase {
 
-	public function provideValidConstructorArguments() {
+	public static function provideValidConstructorArguments() {
 		return [
 			'empty' => [ null ],
 			'empty property' => [ new EntityInstanceHolder( Property::newFromType( 'string' ) ) ],

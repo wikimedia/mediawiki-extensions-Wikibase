@@ -257,7 +257,7 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 		return $parserOutput;
 	}
 
-	public function parserAfterParseProvider() {
+	public static function parserAfterParseProvider() {
 		$commonsOxygen = [
 			'msg' => 'wikibase-otherprojects-commons',
 			'class' => 'wb-otherproject-link wb-otherproject-commons',

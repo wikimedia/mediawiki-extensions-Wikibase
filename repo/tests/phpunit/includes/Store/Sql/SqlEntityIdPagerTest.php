@@ -167,7 +167,7 @@ class SqlEntityIdPagerTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	public function listEntitiesProvider() {
+	public static function listEntitiesProvider() {
 		$property = new Property( new NumericPropertyId( 'P1' ), null, 'string' );
 		$item = new Item( new ItemId( 'Q5' ) );
 		$redirect = new EntityRedirect( new ItemId( 'Q55' ), new ItemId( 'Q5' ) );

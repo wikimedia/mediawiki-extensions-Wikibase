@@ -24,7 +24,7 @@ use Wikibase\Lib\Formatters\GlobeCoordinateKartographerFormatter;
  */
 class GlobeCoordinateKartographerFormatterTest extends \PHPUnit\Framework\TestCase {
 
-	public function emitPreviewHtmlProvider() {
+	public static function emitPreviewHtmlProvider() {
 		yield [ true ];
 		yield [ false ];
 	}

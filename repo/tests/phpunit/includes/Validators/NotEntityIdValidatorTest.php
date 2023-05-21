@@ -26,14 +26,14 @@ class NotEntityIdValidatorTest extends \PHPUnit\Framework\TestCase {
 		new NotEntityIdValidator( new BasicEntityIdParser(), $errorCode );
 	}
 
-	public function invalidConstructorArgumentProvider() {
+	public static function invalidConstructorArgumentProvider() {
 		return [
 			[ null ],
 			[ 1 ],
 		];
 	}
 
-	public function provideValidate() {
+	public static function provideValidate() {
 		return [
 			'empty' => [ '', 'label-no-entityid', null, null ],
 			'silly' => [ 'silly', 'label-no-entityid', null, null ],

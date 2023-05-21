@@ -175,7 +175,7 @@ class ApiPropsEntityUsageTest extends MediaWikiLangTestCase {
 		return $data;
 	}
 
-	public function entityUsageProvider() {
+	public static function entityUsageProvider() {
 		return [
 			'by title' => [
 				[

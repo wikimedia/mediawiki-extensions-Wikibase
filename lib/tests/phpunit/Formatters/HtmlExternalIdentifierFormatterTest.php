@@ -63,7 +63,7 @@ class HtmlExternalIdentifierFormatterTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $text );
 	}
 
-	public function provideFormatSnak_ParameterTypeException() {
+	public static function provideFormatSnak_ParameterTypeException() {
 		return [
 			'bad snak type' => [
 				new PropertyNoValueSnak( new NumericPropertyId( 'P7' ) ),

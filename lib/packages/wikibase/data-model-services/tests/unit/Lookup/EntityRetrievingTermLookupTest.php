@@ -47,7 +47,7 @@ class EntityRetrievingTermLookupTest extends TestCase {
 		$termLookup->getLabel( new ItemId( 'Q503' ), 'en' );
 	}
 
-	public function getLabelsProvider() {
+	public static function getLabelsProvider() {
 		return [
 			[
 				[ 'en' => 'New York City', 'es' => 'Nueva York' ],
@@ -106,7 +106,7 @@ class EntityRetrievingTermLookupTest extends TestCase {
 		$this->assertNull( $termLookup->getDescription( new ItemId( 'Q116' ), 'fr' ) );
 	}
 
-	public function getDescriptionsProvider() {
+	public static function getDescriptionsProvider() {
 		return [
 			[
 				[

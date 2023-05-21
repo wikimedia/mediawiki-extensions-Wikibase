@@ -25,7 +25,7 @@ use Wikibase\Repo\Localizer\MessageParameterFormatter;
  */
 class MessageParameterFormatterTest extends \PHPUnit\Framework\TestCase {
 
-	public function formatProvider() {
+	public static function formatProvider() {
 		$decimal = new DecimalValue( '+123.456' );
 		$entityId = new ItemId( 'Q123' );
 		$siteLink = new SiteLink( 'acme', 'Foo' );

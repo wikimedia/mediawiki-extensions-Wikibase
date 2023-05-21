@@ -88,7 +88,7 @@ class UnexpectedErrorHandlerMiddlewareTest extends TestCase {
 		);
 	}
 
-	public function throwableProvider(): Generator {
+	public static function throwableProvider(): Generator {
 		yield [ new TypeError() ];
 		yield [ new RuntimeException() ];
 	}

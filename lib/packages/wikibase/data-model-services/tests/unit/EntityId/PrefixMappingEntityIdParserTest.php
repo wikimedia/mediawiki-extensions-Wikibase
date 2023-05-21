@@ -37,7 +37,7 @@ class PrefixMappingEntityIdParserTest extends TestCase {
 		$this->assertEquals( $expectedId, $parser->parse( $input ) );
 	}
 
-	public function provideValidIdSerialization() {
+	public static function provideValidIdSerialization() {
 		return [
 			[ [ '' => 'wikidata' ], 'Q1337', new ItemId( 'wikidata:Q1337' ) ],
 			[ [ '' => '' ], 'Q1337', new ItemId( 'Q1337' ) ],
@@ -60,7 +60,7 @@ class PrefixMappingEntityIdParserTest extends TestCase {
 		$this->assertEquals( $expectedEntityId, $parser->parse( $foreignId ) );
 	}
 
-	public function provideMappedSerializationId() {
+	public static function provideMappedSerializationId() {
 		return [
 			[ [ '' => 'foo', 'bar' => 'wd' ], 'bar:Q1337', new ItemId( 'wd:Q1337' ) ],
 			[ [ '' => 'foo', 'bar' => 'wd' ], 'bar:x:Q1337', new ItemId( 'wd:x:Q1337' ) ],
@@ -92,7 +92,7 @@ class PrefixMappingEntityIdParserTest extends TestCase {
 		new PrefixMappingEntityIdParser( $prefixMapping, new ItemIdParser() );
 	}
 
-	public function provideInvalidPrefixMapping() {
+	public static function provideInvalidPrefixMapping() {
 		return [
 			'no empty-string key in prefix mapping' => [ [] ],
 			'non-string values in prefix mapping' => [ [ '' => 123 ] ],

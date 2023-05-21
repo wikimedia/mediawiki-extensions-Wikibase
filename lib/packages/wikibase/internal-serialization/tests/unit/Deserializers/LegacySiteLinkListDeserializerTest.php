@@ -26,7 +26,7 @@ class LegacySiteLinkListDeserializerTest extends \PHPUnit\Framework\TestCase {
 		$this->deserializer = new LegacySiteLinkListDeserializer();
 	}
 
-	public function invalidSerializationProvider() {
+	public static function invalidSerializationProvider() {
 		return [
 			[ null ],
 			[ 42 ],
@@ -58,7 +58,7 @@ class LegacySiteLinkListDeserializerTest extends \PHPUnit\Framework\TestCase {
 		$this->assertInstanceOf( SiteLinkList::class, $list );
 	}
 
-	public function serializationProvider() {
+	public static function serializationProvider() {
 		return [
 			[ [
 			] ],

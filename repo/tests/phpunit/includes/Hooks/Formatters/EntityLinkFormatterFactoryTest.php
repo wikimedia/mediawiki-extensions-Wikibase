@@ -86,7 +86,7 @@ class EntityLinkFormatterFactoryTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	public function notACallbackProvider() {
+	public static function notACallbackProvider() {
 		return [
 			[ [ null ] ],
 			[ [ 'asdf' ] ],

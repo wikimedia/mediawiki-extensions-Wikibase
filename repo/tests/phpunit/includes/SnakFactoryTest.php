@@ -64,7 +64,7 @@ class SnakFactoryTest extends \PHPUnit\Framework\TestCase {
 		$this->assertInstanceOf( $expectedSnakClass, $snak );
 	}
 
-	public function newSnakProvider() {
+	public static function newSnakProvider() {
 		return [
 			'novalue' => [
 				'P1', 'novalue', null,

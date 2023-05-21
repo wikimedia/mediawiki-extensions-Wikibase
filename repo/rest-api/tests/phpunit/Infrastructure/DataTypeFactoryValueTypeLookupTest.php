@@ -26,7 +26,7 @@ class DataTypeFactoryValueTypeLookupTest extends TestCase {
 		);
 	}
 
-	public function dataTypeToExpectedValueTypeProvider(): Generator {
+	public static function dataTypeToExpectedValueTypeProvider(): Generator {
 		yield 'string' => [ 'string', 'string' ];
 		yield 'url' => [ 'url', 'string' ];
 		yield 'time' => [ 'time', 'foobar' ];

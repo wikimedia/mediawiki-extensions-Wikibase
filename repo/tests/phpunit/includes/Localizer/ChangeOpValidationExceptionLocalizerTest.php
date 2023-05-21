@@ -20,7 +20,7 @@ use Wikibase\Repo\Localizer\ChangeOpValidationExceptionLocalizer;
  */
 class ChangeOpValidationExceptionLocalizerTest extends \PHPUnit\Framework\TestCase {
 
-	public function provideGetExceptionMessage() {
+	public static function provideGetExceptionMessage() {
 		$result0 = Result::newError( [] );
 		$result1 = Result::newError( [
 			Error::newError( 'Eeek!', null, 'too-long', [ 8 ] ),

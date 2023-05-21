@@ -370,7 +370,7 @@ class HtmlPageLinkRendererEndHookHandlerTest extends HtmlPageLinkRendererEndHook
 		$this->assertEquals( $expectedUrl, $customAttribs['href'] );
 	}
 
-	public function entityUrlProvider(): iterable {
+	public static function entityUrlProvider(): iterable {
 		yield 'existing entity' => [
 			'entityId' => self::ITEM_WITH_LABEL,
 			'expectedUrl' => 'some-wiki/wiki/Item:' . self::ITEM_WITH_LABEL,
@@ -429,7 +429,7 @@ class HtmlPageLinkRendererEndHookHandlerTest extends HtmlPageLinkRendererEndHook
 		$this->assertSame( $expectedOutput, $output );
 	}
 
-	public function linkTargetProvider(): iterable {
+	public static function linkTargetProvider(): iterable {
 		return [
 			'NS=MAIN, title=null' => [ NS_MAIN, 'ignored', null ], // T260853
 			'NS=SPECIAL, title=null' => [ NS_SPECIAL, 'ignored', null ],

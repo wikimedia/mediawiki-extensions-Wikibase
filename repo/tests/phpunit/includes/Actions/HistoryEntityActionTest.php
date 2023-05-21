@@ -106,7 +106,7 @@ class HistoryEntityActionTest extends \PHPUnit\Framework\TestCase {
 		return $context;
 	}
 
-	public function pageTitleProvider() {
+	public static function pageTitleProvider() {
 		return [
 			'fallback to parent' => [
 				null,

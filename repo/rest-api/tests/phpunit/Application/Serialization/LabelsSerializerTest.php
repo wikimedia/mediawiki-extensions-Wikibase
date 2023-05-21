@@ -28,7 +28,7 @@ class LabelsSerializerTest extends TestCase {
 		);
 	}
 
-	public function labelsProvider(): Generator {
+	public static function labelsProvider(): Generator {
 		yield 'empty' => [
 			new Labels(),
 			new ArrayObject( [] ),

@@ -47,7 +47,7 @@ class EntityChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 		return $factory;
 	}
 
-	public function newForEntityProvider() {
+	public static function newForEntityProvider() {
 		return [
 			'add item' => [ EntityChange::ADD, new ItemId( 'Q17' ), ItemChange::class ],
 			'remove property' => [ EntityChange::REMOVE, new NumericPropertyId( 'P17' ), EntityChange::class ],

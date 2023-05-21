@@ -27,7 +27,7 @@ class RecentChangesFinderTest extends MediaWikiIntegrationTestCase {
 		$this->tablesUsed[] = 'recentchanges';
 	}
 
-	public function provideGetRecentChangeId() {
+	public static function provideGetRecentChangeId() {
 		// Note: this provides change data without rc_user(_text);
 		// those fields will be filled in by newChange(),
 		// because data providers run before the test DB has been set up

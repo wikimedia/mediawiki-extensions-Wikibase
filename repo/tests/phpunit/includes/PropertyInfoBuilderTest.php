@@ -27,7 +27,7 @@ class PropertyInfoBuilderTest extends \PHPUnit\Framework\TestCase {
 		] );
 	}
 
-	public function provideBuildPropertyInfo() {
+	public static function provideBuildPropertyInfo() {
 		$cases = [];
 
 		$cases[] = [

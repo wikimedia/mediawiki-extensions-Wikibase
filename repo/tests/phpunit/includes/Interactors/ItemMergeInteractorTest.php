@@ -186,7 +186,7 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 		return $titleLookup;
 	}
 
-	public function mergeProvider() {
+	public static function mergeProvider() {
 		// NOTE: Any empty arrays and any fields called 'id' or 'hash' get stripped
 		//       from the result before comparing it to the expected value.
 
@@ -393,7 +393,7 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	public function mergeFailureProvider() {
+	public static function mergeFailureProvider() {
 		return [
 			'missing from' => [ new ItemId( 'Q100' ), new ItemId( 'Q2' ), [], 'no-such-entity' ],
 			'missing to' => [ new ItemId( 'Q1' ), new ItemId( 'Q200' ), [], 'no-such-entity' ],
@@ -422,7 +422,7 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	public function mergeConflictsProvider() {
+	public static function mergeConflictsProvider() {
 		return [
 			[
 				[ 'descriptions' => [ 'en' => [ 'language' => 'en', 'value' => 'foo' ] ] ],

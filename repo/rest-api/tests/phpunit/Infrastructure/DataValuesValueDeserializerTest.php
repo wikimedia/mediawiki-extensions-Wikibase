@@ -54,7 +54,7 @@ class DataValuesValueDeserializerTest extends TestCase {
 		);
 	}
 
-	public function provideValidInput(): Generator {
+	public static function provideValidInput(): Generator {
 		yield 'value for string property' => [
 			'string',
 			[ 'type' => 'value', 'content' => 'I am goat' ],
@@ -112,7 +112,7 @@ class DataValuesValueDeserializerTest extends TestCase {
 		}
 	}
 
-	public function provideInvalidInput(): Generator {
+	public static function provideInvalidInput(): Generator {
 		yield 'invalid content field for string data-type' => [
 			'string',
 			[ 'type' => 'value', 'content' => 42 ],

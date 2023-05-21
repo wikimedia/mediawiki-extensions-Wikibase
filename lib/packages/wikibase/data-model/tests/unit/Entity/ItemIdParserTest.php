@@ -24,7 +24,7 @@ class ItemIdParserTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $actual );
 	}
 
-	public function entityIdProvider() {
+	public static function entityIdProvider() {
 		return [
 			[ 'q42', new ItemId( 'Q42' ) ],
 			[ 'Q1337', new ItemId( 'Q1337' ) ],
@@ -41,7 +41,7 @@ class ItemIdParserTest extends \PHPUnit\Framework\TestCase {
 		$parser->parse( $invalidIdSerialization );
 	}
 
-	public function invalidIdSerializationProvider() {
+	public static function invalidIdSerializationProvider() {
 		return [
 			[ 'FOO' ],
 			[ null ],

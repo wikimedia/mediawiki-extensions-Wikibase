@@ -77,12 +77,12 @@ class LatestItemRevisionMetadataResultTest extends TestCase {
 		$this->assertFalse( $result->isRedirect() );
 	}
 
-	public function notAConcreteRevisionProvider(): Generator {
+	public static function notAConcreteRevisionProvider(): Generator {
 		yield 'redirect' => [ LatestItemRevisionMetadataResult::redirect( new ItemId( 'Q123' ) ) ];
 		yield 'not found' => [ LatestItemRevisionMetadataResult::itemNotFound() ];
 	}
 
-	public function itemExistsProvider(): Generator {
+	public static function itemExistsProvider(): Generator {
 		yield 'concrete revision' => [
 			LatestItemRevisionMetadataResult::concreteRevision( 321, '20220101001122' ),
 			true,
@@ -97,7 +97,7 @@ class LatestItemRevisionMetadataResultTest extends TestCase {
 		];
 	}
 
-	public function notARedirectProvider(): Generator {
+	public static function notARedirectProvider(): Generator {
 		yield 'concrete revision' => [ LatestItemRevisionMetadataResult::concreteRevision( 777, '20220101001122' ) ];
 		yield 'not found' => [ LatestItemRevisionMetadataResult::itemNotFound() ];
 	}

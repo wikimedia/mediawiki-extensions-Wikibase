@@ -37,7 +37,7 @@ class EntityIdDeserializerTest extends TestCase {
 		$deserializer->deserialize( $nonDeserializable );
 	}
 
-	public function nonDeserializableProvider() {
+	public static function nonDeserializableProvider() {
 		return [
 			[
 				42,
@@ -56,7 +56,7 @@ class EntityIdDeserializerTest extends TestCase {
 		$this->assertEquals( $object, $deserializer->deserialize( $serialization ) );
 	}
 
-	public function deserializationProvider() {
+	public static function deserializationProvider() {
 		return [
 			[
 				new ItemId( 'Q42' ),

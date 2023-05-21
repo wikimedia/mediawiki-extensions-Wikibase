@@ -27,7 +27,7 @@ class EntityLinkTargetEntityIdLookupTest extends TestCase {
 	private const ITEM_SOURCE_INTERWIKI_PREFIX = 'd';
 	private const ITEM_NAMESPACE = 111;
 
-	public function provideTestGetEntityId() {
+	public static function provideTestGetEntityId() {
 		yield 'good namespace and parsable ID' => [ new TitleValue( self::ITEM_NAMESPACE, 'Q1' ), new ItemId( 'Q1' ) ];
 		yield 'bad namespace and parsable ID' => [ new TitleValue( 222, 'Q1' ), null ];
 		yield 'good namespace and not parsable ID' => [ new TitleValue( self::ITEM_NAMESPACE, 'XXYz' ), null ];

@@ -99,7 +99,7 @@ class EntityUriValidatorTest extends MediaWikiIntegrationTestCase {
 		$this->assertError( $result );
 	}
 
-	public function provideUnnormalizedItemIdStrings(): iterable {
+	public static function provideUnnormalizedItemIdStrings(): iterable {
 		yield 'lowercase' => [ 'q1' ];
 		yield 'empty repository name' => [ ':Q1' ];
 	}

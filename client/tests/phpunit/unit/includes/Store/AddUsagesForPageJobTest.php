@@ -22,7 +22,7 @@ use Wikibase\DataModel\Entity\ItemIdParser;
  */
 class AddUsagesForPageJobTest extends \PHPUnit\Framework\TestCase {
 
-	public function provideConstructor_failure() {
+	public static function provideConstructor_failure() {
 		$pageId = 17;
 		$usageQ5X = new EntityUsage( new ItemId( 'Q5' ), 'X' );
 		$usages = [ $usageQ5X->asArray() ];

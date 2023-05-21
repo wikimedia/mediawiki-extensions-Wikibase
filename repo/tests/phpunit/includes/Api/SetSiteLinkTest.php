@@ -46,7 +46,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 	/** @var ItemId */
 	private static $otherItemId;
 
-	public function provideData() {
+	public static function provideData() {
 		return [
 			'set new link using id' => [
 				'p' => [
@@ -337,7 +337,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 		];
 	}
 
-	public function provideBadBadgeData() {
+	public static function provideBadBadgeData() {
 		return [
 			'bad badge id' => [
 				[ 'site' => 'enwiki',

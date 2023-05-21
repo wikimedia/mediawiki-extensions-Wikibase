@@ -38,7 +38,7 @@ class GuidGeneratorTest extends TestCase {
 		$this->assertIsGuidForId( (string)$guidGen->newStatementId( $id ), $id );
 	}
 
-	public function entityIdProvider() {
+	public static function entityIdProvider() {
 		$argLists = [];
 
 		$argLists[] = [ new ItemId( 'Q123' ) ];

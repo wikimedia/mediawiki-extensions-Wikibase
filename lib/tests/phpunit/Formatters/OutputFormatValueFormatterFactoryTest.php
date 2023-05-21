@@ -44,7 +44,7 @@ class OutputFormatValueFormatterFactoryTest extends \PHPUnit\Framework\TestCase 
 		new OutputFormatValueFormatterFactory( $builder, $language, new LanguageFallbackChainFactory() );
 	}
 
-	public function constructorErrorsProvider() {
+	public static function constructorErrorsProvider() {
 		$stringFormatter = new StringFormatter( new FormatterOptions() );
 
 		return [
@@ -90,7 +90,7 @@ class OutputFormatValueFormatterFactoryTest extends \PHPUnit\Framework\TestCase 
 		$this->assertMatchesRegularExpression( $expectedPattern, $actual );
 	}
 
-	public function provideGetValueFormatter() {
+	public static function provideGetValueFormatter() {
 		return [
 			'plain string' => [
 				SnakFormatter::FORMAT_PLAIN,
@@ -130,7 +130,7 @@ class OutputFormatValueFormatterFactoryTest extends \PHPUnit\Framework\TestCase 
 		}
 	}
 
-	public function provideApplyLanguageDefaults() {
+	public static function provideApplyLanguageDefaults() {
 		$languageFallbackFactory = new LanguageFallbackChainFactory();
 		$lang = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'fr' );
 		$languageFallback = $languageFallbackFactory->newFromLanguage( $lang );

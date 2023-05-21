@@ -36,7 +36,7 @@ use Wikibase\Lib\Store\RevisionBasedEntityLookup;
  */
 class StatementTransclusionInteractorTest extends \PHPUnit\Framework\TestCase {
 
-	public function formatProvider() {
+	public static function formatProvider() {
 		return [
 			[ SnakFormatter::FORMAT_PLAIN, 'a kitten!, two kittens!!' ],
 			[ SnakFormatter::FORMAT_WIKI, '<span>a kitten!, two kittens!!</span>' ],
