@@ -421,7 +421,6 @@
 			"dependencies": [
 				"jquery.spinner",
 				"jquery.ui",
-				"jquery.wikibase.wbtooltip",
 				"mediawiki.api",
 				"mediawiki.user",
 				"mediawiki.util",
