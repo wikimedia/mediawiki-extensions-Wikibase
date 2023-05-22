@@ -25,7 +25,7 @@
 	"wikibase-comment-sitelink-change": "Veza na jeziku promenjena sa $1 na $2",
 	"wikibase-comment-sitelink-remove": "Uklonjena veza za jezik: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|promena|promene|promena}}",
-	"wikibase-dataitem": "Stavka na Vikipodacima",
+	"wikibase-dataitem": "Stavka na {{WBREPONAME}}",
 	"wikibase-editlinks": "Uredi veze",
 	"wikibase-editlinkstitle": "Uredi međujezičke veze",
 	"wikibase-addlinkstitle": "Dodaj međujezičke veze",
