@@ -22,7 +22,8 @@
 			"Vlad5250",
 			"Александр Сигачёв",
 			"1233qwer1234qwer4",
-			"WindEwriX"
+			"WindEwriX",
+			"Michgrig"
 		]
 	},
 	"specialpages-group-wikibase": "Вики-база",
@@ -137,7 +138,7 @@
 	"wikibase-entity-summary-wbsetclaim-update-references": "{{PLURAL:$4|Изменён $4 источник|Изменено $4 источников|Изменено $4 источника}} в {{PLURAL:$3|1=заявлении|заявлениях}}",
 	"wikibase-entity-summary-wbsetclaim-update-rank": "Изменён ранг {{PLURAL:$3|1=заявления|заявлений}}",
 	"wikibase-entity-summary-clientsitelink-update": "Страница перемещена (переименована) из [$3] в [$4]",
-	"wikibase-entity-summary-clientsitelink-remove": "Страница на [$3] удалена",
+	"wikibase-entity-summary-clientsitelink-remove": "Страница в [$3] удалена",
 	"wikibase-entity-summary-wbsetqualifier-add": "{{PLURAL:$1|1=Добавлен квалификатор|Добавлены квалификаторы}}",
 	"wikibase-entity-summary-wbsetqualifier-update": "{{PLURAL:$1|1=Изменён квалификатор|Изменены квалификаторы}}",
 	"wikibase-entity-summary-wbremovequalifiers-remove": "{{PLURAL:$1|1=Удалён квалификатор|Удалены квалификаторы}}",
