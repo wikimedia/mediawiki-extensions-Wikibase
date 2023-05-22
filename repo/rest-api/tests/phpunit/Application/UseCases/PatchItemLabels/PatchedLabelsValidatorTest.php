@@ -4,12 +4,13 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\PatchItemLabels;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchedLabelsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\ItemLabelTextValidator;
+use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 
@@ -22,13 +23,13 @@ use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
  */
 class PatchedLabelsValidatorTest extends TestCase {
 
-	private ItemLabelTextValidator $labelTextValidator;
+	private ItemLabelValidator $labelValidator;
 	private LanguageCodeValidator $languageCodeValidator;
 
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->labelTextValidator = $this->createStub( ItemLabelTextValidator::class );
+		$this->labelValidator = $this->createStub( ItemLabelValidator::class );
 		$this->languageCodeValidator = $this->createStub( LanguageCodeValidator::class );
 	}
 
@@ -38,7 +39,7 @@ class PatchedLabelsValidatorTest extends TestCase {
 	public function testWithValidLabels( array $labelsSerialization, TermList $expectedResult ): void {
 		$this->assertEquals(
 			$expectedResult,
-			$this->newValidator()->validateAndDeserialize( $labelsSerialization )
+			$this->newValidator()->validateAndDeserialize( new ItemId( 'Q123' ), new TermList(), $labelsSerialization )
 		);
 	}
 
@@ -48,12 +49,38 @@ class PatchedLabelsValidatorTest extends TestCase {
 			new TermList(),
 		];
 		yield 'valid labels' => [
-			[
-				'en' => 'potato',
-				'de' => 'Kartoffel',
-			],
+			[ 'en' => 'potato', 'de' => 'Kartoffel' ],
 			new TermList( [ new Term( 'en', 'potato' ), new Term( 'de', 'Kartoffel' ) ] ),
 		];
+	}
+
+	public function testValidateOnlyModifiedLabels(): void {
+		$itemId = new ItemId( 'Q123' );
+		$originalLabels = new TermList( [
+			new Term( 'en', 'spud' ),
+			new Term( 'de', 'Kartoffel' ),
+		] );
+
+		// only 'en' and 'bar' labels have been patched
+		$patchedLabels = [ 'en' => 'potato', 'de' => 'Kartoffel', 'bar' => 'Erdapfel' ];
+
+		// expect validation only for the modified labels
+		$this->labelValidator = $this->createMock( ItemLabelValidator::class );
+		$this->labelValidator->expects( $this->exactly( 2 ) )
+			->method( 'validate' )
+			->withConsecutive(
+				[ $itemId, 'en', 'potato' ],
+				[ $itemId, 'bar', 'Erdapfel' ],
+			);
+
+		$this->assertEquals(
+			new TermList( [
+				new Term( 'en', 'potato' ),
+				new Term( 'de', 'Kartoffel' ),
+				new Term( 'bar', 'Erdapfel' ),
+			] ),
+			$this->newValidator()->validateAndDeserialize( $itemId, $originalLabels, $patchedLabels )
+		);
 	}
 
 	/**
@@ -66,11 +93,11 @@ class PatchedLabelsValidatorTest extends TestCase {
 		string $expectedErrorMessage,
 		array $expectedContext = null
 	): void {
-		$this->labelTextValidator = $this->createStub( ItemLabelTextValidator::class );
-		$this->labelTextValidator->method( 'validate' )->willReturn( $validationError );
+		$this->labelValidator = $this->createStub( ItemLabelValidator::class );
+		$this->labelValidator->method( 'validate' )->willReturn( $validationError );
 
 		try {
-			$this->newValidator()->validateAndDeserialize( $labelsSerialization );
+			$this->newValidator()->validateAndDeserialize( new ItemId( 'Q123' ), new TermList(), $labelsSerialization );
 
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $error ) {
@@ -86,8 +113,8 @@ class PatchedLabelsValidatorTest extends TestCase {
 		yield 'invalid label' => [
 			[ $language => $label ],
 			new ValidationError(
-				ItemLabelTextValidator::CODE_INVALID,
-				[ ItemLabelTextValidator::CONTEXT_VALUE => $label ],
+				ItemLabelValidator::CODE_INVALID,
+				[ ItemLabelValidator::CONTEXT_VALUE => $label ],
 			),
 			UseCaseError::PATCHED_LABEL_INVALID,
 			"Changed label for '$language' is invalid: {$label}",
@@ -99,25 +126,46 @@ class PatchedLabelsValidatorTest extends TestCase {
 
 		$tooLongLabel = 'This label is too long.';
 		$context = [
-			ItemLabelTextValidator::CONTEXT_VALUE => $tooLongLabel,
-			ItemLabelTextValidator::CONTEXT_LIMIT => 250,
+			ItemLabelValidator::CONTEXT_VALUE => $tooLongLabel,
+			ItemLabelValidator::CONTEXT_LIMIT => 250,
 			PatchedLabelsValidator::CONTEXT_LANGUAGE => $language,
 		];
 		yield 'label too long' => [
 			[ $language => $tooLongLabel ],
 			new ValidationError(
-				ItemLabelTextValidator::CODE_TOO_LONG,
+				ItemLabelValidator::CODE_TOO_LONG,
 				$context
 			),
 			UseCaseError::PATCHED_LABEL_TOO_LONG,
 			"Changed label for '$language' must not be more than 250 characters long",
 			$context,
 		];
+
+		$collidingLabel = 'This label already exists on an item with the same description.';
+		$collidingDescription = 'This discription already exists on an item with the same label.';
+		$collidingItemId = 'Q345';
+		$context = [
+			ItemLabelValidator::CONTEXT_LANGUAGE => $language,
+			ItemLabelValidator::CONTEXT_LABEL => $collidingLabel,
+			ItemLabelValidator::CONTEXT_DESCRIPTION => $collidingDescription,
+			ItemLabelValidator::CONTEXT_MATCHING_ITEM_ID => $collidingItemId,
+		];
+		yield 'label/description collision' => [
+			[ $language => $collidingLabel ],
+			new ValidationError(
+				ItemLabelValidator::CODE_LABEL_DESCRIPTION_DUPLICATE,
+				$context
+			),
+			UseCaseError::PATCHED_ITEM_LABEL_DESCRIPTION_DUPLICATE,
+			"Item $collidingItemId already has label '$collidingLabel' associated with language code $language, " .
+			'using the same description text.',
+			$context,
+		];
 	}
 
 	public function testGivenEmptyLabel_throwsEmptyLabelError(): void {
 		try {
-			$this->newValidator()->validateAndDeserialize( [ 'en' => '' ] );
+			$this->newValidator()->validateAndDeserialize( new ItemId( 'Q123' ), new TermList(), [ 'en' => '' ] );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::PATCHED_LABEL_EMPTY, $e->getErrorCode() );
@@ -137,7 +185,7 @@ class PatchedLabelsValidatorTest extends TestCase {
 		);
 
 		try {
-			$this->newValidator()->validateAndDeserialize( [ $invalidLanguage => 'potato' ] );
+			$this->newValidator()->validateAndDeserialize( new ItemId( 'Q123' ), new TermList(), [ $invalidLanguage => 'potato' ] );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::PATCHED_LABEL_INVALID_LANGUAGE_CODE, $e->getErrorCode() );
@@ -149,7 +197,7 @@ class PatchedLabelsValidatorTest extends TestCase {
 	private function newValidator(): PatchedLabelsValidator {
 		return new PatchedLabelsValidator(
 			new LabelsDeserializer(),
-			$this->labelTextValidator,
+			$this->labelValidator,
 			$this->languageCodeValidator
 		);
 	}

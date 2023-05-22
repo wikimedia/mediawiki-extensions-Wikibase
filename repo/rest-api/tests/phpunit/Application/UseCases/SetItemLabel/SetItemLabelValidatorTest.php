@@ -10,7 +10,6 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabelValidato
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ItemLabelTextValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
@@ -172,26 +171,26 @@ class SetItemLabelValidatorTest extends TestCase {
 		$label = "tab characters \t not allowed";
 		yield 'invalid label' => [
 			new ValidationError(
-				ItemLabelTextValidator::CODE_INVALID,
-				[ ItemLabelTextValidator::CONTEXT_VALUE => $label ],
+				ItemLabelValidator::CODE_INVALID,
+				[ ItemLabelValidator::CONTEXT_VALUE => $label ],
 			),
 			UseCaseError::INVALID_LABEL,
 			"Not a valid label: $label",
 		];
 
 		yield 'label empty' => [
-			new ValidationError( ItemLabelTextValidator::CODE_EMPTY ),
+			new ValidationError( ItemLabelValidator::CODE_EMPTY ),
 			UseCaseError::LABEL_EMPTY,
 			'Label must not be empty',
 		];
 
 		$context = [
-			ItemLabelTextValidator::CONTEXT_VALUE => 'This label is too long.',
-			ItemLabelTextValidator::CONTEXT_LIMIT => 250,
+			ItemLabelValidator::CONTEXT_VALUE => 'This label is too long.',
+			ItemLabelValidator::CONTEXT_LIMIT => 250,
 		];
 		yield 'label too long' => [
 			new ValidationError(
-				ItemLabelTextValidator::CODE_TOO_LONG,
+				ItemLabelValidator::CODE_TOO_LONG,
 				$context
 			),
 			UseCaseError::LABEL_TOO_LONG,

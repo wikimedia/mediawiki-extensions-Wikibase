@@ -192,6 +192,46 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 			);
 			assert.include( response.body.message, invalidLanguage );
 		} );
+
+		it( 'patched label and description already exists in a different item', async () => {
+			const languageCode = 'en';
+			const label = `test-label-${utils.uniq()}`;
+			const description = `test-description-${utils.uniq()}`;
+			const existingEntityResponse = await entityHelper.createEntity( 'item', {
+				labels: [ { language: languageCode, value: label } ],
+				descriptions: [ { language: languageCode, value: description } ]
+			} );
+			const existingItemId = existingEntityResponse.entity.id;
+			const createEntityResponse = await entityHelper.createEntity( 'item', {
+				labels: [ { language: languageCode, value: `label-to-be-replaced-${utils.uniq()}` } ],
+				descriptions: [ { language: languageCode, value: description } ]
+			} );
+			const itemIdToBePatched = createEntityResponse.entity.id;
+
+			const response = await newPatchItemLabelsRequestBuilder(
+				itemIdToBePatched,
+				[ {
+					op: 'replace',
+					path: `/${languageCode}`,
+					value: label
+				} ]
+			).assertValidRequest().makeRequest();
+
+			assertValidErrorResponse(
+				response,
+				422,
+				'patched-item-label-description-duplicate',
+				{
+					language: languageCode,
+					label: label,
+					description: description,
+					'matching-item-id': existingItemId
+				}
+			);
+			assert.include( response.body.message, existingItemId );
+			assert.include( response.body.message, label );
+			assert.include( response.body.message, languageCode );
+		} );
 	} );
 
 	describe( '404 error response', () => {
