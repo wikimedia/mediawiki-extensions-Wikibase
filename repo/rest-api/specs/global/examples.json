@@ -238,7 +238,7 @@
 			"message": "Changed label for '{language_code}' must not be more than '{limit}' characters long",
 			"context": {
 				"language": "<language_code>",
-				"label": "<label>",
+				"value": "<label>",
 				"limit": 250
 			}
 		}
