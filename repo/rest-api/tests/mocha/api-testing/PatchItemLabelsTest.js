@@ -21,14 +21,17 @@ function assertValidErrorResponse( response, statusCode, responseBodyErrorCode, 
 describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 	let testItemId;
 	let testEnLabel;
+	let testEnDescription;
 	let originalLastModified;
 	let originalRevisionId;
 	const languageWithExistingLabel = 'en';
 
 	before( async function () {
 		testEnLabel = `English Label ${utils.uniq()}`;
+		testEnDescription = `English Description ${utils.uniq()}`;
 		testItemId = ( await entityHelper.createEntity( 'item', {
-			labels: [ { language: languageWithExistingLabel, value: testEnLabel } ]
+			labels: [ { language: languageWithExistingLabel, value: testEnLabel } ],
+			descriptions: [ { language: languageWithExistingLabel, value: testEnDescription } ]
 		} ) ).entity.id;
 
 		const testItemCreationMetadata = await entityHelper.getLatestEditMetadata( testItemId );
@@ -231,6 +234,25 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 			assert.include( response.body.message, existingItemId );
 			assert.include( response.body.message, label );
 			assert.include( response.body.message, languageCode );
+		} );
+
+		it( 'patched-item-label-description-same-value', async () => {
+			const response = await newPatchItemLabelsRequestBuilder(
+				testItemId,
+				[ makeReplaceExistingLabelPatchOp( testEnDescription ) ]
+			)
+				.assertValidRequest()
+				.makeRequest();
+			assertValidErrorResponse(
+				response,
+				422,
+				'patched-item-label-description-same-value',
+				{ language: languageWithExistingLabel }
+			);
+			assert.strictEqual(
+				response.body.message,
+				`Label and description for language code ${languageWithExistingLabel} can not have the same value.`
+			);
 		} );
 	} );
 

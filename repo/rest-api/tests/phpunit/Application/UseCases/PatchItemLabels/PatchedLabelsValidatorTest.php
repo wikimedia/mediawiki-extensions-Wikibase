@@ -174,6 +174,31 @@ class PatchedLabelsValidatorTest extends TestCase {
 		}
 	}
 
+	public function testGivenLabelSameAsDescriptionForLanguage_throwsUseCaseError(): void {
+		$language = 'en';
+		$this->labelValidator = $this->createStub( ItemLabelValidator::class );
+		$this->labelValidator->method( 'validate' )->willReturn(
+			new ValidationError(
+				ItemLabelValidator::CODE_LABEL_DESCRIPTION_EQUAL,
+				[ ItemLabelValidator::CONTEXT_LANGUAGE => $language ]
+			)
+		);
+		try {
+			$this->newValidator()->validateAndDeserialize(
+				new ItemId( 'Q345' ),
+				new TermList(),
+				[ $language => 'Label same as description.' ]
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+
+			$this->assertSame( UseCaseError::PATCHED_ITEM_LABEL_DESCRIPTION_SAME_VALUE, $e->getErrorCode() );
+			$this->assertSame( "Label and description for language code {$language} can not have the same value.", $e->getErrorMessage() );
+			$this->assertEquals( [ 'language' => $language ], $e->getErrorContext() );
+
+		}
+	}
+
 	public function testGivenInvalidLanguageCode_throwsUseCaseError(): void {
 		$invalidLanguage = 'not-a-valid-language-code';
 		$this->languageCodeValidator = $this->createStub( LanguageCodeValidator::class );
