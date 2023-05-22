@@ -243,6 +243,16 @@
 			}
 		}
 	},
+	"PatchedLabelInvalidExample": {
+		"value": {
+			"code": "patched-label-invalid",
+			"message": "Changed label for '{language_code}' is not valid; '{label}'",
+			"context": {
+				"language": "<language_code>",
+				"value": "<label>"
+			}
+		}
+	},
 	"PatchedItemLabelDescriptionSameValueExample": {
 		"value": {
 			"code": "patched-item-label-description-same-value",
