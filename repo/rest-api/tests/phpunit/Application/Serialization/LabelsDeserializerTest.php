@@ -44,6 +44,17 @@ class LabelsDeserializerTest extends TestCase {
 				new Term( 'de', 'Kartoffel' ),
 			] ),
 		];
+
+		yield 'labels with leading/trailing whitespace' => [
+			[
+				'en' => '  space',
+				'de' => ' Leerzeichen  ',
+			],
+			new TermList( [
+				new Term( 'en', 'space' ),
+				new Term( 'de', 'Leerzeichen' ),
+			] ),
+		];
 	}
 
 	public function testGivenEmptyLabel_throwsException(): void {

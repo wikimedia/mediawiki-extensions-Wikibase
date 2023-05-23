@@ -17,7 +17,7 @@ class LabelsDeserializer {
 			if ( $text === '' ) {
 				throw new EmptyLabelException( $language, '' );
 			}
-			$terms[] = new Term( $language, $text );
+			$terms[] = new Term( $language, trim( $text ) );
 		}
 
 		return new TermList( $terms );
