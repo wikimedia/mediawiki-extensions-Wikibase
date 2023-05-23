@@ -68,7 +68,7 @@
 		"fix-modified": "bash build/phpcbfGitModified.sh",
 		"fix-committed": "bash build/phpcbfGitCommitted.sh",
 		"phan": "phan -d . --long-progress-bar --allow-polyfill-parser",
-		"phpstan": "phpstan analyze -a ../../tests/phpunit/bootstrap.php",
+		"phpstan": "bash build/runPhpstanUnlessMissingDeps.sh",
 		"test": [
 			"composer validate --no-interaction",
 			"composer lint",
