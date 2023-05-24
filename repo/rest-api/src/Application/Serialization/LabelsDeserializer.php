@@ -14,7 +14,9 @@ class LabelsDeserializer {
 		$terms = [];
 
 		foreach ( $serialization as $language => $text ) {
-			if ( $text === '' ) {
+			if ( !is_string( $text ) ) {
+				throw new InvalidFieldException( $language, $text );
+			} elseif ( $text === '' ) {
 				throw new EmptyLabelException( $language, '' );
 			}
 			$terms[] = new Term( $language, $text );

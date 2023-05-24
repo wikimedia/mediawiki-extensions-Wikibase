@@ -7,6 +7,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Application\Serialization\EmptyLabelException;
+use Wikibase\Repo\RestApi\Application\Serialization\InvalidFieldException;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
@@ -57,6 +58,17 @@ class PatchedLabelsValidator {
 				UseCaseError::PATCHED_LABEL_EMPTY,
 				"Changed label for '$languageCode' cannot be empty",
 				[ self::CONTEXT_LANGUAGE => $languageCode ]
+			);
+		} catch ( InvalidFieldException $e ) {
+			$languageCode = $e->getField();
+			$invalidLabel = json_encode( $e->getValue() );
+			throw new UseCaseError(
+				UseCaseError::PATCHED_LABEL_INVALID,
+				"Changed label for '$languageCode' is invalid: $invalidLabel",
+				[
+					self::CONTEXT_LANGUAGE => $languageCode,
+					self::CONTEXT_VALUE => $invalidLabel,
+				]
 			);
 		}
 

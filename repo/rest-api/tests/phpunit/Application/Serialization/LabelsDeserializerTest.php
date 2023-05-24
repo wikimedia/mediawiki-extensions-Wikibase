@@ -7,6 +7,7 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Application\Serialization\EmptyLabelException;
+use Wikibase\Repo\RestApi\Application\Serialization\InvalidFieldException;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 
 /**
@@ -52,6 +53,16 @@ class LabelsDeserializerTest extends TestCase {
 			$this->fail( 'this should not be reached' );
 		} catch ( EmptyLabelException $e ) {
 			$this->assertSame( 'en', $e->getField() );
+		}
+	}
+
+	public function testGivenInvalidLabelType_throwsException(): void {
+		try {
+			( new LabelsDeserializer() )->deserialize( [ 'en' => 123 ] );
+			$this->fail( 'this should not be reached' );
+		} catch ( InvalidFieldException $e ) {
+			$this->assertSame( 'en', $e->getField() );
+			$this->assertSame( 123, $e->getValue() );
 		}
 	}
 

@@ -126,6 +126,28 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 			assert.include( response.body.message, `'${languageWithExistingLabel}'` );
 		} );
 
+		it( 'invalid label type', async () => {
+			const invalidLabel = { object: 'not allowed' };
+			const response = await newPatchItemLabelsRequestBuilder(
+				testItemId,
+				[ makeReplaceExistingLabelPatchOp( invalidLabel ) ]
+			)
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValidErrorResponse(
+				response,
+				422,
+				'patched-label-invalid',
+				{
+					language: languageWithExistingLabel,
+					value: JSON.stringify( invalidLabel )
+				}
+			);
+			assert.include( response.body.message, JSON.stringify( invalidLabel ) );
+			assert.include( response.body.message, `'${languageWithExistingLabel}'` );
+		} );
+
 		it( 'empty label', async () => {
 			const response = await newPatchItemLabelsRequestBuilder(
 				testItemId,
