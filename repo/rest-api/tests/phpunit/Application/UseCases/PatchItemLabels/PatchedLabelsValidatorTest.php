@@ -174,6 +174,19 @@ class PatchedLabelsValidatorTest extends TestCase {
 		}
 	}
 
+	public function testGivenInvalidLabelType_throwsInvalidLabelError(): void {
+		$invalidLabel = 123;
+		try {
+			$this->newValidator()->validateAndDeserialize( new ItemId( 'Q123' ), new TermList(), [ 'en' => $invalidLabel ] );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::PATCHED_LABEL_INVALID, $e->getErrorCode() );
+			$this->assertStringContainsString( 'en', $e->getErrorMessage() );
+			$this->assertStringContainsString( "$invalidLabel", $e->getErrorMessage() );
+			$this->assertEquals( [ 'language' => 'en', 'value' => "$invalidLabel" ], $e->getErrorContext() );
+		}
+	}
+
 	public function testGivenLabelSameAsDescriptionForLanguage_throwsUseCaseError(): void {
 		$language = 'en';
 		$this->labelValidator = $this->createStub( ItemLabelValidator::class );
