@@ -7,7 +7,6 @@ namespace Wikibase\Client\Tests\Integration\Api;
 use ApiContinuationManager;
 use ApiMain;
 use ApiPageSet;
-use ApiUsageException;
 use MediaWiki\Request\FauxRequest;
 use MediaWikiLangTestCase;
 use RequestContext;
@@ -140,70 +139,76 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 	}
 
 	public static function entityUsageProvider(): iterable {
-		$cases = [
+		return [
 			'only Q3' => [
 				[
-					'entities' => 'Q3',
+					'wbleuentities' => 'Q3',
 				],
-				[ "11" => [
-					"ns" => 0,
-					"title" => "Vienna",
-					"pageid" => 11,
-					"entityusage" => [
-						"Q3" => [ "aspects" => [ "O", "S" ] ],
+				[
+					[
+						"ns" => 0,
+						"title" => "Vienna",
+						"pageid" => 11,
+						"entityusage" => [
+							"Q3" => [ "aspects" => [ "O", "S" ] ],
+						],
 					],
-				] ],
+				],
 			],
 			'two entities in two pages' => [
 				[
-					'entities' => 'Q3|Q5',
+					'wbleuentities' => 'Q3|Q5',
 				],
-				[ "11" => [
-					"ns" => 0,
-					"title" => "Vienna",
-					"pageid" => 11,
-					"entityusage" => [
-						"Q3" => [ "aspects" => [ "O", "S" ] ],
+				[
+					[
+						"ns" => 0,
+						"title" => "Vienna",
+						"pageid" => 11,
+						"entityusage" => [
+							"Q3" => [ "aspects" => [ "O", "S" ] ],
+						],
+					],
+					[
+						"ns" => 0,
+						"title" => "Berlin",
+						"pageid" => 22,
+						"entityusage" => [
+							"Q5" => [ "aspects" => [ "S" ] ],
+						],
 					],
 				],
-				"22" => [
-					"ns" => 0,
-					"title" => "Berlin",
-					"pageid" => 22,
-					"entityusage" => [
-						"Q5" => [ "aspects" => [ "S" ] ],
-					],
-				] ],
 			],
 			'continue' => [
 				[
-					'entities' => 'Q3|Q5',
-					'continue' => '11|Q3|S',
+					'wbleuentities' => 'Q3|Q5',
+					'wbleucontinue' => '11|Q3|S',
 				],
-				[ "11" => [
-					"ns" => 0,
-					"title" => "Vienna",
-					"pageid" => 11,
-					"entityusage" => [
-						"Q3" => [ "aspects" => [ "S" ] ],
+				[
+					[
+						"ns" => 0,
+						"title" => "Vienna",
+						"pageid" => 11,
+						"entityusage" => [
+							"Q3" => [ "aspects" => [ "S" ] ],
+						],
+					],
+					[
+						"ns" => 0,
+						"title" => "Berlin",
+						"pageid" => 22,
+						"entityusage" => [
+							"Q5" => [ "aspects" => [ "S" ] ],
+						],
 					],
 				],
-				"22" => [
-					"ns" => 0,
-					"title" => "Berlin",
-					"pageid" => 22,
-					"entityusage" => [
-						"Q5" => [ "aspects" => [ "S" ] ],
-					],
-				] ],
 			],
 			'correctly finish pageination step between two pages' => [
 				[
-					'entities' => 'Q3|Q4|Q5',
-					'limit' => 2,
+					'wbleuentities' => 'Q3|Q4|Q5',
+					'wbleulimit' => 2,
 				],
 				[
-					"11" => [
+					[
 						"ns" => 0,
 						"title" => "Vienna",
 						"pageid" => 11,
@@ -217,38 +222,25 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 				],
 			],
 		];
-
-		foreach ( $cases as $name => $case ) {
-			$unprefixedParams = array_shift( $case );
-			$legacyParams = [];
-			$params = [];
-			foreach ( $unprefixedParams as $key => $value ) {
-				$legacyParams['wbeu' . $key] = $value;
-				$params['wbleu' . $key] = $value;
-			}
-			yield $name => array_merge( [ $params, false ], array_map( 'array_values', $case ) );
-			yield $name . ' (legacy format)' => array_merge( [ $legacyParams, true ], $case );
-		}
 	}
 
 	/**
 	 * @dataProvider entityUsageProvider
 	 */
-	public function testEntityUsage( array $params, bool $isLegacyRequest, array $expected ): void {
+	public function testEntityUsage( array $params, array $expected ): void {
 		$result = $this->callApiModule( $params );
 
 		if ( isset( $result['error'] ) ) {
 			$this->fail( 'API error: ' . print_r( $result['error'], true ) );
 		}
 
-		$resultKey = $isLegacyRequest ? 'pages' : 'entityusage';
 		$this->assertArrayHasKey( 'query', $result );
-		$this->assertArrayHasKey( $resultKey, $result['query'] );
-		$this->assertSame( $expected, $result['query'][$resultKey] );
+		$this->assertArrayHasKey( 'entityusage', $result['query'] );
+		$this->assertSame( $expected, $result['query']['entityusage'] );
 	}
 
 	/** @dataProvider entityUsageProvider */
-	public function testEntityUsageAsGenerator( array $params, bool $isLegacyRequest, array $expected ): void {
+	public function testEntityUsageAsGenerator( array $params, array $expected ): void {
 		$pageSet = $this->callApiModuleAsGenerator( $params );
 
 		$pages = $pageSet->getGoodPages();
@@ -264,29 +256,4 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 		}
 	}
 
-	public function testEntityUsageLegacyFormatDeprecation(): void {
-		$result = $this->callApiModule( [ 'wbeuentities' => 'Q3' ] );
-
-		if ( isset( $result['error'] ) ) {
-			$this->fail( 'API error: ' . print_r( $result['error'], true ) );
-		}
-
-		$this->assertArrayHasKey( 'warnings', $result );
-		$this->assertArrayHasKey( 'entityusage', $result['warnings'] );
-		$this->assertArrayHasKey( '*', $result['warnings']['entityusage'] );
-		$this->assertSame(
-			wfMessage( 'paramvalidator-param-deprecated', 'wbeuentities' )->text(),
-			$result['warnings']['entityusage']['*']
-		);
-	}
-
-	public function testEntityUsageMixedParameters(): void {
-		$this->expectException( ApiUsageException::class );
-		$this->expectExceptionMessage( wfMessage( 'wikibase-client-wblistentityusage-param-format-mix' )->text() );
-
-		$this->callApiModule( [
-			'wbeuentities' => 'Q3',
-			'wbleulimit' => 2,
-		] );
-	}
 }
