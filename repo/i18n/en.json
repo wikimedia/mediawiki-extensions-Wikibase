@@ -277,6 +277,7 @@
 	"wikibase-setlabeldescriptionaliases-description-label": "Description:",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "Aliases:",
 	"wikibase-setlabeldescriptionaliases-submit": "Set label, description and aliases",
+	"wikibase-setlabeldescriptionaliases-continue": "Continue",
 	"special-setsitelink": "Set Item sitelink",
 	"wikibase-setsitelink-introfull": "You are setting the sitelink of $2 for [[:$1]].",
 	"wikibase-setsitelink-intro": "This form allows you to set the sitelink of an Item. You need to provide the ID of the Item (e.g. Q23), a site ID (e.g. \"enwiki\") and the sitelink to set to.",

@@ -167,7 +167,8 @@ class ParameterizedDescriptionTraitTest extends MediaWikiIntegrationTestCase {
 			$this->createMock( FingerprintChangeOpFactory::class ),
 			$this->createMock( ContentLanguages::class ),
 			$this->createMock( EntityPermissionChecker::class ),
-			$this->createMock( LanguageNameUtils::class )
+			$this->createMock( LanguageNameUtils::class ),
+			'savechanges'
 		);
 	}
 
