@@ -61,6 +61,19 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 			assert.notStrictEqual( response.header.etag, makeEtag( originalRevisionId ) );
 		} );
 
+		it( 'trims whitespace around the label', async () => {
+			const label = `spacey ${utils.uniq()}`;
+			const response = await newPatchItemLabelsRequestBuilder(
+				testItemId,
+				[
+					{ op: 'add', path: '/de', value: `  ${label}  ` }
+				]
+			).makeRequest();
+
+			expect( response ).to.have.status( 200 );
+			assert.strictEqual( response.body.de, label );
+		} );
+
 		it( 'can patch labels with edit metadata', async () => {
 			const label = `new arabic label ${utils.uniq()}`;
 			const user = await action.robby(); // robby is a bot
