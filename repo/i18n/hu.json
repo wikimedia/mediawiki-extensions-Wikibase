@@ -256,6 +256,7 @@
 	"wikibase-setlabeldescriptionaliases-description-label": "Leírás:",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "További nevek:",
 	"wikibase-setlabeldescriptionaliases-submit": "Címke, leírás és más nevek beállítása",
+	"wikibase-setlabeldescriptionaliases-continue": "Folytatás",
 	"special-setsitelink": "Elem oldalhivatkozásának beállítása",
 	"wikibase-setsitelink-introfull": "A(z) [[:$1]] oldalhivatkozását állítod be a(z) $2 oldalhoz.",
 	"wikibase-setsitelink-intro": "Ezen az űrlapon megadhatod egy elem oldalhivatkozását. Ehhez meg kell adnod az entitás azonosítóját (pl. Q23), egy oldalazonosítót (pl. „huwiki”) és a hivatkozást.",

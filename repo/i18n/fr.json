@@ -322,6 +322,7 @@
 	"wikibase-setlabeldescriptionaliases-description-label": "Description :",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "Alias :",
 	"wikibase-setlabeldescriptionaliases-submit": "Définir le libellé, la description et les alias",
+	"wikibase-setlabeldescriptionaliases-continue": "Continuer",
 	"special-setsitelink": "Définir le lien de site de l’élément",
 	"wikibase-setsitelink-introfull": "Vous êtes en train de définir le lien de site $2 pour [[:$1]].",
 	"wikibase-setsitelink-intro": "Ce formulaire vous permet de définir le lien de site d’un élément. Vous devez fournir l’identifiant de l’élément (par ex. « Q23 »), un identifiant de site (par ex. « enwiki ») et le lien de site à définir.",

@@ -265,6 +265,7 @@
 	"wikibase-setlabeldescriptionaliases-description-label": "विवरण:",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "उपनाम:",
 	"wikibase-setlabeldescriptionaliases-submit": "लेबल, विवरण और उपनाम सेट करें",
+	"wikibase-setlabeldescriptionaliases-continue": "जारी रखें",
 	"special-setsitelink": "आयटम की साइटकड़ी सेट करें",
 	"wikibase-setsitelink-introfull": "आप [[:$1]] के लिए $2 की साइटकड़ी सेट कर रहे हैं।",
 	"wikibase-setsitelink-intro": "इस फ़ॉर्म से आप किसी सत्ते की साइटकड़ी सेट कर सकते हैं। आपको सत्ते का ID प्रदान करना होगा (जैसे Q23), एक भाषा कोड प्रदान करना होगा (जैसे \"hi\"), और वह साइटकड़ी देनी होगी जिसपर सत्ते को सेट करना है।",

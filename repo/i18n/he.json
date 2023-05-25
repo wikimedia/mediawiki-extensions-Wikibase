@@ -272,6 +272,7 @@
 	"wikibase-setlabeldescriptionaliases-description-label": "תיאור:",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "כינויים:",
 	"wikibase-setlabeldescriptionaliases-submit": "הגדרת תווית, תיאור וכינויים",
+	"wikibase-setlabeldescriptionaliases-continue": "המשך",
 	"special-setsitelink": "הגדרת קישור אתר לפריט",
 	"wikibase-setsitelink-introfull": "כאן מגדירים את קישור האתר של $2 עבור [[:$1]].",
 	"wikibase-setsitelink-intro": "הטופס הזה מאפשר לך להגדיר את כתובת האתר עבור פריט. יש לספק את מזהה הפריט (למשל Q23), את מזהה האתר (למשל \"enwiki\") ואת קישור האתר שצריך להגדיר.",

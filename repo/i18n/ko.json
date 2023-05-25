@@ -258,6 +258,7 @@
 	"wikibase-setlabeldescriptionaliases-description-label": "설명:",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "다른 이름:",
 	"wikibase-setlabeldescriptionaliases-submit": "레이블, 설명, 다른 이름 지정하기",
+	"wikibase-setlabeldescriptionaliases-continue": "계속",
 	"special-setsitelink": "항목의 사이트 링크 설정",
 	"wikibase-setsitelink-introfull": "[[:$1]]에 대한 $2의 사이트 링크를 설정합니다.",
 	"wikibase-setsitelink-intro": "이 양식은 항목의 사이트 링크를 설정할 수 있습니다. 항목의 ID(예를 들어 Q23), 사이트 id(예를 들어 \"kowiki\")와 설정하는 사이트 링크를 입력해야 합니다.",

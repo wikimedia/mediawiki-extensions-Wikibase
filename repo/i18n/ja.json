@@ -276,6 +276,7 @@
 	"wikibase-setlabeldescriptionaliases-description-label": "説明:",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "別名:",
 	"wikibase-setlabeldescriptionaliases-submit": "ラベル、説明、別名の設定",
+	"wikibase-setlabeldescriptionaliases-continue": "続行",
 	"special-setsitelink": "サイトリンクの設定",
 	"wikibase-setsitelink-introfull": "[[:$1]] に対する$2のサイトリンクを設定しています。",
 	"wikibase-setsitelink-intro": "このフォームでは、項目のサイトリンクを設定できます。項目の ID (Q23 など)、サイト ID (\"jawiki\" など)、設定するサイトリンクを入力する必要があります。",
