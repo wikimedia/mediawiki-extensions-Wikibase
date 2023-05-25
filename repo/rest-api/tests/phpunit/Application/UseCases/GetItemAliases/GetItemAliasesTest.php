@@ -9,14 +9,13 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliases\GetItemAliases;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliases\GetItemAliasesRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliases\GetItemAliasesResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliases\GetItemAliasesValidator;
-use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
+use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
-use Wikibase\Repo\RestApi\Domain\ReadModel\LatestItemRevisionMetadataResult;
 use Wikibase\Repo\RestApi\Domain\Services\ItemAliasesRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItemAliases\GetItemAliases
@@ -28,9 +27,9 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 class GetItemAliasesTest extends TestCase {
 
 	/**
-	 * @var MockObject|ItemRevisionMetadataRetriever
+	 * @var MockObject|GetLatestItemRevisionMetadata
 	 */
-	private $itemRevisionMetadataRetriever;
+	private $getRevisionMetadata;
 
 	/**
 	 * @var MockObject|ItemAliasesRetriever
@@ -40,7 +39,7 @@ class GetItemAliasesTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->itemRevisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
+		$this->getRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
 		$this->aliasesRetriever = $this->createStub( ItemAliasesRetriever::class );
 	}
 
@@ -66,11 +65,8 @@ class GetItemAliasesTest extends TestCase {
 		$lastModified = '20201111070707';
 		$revisionId = 2;
 
-		$this->itemRevisionMetadataRetriever = $this->createMock( ItemRevisionMetadataRetriever::class );
-		$this->itemRevisionMetadataRetriever->expects( $this->once() )
-			->method( 'getLatestRevisionMetadata' )
-			->with( $itemId )
-			->willReturn( LatestItemRevisionMetadataResult::concreteRevision( $revisionId, $lastModified ) );
+		$this->getRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
+		$this->getRevisionMetadata->method( 'execute' )->willReturn( [ $revisionId, $lastModified ] );
 
 		$this->aliasesRetriever = $this->createMock( ItemAliasesRetriever::class );
 		$this->aliasesRetriever->expects( $this->once() )
@@ -95,47 +91,26 @@ class GetItemAliasesTest extends TestCase {
 		}
 	}
 
-	public function testGivenRequestedItemDoesNotExist_throwsUseCaseError(): void {
+	public function testGivenItemNotFoundOrRedirect_throws(): void {
 		$itemId = new ItemId( 'Q10' );
+		$expectedException = $this->createStub( UseCaseException::class );
 
-		$this->itemRevisionMetadataRetriever = $this->createMock( ItemRevisionMetadataRetriever::class );
-		$this->itemRevisionMetadataRetriever->expects( $this->once() )
-			->method( 'getLatestRevisionMetadata' )
-			->with( $itemId )
-			->willReturn( LatestItemRevisionMetadataResult::itemNotFound() );
+		$this->getRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
+		$this->getRevisionMetadata->method( 'execute' )
+			->willThrowException( $expectedException );
 
 		try {
 			$this->newUseCase()->execute( new GetItemAliasesRequest( $itemId->getSerialization() ) );
 
 			$this->fail( 'Exception was not thrown.' );
-		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::ITEM_NOT_FOUND, $e->getErrorCode() );
-			$this->assertSame( 'Could not find an item with the ID: Q10', $e->getErrorMessage() );
-			$this->assertNull( $e->getErrorContext() );
-		}
-	}
-
-	public function testGivenItemRedirect_throwsItemRedirectException(): void {
-		$redirectSource = 'Q123';
-		$redirectTarget = 'Q321';
-
-		$this->itemRevisionMetadataRetriever
-			->method( 'getLatestRevisionMetadata' )
-			->with( new ItemId( $redirectSource ) )
-			->willReturn( LatestItemRevisionMetadataResult::redirect( new ItemId( $redirectTarget ) ) );
-
-		try {
-			$this->newUseCase()->execute( new GetItemAliasesRequest( $redirectSource ) );
-
-			$this->fail( 'Exception was not thrown.' );
-		} catch ( ItemRedirect $e ) {
-			$this->assertSame( $redirectTarget, $e->getRedirectTargetId() );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( $expectedException, $e );
 		}
 	}
 
 	private function newUseCase(): GetItemAliases {
 		return new GetItemAliases(
-			$this->itemRevisionMetadataRetriever,
+			$this->getRevisionMetadata,
 			$this->aliasesRetriever,
 			new GetItemAliasesValidator( new ItemIdValidator() )
 		);
