@@ -15,7 +15,9 @@ use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatement
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
@@ -25,10 +27,8 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Item as ReadModelItem;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
-use Wikibase\Repo\RestApi\Domain\ReadModel\LatestItemRevisionMetadataResult;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\Tests\RestApi\Application\Serialization\DeserializerFactory;
@@ -47,9 +47,9 @@ class AddItemStatementTest extends TestCase {
 	use EditMetadataHelper;
 
 	/**
-	 * @var MockObject|ItemRevisionMetadataRetriever
+	 * @var MockObject|GetLatestItemRevisionMetadata
 	 */
-	private $revisionMetadataRetriever;
+	private $getRevisionMetadata;
 	/**
 	 * @var MockObject|ItemRetriever
 	 */
@@ -72,7 +72,8 @@ class AddItemStatementTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->revisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
+		$this->getRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
+		$this->getRevisionMetadata->method( 'execute' )->willReturn( [ 321, '20201111070707' ] );
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
 		$this->guidGenerator = $this->createStub( GuidGenerator::class );
@@ -96,9 +97,6 @@ class AddItemStatementTest extends TestCase {
 			$comment,
 			null
 		);
-		$this->revisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
-		$this->revisionMetadataRetriever->method( 'getLatestRevisionMetadata' )
-			->willReturn( LatestItemRevisionMetadataResult::concreteRevision( 321, '20201111070707' ) );
 
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemRetriever->method( 'getItem' )->willReturn( $item );
@@ -133,12 +131,12 @@ class AddItemStatementTest extends TestCase {
 		$this->assertSame( $modificationTimestamp, $response->getLastModified() );
 	}
 
-	public function testGivenItemNotFound_throws(): void {
+	public function testGivenItemNotFoundOrRedirect_throws(): void {
 		$itemId = 'Q321';
+		$expectedException = $this->createStub( UseCaseException::class );
 
-		$this->revisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
-		$this->revisionMetadataRetriever->method( 'getLatestRevisionMetadata' )
-			->willReturn( LatestItemRevisionMetadataResult::itemNotFound() );
+		$this->getRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
+		$this->getRevisionMetadata->method( 'execute' )->willThrowException( $expectedException );
 
 		try {
 			$this->newUseCase()->execute(
@@ -152,9 +150,8 @@ class AddItemStatementTest extends TestCase {
 				)
 			);
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::ITEM_NOT_FOUND, $e->getErrorCode() );
-			$this->assertStringContainsString( $itemId, $e->getErrorMessage() );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( $expectedException, $e );
 		}
 	}
 
@@ -169,38 +166,8 @@ class AddItemStatementTest extends TestCase {
 		}
 	}
 
-	public function testRedirect_throwsUseCaseError(): void {
-		$redirectSource = 'Q321';
-		$redirectTarget = 'Q123';
-
-		$this->revisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
-		$this->revisionMetadataRetriever->method( 'getLatestRevisionMetadata' )
-			->willReturn( LatestItemRevisionMetadataResult::redirect( new ItemId( $redirectTarget ) ) );
-
-		try {
-			$this->newUseCase()->execute(
-				new AddItemStatementRequest(
-					$redirectSource,
-					$this->getValidNoValueStatementSerialization(),
-					[],
-					false,
-					null,
-					null
-				)
-			);
-			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::ITEM_REDIRECTED, $e->getErrorCode() );
-			$this->assertStringContainsString( $redirectTarget, $e->getErrorMessage() );
-		}
-	}
-
 	public function testProtectedItem_throwsUseCaseError(): void {
 		$itemId = new ItemId( 'Q123' );
-
-		$this->revisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
-		$this->revisionMetadataRetriever->method( 'getLatestRevisionMetadata' )
-			->willReturn( LatestItemRevisionMetadataResult::concreteRevision( 321, '20201111070707' ) );
 
 		$this->permissionChecker = $this->createMock( WikibaseEntityPermissionChecker::class );
 		$this->permissionChecker->expects( $this->once() )
@@ -227,7 +194,7 @@ class AddItemStatementTest extends TestCase {
 	private function newUseCase(): AddItemStatement {
 		return new AddItemStatement(
 			$this->newValidator(),
-			$this->revisionMetadataRetriever,
+			$this->getRevisionMetadata,
 			$this->itemRetriever,
 			$this->itemUpdater,
 			$this->guidGenerator,

@@ -4,12 +4,12 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement;
 
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
+use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
 
@@ -19,7 +19,7 @@ use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
 class AddItemStatement {
 
 	private AddItemStatementValidator $validator;
-	private ItemRevisionMetadataRetriever $revisionMetadataRetriever;
+	private GetLatestItemRevisionMetadata $getRevisionMetadata;
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
 	private GuidGenerator $guidGenerator;
@@ -27,14 +27,14 @@ class AddItemStatement {
 
 	public function __construct(
 		AddItemStatementValidator $validator,
-		ItemRevisionMetadataRetriever $revisionMetadataRetriever,
+		GetLatestItemRevisionMetadata $getRevisionMetadata,
 		ItemRetriever $itemRetriever,
 		ItemUpdater $itemUpdater,
 		GuidGenerator $guidGenerator,
 		PermissionChecker $permissionChecker
 	) {
 		$this->validator = $validator;
-		$this->revisionMetadataRetriever = $revisionMetadataRetriever;
+		$this->getRevisionMetadata = $getRevisionMetadata;
 		$this->itemRetriever = $itemRetriever;
 		$this->itemUpdater = $itemUpdater;
 		$this->guidGenerator = $guidGenerator;
@@ -50,18 +50,8 @@ class AddItemStatement {
 		$statement = $this->validator->getValidatedStatement();
 		$itemId = new ItemId( $request->getItemId() );
 
-		$latestRevision = $this->revisionMetadataRetriever->getLatestRevisionMetadata( $itemId );
-		if ( $latestRevision->isRedirect() ) {
-			throw new UseCaseError(
-				UseCaseError::ITEM_REDIRECTED,
-				"Item {$request->getItemId()} has been merged into {$latestRevision->getRedirectTarget()}."
-			);
-		} elseif ( !$latestRevision->itemExists() ) {
-			throw new UseCaseError(
-				UseCaseError::ITEM_NOT_FOUND,
-				"Could not find an item with the ID: {$request->getItemId()}"
-			);
-		}
+		$this->getRevisionMetadata->execute( $itemId ); // checks redirect and item existence
+
 		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable hasUser checks for null
 		$user = $request->hasUser() ? User::withUsername( $request->getUsername() ) : User::newAnonymous();
 		if ( !$this->permissionChecker->canEdit( $user, $itemId ) ) {
