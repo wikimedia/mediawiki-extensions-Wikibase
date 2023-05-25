@@ -5,8 +5,8 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
+use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementRetriever;
 
 /**
@@ -15,16 +15,16 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemStatementRetriever;
 class GetItemStatement {
 
 	private ItemStatementRetriever $statementRetriever;
-	private ItemRevisionMetadataRetriever $revisionMetadataRetriever;
 	private GetItemStatementValidator $validator;
+	private GetLatestItemRevisionMetadata $getRevisionMetadata;
 
 	public function __construct(
 		GetItemStatementValidator $validator,
 		ItemStatementRetriever $statementRetriever,
-		ItemRevisionMetadataRetriever $revisionMetadataRetriever
+		GetLatestItemRevisionMetadata $getRevisionMetadata
 	) {
 		$this->statementRetriever = $statementRetriever;
-		$this->revisionMetadataRetriever = $revisionMetadataRetriever;
+		$this->getRevisionMetadata = $getRevisionMetadata;
 		$this->validator = $validator;
 	}
 
@@ -41,18 +41,7 @@ class GetItemStatement {
 		$itemId = $requestedItemId ? new ItemId( $requestedItemId ) : $statementId->getEntityId();
 		'@phan-var ItemId $itemId';
 
-		$latestRevisionMetadata = $this->revisionMetadataRetriever
-			->getLatestRevisionMetadata( $itemId );
-
-		if ( !$latestRevisionMetadata->itemExists() ) {
-			if ( $requestedItemId ) {
-				throw new UseCaseError(
-					UseCaseError::ITEM_NOT_FOUND,
-					"Could not find an item with the ID: {$itemId}"
-				);
-			}
-			$this->throwStatementNotFoundException( $statementRequest->getStatementId() );
-		}
+		[ $revisionId, $lastModified ] = $this->getRevisionMetadata->execute( $itemId );
 
 		if ( !$itemId->equals( $statementId->getEntityId() ) ) {
 			$this->throwStatementNotFoundException( $statementRequest->getStatementId() );
@@ -63,11 +52,7 @@ class GetItemStatement {
 			$this->throwStatementNotFoundException( $statementRequest->getStatementId() );
 		}
 
-		return new GetItemStatementResponse(
-			$statement,
-			$latestRevisionMetadata->getRevisionTimestamp(),
-			$latestRevisionMetadata->getRevisionId()
-		);
+		return new GetItemStatementResponse( $statement, $lastModified, $revisionId );
 	}
 
 	/**

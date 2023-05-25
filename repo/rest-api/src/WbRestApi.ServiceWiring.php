@@ -213,9 +213,9 @@ return [
 				new ItemIdValidator()
 			),
 			WbRestApi::getItemDataRetriever( $services ),
-			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
+			new GetLatestItemRevisionMetadata( new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
 				WikibaseRepo::getEntityRevisionLookup( $services )
-			)
+			) )
 		);
 	},
 
