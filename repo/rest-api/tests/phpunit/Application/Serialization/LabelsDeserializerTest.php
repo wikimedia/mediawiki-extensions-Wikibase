@@ -58,13 +58,21 @@ class LabelsDeserializerTest extends TestCase {
 		];
 	}
 
-	public function testGivenEmptyLabel_throwsException(): void {
+	/**
+	 * @dataProvider emptyLabelsProvider
+	 */
+	public function testGivenEmptyLabel_throwsException( string $emptyLabel ): void {
 		try {
-			( new LabelsDeserializer() )->deserialize( [ 'en' => '' ] );
+			( new LabelsDeserializer() )->deserialize( [ 'en' => $emptyLabel ] );
 			$this->fail( 'this should not be reached' );
 		} catch ( EmptyLabelException $e ) {
 			$this->assertSame( 'en', $e->getField() );
 		}
+	}
+
+	public static function emptyLabelsProvider(): Generator {
+		yield 'empty label' => [ '' ];
+		yield 'whitespace only label' => [ '   ' ];
 	}
 
 	public function testGivenInvalidLabelType_throwsException(): void {
