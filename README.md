@@ -83,4 +83,6 @@ Some notable (not a comprehensive list) mentions are
 * the use of qunit to test this code; e.g. in `repo/tests/qunit`, available [via a special page](https://www.mediawiki.org/wiki/Manual:JavaScript_unit_testing)
 * [vue.js](https://vuejs.org/guide/introduction.html) as a frontend framework; e.g. in [data-bridge](./client/data-bridge), the [Lexeme](https://gerrit.wikimedia.org/r/plugins/gitiles/mediawiki/extensions/WikibaseLexeme/) extension, and [termbox](https://gerrit.wikimedia.org/g/wikibase/termbox)
 
+#### Adding language code support in Wikibase
 
+To add support for a new language code (for labels or monolingual text) please refer to the [detailed documentation](https://www.mediawiki.org/wiki/Manual:Adding_and_removing_languages#Wikibase).
