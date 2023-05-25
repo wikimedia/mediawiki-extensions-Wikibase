@@ -4,14 +4,12 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel;
 
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\LabelEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
-use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
 
 /**
  * @license GPL-2.0-or-later
@@ -21,21 +19,21 @@ class SetItemLabel {
 	private GetLatestItemRevisionMetadata $getRevisionMetadata;
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
-	private PermissionChecker $permissionChecker;
 	private SetItemLabelValidator $validator;
+	private AssertUserIsAuthorized $assertUserIsAuthorized;
 
 	public function __construct(
 		SetItemLabelValidator $validator,
 		GetLatestItemRevisionMetadata $getRevisionMetadata,
 		ItemRetriever $itemRetriever,
 		ItemUpdater $itemUpdater,
-		PermissionChecker $permissionChecker
+		AssertUserIsAuthorized $assertUserIsAuthorized
 	) {
 		$this->validator = $validator;
 		$this->getRevisionMetadata = $getRevisionMetadata;
 		$this->itemRetriever = $itemRetriever;
 		$this->itemUpdater = $itemUpdater;
-		$this->permissionChecker = $permissionChecker;
+		$this->assertUserIsAuthorized = $assertUserIsAuthorized;
 	}
 
 	public function execute( SetItemLabelRequest $request ): SetItemLabelResponse {
@@ -45,14 +43,8 @@ class SetItemLabel {
 		$term = new Term( $request->getLanguageCode(), $request->getLabel() );
 
 		$this->getRevisionMetadata->execute( $itemId ); // checks redirect and item existence
-		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-		$user = $request->getUsername() !== null ? User::withUsername( $request->getUsername() ) : User::newAnonymous();
-		if ( !$this->permissionChecker->canEdit( $user, $itemId ) ) {
-			throw new UseCaseError(
-				UseCaseError::PERMISSION_DENIED,
-				'You have no permission to edit this item.'
-			);
-		}
+
+		$this->assertUserIsAuthorized->execute( $itemId, $request->getUsername() );
 
 		$item = $this->itemRetriever->getItem( $itemId );
 		$labelExists = $item->getLabels()->hasTermForLanguage( $request->getLanguageCode() );

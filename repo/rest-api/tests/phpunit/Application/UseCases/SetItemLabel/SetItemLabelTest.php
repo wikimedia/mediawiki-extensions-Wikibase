@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item as DataModelItem;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Tests\NewItem;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabelRequest;
@@ -13,7 +14,6 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabelValidato
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Item;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
@@ -22,8 +22,6 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
-use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 
 /**
@@ -39,7 +37,7 @@ class SetItemLabelTest extends TestCase {
 	private GetLatestItemRevisionMetadata $getRevisionMetadata;
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
-	private PermissionChecker $permissionChecker;
+	private AssertUserIsAuthorized $assertUserIsAuthorized;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -51,8 +49,7 @@ class SetItemLabelTest extends TestCase {
 
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
-		$this->permissionChecker = $this->createStub( PermissionChecker::class );
-		$this->permissionChecker->method( 'canEdit' )->willReturn( true );
+		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
 	}
 
 	public function testAddLabel(): void {
@@ -161,11 +158,14 @@ class SetItemLabelTest extends TestCase {
 	public function testGivenEditIsUnauthorized_throwsUseCaseError(): void {
 		$itemId = new ItemId( 'Q123' );
 
-		$this->permissionChecker = $this->createMock( WikibaseEntityPermissionChecker::class );
-		$this->permissionChecker->expects( $this->once() )
-			->method( 'canEdit' )
-			->with( User::newAnonymous(), $itemId )
-			->willReturn( false );
+		$expectedError = new UseCaseError(
+			UseCaseError::PERMISSION_DENIED,
+			'You have no permission to edit this item.'
+		);
+		$this->assertUserIsAuthorized = $this->createMock( AssertUserIsAuthorized::class );
+		$this->assertUserIsAuthorized->method( 'execute' )
+			->with( $itemId, null )
+			->willThrowException( $expectedError );
 
 		try {
 			$this->newUseCase()->execute(
@@ -173,10 +173,7 @@ class SetItemLabelTest extends TestCase {
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame(
-				UseCaseError::PERMISSION_DENIED,
-				$e->getErrorCode()
-			);
+			$this->assertSame( $expectedError, $e );
 		}
 	}
 
@@ -186,7 +183,7 @@ class SetItemLabelTest extends TestCase {
 			$this->getRevisionMetadata,
 			$this->itemRetriever,
 			$this->itemUpdater,
-			$this->permissionChecker
+			$this->assertUserIsAuthorized
 		);
 	}
 

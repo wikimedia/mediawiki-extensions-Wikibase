@@ -15,6 +15,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\SerializerFactory;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItemValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliases\GetItemAliases;
@@ -98,9 +99,11 @@ return [
 			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getItemUpdater( $services ),
 			new GuidGenerator(),
-			new WikibaseEntityPermissionChecker(
-				WikibaseRepo::getEntityPermissionChecker( $services ),
-				$services->getUserFactory()
+			new AssertUserIsAuthorized(
+				new WikibaseEntityPermissionChecker(
+					WikibaseRepo::getEntityPermissionChecker( $services ),
+					$services->getUserFactory()
+				)
 			)
 		);
 	},
@@ -279,16 +282,18 @@ return [
 			new GetLatestItemRevisionMetadata( new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
 				WikibaseRepo::getEntityRevisionLookup( $services )
 			) ),
-			new WikibaseEntityPermissionChecker(
-				WikibaseRepo::getEntityPermissionChecker( $services ),
-				$services->getUserFactory()
-			),
 			new PatchItemLabelsValidator(
 				new ItemIdValidator(),
 				new JsonDiffJsonPatchValidator(),
 				new EditMetadataValidator(
 					CommentStore::COMMENT_CHARACTER_LIMIT,
 					ChangeTags::listExplicitlyDefinedTags()
+				)
+			),
+			new AssertUserIsAuthorized(
+				new WikibaseEntityPermissionChecker(
+					WikibaseRepo::getEntityPermissionChecker( $services ),
+					$services->getUserFactory()
 				)
 			)
 		);
@@ -317,9 +322,11 @@ return [
 			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
 				WikibaseRepo::getEntityRevisionLookup( $services )
 			),
-			new WikibaseEntityPermissionChecker(
-				WikibaseRepo::getEntityPermissionChecker( $services ),
-				$services->getUserFactory()
+			new AssertUserIsAuthorized(
+				new WikibaseEntityPermissionChecker(
+					WikibaseRepo::getEntityPermissionChecker( $services ),
+					$services->getUserFactory()
+				)
 			)
 		);
 	},
@@ -349,9 +356,11 @@ return [
 			new StatementGuidParser( new ItemIdParser() ),
 			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getItemUpdater( $services ),
-			new WikibaseEntityPermissionChecker(
-				WikibaseRepo::getEntityPermissionChecker( $services ),
-				$services->getUserFactory()
+			new AssertUserIsAuthorized(
+				new WikibaseEntityPermissionChecker(
+					WikibaseRepo::getEntityPermissionChecker( $services ),
+					$services->getUserFactory()
+				)
 			)
 		);
 	},
@@ -372,9 +381,11 @@ return [
 			),
 			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getItemUpdater( $services ),
-			new WikibaseEntityPermissionChecker(
-				WikibaseRepo::getEntityPermissionChecker( $services ),
-				$services->getUserFactory()
+			new AssertUserIsAuthorized(
+				new WikibaseEntityPermissionChecker(
+					WikibaseRepo::getEntityPermissionChecker( $services ),
+					$services->getUserFactory()
+				)
 			)
 		);
 	},
@@ -407,9 +418,11 @@ return [
 			) ),
 			$itemDataRetriever,
 			WbRestApi::getItemUpdater( $services ),
-			new WikibaseEntityPermissionChecker(
-				WikibaseRepo::getEntityPermissionChecker( $services ),
-				$services->getUserFactory()
+			new AssertUserIsAuthorized(
+				new WikibaseEntityPermissionChecker(
+					WikibaseRepo::getEntityPermissionChecker( $services ),
+					$services->getUserFactory()
+				)
 			)
 		);
 	},
@@ -434,9 +447,11 @@ return [
 			) ),
 			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getItemUpdater( $services ),
-			new WikibaseEntityPermissionChecker(
-				WikibaseRepo::getEntityPermissionChecker( $services ),
-				$services->getUserFactory()
+			new AssertUserIsAuthorized(
+				new WikibaseEntityPermissionChecker(
+					WikibaseRepo::getEntityPermissionChecker( $services ),
+					$services->getUserFactory()
+				)
 			)
 		);
 	},

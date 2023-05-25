@@ -4,14 +4,13 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement;
 
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
-use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
 
 /**
  * @license GPL-2.0-or-later
@@ -23,7 +22,7 @@ class AddItemStatement {
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
 	private GuidGenerator $guidGenerator;
-	private PermissionChecker $permissionChecker;
+	private AssertUserIsAuthorized $assertUserIsAuthorized;
 
 	public function __construct(
 		AddItemStatementValidator $validator,
@@ -31,14 +30,14 @@ class AddItemStatement {
 		ItemRetriever $itemRetriever,
 		ItemUpdater $itemUpdater,
 		GuidGenerator $guidGenerator,
-		PermissionChecker $permissionChecker
+		AssertUserIsAuthorized $assertUserIsAuthorized
 	) {
 		$this->validator = $validator;
 		$this->getRevisionMetadata = $getRevisionMetadata;
 		$this->itemRetriever = $itemRetriever;
 		$this->itemUpdater = $itemUpdater;
 		$this->guidGenerator = $guidGenerator;
-		$this->permissionChecker = $permissionChecker;
+		$this->assertUserIsAuthorized = $assertUserIsAuthorized;
 	}
 
 	/**
@@ -52,14 +51,7 @@ class AddItemStatement {
 
 		$this->getRevisionMetadata->execute( $itemId ); // checks redirect and item existence
 
-		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable hasUser checks for null
-		$user = $request->hasUser() ? User::withUsername( $request->getUsername() ) : User::newAnonymous();
-		if ( !$this->permissionChecker->canEdit( $user, $itemId ) ) {
-			throw new UseCaseError(
-				UseCaseError::PERMISSION_DENIED,
-				'You have no permission to edit this item.'
-			);
-		}
+		$this->assertUserIsAuthorized->execute( $itemId, $request->getUsername() );
 
 		$newStatementGuid = $this->guidGenerator->newStatementId( $itemId );
 		$statement->setGuid( (string)$newStatementGuid );
