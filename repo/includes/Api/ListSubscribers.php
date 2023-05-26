@@ -12,7 +12,6 @@ use SiteLookup;
 use stdClass;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\Lib\SettingsArray;
 use Wikimedia\ParamValidator\ParamValidator;
 use Wikimedia\ParamValidator\TypeDef\IntegerDef;
 use Wikimedia\Rdbms\IResultWrapper;
@@ -40,8 +39,6 @@ class ListSubscribers extends ApiQueryBase {
 	 */
 	private $siteLookup;
 
-	private SettingsArray $repoSettings;
-
 	/**
 	 * @param ApiQuery $mainModule
 	 * @param string $moduleName
@@ -56,15 +53,13 @@ class ListSubscribers extends ApiQueryBase {
 		string $moduleName,
 		ApiErrorReporter $errorReporter,
 		EntityIdParser $idParser,
-		SiteLookup $siteLookup,
-		SettingsArray $repoSettings
+		SiteLookup $siteLookup
 	) {
 		parent::__construct( $mainModule, $moduleName, 'wbls' );
 
 		$this->errorReporter = $errorReporter;
 		$this->idParser = $idParser;
 		$this->siteLookup = $siteLookup;
-		$this->repoSettings = $repoSettings;
 	}
 
 	public static function factory(
@@ -72,16 +67,14 @@ class ListSubscribers extends ApiQueryBase {
 		string $moduleName,
 		SiteLookup $siteLookup,
 		ApiHelperFactory $apiHelperFactory,
-		EntityIdParser $entityIdParser,
-		SettingsArray $repoSettings
+		EntityIdParser $entityIdParser
 	): self {
 		return new self(
 			$apiQuery,
 			$moduleName,
 			$apiHelperFactory->getErrorReporter( $apiQuery ),
 			$entityIdParser,
-			$siteLookup,
-			$repoSettings
+			$siteLookup
 		);
 	}
 
@@ -185,23 +178,12 @@ class ListSubscribers extends ApiQueryBase {
 				$entry = [ 'subscribers' => [ $entry ] ];
 				ApiResult::setIndexedTagName( $entry['subscribers'], 'subscriber' );
 
-				if ( $this->repoSettings->getSetting( 'tmpWbsubscribersSensibleOutput' ) ) {
-					$fit = $result->addValue( [ 'query', $this->getModuleName() ], $row->cs_entity_id, $entry );
-				} else {
-					$fit = $result->addValue( [ 'query', 'subscribers' ], $row->cs_entity_id, $entry );
-				}
+				$fit = $result->addValue( [ 'query', $this->getModuleName() ], $row->cs_entity_id, $entry );
 			} else {
-				if ( $this->repoSettings->getSetting( 'tmpWbsubscribersSensibleOutput' ) ) {
-					$fit = $result->addValue(
-						[ 'query', $this->getModuleName(), $row->cs_entity_id, 'subscribers' ],
-						null,
-						$entry );
-				} else {
-					$fit = $result->addValue(
-						[ 'query', 'subscribers', $row->cs_entity_id, 'subscribers' ],
-						null,
-						$entry );
-				}
+				$fit = $result->addValue(
+					[ 'query', $this->getModuleName(), $row->cs_entity_id, 'subscribers' ],
+					null,
+					$entry );
 			}
 
 			if ( !$fit ) {
