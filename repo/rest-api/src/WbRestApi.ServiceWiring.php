@@ -121,9 +121,9 @@ return [
 
 	'WbRestApi.GetItemAliases' => function( MediaWikiServices $services ): GetItemAliases {
 		return new GetItemAliases(
-			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
+			new GetLatestItemRevisionMetadata( new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
 				WikibaseRepo::getEntityRevisionLookup( $services )
-			),
+			) ),
 			new PrefetchingTermLookupAliasesRetriever(
 				WikibaseRepo::getPrefetchingTermLookup( $services ),
 				WikibaseRepo::getTermsLanguages( $services )
