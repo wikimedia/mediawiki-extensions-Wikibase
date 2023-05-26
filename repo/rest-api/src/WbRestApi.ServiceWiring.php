@@ -400,7 +400,9 @@ return [
 					ChangeTags::listExplicitlyDefinedTags()
 				)
 			),
-			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever( WikibaseRepo::getEntityRevisionLookup() ),
+			new GetLatestItemRevisionMetadata( new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
+				WikibaseRepo::getEntityRevisionLookup( $services )
+			) ),
 			$itemDataRetriever,
 			WbRestApi::getItemUpdater( $services ),
 			new WikibaseEntityPermissionChecker(

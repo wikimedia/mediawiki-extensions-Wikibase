@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\SetItemDescription;
 use Wikibase\DataModel\Entity\Item as DataModelItem;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Tests\NewItem;
+use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescriptionRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescriptionValidator;
@@ -17,10 +18,8 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Item as ReadModelItem;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
-use Wikibase\Repo\RestApi\Domain\ReadModel\LatestItemRevisionMetadataResult;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
@@ -37,7 +36,7 @@ class SetItemDescriptionTest extends \PHPUnit\Framework\TestCase {
 	use EditMetadataHelper;
 
 	private SetItemDescriptionValidator $validator;
-	private ItemRevisionMetadataRetriever $metadataRetriever;
+	private GetLatestItemRevisionMetadata $getRevisionMetadata;
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
 	private PermissionChecker $permissionChecker;
@@ -46,9 +45,9 @@ class SetItemDescriptionTest extends \PHPUnit\Framework\TestCase {
 		parent::setUp();
 
 		$this->validator = $this->createStub( SetItemDescriptionValidator::class );
-		$this->metadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
-		$this->metadataRetriever->method( 'getLatestRevisionMetadata' )
-			->willReturn( LatestItemRevisionMetadataResult::concreteRevision( 123, '20221212040505' ) );
+		$this->getRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
+		$this->getRevisionMetadata->method( 'execute' )
+			->willReturn( [ 123, '20221212040505' ] );
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
 		$this->permissionChecker = $this->createStub( PermissionChecker::class );
@@ -155,11 +154,12 @@ class SetItemDescriptionTest extends \PHPUnit\Framework\TestCase {
 		}
 	}
 
-	public function testGivenItemNotFound_throwsUseCaseError(): void {
+	public function testGivenItemNotFoundOrRedirect_throws(): void {
 		$itemId = 'Q789';
-		$this->metadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
-		$this->metadataRetriever->method( 'getLatestRevisionMetadata' )
-			->willReturn( LatestItemRevisionMetadataResult::itemNotFound() );
+		$expectedException = $this->createStub( UseCaseException::class );
+		$this->getRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
+		$this->getRevisionMetadata->method( 'execute' )
+			->willThrowException( $expectedException );
 
 		try {
 			$this->newUseCase()->execute( new SetItemDescriptionRequest(
@@ -172,43 +172,13 @@ class SetItemDescriptionTest extends \PHPUnit\Framework\TestCase {
 				null
 			) );
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::ITEM_NOT_FOUND, $e->getErrorCode() );
-			$this->assertStringContainsString( $itemId, $e->getErrorMessage() );
-		}
-	}
-
-	public function testGivenItemRedirect_throwsUseCaseError(): void {
-		$redirectSource = 'Q321';
-		$redirectTarget = 'Q123';
-
-		$this->metadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
-		$this->metadataRetriever->method( 'getLatestRevisionMetadata' )
-			->willReturn( LatestItemRevisionMetadataResult::redirect( new ItemId( $redirectTarget ) ) );
-
-		try {
-			$this->newUseCase()->execute( new SetItemDescriptionRequest(
-				$redirectSource,
-				'en',
-				'test description',
-				[],
-				false,
-				null,
-				null
-			) );
-			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::ITEM_REDIRECTED, $e->getErrorCode() );
-			$this->assertStringContainsString( $redirectSource, $e->getErrorMessage() );
-			$this->assertStringContainsString( $redirectTarget, $e->getErrorMessage() );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( $expectedException, $e );
 		}
 	}
 
 	public function testGivenEditIsUnauthorized_throwsUseCaseError(): void {
 		$itemId = new ItemId( 'Q123' );
-		$this->metadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
-		$this->metadataRetriever->method( 'getLatestRevisionMetadata' )
-			->willReturn( LatestItemRevisionMetadataResult::concreteRevision( 321, '20201111070707' ) );
 
 		$this->permissionChecker = $this->createMock( PermissionChecker::class );
 		$this->permissionChecker->expects( $this->once() )
@@ -238,7 +208,7 @@ class SetItemDescriptionTest extends \PHPUnit\Framework\TestCase {
 	private function newUseCase(): SetItemDescription {
 		return new SetItemDescription(
 			$this->validator,
-			$this->metadataRetriever,
+			$this->getRevisionMetadata,
 			$this->itemRetriever,
 			$this->itemUpdater,
 			$this->permissionChecker

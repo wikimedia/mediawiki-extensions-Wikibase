@@ -4,12 +4,12 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription;
 
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
+use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
 
@@ -19,20 +19,20 @@ use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
 class SetItemDescription {
 
 	private SetItemDescriptionValidator $validator;
-	private ItemRevisionMetadataRetriever $metadataRetriever;
+	private GetLatestItemRevisionMetadata $getRevisionMetadata;
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
 	private PermissionChecker $permissionChecker;
 
 	public function __construct(
 		SetItemDescriptionValidator $validator,
-		ItemRevisionMetadataRetriever $metadataRetriever,
+		GetLatestItemRevisionMetadata $getRevisionMetadata,
 		ItemRetriever $itemRetriever,
 		ItemUpdater $itemUpdater,
 		PermissionChecker $permissionChecker
 	) {
 		$this->validator = $validator;
-		$this->metadataRetriever = $metadataRetriever;
+		$this->getRevisionMetadata = $getRevisionMetadata;
 		$this->itemRetriever = $itemRetriever;
 		$this->itemUpdater = $itemUpdater;
 		$this->permissionChecker = $permissionChecker;
@@ -44,18 +44,7 @@ class SetItemDescription {
 		$itemId = new ItemId( $request->getItemId() );
 		$description = new Term( $request->getLanguageCode(), $request->getDescription() );
 
-		$latestRevision = $this->metadataRetriever->getLatestRevisionMetadata( $itemId );
-		if ( $latestRevision->isRedirect() ) {
-			throw new UseCaseError(
-				UseCaseError::ITEM_REDIRECTED,
-				"Item {$request->getItemId()} has been merged into {$latestRevision->getRedirectTarget()}."
-			);
-		} elseif ( !$latestRevision->itemExists() ) {
-			throw new UseCaseError(
-				UseCaseError::ITEM_NOT_FOUND,
-				"Could not find an item with the ID: {$request->getItemId()}"
-			);
-		}
+		$this->getRevisionMetadata->execute( $itemId ); // checks redirect and item existence
 
 		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
 		$user = $request->getUsername() !== null ? User::withUsername( $request->getUsername() ) : User::newAnonymous();
