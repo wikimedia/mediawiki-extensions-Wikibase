@@ -4,6 +4,7 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels;
 
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
+use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
@@ -12,7 +13,6 @@ use Wikibase\Repo\RestApi\Domain\Services\Exceptions\PatchPathException;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\PatchTestConditionFailedException;
 use Wikibase\Repo\RestApi\Domain\Services\ItemLabelsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\JsonPatcher;
 use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
@@ -28,7 +28,7 @@ class PatchItemLabels {
 	private PatchedLabelsValidator $patchedLabelsValidator;
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
-	private ItemRevisionMetadataRetriever $revisionMetadataRetriever;
+	private GetLatestItemRevisionMetadata $getRevisionMetadata;
 	private PermissionChecker $permissionChecker;
 	private PatchItemLabelsValidator $useCaseValidator;
 
@@ -39,7 +39,7 @@ class PatchItemLabels {
 		PatchedLabelsValidator $patchedLabelsValidator,
 		ItemRetriever $itemRetriever,
 		ItemUpdater $itemUpdater,
-		ItemRevisionMetadataRetriever $revisionMetadataRetriever,
+		GetLatestItemRevisionMetadata $getRevisionMetadata,
 		PermissionChecker $permissionChecker,
 		PatchItemLabelsValidator $useCaseValidator
 	) {
@@ -49,7 +49,7 @@ class PatchItemLabels {
 		$this->patchedLabelsValidator = $patchedLabelsValidator;
 		$this->itemRetriever = $itemRetriever;
 		$this->itemUpdater = $itemUpdater;
-		$this->revisionMetadataRetriever = $revisionMetadataRetriever;
+		$this->getRevisionMetadata = $getRevisionMetadata;
 		$this->permissionChecker = $permissionChecker;
 		$this->useCaseValidator = $useCaseValidator;
 	}
@@ -59,18 +59,7 @@ class PatchItemLabels {
 
 		$itemId = new ItemId( $request->getItemId() );
 
-		$latestRevision = $this->revisionMetadataRetriever->getLatestRevisionMetadata( $itemId );
-		if ( $latestRevision->isRedirect() ) {
-			throw new UseCaseError(
-				UseCaseError::ITEM_REDIRECTED,
-				"Item {$request->getItemId()} has been merged into {$latestRevision->getRedirectTarget()}."
-			);
-		} elseif ( !$latestRevision->itemExists() ) {
-			throw new UseCaseError(
-				UseCaseError::ITEM_NOT_FOUND,
-				"Could not find an item with the ID: {$request->getItemId()}"
-			);
-		}
+		$this->getRevisionMetadata->execute( $itemId ); // checks redirect and item existence
 
 		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
 		$user = $request->getUsername() !== null ? User::withUsername( $request->getUsername() ) : User::newAnonymous();

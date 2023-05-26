@@ -10,6 +10,7 @@ use Wikibase\DataModel\Term\TermList;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
+use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchedLabelsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsRequest;
@@ -25,11 +26,9 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Item;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
-use Wikibase\Repo\RestApi\Domain\ReadModel\LatestItemRevisionMetadataResult;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemLabelsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\JsonPatcher;
 use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
@@ -54,7 +53,7 @@ class PatchItemLabelsTest extends TestCase {
 	private PatchedLabelsValidator $patchedLabelsValidator;
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
-	private ItemRevisionMetadataRetriever $metadataRetriever;
+	private GetLatestItemRevisionMetadata $getRevisionMetadata;
 	private PermissionChecker $permissionChecker;
 	private PatchItemLabelsValidator $validator;
 
@@ -71,9 +70,9 @@ class PatchItemLabelsTest extends TestCase {
 		);
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
-		$this->metadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
-		$this->metadataRetriever->method( 'getLatestRevisionMetadata' )
-			->willReturn( LatestItemRevisionMetadataResult::concreteRevision( 321, '20201111070707' ) );
+		$this->getRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
+		$this->getRevisionMetadata->method( 'execute' )
+			->willReturn( [ 321, '20201111070707' ] );
 		$this->permissionChecker = $this->createStub( PermissionChecker::class );
 		$this->permissionChecker->method( 'canEdit' )->willReturn( true );
 		$this->validator = $this->createStub( PatchItemLabelsValidator::class );
@@ -148,11 +147,13 @@ class PatchItemLabelsTest extends TestCase {
 		}
 	}
 
-	public function testGivenItemNotFound_throwsUseCaseError(): void {
+	public function testGivenItemNotFoundOrRedirect_throws(): void {
 		$itemId = 'Q789';
-		$this->metadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
-		$this->metadataRetriever->method( 'getLatestRevisionMetadata' )
-			->willReturn( LatestItemRevisionMetadataResult::itemNotFound() );
+		$expectedException = $this->createStub( UseCaseException::class );
+
+		$this->getRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
+		$this->getRevisionMetadata->method( 'execute' )
+			->willThrowException( $expectedException );
 
 		try {
 			$this->newUseCase()->execute(
@@ -172,41 +173,8 @@ class PatchItemLabelsTest extends TestCase {
 				)
 			);
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::ITEM_NOT_FOUND, $e->getErrorCode() );
-			$this->assertStringContainsString( $itemId, $e->getErrorMessage() );
-		}
-	}
-
-	public function testGivenItemRedirect_throwsUseCaseError(): void {
-		$redirectSource = 'Q321';
-		$redirectTarget = 'Q123';
-
-		$this->metadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
-		$this->metadataRetriever->method( 'getLatestRevisionMetadata' )
-			->willReturn( LatestItemRevisionMetadataResult::redirect( new ItemId( $redirectTarget ) ) );
-
-		try {
-			$this->newUseCase()->execute(
-				new PatchItemLabelsRequest(
-					$redirectSource,
-					[
-						[
-							'op' => 'add',
-							'path' => '/ar',
-							'value' => 'new arabic label',
-						],
-					],
-					[],
-					false,
-					null,
-					null
-				)
-			);
-			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::ITEM_REDIRECTED, $e->getErrorCode() );
-			$this->assertStringContainsString( $redirectTarget, $e->getErrorMessage() );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( $expectedException, $e );
 		}
 	}
 
@@ -335,7 +303,7 @@ class PatchItemLabelsTest extends TestCase {
 			$this->patchedLabelsValidator,
 			$this->itemRetriever,
 			$this->itemUpdater,
-			$this->metadataRetriever,
+			$this->getRevisionMetadata,
 			$this->permissionChecker,
 			$this->validator
 		);
