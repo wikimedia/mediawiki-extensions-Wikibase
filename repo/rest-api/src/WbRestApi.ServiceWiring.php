@@ -425,7 +425,9 @@ return [
 					WbRestApi::getItemDataRetriever( $services )
 				)
 			),
-			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever( WikibaseRepo::getEntityRevisionLookup() ),
+			new GetLatestItemRevisionMetadata( new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
+				WikibaseRepo::getEntityRevisionLookup( $services )
+			) ),
 			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getItemUpdater( $services ),
 			new WikibaseEntityPermissionChecker(
