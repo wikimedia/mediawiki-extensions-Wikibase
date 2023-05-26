@@ -30,8 +30,7 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 	private $repoLinker;
 
 	public function __construct( ApiQuery $query, string $moduleName, RepoLinker $repoLinker ) {
-		// This module temporarily supports the "wbeu" and "wbleu" prefixes (T196962)
-		parent::__construct( $query, $moduleName, '' );
+		parent::__construct( $query, $moduleName, 'wbleu' );
 
 		$this->repoLinker = $repoLinker;
 	}
@@ -50,10 +49,7 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 	}
 
 	public function run( ApiPageSet $resultPageSet = null ): void {
-		$rawParams = $this->extractRequestParams();
-		$this->validateParams( $rawParams );
-		$isLegacyRequest = $this->isLegacyRequest( $rawParams );
-		$params = $this->canonicalizeParams( $rawParams, $isLegacyRequest );
+		$params = $this->extractRequestParams();
 
 		$res = $this->doQuery( $params, $resultPageSet );
 		if ( !$res ) {
@@ -61,7 +57,7 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 		}
 
 		$prop = array_flip( (array)$params['prop'] );
-		$this->formatResult( $res, $params['limit'], $prop, $resultPageSet, $isLegacyRequest );
+		$this->formatResult( $res, $params['limit'], $prop, $resultPageSet );
 	}
 
 	private function addPageData( object $row ): array {
@@ -76,8 +72,7 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 		IResultWrapper $res,
 		int $limit,
 		array $prop,
-		?ApiPageSet $resultPageSet,
-		bool $isLegacyRequest
+		?ApiPageSet $resultPageSet
 	): void {
 		$entry = [];
 		$count = 0;
@@ -99,7 +94,7 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 
 			if ( $previousRow !== null && $row->eu_page_id !== $previousRow->eu_page_id ) {
 				// finish previous entry: Let's add the data and check if it needs continuation
-				$fit = $this->formatPageData( $previousRow, intval( $previousRow->eu_page_id ), $entry, $result, $isLegacyRequest );
+				$fit = $this->formatPageData( $previousRow, intval( $previousRow->eu_page_id ), $entry, $result );
 				if ( !$fit ) {
 					$this->setContinueFromRow( $row );
 					break;
@@ -117,7 +112,7 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 
 		}
 		if ( $entry ) {
-			$this->formatPageData( $previousRow, intval( $previousRow->eu_page_id ), $entry, $result, $isLegacyRequest );
+			$this->formatPageData( $previousRow, intval( $previousRow->eu_page_id ), $entry, $result );
 		}
 	}
 
@@ -140,12 +135,8 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 		object $row,
 		int $pageId,
 		array $entry,
-		ApiResult $result,
-		bool $isLegacyRequest
+		ApiResult $result
 	): bool {
-		if ( $isLegacyRequest ) {
-			return $this->formatPageDataLegacy( $row, $pageId, $entry, $result );
-		}
 		$pageData = $this->addPageData( $row );
 		$result->addIndexedTagName( [ 'query', 'entityusage' ], 'page' );
 
@@ -154,78 +145,11 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 		return $result->addValue( [ 'query', 'entityusage' ], null, $value );
 	}
 
-	/**
-	 * Legacy output version of formatPageData.
-	 *
-	 * @return bool True the result fits into the output, false otherwise
-	 */
-	private function formatPageDataLegacy( object $row, int $pageId, array $entry, ApiResult $result ): bool {
-		$pageData = $this->addPageData( $row );
-		$result->addValue( [ 'query', 'pages' ], $pageId, $pageData );
-		$fit = $this->legacyAddPageSubItems( $pageId, $entry );
-		return $fit;
-	}
-
-	/**
-	 * Copy of ApiQueryBase::addPageSubItems with hard coded legacy module prefix.
-	 *
-	 * Add a sub-element under the page element with the given page ID
-	 * @param int $pageId
-	 * @param array $data Data array à la ApiResult
-	 * @return bool Whether the element fit in the result
-	 */
-	private function legacyAddPageSubItems( $pageId, $data ) {
-		$result = $this->getResult();
-		ApiResult::setIndexedTagName( $data, 'wbeu' );
-
-		return $result->addValue( [ 'query', 'pages', (int)$pageId ],
-			$this->getModuleName(),
-			$data );
-	}
-
 	private function setContinueFromRow( object $row ): void {
 		$this->setContinueEnumParameter(
 			'continue',
 			"{$row->eu_page_id}|{$row->eu_entity_id}|{$row->eu_aspect}"
 		);
-	}
-
-	private function isLegacyRequest( array $params ): bool {
-		$params = $this->removeDefaultLimitFromParams( $params );
-
-		$isLegacyRequest = false;
-		foreach ( $params as $key => $value ) {
-			if ( $value === null ) {
-				continue;
-			}
-			if ( strpos( $key, 'wbeu' ) === 0 ) {
-				$isLegacyRequest = true;
-			} elseif ( $isLegacyRequest ) {
-				$this->dieWithError( 'wikibase-client-wblistentityusage-param-format-mix' );
-			}
-		}
-
-		return $isLegacyRequest;
-	}
-
-	private function validateParams( array $params ): void {
-		$this->requireOnlyOneParameter( $params, 'wbeuentities', 'wbleuentities' );
-	}
-
-	/**
-	 * Removes the wb(l)eulimit parameters for the given input params array, if they aren't user specified (but defaults).
-	 */
-	private function removeDefaultLimitFromParams( array $params ): array {
-		$request = $this->getRequest();
-		$defaultLimit = $this->getAllowedParamsUnprefixed()['limit'][ParamValidator::PARAM_DEFAULT];
-		if ( $params['wbeulimit'] === $defaultLimit && !$request->getBool( 'wbeulimit' ) ) {
-			unset( $params['wbeulimit'] );
-		}
-		if ( $params['wbleulimit'] === $defaultLimit && !$request->getBool( 'wbleulimit' ) ) {
-			unset( $params['wbleulimit'] );
-		}
-
-		return $params;
 	}
 
 	/**
@@ -290,22 +214,7 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 		] ) );
 	}
 
-	private function canonicalizeParams( array $params, bool $isLegacyRequest ): array {
-		$prefixLength = strlen( $isLegacyRequest ? 'wbeu' : 'wbleu' );
-		$canonicalParams = [];
-		foreach ( $params as $key => $value ) {
-			if ( $isLegacyRequest !== ( strpos( $key, 'wbeu' ) === 0 ) ) {
-				// Only use legacy params on a legacy request
-				continue;
-			}
-			$canonicalKey = substr( $key, $prefixLength );
-			$canonicalParams[$canonicalKey] = $value;
-		}
-
-		return $canonicalParams;
-	}
-
-	private function getAllowedParamsUnprefixed(): array {
+	public function getAllowedParams(): array {
 		return [
 			'prop' => [
 				ParamValidator::PARAM_ISMULTI => true,
@@ -313,7 +222,6 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 					'url',
 				],
 				ApiBase::PARAM_HELP_MSG_PER_VALUE => [],
-				ApiBase::PARAM_HELP_MSG => 'apihelp-query+wblistentityusage-param-prop',
 			],
 			'aspect' => [
 				ParamValidator::PARAM_ISMULTI => true,
@@ -336,13 +244,10 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 					EntityUsage::ALL_USAGE => 'apihelp-query+wbentityusage-paramvalue-aspect-X',
 					EntityUsage::OTHER_USAGE => 'apihelp-query+wbentityusage-paramvalue-aspect-O',
 				],
-				ApiBase::PARAM_HELP_MSG => 'apihelp-query+wblistentityusage-param-aspect',
 			],
 			'entities' => [
 				ParamValidator::PARAM_ISMULTI => true,
-				// Enforced by self::validateParams
-				//ParamValidator::PARAM_REQUIRED => true,
-				ApiBase::PARAM_HELP_MSG => 'apihelp-query+wblistentityusage-param-entities',
+				ParamValidator::PARAM_REQUIRED => true,
 			],
 			'limit' => [
 				ParamValidator::PARAM_DEFAULT => 10,
@@ -350,29 +255,11 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 				IntegerDef::PARAM_MIN => 1,
 				IntegerDef::PARAM_MAX => ApiBase::LIMIT_BIG1,
 				IntegerDef::PARAM_MAX2 => ApiBase::LIMIT_BIG2,
-				ApiBase::PARAM_HELP_MSG => 'apihelp-query+wblistentityusage-param-limit',
 			],
 			'continue' => [
 				ApiBase::PARAM_HELP_MSG => 'api-help-param-continue',
 			],
 		];
-	}
-
-	public function getAllowedParams(): array {
-		$prefixedParams = [];
-		foreach ( $this->getAllowedParamsUnprefixed() as $name => $param ) {
-			$newName = 'wbleu' . $name;
-			$prefixedParams['wbeu' . $name] = array_merge(
-				[
-					ParamValidator::PARAM_DEPRECATED => true,
-					ApiBase::PARAM_HELP_MSG_APPEND => [ [ 'apihelp-query+wblistentityusage-format-migration', $newName ] ],
-				],
-				$param
-			);
-			$prefixedParams[$newName] = $param;
-		}
-
-		return $prefixedParams;
 	}
 
 	protected function getExamplesMessages(): array {

@@ -41,8 +41,6 @@
 	"apihelp-query+wblistentityusage-example-simple": "Get pages that use the entity <kbd>Q2</kbd>.",
 	"apihelp-query+wblistentityusage-example-url": "Get pages that use the entity <kbd>Q2</kbd> with URL included.",
 	"apihelp-query+wblistentityusage-example-aspect": "Get pages that use the entity <kbd>Q2</kbd> and the aspect was sitelink or statement.",
-	"apihelp-query+wblistentityusage-format-migration": "This module features a new parameter format. This parameter has been superseded by \"$1\".",
-	"wikibase-client-wblistentityusage-param-format-mix": "Legacy \"wblistentityusage\" parameters (prefix wbeu) and new ones (prefix wbleu) must not be used concurrently in one request.",
 	"apihelp-query+pageterms-description": "Get the {{WBREPONAME}} terms (typically labels, descriptions and aliases) associated with a page via a sitelink.",
 	"apihelp-query+pageterms-summary": "Get the {{WBREPONAME}} terms (typically labels, descriptions and aliases) associated with a page via a sitelink.",
 	"apihelp-query+pageterms-example-simple": "Get all terms associated with the page 'London', in the user language.",
