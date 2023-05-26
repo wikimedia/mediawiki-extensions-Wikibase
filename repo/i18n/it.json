@@ -266,6 +266,7 @@
 	"wikibase-setlabeldescriptionaliases-description-label": "Descrizione:",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "Alias:",
 	"wikibase-setlabeldescriptionaliases-submit": "Imposta etichetta, descrizione e alias",
+	"wikibase-setlabeldescriptionaliases-continue": "Continua",
 	"special-setsitelink": "Imposta un collegamento al sito di elementi",
 	"wikibase-setsitelink-introfull": "Stai impostando il collegamento al sito $2 per [[:$1]].",
 	"wikibase-setsitelink-intro": "Questo modulo ti consente di impostare il collegamento al sito per un elemento. È necessario fornire l'ID dell'elemento (per esempio \"Q23\"), l'ID del sito (per esempio \"itwiki\") e il collegamento da impostare.",

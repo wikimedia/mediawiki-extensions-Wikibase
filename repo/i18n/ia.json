@@ -259,6 +259,7 @@
 	"wikibase-setlabeldescriptionaliases-description-label": "Description:",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "Aliases:",
 	"wikibase-setlabeldescriptionaliases-submit": "Definir etiquetta, description e aliases",
+	"wikibase-setlabeldescriptionaliases-continue": "Continuar",
 	"special-setsitelink": "Fixar ligamine de sito del elemento",
 	"wikibase-setsitelink-introfull": "Tu es in curso de definir le ligamine de sito de $2 pro [[:$1]].",
 	"wikibase-setsitelink-intro": "Iste formulario te permitte fixar le ligamine de sito de un entitate. Tu debe fornir le ID del entitate (p.ex. Q23), un ID de sito (p.ex. \"iawiki\") e le ligamine de sito a fixar.",

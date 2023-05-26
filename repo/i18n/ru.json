@@ -287,6 +287,7 @@
 	"wikibase-setlabeldescriptionaliases-description-label": "Описание:",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "Синонимы:",
 	"wikibase-setlabeldescriptionaliases-submit": "Установить название, описание и синонимы",
+	"wikibase-setlabeldescriptionaliases-continue": "Продолжить",
 	"special-setsitelink": "Задать ссылку элемента",
 	"wikibase-setsitelink-introfull": "Вы задали викиссылку $2 на [[:$1]].",
 	"wikibase-setsitelink-intro": "Эта форма позволяет вам задать ссылку на сайт для какого-либо элемента. Необходимо ввести идентификатор элемента (например, Q23), идентификатор сайта (например, «ruwiki») и название страницы этого сайта, на которую вы хотите сослаться.",
