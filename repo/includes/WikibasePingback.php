@@ -153,13 +153,15 @@ class WikibasePingback {
 
 		$timestamp = MWTimestamp::time();
 
-		return $dbw->upsert(
+		$dbw->upsert(
 			'updatelog',
 			[ 'ul_key' => $this->key, 'ul_value' => $timestamp ],
 			'ul_key',
 			[ 'ul_value' => $timestamp ],
 			__METHOD__
 		);
+
+		return true;
 	}
 
 	/**
