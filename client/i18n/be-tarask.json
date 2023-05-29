@@ -109,7 +109,7 @@
 	"notification-bundle-header-page-connection": "<strong>$3</strong> і {{PLURAL:$4|1=адна іншыя старонка была {{GENDER:$2|далучаная}}|$4 іншыя старонкі былі {{GENDER:$2|далучаныя}}|$4 іншых старонак былі {{GENDER:$2|далучаныя}}|100=99+ іншых старонак былі {{GENDER:$2|далучаныя}}}} да элемэнтаў {{GRAMMAR:родны|{{WBREPONAME}}}}, дзе могуць зьбірацца зьвесткі, датычныя гэтых тэмаў.",
 	"notification-link-text-view-item": "{{GENDER:$1|Праглядзець}} элемэнт",
 	"notification-subject-page-connection": "Старонка ў {{GRAMMAR:месны|{{SITENAME}}}}, якую вы {{GENDER:$3|стварылі}}, была {{GENDER:$2|далучаная}} да элемэнту {{GRAMMAR:родны|{{WBREPONAME}}}}",
-	"unresolved-property-category": "Старонкі зь недаступнымі ўласьцівасьцямі",
+	"unresolved-property-category": "Вікіпэдыя:Старонкі зь недаступнымі ўласьцівасьцямі",
 	"unresolved-property-category-desc": "Гэтая катэгорыя ўтрымлівае старонкі, якія спасылаюцца на ўласьцівасьці {{GRAMMAR:родны|{{WBREPONAME}}}}, якія не атрымалася знайсьці ні паводле ідэнтыфікатару, ні паводле меткі.",
 	"connected-redirect-category": "Перанакіраваньні, злучаныя з элемэнтам {{grammar:родны|{{WBREPONAME}}}}",
 	"connected-redirect-category-desc": "Гэтая катэгорыя ўтрымлівае старонкі-перанакіраваньні, злучаныя з элемэнтам {{grammar:родны|{{WBREPONAME}}}}."
