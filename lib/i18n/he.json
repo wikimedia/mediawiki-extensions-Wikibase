@@ -132,7 +132,7 @@
 	"wikibase-entity-summary-wbsetqualifier-update": "{{PLURAL:$1|שוּנה מבחין|שונו מבחינים}}",
 	"wikibase-entity-summary-wbremovequalifiers-remove": "{{PLURAL:$1|הוסר מבחין|הוסרו מבחינים}}",
 	"wikibase-entity-summary-wbremovereferences-remove": "{{PLURAL:$3|הוסרה הפניה למקור|הוסרו הפניות למקורות}} מטענה",
-	"wikibase-entity-summary-wbmergeitems-from": "פריט שמוזג מ{{GRAMMAR:תחילית|$3}}",
+	"wikibase-entity-summary-wbmergeitems-from": "פריט מוזג מ־$3",
 	"wikibase-entity-summary-wbmergeitems-to": "הפריט מוּזג אל $3",
 	"wikibase-item-summary-wbcreate-new": "נוצר פריט חדש",
 	"wikibase-item-summary-wbeditentity": "נוצר פריט חדש",

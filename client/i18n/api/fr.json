@@ -32,8 +32,6 @@
 	"apihelp-query+wblistentityusage-example-simple": "Obtenir les pages qui utilisent l’entité <kbd>Q2</kbd>.",
 	"apihelp-query+wblistentityusage-example-url": "Obtenir les pages qui utilisent l’entité <kbd>Q2</kbd> avec l’URL incluse.",
 	"apihelp-query+wblistentityusage-example-aspect": "Obtenir les pages qui utilisent l’entité <kbd>Q2</kbd> et dont l’aspect était un lien de site ou une déclaration.",
-	"apihelp-query+wblistentityusage-format-migration": "ce module propose un nouveau paramètre de format ; ce paramètre a été remplacé par « $1 ».",
-	"wikibase-client-wblistentityusage-param-format-mix": "les anciens paramètres « wblistentityusage » (avec le préfixe « wbeu ») et les nouveaux (avec le préfixe « wbleu ») ne doivent pas être utilisés simultanément dans une même requête.",
 	"apihelp-query+pageterms-description": "Obtenir les termes de {{WBREPONAME}} (typiquement, les libellés, les descriptions et les alias) associés à une page via un lien de site.",
 	"apihelp-query+pageterms-summary": "Obtenir les termes de {{WBREPONAME}} (typiquement, les libellés, descriptions et alias) associés à une page via un lien de site.",
 	"apihelp-query+pageterms-example-simple": "Obtenir tous les termes associés avec la page « Londres », dans la langue de l’utilisateur.",

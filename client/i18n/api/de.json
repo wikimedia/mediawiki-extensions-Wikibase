@@ -32,8 +32,6 @@
 	"apihelp-query+wblistentityusage-example-simple": "Ruft Seiten ab, die das Objekt <kbd>Q2</kbd> verwenden.",
 	"apihelp-query+wblistentityusage-example-url": "Ruft Seiten ab, die das Objekt <kbd>Q2</kbd> verwenden, inklusive der URL.",
 	"apihelp-query+wblistentityusage-example-aspect": "Ruft Seiten ab, die das Objekt <kbd>Q2</kbd> verwenden, und der Aspekt war Websitelink oder Aussage.",
-	"apihelp-query+wblistentityusage-format-migration": "Dieses Modul verfügt über ein neues Parameterformat. Dieser Parameter wurde durch „$1“ ersetzt.",
-	"wikibase-client-wblistentityusage-param-format-mix": "Ältere „wblistentityusage“-Parameter (Präfix wbeu) und neue (Präfix wbleu) dürfen nicht gleichzeitig in einer Anfrage verwendet werden.",
 	"apihelp-query+pageterms-description": "Ruft die {{WBREPONAME}}-Begriffe ab (typischerweise Bezeichnungen, Beschreibungen und Aliasse), die mit einer Seite über einen Websitelink verknüpft sind.",
 	"apihelp-query+pageterms-summary": "Ruft die {{WBREPONAME}}-Begriffe ab (typischerweise Bezeichnungen, Beschreibungen und Aliasse), die mit einer Seite über einen Link verknüpft sind.",
 	"apihelp-query+pageterms-example-simple": "Ruft alle Begriffe im Zusammenhang mit der Seite „London“ in der Benutzersprache ab.",

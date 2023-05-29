@@ -30,8 +30,6 @@
 	"apihelp-query+wblistentityusage-example-simple": "קבלת דפים שמשתמשים בישות <kbd>Q2</kbd>.",
 	"apihelp-query+wblistentityusage-example-url": "קבלת דפים שמשתמשים בישות <kbd>Q2</kbd> עם ה־URL כלול.",
 	"apihelp-query+wblistentityusage-example-aspect": "קבלת דפים שמשתמשים בישות <kbd>Q2</kbd> וההיבט היה קישור או קביעה.",
-	"apihelp-query+wblistentityusage-format-migration": "המודול הזה מכיל תסדיר פרמטר חדש. הפרמטר הזה הוחלף בפרמטר \"$1\".",
-	"wikibase-client-wblistentityusage-param-format-mix": "אין להשתמש בפרמטרים מהדור הקודם של \"wblistentityusage\" (תחילית wbeu) ובפרמטרים חדשים (תחילית wbleu) ביחד באותה בקשה.",
 	"apihelp-query+pageterms-description": "קבלת איברי {{WBREPONAME}} (בדרך־כלל תוויות, תיאורים, וכינויים) שמשויכים לדף דרך קישור אתר.",
 	"apihelp-query+pageterms-summary": "קבלת מושגי {{WBREPONAME}} (בדרך־כלל תוויות, תיאורים, וכינויים) שמשויכים לדף דרך קישור אתר.",
 	"apihelp-query+pageterms-example-simple": "קבלת כל האיברים המשויכים לדף \"London\", בשפה של המשתמש.",

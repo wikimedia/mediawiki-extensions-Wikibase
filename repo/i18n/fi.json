@@ -213,6 +213,7 @@
 	"wikibase-setlabeldescriptionaliases-description-label": "Kuvaus:",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "Aliakset:",
 	"wikibase-setlabeldescriptionaliases-submit": "Aseta nimi, kuvaus ja aliakset",
+	"wikibase-setlabeldescriptionaliases-continue": "Jatka",
 	"special-setsitelink": "Aseta kohteen sivustolinkki",
 	"wikibase-setsitelink-introfull": "Olet asettamassa sivustolla $2 olevaa linkkiä kohteeseen [[:$1]].",
 	"wikibase-setsitelink-intro": "Tällä lomakkeella voit asettaa sivustolinkin kohteeseen. Sinun täytyy antaa kohteen tunniste (esim. Q23), sivuston tunniste (esim. ”fiwiki”) ja sivustolinkki, jonka haluat asettaa.",
