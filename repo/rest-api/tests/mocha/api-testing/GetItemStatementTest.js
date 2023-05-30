@@ -117,6 +117,19 @@ describe( 'GET statement', () => {
 					assert.equal( response.body.code, 'statement-not-found' );
 					assert.include( response.body.message, statementId );
 				} );
+
+				it( 'statement subject is a redirect', async () => {
+					const redirectSource = await entityHelper.createRedirectForItem( testItemId );
+					const statementId = redirectSource + '$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+					const response = await newRequestBuilder( statementId )
+						.assertValidRequest()
+						.makeRequest();
+
+					expect( response ).to.have.status( 404 );
+					assert.header( response, 'Content-Language', 'en' );
+					assert.equal( response.body.code, 'statement-not-found' );
+					assert.include( response.body.message, statementId );
+				} );
 			} );
 		} );
 	} );
