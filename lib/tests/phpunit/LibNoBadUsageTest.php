@@ -17,7 +17,7 @@ class LibNoBadUsageTest extends NoBadUsageTest {
 			// don’t reference repo or client in lib
 			'WikibaseRepo::' => [
 				'includes/WikibaseSettings.php' => true, // loads settings for both
-				'resources/Resources.php' => 1, // guarded by isRepoEnabled()
+				'resources/Resources.php' => 2, // guarded by isRepoEnabled()
 			],
 			'WikibaseRepo.' => [
 				/*
@@ -35,7 +35,7 @@ class LibNoBadUsageTest extends NoBadUsageTest {
 			'WikibaseClient::' => [
 				'includes/Modules/RepoAccessModule.php' => 1, // guarded by isClientEnabled()
 				'includes/WikibaseSettings.php' => true, // loads settings for both
-				'resources/Resources.php' => 1, // guarded by isClientEnabled()
+				'resources/Resources.php' => 2, // guarded by isClientEnabled()
 			],
 			'WikibaseClient.' => [
 				'includes/WikibaseSettings.php' => true, // loads settings for both

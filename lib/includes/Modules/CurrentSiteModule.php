@@ -10,7 +10,7 @@ use MediaWiki\ResourceLoader as RL;
 use MediaWiki\ResourceLoader\ResourceLoader;
 use MediaWikiSite;
 use MessageLocalizer;
-use Site;
+use RuntimeException;
 use SiteLookup;
 use Wikibase\Lib\LanguageNameLookupFactory;
 use Wikibase\Lib\SettingsArray;
@@ -20,9 +20,8 @@ use Wikibase\Lib\SettingsArray;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  * @author Marius Hoch < hoo@online.de >
- * @author Guergana Tzatchkova < pestanias@yahoo.com >
  */
-class SitesModule extends SitesModuleBase {
+class CurrentSiteModule extends SitesModuleBase {
 
 	/**
 	 * How many seconds the result of getSiteDetails() is cached.
@@ -64,7 +63,7 @@ class SitesModule extends SitesModuleBase {
 
 	/**
 	 * Used to propagate information about sites to JavaScript.
-	 * Sites infos will be available in 'wbSiteDetails' config var.
+	 * Sites infos will be available in 'wbCurrentSiteDetails' config var.
 	 * @see RL\Module::getScript
 	 *
 	 * @param RL\Context $context
@@ -73,7 +72,7 @@ class SitesModule extends SitesModuleBase {
 	public function getScript( RL\Context $context ): string {
 		$languageCode = $context->getLanguage();
 		return $this->cache->getWithSetCallback(
-			$this->cache->makeKey( 'wikibase-sites-module', 'script', $languageCode ),
+			$this->cache->makeKey( 'wikibase-current-site-module', 'script', $languageCode ),
 			self::SITE_DETAILS_TTL,
 			function () use ( $context ) {
 				return $this->makeScript( $context );
@@ -86,40 +85,27 @@ class SitesModule extends SitesModuleBase {
 	 * @return string JavaScript Code
 	 */
 	protected function makeScript( MessageLocalizer $localizer ): string {
-		$groups = $this->getSetting( 'siteLinkGroups' );
-		$specialGroups = $this->getSetting( 'specialSiteLinkGroups' );
-		$specialPos = array_search( 'special', $groups );
-		if ( $specialPos !== false ) {
-			// The "special" group actually maps to multiple groups
-			array_splice( $groups, $specialPos, 1, $specialGroups );
+
+		$globalId = $this->getSetting( 'siteGlobalID' );
+
+		$site = $this->siteLookup->getSite( $globalId );
+
+		if ( $site === null ) {
+			// provide empty site details if site is null, this is needed for freshly
+			// installed MediaWikis and for tests that will otherwise crash if the site
+			// is null
+			$currentSiteDetails = [ 'id' => $globalId ];
+		} elseif ( !( $site instanceof MediaWikiSite ) ) {
+			throw new RuntimeException( 'the current site has to be of type MediaWikiSite' );
+		} else {
+			$specialGroups = $this->getSetting( 'specialSiteLinkGroups' );
+			$currentSiteDetails = $this->computeSiteDetails(
+				$site,
+				$specialGroups,
+				$localizer,
+			);
 		}
-
-		$siteDetails = [];
-		/**
-		 * @var MediaWikiSite $site
-		 */
-		foreach ( $this->siteLookup->getSites() as $site ) {
-			if ( $this->shouldSiteBeIncluded( $site, $groups ) ) {
-				$siteDetails[$site->getGlobalId()] = $this->computeSiteDetails(
-					$site,
-					$specialGroups,
-					$localizer,
-				);
-			}
-		}
-
-		return ResourceLoader::makeConfigSetScript( [ 'wbSiteDetails' => $siteDetails ] );
-	}
-
-	/**
-	 * Whether it's needed to add a Site to the JS variable.
-	 *
-	 * @param Site $site
-	 * @param string[] $groups
-	 * @return bool
-	 */
-	private function shouldSiteBeIncluded( Site $site, array $groups ): bool {
-		return $site->getType() === Site::TYPE_MEDIAWIKI && in_array( $site->getGroup(), $groups );
+		return ResourceLoader::makeConfigSetScript( [ 'wbCurrentSiteDetails' => $currentSiteDetails ] );
 	}
 
 }
