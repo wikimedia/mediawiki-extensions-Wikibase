@@ -11,7 +11,6 @@ use Wikibase\Client\Usage\Sql\EntityUsageTable;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Rdbms\ClientDomainDb;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
-use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\IResultWrapper;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 
@@ -163,25 +162,20 @@ class BulkSubscriptionUpdater {
 	 */
 	private function getUpdateBatch( array &$continuation = null ) {
 		$dbr = $this->localConnectionManager->getReadConnection();
+		$queryBuilder = $dbr->newSelectQueryBuilder();
+		$queryBuilder->distinct()
+			->select( 'eu_entity_id' )
+			->from( EntityUsageTable::DEFAULT_TABLE_NAME );
 
-		if ( empty( $continuation ) ) {
-			$continuationCondition = IDatabase::ALL_ROWS;
-		} else {
+		if ( !empty( $continuation ) ) {
 			[ $fromEntityId ] = $continuation;
-			$continuationCondition = 'eu_entity_id > ' . $dbr->addQuotes( $fromEntityId );
+			$queryBuilder->where( $dbr->buildComparison( '>', [ 'eu_entity_id' => $fromEntityId ] ) );
 		}
 
-		$res = $dbr->select(
-			EntityUsageTable::DEFAULT_TABLE_NAME,
-			[ 'eu_entity_id' ],
-			$continuationCondition,
-			__METHOD__,
-			[
-				'ORDER BY' => 'eu_entity_id',
-				'LIMIT' => $this->batchSize,
-				'DISTINCT',
-			]
-		);
+		$queryBuilder->orderBy( 'eu_entity_id' )
+			->limit( $this->batchSize );
+
+		$res = $queryBuilder->caller( __METHOD__ )->fetchResultSet();
 
 		return $this->getEntityIdsFromRows( $res, 'eu_entity_id', $continuation );
 	}
@@ -332,21 +326,16 @@ class BulkSubscriptionUpdater {
 	 * @param string $minId Entity id string indicating the first element in the deletion range
 	 * @param string $maxId Entity id string indicating the last element in the deletion range
 	 */
-	private function deleteSubscriptionRange( $minId, $maxId ) {
+	private function deleteSubscriptionRange( string $minId, string $maxId ): void {
 		$dbw = $this->repoConnectionManager->getWriteConnection();
 		$dbw->startAtomic( __METHOD__ );
 
-		$conditions = [
-			'cs_subscriber_id' => $this->subscriberWikiId,
-			'cs_entity_id >= ' . $dbw->addQuotes( $minId ),
-			'cs_entity_id <= ' . $dbw->addQuotes( $maxId ),
-		];
-
-		$dbw->delete(
-			'wb_changes_subscription',
-			$conditions,
-			__METHOD__
-		);
+		$dbw->newDeleteQueryBuilder()
+			->delete( 'wb_changes_subscription' )
+			->where( [ 'cs_subscriber_id' => $this->subscriberWikiId ] )
+			->andWhere( $dbw->buildComparison( '>=', [ 'cs_entity_id' => $minId ] ) )
+			->andWhere( $dbw->buildComparison( '<=', [ 'cs_entity_id' => $maxId ] ) )
+			->caller( __METHOD__ )->execute();
 
 		$dbw->endAtomic( __METHOD__ );
 	}
