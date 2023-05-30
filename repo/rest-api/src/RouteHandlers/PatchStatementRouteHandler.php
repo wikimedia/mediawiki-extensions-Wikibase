@@ -10,6 +10,7 @@ use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
 use MediaWiki\Rest\Validator\BodyValidator;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
+use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatementResponse;
@@ -109,8 +110,21 @@ class PatchStatementRouteHandler extends SimpleHandler {
 				)
 			);
 		} catch ( UseCaseError $e ) {
+			if ( $e->getErrorCode() === UseCaseError::ITEM_NOT_FOUND ) {
+				return $this->respondStatementNotFound( $statementId );
+			}
+
 			return $this->responseFactory->newErrorResponseFromException( $e );
+		} catch ( ItemRedirect $e ) {
+			return $this->respondStatementNotFound( $statementId );
 		}
+	}
+
+	private function respondStatementNotFound( string $statementId ): Response {
+		return $this->responseFactory->newErrorResponse(
+			UseCaseError::STATEMENT_NOT_FOUND,
+			"Could not find a statement with the ID: $statementId"
+		);
 	}
 
 	public function getParamSettings(): array {
