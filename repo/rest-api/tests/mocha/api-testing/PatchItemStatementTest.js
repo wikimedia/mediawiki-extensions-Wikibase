@@ -385,6 +385,17 @@ describe( 'PATCH statement tests', () => {
 					assertValid404Response( response, 'statement-not-found' );
 					assert.include( response.body.message, statementId );
 				} );
+
+				it( 'statement subject is a redirect', async () => {
+					const redirectSource = await entityHelper.createRedirectForItem( testItemId );
+					const statementId = redirectSource + '$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+					const response = await newPatchRequestBuilder( statementId, [] )
+						.assertValidRequest()
+						.makeRequest();
+
+					assertValid404Response( response, 'statement-not-found' );
+					assert.include( response.body.message, statementId );
+				} );
 			} );
 
 			describe( '409 conflict', () => {

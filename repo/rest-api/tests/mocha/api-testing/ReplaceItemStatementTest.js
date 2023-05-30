@@ -360,14 +360,13 @@ describe( 'PUT statement tests', () => {
 			} );
 
 			describe( '404 error response', () => {
-
 				it( 'statement not found on item', async () => {
 					const statementId = testItemId + '$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-					const response = await newReplaceRequestBuilder( testItemId, statementId )
-						.withJsonBodyParam(
-							'statement',
-							entityHelper.newStatementWithRandomStringValue( testPropertyId )
-						).assertValidRequest().makeRequest();
+					const response = await newReplaceRequestBuilder(
+						testItemId,
+						statementId,
+						entityHelper.newStatementWithRandomStringValue( testPropertyId )
+					).assertValidRequest().makeRequest();
 
 					expect( response ).to.have.status( 404 );
 					assert.header( response, 'Content-Language', 'en' );
@@ -375,6 +374,20 @@ describe( 'PUT statement tests', () => {
 					assert.include( response.body.message, statementId );
 				} );
 
+				it( 'statement subject is a redirect', async () => {
+					const redirectSource = await entityHelper.createRedirectForItem( testItemId );
+					const statementId = redirectSource + '$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+					const response = await newReplaceRequestBuilder(
+						testItemId,
+						statementId,
+						entityHelper.newStatementWithRandomStringValue( testPropertyId )
+					).assertValidRequest().makeRequest();
+
+					expect( response ).to.have.status( 404 );
+					assert.header( response, 'Content-Language', 'en' );
+					assert.equal( response.body.code, 'statement-not-found' );
+					assert.include( response.body.message, statementId );
+				} );
 			} );
 
 			describe( '415 error response', () => {
