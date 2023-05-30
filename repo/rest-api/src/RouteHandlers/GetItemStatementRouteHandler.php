@@ -12,6 +12,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatementResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
@@ -78,6 +79,11 @@ class GetItemStatementRouteHandler extends SimpleHandler {
 			);
 		} catch ( UseCaseError $e ) {
 			return $this->responseFactory->newErrorResponseFromException( $e );
+		} catch ( ItemRedirect $e ) {
+			return $this->responseFactory->newErrorResponse(
+				UseCaseError::STATEMENT_NOT_FOUND,
+				"Could not find a statement with the ID: $statementId"
+			);
 		}
 	}
 
