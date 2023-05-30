@@ -9,7 +9,6 @@ use MediaWiki\Request\FauxRequest;
 use MediaWikiLangTestCase;
 use RequestContext;
 use Wikibase\DataModel\Entity\ItemIdParser;
-use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\Api\ListSubscribers;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -93,8 +92,7 @@ class ListSubscribersTest extends MediaWikiLangTestCase {
 			'wbsubscribers',
 			$errorReporter,
 			new ItemIdParser(),
-			new HashSiteStore(),
-			new SettingsArray( [ 'tmpWbsubscribersSensibleOutput' => true ] )
+			new HashSiteStore()
 		);
 
 		$module->execute();

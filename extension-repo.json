@@ -303,8 +303,7 @@
 			"services": [
 				"SiteLookup",
 				"WikibaseRepo.ApiHelperFactory",
-				"WikibaseRepo.EntityIdParser",
-				"WikibaseRepo.Settings"
+				"WikibaseRepo.EntityIdParser"
 			]
 		}
 	},
