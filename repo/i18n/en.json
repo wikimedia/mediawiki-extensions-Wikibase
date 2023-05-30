@@ -276,6 +276,7 @@
 	"wikibase-setlabeldescriptionaliases-label-label": "Label:",
 	"wikibase-setlabeldescriptionaliases-description-label": "Description:",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "Aliases:",
+	"wikibase-setlabeldescriptionaliases-description-not-supported": "Descriptions are not supported for this language.",
 	"wikibase-setlabeldescriptionaliases-submit": "Set label, description and aliases",
 	"wikibase-setlabeldescriptionaliases-continue": "Continue",
 	"special-setsitelink": "Set Item sitelink",

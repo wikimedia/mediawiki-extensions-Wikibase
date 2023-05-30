@@ -26,6 +26,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\Validators\UniquenessViolation;
+use WMDE\HamcrestHtml\HtmlMatcher;
 
 /**
  * @covers \Wikibase\Repo\Specials\SpecialSetLabelDescriptionAliases
@@ -45,7 +46,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 
 	private const TAGS = [ 'mw-replace' ];
 
-	private static $languageCodes = [ 'en', 'de', 'de-ch', 'ii', 'zh' ];
+	private static $languageCodes = [ 'en', 'de', 'de-ch', 'ii', 'mul', 'zh' ];
 
 	private $submitButtonMessage;
 
@@ -301,10 +302,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 			tagMatchingOutline( "<input name='id' type='hidden' value='{$item->getId()->getSerialization()}'/>" )
 		) ) ) );
 		$this->assertHtmlContainsInputWithNameAndValue( $output, 'language', 'qqx' );
-		$this->assertHtmlContainsInputWithName( $output, 'label' );
-		$this->assertHtmlContainsInputWithName( $output, 'description' );
-		$this->assertHtmlContainsInputWithName( $output, 'aliases' );
-		$this->assertHtmlContainsSubmitControl( $output );
+		$this->assertHtmlContainsTermFormFields( $output );
 	}
 
 	public function testRendersEditFormInLanguageProvidedAsSecondPartOfSubPage() {
@@ -318,10 +316,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 		$this->assertThatHamcrest( $output, is( htmlPiece( havingChild(
 			tagMatchingOutline( "<input name='language' type='hidden' value='$language'/>" )
 		) ) ) );
-		$this->assertHtmlContainsInputWithName( $output, 'label' );
-		$this->assertHtmlContainsInputWithName( $output, 'description' );
-		$this->assertHtmlContainsInputWithName( $output, 'aliases' );
-		$this->assertHtmlContainsSubmitControl( $output );
+		$this->assertHtmlContainsTermFormFields( $output );
 	}
 
 	public function testRendersEditFormInLanguageProvidedAsQueryParameter() {
@@ -344,10 +339,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 		$this->assertThatHamcrest( $output, is( htmlPiece( havingChild(
 			tagMatchingOutline( "<input name='language' type='hidden' value='$language'/>" )
 		) ) ) );
-		$this->assertHtmlContainsInputWithNameAndValue( $output, 'label', $label );
-		$this->assertHtmlContainsInputWithNameAndValue( $output, 'description', $description );
-		$this->assertHtmlContainsInputWithNameAndValue( $output, 'aliases', $alias );
-		$this->assertHtmlContainsSubmitControl( $output );
+		$this->assertHtmlContainsTermFormFields( $output );
 	}
 
 	public function testLanguageCodeEscaping() {
@@ -432,6 +424,67 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 					'(wikibase-wikibaserepopage-pipe-in-alias)'
 					) )
 		) ) ) );
+	}
+
+	public function testDescriptionDisabledForMul() {
+		$item = new Item();
+		$this->mockRepository->putEntity( $item );
+
+		$subPage = $item->getId()->getSerialization() . '/mul';
+		list( $output ) = $this->executeSpecialPage( $subPage );
+
+		$this->assertHtmlContainsTermFormFields( $output );
+
+		// Description input should be disabled.
+		$this->assertThatHamcrest(
+			$output,
+			is( $this->getDescriptionInputDisabledMatcher() )
+		);
+		// A notice that descriptions are not supported is shown.
+		$this->assertThatHamcrest(
+			$output,
+			is( $this->getDescriptionNotSupportedNoticeMatcher() )
+		);
+	}
+
+	public function testDescriptionInputNonMul() {
+		$item = new Item();
+		$this->mockRepository->putEntity( $item );
+
+		$subPage = $item->getId()->getSerialization() . '/de';
+		list( $output ) = $this->executeSpecialPage( $subPage );
+
+		$this->assertHtmlContainsTermFormFields( $output );
+
+		// Description input is not disabled.
+		$this->assertThatHamcrest(
+			$output,
+			not( $this->getDescriptionInputDisabledMatcher() )
+		);
+		// The "description-not-supported" notice is not shown.
+		$this->assertThatHamcrest(
+			$output,
+			not( $this->getDescriptionNotSupportedNoticeMatcher() )
+		);
+	}
+
+	private function getDescriptionInputDisabledMatcher(): HtmlMatcher {
+		return htmlPiece( havingChild( tagMatchingOutline(
+			"<input name='description' disabled='disabled'/>"
+		) ) );
+	}
+
+	private function getDescriptionNotSupportedNoticeMatcher(): HtmlMatcher {
+		return htmlPiece( havingChild( havingTextContents(
+			"(wikibase-setlabeldescriptionaliases-description-not-supported)"
+		) ) );
+	}
+
+	private function assertHtmlContainsTermFormFields( string $output ): void {
+		$this->assertHtmlContainsInputWithName( $output, 'label' );
+		$this->assertHtmlContainsInputWithName( $output, 'description' );
+		$this->assertHtmlContainsInputWithName( $output, 'aliases' );
+		$this->assertHtmlContainsSubmitControl( $output );
 	}
 
 }

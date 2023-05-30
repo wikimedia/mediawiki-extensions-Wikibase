@@ -233,7 +233,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 			$formDescriptor = array_merge(
 				$formDescriptor,
 				$this->getLabeledInputField( 'label', $this->label ),
-				$this->getLabeledInputField( 'description', $this->description ),
+				$this->getDescriptionInputField( $this->languageCode, $this->description ),
 				$this->getLabeledInputField( 'aliases', implode( '|', $this->aliases ) )
 			);
 		} else {
@@ -255,6 +255,22 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 			->setHeaderHtml( Html::rawElement( 'p', [], $intro ) );
 	}
 
+	private function getDescriptionInputField( string $languageCode, string $value ): array {
+		$fieldDescription = $this->getLabeledInputField( 'description', $value );
+
+		// We don't support "mul" descriptions (T330193).
+		if ( $languageCode === 'mul' ) {
+			$fieldDescription['description']['disabled'] = true;
+			$fieldDescription['description']['notices'] = [
+				$this->msg(
+					'wikibase-setlabeldescriptionaliases-description-not-supported'
+				)->text(),
+			];
+		}
+
+		return $fieldDescription;
+	}
+
 	/**
 	 * Returns an HTML label and text input element for a specific term.
 	 *
@@ -263,7 +279,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	 *
 	 * @return array[]
 	 */
-	private function getLabeledInputField( $termType, $value ) {
+	private function getLabeledInputField( $termType, $value ): array {
 		$fieldId = 'wikibase-setlabeldescriptionaliases-' . $termType;
 
 		// Messages:
