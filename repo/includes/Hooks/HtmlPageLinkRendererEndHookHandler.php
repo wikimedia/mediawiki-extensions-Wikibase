@@ -62,7 +62,6 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 	private LinkTargetEntityIdLookup $linkTargetEntityIdLookup;
 	private ?string $federatedPropertiesSourceScriptUrl;
 	private bool $federatedPropertiesEnabled;
-	private bool $enableLabelsInApiSummaries;
 
 	public static function factory(
 		InterwikiLookup $interwikiLookup,
@@ -89,8 +88,7 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 			$entityUrlLookup,
 			$linkTargetEntityIdLookup,
 			$repoSettings->getSetting( 'federatedPropertiesSourceScriptUrl' ),
-			$repoSettings->getSetting( 'federatedPropertiesEnabled' ),
-			$repoSettings->getSetting( 'tmpEnableLabelsInApiSummaries' )
+			$repoSettings->getSetting( 'federatedPropertiesEnabled' )
 		);
 	}
 
@@ -145,8 +143,7 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 		EntityUrlLookup $entityUrlLookup,
 		LinkTargetEntityIdLookup $linkTargetEntityIdLookup,
 		?string $federatedPropertiesSourceScriptUrl,
-		bool $federatedPropertiesEnabled,
-		bool $enableLabelsInApiSummaries = false
+		bool $federatedPropertiesEnabled
 	) {
 		$this->entityExistenceChecker = $entityExistenceChecker;
 		$this->entityIdParser = $entityIdParser;
@@ -160,7 +157,6 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 		$this->linkTargetEntityIdLookup = $linkTargetEntityIdLookup;
 		$this->federatedPropertiesSourceScriptUrl = $federatedPropertiesSourceScriptUrl;
 		$this->federatedPropertiesEnabled = $federatedPropertiesEnabled;
-		$this->enableLabelsInApiSummaries = $enableLabelsInApiSummaries;
 	}
 
 	/**
@@ -195,17 +191,8 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 		}
 
 		// This weird construct will be cleaned up in T335107
-		if ( $this->enableLabelsInApiSummaries ) {
-			if ( !$this->shouldConvertNoBadTitle( $outTitle, $linkRenderer ) ) {
-				return true;
-			}
-		} else {
-			// Only continue on comment links or on special pages.
-			// Don't run this code when accessing it through the api (eg. for parsing) as the title is
-			// set to a special page dummy in api.php, see https://phabricator.wikimedia.org/T111346
-			if ( $this->isApiRequest() || !$this->shouldConvert( $outTitle, $linkRenderer ) ) {
-				return true;
-			}
+		if ( !$this->shouldConvertNoBadTitle( $outTitle, $linkRenderer ) ) {
+			return true;
 		}
 
 		try {
@@ -432,22 +419,6 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 		}
 
 		return null;
-	}
-
-	private function isApiRequest(): bool {
-		return defined( 'MW_API' )
-			&& MW_API !== 'TEST'; // T269608
-	}
-
-	/**
-	 * Whether we should try to convert links on this page.
-	 */
-	private function shouldConvert( Title $currentTitle, LinkRenderer $linkRenderer ): bool {
-		return $linkRenderer->isForComment() ||
-			// Note: this may not work right with special page transclusion. If $out->getTitle()
-			// doesn't return the transcluded special page's title, the transcluded text will
-			// not have entity IDs resolved to labels.
-			$currentTitle->isSpecialPage();
 	}
 
 	private function shouldConvertNoBadTitle( Title $currentTitle, LinkRenderer $linkRenderer ): bool {
