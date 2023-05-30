@@ -394,13 +394,13 @@ class DatabaseTermInLangIdsAcquirer implements TermInLangIdsAcquirer {
 		$ignoreReplica = false
 	): array {
 		$textIdsAcquirer = new ReplicaPrimaryAwareRecordIdsAcquirer(
-			$this->repoDb, 'wbt_text', 'wbx_id', $this->logger,
+			$this->repoDb, 'wbt_text', 'wbx_id',
 			$ignoreReplica ? ReplicaPrimaryAwareRecordIdsAcquirer::FLAG_IGNORE_REPLICA : 0x0 );
 		$textInLangIdsAcquirer = new ReplicaPrimaryAwareRecordIdsAcquirer(
-			$this->repoDb, 'wbt_text_in_lang', 'wbxl_id', $this->logger,
+			$this->repoDb, 'wbt_text_in_lang', 'wbxl_id',
 			$ignoreReplica ? ReplicaPrimaryAwareRecordIdsAcquirer::FLAG_IGNORE_REPLICA : 0x0 );
 		$termInLangIdsAcquirer = new ReplicaPrimaryAwareRecordIdsAcquirer(
-			$this->repoDb, 'wbt_term_in_lang', 'wbtl_id', $this->logger,
+			$this->repoDb, 'wbt_term_in_lang', 'wbtl_id',
 			$ignoreReplica ? ReplicaPrimaryAwareRecordIdsAcquirer::FLAG_IGNORE_REPLICA : 0x0 );
 
 		$termsArray = $this->mapToTextIds( $termsArray, $textIdsAcquirer );

@@ -171,7 +171,6 @@ class ReplicaPrimaryAwareRecordIdsAcquirerTest extends TestCase {
 			new RepoDomainDb( $lbFactory, $lbFactory->getLocalDomainID() ),
 			self::TABLE_NAME,
 			self::ID_COLUMN,
-			null,
 			$flags
 		);
 	}
