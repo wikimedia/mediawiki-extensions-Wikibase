@@ -8,6 +8,7 @@ use Psr\Log\NullLogger;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILoadBalancer;
+use Wikimedia\Rdbms\IReadableDatabase;
 
 /**
  * Allows acquiring ids of records in database table,
@@ -261,11 +262,12 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	}
 
 	/**
-	 * @param IDatabase $db Caller can choose for this to be the Master or Replica
+	 * @param IReadableDatabase $db Caller can choose for this to be the Master or Replica,
+	 * but only “read” methods are called in either case
 	 * @param array $neededRecords
 	 * @return array
 	 */
-	private function findExistingRecords( IDatabase $db, array $neededRecords ): array {
+	private function findExistingRecords( IReadableDatabase $db, array $neededRecords ): array {
 		$recordsSelectConditions = array_map( function ( $record ) use ( $db ) {
 			return $db->makeList( $record, IDatabase::LIST_AND );
 		}, $neededRecords );

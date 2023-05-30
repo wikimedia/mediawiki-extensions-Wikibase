@@ -15,7 +15,7 @@ use Wikibase\DataModel\Term\TermList;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsLookup;
 use Wikibase\Repo\Store\TermsCollisionDetector;
-use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\IReadableDatabase;
 
 /**
  * Queries db term store for collisions on terms
@@ -95,7 +95,6 @@ class DatabaseTermsCollisionDetector implements TermsCollisionDetector {
 			return null;
 		}
 
-		// @phan-suppress-next-line SecurityCheck-SQLInjection
 		$entityId = $this->findEntityIdsWithTermInLang(
 			$lang,
 			$description,
@@ -291,7 +290,7 @@ class DatabaseTermsCollisionDetector implements TermsCollisionDetector {
 		];
 	}
 
-	private function getDbr(): IDatabase {
+	private function getDbr(): IReadableDatabase {
 		return $this->db->connections()->getReadConnection();
 	}
 

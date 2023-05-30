@@ -9,6 +9,7 @@ use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\IReadableDatabase;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 
@@ -88,7 +89,7 @@ class PruneItemsPerSite extends Maintenance {
 		}
 	}
 
-	private function selectInRange( IDatabase $dbr, int $itemNamespace, int $startRowId, int $endRowId ): array {
+	private function selectInRange( IReadableDatabase $dbr, int $itemNamespace, int $startRowId, int $endRowId ): array {
 		return $dbr->newSelectQueryBuilder()
 			->select( 'ips_row_id' )
 			->from( 'wb_items_per_site' )

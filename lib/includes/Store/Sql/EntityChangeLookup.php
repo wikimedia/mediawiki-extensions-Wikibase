@@ -7,7 +7,7 @@ use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikimedia\Assert\Assert;
-use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\IReadableDatabase;
 
 /**
  * Allows accessing changes stored in a database.
@@ -90,7 +90,7 @@ class EntityChangeLookup {
 			->fetchChanges();
 	}
 
-	private function newEntityChangeSelectQueryBuilder( IDatabase $db ): EntityChangeSelectQueryBuilder {
+	private function newEntityChangeSelectQueryBuilder( IReadableDatabase $db ): EntityChangeSelectQueryBuilder {
 		return new EntityChangeSelectQueryBuilder(
 			$db,
 			$this->entityIdParser,

@@ -6,6 +6,7 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Wikibase\Lib\Store\Sql\Terms\Util\StatsdMonitoring;
 use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\IReadableDatabase;
 
 /**
  * Cleans up the normalized term store after some terms are no longer needed.
@@ -19,7 +20,7 @@ class DatabaseInnerTermStoreCleaner {
 
 	use StatsdMonitoring;
 
-	/** @var IDatabase a connection to DB_REPLICA. Note only set on cleanTermInLangIds */
+	/** @var IReadableDatabase a connection to DB_REPLICA. Note only set on cleanTermInLangIds */
 	private $dbr = null;
 
 	/** @var IDatabase a connection to DB_PRIMARY. Note only set on cleanTermInLangIds */
@@ -45,10 +46,10 @@ class DatabaseInnerTermStoreCleaner {
 	 * used by other wbt_term_in_lang rows are not removed.
 	 *
 	 * @param IDatabase $dbw
-	 * @param IDatabase $dbr
+	 * @param IReadableDatabase $dbr
 	 * @param int[] $termInLangIds (wbtl_id)
 	 */
-	public function cleanTermInLangIds( IDatabase $dbw, IDatabase $dbr, array $termInLangIds ) {
+	public function cleanTermInLangIds( IDatabase $dbw, IReadableDatabase $dbr, array $termInLangIds ) {
 		if ( $termInLangIds === [] ) {
 			return;
 		}

@@ -13,7 +13,7 @@ use Wikibase\Lib\Store\Sql\Terms\Util\StatsdMonitoring;
 use Wikibase\Lib\Store\TermIndexSearchCriteria;
 use Wikibase\Lib\TermIndexEntry;
 use Wikimedia\Rdbms\FakeResultWrapper;
-use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\IReadableDatabase;
 use Wikimedia\Rdbms\IResultWrapper;
 
 /**
@@ -82,7 +82,7 @@ class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 	}
 
 	/**
-	 * @param IDatabase $dbr Used for query construction and selects
+	 * @param IReadableDatabase $dbr Used for query construction and selects
 	 * @param TermIndexSearchCriteria[] $criteria
 	 * @param string|string[]|null $termType
 	 * @param string|string[]|null $entityType
@@ -91,7 +91,7 @@ class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 	 * @return IResultWrapper[]
 	 */
 	private function criteriaToQueryResults(
-		IDatabase $dbr,
+		IReadableDatabase $dbr,
 		array $criteria,
 		$termType = null,
 		$entityType = null,
@@ -116,7 +116,7 @@ class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 	}
 
 	/**
-	 * @param IDatabase $dbr Used for query construction and selects
+	 * @param IReadableDatabase $dbr Used for query construction and selects
 	 * @param TermIndexSearchCriteria $mask
 	 * @param string $entityType
 	 * @param string|string[]|null $termType
@@ -124,7 +124,7 @@ class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 	 * @return IResultWrapper
 	 */
 	private function getTermMatchQueries(
-		IDatabase $dbr,
+		IReadableDatabase $dbr,
 		TermIndexSearchCriteria $mask,
 		string $entityType,
 		$termType = null,

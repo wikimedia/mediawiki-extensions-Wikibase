@@ -10,7 +10,7 @@ use Traversable;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
-use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\IReadableDatabase;
 
 /**
  * Abstract PageTableEntityQuery implementation allowing simple mapping between rows and entity IDs
@@ -42,14 +42,14 @@ abstract class PageTableEntityQueryBase implements PageTableEntityQuery {
 	 * @param array $fields Fields to select
 	 * @param array $joins Joins to use, Keys must be table names.
 	 * @param EntityId[] $entityIds EntityIds to select
-	 * @param IDatabase $db DB to query on
+	 * @param IReadableDatabase $db DB to query on
 	 * @return stdClass[] Array of rows with keys of their entity ID serializations
 	 */
 	public function selectRows(
 		array $fields,
 		array $joins,
 		array $entityIds,
-		IDatabase $db
+		IReadableDatabase $db
 	) {
 		$usesRevisionTable = array_key_exists( 'revision', $joins );
 		list( $where, $slotJoinConds ) = $this->getQueryInfo( $entityIds, $usesRevisionTable, $db );
@@ -72,10 +72,10 @@ abstract class PageTableEntityQueryBase implements PageTableEntityQuery {
 	/**
 	 * @param EntityId[] $entityIds
 	 * @param bool $usesRevisionTable
-	 * @param IDatabase $db
+	 * @param IReadableDatabase $db
 	 * @return array [ string $whereCondition, array $extraTables ]
 	 */
-	private function getQueryInfo( array $entityIds, bool $usesRevisionTable, IDatabase $db ) {
+	private function getQueryInfo( array $entityIds, bool $usesRevisionTable, IReadableDatabase $db ) {
 		$where = [];
 		$slotJoinConds = [];
 

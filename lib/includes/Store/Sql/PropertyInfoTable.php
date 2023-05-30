@@ -13,6 +13,7 @@ use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\DBError;
 use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\IReadableDatabase;
 use Wikimedia\Rdbms\IResultWrapper;
 
 /**
@@ -255,7 +256,7 @@ class PropertyInfoTable implements PropertyInfoLookup, PropertyInfoStore {
 		return $this->db->connections()->getWriteConnection();
 	}
 
-	private function getReadConnection(): IDatabase {
+	private function getReadConnection(): IReadableDatabase {
 		return $this->db->connections()->getReadConnection();
 	}
 

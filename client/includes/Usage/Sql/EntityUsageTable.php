@@ -6,6 +6,7 @@ namespace Wikibase\Client\Usage\Sql;
 
 use ArrayIterator;
 use InvalidArgumentException;
+use LogicException;
 use MediaWiki\Logger\LoggerFactory;
 use MWException;
 use Psr\Log\LoggerInterface;
@@ -20,6 +21,7 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\Rdbms\ClientDomainDb;
 use Wikimedia\Rdbms\DBUnexpectedError;
 use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\IReadableDatabase;
 use Wikimedia\Rdbms\SelectQueryBuilder;
 
 /**
@@ -41,7 +43,7 @@ class EntityUsageTable {
 	private $idParser;
 
 	/**
-	 * @var IDatabase
+	 * @var IDatabase|null
 	 */
 	private $writeConnection;
 
@@ -70,7 +72,7 @@ class EntityUsageTable {
 
 	/**
 	 * @param EntityIdParser $idParser
-	 * @param IDatabase $writeConnection
+	 * @param IDatabase|null $writeConnection If null, this instance can only be used for “read” queries.
 	 * @param int $batchSize Batch size for database queries on the entity usage table, including
 	 *  INSERTs, SELECTs, and DELETEs. Defaults to 100.
 	 * @param string|null $tableName defaults to wbc_entity_usage
@@ -80,7 +82,7 @@ class EntityUsageTable {
 	 */
 	public function __construct(
 		EntityIdParser $idParser,
-		IDatabase $writeConnection,
+		?IDatabase $writeConnection,
 		int $batchSize = 100,
 		?string $tableName = null,
 		int $addUsagesBatchSize = 500
@@ -94,7 +96,6 @@ class EntityUsageTable {
 		}
 
 		$this->idParser = $idParser;
-		// Several places inject read connection instead. Fix those.
 		$this->writeConnection = $writeConnection;
 		$this->batchSize = $batchSize;
 		$this->tableName = $tableName ?: self::DEFAULT_TABLE_NAME;
@@ -103,6 +104,13 @@ class EntityUsageTable {
 		//TODO: Inject
 		$this->db = WikibaseClient::getClientDomainDbFactory()->newLocalDb();
 		$this->logger = LoggerFactory::getInstance( 'Wikibase' );
+	}
+
+	private function getWriteConnection(): IDatabase {
+		if ( $this->writeConnection === null ) {
+			throw new LogicException( 'This EntityUsageTable is read-only!' );
+		}
+		return $this->writeConnection;
 	}
 
 	/**
@@ -115,7 +123,7 @@ class EntityUsageTable {
 	 */
 	private function getAffectedRowIds( int $pageId, array $usages ): array {
 		$usageConditions = [];
-		$db = $this->writeConnection;
+		$db = $this->getWriteConnection();
 
 		foreach ( $usages as $usage ) {
 			$usageConditions[] = $db->makeList( [
@@ -194,9 +202,10 @@ class EntityUsageTable {
 
 		$c = 0;
 
+		$writeConnection = $this->getWriteConnection();
 		foreach ( $batches as $rows ) {
-			$this->writeConnection->insert( $this->tableName, $rows, __METHOD__, [ 'IGNORE' ] );
-			$c += $this->writeConnection->affectedRows();
+			$writeConnection->insert( $this->tableName, $rows, __METHOD__, [ 'IGNORE' ] );
+			$c += $writeConnection->affectedRows();
 
 			// Wait for all database replicas to be updated, but only for the affected client wiki.
 			$this->db->replication()->wait();
@@ -286,11 +295,12 @@ class EntityUsageTable {
 
 		$rowIds = $this->getAffectedRowIds( $pageId, $usages );
 		$rowIdChunks = array_chunk( $rowIds, $this->batchSize );
+		$writeConnection = $this->getWriteConnection();
 
-		$this->writeConnection->startAtomic( __METHOD__ );
+		$writeConnection->startAtomic( __METHOD__ );
 
 		foreach ( $rowIdChunks as $chunk ) {
-			$this->writeConnection->delete(
+			$writeConnection->delete(
 				$this->tableName,
 				[
 					'eu_row_id' => $chunk,
@@ -299,7 +309,7 @@ class EntityUsageTable {
 			);
 		}
 
-		$this->writeConnection->endAtomic( __METHOD__ );
+		$writeConnection->endAtomic( __METHOD__ );
 	}
 
 	/**
@@ -459,12 +469,12 @@ class EntityUsageTable {
 
 	/**
 	 * @param SelectQueryBuilder[] $subQueries
-	 * @param IDatabase $readConnection must have type MySQL
+	 * @param IReadableDatabase $readConnection must have type MySQL
 	 * @return string[]
 	 */
 	private function getUsedEntityIdStringsMySql(
 		array $subQueries,
-		IDatabase $readConnection
+		IReadableDatabase $readConnection
 	): array {
 		$values = [];
 

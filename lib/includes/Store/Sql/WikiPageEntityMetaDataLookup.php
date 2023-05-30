@@ -14,7 +14,7 @@ use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\LookupConstants;
 use Wikimedia\Rdbms\DBQueryError;
-use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\IReadableDatabase;
 
 /**
  * Service for looking up meta data about one or more entities as needed for
@@ -238,12 +238,13 @@ class WikiPageEntityMetaDataLookup implements WikiPageEntityMetaDataAccessor {
 	 *
 	 * @param EntityId $entityId The entity to query the DB for.
 	 * @param int $revisionId The desired revision id
-	 * @param IDatabase $db A connection to either DB_REPLICA or DB_PRIMARY
+	 * @param IReadableDatabase $db A connection to either DB_REPLICA or DB_PRIMARY
+	 * (only “read” methods are used in either case)
 	 *
 	 * @throws DBQueryError If the query fails.
 	 * @return stdClass|bool a raw database row object, or false if no such entity revision exists.
 	 */
-	private function selectRevisionInformationById( EntityId $entityId, int $revisionId, IDatabase $db ) {
+	private function selectRevisionInformationById( EntityId $entityId, int $revisionId, IReadableDatabase $db ) {
 		$rows = $this->pageTableEntityQuery->selectRows(
 			$this->selectFields(),
 			[ 'revision' => [ 'INNER JOIN', [ 'rev_page=page_id', 'rev_id' => $revisionId ] ] ],
@@ -259,13 +260,14 @@ class WikiPageEntityMetaDataLookup implements WikiPageEntityMetaDataAccessor {
 	 * Returns an array like entityid -> object or false (if not found).
 	 *
 	 * @param EntityId[] $entityIds The entities to query the DB for.
-	 * @param IDatabase $db connection to DB_REPLICA or DB_PRIMARY database to query
+	 * @param IReadableDatabase $db connection to DB_REPLICA or DB_PRIMARY database to query
+	 * (only “read” methods are used in either case)
 	 *
 	 * @throws DBQueryError If the query fails.
 	 * @return (stdClass|false)[] Array mapping entity ID serializations to either objects or false if an entity
 	 *  could not be found.
 	 */
-	private function selectRevisionInformationMultiple( array $entityIds, IDatabase $db ): array {
+	private function selectRevisionInformationMultiple( array $entityIds, IReadableDatabase $db ): array {
 		$rows = $this->pageTableEntityQuery->selectRows(
 			$this->selectFields(),
 			[ 'revision' => [ 'INNER JOIN', 'page_latest=rev_id' ] ],
@@ -281,13 +283,14 @@ class WikiPageEntityMetaDataLookup implements WikiPageEntityMetaDataAccessor {
 	 * Returns an array like entityid -> int or false (if not found).
 	 *
 	 * @param EntityId[] $entityIds The entities to query the DB for.
-	 * @param IDatabase $db connection to the DB_REPLICA or DB_PRIMARY database to query from
+	 * @param IReadableDatabase $db connection to the DB_REPLICA or DB_PRIMARY database to query from
+	 * (only “read” methods are used in either case)
 	 *
 	 * @throws DBQueryError If the query fails.
 	 * @return array Array mapping entity ID serializations to either ints
 	 * or false if an entity could not be found (including if the page is a redirect).
 	 */
-	private function selectLatestRevisionIdsMultiple( array $entityIds, IDatabase $db ): array {
+	private function selectLatestRevisionIdsMultiple( array $entityIds, IReadableDatabase $db ): array {
 		$rows = $this->pageTableEntityQuery->selectRows(
 			[ 'page_title', 'page_latest', 'page_is_redirect' ],
 			[],

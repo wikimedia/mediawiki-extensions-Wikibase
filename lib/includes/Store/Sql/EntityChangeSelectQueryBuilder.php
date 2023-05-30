@@ -7,7 +7,7 @@ namespace Wikibase\Lib\Store\Sql;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
-use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\IReadableDatabase;
 use Wikimedia\Rdbms\SelectQueryBuilder;
 use Wikimedia\Timestamp\ConvertibleTimestamp;
 
@@ -22,10 +22,12 @@ class EntityChangeSelectQueryBuilder extends SelectQueryBuilder {
 	private EntityChangeFactory $entityChangeFactory;
 
 	public function __construct(
-		IDatabase $db,
+		IReadableDatabase $db,
 		EntityIdParser $entityIdParser,
 		EntityChangeFactory $entityChangeFactory
 	) {
+		// temporary cast while SelectQueryBuilder requires an IDatabase
+		'@phan-var \Wikimedia\Rdbms\IDatabase $db';
 		parent::__construct( $db );
 		$this->entityIdParser = $entityIdParser;
 		$this->entityChangeFactory = $entityChangeFactory;

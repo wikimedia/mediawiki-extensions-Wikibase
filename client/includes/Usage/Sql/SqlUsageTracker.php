@@ -76,7 +76,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 		$this->addEntityUsagesBatchSize = $addEntityUsagesBatchSize;
 	}
 
-	private function newUsageTable( IDatabase $db ): EntityUsageTable {
+	private function newUsageTable( ?IDatabase $db = null ): EntityUsageTable {
 		$entityUsageTable = new EntityUsageTable( $this->idParser, $db );
 		$entityUsageTable->setAddUsagesBatchSize( $this->addEntityUsagesBatchSize );
 		return $entityUsageTable;
@@ -226,9 +226,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * @return EntityUsage[] EntityUsage identity string => EntityUsage
 	 */
 	public function getUsagesForPage( int $pageId ): array {
-		$db = $this->connectionManager->getReadConnection();
-
-		$usageTable = $this->newUsageTable( $db );
+		$usageTable = $this->newUsageTable();
 		$usages = $usageTable->queryUsages( $pageId );
 
 		return $usages;
@@ -247,9 +245,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 			return new ArrayIterator();
 		}
 
-		$db = $this->connectionManager->getReadConnection();
-
-		$usageTable = $this->newUsageTable( $db );
+		$usageTable = $this->newUsageTable();
 		$pages = $usageTable->getPagesUsing( $entityIds, $aspects );
 
 		return $pages;
@@ -267,9 +263,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 			return [];
 		}
 
-		$db = $this->connectionManager->getReadConnection();
-
-		$usageTable = $this->newUsageTable( $db );
+		$usageTable = $this->newUsageTable();
 		$unused = $usageTable->getUnusedEntities( $entityIds );
 
 		return $unused;

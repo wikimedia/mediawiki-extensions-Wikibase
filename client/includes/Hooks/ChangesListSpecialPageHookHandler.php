@@ -14,7 +14,7 @@ use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Rdbms\ClientDomainDbFactory;
 use Wikibase\Lib\SettingsArray;
-use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\IReadableDatabase;
 
 /**
  * @license GPL-2.0-or-later
@@ -23,7 +23,7 @@ use Wikimedia\Rdbms\IDatabase;
 class ChangesListSpecialPageHookHandler implements ChangesListSpecialPageQueryHook {
 
 	/**
-	 * @var IDatabase
+	 * @var IReadableDatabase
 	 */
 	private $dbr;
 
@@ -38,12 +38,12 @@ class ChangesListSpecialPageHookHandler implements ChangesListSpecialPageQueryHo
 	private $userOptionsLookup;
 
 	/**
-	 * @param IDatabase $dbr
+	 * @param IReadableDatabase $dbr
 	 * @param bool $showExternalChanges
 	 * @param UserOptionsLookup $userOptionsLookup
 	 */
 	public function __construct(
-		IDatabase $dbr,
+		IReadableDatabase $dbr,
 		$showExternalChanges,
 		UserOptionsLookup $userOptionsLookup
 	) {
@@ -170,10 +170,10 @@ class ChangesListSpecialPageHookHandler implements ChangesListSpecialPageQueryHo
 	}
 
 	/**
-	 * @param IDatabase $dbr
+	 * @param IReadableDatabase $dbr
 	 * @param array &$conds
 	 */
-	public function addWikibaseConditions( IDatabase $dbr, array &$conds ) {
+	public function addWikibaseConditions( IReadableDatabase $dbr, array &$conds ) {
 		$conds[] = 'rc_source != ' . $dbr->addQuotes( RecentChangeFactory::SRC_WIKIBASE );
 	}
 
