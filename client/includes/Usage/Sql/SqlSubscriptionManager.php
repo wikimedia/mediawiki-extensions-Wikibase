@@ -9,6 +9,7 @@ use InvalidArgumentException;
 use Wikibase\Client\Usage\SubscriptionManager;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\IReadableDatabase;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 
 /**
@@ -82,23 +83,22 @@ class SqlSubscriptionManager implements SubscriptionManager {
 	/**
 	 * For a set of potential subscriptions, returns the existing subscriptions.
 	 *
-	 * @param IDatabase $db
+	 * @param IReadableDatabase $db
 	 * @param string $subscriber
 	 * @param string[] $subscriptions
 	 *
 	 * @return string[] Entity ID strings from $subscriptions which $subscriber is already subscribed to.
 	 */
-	private function querySubscriptions( IDatabase $db, string $subscriber, array $subscriptions ): array {
+	private function querySubscriptions( IReadableDatabase $db, string $subscriber, array $subscriptions ): array {
 		if ( $subscriptions ) {
-			$subscriptions = $db->selectFieldValues(
-				'wb_changes_subscription',
-				'cs_entity_id',
-				[
+			$subscriptions = $db->newSelectQueryBuilder()
+				->select( 'cs_entity_id' )
+				->from( 'wb_changes_subscription' )
+				->where( [
 					'cs_subscriber_id' => $subscriber,
 					'cs_entity_id' => $subscriptions,
-				],
-				__METHOD__
-			);
+				] )
+				->caller( __METHOD__ )->fetchFieldValues();
 		}
 
 		return $subscriptions;
@@ -131,14 +131,13 @@ class SqlSubscriptionManager implements SubscriptionManager {
 	 */
 	private function deleteSubscriptions( IDatabase $db, string $subscriber, array $subscriptions ): void {
 		if ( $subscriptions ) {
-			$db->delete(
-				'wb_changes_subscription',
-				[
+			$db->newDeleteQueryBuilder()
+				->delete( 'wb_changes_subscription' )
+				->where( [
 					'cs_subscriber_id' => $subscriber,
 					'cs_entity_id' => $subscriptions,
-				],
-				__METHOD__
-			);
+				] )
+				->caller( __METHOD__ )->execute();
 		}
 	}
 
