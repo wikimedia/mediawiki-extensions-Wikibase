@@ -26,8 +26,6 @@ class EntityChangeSelectQueryBuilder extends SelectQueryBuilder {
 		EntityIdParser $entityIdParser,
 		EntityChangeFactory $entityChangeFactory
 	) {
-		// temporary cast while SelectQueryBuilder requires an IDatabase
-		'@phan-var \Wikimedia\Rdbms\IDatabase $db';
 		parent::__construct( $db );
 		$this->entityIdParser = $entityIdParser;
 		$this->entityChangeFactory = $entityChangeFactory;
