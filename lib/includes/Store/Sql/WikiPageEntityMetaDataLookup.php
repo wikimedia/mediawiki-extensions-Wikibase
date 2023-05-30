@@ -30,30 +30,15 @@ use Wikimedia\Rdbms\IReadableDatabase;
  */
 class WikiPageEntityMetaDataLookup implements WikiPageEntityMetaDataAccessor {
 
-	/**
-	 * @var EntityNamespaceLookup
-	 */
-	private $entityNamespaceLookup;
+	private EntityNamespaceLookup $entityNamespaceLookup;
 
-	/**
-	 * @var PageTableEntityQuery
-	 */
-	private $pageTableEntityQuery;
+	private PageTableEntityQuery $pageTableEntityQuery;
 
-	/**
-	 * @var LoggerInterface
-	 */
-	private $logger;
+	private LoggerInterface $logger;
 
-	/**
-	 * @var DatabaseEntitySource
-	 */
-	private $entitySource;
+	private DatabaseEntitySource $entitySource;
 
-	/**
-	 * @var RepoDomainDb
-	 */
-	private $repoDb;
+	private RepoDomainDb $repoDb;
 
 	public function __construct(
 		EntityNamespaceLookup $entityNamespaceLookup,

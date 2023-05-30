@@ -14,10 +14,7 @@ use Wikimedia\Rdbms\IReadableDatabase;
  */
 class DispatchStats {
 
-	/**
-	 * @var RepoDomainDb
-	 */
-	private $db;
+	private RepoDomainDb $db;
 
 	public function __construct( RepoDomainDb $repoDomainDb ) {
 		$this->db = $repoDomainDb;
@@ -90,7 +87,7 @@ class DispatchStats {
 			] + $changeTimesStats;
 	}
 
-	private function buildEstimateStats( $estimate, array $changeTimesStats ): array {
+	private function buildEstimateStats( int $estimate, array $changeTimesStats ): array {
 		return [
 				'estimatedNumberOfChanges' => $estimate,
 			] + $changeTimesStats;

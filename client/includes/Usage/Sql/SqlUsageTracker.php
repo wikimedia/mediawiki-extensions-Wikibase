@@ -23,15 +23,9 @@ use Wikimedia\Rdbms\SessionConsistentConnectionManager;
  */
 class SqlUsageTracker implements UsageTracker, UsageLookup {
 
-	/**
-	 * @var EntityIdParser
-	 */
-	private $idParser;
+	private EntityIdParser $idParser;
 
-	/**
-	 * @var SessionConsistentConnectionManager
-	 */
-	private $connectionManager;
+	private SessionConsistentConnectionManager $connectionManager;
 
 	/**
 	 * Usage aspects in this array won't be persisted. If string keys are used, this
@@ -39,21 +33,17 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 *
 	 * @var string[]
 	 */
-	private $disabledUsageAspects;
+	private array $disabledUsageAspects;
 
 	/**
 	 * The limit to issue a warning when entity usage per page hit that limit
-	 *
-	 * @var int
 	 */
-	private $entityUsagePerPageLimit;
+	private int $entityUsagePerPageLimit;
 
 	/**
 	 * The batch size when adding entity usage.
-	 *
-	 * @var int
 	 */
-	private $addEntityUsagesBatchSize;
+	private int $addEntityUsagesBatchSize;
 
 	/**
 	 * @param EntityIdParser $idParser

@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Lib\Store\Sql;
 
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -17,24 +19,12 @@ use Wikimedia\Rdbms\IReadableDatabase;
  */
 class EntityChangeLookup {
 
-	/**
-	 * @var EntityChangeFactory
-	 */
-	private $entityChangeFactory;
+	private EntityChangeFactory $entityChangeFactory;
 
-	/**
-	 * @var EntityIdParser
-	 */
-	private $entityIdParser;
+	private EntityIdParser $entityIdParser;
 
-	/** @var RepoDomainDb */
-	private $db;
+	private RepoDomainDb $db;
 
-	/**
-	 * @param EntityChangeFactory $entityChangeFactory
-	 * @param EntityIdParser $entityIdParser
-	 * @param RepoDomainDb $db
-	 */
 	public function __construct(
 		EntityChangeFactory $entityChangeFactory,
 		EntityIdParser $entityIdParser,
@@ -50,7 +40,7 @@ class EntityChangeLookup {
 	 *
 	 * @return EntityChange[]
 	 */
-	public function loadByChangeIds( array $ids ) {
+	public function loadByChangeIds( array $ids ): array {
 		Assert::parameterElementType( 'integer', $ids, '$ids' );
 
 		$dbr = $this->db->connections()->getReadConnection();
