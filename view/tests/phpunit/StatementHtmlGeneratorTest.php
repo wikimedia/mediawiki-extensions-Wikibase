@@ -51,10 +51,10 @@ class StatementHtmlGeneratorTest extends \PHPUnit\Framework\TestCase {
 	 * @uses Wikibase\View\Template\TemplateRegistry
 	 */
 	public function testGetHtmlForStatement(
-		SnakHtmlGenerator $snakHtmlGenerator,
 		Statement $statement,
 		$patterns
 	) {
+		$snakHtmlGenerator = $this->getSnakHtmlGeneratorMock();
 		$templateFactory = TemplateFactory::getDefaultInstance();
 		$statementHtmlGenerator = new StatementHtmlGenerator(
 			$templateFactory,
@@ -70,13 +70,10 @@ class StatementHtmlGeneratorTest extends \PHPUnit\Framework\TestCase {
 		}
 	}
 
-	public function getHtmlForStatementProvider() {
-		$snakHtmlGenerator = $this->getSnakHtmlGeneratorMock();
-
+	public static function getHtmlForStatementProvider(): iterable {
 		$testCases = [];
 
 		$testCases[] = [
-			$snakHtmlGenerator,
 			new Statement( new PropertySomeValueSnak( 42 ) ),
 			[
 				'snak html' => '/SNAK HTML/',
@@ -84,7 +81,6 @@ class StatementHtmlGeneratorTest extends \PHPUnit\Framework\TestCase {
 		];
 
 		$testCases[] = [
-			$snakHtmlGenerator,
 			new Statement(
 				new PropertySomeValueSnak( 42 ),
 				new SnakList( [
@@ -97,7 +93,6 @@ class StatementHtmlGeneratorTest extends \PHPUnit\Framework\TestCase {
 		];
 
 		$testCases[] = [
-			$snakHtmlGenerator,
 			new Statement(
 				new PropertyValueSnak( 50, new StringValue( 'chocolate!' ) ),
 				new SnakList(),
@@ -133,7 +128,7 @@ class StatementHtmlGeneratorTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public static function referencesProvider() {
+	public static function referencesProvider(): iterable {
 		$snak = new PropertyNoValueSnak( 1 );
 		$statement = new Statement( $snak );
 		$referencedStatement = clone $statement;
