@@ -3,7 +3,6 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Tests\Unit;
 
-use Generator;
 use LogicException;
 use MediaWiki\HookContainer\HookContainer;
 use MediaWiki\HookContainer\StaticHookRegistry;
@@ -39,7 +38,7 @@ abstract class ServiceWiringTestCase extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->wiring = $this->loadWiring();
+		$this->wiring = self::loadWiring();
 		$this->mockedServices = [];
 		$this->accessedServices = [];
 		$this->serviceContainer = $this->createMock( MediaWikiServices::class );
@@ -122,14 +121,14 @@ abstract class ServiceWiringTestCase extends TestCase {
 			->willReturn( $hookContainer );
 	}
 
-	public function provideWiring(): Generator {
-		$wiring = $this->loadWiring();
+	public static function provideWiring(): iterable {
+		$wiring = self::loadWiring();
 		foreach ( $wiring as $name => $definition ) {
 			yield $name => [ $name, $definition ];
 		}
 	}
 
-	private function loadWiring(): array {
+	private static function loadWiring(): array {
 		return require __DIR__ . '/../../../../WikibaseClient.ServiceWiring.php';
 	}
 

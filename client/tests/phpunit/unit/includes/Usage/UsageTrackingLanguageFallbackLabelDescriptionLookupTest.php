@@ -24,15 +24,15 @@ use Wikibase\Lib\TermLanguageFallbackChain;
 class UsageTrackingLanguageFallbackLabelDescriptionLookupTest extends \PHPUnit\Framework\TestCase {
 	use MediaWikiCoversValidator;
 
-	public function provideGetLabel() {
-		return $this->provideGetTermFallback( 'L' );
+	public static function provideGetLabel(): iterable {
+		return self::provideGetTermFallback( 'L' );
 	}
 
-	public function provideGetDescription() {
-		return $this->provideGetTermFallback( 'D' );
+	public static function provideGetDescription(): iterable {
+		return self::provideGetTermFallback( 'D' );
 	}
 
-	private static function provideGetTermFallback( $usagePrefix ) {
+	private static function provideGetTermFallback( string $usagePrefix ): iterable {
 		return [
 			'No term found -> all languages tracked' => [
 				[ "Q2#$usagePrefix.a", "Q2#$usagePrefix.b", "Q2#$usagePrefix.c" ],

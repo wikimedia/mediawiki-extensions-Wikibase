@@ -26,12 +26,7 @@ use Wikibase\Lib\Formatters\SnakFormatter;
  */
 class SnakSerializationRendererTest extends \PHPUnit\Framework\TestCase {
 
-	/**
-	 * @param DataValue $value
-	 *
-	 * @return array
-	 */
-	private function getSnakSerialization( DataValue $value ) {
+	private static function getSnakSerialization( DataValue $value ): array {
 		$snak = new PropertyValueSnak(
 			new NumericPropertyId( 'P42' ),
 			$value
@@ -73,27 +68,27 @@ class SnakSerializationRendererTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testRenderSnak() {
-		$snakSerialization = $this->getSnakSerialization( new StringValue( 'foo bar foo' ) );
+		$snakSerialization = self::getSnakSerialization( new StringValue( 'foo bar foo' ) );
 		$snakRenderer = $this->getSnakRenderer();
 
 		$this->assertSame( 'foo bar foo', $snakRenderer->renderSnak( $snakSerialization ) );
 	}
 
-	public function provideRenderSnaks() {
+	public static function provideRenderSnaks(): iterable {
 		return [
 			'Single Snak' => [
 				'foo bar foo',
 				[ 'P42' => [
-					$this->getSnakSerialization( new StringValue( 'foo bar foo' ) ),
+					self::getSnakSerialization( new StringValue( 'foo bar foo' ) ),
 				] ],
 			],
 			'Multiple Snaks' => [
 				'foo, bar, Berlin',
 				[ 'P42' => [
-					$this->getSnakSerialization( new StringValue( 'foo' ) ),
-					$this->getSnakSerialization( new StringValue( 'bar' ) ),
-					$this->getSnakSerialization( new StringValue( 'Berlin' ) ),
-					$this->getSnakSerialization( new StringValue( '' ) ),
+					self::getSnakSerialization( new StringValue( 'foo' ) ),
+					self::getSnakSerialization( new StringValue( 'bar' ) ),
+					self::getSnakSerialization( new StringValue( 'Berlin' ) ),
+					self::getSnakSerialization( new StringValue( '' ) ),
 				] ],
 			],
 		];
