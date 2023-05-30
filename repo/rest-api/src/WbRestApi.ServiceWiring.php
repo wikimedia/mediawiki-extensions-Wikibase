@@ -166,9 +166,9 @@ return [
 
 	'WbRestApi.GetItemDescriptions' => function( MediaWikiServices $services ): GetItemDescriptions {
 		return new GetItemDescriptions(
-			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
+			new GetLatestItemRevisionMetadata( new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
 				WikibaseRepo::getEntityRevisionLookup( $services )
-			),
+			) ),
 			new TermLookupItemDataRetriever(
 				WikibaseRepo::getTermLookup( $services ),
 				WikibaseRepo::getTermsLanguages( $services )
