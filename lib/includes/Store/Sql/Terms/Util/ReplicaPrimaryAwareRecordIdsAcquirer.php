@@ -16,17 +16,17 @@ use Wikimedia\Rdbms\IReadableDatabase;
  * Allows acquiring ids of records in database table,
  * by inspecting a given read-only replica database to initially
  * find existing records with their ids, and insert non-existing
- * records into a read-write master database and getting those
- * ids as well from the master database after insertion.
+ * records into a read-write primary database and getting those
+ * ids as well from the primary database after insertion.
  *
  * @see @ref docs_storage_terms
  * @license GPL-2.0-or-later
  */
-class ReplicaMasterAwareRecordIdsAcquirer {
+class ReplicaPrimaryAwareRecordIdsAcquirer {
 
 	/**
 	 * This flag changes this object's behavior so that it always queries
-	 * master database to find existing items, bypassing replica database
+	 * primary database to find existing items, bypassing replica database
 	 * completely.
 	 */
 	public const FLAG_IGNORE_REPLICA = 0x1;
@@ -69,7 +69,7 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 
 	/**
 	 * Acquire ids of needed records in the table, inserting non-existing
-	 * ones into master database.
+	 * ones into primary database.
 	 *
 	 * Note 1: this function assumes that all records given in $neededRecords specify
 	 * the same columns. If some records specify less, more or different columns than
@@ -90,7 +90,7 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	 *		...
 	 *	]
 	 * @param callable|null $recordsToInsertDecoratorCallback a callback that will be passed
-	 *	the array of records that are about to be inserted into master database, and should
+	 *	the array of records that are about to be inserted into primary database, and should
 	 *	return a new array of records to insert, allowing to enhance and/or supply more default
 	 *	values for other columns that are not supplied as part of $neededRecords array.
 	 *
@@ -129,11 +129,11 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 			$neededRecords = $this->filterNonExistingRecords( $neededRecords, $existingRecords );
 		}
 
-		// Then fetch from master
+		// Then fetch from primary
 		if ( !empty( $neededRecords ) ) {
 			$existingRecords = array_merge(
 				$existingRecords,
-				$this->fetchExistingRecordsFromMaster( $neededRecords )
+				$this->fetchExistingRecordsFromPrimary( $neededRecords )
 			);
 		}
 
@@ -159,11 +159,11 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 
 			$recordsCount = count( $records );
 
-			$this->insertNonExistingRecordsIntoMaster( $records );
+			$this->insertNonExistingRecordsIntoPrimary( $records );
 
 			$insertedRecords = array_merge(
 				$insertedRecords,
-				$this->fetchExistingRecordsFromMaster( $records )
+				$this->fetchExistingRecordsFromPrimary( $records )
 			);
 
 			$records = $this->filterNonExistingRecords( $records, $insertedRecords );
@@ -180,7 +180,7 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 
 				$insertedRecords = array_merge(
 					$insertedRecords,
-					$this->fetchExistingRecordsFromMaster( $records, $dbw )
+					$this->fetchExistingRecordsFromPrimary( $records, $dbw )
 				);
 
 				$records = $this->filterNonExistingRecords( $records, $insertedRecords );
@@ -197,7 +197,7 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 					// Logic error, this should never happen.
 					$exception = new Exception(
 						'Fail-safe exception. Avoiding infinite loop due to possibly undetectable'
-						. " existing records in master.\n"
+						. " existing records in primary.\n"
 						. ' It may be due to encoding incompatibility'
 						. ' between database values and values passed in $neededRecords parameter.'
 					);
@@ -209,8 +209,8 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 		return $insertedRecords;
 	}
 
-	private function fetchExistingRecordsFromMaster( array $neededRecords, IDatabase $dbw = null ): array {
-		$dbw = $dbw ?? $this->getDbMaster();
+	private function fetchExistingRecordsFromPrimary( array $neededRecords, IDatabase $dbw = null ): array {
+		$dbw = $dbw ?? $this->getDbPrimary();
 		return $this->findExistingRecords( $dbw, $neededRecords );
 	}
 
@@ -241,12 +241,12 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 		return $this->repoDb->connections()->getReadConnection();
 	}
 
-	private function getDbMaster(): IDatabase {
+	private function getDbPrimary(): IDatabase {
 		return $this->repoDb->connections()->getWriteConnection();
 	}
 
 	/**
-	 * @param IReadableDatabase $db Caller can choose for this to be the Master or Replica,
+	 * @param IReadableDatabase $db Caller can choose for this to be the Primary or Replica,
 	 * but only “read” methods are called in either case
 	 * @param array $neededRecords
 	 * @return array
@@ -283,8 +283,8 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	 * @param array $neededRecords
 	 * @suppress SecurityCheck-SQLInjection
 	 */
-	private function insertNonExistingRecordsIntoMaster( array $neededRecords ): void {
-		$this->getDbMaster()->insert( $this->table, $neededRecords, __METHOD__, [ 'IGNORE' ] );
+	private function insertNonExistingRecordsIntoPrimary( array $neededRecords ): void {
+		$this->getDbPrimary()->insert( $this->table, $neededRecords, __METHOD__, [ 'IGNORE' ] );
 	}
 
 	private function filterNonExistingRecords( array $neededRecords, array $existingRecords ): array {

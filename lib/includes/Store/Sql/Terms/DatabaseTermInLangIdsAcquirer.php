@@ -6,7 +6,7 @@ use MediaWiki\MediaWikiServices;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
-use Wikibase\Lib\Store\Sql\Terms\Util\ReplicaMasterAwareRecordIdsAcquirer;
+use Wikibase\Lib\Store\Sql\Terms\Util\ReplicaPrimaryAwareRecordIdsAcquirer;
 
 /**
  * A {@link TermInLangIdsAcquirer} implementation using the database tables
@@ -103,7 +103,7 @@ class DatabaseTermInLangIdsAcquirer implements TermInLangIdsAcquirer {
 	 *			[ 'language' => 'term' | [ 'term1', 'term2', ... ] ], ...
 	 *		], ...
 	 *	]
-	 * @param ReplicaMasterAwareRecordIdsAcquirer $textIdsAcquirer
+	 * @param ReplicaPrimaryAwareRecordIdsAcquirer $textIdsAcquirer
 	 *
 	 * @return array
 	 *	[
@@ -114,7 +114,7 @@ class DatabaseTermInLangIdsAcquirer implements TermInLangIdsAcquirer {
 	 */
 	private function mapToTextIds(
 		array $termsArray,
-		ReplicaMasterAwareRecordIdsAcquirer $textIdsAcquirer
+		ReplicaPrimaryAwareRecordIdsAcquirer $textIdsAcquirer
 	) {
 		$texts = [];
 
@@ -140,7 +140,7 @@ class DatabaseTermInLangIdsAcquirer implements TermInLangIdsAcquirer {
 	 */
 	private function acquireTextIds(
 		array $texts,
-		ReplicaMasterAwareRecordIdsAcquirer $textIdsAcquirer
+		ReplicaPrimaryAwareRecordIdsAcquirer $textIdsAcquirer
 	) {
 		$truncatedTexts = [];
 		$contLang = MediaWikiServices::getInstance()->getContentLanguage();
@@ -181,7 +181,7 @@ class DatabaseTermInLangIdsAcquirer implements TermInLangIdsAcquirer {
 	 *			[ 'language' => [ <textId1>, <textId2>, ... ] ], ...
 	 *		], ...
 	 *	]
-	 * @param ReplicaMasterAwareRecordIdsAcquirer $textInLangIdsAcquirer
+	 * @param ReplicaPrimaryAwareRecordIdsAcquirer $textInLangIdsAcquirer
 	 *
 	 * @return array
 	 *	[
@@ -191,7 +191,7 @@ class DatabaseTermInLangIdsAcquirer implements TermInLangIdsAcquirer {
 	 */
 	private function mapToTextInLangIds(
 		array $termsArray,
-		ReplicaMasterAwareRecordIdsAcquirer $textInLangIdsAcquirer
+		ReplicaPrimaryAwareRecordIdsAcquirer $textInLangIdsAcquirer
 	) {
 		$flattenedLangTextIds = [];
 		foreach ( $termsArray as $langTextIds ) {
@@ -230,7 +230,7 @@ class DatabaseTermInLangIdsAcquirer implements TermInLangIdsAcquirer {
 
 	private function acquireTextInLangIds(
 		array $langTextIds,
-		ReplicaMasterAwareRecordIdsAcquirer $textInLangIdsAcquirer
+		ReplicaPrimaryAwareRecordIdsAcquirer $textInLangIdsAcquirer
 	) {
 		$textInLangRecords = [];
 		foreach ( $langTextIds as $lang => $textIds ) {
@@ -260,7 +260,7 @@ class DatabaseTermInLangIdsAcquirer implements TermInLangIdsAcquirer {
 	 *		'type' => [ <textInLangId1>, <textInLangId2>, ... ],
 	 *		...
 	 *	]
-	 * @param ReplicaMasterAwareRecordIdsAcquirer $termInLangIdsAcquirer
+	 * @param ReplicaPrimaryAwareRecordIdsAcquirer $termInLangIdsAcquirer
 	 * @param array $idsToRestore
 	 *
 	 * @return array
@@ -272,7 +272,7 @@ class DatabaseTermInLangIdsAcquirer implements TermInLangIdsAcquirer {
 	 */
 	private function mapToTermInLangIds(
 		array $termsArray,
-		ReplicaMasterAwareRecordIdsAcquirer $termInLangIdsAcquirer,
+		ReplicaPrimaryAwareRecordIdsAcquirer $termInLangIdsAcquirer,
 		array $idsToRestore = []
 	) {
 		$flattenedTypeTextInLangIds = [];
@@ -307,7 +307,7 @@ class DatabaseTermInLangIdsAcquirer implements TermInLangIdsAcquirer {
 
 	private function acquireTermInLangIdsInner(
 		array $typeTextInLangIds,
-		ReplicaMasterAwareRecordIdsAcquirer $termInLangIdsAcquirer,
+		ReplicaPrimaryAwareRecordIdsAcquirer $termInLangIdsAcquirer,
 		array $idsToRestore = []
 	) {
 		$termInLangRecords = [];
@@ -393,15 +393,15 @@ class DatabaseTermInLangIdsAcquirer implements TermInLangIdsAcquirer {
 		array $termInLangIdsToRestore = [],
 		$ignoreReplica = false
 	): array {
-		$textIdsAcquirer = new ReplicaMasterAwareRecordIdsAcquirer(
+		$textIdsAcquirer = new ReplicaPrimaryAwareRecordIdsAcquirer(
 			$this->repoDb, 'wbt_text', 'wbx_id', $this->logger,
-			$ignoreReplica ? ReplicaMasterAwareRecordIdsAcquirer::FLAG_IGNORE_REPLICA : 0x0 );
-		$textInLangIdsAcquirer = new ReplicaMasterAwareRecordIdsAcquirer(
+			$ignoreReplica ? ReplicaPrimaryAwareRecordIdsAcquirer::FLAG_IGNORE_REPLICA : 0x0 );
+		$textInLangIdsAcquirer = new ReplicaPrimaryAwareRecordIdsAcquirer(
 			$this->repoDb, 'wbt_text_in_lang', 'wbxl_id', $this->logger,
-			$ignoreReplica ? ReplicaMasterAwareRecordIdsAcquirer::FLAG_IGNORE_REPLICA : 0x0 );
-		$termInLangIdsAcquirer = new ReplicaMasterAwareRecordIdsAcquirer(
+			$ignoreReplica ? ReplicaPrimaryAwareRecordIdsAcquirer::FLAG_IGNORE_REPLICA : 0x0 );
+		$termInLangIdsAcquirer = new ReplicaPrimaryAwareRecordIdsAcquirer(
 			$this->repoDb, 'wbt_term_in_lang', 'wbtl_id', $this->logger,
-			$ignoreReplica ? ReplicaMasterAwareRecordIdsAcquirer::FLAG_IGNORE_REPLICA : 0x0 );
+			$ignoreReplica ? ReplicaPrimaryAwareRecordIdsAcquirer::FLAG_IGNORE_REPLICA : 0x0 );
 
 		$termsArray = $this->mapToTextIds( $termsArray, $textIdsAcquirer );
 		$termsArray = $this->mapToTextInLangIds( $termsArray, $textInLangIdsAcquirer );
