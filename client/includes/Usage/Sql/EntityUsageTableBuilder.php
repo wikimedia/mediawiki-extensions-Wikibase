@@ -15,6 +15,7 @@ use Wikibase\Lib\Rdbms\ClientDomainDb;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\LogWarningExceptionHandler;
 use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\IReadableDatabase;
 use Wikimedia\Rdbms\IResultWrapper;
 
 /**
@@ -163,20 +164,17 @@ class EntityUsageTableBuilder {
 	/**
 	 * @return EntityId[] An associative array mapping page IDs to Entity IDs.
 	 */
-	private function getUsageBatch( IDatabase $db, int $fromPageId = 0 ): array {
-		$res = $db->select(
-			'page_props',
-			[ 'pp_page', 'pp_value' ],
-			[
+	private function getUsageBatch( IReadableDatabase $db, int $fromPageId = 0 ): array {
+		$res = $db->newSelectQueryBuilder()
+			->select( [ 'pp_page', 'pp_value' ] )
+			->from( 'page_props' )
+			->where( [
 				'pp_propname' => 'wikibase_item',
 				'pp_page >= ' . $fromPageId,
-			],
-			__METHOD__,
-			[
-				'LIMIT' => $this->batchSize,
-				'ORDER BY pp_page',
-			]
-		);
+			] )
+			->orderBy( 'pp_page' )
+			->limit( $this->batchSize )
+			->caller( __METHOD__ )->fetchResultSet();
 
 		return $this->slurpEntityIds( $res );
 	}
