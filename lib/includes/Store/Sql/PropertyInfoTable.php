@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Lib\Store\Sql;
 
 use InvalidArgumentException;
@@ -27,16 +29,11 @@ class PropertyInfoTable implements PropertyInfoLookup, PropertyInfoStore {
 
 	private const TABLE_NAME = 'wb_property_info';
 
-	/** @var EntityIdComposer */
-	private $entityIdComposer;
+	private EntityIdComposer $entityIdComposer;
 
-	/**
-	 * @var RepoDomainDb
-	 */
-	private $db;
+	private RepoDomainDb $db;
 
-	/** @var bool */
-	private $allowWrites;
+	private bool $allowWrites;
 
 	/**
 	 * @param EntityIdComposer $entityIdComposer
@@ -63,7 +60,7 @@ class PropertyInfoTable implements PropertyInfoLookup, PropertyInfoStore {
 	 * @return array|null The decoded blob as an associative array, or null if the blob
 	 *         could not be decoded.
 	 */
-	private function decodeBlob( $blob ) {
+	private function decodeBlob( $blob ): ?array {
 		if ( $blob === false || $blob === null ) {
 			return null;
 		}
@@ -84,7 +81,7 @@ class PropertyInfoTable implements PropertyInfoLookup, PropertyInfoStore {
 	 *
 	 * @return array[] The array of decoded blobs
 	 */
-	private function decodeResult( IResultWrapper $res ) {
+	private function decodeResult( IResultWrapper $res ): array {
 		$infos = [];
 
 		foreach ( $res as $row ) {
@@ -116,7 +113,7 @@ class PropertyInfoTable implements PropertyInfoLookup, PropertyInfoStore {
 	 * @throws InvalidArgumentException
 	 * @throws DBError
 	 */
-	public function getPropertyInfo( PropertyId $propertyId ) {
+	public function getPropertyInfo( PropertyId $propertyId ): ?array {
 		Assert::parameterType( NumericPropertyId::class, $propertyId, '$propertyId' );
 		/** @var NumericPropertyId $propertyId */
 		'@phan-var NumericPropertyId $propertyId';
@@ -276,10 +273,8 @@ class PropertyInfoTable implements PropertyInfoLookup, PropertyInfoStore {
 	 *
 	 * This is for use for closely related classes that want to operate directly
 	 * on the database table.
-	 *
-	 * @return string
 	 */
-	public function getTableName() {
+	public function getTableName(): string {
 		return self::TABLE_NAME;
 	}
 

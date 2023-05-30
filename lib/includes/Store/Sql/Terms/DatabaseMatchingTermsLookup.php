@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Lib\Store\Sql\Terms;
 
 use InvalidArgumentException;
@@ -26,20 +28,15 @@ class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 
 	use StatsdMonitoring;
 
-	/** @var RepoDomainDb */
-	private $repoDb;
+	private RepoDomainDb $repoDb;
 
-	/** @var LoggerInterface */
-	private $logger;
+	private LoggerInterface $logger;
 
-	/** @var TypeIdsAcquirer */
-	private $typeIdsAcquirer;
+	private TypeIdsAcquirer $typeIdsAcquirer;
 
-	/** @var TypeIdsResolver */
-	private $typeIdsResolver;
+	private TypeIdsResolver $typeIdsResolver;
 
-	/** @var EntityIdComposer */
-	private $entityIdComposer;
+	private EntityIdComposer $entityIdComposer;
 
 	public function __construct(
 		RepoDomainDb $repoDb,
@@ -96,7 +93,7 @@ class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 		$termType = null,
 		$entityType = null,
 		array $options = []
-	) {
+	): array {
 		$termQueries = [];
 
 		foreach ( $criteria as $mask ) {
@@ -203,7 +200,7 @@ class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 	 * @param int|null $limit
 	 * @return TermIndexEntry[]
 	 */
-	private function buildTermResult( array $results, ?int $limit = null ) {
+	private function buildTermResult( array $results, ?int $limit = null ): array {
 		$matchingTerms = [];
 		// Union in SQL doesn't have limit, we need to enforce it here
 		$counter = 0;
@@ -228,12 +225,7 @@ class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 		return $matchingTerms;
 	}
 
-	/**
-	 * @param object $termRow
-	 *
-	 * @return EntityId|null
-	 */
-	private function getEntityId( $termRow ) {
+	private function getEntityId( object $termRow ): ?EntityId {
 		if ( isset( $termRow->wbpt_property_id ) ) {
 			return $this->entityIdComposer->composeEntityId(
 				'', 'property', $termRow->wbpt_property_id
@@ -247,7 +239,7 @@ class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 		}
 	}
 
-	private function getDbr() {
+	private function getDbr(): IReadableDatabase {
 		return $this->repoDb->connections()->getReadConnection();
 	}
 }

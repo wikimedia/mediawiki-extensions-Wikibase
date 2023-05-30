@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Lib\Store\Sql\Terms\Util;
 
 use Exception;
@@ -29,35 +31,17 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	 */
 	public const FLAG_IGNORE_REPLICA = 0x1;
 
-	/**
-	 * @var RepoDomainDb
-	 */
-	private $repoDb;
+	private RepoDomainDb $repoDb;
 
-	/**
-	 * @var string
-	 */
-	private $table;
+	private string $table;
 
-	/**
-	 * @var string
-	 */
-	private $idColumn;
+	private string $idColumn;
 
-	/**
-	 * @var LoggerInterface|null
-	 */
-	private $logger;
+	private ?LoggerInterface $logger;
 
-	/**
-	 * @var int
-	 */
-	private $flags;
+	private int $flags;
 
-	/**
-	 * @var int
-	 */
-	private $waitForReplicationTimeout;
+	private int $waitForReplicationTimeout;
 
 	/**
 	 * @param RepoDomainDb $repoDb
@@ -69,11 +53,11 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	 */
 	public function __construct(
 		RepoDomainDb $repoDb,
-		$table,
-		$idColumn,
+		string $table,
+		string $idColumn,
 		LoggerInterface $logger = null,
-		$flags = 0x0,
-		$waitForReplicationTimeout = 2
+		int $flags = 0x0,
+		int $waitForReplicationTimeout = 2
 	) {
 		$this->repoDb = $repoDb;
 		$this->table = $table;
@@ -120,8 +104,8 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	 */
 	public function acquireIds(
 		array $neededRecords,
-		$recordsToInsertDecoratorCallback = null
-	) {
+		?callable $recordsToInsertDecoratorCallback = null
+	): array {
 		$existingRecords = $this->fetchExistingRecords( $neededRecords );
 		$nonExistingRecords = $this->filterNonExistingRecords( $neededRecords, $existingRecords );
 		$insertedRecords = $this->insertNonExistingRecords(
@@ -158,7 +142,7 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 
 	private function insertNonExistingRecords(
 		array $records,
-		$recordsToInsertDecoratorCallback = null
+		?callable $recordsToInsertDecoratorCallback = null
 	): array {
 		if ( empty( $records ) ) {
 			return [];
@@ -253,11 +237,11 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 		return $existingRecords;
 	}
 
-	private function getDbReplica() {
+	private function getDbReplica(): IReadableDatabase {
 		return $this->repoDb->connections()->getReadConnection();
 	}
 
-	private function getDbMaster() {
+	private function getDbMaster(): IDatabase {
 		return $this->repoDb->connections()->getWriteConnection();
 	}
 
@@ -299,11 +283,11 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	 * @param array $neededRecords
 	 * @suppress SecurityCheck-SQLInjection
 	 */
-	private function insertNonExistingRecordsIntoMaster( array $neededRecords ) {
+	private function insertNonExistingRecordsIntoMaster( array $neededRecords ): void {
 		$this->getDbMaster()->insert( $this->table, $neededRecords, __METHOD__, [ 'IGNORE' ] );
 	}
 
-	private function filterNonExistingRecords( $neededRecords, $existingRecords ): array {
+	private function filterNonExistingRecords( array $neededRecords, array $existingRecords ): array {
 		$existingRecordsHashes = [];
 		foreach ( $existingRecords as $record ) {
 			unset( $record[$this->idColumn] );
@@ -324,12 +308,12 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 		return array_values( $nonExistingRecords );
 	}
 
-	private function calcRecordHash( array $record ) {
+	private function calcRecordHash( array $record ): string {
 		ksort( $record );
 		return md5( serialize( $record ) );
 	}
 
-	private function isIgnoringReplica() {
+	private function isIgnoringReplica(): bool {
 		return ( $this->flags & self::FLAG_IGNORE_REPLICA ) !== 0x0;
 	}
 

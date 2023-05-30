@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Lib\Store\Sql\Terms;
 
 use Psr\Log\LoggerInterface;
@@ -21,13 +23,12 @@ class DatabaseInnerTermStoreCleaner {
 	use StatsdMonitoring;
 
 	/** @var IReadableDatabase a connection to DB_REPLICA. Note only set on cleanTermInLangIds */
-	private $dbr = null;
+	private ?IReadableDatabase $dbr = null;
 
 	/** @var IDatabase a connection to DB_PRIMARY. Note only set on cleanTermInLangIds */
-	private $dbw = null;
+	private ?IDatabase $dbw = null;
 
-	/** @var LoggerInterface */
-	private $logger;
+	private LoggerInterface $logger;
 
 	public function __construct(
 		LoggerInterface $logger = null
@@ -49,7 +50,7 @@ class DatabaseInnerTermStoreCleaner {
 	 * @param IReadableDatabase $dbr
 	 * @param int[] $termInLangIds (wbtl_id)
 	 */
-	public function cleanTermInLangIds( IDatabase $dbw, IReadableDatabase $dbr, array $termInLangIds ) {
+	public function cleanTermInLangIds( IDatabase $dbw, IReadableDatabase $dbr, array $termInLangIds ): void {
 		if ( $termInLangIds === [] ) {
 			return;
 		}
@@ -65,7 +66,7 @@ class DatabaseInnerTermStoreCleaner {
 	 *
 	 * @param int[] $termInLangIds (wbtl_id)
 	 */
-	private function cleanTermInLangIdsInner( array $termInLangIds ) {
+	private function cleanTermInLangIdsInner( array $termInLangIds ): void {
 		$this->logger->debug(
 			'{method}: deleting {count} term_in_lang rows',
 			[
@@ -181,7 +182,7 @@ class DatabaseInnerTermStoreCleaner {
 	 *
 	 * @param int[] $textInLangIds
 	 */
-	private function cleanTextInLangIds( array $textInLangIds ) {
+	private function cleanTextInLangIds( array $textInLangIds ): void {
 		if ( $textInLangIds === [] ) {
 			return;
 		}
@@ -269,7 +270,7 @@ class DatabaseInnerTermStoreCleaner {
 	 *
 	 * @param array $textIds
 	 */
-	private function cleanTextIds( array $textIds ) {
+	private function cleanTextIds( array $textIds ): void {
 		if ( $textIds === [] ) {
 			return;
 		}
@@ -307,12 +308,12 @@ class DatabaseInnerTermStoreCleaner {
 	 * @return array
 	 */
 	private function selectFieldValuesForPrimaryKey(
-		$table,
-		$selectedVar,
-		$primaryKeyVar,
-		$primaryKeyValues,
-		$fname = __METHOD__
-	) {
+		string $table,
+		string $selectedVar,
+		string $primaryKeyVar,
+		array $primaryKeyValues,
+		string $fname = __METHOD__
+	): array {
 		$values = $this->dbr->selectFieldValues(
 			$table,
 			$selectedVar,

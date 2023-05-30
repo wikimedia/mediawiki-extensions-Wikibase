@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Hooks;
 
 use ChangesListBooleanFilter;
@@ -22,29 +24,15 @@ use Wikimedia\Rdbms\IReadableDatabase;
  */
 class ChangesListSpecialPageHookHandler implements ChangesListSpecialPageQueryHook {
 
-	/**
-	 * @var IReadableDatabase
-	 */
-	private $dbr;
+	private IReadableDatabase $dbr;
 
-	/**
-	 * @var bool
-	 */
-	private $showExternalChanges;
+	private bool $showExternalChanges;
 
-	/**
-	 * @var UserOptionsLookup
-	 */
-	private $userOptionsLookup;
+	private UserOptionsLookup $userOptionsLookup;
 
-	/**
-	 * @param IReadableDatabase $dbr
-	 * @param bool $showExternalChanges
-	 * @param UserOptionsLookup $userOptionsLookup
-	 */
 	public function __construct(
 		IReadableDatabase $dbr,
-		$showExternalChanges,
+		bool $showExternalChanges,
 		UserOptionsLookup $userOptionsLookup
 	) {
 		$this->dbr = $dbr;
@@ -106,7 +94,7 @@ class ChangesListSpecialPageHookHandler implements ChangesListSpecialPageQueryHo
 		}
 	}
 
-	protected function addFilter( ChangesListSpecialPage $specialPage ) {
+	protected function addFilter( ChangesListSpecialPage $specialPage ): void {
 		$filterName = $this->getFilterName();
 		$changeTypeGroup = $specialPage->getFilterGroup( 'changeType' );
 
@@ -169,18 +157,11 @@ class ChangesListSpecialPageHookHandler implements ChangesListSpecialPageQueryHo
 		}
 	}
 
-	/**
-	 * @param IReadableDatabase $dbr
-	 * @param array &$conds
-	 */
-	public function addWikibaseConditions( IReadableDatabase $dbr, array &$conds ) {
+	public function addWikibaseConditions( IReadableDatabase $dbr, array &$conds ): void {
 		$conds[] = 'rc_source != ' . $dbr->addQuotes( RecentChangeFactory::SRC_WIKIBASE );
 	}
 
-	/**
-	 * @return bool
-	 */
-	protected function hasWikibaseChangesEnabled() {
+	protected function hasWikibaseChangesEnabled(): bool {
 		return $this->showExternalChanges;
 	}
 
@@ -188,10 +169,7 @@ class ChangesListSpecialPageHookHandler implements ChangesListSpecialPageQueryHo
 		return (bool)$this->userOptionsLookup->getOption( $user, $this->getOptionName( $pageName ) );
 	}
 
-	/**
-	 * @return string
-	 */
-	private function getFilterName() {
+	private function getFilterName(): string {
 		return 'hideWikibase';
 	}
 

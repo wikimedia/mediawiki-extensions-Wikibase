@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Lib\Store\Sql;
 
 use MediaWiki\Revision\SlotRecord;
@@ -20,15 +22,9 @@ use Wikimedia\Rdbms\IReadableDatabase;
  */
 abstract class PageTableEntityQueryBase implements PageTableEntityQuery {
 
-	/**
-	 * @var EntityNamespaceLookup
-	 */
-	private $entityNamespaceLookup;
+	private EntityNamespaceLookup $entityNamespaceLookup;
 
-	/**
-	 * @var NameTableStore
-	 */
-	private $slotRoleStore;
+	private NameTableStore $slotRoleStore;
 
 	public function __construct(
 		EntityNamespaceLookup $entityNamespaceLookup,
@@ -50,7 +46,7 @@ abstract class PageTableEntityQueryBase implements PageTableEntityQuery {
 		array $joins,
 		array $entityIds,
 		IReadableDatabase $db
-	) {
+	): array {
 		$usesRevisionTable = array_key_exists( 'revision', $joins );
 		list( $where, $slotJoinConds ) = $this->getQueryInfo( $entityIds, $usesRevisionTable, $db );
 		$joins = array_merge( $joins, $slotJoinConds );
@@ -135,7 +131,7 @@ abstract class PageTableEntityQueryBase implements PageTableEntityQuery {
 	 * @param Traversable $rows
 	 * @return stdClass[] Array of rows with keys of their entity ID serializations
 	 */
-	private function indexRowsByEntityId( Traversable $rows ) {
+	private function indexRowsByEntityId( Traversable $rows ): array {
 		$indexedRows = [];
 
 		foreach ( $rows as $row ) {

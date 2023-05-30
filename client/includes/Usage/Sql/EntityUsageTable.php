@@ -37,38 +37,19 @@ class EntityUsageTable {
 
 	public const DEFAULT_TABLE_NAME = 'wbc_entity_usage';
 
-	/**
-	 * @var EntityIdParser
-	 */
-	private $idParser;
+	private EntityIdParser $idParser;
 
-	/**
-	 * @var IDatabase|null
-	 */
-	private $writeConnection;
+	private ?IDatabase $writeConnection;
 
-	/**
-	 * @var ClientDomainDb
-	 */
-	private $db;
+	private ClientDomainDb $db;
 
-	/**
-	 * @var int
-	 */
-	private $batchSize;
+	private int $batchSize;
 
-	/**
-	 * @var string
-	 */
-	private $tableName;
+	private string $tableName;
 
-	/**
-	 * @var int
-	 */
-	private $addUsagesBatchSize;
+	private int $addUsagesBatchSize;
 
-	/** @var LoggerInterface */
-	private $logger;
+	private LoggerInterface $logger;
 
 	/**
 	 * @param EntityIdParser $idParser
@@ -496,7 +477,6 @@ class EntityUsageTable {
 	/**
 	 * Set the batch size for adding entity usage records.
 	 * This can also be set in the constructor.
-	 * @param int $addUsagesBatchSize
 	 */
 	public function setAddUsagesBatchSize( int $addUsagesBatchSize ): void {
 		if ( $addUsagesBatchSize < 1 ) {
