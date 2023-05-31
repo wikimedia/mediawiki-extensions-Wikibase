@@ -3,26 +3,26 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels;
 
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Services\ItemLabelsRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 
 /**
  * @license GPL-2.0-or-later
  */
 class GetItemLabels {
 
-	private ItemRevisionMetadataRetriever $itemRevisionMetadataRetriever;
+	private GetLatestItemRevisionMetadata $getLatestRevisionMetadata;
 	private ItemLabelsRetriever $itemLabelsRetriever;
 	private GetItemLabelsValidator $validator;
 
 	public function __construct(
-		ItemRevisionMetadataRetriever $itemRevisionMetadataRetriever,
+		GetLatestItemRevisionMetadata $getLatestRevisionMetadata,
 		ItemLabelsRetriever $itemLabelsRetriever,
 		GetItemLabelsValidator $validator
 	) {
-		$this->itemRevisionMetadataRetriever = $itemRevisionMetadataRetriever;
+		$this->getLatestRevisionMetadata = $getLatestRevisionMetadata;
 		$this->itemLabelsRetriever = $itemLabelsRetriever;
 		$this->validator = $validator;
 	}
@@ -36,26 +36,13 @@ class GetItemLabels {
 
 		$itemId = new ItemId( $request->getItemId() );
 
-		$metaDataResult = $this->itemRevisionMetadataRetriever->getLatestRevisionMetadata( $itemId );
-
-		if ( !$metaDataResult->itemExists() ) {
-			throw new UseCaseError(
-				UseCaseError::ITEM_NOT_FOUND,
-				"Could not find an item with the ID: {$request->getItemId()}"
-			);
-		}
-
-		if ( $metaDataResult->isRedirect() ) {
-			throw new ItemRedirect(
-				$metaDataResult->getRedirectTarget()->getSerialization()
-			);
-		}
+		[ $revisionId, $lastModified ] = $this->getLatestRevisionMetadata->execute( $itemId );
 
 		return new GetItemLabelsResponse(
 			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Item validated and exists
 			$this->itemLabelsRetriever->getLabels( $itemId ),
-			$metaDataResult->getRevisionTimestamp(),
-			$metaDataResult->getRevisionId(),
+			$lastModified,
+			$revisionId,
 		);
 	}
 }
