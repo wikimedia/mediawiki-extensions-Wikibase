@@ -1,7 +1,2 @@
 [
-	{
-		"path": "/wikibase/v0/entities/items/{item_id}/labels",
-		"method": "PATCH",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\PatchItemLabelsRouteHandler::factory"
-	}
 ]
