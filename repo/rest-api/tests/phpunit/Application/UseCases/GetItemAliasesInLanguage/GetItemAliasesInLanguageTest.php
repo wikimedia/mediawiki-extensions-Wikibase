@@ -9,14 +9,13 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliasesInLanguage\GetItemA
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliasesInLanguage\GetItemAliasesInLanguageRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliasesInLanguage\GetItemAliasesInLanguageResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliasesInLanguage\GetItemAliasesInLanguageValidator;
-use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
+use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
-use Wikibase\Repo\RestApi\Domain\ReadModel\LatestItemRevisionMetadataResult;
 use Wikibase\Repo\RestApi\Domain\Services\ItemAliasesInLanguageRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -29,9 +28,9 @@ use Wikibase\Repo\WikibaseRepo;
 class GetItemAliasesInLanguageTest extends TestCase {
 
 	/**
-	 * @var MockObject|ItemRevisionMetadataRetriever
+	 * @var MockObject|GetLatestItemRevisionMetadata
 	 */
-	private $itemRevisionMetadataRetriever;
+	private $getRevisionMetadata;
 
 	/**
 	 * @var MockObject|ItemAliasesInLanguageRetriever
@@ -41,7 +40,7 @@ class GetItemAliasesInLanguageTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->itemRevisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
+		$this->getRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
 		$this->aliasesInLanguageRetriever = $this->createStub( ItemAliasesInLanguageRetriever::class );
 	}
 
@@ -57,11 +56,8 @@ class GetItemAliasesInLanguageTest extends TestCase {
 		$lastModified = '20201111070707';
 		$revisionId = 2;
 
-		$this->itemRevisionMetadataRetriever = $this->createMock( ItemRevisionMetadataRetriever::class );
-		$this->itemRevisionMetadataRetriever->expects( $this->once() )
-			->method( 'getLatestRevisionMetadata' )
-			->with( $itemId )
-			->willReturn( LatestItemRevisionMetadataResult::concreteRevision( $revisionId, $lastModified ) );
+		$this->getRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
+		$this->getRevisionMetadata->method( 'execute' )->willReturn( [ $revisionId, $lastModified ] );
 
 		$this->aliasesInLanguageRetriever = $this->createMock( ItemAliasesInLanguageRetriever::class );
 		$this->aliasesInLanguageRetriever->expects( $this->once() )
@@ -101,11 +97,8 @@ class GetItemAliasesInLanguageTest extends TestCase {
 	public function testGivenLanguageCodeWithNoAliasesFor_throwsUseCaseError(): void {
 		$itemId = new ItemId( 'Q2' );
 
-		$this->itemRevisionMetadataRetriever = $this->createMock( ItemRevisionMetadataRetriever::class );
-		$this->itemRevisionMetadataRetriever->expects( $this->once() )
-			->method( 'getLatestRevisionMetadata' )
-			->with( $itemId )
-			->willReturn( LatestItemRevisionMetadataResult::concreteRevision( 2, '20201111070707' ) );
+		$this->getRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
+		$this->getRevisionMetadata->method( 'execute' )->willReturn( [ 2, '20201111070707' ] );
 
 		try {
 			$this->newUseCase()->execute(
@@ -120,14 +113,14 @@ class GetItemAliasesInLanguageTest extends TestCase {
 		}
 	}
 
-	public function testGivenRequestedItemDoesNotExist_throwsUseCaseError(): void {
+	public function testGivenItemNotFoundOrRedirect_throws(): void {
 		$itemId = new ItemId( 'Q10' );
 
-		$this->itemRevisionMetadataRetriever = $this->createMock( ItemRevisionMetadataRetriever::class );
-		$this->itemRevisionMetadataRetriever->expects( $this->once() )
-			->method( 'getLatestRevisionMetadata' )
-			->with( $itemId )
-			->willReturn( LatestItemRevisionMetadataResult::itemNotFound() );
+		$expectedException = $this->createStub( UseCaseException::class );
+
+		$this->getRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
+		$this->getRevisionMetadata->method( 'execute' )
+			->willThrowException( $expectedException );
 
 		try {
 			$this->newUseCase()->execute(
@@ -135,34 +128,14 @@ class GetItemAliasesInLanguageTest extends TestCase {
 			);
 
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::ITEM_NOT_FOUND, $e->getErrorCode() );
-			$this->assertSame( 'Could not find an item with the ID: Q10', $e->getErrorMessage() );
-			$this->assertNull( $e->getErrorContext() );
-		}
-	}
-
-	public function testGivenItemRedirect_throwsItemRedirectException(): void {
-		$redirectSource = 'Q123';
-		$redirectTarget = 'Q321';
-
-		$this->itemRevisionMetadataRetriever
-			->method( 'getLatestRevisionMetadata' )
-			->with( new ItemId( $redirectSource ) )
-			->willReturn( LatestItemRevisionMetadataResult::redirect( new ItemId( $redirectTarget ) ) );
-
-		try {
-			$this->newUseCase()->execute( new GetItemAliasesInLanguageRequest( $redirectSource, 'en' ) );
-
-			$this->fail( 'this should not be reached' );
-		} catch ( ItemRedirect $e ) {
-			$this->assertSame( $redirectTarget, $e->getRedirectTargetId() );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( $expectedException, $e );
 		}
 	}
 
 	private function newUseCase(): GetItemAliasesInLanguage {
 		return new GetItemAliasesInLanguage(
-			$this->itemRevisionMetadataRetriever,
+			$this->getRevisionMetadata,
 			$this->aliasesInLanguageRetriever,
 			new GetItemAliasesInLanguageValidator(
 				new ItemIdValidator(),
