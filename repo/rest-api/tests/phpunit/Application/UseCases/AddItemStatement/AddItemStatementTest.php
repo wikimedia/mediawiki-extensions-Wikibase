@@ -15,6 +15,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatement
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
@@ -22,7 +23,6 @@ use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Item as ReadModelItem;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
@@ -30,7 +30,6 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\Tests\RestApi\Application\Serialization\DeserializerFactory;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
@@ -63,9 +62,9 @@ class AddItemStatementTest extends TestCase {
 	 */
 	private $guidGenerator;
 	/**
-	 * @var MockObject|WikibaseEntityPermissionChecker
+	 * @var MockObject|AssertUserIsAuthorized
 	 */
-	private $permissionChecker;
+	private $assertUserIsAuthorized;
 
 	private const ALLOWED_TAGS = [ 'some', 'tags', 'are', 'allowed' ];
 
@@ -77,7 +76,7 @@ class AddItemStatementTest extends TestCase {
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
 		$this->guidGenerator = $this->createStub( GuidGenerator::class );
-		$this->permissionChecker = $this->createStub( WikibaseEntityPermissionChecker::class );
+		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
 	}
 
 	public function testAddStatement(): void {
@@ -116,9 +115,6 @@ class AddItemStatementTest extends TestCase {
 				$this->expectEquivalentMetadata( $editTags, $isBot, $comment, EditSummary::ADD_ACTION )
 			)
 			->willReturn( new ItemRevision( $updatedItem, $modificationTimestamp, $postModificationRevisionId ) );
-
-		$this->permissionChecker = $this->createStub( WikibaseEntityPermissionChecker::class );
-		$this->permissionChecker->method( 'canEdit' )->willReturn( true );
 
 		$response = $this->newUseCase()->execute( $request );
 
@@ -169,11 +165,14 @@ class AddItemStatementTest extends TestCase {
 	public function testProtectedItem_throwsUseCaseError(): void {
 		$itemId = new ItemId( 'Q123' );
 
-		$this->permissionChecker = $this->createMock( WikibaseEntityPermissionChecker::class );
-		$this->permissionChecker->expects( $this->once() )
-			->method( 'canEdit' )
-			->with( User::newAnonymous(), $itemId )
-			->willReturn( false );
+		$expectedError = new UseCaseError(
+			UseCaseError::PERMISSION_DENIED,
+			'You have no permission to edit this item.'
+		);
+		$this->assertUserIsAuthorized = $this->createMock( AssertUserIsAuthorized::class );
+		$this->assertUserIsAuthorized->method( 'execute' )
+			->with( $itemId, null )
+			->willThrowException( $expectedError );
 
 		try {
 			$request = new AddItemStatementRequest(
@@ -187,7 +186,7 @@ class AddItemStatementTest extends TestCase {
 			$this->newUseCase()->execute( $request );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::PERMISSION_DENIED, $e->getErrorCode() );
+			$this->assertSame( $expectedError, $e );
 		}
 	}
 
@@ -198,7 +197,7 @@ class AddItemStatementTest extends TestCase {
 			$this->itemRetriever,
 			$this->itemUpdater,
 			$this->guidGenerator,
-			$this->permissionChecker
+			$this->assertUserIsAuthorized
 		);
 	}
 

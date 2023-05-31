@@ -16,6 +16,7 @@ use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchedStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatementRequest;
@@ -23,7 +24,6 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemState
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Item as ReadModelItem;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
@@ -34,8 +34,6 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
-use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
@@ -86,9 +84,9 @@ class PatchItemStatementTest extends TestCase {
 	private $revisionMetadataRetriever;
 
 	/**
-	 * @var MockObject|PermissionChecker
+	 * @var MockObject|AssertUserIsAuthorized
 	 */
-	private $permissionChecker;
+	private $assertUserIsAuthorized;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -99,8 +97,7 @@ class PatchItemStatementTest extends TestCase {
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
 		$this->revisionMetadataRetriever = $this->newRevisionMetadataRetrieverWithSomeConcreteRevision();
-		$this->permissionChecker = $this->createStub( PermissionChecker::class );
-		$this->permissionChecker->method( 'canEdit' )->willReturn( true );
+		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
 
 		$this->statementSerializer = $this->newStatementSerializer();
 	}
@@ -363,42 +360,6 @@ class PatchItemStatementTest extends TestCase {
 		}
 	}
 
-	public function testGivenProtectedItem_throwsUseCaseError(): void {
-		$itemId = new ItemId( 'Q123' );
-		$statementId = "$itemId\$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE";
-		[ $statementReadModel, $statementWriteModel ] = NewStatementReadModel::forProperty( self::STRING_PROPERTY )
-			->withGuid( $statementId )
-			->withValue( 'abc' )
-			->buildReadAndWriteModel();
-
-		$this->permissionChecker = $this->createMock( WikibaseEntityPermissionChecker::class );
-		$this->permissionChecker->expects( $this->once() )
-			->method( 'canEdit' )
-			->with( User::newAnonymous(), $itemId )
-			->willReturn( false );
-
-		$this->itemRetriever = $this->createStub( ItemRetriever::class );
-		$this->itemRetriever->method( 'getItem' )->willReturn(
-			NewItem::withId( $itemId )->andStatement( $statementWriteModel )->build()
-		);
-
-		$this->statementRetriever = $this->createStub( ItemStatementRetriever::class );
-		$this->statementRetriever->method( 'getStatement' )->willReturn( $statementReadModel );
-
-		try {
-			$this->newUseCase()->execute(
-				$this->newUseCaseRequest( [
-					'$statementId' => $statementId,
-					'$patch' => $this->getValidValueReplacingPatch(),
-				] )
-			);
-			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::PERMISSION_DENIED, $e->getErrorCode() );
-			$this->assertSame( 'You have no permission to edit this item.', $e->getErrorMessage() );
-		}
-	}
-
 	/**
 	 * @dataProvider inapplicablePatchProvider
 	 */
@@ -481,8 +442,46 @@ class PatchItemStatementTest extends TestCase {
 			$this->itemRetriever,
 			$this->itemUpdater,
 			$this->revisionMetadataRetriever,
-			$this->permissionChecker
+			$this->assertUserIsAuthorized
 		);
+	}
+
+	public function testGivenProtectedItem_throwsUseCaseError(): void {
+		$itemId = new ItemId( 'Q123' );
+		$statementId = "$itemId\$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE";
+		[ $statementReadModel, $statementWriteModel ] = NewStatementReadModel::forProperty( self::STRING_PROPERTY )
+			->withGuid( $statementId )
+			->withValue( 'abc' )
+			->buildReadAndWriteModel();
+
+		$expectedError = new UseCaseError(
+			UseCaseError::PERMISSION_DENIED,
+			'You have no permission to edit this item.'
+		);
+		$this->assertUserIsAuthorized = $this->createMock( AssertUserIsAuthorized::class );
+		$this->assertUserIsAuthorized->method( 'execute' )
+			->with( $itemId, null )
+			->willThrowException( $expectedError );
+
+		$this->itemRetriever = $this->createStub( ItemRetriever::class );
+		$this->itemRetriever->method( 'getItem' )->willReturn(
+			NewItem::withId( $itemId )->andStatement( $statementWriteModel )->build()
+		);
+
+		$this->statementRetriever = $this->createStub( ItemStatementRetriever::class );
+		$this->statementRetriever->method( 'getStatement' )->willReturn( $statementReadModel );
+
+		try {
+			$this->newUseCase()->execute(
+				$this->newUseCaseRequest( [
+					'$statementId' => $statementId,
+					'$patch' => $this->getValidValueReplacingPatch(),
+				] )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedError, $e );
+		}
 	}
 
 	private function newUseCaseRequest( array $requestData ): PatchItemStatementRequest {

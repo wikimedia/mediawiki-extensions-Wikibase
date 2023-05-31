@@ -4,18 +4,17 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels;
 
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\PatchPathException;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\PatchTestConditionFailedException;
 use Wikibase\Repo\RestApi\Domain\Services\ItemLabelsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\JsonPatcher;
-use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
 
 /**
  * @license GPL-2.0-or-later
@@ -29,8 +28,8 @@ class PatchItemLabels {
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
 	private GetLatestItemRevisionMetadata $getRevisionMetadata;
-	private PermissionChecker $permissionChecker;
 	private PatchItemLabelsValidator $useCaseValidator;
+	private AssertUserIsAuthorized $assertUserIsAuthorized;
 
 	public function __construct(
 		ItemLabelsRetriever $labelsRetriever,
@@ -40,8 +39,8 @@ class PatchItemLabels {
 		ItemRetriever $itemRetriever,
 		ItemUpdater $itemUpdater,
 		GetLatestItemRevisionMetadata $getRevisionMetadata,
-		PermissionChecker $permissionChecker,
-		PatchItemLabelsValidator $useCaseValidator
+		PatchItemLabelsValidator $useCaseValidator,
+		AssertUserIsAuthorized $assertUserIsAuthorized
 	) {
 		$this->labelsRetriever = $labelsRetriever;
 		$this->labelsSerializer = $labelsSerializer;
@@ -50,8 +49,8 @@ class PatchItemLabels {
 		$this->itemRetriever = $itemRetriever;
 		$this->itemUpdater = $itemUpdater;
 		$this->getRevisionMetadata = $getRevisionMetadata;
-		$this->permissionChecker = $permissionChecker;
 		$this->useCaseValidator = $useCaseValidator;
+		$this->assertUserIsAuthorized = $assertUserIsAuthorized;
 	}
 
 	public function execute( PatchItemLabelsRequest $request ): PatchItemLabelsResponse {
@@ -61,14 +60,7 @@ class PatchItemLabels {
 
 		$this->getRevisionMetadata->execute( $itemId ); // checks redirect and item existence
 
-		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-		$user = $request->getUsername() !== null ? User::withUsername( $request->getUsername() ) : User::newAnonymous();
-		if ( !$this->permissionChecker->canEdit( $user, $itemId ) ) {
-			throw new UseCaseError(
-				UseCaseError::PERMISSION_DENIED,
-				'You have no permission to edit this item.'
-			);
-		}
+		$this->assertUserIsAuthorized->execute( $itemId, $request->getUsername() );
 
 		$labels = $this->labelsRetriever->getLabels( $itemId );
 		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable

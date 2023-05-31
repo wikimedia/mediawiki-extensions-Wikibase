@@ -10,6 +10,7 @@ use Wikibase\DataModel\Term\TermList;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchedLabelsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
@@ -20,7 +21,6 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Item;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
@@ -31,8 +31,6 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemLabelsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\JsonPatcher;
-use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 
@@ -54,8 +52,8 @@ class PatchItemLabelsTest extends TestCase {
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
 	private GetLatestItemRevisionMetadata $getRevisionMetadata;
-	private PermissionChecker $permissionChecker;
 	private PatchItemLabelsValidator $validator;
+	private AssertUserIsAuthorized $assertUserIsAuthorized;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -70,11 +68,10 @@ class PatchItemLabelsTest extends TestCase {
 		);
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
+		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
 		$this->getRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
 		$this->getRevisionMetadata->method( 'execute' )
 			->willReturn( [ 321, '20201111070707' ] );
-		$this->permissionChecker = $this->createStub( PermissionChecker::class );
-		$this->permissionChecker->method( 'canEdit' )->willReturn( true );
 		$this->validator = $this->createStub( PatchItemLabelsValidator::class );
 	}
 
@@ -178,40 +175,6 @@ class PatchItemLabelsTest extends TestCase {
 		}
 	}
 
-	public function testGivenEditIsUnauthorized_throwsUseCaseError(): void {
-		$itemId = new ItemId( 'Q123' );
-
-		$this->permissionChecker = $this->createMock( WikibaseEntityPermissionChecker::class );
-		$this->permissionChecker->expects( $this->once() )
-			->method( 'canEdit' )
-			->with( User::newAnonymous(), $itemId )
-			->willReturn( false );
-
-		try {
-			$this->newUseCase()->execute(
-				new PatchItemLabelsRequest(
-					"$itemId",
-					[
-						[
-							'op' => 'remove',
-							'path' => '/en',
-						],
-					],
-					[],
-					false,
-					null,
-					null
-				)
-			);
-			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseError $e ) {
-			$this->assertSame(
-				UseCaseError::PERMISSION_DENIED,
-				$e->getErrorCode()
-			);
-		}
-	}
-
 	/**
 	 * @dataProvider provideInapplicablePatch
 	 */
@@ -295,6 +258,40 @@ class PatchItemLabelsTest extends TestCase {
 		}
 	}
 
+	public function testGivenEditIsUnauthorized_throwsUseCaseError(): void {
+		$itemId = new ItemId( 'Q123' );
+
+		$expectedError = new UseCaseError(
+			UseCaseError::PERMISSION_DENIED,
+			'You have no permission to edit this item.'
+		);
+		$this->assertUserIsAuthorized = $this->createMock( AssertUserIsAuthorized::class );
+		$this->assertUserIsAuthorized->method( 'execute' )
+			->with( $itemId, null )
+			->willThrowException( $expectedError );
+
+		try {
+			$this->newUseCase()->execute(
+				new PatchItemLabelsRequest(
+					"$itemId",
+					[
+						[
+							'op' => 'remove',
+							'path' => '/en',
+						],
+					],
+					[],
+					false,
+					null,
+					null
+				)
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedError, $e );
+		}
+	}
+
 	private function newUseCase(): PatchItemLabels {
 		return new PatchItemLabels(
 			$this->labelsRetriever,
@@ -304,8 +301,8 @@ class PatchItemLabelsTest extends TestCase {
 			$this->itemRetriever,
 			$this->itemUpdater,
 			$this->getRevisionMetadata,
-			$this->permissionChecker,
-			$this->validator
+			$this->validator,
+			$this->assertUserIsAuthorized
 		);
 	}
 

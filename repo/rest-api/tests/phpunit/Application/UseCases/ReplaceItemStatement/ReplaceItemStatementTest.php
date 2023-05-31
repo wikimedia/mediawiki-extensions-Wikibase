@@ -13,6 +13,7 @@ use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatementResponse;
@@ -23,7 +24,6 @@ use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Item as ReadModelItem;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
@@ -33,8 +33,6 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
-use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\Tests\RestApi\Application\Serialization\DeserializerFactory;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
@@ -63,9 +61,9 @@ class ReplaceItemStatementTest extends TestCase {
 	 */
 	private $itemUpdater;
 	/**
-	 * @var MockObject|PermissionChecker
+	 * @var MockObject|AssertUserIsAuthorized
 	 */
-	private $permissionChecker;
+	private $assertUserIsAuthorized;
 
 	private const ALLOWED_TAGS = [ 'some', 'tags', 'are', 'allowed' ];
 
@@ -75,8 +73,7 @@ class ReplaceItemStatementTest extends TestCase {
 		$this->revisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
-		$this->permissionChecker = $this->createStub( PermissionChecker::class );
-		$this->permissionChecker->method( 'canEdit' )->willReturn( true );
+		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
 	}
 
 	public function testReplaceStatement(): void {
@@ -346,11 +343,14 @@ class ReplaceItemStatementTest extends TestCase {
 		$this->revisionMetadataRetriever->method( 'getLatestRevisionMetadata' )
 			->willReturn( LatestItemRevisionMetadataResult::concreteRevision( 321, '20201111070707' ) );
 
-		$this->permissionChecker = $this->createMock( WikibaseEntityPermissionChecker::class );
-		$this->permissionChecker->expects( $this->once() )
-			->method( 'canEdit' )
-			->with( User::newAnonymous(), $itemId )
-			->willReturn( false );
+		$expectedError = new UseCaseError(
+			UseCaseError::PERMISSION_DENIED,
+			'You have no permission to edit this item.'
+		);
+		$this->assertUserIsAuthorized = $this->createMock( AssertUserIsAuthorized::class );
+		$this->assertUserIsAuthorized->method( 'execute' )
+			->with( $itemId, null )
+			->willThrowException( $expectedError );
 
 		try {
 			$this->newUseCase()->execute(
@@ -361,10 +361,7 @@ class ReplaceItemStatementTest extends TestCase {
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame(
-				UseCaseError::PERMISSION_DENIED,
-				$e->getErrorCode()
-			);
+			$this->assertSame( $expectedError, $e );
 		}
 	}
 
@@ -374,7 +371,7 @@ class ReplaceItemStatementTest extends TestCase {
 			$this->revisionMetadataRetriever,
 			$this->itemRetriever,
 			$this->itemUpdater,
-			$this->permissionChecker
+			$this->assertUserIsAuthorized
 		);
 	}
 

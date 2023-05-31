@@ -8,10 +8,10 @@ use Wikibase\DataModel\Exception\StatementGuidChangedException;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\PatchPathException;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\PatchTestConditionFailedException;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
@@ -19,7 +19,6 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\JsonPatcher;
-use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
 
 /**
  * @license GPL-2.0-or-later
@@ -35,7 +34,7 @@ class PatchItemStatement {
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
 	private ItemRevisionMetadataRetriever $revisionMetadataRetriever;
-	private PermissionChecker $permissionChecker;
+	private AssertUserIsAuthorized $assertUserIsAuthorized;
 
 	public function __construct(
 		PatchItemStatementValidator $useCaseValidator,
@@ -47,7 +46,7 @@ class PatchItemStatement {
 		ItemRetriever $itemRetriever,
 		ItemUpdater $itemUpdater,
 		ItemRevisionMetadataRetriever $revisionMetadataRetriever,
-		PermissionChecker $permissionChecker
+		AssertUserIsAuthorized $assertUserIsAuthorized
 	) {
 		$this->useCaseValidator = $useCaseValidator;
 		$this->patchedStatementValidator = $patchedStatementValidator;
@@ -58,7 +57,7 @@ class PatchItemStatement {
 		$this->itemRetriever = $itemRetriever;
 		$this->itemUpdater = $itemUpdater;
 		$this->revisionMetadataRetriever = $revisionMetadataRetriever;
-		$this->permissionChecker = $permissionChecker;
+		$this->assertUserIsAuthorized = $assertUserIsAuthorized;
 	}
 
 	/**
@@ -91,14 +90,7 @@ class PatchItemStatement {
 			$this->throwStatementNotFoundException( $statementId );
 		}
 
-		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-		$user = $request->getUsername() !== null ? User::withUsername( $request->getUsername() ) : User::newAnonymous();
-		if ( !$this->permissionChecker->canEdit( $user, $itemId ) ) {
-			throw new UseCaseError(
-				UseCaseError::PERMISSION_DENIED,
-				'You have no permission to edit this item.'
-			);
-		}
+		$this->assertUserIsAuthorized->execute( $itemId, $request->getUsername() );
 
 		$serialization = $this->statementSerializer->serialize( $statementToPatch );
 
