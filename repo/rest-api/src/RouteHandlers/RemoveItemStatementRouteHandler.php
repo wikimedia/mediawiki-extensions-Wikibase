@@ -9,6 +9,7 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
 use MediaWiki\Rest\Validator\BodyValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
@@ -102,6 +103,11 @@ class RemoveItemStatementRouteHandler extends SimpleHandler {
 			);
 		} catch ( UseCaseError $exception ) {
 			return $this->responseFactory->newErrorResponseFromException( $exception );
+		} catch ( ItemRedirect $e ) {
+			return $this->responseFactory->newErrorResponse(
+				UseCaseError::STATEMENT_NOT_FOUND,
+				"Could not find a statement with the ID: $statementId"
+			);
 		}
 
 		return $this->newSuccessHttpResponse();

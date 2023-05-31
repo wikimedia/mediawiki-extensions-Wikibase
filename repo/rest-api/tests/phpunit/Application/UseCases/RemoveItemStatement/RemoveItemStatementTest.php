@@ -13,17 +13,17 @@ use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
+use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
-use Wikibase\Repo\RestApi\Domain\ReadModel\LatestItemRevisionMetadataResult;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 
@@ -40,9 +40,9 @@ class RemoveItemStatementTest extends TestCase {
 	use EditMetadataHelper;
 
 	/**
-	 * @var MockObject|ItemRevisionMetadataRetriever
+	 * @var MockObject|GetLatestItemRevisionMetadata
 	 */
-	private $revisionMetadataRetriever;
+	private $getRevisionMetadata;
 
 	/**
 	 * @var MockObject|ItemRetriever
@@ -64,7 +64,8 @@ class RemoveItemStatementTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->revisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
+		$this->getRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
+		$this->getRevisionMetadata->method( 'execute' )->willReturn( [ 223, '20210809030405' ] );
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
 		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
@@ -85,9 +86,6 @@ class RemoveItemStatementTest extends TestCase {
 			'$itemId' => $itemId,
 		];
 
-		$this->revisionMetadataRetriever = $this->newItemMetadataRetriever(
-			LatestItemRevisionMetadataResult::concreteRevision( 223, '20210809030405' )
-		);
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemRetriever->expects( $this->once() )
 			->method( 'getItem' )
@@ -129,26 +127,35 @@ class RemoveItemStatementTest extends TestCase {
 		}
 	}
 
-	public function testRequestedItemNotFound_throwsItemNotFound(): void {
-		$this->revisionMetadataRetriever = $this->newItemMetadataRetriever( LatestItemRevisionMetadataResult::itemNotFound() );
+	public function testRequestedItemNotFoundOrRedirect_throws(): void {
+		$itemId = new ItemId( 'Q999999' );
+		$expectedException = $this->createStub( UseCaseException::class );
+		$this->getRevisionMetadata = $this->createMock( GetLatestItemRevisionMetadata::class );
+		$this->getRevisionMetadata->method( 'execute' )
+			->with( $itemId )
+			->willThrowException( $expectedException );
 		try {
 			$this->newUseCase()->execute(
 				$this->newUseCaseRequest( [
-					'$itemId' => 'Q999999',
-					'$statementId' => 'Q999999$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+					'$itemId' => "$itemId",
+					'$statementId' => 'Q199999$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
 				] )
 			);
 
 			$this->fail( 'Exception was not thrown.' );
-		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::ITEM_NOT_FOUND, $e->getErrorCode() );
-			$this->assertSame( 'Could not find an item with the ID: Q999999', $e->getErrorMessage() );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( $expectedException, $e );
 		}
 	}
 
-	public function testItemForStatementNotFound_throwsStatementNotFound(): void {
-		$this->revisionMetadataRetriever = $this->newItemMetadataRetriever( LatestItemRevisionMetadataResult::itemNotFound() );
-		$statementId = 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+	public function testItemSubjectForStatementNotFoundOrRedirect_throws(): void {
+		$itemId = 'Q42';
+		$expectedException = $this->createStub( UseCaseException::class );
+		$this->getRevisionMetadata = $this->createMock( GetLatestItemRevisionMetadata::class );
+		$this->getRevisionMetadata->method( 'execute' )
+			->with( $itemId )
+			->willThrowException( $expectedException );
+		$statementId = $itemId . '$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 		try {
 			$this->newUseCase()->execute(
 				$this->newUseCaseRequest( [
@@ -157,33 +164,12 @@ class RemoveItemStatementTest extends TestCase {
 			);
 
 			$this->fail( 'Exception was not thrown.' );
-		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::STATEMENT_NOT_FOUND, $e->getErrorCode() );
-			$this->assertSame( "Could not find a statement with the ID: $statementId", $e->getErrorMessage() );
-		}
-	}
-
-	public function testItemForStatementIsRedirect_throws(): void {
-		$this->revisionMetadataRetriever = $this->newItemMetadataRetriever(
-			LatestItemRevisionMetadataResult::redirect( new ItemId( 'Q321' ) )
-		);
-		$statementId = 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-		try {
-			$this->newUseCase()->execute(
-				$this->newUseCaseRequest( [ '$statementId' => $statementId ] )
-			);
-
-			$this->fail( 'Exception was not thrown.' );
-		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::STATEMENT_NOT_FOUND, $e->getErrorCode() );
-			$this->assertSame( "Could not find a statement with the ID: $statementId", $e->getErrorMessage() );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( $expectedException, $e );
 		}
 	}
 
 	public function testStatementIdMismatchingItemId_throws(): void {
-		$this->revisionMetadataRetriever = $this->newItemMetadataRetriever(
-			LatestItemRevisionMetadataResult::concreteRevision( 123, '20220708030405' )
-		);
 		$statementId = 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 		try {
 			$this->newUseCase()->execute(
@@ -201,9 +187,6 @@ class RemoveItemStatementTest extends TestCase {
 	}
 
 	public function testStatementNotFoundOnItem_throws(): void {
-		$this->revisionMetadataRetriever = $this->newItemMetadataRetriever(
-			LatestItemRevisionMetadataResult::concreteRevision( 123, '20220708030405' )
-		);
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemRetriever->method( 'getItem' )->willReturn( NewItem::withId( 'Q42' )->build() );
 		$statementId = 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
@@ -221,10 +204,6 @@ class RemoveItemStatementTest extends TestCase {
 
 	public function testProtectedItem_throws(): void {
 		$itemId = new ItemId( 'Q123' );
-
-		$this->revisionMetadataRetriever = $this->newItemMetadataRetriever(
-			LatestItemRevisionMetadataResult::concreteRevision( 321, '20201111070707' )
-		);
 
 		$expectedError = new UseCaseError(
 			UseCaseError::PERMISSION_DENIED,
@@ -256,7 +235,7 @@ class RemoveItemStatementTest extends TestCase {
 				new StatementIdValidator( $itemIdParser ),
 				new EditMetadataValidator( CommentStore::COMMENT_CHARACTER_LIMIT, self::ALLOWED_TAGS )
 			),
-			$this->revisionMetadataRetriever,
+			$this->getRevisionMetadata,
 			new StatementGuidParser( $itemIdParser ),
 			$this->itemRetriever,
 			$this->itemUpdater,
@@ -275,10 +254,4 @@ class RemoveItemStatementTest extends TestCase {
 		);
 	}
 
-	private function newItemMetadataRetriever( LatestItemRevisionMetadataResult $result ): ItemRevisionMetadataRetriever {
-		$metadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
-		$metadataRetriever->method( 'getLatestRevisionMetadata' )->willReturn( $result );
-
-		return $metadataRetriever;
-	}
 }
