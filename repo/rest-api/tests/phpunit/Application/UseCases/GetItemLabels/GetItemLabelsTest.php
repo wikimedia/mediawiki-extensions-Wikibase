@@ -9,14 +9,13 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabelsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabelsResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabelsValidator;
-use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
+use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
-use Wikibase\Repo\RestApi\Domain\ReadModel\LatestItemRevisionMetadataResult;
 use Wikibase\Repo\RestApi\Domain\Services\ItemLabelsRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabels
@@ -28,9 +27,9 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 class GetItemLabelsTest extends TestCase {
 
 	/**
-	 * @var MockObject|ItemRevisionMetadataRetriever
+	 * @var MockObject|GetLatestItemRevisionMetadata
 	 */
-	private $itemRevisionMetadataRetriever;
+	private $getRevisionMetadata;
 
 	/**
 	 * @var MockObject|ItemLabelsRetriever
@@ -40,7 +39,7 @@ class GetItemLabelsTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->itemRevisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
+		$this->getRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
 		$this->labelsRetriever = $this->createStub( ItemLabelsRetriever::class );
 	}
 
@@ -54,11 +53,8 @@ class GetItemLabelsTest extends TestCase {
 		$lastModified = '20201111070707';
 		$revisionId = 2;
 
-		$this->itemRevisionMetadataRetriever = $this->createMock( ItemRevisionMetadataRetriever::class );
-		$this->itemRevisionMetadataRetriever->expects( $this->once() )
-			->method( 'getLatestRevisionMetadata' )
-			->with( $itemId )
-			->willReturn( LatestItemRevisionMetadataResult::concreteRevision( $revisionId, $lastModified ) );
+		$this->getRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
+		$this->getRevisionMetadata->method( 'execute' )->willReturn( [ $revisionId, $lastModified ] );
 
 		$this->labelsRetriever = $this->createMock( ItemLabelsRetriever::class );
 		$this->labelsRetriever->expects( $this->once() )
@@ -85,14 +81,14 @@ class GetItemLabelsTest extends TestCase {
 		}
 	}
 
-	public function testGivenRequestedItemDoesNotExist_throwsUseCaseError(): void {
+	public function testGivenItemNotFoundOrRedirect_throws(): void {
 		$itemId = new ItemId( 'Q10' );
 
-		$this->itemRevisionMetadataRetriever = $this->createMock( ItemRevisionMetadataRetriever::class );
-		$this->itemRevisionMetadataRetriever->expects( $this->once() )
-			->method( 'getLatestRevisionMetadata' )
-			->with( $itemId )
-			->willReturn( LatestItemRevisionMetadataResult::itemNotFound() );
+		$expectedException = $this->createStub( UseCaseException::class );
+
+		$this->getRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
+		$this->getRevisionMetadata->method( 'execute' )
+			->willThrowException( $expectedException );
 
 		try {
 			$this->newUseCase()->execute(
@@ -100,34 +96,14 @@ class GetItemLabelsTest extends TestCase {
 			);
 
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::ITEM_NOT_FOUND, $e->getErrorCode() );
-			$this->assertSame( 'Could not find an item with the ID: Q10', $e->getErrorMessage() );
-			$this->assertNull( $e->getErrorContext() );
-		}
-	}
-
-	public function testGivenItemRedirect_throwsItemRedirectException(): void {
-		$redirectSource = 'Q123';
-		$redirectTarget = 'Q321';
-
-		$this->itemRevisionMetadataRetriever
-			->method( 'getLatestRevisionMetadata' )
-			->with( new ItemId( $redirectSource ) )
-			->willReturn( LatestItemRevisionMetadataResult::redirect( new ItemId( $redirectTarget ) ) );
-
-		try {
-			$this->newUseCase()->execute( new GetItemLabelsRequest( $redirectSource ) );
-
-			$this->fail( 'this should not be reached' );
-		} catch ( ItemRedirect $e ) {
-			$this->assertSame( $redirectTarget, $e->getRedirectTargetId() );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( $expectedException, $e );
 		}
 	}
 
 	private function newUseCase(): GetItemLabels {
 		return new GetItemLabels(
-			$this->itemRevisionMetadataRetriever,
+			$this->getRevisionMetadata,
 			$this->labelsRetriever,
 			new GetItemLabelsValidator( new ItemIdValidator() )
 		);

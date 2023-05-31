@@ -198,9 +198,9 @@ return [
 
 	'WbRestApi.GetItemLabels' => function( MediaWikiServices $services ): GetItemLabels {
 		return new GetItemLabels(
-			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
+			new GetLatestItemRevisionMetadata( new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
 				WikibaseRepo::getEntityRevisionLookup( $services )
-			),
+			) ),
 			new TermLookupItemDataRetriever(
 				WikibaseRepo::getTermLookup( $services ),
 				WikibaseRepo::getTermsLanguages( $services )
