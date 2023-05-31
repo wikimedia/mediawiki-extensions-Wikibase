@@ -4,27 +4,27 @@ namespace Wikibase\Lib\Tests\Store\Sql\Terms\Util;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
-use Wikibase\Lib\Store\Sql\Terms\Util\ReplicaMasterAwareRecordIdsAcquirer;
+use Wikibase\Lib\Store\Sql\Terms\Util\ReplicaPrimaryAwareRecordIdsAcquirer;
 use Wikimedia\Rdbms\DatabaseSqlite;
 use Wikimedia\Rdbms\IDatabase;
 
 /**
- * @covers \Wikibase\Lib\Store\Sql\Terms\Util\ReplicaMasterAwareRecordIdsAcquirer
+ * @covers \Wikibase\Lib\Store\Sql\Terms\Util\ReplicaPrimaryAwareRecordIdsAcquirer
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class ReplicaMasterAwareRecordIdsAcquirerTest extends TestCase {
+class ReplicaPrimaryAwareRecordIdsAcquirerTest extends TestCase {
 
-	private const TABLE_DDL_FILE_PATH = __DIR__ . '/ReplicaMasterAwareRecordIdsAcquirerTest_tableDDL.sql';
-	private const TABLE_NAME = 'replica_master_aware_record_ids_acquirer_test';
+	private const TABLE_DDL_FILE_PATH = __DIR__ . '/ReplicaPrimaryAwareRecordIdsAcquirerTest_tableDDL.sql';
+	private const TABLE_NAME = 'replica_primary_aware_record_ids_acquirer_test';
 	private const ID_COLUMN = 'id';
 
 	/**
 	 * @var IDatabase
 	 */
-	private $dbMaster;
+	private $dbPrimary;
 
 	/**
 	 * @var IDatabase
@@ -32,8 +32,8 @@ class ReplicaMasterAwareRecordIdsAcquirerTest extends TestCase {
 	private $dbReplica;
 
 	protected function setUp(): void {
-		$this->dbMaster = DatabaseSqlite::newStandaloneInstance( ':memory:' );
-		$this->dbMaster->sourceFile( self::TABLE_DDL_FILE_PATH );
+		$this->dbPrimary = DatabaseSqlite::newStandaloneInstance( ':memory:' );
+		$this->dbPrimary->sourceFile( self::TABLE_DDL_FILE_PATH );
 
 		$this->dbReplica = DatabaseSqlite::newStandaloneInstance( ':memory:' );
 		$this->dbReplica->sourceFile( self::TABLE_DDL_FILE_PATH );
@@ -51,41 +51,41 @@ class ReplicaMasterAwareRecordIdsAcquirerTest extends TestCase {
 		$idsAcquirer = $this->getTestSubjectInstance();
 		$acquiredRecordsWithIds = $idsAcquirer->acquireIds( $records );
 
-		$this->assertNoRecordsInDb( $records, $this->dbMaster );
+		$this->assertNoRecordsInDb( $records, $this->dbPrimary );
 		$this->assertSameRecordsInDb( $acquiredRecordsWithIds, $this->dbReplica );
 	}
 
-	public function testWhenAllRecordsExistInMaster() {
+	public function testWhenAllRecordsExistInPrimary() {
 		$records = $this->getTestRecords();
 
-		$this->dbMaster->insert(
+		$this->dbPrimary->insert(
 			self::TABLE_NAME,
 			$records
 		);
-		$this->assertSameRecordsInDb( $records, $this->dbMaster );
+		$this->assertSameRecordsInDb( $records, $this->dbPrimary );
 
 		$idsAcquirer = $this->getTestSubjectInstance();
 		$acquiredRecordsWithIds = $idsAcquirer->acquireIds( $records );
 
 		$this->assertNoRecordsInDb( $records, $this->dbReplica );
-		$this->assertSameRecordsInDb( $acquiredRecordsWithIds, $this->dbMaster );
+		$this->assertSameRecordsInDb( $acquiredRecordsWithIds, $this->dbPrimary );
 	}
 
-	public function testWhenAllRecordsDoNotExistInReplicaOrMaster() {
+	public function testWhenAllRecordsDoNotExistInReplicaOrPrimary() {
 		$records = $this->getTestRecordsWithDuplicate();
 
 		$idsAcquirer = $this->getTestSubjectInstance();
 		$acquiredRecordsWithIds = $idsAcquirer->acquireIds( $records );
 
 		$this->assertNoRecordsInDb( $records, $this->dbReplica );
-		$this->assertSameRecordsInDb( $acquiredRecordsWithIds, $this->dbMaster );
+		$this->assertSameRecordsInDb( $acquiredRecordsWithIds, $this->dbPrimary );
 	}
 
-	public function testWhenSomeRecordsDoNotExistInReplicaButExistInMaster() {
+	public function testWhenSomeRecordsDoNotExistInReplicaButExistInPrimary() {
 		$records = $this->getTestRecordsWithDuplicate();
 
 		$recordsInReplica = [ $records[0], $records[1] ];
-		$recordsInMaster = [ $records[2] ];
+		$recordsInPrimary = [ $records[2] ];
 
 		$this->dbReplica->insert(
 			self::TABLE_NAME,
@@ -93,11 +93,11 @@ class ReplicaMasterAwareRecordIdsAcquirerTest extends TestCase {
 		);
 		$this->assertSameRecordsInDb( $recordsInReplica, $this->dbReplica );
 
-		$this->dbMaster->insert(
+		$this->dbPrimary->insert(
 			self::TABLE_NAME,
-			$recordsInMaster
+			$recordsInPrimary
 		);
-		$this->assertSameRecordsInDb( $recordsInMaster, $this->dbMaster );
+		$this->assertSameRecordsInDb( $recordsInPrimary, $this->dbPrimary );
 
 		$idsAcquirer = $this->getTestSubjectInstance();
 		$acquiredRecordsWithIds = $idsAcquirer->acquireIds( $records );
@@ -106,9 +106,9 @@ class ReplicaMasterAwareRecordIdsAcquirerTest extends TestCase {
 			count( $acquiredRecordsWithIds ),
 			count( array_unique( $records, SORT_REGULAR ) )
 		);
-		$this->assertSameRecordsInDb( [ $records[3] ], $this->dbMaster );
-		$this->assertNoRecordsInDb( $recordsInReplica, $this->dbMaster );
-		$this->assertNoRecordsInDb( $recordsInMaster, $this->dbReplica );
+		$this->assertSameRecordsInDb( [ $records[3] ], $this->dbPrimary );
+		$this->assertNoRecordsInDb( $recordsInReplica, $this->dbPrimary );
+		$this->assertNoRecordsInDb( $recordsInPrimary, $this->dbReplica );
 	}
 
 	public function testWhenIgnoringReplica() {
@@ -121,14 +121,14 @@ class ReplicaMasterAwareRecordIdsAcquirerTest extends TestCase {
 		$this->assertSameRecordsInDb( $records, $this->dbReplica );
 
 		$idsAcquirer = $this->getTestSubjectInstance(
-			ReplicaMasterAwareRecordIdsAcquirer::FLAG_IGNORE_REPLICA );
+			ReplicaPrimaryAwareRecordIdsAcquirer::FLAG_IGNORE_REPLICA );
 		$acquiredRecordsWithIds = $idsAcquirer->acquireIds( $records );
 
 		$this->assertSame(
 			count( $acquiredRecordsWithIds ),
 			count( $records )
 		);
-		$this->assertSameRecordsInDb( $records, $this->dbMaster );
+		$this->assertSameRecordsInDb( $records, $this->dbPrimary );
 	}
 
 	private function assertNoRecordsInDb( array $records, IDatabase $db ) {
@@ -163,11 +163,11 @@ class ReplicaMasterAwareRecordIdsAcquirerTest extends TestCase {
 	private function getTestSubjectInstance( $flags = 0x0 ) {
 		$loadBalancer = new FakeLoadBalancer( [
 			'dbr' => $this->dbReplica,
-			'dbw' => $this->dbMaster,
+			'dbw' => $this->dbPrimary,
 		] );
 		$lbFactory = new FakeLBFactory( [ 'lb' => $loadBalancer ] );
 
-		return new ReplicaMasterAwareRecordIdsAcquirer(
+		return new ReplicaPrimaryAwareRecordIdsAcquirer(
 			new RepoDomainDb( $lbFactory, $lbFactory->getLocalDomainID() ),
 			self::TABLE_NAME,
 			self::ID_COLUMN,
