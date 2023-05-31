@@ -5,8 +5,6 @@ declare( strict_types = 1 );
 namespace Wikibase\Lib\Store\Sql\Terms\Util;
 
 use Exception;
-use Psr\Log\LoggerInterface;
-use Psr\Log\NullLogger;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILoadBalancer;
@@ -37,8 +35,6 @@ class ReplicaPrimaryAwareRecordIdsAcquirer {
 
 	private string $idColumn;
 
-	private ?LoggerInterface $logger;
-
 	private int $flags;
 
 	private int $waitForReplicationTimeout;
@@ -47,7 +43,6 @@ class ReplicaPrimaryAwareRecordIdsAcquirer {
 	 * @param RepoDomainDb $repoDb
 	 * @param string $table the name of the table this acquirer is for
 	 * @param string $idColumn the name of the column that contains the desired ids
-	 * @param LoggerInterface|null $logger
 	 * @param int $flags {@see self::FLAG_IGNORE_REPLICA}
 	 * @param int $waitForReplicationTimeout in seconds, the timeout on waiting for replication
 	 */
@@ -55,14 +50,12 @@ class ReplicaPrimaryAwareRecordIdsAcquirer {
 		RepoDomainDb $repoDb,
 		string $table,
 		string $idColumn,
-		LoggerInterface $logger = null,
 		int $flags = 0x0,
 		int $waitForReplicationTimeout = 2
 	) {
 		$this->repoDb = $repoDb;
 		$this->table = $table;
 		$this->idColumn = $idColumn;
-		$this->logger = $logger ?? new NullLogger();
 		$this->flags = $flags;
 		$this->waitForReplicationTimeout = $waitForReplicationTimeout;
 	}
