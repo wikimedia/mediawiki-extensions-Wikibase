@@ -4,9 +4,9 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements;
 
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementsRetriever;
 
 /**
@@ -16,16 +16,16 @@ class GetItemStatements {
 
 	private GetItemStatementsValidator $validator;
 	private ItemStatementsRetriever $statementsRetriever;
-	private ItemRevisionMetadataRetriever $revisionMetadataRetriever;
+	private GetLatestItemRevisionMetadata $getLatestRevisionMetadata;
 
 	public function __construct(
 		GetItemStatementsValidator $validator,
 		ItemStatementsRetriever $statementsRetriever,
-		ItemRevisionMetadataRetriever $revisionMetadataRetriever
+		GetLatestItemRevisionMetadata $getLatestRevisionMetadata
 	) {
 		$this->validator = $validator;
 		$this->statementsRetriever = $statementsRetriever;
-		$this->revisionMetadataRetriever = $revisionMetadataRetriever;
+		$this->getLatestRevisionMetadata = $getLatestRevisionMetadata;
 	}
 
 	/**
@@ -41,22 +41,13 @@ class GetItemStatements {
 			? new NumericPropertyId( $statementPropertyId )
 			: null;
 
-		$latestRevisionMetadata = $this->revisionMetadataRetriever->getLatestRevisionMetadata( $itemId );
-
-		if ( !$latestRevisionMetadata->itemExists() ) {
-			throw new UseCaseError(
-				UseCaseError::ITEM_NOT_FOUND,
-				"Could not find an item with the ID: {$request->getItemId()}"
-			);
-		} elseif ( $latestRevisionMetadata->isRedirect() ) {
-			throw new ItemRedirect( $latestRevisionMetadata->getRedirectTarget()->getSerialization() );
-		}
+		[ $revisionId, $lastModified ] = $this->getLatestRevisionMetadata->execute( $itemId );
 
 		return new GetItemStatementsResponse(
 			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Item validated and exists
 			$this->statementsRetriever->getStatements( $itemId, $requestedStatementPropertyId ),
-			$latestRevisionMetadata->getRevisionTimestamp(),
-			$latestRevisionMetadata->getRevisionId()
+			$lastModified,
+			$revisionId,
 		);
 	}
 
