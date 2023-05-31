@@ -17,6 +17,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\GetItemLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\GetItemStatements;
+use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatement;
@@ -146,6 +147,11 @@ class WbRestApi {
 	public static function getAssertUserIsAuthorized( ContainerInterface $services = null ): AssertUserIsAuthorized {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.AssertUserIsAuthorized' );
+	}
+
+	public static function getGetLatestItemRevisionMetadata( ContainerInterface $services = null ): GetLatestItemRevisionMetadata {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.GetLatestItemRevisionMetadata' );
 	}
 
 }

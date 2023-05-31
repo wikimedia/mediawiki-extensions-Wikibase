@@ -93,9 +93,7 @@ return [
 					ChangeTags::listExplicitlyDefinedTags()
 				)
 			),
-			new GetLatestItemRevisionMetadata( new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
-				WikibaseRepo::getEntityRevisionLookup( $services )
-			) ),
+			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
 			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getItemUpdater( $services ),
 			new GuidGenerator(),
@@ -118,9 +116,7 @@ return [
 
 	'WbRestApi.GetItem' => function( MediaWikiServices $services ): GetItem {
 		return new GetItem(
-			new GetLatestItemRevisionMetadata( new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
-				WikibaseRepo::getEntityRevisionLookup( $services )
-			) ),
+			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
 			WbRestApi::getItemDataRetriever( $services ),
 			new GetItemValidator( new ItemIdValidator() )
 		);
@@ -128,9 +124,7 @@ return [
 
 	'WbRestApi.GetItemAliases' => function( MediaWikiServices $services ): GetItemAliases {
 		return new GetItemAliases(
-			new GetLatestItemRevisionMetadata( new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
-				WikibaseRepo::getEntityRevisionLookup( $services )
-			) ),
+			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
 			new PrefetchingTermLookupAliasesRetriever(
 				WikibaseRepo::getPrefetchingTermLookup( $services ),
 				WikibaseRepo::getTermsLanguages( $services )
@@ -141,9 +135,7 @@ return [
 
 	'WbRestApi.GetItemAliasesInLanguage' => function( MediaWikiServices $services ): GetItemAliasesInLanguage {
 		return new GetItemAliasesInLanguage(
-			new GetLatestItemRevisionMetadata( new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
-				WikibaseRepo::getEntityRevisionLookup( $services )
-			) ),
+			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
 			new PrefetchingTermLookupAliasesRetriever(
 				WikibaseRepo::getPrefetchingTermLookup( $services ),
 				WikibaseRepo::getTermsLanguages( $services )
@@ -173,9 +165,7 @@ return [
 
 	'WbRestApi.GetItemDescriptions' => function( MediaWikiServices $services ): GetItemDescriptions {
 		return new GetItemDescriptions(
-			new GetLatestItemRevisionMetadata( new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
-				WikibaseRepo::getEntityRevisionLookup( $services )
-			) ),
+			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
 			new TermLookupItemDataRetriever(
 				WikibaseRepo::getTermLookup( $services ),
 				WikibaseRepo::getTermsLanguages( $services )
@@ -186,9 +176,7 @@ return [
 
 	'WbRestApi.GetItemLabel' => function( MediaWikiServices $services ): GetItemLabel {
 		return new GetItemLabel(
-			new GetLatestItemRevisionMetadata( new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
-				WikibaseRepo::getEntityRevisionLookup( $services )
-			) ),
+			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
 			new TermLookupItemDataRetriever(
 				WikibaseRepo::getTermLookup( $services ),
 				WikibaseRepo::getTermsLanguages( $services )
@@ -202,9 +190,7 @@ return [
 
 	'WbRestApi.GetItemLabels' => function( MediaWikiServices $services ): GetItemLabels {
 		return new GetItemLabels(
-			new GetLatestItemRevisionMetadata( new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
-				WikibaseRepo::getEntityRevisionLookup( $services )
-			) ),
+			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
 			new TermLookupItemDataRetriever(
 				WikibaseRepo::getTermLookup( $services ),
 				WikibaseRepo::getTermsLanguages( $services )
@@ -220,9 +206,7 @@ return [
 				new ItemIdValidator()
 			),
 			WbRestApi::getItemDataRetriever( $services ),
-			new GetLatestItemRevisionMetadata( new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
-				WikibaseRepo::getEntityRevisionLookup( $services )
-			) )
+			WbRestApi::getGetLatestItemRevisionMetadata( $services )
 		);
 	},
 
@@ -230,10 +214,14 @@ return [
 		return new GetItemStatements(
 			new GetItemStatementsValidator( new ItemIdValidator() ),
 			WbRestApi::getItemDataRetriever( $services ),
-			new GetLatestItemRevisionMetadata( new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
-				WikibaseRepo::getEntityRevisionLookup( $services )
-			) )
+			WbRestApi::getGetLatestItemRevisionMetadata( $services )
 		);
+	},
+
+	'WbRestApi.GetLatestItemRevisionMetadata' => function( MediaWikiServices $services ): GetLatestItemRevisionMetadata {
+		return new GetLatestItemRevisionMetadata( new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
+			WikibaseRepo::getEntityRevisionLookup( $services )
+		) );
 	},
 
 	'WbRestApi.ItemDataRetriever' => function( MediaWikiServices $services ): ItemDataRetriever {
@@ -283,9 +271,7 @@ return [
 			),
 			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getItemUpdater( $services ),
-			new GetLatestItemRevisionMetadata( new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
-				WikibaseRepo::getEntityRevisionLookup( $services )
-			) ),
+			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
 			new PatchItemLabelsValidator(
 				new ItemIdValidator(),
 				new JsonDiffJsonPatchValidator(),
@@ -318,9 +304,7 @@ return [
 			$itemDataRetriever,
 			$itemDataRetriever,
 			WbRestApi::getItemUpdater( $services ),
-			new GetLatestItemRevisionMetadata( new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
-				WikibaseRepo::getEntityRevisionLookup( $services )
-			) ),
+			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
 			WbRestApi::getAssertUserIsAuthorized( $services )
 		);
 	},
@@ -344,9 +328,7 @@ return [
 					ChangeTags::listExplicitlyDefinedTags()
 				)
 			),
-			new GetLatestItemRevisionMetadata( new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
-				WikibaseRepo::getEntityRevisionLookup( $services )
-			) ),
+			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
 			new StatementGuidParser( new ItemIdParser() ),
 			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getItemUpdater( $services ),
@@ -365,9 +347,7 @@ return [
 					ChangeTags::listExplicitlyDefinedTags()
 				)
 			),
-			new GetLatestItemRevisionMetadata( new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
-				WikibaseRepo::getEntityRevisionLookup( $services )
-			) ),
+			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
 			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getItemUpdater( $services ),
 			WbRestApi::getAssertUserIsAuthorized( $services )
@@ -397,9 +377,7 @@ return [
 					ChangeTags::listExplicitlyDefinedTags()
 				)
 			),
-			new GetLatestItemRevisionMetadata( new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
-				WikibaseRepo::getEntityRevisionLookup( $services )
-			) ),
+			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
 			$itemDataRetriever,
 			WbRestApi::getItemUpdater( $services ),
 			WbRestApi::getAssertUserIsAuthorized( $services )
@@ -421,9 +399,7 @@ return [
 					WbRestApi::getItemDataRetriever( $services )
 				)
 			),
-			new GetLatestItemRevisionMetadata( new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
-				WikibaseRepo::getEntityRevisionLookup( $services )
-			) ),
+			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
 			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getItemUpdater( $services ),
 			WbRestApi::getAssertUserIsAuthorized( $services )
