@@ -5,11 +5,11 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
+use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 
 /**
@@ -18,7 +18,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 class RemoveItemStatement {
 
 	private RemoveItemStatementValidator $validator;
-	private ItemRevisionMetadataRetriever $revisionMetadataRetriever;
+	private GetLatestItemRevisionMetadata $getRevisionMetadata;
 	private StatementGuidParser $statementIdParser;
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
@@ -26,14 +26,14 @@ class RemoveItemStatement {
 
 	public function __construct(
 		RemoveItemStatementValidator $validator,
-		ItemRevisionMetadataRetriever $revisionMetadataRetriever,
+		GetLatestItemRevisionMetadata $getRevisionMetadata,
 		StatementGuidParser $statementGuidParser,
 		ItemRetriever $itemRetriever,
 		ItemUpdater $itemUpdater,
 		AssertUserIsAuthorized $assertUserIsAuthorized
 	) {
 		$this->validator = $validator;
-		$this->revisionMetadataRetriever = $revisionMetadataRetriever;
+		$this->getRevisionMetadata = $getRevisionMetadata;
 		$this->statementIdParser = $statementGuidParser;
 		$this->itemRetriever = $itemRetriever;
 		$this->itemUpdater = $itemUpdater;
@@ -52,16 +52,9 @@ class RemoveItemStatement {
 		$itemId = $requestedItemId ? new ItemId( $requestedItemId ) : $statementId->getEntityId();
 		'@phan-var ItemId $itemId';
 
-		$revisionMetadata = $this->revisionMetadataRetriever->getLatestRevisionMetadata( $itemId );
-		if ( $requestedItemId && !$revisionMetadata->itemExists() ) {
-			throw new UseCaseError(
-				UseCaseError::ITEM_NOT_FOUND,
-				"Could not find an item with the ID: {$itemId}"
-			);
-		} elseif ( !$revisionMetadata->itemExists()
-				   || $revisionMetadata->isRedirect()
-				   || !$itemId->equals( $statementId->getEntityId() )
-		) {
+		$this->getRevisionMetadata->execute( $itemId ); // checks redirect and item existence
+
+		if ( !$itemId->equals( $statementId->getEntityId() ) ) {
 			$this->throwStatementNotFoundException( $request->getStatementId() );
 		}
 

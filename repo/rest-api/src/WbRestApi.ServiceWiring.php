@@ -350,9 +350,9 @@ return [
 					ChangeTags::listExplicitlyDefinedTags()
 				)
 			),
-			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
+			new GetLatestItemRevisionMetadata( new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
 				WikibaseRepo::getEntityRevisionLookup( $services )
-			),
+			) ),
 			new StatementGuidParser( new ItemIdParser() ),
 			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getItemUpdater( $services ),
