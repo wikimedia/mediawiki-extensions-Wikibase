@@ -65,12 +65,6 @@ class RdfVocabulary {
 	private const GEO_URI = 'http://www.opengis.net/ont/geosparql#';
 	private const PROV_URI = 'http://www.w3.org/ns/prov#';
 
-	// Gregorian calendar link.
-	// I'm not very happy about hardcoding it here but see no better way so far.
-	// See also DataValues\TimeValue\TimeFormatter::XXX_CALENDAR constants.
-	private const GREGORIAN_CALENDAR = 'http://www.wikidata.org/entity/Q1985727';
-	private const JULIAN_CALENDAR = 'http://www.wikidata.org/entity/Q1985786';
-
 	/**
 	 * URI for unit "1"
 	 * See: https://phabricator.wikimedia.org/T105432
