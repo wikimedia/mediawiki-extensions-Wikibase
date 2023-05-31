@@ -321,6 +321,7 @@
 	"wikibase-setlabeldescriptionaliases-label-label": "Libellé :",
 	"wikibase-setlabeldescriptionaliases-description-label": "Description :",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "Alias :",
+	"wikibase-setlabeldescriptionaliases-description-not-supported": "Les descriptions ne sont pas prises en charge pour cette langue.",
 	"wikibase-setlabeldescriptionaliases-submit": "Définir le libellé, la description et les alias",
 	"wikibase-setlabeldescriptionaliases-continue": "Continuer",
 	"special-setsitelink": "Définir le lien de site de l’élément",

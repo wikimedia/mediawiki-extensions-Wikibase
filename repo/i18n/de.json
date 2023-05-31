@@ -288,6 +288,7 @@
 	"wikibase-setlabeldescriptionaliases-label-label": "Bezeichnung:",
 	"wikibase-setlabeldescriptionaliases-description-label": "Beschreibung:",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "Aliasse:",
+	"wikibase-setlabeldescriptionaliases-description-not-supported": "Beschreibungen werden für diese Sprache nicht unterstützt",
 	"wikibase-setlabeldescriptionaliases-submit": "Bezeichnung, Beschreibung und Aliasse festlegen",
 	"wikibase-setlabeldescriptionaliases-continue": "Fortfahren",
 	"special-setsitelink": "Einen Objekt-Websitelink festlegen",
