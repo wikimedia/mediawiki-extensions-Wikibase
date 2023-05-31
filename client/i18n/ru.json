@@ -31,7 +31,8 @@
 			"WindEwriX",
 			"Александр Сигачёв",
 			"Туллук",
-			"Умар"
+			"Умар",
+			"Evs"
 		]
 	},
 	"wikibase-client-desc": "Клиент для расширения Wikibase",
@@ -106,7 +107,7 @@
 	"wikibase-pageinfo-description-local": "Локальное описание",
 	"wikibase-pageinfo-description-central": "Централизованное описание",
 	"wikibase-pageinfo-entity-usage": "Сущности {{WBREPONAME}}, используемые на этой странице",
-	"wikibase-pageinfo-entity-usage-S": "Ссылка на сайт",
+	"wikibase-pageinfo-entity-usage-S": "Ссылка на вики-проект",
 	"wikibase-pageinfo-entity-usage-L": "Некоторые метки",
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "Обозначение (метка): $1",
 	"wikibase-pageinfo-entity-usage-D": "Некоторые описания",
