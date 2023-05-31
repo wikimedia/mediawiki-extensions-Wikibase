@@ -16,10 +16,13 @@ class LabelsDeserializer {
 		foreach ( $serialization as $language => $text ) {
 			if ( !is_string( $text ) ) {
 				throw new InvalidFieldException( $language, $text );
-			} elseif ( $text === '' ) {
+			}
+
+			$trimmedText = trim( $text );
+			if ( $trimmedText === '' ) {
 				throw new EmptyLabelException( $language, '' );
 			}
-			$terms[] = new Term( $language, trim( $text ) );
+			$terms[] = new Term( $language, $trimmedText );
 		}
 
 		return new TermList( $terms );

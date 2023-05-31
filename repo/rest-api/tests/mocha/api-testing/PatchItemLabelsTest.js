@@ -179,6 +179,24 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 			);
 		} );
 
+		it( 'empty label after trimming whitespace in the input', async () => {
+			const response = await newPatchItemLabelsRequestBuilder(
+				testItemId,
+				[ makeReplaceExistingLabelPatchOp( ' ' ) ]
+			)
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValidErrorResponse(
+				response,
+				422,
+				'patched-label-empty',
+				{
+					language: languageWithExistingLabel
+				}
+			);
+		} );
+
 		it( 'label too long', async () => {
 			// this assumes the default value of 250 from Wikibase.default.php is in place and
 			// may fail if $wgWBRepoSettings['string-limits']['multilang']['length'] is overwritten
