@@ -22,8 +22,7 @@
 	},
 	"patch": {
 		"tags": [ "labels" ],
-		"summary": "[WIP] Change an Item's Labels",
-		"description": "This endpoint is currently in development and is not recommended for production use.",
+		"summary": "Change an Item's Labels",
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/ItemId" },
 			{ "$ref": "../../global/parameters.json#/IfMatch" },
