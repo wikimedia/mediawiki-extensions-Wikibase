@@ -9,13 +9,13 @@ use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
+use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\PatchPathException;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\PatchTestConditionFailedException;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\JsonPatcher;
@@ -33,7 +33,7 @@ class PatchItemStatement {
 	private ItemStatementRetriever $statementRetriever;
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
-	private ItemRevisionMetadataRetriever $revisionMetadataRetriever;
+	private GetLatestItemRevisionMetadata $getRevisionMetadata;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
 
 	public function __construct(
@@ -45,7 +45,7 @@ class PatchItemStatement {
 		ItemStatementRetriever $statementRetriever,
 		ItemRetriever $itemRetriever,
 		ItemUpdater $itemUpdater,
-		ItemRevisionMetadataRetriever $revisionMetadataRetriever,
+		GetLatestItemRevisionMetadata $getRevisionMetadata,
 		AssertUserIsAuthorized $assertUserIsAuthorized
 	) {
 		$this->useCaseValidator = $useCaseValidator;
@@ -56,7 +56,7 @@ class PatchItemStatement {
 		$this->statementIdParser = $statementIdParser;
 		$this->itemRetriever = $itemRetriever;
 		$this->itemUpdater = $itemUpdater;
-		$this->revisionMetadataRetriever = $revisionMetadataRetriever;
+		$this->getRevisionMetadata = $getRevisionMetadata;
 		$this->assertUserIsAuthorized = $assertUserIsAuthorized;
 	}
 
@@ -72,15 +72,9 @@ class PatchItemStatement {
 		$itemId = $requestedItemId ? new ItemId( $requestedItemId ) : $statementId->getEntityId();
 		'@phan-var ItemId $itemId';
 
-		$latestRevision = $this->revisionMetadataRetriever->getLatestRevisionMetadata( $itemId );
-		if ( $requestedItemId && !$latestRevision->itemExists() ) {
-			throw new UseCaseError(
-				UseCaseError::ITEM_NOT_FOUND,
-				"Could not find an item with the ID: {$itemId}"
-			);
-		} elseif ( !$latestRevision->itemExists()
-				   || $latestRevision->isRedirect()
-				   || !$itemId->equals( $statementId->getEntityId() ) ) {
+		$this->getRevisionMetadata->execute( $itemId ); // checks redirect and item existence
+
+		if ( !$itemId->equals( $statementId->getEntityId() ) ) {
 			$this->throwStatementNotFoundException( $statementId );
 		}
 

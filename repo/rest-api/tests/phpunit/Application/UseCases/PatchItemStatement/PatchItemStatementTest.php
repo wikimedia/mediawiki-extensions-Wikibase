@@ -17,21 +17,21 @@ use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
+use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchedStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Item as ReadModelItem;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
-use Wikibase\Repo\RestApi\Domain\ReadModel\LatestItemRevisionMetadataResult;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
@@ -79,9 +79,9 @@ class PatchItemStatementTest extends TestCase {
 	private $itemUpdater;
 
 	/**
-	 * @var MockObject|ItemRevisionMetadataRetriever
+	 * @var MockObject|GetLatestItemRevisionMetadata
 	 */
-	private $revisionMetadataRetriever;
+	private $getRevisionMetadata;
 
 	/**
 	 * @var MockObject|AssertUserIsAuthorized
@@ -96,7 +96,8 @@ class PatchItemStatementTest extends TestCase {
 		$this->statementRetriever = $this->createStub( ItemStatementRetriever::class );
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
-		$this->revisionMetadataRetriever = $this->newRevisionMetadataRetrieverWithSomeConcreteRevision();
+		$this->getRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
+		$this->getRevisionMetadata->method( 'execute' )->willReturn( [ 456, '20221111070607' ] );
 		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
 
 		$this->statementSerializer = $this->newStatementSerializer();
@@ -173,11 +174,6 @@ class PatchItemStatementTest extends TestCase {
 			)
 			->willReturn( new ItemRevision( $updatedItem, $modificationTimestamp, $postModificationRevisionId ) );
 
-		$this->revisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
-		$this->revisionMetadataRetriever->method( 'getLatestRevisionMetadata' )->willReturn(
-			LatestItemRevisionMetadataResult::concreteRevision( 456, '20221111070607' )
-		);
-
 		$response = $this->newUseCase()->execute( $request );
 
 		$this->assertInstanceOf( PatchItemStatementResponse::class, $response );
@@ -189,63 +185,48 @@ class PatchItemStatementTest extends TestCase {
 		$this->assertSame( $postModificationRevisionId, $response->getRevisionId() );
 	}
 
-	public function testRequestedItemNotFound_throwsUseCaseError(): void {
-		$this->revisionMetadataRetriever = $this->newItemRevisionMetadataRetriever( LatestItemRevisionMetadataResult::itemNotFound() );
+	public function testRequestedItemNotFoundOrRedirect_throws(): void {
+		$requestedItemId = new ItemId( 'Q42' );
+		$expectedException = $this->createStub( UseCaseException::class );
+		$this->getRevisionMetadata = $this->createMock( GetLatestItemRevisionMetadata::class );
+		$this->getRevisionMetadata
+			->method( 'execute' )
+			->with( $requestedItemId )
+			->willThrowException( $expectedException );
 
 		try {
 			$this->newUseCase()->execute(
 				$this->newUseCaseRequest( [
-					'$itemId' => 'Q42',
-					'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+					'$itemId' => "$requestedItemId",
+					'$statementId' => 'Q43$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
 					'$patch' => $this->getValidValueReplacingPatch(),
 				] )
 			);
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::ITEM_NOT_FOUND, $e->getErrorCode() );
-			$this->assertSame( 'Could not find an item with the ID: Q42', $e->getErrorMessage() );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( $expectedException, $e );
 		}
 	}
 
-	public function testItemForStatementNotFound_throwsUseCaseError(): void {
-		$this->revisionMetadataRetriever = $this->newItemRevisionMetadataRetriever( LatestItemRevisionMetadataResult::itemNotFound() );
+	public function testItemForStatementNotFoundOrRedirect_throws(): void {
+		$subjectItemId = new ItemId( 'Q42' );
+		$expectedException = $this->createStub( UseCaseException::class );
+		$this->getRevisionMetadata = $this->createMock( GetLatestItemRevisionMetadata::class );
+		$this->getRevisionMetadata
+			->method( 'execute' )
+			->with( $subjectItemId )
+			->willThrowException( $expectedException );
 
 		try {
 			$this->newUseCase()->execute(
 				$this->newUseCaseRequest( [
-					'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+					'$statementId' => "$subjectItemId\$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
 					'$patch' => $this->getValidValueReplacingPatch(),
 				] )
 			);
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::STATEMENT_NOT_FOUND, $e->getErrorCode() );
-			$this->assertSame(
-				'Could not find a statement with the ID: Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
-				$e->getErrorMessage()
-			);
-		}
-	}
-
-	public function testItemForStatementIsRedirect_throwsUseCaseError(): void {
-		$this->revisionMetadataRetriever = $this->newItemRevisionMetadataRetriever(
-			LatestItemRevisionMetadataResult::redirect( new ItemId( 'Q321' ) )
-		);
-
-		try {
-			$this->newUseCase()->execute(
-				$this->newUseCaseRequest( [
-					'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
-					'$patch' => $this->getValidValueReplacingPatch(),
-				] )
-			);
-			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::STATEMENT_NOT_FOUND, $e->getErrorCode() );
-			$this->assertSame(
-				'Could not find a statement with the ID: Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
-				$e->getErrorMessage()
-			);
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( $expectedException, $e );
 		}
 	}
 
@@ -441,7 +422,7 @@ class PatchItemStatementTest extends TestCase {
 			$this->statementRetriever,
 			$this->itemRetriever,
 			$this->itemUpdater,
-			$this->revisionMetadataRetriever,
+			$this->getRevisionMetadata,
 			$this->assertUserIsAuthorized
 		);
 	}
@@ -496,13 +477,6 @@ class PatchItemStatementTest extends TestCase {
 		);
 	}
 
-	private function newItemRevisionMetadataRetriever( LatestItemRevisionMetadataResult $result ): ItemRevisionMetadataRetriever {
-		$metadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
-		$metadataRetriever->method( 'getLatestRevisionMetadata' )->willReturn( $result );
-
-		return $metadataRetriever;
-	}
-
 	private function setRetrieversForItemWithStringStatement( StatementGuid $statementId ): void {
 		[ $statementReadModel, $statementWriteModel ] = NewStatementReadModel::forProperty( self::STRING_PROPERTY )
 			->withGuid( $statementId )
@@ -527,12 +501,6 @@ class PatchItemStatementTest extends TestCase {
 				'value' => $newStatementValue,
 			],
 		];
-	}
-
-	private function newRevisionMetadataRetrieverWithSomeConcreteRevision(): ItemRevisionMetadataRetriever {
-		return $this->newItemRevisionMetadataRetriever(
-			LatestItemRevisionMetadataResult::concreteRevision( 123, '20220708030405' )
-		);
 	}
 
 	private function newStatementSerializer(): StatementSerializer {
