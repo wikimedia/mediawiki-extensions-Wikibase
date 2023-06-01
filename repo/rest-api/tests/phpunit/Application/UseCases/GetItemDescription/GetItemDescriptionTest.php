@@ -9,14 +9,13 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescription\GetItemDescrip
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescription\GetItemDescriptionRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescription\GetItemDescriptionResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescription\GetItemDescriptionValidator;
-use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
+use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
-use Wikibase\Repo\RestApi\Domain\ReadModel\LatestItemRevisionMetadataResult;
 use Wikibase\Repo\RestApi\Domain\Services\ItemDescriptionRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -29,9 +28,9 @@ use Wikibase\Repo\WikibaseRepo;
 class GetItemDescriptionTest extends TestCase {
 
 	/**
-	 * @var MockObject|ItemRevisionMetadataRetriever
+	 * @var MockObject|GetLatestItemRevisionMetadata
 	 */
-	private $itemRevisionMetadataRetriever;
+	private $getRevisionMetadata;
 
 	/**
 	 * @var MockObject|ItemDescriptionRetriever
@@ -41,7 +40,8 @@ class GetItemDescriptionTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->itemRevisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
+		$this->getRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
+		$this->getRevisionMetadata->method( 'execute' )->willReturn( [ 42, '20201111070707' ] );
 		$this->descriptionRetriever = $this->createStub( ItemDescriptionRetriever::class );
 	}
 
@@ -56,11 +56,11 @@ class GetItemDescriptionTest extends TestCase {
 		$lastModified = '20201111070707';
 		$revisionId = 2;
 
-		$this->itemRevisionMetadataRetriever = $this->createMock( ItemRevisionMetadataRetriever::class );
-		$this->itemRevisionMetadataRetriever->expects( $this->once() )
-			->method( 'getLatestRevisionMetadata' )
+		$this->getRevisionMetadata = $this->createMock( GetLatestItemRevisionMetadata::class );
+		$this->getRevisionMetadata->expects( $this->once() )
+			->method( 'execute' )
 			->with( $itemId )
-			->willReturn( LatestItemRevisionMetadataResult::concreteRevision( $revisionId, $lastModified ) );
+			->willReturn( [ $revisionId, $lastModified ] );
 
 		$this->descriptionRetriever = $this->createMock( ItemDescriptionRetriever::class );
 		$this->descriptionRetriever->expects( $this->once() )
@@ -73,33 +73,23 @@ class GetItemDescriptionTest extends TestCase {
 		$this->assertEquals( new GetItemDescriptionResponse( $description, $lastModified, $revisionId ), $response );
 	}
 
-	public function testGivenRequestedItemDoesNotExist_throwsUseCaseError(): void {
+	public function testGivenRequestedItemDoesNotExistOrRedirect_throwsUseCaseError(): void {
 		$itemId = new ItemId( 'Q10' );
-		$this->itemRevisionMetadataRetriever = $this->createMock( ItemRevisionMetadataRetriever::class );
-		$this->itemRevisionMetadataRetriever->expects( $this->once() )
-			->method( 'getLatestRevisionMetadata' )
-			->with( $itemId )
-			->willReturn( LatestItemRevisionMetadataResult::itemNotFound() );
+		$expectedException = $this->createStub( UseCaseException::class );
+		$this->getRevisionMetadata = $this->createMock( GetLatestItemRevisionMetadata::class );
+		$this->getRevisionMetadata->method( 'execute' )->willThrowException( $expectedException );
 		try {
 			$this->newUseCase()->execute(
 				new GetItemDescriptionRequest( $itemId->getSerialization(), 'en' )
 			);
 			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::ITEM_NOT_FOUND, $e->getErrorCode() );
-			$this->assertSame( 'Could not find an item with the ID: Q10', $e->getErrorMessage() );
-			$this->assertNull( $e->getErrorContext() );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( $expectedException, $e );
 		}
 	}
 
-	public function testGivenDescriptionNotDefined_throwsUseCaseError(): void {
+	public function testGivenDescriptionNotDefined_throws(): void {
 		$itemId = new ItemId( 'Q2' );
-
-		$this->itemRevisionMetadataRetriever = $this->createMock( ItemRevisionMetadataRetriever::class );
-		$this->itemRevisionMetadataRetriever->expects( $this->once() )
-			->method( 'getLatestRevisionMetadata' )
-			->with( $itemId )
-			->willReturn( LatestItemRevisionMetadataResult::concreteRevision( 42, '20201111070707' ) );
 
 		$this->descriptionRetriever = $this->createStub( ItemDescriptionRetriever::class );
 
@@ -113,21 +103,6 @@ class GetItemDescriptionTest extends TestCase {
 			$this->assertSame( UseCaseError::DESCRIPTION_NOT_DEFINED, $e->getErrorCode() );
 			$this->assertSame( 'Item with the ID Q2 does not have a description in the language: en', $e->getErrorMessage() );
 			$this->assertNull( $e->getErrorContext() );
-		}
-	}
-
-	public function testGivenItemRedirect_throwsItemRedirectException(): void {
-		$redirectSource = 'Q123';
-		$redirectTarget = 'Q321';
-		$this->itemRevisionMetadataRetriever
-			->method( 'getLatestRevisionMetadata' )
-			->with( new ItemId( $redirectSource ) )
-			->willReturn( LatestItemRevisionMetadataResult::redirect( new ItemId( $redirectTarget ) ) );
-		try {
-			$this->newUseCase()->execute( new GetItemDescriptionRequest( $redirectSource, 'en' ) );
-			$this->fail( 'this should not be reached' );
-		} catch ( ItemRedirect $e ) {
-			$this->assertSame( $redirectTarget, $e->getRedirectTargetId() );
 		}
 	}
 
@@ -157,7 +132,7 @@ class GetItemDescriptionTest extends TestCase {
 
 	private function newUseCase(): GetItemDescription {
 		return new GetItemDescription(
-			$this->itemRevisionMetadataRetriever,
+			$this->getRevisionMetadata,
 			$this->descriptionRetriever,
 			new GetItemDescriptionValidator(
 				new ItemIdValidator(),
