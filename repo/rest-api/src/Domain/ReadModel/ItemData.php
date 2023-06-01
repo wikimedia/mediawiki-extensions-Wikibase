@@ -2,12 +2,15 @@
 
 namespace Wikibase\Repo\RestApi\Domain\ReadModel;
 
+use Wikibase\DataModel\Entity\Item as DataModelItem;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
  * @license GPL-2.0-or-later
  */
 class ItemData {
+	public const TYPE = DataModelItem::ENTITY_TYPE;
+
 	public const FIELD_TYPE = 'type';
 	public const FIELD_LABELS = 'labels';
 	public const FIELD_DESCRIPTIONS = 'descriptions';
@@ -25,7 +28,6 @@ class ItemData {
 
 	private ItemId $id;
 	private array $requestedFields;
-	private ?string $type;
 	private ?Labels $labels;
 	private ?Descriptions $descriptions;
 	private ?Aliases $aliases;
@@ -35,7 +37,6 @@ class ItemData {
 	public function __construct(
 		ItemId $id,
 		array $requestedFields,
-		?string $type,
 		?Labels $labels,
 		?Descriptions $descriptions,
 		?Aliases $aliases,
@@ -44,7 +45,6 @@ class ItemData {
 	) {
 		$this->id = $id;
 		$this->requestedFields = $requestedFields;
-		$this->type = $type;
 		$this->labels = $labels;
 		$this->descriptions = $descriptions;
 		$this->aliases = $aliases;
@@ -54,10 +54,6 @@ class ItemData {
 
 	public function getId(): ItemId {
 		return $this->id;
-	}
-
-	public function getType(): ?string {
-		return $this->type;
 	}
 
 	public function getLabels(): ?Labels {

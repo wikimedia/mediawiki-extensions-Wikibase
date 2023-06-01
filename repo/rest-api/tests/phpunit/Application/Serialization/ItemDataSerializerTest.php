@@ -77,9 +77,7 @@ class ItemDataSerializerTest extends TestCase {
 	}
 
 	public function testSerializeType(): void {
-		$itemData = $this->newItemDataBuilderWithSomeId( [ ItemData::FIELD_TYPE ] )
-			->setType( Item::ENTITY_TYPE )
-			->build();
+		$itemData = $this->newItemDataBuilderWithSomeId( [ ItemData::FIELD_TYPE ] )->build();
 
 		$serialization = $this->newSerializer()->serialize( $itemData );
 
@@ -206,9 +204,7 @@ class ItemDataSerializerTest extends TestCase {
 			[ 'id' ],
 		];
 		yield [
-			$this->newItemDataBuilderWithSomeId( [ ItemData::FIELD_TYPE ] )
-				->setType( Item::ENTITY_TYPE )
-				->build(),
+			$this->newItemDataBuilderWithSomeId( [ ItemData::FIELD_TYPE ] )->build(),
 			[ 'id', 'type' ],
 		];
 		yield [
@@ -229,7 +225,6 @@ class ItemDataSerializerTest extends TestCase {
 		];
 		yield [
 			$this->newItemDataBuilderWithSomeId( ItemData::VALID_FIELDS )
-				->setType( Item::ENTITY_TYPE )
 				->setLabels( new Labels() )
 				->setDescriptions( new Descriptions() )
 				->setAliases( new Aliases() )

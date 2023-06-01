@@ -31,7 +31,7 @@ class ItemDataSerializer {
 
 	public function serialize( ItemData $itemData ): array {
 		$fieldSerializers = [
-			ItemData::FIELD_TYPE => fn() => $itemData->getType(),
+			ItemData::FIELD_TYPE => fn() => ItemData::TYPE,
 			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
 			ItemData::FIELD_LABELS => fn() => $this->labelsSerializer->serialize( $itemData->getLabels() ),
 			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
