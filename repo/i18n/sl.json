@@ -267,6 +267,7 @@
 	"wikibase-setlabeldescriptionaliases-label-label": "Oznaka:",
 	"wikibase-setlabeldescriptionaliases-description-label": "Opis:",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "Sopomenke:",
+	"wikibase-setlabeldescriptionaliases-description-not-supported": "Za ta jezik opisi niso podprti.",
 	"wikibase-setlabeldescriptionaliases-submit": "Nastavi oznako, opis in sopomenke",
 	"wikibase-setlabeldescriptionaliases-continue": "Nadaljuj",
 	"special-setsitelink": "Nastavitev povezave mesta za predmet",

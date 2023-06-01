@@ -271,6 +271,7 @@
 	"wikibase-setlabeldescriptionaliases-label-label": "תווית:",
 	"wikibase-setlabeldescriptionaliases-description-label": "תיאור:",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "כינויים:",
+	"wikibase-setlabeldescriptionaliases-description-not-supported": "אין תמיכה בתיאורים בשפה הזאת.",
 	"wikibase-setlabeldescriptionaliases-submit": "הגדרת תווית, תיאור וכינויים",
 	"wikibase-setlabeldescriptionaliases-continue": "המשך",
 	"special-setsitelink": "הגדרת קישור אתר לפריט",

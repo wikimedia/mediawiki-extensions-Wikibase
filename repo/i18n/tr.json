@@ -288,6 +288,7 @@
 	"wikibase-setlabeldescriptionaliases-label-label": "Etiket:",
 	"wikibase-setlabeldescriptionaliases-description-label": "Açıklama:",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "Diğer adlar:",
+	"wikibase-setlabeldescriptionaliases-description-not-supported": "Açıklamalar bu dilde desteklenmiyor.",
 	"wikibase-setlabeldescriptionaliases-submit": "Etiketi, açıklamayı ve diğer adları ayarla",
 	"wikibase-setlabeldescriptionaliases-continue": "Devam et",
 	"special-setsitelink": "Öğe için site bağlantısı ayarla",
