@@ -4,8 +4,10 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel;
 
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
-use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
+use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\LabelEditSummary;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
@@ -16,7 +18,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
  */
 class SetItemLabel {
 
-	private GetLatestItemRevisionMetadata $getRevisionMetadata;
+	private AssertItemExists $assertItemExists;
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
 	private SetItemLabelValidator $validator;
@@ -24,25 +26,29 @@ class SetItemLabel {
 
 	public function __construct(
 		SetItemLabelValidator $validator,
-		GetLatestItemRevisionMetadata $getRevisionMetadata,
+		AssertItemExists $assertItemExists,
 		ItemRetriever $itemRetriever,
 		ItemUpdater $itemUpdater,
 		AssertUserIsAuthorized $assertUserIsAuthorized
 	) {
 		$this->validator = $validator;
-		$this->getRevisionMetadata = $getRevisionMetadata;
+		$this->assertItemExists = $assertItemExists;
 		$this->itemRetriever = $itemRetriever;
 		$this->itemUpdater = $itemUpdater;
 		$this->assertUserIsAuthorized = $assertUserIsAuthorized;
 	}
 
+	/**
+	 * @throws ItemRedirect
+	 * @throws UseCaseError
+	 */
 	public function execute( SetItemLabelRequest $request ): SetItemLabelResponse {
 		$this->validator->assertValidRequest( $request );
 
 		$itemId = new ItemId( $request->getItemId() );
 		$term = new Term( $request->getLanguageCode(), $request->getLabel() );
 
-		$this->getRevisionMetadata->execute( $itemId ); // checks redirect and item existence
+		$this->assertItemExists->execute( $itemId );
 
 		$this->assertUserIsAuthorized->execute( $itemId, $request->getUsername() );
 

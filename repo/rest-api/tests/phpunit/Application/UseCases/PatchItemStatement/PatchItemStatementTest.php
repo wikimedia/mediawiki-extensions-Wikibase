@@ -16,6 +16,7 @@ use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchedStatementValidator;
@@ -419,10 +420,10 @@ class PatchItemStatementTest extends TestCase {
 			new JsonDiffJsonPatcher(),
 			$this->statementSerializer,
 			new StatementGuidParser( new ItemIdParser() ),
+			new AssertItemExists( $this->getRevisionMetadata ),
 			$this->statementRetriever,
 			$this->itemRetriever,
 			$this->itemUpdater,
-			$this->getRevisionMetadata,
 			$this->assertUserIsAuthorized
 		);
 	}

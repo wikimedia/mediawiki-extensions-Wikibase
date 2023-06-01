@@ -10,6 +10,7 @@ use Wikibase\DataModel\Term\TermList;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchedLabelsValidator;
@@ -294,13 +295,13 @@ class PatchItemLabelsTest extends TestCase {
 
 	private function newUseCase(): PatchItemLabels {
 		return new PatchItemLabels(
+			new AssertItemExists( $this->getRevisionMetadata ),
 			$this->labelsRetriever,
 			$this->labelsSerializer,
 			$this->patcher,
 			$this->patchedLabelsValidator,
 			$this->itemRetriever,
 			$this->itemUpdater,
-			$this->getRevisionMetadata,
 			$this->validator,
 			$this->assertUserIsAuthorized
 		);

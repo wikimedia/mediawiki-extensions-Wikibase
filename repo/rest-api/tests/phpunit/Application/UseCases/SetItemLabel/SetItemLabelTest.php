@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item as DataModelItem;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Tests\NewItem;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel;
@@ -180,7 +181,7 @@ class SetItemLabelTest extends TestCase {
 	private function newUseCase(): SetItemLabel {
 		return new SetItemLabel(
 			$this->validator,
-			$this->getRevisionMetadata,
+			new AssertItemExists( $this->getRevisionMetadata ),
 			$this->itemRetriever,
 			$this->itemUpdater,
 			$this->assertUserIsAuthorized

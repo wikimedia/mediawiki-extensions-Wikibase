@@ -15,6 +15,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\SerializerFactory;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItemValidator;
@@ -93,12 +94,16 @@ return [
 					ChangeTags::listExplicitlyDefinedTags()
 				)
 			),
-			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
+			WbRestApi::getAssertItemExists( $services ),
 			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getItemUpdater( $services ),
 			new GuidGenerator(),
 			WbRestApi::getAssertUserIsAuthorized( $services )
 		);
+	},
+
+	'WbRestApi.AssertItemExists' => function( MediaWikiServices $services ): AssertItemExists {
+		return new AssertItemExists( WbRestApi::getGetLatestItemRevisionMetadata( $services ) );
 	},
 
 	'WbRestApi.AssertUserIsAuthorized' => function( MediaWikiServices $services ): AssertUserIsAuthorized {
@@ -252,6 +257,7 @@ return [
 
 	'WbRestApi.PatchItemLabels' => function( MediaWikiServices $services ): PatchItemLabels {
 		return new PatchItemLabels(
+			WbRestApi::getAssertItemExists( $services ),
 			new TermLookupItemDataRetriever(
 				WikibaseRepo::getTermLookup( $services ),
 				WikibaseRepo::getTermsLanguages( $services )
@@ -269,7 +275,6 @@ return [
 			),
 			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getItemUpdater( $services ),
-			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
 			new PatchItemLabelsValidator(
 				new ItemIdValidator(),
 				new JsonDiffJsonPatchValidator(),
@@ -299,10 +304,10 @@ return [
 			new JsonDiffJsonPatcher(),
 			WbRestApi::getSerializerFactory( $services )->newStatementSerializer(),
 			new StatementGuidParser( new ItemIdParser() ),
+			WbRestApi::getAssertItemExists( $services ),
 			$itemDataRetriever,
 			$itemDataRetriever,
 			WbRestApi::getItemUpdater( $services ),
-			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
 			WbRestApi::getAssertUserIsAuthorized( $services )
 		);
 	},
@@ -326,8 +331,8 @@ return [
 					ChangeTags::listExplicitlyDefinedTags()
 				)
 			),
-			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
 			new StatementGuidParser( new ItemIdParser() ),
+			WbRestApi::getAssertItemExists( $services ),
 			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getItemUpdater( $services ),
 			WbRestApi::getAssertUserIsAuthorized( $services )
@@ -345,7 +350,7 @@ return [
 					ChangeTags::listExplicitlyDefinedTags()
 				)
 			),
-			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
+			WbRestApi::getAssertItemExists( $services ),
 			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getItemUpdater( $services ),
 			WbRestApi::getAssertUserIsAuthorized( $services )
@@ -375,7 +380,7 @@ return [
 					ChangeTags::listExplicitlyDefinedTags()
 				)
 			),
-			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
+			WbRestApi::getAssertItemExists( $services ),
 			$itemDataRetriever,
 			WbRestApi::getItemUpdater( $services ),
 			WbRestApi::getAssertUserIsAuthorized( $services )
@@ -397,7 +402,7 @@ return [
 					WbRestApi::getItemDataRetriever( $services )
 				)
 			),
-			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
+			WbRestApi::getAssertItemExists( $services ),
 			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getItemUpdater( $services ),
 			WbRestApi::getAssertUserIsAuthorized( $services )

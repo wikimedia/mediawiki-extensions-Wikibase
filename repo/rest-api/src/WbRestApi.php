@@ -7,6 +7,7 @@ use Psr\Container\ContainerInterface;
 use Wikibase\Repo\RestApi\Application\Serialization\SerializerFactory;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliases\GetItemAliases;
@@ -152,6 +153,11 @@ class WbRestApi {
 	public static function getGetLatestItemRevisionMetadata( ContainerInterface $services = null ): GetLatestItemRevisionMetadata {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.GetLatestItemRevisionMetadata' );
+	}
+
+	public static function getAssertItemExists( ContainerInterface $services = null ): AssertItemExists {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.AssertItemExists' );
 	}
 
 }

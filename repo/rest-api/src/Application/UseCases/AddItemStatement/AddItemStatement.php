@@ -4,8 +4,8 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement;
 
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
-use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
@@ -18,7 +18,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 class AddItemStatement {
 
 	private AddItemStatementValidator $validator;
-	private GetLatestItemRevisionMetadata $getRevisionMetadata;
+	private AssertItemExists $assertItemExists;
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
 	private GuidGenerator $guidGenerator;
@@ -26,14 +26,14 @@ class AddItemStatement {
 
 	public function __construct(
 		AddItemStatementValidator $validator,
-		GetLatestItemRevisionMetadata $getRevisionMetadata,
+		AssertItemExists $assertItemExists,
 		ItemRetriever $itemRetriever,
 		ItemUpdater $itemUpdater,
 		GuidGenerator $guidGenerator,
 		AssertUserIsAuthorized $assertUserIsAuthorized
 	) {
 		$this->validator = $validator;
-		$this->getRevisionMetadata = $getRevisionMetadata;
+		$this->assertItemExists = $assertItemExists;
 		$this->itemRetriever = $itemRetriever;
 		$this->itemUpdater = $itemUpdater;
 		$this->guidGenerator = $guidGenerator;
@@ -49,7 +49,7 @@ class AddItemStatement {
 		$statement = $this->validator->getValidatedStatement();
 		$itemId = new ItemId( $request->getItemId() );
 
-		$this->getRevisionMetadata->execute( $itemId ); // checks redirect and item existence
+		$this->assertItemExists->execute( $itemId );
 
 		$this->assertUserIsAuthorized->execute( $itemId, $request->getUsername() );
 
