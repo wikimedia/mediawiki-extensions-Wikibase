@@ -974,6 +974,7 @@
 			"LibHooks",
 			"ViewHooks"
 		],
+		"VectorSearchResourceLoaderConfig": "\\Wikibase\\Repo\\RepoHooks::onVectorSearchResourceLoaderConfig",
 		"WikibaseContentLanguages": "\\Wikibase\\Repo\\RepoHooks::onWikibaseContentLanguages"
 	},
 	"RateLimits": {
