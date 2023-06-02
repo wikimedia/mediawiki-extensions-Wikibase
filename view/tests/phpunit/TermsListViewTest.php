@@ -58,14 +58,14 @@ class TermsListViewTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	private function getTermList( $term, $languageCode = 'en' ) {
+	private static function getTermList( $term, $languageCode = 'en' ) {
 		return new TermList( [ new Term( $languageCode, $term ) ] );
 	}
 
-	public function getTermsListViewProvider() {
+	public static function getTermsListViewProvider(): iterable {
 		$languageCode = 'arc';
-		$labels = $this->getTermList( '<LABEL>', $languageCode );
-		$descriptions = $this->getTermList( '<DESCRIPTION>', $languageCode );
+		$labels = self::getTermList( '<LABEL>', $languageCode );
+		$descriptions = self::getTermList( '<DESCRIPTION>', $languageCode );
 		$aliasGroups = new AliasGroupList();
 		$aliasGroups->setAliasesForLanguage( $languageCode, [ '<ALIAS1>', '<ALIAS2>' ] );
 
@@ -153,8 +153,8 @@ class TermsListViewTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGetTermsListView_noAliasesProvider() {
-		$labels = $this->getTermList( '<LABEL>' );
-		$descriptions = $this->getTermList( '<DESCRIPTION>' );
+		$labels = self::getTermList( '<LABEL>' );
+		$descriptions = self::getTermList( '<DESCRIPTION>' );
 		$view = $this->getTermsListView( 1 );
 		$html = $view->getHtml( $labels, $descriptions, null, [ 'en' ] );
 

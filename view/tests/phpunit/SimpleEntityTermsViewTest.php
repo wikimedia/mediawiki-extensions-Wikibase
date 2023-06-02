@@ -75,11 +75,11 @@ class SimpleEntityTermsViewTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	private function getTermList( $term, $languageCode = 'en' ) {
+	private static function getTermList( $term, $languageCode = 'en' ) {
 		return new TermList( [ new Term( $languageCode, $term ) ] );
 	}
 
-	private function getAliasGroupList( array $aliases, $languageCode = 'en' ) {
+	private static function getAliasGroupList( array $aliases, $languageCode = 'en' ) {
 		return new AliasGroupList( [ new AliasGroup( $languageCode, $aliases ) ] );
 	}
 
@@ -87,7 +87,7 @@ class SimpleEntityTermsViewTest extends \PHPUnit\Framework\TestCase {
 		$alias1 = '<ALIAS1>';
 		$alias2 = '<ALIAS2>';
 		$entityTermsView = $this->getEntityTermsView( 1 );
-		$aliasGroups = $this->getAliasGroupList( [ $alias1, $alias2 ] );
+		$aliasGroups = self::getAliasGroupList( [ $alias1, $alias2 ] );
 		$html = $entityTermsView->getHtml( 'en', new TermList(), new TermList(), $aliasGroups, null );
 
 		$matchingAliasMarkup = tagMatchingOutline(
@@ -101,9 +101,9 @@ class SimpleEntityTermsViewTest extends \PHPUnit\Framework\TestCase {
 		) ) );
 	}
 
-	public function entityFingerprintProvider() {
-		$labels = $this->getTermList( '<LABEL>' );
-		$descriptions = $this->getTermList( '<DESCRIPTION>' );
+	public static function entityFingerprintProvider(): iterable {
+		$labels = self::getTermList( '<LABEL>' );
+		$descriptions = self::getTermList( '<DESCRIPTION>' );
 		$emptyAliases = new AliasGroupList();
 
 		return [
@@ -130,8 +130,8 @@ class SimpleEntityTermsViewTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGetHtml_valuesAreEscaped() {
-		$descriptions = $this->getTermList( '<script>alert( "xss" );</script>' );
-		$aliasGroups = $this->getAliasGroupList( [ '<a href="#">evil html</a>', '<b>bold</b>', '<i>italic</i>' ] );
+		$descriptions = self::getTermList( '<script>alert( "xss" );</script>' );
+		$aliasGroups = self::getAliasGroupList( [ '<a href="#">evil html</a>', '<b>bold</b>', '<i>italic</i>' ] );
 
 		$view = $this->getEntityTermsView( 1 );
 		$html = $view->getHtml( 'en', new TermList(), $descriptions, $aliasGroups, null );
@@ -155,8 +155,8 @@ class SimpleEntityTermsViewTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetHtml_isNotMarkedAsEmpty() {
 		$entityTermsView = $this->getEntityTermsView( 1 );
-		$terms = $this->getTermList( 'not empty' );
-		$aliasGroups = $this->getAliasGroupList( [ 'not empty' ] );
+		$terms = self::getTermList( 'not empty' );
+		$aliasGroups = self::getAliasGroupList( [ 'not empty' ] );
 		$html = $entityTermsView->getHtml( 'en', $terms, $terms, $aliasGroups, new ItemId( 'Q111' ) );
 
 		$this->assertStringNotContainsString( 'wb-empty', $html );
@@ -166,9 +166,9 @@ class SimpleEntityTermsViewTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetHtml_containsEmptyDescriptionPlaceholder() {
 		$view = $this->getEntityTermsView( 1 );
-		$labels = $this->getTermList( 'not empty' );
+		$labels = self::getTermList( 'not empty' );
 		$descriptions = new TermList();
-		$aliasGroups = $this->getAliasGroupList( [ 'not empty' ] );
+		$aliasGroups = self::getAliasGroupList( [ 'not empty' ] );
 		$html = $view->getHtml( 'en', $labels, $descriptions, $aliasGroups, null );
 
 		$this->assertStringContainsString( 'wb-empty', $html );
