@@ -99,11 +99,15 @@ return [
 			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getItemUpdater( $services ),
 			new GuidGenerator(),
-			new AssertUserIsAuthorized(
-				new WikibaseEntityPermissionChecker(
-					WikibaseRepo::getEntityPermissionChecker( $services ),
-					$services->getUserFactory()
-				)
+			WbRestApi::getAssertUserIsAuthorized( $services )
+		);
+	},
+
+	'WbRestApi.AssertUserIsAuthorized' => function( MediaWikiServices $services ): AssertUserIsAuthorized {
+		return new AssertUserIsAuthorized(
+			new WikibaseEntityPermissionChecker(
+				WikibaseRepo::getEntityPermissionChecker( $services ),
+				$services->getUserFactory()
 			)
 		);
 	},
@@ -290,12 +294,7 @@ return [
 					ChangeTags::listExplicitlyDefinedTags()
 				)
 			),
-			new AssertUserIsAuthorized(
-				new WikibaseEntityPermissionChecker(
-					WikibaseRepo::getEntityPermissionChecker( $services ),
-					$services->getUserFactory()
-				)
-			)
+			WbRestApi::getAssertUserIsAuthorized( $services )
 		);
 	},
 
@@ -322,12 +321,7 @@ return [
 			new GetLatestItemRevisionMetadata( new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
 				WikibaseRepo::getEntityRevisionLookup( $services )
 			) ),
-			new AssertUserIsAuthorized(
-				new WikibaseEntityPermissionChecker(
-					WikibaseRepo::getEntityPermissionChecker( $services ),
-					$services->getUserFactory()
-				)
-			)
+			WbRestApi::getAssertUserIsAuthorized( $services )
 		);
 	},
 
@@ -356,12 +350,7 @@ return [
 			new StatementGuidParser( new ItemIdParser() ),
 			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getItemUpdater( $services ),
-			new AssertUserIsAuthorized(
-				new WikibaseEntityPermissionChecker(
-					WikibaseRepo::getEntityPermissionChecker( $services ),
-					$services->getUserFactory()
-				)
-			)
+			WbRestApi::getAssertUserIsAuthorized( $services )
 		);
 	},
 
@@ -381,12 +370,7 @@ return [
 			) ),
 			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getItemUpdater( $services ),
-			new AssertUserIsAuthorized(
-				new WikibaseEntityPermissionChecker(
-					WikibaseRepo::getEntityPermissionChecker( $services ),
-					$services->getUserFactory()
-				)
-			)
+			WbRestApi::getAssertUserIsAuthorized( $services )
 		);
 	},
 
@@ -418,12 +402,7 @@ return [
 			) ),
 			$itemDataRetriever,
 			WbRestApi::getItemUpdater( $services ),
-			new AssertUserIsAuthorized(
-				new WikibaseEntityPermissionChecker(
-					WikibaseRepo::getEntityPermissionChecker( $services ),
-					$services->getUserFactory()
-				)
-			)
+			WbRestApi::getAssertUserIsAuthorized( $services )
 		);
 	},
 
@@ -447,12 +426,7 @@ return [
 			) ),
 			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getItemUpdater( $services ),
-			new AssertUserIsAuthorized(
-				new WikibaseEntityPermissionChecker(
-					WikibaseRepo::getEntityPermissionChecker( $services ),
-					$services->getUserFactory()
-				)
-			)
+			WbRestApi::getAssertUserIsAuthorized( $services )
 		);
 	},
 

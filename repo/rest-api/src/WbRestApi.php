@@ -7,6 +7,7 @@ use Psr\Container\ContainerInterface;
 use Wikibase\Repo\RestApi\Application\Serialization\SerializerFactory;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliases\GetItemAliases;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliasesInLanguage\GetItemAliasesInLanguage;
@@ -140,6 +141,11 @@ class WbRestApi {
 	public static function getPatchItemLabels( ContainerInterface $services = null ): PatchItemLabels {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.PatchItemLabels' );
+	}
+
+	public static function getAssertUserIsAuthorized( ContainerInterface $services = null ): AssertUserIsAuthorized {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.AssertUserIsAuthorized' );
 	}
 
 }
