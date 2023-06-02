@@ -95,29 +95,6 @@ class EntityChangeLookupTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	/**
-	 * We (might) already have changes in wb_changes, thus we potentially need
-	 * to offset $start.
-	 *
-	 * @param int $start
-	 * @return int
-	 */
-	private function offsetStart( $start ) {
-		$changeIdOffset = (int)$this->db->selectField(
-			'wb_changes',
-			'MIN( change_id )',
-			// First change inserted by this test
-			[ 'change_time' => $this->db->timestamp( '20141008161232' ) ],
-			__METHOD__
-		);
-
-		if ( $changeIdOffset ) {
-			$start = $start + $changeIdOffset - 1;
-		}
-
-		return $start;
-	}
-
 	private function getEntityChanges() {
 		$changeOne = [
 			'type' => 'wikibase-item~remove',

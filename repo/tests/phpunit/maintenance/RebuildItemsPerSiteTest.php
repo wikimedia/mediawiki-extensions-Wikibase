@@ -91,12 +91,10 @@ class RebuildItemsPerSiteTest extends MaintenanceBaseTestCase {
 		$this->maintenance->loadWithArgv( $argv );
 		$this->maintenance->execute();
 
-		$existingSiteLinks = $this->db->selectFieldValues(
-			'wb_items_per_site',
-			'ips_site_page',
-			IDatabase::ALL_ROWS,
-			__METHOD__
-		);
+		$existingSiteLinks = $this->db->newSelectQueryBuilder()
+			->select( 'ips_site_page' )
+			->from( 'wb_items_per_site' )
+			->caller( __METHOD__ )->fetchFieldValues();
 		$this->assertArrayEquals( $expectedSiteLinks, $existingSiteLinks );
 	}
 
@@ -111,12 +109,10 @@ class RebuildItemsPerSiteTest extends MaintenanceBaseTestCase {
 		$this->maintenance->execute();
 		unlink( $file );
 
-		$existingSiteLinks = $this->db->selectFieldValues(
-			'wb_items_per_site',
-			'ips_site_page',
-			IDatabase::ALL_ROWS,
-			__METHOD__
-		);
+		$existingSiteLinks = $this->db->newSelectQueryBuilder()
+			->select( 'ips_site_page' )
+			->from( 'wb_items_per_site' )
+			->caller( __METHOD__ )->fetchFieldValues();
 		$this->assertArrayEquals( [ 'Cat', 'Кошка' ], $existingSiteLinks );
 	}
 

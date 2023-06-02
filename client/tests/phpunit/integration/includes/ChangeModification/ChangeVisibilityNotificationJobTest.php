@@ -107,15 +107,13 @@ class ChangeVisibilityNotificationJobTest extends RecentChangesModificationTest 
 			return;
 		}
 
-		$rcRedactedCount = $this->db->selectRowCount(
-			'recentchanges',
-			'rc_deleted',
-			[
+		$rcRedactedCount = $this->db->newSelectQueryBuilder()
+			->table( 'recentchanges' )
+			->where( [
 				'rc_title' => $expectedRedactedTitles,
 				'rc_deleted' => $visibilityBitFlag,
-			],
-			__METHOD__
-		);
+			] )
+			->caller( __METHOD__ )->fetchRowCount();
 		$this->assertSame( count( $expectedRedactedTitles ), $rcRedactedCount, 'Missing rc_deleted changes.' );
 	}
 
@@ -129,12 +127,10 @@ class ChangeVisibilityNotificationJobTest extends RecentChangesModificationTest 
 			$where[] = 'rc_title NOT IN (' . $this->db->makeList( $expectedRedactedTitles ) . ')';
 		}
 
-		$rcFalsePositiveCount = $this->db->selectRowCount(
-			'recentchanges',
-			'rc_deleted',
-			$where,
-			__METHOD__
-		);
+		$rcFalsePositiveCount = $this->db->newSelectQueryBuilder()
+			->table( 'recentchanges' )
+			->where( $where )
+			->caller( __METHOD__ )->fetchRowCount();
 
 		$this->assertSame( 0, $rcFalsePositiveCount, 'Unexpected rc_deleted changes.' );
 	}

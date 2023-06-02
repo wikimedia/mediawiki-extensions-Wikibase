@@ -121,7 +121,9 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 
 		$this->assertSame(
 			3,
-			$this->db->selectRowCount( 'wbt_text', '*' )
+			$this->db->newSelectQueryBuilder()
+				->table( 'wbt_text' )
+				->caller( __METHOD__ )->fetchRowCount()
 		);
 	}
 
@@ -148,7 +150,9 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 
 		$this->assertSame(
 			4,
-			$this->db->selectRowCount( 'wbt_text_in_lang', '*' )
+			$this->db->newSelectQueryBuilder()
+				->table( 'wbt_text_in_lang' )
+				->caller( __METHOD__ )->fetchRowCount()
 		);
 	}
 
@@ -175,7 +179,9 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 
 		$this->assertSame(
 			6,
-			$this->db->selectRowCount( 'wbt_term_in_lang', '*' )
+			$this->db->newSelectQueryBuilder()
+				->table( 'wbt_term_in_lang' )
+				->caller( __METHOD__ )->fetchRowCount()
 		);
 	}
 
@@ -297,7 +303,10 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 			}
 		);
 		$uniqueAcquiredTermIds = array_values( array_unique( $acquiredTermIds ) );
-		$persistedTermIds = $this->db->selectFieldValues( 'wbt_term_in_lang', 'wbtl_id' );
+		$persistedTermIds = $this->db->newSelectQueryBuilder()
+			->select( 'wbtl_id' )
+			->from( 'wbt_term_in_lang' )
+			->caller( __METHOD__ )->fetchFieldValues();
 
 		sort( $uniqueAcquiredTermIds );
 		sort( $persistedTermIds );
@@ -371,7 +380,10 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 				// the acquirer will restore those records in master again.
 
 				// 1. Replicating master records into replica
-				$recordsInMaster = $dbMaster->select( 'wbt_text', [ 'wbx_id', 'wbx_text' ] );
+				$recordsInMaster = $dbMaster->newSelectQueryBuilder()
+					->select( [ 'wbx_id', 'wbx_text' ] )
+					->from( 'wbt_text' )
+					->fetchResultSet();
 				$recordsToInsertIntoReplica = [];
 				foreach ( $recordsInMaster as $record ) {
 					$recordsToInsertIntoReplica[] = [
@@ -381,8 +393,10 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 				}
 				$this->db->insert( 'wbt_text', $recordsToInsertIntoReplica );
 
-				$recordsInMaster = $dbMaster->select(
-					'wbt_text_in_lang', [ 'wbxl_id', 'wbxl_text_id', 'wbxl_language' ] );
+				$recordsInMaster = $dbMaster->newSelectQueryBuilder()
+					->select( [ 'wbxl_id', 'wbxl_text_id', 'wbxl_language' ] )
+					->from( 'wbt_text_in_lang' )
+					->fetchResultSet();
 				$recordsToInsertIntoReplica = [];
 				foreach ( $recordsInMaster as $record ) {
 					$recordsToInsertIntoReplica[] = [
@@ -393,8 +407,10 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 				}
 				$this->db->insert( 'wbt_text_in_lang', $recordsToInsertIntoReplica );
 
-				$recordsInMaster = $dbMaster->select(
-					'wbt_term_in_lang', [ 'wbtl_id', 'wbtl_text_in_lang_id', 'wbtl_type_id' ] );
+				$recordsInMaster = $dbMaster->newSelectQueryBuilder()
+					->select( [ 'wbtl_id', 'wbtl_text_in_lang_id', 'wbtl_type_id' ] )
+					->from( 'wbt_term_in_lang' )
+					->fetchResultSet();
 				$recordsToInsertIntoReplica = [];
 				foreach ( $recordsInMaster as $record ) {
 					$recordsToInsertIntoReplica[] = [
@@ -438,7 +454,9 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 		];
 
 		$acquiredTermIds = $dbTermIdsAcquirer->acquireTermInLangIds( $termsArray );
-		$textIdsCount = $this->db->selectRowCount( 'wbt_text' );
+		$textIdsCount = $this->db->newSelectQueryBuilder()
+			->table( 'wbt_text' )
+			->caller( __METHOD__ )->fetchRowCount();
 
 		$this->assertCount(
 			6, // six term IDs, even though two will be identical
@@ -467,7 +485,10 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 		];
 
 		$dbTermIdsAcquirer->acquireTermInLangIds( $termsArray );
-		$text = $this->db->selectField( 'wbt_text', 'wbx_text' );
+		$text = $this->db->newSelectQueryBuilder()
+			->select( 'wbx_text' )
+			->from( 'wbt_text' )
+			->caller( __METHOD__ )->fetchField();
 
 		$this->assertSame( str_repeat( 'a', 254 ), $text );
 	}
@@ -478,22 +499,22 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 		foreach ( $termsArray as $type => $textsPerLang ) {
 			foreach ( $textsPerLang as $lang => $texts ) {
 				foreach ( (array)$texts as $text ) {
-					$textId = $db->selectField(
-						'wbt_text',
-						'wbx_id',
-						[ 'wbx_text' => $text ]
-					);
+					$textId = $db->newSelectQueryBuilder()
+						->select( 'wbx_id' )
+						->from( 'wbt_text' )
+						->where( [ 'wbx_text' => $text ] )
+						->caller( __METHOD__ )->fetchField();
 
 					$this->assertNotEmpty(
 						$textId,
 						"Expected record for text '$text' is not in wbt_text"
 					);
 
-					$textInLangId = $db->selectField(
-						'wbt_text_in_lang',
-						'wbxl_id',
-						[ 'wbxl_language' => $lang, 'wbxl_text_id' => $textId ]
-					);
+					$textInLangId = $db->newSelectQueryBuilder()
+						->select( 'wbxl_id' )
+						->from( 'wbt_text_in_lang' )
+						->where( [ 'wbxl_language' => $lang, 'wbxl_text_id' => $textId ] )
+						->caller( __METHOD__ )->fetchField();
 
 					$this->assertNotEmpty(
 						$textInLangId,
@@ -501,14 +522,14 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 					);
 
 					$this->assertNotEmpty(
-						$db->selectField(
-							'wbt_term_in_lang',
-							'wbtl_id',
-							[
+						$db->newSelectQueryBuilder()
+							->select( 'wbtl_id' )
+							->from( 'wbt_term_in_lang' )
+							->where( [
 								'wbtl_type_id' => $typeIds[$type],
 								'wbtl_text_in_lang_id' => $textInLangId,
-							]
-						),
+							] )
+							->caller( __METHOD__ )->fetchField(),
 						"Expected $type '$text' in language '$lang' is not in wbt_term_in_lang"
 					);
 				}

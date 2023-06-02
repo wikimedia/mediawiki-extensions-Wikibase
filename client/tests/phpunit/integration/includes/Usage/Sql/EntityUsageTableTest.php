@@ -343,7 +343,11 @@ class EntityUsageTableTest extends MediaWikiIntegrationTestCase {
 	 * @return bool
 	 */
 	private function rowExists( array $conditions ) {
-		$count = $this->db->selectRowCount( EntityUsageTable::DEFAULT_TABLE_NAME, '*', $conditions );
+		$count = $this->db->newSelectQueryBuilder()
+			->table( EntityUsageTable::DEFAULT_TABLE_NAME )
+			->where( $conditions )
+			->limit( 1 ) // we only care if the count is > 0 or not
+			->caller( __METHOD__ )->fetchRowCount();
 		return $count > 0;
 	}
 

@@ -90,7 +90,10 @@ class EntityUsageTableBuilderTest extends MediaWikiIntegrationTestCase {
 	 * @return string[]
 	 */
 	private function fetchAllUsageStrings(): array {
-		$res = $this->db->select( EntityUsageTable::DEFAULT_TABLE_NAME, '*', '', __METHOD__ );
+		$res = $this->db->newSelectQueryBuilder()
+			->select( [ 'eu_page_id', 'eu_entity_id', 'eu_aspect' ] )
+			->from( EntityUsageTable::DEFAULT_TABLE_NAME )
+			->caller( __METHOD__ )->fetchResultSet();
 
 		$usages = [];
 		foreach ( $res as $row ) {

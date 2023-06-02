@@ -132,21 +132,19 @@ class ReplicaPrimaryAwareRecordIdsAcquirerTest extends TestCase {
 	}
 
 	private function assertNoRecordsInDb( array $records, IDatabase $db ) {
-		$recordsInDbCount = $db->selectRowCount(
-			self::TABLE_NAME,
-			'*',
-			$this->recordsToSelectConditions( $records, $db )
-		);
+		$recordsInDbCount = $db->newSelectQueryBuilder()
+			->table( self::TABLE_NAME )
+			->where( $this->recordsToSelectConditions( $records, $db ) )
+			->caller( __METHOD__ )->fetchRowCount();
 
 		$this->assertSame( 0, $recordsInDbCount );
 	}
 
 	private function assertSameRecordsInDb( array $records, IDatabase $db ) {
-		$recordsInDbCount = $db->selectRowCount(
-			self::TABLE_NAME,
-			'*',
-			$this->recordsToSelectConditions( $records, $db )
-		);
+		$recordsInDbCount = $db->newSelectQueryBuilder()
+			->table( self::TABLE_NAME )
+			->where( $this->recordsToSelectConditions( $records, $db ) )
+			->caller( __METHOD__ )->fetchRowCount();
 
 		$this->assertCount( $recordsInDbCount, $records );
 	}

@@ -36,12 +36,11 @@ trait DatabaseTermStoreWriterTestGetTermsTrait {
 			$repoDb
 		);
 
-		$termInLangIds = $this->db->selectFieldValues(
-			$termsTable,
-			$termInLangField,
-			[ $idField => $entityId->getNumericId() ],
-			__METHOD__
-		);
+		$termInLangIds = $this->db->newSelectQueryBuilder()
+			->select( $termInLangField )
+			->from( $termsTable )
+			->where( [ $idField => $entityId->getNumericId() ] )
+			->caller( __METHOD__ )->fetchFieldValues();
 
 		return $this->resolveTermIdsResultToFingerprint(
 			$termInLangIdsResolver->resolveTermInLangIds( $termInLangIds )

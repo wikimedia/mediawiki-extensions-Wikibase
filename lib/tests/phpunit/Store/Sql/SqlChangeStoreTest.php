@@ -120,7 +120,10 @@ class SqlChangeStoreTest extends MediaWikiIntegrationTestCase {
 		$store = $this->newSqlChangeStore();
 		$store->saveChange( $change );
 
-		$res = $this->db->select( 'wb_changes', '*', [], __METHOD__ );
+		$res = $this->db->newSelectQueryBuilder()
+			->select( '*' )
+			->from( 'wb_changes' )
+			->caller( __METHOD__ )->fetchResultSet();
 
 		$this->assertSame( 1, $res->numRows(), 'row count' );
 
@@ -164,7 +167,10 @@ class SqlChangeStoreTest extends MediaWikiIntegrationTestCase {
 		$change->setField( 'time', '20121026200049' );
 		$store->saveChange( $change );
 
-		$res = $this->db->select( 'wb_changes', '*', [], __METHOD__ );
+		$res = $this->db->newSelectQueryBuilder()
+			->select( '*' )
+			->from( 'wb_changes' )
+			->caller( __METHOD__ )->fetchResultSet();
 
 		$this->assertSame( 1, $res->numRows(), 'row count' );
 
@@ -181,8 +187,10 @@ class SqlChangeStoreTest extends MediaWikiIntegrationTestCase {
 
 		$store->deleteChangesByChangeIds( [ $change->getId() ] );
 
-		$res = $this->db->select( 'wb_changes', '*', [], __METHOD__ );
-		$this->assertSame( 0, $res->numRows(), 'row count' );
+		$rows = $this->db->newSelectQueryBuilder()
+			->table( 'wb_changes' )
+			->caller( __METHOD__ )->fetchRowCount();
+		$this->assertSame( 0, $rows, 'row count' );
 	}
 
 	private function getEntityChangeFactory() {
