@@ -218,6 +218,7 @@
 	"wikibase-setlabeldescriptionaliases-description-label": "বিবরণ:",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "উপনাম:",
 	"wikibase-setlabeldescriptionaliases-submit": "লেবেল, বিবরণ ও উপনাম নির্ধারণ করুন",
+	"wikibase-setlabeldescriptionaliases-continue": "অগ্রসর হোন",
 	"special-setsitelink": "আইটেমের সাইটসংযোগ নির্ধারণ করুন",
 	"wikibase-setsitelink-introfull": "আপনি $2-এ [[:$1]]-এর জন্য সাইট সংযোগ নির্ধারণ করছেন।",
 	"wikibase-setsitelink-site": "সাইট আইডি:",

@@ -3,6 +3,7 @@
 		"authors": [
 			"AVRS",
 			"Badseed",
+			"Dogogos123",
 			"Evropi",
 			"Geraki",
 			"Glavkos",
@@ -226,7 +227,9 @@
 	"wikibase-setlabeldescriptionaliases-label-label": "Ετικέτα:",
 	"wikibase-setlabeldescriptionaliases-description-label": "Περιγραφή:",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "Αλλώνυμα:",
+	"wikibase-setlabeldescriptionaliases-description-not-supported": "Οι περιγραφές δεν υποστηρίζονται για αυτήν τη γλώσσα.",
 	"wikibase-setlabeldescriptionaliases-submit": "Ορισμός ετικέτας, περιγραφής και αλλωνύμων",
+	"wikibase-setlabeldescriptionaliases-continue": "Συνέχεια",
 	"special-setsitelink": "Ορίστε ένα σύνδεσμο ιστοτόπου",
 	"wikibase-setsitelink-introfull": "Ορίζετε ένα σύνδεσμο ιστοτόπου στα $2 για το [[:$1]].",
 	"wikibase-setsitelink-intro": "Αυτή η φόρμα σας επιτρέπει να ορίσετε τον σύνδεσμο ιστοσελίδας για ένα θέμα. Πρέπει να δώσετε το ID του θέματος (π.χ Q23), το ID μιας ιστοσελίδας (π.χ ''enwiki'') και τον ορισμό του συνδέσμου ιστοσελίδας.",
