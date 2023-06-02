@@ -388,7 +388,7 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	public static function provideHandleChange() {
+	public static function provideHandleChange(): iterable {
 		$changes = TestChanges::getChanges();
 		$userEmmy2 = Title::makeTitle( NS_USER, 'Emmy2' )->getPrefixedText();
 
@@ -555,15 +555,7 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	/**
-	 * @param int|null $id
-	 * @param string $type
-	 * @param string $objectId
-	 * @param array $info
-	 *
-	 * @return EntityChange
-	 */
-	private function newChange( $id, $type, $objectId, $info = [] ) {
+	private static function newChange( ?int $id, string $type, string $objectId, array $info = [] ): EntityChange {
 		$fields = [
 			'id' => $id,
 			'time' => '20121212121212',
@@ -575,11 +567,11 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 		return new EntityChange( $fields );
 	}
 
-	public function provideHandleChange_rootJobParams() {
+	public static function provideHandleChange_rootJobParams(): iterable {
 		$ids = [ 18, 19, 17 ]; // note: provide these out of order, to check canonical sorting!
-		$regularChange = $this->newChange( 17, 'x~y', 'Q100', [] );
-		$coalescedChange = $this->newChange( 0, 'x~y', 'Q100', [ 'change-ids' => $ids ] );
-		$strangeChange = $this->newChange( 0, 'x~y', 'Q100', [ 'kittens' => 13 ] );
+		$regularChange = self::newChange( 17, 'x~y', 'Q100', [] );
+		$coalescedChange = self::newChange( 0, 'x~y', 'Q100', [ 'change-ids' => $ids ] );
+		$strangeChange = self::newChange( 0, 'x~y', 'Q100', [ 'kittens' => 13 ] );
 
 		$q100 = new ItemId( 'Q100' );
 		$usages = [ // note: provide these out of order, to check canonical sorting!
