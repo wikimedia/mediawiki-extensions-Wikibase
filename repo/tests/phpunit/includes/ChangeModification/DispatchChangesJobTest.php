@@ -86,7 +86,11 @@ class DispatchChangesJobTest extends MediaWikiIntegrationTestCase {
 		$expectedItemChangeFields = $testItemChange->getFields();
 		$expectedItemChangeFields['info'] = $testItemChange->getSerializedInfo();
 		$this->assertSame( $expectedItemChangeFields, $actualItemChangeFields );
-		$this->assertSame( 0, $dbw->selectRowCount( 'wb_changes' ), 'change should be deleted from `wb_changes`' );
+		$this->assertSame( 0,
+			$dbw->newSelectQueryBuilder()
+				->table( 'wb_changes' )
+				->caller( __METHOD__ )->fetchRowCount(),
+			'change should be deleted from `wb_changes`' );
 	}
 
 	public function testNoValidSubscribers(): void {

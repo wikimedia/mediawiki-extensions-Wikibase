@@ -121,7 +121,10 @@ class ChangesSubscriptionTableBuilderTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function fetchAllSubscriptions() {
-		$res = $this->db->select( self::TABLE_NAME, "*", '', __METHOD__ );
+		$res = $this->db->newSelectQueryBuilder()
+			->select( [ 'cs_subscriber_id', 'cs_entity_id' ] )
+			->from( self::TABLE_NAME )
+			->caller( __METHOD__ )->fetchResultSet();
 
 		$subscriptions = [];
 		foreach ( $res as $row ) {

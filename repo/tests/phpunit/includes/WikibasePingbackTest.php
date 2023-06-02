@@ -130,12 +130,11 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function getPingbackTime() {
-		return $this->db->selectField(
-			'updatelog',
-			'ul_value',
-			[ 'ul_key' => self::TEST_KEY ],
-			__METHOD__
-		);
+		return $this->db->newSelectQueryBuilder()
+			->select( 'ul_value' )
+			->from( 'updatelog' )
+			->where( [ 'ul_key' => self::TEST_KEY ] )
+			->caller( __METHOD__ )->fetchField();
 	}
 
 	public function getPingbackWithRequestExpectation( $expectation, $logger ) {

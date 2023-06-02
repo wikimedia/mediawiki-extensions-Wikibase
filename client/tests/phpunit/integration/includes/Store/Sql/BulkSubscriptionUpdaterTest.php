@@ -226,7 +226,10 @@ class BulkSubscriptionUpdaterTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function fetchAllSubscriptions(): array {
-		$res = $this->db->select( 'wb_changes_subscription', "*", '', __METHOD__ );
+		$res = $this->db->newSelectQueryBuilder()
+			->select( [ 'cs_subscriber_id', 'cs_entity_id' ] )
+			->from( 'wb_changes_subscription' )
+			->caller( __METHOD__ )->fetchResultSet();
 
 		$subscriptions = [];
 		foreach ( $res as $row ) {

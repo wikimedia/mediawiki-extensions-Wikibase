@@ -21,12 +21,12 @@ use Wikibase\Lib\Rdbms\ClientDomainDbFactory;
 class ChangeDeletionNotificationJobTest extends RecentChangesModificationTest {
 
 	private function countRevisions( array $conditions = null ): int {
-		return $this->db->selectRowCount(
-			'recentchanges',
-			'*',
-			$conditions,
-			__METHOD__
-		);
+		$selectQueryBuilder = $this->db->newSelectQueryBuilder();
+		$selectQueryBuilder->table( 'recentchanges' );
+		if ( $conditions !== null ) { // ->where( $conditions ?: IDatabase::ALL_ROWS doesn’t work (T332329)
+			$selectQueryBuilder->where( $conditions );
+		}
+		return $selectQueryBuilder->caller( __METHOD__ )->fetchRowCount();
 	}
 
 	private function assertRevisionsDeleted( array $expectedDeleted ): void {

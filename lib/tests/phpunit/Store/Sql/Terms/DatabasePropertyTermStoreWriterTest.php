@@ -307,7 +307,11 @@ class DatabasePropertyTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 		$jobQueue->get( CleanTermsIfUnusedJob::JOB_NAME )->pop()->run();
 
 		// Make sure the cleanup happened
-		$this->assertSame( 0, $this->db->selectRowCount( 'wbt_text', '*', [ 'wbx_text' => 'a--aaaaaaaaaaaaaa1' ] ) );
+		$this->assertSame( 0,
+			$this->db->newSelectQueryBuilder()
+				->table( 'wbt_text' )
+				->where( [ 'wbx_text' => 'a--aaaaaaaaaaaaaa1' ] )
+				->caller( __METHOD__ )->fetchRowCount() );
 	}
 
 	private function getJobQueueGroupMockExpectingTermInLangsIds( array $termInLangIds ) {
