@@ -68,9 +68,6 @@ class EntityRevisionLookupItemDataRetriever implements ItemRetriever, ItemDataRe
 	private function itemDataFromRequestedFields( array $fields, Item $item ): ItemData {
 		$itemData = ( new ItemDataBuilder( $item->getId(), $fields ) );
 
-		if ( in_array( ItemData::FIELD_TYPE, $fields ) ) {
-			$itemData->setType( $item->getType() );
-		}
 		if ( in_array( ItemData::FIELD_LABELS, $fields ) ) {
 			$itemData->setLabels( Labels::fromTermList( $item->getLabels() ) );
 		}

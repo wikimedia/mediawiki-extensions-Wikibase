@@ -11,7 +11,6 @@ use Wikibase\DataModel\Entity\ItemId;
 class ItemDataBuilder {
 
 	private ItemId $id;
-	private ?string $type = null;
 	private ?Labels $labels = null;
 	private ?Descriptions $descriptions = null;
 	private ?Aliases $aliases = null;
@@ -22,13 +21,6 @@ class ItemDataBuilder {
 	public function __construct( ItemId $id, array $requestedFields ) {
 		$this->id = $id;
 		$this->requestedFields = $requestedFields;
-	}
-
-	public function setType( string $type ): self {
-		$this->checkRequested( ItemData::FIELD_TYPE );
-		$this->type = $type;
-
-		return $this;
 	}
 
 	public function setLabels( Labels $labels ): self {
@@ -70,7 +62,6 @@ class ItemDataBuilder {
 		return new ItemData(
 			$this->id,
 			$this->requestedFields,
-			$this->type,
 			$this->labels,
 			$this->descriptions,
 			$this->aliases,

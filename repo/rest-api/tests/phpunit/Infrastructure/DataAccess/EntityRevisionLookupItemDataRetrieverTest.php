@@ -109,13 +109,6 @@ class EntityRevisionLookupItemDataRetrieverTest extends TestCase {
 			->andSiteLink( 'dewiki', 'Kartoffel' )
 			->build();
 
-		yield 'type only' => [
-			$item,
-			[ ItemData::FIELD_TYPE ],
-			( new ItemDataBuilder( $item->getId(), [ ItemData::FIELD_TYPE ] ) )
-				->setType( Item::ENTITY_TYPE )
-				->build(),
-		];
 		$fields = [ ItemData::FIELD_LABELS, ItemData::FIELD_DESCRIPTIONS, ItemData::FIELD_ALIASES ];
 		yield 'labels, descriptions, aliases' => [
 			$item,
@@ -137,7 +130,6 @@ class EntityRevisionLookupItemDataRetrieverTest extends TestCase {
 			$item,
 			ItemData::VALID_FIELDS,
 			( new ItemDataBuilder( $item->getId(), ItemData::VALID_FIELDS ) )
-				->setType( Item::ENTITY_TYPE )
 				->setLabels( Labels::fromTermList( $item->getLabels() ) )
 				->setDescriptions( Descriptions::fromTermList( $item->getDescriptions() ) )
 				->setAliases( Aliases::fromAliasGroupList( $item->getAliasGroups() ) )
