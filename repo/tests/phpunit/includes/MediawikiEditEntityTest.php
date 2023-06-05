@@ -666,6 +666,10 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 
 			$item->setLabel( 'en', $label );
 
+			// Reset the limit cache in the User object, which would prevent bumping
+			// the same limit twice one the same instance.
+			$user->clearInstanceCache( $user->mFrom );
+
 			$edit = $this->makeEditEntity( $repo, $item->getId(), $titleLookup, $user );
 			$edit->attemptSave( $item, "testing", ( $item->getId() === null ? EDIT_NEW : EDIT_UPDATE ), false );
 
