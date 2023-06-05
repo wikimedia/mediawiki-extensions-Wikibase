@@ -19,6 +19,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\GetItemStatements;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
+use Wikibase\Repo\RestApi\Application\UseCases\GetLatestPropertyRevisionMetadata;
+use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetProperty;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatement;
@@ -27,6 +29,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescrip
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupItemDataRetriever;
+use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupPropertyDataRetriever;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
 
@@ -158,6 +161,21 @@ class WbRestApi {
 	public static function getAssertItemExists( ContainerInterface $services = null ): AssertItemExists {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.AssertItemExists' );
+	}
+
+	public static function getGetProperty( ContainerInterface $services = null ): GetProperty {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.GetProperty' );
+	}
+
+	public static function getPropertyDataRetriever( ContainerInterface $services = null ): EntityRevisionLookupPropertyDataRetriever {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.PropertyDataRetriever' );
+	}
+
+	public static function getGetLatestPropertyRevisionMetadata( ContainerInterface $services = null ): GetLatestPropertyRevisionMetadata {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.GetLatestPropertyRevisionMetadata' );
 	}
 
 }

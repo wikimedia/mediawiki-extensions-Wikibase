@@ -5,9 +5,11 @@ const { expect } = require( '../helpers/chaiHelper' );
 const {
 	createEntity,
 	createUniqueStringProperty,
-	newLegacyStatementWithRandomStringValue
+	newLegacyStatementWithRandomStringValue,
+	getLatestEditMetadata
 } = require( '../helpers/entityHelper' );
 const { newGetPropertyRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { makeEtag } = require( '../helpers/httpHelper' );
 
 describe( newGetPropertyRequestBuilder().getRouteDescription(), () => {
 	const germanLabel = 'a-German-label-' + utils.uniq();
@@ -16,6 +18,8 @@ describe( newGetPropertyRequestBuilder().getRouteDescription(), () => {
 	const testPropertyDataType = 'wikibase-item';
 	let testPropertyId;
 	let testStatementPropertyId;
+	let testModified;
+	let testRevisionId;
 	let testStatement;
 
 	before( async () => {
@@ -34,9 +38,12 @@ describe( newGetPropertyRequestBuilder().getRouteDescription(), () => {
 			claims: [ testStatement ]
 		} );
 		testPropertyId = createPropertyResponse.entity.id;
+		const testPropertyCreationMetadata = await getLatestEditMetadata( testPropertyId );
+		testModified = testPropertyCreationMetadata.timestamp;
+		testRevisionId = testPropertyCreationMetadata.revid;
 	} );
 
-	it( 'can GET all property data', async () => {
+	it( 'can GET all property data including metadata', async () => {
 		const response = await newGetPropertyRequestBuilder( testPropertyId )
 			.assertValidRequest()
 			.makeRequest();
@@ -56,6 +63,9 @@ describe( newGetPropertyRequestBuilder().getRouteDescription(), () => {
 			response.body.statements[ testStatementPropertyId ][ 0 ].value.content,
 			testStatement.mainsnak.datavalue.value
 		);
+
+		assert.equal( response.header[ 'last-modified' ], testModified );
+		assert.equal( response.header.etag, makeEtag( testRevisionId ) );
 	} );
 
 } );

@@ -11,12 +11,28 @@ class GetPropertyResponse {
 
 	private PropertyData $propertyData;
 
-	public function __construct( PropertyData $propertyData ) {
+	/**
+	 * @var string timestamp in MediaWiki format 'YYYYMMDDhhmmss'
+	 */
+	private string $lastModified;
+
+	private int $revisionId;
+
+	public function __construct( PropertyData $propertyData, string $lastModified, int $revisionId ) {
 		$this->propertyData = $propertyData;
+		$this->lastModified = $lastModified;
+		$this->revisionId = $revisionId;
 	}
 
 	public function getPropertyData(): PropertyData {
 		return $this->propertyData;
 	}
 
+	public function getLastModified(): string {
+		return $this->lastModified;
+	}
+
+	public function getRevisionId(): int {
+		return $this->revisionId;
+	}
 }

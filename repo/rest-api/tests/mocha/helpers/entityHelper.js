@@ -53,10 +53,11 @@ async function createRedirectForItem( redirectTarget ) {
 	return redirectSource;
 }
 
-async function getLatestEditMetadata( itemId ) {
+async function getLatestEditMetadata( entityId ) {
+	const entityTitle = ( entityId.charAt( 0 ) === 'P' ) ? `Property:${entityId}` : `Item:${entityId}`;
 	const editMetadata = ( await action.getAnon().action( 'query', {
 		list: 'recentchanges',
-		rctitle: `Item:${itemId}`,
+		rctitle: entityTitle,
 		rclimit: 1,
 		rcprop: 'tags|flags|comment|ids|timestamp|user'
 	} ) ).query.recentchanges[ 0 ];
