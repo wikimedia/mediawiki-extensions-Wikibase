@@ -10,6 +10,13 @@ use Wikibase\DataModel\Entity\PropertyId;
  */
 class PropertyData {
 	public const TYPE = DataModelProperty::ENTITY_TYPE;
+	public const FIELD_ID = 'id';
+	public const FIELD_TYPE = 'type';
+	public const FIELD_DATA_TYPE = 'data-type';
+	public const FIELD_LABELS = 'labels';
+	public const FIELD_DESCRIPTIONS = 'descriptions';
+	public const FIELD_ALIASES = 'aliases';
+	public const FIELD_STATEMENTS = 'statements';
 
 	private PropertyId $id;
 	private string $dataType;
