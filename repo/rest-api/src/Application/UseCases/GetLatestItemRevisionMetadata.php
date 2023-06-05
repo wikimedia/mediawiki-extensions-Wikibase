@@ -17,7 +17,7 @@ class GetLatestItemRevisionMetadata {
 	}
 
 	/**
-	 * @throws ItemRedirect
+	 * @throws ItemRedirect if the item is a redirect
 	 * @throws UseCaseError if the item does not exist
 	 *
 	 * @return array{int, string}

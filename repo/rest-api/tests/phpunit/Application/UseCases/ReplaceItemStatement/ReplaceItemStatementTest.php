@@ -13,6 +13,7 @@ use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatement;
@@ -327,7 +328,7 @@ class ReplaceItemStatementTest extends TestCase {
 	private function newUseCase(): ReplaceItemStatement {
 		return new ReplaceItemStatement(
 			$this->newValidator(),
-			$this->getRevisionMetadata,
+			new AssertItemExists( $this->getRevisionMetadata ),
 			$this->itemRetriever,
 			$this->itemUpdater,
 			$this->assertUserIsAuthorized

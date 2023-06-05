@@ -9,8 +9,9 @@ use Wikibase\DataModel\Exception\StatementGuidChangedException;
 use Wikibase\DataModel\Exception\StatementNotFoundException;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Statement\StatementGuid;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
-use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
+use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
@@ -23,26 +24,27 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 class ReplaceItemStatement {
 
 	private ReplaceItemStatementValidator $validator;
-	private GetLatestItemRevisionMetadata $getRevisionMetadata;
+	private AssertItemExists $assertItemExists;
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
 
 	public function __construct(
 		ReplaceItemStatementValidator $validator,
-		GetLatestItemRevisionMetadata $getRevisionMetadata,
+		AssertItemExists $assertItemExists,
 		ItemRetriever $itemRetriever,
 		ItemUpdater $itemUpdater,
 		AssertUserIsAuthorized $assertUserIsAuthorized
 	) {
 		$this->validator = $validator;
-		$this->getRevisionMetadata = $getRevisionMetadata;
+		$this->assertItemExists = $assertItemExists;
 		$this->itemRetriever = $itemRetriever;
 		$this->itemUpdater = $itemUpdater;
 		$this->assertUserIsAuthorized = $assertUserIsAuthorized;
 	}
 
 	/**
+	 * @throws ItemRedirect
 	 * @throws UseCaseError
 	 */
 	public function execute( ReplaceItemStatementRequest $request ): ReplaceItemStatementResponse {
@@ -55,7 +57,7 @@ class ReplaceItemStatement {
 		$itemId = $requestedItemId ? new ItemId( $requestedItemId ) : $statementId->getEntityId();
 		'@phan-var ItemId $itemId';
 
-		$this->getRevisionMetadata->execute( $itemId ); // checks redirect and item existence
+		$this->assertItemExists->execute( $itemId );
 
 		if ( !$itemId->equals( $statementId->getEntityId() ) ) {
 			$this->throwStatementNotFoundException( $statementId );
@@ -93,7 +95,7 @@ class ReplaceItemStatement {
 		$newRevision = $this->itemUpdater->update( $item, $editMetadata );
 
 		return new ReplaceItemStatementResponse(
-			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Statement is validated and exists
+		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Statement is validated and exists
 			$newRevision->getItem()->getStatements()->getStatementById( $statementId ),
 			$newRevision->getLastModified(),
 			$newRevision->getRevisionId()

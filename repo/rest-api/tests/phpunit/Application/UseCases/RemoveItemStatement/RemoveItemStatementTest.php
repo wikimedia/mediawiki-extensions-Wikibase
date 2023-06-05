@@ -12,6 +12,7 @@ use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatement;
@@ -235,8 +236,8 @@ class RemoveItemStatementTest extends TestCase {
 				new StatementIdValidator( $itemIdParser ),
 				new EditMetadataValidator( CommentStore::COMMENT_CHARACTER_LIMIT, self::ALLOWED_TAGS )
 			),
-			$this->getRevisionMetadata,
 			new StatementGuidParser( $itemIdParser ),
+			new AssertItemExists( $this->getRevisionMetadata ),
 			$this->itemRetriever,
 			$this->itemUpdater,
 			$this->assertUserIsAuthorized

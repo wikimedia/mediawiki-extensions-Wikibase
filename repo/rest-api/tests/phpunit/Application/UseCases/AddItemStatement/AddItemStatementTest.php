@@ -15,6 +15,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatement
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
@@ -193,7 +194,7 @@ class AddItemStatementTest extends TestCase {
 	private function newUseCase(): AddItemStatement {
 		return new AddItemStatement(
 			$this->newValidator(),
-			$this->getRevisionMetadata,
+			new AssertItemExists( $this->getRevisionMetadata ),
 			$this->itemRetriever,
 			$this->itemUpdater,
 			$this->guidGenerator,

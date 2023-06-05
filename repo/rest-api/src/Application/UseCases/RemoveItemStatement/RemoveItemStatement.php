@@ -4,8 +4,9 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement;
 
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
-use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
+use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
@@ -18,29 +19,30 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 class RemoveItemStatement {
 
 	private RemoveItemStatementValidator $validator;
-	private GetLatestItemRevisionMetadata $getRevisionMetadata;
 	private StatementGuidParser $statementIdParser;
+	private AssertItemExists $assertItemExists;
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
 
 	public function __construct(
 		RemoveItemStatementValidator $validator,
-		GetLatestItemRevisionMetadata $getRevisionMetadata,
 		StatementGuidParser $statementGuidParser,
+		AssertItemExists $assertItemExists,
 		ItemRetriever $itemRetriever,
 		ItemUpdater $itemUpdater,
 		AssertUserIsAuthorized $assertUserIsAuthorized
 	) {
 		$this->validator = $validator;
-		$this->getRevisionMetadata = $getRevisionMetadata;
 		$this->statementIdParser = $statementGuidParser;
+		$this->assertItemExists = $assertItemExists;
 		$this->itemRetriever = $itemRetriever;
 		$this->itemUpdater = $itemUpdater;
 		$this->assertUserIsAuthorized = $assertUserIsAuthorized;
 	}
 
 	/**
+	 * @throws ItemRedirect
 	 * @throws UseCaseError
 	 */
 	public function execute( RemoveItemStatementRequest $request ): void {
@@ -52,7 +54,7 @@ class RemoveItemStatement {
 		$itemId = $requestedItemId ? new ItemId( $requestedItemId ) : $statementId->getEntityId();
 		'@phan-var ItemId $itemId';
 
-		$this->getRevisionMetadata->execute( $itemId ); // checks redirect and item existence
+		$this->assertItemExists->execute( $itemId );
 
 		if ( !$itemId->equals( $statementId->getEntityId() ) ) {
 			$this->throwStatementNotFoundException( $request->getStatementId() );

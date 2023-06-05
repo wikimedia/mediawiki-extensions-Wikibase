@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\SetItemDescription;
 use Wikibase\DataModel\Entity\Item as DataModelItem;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Tests\NewItem;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescription;
@@ -206,7 +207,7 @@ class SetItemDescriptionTest extends \PHPUnit\Framework\TestCase {
 	private function newUseCase(): SetItemDescription {
 		return new SetItemDescription(
 			$this->validator,
-			$this->getRevisionMetadata,
+			new AssertItemExists( $this->getRevisionMetadata ),
 			$this->itemRetriever,
 			$this->itemUpdater,
 			$this->assertUserIsAuthorized
