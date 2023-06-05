@@ -43,6 +43,14 @@
 			}
 		},
 		{
+			"name": "properties",
+			"description": "Wikibase Properties",
+			"externalDocs": {
+				"description": "Wikibase Data Model - Properties",
+				"url": "https://www.mediawiki.org/wiki/Wikibase/DataModel#Properties"
+			}
+		},
+		{
 			"name": "labels",
 			"description": "Wikibase Labels",
 			"externalDocs": {

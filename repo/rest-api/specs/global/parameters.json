@@ -15,6 +15,22 @@
 			}
 		}
 	},
+	"PropertyId": {
+		"in": "path",
+		"name": "property_id",
+		"description": "The ID of the required Property",
+		"required": true,
+		"schema": {
+			"type": "string",
+			"pattern": "^P[1-9]\\d{0,9}$"
+		},
+		"examples": {
+			"item": {
+				"summary": "Example of Property ID",
+				"value": "P31"
+			}
+		}
+	},
 	"StatementId": {
 		"in": "path",
 		"name": "statement_id",

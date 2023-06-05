@@ -1,0 +1,17 @@
+{
+	"get": {
+		"tags": [ "properties" ],
+		"summary": "[WIP] Retrieve a single Wikibase Property by ID",
+		"description": "This endpoint is currently in development and is not recommended for production use.",
+		"parameters": [
+			{ "$ref": "../../global/parameters.json#/PropertyId" },
+			{ "$ref": "../../global/parameters.json#/Authorization" }
+		],
+		"responses": {
+			"200": { "$ref": "../../global/responses.json#/Property" },
+			"400": { "$ref": "../../global/responses.json#/InvalidPropertyInput" },
+			"404": { "$ref": "../../global/responses.json#/PropertyNotFound" },
+			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
+		}
+	}
+}
