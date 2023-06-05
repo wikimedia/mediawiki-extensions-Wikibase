@@ -65,15 +65,16 @@ class DispatchChangeDeletionNotificationJob extends DispatchChangeModificationNo
 		);
 
 		$thresholdTime = time() - $this->clientRCMaxAge;
-		$staleRecords = (int)$dbr->selectField(
-			'archive', 'COUNT(*)',
-			[
+		$staleRecords = (int)$dbr->newSelectQueryBuilder()
+			->select( 'COUNT(*)' )
+			->from( 'archive' )
+			->where( [
 				'ar_namespace' => $this->getTitle()->getNamespace(),
 				'ar_title' => $this->getTitle()->getDBkey(),
 				'ar_page_id' => $this->pageId,
-				'ar_timestamp < ' . $dbr->addQuotes( $dbr->timestamp( $thresholdTime ) ),
-			], __METHOD__
-		);
+				$dbr->buildComparison( '<', [ 'ar_timestamp' => $dbr->timestamp( $thresholdTime ) ] ),
+			] )
+			->caller( __METHOD__ )->fetchField();
 
 		if ( $staleRecords === $this->archivedRevisionCount ) {
 			return [];
@@ -84,7 +85,7 @@ class DispatchChangeDeletionNotificationJob extends DispatchChangeModificationNo
 			'ar_page_id' => $this->pageId,
 			'ar_title' => $this->title->getDBkey(),
 			'ar_namespace' => $this->title->getNamespace(),
-			'ar_timestamp >= ' . $dbr->addQuotes( $dbr->timestamp( $thresholdTime ) ),
+			$dbr->buildComparison( '>=', [ 'ar_timestamp' => $dbr->timestamp( $thresholdTime ) ] ),
 		] );
 
 		$identifiers = [];
