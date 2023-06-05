@@ -6,7 +6,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\Services\ItemDataRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\ItemPartsRetriever;
 
 /**
  * @license GPL-2.0-or-later
@@ -14,17 +14,17 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemDataRetriever;
 class GetItem {
 
 	private GetLatestItemRevisionMetadata $getLatestRevisionMetadata;
-	private ItemDataRetriever $itemDataRetriever;
+	private ItemPartsRetriever $itemPartsRetriever;
 	private GetItemValidator $validator;
 
 	public function __construct(
 		GetLatestItemRevisionMetadata $getLatestRevisionMetadata,
-		ItemDataRetriever $itemDataRetriever,
+		ItemPartsRetriever $itemPartsRetriever,
 		GetItemValidator $validator
 	) {
 		$this->validator = $validator;
 		$this->getLatestRevisionMetadata = $getLatestRevisionMetadata;
-		$this->itemDataRetriever = $itemDataRetriever;
+		$this->itemPartsRetriever = $itemPartsRetriever;
 	}
 
 	/**
@@ -39,7 +39,7 @@ class GetItem {
 
 		return new GetItemResponse(
 			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Item validated and exists
-			$this->itemDataRetriever->getItemData( $itemId, $itemRequest->getFields() ),
+			$this->itemPartsRetriever->getItemParts( $itemId, $itemRequest->getFields() ),
 			$lastModified,
 			$revisionId
 		);

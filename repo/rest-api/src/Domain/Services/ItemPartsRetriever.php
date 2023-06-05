@@ -3,13 +3,13 @@
 namespace Wikibase\Repo\RestApi\Domain\Services;
 
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\RestApi\Domain\ReadModel\ItemData;
+use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
 
 /**
  * @license GPL-2.0-or-later
  */
-interface ItemDataRetriever {
+interface ItemPartsRetriever {
 
-	public function getItemData( ItemId $itemId, array $fields ): ?ItemData;
+	public function getItemParts( ItemId $itemId, array $fields ): ?ItemParts;
 
 }

@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\ItemId;
 /**
  * @license GPL-2.0-or-later
  */
-class ItemData {
+class ItemParts {
 	public const TYPE = DataModelItem::ENTITY_TYPE;
 
 	public const FIELD_TYPE = 'type';

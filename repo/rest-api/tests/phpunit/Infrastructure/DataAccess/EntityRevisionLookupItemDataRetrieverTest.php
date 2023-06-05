@@ -18,8 +18,8 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
-use Wikibase\Repo\RestApi\Domain\ReadModel\ItemData;
-use Wikibase\Repo\RestApi\Domain\ReadModel\ItemDataBuilder;
+use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
+use Wikibase\Repo\RestApi\Domain\ReadModel\ItemPartsBuilder;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
@@ -44,7 +44,7 @@ class EntityRevisionLookupItemDataRetrieverTest extends TestCase {
 		$this->entityRevisionLookup = $this->createStub( EntityRevisionLookup::class );
 	}
 
-	public function testGetItemData(): void {
+	public function testGetItemParts(): void {
 		$itemId = new ItemId( 'Q123' );
 		$expectedStatement = NewStatement::someValueFor( 'P123' )
 			->withGuid( 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
@@ -54,49 +54,49 @@ class EntityRevisionLookupItemDataRetrieverTest extends TestCase {
 			->build();
 		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $itemId, $item );
 
-		$itemData = $this->newRetriever()->getItemData( $itemId, ItemData::VALID_FIELDS );
+		$itemParts = $this->newRetriever()->getItemParts( $itemId, ItemParts::VALID_FIELDS );
 
-		$this->assertSame( $itemId, $itemData->getId() );
-		$this->assertEquals( Labels::fromTermList( $item->getLabels() ), $itemData->getLabels() );
-		$this->assertEquals( Descriptions::fromTermList( $item->getDescriptions() ), $itemData->getDescriptions() );
-		$this->assertEquals( Aliases::fromAliasGroupList( $item->getAliasGroups() ), $itemData->getAliases() );
+		$this->assertSame( $itemId, $itemParts->getId() );
+		$this->assertEquals( Labels::fromTermList( $item->getLabels() ), $itemParts->getLabels() );
+		$this->assertEquals( Descriptions::fromTermList( $item->getDescriptions() ), $itemParts->getDescriptions() );
+		$this->assertEquals( Aliases::fromAliasGroupList( $item->getAliasGroups() ), $itemParts->getAliases() );
 		$this->assertEquals(
 			new StatementList( $this->newStatementReadModelConverter()->convert( $expectedStatement ) ),
-			$itemData->getStatements()
+			$itemParts->getStatements()
 		);
 		$this->assertEquals(
 			$this->newSiteLinksReadModelConverter()->convert( $item->getSiteLinkList() ),
-			$itemData->getSiteLinks()
+			$itemParts->getSiteLinks()
 		);
 	}
 
-	public function testGivenItemDoesNotExist_getItemDataReturnsNull(): void {
+	public function testGivenItemDoesNotExist_getItemPartsReturnsNull(): void {
 		$itemId = new ItemId( 'Q321' );
 		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $itemId, null );
 
-		$this->assertNull( $this->newRetriever()->getItemData( $itemId, ItemData::VALID_FIELDS ) );
+		$this->assertNull( $this->newRetriever()->getItemParts( $itemId, ItemParts::VALID_FIELDS ) );
 	}
 
-	public function testGivenItemRedirected_getItemDataReturnsNull(): void {
+	public function testGivenItemRedirected_getItemPartsReturnsNull(): void {
 		$itemId = new ItemId( 'Q321' );
 		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithRedirect( $itemId );
 
-		$this->assertNull( $this->newRetriever()->getItemData( $itemId, ItemData::VALID_FIELDS ) );
+		$this->assertNull( $this->newRetriever()->getItemParts( $itemId, ItemParts::VALID_FIELDS ) );
 	}
 
 	/**
-	 * @dataProvider itemDataWithFieldsProvider
+	 * @dataProvider itemPartsWithFieldsProvider
 	 */
-	public function testGivenFields_getItemDataReturnsItemDataOnlyWithRequestFields( Item $item, array $fields, ItemData $itemData ): void {
+	public function testGivenFields_getItemPartsReturnsOnlyRequestFields( Item $item, array $fields, ItemParts $itemParts ): void {
 		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $item->getId(), $item );
 
 		$this->assertEquals(
-			$itemData,
-			$this->newRetriever()->getItemData( $item->getId(), $fields )
+			$itemParts,
+			$this->newRetriever()->getItemParts( $item->getId(), $fields )
 		);
 	}
 
-	public function itemDataWithFieldsProvider(): Generator {
+	public function itemPartsWithFieldsProvider(): Generator {
 		$statement = NewStatement::someValueFor( 'P123' )
 			->withGuid( 'Q666$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
 			->build();
@@ -109,11 +109,11 @@ class EntityRevisionLookupItemDataRetrieverTest extends TestCase {
 			->andSiteLink( 'dewiki', 'Kartoffel' )
 			->build();
 
-		$fields = [ ItemData::FIELD_LABELS, ItemData::FIELD_DESCRIPTIONS, ItemData::FIELD_ALIASES ];
+		$fields = [ ItemParts::FIELD_LABELS, ItemParts::FIELD_DESCRIPTIONS, ItemParts::FIELD_ALIASES ];
 		yield 'labels, descriptions, aliases' => [
 			$item,
 			$fields,
-			( new ItemDataBuilder( $item->getId(), $fields ) )
+			( new ItemPartsBuilder( $item->getId(), $fields ) )
 				->setLabels( Labels::fromTermList( $item->getLabels() ) )
 				->setDescriptions( Descriptions::fromTermList( $item->getDescriptions() ) )
 				->setAliases( Aliases::fromAliasGroupList( $item->getAliasGroups() ) )
@@ -121,15 +121,15 @@ class EntityRevisionLookupItemDataRetrieverTest extends TestCase {
 		];
 		yield 'statements only' => [
 			$item,
-			[ ItemData::FIELD_STATEMENTS ],
-			( new ItemDataBuilder( $item->getId(), [ ItemData::FIELD_STATEMENTS ] ) )
+			[ ItemParts::FIELD_STATEMENTS ],
+			( new ItemPartsBuilder( $item->getId(), [ ItemParts::FIELD_STATEMENTS ] ) )
 				->setStatements( new StatementList( $this->newStatementReadModelConverter()->convert( $statement ) ) )
 				->build(),
 		];
 		yield 'all fields' => [
 			$item,
-			ItemData::VALID_FIELDS,
-			( new ItemDataBuilder( $item->getId(), ItemData::VALID_FIELDS ) )
+			ItemParts::VALID_FIELDS,
+			( new ItemPartsBuilder( $item->getId(), ItemParts::VALID_FIELDS ) )
 				->setLabels( Labels::fromTermList( $item->getLabels() ) )
 				->setDescriptions( Descriptions::fromTermList( $item->getDescriptions() ) )
 				->setAliases( Aliases::fromAliasGroupList( $item->getAliasGroups() ) )

@@ -12,12 +12,12 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
-use Wikibase\Repo\RestApi\Domain\ReadModel\ItemData;
-use Wikibase\Repo\RestApi\Domain\ReadModel\ItemDataBuilder;
+use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
+use Wikibase\Repo\RestApi\Domain\ReadModel\ItemPartsBuilder;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
-use Wikibase\Repo\RestApi\Domain\Services\ItemDataRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\ItemPartsRetriever;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItem
@@ -34,8 +34,8 @@ class GetItemTest extends TestCase {
 	public function testGetExistingItem(): void {
 		$lastModifiedTimestamp = '20201111070707';
 		$revisionId = 42;
-		$requestedFields = [ ItemData::FIELD_LABELS, ItemData::FIELD_STATEMENTS ];
-		$expectedItemData = ( new ItemDataBuilder( new ItemId( self::ITEM_ID ), $requestedFields ) )
+		$requestedFields = [ ItemParts::FIELD_LABELS, ItemParts::FIELD_STATEMENTS ];
+		$expectedItemParts = ( new ItemPartsBuilder( new ItemId( self::ITEM_ID ), $requestedFields ) )
 			->setLabels( new Labels( new Label( 'en', self::ITEM_LABEL ) ) )
 			->setStatements( new StatementList() )
 			->build();
@@ -44,20 +44,20 @@ class GetItemTest extends TestCase {
 		$getRevisionMetadata->method( 'execute' )
 			->willReturn( [ $revisionId, $lastModifiedTimestamp ] );
 
-		$itemDataRetriever = $this->createMock( ItemDataRetriever::class );
-		$itemDataRetriever->expects( $this->once() )
-			->method( 'getItemData' )
+		$itemPartsRetriever = $this->createMock( ItemPartsRetriever::class );
+		$itemPartsRetriever->expects( $this->once() )
+			->method( 'getItemParts' )
 			->with( self::ITEM_ID, $requestedFields )
-			->willReturn( $expectedItemData );
+			->willReturn( $expectedItemParts );
 
 		$itemResponse = ( new GetItem(
 			$getRevisionMetadata,
-			$itemDataRetriever,
+			$itemPartsRetriever,
 			new GetItemValidator( new ItemIdValidator() )
 		) )->execute( new GetItemRequest( self::ITEM_ID, $requestedFields ) );
 
 		$this->assertInstanceOf( GetItemResponse::class, $itemResponse );
-		$this->assertSame( $expectedItemData, $itemResponse->getItemData() );
+		$this->assertSame( $expectedItemParts, $itemResponse->getItemParts() );
 		$this->assertSame( $lastModifiedTimestamp, $itemResponse->getLastModified() );
 		$this->assertSame( $revisionId, $itemResponse->getRevisionId() );
 	}
@@ -73,7 +73,7 @@ class GetItemTest extends TestCase {
 		try {
 			( new GetItem(
 				$getRevisionMetadata,
-				$this->createStub( ItemDataRetriever::class ),
+				$this->createStub( ItemPartsRetriever::class ),
 				new GetItemValidator( new ItemIdValidator() )
 			) )->execute( new GetItemRequest( $itemId ) );
 
@@ -88,7 +88,7 @@ class GetItemTest extends TestCase {
 		try {
 			( new GetItem(
 				$this->createStub( GetLatestItemRevisionMetadata::class ),
-				$this->createStub( ItemDataRetriever::class ),
+				$this->createStub( ItemPartsRetriever::class ),
 				new GetItemValidator( new ItemIdValidator() )
 			) )->execute( new GetItemRequest( $itemId ) );
 

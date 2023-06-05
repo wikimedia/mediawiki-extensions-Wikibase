@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetItem;
 
-use Wikibase\Repo\RestApi\Domain\ReadModel\ItemData;
+use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
 
 /**
  * @license GPL-2.0-or-later
@@ -12,7 +12,7 @@ class GetItemRequest {
 	private string $itemId;
 	private array $fields;
 
-	public function __construct( string $itemId, array $fields = ItemData::VALID_FIELDS ) {
+	public function __construct( string $itemId, array $fields = ItemParts::VALID_FIELDS ) {
 		$this->itemId = $itemId;
 		$this->fields = $fields;
 	}
