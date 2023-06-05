@@ -19,6 +19,21 @@
 			}
 		]
 	},
+	"PropertyResponse": {
+		"allOf": [
+			{ "$ref": "./schemas.json#/Property" },
+			{
+				"required": [ "id", "type", "data-type", "labels", "descriptions", "aliases", "statements" ],
+				"properties": {
+					"statements": {
+						"additionalProperties": {
+							"items": { "$ref": "#/StatementResponseRequired" }
+						}
+					}
+				}
+			}
+		]
+	},
 	"Error": {
 		"type": "object",
 		"properties": {

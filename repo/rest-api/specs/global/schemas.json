@@ -11,13 +11,37 @@
 				"example": "item"
 			},
 			"labels": {
-				"$ref": "#/Labels"
+				"allOf": [
+					{ "$ref": "#/Labels" },
+					{ "example": { "en": "Douglas Adams", "fr": "Douglas Adams" } }
+				]
 			},
 			"descriptions": {
-				"$ref": "#/Descriptions"
+				"allOf": [
+					{ "$ref": "#/Descriptions" },
+					{
+						"example": {
+							"en": "English science fiction writer and humourist",
+							"fr": "écrivain de science-fiction et humoriste anglais"
+						}
+					}
+				]
 			},
 			"aliases": {
-				"$ref": "#/Aliases"
+				"allOf": [
+					{ "$ref": "#/Aliases" },
+					{
+						"example": {
+							"en": [
+								"Douglas Noel Adams",
+								"Douglas Noël Adams"
+							],
+							"fr": [
+								"Douglas Noel Adams"
+							]
+						}
+					}
+				]
 			},
 			"sitelinks": {
 				"$ref": "./schema-parts.json#/Sitelinks"
@@ -34,14 +58,85 @@
 			"propertyName": "type"
 		}
 	},
+	"Property": {
+		"type": "object",
+		"properties": {
+			"id": {
+				"type": "string",
+				"example": "P31"
+			},
+			"type": {
+				"type": "string",
+				"example": "property"
+			},
+			"data-type": {
+				"type": "string",
+				"example": "wikibase-item"
+			},
+			"labels": {
+				"allOf": [
+					{ "$ref": "#/Labels" },
+					{ "example": { "en": "Instance of", "fr": "nature de l'élément" } }
+				]
+			},
+			"descriptions": {
+				"allOf": [
+					{ "$ref": "#/Descriptions" },
+					{
+						"example": {
+							"en": "that class of which this subject is a particular example and member; different from P279 (subclass of); for example: K2 is an instance of mountain; volcano is a subclass of mountain (and an instance of volcanic landform)",
+							"fr": "cet élément est un exemple spécifique de cette classe qui en précise la nature. Ne pas confondre avec la propriété P279 (sous-classe de)"
+						}
+					}
+				]
+			},
+			"aliases": {
+				"allOf": [
+					{ "$ref": "#/Aliases" },
+					{
+						"example": {
+							"en": [
+								"is a",
+								"is an"
+							],
+							"fr": [
+								"est un"
+							]
+						}
+					}
+				]
+			},
+			"statements": {
+				"type": "object",
+				"additionalProperties": {
+					"type": "array",
+					"items": {
+						"allOf": [
+							{ "$ref": "#/Statement" },
+							{
+								"properties": {
+									"id": {
+										"example": "P31$6403c562-401a-2b26-85cc-8327801145e1"
+									}
+								}
+							}
+						]
+					}
+				}
+			}
+		},
+		"discriminator": {
+			"propertyName": "type"
+		}
+	},
 	"Labels": {
 		"type": "object",
 		"additionalProperties": {
 			"type": "string"
 		},
 		"example": {
-			"en": "Douglas Adams",
-			"fr": "Douglas Adams"
+			"en": "en-label",
+			"fr": "fr-label"
 		}
 	},
 	"Descriptions": {
@@ -50,8 +145,8 @@
 			"type": "string"
 		},
 		"example": {
-			"en": "English science fiction writer and humourist",
-			"fr": "écrivain de science-fiction et humoriste anglais"
+			"en": "en-description",
+			"fr": "fr-description"
 		}
 	},
 	"Aliases": {
@@ -61,13 +156,7 @@
 			"items": { "type": "string" }
 		},
 		"example": {
-			"en": [
-				"Douglas Noel Adams",
-				"Douglas Noël Adams"
-			],
-			"fr": [
-				"Douglas Noel Adams"
-			]
+			"en": [ ], "fr": [ ]
 		}
 	},
 	"Sitelink": {

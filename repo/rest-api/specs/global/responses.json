@@ -37,6 +37,25 @@
 			}
 		}
 	},
+	"PropertyNotFound": {
+		"description": "The specified property was not found",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/Error" },
+				"examples": {
+					"property-not-found": { "$ref": "./examples.json#/PropertyNotFoundExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
 	"ItemRedirected": {
 		"description": "The specified Item was redirected",
 		"content": {
@@ -181,6 +200,23 @@
 				"examples": {
 					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
 					"invalid-field": { "$ref": "./examples.json#/InvalidFieldExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
+	"InvalidPropertyInput": {
+		"description": "The request cannot be processed",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/Error" },
+				"examples": {
+					"invalid-property-id": { "$ref": "./examples.json#/InvalidPropertyIdExample" }
 				}
 			}
 		},
@@ -845,6 +881,36 @@
 						"Douglas Noel Adams",
 						"Douglas Noël Adams"
 					]
+				}
+			}
+		}
+	},
+	"Property": {
+		"description": "A single Wikibase Property",
+		"headers": {
+			"Last-Modified": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Last modified date"
+			},
+			"ETag": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Last entity revision number"
+			},
+			"X-Authenticated-User": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Optional username of the user making the request"
+			}
+		},
+		"content": {
+			"application/json": {
+				"schema": {
+					"$ref": "./response-parts.json#/PropertyResponse"
 				}
 			}
 		}
