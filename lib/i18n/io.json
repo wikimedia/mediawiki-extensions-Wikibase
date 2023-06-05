@@ -6,6 +6,7 @@
 	},
 	"wikibase-error-unexpected": "Eroro: $1",
 	"wikibase-error-save-generic": "Ne povis sparar la modifiko pro eroro.",
+	"wikibase-error-remove-generic": "Ne povis removar pro eroro.",
 	"wikibase-error-ui-no-external-page": "Ne esis posibla trovar la pagino \"$2\" en \"$1\".",
 	"wikibase-timedetails-isotime": "Dato e horo",
 	"wikibase-timedetails-before": "Ante",

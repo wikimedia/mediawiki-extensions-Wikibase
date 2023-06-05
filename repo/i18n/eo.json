@@ -51,7 +51,7 @@
 	"wikibase-label-edit-placeholder-language-aware": "entajpi etikedon en $1",
 	"wikibase-description-empty": "Neniu priskribo difinita",
 	"wikibase-description-edit-placeholder": "entajpi priskribon",
-	"wikibase-description-edit-placeholder-language-aware": "entajpu priskribon en $1",
+	"wikibase-description-edit-placeholder-language-aware": "Enirez deskripto en $1",
 	"wikibase-content-language-edit-label": "Lingvo:",
 	"wikibase-diffview-reference": "referenco",
 	"wikibase-diffview-rank": "rango",
