@@ -3,7 +3,8 @@
 		"authors": [
 			"Salomo Christian Hutajulu",
 			"Herryz",
-			"NoiX180"
+			"NoiX180",
+			"Bennylin"
 		]
 	},
 	"tooltip-t-wikibase": "Pautan to item repositori data na tarsambung",
@@ -12,6 +13,8 @@
 	"wikibase-editlinks": "Patota tautan",
 	"wikibase-editlinkstitle": "Patota angka tautan antarparhataan",
 	"wikibase-linkitem-addlinks": "Tamba tautan",
+	"wikibase-linkitem-input-site": "Parhataan:",
+	"wikibase-linkitem-input-page": "Alaman:",
 	"wikibase-rc-hide-wikidata": "$1{{WBREOPNAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Bunihon",
 	"wikibase-rc-hide-wikidata-show": "Patudu",

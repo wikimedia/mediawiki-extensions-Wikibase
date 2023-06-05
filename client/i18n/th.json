@@ -52,9 +52,9 @@
 	"wikibase-rc-hide-wikidata-show": "แสดง",
 	"wikibase-rc-show-wikidata-pref": "แสดงการแก้ไข {{WBREPONAME}} ในรายการปรับปรุงล่าสุด",
 	"wikibase-rc-wikibase-edit-letter": "ด",
-	"wikibase-rc-wikibase-edit-title": "การแก้ไขบน {{WBREPONAME}}",
+	"wikibase-rc-wikibase-edit-title": "การแก้ไขจาก{{WBREPONAME}}",
 	"wikibase-rcfilters-hide-wikibase-label": "การแก้ไขบน {{WBREPONAME}}",
-	"wikibase-rcfilters-hide-wikibase-description": "การแก้ไขที่เริ่มบน {{WBREPONAME}}",
+	"wikibase-rcfilters-hide-wikibase-description": "การแก้ไขที่{{WBREPONAME}}",
 	"wikibase-rcfilters-hide-wikibase-conflicts-ores": "ตัวกรองนี้ขัดแย้งกับตัวกรองคุณภาพการมีส่วนร่วมหรือจุดประสงค์ของผู้ใช้อย่างน้อยหนึ่งตัว การคาดเดาคุณภาพและจุดประสงค์จะใช้ไม่ได้สำหรับการแก้ไขบน{{WBREPONAME}}",
 	"wikibase-rcfilters-hide-wikibase-conflicts-ores-global": "ตัวกรอง \"การแก้ไขบน{{WBREPONAME}}\" ขัดแย้งกับตัวกรองคุณภาพการมีส่วนร่วมหรือจุดประสงค์ของผู้ใช้อย่างน้อยหนึ่งตัวกรอง การคาดเดาคุณภาพและจุดประสงค์จะใช้ไม่ได้สำหรับการแก้ไขบน{{WBREPONAME}} ตัวกรองที่ขัดแย้งกันได้ถูกทำเครื่องหมายไว้ในส่วนของตัวกรองที่ใช้งานอยู่ด้านบน",
 	"wikibase-rcfilters-damaging-conflicts-hide-wikibase": "การคาดเดาคุณภาพการมีส่วนร่วมใช้ไม่ได้สำหรับการเปลี่ยนแปลงบางประเภท ตัวกรองนี้จึงขัดแย้งกับ{{PLURAL:$2|ตัวกรอง}}ประเภทของการเปลี่ยนแปลงดังต่อไปนี้: $1",
@@ -75,7 +75,7 @@
 	"wikibase-entityusage-submit": "แสดงหน้า",
 	"wikibase-pageinfo-entity-id": "หมายเลขสารสนเทศใน {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "ไม่มี",
-	"wikibase-pageinfo-entity-usage": "รายการสนเทศจาก {{WBREPONAME}} ที่ใช้ในหน้านี้",
+	"wikibase-pageinfo-entity-usage": "รายการสนเทศจาก{{WBREPONAME}}ที่ใช้ในหน้านี้",
 	"wikibase-pageinfo-entity-usage-S": "การเชื่อมโยงข้ามไซต์",
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "ป้ายชื่อ: $1",
 	"wikibase-pageinfo-entity-usage-T": "รหัสชื่อหรือชื่อประจำหน้า",
@@ -91,5 +91,11 @@
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|การเชื่อมโยง}}กับ{{WBREPONAME}}",
 	"notification-link-text-view-item": "{{GENDER:$1|ดู}}สิ่งนี้",
 	"notification-subject-page-connection": "หน้าหนึ่งบน {{SITENAME}} ที่คุณ{{GENDER:$3|ได้สร้างไว้}} ได้{{GENDER:$2|เชื่อมโยง}}เข้ากับรายการของสิ่งหนึ่งใน {{WBREPONAME}}",
-	"wikibase-client-data-bridge-references-heading": "การอ้างอิง"
+	"wikibase-client-data-bridge-dialog-title": "แก้ไข $1",
+	"wikibase-client-data-bridge-references-heading": "การอ้างอิง",
+	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "คุณยังไม่ได้เข้าสู่ระบบ",
+	"wikibase-client-data-bridge-error-go-back": "กลับไป",
+	"wikibase-client-data-bridge-error-retry-save": "ลองบันทึกใหม่อีกครั้ง",
+	"wikibase-client-data-bridge-thank-you-head": "ขอบคุณสำหรับการแก้ไขของคุณ!",
+	"wikibase-client-data-bridge-saving-error-assertuser-heading": "คุณยังไม่ได้เข้าสู่ระบบ"
 }

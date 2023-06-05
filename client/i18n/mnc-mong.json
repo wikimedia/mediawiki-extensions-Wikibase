@@ -5,10 +5,17 @@
 			"Nikki"
 		]
 	},
+	"tooltip-t-wikibase": "ᡩᠠᡨᠠ ᡩᡝ ᡥᠣᠯᠪᠣᠪᡠᡵᡝ ᠨᠠᠮᡠᠨ ᡳ ᠵᠠᡴᠠ",
+	"wikibase-comment-update": "{{WBREPONAME}} ᠵᠠᡴᠠ ᡴᡡᠪᡠᠯᡳᡥᡝᠪᡳ",
+	"wikibase-dataitem": "{{WBREPONAME}} ᠵᠠᡴᠠ",
 	"wikibase-editlinks": "ᠪᠠᠨᠵᡳᠪᡠᠰᡳ ᠯᡳᠨᡴᠰ",
+	"wikibase-editlinkstitle": "ᡤᡝᡵᡝᠨ ᡤᡳᠰᡠᠨ ᡳ ᠠᠰᡠ ᠪᡝ ᡥᠠᠯᠠᠮᠪᡳ",
+	"wikibase-linkitem-addlinks": "ᠠᠰᡠ ᠪᡝ ᠨᠣᠩᡤᡳᠮᠪᡳ",
 	"wikibase-linkitem-input-site": "ᡤᡳᠰᡠᠨ᠄",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "ᠰᠣᠮᡳᡵᡝ",
 	"wikibase-rc-hide-wikidata-show": "ᡳᠯᡝᡨᡠᠯᡝᡵᡝ",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} ᠪᠠᠨᠵᡳᠪᡠᠰᡳ"
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} ᠪᠠᠨᠵᡳᠪᡠᠰᡳ",
+	"wikibase-otherprojects": "ᡝᠨᠴᡠ ᠠᡵᡤᠠ ᡩᡝ",
+	"wikibase-sitelinks-sitename-columnheading": "ᡤᡳᠰᡠᠨ"
 }

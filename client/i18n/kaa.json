@@ -37,5 +37,6 @@
 	"wikibase-pageinfo-entity-usage": "Bul bette paydalanılǵan {{WBREPONAME}} obyektleri",
 	"wikibase-otherprojects": "Basqa joybarlarda",
 	"wikibase-sitelinks-sitename-columnheading": "Til",
-	"wikibase-sitelinks-link-columnheading": "Siltemelengen bet"
+	"wikibase-sitelinks-link-columnheading": "Siltemelengen bet",
+	"notification-header-page-connection": "<strong>$3</strong> beti {{PLURAL:$4|-1={{WBREPONAME}} elementi|$4 {{WBREPONAME}} elementi}} {{GENDER:$2|menen baylanıstırıldı}} hám ol jerde temaǵa baylanıslı maǵlıwmatlardı jıynaw múmkin."
 }

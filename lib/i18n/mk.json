@@ -6,7 +6,6 @@
 			"Vlad5250"
 		]
 	},
-	"wikibase-lib-desc": "Содржи почести функции за додатоците Викибаза и Клиент на Викибазата.",
 	"specialpages-group-wikibase": "Викибаза",
 	"wikibase-deletedentity-item": "Избришан предмет",
 	"wikibase-deletedentity-property": "Избришано својство",
@@ -18,7 +17,7 @@
 	"wikibase-error-save-timeout": "Се соочуваме со технички потешкотии. Обидете се подоцна.",
 	"wikibase-error-remove-timeout": "Се соочуваме со технички потешкотии. Обидете се подоцна.",
 	"wikibase-error-ui-no-external-page": "Страницата „$2“ не е најдена на „$1“.",
-	"wikibase-error-ui-edit-conflict": "Во меѓувреме е изменета истата вредност, предизвикувајќи спротиставеност во уредувањето. Превчитајте ја страницата.",
+	"wikibase-error-ui-edit-conflict": "Во меѓувреме е изменета истата вредност, предизвикувајќи спротивставеност во уредувањето. Превчитајте ја страницата.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (транслитерирано)",
 	"wikibase-quantitydetails-amount": "Износ",
 	"wikibase-quantitydetails-upperbound": "Горна граница",

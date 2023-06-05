@@ -4,8 +4,11 @@
 			"Han4299"
 		]
 	},
-	"wikibase-editlinks": "Pakabajiki sepakna",
+	"wikibase-editlinks": "Pakabajiki sambungangna",
+	"wikibase-linkitem-addlinks": "Tamba sambungang",
 	"wikibase-linkitem-title": "Pasepaki siagang barambang",
+	"wikibase-linkitem-linkpage": "Pasambungi siagang barambang",
+	"wikibase-linkitem-selectlink": "Maekik pilei situs siagang barambang nikaerokai Katte pasambungang siagang anne barambanga.",
 	"wikibase-linkitem-input-site": "Basa:",
 	"wikibase-linkitem-input-page": "Barambang:",
 	"wikibase-rc-hide-wikidata-hide": "Pacokkoi",
