@@ -208,7 +208,7 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 		return $repo;
 	}
 
-	public static function provideEditConflict() {
+	public static function provideEditConflict(): iterable {
 		/*
 		 * Test Revisions:
 		 * #10: label: [ 'en' => 'foo' ];
@@ -217,70 +217,68 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 		 * #13: label: [ 'en' => 'test', 'de' => 'bar' ], description: [ 'en' => 'more testing' ];
 		*/
 
-		return [
-			[ // #0: case I: no base rev given.
-				null,  // input data
-				0,  // base rev
-				false, // expected conflict
-				false, // expected fix
+		yield 'no base rev given' => [
+			'inputData' => null,
+			'baseRevisionId' => 0,
+			'expectedConflict' => false,
+			'expectedFix' => false,
+		];
+		yield 'base rev == current' => [
+			'inputData' => null,
+			'baseRevisionId' => 13,
+			'expectedConflict' => false,
+			'expectedFix' => false,
+		];
+		yield 'user was last to edit' => [
+			'inputData' => [
+				'label' => [ 'de' => 'yarrr' ],
 			],
-			[ // #1: case II: base rev == current
-				null,  // input data
-				13,     // base rev
-				false, // expected conflict
-				false, // expected fix
+			'baseRevisionId' => 12,
+			'expectedConflict' => true,
+			'expectedFix' => true,
+			'expectedData' => [
+				'label' => [ 'en' => 'test', 'de' => 'yarrr' ],
 			],
-			[ // #2: case IIIa: user was last to edit
-				[ // input data
-					'label' => [ 'de' => 'yarrr' ],
-				],
-				12,     // base rev
-				true,  // expected conflict
-				true,  // expected fix
-				[ // expected data
-					'label' => [ 'en' => 'test', 'de' => 'yarrr' ],
-				],
+		];
+		yield 'user was last to edit, but introduces a new operand' => [
+			'inputData' => [
+				'label' => [ 'de' => 'yarrr' ],
 			],
-			[ // #3: case IIIb: user was last to edit, but intoduces a new operand
-				[ // input data
-					'label' => [ 'de' => 'yarrr' ],
-				],
-				11,     // base rev
-				true,  // expected conflict
-				false, // expected failure, diff operand change
-				null,
+			'baseRevisionId' => 11,
+			'expectedConflict' => true,
+			'expectedFix' => false, // expected failure, diff operand change
+			'expectedData' => null,
+		];
+		yield 'patch applied' => [
+			'inputData' => [
+				'label' => [ 'nl' => 'test', 'fr' => 'frrrrtt' ],
 			],
-			[ // #4: case IV: patch applied
-				[ // input data
-					'label' => [ 'nl' => 'test', 'fr' => 'frrrrtt' ],
-				],
-				10,     // base rev
-				true,  // expected conflict
-				true,  // expected fix
-				[ // expected data
-					'label' => [ 'de' => 'bar', 'en' => 'test', 'nl' => 'test', 'fr' => 'frrrrtt' ],
-				],
+			'baseRevisionId' => 10,
+			'expectedConflict' => true,
+			'expectedFix' => true,
+			'expectedData' => [
+				'label' => [ 'de' => 'bar', 'en' => 'test', 'nl' => 'test', 'fr' => 'frrrrtt' ],
 			],
-			[ // #5: case V: patch failed, expect a conflict
-				[ // input data
-					'label' => [ 'nl' => 'test', 'de' => 'bar' ],
-				],
-				10,     // base rev
-				true,  // expected conflict
-				false, // expected fix
-				null,   // expected data
+		];
+		yield 'patch failed, expect a conflict' => [
+			'inputData' => [
+				'label' => [ 'nl' => 'test', 'de' => 'bar' ],
 			],
-			[ // #6: case VI: patch is empty, keep current (not base)
-				[ // input data
-					'label' => [ 'en' => 'bar', 'de' => 'bar' ],
-				],
-				12,     // base rev
-				true,  // expected conflict
-				true,  // expected fix
-				[ // expected data
-					'label' => [ 'en' => 'test', 'de' => 'bar' ],
-					'description' => [ 'en' => 'more testing' ],
-				],
+			'baseRevisionId' => 10,
+			'expectedConflict' => true,
+			'expectedFix' => false,
+			'expectedData' => null,
+		];
+		yield 'patch is empty, keep current (not base)' => [
+			'inputData' => [
+				'label' => [ 'en' => 'bar', 'de' => 'bar' ],
+			],
+			'baseRevisionId' => 12,
+			'expectedConflict' => true,
+			'expectedFix' => true,
+			'expectedData' => [
+				'label' => [ 'en' => 'test', 'de' => 'bar' ],
+				'description' => [ 'en' => 'more testing' ],
 			],
 		];
 	}
@@ -418,18 +416,16 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 			"Saving should have failed late\n$statusMessage" );
 	}
 
-	public function dataCheckEditPermissions() {
-		return [
-			[ # 0: edit allowed for new item
-				[ 'read' => true, 'edit' => true, 'createpage' => true ],
-				false,
-				true,
-			],
-			[ # 3: edit not allowed for existing item
-				[ 'read' => true, 'edit' => false ],
-				true,
-				false,
-			],
+	public static function provideCheckEditPermissions(): iterable {
+		yield 'edit allowed for new item' => [
+			'permissions' => [ 'read' => true, 'edit' => true, 'createpage' => true ],
+			'create' => false,
+			'expectedOK' => true,
+		];
+		yield 'edit not allowed for existing item' => [
+			'permissions' => [ 'read' => true, 'edit' => false ],
+			'create' => true,
+			'expectedOK' => false,
 		];
 	}
 
@@ -445,7 +441,7 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 	}
 
 	/**
-	 * @dataProvider dataCheckEditPermissions
+	 * @dataProvider provideCheckEditPermissions
 	 */
 	public function testCheckEditPermissions( $permissions, $create, $expectedOK ) {
 		$repo = $this->getMockRepository();
@@ -462,7 +458,7 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 	}
 
 	/**
-	 * @dataProvider dataCheckEditPermissions
+	 * @dataProvider provideCheckEditPermissions
 	 */
 	public function testAttemptSavePermissions( $permissions, $create, $expectedOK ) {
 		$repo = $this->getMockRepository();
@@ -525,107 +521,103 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	public function dataAttemptSaveRateLimit() {
-		return [
+	public static function provideAttemptSaveRateLimit(): iterable {
+		yield 'no limits' => [
+			'limits' => [],
+			'groups' => [],
+			'edits' => [
+				[ 'item' => 'foo', 'label' => 'foo', 'ok' => true ],
+				[ 'item' => 'bar', 'label' => 'bar', 'ok' => true ],
+				[ 'item' => 'foo', 'label' => 'Foo', 'ok' => true ],
+				[ 'item' => 'bar', 'label' => 'Bar', 'ok' => true ],
+			],
+		];
 
-			[ // #0: no limits
-				[], // limits: none
-				[], // groups: none
-				[ // edits:
-					[ 'item' => 'foo', 'label' => 'foo', 'ok' => true ],
-					[ 'item' => 'bar', 'label' => 'bar', 'ok' => true ],
-					[ 'item' => 'foo', 'label' => 'Foo', 'ok' => true ],
-					[ 'item' => 'bar', 'label' => 'Bar', 'ok' => true ],
+		yield 'limits bypassed with noratelimit permission' => [
+			'limits' => [
+				'edit' => [
+					'user' => [ 1, 60 ], // one edit per minute
 				],
 			],
+			'groups' => [
+				'sysop', // sysop has the noratelimit permission set in the test case
+			],
+			'edits' => [
+				[ 'item' => 'foo', 'label' => 'foo', 'ok' => true ],
+				[ 'item' => 'bar', 'label' => 'bar', 'ok' => true ],
+				[ 'item' => 'foo', 'label' => 'Foo', 'ok' => true ],
+				[ 'item' => 'bar', 'label' => 'Bar', 'ok' => true ],
+			],
+		];
 
-			[ // #1: limits bypassed with noratelimit permission
-				[ // limits:
-					'edit' => [
-						'user' => [ 1, 60 ], // one edit per minute
-					],
-				],
-				[ // groups:
-					'sysop', // sysop has the noratelimit permission set in the test case
-				],
-				[ // edits:
-					[ 'item' => 'foo', 'label' => 'foo', 'ok' => true ],
-					[ 'item' => 'bar', 'label' => 'bar', 'ok' => true ],
-					[ 'item' => 'foo', 'label' => 'Foo', 'ok' => true ],
-					[ 'item' => 'bar', 'label' => 'Bar', 'ok' => true ],
+		yield 'per-group limit overrides with less restrictive limit' => [
+			'limits' => [
+				'edit' => [
+					'user' => [ 1, 60 ], // one edit per minute
+					'kittens' => [ 10, 60 ], // one edit per minute
 				],
 			],
+			'groups' => [
+				'kittens',
+			],
+			'edits' => [
+				[ 'item' => 'foo', 'label' => 'foo', 'ok' => true ],
+				[ 'item' => 'bar', 'label' => 'bar', 'ok' => true ],
+				[ 'item' => 'foo', 'label' => 'Foo', 'ok' => true ],
+				[ 'item' => 'bar', 'label' => 'Bar', 'ok' => true ],
+			],
+		];
 
-			[ // #2: per-group limit overrides with less restrictive limit
-				[ // limits:
-					'edit' => [
-						'user' => [ 1, 60 ], // one edit per minute
-						'kittens' => [ 10, 60 ], // one edit per minute
-					],
-				],
-				[ // groups:
-					'kittens',
-				],
-				[ // edits:
-					[ 'item' => 'foo', 'label' => 'foo', 'ok' => true ],
-					[ 'item' => 'bar', 'label' => 'bar', 'ok' => true ],
-					[ 'item' => 'foo', 'label' => 'Foo', 'ok' => true ],
-					[ 'item' => 'bar', 'label' => 'Bar', 'ok' => true ],
+		yield 'edit limit applies' => [
+			'limits' => [
+				'edit' => [
+					'user' => [ 1, 60 ], // one edit per minute
 				],
 			],
+			'groups' => [],
+			'edits' => [
+				[ 'item' => 'foo', 'label' => 'foo', 'ok' => true ],
+				[ 'item' => 'foo', 'label' => 'Foo', 'ok' => false ],
+			],
+		];
 
-			[ // #3: edit limit applies
-				[ // limits:
-					'edit' => [
-						'user' => [ 1, 60 ], // one edit per minute
-					],
+		yield 'edit limit also applies to creations' => [
+			'limits' => [
+				'edit' => [
+					'user' => [ 1, 60 ], // one edit per minute
 				],
-				[], // groups: none
-				[ // edits:
-					[ 'item' => 'foo', 'label' => 'foo', 'ok' => true ],
-					[ 'item' => 'foo', 'label' => 'Foo', 'ok' => false ],
+				'create' => [
+					'user' => [ 10, 60 ], // ten creations per minute
 				],
 			],
+			'groups' => [],
+			'edits' => [
+				[ 'item' => 'foo', 'label' => 'foo', 'ok' => true ],
+				[ 'item' => 'bar', 'label' => 'bar', 'ok' => false ],
+				[ 'item' => 'foo', 'label' => 'Foo', 'ok' => false ],
+			],
+		];
 
-			[ // #4: edit limit also applies to creations
-				[ // limits:
-					'edit' => [
-						'user' => [ 1, 60 ], // one edit per minute
-					],
-					'create' => [
-						'user' => [ 10, 60 ], // ten creations per minute
-					],
+		yield 'creation limit applies in addition to edit limit' => [
+			'limits' => [
+				'edit' => [
+					'user' => [ 10, 60 ], // ten edits per minute
 				],
-				[], // groups: none
-				[ // edits:
-					[ 'item' => 'foo', 'label' => 'foo', 'ok' => true ],
-					[ 'item' => 'bar', 'label' => 'bar', 'ok' => false ],
-					[ 'item' => 'foo', 'label' => 'Foo', 'ok' => false ],
+				'create' => [
+					'user' => [ 1, 60 ], // ...but only one creation
 				],
 			],
-
-			[ // #5: creation limit applies in addition to edit limit
-				[ // limits:
-					'edit' => [
-						'user' => [ 10, 60 ], // ten edits per minute
-					],
-					'create' => [
-						'user' => [ 1, 60 ], // ...but only one creation
-					],
-				],
-				[], // groups: none
-				[ // edits:
-					[ 'item' => 'foo', 'label' => 'foo', 'ok' => true ],
-					[ 'item' => 'foo', 'label' => 'Foo', 'ok' => true ],
-					[ 'item' => 'bar', 'label' => 'bar', 'ok' => false ],
-				],
+			'groups' => [],
+			'edits' => [
+				[ 'item' => 'foo', 'label' => 'foo', 'ok' => true ],
+				[ 'item' => 'foo', 'label' => 'Foo', 'ok' => true ],
+				[ 'item' => 'bar', 'label' => 'bar', 'ok' => false ],
 			],
-
 		];
 	}
 
 	/**
-	 * @dataProvider dataAttemptSaveRateLimit
+	 * @dataProvider provideAttemptSaveRateLimit
 	 */
 	public function testAttemptSaveRateLimit( array $limits, array $groups, array $edits ) {
 		$repo = $this->getMockRepository();
@@ -681,24 +673,22 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 		ObjectCache::clear();
 	}
 
-	public static function provideIsTokenOk() {
-		return [
-			[ // 0
-				true, // use a newly generated valid token
-				true, // should work
-			],
-			[ // 1
-				"xyz", // use an invalid token
-				false, // should fail
-			],
-			[ // 2
-				"", // use an empty token
-				false, // should fail
-			],
-			[ // 3
-				null, // use no token
-				false, // should fail
-			],
+	public static function provideIsTokenOk(): iterable {
+		yield 'newly generated valid token' => [
+			'token' => true, // replaced with actually valid token in test
+			'shouldWork' => true,
+		];
+		yield 'invalid token' => [
+			'token' => 'xyz',
+			'shouldWork' => false,
+		];
+		yield 'empty token' => [
+			'token' => '',
+			'shouldWork' => false,
+		];
+		yield 'no token' => [
+			'token' => null,
+			'shouldWork' => false,
 		];
 	}
 
@@ -724,21 +714,73 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 		$this->assertNotEquals( $shouldWork, $edit->hasError( EditEntity::TOKEN_ERROR ) );
 	}
 
-	public static function provideAttemptSaveWatch() {
-		// $watchdefault, $watchcreations, $new, $watched, $watch, $expected
+	public static function provideAttemptSaveWatch(): iterable {
+		yield 'watch new' => [
+			'watchdefault' => true,
+			'watchcreations' => true,
+			'new' => true,
+			'watched' => false,
+			'watch' => null,
+			'expected' => true,
+		];
+		yield 'override watch new' => [
+			'watchdefault' => true,
+			'watchcreations' => true,
+			'new' => true,
+			'watched' => false,
+			'watch' => false,
+			'expected' => false,
+		];
 
-		return [
-			[ true, true, true, false, null, true ], // watch new
-			[ true, true, true, false, false, false ], // override watch new
+		yield 'watch edit' => [
+			'watchdefault' => true,
+			'watchcreations' => true,
+			'new' => false,
+			'watched' => false,
+			'watch' => null,
+			'expected' => true,
+		];
+		yield 'override watch edit' => [
+			'watchdefault' => true,
+			'watchcreations' => true,
+			'new' => false,
+			'watched' => false,
+			'watch' => false,
+			'expected' => false,
+		];
 
-			[ true, true, false, false, null, true ], // watch edit
-			[ true, true, false, false, false, false ], // override watch edit
+		yield 'don’t watch edit' => [
+			'watchdefault' => false,
+			'watchcreations' => false,
+			'new' => false,
+			'watched' => false,
+			'watch' => null,
+			'expected' => false,
+		];
+		yield 'override don’t watch edit' => [
+			'watchdefault' => false,
+			'watchcreations' => false,
+			'new' => false,
+			'watched' => false,
+			'watch' => true,
+			'expected' => true,
+		];
 
-			[ false, false, false, false, null, false ], // don't watch edit
-			[ false, false, false, false, true, true ], // override don't watch edit
-
-			[ false, false, false, true, null, true ], // watch watched
-			[ false, false, false, true, false, false ], // override don't watch edit
+		yield 'watch watched' => [
+			'watchdefault' => false,
+			'watchcreations' => false,
+			'new' => false,
+			'watched' => true,
+			'watch' => null,
+			'expected' => true,
+		];
+		yield 'override watch watched' => [
+			'watchdefault' => false,
+			'watchcreations' => false,
+			'new' => false,
+			'watched' => true,
+			'watch' => false,
+			'expected' => false,
 		];
 	}
 
@@ -818,11 +860,9 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 		$this->assertFalse( $isNew->invoke( $edit ), "Entity exists" );
 	}
 
-	public static function provideHookRunnerReturnStatus() {
-		return [
-			[ Status::newGood() ],
-			[ Status::newFatal( 'OMG' ) ],
-		];
+	public static function provideHookRunnerReturnStatus(): iterable {
+		yield 'good' => [ Status::newGood() ];
+		yield 'fatal' => [ Status::newFatal( 'OMG' ) ];
 	}
 
 	/**
