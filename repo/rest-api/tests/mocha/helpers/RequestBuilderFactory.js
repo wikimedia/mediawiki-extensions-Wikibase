@@ -9,6 +9,12 @@ module.exports = {
 			.withPathParam( 'item_id', itemId );
 	},
 
+	newGetPropertyRequestBuilder( propertyId ) {
+		return new RequestBuilder()
+			.withRoute( 'GET', '/entities/properties/{property_id}' )
+			.withPathParam( 'property_id', propertyId );
+	},
+
 	newGetItemAliasesRequestBuilder( itemId ) {
 		return new RequestBuilder()
 			.withRoute( 'GET', '/entities/items/{item_id}/aliases' )
