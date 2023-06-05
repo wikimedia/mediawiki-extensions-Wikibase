@@ -372,12 +372,11 @@ class DatabaseTermInLangIdsAcquirer implements TermInLangIdsAcquirer {
 		$uniqueTermIds = array_values( array_unique( $termInLangIds ) );
 
 		$dbMaster = $this->repoDb->connections()->getWriteConnection();
-		$persistedTermIds = $dbMaster->selectFieldValues(
-			'wbt_term_in_lang',
-			'wbtl_id',
-			[ 'wbtl_id' => $termInLangIds ],
-			__METHOD__
-		);
+		$persistedTermIds = $dbMaster->newSelectQueryBuilder()
+			->select( 'wbtl_id' )
+			->from( 'wbt_term_in_lang' )
+			->where( [ 'wbtl_id' => $termInLangIds ] )
+			->caller( __METHOD__ )->fetchFieldValues();
 
 		sort( $uniqueTermIds );
 		sort( $persistedTermIds );
