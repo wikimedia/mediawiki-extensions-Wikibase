@@ -97,22 +97,18 @@ abstract class DatabaseTermStoreWriterBase {
 		$entityNumericId = $entityId->getNumericId();
 
 		$dbw = $this->getDbw();
-		$selectArgs = [
-			$this->getMapping()->getTableName(),
-			$this->getMapping()->getTermInLangIdColumn(), // select term_in_lang_id
-			[ $this->getMapping()->getEntityIdColumn() => $entityNumericId ], // of this entity
-			__METHOD__,
-		];
+		$queryBuilder = $dbw->newSelectQueryBuilder()
+			->select( $this->getMapping()->getTermInLangIdColumn() ) // select term_in_lang_id
+			->from( $this->getMapping()->getTableName() )
+			->where( [ $this->getMapping()->getEntityIdColumn() => $entityNumericId ] ) // of this entity
+			->caller( __METHOD__ );
 
 		// Find term entries that already exist for the entity
-		$oldTermInLangIds = $dbw->selectFieldValues( ...$selectArgs );
+		$oldTermInLangIds = ( clone $queryBuilder )->fetchFieldValues();
 
 		// lock them with FOR UPDATE
 		if ( $oldTermInLangIds !== [] ) {
-			$selectArgs[] = [ 'FOR UPDATE' ];
-			$oldTermInLangIds = $dbw->selectFieldValues( // @phan-suppress-current-line PhanParamTooFewUnpack
-				...$selectArgs
-			);
+			$oldTermInLangIds = ( clone $queryBuilder )->forUpdate()->fetchFieldValues();
 		}
 
 		$termsArray = $this->termsArrayFromFingerprint( $fingerprint, $this->stringNormalizer );
@@ -158,14 +154,13 @@ abstract class DatabaseTermStoreWriterBase {
 		if ( $termInLangIdsToClean !== [] ) {
 			// Delete entries in the table that are no longer needed
 			// Further cleanup should then done by the caller of this method
-			$dbw->delete(
-				$this->getMapping()->getTableName(),
-				[
+			$dbw->newDeleteQueryBuilder()
+				->delete( $this->getMapping()->getTableName() )
+				->where( [
 					$this->getMapping()->getEntityIdColumn() => $entityNumericId,
 					$this->getMapping()->getTermInLangIdColumn() => $termInLangIdsToClean,
-				],
-				__METHOD__
-			);
+				] )
+				->caller( __METHOD__ )->execute();
 		}
 
 		return $termInLangIdsToClean;
@@ -185,16 +180,15 @@ abstract class DatabaseTermStoreWriterBase {
 	 */
 	private function deleteTermsWithoutClean( Int32EntityId $entityId ): array {
 		$dbw = $this->getDbw();
-		$res = $dbw->select(
-			$this->getMapping()->getTableName(),
-			[
+		$res = $dbw->newSelectQueryBuilder()
+			->select( [
 				'id' => $this->getMapping()->getRowIdColumn(),
 				'term_in_lang_id' => $this->getMapping()->getTermInLangIdColumn(),
-			],
-			[ $this->getMapping()->getEntityIdColumn() => $entityId->getNumericId() ],
-			__METHOD__,
-			[ 'FOR UPDATE' ]
-		);
+			] )
+			->forUpdate()
+			->from( $this->getMapping()->getTableName() )
+			->where( [ $this->getMapping()->getEntityIdColumn() => $entityId->getNumericId() ] )
+			->caller( __METHOD__ )->fetchResultSet();
 
 		$rowIdsToDelete = [];
 		$termInLangIdsToCleanUp = [];
@@ -204,11 +198,10 @@ abstract class DatabaseTermStoreWriterBase {
 		}
 
 		if ( $rowIdsToDelete !== [] ) {
-			$dbw->delete(
-				$this->getMapping()->getTableName(),
-				[ $this->getMapping()->getRowIdColumn() => $rowIdsToDelete ],
-				__METHOD__
-			);
+			$dbw->newDeleteQueryBuilder()
+				->delete( $this->getMapping()->getTableName() )
+				->where( [ $this->getMapping()->getRowIdColumn() => $rowIdsToDelete ] )
+				->caller( __METHOD__ )->execute();
 		}
 
 		return array_values( array_unique( $termInLangIdsToCleanUp ) );

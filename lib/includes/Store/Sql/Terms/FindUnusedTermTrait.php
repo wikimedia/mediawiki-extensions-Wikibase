@@ -36,18 +36,16 @@ trait FindUnusedTermTrait {
 		$unusedTermInLangIds = [];
 		foreach ( $termInLangIds as $termInLangId ) {
 			// Note: Not batching here is intentional to avoid deadlocks (see method comment)
-			$usedInProperties = $dbw->selectField(
-				'wbt_property_terms',
-				'wbpt_term_in_lang_id',
-				[ 'wbpt_term_in_lang_id' => $termInLangId ],
-				__METHOD__
-			);
-			$usedInItems = $dbw->selectField(
-				'wbt_item_terms',
-				'wbit_term_in_lang_id',
-				[ 'wbit_term_in_lang_id' => $termInLangId ],
-				__METHOD__
-			);
+			$usedInProperties = $dbw->newSelectQueryBuilder()
+				->select( 'wbpt_term_in_lang_id' )
+				->from( 'wbt_property_terms' )
+				->where( [ 'wbpt_term_in_lang_id' => $termInLangId ] )
+				->caller( __METHOD__ )->fetchField();
+			$usedInItems = $dbw->newSelectQueryBuilder()
+				->select( 'wbit_term_in_lang_id' )
+				->from( 'wbt_item_terms' )
+				->where( [ 'wbit_term_in_lang_id' => $termInLangId ] )
+				->caller( __METHOD__ )->fetchField();
 
 			if ( $usedInProperties === false && $usedInItems === false ) {
 				$unusedTermInLangIds[] = $termInLangId;
@@ -57,24 +55,18 @@ trait FindUnusedTermTrait {
 			return [];
 		}
 
-		$termInLangIdsUsedInPropertiesSinceLastLoopRan = $dbw->selectFieldValues(
-			'wbt_property_terms',
-			'wbpt_term_in_lang_id',
-			[ 'wbpt_term_in_lang_id' => $unusedTermInLangIds ],
-			__METHOD__,
-			[
-				'FOR UPDATE',
-			]
-		);
-		$termInLangIdsUsedInItemsSinceLastLoopRan = $dbw->selectFieldValues(
-			'wbt_item_terms',
-			'wbit_term_in_lang_id',
-			[ 'wbit_term_in_lang_id' => $unusedTermInLangIds ],
-			__METHOD__,
-			[
-				'FOR UPDATE',
-			]
-		);
+		$termInLangIdsUsedInPropertiesSinceLastLoopRan = $dbw->newSelectQueryBuilder()
+			->select( 'wbpt_term_in_lang_id' )
+			->forUpdate()
+			->from( 'wbt_property_terms' )
+			->where( [ 'wbpt_term_in_lang_id' => $unusedTermInLangIds ] )
+			->caller( __METHOD__ )->fetchFieldValues();
+		$termInLangIdsUsedInItemsSinceLastLoopRan = $dbw->newSelectQueryBuilder()
+			->select( 'wbit_term_in_lang_id' )
+			->forUpdate()
+			->from( 'wbt_item_terms' )
+			->where( [ 'wbit_term_in_lang_id' => $unusedTermInLangIds ] )
+			->caller( __METHOD__ )->fetchFieldValues();
 
 		$finalUnusedTermInLangIds = array_diff(
 			$unusedTermInLangIds,

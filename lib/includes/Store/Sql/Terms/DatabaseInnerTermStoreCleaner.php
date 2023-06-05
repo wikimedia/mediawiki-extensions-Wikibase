@@ -90,11 +90,10 @@ class DatabaseInnerTermStoreCleaner {
 		);
 
 		$this->incrementForQuery( 'DatabaseTermIdsCleaner_cleanTermInLangIds' );
-		$this->dbw->delete(
-			'wbt_term_in_lang',
-			[ 'wbtl_id' => $termInLangIds ],
-			__METHOD__
-		);
+		$this->dbw->newDeleteQueryBuilder()
+			->delete( 'wbt_term_in_lang' )
+			->where( [ 'wbtl_id' => $termInLangIds ] )
+			->caller( __METHOD__ )->execute();
 
 		if ( $potentiallyUnusedTextInLangIds === [] ) {
 			return;
@@ -113,12 +112,11 @@ class DatabaseInnerTermStoreCleaner {
 		$unusedTextInLangIds = [];
 		foreach ( $potentiallyUnusedTextInLangIds as  $textInLangId ) {
 			// Note: Not batching here is intentional, see T234948
-			$stillUsed = $this->dbw->selectField(
-				'wbt_term_in_lang',
-				'wbtl_text_in_lang_id',
-				[ 'wbtl_text_in_lang_id' => $textInLangId ],
-				__METHOD__
-			);
+			$stillUsed = $this->dbw->newSelectQueryBuilder()
+				->select( 'wbtl_text_in_lang_id' )
+				->from( 'wbt_term_in_lang' )
+				->where( [ 'wbtl_text_in_lang_id' => $textInLangId ] )
+				->caller( __METHOD__ )->fetchField();
 
 			if ( $stillUsed === false ) {
 				$unusedTextInLangIds[] = $textInLangId;
@@ -129,33 +127,30 @@ class DatabaseInnerTermStoreCleaner {
 			return;
 		}
 
-		$textInLangIdsUsedSinceLastLoopRan = $this->dbw->selectFieldValues(
-			'wbt_term_in_lang',
-			'wbtl_text_in_lang_id',
-			[ 'wbtl_text_in_lang_id' => $unusedTextInLangIds ],
-			__METHOD__,
-			[
-				/**
-				 * If we try to clean up a text_in_lang whose last use in a term_in_lang we just
-				 * removed, and simultaneously another request adds a new term_in_lang using that
-				 * text_in_lang, we want one of the following to happen:
-				 *
-				 * 1. Our transaction completes first and removes the text_in_lang. The concurrent
-				 *    request blocks until we’re done, then sees that the text_in_lang is gone and
-				 *    creates it (again) as part of inserting the term_in_lang.
-				 * 2. The other transaction completes first and registers another term_in_lang using
-				 *    that text_in_lang. We block until that’s done and then notice the text_in_lang
-				 *    is still used and don’t clean it up.
-				 *
-				 * For this to work, we need to use 'FOR UPDATE' when checking whether a
-				 * text_in_lang is still used in a term_in_lang, and the other request needs to
-				 * ensure during or after insert of the new term_in_lang that the text_in_lang still
-				 * exists, or create it otherwise. This way, either our check here or the other
-				 * request’s insert will block and wait for the other to complete.
-				 */
-				'FOR UPDATE',
-			]
-		);
+		$textInLangIdsUsedSinceLastLoopRan = $this->dbw->newSelectQueryBuilder()
+			->select( 'wbtl_text_in_lang_id' )
+			/**
+			 * If we try to clean up a text_in_lang whose last use in a term_in_lang we just
+			 * removed, and simultaneously another request adds a new term_in_lang using that
+			 * text_in_lang, we want one of the following to happen:
+			 *
+			 * 1. Our transaction completes first and removes the text_in_lang. The concurrent
+			 *    request blocks until we’re done, then sees that the text_in_lang is gone and
+			 *    creates it (again) as part of inserting the term_in_lang.
+			 * 2. The other transaction completes first and registers another term_in_lang using
+			 *    that text_in_lang. We block until that’s done and then notice the text_in_lang
+			 *    is still used and don’t clean it up.
+			 *
+			 * For this to work, we need to use FOR UPDATE when checking whether a
+			 * text_in_lang is still used in a term_in_lang, and the other request needs to
+			 * ensure during or after insert of the new term_in_lang that the text_in_lang still
+			 * exists, or create it otherwise. This way, either our check here or the other
+			 * request’s insert will block and wait for the other to complete.
+			 */
+			->forUpdate()
+			->from( 'wbt_term_in_lang' )
+			->where( [ 'wbtl_text_in_lang_id' => $unusedTextInLangIds ] )
+			->caller( __METHOD__ )->fetchFieldValues();
 
 		/**
 		 * If this condition hits, then our extra checks actually stopped the "bad" race condition
@@ -204,11 +199,10 @@ class DatabaseInnerTermStoreCleaner {
 		);
 
 		$this->incrementForQuery( 'DatabaseTermIdsCleaner_cleanTextInLangIds' );
-		$this->dbw->delete(
-			'wbt_text_in_lang',
-			[ 'wbxl_id' => $textInLangIds ],
-			__METHOD__
-		);
+		$this->dbw->newDeleteQueryBuilder()
+			->delete( 'wbt_text_in_lang' )
+			->where( [ 'wbxl_id' => $textInLangIds ] )
+			->caller( __METHOD__ )->execute();
 
 		if ( $potentiallyUnusedTextIds === [] ) {
 			return;
@@ -227,12 +221,11 @@ class DatabaseInnerTermStoreCleaner {
 		$unusedTextIds = [];
 		foreach ( $potentiallyUnusedTextIds as  $textId ) {
 			// Note: Not batching here is intentional, see T234948
-			$stillUsed = $this->dbw->selectField(
-				'wbt_text_in_lang',
-				'wbxl_text_id',
-				[ 'wbxl_text_id' => $textId ],
-				__METHOD__
-			);
+			$stillUsed = $this->dbw->newSelectQueryBuilder()
+				->select( 'wbxl_text_id' )
+				->from( 'wbt_text_in_lang' )
+				->where( [ 'wbxl_text_id' => $textId ] )
+				->caller( __METHOD__ )->fetchField();
 
 			if ( $stillUsed === false ) {
 				$unusedTextIds[] = $textId;
@@ -243,13 +236,12 @@ class DatabaseInnerTermStoreCleaner {
 			return;
 		}
 
-		$textIdsUsedSinceLastLoopRan = $this->dbw->selectFieldValues(
-			'wbt_text_in_lang',
-			'wbxl_text_id',
-			[ 'wbxl_text_id' => $unusedTextIds ],
-			__METHOD__,
-			[ 'FOR UPDATE' ]
-		);
+		$textIdsUsedSinceLastLoopRan = $this->dbw->newSelectQueryBuilder()
+			->select( 'wbxl_text_id' )
+			->forUpdate()
+			->from( 'wbt_text_in_lang' )
+			->where( [ 'wbxl_text_id' => $unusedTextIds ] )
+			->caller( __METHOD__ )->fetchFieldValues();
 
 		if ( count( $textIdsUsedSinceLastLoopRan ) ) {
 			$this->logger->info(
@@ -284,11 +276,10 @@ class DatabaseInnerTermStoreCleaner {
 		);
 
 		$this->incrementForQuery( 'DatabaseTermIdsCleaner_cleanTextIds' );
-		$this->dbw->delete(
-			'wbt_text',
-			[ 'wbx_id' => $textIds ],
-			__METHOD__
-		);
+		$this->dbw->newDeleteQueryBuilder()
+			->delete( 'wbt_text' )
+			->where( [ 'wbx_id' => $textIds ] )
+			->caller( __METHOD__ )->execute();
 	}
 
 	/**
@@ -314,12 +305,11 @@ class DatabaseInnerTermStoreCleaner {
 		array $primaryKeyValues,
 		string $fname = __METHOD__
 	): array {
-		$values = $this->dbr->selectFieldValues(
-			$table,
-			$selectedVar,
-			[ $primaryKeyVar => $primaryKeyValues ],
-			$fname
-		);
+		$values = $this->dbr->newSelectQueryBuilder()
+			->select( $selectedVar )
+			->from( $table )
+			->where( [ $primaryKeyVar => $primaryKeyValues ] )
+			->caller( $fname )->fetchFieldValues();
 
 		if ( count( $values ) < count( $primaryKeyValues ) ) {
 			$this->logger->debug(
@@ -335,12 +325,11 @@ class DatabaseInnerTermStoreCleaner {
 					'primaryKeyVar' => $primaryKeyVar,
 				]
 			);
-			$values = $this->dbw->selectFieldValues(
-				$table,
-				$selectedVar,
-				[ $primaryKeyVar => $primaryKeyValues ],
-				$fname
-			);
+			$values = $this->dbw->newSelectQueryBuilder()
+				->select( $selectedVar )
+				->from( $table )
+				->where( [ $primaryKeyVar => $primaryKeyValues ] )
+				->caller( $fname )->fetchFieldValues();
 		}
 
 		return $values;
