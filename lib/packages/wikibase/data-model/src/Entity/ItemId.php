@@ -128,6 +128,9 @@ class ItemId extends SerializableEntityId implements Int32EntityId {
 		if ( !is_numeric( $numericId ) ) {
 			throw new InvalidArgumentException( '$numericId must be numeric' );
 		}
+		if ( $repositoryName !== '' ) {
+			throw new InvalidArgumentException( 'repo name no longer supported (T291823)' );
+		}
 
 		return new self( self::joinSerialization( [ $repositoryName, '', 'Q' . $numericId ] ) );
 	}

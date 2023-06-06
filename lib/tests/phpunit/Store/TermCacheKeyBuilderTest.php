@@ -31,7 +31,6 @@ class TermCacheKeyBuilderTest extends TestCase {
 	public static function cacheKeyParamsProvider() {
 		yield [ new ItemId( 'Q123' ), 777, 'en', 'label', 'Q123_777_en_label' ];
 		yield [ new NumericPropertyId( 'P666' ), 789, 'de', 'alias', 'P666_789_de_alias' ];
-		yield [ new NumericPropertyId( 'reponame:P666' ), 789, 'de', 'alias', 'reponame_P666_789_de_alias' ];
 		yield [ new NumericPropertyId( 'P666' ), 789, 'de()', 'alias', 'P666_789_de___alias' ];
 		yield [ new NumericPropertyId( 'P666' ), 789, 'de{}', 'alias', 'P666_789_de___alias' ];
 		yield [ new NumericPropertyId( 'P666' ), 789, 'de\/', 'alias', 'P666_789_de___alias' ];

@@ -111,16 +111,11 @@ class PropertySomeValueSnakTest extends \PHPUnit\Framework\TestCase {
 
 	public static function provideDataToSerialize() {
 		$p2 = new NumericPropertyId( 'P2' );
-		$p2foo = new NumericPropertyId( 'foo:P2' );
 
 		return [
 			'string' => [
 				'P2',
 				new PropertySomeValueSnak( $p2 ),
-			],
-			'foreign' => [
-				'foo:P2',
-				new PropertySomeValueSnak( $p2foo ),
 			],
 		];
 	}
@@ -139,12 +134,10 @@ class PropertySomeValueSnakTest extends \PHPUnit\Framework\TestCase {
 
 	public static function provideDataToUnserialize() {
 		$p2 = new NumericPropertyId( 'P2' );
-		$p2foo = new NumericPropertyId( 'foo:P2' );
 
 		return [
 			'legacy' => [ new PropertySomeValueSnak( $p2 ), 'i:2;' ],
 			'current' => [ new PropertySomeValueSnak( $p2 ), 'P2' ],
-			'foreign' => [ new PropertySomeValueSnak( $p2foo ), 'foo:P2' ],
 		];
 	}
 

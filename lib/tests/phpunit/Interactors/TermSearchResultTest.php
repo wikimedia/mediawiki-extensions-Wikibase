@@ -35,14 +35,6 @@ class TermSearchResultTest extends \PHPUnit\Framework\TestCase {
 				null,
 				[ 'datatype' => 'some datatype' ],
 			],
-			[
-				new Term( 'en-gb', 'FooText' ),
-				'description',
-				new NumericPropertyId( 'foo:P777' ),
-				null,
-				null,
-				[ 'datatype' => 'some datatype' ],
-			],
 		];
 	}
 

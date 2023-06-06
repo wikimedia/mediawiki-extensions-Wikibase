@@ -98,6 +98,10 @@ abstract class SerializableEntityId implements EntityId {
 		$repoName = array_shift( $parts );
 		$prefixRemainder = implode( ':', $parts );
 
+		if ( $repoName !== null ) {
+			throw new InvalidArgumentException( 'repo name no longer supported (T291823)' );
+		}
+
 		return [
 			is_string( $repoName ) ? $repoName : '',
 			$prefixRemainder,

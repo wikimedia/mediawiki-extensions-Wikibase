@@ -122,17 +122,12 @@ class PropertyValueSnakTest extends \PHPUnit\Framework\TestCase {
 
 	public static function provideDataToSerialize() {
 		$p2 = new NumericPropertyId( 'P2' );
-		$p2foo = new NumericPropertyId( 'foo:P2' );
 		$value = new StringValue( 'b' );
 
 		return [
 			'string' => [
 				'a:2:{i:0;s:2:"P2";i:1;O:22:"DataValues\StringValue":1:{i:0;s:1:"b";}}',
 				new PropertyValueSnak( $p2, $value ),
-			],
-			'foreign' => [
-				'a:2:{i:0;s:6:"foo:P2";i:1;O:22:"DataValues\StringValue":1:{i:0;s:1:"b";}}',
-				new PropertyValueSnak( $p2foo, $value ),
 			],
 		];
 	}
@@ -151,7 +146,6 @@ class PropertyValueSnakTest extends \PHPUnit\Framework\TestCase {
 
 	public static function provideDataToUnserialize() {
 		$p2 = new NumericPropertyId( 'P2' );
-		$p2foo = new NumericPropertyId( 'foo:P2' );
 		$value = new StringValue( 'b' );
 
 		return [
@@ -159,21 +153,13 @@ class PropertyValueSnakTest extends \PHPUnit\Framework\TestCase {
 				new PropertyValueSnak( $p2, $value ),
 				'a:2:{i:0;i:2;i:1;C:22:"DataValues\StringValue":1:{b}}',
 			],
-			'legacy (PHP < 7.4 serialization, local property ID)' => [
+			'legacy (PHP < 7.4 serialization)' => [
 				new PropertyValueSnak( $p2, $value ),
 				'a:2:{i:0;s:2:"P2";i:1;C:22:"DataValues\StringValue":1:{b}}',
 			],
-			'legacy (PHP < 7.4 serialization, foreign property ID)' => [
-				new PropertyValueSnak( $p2foo, $value ),
-				'a:2:{i:0;s:6:"foo:P2";i:1;C:22:"DataValues\StringValue":1:{b}}',
-			],
-			'local property ID' => [
+			'PHP >= 7.4 serialization' => [
 				new PropertyValueSnak( $p2, $value ),
 				'a:2:{i:0;s:2:"P2";i:1;O:22:"DataValues\StringValue":1:{i:0;s:1:"b";}}',
-			],
-			'foreign property ID' => [
-				new PropertyValueSnak( $p2foo, $value ),
-				'a:2:{i:0;s:6:"foo:P2";i:1;O:22:"DataValues\StringValue":1:{i:0;s:1:"b";}}',
 			],
 		];
 	}
