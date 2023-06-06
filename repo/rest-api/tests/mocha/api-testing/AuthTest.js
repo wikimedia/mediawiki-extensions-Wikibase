@@ -38,7 +38,8 @@ describe( 'Auth', () => {
 
 	[
 		...getRequests,
-		...editRequests
+		...editRequests,
+		( { stringPropertyId } ) => rbf.newGetPropertyRequestBuilder( stringPropertyId )
 	].forEach( ( newRequestBuilder ) => {
 		describe( `Authentication - ${newRequestBuilder( requestInputs ).getRouteDescription()}`, () => {
 
