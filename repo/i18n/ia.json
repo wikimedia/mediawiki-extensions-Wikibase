@@ -258,6 +258,7 @@
 	"wikibase-setlabeldescriptionaliases-label-label": "Etiquetta:",
 	"wikibase-setlabeldescriptionaliases-description-label": "Description:",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "Aliases:",
+	"wikibase-setlabeldescriptionaliases-description-not-supported": "Le descriptiones non es supportate pro iste lingua.",
 	"wikibase-setlabeldescriptionaliases-submit": "Definir etiquetta, description e aliases",
 	"wikibase-setlabeldescriptionaliases-continue": "Continuar",
 	"special-setsitelink": "Fixar ligamine de sito del elemento",
