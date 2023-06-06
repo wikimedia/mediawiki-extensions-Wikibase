@@ -71,7 +71,7 @@ class DatabaseTermsCollisionDetector implements TermsCollisionDetector {
 
 		$entityId = $this->findEntityIdsWithTermInLang( $lang, $label, $labelTypeId, true )[0] ?? null;
 
-		return $entityId !== null ? $this->makeEntityId( $entityId ) : null;
+		return $this->makeEntityId( $entityId );
 	}
 
 	/**
@@ -103,7 +103,7 @@ class DatabaseTermsCollisionDetector implements TermsCollisionDetector {
 			$entityIdsWithLabel
 		)[0] ?? null;
 
-		return $entityId !== null ? $this->makeEntityId( $entityId ) : null;
+		return $this->makeEntityId( $entityId );
 	}
 
 	public function detectLabelsCollision( TermList $termList ): array {
