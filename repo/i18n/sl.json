@@ -32,7 +32,7 @@
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "V več jezikih",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Nastavi",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Ob nalaganju strani prikaži oznake, alternativna imena in opise v vseh mojih jezikih",
-	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Z uporabo skladnje [[mw:Special:MyLanguage/Extension:Babel|razširitve Babel]] lahko na uporabniški strani nastavite osebne jezike poleg jezika uporabniškega vmesnika.",
+	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Z uporabo skladnje [[mw:Special:MyLanguage/Extension:Babel|razširitve Babel]] lahko na uporabniški strani poleg jezika uporabniškega vmesnika nastavite osebne jezike.",
 	"wikibase-entitytermsforlanguagelistview-aliases": "Druga imena",
 	"wikibase-entitytermsforlanguagelistview-description": "Opis",
 	"wikibase-entitytermsforlanguagelistview-label": "Oznaka",
