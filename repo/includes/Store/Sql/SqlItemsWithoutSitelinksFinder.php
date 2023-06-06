@@ -7,6 +7,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Store\ItemsWithoutSitelinksFinder;
+use Wikimedia\Rdbms\SelectQueryBuilder;
 
 /**
  * Service for getting Items without sitelinks.
@@ -44,28 +45,20 @@ class SqlItemsWithoutSitelinksFinder implements ItemsWithoutSitelinksFinder {
 	public function getItemsWithoutSitelinks( $limit = 50, $offset = 0 ) {
 		$dbr = $this->db->connections()->getReadConnection();
 
-		$itemIdSerializations = $dbr->selectFieldValues(
-			[ 'page', 'page_props' ],
-			'page_title',
-			[
+		$itemIdSerializations = $dbr->newSelectQueryBuilder()
+			->select( 'page_title' )
+			->from( 'page' )
+			->join( 'page_props', null, 'pp_page = page_id' )
+			->where( [
 				'page_namespace' => $this->entityNamespaceLookup->getEntityNamespace( Item::ENTITY_TYPE ),
 				'page_is_redirect' => 0,
 				'pp_propname' => 'wb-sitelinks',
 				$dbr->buildStringCast( 'pp_value' ) => '0',
-			],
-			__METHOD__,
-			[
-				'OFFSET' => $offset,
-				'LIMIT' => $limit,
-				'ORDER BY' => 'page_id DESC',
-			],
-			[
-				'page_props' => [
-					'INNER JOIN',
-					'pp_page = page_id',
-				],
-			]
-		);
+			] )
+			->orderBy( 'page_id', SelectQueryBuilder::SORT_DESC )
+			->limit( $limit )
+			->offset( $offset )
+			->caller( __METHOD__ )->fetchFieldValues();
 
 		return $this->getItemIdsFromSerializations( $itemIdSerializations );
 	}
