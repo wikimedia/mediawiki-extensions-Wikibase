@@ -68,6 +68,16 @@ describe( newGetPropertyRequestBuilder().getRouteDescription(), () => {
 		assert.equal( response.header.etag, makeEtag( testRevisionId ) );
 	} );
 
+	it( '400 error - invalid property id', async () => {
+		const propertyId = 'X123';
+		const response = await newGetPropertyRequestBuilder( propertyId ).makeRequest();
+
+		expect( response ).to.have.status( 400 );
+		assert.header( response, 'Content-Language', 'en' );
+		assert.equal( response.body.code, 'invalid-property-id' );
+		assert.include( response.body.message, propertyId );
+	} );
+
 	it( '404 error - property not found', async () => {
 		const propertyId = 'P999999';
 		const response = await newGetPropertyRequestBuilder( propertyId ).makeRequest();

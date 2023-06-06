@@ -13,20 +13,24 @@ use Wikibase\Repo\RestApi\Domain\Services\PropertyDataRetriever;
 class GetProperty {
 	private GetLatestPropertyRevisionMetadata $getLatestPropertyRevisionMetadata;
 	private PropertyDataRetriever $propertyDataRetriever;
+	private GetPropertyValidator $validator;
 
 	public function __construct(
 		GetLatestPropertyRevisionMetadata $getLatestPropertyRevisionMetadata,
-		PropertyDataRetriever $propertyDataRetriever
+		PropertyDataRetriever $propertyDataRetriever,
+		GetPropertyValidator $validator
 	) {
 		$this->getLatestPropertyRevisionMetadata = $getLatestPropertyRevisionMetadata;
 		$this->propertyDataRetriever = $propertyDataRetriever;
+		$this->validator = $validator;
 	}
 
 	/**
 	 * @throws UseCaseError
 	 */
-	public function execute( GetPropertyRequest $request ): GetPropertyResponse {
-		$propertyId = new NumericPropertyId( $request->getPropertyId() );
+	public function execute( GetPropertyRequest $propertyRequest ): GetPropertyResponse {
+		$this->validator->assertValidRequest( $propertyRequest );
+		$propertyId = new NumericPropertyId( $propertyRequest->getPropertyId() );
 		[ $revisionId, $lastModified ] = $this->getLatestPropertyRevisionMetadata->execute( $propertyId );
 
 		return new GetPropertyResponse(
