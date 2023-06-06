@@ -12,6 +12,8 @@ use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyDataSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetProperty;
 use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetPropertyRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetPropertyResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
@@ -27,15 +29,18 @@ class GetPropertyRouteHandler extends SimpleHandler {
 	private GetProperty $useCase;
 	private PropertyDataSerializer $propertyDataSerializer;
 	private MiddlewareHandler $middlewareHandler;
+	private ResponseFactory $responseFactory;
 
 	public function __construct(
 		GetProperty $useCase,
 		PropertyDataSerializer $propertyDataSerializer,
-		MiddlewareHandler $middlewareHandler
+		MiddlewareHandler $middlewareHandler,
+		ResponseFactory $responseFactory
 	) {
 		$this->useCase = $useCase;
 		$this->propertyDataSerializer = $propertyDataSerializer;
 		$this->middlewareHandler = $middlewareHandler;
+		$this->responseFactory = $responseFactory;
 	}
 
 	public static function factory(): Handler {
@@ -51,7 +56,8 @@ class GetPropertyRouteHandler extends SimpleHandler {
 				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
 				new UserAgentCheckMiddleware(),
 				new AuthenticationMiddleware(),
-			] )
+			] ),
+			new ResponseFactory()
 		);
 	}
 
@@ -63,15 +69,23 @@ class GetPropertyRouteHandler extends SimpleHandler {
 	}
 
 	public function runUseCase( string $propertyId ): Response {
-		$useCaseResponse = $this->useCase->execute( new GetPropertyRequest( $propertyId ) );
+		try {
+			return $this->newSuccessHttpResponse( $this->useCase->execute( new GetPropertyRequest( $propertyId ) ) );
+		} catch ( UseCaseError $e ) {
+			return $this->responseFactory->newErrorResponseFromException( $e );
+		}
+	}
 
+	private function newSuccessHttpResponse( GetPropertyResponse $useCaseResponse ): Response {
 		$httpResponse = $this->getResponseFactory()->create();
 		$httpResponse->setHeader( 'Content-Type', 'application/json' );
 		$httpResponse->setHeader( 'Last-Modified', wfTimestamp( TS_RFC2822, $useCaseResponse->getLastModified() ) );
 		$this->setEtagFromRevId( $httpResponse, $useCaseResponse->getRevisionId() );
-		$httpResponse->setBody( new StringStream(
-			json_encode( $this->propertyDataSerializer->serialize( $useCaseResponse->getPropertyData() ), JSON_UNESCAPED_SLASHES )
-		) );
+		$httpResponse->setBody(
+			new StringStream(
+				json_encode( $this->propertyDataSerializer->serialize( $useCaseResponse->getPropertyData() ), JSON_UNESCAPED_SLASHES )
+			)
+		);
 
 		return $httpResponse;
 	}

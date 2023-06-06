@@ -4,6 +4,7 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\GetProperty;
 
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestPropertyRevisionMetadata;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyDataRetriever;
 
 /**
@@ -21,6 +22,9 @@ class GetProperty {
 		$this->propertyDataRetriever = $propertyDataRetriever;
 	}
 
+	/**
+	 * @throws UseCaseError
+	 */
 	public function execute( GetPropertyRequest $request ): GetPropertyResponse {
 		$propertyId = new NumericPropertyId( $request->getPropertyId() );
 		[ $revisionId, $lastModified ] = $this->getLatestPropertyRevisionMetadata->execute( $propertyId );

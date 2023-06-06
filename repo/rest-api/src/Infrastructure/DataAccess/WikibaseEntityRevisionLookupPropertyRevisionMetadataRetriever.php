@@ -23,7 +23,8 @@ class WikibaseEntityRevisionLookupPropertyRevisionMetadataRetriever implements P
 			->onConcreteRevision( function( $id, $timestamp ) {
 				return LatestPropertyRevisionMetadataResult::concreteRevision( $id, $timestamp );
 			} )->onRedirect( function(): void {
-			} )->onNonexistentEntity( function (): void {
+			} )->onNonexistentEntity( function () {
+				return LatestPropertyRevisionMetadataResult::propertyNotFound();
 			} )->map();
 	}
 }

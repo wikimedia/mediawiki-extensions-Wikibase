@@ -20,6 +20,10 @@ final class LatestPropertyRevisionMetadataResult {
 		return $result;
 	}
 
+	public static function propertyNotFound(): self {
+		return new self();
+	}
+
 	/**
 	 * @throws RuntimeException if not a concrete revision result
 	 */
@@ -41,4 +45,9 @@ final class LatestPropertyRevisionMetadataResult {
 
 		return $this->revisionTimestamp;
 	}
+
+	public function propertyExists(): bool {
+		return isset( $this->revisionId );
+	}
+
 }

@@ -34,4 +34,18 @@ class WikibaseEntityRevisionLookupPropertyRevisionMetadataRetrieverTest extends 
 		$this->assertSame( $expectedRevisionTimestamp, $result->getRevisionTimestamp() );
 	}
 
+	public function testGivenPropertyDoesNotExist_getLatestRevisionMetadataReturnsPropertyNotFoundResult(): void {
+		$nonexistentProperty = new NumericPropertyId( 'P9999999' );
+		$entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );
+		$entityRevisionLookup->expects( $this->once() )
+			->method( 'getLatestRevisionId' )
+			->with( $nonexistentProperty )
+			->willReturn( LatestRevisionIdResult::nonexistentEntity() );
+
+		$metaDataRetriever = new WikibaseEntityRevisionLookupPropertyRevisionMetadataRetriever( $entityRevisionLookup );
+		$result = $metaDataRetriever->getLatestRevisionMetadata( $nonexistentProperty );
+
+		$this->assertFalse( $result->propertyExists() );
+	}
+
 }
