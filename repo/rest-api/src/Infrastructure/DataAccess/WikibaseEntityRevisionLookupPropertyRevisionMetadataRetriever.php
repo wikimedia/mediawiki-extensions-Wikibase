@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
 
+use LogicException;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\RestApi\Domain\ReadModel\LatestPropertyRevisionMetadataResult;
@@ -22,8 +23,12 @@ class WikibaseEntityRevisionLookupPropertyRevisionMetadataRetriever implements P
 		return $this->revisionLookup->getLatestRevisionId( $propertyId )
 			->onConcreteRevision( function( $id, $timestamp ) {
 				return LatestPropertyRevisionMetadataResult::concreteRevision( $id, $timestamp );
-			} )->onRedirect( function(): void {
-			} )->onNonexistentEntity( function () {
+			} )->onRedirect(
+				/** @return never */
+				function (): void {
+					throw new LogicException( 'Properties cannot be redirected' );
+				}
+			)->onNonexistentEntity( function () {
 				return LatestPropertyRevisionMetadataResult::propertyNotFound();
 			} )->map();
 	}
