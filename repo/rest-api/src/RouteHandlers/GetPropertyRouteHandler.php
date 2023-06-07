@@ -12,6 +12,9 @@ use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyDataSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetProperty;
 use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetPropertyRequest;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -23,13 +26,16 @@ class GetPropertyRouteHandler extends SimpleHandler {
 
 	private GetProperty $useCase;
 	private PropertyDataSerializer $propertyDataSerializer;
+	private MiddlewareHandler $middlewareHandler;
 
 	public function __construct(
 		GetProperty $useCase,
-		PropertyDataSerializer $propertyDataSerializer
+		PropertyDataSerializer $propertyDataSerializer,
+		MiddlewareHandler $middlewareHandler
 	) {
 		$this->useCase = $useCase;
 		$this->propertyDataSerializer = $propertyDataSerializer;
+		$this->middlewareHandler = $middlewareHandler;
 	}
 
 	public static function factory(): Handler {
@@ -40,11 +46,23 @@ class GetPropertyRouteHandler extends SimpleHandler {
 				new DescriptionsSerializer(),
 				new AliasesSerializer(),
 				WbRestApi::getSerializerFactory()->newStatementListSerializer()
-			)
+			),
+			new MiddlewareHandler( [
+				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
+				new UserAgentCheckMiddleware(),
+				new AuthenticationMiddleware(),
+			] )
 		);
 	}
 
-	public function run( string $propertyId ): Response {
+	/**
+	 * @param mixed ...$args
+	 */
+	public function run( ...$args ): Response {
+		return $this->middlewareHandler->run( $this, [ $this, 'runUseCase' ], $args );
+	}
+
+	public function runUseCase( string $propertyId ): Response {
 		$useCaseResponse = $this->useCase->execute( new GetPropertyRequest( $propertyId ) );
 
 		$httpResponse = $this->getResponseFactory()->create();
@@ -70,6 +88,10 @@ class GetPropertyRouteHandler extends SimpleHandler {
 				ParamValidator::PARAM_REQUIRED => true,
 			],
 		];
+	}
+
+	public function needsWriteAccess(): bool {
+		return false;
 	}
 
 }
