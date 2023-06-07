@@ -33,9 +33,7 @@ class PreconditionMiddlewareFactoryTest extends TestCase {
 		$middleware = ( new PreconditionMiddlewareFactory( $metadataRetriever, new ConditionalHeaderUtil() ) )
 			->newPreconditionMiddleware( fn () => $itemId->getSerialization() );
 
-		$middleware->run( $this->newRouteHandler(), function () {
-			return $this->createStub( Response::class );
-		} );
+		$middleware->run( $this->newRouteHandler(), fn() => $this->createStub( Response::class ) );
 	}
 
 	private function newRouteHandler(): Handler {

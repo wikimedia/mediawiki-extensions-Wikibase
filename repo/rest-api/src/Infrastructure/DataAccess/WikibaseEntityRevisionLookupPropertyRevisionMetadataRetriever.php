@@ -5,7 +5,7 @@ namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
 use LogicException;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Repo\RestApi\Domain\ReadModel\LatestPropertyRevisionMetadataResult;
+use Wikibase\Repo\RestApi\Domain\ReadModel\LatestPropertyRevisionMetadataResult as MetadataResult;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyRevisionMetadataRetriever;
 
 /**
@@ -19,17 +19,15 @@ class WikibaseEntityRevisionLookupPropertyRevisionMetadataRetriever implements P
 		$this->revisionLookup = $revisionLookup;
 	}
 
-	public function getLatestRevisionMetadata( NumericPropertyId $propertyId ): LatestPropertyRevisionMetadataResult {
+	public function getLatestRevisionMetadata( NumericPropertyId $propertyId ): MetadataResult {
 		return $this->revisionLookup->getLatestRevisionId( $propertyId )
-			->onConcreteRevision( function( $id, $timestamp ) {
-				return LatestPropertyRevisionMetadataResult::concreteRevision( $id, $timestamp );
-			} )->onRedirect(
+			->onConcreteRevision( fn( $id, $timestamp ) => MetadataResult::concreteRevision( $id, $timestamp ) )
+			->onRedirect(
 				/** @return never */
 				function (): void {
 					throw new LogicException( 'Properties cannot be redirected' );
 				}
-			)->onNonexistentEntity( function () {
-				return LatestPropertyRevisionMetadataResult::propertyNotFound();
-			} )->map();
+			)->onNonexistentEntity( fn() => MetadataResult::propertyNotFound() )
+			->map();
 	}
 }

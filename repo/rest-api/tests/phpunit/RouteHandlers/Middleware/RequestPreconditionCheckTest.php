@@ -34,9 +34,7 @@ class RequestPreconditionCheckTest extends TestCase {
 		$itemId = new ItemId( 'Q42' );
 		$preconditionCheck = new RequestPreconditionCheck(
 			$this->newMetadataRetrieverReturningResult( $itemId, $revisionMetadataResult ),
-			function () use ( $itemId ) {
-				return $itemId->getSerialization();
-			},
+			fn () => $itemId->getSerialization(),
 			new ConditionalHeaderUtil()
 		);
 
@@ -106,9 +104,7 @@ class RequestPreconditionCheckTest extends TestCase {
 
 		$preconditionCheck = new RequestPreconditionCheck(
 			$metadataRetriever,
-			function () {
-				return 'some-invalid-item-id';
-			},
+			fn () => 'some-invalid-item-id',
 			$conditionalHeaderUtil
 		);
 
@@ -128,9 +124,7 @@ class RequestPreconditionCheckTest extends TestCase {
 
 		$preconditionCheck = new RequestPreconditionCheck(
 			$this->newMetadataRetrieverReturningResult( $itemId, $metadataResult ),
-			function () use ( $itemId ) {
-				return $itemId->getSerialization();
-			},
+			fn () => $itemId->getSerialization(),
 			$conditionalHeaderUtil
 		);
 

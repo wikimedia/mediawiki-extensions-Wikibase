@@ -4,7 +4,7 @@ namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
 
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Repo\RestApi\Domain\ReadModel\LatestItemRevisionMetadataResult;
+use Wikibase\Repo\RestApi\Domain\ReadModel\LatestItemRevisionMetadataResult as MetadataResult;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 
 /**
@@ -18,14 +18,11 @@ class WikibaseEntityRevisionLookupItemRevisionMetadataRetriever implements ItemR
 		$this->revisionLookup = $revisionLookup;
 	}
 
-	public function getLatestRevisionMetadata( ItemId $itemId ): LatestItemRevisionMetadataResult {
+	public function getLatestRevisionMetadata( ItemId $itemId ): MetadataResult {
 		return $this->revisionLookup->getLatestRevisionId( $itemId )
-			->onConcreteRevision( function ( $id, $timestamp ) {
-				return LatestItemRevisionMetadataResult::concreteRevision( $id, $timestamp );
-			} )->onRedirect( function ( int $revId, ItemId $redirectTarget ) {
-				return LatestItemRevisionMetadataResult::redirect( $redirectTarget );
-			} )->onNonexistentEntity( function () {
-				return LatestItemRevisionMetadataResult::itemNotFound();
-			} )->map();
+			->onConcreteRevision( fn ( $id, $timestamp ) => MetadataResult::concreteRevision( $id, $timestamp ) )
+			->onRedirect( fn ( int $revId, ItemId $redirectTarget ) => MetadataResult::redirect( $redirectTarget ) )
+			->onNonexistentEntity( fn () => MetadataResult::itemNotFound() )
+			->map();
 	}
 }
