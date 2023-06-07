@@ -9,6 +9,7 @@ use stdClass;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\Sql\Terms\Util\StatsdMonitoring;
 use Wikimedia\Rdbms\IResultWrapper;
+use Wikimedia\Rdbms\SelectQueryBuilder;
 
 /**
  * Term in lang ID resolver using the normalized database schema.
@@ -83,8 +84,9 @@ class DatabaseTermInLangIdsResolver implements TermInLangIdsResolver {
 			]
 		);
 
-		$result = $this->selectTermsViaJoin(
-			[], [], [ 'wbtl_id' => $allTermInLangIds ], $types, $languages );
+		$result = $this->newSelectQueryBuilder( $types, $languages )
+			->where( [ 'wbtl_id' => $allTermInLangIds ] )
+			->caller( __METHOD__ )->fetchResultSet();
 		$this->preloadTypes( $result );
 
 		foreach ( $result as $row ) {
@@ -136,15 +138,11 @@ class DatabaseTermInLangIdsResolver implements TermInLangIdsResolver {
 		array $types = null,
 		array $languages = null
 	): array {
-		$joinConditions = [ $joinTable => [ 'JOIN', $this->getDbr()->addIdentifierQuotes( $joinColumn ) . ' = wbtl_id' ] ];
-		$records = $this->selectTermsViaJoin(
-			[ $joinTable ],
-			[ $groupColumn ],
-			$conditions,
-			$types,
-			$languages,
-			$joinConditions
-		);
+		$records = $this->newSelectQueryBuilder( $types, $languages )
+			->select( $groupColumn )
+			->join( $joinTable, null, $this->getDbr()->addIdentifierQuotes( $joinColumn ) . ' = wbtl_id' )
+			->where( $conditions )
+			->caller( __METHOD__ )->fetchResultSet();
 
 		$this->preloadTypes( $records );
 
@@ -159,33 +157,23 @@ class DatabaseTermInLangIdsResolver implements TermInLangIdsResolver {
 		return $termsByKeyColumn;
 	}
 
-	private function selectTermsViaJoin(
-		array $joinTables,
-		array $columns,
-		array $conditions,
+	private function newSelectQueryBuilder(
 		array $types = null,
-		array $languages = null,
-		array $joinConditions = []
-	): IResultWrapper {
-		$this->incrementForQuery( 'DatabaseTermIdsResolver_selectTermsViaJoin' );
+		array $languages = null
+	): SelectQueryBuilder {
+		$this->incrementForQuery( 'DatabaseTermIdsResolver_selectTermsViaJoin' ); // old method name kept for b/c
+		$queryBuilder = $this->getDbr()->newSelectQueryBuilder()
+			->select( [ 'wbtl_id', 'wbtl_type_id', 'wbxl_language', 'wbx_text' ] )
+			->from( 'wbt_term_in_lang' )
+			->join( 'wbt_text_in_lang', null, 'wbtl_text_in_lang_id=wbxl_id' )
+			->join( 'wbt_text', null, 'wbxl_text_id=wbx_id' );
 		if ( $types !== null ) {
-			$conditions['wbtl_type_id'] = $this->lookupTypeIds( $types );
+			$queryBuilder->where( [ 'wbtl_type_id' => $this->lookupTypeIds( $types ) ] );
 		}
 		if ( $languages !== null ) {
-			$conditions['wbxl_language'] = $languages;
+			$queryBuilder->where( [ 'wbxl_language' => $languages ] );
 		}
-
-		return $this->getDbr()->select(
-			array_merge( [ 'wbt_term_in_lang', 'wbt_text_in_lang', 'wbt_text' ], $joinTables ),
-			array_merge( [ 'wbtl_id', 'wbtl_type_id', 'wbxl_language', 'wbx_text' ], $columns ),
-			$conditions,
-			__METHOD__,
-			[],
-			array_merge( [
-				'wbt_text_in_lang' => [ 'JOIN', 'wbtl_text_in_lang_id=wbxl_id' ],
-				'wbt_text' => [ 'JOIN', 'wbxl_text_id=wbx_id' ],
-			], $joinConditions )
-		);
+		return $queryBuilder;
 	}
 
 	private function preloadTypes( IResultWrapper $result ) {
