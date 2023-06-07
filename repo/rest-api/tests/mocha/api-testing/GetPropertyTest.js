@@ -68,4 +68,14 @@ describe( newGetPropertyRequestBuilder().getRouteDescription(), () => {
 		assert.equal( response.header.etag, makeEtag( testRevisionId ) );
 	} );
 
+	it( '404 error - property not found', async () => {
+		const propertyId = 'P999999';
+		const response = await newGetPropertyRequestBuilder( propertyId ).makeRequest();
+
+		expect( response ).to.have.status( 404 );
+		assert.header( response, 'Content-Language', 'en' );
+		assert.equal( response.body.code, 'property-not-found' );
+		assert.include( response.body.message, propertyId );
+	} );
+
 } );

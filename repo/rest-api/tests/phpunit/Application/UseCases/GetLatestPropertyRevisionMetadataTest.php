@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestPropertyRevisionMetadata;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\ReadModel\LatestPropertyRevisionMetadataResult;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyRevisionMetadataRetriever;
 
@@ -30,6 +31,22 @@ class GetLatestPropertyRevisionMetadataTest extends TestCase {
 
 		$this->assertSame( $expectedRevisionId, $revId );
 		$this->assertSame( $expectedLastModified, $lastModified );
+	}
+
+	public function testGivenPropertyDoesNotExist_throwsUseCaseError(): void {
+		$propertyId = new NumericPropertyId( 'P321' );
+
+		$metadataRetriever = $this->createStub( PropertyRevisionMetadataRetriever::class );
+		$metadataRetriever->method( 'getLatestRevisionMetadata' )
+			->willReturn( LatestPropertyRevisionMetadataResult::propertyNotFound() );
+
+		try {
+			$this->newGetRevisionMetadata( $metadataRetriever )->execute( $propertyId );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::PROPERTY_NOT_FOUND, $e->getErrorCode() );
+			$this->assertSame( "Could not find a property with the ID: {$propertyId}", $e->getErrorMessage() );
+		}
 	}
 
 	private function newGetRevisionMetadata( PropertyRevisionMetadataRetriever $metadataRetriever ): GetLatestPropertyRevisionMetadata {

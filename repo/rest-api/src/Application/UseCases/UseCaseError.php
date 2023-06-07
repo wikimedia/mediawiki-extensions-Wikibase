@@ -32,6 +32,7 @@ class UseCaseError extends UseCaseException {
 	public const INVALID_PATCH_FIELD_TYPE = 'invalid-patch-field-type';
 	public const MISSING_JSON_PATCH_FIELD = 'missing-json-patch-field';
 	public const ITEM_NOT_FOUND = 'item-not-found';
+	public const PROPERTY_NOT_FOUND = 'property-not-found';
 	public const ITEM_LABEL_DESCRIPTION_DUPLICATE = 'item-label-description-duplicate';
 	public const PATCHED_ITEM_LABEL_DESCRIPTION_DUPLICATE = 'patched-item-label-description-duplicate';
 	public const LABEL_NOT_DEFINED = 'label-not-defined';
