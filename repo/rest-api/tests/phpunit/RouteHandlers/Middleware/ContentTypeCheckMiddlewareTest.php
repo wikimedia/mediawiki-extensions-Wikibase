@@ -28,9 +28,7 @@ class ContentTypeCheckMiddlewareTest extends TestCase {
 
 		$response = $middleware->run(
 			$this->newHandlerWithRequest( $request ),
-			function () use ( $expectedResponse ) {
-				return $expectedResponse;
-			}
+			fn () => $expectedResponse
 		);
 
 		$this->assertSame( $expectedResponse, $response );
@@ -44,9 +42,7 @@ class ContentTypeCheckMiddlewareTest extends TestCase {
 		] );
 		$response = $middleware->run(
 			$this->newHandlerWithRequest( $request ),
-			function (): Response {
-				$this->fail( 'This function should never be called in this scenario.' );
-			}
+			fn () => $this->fail( 'This function should never be called in this scenario.' )
 		);
 
 		$this->assertSame( 415, $response->getStatusCode() );

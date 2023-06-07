@@ -33,9 +33,7 @@ class PreconditionMiddlewareTest extends TestCase {
 
 		$response = $middleware->run(
 			$this->newRouteHandler(),
-			function (): Response {
-				$this->fail( 'This function should never be called in this scenario.' );
-			}
+			fn () => $this->fail( 'This function should never be called in this scenario.' )
 		);
 
 		$this->assertSame( 412, $response->getStatusCode() );
@@ -55,9 +53,7 @@ class PreconditionMiddlewareTest extends TestCase {
 
 		$response = $middleware->run(
 			$this->newRouteHandler(),
-			function (): Response {
-				$this->fail( 'This function should never be called in this scenario.' );
-			}
+			fn () => $this->fail( 'This function should never be called in this scenario.' )
 		);
 
 		$this->assertSame( 304, $response->getStatusCode() );
@@ -70,9 +66,7 @@ class PreconditionMiddlewareTest extends TestCase {
 
 		$middleware = new PreconditionMiddleware( $preconditionCheck );
 		$expectedResponse = $this->createStub( Response::class );
-		$response = $middleware->run( $this->createStub( Handler::class ), function () use ( $expectedResponse ) {
-			return $expectedResponse;
-		} );
+		$response = $middleware->run( $this->createStub( Handler::class ), fn () => $expectedResponse );
 
 		$this->assertSame( $expectedResponse, $response );
 	}
