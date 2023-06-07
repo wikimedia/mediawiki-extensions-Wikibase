@@ -4,6 +4,7 @@ namespace Wikibase\Lib;
 
 use ExtensionRegistry;
 use IContextSource;
+use InvalidArgumentException;
 use Language;
 use LanguageConverter;
 use MediaWiki\Babel\Babel;
@@ -11,7 +12,6 @@ use MediaWiki\Languages\LanguageConverterFactory;
 use MediaWiki\Languages\LanguageFactory;
 use MediaWiki\Languages\LanguageFallback;
 use MediaWiki\MediaWikiServices;
-use MWException;
 use User;
 
 /**
@@ -326,7 +326,7 @@ class LanguageFallbackChainFactory {
 			foreach ( $languageCodes as $languageCode ) {
 				try {
 					$validCodes[] = LanguageWithConversion::validateLanguageCode( $languageCode );
-				} catch ( MWException $e ) {
+				} catch ( InvalidArgumentException $e ) {
 					continue;
 				}
 			}
