@@ -13,6 +13,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
+use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementsRetriever;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
@@ -125,7 +126,7 @@ class GetItemStatementsTest extends TestCase {
 
 	private function newUseCase(): GetItemStatements {
 		return new GetItemStatements(
-			new GetItemStatementsValidator( new ItemIdValidator() ),
+			new GetItemStatementsValidator( new ItemIdValidator(), new PropertyIdValidator() ),
 			$this->statementsRetriever,
 			$this->getRevisionMetadata
 		);
