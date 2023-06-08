@@ -2,23 +2,24 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements;
 
-use InvalidArgumentException;
-use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
+use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
 
 /**
  * @license GPL-2.0-or-later
  */
 class GetItemStatementsValidator {
 
-	public const CODE_INVALID_PROPERTY_ID = 'invalid-property-id';
-	public const CONTEXT_PROPERTY_ID_VALUE = 'property-id-value';
-
 	private ItemIdValidator $itemIdValidator;
+	private PropertyIdValidator $propertyIdValidator;
 
-	public function __construct( ItemIdValidator $itemIdValidator ) {
+	public function __construct(
+		ItemIdValidator $itemIdValidator,
+		PropertyIdValidator $propertyIdValidator
+	) {
 		$this->itemIdValidator = $itemIdValidator;
+		$this->propertyIdValidator = $propertyIdValidator;
 	}
 
 	/**
@@ -44,14 +45,13 @@ class GetItemStatementsValidator {
 			return;
 		}
 
-		try {
-			// @phan-suppress-next-line PhanNoopNew
-			new NumericPropertyId( $propertyId );
-		} catch ( InvalidArgumentException $e ) {
+		$validationError = $this->propertyIdValidator->validate( $propertyId );
+		if ( $validationError ) {
+			$context = $validationError->getContext();
 			throw new UseCaseError(
 				UseCaseError::INVALID_PROPERTY_ID,
-				"Not a valid property ID: {$propertyId}",
-				[ self::CONTEXT_PROPERTY_ID_VALUE => $propertyId ]
+				"Not a valid property ID: {$context[PropertyIdValidator::CONTEXT_VALUE]}",
+				$context
 			);
 		}
 	}

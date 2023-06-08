@@ -8,6 +8,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\GetItemStatemen
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\GetItemStatementsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
+use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\GetItemStatementsValidator
@@ -37,7 +38,7 @@ class GetItemStatementsValidatorTest extends TestCase {
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::INVALID_PROPERTY_ID, $e->getErrorCode() );
 			$this->assertSame( 'Not a valid property ID: X123', $e->getErrorMessage() );
-			$this->assertSame( [ GetItemStatementsValidator::CONTEXT_PROPERTY_ID_VALUE => 'X123' ], $e->getErrorContext() );
+			$this->assertSame( [ PropertyIdValidator::CONTEXT_VALUE => 'X123' ], $e->getErrorContext() );
 		}
 	}
 
@@ -55,7 +56,7 @@ class GetItemStatementsValidatorTest extends TestCase {
 	}
 
 	private function newStatementsValidator(): GetItemStatementsValidator {
-		return ( new GetItemStatementsValidator( new ItemIdValidator() ) );
+		return ( new GetItemStatementsValidator( new ItemIdValidator(), new PropertyIdValidator() ) );
 	}
 
 }

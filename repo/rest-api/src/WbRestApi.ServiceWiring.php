@@ -220,7 +220,7 @@ return [
 
 	'WbRestApi.GetItemStatements' => function( MediaWikiServices $services ): GetItemStatements {
 		return new GetItemStatements(
-			new GetItemStatementsValidator( new ItemIdValidator() ),
+			new GetItemStatementsValidator( new ItemIdValidator(), new PropertyIdValidator() ),
 			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getGetLatestItemRevisionMetadata( $services )
 		);
