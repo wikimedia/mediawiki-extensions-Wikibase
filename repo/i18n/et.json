@@ -96,6 +96,7 @@
 	"wikibase-propertypage-bad-datatype": "Tundmatu andmetüüp: $1",
 	"wikibase-claimview-snak-tooltip": "Sisesta omadusele \"$1\" vastav väärtus. Kui omaduse väärtus puudub või kui tegelik väärtus pole teada, saad klõpsata sisestusvälja ees olevat ikooni ja valida muu väärtuse tüübi.",
 	"wikibase-claimview-snak-new-tooltip": "Kui oled määranud omaduse, saad sisestada sobiva väärtuse. Kui omaduse väärtus puudub või kui tegelik väärtus pole teada, saad klõpsata sisestusvälja ees olevat ikooni ja valida muu väärtuse tüübi.",
+	"wikibase-referenceview-tabs-manual": "Käsitsi",
 	"wikibase-statementview-rank-preferred": "Eelisjärk",
 	"wikibase-statementview-rank-tooltip-preferred": "Õige ja praegu kehtiv väärtus",
 	"wikibase-statementview-rank-normal": "Tavajärk",
