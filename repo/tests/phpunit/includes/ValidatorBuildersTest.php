@@ -15,14 +15,12 @@ use DataValues\UnboundedQuantityValue;
 use MediaWiki\Site\MediaWikiPageNameNormalizer;
 use ValueValidators\Result;
 use ValueValidators\ValueValidator;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Services\Lookup\DispatchingEntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Tests\MockRepository;
@@ -69,23 +67,11 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 		$p8 = Property::newFromType( 'string' );
 		$p8->setId( new NumericPropertyId( 'P8' ) );
 
-		$localLookup = new MockRepository();
-		$localLookup->putEntity( $q8 );
-		$localLookup->putEntity( $p8 );
+		$entityLookup = new MockRepository();
+		$entityLookup->putEntity( $q8 );
+		$entityLookup->putEntity( $p8 );
 
-		$fooQ123 = new ItemId( 'foo:Q123' );
-		$fooP42 = new NumericPropertyId( 'foo:P42' );
-
-		$foreignLookup = $this->createMock( EntityLookup::class );
-		$foreignLookup->method( 'hasEntity' )
-			->willReturnCallback( function( EntityId $id ) use ( $fooQ123, $fooP42 ) {
-				return $id->equals( $fooQ123 ) || $id->equals( $fooP42 );
-			} );
-
-		return new DispatchingEntityLookup( [
-			'' => $localLookup,
-			'foo' => $foreignLookup,
-		] );
+		return $entityLookup;
 	}
 
 	private function getMediaWikiPageNameNormalizer(): MediaWikiPageNameNormalizer {
