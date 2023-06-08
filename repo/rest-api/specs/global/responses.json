@@ -244,6 +244,24 @@
 			}
 		}
 	},
+	"InvalidRetrieveStatementsInput": {
+		"description": "The request cannot be processed",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/Error" },
+				"examples": {
+					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
+					"invalid-property-id": { "$ref": "./examples.json#/InvalidPropertyIdExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
 	"InvalidRetrieveStatementInput": {
 		"description": "The request cannot be processed",
 		"content": {
