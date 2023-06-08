@@ -14,8 +14,6 @@ use Wikibase\Lib\DataTypeDefinitions;
  * @license GPL-2.0-or-later
  */
 class PropertyValueExpertsModule extends RL\Module {
-	/** @var string[] Limited to desktop because of T326405 */
-	protected $targets = [ 'desktop' ];
 
 	/**
 	 * @var DataTypeDefinitions
