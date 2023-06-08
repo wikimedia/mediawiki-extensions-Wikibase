@@ -13,6 +13,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikimedia\Rdbms\IReadableDatabase;
+use Wikimedia\Rdbms\SelectQueryBuilder;
 
 /**
  * Abstract PageTableEntityQuery implementation allowing simple mapping between rows and entity IDs
@@ -48,38 +49,28 @@ abstract class PageTableEntityQueryBase implements PageTableEntityQuery {
 		array $entityIds,
 		IReadableDatabase $db
 	): array {
-		$usesRevisionTable = $revisionJoinConds !== null;
-		list( $where, $joins ) = $this->getQueryInfo( $entityIds, $usesRevisionTable, $db );
+		$queryBuilder = $db->newSelectQueryBuilder()
+			->select( $fields )
+			->select( $this->getFieldsNeededForMapping() )
+			->from( 'page' );
 		if ( $revisionJoinConds !== null ) {
-			$joins = array_merge(
-				[ 'revision' => [ 'INNER JOIN', $revisionJoinConds ] ],
-				$joins
-			);
+			$queryBuilder->join( 'revision', null, $revisionJoinConds );
 		}
-		$vars = array_merge( $fields, $this->getFieldsNeededForMapping() );
-		$table = array_merge( [ 'page' ], array_keys( $joins ) );
+		$this->updateQueryBuilder( $queryBuilder, $entityIds, $db );
 
-		$res = $db->select(
-			$table,
-			$vars,
-			$where,
-			__METHOD__,
-			[],
-			$joins
-		);
+		$res = $queryBuilder->caller( __METHOD__ )->fetchResultSet();
 
 		return $this->indexRowsByEntityId( $res );
 	}
 
 	/**
+	 * @param SelectQueryBuilder $queryBuilder
 	 * @param EntityId[] $entityIds
-	 * @param bool $usesRevisionTable
 	 * @param IReadableDatabase $db
-	 * @return array [ string $whereCondition, array $extraTables ]
 	 */
-	private function getQueryInfo( array $entityIds, bool $usesRevisionTable, IReadableDatabase $db ) {
+	private function updateQueryBuilder( SelectQueryBuilder $queryBuilder, array $entityIds, IReadableDatabase $db ) {
 		$where = [];
-		$slotJoinConds = [];
+		$joinSlotsTable = false;
 
 		foreach ( $entityIds as $entityId ) {
 			$entityType = $entityId->getEntityType();
@@ -112,11 +103,7 @@ abstract class PageTableEntityQueryBase implements PageTableEntityQuery {
 				}
 
 				$conditions['slot_role_id'] = $slotRoleId;
-				if ( $usesRevisionTable ) {
-					$slotJoinConds = [ 'slots' => [ 'INNER JOIN', 'rev_id=slot_revision_id' ] ];
-				} else {
-					$slotJoinConds = [ 'slots' => [ 'INNER JOIN', 'page_latest=slot_revision_id' ] ];
-				}
+				$joinSlotsTable = true;
 			}
 
 			$where[] = $db->makeList(
@@ -127,10 +114,17 @@ abstract class PageTableEntityQueryBase implements PageTableEntityQuery {
 
 		if ( empty( $where ) ) {
 			// If we skipped all entity IDs, select nothing, not everything.
-			return [ '0=1', [] ];
+			$queryBuilder->where( '0=1' );
+			return;
 		}
 
-		return [ $db->makeList( $where, LIST_OR ), $slotJoinConds ];
+		if ( $joinSlotsTable ) {
+			$usesRevisionTable = in_array( 'revision', $queryBuilder->getQueryInfo()['tables'], true );
+			$slotJoinConds = $usesRevisionTable ? 'rev_id=slot_revision_id' : 'page_latest=slot_revision_id';
+			$queryBuilder->join( 'slots', null, $slotJoinConds );
+		}
+
+		$queryBuilder->where( $db->makeList( $where, LIST_OR ) );
 	}
 
 	/**

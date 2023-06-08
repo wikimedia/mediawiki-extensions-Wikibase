@@ -11,6 +11,7 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PageTableEntityQueryBase;
 use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\SelectQueryBuilder;
 
 /**
  * @group Wikibase
@@ -48,16 +49,18 @@ class EntityIdLocalPartPageTableEntityQueryUnitTest extends TestCase {
 					throw new Error( 'Unexpected makeList() call' );
 				}
 			} );
+		$database->method( 'newSelectQueryBuilder' )
+			->willReturnCallback( fn() => new SelectQueryBuilder( $database ) );
 		// Extra fields, tables and joins passed to the method should also be requested
 		// No join on the slots table should happen, as we are not looking at a slotted entity
 		$database->method( 'select' )
 			->with(
-			[ "page", "revision" ],
+			[ "page", "revision" => "revision" ],
 			[ "extraField", "page_title" ],
-			"combined-condition",
+			[ "combined-condition" ],
 			PageTableEntityQueryBase::class . "::selectRows",
 			[],
-			[ 'revision' => [ 'INNER JOIN', [ 'rev_id=extraField' ] ] ]
+			[ 'revision' => [ 'JOIN', [ 'rev_id=extraField' ] ] ]
 		)->willReturn(
 		// A Traversable object
 			new ArrayObject(
@@ -109,17 +112,19 @@ class EntityIdLocalPartPageTableEntityQueryUnitTest extends TestCase {
 					throw new Error( 'Unexpected makeList() call' );
 				}
 			} );
+		$database->method( 'newSelectQueryBuilder' )
+			->willReturnCallback( fn() => new SelectQueryBuilder( $database ) );
 		// Extra fields, tables and joins passed to the method should also be requested
 		$database->method( 'select' )
 			->with(
-			[ "page", "revision", "slots" ],
+			[ "page", "revision" => "revision", "slots" => "slots" ],
 			[ "extraField", "page_title" ],
-			"combined-condition",
+			[ "combined-condition" ],
 			PageTableEntityQueryBase::class . "::selectRows",
 			[],
 			[
-				'revision' => [ 'INNER JOIN', [ 'rev_id=extraField' ] ],
-				"slots" => [ "INNER JOIN", "rev_id=slot_revision_id" ],
+				'revision' => [ 'JOIN', [ 'rev_id=extraField' ] ],
+				"slots" => [ "JOIN", "rev_id=slot_revision_id" ],
 			]
 		)->willReturn(
 		// A Traversable object
