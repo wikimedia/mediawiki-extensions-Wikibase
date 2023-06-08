@@ -7,6 +7,9 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestPropertyRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetProperty;
 use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetPropertyRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetPropertyValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyData;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyDataRetriever;
 
@@ -39,6 +42,7 @@ class GetPropertyTest extends TestCase {
 		$response = ( new GetProperty(
 			$getRevisionMetadata,
 			$propertyDataRetriever,
+			new GetPropertyValidator( new PropertyIdValidator() )
 		) )->execute(
 			new GetPropertyRequest( "$propertyId" )
 		);
@@ -48,4 +52,18 @@ class GetPropertyTest extends TestCase {
 		$this->assertSame( $revisionId, $response->getRevisionId() );
 	}
 
+	public function testInvalidPropertyId(): void {
+		$propertyId = 'X123';
+		try {
+			( new GetProperty(
+				$this->createStub( GetLatestPropertyRevisionMetadata::class ),
+				$this->createStub( PropertyDataRetriever::class ),
+				new GetPropertyValidator( new PropertyIdValidator() )
+			) )->execute( new GetPropertyRequest( $propertyId ) );
+
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::INVALID_PROPERTY_ID, $e->getErrorCode() );
+		}
+	}
 }
