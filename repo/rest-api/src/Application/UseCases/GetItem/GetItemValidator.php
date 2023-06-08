@@ -11,8 +11,6 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
  */
 class GetItemValidator {
 
-	public const CODE_INVALID_FIELD = 'invalid-field';
-
 	private ItemIdValidator $itemIdValidator;
 
 	public function __construct( ItemIdValidator $itemIdValidator ) {
