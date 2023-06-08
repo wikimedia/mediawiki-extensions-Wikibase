@@ -1072,6 +1072,7 @@ return [
 		$singleSourceServices = [];
 		foreach ( $entitySourceDefinitions->getSources() as $source ) {
 			$singleSourceServices[$source->getSourceName()] = $singleEntitySourceServicesFactory
+				// @phan-suppress-next-line PhanTypeMismatchArgumentSuperType
 				->getServicesForSource( $source );
 		}
 

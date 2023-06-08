@@ -6,8 +6,10 @@ $cfg['file_list'] = array_merge(
 	$cfg['file_list'],
 	[
 		'client/WikibaseClient.datatypes.php',
+		'client/WikibaseClient.entitytypes.php',
 		'client/WikibaseClient.i18n.alias.php',
 		'client/WikibaseClient.i18n.magic.php',
+		'client/WikibaseClient.ServiceWiring.php',
 		'lib/config/WikibaseLib.default.php',
 		'lib/WikibaseLib.datatypes.php',
 		'lib/WikibaseLib.entitytypes.php',
@@ -17,6 +19,8 @@ $cfg['file_list'] = array_merge(
 		'repo/Wikibase.i18n.namespaces.php',
 		'repo/WikibaseRepo.datatypes.php',
 		'repo/WikibaseRepo.entitytypes.php',
+		'repo/WikibaseRepo.FederatedProperties.OverrideEntityServices.php',
+		'repo/WikibaseRepo.ServiceWiring.php',
 		'view/resources.php',
 		'Wikibase.php',
 	]

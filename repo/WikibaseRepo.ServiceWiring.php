@@ -2106,6 +2106,7 @@ return [
 		$propertyOrderProvider = new CachingPropertyOrderProvider(
 			new WikiPagePropertyOrderProvider(
 				$services->getWikiPageFactory(),
+				// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Title is valid
 				$services->getTitleFactory()
 					->newFromText( 'MediaWiki:Wikibase-SortedProperties' )
 			),
@@ -2163,6 +2164,7 @@ return [
 				continue;
 			}
 			$singleSourceServices[$source->getSourceName()] = $singleEntitySourceServicesFactory
+				// @phan-suppress-next-line PhanTypeMismatchArgumentSuperType
 				->getServicesForSource( $source );
 		}
 		return new MultipleEntitySourceServices(
