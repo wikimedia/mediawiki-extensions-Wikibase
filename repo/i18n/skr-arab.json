@@ -38,6 +38,7 @@
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|حوالہ|حوالے}}",
 	"wikibase-snakview-property-input-placeholder": "خاصیت",
 	"wikibase-entityselector-more": "ٻئے",
+	"wikibase-validator-no-validators": "ممنوع",
 	"wikibase-itembytitle-lookup-site": "سائٹ:",
 	"wikibase-itembytitle-lookup-page": "ورقہ:",
 	"wikibase-itembytitle-submit": "ڳولو",

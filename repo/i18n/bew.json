@@ -5,5 +5,9 @@
 			"Veracious"
 		]
 	},
-	"wikibase-edit": "permak"
+	"wikibase-edit": "permak",
+	"wikibase-add": "tambah",
+	"wikibase-label-empty": "Kaga' ada labèl nyang ditentuin",
+	"wikibase-description-empty": "Kaga' ada dèskripsi",
+	"wikibase-sitelinks-special": "Laèn-laèn pelampang"
 }
