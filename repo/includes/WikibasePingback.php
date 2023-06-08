@@ -146,7 +146,6 @@ class WikibasePingback {
 	/**
 	 * Record the fact that we have sent a pingback for this Wikibase version,
 	 * to ensure we don't submit data multiple times.
-	 * @return bool
 	 */
 	private function markSent() {
 		$dbw = $this->repoConnections->getWriteConnection();
@@ -160,8 +159,6 @@ class WikibasePingback {
 			[ 'ul_value' => $timestamp ],
 			__METHOD__
 		);
-
-		return true;
 	}
 
 	/**
