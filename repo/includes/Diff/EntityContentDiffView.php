@@ -157,9 +157,7 @@ class EntityContentDiffView extends DifferenceEngine {
 	 */
 	protected function getParserOutput( WikiPage $page, RevisionRecord $rev ) {
 		$parserOptions = $page->makeParserOptions( $this->getContext() );
-
-		// Do not poison parser cache with diff-specific stuff
-		$parserOptions->addExtraKey( 'diff=1' );
+		$parserOptions->setRenderReason( 'diff-page' );
 
 		try {
 			$parserOutput = $page->getParserOutput( $parserOptions, $rev->getId() );
