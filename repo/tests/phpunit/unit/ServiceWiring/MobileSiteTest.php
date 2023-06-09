@@ -21,4 +21,34 @@ class MobileSiteTest extends ServiceWiringTestCase {
 		$this->assertFalse( $mobileSite );
 	}
 
+	public function testConstructionMobileView(): void {
+		$this->mockService(
+			'MobileFrontend.Context',
+			new class() {
+				public function shouldDisplayMobileView(): bool {
+					return true;
+				}
+			}
+		);
+
+		$mobileSite = $this->getService( 'WikibaseRepo.MobileSite' );
+
+		$this->assertTrue( $mobileSite );
+	}
+
+	public function testConstructionDesktopView(): void {
+		$this->mockService(
+			'MobileFrontend.Context',
+			new class() {
+				public function shouldDisplayMobileView(): bool {
+					return false;
+				}
+			}
+		);
+
+		$mobileSite = $this->getService( 'WikibaseRepo.MobileSite' );
+
+		$this->assertFalse( $mobileSite );
+	}
+
 }
