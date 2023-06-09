@@ -337,6 +337,7 @@
 				"WikibaseRepo.EntityNamespaceLookup",
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.ItemTermsCollisionDetector",
+				"WikibaseRepo.MobileSite",
 				"WikibaseRepo.Settings",
 				"WikibaseRepo.SiteLinkTargetProvider",
 				"WikibaseRepo.SummaryFormatter",
@@ -352,6 +353,7 @@
 				"WikibaseRepo.EditEntityFactory",
 				"WikibaseRepo.EntityNamespaceLookup",
 				"WikibaseRepo.EntityTitleLookup",
+				"WikibaseRepo.MobileSite",
 				"WikibaseRepo.PropertyTermsCollisionDetector",
 				"WikibaseRepo.Settings",
 				"WikibaseRepo.SummaryFormatter",
@@ -513,6 +515,7 @@
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.ExceptionLocalizer",
 				"WikibaseRepo.ItemMergeInteractor",
+				"WikibaseRepo.MobileSite",
 				"WikibaseRepo.TokenCheckInteractor"
 			]
 		},
@@ -829,6 +832,7 @@
 				"WikibaseRepo.LanguageFallbackChainFactory",
 				"WikibaseRepo.LinkTargetEntityIdLookup",
 				"WikibaseRepo.LocalEntityNamespaceLookup",
+				"WikibaseRepo.MobileSite",
 				"WikibaseRepo.Settings",
 				"WikibaseRepo.TermLookup"
 			]

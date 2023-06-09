@@ -43,6 +43,7 @@ class EntityParserOutputGeneratorFactoryTest extends ServiceWiringTestCase {
 			$this->createMock( LanguageFallbackChainFactory::class ) );
 		$this->mockService( 'WikibaseRepo.EntityDataFormatProvider',
 			new EntityDataFormatProvider() );
+		$this->mockService( 'WikibaseRepo.MobileSite', false );
 		$this->mockService( 'WikibaseRepo.PropertyDataTypeLookup',
 			new InMemoryDataTypeLookup() );
 		$this->mockService( 'WikibaseRepo.EntityTypeDefinitions',

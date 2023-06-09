@@ -9,7 +9,6 @@ use MediaWiki\Interwiki\InterwikiLookup;
 use MediaWiki\Linker\Hook\HtmlPageLinkRendererEndHook;
 use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\Linker\LinkTarget;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\SpecialPage\SpecialPageFactory;
 use RequestContext;
 use Title;
@@ -62,6 +61,7 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 	private LinkTargetEntityIdLookup $linkTargetEntityIdLookup;
 	private ?string $federatedPropertiesSourceScriptUrl;
 	private bool $federatedPropertiesEnabled;
+	private bool $isMobileSite;
 
 	public static function factory(
 		InterwikiLookup $interwikiLookup,
@@ -73,6 +73,7 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		LinkTargetEntityIdLookup $linkTargetEntityIdLookup,
 		EntityNamespaceLookup $localEntityNamespaceLookup,
+		bool $isMobileSite,
 		SettingsArray $repoSettings,
 		TermLookup $termLookup
 	): self {
@@ -88,7 +89,8 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 			$entityUrlLookup,
 			$linkTargetEntityIdLookup,
 			$repoSettings->getSetting( 'federatedPropertiesSourceScriptUrl' ),
-			$repoSettings->getSetting( 'federatedPropertiesEnabled' )
+			$repoSettings->getSetting( 'federatedPropertiesEnabled' ),
+			$isMobileSite
 		);
 	}
 
@@ -143,7 +145,8 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 		EntityUrlLookup $entityUrlLookup,
 		LinkTargetEntityIdLookup $linkTargetEntityIdLookup,
 		?string $federatedPropertiesSourceScriptUrl,
-		bool $federatedPropertiesEnabled
+		bool $federatedPropertiesEnabled,
+		bool $isMobileSite
 	) {
 		$this->entityExistenceChecker = $entityExistenceChecker;
 		$this->entityIdParser = $entityIdParser;
@@ -157,6 +160,7 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 		$this->linkTargetEntityIdLookup = $linkTargetEntityIdLookup;
 		$this->federatedPropertiesSourceScriptUrl = $federatedPropertiesSourceScriptUrl;
 		$this->federatedPropertiesEnabled = $federatedPropertiesEnabled;
+		$this->isMobileSite = $isMobileSite;
 	}
 
 	/**
@@ -328,8 +332,7 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 		// add wikibase styles in all cases, so we can format the link properly:
 		$out = $context->getOutput();
 		$out->addModuleStyles( [ 'wikibase.alltargets' ] );
-		$isMobileSite = MediaWikiServices::getInstance()->getService( 'WikibaseRepo.MobileSite' );
-		if ( !$isMobileSite && $this->federatedPropertiesEnabled && $entityId instanceof PropertyId ) {
+		if ( !$this->isMobileSite && $this->federatedPropertiesEnabled && $entityId instanceof PropertyId ) {
 			$customAttribs[ 'class' ] = $customAttribs[ 'class' ] == '' ? 'fedprop' : $customAttribs[ 'class' ] . ' fedprop';
 			$out->addModules( 'wikibase.federatedPropertiesLeavingSiteNotice' );
 		}

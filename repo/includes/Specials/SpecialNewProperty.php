@@ -60,7 +60,8 @@ class SpecialNewProperty extends SpecialNewEntity {
 		DataTypeFactory $dataTypeFactory,
 		TermValidatorFactory $termValidatorFactory,
 		TermsCollisionDetector $termsCollisionDetector,
-		ValidatorErrorLocalizer $errorLocalizer
+		ValidatorErrorLocalizer $errorLocalizer,
+		bool $isMobileView
 	) {
 		parent::__construct(
 			'NewProperty',
@@ -70,7 +71,8 @@ class SpecialNewProperty extends SpecialNewEntity {
 			$entityNamespaceLookup,
 			$summaryFormatter,
 			$entityTitleLookup,
-			$editEntityFactory
+			$editEntityFactory,
+			$isMobileView
 		);
 
 		$this->dataTypeFactory = $dataTypeFactory;
@@ -84,6 +86,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 		MediawikiEditEntityFactory $editEntityFactory,
 		EntityNamespaceLookup $entityNamespaceLookup,
 		EntityTitleLookup $entityTitleLookup,
+		bool $isMobileView,
 		TermsCollisionDetector $propertyTermsCollisionDetector,
 		SettingsArray $repoSettings,
 		SummaryFormatter $summaryFormatter,
@@ -106,7 +109,8 @@ class SpecialNewProperty extends SpecialNewEntity {
 			$dataTypeFactory,
 			$termValidatorFactory,
 			$propertyTermsCollisionDetector,
-			$errorLocalizer
+			$errorLocalizer,
+			$isMobileView
 		);
 	}
 

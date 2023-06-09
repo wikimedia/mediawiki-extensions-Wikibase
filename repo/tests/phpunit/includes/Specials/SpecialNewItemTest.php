@@ -71,7 +71,8 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 			WikibaseRepo::getItemTermsCollisionDetector(),
 			WikibaseRepo::getValidatorErrorLocalizer(),
 			new SiteLinkTargetProvider( $this->siteStore ),
-			[ 'wikiblah' ]
+			[ 'wikiblah' ],
+			false
 		);
 	}
 
