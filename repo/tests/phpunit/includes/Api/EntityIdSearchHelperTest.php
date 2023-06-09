@@ -6,7 +6,6 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
-use Wikibase\DataModel\Services\Lookup\DispatchingEntityLookup;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;
@@ -24,10 +23,7 @@ use Wikibase\Repo\Api\EntityIdSearchHelper;
  */
 class EntityIdSearchHelperTest extends \PHPUnit\Framework\TestCase {
 
-	private const EXISTING_LOCAL_ITEM = 'Q111';
-	private const FOREIGN_REPO_PREFIX = 'foreign';
-	private const EXISTING_FOREIGN_ITEM = 'foreign:Q2';
-	private const EXISTING_FOREIGN_ITEM_WITHOUT_REPOSITORY_PREFIX = 'Q2';
+	private const EXISTING_ITEM = 'Q111';
 	private const DEFAULT_LANGUAGE = 'pt';
 	private const DEFAULT_LABEL = 'ptLabel';
 	private const DEFAULT_DESCRIPTION = 'ptDescription';
@@ -50,18 +46,8 @@ class EntityIdSearchHelperTest extends \PHPUnit\Framework\TestCase {
 	private function newEntitySearchHelper(
 		array $entityTypeToRepositoryMapping = []
 	) {
-		$localEntityLookup = new InMemoryEntityLookup();
-		$localEntityLookup->addEntity( new Item( new ItemId( self::EXISTING_LOCAL_ITEM ) ) );
-
-		$fooEntityLookup = new InMemoryEntityLookup();
-		$fooEntityLookup->addEntity( new Item( new ItemId( self::EXISTING_FOREIGN_ITEM ) ) );
-
-		$entityLookup = new DispatchingEntityLookup(
-			[
-				'' => $localEntityLookup,
-				self::FOREIGN_REPO_PREFIX => $fooEntityLookup,
-			]
-		);
+		$entityLookup = new InMemoryEntityLookup();
+		$entityLookup->addEntity( new Item( new ItemId( self::EXISTING_ITEM ) ) );
 
 		return new EntityIdSearchHelper(
 			$entityLookup,
@@ -73,9 +59,9 @@ class EntityIdSearchHelperTest extends \PHPUnit\Framework\TestCase {
 
 	public static function provideTestGetRankedSearchResults() {
 		$existingLocalItemResult = new TermSearchResult(
-			new Term( 'qid', self::EXISTING_LOCAL_ITEM ),
+			new Term( 'qid', self::EXISTING_ITEM ),
 			'entityId',
-			new ItemId( self::EXISTING_LOCAL_ITEM ),
+			new ItemId( self::EXISTING_ITEM ),
 			new Term( self::DEFAULT_LANGUAGE, self::DEFAULT_LABEL ),
 			new Term( self::DEFAULT_LANGUAGE, self::DEFAULT_DESCRIPTION )
 		);
@@ -89,44 +75,44 @@ class EntityIdSearchHelperTest extends \PHPUnit\Framework\TestCase {
 				[],
 			],
 			'Exact EntityId match' => [
-				self::EXISTING_LOCAL_ITEM,
+				self::EXISTING_ITEM,
 				$defaultLimit,
-				[ self::EXISTING_LOCAL_ITEM => $existingLocalItemResult ],
+				[ self::EXISTING_ITEM => $existingLocalItemResult ],
 			],
 			'EntityID plus term matches' => [
-				self::EXISTING_LOCAL_ITEM,
+				self::EXISTING_ITEM,
 				$defaultLimit,
-				[ self::EXISTING_LOCAL_ITEM => $existingLocalItemResult ],
+				[ self::EXISTING_ITEM => $existingLocalItemResult ],
 			],
 			'Trimming' => [
-				' ' . self::EXISTING_LOCAL_ITEM . ' ',
+				' ' . self::EXISTING_ITEM . ' ',
 				$defaultLimit,
-				[ self::EXISTING_LOCAL_ITEM => $existingLocalItemResult ],
+				[ self::EXISTING_ITEM => $existingLocalItemResult ],
 			],
 			'Brackets are removed' => [
-				'(' . self::EXISTING_LOCAL_ITEM . ')',
+				'(' . self::EXISTING_ITEM . ')',
 				$defaultLimit,
-				[ self::EXISTING_LOCAL_ITEM => $existingLocalItemResult ],
+				[ self::EXISTING_ITEM => $existingLocalItemResult ],
 			],
 			'URL prefixes are removed' => [
-				'http://example.com/' . self::EXISTING_LOCAL_ITEM,
+				'http://example.com/' . self::EXISTING_ITEM,
 				$defaultLimit,
-				[ self::EXISTING_LOCAL_ITEM => $existingLocalItemResult ],
+				[ self::EXISTING_ITEM => $existingLocalItemResult ],
 			],
 			'Single characters are ignored' => [
-				'w/' . self::EXISTING_LOCAL_ITEM . '/w',
+				'w/' . self::EXISTING_ITEM . '/w',
 				$defaultLimit,
-				[ self::EXISTING_LOCAL_ITEM => $existingLocalItemResult ],
+				[ self::EXISTING_ITEM => $existingLocalItemResult ],
 			],
 			'EntityID extraction' => [
-				'[id:' . self::EXISTING_LOCAL_ITEM . ']',
+				'[id:' . self::EXISTING_ITEM . ']',
 				$defaultLimit,
-				[ self::EXISTING_LOCAL_ITEM => $existingLocalItemResult ],
+				[ self::EXISTING_ITEM => $existingLocalItemResult ],
 			],
 			'Case insensitive' => [
-				strtolower( self::EXISTING_LOCAL_ITEM ),
+				strtolower( self::EXISTING_ITEM ),
 				$defaultLimit,
-				[ self::EXISTING_LOCAL_ITEM => $existingLocalItemResult ],
+				[ self::EXISTING_ITEM => $existingLocalItemResult ],
 			],
 		];
 	}
@@ -139,52 +125,6 @@ class EntityIdSearchHelperTest extends \PHPUnit\Framework\TestCase {
 
 		$results = $entitySearchHelper->getRankedSearchResults( $search, 'en', 'item', $limit, false, null );
 		$this->assertEquals( $expected, $results );
-	}
-
-	public function testGetRankedSearchResults_foreignItem() {
-		$existingForeignItemResult = new TermSearchResult(
-			new Term( 'qid', self::EXISTING_FOREIGN_ITEM ),
-			'entityId',
-			new ItemId( self::EXISTING_FOREIGN_ITEM ),
-			new Term( self::DEFAULT_LANGUAGE, self::DEFAULT_LABEL ),
-			new Term( self::DEFAULT_LANGUAGE, self::DEFAULT_DESCRIPTION )
-		);
-
-		$entitySearchHelper = $this->newEntitySearchHelper( [ 'item' => [ self::FOREIGN_REPO_PREFIX ] ] );
-
-		$results = $entitySearchHelper->getRankedSearchResults( self::EXISTING_FOREIGN_ITEM, 'en', 'item', 10, false, null );
-		$this->assertEquals(
-			[ self::EXISTING_FOREIGN_ITEM => $existingForeignItemResult ],
-			$results
-		);
-	}
-
-	public function testGivenEntityIdWithoutRepositoryPrefix_entityIsFound() {
-		$expectedResults = [
-			self::EXISTING_FOREIGN_ITEM => new TermSearchResult(
-				new Term( 'qid', self::EXISTING_FOREIGN_ITEM ),
-				'entityId',
-				new ItemId( self::EXISTING_FOREIGN_ITEM ),
-				new Term( self::DEFAULT_LANGUAGE, self::DEFAULT_LABEL ),
-				new Term( self::DEFAULT_LANGUAGE, self::DEFAULT_DESCRIPTION )
-			),
-		];
-
-		$entitySearchHelper = $this->newEntitySearchHelper(
-			[ 'item' => [ 'foreign' ] ]
-		);
-
-		$this->assertEquals(
-			$expectedResults,
-			$entitySearchHelper->getRankedSearchResults(
-				self::EXISTING_FOREIGN_ITEM_WITHOUT_REPOSITORY_PREFIX,
-				'en',
-				'item',
-				10,
-				false,
-				null
-			)
-		);
 	}
 
 	public function testGivenEntityTypeDefinedInMultipleRepos_constructorThrowsException() {
