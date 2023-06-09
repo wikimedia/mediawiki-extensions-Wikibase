@@ -5,8 +5,8 @@ declare( strict_types=1 );
 namespace Wikibase\Repo\Store\Sql;
 
 use DatabaseUpdater;
+use InvalidArgumentException;
 use MediaWiki\Installer\Hook\LoadExtensionSchemaUpdatesHook;
-use MWException;
 use Onoi\MessageReporter\ObservableMessageReporter;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\LegacyAdapterItemLookup;
@@ -291,7 +291,7 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 			}
 		}
 
-		throw new MWException( "Could not find schema script '$name'" );
+		throw new InvalidArgumentException( "Could not find schema script '$name'" );
 	}
 
 	/**

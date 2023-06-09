@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use Language;
+use RuntimeException;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
 /**
@@ -49,7 +50,7 @@ class UserLanguageTest extends ServiceWiringTestCase {
 
 		$wgLang = null;
 
-		$this->expectException( 'MWException' );
+		$this->expectException( RuntimeException::class );
 		$this->getService( 'WikibaseRepo.UserLanguage' );
 	}
 }

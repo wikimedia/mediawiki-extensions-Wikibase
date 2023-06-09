@@ -5,8 +5,8 @@ declare( strict_types = 1 );
 namespace Wikibase\Lib\Tests\Changes;
 
 use CentralIdLookup;
+use LogicException;
 use MediaWiki\User\UserIdentity;
-use MWException;
 use User;
 
 /**
@@ -48,13 +48,13 @@ class MockRepoClientCentralIdLookup extends CentralIdLookup {
 	public function lookupCentralIds(
 		array $idToName, $audience = self::AUDIENCE_PUBLIC, $flags = self::READ_NORMAL
 	): array {
-		throw new MWException( 'Not implemented' );
+		throw new LogicException( 'Not implemented' );
 	}
 
 	public function lookupUserNames(
 		array $nameToId, $audience = self::AUDIENCE_PUBLIC, $flags = self::READ_NORMAL
 	): array {
-		throw new MWException( 'Not implemented' );
+		throw new LogicException( 'Not implemented' );
 	}
 
 	public function localUserFromCentralId(

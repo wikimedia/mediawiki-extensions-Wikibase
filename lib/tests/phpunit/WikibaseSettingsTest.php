@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib\Tests;
 
-use MWException;
+use LogicException;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\WikibaseSettings;
 use Wikimedia\TestingAccessWrapper;
@@ -21,7 +21,7 @@ class WikibaseSettingsTest extends \PHPUnit\Framework\TestCase {
 		if ( WikibaseSettings::isRepoEnabled() ) {
 			$this->assertNotNull( WikibaseSettings::getRepoSettings() );
 		} else {
-			$this->expectException( MWException::class );
+			$this->expectException( LogicException::class );
 			WikibaseSettings::getRepoSettings();
 		}
 	}
@@ -30,7 +30,7 @@ class WikibaseSettingsTest extends \PHPUnit\Framework\TestCase {
 		if ( WikibaseSettings::isClientEnabled() ) {
 			$this->assertNotNull( WikibaseSettings::getClientSettings() );
 		} else {
-			$this->expectException( MWException::class );
+			$this->expectException( LogicException::class );
 			WikibaseSettings::getClientSettings();
 		}
 	}
