@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo;
 
-use MWException;
+use InvalidArgumentException;
 use Wikibase\Lib\DataType;
 
 /**
@@ -27,17 +27,11 @@ class DataTypeSelector {
 	/**
 	 * @param DataType[] $dataTypes
 	 * @param string $languageCode
-	 *
-	 * @throws MWException
 	 */
-	public function __construct( array $dataTypes, $languageCode ) {
-		if ( !is_string( $languageCode ) ) {
-			throw new MWException( '$languageCode should be a string' );
-		}
-
+	public function __construct( array $dataTypes, string $languageCode ) {
 		foreach ( $dataTypes as $dataType ) {
 			if ( !( $dataType instanceof DataType ) ) {
-				throw new MWException( '$dataTypes should only contain instances of Wikibase\Lib\DataType' );
+				throw new InvalidArgumentException( '$dataTypes should only contain instances of ' . DataType::class );
 			}
 		}
 

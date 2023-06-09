@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\Actions;
 
 use MediaWiki\MediaWikiServices;
-use MWException;
+use RuntimeException;
 use Title;
 use User;
 use Wikibase\Repo\Actions\EditEntityAction;
@@ -68,7 +68,7 @@ class EditEntityActionTest extends ActionTestCase {
 		for ( $i = abs( $ofs ); $i > 0; $i -= 1 ) {
 			$rev = $revLookup->getPreviousRevision( $rev );
 			if ( !$rev ) {
-				throw new MWException( 'Page ' . $page->getTitle()->getPrefixedDBkey()
+				throw new RuntimeException( 'Page ' . $page->getTitle()->getPrefixedDBkey()
 					. ' does not have ' . ( abs( $ofs ) + 1 ) . ' revisions' );
 			}
 		}

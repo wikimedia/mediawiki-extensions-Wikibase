@@ -5,9 +5,9 @@ namespace Wikibase\Repo\Tests\Actions;
 use Action;
 use Article;
 use Exception;
+use InvalidArgumentException;
 use MediaWiki\Request\FauxRequest;
 use MediaWikiIntegrationTestCase;
-use MWException;
 use OutputPage;
 use RequestContext;
 use RuntimeException;
@@ -169,19 +169,18 @@ class ActionTestCase extends MediaWikiIntegrationTestCase {
 	 * This calls the show() method on the target action.
 	 *
 	 * @param string|Action $action The action to call; may be an action name or existing instance
-	 * @param WikiPage  $page the wiki page to call the action on
+	 * @param WikiPage $page the wiki page to call the action on
 	 * @param array|null $params request parameters
 	 * @param bool $wasPosted
 	 *
 	 * @return OutputPage
-	 * @throws MWException
 	 */
 	protected function callAction( $action, WikiPage $page, array $params, $wasPosted ) {
 		if ( is_string( $action ) ) {
 			$action = $this->createAction( $action, $page, $params, $wasPosted );
 
 			if ( !$action ) {
-				throw new MWException( "unknown action: $action" );
+				throw new InvalidArgumentException( "unknown action: $action" );
 			}
 		}
 
@@ -214,7 +213,6 @@ class ActionTestCase extends MediaWikiIntegrationTestCase {
 	 * @param array $revisions List of EntityDocument or string. String values represent redirects.
 	 *
 	 * @return Item|EntityRedirect
-	 * @throws MWException
 	 * @throws RuntimeException
 	 */
 	private function createTestContent( array $revisions ) {

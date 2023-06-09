@@ -2,9 +2,6 @@
 
 namespace Wikibase\Lib\Store;
 
-use InvalidArgumentException;
-use MWException;
-use OutOfBoundsException;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 
@@ -30,9 +27,6 @@ interface EntityTitleLookup {
 	 *
 	 * @param EntityId $id
 	 *
-	 * @throws MWException
-	 * @throws OutOfBoundsException
-	 * @throws InvalidArgumentException
 	 * @return Title|null
 	 */
 	public function getTitleForId( EntityId $id );
@@ -44,9 +38,6 @@ interface EntityTitleLookup {
 	 *
 	 * @param EntityId[] $ids
 	 *
-	 * @throws MWException
-	 * @throws OutOfBoundsException
-	 * @throws InvalidArgumentException
 	 * @return (Title|null)[]
 	 */
 	public function getTitlesForIds( array $ids );

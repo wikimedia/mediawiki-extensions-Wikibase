@@ -8,7 +8,6 @@ use HashSiteStore;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\SlotRecord;
 use MediaWikiIntegrationTestCase;
-use MWException;
 use Site;
 use SiteLookup;
 use stdClass;
@@ -273,8 +272,6 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 	 * @param string $flavor
 	 * @param EntityDocument[] $entities
 	 * @param EntityId[] $redirects
-	 *
-	 * @throws MWException
 	 */
 	protected function newDumpGenerator( string $flavor, array $entityRevisions = [], array $redirects = [] ): RdfDumpGenerator {
 		$out = fopen( 'php://output', 'w' );

@@ -6,7 +6,6 @@ use CentralIdLookup;
 use ExternalUserNames;
 use Language;
 use Message;
-use MWException;
 use RecentChange;
 use Title;
 use Wikibase\DataAccess\EntitySourceDefinitions;
@@ -308,7 +307,6 @@ class RecentChangeFactory {
 	 * @param Title|null $target The page we create an edit summary for. Needed to create an article
 	 *         specific edit summary on site link changes. Ignored otherwise.
 	 *
-	 * @throws MWException
 	 * @return string
 	 */
 	private function getEditCommentMulti( EntityChange $change, Title $target = null ) {
@@ -345,7 +343,6 @@ class RecentChangeFactory {
 	 * @param Title|null $target The page we create an edit summary for. Needed to create an article
 	 *         specific edit summary on site link changes. Ignored otherwise.
 	 *
-	 * @throws MWException
 	 * @return string
 	 */
 	private function getEditComment( EntityChange $change, Title $target = null ) {
@@ -387,7 +384,6 @@ class RecentChangeFactory {
 	 * @param string $key
 	 *
 	 * @return Message
-	 * @throws MWException
 	 */
 	private function msg( $key, ...$params ) {
 		if ( isset( $params[0] ) && is_array( $params[0] ) ) {

@@ -6,7 +6,6 @@ namespace Wikibase\Repo\Actions;
 
 use Article;
 use Html;
-use MWException;
 use OutputPage;
 use SpecialPage;
 use ViewAction;
@@ -28,7 +27,6 @@ class ViewEntityAction extends ViewAction {
 	 *
 	 * @param Article $article
 	 * @return bool
-	 * @throws MWException
 	 */
 	public static function onBeforeDisplayNoArticleText( Article $article ) {
 		$namespaceLookup = WikibaseRepo::getLocalEntityNamespaceLookup();

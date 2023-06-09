@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Store;
 
-use MWException;
 use PermissionsError;
 use User;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -124,7 +123,6 @@ interface EntityStore {
 	 * @param EntityId $id the entity to watch
 	 * @param bool $watch whether to watch or unwatch the page.
 	 *
-	 * @throws MWException
 	 * @return void
 	 */
 	public function updateWatchlist( User $user, EntityId $id, $watch );

@@ -9,6 +9,7 @@ use MediaWiki\User\UserOptionsLookup;
 use Message;
 use MWException;
 use ReadOnlyError;
+use RuntimeException;
 use Status;
 use Title;
 use User;
@@ -426,7 +427,6 @@ class MediawikiEditEntity implements EditEntity {
 	 *
 	 * @param EntityDocument $newEntity
 	 *
-	 * @throws MWException
 	 * @return null|EntityDocument The patched Entity, or null if patching failed.
 	 */
 	private function fixEditConflict( EntityDocument $newEntity ) {
@@ -650,7 +650,6 @@ class MediawikiEditEntity implements EditEntity {
 	 *
 	 * @return Status
 	 *
-	 * @throws MWException
 	 * @throws ReadOnlyError
 	 *
 	 * @see    WikiPage::doUserEditContent
@@ -825,12 +824,10 @@ class MediawikiEditEntity implements EditEntity {
 	 * @todo move to separate service
 	 *
 	 * @param bool $watch whether to watch or unwatch the page.
-	 *
-	 * @throws MWException
 	 */
 	private function updateWatchlist( $watch ) {
 		if ( $this->getTitle() === null ) {
-			throw new MWException( 'Title not yet known!' );
+			throw new RuntimeException( 'Title not yet known!' );
 		}
 
 		$this->entityStore->updateWatchlist( $this->user, $this->getEntityId(), $watch );

@@ -11,7 +11,6 @@ use MediaWiki\Revision\RevisionStore;
 use MediaWiki\Revision\SlotRecord;
 use MediaWiki\User\ActorNormalization;
 use MediaWiki\Watchlist\WatchlistManager;
-use MWException;
 use RecentChange;
 use Status;
 use Title;
@@ -559,7 +558,6 @@ class WikiPageEntityStore implements EntityStore {
 	 * @param bool $watch whether to watch or unwatch the page.
 	 *
 	 * @throws InvalidArgumentException
-	 * @throws MWException
 	 *
 	 * @note keep in sync with logic in \MediaWiki\EditPage\EditPage
 	 */

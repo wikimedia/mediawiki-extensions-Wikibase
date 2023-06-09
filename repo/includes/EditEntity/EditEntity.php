@@ -148,7 +148,6 @@ interface EditEntity {
 	 * Success or failure are reported via the Status object returned by this method.
 	 *
 	 * @todo $flags here should ideally not refer to EDIT_ constants from mediawiki core.
-	 * @todo This shouldn't throw MWExceptions
 	 *
 	 * @param EntityDocument $newEntity
 	 * @param string $summary The edit summary.
@@ -163,7 +162,6 @@ interface EditEntity {
 	 *
 	 * @return Status
 	 *
-	 * @throws MWException
 	 * @throws ReadOnlyError
 	 *
 	 * @see    WikiPage::doUserEditContent

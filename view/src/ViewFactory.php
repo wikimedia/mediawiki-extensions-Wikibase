@@ -204,7 +204,6 @@ class ViewFactory {
 	 * @param CacheableEntityTermsView $entityTermsView
 	 *
 	 * @return ItemView
-	 * @throws \MWException
 	 */
 	public function newItemView(
 		Language $language,
@@ -253,7 +252,6 @@ class ViewFactory {
 	 * @param CacheableEntityTermsView $entityTermsView
 	 *
 	 * @return PropertyView
-	 * @throws \MWException
 	 */
 	public function newPropertyView(
 		Language $language,
