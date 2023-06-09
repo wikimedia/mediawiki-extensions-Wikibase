@@ -14,15 +14,12 @@ interface EntityParserOutputGenerator {
 	/**
 	 * Creates the parser output for the given entity revision.
 	 *
-	 * @param EntityRevision $entityRevision
-	 * @param bool $generateHtml
-	 *
 	 * @throws InvalidArgumentException
 	 * @return ParserOutput
 	 */
 	public function getParserOutput(
 		EntityRevision $entityRevision,
-		$generateHtml = true
+		bool $generateHtml = true
 	);
 
 }
