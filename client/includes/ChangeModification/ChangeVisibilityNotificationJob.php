@@ -60,12 +60,11 @@ class ChangeVisibilityNotificationJob extends ChangeModificationNotificationJob 
 		$dbw = $this->clientDb->connections()->getWriteConnection();
 
 		foreach ( array_chunk( $relevantChanges, $this->batchSize ) as $rcIdBatch ) {
-			$dbw->update(
-				'recentchanges',
-				[ 'rc_deleted' => $visibilityBitFlag ],
-				[ 'rc_id' => $rcIdBatch ],
-				__METHOD__
-			);
+			$dbw->newUpdateQueryBuilder()
+				->update( 'recentchanges' )
+				->set( [ 'rc_deleted' => $visibilityBitFlag ] )
+				->where( [ 'rc_id' => $rcIdBatch ] )
+				->caller( __METHOD__ )->execute();
 
 			$this->clientDb->replication()->waitForAllAffectedClusters();
 		}

@@ -57,12 +57,11 @@ class SqlChangeStore implements ChangeStore {
 		$dbw = $this->repoDomainDb->connections()->getWriteConnection();
 		$values = $this->getValues( $change, $dbw );
 
-		$dbw->update(
-			'wb_changes',
-			$values,
-			[ 'change_id' => $change->getId() ],
-			__METHOD__
-		);
+		$dbw->newUpdateQueryBuilder()
+			->update( 'wb_changes' )
+			->set( $values )
+			->where( [ 'change_id' => $change->getId() ] )
+			->caller( __METHOD__ )->execute();
 	}
 
 	private function insertChange( ChangeRow $change ) {

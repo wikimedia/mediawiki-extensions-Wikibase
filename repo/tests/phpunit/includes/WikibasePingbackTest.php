@@ -191,6 +191,10 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function populateSiteStats() {
-		$this->db->update( 'site_stats', [ 'ss_total_pages' => 11 ], [ 'ss_row_id' => 1 ], __METHOD__ );
+		$this->db->newUpdateQueryBuilder()
+			->update( 'site_stats' )
+			->set( [ 'ss_total_pages' => 11 ] )
+			->where( [ 'ss_row_id' => 1 ] )
+			->caller( __METHOD__ )->execute();
 	}
 }
