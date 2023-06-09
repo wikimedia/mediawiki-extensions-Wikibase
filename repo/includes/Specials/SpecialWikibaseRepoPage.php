@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Specials;
 
-use MWException;
 use RuntimeException;
 use Status;
 use Title;
@@ -160,7 +159,6 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	/**
 	 * @param EntityId $id
 	 *
-	 * @throws MWException
 	 * @return null|Title
 	 */
 	protected function getEntityTitle( EntityId $id ) {

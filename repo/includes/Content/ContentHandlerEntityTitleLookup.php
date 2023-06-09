@@ -6,7 +6,6 @@ namespace Wikibase\Repo\Content;
 
 use InvalidArgumentException;
 use MediaWiki\Interwiki\InterwikiLookup;
-use MWException;
 use OutOfBoundsException;
 use Title;
 use Wikibase\DataAccess\DatabaseEntitySource;
@@ -57,7 +56,6 @@ class ContentHandlerEntityTitleLookup implements EntityTitleStoreLookup {
 	/**
 	 * Returns the Title object for the item with provided id.
 	 *
-	 * @throws MWException
 	 * @throws OutOfBoundsException
 	 * @throws InvalidArgumentException
 	 */
@@ -101,7 +99,6 @@ class ContentHandlerEntityTitleLookup implements EntityTitleStoreLookup {
 	 *
 	 * @param EntityId[] $ids
 	 *
-	 * @throws MWException
 	 * @throws OutOfBoundsException
 	 * @throws InvalidArgumentException
 	 * @return Title[]

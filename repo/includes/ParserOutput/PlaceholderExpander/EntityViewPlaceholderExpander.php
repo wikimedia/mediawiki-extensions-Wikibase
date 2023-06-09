@@ -5,8 +5,6 @@ namespace Wikibase\Repo\ParserOutput\PlaceholderExpander;
 use InvalidArgumentException;
 use MediaWiki\User\UserIdentity;
 use MediaWiki\User\UserOptionsLookup;
-use MWException;
-use RuntimeException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\DescriptionsProvider;
@@ -130,13 +128,7 @@ class EntityViewPlaceholderExpander implements PlaceholderExpander {
 	 * @return string HTML to be substituted for the placeholder in the output.
 	 */
 	public function getHtmlForPlaceholder( $name ): string {
-		try {
-			return $this->expandPlaceholder( $name );
-		} catch ( MWException | RuntimeException $ex ) {
-			wfWarn( "Expansion of $name failed: " . $ex->getMessage() );
-		}
-
-		return '';
+		return $this->expandPlaceholder( $name );
 	}
 
 	/**

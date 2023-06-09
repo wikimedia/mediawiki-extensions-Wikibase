@@ -8,7 +8,6 @@ use ArrayIterator;
 use InvalidArgumentException;
 use LogicException;
 use MediaWiki\Logger\LoggerFactory;
-use MWException;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
 use Traversable;
@@ -19,7 +18,6 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\Rdbms\ClientDomainDb;
-use Wikimedia\Rdbms\DBUnexpectedError;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\IReadableDatabase;
 use Wikimedia\Rdbms\SelectQueryBuilder;
@@ -99,8 +97,6 @@ class EntityUsageTable {
 	 * @param EntityUsage[] $usages
 	 *
 	 * @return int[] affected row ids
-	 * @throws DBUnexpectedError
-	 * @throws MWException
 	 */
 	private function getAffectedRowIds( int $pageId, array $usages ): array {
 		$usageConditions = [];

@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Store\Sql;
 
-use MWException;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
@@ -56,12 +55,7 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 			throw new EntityRedirectLookupException( $targetId, null, $ex );
 		}
 
-		try {
-			$dbr = $this->repoDb->connections()->getReadConnection();
-		} catch ( MWException $ex ) {
-			throw new EntityRedirectLookupException( $targetId, null, $ex );
-		}
-
+		$dbr = $this->repoDb->connections()->getReadConnection();
 		$res = $dbr->newSelectQueryBuilder()
 			->select( [ 'page_namespace', 'page_title' ] )
 			->from( 'page' )
@@ -107,14 +101,10 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 			throw new EntityRedirectLookupException( $entityId, null, $ex );
 		}
 
-		try {
-			if ( $forUpdate === EntityRedirectLookup::FOR_UPDATE ) {
-				$db = $this->repoDb->connections()->getWriteConnection();
-			} else {
-				$db = $this->repoDb->connections()->getReadConnection();
-			}
-		} catch ( MWException $ex ) {
-			throw new EntityRedirectLookupException( $entityId, null, $ex );
+		if ( $forUpdate === EntityRedirectLookup::FOR_UPDATE ) {
+			$db = $this->repoDb->connections()->getWriteConnection();
+		} else {
+			$db = $this->repoDb->connections()->getReadConnection();
 		}
 
 		$row = $db->newSelectQueryBuilder()

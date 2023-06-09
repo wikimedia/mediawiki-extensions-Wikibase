@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Hooks;
 
 use Content;
+use JobQueueError;
 use JobQueueGroup;
 use MediaWiki\Hook\PageMoveCompleteHook;
 use MediaWiki\JobQueue\JobQueueGroupFactory;
@@ -13,7 +14,6 @@ use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\Page\Hook\ArticleDeleteCompleteHook;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\User\UserIdentity;
-use MWException;
 use Psr\Log\LoggerInterface;
 use Title;
 use User;
@@ -188,7 +188,7 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 			if ( $titleProperty ) {
 				$title->$titleProperty = true;
 			}
-		} catch ( MWException $e ) {
+		} catch ( JobQueueError $e ) {
 			// This is not a reason to let an exception bubble up, we just
 			// show a message to the user that the Wikibase item needs to be
 			// manually updated.

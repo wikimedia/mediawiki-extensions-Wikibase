@@ -58,7 +58,6 @@ class CommonsInlineImageFormatter implements ValueFormatter {
 	 * @param LanguageFactory $languageFactory
 	 * @param FormatterOptions|null $options
 	 * @param RepoGroup|null $repoGroup
-	 * @throws \MWException
 	 */
 	public function __construct(
 		ParserOptions $parserOptions,

@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Dumpers;
 
 use InvalidArgumentException;
 use MWContentSerializationException;
-use MWException;
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -185,7 +184,7 @@ class JsonDumpGenerator extends DumpGenerator {
 	 * @param mixed $data
 	 *
 	 * @return string
-	 * @throws MWException
+	 * @throws StorageException
 	 */
 	public function encode( $data ) {
 		$json = json_encode( $data, $this->jsonFlags );

@@ -9,7 +9,6 @@ use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
 use Language;
 use Message;
-use MWException;
 use SiteLookup;
 use Title;
 
@@ -319,7 +318,6 @@ class SiteLinkCommentCreator {
 	 * @param string $key
 	 *
 	 * @return Message
-	 * @throws MWException
 	 */
 	private function msg( $key, ...$params ) {
 		if ( isset( $params[0] ) && is_array( $params[0] ) ) {

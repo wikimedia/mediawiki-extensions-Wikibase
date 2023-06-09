@@ -5,7 +5,6 @@ namespace Wikibase\Client\Changes;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOp;
 use Exception;
-use MWException;
 use Psr\Log\LoggerInterface;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Changes\Change;
@@ -15,6 +14,7 @@ use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Changes\ItemChange;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\LookupConstants;
+use Wikibase\Lib\Store\StorageException;
 
 /**
  * A transformer for lists of EntityChanges that combines runs of changes into a single change.
@@ -131,7 +131,7 @@ class ChangeRunCoalescer {
 	 * @param EntityId $entityId
 	 * @param EntityChange[] $changes The changes to combine.
 	 *
-	 * @throws MWException
+	 * @throws MergeFailedException
 	 * @return EntityChange a combined change representing the activity from all the original changes.
 	 */
 	private function mergeChanges( EntityId $entityId, array $changes ) {
@@ -168,17 +168,27 @@ class ChangeRunCoalescer {
 		$parentRevId = $firstmeta['parent_id'];
 		$latestRevId = $lastmeta['rev_id'];
 
-		$entityRev = $this->entityRevisionLookup->getEntityRevision(
-			$entityId,
-			$latestRevId,
-			LookupConstants::LATEST_FROM_REPLICA_WITH_FALLBACK
-		);
-
-		if ( !$entityRev ) {
-			throw new MWException( "Failed to load revision $latestRevId of $entityId" );
+		try {
+			$entityRev = $this->entityRevisionLookup->getEntityRevision(
+				$entityId,
+				$latestRevId,
+				LookupConstants::LATEST_FROM_REPLICA_WITH_FALLBACK
+			);
+		} catch ( StorageException $e ) {
+			throw new MergeFailedException( "Failed to load revision $latestRevId of $entityId", 0, $e );
 		}
 
-		$parentRev = $parentRevId ? $this->entityRevisionLookup->getEntityRevision( $entityId, $parentRevId ) : null;
+		if ( !$entityRev ) {
+			throw new MergeFailedException( "Failed to load revision $latestRevId of $entityId" );
+		}
+
+		try {
+			$parentRev = $parentRevId
+				? $this->entityRevisionLookup->getEntityRevision( $entityId, $parentRevId )
+				: null;
+		} catch ( StorageException $e ) {
+			throw new MergeFailedException( "Failed to load parent revision $parentRevId", 0, $e );
+		}
 
 		//XXX: we could avoid loading the entity data by merging the diffs programatically
 		//     instead of re-calculating.
@@ -245,6 +255,14 @@ class ChangeRunCoalescer {
 		$currentAction = null;
 		$breakNext = false;
 
+		$logException = static function ( MergeFailedException $ex ): void {
+			$previousEx = $ex->getPrevious();
+			$logMsg = $ex->getMessage();
+			if ( $previousEx ) {
+				$logMsg .= '. Previous message: ' . $previousEx->getMessage();
+			}
+			wfWarn( $logMsg );
+		};
 		foreach ( $changes as $change ) {
 			try {
 				$action = $change->getAction();
@@ -270,10 +288,10 @@ class ChangeRunCoalescer {
 					if ( !empty( $currentRun ) ) {
 						try {
 							$coalesced[] = $this->mergeChanges( $entityId, $currentRun );
-						} catch ( MWException $ex ) {
+						} catch ( MergeFailedException $ex ) {
 							// Something went wrong while trying to merge the changes.
 							// Just keep the original run.
-							wfWarn( $ex->getMessage() );
+							$logException( $ex );
 							$coalesced = array_merge( $coalesced, $currentRun );
 						}
 					}
@@ -293,10 +311,10 @@ class ChangeRunCoalescer {
 		if ( !empty( $currentRun ) ) {
 			try {
 				$coalesced[] = $this->mergeChanges( $entityId, $currentRun );
-			} catch ( MWException $ex ) {
+			} catch ( MergeFailedException $ex ) {
 				// Something went wrong while trying to merge the changes.
 				// Just keep the original run.
-				wfWarn( $ex->getMessage() );
+				$logException( $ex );
 				$coalesced = array_merge( $coalesced, $currentRun );
 			}
 		}

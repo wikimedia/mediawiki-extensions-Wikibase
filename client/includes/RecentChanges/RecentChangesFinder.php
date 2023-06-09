@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\RecentChanges;
 
-use MWException;
 use RecentChange;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 
@@ -27,7 +26,6 @@ class RecentChangesFinder {
 	 *
 	 * @param RecentChange $change
 	 *
-	 * @throws MWException
 	 * @return int|null
 	 */
 	public function getRecentChangeId( RecentChange $change ) {
