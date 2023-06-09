@@ -1,7 +1,1 @@
-[
-	{
-		"path": "/wikibase/v0/entities/properties/{property_id}",
-		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetPropertyRouteHandler::factory"
-	}
-]
+[ ]
