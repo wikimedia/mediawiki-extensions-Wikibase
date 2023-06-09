@@ -240,19 +240,20 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 		$this->assertMatchesRegularExpression( $expectedPattern, $formatter->formatEntityId( new ItemId( 'Q123' ) ) );
 	}
 
-	public function testGivenForeignItemId_fullUrlIsUsedInTheOutput() {
+	public function testGivenItemIdForInterwikiLink_fullUrlIsUsedInTheOutput() {
 		$this->givenUserLanguageIs( 'en' );
-		$this->givenItemExists( 'foo:Q1' )->andIsNotLocal();
-		$this->givenItemHasLabel( 'foo:Q1', 'en', 'Something' );
+		$this->givenItemExists( 'Q1' )->andIsDefinedOnNonLocalWikiPage( 'foo:Q1' );
+		$this->givenItemHasLabel( 'Q1', 'en', 'Something' );
 
 		$formatter = $this->createFormatter();
-		$result = $formatter->formatEntityId( new ItemId( 'foo:Q1' ) );
+		$result = $formatter->formatEntityId( new ItemId( 'Q1' ) );
 
 		$isFullUrl = startsWith( 'http' );
 		$this->assertThatHamcrest(
 			$result,
 			is( htmlPiece( havingChild(
-				withAttribute( 'href' )->havingValue( $isFullUrl )
+				both( withAttribute( 'href' )->havingValue( $isFullUrl ) )
+					->andAlso( withAttribute( 'title' )->havingValue( 'foo:Q1' ) )
 	   ) ) ) );
 	}
 
@@ -408,19 +409,20 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 		$this->assertStringContainsString( $fallbackMarker, $result );
 	}
 
-	public function testGivenForeignPropertyId_fullUrlIsUsedInTheOutput() {
+	public function testGivenPropertyIdForInterwikiLink_fullUrlIsUsedInTheOutput() {
 		$this->givenUserLanguageIs( 'en' );
-		$this->givenPropertyExists( 'foo:P1' )->andIsNotLocal();
-		$this->givenPropertyHasLabel( 'foo:P1', 'en', 'Something' );
+		$this->givenPropertyExists( 'P1' )->andIsDefinedOnNonLocalWikiPage( 'foo:P1' );
+		$this->givenPropertyHasLabel( 'P1', 'en', 'Something' );
 
 		$formatter = $this->createFormatter();
-		$result = $formatter->formatEntityId( new NumericPropertyId( 'foo:P1' ) );
+		$result = $formatter->formatEntityId( new NumericPropertyId( 'P1' ) );
 
 		$isFullUrl = startsWith( 'http' );
 		$this->assertThatHamcrest(
 			$result,
 			is( htmlPiece( havingChild(
-				withAttribute( 'href' )->havingValue( $isFullUrl )
+				both( withAttribute( 'href' )->havingValue( $isFullUrl ) )
+					->andAlso( withAttribute( 'title' )->havingValue( 'foo:P1' ) )
 			) ) ) );
 	}
 
@@ -541,6 +543,7 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 		$title = $this->createMock( Title::class );
 		$isLocal = true;
 		$isRedirect = false;
+		$prefixedTitleText = $itemId;
 		$title->method( 'isLocal' )->willReturnCallback( function () use ( &$isLocal ) {
 			return $isLocal;
 		} );
@@ -550,26 +553,30 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 		$title->method( 'isKnown' )->willReturn( true );
 		$title->method( 'isRedirect' )->willReturn( false );
 		$title->method( 'getLocalURL' )->willReturn( $this->itemPageUrl( $itemId ) );
-		$title->method( 'getPrefixedText' )->willReturn( $itemId );
+		$title->method( 'getPrefixedText' )->willReturnCallback( function () use ( &$prefixedTitleText ) {
+			return $prefixedTitleText;
+		} );
 
 		$this->entityTitleLookup->method( 'getTitleForId' )
 			->with( new ItemId( $itemId ) )
 			->willReturn( $title );
 
-		return new class( $title, $isLocal, $isRedirect ) {
+		return new class( $title, $isLocal, $isRedirect, $prefixedTitleText ) {
 
-			public function __construct( $title, &$isLocal, &$isRedirect ) {
+			public function __construct( $title, &$isLocal, &$isRedirect, &$prefixedTitleText ) {
 				$this->title = $title;
 				$this->isLocal = &$isLocal;
 				$this->isRedirect = &$isRedirect;
+				$this->prefixedTitleText = &$prefixedTitleText;
 			}
 
 			public function andIsRedirect() {
 				$this->isRedirect = true;
 			}
 
-			public function andIsNotLocal() {
+			public function andIsDefinedOnNonLocalWikiPage( string $interwikiTitle ) {
 				$this->isLocal = false;
+				$this->prefixedTitleText = $interwikiTitle;
 				$this->title->method( 'getFullURL' )->willReturn( 'http://some.url/' );
 			}
 
@@ -606,27 +613,32 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 	private function givenPropertyExists( $propertyId ) {
 		$title = $this->createMock( Title::class );
 		$isLocal = true;
+		$prefixedTitleText = $propertyId;
 		$title->method( 'isLocal' )->willReturnCallback( function () use ( &$isLocal ) {
 			return $isLocal;
 		} );
 		$title->method( 'isKnown' )->willReturn( true );
 		$title->method( 'isRedirect' )->willReturn( false );
 		$title->method( 'getLocalURL' )->willReturn( $this->propertyPageUrl( $propertyId ) );
-		$title->method( 'getPrefixedText' )->willReturn( $propertyId );
+		$title->method( 'getPrefixedText' )->willReturnCallback( function () use ( &$prefixedTitleText ) {
+			return $prefixedTitleText;
+		} );
 
 		$this->entityTitleLookup->method( 'getTitleForId' )
 			->with( new NumericPropertyId( $propertyId ) )
 			->willReturn( $title );
 
-		return new class( $title, $isLocal ) {
+		return new class( $title, $isLocal, $prefixedTitleText ) {
 
-			public function __construct( $title, &$isLocal ) {
+			public function __construct( $title, &$isLocal, &$prefixedTitleText ) {
 				$this->title = $title;
 				$this->isLocal = &$isLocal;
+				$this->prefixedTitleText = &$prefixedTitleText;
 			}
 
-			public function andIsNotLocal() {
+			public function andIsDefinedOnNonLocalWikiPage( string $interwikiTitle ) {
 				$this->isLocal = false;
+				$this->prefixedTitleText = $interwikiTitle;
 				$this->title->method( 'getFullURL' )->willReturn( 'http://some.url/' );
 			}
 
