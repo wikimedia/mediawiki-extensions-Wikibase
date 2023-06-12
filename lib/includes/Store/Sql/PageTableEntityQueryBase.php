@@ -36,20 +36,26 @@ abstract class PageTableEntityQueryBase implements PageTableEntityQuery {
 
 	/**
 	 * @param array $fields Fields to select
-	 * @param array $joins Joins to use, Keys must be table names.
+	 * @param array|null $revisionJoinConds If non-null, perform an INNER JOIN
+	 * against the revision table on these join conditions.
 	 * @param EntityId[] $entityIds EntityIds to select
 	 * @param IReadableDatabase $db DB to query on
 	 * @return stdClass[] Array of rows with keys of their entity ID serializations
 	 */
 	public function selectRows(
 		array $fields,
-		array $joins,
+		?array $revisionJoinConds,
 		array $entityIds,
 		IReadableDatabase $db
 	): array {
-		$usesRevisionTable = array_key_exists( 'revision', $joins );
-		list( $where, $slotJoinConds ) = $this->getQueryInfo( $entityIds, $usesRevisionTable, $db );
-		$joins = array_merge( $joins, $slotJoinConds );
+		$usesRevisionTable = $revisionJoinConds !== null;
+		list( $where, $joins ) = $this->getQueryInfo( $entityIds, $usesRevisionTable, $db );
+		if ( $revisionJoinConds !== null ) {
+			$joins = array_merge(
+				[ 'revision' => [ 'INNER JOIN', $revisionJoinConds ] ],
+				$joins
+			);
+		}
 		$vars = array_merge( $fields, $this->getFieldsNeededForMapping() );
 		$table = array_merge( [ 'page' ], array_keys( $joins ) );
 

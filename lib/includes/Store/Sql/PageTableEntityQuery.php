@@ -17,14 +17,15 @@ interface PageTableEntityQuery {
 
 	/**
 	 * @param array $fields Fields to select
-	 * @param array $joins Joins to use, Keys must be table names.
+	 * @param array|null $revisionJoinConds If non-null, perform an INNER JOIN
+	 * against the revision table on these join conditions.
 	 * @param EntityId[] $entityIds EntityIds to select
 	 * @param IReadableDatabase $db DB to query on
 	 * @return \stdClass[] Array of rows with keys of their entity ID serializations
 	 */
 	public function selectRows(
 		array $fields,
-		array $joins,
+		?array $revisionJoinConds,
 		array $entityIds,
 		IReadableDatabase $db
 	);

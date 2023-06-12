@@ -52,12 +52,12 @@ class EntityIdLocalPartPageTableEntityQueryUnitTest extends TestCase {
 		// No join on the slots table should happen, as we are not looking at a slotted entity
 		$database->method( 'select' )
 			->with(
-			[ "page", "extraTable" ],
+			[ "page", "revision" ],
 			[ "extraField", "page_title" ],
 			"combined-condition",
 			PageTableEntityQueryBase::class . "::selectRows",
 			[],
-			[ 'extraTable' => "extraJoin" ]
+			[ 'revision' => [ 'INNER JOIN', [ 'rev_id=extraField' ] ] ]
 		)->willReturn(
 		// A Traversable object
 			new ArrayObject(
@@ -69,7 +69,7 @@ class EntityIdLocalPartPageTableEntityQueryUnitTest extends TestCase {
 
 		$rows = $query->selectRows(
 			[ 'extraField' ],
-			[ 'extraTable' => 'extraJoin' ],
+			[ 'rev_id=extraField' ],
 			[ $this->getMockEntityId( 'item', 'Q1' ) ],
 			$database
 		);
@@ -112,12 +112,15 @@ class EntityIdLocalPartPageTableEntityQueryUnitTest extends TestCase {
 		// Extra fields, tables and joins passed to the method should also be requested
 		$database->method( 'select' )
 			->with(
-			[ "page", "extraTable", "slots" ],
+			[ "page", "revision", "slots" ],
 			[ "extraField", "page_title" ],
 			"combined-condition",
 			PageTableEntityQueryBase::class . "::selectRows",
 			[],
-			[ 'extraTable' => "extraJoin", "slots" => [ "INNER JOIN", "page_latest=slot_revision_id" ] ]
+			[
+				'revision' => [ 'INNER JOIN', [ 'rev_id=extraField' ] ],
+				"slots" => [ "INNER JOIN", "rev_id=slot_revision_id" ],
+			]
 		)->willReturn(
 		// A Traversable object
 			new ArrayObject(
@@ -130,7 +133,7 @@ class EntityIdLocalPartPageTableEntityQueryUnitTest extends TestCase {
 
 		$rows = $query->selectRows(
 			[ 'extraField' ],
-			[ 'extraTable' => 'extraJoin' ],
+			[ 'rev_id=extraField' ],
 			[ $this->getMockEntityId( 'item', 'Q1' ), $this->getMockEntityId( 'other', 'ooo123' ) ],
 			$database
 		);

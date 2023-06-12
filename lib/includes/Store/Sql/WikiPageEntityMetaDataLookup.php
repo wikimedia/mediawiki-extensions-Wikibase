@@ -232,7 +232,7 @@ class WikiPageEntityMetaDataLookup implements WikiPageEntityMetaDataAccessor {
 	private function selectRevisionInformationById( EntityId $entityId, int $revisionId, IReadableDatabase $db ) {
 		$rows = $this->pageTableEntityQuery->selectRows(
 			$this->selectFields(),
-			[ 'revision' => [ 'INNER JOIN', [ 'rev_page=page_id', 'rev_id' => $revisionId ] ] ],
+			[ 'rev_page=page_id', 'rev_id' => $revisionId ],
 			[ $entityId ],
 			$db
 		);
@@ -255,7 +255,7 @@ class WikiPageEntityMetaDataLookup implements WikiPageEntityMetaDataAccessor {
 	private function selectRevisionInformationMultiple( array $entityIds, IReadableDatabase $db ): array {
 		$rows = $this->pageTableEntityQuery->selectRows(
 			$this->selectFields(),
-			[ 'revision' => [ 'INNER JOIN', 'page_latest=rev_id' ] ],
+			[ 'page_latest=rev_id' ],
 			$entityIds,
 			$db
 		);
@@ -278,7 +278,7 @@ class WikiPageEntityMetaDataLookup implements WikiPageEntityMetaDataAccessor {
 	private function selectLatestRevisionIdsMultiple( array $entityIds, IReadableDatabase $db ): array {
 		$rows = $this->pageTableEntityQuery->selectRows(
 			[ 'page_title', 'page_latest', 'page_is_redirect' ],
-			[],
+			null,
 			$entityIds,
 			$db
 		);

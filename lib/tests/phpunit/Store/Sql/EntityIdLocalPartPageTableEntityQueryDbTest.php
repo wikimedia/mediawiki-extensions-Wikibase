@@ -110,19 +110,19 @@ class EntityIdLocalPartPageTableEntityQueryDbTest extends MediaWikiIntegrationTe
 		return [
 			[
 				[],
-				[],
+				null,
 				[ $this->getMockEntityId( 'entityTypeOne', 'localPartOne' ) ],
 				[ 'localPartOne' => (object)[ 'page_title' => 'localPartOne' ] ],
 			],
 			[
 				[],
-				[],
+				null,
 				[ $this->getMockEntityId( 'entityTypeOne', 'localPartNone' ) ],
 				[],
 			],
 			[
 				[ 'page_namespace' ],
-				[],
+				null,
 				[ $this->getMockEntityId( 'entityTypeOne', 'localPartOne' ) ],
 				[
 					'localPartOne' => (object)[
@@ -133,7 +133,7 @@ class EntityIdLocalPartPageTableEntityQueryDbTest extends MediaWikiIntegrationTe
 			],
 			[
 				[ 'page_namespace' ],
-				[],
+				null,
 				[ $this->getMockEntityId( 'entityTypeTwo', 'localPartTwo' ) ],
 				[
 					'localPartTwo' => (object)[
@@ -144,7 +144,7 @@ class EntityIdLocalPartPageTableEntityQueryDbTest extends MediaWikiIntegrationTe
 			],
 			[
 				[ 'page_namespace' ],
-				[],
+				null,
 				[
 					$this->getMockEntityId( 'entityTypeOne', 'localPartOne' ),
 					$this->getMockEntityId( 'entityTypeTwo', 'localPartTwo' ),
@@ -162,7 +162,7 @@ class EntityIdLocalPartPageTableEntityQueryDbTest extends MediaWikiIntegrationTe
 			],
 			[
 				[ 'page_namespace' ],
-				[ 'revision' => [ 'INNER JOIN', [ 'rev_page=page_id', 'rev_id' => 220 ] ] ],
+				[ 'rev_page=page_id', 'rev_id' => 220 ],
 				[
 					$this->getMockEntityId( 'entityTypeTwo', 'localPartTwo' ),
 				],
@@ -174,11 +174,11 @@ class EntityIdLocalPartPageTableEntityQueryDbTest extends MediaWikiIntegrationTe
 	/**
 	 * @dataProvider provideSelectRows
 	 */
-	public function testSelectRows( $fields, $joins, $entityIds, $expected ) {
+	public function testSelectRows( $fields, $revisionJoinConds, $entityIds, $expected ) {
 		$query = $this->getQuery();
 		$rows = $query->selectRows(
 			$fields,
-			$joins,
+			$revisionJoinConds,
 			$entityIds,
 			$this->db
 		);
