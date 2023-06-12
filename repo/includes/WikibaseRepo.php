@@ -286,6 +286,11 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.EntityArticleIdLookup' );
 	}
 
+	public static function getMobileSite( ContainerInterface $services = null ): bool {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.MobileSite' );
+	}
+
 	public static function getEntityExistenceChecker( ContainerInterface $services = null ): EntityExistenceChecker {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.EntityExistenceChecker' );
