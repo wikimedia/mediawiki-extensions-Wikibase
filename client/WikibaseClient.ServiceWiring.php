@@ -604,8 +604,8 @@ return [
 	},
 
 	'WikibaseClient.MobileSite' => function ( MediaWikiServices $services ): bool {
-		if ( $services->hasService( 'MobileFrontend.Context' ) ) {
-			$mobileContext = $services->getService( 'MobileFrontend.Context' );
+		if ( $services->has( 'MobileFrontend.Context' ) ) {
+			$mobileContext = $services->get( 'MobileFrontend.Context' );
 			return $mobileContext->shouldDisplayMobileView();
 		}
 		return false;
