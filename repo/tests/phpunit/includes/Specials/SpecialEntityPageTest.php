@@ -10,7 +10,6 @@ use MediaWiki\Request\FauxRequest;
 use SpecialPageExecutor;
 use SpecialPageTestBase;
 use Title;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Specials\SpecialEntityPage;
@@ -29,7 +28,6 @@ use Wikibase\Repo\Specials\SpecialEntityPage;
 class SpecialEntityPageTest extends SpecialPageTestBase {
 
 	private const LOCAL_ENTITY_PAGE_URL = 'https://local.wiki/local-entity-page';
-	private const FOREIGN_ENTITY_PAGE_URL = 'https://foreign.wiki/Special:EntityPage/entity-id';
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -42,23 +40,14 @@ class SpecialEntityPageTest extends SpecialPageTestBase {
 	 * @return EntityTitleLookup
 	 */
 	private function getEntityTitleLookup() {
+		$title = $this->createMock( Title::class );
+		$title->method( 'getFullURL' )
+			->willReturnCallback(
+				fn( $query ) => wfAppendQuery( self::LOCAL_ENTITY_PAGE_URL, $query )
+			);
+
 		$titleLookup = $this->createMock( EntityTitleLookup::class );
-
-		$titleLookup->method( 'getTitleForId' )
-			->willReturnCallback( function ( EntityId $id ) {
-				$title = $this->createMock( Title::class );
-
-				$title->method( 'getFullURL' )
-					->willReturnCallback(
-						function ( $query ) use ( $id ) {
-							$base = $id->isForeign()
-								? self::FOREIGN_ENTITY_PAGE_URL
-								: self::LOCAL_ENTITY_PAGE_URL;
-							return wfAppendQuery( $base, $query );
-						} );
-
-				return $title;
-			} );
+		$titleLookup->method( 'getTitleForId' )->willReturn( $title );
 
 		return $titleLookup;
 	}
@@ -117,29 +106,6 @@ class SpecialEntityPageTest extends SpecialPageTestBase {
 		$this->assertSame( 301, $response->getStatusCode() );
 		$expectedUrl = self::LOCAL_ENTITY_PAGE_URL . $expectedUrlSuffix;
 		$this->assertSame( $expectedUrl, $response->getHeader( 'Location' ) );
-	}
-
-	public static function provideForeignEntityIdArgumentsToSpecialPage() {
-		return [
-			'id as a sub page' => [ 'foo:Q100', [] ],
-			'id as a request parameter' => [ null, [ 'id' => 'foo:Q100' ] ],
-		];
-	}
-
-	/**
-	 * @dataProvider provideForeignEntityIdArgumentsToSpecialPage
-	 */
-	public function testGivenForeignEntityId_pageRedirectsToOtherReposSpecialEntityPage(
-		$subPage,
-		array $requestParams
-	) {
-		$request = new FauxRequest( $requestParams );
-
-		/** @var FauxResponse $response */
-		list( , $response ) = $this->executeSpecialPage( $subPage, $request );
-
-		$this->assertSame( 301, $response->getStatusCode() );
-		$this->assertSame( self::FOREIGN_ENTITY_PAGE_URL, $response->getHeader( 'Location' ) );
 	}
 
 	public static function provideInvalidEntityIdArgumentsToSpecialPage() {
