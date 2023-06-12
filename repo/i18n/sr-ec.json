@@ -290,7 +290,7 @@
 	"wikibase-parse-error-quantity": "Вредност количине је неисправно формирана.",
 	"wikibase-parse-error-time": "Вредност за време је погрешно форматирана.",
 	"special-redirectentity": "Преусмеравање ентитета",
-	"wikibase-redirectentity-success": "$1 је успешно преусмерено на $2.",
+	"wikibase-redirectentity-success": "$1 је преусмерено на $2.",
 	"wikibase-redirectentity-submit": "Преусмеравање",
 	"wikibase-redirect-origin-not-empty": "Није могуће направити преусмеравање на непразан ентитет „$1”",
 	"wikibase-redirect-no-such-entity": "Није могуће пронаћи ентитет $1",
