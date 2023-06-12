@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bangrapip"
+		]
+	},
+	"wikibase-dataitem": "Butir di {{WBREPONAME}}",
+	"wikibase-editlinks": "Permak sènggètan",
+	"wikibase-linkitem-addlinks": "Tambah sènggètan",
+	"wikibase-linkitem-title": "Sènggètin ama halaman",
+	"wikibase-linkitem-linkpage": "Sènggètin ama halaman",
+	"wikibase-linkitem-selectlink": "Padol dah, pilih pelampang èn halaman nyang lu pèngèn sènggètin ke ni halaman.",
+	"wikibase-linkitem-input-site": "Basa:",
+	"wikibase-linkitem-input-page": "Halaman:",
+	"wikibase-rc-hide-wikidata-hide": "Umpetin",
+	"wikibase-rc-hide-wikidata-show": "Kasi unjuk",
+	"wikibase-otherprojects": "Di laèn-laèn proyèk"
+}

@@ -28,7 +28,9 @@
 	"apihelp-wbeditentity-example-12": "Odstrani oznako",
 	"apihelp-wbformatvalue-description": "Oblikuje podatkovne vrednosti.",
 	"apihelp-wbformatvalue-summary": "Oblikuje podatkovne vrednosti.",
+	"apihelp-wbformatvalue-param-generate": "Želeni izhodni format za generiranje.",
 	"apihelp-wbformatvalue-param-options": "Možnosti, ki naj jih uporablja oblikovalnik. Na voljo kot JSON-objekt.",
+	"apihelp-wbgetentities-example-6": "Pridobitev entitete z ID-jem <samp>Q42</samp>, ki prikazuje vse oznake v vseh razpoložljivih jezikih",
 	"apihelp-wbmergeitems-description": "Združitev več predmetov.",
 	"apihelp-wbmergeitems-summary": "Združi več predmetov.",
 	"apihelp-wbmergeitems-param-fromid": "Izvorni ID za združitev",
@@ -58,5 +60,8 @@
 	"apihelp-wbsetsitelink-example-3": "Dodajanje povezave spletišča na predmet, povezan z angleško stranjo »Hydrogen«, nemški strani »Wasserstoff«, če povezava spletišča ne obstaja",
 	"apihelp-wbsetsitelink-example-4": "Odstrani nemško povezavo spletišča s predmeta",
 	"apihelp-wbsetsitelink-example-5": "Dodajanje povezave spletišča do poljske strani »Wodór« predmetu, ki je povezan z angleško stranjo »Hydrogen«, z eno značko, ki kaže na element z ID-jem »Q149«",
-	"apihelp-wbformatentities-example-3": "Oblikuje ID predmeta, ID lastnosti in ID leksema."
+	"apihelp-wbformatentities-param-ids": "ID-ji entitete za oblikovanje.",
+	"apihelp-wbformatentities-example-1": "Oblikovanje ID-ja posameznega elementa.",
+	"apihelp-wbformatentities-example-3": "Oblikuje ID predmeta, ID lastnosti in ID leksema.",
+	"apihelp-wbformatentities-example-4": "Oblikujete tri oznake predmeta v francoščini"
 }
