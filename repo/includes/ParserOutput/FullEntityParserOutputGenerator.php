@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\ParserOutput;
 
 use InvalidArgumentException;
@@ -22,40 +24,22 @@ use Wikibase\View\ViewPlaceHolderEmitter;
  */
 class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 
-	/**
-	 * @var DispatchingEntityViewFactory
-	 */
-	private $entityViewFactory;
+	private DispatchingEntityViewFactory $entityViewFactory;
 
-	/**
-	 * @var DispatchingEntityMetaTagsCreatorFactory
-	 */
-	private $entityMetaTagsCreatorFactory;
+	private DispatchingEntityMetaTagsCreatorFactory $entityMetaTagsCreatorFactory;
 
-	/**
-	 * @var ParserOutputJsConfigBuilder
-	 */
-	private $configBuilder;
+	private ParserOutputJsConfigBuilder $configBuilder;
 
-	/**
-	 * @var TermLanguageFallbackChain
-	 */
-	private $termLanguageFallbackChain;
+	private TermLanguageFallbackChain $termLanguageFallbackChain;
 
-	/**
-	 * @var EntityDataFormatProvider
-	 */
-	private $entityDataFormatProvider;
+	private EntityDataFormatProvider $entityDataFormatProvider;
 
 	/**
 	 * @var EntityParserOutputUpdater[]
 	 */
-	private $dataUpdaters;
+	private array $dataUpdaters;
 
-	/**
-	 * @var Language
-	 */
-	private $language;
+	private Language $language;
 
 	private bool $isMobileView;
 
@@ -92,16 +76,12 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 	/**
 	 * Creates the parser output for the given entity revision.
 	 *
-	 * @param EntityRevision $entityRevision
-	 * @param bool $generateHtml
-	 *
 	 * @throws InvalidArgumentException
-	 * @return ParserOutput
 	 */
 	public function getParserOutput(
 		EntityRevision $entityRevision,
-		$generateHtml = true
-	) {
+		bool $generateHtml = true
+	): ParserOutput {
 		$entity = $entityRevision->getEntity();
 
 		$parserOutput = new ParserOutput();
@@ -151,7 +131,7 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 	private function addHtmlToParserOutput(
 		ParserOutput $parserOutput,
 		EntityRevision $entityRevision
-	) {
+	): void {
 		$entity = $entityRevision->getEntity();
 
 		$entityView = $this->entityViewFactory->newEntityView(
@@ -178,7 +158,7 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 		}
 	}
 
-	private function addModules( ParserOutput $parserOutput ) {
+	private function addModules( ParserOutput $parserOutput ): void {
 		// make css available for JavaScript-less browsers
 		$parserOutput->addModuleStyles( [
 			'wikibase.alltargets',
@@ -209,11 +189,8 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 	/**
 	 * Add alternate links as extension data.
 	 * OutputPageBeforeHTMLHookHandler will add these to the OutputPage.
-	 *
-	 * @param ParserOutput $parserOutput
-	 * @param EntityId $entityId
 	 */
-	private function addAlternateLinks( ParserOutput $parserOutput, EntityId $entityId ) {
+	private function addAlternateLinks( ParserOutput $parserOutput, EntityId $entityId ): void {
 		$entityDataFormatProvider = $this->entityDataFormatProvider;
 		$subPagePrefix = $entityId->getSerialization() . '.';
 
