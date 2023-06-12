@@ -14,6 +14,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetProperty;
 use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetPropertyRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetPropertyResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyData;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
@@ -25,6 +26,7 @@ use Wikimedia\ParamValidator\ParamValidator;
  */
 class GetPropertyRouteHandler extends SimpleHandler {
 	private const PROPERTY_ID_PATH_PARAM = 'property_id';
+	private const FIELDS_QUERY_PARAM = '_fields';
 
 	private GetProperty $useCase;
 	private PropertyDataSerializer $propertyDataSerializer;
@@ -69,8 +71,12 @@ class GetPropertyRouteHandler extends SimpleHandler {
 	}
 
 	public function runUseCase( string $propertyId ): Response {
+		$fields = explode( ',', $this->getValidatedParams()[self::FIELDS_QUERY_PARAM] );
+
 		try {
-			return $this->newSuccessHttpResponse( $this->useCase->execute( new GetPropertyRequest( $propertyId ) ) );
+			return $this->newSuccessHttpResponse(
+				$this->useCase->execute( new GetPropertyRequest( $propertyId, $fields ) )
+			);
 		} catch ( UseCaseError $e ) {
 			return $this->responseFactory->newErrorResponseFromException( $e );
 		}
@@ -100,6 +106,13 @@ class GetPropertyRouteHandler extends SimpleHandler {
 				self::PARAM_SOURCE => 'path',
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => true,
+			],
+			self::FIELDS_QUERY_PARAM => [
+				self::PARAM_SOURCE => 'query',
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_REQUIRED => false,
+				ParamValidator::PARAM_ISMULTI => false,
+				ParamValidator::PARAM_DEFAULT => implode( ',', PropertyData::VALID_FIELDS ),
 			],
 		];
 	}

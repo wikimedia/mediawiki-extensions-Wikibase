@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\RestApi\Application\Serialization;
 
 use ArrayObject;
+use Generator;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
@@ -15,6 +16,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyData;
+use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyDataBuilder;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 
 /**
@@ -95,6 +97,7 @@ class PropertyDataSerializerTest extends TestCase {
 
 		$propertyData = new PropertyData(
 			new NumericPropertyId( $propertyId ),
+			PropertyData::VALID_FIELDS,
 			$dataType,
 			$labels,
 			$descriptions,
@@ -116,6 +119,53 @@ class PropertyDataSerializerTest extends TestCase {
 		);
 	}
 
+	/**
+	 * @dataProvider propertyDataFieldsProvider
+	 */
+	public function testSkipsFieldsThatAreNotSet( PropertyData $propertyData, array $fields ): void {
+		$serialization = $this->newSerializer()->serialize( $propertyData );
+		$serializationFields = array_keys( $serialization );
+
+		$this->assertEqualsCanonicalizing( $fields, $serializationFields );
+	}
+
+	public function propertyDataFieldsProvider(): Generator {
+		yield [
+			$this->newPropertyDataBuilderWithSomeId( [] )->build(),
+			[ 'id' ],
+		];
+		yield [
+			$this->newPropertyDataBuilderWithSomeId( [ PropertyData::FIELD_TYPE ] )->build(),
+			[ 'id', 'type' ],
+		];
+		yield [
+			$this->newPropertyDataBuilderWithSomeId(
+				[ PropertyData::FIELD_LABELS, PropertyData::FIELD_DESCRIPTIONS, PropertyData::FIELD_ALIASES ]
+			)
+				->setLabels( new Labels() )
+				->setDescriptions( new Descriptions() )
+				->setAliases( new Aliases() )
+				->build(),
+			[ 'id', 'labels', 'descriptions', 'aliases' ],
+		];
+		yield [
+			$this->newPropertyDataBuilderWithSomeId( [ PropertyData::FIELD_STATEMENTS ] )
+				->setStatements( new StatementList() )
+				->build(),
+			[ 'id', 'statements' ],
+		];
+		yield [
+			$this->newPropertyDataBuilderWithSomeId( PropertyData::VALID_FIELDS )
+				->setDataType( 'string' )
+				->setLabels( new Labels() )
+				->setDescriptions( new Descriptions() )
+				->setAliases( new Aliases() )
+				->setStatements( new StatementList() )
+				->build(),
+			[ 'id', 'type', 'data-type', 'labels', 'descriptions', 'aliases', 'statements' ],
+		];
+	}
+
 	private function newSerializer(): PropertyDataSerializer {
 		return new PropertyDataSerializer(
 			$this->labelsSerializer,
@@ -125,4 +175,7 @@ class PropertyDataSerializerTest extends TestCase {
 		);
 	}
 
+	private function newPropertyDataBuilderWithSomeId( array $requestedFields ): PropertyDataBuilder {
+		return new PropertyDataBuilder( new NumericPropertyId( 'P666' ), $requestedFields );
+	}
 }

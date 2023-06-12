@@ -30,6 +30,10 @@ class GetPropertyValidatorTest extends TestCase {
 		yield 'valid ID' => [
 			new GetPropertyRequest( 'P123' ),
 		];
+
+		yield 'valid ID and fields' => [
+			new GetPropertyRequest( 'P123', [ 'type', 'labels', 'descriptions' ] ),
+		];
 	}
 
 	/**
@@ -55,6 +59,11 @@ class GetPropertyValidatorTest extends TestCase {
 			new GetPropertyRequest( 'X123' ),
 			UseCaseError::INVALID_PROPERTY_ID,
 			'Not a valid property ID: X123',
+		];
+		yield 'invalid field' => [
+			new GetPropertyRequest( 'P123', [ 'type', 'unknown_field' ] ),
+			UseCaseError::INVALID_FIELD,
+			'Not a valid field: unknown_field',
 		];
 	}
 }

@@ -28,19 +28,31 @@ class PropertyDataSerializer {
 
 	public function serialize( PropertyData $propertyData ): array {
 		$fieldSerializers = [
-			PropertyData::FIELD_ID => fn() => $propertyData->getId()->getSerialization(),
 			PropertyData::FIELD_TYPE => fn() => $propertyData::TYPE,
 			PropertyData::FIELD_DATA_TYPE => fn() => $propertyData->getDataType(),
+			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
 			PropertyData::FIELD_LABELS => fn() => $this->labelsSerializer->serialize( $propertyData->getLabels() ),
+			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
 			PropertyData::FIELD_DESCRIPTIONS => fn() => $this->descriptionsSerializer->serialize( $propertyData->getDescriptions() ),
+			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
 			PropertyData::FIELD_ALIASES => fn() => $this->aliasesSerializer->serialize( $propertyData->getAliases() ),
+			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
 			PropertyData::FIELD_STATEMENTS => fn() => $this->statementsSerializer->serialize( $propertyData->getStatements() ),
 		];
 
-		return array_map(
+		// serialize all fields, filtered by isRequested()
+		$serialization = array_map(
 			fn( callable $serializeField ) => $serializeField(),
-			$fieldSerializers,
+			array_filter(
+				$fieldSerializers,
+				fn ( string $fieldName ) => $propertyData->isRequested( $fieldName ),
+				ARRAY_FILTER_USE_KEY
+			),
 		);
+
+		$serialization['id'] = $propertyData->getId()->getSerialization();
+
+		return $serialization;
 	}
 
 }

@@ -9,6 +9,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyData;
+use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyDataBuilder;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyDataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
@@ -29,28 +30,51 @@ class EntityRevisionLookupPropertyDataRetriever implements PropertyDataRetriever
 		$this->statementReadModelConverter = $statementReadModelConverter;
 	}
 
-	public function getPropertyData( PropertyId $propertyId ): ?PropertyData {
+	public function getProperty( PropertyId $propertyId ): ?Property {
 		$entityRevision = $this->entityRevisionLookup->getEntityRevision( $propertyId );
 
 		if ( !$entityRevision ) {
 			return null;
 		}
 
-		/** @var Property $property */
-		$property = $entityRevision->getEntity();
-		'@phan-var Property $property';
-
-		return new PropertyData(
-			$property->getId(),
-			$property->getDataTypeId(),
-			Labels::fromTermList( $property->getLabels() ),
-			Descriptions::fromTermList( $property->getDescriptions() ),
-			Aliases::fromAliasGroupList( $property->getAliasGroups() ),
-			new StatementList( ...array_map(
-				[ $this->statementReadModelConverter, 'convert' ],
-				iterator_to_array( $property->getStatements() )
-			) )
-		);
+		// @phan-suppress-next-line PhanTypeMismatchReturn
+		return $entityRevision->getEntity();
 	}
 
+	public function getPropertyData( PropertyId $propertyId, array $fields ): ?PropertyData {
+		$property = $this->getProperty( $propertyId );
+		if ( $property === null ) {
+			return null;
+		}
+		return $this->propertyDataFromRequestedFields( $fields, $property );
+	}
+
+	private function propertyDataFromRequestedFields( array $fields, Property $property ): PropertyData {
+		$propertyData = ( new PropertyDataBuilder( $property->getId(), $fields ) );
+
+		if ( in_array( PropertyData::FIELD_DATA_TYPE, $fields ) ) {
+			$propertyData->setDataType( $property->getDataTypeId() );
+		}
+		if ( in_array( PropertyData::FIELD_LABELS, $fields ) ) {
+			$propertyData->setLabels( Labels::fromTermList( $property->getLabels() ) );
+		}
+		if ( in_array( PropertyData::FIELD_DESCRIPTIONS, $fields ) ) {
+			$propertyData->setDescriptions( Descriptions::fromTermList( $property->getDescriptions() ) );
+		}
+		if ( in_array( PropertyData::FIELD_ALIASES, $fields ) ) {
+			$propertyData->setAliases( Aliases::fromAliasGroupList( $property->getAliasGroups() ) );
+		}
+		if ( in_array( PropertyData::FIELD_STATEMENTS, $fields ) ) {
+			$propertyData->setStatements(
+				new StatementList(
+					...array_map(
+						[ $this->statementReadModelConverter, 'convert' ],
+						iterator_to_array( $property->getStatements() )
+					)
+				)
+			);
+		}
+
+		return $propertyData->build();
+	}
 }

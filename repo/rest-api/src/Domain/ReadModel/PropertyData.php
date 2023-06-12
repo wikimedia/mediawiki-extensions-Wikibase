@@ -18,22 +18,34 @@ class PropertyData {
 	public const FIELD_ALIASES = 'aliases';
 	public const FIELD_STATEMENTS = 'statements';
 
+	public const VALID_FIELDS = [
+		self::FIELD_TYPE,
+		self::FIELD_DATA_TYPE,
+		self::FIELD_LABELS,
+		self::FIELD_DESCRIPTIONS,
+		self::FIELD_ALIASES,
+		self::FIELD_STATEMENTS,
+	];
+
 	private PropertyId $id;
-	private string $dataType;
-	private Labels $labels;
-	private Descriptions $descriptions;
-	private Aliases $aliases;
-	private StatementList $statements;
+	private array $requestedFields;
+	private ?string $dataType;
+	private ?Labels $labels;
+	private ?Descriptions $descriptions;
+	private ?Aliases $aliases;
+	private ?StatementList $statements;
 
 	public function __construct(
 		PropertyId $id,
-		string $dataType,
-		Labels $labels,
-		Descriptions $descriptions,
-		Aliases $aliases,
-		StatementList $statements
+		array $requestedFields,
+		?string $dataType,
+		?Labels $labels,
+		?Descriptions $descriptions,
+		?Aliases $aliases,
+		?StatementList $statements
 	) {
 		$this->id = $id;
+		$this->requestedFields = $requestedFields;
 		$this->dataType = $dataType;
 		$this->labels = $labels;
 		$this->descriptions = $descriptions;
@@ -45,23 +57,27 @@ class PropertyData {
 		return $this->id;
 	}
 
-	public function getDataType(): string {
+	public function getDataType(): ?string {
 		return $this->dataType;
 	}
 
-	public function getLabels(): Labels {
+	public function getLabels(): ?Labels {
 		return $this->labels;
 	}
 
-	public function getDescriptions(): Descriptions {
+	public function getDescriptions(): ?Descriptions {
 		return $this->descriptions;
 	}
 
-	public function getAliases(): Aliases {
+	public function getAliases(): ?Aliases {
 		return $this->aliases;
 	}
 
-	public function getStatements(): StatementList {
+	public function getStatements(): ?StatementList {
 		return $this->statements;
+	}
+
+	public function isRequested( string $field ): bool {
+		return in_array( $field, $this->requestedFields );
 	}
 }

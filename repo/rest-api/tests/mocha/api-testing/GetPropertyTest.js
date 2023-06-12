@@ -22,6 +22,10 @@ describe( newGetPropertyRequestBuilder().getRouteDescription(), () => {
 	let testRevisionId;
 	let testStatement;
 
+	function newValidRequestBuilderWithTestProperty() {
+		return newGetPropertyRequestBuilder( testPropertyId ).assertValidRequest();
+	}
+
 	before( async () => {
 		testStatementPropertyId = ( await createUniqueStringProperty() ).entity.id;
 		testStatement = newLegacyStatementWithRandomStringValue( testStatementPropertyId );
@@ -64,6 +68,44 @@ describe( newGetPropertyRequestBuilder().getRouteDescription(), () => {
 			testStatement.mainsnak.datavalue.value
 		);
 
+		assert.equal( response.header[ 'last-modified' ], testModified );
+		assert.equal( response.header.etag, makeEtag( testRevisionId ) );
+	} );
+
+	it( 'can GET a partial property with single _fields param', async () => {
+		const response = await newValidRequestBuilderWithTestProperty()
+			.withQueryParam( '_fields', 'labels' )
+			.makeRequest();
+
+		expect( response ).to.have.status( 200 );
+		assert.deepEqual( response.body, {
+			id: testPropertyId,
+			labels: {
+				de: germanLabel,
+				en: englishLabel
+			}
+		} );
+		assert.equal( response.header[ 'last-modified' ], testModified );
+		assert.equal( response.header.etag, makeEtag( testRevisionId ) );
+	} );
+
+	it( 'can GET a partial property with multiple _fields params', async () => {
+		const response = await newValidRequestBuilderWithTestProperty()
+			.withQueryParam( '_fields', 'labels,descriptions,aliases' )
+			.makeRequest();
+
+		expect( response ).to.have.status( 200 );
+		assert.deepEqual( response.body, {
+			id: testPropertyId,
+			labels: {
+				de: germanLabel,
+				en: englishLabel
+			},
+			descriptions: {
+				en: englishDescription
+			},
+			aliases: {} // expect {}, not []
+		} );
 		assert.equal( response.header[ 'last-modified' ], testModified );
 		assert.equal( response.header.etag, makeEtag( testRevisionId ) );
 	} );
