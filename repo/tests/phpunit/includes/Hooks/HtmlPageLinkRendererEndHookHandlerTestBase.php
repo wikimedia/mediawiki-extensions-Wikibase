@@ -120,7 +120,7 @@ abstract class HtmlPageLinkRendererEndHookHandlerTestBase extends MediaWikiLangT
 			),
 			'http://source.wiki/script/',
 			$federatedPropertiesEnabled,
-			true
+			false
 		);
 	}
 

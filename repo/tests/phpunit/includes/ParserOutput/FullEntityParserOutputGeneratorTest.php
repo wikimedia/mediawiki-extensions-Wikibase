@@ -229,7 +229,8 @@ class FullEntityParserOutputGeneratorTest extends EntityParserOutputGeneratorTes
 			$this->newLanguageFallbackChain(),
 			$entityDataFormatProvider,
 			$dataUpdaters,
-			$this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' )
+			$this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' ),
+			false
 		);
 	}
 }

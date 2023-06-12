@@ -126,7 +126,8 @@ class FederatedPropertiesUiEntityParserOutputGeneratorDecoratorTest extends Enti
 				$this->newLanguageFallbackChain(),
 				$entityDataFormatProvider,
 				$dataUpdaters,
-				$this->getServiceContainer()->getLanguageFactory()->getLanguage( $language )
+				$this->getServiceContainer()->getLanguageFactory()->getLanguage( $language ),
+				false
 			),
 			$this->createStub( ApiEntityLookup::class )
 		);

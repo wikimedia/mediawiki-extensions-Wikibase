@@ -4,7 +4,6 @@ namespace Wikibase\Repo\ParserOutput;
 
 use InvalidArgumentException;
 use Language;
-use MediaWiki\MediaWikiServices;
 use ParserOutput;
 use SpecialPage;
 use Wikibase\DataModel\Entity\EntityId;
@@ -58,6 +57,8 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 	 */
 	private $language;
 
+	private bool $isMobileView;
+
 	/**
 	 * @param DispatchingEntityViewFactory $entityViewFactory
 	 * @param DispatchingEntityMetaTagsCreatorFactory $entityMetaTagsCreatorFactory
@@ -66,6 +67,7 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 	 * @param EntityDataFormatProvider $entityDataFormatProvider
 	 * @param EntityParserOutputUpdater[] $dataUpdaters
 	 * @param Language $language
+	 * @param bool $isMobileView
 	 */
 	public function __construct(
 		DispatchingEntityViewFactory $entityViewFactory,
@@ -74,7 +76,8 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 		TermLanguageFallbackChain $termLanguageFallbackChain,
 		EntityDataFormatProvider $entityDataFormatProvider,
 		array $dataUpdaters,
-		Language $language
+		Language $language,
+		bool $isMobileView
 	) {
 		$this->entityViewFactory = $entityViewFactory;
 		$this->entityMetaTagsCreatorFactory = $entityMetaTagsCreatorFactory;
@@ -83,6 +86,7 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 		$this->entityDataFormatProvider = $entityDataFormatProvider;
 		$this->dataUpdaters = $dataUpdaters;
 		$this->language = $language;
+		$this->isMobileView = $isMobileView;
 	}
 
 	/**
@@ -179,9 +183,8 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 		$parserOutput->addModuleStyles( [
 			'wikibase.alltargets',
 		] );
-		$isDesktopView = !MediaWikiServices::getInstance()->getService( 'WikibaseRepo.MobileSite' );
 		// T324991
-		if ( $isDesktopView ) {
+		if ( !$this->isMobileView ) {
 			$parserOutput->addModuleStyles( [
 				'wikibase.desktop',
 				'jquery.wikibase.toolbar.styles',
@@ -193,7 +196,7 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 			'wikibase.entityPage.entityLoaded',
 		] );
 		// T324991
-		if ( $isDesktopView ) {
+		if ( !$this->isMobileView ) {
 			// make sure required client-side resources will be loaded
 			// FIXME: Separate the JavaScript that is also needed in read-only mode from
 			// the JavaScript that is only necessary for editing.

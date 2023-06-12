@@ -58,7 +58,8 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 			WikibaseRepo::getDataTypeFactory(),
 			$this->getTermValidatorFactoryMock(),
 			WikibaseRepo::getPropertyTermsCollisionDetector(),
-			WikibaseRepo::getValidatorErrorLocalizer()
+			WikibaseRepo::getValidatorErrorLocalizer(),
+			false
 		);
 	}
 

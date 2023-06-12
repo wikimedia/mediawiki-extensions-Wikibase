@@ -103,6 +103,7 @@ class EntityParserOutputGeneratorFactory {
 	 * @var HookContainer
 	 */
 	private $hookContainer;
+	private bool $isMobileView;
 
 	/**
 	 * @param DispatchingEntityViewFactory $entityViewFactory
@@ -135,6 +136,7 @@ class EntityParserOutputGeneratorFactory {
 		RepoGroup $repoGroup,
 		LinkBatchFactory $linkBatchFactory,
 		HookContainer $hookContainer,
+		bool $isMobileView,
 		array $preferredGeoDataProperties = [],
 		array $preferredPageImagesProperties = [],
 		array $globeUris = []
@@ -154,6 +156,7 @@ class EntityParserOutputGeneratorFactory {
 		$this->preferredGeoDataProperties = $preferredGeoDataProperties;
 		$this->preferredPageImagesProperties = $preferredPageImagesProperties;
 		$this->globeUris = $globeUris;
+		$this->isMobileView = $isMobileView;
 	}
 
 	public function getEntityParserOutputGenerator( Language $userLanguage ): EntityParserOutputGenerator {
@@ -164,7 +167,8 @@ class EntityParserOutputGeneratorFactory {
 			$this->getLanguageFallbackChain( $userLanguage ),
 			$this->entityDataFormatProvider,
 			$this->getDataUpdaters(),
-			$userLanguage
+			$userLanguage,
+			$this->isMobileView
 		);
 
 		$pog = new StatsdTimeRecordingEntityParserOutputGenerator(

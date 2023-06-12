@@ -73,7 +73,8 @@ class SpecialNewItem extends SpecialNewEntity {
 		TermsCollisionDetector $termsCollisionDetector,
 		ValidatorErrorLocalizer $errorLocalizer,
 		SiteLinkTargetProvider $siteLinkTargetProvider,
-		array $siteLinkGroups
+		array $siteLinkGroups,
+		bool $isMobileView
 	) {
 		parent::__construct(
 			'NewItem',
@@ -83,7 +84,8 @@ class SpecialNewItem extends SpecialNewEntity {
 			$entityNamespaceLookup,
 			$summaryFormatter,
 			$entityTitleLookup,
-			$editEntityFactory
+			$editEntityFactory,
+			$isMobileView
 		);
 		$this->termValidatorFactory = $termValidatorFactory;
 		$this->termsCollisionDetector = $termsCollisionDetector;
@@ -97,6 +99,7 @@ class SpecialNewItem extends SpecialNewEntity {
 		EntityNamespaceLookup $entityNamespaceLookup,
 		EntityTitleLookup $entityTitleLookup,
 		TermsCollisionDetector $itemTermsCollisionDetector,
+		bool $isMobileView,
 		SettingsArray $repoSettings,
 		SiteLinkTargetProvider $siteLinkTargetProvider,
 		SummaryFormatter $summaryFormatter,
@@ -120,7 +123,8 @@ class SpecialNewItem extends SpecialNewEntity {
 			$itemTermsCollisionDetector,
 			$errorLocalizer,
 			$siteLinkTargetProvider,
-			$repoSettings->getSetting( 'siteLinkGroups' )
+			$repoSettings->getSetting( 'siteLinkGroups' ),
+			$isMobileView
 		);
 	}
 

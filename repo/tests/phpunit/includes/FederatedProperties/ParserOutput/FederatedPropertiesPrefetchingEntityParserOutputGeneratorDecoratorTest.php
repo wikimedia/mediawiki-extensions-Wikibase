@@ -130,7 +130,8 @@ class FederatedPropertiesPrefetchingEntityParserOutputGeneratorDecoratorTest ext
 			$this->newLanguageFallbackChain(),
 			$entityDataFormatProvider,
 			$dataUpdaters,
-			$this->getServiceContainer()->getLanguageFactory()->getLanguage( $language )
+			$this->getServiceContainer()->getLanguageFactory()->getLanguage( $language ),
+			false
 		);
 	}
 }

@@ -50,7 +50,8 @@ class EntityParserOutputGeneratorFactoryTest extends FederatedPropertiesTestCase
 			new NullStatsdDataFactory(),
 			$this->createMock( RepoGroup::class ),
 			$this->createMock( LinkBatchFactory::class ),
-			$this->createMock( HookContainer::class )
+			$this->createMock( HookContainer::class ),
+			false
 		);
 	}
 

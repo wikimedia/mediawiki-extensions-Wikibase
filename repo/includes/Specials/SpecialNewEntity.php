@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Specials;
 
 use Html;
 use HTMLForm;
-use MediaWiki\MediaWikiServices;
 use Message;
 use OutputPage;
 use Status;
@@ -35,6 +34,8 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	 */
 	protected $entityNamespaceLookup;
 
+	private bool $isMobileView;
+
 	/**
 	 * @param string $name Name of the special page, as seen in links and URLs.
 	 * @param string $restriction User right required,
@@ -53,7 +54,8 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 		EntityNamespaceLookup $entityNamespaceLookup,
 		SummaryFormatter $summaryFormatter,
 		EntityTitleLookup $entityTitleLookup,
-		MediawikiEditEntityFactory $editEntityFactory
+		MediawikiEditEntityFactory $editEntityFactory,
+		bool $isMobileView
 	) {
 		parent::__construct(
 			$name,
@@ -66,6 +68,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 		);
 
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
+		$this->isMobileView = $isMobileView;
 	}
 
 	/**
@@ -200,7 +203,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 
 	protected function displayBeforeForm( OutputPage $output ) {
 		// T324991
-		if ( !MediaWikiServices::getInstance()->getService( 'WikibaseRepo.MobileSite' ) ) {
+		if ( !$this->isMobileView ) {
 			$output->addModules( 'wikibase.special.newEntity' );
 		}
 

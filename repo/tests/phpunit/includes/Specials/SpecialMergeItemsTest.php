@@ -167,6 +167,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 				$titleLookup,
 				MediaWikiServices::getInstance()->getPermissionManager()
 			),
+			false,
 			WikibaseRepo::getTokenCheckInteractor()
 		);
 

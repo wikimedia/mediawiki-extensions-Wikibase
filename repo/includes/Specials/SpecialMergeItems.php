@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Specials;
 use Exception;
 use Html;
 use HTMLForm;
-use MediaWiki\MediaWikiServices;
 use Message;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -52,12 +51,14 @@ class SpecialMergeItems extends SpecialWikibasePage {
 	 * @var TokenCheckInteractor
 	 */
 	private $tokenCheck;
+	private bool $isMobileView;
 
 	public function __construct(
 		EntityIdParser $idParser,
 		EntityTitleLookup $titleLookup,
 		ExceptionLocalizer $exceptionLocalizer,
 		ItemMergeInteractor $interactor,
+		bool $isMobileView,
 		TokenCheckInteractor $tokenCheck
 	) {
 		parent::__construct( 'MergeItems', 'item-merge' );
@@ -67,6 +68,7 @@ class SpecialMergeItems extends SpecialWikibasePage {
 		$this->interactor = $interactor;
 		$this->titleLookup = $titleLookup;
 		$this->tokenCheck = $tokenCheck;
+		$this->isMobileView = $isMobileView;
 	}
 
 	public function doesWrites() {
@@ -211,7 +213,7 @@ class SpecialMergeItems extends SpecialWikibasePage {
 	 */
 	protected function createForm() {
 		// T324991
-		if ( !MediaWikiServices::getInstance()->getService( 'WikibaseRepo.MobileSite' ) ) {
+		if ( !$this->isMobileView ) {
 			$this->getOutput()->addModules( 'wikibase.special.mergeItems' );
 		}
 
