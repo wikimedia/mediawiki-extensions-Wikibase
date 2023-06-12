@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 /**
  * @license GPL-2.0-or-later
  */
-class PropertyData {
+class PropertyParts {
 	public const TYPE = DataModelProperty::ENTITY_TYPE;
 	public const FIELD_ID = 'id';
 	public const FIELD_TYPE = 'type';

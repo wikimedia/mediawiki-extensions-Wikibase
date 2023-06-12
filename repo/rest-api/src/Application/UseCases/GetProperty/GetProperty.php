@@ -5,23 +5,23 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\GetProperty;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestPropertyRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyDataRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyPartsRetriever;
 
 /**
  * @license GPL-2.0-or-later
  */
 class GetProperty {
 	private GetLatestPropertyRevisionMetadata $getLatestPropertyRevisionMetadata;
-	private PropertyDataRetriever $propertyDataRetriever;
+	private PropertyPartsRetriever $propertyPartsRetriever;
 	private GetPropertyValidator $validator;
 
 	public function __construct(
 		GetLatestPropertyRevisionMetadata $getLatestPropertyRevisionMetadata,
-		PropertyDataRetriever $propertyDataRetriever,
+		PropertyPartsRetriever $propertyPartsRetriever,
 		GetPropertyValidator $validator
 	) {
 		$this->getLatestPropertyRevisionMetadata = $getLatestPropertyRevisionMetadata;
-		$this->propertyDataRetriever = $propertyDataRetriever;
+		$this->propertyPartsRetriever = $propertyPartsRetriever;
 		$this->validator = $validator;
 	}
 
@@ -35,7 +35,7 @@ class GetProperty {
 
 		return new GetPropertyResponse(
 			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Property exists
-			$this->propertyDataRetriever->getPropertyData( $propertyId, $propertyRequest->getFields() ),
+			$this->propertyPartsRetriever->getPropertyParts( $propertyId, $propertyRequest->getFields() ),
 			$lastModified,
 			$revisionId
 		);

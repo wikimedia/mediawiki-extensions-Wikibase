@@ -2,14 +2,14 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetProperty;
 
-use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyData;
+use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyParts;
 
 /**
  * @license GPL-2.0-or-later
  */
 class GetPropertyResponse {
 
-	private PropertyData $propertyData;
+	private PropertyParts $propertyParts;
 
 	/**
 	 * @var string timestamp in MediaWiki format 'YYYYMMDDhhmmss'
@@ -18,14 +18,14 @@ class GetPropertyResponse {
 
 	private int $revisionId;
 
-	public function __construct( PropertyData $propertyData, string $lastModified, int $revisionId ) {
-		$this->propertyData = $propertyData;
+	public function __construct( PropertyParts $propertyParts, string $lastModified, int $revisionId ) {
+		$this->propertyParts = $propertyParts;
 		$this->lastModified = $lastModified;
 		$this->revisionId = $revisionId;
 	}
 
-	public function getPropertyData(): PropertyData {
-		return $this->propertyData;
+	public function getPropertyParts(): PropertyParts {
+		return $this->propertyParts;
 	}
 
 	public function getLastModified(): string {

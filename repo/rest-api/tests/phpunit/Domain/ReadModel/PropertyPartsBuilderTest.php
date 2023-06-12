@@ -11,30 +11,30 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
-use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyData;
-use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyDataBuilder;
+use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyParts;
+use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyPartsBuilder;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Domain\ReadModel\PropertyDataBuilder
- * @covers \Wikibase\Repo\RestApi\Domain\ReadModel\PropertyData
+ * @covers \Wikibase\Repo\RestApi\Domain\ReadModel\PropertyPartsBuilder
+ * @covers \Wikibase\Repo\RestApi\Domain\ReadModel\PropertyParts
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class PropertyDataBuilderTest extends TestCase {
+class PropertyPartsBuilderTest extends TestCase {
 
 	public function testId(): void {
 		$id = new NumericPropertyId( 'P123' );
-		$propertyParts = ( new PropertyDataBuilder( $id, [] ) )
+		$propertyParts = ( new PropertyPartsBuilder( $id, [] ) )
 			->build();
 		$this->assertSame( $id, $propertyParts->getId() );
 	}
 
 	public function testDataType(): void {
 		$dataType = 'wikibase-item';
-		$propertyParts = $this->newBuilderWithSomeId( [ PropertyData::FIELD_DATA_TYPE ] )
+		$propertyParts = $this->newBuilderWithSomeId( [ PropertyParts::FIELD_DATA_TYPE ] )
 			->setDataType( $dataType )
 			->build();
 		$this->assertSame( $dataType, $propertyParts->getDataType() );
@@ -42,7 +42,7 @@ class PropertyDataBuilderTest extends TestCase {
 
 	public function testLabels(): void {
 		$labels = new Labels( new Label( 'en', 'potato' ) );
-		$propertyParts = $this->newBuilderWithSomeId( [ PropertyData::FIELD_LABELS ] )
+		$propertyParts = $this->newBuilderWithSomeId( [ PropertyParts::FIELD_LABELS ] )
 			->setLabels( $labels )
 			->build();
 		$this->assertSame( $labels, $propertyParts->getLabels() );
@@ -50,7 +50,7 @@ class PropertyDataBuilderTest extends TestCase {
 
 	public function testDescriptions(): void {
 		$descriptions = new Descriptions( new Description( 'en', 'root vegetable' ) );
-		$propertyParts = $this->newBuilderWithSomeId( [ PropertyData::FIELD_DESCRIPTIONS ] )
+		$propertyParts = $this->newBuilderWithSomeId( [ PropertyParts::FIELD_DESCRIPTIONS ] )
 			->setDescriptions( $descriptions )
 			->build();
 		$this->assertSame( $descriptions, $propertyParts->getDescriptions() );
@@ -58,7 +58,7 @@ class PropertyDataBuilderTest extends TestCase {
 
 	public function testAliases(): void {
 		$aliases = new Aliases();
-		$propertyParts = $this->newBuilderWithSomeId( [ PropertyData::FIELD_ALIASES ] )
+		$propertyParts = $this->newBuilderWithSomeId( [ PropertyParts::FIELD_ALIASES ] )
 			->setAliases( $aliases )
 			->build();
 		$this->assertSame( $aliases, $propertyParts->getAliases() );
@@ -66,7 +66,7 @@ class PropertyDataBuilderTest extends TestCase {
 
 	public function testStatements(): void {
 		$statements = new StatementList();
-		$propertyParts = $this->newBuilderWithSomeId( [ PropertyData::FIELD_STATEMENTS ] )
+		$propertyParts = $this->newBuilderWithSomeId( [ PropertyParts::FIELD_STATEMENTS ] )
 			->setStatements( $statements )
 			->build();
 		$this->assertSame( $statements, $propertyParts->getStatements() );
@@ -79,7 +79,7 @@ class PropertyDataBuilderTest extends TestCase {
 		$aliases = new Aliases();
 		$statements = new StatementList();
 
-		$propertyParts = $this->newBuilderWithSomeId( PropertyData::VALID_FIELDS )
+		$propertyParts = $this->newBuilderWithSomeId( PropertyParts::VALID_FIELDS )
 			->setDataType( $dataType )
 			->setLabels( $labels )
 			->setDescriptions( $descriptions )
@@ -103,43 +103,43 @@ class PropertyDataBuilderTest extends TestCase {
 		$builder = $this->newBuilderWithSomeId( [] );
 
 		$this->expectException( LogicException::class );
-		$this->expectExceptionMessage( 'cannot set unrequested ' . PropertyData::class . " field '$field'" );
+		$this->expectExceptionMessage( 'cannot set unrequested ' . PropertyParts::class . " field '$field'" );
 		$builder->$setterFunction( $param )->build();
 	}
 
 	public function nonRequiredFields(): Generator {
 		yield 'data-type' => [
-			PropertyData::FIELD_DATA_TYPE,
+			PropertyParts::FIELD_DATA_TYPE,
 			'setDataType',
 			'wikibase-item',
 		];
 
 		yield 'labels' => [
-			PropertyData::FIELD_LABELS,
+			PropertyParts::FIELD_LABELS,
 			'setLabels',
 			new Labels( new Label( 'en', 'potato' ) ),
 		];
 
 		yield 'descriptions' => [
-			PropertyData::FIELD_DESCRIPTIONS,
+			PropertyParts::FIELD_DESCRIPTIONS,
 			'setDescriptions',
 			new Descriptions( new Description( 'en', 'root vegetable' ) ),
 		];
 
 		yield 'aliases' => [
-			PropertyData::FIELD_ALIASES,
+			PropertyParts::FIELD_ALIASES,
 			'setAliases',
 			new Aliases(),
 		];
 
 		yield 'statements' => [
-			PropertyData::FIELD_STATEMENTS,
+			PropertyParts::FIELD_STATEMENTS,
 			'setStatements',
 			new StatementList(),
 		];
 	}
 
-	private function newBuilderWithSomeId( array $requestedFields ): PropertyDataBuilder {
-		return ( new PropertyDataBuilder( new NumericPropertyId( 'P666' ), $requestedFields ) );
+	private function newBuilderWithSomeId( array $requestedFields ): PropertyPartsBuilder {
+		return ( new PropertyPartsBuilder( new NumericPropertyId( 'P666' ), $requestedFields ) );
 	}
 }

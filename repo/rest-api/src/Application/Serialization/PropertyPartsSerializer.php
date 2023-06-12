@@ -2,12 +2,12 @@
 
 namespace Wikibase\Repo\RestApi\Application\Serialization;
 
-use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyData;
+use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyParts;
 
 /**
  * @license GPL-2.0-or-later
  */
-class PropertyDataSerializer {
+class PropertyPartsSerializer {
 
 	private LabelsSerializer $labelsSerializer;
 	private DescriptionsSerializer $descriptionsSerializer;
@@ -26,18 +26,18 @@ class PropertyDataSerializer {
 		$this->statementsSerializer = $statementsSerializer;
 	}
 
-	public function serialize( PropertyData $propertyData ): array {
+	public function serialize( PropertyParts $propertyParts ): array {
 		$fieldSerializers = [
-			PropertyData::FIELD_TYPE => fn() => $propertyData::TYPE,
-			PropertyData::FIELD_DATA_TYPE => fn() => $propertyData->getDataType(),
+			PropertyParts::FIELD_TYPE => fn() => $propertyParts::TYPE,
+			PropertyParts::FIELD_DATA_TYPE => fn() => $propertyParts->getDataType(),
 			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-			PropertyData::FIELD_LABELS => fn() => $this->labelsSerializer->serialize( $propertyData->getLabels() ),
+			PropertyParts::FIELD_LABELS => fn() => $this->labelsSerializer->serialize( $propertyParts->getLabels() ),
 			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-			PropertyData::FIELD_DESCRIPTIONS => fn() => $this->descriptionsSerializer->serialize( $propertyData->getDescriptions() ),
+			PropertyParts::FIELD_DESCRIPTIONS => fn() => $this->descriptionsSerializer->serialize( $propertyParts->getDescriptions() ),
 			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-			PropertyData::FIELD_ALIASES => fn() => $this->aliasesSerializer->serialize( $propertyData->getAliases() ),
+			PropertyParts::FIELD_ALIASES => fn() => $this->aliasesSerializer->serialize( $propertyParts->getAliases() ),
 			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-			PropertyData::FIELD_STATEMENTS => fn() => $this->statementsSerializer->serialize( $propertyData->getStatements() ),
+			PropertyParts::FIELD_STATEMENTS => fn() => $this->statementsSerializer->serialize( $propertyParts->getStatements() ),
 		];
 
 		// serialize all fields, filtered by isRequested()
@@ -45,12 +45,12 @@ class PropertyDataSerializer {
 			fn( callable $serializeField ) => $serializeField(),
 			array_filter(
 				$fieldSerializers,
-				fn ( string $fieldName ) => $propertyData->isRequested( $fieldName ),
+				fn ( string $fieldName ) => $propertyParts->isRequested( $fieldName ),
 				ARRAY_FILTER_USE_KEY
 			),
 		);
 
-		$serialization['id'] = $propertyData->getId()->getSerialization();
+		$serialization['id'] = $propertyParts->getId()->getSerialization();
 
 		return $serialization;
 	}

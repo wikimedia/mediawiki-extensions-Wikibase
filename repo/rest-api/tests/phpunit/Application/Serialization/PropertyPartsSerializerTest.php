@@ -10,23 +10,23 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
-use Wikibase\Repo\RestApi\Application\Serialization\PropertyDataSerializer;
+use Wikibase\Repo\RestApi\Application\Serialization\PropertyPartsSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementListSerializer;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
-use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyData;
-use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyDataBuilder;
+use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyParts;
+use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyPartsBuilder;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\Serialization\PropertyDataSerializer
+ * @covers \Wikibase\Repo\RestApi\Application\Serialization\PropertyPartsSerializer
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class PropertyDataSerializerTest extends TestCase {
+class PropertyPartsSerializerTest extends TestCase {
 
 	/**
 	 * @var MockObject|LabelsSerializer
@@ -95,9 +95,9 @@ class PropertyDataSerializerTest extends TestCase {
 			->with( $statements )
 			->willReturn( $expectedStatementsSerialization );
 
-		$propertyData = new PropertyData(
+		$propertyParts = new PropertyParts(
 			new NumericPropertyId( $propertyId ),
-			PropertyData::VALID_FIELDS,
+			PropertyParts::VALID_FIELDS,
 			$dataType,
 			$labels,
 			$descriptions,
@@ -106,10 +106,10 @@ class PropertyDataSerializerTest extends TestCase {
 		);
 
 		$this->assertEquals(
-			$this->newSerializer()->serialize( $propertyData ),
+			$this->newSerializer()->serialize( $propertyParts ),
 			[
 				'id' => $propertyId,
-				'type' => PropertyData::TYPE,
+				'type' => PropertyParts::TYPE,
 				'data-type' => $dataType,
 				'labels' => $expectedLabelsSerialization,
 				'descriptions' => $expectedDescriptionsSerialization,
@@ -120,27 +120,27 @@ class PropertyDataSerializerTest extends TestCase {
 	}
 
 	/**
-	 * @dataProvider propertyDataFieldsProvider
+	 * @dataProvider propertyPartsFieldsProvider
 	 */
-	public function testSkipsFieldsThatAreNotSet( PropertyData $propertyData, array $fields ): void {
-		$serialization = $this->newSerializer()->serialize( $propertyData );
+	public function testSkipsFieldsThatAreNotSet( PropertyParts $propertyParts, array $fields ): void {
+		$serialization = $this->newSerializer()->serialize( $propertyParts );
 		$serializationFields = array_keys( $serialization );
 
 		$this->assertEqualsCanonicalizing( $fields, $serializationFields );
 	}
 
-	public function propertyDataFieldsProvider(): Generator {
+	public function propertyPartsFieldsProvider(): Generator {
 		yield [
-			$this->newPropertyDataBuilderWithSomeId( [] )->build(),
+			$this->newPropertyPartsBuilderWithSomeId( [] )->build(),
 			[ 'id' ],
 		];
 		yield [
-			$this->newPropertyDataBuilderWithSomeId( [ PropertyData::FIELD_TYPE ] )->build(),
+			$this->newPropertyPartsBuilderWithSomeId( [ PropertyParts::FIELD_TYPE ] )->build(),
 			[ 'id', 'type' ],
 		];
 		yield [
-			$this->newPropertyDataBuilderWithSomeId(
-				[ PropertyData::FIELD_LABELS, PropertyData::FIELD_DESCRIPTIONS, PropertyData::FIELD_ALIASES ]
+			$this->newPropertyPartsBuilderWithSomeId(
+				[ PropertyParts::FIELD_LABELS, PropertyParts::FIELD_DESCRIPTIONS, PropertyParts::FIELD_ALIASES ]
 			)
 				->setLabels( new Labels() )
 				->setDescriptions( new Descriptions() )
@@ -149,13 +149,13 @@ class PropertyDataSerializerTest extends TestCase {
 			[ 'id', 'labels', 'descriptions', 'aliases' ],
 		];
 		yield [
-			$this->newPropertyDataBuilderWithSomeId( [ PropertyData::FIELD_STATEMENTS ] )
+			$this->newPropertyPartsBuilderWithSomeId( [ PropertyParts::FIELD_STATEMENTS ] )
 				->setStatements( new StatementList() )
 				->build(),
 			[ 'id', 'statements' ],
 		];
 		yield [
-			$this->newPropertyDataBuilderWithSomeId( PropertyData::VALID_FIELDS )
+			$this->newPropertyPartsBuilderWithSomeId( PropertyParts::VALID_FIELDS )
 				->setDataType( 'string' )
 				->setLabels( new Labels() )
 				->setDescriptions( new Descriptions() )
@@ -166,8 +166,8 @@ class PropertyDataSerializerTest extends TestCase {
 		];
 	}
 
-	private function newSerializer(): PropertyDataSerializer {
-		return new PropertyDataSerializer(
+	private function newSerializer(): PropertyPartsSerializer {
+		return new PropertyPartsSerializer(
 			$this->labelsSerializer,
 			$this->descriptionsSerializer,
 			$this->aliasesSerializer,
@@ -175,7 +175,7 @@ class PropertyDataSerializerTest extends TestCase {
 		);
 	}
 
-	private function newPropertyDataBuilderWithSomeId( array $requestedFields ): PropertyDataBuilder {
-		return new PropertyDataBuilder( new NumericPropertyId( 'P666' ), $requestedFields );
+	private function newPropertyPartsBuilderWithSomeId( array $requestedFields ): PropertyPartsBuilder {
+		return new PropertyPartsBuilder( new NumericPropertyId( 'P666' ), $requestedFields );
 	}
 }

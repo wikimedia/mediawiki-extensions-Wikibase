@@ -10,8 +10,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetPropertyRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetPropertyValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
-use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyData;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyDataRetriever;
+use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyParts;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyPartsRetriever;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetProperty
@@ -24,7 +24,7 @@ class GetPropertyTest extends TestCase {
 
 	public function testHappyPath(): void {
 		$propertyId = new NumericPropertyId( 'P123' );
-		$expectedPropertyData = $this->createStub( PropertyData::class );
+		$expectedPropertyParts = $this->createStub( PropertyParts::class );
 
 		$lastModifiedTimestamp = '20201111070707';
 		$revisionId = 42;
@@ -33,21 +33,21 @@ class GetPropertyTest extends TestCase {
 		$getRevisionMetadata->method( 'execute' )
 			->willReturn( [ $revisionId, $lastModifiedTimestamp ] );
 
-		$propertyDataRetriever = $this->createMock( PropertyDataRetriever::class );
-		$propertyDataRetriever->expects( $this->once() )
-			->method( 'getPropertyData' )
+		$propertyPartsRetriever = $this->createMock( PropertyPartsRetriever::class );
+		$propertyPartsRetriever->expects( $this->once() )
+			->method( 'getPropertyParts' )
 			->with( $propertyId )
-			->willReturn( $expectedPropertyData );
+			->willReturn( $expectedPropertyParts );
 
 		$response = ( new GetProperty(
 			$getRevisionMetadata,
-			$propertyDataRetriever,
+			$propertyPartsRetriever,
 			new GetPropertyValidator( new PropertyIdValidator() )
 		) )->execute(
 			new GetPropertyRequest( "$propertyId" )
 		);
 
-		$this->assertSame( $expectedPropertyData, $response->getPropertyData() );
+		$this->assertSame( $expectedPropertyParts, $response->getPropertyParts() );
 		$this->assertSame( $lastModifiedTimestamp, $response->getLastModified() );
 		$this->assertSame( $revisionId, $response->getRevisionId() );
 	}
@@ -57,7 +57,7 @@ class GetPropertyTest extends TestCase {
 		try {
 			( new GetProperty(
 				$this->createStub( GetLatestPropertyRevisionMetadata::class ),
-				$this->createStub( PropertyDataRetriever::class ),
+				$this->createStub( PropertyPartsRetriever::class ),
 				new GetPropertyValidator( new PropertyIdValidator() )
 			) )->execute( new GetPropertyRequest( $propertyId ) );
 

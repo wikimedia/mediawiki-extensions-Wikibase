@@ -9,12 +9,12 @@ use MediaWiki\Rest\StringStream;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
-use Wikibase\Repo\RestApi\Application\Serialization\PropertyDataSerializer;
+use Wikibase\Repo\RestApi\Application\Serialization\PropertyPartsSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetProperty;
 use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetPropertyRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetPropertyResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyData;
+use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyParts;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
@@ -29,18 +29,18 @@ class GetPropertyRouteHandler extends SimpleHandler {
 	private const FIELDS_QUERY_PARAM = '_fields';
 
 	private GetProperty $useCase;
-	private PropertyDataSerializer $propertyDataSerializer;
+	private PropertyPartsSerializer $propertyPartsSerializer;
 	private MiddlewareHandler $middlewareHandler;
 	private ResponseFactory $responseFactory;
 
 	public function __construct(
 		GetProperty $useCase,
-		PropertyDataSerializer $propertyDataSerializer,
+		PropertyPartsSerializer $propertyPartsSerializer,
 		MiddlewareHandler $middlewareHandler,
 		ResponseFactory $responseFactory
 	) {
 		$this->useCase = $useCase;
-		$this->propertyDataSerializer = $propertyDataSerializer;
+		$this->propertyPartsSerializer = $propertyPartsSerializer;
 		$this->middlewareHandler = $middlewareHandler;
 		$this->responseFactory = $responseFactory;
 	}
@@ -48,7 +48,7 @@ class GetPropertyRouteHandler extends SimpleHandler {
 	public static function factory(): Handler {
 		return new self(
 			WbRestApi::getGetProperty(),
-			new PropertyDataSerializer(
+			new PropertyPartsSerializer(
 				new LabelsSerializer(),
 				new DescriptionsSerializer(),
 				new AliasesSerializer(),
@@ -89,7 +89,7 @@ class GetPropertyRouteHandler extends SimpleHandler {
 		$this->setEtagFromRevId( $httpResponse, $useCaseResponse->getRevisionId() );
 		$httpResponse->setBody(
 			new StringStream(
-				json_encode( $this->propertyDataSerializer->serialize( $useCaseResponse->getPropertyData() ), JSON_UNESCAPED_SLASHES )
+				json_encode( $this->propertyPartsSerializer->serialize( $useCaseResponse->getPropertyParts() ), JSON_UNESCAPED_SLASHES )
 			)
 		);
 
@@ -112,7 +112,7 @@ class GetPropertyRouteHandler extends SimpleHandler {
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => false,
 				ParamValidator::PARAM_ISMULTI => false,
-				ParamValidator::PARAM_DEFAULT => implode( ',', PropertyData::VALID_FIELDS ),
+				ParamValidator::PARAM_DEFAULT => implode( ',', PropertyParts::VALID_FIELDS ),
 			],
 		];
 	}
