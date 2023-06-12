@@ -83,12 +83,11 @@ class SqlIdGenerator implements IdGenerator {
 
 		if ( is_object( $currentId ) ) {
 			$id = $currentId->id_value + 1;
-			$success = $database->update(
-				'wb_id_counters',
-				[ 'id_value' => $id ],
-				[ 'id_type' => $type ],
-				__METHOD__
-			);
+			$success = $database->newUpdateQueryBuilder()
+				->update( 'wb_id_counters' )
+				->set( [ 'id_value' => $id ] )
+				->where( [ 'id_type' => $type ] )
+				->caller( __METHOD__ )->execute();
 		} else {
 			$id = 1;
 
