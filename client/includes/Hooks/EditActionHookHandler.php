@@ -8,7 +8,6 @@ use Html;
 use IContextSource;
 use MediaWiki\EditPage\EditPage;
 use MediaWiki\Hook\EditPage__showStandardInputs_optionsHook;
-use MediaWiki\MediaWikiServices;
 use MessageLocalizer;
 use OutputPage;
 use Wikibase\Client\RepoLinker;
@@ -27,22 +26,27 @@ class EditActionHookHandler implements EditPage__showStandardInputs_optionsHook 
 
 	private RepoLinker $repoLinker;
 
+	private bool $isMobileView;
+
 	private UsageLookup $usageLookup;
 
 	private FallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory;
 
 	public function __construct(
 		RepoLinker $repoLinker,
+		bool $isMobileView,
 		UsageLookup $usageLookup,
 		FallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory
 	) {
 		$this->repoLinker = $repoLinker;
+		$this->isMobileView = $isMobileView;
 		$this->usageLookup = $usageLookup;
 		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
 	}
 
 	public static function factory(
 		FallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
+		bool $isMobileView,
 		RepoLinker $repoLinker,
 		ClientStore $store
 	): self {
@@ -50,6 +54,7 @@ class EditActionHookHandler implements EditPage__showStandardInputs_optionsHook 
 
 		return new self(
 			$repoLinker,
+			$isMobileView,
 			$usageLookup,
 			$labelDescriptionLookupFactory
 		);
@@ -83,7 +88,7 @@ class EditActionHookHandler implements EditPage__showStandardInputs_optionsHook 
 		}
 
 		// T324991
-		if ( !MediaWikiServices::getInstance()->getService( 'WikibaseClient.MobileSite' ) ) {
+		if ( !$this->isMobileView ) {
 			$out->addModules( 'wikibase.client.action.edit.collapsibleFooter' );
 		}
 	}

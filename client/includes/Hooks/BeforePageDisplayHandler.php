@@ -5,7 +5,6 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Hooks;
 
 use MediaWiki\Hook\BeforePageDisplayHook;
-use MediaWiki\MediaWikiServices;
 use OutputPage;
 use Skin;
 use Title;
@@ -22,20 +21,29 @@ use Wikibase\Lib\SettingsArray;
  */
 class BeforePageDisplayHandler implements BeforePageDisplayHook {
 
+	private bool $isMobileView;
+
 	private NamespaceChecker $namespaceChecker;
 
 	private bool $dataBridgeEnabled;
 
-	public function __construct( NamespaceChecker $namespaceChecker, bool $dataBridgeEnabled ) {
+	public function __construct(
+		bool $isMobileView,
+		NamespaceChecker $namespaceChecker,
+		bool $dataBridgeEnabled
+	) {
+		$this->isMobileView = $isMobileView;
 		$this->namespaceChecker = $namespaceChecker;
 		$this->dataBridgeEnabled = $dataBridgeEnabled;
 	}
 
 	public static function factory(
+		bool $isMobileView,
 		NamespaceChecker $namespaceChecker,
 		SettingsArray $clientSettings
 	): self {
 		return new self(
+			$isMobileView,
 			$namespaceChecker,
 			$clientSettings->getSetting( 'dataBridgeEnabled' )
 		);
@@ -79,7 +87,7 @@ class BeforePageDisplayHandler implements BeforePageDisplayHook {
 			// Add the JavaScript which lazy-loads the link item widget
 			// (needed as jquery.wikibase.linkitem has pretty heavy dependencies)
 			// T324991
-			if ( !MediaWikiServices::getInstance()->getService( 'WikibaseClient.MobileSite' ) ) {
+			if ( !$this->isMobileView ) {
 				$outputPage->addModules( 'wikibase.client.linkitem.init' );
 			}
 		}

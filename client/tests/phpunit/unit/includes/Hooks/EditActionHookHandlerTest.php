@@ -120,6 +120,7 @@ class EditActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 
 		return new EditActionHookHandler(
 			$repoLinker,
+			false,
 			$sqlUsageTracker,
 			$labelDescriptionLookupFactory
 		);

@@ -56,6 +56,7 @@ class MovePageNoticeTest extends MediaWikiIntegrationTestCase {
 			->willReturn( new ItemId( 'Q4880' ) );
 
 		$movePageNotice = new MovePageNotice(
+			false,
 			$siteLinkLookup,
 			'dewiki',
 			$this->getRepoLinker()
