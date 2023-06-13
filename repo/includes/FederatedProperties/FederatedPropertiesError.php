@@ -6,8 +6,8 @@ namespace Wikibase\Repo\FederatedProperties;
 use ErrorPageError;
 use Html;
 use MediaWiki\Language\RawMessage;
-use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Term\LabelsProvider;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
@@ -58,7 +58,7 @@ class FederatedPropertiesError extends ErrorPageError {
 			global $wgOut;
 			$wgOut->addModuleStyles( [ 'wikibase.alltargets' ] );
 			// T324991
-			if ( !MediaWikiServices::getInstance()->getService( 'WikibaseRepo.MobileSite' ) ) {
+			if ( !WikibaseRepo::getMobileSite() ) {
 				$wgOut->addModuleStyles( [ 'wikibase.desktop' ] );
 			}
 			parent::report( $action );

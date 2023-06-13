@@ -937,7 +937,7 @@ return [
 			$services->getRepoGroup(),
 			$services->getLinkBatchFactory(),
 			$services->getHookContainer(),
-			$services->get( 'WikibaseRepo.MobileSite' ),
+			WikibaseRepo::getMobileSite( $services ),
 			$settings->getSetting( 'preferredGeoDataProperties' ),
 			$settings->getSetting( 'preferredPageImagesProperties' ),
 			$settings->getSetting( 'globeUris' )
