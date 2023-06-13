@@ -162,10 +162,10 @@
 									}
 								}
 							],
-							"foreign:P11": [
+							"P11": [
 								{
 									"snaktype": "value",
-									"property": "foreign:P11",
+									"property": "P11",
 									"datatype": "string",
 									"datavalue": {
 										"value": "simplestring",
@@ -173,15 +173,15 @@
 									}
 								}
 							],
-							"foreign:P12": [
+							"P12": [
 								{
 									"snaktype": "value",
-									"property": "foreign:P12",
+									"property": "P12",
 									"datatype": "wikibase-entityid",
 									"datavalue": {
 										"value": {
 											"entity-type": "item",
-											"id": "foreign:Q303"
+											"id": "Q303"
 										},
 										"type": "wikibase-entityid"
 									}
@@ -197,8 +197,8 @@
 							"P7",
 							"P8",
 							"P9",
-							"foreign:P11",
-							"foreign:P12"
+							"P11",
+							"P12"
 						]
 					}
 				]
@@ -362,10 +362,10 @@
 									}
 								}
 							],
-							"foreign:P11": [
+							"P11": [
 								{
 									"snaktype": "value",
-									"property": "foreign:P11",
+									"property": "P11",
 									"datatype": "string",
 									"datavalue": {
 										"value": "simplestring",
@@ -373,15 +373,15 @@
 									}
 								}
 							],
-							"foreign:P12": [
+							"P12": [
 								{
 									"snaktype": "value",
-									"property": "foreign:P12",
+									"property": "P12",
 									"datatype": "wikibase-entityid",
 									"datavalue": {
 										"value": {
 											"entity-type": "item",
-											"id": "foreign:Q303"
+											"id": "Q303"
 										},
 										"type": "wikibase-entityid"
 									}
@@ -397,8 +397,8 @@
 							"P7",
 							"P8",
 							"P9",
-							"foreign:P11",
-							"foreign:P12"
+							"P11",
+							"P12"
 						]
 					}
 				]
