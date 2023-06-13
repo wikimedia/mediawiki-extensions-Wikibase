@@ -5,7 +5,8 @@
 			"Kareyac",
 			"Ләйсән",
 			"Рустам Нурыев",
-			"Roustammr"
+			"Roustammr",
+			"Sagan"
 		]
 	},
 	"tooltip-t-wikibase": "Мәғлүмәт репозитарийҙағы үҙара бәйле элементҡа һылтанма",
@@ -14,6 +15,9 @@
 	"wikibase-editlinks": "Һылтанмаларҙы төҙәт",
 	"wikibase-editlinkstitle": "Башҡа телдәргә һылтанмаларҙы төҙәтеү",
 	"wikibase-linkitem-addlinks": "Һылтанмалар өҫтәү",
+	"wikibase-linkitem-title": "Бит менән бәйләргә",
+	"wikibase-linkitem-linkpage": "Бит менән бәйләргә",
+	"wikibase-linkitem-selectlink": "Бит бит менән бәйләргә теләгән сайт йәки битте һайлағыҙ.",
 	"wikibase-linkitem-input-site": "Тел:",
 	"wikibase-linkitem-input-page": "Бит:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
