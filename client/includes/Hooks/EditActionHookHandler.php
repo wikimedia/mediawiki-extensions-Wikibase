@@ -25,20 +25,11 @@ use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
  */
 class EditActionHookHandler implements EditPage__showStandardInputs_optionsHook {
 
-	/**
-	 * @var RepoLinker
-	 */
-	private $repoLinker;
+	private RepoLinker $repoLinker;
 
-	/**
-	 * @var UsageLookup
-	 */
-	private $usageLookup;
+	private UsageLookup $usageLookup;
 
-	/**
-	 * @var FallbackLabelDescriptionLookupFactory
-	 */
-	private $labelDescriptionLookupFactory;
+	private FallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory;
 
 	public function __construct(
 		RepoLinker $repoLinker,
