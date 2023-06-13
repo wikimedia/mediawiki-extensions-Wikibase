@@ -10,6 +10,6 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyData;
  */
 interface PropertyDataRetriever {
 
-	public function getPropertyData( PropertyId $propertyId ): ?PropertyData;
+	public function getPropertyData( PropertyId $propertyId, array $fields ): ?PropertyData;
 
 }

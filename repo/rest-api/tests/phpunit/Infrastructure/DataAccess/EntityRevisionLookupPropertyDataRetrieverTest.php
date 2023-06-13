@@ -2,9 +2,11 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
 
+use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Statement\StatementList as DataModelStatementList;
 use Wikibase\DataModel\Term\AliasGroup;
@@ -18,6 +20,8 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
+use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyData;
+use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyDataBuilder;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupPropertyDataRetriever;
@@ -43,7 +47,7 @@ class EntityRevisionLookupPropertyDataRetrieverTest extends TestCase {
 	public function testGetPropertyData(): void {
 		$propertyId = new NumericPropertyId( 'P123' );
 		$expectedStatement = NewStatement::someValueFor( 'P321' )
-			->withGuid( 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
+			->withGuid( 'P123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
 			->build();
 		$property = new Property(
 			$propertyId,
@@ -60,7 +64,7 @@ class EntityRevisionLookupPropertyDataRetrieverTest extends TestCase {
 		$this->entityRevisionLookup->method( 'getEntityRevision' )
 			->willReturn( new EntityRevision( $property, 123, '20201010998877' ) );
 
-		$propertyData = $this->newRetriever()->getPropertyData( $propertyId );
+		$propertyData = $this->newRetriever()->getPropertyData( $propertyId, PropertyData::VALID_FIELDS );
 
 		$this->assertSame( $propertyId, $propertyData->getId() );
 		$this->assertEquals( Labels::fromTermList( $property->getLabels() ), $propertyData->getLabels() );
@@ -78,7 +82,72 @@ class EntityRevisionLookupPropertyDataRetrieverTest extends TestCase {
 		$this->entityRevisionLookup->method( 'getEntityRevision' )
 			->willReturn( null );
 
-		$this->assertNull( $this->newRetriever()->getPropertyData( $propertyId ) );
+		$this->assertNull( $this->newRetriever()->getPropertyData( $propertyId, PropertyData::VALID_FIELDS ) );
+	}
+
+	/**
+	 * @dataProvider propertyPartsWithFieldsProvider
+	 */
+	public function testGivenFields_getPropertyDataReturnsOnlyRequestFields(
+		Property $property,
+		array $fields,
+		PropertyData $propertyParts
+	): void {
+		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $property->getId(), $property );
+
+		$this->assertEquals(
+			$propertyParts,
+			$this->newRetriever()->getPropertyData( $property->getId(), $fields )
+		);
+	}
+
+	public function propertyPartsWithFieldsProvider(): Generator {
+		$statement = NewStatement::someValueFor( 'P123' )
+			->withGuid( 'P666$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
+			->build();
+
+		$property = new Property(
+			new NumericPropertyId( 'P666' ),
+			new Fingerprint(
+				new TermList( [ new Term( 'en', 'potato' ) ] ),
+				new TermList( [ new Term( 'en', 'root vegetable' ) ] ),
+				new AliasGroupList( [ new AliasGroup( 'en', [ 'spud', 'tater' ] ) ] )
+			),
+			'wikibase-item',
+			new DataModelStatementList( $statement )
+		);
+
+		$fields = [ PropertyData::FIELD_LABELS, PropertyData::FIELD_DESCRIPTIONS, PropertyData::FIELD_ALIASES ];
+
+		yield 'labels, descriptions, aliases' => [
+			$property,
+			$fields,
+			( new PropertyDataBuilder( $property->getId(), $fields ) )
+				->setLabels( Labels::fromTermList( $property->getLabels() ) )
+				->setDescriptions( Descriptions::fromTermList( $property->getDescriptions() ) )
+				->setAliases( Aliases::fromAliasGroupList( $property->getAliasGroups() ) )
+				->build(),
+		];
+
+		yield 'statements only' => [
+			$property,
+			[ PropertyData::FIELD_STATEMENTS ],
+			( new PropertyDataBuilder( $property->getId(), [ PropertyData::FIELD_STATEMENTS ] ) )
+				->setStatements( new StatementList( $this->newStatementReadModelConverter()->convert( $statement ) ) )
+				->build(),
+		];
+
+		yield 'all fields' => [
+			$property,
+			PropertyData::VALID_FIELDS,
+			( new PropertyDataBuilder( $property->getId(), PropertyData::VALID_FIELDS ) )
+				->setDataType( $property->getDataTypeId() )
+				->setLabels( Labels::fromTermList( $property->getLabels() ) )
+				->setDescriptions( Descriptions::fromTermList( $property->getDescriptions() ) )
+				->setAliases( Aliases::fromAliasGroupList( $property->getAliasGroups() ) )
+				->setStatements( new StatementList( $this->newStatementReadModelConverter()->convert( $statement ) ) )
+				->build(),
+		];
 	}
 
 	private function newRetriever(): EntityRevisionLookupPropertyDataRetriever {
@@ -86,6 +155,16 @@ class EntityRevisionLookupPropertyDataRetrieverTest extends TestCase {
 			$this->entityRevisionLookup,
 			$this->newStatementReadModelConverter()
 		);
+	}
+
+	private function newEntityRevisionLookupForIdWithReturnValue( PropertyId $id, ?Property $returnValue ): EntityRevisionLookup {
+		$entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );
+		$entityRevisionLookup->expects( $this->once() )
+			->method( 'getEntityRevision' )
+			->with( $id )
+			->willReturn( $returnValue ? new EntityRevision( $returnValue ) : null );
+
+		return $entityRevisionLookup;
 	}
 
 	private function newStatementReadModelConverter(): StatementReadModelConverter {

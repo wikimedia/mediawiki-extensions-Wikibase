@@ -35,7 +35,7 @@ class GetProperty {
 
 		return new GetPropertyResponse(
 			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Property exists
-			$this->propertyDataRetriever->getPropertyData( $propertyId ),
+			$this->propertyDataRetriever->getPropertyData( $propertyId, $propertyRequest->getFields() ),
 			$lastModified,
 			$revisionId
 		);
