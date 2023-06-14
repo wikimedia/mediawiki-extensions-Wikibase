@@ -357,7 +357,7 @@ class SiteLinksView {
 
 			$html .= $this->templateFactory->render( 'wb-badge',
 				$classes,
-				$this->entityIdFormatter->formatEntityId( $badge ),
+				htmlspecialchars( $this->entityIdFormatter->formatEntityId( $badge ) ),
 				$badge
 			);
 		}

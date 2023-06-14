@@ -101,13 +101,15 @@ class SiteLinksViewTest extends \PHPUnit\Framework\TestCase {
 	public function testBadges() {
 		$featured = new ItemId( 'Q42' );
 		$good = new ItemId( 'Q12' );
+		$withHtml = new ItemId( 'Q56' );
 		$siteLinks = [
 			new SiteLink( 'enwiki', 'Title', [ $featured ] ),
 			new SiteLink( 'dewiki', 'Titel', [ $featured, $good ] ),
+			new SiteLink( 'ptwiki', 'tItLe', [ $withHtml ] ),
 		];
 		$html = $this->newInstance()->getHtml( $siteLinks, null, [ 'wikipedia' ] );
 
-		$this->assertSame( 3, substr_count( $html, '<BADGE' ) );
+		$this->assertSame( 4, substr_count( $html, '<BADGE' ) );
 		$this->assertStringContainsString(
 			'<BADGE class="Q42 wb-badge-featuredarticle" id="Q42">Featured article</BADGE>',
 			$html
@@ -116,6 +118,11 @@ class SiteLinksViewTest extends \PHPUnit\Framework\TestCase {
 			'<BADGE class="Q12 wb-badge-goodarticle" id="Q12">Q12</BADGE>',
 			$html
 		);
+		$this->assertStringContainsString(
+			'<BADGE class="Q56" id="Q56">badge &lt;with&gt; &quot;HTML&quot;</BADGE>',
+			$html
+		);
+		$this->assertStringNotContainsString( '<with>', $html );
 	}
 
 	/**
@@ -183,7 +190,13 @@ class SiteLinksViewTest extends \PHPUnit\Framework\TestCase {
 		$deWiki->setLanguageCode( 'de' );
 		$deWiki->setGroup( 'wikipedia' );
 
-		return new SiteList( [ $enWiki, $specialWiki, $deWiki ] );
+		$ptWiki = new Site();
+		$ptWiki->setGlobalId( 'ptwiki' );
+		$ptWiki->setLinkPath( '#ptwiki' );
+		$ptWiki->setLanguageCode( 'pt' );
+		$ptWiki->setGroup( 'wikipedia' );
+
+		return new SiteList( [ $enWiki, $specialWiki, $deWiki, $ptWiki ] );
 	}
 
 	/**
@@ -196,6 +209,8 @@ class SiteLinksViewTest extends \PHPUnit\Framework\TestCase {
 			->willReturnCallback( function( EntityId $id ) {
 				if ( $id->getSerialization() === 'Q42' ) {
 					return 'Featured article';
+				} elseif ( $id->getSerialization() === 'Q56' ) {
+					return 'badge <with> "HTML"';
 				}
 
 				return $id->getSerialization();
