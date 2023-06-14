@@ -185,6 +185,52 @@
 		$queue.dequeue( 'tests' );
 	} );
 
+	QUnit.test( 'non-mul description behaviour', function ( assert ) {
+		var $entitytermsforlanguageview = createEntitytermsforlanguageview(),
+			entitytermsforlanguageview
+				= $entitytermsforlanguageview.data( 'entitytermsforlanguageview' );
+
+		assert.propContains(
+			entitytermsforlanguageview.$descriptionview.data( 'descriptionview' ).options,
+			{
+				readOnly: false,
+				accessibilityLabel: null
+			},
+			'Not read only, no accessibility label passed.'
+		);
+		assert.notPropContains(
+			entitytermsforlanguageview.$descriptionview.data( 'descriptionview' ).options,
+			{
+				placeholderMessage: 'wikibase-description-edit-placeholder-not-applicable'
+			},
+			'Mul placeholder message is not used.'
+		);
+	} );
+
+	QUnit.test( 'mul description behaviour', function ( assert ) {
+		var $entitytermsforlanguageview = createEntitytermsforlanguageview( {
+				value: {
+					language: 'mul',
+					label: new datamodel.Term( 'mul', 'test label' ),
+					description: new datamodel.Term( 'mul', '' ),
+					aliases: new datamodel.MultiTerm( 'mul', [ 'alias1', 'alias2' ] )
+				}
+			} ),
+			entitytermsforlanguageview
+				= $entitytermsforlanguageview.data( 'entitytermsforlanguageview' );
+
+		assert.propContains(
+			entitytermsforlanguageview.$descriptionview.data( 'descriptionview' ).options,
+			{
+				readOnly: true,
+				placeholderMessage: 'wikibase-description-edit-placeholder-not-applicable',
+				accessibilityLabel:
+					mw.msg( 'wikibase-description-edit-mul-not-applicable-accessibility-label' )
+			},
+			'Options for mul set: Read only, accessibility label and placeholder message.'
+		);
+	} );
+
 	QUnit.test( 'setError()', function ( assert ) {
 		var $entitytermsforlanguageview = createEntitytermsforlanguageview(),
 			entitytermsforlanguageview

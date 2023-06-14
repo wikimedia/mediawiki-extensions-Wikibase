@@ -332,6 +332,8 @@ return call_user_func( function() {
 				'wikibase-description-empty',
 				'wikibase-description-not-applicable',
 				'wikibase-description-not-applicable-title',
+				'wikibase-description-edit-placeholder-not-applicable',
+				'wikibase-description-edit-mul-not-applicable-accessibility-label',
 				'wikibase-statementgrouplistview-add',
 				'wikibase-description-empty',
 				'wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label',

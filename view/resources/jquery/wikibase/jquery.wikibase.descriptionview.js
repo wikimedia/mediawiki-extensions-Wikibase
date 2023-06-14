@@ -17,6 +17,11 @@
 	 *
 	 * @option {string} [inputNodeName='TEXTAREA']
 	 *         Should either be 'TEXTAREA' or 'INPUT'.
+	 * @option {boolean} [readOnly=false]
+	 *         Whether the input should be read only.
+	 * @option {string} [placeholderMessage='wikibase-description-edit-placeholder-language-aware']
+	 * @option {string|null} [accessibilityLabel]
+	 *         Will be added to the input/textarea as aria-label.
 	 */
 	$.widget( 'wikibase.descriptionview', PARENT, {
 		/**
@@ -33,7 +38,10 @@
 				$text: '.wikibase-descriptionview-text'
 			},
 			value: null,
-			inputNodeName: 'TEXTAREA'
+			inputNodeName: 'TEXTAREA',
+			readOnly: false,
+			placeholderMessage: 'wikibase-description-edit-placeholder-language-aware',
+			accessibilityLabel: null
 		},
 
 		/**
@@ -137,9 +145,11 @@
 
 			$input
 			.addClass( this.widgetFullName + '-input' )
-			// TODO: Inject correct placeholder via options
 			.attr( 'placeholder', mw.msg(
-				'wikibase-description-edit-placeholder-language-aware',
+				// The following messages can be used here:
+				// * wikibase-description-edit-placeholder-language-aware
+				// * wikibase-description-edit-placeholder-not-applicable
+				this.options.placeholderMessage,
 				wb.getLanguageNameByCode( languageCode )
 			) )
 			.attr( 'lang', languageCode )
@@ -162,6 +172,14 @@
 					expandHeight: true,
 					suppressNewLine: true
 				} );
+			}
+
+			if ( this.options.readOnly ) {
+				$input.prop( 'readOnly', true );
+			}
+
+			if ( this.options.accessibilityLabel ) {
+				$input.attr( 'aria-label', this.options.accessibilityLabel );
 			}
 
 			this.$text.empty().append( $input );
