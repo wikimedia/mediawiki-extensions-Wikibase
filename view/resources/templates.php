@@ -145,6 +145,15 @@ HTML;
 <div class="wikibase-descriptionview $1" dir="$4" lang="$5"><div class="wikibase-descriptionview-container"><span class="wikibase-descriptionview-text">$2</span><!-- wikibase-toolbar -->$3</div></div>
 HTML;
 
+	$templates['wikibase-descriptionview-mul'] =
+		<<<HTML
+<div class="wikibase-descriptionview wikibase-descriptionview--mul wb-empty" dir="auto" lang="$3">
+	<div class="wikibase-descriptionview-container">
+		<abbr title="$2" class="wikibase-descriptionview-text"><span aria-hidden="true">$1</span></abbr>
+	</div>
+</div>
+HTML;
+
 	$templates['wikibase-aliasesview'] =
 <<<HTML
 <div class="wikibase-aliasesview $1">
