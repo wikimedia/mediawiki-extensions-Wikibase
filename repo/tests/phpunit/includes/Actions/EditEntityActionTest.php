@@ -2,12 +2,16 @@
 
 namespace Wikibase\Repo\Tests\Actions;
 
+use IContextSource;
 use MediaWiki\MediaWikiServices;
 use RuntimeException;
+use Status;
 use Title;
 use User;
+use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Repo\Actions\EditEntityAction;
 use Wikibase\Repo\Actions\SubmitEntityAction;
+use Wikibase\Repo\Content\EntityContent;
 use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 
@@ -32,6 +36,27 @@ class EditEntityActionTest extends ActionTestCase {
 
 		// Remove handlers for the "OutputPageParserOutput" hook
 		$this->clearHook( 'OutputPageParserOutput' );
+
+		// Install EditFilterMergedContent hook blocking any edits to "Oslo"@en
+		$method = __METHOD__;
+		$this->setTemporaryHook(
+			'EditFilterMergedContent',
+			function ( IContextSource $context, EntityContent $entityContent, Status $status ) use ( $method ) {
+				if ( !$entityContent->isRedirect() ) {
+					$entity = $entityContent->getEntity();
+					if ( $entity instanceof LabelsProvider ) {
+						$labels = $entity->getLabels();
+						if ( $labels->hasTermForLanguage( 'en' )
+							&& $labels->getByLanguage( 'en' )->getText() === 'Oslo'
+						) {
+							$status->fatal( $method . ': block "Oslo"@en edit' );
+							return false;
+						}
+					}
+				}
+				return true;
+			}
+		);
 	}
 
 	public function testActionForPage() {
@@ -844,6 +869,20 @@ class EditEntityActionTest extends ActionTestCase {
 			true, // post
 			null, // user
 			'/wikibase-undo-redirect-latestnoredirect/', // htmlPattern: should contain error
+		];
+
+		// blocked by edit filter (e.g. AbuseFilter, T250720), see setUp()
+		yield 'edit blocked by edit filter' => [
+			'submit', // action
+			'Oslo', // handle
+			[ // params
+				'wpSave' => 1,
+				'wpEditToken' => true, // automatic token
+				'undo' => 0, // current revision
+			],
+			true, // post
+			null, // user
+			'/block "Oslo"@en edit/', // htmlPattern: should contain filter error message
 		];
 	}
 
