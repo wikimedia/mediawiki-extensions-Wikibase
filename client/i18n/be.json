@@ -163,7 +163,7 @@
 	"wikibase-client-data-bridge-saving-error-message": "Вашы змены не могуць быць захаваны з-за памылкі. Паспрабуйце захаваць зноў.",
 	"wikibase-client-data-bridge-edit-conflict-error-heading": "Выяўлены канфлікт правак",
 	"wikibase-client-data-bridge-edit-conflict-error-message": "Іншы ўдзельнік толькі што змяніў гэта значэнне і апублікаваў свае змены першым. Прымяніць вашыя змены немагчыма. Перазагрузіце старонку, каб атрымаць новае значэнне.",
-	"wikibase-client-data-bridge-unknown-error-heading": "Штось пайшло не так...",
+	"wikibase-client-data-bridge-unknown-error-heading": "Штосьці пайшло не так...",
 	"wikibase-client-data-bridge-unknown-error-message": "Адбылася памылка, і змяніць абранае значэнне зараз немагчыма. Паспрабуйце перазагрузіць.",
 	"wikibase-client-data-bridge-error-report": "<p>Калі памылка не знікне, калі ласка, [$1 паведаміце аб гэтай праблеме], апішыце свае дзеянні і ўключыце наступную інфармацыю:</p>\n<ul>\n<li>$2</li>\n<li>$3 з $4</li>\n<li>Код памылкі: $5</li>\n</ul>",
 	"wikibase-client-data-bridge-error-reload-bridge": "Перазагрузіць",
