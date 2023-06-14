@@ -26,7 +26,7 @@
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|izmjena|izmjene}}",
 	"wikibase-dataitem": "Stavka na {{GRAMMAR:dativ|{{WBREPONAME}}}}",
 	"wikibase-editlinks": "Uredi veze",
-	"wikibase-editlinkstitle": "Uredi međujezične veze",
+	"wikibase-editlinkstitle": "Uredi međujezičke linkove",
 	"wikibase-addlinkstitle": "Dodaj međujezičke veze",
 	"wikibase-linkitem-addlinks": "Dodaj veze",
 	"wikibase-linkitem-alreadylinked": "Stranica sa kojom ste htjeli napraviti vezu je već povezana sa [$1 stavkom] u centralnom skladištu podataka koja vodi prema [[$2]] na ovom sajtu. Stavke se mogu povezati samo sa jednom stranicom. Molimo izaberite drugu stranicu.",

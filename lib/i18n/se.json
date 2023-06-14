@@ -11,5 +11,6 @@
 	"datatypes-type-string": "Sreaŋga",
 	"datatypes-type-boolean": "Boolelaš árvu",
 	"datatypes-type-wikibase-property": "Iešvuohta",
+	"wikibase-time-precision-century": "$1. čuohtejahki",
 	"wikibase-reference-formatter-snak-retrieved": "Čujuhuvvon $1"
 }

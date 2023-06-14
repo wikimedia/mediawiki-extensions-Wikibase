@@ -12,9 +12,12 @@
 	"wikibase-editlinks": "ЭлячӀунар дуьзар хъувун",
 	"wikibase-editlinkstitle": "ЧӀаларин арадавай элячӀунар дуьзар хъувун",
 	"wikibase-linkitem-addlinks": "ЭлячӀунар алава авун",
+	"wikibase-linkitem-input-site": "ЧӀал:",
+	"wikibase-linkitem-input-page": "Ччин:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Чуьнуьхун",
 	"wikibase-rc-hide-wikidata-show": "Къалурун",
 	"wikibase-rc-wikibase-edit-letter": "Д",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} дуьзар хъувун"
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} дуьзар хъувун",
+	"wikibase-otherprojects": "Маса проектра"
 }
