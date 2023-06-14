@@ -4,7 +4,7 @@
 		"summary": "Retrieve a single Wikibase Item by ID",
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/ItemId" },
-			{ "$ref": "../../global/parameters.json#/Fields" },
+			{ "$ref": "../../global/parameters.json#/ItemFields" },
 			{ "$ref": "../../global/parameters.json#/IfNoneMatch" },
 			{ "$ref": "../../global/parameters.json#/IfModifiedSince" },
 			{ "$ref": "../../global/parameters.json#/IfMatch" },

@@ -81,6 +81,16 @@ describe( 'validate GET /entities/properties/{id} responses against OpenAPI docu
 		expect( response ).to.satisfyApiSpec;
 	} );
 
+	it( '400 Bad Request response is valid for an invalid field', async () => {
+		const response = await newGetPropertyRequestBuilder( 'Q123' )
+			.withQueryParam( '_fields', 'unknown_field' )
+			.assertInvalidRequest()
+			.makeRequest();
+
+		expect( response ).to.have.status( 400 );
+		expect( response ).to.satisfyApiSpec;
+	} );
+
 	it( '404 Not Found response is valid for a non-existing property', async () => {
 		const response = await newGetPropertyRequestBuilder( 'P99999' ).makeRequest();
 
