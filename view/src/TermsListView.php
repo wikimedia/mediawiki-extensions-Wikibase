@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\View;
 
 use Wikibase\DataModel\Term\AliasGroupList;
@@ -14,25 +16,13 @@ use Wikibase\View\Template\TemplateFactory;
  */
 class TermsListView {
 
-	/**
-	 * @var TemplateFactory
-	 */
-	private $templateFactory;
+	private TemplateFactory $templateFactory;
 
-	/**
-	 * @var LanguageDirectionalityLookup
-	 */
-	private $languageDirectionalityLookup;
+	private LanguageDirectionalityLookup $languageDirectionalityLookup;
 
-	/**
-	 * @var LanguageNameLookup
-	 */
-	private $languageNameLookup;
+	private LanguageNameLookup $languageNameLookup;
 
-	/**
-	 * @var LocalizedTextProvider
-	 */
-	private $textProvider;
+	private LocalizedTextProvider $textProvider;
 
 	public function __construct(
 		TemplateFactory $templateFactory,
@@ -59,7 +49,7 @@ class TermsListView {
 		TermList $descriptions,
 		?AliasGroupList $aliasGroups,
 		array $languageCodes
-	) {
+	): string {
 		$entityTermsForLanguageViewsHtml = '';
 
 		foreach ( $languageCodes as $languageCode ) {
@@ -75,11 +65,9 @@ class TermsListView {
 	}
 
 	/**
-	 * @param string $contentHtml
-	 *
 	 * @return string HTML
 	 */
-	public function getListViewHtml( $contentHtml ) {
+	public function getListViewHtml( string $contentHtml ): string {
 		return $this->templateFactory->render(
 			'wikibase-entitytermsforlanguagelistview',
 			$this->textProvider->getEscaped( 'wikibase-entitytermsforlanguagelistview-language' ),
@@ -91,19 +79,14 @@ class TermsListView {
 	}
 
 	/**
-	 * @param TermList $labels
-	 * @param TermList $descriptions
-	 * @param AliasGroupList|null $aliasGroups
-	 * @param string $languageCode
-	 *
 	 * @return string HTML
 	 */
 	public function getListItemHtml(
 		TermList $labels,
 		TermList $descriptions,
 		?AliasGroupList $aliasGroups,
-		$languageCode
-	) {
+		string $languageCode
+	): string {
 		$languageName = $this->languageNameLookup->getName( $languageCode );
 
 		return $this->templateFactory->render(
@@ -126,7 +109,7 @@ class TermsListView {
 		);
 	}
 
-	private function getLabelView( TermList $listOfLabelTerms, $languageCode ) {
+	private function getLabelView( TermList $listOfLabelTerms, string $languageCode ): string {
 		$hasLabelInLanguage = $listOfLabelTerms->hasTermForLanguage( $languageCode );
 		$effectiveLanguage = $hasLabelInLanguage ? $languageCode : $this->textProvider->getLanguageOf( 'wikibase-label-empty' );
 		return $this->templateFactory->render(
@@ -142,7 +125,7 @@ class TermsListView {
 		);
 	}
 
-	private function getDescriptionView( TermList $listOfDescriptionTerms, $languageCode ) {
+	private function getDescriptionView( TermList $listOfDescriptionTerms, string $languageCode ): string {
 		$hasDescriptionInLanguage = $listOfDescriptionTerms->hasTermForLanguage( $languageCode );
 		$effectiveLanguage = $hasDescriptionInLanguage ? $languageCode : $this->textProvider->getLanguageOf( 'wikibase-description-empty' );
 		return $this->templateFactory->render(
@@ -159,12 +142,9 @@ class TermsListView {
 	}
 
 	/**
-	 * @param AliasGroupList $aliasGroups
-	 * @param string $languageCode
-	 *
 	 * @return string HTML
 	 */
-	private function getAliasesView( AliasGroupList $aliasGroups, $languageCode ) {
+	private function getAliasesView( AliasGroupList $aliasGroups, string $languageCode ): string {
 		if ( !$aliasGroups->hasGroupForLanguage( $languageCode ) ) {
 			return $this->templateFactory->render(
 				'wikibase-aliasesview',
