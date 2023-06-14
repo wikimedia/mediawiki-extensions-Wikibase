@@ -112,16 +112,12 @@ class TermsListView {
 			'td',
 			$languageCode,
 			htmlspecialchars( $languageName ),
-			$this->getTermView(
+			$this->getLabelView(
 				$labels,
-				'wikibase-labelview', // Template
-				'wikibase-label-empty', // Text key
 				$languageCode
 			),
-			$this->getTermView(
+			$this->getDescriptionView(
 				$descriptions,
-				'wikibase-descriptionview', // Template
-				'wikibase-description-empty', // Text key
 				$languageCode
 			),
 			$aliasGroups ? $this->getAliasesView( $aliasGroups, $languageCode ) : '',
@@ -130,15 +126,31 @@ class TermsListView {
 		);
 	}
 
-	private function getTermView( TermList $termList, $templateName, $emptyTextKey, $languageCode ) {
-		$hasTerm = $termList->hasTermForLanguage( $languageCode );
-		$effectiveLanguage = $hasTerm ? $languageCode : $this->textProvider->getLanguageOf( $emptyTextKey );
+	private function getLabelView( TermList $listOfLabelTerms, $languageCode ) {
+		$hasLabelInLanguage = $listOfLabelTerms->hasTermForLanguage( $languageCode );
+		$effectiveLanguage = $hasLabelInLanguage ? $languageCode : $this->textProvider->getLanguageOf( 'wikibase-label-empty' );
 		return $this->templateFactory->render(
-			$templateName,
-			$hasTerm ? '' : 'wb-empty',
-			htmlspecialchars( $hasTerm
-				? $termList->getByLanguage( $languageCode )->getText()
-				: $this->textProvider->get( $emptyTextKey )
+			'wikibase-labelview',
+			$hasLabelInLanguage ? '' : 'wb-empty',
+			htmlspecialchars( $hasLabelInLanguage
+				? $listOfLabelTerms->getByLanguage( $languageCode )->getText()
+				: $this->textProvider->get( 'wikibase-label-empty' )
+			),
+			'',
+			$this->languageDirectionalityLookup->getDirectionality( $effectiveLanguage ) ?: 'auto',
+			$effectiveLanguage
+		);
+	}
+
+	private function getDescriptionView( TermList $listOfDescriptionTerms, $languageCode ) {
+		$hasDescriptionInLanguage = $listOfDescriptionTerms->hasTermForLanguage( $languageCode );
+		$effectiveLanguage = $hasDescriptionInLanguage ? $languageCode : $this->textProvider->getLanguageOf( 'wikibase-description-empty' );
+		return $this->templateFactory->render(
+			'wikibase-descriptionview',
+			$hasDescriptionInLanguage ? '' : 'wb-empty',
+			htmlspecialchars( $hasDescriptionInLanguage
+				? $listOfDescriptionTerms->getByLanguage( $languageCode )->getText()
+				: $this->textProvider->get( 'wikibase-description-empty' )
 			),
 			'',
 			$this->languageDirectionalityLookup->getDirectionality( $effectiveLanguage ) ?: 'auto',
