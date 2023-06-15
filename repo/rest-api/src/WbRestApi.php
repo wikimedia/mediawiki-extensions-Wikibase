@@ -30,6 +30,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupItemDataRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupPropertyDataRetriever;
+use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupStatementRetriever;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
 
@@ -131,6 +132,11 @@ class WbRestApi {
 	public static function getItemDataRetriever( ContainerInterface $services = null ): EntityRevisionLookupItemDataRetriever {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.ItemDataRetriever' );
+	}
+
+	public static function getStatementRetriever( ContainerInterface $services = null ): EntityRevisionLookupStatementRetriever {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.StatementRetriever' );
 	}
 
 	public static function getStatementDeserializer( ContainerInterface $services = null ): StatementDeserializer {

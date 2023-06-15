@@ -8,8 +8,8 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
 /**
  * @license GPL-2.0-or-later
  */
-interface ItemStatementRetriever {
+interface StatementRetriever {
 
-	public function getStatement( StatementGuid $statementGuid ): ?Statement;
+	public function getStatement( StatementGuid $statementId ): ?Statement;
 
 }

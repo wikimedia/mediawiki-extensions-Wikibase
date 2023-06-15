@@ -15,7 +15,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
-use Wikibase\Repo\RestApi\Domain\Services\ItemStatementRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\StatementRetriever;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
 
 /**
@@ -33,7 +33,7 @@ class GetItemStatementTest extends TestCase {
 	private $getRevisionMetadata;
 
 	/**
-	 * @var Stub|ItemStatementRetriever
+	 * @var Stub|StatementRetriever
 	 */
 	private $statementRetriever;
 
@@ -41,7 +41,7 @@ class GetItemStatementTest extends TestCase {
 		parent::setUp();
 
 		$this->getRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
-		$this->statementRetriever = $this->createStub( ItemStatementRetriever::class );
+		$this->statementRetriever = $this->createStub( StatementRetriever::class );
 	}
 
 	public function testGetItemStatement(): void {
@@ -61,7 +61,7 @@ class GetItemStatementTest extends TestCase {
 			->with( $itemId )
 			->willReturn( [ $revision, $lastModified ] );
 
-		$this->statementRetriever = $this->createMock( ItemStatementRetriever::class );
+		$this->statementRetriever = $this->createMock( StatementRetriever::class );
 		$this->statementRetriever->expects( $this->once() )
 			->method( 'getStatement' )
 			->with( $statementId )
@@ -163,7 +163,7 @@ class GetItemStatementTest extends TestCase {
 		$this->getRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
 		$this->getRevisionMetadata->method( 'execute' )->willReturn( [ $revision, $lastModified ] );
 
-		$this->statementRetriever = $this->createMock( ItemStatementRetriever::class );
+		$this->statementRetriever = $this->createMock( StatementRetriever::class );
 		$this->statementRetriever->expects( $this->never() )->method( $this->anything() );
 
 		try {
