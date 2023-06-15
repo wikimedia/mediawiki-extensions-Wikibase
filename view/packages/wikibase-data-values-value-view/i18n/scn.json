@@ -14,6 +14,5 @@
 	"valueview-expert-timeinput-precision-hour": "ura",
 	"valueview-expert-timeinput-precision-minute": "minutu",
 	"valueview-expert-timeinput-precision-second": "secunnu",
-	"valueview-expert-timeinput-calendar": "Calannariu:",
-	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)"
+	"valueview-expert-timeinput-calendar": "Calannariu:"
 }

@@ -32,7 +32,6 @@
 	"valueview-expert-timeinput-precision-hour": "час",
 	"valueview-expert-timeinput-precision-minute": "минута",
 	"valueview-expert-timeinput-calendar": "Календарь:",
-	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
 	"valueview-expertextender-languageselector-label": "Язык (обязательно):",
 	"valueview-expertextender-unitsuggester-label": "Единица измерения (необязательно):",
 	"valueview-preview-label": "будет отображаться как:",

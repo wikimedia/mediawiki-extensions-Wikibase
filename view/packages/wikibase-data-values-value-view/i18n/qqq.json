@@ -41,7 +41,7 @@
 	"valueview-expert-timeinput-precision-minute": "Label for a certain precision when entering a time value, displayed following {{msg-mw|valueview-expert-timeinput-precision}}",
 	"valueview-expert-timeinput-precision-second": "Label for a certain precision when entering a time value, displayed following {{msg-mw|valueview-expert-timeinput-precision}}",
 	"valueview-expert-timeinput-calendar": "Label for the user interface element used to select a specific calendar (e.g. Gregorian, Julian) entering a time value.\n\nThe calendar is not localized at this time.\n{{Identical|Calendar}}",
-	"valueview-expertextender-languageselector-languagetemplate": "Defines how the language should be displayed relative to the text.\n\nParameters:\n* $1 - the text.\n* $2 - the language name or code.",
+	"valueview-expertextender-languageselector-languagetemplate": "{{Optional}}\n\nDefines how the language should be displayed relative to the text.\n\nParameters:\n* $1 - the text.\n* $2 - the language name or code.",
 	"valueview-expertextender-languageselector-label": "Label displayed above the language input. The input is either a plain text field or a search with a suggester.",
 	"valueview-expertextender-unitsuggester-label": "Label displayed above the quantity's unit input. The input is a plain text field with an optional suggester.",
 	"valueview-preview-label": "Label displayed above the preview of a value that is being entered by the user. The preview is the system's interpretation of the specified value and - since there is no strict definition for a user how to specify values - visualizes how the value will be displayed later on after the value has been saved.",

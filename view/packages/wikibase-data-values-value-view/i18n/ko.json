@@ -33,7 +33,6 @@
 	"valueview-expert-timeinput-precision-minute": "분",
 	"valueview-expert-timeinput-precision-second": "초",
 	"valueview-expert-timeinput-calendar": "달력:",
-	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
 	"valueview-expertextender-languageselector-label": "언어 (필수):",
 	"valueview-expertextender-unitsuggester-label": "단위 (선택 사항):",
 	"valueview-preview-label": "다음과 같이 표시됩니다:",

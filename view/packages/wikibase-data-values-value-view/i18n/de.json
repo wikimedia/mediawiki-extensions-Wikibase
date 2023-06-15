@@ -37,7 +37,6 @@
 	"valueview-expert-timeinput-precision-minute": "Minute",
 	"valueview-expert-timeinput-precision-second": "Sekunde",
 	"valueview-expert-timeinput-calendar": "Kalender:",
-	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
 	"valueview-expertextender-languageselector-label": "Sprache (verpflichtend):",
 	"valueview-expertextender-unitsuggester-label": "Einheit (optional):",
 	"valueview-preview-label": "wird angezeigt als:",

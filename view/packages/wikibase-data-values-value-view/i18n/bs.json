@@ -12,7 +12,6 @@
 	"valueview-expert-timevalue-calendar-julian": "Julijanski",
 	"valueview-expert-timeinput-precision": "Preciznost:",
 	"valueview-expert-timeinput-calendar": "Kalendar:",
-	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
 	"valueview-expertextender-languageselector-label": "Jezik (obavezno):",
 	"valueview-expertextender-unitsuggester-label": "Jedinica (neobavezno):"
 }

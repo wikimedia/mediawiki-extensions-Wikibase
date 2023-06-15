@@ -35,7 +35,6 @@
 	"valueview-expert-timeinput-precision-hour": "tunti",
 	"valueview-expert-timeinput-precision-minute": "minuutti",
 	"valueview-expert-timeinput-calendar": "Kalenteri:",
-	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
 	"valueview-expertextender-languageselector-label": "Kieli (pakollinen):",
 	"valueview-expertextender-unitsuggester-label": "Yksikkö (valinnainen):",
 	"valueview-preview-label": "näytetään muodossa:",
