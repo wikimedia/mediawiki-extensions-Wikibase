@@ -4,15 +4,19 @@
 			"Herryz",
 			"NoiX180",
 			"Salomo Christian Hutajulu",
-			"Bennylin"
+			"Bennylin",
+			"27christian11"
 		]
 	},
 	"tooltip-t-wikibase": "Pautan to item repositori data na tarsambung",
 	"wikibase-comment-update": "Diubah do item {{WBREPONAME}}",
 	"wikibase-dataitem": "{{WBREPONAME}} ulaula",
-	"wikibase-editlinks": "Patota tautan",
+	"wikibase-editlinks": "Patota pangait",
 	"wikibase-editlinkstitle": "Patota angka tautan antarparhataan",
-	"wikibase-linkitem-addlinks": "Tamba tautan",
+	"wikibase-linkitem-addlinks": "Tamba pangait",
+	"wikibase-linkitem-title": "Padomu dohot alaman",
+	"wikibase-linkitem-linkpage": "Haithon dohot alaman",
+	"wikibase-linkitem-selectlink": "Pillit ma situs dohot alaman na naeng sipahaithononmuna tu alaman on.",
 	"wikibase-linkitem-input-site": "Parhataan:",
 	"wikibase-linkitem-input-page": "Alaman:",
 	"wikibase-rc-hide-wikidata": "$1{{WBREOPNAME}}",

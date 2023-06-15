@@ -1,0 +1,25 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bangrapip"
+		]
+	},
+	"wikibase-client-desc": "Klièn bakal èkstènsi Wikibase",
+	"tooltip-t-wikibase": "Sènggètan ke butir gudang data nyang keubung",
+	"wikibase-after-page-move": "Aturan mah sekarang pemindahan lu [$1 keliatan di sènggètan basa butir {{WBREPONAME}}]. Kita minta' lu perèksa apa ni udah kejadian.",
+	"wikibase-after-page-delete": "Sènggètan ke ni halaman aturan mah udah diapus deri [$1 butir {{WBREPONAME}} nyang bekaètan]. Kita minta' lu perèksa apa ni udah kejadian.",
+	"wikibase-after-page-delete-queued": "[$1 butir {{WBREPONAME}}] nyang bekaètan ama ni halaman bakalan otomatis diperbaruin. Èling baè'-baè' kalo ni bisa aja kaga' langsung kejadian.",
+	"wikibase-comment-add": "Butir {{WBREPONAME}} udah dikeja.",
+	"wikibase-comment-remove": "Butir {{WBREPONAME}} nyang bekaètan diapus. Sènggètan basa dibuang.",
+	"wikibase-dataitem": "Butir di {{WBREPONAME}}",
+	"wikibase-editlinks": "Permak sènggètan",
+	"wikibase-linkitem-addlinks": "Tambah sènggètan",
+	"wikibase-linkitem-title": "Sènggètin ama halaman",
+	"wikibase-linkitem-linkpage": "Sènggètin ama halaman",
+	"wikibase-linkitem-selectlink": "Padol dah, pilih pelampang èn halaman nyang lu pèngèn sènggètin ke ni halaman.",
+	"wikibase-linkitem-input-site": "Basa:",
+	"wikibase-linkitem-input-page": "Halaman:",
+	"wikibase-rc-hide-wikidata-hide": "Umpetin",
+	"wikibase-rc-hide-wikidata-show": "Kasi unjuk",
+	"wikibase-otherprojects": "Di laèn-laèn proyèk"
+}
