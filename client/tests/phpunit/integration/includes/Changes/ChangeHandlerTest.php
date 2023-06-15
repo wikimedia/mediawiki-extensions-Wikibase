@@ -168,14 +168,14 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 		];
 
 		$testHooks = [
-			'WikibaseHandleChange' => [ function( Change $change ) use ( $spy ) {
+			'WikibaseHandleChange' => function( Change $change ) use ( $spy ) {
 				$spy->handleChangeCallCount++;
 				return true;
-			} ],
-			'WikibaseHandleChanges' => [ function( array $changes ) use ( $spy ) {
+			},
+			'WikibaseHandleChanges' => function( array $changes ) use ( $spy ) {
 				$spy->handleChangesCallCount++;
 				return true;
-			} ],
+			},
 		];
 
 		$changeHandler = $this->getChangeHandler( [], null, $testHooks );
