@@ -7,7 +7,7 @@
 		"description": "This endpoint is also accessible through `/statements/{statement_id}`",
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/ItemId" },
-			{ "$ref": "../../global/parameters.json#/StatementId" },
+			{ "$ref": "../../global/parameters.json#/ItemStatementId" },
 			{ "$ref": "../../global/parameters.json#/IfNoneMatch" },
 			{ "$ref": "../../global/parameters.json#/IfModifiedSince" },
 			{ "$ref": "../../global/parameters.json#/IfMatch" },
@@ -15,10 +15,7 @@
 			{ "$ref": "../../global/parameters.json#/Authorization" }
 		],
 		"responses": {
-			"200": {
-				"$ref": "../../global/responses.json#/ItemStatement",
-				"description": "A single Wikibase Statement. Please note that the value of the `ETag` header field refers to the Item's revision ID."
-			},
+			"200": { "$ref": "../../global/responses.json#/ItemStatement" },
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
 			"400": { "$ref": "../../global/responses.json#/InvalidRetrieveItemStatementInput" },
 			"404": { "$ref": "../../global/responses.json#/ItemStatementNotFound" },
@@ -32,7 +29,7 @@
 		"description": "This endpoint is also accessible through `/statements/{statement_id}`",
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/ItemId" },
-			{ "$ref": "../../global/parameters.json#/StatementId" },
+			{ "$ref": "../../global/parameters.json#/ItemStatementId" },
 			{ "$ref": "../../global/parameters.json#/IfMatch" },
 			{ "$ref": "../../global/parameters.json#/IfNoneMatch" },
 			{ "$ref": "../../global/parameters.json#/IfUnmodifiedSince" }
@@ -53,7 +50,7 @@
 		"description": "This endpoint is also accessible through `/statements/{statement_id}`.",
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/ItemId" },
-			{ "$ref": "../../global/parameters.json#/StatementId" },
+			{ "$ref": "../../global/parameters.json#/ItemStatementId" },
 			{ "$ref": "../../global/parameters.json#/IfMatch" },
 			{ "$ref": "../../global/parameters.json#/IfNoneMatch" },
 			{ "$ref": "../../global/parameters.json#/IfUnmodifiedSince" }
@@ -76,7 +73,7 @@
 		"description": "This endpoint is also accessible through `/statements/{statement_id}`",
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/ItemId" },
-			{ "$ref": "../../global/parameters.json#/StatementId" },
+			{ "$ref": "../../global/parameters.json#/ItemStatementId" },
 			{ "$ref": "../../global/parameters.json#/IfMatch" },
 			{ "$ref": "../../global/parameters.json#/IfNoneMatch" },
 			{ "$ref": "../../global/parameters.json#/IfUnmodifiedSince" }

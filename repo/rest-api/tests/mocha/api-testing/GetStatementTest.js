@@ -137,7 +137,8 @@ describe( 'Retrieve Single Statement', () => {
 						const incorrectSubjectId = allTestData[ incorrectSubjectType ].subjectId;
 						const statementId = `${incorrectSubjectId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
 						const response = await newRequestBuilder( { subjectId: testData.subjectId, statementId } )
-							.assertValidRequest()
+							// TODO: uncomment when the test suite is split up by statement subject type
+							// .assertValidRequest()
 							.makeRequest();
 
 						assertValidErrorResponse( response, 404, 'statement-not-found' );

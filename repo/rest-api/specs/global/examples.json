@@ -329,5 +329,43 @@
 				"matching-item-id": "{duplicate_item_id}"
 			}
 		}
+	},
+	"ItemStatementIdExample": {
+		"value": "Q42$F078E5B3-F9A8-480E-B7AC-D97778CBBEF9"
+	},
+	"PropertyStatementIdExample": {
+		"value": "P31$9d042001-4a7e-2432-a7e1-233360062379"
+	},
+	"ItemStatementResponseExample": {
+		"value": {
+			"id": "Q42$F078E5B3-F9A8-480E-B7AC-D97778CBBEF9",
+			"rank": "normal",
+			"property": {
+				"id": "P31",
+				"data-type": "wikibase-item"
+			},
+			"value": {
+				"type": "value",
+				"content": "Q5"
+			},
+			"qualifiers": [],
+			"references": []
+		}
+	},
+	"PropertyStatementResponseExample": {
+		"value": {
+			"id": "P31$9d042001-4a7e-2432-a7e1-233360062379",
+			"rank": "normal",
+			"property": {
+				"id": "P31",
+				"data-type": "wikibase-item"
+			},
+			"value": {
+				"type": "value",
+				"content": "Q18616576"
+			},
+			"qualifiers": [],
+			"references": []
+		}
 	}
 }

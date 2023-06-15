@@ -203,16 +203,6 @@ describe( 'PUT statement tests', () => {
 					assert.include( response.body.message, statementId );
 				} );
 
-				it( 'statement is not on an item', async () => {
-					const statementId = testStatementId.replace( 'Q', 'P' );
-					const statementSerialization = entityHelper.newStatementWithRandomStringValue( testPropertyId );
-					const response = await newReplaceRequestBuilder( testItemId, statementId, statementSerialization )
-						.assertValidRequest().makeRequest();
-
-					assertValid400Response( response, 'invalid-statement-id' );
-					assert.include( response.body.message, statementId );
-				} );
-
 				it( 'comment too long', async () => {
 					const comment = 'x'.repeat( 501 );
 					const statementSerialization = entityHelper.newStatementWithRandomStringValue( testPropertyId );
@@ -438,6 +428,16 @@ describe( 'PUT statement tests', () => {
 	} );
 
 	describe( 'short route specific errors', () => {
+		it( 'responds 400 invalid-statement-id if statement is not on an item', async () => {
+			const statementId = testStatementId.replace( 'Q', 'P' );
+			const statementSerialization = entityHelper.newStatementWithRandomStringValue( testPropertyId );
+			const response = await newReplaceStatementRequestBuilder( statementId, statementSerialization )
+				.assertValidRequest().makeRequest();
+
+			assertValid400Response( response, 'invalid-statement-id' );
+			assert.include( response.body.message, statementId );
+		} );
+
 		it( 'responds 404 statement-not-found for nonexistent item', async () => {
 			const statementId = 'Q9999999$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 			const response = await newReplaceStatementRequestBuilder( statementId )

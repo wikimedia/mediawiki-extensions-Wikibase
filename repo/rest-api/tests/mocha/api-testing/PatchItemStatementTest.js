@@ -180,15 +180,6 @@ describe( 'PATCH statement tests', () => {
 					assert.include( response.body.message, statementId );
 				} );
 
-				it( 'statement is not on an item', async () => {
-					const statementId = testStatementId.replace( 'Q', 'P' );
-					const response = await newPatchRequestBuilder( statementId, [] )
-						.assertValidRequest().makeRequest();
-
-					assertValid400Response( response, 'invalid-statement-id' );
-					assert.include( response.body.message, statementId );
-				} );
-
 				it( 'comment too long', async () => {
 					const comment = 'x'.repeat( 501 );
 					const response = await newPatchRequestBuilder( testStatementId, [] )
@@ -523,6 +514,15 @@ describe( 'PATCH statement tests', () => {
 	} );
 
 	describe( 'short route specific errors', () => {
+		it( 'responds 400 invalid-statement-id if statement is not on an item', async () => {
+			const statementId = testStatementId.replace( 'Q', 'P' );
+			const response = await newPatchStatementRequestBuilder( statementId, [] )
+				.assertValidRequest().makeRequest();
+
+			assertValid400Response( response, 'invalid-statement-id' );
+			assert.include( response.body.message, statementId );
+		} );
+
 		it( 'responds 404 statement-not-found for nonexistent item', async () => {
 			const statementId = 'Q999999999$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 			const response = await newPatchStatementRequestBuilder( statementId, [] )
