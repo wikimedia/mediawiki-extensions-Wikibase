@@ -53,7 +53,7 @@
 		},
 		"example": "en"
 	},
-	"Fields": {
+	"ItemFields": {
 		"in": "query",
 		"name": "_fields",
 		"description": "Comma-separated list of fields to include in each response object.",
@@ -63,6 +63,21 @@
 			"items": {
 				"type": "string",
 				"enum": [ "type", "labels", "descriptions", "aliases", "statements", "sitelinks" ]
+			}
+		},
+		"explode": false,
+		"style": "form"
+	},
+	"PropertyFields": {
+		"in": "query",
+		"name": "_fields",
+		"description": "Comma-separated list of fields to include in each response object.",
+		"required": false,
+		"schema": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"enum": [ "type", "data-type", "labels", "descriptions", "aliases", "statements" ]
 			}
 		},
 		"explode": false,

@@ -4,6 +4,7 @@
 		"summary": "Retrieve a single Wikibase Property by ID",
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/PropertyId" },
+			{ "$ref": "../../global/parameters.json#/PropertyFields" },
 			{ "$ref": "../../global/parameters.json#/Authorization" }
 		],
 		"responses": {

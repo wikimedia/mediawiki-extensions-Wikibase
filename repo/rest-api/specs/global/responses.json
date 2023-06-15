@@ -216,7 +216,8 @@
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"invalid-property-id": { "$ref": "./examples.json#/InvalidPropertyIdExample" }
+					"invalid-property-id": { "$ref": "./examples.json#/InvalidPropertyIdExample" },
+					"invalid-field": { "$ref": "./examples.json#/InvalidFieldExample" }
 				}
 			}
 		},
