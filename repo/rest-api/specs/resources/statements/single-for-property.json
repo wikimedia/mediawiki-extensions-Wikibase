@@ -1,0 +1,30 @@
+{
+	"get": {
+		"tags": [
+			"statements"
+		],
+		"summary": "Retrieve a single Statement from a Property",
+		"description": "This endpoint is also accessible through `/statements/{statement_id}`",
+		"parameters": [
+			{ "$ref": "../../global/parameters.json#/PropertyId" },
+			{ "$ref": "../../global/parameters.json#/PropertyStatementId" },
+			{ "$ref": "../../global/parameters.json#/IfNoneMatch" },
+			{ "$ref": "../../global/parameters.json#/IfModifiedSince" },
+			{ "$ref": "../../global/parameters.json#/IfMatch" },
+			{ "$ref": "../../global/parameters.json#/IfUnmodifiedSince" },
+			{ "$ref": "../../global/parameters.json#/Authorization" }
+		],
+		"responses": {
+			"200": {
+				"$ref": "../../global/responses.json#/PropertyStatement",
+				"description": "A single Wikibase Statement. Please note that the value of the `ETag` header field refers to the Property's revision ID."
+			},
+			"304": { "$ref": "../../global/responses.json#/NotModified" },
+			"400": { "$ref": "../../global/responses.json#/InvalidRetrievePropertyStatementInput" },
+			"404": { "$ref": "../../global/responses.json#/PropertyStatementNotFound" },
+			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
+			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
+
+		}
+	}
+}

@@ -120,6 +120,30 @@
 			}
 		}
 	},
+	"PropertyStatementNotFound": {
+		"description": "The specified resource was not found",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/Error" },
+				"examples": {
+					"property-not-found": {
+						"$ref": "./examples.json#/PropertyNotFoundExample"
+					},
+					"statement-not-found": {
+						"$ref": "./examples.json#/StatementNotFoundExample"
+					}
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
 	"ItemLabelNotFound": {
 		"description": "The specified resource was not found",
 		"content": {
@@ -286,6 +310,24 @@
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
+					"invalid-statement-id": { "$ref": "./examples.json#/InvalidStatementIdExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
+	"InvalidRetrievePropertyStatementInput": {
+		"description": "The request cannot be processed",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/Error" },
+				"examples": {
+					"invalid-property-id": { "$ref": "./examples.json#/InvalidPropertyIdExample" },
 					"invalid-statement-id": { "$ref": "./examples.json#/InvalidStatementIdExample" }
 				}
 			}
@@ -933,7 +975,7 @@
 			}
 		}
 	},
-	"Statement": {
+	"ItemStatement": {
 		"description": "A single Wikibase Statement. Please note that the value of the `ETag` header field refers to the entity's revision ID.",
 		"headers": {
 			"Last-Modified": {
@@ -959,6 +1001,50 @@
 			"application/json": {
 				"schema": {
 					"$ref": "./response-parts.json#/StatementResponse"
+				}
+			}
+		}
+	},
+	"PropertyStatement": {
+		"description": "A single Wikibase Statement. Please note that the value of the `ETag` header field refers to the entity's revision ID.",
+		"headers": {
+			"Last-Modified": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Last modified date"
+			},
+			"ETag": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Last entity revision number"
+			},
+			"X-Authenticated-User": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Optional username of the user making the request"
+			}
+		},
+		"content": {
+			"application/json": {
+				"schema": {
+					"$ref": "./response-parts.json#/StatementResponse"
+				},
+				"example": {
+					"id": "P31$9d042001-4a7e-2432-a7e1-233360062379",
+					"rank": "normal",
+					"property": {
+						"id": "P31",
+						"data-type": "wikibase-item"
+					},
+					"value": {
+						"type": "value",
+						"content": "Q18616576"
+					},
+					"qualifiers": [],
+					"references": []
 				}
 			}
 		}
