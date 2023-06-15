@@ -5,9 +5,8 @@ namespace Wikibase\Repo\RestApi\RouteHandlers\Middleware;
 use Exception;
 use MediaWiki\Rest\ConditionalHeaderUtil;
 use MediaWiki\Rest\RequestInterface;
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\RestApi\Domain\ReadModel\LatestItemRevisionMetadataResult;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
+use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 
 /**
  * Wrapper around an ItemRevisionMetadataRetriever and ConditionalHeaderUtil to check whether
@@ -17,65 +16,67 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
  */
 class RequestPreconditionCheck {
 
-	private ItemRevisionMetadataRetriever $metadataRetriever;
+	private EntityRevisionLookup $revisionLookup;
+	private EntityIdParser $entityIdParser;
 	/** @var callable */
-	private $getItemIdFromRequest;
+	private $getEntityIdFromRequest;
 	private ConditionalHeaderUtil $conditionalHeaderUtil;
 
 	public function __construct(
-		ItemRevisionMetadataRetriever $metadataRetriever,
-		callable $getItemIdFromRequest,
+		EntityRevisionLookup $revisionLookup,
+		EntityIdParser $entityIdParser,
+		callable $getEntityIdFromRequest,
 		ConditionalHeaderUtil $conditionalHeaderUtil
 	) {
-		$this->metadataRetriever = $metadataRetriever;
-		$this->getItemIdFromRequest = $getItemIdFromRequest;
+		$this->revisionLookup = $revisionLookup;
+		$this->entityIdParser = $entityIdParser;
+		$this->getEntityIdFromRequest = $getEntityIdFromRequest;
 		$this->conditionalHeaderUtil = $conditionalHeaderUtil;
 	}
 
 	/**
-	 * Convenience function to use with the $getItemIdFromRequest callable and dealing with statement IDs.
+	 * Convenience function to use with the $getEntityIdFromRequest callable and dealing with statement IDs.
 	 */
-	public static function getItemIdPrefixFromStatementId( string $statementId ): string {
+	public static function getEntityIdPrefixFromStatementId( string $statementId ): string {
 		return substr( $statementId, 0, strpos( $statementId, '$' ) ?: 0 );
 	}
 
 	public function checkPreconditions( RequestInterface $request ): RequestPreconditionCheckResult {
 		try {
-			$itemId = new ItemId(
-				( $this->getItemIdFromRequest )( $request )
+			$entityId = $this->entityIdParser->parse(
+				( $this->getEntityIdFromRequest )( $request )
 			);
 		} catch ( Exception $e ) {
 			// Malformed IDs will be caught by validation later.
 			return RequestPreconditionCheckResult::newConditionUnmetResult();
 		}
 
-		$itemMetadata = $this->metadataRetriever->getLatestRevisionMetadata( $itemId );
-		$preconditionStatusCode = $this->getStatusCodeFromRequestAndMetadata( $request, $itemMetadata );
-
-		return $preconditionStatusCode ?
-			RequestPreconditionCheckResult::newConditionMetResult( $itemMetadata, $preconditionStatusCode ) :
-			RequestPreconditionCheckResult::newConditionUnmetResult();
+		return $this->revisionLookup->getLatestRevisionId( $entityId )
+			->onConcreteRevision(
+				fn ( $revisionId, $timestamp ) =>
+				$this->getCheckResultFromRequestAndMetadata( $request, $revisionId, $timestamp )
+			)
+			->onRedirect( fn () => RequestPreconditionCheckResult::newConditionUnmetResult() )
+			->onNonexistentEntity( fn () => RequestPreconditionCheckResult::newConditionUnmetResult() )
+			->map();
 	}
 
-	/**
-	 * @return int|null The status code to return without processing the request further,
-	 * or null to continue processing the request.
-	 */
-	private function getStatusCodeFromRequestAndMetadata(
+	private function getCheckResultFromRequestAndMetadata(
 		RequestInterface $request,
-		LatestItemRevisionMetadataResult $revisionMetadata
-	): ?int {
-		if ( !$revisionMetadata->itemExists() || $revisionMetadata->isRedirect() ) {
-			return null;
-		}
-
+		int $revisionId,
+		string $revisionTimestamp
+	): RequestPreconditionCheckResult {
 		$this->conditionalHeaderUtil->setValidators(
-			"\"{$revisionMetadata->getRevisionId()}\"",
-			$revisionMetadata->getRevisionTimestamp(),
+			"\"{$revisionId}\"",
+			$revisionTimestamp,
 			true
 		);
 
-		return $this->conditionalHeaderUtil->checkPreconditions( $request );
+		$preconditionStatusCode = $this->conditionalHeaderUtil->checkPreconditions( $request );
+
+		return $preconditionStatusCode ?
+			RequestPreconditionCheckResult::newConditionMetResult( $revisionId, $preconditionStatusCode ) :
+			RequestPreconditionCheckResult::newConditionUnmetResult();
 	}
 
 }

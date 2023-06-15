@@ -332,9 +332,8 @@ return [
 
 	'WbRestApi.PreconditionMiddlewareFactory' => function( MediaWikiServices $services ): PreconditionMiddlewareFactory {
 		return new PreconditionMiddlewareFactory(
-			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
-				WikibaseRepo::getEntityRevisionLookup( $services )
-			),
+			WikibaseRepo::getEntityRevisionLookup( $services ),
+			WikibaseRepo::getEntityIdParser( $services ),
 			new ConditionalHeaderUtil()
 		);
 	},

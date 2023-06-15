@@ -20,29 +20,17 @@ class PreconditionMiddleware implements Middleware {
 		$preconditionCheckResult = $this->preconditionCheck->checkPreconditions( $routeHandler->getRequest() );
 		switch ( $preconditionCheckResult->getStatusCode() ) {
 			case 304:
-				return $this->newNotModifiedResponse(
-					$routeHandler,
-					$preconditionCheckResult->getRevisionMetadata()->getRevisionId()
-				);
+				$notModifiedResponse = $routeHandler->getResponseFactory()->createNotModified();
+				$notModifiedResponse->setHeader( 'ETag', '"' . $preconditionCheckResult->getRevisionId() . '"' );
+
+				return $notModifiedResponse;
 			case 412:
-				return $this->newPreconditionFailedResponse( $routeHandler );
+				$response = $routeHandler->getResponseFactory()->createNoContent();
+				$response->setStatus( 412 );
+
+				return $response;
 			default:
 				return $runNext();
 		}
 	}
-
-	private function newNotModifiedResponse( Handler $routeHandler, int $revId ): Response {
-		$notModifiedResponse = $routeHandler->getResponseFactory()->createNotModified();
-		$notModifiedResponse->setHeader( 'ETag', "\"$revId\"" );
-
-		return $notModifiedResponse;
-	}
-
-	private function newPreconditionFailedResponse( Handler $routeHandler ): Response {
-		$response = $routeHandler->getResponseFactory()->createNoContent();
-		$response->setStatus( 412 );
-
-		return $response;
-	}
-
 }

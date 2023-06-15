@@ -3,7 +3,9 @@
 namespace Wikibase\Repo\RestApi\RouteHandlers;
 
 use MediaWiki\Rest\Handler;
+use MediaWiki\Rest\RequestInterface;
 use MediaWiki\Rest\Response;
+use MediaWiki\Rest\ResponseInterface;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
@@ -58,6 +60,9 @@ class GetPropertyRouteHandler extends SimpleHandler {
 				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
 				new UserAgentCheckMiddleware(),
 				new AuthenticationMiddleware(),
+				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
+					fn ( RequestInterface $request ): string => $request->getPathParam( self::PROPERTY_ID_PATH_PARAM )
+				),
 			] ),
 			new ResponseFactory()
 		);
@@ -119,6 +124,15 @@ class GetPropertyRouteHandler extends SimpleHandler {
 
 	public function needsWriteAccess(): bool {
 		return false;
+	}
+
+	/**
+	 * Preconditions are checked via {@link PreconditionMiddleware}
+	 *
+	 * @inheritDoc
+	 */
+	public function checkPreconditions(): ?ResponseInterface {
+		return null;
 	}
 
 }

@@ -6,7 +6,6 @@ use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\ResponseFactory;
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\RestApi\Domain\ReadModel\LatestItemRevisionMetadataResult;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\RequestPreconditionCheck;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\RequestPreconditionCheckResult;
@@ -23,10 +22,7 @@ class PreconditionMiddlewareTest extends TestCase {
 	public function testGivenPreconditionCheckReturns412_respondsWith412(): void {
 		$preconditionCheck = $this->createStub( RequestPreconditionCheck::class );
 		$preconditionCheck->method( 'checkPreconditions' )->willReturn(
-			RequestPreconditionCheckResult::newConditionMetResult(
-				LatestItemRevisionMetadataResult::concreteRevision( 123, '20201111070707' ),
-				412
-			)
+			RequestPreconditionCheckResult::newConditionMetResult( 123, 412 )
 		);
 
 		$middleware = new PreconditionMiddleware( $preconditionCheck );
@@ -43,10 +39,7 @@ class PreconditionMiddlewareTest extends TestCase {
 		$revId = 123;
 		$preconditionCheck = $this->createStub( RequestPreconditionCheck::class );
 		$preconditionCheck->method( 'checkPreconditions' )->willReturn(
-			RequestPreconditionCheckResult::newConditionMetResult(
-				LatestItemRevisionMetadataResult::concreteRevision( 123, '20201111070707' ),
-				304
-			)
+			RequestPreconditionCheckResult::newConditionMetResult( 123, 304 )
 		);
 
 		$middleware = new PreconditionMiddleware( $preconditionCheck );

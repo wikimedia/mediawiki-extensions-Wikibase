@@ -2,23 +2,21 @@
 
 namespace Wikibase\Repo\RestApi\RouteHandlers\Middleware;
 
-use Wikibase\Repo\RestApi\Domain\ReadModel\LatestItemRevisionMetadataResult;
-
 /**
  * @license GPL-2.0-or-later
  */
 class RequestPreconditionCheckResult {
 
-	private ?LatestItemRevisionMetadataResult $revisionMetadata;
+	private ?int $revisionId;
 	private ?int $statusCode;
 
-	private function __construct( ?LatestItemRevisionMetadataResult $revisionMetadata, ?int $statusCode ) {
-		$this->revisionMetadata = $revisionMetadata;
+	private function __construct( ?int $revisionId, ?int $statusCode ) {
+		$this->revisionId = $revisionId;
 		$this->statusCode = $statusCode;
 	}
 
-	public static function newConditionMetResult( LatestItemRevisionMetadataResult $revisionMetadata, int $statusCode ): self {
-		return new self( $revisionMetadata, $statusCode );
+	public static function newConditionMetResult( int $revisionId, int $statusCode ): self {
+		return new self( $revisionId, $statusCode );
 	}
 
 	public static function newConditionUnmetResult(): self {
@@ -26,11 +24,11 @@ class RequestPreconditionCheckResult {
 	}
 
 	/**
-	 * Guaranteed to return a *concrete* revision result  if the request headers match the latest revision, e.g. when sending
+	 * Guaranteed to return a revision ID if the request headers match the latest revision, e.g. when sending
 	 * an If-None-Match header containing the latest revision ID. Returns null if there was no match.
 	 */
-	public function getRevisionMetadata(): ?LatestItemRevisionMetadataResult {
-		return $this->revisionMetadata;
+	public function getRevisionId(): ?int {
+		return $this->revisionId;
 	}
 
 	/**

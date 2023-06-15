@@ -6,11 +6,14 @@ use Generator;
 use MediaWiki\Rest\ConditionalHeaderUtil;
 use MediaWiki\Rest\RequestData;
 use PHPUnit\Framework\TestCase;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\RestApi\Domain\ReadModel\LatestItemRevisionMetadataResult;
+use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\LatestRevisionIdResult;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\RequestPreconditionCheck;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\RequestPreconditionCheckResult;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\RestApi\RouteHandlers\Middleware\RequestPreconditionCheck
@@ -27,72 +30,68 @@ class RequestPreconditionCheckTest extends TestCase {
 	 */
 	public function testMeetsPreconditionForStatusCode(
 		array $headers,
-		LatestItemRevisionMetadataResult $revisionMetadataResult,
-		?int $expectedStatusCode,
+		LatestRevisionIdResult $revisionIdResult,
+		RequestPreconditionCheckResult $expectedResult,
 		string $method = 'GET'
 	): void {
-		$itemId = new ItemId( 'Q42' );
+		$subjectId = new ItemId( 'Q42' );
 		$preconditionCheck = new RequestPreconditionCheck(
-			$this->newMetadataRetrieverReturningResult( $itemId, $revisionMetadataResult ),
-			fn () => $itemId->getSerialization(),
+			$this->newEntityRevisionLookupReturningResult( $subjectId, $revisionIdResult ),
+			WikibaseRepo::getEntityIdParser(),
+			fn () => $subjectId->getSerialization(),
 			new ConditionalHeaderUtil()
 		);
 
-		$result = $preconditionCheck->checkPreconditions(
-			new RequestData( [
-				'headers' => $headers,
-				'method' => $method,
-			] )
+		$this->assertEquals(
+			$expectedResult,
+			$preconditionCheck->checkPreconditions(
+				new RequestData( [ 'headers' => $headers, 'method' => $method ] )
+			)
 		);
-
-		$this->assertSame( $expectedStatusCode, $result->getStatusCode() );
-		if ( $expectedStatusCode ) {
-			$this->assertEquals( $revisionMetadataResult, $result->getRevisionMetadata() );
-		}
 	}
 
 	public static function headersAndRevisionMetadataProvider(): Generator {
 		yield 'If-None-Match - revision id match' => [
 			'headers' => [ 'If-None-Match' => '"42"' ],
-			'revisionMetadataResult' => LatestItemRevisionMetadataResult::concreteRevision( 42, '20201111070707' ),
-			'statusCodeToCheck' => 304,
+			'revisionIdResult' => LatestRevisionIdResult::concreteRevision( 42, '20201111070707' ),
+			'expectedResult' => RequestPreconditionCheckResult::newConditionMetResult( 42, 304 ),
 		];
 		yield 'If-Modified-Since - not modified since specified date' => [
 			'headers' => [ 'If-Modified-Since' => wfTimestamp( TS_RFC2822, '20201111070707' ) ],
-			'revisionMetadataResult' => LatestItemRevisionMetadataResult::concreteRevision( 42, '20201111060606' ),
-			'statusCodeToCheck' => 304,
+			'revisionIdResult' => LatestRevisionIdResult::concreteRevision( 42, '20201111060606' ),
+			'expectedResult' => RequestPreconditionCheckResult::newConditionMetResult( 42, 304 ),
 		];
 		yield 'If-None-Match - revision id mismatch' => [
 			'headers' => [ 'If-None-Match' => '"41"' ],
-			'revisionMetadataResult' => LatestItemRevisionMetadataResult::concreteRevision( 42, '20201111070707' ),
-			'statusCodeToCheck' => null,
+			'revisionIdResult' => LatestRevisionIdResult::concreteRevision( 42, '20201111070707' ),
+			'expectedResult' => RequestPreconditionCheckResult::newConditionUnmetResult(),
 		];
 		yield 'If-None-Match - non-GET request with wildcard' => [
 			'headers' => [ 'If-None-Match' => '*' ],
-			'revisionMetadataResult' => LatestItemRevisionMetadataResult::concreteRevision( 42, '20201111070707' ),
-			'statusCodeToCheck' => 412,
+			'revisionIdResult' => LatestRevisionIdResult::concreteRevision( 42, '20201111070707' ),
+			'expectedResult' => RequestPreconditionCheckResult::newConditionMetResult( 42, 412 ),
 			'method' => 'POST',
 		];
 
 		yield 'If-Match - revision id mismatch' => [
 			'headers' => [ 'If-Match' => '"43"' ],
-			'revisionMetadataResult' => LatestItemRevisionMetadataResult::concreteRevision( 42, '20201111070707' ),
-			'statusCodeToCheck' => 412,
+			'revisionIdResult' => LatestRevisionIdResult::concreteRevision( 42, '20201111070707' ),
+			'expectedResult' => RequestPreconditionCheckResult::newConditionMetResult( 42, 412 ),
 		];
 		yield 'If-Unmodified-Since - item has been modified since specified date' => [
 			'headers' => [ 'If-Unmodified-Since' => wfTimestamp( TS_RFC2822, '20201111070707' ) ],
-			'revisionMetadataResult' => LatestItemRevisionMetadataResult::concreteRevision( 42, '20201111080808' ),
-			'statusCodeToCheck' => 412,
+			'revisionIdResult' => LatestRevisionIdResult::concreteRevision( 42, '20201111080808' ),
+			'expectedResult' => RequestPreconditionCheckResult::newConditionMetResult( 42, 412 ),
 		];
 		yield 'If-Match - revision id match' => [
 			'headers' => [ 'If-Match' => '"42"' ],
-			'revisionMetadataResult' => LatestItemRevisionMetadataResult::concreteRevision( 42, '20201111070707' ),
-			'statusCodeToCheck' => null,
+			'revisionIdResult' => LatestRevisionIdResult::concreteRevision( 42, '20201111070707' ),
+			'expectedResult' => RequestPreconditionCheckResult::newConditionUnmetResult(),
 		];
 		yield 'If-Unmodified-Since - not modified since specified date' => [
 			'headers' => [ 'If-Unmodified-Since' => wfTimestamp( TS_RFC2822, '20201111070707' ) ],
-			'revisionMetadataResult' => LatestItemRevisionMetadataResult::concreteRevision( 42, '20201111070707' ),
-			'statusCodeToCheck' => null,
+			'revisionIdResult' => LatestRevisionIdResult::concreteRevision( 42, '20201111070707' ),
+			'expectedResult' => RequestPreconditionCheckResult::newConditionUnmetResult(),
 		];
 	}
 
@@ -103,7 +102,8 @@ class RequestPreconditionCheckTest extends TestCase {
 		$conditionalHeaderUtil->expects( $this->never() )->method( $this->anything() );
 
 		$preconditionCheck = new RequestPreconditionCheck(
-			$metadataRetriever,
+			$this->createStub( EntityRevisionLookup::class ),
+			WikibaseRepo::getEntityIdParser(),
 			fn () => 'some-invalid-item-id',
 			$conditionalHeaderUtil
 		);
@@ -117,14 +117,15 @@ class RequestPreconditionCheckTest extends TestCase {
 	/**
 	 * @dataProvider redirectOrNotExistMetadataProvider
 	 */
-	public function testGivenItemDoesNotExistOrIsRedirect_returnsMismatchResult( LatestItemRevisionMetadataResult $metadataResult ): void {
-		$itemId = new ItemId( 'Q42' );
+	public function testGivenEntityDoesNotExistOrIsRedirect_returnsMismatchResult( LatestRevisionIdResult $revisionIdResult ): void {
+		$entityId = new ItemId( 'Q42' );
 		$conditionalHeaderUtil = $this->createMock( ConditionalHeaderUtil::class );
 		$conditionalHeaderUtil->expects( $this->never() )->method( $this->anything() );
 
 		$preconditionCheck = new RequestPreconditionCheck(
-			$this->newMetadataRetrieverReturningResult( $itemId, $metadataResult ),
-			fn () => $itemId->getSerialization(),
+			$this->newEntityRevisionLookupReturningResult( $entityId, $revisionIdResult ),
+			WikibaseRepo::getEntityIdParser(),
+			fn () => $entityId->getSerialization(),
 			$conditionalHeaderUtil
 		);
 
@@ -136,24 +137,22 @@ class RequestPreconditionCheckTest extends TestCase {
 
 	public static function redirectOrNotExistMetadataProvider(): Generator {
 		yield 'item redirect' => [
-			LatestItemRevisionMetadataResult::redirect( new ItemId( 'Q24' ) ),
+			LatestRevisionIdResult::redirect( 12345, new ItemId( 'Q25' ) ),
 		];
-		yield 'item does not exist' => [
-			LatestItemRevisionMetadataResult::itemNotFound(),
-		];
+		yield 'entity does not exist' => [ LatestRevisionIdResult::nonexistentEntity() ];
 	}
 
-	private function newMetadataRetrieverReturningResult(
-		ItemId $id,
-		LatestItemRevisionMetadataResult $result
-	): ItemRevisionMetadataRetriever {
-		$revisionMetadataLookup = $this->createMock( ItemRevisionMetadataRetriever::class );
-		$revisionMetadataLookup->expects( $this->once() )
-			->method( 'getLatestRevisionMetadata' )
+	private function newEntityRevisionLookupReturningResult(
+		EntityId $id,
+		LatestRevisionIdResult $result
+	): EntityRevisionLookup {
+		$entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );
+		$entityRevisionLookup->expects( $this->once() )
+			->method( 'getLatestRevisionId' )
 			->with( $id )
 			->willReturn( $result );
 
-		return $revisionMetadataLookup;
+		return $entityRevisionLookup;
 	}
 
 }
