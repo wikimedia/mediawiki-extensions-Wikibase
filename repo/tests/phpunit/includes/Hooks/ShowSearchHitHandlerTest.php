@@ -6,7 +6,6 @@ use ContextSource;
 use HtmlArmor;
 use MediaWiki\Language\RawMessage;
 use MediaWikiIntegrationTestCase;
-use MWException;
 use SearchResult;
 use SpecialSearch;
 use Title;
@@ -47,7 +46,6 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @param string $language
 	 * @return SpecialSearch
-	 * @throws MWException
 	 */
 	private function getSearchPage( $language ) {
 		$searchPage = $this->createMock( SpecialSearch::class );

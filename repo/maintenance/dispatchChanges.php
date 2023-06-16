@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Maintenance;
 
 use ExtensionRegistry;
 use Maintenance;
-use MWException;
 use OutOfBoundsException;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -43,7 +42,7 @@ class DispatchChanges extends Maintenance {
 
 		if ( !ExtensionRegistry::getInstance()->isLoaded( 'WikibaseRepository' ) ) {
 			// Since people might waste time debugging odd errors when they forget to enable the extension. BTDT.
-			throw new MWException( 'WikibaseRepository has not been loaded.' );
+			$this->fatalError( 'WikibaseRepository has not been loaded.' );
 		}
 
 		$defaultMaxTime = $this->getSettingOrDefault( 'dispatchMaxTime', 60 * 60 );

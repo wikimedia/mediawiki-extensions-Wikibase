@@ -8,7 +8,7 @@ use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
 use MessageLocalizer;
-use MWException;
+use UnexpectedValueException;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
 use Wikibase\Repo\Content\EntityContentDiff;
 
@@ -120,7 +120,6 @@ class BasicEntityDiffVisualizer implements EntityDiffVisualizer {
 	 * @param DiffOp $claimDiffOp
 	 *
 	 * @return string HTML
-	 * @throws MWException
 	 */
 	protected function getClaimDiffHtml( DiffOp $claimDiffOp ) {
 		if ( $claimDiffOp instanceof DiffOpChange ) {
@@ -139,7 +138,7 @@ class BasicEntityDiffVisualizer implements EntityDiffVisualizer {
 		} elseif ( $claimDiffOp instanceof DiffOpRemove ) {
 			return $this->claimDiffVisualizer->visualizeRemovedClaim( $claimDiffOp->getOldValue() );
 		} else {
-			throw new MWException( 'Encountered an unexpected diff operation type for a claim' );
+			throw new UnexpectedValueException( 'Encountered an unexpected diff operation type for a claim' );
 		}
 	}
 

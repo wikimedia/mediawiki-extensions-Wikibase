@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Store;
 
 use InvalidArgumentException;
-use MWException;
 use PermissionsError;
 use User;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -152,8 +151,6 @@ class TypeDispatchingEntityStore implements EntityStore {
 	 * @param User $user
 	 * @param EntityId $id
 	 * @param bool $watch
-	 *
-	 * @throws MWException
 	 */
 	public function updateWatchlist( User $user, EntityId $id, $watch ) {
 		$this->getStore( $id->getEntityType() )->updateWatchlist( $user, $id, $watch );

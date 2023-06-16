@@ -23,7 +23,6 @@ class SpecialListPropertiesDispatchingFactory {
 
 	/**
 	 * @return SpecialListFederatedProperties|SpecialListProperties
-	 * @throws \MWException
 	 */
 	public static function factory(
 		DataTypeFactory $dataTypeFactory,

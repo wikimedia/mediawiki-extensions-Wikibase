@@ -13,7 +13,6 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
 use MediaWikiIntegrationTestCase;
-use MWException;
 use RequestContext;
 use RuntimeException;
 use SearchEngine;
@@ -385,7 +384,7 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 
 	public function testMakeRedirectContent() {
 		// We don't support title based redirects.
-		$this->expectException( MWException::class );
+		$this->expectException( LogicException::class );
 
 		$handler = $this->getHandler();
 		$handler->makeRedirectContent( Title::makeTitle( $handler->getEntityNamespace(), 'X11' ) );
@@ -528,7 +527,6 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 	/**
 	 * @param Title $title
 	 * @return RequestContext
-	 * @throws MWException
 	 */
 	protected function getContext( Title $title ) {
 		$context = new RequestContext();

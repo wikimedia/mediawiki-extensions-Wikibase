@@ -10,6 +10,7 @@ use Html;
 use IContextSource;
 use InvalidArgumentException;
 use Language;
+use LogicException;
 use MediaWiki\Content\Renderer\ContentParseParams;
 use MediaWiki\Content\ValidationParams;
 use MediaWiki\MediaWikiServices;
@@ -274,7 +275,7 @@ abstract class EntityHandler extends ContentHandler {
 	/**
 	 * @see ContentHandler::makeRedirectContent
 	 *
-	 * @warning Always throws an MWException, since an EntityRedirects needs to know it's own
+	 * @warning This always throws an exception, since an EntityRedirects needs to know it's own
 	 * ID in addition to the target ID. We have no way to guess that in makeRedirectContent().
 	 * Use makeEntityRedirectContent() instead.
 	 *
@@ -283,12 +284,10 @@ abstract class EntityHandler extends ContentHandler {
 	 * @param Title $title
 	 * @param string $text
 	 *
-	 * @throws MWException Always.
-	 * @return EntityContent|null
+	 * @return never
 	 */
 	public function makeRedirectContent( Title $title, $text = '' ) {
-		// @phan-suppress-previous-line PhanPluginNeverReturnMethod
-		throw new MWException( 'EntityContent does not support plain title based redirects.'
+		throw new LogicException( 'EntityContent does not support plain title based redirects.'
 			. ' Use makeEntityRedirectContent() instead.' );
 	}
 

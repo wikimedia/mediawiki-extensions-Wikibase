@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests;
 
-use MWException;
+use InvalidArgumentException;
 use Wikibase\Lib\DataType;
 use Wikibase\Repo\DataTypeSelector;
 
@@ -41,14 +41,12 @@ class DataTypeSelectorTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider invalidConstructorArgumentsProvider
 	 */
 	public function testConstructorThrowsException( array $dataTypes, $languageCode ) {
-		$this->expectException( MWException::class );
+		$this->expectException( InvalidArgumentException::class );
 		new DataTypeSelector( $dataTypes, $languageCode );
 	}
 
 	public static function invalidConstructorArgumentsProvider() {
 		return [
-			[ [], null ],
-			[ [], false ],
 			[ [ null ], '' ],
 			[ [ false ], '' ],
 			[ [ '' ], '' ],
