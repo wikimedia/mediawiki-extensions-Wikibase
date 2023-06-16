@@ -33,8 +33,8 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\ItemStatementRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\StatementRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
@@ -64,10 +64,7 @@ class PatchItemStatementTest extends TestCase {
 
 	private StatementSerializer $statementSerializer;
 
-	/**
-	 * @var MockObject|ItemStatementRetriever
-	 */
-	private $statementRetriever;
+	private StatementRetriever $statementRetriever;
 
 	/**
 	 * @var MockObject|ItemRetriever
@@ -94,7 +91,7 @@ class PatchItemStatementTest extends TestCase {
 
 		$this->useCaseValidator = $this->createStub( PatchItemStatementValidator::class );
 		$this->patchedStatementValidator = $this->createStub( PatchedStatementValidator::class );
-		$this->statementRetriever = $this->createStub( ItemStatementRetriever::class );
+		$this->statementRetriever = $this->createStub( StatementRetriever::class );
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
 		$this->getRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
@@ -141,7 +138,7 @@ class PatchItemStatementTest extends TestCase {
 
 		$request = $this->newUseCaseRequest( $requestData );
 
-		$this->statementRetriever = $this->createStub( ItemStatementRetriever::class );
+		$this->statementRetriever = $this->createStub( StatementRetriever::class );
 		$this->statementRetriever->method( 'getStatement' )->willReturn( $statementToPatch );
 
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
@@ -283,7 +280,7 @@ class PatchItemStatementTest extends TestCase {
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemRetriever->method( 'getItem' )->willReturn( $item );
 
-		$this->statementRetriever = $this->createStub( ItemStatementRetriever::class );
+		$this->statementRetriever = $this->createStub( StatementRetriever::class );
 		$this->statementRetriever->method( 'getStatement' )->willReturn( $statementToPatch );
 
 		$this->patchedStatementValidator = $this->createStub( PatchedStatementValidator::class );
@@ -319,7 +316,7 @@ class PatchItemStatementTest extends TestCase {
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemRetriever->method( 'getItem' )->willReturn( $item );
 
-		$this->statementRetriever = $this->createStub( ItemStatementRetriever::class );
+		$this->statementRetriever = $this->createStub( StatementRetriever::class );
 		$this->statementRetriever->method( 'getStatement' )->willReturn( $statementToPatch );
 
 		$this->patchedStatementValidator = $this->createStub( PatchedStatementValidator::class );
@@ -450,7 +447,7 @@ class PatchItemStatementTest extends TestCase {
 			NewItem::withId( $itemId )->andStatement( $statementWriteModel )->build()
 		);
 
-		$this->statementRetriever = $this->createStub( ItemStatementRetriever::class );
+		$this->statementRetriever = $this->createStub( StatementRetriever::class );
 		$this->statementRetriever->method( 'getStatement' )->willReturn( $statementReadModel );
 
 		try {
@@ -490,7 +487,7 @@ class PatchItemStatementTest extends TestCase {
 				->andStatement( $statementWriteModel )->build()
 		);
 
-		$this->statementRetriever = $this->createStub( ItemStatementRetriever::class );
+		$this->statementRetriever = $this->createStub( StatementRetriever::class );
 		$this->statementRetriever->method( 'getStatement' )->willReturn( $statementReadModel );
 	}
 

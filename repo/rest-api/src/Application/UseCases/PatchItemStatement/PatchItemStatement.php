@@ -17,9 +17,9 @@ use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\PatchPathException;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\PatchTestConditionFailedException;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\ItemStatementRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\JsonPatcher;
+use Wikibase\Repo\RestApi\Domain\Services\StatementRetriever;
 
 /**
  * @license GPL-2.0-or-later
@@ -32,7 +32,7 @@ class PatchItemStatement {
 	private StatementSerializer $statementSerializer;
 	private StatementGuidParser $statementIdParser;
 	private AssertItemExists $assertItemExists;
-	private ItemStatementRetriever $statementRetriever;
+	private StatementRetriever $statementRetriever;
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
@@ -44,7 +44,7 @@ class PatchItemStatement {
 		StatementSerializer $statementSerializer,
 		StatementGuidParser $statementIdParser,
 		AssertItemExists $assertItemExists,
-		ItemStatementRetriever $statementRetriever,
+		StatementRetriever $statementRetriever,
 		ItemRetriever $itemRetriever,
 		ItemUpdater $itemUpdater,
 		AssertUserIsAuthorized $assertUserIsAuthorized

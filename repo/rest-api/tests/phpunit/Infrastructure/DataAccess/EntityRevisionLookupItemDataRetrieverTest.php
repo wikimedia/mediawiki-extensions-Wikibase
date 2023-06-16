@@ -10,7 +10,6 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
-use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Lib\Store\EntityRevision;
@@ -137,54 +136,6 @@ class EntityRevisionLookupItemDataRetrieverTest extends TestCase {
 				->setSiteLinks( $this->newSiteLinksReadModelConverter()->convert( $item->getSiteLinkList() ) )
 				->build(),
 		];
-	}
-
-	public function testGetStatement(): void {
-		$itemId = new ItemId( 'Q123' );
-		$statementId = new StatementGuid( $itemId, 'c48c32c3-42b5-498f-9586-84608b88747c' );
-
-		$statement = NewStatement::forProperty( 'P123' )
-			->withValue( 'potato' )
-			->withGuid( $statementId )
-			->build();
-		$item = NewItem::withId( $itemId )
-			->andStatement( $statement )
-			->build();
-
-		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $itemId, $item );
-
-		$this->assertEquals(
-			$this->newStatementReadModelConverter()->convert( $statement ),
-			$this->newRetriever()->getStatement( $statementId )
-		);
-	}
-
-	public function testGivenItemDoesNotExist_getStatementReturnsNull(): void {
-		$itemId = new ItemId( 'Q321' );
-		$statementId = new StatementGuid( $itemId, 'c48c32c3-42b5-498f-9586-84608b88747c' );
-		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $itemId, null );
-
-		$this->assertNull( $this->newRetriever()->getStatement( $statementId ) );
-	}
-
-	public function testGivenItemRedirected_getStatementReturnsNull(): void {
-		$itemId = new ItemId( 'Q321' );
-		$statementId = new StatementGuid( $itemId, 'c48c32c3-42b5-498f-9586-84608b88747c' );
-		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithRedirect( $itemId );
-
-		$this->assertNull( $this->newRetriever()->getStatement( $statementId ) );
-	}
-
-	public function testGivenStatementDoesNotExist_getStatementReturnsNull(): void {
-		$itemId = new ItemId( 'Q123' );
-		$statementId = new StatementGuid( $itemId, 'c48c32c3-42b5-498f-9586-84608b88747c' );
-
-		$item = NewItem::withId( $itemId )
-			->build();
-
-		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $itemId, $item );
-
-		$this->assertNull( $this->newRetriever()->getStatement( $statementId ) );
 	}
 
 	public function testGetStatements(): void {

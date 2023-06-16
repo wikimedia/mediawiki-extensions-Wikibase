@@ -5,7 +5,6 @@ namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Statement\StatementList as DataModelStatementList;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
@@ -14,11 +13,9 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemPartsBuilder;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemPartsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\ItemStatementRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\RestApi\Infrastructure\SiteLinksReadModelConverter;
@@ -26,7 +23,7 @@ use Wikibase\Repo\RestApi\Infrastructure\SiteLinksReadModelConverter;
 /**
  * @license GPL-2.0-or-later
  */
-class EntityRevisionLookupItemDataRetriever implements ItemRetriever, ItemPartsRetriever, ItemStatementsRetriever, ItemStatementRetriever {
+class EntityRevisionLookupItemDataRetriever implements ItemRetriever, ItemPartsRetriever, ItemStatementsRetriever {
 
 	private EntityRevisionLookup $entityRevisionLookup;
 	private StatementReadModelConverter $statementReadModelConverter;
@@ -103,18 +100,5 @@ class EntityRevisionLookupItemDataRetriever implements ItemRetriever, ItemPartsR
 			[ $this->statementReadModelConverter, 'convert' ],
 			iterator_to_array( $list )
 		) );
-	}
-
-	public function getStatement( StatementGuid $statementGuid ): ?Statement {
-		/** @var ItemId $itemId */
-		$itemId = $statementGuid->getEntityId();
-		'@phan-var ItemId $itemId';
-
-		$statements = $this->getStatements( $itemId );
-		if ( $statements === null ) {
-			return null;
-		}
-
-		return $statements->getStatementById( $statementGuid );
 	}
 }

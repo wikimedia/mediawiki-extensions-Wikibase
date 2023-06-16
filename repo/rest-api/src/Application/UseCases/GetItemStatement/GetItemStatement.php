@@ -7,24 +7,24 @@ use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\Services\ItemStatementRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\StatementRetriever;
 
 /**
  * @license GPL-2.0-or-later
  */
 class GetItemStatement {
 
-	private ItemStatementRetriever $statementRetriever;
+	private StatementRetriever $statementRetriever;
 	private GetItemStatementValidator $validator;
 	private GetLatestItemRevisionMetadata $getRevisionMetadata;
 
 	public function __construct(
 		GetItemStatementValidator $validator,
-		ItemStatementRetriever $statementRetriever,
+		StatementRetriever $statementRetriever,
 		GetLatestItemRevisionMetadata $getRevisionMetadata
 	) {
-		$this->statementRetriever = $statementRetriever;
 		$this->getRevisionMetadata = $getRevisionMetadata;
+		$this->statementRetriever = $statementRetriever;
 		$this->validator = $validator;
 	}
 

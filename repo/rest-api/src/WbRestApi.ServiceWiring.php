@@ -63,6 +63,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupItemDataRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupPropertyDataRetriever;
+use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupStatementRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\MediaWikiEditEntityFactoryItemUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\PrefetchingTermLookupAliasesRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\TermLookupItemDataRetriever;
@@ -213,7 +214,7 @@ return [
 				new StatementIdValidator( new ItemIdParser() ),
 				new ItemIdValidator()
 			),
-			WbRestApi::getItemDataRetriever( $services ),
+			WbRestApi::getStatementRetriever( $services ),
 			WbRestApi::getGetLatestItemRevisionMetadata( $services )
 		);
 	},
@@ -307,8 +308,6 @@ return [
 	},
 
 	'WbRestApi.PatchItemStatement' => function( MediaWikiServices $services ): PatchItemStatement {
-		$itemDataRetriever = WbRestApi::getItemDataRetriever( $services );
-
 		return new PatchItemStatement(
 			new PatchItemStatementValidator(
 				new ItemIdValidator(),
@@ -324,8 +323,8 @@ return [
 			WbRestApi::getSerializerFactory( $services )->newStatementSerializer(),
 			new StatementGuidParser( new ItemIdParser() ),
 			WbRestApi::getAssertItemExists( $services ),
-			$itemDataRetriever,
-			$itemDataRetriever,
+			WbRestApi::getStatementRetriever( $services ),
+			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getItemUpdater( $services ),
 			WbRestApi::getAssertUserIsAuthorized( $services )
 		);
@@ -453,6 +452,16 @@ return [
 		return new StatementDeserializer(
 			$propertyValuePairDeserializer,
 			new ReferenceDeserializer( $propertyValuePairDeserializer )
+		);
+	},
+
+	'WbRestApi.StatementRetriever' => function( MediaWikiServices $services ): EntityRevisionLookupStatementRetriever {
+		return new EntityRevisionLookupStatementRetriever(
+			WikibaseRepo::getEntityRevisionLookup( $services ),
+			new StatementReadModelConverter(
+				WikibaseRepo::getStatementGuidParser( $services ),
+				WikibaseRepo::getPropertyDataTypeLookup()
+			)
 		);
 	},
 
