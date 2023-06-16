@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Parsers;
 
 use DataValues\DataValue;
+use ValueParsers\ParseException;
 use ValueParsers\ParserOptions;
 use ValueParsers\ValueParser;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -125,7 +126,7 @@ class EntityIdValueParserTest extends \PHPUnit\Framework\TestCase {
 			$parser = $this->getInstance();
 		}
 
-		$this->expectException( 'ValueParsers\ParseException' );
+		$this->expectException( ParseException::class );
 		$parser->parse( $value );
 	}
 

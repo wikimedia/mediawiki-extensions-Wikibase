@@ -3,6 +3,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
+use LogicException;
 use MediaWiki\Revision\SlotRecord;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\DataAccess\DatabaseEntitySource;
@@ -56,7 +57,7 @@ class PropertySourceTest extends ServiceWiringTestCase {
 			$this->getEntitySourceDefinitions( [] )
 		);
 
-		$this->expectException( 'LogicException' );
+		$this->expectException( LogicException::class );
 		$this->getService( 'WikibaseClient.PropertySource' );
 	}
 

@@ -376,7 +376,7 @@ class DateFormatParserTest extends \PHPUnit\Framework\TestCase {
 			$parser = $this->getInstance();
 		}
 
-		$this->expectException( 'ValueParsers\ParseException' );
+		$this->expectException( ParseException::class );
 		$parser->parse( $value );
 	}
 
