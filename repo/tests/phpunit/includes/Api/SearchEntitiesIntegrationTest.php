@@ -99,7 +99,7 @@ class SearchEntitiesIntegrationTest extends MediaWikiIntegrationTestCase {
 					$this->newEntityLookup(),
 					$this->idParser,
 					$this->createMock( LabelDescriptionLookup::class ),
-					[ 'item' => [ '' ] ]
+					[ 'item' ]
 				),
 				new EntityTermSearchHelper(
 					$this->newConfigurableTermSearchInteractor()

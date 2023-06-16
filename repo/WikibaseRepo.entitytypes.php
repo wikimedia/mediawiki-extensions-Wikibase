@@ -223,7 +223,7 @@ return [
 							WikibaseRepo::getEntityIdParser(),
 							WikibaseRepo::getFallbackLabelDescriptionLookupFactory()
 								->newLabelDescriptionLookup( $language ),
-							WikibaseRepo::getEntityTypeToRepositoryMapping()
+							WikibaseRepo::getEnabledEntityTypes()
 						),
 						new EntityTermSearchHelper(
 							new MatchingTermsLookupSearchInteractor(
@@ -427,7 +427,7 @@ return [
 
 							WikibaseRepo::getFallbackLabelDescriptionLookupFactory()
 								->newLabelDescriptionLookup( $language ),
-							WikibaseRepo::getEntityTypeToRepositoryMapping()
+							WikibaseRepo::getEnabledEntityTypes()
 						),
 						new EntityTermSearchHelper(
 							new MatchingTermsLookupSearchInteractor(
