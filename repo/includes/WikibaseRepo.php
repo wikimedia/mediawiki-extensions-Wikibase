@@ -943,17 +943,6 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.EntityDiffVisualizerFactory' );
 	}
 
-	/**
-	 * @return string[][] Associative array mapping names of known entity types (strings) to lists of names of
-	 *         repositories providing entities of those types.
-	 *         Note: Currently entities of a given type are only provided by single source. This
-	 *         assumption can be changed in the future.
-	 */
-	public static function getEntityTypeToRepositoryMapping( ContainerInterface $services = null ): array {
-		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WikibaseRepo.EntityTypeToRepositoryMapping' );
-	}
-
 	public static function getPropertyValueExpertsModule( ContainerInterface $services = null ): PropertyValueExpertsModule {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.PropertyValueExpertsModule' );
