@@ -265,25 +265,6 @@ class RdfBuilderTestData {
 		];
 	}
 
-	/**
-	 * @return array[] A list of properties used in the test data. Each element is a pair
-	 *         of an NumericPropertyId and a data type ID.
-	 */
-	public static function getTestProperties_noPrefixedIds() {
-		return [
-			[ new NumericPropertyId( 'P2' ), 'wikibase-item' ],
-			[ new NumericPropertyId( 'P3' ), 'commonsMedia' ],
-			[ new NumericPropertyId( 'P4' ), 'globe-coordinate' ],
-			[ new NumericPropertyId( 'P5' ), 'monolingualtext' ],
-			[ new NumericPropertyId( 'P6' ), 'quantity' ],
-			[ new NumericPropertyId( 'P7' ), 'string' ],
-			[ new NumericPropertyId( 'P8' ), 'time' ],
-			[ new NumericPropertyId( 'P9' ), 'url' ],
-			[ new NumericPropertyId( 'P10' ), 'geo-shape' ],
-			[ new NumericPropertyId( 'P11' ), 'external-id' ],
-		];
-	}
-
 	public function getMockTermLookup( bool $loadEntitiesIfNotPrefetched = true ): PrefetchingTermLookup {
 		$termLookup = new InMemoryPrefetchingTermLookup( $loadEntitiesIfNotPrefetched );
 		$entities = [];
