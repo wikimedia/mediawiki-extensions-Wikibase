@@ -236,41 +236,6 @@
 				"type": "statement",
 				"rank": "normal"
 			}
-		],
-		"foreign:P12": [
-			{
-				"id": "TEST-Statement-12-foreign-property",
-				"mainsnak": {
-					"snaktype": "value",
-					"property": "foreign:P12",
-					"datatype": "string",
-					"datavalue": {
-						"value": "foo",
-						"type": "string"
-					}
-				},
-				"type": "statement",
-				"rank": "normal"
-			}
-		],
-		"foreign:P13": [
-			{
-				"id": "TEST-Statement-13-foreign-entities",
-				"mainsnak": {
-					"snaktype": "value",
-					"property": "foreign:P13",
-					"datatype": "wikibase-entityid",
-					"datavalue": {
-						"value": {
-							"entity-type": "item",
-							"id": "foreign:Q200"
-						},
-						"type": "wikibase-entityid"
-					}
-				},
-				"type": "statement",
-				"rank": "normal"
-			}
 		]
 	}
 }

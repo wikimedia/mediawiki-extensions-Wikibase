@@ -314,7 +314,7 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 			[ 'Q2', [ 'Q2_meta', 'Q2_version', 'Q2_stub', 'Q2_aliases' ] ],
 			[ 'Q3', [ 'Q3_meta', 'Q3_version', 'Q3_sitelinks' ] ],
 			[
-				'Q4_no_prefixed_ids',
+				'Q4',
 				[
 					'Q4_meta',
 					'Q4_version',
@@ -325,7 +325,7 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 			],
 			[ 'Q5', 'Q5_badges' ],
 			[
-				'Q6_no_prefixed_ids',
+				'Q6',
 				[
 					'Q6_meta',
 					'Q6_version',
@@ -336,7 +336,7 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 				],
 			],
 			[
-				'Q7_no_prefixed_ids',
+				'Q7',
 				[
 					'Q7_meta',
 					'Q7_version',
@@ -413,32 +413,32 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 	public function getProduceOptions(): iterable {
 		return [
 			[
-				'Q4_no_prefixed_ids',
+				'Q4',
 				RdfProducer::PRODUCE_ALL_STATEMENTS,
 				[ 'Q4_meta', 'Q4_statements_foreignsource_properties' ],
 			],
 			[
-				'Q4_no_prefixed_ids',
+				'Q4',
 				RdfProducer::PRODUCE_TRUTHY_STATEMENTS,
 				[ 'Q4_meta', 'Q4_direct_foreignsource_properties' ],
 			],
 			[
-				'Q6_no_prefixed_ids',
+				'Q6',
 				RdfProducer::PRODUCE_ALL_STATEMENTS,
 				[ 'Q6_meta', 'Q6_statements_foreignsource_properties' ],
 			],
 			[
-				'Q6_no_prefixed_ids',
+				'Q6',
 				RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_QUALIFIERS,
 				[ 'Q6_meta', 'Q6_statements_foreignsource_properties', 'Q6_qualifiers_foreignsource_properties' ],
 			],
 			[
-				'Q7_no_prefixed_ids',
+				'Q7',
 				RdfProducer::PRODUCE_ALL_STATEMENTS,
 				[ 'Q7_meta', 'Q7_statements_foreignsource_properties' ],
 			],
 			[
-				'Q7_no_prefixed_ids',
+				'Q7',
 				RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_REFERENCES,
 				[
 					'Q7_meta',
@@ -453,12 +453,12 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 				[ 'Q3_meta', 'Q3_sitelinks' ],
 			],
 			[
-				'Q4_no_prefixed_ids',
+				'Q4',
 				RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_PROPERTIES,
 				[ 'Q4_meta', 'Q4_statements_foreignsource_properties', 'Q4_props_foreignsource_properties' ],
 			],
 			[
-				'Q4_no_prefixed_ids',
+				'Q4',
 				RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_FULL_VALUES,
 				[ 'Q4_meta', 'Q4_values_foreignsource_properties', 'Q4_statements_foreignsource_properties' ],
 			],
@@ -468,7 +468,7 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 				'Q1_info',
 			],
 			[
-				'Q4_no_prefixed_ids',
+				'Q4',
 				RdfProducer::PRODUCE_TRUTHY_STATEMENTS | RdfProducer::PRODUCE_RESOLVED_ENTITIES,
 				[ 'Q4_meta', 'Q4_direct_foreignsource_properties', 'Q4_referenced' ],
 			],
@@ -503,11 +503,11 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 		$bag = new HashDedupeBag();
 
 		$builder = $this->newRdfBuilder( RdfProducer::PRODUCE_ALL, $bag );
-		$builder->addEntity( $this->getEntityData( 'Q7_no_prefixed_ids' ) );
+		$builder->addEntity( $this->getEntityData( 'Q7' ) );
 		$data1 = $builder->getRDF();
 
 		$builder = $this->newRdfBuilder( RdfProducer::PRODUCE_ALL, $bag );
-		$builder->addEntity( $this->getEntityData( 'Q9_no_prefixed_ids' ) );
+		$builder->addEntity( $this->getEntityData( 'Q9' ) );
 		$data2 = $builder->getRDF();
 
 		$this->helper->assertNTriplesEqualsDataset( 'Q7_Q9_dedup_foreignsource_properties', $data1 . $data2 );

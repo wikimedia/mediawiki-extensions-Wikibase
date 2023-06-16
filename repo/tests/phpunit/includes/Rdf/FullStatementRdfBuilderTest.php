@@ -140,15 +140,15 @@ class FullStatementRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		];
 
 		return [
-			[ 'Q4_no_prefixed_ids', 0, $q4_minimal, [] ],
-			[ 'Q4_no_prefixed_ids', RdfProducer::PRODUCE_ALL, $q4_all, $props ],
-			[ 'Q4_no_prefixed_ids', RdfProducer::PRODUCE_ALL_STATEMENTS, $q4_statements, [] ],
-			[ 'Q6_no_prefixed_ids', RdfProducer::PRODUCE_ALL_STATEMENTS, $q6_no_qualifiers, [] ],
-			[ 'Q6_no_prefixed_ids', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_QUALIFIERS, $q6_qualifiers, [] ],
-			[ 'Q7_no_prefixed_ids', RdfProducer::PRODUCE_ALL_STATEMENTS , $q7_no_refs, [] ],
-			[ 'Q7_no_prefixed_ids', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_REFERENCES, $q7_refs, [] ],
-			[ 'Q4_no_prefixed_ids', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_PROPERTIES, $q4_minimal, $props ],
-			[ 'Q4_no_prefixed_ids', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_FULL_VALUES, $q4_values, [] ],
+			[ 'Q4', 0, $q4_minimal, [] ],
+			[ 'Q4', RdfProducer::PRODUCE_ALL, $q4_all, $props ],
+			[ 'Q4', RdfProducer::PRODUCE_ALL_STATEMENTS, $q4_statements, [] ],
+			[ 'Q6', RdfProducer::PRODUCE_ALL_STATEMENTS, $q6_no_qualifiers, [] ],
+			[ 'Q6', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_QUALIFIERS, $q6_qualifiers, [] ],
+			[ 'Q7', RdfProducer::PRODUCE_ALL_STATEMENTS , $q7_no_refs, [] ],
+			[ 'Q7', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_REFERENCES, $q7_refs, [] ],
+			[ 'Q4', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_PROPERTIES, $q4_minimal, $props ],
+			[ 'Q4', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_FULL_VALUES, $q4_values, [] ],
 		];
 	}
 
@@ -167,7 +167,7 @@ class FullStatementRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testAddEntity_seen() {
-		$entity = $this->getTestData()->getEntity( 'Q7_no_prefixed_ids' );
+		$entity = $this->getTestData()->getEntity( 'Q7' );
 
 		$dedupe = new HashDedupeBag();
 
@@ -182,7 +182,7 @@ class FullStatementRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testAddStatements() {
-		$entity = $this->getTestData()->getEntity( 'Q4_no_prefixed_ids' );
+		$entity = $this->getTestData()->getEntity( 'Q4' );
 
 		$writer = $this->getTestData()->getNTriplesWriter();
 		$this->newBuilder( $writer, RdfProducer::PRODUCE_ALL )

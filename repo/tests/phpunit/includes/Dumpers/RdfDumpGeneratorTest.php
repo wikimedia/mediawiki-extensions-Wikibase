@@ -380,12 +380,12 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 		$entityRevisions = [];
 
 		$entityRevisions['Q7'] = new EntityRevision(
-			$this->getTestData()->getEntity( 'Q7_no_prefixed_ids' ),
+			$this->getTestData()->getEntity( 'Q7' ),
 			12,
 			'19700112134640'
 		);
 		$entityRevisions['Q9'] = new EntityRevision(
-			$this->getTestData()->getEntity( 'Q9_no_prefixed_ids' ),
+			$this->getTestData()->getEntity( 'Q9' ),
 			12,
 			'19700112134640'
 		);

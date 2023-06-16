@@ -83,7 +83,7 @@ class TruthyStatementRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testAddEntity() {
-		$entity = $this->getTestData()->getEntity( 'Q4_no_prefixed_ids' );
+		$entity = $this->getTestData()->getEntity( 'Q4' );
 
 		$writer = $this->getTestData()->getNTriplesWriter();
 		$this->newBuilder( $writer )->addEntity( $entity );
@@ -92,7 +92,7 @@ class TruthyStatementRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testAddStatements() {
-		$entity = $this->getTestData()->getEntity( 'Q4_no_prefixed_ids' );
+		$entity = $this->getTestData()->getEntity( 'Q4' );
 
 		$writer = $this->getTestData()->getNTriplesWriter();
 		$this->newBuilder( $writer )->addStatements( $entity->getId(), $entity->getStatements() );
