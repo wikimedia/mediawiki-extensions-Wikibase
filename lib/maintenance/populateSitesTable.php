@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Maintenance;
 
 use Maintenance;
 use MediaWiki\MediaWikiServices;
-use MWException;
 use Wikibase\Lib\Sites\SiteMatrixParser;
 use Wikibase\Lib\Sites\SitesBuilder;
 
@@ -80,20 +79,16 @@ class PopulateSitesTable extends Maintenance {
 		$validGroups = [ 'wikipedia', 'wikivoyage', 'wikiquote', 'wiktionary',
 			'wikibooks', 'wikisource', 'wikiversity', 'wikinews' ];
 
-		try {
-			$json = $this->getSiteMatrixData( $url );
-
-			$siteMatrixParser = new SiteMatrixParser( $scriptPath, $articlePath,
-				$protocol, $expandGroup );
-
+		$json = $this->getSiteMatrixData( $url );
+		if ( !$json ) {
+			$this->output( "Got no data from $url\n" );
+		} else {
+			$siteMatrixParser = new SiteMatrixParser( $scriptPath, $articlePath, $protocol, $expandGroup );
 			$sites = $siteMatrixParser->sitesFromJson( $json );
 
 			$store = MediaWikiServices::getInstance()->getSiteStore();
 			$sitesBuilder = new SitesBuilder( $store, $validGroups );
 			$sitesBuilder->buildStore( $sites, $siteGroup, $wikiId );
-
-		} catch ( MWException $e ) {
-			$this->output( $e->getMessage() );
 		}
 
 		$this->output( "done.\n" );
@@ -102,19 +97,12 @@ class PopulateSitesTable extends Maintenance {
 	/**
 	 * @param string $url
 	 *
-	 * @throws MWException
-	 * @return string
+	 * @return string|null
 	 */
 	protected function getSiteMatrixData( $url ) {
 		$url .= '?action=sitematrix&format=json';
 
-		$json = MediaWikiServices::getInstance()->getHttpRequestFactory()->get( $url, [], __METHOD__ );
-
-		if ( !$json ) {
-			throw new MWException( "Got no data from $url\n" );
-		}
-
-		return $json;
+		return MediaWikiServices::getInstance()->getHttpRequestFactory()->get( $url, [], __METHOD__ );
 	}
 
 }

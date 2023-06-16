@@ -3,7 +3,7 @@
 namespace Wikibase\Lib;
 
 use ExtensionRegistry;
-use MWException;
+use LogicException;
 
 /**
  * WikibaseSettings is a static access point to Wikibase settings defined as global state
@@ -29,14 +29,12 @@ class WikibaseSettings {
 	}
 
 	/**
-	 * @throws MWException
-	 *
 	 * @return SettingsArray
 	 */
 	public static function getRepoSettings() {
 		global $wgWBRepoSettings;
 		if ( !self::isRepoEnabled() ) {
-			throw new MWException( 'Cannot access repo settings: Wikibase Repository component is not enabled!' );
+			throw new LogicException( 'Cannot access repo settings: Wikibase Repository component is not enabled!' );
 		}
 
 		$repoSettings = array_merge(
@@ -67,15 +65,13 @@ class WikibaseSettings {
 	}
 
 	/**
-	 * @throws MWException
-	 *
 	 * @return SettingsArray
 	 */
 	public static function getClientSettings() {
 		global $wgWBClientSettings;
 
 		if ( !self::isClientEnabled() ) {
-			throw new MWException( 'Cannot access client settings: Wikibase Client component is not enabled!' );
+			throw new LogicException( 'Cannot access client settings: Wikibase Client component is not enabled!' );
 		}
 
 		$clientSettings = array_merge(

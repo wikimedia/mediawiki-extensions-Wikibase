@@ -20,11 +20,11 @@ use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
 use MediaWiki\StubObject\StubUserLang;
 use MediaWiki\User\UserIdentity;
-use MWException;
 use OutputPage;
 use Parser;
 use ParserOptions;
 use ParserOutput;
+use RuntimeException;
 use Skin;
 use SkinTemplate;
 use Throwable;
@@ -124,8 +124,6 @@ final class RepoHooks {
 	 * This updates the $wgContentHandlers and $wgNamespaceContentModels registries
 	 * according to information provided by entity type definitions and the entityNamespaces
 	 * setting for the local entity source.
-	 *
-	 * @throws MWException
 	 */
 	public static function onSetupAfterCache() {
 		global $wgContentHandlers,
@@ -340,8 +338,6 @@ final class RepoHooks {
 	 * @param int $id id of the article that was deleted
 	 * @param Content|null $content
 	 * @param LogEntry $logEntry
-	 *
-	 * @throws MWException
 	 */
 	public static function onArticleDeleteComplete(
 		WikiPage $wikiPage,
@@ -882,8 +878,6 @@ final class RepoHooks {
 	 * @param object $importer unclear, see Bug T66657
 	 * @param array $pageInfo
 	 * @param array $revisionInfo
-	 *
-	 * @throws MWException
 	 */
 	public static function onImportHandleRevisionXMLTag( $importer, $pageInfo, $revisionInfo ) {
 		if ( isset( $revisionInfo['model'] ) ) {
@@ -893,7 +887,7 @@ final class RepoHooks {
 			if ( !$allowImport && in_array( $revisionInfo['model'], $contentModels ) ) {
 				// Skip entities.
 				// XXX: This is rather rough.
-				throw new MWException(
+				throw new RuntimeException(
 					'To avoid ID conflicts, the import of Wikibase entities is not supported.'
 						. ' You can enable imports using the "allowEntityImport" setting.'
 				);
@@ -1142,7 +1136,6 @@ final class RepoHooks {
 	 * @param ApiMain $apiMain
 	 * @param Throwable $e
 	 * @return bool|void
-	 * @throws MWException
 	 */
 	public static function onApiMainOnException( $apiMain, $e ) {
 		$module = $apiMain->getModule();

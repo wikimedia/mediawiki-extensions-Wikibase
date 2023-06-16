@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Maintenance;
 
+use InvalidArgumentException;
 use Maintenance;
 use MediaWiki\Maintenance\OrderedStreamingForkController;
-use MWException;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -137,7 +137,6 @@ class SearchEntities extends Maintenance {
 	 * Get appropriate searcher.
 	 * @param string $engine
 	 * @return EntitySearchHelper
-	 * @throws MWException
 	 */
 	private function getSearchHelper( $engine ) {
 		$engines = [
@@ -147,7 +146,7 @@ class SearchEntities extends Maintenance {
 		];
 
 		if ( !isset( $engines[$engine] ) ) {
-			throw new MWException( "Unknown engine: $engine, valid values: "
+			throw new InvalidArgumentException( "Unknown engine: $engine, valid values: "
 				. implode( ", ", array_keys( $engines ) ) );
 		}
 

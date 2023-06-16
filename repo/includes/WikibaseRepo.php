@@ -7,7 +7,6 @@ use Deserializers\Deserializer;
 use Deserializers\DispatchableDeserializer;
 use Language;
 use MediaWiki\MediaWikiServices;
-use MWException;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 use Serializers\Serializer;
@@ -204,7 +203,6 @@ class WikibaseRepo {
 
 	/**
 	 * @deprecated
-	 * @throws MWException when called too early
 	 */
 	public static function getUserLanguage( ContainerInterface $services = null ): Language {
 		return ( $services ?: MediaWikiServices::getInstance() )

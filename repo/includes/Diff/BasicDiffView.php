@@ -10,7 +10,7 @@ use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
 use Html;
-use MWException;
+use UnexpectedValueException;
 use WordLevelDiff;
 
 /**
@@ -53,7 +53,6 @@ class BasicDiffView implements DiffView {
 	 * @param DiffOp $op
 	 *
 	 * @return string
-	 * @throws MWException
 	 */
 	protected function generateOpHtml( array $path, DiffOp $op ) {
 		if ( $op->isAtomic() ) {
@@ -90,7 +89,7 @@ class BasicDiffView implements DiffView {
 					$wordLevelDiff->closing()[0]
 				 );
 			} else {
-				throw new MWException( 'Invalid diffOp type' );
+				throw new UnexpectedValueException( 'Invalid diffOp type' );
 			}
 		} else {
 			$html = '';

@@ -5,11 +5,11 @@ namespace Wikibase\Repo\Actions;
 use Article;
 use Content;
 use IContextSource;
+use LogicException;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Permissions\PermissionManager;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
-use MWException;
 use Status;
 use Title;
 use Wikibase\Lib\Summary;
@@ -206,12 +206,9 @@ class SubmitEntityAction extends EditEntityAction {
 		return $this->summaryFormatter->formatSummary( $summary );
 	}
 
-	/**
-	 * @throws MWException
-	 */
 	public function execute() {
 		// @phan-suppress-previous-line PhanPluginNeverReturnMethod
-		throw new MWException( 'Not applicable.' );
+		throw new LogicException( 'Not applicable.' );
 	}
 
 	/**

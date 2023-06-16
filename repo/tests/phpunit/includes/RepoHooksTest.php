@@ -11,11 +11,11 @@ use Exception;
 use ImportStringSource;
 use MediaWiki\Linker\LinkTarget;
 use MediaWikiIntegrationTestCase;
-use MWException;
 use OutputPage;
 use ParserOptions;
 use ParserOutput;
 use RequestContext;
+use RuntimeException;
 use SkinTemplate;
 use Title;
 use TitleValue;
@@ -187,7 +187,7 @@ class RepoHooksTest extends MediaWikiIntegrationTestCase {
 			'item_allowimport' => [
 				[ 'model' => ItemContent::CONTENT_MODEL_ID ],
 				false,
-				MWException::class,
+				RuntimeException::class,
 			],
 			'item_noimport' => [
 				[ 'model' => ItemContent::CONTENT_MODEL_ID ],
@@ -260,7 +260,7 @@ XML
 XML
 				,
 				false,
-				MWException::class,
+				RuntimeException::class,
 			],
 			'item (allow)' => [ <<<XML
 <mediawiki>

@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Maintenance;
 use ExtensionRegistry;
 use Maintenance;
 use MediaWiki\Settings\SettingsBuilder;
-use MWException;
 use Onoi\MessageReporter\ObservableMessageReporter;
 use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 use Wikibase\DataModel\Services\Lookup\EntityLookupException;
@@ -135,8 +134,6 @@ abstract class DumpEntities extends Maintenance {
 	 * Opens the given file for use by logMessage().
 	 *
 	 * @param string $file use "-" as a shortcut for "php://stdout"
-	 *
-	 * @throws MWException
 	 */
 	private function openLogFile( $file ) {
 		$this->closeLogFile();
@@ -149,7 +146,7 @@ abstract class DumpEntities extends Maintenance {
 		$this->logFileHandle = fopen( $file, 'a' );
 
 		if ( !$this->logFileHandle ) {
-			throw new MWException( 'Failed to open log file: ' . $file );
+			$this->fatalError( 'Failed to open log file: ' . $file );
 		}
 	}
 
@@ -189,7 +186,7 @@ abstract class DumpEntities extends Maintenance {
 		$output = fopen( $outFile, 'w' ); //TODO: Allow injection of an OutputStream
 
 		if ( !$output ) {
-			throw new MWException( 'Failed to open ' . $outFile . '!' );
+			$this->fatalError( 'Failed to open ' . $outFile . '!' );
 		}
 
 		if ( $this->hasOption( 'list-file' ) ) {
@@ -362,14 +359,13 @@ abstract class DumpEntities extends Maintenance {
 	 * @param string $listFile
 	 * @param ExceptionHandler|null $exceptionReporter
 	 *
-	 * @throws MWException
 	 * @return EntityIdReader
 	 */
 	private function makeIdFileStream( $listFile, ExceptionHandler $exceptionReporter = null ) {
 		$input = fopen( $listFile, 'r' );
 
 		if ( !$input ) {
-			throw new MWException( "Failed to open ID file: $listFile" );
+			$this->fatalError( "Failed to open ID file: $listFile" );
 		}
 
 		$stream = new EntityIdReader( new LineReader( $input ), WikibaseRepo::getEntityIdParser() );

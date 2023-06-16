@@ -11,7 +11,6 @@ use JobSpecification;
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use MediaWiki\JobQueue\JobQueueGroupFactory;
 use MediaWiki\MediaWikiServices;
-use MWException;
 use Psr\Log\LoggerInterface;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -126,9 +125,6 @@ class DispatchChangesJob extends Job {
 		);
 	}
 
-	/**
-	 * @throws MWException
-	 */
 	public function run(): bool {
 		// TODO: for v2 of this job, we could actually get all the newest revision from the DB,
 		//       calculate the change_info ourselves and thus make wb_changes table obsolete?
@@ -223,7 +219,6 @@ class DispatchChangesJob extends Job {
 	 * @param string[] $subscribedClientSites sites subscribed to this entityId
 	 * @param string[] $wikisWithSitelinkChanges sites whose sitelink was changed
 	 *
-	 * @throws MWException
 	 * @return string[] A mapping of client wiki site IDs to logical database names.
 	 */
 	private function filterClientWikis( array $allClientWikis, array $subscribedClientSites, array $wikisWithSitelinkChanges ): array {

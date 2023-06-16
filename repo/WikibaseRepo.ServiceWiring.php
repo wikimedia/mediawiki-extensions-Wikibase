@@ -2041,7 +2041,7 @@ return [
 		// run during bootstrapping.
 
 		if ( !$wgLang ) {
-			throw new MWException( 'Premature access: $wgLang is not yet initialized!' );
+			throw new RuntimeException( 'Premature access: $wgLang is not yet initialized!' );
 		}
 
 		StubObject::unstub( $wgLang );
