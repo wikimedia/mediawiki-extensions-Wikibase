@@ -24,6 +24,9 @@ $wgWBClientSettings['dataBridgeEnabled'] = true;
 $wgWBClientSettings['dataBridgeHrefRegExp'] = '[/=]((?:Item:)?(Q[1-9][0-9]*)).*#(P[1-9][0-9]*)$';
 $wgWBClientSettings['dataBridgeEditTags'] = [ 'Data Bridge' ];
 
+// Reduce injecting RC records batch size (T299077)
+$wgWBClientSettings['recentChangesBatchSize'] = 10;
+
 // if this is a Client-only wiki, configure a fake Repo
 if ( !( $wgEnableWikibaseRepo ?? true ) ) {
 	$wgWBClientSettings['repoUrl'] = 'https://ci.wikibase.example';
