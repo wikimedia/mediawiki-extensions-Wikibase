@@ -365,10 +365,7 @@ class RdfVocabulary {
 	 * @return string
 	 */
 	public function getEntityLName( EntityId $entityId ) {
-		$localIdPart = $entityId->getLocalPart();
-		// If local ID part (ID excluding repository prefix) contains a colon, ie. the ID contains
-		// "chained" repository prefixes, replace all colons with periods in the local ID part.
-		return str_replace( ':', '.', $localIdPart );
+		return $entityId->getSerialization();
 	}
 
 	/**
