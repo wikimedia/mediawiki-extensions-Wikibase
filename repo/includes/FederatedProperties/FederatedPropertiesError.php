@@ -44,7 +44,7 @@ class FederatedPropertiesError extends ErrorPageError {
 
 		$html = $templateFactory->render( 'wikibase-title',
 			!$hasLabel ? 'wb-empty' : '',
-			!$hasLabel ? wfMessage( 'wikibase-label-empty' )->parse() : $labelText,
+			!$hasLabel ? wfMessage( 'wikibase-label-empty' )->parse() : htmlspecialchars( $labelText, ENT_QUOTES ),
 			$idInParenthesesHtml
 		);
 
