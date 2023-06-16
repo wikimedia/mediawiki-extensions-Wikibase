@@ -110,7 +110,7 @@ class TermsRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		TestingAccessWrapper::newFromObject( $this->newBuilder( $writer, $languages ) )
 			->addLabels(
 				RdfVocabulary::NS_ENTITY,
-				$entity->getId()->getLocalPart(),
+				$entity->getId()->getSerialization(),
 				$entity->getFingerprint()->getLabels(),
 				self::$DEFAULT_LABELS
 			);
@@ -135,7 +135,7 @@ class TermsRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		TestingAccessWrapper::newFromObject( $this->newBuilder( $writer, $languages ) )
 			->addDescriptions(
 				RdfVocabulary::NS_ENTITY,
-				$entity->getId()->getLocalPart(),
+				$entity->getId()->getSerialization(),
 				$entity->getFingerprint()->getDescriptions()
 			);
 
@@ -159,7 +159,7 @@ class TermsRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		TestingAccessWrapper::newFromObject( $this->newBuilder( $writer, $languages ) )
 			->addAliases(
 				RdfVocabulary::NS_ENTITY,
-				$entity->getId()->getLocalPart(),
+				$entity->getId()->getSerialization(),
 				$entity->getFingerprint()->getAliasGroups()
 			);
 
