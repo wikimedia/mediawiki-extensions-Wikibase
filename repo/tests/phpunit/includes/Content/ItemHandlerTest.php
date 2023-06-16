@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Tests\Content;
 
+use BadMethodCallException;
 use DataValues\StringValue;
-use MWException;
 use ParserOutput;
 use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -146,7 +146,7 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 		$this->assertEquals( $target->getFullText(), $content->getRedirectTarget()->getFullText() );
 
 		// getEntity() should fail
-		$this->expectException( MWException::class );
+		$this->expectException( BadMethodCallException::class );
 		$content->getEntity();
 	}
 

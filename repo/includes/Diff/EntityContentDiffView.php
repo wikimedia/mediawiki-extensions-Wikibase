@@ -9,7 +9,6 @@ use IContextSource;
 use Language;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionRecord;
-use MWException;
 use ParserOutput;
 use Wikibase\Repo\Content\EntityContent;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesError;
@@ -131,7 +130,6 @@ class EntityContentDiffView extends DifferenceEngine {
 	 * @param Content $old
 	 * @param Content $new
 	 *
-	 * @throws MWException If the two content objects are neither EntityContent nor TextContent.
 	 * @return string
 	 */
 	public function generateContentDiffBody( Content $old, Content $new ) {

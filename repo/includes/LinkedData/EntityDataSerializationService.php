@@ -9,8 +9,9 @@ use ApiMain;
 use ApiResult;
 use DerivativeContext;
 use DerivativeRequest;
-use MWException;
+use InvalidArgumentException;
 use RequestContext;
+use RuntimeException;
 use Serializers\Serializer;
 use SiteLookup;
 use Wikibase\DataModel\Entity\EntityId;
@@ -121,7 +122,6 @@ class EntityDataSerializationService {
 	 *
 	 * @return array tuple of ( $data, $contentType )
 	 * @throws UnknownFlavorException
-	 * @throws MWException
 	 */
 	public function getSerializedData(
 		string $format,
@@ -134,7 +134,7 @@ class EntityDataSerializationService {
 		$formatName = $this->entityDataFormatProvider->getFormatName( $format );
 
 		if ( $formatName === null ) {
-			throw new MWException( "Unsupported format: $format" );
+			throw new InvalidArgumentException( "Unsupported format: $format" );
 		}
 
 		$serializer = $this->createApiSerializer( $formatName );
@@ -146,7 +146,7 @@ class EntityDataSerializationService {
 			$rdfBuilder = $this->createRdfBuilder( $formatName, $flavor );
 
 			if ( $rdfBuilder === null ) {
-				throw new MWException( "Could not create serializer for $formatName" );
+				throw new RuntimeException( "Could not create serializer for $formatName" );
 			}
 
 			$data = $this->rdfSerialize( $entityRevision, $followedRedirect, $incomingRedirects, $rdfBuilder, $flavor );
