@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Api;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\DataModel\Entity\SerializableEntityId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;
@@ -170,8 +169,7 @@ class EntityIdSearchHelper implements EntitySearchHelper {
 
 	/**
 	 * Returns a list of entity IDs matching the pattern defined by $entityId: existing entities
-	 * of type of $entityId, and serialized id equal to $entityId, possibly including prefixes
-	 * of configured repositories.
+	 * of type of $entityId, and serialized id equal to $entityId.
 	 *
 	 * @param EntityId $entityId
 	 *
@@ -184,36 +182,8 @@ class EntityIdSearchHelper implements EntitySearchHelper {
 			return null;
 		}
 
-		// NOTE: this assumes entities of the particular type are only provided by a single repository
-		// This assumption is currently valid but might change in the future.
-		$repositoryPrefix = $this->entityTypeToRepositoryMapping[$entityType][0];
-
-		if ( $entityId->getRepositoryName() !== '' && $repositoryPrefix !== $entityId->getRepositoryName() ) {
-			// If a repository is explicitly specified and it is not the one (and only) we know about abort.
-			return null;
-		}
-
-		// Note: EntityLookup::hasEntity may return true even if the getRepositoryName of the entity id is
-		// unknown, as the lookup doesn't about its entity source setting.
 		if ( $this->entityLookup->hasEntity( $entityId ) ) {
 			return $entityId;
-		}
-
-		// Entity ID without repository prefix, let's try prepending known prefixes
-		$unprefixedIdPart = $entityId->getLocalPart();
-
-		try {
-			$id = $this->idParser->parse( SerializableEntityId::joinSerialization( [
-				$repositoryPrefix,
-				'',
-				$unprefixedIdPart,
-			] ) );
-		} catch ( EntityIdParsingException $ex ) {
-			return null;
-		}
-
-		if ( $this->entityLookup->hasEntity( $id ) ) {
-			return $id;
 		}
 
 		return null;
