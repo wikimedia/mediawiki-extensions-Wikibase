@@ -3,6 +3,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
+use LogicException;
 use MediaWiki\Revision\SlotRecord;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
@@ -71,7 +72,7 @@ class ItemVocabularyBaseUriTest extends ServiceWiringTestCase {
 			] )
 		);
 
-		$this->expectException( 'LogicException' );
+		$this->expectException( LogicException::class );
 
 		$this->getService( 'WikibaseRepo.ItemVocabularyBaseUri' );
 	}

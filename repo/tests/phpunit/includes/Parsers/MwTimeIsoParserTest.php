@@ -7,6 +7,7 @@ use DataValues\TimeValue;
 use Language;
 use MediaWiki\Languages\LanguageFactory;
 use MediaWiki\MediaWikiServices;
+use ValueParsers\ParseException;
 use ValueParsers\ParserOptions;
 use ValueParsers\ValueParser;
 use Wikibase\Repo\Parsers\MwTimeIsoParser;
@@ -356,7 +357,7 @@ class MwTimeIsoParserTest extends \PHPUnit\Framework\TestCase {
 			$parser = $this->getInstance();
 		}
 
-		$this->expectException( 'ValueParsers\ParseException' );
+		$this->expectException( ParseException::class );
 		$parser->parse( $value );
 	}
 

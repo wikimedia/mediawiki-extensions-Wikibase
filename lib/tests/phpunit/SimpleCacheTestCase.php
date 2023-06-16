@@ -14,6 +14,7 @@ namespace Wikibase\Lib\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Psr\SimpleCache\CacheInterface;
+use Psr\SimpleCache\InvalidArgumentException as SimpleCacheInvalidArgumentException;
 
 /**
  * All modifications to the original MIT-licensed file are made under
@@ -417,7 +418,7 @@ abstract class SimpleCacheTestCase extends TestCase {
 			$this->markTestSkipped( $this->skippedTests[__FUNCTION__] );
 		}
 
-		$this->expectException( 'Psr\SimpleCache\InvalidArgumentException' );
+		$this->expectException( SimpleCacheInvalidArgumentException::class );
 		$this->cache->get( $key );
 	}
 
@@ -429,7 +430,7 @@ abstract class SimpleCacheTestCase extends TestCase {
 			$this->markTestSkipped( $this->skippedTests[__FUNCTION__] );
 		}
 
-		$this->expectException( 'Psr\SimpleCache\InvalidArgumentException' );
+		$this->expectException( SimpleCacheInvalidArgumentException::class );
 		$result = $this->cache->getMultiple( [ 'key1', $key, 'key2' ] );
 	}
 
@@ -438,7 +439,7 @@ abstract class SimpleCacheTestCase extends TestCase {
 			$this->markTestSkipped( $this->skippedTests[__FUNCTION__] );
 		}
 
-		$this->expectException( 'Psr\SimpleCache\InvalidArgumentException' );
+		$this->expectException( SimpleCacheInvalidArgumentException::class );
 		$result = $this->cache->getMultiple( 'key' );
 	}
 
@@ -450,7 +451,7 @@ abstract class SimpleCacheTestCase extends TestCase {
 			$this->markTestSkipped( $this->skippedTests[__FUNCTION__] );
 		}
 
-		$this->expectException( 'Psr\SimpleCache\InvalidArgumentException' );
+		$this->expectException( SimpleCacheInvalidArgumentException::class );
 		$this->cache->set( $key, 'foobar' );
 	}
 
@@ -467,7 +468,7 @@ abstract class SimpleCacheTestCase extends TestCase {
 			yield $key => 'bar';
 			yield 'key2' => 'baz';
 		};
-		$this->expectException( 'Psr\SimpleCache\InvalidArgumentException' );
+		$this->expectException( SimpleCacheInvalidArgumentException::class );
 		$this->cache->setMultiple( $values() );
 	}
 
@@ -476,7 +477,7 @@ abstract class SimpleCacheTestCase extends TestCase {
 			$this->markTestSkipped( $this->skippedTests[__FUNCTION__] );
 		}
 
-		$this->expectException( 'Psr\SimpleCache\InvalidArgumentException' );
+		$this->expectException( SimpleCacheInvalidArgumentException::class );
 		$this->cache->setMultiple( 'key' );
 	}
 
@@ -488,7 +489,7 @@ abstract class SimpleCacheTestCase extends TestCase {
 			$this->markTestSkipped( $this->skippedTests[__FUNCTION__] );
 		}
 
-		$this->expectException( 'Psr\SimpleCache\InvalidArgumentException' );
+		$this->expectException( SimpleCacheInvalidArgumentException::class );
 		$this->cache->has( $key );
 	}
 
@@ -500,7 +501,7 @@ abstract class SimpleCacheTestCase extends TestCase {
 			$this->markTestSkipped( $this->skippedTests[__FUNCTION__] );
 		}
 
-		$this->expectException( 'Psr\SimpleCache\InvalidArgumentException' );
+		$this->expectException( SimpleCacheInvalidArgumentException::class );
 		$this->cache->delete( $key );
 	}
 
@@ -512,7 +513,7 @@ abstract class SimpleCacheTestCase extends TestCase {
 			$this->markTestSkipped( $this->skippedTests[__FUNCTION__] );
 		}
 
-		$this->expectException( 'Psr\SimpleCache\InvalidArgumentException' );
+		$this->expectException( SimpleCacheInvalidArgumentException::class );
 		$this->cache->deleteMultiple( [ 'key1', $key, 'key2' ] );
 	}
 
@@ -521,7 +522,7 @@ abstract class SimpleCacheTestCase extends TestCase {
 			$this->markTestSkipped( $this->skippedTests[__FUNCTION__] );
 		}
 
-		$this->expectException( 'Psr\SimpleCache\InvalidArgumentException' );
+		$this->expectException( SimpleCacheInvalidArgumentException::class );
 		$this->cache->deleteMultiple( 'key' );
 	}
 
@@ -533,7 +534,7 @@ abstract class SimpleCacheTestCase extends TestCase {
 			$this->markTestSkipped( $this->skippedTests[__FUNCTION__] );
 		}
 
-		$this->expectException( 'Psr\SimpleCache\InvalidArgumentException' );
+		$this->expectException( SimpleCacheInvalidArgumentException::class );
 		$this->cache->set( 'key', 'value', $ttl );
 	}
 
@@ -545,7 +546,7 @@ abstract class SimpleCacheTestCase extends TestCase {
 			$this->markTestSkipped( $this->skippedTests[__FUNCTION__] );
 		}
 
-		$this->expectException( 'Psr\SimpleCache\InvalidArgumentException' );
+		$this->expectException( SimpleCacheInvalidArgumentException::class );
 		$this->cache->setMultiple( [ 'key' => 'value' ], $ttl );
 	}
 
