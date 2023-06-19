@@ -166,6 +166,41 @@ class RdfBuilderTestData {
 	 */
 	public function getVocabulary() {
 		return new RdfVocabulary(
+			[ 'wikidata' => self::URI_BASE ],
+			[ 'wikidata' => self::URI_DATA ],
+			new EntitySourceDefinitions(
+				[
+					new DatabaseEntitySource(
+						'wikidata',
+						'wikidatadb',
+						[
+							'item' => [ 'namespaceId' => 700, 'slot' => SlotRecord::MAIN ],
+							'property' => [ 'namespaceId' => 900, 'slot' => SlotRecord::MAIN ],
+						],
+						self::URI_BASE,
+						'wd',
+						'',
+						''
+					),
+				],
+				new SubEntityTypesMapper( [] )
+			),
+			[ 'wikidata' => '' ],
+			[ 'wikidata' => '' ],
+			[],
+			[],
+			[],
+			'http://creativecommons.org/publicdomain/zero/1.0/'
+		);
+	}
+
+	/**
+	 * Returns the vocabulary to use with the test data.
+	 *
+	 * @return RdfVocabulary
+	 */
+	public function getVocabularyForPropertiesFromOtherWikibase() {
+		return new RdfVocabulary(
 			[ 'wikidata' => self::URI_BASE, 'foreign' => self::URI_BASE_FOREIGN ],
 			[ 'wikidata' => self::URI_DATA, 'foreign' => self::URI_DATA_FOREIGN ],
 			new EntitySourceDefinitions(
@@ -217,6 +252,18 @@ class RdfBuilderTestData {
 		if ( $start ) {
 			$writer->start();
 		}
+
+		return $writer;
+	}
+
+	public function getNTriplesWriterForPropertiesFromOtherWikibase(): NTriplesRdfWriter {
+		$writer = new NTriplesRdfWriter( NTriplesRdfWriter::DOCUMENT_ROLE, new NoopBNodeLabeler() );
+
+		foreach ( $this->getVocabularyForPropertiesFromOtherWikibase()->getNamespaces() as $ns => $uri ) {
+			$writer->prefix( $ns, $uri );
+		}
+
+		$writer->start();
 
 		return $writer;
 	}

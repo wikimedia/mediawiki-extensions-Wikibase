@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Rdf;
 use Wikibase\Repo\Rdf\NullDedupeBag;
 use Wikibase\Repo\Rdf\NullEntityMentionListener;
 use Wikibase\Repo\Rdf\RdfProducer;
+use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\SnakRdfBuilder;
 use Wikibase\Repo\Rdf\TruthyStatementRdfBuilder;
 use Wikibase\Repo\WikibaseRepo;
@@ -45,14 +46,7 @@ class TruthyStatementRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		return $this->helper->getTestData();
 	}
 
-	/**
-	 * @param RdfWriter $writer
-	 *
-	 * @return TruthyStatementRdfBuilder
-	 */
-	private function newBuilder( RdfWriter $writer ) {
-		$vocabulary = $this->getTestData()->getVocabulary();
-
+	private function newBuilder( RdfVocabulary $vocabulary, RdfWriter $writer ): TruthyStatementRdfBuilder {
 		// Note: using the actual factory here makes this an integration test!
 		$valueBuilderFactory = WikibaseRepo::getValueSnakRdfBuilderFactory();
 
@@ -85,8 +79,19 @@ class TruthyStatementRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	public function testAddEntity() {
 		$entity = $this->getTestData()->getEntity( 'Q4' );
 
+		$vocabulary = $this->getTestData()->getVocabulary();
 		$writer = $this->getTestData()->getNTriplesWriter();
-		$this->newBuilder( $writer )->addEntity( $entity );
+		$this->newBuilder( $vocabulary, $writer )->addEntity( $entity );
+
+		$this->assertOrCreateNTriples( [ 'Q4_direct' ], $writer );
+	}
+
+	public function testAddEntity_whenPropertiesFromOtherWikibase() {
+		$entity = $this->getTestData()->getEntity( 'Q4' );
+
+		$vocabulary = $this->getTestData()->getVocabularyForPropertiesFromOtherWikibase();
+		$writer = $this->getTestData()->getNTriplesWriterForPropertiesFromOtherWikibase();
+		$this->newBuilder( $vocabulary, $writer )->addEntity( $entity );
 
 		$this->assertOrCreateNTriples( [ 'Q4_direct_foreignsource_properties' ], $writer );
 	}
@@ -94,8 +99,19 @@ class TruthyStatementRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	public function testAddStatements() {
 		$entity = $this->getTestData()->getEntity( 'Q4' );
 
+		$vocabulary = $this->getTestData()->getVocabulary();
 		$writer = $this->getTestData()->getNTriplesWriter();
-		$this->newBuilder( $writer )->addStatements( $entity->getId(), $entity->getStatements() );
+		$this->newBuilder( $vocabulary, $writer )->addStatements( $entity->getId(), $entity->getStatements() );
+
+		$this->assertOrCreateNTriples( [ 'Q4_direct' ], $writer );
+	}
+
+	public function testAddStatements_whenPropertiesFromOtherWikibase() {
+		$entity = $this->getTestData()->getEntity( 'Q4' );
+
+		$vocabulary = $this->getTestData()->getVocabularyForPropertiesFromOtherWikibase();
+		$writer = $this->getTestData()->getNTriplesWriterForPropertiesFromOtherWikibase();
+		$this->newBuilder( $vocabulary, $writer )->addStatements( $entity->getId(), $entity->getStatements() );
 
 		$this->assertOrCreateNTriples( [ 'Q4_direct_foreignsource_properties' ], $writer );
 	}

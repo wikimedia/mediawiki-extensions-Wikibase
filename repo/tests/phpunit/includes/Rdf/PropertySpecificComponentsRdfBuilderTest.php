@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\Repo\Rdf\PropertySpecificComponentsRdfBuilder;
+use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
@@ -51,13 +52,7 @@ class PropertySpecificComponentsRdfBuilderTest extends TestCase {
 		return $this->testData;
 	}
 
-	/**
-	 * @param RdfWriter $writer
-	 *
-	 * @return PropertySpecificComponentsRdfBuilder
-	 */
-	private function newBuilder( RdfWriter $writer ) {
-		$vocabulary = $this->getTestData()->getVocabulary();
+	private function newBuilder( RdfVocabulary $vocabulary, RdfWriter $writer ): PropertySpecificComponentsRdfBuilder {
 		$dataTypeLookup = $this->getPropertyDataTypeLookup();
 
 		return new PropertySpecificComponentsRdfBuilder(
@@ -91,8 +86,19 @@ class PropertySpecificComponentsRdfBuilderTest extends TestCase {
 	public function testAddEntity() {
 		$entity = $this->getTestData()->getEntity( 'P2' );
 
+		$vocabulary = $this->getTestData()->getVocabulary();
 		$writer = $this->getTestData()->getNTriplesWriter();
-		$this->newBuilder( $writer )->addEntity( $entity );
+		$this->newBuilder( $vocabulary, $writer )->addEntity( $entity );
+
+		$this->assertOrCreateNTriples( 'P2_all', $writer );
+	}
+
+	public function testAddEntity_whenPropertiesFromOtherWikibase() {
+		$entity = $this->getTestData()->getEntity( 'P2' );
+
+		$vocabulary = $this->getTestData()->getVocabularyForPropertiesFromOtherWikibase();
+		$writer = $this->getTestData()->getNTriplesWriterForPropertiesFromOtherWikibase();
+		$this->newBuilder( $vocabulary, $writer )->addEntity( $entity );
 
 		$this->assertOrCreateNTriples( 'P2_all_foreignsource', $writer );
 	}

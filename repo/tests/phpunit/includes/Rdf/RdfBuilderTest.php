@@ -315,9 +315,9 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 				[
 					'Q4_meta',
 					'Q4_version',
-					'Q4_statements_foreignsource_properties',
-					'Q4_direct_foreignsource_properties',
-					'Q4_values_foreignsource_properties',
+					'Q4_statements',
+					'Q4_direct',
+					'Q4_values',
 				],
 			],
 			[ 'Q5', 'Q5_badges' ],
@@ -326,10 +326,10 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 				[
 					'Q6_meta',
 					'Q6_version',
-					'Q6_statements_foreignsource_properties',
-					'Q6_qualifiers_foreignsource_properties',
-					'Q6_values_foreignsource_properties',
-					'Q6_referenced_foreignsource_properties',
+					'Q6_statements',
+					'Q6_qualifiers',
+					'Q6_values',
+					'Q6_referenced',
 				],
 			],
 			[
@@ -337,13 +337,13 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 				[
 					'Q7_meta',
 					'Q7_version',
-					'Q7_statements_foreignsource_properties',
-					'Q7_reference_refs_foreignsource_properties',
-					'Q7_references_foreignsource_properties',
-					'Q7_values_foreignsource_properties',
+					'Q7_statements',
+					'Q7_reference_refs',
+					'Q7_references',
+					'Q7_values',
 				],
 			],
-			[ 'Q8', 'Q8_baddates_foreignsource_properties' ],
+			[ 'Q8', 'Q8_baddates' ],
 		];
 
 		return $rdfTests;
@@ -356,6 +356,59 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 		$entity = $this->getEntityData( $entityName );
 
 		$builder = $this->newRdfBuilder( RdfProducer::PRODUCE_ALL );
+		$builder->addEntity( $entity );
+		$builder->addEntityRevisionInfo( $entity->getId(), 42, "2013-10-04T03:31:05Z" );
+
+		$this->helper->assertNTriplesEqualsDataset( $dataSetNames, $builder->getRDF() );
+	}
+
+	public static function provideAddEntityTestCasesWhenPropertiesFromOtherWikibase(): iterable {
+		yield [
+			'Q4',
+			[
+				'Q4_meta',
+				'Q4_version',
+				'Q4_statements_foreignsource_properties',
+				'Q4_direct_foreignsource_properties',
+				'Q4_values_foreignsource_properties',
+			],
+		];
+		yield [
+			'Q6',
+			[
+				'Q6_meta',
+				'Q6_version',
+				'Q6_statements_foreignsource_properties',
+				'Q6_qualifiers_foreignsource_properties',
+				'Q6_values_foreignsource_properties',
+				'Q6_referenced_foreignsource_properties',
+			],
+		];
+		yield [
+			'Q7',
+			[
+				'Q7_meta',
+				'Q7_version',
+				'Q7_statements_foreignsource_properties',
+				'Q7_reference_refs_foreignsource_properties',
+				'Q7_references_foreignsource_properties',
+				'Q7_values_foreignsource_properties',
+			],
+		];
+		yield [ 'Q8', 'Q8_baddates_foreignsource_properties' ];
+	}
+
+	/**
+	 * @dataProvider provideAddEntityTestCasesWhenPropertiesFromOtherWikibase
+	 */
+	public function testAddEntity_whenPropertiesFromOtherWikibase( string $entityName, $dataSetNames ): void {
+		$entity = $this->getEntityData( $entityName );
+
+		$builder = $this->newRdfBuilder(
+			RdfProducer::PRODUCE_ALL,
+			null,
+			$this->getTestData()->getVocabularyForPropertiesFromOtherWikibase()
+		);
 		$builder->addEntity( $entity );
 		$builder->addEntityRevisionInfo( $entity->getId(), 42, "2013-10-04T03:31:05Z" );
 
@@ -412,36 +465,36 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 			[
 				'Q4',
 				RdfProducer::PRODUCE_ALL_STATEMENTS,
-				[ 'Q4_meta', 'Q4_statements_foreignsource_properties' ],
+				[ 'Q4_meta', 'Q4_statements' ],
 			],
 			[
 				'Q4',
 				RdfProducer::PRODUCE_TRUTHY_STATEMENTS,
-				[ 'Q4_meta', 'Q4_direct_foreignsource_properties' ],
+				[ 'Q4_meta', 'Q4_direct' ],
 			],
 			[
 				'Q6',
 				RdfProducer::PRODUCE_ALL_STATEMENTS,
-				[ 'Q6_meta', 'Q6_statements_foreignsource_properties' ],
+				[ 'Q6_meta', 'Q6_statements' ],
 			],
 			[
 				'Q6',
 				RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_QUALIFIERS,
-				[ 'Q6_meta', 'Q6_statements_foreignsource_properties', 'Q6_qualifiers_foreignsource_properties' ],
+				[ 'Q6_meta', 'Q6_statements', 'Q6_qualifiers' ],
 			],
 			[
 				'Q7',
 				RdfProducer::PRODUCE_ALL_STATEMENTS,
-				[ 'Q7_meta', 'Q7_statements_foreignsource_properties' ],
+				[ 'Q7_meta', 'Q7_statements' ],
 			],
 			[
 				'Q7',
 				RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_REFERENCES,
 				[
 					'Q7_meta',
-					'Q7_statements_foreignsource_properties',
-					'Q7_reference_refs_foreignsource_properties',
-					'Q7_references_foreignsource_properties',
+					'Q7_statements',
+					'Q7_reference_refs',
+					'Q7_references',
 				],
 			],
 			[
@@ -452,12 +505,12 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 			[
 				'Q4',
 				RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_PROPERTIES,
-				[ 'Q4_meta', 'Q4_statements_foreignsource_properties', 'Q4_props_foreignsource_properties' ],
+				[ 'Q4_meta', 'Q4_statements', 'Q4_props' ],
 			],
 			[
 				'Q4',
 				RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_FULL_VALUES,
-				[ 'Q4_meta', 'Q4_values_foreignsource_properties', 'Q4_statements_foreignsource_properties' ],
+				[ 'Q4_meta', 'Q4_values', 'Q4_statements' ],
 			],
 			[
 				'Q1',
@@ -467,12 +520,12 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 			[
 				'Q4',
 				RdfProducer::PRODUCE_TRUTHY_STATEMENTS | RdfProducer::PRODUCE_RESOLVED_ENTITIES,
-				[ 'Q4_meta', 'Q4_direct_foreignsource_properties', 'Q4_referenced' ],
+				[ 'Q4_meta', 'Q4_direct', 'Q4_referenced' ],
 			],
 			"q10" => [
 				'Q10',
 				RdfProducer::PRODUCE_TRUTHY_STATEMENTS | RdfProducer::PRODUCE_RESOLVED_ENTITIES,
-				'Q10_redirect_foreignsource_properties',
+				'Q10_redirect',
 			],
 		];
 	}
@@ -504,6 +557,28 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 		$data1 = $builder->getRDF();
 
 		$builder = $this->newRdfBuilder( RdfProducer::PRODUCE_ALL, $bag );
+		$builder->addEntity( $this->getEntityData( 'Q9' ) );
+		$data2 = $builder->getRDF();
+
+		$this->helper->assertNTriplesEqualsDataset( 'Q7_Q9_dedup', $data1 . $data2 );
+	}
+
+	public function testDeduplication_whenPropertiesFromOtherWikibase(): void {
+		$bag = new HashDedupeBag();
+
+		$builder = $this->newRdfBuilder(
+			RdfProducer::PRODUCE_ALL,
+			$bag,
+			$this->getTestData()->getVocabularyForPropertiesFromOtherWikibase()
+		);
+		$builder->addEntity( $this->getEntityData( 'Q7' ) );
+		$data1 = $builder->getRDF();
+
+		$builder = $this->newRdfBuilder(
+			RdfProducer::PRODUCE_ALL,
+			$bag,
+			$this->getTestData()->getVocabularyForPropertiesFromOtherWikibase()
+		);
 		$builder->addEntity( $this->getEntityData( 'Q9' ) );
 		$data2 = $builder->getRDF();
 

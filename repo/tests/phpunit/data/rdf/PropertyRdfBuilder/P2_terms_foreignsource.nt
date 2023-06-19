@@ -1,0 +1,31 @@
+<http://foreign.test/P2> <http://www.w3.org/2000/01/rdf-schema#label> "Instance of"@en .
+<http://foreign.test/P2> <http://www.w3.org/2004/02/skos/core#prefLabel> "Instance of"@en .
+<http://foreign.test/P2> <http://schema.org/name> "Instance of"@en .
+<http://foreign.test/P2> <http://www.w3.org/2000/01/rdf-schema#label> "ist ein(e)"@de .
+<http://foreign.test/P2> <http://www.w3.org/2004/02/skos/core#prefLabel> "ist ein(e)"@de .
+<http://foreign.test/P2> <http://schema.org/name> "ist ein(e)"@de .
+<http://foreign.test/P2> <http://schema.org/description> "that class of which this subject is a particular example and member. (Subject typically an individual member with Proper Name label.) Different from P279 (subclass of)"@en .
+<http://foreign.test/P2> <http://schema.org/description> "Auspr\u00E4gung oder Exemplar einer Sache, Mitglied einer Klasse. Zu unterscheiden von P279 (Unterklasse von)."@de .
+<http://foreign.test/P2> <http://wikiba.se/ontology#propertyType> <http://wikiba.se/ontology#String> .
+<http://foreign.test/P2> <http://wikiba.se/ontology#directClaim> <http://foreign.test/prop/direct/P2> .
+<http://foreign.test/P2> <http://wikiba.se/ontology#claim> <http://foreign.test/prop/P2> .
+<http://foreign.test/P2> <http://wikiba.se/ontology#statementProperty> <http://foreign.test/prop/statement/P2> .
+<http://foreign.test/P2> <http://wikiba.se/ontology#statementValue> <http://foreign.test/prop/statement/value/P2> .
+<http://foreign.test/P2> <http://wikiba.se/ontology#qualifier> <http://foreign.test/prop/qualifier/P2> .
+<http://foreign.test/P2> <http://wikiba.se/ontology#qualifierValue> <http://foreign.test/prop/qualifier/value/P2> .
+<http://foreign.test/P2> <http://wikiba.se/ontology#reference> <http://foreign.test/prop/reference/P2> .
+<http://foreign.test/P2> <http://wikiba.se/ontology#referenceValue> <http://foreign.test/prop/reference/value/P2> .
+<http://foreign.test/P2> <http://wikiba.se/ontology#novalue> <http://foreign.test/prop/novalue/P2> .
+<http://foreign.test/prop/P2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://foreign.test/prop/statement/value/P2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://foreign.test/prop/qualifier/value/P2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://foreign.test/prop/reference/value/P2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://foreign.test/prop/direct/P2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://foreign.test/prop/statement/P2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://foreign.test/prop/qualifier/P2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://foreign.test/prop/reference/P2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://foreign.test/prop/novalue/P2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://foreign.test/prop/novalue/P2> <http://www.w3.org/2002/07/owl#complementOf> _:849fd4307e7deef3b569568be8019566 .
+_:849fd4307e7deef3b569568be8019566 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
+_:849fd4307e7deef3b569568be8019566 <http://www.w3.org/2002/07/owl#onProperty> <http://foreign.test/prop/direct/P2> .
+_:849fd4307e7deef3b569568be8019566 <http://www.w3.org/2002/07/owl#someValuesFrom> <http://www.w3.org/2002/07/owl#Thing> .
