@@ -40,6 +40,7 @@ class ErrorResponseToHttpStatus {
 		UseCaseError::PATCHED_LABEL_EMPTY => 422,
 		UseCaseError::PATCHED_LABEL_TOO_LONG => 422,
 		UseCaseError::PERMISSION_DENIED => 403,
+		UseCaseError::STATEMENT_SUBJECT_NOT_FOUND => 404,
 		UseCaseError::ITEM_NOT_FOUND => 404,
 		UseCaseError::PROPERTY_NOT_FOUND => 404,
 		UseCaseError::LABEL_NOT_DEFINED => 404,
