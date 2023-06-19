@@ -9,7 +9,6 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Interactors\TermSearchResult;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Helper class to search for entities by ID
@@ -42,21 +41,18 @@ class EntityIdSearchHelper implements EntitySearchHelper {
 	 * @param EntityLookup $entityLookup
 	 * @param EntityIdParser $idParser
 	 * @param LabelDescriptionLookup $labelDescriptionLookup
-	 * @param array $entityTypeToRepositoryMapping Associative array (string => string[][])
-	 *   mapping entity types to a list of repository names which provide entities of the given type.
+	 * @param string[] $entityTypes list of "names" of known entity types
 	 */
 	public function __construct(
 		EntityLookup $entityLookup,
 		EntityIdParser $idParser,
 		LabelDescriptionLookup $labelDescriptionLookup,
-		array $entityTypeToRepositoryMapping
+		array $entityTypes
 	) {
 		$this->entityLookup = $entityLookup;
 		$this->idParser = $idParser;
 		$this->labelDescriptionLookup = $labelDescriptionLookup;
-		// TODO: This is a temporary hack to overcome the circular dependency between
-		// Wikibase and WikibaseLexeme in Wikibase CI. This is too be i
-		$this->entityTypes = WikibaseRepo::getEnabledEntityTypes();
+		$this->entityTypes = $entityTypes;
 	}
 
 	/**
