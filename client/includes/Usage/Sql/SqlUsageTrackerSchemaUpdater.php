@@ -6,8 +6,8 @@ namespace Wikibase\Client\Usage\Sql;
 
 use DatabaseUpdater;
 use MediaWiki\Installer\Hook\LoadExtensionSchemaUpdatesHook;
-use MWException;
 use Onoi\MessageReporter\CallbackMessageReporter;
+use RuntimeException;
 use Wikibase\Client\WikibaseClient;
 
 /**
@@ -83,7 +83,7 @@ class SqlUsageTrackerSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 			}
 		}
 
-		throw new MWException( "Could not find schema script '$name'" );
+		throw new RuntimeException( "Could not find schema script '$name'" );
 	}
 
 }

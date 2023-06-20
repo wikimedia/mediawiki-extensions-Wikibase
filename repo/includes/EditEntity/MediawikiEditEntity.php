@@ -7,7 +7,6 @@ use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\User\UserOptionsLookup;
 use Message;
-use MWException;
 use ReadOnlyError;
 use RuntimeException;
 use Status;
@@ -328,7 +327,8 @@ class MediawikiEditEntity implements EditEntity {
 	 * yet, this returns null.
 	 *
 	 * @return EntityRevision|null
-	 * @throws MWException
+	 * @throws RevisionedUnresolvedRedirectException
+	 * @throws StorageException
 	 */
 	public function getBaseRevision() {
 		if ( $this->baseRev === null ) {
@@ -346,7 +346,7 @@ class MediawikiEditEntity implements EditEntity {
 				);
 
 				if ( $this->baseRev === null ) {
-					throw new MWException( 'Base revision ID not found: rev ' . $baseRevId
+					throw new RuntimeException( 'Base revision ID not found: rev ' . $baseRevId
 						. ' of ' . $id->getSerialization() );
 				}
 			}

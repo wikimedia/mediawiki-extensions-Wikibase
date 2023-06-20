@@ -2,10 +2,10 @@
 
 namespace Wikibase\Repo\Content;
 
+use BadMethodCallException;
 use InvalidArgumentException;
 use LogicException;
 use MediaWiki\MediaWikiServices;
-use MWException;
 use Title;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
@@ -140,15 +140,14 @@ class ItemContent extends EntityContent {
 	}
 
 	/**
-	 * @throws MWException when it's a redirect (targets will never be resolved)
-	 * @throws LogicException if the content object is empty and does not contain an entity.
+	 * @note This method cannot be called on redirects (targets will never be resolved)
 	 * @return Item
 	 */
 	public function getItem() {
 		$redirect = $this->getRedirectTarget();
 
 		if ( $redirect ) {
-			throw new MWException( 'Unresolved redirect to [[' . $redirect->getFullText() . ']]' );
+			throw new BadMethodCallException( 'Unresolved redirect to [[' . $redirect->getFullText() . ']]' );
 		}
 
 		if ( !$this->itemHolder ) {
@@ -162,8 +161,7 @@ class ItemContent extends EntityContent {
 	/**
 	 * @see EntityContent::getEntity
 	 *
-	 * @throws MWException when it's a redirect (targets will never be resolved)
-	 * @throws LogicException if the content object is empty and does not contain an entity.
+	 * @note This method cannot be called on redirects (targets will never be resolved)
 	 * @return Item
 	 */
 	public function getEntity() {

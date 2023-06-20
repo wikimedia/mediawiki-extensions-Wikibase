@@ -9,12 +9,12 @@ use Linker;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
-use MWException;
 use OOUI\ButtonInputWidget;
 use OOUI\ButtonWidget;
 use OOUI\FieldLayout;
 use OOUI\HtmlSnippet;
 use OOUI\TextInputWidget;
+use RuntimeException;
 use Status;
 use WebRequest;
 use Wikibase\Repo\Content\EntityContent;
@@ -92,7 +92,6 @@ class EditEntityAction extends ViewEntityAction {
 	 *
 	 * @return Status A Status object containing an array with three revision record objects,
 	 *   [ $olderRevision, $newerRevision, $latestRevision ].
-	 * @throws MWException if the page's latest revision cannot be loaded
 	 */
 	protected function loadRevisions() {
 		$latestRevId = $this->getTitle()->getLatestRevID();
@@ -107,7 +106,7 @@ class EditEntityAction extends ViewEntityAction {
 			->getRevisionById( $latestRevId );
 
 		if ( !$latestRevId ) {
-			throw new MWException( "latest revision not found: $latestRevId" );
+			throw new RuntimeException( "latest revision not found: $latestRevId" );
 		}
 
 		return $this->getStatus( $this->getRequest(), $latestRevision );

@@ -4,9 +4,9 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Lib\Store\Sql;
 
+use BadMethodCallException;
 use InvalidArgumentException;
 use MediaWiki\Logger\LoggerFactory;
-use MWException;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
 use Wikibase\DataModel\Entity\EntityId;
@@ -205,11 +205,10 @@ class SiteLinkTable implements SiteLinkStore {
 	 * @param ItemId $itemId
 	 *
 	 * @return boolean Success indicator
-	 * @throws MWException
 	 */
 	public function deleteLinksOfItem( ItemId $itemId ): bool {
 		if ( $this->readonly ) {
-			throw new MWException( 'Cannot write when in readonly mode' );
+			throw new BadMethodCallException( 'Cannot write when in readonly mode' );
 		}
 
 		$dbw = $this->db->connections()->getWriteConnection();

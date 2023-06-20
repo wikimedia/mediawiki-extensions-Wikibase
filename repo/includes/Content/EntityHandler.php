@@ -17,7 +17,6 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
 use MWContentSerializationException;
-use MWException;
 use ParserCache;
 use ParserOptions;
 use ParserOutput;
@@ -701,7 +700,6 @@ abstract class EntityHandler extends ContentHandler {
 	 * @stable to override
 	 * @param Content $content the Content to extract search data from
 	 * @return array fields to be indexed by the search engine
-	 * @throws MWException
 	 */
 	public function getContentDataForSearchIndex( Content $content ): array {
 		$fieldsData = [];

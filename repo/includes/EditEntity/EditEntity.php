@@ -2,12 +2,13 @@
 
 namespace Wikibase\Repo\EditEntity;
 
-use MWException;
 use ReadOnlyError;
 use Status;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
+use Wikibase\Lib\Store\StorageException;
 
 /**
  * Handler for editing activity, providing a unified interface for saving modified entities while performing
@@ -80,7 +81,8 @@ interface EditEntity {
 	 * yet, this returns null.
 	 *
 	 * @return EntityRevision|null
-	 * @throws MWException
+	 * @throws RevisionedUnresolvedRedirectException
+	 * @throws StorageException
 	 */
 	public function getBaseRevision();
 
