@@ -3,13 +3,14 @@
 		"authors": [
 			"Agilight",
 			"Riverman",
-			"Монгуш Салим"
+			"Монгуш Салим",
+			"Karak-Kyzyl"
 		]
 	},
 	"wikibase-edit": "эдер",
 	"wikibase-add": "немээр",
 	"wikibase-label-empty": "Демдек тодараттынмаан",
-	"wikibase-description-empty": "Тайылбыр тодараттынмаан",
+	"wikibase-description-empty": "Тайылбыр долдурттунмаан",
 	"wikibase-sitelinks-special": "Өске сайттар",
 	"wikibase-statementview-rank-normal": "Нормалдыг ранг"
 }
