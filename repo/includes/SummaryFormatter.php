@@ -6,7 +6,6 @@ use DataValues\DataValue;
 use Exception;
 use InvalidArgumentException;
 use Language;
-use MWException;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -121,7 +120,6 @@ class SummaryFormatter {
 	 *
 	 * @param FormatableSummary $summary
 	 *
-	 * @throws MWException
 	 * @return string The auto summary arguments comma-separated
 	 */
 	public function formatAutoSummary( FormatableSummary $summary ) {
