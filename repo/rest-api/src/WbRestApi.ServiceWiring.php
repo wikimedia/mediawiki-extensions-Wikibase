@@ -31,14 +31,15 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\GetItemLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\GetItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabelsValidator;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\GetItemStatements;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\GetItemStatementsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestPropertyRevisionMetadata;
+use Wikibase\Repo\RestApi\Application\UseCases\GetLatestStatementSubjectRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetProperty;
 use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetPropertyValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchedLabelsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsValidator;
@@ -70,6 +71,7 @@ use Wikibase\Repo\RestApi\Infrastructure\DataAccess\TermLookupItemDataRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\WikibaseEntityRevisionLookupItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\WikibaseEntityRevisionLookupPropertyRevisionMetadataRetriever;
+use Wikibase\Repo\RestApi\Infrastructure\DataAccess\WikibaseEntityRevisionLookupStatementSubjectRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
 use Wikibase\Repo\RestApi\Infrastructure\DataValuesValueDeserializer;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
@@ -208,17 +210,6 @@ return [
 		);
 	},
 
-	'WbRestApi.GetItemStatement' => function( MediaWikiServices $services ): GetItemStatement {
-		return new GetItemStatement(
-			new GetItemStatementValidator(
-				new StatementIdValidator( new ItemIdParser() ),
-				new ItemIdValidator()
-			),
-			WbRestApi::getStatementRetriever( $services ),
-			WbRestApi::getGetLatestItemRevisionMetadata( $services )
-		);
-	},
-
 	'WbRestApi.GetItemStatements' => function( MediaWikiServices $services ): GetItemStatements {
 		return new GetItemStatements(
 			new GetItemStatementsValidator( new ItemIdValidator(), new PropertyIdValidator() ),
@@ -239,11 +230,30 @@ return [
 		) );
 	},
 
+	'WbRestApi.GetLatestStatementSubjectRevisionMetadata' => function(
+		MediaWikiServices $services
+	): GetLatestStatementSubjectRevisionMetadata {
+		return new GetLatestStatementSubjectRevisionMetadata( new WikibaseEntityRevisionLookupStatementSubjectRevisionMetadataRetriever(
+			WikibaseRepo::getEntityRevisionLookup( $services )
+		) );
+	},
+
 	'WbRestApi.GetProperty' => function( MediaWikiServices $services ): GetProperty {
 		return new GetProperty(
 			WbRestApi::getGetLatestPropertyRevisionMetadata( $services ),
 			WbRestApi::getPropertyDataRetriever( $services ),
 			new GetPropertyValidator( new PropertyIdValidator() )
+		);
+	},
+
+	'WbRestApi.GetStatement' => function( MediaWikiServices $services ): GetStatement {
+		return new GetStatement(
+			new GetStatementValidator(
+				new StatementIdValidator( new ItemIdParser() ),
+				new ItemIdValidator()
+			),
+			WbRestApi::getStatementRetriever( $services ),
+			WbRestApi::getGetLatestStatementSubjectRevisionMetadata( $services )
 		);
 	},
 

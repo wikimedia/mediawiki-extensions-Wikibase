@@ -1,13 +1,13 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement;
+namespace Wikibase\Repo\RestApi\Application\UseCases\GetStatement;
 
 use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
 
 /**
  * @license GPL-2.0-or-later
  */
-class GetItemStatementResponse {
+class GetStatementResponse {
 
 	private Statement $statement;
 

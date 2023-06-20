@@ -1,24 +1,24 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\GetItemStatement;
+namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\GetStatement;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemIdParser;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatementRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatementValidator
+ * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementValidator
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class GetItemStatementValidatorTest extends TestCase {
+class GetStatementValidatorTest extends TestCase {
 
 	/**
 	 * @dataProvider invalidStatementIdDataProvider
@@ -26,7 +26,7 @@ class GetItemStatementValidatorTest extends TestCase {
 	public function testWithInvalidStatementId( string $statementId ): void {
 		try {
 			$this->newStatementValidator()->assertValidRequest(
-				new GetItemStatementRequest( $statementId )
+				new GetStatementRequest( $statementId )
 			);
 
 			$this->fail( 'this should not be reached' );
@@ -50,7 +50,7 @@ class GetItemStatementValidatorTest extends TestCase {
 		$itemId = 'X123';
 		try {
 			$this->newStatementValidator()->assertValidRequest(
-				new GetItemStatementRequest(
+				new GetStatementRequest(
 					'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
 					$itemId
 				)
@@ -68,7 +68,7 @@ class GetItemStatementValidatorTest extends TestCase {
 	 */
 	public function testWithValidStatementId(): void {
 		$this->newStatementValidator()->assertValidRequest(
-			new GetItemStatementRequest( 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
+			new GetStatementRequest( 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
 		);
 	}
 
@@ -77,15 +77,15 @@ class GetItemStatementValidatorTest extends TestCase {
 	 */
 	public function testWithValidStatementIdAndItemId(): void {
 		$this->newStatementValidator()->assertValidRequest(
-			new GetItemStatementRequest(
+			new GetStatementRequest(
 				'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
 				'Q123'
 			)
 		);
 	}
 
-	private function newStatementValidator(): GetItemstatementValidator {
-		return new GetItemStatementValidator(
+	private function newStatementValidator(): GetStatementValidator {
+		return new GetStatementValidator(
 			new StatementIdValidator( new ItemIdParser() ),
 			new ItemIdValidator()
 		);

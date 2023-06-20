@@ -9,9 +9,9 @@ use MediaWiki\Rest\ResponseInterface;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatementRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatementResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
@@ -28,18 +28,18 @@ class GetStatementRouteHandler extends SimpleHandler {
 
 	public const STATEMENT_ID_PATH_PARAM = 'statement_id';
 
-	private GetItemStatement $getItemStatement;
+	private GetStatement $getStatement;
 	private StatementSerializer $statementSerializer;
 	private ResponseFactory $responseFactory;
 	private MiddlewareHandler $middlewareHandler;
 
 	public function __construct(
-		GetItemStatement $getItemStatement,
+		GetStatement $getStatement,
 		StatementSerializer $statementSerializer,
 		ResponseFactory $responseFactory,
 		MiddlewareHandler $middlewareHandler
 	) {
-		$this->getItemStatement = $getItemStatement;
+		$this->getStatement = $getStatement;
 		$this->statementSerializer = $statementSerializer;
 		$this->responseFactory = $responseFactory;
 		$this->middlewareHandler = $middlewareHandler;
@@ -48,7 +48,7 @@ class GetStatementRouteHandler extends SimpleHandler {
 	public static function factory(): Handler {
 		$responseFactory = new ResponseFactory();
 		return new self(
-			WbRestApi::getGetItemStatement(),
+			WbRestApi::getGetStatement(),
 			WbRestApi::getSerializerFactory()->newStatementSerializer(),
 			$responseFactory,
 			new MiddlewareHandler( [
@@ -74,12 +74,12 @@ class GetStatementRouteHandler extends SimpleHandler {
 	public function runUseCase( string $statementId ): Response {
 		try {
 			return $this->newSuccessHttpResponse(
-				$this->getItemStatement->execute(
-					new GetItemStatementRequest( $statementId )
+				$this->getStatement->execute(
+					new GetStatementRequest( $statementId )
 				)
 			);
 		} catch ( UseCaseError $e ) {
-			if ( $e->getErrorCode() === UseCaseError::ITEM_NOT_FOUND ) {
+			if ( $e->getErrorCode() === UseCaseError::STATEMENT_SUBJECT_NOT_FOUND ) {
 				return $this->respondStatementNotFound( $statementId );
 			}
 
@@ -119,7 +119,7 @@ class GetStatementRouteHandler extends SimpleHandler {
 		return null;
 	}
 
-	private function newSuccessHttpResponse( GetItemStatementResponse $useCaseResponse ): Response {
+	private function newSuccessHttpResponse( GetStatementResponse $useCaseResponse ): Response {
 		$httpResponse = $this->getResponseFactory()->create();
 		$httpResponse->setHeader( 'Content-Type', 'application/json' );
 		$httpResponse->setHeader(

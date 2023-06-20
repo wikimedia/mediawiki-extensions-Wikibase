@@ -1,27 +1,27 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement;
+namespace Wikibase\Repo\RestApi\Application\UseCases\GetStatement;
 
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
-use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
+use Wikibase\Repo\RestApi\Application\UseCases\GetLatestStatementSubjectRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Services\StatementRetriever;
 
 /**
  * @license GPL-2.0-or-later
  */
-class GetItemStatement {
+class GetStatement {
 
 	private StatementRetriever $statementRetriever;
-	private GetItemStatementValidator $validator;
-	private GetLatestItemRevisionMetadata $getRevisionMetadata;
+	private GetStatementValidator $validator;
+	private GetLatestStatementSubjectRevisionMetadata $getRevisionMetadata;
 
 	public function __construct(
-		GetItemStatementValidator $validator,
+		GetStatementValidator $validator,
 		StatementRetriever $statementRetriever,
-		GetLatestItemRevisionMetadata $getRevisionMetadata
+		GetLatestStatementSubjectRevisionMetadata $getRevisionMetadata
 	) {
 		$this->getRevisionMetadata = $getRevisionMetadata;
 		$this->statementRetriever = $statementRetriever;
@@ -31,17 +31,17 @@ class GetItemStatement {
 	/**
 	 * @throws UseCaseError
 	 */
-	public function execute( GetItemStatementRequest $statementRequest ): GetItemStatementResponse {
+	public function execute( GetStatementRequest $statementRequest ): GetStatementResponse {
 		$this->validator->assertValidRequest( $statementRequest );
 
 		$statementIdParser = new StatementGuidParser( new ItemIdParser() );
 		$statementId = $statementIdParser->parse( $statementRequest->getStatementId() );
-		$requestedItemId = $statementRequest->getItemId();
+		$requestedItemId = $statementRequest->getEntityId();
 		/** @var ItemId $itemId */
 		$itemId = $requestedItemId ? new ItemId( $requestedItemId ) : $statementId->getEntityId();
 		'@phan-var ItemId $itemId';
 
-		[ $revisionId, $lastModified ] = $this->getRevisionMetadata->execute( $itemId );
+		[ $revisionId, $lastModified ] = $this->getRevisionMetadata->execute( $statementId );
 
 		if ( !$itemId->equals( $statementId->getEntityId() ) ) {
 			$this->throwStatementNotFoundException( $statementRequest->getStatementId() );
@@ -52,7 +52,7 @@ class GetItemStatement {
 			$this->throwStatementNotFoundException( $statementRequest->getStatementId() );
 		}
 
-		return new GetItemStatementResponse( $statement, $lastModified, $revisionId );
+		return new GetStatementResponse( $statement, $lastModified, $revisionId );
 	}
 
 	/**

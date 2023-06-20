@@ -8,7 +8,7 @@ use MediaWiki\Rest\RequestData;
 use MediaWiki\Tests\Rest\Handler\HandlerTestTrait;
 use MediaWikiIntegrationTestCase;
 use RuntimeException;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\RouteHandlers\GetStatementRouteHandler;
 
@@ -24,9 +24,9 @@ class GetStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 	use HandlerTestTrait;
 
 	public function testHandlesUnexpectedErrors(): void {
-		$useCase = $this->createStub( GetItemStatement::class );
+		$useCase = $this->createStub( GetStatement::class );
 		$useCase->method( 'execute' )->willThrowException( new RuntimeException() );
-		$this->setService( 'WbRestApi.GetItemStatement', $useCase );
+		$this->setService( 'WbRestApi.GetStatement', $useCase );
 		$this->setService( 'WbRestApi.ErrorReporter', $this->createStub( ErrorReporter::class ) );
 
 		$response = $this->newHandlerWithValidRequest()->execute();

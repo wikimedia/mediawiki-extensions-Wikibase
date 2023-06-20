@@ -16,11 +16,12 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescription\GetItemDescrip
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\GetItemDescriptions;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\GetItemLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabels;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\GetItemStatements;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestPropertyRevisionMetadata;
+use Wikibase\Repo\RestApi\Application\UseCases\GetLatestStatementSubjectRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetProperty;
+use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatement;
@@ -89,9 +90,9 @@ class WbRestApi {
 			->get( 'WbRestApi.GetItemStatements' );
 	}
 
-	public static function getGetItemStatement( ContainerInterface $services = null ): GetItemStatement {
+	public static function getGetStatement( ContainerInterface $services = null ): GetStatement {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.GetItemStatement' );
+			->get( 'WbRestApi.GetStatement' );
 	}
 
 	public static function getSerializerFactory( ContainerInterface $services = null ): SerializerFactory {
@@ -182,6 +183,13 @@ class WbRestApi {
 	public static function getGetLatestPropertyRevisionMetadata( ContainerInterface $services = null ): GetLatestPropertyRevisionMetadata {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.GetLatestPropertyRevisionMetadata' );
+	}
+
+	public static function getGetLatestStatementSubjectRevisionMetadata(
+		ContainerInterface $services = null
+	): GetLatestStatementSubjectRevisionMetadata {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.GetLatestStatementSubjectRevisionMetadata' );
 	}
 
 }

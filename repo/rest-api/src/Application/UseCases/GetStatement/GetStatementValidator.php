@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement;
+namespace Wikibase\Repo\RestApi\Application\UseCases\GetStatement;
 
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
@@ -9,7 +9,7 @@ use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
 /**
  * @license GPL-2.0-or-later
  */
-class GetItemStatementValidator {
+class GetStatementValidator {
 
 	private StatementIdValidator $statementIdValidator;
 	private ItemIdValidator $itemIdValidator;
@@ -25,7 +25,7 @@ class GetItemStatementValidator {
 	/**
 	 * @throws UseCaseError
 	 */
-	public function assertValidRequest( GetItemStatementRequest $statementRequest ): void {
+	public function assertValidRequest( GetStatementRequest $statementRequest ): void {
 		$statementIdValidationError = $this->statementIdValidator->validate(
 			$statementRequest->getStatementId()
 		);
@@ -37,7 +37,7 @@ class GetItemStatementValidator {
 			);
 		}
 
-		$this->validateItemId( $statementRequest->getItemId() );
+		$this->validateItemId( $statementRequest->getEntityId() );
 	}
 
 	/**
