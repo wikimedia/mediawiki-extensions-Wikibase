@@ -6,7 +6,6 @@ namespace Wikibase\Client\Hooks;
 
 use Html;
 use MediaWiki\Hook\SpecialMovepageAfterMoveHook;
-use MediaWiki\MediaWikiServices;
 use MovePageForm;
 use Title;
 use Wikibase\Client\RepoLinker;
@@ -23,6 +22,8 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  */
 class MovePageNotice implements SpecialMovepageAfterMoveHook {
 
+	private bool $isMobileView;
+
 	private SiteLinkLookup $siteLinkLookup;
 
 	private string $siteId;
@@ -30,22 +31,31 @@ class MovePageNotice implements SpecialMovepageAfterMoveHook {
 	private RepoLinker $repoLinker;
 
 	/**
+	 * @param bool $isMobileView
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param string $siteId Global id of the client wiki
 	 * @param RepoLinker $repoLinker
 	 */
-	public function __construct( SiteLinkLookup $siteLinkLookup, string $siteId, RepoLinker $repoLinker ) {
+	public function __construct(
+		bool $isMobileView,
+		SiteLinkLookup $siteLinkLookup,
+		string $siteId,
+		RepoLinker $repoLinker
+	) {
+		$this->isMobileView = $isMobileView;
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->siteId = $siteId;
 		$this->repoLinker = $repoLinker;
 	}
 
 	public static function factory(
+		bool $isMobileView,
 		RepoLinker $repoLinker,
 		SettingsArray $clientSettings,
 		ClientStore $store
 	): self {
 		return new self(
+			$isMobileView,
 			$store->getSiteLinkLookup(),
 			$clientSettings->getSetting( 'siteGlobalID' ),
 			$repoLinker
@@ -63,7 +73,7 @@ class MovePageNotice implements SpecialMovepageAfterMoveHook {
 	public function onSpecialMovepageAfterMove( $movePage, $oldTitle, $newTitle ): void {
 		$out = $movePage->getOutput();
 		// T324991
-		if ( !MediaWikiServices::getInstance()->getService( 'WikibaseClient.MobileSite' ) ) {
+		if ( !$this->isMobileView ) {
 			$out->addModules( 'wikibase.client.miscStyles' );
 		}
 

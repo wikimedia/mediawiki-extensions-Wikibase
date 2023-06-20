@@ -34,7 +34,7 @@ class BeforePageDisplayHandlerTest extends TestCase {
 
 		$namespaceChecker = $this->getNamespaceChecker( $enabledForNamespace );
 
-		$handler = new BeforePageDisplayHandler( $namespaceChecker, false );
+		$handler = new BeforePageDisplayHandler( false, $namespaceChecker, false );
 		$handler->addModules( $output, 'view', $skin );
 
 		$this->assertEquals( $expectedJsModules, $output->getModules(), 'js modules' );
@@ -73,7 +73,7 @@ class BeforePageDisplayHandlerTest extends TestCase {
 
 		$namespaceChecker = $this->getNamespaceChecker( $enabledForNamespace );
 
-		$handler = new BeforePageDisplayHandler( $namespaceChecker, false );
+		$handler = new BeforePageDisplayHandler( false, $namespaceChecker, false );
 		$handler->addModules( $output, 'view', $skin );
 
 		$this->assertEquals( $expectedJsModules, $output->getModules(), 'js modules' );
@@ -100,7 +100,7 @@ class BeforePageDisplayHandlerTest extends TestCase {
 		$output = $this->getOutputPage( $skin, [ 'de:Rom' ], 'Q4', [ '*' ] );
 		$namespaceChecker = $this->getNamespaceChecker( true );
 
-		$handler = new BeforePageDisplayHandler( $namespaceChecker, false );
+		$handler = new BeforePageDisplayHandler( false, $namespaceChecker, false );
 		$handler->addModules( $output, 'view', $skin );
 
 		$this->assertEquals( [], $output->getModules(), 'js modules' );
@@ -118,7 +118,7 @@ class BeforePageDisplayHandlerTest extends TestCase {
 
 		$namespaceChecker = $this->getNamespaceChecker( $enabledForNamespace );
 
-		$handler = new BeforePageDisplayHandler( $namespaceChecker, false );
+		$handler = new BeforePageDisplayHandler( false, $namespaceChecker, false );
 		$handler->addModules( $output, 'view', $skin );
 
 		$this->assertEquals( $expectedJsModules, $output->getModules(), 'js modules' );
@@ -149,7 +149,7 @@ class BeforePageDisplayHandlerTest extends TestCase {
 
 		$namespaceChecker = $this->getNamespaceChecker( $enabledForNamespace );
 
-		$handler = new BeforePageDisplayHandler( $namespaceChecker, false );
+		$handler = new BeforePageDisplayHandler( false, $namespaceChecker, false );
 		$handler->addModules( $output, 'view', $skin );
 
 		$this->assertEquals( $expectedJsModules, $output->getModules(), 'js modules' );
@@ -180,7 +180,7 @@ class BeforePageDisplayHandlerTest extends TestCase {
 
 		$namespaceChecker = $this->getNamespaceChecker( $enabledForNamespace );
 
-		$handler = new BeforePageDisplayHandler( $namespaceChecker, false );
+		$handler = new BeforePageDisplayHandler( false, $namespaceChecker, false );
 		$handler->addModules( $output, 'view', $skin );
 
 		$this->assertEquals( $expectedJsModules, $output->getModules(), 'js modules' );
@@ -211,7 +211,7 @@ class BeforePageDisplayHandlerTest extends TestCase {
 
 		$namespaceChecker = $this->getNamespaceChecker( $enabledForNamespace );
 
-		$handler = new BeforePageDisplayHandler( $namespaceChecker, false );
+		$handler = new BeforePageDisplayHandler( false, $namespaceChecker, false );
 		$handler->addModules( $output, 'history', $skin );
 
 		$this->assertEquals( $expectedJsModules, $output->getModules(), 'js modules' );
@@ -242,7 +242,7 @@ class BeforePageDisplayHandlerTest extends TestCase {
 		$output = $this->getOutputPage( $skin, [] );
 		$namespaceChecker = $this->getNamespaceChecker( $wikibaseEnabled );
 
-		$handler = new BeforePageDisplayHandler( $namespaceChecker, $dataBridgeEnabled );
+		$handler = new BeforePageDisplayHandler( false, $namespaceChecker, $dataBridgeEnabled );
 		$handler->addModules( $output, 'view', $skin );
 
 		$this->assertSame( $expectedJsModules, $output->getModules(), 'js modules' );

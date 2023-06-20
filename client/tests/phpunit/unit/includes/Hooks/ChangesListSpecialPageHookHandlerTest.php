@@ -80,6 +80,7 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 		$hookHandler = TestingAccessWrapper::newFromObject( new ChangesListSpecialPageHookHandler(
 			$this->getDatabase(),
 			true,
+			false,
 			MediaWikiServices::getInstance()->getUserOptionsLookup()
 		) );
 
@@ -129,6 +130,7 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 		$handler = new ChangesListSpecialPageHookHandler(
 			$this->getDatabase(),
 			true,
+			false,
 			MediaWikiServices::getInstance()->getUserOptionsLookup()
 		);
 
@@ -155,6 +157,7 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 				[
 					$this->getDatabase(),
 					true,
+					false,
 					$this->getUserOptionsLookup(),
 				]
 			)
@@ -203,6 +206,7 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 		$hookHandler = TestingAccessWrapper::newFromObject( new ChangesListSpecialPageHookHandler(
 			$this->getDatabase(),
 			true,
+			false,
 			MediaWikiServices::getInstance()->getUserOptionsLookup()
 		) );
 
@@ -235,6 +239,7 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 		$hookHandler = new ChangesListSpecialPageHookHandler(
 			$this->getDatabase(),
 			true,
+			false,
 			MediaWikiServices::getInstance()->getUserOptionsLookup()
 		);
 
@@ -262,6 +267,7 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 		$hookHandler = TestingAccessWrapper::newFromObject( new ChangesListSpecialPageHookHandler(
 			$this->getDatabase(),
 			true,
+			false,
 			MediaWikiServices::getInstance()->getUserOptionsLookup()
 		) );
 
@@ -327,6 +333,7 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 		$hookHandler = TestingAccessWrapper::newFromObject( new ChangesListSpecialPageHookHandler(
 			$this->getDatabase(),
 			true,
+			false,
 			MediaWikiServices::getInstance()->getUserOptionsLookup()
 		) );
 
@@ -397,6 +404,7 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 		$hookHandler = TestingAccessWrapper::newFromObject( new ChangesListSpecialPageHookHandler(
 			$this->getDatabase(),
 			true,
+			false,
 			MediaWikiServices::getInstance()->getUserOptionsLookup()
 		) );
 
@@ -453,6 +461,7 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 		/** @var ChangesListSpecialPageHookHandler $hookHandler */
 		$hookHandler = TestingAccessWrapper::newFromObject( new ChangesListSpecialPageHookHandler(
 			$this->getDatabase(),
+			false,
 			false,
 			MediaWikiServices::getInstance()->getUserOptionsLookup()
 		) );

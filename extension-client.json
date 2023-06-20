@@ -71,6 +71,7 @@
 			"class": "\\Wikibase\\Client\\Hooks\\BeforePageDisplayHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\BeforePageDisplayHandler::factory",
 			"services": [
+				"WikibaseClient.MobileSite",
 				"WikibaseClient.NamespaceChecker",
 				"WikibaseClient.Settings"
 			]
@@ -92,6 +93,7 @@
 			"services": [
 				"UserOptionsLookup",
 				"WikibaseClient.ClientDomainDbFactory",
+				"WikibaseClient.MobileSite",
 				"WikibaseClient.Settings"
 			]
 		},
@@ -149,6 +151,7 @@
 			"factory": "\\Wikibase\\Client\\Hooks\\EditActionHookHandler::factory",
 			"services": [
 				"WikibaseClient.FallbackLabelDescriptionLookupFactory",
+				"WikibaseClient.MobileSite",
 				"WikibaseClient.RepoLinker",
 				"WikibaseClient.Store"
 			]
@@ -178,6 +181,7 @@
 			"class": "\\Wikibase\\Client\\Hooks\\MovePageNotice",
 			"factory": "\\Wikibase\\Client\\Hooks\\MovePageNotice::factory",
 			"services": [
+				"WikibaseClient.MobileSite",
 				"WikibaseClient.RepoLinker",
 				"WikibaseClient.Settings",
 				"WikibaseClient.Store"

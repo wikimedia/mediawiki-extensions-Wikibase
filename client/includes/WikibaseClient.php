@@ -293,6 +293,11 @@ final class WikibaseClient {
 			->get( 'WikibaseClient.RepoItemUriParser' );
 	}
 
+	public static function getMobileSite( ContainerInterface $services = null ): bool {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.MobileSite' );
+	}
+
 	public static function getNamespaceChecker( ContainerInterface $services = null ): NamespaceChecker {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.NamespaceChecker' );

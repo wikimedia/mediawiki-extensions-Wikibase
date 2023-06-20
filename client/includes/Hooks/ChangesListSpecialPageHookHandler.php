@@ -28,26 +28,32 @@ class ChangesListSpecialPageHookHandler implements ChangesListSpecialPageQueryHo
 
 	private bool $showExternalChanges;
 
+	private bool $isMobileView;
+
 	private UserOptionsLookup $userOptionsLookup;
 
 	public function __construct(
 		IReadableDatabase $dbr,
 		bool $showExternalChanges,
+		bool $isMobileView,
 		UserOptionsLookup $userOptionsLookup
 	) {
 		$this->dbr = $dbr;
 		$this->showExternalChanges = $showExternalChanges;
+		$this->isMobileView = $isMobileView;
 		$this->userOptionsLookup = $userOptionsLookup;
 	}
 
 	public static function factory(
 		UserOptionsLookup $userOptionsLookup,
 		ClientDomainDbFactory $dbFactory,
+		bool $isMobileView,
 		SettingsArray $clientSettings
 	): self {
 		return new self(
 			$dbFactory->newLocalDb()->connections()->getReadConnection(),
 			$clientSettings->getSetting( 'showExternalRecentChanges' ),
+			$isMobileView,
 			$userOptionsLookup
 		);
 	}
@@ -82,6 +88,7 @@ class ChangesListSpecialPageHookHandler implements ChangesListSpecialPageQueryHo
 		$handler = self::factory(
 			MediaWikiServices::getInstance()->getUserOptionsLookup(),
 			WikibaseClient::getClientDomainDbFactory( $services ),
+			WikibaseClient::getMobileSite( $services ),
 			WikibaseClient::getSettings( $services )
 		);
 		// The *user-facing* filter is only registered if external changes
@@ -101,7 +108,7 @@ class ChangesListSpecialPageHookHandler implements ChangesListSpecialPageQueryHo
 		$out = $specialPage->getOutput();
 		$out->addModules( 'wikibase.client.jqueryMsg' );
 		// T324991
-		if ( !MediaWikiServices::getInstance()->getService( 'WikibaseClient.MobileSite' ) ) {
+		if ( !$this->isMobileView ) {
 			$out->addModuleStyles( 'wikibase.client.miscStyles' );
 		}
 
