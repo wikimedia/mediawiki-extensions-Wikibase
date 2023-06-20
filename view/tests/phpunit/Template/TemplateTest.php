@@ -19,19 +19,19 @@ use Wikibase\View\Template\TemplateRegistry;
  */
 class TemplateTest extends \PHPUnit\Framework\TestCase {
 
-	public function testRender() {
+	public function testRenderEmpty() {
 		$instance = new Template( new TemplateRegistry( [ 'empty' => '' ] ), 'empty' );
 		$rendered = $instance->render();
 		$this->assertSame( '', $rendered );
 	}
 
-	public function testText() {
+	public function testRenderWithVariable() {
 		$registry = new TemplateRegistry( [
 			'tmpl1' => '<div>$1</div>',
 		] );
 
 		$template = new Template( $registry, 'tmpl1', [ 'param' ] );
-		$this->assertSame( '<div>param</div>', $template->text() );
+		$this->assertSame( '<div>param</div>', $template->render() );
 	}
 
 }
