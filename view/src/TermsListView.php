@@ -99,7 +99,9 @@ class TermsListView {
 				$labels,
 				$languageCode
 			),
-			$this->getDescriptionView(
+			$languageCode === 'mul'
+				? $this->getMulDescriptionView()
+				: $this->getDescriptionView(
 				$descriptions,
 				$languageCode
 			),
@@ -138,6 +140,15 @@ class TermsListView {
 			'',
 			$this->languageDirectionalityLookup->getDirectionality( $effectiveLanguage ) ?: 'auto',
 			$effectiveLanguage
+		);
+	}
+
+	private function getMulDescriptionView() {
+		return $this->templateFactory->render(
+			'wikibase-descriptionview-mul',
+			$this->textProvider->get( 'wikibase-description-not-applicable' ),
+			$this->textProvider->get( 'wikibase-description-not-applicable-title' ),
+			$this->textProvider->getLanguageOf( 'wikibase-description-not-applicable-title' )
 		);
 	}
 

@@ -1,3 +1,5 @@
+@import 'mediawiki.mixins.less';
+
 /**
  * @license GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
@@ -13,4 +15,14 @@
 
 .wikibase-descriptionview .wikibase-descriptionview-input:focus {
 	background-color: #eaf3ff;
+}
+
+.wikibase-descriptionview--mul abbr {
+	text-decoration: none;
+	cursor: default;
+}
+
+.wikibase-descriptionview--mul abbr[ title ]::after {
+	content: ' ' attr( title );
+	.mixin-screen-reader-text();
 }

@@ -100,6 +100,8 @@
 	"wikibase-description-edit-placeholder": "[[File:Screenshot WikidataRepo 2012-05-13 G.png|right|0x150px]]\nThis is a generic text used as a placeholder while editing a new description. See also the Wikidata glossary on [[d:Wikidata:Glossary#languageattribute-description|description]].",
 	"wikibase-description-edit-placeholder-language-aware": "Like {{msg-mw|Wikibase-description-edit-placeholder}}, but language ($1) aware.",
 	"wikibase-description-edit-not-supported": "Message shown on special pages as notice indicating that descriptions are not supported for the current language.",
+	"wikibase-description-not-applicable": "{{optional}}\nPlaceholder shown instead of the {{msg-mw|wikibase-description-empty}} placeholder for the language code \"mul\" (Multiple Languages), because there a description does not make sense and cannot be added. This placeholder indicates that a description is not applicable instead of just missing.",
+	"wikibase-description-not-applicable-title": "Content of the title attribute on the {{msg-mw|wikibase-description-not-applicable}} placeholder, elaborating that descriptions are not available for `mul` (Multiple Languages). This text is also announced by screen readers.",
 	"wikibase-aliases-edit-placeholder": "This is a generic text used as a placeholder while editing a new list of pipe-separated aliases.",
 	"wikibase-aliases-edit-placeholder-language-aware": "Like {{msg-mw|Wikibase-aliases-edit-placeholder}}, but language ($1) aware.",
 	"wikibase-aliases-edit-label": "Generic label for the \"aliases\" text field holding the pipe-separated aliases.",

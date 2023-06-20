@@ -172,4 +172,16 @@ class TermsListViewTest extends \PHPUnit\Framework\TestCase {
 		$this->assertStringNotContainsString( '&amp;', $html, 'no double escaping' );
 	}
 
+	public function testGetTermsListViewMul(): void {
+		$view = $this->getTermsListView( 1 );
+		$html = $view->getHtml(
+			new TermList(),
+			new TermList(),
+			new AliasGroupList(),
+			[ 'mul' ]
+		);
+		$this->assertStringContainsString( '(wikibase-description-not-applicable)', $html );
+		$this->assertStringContainsString( '(wikibase-description-not-applicable-title)', $html );
+	}
+
 }
