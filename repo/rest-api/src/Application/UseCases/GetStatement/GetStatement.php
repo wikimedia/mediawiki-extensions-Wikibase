@@ -2,8 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetStatement;
 
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\ItemIdParser;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestStatementSubjectRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
@@ -34,16 +33,12 @@ class GetStatement {
 	public function execute( GetStatementRequest $statementRequest ): GetStatementResponse {
 		$this->validator->assertValidRequest( $statementRequest );
 
-		$statementIdParser = new StatementGuidParser( new ItemIdParser() );
+		$statementIdParser = new StatementGuidParser( new BasicEntityIdParser() );
 		$statementId = $statementIdParser->parse( $statementRequest->getStatementId() );
-		$requestedItemId = $statementRequest->getEntityId();
-		/** @var ItemId $itemId */
-		$itemId = $requestedItemId ? new ItemId( $requestedItemId ) : $statementId->getEntityId();
-		'@phan-var ItemId $itemId';
 
 		[ $revisionId, $lastModified ] = $this->getRevisionMetadata->execute( $statementId );
 
-		if ( !$itemId->equals( $statementId->getEntityId() ) ) {
+		if ( $statementRequest->getEntityId() && $statementRequest->getEntityId() !== (string)$statementId->getEntityId() ) {
 			$this->throwStatementNotFoundException( $statementRequest->getStatementId() );
 		}
 
