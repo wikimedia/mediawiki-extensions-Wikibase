@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"HalanTul",
-			"Туллук"
+			"Туллук",
+			"MARKSDNW"
 		]
 	},
 	"tooltip-t-wikibase": "Репозиторийга сигэнии",
@@ -11,6 +12,11 @@
 	"wikibase-editlinks": "Сигэни уларыт",
 	"wikibase-editlinkstitle": "Омук тылынан сигэлэри уларытыы",
 	"wikibase-linkitem-addlinks": "Сигэни эп",
+	"wikibase-linkitem-title": "Сирэйи кытта холбоо",
+	"wikibase-linkitem-linkpage": "Сирэйи кытта холбоо",
+	"wikibase-linkitem-selectlink": "Баһаалыста бу сирэйгэ сигэни эбээри гыннаххына сайты уонна сирэйи тал.",
+	"wikibase-linkitem-input-site": "Тыла:",
+	"wikibase-linkitem-input-page": "Сирэй:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Кистээ",
 	"wikibase-rc-hide-wikidata-show": "Көрдөр",
