@@ -83,7 +83,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 	public function testValidRequests() {
 		$argLists = [];
 
-		$property = Property::newFromType( 'commonsMedia' );
+		$property = Property::newFromType( 'string' );
 
 		$store = $this->getEntityStore();
 		$store->saveEntity( $property, '', $this->user, EDIT_NEW );
@@ -91,7 +91,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 		$entity = $this->addStatementsAndSave( new Item(), $property->getId() );
 
 		foreach ( $entity->getStatements()->toArray() as $statement ) {
-			$value = new StringValue( 'Kittens.png' );
+			$value = new StringValue( 'Kittens' );
 			$argLists[] = [
 				$entity->getId(),
 				$statement->getGuid(),
@@ -106,7 +106,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 	}
 
 	public function testSetClaimNewWithTag() {
-		$property = Property::newFromType( 'commonsMedia' );
+		$property = Property::newFromType( 'string' );
 
 		$store = $this->getEntityStore();
 		$store->saveEntity( $property, '', $this->user, EDIT_NEW );
@@ -116,7 +116,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 		$this->assertCanTagSuccessfulRequest( [
 			'action' => 'wbsetclaimvalue',
 			'claim' => $entity->getStatements()->toArray()[0]->getGuid(),
-			'value' => FormatJson::encode( ( new StringValue( 'Kittens.png' ) )->getArrayValue() ),
+			'value' => FormatJson::encode( ( new StringValue( 'Kittens' ) )->getArrayValue() ),
 			'snaktype' => 'value',
 		] );
 	}
