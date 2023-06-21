@@ -9,233 +9,243 @@ const {
 } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 
-describe( 'GET statement', () => {
-	let testItemId;
+function assertValid200Response( response, statementId, testData ) {
+	expect( response ).to.have.status( 200 );
+	assert.equal( response.body.id, statementId );
+	assert.equal( response.header[ 'last-modified' ], testData.lastModified );
+	assert.equal( response.header.etag, makeEtag( testData.revisionId ) );
+}
 
-	let testStatement;
-	let testStatementWithDeletedProperty;
-
-	let testLastModified;
-	let testRevisionId;
-
-	function assertValid200Response( response, statement ) {
-		expect( response ).to.have.status( 200 );
-		assert.equal( response.body.id, statement.id );
-		assert.equal( response.header[ 'last-modified' ], testLastModified );
-		assert.equal( response.header.etag, makeEtag( testRevisionId ) );
+function assertValidErrorResponse( response, statusCode, responseBodyErrorCode, context = null ) {
+	expect( response ).to.have.status( statusCode );
+	assert.header( response, 'Content-Language', 'en' );
+	assert.strictEqual( response.body.code, responseBodyErrorCode );
+	if ( context === null ) {
+		assert.notProperty( response.body, 'context' );
+	} else {
+		assert.deepStrictEqual( response.body.context, context );
 	}
+}
+
+describe( 'Retrieve Single Statement', () => {
+	const allTestData = {};
+	const requestSetBySubjectType = {
+		item: {
+			long: ( { subjectId, statementId } ) => newGetItemStatementRequestBuilder( subjectId, statementId ),
+			short: ( { statementId } ) => newGetStatementRequestBuilder( statementId )
+		},
+		property: {
+			short: ( { statementId } ) => newGetStatementRequestBuilder( statementId )
+		}
+	};
 
 	before( async () => {
-		const testPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
-		const testPropertyIdToDelete = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+		for ( const subjectType of Object.keys( requestSetBySubjectType ) ) {
+			const propertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+			const propertyIdToDelete = ( await entityHelper.createUniqueStringProperty() ).entity.id;
 
-		const createItemResponse = await entityHelper.createItemWithStatements( [
-			entityHelper.newLegacyStatementWithRandomStringValue( testPropertyId ),
-			entityHelper.newLegacyStatementWithRandomStringValue( testPropertyIdToDelete )
-		] );
+			const createEntityResponse = await entityHelper.createEntityWithStatements( [
+				entityHelper.newLegacyStatementWithRandomStringValue( propertyId ),
+				entityHelper.newLegacyStatementWithRandomStringValue( propertyIdToDelete )
+			], subjectType );
 
-		testItemId = createItemResponse.entity.id;
-		testStatement = createItemResponse.entity.claims[ testPropertyId ][ 0 ];
+			const subjectId = createEntityResponse.entity.id;
+			const otherSubjectId = ( await entityHelper.createEntityWithStatements( [], subjectType ) ).entity.id;
+			const statementId = createEntityResponse.entity.claims[ propertyId ][ 0 ].id;
 
-		testStatementWithDeletedProperty = createItemResponse.entity.claims[ testPropertyIdToDelete ][ 0 ];
-		await entityHelper.deleteProperty( testPropertyIdToDelete );
+			const statementIdWithDeletedProperty = createEntityResponse.entity.claims[ propertyIdToDelete ][ 0 ].id;
+			await entityHelper.deleteProperty( propertyIdToDelete );
 
-		const testItemCreationMetadata = await entityHelper.getLatestEditMetadata( testItemId );
-		testLastModified = testItemCreationMetadata.timestamp;
-		testRevisionId = testItemCreationMetadata.revid;
+			const entityCreationMetadata = await entityHelper.getLatestEditMetadata( subjectId );
+
+			allTestData[ subjectType ] = {
+				subjectId,
+				otherSubjectId,
+				statementId,
+				statementIdWithDeletedProperty,
+				lastModified: entityCreationMetadata.timestamp,
+				revisionId: entityCreationMetadata.revid
+			};
+		}
 	} );
 
-	[
-		( statementId ) => newGetItemStatementRequestBuilder( testItemId, statementId ),
-		newGetStatementRequestBuilder
-	].forEach( ( newRequestBuilder ) => {
-		describe( newRequestBuilder().getRouteDescription(), () => {
-			it( 'can GET a statement with metadata', async () => {
-				const response = await newRequestBuilder( testStatement.id )
-					.assertValidRequest()
-					.makeRequest();
+	for ( const [ subjectType, requestBuilderByRequestType ] of Object.entries( requestSetBySubjectType ) ) {
+		for ( const [ requestType, newRequestBuilder ] of Object.entries( requestBuilderByRequestType ) ) {
+			let testData;
 
-				assertValid200Response( response, testStatement );
-			} );
-
-			it( 'can get a statement with a deleted property', async () => {
-				const response = await newGetStatementRequestBuilder( testStatementWithDeletedProperty.id )
-					.assertValidRequest()
-					.makeRequest();
-
-				assertValid200Response( response, testStatementWithDeletedProperty );
-				assert.equal( response.body.property[ 'data-type' ], null );
-			} );
-
-			describe( '400 error response', () => {
-				it( 'statement ID contains invalid entity ID', async () => {
-					const statementId = 'X123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-					const response = await newRequestBuilder( statementId )
-						.assertInvalidRequest()
-						.makeRequest();
-
-					expect( response ).to.have.status( 400 );
-					assert.header( response, 'Content-Language', 'en' );
-					assert.equal( response.body.code, 'invalid-statement-id' );
-					assert.include( response.body.message, statementId );
+			describe( `${newRequestBuilder( {} ).getRouteDescription()} [${subjectType}]`, () => {
+				before( () => {
+					testData = allTestData[ subjectType ];
 				} );
 
-				it( 'statement ID is invalid format', async () => {
-					const statementId = 'not-a-valid-format';
-					const response = await newRequestBuilder( statementId )
-						.assertInvalidRequest()
-						.makeRequest();
-
-					expect( response ).to.have.status( 400 );
-					assert.header( response, 'Content-Language', 'en' );
-					assert.equal( response.body.code, 'invalid-statement-id' );
-					assert.include( response.body.message, statementId );
-				} );
-
-				it( 'statement is not on an item', async () => {
-					const statementId = 'P123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-					const response = await newRequestBuilder( statementId )
+				it( 'can GET a statement with metadata', async () => {
+					const response = await newRequestBuilder( testData )
 						.assertValidRequest()
 						.makeRequest();
 
-					expect( response ).to.have.status( 400 );
-					assert.header( response, 'Content-Language', 'en' );
-					assert.equal( response.body.code, 'invalid-statement-id' );
-					assert.include( response.body.message, statementId );
+					assertValid200Response( response, testData.statementId, testData );
 				} );
-			} );
 
-			describe( '404 error response', () => {
-				it( 'statement not found on item', async () => {
-					const statementId = testItemId + '$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-					const response = await newRequestBuilder( statementId )
+				it( 'can get a statement with a deleted property', async () => {
+					const requestInput = {
+						subjectId: testData.subjectId,
+						statementId: testData.statementIdWithDeletedProperty
+					};
+					const response = await newRequestBuilder( requestInput )
 						.assertValidRequest()
 						.makeRequest();
 
-					expect( response ).to.have.status( 404 );
-					assert.header( response, 'Content-Language', 'en' );
-					assert.equal( response.body.code, 'statement-not-found' );
-					assert.include( response.body.message, statementId );
+					assertValid200Response( response, testData.statementIdWithDeletedProperty, testData );
+					assert.equal( response.body.property[ 'data-type' ], null );
 				} );
 
-				it( 'statement subject is a redirect', async () => {
-					const redirectSource = await entityHelper.createRedirectForItem( testItemId );
-					const statementId = redirectSource + '$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-					const response = await newRequestBuilder( statementId )
-						.assertValidRequest()
-						.makeRequest();
+				describe( '400 error response', () => {
+					it( 'statement ID contains invalid subject ID', async () => {
+						const statementId = 'X123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+						const response = await newRequestBuilder( { subjectId: testData.subjectId, statementId } )
+							.assertInvalidRequest()
+							.makeRequest();
 
-					expect( response ).to.have.status( 404 );
-					assert.header( response, 'Content-Language', 'en' );
-					assert.equal( response.body.code, 'statement-not-found' );
-					assert.include( response.body.message, statementId );
+						assertValidErrorResponse( response, 400, 'invalid-statement-id' );
+						assert.include( response.body.message, statementId );
+					} );
+
+					it( 'statement ID is invalid format', async () => {
+						const statementId = 'not-a-valid-format';
+						const response = await newRequestBuilder( { subjectId: testData.subjectId, statementId } )
+							.assertInvalidRequest()
+							.makeRequest();
+
+						assertValidErrorResponse( response, 400, 'invalid-statement-id' );
+						assert.include( response.body.message, statementId );
+					} );
 				} );
+
+				describe( '404 error response', () => {
+					it( `statement not found on ${subjectType}`, async () => {
+						const statementId = `${testData.subjectId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
+						const response = await newRequestBuilder( { subjectId: testData.subjectId, statementId } )
+							.assertValidRequest()
+							.makeRequest();
+
+						assertValidErrorResponse( response, 404, 'statement-not-found' );
+						assert.include( response.body.message, statementId );
+					} );
+
+					if ( subjectType === 'item' ) {
+						it( 'statement subject is a redirect', async () => {
+							const redirectSource = await entityHelper.createRedirectForItem( testData.subjectId );
+							const statementId = `${redirectSource}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
+							const response = await newRequestBuilder( { subjectId: testData.subjectId, statementId } )
+								.assertValidRequest()
+								.makeRequest();
+
+							assertValidErrorResponse( response, 404, 'statement-not-found' );
+							assert.include( response.body.message, statementId );
+						} );
+					}
+				} );
+
+				if ( requestType === 'long' ) {
+					describe( 'long route specific tests', () => {
+						it( `responds 400 for invalid ${subjectType} ID`, async () => {
+							const subjectId = 'X123';
+							const statementId = testData.statementId;
+							const response = await newRequestBuilder( { subjectId, statementId } )
+								.assertInvalidRequest()
+								.makeRequest();
+
+							assertValidErrorResponse( response, 400, `invalid-${subjectType}-id` );
+							assert.include( response.body.message, subjectId );
+						} );
+
+						it( `responds ${subjectType}-not-found if ${subjectType} does not exist`, async () => {
+							const subjectId = `${testData.subjectId}999`;
+							const response = await newRequestBuilder( { subjectId, statementId: testData.statementId } )
+								.assertValidRequest()
+								.makeRequest();
+
+							assertValidErrorResponse( response, 404, `${subjectType}-not-found` );
+							assert.include( response.body.message, subjectId );
+						} );
+
+						it( `responds ${subjectType}-not-found if ${subjectType} and statement do not exist but` +
+							'statement prefix does', async () => {
+							const subjectId = `${testData.subjectId}999`;
+							const statementId = `${testData.subjectId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
+							const response = await newRequestBuilder( { subjectId, statementId } )
+								.assertValidRequest()
+								.makeRequest();
+
+							assertValidErrorResponse( response, 404, `${subjectType}-not-found` );
+							assert.include( response.body.message, subjectId );
+						} );
+
+						it( `responds ${subjectType}-not-found if ${subjectType}, statement, or statement prefix` +
+							'do not exist', async () => {
+							const subjectId = `${testData.subjectId}999`;
+							const statementId = `${subjectId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
+							const response = await newRequestBuilder( { subjectId, statementId } )
+								.assertValidRequest()
+								.makeRequest();
+
+							assertValidErrorResponse( response, 404, `${subjectType}-not-found` );
+							assert.include( response.body.message, subjectId );
+						} );
+
+						it( `responds statement-not-found if ${subjectType} exists` +
+							' but statement prefix does not', async () => {
+							const statementId = `${testData.subjectId}999$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
+							const response = await newRequestBuilder( { subjectId: testData.subjectId, statementId } )
+								.assertValidRequest()
+								.makeRequest();
+
+							assertValidErrorResponse( response, 404, 'statement-not-found' );
+							assert.include( response.body.message, statementId );
+						} );
+
+						it( `responds statement-not-found if ${subjectType} and statement prefix exists` +
+							'but statement does not', async () => {
+							const statementId = `${testData.subjectId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
+							const response = await newRequestBuilder( { subjectId: testData.subjectId, statementId } )
+								.assertValidRequest()
+								.makeRequest();
+
+							assertValidErrorResponse( response, 404, 'statement-not-found' );
+							assert.include( response.body.message, statementId );
+						} );
+
+						it( `responds statement-not-found if ${subjectType} and statement exist,` +
+							'but do not match', async () => {
+							const requestInput = {
+								subjectId: testData.otherSubjectId,
+								statementId: testData.statementId
+							};
+							const response = await newRequestBuilder( requestInput )
+								.assertValidRequest()
+								.makeRequest();
+
+							assertValidErrorResponse( response, 404, 'statement-not-found' );
+							assert.include( response.body.message, testData.statementId );
+						} );
+					} );
+				}
+
+				if ( requestType === 'short' ) {
+					describe( 'short route specific tests', () => {
+						it( `responds statement-not-found if ${subjectType} not found`, async () => {
+							const subjectId = testData.subjectId;
+							const statementId = `${subjectId}999$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
+							const response = await newRequestBuilder( { subjectId, statementId } )
+								.assertValidRequest()
+								.makeRequest();
+
+							assertValidErrorResponse( response, 404, 'statement-not-found' );
+							assert.include( response.body.message, statementId );
+						} );
+					} );
+				}
 			} );
-		} );
-	} );
-
-	describe( 'long route specific errors', () => {
-		it( 'responds 400 for invalid Item ID', async () => {
-			const itemId = 'X123';
-			const statementId = 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-			const response = await newGetItemStatementRequestBuilder( itemId, statementId )
-				.assertInvalidRequest()
-				.makeRequest();
-
-			expect( response ).to.have.status( 400 );
-			assert.header( response, 'Content-Language', 'en' );
-			assert.equal( response.body.code, 'invalid-item-id' );
-			assert.include( response.body.message, itemId );
-		} );
-
-		it( 'responds item-not-found if item does not exist but statement does', async () => {
-			const itemId = 'Q999999';
-			const response = await newGetItemStatementRequestBuilder( itemId, testStatement.id )
-				.assertValidRequest()
-				.makeRequest();
-
-			expect( response ).to.have.status( 404 );
-			assert.header( response, 'Content-Language', 'en' );
-			assert.equal( response.body.code, 'item-not-found' );
-			assert.include( response.body.message, itemId );
-		} );
-
-		it( 'responds item-not-found if item does not exist and statement subject does, ' +
-			'but statement does not', async () => {
-			const itemId = 'Q999999';
-			const statementId = `${itemId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
-			const response = await newGetItemStatementRequestBuilder( itemId, statementId )
-				.assertValidRequest()
-				.makeRequest();
-
-			expect( response ).to.have.status( 404 );
-			assert.header( response, 'Content-Language', 'en' );
-			assert.equal( response.body.code, 'item-not-found' );
-			assert.include( response.body.message, itemId );
-		} );
-
-		it( 'responds item-not-found if neither item nor statement nor its subject exist', async () => {
-			const itemId = 'Q999999';
-			const statementId = 'Q999999$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-			const response = await newGetItemStatementRequestBuilder( itemId, statementId )
-				.assertValidRequest()
-				.makeRequest();
-
-			expect( response ).to.have.status( 404 );
-			assert.header( response, 'Content-Language', 'en' );
-			assert.equal( response.body.code, 'item-not-found' );
-			assert.include( response.body.message, itemId );
-		} );
-
-		it( 'responds statement-not-found if item exists but statement subject does not', async () => {
-			const requestedItemId = ( await entityHelper.createEntity( 'item', {} ) ).entity.id;
-			const statementId = 'Q999999$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-			const response = await newGetItemStatementRequestBuilder( requestedItemId, statementId )
-				.assertValidRequest()
-				.makeRequest();
-
-			expect( response ).to.have.status( 404 );
-			assert.equal( response.body.code, 'statement-not-found' );
-			assert.include( response.body.message, statementId );
-		} );
-
-		it( 'responds statement-not-found if item and subject exists but statement does not', async () => {
-			const requestedItemId = ( await entityHelper.createEntity( 'item', {} ) ).entity.id;
-			const statementId = `${requestedItemId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
-			const response = await newGetItemStatementRequestBuilder( requestedItemId, statementId )
-				.assertValidRequest()
-				.makeRequest();
-
-			expect( response ).to.have.status( 404 );
-			assert.equal( response.body.code, 'statement-not-found' );
-			assert.include( response.body.message, statementId );
-		} );
-
-		it( 'responds statement-not-found if requested Item and Statement exist, but do not match', async () => {
-			const requestedItemId = ( await entityHelper.createEntity( 'item', {} ) ).entity.id;
-			const response = await newGetItemStatementRequestBuilder(
-				requestedItemId,
-				testStatement.id
-			).assertValidRequest().makeRequest();
-
-			expect( response ).to.have.status( 404 );
-			assert.equal( response.body.code, 'statement-not-found' );
-			assert.include( response.body.message, testStatement.id );
-		} );
-	} );
-
-	describe( 'short route specific errors', () => {
-		it( 'responds 404 if item not found', async () => {
-			const statementId = 'Q999999$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-			const response = await newGetStatementRequestBuilder( statementId )
-				.assertValidRequest()
-				.makeRequest();
-
-			expect( response ).to.have.status( 404 );
-			assert.header( response, 'Content-Language', 'en' );
-			assert.equal( response.body.code, 'statement-not-found' );
-			assert.include( response.body.message, statementId );
-		} );
-	} );
-
+		}
+	}
 } );

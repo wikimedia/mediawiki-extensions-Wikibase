@@ -2,10 +2,11 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\GetStatement;
 
-use PHPUnit\Framework\MockObject\Stub;
+use Generator;
 use PHPUnit\Framework\TestCase;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\ItemIdParser;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestStatementSubjectRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
@@ -13,8 +14,6 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
-use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
-use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
 use Wikibase\Repo\RestApi\Domain\Services\StatementRetriever;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
 
@@ -27,29 +26,26 @@ use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
  */
 class GetStatementTest extends TestCase {
 
-	/**
-	 * @var Stub|GetLatestStatementSubjectRevisionMetadata
-	 */
-	private $getRevisionMetadata;
-
-	/**
-	 * @var Stub|StatementRetriever
-	 */
-	private $statementRetriever;
+	private GetStatementValidator $requestValidator;
+	private StatementRetriever $statementRetriever;
+	private GetLatestStatementSubjectRevisionMetadata $getRevisionMetadata;
 
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->getRevisionMetadata = $this->createStub( GetLatestStatementSubjectRevisionMetadata::class );
+		$this->requestValidator = $this->createStub( GetStatementValidator::class );
 		$this->statementRetriever = $this->createStub( StatementRetriever::class );
+		$this->getRevisionMetadata = $this->createStub( GetLatestStatementSubjectRevisionMetadata::class );
 	}
 
-	public function testGetStatement(): void {
-		$itemId = new ItemId( 'Q123' );
+	/**
+	 * @dataProvider subjectIdProvider
+	 */
+	public function testGetStatement( EntityId $subjectId ): void {
 		$revision = 987;
 		$lastModified = '20201111070707';
 		$guidPart = 'c48c32c3-42b5-498f-9586-84608b88747c';
-		$statementId = $itemId . StatementGuid::SEPARATOR . $guidPart;
+		$statementId = $subjectId . StatementGuid::SEPARATOR . $guidPart;
 		$expectedStatement = NewStatementReadModel::forProperty( 'P123' )
 			->withGuid( $statementId )
 			->withValue( 'potato' )
@@ -58,7 +54,7 @@ class GetStatementTest extends TestCase {
 		$this->getRevisionMetadata = $this->createMock( GetLatestStatementSubjectRevisionMetadata::class );
 		$this->getRevisionMetadata->expects( $this->once() )
 			->method( 'execute' )
-			->with( $itemId->getSerialization() )
+			->with( $subjectId )
 			->willReturn( [ $revision, $lastModified ] );
 
 		$this->statementRetriever = $this->createMock( StatementRetriever::class );
@@ -76,27 +72,30 @@ class GetStatementTest extends TestCase {
 		$this->assertSame( $lastModified, $response->getLastModified() );
 	}
 
-	public function testGivenInvalidStatementId_throwsUseCaseError(): void {
-		$statementId = 'X123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-		try {
-			$this->newUseCase()->execute(
-				new GetStatementRequest( $statementId )
-			);
+	public function testGivenInvalidRequest_throwsUseCaseError(): void {
+		$request = $this->createStub( GetStatementRequest::class );
+		$useCaseError = $this->createStub( UseCaseError::class );
 
+		$this->requestValidator = $this->createMock( GetStatementValidator::class );
+		$this->requestValidator->expects( $this->once() )
+			->method( 'assertValidRequest' )
+			->with( $request )
+			->willThrowException( $useCaseError );
+
+		try {
+			$this->newUseCase()->execute( $request );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::INVALID_STATEMENT_ID, $e->getErrorCode() );
-			$this->assertSame(
-				"Not a valid statement ID: {$statementId}",
-				$e->getErrorMessage()
-			);
+			$this->assertSame( $useCaseError, $e );
 		}
 	}
 
-	public function testItemForStatementSubjectNotFoundOrRedirect_throws(): void {
-		$itemId = new ItemId( 'Q123' );
+	/**
+	 * @dataProvider subjectIdProvider
+	 */
+	public function testStatementSubjectNotFoundOrRedirect_throws( EntityId $subjectId ): void {
 		$expectedException = $this->createStub( UseCaseException::class );
-		$statementId = $itemId . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+		$statementId = $subjectId . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 
 		$this->getRevisionMetadata = $this->createStub( GetLatestStatementSubjectRevisionMetadata::class );
 		$this->getRevisionMetadata->method( 'execute' )->willThrowException( $expectedException );
@@ -110,21 +109,26 @@ class GetStatementTest extends TestCase {
 		}
 	}
 
-	public function testRequestedItemIdNotFoundOrRedirect_throws(): void {
-		$itemId = new ItemId( 'Q123' );
+	/**
+	 * @dataProvider provideTwoDifferentSubjectIds
+	 */
+	public function testRequestedStatementSubjectIdNotFoundOrRedirect_throws(
+		EntityId $requestedSubjectId,
+		EntityId $statementSubjectId
+	): void {
 		// using a different item id below on purpose to check that the *requested* item is being checked, if provided
-		$statementId = 'Q321' . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+		$statementId = $statementSubjectId . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 		$expectedException = $this->createStub( UseCaseException::class );
 
 		$this->getRevisionMetadata = $this->createMock( GetLatestStatementSubjectRevisionMetadata::class );
 		$this->getRevisionMetadata->expects( $this->once() )
 			->method( 'execute' )
-			->with( $itemId->getSerialization() )
+			->with( $requestedSubjectId->getSerialization() )
 			->willThrowException( $expectedException );
 
 		try {
 			$this->newUseCase()->execute(
-				new GetStatementRequest( $statementId, $itemId->getSerialization() )
+				new GetStatementRequest( $statementId, $requestedSubjectId->getSerialization() )
 			);
 
 			$this->fail( 'this should not be reached' );
@@ -134,18 +138,16 @@ class GetStatementTest extends TestCase {
 	}
 
 	public function testStatementNotFound_throwsUseCaseError(): void {
-		$itemId = new ItemId( 'Q321' );
+		$subjectId = new ItemId( 'Q321' );
 		$revision = 987;
 		$lastModified = '20201111070707';
-		$statementId = $itemId . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+		$statementId = $subjectId . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 
 		$this->getRevisionMetadata = $this->createStub( GetLatestStatementSubjectRevisionMetadata::class );
 		$this->getRevisionMetadata->method( 'execute' )->willReturn( [ $revision, $lastModified ] );
 
 		try {
-			$this->newUseCase()->execute(
-				new GetStatementRequest( $statementId )
-			);
+			$this->newUseCase()->execute( new GetStatementRequest( $statementId ) );
 
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
@@ -153,12 +155,16 @@ class GetStatementTest extends TestCase {
 		}
 	}
 
-	public function testStatementIdNotMatchingItemId_throwsUseCaseError(): void {
-		$requestedItemId = new ItemId( 'Q123' );
-		$statementItemId = new ItemId( 'Q321' );
+	/**
+	 * @dataProvider provideTwoDifferentSubjectIds
+	 */
+	public function testStatementIdNotMatchingSubjectId_throwsUseCaseError(
+		EntityId $requestedSubjectId,
+		EntityId $statementSubjectId
+	): void {
 		$revision = 987;
 		$lastModified = '20201111070707';
-		$statementId = $statementItemId . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+		$statementId = $statementSubjectId . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 
 		$this->getRevisionMetadata = $this->createStub( GetLatestStatementSubjectRevisionMetadata::class );
 		$this->getRevisionMetadata->method( 'execute' )->willReturn( [ $revision, $lastModified ] );
@@ -168,7 +174,7 @@ class GetStatementTest extends TestCase {
 
 		try {
 			$this->newUseCase()->execute(
-				new GetStatementRequest( $statementId, $requestedItemId->getSerialization() )
+				new GetStatementRequest( $statementId, $requestedSubjectId->getSerialization() )
 			);
 
 			$this->fail( 'this should not be reached' );
@@ -177,12 +183,19 @@ class GetStatementTest extends TestCase {
 		}
 	}
 
+	public static function subjectIdProvider(): Generator {
+		yield 'item id' => [ new ItemId( 'Q123' ) ];
+		yield 'property id' => [ new NumericPropertyId( 'P123' ) ];
+	}
+
+	public static function provideTwoDifferentSubjectIds(): Generator {
+		yield 'item id' => [ new ItemId( 'Q123' ), new ItemId( 'Q321' ) ];
+		yield 'property id' => [ new NumericPropertyId( 'P123' ), new NumericPropertyId( 'P321' ) ];
+	}
+
 	private function newUseCase(): GetStatement {
 		return new GetStatement(
-			new GetStatementValidator(
-				new StatementIdValidator( new ItemIdParser() ),
-				new ItemIdValidator()
-			),
+			$this->requestValidator,
 			$this->statementRetriever,
 			$this->getRevisionMetadata
 		);

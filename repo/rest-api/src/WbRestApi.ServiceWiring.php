@@ -4,6 +4,7 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\ConditionalHeaderUtil;
 use MediaWiki\Rest\Reporter\ErrorReporter;
 use MediaWiki\Rest\Reporter\MWErrorReporter;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
@@ -56,6 +57,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescrip
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
+use Wikibase\Repo\RestApi\Application\Validation\EntityIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
@@ -256,8 +258,8 @@ return [
 	'WbRestApi.GetStatement' => function( MediaWikiServices $services ): GetStatement {
 		return new GetStatement(
 			new GetStatementValidator(
-				new StatementIdValidator( new ItemIdParser() ),
-				new ItemIdValidator()
+				new StatementIdValidator( new BasicEntityIdParser() ),
+				new EntityIdValidator( new BasicEntityIdParser() )
 			),
 			WbRestApi::getStatementRetriever( $services ),
 			WbRestApi::getGetLatestStatementSubjectRevisionMetadata( $services )

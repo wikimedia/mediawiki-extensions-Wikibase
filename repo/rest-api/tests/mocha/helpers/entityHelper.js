@@ -27,15 +27,26 @@ async function createUniqueStringProperty() {
 
 /**
  * @param {Array} statements
+ * @param {string} entityType
  */
-async function createItemWithStatements( statements ) {
+async function createEntityWithStatements( statements, entityType ) {
 	statements.forEach( ( statement ) => {
 		statement.type = 'statement';
 	} );
-	const item = {
-		claims: statements
-	};
-	return await createEntity( 'item', item );
+
+	const entity = { claims: statements };
+	if ( entityType === 'property' ) {
+		entity.datatype = 'string';
+	}
+
+	return await createEntity( entityType, entity );
+}
+
+/**
+ * @param {Array} statements
+ */
+async function createItemWithStatements( statements ) {
+	return await createEntityWithStatements( statements, 'item' );
 }
 
 /**
@@ -115,6 +126,7 @@ function newStatementWithRandomStringValue( propertyId ) {
 module.exports = {
 	createEntity,
 	deleteProperty,
+	createEntityWithStatements,
 	createItemWithStatements,
 	createUniqueStringProperty,
 	createRedirectForItem,

@@ -4,11 +4,11 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\GetStatement;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\ItemIdParser;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
+use Wikibase\Repo\RestApi\Application\Validation\EntityIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
 
 /**
@@ -21,7 +21,30 @@ use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
 class GetStatementValidatorTest extends TestCase {
 
 	/**
-	 * @dataProvider invalidStatementIdDataProvider
+	 * @dataProvider provideSubjectId
+	 * @doesNotPerformAssertions
+	 */
+	public function testWithValidStatementId( string $subjectId ): void {
+		$this->newStatementValidator()->assertValidRequest(
+			new GetStatementRequest( "$subjectId\$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE" )
+		);
+	}
+
+	/**
+	 * @dataProvider provideSubjectId
+	 * @doesNotPerformAssertions
+	 */
+	public function testWithValidStatementIdAndEntityId( string $subjectId ): void {
+		$this->newStatementValidator()->assertValidRequest(
+			new GetStatementRequest(
+				"$subjectId\$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+				$subjectId
+			)
+		);
+	}
+
+	/**
+	 * @dataProvider provideInvalidStatementId
 	 */
 	public function testWithInvalidStatementId( string $statementId ): void {
 		try {
@@ -32,62 +55,46 @@ class GetStatementValidatorTest extends TestCase {
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::INVALID_STATEMENT_ID, $e->getErrorCode() );
-			$this->assertSame(
-				'Not a valid statement ID: ' . $statementId,
-				$e->getErrorMessage()
-			);
+			$this->assertSame( "Not a valid statement ID: $statementId", $e->getErrorMessage() );
 		}
 	}
 
-	public static function invalidStatementIdDataProvider(): Generator {
+	public static function provideInvalidStatementId(): Generator {
 		yield 'invalid format' => [ 'not-a-valid-statement-id' ];
-		yield 'invalid ItemId' => [ 'X123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' ];
-		yield 'invalid UUID part' => [ 'Q123$INVALID-UUID-PART' ];
-		yield 'statement not on an item' => [ 'P123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' ];
+		yield 'invalid subject id' => [ 'X123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' ];
+		yield 'invalid UUID part with item subject' => [ 'Q123$INVALID-UUID-PART' ];
+		yield 'invalid UUID part with property subject' => [ 'P123$INVALID-UUID-PART' ];
 	}
 
-	public function testWithInvalidItemId(): void {
-		$itemId = 'X123';
+	/**
+	 * @dataProvider provideSubjectId
+	 */
+	public function testWithValidStatementIdAndInvalidSubjectId( string $validSubjectId ): void {
+		$invalidSubjectId = 'X123';
 		try {
 			$this->newStatementValidator()->assertValidRequest(
 				new GetStatementRequest(
-					'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
-					$itemId
+					"$validSubjectId\$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+					$invalidSubjectId
 				)
 			);
 
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::INVALID_ITEM_ID, $e->getErrorCode() );
-			$this->assertSame( 'Not a valid item ID: ' . $itemId, $e->getErrorMessage() );
+			$this->assertSame( UseCaseError::INVALID_STATEMENT_SUBJECT_ID, $e->getErrorCode() );
+			$this->assertSame( "Not a valid subject ID: $invalidSubjectId", $e->getErrorMessage() );
 		}
 	}
 
-	/**
-	 * @doesNotPerformAssertions
-	 */
-	public function testWithValidStatementId(): void {
-		$this->newStatementValidator()->assertValidRequest(
-			new GetStatementRequest( 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
-		);
-	}
-
-	/**
-	 * @doesNotPerformAssertions
-	 */
-	public function testWithValidStatementIdAndItemId(): void {
-		$this->newStatementValidator()->assertValidRequest(
-			new GetStatementRequest(
-				'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
-				'Q123'
-			)
-		);
+	public static function provideSubjectId(): Generator {
+		yield 'item id' => [ 'Q123' ];
+		yield 'property id' => [ 'P123' ];
 	}
 
 	private function newStatementValidator(): GetStatementValidator {
 		return new GetStatementValidator(
-			new StatementIdValidator( new ItemIdParser() ),
-			new ItemIdValidator()
+			new StatementIdValidator( new BasicEntityIdParser() ),
+			new EntityIdValidator( new BasicEntityIdParser() )
 		);
 	}
 
