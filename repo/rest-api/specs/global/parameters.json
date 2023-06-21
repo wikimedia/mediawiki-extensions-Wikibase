@@ -42,6 +42,18 @@
 		},
 		"example": "Q42$F078E5B3-F9A8-480E-B7AC-D97778CBBEF9"
 	},
+	"PropertyStatementId": {
+		"in": "path",
+		"name": "statement_id",
+		"description": "The ID of the required Property Statement",
+		"required": true,
+		"schema": {
+			"type": "string",
+			"pattern": "^P[1-9]\\d{0,9}\\$.+$"
+		},
+		"example": "P31$F078E5B3-F9A8-480E-B7AC-D97778CBBEF9"
+	},
+
 	"LanguageCode": {
 		"in": "path",
 		"name": "language_code",
