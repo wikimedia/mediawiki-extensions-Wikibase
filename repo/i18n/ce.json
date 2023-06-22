@@ -108,6 +108,7 @@
 	"wikibase-validator-sitelink-conflict": "$1 хьажорг хӀинцале $2 элементас лелош йу. Хьа йиш йу $2 чуьра и дӀайаккха, и оцу чохь хилла йезаш йацахь, йа элементаш вовшахтоха, уьш цхьаттера йелахь.",
 	"wikibase-validator-label-conflict": "«$3» билгалонан «$1» цӀе йолуш йу, «$2» меттан кодаца.",
 	"wikibase-validator-label-with-description-conflict": "«$3» элементан «$1» цӀе йолуш йу, иза йу «$2» кодаца, цуо лелош ду иза йоза хаам сана.",
+	"wikibase-validator-no-such-media": "[https://commons.wikimedia.org/ Викилармехь] йац «$1» цӀе йолуш файл.",
 	"wikibase-wikibaserepopage-invalid-langcode": "Йевзаш йоцу меттан код «$1». Дехар-до, лелайе системехь йевзаш йолчарах цхьаъ меттан код, масала «ce».",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 дӀасахьажорг.",
 	"special-itembytitle": "Элементаш коьртамогӀомца",
