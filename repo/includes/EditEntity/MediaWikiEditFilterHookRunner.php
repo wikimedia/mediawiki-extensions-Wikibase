@@ -22,7 +22,7 @@ use Wikibase\Repo\Store\EntityTitleStoreLookup;
  * @license GPL-2.0-or-later
  * @author Addshore
  */
-class MediawikiEditFilterHookRunner implements EditFilterHookRunner {
+class MediaWikiEditFilterHookRunner implements EditFilterHookRunner {
 
 	/**
 	 * @var EntityNamespaceLookup

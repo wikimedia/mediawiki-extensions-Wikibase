@@ -99,7 +99,7 @@ use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\Content\PropertyHandler;
 use Wikibase\Repo\Diff\EntityDiffVisualizerFactory;
 use Wikibase\Repo\EditEntity\EditFilterHookRunner;
-use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
+use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\FederatedProperties\ApiServiceFactory;
 use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
@@ -791,7 +791,7 @@ class WikibaseRepo {
 
 	public static function getEditEntityFactory(
 		ContainerInterface $services = null
-	): MediawikiEditEntityFactory {
+	): MediaWikiEditEntityFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.EditEntityFactory' );
 	}

@@ -17,7 +17,7 @@ use Wikibase\Repo\Store\EntityTitleStoreLookup;
  * @license GPL-2.0-or-later
  * @author Addshore
  */
-class MediawikiEditEntityFactory {
+class MediaWikiEditEntityFactory {
 
 	/**
 	 * @var EntityTitleStoreLookup
@@ -118,7 +118,7 @@ class MediawikiEditEntityFactory {
 	) {
 		$statsTimingPrefix = "wikibase.repo.EditEntity.timing";
 		return new StatsdSaveTimeRecordingEditEntity(
-			new MediawikiEditEntity( $this->titleLookup,
+			new MediaWikiEditEntity( $this->titleLookup,
 				$this->entityRevisionLookup,
 				new StatsdSaveTimeRecordingEntityStore(
 					$this->entityStore,

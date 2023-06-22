@@ -12,7 +12,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Summary;
-use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
+use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\SummaryFormatter;
 
 /**
@@ -44,7 +44,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
 	 * @param SummaryFormatter $summaryFormatter
 	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param MediawikiEditEntityFactory $editEntityFactory
+	 * @param MediaWikiEditEntityFactory $editEntityFactory
 	 */
 	public function __construct(
 		$name,
@@ -54,7 +54,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 		EntityNamespaceLookup $entityNamespaceLookup,
 		SummaryFormatter $summaryFormatter,
 		EntityTitleLookup $entityTitleLookup,
-		MediawikiEditEntityFactory $editEntityFactory,
+		MediaWikiEditEntityFactory $editEntityFactory,
 		bool $isMobileView
 	) {
 		parent::__construct(

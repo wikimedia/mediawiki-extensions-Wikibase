@@ -36,7 +36,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Daniel Kinzler
  * @author Thiemo Kreuz
  */
-class MediawikiEditEntity implements EditEntity {
+class MediaWikiEditEntity implements EditEntity {
 
 	/**
 	 * @var EntityRevisionLookup

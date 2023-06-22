@@ -18,7 +18,7 @@ use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Summary;
-use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
+use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\SummaryFormatter;
 use Wikibase\Repo\WikibaseRepo;
@@ -85,7 +85,7 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 		SummaryFormatter $summaryFormatter,
 		LoggerInterface $logger,
 		SiteLookup $siteLookup,
-		MediawikiEditEntityFactory $editEntityFactory,
+		MediaWikiEditEntityFactory $editEntityFactory,
 		SettingsArray $settings
 	): void {
 		$this->initRepoJobServices(

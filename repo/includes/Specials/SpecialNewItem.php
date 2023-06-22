@@ -14,7 +14,7 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\CopyrightMessageBuilder;
-use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
+use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\Specials\HTMLForm\HTMLAliasesField;
 use Wikibase\Repo\Specials\HTMLForm\HTMLContentLanguageField;
@@ -68,7 +68,7 @@ class SpecialNewItem extends SpecialNewEntity {
 		EntityNamespaceLookup $entityNamespaceLookup,
 		SummaryFormatter $summaryFormatter,
 		EntityTitleLookup $entityTitleLookup,
-		MediawikiEditEntityFactory $editEntityFactory,
+		MediaWikiEditEntityFactory $editEntityFactory,
 		TermValidatorFactory $termValidatorFactory,
 		TermsCollisionDetector $termsCollisionDetector,
 		ValidatorErrorLocalizer $errorLocalizer,
@@ -95,7 +95,7 @@ class SpecialNewItem extends SpecialNewEntity {
 	}
 
 	public static function factory(
-		MediawikiEditEntityFactory $editEntityFactory,
+		MediaWikiEditEntityFactory $editEntityFactory,
 		EntityNamespaceLookup $entityNamespaceLookup,
 		EntityTitleLookup $entityTitleLookup,
 		TermsCollisionDetector $itemTermsCollisionDetector,

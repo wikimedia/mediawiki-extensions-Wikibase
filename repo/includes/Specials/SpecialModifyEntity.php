@@ -17,7 +17,7 @@ use Wikibase\Lib\UserInputException;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\ChangeOpValidationException;
-use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
+use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\SummaryFormatter;
 
 /**
@@ -45,7 +45,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	 * @param SpecialPageCopyrightView $copyrightView
 	 * @param SummaryFormatter $summaryFormatter
 	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param MediawikiEditEntityFactory $editEntityFactory
+	 * @param MediaWikiEditEntityFactory $editEntityFactory
 	 */
 	public function __construct(
 		$title,
@@ -53,7 +53,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 		SpecialPageCopyrightView $copyrightView,
 		SummaryFormatter $summaryFormatter,
 		EntityTitleLookup $entityTitleLookup,
-		MediawikiEditEntityFactory $editEntityFactory
+		MediaWikiEditEntityFactory $editEntityFactory
 	) {
 		parent::__construct(
 			$title,

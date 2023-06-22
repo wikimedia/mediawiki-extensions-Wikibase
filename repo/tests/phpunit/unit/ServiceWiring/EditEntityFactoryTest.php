@@ -9,7 +9,7 @@ use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Repo\EditEntity\EditFilterHookRunner;
-use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
+use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\Store;
@@ -79,7 +79,7 @@ class EditEntityFactoryTest extends ServiceWiringTestCase {
 			[ 'item', 'property' ] );
 
 		$this->assertInstanceOf(
-			MediawikiEditEntityFactory::class,
+			MediaWikiEditEntityFactory::class,
 			$this->getService( 'WikibaseRepo.EditEntityFactory' )
 		);
 	}

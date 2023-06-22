@@ -21,11 +21,11 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Content\EntityInstanceHolder;
 use Wikibase\Repo\Content\ItemContent;
-use Wikibase\Repo\EditEntity\MediawikiEditFilterHookRunner;
+use Wikibase\Repo\EditEntity\MediaWikiEditFilterHookRunner;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 
 /**
- * @covers \Wikibase\Repo\EditEntity\MediawikiEditFilterHookRunner
+ * @covers \Wikibase\Repo\EditEntity\MediaWikiEditFilterHookRunner
  *
  * @group Wikibase
  *
@@ -34,7 +34,7 @@ use Wikibase\Repo\Store\EntityTitleStoreLookup;
  */
 class EditFilterHookRunnerTest extends MediaWikiIntegrationTestCase {
 
-	public function getEditFilterHookRunner(): MediawikiEditFilterHookRunner {
+	public function getEditFilterHookRunner(): MediaWikiEditFilterHookRunner {
 		$namespaceLookup = $this->createMock( EntityNamespaceLookup::class );
 		$namespaceLookup->method( 'getEntitySlotRole' )->willReturn( SlotRecord::MAIN );
 
@@ -52,7 +52,7 @@ class EditFilterHookRunnerTest extends MediaWikiIntegrationTestCase {
 			->with( $this->isInstanceOf( EntityRedirect::class ) )
 			->willReturn( new ItemContent( new EntityInstanceHolder( new Item() ) ) );
 
-		return new MediawikiEditFilterHookRunner(
+		return new MediaWikiEditFilterHookRunner(
 			$namespaceLookup,
 			$entityTitleLookup,
 			$entityContentFactory,

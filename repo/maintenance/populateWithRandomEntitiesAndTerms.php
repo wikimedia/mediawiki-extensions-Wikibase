@@ -14,7 +14,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Lib\WikibaseSettings;
-use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
+use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\WikibaseRepo;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false
@@ -150,7 +150,7 @@ class PopulateWithRandomEntitiesAndTerms extends Maintenance {
 	private function saveEntity(
 		EntityDocument $entity,
 		IContextSource $context,
-		MediawikiEditEntityFactory $editEntityFactory
+		MediaWikiEditEntityFactory $editEntityFactory
 	): ?EntityId {
 		$editEntity = $editEntityFactory->newEditEntity( $context );
 

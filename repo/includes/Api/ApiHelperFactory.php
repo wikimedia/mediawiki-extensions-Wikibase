@@ -15,7 +15,7 @@ use Wikibase\Lib\EntityFactory;
 use Wikibase\Lib\Store\EntityByLinkedTitleLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
-use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
+use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\SummaryFormatter;
@@ -57,7 +57,7 @@ class ApiHelperFactory {
 	private $entityRevisionLookup;
 
 	/**
-	 * @var MediawikiEditEntityFactory
+	 * @var MediaWikiEditEntityFactory
 	 */
 	private $editEntityFactory;
 
@@ -114,7 +114,7 @@ class ApiHelperFactory {
 	 * @param SiteLookup $siteLookup
 	 * @param SummaryFormatter $summaryFormatter
 	 * @param EntityRevisionLookup $entityRevisionLookup
-	 * @param MediawikiEditEntityFactory $editEntityFactory
+	 * @param MediaWikiEditEntityFactory $editEntityFactory
 	 * @param SerializerFactory $serializerFactory
 	 * @param Serializer $entitySerializer
 	 * @param EntityIdParser $idParser
@@ -132,7 +132,7 @@ class ApiHelperFactory {
 		SiteLookup $siteLookup,
 		SummaryFormatter $summaryFormatter,
 		EntityRevisionLookup $entityRevisionLookup,
-		MediawikiEditEntityFactory $editEntityFactory,
+		MediaWikiEditEntityFactory $editEntityFactory,
 		SerializerFactory $serializerFactory,
 		Serializer $entitySerializer,
 		EntityIdParser $idParser,

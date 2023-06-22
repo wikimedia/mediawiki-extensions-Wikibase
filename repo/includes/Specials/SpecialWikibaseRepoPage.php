@@ -12,7 +12,7 @@ use Wikibase\Lib\FormatableSummary;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\UserInputException;
 use Wikibase\Repo\EditEntity\EditEntity;
-use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
+use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\SummaryFormatter;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -43,7 +43,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	private $entityTitleLookup;
 
 	/**
-	 * @var MediawikiEditEntityFactory
+	 * @var MediaWikiEditEntityFactory
 	 */
 	private $editEntityFactory;
 
@@ -59,7 +59,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	 * @param SpecialPageCopyrightView $copyrightView
 	 * @param SummaryFormatter $summaryFormatter
 	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param MediawikiEditEntityFactory $editEntityFactory
+	 * @param MediaWikiEditEntityFactory $editEntityFactory
 	 */
 	public function __construct(
 		$title,
@@ -68,7 +68,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 		SpecialPageCopyrightView $copyrightView,
 		SummaryFormatter $summaryFormatter,
 		EntityTitleLookup $entityTitleLookup,
-		MediawikiEditEntityFactory $editEntityFactory
+		MediaWikiEditEntityFactory $editEntityFactory
 	) {
 		parent::__construct( $title, $restriction );
 		$this->tags = $tags;

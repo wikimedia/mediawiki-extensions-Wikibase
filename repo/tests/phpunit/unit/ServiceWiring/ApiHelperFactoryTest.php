@@ -14,7 +14,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\HashSiteLinkStore;
 use Wikibase\Repo\Api\ApiHelperFactory;
-use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
+use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\Store;
@@ -53,7 +53,7 @@ class ApiHelperFactoryTest extends ServiceWiringTestCase {
 		$this->mockService( 'WikibaseRepo.SummaryFormatter',
 			$this->createMock( SummaryFormatter::class ) );
 		$this->mockService( 'WikibaseRepo.EditEntityFactory',
-			$this->createMock( MediawikiEditEntityFactory::class ) );
+			$this->createMock( MediaWikiEditEntityFactory::class ) );
 		$this->mockService( 'WikibaseRepo.BaseDataModelSerializerFactory',
 			$this->createMock( SerializerFactory::class ) );
 		$this->mockService( 'WikibaseRepo.AllTypesEntitySerializer',

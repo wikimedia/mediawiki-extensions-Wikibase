@@ -15,7 +15,7 @@ use Wikibase\Lib\UserInputException;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
-use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
+use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\SummaryFormatter;
 
@@ -71,7 +71,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		SpecialPageCopyrightView $copyrightView,
 		SummaryFormatter $summaryFormatter,
 		EntityTitleLookup $entityTitleLookup,
-		MediawikiEditEntityFactory $editEntityFactory,
+		MediaWikiEditEntityFactory $editEntityFactory,
 		EntityPermissionChecker $permissionChecker,
 		ContentLanguages $termsLanguages,
 		LanguageNameUtils $languageNameUtils

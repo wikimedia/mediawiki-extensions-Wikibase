@@ -9,7 +9,7 @@ use RuntimeException;
 use User;
 use Wikibase\DataModel\Entity\Item as DataModelItem;
 use Wikibase\Lib\Store\EntityRevision;
-use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
+use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Item;
@@ -28,7 +28,7 @@ use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
 class MediaWikiEditEntityFactoryItemUpdater implements ItemUpdater {
 
 	private IContextSource $context;
-	private MediawikiEditEntityFactory $editEntityFactory;
+	private MediaWikiEditEntityFactory $editEntityFactory;
 	private LoggerInterface $logger;
 	private EditSummaryFormatter $summaryFormatter;
 	private PermissionManager $permissionManager;
@@ -36,7 +36,7 @@ class MediaWikiEditEntityFactoryItemUpdater implements ItemUpdater {
 
 	public function __construct(
 		IContextSource $context,
-		MediawikiEditEntityFactory $editEntityFactory,
+		MediaWikiEditEntityFactory $editEntityFactory,
 		LoggerInterface $logger,
 		EditSummaryFormatter $summaryFormatter,
 		PermissionManager $permissionManager,

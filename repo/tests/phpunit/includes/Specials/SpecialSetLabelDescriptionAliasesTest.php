@@ -19,7 +19,7 @@ use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\Repo\CopyrightMessageBuilder;
 use Wikibase\Repo\EditEntity\EditFilterHookRunner;
-use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
+use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\Specials\SpecialPageCopyrightView;
 use Wikibase\Repo\Specials\SpecialSetLabelDescriptionAliases;
 use Wikibase\Repo\Store\EntityPermissionChecker;
@@ -69,7 +69,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 			$copyrightView,
 			$this->getSummaryFormatter(),
 			$this->getEntityTitleLookup(),
-			new MediawikiEditEntityFactory(
+			new MediaWikiEditEntityFactory(
 				$this->getEntityTitleLookup(),
 				$this->getEntityRevisionLookup(),
 				$this->getEntityStore(),
@@ -389,7 +389,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 			$copyrightView,
 			$this->getSummaryFormatter(),
 			$this->getEntityTitleLookup(),
-			new MediawikiEditEntityFactory(
+			new MediaWikiEditEntityFactory(
 				$this->getEntityTitleLookup(),
 				$this->getEntityRevisionLookup(),
 				$this->getEntityStore(),

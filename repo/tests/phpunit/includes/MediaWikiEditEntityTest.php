@@ -22,14 +22,14 @@ use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Repo\EditEntity\EditEntity;
 use Wikibase\Repo\EditEntity\EditFilterHookRunner;
-use Wikibase\Repo\EditEntity\MediawikiEditEntity;
+use Wikibase\Repo\EditEntity\MediaWikiEditEntity;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\TestingAccessWrapper;
 
 /**
- * @covers \Wikibase\Repo\EditEntity\MediawikiEditEntity
+ * @covers \Wikibase\Repo\EditEntity\MediaWikiEditEntity
  *
  * @group Wikibase
  *
@@ -39,7 +39,7 @@ use Wikimedia\TestingAccessWrapper;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
+class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 
 	private function getUser( $name ) {
 		$user = User::newFromName( $name );
@@ -125,7 +125,7 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 	 * @param EditFilterHookRunner|null $editFilterHookRunner
 	 * @param string[]|null $localEntityTypes
 	 *
-	 * @return MediawikiEditEntity
+	 * @return MediaWikiEditEntity
 	 */
 	private function makeEditEntity(
 		MockRepository $mockRepository,
@@ -153,7 +153,7 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 		$repoSettings = WikibaseRepo::getSettings();
 		$localEntityTypes = $localEntityTypes ?: WikibaseRepo::getLocalEntityTypes();
 
-		return new MediawikiEditEntity(
+		return new MediaWikiEditEntity(
 			$titleLookup,
 			$mockRepository,
 			$mockRepository,
@@ -845,7 +845,7 @@ class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 		$titleLookup = $this->getEntityTitleLookup();
 		$item = new Item();
 
-		$isNew = new ReflectionMethod( MediawikiEditEntity::class, 'isNew' );
+		$isNew = new ReflectionMethod( MediaWikiEditEntity::class, 'isNew' );
 		$isNew->setAccessible( true );
 
 		$edit = $this->makeEditEntity( $repo, $item->getId(), $titleLookup );

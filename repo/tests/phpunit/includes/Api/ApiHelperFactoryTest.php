@@ -16,7 +16,7 @@ use Wikibase\Repo\Api\ApiHelperFactory;
 use Wikibase\Repo\Api\EntityLoadingHelper;
 use Wikibase\Repo\Api\EntitySavingHelper;
 use Wikibase\Repo\Api\ResultBuilder;
-use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
+use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\SummaryFormatter;
@@ -35,7 +35,7 @@ class ApiHelperFactoryTest extends \PHPUnit\Framework\TestCase {
 	private function newApiHelperFactory() {
 		$summaryFormatter = $this->createMock( SummaryFormatter::class );
 
-		$editEntityFactory = $this->createMock( MediawikiEditEntityFactory::class );
+		$editEntityFactory = $this->createMock( MediaWikiEditEntityFactory::class );
 
 		$serializerFactory = $this->createMock( SerializerFactory::class );
 

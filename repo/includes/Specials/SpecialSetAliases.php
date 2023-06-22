@@ -15,7 +15,7 @@ use Wikibase\Lib\UserInputException;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\ChangeOps;
 use Wikibase\Repo\CopyrightMessageBuilder;
-use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
+use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\SummaryFormatter;
 
@@ -33,7 +33,7 @@ class SpecialSetAliases extends SpecialModifyTerm {
 		SpecialPageCopyrightView $copyrightView,
 		SummaryFormatter $summaryFormatter,
 		EntityTitleLookup $entityTitleLookup,
-		MediawikiEditEntityFactory $editEntityFactory,
+		MediaWikiEditEntityFactory $editEntityFactory,
 		EntityPermissionChecker $entityPermissionChecker,
 		ContentLanguages $termsLanguages,
 		LanguageNameUtils $languageNameUtils
@@ -55,7 +55,7 @@ class SpecialSetAliases extends SpecialModifyTerm {
 	public static function factory(
 		LanguageNameUtils $languageNameUtils,
 		ChangeOpFactoryProvider $changeOpFactoryProvider,
-		MediawikiEditEntityFactory $editEntityFactory,
+		MediaWikiEditEntityFactory $editEntityFactory,
 		EntityPermissionChecker $entityPermissionChecker,
 		EntityTitleLookup $entityTitleLookup,
 		SettingsArray $repoSettings,

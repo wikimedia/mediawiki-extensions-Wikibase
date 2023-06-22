@@ -19,7 +19,7 @@ use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\EditEntity\EditEntity;
-use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
+use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
@@ -51,7 +51,7 @@ class MediaWikiEditEntityFactoryItemUpdaterTest extends TestCase {
 	private $context;
 
 	/**
-	 * @var MockObject|MediawikiEditEntityFactory
+	 * @var MockObject|MediaWikiEditEntityFactory
 	 */
 	private $editEntityFactory;
 
@@ -75,7 +75,7 @@ class MediaWikiEditEntityFactoryItemUpdaterTest extends TestCase {
 
 		$this->context = $this->createStub( IContextSource::class );
 		$this->context->method( 'getUser' )->willReturn( $this->createStub( User::class ) );
-		$this->editEntityFactory = $this->createStub( MediawikiEditEntityFactory::class );
+		$this->editEntityFactory = $this->createStub( MediaWikiEditEntityFactory::class );
 		$this->logger = $this->createStub( LoggerInterface::class );
 		$this->summaryFormatter = $this->createStub( EditSummaryFormatter::class );
 		$this->permissionManager = $this->createStub( PermissionManager::class );
@@ -115,7 +115,7 @@ class MediaWikiEditEntityFactoryItemUpdaterTest extends TestCase {
 				] )
 			);
 
-		$this->editEntityFactory = $this->createMock( MediawikiEditEntityFactory::class );
+		$this->editEntityFactory = $this->createMock( MediaWikiEditEntityFactory::class );
 		$this->editEntityFactory->expects( $this->once() )
 			->method( 'newEditEntity' )
 			->with( $this->context, $itemToUpdate->getId() )
@@ -145,7 +145,7 @@ class MediaWikiEditEntityFactoryItemUpdaterTest extends TestCase {
 		$editEntity = $this->createStub( EditEntity::class );
 		$editEntity->method( 'attemptSave' )->willReturn( $errorStatus );
 
-		$this->editEntityFactory = $this->createStub( MediawikiEditEntityFactory::class );
+		$this->editEntityFactory = $this->createStub( MediaWikiEditEntityFactory::class );
 		$this->editEntityFactory->method( 'newEditEntity' )->willReturn( $editEntity );
 
 		$updater = $this->newItemUpdater();
@@ -166,7 +166,7 @@ class MediaWikiEditEntityFactoryItemUpdaterTest extends TestCase {
 		$editEntity = $this->createStub( EditEntity::class );
 		$editEntity->method( 'attemptSave' )->willReturn( $errorStatus );
 
-		$this->editEntityFactory = $this->createStub( MediawikiEditEntityFactory::class );
+		$this->editEntityFactory = $this->createStub( MediaWikiEditEntityFactory::class );
 		$this->editEntityFactory->method( 'newEditEntity' )->willReturn( $editEntity );
 
 		$updater = $this->newItemUpdater();
@@ -200,7 +200,7 @@ class MediaWikiEditEntityFactoryItemUpdaterTest extends TestCase {
 		$editEntity = $this->createStub( EditEntity::class );
 		$editEntity->method( 'attemptSave' )->willReturn( $saveStatus );
 
-		$this->editEntityFactory = $this->createStub( MediawikiEditEntityFactory::class );
+		$this->editEntityFactory = $this->createStub( MediaWikiEditEntityFactory::class );
 		$this->editEntityFactory->method( 'newEditEntity' )->willReturn( $editEntity );
 
 		$this->assertInstanceOf(

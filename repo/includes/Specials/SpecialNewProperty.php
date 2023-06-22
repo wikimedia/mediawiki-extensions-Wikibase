@@ -14,7 +14,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\CopyrightMessageBuilder;
 use Wikibase\Repo\DataTypeSelector;
-use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
+use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\Specials\HTMLForm\HTMLAliasesField;
 use Wikibase\Repo\Specials\HTMLForm\HTMLContentLanguageField;
 use Wikibase\Repo\Specials\HTMLForm\HTMLTrimmedTextField;
@@ -56,7 +56,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 		EntityNamespaceLookup $entityNamespaceLookup,
 		SummaryFormatter $summaryFormatter,
 		EntityTitleLookup $entityTitleLookup,
-		MediawikiEditEntityFactory $editEntityFactory,
+		MediaWikiEditEntityFactory $editEntityFactory,
 		DataTypeFactory $dataTypeFactory,
 		TermValidatorFactory $termValidatorFactory,
 		TermsCollisionDetector $termsCollisionDetector,
@@ -83,7 +83,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 
 	public static function factory(
 		DataTypeFactory $dataTypeFactory,
-		MediawikiEditEntityFactory $editEntityFactory,
+		MediaWikiEditEntityFactory $editEntityFactory,
 		EntityNamespaceLookup $entityNamespaceLookup,
 		EntityTitleLookup $entityTitleLookup,
 		bool $isMobileView,

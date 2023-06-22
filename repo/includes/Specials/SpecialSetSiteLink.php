@@ -19,7 +19,7 @@ use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\Repo\CopyrightMessageBuilder;
-use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
+use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\SiteLinkPageNormalizer;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\SummaryFormatter;
@@ -86,7 +86,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @param SpecialPageCopyrightView $copyrightView
 	 * @param SummaryFormatter $summaryFormatter
 	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param MediawikiEditEntityFactory $editEntityFactory
+	 * @param MediaWikiEditEntityFactory $editEntityFactory
 	 * @param SiteLinkTargetProvider $siteLinkTargetProvider
 	 * @param string[] $siteLinkGroups
 	 * @param string[] $badgeItems
@@ -98,7 +98,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		SpecialPageCopyrightView $copyrightView,
 		SummaryFormatter $summaryFormatter,
 		EntityTitleLookup $entityTitleLookup,
-		MediawikiEditEntityFactory $editEntityFactory,
+		MediaWikiEditEntityFactory $editEntityFactory,
 		SiteLinkPageNormalizer $siteLinkPageNormalizer,
 		SiteLinkTargetProvider $siteLinkTargetProvider,
 		array $siteLinkGroups,
@@ -125,7 +125,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 
 	public static function factory(
 		ChangeOpFactoryProvider $changeOpFactoryProvider,
-		MediawikiEditEntityFactory $editEntityFactory,
+		MediaWikiEditEntityFactory $editEntityFactory,
 		EntityTitleLookup $entityTitleLookup,
 		FallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		SettingsArray $repoSettings,

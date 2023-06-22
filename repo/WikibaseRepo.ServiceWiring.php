@@ -171,8 +171,8 @@ use Wikibase\Repo\DataTypeValidatorFactory;
 use Wikibase\Repo\Diff\ClaimDiffer;
 use Wikibase\Repo\Diff\EntityDiffVisualizerFactory;
 use Wikibase\Repo\EditEntity\EditFilterHookRunner;
-use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
-use Wikibase\Repo\EditEntity\MediawikiEditFilterHookRunner;
+use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
+use Wikibase\Repo\EditEntity\MediaWikiEditFilterHookRunner;
 use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
 use Wikibase\Repo\EntityIdLabelFormatterFactory;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;
@@ -600,8 +600,8 @@ return [
 		);
 	},
 
-	'WikibaseRepo.EditEntityFactory' => function ( MediaWikiServices $services ): MediawikiEditEntityFactory {
-		return new MediawikiEditEntityFactory(
+	'WikibaseRepo.EditEntityFactory' => function ( MediaWikiServices $services ): MediaWikiEditEntityFactory {
+		return new MediaWikiEditEntityFactory(
 			WikibaseRepo::getEntityTitleStoreLookup( $services ),
 			WikibaseRepo::getStore( $services )
 				->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
@@ -618,7 +618,7 @@ return [
 	},
 
 	'WikibaseRepo.EditFilterHookRunner' => function ( MediaWikiServices $services ): EditFilterHookRunner {
-		return new MediawikiEditFilterHookRunner(
+		return new MediaWikiEditFilterHookRunner(
 			WikibaseRepo::getEntityNamespaceLookup( $services ),
 			WikibaseRepo::getEntityTitleStoreLookup( $services ),
 			WikibaseRepo::getEntityContentFactory( $services ),

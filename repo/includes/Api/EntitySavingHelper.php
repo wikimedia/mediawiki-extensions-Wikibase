@@ -24,7 +24,7 @@ use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\EditEntity\EditEntity;
-use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
+use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\SummaryFormatter;
 
@@ -46,7 +46,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 	private $summaryFormatter;
 
 	/**
-	 * @var MediawikiEditEntityFactory
+	 * @var MediaWikiEditEntityFactory
 	 */
 	private $editEntityFactory;
 
@@ -111,7 +111,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 		EntityTitleStoreLookup $entityTitleStoreLookup,
 		ApiErrorReporter $errorReporter,
 		SummaryFormatter $summaryFormatter,
-		MediawikiEditEntityFactory $editEntityFactory,
+		MediaWikiEditEntityFactory $editEntityFactory,
 		PermissionManager $permissionManager
 	) {
 		parent::__construct(

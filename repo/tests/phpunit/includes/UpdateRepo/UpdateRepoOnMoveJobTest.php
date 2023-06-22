@@ -25,7 +25,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Repo\EditEntity\EditFilterHookRunner;
-use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
+use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\SummaryFormatter;
@@ -144,7 +144,7 @@ class UpdateRepoOnMoveJobTest extends MediaWikiIntegrationTestCase {
 			$summaryFormatter,
 			new NullLogger(),
 			$this->getSiteLookup( $normalizedPageName ),
-			new MediawikiEditEntityFactory(
+			new MediaWikiEditEntityFactory(
 				$this->getEntityTitleLookup( $titleItem->getId() ),
 				$editEntityLookup,
 				$editEntityStore,

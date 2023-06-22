@@ -26,7 +26,7 @@ use Wikibase\MediaInfo\DataModel\MediaInfoId;
 use Wikibase\Repo\Api\EntityLoadingHelper;
 use Wikibase\Repo\Api\EntitySavingHelper;
 use Wikibase\Repo\EditEntity\EditEntity;
-use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
+use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\SummaryFormatter;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -67,8 +67,8 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 		return $mock;
 	}
 
-	private function getMockEditEntityFactory( ?int $calls, ?Status $status ): MediawikiEditEntityFactory {
-		$mock = $this->createMock( MediawikiEditEntityFactory::class );
+	private function getMockEditEntityFactory( ?int $calls, ?Status $status ): MediaWikiEditEntityFactory {
+		$mock = $this->createMock( MediaWikiEditEntityFactory::class );
 		$mock->expects( $calls === null ? $this->any() : $this->exactly( $calls ) )
 			->method( 'newEditEntity' )
 			->willReturn( $this->getMockEditEntity( $calls, $status ) );
