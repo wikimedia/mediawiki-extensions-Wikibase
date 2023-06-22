@@ -149,7 +149,9 @@ HTML;
 		<<<HTML
 <div class="wikibase-descriptionview wikibase-descriptionview--mul wb-empty" dir="auto" lang="$3">
 	<div class="wikibase-descriptionview-container">
-		<abbr title="$2" class="wikibase-descriptionview-text"><span aria-hidden="true">$1</span></abbr>
+		<span class="wikibase-descriptionview-text">
+			<abbr title="$2"><span aria-hidden="true">$1</span></abbr>
+		</span>
 	</div>
 </div>
 HTML;
