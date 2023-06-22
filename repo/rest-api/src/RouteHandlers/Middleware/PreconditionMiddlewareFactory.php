@@ -3,25 +3,33 @@
 namespace Wikibase\Repo\RestApi\RouteHandlers\Middleware;
 
 use MediaWiki\Rest\ConditionalHeaderUtil;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
+use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 
 /**
  * @license GPL-2.0-or-later
  */
 class PreconditionMiddlewareFactory {
 
-	private ItemRevisionMetadataRetriever $metadataRetriever;
+	private EntityRevisionLookup $revisionLookup;
+	private EntityIdParser $entityIdParser;
 	private ConditionalHeaderUtil $conditionalHeaderUtil;
 
-	public function __construct( ItemRevisionMetadataRetriever $metadataRetriever, ConditionalHeaderUtil $conditionalHeaderUtil ) {
-		$this->metadataRetriever = $metadataRetriever;
+	public function __construct(
+		EntityRevisionLookup $revisionLookup,
+		EntityIdParser $entityIdParser,
+		ConditionalHeaderUtil $conditionalHeaderUtil
+	) {
 		$this->conditionalHeaderUtil = $conditionalHeaderUtil;
+		$this->revisionLookup = $revisionLookup;
+		$this->entityIdParser = $entityIdParser;
 	}
 
-	public function newPreconditionMiddleware( callable $getItemFromRequest ): PreconditionMiddleware {
+	public function newPreconditionMiddleware( callable $getEntityIdFromRequest ): PreconditionMiddleware {
 		return new PreconditionMiddleware( new RequestPreconditionCheck(
-			$this->metadataRetriever,
-			$getItemFromRequest,
+			$this->revisionLookup,
+			$this->entityIdParser,
+			$getEntityIdFromRequest,
 			$this->conditionalHeaderUtil
 		) );
 	}

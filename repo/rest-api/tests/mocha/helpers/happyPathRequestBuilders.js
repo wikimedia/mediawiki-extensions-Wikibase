@@ -4,7 +4,7 @@ const rbf = require( './RequestBuilderFactory' );
 const { newStatementWithRandomStringValue } = require( './entityHelper' );
 const { utils } = require( 'api-testing' );
 
-module.exports.getRequests = [
+module.exports.getRequestsOnItem = [
 	( { itemId } ) => rbf.newGetItemStatementsRequestBuilder( itemId ),
 	( { itemId, statementId } ) => rbf.newGetItemStatementRequestBuilder( itemId, statementId ),
 	( { itemId } ) => rbf.newGetItemRequestBuilder( itemId ),
@@ -17,7 +17,11 @@ module.exports.getRequests = [
 	( { statementId } ) => rbf.newGetStatementRequestBuilder( statementId )
 ];
 
-module.exports.editRequests = [
+module.exports.getRequestsOnProperty = [
+	( { stringPropertyId } ) => rbf.newGetPropertyRequestBuilder( stringPropertyId )
+];
+
+module.exports.editRequestsOnItem = [
 	( { itemId, stringPropertyId } ) => rbf.newAddItemStatementRequestBuilder(
 		itemId,
 		newStatementWithRandomStringValue( stringPropertyId )

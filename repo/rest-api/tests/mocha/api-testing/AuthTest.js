@@ -11,7 +11,11 @@ const {
 	createEntity
 } = require( '../helpers/entityHelper' );
 const { requireExtensions } = require( '../../../../../tests/api-testing/utils' );
-const { editRequests, getRequests } = require( '../helpers/happyPathRequestBuilders' );
+const {
+	editRequestsOnItem,
+	getRequestsOnItem,
+	getRequestsOnProperty
+} = require( '../helpers/happyPathRequestBuilders' );
 
 describe( 'Auth', () => {
 
@@ -37,9 +41,9 @@ describe( 'Auth', () => {
 	} );
 
 	[
-		...getRequests,
-		...editRequests,
-		( { stringPropertyId } ) => rbf.newGetPropertyRequestBuilder( stringPropertyId )
+		...getRequestsOnItem,
+		...getRequestsOnProperty,
+		...editRequestsOnItem
 	].forEach( ( newRequestBuilder ) => {
 		describe( `Authentication - ${newRequestBuilder( requestInputs ).getRouteDescription()}`, () => {
 
@@ -82,7 +86,7 @@ describe( 'Auth', () => {
 			assert.strictEqual( response.body.error, 'rest-write-denied' );
 		}
 
-		editRequests.forEach( ( newRequestBuilder ) => {
+		editRequestsOnItem.forEach( ( newRequestBuilder ) => {
 			describe( 'Protected item', () => {
 				before( async () => {
 					await changeItemProtectionStatus( requestInputs.itemId, 'sysop' ); // protect

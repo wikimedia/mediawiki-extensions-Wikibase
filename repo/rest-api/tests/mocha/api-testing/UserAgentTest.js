@@ -7,8 +7,11 @@ const {
 	createUniqueStringProperty,
 	newLegacyStatementWithRandomStringValue
 } = require( '../helpers/entityHelper' );
-const { editRequests, getRequests } = require( '../helpers/happyPathRequestBuilders' );
-const { newGetPropertyRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const {
+	editRequestsOnItem,
+	getRequestsOnItem,
+	getRequestsOnProperty
+} = require( '../helpers/happyPathRequestBuilders' );
 
 function assertValid400Response( response ) {
 	expect( response ).to.have.status( 400 );
@@ -32,9 +35,9 @@ describe( 'User-Agent requests', () => {
 	} );
 
 	[
-		...getRequests,
-		...editRequests,
-		( { stringPropertyId } ) => newGetPropertyRequestBuilder( stringPropertyId )
+		...getRequestsOnItem,
+		...getRequestsOnProperty,
+		...editRequestsOnItem
 	].forEach( ( newRequestBuilder ) => {
 		describe( newRequestBuilder( requestInputs ).getRouteDescription(), () => {
 

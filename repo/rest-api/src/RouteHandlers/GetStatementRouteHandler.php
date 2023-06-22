@@ -56,7 +56,7 @@ class GetStatementRouteHandler extends SimpleHandler {
 				new UserAgentCheckMiddleware(),
 				new AuthenticationMiddleware(),
 				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
-					fn( RequestInterface $request ): string => RequestPreconditionCheck::getItemIdPrefixFromStatementId(
+					fn( RequestInterface $request ): string => RequestPreconditionCheck::getEntityIdPrefixFromStatementId(
 						$request->getPathParam( self::STATEMENT_ID_PATH_PARAM )
 					)
 				),
