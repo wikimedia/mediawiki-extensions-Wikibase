@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases;
 
-use Wikibase\DataModel\Statement\StatementGuid;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Repo\RestApi\Domain\Services\StatementSubjectRevisionMetaDataRetriever;
 
 /**
@@ -22,13 +22,13 @@ class GetLatestStatementSubjectRevisionMetadata {
 	 *
 	 * @return array{int, string}
 	 */
-	public function execute( StatementGuid $statementId ): array {
-		$metaDataResult = $this->metadataRetriever->getLatestRevisionMetadata( $statementId );
+	public function execute( EntityId $entityId ): array {
+		$metaDataResult = $this->metadataRetriever->getLatestRevisionMetadata( $entityId );
 
 		if ( !$metaDataResult->subjectExists() ) {
 			throw new UseCaseError(
 				UseCaseError::STATEMENT_SUBJECT_NOT_FOUND,
-				"Could not find an entity with the ID: {$statementId->getEntityId()}"
+				"Could not find an entity with the ID: {$entityId}"
 			);
 		}
 

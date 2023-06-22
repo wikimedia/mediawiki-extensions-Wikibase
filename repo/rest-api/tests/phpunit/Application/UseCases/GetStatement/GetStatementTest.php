@@ -58,7 +58,7 @@ class GetStatementTest extends TestCase {
 		$this->getRevisionMetadata = $this->createMock( GetLatestStatementSubjectRevisionMetadata::class );
 		$this->getRevisionMetadata->expects( $this->once() )
 			->method( 'execute' )
-			->with( $statementId )
+			->with( $itemId->getSerialization() )
 			->willReturn( [ $revision, $lastModified ] );
 
 		$this->statementRetriever = $this->createMock( StatementRetriever::class );
@@ -119,7 +119,7 @@ class GetStatementTest extends TestCase {
 		$this->getRevisionMetadata = $this->createMock( GetLatestStatementSubjectRevisionMetadata::class );
 		$this->getRevisionMetadata->expects( $this->once() )
 			->method( 'execute' )
-			->with( $statementId )
+			->with( $itemId->getSerialization() )
 			->willThrowException( $expectedException );
 
 		try {

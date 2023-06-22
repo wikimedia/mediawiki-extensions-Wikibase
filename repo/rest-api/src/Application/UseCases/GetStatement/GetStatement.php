@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetStatement;
 
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestStatementSubjectRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
@@ -35,8 +36,13 @@ class GetStatement {
 
 		$statementIdParser = new StatementGuidParser( new BasicEntityIdParser() );
 		$statementId = $statementIdParser->parse( $statementRequest->getStatementId() );
+		$requestedEntityId = $statementRequest->getEntityId();
 
-		[ $revisionId, $lastModified ] = $this->getRevisionMetadata->execute( $statementId );
+		/** @var EntityId $entityId */
+		$entityId = $requestedEntityId ? ( new BasicEntityIdParser() )->parse( $requestedEntityId ) : $statementId->getEntityId();
+		'@phan-var EntityId $entityId';
+
+		[ $revisionId, $lastModified ] = $this->getRevisionMetadata->execute( $entityId );
 
 		if ( $statementRequest->getEntityId() && $statementRequest->getEntityId() !== (string)$statementId->getEntityId() ) {
 			$this->throwStatementNotFoundException( $statementRequest->getStatementId() );

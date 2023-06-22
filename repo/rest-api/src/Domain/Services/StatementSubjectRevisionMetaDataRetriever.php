@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Domain\Services;
 
-use Wikibase\DataModel\Statement\StatementGuid;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Repo\RestApi\Domain\ReadModel\LatestStatementSubjectRevisionMetadataResult;
 
 /**
@@ -10,6 +10,6 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\LatestStatementSubjectRevisionMetadat
  */
 interface StatementSubjectRevisionMetaDataRetriever {
 
-	public function getLatestRevisionMetadata( StatementGuid $statementId ): LatestStatementSubjectRevisionMetadataResult;
+	public function getLatestRevisionMetadata( EntityId $entityId ): LatestStatementSubjectRevisionMetadataResult;
 
 }
