@@ -330,6 +330,8 @@ return call_user_func( function() {
 				'wikibase-description-edit-placeholder',
 				'wikibase-description-edit-placeholder-language-aware',
 				'wikibase-description-empty',
+				'wikibase-description-not-applicable',
+				'wikibase-description-not-applicable-title',
 				'wikibase-statementgrouplistview-add',
 				'wikibase-description-empty',
 				'wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label',
