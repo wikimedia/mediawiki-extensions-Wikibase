@@ -146,9 +146,9 @@ class TermsListView {
 	private function getMulDescriptionView() {
 		return $this->templateFactory->render(
 			'wikibase-descriptionview-mul',
-			$this->textProvider->get( 'wikibase-description-not-applicable' ),
-			$this->textProvider->get( 'wikibase-description-not-applicable-title' ),
-			$this->textProvider->getLanguageOf( 'wikibase-description-not-applicable-title' )
+			htmlspecialchars( $this->textProvider->get( 'wikibase-description-not-applicable' ), ENT_QUOTES ),
+			htmlspecialchars( $this->textProvider->get( 'wikibase-description-not-applicable-title' ), ENT_QUOTES ),
+			htmlspecialchars( $this->textProvider->getLanguageOf( 'wikibase-description-not-applicable-title' ), ENT_QUOTES )
 		);
 	}
 
