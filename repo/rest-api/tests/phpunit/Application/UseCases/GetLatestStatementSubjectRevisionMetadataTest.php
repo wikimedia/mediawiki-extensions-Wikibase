@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Statement\StatementGuid;
@@ -23,38 +24,38 @@ use Wikibase\Repo\RestApi\Domain\Services\StatementSubjectRevisionMetaDataRetrie
 class GetLatestStatementSubjectRevisionMetadataTest extends TestCase {
 
 	/**
-	 * @dataProvider provideStatementId
+	 * @dataProvider provideStatementSubjectId
 	 */
-	public function testExecute( StatementGuid $statementId ): void {
+	public function testExecute( EntityId $subjectId ): void {
 		$expectedRevisionId = 123;
 		$expectedLastModified = '20220101001122';
 
 		$metadataRetriever = $this->createMock( StatementSubjectRevisionMetadataRetriever::class );
 		$metadataRetriever->expects( $this->once() )
 			->method( 'getLatestRevisionMetadata' )
-			->with( $statementId )
+			->with( $subjectId )
 			->willReturn( LatestStatementSubjectRevisionMetadataResult::concreteRevision( $expectedRevisionId, $expectedLastModified ) );
 
-		[ $revId, $lastModified ] = $this->newGetRevisionMetadata( $metadataRetriever )->execute( $statementId );
+		[ $revId, $lastModified ] = $this->newGetRevisionMetadata( $metadataRetriever )->execute( $subjectId );
 
 		$this->assertSame( $expectedRevisionId, $revId );
 		$this->assertSame( $expectedLastModified, $lastModified );
 	}
 
 	/**
-	 * @dataProvider provideStatementId
+	 * @dataProvider provideStatementSubjectId
 	 */
-	public function testGivenStatementSubjectDoesNotExist_throwsUseCaseError( StatementGuid $statementId ): void {
+	public function testGivenStatementSubjectDoesNotExist_throwsUseCaseError( EntityId $subjectId ): void {
 		$metadataRetriever = $this->createStub( StatementSubjectRevisionMetadataRetriever::class );
 		$metadataRetriever->method( 'getLatestRevisionMetadata' )
 			->willReturn( LatestStatementSubjectRevisionMetadataResult::subjectNotFound() );
 
 		try {
-			$this->newGetRevisionMetadata( $metadataRetriever )->execute( $statementId );
+			$this->newGetRevisionMetadata( $metadataRetriever )->execute( $subjectId );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::STATEMENT_SUBJECT_NOT_FOUND, $e->getErrorCode() );
-			$this->assertSame( "Could not find an entity with the ID: {$statementId->getEntityId()}", $e->getErrorMessage() );
+			$this->assertSame( "Could not find an entity with the ID: {$subjectId}", $e->getErrorMessage() );
 		}
 	}
 
@@ -73,7 +74,7 @@ class GetLatestStatementSubjectRevisionMetadataTest extends TestCase {
 			->willReturn( LatestStatementSubjectRevisionMetadataResult::redirect( new ItemId( $redirectTarget ) ) );
 
 		try {
-			$this->newGetRevisionMetadata( $metadataRetriever )->execute( $statementWithRedirectItem );
+			$this->newGetRevisionMetadata( $metadataRetriever )->execute( $redirectSource );
 			$this->fail( 'this should not be reached' );
 		} catch ( ItemRedirect $e ) {
 			$this->assertSame( $redirectTarget, $e->getRedirectTargetId() );
@@ -85,19 +86,9 @@ class GetLatestStatementSubjectRevisionMetadataTest extends TestCase {
 		return new GetLatestStatementSubjectRevisionMetadata( $metadataRetriever );
 	}
 
-	public function provideStatementId(): Generator {
-		yield 'statement ID on an item' => [
-			new StatementGuid(
-				new ItemId( 'Q123' ),
-				'D4FDE516-F20C-4154-ADCE-7C5B609DFDFF'
-			),
-		];
-		yield 'statement ID on a property' => [
-			new StatementGuid(
-				new NumericPropertyId( 'P123' ),
-				'D8404CDA-25E4-4334-AF13-A3290BCD9C0N'
-			),
-		];
+	public function provideStatementSubjectId(): Generator {
+		yield 'item id' => [ new ItemId( 'Q123' ) ];
+		yield 'property id' => [ new NumericPropertyId( 'P123' ) ];
 	}
 
 }

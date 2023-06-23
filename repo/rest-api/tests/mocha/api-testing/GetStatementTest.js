@@ -148,7 +148,20 @@ describe( 'GET statement', () => {
 			assert.include( response.body.message, itemId );
 		} );
 
-		it( 'responds 404 if requested item not found', async () => {
+		it( 'responds item-not-found if item does not exist but statement does', async () => {
+			const itemId = 'Q999999';
+			const response = await newGetItemStatementRequestBuilder( itemId, testStatement.id )
+				.assertValidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 404 );
+			assert.header( response, 'Content-Language', 'en' );
+			assert.equal( response.body.code, 'item-not-found' );
+			assert.include( response.body.message, itemId );
+		} );
+
+		it( 'responds item-not-found if item does not exist and statement subject does, ' +
+			'but statement does not', async () => {
 			const itemId = 'Q999999';
 			const statementId = `${itemId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
 			const response = await newGetItemStatementRequestBuilder( itemId, statementId )
@@ -161,7 +174,44 @@ describe( 'GET statement', () => {
 			assert.include( response.body.message, itemId );
 		} );
 
-		it( 'responds 404 requested Item ID and Statement ID mismatch', async () => {
+		it( 'responds item-not-found if neither item nor statement nor its subject exist', async () => {
+			const itemId = 'Q999999';
+			const statementId = 'Q999999$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+			const response = await newGetItemStatementRequestBuilder( itemId, statementId )
+				.assertValidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 404 );
+			assert.header( response, 'Content-Language', 'en' );
+			assert.equal( response.body.code, 'item-not-found' );
+			assert.include( response.body.message, itemId );
+		} );
+
+		it( 'responds statement-not-found if item exists but statement subject does not', async () => {
+			const requestedItemId = ( await entityHelper.createEntity( 'item', {} ) ).entity.id;
+			const statementId = 'Q999999$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+			const response = await newGetItemStatementRequestBuilder( requestedItemId, statementId )
+				.assertValidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 404 );
+			assert.equal( response.body.code, 'statement-not-found' );
+			assert.include( response.body.message, statementId );
+		} );
+
+		it( 'responds statement-not-found if item and subject exists but statement does not', async () => {
+			const requestedItemId = ( await entityHelper.createEntity( 'item', {} ) ).entity.id;
+			const statementId = `${requestedItemId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
+			const response = await newGetItemStatementRequestBuilder( requestedItemId, statementId )
+				.assertValidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 404 );
+			assert.equal( response.body.code, 'statement-not-found' );
+			assert.include( response.body.message, statementId );
+		} );
+
+		it( 'responds statement-not-found if requested Item and Statement exist, but do not match', async () => {
 			const requestedItemId = ( await entityHelper.createEntity( 'item', {} ) ).entity.id;
 			const response = await newGetItemStatementRequestBuilder(
 				requestedItemId,
