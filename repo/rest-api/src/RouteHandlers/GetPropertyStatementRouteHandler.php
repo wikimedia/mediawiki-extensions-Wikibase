@@ -12,9 +12,8 @@ use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementResponse;
-use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
+use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\RequiredRequestedSubjectIdValidator;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
@@ -25,11 +24,11 @@ use Wikimedia\ParamValidator\ParamValidator;
 /**
  * @license GPL-2.0-or-later
  */
-class GetItemStatementRouteHandler extends SimpleHandler {
+class GetPropertyStatementRouteHandler extends SimpleHandler {
 
-	public const ITEM_ID_PATH_PARAM = 'item_id';
+	public const PROPERTY_ID_PATH_PARAM = 'property_id';
 	public const STATEMENT_ID_PATH_PARAM = 'statement_id';
-	public const ROUTE = '/wikibase/v0/entities/items/{item_id}/statements/{statement_id}';
+	public const ROUTE = '/wikibase/v0/entities/properties/{property_id}/statements/{statement_id}';
 
 	private GetStatement $getStatement;
 	private StatementSerializer $statementSerializer;
@@ -52,7 +51,7 @@ class GetItemStatementRouteHandler extends SimpleHandler {
 		$responseFactory = new ResponseFactory();
 		return new self(
 			WbRestApi::getStatementFactory()->newGetStatement(
-				new RequiredRequestedSubjectIdValidator( new ItemIdValidator() )
+				new RequiredRequestedSubjectIdValidator( new PropertyIdValidator() )
 			),
 			WbRestApi::getSerializerFactory()->newStatementSerializer(),
 			$responseFactory,
@@ -61,7 +60,7 @@ class GetItemStatementRouteHandler extends SimpleHandler {
 				new UserAgentCheckMiddleware(),
 				new AuthenticationMiddleware(),
 				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
-					fn( RequestInterface $request ): string => $request->getPathParam( self::ITEM_ID_PATH_PARAM )
+					fn( RequestInterface $request ): string => $request->getPathParam( self::PROPERTY_ID_PATH_PARAM )
 				),
 			] )
 		);
@@ -74,19 +73,19 @@ class GetItemStatementRouteHandler extends SimpleHandler {
 		return $this->middlewareHandler->run( $this, [ $this, 'runUseCase' ], $args );
 	}
 
-	public function runUseCase( string $itemId, string $statementId ): Response {
+	public function runUseCase( string $propertyId, string $statementId ): Response {
 		try {
 			return $this->newSuccessHttpResponse(
 				$this->getStatement->execute(
-					new GetStatementRequest( $statementId, $itemId )
+					new GetStatementRequest( $statementId, $propertyId )
 				)
 			);
 		} catch ( UseCaseError $e ) {
 			if ( $e->getErrorCode() === UseCaseError::STATEMENT_SUBJECT_NOT_FOUND ) {
 				return $this->responseFactory->newErrorResponseFromException(
 					new UseCaseError(
-						UseCaseError::ITEM_NOT_FOUND,
-						"Could not find an item with the ID: $itemId"
+						UseCaseError::PROPERTY_NOT_FOUND,
+						"Could not find a property with the ID: $propertyId"
 					)
 				);
 			}
@@ -94,24 +93,18 @@ class GetItemStatementRouteHandler extends SimpleHandler {
 			if ( $e->getErrorCode() === UseCaseError::INVALID_STATEMENT_SUBJECT_ID ) {
 				return $this->responseFactory->newErrorResponseFromException(
 					new UseCaseError(
-						UseCaseError::INVALID_ITEM_ID,
-						'Not a valid item ID: ' . $itemId
+						UseCaseError::INVALID_PROPERTY_ID,
+						"Not a valid property ID: $propertyId"
 					)
 				);
 			}
-
 			return $this->responseFactory->newErrorResponseFromException( $e );
-		} catch ( ItemRedirect $e ) {
-			return $this->responseFactory->newErrorResponse(
-				UseCaseError::STATEMENT_NOT_FOUND,
-				"Could not find a statement with the ID: $statementId"
-			);
 		}
 	}
 
 	public function getParamSettings(): array {
 		return [
-			self::ITEM_ID_PATH_PARAM => [
+			self::PROPERTY_ID_PATH_PARAM => [
 				self::PARAM_SOURCE => 'path',
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => true,
