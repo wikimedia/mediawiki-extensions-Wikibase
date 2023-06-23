@@ -16,7 +16,6 @@
 			"Thiemo Kreuz"
 		]
 	},
-	"apihelp-query+wbentityusage-description": "Returns all entity IDs used in the given pages.",
 	"apihelp-query+wbentityusage-summary": "Returns all entity IDs used in the given pages.",
 	"apihelp-query+wbentityusage-param-aspect": "Only return entity IDs that used this aspect.",
 	"apihelp-query+wbentityusage-paramvalue-aspect-S": "The entity's sitelinks are used",
@@ -31,7 +30,6 @@
 	"apihelp-query+wbentityusage-param-entities": "Only return page that used these entities.",
 	"apihelp-query+wbentityusage-param-limit": "How many entity usages to return.",
 	"apihelp-query+wbentityusage-example-simple": "Get entities used in the page <kbd>Main Page</kbd>.",
-	"apihelp-query+wblistentityusage-description": "Returns all pages that use the given entity IDs.",
 	"apihelp-query+wblistentityusage-summary": "Returns all pages that use the given entity IDs.",
 	"apihelp-query+wblistentityusage-param-prop": "Properties to add to the result.",
 	"apihelp-query+wblistentityusage-paramvalue-prop-url": "If enabled the url of the entity will be added to the result.",
@@ -41,7 +39,6 @@
 	"apihelp-query+wblistentityusage-example-simple": "Get pages that use the entity <kbd>Q2</kbd>.",
 	"apihelp-query+wblistentityusage-example-url": "Get pages that use the entity <kbd>Q2</kbd> with URL included.",
 	"apihelp-query+wblistentityusage-example-aspect": "Get pages that use the entity <kbd>Q2</kbd> and the aspect was sitelink or statement.",
-	"apihelp-query+pageterms-description": "Get the {{WBREPONAME}} terms (typically labels, descriptions and aliases) associated with a page via a sitelink.",
 	"apihelp-query+pageterms-summary": "Get the {{WBREPONAME}} terms (typically labels, descriptions and aliases) associated with a page via a sitelink.",
 	"apihelp-query+pageterms-example-simple": "Get all terms associated with the page 'London', in the user language.",
 	"apihelp-query+pageterms-example-label-en": "Get labels and aliases associated with the page 'London', in English.",
@@ -54,7 +51,6 @@
 	"apihelp-query+description-paramvalue-prefersource-central": "Central descriptions from the associated {{WBREPONAME}} item.",
 	"apihelp-query+description-example": "Get the description for the page 'London'.",
 	"apihelp-query+description-example-central": "Get the description for the page 'London', preferring the central description if it exists.",
-	"apihelp-query+wikibase-description": "Get information about the Wikibase client and the associated Wikibase repository.",
 	"apihelp-query+wikibase-summary": "Get information about the Wikibase client and the associated Wikibase repository.",
 	"apihelp-query+wikibase-example": "Get URL path and other information about Wikibase client and repository.",
 	"apihelp-query+wikibase-param-prop": "Which properties to get:\n;<kbd>url</kbd>: Base URL, script path and article path of the Wikibase repository.\n;<kbd>siteid</kbd>: The siteid of this site.",

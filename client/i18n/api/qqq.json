@@ -25,7 +25,6 @@
 			"Vadgt"
 		]
 	},
-	"apihelp-query+wbentityusage-description": "{{doc-apihelp-description|query+wbentityusage}}",
 	"apihelp-query+wbentityusage-summary": "{{doc-apihelp-summary|query+wbentityusage}}",
 	"apihelp-query+wbentityusage-param-aspect": "{{doc-apihelp-param|query+wbentityusage|aspect}}",
 	"apihelp-query+wbentityusage-paramvalue-aspect-S": "{{doc-apihelp-paramvalue|query+wbentityusage|aspect|S|info=This message is also used for the same parameter value of the \"query+wblistentityusage\" module.}}",
@@ -40,7 +39,6 @@
 	"apihelp-query+wbentityusage-param-entities": "{{doc-apihelp-param|query+wbentityusage|entities}}",
 	"apihelp-query+wbentityusage-param-limit": "{{doc-apihelp-param|query+wbentityusage|limit}}",
 	"apihelp-query+wbentityusage-example-simple": "{{doc-apihelp-example|query+wbentityusage}}",
-	"apihelp-query+wblistentityusage-description": "{{doc-apihelp-description|query+wblistentityusage}}",
 	"apihelp-query+wblistentityusage-summary": "{{doc-apihelp-summary|query+wblistentityusage}}",
 	"apihelp-query+wblistentityusage-param-prop": "{{doc-apihelp-param|query+wblistentityusage|prop}}",
 	"apihelp-query+wblistentityusage-paramvalue-prop-url": "{{doc-apihelp-paramvalue|query+wblistentityusage|prop|url}}",
@@ -50,7 +48,6 @@
 	"apihelp-query+wblistentityusage-example-simple": "{{doc-apihelp-example|query+wblistentityusage}}",
 	"apihelp-query+wblistentityusage-example-url": "{{doc-apihelp-example|query+wblistentityusage}}",
 	"apihelp-query+wblistentityusage-example-aspect": "{{doc-apihelp-example|query+wblistentityusage}}",
-	"apihelp-query+pageterms-description": "{{doc-apihelp-description|query+pageterms}}",
 	"apihelp-query+pageterms-summary": "{{doc-apihelp-summary|query+pageterms}}",
 	"apihelp-query+pageterms-example-simple": "{{doc-apihelp-example|query+pageterms}}",
 	"apihelp-query+pageterms-example-label-en": "{{doc-apihelp-example|query+pageterms}}",
@@ -63,7 +60,6 @@
 	"apihelp-query+description-paramvalue-prefersource-central": "{{doc-apihelp-paramvalue|query+description|prefersource|central}}",
 	"apihelp-query+description-example": "{{doc-apihelp-example|query+description}}",
 	"apihelp-query+description-example-central": "{{doc-apihelp-example|query+description}}",
-	"apihelp-query+wikibase-description": "{{doc-apihelp-description|query+wikibase}}",
 	"apihelp-query+wikibase-summary": "{{doc-apihelp-summary|query+wikibase}}",
 	"apihelp-query+wikibase-example": "{{doc-apihelp-example|query+wikibase}}",
 	"apihelp-query+wikibase-param-prop": "{{doc-apihelp-param|query+wikibase|prop}}",
