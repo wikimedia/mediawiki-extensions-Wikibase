@@ -83,6 +83,11 @@
 			undefined,
 			'Created widget.'
 		);
+		assert.deepEqual(
+			entitytermsforlanguagelistview._defaultLanguages,
+			[ 'de', 'en' ],
+			'Default languages without "mul".'
+		);
 
 		entitytermsforlanguagelistview.destroy();
 
@@ -156,6 +161,21 @@
 			= $entitytermsforlanguagelistview.data( 'entitytermsforlanguagelistview' );
 
 		assert.strictEqual( !entitytermsforlanguagelistview._hasMoreLanguages(), true );
+	} );
+
+	QUnit.test( 'mul handling', function ( assert ) {
+		var fingerprint = createFingerprint();
+		fingerprint.setLabel( 'mul', new datamodel.Term( 'mul', 'mul-label' ) );
+
+		var $entitytermsforlanguagelistview = createEntitytermsforlanguagelistview( { value: fingerprint } ),
+			entitytermsforlanguagelistview
+				= $entitytermsforlanguagelistview.data( 'entitytermsforlanguagelistview' );
+
+		assert.deepEqual(
+			entitytermsforlanguagelistview._defaultLanguages,
+			[ 'de', 'en', 'mul' ],
+			'Default languages if a "mul" term is present.'
+		);
 	} );
 
 }() );

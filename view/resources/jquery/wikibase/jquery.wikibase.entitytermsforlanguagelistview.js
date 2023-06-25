@@ -73,6 +73,11 @@
 		_moreLanguagesItems: {},
 
 		/**
+		 * @type {string[]} List of languages shown per default.
+		 */
+		_defaultLanguages: [],
+
+		/**
 		 * @see jQuery.ui.TemplatedWidget._create
 		 */
 		_create: function () {
@@ -83,6 +88,13 @@
 			}
 
 			PARENT.prototype._create.call( this );
+			this._defaultLanguages = this.options.userLanguages;
+
+			var furtherLanguages = this._getMoreLanguages();
+			if ( 'mul' in furtherLanguages ) {
+				// We have a mul term, always show it per default (but in the last position)
+				this._defaultLanguages.push( 'mul' );
+			}
 
 			this._verifyExistingDom();
 			this._createListView();
@@ -123,19 +135,23 @@
 
 			// Scrape languages from static HTML:
 			var mismatchAt = null,
-				userLanguages = this.options.userLanguages;
+				languages = this._defaultLanguages;
 			$entitytermsforlanguageview.each( function ( i ) {
 				var match = $( this )
 					.attr( 'class' )
 					.match( /(?:^|\s)wikibase-entitytermsforlanguageview-(\S+)/ );
-				if ( match && match[ 1 ] !== userLanguages[ i ] ) {
+				if ( match && match[ 1 ] !== languages[ i ] ) {
+					if ( match[ 1 ] !== 'mul' ) {
+						// "mul" might be included in the existing term box, but we want it to be after
+						// everything else, thus discarding it is expected.
+						mw.log.warn( 'Existing entitytermsforlanguagelistview DOM does not match configured languages' );
+					}
 					mismatchAt = i;
 					return false;
 				}
 			} );
 
 			if ( mismatchAt !== null ) {
-				mw.log.warn( 'Existing entitytermsforlanguagelistview DOM does not match configured languages' );
 				$entitytermsforlanguageview.slice( mismatchAt ).remove();
 			}
 		},
@@ -183,7 +199,7 @@
 						};
 					}
 				} ),
-				value: this.options.userLanguages.map( function ( lang ) {
+				value: this._defaultLanguages.map( function ( lang ) {
 					return self._getValueForLanguage( lang );
 				} ),
 				listItemNodeName: 'TR'
@@ -222,7 +238,7 @@
 		 */
 		_hasMoreLanguages: function () {
 			var fingerprint = this.options.value,
-				minLength = this.options.userLanguages.length;
+				minLength = this._defaultLanguages.length;
 
 			if ( fingerprint.getLabels().length > minLength
 				|| fingerprint.getDescriptions().length > minLength
@@ -340,7 +356,7 @@
 				languages[ lang ] = lang;
 			} );
 
-			this.options.userLanguages.forEach( function ( lang ) {
+			this._defaultLanguages.forEach( function ( lang ) {
 				delete languages[ lang ];
 			} );
 
