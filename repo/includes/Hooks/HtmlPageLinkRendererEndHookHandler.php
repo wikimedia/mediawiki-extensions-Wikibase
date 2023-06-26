@@ -17,7 +17,6 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Entity\SerializableEntityId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
@@ -372,15 +371,11 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 			return null;
 		}
 
-		$idPart = $this->extractForeignIdString( $target );
+		$foreignId = $this->extractForeignIdString( $target );
 
-		$idPrefix = '';
-
-		if ( $idPart !== null ) {
+		if ( $foreignId !== null ) {
 			try {
-				// FIXME: This assumes repository name is equal to interwiki. This assumption might
-				// become invalid
-				return $this->entityIdParser->parse( SerializableEntityId::joinSerialization( [ $idPrefix, '', $idPart ] ) );
+				return $this->entityIdParser->parse( $foreignId );
 			} catch ( EntityIdParsingException $ex ) {
 			}
 		}
