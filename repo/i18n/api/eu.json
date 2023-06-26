@@ -6,7 +6,6 @@
 			"Subi"
 		]
 	},
-	"apihelp-wblinktitles-description": "Bi orrialde bi wiki desberdinekin lotzen ditu Wikibaserekin.",
 	"apihelp-wbsearchentities-param-language": "Bilatu hizkuntza honetan.",
 	"apihelp-wbsearchentities-param-props": "Propietate hauek entitate bakoitzari bueltatu.",
 	"apihelp-wbsearchentities-example-5": "Bilatu \"alphabet\" ingelesez url parametroa omititu",

@@ -7,7 +7,6 @@
 		]
 	},
 	"apihelp-query+wbentityusage-param-prop": "ফলাফলে যোগ করবার বৈশিষ্ট্য।",
-	"apihelp-query+wblistentityusage-description": "প্রদত্ত সত্তা অভিজ্ঞান ব্যবহৃত হয়েছে, এমন সব পাতা ফিরিয়ে আনো।",
 	"apihelp-query+wblistentityusage-param-prop": "ফলাফলে যোগ করবার বৈশিষ্ট্য।",
 	"apihelp-query+wblistentityusage-param-entities": "ব্যবহার কারা হয়েছে এমন সত্তাসমূহ।",
 	"apihelp-query+wblistentityusage-example-simple": "<kbd>Q2</kbd> এই সত্তা ব্যবহার করা হয়েছে এমন পাতাগুলি।",

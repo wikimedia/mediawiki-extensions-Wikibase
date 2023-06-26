@@ -6,7 +6,6 @@
 			"Vyolla"
 		]
 	},
-	"apihelp-query+wbentityusage-description": "Sjell krejt ID njësish të përdorura në faqet e dhëna.",
 	"apihelp-query+wbentityusage-summary": "Sjell krejt ID njësish të përdorura në faqet e dhëna.",
 	"apihelp-query+wbentityusage-param-aspect": "Sill vetëm me ID njësish që kanë përdorur këtë aspekt.",
 	"apihelp-query+wbentityusage-paramvalue-aspect-S": "Përdoren lidhjet e faqes së entitetit",
@@ -21,7 +20,6 @@
 	"apihelp-query+wbentityusage-param-entities": "Sill vetëm faqen që ka përdorur këto njësi.",
 	"apihelp-query+wbentityusage-param-limit": "Sa përdorime njësie të sillen.",
 	"apihelp-query+wbentityusage-example-simple": "Merrni njësi të përdorura në faqen <kbd>Faqja Kryesore</kbd>.",
-	"apihelp-query+wblistentityusage-description": "Sjell krejt faqet që përdorin ID-të e njësisë së dhënë.",
 	"apihelp-query+wblistentityusage-summary": "Sjell krejt faqet që përdorin ID-të e dhëna të njësisë.",
 	"apihelp-query+wblistentityusage-param-prop": "Veti për t’u shtuar te përfundimi.",
 	"apihelp-query+wblistentityusage-paramvalue-prop-url": "Në u aktivizoftë, URL-ja e njësisë do të shtohet te përfundimi.",
@@ -31,7 +29,6 @@
 	"apihelp-query+wblistentityusage-example-simple": "Merrni faqe që përdorin njësinë <kbd>Q2</kbd>.",
 	"apihelp-query+wblistentityusage-example-url": "Merrni faqe që përdorin njësinë <kbd>Q2</kbd>, përfshi URL-në.",
 	"apihelp-query+wblistentityusage-example-aspect": "Merrni faqe që përdorin njësinë <kbd>Q2</kbd> dhe për të cilat aspekti ishte lidhje sajti ose pohim.",
-	"apihelp-query+pageterms-description": "Merrni termat e {{WBREPONAME}} (kryesisht etiketa, përshkrime dhe aliase) të përshoqëruar me një faqe përmes një lidhjeje sajti.",
 	"apihelp-query+pageterms-summary": "Merrni termat e {{WBREPONAME}} (kryesisht etiketa, përshkrime dhe aliase) të përshoqëruar me një faqe përmes një lidhjeje sajti.",
 	"apihelp-query+pageterms-example-simple": "Merrni krejt termat përshoqëruar me faqen 'London', në gjuhën e përdoruesit.",
 	"apihelp-query+pageterms-example-label-en": "Merrni etiketa dhe aliase përshoqëruar me faqen 'London', në anglisht.",
@@ -44,7 +41,6 @@
 	"apihelp-query+description-paramvalue-prefersource-central": "Përshkrime qendrore nga objekt {{WBREPONAME}} i përshoqëruar.",
 	"apihelp-query+description-example": "Merrni përshkrimin për faqen 'London'.",
 	"apihelp-query+description-example-central": "Merrni përshkrimin për faqen 'London', duke parapëlqyer përshkrimin qendror, në ekzistoftë.",
-	"apihelp-query+wikibase-description": "Merrni informacion mbi klientin Wikibase dhe depon Wikibase përshoqëruar atij.",
 	"apihelp-query+wikibase-summary": "Merrni informacion mbi klientin Wikibase dhe depon Wikibase përshoqëruar atij.",
 	"apihelp-query+wikibase-example": "Merrni shteg URL-je dhe informacion tjetër mbi klientin dhe depon Wikibase.",
 	"apihelp-query+wikibase-param-prop": "Cilat veti të merren:\n;<kbd>url</kbd>: URL bazë, shteg programthi dhe shteg artikulli të depos Wikibase.\n;<kbd>siteid</kbd>: ID sajti e këtij sajti.",

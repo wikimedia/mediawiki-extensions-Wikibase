@@ -4,13 +4,11 @@
 			"Ans"
 		]
 	},
-	"apihelp-query+wbentityusage-description": "คืนค่ารหัสประจำรายการสนเทศทั้งหมดที่ใช้ในหน้าที่กำหนด",
 	"apihelp-query+wbentityusage-summary": "คืนค่ารหัสประจำรายการสนเทศทั้งหมดที่ใช้ในหน้าที่กำหนด",
 	"apihelp-query+wbentityusage-param-prop": "คุณลักษณะที่จะเพิ่มไปในผลลัพธ์",
 	"apihelp-query+wbentityusage-param-entities": "คืนหน้าที่เรียกใช้รายการสนเทศเหล่านี้เท่านั้น",
 	"apihelp-query+wbentityusage-param-limit": "จำนวนการเรียกใช้รายการสนเทศที่จะคืนค่า",
 	"apihelp-query+wbentityusage-example-simple": "ดึงรายการสนเทศที่ใช้ในหน้า <kbd>หน้าหลัก</kbd>.",
-	"apihelp-query+wblistentityusage-description": "คืนรายการหน้าทั้งหมดที่เรียกใช้รหัสประจำรายการสนเทศตามที่ระบุ",
 	"apihelp-query+wblistentityusage-summary": "คืนรายการหน้าทั้งหมดที่เรียกใช้รหัสประจำรายการสนเทศตามที่ระบุ",
 	"apihelp-query+wblistentityusage-param-prop": "คุณลักษณะที่จะเพิ่มไปในผลลัพธ์",
 	"apihelp-query+wblistentityusage-param-entities": "รายการสนเทศที่ถูกเรียกใช้แล้ว",

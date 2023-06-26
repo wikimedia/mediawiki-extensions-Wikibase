@@ -4,7 +4,6 @@
 			"McDutchie"
 		]
 	},
-	"apihelp-query+wbentityusage-description": "Restitute tote le IDs de entitate usate in le paginas date.",
 	"apihelp-query+wbentityusage-summary": "Retorna tote le IDs de entitate usate in le paginas date.",
 	"apihelp-query+wbentityusage-param-aspect": "Solmente restituer le IDs del entitates que usava iste aspecto.",
 	"apihelp-query+wbentityusage-paramvalue-aspect-S": "Le ligamines de sito del entitate es usate",
@@ -19,7 +18,6 @@
 	"apihelp-query+wbentityusage-param-entities": "Solmente restituer le pagina que usava iste entitates.",
 	"apihelp-query+wbentityusage-param-limit": "Quante usos de entitate restituer.",
 	"apihelp-query+wbentityusage-example-simple": "Obtener le entitates usate in le pagina <kbd>Main Page</kbd>.",
-	"apihelp-query+wblistentityusage-description": "Restitue tote le paginas que usa le IDs de entitate fornite.",
 	"apihelp-query+wblistentityusage-summary": "Restitute tote le paginas que usa le IDs de entitate fornite.",
 	"apihelp-query+wblistentityusage-param-prop": "Le proprietates a adder al resultato.",
 	"apihelp-query+wblistentityusage-paramvalue-prop-url": "Si es activate, le URL del entitate essera addite al resultato.",
@@ -29,7 +27,6 @@
 	"apihelp-query+wblistentityusage-example-simple": "Obtener paginas que usa le entitate <kbd>Q2</kbd>.",
 	"apihelp-query+wblistentityusage-example-url": "Obtener paginas que usa le entitate <kbd>Q2</kbd> con URL includite.",
 	"apihelp-query+wblistentityusage-example-aspect": "Obtener paginas que usa le entitate <kbd>Q2</kbd> e le aspecto esseva un ligamine de sito o un declaration.",
-	"apihelp-query+pageterms-description": "Obtener le terminos de {{WBREPONAME}} (typicamente etiquettas, descriptiones e aliases) associate a un pagina per un ligamine de sito.",
 	"apihelp-query+pageterms-summary": "Obtener le terminos de {{WBREPONAME}} (typicamente etiquettas, descriptiones e aliases) associate a un pagina per un ligamine de sito.",
 	"apihelp-query+pageterms-example-simple": "Obtener tote le terminos associate al pagina 'London', in le lingua del usator.",
 	"apihelp-query+pageterms-example-label-en": "Obtener etiquettas e aliases associate al pagina 'London', in anglese.",
@@ -42,7 +39,6 @@
 	"apihelp-query+description-paramvalue-prefersource-central": "Descriptiones central del elemento associate de {{WBREPONAME}}.",
 	"apihelp-query+description-example": "Obtener le description del pagina 'London'.",
 	"apihelp-query+description-example-central": "Obtener le description del pagina 'London', preferente le description central si existe.",
-	"apihelp-query+wikibase-description": "Obtener information sur le cliente Wikibase e le repositorio Wikibase associate.",
 	"apihelp-query+wikibase-summary": "Obtener information sur le cliente Wikibase e le repositorio Wikibase associate.",
 	"apihelp-query+wikibase-example": "Obtener le percurso del URL e altere informationes sur le cliente e repositorio Wikibase.",
 	"apihelp-query+wikibase-param-prop": "Qual proprietates obtener:\n;<kbd>url</kbd>: URL de base, percurso del script e percurso del articulo del respositorio Wikibase.\n;<kbd>siteid</kbd>: Le ID de iste sito.",

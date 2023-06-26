@@ -4,11 +4,9 @@
 			"Pikne"
 		]
 	},
-	"apihelp-query+pageterms-description": "Võrgukohalingi vahendusel leheküljega seotud termide (harilikult sildid, kirjeldused ja rööpkujud) hankimine Vikiandmetest.",
 	"apihelp-query+pageterms-example-simple": "Hangi kasutaja keeles kõik leheküljega \"London\" seotud termid.",
 	"apihelp-query+pageterms-example-label-en": "Hangi inglise keeles leheküljega \"London\" seotud sildid ja rööpkujud.",
 	"apihelp-query+pageterms-param-terms": "Millist tüüpi termid hankida, nt 'description' (kirjeldused). Iga termi kohta tagastatakse sõnede massiiv, kus võtmeks on tüüp, nt {\"description\": [\"foo\"]}. Kui määramata, tagastatakse kõik tüübid.",
-	"apihelp-query+wikibase-description": "Teabe hankimine Vikibaasi kliendi ja sellega seotud Vikibaasi hoidla kohta.",
 	"apihelp-query+wikibase-example": "Hangi internetiaadressi tee ja muu teave Vikibaasi kliendi ja hoida kohta.",
 	"apihelp-query+wikibase-param-prop": "Millised atribuudid hankida:\n;<kbd>url</kbd>: Vikibaasi hoidla baas-URL, skriptitee ja artiklitee.\n;<kbd>siteid</kbd>: Selle võrgukoha identifikaator."
 }

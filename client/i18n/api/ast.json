@@ -5,7 +5,6 @@
 			"Xuacu"
 		]
 	},
-	"apihelp-query+wbentityusage-description": "Devuelve tolos identificadores d'entidá usaos nes páxines indicaes.",
 	"apihelp-query+wbentityusage-summary": "Devolver toles IDs d'entidá que s'usen nes páxines indicaes.",
 	"apihelp-query+wbentityusage-param-aspect": "Sólo devuelve los identificadores d'entidá qu'usen esti aspeutu.",
 	"apihelp-query+wbentityusage-param-prop": "Propiedaes a amestar al resultáu.",
@@ -13,7 +12,6 @@
 	"apihelp-query+wbentityusage-param-entities": "Devolver sólo la páxina qu'usó eses entidaes.",
 	"apihelp-query+wbentityusage-param-limit": "Númberu d'usos d'entidá a devolver.",
 	"apihelp-query+wbentityusage-example-simple": "Algamar les entidaes usaes na <kbd>Páxina principal</kbd>.",
-	"apihelp-query+wblistentityusage-description": "Devuelve toles páxines qu'utilicen los ID d'entidá daos.",
 	"apihelp-query+wblistentityusage-summary": "Devuelve toles páxines qu'utilicen los ID d'entidá daos.",
 	"apihelp-query+wblistentityusage-param-prop": "Propiedaes a amestar al resultáu.",
 	"apihelp-query+wblistentityusage-paramvalue-prop-url": "Si ta activáu, la url de la entidá amestaráse al resultáu.",
@@ -23,7 +21,6 @@
 	"apihelp-query+wblistentityusage-example-simple": "Algamar les páxines qu'usen la entidá <kbd>Q2</kbd>.",
 	"apihelp-query+wblistentityusage-example-url": "Algamar les páxines qu'usen la entidá <kbd>Q2</kbd> con URL incluída.",
 	"apihelp-query+wblistentityusage-example-aspect": "Algamar les páxines qu'usen la entidá <kbd>Q2</kbd> y que'l so aspeutu yera enllaz a un sitiu o declaración.",
-	"apihelp-query+pageterms-description": "Algama los términos de {{WBREPONAME}} (de vezu etiquetes, descripciones y alcuños) asociaos con una páxina al traviés d'un enllaz de sitiu. Na propia páxina d'entidá, úsense direutamente los términos. Cuidáu: N'una wiki de repo, esti módulu sólo funciona direutamente nes páxines d'entidá, non nes páxines coneutaes con una entidá per un enllaz de sitiu. Esto puede cambiar nel futuru.",
 	"apihelp-query+pageterms-summary": "Algama los términos de {{WBREPONAME}} (de vezu etiquetes, descripciones y alcuños) asociaos con una páxina al traviés d'un enllaz de sitiu. Na propia páxina d'entidá, úsense direutamente los términos. Cuidáu: N'una wiki de repo, esti módulu sólo funciona direutamente nes páxines d'entidá, non nes páxines coneutaes con una entidá per un enllaz de sitiu. Esto puede cambiar nel futuru.",
 	"apihelp-query+pageterms-example-simple": "Algama tolos términos asociaos cola páxina 'London', na llingua del usuariu.",
 	"apihelp-query+pageterms-example-label-en": "Algama les etiquetes y alcuños asociaos cola páxina 'London', n'inglés.",
@@ -35,7 +32,6 @@
 	"apihelp-query+description-paramvalue-prefersource-central": "Descripciones centralizaes dende l'elementu asociáu en {{WBREPONAME}}.",
 	"apihelp-query+description-example": "Recibir la descripcion de la páxina 'London'.",
 	"apihelp-query+description-example-central": "Recibir la descripcion de la páxina 'London', prefiriendo la descripción central si existe.",
-	"apihelp-query+wikibase-description": "Algamar información sobro'l cliente de Wikibase ya'l repositoriu de Wikibase asociáu.",
 	"apihelp-query+wikibase-summary": "Algamar información sobro'l cliente de Wikibase ya'l repositoriu de Wikibase asociáu.",
 	"apihelp-query+wikibase-example": "Algamar el camín URL y otra información sobro'l cliente ya'l repositoriu de Wikibase.",
 	"apihelp-query+wikibase-param-prop": "Qué propiedaes algamar:\n;<kbd>url</kbd>: URL base, camín a scripts y camín a artículos del repositoriu de Wikibase.\n;<kbd>siteid</kbd>: El siteid d'esti sitiu."

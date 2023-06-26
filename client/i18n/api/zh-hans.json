@@ -10,7 +10,6 @@
 			"落花有意12138"
 		]
 	},
-	"apihelp-query+wbentityusage-description": "返回指定页面中使用的所有实体ID。",
 	"apihelp-query+wbentityusage-summary": "返回指定页面使用的所有实体ID。",
 	"apihelp-query+wbentityusage-param-aspect": "只返回使用这一方面的实体ID。",
 	"apihelp-query+wbentityusage-paramvalue-aspect-S": "实体站点链接已使用",
@@ -25,7 +24,6 @@
 	"apihelp-query+wbentityusage-param-entities": "只返回使用了这些实体的页面。",
 	"apihelp-query+wbentityusage-param-limit": "返回实体使用数量。",
 	"apihelp-query+wbentityusage-example-simple": "获取在页面<kbd>Main Page</kbd>使用的实体。",
-	"apihelp-query+wblistentityusage-description": "返回所有使用指定实体ID的页面。",
 	"apihelp-query+wblistentityusage-summary": "返回所有使用指定实体ID的页面。",
 	"apihelp-query+wblistentityusage-param-prop": "要添加至结果的属性。",
 	"apihelp-query+wblistentityusage-paramvalue-prop-url": "如果启用，实体的url将添加至结果中。",
@@ -35,7 +33,6 @@
 	"apihelp-query+wblistentityusage-example-simple": "获取使用实体<kbd>Q2</kbd>的页面。",
 	"apihelp-query+wblistentityusage-example-url": "获取使用实体<kbd>Q2</kbd>的页面，包含URL。",
 	"apihelp-query+wblistentityusage-example-aspect": "获取使用实体<kbd>Q2</kbd>，并且方面是网站链接或陈述的页面。",
-	"apihelp-query+pageterms-description": "通过网站链接获取与页面相关的{{WBREPONAME}}术语（例如标签、描述和别名）。",
 	"apihelp-query+pageterms-summary": "通过网站链接获取与页面相关的{{WBREPONAME}}术语（例如标签、描述和别名）。",
 	"apihelp-query+pageterms-example-simple": "以用户语言获取与“伦敦”页面相关的所有术语。",
 	"apihelp-query+pageterms-example-label-en": "获取与“伦敦”页面相关的英文标签和别名。",
@@ -48,7 +45,6 @@
 	"apihelp-query+description-paramvalue-prefersource-central": "来自关联{{WBREPONAME}}项目的中心描述。",
 	"apihelp-query+description-example": "获取页面“London”的描述。",
 	"apihelp-query+description-example-central": "获取页面“London”的描述，首选中心描述（如有）。",
-	"apihelp-query+wikibase-description": "获取有关Wikibase客户端及其相关Wikibase仓库的信息。",
 	"apihelp-query+wikibase-summary": "获取有关Wikibase客户端及其相关Wikibase仓库的信息。",
 	"apihelp-query+wikibase-example": "获取有关Wikibase客户端和仓库的URL路径和其他信息。",
 	"apihelp-query+wikibase-param-prop": "要获取的属性：\n;<kbd>url</kbd>:Base URL，Wikibase仓库的脚本路径和条目路径。\n;<kbd>siteid</kbd>:网站的siteid。",

@@ -1,8 +1,0 @@
-{
-	"@metadata": {
-		"authors": [
-			"Thin"
-		]
-	},
-	"apihelp-query+wblistentityusage-description": "Trở về tất cả những trang sử dụng IDs riêng sau đây."
-}

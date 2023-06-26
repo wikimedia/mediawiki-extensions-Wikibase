@@ -5,14 +5,12 @@
 			"Woytecr"
 		]
 	},
-	"apihelp-query+wbentityusage-description": "Zwraca wszystkie identyfikatory obiektów użytych na podanych stronach.",
 	"apihelp-query+wbentityusage-param-aspect": "Zwróć tylko identyfikatory obiektów wykorzystujące ten aspekt.",
 	"apihelp-query+wbentityusage-param-prop": "Właściwości do dodania do wyniku.",
 	"apihelp-query+wbentityusage-paramvalue-prop-url": "Jeżeli włączone, zostanie dodany url do elementu",
 	"apihelp-query+wbentityusage-param-entities": "Zwróć tylko stronę, która wykorzystuje te elementy.",
 	"apihelp-query+wbentityusage-param-limit": "Ile zwrócić wykorzystanych obiektów.",
 	"apihelp-query+wbentityusage-example-simple": "Uzyskaj obiekty wykorzystane na stronie <kbd>Main Page</kbd>.",
-	"apihelp-query+wblistentityusage-description": "Zwraca wszystkie strony, które wykorzystują obiekty o podanych identyfikatorach.",
 	"apihelp-query+wblistentityusage-param-prop": "Właściwości, które dołączyć do wyniku.",
 	"apihelp-query+wblistentityusage-paramvalue-prop-url": "Jeżeli włączone, zostanie dołączony url obiektu do wyniku.",
 	"apihelp-query+wblistentityusage-param-aspect": "Zwróć tylko identyfikatory obiektów wykorzystujące ten aspekt.",

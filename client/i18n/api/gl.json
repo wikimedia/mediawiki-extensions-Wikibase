@@ -6,7 +6,6 @@
 			"Toliño"
 		]
 	},
-	"apihelp-query+wbentityusage-description": "Devolve tódolos identificadores de entidade usados nas páxinas indicadas.",
 	"apihelp-query+wbentityusage-summary": "Devolve tódolos identificadores de entidade usadas nas páxinas indicadas.",
 	"apihelp-query+wbentityusage-param-aspect": "Só devolve os identificadores de entidade que usan este aspecto.",
 	"apihelp-query+wbentityusage-param-prop": "Propiedades a engadir ó resultado.",
@@ -14,7 +13,6 @@
 	"apihelp-query+wbentityusage-param-entities": "Só devolver a páxina que utiliza estas entidades.",
 	"apihelp-query+wbentityusage-param-limit": "Cantos usos de entidades devolver.",
 	"apihelp-query+wbentityusage-example-simple": "Obter as entidades usadas na <kbd>Páxina principal</kbd>.",
-	"apihelp-query+wblistentityusage-description": "Devolve todas as páxinas que utilizan os identificadores de entidade dados.",
 	"apihelp-query+wblistentityusage-summary": "Devolve todas as páxinas que utilizan os identificadores de entidade dados.",
 	"apihelp-query+wblistentityusage-param-prop": "Propiedades a engadir ó resultado.",
 	"apihelp-query+wblistentityusage-paramvalue-prop-url": "Se habilitou o url da entidade será engadida ó resultado.",
@@ -24,11 +22,9 @@
 	"apihelp-query+wblistentityusage-example-simple": "Obter as páxinas que usan a entidade <kbd>Q2</kbd>.",
 	"apihelp-query+wblistentityusage-example-url": "Obter as páxinas que usan a entidade <kbd>Q2</kbd> con URL incluído.",
 	"apihelp-query+wblistentityusage-example-aspect": "Obter as páxinas que usan a entidade <kbd>Q2</kbd> e cuxo aspecto era ligazón de sitio ou declaración.",
-	"apihelp-query+pageterms-description": "Obter os termos asociados a unha páxina a través dun elemento de datos asociado. Nunha páxina de entidade da wikibase, os termos de entidade usanse directamente.\nAdvertencia: Nunha wiki repositorio, os termos de páxina só funcionan directamente en páxinas de entidades, non en páxinas conectadas a un elemento. Isto pode cambiar nun futuro.",
 	"apihelp-query+pageterms-example-simple": "Obter todos os termos asociados á páxina \"London\", na lingua do usuario.",
 	"apihelp-query+pageterms-example-label-en": "Obter as etiquetas e os pseudónimos asociados á páxina \"London\", en inglés.",
 	"apihelp-query+pageterms-param-terms": "O tipo de termos que se obteñen; por exemplo, \"description\". Se non se especifica, devólvense todos os tipos.",
-	"apihelp-query+wikibase-description": "Obter a información sobre o cliente Wikibase e o repositorio de Wikibase asociado.",
 	"apihelp-query+wikibase-summary": "Obter a información sobre o cliente Wikibase e o repositorio de Wikibase asociado.",
 	"apihelp-query+wikibase-example": "Obter a ruta URL e outra información sobre o cliente e o repositorio de Wikibase.",
 	"apihelp-query+wikibase-param-prop": "As propiedades que se obteñen:\n;<kbd>url</kbd>: URL base, ruta da de secuencia de ordes e ruta do artigo do repositorio de Wikibase.\n;<kbd>siteid</kbd>: o identificador deste sitio."

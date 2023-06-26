@@ -7,9 +7,7 @@
 			"Iwan Novirion"
 		]
 	},
-	"apihelp-query+pageterms-description": "Tambahkan istilah {{WBREPONAME}} (biasanya label, deskripsi, dan alias) yang terkait dengan halaman melalui pranala antarwiki.",
 	"apihelp-query+pageterms-example-simple": "Tambahkan semua istilah yang terkait dengan halaman 'London', dalam bahasa pengguna.",
 	"apihelp-query+pageterms-example-label-en": "Tambahkan label dan nama lain terkait dengan halaman 'London', dalam bahasa Inggris.",
-	"apihelp-query+pageterms-param-terms": "Tipe istilah yang ingin didapatkan, misalnya 'description', masing-masing dikembalikan sebagai larik string dengan tipe sebagai kuncinya, misalnya {\"description\": [\"foo\"]}. Jika tidak ditentukan, semua tipe dikembalikan.",
-	"apihelp-query+wikibase-description": "Dapatkan informasi tentang klien Wikibase dan ruang penyimpanan Wikibase terkait."
+	"apihelp-query+pageterms-param-terms": "Tipe istilah yang ingin didapatkan, misalnya 'description', masing-masing dikembalikan sebagai larik string dengan tipe sebagai kuncinya, misalnya {\"description\": [\"foo\"]}. Jika tidak ditentukan, semua tipe dikembalikan."
 }

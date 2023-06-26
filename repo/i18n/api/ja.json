@@ -7,15 +7,11 @@
 			"Sujiniku"
 		]
 	},
-	"apihelp-wbcreateclaim-description": "Wikibaseの主張を作成",
 	"apihelp-wbcreateclaim-param-entity": "主張を追加するエンティティのID",
-	"apihelp-wbcreateredirect-description": "エンティティのリダイレクトを作成します。",
 	"apihelp-wbcreateredirect-param-from": "リダイレクトを作成するエンティティID",
 	"apihelp-wbcreateredirect-param-to": "リダイレクト先のエンティティID",
 	"apihelp-wbeditentity-example-12": "ラベルを除去",
-	"apihelp-wbgetclaims-description": "Wikibaseの主張を取得",
 	"apihelp-wbgetentities-param-redirects": "転送を解決するかどうか。\n「no」が設定された場合、転送は削除されたエンティティのように扱われます。",
-	"apihelp-wbmergeitems-description": "複数の項目を統合する。",
 	"apihelp-wbmergeitems-param-fromid": "統合元の ID",
 	"apihelp-wbmergeitems-param-toid": "統合先の ID",
 	"apihelp-wbmergeitems-param-tags": "版に適用するタグを変更します。",

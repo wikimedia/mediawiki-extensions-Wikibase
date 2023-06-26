@@ -4,11 +4,9 @@
 			"C.R."
 		]
 	},
-	"apihelp-query+pageterms-description": "Piglia tuttuquante termene suoccie a na paggena via n'item suoccio a essa. Dint'a na paggena entità 'e wikibase, 'e termene identità s'auserranno direttamente.\nAttenziò: su nu repository wiki, 'e termene song'ausate direttamente ncopp' 'e paggene 'e ll'entità, nun ncopp' 'e paggene cullegate a n'elemento. Sta cosa putesse cagnà 'n futuro.",
 	"apihelp-query+pageterms-example-simple": "Piglia tuttuquante 'e termene suoccie 'a paggena 'London', dint'a lengua utente.",
 	"apihelp-query+pageterms-example-label-en": "Piglia 'etichette e aliasse suoccie 'a paggena 'London', pe' ngrese.",
 	"apihelp-query+pageterms-param-terms": "'E tipe 'e termene ca s'uttenessero, e.g. 'descriziona'. Si nun songo specificate, tuttuquante tipe songo turnate.",
-	"apihelp-query+wikibase-description": "Piglia nfurmaziune ncopp' 'o cliente Wikibase e repository Wikibase.",
 	"apihelp-query+wikibase-example": "Piglia nu percurzo URL e l'ati nfurmaziune ncopp'a Wikibase e repository.",
 	"apihelp-query+wikibase-param-prop": "Quala pruprietà s'avess'a piglià:\n;<kbd>url</kbd>: URL bbase, 'o posto addò sta 'o script e base articule 'e Wikibase repository.\n;<kbd>siteid</kbd>: 'O siteide 'e stu sito."
 }

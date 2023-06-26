@@ -7,7 +7,6 @@
 			"MuratTheTurkish"
 		]
 	},
-	"apihelp-query+wbentityusage-description": "Belirli sayfalarda kullanılan tüm varlık kimliklerini döndürür.",
 	"apihelp-query+wbentityusage-summary": "Belirli sayfalarda kullanılan tüm varlık kimliklerini döndürür.",
 	"apihelp-query+wbentityusage-param-aspect": "Yalnızca bu yönü kullanan varlık kimliklerini döndürün.",
 	"apihelp-query+wbentityusage-paramvalue-aspect-S": "Varlığın site bağlantıları kullanılıyor",
@@ -22,7 +21,6 @@
 	"apihelp-query+wbentityusage-param-entities": "Yalnızca bu varlıkları kullanan sayfayı döndürün.",
 	"apihelp-query+wbentityusage-param-limit": "Kaç varlık geri dönmek için kullanır.",
 	"apihelp-query+wbentityusage-example-simple": "Varlıkları <kbd>Main Page</kbd> sayfasında kullanın.",
-	"apihelp-query+wblistentityusage-description": "Belirli varlık kimliklerini kullanan tüm sayfaları döndürür.",
 	"apihelp-query+wblistentityusage-summary": "Belirli varlık kimliklerini kullanan tüm sayfaları döndürür.",
 	"apihelp-query+wblistentityusage-param-prop": "Sonuca eklenecek özellikler.",
 	"apihelp-query+wblistentityusage-paramvalue-prop-url": "Etkinleştirilirse, varlığın URL'si sonuca eklenir.",
@@ -32,7 +30,6 @@
 	"apihelp-query+wblistentityusage-example-simple": "<kbd>Q2</kbd> varlığını kullanan sayfaları alın.",
 	"apihelp-query+wblistentityusage-example-url": "URL dahil olarak <kbd>Q2</kbd> varlığını kullanan sayfaları alın.",
 	"apihelp-query+wblistentityusage-example-aspect": "<kbd>Q2</kbd> varlığını kullanan sayfalar olsun ve görünüm site bağlantısı veya ifade oldu.",
-	"apihelp-query+pageterms-description": "Bir site bağlantısı aracılığıyla bir sayfayla ilişkili {{WBREPONAME}} terimlerini (genellikle etiketler, açıklamalar ve takma adlar) alın.",
 	"apihelp-query+pageterms-summary": "Bir site bağlantısı aracılığıyla bir sayfayla ilişkili {{WBREPONAME}} terimlerini (genellikle etiketler, açıklamalar ve takma adlar) alın.",
 	"apihelp-query+pageterms-example-simple": "'London' sayfası ile ilişkili tüm terimleri kullanıcı dilinde edinin.",
 	"apihelp-query+pageterms-example-label-en": "İngilizce 'London' sayfası ile ilişkili etiketler ve takma adlar alın.",
@@ -45,7 +42,6 @@
 	"apihelp-query+description-paramvalue-prefersource-central": "İlişkili {{WBREPONAME}} öğesinden merkezi açıklamalar.",
 	"apihelp-query+description-example": "'London' sayfası için açıklama alın.",
 	"apihelp-query+description-example-central": "Varsa merkezi açıklamayı tercih ederek 'London' sayfasının açıklamasını alın.",
-	"apihelp-query+wikibase-description": "Wikibase istemcisi ve ilgili Wikibase deposu hakkında bilgi edinin.",
 	"apihelp-query+wikibase-summary": "Wikibase istemcisi hakkında bilgi alın ve Wikibase istemcisi ve ilgili Wikibase deposu hakkında bilgi alın.",
 	"apihelp-query+wikibase-example": "URL yolunu ve Wikibase istemcisi ve deposu hakkında diğer bilgileri alın.",
 	"apihelp-query+wikibase-param-prop": "Özelliklere sahip olanacağı:\n;<kbd>url</kbd>: Wikibase deposunun temel URL'si, betik yolu ve madde yolu.\n;<kbd>siteid</kbd>: Bu sitenin site kimliği.",

@@ -8,7 +8,6 @@
 			"Ата"
 		]
 	},
-	"apihelp-query+wbentityusage-description": "Виводить ідентифікатори сутностей, що використовуються на заданих сторінках.",
 	"apihelp-query+wbentityusage-summary": "Виводить всі ідентифікатори сутностей, які використовувались на вказаних сторінках.",
 	"apihelp-query+wbentityusage-param-aspect": "Виводити лише ідентифікатори тих сутностей, що використовували цей аспект.",
 	"apihelp-query+wbentityusage-paramvalue-aspect-S": "Використовуються посилання на сайти організації",
@@ -23,7 +22,6 @@
 	"apihelp-query+wbentityusage-param-entities": "Вивести лише ті сторінки, що використовували ці сутності.",
 	"apihelp-query+wbentityusage-param-limit": "Скільки використань сутності вивести.",
 	"apihelp-query+wbentityusage-example-simple": "Отримати сутності, що використовувалися на сторінці <kbd>Main Page</kbd>.",
-	"apihelp-query+wblistentityusage-description": "Виводить усі сторінки, що використовують задані ідентифікатори сутностей.",
 	"apihelp-query+wblistentityusage-summary": "Виводить усі сторінки, що використовують вказані ідентифікатори сутностей.",
 	"apihelp-query+wblistentityusage-param-prop": "Властивості, які додати до результату.",
 	"apihelp-query+wblistentityusage-paramvalue-prop-url": "Якщо увімкнено, до результату буде додано URL-адресу сутності.",
@@ -33,7 +31,6 @@
 	"apihelp-query+wblistentityusage-example-simple": "Отримати сторінки, що використовують сутність <kbd>Q2</kbd>.",
 	"apihelp-query+wblistentityusage-example-url": "Отримати сторінки, що використовують сутність <kbd>Q2</kbd> із включенням URL-адреси.",
 	"apihelp-query+wblistentityusage-example-aspect": "Отримати сторінки, що використовують сутність <kbd>Q2</kbd>, і де аспектом було посилання на сайт, або ж твердження.",
-	"apihelp-query+pageterms-description": "Отримати {{WBREPONAME}}-терміни (зазвичай назви, описи та альтернативні назви), пов'язані зі сторінкою за допомогою відповідного елемента даних.",
 	"apihelp-query+pageterms-summary": "Отримати {{WBREPONAME}}-терміни (зазвичай назви, описи та альтернативні назви), пов'язані зі сторінкою через елемент даних.",
 	"apihelp-query+pageterms-example-simple": "Отримати всі терміни, пов'язані зі сторінкою «London» мовою користувача.",
 	"apihelp-query+pageterms-example-label-en": "Отримати назви та псевдоніми, пов'язані з англомовною сторінкою «London».",
@@ -46,7 +43,6 @@
 	"apihelp-query+description-paramvalue-prefersource-central": "Центральні описи з пов'язаного елемента проекту {{WBREPONAME}}.",
 	"apihelp-query+description-example": "Отримати опис для сторінки «London».",
 	"apihelp-query+description-example-central": "Отримати опис для сторінки «London», віддаючи перевагу центральному опису, якщо такий існує.",
-	"apihelp-query+wikibase-description": "Отримати інформацію про клієнт Wikibase і пов'язаний репозиторій Wikibase.",
 	"apihelp-query+wikibase-summary": "Отримати інформацію про клієнта Вікібази та пов'язаний репозиторій Вікібази.",
 	"apihelp-query+wikibase-example": "Отримати URL-адресу та іншу інформацію про клієнт і репозиторій Wikibase.",
 	"apihelp-query+wikibase-param-prop": "кі властивості отримати:\n;<kbd>url</kbd>: Базовий URL, шлях скрипту і шлях статті для репозиторія Wikibase.\n;<kbd>siteid</kbd>: siteid цього сайту.",

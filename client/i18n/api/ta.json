@@ -6,7 +6,6 @@
 	},
 	"apihelp-query+wbentityusage-param-entities": "இந்த உருப்படியை பயன்படுத்தும் பக்கத்தை மட்டும் பெறு.",
 	"apihelp-query+wbentityusage-param-limit": "எத்தனை உருப்படிகளின் பயன்பாட்டை பெற வேண்டும்",
-	"apihelp-query+wblistentityusage-description": "கொடுக்கப்பட்ட ஐடி ஐ பயன்படுத்தும் பக்கங்களை பெறு",
 	"apihelp-query+wblistentityusage-param-prop": "முடிவிற்க்கான பண்புகள்",
 	"apihelp-query+wblistentityusage-paramvalue-prop-url": "இதை இயற்றினால் உருப்படியின்  யூ.ஆர் எல்  முடிவுடன் சேர்க்கப்படும்",
 	"apihelp-query+wblistentityusage-param-aspect": "இந்த அம்சம் பயன்பாட்டிலுள்ள ஐடிகளை மட்டும் பெறு",

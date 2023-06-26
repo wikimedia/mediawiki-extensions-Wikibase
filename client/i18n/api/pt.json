@@ -8,7 +8,6 @@
 			"Vitorvicentevalente"
 		]
 	},
-	"apihelp-query+wbentityusage-description": "Devolve os identificadores de todas as entidades usadas nas páginas especificadas.",
 	"apihelp-query+wbentityusage-summary": "Devolve os identificadores de todas as entidades usadas nas páginas especificadas.",
 	"apihelp-query+wbentityusage-param-aspect": "Devolver só os identificadores de entidades que usaram este aspeto.",
 	"apihelp-query+wbentityusage-paramvalue-aspect-S": "São usadas as hiperligações intersites da entidade",
@@ -23,7 +22,6 @@
 	"apihelp-query+wbentityusage-param-entities": "Devolver só a página que usou estas entidades.",
 	"apihelp-query+wbentityusage-param-limit": "Quantas utilizações de entidades serão devolvidas.",
 	"apihelp-query+wbentityusage-example-simple": "Obter as entidades usadas na <kbd>Página principal</kbd>.",
-	"apihelp-query+wblistentityusage-description": "Devolve todas as páginas que usam os identificadores de identidades especificados.",
 	"apihelp-query+wblistentityusage-summary": "Devolve todas as páginas que usam os identificadores de identidades especificados.",
 	"apihelp-query+wblistentityusage-param-prop": "Propriedades para adicionar ao resultado.",
 	"apihelp-query+wblistentityusage-paramvalue-prop-url": "Se ativado, o URL da entidade será adicionado ao resultado.",
@@ -33,7 +31,6 @@
 	"apihelp-query+wblistentityusage-example-simple": "Obter as páginas que usam a entidade <kbd>Q2</kbd>.",
 	"apihelp-query+wblistentityusage-example-url": "Obter as páginas que usam a entidade <kbd>Q2</kbd> com URL incluído.",
 	"apihelp-query+wblistentityusage-example-aspect": "Obter as páginas que usam a entidade <kbd>Q2</kbd> e cujo aspeto era hiperligação intersites ou declaração.",
-	"apihelp-query+pageterms-description": "Obter os termos {{WBREPONAME}} (tipicamente rótulos, descrições e nomes alternativos) associados a uma página através de uma hiperligação intersites.",
 	"apihelp-query+pageterms-summary": "Obter os termos {{WBREPONAME}} (tipicamente rótulos, descrições e nomes alternativos) associados a uma página através de uma hiperligação intersites.",
 	"apihelp-query+pageterms-example-simple": "Obter todos os termos associados à página 'Londres', na língua do utilizador.",
 	"apihelp-query+pageterms-example-label-en": "Obter os rótulos e nomes alternativos associados à página 'Londres', em inglês.",
@@ -46,7 +43,6 @@
 	"apihelp-query+description-paramvalue-prefersource-central": "Descrições centralizadas, do elemento {{WBREPONAME}} associado.",
 	"apihelp-query+description-example": "Obter a descrição para a página 'London'.",
 	"apihelp-query+description-example-central": "Obter a descrição para a página 'London', dando preferência à descrição centralizada se esta existir.",
-	"apihelp-query+wikibase-description": "Obter informação sobre o cliente Wikibase e o repositório Wikibase associado.",
 	"apihelp-query+wikibase-summary": "Obter informação sobre o cliente Wikibase e o repositório Wikibase associado.",
 	"apihelp-query+wikibase-example": "Obter o endereço do URL e outras informações do cliente e repositório Wikibase",
 	"apihelp-query+wikibase-param-prop": "Que propriedades obter:\n;<kbd>url</kbd>: URL de base, caminho dos scripts e caminho dos artigos no repositório Wikibase.\n;<kbd>siteid</kbd>: O identificador deste sítio.",

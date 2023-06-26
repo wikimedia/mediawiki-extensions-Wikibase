@@ -11,7 +11,6 @@
 			"Tiberius1701"
 		]
 	},
-	"apihelp-query+wbentityusage-description": "Devuelve todos los identificadores de entidad utilizados en las páginas dadas.",
 	"apihelp-query+wbentityusage-summary": "Devuelve todos los identificadores de entidades utilizados en las páginas indicadas.",
 	"apihelp-query+wbentityusage-param-aspect": "Devolver solo los identificadores de entidad que utilizaron este aspecto.",
 	"apihelp-query+wbentityusage-paramvalue-aspect-S": "Se utilizan los enlaces de sitio de la entidad.",
@@ -26,7 +25,6 @@
 	"apihelp-query+wbentityusage-param-entities": "Devolver solo la página que utilizó estas entidades.",
 	"apihelp-query+wbentityusage-param-limit": "Número de utilizaciones de entidades que devolver.",
 	"apihelp-query+wbentityusage-example-simple": "Obtener entidades utilizadas en la página <kbd>Main Page</kbd>.",
-	"apihelp-query+wblistentityusage-description": "Devuelve todas las páginas que utilizan los identificadores de entidad dados.",
 	"apihelp-query+wblistentityusage-summary": "Devuelve todas las páginas que utilizan los identificadores de entidad especificados.",
 	"apihelp-query+wblistentityusage-param-prop": "Propiedades que añadir al resultado.",
 	"apihelp-query+wblistentityusage-paramvalue-prop-url": "Si está activado, se añadirá al resultado el URL de la entidad.",
@@ -36,7 +34,6 @@
 	"apihelp-query+wblistentityusage-example-simple": "Obtener páginas que utilicen la entidad <kbd>Q2</kbd>.",
 	"apihelp-query+wblistentityusage-example-url": "Obtener páginas que utilicen la entidad <kbd>Q2</kbd> con la URL incluida.",
 	"apihelp-query+wblistentityusage-example-aspect": "Obtener páginas que utilicen la entidad <kbd>Q2</kbd> y cuyo aspecto fue enlace de sitio o declaración.",
-	"apihelp-query+pageterms-description": "Obtener los términos de {{WBREPONAME}} (normalmente, etiquetas, descripciones y alias) asociados con una página mediante un enlace de sitio.",
 	"apihelp-query+pageterms-summary": "Obtener los términos de {{WBREPONAME}} (normalmente, etiquetas, descripciones y alias) asociados con una página mediante un enlace de sitio.",
 	"apihelp-query+pageterms-example-simple": "Obtener todos los términos asociados con la página 'London', en el idioma del usuario.",
 	"apihelp-query+pageterms-example-label-en": "Obtener etiquetas y alias asociados con la página 'London', en inglés.",
@@ -49,7 +46,6 @@
 	"apihelp-query+description-paramvalue-prefersource-central": "Descripciones centrales provenientes del elemento asociado de {{WBREPONAME}}.",
 	"apihelp-query+description-example": "Obtener la descripción de la página «Londres».",
 	"apihelp-query+description-example-central": "Obtener la descripción de la página «Londres», con preferencia a la descripción central, si existe.",
-	"apihelp-query+wikibase-description": "Obtener información acerca del cliente Wikibase y el repositorio Wikibase asociado.",
 	"apihelp-query+wikibase-summary": "Obtener información sobre el cliente de Wikibase y el repositorio Wikibase asociado.",
 	"apihelp-query+wikibase-example": "Obtener la ruta de URL y otra información acerca del cliente y repositorio de Wikibase.",
 	"apihelp-query+wikibase-param-prop": "Qué propiedades se obtendrán:\n;<kbd>url</kbd>: URL de base, ruta de secuencia de órdenes y ruta de artículo del repositorio de Wikibase.\n;<kbd>siteid</kbd>: el identificador de este sitio."

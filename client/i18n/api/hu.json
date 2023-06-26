@@ -7,7 +7,6 @@
 	"apihelp-query+wbentityusage-param-prop": "Az eredményhez adandó tulajdonságok.",
 	"apihelp-query+wblistentityusage-param-prop": "Az eredményhez adandó tulajdonságok.",
 	"apihelp-query+pageterms-example-label-en": "A „London” laphoz angolul kapcsolt címkék és más nevek lekérdezése.",
-	"apihelp-query+wikibase-description": "Információk a Wikibase kliensről és a kapcsolt Wikibase adattárról.",
 	"apihelp-query+wikibase-example": "URL-útvonal és más információk lekérdezése a Wikibase kliensről és adattárról.",
 	"apihelp-query+wikibase-param-prop": "A lekérdezendő tulajdonságok:\n;<kbd>url</kbd>: A Wikivase adattár alap URL-je, szkriptútvonala és szócikkútvonala.\n;<kbd>siteid</kbd>: Ennek az oldalnak az azonosítója."
 }

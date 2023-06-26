@@ -7,7 +7,6 @@
 			"Wladek92"
 		]
 	},
-	"apihelp-query+wbentityusage-description": "Renvoie tous les identifiants d’entité utilisés dans les pages données.",
 	"apihelp-query+wbentityusage-summary": "Renvoie tous les identifiants d’entité utilisés dans les pages données.",
 	"apihelp-query+wbentityusage-param-aspect": "Renvoyer uniquement les identifiants d’entité qui ayant utilisé cet aspect.",
 	"apihelp-query+wbentityusage-paramvalue-aspect-S": "Les liens de site de l’entité sont utilisés",
@@ -22,7 +21,6 @@
 	"apihelp-query+wbentityusage-param-entities": "Renvoyer uniquement la page ayant utilisé ces entités.",
 	"apihelp-query+wbentityusage-param-limit": "Combien d’utilisations d’entités renvoyer.",
 	"apihelp-query+wbentityusage-example-simple": "Obtenir les entités utilisées dans la page <kbd>Main Page</kbd> (Page d’accueil).",
-	"apihelp-query+wblistentityusage-description": "Renvoie toutes les pages qui utilisent les identifiants d’entité donnés.",
 	"apihelp-query+wblistentityusage-summary": "Renvoie toutes les pages qui utilisent les identifiants d’entités donnés.",
 	"apihelp-query+wblistentityusage-param-prop": "Propriétés à ajouter au résultat.",
 	"apihelp-query+wblistentityusage-paramvalue-prop-url": "Si activé, l’URL de l’entité sera ajoutée au résultat.",
@@ -32,7 +30,6 @@
 	"apihelp-query+wblistentityusage-example-simple": "Obtenir les pages qui utilisent l’entité <kbd>Q2</kbd>.",
 	"apihelp-query+wblistentityusage-example-url": "Obtenir les pages qui utilisent l’entité <kbd>Q2</kbd> avec l’URL incluse.",
 	"apihelp-query+wblistentityusage-example-aspect": "Obtenir les pages qui utilisent l’entité <kbd>Q2</kbd> et dont l’aspect était un lien de site ou une déclaration.",
-	"apihelp-query+pageterms-description": "Obtenir les termes de {{WBREPONAME}} (typiquement, les libellés, les descriptions et les alias) associés à une page via un lien de site.",
 	"apihelp-query+pageterms-summary": "Obtenir les termes de {{WBREPONAME}} (typiquement, les libellés, descriptions et alias) associés à une page via un lien de site.",
 	"apihelp-query+pageterms-example-simple": "Obtenir tous les termes associés avec la page « Londres », dans la langue de l’utilisateur.",
 	"apihelp-query+pageterms-example-label-en": "Obtenir les libellés et les alias associés avec la page « London », en anglais.",
@@ -45,7 +42,6 @@
 	"apihelp-query+description-paramvalue-prefersource-central": "Descriptions centrales de l'élément associé  {{WBREPONAME}} .",
 	"apihelp-query+description-example": "Obtenir la description de la page 'London'.",
 	"apihelp-query+description-example-central": "Obtenez la description de la page 'London', en préférant la description centrale si elle existe.",
-	"apihelp-query+wikibase-description": "Obtenir des informations sur le client Wikibase et le référentiel Wikibase associé.",
 	"apihelp-query+wikibase-summary": "Obtenir des informations sur le client Wikibase et le dépôt Wikibase associé.",
 	"apihelp-query+wikibase-example": "Obtenir le chemin de l’URL et d’autres informations sur le client et le référentiel Wikibase.",
 	"apihelp-query+wikibase-param-prop": "Quelles propriétés obtenir :\n;<kbd>url</kbd>: URL de base, chemin du script et chemin de l’article du référentiel Wikibase.\n;<kbd>siteid</kbd>: Le siteid de ce site.",

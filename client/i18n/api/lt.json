@@ -12,7 +12,6 @@
 	"apihelp-query+wbentityusage-param-entities": "Gražinti tik puslapį, kuris naudoja šiuos objektus.",
 	"apihelp-query+wbentityusage-param-limit": "Kiek objektų panaudojimų gražinti.",
 	"apihelp-query+wbentityusage-example-simple": "Gauti subjektus, panaudotus puslapyje <kbd>Main Page</kbd>.",
-	"apihelp-query+wblistentityusage-description": "Gražina visus puslapius, kurie naudoja pateiktus objektų ID.",
 	"apihelp-query+wblistentityusage-param-prop": "Savybės, kurias pridėti prie rezultato.",
 	"apihelp-query+wblistentityusage-paramvalue-prop-url": "jei įjungta, objekto url bus pridėtas prie rezultato.",
 	"apihelp-query+wblistentityusage-param-aspect": "Gražinti tik subjekto ID, kurie naudoja šį aspektą.",
@@ -20,11 +19,9 @@
 	"apihelp-query+wblistentityusage-param-limit": "Kiek objekto naudojimų gražinti.",
 	"apihelp-query+wblistentityusage-example-simple": "Gauti puslapius, kurie naudoją objektą <kbd>Q2</kbd>.",
 	"apihelp-query+wblistentityusage-example-url": "Gauti puslapius, kurie naudoją objektą <kbd>Q2</kbd> su URL.",
-	"apihelp-query+pageterms-description": "Gauti su puslapiu susijusias sąlygas per susijusį duomenų įrašą. Viki-pagrindo esybės puslapyje, esybių terminai yra naudojami tiesiogiai.\nPastaba: Repozitorijos vikyje, puslapių-terminai veikia tik tiesiogiai esybės puslapiuose, bet ne puslapiuose susietuose su įrašu. Tai gali keistis ateityje.",
 	"apihelp-query+pageterms-example-simple": "Gauti visus su puslapiu \"Londonas\" susijusius terminus naudotojo kalba.",
 	"apihelp-query+pageterms-example-label-en": "Gauti žymas ir pseudonimus, susijusius su puslapiu \"Londonas\", anglų kalba.",
 	"apihelp-query+pageterms-param-terms": "Grąžintinų terminų tipai, pvz. \"apibūdinimas\". Jei nenurodyta, grąžinami visi tipai.",
-	"apihelp-query+wikibase-description": "Gauti informacijos apie Wikibase klientą ir susijusią Wikibase saugyklą.",
 	"apihelp-query+wikibase-example": "Gauti URL kelią ir kitos informacijos apie Wikibase klientą ir saugyklą.",
 	"apihelp-query+wikibase-param-prop": "Kurias savybes gauti:\n;<kbd>url</kbd>: Bazinis URL, Wikibase repozitorijos scenarijaus ir straipsnio keliai.\n;<kbd>siteid</kbd>: Šio puslapio ID."
 }

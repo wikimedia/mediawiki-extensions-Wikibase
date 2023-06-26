@@ -5,7 +5,6 @@
 			"Guycn2"
 		]
 	},
-	"apihelp-query+wbentityusage-description": "Ги дава сите назнаки на единици користени на дадени страници.",
 	"apihelp-query+wbentityusage-summary": "Ги дава сите назнаки на единиците во дадени страници.",
 	"apihelp-query+wbentityusage-param-aspect": "Дај ја само назнаката на единицата што се користи во овој аспект.",
 	"apihelp-query+wbentityusage-paramvalue-aspect-S": "Викиврските на единицата се во употреба",
@@ -20,7 +19,6 @@
 	"apihelp-query+wbentityusage-param-entities": "Давај само страници што ги користат следниве единици.",
 	"apihelp-query+wbentityusage-param-limit": "Колку единици да има во изводот.",
 	"apihelp-query+wbentityusage-example-simple": "Дај единици што се користат на страницата <kbd>Main Page</kbd>.",
-	"apihelp-query+wblistentityusage-description": "Ги дава ситге страници што користат единица со оваа назнака.",
 	"apihelp-query+wblistentityusage-summary": "Ги дава сите страници што ја користат дадената назнака на единцата.",
 	"apihelp-query+wblistentityusage-param-prop": "Својства што ќе се додадат во исходот.",
 	"apihelp-query+wblistentityusage-paramvalue-prop-url": "Ако е овозможено, URL на единицата што ќе се придодаде кон исходот.",
@@ -30,7 +28,6 @@
 	"apihelp-query+wblistentityusage-example-simple": "Дај ги страниците што ја користат единицата <kbd>Q2</kbd>.",
 	"apihelp-query+wblistentityusage-example-url": "Дај ги страниците што ја користат единицата <kbd>Q2</kbd> со вклучена URL.",
 	"apihelp-query+wblistentityusage-example-aspect": "Дај ги страниците што ја користат единицата <kbd>Q2</kbd> и каде аспектот е викиврска или исказ.",
-	"apihelp-query+pageterms-description": "Дај поими од {{WBREPONAME}} (обично натписи, описи и истозначници) поврзани со страница преку викиврска.",
 	"apihelp-query+pageterms-summary": "Дај поими од {{WBREPONAME}} (обично натписи, описи и истозначници) поврзани со страница преку викиврска.",
 	"apihelp-query+pageterms-example-simple": "Дај ги сите поими поврзани со страницата „Лондон“, во корисничката страница.",
 	"apihelp-query+pageterms-example-label-en": "Дај ги натписите и истозначниците поврзани со страницата „Лондон“, на македонски.",
@@ -43,7 +40,6 @@
 	"apihelp-query+description-paramvalue-prefersource-central": "Централните описи од поврзаниот предмет на {{WBREPONAME}}.",
 	"apihelp-query+description-example": "Дај опис за страницата „Лондон“.",
 	"apihelp-query+description-example-central": "Дај опис за страницата „Лондон“, претпочитајќи го централниот опис, ако постои.",
-	"apihelp-query+wikibase-description": "Дај информации за клиентот на Викибазата и за поврзаното складиште на Викибазата",
 	"apihelp-query+wikibase-summary": "Дај информации за клиентот на Викибазата и за поврзаното складиште на Викибазата.",
 	"apihelp-query+wikibase-example": "Дај URL-патека и други информации за складиштето на Викибазата.",
 	"apihelp-query+wikibase-param-prop": "Кои својства да се дадат:\n;<kbd>url</kbd>: URL на базата, патека на скриптата и патека на статијата на складиштето на Викибазата.\n;<kbd>siteid</kbd>: Назнаката на ова мрежно место.",

@@ -6,7 +6,6 @@
 			"Tranve"
 		]
 	},
-	"apihelp-query+wbentityusage-description": "回傳在指定頁面的所有使用到的項目 ID。",
 	"apihelp-query+wbentityusage-summary": "回傳在指定頁面的所有使用到的項目 ID。",
 	"apihelp-query+wbentityusage-param-aspect": "僅回傳有使用到此方面的項目 ID。",
 	"apihelp-query+wbentityusage-param-prop": "添加至結果的屬性。",
@@ -14,7 +13,6 @@
 	"apihelp-query+wbentityusage-param-entities": "僅回傳使用到這些項目的頁面。",
 	"apihelp-query+wbentityusage-param-limit": "要回傳的項目使用量。",
 	"apihelp-query+wbentityusage-example-simple": "取得在 <kbd>Main Page</kbd> 頁面使用到的項目。",
-	"apihelp-query+wblistentityusage-description": "回傳所有使用指定項目 ID 的頁面。",
 	"apihelp-query+wblistentityusage-summary": "回傳所有使用指定項目 ID 的頁面。",
 	"apihelp-query+wblistentityusage-param-prop": "添加至結果的屬性。",
 	"apihelp-query+wblistentityusage-paramvalue-prop-url": "若有啟用，項目的 url 會被添加在結果裡。",
@@ -24,7 +22,6 @@
 	"apihelp-query+wblistentityusage-example-simple": "取得使用項目 <kbd>Q2</kbd> 的頁面。",
 	"apihelp-query+wblistentityusage-example-url": "取得有使用包含 URL 的 <kbd>Q2</kbd> 項目之頁面。",
 	"apihelp-query+wblistentityusage-example-aspect": "取得使用項目 <kbd>Q2</kbd> 且為網站連結或陳述方面的頁面。",
-	"apihelp-query+pageterms-description": "取得透過站台連結關聯至頁面的{{WBREPONAME}}名稱（代表性標籤、描述，以及別名）。",
 	"apihelp-query+pageterms-summary": "取得透過站台連結關聯至頁面的{{WBREPONAME}}名稱（代表性標籤、描述，以及別名）。",
 	"apihelp-query+pageterms-example-simple": "取得所有關聯到頁面「London」，以使用者語言的項目。",
 	"apihelp-query+pageterms-example-label-en": "取得關聯到頁面「London」的英語標籤和別名。",
@@ -36,7 +33,6 @@
 	"apihelp-query+description-paramvalue-prefersource-central": "來自關聯{{WBREPONAME}}項目的中心描述。",
 	"apihelp-query+description-example": "取得頁面「London」的描述。",
 	"apihelp-query+description-example-central": "取得頁面「London」的描述，若中心描述存在則為首選。",
-	"apihelp-query+wikibase-description": "取得有關 Wikibase 客戶端以及關聯 Wikibase 儲存庫的資訊。",
 	"apihelp-query+wikibase-summary": "取得有關 Wikibase 客戶端以及關聯 Wikibase 儲存庫的資訊。",
 	"apihelp-query+wikibase-example": "取得有關 Wikibase 客戶端以及儲存庫的 URL 路徑以及其它資訊。",
 	"apihelp-query+wikibase-param-prop": "要取得的屬性：\n;<kbd>url</kbd>：基本 URL、Wikibase 儲存庫的腳本路徑、以及條目路徑。\n;<kbd>siteid</kbd>： 此網站的站台 id。",

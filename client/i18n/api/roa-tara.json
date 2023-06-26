@@ -4,7 +4,6 @@
 			"Joetaras"
 		]
 	},
-	"apihelp-query+wbentityusage-description": "Tuèrne tutte le ID de l'entità ausate jndr'à le pàggene indicate.",
 	"apihelp-query+wbentityusage-summary": "Tuèrne tutte le ID de l'entità ausate jndr'à le pàggene indicate.",
 	"apihelp-query+wbentityusage-param-aspect": "Tuèrne sulamende l'ID endità ca ausane stu aspette.",
 	"apihelp-query+wbentityusage-paramvalue-aspect-S": "Le collegaminde a 'u site de l'entità sò ausate",
@@ -19,7 +18,6 @@
 	"apihelp-query+wbentityusage-param-entities": "Tuèrne sulamende le pàggene ca ausane ste endità.",
 	"apihelp-query+wbentityusage-param-limit": "Quanda ause de le endità adda turnà.",
 	"apihelp-query+wbentityusage-example-simple": "Pigghie le endità ausate jndr'à pàgene <kbd>Main Page</kbd>.",
-	"apihelp-query+wblistentityusage-description": "Tuèrne tutte le pàggene ca ausane le ID endità indicate.",
 	"apihelp-query+wblistentityusage-summary": "Tuèrne tutte le pàggene ca ausane le ID endità indicate.",
 	"apihelp-query+wblistentityusage-param-prop": "Probbietà da aggiungere a 'u resultate.",
 	"apihelp-query+wblistentityusage-paramvalue-prop-url": "Ce abbilitate, l'url de l'identità avène aggiunde a 'u resultate.",
@@ -29,7 +27,6 @@
 	"apihelp-query+wblistentityusage-example-simple": "Pigghie le pàggene ca ausane l'endità <kbd>Q2</kbd>.",
 	"apihelp-query+wblistentityusage-example-url": "Pigghie le pàggene ca ausane l'endità <kbd>Q2</kbd> cu l'URL 'ngluse.",
 	"apihelp-query+wblistentityusage-example-aspect": "Pigghie le pàggene ca ausane l'endità <kbd>Q2</kbd> e l'aspette ere 'nu collegamende a 'u site o 'na dichiarazione.",
-	"apihelp-query+pageterms-description": "Pigghie le termine {{WBREPONAME}} (normalmende etichette, descriziune e alias) associate a 'na pàgene ausanne 'nu collegamende a 'u site.",
 	"apihelp-query+pageterms-summary": "Pigghie le termine {{WBREPONAME}} (normalmende etichette, descriziune e alias) associate a 'na pàgene ausanne 'nu collegamende a 'u site.",
 	"apihelp-query+pageterms-example-simple": "Pigghie tutte le vôsce associate cu 'a pàgene 'London', jndr'à lènghe de l'utende.",
 	"apihelp-query+pageterms-example-label-en": "Pigghie le atichette e le alias associate a 'a pàgene 'London', in inglese.",
@@ -42,7 +39,6 @@
 	"apihelp-query+description-paramvalue-prefersource-central": "Descriziune cendrale da 'a vôsce associate {{WBREPONAME}}.",
 	"apihelp-query+description-example": "Pigghie 'a descrizione d'a pàgene 'Londre'.",
 	"apihelp-query+description-example-central": "Pigghie 'a descrizione d'a pàgene 'Londre', preferenne 'a descrizione cendralizzate ce esiste.",
-	"apihelp-query+wikibase-description": "Pigghie le 'mbormaziune sus a 'u client Wikibase e l'archivije Wikibase associate.",
 	"apihelp-query+wikibase-summary": "Pigghie le 'mbormaziune sus a 'u client Wikibase e l'archivije Wikibase associate.",
 	"apihelp-query+wikibase-example": "Pigghie 'u percorse URL e otre 'mbormaziune sus a 'u client e l'archivije Wikibase.",
 	"apihelp-query+wikibase-param-prop": "Ce probbietà ha pigghià:\n;<kbd>url</kbd>: URL base, percorse de script e de le vôsce de l'archivije Wikibase\n;<kbd>siteid</kbd>: l'idendificatore de stu site.",

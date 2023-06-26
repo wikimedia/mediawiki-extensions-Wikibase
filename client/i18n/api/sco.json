@@ -4,11 +4,9 @@
 			"AmaryllisGardener"
 		]
 	},
-	"apihelp-query+pageterms-description": "Get terms associatit wi a page via an associatit data item. On a wikibase entity page, the entity terms are uised directly.\nCaveat: On a repo wiki, pageterms anly wirks directly on entity pages, nae on pages connectit tae an item. This mey chynge in the futur.",
 	"apihelp-query+pageterms-example-simple": "Get aw terms associatit wi the page 'London', in the uiser leid.",
 	"apihelp-query+pageterms-example-label-en": "Get labels an aliases associatit wi the page 'London', in Scots.",
 	"apihelp-query+pageterms-param-terms": "The teeps o terms to get, e.g. 'description'. If nae specified, aw teeps are returned.",
-	"apihelp-query+wikibase-description": "Get information aboot the Wikibase client an the associatit Wikibase repository.",
 	"apihelp-query+wikibase-example": "Get URL path an ither information aboot Wikibase client an repository.",
 	"apihelp-query+wikibase-param-prop": "Which properties tae get:\n;<kbd>url</kbd>: Base URL, script path an airticle path o the Wikibase repository.\n;<kbd>siteid</kbd>: The siteid o this steid."
 }

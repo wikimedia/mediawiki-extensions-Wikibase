@@ -7,7 +7,6 @@
 			"Guycn2"
 		]
 	},
-	"apihelp-query+wbentityusage-description": "Retorna todas as IDs de entidade usadas nas páginas fornecidas.",
 	"apihelp-query+wbentityusage-summary": "Retorna todas as IDs de entidade usadas nas páginas fornecidas.",
 	"apihelp-query+wbentityusage-param-aspect": "Apenas retorna IDs de entidades que usaram esse aspecto.",
 	"apihelp-query+wbentityusage-paramvalue-aspect-S": "Os sitelinks da entidade são usados",
@@ -22,7 +21,6 @@
 	"apihelp-query+wbentityusage-param-entities": "Somente uma página de retorno que usou essas entidades.",
 	"apihelp-query+wbentityusage-param-limit": "Quantos usos da entidade retornar.",
 	"apihelp-query+wbentityusage-example-simple": "Obtenha entidades usadas na página <kbd>Main Page</kbd>.",
-	"apihelp-query+wblistentityusage-description": "Retorna todas as páginas que usam os IDs de entidade fornecidas.",
 	"apihelp-query+wblistentityusage-summary": "Retorna todas as páginas que usam os IDs de entidade fornecidas.",
 	"apihelp-query+wblistentityusage-param-prop": "Propriedades a adicionar ao resultado.",
 	"apihelp-query+wblistentityusage-paramvalue-prop-url": "Se ativado, o URL da entidade será adicionado ao resultado.",
@@ -32,7 +30,6 @@
 	"apihelp-query+wblistentityusage-example-simple": "Obter páginas que usam a entidade <kbd>Q2</kbd>.",
 	"apihelp-query+wblistentityusage-example-url": "Obter páginas que usam a entidade <kbd>Q2</kbd> com o URL incluído.",
 	"apihelp-query+wblistentityusage-example-aspect": "Obter páginas que usam a entidade <kbd>Q2</kbd> e o aspecto foi sitelink ou declaração.",
-	"apihelp-query+pageterms-description": "Obtenha os termos {{WBREPONAME}} (geralmente rótulos, descrições e alias) associados a uma página por meio de um link de site.",
 	"apihelp-query+pageterms-summary": "Obtenha os termos {{WBREPONAME}} (geralmente rótulos, descrições e alias) associados a uma página por meio de um link de site.",
 	"apihelp-query+pageterms-example-simple": "Obtenha todos os termos associados à página 'London', no idioma do usuário.",
 	"apihelp-query+pageterms-example-label-en": "Obtenha rótulos e alias associados à página 'London', em inglês.",
@@ -45,7 +42,6 @@
 	"apihelp-query+description-paramvalue-prefersource-central": "Descrições centralizadas, do elemento {{WBREPONAME}} associado.",
 	"apihelp-query+description-example": "Obter a descrição para a página 'London'.",
 	"apihelp-query+description-example-central": "Obter a descrição para a página 'London', dando preferência à descrição centralizada se esta existir.",
-	"apihelp-query+wikibase-description": "Obtenha informações sobre o cliente Wikibase e o repositório Wikibase associado.",
 	"apihelp-query+wikibase-summary": "Obtenha informações sobre o cliente Wikibase e o repositório Wikibase associado.",
 	"apihelp-query+wikibase-example": "Obter o caminho do URL e outras informações sobre o cliente e o repositório Wikibase.",
 	"apihelp-query+wikibase-param-prop": "Quais as propriedades a serem obtidas:\n;<kbd>url</kbd>: URL básico, caminho do script e caminho do artigo do repositório do Wikibase.\n;<kbd>siteid</kbd>: O siteid deste site.",

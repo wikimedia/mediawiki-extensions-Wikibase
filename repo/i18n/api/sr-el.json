@@ -5,7 +5,6 @@
 	"apihelp-wbeditentity-example-12": "Uklanja oznaku",
 	"apihelp-wbgetentities-example-1": "Prikaži entitete sa identifikatorom <samp>Q42</samp> sa svim dostupnim atributima na svim dostupnim jezicima",
 	"apihelp-wbgetentities-example-4": "Prikaži entitete sa identifikatorom <samp>Q42</samp> sa svim dostupnim atributima na engleskom jeziku",
-	"apihelp-wbmergeitems-description": "Spaja više stavki.",
 	"apihelp-wbmergeitems-summary": "Spaja više stavki.",
 	"apihelp-wbmergeitems-param-fromid": "Identifikator za spajanje od",
 	"apihelp-wbmergeitems-param-toid": "Identifikator za spajanje sa",

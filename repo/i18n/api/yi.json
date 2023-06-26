@@ -4,12 +4,10 @@
 			"פוילישער"
 		]
 	},
-	"apihelp-wbcreateclaim-description": "שאפֿט וויקיבאזע טענות.",
 	"apihelp-wbcreateclaim-summary": "שאפֿט וויקיבאזע טענות.",
 	"apihelp-wbeditentity-example-2": "שאפן א נייעם אביעקט און שטעלן באצייכענונגען פאר <var>de</var> און  <var>en</var>",
 	"apihelp-wbeditentity-example-12": "אראפנעמען א באצייכענונג",
 	"apihelp-wbmergeitems-param-fromid": "דער אידענטיפֿיצירער פון וואס צונויפֿצומישן",
-	"apihelp-wbremoveclaims-description": "נעמט אראפ וויקיבאזע טענות.",
 	"apihelp-wbsetdescription-param-language": "שפראך פון באשרייבונג",
 	"apihelp-wbsetlabel-param-language": "שפראך פון דער באצייכענונג"
 }

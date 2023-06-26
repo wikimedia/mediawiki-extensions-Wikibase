@@ -12,6 +12,7 @@
 			"Sibabrata Banerjee",
 			"Sohom Datta",
 			"Titodutta",
+			"Yahya",
 			"ZI Jony",
 			"আজিজ",
 			"আফতাবুজ্জামান"
@@ -52,6 +53,7 @@
 	"wikibase-description-empty": "কোনো বিবরণ যোগ করা হয়নি",
 	"wikibase-description-edit-placeholder": "বিবরণ লিখুন",
 	"wikibase-description-edit-placeholder-language-aware": "$1 ভাষায় একটি বিবরণ লিখুন",
+	"wikibase-description-not-applicable-title": "একটি বর্ণনা একাধিক ভাষার জন্য প্রযোজ্য নয়।",
 	"wikibase-aliases-edit-placeholder": "কিছু উপনাম লিখুন",
 	"wikibase-aliases-edit-placeholder-language-aware": "$1 ভাষায় কিছু উপনাম লিখুন",
 	"wikibase-aliases-edit-label": "উপনাম, উল্লম্ব দণ্ড দ্বারা বিভাজিত:",

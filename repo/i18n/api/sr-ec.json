@@ -11,7 +11,6 @@
 	"apihelp-wbeditentity-example-12": "Уклања ознаку",
 	"apihelp-wbgetentities-example-1": "Прикажи ентитете са идентификатором <samp>Q42</samp> са свим доступним атрибутима на свим доступним језицима",
 	"apihelp-wbgetentities-example-4": "Прикажи ентитете са идентификатором <samp>Q42</samp> са свим доступним атрибутима на енглеском језику",
-	"apihelp-wbmergeitems-description": "Спаја више ставки.",
 	"apihelp-wbmergeitems-summary": "Спаја више ставки.",
 	"apihelp-wbmergeitems-param-fromid": "Идентификатор за спајање од",
 	"apihelp-wbmergeitems-param-toid": "Идентификатор за спајање са",

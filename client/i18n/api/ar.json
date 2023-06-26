@@ -9,7 +9,6 @@
 			"ديفيد"
 		]
 	},
-	"apihelp-query+wbentityusage-description": "يرجع كل أرقام الكيانات المستخدمة في الصفحات المعطاة.",
 	"apihelp-query+wbentityusage-summary": "يرجع كل معرفات الكيان المستخدمة في الصفحات المعطاة.",
 	"apihelp-query+wbentityusage-param-aspect": "فقط أرجع أرقام الكيانات المستخدمة في هذا الجانب.",
 	"apihelp-query+wbentityusage-param-prop": "الخواص للإضافة للنتيجة.",
@@ -17,7 +16,6 @@
 	"apihelp-query+wbentityusage-param-entities": "فقط أرجع الصفحة التي تستخدم هذه الكيانات.",
 	"apihelp-query+wbentityusage-param-limit": "كم عدد استخدامات الكيانات للإرجاع.",
 	"apihelp-query+wbentityusage-example-simple": "الحصول على الكيانات المستخدمة في الصفحة <kbd>Main Page</kbd>.",
-	"apihelp-query+wblistentityusage-description": "يرجع كل الصفحات التي تستخدم أرقام الكيانات المعطاة.",
 	"apihelp-query+wblistentityusage-summary": "يرجع كل الصفحات التي تستخدم معرفات الكيانات المعطاة.",
 	"apihelp-query+wblistentityusage-param-prop": "خواص لإضافتها للنتيجة.",
 	"apihelp-query+wblistentityusage-paramvalue-prop-url": "لو مفعل فمسار الكيان ستتم إضافته للنتيجة.",
@@ -27,7 +25,6 @@
 	"apihelp-query+wblistentityusage-example-simple": "الحصول على الصفحات التي تستخدم الكيان <kbd>Q2</kbd>.",
 	"apihelp-query+wblistentityusage-example-url": "الحصول على الصفحات التي تستخدم الكيان <kbd>Q2</kbd> مع تضمين المسار.",
 	"apihelp-query+wblistentityusage-example-aspect": "الحصول على الصفحات التي تستخدم الكيان <kbd>Q2</kbd> والجانب كان وصلة موقع أو بيان.",
-	"apihelp-query+pageterms-description": "احصل على مصطلحات {{WBREPONAME}} (عادة التسميات والأوصاف والأسماء المستعارة) مقترنة بصفحة عبر وصلة موقع، في صفحة الكيان نفسها، يتم استخدام المصطلحات مباشرة. تحذير: على ويكي الريبو، لا تعمل هذه الوحدة إلا مباشرة على صفحات الكيانات، وليس على الصفحات المتصلة بأي كيان عبر وصلة موقع. هذا قد يتغير في المستقبل.",
 	"apihelp-query+pageterms-summary": "الحصول على مصلحات {{WBREPONAME}} (عادة العلامات والوصوفات والأسماء المستعارة) المصابة لصفحة من خلال وصلة موقع. على صفحة الكيان نفسها، المصطلحات مستخدمة مباشرة. ملاحظة: على ويكي مستودع، فهذا الجزء يعمل مباشرة فقط على صفحات الكيانات، وليس على الصفحات الموصولة لكيان من خلال وصلة موقع. هذا ربما يتغير في المستقبل.",
 	"apihelp-query+pageterms-example-simple": "الحصول على كل المصطلحات المرتبطة بالصفحة 'London'، بلغة المستخدم.",
 	"apihelp-query+pageterms-example-label-en": "الحصول على التسميات والاسماء المستعارة مع الصفحة 'London'، بالإنجليزية.",
@@ -40,7 +37,6 @@
 	"apihelp-query+description-paramvalue-prefersource-central": "وصف مركزي من عنصر {{WBREPONAME}} المقترن.",
 	"apihelp-query+description-example": "احصل على وصف لصفحة 'لندن'.",
 	"apihelp-query+description-example-central": "احصل على وصف لصفحة 'لندن'، مفضلا الوصف المركزي إذا كان موجودًا.",
-	"apihelp-query+wikibase-description": "الحصول على المعلومات حول عميل Wikibase ومستودع Wikibase المصاحب.",
 	"apihelp-query+wikibase-summary": "الحصول على معلومات حول عميل ويكي بيز ومستودع ويكي بيز المصاحب.",
 	"apihelp-query+wikibase-example": "الحصول على المسار والمعلومات الأخرى حول عميل ومستودع Wikibase.",
 	"apihelp-query+wikibase-param-prop": "ما هي الخواص للحصول عليها:\n;<kbd>url</kbd>: المسار الأساسي، مسار السكريبتات ومسار المقالات لمستودع Wikibase.\n;<kbd>siteid</kbd>: رقم الموقع لهذا الموقع."

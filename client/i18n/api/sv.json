@@ -7,7 +7,6 @@
 			"WikiPhoenix"
 		]
 	},
-	"apihelp-query+wbentityusage-description": "Returnerar alla enhets -ID som används på de angivna sidorna.",
 	"apihelp-query+wbentityusage-summary": "Returnerar alla enhets -ID som används på de angivna sidorna.",
 	"apihelp-query+wbentityusage-param-aspect": "Returnerar enbart enhets-ID som används på denna aspekt.",
 	"apihelp-query+wbentityusage-paramvalue-aspect-S": "Enhetens webbplatslänkar används",
@@ -22,7 +21,6 @@
 	"apihelp-query+wbentityusage-param-entities": "Endast en retursida för de som använder dessa enheter.",
 	"apihelp-query+wbentityusage-param-limit": "Hur många entitetsanvändningar att returnera.",
 	"apihelp-query+wbentityusage-example-simple": "Få enheter som används på sidan <kbd>Huvudsida</kbd>.",
-	"apihelp-query+wblistentityusage-description": "Returnera alla sidor som använder de givna entitets ID.",
 	"apihelp-query+wblistentityusage-summary": "Återkalla alla sidor som använder givna entitets ID",
 	"apihelp-query+wblistentityusage-param-prop": "Egenskaper att lägga till i resultat",
 	"apihelp-query+wblistentityusage-paramvalue-prop-url": "Om den är aktiverad kommer enhetens webbadress att läggas till i resultatet.",
@@ -32,7 +30,6 @@
 	"apihelp-query+wblistentityusage-example-simple": "Hämta sidor som använder entiteten <kbd>Q2</kbd>.",
 	"apihelp-query+wblistentityusage-example-url": "Hämta sidor som använder entiteten <kbd>Q2</kbd> med URL inkluderad.",
 	"apihelp-query+wblistentityusage-example-aspect": "Hämta sidor som använder entiteten <kbd>Q2</kbd> och aspekten var webbplatslänk eller uttalande.",
-	"apihelp-query+pageterms-description": "Få {{WBREPONAME}}-termerna (oftast etiketter, beskrivningar och alias) associerade med en sida via en sajtlänk.",
 	"apihelp-query+pageterms-summary": "Få {{WBREPONAME}} termerna (typiskt etiketter, beskrivningar och alias) associerade med en sida via en sid länk.",
 	"apihelp-query+pageterms-example-simple": "Få alla termer associerade med sidan 'London', på användarens språk.",
 	"apihelp-query+pageterms-example-label-en": "Få etiketter och alias associerade med sidan 'London', på engelska.",
@@ -45,7 +42,6 @@
 	"apihelp-query+description-paramvalue-prefersource-central": "Centrala beskrivningar från det associerade {{WBREPONAME}} objektet.",
 	"apihelp-query+description-example": "Hämta beskrivningen för sidan \"London\".",
 	"apihelp-query+description-example-central": "Hämta beskrivningen för sidan \"London\", helst den centrala beskrivningen om det finns någon.",
-	"apihelp-query+wikibase-description": "Hämta information om Wikibase-klienten och det tillhörande Wikibase-centralförvaret.",
 	"apihelp-query+wikibase-summary": "Hämta information om Wikibase-klienten och det associerade Wikibase-centralförvaret.",
 	"apihelp-query+wikibase-example": "Hämta URL-sökvägen och annan information om Wikibase-klienten och centralförvaret.",
 	"apihelp-query+wikibase-param-prop": "Vilka egenskaper att hämta:\n;<kbd>url</kbd>: Bas-URL, skript-sökväg och artikel-sökväg för Wikibase-centralförvaret.\n;<kbd>siteid</kbd>: siteid för denna webbplats.",

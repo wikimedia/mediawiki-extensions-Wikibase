@@ -4,14 +4,12 @@
 			"Fulup"
 		]
 	},
-	"apihelp-query+wbentityusage-description": "Adkas a ra an holl ID anaout implijet er pajennoù merket.",
 	"apihelp-query+wbentityusage-param-aspect": "Adkas hepken an ID anaout a ra gant an arvez-mañ.",
 	"apihelp-query+wbentityusage-param-prop": "Perzhioù da vezañ ouzhpennet d'an disoc'h.",
 	"apihelp-query+wbentityusage-paramvalue-prop-url": "Ma vez gweredekaet e vo ouzhpennet URL an entite",
 	"apihelp-query+wbentityusage-param-entities": "Adkas hepken ar pajennoù a ra gant an entite-se.",
 	"apihelp-query+wbentityusage-param-limit": "Niver a implijoù entite da adkas.",
 	"apihelp-query+wbentityusage-example-simple": "Kaout an entiteoù implijet er <kbd>bajenn degemer</kbd>.",
-	"apihelp-query+wblistentityusage-description": "Adkas an holl bajennoù a implij an IDoù entite merket.",
 	"apihelp-query+wblistentityusage-param-prop": "Perzhioù da vezañ ouzhpennet d'an disoc'h.",
 	"apihelp-query+wblistentityusage-paramvalue-prop-url": "Ma vez gweredekaet e vo ouzhpennet URL an entite d'an disoc'h.",
 	"apihelp-query+wblistentityusage-param-aspect": "Adkas hepken an IDoù entite a implij an arvez-mañ.",
@@ -20,11 +18,9 @@
 	"apihelp-query+wblistentityusage-example-simple": "Kaout ar pajennoù a ra gant an entite <kbd>Q2</kbd>.",
 	"apihelp-query+wblistentityusage-example-url": "Kaout ar pajennoù a implij an entite <kbd>Q2</kbd> gant o URL.",
 	"apihelp-query+wblistentityusage-example-aspect": "Kaout ar pajennoù a implij an entite <kbd>Q2</kbd> ha ma oa o arvez ul liamm lec'hienn pe un disklêriadenn.",
-	"apihelp-query+pageterms-description": "Kaout an termenoù liammet ouzh ur bajenn dre un elfenn roadenn liammet. War ur bajenn entite eus wikibase eo implijet war-eeun termenoù an entite.\nDiwallit mat : war ur wiki sanailhañ, termenoù ar pajennoù ne'z eont en-dro nemet war ar pajennoù entite. Marteze a-walc'h e cheñcho an dra-se en amzer da zont.",
 	"apihelp-query+pageterms-example-simple": "Kaout an holl dermenoù liammet ouzh ar bajenn 'London' e yezh an implijer.",
 	"apihelp-query+pageterms-example-label-en": "Kaout an tikedennoù hag an aliasoù liammet ouzh ar bajenn 'London', e saozneg.",
 	"apihelp-query+pageterms-param-terms": "Ar seurt termenoù da gaout, da sk. 'deskrivadur'. Ma n'eo ket resisaet e vo distroet kement seurt zo.",
-	"apihelp-query+wikibase-description": "Tapout titouroù diwar-benn arval ar Wikibase ha war kavlec'h Wikibase stag outañ.",
 	"apihelp-query+wikibase-example": "Tapout hent an URL ha titouroù all diwar-benn arval Wikibase hag ar c'havlec'h.",
 	"apihelp-query+wikibase-param-prop": "PEseurt perzhioù tapout :\n;<kbd>url</kbd>: URL diazez, hent ar skript ha hent pennad kavlec'h Wikibase.\n;<kbd>siteid</kbd>: ID al lec'hienn-mañ."
 }

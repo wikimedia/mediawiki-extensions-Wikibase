@@ -12,7 +12,6 @@
 	"apihelp-wblinktitles-param-totitle": "عنوان صفحه که با آن مطابقت دارد.\nهمراه با «به‌وبگاه» استفاده کنید تا تشکیل یک پیونداد کامل دهد.",
 	"apihelp-wbsearchentities-example-3": "مِنِی کردن ئەرا \"alphabet\" ئەانگلیسی ئەرا نوع خصوصیت",
 	"apihelp-query+entityterms-example-item": "گرفتن برچسب‌ها و نام‌های مستعار آیتم Q84.",
-	"apihelp-wbsetdescription-description": "برای یک جوهره ویکی‌بیس که منفرد باشد یک توضیحات قرار می‌دهد",
 	"apihelp-wbsetdescription-param-title": "عنوان صفحه که با آن مطابقت دارد.\nهمراه با «وبگاه» استفاده کنید تا تشکیل یک پیونداد کامل دهد.",
 	"apihelp-wbsetdescription-param-language": "زوون توضیحةل",
 	"apihelp-wbsetdescription-param-value": "مقدار برای تنظیم توضیحات",
