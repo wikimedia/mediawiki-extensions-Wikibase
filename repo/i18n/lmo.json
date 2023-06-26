@@ -457,7 +457,7 @@
 	"wikibase-search-namespace-mix": "Adsedess la messedada di spazzi de nom di entità e di artìcol in la ricerca l'è minga suportada. La sarà fada la ricerca domà in di spazzi de nom di entita.",
 	"wikibase-search-config-notfound": "Impostazzion de la ricerca a test complet trovada nò: $1",
 	"wikibase-search-config-badclass": "Class de costrutor de l'interogazzion minga bona: $1",
-	"wikibase-refresh-for-missing-datatype": "Impossibil trovà un tipo de dati $1 in del script del client local, forsi perchè el script de la cache a l'è andegher. Per risolver el problema prova atualizà el to programa de navigazzion passa de là de cache local (Ctrl-Shift-Roò Cmd-Shift-R in la magioranza di programa de navigazzion) .",
+	"wikibase-refresh-for-missing-datatype": "Impossibil trovà un tipo de dati $1 in del script del client local, forsi perchè el script de la cache a l'è andegher. Per risolver el problema prova atualizà el to curiosador passa de là de cache local (Ctrl-Shift-Roò Cmd-Shift-R in la magioranza di curiosador) .",
 	"wikibase-outdated-client-script": "Oh-oh, a gh'è besogn de atualizà de bon!",
 	"wikibase-shortcopyrightwarning-heading": "Atribuzzion de licenza",
 	"wikibase-entity-save-error-heading": "Un quaicoss l'è andad mal",

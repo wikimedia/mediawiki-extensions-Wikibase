@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"고솜"
+		]
+	},
+	"tooltip-t-wikibase": "얼긴 데이터 갈무리광 항목으로의 링크",
+	"wikibase-comment-update": "{{WBREPONAME}} 항목을 겡신ᄒᆞ여수다.",
+	"wikibase-dataitem": "{{WBREPONAME}}항목",
+	"wikibase-editlinks": "링크 바꼬기",
+	"wikibase-editlinkstitle": "말 ᄉᆞ시 링크 바꼬기",
+	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
+	"wikibase-rc-hide-wikidata-hide": "곱지기",
+	"wikibase-rc-hide-wikidata-show": "베우기",
+	"wikibase-rc-wikibase-edit-letter": "데",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}의 바꼼",
+	"wikibase-otherprojects": "ᄐᆞ난 졔훽서"
+}
