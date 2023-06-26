@@ -74,7 +74,7 @@ class ConceptUriSearchHelper implements EntitySearchHelper {
 	 */
 	private function getConceptUri( EntityId $entityId ) {
 		$baseUri = $this->getConceptBaseUri( $entityId );
-		return $baseUri . wfUrlencode( $entityId->getLocalPart() );
+		return $baseUri . wfUrlencode( $entityId->getSerialization() );
 	}
 
 	private function getConceptBaseUri( EntityId $entityId ): string {
