@@ -101,12 +101,6 @@ class EntityIdTest extends \PHPUnit\Framework\TestCase {
 		$this->assertIsString( $id->__toString() );
 	}
 
-	public function testIsForeign() {
-		$this->assertFalse( ( new ItemId( 'Q42' ) )->isForeign() );
-		$this->assertFalse( ( new ItemId( ':Q42' ) )->isForeign() );
-		$this->assertFalse( ( new NumericPropertyId( ':P42' ) )->isForeign() );
-	}
-
 	/**
 	 * @dataProvider instanceProvider
 	 */

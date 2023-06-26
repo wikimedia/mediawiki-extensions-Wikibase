@@ -150,15 +150,6 @@ abstract class SerializableEntityId implements EntityId {
 	}
 
 	/**
-	 * Returns true iff SerializableEntityId::getRepositoryName returns a non-empty string.
-	 *
-	 * @return bool
-	 */
-	public function isForeign() {
-		return $this->repositoryName !== '';
-	}
-
-	/**
 	 * @param string $id
 	 *
 	 * @return string
