@@ -199,8 +199,8 @@ class PropertyInfoTableTest extends MediaWikiIntegrationTestCase {
 
 	private function getEntityComposer() {
 		return new EntityIdComposer( [
-			Property::ENTITY_TYPE => function( $repository, $uniquePart ) {
-				return NumericPropertyId::newFromRepositoryAndNumber( $repository, $uniquePart );
+			Property::ENTITY_TYPE => function( $uniquePart ) {
+				return new NumericPropertyId( 'P' . $uniquePart );
 			},
 		] );
 	}

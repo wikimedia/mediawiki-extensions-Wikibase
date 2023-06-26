@@ -80,7 +80,7 @@ class SqlSiteLinkConflictLookupTest extends MediaWikiIntegrationTestCase {
 
 	private function newSqlSiteLinkConflictLookup() {
 		$entityIdComposer = new EntityIdComposer( [
-			'item' => function ( $repositoryName, $uniquePart ) {
+			'item' => function ( $uniquePart ) {
 				return ItemId::newFromNumber( $uniquePart );
 			},
 		] );

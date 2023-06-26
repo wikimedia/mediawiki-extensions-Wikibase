@@ -97,7 +97,9 @@ class MatchingTermsLookupFactoryTest extends MediaWikiIntegrationTestCase {
 	public function testReturnsWorkingLookup() {
 		$factory = new MatchingTermsLookupFactory(
 			new EntityIdComposer( [
-				Item::ENTITY_TYPE => [ ItemId::class, 'newFromRepositoryAndNumber' ],
+				Item::ENTITY_TYPE => function( $uniquePartOfId ) {
+					return new ItemId( 'Q' . $uniquePartOfId );
+				},
 			] ),
 			$this->dbFactory,
 			new NullLogger(),

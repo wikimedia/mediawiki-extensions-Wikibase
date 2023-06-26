@@ -89,7 +89,6 @@ class SqlSiteLinkConflictLookup implements SiteLinkConflictLookup {
 			$conflicts[] = [
 				'siteId' => $link->ips_site_id,
 				'itemId' => $this->entityIdComposer->composeEntityId(
-					'',
 					Item::ENTITY_TYPE,
 					$link->ips_item_id
 				),

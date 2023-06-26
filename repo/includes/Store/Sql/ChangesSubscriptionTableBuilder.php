@@ -235,7 +235,7 @@ class ChangesSubscriptionTableBuilder {
 			if ( $row->ips_item_id != $currentItemId ) {
 				$currentItemId = $row->ips_item_id;
 				$itemId = $this->entityIdComposer
-					->composeEntityId( '', Item::ENTITY_TYPE, $currentItemId )
+					->composeEntityId( Item::ENTITY_TYPE, $currentItemId )
 					->getSerialization();
 			}
 

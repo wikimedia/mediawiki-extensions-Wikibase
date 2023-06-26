@@ -37,8 +37,8 @@ return [
 		Def::ENTITY_ID_BUILDER => function( $serialization ) {
 			return new ItemId( $serialization );
 		},
-		Def::ENTITY_ID_COMPOSER_CALLBACK => function( $repositoryName, $uniquePart ) {
-			return ItemId::newFromRepositoryAndNumber( $repositoryName, $uniquePart );
+		Def::ENTITY_ID_COMPOSER_CALLBACK => function( $uniquePart ) {
+			return new ItemId( 'Q' . $uniquePart );
 		},
 		Def::ENTITY_DIFFER_STRATEGY_BUILDER => function() {
 			return new ItemDiffer();
@@ -58,8 +58,8 @@ return [
 		Def::ENTITY_ID_BUILDER => function( $serialization ) {
 			return new NumericPropertyId( $serialization );
 		},
-		Def::ENTITY_ID_COMPOSER_CALLBACK => function( $repositoryName, $uniquePart ) {
-			return NumericPropertyId::newFromRepositoryAndNumber( $repositoryName, $uniquePart );
+		Def::ENTITY_ID_COMPOSER_CALLBACK => function( $uniquePart ) {
+			return new NumericPropertyId( 'P' . $uniquePart );
 		},
 		Def::ENTITY_DIFFER_STRATEGY_BUILDER => function() {
 			return new PropertyDiffer();

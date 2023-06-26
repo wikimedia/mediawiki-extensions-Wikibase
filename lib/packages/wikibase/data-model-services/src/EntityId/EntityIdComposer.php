@@ -44,8 +44,8 @@ class EntityIdComposer {
 	}
 
 	/**
-	 * @param string $repositoryName
-	 * @param string $entityType
+	 * @param string $irrelevantRepositoryName
+	 * @param string|mixed $entityType
 	 * @param mixed $uniquePart
 	 *
 	 * @throws InvalidArgumentException when the entity type is not known or the unique part is not
@@ -54,12 +54,17 @@ class EntityIdComposer {
 	 *  object.
 	 * @return EntityId
 	 */
-	public function composeEntityId( $repositoryName, $entityType, $uniquePart ) {
+	public function composeEntityId( $irrelevantRepositoryName, $entityType, $uniquePart = null ) {
+		if ( !isset( $uniquePart ) ) {
+			$uniquePart = $entityType;
+			$entityType = $irrelevantRepositoryName;
+		}
+
 		if ( !isset( $this->composers[$entityType] ) ) {
 			throw new InvalidArgumentException( 'Unknown entity type ' . $entityType );
 		}
 
-		$id = $this->composers[$entityType]( $repositoryName, $uniquePart );
+		$id = $this->composers[$entityType]( $uniquePart );
 
 		if ( !( $id instanceof EntityId ) ) {
 			throw new UnexpectedValueException( 'Composer for ' . $entityType . ' is invalid' );

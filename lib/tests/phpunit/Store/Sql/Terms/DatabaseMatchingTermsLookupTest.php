@@ -212,11 +212,11 @@ class DatabaseMatchingTermsLookupTest extends MediaWikiIntegrationTestCase {
 		);
 
 		$composer = new EntityIdComposer( [
-			'item' => function ( $repositoryName, $uniquePart ) {
-				return ItemId::newFromRepositoryAndNumber( $repositoryName, $uniquePart );
+			'item' => function ( $uniquePart ) {
+				return new ItemId( 'Q' . $uniquePart );
 			},
-			'property' => function ( $repositoryName, $uniquePart ) {
-				return NumericPropertyId::newFromRepositoryAndNumber( $repositoryName, $uniquePart );
+			'property' => function ( $uniquePart ) {
+				return new NumericPropertyId( 'P' . $uniquePart );
 			},
 		] );
 		return new DatabaseMatchingTermsLookup(

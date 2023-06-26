@@ -22,8 +22,8 @@ class EntityIdComposerTest extends ServiceWiringTestCase {
 		$this->mockService( 'WikibaseClient.EntityTypeDefinitions',
 			new EntityTypeDefinitions( [
 				'test' => [
-					EntityTypeDefinitions::ENTITY_ID_COMPOSER_CALLBACK => function ( $repositoryName, $uniquePart ) {
-						return ItemId::newFromRepositoryAndNumber( $repositoryName, $uniquePart );
+					EntityTypeDefinitions::ENTITY_ID_COMPOSER_CALLBACK => function ( $uniquePart ) {
+						return new ItemId( 'Q' . $uniquePart );
 					},
 				],
 			] ) );
@@ -33,7 +33,7 @@ class EntityIdComposerTest extends ServiceWiringTestCase {
 
 		$this->assertInstanceOf( EntityIdComposer::class, $entityIdComposer );
 		$this->assertEquals( new ItemId( 'Q123' ),
-			$entityIdComposer->composeEntityId( '', 'test', 123 ) );
+			$entityIdComposer->composeEntityId( 'test', 123 ) );
 	}
 
 }

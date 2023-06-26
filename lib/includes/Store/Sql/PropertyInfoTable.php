@@ -94,7 +94,6 @@ class PropertyInfoTable implements PropertyInfoLookup, PropertyInfoStore {
 			}
 
 			$id = $this->entityIdComposer->composeEntityId(
-				'',
 				Property::ENTITY_TYPE,
 				$row->pi_property_id
 			);
