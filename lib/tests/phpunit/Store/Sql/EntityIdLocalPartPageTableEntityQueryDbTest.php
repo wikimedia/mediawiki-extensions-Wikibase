@@ -99,9 +99,9 @@ class EntityIdLocalPartPageTableEntityQueryDbTest extends MediaWikiIntegrationTe
 		);
 	}
 
-	private function getMockEntityId( string $type, string $localPart ): EntityId {
+	private function getMockEntityId( string $type, string $idString ): EntityId {
 		$id = $this->createMock( EntityId::class );
-		$id->method( 'getLocalPart' )->willReturn( $localPart );
+		$id->method( 'getSerialization' )->willReturn( $idString );
 		$id->method( 'getEntityType' )->willReturn( $type );
 		return $id;
 	}
