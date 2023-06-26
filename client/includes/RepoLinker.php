@@ -129,7 +129,7 @@ class RepoLinker {
 	 */
 	public function getEntityConceptUri( EntityId $entityId ): string {
 		$baseUri = $this->getConceptBaseUri( $entityId );
-		return $baseUri . '/' . wfUrlencode( $entityId->getLocalPart() );
+		return $baseUri . '/' . wfUrlencode( $entityId->getSerialization() );
 	}
 
 	public function getBaseUrl(): string {
