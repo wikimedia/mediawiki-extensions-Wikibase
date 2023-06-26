@@ -152,7 +152,7 @@ class RepoLinker {
 
 		if ( !isset( $uri ) ) {
 			throw new LogicException(
-				'No base URI for for concept URI for repository: ' . $entityId->getRepositoryName()
+				'No base URI for for concept URI for entity source: ' . $source->getSourceName()
 			);
 		}
 		return rtrim( $uri, '/' );
