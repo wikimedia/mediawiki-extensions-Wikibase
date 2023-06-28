@@ -4,6 +4,7 @@ namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
 
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Statement\StatementList as DataModelStatementList;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
@@ -12,12 +13,13 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyParts;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyPartsBuilder;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyPartsRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyStatementsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 
 /**
  * @license GPL-2.0-or-later
  */
-class EntityRevisionLookupPropertyDataRetriever implements PropertyPartsRetriever {
+class EntityRevisionLookupPropertyDataRetriever implements PropertyPartsRetriever, PropertyStatementsRetriever {
 
 	private EntityRevisionLookup $entityRevisionLookup;
 	private StatementReadModelConverter $statementReadModelConverter;
@@ -77,4 +79,23 @@ class EntityRevisionLookupPropertyDataRetriever implements PropertyPartsRetrieve
 
 		return $propertyParts->build();
 	}
+
+	public function getStatements( PropertyId $subjectPropertyId, ?PropertyId $filterPropertyId = null ): ?StatementList {
+		$property = $this->getProperty( $subjectPropertyId );
+		if ( $property === null ) {
+			return null;
+		}
+
+		return $this->convertDataModelStatementListToReadModel(
+			$filterPropertyId ? $property->getStatements()->getByPropertyId( $filterPropertyId ) : $property->getStatements()
+		);
+	}
+
+	private function convertDataModelStatementListToReadModel( DataModelStatementList $list ): StatementList {
+		return new StatementList( ...array_map(
+			[ $this->statementReadModelConverter, 'convert' ],
+			iterator_to_array( $list )
+		) );
+	}
+
 }
