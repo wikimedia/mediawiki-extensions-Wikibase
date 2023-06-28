@@ -2,13 +2,14 @@
 	"@metadata": {
 		"authors": [
 			"Samatics",
-			"Emmikweok"
+			"Emmikweok",
+			"Maryeren"
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}} n̄kpọ",
-	"wikibase-editlinks": "Nen̄ede n̄kpọ ke ikpehe oro",
+	"wikibase-editlinks": "Kpụhọde n̄kpọ ke ikpehe oro",
 	"wikibase-linkitem-addlinks": "Dian ikpehe en̄wen",
-	"wikibase-linkitem-title": "Itie asan̄ade ye ikpeh",
+	"wikibase-linkitem-title": "Itie asan̄ade ye ikpehe",
 	"wikibase-linkitem-linkpage": "Itie ye ikpehe",
 	"wikibase-linkitem-selectlink": "Mbọk fịk itie emi oyomde ndidian ke ikpehe emi",
 	"wikibase-linkitem-input-site": "Usem:",

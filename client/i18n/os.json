@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Amikeco"
+			"Amikeco",
+			"Таймураз"
 		]
 	},
 	"wikibase-comment-update": "{{grammar:genitive|{{WBREPONAME}}}} элемент ивд æрцыдис",
@@ -9,6 +10,9 @@
 	"wikibase-editlinks": "Æрвитæнтæ ивын",
 	"wikibase-editlinkstitle": "Æвзæгты ’хсæн æрвитæнтæ баив",
 	"wikibase-linkitem-addlinks": "Бафтау æрвитæнтæ",
+	"wikibase-linkitem-title": "Фарсимæ бабæтт",
+	"wikibase-linkitem-linkpage": "Фарсимæ сбæтт",
+	"wikibase-linkitem-selectlink": "Дæ хорзæхæй, цы сайт æмæ  фарсимæ сбæттинаг дæ ацы фарс, уый равзар",
 	"wikibase-linkitem-input-site": "Æвзаг:",
 	"wikibase-linkitem-input-page": "Фарс:",
 	"wikibase-rc-hide-wikidata-hide": "Бамбæхс",

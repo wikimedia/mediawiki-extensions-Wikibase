@@ -2,10 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"Maryeren",
-			"Samatics"
+			"Samatics",
+			"Emmikweok"
 		]
 	},
 	"wikibase-edit": "kpụhọde",
 	"wikibase-add": "dian",
+	"wikibase-label-empty": "Idụhe se iwụt ke enye ke edi",
+	"wikibase-description-empty": "Idụhe n̄kpọ emi owụtde",
 	"wikibase-sitelinks-special": "Mme ikpehe efen"
 }
