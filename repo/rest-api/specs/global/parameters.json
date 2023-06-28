@@ -95,7 +95,7 @@
 		"explode": false,
 		"style": "form"
 	},
-	"Property": {
+	"PropertyFilter": {
 		"in": "query",
 		"name": "property",
 		"description": "Single property ID to filter statements by.",

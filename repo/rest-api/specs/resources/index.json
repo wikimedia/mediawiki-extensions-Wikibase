@@ -12,7 +12,7 @@
 		"$ref": "./descriptions/description-in-language.json"
 	},
 	"/entities/items/{item_id}/statements": {
-		"$ref": "./statements/list.json"
+		"$ref": "./statements/list-for-item.json"
 	},
 	"/entities/items/{item_id}/statements/{statement_id}": {
 		"$ref": "./statements/single-for-item.json"
@@ -28,6 +28,9 @@
 	},
 	"/entities/items/{item_id}/aliases/{language_code}": {
 		"$ref": "./aliases/aliases-in-language.json"
+	},
+	"/entities/properties/{property_id}/statements": {
+		"$ref": "./statements/list-for-property.json"
 	},
 	"/entities/properties/{property_id}/statements/{statement_id}": {
 		"$ref": "./statements/single-for-property.json"
