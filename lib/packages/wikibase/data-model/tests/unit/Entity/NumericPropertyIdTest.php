@@ -36,8 +36,6 @@ class NumericPropertyIdTest extends \PHPUnit\Framework\TestCase {
 			[ 'P31337', 'P31337' ],
 			[ 'P42', 'P42' ],
 			[ ':P42', 'P42' ],
-			[ 'foo:P42', 'foo:P42' ],
-			[ 'foo:bar:p42', 'foo:bar:P42' ],
 			[ 'P2147483647', 'P2147483647' ],
 		];
 	}
@@ -69,16 +67,14 @@ class NumericPropertyIdTest extends \PHPUnit\Framework\TestCase {
 			[ 1 ],
 			[ 'P2147483648' ],
 			[ 'P99999999999' ],
+			// no longer supported (T291823, T338223)
+			[ 'foo:P42', 'foo:P42' ],
+			[ 'foo:bar:p42', 'foo:bar:P42' ],
 		];
 	}
 
 	public function testGetNumericId() {
 		$id = new NumericPropertyId( 'P1' );
-		$this->assertSame( 1, $id->getNumericId() );
-	}
-
-	public function testGetNumericId_foreignId() {
-		$id = new NumericPropertyId( 'foo:P1' );
 		$this->assertSame( 1, $id->getNumericId() );
 	}
 
@@ -154,8 +150,8 @@ class NumericPropertyIdTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testNewFromRepositoryAndNumber() {
-		$id = NumericPropertyId::newFromRepositoryAndNumber( 'foo', 1 );
-		$this->assertSame( 'foo:P1', $id->getSerialization() );
+		$id = NumericPropertyId::newFromRepositoryAndNumber( '', 1 );
+		$this->assertSame( 'P1', $id->getSerialization() );
 	}
 
 	public function testNewFromRepositoryAndNumberWithInvalidNumericId() {

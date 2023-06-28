@@ -37,8 +37,6 @@ class ItemIdTest extends \PHPUnit\Framework\TestCase {
 			[ 'Q31337', 'Q31337' ],
 			[ 'Q42', 'Q42' ],
 			[ ':Q42', 'Q42' ],
-			[ 'foo:Q42', 'foo:Q42' ],
-			[ 'foo:bar:q42', 'foo:bar:Q42' ],
 			[ 'Q2147483647', 'Q2147483647' ],
 		];
 	}
@@ -70,16 +68,14 @@ class ItemIdTest extends \PHPUnit\Framework\TestCase {
 			[ 1 ],
 			[ 'Q2147483648' ],
 			[ 'Q99999999999' ],
+			// no longer supported (T291823, T338223)
+			[ 'foo:Q42', 'foo:Q42' ],
+			[ 'foo:bar:q42', 'foo:bar:Q42' ],
 		];
 	}
 
 	public function testGetNumericId() {
 		$id = new ItemId( 'Q1' );
-		$this->assertSame( 1, $id->getNumericId() );
-	}
-
-	public function testGetNumericId_foreignId() {
-		$id = new ItemId( 'foo:Q1' );
 		$this->assertSame( 1, $id->getNumericId() );
 	}
 
@@ -155,8 +151,8 @@ class ItemIdTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testNewFromRepositoryAndNumber() {
-		$id = ItemId::newFromRepositoryAndNumber( 'foo', 1 );
-		$this->assertSame( 'foo:Q1', $id->getSerialization() );
+		$id = ItemId::newFromRepositoryAndNumber( '', 1 );
+		$this->assertSame( 'Q1', $id->getSerialization() );
 	}
 
 	public function testNewFromRepositoryAndNumberWithInvalidNumericId() {

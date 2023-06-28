@@ -235,8 +235,7 @@ class DescriptionLookupTest extends TestCase {
 					if ( !array_key_exists( $title->getArticleID(), $centralDescriptions ) ) {
 						return null;
 					}
-					return new ItemId( ItemId::joinSerialization(
-						[ 'central', '', 'Q' . $title->getArticleID() ] ) );
+					return new ItemId( 'Q' . $title->getArticleID() );
 				}, $titlesByPageId ) );
 			} );
 		return $idLookup;

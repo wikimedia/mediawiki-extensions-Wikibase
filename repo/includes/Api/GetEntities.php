@@ -14,7 +14,6 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\SettingsArray;
-use Wikibase\Lib\Store\DivergingEntityIdException;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
@@ -326,11 +325,6 @@ class GetEntities extends ApiBase {
 				$entityId = $ex->getRedirectTargetId();
 				$entityRevision = $this->getEntityRevision( $entityId, false );
 			}
-		} catch ( DivergingEntityIdException $ex ) {
-			// DivergingEntityIdException is thrown when the repository $entityId is from other
-			// repository than the entityRevisionLookup was configured to read from.
-			// Such cases are input errors (e.g. specifying non-existent repository prefix)
-			// and should be ignored and treated as non-existing entities.
 		}
 
 		return $entityRevision;

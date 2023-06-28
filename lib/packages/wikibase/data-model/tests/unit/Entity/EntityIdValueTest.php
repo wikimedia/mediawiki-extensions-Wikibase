@@ -46,7 +46,6 @@ class EntityIdValueTest extends \PHPUnit\Framework\TestCase {
 			new NumericPropertyId( 'P1' ),
 			new NumericPropertyId( 'P31337' ),
 			new CustomEntityId( 'X567' ),
-			new NumericPropertyId( 'foo:P678' ),
 		];
 
 		$argLists = [];
@@ -104,14 +103,6 @@ class EntityIdValueTest extends \PHPUnit\Framework\TestCase {
 					'id' => 'X567',
 				],
 			],
-			'foo:P678' => [
-				new NumericPropertyId( 'foo:P678' ),
-				[
-					'entity-type' => 'property',
-					'numeric-id' => 678,
-					'id' => 'foo:P678',
-				],
-			],
 		];
 	}
 
@@ -137,7 +128,6 @@ class EntityIdValueTest extends \PHPUnit\Framework\TestCase {
 
 	public static function provideDeserializationCompatibility() {
 		$local = new EntityIdValue( new ItemId( 'Q31337' ) );
-		$foreign = new EntityIdValue( new NumericPropertyId( 'foo:P678' ) );
 		$custom = new EntityIdValue( new CustomEntityId( 'X567' ) );
 
 		return [
@@ -149,11 +139,6 @@ class EntityIdValueTest extends \PHPUnit\Framework\TestCase {
 				'C:39:"Wikibase\DataModel\Entity\EntityIdValue":'
 					. '50:{C:32:"Wikibase\DataModel\Entity\ItemId":6:{Q31337}}',
 				$local,
-			],
-			'foreign: Version 7.0 (7fcddfc)' => [
-				'C:39:"Wikibase\DataModel\Entity\EntityIdValue":'
-					. '63:{C:43:"Wikibase\DataModel\Entity\NumericPropertyId":8:{foo:P678}}',
-				$foreign,
 			],
 			'custom: Version 7.0 (7fcddfc): custom' => [
 				'C:39:"Wikibase\DataModel\Entity\EntityIdValue":'

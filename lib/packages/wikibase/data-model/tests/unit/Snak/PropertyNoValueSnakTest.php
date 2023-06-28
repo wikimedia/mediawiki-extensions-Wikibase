@@ -111,16 +111,11 @@ class PropertyNoValueSnakTest extends \PHPUnit\Framework\TestCase {
 
 	public static function provideDataToSerialize() {
 		$p2 = new NumericPropertyId( 'P2' );
-		$p2foo = new NumericPropertyId( 'foo:P2' );
 
 		return [
 			'string' => [
 				'P2',
 				new PropertyNoValueSnak( $p2 ),
-			],
-			'foreign' => [
-				'foo:P2',
-				new PropertyNoValueSnak( $p2foo ),
 			],
 		];
 	}
@@ -139,12 +134,10 @@ class PropertyNoValueSnakTest extends \PHPUnit\Framework\TestCase {
 
 	public static function provideDataToUnserialize() {
 		$p2 = new NumericPropertyId( 'P2' );
-		$p2foo = new NumericPropertyId( 'foo:P2' );
 
 		return [
 			'legacy' => [ new PropertyNoValueSnak( $p2 ), 'i:2;' ],
 			'current' => [ new PropertyNoValueSnak( $p2 ), 'P2' ],
-			'foreign' => [ new PropertyNoValueSnak( $p2foo ), 'foo:P2' ],
 		];
 	}
 

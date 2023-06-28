@@ -30,10 +30,7 @@ class EntityIdTest extends \PHPUnit\Framework\TestCase {
 		$ids[] = [ new ItemId( 'Q42' ), '' ];
 		$ids[] = [ new ItemId( 'Q31337' ), '' ];
 		$ids[] = [ new ItemId( 'Q2147483647' ), '' ];
-		$ids[] = [ new ItemId( ':Q2147483647' ), '' ];
-		$ids[] = [ new ItemId( 'foo:Q2147483647' ), 'foo' ];
 		$ids[] = [ new NumericPropertyId( 'P101010' ), '' ];
-		$ids[] = [ new NumericPropertyId( 'foo:bar:P101010' ), 'foo' ];
 
 		return $ids;
 	}
@@ -107,9 +104,7 @@ class EntityIdTest extends \PHPUnit\Framework\TestCase {
 	public function testIsForeign() {
 		$this->assertFalse( ( new ItemId( 'Q42' ) )->isForeign() );
 		$this->assertFalse( ( new ItemId( ':Q42' ) )->isForeign() );
-		$this->assertTrue( ( new ItemId( 'foo:Q42' ) )->isForeign() );
 		$this->assertFalse( ( new NumericPropertyId( ':P42' ) )->isForeign() );
-		$this->assertTrue( ( new NumericPropertyId( 'foo:P42' ) )->isForeign() );
 	}
 
 	/**
@@ -122,9 +117,6 @@ class EntityIdTest extends \PHPUnit\Framework\TestCase {
 	public static function serializationSplitProvider() {
 		return [
 			[ 'Q42', [ '', '', 'Q42' ] ],
-			[ 'foo:Q42', [ 'foo', '', 'Q42' ] ],
-			[ '0:Q42', [ '0', '', 'Q42' ] ],
-			[ 'foo:bar:baz:Q42', [ 'foo', 'bar:baz', 'Q42' ] ],
 		];
 	}
 
@@ -168,15 +160,12 @@ class EntityIdTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGivenNotNormalizedSerialization_splitSerializationReturnsNormalizedParts() {
 		$this->assertSame( [ '', '', 'Q42' ], SerializableEntityId::splitSerialization( ':Q42' ) );
-		$this->assertSame( [ 'foo', 'bar', 'Q42' ], SerializableEntityId::splitSerialization( ':foo:bar:Q42' ) );
 	}
 
 	public static function localPartDataProvider() {
 		return [
 			[ 'Q42', 'Q42' ],
 			[ ':Q42', 'Q42' ],
-			[ 'foo:Q42', 'Q42' ],
-			[ 'foo:bar:Q42', 'bar:Q42' ],
 		];
 	}
 

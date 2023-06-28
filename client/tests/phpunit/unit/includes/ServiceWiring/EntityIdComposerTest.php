@@ -32,8 +32,8 @@ class EntityIdComposerTest extends ServiceWiringTestCase {
 		$entityIdComposer = $this->getService( 'WikibaseClient.EntityIdComposer' );
 
 		$this->assertInstanceOf( EntityIdComposer::class, $entityIdComposer );
-		$this->assertEquals( new ItemId( 'repo:Q123' ),
-			$entityIdComposer->composeEntityId( 'repo', 'test', 123 ) );
+		$this->assertEquals( new ItemId( 'Q123' ),
+			$entityIdComposer->composeEntityId( '', 'test', 123 ) );
 	}
 
 }

@@ -262,8 +262,6 @@ class RdfBuilderTestData {
 			[ new NumericPropertyId( 'P9' ), 'url' ],
 			[ new NumericPropertyId( 'P10' ), 'geo-shape' ],
 			[ new NumericPropertyId( 'P11' ), 'external-id' ],
-			[ new NumericPropertyId( 'foreign:P12' ), 'string' ],
-			[ new NumericPropertyId( 'foreign:P13' ), 'wikibase-item' ],
 		];
 	}
 
