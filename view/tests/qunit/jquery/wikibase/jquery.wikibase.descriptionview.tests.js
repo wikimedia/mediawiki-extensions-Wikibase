@@ -151,4 +151,17 @@
 		);
 	} );
 
+	QUnit.test( 'shows N/A placeholder for mul', function ( assert ) {
+		var $descriptionview = createDescriptionview( {
+				value: new datamodel.Term( 'mul', '' )
+			} ),
+			descriptionview = $descriptionview.data( 'descriptionview' );
+
+		assert.strictEqual(
+			descriptionview.$text.text(),
+			'(wikibase-description-not-applicable)',
+			'Shows "not applicable" placeholder.'
+		);
+	} );
+
 }() );

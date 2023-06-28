@@ -108,7 +108,13 @@
 			this.element[ descriptionText ? 'removeClass' : 'addClass' ]( 'wb-empty' );
 
 			if ( !this.isInEditMode() && !descriptionText ) {
-				this.$text.text( mw.msg( 'wikibase-description-empty' ) );
+				if ( languageCode === 'mul' ) {
+					this.$text.empty().append(
+						this._createDescriptionNotApplicableElements()
+					);
+				} else {
+					this.$text.text( mw.msg( 'wikibase-description-empty' ) );
+				}
 				// Apply lang and dir of UI language
 				// instead language of that row
 				var userLanguage = mw.config.get( 'wgUserLanguage' );
@@ -187,6 +193,15 @@
 			}
 
 			return response;
+		},
+
+		_createDescriptionNotApplicableElements: function () {
+			var $abbr = $( '<abbr>' ).attr( 'title', mw.msg( 'wikibase-description-not-applicable-title' ) );
+			var $abbrText = $( '<span>' )
+				.text( mw.msg( 'wikibase-description-not-applicable' ) )
+				.attr( 'aria-hidden', 'true' );
+			$abbr.append( $abbrText );
+			return $abbr;
 		},
 
 		/**
