@@ -246,6 +246,91 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( $contentBetweenEditLinks, $html );
 	}
 
+	public static function hasMulProvider(): array {
+		return [
+			'has mul' => [ true ],
+			'without mul' => [ false ],
+		];
+	}
+
+	/**
+	 * @dataProvider hasMulProvider
+	 */
+	public function testOnOutputPageBeforeHTML_withoutListItemHtml_mulHandling( bool $hasMul ) {
+		$out = $this->newOutputPage();
+		$item = new Item( $this->itemId );
+		if ( $hasMul ) {
+			$item->setLabel( 'mul', 'bar' );
+		}
+
+		$this->outputPageEntityIdReader = $this->getOutputPageEntityIdReaderReturningEntity( $this->itemId );
+		$this->entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );
+		$this->entityRevisionLookup->expects( $this->once() )
+			->method( 'getEntityRevision' )
+			->willReturn( new EntityRevision( $item ) );
+
+		$this->preferredLanguageLookup->method( 'getLanguages' )
+			->with( $this->uiLanguageCode, $out->getUser() ); // return value already mocked in setUp
+
+		$outputPageBeforeHTMLHookHandler = $this->getHookHandler();
+
+		$html = '$1';
+		$out->setTitle( Title::makeTitle( 0, 'OutputPageBeforeHTMLHookHandlerTest' ) );
+		$out->setProperty( 'wikibase-view-chunks', [ '$1' => [ 'termbox' ] ] );
+		$out->setArticleFlag( true );
+
+		$outputPageBeforeHTMLHookHandler->onOutputPageBeforeHTML( $out, $html );
+		$this->assertStringContainsString( 'lang="en"', $html );
+		$this->assertStringContainsString( 'lang="es"', $html );
+		$this->assertStringContainsString( 'lang="ru"', $html );
+		if ( $hasMul ) {
+			$this->assertStringContainsString( 'lang="mul"', $html );
+		} else {
+			$this->assertStringNotContainsString( 'lang="mul"', $html );
+		}
+	}
+
+	/**
+	 * @dataProvider hasMulProvider
+	 */
+	public function testOnOutputPageBeforeHTML_withListItemHtml_mulHandling( bool $hasMul ) {
+		$out = $this->newOutputPage();
+
+		$this->outputPageEntityIdReader = $this->getOutputPageEntityIdReaderReturningEntity( $this->itemId );
+		$this->entityFactory->expects( $this->once() )
+			->method( 'newEmpty' )
+			->willReturn( new Item( $this->itemId ) );
+
+		$this->preferredLanguageLookup->method( 'getLanguages' )
+			->with( $this->uiLanguageCode, $out->getUser() ); // return value already mocked in setUp
+
+		$outputPageBeforeHTMLHookHandler = $this->getHookHandler();
+
+		$html = '$1';
+		$out->setTitle( Title::makeTitle( 0, 'OutputPageBeforeHTMLHookHandlerTest' ) );
+		$out->setProperty( 'wikibase-view-chunks', [ '$1' => [ 'termbox' ] ] );
+		$termsListItems = [
+			'en' => '<termboxrow lang="en">',
+			'es' => '<termboxrow lang="es">',
+			'ru' => '<termboxrow lang="ru">',
+		];
+		if ( $hasMul ) {
+			$termsListItems['mul'] = '<termboxrow lang="mul">';
+		}
+		$out->setProperty( 'wikibase-terms-list-items', $termsListItems );
+		$out->setArticleFlag( true );
+
+		$outputPageBeforeHTMLHookHandler->onOutputPageBeforeHTML( $out, $html );
+		$this->assertStringContainsString( 'lang="en"', $html );
+		$this->assertStringContainsString( 'lang="es"', $html );
+		$this->assertStringContainsString( 'lang="ru"', $html );
+		if ( $hasMul ) {
+			$this->assertStringContainsString( 'lang="mul"', $html );
+		} else {
+			$this->assertStringNotContainsString( 'lang="mul"', $html );
+		}
+	}
+
 	private function mockEditability( $permissive = true ) {
 		$editability = $this->createMock( OutputPageEditability::class );
 		$editability->method( 'validate' )->willReturn( $permissive );

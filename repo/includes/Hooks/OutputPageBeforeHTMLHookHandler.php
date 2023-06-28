@@ -13,6 +13,8 @@ use Psr\Log\NullLogger;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Term\AliasesProvider;
+use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\EntityFactory;
 use Wikibase\Lib\LanguageFallbackChainFactory;
@@ -303,19 +305,53 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 	) {
 		$language = $out->getLanguage();
 		$user = $out->getUser();
+		$entityTermsListHtml = $this->getEntityTermsListHtml( $out ) ?: [];
 
 		return new EntityViewPlaceholderExpander(
 			$this->templateFactory,
 			$user,
 			$entity,
-			$this->userPreferredTermsLanguages->getLanguages( $language->getCode(), $user ),
+			$this->getTermsLanguages(
+				$this->userPreferredTermsLanguages->getLanguages( $language->getCode(), $user ),
+				$entity,
+				$entityTermsListHtml
+			),
 			$this->languageDirectionalityLookup,
 			$this->languageNameLookup,
 			new MediaWikiLocalizedTextProvider( $language ),
 			$this->userOptionsLookup,
 			$this->cookiePrefix,
-			$this->getEntityTermsListHtml( $out ) ?: []
+			$entityTermsListHtml
 		);
+	}
+
+	/**
+	 * Get the term languages to use for the current user and entity.
+	 */
+	private function getTermsLanguages(
+		array $userPreferredTermsLanguages,
+		EntityDocument $entity,
+		array $entityTermsListHtml
+	): array {
+		// The user already has "mul" in their preferred languages, nothing to do
+		if ( in_array( 'mul', $userPreferredTermsLanguages ) ) {
+			return $userPreferredTermsLanguages;
+		}
+
+		// Check both the html snippets and the (possibly empty) entity for a "mul" term.
+		$hasMulTerm = isset( $entityTermsListHtml['mul'] );
+		if ( $entity instanceof LabelsProvider ) {
+			$hasMulTerm = $hasMulTerm || $entity->getLabels()->hasTermForLanguage( 'mul' );
+		}
+		if ( $entity instanceof AliasesProvider ) {
+			$hasMulTerm = $hasMulTerm || $entity->getAliasGroups()->hasGroupForLanguage( 'mul' );
+		}
+
+		if ( $hasMulTerm ) {
+			// There is a "mul" term present, show as last entry in the term box.
+			return array_merge( $userPreferredTermsLanguages, [ 'mul' ] );
+		}
+		return $userPreferredTermsLanguages;
 	}
 
 	private function getExternallyRenderedEntityViewPlaceholderExpander( OutputPage $out ) {
@@ -337,7 +373,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		);
 	}
 
-	private function getEntityTermsListHtml( OutputPage $out ) {
+	private function getEntityTermsListHtml( OutputPage $out ): ?array {
 		return $out->getProperty( 'wikibase-terms-list-items' );
 	}
 
