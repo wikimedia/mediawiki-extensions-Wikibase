@@ -8,6 +8,7 @@ use RuntimeException;
 use Status;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityRedirect;
+use Wikibase\Repo\Content\EntityContent;
 
 /**
  * Interface to run a hook before and edit is saved.
@@ -20,7 +21,7 @@ interface EditFilterHookRunner {
 	/**
 	 * Call EditFilterMergedContent hook, if registered.
 	 *
-	 * @param EntityDocument|EntityRedirect|null $new The entity or redirect we are trying to save
+	 * @param EntityDocument|EntityRedirect|EntityContent|null $new The entity or redirect (content) we are trying to save
 	 * @param IContextSource $context The request context for the edit
 	 * @param string $summary The edit summary
 	 *

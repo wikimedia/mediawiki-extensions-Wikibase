@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Actions;
 
 use Article;
-use Content;
 use IContextSource;
 use LogicException;
 use MediaWiki\MediaWikiServices;
@@ -14,6 +13,7 @@ use Status;
 use Title;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\Content\EntityContent;
+use Wikibase\Repo\EditEntity\EditFilterHookRunner;
 use Wikibase\Repo\SummaryFormatter;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -29,10 +29,8 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class SubmitEntityAction extends EditEntityAction {
 
-	/**
-	 * @var SummaryFormatter
-	 */
-	private $summaryFormatter;
+	private EditFilterHookRunner $editFilterHookRunner;
+	private SummaryFormatter $summaryFormatter;
 
 	/**
 	 * @see EditEntityAction::__construct
@@ -43,6 +41,7 @@ class SubmitEntityAction extends EditEntityAction {
 	public function __construct( Article $article, IContextSource $context ) {
 		parent::__construct( $article, $context );
 
+		$this->editFilterHookRunner = WikibaseRepo::getEditFilterHookRunner();
 		$this->summaryFormatter = WikibaseRepo::getSummaryFormatter();
 	}
 
@@ -213,7 +212,7 @@ class SubmitEntityAction extends EditEntityAction {
 
 	/**
 	 * @param Title $title
-	 * @param Content $content
+	 * @param EntityContent $content
 	 * @param string $summary
 	 * @param int $undidRevId
 	 * @param int $originalRevId
@@ -222,7 +221,7 @@ class SubmitEntityAction extends EditEntityAction {
 	 * @return Status
 	 */
 	private function attemptSave(
-		Title $title, Content $content, $summary, $undidRevId, $originalRevId, $editToken
+		Title $title, EntityContent $content, $summary, $undidRevId, $originalRevId, $editToken
 	) {
 		$status = $this->getEditTokenStatus( $editToken );
 
@@ -231,6 +230,12 @@ class SubmitEntityAction extends EditEntityAction {
 		}
 
 		$status = $this->getPermissionStatus( 'edit', $title );
+
+		if ( !$status->isOK() ) {
+			return $status;
+		}
+
+		$status = $this->editFilterHookRunner->run( $content, $this->getContext(), $summary );
 
 		if ( !$status->isOK() ) {
 			return $status;

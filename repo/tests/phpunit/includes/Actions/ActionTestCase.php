@@ -92,6 +92,10 @@ class ActionTestCase extends MediaWikiIntegrationTestCase {
 		$items['London'][] = $item;
 
 		$item = new Item();
+		$item->setLabel( 'en', 'Oslo' );
+		$items['Oslo'][] = $item;
+
+		$item = new Item();
 		$item->setLabel( 'de', 'Oslo' );
 		$item->setLabel( 'en', 'Oslo' );
 		$items['Oslo'][] = $item;

@@ -13,6 +13,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
+use Wikibase\Repo\Content\EntityContent;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 
@@ -59,7 +60,7 @@ class MediaWikiEditFilterHookRunner implements EditFilterHookRunner {
 	/**
 	 * Call EditFilterMergedContent hook, if registered.
 	 *
-	 * @param EntityDocument|EntityRedirect|null $new The entity or redirect we are trying to save
+	 * @param EntityDocument|EntityRedirect|EntityContent|null $new The entity or redirect (content) we are trying to save
 	 * @param IContextSource $context The request context for the edit
 	 * @param string $summary The edit summary
 	 *
@@ -100,8 +101,18 @@ class MediaWikiEditFilterHookRunner implements EditFilterHookRunner {
 				$entityId,
 				$entityType
 			);
+		} elseif ( $new instanceof EntityContent ) {
+			$entityContent = $new;
+			$entityId = $entityContent->getEntityId();
+			$entityType = $entityId->getEntityType();
+
+			$context = $this->getContextForEditFilter(
+				$context,
+				$entityId,
+				$entityType
+			);
 		} else {
-			throw new InvalidArgumentException( '$new must be instance of EntityDocument or EntityRedirect' );
+			throw new InvalidArgumentException( '$new must be instance of EntityDocument, EntityRedirect or EntityContent' );
 		}
 
 		$slotRole = $this->namespaceLookup->getEntitySlotRole( $entityType );

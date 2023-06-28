@@ -7,6 +7,7 @@ use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use Status;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityRedirect;
+use Wikibase\Repo\Content\EntityContent;
 
 /**
  * EditFilterHookRunning that collects stats for edits.
@@ -37,7 +38,7 @@ class StatsdTimeRecordingEditFilterHookRunner implements EditFilterHookRunner {
 	}
 
 	/**
-	 * @param null|EntityDocument|EntityRedirect $new
+	 * @param null|EntityDocument|EntityRedirect|EntityContent $new
 	 * @param IContextSource $context
 	 * @param string $summary
 	 * @return Status
@@ -47,10 +48,21 @@ class StatsdTimeRecordingEditFilterHookRunner implements EditFilterHookRunner {
 		$hookStatus = $this->hookRunner->run( $new, $context, $summary );
 		$attemptSaveFilterEnd = microtime( true );
 
-		$this->stats->timing(
-			"{$this->timingPrefix}.run.{$new->getType()}",
-			( $attemptSaveFilterEnd - $attemptSaveFilterStart ) * 1000
-		);
+		if ( $new !== null ) {
+			if ( $new instanceof EntityDocument ) {
+				$entityType = $new->getType();
+			} elseif ( $new instanceof EntityRedirect ) {
+				$entityType = $new->getEntityId()->getEntityType();
+			} elseif ( $new instanceof EntityContent ) {
+				$entityType = $new->getEntityId()->getEntityType();
+			} else {
+				$entityType = 'UNKNOWN';
+			}
+			$this->stats->timing(
+				"{$this->timingPrefix}.run.{$entityType}",
+				( $attemptSaveFilterEnd - $attemptSaveFilterStart ) * 1000
+			);
+		}
 
 		return $hookStatus;
 	}
