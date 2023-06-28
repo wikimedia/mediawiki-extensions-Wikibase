@@ -17,5 +17,6 @@ Current ADRs include:
 * @subpage rest_adr_0010
 * @subpage rest_adr_0011
 * @subpage rest_adr_0012
+* @subpage rest_adr_0013
 
 [ADR 9]: @ref rest_adr_0009
