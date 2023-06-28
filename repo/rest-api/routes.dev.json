@@ -1,1 +1,7 @@
-[ ]
+[
+	{
+		"path": "/wikibase/v0/entities/properties/{property_id}/statements",
+		"method": "GET",
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetPropertyStatementsRouteHandler::factory"
+	}
+]
