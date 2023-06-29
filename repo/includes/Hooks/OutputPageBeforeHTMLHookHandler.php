@@ -267,6 +267,21 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 			// The parser cache content is too old to contain the terms list items
 			// Pass the correct entity to generate terms list items on the fly
 			$entityRev = $this->entityRevisionLookup->getEntityRevision( $entityId, $out->getRevisionId() );
+
+			// T340642: Is this still needed? Log cases where a real entity was (attempted to be) loaded.
+			if ( $entityRev instanceof EntityRevision ) {
+				$logMessage = 'A real entity was loaded for entity id {entityId}.';
+			} else {
+				$logMessage = 'Loading a real entity for entity id {entityId} failed.';
+			}
+
+			$this->logger->warning(
+				__METHOD__ . ': (T340642) ' . $logMessage,
+				[
+					'entityId' => $entityId->getSerialization(),
+				]
+			);
+
 			if ( !( $entityRev instanceof EntityRevision ) ) {
 				return null;
 			}
@@ -278,7 +293,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 	}
 
 	private function needsRealEntity( OutputPage $out ) {
-		return !$this->isExternallyRendered && !$this->getEntityTermsListHtml( $out );
+		return !$this->isExternallyRendered && $this->getEntityTermsListHtml( $out ) === null;
 	}
 
 	private function getPlaceholderExpander(
