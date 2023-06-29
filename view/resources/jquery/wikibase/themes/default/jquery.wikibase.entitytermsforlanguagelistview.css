@@ -68,6 +68,10 @@
 	vertical-align: top;
 }
 
+.wikibase-entitytermsforlanguagelistview .wikibase-entitytermsforlanguagelistview-listview .wikibase-entitytermsforlanguageview-mul .wikibase-entitytermsforlanguageview-language {
+	overflow: visible;
+}
+
 .wikibase-entitytermsforlanguagelistview .wikibase-entitytermsforlanguagelistview-listview .wikibase-entitytermsforlanguageview .wikibase-entitytermsforlanguageview-language {
 	width: 4%;
 	word-wrap: normal;
@@ -139,4 +143,8 @@
 
 .wikibase-entitytermsview-entitytermsforlanguagelistview .wikibase-entitytermsforlanguagelistview-more {
 	padding: 0.4em;
+}
+
+.wikibase-entityterms-languagelistview-mul-popup {
+	font-size: 0.875em;
 }

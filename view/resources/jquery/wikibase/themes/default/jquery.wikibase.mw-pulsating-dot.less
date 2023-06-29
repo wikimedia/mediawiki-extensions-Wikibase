@@ -1,0 +1,15 @@
+.wikibase-entitytermsforlanguageview-language .mw-pulsating-dot {
+	position: relative;
+	vertical-align: middle;
+	width: 10px; // distance from pulsating dot to popup anchor
+	display: inline-block;
+
+	&-container {
+		position: relative;
+		left: 15px; // distance from multiple languages label to pulsating dot
+	}
+
+	&::before {
+		animation-iteration-count: 3;
+	}
+}
