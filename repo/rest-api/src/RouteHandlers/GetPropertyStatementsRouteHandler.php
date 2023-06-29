@@ -9,6 +9,8 @@ use MediaWiki\Rest\StringStream;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementListSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetPropertyStatements;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetPropertyStatementsRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetPropertyStatementsResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -22,29 +24,44 @@ class GetPropertyStatementsRouteHandler extends SimpleHandler {
 
 	private GetPropertyStatements $useCase;
 	private StatementListSerializer $statementListSerializer;
+	private ResponseFactory $responseFactory;
 
 	public function __construct(
 		GetPropertyStatements $useCase,
-		StatementListSerializer $statementListSerializer
+		StatementListSerializer $statementListSerializer,
+		ResponseFactory $responseFactory
 	) {
 		$this->useCase = $useCase;
 		$this->statementListSerializer = $statementListSerializer;
+		$this->responseFactory = $responseFactory;
 	}
 
 	public static function factory(): Handler {
 		return new self(
 			WbRestApi::getGetPropertyStatements(),
 			WbRestApi::getSerializerFactory()->newStatementListSerializer(),
+			new ResponseFactory()
 		);
 	}
 
 	public function run( string $subjectPropertyId ): Response {
 		$filterPropertyId = $this->getRequest()->getQueryParams()[self::PROPERTY_ID_QUERY_PARAM] ?? null;
 
-		$useCaseResponse = $this->useCase->execute( new GetPropertyStatementsRequest( $subjectPropertyId, $filterPropertyId ) );
+		try {
+			$useCaseResponse = $this->useCase->execute( new GetPropertyStatementsRequest( $subjectPropertyId, $filterPropertyId ) );
+			$httpResponse = $this->newSuccessHttpResponse( $useCaseResponse );
+		} catch ( UseCaseError $e ) {
+			return $this->responseFactory->newErrorResponseFromException( $e );
+		}
 
+		return $httpResponse;
+	}
+
+	private function newSuccessHttpResponse( GetPropertyStatementsResponse $useCaseResponse ): Response {
 		$httpResponse = $this->getResponseFactory()->create();
 		$httpResponse->setHeader( 'Content-Type', 'application/json' );
+		$httpResponse->setHeader( 'Last-Modified', wfTimestamp( TS_RFC2822, $useCaseResponse->getLastModified() ) );
+		$this->setEtagFromRevId( $httpResponse, $useCaseResponse->getRevisionId() );
 		$httpResponse->setBody(
 			new StringStream(
 				json_encode( $this->statementListSerializer->serialize( $useCaseResponse->getStatements() ) )
@@ -52,6 +69,10 @@ class GetPropertyStatementsRouteHandler extends SimpleHandler {
 		);
 
 		return $httpResponse;
+	}
+
+	private function setEtagFromRevId( Response $response, int $revId ): void {
+		$response->setHeader( 'ETag', "\"$revId\"" );
 	}
 
 	public function getParamSettings(): array {
