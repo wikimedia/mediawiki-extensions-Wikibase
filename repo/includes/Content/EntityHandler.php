@@ -32,7 +32,9 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Repo\Diff\DispatchingEntityDiffVisualizer;
 use Wikibase\Repo\Diff\EntityContentDiffView;
+use Wikibase\Repo\Diff\EntitySlotDiffRenderer;
 use Wikibase\Repo\Search\Fields\FieldDefinitions;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\EntityValidator;
@@ -171,6 +173,12 @@ abstract class EntityHandler extends ContentHandler {
 	 */
 	protected function getDiffEngineClass() {
 		return EntityContentDiffView::class;
+	}
+
+	protected function getSlotDiffRendererWithOptions( IContextSource $context, $options = [] ) {
+		$entityDiffVisualizerFactory = WikibaseRepo::getEntityDiffVisualizerFactory();
+		$diffVisualizer = new DispatchingEntityDiffVisualizer( $entityDiffVisualizerFactory, $context );
+		return new EntitySlotDiffRenderer( $diffVisualizer, $context->getLanguage()->getCode() );
 	}
 
 	/**
