@@ -8,6 +8,8 @@
 
 	var PARENT = $.Widget;
 
+	require( './jquery.tipsy/jquery.tipsy.js' );
+
 	/**
 	 * Tooltip widget enhancing jQuery.tipsy.
 	 *
