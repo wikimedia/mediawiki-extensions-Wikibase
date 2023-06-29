@@ -19,7 +19,7 @@ use SiteLookup;
 use UnexpectedValueException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
-use WordLevelDiff;
+use Wikimedia\Diff\WordLevelDiff;
 
 /**
  * Class for generating views of DiffOp objects

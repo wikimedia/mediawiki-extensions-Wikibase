@@ -11,7 +11,7 @@ use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
 use Html;
 use UnexpectedValueException;
-use WordLevelDiff;
+use Wikimedia\Diff\WordLevelDiff;
 
 /**
  * Class for generating views of DiffOp objects.
