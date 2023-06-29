@@ -57,6 +57,8 @@
 	"wikibase-description-empty": "No description defined",
 	"wikibase-description-edit-placeholder": "enter a description",
 	"wikibase-description-edit-placeholder-language-aware": "enter a description in $1",
+	"wikibase-description-edit-placeholder-not-applicable": "not applicable",
+	"wikibase-description-edit-mul-not-applicable-accessibility-label": "A description is not applicable for Multiple languages",
 	"wikibase-description-edit-not-supported": "Descriptions are not supported for this language. Please provide a description in another language once the Item is created.",
 	"wikibase-description-not-applicable": "–",
 	"wikibase-description-not-applicable-title": "A description is not applicable for Multiple Languages.",

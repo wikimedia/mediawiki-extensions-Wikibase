@@ -86,10 +86,21 @@
 
 		descriptionview.startEditing();
 
+		var $textarea = descriptionview.$text.find( 'textarea' );
 		assert.strictEqual(
-			descriptionview.$text.find( 'textarea' ).length,
+			$textarea.length,
 			1,
 			'Generated textarea element.'
+		);
+		assert.strictEqual(
+			$textarea.get( 0 ).readOnly,
+			false,
+			'textarea is not read only.'
+		);
+		assert.strictEqual(
+			$textarea.attr( 'aria-label' ),
+			undefined,
+			'textarea has no aria-label.'
 		);
 
 		descriptionview.startEditing(); // should not trigger event
@@ -101,6 +112,34 @@
 		descriptionview.$text.find( 'textarea' ).val( '' );
 
 		descriptionview.stopEditing();
+	} );
+
+	QUnit.test( 'read only mode with accessibility label', function ( assert ) {
+		var accessibilityLabel = 'a11y-label-text',
+			$descriptionview = createDescriptionview( {
+				readOnly: true,
+				accessibilityLabel: accessibilityLabel
+			} ),
+			descriptionview = $descriptionview.data( 'descriptionview' );
+
+		descriptionview.startEditing();
+
+		var $textarea = descriptionview.$text.find( 'textarea' );
+		assert.strictEqual(
+			$textarea.length,
+			1,
+			'Generated textarea element.'
+		);
+		assert.strictEqual(
+			$textarea.get( 0 ).readOnly,
+			true,
+			'textarea is read only.'
+		);
+		assert.strictEqual(
+			$textarea.attr( 'aria-label' ),
+			accessibilityLabel,
+			'textarea has the aria-label set.'
+		);
 	} );
 
 	QUnit.test( 'setError()', function ( assert ) {

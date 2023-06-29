@@ -169,6 +169,14 @@
 						wb.getLanguageNameByCode( self.options.value.language )
 					)
 				};
+				// T338302: Indicate to the editor that mul doesn't support descriptions.
+				if ( subjectName === 'description' && self.options.value.language === 'mul' ) {
+					options.placeholderMessage = 'wikibase-description-edit-placeholder-not-applicable';
+					options.accessibilityLabel = mw.msg(
+						'wikibase-description-edit-mul-not-applicable-accessibility-label'
+					);
+					options.readOnly = true;
+				}
 
 				self[ '$' + widgetName ][ widgetName ]( options );
 			} );
