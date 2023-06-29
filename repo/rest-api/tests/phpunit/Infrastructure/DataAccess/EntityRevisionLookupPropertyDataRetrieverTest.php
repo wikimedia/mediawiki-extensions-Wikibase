@@ -150,6 +150,74 @@ class EntityRevisionLookupPropertyDataRetrieverTest extends TestCase {
 		];
 	}
 
+	public function testGetStatements(): void {
+		$statement1 = NewStatement::forProperty( 'P123' )
+			->withGuid( 'P666$c48c32c3-42b5-498f-9586-84608b88747c' )
+			->withValue( 'potato' )
+			->build();
+		$statement2 = NewStatement::forProperty( 'P321' )
+			->withGuid( 'P666$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
+			->withValue( 'banana' )
+			->build();
+
+		$property = new Property(
+			new NumericPropertyId( 'P666' ),
+			new Fingerprint(
+				new TermList( [ new Term( 'en', 'potato' ) ] ),
+				new TermList( [ new Term( 'en', 'root vegetable' ) ] ),
+				new AliasGroupList( [ new AliasGroup( 'en', [ 'spud', 'tater' ] ) ] )
+			),
+			'wikibase-item',
+			new DataModelStatementList( $statement1, $statement2 )
+		);
+
+		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $property->getId(), $property );
+
+		$this->assertEquals(
+			new StatementList(
+				$this->newStatementReadModelConverter()->convert( $statement1 ),
+				$this->newStatementReadModelConverter()->convert( $statement2 )
+			),
+			$this->newRetriever()->getStatements( $property->getId() )
+		);
+	}
+
+	public function testGivenFilterProperty_getStatementsReturnsStatementGroup(): void {
+		$statement1 = NewStatement::forProperty( 'P123' )
+			->withGuid( 'P666$c48c32c3-42b5-498f-9586-84608b88747c' )
+			->withValue( 'potato' )
+			->build();
+		$statement2 = NewStatement::forProperty( 'P321' )
+			->withGuid( 'P666$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
+			->withValue( 'banana' )
+			->build();
+
+		$property = new Property(
+			new NumericPropertyId( 'P666' ),
+			new Fingerprint(
+				new TermList( [ new Term( 'en', 'potato' ) ] ),
+				new TermList( [ new Term( 'en', 'root vegetable' ) ] ),
+				new AliasGroupList( [ new AliasGroup( 'en', [ 'spud', 'tater' ] ) ] )
+			),
+			'wikibase-item',
+			new DataModelStatementList( $statement1, $statement2 )
+		);
+
+		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $property->getId(), $property );
+
+		$this->assertEquals(
+			new StatementList( $this->newStatementReadModelConverter()->convert( $statement1 ) ),
+			$this->newRetriever()->getStatements( $property->getId(), new NumericPropertyId( 'P123' ) )
+		);
+	}
+
+	public function testGivenPropertyDoesNotExist_getStatementsReturnsNull(): void {
+		$nonexistentPropertyId = new NumericPropertyId( 'P321' );
+		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $nonexistentPropertyId, null );
+
+		$this->assertNull( $this->newRetriever()->getStatements( $nonexistentPropertyId ) );
+	}
+
 	private function newRetriever(): EntityRevisionLookupPropertyDataRetriever {
 		return new EntityRevisionLookupPropertyDataRetriever(
 			$this->entityRevisionLookup,
