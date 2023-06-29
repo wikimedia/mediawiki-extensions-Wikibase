@@ -404,6 +404,7 @@
 				"client/resources/wikibase.sites.js",
 				"client/resources/jquery.wikibase/jquery.wikibase.siteselector.js",
 				"client/resources/jquery.wikibase/jquery.wikibase.wbtooltip.js",
+				"client/resources/jquery.wikibase/jquery.tipsy/jquery.tipsy.js",
 				"client/resources/wikibase.buildErrorOutput.js",
 				"client/resources/util.highlightSubstring.js",
 				"client/resources/jquery.ui/jquery.ui.suggester.js",
@@ -419,6 +420,7 @@
 			"styles": [
 				"client/resources/jquery.wikibase/jquery.wikibase.linkitem.css",
 				"client/resources/jquery.wikibase/jquery.wikibase.wbtooltip.css",
+				"client/resources/jquery.wikibase/jquery.tipsy/jquery.tipsy.css",
 				"client/resources/jquery.ui/jquery.ui.suggester.css",
 				"client/resources/jquery.ui/jquery.ui.ooMenu.css"
 			],
