@@ -8,7 +8,10 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestPropertyRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetPropertyStatements;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetPropertyStatementsRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetPropertyStatementsValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyStatementsRetriever;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
@@ -106,8 +109,21 @@ class GetPropertyStatementsTest extends TestCase {
 		}
 	}
 
+	public function testGivenInvalidPropertyId_throwsException(): void {
+		try {
+			$this->newUseCase()->execute( new GetPropertyStatementsRequest( 'X123' ) );
+
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::INVALID_PROPERTY_ID, $e->getErrorCode() );
+			$this->assertSame( 'Not a valid property ID: X123', $e->getErrorMessage() );
+			$this->assertSame( [ PropertyIdValidator::CONTEXT_VALUE => 'X123' ], $e->getErrorContext() );
+		}
+	}
+
 	private function newUseCase(): GetPropertyStatements {
 		return new GetPropertyStatements(
+			new GetPropertyStatementsValidator( new PropertyIdValidator() ),
 			$this->statementsRetriever,
 			$this->getRevisionMetadata
 		);

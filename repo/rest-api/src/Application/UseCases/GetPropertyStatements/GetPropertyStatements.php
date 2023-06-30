@@ -12,13 +12,16 @@ use Wikibase\Repo\RestApi\Domain\Services\PropertyStatementsRetriever;
  */
 class GetPropertyStatements {
 
+	private GetPropertyStatementsValidator $validator;
 	private PropertyStatementsRetriever $statementsRetriever;
 	private GetLatestPropertyRevisionMetadata $getLatestRevisionMetadata;
 
 	public function __construct(
+		GetPropertyStatementsValidator $validator,
 		PropertyStatementsRetriever $statementsRetriever,
 		GetLatestPropertyRevisionMetadata $getLatestRevisionMetadata
 	) {
+		$this->validator = $validator;
 		$this->statementsRetriever = $statementsRetriever;
 		$this->getLatestRevisionMetadata = $getLatestRevisionMetadata;
 	}
@@ -27,6 +30,8 @@ class GetPropertyStatements {
 	 * @throws UseCaseError
 	 */
 	public function execute( GetPropertyStatementsRequest $request ): GetPropertyStatementsResponse {
+		$this->validator->assertValidRequest( $request );
+
 		$subjectPropertyId = new NumericPropertyId( $request->getSubjectPropertyId() );
 		$requestedFilterPropertyId = $request->getFilterPropertyId();
 		$filterPropertyId = $requestedFilterPropertyId ? new NumericPropertyId( $requestedFilterPropertyId ) : null;
