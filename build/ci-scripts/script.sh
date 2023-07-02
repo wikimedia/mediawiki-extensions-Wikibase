@@ -2,6 +2,6 @@
 
 set -ex
 
-cd ../mediawiki/tests/phpunit
+cd ../mediawiki
 
-php phpunit.php --group Wikibase
+composer phpunit:entrypoint -- --group Wikibase
