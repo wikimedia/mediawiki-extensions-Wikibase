@@ -66,13 +66,14 @@
 		}
 	} ) );
 
-	QUnit.test( 'Create & destroy', function ( assert ) {
+	QUnit.test( 'Create & destroy (with mul disabled)', function ( assert ) {
 		assert.throws(
 			function () {
 				createEntitytermsforlanguagelistview( { value: null } );
 			},
 			'Throwing error when trying to initialize widget without a value.'
 		);
+		mw.config.set( { wbEnableMulLanguageCode: false } );
 
 		var $entitytermsforlanguagelistview = createEntitytermsforlanguagelistview(),
 			entitytermsforlanguagelistview
@@ -163,9 +164,12 @@
 		assert.strictEqual( !entitytermsforlanguagelistview._hasMoreLanguages(), true );
 	} );
 
-	QUnit.test( 'mul handling', function ( assert ) {
+	// This test is to be removed in T330217
+	QUnit.test( 'mul handling when not always showing it (temporary)', function ( assert ) {
 		var fingerprint = createFingerprint();
 		fingerprint.setLabel( 'mul', new datamodel.Term( 'mul', 'mul-label' ) );
+		mw.config.set( { wbEnableMulLanguageCode: true } );
+		mw.config.set( { wbTmpAlwaysShowMulLanguageCode: false } );
 
 		var $entitytermsforlanguagelistview = createEntitytermsforlanguagelistview( { value: fingerprint } ),
 			entitytermsforlanguagelistview
@@ -175,6 +179,23 @@
 			entitytermsforlanguagelistview._defaultLanguages,
 			[ 'de', 'en', 'mul' ],
 			'Default languages if a "mul" term is present.'
+		);
+	} );
+
+	QUnit.test( 'mul handling ', function ( assert ) {
+		var fingerprint = createFingerprint();
+		fingerprint.setLabel( 'mul', new datamodel.Term( 'mul', 'mul-label' ) );
+		mw.config.set( { wbEnableMulLanguageCode: true } );
+		mw.config.set( { wbTmpAlwaysShowMulLanguageCode: true } );
+
+		var $entitytermsforlanguagelistview = createEntitytermsforlanguagelistview(),
+			entitytermsforlanguagelistview
+				= $entitytermsforlanguagelistview.data( 'entitytermsforlanguagelistview' );
+
+		assert.deepEqual(
+			entitytermsforlanguagelistview._defaultLanguages,
+			[ 'de', 'en', 'mul' ],
+			'"mul" should always be added to the default languages, even if it has no term.'
 		);
 	} );
 
