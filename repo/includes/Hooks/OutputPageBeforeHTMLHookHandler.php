@@ -353,6 +353,13 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 			return $userPreferredTermsLanguages;
 		}
 
+		if (
+			$this->repoSettings->getSetting( 'tmpEnableMulLanguageCode' )
+			&& $this->repoSettings->getSetting( 'tmpAlwaysShowMulLanguageCode' )
+		) {
+			return array_merge( $userPreferredTermsLanguages, [ 'mul' ] );
+		}
+
 		// Check both the html snippets and the (possibly empty) entity for a "mul" term.
 		$hasMulTerm = isset( $entityTermsListHtml['mul'] );
 		if ( $entity instanceof LabelsProvider ) {
