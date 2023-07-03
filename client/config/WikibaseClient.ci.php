@@ -16,6 +16,11 @@
  * @license GPL-2.0-or-later
  */
 
+// Make this explicitly global for the PHPUnit bootstrap code. This is only necessary
+// because ExtensionLoadHandler tries to read the global before the bootstrap code
+// actually put these values into the global scope.
+global $wgWBClientSettings;
+
 // enable data access in user language, for LuaWikibaseIntegrationTest
 $wgWBClientSettings['allowDataAccessInUserLanguage'] = true;
 
