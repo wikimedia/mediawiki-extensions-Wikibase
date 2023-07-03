@@ -15,7 +15,9 @@
 	"wikibase-add": "кошуу",
 	"wikibase-label-empty": "белги аныкталган жок",
 	"wikibase-description-empty": "Сүрөттөмө аныкталган жок",
+	"wikibase-diffview-link": "шилтемелер",
 	"wikibase-sitelink-site-edit-placeholder": "сайт",
+	"wikibase-sitelink-page-edit-placeholder": "барак",
 	"wikibase-sitelinks-special": "Башка сайттар",
 	"wikibase-remove": "өчүрүү",
 	"wikibase-statementview-rank-normal": "Кадимки ранг",
@@ -26,5 +28,6 @@
 	"wikibase-itemdisambiguation-lookup-language": "Тилдин коду:",
 	"wikibase-itemdisambiguation-submit": "Издөө",
 	"wikibase-newentity-description": "Баяндама:",
-	"wikibase-modifyterm-language": "Тилдин коду:"
+	"wikibase-modifyterm-language": "Тилдин коду:",
+	"wikibase-federated-properties-leaving-site-notice-cancel": "Жокко чыгаруу"
 }

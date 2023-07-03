@@ -2,13 +2,20 @@
 	"@metadata": {
 		"authors": [
 			"Сай",
-			"Санюн Вадик"
+			"Санюн Вадик",
+			"Lifeway"
 		]
 	},
 	"tooltip-t-wikibase": "Ссылка на связанный элемент репозитория данных",
 	"wikibase-comment-update": "{{WBREPONAME}} элемент вашталтын",
 	"wikibase-editlinks": "Кылверым тӧрлаташ",
 	"wikibase-editlinkstitle": "Йылмыла кокласе кылвер-влакым тӧрлаташ",
+	"wikibase-linkitem-addlinks": "Кылвер-влакым ешараш",
+	"wikibase-linkitem-title": "Велыж дене кылдымаш",
+	"wikibase-linkitem-linkpage": "Велыж дене кылдымаш",
+	"wikibase-linkitem-selectlink": "Порылий, сайтым да велыжым ойыро, кудын дене тиде велыжым кылдынет.",
+	"wikibase-linkitem-input-site": "Йылме:",
+	"wikibase-linkitem-input-page": "Велыж:",
 	"wikibase-rc-hide-wikidata-show": "ончыкташ",
 	"wikibase-rc-wikibase-edit-letter": "д",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} тӧрлатымаш",
