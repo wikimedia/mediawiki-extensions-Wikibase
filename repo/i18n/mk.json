@@ -49,6 +49,8 @@
 	"wikibase-description-empty": "Сè уште нема зададено опис",
 	"wikibase-description-edit-placeholder": "внесете опис",
 	"wikibase-description-edit-placeholder-language-aware": "внесете опис на $1",
+	"wikibase-description-edit-placeholder-not-applicable": "неприменливо",
+	"wikibase-description-edit-mul-not-applicable-accessibility-label": "Описот не е применлив за повеќе јазици",
 	"wikibase-description-edit-not-supported": "Описите не се поддржани за овој јазик. Дајте опис на друг јазик откако ќе го создадете предметот.",
 	"wikibase-description-not-applicable-title": "Описот не е применлив за повеќе јазици.",
 	"wikibase-aliases-edit-placeholder": "внесете некои истозначници",

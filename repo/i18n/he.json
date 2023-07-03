@@ -59,6 +59,8 @@
 	"wikibase-description-empty": "לא הוגדר תיאור",
 	"wikibase-description-edit-placeholder": "נא להקליד תיאור",
 	"wikibase-description-edit-placeholder-language-aware": "נא להקליד תיאור ב{{GRAMMAR:תחילית|$1}}",
+	"wikibase-description-edit-placeholder-not-applicable": "לא זמין",
+	"wikibase-description-edit-mul-not-applicable-accessibility-label": "התיאור אינו זמין בשפות מרובות",
 	"wikibase-description-edit-not-supported": "אין תמיכה בתיאורים בשפה הזאת. נא לספק תיאור בשפה אחרת לאחר יצירת הפריט.",
 	"wikibase-description-not-applicable-title": "לא מתאים ליצור תיאור לערך שמיועד לשפות מרובות.",
 	"wikibase-aliases-edit-placeholder": "נא להזין כמה כינויים",

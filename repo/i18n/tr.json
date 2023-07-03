@@ -76,6 +76,8 @@
 	"wikibase-description-empty": "Açıklama bulunamadı",
 	"wikibase-description-edit-placeholder": "bir açıklama girin",
 	"wikibase-description-edit-placeholder-language-aware": "$1 açıklamasını girin",
+	"wikibase-description-edit-placeholder-not-applicable": "uygun değil",
+	"wikibase-description-edit-mul-not-applicable-accessibility-label": "Açıklama, Çoklu Dil için geçerli değildir",
 	"wikibase-description-edit-not-supported": "Açıklamalar bu dil için desteklenmiyor. Öge oluşturulduktan sonra lütfen başka bir dilde bir açıklama sağlayın.",
 	"wikibase-description-not-applicable-title": "Açıklama, Çoklu Dil için geçerli değildir.",
 	"wikibase-aliases-edit-placeholder": "diğer adını girin",

@@ -72,6 +72,7 @@
 	"wikibase-description-empty": "Nessuna descrizione definita",
 	"wikibase-description-edit-placeholder": "inserisci una descrizione",
 	"wikibase-description-edit-placeholder-language-aware": "inserisci una descrizione in $1",
+	"wikibase-description-edit-placeholder-not-applicable": "non applicabile",
 	"wikibase-aliases-edit-placeholder": "inserisci degli alias",
 	"wikibase-aliases-edit-placeholder-language-aware": "inserisci degli alias in $1",
 	"wikibase-aliases-edit-label": "Alias, separati da una barra verticale:",

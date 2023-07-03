@@ -56,6 +56,7 @@
 	"wikibase-description-empty": "Опис није дефинисан",
 	"wikibase-description-edit-placeholder": "унесите опис",
 	"wikibase-description-edit-placeholder-language-aware": "унесите опис на $1",
+	"wikibase-description-edit-placeholder-not-applicable": "није применљиво",
 	"wikibase-aliases-edit-placeholder": "унесите неке псеудониме",
 	"wikibase-aliases-edit-placeholder-language-aware": "унесите неке псеудониме на $1",
 	"wikibase-aliases-edit-label": "Псеудоними, раздвојени усправном цртом:",

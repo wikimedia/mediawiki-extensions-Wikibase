@@ -46,6 +46,8 @@
 	"wikibase-description-empty": "Nulle description definite",
 	"wikibase-description-edit-placeholder": "scribe description",
 	"wikibase-description-edit-placeholder-language-aware": "insere un description in $1",
+	"wikibase-description-edit-placeholder-not-applicable": "non applicabile",
+	"wikibase-description-edit-mul-not-applicable-accessibility-label": "Un description non es applicabile pro Plure Linguas",
 	"wikibase-description-edit-not-supported": "Descriptiones non es supportate pro iste lingua. Per favor forni un description in un altere lingua un vice le elemento create.",
 	"wikibase-description-not-applicable-title": "Un description non es applicabile pro Plure Linguas.",
 	"wikibase-aliases-edit-placeholder": "insere alcun aliases",
