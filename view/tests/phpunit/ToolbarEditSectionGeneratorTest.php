@@ -6,7 +6,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\View\LocalizedTextProvider;
+use Wikibase\View\DummyLocalizedTextProvider;
 use Wikibase\View\SpecialPageLinker;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\ToolbarEditSectionGenerator;
@@ -114,7 +114,7 @@ class ToolbarEditSectionGeneratorTest extends \PHPUnit\Framework\TestCase {
 		return new ToolbarEditSectionGenerator(
 			$specialPageLinker,
 			$templateFactory,
-			$this->createMock( LocalizedTextProvider::class )
+			new DummyLocalizedTextProvider()
 		);
 	}
 
