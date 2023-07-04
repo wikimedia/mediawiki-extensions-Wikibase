@@ -20,16 +20,11 @@ use WikiPage;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class EntityContentDiffView extends DifferenceEngine {
-
 	/**
 	 * @return Language
 	 */
-	public function getDiffLang() {
-		if ( $this->mDiffLang === null ) {
-			$this->mDiffLang = $this->getLanguage();
-		}
-
-		return parent::getDiffLang();
+	public function getDefaultLanguage() {
+		return $this->getLanguage();
 	}
 
 	/**
