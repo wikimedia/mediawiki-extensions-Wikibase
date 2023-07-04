@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\ItemId;
 /**
  * @license GPL-2.0-or-later
  */
-class ItemIdValidator {
+class ItemIdValidator implements EntityIdValidator {
 
 	public const CODE_INVALID = 'invalid-item-id';
 	public const CONTEXT_VALUE = 'item-id-value';

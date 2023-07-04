@@ -41,8 +41,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetProperty;
 use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetPropertyValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetPropertyStatements;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetPropertyStatementsValidator;
-use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementFactory;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchedLabelsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsValidator;
@@ -58,7 +57,6 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescrip
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
-use Wikibase\Repo\RestApi\Application\Validation\EntityIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
@@ -258,12 +256,9 @@ return [
 		);
 	},
 
-	'WbRestApi.GetStatement' => function( MediaWikiServices $services ): GetStatement {
-		return new GetStatement(
-			new GetStatementValidator(
-				new StatementIdValidator( new BasicEntityIdParser() ),
-				new EntityIdValidator( new BasicEntityIdParser() )
-			),
+	'WbRestApi.GetStatementFactory' => function( MediaWikiServices $services ): GetStatementFactory {
+		return new GetStatementFactory(
+			new StatementIdValidator( new BasicEntityIdParser() ),
 			WbRestApi::getStatementRetriever( $services ),
 			WbRestApi::getGetLatestStatementSubjectRevisionMetadata( $services )
 		);

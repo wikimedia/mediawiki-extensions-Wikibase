@@ -13,6 +13,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
+use Wikibase\Repo\RestApi\Application\UseCases\UnexpectedRequestedSubjectIdValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
@@ -48,7 +49,7 @@ class GetStatementRouteHandler extends SimpleHandler {
 	public static function factory(): Handler {
 		$responseFactory = new ResponseFactory();
 		return new self(
-			WbRestApi::getGetStatement(),
+			WbRestApi::getStatementFactory()->newGetStatement( new UnexpectedRequestedSubjectIdValidator() ),
 			WbRestApi::getSerializerFactory()->newStatementSerializer(),
 			$responseFactory,
 			new MiddlewareHandler( [
