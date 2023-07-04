@@ -33,9 +33,6 @@ class UsageTrackingIntegrationTest extends MediaWikiIntegrationTestCase {
 	/** @var Title */
 	private $templateTitle;
 
-	/** @var bool */
-	private $oldAllowDataTransclusion;
-
 	protected function setUp(): void {
 		if ( !WikibaseSettings::isRepoEnabled() ) {
 			$this->markTestSkipped( 'Integration test requires repo and client extension to be active on the same wiki.' );
@@ -47,9 +44,10 @@ class UsageTrackingIntegrationTest extends MediaWikiIntegrationTestCase {
 		// Disable caching to avoid Q33 vs Q22 mixup
 		$this->setMainCache( CACHE_NONE );
 
-		$settings = WikibaseClient::getSettings();
-		$this->oldAllowDataTransclusion = $settings->getSetting( 'allowDataTransclusion' );
+		$settings = clone WikibaseClient::getSettings();
 		$settings->setSetting( 'allowDataTransclusion', true );
+		$settings->setSetting( 'allowDataAccessInUserLanguage', true );
+		$this->setService( 'WikibaseClient.Settings', $settings );
 
 		$entityLookup = $this->createMock( EntityLookup::class );
 		$entityLookup->method( 'hasEntity' )
@@ -63,15 +61,6 @@ class UsageTrackingIntegrationTest extends MediaWikiIntegrationTestCase {
 		$ns = $this->getDefaultWikitextNS();
 		$this->articleTitle = Title::makeTitle( $ns, 'UsageTrackingIntegrationTest_Article' );
 		$this->templateTitle = Title::makeTitle( NS_TEMPLATE, 'UsageTrackingIntegrationTest_Template' );
-	}
-
-	protected function tearDown(): void {
-		parent::tearDown();
-
-		WikibaseClient::getSettings()->setSetting(
-			'allowDataTransclusion',
-			$this->oldAllowDataTransclusion
-		);
 	}
 
 	private function runRefreshLinksJobs() {
