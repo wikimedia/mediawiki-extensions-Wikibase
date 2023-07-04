@@ -30,8 +30,6 @@ module.exports = function ( grunt ) {
 		},
 		banana: {
 			options: {
-				disallowDuplicateTranslations: false,
-				disallowUnusedTranslations: false,
 				requireLowerCase: false
 			},
 			all: [
