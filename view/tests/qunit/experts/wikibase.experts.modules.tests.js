@@ -12,6 +12,7 @@
 					var caughtError = null;
 
 					try {
+						// eslint-disable-next-line security/detect-non-literal-require
 						var module = require( modules[ propertyType ] );
 						assert.strictEqual(
 							typeof module,

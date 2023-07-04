@@ -185,6 +185,7 @@
 			this.element.removeClassByRegex( /wb-reference-.+/ );
 			this.element.addClass( 'wb-reference-' + refHash );
 
+			// eslint-disable-next-line security/detect-non-literal-regexp
 			this.element.removeClassByRegex( new RegExp( this.widgetBaseClass + '-.+' ) );
 			this.element.addClass( this.widgetBaseClass + '-' + refHash );
 		},

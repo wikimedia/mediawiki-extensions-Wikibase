@@ -94,6 +94,7 @@
 			mw.loader.using( modules, function ( require ) {
 				modules.forEach( function ( module, index ) {
 					entityDeserializer.registerStrategy(
+						// eslint-disable-next-line security/detect-non-literal-require
 						require( module )(),
 						typeNames[ index ]
 					);

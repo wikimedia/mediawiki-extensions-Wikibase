@@ -655,6 +655,7 @@
 		 */
 		_getSuggestionsFromArray: function ( term, source ) {
 			var deferred = $.Deferred(),
+				// eslint-disable-next-line security/detect-non-literal-regexp
 				matcher = new RegExp( this._escapeRegex( term ), 'i' );
 
 			deferred.resolve( source.filter( function ( item ) {

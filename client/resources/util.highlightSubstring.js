@@ -72,6 +72,7 @@
 		}
 
 		var matches = string.match(
+			// eslint-disable-next-line security/detect-non-literal-regexp
 			new RegExp( regExpString, options.caseSensitive ? '' : 'i' )
 		);
 
