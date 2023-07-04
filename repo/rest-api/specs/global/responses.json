@@ -269,13 +269,30 @@
 			}
 		}
 	},
-	"InvalidRetrieveStatementsInput": {
+	"InvalidRetrieveItemStatementsInput": {
 		"description": "The request cannot be processed",
 		"content": {
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
+					"invalid-property-id": { "$ref": "./examples.json#/InvalidPropertyIdExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
+	"InvalidRetrievePropertyStatementsInput": {
+		"description": "The request cannot be processed",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/Error" },
+				"examples": {
 					"invalid-property-id": { "$ref": "./examples.json#/InvalidPropertyIdExample" }
 				}
 			}
@@ -1086,7 +1103,7 @@
 			}
 		}
 	},
-	"Statements": {
+	"ItemStatements": {
 		"description": "The statements of an Item",
 		"headers": {
 			"Last-Modified": {
@@ -1116,6 +1133,108 @@
 						"type": "array",
 						"items": { "$ref": "./response-parts.json#/StatementResponse" }
 					}
+				},
+				"example": {
+					"P370": [
+						{
+							"id": "Q11$6403c562-401a-2b26-85cc-8327801145e1",
+							"rank": "normal",
+							"property": {
+								"id": "P370",
+								"data-type": "string"
+							},
+							"value": {
+								"content": "I am a goat",
+								"type": "value"
+							},
+							"qualifiers": [ ],
+							"references": [ ]
+						}
+					],
+					"P92": [
+						{
+							"id": "Q11$6403c562-401a-2b26-85cc-8327801145e1",
+							"rank": "normal",
+							"property": {
+								"id": "P92",
+								"data-type": "string"
+							},
+							"value": {
+								"content": "I am a goat",
+								"type": "value"
+							},
+							"qualifiers": [ ],
+							"references": [ ]
+						}
+					]
+				}
+			}
+		}
+	},
+	"PropertyStatements": {
+		"description": "The statements of a Property",
+		"headers": {
+			"Last-Modified": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Last modified date"
+			},
+			"ETag": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Last entity revision number"
+			},
+			"X-Authenticated-User": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Optional username of the user making the request"
+			}
+		},
+		"content": {
+			"application/json": {
+				"schema": {
+					"type": "object",
+					"additionalProperties": {
+						"type": "array",
+						"items": { "$ref": "./response-parts.json#/StatementResponse" }
+					}
+				},
+				"example": {
+					"P370": [
+						{
+							"id": "P11$6403c562-401a-2b26-85cc-8327801145e1",
+							"rank": "normal",
+							"property": {
+								"id": "P370",
+								"data-type": "string"
+							},
+							"value": {
+								"content": "I am a goat",
+								"type": "value"
+							},
+							"qualifiers": [],
+							"references": []
+						}
+					],
+					"P92": [
+						{
+							"id": "P11$6403c562-401a-2b26-85cc-8327801145e1",
+							"rank": "normal",
+							"property": {
+								"id": "P92",
+								"data-type": "string"
+							},
+							"value": {
+								"content": "I am a goat",
+								"type": "value"
+							},
+							"qualifiers": [],
+							"references": []
+						}
+					]
 				}
 			}
 		}

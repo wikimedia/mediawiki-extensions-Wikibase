@@ -26,7 +26,8 @@
 	"InvalidPropertyIdExample": {
 		"value": {
 			"code": "invalid-property-id",
-			"message": "Not a valid property ID: {property_id}"
+			"message": "Not a valid property ID: {property_id}",
+			"context": { "property-id": "{property_id}" }
 		}
 	},
 	"InvalidStatementIdExample": {

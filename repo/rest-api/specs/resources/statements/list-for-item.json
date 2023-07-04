@@ -4,7 +4,7 @@
 		"summary": "Retrieve Statements from an Item",
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/ItemId" },
-			{ "$ref": "../../global/parameters.json#/Property" },
+			{ "$ref": "../../global/parameters.json#/PropertyFilter" },
 			{ "$ref": "../../global/parameters.json#/IfNoneMatch" },
 			{ "$ref": "../../global/parameters.json#/IfModifiedSince" },
 			{ "$ref": "../../global/parameters.json#/IfMatch" },
@@ -12,10 +12,10 @@
 			{ "$ref": "../../global/parameters.json#/Authorization" }
 		],
 		"responses": {
-			"200": { "$ref": "../../global/responses.json#/Statements" },
+			"200": { "$ref": "../../global/responses.json#/ItemStatements" },
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
 			"308": { "$ref": "../../global/responses.json#/Moved" },
-			"400": { "$ref": "../../global/responses.json#/InvalidRetrieveStatementsInput" },
+			"400": { "$ref": "../../global/responses.json#/InvalidRetrieveItemStatementsInput" },
 			"404": { "$ref": "../../global/responses.json#/ItemNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
