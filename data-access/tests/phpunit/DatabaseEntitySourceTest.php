@@ -31,16 +31,19 @@ class DatabaseEntitySourceTest extends TestCase {
 	) {
 		$this->expectException( InvalidArgumentException::class );
 		AtEase::suppressWarnings();
-		new DatabaseEntitySource(
-			$slotName,
-			$databaseName,
-			$entityNamespaceIdsAndSlots,
-			$conceptBaseUri,
-			$validRdfNodeNamespacePrefix,
-			$validRdfPredicateNamespacePrefix,
-			$interwikiPrefix
-		);
-		AtEase::restoreWarnings();
+		try {
+			new DatabaseEntitySource(
+				$slotName,
+				$databaseName,
+				$entityNamespaceIdsAndSlots,
+				$conceptBaseUri,
+				$validRdfNodeNamespacePrefix,
+				$validRdfPredicateNamespacePrefix,
+				$interwikiPrefix
+			);
+		} finally {
+			AtEase::restoreWarnings();
+		}
 	}
 
 	public static function provideInvalidConstructorArguments() {
