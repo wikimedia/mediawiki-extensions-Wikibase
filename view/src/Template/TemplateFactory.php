@@ -41,16 +41,6 @@ class TemplateFactory {
 	}
 
 	/**
-	 * @param string $key
-	 * @param array $params
-	 *
-	 * @return Template
-	 */
-	public function get( $key, array $params ) {
-		return new Template( $this->templateRegistry, $key, $params );
-	}
-
-	/**
 	 * Shorthand function to retrieve a template filled with the specified parameters.
 	 *
 	 * important! note that the Template class does not escape anything.
@@ -67,7 +57,7 @@ class TemplateFactory {
 			$params = $params[0];
 		}
 
-		$template = $this->get( $key, $params );
+		$template = new Template( $this->templateRegistry, $key, $params );
 
 		return $template->render();
 	}

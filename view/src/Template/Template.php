@@ -4,8 +4,6 @@ declare( strict_types = 1 );
 
 namespace Wikibase\View\Template;
 
-use Message;
-
 /**
  * Allows storing and accessing of templates (e.g. snippets commonly used in server-side HTML
  * generation and client-side JavaScript processing).
@@ -15,42 +13,33 @@ use Message;
  * @license GPL-2.0-or-later
  * @author H. Snater <mediawiki@snater.com>
  */
-class Template extends Message {
+class Template {
 
-	/** @var TemplateRegistry */
-	protected $templateRegistry;
+	private TemplateRegistry $templateRegistry;
+	private string $key;
+	private array $params;
 
 	/**
 	 * important! note that the Template class does not escape anything.
 	 * be sure to escape your params before using this class!
 	 *
 	 * @param TemplateRegistry $templateRegistry
-	 * @param string|string[] $key message key, or array of message keys to try
-	 *          and use the first non-empty message for
-	 * @param array $params Array message parameters
+	 * @param string $key template key
+	 * @param array $params Array template parameters
 	 */
-	public function __construct( TemplateRegistry $templateRegistry, $key, array $params = [] ) {
+	public function __construct( TemplateRegistry $templateRegistry, string $key, array $params = [] ) {
 		$this->templateRegistry = $templateRegistry;
-		parent::__construct( $key, $params );
-	}
-
-	/**
-	 * Fetch a template from the template store.
-	 *
-	 * @see Message.fetchMessage
-	 *
-	 * @return string template
-	 */
-	protected function fetchMessage(): string {
-		if ( !isset( $this->message ) ) {
-			$this->message = $this->templateRegistry->getTemplate( $this->key );
-		}
-		return $this->message;
+		$this->key = $key;
+		$this->params = $params;
 	}
 
 	public function render(): string {
-		// Use plain() to prevent replacing {{...}}:
-		return $this->plain();
+		$template = $this->templateRegistry->getTemplate( $this->key );
+		$replacements = [];
+		foreach ( $this->params as $n => $param ) {
+			$replacements['$' . ( $n + 1 )] = $param;
+		}
+		return strtr( $template, $replacements );
 	}
 
 }
