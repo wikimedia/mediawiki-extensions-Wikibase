@@ -16,6 +16,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\EntityFactory;
 use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\Hooks\Helpers\OutputPageEditability;
@@ -60,6 +61,8 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 	 */
 	private $entityViewChecker;
 
+	private SettingsArray $settings;
+
 	protected function setUp(): void {
 		parent::setUp();
 		$this->itemId = new ItemId( 'Q1' );
@@ -71,6 +74,12 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->entityFactory = $this->createMock( EntityFactory::class );
 		$this->editability = $this->mockEditability();
 		$this->isExternallyRendered = false;
+		$this->settings = new SettingsArray( [
+			'ssrServerUrl' => null,
+			'ssrServerTimeout' => 3,
+			'termboxUserSpecificSsrEnabled' => true,
+			'tmpEnableMulLanguageCode' => false,
+		] );
 
 		$this->preferredLanguageLookup = $this->createMock( UserPreferredContentLanguagesLookup::class );
 		$this->preferredLanguageLookup->method( 'getLanguages' )
@@ -102,7 +111,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 		return new OutputPageBeforeHTMLHookHandler(
 			new NullHttpRequestFactory(),
 			new NullStatsdDataFactory(),
-			WikibaseRepo::getSettings(),
+			$this->settings,
 			TemplateFactory::getDefaultInstance(),
 			$this->entityRevisionLookup,
 			$this->languageNameLookup,
@@ -248,18 +257,26 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 	public static function hasMulProvider(): array {
 		return [
-			'has mul' => [ true ],
-			'without mul' => [ false ],
+			'mul is not enabled' => [ false, false ],
+			'mul is enabled' => [ true, true ],
+			'mul is enabled but not always shown, without mul term present' => [ true, false, false ],
+			'mul is enabled but not always shown, with mul term present' => [ true, false, true ],
 		];
 	}
 
 	/**
 	 * @dataProvider hasMulProvider
 	 */
-	public function testOnOutputPageBeforeHTML_withoutListItemHtml_mulHandling( bool $hasMul ) {
+	public function testOnOutputPageBeforeHTML_withoutListItemHtml_mulHandling(
+		bool $mulEnabled,
+		bool $mulAlwaysShown,
+		bool $hasMulTerm = false
+	) {
+		$this->settings->setSetting( 'tmpEnableMulLanguageCode', $mulEnabled );
+		$this->settings->setSetting( 'tmpAlwaysShowMulLanguageCode', $mulAlwaysShown );
 		$out = $this->newOutputPage();
 		$item = new Item( $this->itemId );
-		if ( $hasMul ) {
+		if ( $hasMulTerm ) {
 			$item->setLabel( 'mul', 'bar' );
 		}
 
@@ -283,7 +300,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->assertStringContainsString( 'lang="en"', $html );
 		$this->assertStringContainsString( 'lang="es"', $html );
 		$this->assertStringContainsString( 'lang="ru"', $html );
-		if ( $hasMul ) {
+		if ( $mulEnabled && ( $mulAlwaysShown || $hasMulTerm ) ) {
 			$this->assertStringContainsString( 'lang="mul"', $html );
 		} else {
 			$this->assertStringNotContainsString( 'lang="mul"', $html );

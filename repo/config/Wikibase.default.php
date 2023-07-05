@@ -466,4 +466,12 @@ return [
 	 * @see https://phabricator.wikimedia.org/T297393
 	 */
 	'tmpEnableMulLanguageCode' => false,
+
+	/**
+	 * Feature Flag for the soft rollout of always showing the 'mul' language in the termbox.
+	 *
+	 * Add in https://phabricator.wikimedia.org/T339104, to be removed in https://phabricator.wikimedia.org/T330217
+	 * @var bool Whether to always show the 'mul' language code in the termbox
+	 */
+	'tmpAlwaysShowMulLanguageCode' => false,
 ];
