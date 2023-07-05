@@ -7,16 +7,16 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements;
  */
 class GetPropertyStatementsRequest {
 
-	private string $subjectPropertyId;
+	private string $propertyId;
 	private ?string $filterPropertyId;
 
-	public function __construct( string $subjectPropertyId, ?string $filterPropertyId = null ) {
-		$this->subjectPropertyId = $subjectPropertyId;
+	public function __construct( string $propertyId, ?string $filterPropertyId = null ) {
+		$this->propertyId = $propertyId;
 		$this->filterPropertyId = $filterPropertyId;
 	}
 
-	public function getSubjectPropertyId(): string {
-		return $this->subjectPropertyId;
+	public function getPropertyId(): string {
+		return $this->propertyId;
 	}
 
 	public function getFilterPropertyId(): ?string {

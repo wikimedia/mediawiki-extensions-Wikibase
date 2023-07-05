@@ -32,15 +32,15 @@ class GetPropertyStatements {
 	public function execute( GetPropertyStatementsRequest $request ): GetPropertyStatementsResponse {
 		$this->validator->assertValidRequest( $request );
 
-		$subjectPropertyId = new NumericPropertyId( $request->getSubjectPropertyId() );
+		$propertyId = new NumericPropertyId( $request->getPropertyId() );
 		$requestedFilterPropertyId = $request->getFilterPropertyId();
 		$filterPropertyId = $requestedFilterPropertyId ? new NumericPropertyId( $requestedFilterPropertyId ) : null;
 
-		[ $revisionId, $lastModified ] = $this->getLatestRevisionMetadata->execute( $subjectPropertyId );
+		[ $revisionId, $lastModified ] = $this->getLatestRevisionMetadata->execute( $propertyId );
 
 		return new GetPropertyStatementsResponse(
 			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Property exists
-			$this->statementsRetriever->getStatements( $subjectPropertyId, $filterPropertyId ),
+			$this->statementsRetriever->getStatements( $propertyId, $filterPropertyId ),
 			$lastModified,
 			$revisionId,
 		);

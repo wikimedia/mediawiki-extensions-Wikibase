@@ -44,11 +44,11 @@ class GetPropertyStatementsRouteHandler extends SimpleHandler {
 		);
 	}
 
-	public function run( string $subjectPropertyId ): Response {
+	public function run( string $propertyId ): Response {
 		$filterPropertyId = $this->getRequest()->getQueryParams()[self::PROPERTY_ID_QUERY_PARAM] ?? null;
 
 		try {
-			$useCaseResponse = $this->useCase->execute( new GetPropertyStatementsRequest( $subjectPropertyId, $filterPropertyId ) );
+			$useCaseResponse = $this->useCase->execute( new GetPropertyStatementsRequest( $propertyId, $filterPropertyId ) );
 			$httpResponse = $this->newSuccessHttpResponse( $useCaseResponse );
 		} catch ( UseCaseError $e ) {
 			return $this->responseFactory->newErrorResponseFromException( $e );

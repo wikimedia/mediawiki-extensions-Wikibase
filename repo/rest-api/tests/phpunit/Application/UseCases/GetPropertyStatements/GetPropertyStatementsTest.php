@@ -76,18 +76,18 @@ class GetPropertyStatementsTest extends TestCase {
 	}
 
 	public function testGivenFilterPropertyId_retrievesOnlyRequestedStatements(): void {
-		$subjectPropertyId = new NumericPropertyId( 'P123' );
+		$propertyId = new NumericPropertyId( 'P123' );
 		$filterPropertyId = new NumericPropertyId( 'P111' );
 
 		$expectedStatements = $this->createStub( StatementList::class );
 		$this->statementsRetriever = $this->createMock( PropertyStatementsRetriever::class );
 		$this->statementsRetriever->expects( $this->once() )
 			->method( 'getStatements' )
-			->with( $subjectPropertyId, $filterPropertyId )
+			->with( $propertyId, $filterPropertyId )
 			->willReturn( $expectedStatements );
 
 		$response = $this->newUseCase()->execute(
-			new GetPropertyStatementsRequest( $subjectPropertyId->getSerialization(), $filterPropertyId->getSerialization() )
+			new GetPropertyStatementsRequest( $propertyId->getSerialization(), $filterPropertyId->getSerialization() )
 		);
 
 		$this->assertSame( $expectedStatements, $response->getStatements() );

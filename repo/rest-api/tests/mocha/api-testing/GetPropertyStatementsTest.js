@@ -11,7 +11,7 @@ const { makeEtag } = require( '../helpers/httpHelper' );
 
 describe( 'GET /entities/properties/{id}/statements', () => {
 
-	let subjectPropertyId;
+	let propertyId;
 
 	let testPropertyId1;
 	let testPropertyId2;
@@ -40,15 +40,15 @@ describe( 'GET /entities/properties/{id}/statements', () => {
 			datatype: 'string'
 		} );
 
-		subjectPropertyId = property.entity.id;
+		propertyId = property.entity.id;
 
-		const testPropertyCreationMetadata = await getLatestEditMetadata( subjectPropertyId );
+		const testPropertyCreationMetadata = await getLatestEditMetadata( propertyId );
 		testModified = testPropertyCreationMetadata.timestamp;
 		testRevisionId = testPropertyCreationMetadata.revid;
 	} );
 
 	it( 'can GET statements of a property with metadata', async () => {
-		const response = await newGetPropertyStatementsRequestBuilder( subjectPropertyId )
+		const response = await newGetPropertyStatementsRequestBuilder( propertyId )
 			.assertValidRequest()
 			.makeRequest();
 
@@ -68,7 +68,7 @@ describe( 'GET /entities/properties/{id}/statements', () => {
 	} );
 
 	it( 'can filter statements by property', async () => {
-		const response = await newGetPropertyStatementsRequestBuilder( subjectPropertyId )
+		const response = await newGetPropertyStatementsRequestBuilder( propertyId )
 			.withQueryParam( 'property', testPropertyId1 )
 			.assertValidRequest()
 			.makeRequest();
@@ -89,32 +89,30 @@ describe( 'GET /entities/properties/{id}/statements', () => {
 	} );
 
 	it( '404 error - property not found', async () => {
-		const propertyId = 'P999999';
-		const response = await newGetPropertyStatementsRequestBuilder( propertyId )
+		const response = await newGetPropertyStatementsRequestBuilder( 'P999999' )
 			.assertValidRequest()
 			.makeRequest();
 
 		expect( response ).to.have.status( 404 );
 		assert.header( response, 'Content-Language', 'en' );
 		assert.equal( response.body.code, 'property-not-found' );
-		assert.include( response.body.message, propertyId );
+		assert.include( response.body.message, 'P999999' );
 	} );
 
 	it( '400 error - bad request, invalid subject property ID', async () => {
-		const propertyId = 'X123';
-		const response = await newGetPropertyStatementsRequestBuilder( propertyId )
+		const response = await newGetPropertyStatementsRequestBuilder( 'X123' )
 			.assertInvalidRequest()
 			.makeRequest();
 
 		expect( response ).to.have.status( 400 );
 		assert.header( response, 'Content-Language', 'en' );
 		assert.equal( response.body.code, 'invalid-property-id' );
-		assert.include( response.body.message, propertyId );
+		assert.include( response.body.message, 'X123' );
 	} );
 
 	it( '400 error - bad request, invalid filter property ID', async () => {
 		const filterPropertyId = 'X123';
-		const response = await newGetPropertyStatementsRequestBuilder( subjectPropertyId )
+		const response = await newGetPropertyStatementsRequestBuilder( propertyId )
 			.withQueryParam( 'property', filterPropertyId )
 			.assertInvalidRequest()
 			.makeRequest();

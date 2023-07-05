@@ -10,6 +10,6 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
  */
 interface PropertyStatementsRetriever {
 
-	public function getStatements( PropertyId $subjectPropertyId, ?PropertyId $filterPropertyId = null ): ?StatementList;
+	public function getStatements( PropertyId $propertyId, ?PropertyId $filterPropertyId = null ): ?StatementList;
 
 }

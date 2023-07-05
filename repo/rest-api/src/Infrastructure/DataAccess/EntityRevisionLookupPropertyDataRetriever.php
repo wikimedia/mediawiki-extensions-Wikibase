@@ -80,8 +80,8 @@ class EntityRevisionLookupPropertyDataRetriever implements PropertyPartsRetrieve
 		return $propertyParts->build();
 	}
 
-	public function getStatements( PropertyId $subjectPropertyId, ?PropertyId $filterPropertyId = null ): ?StatementList {
-		$property = $this->getProperty( $subjectPropertyId );
+	public function getStatements( PropertyId $propertyId, ?PropertyId $filterPropertyId = null ): ?StatementList {
+		$property = $this->getProperty( $propertyId );
 		if ( $property === null ) {
 			return null;
 		}

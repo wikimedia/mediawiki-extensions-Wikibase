@@ -20,7 +20,7 @@ class GetPropertyStatementsValidator {
 	 * @throws UseCaseError
 	 */
 	public function assertValidRequest( GetPropertyStatementsRequest $request ): void {
-		$propertyIdsToValidate = [ $request->getSubjectPropertyId() ];
+		$propertyIdsToValidate = [ $request->getPropertyId() ];
 
 		if ( $request->getFilterPropertyId() ) {
 			$propertyIdsToValidate[] = $request->getFilterPropertyId();
