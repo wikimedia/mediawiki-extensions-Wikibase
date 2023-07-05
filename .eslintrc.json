@@ -75,15 +75,5 @@
 				"ViewState": "ViewState"
 			}
 		}
-	},
-	"overrides": [
-		{
-			"files": [
-				"repo/resources/wikibase.vector.searchClient.js"
-			],
-			"parserOptions": {
-				"ecmaVersion": 6
-			}
-		}
-	]
+	}
 }
