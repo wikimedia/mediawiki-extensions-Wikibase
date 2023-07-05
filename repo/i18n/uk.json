@@ -440,7 +440,6 @@
 	"wikibase-restoreold": "відновити",
 	"wikibase-entity-summary-restore": "Відновлена версія $3, зроблена [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-entity-summary-undo": "Скасувати редагування $3 {{GENDER:$4|користувача|користувачки}} [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|обговорення]])",
-	"wikibase-non-entity-diff": "Неможливо вивести різницю версій між сутністю та вмістом, який не є сутністю.",
 	"wikibase-no-direct-editing": "У просторі назв «$1» вимкнено пряме редагування",
 	"wikibase-noentity": "Такої сутності не існує. Ви можете [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} пошукати відповідні записи в журналах], щоб дізнатися, куди вона поділася.",
 	"wikibase-noentity-createone": "Ви також можете [[$1|створити нову]].",

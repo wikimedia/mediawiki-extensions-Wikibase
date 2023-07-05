@@ -336,7 +336,6 @@
 	"wikibase-restoreold": "assevel",
 	"wikibase-entity-summary-restore": "Adstumm $3 assavet gant [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-entity-summary-undo": "Adstumm $3 distaolet gant[[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|kaozeal]])",
-	"wikibase-non-entity-diff": "Ne c'haller ket keñveriañ un entite gant un danvez disheñvel diouzh hini an entite.",
 	"wikibase-no-direct-editing": "Diweredekaet eo ar c'hemmoù eeun en esaouenn $1",
 	"wikibase-noentity": "N'eus ket eus an entite-se. Gallout a rit [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} klask er marilhoù kar] evit kavout da belec'h eo aet.",
 	"wikibase-noentity-createone": "Gallout a rit ivez [[$1|krouiñ unan nevez]].",

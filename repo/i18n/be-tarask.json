@@ -342,7 +342,6 @@
 	"wikibase-restoreold": "аднавіць",
 	"wikibase-entity-summary-restore": "Адноўленая вэрсія $3 аўтарства [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-entity-summary-undo": "Скасаваньне вэрсіі $3 аўтарства [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|гутаркі]])",
-	"wikibase-non-entity-diff": "Немагчыма паказаць розьніцу паміж элемэнтам і зьместам, які не зьяўляецца элемэнтам.",
 	"wikibase-no-direct-editing": "Простае рэдагаваньне ў прасторы назваў «$1» адключанае",
 	"wikibase-noentity": "Гэты элемэнт не існуе. Вы можаце [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} пашукаць у журналах падзеяў], каб даведацца, куды ён зьнік.",
 	"wikibase-noentity-createone": "Вы можаце таксама [[$1|стварыць яго]].",

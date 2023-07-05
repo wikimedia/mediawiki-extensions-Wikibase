@@ -311,7 +311,6 @@
 	"wikibase-api-tags-invalid": "Параметар ознака није исправан.",
 	"wikibase-restoreold": "врати",
 	"wikibase-entity-summary-restore": "Враћена измена $3 корисника [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
-	"wikibase-non-entity-diff": "Није могуће упоредити ентитет са неентитетским садржајем.",
 	"wikibase-no-direct-editing": "Директне измене су онемогућене у именском простору $1",
 	"wikibase-noentity": "Овај ентитет не постоји. Можете да [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} претражите сродне дневнике] да бисте сазнали где је премештен.",
 	"wikibase-noentity-createone": "Можете такође [[$1|направити нови]].",

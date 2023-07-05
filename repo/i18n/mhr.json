@@ -1,9 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"Lifeway",
 			"Сай"
 		]
 	},
 	"wikibase-edit": "тӧрлаташ",
-	"wikibase-add": "ешараш"
+	"wikibase-add": "ешараш",
+	"wikibase-description-empty": "Возен ончыктымашым тичмашлыме огыл",
+	"wikibase-sitelinks-special": "Моло сайт-влак"
 }

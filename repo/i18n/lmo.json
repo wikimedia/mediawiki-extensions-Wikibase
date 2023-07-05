@@ -399,7 +399,6 @@
 	"wikibase-restoreold": "restaora",
 	"wikibase-entity-summary-restore": "Restaora a la revision $3 d[[Special:Contributions/$4|{{GENDER:$4|el $4|e la$4|e $4}}]]",
 	"wikibase-entity-summary-undo": "Anulada la modifica $3 d[[Special:Contributions/$4|el $4|e la $4|e $4]] ([[User talk:$4|discussion]])",
-	"wikibase-non-entity-diff": "Impossibil fà el confront infra i contegnud d'una entità e d'una minga-entità",
 	"wikibase-no-direct-editing": "La modifica diretta l'è stada disativada in del spazzi di nom $1",
 	"wikibase-noentity": "Questa enitità chì l'esist minga.\nTe podet [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} cerca infra i register relativ] per savè cossa l'è sucecedud.",
 	"wikibase-noentity-createone": "Te podet anca [[$1|creann vun noeuv]].",

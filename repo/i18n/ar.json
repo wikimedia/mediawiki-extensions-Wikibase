@@ -446,7 +446,6 @@
 	"wikibase-restoreold": "استرجاع",
 	"wikibase-entity-summary-restore": "استرجع التعديل $3 من قبل [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-entity-summary-undo": "الرجوع عن التعديل $3 بواسطة [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|talk]])",
-	"wikibase-non-entity-diff": "لا يمكن المقارنة بين محتوى كيان ومحتوى غير كيان.",
 	"wikibase-no-direct-editing": "التحرير المباشر معطل في النطاق $1",
 	"wikibase-noentity": "هذا الكائن غير موجود. يمكنك [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} البحث في السجلات المتعلقة] لتعرف أين انتقل.",
 	"wikibase-noentity-createone": "كما يمكنك [[$1|إنشاء كائن جديد]].",

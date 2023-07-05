@@ -417,7 +417,6 @@
 	"wikibase-restoreold": "पुनर्स्थापित करें",
 	"wikibase-entity-summary-restore": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]] द्वारा अवतरण $3 को पुनर्स्थापित किया",
 	"wikibase-entity-summary-undo": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|वार्ता]]) द्वारा अवतरण $3 को पुनर्स्थापित किया",
-	"wikibase-non-entity-diff": "एक सत्ते और गैर-सत्ते सामग्री के बीच अंतर नहीं देखा जा सकता।",
 	"wikibase-no-direct-editing": "नामस्थान $1 में सीधे संपादन नहीं किया जा सकता",
 	"wikibase-noentity": "यह सत्ता मौजूद नहीं है। आप इसे [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} संबंधित लॉग्स में ढूँढ़] सकते है।",
 	"wikibase-noentity-createone": "आप एक [[$1|नया आयटम भी बना]] सकते हैं।",

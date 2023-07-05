@@ -424,7 +424,6 @@
 	"wikibase-restoreold": "gjenopprett",
 	"wikibase-entity-summary-restore": "Gjenoppretter sideversjon $3 av [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-entity-summary-undo": "Fjerner sideversjon $3 av [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|diskusjon]])",
-	"wikibase-non-entity-diff": "Kan ikke vise diff for en entitet med ikke-entitets-innhold.",
 	"wikibase-no-direct-editing": "Direkteredigering er avslått i navnerommet $1",
 	"wikibase-noentity": "Denne entiteten finnes ikke.\nDu kan [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} søke i aktuelle logger]\nfor å finne ut hva som har skjedd.",
 	"wikibase-noentity-createone": "Du kan også [[$1|opprette en ny en]].",

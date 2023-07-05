@@ -404,7 +404,6 @@
 	"wikibase-restoreold": "ktheni",
 	"wikibase-entity-summary-restore": "Rivendos versionin e riparuar $3 nga [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-entity-summary-undo": "Rikthe versionin e riparuar $3 nga [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|diskutimi]])",
-	"wikibase-non-entity-diff": "Nuk mund të ndryshojë një njësi me një përmbajtje jo njësi.",
 	"wikibase-no-direct-editing": "Redaktimi i drejtpërdrejtë është çaktivizuar në hapësirën e emrave $1",
 	"wikibase-noentity": "Ky entitet nuk ekziston. Ju mund të [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} për të zbuluar regjistrat e lidhur] se ku shkoi.",
 	"wikibase-noentity-createone": "Ju gjithashtu mund të [[$1|krijoni një të ri]].",

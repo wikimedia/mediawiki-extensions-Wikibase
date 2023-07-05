@@ -401,7 +401,6 @@
 	"wikibase-restoreold": "restaurar",
 	"wikibase-entity-summary-restore": "Restaurada a revisão $3 por [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-entity-summary-undo": "Desfeita a edição $3 por [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|discussão]])",
-	"wikibase-non-entity-diff": "Não é possível comparar uma entidade com um conteúdo que não seja uma entidade.",
 	"wikibase-no-direct-editing": "A edição direta está desabilitada no espaço nominal $1",
 	"wikibase-noentity": "Esta entidade não existe. Você pode [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} pesquisar nos registros relacionados] para descobrir o que ocorreu.",
 	"wikibase-noentity-createone": "Você também pode [[$1|criar um novo]].",

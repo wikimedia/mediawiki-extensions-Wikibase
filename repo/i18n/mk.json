@@ -419,7 +419,6 @@
 	"wikibase-restoreold": "врати",
 	"wikibase-entity-summary-restore": "Повраток на преработката $3 од [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-entity-summary-undo": "Откажана преработката $3 на уредникот [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|разговор]])",
-	"wikibase-non-entity-diff": "Не можам да ја различам единицата со неединична содржина.",
 	"wikibase-no-direct-editing": "Непосредното уредување е оневозможено во именскиот простор $1",
 	"wikibase-noentity": "Оваа единица не постои. Можете да ги [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} пребарате дневниците] за да дознаете каде отишла.",
 	"wikibase-noentity-createone": "Можете и да [[$1|создадете нов]].",

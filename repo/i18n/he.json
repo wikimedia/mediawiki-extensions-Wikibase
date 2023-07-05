@@ -428,7 +428,6 @@
 	"wikibase-restoreold": "איפוס",
 	"wikibase-entity-summary-restore": "שחזור גרסה $3 מאת [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-entity-summary-undo": "ביטול גרסה $3 של [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|שיחה]])",
-	"wikibase-non-entity-diff": "לא ניתן להשוות ישות עם תוכן שאינו ישות.",
 	"wikibase-no-direct-editing": "עריכה ישירה כבויה במרחב השם $1",
 	"wikibase-noentity": "הישות הזאת אינה קיימת. ביכולתך [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} לחפש ביומנים הקשורים] כדי למצוא לאן היא הלכה.",
 	"wikibase-noentity-createone": "אפשר גם [[$1|ליצור אחת חדשה]].",

@@ -384,7 +384,6 @@
 	"wikibase-restoreold": "återställ",
 	"wikibase-entity-summary-restore": "Återställ versionen $3 av [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-entity-summary-undo": "Gör version $3 av [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|diskussion]]) ogjord",
-	"wikibase-non-entity-diff": "Kan inte jämföra innehållet mellan en entitet och en icke-entitet.",
 	"wikibase-no-direct-editing": "Direkt redigering har inaktiverats i namnområdet $1",
 	"wikibase-noentity": "Denna entitet finns inte. Du kan [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} söka i de relaterade loggarna] för att ta reda på var den tog vägen.",
 	"wikibase-noentity-createone": "Du kan också [[$1|skapa en ny]].",

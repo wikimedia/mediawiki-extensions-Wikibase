@@ -298,7 +298,6 @@
 	"wikibase-api-not-item": "Nije stavka.",
 	"wikibase-restoreold": "vrati",
 	"wikibase-entity-summary-restore": "Vraćena izmena $3 korisnika [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
-	"wikibase-non-entity-diff": "Nije moguće uporediti entitet sa neentitetskim sadržajem.",
 	"wikibase-no-direct-editing": "Direktne izmene su onemogućene u imenskom prostoru $1",
 	"wikibase-noentity": "Ovaj entitet ne postoji. Možete da [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} pretražite srodne dnevnike] da biste saznali gde je premešten.",
 	"wikibase-noentity-createone": "Možete takođe [[$1|napraviti novi]].",

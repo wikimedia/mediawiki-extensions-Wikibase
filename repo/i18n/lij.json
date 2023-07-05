@@ -353,7 +353,6 @@
 	"wikibase-restoreold": "ripristina",
 	"wikibase-entity-summary-restore": "Ripristina verscion $3 de [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-entity-summary-undo": "Anulla verscion $3 de [[Special:Contributions/$4|$4]] ([[User talk:$4|discuscion]])",
-	"wikibase-non-entity-diff": "Imposcibbile confrontâ un'entitæ co-in contegnuo ch'o no l'è 'n'entitæ.",
 	"wikibase-no-direct-editing": "A modiffica diretta a l'è dezabilitâ into namespace $1",
 	"wikibase-noentity": "Quest'entitæ a no l'existe.\nTi pœu [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} sercâ tra i relativi log] pe savei dov'a l'è anæt'a finî.",
 	"wikibase-noentity-createone": "Ti pœu ascì [[$1|creâne un-a nœuva]].",

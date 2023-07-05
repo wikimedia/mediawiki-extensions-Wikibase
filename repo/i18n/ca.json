@@ -335,7 +335,6 @@
 	"wikibase-restoreold": "restaura",
 	"wikibase-entity-summary-restore": "Es restableix la revisió $3 de [[Special:Contributions/$4|$4]]",
 	"wikibase-entity-summary-undo": "Es desfà la revisió $3 de [[Special:Contributions/$4|$4]] ([[User talk:$4|disc.]])",
-	"wikibase-non-entity-diff": "No es pot generar una diferència entre una entitat amb un contingut que no ho sigui.",
 	"wikibase-no-direct-editing": "L'edició directa està inhabilitada en l'espai de noms $1",
 	"wikibase-noentity": "Aquesta entitat no existeix. Podeu [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} cercar en els registres relacionats] per a descobrir què li ha passat.",
 	"wikibase-noentity-createone": "Podeu també [[$1|crear-ne una de nova]].",

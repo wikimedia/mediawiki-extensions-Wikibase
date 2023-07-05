@@ -418,7 +418,6 @@
 	"wikibase-restoreold": "аднавіць",
 	"wikibase-entity-summary-restore": "Адноўлена версія $3 аўтарства [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-entity-summary-undo": "Адкат праўкі $3 аўтарства [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|размовы]])",
-	"wikibase-non-entity-diff": "Немагчыма паказаць розніцу паміж элементам і зместам, які не з’яўляецца элементам.",
 	"wikibase-no-direct-editing": "У прасторы назваў «$1» адключана прамое рэдагаванне",
 	"wikibase-noentity": "Гэтая сутнасць не існуе. Вы можаце [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} пашукаць у журналах падзеяў], каб даведацца, куды яна зышла.",
 	"wikibase-noentity-createone": "Вы таксама можаце [[$1|стварыць яго]].",

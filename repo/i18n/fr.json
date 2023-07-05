@@ -479,7 +479,6 @@
 	"wikibase-restoreold": "restaurer",
 	"wikibase-entity-summary-restore": "Révision $3 par [[Special:Contributions/$4|{{GENDER:$4|}}$4]] restaurée",
 	"wikibase-entity-summary-undo": "Révision $3 par [[Special:Contributions/$4|{{GENDER:$4|}}$4]] ([[User talk:$4|talk]]) annulée",
-	"wikibase-non-entity-diff": "Impossible de comparer une entité avec un contenu qui n’est pas une entité.",
 	"wikibase-no-direct-editing": "La modification directe est désactivée dans l’espace de noms $1",
 	"wikibase-noentity": "Cette entité n’existe pas. Vous pouvez [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} rechercher dans les journaux concernés] pour savoir où elle est allée.",
 	"wikibase-noentity-createone": "Vous pouvez aussi [[$1|en créer une nouvelle]].",

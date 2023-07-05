@@ -428,7 +428,6 @@
 	"wikibase-restoreold": "επαναφορά",
 	"wikibase-entity-summary-restore": "Επαναφορά της αναθεώρησης $3 από  [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-entity-summary-undo": "Αναίρεση αναθεώρησης $3 από [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|talk]])",
-	"wikibase-non-entity-diff": "Δεν είναι δυνατή η διαφοροποίηση μιας οντότητας με περιεχόμενο που δεν είναι οντότητα.",
 	"wikibase-no-direct-editing": "Η άμεση επεξεργασία είναι απενεργοποιημένη στον χώρο ονομάτων $1",
 	"wikibase-noentity": "Αυτή η οντότητα δεν υπάρχει. Μπορείτε να κάνετε [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} αναζήτηση στα σχετικά αρχεία καταγραφής] για να μάθετε πού πήγε.",
 	"wikibase-noentity-createone": "Μπορείτε επίσης να [[$1|δημιουργήσετε ένα νέο]].",

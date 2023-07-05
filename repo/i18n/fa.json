@@ -350,7 +350,6 @@
 	"wikibase-conflict-patched": "ویرایش شما به آخرین نسخه وصله شد.",
 	"wikibase-restoreold": "بازگردانی",
 	"wikibase-entity-summary-restore": "بازگردانی نسخهٔ $3 توسط [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
-	"wikibase-non-entity-diff": "نمی‌توان بین یک هستار با محتوای غیرهستار تفاوت‌یابی کرد.",
 	"wikibase-no-direct-editing": "ویرایش‌کردن مستقیم در فضای نام $1 غیرفعال شده است",
 	"wikibase-noentity": "این موجودیت وجود ندارد. می‌توانید <span class=\"plainlinks\">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} سیاهه‌های مرتبط را جستجو کنید]</span> تا ببینید کجا رفته‌است.",
 	"wikibase-noentity-createone": "شما می‌توانید همچنین [[$1|یکی جدید ایجاد کنید]].",

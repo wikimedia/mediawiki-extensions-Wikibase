@@ -356,7 +356,6 @@
 	"wikibase-restoreold": "visszaállítás erre",
 	"wikibase-entity-summary-restore": "Visszaállítás a(z) [[Special:Contributions/$4|{{GENDER:$4|$4}}]] által szerkesztett $3 változatra",
 	"wikibase-entity-summary-undo": "A(z) [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|vita]]) által szerkesztett $3 változat visszavonása",
-	"wikibase-non-entity-diff": "Nem lehet összehasonlítani egy entitást nem entitás tartalommal.",
 	"wikibase-no-direct-editing": "A(z) $1 névtérben a lapok közvetlenül nem szerkeszthetőek",
 	"wikibase-noentity": "Nincs ilyen entitás. Ha korábban volt, [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} a naplókból] kiderülhet, mi történt vele.",
 	"wikibase-noentity-createone": "Vagy [[$1|hozz létre egy újat]].",

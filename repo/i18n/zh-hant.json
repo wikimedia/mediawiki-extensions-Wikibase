@@ -404,7 +404,6 @@
 	"wikibase-restoreold": "還原",
 	"wikibase-entity-summary-restore": "還原到[[Special:Contributions/$4|{{GENDER:$4|$4}}]]的版本$3",
 	"wikibase-entity-summary-undo": "復原[[Special:Contributions/$4|{{GENDER:$4|$4}}]]（[[User talk:$4|討論]]）的版本$3",
-	"wikibase-non-entity-diff": "無法比對實體與非實體內容。",
 	"wikibase-no-direct-editing": "命名空間 $1 已停用直接編輯",
 	"wikibase-noentity": "此實體不存在，您可 <span class=\"plainlinks\">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} 搜尋相關日誌]</span> 來查詢該項目去向。",
 	"wikibase-noentity-createone": "您也可以 [[$1|新增一個]]。",

@@ -381,7 +381,6 @@
 	"wikibase-restoreold": "復元",
 	"wikibase-entity-summary-restore": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]] による版 $3 を復元",
 	"wikibase-entity-summary-undo": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|トーク]]) による版 $3 を取り消し",
-	"wikibase-non-entity-diff": "非エンティティコンテンツとエンティティとの差分は表示できません。",
 	"wikibase-no-direct-editing": "$1 名前空間では直接の編集は無効になっています",
 	"wikibase-noentity": "このエンティティは存在しません。<span class=\"plainlinks\">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} 関連する記録を検索し]</span>どこに行ったのか調べることができます。",
 	"wikibase-noentity-createone": "[[$1|新規作成]]することもできます。",

@@ -415,7 +415,6 @@
 	"wikibase-restoreold": "restaurar",
 	"wikibase-entity-summary-restore": "Restaurate le version $3 per [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-entity-summary-undo": "Disfacite le version $3 per [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|discussion]])",
-	"wikibase-non-entity-diff": "Il non es possibile facer un diff de un entitate con un contento non-entitate.",
 	"wikibase-no-direct-editing": "Le modification directe es disactivate in le spatio de nomines $1.",
 	"wikibase-noentity": "Iste entitate non existe. Tu pote [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} cercar le registros pertinente] pro trovar ubi illo ha vadite.",
 	"wikibase-noentity-createone": "Tu pote etiam [[$1|crear un nove]].",

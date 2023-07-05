@@ -340,7 +340,6 @@
 	"wikibase-restoreold": "endursetja",
 	"wikibase-entity-summary-restore": "Endurvekja útgáfu $3 eftir [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-entity-summary-undo": "Tók aftur útgáfu $3 eftir [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|talk]])",
-	"wikibase-non-entity-diff": "Get ekki sýnt hverju var breytt þegar innihaldið er ekki eining.",
 	"wikibase-no-direct-editing": "Bein breyting er óvirk í nafnrými $1",
 	"wikibase-noentity": "Þessi eining er ekki til.\nÞú getur [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} leitað í aðgerðarskránni] til að finna hvað hefur gerst.",
 	"wikibase-noentity-createone": "Þú getur líka [[$1|búið til nýjan]].",

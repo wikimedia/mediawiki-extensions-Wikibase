@@ -445,7 +445,6 @@
 	"wikibase-restoreold": "geri getir",
 	"wikibase-entity-summary-restore": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]] düzenlemeleri $3 sürümüne döndürüldü",
 	"wikibase-entity-summary-undo": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]] düzenlemeleri $3 sürümüne döndürüldü ([[User talk:$4|mesaj]])",
-	"wikibase-non-entity-diff": "Varlık olmayan bir içerik ile varlık farklı değil.",
 	"wikibase-no-direct-editing": "$1 ad alanında doğrudan düzenleme devre dışı bırakıldı.",
 	"wikibase-noentity": "Bu varlık mevcut değil. Dilerseniz nerede bulunduğunu öğrenmek için [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} ilgili kayıtlarda arayabilirsiniz].",
 	"wikibase-noentity-createone": "Ayrıca [[$1|yeni bir tane oluşturabilirsiniz]].",

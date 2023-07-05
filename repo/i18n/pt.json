@@ -426,7 +426,6 @@
 	"wikibase-restoreold": "restaurar",
 	"wikibase-entity-summary-restore": "Restaurar a revisão $3 {{GENDER:$4|do utilizador|da utilizadora}} [[Special:Contributions/$4|$4]]",
 	"wikibase-entity-summary-undo": "Reverter a revisão $3 {{GENDER:$4|do utilizador|da utilizadora}} [[Special:Contributions/$4|$4]] ([[User talk:$4|discussão]])",
-	"wikibase-non-entity-diff": "Não é possível comparar uma entidade com um conteúdo que não seja uma entidade.",
 	"wikibase-no-direct-editing": "Não é possível a edição direta no espaço nominal $1",
 	"wikibase-noentity": "A entidade não existe. Pode\n[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} pesquisar os registos relacionados] para descobrir o que lhe sucedeu.",
 	"wikibase-noentity-createone": "Também pode [[$1|criar uma nova]].",
