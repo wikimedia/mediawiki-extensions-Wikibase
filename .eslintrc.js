@@ -48,14 +48,7 @@ module.exports = {
 		'yml/no-empty-mapping-value': 'off',
 		'yml/plain-scalar': 'off',
 		'es-x/no-array-string-prototype-at': 'off',
-		'es-x/no-arrow-functions': 'off',
-		'es-x/no-async-functions': 'off',
-		'es-x/no-block-scoped-variables': 'off',
-		'es-x/no-default-parameters': 'off',
-		'es-x/no-destructuring': 'off',
-		'es-x/no-property-shorthands': 'off',
-		'es-x/no-rest-parameters': 'off',
-		'es-x/no-template-literals': 'off'
+		'es-x/no-async-functions': 'off'
 	},
 	settings: {
 		'no-jquery': {
