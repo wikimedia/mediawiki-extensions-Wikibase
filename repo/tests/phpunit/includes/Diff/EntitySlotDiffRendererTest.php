@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests\Diff;
 
 use Content;
@@ -26,7 +28,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @license GPL-2.0-or-later
  */
 class EntitySlotDiffRendererTest extends \MediaWikiIntegrationTestCase {
-	private function newFactory( array $instantiators = [] ) {
+	private function newFactory( array $instantiators = [] ): EntityDiffVisualizerFactory {
 		return new EntityDiffVisualizerFactory(
 			$instantiators,
 			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) ),

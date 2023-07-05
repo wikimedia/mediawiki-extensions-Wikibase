@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Diff;
 
 use Content;
@@ -11,11 +13,9 @@ use Wikibase\Repo\Content\EntityContent;
  * @license GPL-2.0-or-later
  */
 class EntitySlotDiffRenderer extends SlotDiffRenderer {
-	/** @var EntityDiffVisualizer */
-	private $diffVisualizer;
+	private EntityDiffVisualizer $diffVisualizer;
 
-	/** @var string */
-	private $langCode;
+	private string $langCode;
 
 	/**
 	 * @param EntityDiffVisualizer $diffVisualizer
