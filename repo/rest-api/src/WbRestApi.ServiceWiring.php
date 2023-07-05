@@ -38,6 +38,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetLatestPropertyRevisionMetadata
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestStatementSubjectRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetProperty;
 use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetPropertyValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetPropertyStatements;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchedLabelsValidator;
@@ -243,6 +244,12 @@ return [
 			WbRestApi::getGetLatestPropertyRevisionMetadata( $services ),
 			WbRestApi::getPropertyDataRetriever( $services ),
 			new GetPropertyValidator( new PropertyIdValidator() )
+		);
+	},
+
+	'WbRestApi.GetPropertyStatements' => function( MediaWikiServices $services ): GetPropertyStatements {
+		return new GetPropertyStatements(
+			WbRestApi::getPropertyDataRetriever( $services ),
 		);
 	},
 
