@@ -60,6 +60,6 @@
 		"client/data-bridge/"
 	],
 	"browserslist": [
-		"ie 11"
+		"Safari 11.1"
 	]
 }
