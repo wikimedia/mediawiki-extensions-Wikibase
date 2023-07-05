@@ -17,12 +17,12 @@
 	background-color: #eaf3ff;
 }
 
-.wikibase-descriptionview--mul abbr {
+.wikibase-entitytermsforlanguageview-mul .wikibase-descriptionview abbr {
 	text-decoration: none;
 	cursor: default;
-}
 
-.wikibase-descriptionview--mul abbr[ title ]::after {
-	content: ' ' attr( title );
-	.mixin-screen-reader-text();
+	&[ title ]::after {
+		content: ' ' attr( title );
+		.mixin-screen-reader-text();
+	}
 }
