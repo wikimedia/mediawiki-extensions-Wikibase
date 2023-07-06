@@ -5,6 +5,7 @@
 			"Ilnur efende",
 			"Marat-avgust",
 			"Ерней",
+			"З. ӘЙЛЕ",
 			"Ильнар",
 			"Умар"
 		]
@@ -25,8 +26,8 @@
 	"wikibase-linkitem-not-loggedin-title": "Сез теркәлергә тиешсез",
 	"wikibase-property-notfound": "$1 табылмады",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
-	"wikibase-rc-hide-wikidata-hide": "Яшерү",
-	"wikibase-rc-hide-wikidata-show": "Күрсәтү",
+	"wikibase-rc-hide-wikidata-hide": "Яшерергә",
+	"wikibase-rc-hide-wikidata-show": "Күрсәтергә",
 	"wikibase-rc-show-wikidata-pref": "Тикшерелгән үзгәртүләр {{grammar:genitive|{{WBREPONAME}}}} проектының яңа үзгәртүләр исемлегендә курсәтелсен",
 	"wikibase-rc-wikibase-edit-letter": "м",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} үзгәртүе",
