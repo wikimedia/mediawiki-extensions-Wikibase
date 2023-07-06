@@ -108,6 +108,29 @@ return call_user_func( function() {
 			},
 		],
 
+		'mw.config.values.wbEnableMulLanguageCode' => $moduleTemplate + [
+			'class' => MediaWikiConfigModule::class,
+			'getconfigvalueprovider' => function () {
+				return new SettingsValueProvider(
+					WikibaseRepo::getSettings(),
+					'wbEnableMulLanguageCode',
+					'tmpEnableMulLanguageCode'
+				);
+			},
+		],
+
+		// Temporary, see: T339104, to be removed in T330217
+		'mw.config.values.wbTmpAlwaysShowMulLanguageCode' => $moduleTemplate + [
+			'class' => MediaWikiConfigModule::class,
+			'getconfigvalueprovider' => function () {
+				return new SettingsValueProvider(
+					WikibaseRepo::getSettings(),
+					'wbTmpAlwaysShowMulLanguageCode',
+					'tmpAlwaysShowMulLanguageCode'
+				);
+			},
+		],
+
 		'wikibase.entityPage.entityLoaded' => $moduleTemplate + [
 			'scripts' => [
 				'wikibase.entityPage.entityLoaded.js',

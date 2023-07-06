@@ -90,16 +90,31 @@
 			PARENT.prototype._create.call( this );
 			this._defaultLanguages = this.options.userLanguages;
 
-			var furtherLanguages = this._getMoreLanguages();
-			if ( 'mul' in furtherLanguages ) {
-				// We have a mul term, always show it per default (but in the last position)
-				this._defaultLanguages.push( 'mul' );
-			}
+			this._amendDefaultLanguages();
 
 			this._verifyExistingDom();
 			this._createListView();
 
 			this.element.addClass( 'wikibase-entitytermsforlanguagelistview' );
+		},
+
+		_amendDefaultLanguages: function () {
+			if ( !mw.config.get( 'wbEnableMulLanguageCode' ) ) {
+				return;
+			}
+			// eslint-disable-next-line es-x/no-array-prototype-includes
+			if ( this._defaultLanguages.includes( 'mul' ) ) {
+				return;
+			}
+
+			if ( mw.config.get( 'wbTmpAlwaysShowMulLanguageCode' ) === false ) {
+				// temporarily show "mul" only if it has a label or alias, see T330217 for removing this block
+				if ( !( 'mul' in this._getMoreLanguages() ) ) {
+					return;
+				}
+			}
+
+			this._defaultLanguages.push( 'mul' );
 		},
 
 		/**
