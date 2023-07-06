@@ -76,22 +76,22 @@ class GetItemStatementsTest extends TestCase {
 		$this->assertSame( $lastModified, $response->getLastModified() );
 	}
 
-	public function testGivenPropertyIdInRequest_retrievesOnlyRequestedStatements(): void {
-		$requestedProperty = 'P123';
+	public function testGivenFilterPropertyId_retrievesOnlyRequestedStatements(): void {
+		$filterPropertyId = 'P123';
 		$itemId = new ItemId( 'Q123' );
 
 		$expectedStatements = $this->createStub( StatementList::class );
 		$this->statementsRetriever = $this->createMock( ItemStatementsRetriever::class );
 		$this->statementsRetriever->expects( $this->once() )
 			->method( 'getStatements' )
-			->with( $itemId, new NumericPropertyId( $requestedProperty ) )
+			->with( $itemId, new NumericPropertyId( $filterPropertyId ) )
 			->willReturn( $expectedStatements );
 
 		$this->getRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
 		$this->getRevisionMetadata->method( 'execute' )->willReturn( [ 123, '20230111070707' ] );
 
 		$response = $this->newUseCase()->execute(
-			new GetItemStatementsRequest( $itemId->getSerialization(), $requestedProperty )
+			new GetItemStatementsRequest( $itemId->getSerialization(), $filterPropertyId )
 		);
 
 		$this->assertSame( $expectedStatements, $response->getStatements() );

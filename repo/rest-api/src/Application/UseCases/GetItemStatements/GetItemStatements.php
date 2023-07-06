@@ -36,16 +36,16 @@ class GetItemStatements {
 		$this->validator->assertValidRequest( $request );
 
 		$itemId = new ItemId( $request->getItemId() );
-		$statementPropertyId = $request->getStatementPropertyId();
-		$requestedStatementPropertyId = $statementPropertyId
-			? new NumericPropertyId( $statementPropertyId )
+		$requestedFilterPropertyId = $request->getStatementPropertyId();
+		$filterPropertyId = $requestedFilterPropertyId
+			? new NumericPropertyId( $requestedFilterPropertyId )
 			: null;
 
 		[ $revisionId, $lastModified ] = $this->getLatestRevisionMetadata->execute( $itemId );
 
 		return new GetItemStatementsResponse(
 			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Item validated and exists
-			$this->statementsRetriever->getStatements( $itemId, $requestedStatementPropertyId ),
+			$this->statementsRetriever->getStatements( $itemId, $filterPropertyId ),
 			$lastModified,
 			$revisionId,
 		);
