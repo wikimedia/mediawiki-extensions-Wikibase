@@ -18,7 +18,8 @@ module.exports.getRequestsOnItem = [
 ];
 
 module.exports.getRequestsOnProperty = [
-	( { stringPropertyId } ) => rbf.newGetPropertyRequestBuilder( stringPropertyId )
+	( { stringPropertyId } ) => rbf.newGetPropertyRequestBuilder( stringPropertyId ),
+	( { stringPropertyId } ) => rbf.newGetPropertyStatementsRequestBuilder( stringPropertyId )
 ];
 
 module.exports.editRequestsOnItem = [
