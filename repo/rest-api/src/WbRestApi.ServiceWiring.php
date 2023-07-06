@@ -250,6 +250,7 @@ return [
 	'WbRestApi.GetPropertyStatements' => function( MediaWikiServices $services ): GetPropertyStatements {
 		return new GetPropertyStatements(
 			WbRestApi::getPropertyDataRetriever( $services ),
+			WbRestApi::getGetLatestPropertyRevisionMetadata( $services )
 		);
 	},
 

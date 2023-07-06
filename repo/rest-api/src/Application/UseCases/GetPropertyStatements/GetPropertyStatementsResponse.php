@@ -11,12 +11,29 @@ class GetPropertyStatementsResponse {
 
 	private StatementList $statements;
 
-	public function __construct( StatementList $serializedStatements ) {
+	/**
+	 * @var string timestamp in MediaWiki format 'YYYYMMDDhhmmss'
+	 */
+	private string $lastModified;
+
+	private int $revisionId;
+
+	public function __construct( StatementList $serializedStatements, string $lastModified, int $revisionId ) {
 		$this->statements = $serializedStatements;
+		$this->lastModified = $lastModified;
+		$this->revisionId = $revisionId;
 	}
 
 	public function getStatements(): StatementList {
 		return $this->statements;
+	}
+
+	public function getLastModified(): string {
+		return $this->lastModified;
+	}
+
+	public function getRevisionId(): int {
+		return $this->revisionId;
 	}
 
 }
