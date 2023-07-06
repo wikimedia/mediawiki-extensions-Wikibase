@@ -47,7 +47,6 @@
 		"no-jquery/no-global-selector": "off",
 		"yml/no-empty-mapping-value": "off",
 		"yml/plain-scalar": "off",
-		"es-x/no-array-prototype": "off",
 		"es-x/no-array-string-prototype-at": "off",
 		"es-x/no-arrow-functions": "off",
 		"es-x/no-async-functions": "off",
