@@ -100,4 +100,29 @@ describe( 'GET /entities/properties/{id}/statements', () => {
 		assert.include( response.body.message, propertyId );
 	} );
 
+	it( '400 error - bad request, invalid subject property ID', async () => {
+		const propertyId = 'X123';
+		const response = await newGetPropertyStatementsRequestBuilder( propertyId )
+			.assertInvalidRequest()
+			.makeRequest();
+
+		expect( response ).to.have.status( 400 );
+		assert.header( response, 'Content-Language', 'en' );
+		assert.equal( response.body.code, 'invalid-property-id' );
+		assert.include( response.body.message, propertyId );
+	} );
+
+	it( '400 error - bad request, invalid filter property ID', async () => {
+		const filterPropertyId = 'X123';
+		const response = await newGetPropertyStatementsRequestBuilder( subjectPropertyId )
+			.withQueryParam( 'property', filterPropertyId )
+			.assertInvalidRequest()
+			.makeRequest();
+
+		expect( response ).to.have.status( 400 );
+		assert.header( response, 'Content-Language', 'en' );
+		assert.equal( response.body.code, 'invalid-property-id' );
+		assert.include( response.body.message, filterPropertyId );
+	} );
+
 } );
