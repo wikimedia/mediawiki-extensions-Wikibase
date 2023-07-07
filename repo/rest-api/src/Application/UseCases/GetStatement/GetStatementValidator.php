@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetStatement;
 
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
+use Wikibase\Repo\RestApi\Application\Validation\EntityIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
 
 /**
@@ -12,48 +12,41 @@ use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
 class GetStatementValidator {
 
 	private StatementIdValidator $statementIdValidator;
-	private ItemIdValidator $itemIdValidator;
+	private EntityIdValidator $subjectIdValidator;
 
-	public function __construct(
-		StatementIdValidator $statementIdValidator,
-		ItemIdValidator $itemIdValidator
-	) {
+	public function __construct( StatementIdValidator $statementIdValidator, EntityIdValidator $subjectIdValidator ) {
 		$this->statementIdValidator = $statementIdValidator;
-		$this->itemIdValidator = $itemIdValidator;
+		$this->subjectIdValidator = $subjectIdValidator;
 	}
 
 	/**
 	 * @throws UseCaseError
 	 */
 	public function assertValidRequest( GetStatementRequest $statementRequest ): void {
-		$statementIdValidationError = $this->statementIdValidator->validate(
-			$statementRequest->getStatementId()
-		);
-
-		if ( $statementIdValidationError ) {
+		$validationError = $this->statementIdValidator->validate( $statementRequest->getStatementId() );
+		if ( $validationError ) {
 			throw new UseCaseError(
 				UseCaseError::INVALID_STATEMENT_ID,
-				'Not a valid statement ID: ' . $statementIdValidationError->getContext()[StatementIdValidator::CONTEXT_VALUE]
+				'Not a valid statement ID: ' . $validationError->getContext()[StatementIdValidator::CONTEXT_VALUE]
 			);
 		}
 
-		$this->validateItemId( $statementRequest->getEntityId() );
+		$this->validateSubjectId( $statementRequest->getEntityId() );
 	}
 
 	/**
 	 * @throws UseCaseError
 	 */
-	private function validateItemId( ?string $itemId ): void {
-		if ( !isset( $itemId ) ) {
+	private function validateSubjectId( ?string $entityId ): void {
+		if ( !isset( $entityId ) ) {
 			return;
 		}
 
-		$validationError = $this->itemIdValidator->validate( $itemId );
-
+		$validationError = $this->subjectIdValidator->validate( $entityId );
 		if ( $validationError ) {
 			throw new UseCaseError(
-				UseCaseError::INVALID_ITEM_ID,
-				'Not a valid item ID: ' . $validationError->getContext()[ItemIdValidator::CONTEXT_VALUE]
+				UseCaseError::INVALID_STATEMENT_SUBJECT_ID,
+				'Not a valid subject ID: ' . $validationError->getContext()[EntityIdValidator::CONTEXT_VALUE]
 			);
 		}
 	}

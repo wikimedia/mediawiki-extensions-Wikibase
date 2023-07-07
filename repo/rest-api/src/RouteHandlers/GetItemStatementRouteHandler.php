@@ -87,6 +87,15 @@ class GetItemStatementRouteHandler extends SimpleHandler {
 				);
 			}
 
+			if ( $e->getErrorCode() === UseCaseError::INVALID_STATEMENT_SUBJECT_ID ) {
+				return $this->responseFactory->newErrorResponseFromException(
+					new UseCaseError(
+						UseCaseError::INVALID_ITEM_ID,
+						'Not a valid item ID: ' . $itemId
+					)
+				);
+			}
+
 			return $this->responseFactory->newErrorResponseFromException( $e );
 		} catch ( ItemRedirect $e ) {
 			return $this->responseFactory->newErrorResponse(

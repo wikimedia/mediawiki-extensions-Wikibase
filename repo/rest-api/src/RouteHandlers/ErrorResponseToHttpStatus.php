@@ -13,6 +13,7 @@ class ErrorResponseToHttpStatus {
 		UseCaseError::INVALID_ITEM_ID => 400,
 		UseCaseError::INVALID_PROPERTY_ID => 400,
 		UseCaseError::INVALID_STATEMENT_ID => 400,
+		UseCaseError::INVALID_STATEMENT_SUBJECT_ID => 400,
 		UseCaseError::INVALID_FIELD => 400,
 		UseCaseError::INVALID_LANGUAGE_CODE => 400,
 		UseCaseError::PATCHED_LABEL_INVALID_LANGUAGE_CODE => 422,
