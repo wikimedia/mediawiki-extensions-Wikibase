@@ -12,6 +12,7 @@ use MediaWikiIntegrationTestCase;
 use RuntimeException;
 use Throwable;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementFactory;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\RouteHandlers\GetItemStatementRouteHandler;
@@ -33,7 +34,11 @@ class GetItemStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 	public function testHandlesErrors( Throwable $exception, string $expectedErrorCode ): void {
 		$useCase = $this->createStub( GetStatement::class );
 		$useCase->method( 'execute' )->willThrowException( $exception );
-		$this->setService( 'WbRestApi.GetStatement', $useCase );
+
+		$useCaseFactory = $this->createStub( GetStatementFactory::class );
+		$useCaseFactory->method( 'newGetStatement' )->willReturn( $useCase );
+
+		$this->setService( 'WbRestApi.GetStatementFactory', $useCaseFactory );
 		$this->setService( 'WbRestApi.ErrorReporter', $this->createStub( ErrorReporter::class ) );
 
 		/** @var Response $response */

@@ -22,7 +22,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetLatestPropertyRevisionMetadata
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestStatementSubjectRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetProperty;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetPropertyStatements;
-use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementFactory;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatement;
@@ -91,9 +91,9 @@ class WbRestApi {
 			->get( 'WbRestApi.GetItemStatements' );
 	}
 
-	public static function getGetStatement( ContainerInterface $services = null ): GetStatement {
+	public static function getStatementFactory( ContainerInterface $services = null ): GetStatementFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.GetStatement' );
+			->get( 'WbRestApi.GetStatementFactory' );
 	}
 
 	public static function getSerializerFactory( ContainerInterface $services = null ): SerializerFactory {

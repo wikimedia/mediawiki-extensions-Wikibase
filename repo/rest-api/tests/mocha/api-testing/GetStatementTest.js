@@ -132,6 +132,18 @@ describe( 'Retrieve Single Statement', () => {
 						assert.include( response.body.message, statementId );
 					} );
 
+					it( 'responds statement-not-found if statement id prefix is incorrect type', async () => {
+						const incorrectSubjectType = subjectType === 'item' ? 'property' : 'item';
+						const incorrectSubjectId = allTestData[ incorrectSubjectType ].subjectId;
+						const statementId = `${incorrectSubjectId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
+						const response = await newRequestBuilder( { subjectId: testData.subjectId, statementId } )
+							.assertValidRequest()
+							.makeRequest();
+
+						assertValidErrorResponse( response, 404, 'statement-not-found' );
+						assert.include( response.body.message, statementId );
+					} );
+
 					if ( subjectType === 'item' ) {
 						it( 'statement subject is a redirect', async () => {
 							const redirectSource = await entityHelper.createRedirectForItem( testData.subjectId );
@@ -150,6 +162,17 @@ describe( 'Retrieve Single Statement', () => {
 					describe( 'long route specific tests', () => {
 						it( `responds 400 for invalid ${subjectType} ID`, async () => {
 							const subjectId = 'X123';
+							const statementId = testData.statementId;
+							const response = await newRequestBuilder( { subjectId, statementId } )
+								.assertInvalidRequest()
+								.makeRequest();
+
+							assertValidErrorResponse( response, 400, `invalid-${subjectType}-id` );
+							assert.include( response.body.message, subjectId );
+						} );
+
+						it( "responds 400 if subject id doesn't match endpoint", async () => {
+							const subjectId = subjectType !== 'property' ? 'P123' : 'Q123';
 							const statementId = testData.statementId;
 							const response = await newRequestBuilder( { subjectId, statementId } )
 								.assertInvalidRequest()
