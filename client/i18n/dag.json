@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Achiri Bitamsimli",
 			"Alhaj Darajaati",
 			"Amire80",
 			"Dhee jah",
@@ -18,6 +19,7 @@
 	"wikibase-editlinkstitle": "Malimi bala din kpɛri tabini soya n niŋ",
 	"wikibase-linkitem-addlinks": "Pahimi soya",
 	"wikibase-linkitem-title": "Za~n gohi ya~y' sh~eli",
+	"wikibase-linkitem-linkpage": "Zaŋ gɔhi yaɣili",
 	"wikibase-linkitem-selectlink": "Dim suɣulo piimi yaɣi shɛli a no bor' ni a zaŋ gohi yaɣili ŋɔ",
 	"wikibase-linkitem-input-site": "Balli",
 	"wikibase-linkitem-input-page": "Yaɣili",
