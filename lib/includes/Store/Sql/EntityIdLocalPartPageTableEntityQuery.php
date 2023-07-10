@@ -20,7 +20,7 @@ class EntityIdLocalPartPageTableEntityQuery extends PageTableEntityQueryBase {
 	 * @return array SQL condition
 	 */
 	protected function getConditionForEntityId( EntityId $entityId ) {
-		return [ 'page_title' => $entityId->getLocalPart() ];
+		return [ 'page_title' => $entityId->getSerialization() ];
 	}
 
 	protected function getEntityIdStringFromRow( stdClass $row ) {
