@@ -151,7 +151,7 @@ class MediaWikiEditEntityFactoryItemUpdaterTest extends TestCase {
 		$updater = $this->newItemUpdater();
 
 		$this->expectException( ItemUpdateFailed::class );
-		$this->expectErrorMessage( (string)$errorStatus );
+		$this->expectExceptionMessage( (string)$errorStatus );
 
 		$updater->update( $itemToUpdate, $editMeta );
 	}
@@ -172,7 +172,7 @@ class MediaWikiEditEntityFactoryItemUpdaterTest extends TestCase {
 		$updater = $this->newItemUpdater();
 
 		$this->expectException( ItemUpdatePrevented::class );
-		$this->expectErrorMessage( (string)$errorStatus );
+		$this->expectExceptionMessage( (string)$errorStatus );
 
 		$updater->update( $itemToUpdate, $editMeta );
 	}
