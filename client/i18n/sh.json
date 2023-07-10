@@ -24,7 +24,9 @@
 	"wikibase-rc-hide-wikidata-hide": "Sakrij",
 	"wikibase-rc-hide-wikidata-show": "Prikaži",
 	"wikibase-rc-wikibase-edit-letter": "P",
-	"wikibase-rc-wikibase-edit-title": "Ova izmjena načinjena je na Wikipodacima",
+	"wikibase-rc-wikibase-edit-title": "Izmjena na Wikipodacima",
+	"wikibase-rcfilters-hide-wikibase-label": "Izmjene na Wikipodacima",
+	"wikibase-rcfilters-hide-wikibase-description": "Izmjene koje potiču s Wikipodataka",
 	"wikibase-otherprojects": "Na drugim projektima",
 	"wikibase-otherprojects-beta-message": "Bočna traka drugih projekata"
 }
