@@ -7,7 +7,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetLatestStatementSubjectRevision
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementFactory;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementValidator;
-use Wikibase\Repo\RestApi\Application\UseCases\RequestedSubjectIdValidator;
+use Wikibase\Repo\RestApi\Application\Validation\RequestedSubjectIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
 use Wikibase\Repo\RestApi\Domain\Services\StatementRetriever;
 

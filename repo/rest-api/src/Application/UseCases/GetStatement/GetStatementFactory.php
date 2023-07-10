@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetStatement;
 
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestStatementSubjectRevisionMetadata;
-use Wikibase\Repo\RestApi\Application\UseCases\RequestedSubjectIdValidator;
+use Wikibase\Repo\RestApi\Application\Validation\RequestedSubjectIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
 use Wikibase\Repo\RestApi\Domain\Services\StatementRetriever;
 

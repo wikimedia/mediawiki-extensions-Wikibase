@@ -1,9 +1,8 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases;
+namespace Wikibase\Repo\RestApi\Application\Validation;
 
 use LogicException;
-use Wikibase\Repo\RestApi\Application\Validation\EntityIdValidator;
 
 /**
  * @license GPL-2.0-or-later
@@ -16,18 +15,16 @@ class RequiredRequestedSubjectIdValidator implements RequestedSubjectIdValidator
 		$this->subjectIdValidator = $subjectIdValidator;
 	}
 
-	public function assertValid( ?string $subjectId ): void {
+	public function validate( ?string $subjectId ): ?ValidationError {
 		if ( $subjectId === null ) {
 			throw new LogicException( "\$subjectId shouldn't be null" );
 		}
 
-		$validationError = $this->subjectIdValidator->validate( $subjectId );
-		if ( $validationError ) {
-			throw new UseCaseError(
-				UseCaseError::INVALID_STATEMENT_SUBJECT_ID,
-				"Not a valid subject ID: $subjectId"
-			);
+		if ( $this->subjectIdValidator->validate( $subjectId ) ) {
+			return new ValidationError( self::CODE_INVALID, [ self::CONTEXT_VALUE => $subjectId ] );
 		}
+
+		return null;
 	}
 
 }

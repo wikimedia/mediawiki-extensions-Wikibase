@@ -6,14 +6,14 @@ use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementValidator;
-use Wikibase\Repo\RestApi\Application\UseCases\RequestedSubjectIdValidator;
-use Wikibase\Repo\RestApi\Application\UseCases\RequiredRequestedSubjectIdValidator;
-use Wikibase\Repo\RestApi\Application\UseCases\UnexpectedRequestedSubjectIdValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\EntityIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
+use Wikibase\Repo\RestApi\Application\Validation\RequestedSubjectIdValidator;
+use Wikibase\Repo\RestApi\Application\Validation\RequiredRequestedSubjectIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
+use Wikibase\Repo\RestApi\Application\Validation\UnexpectedRequestedSubjectIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 
 /**
@@ -35,17 +35,17 @@ class GetStatementValidatorTest extends TestCase {
 	}
 
 	/**
-	 * @dataProvider provideSubjectId
+	 * @dataProvider provideStatementIdPrefix
 	 * @doesNotPerformAssertions
 	 */
-	public function testWithValidStatementId( string $subjectId ): void {
+	public function testGivenValidStatementId_noErrorIsThrown( string $statementIdPrefix ): void {
 		$this->requestedSubjectIdValidator = new UnexpectedRequestedSubjectIdValidator();
 		$this->newStatementValidator()->assertValidRequest(
-			new GetStatementRequest( "$subjectId\$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE" )
+			new GetStatementRequest( "$statementIdPrefix\$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE" )
 		);
 	}
 
-	public static function provideSubjectId(): Generator {
+	public static function provideStatementIdPrefix(): Generator {
 		yield 'item id' => [ 'Q123' ];
 		yield 'property id' => [ 'P123' ];
 	}
@@ -54,7 +54,7 @@ class GetStatementValidatorTest extends TestCase {
 	 * @dataProvider provideEntityIdValidatorAndValidSubjectId
 	 * @doesNotPerformAssertions
 	 */
-	public function testWithValidStatementIdAndSubjectId( EntityIdValidator $entityIdValidator, string $subjectId ): void {
+	public function testGivenValidStatementIdAndSubjectId_noErrorIsThrown( EntityIdValidator $entityIdValidator, string $subjectId ): void {
 		$this->requestedSubjectIdValidator = new RequiredRequestedSubjectIdValidator( $entityIdValidator );
 		$this->newStatementValidator()->assertValidRequest(
 			new GetStatementRequest( "$subjectId\$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE", $subjectId )
@@ -66,20 +66,27 @@ class GetStatementValidatorTest extends TestCase {
 		yield 'property id' => [ new PropertyIdValidator(), 'P123' ];
 	}
 
-	public function testGivenRequestedSubjectIdValidatorThrowsUseCaseError_throwsUseCaseError(): void {
+	public function testGivenRequestedSubjectIdValidatorReturnsValidationError_throwsUseCaseError(): void {
 		$invalidSubjectId = 'X123';
-		$useCaseError = $this->createStub( UseCaseError::class );
 		$this->requestedSubjectIdValidator = $this->createMock( RequestedSubjectIdValidator::class );
 		$this->requestedSubjectIdValidator->expects( $this->once() )
-			->method( 'assertValid' )
+			->method( 'validate' )
 			->with( $invalidSubjectId )
-			->willThrowException( $useCaseError );
+			->willReturn( new ValidationError(
+				RequestedSubjectIdValidator::CODE_INVALID,
+				[ RequestedSubjectIdValidator::CONTEXT_VALUE => $invalidSubjectId ]
+			) );
 
-		$this->expectExceptionObject( $useCaseError );
+		try {
+			$this->newStatementValidator()->assertValidRequest(
+				new GetStatementRequest( "$invalidSubjectId\$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE", $invalidSubjectId )
+			);
 
-		$this->newStatementValidator()->assertValidRequest(
-			new GetStatementRequest( "$invalidSubjectId\$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE", $invalidSubjectId )
-		);
+			$this->fail( 'Exception not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::INVALID_STATEMENT_SUBJECT_ID, $e->getErrorCode() );
+			$this->assertStringContainsString( $invalidSubjectId, $e->getErrorMessage() );
+		}
 	}
 
 	public function testGivenStatementIdValidatorReturnsValidationError_throwsUseCaseError(): void {
