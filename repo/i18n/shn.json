@@ -7,12 +7,21 @@
 		]
 	},
 	"wikibase-edit": "မႄးထတ်း",
+	"wikibase-cancel": "ယုၵ်ႉလိူၵ်ႈ",
 	"wikibase-add": "ထႅမ်သႂ်ႇ",
+	"wikibase-entitytermsforlanguagelistview-description": "ၶေႃႈသပ်းလႅင်း",
 	"wikibase-label-empty": "ပႆႇလႆႈမၵ်းမၼ်ႈဝႆႉၸိုဝ်ႈ",
 	"wikibase-description-empty": "ၶေႃႈသပ်းလႅင်း ပႆႇပႃႈမၵ်းမၼ်ႈဝႆႉ",
+	"wikibase-description-edit-placeholder": "သႂ်ႇ ၶေႃႈသပ်းလႅင်း",
+	"wikibase-diffview-description": "ၶေႃႈသပ်းလႅင်း",
+	"wikibase-diffview-link": "လိင်ႉ",
 	"wikibase-statementsection-statements": "ၶေႃႈၸၼ်ဢွၵ်ႇ",
 	"wikibase-sitelinks-special": "ဝႅပ်ႉသၢႆႉ တၢင်ႇဢၼ်",
 	"wikibase-statementview-rank-normal": "ၸၼ်ႉပူင်ႇၵၢင်",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|reference|ငဝ်ႈၵုမ်းပိူင်}}",
-	"wikibase-gotolinkedpage-error-item-not-found": "ဢၼ်ၼႆႉ ဢမ်ႇႁၼ်"
+	"wikibase-gotolinkedpage-error-item-not-found": "ဢၼ်ၼႆႉ ဢမ်ႇႁၼ်",
+	"wikibase-newentity-description": "ၶေႃႈသပ်းလႅင်း:",
+	"wikibase-setdescription-submit": "သႂ်ႇ ၶေႃႈသပ်းလႅင်း",
+	"wikibase-setlabeldescriptionaliases-description-label": "ၶေႃႈသပ်းလႅင်း:",
+	"wikibase-federated-properties-leaving-site-notice-cancel": "ယုၵ်ႉလိူၵ်ႈ"
 }

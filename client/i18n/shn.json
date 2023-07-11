@@ -27,5 +27,8 @@
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} မႄးထတ်း",
 	"wikibase-replicationnote": "ၶႅၼ်းတေႃႈ ၽၢင်ႉပၼ်ဝႆႉဝႃႈ တွၼ်ႈတႃႇလွင်ႈလႅၵ်ႈလၢႆႈမၼ်း ပေႃးတေႁၼ်လႆႈ တီႈ ဝီႇၶီႇတင်းသဵင်ႈၼႆႉ တေႁိုင်ယူႇ မွၵ်ႈလၢႆမိတ်ႉၼိတ်ႉ။",
-	"wikibase-otherprojects": "တီႈၼႂ်းၼႃႈၵၢၼ်တၢင်ႇဢၼ်"
+	"wikibase-pageinfo-description-local": "ၶေႃႈသပ်းလႅင်း ပိုၼ်ႉတီႈ",
+	"wikibase-pageinfo-entity-usage-D": "ၶေႃႈသပ်းလႅင်း ၵမ်ႈၽွင်ႈ",
+	"wikibase-otherprojects": "တီႈၼႂ်းၼႃႈၵၢၼ်တၢင်ႇဢၼ်",
+	"wikibase-client-data-bridge-references-heading": "ဢၢင်ႈဢိင်"
 }
