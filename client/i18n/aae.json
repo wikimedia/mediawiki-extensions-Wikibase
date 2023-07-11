@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Martindimaggio"
+		]
+	},
+	"wikibase-dataitem": "Suget të {{WBREPONAME}}",
+	"wikibase-editlinks": "Ndroje kolegamente",
+	"wikibase-linkitem-addlinks": "Vu kolegamente",
+	"wikibase-linkitem-title": "Kolegament me pagina",
+	"wikibase-linkitem-linkpage": "Kolegament me pagina",
+	"wikibase-linkitem-selectlink": "Të parkales të zglidh gnë situ e gnë pagina çë do lidh me rtë.",
+	"wikibase-linkitem-input-site": "Gljuh:",
+	"wikibase-linkitem-input-page": "Pagina:"
+}
