@@ -312,15 +312,12 @@ class WikiPageEntityMetaDataLookup implements WikiPageEntityMetaDataAccessor {
 	private function processRows( array $entityIds, array $rows ): array {
 		$result = [];
 		foreach ( $entityIds as $entityId ) {
-			// $rows is indexed by page titles without repository prefix but we want to keep prefixes
-			// in the results returned by the lookup to match the input $entityIds
 			$serializedId = $entityId->getSerialization();
-			$idLocalPart = $entityId->getLocalPart();
 
 			$result[$serializedId] = false;
 
-			if ( isset( $rows[$idLocalPart] ) ) {
-				$row = $rows[$idLocalPart];
+			if ( isset( $rows[$serializedId] ) ) {
+				$row = $rows[$serializedId];
 
 				// Attach the appropriate role name.
 				// This could as well come from the database, if the query was written accordingly.
