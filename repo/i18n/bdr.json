@@ -5,5 +5,7 @@
 		]
 	},
 	"wikibase-edit": "niuba",
-	"wikibase-add": "peniko"
+	"wikibase-add": "peniko",
+	"wikibase-description-empty": "Nyaun keterangan",
+	"wikibase-sitelinks-special": "Tapak sediri"
 }
