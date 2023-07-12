@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases;
+namespace Wikibase\Repo\RestApi\Application\Validation;
 
 use LogicException;
 
@@ -9,10 +9,12 @@ use LogicException;
  */
 class UnexpectedRequestedSubjectIdValidator implements RequestedSubjectIdValidator {
 
-	public function assertValid( ?string $subjectId ): void {
+	public function validate( ?string $subjectId ): ?ValidationError {
 		if ( $subjectId !== null ) {
 			throw new LogicException( '$subjectId should be null' );
 		}
+
+		return null;
 	}
 
 }

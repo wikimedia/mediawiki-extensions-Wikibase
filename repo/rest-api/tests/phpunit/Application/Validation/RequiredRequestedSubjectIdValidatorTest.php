@@ -1,18 +1,19 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCases;
+namespace Wikibase\Repo\Tests\RestApi\Application\Validation;
 
 use Generator;
 use LogicException;
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\RestApi\Application\UseCases\RequiredRequestedSubjectIdValidator;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\EntityIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
+use Wikibase\Repo\RestApi\Application\Validation\RequestedSubjectIdValidator;
+use Wikibase\Repo\RestApi\Application\Validation\RequiredRequestedSubjectIdValidator;
+use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\RequiredRequestedSubjectIdValidator
+ * @covers \Wikibase\Repo\RestApi\Application\Validation\RequiredRequestedSubjectIdValidator
  *
  * @group Wikibase
  *
@@ -22,10 +23,9 @@ class RequiredRequestedSubjectIdValidatorTest extends TestCase {
 
 	/**
 	 * @dataProvider provideEntityIdValidatorAndValidSubjectId
-	 * @doesNotPerformAssertions
 	 */
-	public function testGivenValidSubjectIdForValidator_noErrorIsThrown( EntityIdValidator $idValidator, string $subjectId ): void {
-		$this->newRequiredRequestedSubjectIdValidator( $idValidator )->assertValid( $subjectId );
+	public function testGivenValidSubjectIdForValidator_returnsNull( EntityIdValidator $idValidator, string $subjectId ): void {
+		$this->assertNull( $this->newRequiredRequestedSubjectIdValidator( $idValidator )->validate( $subjectId ) );
 	}
 
 	public function provideEntityIdValidatorAndValidSubjectId(): Generator {
@@ -36,13 +36,11 @@ class RequiredRequestedSubjectIdValidatorTest extends TestCase {
 	/**
 	 * @dataProvider provideEntityIdValidatorAndInvalidSubjectId
 	 */
-	public function testGivenInvalidSubjectIdForValidator_throwsUseCaseError( EntityIdValidator $idValidator, string $subjectId ): void {
-		try {
-			$this->newRequiredRequestedSubjectIdValidator( $idValidator )->assertValid( $subjectId );
-			$this->fail( 'Exception not thrown' );
-		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::INVALID_STATEMENT_SUBJECT_ID, $e->getErrorCode() );
-		}
+	public function testGivenInvalidSubjectIdForValidator_returnsValidationError( EntityIdValidator $validator, string $subjectId ): void {
+		$this->assertEquals(
+			new ValidationError( RequestedSubjectIdValidator::CODE_INVALID, [ RequestedSubjectIdValidator::CONTEXT_VALUE => $subjectId ] ),
+			$this->newRequiredRequestedSubjectIdValidator( $validator )->validate( $subjectId )
+		);
 	}
 
 	public function provideEntityIdValidatorAndInvalidSubjectId(): Generator {
@@ -54,7 +52,7 @@ class RequiredRequestedSubjectIdValidatorTest extends TestCase {
 
 	public function testGivenSubjectIdIsNull_throwsLogicException(): void {
 		$this->expectException( LogicException::class );
-		$this->newRequiredRequestedSubjectIdValidator( $this->createStub( EntityIdValidator::class ) )->assertValid( null );
+		$this->newRequiredRequestedSubjectIdValidator( $this->createStub( EntityIdValidator::class ) )->validate( null );
 	}
 
 	private function newRequiredRequestedSubjectIdValidator( EntityIdValidator $idValidator ): RequiredRequestedSubjectIdValidator {
