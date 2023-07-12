@@ -1169,4 +1169,16 @@ final class RepoHooks {
 	public static function onMaintenanceShellStart(): void {
 		require_once __DIR__ . '/MaintenanceShellStart.php';
 	}
+
+	/**
+	 * Handler for the VectorSearchResourceLoaderConfig hook to overwrite search pattern highlighting for wikibase
+	 */
+	public static function onVectorSearchResourceLoaderConfig( array &$vectorSearchConfig ): bool {
+		$settings = WikibaseRepo::getSettings();
+		if ( $settings->getSetting( 'enableEntitySearchUI' ) === true ) {
+			$vectorSearchConfig['highlightQuery'] = false;
+		}
+
+		return true;
+	}
 }
