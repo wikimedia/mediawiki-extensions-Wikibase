@@ -3,10 +3,5 @@
 		"path": "/wikibase/v0/entities/properties/{property_id}/statements/{statement_id}",
 		"method": "GET",
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetPropertyStatementRouteHandler::factory"
-	},
-	{
-		"path": "/wikibase/v0/entities/properties/{property_id}/statements",
-		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetPropertyStatementsRouteHandler::factory"
 	}
 ]
