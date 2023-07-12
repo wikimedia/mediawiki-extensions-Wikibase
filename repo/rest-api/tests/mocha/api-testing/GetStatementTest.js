@@ -5,7 +5,8 @@ const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const {
 	newGetItemStatementRequestBuilder,
-	newGetStatementRequestBuilder
+	newGetStatementRequestBuilder,
+	newGetPropertyStatementRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 
@@ -35,6 +36,7 @@ describe( 'Retrieve Single Statement', () => {
 			short: ( { statementId } ) => newGetStatementRequestBuilder( statementId )
 		},
 		property: {
+			long: ( { subjectId, statementId } ) => newGetPropertyStatementRequestBuilder( subjectId, statementId ),
 			short: ( { statementId } ) => newGetStatementRequestBuilder( statementId )
 		}
 	};
@@ -137,7 +139,11 @@ describe( 'Retrieve Single Statement', () => {
 						const incorrectSubjectId = allTestData[ incorrectSubjectType ].subjectId;
 						const statementId = `${incorrectSubjectId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
 						const response = await newRequestBuilder( { subjectId: testData.subjectId, statementId } )
-							// TODO: uncomment when the test suite is split up by statement subject type
+							// TODO: uncomment `.assertValidRequest()`.
+							//  Currently, PropertyStatementId OAS parameter doesn't accept item id, so
+							//  it's not possible to test if we can get statement-not-found response by
+							//  passing item id to the
+							//  `/entities/properties/{property_id}/statements/{statement_id}` endpoint.
 							// .assertValidRequest()
 							.makeRequest();
 

@@ -3,7 +3,7 @@
 const { assert } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const {
-	createItemWithStatements,
+	createEntityWithStatements,
 	createUniqueStringProperty,
 	newLegacyStatementWithRandomStringValue
 } = require( '../helpers/entityHelper' );
@@ -21,28 +21,39 @@ function assertValid400Response( response ) {
 
 describe( 'User-Agent requests', () => {
 
-	let requestInputs = {};
+	const itemRequestInputs = {};
+	const propertyRequestInputs = {};
 
 	before( async () => {
-		const stringPropertyId = ( await createUniqueStringProperty() ).entity.id;
-		const createEntityResponse = await createItemWithStatements( [
-			newLegacyStatementWithRandomStringValue( stringPropertyId )
-		] );
-		const itemId = createEntityResponse.entity.id;
-		const statementId = createEntityResponse.entity.claims[ stringPropertyId ][ 0 ].id;
+		const propertyId = ( await createUniqueStringProperty() ).entity.id;
 
-		requestInputs = { itemId, statementId, stringPropertyId };
+		const createItemResponse = await createEntityWithStatements(
+			[ newLegacyStatementWithRandomStringValue( propertyId ) ],
+			'item'
+		);
+		itemRequestInputs.stringPropertyId = propertyId;
+		itemRequestInputs.itemId = createItemResponse.entity.id;
+		itemRequestInputs.statementId = createItemResponse.entity.claims[ propertyId ][ 0 ].id;
+
+		const createPropertyResponse = await createEntityWithStatements(
+			[ newLegacyStatementWithRandomStringValue( propertyId ) ],
+			'property'
+		);
+		propertyRequestInputs.stringPropertyId = createPropertyResponse.entity.id;
+		propertyRequestInputs.statementId = createPropertyResponse.entity.claims[ propertyId ][ 0 ].id;
 	} );
 
+	const useRequestInputs = ( requestInputs ) => ( newReqBuilder ) => () => newReqBuilder( requestInputs );
+
 	[
-		...getRequestsOnItem,
-		...getRequestsOnProperty,
-		...editRequestsOnItem
+		...getRequestsOnItem.map( useRequestInputs( itemRequestInputs ) ),
+		...getRequestsOnProperty.map( useRequestInputs( propertyRequestInputs ) ),
+		...editRequestsOnItem.map( useRequestInputs( itemRequestInputs ) )
 	].forEach( ( newRequestBuilder ) => {
-		describe( newRequestBuilder( requestInputs ).getRouteDescription(), () => {
+		describe( newRequestBuilder().getRouteDescription(), () => {
 
 			it( 'No User-Agent header provided', async () => {
-				const requestBuilder = newRequestBuilder( requestInputs );
+				const requestBuilder = newRequestBuilder();
 				delete requestBuilder.headers[ 'user-agent' ];
 				const response = await requestBuilder
 					.assertValidRequest()
@@ -52,7 +63,7 @@ describe( 'User-Agent requests', () => {
 			} );
 
 			it( 'Empty User-Agent header provided', async () => {
-				const response = await newRequestBuilder( requestInputs )
+				const response = await newRequestBuilder()
 					.withHeader( 'user-agent', '' )
 					.assertValidRequest()
 					.makeRequest();

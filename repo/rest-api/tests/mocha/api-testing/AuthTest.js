@@ -19,45 +19,56 @@ const {
 
 describe( 'Auth', () => {
 
-	const requestInputs = {};
+	const itemRequestInputs = {};
+	const propertyRequestInputs = {};
+
 	let user;
 
 	before( async () => {
-		requestInputs.stringPropertyId = ( await createUniqueStringProperty() ).entity.id;
-		const createEntityResponse = await createEntity(
-			'item',
-			{
-				claims: [ newLegacyStatementWithRandomStringValue( requestInputs.stringPropertyId ) ],
-				descriptions: { en: { language: 'en', value: `item-with-statements-${utils.uniq()}` } },
-				labels: { en: { language: 'en', value: `item-with-statements-${utils.uniq()}` } },
-				aliases: {
-					en: [ { language: 'en', value: 'Douglas Noël Adams' }, { language: 'en', value: 'DNA' } ]
-				}
+		const propertyId = ( await createUniqueStringProperty() ).entity.id;
+
+		const entityParts = {
+			claims: [ newLegacyStatementWithRandomStringValue( propertyId ) ],
+			descriptions: { en: { language: 'en', value: `entity-with-statements-${utils.uniq()}` } },
+			labels: { en: { language: 'en', value: `entity-with-statements-${utils.uniq()}` } },
+			aliases: {
+				en: [ { language: 'en', value: 'entity' }, { language: 'en', value: 'thing' } ]
 			}
-		);
-		requestInputs.itemId = createEntityResponse.entity.id;
-		requestInputs.statementId = createEntityResponse.entity.claims[ requestInputs.stringPropertyId ][ 0 ].id;
+		};
+
+		const createItemResponse = await createEntity( 'item', entityParts );
+		itemRequestInputs.stringPropertyId = propertyId;
+		itemRequestInputs.itemId = createItemResponse.entity.id;
+		itemRequestInputs.statementId = createItemResponse.entity.claims[ propertyId ][ 0 ].id;
+
+		entityParts.datatype = 'string';
+		const createPropertyResponse = await createEntity( 'property', entityParts );
+		propertyRequestInputs.stringPropertyId = createPropertyResponse.entity.id;
+		propertyRequestInputs.statementId = createPropertyResponse.entity.claims[ propertyId ][ 0 ].id;
+
 		user = await action.mindy();
 	} );
 
+	const useRequestInputs = ( requestInputs ) => ( newReqBuilder ) => () => newReqBuilder( requestInputs );
+
 	[
-		...getRequestsOnItem,
-		...getRequestsOnProperty,
-		...editRequestsOnItem
+		...getRequestsOnItem.map( useRequestInputs( itemRequestInputs ) ),
+		...getRequestsOnProperty.map( useRequestInputs( propertyRequestInputs ) ),
+		...editRequestsOnItem.map( useRequestInputs( itemRequestInputs ) )
 	].forEach( ( newRequestBuilder ) => {
-		describe( `Authentication - ${newRequestBuilder( requestInputs ).getRouteDescription()}`, () => {
+		describe( `Authentication - ${newRequestBuilder().getRouteDescription()}`, () => {
 
 			afterEach( async () => {
-				if ( newRequestBuilder( requestInputs ).getMethod() === 'DELETE' ) {
-					requestInputs.statementId = ( await rbf.newAddItemStatementRequestBuilder(
-						requestInputs.itemId,
-						newStatementWithRandomStringValue( requestInputs.stringPropertyId )
+				if ( newRequestBuilder().getMethod() === 'DELETE' ) {
+					itemRequestInputs.statementId = ( await rbf.newAddItemStatementRequestBuilder(
+						itemRequestInputs.itemId,
+						newStatementWithRandomStringValue( itemRequestInputs.stringPropertyId )
 					).makeRequest() ).body.id;
 				}
 			} );
 
 			it( 'has an X-Authenticated-User header with the logged in user', async () => {
-				const response = await newRequestBuilder( requestInputs ).withUser( user ).makeRequest();
+				const response = await newRequestBuilder().withUser( user ).makeRequest();
 
 				expect( response ).status.to.be.within( 200, 299 );
 				assert.header( response, 'X-Authenticated-User', user.username );
@@ -68,7 +79,7 @@ describe( 'Auth', () => {
 				before( requireExtensions( [ 'OAuth' ] ) );
 
 				it( 'responds with an error given an invalid bearer token', async () => {
-					const response = newRequestBuilder( requestInputs )
+					const response = newRequestBuilder()
 						.withHeader( 'Authorization', 'Bearer this-is-an-invalid-token' )
 						.makeRequest();
 
@@ -86,18 +97,18 @@ describe( 'Auth', () => {
 			assert.strictEqual( response.body.error, 'rest-write-denied' );
 		}
 
-		editRequestsOnItem.forEach( ( newRequestBuilder ) => {
+		editRequestsOnItem.map( useRequestInputs( itemRequestInputs ) ).forEach( ( newRequestBuilder ) => {
 			describe( 'Protected item', () => {
 				before( async () => {
-					await changeItemProtectionStatus( requestInputs.itemId, 'sysop' ); // protect
+					await changeItemProtectionStatus( itemRequestInputs.itemId, 'sysop' ); // protect
 				} );
 
 				after( async () => {
-					await changeItemProtectionStatus( requestInputs.itemId, 'all' ); // unprotect
+					await changeItemProtectionStatus( itemRequestInputs.itemId, 'all' ); // unprotect
 				} );
 
-				it( `Permission denied - ${newRequestBuilder( requestInputs ).getRouteDescription()}`, async () => {
-					assertPermissionDenied( await newRequestBuilder( requestInputs ).makeRequest() );
+				it( `Permission denied - ${newRequestBuilder().getRouteDescription()}`, async () => {
+					assertPermissionDenied( await newRequestBuilder().makeRequest() );
 				} );
 			} );
 
@@ -118,14 +129,14 @@ describe( 'Auth', () => {
 				} );
 
 				it( 'can not edit if blocked', async () => {
-					const response = await newRequestBuilder( requestInputs ).withUser( user ).makeRequest();
+					const response = await newRequestBuilder().withUser( user ).makeRequest();
 					expect( response ).to.have.status( 403 );
 				} );
 			} );
 
-			it( `Unauthorized bot edit - ${newRequestBuilder( requestInputs ).getRouteDescription()}`, async () => {
+			it( `Unauthorized bot edit - ${newRequestBuilder().getRouteDescription()}`, async () => {
 				assertPermissionDenied(
-					await newRequestBuilder( requestInputs )
+					await newRequestBuilder()
 						.withJsonBodyParam( 'bot', true )
 						.makeRequest()
 				);

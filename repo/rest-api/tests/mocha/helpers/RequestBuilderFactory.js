@@ -103,6 +103,13 @@ module.exports = {
 			.withPathParam( 'statement_id', statementId );
 	},
 
+	newGetPropertyStatementRequestBuilder( propertyId, statementId ) {
+		return new RequestBuilder()
+			.withRoute( 'GET', '/entities/properties/{property_id}/statements/{statement_id}' )
+			.withPathParam( 'property_id', propertyId )
+			.withPathParam( 'statement_id', statementId );
+	},
+
 	newGetStatementRequestBuilder( statementId ) {
 		return new RequestBuilder()
 			.withRoute( 'GET', '/statements/{statement_id}' )
