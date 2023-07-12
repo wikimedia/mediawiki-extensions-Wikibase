@@ -78,6 +78,11 @@
 		_defaultLanguages: [],
 
 		/**
+		 * @type {OO.ui.PopupWidget|null}
+		 */
+		_popup: null,
+
+		/**
 		 * @see jQuery.ui.TemplatedWidget._create
 		 */
 		_create: function () {
@@ -223,6 +228,8 @@
 			if ( !this.element.find( '.wikibase-entitytermsforlanguagelistview-more' ).length ) {
 				this._createEntitytermsforlanguagelistviewMore();
 			}
+
+			this._addPulsatingDotToMul();
 		},
 
 		/**
@@ -276,6 +283,7 @@
 			if ( !this._isMoreLanguagesExpanded() ) {
 				this._addMoreLanguages();
 				this._trackAllLanguagesShown();
+				this._addPulsatingDotToMul();
 			} else {
 				var previousTop = $button.offset().top;
 				this._removeMoreLanguages();
@@ -390,6 +398,35 @@
 				// This does not only keep the toggler visible, it also updates all stick(y)nodes.
 				window.scrollBy( 0, top - previousTop );
 			}
+		},
+
+		/**
+		 * Click handler to open Popup when clicking pulsating dot for mul language.
+		 *
+		 * @private
+		 */
+		_onMulPulsatingDotClicked: function ( _event ) {
+			if ( !this._popup ) {
+				var $target = $( this.element ).find( '.mw-pulsating-dot-container' );
+
+				var $tooltipContent = $( '<div>' ).append( mw.message( 'wikibase-entityterms-languagelistview-mul-popup-content' ).parseDom() );
+
+				this._popup = new OO.ui.PopupWidget( {
+					padded: true,
+					width: 400,
+					head: true,
+					label: mw.msg(
+						'wikibase-entityterms-languagelistview-mul-popup-title'
+					),
+					$content: $tooltipContent,
+					classes: [ 'wikibase-entityterms-languagelistview-mul-popup' ],
+					$floatableContainer: $target,
+					position: 'after',
+					align: 'forwards'
+				} );
+				$( document.body ).append( this._popup.$element );
+			}
+			this._popup.toggle();
 		},
 
 		/**
@@ -543,6 +580,22 @@
 			}
 
 			return response;
+		},
+
+		/**
+		 * Adds a clickable pulsating dot into the language column for "mul", if we have a "mul" row.
+		 *
+		 * @private
+		 */
+		_addPulsatingDotToMul: function () {
+			var $mulLanguageRow = this.element.find( '.wikibase-entitytermsforlanguageview-mul' );
+			if ( $mulLanguageRow.length ) {
+				var $pulsatingDot = $( '<span>' ).addClass( 'mw-pulsating-dot-container' );
+				$pulsatingDot.append( $( '<a>' ).addClass( 'mw-pulsating-dot' ) )
+					.on( 'click', this._onMulPulsatingDotClicked.bind( this ) );
+
+				$mulLanguageRow.find( '.wikibase-entitytermsforlanguageview-language' ).append( $pulsatingDot );
+			}
 		}
 	} );
 
