@@ -39,7 +39,7 @@ use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
  * their entity ID.
  *
  * Label lookups are relatively expensive if done repeatedly for individual labels. If possible,
- * labels should be pre-loaded and buffered for later use via the HtmlPageLinkRendererEnd hook.
+ * labels will be pre-loaded via the LabelPrefetchHookHandler and buffered for later use here.
  *
  * @see LabelPrefetchHookHandler
  *
