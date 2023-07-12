@@ -22,7 +22,7 @@ class FederatedPropertiesErrorTest extends MediaWikiIntegrationTestCase {
 	public function testOutputShouldGenerateErrorPage() {
 		$languageCode = 'en';
 		$item = new Item( new ItemId( 'Q1' ) );
-		$item->setLabel( $languageCode, 'A label' );
+		$item->setLabel( $languageCode, 'A <b>label</b>' );
 		$params = [];
 
 		$e = new FederatedPropertiesError( $languageCode, $item, 'key', $params );
@@ -37,7 +37,7 @@ class FederatedPropertiesErrorTest extends MediaWikiIntegrationTestCase {
 		);
 
 		$this->assertStringContainsString(
-			'<span class="wikibase-title-label">A label</span>',
+			'<span class="wikibase-title-label">A &lt;b&gt;label&lt;/b&gt;</span>',
 			$e->title->parse()
 		);
 	}
