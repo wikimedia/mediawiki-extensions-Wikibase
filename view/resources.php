@@ -330,6 +330,7 @@ return call_user_func( function() {
 				'wikibase-entitytermsview-input-help-message',
 				'wikibase-entityterms-languagelistview-mul-popup-title',
 				'wikibase-entityterms-languagelistview-mul-popup-content',
+				'wikibase-entityterms-languagelistview-mul-popup-dont-show-again',
 				'wikibase-aliases-separator',
 				'wikibase-aliases-input-help-message',
 				'wikibase-alias-edit-placeholder',
