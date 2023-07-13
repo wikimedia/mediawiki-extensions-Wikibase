@@ -53,6 +53,8 @@
 	"wikibase-entitytermsforlanguagelistview-language": "שפה",
 	"wikibase-entitytermsforlanguagelistview-more": "כל השפות שהוכנסו",
 	"wikibase-entitytermsforlanguagelistview-less": "פחות שפות",
+	"wikibase-entityterms-languagelistview-mul-popup-title": "חדש! גיבוי (fallback) לשפות מרובות",
+	"wikibase-entityterms-languagelistview-mul-popup-content": "הימנעו מיתירות ועריכות ידניות על־ידי הגדרת ברירת מחדל לשפת גיבוי (fallback) עבור כל השפות. [https://www.wikidata.org/wiki/Special:MyLanguage/Help:Mul מידע נוסף]",
 	"wikibase-label-empty": "לא הוגדרה תווית",
 	"wikibase-label-edit-placeholder": "נא להזין תווית",
 	"wikibase-label-edit-placeholder-language-aware": "נא להקליד תווית ב{{GRAMMAR:תחילית|$1}}",

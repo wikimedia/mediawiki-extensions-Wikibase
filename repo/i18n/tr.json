@@ -70,6 +70,8 @@
 	"wikibase-entitytermsforlanguagelistview-language": "Dil",
 	"wikibase-entitytermsforlanguagelistview-more": "Eklenmiş tüm diller",
 	"wikibase-entitytermsforlanguagelistview-less": "Daha az dil",
+	"wikibase-entityterms-languagelistview-mul-popup-title": "Yeni! Çoklu dil yedeği",
+	"wikibase-entityterms-languagelistview-mul-popup-content": "Tüm diller için bir varsayılan yedek tanımlayarak fazlalıklardan ve elle değişikliklerden kaçının. [https://www.wikidata.org/wiki/Special:MyLanguage/Help:Mul Daha fazla bilgi]",
 	"wikibase-label-empty": "Etiket tanımlanmamış",
 	"wikibase-label-edit-placeholder": "bir etiket girin",
 	"wikibase-label-edit-placeholder-language-aware": "$1 etiketini girin",

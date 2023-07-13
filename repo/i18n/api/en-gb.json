@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Reedy"
+		]
+	},
+	"apihelp-wbeditentity-param-data": "The serialised object that is used as the data source.\nA newly created entity will be assigned an 'id'.",
+	"apihelp-wbformatvalue-param-datavalue": "The data to format. This has to be the JSON serialisation of a DataValue object.",
+	"apihelp-wbsetclaim-param-claim": "Statement or Claim serialisation"
+}

@@ -5,11 +5,13 @@
 			"Chase me ladies, I'm the Cavalry",
 			"Felicilijonas",
 			"Pierpao",
+			"Reedy",
 			"Robin Owain",
 			"Shirayuki"
 		]
 	},
 	"wikibase-rc-wikibase-edit-letter": "WD",
+	"wikibase-error-deserialize-error": "Failed to deserialise data.",
 	"wikibase-error-serialize-error": "Failed to serialise data",
 	"wikibase-client-data-bridge-license-heading": "Usage and licence"
 }

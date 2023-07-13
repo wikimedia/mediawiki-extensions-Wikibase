@@ -99,6 +99,8 @@
 	"wikibase-entitytermsforlanguagelistview-language": "Langue",
 	"wikibase-entitytermsforlanguagelistview-more": "Toutes les langues saisies",
 	"wikibase-entitytermsforlanguagelistview-less": "Moins de langues",
+	"wikibase-entityterms-languagelistview-mul-popup-title": "Nouveau ! Plusieurs langages de remplacement",
+	"wikibase-entityterms-languagelistview-mul-popup-content": "Éviter la redondance et les modifications manuelles en définissant une valeur de repli pour toutes les langues. [https://www.wikidata.org/wiki/Special:MyLanguage/Help:Mul Plus d’information]",
 	"wikibase-label-empty": "Pas de libellé défini",
 	"wikibase-label-edit-placeholder": "saisir un libellé",
 	"wikibase-label-edit-placeholder-language-aware": "entrer le libellé en $1",
