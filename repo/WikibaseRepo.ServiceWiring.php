@@ -1133,17 +1133,6 @@ return [
 		];
 	},
 
-	'WikibaseRepo.EntityTypeToRepositoryMapping' => function ( MediaWikiServices $services ): array {
-		// Map all entity types to unprefixed repository.
-		// TODO: This is a bit of a hack but does the job for EntityIdSearchHelper as long as there are no
-		// prefixed IDs in the entity source realm. Probably EntityIdSearchHelper should be changed instead
-		// of getting this map passed from Repo
-		$entityTypes = array_keys(
-			WikibaseRepo::getEntitySourceDefinitions( $services )->getEntityTypeToDatabaseSourceMapping()
-		);
-		return array_fill_keys( $entityTypes, [ '' ] );
-	},
-
 	'WikibaseRepo.EntityUrlLookup' => function ( MediaWikiServices $services ): EntityUrlLookup {
 		return new SourceAndTypeDispatchingUrlLookup(
 			new ServiceBySourceAndTypeDispatcher(
