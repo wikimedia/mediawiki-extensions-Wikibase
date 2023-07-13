@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
-use InvalidArgumentException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
@@ -43,9 +42,7 @@ class EntityIdSearchHelperTest extends \PHPUnit\Framework\TestCase {
 		return $mock;
 	}
 
-	private function newEntitySearchHelper(
-		array $entityTypeToRepositoryMapping = []
-	) {
+	private function newEntitySearchHelper() {
 		$entityLookup = new InMemoryEntityLookup();
 		$entityLookup->addEntity( new Item( new ItemId( self::EXISTING_ITEM ) ) );
 
@@ -53,7 +50,7 @@ class EntityIdSearchHelperTest extends \PHPUnit\Framework\TestCase {
 			$entityLookup,
 			new ItemIdParser(),
 			$this->getMockLabelDescriptionLookup(),
-			$entityTypeToRepositoryMapping
+			[ 'item' ]
 		);
 	}
 
@@ -121,16 +118,10 @@ class EntityIdSearchHelperTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideTestGetRankedSearchResults
 	 */
 	public function testGetRankedSearchResults( $search, $limit, array $expected ) {
-		$entitySearchHelper = $this->newEntitySearchHelper( [ 'item' => [ '' ] ] );
+		$entitySearchHelper = $this->newEntitySearchHelper();
 
 		$results = $entitySearchHelper->getRankedSearchResults( $search, 'en', 'item', $limit, false, null );
 		$this->assertEquals( $expected, $results );
-	}
-
-	public function testGivenEntityTypeDefinedInMultipleRepos_constructorThrowsException() {
-		$this->expectException( InvalidArgumentException::class );
-
-		$this->newEntitySearchHelper( [ 'item' => [ '', 'foreign' ] ] );
 	}
 
 }

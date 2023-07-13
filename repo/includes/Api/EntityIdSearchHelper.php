@@ -9,7 +9,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Interactors\TermSearchResult;
-use Wikimedia\Assert\Assert;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Helper class to search for entities by ID
@@ -34,16 +34,15 @@ class EntityIdSearchHelper implements EntitySearchHelper {
 	private $entityLookup;
 
 	/**
-	 * @var string[][] Associative array mapping entity type names (strings) to names of
-	 *   repositories providing entities of this type.
+	 * @var string[] Entity type names
 	 */
-	private $entityTypeToRepositoryMapping;
+	private $entityTypes;
 
 	/**
 	 * @param EntityLookup $entityLookup
 	 * @param EntityIdParser $idParser
 	 * @param LabelDescriptionLookup $labelDescriptionLookup
-	 * @param string[][] $entityTypeToRepositoryMapping Associative array (string => string[][])
+	 * @param array $entityTypeToRepositoryMapping Associative array (string => string[][])
 	 *   mapping entity types to a list of repository names which provide entities of the given type.
 	 */
 	public function __construct(
@@ -52,18 +51,12 @@ class EntityIdSearchHelper implements EntitySearchHelper {
 		LabelDescriptionLookup $labelDescriptionLookup,
 		array $entityTypeToRepositoryMapping
 	) {
-		foreach ( $entityTypeToRepositoryMapping as $entityType => $repositoryNames ) {
-			Assert::parameter(
-				count( $repositoryNames ) === 1,
-				'$entityTypeToRepositoryMapping',
-				'Expected entities of type: "' . $entityType . '" to only be provided by single repository.'
-			);
-		}
-
 		$this->entityLookup = $entityLookup;
 		$this->idParser = $idParser;
 		$this->labelDescriptionLookup = $labelDescriptionLookup;
-		$this->entityTypeToRepositoryMapping = $entityTypeToRepositoryMapping;
+		// TODO: This is a temporary hack to overcome the circular dependency between
+		// Wikibase and WikibaseLexeme in Wikibase CI. This is too be i
+		$this->entityTypes = WikibaseRepo::getEnabledEntityTypes();
 	}
 
 	/**
@@ -177,7 +170,7 @@ class EntityIdSearchHelper implements EntitySearchHelper {
 	 */
 	private function getMatchingId( EntityId $entityId ) {
 		$entityType = $entityId->getEntityType();
-		if ( !array_key_exists( $entityType, $this->entityTypeToRepositoryMapping ) ) {
+		if ( !in_array( $entityType, $this->entityTypes ) ) {
 			// Unknown entity type, nothing we can do here.
 			return null;
 		}
