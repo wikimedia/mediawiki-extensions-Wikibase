@@ -6,6 +6,7 @@ namespace Wikibase\View;
 
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\TermList;
+use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\View\Template\TemplateFactory;
 
@@ -23,17 +24,23 @@ class TermsListView {
 	private LanguageNameLookup $languageNameLookup;
 
 	private LocalizedTextProvider $textProvider;
+	private LanguageFallbackChainFactory $languageFallbackChainFactory;
+	private bool $mulEnabled;
 
 	public function __construct(
 		TemplateFactory $templateFactory,
 		LanguageNameLookup $languageNameLookup,
 		LocalizedTextProvider $textProvider,
-		LanguageDirectionalityLookup $languageDirectionalityLookup
+		LanguageDirectionalityLookup $languageDirectionalityLookup,
+		LanguageFallbackChainFactory $languageFallbackChainFactory,
+		bool $mulEnabled
 	) {
 		$this->templateFactory = $templateFactory;
 		$this->languageNameLookup = $languageNameLookup;
 		$this->textProvider = $textProvider;
 		$this->languageDirectionalityLookup = $languageDirectionalityLookup;
+		$this->mulEnabled = $mulEnabled;
+		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 	}
 
 	/**
@@ -118,8 +125,14 @@ class TermsListView {
 			$effectiveLanguage = $languageCode;
 		} else {
 			$classes = 'wb-empty';
-			$text = $this->textProvider->get( 'wikibase-label-empty' );
-			$effectiveLanguage = $this->textProvider->getLanguageOf( 'wikibase-label-empty' );
+			$bestAvailableLabel = $this->getFallbackLabel( $listOfLabelTerms, $languageCode );
+			if ( $bestAvailableLabel !== null ) {
+				$text = $bestAvailableLabel['value'];
+				$effectiveLanguage = $bestAvailableLabel['language'];
+			} else {
+				$text = $this->textProvider->get( 'wikibase-label-empty' );
+				$effectiveLanguage = $this->textProvider->getLanguageOf( 'wikibase-label-empty' );
+			}
 		}
 
 		return $this->templateFactory->render(
@@ -130,6 +143,26 @@ class TermsListView {
 			$this->languageDirectionalityLookup->getDirectionality( $effectiveLanguage ) ?: 'auto',
 			$effectiveLanguage
 		);
+	}
+
+	private function getFallbackLabel( TermList $listOfLabelTerms, string $languageCode ): ?array {
+		if ( !$this->mulEnabled ) {
+			/*
+			 * WARNING: if that functionality is ever attached to a setting other than `mul` being enabled or not,
+			 * then the $shouldSkipEnglishFallback heuristic will fail in subtle ways for languages that genuinely
+			 * fallback to English, such as `en-ca`!
+			 */
+			return null;
+		}
+
+		$fallbackChain = $this->languageFallbackChainFactory->newFromLanguageCode( $languageCode );
+		$shouldSkipEnglishFallback = array_slice( $fallbackChain->getFetchLanguageCodes(), -1 )[0] === 'en';
+		$bestAvailableLabel = $fallbackChain->extractPreferredValue( $listOfLabelTerms->toTextArray() );
+		if ( !$bestAvailableLabel || ( $bestAvailableLabel['language'] === 'en' && $shouldSkipEnglishFallback ) ) {
+			return null;
+		}
+
+		return $bestAvailableLabel;
 	}
 
 	private function getDescriptionView( TermList $listOfDescriptionTerms, string $languageCode ): string {
