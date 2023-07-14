@@ -37,6 +37,7 @@ class PlaceholderEmittingEntityTermsView extends SimpleEntityTermsView implement
 	 * @var TextInjector
 	 */
 	private $textInjector;
+	private bool $mulEnabled;
 
 	public const TERMBOX_VERSION = 1;
 
@@ -55,7 +56,8 @@ class PlaceholderEmittingEntityTermsView extends SimpleEntityTermsView implement
 		EditSectionGenerator $sectionEditLinkGenerator,
 		LocalizedTextProvider $textProvider,
 		TermsListView $termsListView,
-		TextInjector $textInjector
+		TextInjector $textInjector,
+		bool $mulEnabled = false
 	) {
 		parent::__construct(
 			$htmlTermRenderer,
@@ -68,6 +70,7 @@ class PlaceholderEmittingEntityTermsView extends SimpleEntityTermsView implement
 		$this->templateFactory = $templateFactory;
 		$this->termsListView = $termsListView;
 		$this->textInjector = $textInjector;
+		$this->mulEnabled = $mulEnabled;
 	}
 
 	/**
@@ -145,17 +148,23 @@ class PlaceholderEmittingEntityTermsView extends SimpleEntityTermsView implement
 		$revision,
 		$languageCode
 	) {
-		return [
+
+		$labelTermList = $entity->getLabels();
+		$placeholders = [
 			'wikibase-view-chunks' =>
 				$this->textInjector->getMarkers(),
 			'wikibase-terms-list-items' =>
 				$this->getTermsListItems(
 					$languageCode,
-					$entity->getLabels(),
+					$labelTermList,
 					$entity->getDescriptions(),
 					$entity->getAliasGroups()
 				),
 		];
+		if ( $this->mulEnabled ) {
+			$placeholders[ 'wikibase-entity-labels' ] = $labelTermList->toTextArray();
+		}
+		return $placeholders;
 	}
 
 }

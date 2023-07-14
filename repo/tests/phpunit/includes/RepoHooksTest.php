@@ -319,7 +319,7 @@ XML
 		$outputPage = new OutputPage( $context );
 
 		$parserOutput = $this->createMock( ParserOutput::class );
-		$parserOutput->expects( $this->exactly( 5 ) )
+		$parserOutput->expects( $this->exactly( 6 ) )
 			->method( 'getExtensionData' )
 			->willReturnCallback( function ( $key ) use ( $altLinks ) {
 				if ( $key === 'wikibase-alternate-links' ) {

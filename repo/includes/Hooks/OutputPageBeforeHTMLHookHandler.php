@@ -265,9 +265,22 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 
 		// Previously, this would sometimes load the entity from the EntityRevisionLookup.
 		// However, this is currently not needed: the parser cache content has all the term list items,
-		// so we can just use a blank entity to render the remaining "no terms" rows.
+		// so we can just use a blank entity to render the remaining "no terms" rows,
+		// optionally hydrated with labels, also from the parser cache, in order to render label placeholder fallbacks.
 
-		return $this->entityFactory->newEmpty( $entityId->getEntityType() );
+		$entity = $this->entityFactory->newEmpty( $entityId->getEntityType() );
+
+		if ( $entity instanceof LabelsProvider ) {
+			$labelsTermList = $entity->getLabels();
+			$entityLabels = $out->getProperty( 'wikibase-entity-labels' ) ?: [];
+			if ( $labelsTermList->isEmpty() && count( $entityLabels ) > 0 ) {
+				foreach ( $entityLabels as $languageCode => $label ) {
+					$labelsTermList->setTextForLanguage( $languageCode, $label );
+				}
+			}
+		}
+
+		return $entity;
 	}
 
 	private function getPlaceholderExpander(

@@ -758,16 +758,22 @@ final class RepoHooks {
 	 * @param ParserOutput $parserOutput
 	 */
 	public static function onOutputPageParserOutput( OutputPage $outputPage, ParserOutput $parserOutput ) {
-		// Set in EntityParserOutputGenerator.
+		// Set in PlaceholderEmittingEntityTermsView.
 		$placeholders = $parserOutput->getExtensionData( 'wikibase-view-chunks' );
 		if ( $placeholders !== null ) {
 			$outputPage->setProperty( 'wikibase-view-chunks', $placeholders );
 		}
 
-		// Set in EntityParserOutputGenerator.
+		// Set in PlaceholderEmittingEntityTermsView.
 		$termsListItems = $parserOutput->getExtensionData( 'wikibase-terms-list-items' );
 		if ( $termsListItems !== null ) {
 			$outputPage->setProperty( 'wikibase-terms-list-items', $termsListItems );
+		}
+
+		// Set in PlaceholderEmittingEntityTermsView
+		$entityLabels = $parserOutput->getExtensionData( 'wikibase-entity-labels' );
+		if ( $entityLabels !== null ) {
+			$outputPage->setProperty( 'wikibase-entity-labels', $entityLabels );
 		}
 
 		// Used in ViewEntityAction and EditEntityAction to override the page HTML title
