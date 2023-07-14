@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\RestApi\Application\Serialization;
 
 use DataValues\StringValue;
 use Generator;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ValueValidators\Result;
 use ValueValidators\ValueValidator;
@@ -41,10 +40,7 @@ class PropertyValuePairDeserializerTest extends TestCase {
 	private const GLOBECOORDINATE_PROPERTY_ID = 'P678';
 	private const STRING_URI_PROPERTY_ID = 'https://example.com/P1';
 
-	/**
-	 * @var MockObject | DataTypeValidatorFactory
-	 */
-	private $dataTypeValidatorFactory;
+	private DataTypeValidatorFactory $dataTypeValidatorFactory;
 
 	protected function setUp(): void {
 		parent::setUp();

@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\GetItemDescriptions;
 
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\GetItemDescriptions;
@@ -26,15 +25,8 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemDescriptionsRetriever;
  */
 class GetItemDescriptionsTest extends TestCase {
 
-	/**
-	 * @var MockObject|GetLatestItemRevisionMetadata
-	 */
-	private $getRevisionMetadata;
-
-	/**
-	 * @var MockObject|ItemDescriptionsRetriever
-	 */
-	private $descriptionsRetriever;
+	private GetLatestItemRevisionMetadata $getRevisionMetadata;
+	private ItemDescriptionsRetriever $descriptionsRetriever;
 
 	protected function setUp(): void {
 		parent::setUp();

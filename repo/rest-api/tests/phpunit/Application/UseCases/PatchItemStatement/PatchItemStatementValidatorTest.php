@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\PatchItemStatement;
 
 use CommentStore;
 use Generator;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Statement\StatementGuid;
@@ -26,10 +25,7 @@ use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
  */
 class PatchItemStatementValidatorTest extends TestCase {
 
-	/**
-	 * @var MockObject|JsonPatchValidator
-	 */
-	private $jsonPatchValidator;
+	private JsonPatchValidator $jsonPatchValidator;
 
 	private const ALLOWED_TAGS = [ 'some', 'tags', 'are', 'allowed' ];
 

@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\AddItemStatement;
 
 use CommentStore;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatementValidator;
@@ -22,15 +21,8 @@ use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
  */
 class AddItemStatementValidatorTest extends TestCase {
 
-	/**
-	 * @var MockObject|StatementValidator
-	 */
-	private $statementValidator;
-
-	/**
-	 * @var MockObject|EditMetadataValidator
-	 */
-	private $editMetadataValidator;
+	private StatementValidator $statementValidator;
+	private EditMetadataValidator $editMetadataValidator;
 
 	protected function setUp(): void {
 		parent::setUp();

@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\RestApi\Application\Validation;
 
 use Generator;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\RestApi\Application\Serialization\InvalidFieldException;
@@ -22,10 +21,7 @@ use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
  */
 class StatementValidatorTest extends TestCase {
 
-	/**
-	 * @var MockObject|StatementDeserializer
-	 */
-	private $deserializer;
+	private StatementDeserializer $deserializer;
 
 	protected function setUp(): void {
 		parent::setUp();

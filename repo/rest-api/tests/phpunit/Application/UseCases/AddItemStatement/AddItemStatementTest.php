@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\AddItemStatement;
 
 use CommentStore;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -46,26 +45,11 @@ class AddItemStatementTest extends TestCase {
 
 	use EditMetadataHelper;
 
-	/**
-	 * @var MockObject|GetLatestItemRevisionMetadata
-	 */
-	private $getRevisionMetadata;
-	/**
-	 * @var MockObject|ItemRetriever
-	 */
-	private $itemRetriever;
-	/**
-	 * @var MockObject|ItemUpdater
-	 */
-	private $itemUpdater;
-	/**
-	 * @var MockObject|GuidGenerator
-	 */
-	private $guidGenerator;
-	/**
-	 * @var MockObject|AssertUserIsAuthorized
-	 */
-	private $assertUserIsAuthorized;
+	private GetLatestItemRevisionMetadata $getRevisionMetadata;
+	private ItemRetriever $itemRetriever;
+	private ItemUpdater $itemUpdater;
+	private GuidGenerator $guidGenerator;
+	private AssertUserIsAuthorized $assertUserIsAuthorized;
 
 	private const ALLOWED_TAGS = [ 'some', 'tags', 'are', 'allowed' ];
 

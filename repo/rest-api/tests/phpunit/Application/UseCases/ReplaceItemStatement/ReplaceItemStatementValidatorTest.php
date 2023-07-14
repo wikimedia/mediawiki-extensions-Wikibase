@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\ReplaceItemStatement;
 
 use CommentStore;
 use Generator;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Statement\StatementGuid;
@@ -26,10 +25,7 @@ use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
  */
 class ReplaceItemStatementValidatorTest extends TestCase {
 
-	/**
-	 * @var MockObject|StatementValidator
-	 */
-	private $statementValidator;
+	private StatementValidator $statementValidator;
 
 	private const ALLOWED_TAGS = [ 'some', 'tags', 'are', 'allowed' ];
 

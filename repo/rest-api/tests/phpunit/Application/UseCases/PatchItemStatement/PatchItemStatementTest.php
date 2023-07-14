@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\PatchItemStatement;
 
 use Exception;
 use Generator;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -52,39 +51,15 @@ class PatchItemStatementTest extends TestCase {
 
 	private const STRING_PROPERTY = 'P123';
 
-	/**
-	 * @var MockObject|PatchItemStatementValidator
-	 */
-	private $useCaseValidator;
-
-	/**
-	 * @var MockObject|PatchedStatementValidator
-	 */
-	private $patchedStatementValidator;
+	private PatchItemStatementValidator $useCaseValidator;
+	private PatchedStatementValidator $patchedStatementValidator;
 
 	private StatementSerializer $statementSerializer;
-
 	private StatementRetriever $statementRetriever;
-
-	/**
-	 * @var MockObject|ItemRetriever
-	 */
-	private $itemRetriever;
-
-	/**
-	 * @var MockObject|ItemUpdater
-	 */
-	private $itemUpdater;
-
-	/**
-	 * @var MockObject|GetLatestItemRevisionMetadata
-	 */
-	private $getRevisionMetadata;
-
-	/**
-	 * @var MockObject|AssertUserIsAuthorized
-	 */
-	private $assertUserIsAuthorized;
+	private ItemRetriever $itemRetriever;
+	private ItemUpdater $itemUpdater;
+	private GetLatestItemRevisionMetadata $getRevisionMetadata;
+	private AssertUserIsAuthorized $assertUserIsAuthorized;
 
 	protected function setUp(): void {
 		parent::setUp();
