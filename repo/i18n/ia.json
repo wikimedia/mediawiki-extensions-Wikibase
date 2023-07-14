@@ -40,6 +40,8 @@
 	"wikibase-entitytermsforlanguagelistview-language": "Lingua",
 	"wikibase-entitytermsforlanguagelistview-more": "Tote le linguas inserite",
 	"wikibase-entitytermsforlanguagelistview-less": "Minus linguas",
+	"wikibase-entityterms-languagelistview-mul-popup-title": "Nove! Recurso a plure linguas",
+	"wikibase-entityterms-languagelistview-mul-popup-content": "Evita redundantia e modificationes manual predefiniente un recurso pro tote le linguas. [https://www.wikidata.org/wiki/Special:MyLanguage/Help:Mul Plus information]",
 	"wikibase-label-empty": "Nulle etiquetta definite",
 	"wikibase-label-edit-placeholder": "scribe etiquetta",
 	"wikibase-label-edit-placeholder-language-aware": "insere un etiquetta in $1",

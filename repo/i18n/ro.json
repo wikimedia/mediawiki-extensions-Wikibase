@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Alesaru",
 			"Andrei Stroe",
 			"Andreyyshore",
 			"Danutz",
@@ -42,6 +43,7 @@
 	"wikibase-entitytermsforlanguagelistview-language": "Limbă",
 	"wikibase-entitytermsforlanguagelistview-more": "Toate limbile cu etichetă",
 	"wikibase-entitytermsforlanguagelistview-less": "Mai puține limbi",
+	"wikibase-entityterms-languagelistview-mul-popup-title": "Nou! Alternativ în mai multe limbi",
 	"wikibase-label-empty": "Nicio etichetă definită",
 	"wikibase-label-edit-placeholder": "introduceți o etichetă",
 	"wikibase-label-edit-placeholder-language-aware": "introduceți o etichetă în $1",
