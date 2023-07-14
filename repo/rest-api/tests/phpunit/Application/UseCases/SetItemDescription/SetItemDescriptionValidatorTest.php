@@ -119,7 +119,7 @@ class SetItemDescriptionValidatorTest extends TestCase {
 			'Description must not be empty',
 		];
 
-		$description = 'Label Description';
+		$description = 'description that is too long...';
 		$limit = 40;
 		yield 'description too long' => [
 			new ValidationError(
@@ -142,6 +142,43 @@ class SetItemDescriptionValidatorTest extends TestCase {
 			),
 			UseCaseError::INVALID_DESCRIPTION,
 			"Not a valid description: $description",
+		];
+
+		$language = 'en';
+		yield 'label and description are equal' => [
+			new ValidationError(
+				ItemDescriptionValidator::CODE_LABEL_DESCRIPTION_EQUAL,
+				[ ItemDescriptionValidator::CONTEXT_LANGUAGE => $language ],
+			),
+			UseCaseError::LABEL_DESCRIPTION_SAME_VALUE,
+			"Label and description for language code '$language' can not have the same value",
+			[ ItemDescriptionValidator::CONTEXT_LANGUAGE => $language ],
+		];
+
+		$language = 'en';
+		$label = 'test label';
+		$description = 'test description';
+		$matchingItemId = 'Q213';
+		yield 'label and description duplicate' => [
+			new ValidationError(
+				ItemDescriptionValidator::CODE_LABEL_DESCRIPTION_DUPLICATE,
+				[
+					ItemDescriptionValidator::CONTEXT_LANGUAGE => $language,
+					ItemDescriptionValidator::CONTEXT_LABEL => $label,
+					ItemDescriptionValidator::CONTEXT_DESCRIPTION => $description,
+					ItemDescriptionValidator::CONTEXT_MATCHING_ITEM_ID => $matchingItemId,
+
+				],
+			),
+			UseCaseError::ITEM_LABEL_DESCRIPTION_DUPLICATE,
+			"Item '$matchingItemId' already has label '$label' associated with "
+			. "language code '$language', using the same description text",
+			[
+				ItemDescriptionValidator::CONTEXT_LANGUAGE => $language,
+				ItemDescriptionValidator::CONTEXT_LABEL => $label,
+				ItemDescriptionValidator::CONTEXT_DESCRIPTION => $description,
+				ItemDescriptionValidator::CONTEXT_MATCHING_ITEM_ID => $matchingItemId,
+			],
 		];
 	}
 
