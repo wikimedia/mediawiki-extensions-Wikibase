@@ -25,7 +25,7 @@ class SetItemDescriptionRequest {
 		?string $username
 	) {
 		$this->itemId = $itemId;
-		$this->languageCode = strtolower( trim( $languageCode ) );
+		$this->languageCode = $languageCode;
 		$this->description = trim( $description );
 		$this->editTags = $editTags;
 		$this->isBot = $isBot;

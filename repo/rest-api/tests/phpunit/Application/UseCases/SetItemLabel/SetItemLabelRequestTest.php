@@ -27,21 +27,6 @@ class SetItemLabelRequestTest extends TestCase {
 		$this->assertFalse( $request->isBot() );
 	}
 
-	public function testNewWithUppercaseLanguage(): void {
-		$itemId = 'Q123';
-		$langCode = 'EN';
-		$newLabelText = 'New label';
-		$editTags = [ 'some', 'tags' ];
-		$isBot = false;
-
-		$request = new SetItemLabelRequest( $itemId, $langCode, $newLabelText, $editTags, $isBot, null, null );
-		$this->assertEquals( $itemId, $request->getItemId() );
-		$this->assertEquals( 'en', $request->getLanguageCode() );
-		$this->assertEquals( $newLabelText, $request->getLabel() );
-		$this->assertEquals( $editTags, $request->getEditTags() );
-		$this->assertFalse( $request->isBot() );
-	}
-
 	public function testNewWithTrimmedLabel(): void {
 		$itemId = 'Q123';
 		$langCode = 'en';
