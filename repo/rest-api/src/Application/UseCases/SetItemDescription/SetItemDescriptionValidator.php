@@ -62,7 +62,7 @@ class SetItemDescriptionValidator {
 		if ( $validationError ) {
 			throw new UseCaseError(
 				UseCaseError::INVALID_ITEM_ID,
-				'Not a valid item ID: ' . $validationError->getContext()[ItemIdValidator::CONTEXT_VALUE]
+				"Not a valid item ID: {$validationError->getContext()[ItemIdValidator::CONTEXT_VALUE]}"
 			);
 		}
 	}
@@ -76,7 +76,7 @@ class SetItemDescriptionValidator {
 			$languageCode = $validationError->getContext()[DescriptionLanguageCodeValidator::CONTEXT_LANGUAGE];
 			throw new UseCaseError(
 				UseCaseError::INVALID_LANGUAGE_CODE,
-				"Not a valid language code: {$languageCode}"
+				"Not a valid language code: $languageCode"
 			);
 		}
 	}

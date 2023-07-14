@@ -202,10 +202,7 @@ class ReplaceItemStatementTest extends TestCase {
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame(
-				UseCaseError::INVALID_STATEMENT_ID,
-				$e->getErrorCode()
-			);
+			$this->assertSame( UseCaseError::INVALID_STATEMENT_ID, $e->getErrorCode() );
 		}
 	}
 
@@ -261,10 +258,7 @@ class ReplaceItemStatementTest extends TestCase {
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame(
-				UseCaseError::STATEMENT_NOT_FOUND,
-				$e->getErrorCode()
-			);
+			$this->assertSame( UseCaseError::STATEMENT_NOT_FOUND, $e->getErrorCode() );
 		}
 	}
 
@@ -281,10 +275,7 @@ class ReplaceItemStatementTest extends TestCase {
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame(
-				UseCaseError::STATEMENT_NOT_FOUND,
-				$e->getErrorCode()
-			);
+			$this->assertSame( UseCaseError::STATEMENT_NOT_FOUND, $e->getErrorCode() );
 		}
 	}
 

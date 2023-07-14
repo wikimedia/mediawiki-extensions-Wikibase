@@ -21,23 +21,20 @@ class GetItemDescriptionsValidatorTest extends TestCase {
 		$invalidId = 'X123';
 
 		try {
-			$this->newDescriptionsValidator()
-				->assertValidRequest( new GetItemDescriptionsRequest( $invalidId ) );
-
+			$this->newValidator()->assertValidRequest( new GetItemDescriptionsRequest( $invalidId ) );
 			$this->fail( 'Exception was not thrown.' );
 		} catch ( UseCaseError $useCaseEx ) {
 			$this->assertSame( UseCaseError::INVALID_ITEM_ID, $useCaseEx->getErrorCode() );
-			$this->assertSame( 'Not a valid item ID: ' . $invalidId, $useCaseEx->getErrorMessage() );
+			$this->assertSame( "Not a valid item ID: $invalidId", $useCaseEx->getErrorMessage() );
 		}
 	}
 
 	public function testWithValidId(): void {
 		$this->expectNotToPerformAssertions();
-		$this->newDescriptionsValidator()
-			->assertValidRequest( new GetItemDescriptionsRequest( 'Q321' ) );
+		$this->newValidator()->assertValidRequest( new GetItemDescriptionsRequest( 'Q321' ) );
 	}
 
-	private function newDescriptionsValidator(): GetItemDescriptionsValidator {
+	private function newValidator(): GetItemDescriptionsValidator {
 		return ( new GetItemDescriptionsValidator( new ItemIdValidator() ) );
 	}
 

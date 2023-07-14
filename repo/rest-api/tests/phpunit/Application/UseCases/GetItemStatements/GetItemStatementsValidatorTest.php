@@ -22,7 +22,6 @@ class GetItemStatementsValidatorTest extends TestCase {
 	public function testWithInvalidId(): void {
 		try {
 			$this->newStatementsValidator()->assertValidRequest( new GetItemStatementsRequest( 'X123' ) );
-
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::INVALID_ITEM_ID, $e->getErrorCode() );
@@ -33,7 +32,6 @@ class GetItemStatementsValidatorTest extends TestCase {
 	public function testWithInvalidPropertyFilter(): void {
 		try {
 			$this->newStatementsValidator()->assertValidRequest( new GetItemStatementsRequest( 'Q123', 'X123' ) );
-
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::INVALID_PROPERTY_ID, $e->getErrorCode() );

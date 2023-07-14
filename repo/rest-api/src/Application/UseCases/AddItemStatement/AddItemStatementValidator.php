@@ -54,11 +54,10 @@ class AddItemStatementValidator {
 		}
 
 		$validationError = $this->itemIdValidator->validate( $itemId );
-
 		if ( $validationError ) {
 			throw new UseCaseError(
 				UseCaseError::INVALID_ITEM_ID,
-				'Not a valid item ID: ' . $validationError->getContext()[ItemIdValidator::CONTEXT_VALUE]
+				"Not a valid item ID: {$validationError->getContext()[ItemIdValidator::CONTEXT_VALUE]}"
 			);
 		}
 	}
@@ -68,7 +67,6 @@ class AddItemStatementValidator {
 	 */
 	private function validateStatement( array $statement ): void {
 		$validationError = $this->statementValidator->validate( $statement );
-
 		if ( $validationError ) {
 			$context = $validationError->getContext();
 			switch ( $validationError->getCode() ) {
@@ -99,7 +97,6 @@ class AddItemStatementValidator {
 	 */
 	private function validateEditTags( array $editTags ): void {
 		$validationError = $this->editMetadataValidator->validateEditTags( $editTags );
-
 		if ( $validationError ) {
 			throw new UseCaseError(
 				UseCaseError::INVALID_EDIT_TAG,
@@ -117,7 +114,6 @@ class AddItemStatementValidator {
 		}
 
 		$validationError = $this->editMetadataValidator->validateComment( $comment );
-
 		if ( $validationError ) {
 			$commentMaxLength = $validationError->getContext()[EditMetadataValidator::CONTEXT_COMMENT_MAX_LENGTH];
 			throw new UseCaseError(
@@ -126,4 +122,5 @@ class AddItemStatementValidator {
 			);
 		}
 	}
+
 }

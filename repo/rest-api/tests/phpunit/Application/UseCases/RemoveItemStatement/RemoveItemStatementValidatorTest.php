@@ -30,9 +30,7 @@ class RemoveItemStatementValidatorTest extends TestCase {
 	 * @doesNotPerformAssertions
 	 */
 	public function testValidatePass( array $requestData ): void {
-		$this->newRemoveItemStatementValidator()->assertValidRequest(
-			$this->newUseCaseRequest( $requestData )
-		);
+		$this->newValidator()->assertValidRequest( $this->newUseCaseRequest( $requestData ) );
 	}
 
 	/**
@@ -40,10 +38,7 @@ class RemoveItemStatementValidatorTest extends TestCase {
 	 */
 	public function testValidateFails( array $requestData, string $errorCode, string $errorMessage ): void {
 		try {
-			$this->newRemoveItemStatementValidator()->assertValidRequest(
-				$this->newUseCaseRequest( $requestData )
-			);
-
+			$this->newValidator()->assertValidRequest( $this->newUseCaseRequest( $requestData ) );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( $errorCode, $e->getErrorCode() );
@@ -148,7 +143,7 @@ class RemoveItemStatementValidatorTest extends TestCase {
 		];
 	}
 
-	private function newRemoveItemStatementValidator(): RemoveItemStatementValidator {
+	private function newValidator(): RemoveItemStatementValidator {
 		return new RemoveItemStatementValidator(
 			new ItemIdValidator(),
 			new StatementIdValidator( new ItemIdParser() ),

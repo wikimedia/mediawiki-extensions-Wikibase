@@ -22,11 +22,10 @@ class GetPropertyValidator {
 	 */
 	public function assertValidRequest( GetPropertyRequest $request ): void {
 		$validationError = $this->propertyIdValidator->validate( $request->getPropertyId() );
-
 		if ( $validationError ) {
 			throw new UseCaseError(
 				UseCaseError::INVALID_PROPERTY_ID,
-				'Not a valid property ID: ' . $validationError->getContext()[PropertyIdValidator::CONTEXT_VALUE]
+				"Not a valid property ID: {$validationError->getContext()[PropertyIdValidator::CONTEXT_VALUE]}"
 			);
 		}
 
@@ -39,11 +38,9 @@ class GetPropertyValidator {
 	private function validateFields( array $fields ): void {
 		foreach ( $fields as $field ) {
 			if ( !in_array( $field, PropertyParts::VALID_FIELDS ) ) {
-				throw new UseCaseError(
-					UseCaseError::INVALID_FIELD,
-					'Not a valid field: ' . $field
-				);
+				throw new UseCaseError( UseCaseError::INVALID_FIELD, "Not a valid field: $field" );
 			}
 		}
 	}
+
 }

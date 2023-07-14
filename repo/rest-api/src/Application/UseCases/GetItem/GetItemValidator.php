@@ -22,11 +22,10 @@ class GetItemValidator {
 	 */
 	public function assertValidRequest( GetItemRequest $request ): void {
 		$validationError = $this->itemIdValidator->validate( $request->getItemId() );
-
 		if ( $validationError ) {
 			throw new UseCaseError(
 				UseCaseError::INVALID_ITEM_ID,
-				'Not a valid item ID: ' . $validationError->getContext()[ItemIdValidator::CONTEXT_VALUE]
+				"Not a valid item ID: {$validationError->getContext()[ItemIdValidator::CONTEXT_VALUE]}"
 			);
 		}
 
@@ -39,11 +38,9 @@ class GetItemValidator {
 	private function validateFields( array $fields ): void {
 		foreach ( $fields as $field ) {
 			if ( !in_array( $field, ItemParts::VALID_FIELDS ) ) {
-				throw new UseCaseError(
-					UseCaseError::INVALID_FIELD,
-					'Not a valid field: ' . $field
-				);
+				throw new UseCaseError( UseCaseError::INVALID_FIELD, "Not a valid field: $field" );
 			}
 		}
 	}
+
 }

@@ -26,10 +26,7 @@ class GetLatestItemRevisionMetadata {
 		$metaDataResult = $this->metadataRetriever->getLatestRevisionMetadata( $id );
 
 		if ( !$metaDataResult->itemExists() ) {
-			throw new UseCaseError(
-				UseCaseError::ITEM_NOT_FOUND,
-				"Could not find an item with the ID: {$id}"
-			);
+			throw new UseCaseError( UseCaseError::ITEM_NOT_FOUND, "Could not find an item with the ID: $id" );
 		}
 
 		if ( $metaDataResult->isRedirect() ) {

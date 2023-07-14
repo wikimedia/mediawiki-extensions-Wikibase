@@ -114,13 +114,7 @@ class PatchItemLabelsTest extends TestCase {
 		$response = $this->newUseCase()->execute(
 			new PatchItemLabelsRequest(
 				"$itemId",
-				[
-					[
-						'op' => 'add',
-						'path' => "/$newLabelLanguage",
-						'value' => $newLabelText,
-					],
-				],
+				[ [ 'op' => 'add', 'path' => "/$newLabelLanguage", 'value' => $newLabelText ] ],
 				$editTags,
 				$isBot,
 				$comment,
@@ -157,13 +151,7 @@ class PatchItemLabelsTest extends TestCase {
 			$this->newUseCase()->execute(
 				new PatchItemLabelsRequest(
 					$itemId,
-					[
-						[
-							'op' => 'add',
-							'path' => '/ar',
-							'value' => 'new arabic label',
-						],
-					],
+					[ [ 'op' => 'add', 'path' => '/ar', 'value' => 'new arabic label' ] ],
 					[],
 					false,
 					null,
@@ -240,13 +228,7 @@ class PatchItemLabelsTest extends TestCase {
 			$this->newUseCase()->execute(
 				new PatchItemLabelsRequest(
 					$item->getId()->getSerialization(),
-					[
-						[
-							'op' => 'add',
-							'path' => '/ar',
-							'value' => '',
-						],
-					],
+					[ [ 'op' => 'add', 'path' => '/ar', 'value' => '' ] ],
 					[],
 					false,
 					null,
@@ -275,12 +257,7 @@ class PatchItemLabelsTest extends TestCase {
 			$this->newUseCase()->execute(
 				new PatchItemLabelsRequest(
 					"$itemId",
-					[
-						[
-							'op' => 'remove',
-							'path' => '/en',
-						],
-					],
+					[ [ 'op' => 'remove', 'path' => '/en' ] ],
 					[],
 					false,
 					null,

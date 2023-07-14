@@ -27,16 +27,13 @@ class PatchedStatementValidator {
 	public function validateAndDeserializeStatement( array $patchedStatement ): Statement {
 		$validationError = $this->statementValidator->validate( $patchedStatement );
 		if ( $validationError ) {
-			$errorCode = $validationError->getCode();
 			$context = $validationError->getContext();
-			switch ( $errorCode ) {
+			switch ( $validationError->getCode() ) {
 				case StatementValidator::CODE_MISSING_FIELD:
 					throw new UseCaseError(
 						UseCaseError::PATCHED_STATEMENT_MISSING_FIELD,
 						"Mandatory field missing in the patched statement: {$context[StatementValidator::CONTEXT_FIELD_NAME]}",
-						[
-							self::CONTEXT_PATH => $context[StatementValidator::CONTEXT_FIELD_NAME],
-						]
+						[ self::CONTEXT_PATH => $context[StatementValidator::CONTEXT_FIELD_NAME] ]
 					);
 
 				case StatementValidator::CODE_INVALID_FIELD:
@@ -50,7 +47,7 @@ class PatchedStatementValidator {
 					);
 
 				default:
-					throw new LogicException( "Unexpected validation error code: $errorCode" );
+					throw new LogicException( "Unexpected validation error code: {$validationError->getCode()}" );
 			}
 		}
 

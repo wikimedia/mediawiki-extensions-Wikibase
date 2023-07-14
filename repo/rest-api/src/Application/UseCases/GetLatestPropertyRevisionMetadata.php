@@ -25,10 +25,7 @@ class GetLatestPropertyRevisionMetadata {
 		$metaDataResult = $this->metadataRetriever->getLatestRevisionMetadata( $id );
 
 		if ( !$metaDataResult->propertyExists() ) {
-			throw new UseCaseError(
-				UseCaseError::PROPERTY_NOT_FOUND,
-				"Could not find a property with the ID: {$id}"
-			);
+			throw new UseCaseError( UseCaseError::PROPERTY_NOT_FOUND, "Could not find a property with the ID: $id" );
 		}
 
 		return [ $metaDataResult->getRevisionId(), $metaDataResult->getRevisionTimestamp() ];

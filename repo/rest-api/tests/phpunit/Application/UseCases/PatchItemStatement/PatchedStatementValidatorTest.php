@@ -87,4 +87,5 @@ class PatchedStatementValidatorTest extends TestCase {
 			],
 		];
 	}
+
 }

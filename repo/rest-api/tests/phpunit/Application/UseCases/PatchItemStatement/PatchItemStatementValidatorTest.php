@@ -42,9 +42,7 @@ class PatchItemStatementValidatorTest extends TestCase {
 	 * @doesNotPerformAssertions
 	 */
 	public function testAssertValidRequest_withValidRequest( array $requestData ): void {
-		$this->newPatchItemStatementValidator()->assertValidRequest(
-			$this->newUseCaseRequest( $requestData )
-		);
+		$this->newValidator()->assertValidRequest( $this->newUseCaseRequest( $requestData ) );
 	}
 
 	public static function provideValidRequest(): Generator {
@@ -76,7 +74,7 @@ class PatchItemStatementValidatorTest extends TestCase {
 	public function testAssertValidRequest_withInvalidItemId(): void {
 		$itemId = 'X123';
 		try {
-			$this->newPatchItemStatementValidator()->assertValidRequest(
+			$this->newValidator()->assertValidRequest(
 				$this->newUseCaseRequest( [
 					'$statementId' => 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
 					'$patch' => [ 'valid' => 'patch' ],
@@ -90,10 +88,7 @@ class PatchItemStatementValidatorTest extends TestCase {
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::INVALID_ITEM_ID, $e->getErrorCode() );
-			$this->assertSame(
-				'Not a valid item ID: ' . $itemId,
-				$e->getErrorMessage()
-			);
+			$this->assertSame( "Not a valid item ID: $itemId", $e->getErrorMessage() );
 		}
 	}
 
@@ -101,7 +96,7 @@ class PatchItemStatementValidatorTest extends TestCase {
 		$itemId = 'Q123';
 		$statementId = $itemId . StatementGuid::SEPARATOR . 'INVALID-STATEMENT-ID';
 		try {
-			$this->newPatchItemStatementValidator()->assertValidRequest(
+			$this->newValidator()->assertValidRequest(
 				$this->newUseCaseRequest( [
 					'$statementId' => $statementId,
 					'$patch' => [ 'valid' => 'patch' ],
@@ -115,10 +110,7 @@ class PatchItemStatementValidatorTest extends TestCase {
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::INVALID_STATEMENT_ID, $e->getErrorCode() );
-			$this->assertSame(
-				'Not a valid statement ID: ' . $statementId,
-				$e->getErrorMessage()
-			);
+			$this->assertSame( "Not a valid statement ID: $statementId", $e->getErrorMessage() );
 		}
 	}
 
@@ -138,7 +130,7 @@ class PatchItemStatementValidatorTest extends TestCase {
 			->willReturn( $validationError );
 
 		try {
-			$this->newPatchItemStatementValidator()->assertValidRequest(
+			$this->newValidator()->assertValidRequest(
 				$this->newUseCaseRequest( [
 					'$statementId' => 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
 					'$patch' => $invalidPatch,
@@ -203,7 +195,7 @@ class PatchItemStatementValidatorTest extends TestCase {
 	public function testAssertValidRequest_withCommentTooLong(): void {
 		$comment = str_repeat( 'x', CommentStore::COMMENT_CHARACTER_LIMIT + 1 );
 		try {
-			$this->newPatchItemStatementValidator()->assertValidRequest(
+			$this->newValidator()->assertValidRequest(
 				$this->newUseCaseRequest( [
 					'$statementId' => 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
 					'$patch' => [ 'valid' => 'patch' ],
@@ -227,7 +219,7 @@ class PatchItemStatementValidatorTest extends TestCase {
 	public function testAssertValidRequest_withInvalidEditTags(): void {
 		$invalid = 'invalid';
 		try {
-			$this->newPatchItemStatementValidator()->assertValidRequest(
+			$this->newValidator()->assertValidRequest(
 				$this->newUseCaseRequest( [
 					'$statementId' => 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
 					'$patch' => [ 'valid' => 'patch' ],
@@ -241,14 +233,11 @@ class PatchItemStatementValidatorTest extends TestCase {
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::INVALID_EDIT_TAG, $e->getErrorCode() );
-			$this->assertSame(
-				'Invalid MediaWiki tag: "invalid"',
-				$e->getErrorMessage()
-			);
+			$this->assertSame( 'Invalid MediaWiki tag: "invalid"', $e->getErrorMessage() );
 		}
 	}
 
-	private function newPatchItemStatementValidator(): PatchItemStatementValidator {
+	private function newValidator(): PatchItemStatementValidator {
 		return new PatchItemStatementValidator(
 			new ItemIdValidator(),
 			new StatementIdValidator( new ItemIdParser() ),
@@ -268,4 +257,5 @@ class PatchItemStatementValidatorTest extends TestCase {
 			$requestData['$itemId'] ?? null
 		);
 	}
+
 }

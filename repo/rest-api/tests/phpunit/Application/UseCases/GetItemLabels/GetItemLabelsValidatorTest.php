@@ -21,13 +21,11 @@ class GetItemLabelsValidatorTest extends TestCase {
 		$invalidId = 'X123';
 
 		try {
-			$this->newLabelsValidator()
-				->assertValidRequest( new GetItemLabelsRequest( $invalidId ) );
-
+			$this->newLabelsValidator()->assertValidRequest( new GetItemLabelsRequest( $invalidId ) );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $useCaseEx ) {
 			$this->assertSame( UseCaseError::INVALID_ITEM_ID, $useCaseEx->getErrorCode() );
-			$this->assertSame( 'Not a valid item ID: ' . $invalidId, $useCaseEx->getErrorMessage() );
+			$this->assertSame( "Not a valid item ID: $invalidId", $useCaseEx->getErrorMessage() );
 		}
 	}
 
@@ -35,8 +33,7 @@ class GetItemLabelsValidatorTest extends TestCase {
 	 * @doesNotPerformAssertions
 	 */
 	public function testWithValidId(): void {
-		$this->newLabelsValidator()
-			->assertValidRequest( new GetItemLabelsRequest( 'Q321' ) );
+		$this->newLabelsValidator()->assertValidRequest( new GetItemLabelsRequest( 'Q321' ) );
 	}
 
 	private function newLabelsValidator(): GetItemLabelsValidator {

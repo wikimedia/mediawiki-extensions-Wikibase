@@ -167,4 +167,5 @@ class AddItemStatementValidatorTest extends TestCase {
 			$this->editMetadataValidator
 		);
 	}
+
 }

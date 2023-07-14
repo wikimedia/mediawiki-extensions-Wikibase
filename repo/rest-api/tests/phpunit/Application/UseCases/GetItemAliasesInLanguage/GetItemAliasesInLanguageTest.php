@@ -38,11 +38,7 @@ class GetItemAliasesInLanguageTest extends TestCase {
 
 	public function testSuccess(): void {
 		$languageCode = 'en';
-
-		$aliasesInLanguage = new AliasesInLanguage(
-			$languageCode,
-			[ 'Planet Earth', 'the Earth' ]
-		);
+		$aliasesInLanguage = new AliasesInLanguage( $languageCode, [ 'Planet Earth', 'the Earth' ] );
 
 		$itemId = new ItemId( 'Q2' );
 		$lastModified = '20201111070707';

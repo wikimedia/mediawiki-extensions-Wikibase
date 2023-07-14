@@ -45,7 +45,7 @@ class SetItemLabelValidatorTest extends TestCase {
 
 		$request = new SetItemLabelRequest( $itemId, $langCode, $newLabelText, $editTags, $isBot, $comment, null );
 
-		$this->newLabelValidator()->assertValidRequest( $request );
+		$this->newValidator()->assertValidRequest( $request );
 	}
 
 	public function testWithInvalidId(): void {
@@ -59,12 +59,11 @@ class SetItemLabelValidatorTest extends TestCase {
 		$request = new SetItemLabelRequest( $invalidItemId, $langCode, $newLabelText, $editTags, $isBot, $comment, null );
 
 		try {
-			$this->newLabelValidator()->assertValidRequest( $request );
-
+			$this->newValidator()->assertValidRequest( $request );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $error ) {
 			$this->assertSame( UseCaseError::INVALID_ITEM_ID, $error->getErrorCode() );
-			$this->assertSame( 'Not a valid item ID: ' . $invalidItemId, $error->getErrorMessage() );
+			$this->assertSame( "Not a valid item ID: $invalidItemId", $error->getErrorMessage() );
 		}
 	}
 
@@ -79,12 +78,11 @@ class SetItemLabelValidatorTest extends TestCase {
 		$request = new SetItemLabelRequest( $itemId, $invalidLanguageCode, $newLabelText, $editTags, $isBot, $comment, null );
 
 		try {
-			$this->newLabelValidator()->assertValidRequest( $request );
-
+			$this->newValidator()->assertValidRequest( $request );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $error ) {
 			$this->assertSame( UseCaseError::INVALID_LANGUAGE_CODE, $error->getErrorCode() );
-			$this->assertSame( 'Not a valid language code: ' . $invalidLanguageCode, $error->getErrorMessage() );
+			$this->assertSame( "Not a valid language code: $invalidLanguageCode", $error->getErrorMessage() );
 		}
 	}
 
@@ -101,8 +99,7 @@ class SetItemLabelValidatorTest extends TestCase {
 		$request = new SetItemLabelRequest( $itemId, $languageCode, $newLabelText, $editTags, $isBot, $comment, null );
 
 		try {
-			$this->newLabelValidator()->assertValidRequest( $request );
-
+			$this->newValidator()->assertValidRequest( $request );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $error ) {
 			$this->assertSame( UseCaseError::INVALID_EDIT_TAG, $error->getErrorCode() );
@@ -121,8 +118,7 @@ class SetItemLabelValidatorTest extends TestCase {
 		$request = new SetItemLabelRequest( $itemId, $languageCode, $newLabelText, $editTags, $isBot, $comment, null );
 
 		try {
-			$this->newLabelValidator()->assertValidRequest( $request );
-
+			$this->newValidator()->assertValidRequest( $request );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $error ) {
 			$this->assertSame( UseCaseError::COMMENT_TOO_LONG, $error->getErrorCode() );
@@ -152,13 +148,10 @@ class SetItemLabelValidatorTest extends TestCase {
 		$request = new SetItemLabelRequest( $itemId, $languageCode, $labelText, $editTags, $isBot, $comment, null );
 
 		$this->itemLabelValidator = $this->createStub( ItemLabelValidator::class );
-		$this->itemLabelValidator
-			->method( 'validate' )
-			->willReturn( $validationError );
+		$this->itemLabelValidator->method( 'validate' )->willReturn( $validationError );
 
 		try {
-			$this->newLabelValidator()->assertValidRequest( $request );
-
+			$this->newValidator()->assertValidRequest( $request );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $error ) {
 			$this->assertSame( $expectedErrorCode, $error->getErrorCode() );
@@ -189,10 +182,7 @@ class SetItemLabelValidatorTest extends TestCase {
 			ItemLabelValidator::CONTEXT_LIMIT => 250,
 		];
 		yield 'label too long' => [
-			new ValidationError(
-				ItemLabelValidator::CODE_TOO_LONG,
-				$context
-			),
+			new ValidationError( ItemLabelValidator::CODE_TOO_LONG, $context ),
 			UseCaseError::LABEL_TOO_LONG,
 			'Label must be no more than 250 characters long',
 			$context,
@@ -200,10 +190,7 @@ class SetItemLabelValidatorTest extends TestCase {
 
 		$context = [ ItemLabelValidator::CONTEXT_LANGUAGE => 'en' ];
 		yield 'label equals description' => [
-			new ValidationError(
-				ItemLabelValidator::CODE_LABEL_DESCRIPTION_EQUAL,
-				$context
-			),
+			new ValidationError( ItemLabelValidator::CODE_LABEL_DESCRIPTION_EQUAL, $context ),
 			UseCaseError::LABEL_DESCRIPTION_SAME_VALUE,
 			"Label and description for language code 'en' can not have the same value.",
 			$context,
@@ -216,24 +203,18 @@ class SetItemLabelValidatorTest extends TestCase {
 			ItemLabelValidator::CONTEXT_MATCHING_ITEM_ID => 'Q456',
 		];
 		yield 'label/description not unique' => [
-			new ValidationError(
-				ItemLabelValidator::CODE_LABEL_DESCRIPTION_DUPLICATE,
-				$context
-			),
+			new ValidationError( ItemLabelValidator::CODE_LABEL_DESCRIPTION_DUPLICATE, $context ),
 			UseCaseError::ITEM_LABEL_DESCRIPTION_DUPLICATE,
 			"Item Q456 already has label 'My Label' associated with language code 'en', using the same description text.",
 			$context,
 		];
 	}
 
-	private function newLabelValidator(): SetItemLabelValidator {
+	private function newValidator(): SetItemLabelValidator {
 		return new SetItemLabelValidator(
 			new ItemIdValidator(),
 			new LanguageCodeValidator( WikibaseRepo::getTermsLanguages()->getLanguages() ),
-			new EditMetadataValidator(
-				CommentStore::COMMENT_CHARACTER_LIMIT,
-				self::ALLOWED_TAGS
-			),
+			new EditMetadataValidator( CommentStore::COMMENT_CHARACTER_LIMIT, self::ALLOWED_TAGS ),
 			$this->itemLabelValidator
 		);
 	}

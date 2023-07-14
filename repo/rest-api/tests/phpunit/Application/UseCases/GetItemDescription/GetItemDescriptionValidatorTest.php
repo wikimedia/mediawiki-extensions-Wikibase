@@ -23,21 +23,18 @@ class GetItemDescriptionValidatorTest extends TestCase {
 	 * @doesNotPerformAssertions
 	 */
 	public function testWithValidIdAndLanguageCode(): void {
-		$this->newDescriptionValidator()
-			->assertValidRequest( new GetItemDescriptionRequest( 'Q321', 'en' ) );
+		$this->newValidator()->assertValidRequest( new GetItemDescriptionRequest( 'Q321', 'en' ) );
 	}
 
 	public function testWithInvalidId(): void {
 		$invalidId = 'X123';
 
 		try {
-			$this->newDescriptionValidator()
-				->assertValidRequest( new GetItemDescriptionRequest( $invalidId, 'en' ) );
-
+			$this->newValidator()->assertValidRequest( new GetItemDescriptionRequest( $invalidId, 'en' ) );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $useCaseEx ) {
 			$this->assertSame( UseCaseError::INVALID_ITEM_ID, $useCaseEx->getErrorCode() );
-			$this->assertSame( 'Not a valid item ID: ' . $invalidId, $useCaseEx->getErrorMessage() );
+			$this->assertSame( "Not a valid item ID: $invalidId", $useCaseEx->getErrorMessage() );
 		}
 	}
 
@@ -45,17 +42,15 @@ class GetItemDescriptionValidatorTest extends TestCase {
 		$invalidLanguageCode = '1e';
 
 		try {
-			$this->newDescriptionValidator()
-				->assertValidRequest( new GetItemDescriptionRequest( 'Q123', $invalidLanguageCode ) );
-
+			$this->newValidator()->assertValidRequest( new GetItemDescriptionRequest( 'Q123', $invalidLanguageCode ) );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $useCaseEx ) {
 			$this->assertSame( UseCaseError::INVALID_LANGUAGE_CODE, $useCaseEx->getErrorCode() );
-			$this->assertSame( 'Not a valid language code: ' . $invalidLanguageCode, $useCaseEx->getErrorMessage() );
+			$this->assertSame( "Not a valid language code: $invalidLanguageCode", $useCaseEx->getErrorMessage() );
 		}
 	}
 
-	private function newDescriptionValidator(): GetItemDescriptionValidator {
+	private function newValidator(): GetItemDescriptionValidator {
 		return ( new GetItemDescriptionValidator(
 			new ItemIdValidator(),
 			new LanguageCodeValidator( WikibaseRepo::getTermsLanguages()->getLanguages() )

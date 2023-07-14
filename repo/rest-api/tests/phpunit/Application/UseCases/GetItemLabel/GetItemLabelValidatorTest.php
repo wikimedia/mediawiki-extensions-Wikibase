@@ -23,39 +23,35 @@ class GetItemLabelValidatorTest extends TestCase {
 	 * @doesNotPerformAssertions
 	 */
 	public function testWithValidIdAndLanguageCode(): void {
-		$this->newLabelValidator()
-			->assertValidRequest( new GetItemLabelRequest( 'Q321', 'en' ) );
+		$this->newValidator()->assertValidRequest( new GetItemLabelRequest( 'Q321', 'en' ) );
 	}
 
 	public function testWithInvalidId(): void {
 		$invalidId = 'X123';
 
 		try {
-			$this->newLabelValidator()
-				->assertValidRequest( new GetItemLabelRequest( $invalidId, 'en' ) );
-
+			$this->newValidator()->assertValidRequest( new GetItemLabelRequest( $invalidId, 'en' ) );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $error ) {
 			$this->assertSame( UseCaseError::INVALID_ITEM_ID, $error->getErrorCode() );
-			$this->assertSame( 'Not a valid item ID: ' . $invalidId, $error->getErrorMessage() );
+			$this->assertSame( "Not a valid item ID: $invalidId", $error->getErrorMessage() );
 		}
 	}
 
 	public function testWithInvalidLanguageCode(): void {
-		$invalidLanguageCode = '1e';
+		$invalidLanguage = '1e';
 
 		try {
-			$this->newLabelValidator()
-				->assertValidRequest( new GetItemLabelRequest( 'Q123', $invalidLanguageCode ) );
+			$this->newValidator()->assertValidRequest( new GetItemLabelRequest( 'Q123', $invalidLanguage ) );
 
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $error ) {
 			$this->assertSame( UseCaseError::INVALID_LANGUAGE_CODE, $error->getErrorCode() );
-			$this->assertSame( 'Not a valid language code: ' . $invalidLanguageCode, $error->getErrorMessage() );
+			$this->assertSame( "Not a valid language code: $invalidLanguage", $error->getErrorMessage() );
 		}
 	}
 
-	private function newLabelValidator(): GetItemLabelValidator {
+	private function newValidator(): GetItemLabelValidator {
 		return ( new GetItemLabelValidator(
 			new ItemIdValidator(),
 			new LanguageCodeValidator( WikibaseRepo::getTermsLanguages()->getLanguages() )

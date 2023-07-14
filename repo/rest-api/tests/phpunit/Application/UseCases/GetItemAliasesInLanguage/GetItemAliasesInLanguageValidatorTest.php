@@ -23,39 +23,34 @@ class GetItemAliasesInLanguageValidatorTest extends TestCase {
 	 * @doesNotPerformAssertions
 	 */
 	public function testWithValidIdAndLanguageCode(): void {
-		$this->newAliasesInLanguageValidator()
-			->assertValidRequest( new GetItemAliasesInLanguageRequest( 'Q321', 'en' ) );
+		$this->newValidator()->assertValidRequest( new GetItemAliasesInLanguageRequest( 'Q321', 'en' ) );
 	}
 
 	public function testWithInvalidId(): void {
 		$invalidId = 'X123';
 
 		try {
-			$this->newAliasesInLanguageValidator()
-				->assertValidRequest( new GetItemAliasesInLanguageRequest( $invalidId, 'en' ) );
-
+			$this->newValidator()->assertValidRequest( new GetItemAliasesInLanguageRequest( $invalidId, 'en' ) );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $useCaseEx ) {
 			$this->assertSame( UseCaseError::INVALID_ITEM_ID, $useCaseEx->getErrorCode() );
-			$this->assertSame( 'Not a valid item ID: ' . $invalidId, $useCaseEx->getErrorMessage() );
+			$this->assertSame( "Not a valid item ID: $invalidId", $useCaseEx->getErrorMessage() );
 		}
 	}
 
 	public function testWithInvalidLanguageCode(): void {
-		$invalidLanguageCode = '1e';
+		$invalidLanguage = '1e';
 
 		try {
-			$this->newAliasesInLanguageValidator()
-				->assertValidRequest( new GetItemAliasesInLanguageRequest( 'Q123', $invalidLanguageCode ) );
-
+			$this->newValidator()->assertValidRequest( new GetItemAliasesInLanguageRequest( 'Q123', $invalidLanguage ) );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $useCaseEx ) {
 			$this->assertSame( UseCaseError::INVALID_LANGUAGE_CODE, $useCaseEx->getErrorCode() );
-			$this->assertSame( 'Not a valid language code: ' . $invalidLanguageCode, $useCaseEx->getErrorMessage() );
+			$this->assertSame( "Not a valid language code: $invalidLanguage", $useCaseEx->getErrorMessage() );
 		}
 	}
 
-	private function newAliasesInLanguageValidator(): GetItemAliasesInLanguageValidator {
+	private function newValidator(): GetItemAliasesInLanguageValidator {
 		return ( new GetItemAliasesInLanguageValidator(
 			new ItemIdValidator(),
 			new LanguageCodeValidator( WikibaseRepo::getTermsLanguages()->getLanguages() )

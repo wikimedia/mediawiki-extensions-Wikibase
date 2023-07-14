@@ -45,7 +45,6 @@ class PatchItemLabelsValidator {
 	 */
 	private function validateItemId( string $itemId ): void {
 		$validationError = $this->itemIdValidator->validate( $itemId );
-
 		if ( $validationError ) {
 			throw new UseCaseError(
 				UseCaseError::INVALID_ITEM_ID,
@@ -59,7 +58,6 @@ class PatchItemLabelsValidator {
 	 */
 	private function validatePatch( array $patch ): void {
 		$validationError = $this->jsonPatchValidator->validate( $patch );
-
 		if ( $validationError ) {
 			$context = $validationError->getContext();
 			switch ( $validationError->getCode() ) {
@@ -75,10 +73,9 @@ class PatchItemLabelsValidator {
 					);
 
 				case JsonPatchValidator::CODE_INVALID_FIELD_TYPE:
-					$field = $context[JsonPatchValidator::CONTEXT_FIELD];
 					throw new UseCaseError(
 						UseCaseError::INVALID_PATCH_FIELD_TYPE,
-						"The value of '$field' must be of type string",
+						"The value of '{$context[JsonPatchValidator::CONTEXT_FIELD]}' must be of type string",
 						[
 							self::CONTEXT_OPERATION => $context[JsonPatchValidator::CONTEXT_OPERATION],
 							self::CONTEXT_FIELD => $context[JsonPatchValidator::CONTEXT_FIELD],
@@ -86,13 +83,12 @@ class PatchItemLabelsValidator {
 					);
 
 				case JsonPatchValidator::CODE_MISSING_FIELD:
-					$field = $context[JsonPatchValidator::CONTEXT_FIELD];
 					throw new UseCaseError(
 						UseCaseError::MISSING_JSON_PATCH_FIELD,
-						"Missing '$field' in JSON patch",
+						"Missing '{$context[JsonPatchValidator::CONTEXT_FIELD]}' in JSON patch",
 						[
 							self::CONTEXT_OPERATION => $context[JsonPatchValidator::CONTEXT_OPERATION],
-							self::CONTEXT_FIELD => $field,
+							self::CONTEXT_FIELD => $context[JsonPatchValidator::CONTEXT_FIELD],
 						]
 					);
 
@@ -107,7 +103,6 @@ class PatchItemLabelsValidator {
 	 */
 	private function validateEditTags( array $editTags ): void {
 		$validationError = $this->editMetadataValidator->validateEditTags( $editTags );
-
 		if ( $validationError ) {
 			throw new UseCaseError(
 				UseCaseError::INVALID_EDIT_TAG,
@@ -125,7 +120,6 @@ class PatchItemLabelsValidator {
 		}
 
 		$validationError = $this->editMetadataValidator->validateComment( $comment );
-
 		if ( $validationError ) {
 			$commentMaxLength = $validationError->getContext()[EditMetadataValidator::CONTEXT_COMMENT_MAX_LENGTH];
 			throw new UseCaseError(
