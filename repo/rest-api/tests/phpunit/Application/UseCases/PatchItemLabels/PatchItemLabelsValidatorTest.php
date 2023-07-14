@@ -51,10 +51,7 @@ class PatchItemLabelsValidatorTest extends TestCase {
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::INVALID_ITEM_ID, $e->getErrorCode() );
-			$this->assertSame(
-				'Not a valid item ID: ' . $itemId,
-				$e->getErrorMessage()
-			);
+			$this->assertSame( "Not a valid item ID: $itemId", $e->getErrorMessage() );
 		}
 	}
 
@@ -93,38 +90,44 @@ class PatchItemLabelsValidatorTest extends TestCase {
 			null,
 		];
 
-		$context = [ JsonPatchValidator::CONTEXT_OPERATION => [ 'op' => 'bad', 'path' => '/a/b/c', 'value' => 'test' ] ];
+		$operation = [ 'op' => 'bad', 'path' => '/a/b/c', 'value' => 'test' ];
 		yield 'from invalid patch operation' => [
-			new ValidationError( JsonPatchValidator::CODE_INVALID_OPERATION, $context ),
+			new ValidationError( JsonPatchValidator::CODE_INVALID_OPERATION, [ JsonPatchValidator::CONTEXT_OPERATION => $operation ] ),
 			UseCaseError::INVALID_PATCH_OPERATION,
 			"Incorrect JSON patch operation: 'bad'",
-			$context,
+			[ PatchItemLabelsValidator::CONTEXT_OPERATION => $operation ],
 		];
 
-		$context = [
-			JsonPatchValidator::CONTEXT_OPERATION => [
-				'op' => [ 'not', [ 'a' => 'string' ] ],
-				'path' => '/a/b/c',
-				'value' => 'test',
-			],
-			JsonPatchValidator::CONTEXT_FIELD => 'op',
+		$operation = [
+			'op' => [ 'not', [ 'a' => 'string' ] ],
+			'path' => '/a/b/c',
+			'value' => 'test',
 		];
 		yield 'from invalid patch field type' => [
-			new ValidationError( JsonPatchValidator::CODE_INVALID_FIELD_TYPE, $context ),
+			new ValidationError( JsonPatchValidator::CODE_INVALID_FIELD_TYPE, [
+				JsonPatchValidator::CONTEXT_OPERATION => $operation,
+				JsonPatchValidator::CONTEXT_FIELD => 'op',
+			] ),
 			UseCaseError::INVALID_PATCH_FIELD_TYPE,
 			"The value of 'op' must be of type string",
-			$context,
+			[
+				PatchItemLabelsValidator::CONTEXT_OPERATION => $operation,
+				PatchItemLabelsValidator::CONTEXT_FIELD => 'op',
+			],
 		];
 
-		$context = [
-			JsonPatchValidator::CONTEXT_OPERATION => [ 'path' => '/a/b/c', 'value' => 'test' ],
-			JsonPatchValidator::CONTEXT_FIELD => 'op',
-		];
+		$operation = [ 'path' => '/a/b/c', 'value' => 'test' ];
 		yield 'from missing patch field' => [
-			new ValidationError( JsonPatchValidator::CODE_MISSING_FIELD, $context ),
+			new ValidationError( JsonPatchValidator::CODE_MISSING_FIELD, [
+				JsonPatchValidator::CONTEXT_OPERATION => $operation,
+				JsonPatchValidator::CONTEXT_FIELD => 'op',
+			] ),
 			UseCaseError::MISSING_JSON_PATCH_FIELD,
 			"Missing 'op' in JSON patch",
-			$context,
+			[
+				PatchItemLabelsValidator::CONTEXT_OPERATION => $operation,
+				PatchItemLabelsValidator::CONTEXT_FIELD => 'op',
+			],
 		];
 	}
 

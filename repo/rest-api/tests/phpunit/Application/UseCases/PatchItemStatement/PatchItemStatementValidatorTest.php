@@ -165,38 +165,38 @@ class PatchItemStatementValidatorTest extends TestCase {
 			null,
 		];
 
-		$context = [
-			JsonPatchValidator::CONTEXT_OPERATION => [ 'path' => '/a/b/c', 'value' => 'test' ],
-			JsonPatchValidator::CONTEXT_FIELD => 'op',
-		];
+		$operation = [ 'path' => '/a/b/c', 'value' => 'test' ];
 		yield 'from missing patch field' => [
-			new ValidationError( JsonPatchValidator::CODE_MISSING_FIELD, $context ),
+			new ValidationError( JsonPatchValidator::CODE_MISSING_FIELD, [
+				JsonPatchValidator::CONTEXT_OPERATION => $operation,
+				JsonPatchValidator::CONTEXT_FIELD => 'op',
+			] ),
 			UseCaseError::MISSING_JSON_PATCH_FIELD,
 			"Missing 'op' in JSON patch",
-			$context,
+			[ 'operation' => $operation, 'field' => 'op' ],
 		];
 
-		$context = [ JsonPatchValidator::CONTEXT_OPERATION => [ 'op' => 'bad', 'path' => '/a/b/c', 'value' => 'test' ] ];
+		$operation = [ 'op' => 'bad', 'path' => '/a/b/c', 'value' => 'test' ];
 		yield 'from invalid patch operation' => [
-			new ValidationError( JsonPatchValidator::CODE_INVALID_OPERATION, $context ),
+			new ValidationError( JsonPatchValidator::CODE_INVALID_OPERATION, [ JsonPatchValidator::CONTEXT_OPERATION => $operation ] ),
 			UseCaseError::INVALID_PATCH_OPERATION,
 			"Incorrect JSON patch operation: 'bad'",
-			$context,
+			[ 'operation' => $operation ],
 		];
 
-		$context = [
-			JsonPatchValidator::CONTEXT_OPERATION => [
-				'op' => [ 'not', [ 'a' => 'string' ] ],
-				'path' => '/a/b/c',
-				'value' => 'test',
-			],
-			JsonPatchValidator::CONTEXT_FIELD => 'op',
+		$operation = [
+			'op' => [ 'not', [ 'a' => 'string' ] ],
+			'path' => '/a/b/c',
+			'value' => 'test',
 		];
 		yield 'from invalid patch field type' => [
-			new ValidationError( JsonPatchValidator::CODE_INVALID_FIELD_TYPE, $context ),
+			new ValidationError( JsonPatchValidator::CODE_INVALID_FIELD_TYPE, [
+				JsonPatchValidator::CONTEXT_OPERATION => $operation,
+				JsonPatchValidator::CONTEXT_FIELD => 'op',
+			] ),
 			UseCaseError::INVALID_PATCH_FIELD_TYPE,
 			"The value of 'op' must be of type string",
-			$context,
+			[ 'operation' => $operation, 'field' => 'op' ],
 		];
 	}
 

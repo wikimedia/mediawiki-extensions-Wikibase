@@ -103,7 +103,7 @@ class PatchedLabelsValidatorTest extends TestCase {
 		} catch ( UseCaseError $error ) {
 			$this->assertSame( $expectedErrorCode, $error->getErrorCode() );
 			$this->assertSame( $expectedErrorMessage, $error->getErrorMessage() );
-			$this->assertSame( $expectedContext, $error->getErrorContext() );
+			$this->assertEquals( $expectedContext, $error->getErrorContext() );
 		}
 	}
 
@@ -125,41 +125,48 @@ class PatchedLabelsValidatorTest extends TestCase {
 		];
 
 		$tooLongLabel = 'This label is too long.';
-		$context = [
-			ItemLabelValidator::CONTEXT_VALUE => $tooLongLabel,
-			ItemLabelValidator::CONTEXT_LIMIT => 250,
-			PatchedLabelsValidator::CONTEXT_LANGUAGE => $language,
-		];
 		yield 'label too long' => [
 			[ $language => $tooLongLabel ],
 			new ValidationError(
 				ItemLabelValidator::CODE_TOO_LONG,
-				$context
+				[
+					ItemLabelValidator::CONTEXT_VALUE => $tooLongLabel,
+					ItemLabelValidator::CONTEXT_LIMIT => 250,
+					ItemLabelValidator::CONTEXT_LANGUAGE => $language,
+				]
 			),
 			UseCaseError::PATCHED_LABEL_TOO_LONG,
 			"Changed label for '$language' must not be more than 250 characters long",
-			$context,
+			[
+				PatchedLabelsValidator::CONTEXT_VALUE => $tooLongLabel,
+				PatchedLabelsValidator::CONTEXT_LIMIT => 250,
+				PatchedLabelsValidator::CONTEXT_LANGUAGE => $language,
+			],
 		];
 
 		$collidingLabel = 'This label already exists on an item with the same description.';
 		$collidingDescription = 'This discription already exists on an item with the same label.';
 		$collidingItemId = 'Q345';
-		$context = [
-			ItemLabelValidator::CONTEXT_LANGUAGE => $language,
-			ItemLabelValidator::CONTEXT_LABEL => $collidingLabel,
-			ItemLabelValidator::CONTEXT_DESCRIPTION => $collidingDescription,
-			ItemLabelValidator::CONTEXT_MATCHING_ITEM_ID => $collidingItemId,
-		];
 		yield 'label/description collision' => [
 			[ $language => $collidingLabel ],
 			new ValidationError(
 				ItemLabelValidator::CODE_LABEL_DESCRIPTION_DUPLICATE,
-				$context
+				[
+					ItemLabelValidator::CONTEXT_LANGUAGE => $language,
+					ItemLabelValidator::CONTEXT_LABEL => $collidingLabel,
+					ItemLabelValidator::CONTEXT_DESCRIPTION => $collidingDescription,
+					ItemLabelValidator::CONTEXT_MATCHING_ITEM_ID => $collidingItemId,
+				]
 			),
 			UseCaseError::PATCHED_ITEM_LABEL_DESCRIPTION_DUPLICATE,
 			"Item $collidingItemId already has label '$collidingLabel' associated with language code $language, " .
 			'using the same description text.',
-			$context,
+			[
+				PatchedLabelsValidator::CONTEXT_LANGUAGE => $language,
+				PatchedLabelsValidator::CONTEXT_LABEL => $collidingLabel,
+				PatchedLabelsValidator::CONTEXT_DESCRIPTION => $collidingDescription,
+				PatchedLabelsValidator::CONTEXT_MATCHING_ITEM_ID => $collidingItemId,
+			],
 		];
 	}
 
@@ -170,7 +177,7 @@ class PatchedLabelsValidatorTest extends TestCase {
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::PATCHED_LABEL_EMPTY, $e->getErrorCode() );
 			$this->assertSame( "Changed label for 'en' cannot be empty", $e->getErrorMessage() );
-			$this->assertEquals( [ 'language' => 'en' ], $e->getErrorContext() );
+			$this->assertEquals( [ PatchedLabelsValidator::CONTEXT_LANGUAGE => 'en' ], $e->getErrorContext() );
 		}
 	}
 
@@ -183,7 +190,10 @@ class PatchedLabelsValidatorTest extends TestCase {
 			$this->assertSame( UseCaseError::PATCHED_LABEL_INVALID, $e->getErrorCode() );
 			$this->assertStringContainsString( 'en', $e->getErrorMessage() );
 			$this->assertStringContainsString( "$invalidLabel", $e->getErrorMessage() );
-			$this->assertEquals( [ 'language' => 'en', 'value' => "$invalidLabel" ], $e->getErrorContext() );
+			$this->assertEquals(
+				[ PatchedLabelsValidator::CONTEXT_LANGUAGE => 'en', PatchedLabelsValidator::CONTEXT_VALUE => "$invalidLabel" ],
+				$e->getErrorContext()
+			);
 		}
 	}
 
@@ -204,11 +214,9 @@ class PatchedLabelsValidatorTest extends TestCase {
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-
 			$this->assertSame( UseCaseError::PATCHED_ITEM_LABEL_DESCRIPTION_SAME_VALUE, $e->getErrorCode() );
 			$this->assertSame( "Label and description for language code {$language} can not have the same value.", $e->getErrorMessage() );
-			$this->assertEquals( [ 'language' => $language ], $e->getErrorContext() );
-
+			$this->assertEquals( [ PatchedLabelsValidator::CONTEXT_LANGUAGE => $language ], $e->getErrorContext() );
 		}
 	}
 

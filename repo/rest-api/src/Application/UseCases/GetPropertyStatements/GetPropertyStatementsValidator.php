@@ -10,6 +10,8 @@ use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
  */
 class GetPropertyStatementsValidator {
 
+	public const CONTEXT_PROPERTY_ID = 'property-id';
+
 	private PropertyIdValidator $propertyIdValidator;
 
 	public function __construct( PropertyIdValidator $propertyIdValidator ) {
@@ -20,22 +22,26 @@ class GetPropertyStatementsValidator {
 	 * @throws UseCaseError
 	 */
 	public function assertValidRequest( GetPropertyStatementsRequest $request ): void {
-		$propertyIdsToValidate = [ $request->getPropertyId() ];
+		$this->assertValidPropertyId( $request->getPropertyId() );
 
 		if ( $request->getFilterPropertyId() ) {
-			$propertyIdsToValidate[] = $request->getFilterPropertyId();
+			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
+			$this->assertValidPropertyId( $request->getFilterPropertyId() );
 		}
+	}
 
-		foreach ( $propertyIdsToValidate as $propertyId ) {
-			$validationError = $this->propertyIdValidator->validate( $propertyId );
-			if ( $validationError ) {
-				$context = $validationError->getContext();
-				throw new UseCaseError(
-					UseCaseError::INVALID_PROPERTY_ID,
-					"Not a valid property ID: {$context[PropertyIdValidator::CONTEXT_VALUE]}",
-					$context
-				);
-			}
+	/**
+	 * @throws UseCaseError
+	 */
+	private function assertValidPropertyId( string $propertyId ): void {
+		$validationError = $this->propertyIdValidator->validate( $propertyId );
+		if ( $validationError ) {
+			$invalidPropertyId = $validationError->getContext()[PropertyIdValidator::CONTEXT_VALUE];
+			throw new UseCaseError(
+				UseCaseError::INVALID_PROPERTY_ID,
+				"Not a valid property ID: $invalidPropertyId",
+				[ self::CONTEXT_PROPERTY_ID => $invalidPropertyId ]
+			);
 		}
 	}
 }
