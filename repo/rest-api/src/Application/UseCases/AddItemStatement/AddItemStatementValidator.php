@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement;
 
+use LogicException;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
@@ -83,6 +84,8 @@ class AddItemStatementValidator {
 						$validationError->getContext()[StatementValidator::CONTEXT_FIELD_NAME],
 						[ 'path' => $validationError->getContext()[StatementValidator::CONTEXT_FIELD_NAME] ]
 					);
+				default:
+					throw new LogicException( "Unknown validation error code: {$validationError->getCode()}" );
 			}
 		}
 	}

@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement;
 
+use LogicException;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
@@ -113,6 +114,8 @@ class PatchItemStatementValidator {
 						"Missing '$field' in JSON patch",
 						$context
 					);
+				default:
+					throw new LogicException( "Unknown validation error code: $errorCode" );
 			}
 		}
 	}
