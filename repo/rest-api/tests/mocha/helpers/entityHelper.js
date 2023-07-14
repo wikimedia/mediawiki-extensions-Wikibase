@@ -50,6 +50,13 @@ async function createItemWithStatements( statements ) {
 }
 
 /**
+ * @param {Array} statements
+ */
+async function createPropertyWithStatements( statements ) {
+	return await createEntityWithStatements( statements, 'property' );
+}
+
+/**
  * @param {string} redirectTarget - the id of the item to redirect to (target)
  * @return {Promise<string>} - the id of the item to redirect from (source)
  */
@@ -128,6 +135,7 @@ module.exports = {
 	deleteProperty,
 	createEntityWithStatements,
 	createItemWithStatements,
+	createPropertyWithStatements,
 	createUniqueStringProperty,
 	createRedirectForItem,
 	getLatestEditMetadata,
