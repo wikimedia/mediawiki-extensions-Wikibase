@@ -10,6 +10,7 @@ use MediaWiki\User\UserOptionsLookup;
 use OutputPage;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
+use RuntimeException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -20,7 +21,6 @@ use Wikibase\Lib\EntityFactory;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SettingsArray;
-use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\BabelUserLanguageLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
@@ -263,37 +263,11 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 			return null;
 		}
 
-		if ( $this->needsRealEntity( $out ) ) {
-			// The parser cache content is too old to contain the terms list items
-			// Pass the correct entity to generate terms list items on the fly
-			$entityRev = $this->entityRevisionLookup->getEntityRevision( $entityId, $out->getRevisionId() );
-
-			// T340642: Is this still needed? Log cases where a real entity was (attempted to be) loaded.
-			if ( $entityRev instanceof EntityRevision ) {
-				$logMessage = 'A real entity was loaded for entity id {entityId}.';
-			} else {
-				$logMessage = 'Loading a real entity for entity id {entityId} failed.';
-			}
-
-			$this->logger->warning(
-				__METHOD__ . ': (T340642) ' . $logMessage,
-				[
-					'entityId' => $entityId->getSerialization(),
-				]
-			);
-
-			if ( !( $entityRev instanceof EntityRevision ) ) {
-				return null;
-			}
-
-			return $entityRev->getEntity();
-		}
+		// Previously, this would sometimes load the entity from the EntityRevisionLookup.
+		// However, this is currently not needed: the parser cache content has all the term list items,
+		// so we can just use a blank entity to render the remaining "no terms" rows.
 
 		return $this->entityFactory->newEmpty( $entityId->getEntityType() );
-	}
-
-	private function needsRealEntity( OutputPage $out ) {
-		return !$this->isExternallyRendered && $this->getEntityTermsListHtml( $out ) === null;
 	}
 
 	private function getPlaceholderExpander(
@@ -320,7 +294,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 	) {
 		$language = $out->getLanguage();
 		$user = $out->getUser();
-		$entityTermsListHtml = $this->getEntityTermsListHtml( $out ) ?: [];
+		$entityTermsListHtml = $this->getEntityTermsListHtml( $out );
 
 		return new EntityViewPlaceholderExpander(
 			$this->templateFactory,
@@ -395,8 +369,19 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		);
 	}
 
-	private function getEntityTermsListHtml( OutputPage $out ): ?array {
-		return $out->getProperty( 'wikibase-terms-list-items' );
+	private function getEntityTermsListHtml( OutputPage $out ): array {
+		$items = $out->getProperty( 'wikibase-terms-list-items' );
+		if ( is_array( $items ) ) {
+			return $items;
+		} elseif ( $items === null ) {
+			throw new RuntimeException(
+				'OutputPage missing wikibase-terms-list-items: ' . $out->getTitle()->getPrefixedText()
+			);
+		} else {
+			throw new RuntimeException(
+				'Unexpected type ' . gettype( $items ) . ' for wikibase-terms-list-items: ' . $out->getTitle()->getPrefixedText()
+			);
+		}
 	}
 
 	private function showOrHideEditLinks( OutputPage $out, $html ) {
