@@ -4,13 +4,13 @@ namespace Wikibase\Lib\Tests\Formatters;
 
 use DataValues\Geo\Values\GlobeCoordinateValue;
 use DataValues\Geo\Values\LatLongValue;
+use MediaWiki\Html\Html;
 use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Parser;
 use ParserOutput;
 use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
 use Wikimedia\TestingAccessWrapper;
-use Xml;
 
 /**
  * @covers \Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler
@@ -174,7 +174,7 @@ class CachingKartographerEmbeddingHandlerTest extends MediaWikiIntegrationTestCa
 
 		foreach ( $stringsToEscape as $str ) {
 			$this->assertStringNotContainsString( $str, $html );
-			$this->assertStringContainsString( Xml::encodeJsVar( $str ), $html );
+			$this->assertStringContainsString( Html::encodeJsVar( $str ), $html );
 		}
 	}
 

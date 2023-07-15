@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Modules;
 
+use MediaWiki\Html\Html;
 // phpcs:disable MediaWiki.Classes.FullQualifiedClassName -- T308814
 use MediaWiki\ResourceLoader as RL;
 use Wikibase\Lib\DataTypeDefinitions;
@@ -25,7 +26,7 @@ class PropertyValueExpertsModule extends RL\Module {
 	}
 
 	public function getScript( RL\Context $context ) {
-		$expertModuleMap = \Xml::encodeJsVar( $this->dataTypeDefinitions->getExpertModules() );
+		$expertModuleMap = Html::encodeJsVar( $this->dataTypeDefinitions->getExpertModules() );
 
 		$js = <<<JS
 module.exports = ( function () {
