@@ -1,7 +1,6 @@
 name: Wikibase Secondary CI
 on:
   push:
-    branches: [ master ]
 
 jobs:
   secondary-ci:
@@ -75,26 +74,3 @@ jobs:
       env: ${{ matrix.env }}
       run: |
         bash ./build/ci-scripts/script.sh
-    - name: Send mail
-      if: ${{ failure() }}
-      uses: dawidd6/action-send-mail@v3.7.1
-      with:
-        server_address: smtp.gmail.com
-        server_port: 465
-        username: ${{secrets.MAIL_USERNAME}}
-        password: ${{secrets.MAIL_PASSWORD}}
-        subject: Github Action job failed for Wikibase
-        html_body: |
-          Job secondary-ci failed!
-          The failed job can be found in <a href="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}">here</a>
-          <h3>Specifications of the failed job:</h3>
-          <ul>
-          <li>php version: ${{ matrix.php-versions }}</li>
-          <li>Database type: ${{ matrix.env.DBTYPE }}</li>
-          <li>MediaWiki language: ${{ matrix.env.LANG }}</li>
-          <li>Wikibase type: ${{ matrix.env.WB }}</li>
-          <li>MediaWiki core branch: ${{ matrix.env.MW_BRANCH }}</li>
-          </ul>
-          CI specifications can be found in <a href="https://github.com/${{ github.repository }}/actions/workflows/secondaryCI.yml">here</a>
-        to: wikidata-ci-status@wikimedia.de
-        from: Wikibase Github Action CI
