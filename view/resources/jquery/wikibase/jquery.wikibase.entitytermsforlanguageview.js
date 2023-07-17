@@ -60,6 +60,7 @@
 				$description: '.wikibase-entitytermsforlanguageview-description',
 				$aliases: '.wikibase-entitytermsforlanguageview-aliases'
 			},
+			allLanguageLabels: {},
 			value: null
 		},
 
@@ -169,6 +170,9 @@
 						wb.getLanguageNameByCode( self.options.value.language )
 					)
 				};
+				if ( subjectName === 'label' ) {
+					options.allLanguages = self.options.allLanguageLabels;
+				}
 				// T338302: Indicate to the editor that mul doesn't support descriptions.
 				if ( subjectName === 'description' && self.options.value.language === 'mul' ) {
 					options.placeholderMessage = 'wikibase-description-edit-placeholder-not-applicable';

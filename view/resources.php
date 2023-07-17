@@ -205,6 +205,18 @@ return call_user_func( function() {
 				'wikibase.view.ControllerViewFactory',
 			],
 		],
+		'wikibase.fallbackchains' => $moduleTemplate + [
+			'packageFiles' => [
+				'wikibase/wikibase.fallbackChains.js',
+				[
+					'name' => 'fallbackchains.json',
+					'callback' => '\Wikibase\View\FallbackChainModuleMethods::buildFallbackChains',
+				],
+			],
+			'dependencies' => [
+				'wikibase',
+			],
+		],
 		'wikibase.view.ControllerViewFactory' => $moduleBaseTemplate + [
 			'packageFiles' => [
 				'resources/wikibase/view/ControllerViewFactory.js',
@@ -289,6 +301,7 @@ return call_user_func( function() {
 				'jquery.inputautoexpand',
 				'jquery.wikibase.entityselector',
 				'wikibase.buildErrorOutput',
+				'wikibase.fallbackchains',
 				'wikibase.getLanguageNameByCode',
 				'wikibase.sites',
 				'wikibase.templates',

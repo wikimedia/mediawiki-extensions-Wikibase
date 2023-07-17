@@ -215,6 +215,7 @@
 					listItemWidget: listItemWidget,
 					newItemOptionsFn: function ( value ) {
 						return {
+							allLanguageLabels: self.options.value.getLabels(),
 							value: value
 						};
 					}
