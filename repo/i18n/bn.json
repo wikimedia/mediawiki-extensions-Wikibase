@@ -47,6 +47,7 @@
 	"wikibase-entitytermsforlanguagelistview-language": "ভাষা",
 	"wikibase-entitytermsforlanguagelistview-more": "সকল অন্তর্ভুক্ত ভাষা",
 	"wikibase-entitytermsforlanguagelistview-less": "কম ভাষা",
+	"wikibase-entityterms-languagelistview-mul-popup-title": "নতুন! একাধিক ভাষার ফলব্যাক",
 	"wikibase-label-empty": "কোনো লেবেল নেই",
 	"wikibase-label-edit-placeholder": "লেবেল লিখুন",
 	"wikibase-label-edit-placeholder-language-aware": "$1 ভাষায় একটি লেবেল লিখুন",

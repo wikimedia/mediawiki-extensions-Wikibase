@@ -48,6 +48,8 @@
 	"wikibase-entitytermsforlanguagelistview-language": "Språk",
 	"wikibase-entitytermsforlanguagelistview-more": "Alle språk med data",
 	"wikibase-entitytermsforlanguagelistview-less": "Færre språk",
+	"wikibase-entityterms-languagelistview-mul-popup-title": "Nytt! Tilbakefall til flerspråklige etiketter",
+	"wikibase-entityterms-languagelistview-mul-popup-content": "Unngå redundans og manuelle redigeringer ved å definere et flerspråklig tilbakefall. [https://www.wikidata.org/wiki/Special:MyLanguage/Help:Mul Mer informasjon]",
 	"wikibase-label-empty": "Ingen etikett definert",
 	"wikibase-label-edit-placeholder": "lag etikett",
 	"wikibase-label-edit-placeholder-language-aware": "fyll inn etikett på $1",
