@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\GetItemAliases;
 
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliases\GetItemAliases;
@@ -26,15 +25,8 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemAliasesRetriever;
  */
 class GetItemAliasesTest extends TestCase {
 
-	/**
-	 * @var MockObject|GetLatestItemRevisionMetadata
-	 */
-	private $getRevisionMetadata;
-
-	/**
-	 * @var MockObject|ItemAliasesRetriever
-	 */
-	private $aliasesRetriever;
+	private GetLatestItemRevisionMetadata $getRevisionMetadata;
+	private ItemAliasesRetriever $aliasesRetriever;
 
 	protected function setUp(): void {
 		parent::setUp();

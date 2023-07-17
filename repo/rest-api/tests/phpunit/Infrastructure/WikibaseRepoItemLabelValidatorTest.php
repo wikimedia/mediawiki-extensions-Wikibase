@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Infrastructure;
 
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -23,12 +22,9 @@ use Wikibase\Repo\Store\TermsCollisionDetector;
  */
 class WikibaseRepoItemLabelValidatorTest extends TestCase {
 
-	/** @var ItemRetriever|MockObject */
-	private $itemRetriever;
-	/** @var TermsCollisionDetector|MockObject */
-	private $termsCollisionDetector;
-	/** @var TermValidatorFactoryLabelTextValidator|MockObject */
-	private $labelTextValidator;
+	private ItemRetriever $itemRetriever;
+	private TermsCollisionDetector $termsCollisionDetector;
+	private TermValidatorFactoryLabelTextValidator $labelTextValidator;
 
 	protected function setUp(): void {
 		parent::setUp();

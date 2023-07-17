@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\GetItemStatements;
 
-use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
@@ -27,15 +26,8 @@ use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
  */
 class GetItemStatementsTest extends TestCase {
 
-	/**
-	 * @var Stub|GetLatestItemRevisionMetadata
-	 */
-	private $getRevisionMetadata;
-
-	/**
-	 * @var Stub|ItemStatementsRetriever
-	 */
-	private $statementsRetriever;
+	private GetLatestItemRevisionMetadata $getRevisionMetadata;
+	private ItemStatementsRetriever $statementsRetriever;
 
 	protected function setUp(): void {
 		parent::setUp();

@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\PatchItemLabels;
 
 use CommentStore;
 use Generator;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsValidator;
@@ -23,10 +22,7 @@ use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
  */
 class PatchItemLabelsValidatorTest extends TestCase {
 
-	/**
-	 * @var MockObject|JsonPatchValidator
-	 */
-	private $jsonPatchValidator;
+	private JsonPatchValidator $jsonPatchValidator;
 
 	private const ALLOWED_TAGS = [ 'some', 'tags', 'are', 'allowed' ];
 

@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\GetItemLabels;
 
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabels;
@@ -26,15 +25,8 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemLabelsRetriever;
  */
 class GetItemLabelsTest extends TestCase {
 
-	/**
-	 * @var MockObject|GetLatestItemRevisionMetadata
-	 */
-	private $getRevisionMetadata;
-
-	/**
-	 * @var MockObject|ItemLabelsRetriever
-	 */
-	private $labelsRetriever;
+	private GetLatestItemRevisionMetadata $getRevisionMetadata;
+	private ItemLabelsRetriever $labelsRetriever;
 
 	protected function setUp(): void {
 		parent::setUp();

@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\GetItemAliasesInLanguage;
 
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliasesInLanguage\GetItemAliasesInLanguage;
@@ -27,15 +26,8 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class GetItemAliasesInLanguageTest extends TestCase {
 
-	/**
-	 * @var MockObject|GetLatestItemRevisionMetadata
-	 */
-	private $getRevisionMetadata;
-
-	/**
-	 * @var MockObject|ItemAliasesInLanguageRetriever
-	 */
-	private $aliasesInLanguageRetriever;
+	private GetLatestItemRevisionMetadata $getRevisionMetadata;
+	private ItemAliasesInLanguageRetriever $aliasesInLanguageRetriever;
 
 	protected function setUp(): void {
 		parent::setUp();

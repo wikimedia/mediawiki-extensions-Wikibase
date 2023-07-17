@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
 use Generator;
 use IContextSource;
 use MediaWiki\Permissions\PermissionManager;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
@@ -45,30 +44,11 @@ use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
  */
 class MediaWikiEditEntityFactoryItemUpdaterTest extends TestCase {
 
-	/**
-	 * @var MockObject|IContextSource
-	 */
-	private $context;
-
-	/**
-	 * @var MockObject|MediaWikiEditEntityFactory
-	 */
-	private $editEntityFactory;
-
-	/**
-	 * @var MockObject|LoggerInterface
-	 */
-	private $logger;
-
-	/**
-	 * @var MockObject|EditSummaryFormatter
-	 */
-	private $summaryFormatter;
-
-	/**
-	 * @var MockObject|PermissionManager
-	 */
-	private $permissionManager;
+	private IContextSource $context;
+	private MediaWikiEditEntityFactory $editEntityFactory;
+	private LoggerInterface $logger;
+	private EditSummaryFormatter $summaryFormatter;
+	private PermissionManager $permissionManager;
 
 	protected function setUp(): void {
 		parent::setUp();

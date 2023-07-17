@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\RestApi\Application\Serialization;
 
 use ArrayObject;
 use Generator;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
@@ -28,25 +27,10 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
  */
 class PropertyPartsSerializerTest extends TestCase {
 
-	/**
-	 * @var MockObject|LabelsSerializer
-	 */
-	private $labelsSerializer;
-
-	/**
-	 * @var MockObject|DescriptionsSerializer
-	 */
-	private $descriptionsSerializer;
-
-	/**
-	 * @var MockObject|AliasesSerializer
-	 */
-	private $aliasesSerializer;
-
-	/**
-	 * @var MockObject|StatementListSerializer
-	 */
-	private $statementsSerializer;
+	private LabelsSerializer $labelsSerializer;
+	private DescriptionsSerializer $descriptionsSerializer;
+	private AliasesSerializer $aliasesSerializer;
+	private StatementListSerializer $statementsSerializer;
 
 	protected function setUp(): void {
 		$this->labelsSerializer = $this->createStub( LabelsSerializer::class );

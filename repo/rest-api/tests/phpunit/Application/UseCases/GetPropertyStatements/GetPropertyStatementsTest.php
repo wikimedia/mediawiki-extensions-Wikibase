@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\GetPropertyStatements;
 
-use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestPropertyRevisionMetadata;
@@ -25,15 +24,8 @@ use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
  */
 class GetPropertyStatementsTest extends TestCase {
 
-	/**
-	 * @var Stub|GetLatestPropertyRevisionMetadata
-	 */
-	private $getRevisionMetadata;
-
-	/**
-	 * @var Stub|PropertyStatementsRetriever
-	 */
-	private $statementsRetriever;
+	private GetLatestPropertyRevisionMetadata $getRevisionMetadata;
+	private PropertyStatementsRetriever $statementsRetriever;
 
 	protected function setUp(): void {
 		parent::setUp();
