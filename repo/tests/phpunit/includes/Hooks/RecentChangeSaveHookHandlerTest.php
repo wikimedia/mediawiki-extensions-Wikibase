@@ -6,6 +6,7 @@ namespace Wikibase\Repo\Tests\Hooks;
 
 use CentralIdLookup;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\User\UserIdentityValue;
 use MediaWiki\WikiMap\WikiMap;
 use MediaWikiIntegrationTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -88,7 +89,7 @@ class RecentChangeSaveHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 	public function testGivenCentralIdLookupAndRecentChangeWithUser_addsUserIdToEntityChange() {
 		$expectedUserId = 123;
-		$testUser = $this->getTestUser()->getUser();
+		$testUser = new UserIdentityValue( 42, 'Test' );
 		$recentChangeAttrs = [
 			'rc_this_oldid' => 777,
 			'rc_user' => $testUser->getId(),
@@ -300,6 +301,10 @@ class RecentChangeSaveHookHandlerTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
+	/**
+	 * @param array $attributes
+	 * @return RecentChange&MockObject
+	 */
 	private function newStubRecentChangeWithAttributes( array $attributes ): RecentChange {
 		$rc = $this->createStub( RecentChange::class );
 		$rc->method( 'getAttribute' )

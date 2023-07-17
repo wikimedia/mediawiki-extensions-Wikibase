@@ -6,6 +6,7 @@ namespace Wikibase\Repo\Tests\Hooks;
 
 use MediaWikiIntegrationTestCase;
 use OutputPage;
+use User;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\UserLanguageLookup;
 use Wikibase\Repo\Hooks\Helpers\OutputPageEntityViewChecker;
@@ -29,7 +30,7 @@ class MakeGlobalVariablesScriptHookHandlerTest extends MediaWikiIntegrationTestC
 			->willReturn( true );
 		$services = $this->getServiceContainer();
 		$language = $services->getContentLanguage();
-		$user = $this->getTestUser()->getUser();
+		$user = $this->createMock( User::class );
 		$userLanguageLookup = $this->createMock( UserLanguageLookup::class );
 		$userLanguageLookup->expects( $this->once() )
 			->method( 'getUserSpecifiedLanguages' )
