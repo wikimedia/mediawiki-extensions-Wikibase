@@ -4,7 +4,7 @@
 			"statements"
 		],
 		"summary": "Retrieve a single Statement",
-		"description": "This endpoint is also accessible through `/entities/items/{item_id}/statements/{statement_id}` or `/entities/properties/{property_id}/statements/{statement_id}`",
+		"description": "This endpoint is also accessible through `/entities/items/{item_id}/statements/{statement_id}` and `/entities/properties/{property_id}/statements/{statement_id}`",
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/StatementId" },
 			{ "$ref": "../../global/parameters.json#/IfNoneMatch" },
@@ -14,7 +14,7 @@
 			{ "$ref": "../../global/parameters.json#/Authorization" }
 		],
 		"responses": {
-			"200": { "$ref": "../../global/responses.json#/ItemStatement" },
+			"200": { "$ref": "../../global/responses.json#/Statement" },
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
 			"400": { "$ref": "../../global/responses.json#/InvalidRetrieveStatementInput" },
 			"404": { "$ref": "../../global/responses.json#/StatementNotFound" },
@@ -34,7 +34,7 @@
 		],
 		"requestBody": { "$ref": "../../global/requests.json#/Statement" },
 		"responses": {
-			"200": { "$ref": "../../global/responses.json#/ItemStatement" },
+			"200": { "$ref": "../../global/responses.json#/Statement" },
 			"400": { "$ref": "../../global/responses.json#/InvalidReplaceStatementInput" },
 			"404": { "$ref": "../../global/responses.json#/StatementNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
@@ -45,7 +45,7 @@
 	"patch": {
 		"tags": [ "statements" ],
 		"summary": "Change elements of a single Statement",
-		"description": "This endpoint is also accessible through `/entities/items/{item_id}/statements/{statement_id}`.",
+		"description": "This endpoint is also accessible through `/entities/items/{item_id}/statements/{statement_id}`",
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/StatementId" },
 			{ "$ref": "../../global/parameters.json#/IfMatch" },
@@ -54,7 +54,7 @@
 		],
 		"requestBody": { "$ref": "../../global/requests.json#/StatementPatch" },
 		"responses": {
-			"200": { "$ref": "../../global/responses.json#/ItemStatement" },
+			"200": { "$ref": "../../global/responses.json#/Statement" },
 			"400": { "$ref": "../../global/responses.json#/InvalidStatementPatch" },
 			"404": { "$ref": "../../global/responses.json#/StatementNotFound" },
 			"409": { "$ref": "../../global/responses.json#/CannotApplyStatementPatch" },

@@ -993,7 +993,7 @@
 			}
 		}
 	},
-	"ItemStatement": {
+	"Statement": {
 		"description": "A single Wikibase Statement. Please note that the value of the `ETag` header field refers to the entity's revision ID.",
 		"headers": {
 			"Last-Modified": {
@@ -1019,12 +1019,16 @@
 			"application/json": {
 				"schema": {
 					"$ref": "./response-parts.json#/StatementResponse"
+				},
+				"examples": {
+					"Statement on an Item": { "$ref": "./examples.json#/ItemStatementResponseExample" },
+					"Statement on a Property": { "$ref": "./examples.json#/PropertyStatementResponseExample" }
 				}
 			}
 		}
 	},
-	"PropertyStatement": {
-		"description": "A single Wikibase Statement. Please note that the value of the `ETag` header field refers to the entity's revision ID.",
+	"ItemStatement": {
+		"description": "A single Wikibase Statement. Please note that the value of the `ETag` header field refers to the Item's revision ID.",
 		"headers": {
 			"Last-Modified": {
 				"schema": {
@@ -1050,20 +1054,38 @@
 				"schema": {
 					"$ref": "./response-parts.json#/StatementResponse"
 				},
-				"example": {
-					"id": "P31$9d042001-4a7e-2432-a7e1-233360062379",
-					"rank": "normal",
-					"property": {
-						"id": "P31",
-						"data-type": "wikibase-item"
-					},
-					"value": {
-						"type": "value",
-						"content": "Q18616576"
-					},
-					"qualifiers": [],
-					"references": []
-				}
+				"example": { "$ref": "./examples.json#/ItemStatementResponseExample/value" }
+			}
+		}
+	},
+	"PropertyStatement": {
+		"description": "A single Wikibase Statement. Please note that the value of the `ETag` header field refers to the Property's Revision ID.",
+		"headers": {
+			"Last-Modified": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Last modified date"
+			},
+			"ETag": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Last entity revision number"
+			},
+			"X-Authenticated-User": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Optional username of the user making the request"
+			}
+		},
+		"content": {
+			"application/json": {
+				"schema": {
+					"$ref": "./response-parts.json#/StatementResponse"
+				},
+				"example": { "$ref": "./examples.json#/PropertyStatementResponseExample/value" }
 			}
 		}
 	},

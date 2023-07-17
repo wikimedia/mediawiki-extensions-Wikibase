@@ -40,7 +40,21 @@
 			"type": "string",
 			"pattern": "^(Q|P)[1-9]\\d{0,9}\\$.+$"
 		},
-		"example": "Q42$F078E5B3-F9A8-480E-B7AC-D97778CBBEF9"
+		"examples": {
+			"Statement on an Item": { "$ref": "./examples.json#/ItemStatementIdExample" },
+			"Statement on a Property": { "$ref": "./examples.json#/PropertyStatementIdExample" }
+		}
+	},
+	"ItemStatementId": {
+		"in": "path",
+		"name": "statement_id",
+		"description": "The ID of the required Item Statement",
+		"required": true,
+		"schema": {
+			"type": "string",
+			"pattern": "^Q[1-9]\\d{0,9}\\$.+$"
+		},
+		"example": { "$ref": "./examples.json#/ItemStatementIdExample/value" }
 	},
 	"PropertyStatementId": {
 		"in": "path",
@@ -51,9 +65,8 @@
 			"type": "string",
 			"pattern": "^P[1-9]\\d{0,9}\\$.+$"
 		},
-		"example": "P31$F078E5B3-F9A8-480E-B7AC-D97778CBBEF9"
+		"example": { "$ref": "./examples.json#/PropertyStatementIdExample/value" }
 	},
-
 	"LanguageCode": {
 		"in": "path",
 		"name": "language_code",
