@@ -118,7 +118,7 @@
 	"wikibase-entity-summary-wbsetsitelink-remove": "Αφαίρεσε σύνδεσμο από το [$2]",
 	"wikibase-entity-summary-wblinktitles-create": "Δημιουργήθηκε αυτή η οντότητα για να συνδέσει τις σελίδες",
 	"wikibase-entity-summary-wblinktitles-connect": "Προσθέθηκε ένας σύνδεσμος γλώσσας για να συνδέσει τις σελίδες",
-	"wikibase-entity-summary-wbcreateclaim-value": "Δημιουργήθηκε {{PLURAL:$1|απαίτηση|απαιτήσεις}}",
+	"wikibase-entity-summary-wbcreateclaim-value": "{{PLURAL:$1|Δημιουργήθηκε ισχυρισμός|Δημιουργήθηκαν ισχυρισμοί}}",
 	"wikibase-entity-summary-wbcreateclaim-novalue": "Δημιουργήθηκε {{PLURAL:$1| αξίωση|αξιώσεις}}",
 	"wikibase-entity-summary-wbcreateclaim-somevalue": "Δημιουργήθηκε {{PLURAL:$1|απαίτηση|απαιτήσεις}}",
 	"wikibase-entity-summary-wbcreateclaim": "Δημιουργήθηκε {{PLURAL:$1|απαίτηση|απαιτήσεις}}",

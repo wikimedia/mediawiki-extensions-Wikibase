@@ -6,7 +6,8 @@
 			"Inkbug",
 			"Macofe",
 			"Yona b",
-			"ערן"
+			"ערן",
+			"Neriah"
 		]
 	},
 	"specialpages-group-wikibase": "ויקיבייס",
@@ -105,7 +106,7 @@
 	"wikibase-entity-summary-wbsetlabeldescriptionaliases": "שונתה תווית [$2], תיאור וכינויים",
 	"wikibase-entity-summary-wbsetsitelink-add": "נוסף קישור אל [$2]",
 	"wikibase-entity-summary-wbsetsitelink-add-both": "נוסף קישור עם סמל אל [$2]",
-	"wikibase-entity-summary-wbsetsitelink-set": "הקישור שוּנה אל [$2]",
+	"wikibase-entity-summary-wbsetsitelink-set": "הקישור שונה אל [$2]",
 	"wikibase-entity-summary-wbsetsitelink-set-badges": "שונו סמלים עבור [$2]",
 	"wikibase-entity-summary-wbsetsitelink-set-both": "שונו קישור וסמלים עבור [$2]",
 	"wikibase-entity-summary-wbsetsitelink-remove": "הוסר קישור אל [$2]",
@@ -138,14 +139,14 @@
 	"wikibase-item-summary-wbeditentity": "נוצר פריט חדש",
 	"wikibase-item-summary-wbeditentity-create": "נוצר פריט חדש",
 	"wikibase-item-summary-wbeditentity-create-item": "נוצר פריט חדש",
-	"wikibase-item-summary-wbeditentity-update": "פריט שוּנה",
+	"wikibase-item-summary-wbeditentity-update": "שונה פריט",
 	"wikibase-item-summary-wbeditentity-override": "פריט נדרס",
 	"wikibase-item-summary-wblinktitles-create": "נוצר הפריט הזה כדי לקשר בין דפים",
 	"wikibase-item-summary-wblinktitles-connect": "נוסף קישור לשוני כדי לקשר בין דפים",
 	"wikibase-property-summary-wbcreate-new": "נוצר מאפיין חדש",
 	"wikibase-property-summary-wbeditentity-create": "נוצר מאפיין חדש",
 	"wikibase-property-summary-wbeditentity-create-property": "נוצר מאפיין חדש",
-	"wikibase-property-summary-wbeditentity-update": "מאפיין שוּנה",
+	"wikibase-property-summary-wbeditentity-update": "שונה מאפיין",
 	"wikibase-property-summary-wbeditentity-override": "נוקה מאפיין",
 	"wikibase-property-summary-special-create-property": "נוצר מאפיין בשפה [$2] עם {{PLURAL:$1|ערך|ערכים}}",
 	"wikibase-reference-formatter-snak-retrieved": "אוחזר ב־$1"

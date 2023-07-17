@@ -6,7 +6,9 @@
 			"Pierpao",
 			"Shirayuki",
 			"Bjh21",
-			"Robin Owain"
+			"Robin Owain",
+			"Piano1forte2",
+			"Reedy"
 		]
 	},
 	"tooltip-t-wikibase": "Link to connected data repository item",
@@ -14,9 +16,11 @@
 	"wikibase-dataitem": "{{WBREPONAME}} item",
 	"wikibase-editlinks": "Edit links",
 	"wikibase-editlinkstitle": "Edit interlanguage links",
+	"wikibase-linkitem-close": "Close dialogue and reload page",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-wikibase-edit-letter": "WD",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} edit",
+	"wikibase-error-deserialize-error": "Failed to deserialise data.",
 	"wikibase-error-serialize-error": "Failed to serialise data",
 	"wikibase-client-data-bridge-license-heading": "Usage and licence"
 }
