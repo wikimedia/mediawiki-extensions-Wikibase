@@ -1,4 +1,5 @@
 <?php
+// phpcs:disable MediaWiki.Files.ClassMatchesFilename.WrongCase -- keep file name for B/C
 
 namespace Wikibase\Repo\Maintenance;
 
@@ -10,10 +11,6 @@ use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\WikibaseRepo;
 
-$basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../../..';
-
-require_once $basePath . '/maintenance/Maintenance.php';
-
 require_once __DIR__ . '/EntityQuantityUnitRebuilder.php';
 
 /**
@@ -23,7 +20,9 @@ require_once __DIR__ . '/EntityQuantityUnitRebuilder.php';
  * https://phabricator.wikimedia.org/T312256
  *
  * Example:
- * php extensions/Wikibase/repo/maintenance/rebuildEntityQuantityUnit.php --from-value=example.localhost --to-value=example.com
+ * php maintenance/run.php \
+ *     extensions/Wikibase/repo/maintenance/rebuildEntityQuantityUnit.php \
+ *     --from-value=example.localhost --to-value=example.com
  */
 class RebuildEntityQuantityUnit extends Maintenance {
 
@@ -108,5 +107,4 @@ class RebuildEntityQuantityUnit extends Maintenance {
 	}
 }
 
-$maintClass = RebuildEntityQuantityUnit::class;
-require_once RUN_MAINTENANCE_IF_MAIN;
+return RebuildEntityQuantityUnit::class;
