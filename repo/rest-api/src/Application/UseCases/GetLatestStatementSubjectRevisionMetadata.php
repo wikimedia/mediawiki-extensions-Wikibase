@@ -22,13 +22,13 @@ class GetLatestStatementSubjectRevisionMetadata {
 	 *
 	 * @return array{int, string}
 	 */
-	public function execute( EntityId $entityId ): array {
-		$metaDataResult = $this->metadataRetriever->getLatestRevisionMetadata( $entityId );
+	public function execute( EntityId $subjectId ): array {
+		$metaDataResult = $this->metadataRetriever->getLatestRevisionMetadata( $subjectId );
 
 		if ( !$metaDataResult->subjectExists() ) {
 			throw new UseCaseError(
 				UseCaseError::STATEMENT_SUBJECT_NOT_FOUND,
-				"Could not find an entity with the ID: {$entityId}"
+				"Could not find the statement subject with the ID: {$subjectId}"
 			);
 		}
 

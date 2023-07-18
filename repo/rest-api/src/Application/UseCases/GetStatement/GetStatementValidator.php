@@ -23,7 +23,7 @@ class GetStatementValidator {
 	 * @throws UseCaseError
 	 */
 	public function assertValidRequest( GetStatementRequest $statementRequest ): void {
-		$subjectId = $statementRequest->getEntityId();
+		$subjectId = $statementRequest->getSubjectId();
 		$validationError = $this->requestedSubjectIdValidator->validate( $subjectId );
 		if ( $validationError ) {
 			throw new UseCaseError(

@@ -36,15 +36,15 @@ class GetStatement {
 
 		$statementIdParser = new StatementGuidParser( new BasicEntityIdParser() );
 		$statementId = $statementIdParser->parse( $statementRequest->getStatementId() );
-		$requestedEntityId = $statementRequest->getEntityId();
+		$requestedSubjectId = $statementRequest->getSubjectId();
 
-		/** @var EntityId $entityId */
-		$entityId = $requestedEntityId ? ( new BasicEntityIdParser() )->parse( $requestedEntityId ) : $statementId->getEntityId();
-		'@phan-var EntityId $entityId';
+		/** @var EntityId $subjectId */
+		$subjectId = $requestedSubjectId ? ( new BasicEntityIdParser() )->parse( $requestedSubjectId ) : $statementId->getEntityId();
+		'@phan-var EntityId $subjectId';
 
-		[ $revisionId, $lastModified ] = $this->getRevisionMetadata->execute( $entityId );
+		[ $revisionId, $lastModified ] = $this->getRevisionMetadata->execute( $subjectId );
 
-		if ( $statementRequest->getEntityId() && $statementRequest->getEntityId() !== (string)$statementId->getEntityId() ) {
+		if ( $requestedSubjectId && $requestedSubjectId !== (string)$statementId->getEntityId() ) {
 			$this->throwStatementNotFoundException( $statementRequest->getStatementId() );
 		}
 
