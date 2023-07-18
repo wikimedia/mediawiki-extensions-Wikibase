@@ -14,6 +14,9 @@ use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
  */
 class PatchItemStatementValidator {
 
+	public const CONTEXT_OPERATION = 'operation';
+	public const CONTEXT_FIELD = 'field';
+
 	private ItemIdValidator $itemIdValidator;
 	private StatementIdValidator $statementIdValidator;
 	private JsonPatchValidator $jsonPatchValidator;
@@ -81,10 +84,8 @@ class PatchItemStatementValidator {
 		$validationError = $this->jsonPatchValidator->validate( $patch );
 
 		if ( $validationError ) {
-			$errorCode = $validationError->getCode();
 			$context = $validationError->getContext();
-
-			switch ( $errorCode ) {
+			switch ( $validationError->getCode() ) {
 				case JsonPatchValidator::CODE_INVALID:
 					throw new UseCaseError(
 						UseCaseError::INVALID_PATCH,
@@ -96,26 +97,30 @@ class PatchItemStatementValidator {
 					throw new UseCaseError(
 						UseCaseError::INVALID_PATCH_OPERATION,
 						"Incorrect JSON patch operation: '$op'",
-						$context
+						[ self::CONTEXT_OPERATION => $context[JsonPatchValidator::CONTEXT_OPERATION] ]
 					);
-
 				case JsonPatchValidator::CODE_INVALID_FIELD_TYPE:
 					$field = $context[JsonPatchValidator::CONTEXT_FIELD];
 					throw new UseCaseError(
 						UseCaseError::INVALID_PATCH_FIELD_TYPE,
 						"The value of '$field' must be of type string",
-						$context
+						[
+							self::CONTEXT_OPERATION => $context[JsonPatchValidator::CONTEXT_OPERATION],
+							self::CONTEXT_FIELD => $context[JsonPatchValidator::CONTEXT_FIELD],
+						]
 					);
-
 				case JsonPatchValidator::CODE_MISSING_FIELD:
 					$field = $context[JsonPatchValidator::CONTEXT_FIELD];
 					throw new UseCaseError(
 						UseCaseError::MISSING_JSON_PATCH_FIELD,
 						"Missing '$field' in JSON patch",
-						$context
+						[
+							self::CONTEXT_OPERATION => $context[JsonPatchValidator::CONTEXT_OPERATION],
+							self::CONTEXT_FIELD => $field,
+						]
 					);
 				default:
-					throw new LogicException( "Unknown validation error code: $errorCode" );
+					throw new LogicException( "Unknown validation error code: {$validationError->getCode()}" );
 			}
 		}
 	}

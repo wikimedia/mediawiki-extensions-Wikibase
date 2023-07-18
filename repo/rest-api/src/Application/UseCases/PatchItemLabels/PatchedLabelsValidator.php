@@ -19,7 +19,11 @@ use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 class PatchedLabelsValidator {
 
 	public const CONTEXT_LANGUAGE = 'language';
+	public const CONTEXT_LABEL = 'label';
 	public const CONTEXT_VALUE = 'value';
+	public const CONTEXT_LIMIT = 'character-limit';
+	public const CONTEXT_DESCRIPTION = 'description';
+	public const CONTEXT_MATCHING_ITEM_ID = 'matching-item-id';
 
 	private LabelsDeserializer $labelsDeserializer;
 	private ItemLabelValidator $labelValidator;
@@ -95,6 +99,7 @@ class PatchedLabelsValidator {
 			return;
 		}
 
+		$context = $validationError->getContext();
 		switch ( $validationError->getCode() ) {
 			case ItemLabelValidator::CODE_INVALID:
 				throw new UseCaseError(
@@ -106,43 +111,51 @@ class PatchedLabelsValidator {
 					]
 				);
 			case ItemLabelValidator::CODE_TOO_LONG:
-				$maxLabelLength = $validationError->getContext()[ItemLabelValidator::CONTEXT_LIMIT];
+				$maxLabelLength = $context[ItemLabelValidator::CONTEXT_LIMIT];
 				throw new UseCaseError(
 					UseCaseError::PATCHED_LABEL_TOO_LONG,
 					"Changed label for '{$label->getLanguageCode()}' must not be more than $maxLabelLength characters long",
-					array_merge( $validationError->getContext(), [ self::CONTEXT_LANGUAGE => $label->getLanguageCode() ] )
+					[
+						self::CONTEXT_LANGUAGE => $label->getLanguageCode(),
+						self::CONTEXT_VALUE => $context[ItemLabelValidator::CONTEXT_VALUE],
+						self::CONTEXT_LIMIT => $context[ItemLabelValidator::CONTEXT_LIMIT],
+					]
 				);
 			case ItemLabelValidator::CODE_LABEL_DESCRIPTION_DUPLICATE:
-				$languageCode = $validationError->getContext()[ItemLabelValidator::CONTEXT_LANGUAGE];
-				$label = $validationError->getContext()[ItemLabelValidator::CONTEXT_LABEL];
-				$duplicateItemId = $validationError->getContext()[ItemLabelValidator::CONTEXT_MATCHING_ITEM_ID];
+				$languageCode = $context[ItemLabelValidator::CONTEXT_LANGUAGE];
+				$label = $context[ItemLabelValidator::CONTEXT_LABEL];
+				$duplicateItemId = $context[ItemLabelValidator::CONTEXT_MATCHING_ITEM_ID];
 				throw new UseCaseError(
 					UseCaseError::PATCHED_ITEM_LABEL_DESCRIPTION_DUPLICATE,
-					"Item {$duplicateItemId} already has label '{$label}' associated with language code {$languageCode}, " .
-					'using the same description text.',
-					$validationError->getContext()
+					"Item $duplicateItemId already has label '$label' associated with language " .
+					"code $languageCode, using the same description text.",
+					[
+						self::CONTEXT_LANGUAGE => $context[ItemLabelValidator::CONTEXT_LANGUAGE],
+						self::CONTEXT_LABEL => $context[ItemLabelValidator::CONTEXT_LABEL],
+						self::CONTEXT_DESCRIPTION => $context[ItemLabelValidator::CONTEXT_DESCRIPTION],
+						self::CONTEXT_MATCHING_ITEM_ID => $context[ItemLabelValidator::CONTEXT_MATCHING_ITEM_ID],
+					]
 				);
-
 			case ItemLabelValidator::CODE_LABEL_DESCRIPTION_EQUAL:
-				$language = $validationError->getContext()[ItemLabelValidator::CONTEXT_LANGUAGE];
+				$language = $context[ItemLabelValidator::CONTEXT_LANGUAGE];
 				throw new UseCaseError(
 					UseCaseError::PATCHED_ITEM_LABEL_DESCRIPTION_SAME_VALUE,
 					"Label and description for language code {$language} can not have the same value.",
-					$validationError->getContext()
+					[ self::CONTEXT_LANGUAGE => $context[ItemLabelValidator::CONTEXT_LANGUAGE] ]
 				);
-
 			default:
-				throw new LogicException( 'Unknown validation error: ' . $validationError->getCode() );
+				throw new LogicException( "Unknown validation error: {$validationError->getCode()}" );
 		}
 	}
 
 	private function validateLanguageCode( Term $label ): void {
 		$validationError = $this->languageCodeValidator->validate( $label->getLanguageCode() );
 		if ( $validationError ) {
+			$languageCode = $validationError->getContext()[LanguageCodeValidator::CONTEXT_LANGUAGE_CODE_VALUE];
 			throw new UseCaseError(
 				UseCaseError::PATCHED_LABEL_INVALID_LANGUAGE_CODE,
-				"Not a valid language code '{$label->getLanguageCode()}' in changed labels",
-				[ self::CONTEXT_LANGUAGE => $label->getLanguageCode() ]
+				"Not a valid language code '$languageCode' in changed labels",
+				[ self::CONTEXT_LANGUAGE => $languageCode ]
 			);
 		}
 	}

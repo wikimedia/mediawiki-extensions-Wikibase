@@ -11,6 +11,8 @@ use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
  */
 class GetItemStatementsValidator {
 
+	public const CONTEXT_PROPERTY_ID = 'property-id';
+
 	private ItemIdValidator $itemIdValidator;
 	private PropertyIdValidator $propertyIdValidator;
 
@@ -51,7 +53,7 @@ class GetItemStatementsValidator {
 			throw new UseCaseError(
 				UseCaseError::INVALID_PROPERTY_ID,
 				"Not a valid property ID: {$context[PropertyIdValidator::CONTEXT_VALUE]}",
-				$context
+				[ self::CONTEXT_PROPERTY_ID => $context[PropertyIdValidator::CONTEXT_VALUE] ]
 			);
 		}
 	}

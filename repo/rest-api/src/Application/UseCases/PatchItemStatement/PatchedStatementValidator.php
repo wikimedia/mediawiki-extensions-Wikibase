@@ -12,6 +12,9 @@ use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
  */
 class PatchedStatementValidator {
 
+	public const CONTEXT_PATH = 'path';
+	public const CONTEXT_VALUE = 'value';
+
 	private StatementValidator $statementValidator;
 
 	public function __construct( StatementValidator $statementValidator ) {
@@ -32,7 +35,7 @@ class PatchedStatementValidator {
 						UseCaseError::PATCHED_STATEMENT_MISSING_FIELD,
 						"Mandatory field missing in the patched statement: {$context[StatementValidator::CONTEXT_FIELD_NAME]}",
 						[
-							'path' => $context[StatementValidator::CONTEXT_FIELD_NAME],
+							self::CONTEXT_PATH => $context[StatementValidator::CONTEXT_FIELD_NAME],
 						]
 					);
 
@@ -41,8 +44,8 @@ class PatchedStatementValidator {
 						UseCaseError::PATCHED_STATEMENT_INVALID_FIELD,
 						"Invalid input for '{$context[StatementValidator::CONTEXT_FIELD_NAME]}' in the patched statement",
 						[
-							'path' => $context[StatementValidator::CONTEXT_FIELD_NAME],
-							'value' => $context[StatementValidator::CONTEXT_FIELD_VALUE],
+							self::CONTEXT_PATH => $context[StatementValidator::CONTEXT_FIELD_NAME],
+							self::CONTEXT_VALUE => $context[StatementValidator::CONTEXT_FIELD_VALUE],
 						]
 					);
 

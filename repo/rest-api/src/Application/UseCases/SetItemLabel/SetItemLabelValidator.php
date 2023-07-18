@@ -15,6 +15,13 @@ use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
  */
 class SetItemLabelValidator {
 
+	public const CONTEXT_VALUE = 'value';
+	public const CONTEXT_LIMIT = 'character-limit';
+	public const CONTEXT_LANGUAGE = 'language';
+	public const CONTEXT_LABEL = 'label';
+	public const CONTEXT_DESCRIPTION = 'description';
+	public const CONTEXT_MATCHING_ITEM_ID = 'matching-item-id';
+
 	private ItemIdValidator $itemIdValidator;
 	private LanguageCodeValidator $languageCodeValidator;
 	private EditMetadataValidator $editMetadataValidator;
@@ -97,14 +104,17 @@ class SetItemLabelValidator {
 					throw new UseCaseError(
 						UseCaseError::LABEL_TOO_LONG,
 						"Label must be no more than $maxLabelLength characters long",
-						$context
+						[
+							self::CONTEXT_VALUE => $context[ItemLabelValidator::CONTEXT_VALUE],
+							self::CONTEXT_LIMIT => $maxLabelLength,
+						]
 					);
 				case ItemLabelValidator::CODE_LABEL_DESCRIPTION_EQUAL:
 					$language = $context[ItemLabelValidator::CONTEXT_LANGUAGE];
 					throw new UseCaseError(
 						UseCaseError::LABEL_DESCRIPTION_SAME_VALUE,
 						"Label and description for language code '$language' can not have the same value.",
-						$context
+						[ self::CONTEXT_LANGUAGE => $context[ItemLabelValidator::CONTEXT_LANGUAGE] ]
 					);
 				case ItemLabelValidator::CODE_LABEL_DESCRIPTION_DUPLICATE:
 					$language = $context[ItemLabelValidator::CONTEXT_LANGUAGE];
@@ -114,7 +124,12 @@ class SetItemLabelValidator {
 						UseCaseError::ITEM_LABEL_DESCRIPTION_DUPLICATE,
 						"Item $matchingItemId already has label '$label' associated with " .
 						"language code '$language', using the same description text.",
-						$context
+						[
+							self::CONTEXT_LANGUAGE => $language,
+							self::CONTEXT_LABEL => $label,
+							self::CONTEXT_DESCRIPTION => $context[ItemLabelValidator::CONTEXT_DESCRIPTION],
+							self::CONTEXT_MATCHING_ITEM_ID => $matchingItemId,
+						]
 					);
 				default:
 					throw new LogicException( "Unknown validation error code: $errorCode" );

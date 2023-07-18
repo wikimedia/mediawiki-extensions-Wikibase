@@ -15,6 +15,13 @@ use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
  */
 class SetItemDescriptionValidator {
 
+	public const CONTEXT_VALUE = 'value';
+	public const CONTEXT_LIMIT = 'character-limit';
+	public const CONTEXT_LANGUAGE = 'language';
+	public const CONTEXT_LABEL = 'label';
+	public const CONTEXT_DESCRIPTION = 'description';
+	public const CONTEXT_MATCHING_ITEM_ID = 'matching-item-id';
+
 	private ItemIdValidator $itemIdValidator;
 	private DescriptionLanguageCodeValidator $languageCodeValidator;
 	private ItemDescriptionValidator $itemDescriptionValidator;
@@ -98,13 +105,16 @@ class SetItemDescriptionValidator {
 					throw new UseCaseError(
 						UseCaseError::DESCRIPTION_TOO_LONG,
 						"Description must be no more than $limit characters long",
-						$context
+						[
+							self::CONTEXT_VALUE => $context[ItemDescriptionValidator::CONTEXT_VALUE],
+							self::CONTEXT_LIMIT => $limit,
+						]
 					);
 				case ItemDescriptionValidator::CODE_LABEL_DESCRIPTION_EQUAL:
 					throw new UseCaseError(
 						UseCaseError::LABEL_DESCRIPTION_SAME_VALUE,
 						"Label and description for language code '$language' can not have the same value",
-						$context
+						[ self::CONTEXT_LANGUAGE => $context[ItemDescriptionValidator::CONTEXT_LANGUAGE] ]
 					);
 				case ItemDescriptionValidator::CODE_LABEL_DESCRIPTION_DUPLICATE:
 					$matchingItemId = $context[ItemDescriptionValidator::CONTEXT_MATCHING_ITEM_ID];
@@ -113,7 +123,12 @@ class SetItemDescriptionValidator {
 						UseCaseError::ITEM_LABEL_DESCRIPTION_DUPLICATE,
 						"Item '$matchingItemId' already has label '$label' associated with "
 						. "language code '$language', using the same description text",
-						$context
+						[
+							self::CONTEXT_LANGUAGE => $context[ItemDescriptionValidator::CONTEXT_LANGUAGE],
+							self::CONTEXT_LABEL => $label,
+							self::CONTEXT_DESCRIPTION => $context[ItemDescriptionValidator::CONTEXT_DESCRIPTION],
+							self::CONTEXT_MATCHING_ITEM_ID => $matchingItemId,
+						]
 					);
 				default:
 					throw new LogicException( "Unexpected validation error code: $errorCode" );

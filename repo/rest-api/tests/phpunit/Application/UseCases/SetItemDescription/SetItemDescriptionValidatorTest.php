@@ -131,7 +131,10 @@ class SetItemDescriptionValidatorTest extends TestCase {
 			),
 			UseCaseError::DESCRIPTION_TOO_LONG,
 			'Description must be no more than 40 characters long',
-			[ 'value' => $description, 'character-limit' => $limit ],
+			[
+				SetItemDescriptionValidator::CONTEXT_VALUE => $description,
+				SetItemDescriptionValidator::CONTEXT_LIMIT => $limit,
+			],
 		];
 
 		$description = "tab characters \t not allowed";
@@ -152,7 +155,7 @@ class SetItemDescriptionValidatorTest extends TestCase {
 			),
 			UseCaseError::LABEL_DESCRIPTION_SAME_VALUE,
 			"Label and description for language code '$language' can not have the same value",
-			[ ItemDescriptionValidator::CONTEXT_LANGUAGE => $language ],
+			[ SetItemDescriptionValidator::CONTEXT_LANGUAGE => $language ],
 		];
 
 		$language = 'en';
@@ -174,10 +177,10 @@ class SetItemDescriptionValidatorTest extends TestCase {
 			"Item '$matchingItemId' already has label '$label' associated with "
 			. "language code '$language', using the same description text",
 			[
-				ItemDescriptionValidator::CONTEXT_LANGUAGE => $language,
-				ItemDescriptionValidator::CONTEXT_LABEL => $label,
-				ItemDescriptionValidator::CONTEXT_DESCRIPTION => $description,
-				ItemDescriptionValidator::CONTEXT_MATCHING_ITEM_ID => $matchingItemId,
+				SetItemDescriptionValidator::CONTEXT_LANGUAGE => $language,
+				SetItemDescriptionValidator::CONTEXT_LABEL => $label,
+				SetItemDescriptionValidator::CONTEXT_DESCRIPTION => $description,
+				SetItemDescriptionValidator::CONTEXT_MATCHING_ITEM_ID => $matchingItemId,
 			],
 		];
 	}
