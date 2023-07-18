@@ -194,7 +194,6 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 			return true;
 		}
 
-		// This weird construct will be cleaned up in T335107
 		if ( !$this->shouldConvertNoBadTitle( $outTitle, $linkRenderer ) ) {
 			return true;
 		}
