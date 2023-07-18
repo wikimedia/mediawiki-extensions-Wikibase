@@ -7,7 +7,6 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\LatestRevisionIdResult;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\WikibaseEntityRevisionLookupStatementSubjectRevisionMetadataRetriever;
@@ -42,11 +41,6 @@ class WikibaseEntityRevisionLookupStatementSubjectRevisionMetadataRetrieverTest 
 
 	public function testGivenRedirect_getLatestRevisionMetadataReturnsRedirectResult(): void {
 		$itemWithRedirect = new ItemId( 'Q4321' );
-
-		$statementWithRedirectItem = new StatementGuid(
-			$itemWithRedirect,
-			'FFFFFFFF-BBBB-CCCC-DDDD-EEEEEEEEEEEE'
-		);
 
 		$redirectTarget = new ItemId( 'Q1234' );
 
