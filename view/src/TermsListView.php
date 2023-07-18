@@ -112,15 +112,20 @@ class TermsListView {
 	}
 
 	private function getLabelView( TermList $listOfLabelTerms, string $languageCode ): string {
-		$hasLabelInLanguage = $listOfLabelTerms->hasTermForLanguage( $languageCode );
-		$effectiveLanguage = $hasLabelInLanguage ? $languageCode : $this->textProvider->getLanguageOf( 'wikibase-label-empty' );
+		if ( $listOfLabelTerms->hasTermForLanguage( $languageCode ) ) {
+			$classes = '';
+			$text = $listOfLabelTerms->getByLanguage( $languageCode )->getText();
+			$effectiveLanguage = $languageCode;
+		} else {
+			$classes = 'wb-empty';
+			$text = $this->textProvider->get( 'wikibase-label-empty' );
+			$effectiveLanguage = $this->textProvider->getLanguageOf( 'wikibase-label-empty' );
+		}
+
 		return $this->templateFactory->render(
 			'wikibase-labelview',
-			$hasLabelInLanguage ? '' : 'wb-empty',
-			htmlspecialchars( $hasLabelInLanguage
-				? $listOfLabelTerms->getByLanguage( $languageCode )->getText()
-				: $this->textProvider->get( 'wikibase-label-empty' )
-			),
+			$classes,
+			htmlspecialchars( $text ),
 			'',
 			$this->languageDirectionalityLookup->getDirectionality( $effectiveLanguage ) ?: 'auto',
 			$effectiveLanguage
@@ -128,15 +133,20 @@ class TermsListView {
 	}
 
 	private function getDescriptionView( TermList $listOfDescriptionTerms, string $languageCode ): string {
-		$hasDescriptionInLanguage = $listOfDescriptionTerms->hasTermForLanguage( $languageCode );
-		$effectiveLanguage = $hasDescriptionInLanguage ? $languageCode : $this->textProvider->getLanguageOf( 'wikibase-description-empty' );
+		if ( $listOfDescriptionTerms->hasTermForLanguage( $languageCode ) ) {
+			$classes = '';
+			$text = $listOfDescriptionTerms->getByLanguage( $languageCode )->getText();
+			$effectiveLanguage = $languageCode;
+		} else {
+			$classes = 'wb-empty';
+			$text = $this->textProvider->get( 'wikibase-description-empty' );
+			$effectiveLanguage = $this->textProvider->getLanguageOf( 'wikibase-description-empty' );
+		}
+
 		return $this->templateFactory->render(
 			'wikibase-descriptionview',
-			$hasDescriptionInLanguage ? '' : 'wb-empty',
-			htmlspecialchars( $hasDescriptionInLanguage
-				? $listOfDescriptionTerms->getByLanguage( $languageCode )->getText()
-				: $this->textProvider->get( 'wikibase-description-empty' )
-			),
+			$classes,
+			htmlspecialchars( $text ),
 			'',
 			$this->languageDirectionalityLookup->getDirectionality( $effectiveLanguage ) ?: 'auto',
 			$effectiveLanguage
@@ -156,17 +166,8 @@ class TermsListView {
 	 * @return string HTML
 	 */
 	private function getAliasesView( AliasGroupList $aliasGroups, string $languageCode ): string {
-		if ( !$aliasGroups->hasGroupForLanguage( $languageCode ) ) {
-			return $this->templateFactory->render(
-				'wikibase-aliasesview',
-				'wb-empty',
-				'',
-				'',
-				// FIXME: Ideally we would not emit dir and lang attributes at all here
-				'', // Empty dir attribute is considered invalid and thus the element inherits dir
-				$languageCode // Empty lang attribute would mean "explicitly unknown language"
-			);
-		} else {
+		if ( $aliasGroups->hasGroupForLanguage( $languageCode ) ) {
+			$classes = '';
 			$aliasesHtml = '';
 			$aliases = $aliasGroups->getByLanguage( $languageCode )->getAliases();
 			foreach ( $aliases as $alias ) {
@@ -175,16 +176,23 @@ class TermsListView {
 					htmlspecialchars( $alias )
 				);
 			}
-
-			return $this->templateFactory->render(
-				'wikibase-aliasesview',
-				'',
-				$aliasesHtml,
-				'',
-				$this->languageDirectionalityLookup->getDirectionality( $languageCode ) ?: 'auto',
-				$languageCode
-			);
+			$dir = $this->languageDirectionalityLookup->getDirectionality( $languageCode ) ?: 'auto';
+		} else {
+			$classes = 'wb-empty';
+			$aliasesHtml = '';
+			// FIXME: Ideally we would not emit dir and lang attributes at all here
+			$dir = ''; // Empty dir attribute is considered invalid and thus the element inherits dir
+			// Do not change lang: empty lang attribute would mean "explicitly unknown language"
 		}
+
+		return $this->templateFactory->render(
+			'wikibase-aliasesview',
+			$classes,
+			$aliasesHtml,
+			'',
+			$dir,
+			$languageCode
+		);
 	}
 
 }
