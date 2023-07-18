@@ -6,10 +6,14 @@
 			"Felicilijonas",
 			"Pierpao",
 			"Robin Owain",
-			"Shirayuki"
+			"Shirayuki",
+			"Piano1forte2",
+			"Reedy"
 		]
 	},
+	"wikibase-linkitem-close": "Close dialogue and reload page",
 	"wikibase-rc-wikibase-edit-letter": "WD",
+	"wikibase-error-deserialize-error": "Failed to deserialise data.",
 	"wikibase-error-serialize-error": "Failed to serialise data",
 	"wikibase-client-data-bridge-license-heading": "Usage and licence"
 }

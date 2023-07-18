@@ -11,10 +11,12 @@
 	"wikibase-editlinks": "ᬳᬸᬯᬄᬧ᭄ᬭᬦᬮ",
 	"wikibase-editlinkstitle": "ᬳᬸᬯᬄᬧ᭄ᬭᬦᬮᬧᬦ᭄ᬢᬭᬦᬶᬂᬪᬵᬱ",
 	"wikibase-linkitem-addlinks": "ᬯᭂᬯᭂᬄᬧ᭄ᬭᬦᬮ",
+	"wikibase-linkitem-title": "ᬢᭁᬢᬂ​ᬲᬭᬾᬂ​ᬓᬘ:",
 	"wikibase-linkitem-input-site": "ᬪᬵᬱ:",
 	"wikibase-linkitem-input-page": "ᬓᬘ:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "ᬳᭂᬂᬓᭂᬩᬂ",
+	"wikibase-rc-hide-wikidata-show": "ᬲᬶᬦᬳᬂ",
 	"wikibase-rc-wikibase-edit-letter": "ᬤ᭄",
 	"wikibase-rc-wikibase-edit-title": "ᬳᬸᬯᬳᬦ᭄ {{WBREPONAME}}",
 	"wikibase-otherprojects": "ᬭᬶᬂᬧ᭄ᬭᭀᬬᬾᬓ᭄ᬮᬶᬬᬦᬦ᭄"
