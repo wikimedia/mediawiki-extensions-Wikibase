@@ -1,4 +1,5 @@
 <?php
+// phpcs:disable MediaWiki.Files.ClassMatchesFilename.WrongCase -- keep file name for B/C
 
 declare( strict_types = 1 );
 namespace Wikibase\Repo\Maintenance;
@@ -8,10 +9,6 @@ use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Repo\WikibaseRepo;
-
-$basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../mediawiki';
-
-require_once $basePath . '/maintenance/Maintenance.php';
 
 /**
  * Import data from a data file to a Federated Properties Wikibase instance
@@ -69,5 +66,4 @@ class ImportFederatedPropertiesSampleData extends Maintenance {
 	}
 }
 
-$maintClass = ImportFederatedPropertiesSampleData::class;
-require_once RUN_MAINTENANCE_IF_MAIN;
+return ImportFederatedPropertiesSampleData::class;
