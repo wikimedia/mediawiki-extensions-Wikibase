@@ -153,7 +153,7 @@ class SetItemDescriptionValidator {
 	 * @throws UseCaseError
 	 */
 	private function validateComment( ?string $comment ): void {
-		if ( !isset( $comment ) ) {
+		if ( $comment === null ) {
 			return;
 		}
 

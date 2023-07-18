@@ -54,7 +54,7 @@ class ReplaceItemStatementValidator {
 	 * @throws UseCaseError
 	 */
 	private function validateItemId( ?string $itemId ): void {
-		if ( !isset( $itemId ) ) {
+		if ( $itemId === null ) {
 			return;
 		}
 
@@ -131,7 +131,7 @@ class ReplaceItemStatementValidator {
 	 * @throws UseCaseError
 	 */
 	private function validateComment( ?string $comment ): void {
-		if ( !isset( $comment ) ) {
+		if ( $comment === null ) {
 			return;
 		}
 
