@@ -62,8 +62,6 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 		$context = $this->createMock( ContextSource::class );
 		$context->method( 'getLanguage' )
 			->willReturn( $lang );
-		$context->method( 'getUser' )
-			->willReturn( MediaWikiIntegrationTestCase::getTestUser()->getUser() );
 
 		$searchPage->method( 'getContext' )->willReturn( $context );
 
@@ -95,7 +93,10 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 		$extract = '<span>extract</span>';
 		$redirect = $section = $score = $size = $date = $related = $html = '';
 		$searchResult = $this->createMock( SearchResult::class );
-		$searchResult->method( 'getTitle' )->willReturn( Title::makeTitle( NS_TALK, 'Test' ) );
+		$title = Title::makeTitle( NS_TALK, 'Test' );
+		// Force a content model to avoid hitting the database
+		$title->setContentModel( CONTENT_MODEL_WIKITEXT );
+		$searchResult->method( 'getTitle' )->willReturn( $title );
 		$handler = $this->getShowSearchHitHandler();
 		$handler->onShowSearchHit(
 			$searchPage,
