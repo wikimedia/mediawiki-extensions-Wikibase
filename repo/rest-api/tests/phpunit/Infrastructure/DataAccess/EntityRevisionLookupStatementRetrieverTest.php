@@ -12,7 +12,6 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\StatementListProvidingEntity as StatementSubject;
 use Wikibase\DataModel\Fixtures\CustomEntityId;
 use Wikibase\DataModel\Services\Fixtures\FakeEntityDocument;
-use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\Fingerprint;
@@ -22,9 +21,7 @@ use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
-use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupStatementRetriever;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupStatementRetriever
@@ -34,6 +31,8 @@ use Wikibase\Repo\WikibaseRepo;
  * @license GPL-2.0-or-later
  */
 class EntityRevisionLookupStatementRetrieverTest extends TestCase {
+
+	use StatementReadModelHelper;
 
 	private EntityRevisionLookup $entityRevisionLookup;
 
@@ -156,10 +155,6 @@ class EntityRevisionLookupStatementRetrieverTest extends TestCase {
 			$this->entityRevisionLookup,
 			$this->newStatementReadModelConverter()
 		);
-	}
-
-	private function newStatementReadModelConverter(): StatementReadModelConverter {
-		return new StatementReadModelConverter( WikibaseRepo::getStatementGuidParser(), new InMemoryDataTypeLookup() );
 	}
 
 }

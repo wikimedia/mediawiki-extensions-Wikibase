@@ -9,7 +9,6 @@ use SiteLookup;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Lib\Store\EntityRevision;
@@ -21,10 +20,8 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemPartsBuilder;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
-use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupItemDataRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\SiteLinksReadModelConverter;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupItemDataRetriever
@@ -34,6 +31,8 @@ use Wikibase\Repo\WikibaseRepo;
  * @license GPL-2.0-or-later
  */
 class EntityRevisionLookupItemDataRetrieverTest extends TestCase {
+
+	use StatementReadModelHelper;
 
 	private EntityRevisionLookup $entityRevisionLookup;
 
@@ -249,10 +248,6 @@ class EntityRevisionLookupItemDataRetrieverTest extends TestCase {
 			->willThrowException( $this->createStub( RevisionedUnresolvedRedirectException::class ) );
 
 		return $entityRevisionLookup;
-	}
-
-	private function newStatementReadModelConverter(): StatementReadModelConverter {
-		return new StatementReadModelConverter( WikibaseRepo::getStatementGuidParser(), new InMemoryDataTypeLookup() );
 	}
 
 	private function newSiteLinksReadModelConverter(): SiteLinksReadModelConverter {
