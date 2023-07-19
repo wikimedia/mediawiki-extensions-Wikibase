@@ -17,7 +17,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\EntityFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SettingsArray;
-use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\Hooks\Helpers\OutputPageEditability;
 use Wikibase\Repo\Hooks\Helpers\OutputPageEntityViewChecker;
@@ -138,7 +137,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 			->method( 'getName' );
 
 		$this->outputPageEntityIdReader = $this->getOutputPageEntityIdReaderReturningEntity( $this->itemId );
-		$this->entityRevisionLookup = $this->getEntityRevisionLookupReturningEntity( $this->itemId );
+		$this->entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );
 
 		$this->preferredLanguageLookup->method( 'getLanguages' )
 			->with( $this->uiLanguageCode, $out->getUser() ); // return value already mocked in setUp
@@ -150,6 +149,10 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$out->setProperty(
 			'wikibase-view-chunks',
 			[ '$1' => [ 'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class' ] ]
+		);
+		$out->setProperty(
+			'wikibase-terms-list-items',
+			[]
 		);
 		$out->setArticleFlag( true );
 
@@ -220,18 +223,6 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 		return $outputPageEntityIdReader;
 	}
 
-	/**
-	 * @param $itemId
-	 * @return MockObject
-	 */
-	private function getEntityRevisionLookupReturningEntity( $itemId ): EntityRevisionLookup {
-		$entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );
-		$entityRevisionLookup->expects( $this->once() )
-			->method( 'getEntityRevision' )
-			->willReturn( new EntityRevision( new Item( $itemId ) ) );
-		return $entityRevisionLookup;
-	}
-
 	public function testGivenPageIsEditable_keepsEditButtonsAndRemovesSpecialMarkup() {
 		$contentBetweenEditLinks = 'hello';
 		$editLink1 = 'edit link 1';
@@ -267,50 +258,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider hasMulProvider
 	 */
-	public function testOnOutputPageBeforeHTML_withoutListItemHtml_mulHandling(
-		bool $mulEnabled,
-		bool $mulAlwaysShown,
-		bool $hasMulTerm = false
-	) {
-		$this->settings->setSetting( 'tmpEnableMulLanguageCode', $mulEnabled );
-		$this->settings->setSetting( 'tmpAlwaysShowMulLanguageCode', $mulAlwaysShown );
-		$out = $this->newOutputPage();
-		$item = new Item( $this->itemId );
-		if ( $hasMulTerm ) {
-			$item->setLabel( 'mul', 'bar' );
-		}
-
-		$this->outputPageEntityIdReader = $this->getOutputPageEntityIdReaderReturningEntity( $this->itemId );
-		$this->entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );
-		$this->entityRevisionLookup->expects( $this->once() )
-			->method( 'getEntityRevision' )
-			->willReturn( new EntityRevision( $item ) );
-
-		$this->preferredLanguageLookup->method( 'getLanguages' )
-			->with( $this->uiLanguageCode, $out->getUser() ); // return value already mocked in setUp
-
-		$outputPageBeforeHTMLHookHandler = $this->getHookHandler();
-
-		$html = '$1';
-		$out->setTitle( Title::makeTitle( 0, 'OutputPageBeforeHTMLHookHandlerTest' ) );
-		$out->setProperty( 'wikibase-view-chunks', [ '$1' => [ 'termbox' ] ] );
-		$out->setArticleFlag( true );
-
-		$outputPageBeforeHTMLHookHandler->onOutputPageBeforeHTML( $out, $html );
-		$this->assertStringContainsString( 'lang="en"', $html );
-		$this->assertStringContainsString( 'lang="es"', $html );
-		$this->assertStringContainsString( 'lang="ru"', $html );
-		if ( $mulEnabled && ( $mulAlwaysShown || $hasMulTerm ) ) {
-			$this->assertStringContainsString( 'lang="mul"', $html );
-		} else {
-			$this->assertStringNotContainsString( 'lang="mul"', $html );
-		}
-	}
-
-	/**
-	 * @dataProvider hasMulProvider
-	 */
-	public function testOnOutputPageBeforeHTML_withListItemHtml_mulHandling( bool $hasMul ) {
+	public function testOnOutputPageBeforeHTML_mulHandling( bool $hasMul ) {
 		$out = $this->newOutputPage();
 
 		$this->outputPageEntityIdReader = $this->getOutputPageEntityIdReaderReturningEntity( $this->itemId );
