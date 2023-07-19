@@ -8,7 +8,6 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Client\Api\ApiFormatReference;
 use Wikibase\Client\Hooks\ChangesListSpecialPageHookHandler;
-use Wikibase\Client\Hooks\EchoNotificationsHandlers;
 use Wikibase\Client\Hooks\ExtensionLoadHandler;
 
 /**
@@ -37,37 +36,8 @@ class ExtensionLoadHandlerTest extends TestCase {
 		return $container;
 	}
 
-	public function testGetHooks_withEcho() {
+	public function testGetHooks() {
 		$extensionRegistry = $this->createMock( ExtensionRegistry::class );
-		$extensionRegistry->method( 'isLoaded' )
-			->with( 'Echo' )
-			->willReturn( true );
-
-		$actualHooks = [];
-		$container = $this->getFauxHookContainer( $actualHooks );
-
-		$handler = new ExtensionLoadHandler( $extensionRegistry, $container );
-		$handler->registerHooks();
-
-		$expectedHooks = [
-			'LocalUserCreated' => [
-				EchoNotificationsHandlers::class . '::onLocalUserCreated',
-			],
-			'WikibaseHandleChange' => [
-				EchoNotificationsHandlers::class . '::onWikibaseHandleChange',
-			],
-			'ChangesListSpecialPageStructuredFilters' => [
-				ChangesListSpecialPageHookHandler::class . '::onChangesListSpecialPageStructuredFilters',
-			],
-		];
-		$this->assertSame( $expectedHooks, $actualHooks );
-	}
-
-	public function testGetHooks_withoutEcho() {
-		$extensionRegistry = $this->createMock( ExtensionRegistry::class );
-		$extensionRegistry->method( 'isLoaded' )
-			->with( 'Echo' )
-			->willReturn( false );
 
 		$actualHooks = [];
 		$container = $this->getFauxHookContainer( $actualHooks );

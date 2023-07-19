@@ -270,6 +270,7 @@
 			"LoadExtensionSchemaUpdates",
 			"SqlUsageTrackerSchemaUpdater"
 		],
+		"LocalUserCreated": "Wikibase\\Client\\Hooks\\EchoNotificationsHandlers::onLocalUserCreated",
 		"LoginFormValidErrorMessages": "\\Wikibase\\Client\\Hooks\\LoginFormValidErrorMessagesHandler::handle",
 		"MagicWordwgVariableIDs": "Magic",
 		"MaintenanceShellStart": "\\Wikibase\\Client\\ClientHooks::onMaintenanceShellStart",
@@ -304,7 +305,8 @@
 			"LibHooks"
 		],
 		"wgQueryPages": "Trivial",
-		"WikibaseContentLanguages": "\\Wikibase\\Client\\ClientHooks::onWikibaseContentLanguages"
+		"WikibaseContentLanguages": "\\Wikibase\\Client\\ClientHooks::onWikibaseContentLanguages",
+		"WikibaseHandleChange": "Wikibase\\Client\\Hooks\\EchoNotificationsHandlers::onWikibaseHandleChange"
 	},
 	"TrackingCategories": [
 		"unresolved-property-category",

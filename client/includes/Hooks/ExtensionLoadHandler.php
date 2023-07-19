@@ -70,12 +70,6 @@ class ExtensionLoadHandler {
 	 * Register the appropriate hooks in the HookContainer passed to the constructor.
 	 */
 	public function registerHooks(): void {
-		// These hooks should only be run if we use the Echo extension
-		if ( $this->extensionRegistry->isLoaded( 'Echo' ) ) {
-			$this->hookContainer->register( 'LocalUserCreated', EchoNotificationsHandlers::class . '::onLocalUserCreated' );
-			$this->hookContainer->register( 'WikibaseHandleChange', EchoNotificationsHandlers::class . '::onWikibaseHandleChange' );
-		}
-
 		// This is in onExtensionLoad to ensure we register our
 		// ChangesListSpecialPageStructuredFilters after ORES's.
 		//
