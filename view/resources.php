@@ -41,7 +41,7 @@ return call_user_func( function() {
 		'remoteExtPath' => 'Wikibase/view/lib/wikibase-data-values-value-view',
 	];
 
-	$wikibaseTermboxPaths = [
+	$wikibaseTermboxSubmodulePaths = [
 		'localBasePath' => __DIR__ . '/lib/wikibase-termbox',
 		'remoteExtPath' => 'Wikibase/view/lib/wikibase-termbox',
 	];
@@ -929,10 +929,19 @@ return call_user_func( function() {
 			],
 		],
 
-		'wikibase.termbox' => $wikibaseTermboxPaths + [
+		'wikibase.termbox' => [
+			'scripts' => [
+				'termbox.init.js',
+			],
+			'remoteExtPath' => 'Wikibase/view/resources/wikibase/termbox',
+			'localBasePath' => __DIR__ . '/resources/wikibase/termbox',
+			'dependencies' => [ 'wikibase.termbox.init' ],
+		],
+
+		'wikibase.termbox.init' => $wikibaseTermboxSubmodulePaths + [
 			'class' => TermboxModule::class,
 			'packageFiles' => [
-				'dist/wikibase.termbox.main.js',
+				'dist/wikibase.termbox.init.js',
 				[
 					'name' => 'dist/config.json',
 					'callback' => function () {
@@ -955,7 +964,7 @@ return call_user_func( function() {
 			// 'messages' are declared by ./resources.json via TermboxModule.
 		],
 
-		'wikibase.termbox.styles' => $wikibaseTermboxPaths + [
+		'wikibase.termbox.styles' => $wikibaseTermboxSubmodulePaths + [
 			'styles' => [
 				'dist/wikibase.termbox.main.css',
 			],
