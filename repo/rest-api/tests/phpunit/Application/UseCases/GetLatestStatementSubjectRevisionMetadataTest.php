@@ -7,7 +7,6 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestStatementSubjectRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
@@ -61,11 +60,6 @@ class GetLatestStatementSubjectRevisionMetadataTest extends TestCase {
 
 	public function testGivenItemRedirect_throwsItemRedirect(): void {
 		$redirectSource = new ItemId( 'Q321' );
-
-		$statementWithRedirectItem = new StatementGuid(
-			$redirectSource,
-			'FFFFFFFF-BBBB-CCCC-DDDD-EEEEEEEEEEEE'
-		);
 
 		$redirectTarget = 'Q123';
 
