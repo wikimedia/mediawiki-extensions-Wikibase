@@ -10,6 +10,6 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\LatestStatementSubjectRevisionMetadat
  */
 interface StatementSubjectRevisionMetaDataRetriever {
 
-	public function getLatestRevisionMetadata( EntityId $entityId ): LatestStatementSubjectRevisionMetadataResult;
+	public function getLatestRevisionMetadata( EntityId $subjectId ): LatestStatementSubjectRevisionMetadataResult;
 
 }

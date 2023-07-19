@@ -54,7 +54,7 @@ class GetLatestStatementSubjectRevisionMetadataTest extends TestCase {
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::STATEMENT_SUBJECT_NOT_FOUND, $e->getErrorCode() );
-			$this->assertSame( "Could not find an entity with the ID: {$subjectId}", $e->getErrorMessage() );
+			$this->assertSame( "Could not find the statement subject with the ID: {$subjectId}", $e->getErrorMessage() );
 		}
 	}
 

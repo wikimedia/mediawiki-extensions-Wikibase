@@ -37,7 +37,7 @@ class RequestPreconditionCheck {
 	/**
 	 * Convenience function to use with the $getEntityIdFromRequest callable and dealing with statement IDs.
 	 */
-	public static function getEntityIdPrefixFromStatementId( string $statementId ): string {
+	public static function getSubjectIdPrefixFromStatementId( string $statementId ): string {
 		return substr( $statementId, 0, strpos( $statementId, '$' ) ?: 0 );
 	}
 
