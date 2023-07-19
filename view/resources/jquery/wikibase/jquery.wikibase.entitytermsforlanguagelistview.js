@@ -283,7 +283,6 @@
 			if ( !this._isMoreLanguagesExpanded() ) {
 				this._addMoreLanguages();
 				this._trackAllLanguagesShown();
-				this._addPulsatingDotToMul();
 			} else {
 				var previousTop = $button.offset().top;
 				this._removeMoreLanguages();
