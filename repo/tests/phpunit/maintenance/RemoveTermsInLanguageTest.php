@@ -15,6 +15,7 @@ require_once __DIR__ . '/../../../maintenance/removeTermsInLanguage.php';
  * @covers \Wikibase\Repo\Maintenance\RemoveTermsInLanguage
  *
  * @group Wikibase
+ * @group Database
  *
  * @license GPL-2.0-or-later
  */

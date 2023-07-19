@@ -22,6 +22,7 @@ use Wikimedia\TestingAccessWrapper;
  * @group Wikibase
  * @group WikibaseAPI
  * @group medium
+ * @group Database
  *
  * @license GPL-2.0-or-later
  */
