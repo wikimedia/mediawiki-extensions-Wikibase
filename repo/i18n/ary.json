@@ -26,5 +26,6 @@
 	"wikibase-setsitelink-introfull": "راك كاتقاد الليان ديال $2 ل [[:$1]].",
 	"wikibase-setsitelink-intro": "هاد لفورم كاتسمح ليك باش تقاد الليان ديال عنصر. راك محتاج ل توفير النمرة د لعنصر (متلاً Q23)، الرمز د السيت (مثلا \"enwiki\") و الليان د السيت باش يتقادّ عليه.",
 	"wikibase-setsitelink-label": "ليان د السيت:",
-	"wikibase-setsitelink-submit": "زيد ليان د السيت"
+	"wikibase-setsitelink-submit": "زيد ليان د السيت",
+	"wikibase-restoreold": "ترجاع"
 }
