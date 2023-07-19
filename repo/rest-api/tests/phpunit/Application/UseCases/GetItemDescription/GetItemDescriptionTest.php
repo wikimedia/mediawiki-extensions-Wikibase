@@ -94,7 +94,7 @@ class GetItemDescriptionTest extends TestCase {
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::DESCRIPTION_NOT_DEFINED, $e->getErrorCode() );
 			$this->assertSame( 'Item with the ID Q2 does not have a description in the language: en', $e->getErrorMessage() );
-			$this->assertNull( $e->getErrorContext() );
+			$this->assertSame( [], $e->getErrorContext() );
 		}
 	}
 
@@ -106,7 +106,7 @@ class GetItemDescriptionTest extends TestCase {
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::INVALID_ITEM_ID, $e->getErrorCode() );
 			$this->assertSame( 'Not a valid item ID: X321', $e->getErrorMessage() );
-			$this->assertNull( $e->getErrorContext() );
+			$this->assertSame( [], $e->getErrorContext() );
 		}
 	}
 
@@ -118,7 +118,7 @@ class GetItemDescriptionTest extends TestCase {
 		} catch ( UseCaseError $useCaseEx ) {
 			$this->assertSame( UseCaseError::INVALID_LANGUAGE_CODE, $useCaseEx->getErrorCode() );
 			$this->assertSame( 'Not a valid language code: 1e', $useCaseEx->getErrorMessage() );
-			$this->assertNull( $useCaseEx->getErrorContext() );
+			$this->assertSame( [], $useCaseEx->getErrorContext() );
 		}
 	}
 

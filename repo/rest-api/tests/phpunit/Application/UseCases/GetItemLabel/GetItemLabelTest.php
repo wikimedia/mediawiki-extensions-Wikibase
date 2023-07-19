@@ -94,7 +94,7 @@ class GetItemLabelTest extends TestCase {
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::LABEL_NOT_DEFINED, $e->getErrorCode() );
 			$this->assertSame( 'Item with the ID Q11 does not have a label in the language: en', $e->getErrorMessage() );
-			$this->assertNull( $e->getErrorContext() );
+			$this->assertSame( [], $e->getErrorContext() );
 		}
 	}
 
@@ -106,7 +106,7 @@ class GetItemLabelTest extends TestCase {
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::INVALID_ITEM_ID, $e->getErrorCode() );
 			$this->assertSame( 'Not a valid item ID: X321', $e->getErrorMessage() );
-			$this->assertNull( $e->getErrorContext() );
+			$this->assertSame( [], $e->getErrorContext() );
 		}
 	}
 
@@ -118,7 +118,7 @@ class GetItemLabelTest extends TestCase {
 		} catch ( UseCaseError $error ) {
 			$this->assertSame( UseCaseError::INVALID_LANGUAGE_CODE, $error->getErrorCode() );
 			$this->assertSame( 'Not a valid language code: 1e', $error->getErrorMessage() );
-			$this->assertNull( $error->getErrorContext() );
+			$this->assertSame( [], $error->getErrorContext() );
 		}
 	}
 

@@ -28,7 +28,8 @@ class GetLatestStatementSubjectRevisionMetadata {
 		if ( !$metaDataResult->subjectExists() ) {
 			throw new UseCaseError(
 				UseCaseError::STATEMENT_SUBJECT_NOT_FOUND,
-				"Could not find the statement subject with the ID: {$subjectId}"
+				"Could not find the statement subject with the ID: $subjectId",
+				[ UseCaseError::CONTEXT_SUBJECT_ID => $subjectId ]
 			);
 		}
 

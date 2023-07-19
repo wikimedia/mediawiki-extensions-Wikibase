@@ -122,18 +122,18 @@ describe( 'GET statement', () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			assertValidErrorResponse( response, 400, 'invalid-property-id' );
+			assertValidErrorResponse( response, 400, 'invalid-property-id', { 'property-id': propertyId } );
 			assert.include( response.body.message, propertyId );
 		} );
 
-		it( 'responds 400 if subject id in endpoint is not an property id', async () => {
+		it( 'responds 400 if subject id in endpoint is not a property id', async () => {
 			const subjectId = 'Q123';
 			const statementId = 'P123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 			const response = await newGetPropertyStatementRequestBuilder( subjectId, statementId )
 				.assertInvalidRequest()
 				.makeRequest();
 
-			assertValidErrorResponse( response, 400, 'invalid-property-id' );
+			assertValidErrorResponse( response, 400, 'invalid-property-id', { 'property-id': subjectId } );
 			assert.include( response.body.message, subjectId );
 		} );
 

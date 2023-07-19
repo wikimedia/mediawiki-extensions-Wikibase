@@ -77,7 +77,7 @@ class PatchItemLabels {
 			throw new UseCaseError(
 				UseCaseError::PATCH_TARGET_NOT_FOUND,
 				"Target '{$e->getOperation()[$e->getField()]}' not found on the resource",
-				[ 'operation' => $e->getOperation(), 'field' => $e->getField() ]
+				[ UseCaseError::CONTEXT_OPERATION => $e->getOperation(), UseCaseError::CONTEXT_FIELD => $e->getField() ]
 			);
 		} catch ( PatchTestConditionFailedException $e ) {
 			$operation = $e->getOperation();
@@ -87,7 +87,7 @@ class PatchItemLabels {
 				"At path '" . $operation['path'] .
 				"' expected '" . json_encode( $operation['value'] ) .
 				"', actual: '" . json_encode( $e->getActualValue() ) . "'",
-				[ 'operation' => $operation, 'actual-value' => $e->getActualValue() ]
+				[ UseCaseError::CONTEXT_OPERATION => $operation, UseCaseError::CONTEXT_ACTUAL_VALUE => $e->getActualValue() ]
 			);
 		}
 

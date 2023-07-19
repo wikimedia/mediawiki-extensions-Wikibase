@@ -25,7 +25,8 @@ class GetPropertyValidator {
 		if ( $validationError ) {
 			throw new UseCaseError(
 				UseCaseError::INVALID_PROPERTY_ID,
-				"Not a valid property ID: {$validationError->getContext()[PropertyIdValidator::CONTEXT_VALUE]}"
+				"Not a valid property ID: {$validationError->getContext()[PropertyIdValidator::CONTEXT_VALUE]}",
+				[ UseCaseError::CONTEXT_PROPERTY_ID => $validationError->getContext()[PropertyIdValidator::CONTEXT_VALUE] ]
 			);
 		}
 

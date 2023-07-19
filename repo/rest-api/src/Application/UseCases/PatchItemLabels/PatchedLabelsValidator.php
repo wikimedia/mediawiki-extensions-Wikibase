@@ -18,13 +18,6 @@ use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
  */
 class PatchedLabelsValidator {
 
-	public const CONTEXT_LANGUAGE = 'language';
-	public const CONTEXT_LABEL = 'label';
-	public const CONTEXT_VALUE = 'value';
-	public const CONTEXT_LIMIT = 'character-limit';
-	public const CONTEXT_DESCRIPTION = 'description';
-	public const CONTEXT_MATCHING_ITEM_ID = 'matching-item-id';
-
 	private LabelsDeserializer $labelsDeserializer;
 	private ItemLabelValidator $labelValidator;
 	private LanguageCodeValidator $languageCodeValidator;
@@ -60,7 +53,7 @@ class PatchedLabelsValidator {
 			throw new UseCaseError(
 				UseCaseError::PATCHED_LABEL_EMPTY,
 				"Changed label for '$languageCode' cannot be empty",
-				[ self::CONTEXT_LANGUAGE => $languageCode ]
+				[ UseCaseError::CONTEXT_LANGUAGE => $languageCode ]
 			);
 		} catch ( InvalidFieldException $e ) {
 			$languageCode = $e->getField();
@@ -69,8 +62,8 @@ class PatchedLabelsValidator {
 				UseCaseError::PATCHED_LABEL_INVALID,
 				"Changed label for '$languageCode' is invalid: $invalidLabel",
 				[
-					self::CONTEXT_LANGUAGE => $languageCode,
-					self::CONTEXT_VALUE => $invalidLabel,
+					UseCaseError::CONTEXT_LANGUAGE => $languageCode,
+					UseCaseError::CONTEXT_VALUE => $invalidLabel,
 				]
 			);
 		}
@@ -104,8 +97,8 @@ class PatchedLabelsValidator {
 					UseCaseError::PATCHED_LABEL_INVALID,
 					"Changed label for '{$label->getLanguageCode()}' is invalid: {$label->getText()}",
 					[
-						self::CONTEXT_LANGUAGE => $label->getLanguageCode(),
-						self::CONTEXT_VALUE => $label->getText(),
+						UseCaseError::CONTEXT_LANGUAGE => $label->getLanguageCode(),
+						UseCaseError::CONTEXT_VALUE => $label->getText(),
 					]
 				);
 			case ItemLabelValidator::CODE_TOO_LONG:
@@ -114,9 +107,9 @@ class PatchedLabelsValidator {
 					UseCaseError::PATCHED_LABEL_TOO_LONG,
 					"Changed label for '{$label->getLanguageCode()}' must not be more than $maxLabelLength characters long",
 					[
-						self::CONTEXT_LANGUAGE => $label->getLanguageCode(),
-						self::CONTEXT_VALUE => $context[ItemLabelValidator::CONTEXT_VALUE],
-						self::CONTEXT_LIMIT => $context[ItemLabelValidator::CONTEXT_LIMIT],
+						UseCaseError::CONTEXT_LANGUAGE => $label->getLanguageCode(),
+						UseCaseError::CONTEXT_VALUE => $context[ItemLabelValidator::CONTEXT_VALUE],
+						UseCaseError::CONTEXT_CHARACTER_LIMIT => $context[ItemLabelValidator::CONTEXT_LIMIT],
 					]
 				);
 			case ItemLabelValidator::CODE_LABEL_DESCRIPTION_DUPLICATE:
@@ -128,10 +121,10 @@ class PatchedLabelsValidator {
 					"Item $duplicateItemId already has label '$label' associated with language " .
 					"code $languageCode, using the same description text.",
 					[
-						self::CONTEXT_LANGUAGE => $context[ItemLabelValidator::CONTEXT_LANGUAGE],
-						self::CONTEXT_LABEL => $context[ItemLabelValidator::CONTEXT_LABEL],
-						self::CONTEXT_DESCRIPTION => $context[ItemLabelValidator::CONTEXT_DESCRIPTION],
-						self::CONTEXT_MATCHING_ITEM_ID => $context[ItemLabelValidator::CONTEXT_MATCHING_ITEM_ID],
+						UseCaseError::CONTEXT_LANGUAGE => $context[ItemLabelValidator::CONTEXT_LANGUAGE],
+						UseCaseError::CONTEXT_LABEL => $context[ItemLabelValidator::CONTEXT_LABEL],
+						UseCaseError::CONTEXT_DESCRIPTION => $context[ItemLabelValidator::CONTEXT_DESCRIPTION],
+						UseCaseError::CONTEXT_MATCHING_ITEM_ID => $context[ItemLabelValidator::CONTEXT_MATCHING_ITEM_ID],
 					]
 				);
 			case ItemLabelValidator::CODE_LABEL_DESCRIPTION_EQUAL:
@@ -139,7 +132,7 @@ class PatchedLabelsValidator {
 				throw new UseCaseError(
 					UseCaseError::PATCHED_ITEM_LABEL_DESCRIPTION_SAME_VALUE,
 					"Label and description for language code {$language} can not have the same value.",
-					[ self::CONTEXT_LANGUAGE => $context[ItemLabelValidator::CONTEXT_LANGUAGE] ]
+					[ UseCaseError::CONTEXT_LANGUAGE => $context[ItemLabelValidator::CONTEXT_LANGUAGE] ]
 				);
 			default:
 				throw new LogicException( "Unknown validation error: {$validationError->getCode()}" );
@@ -153,7 +146,7 @@ class PatchedLabelsValidator {
 			throw new UseCaseError(
 				UseCaseError::PATCHED_LABEL_INVALID_LANGUAGE_CODE,
 				"Not a valid language code '$languageCode' in changed labels",
-				[ self::CONTEXT_LANGUAGE => $languageCode ]
+				[ UseCaseError::CONTEXT_LANGUAGE => $languageCode ]
 			);
 		}
 	}

@@ -48,7 +48,7 @@ class SetItemDescriptionValidatorTest extends TestCase {
 		array $request,
 		string $errorCode,
 		string $errorMessage,
-		array $context = null
+		array $context = []
 	): void {
 		try {
 			$this->newSetItemDescriptionValidator()->assertValidRequest( $this->newUseCaseRequest( $request ) );
@@ -93,7 +93,7 @@ class SetItemDescriptionValidatorTest extends TestCase {
 		ValidationError $validationError,
 		string $errorCode,
 		string $errorMessage,
-		array $context = null
+		array $context = []
 	): void {
 		$this->itemDescriptionValidator = $this->createStub( ItemDescriptionValidator::class );
 		$this->itemDescriptionValidator->method( 'validate' )->willReturn( $validationError );
@@ -128,8 +128,8 @@ class SetItemDescriptionValidatorTest extends TestCase {
 			UseCaseError::DESCRIPTION_TOO_LONG,
 			'Description must be no more than 40 characters long',
 			[
-				SetItemDescriptionValidator::CONTEXT_VALUE => $description,
-				SetItemDescriptionValidator::CONTEXT_LIMIT => $limit,
+				UseCaseError::CONTEXT_VALUE => $description,
+				UseCaseError::CONTEXT_CHARACTER_LIMIT => $limit,
 			],
 		];
 
@@ -151,7 +151,7 @@ class SetItemDescriptionValidatorTest extends TestCase {
 			),
 			UseCaseError::LABEL_DESCRIPTION_SAME_VALUE,
 			"Label and description for language code '$language' can not have the same value",
-			[ SetItemDescriptionValidator::CONTEXT_LANGUAGE => $language ],
+			[ UseCaseError::CONTEXT_LANGUAGE => $language ],
 		];
 
 		$language = 'en';
@@ -173,10 +173,10 @@ class SetItemDescriptionValidatorTest extends TestCase {
 			"Item '$matchingItemId' already has label '$label' associated with "
 			. "language code '$language', using the same description text",
 			[
-				SetItemDescriptionValidator::CONTEXT_LANGUAGE => $language,
-				SetItemDescriptionValidator::CONTEXT_LABEL => $label,
-				SetItemDescriptionValidator::CONTEXT_DESCRIPTION => $description,
-				SetItemDescriptionValidator::CONTEXT_MATCHING_ITEM_ID => $matchingItemId,
+				UseCaseError::CONTEXT_LANGUAGE => $language,
+				UseCaseError::CONTEXT_LABEL => $label,
+				UseCaseError::CONTEXT_DESCRIPTION => $description,
+				UseCaseError::CONTEXT_MATCHING_ITEM_ID => $matchingItemId,
 			],
 		];
 	}

@@ -62,7 +62,7 @@ class PatchItemLabelsValidatorTest extends TestCase {
 		ValidationError $validationError,
 		string $expectedErrorCode,
 		string $expectedErrorMessage,
-		?array $expectedErrorContext
+		array $expectedErrorContext
 	): void {
 		$invalidPatch = [ 'this is' => 'not a valid patch' ];
 		$this->jsonPatchValidator = $this->createMock( JsonPatchValidator::class );
@@ -87,7 +87,7 @@ class PatchItemLabelsValidatorTest extends TestCase {
 			new ValidationError( JsonPatchValidator::CODE_INVALID ),
 			UseCaseError::INVALID_PATCH,
 			'The provided patch is invalid',
-			null,
+			[],
 		];
 
 		$operation = [ 'op' => 'bad', 'path' => '/a/b/c', 'value' => 'test' ];
@@ -95,7 +95,7 @@ class PatchItemLabelsValidatorTest extends TestCase {
 			new ValidationError( JsonPatchValidator::CODE_INVALID_OPERATION, [ JsonPatchValidator::CONTEXT_OPERATION => $operation ] ),
 			UseCaseError::INVALID_PATCH_OPERATION,
 			"Incorrect JSON patch operation: 'bad'",
-			[ PatchItemLabelsValidator::CONTEXT_OPERATION => $operation ],
+			[ UseCaseError::CONTEXT_OPERATION => $operation ],
 		];
 
 		$operation = [
@@ -111,8 +111,8 @@ class PatchItemLabelsValidatorTest extends TestCase {
 			UseCaseError::INVALID_PATCH_FIELD_TYPE,
 			"The value of 'op' must be of type string",
 			[
-				PatchItemLabelsValidator::CONTEXT_OPERATION => $operation,
-				PatchItemLabelsValidator::CONTEXT_FIELD => 'op',
+				UseCaseError::CONTEXT_OPERATION => $operation,
+				UseCaseError::CONTEXT_FIELD => 'op',
 			],
 		];
 
@@ -125,8 +125,8 @@ class PatchItemLabelsValidatorTest extends TestCase {
 			UseCaseError::MISSING_JSON_PATCH_FIELD,
 			"Missing 'op' in JSON patch",
 			[
-				PatchItemLabelsValidator::CONTEXT_OPERATION => $operation,
-				PatchItemLabelsValidator::CONTEXT_FIELD => 'op',
+				UseCaseError::CONTEXT_OPERATION => $operation,
+				UseCaseError::CONTEXT_FIELD => 'op',
 			],
 		];
 	}
