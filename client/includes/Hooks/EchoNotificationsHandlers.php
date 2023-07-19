@@ -6,6 +6,7 @@ use Diff\DiffOp\DiffOp;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use EchoEvent;
+use ExtensionRegistry;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Page\RedirectLookup;
 use MediaWiki\User\UserOptionsManager;
@@ -126,6 +127,9 @@ class EchoNotificationsHandlers {
 	 * @param bool $autocreated True when account was auto-created
 	 */
 	public static function onLocalUserCreated( User $user, $autocreated ) {
+		if ( !ExtensionRegistry::getInstance()->isLoaded( 'Echo' ) ) {
+			return;
+		}
 		$self = self::factory();
 		$self->doLocalUserCreated( $user, $autocreated );
 	}
@@ -151,6 +155,9 @@ class EchoNotificationsHandlers {
 	 * @param Change $change
 	 */
 	public static function onWikibaseHandleChange( Change $change ) {
+		if ( !ExtensionRegistry::getInstance()->isLoaded( 'Echo' ) ) {
+			return;
+		}
 		$self = self::factory();
 		$self->doWikibaseHandleChange( $change );
 	}
