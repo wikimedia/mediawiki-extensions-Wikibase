@@ -122,8 +122,7 @@ class CreateRedirectTest extends MediaWikiIntegrationTestCase {
 
 		$errorReporter = new ApiErrorReporter(
 			$main,
-			WikibaseRepo::getExceptionLocalizer(),
-			$this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' )
+			WikibaseRepo::getExceptionLocalizer()
 		);
 
 		if ( !$interactor ) {

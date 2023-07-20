@@ -147,9 +147,10 @@ class ApiErrorReporterTest extends MediaWikiIntegrationTestCase {
 		$infoPattern,
 		array $expectedDataFields
 	) {
+		$this->setUserLang( 'de' );
 		$api = new ApiMain();
 		$localizer = $this->getExceptionLocalizer();
-		$reporter = new ApiErrorReporter( $api, $localizer, $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'de' ) );
+		$reporter = new ApiErrorReporter( $api, $localizer );
 
 		try {
 			$reporter->dieException( $exception, $code, $httpStatusCode, $extradata );
@@ -206,9 +207,10 @@ class ApiErrorReporterTest extends MediaWikiIntegrationTestCase {
 		$infoPattern,
 		array $expectedDataFields
 	) {
+		$this->setUserLang( 'de' );
 		$api = new ApiMain();
 		$localizer = $this->getExceptionLocalizer();
-		$reporter = new ApiErrorReporter( $api, $localizer, $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'de' ) );
+		$reporter = new ApiErrorReporter( $api, $localizer );
 
 		try {
 			$reporter->dieWithError( $msg, $code, $httpRespCode, $extradata );
@@ -262,9 +264,10 @@ class ApiErrorReporterTest extends MediaWikiIntegrationTestCase {
 		$infoPattern,
 		array $expectedDataFields
 	) {
+		$this->setUserLang( 'de' );
 		$api = new ApiMain();
 		$localizer = $this->getExceptionLocalizer();
-		$reporter = new ApiErrorReporter( $api, $localizer, $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'de' ) );
+		$reporter = new ApiErrorReporter( $api, $localizer );
 
 		try {
 			$reporter->dieStatus( $status, $code );
@@ -314,9 +317,10 @@ class ApiErrorReporterTest extends MediaWikiIntegrationTestCase {
 		$infoPattern,
 		array $expectedDataFields
 	) {
+		$this->setUserLang( 'de' );
 		$api = new ApiMain();
 		$localizer = $this->getExceptionLocalizer();
-		$reporter = new ApiErrorReporter( $api, $localizer, $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'de' ) );
+		$reporter = new ApiErrorReporter( $api, $localizer );
 
 		try {
 			$reporter->dieError( $description, $code, $httpStatusCode, $extradata );
@@ -349,9 +353,10 @@ class ApiErrorReporterTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider warningProvider
 	 */
 	public function testReportStatusWarnings( Status $status, array $expectedDataFields ) {
+		$this->setUserLang( 'de' );
 		$api = new ApiMain();
 		$localizer = $this->getExceptionLocalizer();
-		$reporter = new ApiErrorReporter( $api, $localizer, $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'de' ) );
+		$reporter = new ApiErrorReporter( $api, $localizer );
 
 		$reporter->reportStatusWarnings( $status );
 

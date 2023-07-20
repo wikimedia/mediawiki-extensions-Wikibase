@@ -191,8 +191,7 @@ class ApiHelperFactory {
 	public function getErrorReporter( ApiBase $api ) {
 		return new ApiErrorReporter(
 			$api,
-			$this->exceptionLocalizer,
-			$api->getLanguage()
+			$this->exceptionLocalizer
 		);
 	}
 
