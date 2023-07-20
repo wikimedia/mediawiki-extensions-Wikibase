@@ -14,10 +14,15 @@
 			"Dreamy Jazz"
 		]
 	},
+	"wikibase-content-language-edit-not-recognized-language": "The supplied language code was not recognised.",
 	"wikibase-newitem-not-recognized-siteid": "The provided site identifier was not recognised.",
+	"wikibase-api-not-recognized-datatype": "A datatype was expected, but either missing or not recognised.",
 	"wikibase-api-not-recognized-siteid": "The supplied site identifier was not recognised.",
+	"wikibase-api-not-recognized": "Something was not recognised.",
 	"wikibase-api-not-recognized-array": "An array was expected, but not recognised.",
 	"wikibase-api-not-recognized-language": "The supplied language code \"$1\" was not recognised.",
+	"wikibase-api-not-recognized-string": "A string was expected, but not recognised.",
 	"wikibase-listdatatypes-quantity-body": "Literal data field for a quantity that relates to some kind of well-defined unit. The actual unit goes in the data values that is entered.\n* amount – implicit part of the string (mapping of unit prefix is unclear)\n* unit – implicit part of the string that defaults to \"1\" (mapping to standardising body is unclear)\n* upperbound - quantity's upper bound\n* lowerbound - quantity's lower bound",
-	"wikibase-shortcopyrightwarning-heading": "Licence Attribution"
+	"wikibase-shortcopyrightwarning-heading": "Licence Attribution",
+	"wikibase-editentity-warning-serializeresult": "Could not serialise entity data for result."
 }
