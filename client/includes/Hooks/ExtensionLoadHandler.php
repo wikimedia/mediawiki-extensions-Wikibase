@@ -3,7 +3,6 @@
 namespace Wikibase\Client\Hooks;
 
 use ApiMain;
-use ExtensionRegistry;
 use MediaWiki\HookContainer\HookContainer;
 use MediaWiki\MediaWikiServices;
 use Parser;
@@ -24,27 +23,20 @@ use Wikibase\DataModel\Deserializers\DeserializerFactory;
  */
 class ExtensionLoadHandler {
 
-	/** @var ExtensionRegistry */
-	private $extensionRegistry;
-
 	/** @var HookContainer */
 	private $hookContainer;
 
 	/**
-	 * @param ExtensionRegistry $extensionRegistry
 	 * @param HookContainer $hookContainer
 	 */
 	public function __construct(
-		ExtensionRegistry $extensionRegistry,
 		HookContainer $hookContainer
 	) {
-		$this->extensionRegistry = $extensionRegistry;
 		$this->hookContainer = $hookContainer;
 	}
 
 	public static function factory(): self {
 		return new self(
-			ExtensionRegistry::getInstance(),
 			MediaWikiServices::getInstance()->getHookContainer()
 		);
 	}

@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Tests\Unit\Hooks;
 
-use ExtensionRegistry;
 use MediaWiki\HookContainer\HookContainer;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -37,12 +36,10 @@ class ExtensionLoadHandlerTest extends TestCase {
 	}
 
 	public function testGetHooks() {
-		$extensionRegistry = $this->createMock( ExtensionRegistry::class );
-
 		$actualHooks = [];
 		$container = $this->getFauxHookContainer( $actualHooks );
 
-		$handler = new ExtensionLoadHandler( $extensionRegistry, $container );
+		$handler = new ExtensionLoadHandler( $container );
 		$handler->registerHooks();
 
 		$expectedHooks = [
@@ -54,7 +51,7 @@ class ExtensionLoadHandlerTest extends TestCase {
 	}
 
 	public function testGetApiFormatReferenceSpec_settingTrue() {
-		$handler = new ExtensionLoadHandler( $this->createMock( ExtensionRegistry::class ), $this->createMock( HookContainer::class ) );
+		$handler = new ExtensionLoadHandler( $this->createMock( HookContainer::class ) );
 
 		$spec = $handler->getApiFormatReferenceSpec( [ 'dataBridgeEnabled' => true ] );
 
@@ -64,7 +61,7 @@ class ExtensionLoadHandlerTest extends TestCase {
 
 	/** @dataProvider provideNotTrueDataBridgeEnabledSettings */
 	public function testGetApiFormatReferenceSpec_settingNotTrue( array $settings ) {
-		$handler = new ExtensionLoadHandler( $this->createMock( ExtensionRegistry::class ), $this->createMock( HookContainer::class ) );
+		$handler = new ExtensionLoadHandler( $this->createMock( HookContainer::class ) );
 
 		$spec = $handler->getApiFormatReferenceSpec( $settings );
 
