@@ -177,36 +177,51 @@ class SetItemLabelValidatorTest extends TestCase {
 			'Label must not be empty',
 		];
 
-		$context = [
-			ItemLabelValidator::CONTEXT_VALUE => 'This label is too long.',
-			ItemLabelValidator::CONTEXT_LIMIT => 250,
-		];
+		$label = 'This label is too long.';
+		$limit = 250;
 		yield 'label too long' => [
-			new ValidationError( ItemLabelValidator::CODE_TOO_LONG, $context ),
+			new ValidationError( ItemLabelValidator::CODE_TOO_LONG, [
+				ItemLabelValidator::CONTEXT_VALUE => $label,
+				ItemLabelValidator::CONTEXT_LIMIT => $limit,
+			] ),
 			UseCaseError::LABEL_TOO_LONG,
-			'Label must be no more than 250 characters long',
-			$context,
+			"Label must be no more than $limit characters long",
+			[
+				SetItemLabelValidator::CONTEXT_VALUE => $label,
+				SetItemLabelValidator::CONTEXT_LIMIT => $limit,
+			],
 		];
 
-		$context = [ ItemLabelValidator::CONTEXT_LANGUAGE => 'en' ];
+		$language = 'en';
 		yield 'label equals description' => [
-			new ValidationError( ItemLabelValidator::CODE_LABEL_DESCRIPTION_EQUAL, $context ),
+			new ValidationError(
+				ItemLabelValidator::CODE_LABEL_DESCRIPTION_EQUAL,
+				[ ItemLabelValidator::CONTEXT_LANGUAGE => $language ]
+			),
 			UseCaseError::LABEL_DESCRIPTION_SAME_VALUE,
-			"Label and description for language code 'en' can not have the same value.",
-			$context,
+			"Label and description for language code '$language' can not have the same value.",
+			[ SetItemLabelValidator::CONTEXT_LANGUAGE => $language ],
 		];
 
-		$context = [
-			ItemLabelValidator::CONTEXT_LANGUAGE => 'en',
-			ItemLabelValidator::CONTEXT_LABEL => 'My Label',
-			ItemLabelValidator::CONTEXT_DESCRIPTION => 'My Description',
-			ItemLabelValidator::CONTEXT_MATCHING_ITEM_ID => 'Q456',
-		];
+		$language = 'en';
+		$label = 'My Label';
+		$description = 'My Description';
+		$itemId = 'Q456';
 		yield 'label/description not unique' => [
-			new ValidationError( ItemLabelValidator::CODE_LABEL_DESCRIPTION_DUPLICATE, $context ),
+			new ValidationError( ItemLabelValidator::CODE_LABEL_DESCRIPTION_DUPLICATE, [
+				ItemLabelValidator::CONTEXT_LANGUAGE => $language,
+				ItemLabelValidator::CONTEXT_LABEL => $label,
+				ItemLabelValidator::CONTEXT_DESCRIPTION => $description,
+				ItemLabelValidator::CONTEXT_MATCHING_ITEM_ID => $itemId,
+			] ),
 			UseCaseError::ITEM_LABEL_DESCRIPTION_DUPLICATE,
-			"Item Q456 already has label 'My Label' associated with language code 'en', using the same description text.",
-			$context,
+			"Item $itemId already has label '$label' associated with language code '$language', using the same description text.",
+			[
+				SetItemLabelValidator::CONTEXT_LANGUAGE => $language,
+				SetItemLabelValidator::CONTEXT_LABEL => $label,
+				SetItemLabelValidator::CONTEXT_DESCRIPTION => $description,
+				SetItemLabelValidator::CONTEXT_MATCHING_ITEM_ID => $itemId,
+			],
 		];
 	}
 
