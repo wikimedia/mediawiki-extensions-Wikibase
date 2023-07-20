@@ -82,21 +82,16 @@ class GetPropertyStatementRouteHandler extends SimpleHandler {
 			);
 		} catch ( UseCaseError $e ) {
 			if ( $e->getErrorCode() === UseCaseError::STATEMENT_SUBJECT_NOT_FOUND ) {
-				return $this->responseFactory->newErrorResponseFromException(
-					new UseCaseError(
-						UseCaseError::PROPERTY_NOT_FOUND,
-						"Could not find a property with the ID: {$e->getErrorContext()['subject-id']}"
-					)
+				return $this->responseFactory->newErrorResponse(
+					UseCaseError::PROPERTY_NOT_FOUND,
+					"Could not find a property with the ID: {$e->getErrorContext()['subject-id']}"
 				);
 			}
-
 			if ( $e->getErrorCode() === UseCaseError::INVALID_STATEMENT_SUBJECT_ID ) {
-				return $this->responseFactory->newErrorResponseFromException(
-					new UseCaseError(
-						UseCaseError::INVALID_PROPERTY_ID,
-						"Not a valid property ID: {$e->getErrorContext()['subject-id']}",
-						[ 'property-id' => $e->getErrorContext()['subject-id'] ]
-					)
+				return $this->responseFactory->newErrorResponse(
+					UseCaseError::INVALID_PROPERTY_ID,
+					"Not a valid property ID: {$e->getErrorContext()['subject-id']}",
+					[ 'property-id' => $e->getErrorContext()['subject-id'] ]
 				);
 			}
 			return $this->responseFactory->newErrorResponseFromException( $e );
