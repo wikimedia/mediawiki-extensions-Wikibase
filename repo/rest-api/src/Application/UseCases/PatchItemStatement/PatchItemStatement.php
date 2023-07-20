@@ -96,10 +96,7 @@ class PatchItemStatement {
 			throw new UseCaseError(
 				UseCaseError::PATCH_TARGET_NOT_FOUND,
 				"Target '{$e->getOperation()[$e->getField()]}' not found on the resource",
-				[
-					'operation' => $e->getOperation(),
-					'field' => $e->getField(),
-				]
+				[ 'operation' => $e->getOperation(), 'field' => $e->getField() ]
 			);
 		} catch ( PatchTestConditionFailedException $e ) {
 			$operation = $e->getOperation();

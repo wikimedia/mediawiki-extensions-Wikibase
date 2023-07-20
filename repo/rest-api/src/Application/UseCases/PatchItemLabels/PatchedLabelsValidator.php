@@ -44,7 +44,6 @@ class PatchedLabelsValidator {
 	 */
 	public function validateAndDeserialize( ItemId $itemId, TermList $originalLabels, array $labelsSerialization ): TermList {
 		$patchedLabels = $this->deserializeLabels( $labelsSerialization );
-
 		foreach ( $this->getModifiedLabels( $originalLabels, $patchedLabels ) as $label ) {
 			$this->validateLabel( $itemId, $label );
 			$this->validateLanguageCode( $label );
@@ -81,7 +80,6 @@ class PatchedLabelsValidator {
 
 	private function getModifiedLabels( TermList $original, TermList $modified ): array {
 		$modifiedLabels = [];
-
 		foreach ( $modified as $label ) {
 			if ( !$original->hasTermForLanguage( $label->getLanguageCode() ) ) {
 				$modifiedLabels[] = $label;

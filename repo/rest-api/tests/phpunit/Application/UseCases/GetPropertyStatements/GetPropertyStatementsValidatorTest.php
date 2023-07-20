@@ -20,8 +20,7 @@ class GetPropertyStatementsValidatorTest extends TestCase {
 
 	public function testWithInvalidId(): void {
 		try {
-			$this->newStatementsValidator()->assertValidRequest( new GetPropertyStatementsRequest( 'X123' ) );
-
+			$this->newValidator()->assertValidRequest( new GetPropertyStatementsRequest( 'X123' ) );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::INVALID_PROPERTY_ID, $e->getErrorCode() );
@@ -32,10 +31,7 @@ class GetPropertyStatementsValidatorTest extends TestCase {
 
 	public function testWithInvalidFilterPropertyId(): void {
 		try {
-			$this->newStatementsValidator()->assertValidRequest(
-				new GetPropertyStatementsRequest( 'P123', 'X123' )
-			);
-
+			$this->newValidator()->assertValidRequest( new GetPropertyStatementsRequest( 'P123', 'X123' ) );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::INVALID_PROPERTY_ID, $e->getErrorCode() );
@@ -49,7 +45,7 @@ class GetPropertyStatementsValidatorTest extends TestCase {
 	 * @doesNotPerformAssertions
 	 */
 	public function testWithValidRequest( GetPropertyStatementsRequest $request ): void {
-		$this->newStatementsValidator()->assertValidRequest( $request );
+		$this->newValidator()->assertValidRequest( $request );
 	}
 
 	public static function validRequestProvider(): Generator {
@@ -57,7 +53,7 @@ class GetPropertyStatementsValidatorTest extends TestCase {
 		yield [ new GetPropertyStatementsRequest( 'P321', 'P123' ) ];
 	}
 
-	private function newStatementsValidator(): GetPropertyStatementsValidator {
+	private function newValidator(): GetPropertyStatementsValidator {
 		return ( new GetPropertyStatementsValidator( new PropertyIdValidator() ) );
 	}
 

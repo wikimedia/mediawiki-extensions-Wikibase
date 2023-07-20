@@ -21,13 +21,11 @@ class GetItemAliasesValidatorTest extends TestCase {
 		$invalidId = 'X123';
 
 		try {
-			$this->newAliasesValidator()
-				->assertValidRequest( new GetItemAliasesRequest( $invalidId ) );
-
+			$this->newAliasesValidator()->assertValidRequest( new GetItemAliasesRequest( $invalidId ) );
 			$this->fail( 'Exception was not thrown.' );
 		} catch ( UseCaseError $useCaseEx ) {
 			$this->assertSame( UseCaseError::INVALID_ITEM_ID, $useCaseEx->getErrorCode() );
-			$this->assertSame( 'Not a valid item ID: ' . $invalidId, $useCaseEx->getErrorMessage() );
+			$this->assertSame( "Not a valid item ID: $invalidId", $useCaseEx->getErrorMessage() );
 		}
 	}
 
@@ -35,8 +33,7 @@ class GetItemAliasesValidatorTest extends TestCase {
 	 * @doesNotPerformAssertions
 	 */
 	public function testWithValidId(): void {
-		$this->newAliasesValidator()
-			->assertValidRequest( new GetItemAliasesRequest( 'Q321' ) );
+		$this->newAliasesValidator()->assertValidRequest( new GetItemAliasesRequest( 'Q321' ) );
 	}
 
 	private function newAliasesValidator(): GetItemAliasesValidator {

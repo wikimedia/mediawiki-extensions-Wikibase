@@ -35,11 +35,10 @@ class GetItemAliasesInLanguageValidator {
 	 */
 	private function validateItemId( string $itemId ): void {
 		$validationError = $this->itemIdValidator->validate( $itemId );
-
 		if ( $validationError ) {
 			throw new UseCaseError(
 				UseCaseError::INVALID_ITEM_ID,
-				'Not a valid item ID: ' . $validationError->getContext()[ItemIdValidator::CONTEXT_VALUE]
+				"Not a valid item ID: {$validationError->getContext()[ItemIdValidator::CONTEXT_VALUE]}"
 			);
 		}
 	}
@@ -49,11 +48,10 @@ class GetItemAliasesInLanguageValidator {
 	 */
 	private function validateLanguageCode( string $languageCode ): void {
 		$validationError = $this->languageCodeValidator->validate( $languageCode );
-
 		if ( $validationError ) {
 			throw new UseCaseError(
 				UseCaseError::INVALID_LANGUAGE_CODE,
-				'Not a valid language code: ' . $validationError->getContext()[LanguageCodeValidator::CONTEXT_LANGUAGE_CODE_VALUE]
+				"Not a valid language code: {$validationError->getContext()[LanguageCodeValidator::CONTEXT_LANGUAGE_CODE_VALUE]}"
 			);
 		}
 	}

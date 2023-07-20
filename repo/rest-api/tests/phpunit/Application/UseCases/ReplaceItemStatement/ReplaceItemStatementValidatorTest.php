@@ -257,4 +257,5 @@ class ReplaceItemStatementValidatorTest extends TestCase {
 			$requestData['$itemId'] ?? null
 		);
 	}
+
 }

@@ -23,12 +23,11 @@ class GetStatementValidator {
 	 * @throws UseCaseError
 	 */
 	public function assertValidRequest( GetStatementRequest $statementRequest ): void {
-		$subjectId = $statementRequest->getSubjectId();
-		$validationError = $this->requestedSubjectIdValidator->validate( $subjectId );
+		$validationError = $this->requestedSubjectIdValidator->validate( $statementRequest->getSubjectId() );
 		if ( $validationError ) {
 			throw new UseCaseError(
 				UseCaseError::INVALID_STATEMENT_SUBJECT_ID,
-				'Not a valid subject ID: ' . $validationError->getContext()[RequestedSubjectIdValidator::CONTEXT_VALUE]
+				"Not a valid subject ID: {$validationError->getContext()[RequestedSubjectIdValidator::CONTEXT_VALUE]}"
 			);
 		}
 
@@ -36,7 +35,7 @@ class GetStatementValidator {
 		if ( $validationError ) {
 			throw new UseCaseError(
 				UseCaseError::INVALID_STATEMENT_ID,
-				'Not a valid statement ID: ' . $validationError->getContext()[StatementIdValidator::CONTEXT_VALUE]
+				"Not a valid statement ID: {$validationError->getContext()[StatementIdValidator::CONTEXT_VALUE]}"
 			);
 		}
 	}

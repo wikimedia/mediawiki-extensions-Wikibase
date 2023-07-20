@@ -21,11 +21,10 @@ class GetItemLabelsValidator {
 	 */
 	public function assertValidRequest( GetItemLabelsRequest $request ): void {
 		$validationError = $this->itemIdValidator->validate( $request->getItemId() );
-
 		if ( $validationError ) {
 			throw new UseCaseError(
 				UseCaseError::INVALID_ITEM_ID,
-				'Not a valid item ID: ' . $validationError->getContext()[ItemIdValidator::CONTEXT_VALUE]
+				"Not a valid item ID: {$validationError->getContext()[ItemIdValidator::CONTEXT_VALUE]}"
 			);
 		}
 	}

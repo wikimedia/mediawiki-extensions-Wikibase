@@ -38,29 +38,26 @@ class RemoveItemStatementValidator {
 
 	private function assertValidItemId( string $itemId ): void {
 		$validationError = $this->itemIdValidator->validate( $itemId );
-
 		if ( $validationError ) {
 			throw new UseCaseError(
 				UseCaseError::INVALID_ITEM_ID,
-				'Not a valid item ID: ' . $validationError->getContext()[ItemIdValidator::CONTEXT_VALUE]
+				"Not a valid item ID: {$validationError->getContext()[ItemIdValidator::CONTEXT_VALUE]}"
 			);
 		}
 	}
 
 	private function assertValidStatementId( string $statementId ): void {
 		$validationError = $this->statementIdValidator->validate( $statementId );
-
 		if ( $validationError ) {
 			throw new UseCaseError(
 				UseCaseError::INVALID_STATEMENT_ID,
-				'Not a valid statement ID: ' . $validationError->getContext()[StatementIdValidator::CONTEXT_VALUE]
+				"Not a valid statement ID: {$validationError->getContext()[StatementIdValidator::CONTEXT_VALUE]}"
 			);
 		}
 	}
 
 	private function assertValidComment( ?string $comment ): void {
 		$validationError = $this->editMetadataValidator->validateComment( $comment );
-
 		if ( $validationError ) {
 			$commentMaxLength = $validationError->getContext()[ EditMetadataValidator::CONTEXT_COMMENT_MAX_LENGTH ];
 			throw new UseCaseError(
@@ -72,7 +69,6 @@ class RemoveItemStatementValidator {
 
 	private function assertValidEditTags( array $editTags ): void {
 		$validationError = $this->editMetadataValidator->validateEditTags( $editTags );
-
 		if ( $validationError ) {
 			throw new UseCaseError(
 				UseCaseError::INVALID_EDIT_TAG,
@@ -80,4 +76,5 @@ class RemoveItemStatementValidator {
 			);
 		}
 	}
+
 }

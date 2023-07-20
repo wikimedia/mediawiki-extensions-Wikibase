@@ -271,10 +271,7 @@ class PatchItemStatementTest extends TestCase {
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::INVALID_OPERATION_CHANGED_PROPERTY, $e->getErrorCode() );
-			$this->assertSame(
-				'Cannot change the property of the existing statement',
-				$e->getErrorMessage()
-			);
+			$this->assertSame( 'Cannot change the property of the existing statement', $e->getErrorMessage() );
 		}
 	}
 
@@ -307,10 +304,7 @@ class PatchItemStatementTest extends TestCase {
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::INVALID_OPERATION_CHANGED_STATEMENT_ID, $e->getErrorCode() );
-			$this->assertSame(
-				'Cannot change the ID of the existing statement',
-				$e->getErrorMessage()
-			);
+			$this->assertSame( 'Cannot change the ID of the existing statement', $e->getErrorMessage() );
 		}
 	}
 
@@ -323,10 +317,7 @@ class PatchItemStatementTest extends TestCase {
 
 		try {
 			$this->newUseCase()->execute(
-				$this->newUseCaseRequest( [
-					'$statementId' => "$statementId",
-					'$patch' => $patch,
-				] )
+				$this->newUseCaseRequest( [ '$statementId' => "$statementId", '$patch' => $patch ] )
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {

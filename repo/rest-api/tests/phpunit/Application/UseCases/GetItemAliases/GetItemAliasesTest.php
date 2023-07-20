@@ -37,20 +37,8 @@ class GetItemAliasesTest extends TestCase {
 
 	public function testSuccess(): void {
 		$aliases = new Aliases(
-			new AliasesInLanguage(
-				'en',
-				[
-					'Planet Earth',
-					'the Earth',
-				]
-			),
-			new AliasesInLanguage(
-				'ar',
-				[
-					'كوكب الأرض',
-					'العالم',
-				]
-			),
+			new AliasesInLanguage( 'en', [ 'Planet Earth', 'the Earth' ] ),
+			new AliasesInLanguage( 'ar', [ 'كوكب الأرض', 'العالم' ] ),
 		);
 
 		$itemId = new ItemId( 'Q2' );

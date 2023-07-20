@@ -51,10 +51,7 @@ class SetItemDescriptionValidatorTest extends TestCase {
 		array $context = null
 	): void {
 		try {
-			$this->newSetItemDescriptionValidator()->assertValidRequest(
-				$this->newUseCaseRequest( $request )
-			);
-
+			$this->newSetItemDescriptionValidator()->assertValidRequest( $this->newUseCaseRequest( $request ) );
 			$this->fail( 'Exception was not thrown.' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( $errorCode, $e->getErrorCode() );
@@ -103,7 +100,6 @@ class SetItemDescriptionValidatorTest extends TestCase {
 
 		try {
 			$this->newSetItemDescriptionValidator()->assertValidRequest( $this->newUseCaseRequest() );
-
 			$this->fail( 'Exception was not thrown.' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( $errorCode, $e->getErrorCode() );
@@ -188,9 +184,7 @@ class SetItemDescriptionValidatorTest extends TestCase {
 	private function newSetItemDescriptionValidator(): SetItemDescriptionValidator {
 		return new SetItemDescriptionValidator(
 			new ItemIdValidator(),
-			new WikibaseRepoDescriptionLanguageCodeValidator(
-				WikibaseRepo::getTermValidatorFactory()
-			),
+			new WikibaseRepoDescriptionLanguageCodeValidator( WikibaseRepo::getTermValidatorFactory() ),
 			$this->itemDescriptionValidator,
 			new EditMetadataValidator( self::COMMENT_CHARACTER_LIMIT, self::ALLOWED_TAGS )
 		);
