@@ -25,6 +25,11 @@
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetItemStatementRouteHandler::factory"
 	},
 	{
+		"path": "/wikibase/v0/entities/properties/{property_id}/statements/{statement_id}",
+		"method": "GET",
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetPropertyStatementRouteHandler::factory"
+	},
+	{
 		"path": "/wikibase/v0/statements/{statement_id}",
 		"method": "GET",
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetStatementRouteHandler::factory"
