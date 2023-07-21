@@ -1,11 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
+			"Frzzl",
 			"Robin van der Vliet",
 			"שוקו מוקה"
 		]
 	},
 	"wikibase-edit": "o ante",
+	"wikibase-add": "o pana",
 	"wikibase-entitytermsforlanguagelistview-language": "toki",
 	"wikibase-content-language-edit-label": "toki:",
 	"wikibase-sitelinks-special": "lipu ante",
