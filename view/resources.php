@@ -930,26 +930,30 @@ return call_user_func( function() {
 		],
 
 		'wikibase.termbox' => [
-			'scripts' => [
-				'termbox.init.js',
-			],
-			'remoteExtPath' => 'Wikibase/view/resources/wikibase/termbox',
-			'localBasePath' => __DIR__ . '/resources/wikibase/termbox',
-			'dependencies' => [ 'wikibase.termbox.init' ],
-		],
-
-		'wikibase.termbox.init' => $wikibaseTermboxSubmodulePaths + [
-			'class' => TermboxModule::class,
 			'packageFiles' => [
-				'dist/wikibase.termbox.init.js',
+				'termbox.init.js',
+				'RepoApiWritingEntityRepository.js',
 				[
-					'name' => 'dist/config.json',
+					'name' => 'config.json',
 					'callback' => function () {
 						return [
 							'tags' => WikibaseRepo::getSettings()->getSetting( 'termboxTags' ),
 						];
 					},
 				],
+			],
+			'remoteExtPath' => 'Wikibase/view/resources/wikibase/termbox',
+			'localBasePath' => __DIR__ . '/resources/wikibase/termbox',
+			'dependencies' => [
+				'wikibase.termbox.init',
+				'wikibase.api.RepoApi',
+			],
+		],
+
+		'wikibase.termbox.init' => $wikibaseTermboxSubmodulePaths + [
+			'class' => TermboxModule::class,
+			'packageFiles' => [
+				'dist/wikibase.termbox.init.js',
 			],
 			'es6' => true,
 			'dependencies' => [
