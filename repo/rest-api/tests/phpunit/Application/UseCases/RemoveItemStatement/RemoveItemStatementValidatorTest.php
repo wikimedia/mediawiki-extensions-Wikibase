@@ -72,7 +72,21 @@ class RemoveItemStatementValidatorTest extends TestCase {
 
 	public static function provideInvalidRequest(): Generator {
 		$itemId = 'Z2Z';
-		yield 'Invalid item ID' => [
+		yield 'Invalid truthy item ID' => [
+			[
+				'$statementId' => $itemId . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+				'$editTags' => [],
+				'$isBot' => false,
+				'$comment' => null,
+				'$username' => null,
+				'$itemId' => $itemId,
+			],
+			ItemIdValidator::CODE_INVALID,
+			"Not a valid item ID: $itemId",
+		];
+
+		$itemId = '0';
+		yield 'Invalid falsy item ID' => [
 			[
 				'$statementId' => $itemId . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
 				'$editTags' => [],

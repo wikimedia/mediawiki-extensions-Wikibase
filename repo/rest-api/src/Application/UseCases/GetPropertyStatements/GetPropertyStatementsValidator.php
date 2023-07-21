@@ -22,7 +22,7 @@ class GetPropertyStatementsValidator {
 	public function assertValidRequest( GetPropertyStatementsRequest $request ): void {
 		$this->assertValidPropertyId( $request->getPropertyId() );
 
-		if ( $request->getFilterPropertyId() ) {
+		if ( $request->getFilterPropertyId() !== null ) {
 			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
 			$this->assertValidPropertyId( $request->getFilterPropertyId() );
 		}

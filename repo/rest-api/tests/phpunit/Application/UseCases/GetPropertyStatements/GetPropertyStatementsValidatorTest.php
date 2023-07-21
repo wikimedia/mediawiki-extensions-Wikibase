@@ -29,15 +29,23 @@ class GetPropertyStatementsValidatorTest extends TestCase {
 		}
 	}
 
-	public function testWithInvalidFilterPropertyId(): void {
+	/**
+	 * @dataProvider provideInvalidPropertyId
+	 */
+	public function testWithInvalidFilterPropertyId( string $invalidPropertyId ): void {
 		try {
-			$this->newValidator()->assertValidRequest( new GetPropertyStatementsRequest( 'P123', 'X123' ) );
+			$this->newValidator()->assertValidRequest( new GetPropertyStatementsRequest( 'P123', $invalidPropertyId ) );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::INVALID_PROPERTY_ID, $e->getErrorCode() );
-			$this->assertSame( 'Not a valid property ID: X123', $e->getErrorMessage() );
-			$this->assertSame( [ UseCaseError::CONTEXT_PROPERTY_ID => 'X123' ], $e->getErrorContext() );
+			$this->assertSame( "Not a valid property ID: $invalidPropertyId", $e->getErrorMessage() );
+			$this->assertSame( [ UseCaseError::CONTEXT_PROPERTY_ID => $invalidPropertyId ], $e->getErrorContext() );
 		}
+	}
+
+	public function provideInvalidPropertyId(): Generator {
+		yield 'invalid truthy id' => [ 'X123' ];
+		yield 'invalid falsy id' => [ '0' ];
 	}
 
 	/**
