@@ -8,7 +8,9 @@
 	"--warnings": [ "-all" ],
 	"--exclude": [
 		"view/lib/wikibase-termbox",
-		"view/lib/wikibase-tainted-ref"
+		"view/lib/wikibase-tainted-ref",
+		"view/resources/wikibase/termbox",
+		"view/tests/qunit/wikibase/termbox/"
 	],
 	"--": [
 		"view/"
