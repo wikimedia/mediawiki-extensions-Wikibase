@@ -10,7 +10,6 @@ use ApiResult;
 use ApiUsageException;
 use Exception;
 use InvalidArgumentException;
-use Language;
 use LogicException;
 use Message;
 use MessageSpecifier;
@@ -37,23 +36,15 @@ class ApiErrorReporter {
 	private $localizer;
 
 	/**
-	 * @var Language
-	 */
-	private $language;
-
-	/**
 	 * @param ApiBase $apiModule the API module for collaboration
 	 * @param ExceptionLocalizer $localizer
-	 * @param Language $language
 	 */
 	public function __construct(
 		ApiBase $apiModule,
-		ExceptionLocalizer $localizer,
-		Language $language
+		ExceptionLocalizer $localizer
 	) {
 		$this->apiModule = $apiModule;
 		$this->localizer = $localizer;
-		$this->language = $language;
 	}
 
 	/**
@@ -435,7 +426,7 @@ class ApiErrorReporter {
 		ApiResult::setValue( $row, 'parameters', $params );
 		ApiResult::setIndexedTagName( $row['parameters'], 'parameter' );
 
-		$html = $message->inLanguage( $this->language )->useDatabase( true )->parse();
+		$html = $message->setContext( $this->apiModule->getContext() )->useDatabase( true )->parse();
 		ApiResult::setValue( $row, 'html', $html );
 		$row[ApiResult::META_BC_SUBELEMENTS][] = 'html';
 
