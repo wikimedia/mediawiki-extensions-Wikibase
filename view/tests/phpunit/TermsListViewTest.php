@@ -5,7 +5,9 @@ namespace Wikibase\View\Tests;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
+use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\View\DummyLocalizedTextProvider;
 use Wikibase\View\LanguageDirectionalityLookup;
 use Wikibase\View\LocalizedTextProvider;
@@ -31,7 +33,9 @@ class TermsListViewTest extends \PHPUnit\Framework\TestCase {
 
 	private function getTermsListView(
 		$languageNameCalls = 0,
-		LocalizedTextProvider $textProvider = null
+		LocalizedTextProvider $textProvider = null,
+		LanguageFallbackChainFactory $languageFallbackChainFactory = null,
+		$mulEnabled = false
 	) {
 		$languageNameLookup = $this->createMock( LanguageNameLookup::class );
 		$languageNameLookup->expects( $this->exactly( $languageNameCalls ) )
@@ -54,7 +58,9 @@ class TermsListViewTest extends \PHPUnit\Framework\TestCase {
 			TemplateFactory::getDefaultInstance(),
 			$languageNameLookup,
 			$textProvider ?: new DummyLocalizedTextProvider(),
-			$languageDirectionalityLookup
+			$languageDirectionalityLookup,
+			$languageFallbackChainFactory ?? $this->createStub( LanguageFallbackChainFactory::class ),
+			$mulEnabled
 		);
 	}
 
@@ -182,6 +188,55 @@ class TermsListViewTest extends \PHPUnit\Framework\TestCase {
 		);
 		$this->assertStringContainsString( '(wikibase-description-not-applicable)', $html );
 		$this->assertStringContainsString( '(wikibase-description-not-applicable-title)', $html );
+	}
+
+	public static function labelPlaceholderFallbackScenarioProvider(): iterable {
+		$englishLabel = 'English Label';
+		yield 'no mul' => [
+			false,
+			[ 'en-ca', 'en' ],
+			'en-ca',
+			$englishLabel,
+			'(wikibase-label-empty)',
+		];
+		yield 'shows en for en-ca label' => [
+			true,
+			[ 'en-ca', 'en', 'mul' ],
+			'en-ca',
+			$englishLabel,
+			$englishLabel,
+		];
+		yield 'doesn\'t show en for de label' => [
+			true,
+			[ 'de', 'mul', 'en' ],
+			'de',
+			$englishLabel,
+			'(wikibase-label-empty)',
+		];
+	}
+
+	/**
+	 * @dataProvider labelPlaceholderFallbackScenarioProvider
+	 */
+	public function testGetTermsListViewLabelPlaceholderFallback_(
+		bool $mulEnabled,
+		array $fetchLanguageCodes,
+		string $requestedLanguageCode,
+		string $englishLabel,
+		string $expectedText
+	): void {
+		$languageFallbackChain = $this->createConfiguredMock( TermLanguageFallbackChain::class, [
+			'getFetchLanguageCodes' => $fetchLanguageCodes,
+			'extractPreferredValue' => [ 'language' => 'en', 'value' => $englishLabel ],
+		] );
+		$languageFallbackChainFactory = $this->createConfiguredMock( LanguageFallbackChainFactory::class, [
+			'newFromLanguageCode' => $languageFallbackChain,
+		] );
+		$view = $this->getTermsListView( 1, null, $languageFallbackChainFactory, $mulEnabled );
+
+		$labels = new TermList( [ new Term( 'en', $englishLabel ) ] );
+		$html = $view->getListItemHtml( $labels, new TermList(), null, $requestedLanguageCode );
+		$this->assertStringContainsString( $expectedText, $html );
 	}
 
 }

@@ -6,6 +6,7 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\User\UserIdentity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Repo\ParserOutput\PlaceholderExpander\EntityViewPlaceholderExpander;
 use Wikibase\View\DummyLocalizedTextProvider;
@@ -52,7 +53,9 @@ class EntityViewPlaceholderExpanderTest extends \PHPUnit\Framework\TestCase {
 			$languageNameLookup,
 			new DummyLocalizedTextProvider(),
 			MediaWikiServices::getInstance()->getUserOptionsLookup(),
-			$cookiePrefix
+			$cookiePrefix,
+			$this->createMock( LanguageFallbackChainFactory::class ),
+			false
 		);
 	}
 

@@ -77,7 +77,10 @@ class EntityTermsViewFactory {
 				$templateFactory,
 				$languageNameLookup,
 				$textProvider,
-				$languageDirectionalityLookup
+				$languageDirectionalityLookup,
+				WikibaseRepo::getLanguageFallbackChainFactory( $services ),
+				WikibaseRepo::getSettings( $services )->getSetting( 'tmpEnableMulLanguageCode' )
+
 			),
 			new TextInjector()
 		);

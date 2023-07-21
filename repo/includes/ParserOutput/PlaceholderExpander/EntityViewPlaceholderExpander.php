@@ -10,6 +10,7 @@ use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\DataModel\Term\TermList;
+use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\View\LanguageDirectionalityLookup;
 use Wikibase\View\LocalizedTextProvider;
@@ -79,6 +80,8 @@ class EntityViewPlaceholderExpander implements PlaceholderExpander {
 	 * @var string[]
 	 */
 	private $termsListItems;
+	private LanguageFallbackChainFactory $languageFallbackChainFactory;
+	private bool $mulEnabled;
 
 	/**
 	 * @param TemplateFactory $templateFactory
@@ -102,6 +105,8 @@ class EntityViewPlaceholderExpander implements PlaceholderExpander {
 		LocalizedTextProvider $textProvider,
 		UserOptionsLookup $userOptionsLookup,
 		$cookiePrefix,
+		LanguageFallbackChainFactory $languageFallbackChainFactory,
+		bool $mulEnabled,
 		array $termsListItems = []
 	) {
 		$this->user = $user;
@@ -114,6 +119,8 @@ class EntityViewPlaceholderExpander implements PlaceholderExpander {
 		$this->userOptionsLookup = $userOptionsLookup;
 		$this->cookiePrefix = $cookiePrefix;
 		$this->termsListItems = $termsListItems;
+		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
+		$this->mulEnabled = $mulEnabled;
 	}
 
 	/**
@@ -180,7 +187,9 @@ class EntityViewPlaceholderExpander implements PlaceholderExpander {
 			$this->templateFactory,
 			$this->languageNameLookup,
 			$this->textProvider,
-			$this->languageDirectionalityLookup
+			$this->languageDirectionalityLookup,
+			$this->languageFallbackChainFactory,
+			$this->mulEnabled
 		);
 
 		$contentHtml = '';

@@ -310,6 +310,8 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 			new MediaWikiLocalizedTextProvider( $language ),
 			$this->userOptionsLookup,
 			$this->cookiePrefix,
+			$this->languageFallbackChainFactory,
+			$this->repoSettings->getSetting( 'tmpEnableMulLanguageCode' ),
 			$entityTermsListHtml
 		);
 	}
