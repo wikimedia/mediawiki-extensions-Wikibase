@@ -51,6 +51,14 @@ class RequestPreconditionCheck {
 			return RequestPreconditionCheckResult::newConditionUnmetResult();
 		}
 
+		/**
+		 * Calling an EntityRevisionLookup directly from the middleware violates the "flow of control"
+		 * rule as it bypasses the input port and domain layer (see the 4th bullet point in ADR 1).
+		 * We have made the conscious decision to allow an exception for the following reasons:
+		 *  - The middleware is quite isolated and can easily be reimplement
+		 *  - Doing this "properly" would result in more complex code and tests without much added
+		 *    value except for "following the rules"
+		 */
 		return $this->revisionLookup->getLatestRevisionId( $entityId )
 			->onConcreteRevision(
 				fn ( $revisionId, $timestamp ) =>
