@@ -57,6 +57,7 @@ class EntityTermsViewFactory {
 			$entityLookup->addEntity( $entity );
 		}
 
+		$mulEnabled = WikibaseRepo::getSettings( $services )->getSetting( 'tmpEnableMulLanguageCode' );
 		return new PlaceholderEmittingEntityTermsView(
 			new FallbackHintHtmlTermRenderer(
 				$languageDirectionalityLookup,
@@ -79,10 +80,11 @@ class EntityTermsViewFactory {
 				$textProvider,
 				$languageDirectionalityLookup,
 				WikibaseRepo::getLanguageFallbackChainFactory( $services ),
-				WikibaseRepo::getSettings( $services )->getSetting( 'tmpEnableMulLanguageCode' )
+				$mulEnabled
 
 			),
-			new TextInjector()
+			new TextInjector(),
+			$mulEnabled
 		);
 	}
 

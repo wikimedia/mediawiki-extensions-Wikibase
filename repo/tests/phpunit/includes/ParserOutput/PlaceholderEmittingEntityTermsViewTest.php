@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\ParserOutput;
 
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\ParserOutput\PlaceholderEmittingEntityTermsView;
@@ -22,7 +23,7 @@ use Wikibase\View\TermsListView;
  */
 class PlaceholderEmittingEntityTermsViewTest extends \PHPUnit\Framework\TestCase {
 
-	private function newEntityTermsView( TextInjector $textInjector ) {
+	private function newEntityTermsView( TextInjector $textInjector, $mulEnabled = false ) {
 		$termsListView = $this->createConfiguredMock( TermsListView::class, [
 			'getListItemHtml' => 'mocked HTML',
 		] );
@@ -34,7 +35,8 @@ class PlaceholderEmittingEntityTermsViewTest extends \PHPUnit\Framework\TestCase
 			$this->createMock( EditSectionGenerator::class ),
 			$this->createMock( LocalizedTextProvider::class ),
 			$termsListView,
-			$textInjector
+			$textInjector,
+			$mulEnabled
 		);
 	}
 
@@ -67,6 +69,39 @@ class PlaceholderEmittingEntityTermsViewTest extends \PHPUnit\Framework\TestCase
 		$termsListItems = $entityTermsView->getTermsListItems( 'lkt', new TermList(), new TermList() );
 
 		$this->assertSame( [ 'lkt' => 'mocked HTML' ], $termsListItems );
+	}
+
+	public function testGetPlaceholders_withMulEnabled() {
+		$textInjector = new TextInjector();
+
+		$entityTermsView = $this->newEntityTermsView( $textInjector, true );
+
+		$testItem = new Item();
+		$testItem->getLabels()->setTextForLanguage( 'en', 'english label' );
+		$placeholders = $entityTermsView->getPlaceholders( $testItem, 0, 'en' );
+
+		$this->assertSame( [
+			'wikibase-view-chunks' => [],
+			'wikibase-terms-list-items' => [ 'en' => 'mocked HTML' ],
+			'wikibase-entity-labels' => [
+				'en' => 'english label',
+			],
+		], $placeholders );
+	}
+
+	public function testGetPlaceholders_withMulDisabled() {
+		$textInjector = new TextInjector();
+
+		$entityTermsView = $this->newEntityTermsView( $textInjector, false );
+
+		$testItem = new Item();
+		$testItem->getLabels()->setTextForLanguage( 'en', 'english label' );
+		$placeholders = $entityTermsView->getPlaceholders( $testItem, 0, 'en' );
+
+		$this->assertSame( [
+			'wikibase-view-chunks' => [],
+			'wikibase-terms-list-items' => [ 'en' => 'mocked HTML' ],
+		], $placeholders );
 	}
 
 }
