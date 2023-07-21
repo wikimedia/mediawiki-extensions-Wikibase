@@ -7,7 +7,6 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Statement\StatementList as DataModelStatementList;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
@@ -23,9 +22,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyParts;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyPartsBuilder;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
-use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupPropertyDataRetriever;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupPropertyDataRetriever
@@ -35,6 +32,8 @@ use Wikibase\Repo\WikibaseRepo;
  * @license GPL-2.0-or-later
  */
 class EntityRevisionLookupPropertyDataRetrieverTest extends TestCase {
+
+	use StatementReadModelHelper;
 
 	private EntityRevisionLookup $entityRevisionLookup;
 
@@ -233,10 +232,6 @@ class EntityRevisionLookupPropertyDataRetrieverTest extends TestCase {
 			->willReturn( $returnValue ? new EntityRevision( $returnValue ) : null );
 
 		return $entityRevisionLookup;
-	}
-
-	private function newStatementReadModelConverter(): StatementReadModelConverter {
-		return new StatementReadModelConverter( WikibaseRepo::getStatementGuidParser(), new InMemoryDataTypeLookup() );
 	}
 
 }
