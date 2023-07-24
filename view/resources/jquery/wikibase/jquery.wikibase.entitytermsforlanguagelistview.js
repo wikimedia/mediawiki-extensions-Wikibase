@@ -229,7 +229,9 @@
 				this._createEntitytermsforlanguagelistviewMore();
 			}
 
-			this._addPulsatingDotToMul();
+			if ( !mw.user.options.get( 'wb-dont-show-again-mul-popup' ) ) {
+				this._addPulsatingDotToMul();
+			}
 		},
 
 		/**
@@ -408,7 +410,23 @@
 			if ( !this._popup ) {
 				var $target = $( this.element ).find( '.mw-pulsating-dot-container' );
 
-				var $tooltipContent = $( '<div>' ).append( mw.message( 'wikibase-entityterms-languagelistview-mul-popup-content' ).parseDom() );
+				var dontShowMulPopupCheckbox = new OO.ui.CheckboxInputWidget( {
+					value: true,
+					selected: false
+				} ).on( 'change', function ( value ) {
+					new mw.Api().saveOption( 'wb-dont-show-again-mul-popup', value ? '1' : null );
+					mw.user.options.set( 'wb-dont-show-again-mul-popup', value ? '1' : null );
+				} );
+
+				var showAgainLayout = new OO.ui.FieldLayout( dontShowMulPopupCheckbox, {
+					align: 'inline',
+					label: mw.msg( 'wikibase-entityterms-languagelistview-mul-popup-dont-show-again' )
+				} );
+
+				var $tooltipContent = $( '<div>' ).append(
+					mw.message( 'wikibase-entityterms-languagelistview-mul-popup-content' ).parseDom(),
+					showAgainLayout.$element
+				);
 
 				this._popup = new OO.ui.PopupWidget( {
 					padded: true,

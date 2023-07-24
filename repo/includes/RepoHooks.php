@@ -427,6 +427,10 @@ final class RepoHooks {
 			'section' => 'rendering/advancedrendering',
 			'default' => '1',
 		];
+
+		$preferences['wb-dont-show-again-mul-popup'] = [
+			'type' => 'api',
+		];
 	}
 
 	/**
