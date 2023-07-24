@@ -8,8 +8,8 @@
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}} элементи",
-	"wikibase-editlinks": "Шилтемелерди оңдоо",
-	"wikibase-editlinkstitle": "Тилдер аралык шилтемелерди түзөтүү",
+	"wikibase-editlinks": "Шилтемелерди түзөтүү",
+	"wikibase-editlinkstitle": "Башка тилдерге шилтемени түзөтүү",
 	"wikibase-linkitem-addlinks": "Шилтемелерди кошуу",
 	"wikibase-linkitem-title": "Баракка шилтеме",
 	"wikibase-linkitem-linkpage": "Баракка шилтеме",
