@@ -747,7 +747,9 @@
 			"view/resources/jquery/wikibase/toolbar/jquery.wikibase.addtoolbar.js",
 			"view/resources/jquery/wikibase/toolbar/jquery.wikibase.edittoolbar.js",
 			"view/resources/jquery/wikibase/toolbar/jquery.wikibase.removetoolbar.js",
-			"view/resources/wikibase/view/ToolbarFactory.js"
+			"view/resources/wikibase/view/ToolbarFactory.js",
+			"view/resources/wikibase/termbox/RepoApiWritingEntityRepository.js",
+			"view/tests/qunit/wikibase/termbox/RepoApiWritingEntityRepository.tests.js"
 		],
 		"dependencies": [
 			"wikibase.EntityInitializer",
