@@ -197,7 +197,7 @@
 	"wikibase-validator-label-with-description-conflict": "Das Datenobjekt $3 hat bereits die Bezeichnung „$1“, die dem Sprachcode $2 zugeordnet ist, verwendet den gleichen Beschreibungstext.",
 	"wikibase-validator-label-equals-description": "Die Bezeichnung und die Beschreibung für den Sprachcode $1 können nicht den gleichen Wert haben.",
 	"wikibase-validator-label-no-entityid": "Die Bezeichnung darf keine gültige Objektkennung sein.",
-	"wikibase-validator-illegal-string-chars": "Die Zeichenfolge sollte nicht mit Leerzeichen beginnen oder enden und auch keine vertikalen Leerzeichen oder Tabulatoren enthalten: $1",
+	"wikibase-validator-illegal-string-chars": "Die Zeichenfolge darf nicht mit Leerzeichen beginnen oder enden und auch keine vertikalen Leerzeichen oder Tabulatoren enthalten: $1",
 	"wikibase-validator-illegal-file-chars": "Dateinamen dürfen bestimmte Zeichen wie Doppelpunkte oder Schrägstriche nicht enthalten.",
 	"wikibase-validator-check-file-type": "Die Dateierweiterung fehlt.",
 	"wikibase-validator-illegal-geo-shape-title": "Der Wert muss mit <code>Data:</code> beginnen und mit <code>.map</code> enden. Zusätzlich sollte der Titel bestimmte Zeichen wie Doppelpunkte, Rauten oder senkrechte Striche nicht enthalten.",

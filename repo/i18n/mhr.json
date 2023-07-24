@@ -9,5 +9,6 @@
 	"wikibase-add": "ешараш",
 	"wikibase-label-empty": "Вуйлӱм уке",
 	"wikibase-description-empty": "Возен ончыктымашым тичмашлыме огыл",
-	"wikibase-sitelinks-special": "Моло сайт-влак"
+	"wikibase-sitelinks-special": "Моло сайт-влак",
+	"wikibase-federated-properties-leaving-site-notice-checkbox-label": "Тиде серышым тетла ончыктыман огыл"
 }
