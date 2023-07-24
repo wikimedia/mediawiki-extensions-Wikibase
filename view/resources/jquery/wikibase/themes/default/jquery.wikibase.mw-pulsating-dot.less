@@ -7,6 +7,10 @@
 	&-container {
 		position: relative;
 		left: 15px; // distance from multiple languages label to pulsating dot
+
+		.wikibase-entitytermsforlanguagelistview:not( .wb-edit ) & {
+			display: none;
+		}
 	}
 
 	&::before {
