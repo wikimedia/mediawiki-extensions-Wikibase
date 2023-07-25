@@ -27,6 +27,7 @@ class SpecialAvailableBadgesTest extends SpecialPageTestBase {
 		parent::setUp();
 
 		$this->setContentLang( 'qqx' );
+		$this->setUserLang( 'qqx' );
 	}
 
 	protected function newSpecialPage() {
