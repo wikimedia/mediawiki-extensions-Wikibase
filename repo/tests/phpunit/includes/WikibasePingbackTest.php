@@ -3,9 +3,10 @@
 declare( strict_types=1 );
 namespace Wikibase\Repo\Tests;
 
-use Config;
 use ExtensionRegistry;
+use HashConfig;
 use MediaWiki\Http\HttpRequestFactory;
+use MediaWiki\MainConfigNames;
 use MediaWikiIntegrationTestCase;
 use MWTimestamp;
 use Psr\Log\LoggerInterface;
@@ -155,18 +156,11 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	private function getPingback(
-		HttpRequestFactory $requestFactory = null,
-		Config $config = null,
-		LoggerInterface $logger = null,
-		ExtensionRegistry $extensions = null,
-		SettingsArray $wikibaseRepoSettings = null
-	): WikibasePingback {
-		$config = $config ?: $this->createMock( Config::class );
-		$logger = $logger ?: $this->createMock( LoggerInterface::class );
-		$extensions = $extensions ?: $this->createMock( ExtensionRegistry::class );
-		$wikibaseRepoSettings = $wikibaseRepoSettings ?: $this->createMock( SettingsArray::class );
-		$requestFactory = $requestFactory ?: $this->createMock( HTTPRequestFactory::class );
+	private function getPingback( HttpRequestFactory $requestFactory = null ): WikibasePingback {
+		$logger = $this->createMock( LoggerInterface::class );
+		$extensions = $this->createMock( ExtensionRegistry::class );
+		$wikibaseRepoSettings = $this->createMock( SettingsArray::class );
+		$requestFactory ??= $this->createMock( HTTPRequestFactory::class );
 		$lbFactory = new FakeLBFactory( [ 'lb' => new FakeLoadBalancer( [ 'dbr' => $this->db ] ) ] );
 
 		$wikibaseRepoSettings
@@ -181,7 +175,7 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 			] );
 
 		return new WikibasePingback(
-			$config,
+			new HashConfig( [ MainConfigNames::DBtype => '' ] ),
 			$logger,
 			$extensions,
 			$wikibaseRepoSettings,
