@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"Winston Sung"
+		]
+	},
+	"tooltip-t-wikibase": "链接到有关数据存储库项",
+	"wikibase-comment-update": "{{WBREPONAME}}项更改",
+	"wikibase-dataitem": "{{WBREPONAME}}项",
+	"wikibase-editlinks": "编辑链接",
+	"wikibase-editlinkstitle": "编辑跨语言链接",
+	"wikibase-linkitem-addlinks": "添加链接",
+	"wikibase-linkitem-title": "链接个页面",
+	"wikibase-rc-hide-wikidata": "$1{{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "囥脱",
+	"wikibase-rc-hide-wikidata-show": "显示",
+	"wikibase-rc-wikibase-edit-letter": "数",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}编辑",
+	"wikibase-pageinfo-entity-usage": "箇页用着个{{WBREPONAME}}实体",
+	"wikibase-otherprojects": "别个项目里向"
+}

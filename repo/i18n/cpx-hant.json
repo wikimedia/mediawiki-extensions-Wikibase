@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Winston Sung"
+		]
+	},
+	"wikibase-edit": "修改",
+	"wikibase-add": "添加",
+	"wikibase-label-empty": "未定義標籤",
+	"wikibase-description-empty": "未定義描述"
+}

@@ -416,7 +416,7 @@
 	"wikibase-conflict-patched": "Do Twojej edycji została zastosowana poprawka do najnowszej wersji.",
 	"wikibase-save-unresolved-redirect": "Napotkano nierozwiązane przekierowanie z $1 na $2 podczas próby zapisania zmiany.",
 	"wikibase-restoreold": "przywróć",
-	"wikibase-entity-summary-restore": "Przywrócono wersję $3 zrobioną przez [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
+	"wikibase-entity-summary-restore": "Przywrócono wersję $3 autorstwa [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-entity-summary-undo": "Anulowanie wersji $3 autorstwa [[Special:Contributions/$4|$4]] ([[User talk:$4|dyskusja]])",
 	"wikibase-non-entity-diff": "Nie można porównać obiektu z zawartością niebędącą obiektem.",
 	"wikibase-no-direct-editing": "Bezpośrednia edycja jest wyłączona w przestrzeni nazw $1",

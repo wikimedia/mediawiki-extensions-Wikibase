@@ -1,0 +1,28 @@
+{
+	"@metadata": {
+		"authors": [
+			"Winston Sung"
+		]
+	},
+	"wikibase-client-desc": "Klijent za proširenje Wikibaza",
+	"tooltip-t-wikibase": "Link na povezane podatke spremišnih stavki",
+	"wikibase-comment-update": "{{WBREPONAME}} promijenjena stavka",
+	"wikibase-dataitem": "Stavka na Wikipodacima",
+	"wikibase-editlinks": "Uredi veze",
+	"wikibase-editlinkstitle": "Uredi međujezične poveznice",
+	"wikibase-linkitem-addlinks": "Dodaj veze",
+	"wikibase-linkitem-title": "Povezivanje sa stranicom",
+	"wikibase-linkitem-linkpage": "Poveži sa stranicom",
+	"wikibase-linkitem-selectlink": "Izaberite projekt i stranicu koju želite povezati s ovom.",
+	"wikibase-linkitem-input-site": "Jezik:",
+	"wikibase-linkitem-input-page": "Stranica:",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Sakrij",
+	"wikibase-rc-hide-wikidata-show": "Prikaži",
+	"wikibase-rc-wikibase-edit-letter": "P",
+	"wikibase-rc-wikibase-edit-title": "Izmjena na Wikipodacima",
+	"wikibase-rcfilters-hide-wikibase-label": "Izmjene na Wikipodacima",
+	"wikibase-rcfilters-hide-wikibase-description": "Izmjene koje potiču s Wikipodataka",
+	"wikibase-otherprojects": "Na drugim projektima",
+	"wikibase-otherprojects-beta-message": "Bočna traka drugih projekata"
+}

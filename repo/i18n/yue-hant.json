@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Winston Sung"
+		]
+	},
+	"wikibase-edit": "改",
+	"wikibase-add": "加",
+	"wikibase-entitytermsforlanguagelistview-less": "少啲語言",
+	"wikibase-label-empty": "未定義標籤",
+	"wikibase-description-empty": "未定義描述",
+	"wikibase-statementsection-statements": "陳述",
+	"wikibase-sitelinks-special": "第啲網站",
+	"wikibase-statementview-rank-normal": "正常等級",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|參考來源}}",
+	"wikibase-validator-bad-url": "不允許包含某啲字符（例如空格同方括號）嘅鏈接"
+}
