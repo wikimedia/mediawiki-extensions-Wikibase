@@ -84,7 +84,7 @@
 	"wikibase-itemdisambiguation-invalid-langcode": "Bóžko rěcny identifikator, kótaryž sy pódał, jo njeznaty systemoju. Pšosym wužyj płaśiwy identifikator ako \"dsb\".",
 	"wikibase-itemdisambiguation-description": "Gódnoty, kótarež wužywaju se za pytanje, muse dopołne tekstowe zapiski byś. Rěc jo identifikator, na pśikład \"dsb\".",
 	"special-newproperty": "Nowu kakosć napóraś",
-	"wikibase-newproperty-summary": "Pśekontrolěruj, [[Special:PropertyDisambiguation|lěc kakosć južo eksistěrujo]]!<br />Ty by měł [[{{int:Wikibase-label-helppage}}|pomjenjenje]] a [[{{int:Wikibase-description-helppage}}|wopisanje]] za wšykne nowe kakosći napóraś, a mimo togo w płaśiwem typje kakosći.",
+	"wikibase-newproperty-summary": "Pśekontrolěruj, Special:PropertyDisambiguation|lěc kakosć južo eksistěrujo!<br />Ty by měł {{int:Wikibase-label-helppage}}|pomjenjenje a {{int:Wikibase-description-helppage}}|wopisanje za wšykne nowe kakosći napóraś, a mimo togo w płaśiwem typje kakosći.",
 	"wikibase-newproperty-fieldset": "Nowu kakosć napóraś",
 	"wikibase-newproperty-datatype": "Datowy typ:",
 	"wikibase-newproperty-invalid-datatype": "Njepłaśiwy datowy typ pódany.",

@@ -123,7 +123,7 @@
 	"wikibase-itemdisambiguation-invalid-langcode": "L'identificador de lingua inserìo el xe sconossùo al sistema. Doparar un identificador valido, par esenpio \"vec\".",
 	"wikibase-itemdisambiguation-description": "I valori doparà par la riserca i deve conpréndar el testo conpleto de l'elemento. La lengua la xe un identificador, par esenpio \"vec\".",
 	"special-newproperty": "Crea na proprietà nova",
-	"wikibase-newproperty-summary": "Sta tento che [[Special:PropertyDisambiguation|la proprietà no la ghe sia gnancora su Wikidata]]!<br />Inserisi na [[Help:Etichetta|eticheta]] e la [[Help:Descrision|descrision]] par tute le nove proprietà, oltre a sieliere un valido tipo de dato.",
+	"wikibase-newproperty-summary": "Sta tento che Special:PropertyDisambiguation|la proprietà no la ghe sia gnancora su Wikidata!<br />Inserisi na Help:Etichetta|eticheta e la Help:Descrision|descrision par tute le nove proprietà, oltre a sieliere un valido tipo de dato.",
 	"wikibase-newproperty-fieldset": "Crea na proprietà nova",
 	"wikibase-newproperty-datatype": "Tipo de dato:",
 	"wikibase-newproperty-invalid-datatype": "Specificà un tipo de dato mia valido",

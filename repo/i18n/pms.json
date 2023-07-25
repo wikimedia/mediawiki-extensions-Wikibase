@@ -117,7 +117,7 @@
 	"wikibase-itemdisambiguation-invalid-langcode": "An dëspias, l'identificator ëd lenga ch'a l'ha fornì a l'é nen conossù dal sistema. Për piasì, ch'a deuvra n'identificator bon, coma «en».",
 	"wikibase-itemdisambiguation-description": "Ij valor dovrà për serché a devo esse ël test complet. La lenga a l'é n'identificator, coma «en».",
 	"special-newproperty": "crea un proget neuv.",
-	"wikibase-newproperty-summary": "Ch'as visa ëd controlé che la propietà a esista già nen!<br /> A dovrìa creé na [[{{int:Wikibase-label-helppage}}|tichëtta]] e na [[{{int:Wikibase-description-helppage}}|descrission]] për tute le propietà neuve, e ëdcò na sòrt ëd propietà vàlida.",
+	"wikibase-newproperty-summary": "Ch'as visa ëd controlé che la propietà a esista già nen!<br /> A dovrìa creé na {{int:Wikibase-label-helppage}}|tichëtta e na {{int:Wikibase-description-helppage}}|descrission për tute le propietà neuve, e ëdcò na sòrt ëd propietà vàlida.",
 	"wikibase-newproperty-fieldset": "Crea na propietà neuva.",
 	"wikibase-newproperty-datatype": "Sòrt ëd dat:",
 	"wikibase-newproperty-invalid-datatype": "Sòrt ëd dat specificà pa bon.",

@@ -198,8 +198,6 @@
 	"wikibase-newproperty-datatype": "Врста податка:",
 	"wikibase-newproperty-invalid-datatype": "Наведена је неважећа врста податка.",
 	"wikibase-newproperty-pick-data-type": "(изаберите тип података)",
-	"wikibase-description-helppage": "Help:Опис",
-	"wikibase-label-helppage": "Help:Назив",
 	"special-newitem": "Нова ставка",
 	"wikibase-newitem-summary": "Обавезно проверите [[Special:Search|да ли ставка већ постоји]]!<br />Требало би да додате [[{{int:Wikibase-label-helppage}}|назив]] и [[{{int:Wikibase-description-helppage}}|опис]] за све нове ставке.",
 	"wikibase-newitem-fieldset": "Направи нову ставку",

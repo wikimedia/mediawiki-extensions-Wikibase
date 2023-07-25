@@ -135,7 +135,6 @@
 	"wikibase-itemdisambiguation-invalid-langcode": "ക്ഷമിക്കുക, താങ്കൾ നൽകിയ ഭാഷാ തിരിച്ചറിയൽ വിവരം സിസ്റ്റത്തിന് അപരിചിതമാണ്. ദയവായി \"ml\" പോലെയുള്ള സാധുവായ തിരിച്ചറിയലുപാധി നൽകുക.",
 	"wikibase-newproperty-datatype": "ഡേറ്റാ തരം:",
 	"wikibase-newproperty-invalid-datatype": "അസാധുവായാ ഡേറ്റാതരമാണ് നൽകിയിരിക്കുന്നത്",
-	"wikibase-description-helppage": "Help:വിവരണം",
 	"special-newitem": "പുതിയൊരു ഇനം സൃഷ്ടിക്കുക",
 	"wikibase-newitem-fieldset": "പുതിയൊരു ഇനം സൃഷ്ടിക്കുക",
 	"wikibase-newentity-language": "ഭാഷ:",

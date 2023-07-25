@@ -152,7 +152,7 @@
 	"wikibase-itemdisambiguation-description": "sapikilim tu sulyang kanca u malekuay a nisukitan tu tiyawmu. kamubpisaungay mapulitaay-kodo, tinaku \"ais\"",
 	"wikibase-itemdisambiguation-summary": "mikilim sacahamin aazihan-paya mahmin malecaday a kasacacay.",
 	"special-newproperty": "patizeng cacay baluhay susin",
-	"wikibase-newproperty-summary": "pilucek makinsa tu ku susin mueneng tu haw?<br /> kanca kisu sapahamin baluhay a susin patizeng [[{{int:Wikibase-label-helppage}}|aazihen-paya]] atu [[{{int:Wikibase-description-helppage}}|sapuelac]], zumasatu cunusen cacay kapahay a susin kakuniza.",
+	"wikibase-newproperty-summary": "pilucek makinsa tu ku susin mueneng tu haw?<br /> kanca kisu sapahamin baluhay a susin patizeng {{int:Wikibase-label-helppage}}|aazihen-paya atu {{int:Wikibase-description-helppage}}|sapuelac, zumasatu cunusen cacay kapahay a susin kakuniza.",
 	"wikibase-newproperty-fieldset": "patizeng cacay baluhay susin",
 	"wikibase-newproperty-datatype": "kalunasulitan a kakuniza:",
 	"wikibase-newproperty-invalid-datatype": "matuzu’ay a kalunasulitan kakuniza la’cus.",

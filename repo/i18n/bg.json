@@ -157,8 +157,6 @@
 	"wikibase-newproperty-datatype": "Тип на данните:",
 	"wikibase-newproperty-invalid-datatype": "Указан е невалиден тип на данните.",
 	"wikibase-newproperty-pick-data-type": "(изберете тип на данните)",
-	"wikibase-description-helppage": "Help:Описание",
-	"wikibase-label-helppage": "Help:Етикет",
 	"special-newitem": "Създаване на нов обект",
 	"wikibase-newitem-fieldset": "Създаване на нов обект",
 	"wikibase-newitem-site": "Уики на първата свързана страница",

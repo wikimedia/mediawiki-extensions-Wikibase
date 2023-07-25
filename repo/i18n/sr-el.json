@@ -189,8 +189,6 @@
 	"wikibase-newproperty-datatype": "Vrsta podatka:",
 	"wikibase-newproperty-invalid-datatype": "Navedena je nevažeća vrsta podatka.",
 	"wikibase-newproperty-pick-data-type": "(izaberite tip podataka)",
-	"wikibase-description-helppage": "Help:Opis",
-	"wikibase-label-helppage": "Help:Naziv",
 	"special-newitem": "Nova stavka",
 	"wikibase-newitem-summary": "Obavezno proverite [[Special:Search|da li stavka već postoji]]!<br />Trebalo bi da dodate [[{{int:Wikibase-label-helppage}}|naziv]] i [[{{int:Wikibase-description-helppage}}|opis]] za sve nove stavke.",
 	"wikibase-newitem-fieldset": "Napravi novu stavku",

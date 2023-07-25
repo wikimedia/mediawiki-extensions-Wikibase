@@ -72,7 +72,7 @@
 	"wikibase-itemdisambiguation-nothing-found": "Jammer, geen items met die etiket kon gevind word nie.",
 	"wikibase-itemdisambiguation-create": "U kan [$1 die item skep].",
 	"special-newproperty": "Skep 'n nuwe eienskap",
-	"wikibase-newproperty-summary": "Kyk of die eienskap nie reeds bestaan nie!<br />U moet 'n [[{{int:Wikibase-label-helppage}}|etiket]] en 'n [[{{int:Wikibase-description-helppage}}|beskrywing]], asook 'n geldige eienskap-tipe vir alle nuwe items verskaf.",
+	"wikibase-newproperty-summary": "Kyk of die eienskap nie reeds bestaan nie!<br />U moet 'n {{int:Wikibase-label-helppage}}|etiket en 'n {{int:Wikibase-description-helppage}}|beskrywing, asook 'n geldige eienskap-tipe vir alle nuwe items verskaf.",
 	"wikibase-newproperty-fieldset": "Skep 'n nuwe eienskap",
 	"wikibase-newproperty-datatype": "Datatipe:",
 	"wikibase-newproperty-invalid-datatype": "Foutiewe datatipe gespesifiseer",

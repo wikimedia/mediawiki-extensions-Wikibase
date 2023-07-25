@@ -162,7 +162,7 @@
 	"wikibase-itemdisambiguation-description": "'E valure ausate p' 'a ricerca hanna essere teste sane sane. 'A lengua è n'identificatore, comme fosse \"nap\".",
 	"wikibase-itemdisambiguation-summary": "Ascìa pe' tuttuquante elemente c' 'a stessa etichetta.",
 	"special-newproperty": "Crea na pruprietà nuova",
-	"wikibase-newproperty-summary": "Faciteve capace ca 'a pruprietà esistesse overamente <br />Avit'a crià n'[[{{int:Wikibase-label-helppage}}|etichetta]] e na [[{{int:Wikibase-description-helppage}}|descriziona]] pe' tuttuquante proprietà, e pure avit'a miette nu valore 'e pruprietà.",
+	"wikibase-newproperty-summary": "Faciteve capace ca 'a pruprietà esistesse overamente <br />Avit'a crià n'{{int:Wikibase-label-helppage}}|etichetta e na {{int:Wikibase-description-helppage}}|descriziona pe' tuttuquante proprietà, e pure avit'a miette nu valore 'e pruprietà.",
 	"wikibase-newproperty-fieldset": "Crea na pruprietà nuova",
 	"wikibase-newproperty-datatype": "Tipo 'e dato:",
 	"wikibase-newproperty-invalid-datatype": "Specificato nu tipo 'e dato nun valido.",

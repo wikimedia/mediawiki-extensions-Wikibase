@@ -59,7 +59,7 @@
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|منبع|منابع}}",
 	"wikibase-validator-no-validators": "ممنوع/کێخة بیة",
 	"wikibase-validator-label-with-description-conflict": "آیتم $3 از قبل دارای نام «$1» با توضیحات متنی مشابه مربوط به کد زبان «$2» است",
-	"wikibase-newproperty-summary": "مطمئن شوید که [[Special:PropertyDisambiguation|خصوصیت مربوطه از قبل وجود دارد]]! <br /> شما باید یک [[{{int:Wikibase-label-helppage}}|برچسب]] و یک [[{{int:Wikibase-description-helppage}}|توضیح]] برای همهٔ خصوصیت‌های تازه ایجاد کنید. به همراه نوع داده قابل قبول خصوصیت.",
+	"wikibase-newproperty-summary": "مطمئن شوید که Special:PropertyDisambiguation|خصوصیت مربوطه از قبل وجود دارد! <br /> شما باید یک {{int:Wikibase-label-helppage}}|برچسب و یک {{int:Wikibase-description-helppage}}|توضیح برای همهٔ خصوصیت‌های تازه ایجاد کنید. به همراه نوع داده قابل قبول خصوصیت.",
 	"wikibase-newitem-summary": "مطمئن شوید که [[Special:Search|اگر آیتم مربوطه از قبل وجود داشته باشد]]!<br /> شما باید یک [[{{int:Wikibase-label-helppage}}|برچسب]] و [[{{int:Wikibase-description-helppage}}|توضیح]] برای همهٔ آیتم‌های تازه ایجاد کنید.",
 	"wikibase-newentity-label": "نام:",
 	"wikibase-newentity-description": ":توضیحۀل",

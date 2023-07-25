@@ -208,7 +208,7 @@
 	"wikibase-itemdisambiguation-description": "Otsingus kasutatav väärtus peab olema täielikult tekstisisend. Keel on identifikaator, näiteks \"et\".",
 	"wikibase-itemdisambiguation-summary": "Leia kõik üksused, millel on täpselt sama silt.",
 	"special-newproperty": "Uue omaduse loomine",
-	"wikibase-newproperty-summary": "Kontrolli kindlasti, ega omadus juba olemas pole!<br />Kõigi uute omaduste juurde tuleks lisada [[{{int:Wikibase-label-helppage}}|silt]] ja [[{{int:Wikibase-description-helppage}}|kirjeldus]] ning lisaks ka sobiv omaduse tüüp.",
+	"wikibase-newproperty-summary": "Kontrolli kindlasti, ega omadus juba olemas pole!<br />Kõigi uute omaduste juurde tuleks lisada {{int:Wikibase-label-helppage}}|silt ja {{int:Wikibase-description-helppage}}|kirjeldus ning lisaks ka sobiv omaduse tüüp.",
 	"wikibase-newproperty-fieldset": "Uue omaduse loomine",
 	"wikibase-newproperty-datatype": "Andmetüüp:",
 	"wikibase-newproperty-invalid-datatype": "Määratud vigane andmetüüp.",

@@ -181,8 +181,6 @@
 	"wikibase-newproperty-invalid-datatype": "Specifita datentipo ne estas valida.",
 	"wikibase-newproperty-insufficient-data": "Vi devas almenaŭ plenigigi aŭ labelon, priskribon, aŭ alinomojn.",
 	"wikibase-newproperty-pick-data-type": "(elektu datentipon)",
-	"wikibase-description-helppage": "Help:Priskribo",
-	"wikibase-label-helppage": "Help:Etikedo",
 	"special-newitem": "Krei novan eron",
 	"wikibase-newitem-fieldset": "Krei novan eron",
 	"wikibase-newitem-site": "Retejo de la unua ligita paĝo",

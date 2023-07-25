@@ -90,7 +90,7 @@
 	"wikibase-itemdisambiguation-invalid-langcode": "Žalimo, jezička identifikacija koju ste pružili nije poznata sistemuj. Koristite valjane identifikacije kao \"en\".",
 	"wikibase-itemdisambiguation-description": "Vrijednosti korištene za pretragu moraju biti dovršeni tekstualni unosi. Jezik je identifikacija, kao \"en\".",
 	"special-newproperty": "Stvorite novo polje",
-	"wikibase-newproperty-summary": "Svakako [[Special:PropertyDisambiguation|provjerite da li polje već postoji]]!<br />Trebali biste stvoriti [[{{int:Wikibase-label-helppage}}|oznaku]] i [[{{int:Wikibase-description-helppage}}|opis]] za sva nova polja, i dodati valjani tip polja.",
+	"wikibase-newproperty-summary": "Svakako Special:PropertyDisambiguation|provjerite da li polje već postoji!<br />Trebali biste stvoriti {{int:Wikibase-label-helppage}}|oznaku i {{int:Wikibase-description-helppage}}|opis za sva nova polja, i dodati valjani tip polja.",
 	"wikibase-newproperty-fieldset": "Stvorite novo polje",
 	"wikibase-newproperty-datatype": "Tip podatka:",
 	"wikibase-newproperty-invalid-datatype": "Nevaljani tip podatka specificiran",

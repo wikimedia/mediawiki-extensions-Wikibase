@@ -190,7 +190,7 @@
 	"wikibase-itemdisambiguation-description": "Hódnoty, kotrež so za pytanje wužiwaja, dyrbja dospołne tekstowe zapiski być. Rěč je identifikator, na přikład \"hsb\".",
 	"wikibase-itemdisambiguation-summary": "Pytaj za wšěmi objektami z dokładnje samsnym mjenom.",
 	"special-newproperty": "Nowu kajkosć wutworić",
-	"wikibase-newproperty-summary": "Přepruwuj hač kajkosć hižo wobsteji!<br />Ty dyrbjał(a) [[{{int:Wikibase-label-helppage}}|mjeno]] a [[{{int:Wikibase-description-helppage}}|wopis]] za wšě nowe kajkosće wutworić a přidatnje płaćiwy typ kajkosće.",
+	"wikibase-newproperty-summary": "Přepruwuj hač kajkosć hižo wobsteji!<br />Ty dyrbjał(a) {{int:Wikibase-label-helppage}}|mjeno a {{int:Wikibase-description-helppage}}|wopis za wšě nowe kajkosće wutworić a přidatnje płaćiwy typ kajkosće.",
 	"wikibase-newproperty-fieldset": "Nowu kajkosć wutworić",
 	"wikibase-newproperty-datatype": "Datowy typ:",
 	"wikibase-newproperty-invalid-datatype": "Njepłaćiwy datowy typ podaty.",

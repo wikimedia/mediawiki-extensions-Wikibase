@@ -157,7 +157,7 @@
 	"wikibase-itemdisambiguation-description": "Li valuri adupirati pi l'arricerca hannu a currispùnniri ô testu cumpletu dâ vuci. La lingua è un còdici idintificativu, comu p'esempiu \"scn\".",
 	"wikibase-itemdisambiguation-summary": "Arricerca tutti li suggetti câ stissa pricisa etichetta.",
 	"special-newproperty": "Criazzioni di na prupità nova",
-	"wikibase-newproperty-summary": "Cuntrolla bonu chi la prupità già nun esisti!<br />Pi tutti li prupità novi s'avìssiru a criari n'[[{{int:Wikibase-label-helppage}}|etichetta]] e na [[{{int:Wikibase-description-helppage}}|discrizzioni]], e s'havi a spicificari nu tipu di prupità vàlidu.",
+	"wikibase-newproperty-summary": "Cuntrolla bonu chi la prupità già nun esisti!<br />Pi tutti li prupità novi s'avìssiru a criari n'{{int:Wikibase-label-helppage}}|etichetta e na {{int:Wikibase-description-helppage}}|discrizzioni, e s'havi a spicificari nu tipu di prupità vàlidu.",
 	"wikibase-newproperty-fieldset": "Criazzioni di na prupità nova",
 	"wikibase-newproperty-datatype": "Tipu di datu:",
 	"wikibase-newproperty-invalid-datatype": "Spicificatu nu tipu di datu nun vàlidu.",

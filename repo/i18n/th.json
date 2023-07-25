@@ -172,7 +172,7 @@
 	"wikibase-itemdisambiguation-description": "ค่าที่ใช้สำหรับการค้นหาจะต้องเป็นรายการข้อความที่สมบูรณ์ โดยใช้คำระบุภาษา เช่น \"th\"",
 	"wikibase-itemdisambiguation-summary": "ค้นหารายการทั้งหมดที่มีป้ายกำกับเดียวกัน",
 	"special-newproperty": "สร้างคุณสมบัติใหม่",
-	"wikibase-newproperty-summary": "โปรดตรวจสอบให้แน่ใจด้วยว่ามีคุณสมบัติดังกล่าวอยู่แล้วหรือยัง<br />คุณควรสร้าง[[{{int:Wikibase-label-helppage}}|ป้ายกำกับ]]และ[[{{int:Wikibase-description-helppage}}|คำอธิบาย]]สำหรับคุณสมบัติใหม่ทั้งหมด รวมถึงระบุชนิดของคุณสมบัติที่ถูกต้อง",
+	"wikibase-newproperty-summary": "โปรดตรวจสอบให้แน่ใจด้วยว่ามีคุณสมบัติดังกล่าวอยู่แล้วหรือยัง<br />คุณควรสร้าง{{int:Wikibase-label-helppage}}|ป้ายกำกับและ{{int:Wikibase-description-helppage}}|คำอธิบายสำหรับคุณสมบัติใหม่ทั้งหมด รวมถึงระบุชนิดของคุณสมบัติที่ถูกต้อง",
 	"wikibase-newproperty-fieldset": "สร้างคุณลักษณะใหม่",
 	"wikibase-newproperty-datatype": "ชนิดของข้อมูล:",
 	"wikibase-newproperty-invalid-datatype": "ระบุชนิดของข้อมูลไม่ถูกต้อง",

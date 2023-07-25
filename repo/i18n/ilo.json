@@ -157,7 +157,7 @@
 	"wikibase-itemdisambiguation-description": "Dagiti pateg a panagbiruk ket nasken a ti kompleto a panagikabil ti teksto. Ti pagsasao ket maysa a panagilasin, a kas ti \"en\".",
 	"wikibase-itemdisambiguation-summary": "Agbiruk kadagiti banag nga agraman iti eksakto nga agpada nga etiketa.",
 	"special-newproperty": "Agpartuat ti baro a tagikua",
-	"wikibase-newproperty-summary": "Siguraduen [[Special:PropertyDisambiguation|a kitaen no addan dagiti tagikua]]!<br />Nasken apartuatem ti maysa nga [[{{int:Wikibase-label-helppage}}|etiketa]] ken maysa a [[{{int:Wikibase-description-helppage}}|deskripsion]] para kadagiti amin a tagikua, ken ti maipatinayon ti maysa nga umiso a kita ti tagikua.",
+	"wikibase-newproperty-summary": "Siguraduen Special:PropertyDisambiguation|a kitaen no addan dagiti tagikua!<br />Nasken apartuatem ti maysa nga {{int:Wikibase-label-helppage}}|etiketa ken maysa a {{int:Wikibase-description-helppage}}|deskripsion para kadagiti amin a tagikua, ken ti maipatinayon ti maysa nga umiso a kita ti tagikua.",
 	"wikibase-newproperty-fieldset": "Agpartuat ti baro a tagikua",
 	"wikibase-newproperty-datatype": "Kita ti datos:",
 	"wikibase-newproperty-invalid-datatype": "Saan a husto a kita ti datos ti nainaganan.",

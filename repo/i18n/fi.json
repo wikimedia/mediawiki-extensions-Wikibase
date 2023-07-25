@@ -177,7 +177,7 @@
 	"wikibase-itemdisambiguation-invalid-langcode": "Valitettavasti järjestelmä ei tunne antamaasi kielikoodia. Käytä kelvollista kielikoodia, kuten ”fi”.",
 	"wikibase-itemdisambiguation-description": "Hakuun käytettyjen arvojen tulee olla niiden kokonaisia tekstejä. Kieli tarkoittaa tunnusta, kuten ”fi”.",
 	"special-newproperty": "Luo uusi ominaisuus",
-	"wikibase-newproperty-summary": "Tarkista, onko ominaisuus jo olemassa!<br />Sinun tulee lisätä [[{{int:Wikibase-label-helppage}}|nimi]] ja [[{{int:Wikibase-description-helppage}}|kuvaus]] kaikille uusille ominaisuuksille sekä lisäksi kelvollinen tietotyyppi.",
+	"wikibase-newproperty-summary": "Tarkista, onko ominaisuus jo olemassa!<br />Sinun tulee lisätä {{int:Wikibase-label-helppage}}|nimi ja {{int:Wikibase-description-helppage}}|kuvaus kaikille uusille ominaisuuksille sekä lisäksi kelvollinen tietotyyppi.",
 	"wikibase-newproperty-fieldset": "Luo uusi ominaisuus",
 	"wikibase-newproperty-datatype": "Tietotyyppi:",
 	"wikibase-newproperty-invalid-datatype": "Virheellinen tietotyyppi määritetty.",
