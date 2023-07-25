@@ -622,21 +622,15 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 	public function testAttemptSaveRateLimit( array $limits, array $groups, array $edits ) {
 		$repo = $this->getMockRepository();
 
-		$this->setMwGlobals(
-			'wgRateLimits',
-			$limits
-		);
-
-		$this->setMwGlobals(
-			'wgGroupPermissions',
-			[
+		$this->setMwGlobals( [
+			'wgRateLimits' => $limits,
+			'wgGroupPermissions' => [
 				'*' => [ 'edit' => true ],
 				'sysop' => [ 'noratelimit' => true ],
-			]
-		);
-
-		// make sure we have a working cache
-		$this->setMwGlobals( 'wgMainCacheType', 'hash' );
+			],
+			// make sure we have a working cache
+			'wgMainCacheType' => 'hash',
+		] );
 		// make sure we have a fresh cache
 		ObjectCache::clear();
 
