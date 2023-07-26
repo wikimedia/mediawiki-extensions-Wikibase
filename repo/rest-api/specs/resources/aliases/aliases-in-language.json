@@ -1,5 +1,6 @@
 {
 	"get": {
+		"operationId": "getItemAliasesInLanguage",
 		"tags": [ "aliases" ],
 		"summary": "Retrieve an Item's aliases in a specific language",
 		"parameters": [

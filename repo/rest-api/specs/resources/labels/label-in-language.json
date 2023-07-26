@@ -1,5 +1,6 @@
 {
 	"get": {
+		"operationId": "getItemLabel",
 		"tags": [ "labels" ],
 		"summary": "Retrieve an Item's label in a specific language",
 		"parameters": [
@@ -22,6 +23,7 @@
 		}
 	},
 	"put": {
+		"operationId": "replaceItemLabel",
 		"tags": [ "labels" ],
 		"summary": "Add / Replace an Item's label in a specific language",
 		"parameters": [

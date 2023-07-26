@@ -1,5 +1,6 @@
 {
 	"get": {
+		"operationId": "getItemDescription",
 		"tags": [ "descriptions" ],
 		"summary": "Retrieve an Item's description in a specific language",
 		"parameters": [
@@ -22,6 +23,7 @@
 		}
 	},
 	"put": {
+		"operationId": "replaceItemDescription",
 		"tags": [ "descriptions" ],
 		"summary": "Add / Replace an Item's description in a specific language",
 		"parameters": [

@@ -1,5 +1,6 @@
 {
 	"get": {
+		"operationId": "getItemStatement",
 		"tags": [
 			"statements"
 		],
@@ -24,6 +25,7 @@
 		}
 	},
 	"put": {
+		"operationId": "replaceItemStatement",
 		"tags": [ "statements" ],
 		"summary": "Replace a single Statement of an Item",
 		"description": "This endpoint is also accessible through `/statements/{statement_id}`",
@@ -45,6 +47,7 @@
 		}
 	},
 	"patch": {
+		"operationId": "patchItemStatement",
 		"tags": [ "statements" ],
 		"summary": "Change elements of a single Statement of an Item",
 		"description": "This endpoint is also accessible through `/statements/{statement_id}`.",
@@ -68,6 +71,7 @@
 		}
 	},
 	"delete": {
+		"operationId": "deleteItemStatement",
 		"tags": [ "statements" ],
 		"summary": "Delete a single Statement from an Item",
 		"description": "This endpoint is also accessible through `/statements/{statement_id}`",
