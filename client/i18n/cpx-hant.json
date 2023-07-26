@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Winston Sung"
+		]
+	},
+	"wikibase-dataitem": "{{WBREPONAME}}項目",
+	"wikibase-editlinks": "修改連結",
+	"wikibase-linkitem-input-page": "頁面：",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}修改",
+	"wikibase-otherprojects": "佇其他兮項目中央"
+}

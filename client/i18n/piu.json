@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Pintupi Luritja Guy"
+		]
+	},
+	"wikibase-dataitem": "Piipa {{WBREPONAME}}",
+	"wikibase-editlinks": "Linka tjiyinytji",
+	"wikibase-linkitem-addlinks": "Linkanya tuturrpuwa",
+	"wikibase-linkitem-title": "Tinkitjurra piipankunytjaku",
+	"wikibase-linkitem-linkpage": "Tinkitjurra piipankunytjaku",
+	"wikibase-linkitem-selectlink": "Piipa mantjila wiptjayta kutjupawana nyuntu yunytjurringanyingka tinkitjunkunytjaku piipa ngaatuku.",
+	"wikibase-linkitem-input-site": "Wangka:",
+	"wikibase-linkitem-input-page": "Piipa:",
+	"wikibase-rc-hide-wikidata-hide": "Kumpitjurra",
+	"wikibase-rc-hide-wikidata-show": "Nyawa"
+}

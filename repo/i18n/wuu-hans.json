@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Winston Sung"
+		]
+	},
+	"wikibase-edit": "编辑",
+	"wikibase-add": "添加",
+	"wikibase-label-empty": "呒不已定义个标签",
+	"wikibase-description-empty": "呒不定义说明",
+	"wikibase-sitelink-page-edit-placeholder": "頁",
+	"wikibase-statementsection-statements": "声明",
+	"wikibase-sitelinks-special": "其他网站",
+	"wikibase-statementview-rank-normal": "普通级",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|来源}}"
+}

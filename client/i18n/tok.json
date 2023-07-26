@@ -3,7 +3,8 @@
 		"authors": [
 			"Robin van der Vliet",
 			"LesVisages",
-			"Keenan Pepper"
+			"Keenan Pepper",
+			"Frzzl"
 		]
 	},
 	"wikibase-dataitem": "ijo lon {{WBREPONAME}}",
@@ -14,5 +15,7 @@
 	"wikibase-linkitem-selectlink": "sina wile linja e lipu ante tawa lipu ni la o luka e lipu ante.",
 	"wikibase-linkitem-input-site": "toki:",
 	"wikibase-linkitem-input-page": "lipu:",
+	"wikibase-rc-hide-wikidata-hide": "o weka",
+	"wikibase-rc-hide-wikidata-show": "o suli",
 	"wikibase-sitelinks-sitename-columnheading": "toki"
 }

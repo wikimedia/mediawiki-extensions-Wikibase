@@ -1,0 +1,38 @@
+{
+	"@metadata": {
+		"authors": [
+			"Winston Sung"
+		]
+	},
+	"specialpages-group-wikibase": "Wikibazino skladište",
+	"wikibase-sitelinks-wikipedia": "Wikipedia",
+	"wikibase-snakview-snaktypeselector-somevalue": "nepoznata vrijednost",
+	"wikibase-snakview-snaktypeselector-novalue": "bez vrijednosti",
+	"wikibase-entity-summary-wbsetitem": "Stvorena nova stavka",
+	"wikibase-entity-summary-wbsetlabel-set": "Promijenjena [$2] oznaka",
+	"wikibase-entity-summary-wbsetlabel-remove": "Uklonjena [$2] oznaka",
+	"wikibase-entity-summary-wbsetdescription-set": "Promijenjen [$2] opis",
+	"wikibase-entity-summary-wbsetdescription-remove": "Uklonjen [$2] opis",
+	"wikibase-entity-summary-wbsetaliases-set": "Postavljanje [$2] {{PLURAL:$1|alias|aliasi}}",
+	"wikibase-entity-summary-wbsetaliases-add-remove": "Dodan i uklonjen [$2] {{PLURAL:$1|alias|aliasi}}",
+	"wikibase-entity-summary-wbsetaliases-add": "Dodan [$2] {{PLURAL:$1|alias|aliasi}}",
+	"wikibase-entity-summary-wbsetaliases-remove": "Uklonjen [$2] {{PLURAL:$1|alias|aliasi}}",
+	"wikibase-entity-summary-wbsetsitelink-add": "Dodan specifičan [$2] link za sajt",
+	"wikibase-entity-summary-wbsetsitelink-remove": "Uklonjen specifičan [$2] link za sajt",
+	"wikibase-entity-summary-wbcreateclaim-value": "{{PLURAL:$1|Stvorena|Stvorene}} {{PLURAL:$1|izjava|izjave}}",
+	"wikibase-entity-summary-wbcreateclaim-novalue": "{{PLURAL:$1|Stvorena|Stvorene}} {{PLURAL:$1|izjava|izjave}}",
+	"wikibase-entity-summary-wbcreateclaim-somevalue": "{{PLURAL:$1|Stvorena|Stvorene}} {{PLURAL:$1|izjava|izjave}}",
+	"wikibase-entity-summary-wbcreateclaim": "{{PLURAL:$1|Stvorena|Stvorene}} {{PLURAL:$1|izjava|izjave}}",
+	"wikibase-entity-summary-wbsetclaimvalue": "{{PLURAL:$1|Postavljena|Postavljene}} {{PLURAL:$1|izjava vrijednosti|izjave vrijednosti}}",
+	"wikibase-entity-summary-wbremoveclaims": "{{PLURAL:$1|Uklonjena|Uklonjene}} {{PLURAL:$1|izjava vrijednosti|izjave vrijednosti}}",
+	"wikibase-entity-summary-special-create-item": "Stvorena [$2] stavka s {{PLURAL:$1|vrijednosti|vrijednostima}}",
+	"wikibase-item-summary-wbeditentity": "Stvorena nova stavka",
+	"wikibase-item-summary-wbeditentity-create": "Stvorena nova stavka",
+	"wikibase-item-summary-wbeditentity-update": "Ažurirana stavka",
+	"wikibase-item-summary-wbeditentity-override": "Presnimljena stavka",
+	"wikibase-item-summary-wblinktitles-connect": "Povezane {{PLURAL:$1|stranica|stranice}}",
+	"wikibase-property-summary-wbeditentity-create": "Stvoreno novo polje",
+	"wikibase-property-summary-wbeditentity-update": "Ažurirano polje",
+	"wikibase-property-summary-wbeditentity-override": "Presnimljeno polje",
+	"wikibase-property-summary-special-create-property": "Stvoreno [$2] polje sa {{PLURAL:$1|vrijednosti|vrijednostima}}"
+}
