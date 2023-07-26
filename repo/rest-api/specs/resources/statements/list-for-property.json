@@ -1,5 +1,6 @@
 {
 	"get": {
+		"operationId": "getPropertyStatements",
 		"tags": [ "statements" ],
 		"summary": "Retrieve Statements from a Property",
 		"parameters": [

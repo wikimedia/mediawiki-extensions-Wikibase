@@ -1,5 +1,6 @@
 {
 	"get": {
+		"operationId": "getItemAliases",
 		"tags": [ "aliases" ],
 		"summary": "Retrieve an Item's aliases",
 		"parameters": [

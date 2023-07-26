@@ -1,5 +1,6 @@
 {
 	"get": {
+		"operationId": "getItem",
 		"tags": [ "items" ],
 		"summary": "Retrieve a single Wikibase Item by ID",
 		"parameters": [
