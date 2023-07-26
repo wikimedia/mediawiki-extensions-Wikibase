@@ -4,8 +4,8 @@ declare( strict_types=1 );
 
 namespace Wikibase\Lib\Rdbms;
 
-use InvalidArgumentException;
 use Wikibase\DataAccess\DatabaseEntitySource;
+use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\ILBFactory;
 
 /**
@@ -30,13 +30,11 @@ class RepoDomainDbFactory {
 
 	public function __construct(
 		ILBFactory $lbFactory,
-		string $repoDomain,
+		$repoDomain,
 		array $loadGroups = []
 	) {
-		if ( $repoDomain === '' ) {
-			throw new InvalidArgumentException( '"$repoDomain" must not be empty' );
-		}
-
+		// Make sure callers are not passing `false`. Can be replaced with a typehint once all callers have strict_types enabled.
+		Assert::parameterType( 'string', $repoDomain, '$repoDomain' );
 		$this->lbFactory = $lbFactory;
 		$this->repoDomain = $repoDomain;
 		$this->loadGroups = $loadGroups;

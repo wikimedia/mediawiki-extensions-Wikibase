@@ -4,11 +4,11 @@ declare( strict_types=1 );
 
 namespace Wikibase\Lib\Tests;
 
-use InvalidArgumentException;
 use PHPUnit\Framework\MockObject\MockObject;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\Lib\Rdbms\DomainDb;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
+use Wikimedia\Assert\ParameterTypeException;
 use Wikimedia\Rdbms\ILBFactory;
 
 /**
@@ -66,9 +66,9 @@ class RepoDomainDbFactoryTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testDomainMustNotBeEmpty() {
-		$this->repoDomainId = '';
+		$this->repoDomainId = false;
 
-		$this->expectException( InvalidArgumentException::class );
+		$this->expectException( ParameterTypeException::class );
 
 		$this->newFactory();
 	}
