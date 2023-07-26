@@ -1,6 +1,6 @@
 {
 	"get": {
-		"operationId": "getPropertyStatement",
+		"operationId": "getProperty",
 		"tags": [ "properties" ],
 		"summary": "Retrieve a single Wikibase Property by ID",
 		"parameters": [
