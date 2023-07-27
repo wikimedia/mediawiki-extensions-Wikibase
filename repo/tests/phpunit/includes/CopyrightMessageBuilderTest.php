@@ -48,6 +48,15 @@ class CopyrightMessageBuilderTest extends MediaWikiIntegrationTestCase {
 				'https://creativecommons.org',
 				'Creative Commons Attribution-Share Alike 3.0',
 			],
+			[
+				'wikibase-shortcopyrightwarning-minimal',
+				[
+					'(wikibase-save)',
+					'(copyrightpage)',
+				],
+				'',
+				'',
+			],
 		];
 	}
 
