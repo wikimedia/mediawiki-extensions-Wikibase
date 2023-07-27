@@ -933,6 +933,7 @@ return call_user_func( function() {
 		'wikibase.termbox' => [
 			'packageFiles' => [
 				'termbox.init.js',
+				'EntityLoadedHookEntityRepository.js',
 				'RepoApiWritingEntityRepository.js',
 				[
 					'name' => 'config.json',
