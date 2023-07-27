@@ -20,6 +20,23 @@ class ResponseFactoryTest extends TestCase {
 	/**
 	 * @dataProvider errorCodeToHttpStatusCodeProvider
 	 */
+	public function testNewErrorResponseFromException( string $errorCode, int $httpStatus ): void {
+		$errorMessage = 'testNewErrorResponseFromException error message';
+
+		$httpResponse = ( new ResponseFactory() )->newErrorResponseFromException(
+			new UseCaseError( $errorCode, $errorMessage )
+		);
+
+		$this->assertJsonStringEqualsJsonString(
+			"{ \"code\": \"$errorCode\", \"message\": \"$errorMessage\" }",
+			$httpResponse->getBody()->getContents()
+		);
+		$this->assertSame( $httpStatus, $httpResponse->getStatusCode() );
+	}
+
+	/**
+	 * @dataProvider errorCodeToHttpStatusCodeProvider
+	 */
 	public function testNewErrorResponse( string $errorCode, int $httpStatus ): void {
 		$errorMessage = 'testNewErrorResponse error message';
 

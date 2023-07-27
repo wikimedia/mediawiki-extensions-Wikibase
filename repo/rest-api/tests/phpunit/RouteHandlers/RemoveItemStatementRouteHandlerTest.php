@@ -2,13 +2,17 @@
 
 namespace Wikibase\Repo\Tests\RestApi\RouteHandlers;
 
+use Generator;
 use MediaWiki\ChangeTags\ChangeTagsStore;
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Reporter\ErrorReporter;
 use MediaWiki\Rest\RequestData;
+use MediaWiki\Rest\Response;
 use MediaWiki\Tests\Rest\Handler\HandlerTestTrait;
 use MediaWikiIntegrationTestCase;
 use RuntimeException;
+use Throwable;
+use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\RouteHandlers\RemoveItemStatementRouteHandler;
@@ -31,19 +35,44 @@ class RemoveItemStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->setService( 'ChangeTagsStore', $changeTagsStore );
 	}
 
-	public function testHandlesUnexpectedErrors(): void {
+	public function testValidHttpResponse(): void {
+		$this->setService( 'WbRestApi.RemoveItemStatement', $this->createStub( RemoveItemStatement::class ) );
+
+		/** @var Response $response */
+		$response = $this->newHandlerWithValidRequest()->execute();
+
+		$this->assertSame( 200, $response->getStatusCode() );
+		$this->assertSame( [ 'application/json' ], $response->getHeader( 'Content-Type' ) );
+		$this->assertSame( '"Statement deleted"', $response->getBody()->getContents() );
+	}
+
+	/**
+	 * @dataProvider provideExceptionAndExpectedErrorCode
+	 */
+	public function testHandlesErrors( Throwable $exception, string $expectedErrorCode ): void {
 		$useCase = $this->createStub( RemoveItemStatement::class );
-		$useCase->method( 'execute' )->willThrowException( new RuntimeException() );
+		$useCase->method( 'execute' )->willThrowException( $exception );
+
 		$this->setService( 'WbRestApi.RemoveItemStatement', $useCase );
 		$this->setService( 'WbRestApi.ErrorReporter', $this->createStub( ErrorReporter::class ) );
 
-		$routeHandler = $this->newHandlerWithValidRequest();
-		$this->validateHandler( $routeHandler );
-
-		$response = $routeHandler->execute();
+		/** @var Response $response */
+		$response = $this->newHandlerWithValidRequest()->execute();
 		$responseBody = json_decode( $response->getBody()->getContents() );
+
 		$this->assertSame( [ 'en' ], $response->getHeader( 'Content-Language' ) );
-		$this->assertSame( UseCaseError::UNEXPECTED_ERROR, $responseBody->code );
+		$this->assertSame( $expectedErrorCode, $responseBody->code );
+	}
+
+	public function provideExceptionAndExpectedErrorCode(): Generator {
+		yield 'Error handled by ResponseFactory' => [
+			new UseCaseError( UseCaseError::INVALID_STATEMENT_ID, '' ),
+			UseCaseError::INVALID_STATEMENT_ID,
+		];
+
+		yield 'Item Redirect' => [ new ItemRedirect( 'Q123' ), UseCaseError::STATEMENT_NOT_FOUND ];
+
+		yield 'Unexpected Error' => [ new RuntimeException(), UseCaseError::UNEXPECTED_ERROR ];
 	}
 
 	public function testReadWriteAccess(): void {
@@ -72,6 +101,8 @@ class RemoveItemStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 				] ),
 			] )
 		);
+		$this->validateHandler( $routeHandler );
+
 		return $routeHandler;
 	}
 }
