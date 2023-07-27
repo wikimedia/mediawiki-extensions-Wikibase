@@ -229,7 +229,10 @@
 				this._createEntitytermsforlanguagelistviewMore();
 			}
 
-			if ( !mw.user.options.get( 'wb-dont-show-again-mul-popup' ) ) {
+			if (
+				mw.user.isNamed() &&
+				!mw.user.options.get( 'wb-dont-show-again-mul-popup' )
+			) {
 				this._addPulsatingDotToMul();
 			}
 		},
