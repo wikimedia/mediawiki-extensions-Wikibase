@@ -14,7 +14,8 @@
 			"Titodutta",
 			"ZI Jony",
 			"আজিজ",
-			"আফতাবুজ্জামান"
+			"আফতাবুজ্জামান",
+			"Yahya"
 		]
 	},
 	"wikibase-desc": "কাঠামোবদ্ধ তথ্য ভান্ডার",
@@ -22,6 +23,12 @@
 	"wikibase-entity-item": "আইটেম",
 	"wikibase-entity-property": "বৈশিষ্ট্য",
 	"wikibase-entity-query": "কোয়েরি",
+	"nstab-item": "আইটেম",
+	"tooltip-ca-nstab-item": "আইটেমটি দেখুন",
+	"nstab-property": "বৈশিষ্ট্য",
+	"tooltip-ca-nstab-property": "বৈশিষ্ট্যটি দেখুন",
+	"nstab-query": "কোয়েরি",
+	"tooltip-ca-nstab-query": "কোয়েরিটি দেখুন",
 	"wikibase-edit": "সম্পাদনা",
 	"wikibase-save": "সংরক্ষণ",
 	"wikibase-publish": "প্রকাশ করুন",

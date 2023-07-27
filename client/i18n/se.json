@@ -4,18 +4,21 @@
 			"Jon Harald Søby (WMNO)",
 			"Kimberli Mäkäräinen (WMNO)",
 			"Trondtr",
-			"Yupik"
+			"Yupik",
+			"Caden99"
 		]
 	},
 	"wikibase-comment-sitelink-add": "Giellaliŋka lasihuvvon: $1",
 	"wikibase-comment-sitelink-remove": "Giellaliŋka sihkkojuvvon: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|rievdadus|rievdadusa}}",
+	"wikibase-dataitem": "{{WBREPONAME}} item",
 	"wikibase-editlinks": "Rievdat liŋkkaid",
 	"wikibase-editlinkstitle": "Rievdat gielaidgaskasaš liŋkkaid",
 	"wikibase-addlinkstitle": "Lasit gielaidgaskasaš liŋkkaid",
 	"wikibase-linkitem-addlinks": "Lasit liŋkkaid",
 	"wikibase-linkitem-title": "Lasit liŋkka siidui",
 	"wikibase-linkitem-linkpage": "Lasit liŋkka siidui",
+	"wikibase-linkitem-selectlink": "Vállje báiki ja siidu maid hálidat liŋket dán siiddu.",
 	"wikibase-linkitem-input-site": "Giella:",
 	"wikibase-linkitem-input-page": "Siidu:",
 	"wikibase-rc-hide-wikidata-hide": "Čiega",

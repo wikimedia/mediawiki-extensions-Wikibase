@@ -11,5 +11,8 @@
 	"wikibase-linkitem-linkpage": "СибтIе джар",
 	"wikibase-linkitem-selectlink": "Башуста, кеп1ин ваа сайт н джар, вад китIе ыгад гьыъын ссылкая",
 	"wikibase-linkitem-input-site": "ЧIел:",
-	"wikibase-linkitem-input-page": "Джар:"
+	"wikibase-linkitem-input-page": "Джар:",
+	"wikibase-rc-hide-wikidata-hide": "ГиркIа",
+	"wikibase-rc-hide-wikidata-show": "Ачых",
+	"wikibase-otherprojects": "Мадды проектма:"
 }
