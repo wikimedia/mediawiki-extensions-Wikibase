@@ -168,14 +168,18 @@
 			}
 
 			var $input = $( document.createElement( this.options.inputNodeName ) );
+			var inputPlaceholder = mw.msg(
+				'wikibase-label-edit-placeholder-language-aware',
+				wb.getLanguageNameByCode( languageCode )
+			);
+			if ( !labelText && this._getPlaceholderLabel( languageCode ) !== null ) {
+				inputPlaceholder = this._getPlaceholderLabel( languageCode ).getText();
+			}
 
 			$input
 			.addClass( this.widgetFullName + '-input' )
 			// TODO: Inject correct placeholder via options
-			.attr( 'placeholder', mw.msg(
-				'wikibase-label-edit-placeholder-language-aware',
-				wb.getLanguageNameByCode( languageCode )
-			) )
+			.attr( 'placeholder', inputPlaceholder )
 			.attr( 'lang', languageCode )
 			.attr( 'dir', $.util.getDirectionality( languageCode ) )
 			.on( 'keydown.' + this.widgetName, function ( event ) {
