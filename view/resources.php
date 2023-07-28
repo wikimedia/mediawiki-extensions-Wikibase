@@ -1,5 +1,8 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
+use MediaWiki\ResourceLoader\Context;
+use Wikibase\Repo\CopyrightMessageBuilder;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\Module\TemplateModule;
 use Wikibase\View\Termbox\TermboxModule;
@@ -954,8 +957,31 @@ return call_user_func( function() {
 
 		'wikibase.termbox.init' => $wikibaseTermboxSubmodulePaths + [
 			'class' => TermboxModule::class,
-			'packageFiles' => [
+			'scripts' => [
 				'dist/wikibase.termbox.init.js',
+				[
+					'name' => 'termbox.config.js',
+					'callback' => function ( Context $context ) {
+						global $wgEditSubmitButtonLabelPublish;
+
+						$saveMessageKey = ( $wgEditSubmitButtonLabelPublish ) ? 'wikibase-publish' : 'wikibase-save';
+						$repoSettings = WikibaseRepo::getSettings();
+						$language = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( $context->getLanguage() );
+						$copyrightMessage = ( new CopyrightMessageBuilder )->build(
+							$repoSettings->getSetting( 'dataRightsUrl' ),
+							$repoSettings->getSetting( 'dataRightsText' ),
+							$language,
+							$saveMessageKey
+						);
+						return ResourceLoader::makeConfigSetScript( [
+							'wbMultiLingualStringLimit' => $repoSettings->getSetting( 'string-limits' )['multilang']['length'],
+							'wbCopyright' => [
+								'version' => $context->msg( 'wikibase-shortcopyrightwarning-version' )->parse(),
+								'messageHtml' => $copyrightMessage->inLanguage( $language )->parse(),
+							],
+						] );
+					},
+				],
 			],
 			'es6' => true,
 			'dependencies' => [
