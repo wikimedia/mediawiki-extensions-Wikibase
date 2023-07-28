@@ -86,4 +86,5 @@
 	require( '../../../view/tests/qunit/wikibase/utilities/GuidGenerator.tests.js' );
 	require( '../../../view/tests/qunit/wikibase/view/ToolbarFactory.tests.js' );
 	require( '../../../view/tests/qunit/wikibase/termbox/RepoApiWritingEntityRepository.tests.js' );
+	require( '../../../view/tests/qunit/wikibase/termbox/EntityLoadedHookEntityRepository.tests.js' );
 }() );
