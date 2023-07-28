@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Adriendelucca",
 			"Dishual",
 			"Fohanno",
 			"Fulup",
@@ -190,7 +191,7 @@
 	"wikibase-itemdisambiguation-description": "Ret eo d'an talvoudoù implijet evit klask klotañ gant ar skrid en e bezh. Ur c'hod anaout eo ar yezh, evel \"br\".",
 	"wikibase-itemdisambiguation-summary": "Klask an holl elfennoù a glot rik gant an dikedenn-se.",
 	"special-newproperty": "Krouiñ ur perzh nevez",
-	"wikibase-newproperty-summary": "Gwiriit mat n'ue ket eus a rperzh-se c'hoazh !<br />Dleout a rafec'h krouiñ {{int:Wikibase-label-helppage}}|un dikedenn hag un {{int:Wikibase-description-helppage}}|deskrivadur evit an holl berzhioù nevez all hag ur seurt perzh reizh.",
+	"wikibase-newproperty-summary": "Gwiriit mat n'eus ket eus ar perzh-se c'hoazh !<br />Dleout a rafec'h krouiñ ur {{int:Wikibase-label-helppage}} hag un {{int:Wikibase-description-helppage}} evit an holl berzhioù nevez all hag ur seurt perzh reizh.",
 	"wikibase-newproperty-fieldset": "Krouiñ ur perzh nevez",
 	"wikibase-newproperty-datatype": "Seurt roadennnoù :",
 	"wikibase-newproperty-invalid-datatype": "Direizh eo ar seurt roadennoù bet spisaet.",
