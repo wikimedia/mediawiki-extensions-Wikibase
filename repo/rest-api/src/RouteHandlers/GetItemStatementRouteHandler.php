@@ -83,23 +83,17 @@ class GetItemStatementRouteHandler extends SimpleHandler {
 			);
 		} catch ( UseCaseError $e ) {
 			if ( $e->getErrorCode() === UseCaseError::STATEMENT_SUBJECT_NOT_FOUND ) {
-				return $this->responseFactory->newErrorResponseFromException(
-					new UseCaseError(
-						UseCaseError::ITEM_NOT_FOUND,
-						"Could not find an item with the ID: $itemId"
-					)
+				return $this->responseFactory->newErrorResponse(
+					UseCaseError::ITEM_NOT_FOUND,
+					"Could not find an item with the ID: $itemId"
 				);
 			}
-
 			if ( $e->getErrorCode() === UseCaseError::INVALID_STATEMENT_SUBJECT_ID ) {
-				return $this->responseFactory->newErrorResponseFromException(
-					new UseCaseError(
-						UseCaseError::INVALID_ITEM_ID,
-						'Not a valid item ID: ' . $itemId
-					)
+				return $this->responseFactory->newErrorResponse(
+					UseCaseError::INVALID_ITEM_ID,
+					"Not a valid item ID: $itemId"
 				);
 			}
-
 			return $this->responseFactory->newErrorResponseFromException( $e );
 		} catch ( ItemRedirect $e ) {
 			return $this->responseFactory->newErrorResponse(
