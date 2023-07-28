@@ -121,7 +121,7 @@ class PatchItemStatementValidatorTest extends TestCase {
 		ValidationError $validationError,
 		string $expectedErrorCode,
 		string $expectedErrorMessage,
-		?array $expectedErrorContext
+		array $expectedErrorContext
 	): void {
 		$invalidPatch = [ 'this is' => 'not a valid patch' ];
 		$this->jsonPatchValidator = $this->createMock( JsonPatchValidator::class );
@@ -154,7 +154,7 @@ class PatchItemStatementValidatorTest extends TestCase {
 			new ValidationError( JsonPatchValidator::CODE_INVALID ),
 			UseCaseError::INVALID_PATCH,
 			'The provided patch is invalid',
-			null,
+			[],
 		];
 
 		$operation = [ 'path' => '/a/b/c', 'value' => 'test' ];

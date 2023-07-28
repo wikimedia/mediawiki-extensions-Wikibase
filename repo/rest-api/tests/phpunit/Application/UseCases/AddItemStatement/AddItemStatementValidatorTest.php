@@ -79,7 +79,7 @@ class AddItemStatementValidatorTest extends TestCase {
 			$this->assertSame( UseCaseError::STATEMENT_DATA_INVALID_FIELD, $e->getErrorCode() );
 			$this->assertSame( "Invalid input for 'some-field'", $e->getErrorMessage() );
 			$this->assertSame(
-				[ AddItemStatementValidator::CONTEXT_PATH => 'some-field', AddItemStatementValidator::CONTEXT_VALUE => 'foo' ],
+				[ UseCaseError::CONTEXT_PATH => 'some-field', UseCaseError::CONTEXT_VALUE => 'foo' ],
 				$e->getErrorContext()
 			);
 		}
@@ -107,7 +107,7 @@ class AddItemStatementValidatorTest extends TestCase {
 				'Mandatory field missing in the statement data: some-field',
 				$e->getErrorMessage()
 			);
-			$this->assertSame( [ AddItemStatementValidator::CONTEXT_PATH => 'some-field' ], $e->getErrorContext() );
+			$this->assertSame( [ UseCaseError::CONTEXT_PATH => 'some-field' ], $e->getErrorContext() );
 		}
 	}
 

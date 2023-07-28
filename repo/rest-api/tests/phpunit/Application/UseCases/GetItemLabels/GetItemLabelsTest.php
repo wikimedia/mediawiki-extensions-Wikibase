@@ -69,7 +69,7 @@ class GetItemLabelsTest extends TestCase {
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::INVALID_ITEM_ID, $e->getErrorCode() );
 			$this->assertSame( 'Not a valid item ID: X321', $e->getErrorMessage() );
-			$this->assertNull( $e->getErrorContext() );
+			$this->assertSame( [], $e->getErrorContext() );
 		}
 	}
 

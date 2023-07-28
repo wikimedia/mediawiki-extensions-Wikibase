@@ -49,12 +49,12 @@ class GetPropertyStatementRouteHandlerTest extends MediaWikiIntegrationTestCase 
 
 	public function provideExceptionAndExpectedErrorCode(): Generator {
 		yield 'Statement Subject Not Found' => [
-			new UseCaseError( UseCaseError::STATEMENT_SUBJECT_NOT_FOUND, '' ),
+			new UseCaseError( UseCaseError::STATEMENT_SUBJECT_NOT_FOUND, '', [ 'subject-id' => 'P123' ] ),
 			UseCaseError::PROPERTY_NOT_FOUND,
 		];
 
 		yield 'Invalid Statement Subject ID' => [
-			new UseCaseError( UseCaseError::INVALID_STATEMENT_SUBJECT_ID, '' ),
+			new UseCaseError( UseCaseError::INVALID_STATEMENT_SUBJECT_ID, '', [ 'subject-id' => 'X123' ] ),
 			UseCaseError::INVALID_PROPERTY_ID,
 		];
 

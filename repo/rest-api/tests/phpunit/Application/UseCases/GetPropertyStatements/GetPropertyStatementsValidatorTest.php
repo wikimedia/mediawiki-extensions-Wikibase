@@ -25,7 +25,7 @@ class GetPropertyStatementsValidatorTest extends TestCase {
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::INVALID_PROPERTY_ID, $e->getErrorCode() );
 			$this->assertSame( 'Not a valid property ID: X123', $e->getErrorMessage() );
-			$this->assertSame( [ GetPropertyStatementsValidator::CONTEXT_PROPERTY_ID => 'X123' ], $e->getErrorContext() );
+			$this->assertSame( [ UseCaseError::CONTEXT_PROPERTY_ID => 'X123' ], $e->getErrorContext() );
 		}
 	}
 
@@ -36,7 +36,7 @@ class GetPropertyStatementsValidatorTest extends TestCase {
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::INVALID_PROPERTY_ID, $e->getErrorCode() );
 			$this->assertSame( 'Not a valid property ID: X123', $e->getErrorMessage() );
-			$this->assertSame( [ GetPropertyStatementsValidator::CONTEXT_PROPERTY_ID => 'X123' ], $e->getErrorContext() );
+			$this->assertSame( [ UseCaseError::CONTEXT_PROPERTY_ID => 'X123' ], $e->getErrorContext() );
 		}
 	}
 

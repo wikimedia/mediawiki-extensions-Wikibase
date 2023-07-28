@@ -67,7 +67,7 @@ class GetItemDescriptionsTest extends TestCase {
 		} catch ( UseCaseError $useCaseEx ) {
 			$this->assertSame( UseCaseError::INVALID_ITEM_ID, $useCaseEx->getErrorCode() );
 			$this->assertSame( 'Not a valid item ID: X321', $useCaseEx->getErrorMessage() );
-			$this->assertNull( $useCaseEx->getErrorContext() );
+			$this->assertSame( [], $useCaseEx->getErrorContext() );
 		}
 	}
 

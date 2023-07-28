@@ -60,7 +60,6 @@ class GetLatestStatementSubjectRevisionMetadataTest extends TestCase {
 
 	public function testGivenItemRedirect_throwsItemRedirect(): void {
 		$redirectSource = new ItemId( 'Q321' );
-
 		$redirectTarget = 'Q123';
 
 		$metadataRetriever = $this->createStub( StatementSubjectRevisionMetadataRetriever::class );

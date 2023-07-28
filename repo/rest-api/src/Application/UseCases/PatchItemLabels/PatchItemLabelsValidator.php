@@ -13,9 +13,6 @@ use Wikibase\Repo\RestApi\Application\Validation\JsonPatchValidator;
  */
 class PatchItemLabelsValidator {
 
-	public const CONTEXT_OPERATION = 'operation';
-	public const CONTEXT_FIELD = 'field';
-
 	private ItemIdValidator $itemIdValidator;
 	private JsonPatchValidator $jsonPatchValidator;
 	private EditMetadataValidator $editMetadataValidator;
@@ -69,7 +66,7 @@ class PatchItemLabelsValidator {
 					throw new UseCaseError(
 						UseCaseError::INVALID_PATCH_OPERATION,
 						"Incorrect JSON patch operation: '$op'",
-						[ self::CONTEXT_OPERATION => $context[JsonPatchValidator::CONTEXT_OPERATION] ]
+						[ UseCaseError::CONTEXT_OPERATION => $context[JsonPatchValidator::CONTEXT_OPERATION] ]
 					);
 
 				case JsonPatchValidator::CODE_INVALID_FIELD_TYPE:
@@ -77,8 +74,8 @@ class PatchItemLabelsValidator {
 						UseCaseError::INVALID_PATCH_FIELD_TYPE,
 						"The value of '{$context[JsonPatchValidator::CONTEXT_FIELD]}' must be of type string",
 						[
-							self::CONTEXT_OPERATION => $context[JsonPatchValidator::CONTEXT_OPERATION],
-							self::CONTEXT_FIELD => $context[JsonPatchValidator::CONTEXT_FIELD],
+							UseCaseError::CONTEXT_OPERATION => $context[JsonPatchValidator::CONTEXT_OPERATION],
+							UseCaseError::CONTEXT_FIELD => $context[JsonPatchValidator::CONTEXT_FIELD],
 						]
 					);
 
@@ -87,8 +84,8 @@ class PatchItemLabelsValidator {
 						UseCaseError::MISSING_JSON_PATCH_FIELD,
 						"Missing '{$context[JsonPatchValidator::CONTEXT_FIELD]}' in JSON patch",
 						[
-							self::CONTEXT_OPERATION => $context[JsonPatchValidator::CONTEXT_OPERATION],
-							self::CONTEXT_FIELD => $context[JsonPatchValidator::CONTEXT_FIELD],
+							UseCaseError::CONTEXT_OPERATION => $context[JsonPatchValidator::CONTEXT_OPERATION],
+							UseCaseError::CONTEXT_FIELD => $context[JsonPatchValidator::CONTEXT_FIELD],
 						]
 					);
 

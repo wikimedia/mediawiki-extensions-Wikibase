@@ -359,7 +359,7 @@ class PatchItemStatementTest extends TestCase {
 		$statementId = new StatementGuid( new ItemId( 'Q123' ), 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 		$this->setRetrieversForItemWithStringStatement( $statementId );
 
-		$expectedException = new UseCaseError( 'fail', 'message' );
+		$expectedException = $this->createStub( UseCaseError::class );
 		$this->patchedStatementValidator = $this->createStub( PatchedStatementValidator::class );
 		$this->patchedStatementValidator
 			->method( 'validateAndDeserializeStatement' )

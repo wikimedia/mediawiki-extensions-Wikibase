@@ -136,7 +136,7 @@ class SetItemLabelValidatorTest extends TestCase {
 		ValidationError $validationError,
 		string $expectedErrorCode,
 		string $expectedErrorMessage,
-		array $expectedContext = null
+		array $expectedContext = []
 	): void {
 		$itemId = 'Q123';
 		$languageCode = 'en';
@@ -187,8 +187,8 @@ class SetItemLabelValidatorTest extends TestCase {
 			UseCaseError::LABEL_TOO_LONG,
 			"Label must be no more than $limit characters long",
 			[
-				SetItemLabelValidator::CONTEXT_VALUE => $label,
-				SetItemLabelValidator::CONTEXT_LIMIT => $limit,
+				UseCaseError::CONTEXT_VALUE => $label,
+				UseCaseError::CONTEXT_CHARACTER_LIMIT => $limit,
 			],
 		];
 
@@ -200,7 +200,7 @@ class SetItemLabelValidatorTest extends TestCase {
 			),
 			UseCaseError::LABEL_DESCRIPTION_SAME_VALUE,
 			"Label and description for language code '$language' can not have the same value.",
-			[ SetItemLabelValidator::CONTEXT_LANGUAGE => $language ],
+			[ UseCaseError::CONTEXT_LANGUAGE => $language ],
 		];
 
 		$language = 'en';
@@ -217,10 +217,10 @@ class SetItemLabelValidatorTest extends TestCase {
 			UseCaseError::ITEM_LABEL_DESCRIPTION_DUPLICATE,
 			"Item $itemId already has label '$label' associated with language code '$language', using the same description text.",
 			[
-				SetItemLabelValidator::CONTEXT_LANGUAGE => $language,
-				SetItemLabelValidator::CONTEXT_LABEL => $label,
-				SetItemLabelValidator::CONTEXT_DESCRIPTION => $description,
-				SetItemLabelValidator::CONTEXT_MATCHING_ITEM_ID => $itemId,
+				UseCaseError::CONTEXT_LANGUAGE => $language,
+				UseCaseError::CONTEXT_LABEL => $label,
+				UseCaseError::CONTEXT_DESCRIPTION => $description,
+				UseCaseError::CONTEXT_MATCHING_ITEM_ID => $itemId,
 			],
 		];
 	}

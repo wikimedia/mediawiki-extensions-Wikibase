@@ -27,7 +27,8 @@ class GetStatementValidator {
 		if ( $validationError ) {
 			throw new UseCaseError(
 				UseCaseError::INVALID_STATEMENT_SUBJECT_ID,
-				"Not a valid subject ID: {$validationError->getContext()[RequestedSubjectIdValidator::CONTEXT_VALUE]}"
+				"Not a valid subject ID: {$validationError->getContext()[RequestedSubjectIdValidator::CONTEXT_VALUE]}",
+				[ 'subject-id' => $validationError->getContext()[RequestedSubjectIdValidator::CONTEXT_VALUE] ]
 			);
 		}
 

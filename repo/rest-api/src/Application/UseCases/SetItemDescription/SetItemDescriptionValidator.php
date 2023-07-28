@@ -15,13 +15,6 @@ use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
  */
 class SetItemDescriptionValidator {
 
-	public const CONTEXT_VALUE = 'value';
-	public const CONTEXT_LIMIT = 'character-limit';
-	public const CONTEXT_LANGUAGE = 'language';
-	public const CONTEXT_LABEL = 'label';
-	public const CONTEXT_DESCRIPTION = 'description';
-	public const CONTEXT_MATCHING_ITEM_ID = 'matching-item-id';
-
 	private ItemIdValidator $itemIdValidator;
 	private DescriptionLanguageCodeValidator $languageCodeValidator;
 	private ItemDescriptionValidator $itemDescriptionValidator;
@@ -106,15 +99,15 @@ class SetItemDescriptionValidator {
 						UseCaseError::DESCRIPTION_TOO_LONG,
 						"Description must be no more than $limit characters long",
 						[
-							self::CONTEXT_VALUE => $context[ItemDescriptionValidator::CONTEXT_VALUE],
-							self::CONTEXT_LIMIT => $limit,
+							UseCaseError::CONTEXT_VALUE => $context[ItemDescriptionValidator::CONTEXT_VALUE],
+							UseCaseError::CONTEXT_CHARACTER_LIMIT => $limit,
 						]
 					);
 				case ItemDescriptionValidator::CODE_LABEL_DESCRIPTION_EQUAL:
 					throw new UseCaseError(
 						UseCaseError::LABEL_DESCRIPTION_SAME_VALUE,
 						"Label and description for language code '$language' can not have the same value",
-						[ self::CONTEXT_LANGUAGE => $context[ItemDescriptionValidator::CONTEXT_LANGUAGE] ]
+						[ UseCaseError::CONTEXT_LANGUAGE => $context[ItemDescriptionValidator::CONTEXT_LANGUAGE] ]
 					);
 				case ItemDescriptionValidator::CODE_LABEL_DESCRIPTION_DUPLICATE:
 					$matchingItemId = $context[ItemDescriptionValidator::CONTEXT_MATCHING_ITEM_ID];
@@ -124,10 +117,10 @@ class SetItemDescriptionValidator {
 						"Item '$matchingItemId' already has label '$label' associated with "
 						. "language code '$language', using the same description text",
 						[
-							self::CONTEXT_LANGUAGE => $context[ItemDescriptionValidator::CONTEXT_LANGUAGE],
-							self::CONTEXT_LABEL => $label,
-							self::CONTEXT_DESCRIPTION => $context[ItemDescriptionValidator::CONTEXT_DESCRIPTION],
-							self::CONTEXT_MATCHING_ITEM_ID => $matchingItemId,
+							UseCaseError::CONTEXT_LANGUAGE => $context[ItemDescriptionValidator::CONTEXT_LANGUAGE],
+							UseCaseError::CONTEXT_LABEL => $label,
+							UseCaseError::CONTEXT_DESCRIPTION => $context[ItemDescriptionValidator::CONTEXT_DESCRIPTION],
+							UseCaseError::CONTEXT_MATCHING_ITEM_ID => $matchingItemId,
 						]
 					);
 				default:
