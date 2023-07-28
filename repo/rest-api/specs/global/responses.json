@@ -433,6 +433,34 @@
 			}
 		}
 	},
+	"InvalidReplacePropertyStatementInput": {
+		"description": "The request cannot be processed",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/ContextError" },
+				"examples": {
+					"invalid-property-id": { "$ref": "./examples.json#/InvalidPropertyIdExample" },
+					"invalid-statement-id": { "$ref": "./examples.json#/InvalidStatementIdExample" },
+					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
+					"statement-data-missing-field": { "$ref": "./examples.json#/StatementDataMissingFieldExample" },
+					"statement-data-invalid-field": { "$ref": "./examples.json#/StatementDataInvalidFieldExample" },
+					"invalid-operation-change-statement-id": {
+						"$ref": "./examples.json#/InvalidOperationChangeStatementId"
+					},
+					"invalid-operation-change-property-of-statement": {
+						"$ref": "./examples.json#/InvalidOperationChangePropertyOfStatement"
+					}
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
 	"InvalidRemoveStatementInput": {
 		"description": "The request cannot be processed",
 		"content": {
