@@ -9,6 +9,7 @@ use Deserializers\Exceptions\DeserializationException;
 use MediaWiki\Request\FauxRequest;
 use MediaWikiIntegrationTestCase;
 use Parser;
+use ParserFactory;
 use ParserOutput;
 use Wikibase\Client\Api\ApiFormatReference;
 use Wikibase\Client\DataAccess\ReferenceFormatterFactory;
@@ -67,13 +68,15 @@ class ApiFormatReferenceUnitTest extends MediaWikiIntegrationTestCase {
 	}
 
 	/** A parser that expects the given input and returns the given output. */
-	private function getParser( string $inputWikitext, string $outputHtml ): Parser {
+	private function getParser( string $inputWikitext, string $outputHtml ): ParserFactory {
 		$parser = $this->createMock( Parser::class );
 		$parser->method( 'parse' )
 			->with( $inputWikitext );
 		$parser->method( 'getOutput' )
 			->willReturn( new ParserOutput( $outputHtml ) );
-		return $parser;
+		$parserFactory = $this->createMock( ParserFactory::class );
+		$parserFactory->method( 'getInstance' )->willReturn( $parser );
+		return $parserFactory;
 	}
 
 	/** A reference deserializer that expects not to be called. */
@@ -91,11 +94,13 @@ class ApiFormatReferenceUnitTest extends MediaWikiIntegrationTestCase {
 	}
 
 	/** A parser that expects not to be called. */
-	private function unusedParser(): Parser {
+	private function unusedParser(): ParserFactory {
 		$parser = $this->createMock( Parser::class );
 		$parser->expects( $this->never() )->method( 'parse' );
 		$parser->expects( $this->never() )->method( 'getOutput' );
-		return $parser;
+		$parserFactory = $this->createMock( ParserFactory::class );
+		$parserFactory->method( 'getInstance' )->willReturn( $parser );
+		return $parserFactory;
 	}
 
 	public function testAsDataBridgeForHtml() {

@@ -8,7 +8,7 @@ use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
 use FormatJson;
 use LogicException;
-use Parser;
+use ParserFactory;
 use ParserOptions;
 use Title;
 use Wikibase\Client\DataAccess\ReferenceFormatterFactory;
@@ -23,8 +23,8 @@ use Wikimedia\ParamValidator\ParamValidator;
  */
 class ApiFormatReference extends ApiBase {
 
-	/** @var Parser */
-	private $parser;
+	/** @var ParserFactory */
+	private $parserFactory;
 	/** @var ReferenceFormatterFactory */
 	private $referenceFormatterFactory;
 	/** @var Deserializer */
@@ -33,12 +33,12 @@ class ApiFormatReference extends ApiBase {
 	public function __construct(
 		ApiMain $mainModule,
 		string $moduleName,
-		Parser $parser,
+		ParserFactory $parserFactory,
 		ReferenceFormatterFactory $referenceFormatterFactory,
 		Deserializer $referenceDeserializer
 	) {
 		parent::__construct( $mainModule, $moduleName );
-		$this->parser = $parser;
+		$this->parserFactory = $parserFactory;
 		$this->referenceFormatterFactory = $referenceFormatterFactory;
 		$this->referenceDeserializer = $referenceDeserializer;
 	}
@@ -81,8 +81,9 @@ class ApiFormatReference extends ApiBase {
 		switch ( $this->getParameter( 'outputformat' ) ) {
 			case 'html':
 				$parserOptions = ParserOptions::newFromContext( $this );
-				$this->parser->parse( $wikitext, Title::makeTitle( 0, 'API' ), $parserOptions );
-				$html = $this->parser->getOutput()->getText();
+				$parser = $this->parserFactory->getInstance();
+				$parser->parse( $wikitext, Title::makeTitle( 0, 'API' ), $parserOptions );
+				$html = $parser->getOutput()->getText();
 				$this->getResult()->addValue( $this->getModulePath(), 'html', $html );
 				break;
 			default:
