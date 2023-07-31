@@ -8,7 +8,9 @@ use DataValues\Geo\Formatters\GlobeCoordinateFormatter;
 use DataValues\Geo\Formatters\LatLongFormatter;
 use InvalidArgumentException;
 use MediaWiki\Languages\LanguageFactory;
+use MediaWiki\Logger\LoggerFactory;
 use RequestContext;
+use RuntimeException;
 use ValueFormatters\DecimalFormatter;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\QuantityFormatter;
@@ -20,6 +22,7 @@ use Wikibase\DataModel\Services\EntityId\EntityIdLabelFormatter;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
 use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\LanguageNameLookupFactory;
 use Wikibase\Lib\Store\CachingFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\EntityExistenceChecker;
 use Wikibase\Lib\Store\EntityRedirectChecker;
@@ -29,6 +32,7 @@ use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
+use Wikibase\Lib\TermLanguageFallbackChain;
 
 /**
  * Low level factory for ValueFormatters for well known data types.
@@ -48,9 +52,9 @@ class WikibaseValueFormatterBuilders {
 	private $labelDescriptionLookupFactory;
 
 	/**
-	 * @var LanguageNameLookup
+	 * @var LanguageNameLookupFactory
 	 */
-	private $languageNameLookup;
+	private $languageNameLookupFactory;
 
 	/**
 	 * @var EntityIdParser
@@ -146,7 +150,7 @@ class WikibaseValueFormatterBuilders {
 
 	public function __construct(
 		FormatterLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
-		LanguageNameLookup $languageNameLookup,
+		LanguageNameLookupFactory $languageNameLookupFactory,
 		EntityIdParser $itemUriParser,
 		string $geoShapeStorageBaseUrl,
 		string $tabularDataStorageBaseUrl,
@@ -164,7 +168,7 @@ class WikibaseValueFormatterBuilders {
 		array $thumbLimits = []
 	) {
 		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
-		$this->languageNameLookup = $languageNameLookup;
+		$this->languageNameLookupFactory = $languageNameLookupFactory;
 		$this->itemUriParser = $itemUriParser;
 		$this->geoShapeStorageBaseUrl = $geoShapeStorageBaseUrl;
 		$this->tabularDataStorageBaseUrl = $tabularDataStorageBaseUrl;
@@ -249,7 +253,7 @@ class WikibaseValueFormatterBuilders {
 		return new ItemPropertyIdHtmlLinkFormatter(
 			$this->getLabelDescriptionLookup( $options ),
 			$this->entityTitleLookup,
-			$this->languageNameLookup,
+			$this->newLanguageNameLookup( $options ),
 			new NonExistingEntityIdHtmlBrokenLinkFormatter(
 				'wikibase-deletedentity-',
 				$this->entityTitleTextLookup,
@@ -262,7 +266,7 @@ class WikibaseValueFormatterBuilders {
 		return new ItemPropertyIdHtmlLinkFormatter(
 			$this->getLabelDescriptionLookup( $options ),
 			$this->entityTitleLookup,
-			$this->languageNameLookup,
+			$this->newLanguageNameLookup( $options ),
 			new NonExistingEntityIdHtmlFormatter( 'wikibase-deletedentity-' )
 		);
 	}
@@ -500,13 +504,16 @@ class WikibaseValueFormatterBuilders {
 
 	/**
 	 * @param string $format The desired target format, see SnakFormatter::FORMAT_XXX
+	 * @param FormatterOptions $options
 	 *
 	 * @return MonolingualHtmlFormatter|MonolingualWikitextFormatter|MonolingualTextFormatter
 	 */
-	public function newMonolingualFormatter( $format ) {
+	public function newMonolingualFormatter( $format, FormatterOptions $options ) {
 		switch ( $this->snakFormat->getBaseFormat( $format ) ) {
 			case SnakFormatter::FORMAT_HTML:
-				return new MonolingualHtmlFormatter( $this->languageNameLookup );
+				return new MonolingualHtmlFormatter(
+					$this->newLanguageNameLookup( $options )
+				);
 			case SnakFormatter::FORMAT_WIKI:
 				return new MonolingualWikitextFormatter();
 			default:
@@ -518,12 +525,37 @@ class WikibaseValueFormatterBuilders {
 		$lookup = $this->labelDescriptionLookupFactory->getLabelDescriptionLookup( $options );
 		return new LabelsProviderEntityIdHtmlLinkFormatter(
 			$lookup,
-			$this->languageNameLookup,
+			$this->newLanguageNameLookup( $options ),
 			$this->entityExistenceChecker,
 			$this->entityTitleTextLookup,
 			$this->entityUrlLookup,
 			$this->entityRedirectChecker
 		);
+	}
+
+	private function newLanguageNameLookup( FormatterOptions $options ): LanguageNameLookup {
+		global $wgLang;
+
+		if ( $options->hasOption( ValueFormatter::OPT_LANG ) ) {
+			return $this->languageNameLookupFactory->getForLanguageCode(
+				$options->getOption( ValueFormatter::OPT_LANG )
+			);
+		} elseif ( $options->hasOption( FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN ) ) {
+			/** @var TermLanguageFallbackChain $chain */
+			$chain = $options->getOption( FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN );
+			'@phan-var TermLanguageFallbackChain $chain';
+			return $this->languageNameLookupFactory->getForLanguageCode(
+				$chain->getFallbackChain()[0]->getLanguageCode()
+			);
+		} else {
+			LoggerFactory::getInstance( 'Wikibase' )
+				->warning( __METHOD__ . ': FormatterOptions without OPT_LANG or OPT_LANGUAGE_FALLBACK_CHAIN', [
+					// unfortunately, we cannot usefully log $options :/ no way to access its keys
+					'exception' => new RuntimeException(), // capture stack trace
+				] );
+			// TODO remove warning and throw exception instead
+			return $this->languageNameLookupFactory->getForLanguageCode( $wgLang->getCode() );
+		}
 	}
 
 }
