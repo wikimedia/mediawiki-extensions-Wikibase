@@ -575,7 +575,7 @@ return [
 				$termFallbackCache,
 				$redirectResolvingLatestRevisionLookup
 			),
-			WikibaseRepo::getLanguageNameLookup( $services ),
+			WikibaseRepo::getLanguageNameLookupFactory( $services ),
 			WikibaseRepo::getItemUrlParser( $services ),
 			$settings->getSetting( 'geoShapeStorageBaseUrl' ),
 			$settings->getSetting( 'tabularDataStorageBaseUrl' ),

@@ -309,7 +309,7 @@ return [
 				$termFallbackCache,
 				$redirectResolvingLatestRevisionLookup
 			),
-			$languageNameLookupFactory->getForLanguage( WikibaseClient::getUserLanguage( $services ) ),
+			$languageNameLookupFactory,
 			WikibaseClient::getRepoItemUriParser( $services ),
 			$settings->getSetting( 'geoShapeStorageBaseUrl' ),
 			$settings->getSetting( 'tabularDataStorageBaseUrl' ),
