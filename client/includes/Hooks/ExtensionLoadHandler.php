@@ -5,7 +5,7 @@ namespace Wikibase\Client\Hooks;
 use ApiMain;
 use MediaWiki\HookContainer\HookContainer;
 use MediaWiki\MediaWikiServices;
-use Parser;
+use ParserFactory;
 use Wikibase\Client\Api\ApiFormatReference;
 use Wikibase\Client\DataAccess\ReferenceFormatterFactory;
 use Wikibase\DataModel\Deserializers\DeserializerFactory;
@@ -81,21 +81,21 @@ class ExtensionLoadHandler {
 		return [
 			'class' => ApiFormatReference::class,
 			'services' => [
-				'Parser',
+				'ParserFactory',
 				'WikibaseClient.BaseDataModelDeserializerFactory',
 				'WikibaseClient.ReferenceFormatterFactory',
 			],
 			'factory' => function (
 				ApiMain $apiMain,
 				string $moduleName,
-				Parser $parser,
+				ParserFactory $parserFactory,
 				DeserializerFactory $deserializerFactory,
 				ReferenceFormatterFactory $referenceFormatterFactory
 			) {
 				return new ApiFormatReference(
 					$apiMain,
 					$moduleName,
-					$parser,
+					$parserFactory,
 					$referenceFormatterFactory,
 					$deserializerFactory->newReferenceDeserializer()
 				);
