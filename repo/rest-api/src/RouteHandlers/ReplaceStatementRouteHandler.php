@@ -11,9 +11,9 @@ use MediaWiki\Rest\StringStream;
 use MediaWiki\Rest\Validator\BodyValidator;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
-use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatementRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatementResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\BotRightCheckMiddleware;
@@ -35,18 +35,18 @@ class ReplaceStatementRouteHandler extends SimpleHandler {
 	public const BOT_BODY_PARAM = 'bot';
 	public const COMMENT_BODY_PARAM = 'comment';
 
-	private ReplaceItemStatement $replaceItemStatement;
+	private ReplaceStatement $useCase;
 	private StatementSerializer $statementSerializer;
 	private MiddlewareHandler $middlewareHandler;
 	private ResponseFactory $responseFactory;
 
 	public function __construct(
-		ReplaceItemStatement $replaceItemStatement,
+		ReplaceStatement $useCase,
 		StatementSerializer $statementSerializer,
 		MiddlewareHandler $middlewareHandler,
 		ResponseFactory $responseFactory
 	) {
-		$this->replaceItemStatement = $replaceItemStatement;
+		$this->useCase = $useCase;
 		$this->statementSerializer = $statementSerializer;
 		$this->middlewareHandler = $middlewareHandler;
 		$this->responseFactory = $responseFactory;
@@ -55,7 +55,7 @@ class ReplaceStatementRouteHandler extends SimpleHandler {
 	public static function factory(): Handler {
 		$responseFactory = new ResponseFactory();
 		return new self(
-			WbRestApi::getReplaceItemStatement(),
+			WbRestApi::getReplaceStatement(),
 			WbRestApi::getSerializerFactory()->newStatementSerializer(),
 			new MiddlewareHandler( [
 				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
@@ -93,7 +93,7 @@ class ReplaceStatementRouteHandler extends SimpleHandler {
 		$requestBody = $this->getValidatedBody();
 
 		try {
-			$useCaseResponse = $this->replaceItemStatement->execute( new ReplaceItemStatementRequest(
+			$useCaseResponse = $this->useCase->execute( new ReplaceStatementRequest(
 				$statementId,
 				$requestBody[self::STATEMENT_BODY_PARAM],
 				$requestBody[self::TAGS_BODY_PARAM],
@@ -161,7 +161,7 @@ class ReplaceStatementRouteHandler extends SimpleHandler {
 			] ) : parent::getBodyValidator( $contentType );
 	}
 
-	private function newSuccessHttpResponse( ReplaceItemStatementResponse $useCaseResponse ): Response {
+	private function newSuccessHttpResponse( ReplaceStatementResponse $useCaseResponse ): Response {
 		$httpResponse = $this->getResponseFactory()->create();
 		$httpResponse->setStatus( 200 );
 		$httpResponse->setHeader( 'Content-Type', 'application/json' );

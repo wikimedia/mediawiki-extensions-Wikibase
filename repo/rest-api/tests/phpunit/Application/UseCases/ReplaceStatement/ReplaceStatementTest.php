@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\ReplaceItemStatement;
+namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\ReplaceStatement;
 
 use CommentStore;
 use PHPUnit\Framework\TestCase;
@@ -15,10 +15,10 @@ use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
-use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatementRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatementResponse;
-use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
@@ -38,13 +38,13 @@ use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatement
+ * @covers \Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatement
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class ReplaceItemStatementTest extends TestCase {
+class ReplaceStatementTest extends TestCase {
 
 	use EditMetadataHelper;
 
@@ -115,7 +115,7 @@ class ReplaceItemStatementTest extends TestCase {
 			] )
 		);
 
-		$this->assertInstanceOf( ReplaceItemStatementResponse::class, $response );
+		$this->assertInstanceOf( ReplaceStatementResponse::class, $response );
 		$this->assertSame(
 			$updatedItem->getStatements()->getStatementById( $statementId ),
 			$response->getStatement()
@@ -303,8 +303,8 @@ class ReplaceItemStatementTest extends TestCase {
 		}
 	}
 
-	private function newUseCase(): ReplaceItemStatement {
-		return new ReplaceItemStatement(
+	private function newUseCase(): ReplaceStatement {
+		return new ReplaceStatement(
 			$this->newValidator(),
 			new AssertItemExists( $this->getRevisionMetadata ),
 			$this->itemRetriever,
@@ -313,8 +313,8 @@ class ReplaceItemStatementTest extends TestCase {
 		);
 	}
 
-	private function newUseCaseRequest( array $requestData ): ReplaceItemStatementRequest {
-		return new ReplaceItemStatementRequest(
+	private function newUseCaseRequest( array $requestData ): ReplaceStatementRequest {
+		return new ReplaceStatementRequest(
 			$requestData['$statementId'],
 			$requestData['$statement'],
 			$requestData['$editTags'] ?? [],
@@ -325,8 +325,8 @@ class ReplaceItemStatementTest extends TestCase {
 		);
 	}
 
-	private function newValidator(): ReplaceItemStatementValidator {
-		return new ReplaceItemStatementValidator(
+	private function newValidator(): ReplaceStatementValidator {
+		return new ReplaceStatementValidator(
 			new ItemIdValidator(),
 			new StatementIdValidator( new ItemIdParser() ),
 			new StatementValidator( $this->newDeserializer() ),

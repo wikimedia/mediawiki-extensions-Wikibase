@@ -1,14 +1,14 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\ReplaceItemStatement;
+namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\ReplaceStatement;
 
 use CommentStore;
 use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Statement\StatementGuid;
-use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatementRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
@@ -17,13 +17,13 @@ use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatementValidator
+ * @covers \Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementValidator
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class ReplaceItemStatementValidatorTest extends TestCase {
+class ReplaceStatementValidatorTest extends TestCase {
 
 	private StatementValidator $statementValidator;
 
@@ -41,7 +41,7 @@ class ReplaceItemStatementValidatorTest extends TestCase {
 	 * @doesNotPerformAssertions
 	 */
 	public function testValidate_withValidRequest( array $requestData ): void {
-		$this->newReplaceItemStatementValidator()->assertValidRequest(
+		$this->newReplaceStatementValidator()->assertValidRequest(
 			$this->newUseCaseRequest( $requestData )
 		);
 	}
@@ -76,7 +76,7 @@ class ReplaceItemStatementValidatorTest extends TestCase {
 		$itemId = 'X123';
 
 		try {
-			$this->newReplaceItemStatementValidator()->assertValidRequest(
+			$this->newReplaceStatementValidator()->assertValidRequest(
 				$this->newUseCaseRequest( [
 					'$statementId' => 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
 					'$statement' => [ 'valid' => 'statement' ],
@@ -99,7 +99,7 @@ class ReplaceItemStatementValidatorTest extends TestCase {
 		$statementId = $itemId . StatementGuid::SEPARATOR . 'INVALID-STATEMENT-ID';
 
 		try {
-			$this->newReplaceItemStatementValidator()->assertValidRequest(
+			$this->newReplaceStatementValidator()->assertValidRequest(
 				$this->newUseCaseRequest( [
 					'$statementId' => $statementId,
 					'$statement' => [ 'valid' => 'statement' ],
@@ -132,7 +132,7 @@ class ReplaceItemStatementValidatorTest extends TestCase {
 			->willReturn( $expectedError );
 
 		try {
-			$this->newReplaceItemStatementValidator()->assertValidRequest(
+			$this->newReplaceStatementValidator()->assertValidRequest(
 				$this->newUseCaseRequest( [
 					'$statementId' => 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
 					'$statement' => $invalidStatement,
@@ -166,7 +166,7 @@ class ReplaceItemStatementValidatorTest extends TestCase {
 			->willReturn( $expectedError );
 
 		try {
-			$this->newReplaceItemStatementValidator()->assertValidRequest(
+			$this->newReplaceStatementValidator()->assertValidRequest(
 				$this->newUseCaseRequest( [
 					'$statementId' => 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
 					'$statement' => $invalidStatement,
@@ -191,7 +191,7 @@ class ReplaceItemStatementValidatorTest extends TestCase {
 	public function testValidate_withCommentTooLong(): void {
 		$comment = str_repeat( 'x', CommentStore::COMMENT_CHARACTER_LIMIT + 1 );
 		try {
-			$this->newReplaceItemStatementValidator()->assertValidRequest(
+			$this->newReplaceStatementValidator()->assertValidRequest(
 				$this->newUseCaseRequest( [
 					'$statementId' => 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
 					'$statement' => [ 'valid' => 'statement' ],
@@ -216,7 +216,7 @@ class ReplaceItemStatementValidatorTest extends TestCase {
 		$invalid = 'invalid';
 
 		try {
-			$this->newReplaceItemStatementValidator()->assertValidRequest(
+			$this->newReplaceStatementValidator()->assertValidRequest(
 				$this->newUseCaseRequest( [
 					'$statementId' => 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
 					'$statement' => [ 'valid' => 'statement' ],
@@ -234,8 +234,8 @@ class ReplaceItemStatementValidatorTest extends TestCase {
 		}
 	}
 
-	private function newReplaceItemStatementValidator(): ReplaceItemStatementValidator {
-		return new ReplaceItemStatementValidator(
+	private function newReplaceStatementValidator(): ReplaceStatementValidator {
+		return new ReplaceStatementValidator(
 			new ItemIdValidator(),
 			new StatementIdValidator( new ItemIdParser() ),
 			$this->statementValidator,
@@ -243,8 +243,8 @@ class ReplaceItemStatementValidatorTest extends TestCase {
 		);
 	}
 
-	private function newUseCaseRequest( array $requestData ): ReplaceItemStatementRequest {
-		return new ReplaceItemStatementRequest(
+	private function newUseCaseRequest( array $requestData ): ReplaceStatementRequest {
+		return new ReplaceStatementRequest(
 			$requestData['$statementId'],
 			$requestData['$statement'],
 			$requestData['$editTags'],

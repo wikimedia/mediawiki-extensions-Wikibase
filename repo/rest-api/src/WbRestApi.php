@@ -26,7 +26,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementFactory;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
@@ -106,9 +106,9 @@ class WbRestApi {
 			->get( 'WbRestApi.AddItemStatement' );
 	}
 
-	public static function getReplaceItemStatement( ContainerInterface $services = null ): ReplaceItemStatement {
+	public static function getReplaceStatement( ContainerInterface $services = null ): ReplaceStatement {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.ReplaceItemStatement' );
+			->get( 'WbRestApi.ReplaceStatement' );
 	}
 
 	public static function getRemoveItemStatement( ContainerInterface $services = null ): RemoveItemStatement {

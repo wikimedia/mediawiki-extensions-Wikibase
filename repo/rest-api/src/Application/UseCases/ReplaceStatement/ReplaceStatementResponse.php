@@ -1,13 +1,13 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement;
+namespace Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement;
 
 use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
 
 /**
  * @license GPL-2.0-or-later
  */
-class ReplaceItemStatementResponse {
+class ReplaceStatementResponse {
 
 	private Statement $statement;
 	private string $lastModified;
