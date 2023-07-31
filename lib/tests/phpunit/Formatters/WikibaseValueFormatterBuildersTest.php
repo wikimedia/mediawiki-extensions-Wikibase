@@ -63,7 +63,11 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->setMwGlobals( 'wgArticlePath', '/wiki/$1' );
+		$this->setMwGlobals( [
+			'wgArticlePath' => '/wiki/$1',
+			'wgUseInstantCommons' => false,
+			'wgForeignFileRepos' => [],
+		] );
 	}
 
 	/**
