@@ -149,14 +149,4 @@ class NumericPropertyIdTest extends \PHPUnit\Framework\TestCase {
 		];
 	}
 
-	public function testNewFromRepositoryAndNumber() {
-		$id = NumericPropertyId::newFromRepositoryAndNumber( '', 1 );
-		$this->assertSame( 'P1', $id->getSerialization() );
-	}
-
-	public function testNewFromRepositoryAndNumberWithInvalidNumericId() {
-		$this->expectException( InvalidArgumentException::class );
-		NumericPropertyId::newFromRepositoryAndNumber( '', 'P1' );
-	}
-
 }

@@ -150,14 +150,4 @@ class ItemIdTest extends \PHPUnit\Framework\TestCase {
 		];
 	}
 
-	public function testNewFromRepositoryAndNumber() {
-		$id = ItemId::newFromRepositoryAndNumber( '', 1 );
-		$this->assertSame( 'Q1', $id->getSerialization() );
-	}
-
-	public function testNewFromRepositoryAndNumberWithInvalidNumericId() {
-		$this->expectException( InvalidArgumentException::class );
-		ItemId::newFromRepositoryAndNumber( '', 'Q1' );
-	}
-
 }
