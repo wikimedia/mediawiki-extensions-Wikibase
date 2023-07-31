@@ -935,6 +935,7 @@ return call_user_func( function() {
 				'termbox.init.js',
 				'EntityLoadedHookEntityRepository.js',
 				'RepoApiWritingEntityRepository.js',
+				'mountTermbox.js',
 				[
 					'name' => 'config.json',
 					'callback' => function () {

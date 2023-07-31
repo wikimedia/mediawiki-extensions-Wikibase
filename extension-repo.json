@@ -751,7 +751,9 @@
 			"view/resources/wikibase/termbox/EntityLoadedHookEntityRepository.js",
 			"view/tests/qunit/wikibase/termbox/EntityLoadedHookEntityRepository.tests.js",
 			"view/resources/wikibase/termbox/RepoApiWritingEntityRepository.js",
-			"view/tests/qunit/wikibase/termbox/RepoApiWritingEntityRepository.tests.js"
+			"view/tests/qunit/wikibase/termbox/RepoApiWritingEntityRepository.tests.js",
+			"view/resources/wikibase/termbox/mountTermbox.js",
+			"view/tests/qunit/wikibase/termbox/mountTermbox.tests.js"
 		],
 		"dependencies": [
 			"wikibase.EntityInitializer",
