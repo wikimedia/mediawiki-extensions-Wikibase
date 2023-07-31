@@ -1,0 +1,33 @@
+{
+	"@metadata": {
+		"authors": [
+			"Winston Sung"
+		]
+	},
+	"wikibase-client-desc": "Wikibase擴展客戶端",
+	"tooltip-t-wikibase": "連到接住資料儲存庫嘅項目",
+	"wikibase-after-page-move": "你嘅搬動應該依家[$1 反映喺{{WBREPONAME}}項目]語言連，我哋問你查返呢個已經發生咗。",
+	"wikibase-comment-update": "改好{{WBREPONAME}}項目",
+	"wikibase-dataitem": "{{WBREPONAME}}項目",
+	"wikibase-editlinks": "改拎",
+	"wikibase-editlinkstitle": "改跨語言拎",
+	"wikibase-addlinkstitle": "加跨語言連結",
+	"wikibase-linkitem-addlinks": "加新連結",
+	"wikibase-linkitem-input-site": "話：",
+	"wikibase-linkitem-input-page": "頁面：",
+	"wikibase-linkitem-confirmitem-button": "確認",
+	"wikibase-linkitem-not-loggedin-title": "你要登入先",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "收埋",
+	"wikibase-rc-hide-wikidata-show": "顯示",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} 修改",
+	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}}改動",
+	"unconnectedpages": "未連到項目嘅版",
+	"wikibase-unconnectedpages-submit": "顯示版",
+	"wikibase-pageinfo-entity-id": "{{WBREPONAME}}項目ID",
+	"wikibase-otherprojects": "第啲項目",
+	"wikibase-sitelinks-sitename-columnheading": "話",
+	"connected-redirect-category": "連咗去個{{WBREPONAME}}項目嘅跳轉",
+	"wikibase-client-data-bridge-error-go-back": "返去"
+}

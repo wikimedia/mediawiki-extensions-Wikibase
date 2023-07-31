@@ -16,11 +16,13 @@
 	"wikibase-linkitem-selectlink": "Сураныч, бул баракка шилтеме кылууну каалаган сайтты жана баракты тандаңыз.",
 	"wikibase-linkitem-input-site": "Тил:",
 	"wikibase-linkitem-input-page": "Барак:",
+	"wikibase-linkitem-confirmitem-button": "Ырастоо",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Жашыруу",
 	"wikibase-rc-hide-wikidata-show": "Көрсөтүү",
 	"wikibase-rc-wikibase-edit-letter": "ВМ",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} оңдоо",
+	"wikibase-pageinfo-entity-usage-T": "Аталыш",
 	"wikibase-otherprojects": "Башка долбоорлордо",
 	"wikibase-sitelinks-sitename-columnheading": "Тил"
 }

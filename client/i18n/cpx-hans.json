@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Winston Sung"
+		]
+	},
+	"wikibase-linkitem-addlinks": "添加链接",
+	"wikibase-linkitem-title": "链接页面",
+	"wikibase-linkitem-linkpage": "链接页面",
+	"wikibase-linkitem-selectlink": "请选蜀个汝卜链接遘者个页面兮网站合页面。",
+	"wikibase-linkitem-input-site": "语言：",
+	"wikibase-linkitem-input-page": "页面：",
+	"wikibase-rc-hide-wikidata-hide": "隐藏",
+	"wikibase-rc-hide-wikidata-show": "显示"
+}
