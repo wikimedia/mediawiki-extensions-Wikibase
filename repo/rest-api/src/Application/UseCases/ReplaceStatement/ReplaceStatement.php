@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement;
+namespace Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement;
 
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
@@ -21,16 +21,16 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 /**
  * @license GPL-2.0-or-later
  */
-class ReplaceItemStatement {
+class ReplaceStatement {
 
-	private ReplaceItemStatementValidator $validator;
+	private ReplaceStatementValidator $validator;
 	private AssertItemExists $assertItemExists;
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
 
 	public function __construct(
-		ReplaceItemStatementValidator $validator,
+		ReplaceStatementValidator $validator,
 		AssertItemExists $assertItemExists,
 		ItemRetriever $itemRetriever,
 		ItemUpdater $itemUpdater,
@@ -47,7 +47,7 @@ class ReplaceItemStatement {
 	 * @throws ItemRedirect
 	 * @throws UseCaseError
 	 */
-	public function execute( ReplaceItemStatementRequest $request ): ReplaceItemStatementResponse {
+	public function execute( ReplaceStatementRequest $request ): ReplaceStatementResponse {
 		$this->validator->assertValidRequest( $request );
 
 		$requestedItemId = $request->getItemId();
@@ -94,7 +94,7 @@ class ReplaceItemStatement {
 		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Item is validated and exists
 		$newRevision = $this->itemUpdater->update( $item, $editMetadata );
 
-		return new ReplaceItemStatementResponse(
+		return new ReplaceStatementResponse(
 		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Statement is validated and exists
 			$newRevision->getItem()->getStatements()->getStatementById( $statementId ),
 			$newRevision->getLastModified(),

@@ -1,11 +1,11 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement;
+namespace Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement;
 
 /**
  * @license GPL-2.0-or-later
  */
-class ReplaceItemStatementRequest {
+class ReplaceStatementRequest {
 
 	private ?string $itemId;
 	private string $statementId;

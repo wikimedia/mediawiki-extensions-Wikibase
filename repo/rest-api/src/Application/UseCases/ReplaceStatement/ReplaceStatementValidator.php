@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement;
+namespace Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement;
 
 use LogicException;
 use Wikibase\DataModel\Statement\Statement;
@@ -13,7 +13,7 @@ use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
 /**
  * @license GPL-2.0-or-later
  */
-class ReplaceItemStatementValidator {
+class ReplaceStatementValidator {
 
 	private ItemIdValidator $itemIdValidator;
 	private StatementIdValidator $statementIdValidator;
@@ -35,7 +35,7 @@ class ReplaceItemStatementValidator {
 	/**
 	 * @throws UseCaseError
 	 */
-	public function assertValidRequest( ReplaceItemStatementRequest $request ): void {
+	public function assertValidRequest( ReplaceStatementRequest $request ): void {
 		$this->validateItemId( $request->getItemId() );
 		$this->validateStatementId( $request->getStatementId() );
 		$this->validateStatement( $request->getStatement() );
