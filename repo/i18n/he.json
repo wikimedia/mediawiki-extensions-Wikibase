@@ -499,7 +499,7 @@
 	"wikibase-shortcopyrightwarning-heading": "ייחוס רישיון",
 	"wikibase-entity-save-error-heading": "משהו השתבש",
 	"wikibase-entity-save-error-message": "לא היה אפשר לפרסם את השינוי שלך. באפשרותך לנסות ללחוץ שוב על כפתור הפרסום.",
-	"wikibase-tainted-ref-popper-text": "הערך של הקביעה הזאת שוּנה, אבל המקור נשאר. באשפרותך להסיר את האזהרה הזאת אם המקור עדיין נכון.",
+	"wikibase-tainted-ref-popper-text": "הערך של הקביעה הזאת שוּנה, אבל המקור נשאר זהה. באשפרותך להסיר את האזהרה הזאת אם המקור עדיין נכון.",
 	"wikibase-tainted-ref-popper-title": "ייתכן שיש חוסר התאמה בין המקור לבין הערך",
 	"wikibase-tainted-ref-popper-help-link-title": "דף העזרה לסוג האילוץ הזה",
 	"wikibase-tainted-ref-popper-help-link-text": "עזרה",
