@@ -23,6 +23,7 @@ class EntitySourceDocumentUrlProviderTest extends MediaWikiIntegrationTestCase {
 		$this->setMwGlobals( [
 			'wgLanguageCode' => 'de',
 			'wgArticlePath' => 'http://foo.test/wiki/$1',
+			'wgHooks' => [],
 		] );
 
 		$sources = new EntitySourceDefinitions(
