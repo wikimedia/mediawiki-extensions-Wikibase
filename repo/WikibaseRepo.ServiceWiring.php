@@ -1225,8 +1225,13 @@ return [
 		$db = WikibaseRepo::getRepoDomainDbFactory( $services )->newRepoDb();
 
 		if ( $idGeneratorSetting === 'auto' ) {
-			$idGeneratorSetting = $db->connections()->getWriteConnection()->getType() === 'mysql'
-				? 'mysql-upsert' : 'original';
+			if ( defined( 'MW_PHPUNIT_TEST' ) && $services->isStorageDisabled() ) {
+				// Avoid DB connections in tests where the DB is disabled.
+				$idGeneratorSetting = 'original';
+			} else {
+				$idGeneratorSetting = $db->connections()->getWriteConnection()->getType() === 'mysql'
+					? 'mysql-upsert' : 'original';
+			}
 		}
 
 		switch ( $idGeneratorSetting ) {
