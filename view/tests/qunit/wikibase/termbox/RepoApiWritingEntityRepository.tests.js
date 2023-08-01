@@ -37,6 +37,7 @@
 	} );
 
 	QUnit.test( 'request failed', function ( assert ) {
+		const done = assert.async();
 		const repoApiError = 'some-error-code';
 		const stubRepoApi = {
 			editEntity( id, baseRevId, data ) {
@@ -50,11 +51,12 @@
 			.catch( ( e ) => {
 				assert.strictEqual( e.message, repoApiError );
 				assert.true( e.getContext() !== null );
+				done();
 			} );
-		assert.expect( 0 );
 	} );
 
 	QUnit.test( 'invalid RepoApi response', function ( assert ) {
+		const done = assert.async();
 		const stubRepoApi = {
 			editEntity( id, baseRevId, data ) {
 				return Promise.resolve( { entity: { foo: 'bar' }, success: 1 } );
@@ -67,7 +69,7 @@
 			.catch( ( e ) => {
 				assert.strictEqual( e.message, 'Error: invalid entity serialization' );
 				assert.true( e.getContext() !== null );
+				done();
 			} );
-		assert.expect( 0 );
 	} );
 }( sinon, QUnit ) );
