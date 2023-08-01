@@ -135,6 +135,7 @@
 	"wikibase-snakview-snaktypeselector-value": "ערך מותאם אישית",
 	"wikibase-snakformat-invalid-value": "ערך בלתי־תקין.",
 	"wikibase-snakformat-propertynotfound": "המאפיין לא נמצא.",
+	"wikibase-shortcopyrightwarning-minimal": "לחיצה על \"$1\" מהווה את הסכמתך ל[[$2|תנאי השימוש]].",
 	"wikibase-shortcopyrightwarning": "לחיצה על \"$1\" היא הסכמה ל[[$2|תנאי השימוש]] ולשחרור של תרומתך לפי [$3 $4].",
 	"wikibase-shortcopyrightwarning-accept-persist": "קיבלתי את התנאים האלה לכל העריכות העתידיות שלי. אל תראו לי את ההודעה הזאת שוב.",
 	"wikibase-copyrighttooltip-acknowledge": "קיבלתי את התנאים האלה לכל העריכות העתידיות שלי. אל תראו לי את ההודעה הזאת שוב.",

@@ -229,7 +229,7 @@
 	"wikibase-newproperty-insufficient-data": "Bạn cần phải nhập nhãn, miêu tả, hoặc biệt danh.",
 	"wikibase-newproperty-pick-data-type": "(chọn kiểu dữ liệu)",
 	"special-newitem": "Tạo khoản mục mới",
-	"wikibase-newitem-summary": "Đảm bảo [[Đặc biệt:Tìm kiếm|kiểm tra xem Mặt hàng đã tồn tại chưa]]!<br /> Bạn nên tạo một {{int:Wikibase-label-helppage|nhãn}} và một {{int:Wikibase-description-helppage|description}} cho tất cả các mục mới.",
+	"wikibase-newitem-summary": "Đảm bảo [[Special:Search|kiểm tra xem khoản mục đã tồn tại chưa]]!<br />Bạn nên cung cấp {{int:Wikibase-label-helppage|nhãn}} và {{int:Wikibase-description-helppage|lời miêu tả}} cho tất cả các khoản mục mới.",
 	"wikibase-newitem-fieldset": "Tạo khoản mục mới",
 	"wikibase-newitem-site": "Dịch vụ của trang liên kết đầu tiên",
 	"wikibase-newitem-page": "Tên của trang liên kết đầu tiên",

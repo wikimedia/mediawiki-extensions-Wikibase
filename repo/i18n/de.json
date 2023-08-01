@@ -152,6 +152,7 @@
 	"wikibase-snakview-snaktypeselector-value": "Benutzerdefinierter Wert",
 	"wikibase-snakformat-invalid-value": "Ungültiger Wert.",
 	"wikibase-snakformat-propertynotfound": "Eigenschaft nicht gefunden.",
+	"wikibase-shortcopyrightwarning-minimal": "Indem du auf „$1“ klickst, stimmst du den [[$2|Nutzungsbedingungen]] zu.",
 	"wikibase-shortcopyrightwarning": "Durch Klicken auf „$1“ stimmst du den [[$2|Nutzungsbedingungen]] und unwiderruflich der Veröffentlichung deines Beitrags unter der [$3 $4] zu.",
 	"wikibase-shortcopyrightwarning-accept-persist": "Ich akzeptiere diese Bedingungen für meine zukünftigen Bearbeitungen. Diese Nachricht nicht erneut anzeigen.",
 	"wikibase-copyrighttooltip-acknowledge": "Ich akzeptiere diese Bedingungen für meine zukünftigen Bearbeitungen. Diese Nachricht nicht mehr anzeigen.",
