@@ -41,7 +41,7 @@ class GetItemStatementsValidator {
 	 * @throws UseCaseError
 	 */
 	private function validatePropertyId( ?string $propertyId ): void {
-		if ( !$propertyId ) {
+		if ( $propertyId === null ) {
 			return;
 		}
 

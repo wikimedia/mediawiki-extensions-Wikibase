@@ -27,16 +27,17 @@ class RemoveItemStatementValidator {
 	}
 
 	public function assertValidRequest( RemoveItemStatementRequest $request ): void {
-		$itemId = $request->getItemId();
-		if ( $itemId ) {
-			$this->assertValidItemId( $itemId );
-		}
+		$this->assertValidItemId( $request->getItemId() );
 		$this->assertValidStatementId( $request->getStatementId() );
 		$this->assertValidComment( $request->getComment() );
 		$this->assertValidEditTags( $request->getEditTags() );
 	}
 
-	private function assertValidItemId( string $itemId ): void {
+	private function assertValidItemId( ?string $itemId ): void {
+		if ( $itemId === null ) {
+			return;
+		}
+
 		$validationError = $this->itemIdValidator->validate( $itemId );
 		if ( $validationError ) {
 			throw new UseCaseError(
