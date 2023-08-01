@@ -5,7 +5,6 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
 use HashConfig;
-use Language;
 use Wikibase\Client\Store\ClientStore;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\DataAccess\NullPrefetchingTermLookup;
@@ -47,12 +46,6 @@ class DefaultValueFormatterBuildersTest extends ServiceWiringTestCase {
 			new NullPrefetchingTermLookup() );
 		$this->mockService( 'WikibaseClient.RedirectResolvingLatestRevisionLookup',
 			$this->createMock( RedirectResolvingLatestRevisionLookup::class ) );
-		$userLanguage = $this->createMock( Language::class );
-		$userLanguage->expects( $this->once() )
-			->method( 'getCode' )
-			->willReturn( 'en' );
-		$this->mockService( 'WikibaseClient.UserLanguage',
-			$userLanguage );
 		$this->mockService( 'WikibaseClient.RepoItemUriParser',
 			new ItemIdParser() );
 		$this->mockService( 'WikibaseClient.TermFallbackCache',

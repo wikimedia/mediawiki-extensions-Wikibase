@@ -9,7 +9,7 @@ use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
-use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\LanguageNameLookupFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityExistenceChecker;
 use Wikibase\Lib\Store\EntityRedirectChecker;
@@ -59,8 +59,8 @@ class DefaultValueFormatterBuildersTest extends ServiceWiringTestCase {
 		);
 
 		$this->mockService(
-			'WikibaseRepo.LanguageNameLookup',
-			$this->createMock( LanguageNameLookup::class )
+			'WikibaseRepo.LanguageNameLookupFactory',
+			$this->createMock( LanguageNameLookupFactory::class )
 		);
 
 		$this->mockService(

@@ -34,6 +34,7 @@ use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\LanguageNameLookupFactory;
 use Wikibase\Lib\Store\EntityExistenceChecker;
 use Wikibase\Lib\Store\EntityRedirectChecker;
 use Wikibase\Lib\Store\EntityTitleLookup;
@@ -95,6 +96,9 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 		$languageNameLookup = $this->createMock( LanguageNameLookup::class );
 		$languageNameLookup->method( 'getName' )
 			->willReturn( 'Deutsch' );
+		$languageNameLookupFactory = $this->createMock( LanguageNameLookupFactory::class );
+		$languageNameLookupFactory->method( 'getForLanguageCode' )
+			->willReturn( $languageNameLookup );
 
 		$urlLookup = $this->createMock( EntityUrlLookup::class );
 		$urlLookup->method( 'getLinkUrl' )
@@ -117,7 +121,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 				new TermFallbackCacheFacade( new FakeCache(), 999 ),
 				$redirectResolvingLatestRevisionLookup
 			),
-			$languageNameLookup,
+			$languageNameLookupFactory,
 			new ItemIdParser(),
 			self::GEO_SHAPE_STORAGE_FRONTEND_URL,
 			self::TABULAR_DATA_STORAGE_FRONTEND_URL,
