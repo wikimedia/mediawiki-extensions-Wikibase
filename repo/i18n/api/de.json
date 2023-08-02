@@ -8,7 +8,8 @@
 			"ToBeFree",
 			"Twagner",
 			"Wolfdietmann",
-			"Brettchenweber"
+			"Brettchenweber",
+			"Nw520"
 		]
 	},
 	"apihelp-wbavailablebadges-description": "Fragt verfügbare Auszeichnungs-Datenobjekte ab.",
@@ -76,7 +77,7 @@
 	"apihelp-wbgetclaims-example-1": "Ruft Behauptungen für das Objekt mit der Kennung <samp>Q42</samp> ab",
 	"apihelp-wbgetentities-description": "Ruft die Daten für mehrere Wikibase-Objekte ab.",
 	"apihelp-wbgetentities-summary": "Ruft die Daten für mehrere Wikibase-Objekte ab.",
-	"apihelp-wbgetentities-param-ids": "Die Kennungen der Objekte, von denen die Daten abgerufen werden sollen",
+	"apihelp-wbgetentities-param-ids": "Die Kennungen der Entitäten, von denen die Daten abgerufen werden sollen",
 	"apihelp-wbgetentities-param-sites": "Identifier für die Site, auf der sich die entsprechende Seite befindet.\nZusammen mit <code>title</code> verwenden, aber nur eine Site für mehrere Titel oder mehrere Sites für einen Titel angeben.",
 	"apihelp-wbgetentities-param-titles": "Der Titel der entsprechenden Seite.\nZusammen mit <code>sites</code> benutzen, setze aber nur eine Site für mehrere Titel oder mehrere Sites für einen Titel.",
 	"apihelp-wbgetentities-param-redirects": "Ob Weiterleitungen aufgelöst werden sollen.\nFalls auf „no“ festgelegt, werden Weiterleitungen wie gelöschte Objekte behandelt.",
@@ -164,8 +165,8 @@
 	"apihelp-query+wbsearch-example-3": "Sucht nach „Alphabet“ in deutscher Sprache für die Eigenschaft „Typ“",
 	"apihelp-query+wbsearch-example-4": "Sucht nach „alphabet“ auf Englisch als Generator",
 	"apihelp-query+wbsubscribers-description": "Ruft die Abonnements für die angegebenen Objekte ab.",
-	"apihelp-query+wbsubscribers-summary": "Ruft die Abonnements für die angegebenen Objekte ab.",
-	"apihelp-query+wbsubscribers-param-entities": "Objekte, für die die Abonnenten abgerufen werden sollen.",
+	"apihelp-query+wbsubscribers-summary": "Ruft die Abonnements für die angegebenen Entitäten ab.",
+	"apihelp-query+wbsubscribers-param-entities": "Entitäten, für die die Abonnenten abgerufen werden sollen.",
 	"apihelp-query+wbsubscribers-param-prop": "Eigenschaften, die zum Ergebnis hinzugefügt werden sollen.",
 	"apihelp-query+wbsubscribers-param-limit": "Maximale Anzahl der Ergebnisse",
 	"apihelp-query+wbsubscribers-example-1": "Ruft die Abonnenten des Objekts <samp>Q42</samp> ab",

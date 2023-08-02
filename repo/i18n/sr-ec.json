@@ -346,6 +346,7 @@
 	"wikibase-tainted-ref-popper-remove-warning": "Уклони упозорење",
 	"wikibase-tainted-ref-tainted-icon-title": "Ова изјава има неке проблеме.",
 	"wikibase-federated-properties-save-api-error-message": "Чување није успело због неуспешног захтева заједничком изворном викију.",
+	"wikibase-federated-properties-special-list-of-properties-source-ref": "[$1 Списак својстава на $2]",
 	"wikibase-federated-properties-leaving-site-notice-cancel": "Откажи",
 	"wikibase-federated-properties-leaving-site-notice-continue": "Настави на изворни вики",
 	"wikibase-federated-properties-leaving-site-notice-header": "Напуштање локалне викибазе",
