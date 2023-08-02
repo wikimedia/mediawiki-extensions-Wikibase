@@ -233,7 +233,7 @@
 	"wikibase-itemdisambiguation-description": "検索に用いる値は名前全体でなければなりません。言語は「en」などのIDを指定してください。",
 	"wikibase-itemdisambiguation-summary": "正確に同じラベルを持つ全ての項目の検索。",
 	"special-newproperty": "プロパティの新規作成",
-	"wikibase-newproperty-summary": "プロパティが既に存在することを確認してください!<br />すべての新規プロパティについて{{int:Wikibase-label-helppage}}|ラベルおよび{{int:Wikibase-description-helppage}}|説明を作成する必要があり、さらにプロパティの型が有効である必要があります。",
+	"wikibase-newproperty-summary": "プロパティが既に存在することを確認してください！<br />すべての新規プロパティについて{{int:Wikibase-label-helppage|ラベル}}および{{int:Wikibase-description-helppage|説明}}を作成する必要があり、さらにプロパティの型が有効である必要があります。",
 	"wikibase-newproperty-fieldset": "プロパティの新規作成",
 	"wikibase-newproperty-datatype": "データ型:",
 	"wikibase-newproperty-invalid-datatype": "指定したデータ型は無効です。",

@@ -140,6 +140,7 @@
 	"wikibase-snakview-snaktypeselector-value": "valore personalizzato",
 	"wikibase-snakformat-invalid-value": "Valore non valido.",
 	"wikibase-snakformat-propertynotfound": "Proprietà non trovata.",
+	"wikibase-shortcopyrightwarning-minimal": "Cliccando \"$1\", accetti le [[$2|condizioni d'uso]].",
 	"wikibase-shortcopyrightwarning": "Cliccando su \"$1\", accetti le [[$2|condizioni d'uso]], ed accetti irrevocabilmente a rilasciare il tuo contributo in base alla [$3 $4].",
 	"wikibase-shortcopyrightwarning-accept-persist": "Accetto questi termini per le mie future modifiche. Non mostrare di nuovo questo messaggio.",
 	"wikibase-copyrighttooltip-acknowledge": "Accetto questi termini per le mie future modifiche. Non mostrare di nuovo questo messaggio.",

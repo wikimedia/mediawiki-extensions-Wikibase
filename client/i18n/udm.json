@@ -5,6 +5,7 @@
 			"Irus",
 			"Kaganer",
 			"Kotwys",
+			"Udmwiki",
 			"Wadorgurt",
 			"Света Поторочина"
 		]
@@ -15,11 +16,11 @@
 	"wikibase-comment-update": "{{WBREPONAME}} арбери воштэмын",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|воштон}}",
 	"wikibase-dataitem": "{{WBREPONAME}} арбери",
-	"wikibase-editlinks": "Чӧлсконъёсыз тупатыны",
+	"wikibase-editlinks": "Чӧлсконъёсты тупатыны",
 	"wikibase-editlinkstitle": "Кылъёс куспысь чӧлсконъёсыз тупатоно",
-	"wikibase-linkitem-addlinks": "Чӧлсконъёсты ватсано",
-	"wikibase-linkitem-title": "Бамен герӟан",
-	"wikibase-linkitem-linkpage": "Та бамен герӟано",
+	"wikibase-linkitem-addlinks": "Чӧлсконъёс ватсано",
+	"wikibase-linkitem-title": "Та бамен герӟано:",
+	"wikibase-linkitem-linkpage": "Та бамен герӟано:",
 	"wikibase-linkitem-selectlink": "Та бамен герӟано сайтэз но бамез быръелэ вал.",
 	"wikibase-linkitem-input-site": "Кыл:",
 	"wikibase-linkitem-input-page": "Бам:",

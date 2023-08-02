@@ -252,7 +252,7 @@
 	"wikibase-itemdisambiguation-description": "用于搜索的值必须是完整的文字条目。语言是一个标识符，例如“zh”。",
 	"wikibase-itemdisambiguation-summary": "搜索具有完全相同标签的所有项目。",
 	"special-newproperty": "新建属性",
-	"wikibase-newproperty-summary": "请务必检查该属性是否已经存在！<br />您应该为所有新属性创建一个{{int:Wikibase-label-helppage|标签}}和一个{{int:Wikibase-description-helppage|描述}}并指定一个有效的属性类型。",
+	"wikibase-newproperty-summary": "请务必检查是否已存在该属性！<br />您应该为所有新属性创建一个{{int:Wikibase-label-helppage|标签}}和一个{{int:Wikibase-description-helppage|描述}}并指定一个有效的属性类型。",
 	"wikibase-newproperty-fieldset": "新建属性",
 	"wikibase-newproperty-datatype": "数据类型：",
 	"wikibase-newproperty-invalid-datatype": "指定的数据类型无效。",
