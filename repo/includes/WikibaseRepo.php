@@ -202,7 +202,9 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @deprecated
+	 * @deprecated Avoid injecting the user language into a service.
+	 * If the service depends on a language, make it part of the parameters when the service is used
+	 * (possibly indirectly, e.g. via an {@link \IContextSource}).
 	 */
 	public static function getUserLanguage( ContainerInterface $services = null ): Language {
 		return ( $services ?: MediaWikiServices::getInstance() )
