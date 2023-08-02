@@ -89,8 +89,7 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 		$updaterCollection = new EntityParserOutputDataUpdaterCollection( $parserOutput, $this->dataUpdaters );
 		$updaterCollection->updateParserOutput( $entity );
 
-		$configVars = $this->configBuilder->build( $entity );
-		$parserOutput->addJsConfigVars( $configVars );
+		$this->configBuilder->build( $entity, $parserOutput );
 
 		$entityMetaTagsCreator = $this->entityMetaTagsCreatorFactory->newEntityMetaTags( $entity->getType(), $this->language );
 

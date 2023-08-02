@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\ParserOutput;
 
 use MediaWikiIntegrationTestCase;
+use ParserOutput;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
@@ -24,28 +25,37 @@ class ParserOutputJsConfigBuilderTest extends MediaWikiIntegrationTestCase {
 		$item = new Item( new ItemId( 'Q5881' ) );
 		$this->addLabels( $item );
 
-		$configBuilder = new ParserOutputJsConfigBuilder();
-		$configVars = $configBuilder->build( $item );
+		$parserOutput = $this->createMock( ParserOutput::class );
+		$this->assertWbEntityId( 'Q5881', $parserOutput, $sawOnce );
 
-		$this->assertWbEntityId( 'Q5881', $configVars );
+		$configBuilder = new ParserOutputJsConfigBuilder();
+		$configBuilder->build( $item, $parserOutput );
+		$this->assertTrue( $sawOnce );
 	}
 
 	public function testBuildConfigProperty() {
 		$property = new Property( new NumericPropertyId( 'P330' ), null, 'string' );
 		$this->addLabels( $property );
 
-		$configBuilder = new ParserOutputJsConfigBuilder();
-		$configVars = $configBuilder->build( $property );
+		$parserOutput = $this->createMock( ParserOutput::class );
+		$this->assertWbEntityId( 'P330', $parserOutput, $sawOnce );
 
-		$this->assertWbEntityId( 'P330', $configVars );
+		$configBuilder = new ParserOutputJsConfigBuilder();
+		$configBuilder->build( $property, $parserOutput );
+		$this->assertTrue( $sawOnce );
 	}
 
-	public function assertWbEntityId( $expectedId, array $configVars ) {
-		$this->assertEquals(
-			$expectedId,
-			$configVars['wbEntityId'],
-			'wbEntityId'
-		);
+	public function assertWbEntityId( $expectedId, $parserOutputMock, &$sawOnce ) {
+		$sawOnce = false;
+		$parserOutputMock
+			->expects( $this->atLeastOnce() )
+			->method( 'setJsConfigVar' )
+			->with( $this->anything(), $this->anything() )
+			->willReturnCallback( function( $name, $value ) use ( &$sawOnce, $expectedId ) {
+				if ( $name === 'wbEntityId' && $value === $expectedId ) {
+					$sawOnce = true;
+				}
+			} );
 	}
 
 	private function addLabels( LabelsProvider $entity ) {
