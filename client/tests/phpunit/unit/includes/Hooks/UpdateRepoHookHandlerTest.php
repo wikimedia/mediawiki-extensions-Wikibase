@@ -7,6 +7,7 @@ namespace Wikibase\Client\Tests\Unit\Hooks;
 use IJobSpecification;
 use JobQueue;
 use JobQueueGroup;
+use MediaWiki\JobQueue\JobQueueGroupFactory;
 use MediaWiki\Revision\RevisionRecord;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
@@ -14,6 +15,7 @@ use Title;
 use User;
 use Wikibase\Client\Hooks\UpdateRepoHookHandler;
 use Wikibase\Client\NamespaceChecker;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Rdbms\ClientDomainDb;
 use Wikibase\Lib\Rdbms\ReplicationWaiter;
@@ -189,8 +191,9 @@ class UpdateRepoHookHandlerTest extends TestCase {
 		$jobQueue->method( 'supportsDelayedJobs' )
 			->willReturn( true );
 
-		$jobQueueGroup = $this->createMock( JobQueueGroup::class );
+		$jobQueueGroupFactory = $this->createMock( JobQueueGroupFactory::class );
 		if ( $jobName !== null ) {
+			$jobQueueGroup = $this->createMock( JobQueueGroup::class );
 			$jobQueueGroup->expects( $this->once() )
 				->method( 'push' )
 				->with( $this->isInstanceOf( IJobSpecification::class ) );
@@ -198,12 +201,18 @@ class UpdateRepoHookHandlerTest extends TestCase {
 				->method( 'get' )
 				->with( $jobName )
 				->willReturn( $jobQueue );
+			$jobQueueGroupFactory->expects( $this->once() )
+				->method( 'makeJobQueueGroup' )
+				->with( 'entitySourceDbName' )
+				->willReturn( $jobQueueGroup );
 		} else {
-			$jobQueueGroup->expects( $this->never() )
-				->method( 'push' );
-			$jobQueueGroup->expects( $this->never() )
-				->method( 'get' );
+			$jobQueueGroupFactory->expects( $this->never() )
+				->method( 'makeJobQueueGroup' );
 		}
+
+		$entitySource = $this->createConfiguredMock( DatabaseEntitySource::class, [
+			'getDatabaseName' => 'entitySourceDbName',
+		] );
 
 		$siteLinkLookup = $this->createMock( SiteLinkLookup::class );
 		$siteLinkLookup->method( 'getItemIdForLink' )
@@ -220,7 +229,8 @@ class UpdateRepoHookHandlerTest extends TestCase {
 
 		return new UpdateRepoHookHandler(
 			$namespaceChecker,
-			$jobQueueGroup,
+			$jobQueueGroupFactory,
+			$entitySource,
 			$siteLinkLookup,
 			new NullLogger(),
 			$clientDb,

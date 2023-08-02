@@ -6,7 +6,6 @@ namespace Wikibase\Client\Hooks;
 
 use Content;
 use JobQueueError;
-use JobQueueGroup;
 use MediaWiki\Hook\PageMoveCompleteHook;
 use MediaWiki\JobQueue\JobQueueGroupFactory;
 use MediaWiki\Linker\LinkTarget;
@@ -45,9 +44,14 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 	private $namespaceChecker;
 
 	/**
-	 * @var JobQueueGroup
+	 * @var JobQueueGroupFactory
 	 */
-	private $jobQueueGroup;
+	private $jobQueueGroupFactory;
+
+	/**
+	 * @var DatabaseEntitySource
+	 */
+	private $entitySource;
 
 	/**
 	 * @var SiteLinkLookup
@@ -82,13 +86,10 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 		SettingsArray $clientSettings,
 		ClientStore $store
 	): ?self {
-
-		$repoDB = $entitySource->getDatabaseName();
-		$jobQueueGroup = $jobQueueGroupFactory->makeJobQueueGroup( $repoDB );
-
 		return new self(
 			$namespaceChecker,
-			$jobQueueGroup,
+			$jobQueueGroupFactory,
+			$entitySource,
 			$store->getSiteLinkLookup(),
 			LoggerFactory::getInstance( 'UpdateRepo' ),
 			$clientDomainDbFactory->newLocalDb(),
@@ -99,7 +100,8 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 
 	/**
 	 * @param NamespaceChecker $namespaceChecker
-	 * @param JobQueueGroup $jobQueueGroup
+	 * @param JobQueueGroupFactory $jobQueueGroupFactory
+	 * @param DatabaseEntitySource $entitySource
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param LoggerInterface $logger
 	 * @param string $siteGlobalID
@@ -107,7 +109,8 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 	 */
 	public function __construct(
 		NamespaceChecker $namespaceChecker,
-		JobQueueGroup $jobQueueGroup,
+		JobQueueGroupFactory $jobQueueGroupFactory,
+		DatabaseEntitySource $entitySource,
 		SiteLinkLookup $siteLinkLookup,
 		LoggerInterface $logger,
 		ClientDomainDb $clientDb,
@@ -115,7 +118,8 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 		$propagateChangesToRepo
 	) {
 		$this->namespaceChecker = $namespaceChecker;
-		$this->jobQueueGroup = $jobQueueGroup;
+		$this->jobQueueGroupFactory = $jobQueueGroupFactory;
+		$this->entitySource = $entitySource;
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->logger = $logger;
 		$this->clientDb = $clientDb;
@@ -181,7 +185,10 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 		}
 
 		try {
-			$updateRepo->injectJob( $this->jobQueueGroup );
+			$jobQueueGroup = $this->jobQueueGroupFactory->makeJobQueueGroup(
+				$this->entitySource->getDatabaseName()
+			);
+			$updateRepo->injectJob( $jobQueueGroup );
 
 			// To be able to find out about this in the ArticleDeleteAfter
 			// hook (but see T268135)
