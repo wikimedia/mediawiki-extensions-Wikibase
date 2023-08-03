@@ -122,6 +122,7 @@
 	"wikibase-snakview-snaktypeselector-value": "valor personalisate",
 	"wikibase-snakformat-invalid-value": "Valor non valide.",
 	"wikibase-snakformat-propertynotfound": "Proprietate non trovate.",
+	"wikibase-shortcopyrightwarning-minimal": "Cliccante sur \"$1\", tu accepta le [[$2|conditiones de uso]].",
 	"wikibase-shortcopyrightwarning": "Cliccante sur \"$1\" tu accepta le [[$2|conditiones de uso]] e tu libera irrevocabilemente tu contribution sub le [$3 $4].",
 	"wikibase-shortcopyrightwarning-accept-persist": "Io accepta iste conditiones pro mi modificationes futur. Non monstrar iste message de novo.",
 	"wikibase-copyrighttooltip-acknowledge": "Io accepta iste conditiones pro mi modificationes futur. Non monstrar iste message de novo.",

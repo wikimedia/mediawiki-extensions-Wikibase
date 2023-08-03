@@ -16,6 +16,7 @@
 	},
 	"wikibase-content-language-edit-not-recognized-language": "The supplied language code was not recognised.",
 	"wikibase-newitem-not-recognized-siteid": "The provided site identifier was not recognised.",
+	"wikibase-entitydata-bad-flavor": "Invalid flavour $1: must be {{PLURAL:$2|{{#commaseparatedlist:$3}}|one of {{#commaseparatedlist:$3}}}}.",
 	"wikibase-api-not-recognized-datatype": "A datatype was expected, but either missing or not recognised.",
 	"wikibase-api-not-recognized-siteid": "The supplied site identifier was not recognised.",
 	"wikibase-api-not-recognized": "Something was not recognised.",
