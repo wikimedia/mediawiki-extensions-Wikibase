@@ -103,6 +103,7 @@
 	"wikibase-entity-summary-wbsetaliases-add-remove": "Додато и уклоњено [$2] {{PLURAL:$1|псеудоним|псеудонима}}",
 	"wikibase-entity-summary-wbsetaliases-add": "Додато [$2] {{PLURAL:$1|псеудоним|псеудонима}}",
 	"wikibase-entity-summary-wbsetaliases-remove": "Уклоњенo {{PLURAL:$1|псеудонима}}: ([$2])",
+	"wikibase-entity-summary-wbsetlabeldescriptionaliases": "Промењен назив, опис и псеудоними на $2",
 	"wikibase-entity-summary-wbsetsitelink-add": "Додата веза ка [$2]",
 	"wikibase-entity-summary-wbsetsitelink-set": "Измењена веза ка [$2]",
 	"wikibase-entity-summary-wbsetsitelink-set-badges": "Промењена значка за [$2]",
