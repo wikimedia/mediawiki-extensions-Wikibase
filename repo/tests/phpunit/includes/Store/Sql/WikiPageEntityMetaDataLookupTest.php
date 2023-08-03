@@ -132,8 +132,6 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 		$nsLookup = $this->getEntityNamespaceLookup();
 
 		$loadBalancer = $this->createMock( ILoadBalancerForOwner::class );
-		$loadBalancer->expects( $this->never() )
-			->method( 'getConnectionRef' );
 		$loadBalancer->expects( $this->exactly( $getConnectionCount ) )
 			->method( 'getConnection' )
 			->willReturnCallback( function( $id ) use ( $selectCount ) {

@@ -96,8 +96,6 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiIntegrationTestCase
 				$lb->expects( $this->never() )
 					->method( 'getConnection' );
 				$lb->expects( $this->never() )
-					->method( 'getConnectionRef' );
-				$lb->expects( $this->never() )
 					->method( 'getMaintenanceConnectionRef' );
 				$lb->method( 'getLocalDomainID' )
 					->willReturn( 'banana' );
