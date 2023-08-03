@@ -18,8 +18,8 @@ class GetItemStatementsResponse {
 
 	private int $revisionId;
 
-	public function __construct( StatementList $serializedStatements, string $lastModified, int $revisionId ) {
-		$this->statements = $serializedStatements;
+	public function __construct( StatementList $statements, string $lastModified, int $revisionId ) {
+		$this->statements = $statements;
 		$this->lastModified = $lastModified;
 		$this->revisionId = $revisionId;
 	}
