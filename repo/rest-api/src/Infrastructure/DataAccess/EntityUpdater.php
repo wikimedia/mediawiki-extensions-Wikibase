@@ -40,6 +40,9 @@ class EntityUpdater {
 		$this->permissionManager = $permissionManager;
 	}
 
+	/**
+	 * @throws EntityUpdateFailed
+	 */
 	public function update( EntityDocument $entity, EditMetadata $editMetadata ): EntityRevision {
 		$this->checkBotRightIfProvided( $this->context->getUser(), $editMetadata->isBot() );
 
