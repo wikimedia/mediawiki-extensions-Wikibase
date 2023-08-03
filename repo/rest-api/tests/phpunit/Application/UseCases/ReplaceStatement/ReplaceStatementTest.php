@@ -125,17 +125,18 @@ class ReplaceStatementTest extends TestCase {
 	 * @dataProvider provideSubjectId
 	 */
 	public function testGivenStatementSubjectNotFoundOrRedirect_throwsUseCaseError( EntityId $subjectId ): void {
+		$statementId = new StatementGuid( $subjectId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 		$expectedException = $this->createStub( UseCaseException::class );
 		$this->assertStatementSubjectExists = $this->createMock( AssertStatementSubjectExists::class );
 		$this->assertStatementSubjectExists->expects( $this->once() )
 			->method( 'execute' )
-			->with( $subjectId )
+			->with( $statementId )
 			->willThrowException( $expectedException );
 
 		try {
 			$this->newUseCase()->execute(
 				$this->newUseCaseRequest( [
-					'$statementId' => "$subjectId\$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+					'$statementId' => (string)$statementId,
 					'$statement' => $this->getValidStatementSerialization(),
 				] )
 			);

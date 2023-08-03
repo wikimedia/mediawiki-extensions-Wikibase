@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases;
 
-use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Statement\StatementGuid;
 
 /**
  * @license GPL-2.0-or-later
@@ -19,8 +19,8 @@ class AssertStatementSubjectExists {
 	 * @throws ItemRedirect if the statement subject is a redirect
 	 * @throws UseCaseError if the statement subject does not exist
 	 */
-	public function execute( EntityId $id ): void {
-		$this->getRevisionMetadata->execute( $id );
+	public function execute( StatementGuid $statementId ): void {
+		$this->getRevisionMetadata->execute( $statementId );
 	}
 
 }

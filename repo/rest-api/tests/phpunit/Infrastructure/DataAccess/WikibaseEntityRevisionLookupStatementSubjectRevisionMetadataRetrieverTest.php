@@ -4,9 +4,9 @@ namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\LatestRevisionIdResult;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\WikibaseEntityRevisionLookupStatementSubjectRevisionMetadataRetriever;
@@ -21,19 +21,19 @@ use Wikibase\Repo\RestApi\Infrastructure\DataAccess\WikibaseEntityRevisionLookup
 class WikibaseEntityRevisionLookupStatementSubjectRevisionMetadataRetrieverTest extends TestCase {
 
 	/**
-	 * @dataProvider provideStatementSubjectId
+	 * @dataProvider provideStatementId
 	 */
-	public function testGivenConcreteRevision_getLatestRevisionMetadataReturnsMetadata( EntityId $subjectId ): void {
+	public function testGivenConcreteRevision_getLatestRevisionMetadataReturnsMetadata( StatementGuid $statementId ): void {
 		$expectedRevisionId = 777;
 		$expectedRevisionTimestamp = '20201111070707';
 		$entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );
 		$entityRevisionLookup->expects( $this->once() )
 			->method( 'getLatestRevisionId' )
-			->with( $subjectId )
+			->with( $statementId->getEntityId() )
 			->willReturn( LatestRevisionIdResult::concreteRevision( $expectedRevisionId, $expectedRevisionTimestamp ) );
 
 		$metaDataRetriever = new WikibaseEntityRevisionLookupStatementSubjectRevisionMetadataRetriever( $entityRevisionLookup );
-		$result = $metaDataRetriever->getLatestRevisionMetadata( $subjectId );
+		$result = $metaDataRetriever->getLatestRevisionMetadata( $statementId );
 
 		$this->assertSame( $expectedRevisionId, $result->getRevisionId() );
 		$this->assertSame( $expectedRevisionTimestamp, $result->getRevisionTimestamp() );
@@ -41,8 +41,8 @@ class WikibaseEntityRevisionLookupStatementSubjectRevisionMetadataRetrieverTest 
 
 	public function testGivenRedirect_getLatestRevisionMetadataReturnsRedirectResult(): void {
 		$itemWithRedirect = new ItemId( 'Q4321' );
-
 		$redirectTarget = new ItemId( 'Q1234' );
+		$statementId = new StatementGuid( $itemWithRedirect, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 
 		$entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );
 		$entityRevisionLookup->expects( $this->once() )
@@ -51,33 +51,34 @@ class WikibaseEntityRevisionLookupStatementSubjectRevisionMetadataRetrieverTest 
 			->willReturn( LatestRevisionIdResult::redirect( 9876, $redirectTarget ) );
 
 		$metaDataRetriever = new WikibaseEntityRevisionLookupStatementSubjectRevisionMetadataRetriever( $entityRevisionLookup );
-		$result = $metaDataRetriever->getLatestRevisionMetadata( $itemWithRedirect );
+		$result = $metaDataRetriever->getLatestRevisionMetadata( $statementId );
 
 		$this->assertTrue( $result->isRedirect() );
 		$this->assertSame( $redirectTarget, $result->getRedirectTarget() );
 	}
 
 	/**
-	 * @dataProvider provideStatementSubjectId
+	 * @dataProvider provideStatementId
 	 */
 	public function testGivenStatementSubjectDoesNotExist_getLatestRevisionMetadataReturnsStatementSubjectNotFoundResult(
-		EntityId $subjectId
+		StatementGuid $statementId
 	): void {
 		$entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );
 		$entityRevisionLookup->expects( $this->once() )
 			->method( 'getLatestRevisionId' )
-			->with( $subjectId )
+			->with( $statementId->getEntityId() )
 			->willReturn( LatestRevisionIdResult::nonexistentEntity() );
 
 		$metaDataRetriever = new WikibaseEntityRevisionLookupStatementSubjectRevisionMetadataRetriever( $entityRevisionLookup );
-		$result = $metaDataRetriever->getLatestRevisionMetadata( $subjectId );
+		$result = $metaDataRetriever->getLatestRevisionMetadata( $statementId );
 
 		$this->assertFalse( $result->subjectExists() );
 	}
 
-	public function provideStatementSubjectId(): Generator {
-		yield 'item id' => [ new ItemId( 'Q123' ) ];
-		yield 'property id' => [ new NumericPropertyId( 'P123' ) ];
+	public function provideStatementId(): Generator {
+		$guidPart = 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+		yield 'statement on an item' => [ new StatementGuid( new ItemId( 'Q123' ), $guidPart ) ];
+		yield 'statement on a property' => [ new StatementGuid( new NumericPropertyId( 'P123' ), $guidPart ) ];
 	}
 
 }
