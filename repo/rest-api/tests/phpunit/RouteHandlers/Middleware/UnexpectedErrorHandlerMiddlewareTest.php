@@ -13,7 +13,7 @@ use RuntimeException;
 use Throwable;
 use TypeError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\Services\Exceptions\ItemUpdatePrevented;
+use Wikibase\Repo\RestApi\Domain\Services\Exceptions\EntityUpdatePrevented;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\ResponseFactory;
 
@@ -93,7 +93,7 @@ class UnexpectedErrorHandlerMiddlewareTest extends TestCase {
 
 	public function testGivenEditPrevented_logsWarning(): void {
 		$routeHandler = $this->createStub( Handler::class );
-		$exception = new ItemUpdatePrevented( 'bad things happened' );
+		$exception = new EntityUpdatePrevented( 'bad things happened' );
 
 		$this->logger = $this->createMock( LoggerInterface::class );
 		$this->logger->expects( $this->once() )

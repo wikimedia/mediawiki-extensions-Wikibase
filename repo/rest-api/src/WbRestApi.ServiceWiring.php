@@ -67,7 +67,8 @@ use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupItemDataRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupPropertyDataRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupStatementRetriever;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\MediaWikiEditEntityFactoryItemUpdater;
+use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdater;
+use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdaterItemUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\PrefetchingTermLookupAliasesRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\StatementSubjectRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\TermLookupItemDataRetriever;
@@ -277,15 +278,17 @@ return [
 	},
 
 	'WbRestApi.ItemUpdater' => function( MediaWikiServices $services ): ItemUpdater {
-		return new MediaWikiEditEntityFactoryItemUpdater(
-			RequestContext::getMain(),
-			WikibaseRepo::getEditEntityFactory( $services ),
-			WikibaseRepo::getLogger( $services ),
-			new EditSummaryFormatter(
-				WikibaseRepo::getSummaryFormatter( $services ),
-				new LabelsEditSummaryToFormattableSummaryConverter()
+		return new EntityUpdaterItemUpdater(
+			new EntityUpdater(
+				RequestContext::getMain(),
+				WikibaseRepo::getEditEntityFactory( $services ),
+				WikibaseRepo::getLogger( $services ),
+				new EditSummaryFormatter(
+					WikibaseRepo::getSummaryFormatter( $services ),
+					new LabelsEditSummaryToFormattableSummaryConverter()
+				),
+				$services->getPermissionManager(),
 			),
-			$services->getPermissionManager(),
 			new StatementReadModelConverter(
 				WikibaseRepo::getStatementGuidParser( $services ),
 				WikibaseRepo::getPropertyDataTypeLookup( $services )

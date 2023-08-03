@@ -7,5 +7,5 @@ use Exception;
 /**
  * @license GPL-2.0-or-later
  */
-class ItemUpdateFailed extends Exception {
+class EntityUpdateFailed extends Exception {
 }

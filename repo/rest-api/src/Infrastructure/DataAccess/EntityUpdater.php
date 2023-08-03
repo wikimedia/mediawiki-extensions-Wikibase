@@ -7,56 +7,46 @@ use MediaWiki\Permissions\PermissionManager;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
 use User;
-use Wikibase\DataModel\Entity\Item as DataModelItem;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Item;
-use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
-use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
-use Wikibase\Repo\RestApi\Domain\Services\Exceptions\ItemUpdateFailed;
-use Wikibase\Repo\RestApi\Domain\Services\Exceptions\ItemUpdatePrevented;
-use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
-use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
+use Wikibase\Repo\RestApi\Domain\Services\Exceptions\EntityUpdateFailed;
+use Wikibase\Repo\RestApi\Domain\Services\Exceptions\EntityUpdatePrevented;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
 
 /**
  * @license GPL-2.0-or-later
  */
-class MediaWikiEditEntityFactoryItemUpdater implements ItemUpdater {
+class EntityUpdater {
 
 	private IContextSource $context;
 	private MediaWikiEditEntityFactory $editEntityFactory;
 	private LoggerInterface $logger;
 	private EditSummaryFormatter $summaryFormatter;
 	private PermissionManager $permissionManager;
-	private StatementReadModelConverter $statementReadModelConverter;
 
 	public function __construct(
 		IContextSource $context,
 		MediaWikiEditEntityFactory $editEntityFactory,
 		LoggerInterface $logger,
 		EditSummaryFormatter $summaryFormatter,
-		PermissionManager $permissionManager,
-		StatementReadModelConverter $statementReadModelConverter
+		PermissionManager $permissionManager
 	) {
 		$this->context = $context;
 		$this->editEntityFactory = $editEntityFactory;
 		$this->logger = $logger;
 		$this->summaryFormatter = $summaryFormatter;
 		$this->permissionManager = $permissionManager;
-		$this->statementReadModelConverter = $statementReadModelConverter;
 	}
 
-	public function update( DataModelItem $item, EditMetadata $editMetadata ): ItemRevision {
+	public function update( EntityDocument $entity, EditMetadata $editMetadata ): EntityRevision {
 		$this->checkBotRightIfProvided( $this->context->getUser(), $editMetadata->isBot() );
 
-		$editEntity = $this->editEntityFactory->newEditEntity( $this->context, $item->getId() );
+		$editEntity = $this->editEntityFactory->newEditEntity( $this->context, $entity->getId() );
 
 		$status = $editEntity->attemptSave(
-			$item,
+			$entity,
 			$this->summaryFormatter->format( $editMetadata->getSummary() ),
 			EDIT_UPDATE | ( $editMetadata->isBot() ? EDIT_FORCE_BOT : 0 ),
 			false,
@@ -66,25 +56,15 @@ class MediaWikiEditEntityFactoryItemUpdater implements ItemUpdater {
 
 		if ( !$status->isOK() ) {
 			if ( $this->isPreventedEdit( $status ) ) {
-				throw new ItemUpdatePrevented( (string)$status );
+				throw new EntityUpdatePrevented( (string)$status );
 			}
 
-			throw new ItemUpdateFailed( (string)$status );
+			throw new EntityUpdateFailed( (string)$status );
 		} elseif ( !$status->isGood() ) {
 			$this->logger->warning( (string)$status );
 		}
 
-		/** @var EntityRevision $entityRevision */
-		$entityRevision = $status->getValue()['revision'];
-		/** @var DataModelItem $savedItem */
-		$savedItem = $entityRevision->getEntity();
-		'@phan-var DataModelItem $savedItem';
-
-		return new ItemRevision(
-			$this->convertDataModelItemToReadModel( $savedItem ),
-			$entityRevision->getTimestamp(),
-			$entityRevision->getRevisionId()
-		);
+		return $status->getValue()['revision'];
 	}
 
 	private function isPreventedEdit( \Status $status ): bool {
@@ -101,19 +81,6 @@ class MediaWikiEditEntityFactoryItemUpdater implements ItemUpdater {
 		if ( $isBot && !$this->permissionManager->userHasRight( $user, 'bot' ) ) {
 			throw new RuntimeException( 'Attempted bot edit with insufficient rights' );
 		}
-	}
-
-	private function convertDataModelItemToReadModel( DataModelItem $item ): Item {
-		return new Item(
-			Labels::fromTermList( $item->getLabels() ),
-			Descriptions::fromTermList( $item->getDescriptions() ),
-			new StatementList(
-				...array_map(
-					[ $this->statementReadModelConverter, 'convert' ],
-					iterator_to_array( $item->getStatements() )
-				)
-			)
-		);
 	}
 
 }

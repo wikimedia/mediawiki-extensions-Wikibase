@@ -8,7 +8,7 @@ use MediaWiki\Rest\Response;
 use Psr\Log\LoggerInterface;
 use Throwable;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\Services\Exceptions\ItemUpdatePrevented;
+use Wikibase\Repo\RestApi\Domain\Services\Exceptions\EntityUpdatePrevented;
 use Wikibase\Repo\RestApi\RouteHandlers\ResponseFactory;
 
 /**
@@ -33,7 +33,7 @@ class UnexpectedErrorHandlerMiddleware implements Middleware {
 	public function run( Handler $routeHandler, callable $runNext ): Response {
 		try {
 			return $runNext();
-		} catch ( ItemUpdatePrevented $exception ) { // temporary fix for T329233
+		} catch ( EntityUpdatePrevented $exception ) { // temporary fix for T329233
 			$this->logger->warning( $exception->getMessage(), [ 'exception' => $exception ] );
 		} catch ( Throwable $exception ) {
 			$this->errorReporter->reportError( $exception, $routeHandler, $routeHandler->getRequest() );
