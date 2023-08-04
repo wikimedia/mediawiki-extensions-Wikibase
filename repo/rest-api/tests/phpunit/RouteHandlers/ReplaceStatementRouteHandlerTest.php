@@ -13,6 +13,7 @@ use RuntimeException;
 use Throwable;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementFactory;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
@@ -40,8 +41,10 @@ class ReplaceStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 		$useCaseResponse = new ReplaceStatementResponse( $this->createStub( Statement::class ), '20230731042031', 42 );
 		$useCase = $this->createStub( ReplaceStatement::class );
 		$useCase->method( 'execute' )->willReturn( $useCaseResponse );
+		$useCaseFactory = $this->createStub( ReplaceStatementFactory::class );
+		$useCaseFactory->method( 'newReplaceStatement' )->willReturn( $useCase );
 
-		$this->setService( 'WbRestApi.ReplaceStatement', $useCase );
+		$this->setService( 'WbRestApi.ReplaceStatementFactory', $useCaseFactory );
 
 		/** @var Response $response */
 		$response = $this->newHandlerWithValidRequest()->execute();
@@ -60,10 +63,13 @@ class ReplaceStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 	public function testHandlesErrors( Throwable $exception, string $expectedErrorCode ): void {
 		$useCase = $this->createStub( ReplaceStatement::class );
 		$useCase->method( 'execute' )->willThrowException( $exception );
+		$useCaseFactory = $this->createStub( ReplaceStatementFactory::class );
+		$useCaseFactory->method( 'newReplaceStatement' )->willReturn( $useCase );
 
-		$this->setService( 'WbRestApi.ReplaceStatement', $useCase );
+		$this->setService( 'WbRestApi.ReplaceStatementFactory', $useCaseFactory );
 		$this->setService( 'WbRestApi.ErrorReporter', $this->createStub( ErrorReporter::class ) );
 
+		/** @var Response $response */
 		$response = $this->newHandlerWithValidRequest()->execute();
 		$responseBody = json_decode( $response->getBody()->getContents() );
 
@@ -77,8 +83,8 @@ class ReplaceStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 			UseCaseError::INVALID_STATEMENT_ID,
 		];
 
-		yield 'Item Not Found' => [
-			new UseCaseError( UseCaseError::ITEM_NOT_FOUND, '' ),
+		yield 'Statement Subject Not Found' => [
+			new UseCaseError( UseCaseError::STATEMENT_SUBJECT_NOT_FOUND, '', [ 'subject-id' => 'Q123' ] ),
 			UseCaseError::STATEMENT_NOT_FOUND,
 		];
 

@@ -2,38 +2,29 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\ReplaceStatement;
 
-use CommentStore;
+use Generator;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\ItemIdParser;
-use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikibase\DataModel\Exception\PropertyChangedException;
+use Wikibase\DataModel\Exception\StatementNotFoundException;
+use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Statement\StatementGuid;
-use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
-use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
-use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertStatementSubjectExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
-use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
-use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
-use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
-use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
+use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Item as ReadModelItem;
-use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
-use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
-use Wikibase\Repo\Tests\RestApi\Application\Serialization\DeserializerFactory;
+use Wikibase\Repo\RestApi\Domain\ReadModel\StatementRevision;
+use Wikibase\Repo\RestApi\Domain\Services\StatementUpdater;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
 
@@ -48,61 +39,53 @@ class ReplaceStatementTest extends TestCase {
 
 	use EditMetadataHelper;
 
-	private GetLatestItemRevisionMetadata $getRevisionMetadata;
-	private ItemRetriever $itemRetriever;
-	private ItemUpdater $itemUpdater;
+	private ReplaceStatementValidator $replaceStatementValidator;
+	private AssertStatementSubjectExists $assertStatementSubjectExists;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
+	private StatementUpdater $statementUpdater;
 
 	private const ALLOWED_TAGS = [ 'some', 'tags', 'are', 'allowed' ];
 
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->getRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
-		$this->getRevisionMetadata->method( 'execute' )->willReturn( [ 321, '20201111070707' ] );
-		$this->itemRetriever = $this->createStub( ItemRetriever::class );
-		$this->itemUpdater = $this->createStub( ItemUpdater::class );
+		$this->replaceStatementValidator = $this->createStub( ReplaceStatementValidator::class );
+		$this->assertStatementSubjectExists = $this->createStub( AssertStatementSubjectExists::class );
 		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
+		$this->statementUpdater = $this->createStub( StatementUpdater::class );
 	}
 
-	public function testReplaceStatement(): void {
-		$itemId = 'Q123';
-		$statementId = new StatementGuid( new ItemId( $itemId ), 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
-		$oldStatement = NewStatement::noValueFor( 'P123' )->withGuid( $statementId )->build();
+	/**
+	 * @dataProvider provideSubjectId
+	 */
+	public function testReplaceStatement( EntityId $subjectId ): void {
+		$statementId = new StatementGuid( $subjectId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 		$newStatementSerialization = [
 			'id' => (string)$statementId,
 			'property' => [ 'id' => 'P123' ],
 			'value' => [
-				'type' => 'value',
-				'content' => 'new statement value',
+				'type' => 'somevalue',
 			],
 		];
-		$item = NewItem::withId( $itemId )->andStatement( $oldStatement )->build();
+		$newStatementWriteModel = NewStatement::someValueFor( 'P123' )->withGuid( $statementId )->build();
 		$modificationRevisionId = 322;
 		$modificationTimestamp = '20221111070707';
 		$editTags = [ 'some', 'tags' ];
 		$isBot = false;
 		$comment = 'statement replaced by ' . __method__;
 
-		$this->itemRetriever = $this->createStub( ItemRetriever::class );
-		$this->itemRetriever->method( 'getItem' )->willReturn( $item );
+		$this->replaceStatementValidator = $this->createStub( ReplaceStatementValidator::class );
+		$this->replaceStatementValidator->method( 'getValidatedStatement' )->willReturn( $newStatementWriteModel );
 
-		$updatedItem = new ReadModelItem(
-			new Labels(),
-			new Descriptions(),
-			new StatementList( NewStatementReadModel::someValueFor( 'P123' )->withGuid( $statementId )->build() )
-		);
-		$this->itemUpdater = $this->createMock( ItemUpdater::class );
-		$this->itemUpdater->expects( $this->once() )
+		$expectedStatementReadModel = NewStatementReadModel::someValueFor( 'P123' )->withGuid( $statementId )->build();
+		$this->statementUpdater = $this->createMock( StatementUpdater::class );
+		$this->statementUpdater->expects( $this->once() )
 			->method( 'update' )
 			->with(
-				$this->callback(
-					fn( Item $item ) => $item->getStatements()->getFirstStatementWithGuid( (string)$statementId )
-						->equals( $this->newDeserializer()->deserialize( $newStatementSerialization ) )
-				),
+				$newStatementWriteModel,
 				$this->expectEquivalentMetadata( $editTags, $isBot, $comment, EditSummary::REPLACE_ACTION )
 			)
-			->willReturn( new ItemRevision( $updatedItem, $modificationTimestamp, $modificationRevisionId ) );
+			->willReturn( new StatementRevision( $expectedStatementReadModel, $modificationTimestamp, $modificationRevisionId ) );
 
 		$response = $this->newUseCase()->execute(
 			$this->newUseCaseRequest( [
@@ -111,113 +94,49 @@ class ReplaceStatementTest extends TestCase {
 				'$editTags' => $editTags,
 				'$isBot' => $isBot,
 				'$comment' => $comment,
-				'$itemId' => $itemId,
+				'$subjectId' => (string)$subjectId,
 			] )
 		);
 
 		$this->assertInstanceOf( ReplaceStatementResponse::class, $response );
-		$this->assertSame(
-			$updatedItem->getStatements()->getStatementById( $statementId ),
-			$response->getStatement()
-		);
+		$this->assertSame( $expectedStatementReadModel, $response->getStatement() );
 		$this->assertSame( $modificationRevisionId, $response->getRevisionId() );
 		$this->assertSame( $modificationTimestamp, $response->getLastModified() );
 	}
 
-	public function testRejectsStatementIdChange_throws(): void {
-		$itemId = new ItemId( 'Q123' );
-		$originalStatementId = new StatementGuid( $itemId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
-		$originalStatement = NewStatement::noValueFor( 'P123' )
-			->withGuid( (string)$originalStatementId )
-			->build();
-		$newStatementSerialization = [
-			'id' => $itemId . '$LLLLLLL-MMMM-NNNN-OOOO-PPPPPPPPPPPP',
-			'property' => [ 'id' => 'P123' ],
-			'value' => [ 'type' => 'somevalue' ],
-		];
+	public function testGivenInvalidUseCaseRequest_throwsUseCaseError(): void {
+		$expectedUseCaseRequest = $this->createStub( ReplaceStatementRequest::class );
+		$expectedUseCaseError = $this->createStub( UseCaseError::class );
 
-		$item = NewItem::withId( $itemId )->andStatement( $originalStatement )->build();
-
-		$this->itemRetriever = $this->createStub( ItemRetriever::class );
-		$this->itemRetriever->method( 'getItem' )->willReturn( $item );
+		$this->replaceStatementValidator = $this->createMock( ReplaceStatementValidator::class );
+		$this->replaceStatementValidator->expects( $this->once() )
+			->method( 'assertValidRequest' )
+			->with( $expectedUseCaseRequest )
+			->willThrowException( $expectedUseCaseError );
 
 		try {
-			$this->newUseCase()->execute(
-				$this->newUseCaseRequest( [
-					'$statementId' => (string)$originalStatementId,
-					'$statement' => $newStatementSerialization,
-				] )
-			);
+			$this->newUseCase()->execute( $expectedUseCaseRequest );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame(
-				UseCaseError::INVALID_OPERATION_CHANGED_STATEMENT_ID,
-				$e->getErrorCode()
-			);
+			$this->assertSame( $expectedUseCaseError, $e );
 		}
 	}
 
-	public function testRejectsPropertyIdChange_throwsUseCaseError(): void {
-		$itemId = new ItemId( 'Q123' );
-		$statementId = new StatementGuid( $itemId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
-		$originalStatement = NewStatement::noValueFor( 'P123' )
-			->withGuid( (string)$statementId )
-			->build();
-		$newStatementSerialization = [
-			'property' => [ 'id' => 'P321' ],
-			'value' => [ 'type' => 'somevalue' ],
-		];
-
-		$item = NewItem::withId( $itemId )->andStatement( $originalStatement )->build();
-
-		$this->itemRetriever = $this->createStub( ItemRetriever::class );
-		$this->itemRetriever->method( 'getItem' )->willReturn( $item );
-
-		try {
-			$this->newUseCase()->execute(
-				$this->newUseCaseRequest( [
-					'$statementId' => (string)$statementId,
-					'$statement' => $newStatementSerialization,
-				] )
-			);
-			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseError $e ) {
-			$this->assertSame(
-				UseCaseError::INVALID_OPERATION_CHANGED_PROPERTY,
-				$e->getErrorCode()
-			);
-		}
-	}
-
-	public function testInvalidStatementId_throwsUseCaseError(): void {
-		try {
-			$this->newUseCase()->execute(
-				$this->newUseCaseRequest( [
-					'$statementId' => 'INVALID-STATEMENT-ID',
-					'$statement' => [
-						'property' => [ 'id' => 'P123' ],
-						'value' => [ 'type' => 'novalue' ],
-					],
-				] )
-			);
-			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::INVALID_STATEMENT_ID, $e->getErrorCode() );
-		}
-	}
-
-	public function testRequestedItemNotFoundOrRedirect_throws(): void {
+	/**
+	 * @dataProvider provideSubjectId
+	 */
+	public function testGivenStatementSubjectNotFoundOrRedirect_throwsUseCaseError( EntityId $subjectId ): void {
 		$expectedException = $this->createStub( UseCaseException::class );
-		$itemId = new ItemId( 'Q42' );
-		$this->getRevisionMetadata->method( 'execute' )
-			->with( $itemId )
+		$this->assertStatementSubjectExists = $this->createMock( AssertStatementSubjectExists::class );
+		$this->assertStatementSubjectExists->expects( $this->once() )
+			->method( 'execute' )
+			->with( $subjectId )
 			->willThrowException( $expectedException );
 
 		try {
 			$this->newUseCase()->execute(
 				$this->newUseCaseRequest( [
-					'$itemId' => "$itemId",
-					'$statementId' => 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+					'$statementId' => "$subjectId\$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
 					'$statement' => $this->getValidStatementSerialization(),
 				] )
 			);
@@ -227,32 +146,15 @@ class ReplaceStatementTest extends TestCase {
 		}
 	}
 
-	public function testItemSubjectForStatementNotFoundOrRedirect_throws(): void {
-		$expectedException = $this->createStub( UseCaseException::class );
-		$itemId = new ItemId( 'Q42' );
-		$this->getRevisionMetadata->method( 'execute' )
-			->with( $itemId )
-			->willThrowException( $expectedException );
-
+	/**
+	 * @dataProvider provideTwoSubjectIds
+	 */
+	public function testGivenStatementIdMismatchingRequestedSubjectId_throwsUseCaseError( EntityId $id1, EntityId $id2 ): void {
 		try {
 			$this->newUseCase()->execute(
 				$this->newUseCaseRequest( [
-					'$statementId' => "$itemId\$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
-					'$statement' => $this->getValidStatementSerialization(),
-				] )
-			);
-			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
-			$this->assertSame( $expectedException, $e );
-		}
-	}
-
-	public function testStatementIdMismatchingItemId_throwsUseCaseError(): void {
-		try {
-			$this->newUseCase()->execute(
-				$this->newUseCaseRequest( [
-					'$itemId' => 'Q666',
-					'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+					'$subjectId' => "$id1",
+					'$statementId' => "$id2\$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
 					'$statement' => $this->getValidStatementSerialization(),
 				] )
 			);
@@ -262,38 +164,26 @@ class ReplaceStatementTest extends TestCase {
 		}
 	}
 
-	public function testStatementNotFoundOnItem_throwsUseCaseError(): void {
-		$this->itemRetriever = $this->createStub( ItemRetriever::class );
-		$this->itemRetriever->method( 'getItem' )->willReturn( NewItem::withId( 'Q42' )->build() );
-
-		try {
-			$this->newUseCase()->execute(
-				$this->newUseCaseRequest( [
-					'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
-					'$statement' => $this->getValidStatementSerialization(),
-				] )
-			);
-			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::STATEMENT_NOT_FOUND, $e->getErrorCode() );
-		}
+	public function provideTwoSubjectIds(): Generator {
+		yield 'item ids' => [ new ItemId( 'Q123' ), new ItemId( 'Q456' ) ];
+		yield 'property ids' => [ new NumericPropertyId( 'P123' ), new NumericPropertyId( 'P456' ) ];
 	}
 
-	public function testProtectedItem_throwsUseCaseError(): void {
-		$itemId = new ItemId( 'Q123' );
-		$expectedError = new UseCaseError(
-			UseCaseError::PERMISSION_DENIED,
-			'You have no permission to edit this item.'
-		);
+	/**
+	 * @dataProvider provideSubjectId
+	 */
+	public function testProtectedStatementSubject_throwsUseCaseError( EntityId $subjectId ): void {
+		$expectedError = $this->createStub( UseCaseError::class );
 		$this->assertUserIsAuthorized = $this->createMock( AssertUserIsAuthorized::class );
-		$this->assertUserIsAuthorized->method( 'execute' )
-			->with( $itemId, null )
+		$this->assertUserIsAuthorized->expects( $this->once() )
+			->method( 'execute' )
+			->with( $subjectId, null )
 			->willThrowException( $expectedError );
 
 		try {
 			$this->newUseCase()->execute(
 				$this->newUseCaseRequest( [
-					'$statementId' => "$itemId\$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+					'$statementId' => "$subjectId\$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
 					'$statement' => $this->getValidStatementSerialization(),
 				] )
 			);
@@ -303,13 +193,92 @@ class ReplaceStatementTest extends TestCase {
 		}
 	}
 
+	/**
+	 * @dataProvider provideSubjectId
+	 */
+	public function testGivenStatementIdChangedInSerialization_throwsUseCaseError( EntityId $subjectId ): void {
+		$originalStatementId = new StatementGuid( $subjectId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
+		$changedStatementID = new StatementGuid( $subjectId, 'LLLLLLL-MMMM-NNNN-OOOO-PPPPPPPPPPPP' );
+		$newStatementWriteModel = NewStatement::someValueFor( 'P321' )->withGuid( $changedStatementID )->build();
+
+		$this->replaceStatementValidator = $this->createStub( ReplaceStatementValidator::class );
+		$this->replaceStatementValidator->method( 'getValidatedStatement' )->willReturn( $newStatementWriteModel );
+
+		try {
+			$this->newUseCase()->execute(
+				$this->newUseCaseRequest( [
+					'$statementId' => (string)$originalStatementId,
+					'$statement' => [ 'statement' => 'with different id' ],
+				] )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::INVALID_OPERATION_CHANGED_STATEMENT_ID, $e->getErrorCode() );
+		}
+	}
+
+	/**
+	 * @dataProvider provideSubjectId
+	 */
+	public function testStatementNotFoundOnSubject_throwsUseCaseError( EntityId $subjectId ): void {
+		$statementId = new StatementGuid( $subjectId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
+		$newStatementWriteModel = NewStatement::someValueFor( 'P123' )->withGuid( $statementId )->build();
+
+		$this->replaceStatementValidator = $this->createStub( ReplaceStatementValidator::class );
+		$this->replaceStatementValidator->method( 'getValidatedStatement' )->willReturn( $newStatementWriteModel );
+
+		$this->statementUpdater = $this->createMock( StatementUpdater::class );
+		$this->statementUpdater->expects( $this->once() )
+			->method( 'update' )
+			->with( $newStatementWriteModel, $this->isInstanceOf( EditMetadata::class ) )
+			->willThrowException( new StatementNotFoundException() );
+
+		try {
+			$this->newUseCase()->execute(
+				$this->newUseCaseRequest( [
+					'$statementId' => (string)$statementId,
+					'$statement' => $this->getValidStatementSerialization(),
+				] )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::STATEMENT_NOT_FOUND, $e->getErrorCode() );
+		}
+	}
+
+	/**
+	 * @dataProvider provideSubjectId
+	 */
+	public function testGivenPropertyChanged_throwsUseCaseError( EntityId $subjectId ): void {
+		$this->statementUpdater = $this->createStub( StatementUpdater::class );
+		$this->statementUpdater->method( 'update' )->willThrowException( new PropertyChangedException() );
+
+		try {
+			$this->newUseCase()->execute(
+				$this->newUseCaseRequest( [
+					'$statementId' => "$subjectId\$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+					'$statement' => [ 'statement' => 'with different property' ],
+				] )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::INVALID_OPERATION_CHANGED_PROPERTY, $e->getErrorCode() );
+		}
+	}
+
+	public function provideSubjectId(): Generator {
+		yield 'item id' => [ new ItemId( 'Q123' ) ];
+		yield 'property id' => [ new NumericPropertyId( 'P123' ) ];
+	}
+
 	private function newUseCase(): ReplaceStatement {
 		return new ReplaceStatement(
-			$this->newValidator(),
-			new AssertItemExists( $this->getRevisionMetadata ),
-			$this->itemRetriever,
-			$this->itemUpdater,
-			$this->assertUserIsAuthorized
+			$this->replaceStatementValidator,
+			new StatementGuidParser( new BasicEntityIdParser() ),
+			new BasicEntityIdParser(),
+			$this->assertStatementSubjectExists,
+			$this->assertUserIsAuthorized,
+			$this->statementUpdater,
 		);
 	}
 
@@ -321,24 +290,8 @@ class ReplaceStatementTest extends TestCase {
 			$requestData['$isBot'] ?? false,
 			$requestData['$comment'] ?? null,
 			$requestData['$username'] ?? null,
-			$requestData['$itemId'] ?? null
+			$requestData['$subjectId'] ?? null
 		);
-	}
-
-	private function newValidator(): ReplaceStatementValidator {
-		return new ReplaceStatementValidator(
-			new ItemIdValidator(),
-			new StatementIdValidator( new ItemIdParser() ),
-			new StatementValidator( $this->newDeserializer() ),
-			new EditMetadataValidator( CommentStore::COMMENT_CHARACTER_LIMIT, self::ALLOWED_TAGS )
-		);
-	}
-
-	private function newDeserializer(): StatementDeserializer {
-		$propertyDataTypeLookup = $this->createStub( PropertyDataTypeLookup::class );
-		$propertyDataTypeLookup->method( 'getDataTypeIdForProperty' )->willReturn( 'string' );
-
-		return DeserializerFactory::newStatementDeserializer( $propertyDataTypeLookup );
 	}
 
 	private function getValidStatementSerialization(): array {

@@ -17,6 +17,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertStatementSubjectExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItemValidator;
@@ -50,8 +51,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemState
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatementValidator;
-use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementFactory;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel;
@@ -64,11 +64,13 @@ use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
+use Wikibase\Repo\RestApi\Domain\Services\StatementUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupItemDataRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupPropertyDataRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupStatementRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdaterItemUpdater;
+use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdaterStatementUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\PrefetchingTermLookupAliasesRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\StatementSubjectRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\TermLookupItemDataRetriever;
@@ -118,12 +120,29 @@ return [
 		return new AssertItemExists( WbRestApi::getGetLatestItemRevisionMetadata( $services ) );
 	},
 
+	'WbRestApi.AssertStatementSubjectExists' => function( MediaWikiServices $services ): AssertStatementSubjectExists {
+		return new AssertStatementSubjectExists( WbRestApi::getGetLatestStatementSubjectRevisionMetadata( $services ) );
+	},
+
 	'WbRestApi.AssertUserIsAuthorized' => function( MediaWikiServices $services ): AssertUserIsAuthorized {
 		return new AssertUserIsAuthorized(
 			new WikibaseEntityPermissionChecker(
 				WikibaseRepo::getEntityPermissionChecker( $services ),
 				$services->getUserFactory()
 			)
+		);
+	},
+
+	'WbRestApi.EntityUpdater' => function( MediaWikiServices $services ): EntityUpdater {
+		return new EntityUpdater(
+			RequestContext::getMain(),
+			WikibaseRepo::getEditEntityFactory( $services ),
+			WikibaseRepo::getLogger( $services ),
+			new EditSummaryFormatter(
+				WikibaseRepo::getSummaryFormatter( $services ),
+				new LabelsEditSummaryToFormattableSummaryConverter()
+			),
+			$services->getPermissionManager(),
 		);
 	},
 
@@ -279,16 +298,7 @@ return [
 
 	'WbRestApi.ItemUpdater' => function( MediaWikiServices $services ): ItemUpdater {
 		return new EntityUpdaterItemUpdater(
-			new EntityUpdater(
-				RequestContext::getMain(),
-				WikibaseRepo::getEditEntityFactory( $services ),
-				WikibaseRepo::getLogger( $services ),
-				new EditSummaryFormatter(
-					WikibaseRepo::getSummaryFormatter( $services ),
-					new LabelsEditSummaryToFormattableSummaryConverter()
-				),
-				$services->getPermissionManager(),
-			),
+			WbRestApi::getEntityUpdater( $services ),
 			new StatementReadModelConverter(
 				WikibaseRepo::getStatementGuidParser( $services ),
 				WikibaseRepo::getPropertyDataTypeLookup( $services )
@@ -387,21 +397,20 @@ return [
 		);
 	},
 
-	'WbRestApi.ReplaceStatement' => function( MediaWikiServices $services ): ReplaceStatement {
-		return new ReplaceStatement(
-			new ReplaceStatementValidator(
-				new ItemIdValidator(),
-				new StatementIdValidator( new ItemIdParser() ),
-				new StatementValidator( WbRestApi::getStatementDeserializer() ),
-				new EditMetadataValidator(
-					CommentStore::COMMENT_CHARACTER_LIMIT,
-					ChangeTags::listExplicitlyDefinedTags()
-				)
+	'WbRestApi.ReplaceStatementFactory' => function( MediaWikiServices $services ): ReplaceStatementFactory {
+		$entityIdParser = WikibaseRepo::getEntityIdParser( $services );
+		return new ReplaceStatementFactory(
+			new StatementIdValidator( $entityIdParser ),
+			new StatementValidator( WbRestApi::getStatementDeserializer() ),
+			new EditMetadataValidator(
+				CommentStore::COMMENT_CHARACTER_LIMIT,
+				ChangeTags::listExplicitlyDefinedTags()
 			),
-			WbRestApi::getAssertItemExists( $services ),
-			WbRestApi::getItemDataRetriever( $services ),
-			WbRestApi::getItemUpdater( $services ),
-			WbRestApi::getAssertUserIsAuthorized( $services )
+			WikibaseRepo::getStatementGuidParser( $services ),
+			$entityIdParser,
+			WbRestApi::getAssertStatementSubjectExists( $services ),
+			WbRestApi::getAssertUserIsAuthorized( $services ),
+			WbRestApi::getStatementUpdater( $services )
 		);
 	},
 
@@ -478,6 +487,18 @@ return [
 	'WbRestApi.StatementRetriever' => function( MediaWikiServices $services ): EntityRevisionLookupStatementRetriever {
 		return new EntityRevisionLookupStatementRetriever(
 			new StatementSubjectRetriever( WikibaseRepo::getEntityRevisionLookup( $services ) ),
+			new StatementReadModelConverter(
+				WikibaseRepo::getStatementGuidParser( $services ),
+				WikibaseRepo::getPropertyDataTypeLookup()
+			)
+		);
+	},
+
+	'WbRestApi.StatementUpdater' => function( MediaWikiServices $services ): StatementUpdater {
+		return new EntityUpdaterStatementUpdater(
+			WikibaseRepo::getStatementGuidParser( $services ),
+			new StatementSubjectRetriever( WikibaseRepo::getEntityRevisionLookup( $services ) ),
+			WbRestApi::getEntityUpdater( $services ),
 			new StatementReadModelConverter(
 				WikibaseRepo::getStatementGuidParser( $services ),
 				WikibaseRepo::getPropertyDataTypeLookup()

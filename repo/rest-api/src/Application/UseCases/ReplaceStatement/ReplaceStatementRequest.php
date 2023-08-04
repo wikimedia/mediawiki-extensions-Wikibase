@@ -7,7 +7,7 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement;
  */
 class ReplaceStatementRequest {
 
-	private ?string $itemId;
+	private ?string $subjectId;
 	private string $statementId;
 	private array $statement;
 	private array $editTags;
@@ -22,7 +22,7 @@ class ReplaceStatementRequest {
 		bool $isBot,
 		?string $comment,
 		?string $username,
-		string $itemId = null
+		string $subjectId = null
 	) {
 		$this->statementId = $statementId;
 		$this->statement = $statement;
@@ -30,7 +30,7 @@ class ReplaceStatementRequest {
 		$this->isBot = $isBot;
 		$this->comment = $comment;
 		$this->username = $username;
-		$this->itemId = $itemId;
+		$this->subjectId = $subjectId;
 	}
 
 	public function getStatementId(): string {
@@ -61,7 +61,7 @@ class ReplaceStatementRequest {
 		return $this->username;
 	}
 
-	public function getItemId(): ?string {
-		return $this->itemId;
+	public function getSubjectId(): ?string {
+		return $this->subjectId;
 	}
 }

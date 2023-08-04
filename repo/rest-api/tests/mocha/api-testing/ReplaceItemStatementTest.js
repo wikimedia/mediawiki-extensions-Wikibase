@@ -428,11 +428,11 @@ describe( 'PUT statement tests', () => {
 	} );
 
 	describe( 'short route specific errors', () => {
-		it( 'responds 400 invalid-statement-id if statement is not on an item', async () => {
-			const statementId = testStatementId.replace( 'Q', 'P' );
+		it( 'responds 400 invalid-statement-id if statement is not on a valid entity', async () => {
+			const statementId = testStatementId.replace( 'Q', 'X' );
 			const statementSerialization = entityHelper.newStatementWithRandomStringValue( testPropertyId );
 			const response = await newReplaceStatementRequestBuilder( statementId, statementSerialization )
-				.assertValidRequest().makeRequest();
+				.assertInvalidRequest().makeRequest();
 
 			assertValid400Response( response, 'invalid-statement-id' );
 			assert.include( response.body.message, statementId );

@@ -8,6 +8,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\SerializerFactory;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertStatementSubjectExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliases\GetItemAliases;
@@ -26,13 +27,15 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementFactory;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementFactory;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\StatementUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupItemDataRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupPropertyDataRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupStatementRetriever;
+use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdater;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
 
@@ -106,9 +109,9 @@ class WbRestApi {
 			->get( 'WbRestApi.AddItemStatement' );
 	}
 
-	public static function getReplaceStatement( ContainerInterface $services = null ): ReplaceStatement {
+	public static function getReplaceStatementFactory( ContainerInterface $services = null ): ReplaceStatementFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.ReplaceStatement' );
+			->get( 'WbRestApi.ReplaceStatementFactory' );
 	}
 
 	public static function getRemoveItemStatement( ContainerInterface $services = null ): RemoveItemStatement {
@@ -126,9 +129,18 @@ class WbRestApi {
 			->get( 'WbRestApi.PatchItemStatement' );
 	}
 
+	public static function getEntityUpdater( ContainerInterface $services = null ): EntityUpdater {
+		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbRestApi.EntityUpdater' );
+	}
+
 	public static function getItemUpdater( ContainerInterface $services = null ): ItemUpdater {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.ItemUpdater' );
+	}
+
+	public static function getStatementUpdater( ContainerInterface $services = null ): StatementUpdater {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.StatementUpdater' );
 	}
 
 	public static function getItemDataRetriever( ContainerInterface $services = null ): EntityRevisionLookupItemDataRetriever {
@@ -169,6 +181,11 @@ class WbRestApi {
 	public static function getAssertItemExists( ContainerInterface $services = null ): AssertItemExists {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.AssertItemExists' );
+	}
+
+	public static function getAssertStatementSubjectExists( ContainerInterface $services = null ): AssertStatementSubjectExists {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.AssertStatementSubjectExists' );
 	}
 
 	public static function getGetProperty( ContainerInterface $services = null ): GetProperty {

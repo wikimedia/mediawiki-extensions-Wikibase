@@ -15,6 +15,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatement
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\Validation\UnexpectedRequestedSubjectIdValidator;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\BotRightCheckMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\ContentTypeCheckMiddleware;
@@ -55,7 +56,7 @@ class ReplaceStatementRouteHandler extends SimpleHandler {
 	public static function factory(): Handler {
 		$responseFactory = new ResponseFactory();
 		return new self(
-			WbRestApi::getReplaceStatement(),
+			WbRestApi::getReplaceStatementFactory()->newReplaceStatement( new UnexpectedRequestedSubjectIdValidator() ),
 			WbRestApi::getSerializerFactory()->newStatementSerializer(),
 			new MiddlewareHandler( [
 				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
@@ -103,7 +104,7 @@ class ReplaceStatementRouteHandler extends SimpleHandler {
 			) );
 			return $this->newSuccessHttpResponse( $useCaseResponse );
 		} catch ( UseCaseError $e ) {
-			if ( $e->getErrorCode() === UseCaseError::ITEM_NOT_FOUND ) {
+			if ( $e->getErrorCode() === UseCaseError::STATEMENT_SUBJECT_NOT_FOUND ) {
 				return $this->respondStatementNotFound( $statementId );
 			}
 

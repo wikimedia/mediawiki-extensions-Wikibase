@@ -15,6 +15,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatement
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
+use Wikibase\Repo\RestApi\Application\Validation\RequiredRequestedSubjectIdValidator;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\BotRightCheckMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\ContentTypeCheckMiddleware;
@@ -55,7 +57,9 @@ class ReplaceItemStatementRouteHandler extends SimpleHandler {
 	public static function factory(): Handler {
 		$responseFactory = new ResponseFactory();
 		return new self(
-			WbRestApi::getReplaceStatement(),
+			WbRestApi::getReplaceStatementFactory()->newReplaceStatement(
+				new RequiredRequestedSubjectIdValidator( new ItemIdValidator() )
+			),
 			WbRestApi::getSerializerFactory()->newStatementSerializer(),
 			new MiddlewareHandler( [
 				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
@@ -102,6 +106,18 @@ class ReplaceItemStatementRouteHandler extends SimpleHandler {
 			) );
 			return $this->newSuccessHttpResponse( $useCaseResponse );
 		} catch ( UseCaseError $e ) {
+			if ( $e->getErrorCode() === UseCaseError::INVALID_STATEMENT_SUBJECT_ID ) {
+				return $this->responseFactory->newErrorResponse(
+					UseCaseError::INVALID_ITEM_ID,
+					"Not a valid item ID: $itemId"
+				);
+			}
+			if ( $e->getErrorCode() === UseCaseError::STATEMENT_SUBJECT_NOT_FOUND ) {
+				return $this->responseFactory->newErrorResponse(
+					UseCaseError::ITEM_NOT_FOUND,
+					"Could not find an item with the ID: $itemId"
+				);
+			}
 			return $this->responseFactory->newErrorResponseFromException( $e );
 		} catch ( ItemRedirect $e ) {
 			return $this->responseFactory->newErrorResponse(

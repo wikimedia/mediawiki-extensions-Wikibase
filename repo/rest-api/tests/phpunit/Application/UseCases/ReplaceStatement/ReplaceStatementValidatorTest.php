@@ -5,13 +5,13 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\ReplaceStatement;
 use CommentStore;
 use Generator;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\ItemIdParser;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
+use Wikibase\Repo\RestApi\Application\Validation\RequestedSubjectIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
@@ -25,6 +25,7 @@ use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
  */
 class ReplaceStatementValidatorTest extends TestCase {
 
+	private RequestedSubjectIdValidator $requestedSubjectIdValidator;
 	private StatementValidator $statementValidator;
 
 	private const ALLOWED_TAGS = [ 'some', 'tags', 'are', 'allowed' ];
@@ -32,6 +33,7 @@ class ReplaceStatementValidatorTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
+		$this->requestedSubjectIdValidator = $this->createStub( RequestedSubjectIdValidator::class );
 		$this->statementValidator = $this->createStub( StatementValidator::class );
 		$this->statementValidator->method( 'validate' )->willReturn( null );
 	}
@@ -41,73 +43,86 @@ class ReplaceStatementValidatorTest extends TestCase {
 	 * @doesNotPerformAssertions
 	 */
 	public function testValidate_withValidRequest( array $requestData ): void {
-		$this->newReplaceStatementValidator()->assertValidRequest(
-			$this->newUseCaseRequest( $requestData )
-		);
+		$replaceStatementValidator = $this->newReplaceStatementValidator();
+		$replaceStatementValidator->assertValidRequest( $this->newUseCaseRequest( $requestData ) );
+		$replaceStatementValidator->getValidatedStatement();
 	}
 
 	public static function provideValidRequest(): Generator {
 		$itemId = 'Q123';
 		$statementId = $itemId . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-		yield 'Valid with item ID' => [
+		yield '[Item] Valid with requested subject id' => [
 			[
+				'$subjectId' => $itemId,
 				'$statementId' => $statementId,
 				'$statement' => [ 'valid' => 'statement' ],
-				'$editTags' => [],
-				'$isBot' => false,
-				'$comment' => null,
-				'$username' => null,
-				'$itemId' => $itemId,
 			],
 		];
-		yield 'Valid without item ID' => [
+		yield '[Item] Valid without subject ID' => [
 			[
 				'$statementId' => $statementId,
 				'$statement' => [ 'valid' => 'statement' ],
-				'$editTags' => [],
-				'$isBot' => false,
-				'$comment' => null,
-				'$username' => null,
+			],
+		];
+
+		$propertyId = 'P123';
+		$statementId = $propertyId . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+		yield '[Property] Valid with requested subject id' => [
+			[
+				'$subjectId' => $propertyId,
+				'$statementId' => $statementId,
+				'$statement' => [ 'valid' => 'statement' ],
+			],
+		];
+		yield '[Property] Valid without subject ID' => [
+			[
+				'$statementId' => $statementId,
+				'$statement' => [ 'valid' => 'statement' ],
 			],
 		];
 	}
 
-	public function testValidate_withInvalidItemId(): void {
-		$itemId = 'X123';
+	public function testValidate_withInvalidSubjectId(): void {
+		$subjectId = 'X123';
+
+		$this->requestedSubjectIdValidator = $this->createMock( RequestedSubjectIdValidator::class );
+		$this->requestedSubjectIdValidator->expects( $this->once() )
+			->method( 'validate' )
+			->with( $subjectId )
+			->willReturn(
+				new ValidationError(
+					RequestedSubjectIdValidator::CODE_INVALID,
+					[ RequestedSubjectIdValidator::CONTEXT_VALUE => $subjectId ]
+				)
+			);
 
 		try {
 			$this->newReplaceStatementValidator()->assertValidRequest(
 				$this->newUseCaseRequest( [
+					'$subjectId' => $subjectId,
 					'$statementId' => 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
 					'$statement' => [ 'valid' => 'statement' ],
-					'$editTags' => [],
-					'$isBot' => false,
-					'$comment' => null,
-					'$username' => null,
-					'$itemId' => $itemId,
 				] )
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::INVALID_ITEM_ID, $e->getErrorCode() );
-			$this->assertSame( 'Not a valid item ID: X123', $e->getErrorMessage() );
+			$this->assertSame( UseCaseError::INVALID_STATEMENT_SUBJECT_ID, $e->getErrorCode() );
+			$this->assertSame( $subjectId, $e->getErrorContext()[UseCaseError::CONTEXT_SUBJECT_ID] );
 		}
 	}
 
-	public function testValidate_withInvalidStatementId(): void {
-		$itemId = 'Q123';
-		$statementId = $itemId . StatementGuid::SEPARATOR . 'INVALID-STATEMENT-ID';
+	/**
+	 * @dataProvider provideStatementSubjectId
+	 */
+	public function testValidate_withInvalidStatementId( string $subjectId ): void {
+		$statementId = $subjectId . StatementGuid::SEPARATOR . 'INVALID-STATEMENT-ID';
 
 		try {
 			$this->newReplaceStatementValidator()->assertValidRequest(
 				$this->newUseCaseRequest( [
+					'$subjectId' => $subjectId,
 					'$statementId' => $statementId,
 					'$statement' => [ 'valid' => 'statement' ],
-					'$editTags' => [],
-					'$isBot' => false,
-					'$comment' => null,
-					'$username' => null,
-					'$itemId' => $itemId,
 				] )
 			);
 			$this->fail( 'this should not be reached' );
@@ -127,7 +142,8 @@ class ReplaceStatementValidatorTest extends TestCase {
 			]
 		);
 		$this->statementValidator = $this->createMock( StatementValidator::class );
-		$this->statementValidator->method( 'validate' )
+		$this->statementValidator->expects( $this->once() )
+			->method( 'validate' )
 			->with( $invalidStatement )
 			->willReturn( $expectedError );
 
@@ -136,21 +152,14 @@ class ReplaceStatementValidatorTest extends TestCase {
 				$this->newUseCaseRequest( [
 					'$statementId' => 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
 					'$statement' => $invalidStatement,
-					'$editTags' => [],
-					'$isBot' => false,
-					'$comment' => null,
-					'$username' => null,
-					'$itemId' => null,
 				] )
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::STATEMENT_DATA_INVALID_FIELD, $e->getErrorCode() );
 			$this->assertSame( "Invalid input for 'some-field'", $e->getErrorMessage() );
-			$this->assertSame(
-				[ UseCaseError::CONTEXT_PATH => 'some-field', UseCaseError::CONTEXT_VALUE => 'foo' ],
-				$e->getErrorContext()
-			);
+			$this->assertSame( 'some-field', $e->getErrorContext()[UseCaseError::CONTEXT_PATH] );
+			$this->assertSame( 'foo', $e->getErrorContext()[UseCaseError::CONTEXT_VALUE] );
 		}
 	}
 
@@ -161,20 +170,16 @@ class ReplaceStatementValidatorTest extends TestCase {
 			[ StatementValidator::CONTEXT_FIELD_NAME => 'some-field' ]
 		);
 		$this->statementValidator = $this->createMock( StatementValidator::class );
-		$this->statementValidator->method( 'validate' )
+		$this->statementValidator->expects( $this->once() )
+			->method( 'validate' )
 			->with( $invalidStatement )
 			->willReturn( $expectedError );
 
 		try {
 			$this->newReplaceStatementValidator()->assertValidRequest(
 				$this->newUseCaseRequest( [
-					'$statementId' => 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+					'$statementId' => 'P123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
 					'$statement' => $invalidStatement,
-					'$editTags' => [],
-					'$isBot' => false,
-					'$comment' => null,
-					'$username' => null,
-					'$itemId' => null,
 				] )
 			);
 			$this->fail( 'this should not be reached' );
@@ -195,11 +200,7 @@ class ReplaceStatementValidatorTest extends TestCase {
 				$this->newUseCaseRequest( [
 					'$statementId' => 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
 					'$statement' => [ 'valid' => 'statement' ],
-					'$editTags' => [],
-					'$isBot' => false,
 					'$comment' => $comment,
-					'$username' => null,
-					'$itemId' => null,
 				] )
 			);
 			$this->fail( 'this should not be reached' );
@@ -218,13 +219,9 @@ class ReplaceStatementValidatorTest extends TestCase {
 		try {
 			$this->newReplaceStatementValidator()->assertValidRequest(
 				$this->newUseCaseRequest( [
-					'$statementId' => 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+					'$statementId' => 'P123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
 					'$statement' => [ 'valid' => 'statement' ],
 					'$editTags' => [ 'some', 'tags', 'are', $invalid ],
-					'$isBot' => false,
-					'$comment' => null,
-					'$username' => null,
-					'$itemId' => null,
 				] )
 			);
 			$this->fail( 'this should not be reached' );
@@ -234,10 +231,15 @@ class ReplaceStatementValidatorTest extends TestCase {
 		}
 	}
 
+	public function provideStatementSubjectId(): Generator {
+		yield 'item id' => [ 'Q123' ];
+		yield 'property id' => [ 'P123' ];
+	}
+
 	private function newReplaceStatementValidator(): ReplaceStatementValidator {
 		return new ReplaceStatementValidator(
-			new ItemIdValidator(),
-			new StatementIdValidator( new ItemIdParser() ),
+			$this->requestedSubjectIdValidator,
+			new StatementIdValidator( new BasicEntityIdParser() ),
 			$this->statementValidator,
 			new EditMetadataValidator( CommentStore::COMMENT_CHARACTER_LIMIT, self::ALLOWED_TAGS )
 		);
@@ -247,11 +249,11 @@ class ReplaceStatementValidatorTest extends TestCase {
 		return new ReplaceStatementRequest(
 			$requestData['$statementId'],
 			$requestData['$statement'],
-			$requestData['$editTags'],
-			$requestData['$isBot'],
+			$requestData['$editTags'] ?? [],
+			$requestData['$isBot'] ?? false,
 			$requestData['$comment'] ?? null,
 			$requestData['$username'] ?? null,
-			$requestData['$itemId'] ?? null
+			$requestData['$subjectId'] ?? null
 		);
 	}
 

@@ -6,7 +6,7 @@ use LogicException;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
+use Wikibase\Repo\RestApi\Application\Validation\RequestedSubjectIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
 
@@ -15,18 +15,18 @@ use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
  */
 class ReplaceStatementValidator {
 
-	private ItemIdValidator $itemIdValidator;
+	private RequestedSubjectIdValidator $subjectIdValidator;
 	private StatementIdValidator $statementIdValidator;
 	private EditMetadataValidator $editMetadataValidator;
 	private StatementValidator $statementValidator;
 
 	public function __construct(
-		ItemIdValidator $itemIdValidator,
+		RequestedSubjectIdValidator $subjectIdValidator,
 		StatementIdValidator $statementIdValidator,
 		StatementValidator $statementValidator,
 		EditMetadataValidator $editMetadataValidator
 	) {
-		$this->itemIdValidator = $itemIdValidator;
+		$this->subjectIdValidator = $subjectIdValidator;
 		$this->statementIdValidator = $statementIdValidator;
 		$this->statementValidator = $statementValidator;
 		$this->editMetadataValidator = $editMetadataValidator;
@@ -36,7 +36,7 @@ class ReplaceStatementValidator {
 	 * @throws UseCaseError
 	 */
 	public function assertValidRequest( ReplaceStatementRequest $request ): void {
-		$this->validateItemId( $request->getItemId() );
+		$this->validateSubjectId( $request->getSubjectId() );
 		$this->validateStatementId( $request->getStatementId() );
 		$this->validateStatement( $request->getStatement() );
 		$this->validateEditTags( $request->getEditTags() );
@@ -50,16 +50,13 @@ class ReplaceStatementValidator {
 	/**
 	 * @throws UseCaseError
 	 */
-	private function validateItemId( ?string $itemId ): void {
-		if ( $itemId === null ) {
-			return;
-		}
-
-		$validationError = $this->itemIdValidator->validate( $itemId );
+	private function validateSubjectId( ?string $subjectId ): void {
+		$validationError = $this->subjectIdValidator->validate( $subjectId );
 		if ( $validationError ) {
 			throw new UseCaseError(
-				UseCaseError::INVALID_ITEM_ID,
-				"Not a valid item ID: {$validationError->getContext()[ItemIdValidator::CONTEXT_VALUE]}"
+				UseCaseError::INVALID_STATEMENT_SUBJECT_ID,
+				'Invalid Subject ID',
+				[ UseCaseError::CONTEXT_SUBJECT_ID => $validationError->getContext()[RequestedSubjectIdValidator::CONTEXT_VALUE] ]
 			);
 		}
 	}
