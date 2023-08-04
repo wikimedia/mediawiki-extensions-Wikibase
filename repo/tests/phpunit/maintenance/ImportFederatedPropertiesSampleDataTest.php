@@ -15,6 +15,7 @@ require_once __DIR__ . '/../../../maintenance/importFederatedPropertiesSampleDat
  * @covers \Wikibase\Repo\Maintenance\ImportFederatedPropertiesSampleData
  *
  * @group Wikibase
+ * @group Database
  *
  * @license GPL-2.0-or-later
  */

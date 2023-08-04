@@ -2,6 +2,8 @@
 
 namespace Wikibase\Repo\Tests\Specials;
 
+use MediaWiki\Linker\LinkRenderer;
+use MediaWiki\Linker\LinkRendererFactory;
 use SpecialPageTestBase;
 use Title;
 use Wikibase\DataAccess\PrefetchingTermLookup;
@@ -51,6 +53,13 @@ class SpecialAvailableBadgesTest extends SpecialPageTestBase {
 	}
 
 	public function testExecute() {
+		$linkRenderer = $this->createMock( LinkRenderer::class );
+		$linkRenderer->method( 'makeLink' )->willReturnCallback( static function ( $target, $text ) {
+			return $text ?? Title::castFromLinkTarget( $target )->getPrefixedText();
+		} );
+		$lrFactory = $this->createMock( LinkRendererFactory::class );
+		$lrFactory->method( 'create' )->willReturn( $linkRenderer );
+		$this->setService( 'LinkRendererFactory', $lrFactory );
 		list( $output, ) = $this->executeSpecialPage( '' );
 
 		$this->assertIsString( $output );

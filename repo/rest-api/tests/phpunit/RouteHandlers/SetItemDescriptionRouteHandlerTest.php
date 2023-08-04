@@ -14,6 +14,7 @@ use Wikibase\Repo\RestApi\RouteHandlers\SetItemDescriptionRouteHandler;
 /**
  * @covers \Wikibase\Repo\RestApi\RouteHandlers\SetItemDescriptionRouteHandler
  * @group Wikibase
+ * @group Database
  * @license GPL-2.0-or-later
  */
 class SetItemDescriptionRouteHandlerTest extends \MediaWikiIntegrationTestCase {

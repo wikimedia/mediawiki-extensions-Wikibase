@@ -3,6 +3,8 @@
 declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\FederatedProperties\ParserOutput;
 
+use LinkBatch;
+use MediaWiki\Cache\LinkBatchFactory;
 use Psr\SimpleCache\CacheInterface;
 use RepoGroup;
 use Wikibase\DataModel\Entity\EntityId;
@@ -34,6 +36,12 @@ use Wikibase\Repo\Tests\ParserOutput\EntityParserOutputGeneratorTestBase;
 class FederatedPropertiesPrefetchingEntityParserOutputGeneratorDecoratorTest extends EntityParserOutputGeneratorTestBase {
 
 	public function testShouldPrefetchFederatedProperties() {
+		$lb = $this->createMock( LinkBatch::class );
+		$lb->method( 'doQuery' )->willReturn( false );
+		$lbFactory = $this->createMock( LinkBatchFactory::class );
+		$lbFactory->method( 'newLinkBatch' )->willReturn( $lb );
+		$this->setService( 'LinkBatchFactory', $lbFactory );
+
 		$labelLanguage = 'en';
 
 		$fedPropId1 = new FederatedPropertyId( 'http://wikidata.org/entity/P123', 'P123' );

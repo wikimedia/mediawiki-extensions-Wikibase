@@ -46,6 +46,7 @@ use Wikimedia\TestingAccessWrapper;
  *
  * @group Wikibase
  * @group WikibaseRdf
+ * @group Database
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler

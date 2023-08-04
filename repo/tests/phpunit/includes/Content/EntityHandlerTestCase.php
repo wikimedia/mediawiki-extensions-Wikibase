@@ -8,7 +8,9 @@ use ContentHandler;
 use DataValues\Serializers\DataValueSerializer;
 use DummySearchIndexFieldDefinition;
 use InvalidArgumentException;
+use LinkBatch;
 use LogicException;
+use MediaWiki\Cache\LinkBatchFactory;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
@@ -17,6 +19,7 @@ use RequestContext;
 use RuntimeException;
 use SearchEngine;
 use Serializers\Serializer;
+use Site;
 use Title;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
@@ -56,6 +59,7 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 			'WikibaseRepo.EntityTypeDefinitions',
 			$this->getEntityTypeDefinitions()
 		);
+		$this->setService( 'WikibaseClient.SiteGroup', Site::GROUP_NONE );
 	}
 
 	abstract public function getModelId();
@@ -720,7 +724,13 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 	 * @dataProvider providePageProperties
 	 */
 	public function testPageProperties( EntityContent $content, array $expectedProps ) {
+		$lb = $this->createMock( LinkBatch::class );
+		$lb->method( 'doQuery' )->willReturn( false );
+		$lbFactory = $this->createMock( LinkBatchFactory::class );
+		$lbFactory->method( 'newLinkBatch' )->willReturn( $lb );
+		$this->setService( 'LinkBatchFactory', $lbFactory );
 		$title = Title::makeTitle( NS_MAIN, 'Foo' );
+		$title->setContentModel( CONTENT_MODEL_WIKITEXT );
 		$contentRenderer = $this->getServiceContainer()->getContentRenderer();
 		$parserOutput = $contentRenderer->getParserOutput( $content, $title, null, null, false );
 

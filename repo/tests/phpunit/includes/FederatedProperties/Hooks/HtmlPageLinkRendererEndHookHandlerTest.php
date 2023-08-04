@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Repo\FederatedProperties\ApiRequestExecutionException;
 use Wikibase\Repo\Tests\Hooks\HtmlPageLinkRendererEndHookHandlerTestBase;
+use Wikimedia\TestingAccessWrapper;
 
 /**
  * @covers \Wikibase\Repo\Hooks\HtmlPageLinkRendererEndHookHandler
@@ -28,6 +29,8 @@ class HtmlPageLinkRendererEndHookHandlerTest extends HtmlPageLinkRendererEndHook
 		$handler = $this->newInstance( 'foo', false, true, Property::ENTITY_TYPE );
 
 		$title = Title::makeTitle( WB_NS_PROPERTY, self::PROPERTY_WITH_LABEL );
+		$wrapper = TestingAccessWrapper::newFromObject( $title );
+		$wrapper->mRedirect = false;
 		$text = $title->getFullText();
 		$customAttribs = [];
 

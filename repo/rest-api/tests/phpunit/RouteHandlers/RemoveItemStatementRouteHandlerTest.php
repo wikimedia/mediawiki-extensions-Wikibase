@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\RestApi\RouteHandlers;
 
+use MediaWiki\ChangeTags\ChangeTagsStore;
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Reporter\ErrorReporter;
 use MediaWiki\Rest\RequestData;
@@ -22,6 +23,13 @@ use Wikibase\Repo\RestApi\RouteHandlers\RemoveItemStatementRouteHandler;
 class RemoveItemStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 
 	use HandlerTestTrait;
+
+	protected function setUp(): void {
+		parent::setUp();
+		$changeTagsStore = $this->createMock( ChangeTagsStore::class );
+		$changeTagsStore->method( 'listExplicitlyDefinedTags' )->willReturn( [] );
+		$this->setService( 'ChangeTagsStore', $changeTagsStore );
+	}
 
 	public function testHandlesUnexpectedErrors(): void {
 		$useCase = $this->createStub( RemoveItemStatement::class );

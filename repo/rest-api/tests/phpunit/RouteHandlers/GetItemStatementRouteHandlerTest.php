@@ -21,6 +21,7 @@ use Wikibase\Repo\RestApi\RouteHandlers\GetItemStatementRouteHandler;
  * @covers \Wikibase\Repo\RestApi\RouteHandlers\GetItemStatementRouteHandler
  *
  * @group Wikibase
+ * @group Database
  *
  * @license GPL-2.0-or-later
  */

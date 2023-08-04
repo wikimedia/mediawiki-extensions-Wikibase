@@ -7,6 +7,7 @@ use ApiMain;
 use ApiPageSet;
 use ApiQuery;
 use MediaWiki\Request\FauxRequest;
+use MediaWiki\Tests\Unit\Permissions\MockAuthorityTrait;
 use MediaWikiIntegrationTestCase;
 use RequestContext;
 use Status;
@@ -32,6 +33,7 @@ use Wikibase\Repo\Api\QuerySearchEntities;
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class QuerySearchEntitiesTest extends MediaWikiIntegrationTestCase {
+	use MockAuthorityTrait;
 
 	/**
 	 * @param array $params
@@ -42,6 +44,7 @@ class QuerySearchEntitiesTest extends MediaWikiIntegrationTestCase {
 		$context = new RequestContext();
 		$context->setLanguage( 'en-ca' );
 		$context->setRequest( new FauxRequest( $params, true ) );
+		$context->setAuthority( $this->mockRegisteredNullAuthority() );
 		$main = new ApiMain( $context );
 		return $main->getModuleManager()->getModule( 'query' );
 	}

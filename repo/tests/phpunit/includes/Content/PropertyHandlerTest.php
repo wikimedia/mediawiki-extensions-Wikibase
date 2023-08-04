@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Content;
 
+use MediaWiki\Page\WikiPageFactory;
 use ParserOutput;
 use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -25,6 +26,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @group WikibaseProperty
  * @group WikibaseEntity
  * @group WikibaseEntityHandler
+ * @group Database
  *
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -196,10 +198,12 @@ class PropertyHandlerTest extends EntityHandlerTestCase {
 	}
 
 	public function testGetParserOutput() {
+		$this->setService( 'WikiPageFactory', $this->createMock( WikiPageFactory::class ) );
 		$content = $this->newEntityContent();
 		$contentRenderer = $this->getServiceContainer()->getContentRenderer();
 
 		$title = Title::makeTitle( NS_MAIN, 'Foo' );
+		$title->setContentModel( CONTENT_MODEL_WIKITEXT );
 		$parserOutput = $contentRenderer->getParserOutput( $content, $title );
 
 		$expectedUsedOptions = [ 'userlang', 'wb', 'termboxVersion' ];

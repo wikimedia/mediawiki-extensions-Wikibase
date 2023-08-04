@@ -18,6 +18,7 @@ use Wikibase\Repo\OutputPageJsConfigBuilder;
  * @covers \Wikibase\Repo\Hooks\MakeGlobalVariablesScriptHookHandler
  *
  * @group Wikibase
+ * @group Database
  *
  * @license GPL-2.0-or-later
  */

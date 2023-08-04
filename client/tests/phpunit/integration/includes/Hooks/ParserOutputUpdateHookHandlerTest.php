@@ -44,6 +44,7 @@ use Wikibase\Lib\DataValue\UnmappedEntityIdValue;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Tests\MockRepository;
+use Wikimedia\TestingAccessWrapper;
 
 /**
  * @covers \Wikibase\Client\Hooks\ParserOutputUpdateHookHandler
@@ -320,6 +321,8 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 		array $expectedSisterLinks,
 		array $expectedBadges = null
 	) {
+		$titleWrapper = TestingAccessWrapper::newFromObject( $title );
+		$titleWrapper->mRedirect = false;
 		$content = $this->createMock( Content::class );
 		$parserOutput = $this->newParserOutput( $extensionDataAppend, [] );
 		$handler = $this->newParserOutputUpdateHookHandler( $this->getTestSiteLinkData() );
@@ -420,6 +423,8 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 		$content = $this->createMock( Content::class );
 		$title = Title::makeTitle( NS_MAIN, 'Foobarium' );
+		$titleWrapper = TestingAccessWrapper::newFromObject( $title );
+		$titleWrapper->mRedirect = false;
 
 		$parserOutput = $this->newParserOutput( [], [] );
 

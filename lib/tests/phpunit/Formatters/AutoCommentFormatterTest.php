@@ -58,6 +58,8 @@ class AutoCommentFormatterTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider provideTestAutoComment
 	 */
 	public function testFormatAutoComment( array $prefixes, $auto, $expected ) {
+		// If the Translate extension is installed, its handler for ParserBeforeInternalParse can trigger DB access
+		$this->clearHook( 'ParserBeforeInternalParse' );
 		$formatter = new AutoCommentFormatter( $this->language, $prefixes );
 		$value = $formatter->formatAutoComment( $auto );
 		$this->assertEquals( $expected, $value );
