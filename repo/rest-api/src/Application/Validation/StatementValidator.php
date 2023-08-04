@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Application\Validation;
 
+use LogicException;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\RestApi\Application\Serialization\InvalidFieldException;
 use Wikibase\Repo\RestApi\Application\Serialization\MissingFieldException;
@@ -44,7 +45,11 @@ class StatementValidator {
 		return null;
 	}
 
-	public function getValidatedStatement(): ?Statement {
+	public function getValidatedStatement(): Statement {
+		if ( $this->deserializedStatement === null ) {
+			throw new LogicException( 'getValidatedStatement() called before validate()' );
+		}
+
 		return $this->deserializedStatement;
 	}
 

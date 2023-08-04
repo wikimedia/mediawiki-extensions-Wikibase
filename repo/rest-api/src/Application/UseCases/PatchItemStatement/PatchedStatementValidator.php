@@ -48,7 +48,6 @@ class PatchedStatementValidator {
 			}
 		}
 
-		// @phan-suppress-next-line PhanTypeMismatchReturnNullable statement is valid and not-null
 		return $this->statementValidator->getValidatedStatement();
 	}
 

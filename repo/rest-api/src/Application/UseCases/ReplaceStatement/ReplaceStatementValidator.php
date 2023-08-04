@@ -43,7 +43,7 @@ class ReplaceStatementValidator {
 		$this->validateComment( $request->getComment() );
 	}
 
-	public function getValidatedStatement(): ?Statement {
+	public function getValidatedStatement(): Statement {
 		return $this->statementValidator->getValidatedStatement();
 	}
 
