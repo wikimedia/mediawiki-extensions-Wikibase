@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
 
 use MediaWiki\User\UserFactory;
-use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
 use Wikibase\Repo\Store\EntityPermissionChecker;
@@ -21,7 +21,7 @@ class WikibaseEntityPermissionChecker implements PermissionChecker {
 		$this->userFactory = $userFactory;
 	}
 
-	public function canEdit( User $user, ItemId $id ): bool {
+	public function canEdit( User $user, EntityId $id ): bool {
 		$mwUser = $user->isAnonymous() ?
 			$this->userFactory->newAnonymous() :
 			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable isAnonymous checks for null

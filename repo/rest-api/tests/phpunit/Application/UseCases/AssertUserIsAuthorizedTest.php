@@ -2,8 +2,11 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Application\UseCases;
 
+use Generator;
 use PHPUnit\Framework\TestCase;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\User;
@@ -21,9 +24,10 @@ use Wikibase\Repo\RestApi\Infrastructure\DataAccess\WikibaseEntityPermissionChec
  */
 class AssertUserIsAuthorizedTest extends TestCase {
 
-	public function testGivenUserIsAuthorized(): void {
-		$itemId = new ItemId( 'Q123' );
-
+	/**
+	 * @dataProvider provideEntityId
+	 */
+	public function testGivenUserIsAuthorized( EntityId $entityId ): void {
 		$metadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
 		$metadataRetriever->method( 'getLatestRevisionMetadata' )
 			->willReturn( LatestItemRevisionMetadataResult::concreteRevision( 321, '20201111070707' ) );
@@ -31,15 +35,16 @@ class AssertUserIsAuthorizedTest extends TestCase {
 		$permissionChecker = $this->createMock( WikibaseEntityPermissionChecker::class );
 		$permissionChecker->expects( $this->once() )
 			->method( 'canEdit' )
-			->with( User::newAnonymous(), $itemId )
+			->with( User::newAnonymous(), $entityId )
 			->willReturn( true );
 
-		$this->newAssertUserIsAuthorized( $permissionChecker )->execute( $itemId, null );
+		$this->newAssertUserIsAuthorized( $permissionChecker )->execute( $entityId, null );
 	}
 
-	public function testGivenUserIsUnauthorized_throwsUseCaseError(): void {
-		$itemId = new ItemId( 'Q123' );
-
+	/**
+	 * @dataProvider provideEntityId
+	 */
+	public function testGivenUserIsUnauthorized_throwsUseCaseError( EntityId $entityId ): void {
 		$metadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
 		$metadataRetriever->method( 'getLatestRevisionMetadata' )
 			->willReturn( LatestItemRevisionMetadataResult::concreteRevision( 321, '20201111070707' ) );
@@ -47,11 +52,11 @@ class AssertUserIsAuthorizedTest extends TestCase {
 		$permissionChecker = $this->createMock( WikibaseEntityPermissionChecker::class );
 		$permissionChecker->expects( $this->once() )
 			->method( 'canEdit' )
-			->with( User::newAnonymous(), $itemId )
+			->with( User::newAnonymous(), $entityId )
 			->willReturn( false );
 
 		try {
-			$this->newAssertUserIsAuthorized( $permissionChecker )->execute( $itemId, null );
+			$this->newAssertUserIsAuthorized( $permissionChecker )->execute( $entityId, null );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame(
@@ -59,6 +64,11 @@ class AssertUserIsAuthorizedTest extends TestCase {
 				$e->getErrorCode()
 			);
 		}
+	}
+
+	public function provideEntityId(): Generator {
+		yield 'item id' => [ new ItemId( 'Q123' ) ];
+		yield 'property id' => [ new NumericPropertyId( 'P123' ) ];
 	}
 
 	private function newAssertUserIsAuthorized( PermissionChecker $permissionChecker ): AssertUserIsAuthorized {

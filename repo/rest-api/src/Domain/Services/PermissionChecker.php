@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Domain\Services;
 
-use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Repo\RestApi\Domain\Model\User;
 
 /**
@@ -10,6 +10,6 @@ use Wikibase\Repo\RestApi\Domain\Model\User;
  */
 interface PermissionChecker {
 
-	public function canEdit( User $user, ItemId $id ): bool;
+	public function canEdit( User $user, EntityId $id ): bool;
 
 }
