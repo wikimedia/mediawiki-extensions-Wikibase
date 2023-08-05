@@ -63,6 +63,8 @@
 	"apihelp-query+wikibase-summary": "{{doc-apihelp-summary|query+wikibase}}",
 	"apihelp-query+wikibase-example": "{{doc-apihelp-example|query+wikibase}}",
 	"apihelp-query+wikibase-param-prop": "{{doc-apihelp-param|query+wikibase|prop}}",
+	"apihelp-query+wikibase-paramvalue-prop-url": "{{doc-apihelp-paramvalue|query+wikibase|prop|url}}",
+	"apihelp-query+wikibase-paramvalue-prop-siteid": "{{doc-apihelp-paramvalue|query+wikibase|prop|siteid}}",
 	"apihelp-wbformatreference-summary": "{{doc-apihelp-summary|wbformatreference}}",
 	"apihelp-wbformatreference-example-1": "{{doc-apihelp-example|wbformatreference}}",
 	"apihelp-wbformatreference-example-2": "{{doc-apihelp-example|wbformatreference}}",
