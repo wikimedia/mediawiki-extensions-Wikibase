@@ -7,7 +7,7 @@ namespace Wikibase\DataModel\Statement;
  *
  * @since 3.0
  * @deprecated since 5.1, will be removed in favor of StatementListProvider, which
- *  gives the guarantee to return an object by reference. Changes to that object change the entity.
+ *  gives the guarantee to return a mutable object. Changes to that object change the entity.
  *
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz

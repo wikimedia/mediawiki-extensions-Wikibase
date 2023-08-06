@@ -4,7 +4,7 @@ namespace Wikibase\DataModel\Term;
 
 /**
  * Common interface for classes (typically Entities) that contain an AliasGroupList. Implementations
- * must guarantee this returns the original, mutable object by reference.
+ * must guarantee this returns the original, mutable object.
  *
  * @since 4.1
  *
@@ -14,7 +14,7 @@ namespace Wikibase\DataModel\Term;
 interface AliasesProvider {
 
 	/**
-	 * This is guaranteed to return the original, mutable object by reference.
+	 * This is guaranteed to return the original, mutable object.
 	 *
 	 * @return AliasGroupList
 	 */
