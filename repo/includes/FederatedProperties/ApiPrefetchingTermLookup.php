@@ -3,7 +3,8 @@
 declare( strict_types = 1 );
 namespace Wikibase\Repo\FederatedProperties;
 
-use BadMethodCallException;
+use InvalidArgumentException;
+use LogicException;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\TermTypes;
@@ -180,17 +181,15 @@ class ApiPrefetchingTermLookup extends EntityTermLookupBase implements Prefetchi
 	private function validateTermTypes( array $termTypes ): void {
 		foreach ( $termTypes as $termType ) {
 			if ( !in_array( $termType, self::SUPPORTED_TERM_TYPES ) ) {
-				throw new BadMethodCallException( "term type $termType is not supported by " . __CLASS__ );
+				throw new InvalidArgumentException( "term type $termType is not supported by " . __CLASS__ );
 			}
 		}
 	}
 
 	/**
-	 * Not implemented
-	 * @throws BadMethodCallException always
+	 * @return never
 	 */
 	public function getPrefetchedAliases( EntityId $entityId, $languageCode ) {
-		// @phan-suppress-previous-line PhanPluginNeverReturnMethod
-		throw new BadMethodCallException( 'Cannot get Aliases. Only labels' );
+		throw new LogicException( 'Cannot get Aliases. Only labels' );
 	}
 }

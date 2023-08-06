@@ -3,6 +3,7 @@
 declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\FederatedProperties;
 
+use LogicException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\FederatedProperties\FederatedPropertyId;
@@ -136,7 +137,7 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 			)
 		);
 
-		$this->expectException( \BadMethodCallException::class );
+		$this->expectException( LogicException::class );
 		$apiLookup->getPrefetchedAliases( new FederatedPropertyId( 'http://wikidata.org/entity/P1', 'P1' ), 'someLanguage' );
 	}
 
