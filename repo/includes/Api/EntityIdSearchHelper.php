@@ -97,11 +97,7 @@ class EntityIdSearchHelper implements EntitySearchHelper {
 	}
 
 	/**
-	 * Returns EntityIds matching the search term (possibly with some repository prefix).
-	 * If search term is a serialized entity id of the requested type, and multiple repositories provide
-	 * entities of the type, prefixes of each of repositories are added to the search term and those repositories
-	 * are searched for the result entity ID. If such concatenated entity IDs are found in several respective
-	 * repositories, this returns all relevant matches.
+	 * Returns EntityId matching the search term.
 	 *
 	 * @param string $term
 	 * @param string $entityType
@@ -157,7 +153,7 @@ class EntityIdSearchHelper implements EntitySearchHelper {
 	}
 
 	/**
-	 * Returns a list of entity IDs matching the pattern defined by $entityId: existing entities
+	 * Returns an entity ID matching the pattern defined by $entityId: existing entity
 	 * of type of $entityId, and serialized id equal to $entityId.
 	 *
 	 * @param EntityId $entityId
