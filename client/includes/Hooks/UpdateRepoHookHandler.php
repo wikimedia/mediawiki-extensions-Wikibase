@@ -38,45 +38,14 @@ use WikiPage;
  */
 class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteCompleteHook {
 
-	/**
-	 * @var NamespaceChecker
-	 */
-	private $namespaceChecker;
-
-	/**
-	 * @var JobQueueGroupFactory
-	 */
-	private $jobQueueGroupFactory;
-
-	/**
-	 * @var DatabaseEntitySource
-	 */
-	private $entitySource;
-
-	/**
-	 * @var SiteLinkLookup
-	 */
-	private $siteLinkLookup;
-
-	/**
-	 * @var LoggerInterface
-	 */
-	private $logger;
-
-	/**
-	 * @var ClientDomainDb
-	 */
-	private $clientDb;
-
-	/**
-	 * @var string
-	 */
-	private $siteGlobalID;
-
-	/**
-	 * @var bool
-	 */
-	private $propagateChangesToRepo;
+	private NamespaceChecker $namespaceChecker;
+	private JobQueueGroupFactory $jobQueueGroupFactory;
+	private DatabaseEntitySource $entitySource;
+	private SiteLinkLookup $siteLinkLookup;
+	private LoggerInterface $logger;
+	private ClientDomainDb $clientDb;
+	private string $siteGlobalID;
+	private bool $propagateChangesToRepo;
 
 	public static function factory(
 		JobQueueGroupFactory $jobQueueGroupFactory,
@@ -98,15 +67,6 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 		);
 	}
 
-	/**
-	 * @param NamespaceChecker $namespaceChecker
-	 * @param JobQueueGroupFactory $jobQueueGroupFactory
-	 * @param DatabaseEntitySource $entitySource
-	 * @param SiteLinkLookup $siteLinkLookup
-	 * @param LoggerInterface $logger
-	 * @param string $siteGlobalID
-	 * @param bool $propagateChangesToRepo
-	 */
 	public function __construct(
 		NamespaceChecker $namespaceChecker,
 		JobQueueGroupFactory $jobQueueGroupFactory,
@@ -114,8 +74,8 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 		SiteLinkLookup $siteLinkLookup,
 		LoggerInterface $logger,
 		ClientDomainDb $clientDb,
-		$siteGlobalID,
-		$propagateChangesToRepo
+		string $siteGlobalID,
+		bool $propagateChangesToRepo
 	) {
 		$this->namespaceChecker = $namespaceChecker;
 		$this->jobQueueGroupFactory = $jobQueueGroupFactory;
@@ -130,12 +90,8 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 
 	/**
 	 * @see NamespaceChecker::isWikibaseEnabled
-	 *
-	 * @param int $namespace
-	 *
-	 * @return bool
 	 */
-	private function isWikibaseEnabled( $namespace ) {
+	private function isWikibaseEnabled( int $namespace ): bool {
 		return $this->namespaceChecker->isWikibaseEnabled( $namespace );
 	}
 
@@ -236,7 +192,7 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 		$logEntry,
 		$archivedRevisionCount
 	) {
-		if ( $this->propagateChangesToRepo !== true ) {
+		if ( !$this->propagateChangesToRepo ) {
 			return true;
 		}
 
@@ -276,7 +232,7 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 		$reason,
 		$revisionRecord
 	) {
-		if ( $this->propagateChangesToRepo !== true ) {
+		if ( !$this->propagateChangesToRepo ) {
 			return true;
 		}
 
