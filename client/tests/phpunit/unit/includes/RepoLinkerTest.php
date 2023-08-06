@@ -245,7 +245,7 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 		];
 	}
 
-	public function testGivenEntitySourceDefinitions_getEntityConceptUriUsesBasedFromRightSource() {
+	public function testGetEntityConceptUriUsesUriBasedFromRightSource() {
 		$linker = new RepoLinker(
 			new EntitySourceDefinitions(
 				[
