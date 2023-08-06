@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Api;
 
+use ApiBase;
 use ApiQuery;
 use ApiQueryBase;
 use Wikibase\Lib\SettingsArray;
@@ -103,6 +104,7 @@ class ApiClientInfo extends ApiQueryBase {
 				ParamValidator::PARAM_TYPE => [
 					'url', 'siteid',
 				],
+				ApiBase::PARAM_HELP_MSG_PER_VALUE => [],
 			],
 		];
 	}
