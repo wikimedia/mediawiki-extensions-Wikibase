@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Tests\Store\Sql;
 use Error;
 use MediaWiki\Revision\SlotRecord;
 use MediaWiki\Storage\NameTableStore;
+use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
@@ -28,17 +29,7 @@ class EntityIdLocalPartPageTableEntityQueryDbTest extends MediaWikiIntegrationTe
 		$this->tablesUsed[] = 'revision';
 		$this->tablesUsed[] = 'slots';
 		$this->tablesUsed[] = 'slot_roles';
-		$this->db->insert(
-			'page',
-			[
-				'page_title' => 'localPartOne',
-				'page_namespace' => 1,
-				'page_random' => 1,
-				'page_latest' => 1,
-				'page_len' => 1,
-				'page_touched' => $this->db->timestamp(),
-			]
-		);
+		$this->getExistingTestPage( Title::makeTitle( 1, 'LocalPartOne' ) );
 		$this->db->insert(
 			'page',
 			[
@@ -111,8 +102,8 @@ class EntityIdLocalPartPageTableEntityQueryDbTest extends MediaWikiIntegrationTe
 			[
 				[],
 				null,
-				[ $this->getMockEntityId( 'entityTypeOne', 'localPartOne' ) ],
-				[ 'localPartOne' => (object)[ 'page_title' => 'localPartOne' ] ],
+				[ $this->getMockEntityId( 'entityTypeOne', 'LocalPartOne' ) ],
+				[ 'LocalPartOne' => (object)[ 'page_title' => 'LocalPartOne' ] ],
 			],
 			[
 				[],
@@ -123,10 +114,10 @@ class EntityIdLocalPartPageTableEntityQueryDbTest extends MediaWikiIntegrationTe
 			[
 				[ 'page_namespace' ],
 				null,
-				[ $this->getMockEntityId( 'entityTypeOne', 'localPartOne' ) ],
+				[ $this->getMockEntityId( 'entityTypeOne', 'LocalPartOne' ) ],
 				[
-					'localPartOne' => (object)[
-						'page_title' => 'localPartOne',
+					'LocalPartOne' => (object)[
+						'page_title' => 'LocalPartOne',
 						'page_namespace' => 1,
 					],
 				],
@@ -146,12 +137,12 @@ class EntityIdLocalPartPageTableEntityQueryDbTest extends MediaWikiIntegrationTe
 				[ 'page_namespace' ],
 				null,
 				[
-					$this->getMockEntityId( 'entityTypeOne', 'localPartOne' ),
+					$this->getMockEntityId( 'entityTypeOne', 'LocalPartOne' ),
 					$this->getMockEntityId( 'entityTypeTwo', 'localPartTwo' ),
 				],
 				[
-					'localPartOne' => (object)[
-						'page_title' => 'localPartOne',
+					'LocalPartOne' => (object)[
+						'page_title' => 'LocalPartOne',
 						'page_namespace' => 1,
 					],
 					'localPartTwo' => (object)[
