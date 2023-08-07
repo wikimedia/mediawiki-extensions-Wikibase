@@ -4,7 +4,8 @@
 			"Inkowik",
 			"Metalhead64",
 			"Tiin",
-			"Brettchenweber"
+			"Brettchenweber",
+			"Nw520"
 		]
 	},
 	"apihelp-query+wbentityusage-description": "Gibt alle Objektkennungen zurück, die in den angegebenen Seiten verwendet werden.",
@@ -19,7 +20,7 @@
 	"apihelp-query+wbentityusage-paramvalue-aspect-O": "Es wird etwas anderes über das Objekt verwendet. Dies impliziert derzeit die Verwendung von Aliasen sowie explizite Prüfungen auf die Existenz des Objektes.",
 	"apihelp-query+wbentityusage-param-prop": "Eigenschaften, die zum Ergebnis hinzugefügt werden sollen.",
 	"apihelp-query+wbentityusage-paramvalue-prop-url": "Ob die aktivierte URL oder das Objekt hinzugefügt wird",
-	"apihelp-query+wbentityusage-param-entities": "Gibt nur die Seite zurück, die diese Objekte verwendet hat.",
+	"apihelp-query+wbentityusage-param-entities": "Gibt nur die Seite zurück, die diese Entitäten verwendet hat.",
 	"apihelp-query+wbentityusage-param-limit": "Wie viele Objektverwendungen zurückgegeben werden sollen.",
 	"apihelp-query+wbentityusage-example-simple": "Ruft Objekte ab, die in der Seite <kbd>Main Page</kbd> verwendet werden.",
 	"apihelp-query+wblistentityusage-description": "Gibt alle Seiten zurück, die die angegebenen Objektkennungen verwenden.",
@@ -27,7 +28,7 @@
 	"apihelp-query+wblistentityusage-param-prop": "Eigenschaften, die dem Ergebnis hinzugefügt werden sollen.",
 	"apihelp-query+wblistentityusage-paramvalue-prop-url": "Falls aktiviert, wird die URL des Objekts zum Ergebnis hinzugefügt.",
 	"apihelp-query+wblistentityusage-param-aspect": "Gibt nur Objektkennungen zurück, die diesen Aspekt verwendet haben.",
-	"apihelp-query+wblistentityusage-param-entities": "Objekte, die verwendet wurden.",
+	"apihelp-query+wblistentityusage-param-entities": "Entitäten, die verwendet wurden.",
 	"apihelp-query+wblistentityusage-param-limit": "Wie viele Objektverwendungen zurückgegeben werden sollen.",
 	"apihelp-query+wblistentityusage-example-simple": "Ruft Seiten ab, die das Objekt <kbd>Q2</kbd> verwenden.",
 	"apihelp-query+wblistentityusage-example-url": "Ruft Seiten ab, die das Objekt <kbd>Q2</kbd> verwenden, inklusive der URL.",

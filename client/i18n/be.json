@@ -107,7 +107,7 @@
 	"wikibase-sitelinks-link-columnheading": "Злучаная старонка",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Злучэнне|Злучэнні}} з элементам {{grammar:родны|{{WBREPONAME}}}}",
 	"echo-pref-tooltip-wikibase-action": "Паведамляць мне, калі хтосьці падключаецца да старонкі, якую {{GENDER:|я стварыў у|я стварыла ў}} элеменце {{grammar:родны|{{WBREPONAME}}}}.",
-	"notification-header-page-connection": "Старонка <strong>$3</strong> была {{GENDER:$2|злучана}} з {{PLURAL:$4|-1=элементам {{grammar:родны|{{WBREPONAME}}}}|элементам {{grammar:родны|{{WBREPONAME}}}} $4}}, дзе можна сабраць дадзеныя, якія адносяцца да тэмы.",
+	"notification-header-page-connection": "Старонка <strong>$3</strong> была {{GENDER:$2|злучана}} з {{PLURAL:$4|-1=элементам {{grammar:родны|{{WBREPONAME}}}}|элементам {{grammar:родны|{{WBREPONAME}}}} $4}}, дзе можна сабраць даныя, якія адносяцца да тэмы.",
 	"notification-bundle-header-page-connection": "$3 і яшчэ {{PLURAL:$4|$4 старонка|$4 старонкі|$4 старонак|100=99+ іншых старонак}} былі {{GENDER:$2|падлучаныя}} да элементаў {{WBREPONAME}}, дзе можна збіраць дадзеныя, якія маюць дачыненне да тэмаў.",
 	"notification-link-text-view-item": "{{GENDER:$1|Праглядзець}} элемент",
 	"notification-subject-page-connection": "Старонка на сайце {{SITENAME}}, якую вы {{GENDER:$3|стварылі}}, была {{GENDER:$2|далучаная}} да элемента {{WBREPONAME}}",

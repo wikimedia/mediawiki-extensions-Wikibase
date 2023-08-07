@@ -4,7 +4,7 @@
 			"Bangrapip"
 		]
 	},
-	"wikibase-client-desc": "Klièn bakal èkstènsi Wikibase",
+	"wikibase-client-desc": "Klièn bakal ata-été Wikibase",
 	"tooltip-t-wikibase": "Sènggètan ke butir gudang data nyang keubung",
 	"wikibase-after-page-move": "Aturan mah sekarang pemindahan lu [$1 keliatan di sènggètan basa butir {{WBREPONAME}}]. Kita minta' lu perèksa apa ni udah kejadian.",
 	"wikibase-after-page-delete": "Sènggètan ke ni halaman aturan mah udah diapus deri [$1 butir {{WBREPONAME}} nyang bekaètan]. Kita minta' lu perèksa apa ni udah kejadian.",
@@ -132,7 +132,7 @@
 	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>Wanti-wanti:</strong> Lu kaga' lagi masup. Lu punya aderès IP bakal kiatan ama halayak umum kalo lu banyak bikin permakan. Kalo lu  <strong>masup</strong> atawa <strong>ngeja rèkening</strong>, lu punya permakan bakal dinisbatin ke lu punya nama pemaké, beserènta macem-macem keuntungan laènnya.",
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Permak sonder masup",
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "Masup atawa Daptar",
-	"wikibase-client-data-bridge-license-heading": "Pemakéan èn lisènsi",
+	"wikibase-client-data-bridge-license-heading": "Pemakéan èn ongji",
 	"wikibase-client-data-bridge-license-body": "<p>Ngrobah ni nilé bakal ngrobah juga' di {{WBREPONAME}} èn bisa juga' di wiki di laèn-laèn basa.</p>\n<p>Dengen ngeklik \"{{int:$1}}\", lu akur ama [$2 ketentuan pemakéan], èn lu kaga' bisa ngurungin lu punya akur bakal ngelansir lu punya sumbangsih di bawah [$3 $4].</p>",
 	"wikibase-client-data-bridge-bailout-heading": "Sebagé gantinya, lu bisa nglakonin ni:",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo": "Permak nilé di {{WBREPONAME}}. Klik tombol di bawah bakal mermak nilénya langsung (sènggètan kebuka di lembaran baru).",
