@@ -10,8 +10,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\StatementListProvidingEntity as StatementSubject;
-use Wikibase\DataModel\Fixtures\CustomEntityId;
-use Wikibase\DataModel\Services\Fixtures\FakeEntityDocument;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\Fingerprint;
@@ -19,9 +17,9 @@ use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupStatementRetriever;
+use Wikibase\Repo\RestApi\Infrastructure\DataAccess\StatementSubjectRetriever;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupStatementRetriever
@@ -93,14 +91,6 @@ class EntityRevisionLookupStatementRetrieverTest extends TestCase {
 		yield 'Property ID' => [ new NumericPropertyId( 'P123' ) ];
 	}
 
-	public function testGivenItemRedirected_getStatementReturnsNull(): void {
-		$itemId = new ItemId( 'Q321' );
-		$statementId = new StatementGuid( $itemId, 'c48c32c3-42b5-498f-9586-84608b88747c' );
-		$this->entityRevisionLookup = $this->newLookupForIdWithRedirect( $itemId );
-
-		$this->assertNull( $this->newRetriever()->getStatement( $statementId ) );
-	}
-
 	/**
 	 * @dataProvider provideStatementSubjectWithoutStatement
 	 */
@@ -121,15 +111,6 @@ class EntityRevisionLookupStatementRetrieverTest extends TestCase {
 		];
 	}
 
-	public function testGivenEntityIsNotStatementSubject_getStatementReturnsNull(): void {
-		$subjectId = new CustomEntityId( 'A123' );
-		$subject = new FakeEntityDocument( $subjectId );
-		$statementId = new StatementGuid( $subjectId, '69460e7f-4c45-d417-9420-9431a47969a8' );
-		$this->entityRevisionLookup = $this->newLookupForIdWithReturnValue( $subjectId, $subject );
-
-		$this->assertNull( $this->newRetriever()->getStatement( $statementId ) );
-	}
-
 	private function newLookupForIdWithReturnValue( EntityId $id, ?EntityDocument $returnValue ): EntityRevisionLookup {
 		$entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );
 		$entityRevisionLookup->expects( $this->once() )
@@ -140,19 +121,9 @@ class EntityRevisionLookupStatementRetrieverTest extends TestCase {
 		return $entityRevisionLookup;
 	}
 
-	private function newLookupForIdWithRedirect( EntityId $id ): EntityRevisionLookup {
-		$entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );
-		$entityRevisionLookup->expects( $this->once() )
-			->method( 'getEntityRevision' )
-			->with( $id )
-			->willThrowException( $this->createStub( RevisionedUnresolvedRedirectException::class ) );
-
-		return $entityRevisionLookup;
-	}
-
 	private function newRetriever(): EntityRevisionLookupStatementRetriever {
 		return new EntityRevisionLookupStatementRetriever(
-			$this->entityRevisionLookup,
+			new StatementSubjectRetriever( $this->entityRevisionLookup ),
 			$this->newStatementReadModelConverter()
 		);
 	}
