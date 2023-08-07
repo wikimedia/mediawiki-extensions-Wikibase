@@ -1,15 +1,18 @@
 /**
- * implements termbox EntityRepository
+ * @typedef {import("../../../lib/wikibase-termbox/dist/wikibase.termbox.init.d.ts")} Termbox
+ *
+ * @implements {Termbox.EntityRepository}
  *
  * @license GPL-2.0-or-later
  */
-module.exports = class EntityLoadedHookEntityRepository {
+class EntityLoadedHookEntityRepository {
 	/**
 	 * @param  {mw.hook} hook
 	 */
 	constructor( hook ) {
 		this._entityLoadedHook = hook;
 	}
+
 	/**
 	 * @return {Promise<Object>}
 	 */
@@ -20,4 +23,6 @@ module.exports = class EntityLoadedHookEntityRepository {
 			} );
 		} );
 	}
-};
+}
+
+module.exports = EntityLoadedHookEntityRepository;

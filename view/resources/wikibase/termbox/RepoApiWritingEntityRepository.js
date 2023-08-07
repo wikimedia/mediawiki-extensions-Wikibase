@@ -1,11 +1,11 @@
 /**
- * implements termbox EntityRepository
+ * @typedef {import("../../../lib/wikibase-termbox/dist/wikibase.termbox.init.d.ts")} Termbox
  *
  * @license GPL-2.0-or-later
  */
 
 /**
- * equivalent to termbox TechnicalProblem
+ * @see {Termbox.TechnicalProblem}
  */
 class TechnicalProblem extends Error {
 	getContext() {
@@ -13,7 +13,10 @@ class TechnicalProblem extends Error {
 	}
 }
 
-module.exports = class RepoApiWritingEntityRepository {
+/**
+ * @implements {Termbox.WritingEntityRepository}
+ */
+class RepoApiWritingEntityRepository {
 	/**
 	 * @param {RepoApi} repoApi
 	 */
@@ -51,4 +54,6 @@ module.exports = class RepoApiWritingEntityRepository {
 		}
 
 	}
-};
+}
+
+module.exports = RepoApiWritingEntityRepository;
