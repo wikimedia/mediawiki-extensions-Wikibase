@@ -155,7 +155,7 @@
 	"apihelp-wbsearchentities-example-1": "חיפוש \"abc\" בשפה האנגלית, עם ברירות מחדל לסוג ומגבלה",
 	"apihelp-wbsearchentities-example-2": "חיפוש עבור \"abc\" בשפה אנגלית עם מגבלה של 50",
 	"apihelp-wbsearchentities-example-3": "חיפוש \"alphabet\" בשפה האנגלית למאפיין type",
-	"apihelp-wbsearchentities-example-4": "חיפוש \"abc\" בשפה האנגלית עם הגבלה של 2 והיסט של 2",
+	"apihelp-wbsearchentities-example-4": "חיפוש \"abc\" בשפה האנגלית עם מגבלה של 2 והיסט של 2",
 	"apihelp-wbsearchentities-example-5": "חיפוש \"alphabet\" בשפה האנגלית ללא הפרמטר url",
 	"apihelp-wbsearchentities-example-6": "חיפוש עבור \"Q1234\" בשפה אנגלית, כדי להתאים למזהה של הישות.",
 	"apihelp-query+entityterms-summary": "קבלת איברים (תוויות, תיאורים, וכיוניים) של הישות בדף הזה.",

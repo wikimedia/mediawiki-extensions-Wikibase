@@ -223,7 +223,7 @@
 	"wikibase-itemdisambiguation-description": "Värden som används för sökning måste vara det fullständiga textuppslaget. Språket är en identifierare, som exempelvis \"en\".",
 	"wikibase-itemdisambiguation-summary": "Sök efter alla objekt med exakt samma etikett.",
 	"special-newproperty": "Skapa en ny egenskap",
-	"wikibase-newproperty-summary": "Se till att kontrollera om egenskapen redan finns!<br />Du bör skapa en {{int:Wikibase-label-helppage}}|etikett och en {{int:Wikibase-description-helppage}}|beskrivning för alla nya egenskaper och en giltig egenskapstyp.",
+	"wikibase-newproperty-summary": "Se till att kontrollera om egenskapen redan finns!<br />Du bör skapa en {{int:Wikibase-label-helppage|etikett}} och en {{int:Wikibase-description-helppage|beskrivning}} för alla nya egenskaper och en giltig egenskapstyp.",
 	"wikibase-newproperty-fieldset": "Skapa en ny egenskap",
 	"wikibase-newproperty-datatype": "Datatyp:",
 	"wikibase-newproperty-invalid-datatype": "Ogiltig datatyp angiven.",
