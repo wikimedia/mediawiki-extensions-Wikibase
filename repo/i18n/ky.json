@@ -9,11 +9,14 @@
 			"Элдин беги"
 		]
 	},
+	"wikibase-entity-item": "Элемент",
 	"wikibase-edit": "оңдоо",
 	"wikibase-save": "сактоо",
+	"wikibase-publish": "жарыялоо",
 	"wikibase-cancel": "жокко чыгаруу",
 	"wikibase-add": "кошуу",
 	"wikibase-save-inprogress": "Сакталууда...",
+	"wikibase-publish-inprogress": "Жарыяланууда...",
 	"wikibase-label-empty": "белги аныкталган жок",
 	"wikibase-description-empty": "Сүрөттөмө аныкталган жок",
 	"wikibase-diffview-link": "шилтемелер",
@@ -30,7 +33,9 @@
 	"wikibase-itemdisambiguation-lookup-language": "Тилдин коду:",
 	"wikibase-itemdisambiguation-submit": "Издөө",
 	"wikibase-newentity-description": "Баяндама:",
+	"wikibase-newentity-submit": "Түзүү",
 	"wikibase-modifyterm-language": "Тилдин коду:",
 	"wikibase-restoreold": "калыбына келтирүү",
+	"wikibase-listdatatypes-wikibase-item-head": "Элемент",
 	"wikibase-federated-properties-leaving-site-notice-cancel": "Жокко чыгаруу"
 }

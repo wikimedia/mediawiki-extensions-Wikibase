@@ -3,13 +3,14 @@
 		"authors": [
 			"Сай",
 			"Санюн Вадик",
-			"Lifeway"
+			"Lifeway",
+			"Венина Наталья Константиновна"
 		]
 	},
 	"tooltip-t-wikibase": "Ссылка на связанный элемент репозитория данных",
 	"wikibase-comment-update": "{{WBREPONAME}} элемент вашталтын",
 	"wikibase-dataitem": "{{WBREPONAME}} иктык",
-	"wikibase-editlinks": "Кылверым тӧрлаташ",
+	"wikibase-editlinks": "Кылвер-влакым тӧрлаш",
 	"wikibase-editlinkstitle": "Йылмыла кокласе кылвер-влакым тӧрлаташ",
 	"wikibase-linkitem-addlinks": "Кылвер-влакым ешараш",
 	"wikibase-linkitem-title": "Велыж дене кылдымаш",
@@ -18,7 +19,7 @@
 	"wikibase-linkitem-input-site": "Йылме:",
 	"wikibase-linkitem-input-page": "Велыж:",
 	"wikibase-rc-hide-wikidata-hide": "Шылташ",
-	"wikibase-rc-hide-wikidata-show": "ончыкташ",
+	"wikibase-rc-hide-wikidata-show": "Ончыкташ",
 	"wikibase-rc-wikibase-edit-letter": "д",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} тӧрлатымаш",
 	"unconnectedpages": "Элемент-влак дене кылдалтыдме лаштык-влак",
