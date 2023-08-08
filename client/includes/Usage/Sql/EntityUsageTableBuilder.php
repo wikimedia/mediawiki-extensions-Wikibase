@@ -141,18 +141,15 @@ class EntityUsageTableBuilder {
 
 		$c = 0;
 		foreach ( $entityPerPage as $pageId => $entityId ) {
-			$dbw->insert(
-				$this->usageTableName,
-				[
+			$dbw->newInsertQueryBuilder()
+				->insert( $this->usageTableName )
+				->ignore()
+				->row( [
 					'eu_page_id' => (int)$pageId,
 					'eu_aspect' => EntityUsage::ALL_USAGE,
 					'eu_entity_id' => $entityId->getSerialization(),
-				],
-				__METHOD__,
-				[
-					'IGNORE',
-				]
-			);
+				] )
+				->caller( __METHOD__ )->execute();
 
 			$c++;
 		}

@@ -126,11 +126,13 @@ abstract class DatabaseTermStoreWriterBase {
 				$dbw,
 				$entityNumericId
 			) {
-
 				$termInLangIdsToInsert = array_diff( $newTermInLangIds, $oldTermInLangIds );
 				$termInLangIdsToClean = array_diff( $oldTermInLangIds, $newTermInLangIds );
-				$rowsToInsert = [];
+				if ( $termInLangIdsToInsert === [] ) {
+					return;
+				}
 
+				$rowsToInsert = [];
 				$entityIdColumnName = $this->getMapping()->getEntityIdColumn();
 				$termInLangColumnName = $this->getMapping()->getTermInLangIdColumn();
 				foreach ( $termInLangIdsToInsert as $termInLangIdToInsert ) {
@@ -141,12 +143,11 @@ abstract class DatabaseTermStoreWriterBase {
 				}
 
 				$dbw->onTransactionPreCommitOrIdle( function () use ( $dbw, $rowsToInsert, $fname ) {
-					$dbw->insert(
-						$this->getMapping()->getTableName(),
-						$rowsToInsert,
-						$fname,
-						[ 'IGNORE' ]
-					);
+					$dbw->newInsertQueryBuilder()
+						->insert( $this->getMapping()->getTableName() )
+						->ignore()
+						->rows( $rowsToInsert )
+						->caller( $fname )->execute();
 				}, $fname );
 			}
 		);

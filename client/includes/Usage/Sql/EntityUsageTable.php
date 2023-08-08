@@ -181,7 +181,11 @@ class EntityUsageTable {
 
 		$writeConnection = $this->getWriteConnection();
 		foreach ( $batches as $rows ) {
-			$writeConnection->insert( $this->tableName, $rows, __METHOD__, [ 'IGNORE' ] );
+			$writeConnection->newInsertQueryBuilder()
+				->insert( $this->tableName )
+				->ignore()
+				->rows( $rows )
+				->caller( __METHOD__ )->execute();
 			$c += $writeConnection->affectedRows();
 
 			// Wait for all database replicas to be updated, but only for the affected client wiki.
