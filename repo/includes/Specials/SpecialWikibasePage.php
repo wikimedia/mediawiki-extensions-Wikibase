@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Specials;
 
+use Message;
 use SpecialPage;
 use UserBlockedError;
 use Wikibase\Lib\StringNormalizer;
@@ -48,10 +49,10 @@ abstract class SpecialWikibasePage extends SpecialPage {
 	/**
 	 * @see SpecialPage::getDescription
 	 *
-	 * @return string
+	 * @return Message
 	 */
 	public function getDescription() {
-		return $this->msg( 'special-' . strtolower( $this->getName() ) )->text();
+		return $this->msg( 'special-' . strtolower( $this->getName() ) );
 	}
 
 	/**

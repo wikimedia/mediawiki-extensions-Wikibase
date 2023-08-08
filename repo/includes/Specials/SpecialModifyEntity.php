@@ -297,7 +297,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 			->setSubmitID( 'wb-' . strtolower( $this->getName() ) . '-submit' )
 			->setSubmitName( $submitKey )
 			->setSubmitTextMsg( $submitKey )
-			->setWrapperLegend( $this->getDescription() )
+			->setWrapperLegendMsg( $this->getDescription() )
 			->setSubmitCallback( function () {
 				// no-op
 			} )->show();
