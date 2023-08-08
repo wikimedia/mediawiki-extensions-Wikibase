@@ -21,12 +21,18 @@ use Wikibase\Repo\RestApi\RouteHandlers\SetItemDescriptionRouteHandler;
 /**
  * @covers \Wikibase\Repo\RestApi\RouteHandlers\SetItemDescriptionRouteHandler
  * @group Wikibase
- * @group Database
  * @license GPL-2.0-or-later
  */
 class SetItemDescriptionRouteHandlerTest extends MediaWikiIntegrationTestCase {
 
 	use HandlerTestTrait;
+	use RestHandlerTestUtilsTrait;
+
+	protected function setUp(): void {
+		parent::setUp();
+		$this->setMockChangeTagsStore();
+		$this->setMockPreconditionMiddlewareFactory();
+	}
 
 	/**
 	 * @dataProvider provideWasReplacedAndStatusCode

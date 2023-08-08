@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\RestApi\RouteHandlers;
 
 use Generator;
-use MediaWiki\ChangeTags\ChangeTagsStore;
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Reporter\ErrorReporter;
 use MediaWiki\Rest\RequestData;
@@ -29,12 +28,12 @@ use Wikibase\Repo\RestApi\RouteHandlers\ReplaceStatementRouteHandler;
 class ReplaceStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 
 	use HandlerTestTrait;
+	use RestHandlerTestUtilsTrait;
 
 	protected function setUp(): void {
 		parent::setUp();
-		$changeTagsStore = $this->createMock( ChangeTagsStore::class );
-		$changeTagsStore->method( 'listExplicitlyDefinedTags' )->willReturn( [] );
-		$this->setService( 'ChangeTagsStore', $changeTagsStore );
+		$this->setMockChangeTagsStore();
+		$this->setMockPreconditionMiddlewareFactory();
 	}
 
 	public function testValidHttpResponse(): void {

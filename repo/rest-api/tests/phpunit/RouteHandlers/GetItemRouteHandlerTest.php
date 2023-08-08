@@ -28,6 +28,12 @@ use Wikibase\Repo\RestApi\RouteHandlers\GetItemRouteHandler;
 class GetItemRouteHandlerTest extends MediaWikiIntegrationTestCase {
 
 	use HandlerTestTrait;
+	use RestHandlerTestUtilsTrait;
+
+	protected function setUp(): void {
+		parent::setUp();
+		$this->setMockPreconditionMiddlewareFactory();
+	}
 
 	public function testValidSuccessHttpResponse(): void {
 		$useCaseResponse = new GetItemResponse( $this->createStub( ItemParts::class ), '20230731042031', 42 );

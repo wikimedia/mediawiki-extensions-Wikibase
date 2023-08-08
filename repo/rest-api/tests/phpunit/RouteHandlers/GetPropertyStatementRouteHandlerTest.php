@@ -22,13 +22,18 @@ use Wikibase\Repo\RestApi\RouteHandlers\GetPropertyStatementRouteHandler;
  * @covers \Wikibase\Repo\RestApi\RouteHandlers\GetPropertyStatementRouteHandler
  *
  * @group Wikibase
- * @group Database
  *
  * @license GPL-2.0-or-later
  */
 class GetPropertyStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 
 	use HandlerTestTrait;
+	use RestHandlerTestUtilsTrait;
+
+	protected function setUp(): void {
+		parent::setUp();
+		$this->setMockPreconditionMiddlewareFactory();
+	}
 
 	public function testValidHttpResponse(): void {
 		$useCaseResponse = new GetStatementResponse( $this->createStub( Statement::class ), '20230731042031', 42 );
