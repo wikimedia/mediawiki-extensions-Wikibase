@@ -357,13 +357,34 @@
 			}
 		}
 	},
-	"InvalidNewStatementInput": {
+	"InvalidNewItemStatementInput": {
 		"description": "The request cannot be processed",
 		"content": {
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/ContextError" },
 				"examples": {
 					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
+					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
+					"statement-data-missing-field": { "$ref": "./examples.json#/StatementDataMissingFieldExample" },
+					"statement-data-invalid-field": { "$ref": "./examples.json#/StatementDataInvalidFieldExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
+	"InvalidNewPropertyStatementInput": {
+		"description": "The request cannot be processed",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/ContextError" },
+				"examples": {
+					"invalid-property-id": { "$ref": "./examples.json#/InvalidPropertyIdExample" },
 					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
 					"statement-data-missing-field": { "$ref": "./examples.json#/StatementDataMissingFieldExample" },
@@ -1117,7 +1138,7 @@
 			}
 		}
 	},
-	"StatementCreated": {
+	"ItemStatementCreated": {
 		"description": "A single newly created Wikibase Statement. Please note that the value of the `ETag` header field refers to the entity's revision ID.",
 		"headers": {
 			"Last-Modified": {
@@ -1149,6 +1170,45 @@
 			"application/json": {
 				"schema": {
 					"$ref": "./response-parts.json#/StatementResponse"
+				}
+			}
+		}
+	},
+	"PropertyStatementCreated": {
+		"description": "A single newly created Wikibase Statement. Please note that the value of the `ETag` header field refers to the entity's revision ID.",
+		"headers": {
+			"Last-Modified": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Last modified date"
+			},
+			"ETag": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Last entity revision number"
+			},
+			"X-Authenticated-User": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Optional username of the user making the request"
+			},
+			"Location": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "The URI of the newly created statement"
+			}
+		},
+		"content": {
+			"application/json": {
+				"schema": {
+					"$ref": "./response-parts.json#/StatementResponse"
+				},
+				"example": {
+					"$ref": "./examples.json#/PropertyStatementResponseExample/value"
 				}
 			}
 		}
