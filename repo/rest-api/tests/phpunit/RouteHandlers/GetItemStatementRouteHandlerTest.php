@@ -23,13 +23,19 @@ use Wikibase\Repo\RestApi\RouteHandlers\GetItemStatementRouteHandler;
  * @covers \Wikibase\Repo\RestApi\RouteHandlers\GetItemStatementRouteHandler
  *
  * @group Wikibase
- * @group Database
  *
  * @license GPL-2.0-or-later
  */
 class GetItemStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 
 	use HandlerTestTrait;
+	use RestHandlerTestUtilsTrait;
+
+	protected function setUp(): void {
+		parent::setUp();
+		$this->setMockChangeTagsStore();
+		$this->setMockPreconditionMiddlewareFactory();
+	}
 
 	public function testValidHttpResponse(): void {
 		$useCaseResponse = new GetStatementResponse( $this->createStub( Statement::class ), '20230731042031', 42 );

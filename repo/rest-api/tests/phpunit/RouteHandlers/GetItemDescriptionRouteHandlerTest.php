@@ -28,6 +28,12 @@ use Wikibase\Repo\RestApi\RouteHandlers\GetItemDescriptionRouteHandler;
 class GetItemDescriptionRouteHandlerTest extends MediaWikiIntegrationTestCase {
 
 	use HandlerTestTrait;
+	use RestHandlerTestUtilsTrait;
+
+	protected function setUp(): void {
+		parent::setUp();
+		$this->setMockPreconditionMiddlewareFactory();
+	}
 
 	public function testValidSuccessHttpResponse(): void {
 		$description = 'test description';

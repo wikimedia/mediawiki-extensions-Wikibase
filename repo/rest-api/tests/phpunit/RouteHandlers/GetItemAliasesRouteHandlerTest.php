@@ -29,6 +29,12 @@ use Wikibase\Repo\RestApi\RouteHandlers\GetItemAliasesRouteHandler;
 class GetItemAliasesRouteHandlerTest extends MediaWikiIntegrationTestCase {
 
 	use HandlerTestTrait;
+	use RestHandlerTestUtilsTrait;
+
+	protected function setUp(): void {
+		parent::setUp();
+		$this->setMockPreconditionMiddlewareFactory();
+	}
 
 	public function testValidSuccessHttpResponse(): void {
 		$enAliases = [ 'alias one', 'second alias' ];

@@ -28,6 +28,12 @@ use Wikibase\Repo\RestApi\RouteHandlers\GetItemLabelRouteHandler;
 class GetItemLabelRouteHandlerTest extends MediaWikiIntegrationTestCase {
 
 	use HandlerTestTrait;
+	use RestHandlerTestUtilsTrait;
+
+	protected function setUp(): void {
+		parent::setUp();
+		$this->setMockPreconditionMiddlewareFactory();
+	}
 
 	public function testValidSuccessHttpResponse(): void {
 		$label = 'test label';

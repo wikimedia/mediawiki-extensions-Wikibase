@@ -25,6 +25,12 @@ use Wikibase\Repo\RestApi\RouteHandlers\GetPropertyRouteHandler;
 class GetPropertyRouteHandlerTest extends MediaWikiIntegrationTestCase {
 
 	use HandlerTestTrait;
+	use RestHandlerTestUtilsTrait;
+
+	protected function setUp(): void {
+		parent::setUp();
+		$this->setMockPreconditionMiddlewareFactory();
+	}
 
 	public function testValidSuccessHttpResponse(): void {
 		$useCaseResponse = new GetPropertyResponse( $this->createStub( PropertyParts::class ), '20230731042031', 42 );
