@@ -11,8 +11,8 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
-use Wikibase\Repo\RestApi\Domain\Services\Exceptions\EntityUpdateFailed;
-use Wikibase\Repo\RestApi\Domain\Services\Exceptions\EntityUpdatePrevented;
+use Wikibase\Repo\RestApi\Infrastructure\DataAccess\Exceptions\EntityUpdateFailed;
+use Wikibase\Repo\RestApi\Infrastructure\DataAccess\Exceptions\EntityUpdatePrevented;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
 
 /**

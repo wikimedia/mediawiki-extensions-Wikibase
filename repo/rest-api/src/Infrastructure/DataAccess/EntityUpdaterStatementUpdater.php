@@ -7,10 +7,10 @@ use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementRevision;
-use Wikibase\Repo\RestApi\Domain\Services\Exceptions\EntityUpdateFailed;
-use Wikibase\Repo\RestApi\Domain\Services\Exceptions\StatementUpdateFailed;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\RestApi\Domain\Services\StatementUpdater;
+use Wikibase\Repo\RestApi\Infrastructure\DataAccess\Exceptions\EntityUpdateFailed;
+use Wikibase\Repo\RestApi\Infrastructure\DataAccess\Exceptions\StatementUpdateFailed;
 
 /**
  * @license GPL-2.0-or-later

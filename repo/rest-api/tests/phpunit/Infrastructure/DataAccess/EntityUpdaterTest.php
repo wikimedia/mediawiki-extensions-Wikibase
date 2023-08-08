@@ -24,9 +24,9 @@ use Wikibase\Repo\EditEntity\EditEntity;
 use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
-use Wikibase\Repo\RestApi\Domain\Services\Exceptions\EntityUpdateFailed;
-use Wikibase\Repo\RestApi\Domain\Services\Exceptions\EntityUpdatePrevented;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdater;
+use Wikibase\Repo\RestApi\Infrastructure\DataAccess\Exceptions\EntityUpdateFailed;
+use Wikibase\Repo\RestApi\Infrastructure\DataAccess\Exceptions\EntityUpdatePrevented;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
 
 /**

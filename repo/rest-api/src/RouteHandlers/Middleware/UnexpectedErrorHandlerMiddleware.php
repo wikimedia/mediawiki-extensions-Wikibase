@@ -8,7 +8,7 @@ use MediaWiki\Rest\Response;
 use Psr\Log\LoggerInterface;
 use Throwable;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\Services\Exceptions\EntityUpdatePrevented;
+use Wikibase\Repo\RestApi\Infrastructure\DataAccess\Exceptions\EntityUpdatePrevented;
 use Wikibase\Repo\RestApi\RouteHandlers\ResponseFactory;
 
 /**

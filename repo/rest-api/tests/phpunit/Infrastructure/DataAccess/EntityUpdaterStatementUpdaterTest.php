@@ -17,10 +17,10 @@ use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
-use Wikibase\Repo\RestApi\Domain\Services\Exceptions\StatementUpdateFailed;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdaterStatementUpdater;
+use Wikibase\Repo\RestApi\Infrastructure\DataAccess\Exceptions\StatementUpdateFailed;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\StatementSubjectRetriever;
 
 /**
