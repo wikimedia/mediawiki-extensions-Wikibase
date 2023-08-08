@@ -159,14 +159,11 @@ class ChangesSubscriptionTableBuilder {
 		foreach ( $subscriptionsPerItem as $itemId => $subscribers ) {
 			$rows = $this->makeSubscriptionRows( $itemId, $subscribers );
 
-			$db->insert(
-				$this->tableName,
-				$rows,
-				__METHOD__,
-				[
-					'IGNORE',
-				]
-			);
+			$db->newInsertQueryBuilder()
+				->insert( $this->tableName )
+				->ignore()
+				->rows( $rows )
+				->caller( __METHOD__ )->execute();
 
 			if ( $this->verbosity === 'verbose' ) {
 				$this->progressReporter->reportMessage( 'Inserted ' . $db->affectedRows()

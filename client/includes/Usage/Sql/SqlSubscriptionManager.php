@@ -112,14 +112,17 @@ class SqlSubscriptionManager implements SubscriptionManager {
 	 * @param string[] $subscriptions
 	 */
 	private function insertSubscriptions( IDatabase $db, string $subscriber, array $subscriptions ): void {
+		if ( $subscriptions === [] ) {
+			return;
+		}
+
 		$rows = $this->makeSubscriptionRows( $subscriber, $subscriptions );
 
-		$db->insert(
-			'wb_changes_subscription',
-			$rows,
-			__METHOD__,
-			[ 'IGNORE' ]
-		);
+		$db->newInsertQueryBuilder()
+			->insert( 'wb_changes_subscription' )
+			->ignore()
+			->rows( $rows )
+			->caller( __METHOD__ )->execute();
 	}
 
 	/**

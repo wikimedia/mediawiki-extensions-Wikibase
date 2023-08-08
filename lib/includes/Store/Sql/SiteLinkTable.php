@@ -147,21 +147,17 @@ class SiteLinkTable implements SiteLinkStore {
 			]
 		);
 
-		$insert = [];
+		$insertQueryBuilder = $dbw->newInsertQueryBuilder()
+			->insert( $this->table )
+			->ignore();
 		foreach ( $links as $siteLink ) {
-			$insert[] = [
+			$insertQueryBuilder->row( [
 				'ips_item_id' => $item->getId()->getNumericId(),
 				'ips_site_id' => $siteLink->getSiteId(),
 				'ips_site_page' => $siteLink->getPageName(),
-			];
+			] );
 		}
-
-		$dbw->insert(
-			$this->table,
-			$insert,
-			__METHOD__,
-			[ 'IGNORE' ]
-		);
+		$insertQueryBuilder->caller( __METHOD__ )->execute();
 
 		return $dbw->affectedRows() ? true : false;
 	}

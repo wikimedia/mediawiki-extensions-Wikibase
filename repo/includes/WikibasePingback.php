@@ -286,12 +286,14 @@ class WikibasePingback {
 			if ( $id === false ) {
 				$id = MWCryptRand::generateHex( 32 );
 				$dbw = $this->repoConnections->getWriteConnection();
-				$dbw->insert(
-					'updatelog',
-					[ 'ul_key' => 'WikibasePingback', 'ul_value' => $id ],
-					__METHOD__,
-					[ 'IGNORE' ]
-				);
+				$dbw->newInsertQueryBuilder()
+					->insert( 'updatelog' )
+					->ignore()
+					->row( [
+						'ul_key' => 'WikibasePingback',
+						'ul_value' => $id,
+					] )
+					->caller( __METHOD__ )->execute();
 
 				if ( !$dbw->affectedRows() ) {
 					$id = $dbw->newSelectQueryBuilder()

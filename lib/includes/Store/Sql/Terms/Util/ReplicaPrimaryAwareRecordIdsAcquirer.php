@@ -274,10 +274,13 @@ class ReplicaPrimaryAwareRecordIdsAcquirer {
 
 	/**
 	 * @param array $neededRecords
-	 * @suppress SecurityCheck-SQLInjection
 	 */
 	private function insertNonExistingRecordsIntoPrimary( array $neededRecords ): void {
-		$this->getDbPrimary()->insert( $this->table, $neededRecords, __METHOD__, [ 'IGNORE' ] );
+		$this->getDbPrimary()->newInsertQueryBuilder()
+			->insert( $this->table )
+			->ignore()
+			->rows( $neededRecords )
+			->caller( __METHOD__ )->execute();
 	}
 
 	private function filterNonExistingRecords( array $neededRecords, array $existingRecords ): array {

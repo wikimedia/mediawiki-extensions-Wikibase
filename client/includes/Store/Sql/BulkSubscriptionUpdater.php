@@ -140,14 +140,11 @@ class BulkSubscriptionUpdater {
 
 		$rows = $this->makeSubscriptionRows( $entities );
 
-		$dbw->insert(
-			'wb_changes_subscription',
-			$rows,
-			__METHOD__,
-			[
-				'IGNORE',
-			]
-		);
+		$dbw->newInsertQueryBuilder()
+			->insert( 'wb_changes_subscription' )
+			->ignore()
+			->rows( $rows )
+			->caller( __METHOD__ )->execute();
 
 		$count = $dbw->affectedRows();
 		$dbw->endAtomic( __METHOD__ );
