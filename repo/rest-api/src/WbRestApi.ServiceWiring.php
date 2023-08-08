@@ -36,6 +36,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\GetItemLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\GetItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabelsValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\GetItemStatements;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\GetItemStatementsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
@@ -271,6 +273,14 @@ return [
 				WikibaseRepo::getTermsLanguages( $services )
 			),
 			new GetItemLabelsValidator( new ItemIdValidator() )
+		);
+	},
+
+	'WbRestApi.GetItemStatement' => function( MediaWikiServices $services ): GetItemStatement {
+		return new GetItemStatement(
+			new GetItemStatementValidator( new ItemIdValidator() ),
+			WbRestApi::getAssertItemExists( $services ),
+			WbRestApi::getStatementFactory( $services )->newGetStatement( new UnexpectedRequestedSubjectIdValidator() )
 		);
 	},
 

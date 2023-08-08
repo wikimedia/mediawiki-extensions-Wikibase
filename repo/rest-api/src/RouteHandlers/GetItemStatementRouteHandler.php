@@ -9,13 +9,11 @@ use MediaWiki\Rest\ResponseInterface;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
-use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
-use Wikibase\Repo\RestApi\Application\Validation\RequiredRequestedSubjectIdValidator;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
@@ -31,13 +29,13 @@ class GetItemStatementRouteHandler extends SimpleHandler {
 	public const STATEMENT_ID_PATH_PARAM = 'statement_id';
 	public const ROUTE = '/wikibase/v0/entities/items/{item_id}/statements/{statement_id}';
 
-	private GetStatement $getStatement;
+	private GetItemStatement $getStatement;
 	private StatementSerializer $statementSerializer;
 	private ResponseFactory $responseFactory;
 	private MiddlewareHandler $middlewareHandler;
 
 	public function __construct(
-		GetStatement $getStatement,
+		GetItemStatement $getStatement,
 		StatementSerializer $statementSerializer,
 		ResponseFactory $responseFactory,
 		MiddlewareHandler $middlewareHandler
@@ -51,9 +49,7 @@ class GetItemStatementRouteHandler extends SimpleHandler {
 	public static function factory(): Handler {
 		$responseFactory = new ResponseFactory();
 		return new self(
-			WbRestApi::getStatementFactory()->newGetStatement(
-				new RequiredRequestedSubjectIdValidator( new ItemIdValidator() )
-			),
+			WbRestApi::getGetItemStatement(),
 			WbRestApi::getSerializerFactory()->newStatementSerializer(),
 			$responseFactory,
 			new MiddlewareHandler( [
@@ -78,22 +74,10 @@ class GetItemStatementRouteHandler extends SimpleHandler {
 		try {
 			return $this->newSuccessHttpResponse(
 				$this->getStatement->execute(
-					new GetStatementRequest( $statementId, $itemId )
+					new GetItemStatementRequest( $itemId, $statementId )
 				)
 			);
 		} catch ( UseCaseError $e ) {
-			if ( $e->getErrorCode() === UseCaseError::STATEMENT_SUBJECT_NOT_FOUND ) {
-				return $this->responseFactory->newErrorResponse(
-					UseCaseError::ITEM_NOT_FOUND,
-					"Could not find an item with the ID: $itemId"
-				);
-			}
-			if ( $e->getErrorCode() === UseCaseError::INVALID_STATEMENT_SUBJECT_ID ) {
-				return $this->responseFactory->newErrorResponse(
-					UseCaseError::INVALID_ITEM_ID,
-					"Not a valid item ID: $itemId"
-				);
-			}
 			return $this->responseFactory->newErrorResponseFromException( $e );
 		} catch ( ItemRedirect $e ) {
 			return $this->responseFactory->newErrorResponse(

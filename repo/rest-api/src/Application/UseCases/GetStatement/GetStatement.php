@@ -53,7 +53,7 @@ class GetStatement {
 			$this->throwStatementNotFoundException( $statementRequest->getStatementId() );
 		}
 
-		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable $statement is checked
+		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
 		return new GetStatementResponse( $statement, $lastModified, $revisionId );
 	}
 

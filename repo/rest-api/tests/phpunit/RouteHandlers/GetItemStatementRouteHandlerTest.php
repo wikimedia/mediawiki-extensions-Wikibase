@@ -11,8 +11,7 @@ use MediaWiki\Tests\Rest\Handler\HandlerTestTrait;
 use MediaWikiIntegrationTestCase;
 use RuntimeException;
 use Throwable;
-use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementFactory;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
@@ -39,12 +38,9 @@ class GetItemStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 
 	public function testValidHttpResponse(): void {
 		$useCaseResponse = new GetStatementResponse( $this->createStub( Statement::class ), '20230731042031', 42 );
-		$useCase = $this->createStub( GetStatement::class );
+		$useCase = $this->createStub( GetItemStatement::class );
 		$useCase->method( 'execute' )->willReturn( $useCaseResponse );
-		$useCaseFactory = $this->createStub( GetStatementFactory::class );
-		$useCaseFactory->method( 'newGetStatement' )->willReturn( $useCase );
-
-		$this->setService( 'WbRestApi.GetStatementFactory', $useCaseFactory );
+		$this->setService( 'WbRestApi.GetItemStatement', $useCase );
 
 		/** @var Response $response */
 		$response = $this->newHandlerWithValidRequest()->execute();
@@ -61,12 +57,10 @@ class GetItemStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider provideExceptionAndExpectedErrorCode
 	 */
 	public function testHandlesErrors( Throwable $exception, string $expectedErrorCode ): void {
-		$useCase = $this->createStub( GetStatement::class );
+		$useCase = $this->createStub( GetItemStatement::class );
 		$useCase->method( 'execute' )->willThrowException( $exception );
-		$useCaseFactory = $this->createStub( GetStatementFactory::class );
-		$useCaseFactory->method( 'newGetStatement' )->willReturn( $useCase );
 
-		$this->setService( 'WbRestApi.GetStatementFactory', $useCaseFactory );
+		$this->setService( 'WbRestApi.GetItemStatement', $useCase );
 		$this->setService( 'WbRestApi.ErrorReporter', $this->createStub( ErrorReporter::class ) );
 
 		/** @var Response $response */
@@ -81,16 +75,6 @@ class GetItemStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 		yield 'Error handled by ResponseFactory' => [
 			new UseCaseError( UseCaseError::INVALID_STATEMENT_ID, '' ),
 			UseCaseError::INVALID_STATEMENT_ID,
-		];
-
-		yield 'Statement Subject Not Found' => [
-			new UseCaseError( UseCaseError::STATEMENT_SUBJECT_NOT_FOUND, '', [ 'subject-id' => 'Q123' ] ),
-			UseCaseError::ITEM_NOT_FOUND,
-		];
-
-		yield 'Invalid Statement Subject ID' => [
-			new UseCaseError( UseCaseError::INVALID_STATEMENT_SUBJECT_ID, '', [ 'subject-id' => 'X123' ] ),
-			UseCaseError::INVALID_ITEM_ID,
 		];
 
 		yield 'Item Redirect' => [ new ItemRedirect( 'Q123' ), UseCaseError::STATEMENT_NOT_FOUND ];
