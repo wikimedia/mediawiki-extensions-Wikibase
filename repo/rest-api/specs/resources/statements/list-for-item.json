@@ -34,8 +34,8 @@
 		],
 		"requestBody": { "$ref": "../../global/requests.json#/Statement" },
 		"responses": {
-			"201": { "$ref": "../../global/responses.json#/StatementCreated" },
-			"400": { "$ref": "../../global/responses.json#/InvalidNewStatementInput" },
+			"201": { "$ref": "../../global/responses.json#/ItemStatementCreated" },
+			"400": { "$ref": "../../global/responses.json#/InvalidNewItemStatementInput" },
 			"404": { "$ref": "../../global/responses.json#/ItemNotFound" },
 			"409": { "$ref": "../../global/responses.json#/ItemRedirected" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
