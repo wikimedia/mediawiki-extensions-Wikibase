@@ -45,7 +45,9 @@ class MwTimeIsoParserTest extends \PHPUnit\Framework\TestCase {
 		$this->oldLangFactory = $services->getLanguageFactory();
 		$stub = $this->createMock( LanguageFactory::class );
 		$stub->method( 'getLanguage' )->willReturnCallback( function ( $code ) {
-			return $code === 'es' ? $this->getLanguage() : new \LanguageEn();
+			return $code === 'es'
+				? $this->getLanguage()
+				: $this->oldLangFactory->getLanguage( $code );
 		} );
 		$services->disableService( 'LanguageFactory' );
 		$services->redefineService( 'LanguageFactory',
@@ -74,7 +76,8 @@ class MwTimeIsoParserTest extends \PHPUnit\Framework\TestCase {
 
 		$lang->method( 'parseFormattedNumber' )
 			->willReturnCallback( function ( $number ) {
-				return ( new \LanguageEn() )->parseFormattedNumber( $number );
+				return $this->oldLangFactory->getLanguage( 'en' )
+					->parseFormattedNumber( $number );
 			} );
 
 		$lang->method( 'getMessage' )
