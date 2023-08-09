@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Statement\StatementGuid;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Property;
+use Wikibase\Repo\RestApi\Domain\ReadModel\PredicateProperty;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Qualifiers;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Rank;
 use Wikibase\Repo\RestApi\Domain\ReadModel\References;
@@ -46,7 +46,7 @@ class StatementListTest extends TestCase {
 	private function newStatementWithId( StatementGuid $id ): Statement {
 		return new Statement(
 			$id,
-			new Property( new NumericPropertyId( 'P123' ), 'string' ),
+			new PredicateProperty( new NumericPropertyId( 'P123' ), 'string' ),
 			new Value( Value::TYPE_SOME_VALUE ),
 			Rank::normal(),
 			new Qualifiers(),

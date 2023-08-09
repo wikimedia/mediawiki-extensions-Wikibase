@@ -12,7 +12,7 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairSerializer;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Property;
+use Wikibase\Repo\RestApi\Domain\ReadModel\PredicateProperty;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyValuePair;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Value;
 
@@ -43,7 +43,7 @@ class PropertyValuePairSerializerTest extends TestCase {
 	public static function serializationProvider(): Generator {
 		yield 'no value for string prop' => [
 			new PropertyValuePair(
-				new Property(
+				new PredicateProperty(
 					new NumericPropertyId( self::STRING_PROPERTY_ID ),
 					'string'
 				),
@@ -60,7 +60,7 @@ class PropertyValuePairSerializerTest extends TestCase {
 
 		yield 'some value for item id prop' => [
 			new PropertyValuePair(
-				new Property(
+				new PredicateProperty(
 					new NumericPropertyId( self::ITEM_ID_PROPERTY_ID ),
 					'wikibase-item'
 				),
@@ -77,7 +77,7 @@ class PropertyValuePairSerializerTest extends TestCase {
 
 		yield 'string value' => [
 			new PropertyValuePair(
-				new Property(
+				new PredicateProperty(
 					new NumericPropertyId( self::STRING_PROPERTY_ID ),
 					'string'
 				),
@@ -100,7 +100,7 @@ class PropertyValuePairSerializerTest extends TestCase {
 
 		yield 'item id value' => [
 			new PropertyValuePair(
-				new Property(
+				new PredicateProperty(
 					new NumericPropertyId( self::ITEM_ID_PROPERTY_ID ),
 					'wikibase-item'
 				),
@@ -125,7 +125,7 @@ class PropertyValuePairSerializerTest extends TestCase {
 		$calendar = 'Q12345';
 		yield 'time value' => [
 			new PropertyValuePair(
-				new Property(
+				new PredicateProperty(
 					new NumericPropertyId( self::TIME_PROPERTY_ID ),
 					'time'
 				),
@@ -152,7 +152,7 @@ class PropertyValuePairSerializerTest extends TestCase {
 
 		yield 'globecoordinate value' => [
 			new PropertyValuePair(
-				new Property(
+				new PredicateProperty(
 					new NumericPropertyId( self::GLOBECOORDINATE_PROPERTY_ID ),
 					'globe-coordinate'
 				),
@@ -180,7 +180,7 @@ class PropertyValuePairSerializerTest extends TestCase {
 
 		yield 'null data type for some property value' => [
 			new PropertyValuePair(
-				new Property(
+				new PredicateProperty(
 					new NumericPropertyId( self::DELETED_PROPERTY_ID ),
 					null
 				),

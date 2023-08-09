@@ -10,7 +10,7 @@ use Wikibase\DataModel\Statement\StatementGuid;
 class Statement {
 
 	private StatementGuid $guid;
-	private Property $property;
+	private PredicateProperty $property;
 	private Value $value;
 	private Rank $rank;
 	private Qualifiers $qualifiers;
@@ -18,7 +18,7 @@ class Statement {
 
 	public function __construct(
 		StatementGuid $guid,
-		Property $property,
+		PredicateProperty $property,
 		Value $value,
 		Rank $rank,
 		Qualifiers $qualifiers,
@@ -36,7 +36,7 @@ class Statement {
 		return $this->guid;
 	}
 
-	public function getProperty(): Property {
+	public function getProperty(): PredicateProperty {
 		return $this->property;
 	}
 
