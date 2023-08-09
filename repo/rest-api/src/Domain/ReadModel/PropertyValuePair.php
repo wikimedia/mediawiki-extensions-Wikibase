@@ -7,15 +7,15 @@ namespace Wikibase\Repo\RestApi\Domain\ReadModel;
  */
 class PropertyValuePair {
 
-	private Property $property;
+	private PredicateProperty $property;
 	private Value $value;
 
-	public function __construct( Property $property, Value $value ) {
+	public function __construct( PredicateProperty $property, Value $value ) {
 		$this->property = $property;
 		$this->value = $value;
 	}
 
-	public function getProperty(): Property {
+	public function getProperty(): PredicateProperty {
 		return $this->property;
 	}
 

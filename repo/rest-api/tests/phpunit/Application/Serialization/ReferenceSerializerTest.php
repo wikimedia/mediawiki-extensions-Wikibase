@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceSerializer;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Property;
+use Wikibase\Repo\RestApi\Domain\ReadModel\PredicateProperty;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyValuePair;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Reference;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Value;
@@ -34,7 +34,7 @@ class ReferenceSerializerTest extends TestCase {
 	public static function serializationProvider(): Generator {
 		$ref1 = new Reference( 'some-hash-1', [
 			new PropertyValuePair(
-				new Property( new NumericPropertyId( 'P123' ), 'string' ),
+				new PredicateProperty( new NumericPropertyId( 'P123' ), 'string' ),
 				new Value( Value::TYPE_SOME_VALUE )
 			),
 		] );
@@ -50,11 +50,11 @@ class ReferenceSerializerTest extends TestCase {
 
 		$ref2 = new Reference( 'some-hash-2', [
 			new PropertyValuePair(
-				new Property( new NumericPropertyId( 'P234' ), 'string' ),
+				new PredicateProperty( new NumericPropertyId( 'P234' ), 'string' ),
 				new Value( Value::TYPE_SOME_VALUE )
 			),
 			new PropertyValuePair(
-				new Property( new NumericPropertyId( 'P345' ), 'string' ),
+				new PredicateProperty( new NumericPropertyId( 'P345' ), 'string' ),
 				new Value( Value::TYPE_SOME_VALUE )
 			),
 		] );

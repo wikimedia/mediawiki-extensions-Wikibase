@@ -12,7 +12,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement as DataModelStatement;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Property;
+use Wikibase\Repo\RestApi\Domain\ReadModel\PredicateProperty;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyValuePair;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Qualifiers;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Rank;
@@ -83,7 +83,7 @@ class StatementReadModelConverter {
 		}
 
 		return new PropertyValuePair(
-			new Property( $snak->getPropertyId(), $dataType ),
+			new PredicateProperty( $snak->getPropertyId(), $dataType ),
 			new Value(
 				$snak->getType(),
 				$snak instanceof PropertyValueSnak ? $snak->getDataValue() : null
