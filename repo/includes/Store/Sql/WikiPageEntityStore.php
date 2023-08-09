@@ -177,7 +177,7 @@ class WikiPageEntityStore implements EntityStore {
 		$contentModelId = $handler->getModelID();
 		$numericId = $this->idGenerator->getNewId( $contentModelId );
 
-		$entityId = $this->entityIdComposer->composeEntityId( '', $type, $numericId );
+		$entityId = $this->entityIdComposer->composeEntityId( $type, $numericId );
 		$entity->setId( $entityId );
 	}
 

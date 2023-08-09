@@ -228,11 +228,11 @@ class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 	private function getEntityId( object $termRow ): ?EntityId {
 		if ( isset( $termRow->wbpt_property_id ) ) {
 			return $this->entityIdComposer->composeEntityId(
-				'', 'property', $termRow->wbpt_property_id
+				'property', $termRow->wbpt_property_id
 			);
 		} elseif ( isset( $termRow->wbit_item_id ) ) {
 			return $this->entityIdComposer->composeEntityId(
-				'', 'item', $termRow->wbit_item_id
+				'item', $termRow->wbit_item_id
 			);
 		} else {
 			return null;
