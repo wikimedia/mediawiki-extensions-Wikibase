@@ -6,5 +6,6 @@
 			"Bosogo"
 		]
 	},
-	"wikibase-sitelinks-wikipedia": "Википедия"
+	"wikibase-sitelinks-wikipedia": "Википедия",
+	"datatypes-type-wikibase-item": "Элемент"
 }
