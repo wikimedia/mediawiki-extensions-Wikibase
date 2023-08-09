@@ -13,13 +13,14 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyParts;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyPartsBuilder;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyPartsRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyStatementsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 
 /**
  * @license GPL-2.0-or-later
  */
-class EntityRevisionLookupPropertyDataRetriever implements PropertyPartsRetriever, PropertyStatementsRetriever {
+class EntityRevisionLookupPropertyDataRetriever implements PropertyRetriever, PropertyPartsRetriever, PropertyStatementsRetriever {
 
 	private EntityRevisionLookup $entityRevisionLookup;
 	private StatementReadModelConverter $statementReadModelConverter;

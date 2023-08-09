@@ -149,6 +149,28 @@ class EntityRevisionLookupPropertyDataRetrieverTest extends TestCase {
 		];
 	}
 
+	public function testGetProperty(): void {
+		$id = new NumericPropertyId( 'P123' );
+		$expectedProperty = new Property(
+			$id,
+			null,
+			'string'
+		);
+		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue(
+			$id,
+			$expectedProperty
+		);
+
+		$this->assertSame( $expectedProperty, $this->newRetriever()->getProperty( $id ) );
+	}
+
+	public function testGivenPropertyNotFound_getPropertyReturnsNull(): void {
+		$id = new NumericPropertyId( 'P123' );
+		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $id, null );
+
+		$this->assertNull( $this->newRetriever()->getProperty( $id ) );
+	}
+
 	public function testGetStatements(): void {
 		$statement1 = NewStatement::forProperty( 'P123' )
 			->withGuid( 'P666$c48c32c3-42b5-498f-9586-84608b88747c' )
