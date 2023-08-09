@@ -75,23 +75,10 @@ class GlobeCoordinateKartographerDataUpdater implements StatementDataUpdater {
 			$this->globeCoordinateValues,
 			$language
 		);
-
-		$parserOutput->addJsConfigVars( $kartographerParserOutput->getJsConfigVars() );
-		$parserOutput->addModules( $kartographerParserOutput->getModules() );
-		$parserOutput->addModuleStyles( $kartographerParserOutput->getModuleStyles() );
-
-		$parserOutput->setExtensionData(
-			'kartographer',
-			$kartographerParserOutput->getExtensionData( 'kartographer' )
-		);
-		$parserOutput->setPageProperty(
-			'kartographer_links',
-			$kartographerParserOutput->getPageProperty( 'kartographer_links' )
-		);
-		$parserOutput->setPageProperty(
-			'kartographer_frames',
-			$kartographerParserOutput->getPageProperty( 'kartographer_frames' )
-		);
+		// Transfer kartographer-related metadata (jsconfigvars, modules,
+		// modulestyles, extensiondata, page properties) to our own
+		// ParserOutput
+		$kartographerParserOutput->collectMetadata( $parserOutput );
 	}
 
 }

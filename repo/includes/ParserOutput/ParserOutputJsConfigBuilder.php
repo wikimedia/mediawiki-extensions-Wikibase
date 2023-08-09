@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\ParserOutput;
 
+use ParserOutput;
 use Wikibase\DataModel\Entity\EntityDocument;
 
 /**
@@ -9,12 +10,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
  */
 class ParserOutputJsConfigBuilder {
 
-	/**
-	 * @param EntityDocument $entity
-	 *
-	 * @return array
-	 */
-	public function build( EntityDocument $entity ) {
+	public function build( EntityDocument $entity, ParserOutput $parserOutput ): void {
 		global $wgEditSubmitButtonLabelPublish;
 
 		$entityId = $entity->getId();
@@ -25,12 +21,8 @@ class ParserOutputJsConfigBuilder {
 			$entityId = $entityId->getSerialization();
 		}
 
-		$configVars = [
-			'wbEntityId' => $entityId,
-			'wgEditSubmitButtonLabelPublish' => $wgEditSubmitButtonLabelPublish,
-		];
-
-		return $configVars;
+		$parserOutput->setJsConfigVar( 'wbEntityId', $entityId );
+		$parserOutput->setJsConfigVar( 'wgEditSubmitButtonLabelPublish', $wgEditSubmitButtonLabelPublish );
 	}
 
 }

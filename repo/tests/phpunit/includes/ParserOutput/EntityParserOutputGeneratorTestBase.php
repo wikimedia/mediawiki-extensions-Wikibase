@@ -172,7 +172,9 @@ class EntityParserOutputGeneratorTestBase extends MediaWikiIntegrationTestCase {
 		$configBuilder = $this->createMock( ParserOutputJsConfigBuilder::class );
 
 		$configBuilder->method( 'build' )
-			->willReturn( [ '<JS>' ] );
+			->willReturnCallback( function( $ignore, $parserOutput ) {
+				$parserOutput->setJsConfigVar( '<JS>', '<JS>' );
+			} );
 
 		return $configBuilder;
 	}

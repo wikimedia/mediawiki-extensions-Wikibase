@@ -34,7 +34,7 @@ class GlobeCoordinateKartographerDataUpdaterTest extends \PHPUnit\Framework\Test
 		}
 
 		$parserOutput = new ParserOutput();
-		$parserOutput->addJsConfigVars( 'wgUserLanguage', 'qqx' );
+		$parserOutput->setJsConfigVar( 'wgUserLanguage', 'qqx' );
 		$parserOutput->addModules( [ 'wikibase' ] );
 
 		$expected = $this->getKartographerParserOutput();
@@ -115,7 +115,7 @@ class GlobeCoordinateKartographerDataUpdaterTest extends \PHPUnit\Framework\Test
 		$parserOutput->setExtensionData( 'kartographer', [ [ 'whatever' ] ] );
 		$parserOutput->setPageProperty( 'kartographer_links', [ [ 34 ] ] );
 		$parserOutput->setPageProperty( 'kartographer_frames', [ [ 'blah' ] ] );
-		$parserOutput->addJsConfigVars( 'wgKartographerMapServer', 'https://maps.wikimedia.org' );
+		$parserOutput->setJsConfigVar( 'wgKartographerMapServer', 'https://maps.wikimedia.org' );
 
 		return $parserOutput;
 	}

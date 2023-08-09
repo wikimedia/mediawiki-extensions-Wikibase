@@ -80,7 +80,7 @@ class FullEntityParserOutputGeneratorTest extends EntityParserOutputGeneratorTes
 		 * for tests concerning html view placeholder integration.
 		 */
 
-		$this->assertSame( [ '<JS>' ], $parserOutput->getJsConfigVars(), 'config vars' );
+		$this->assertSame( [ '<JS>' => '<JS>' ], $parserOutput->getJsConfigVars(), 'config vars' );
 
 		$this->assertSame(
 			[
