@@ -20,7 +20,7 @@ use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdaterItemUpdater;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdater
+ * @covers \Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdaterItemUpdater
  *
  * @group Wikibase
  *
