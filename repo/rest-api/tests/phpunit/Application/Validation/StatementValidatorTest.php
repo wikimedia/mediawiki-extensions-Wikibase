@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\RestApi\Application\Validation;
 
 use Generator;
+use LogicException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\RestApi\Application\Serialization\InvalidFieldException;
@@ -60,7 +61,7 @@ class StatementValidatorTest extends TestCase {
 		];
 	}
 
-	public function testGetValidatedStatement(): void {
+	public function testGetValidatedStatement_calledAfterValidate(): void {
 		$serialization = [
 			'property' => [ 'id' => 'P123' ],
 			'value' => [ 'type' => 'novalue' ],
@@ -72,6 +73,12 @@ class StatementValidatorTest extends TestCase {
 		$validator = $this->newValidator();
 		$this->assertNull( $validator->validate( $serialization ) );
 		$this->assertSame( $deserializedStatement, $validator->getValidatedStatement() );
+	}
+
+	public function testGetValidatedStatement_calledBeforeValidate(): void {
+		$this->expectException( LogicException::class );
+
+		$this->newValidator()->getValidatedStatement();
 	}
 
 	public function testGivenSyntacticallyValidSerializationButInvalidValueType_validateReturnsValidationError(): void {
@@ -94,7 +101,9 @@ class StatementValidatorTest extends TestCase {
 
 		$this->assertInstanceOf( ValidationError::class, $error );
 		$this->assertSame( StatementValidator::CODE_INVALID_FIELD, $error->getCode() );
-		$this->assertNull( $validator->getValidatedStatement() );
+
+		$this->expectException( LogicException::class );
+		$validator->getValidatedStatement();
 	}
 
 	private function newValidator(): StatementValidator {

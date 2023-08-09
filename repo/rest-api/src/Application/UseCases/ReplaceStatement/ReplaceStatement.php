@@ -69,7 +69,6 @@ class ReplaceStatement {
 		$newStatement = $this->validator->getValidatedStatement();
 
 		try {
-			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable NewStatement is validated and exists
 			$item->getStatements()->replaceStatement( $statementId, $newStatement );
 		} catch ( StatementNotFoundException $e ) {
 			$this->throwStatementNotFoundException( $statementId );
@@ -88,14 +87,13 @@ class ReplaceStatement {
 		$editMetadata = new EditMetadata(
 			$request->getEditTags(),
 			$request->isBot(),
-			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable NewStatement is validated and exists
 			StatementEditSummary::newReplaceSummary( $request->getComment(), $newStatement )
 		);
 		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Item is validated and exists
 		$newRevision = $this->itemUpdater->update( $item, $editMetadata );
 
 		return new ReplaceStatementResponse(
-		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Statement is validated and exists
+			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Statement exists
 			$newRevision->getItem()->getStatements()->getStatementById( $statementId ),
 			$newRevision->getLastModified(),
 			$newRevision->getRevisionId()
