@@ -4,6 +4,11 @@
 			"Athram Rajkumar"
 		]
 	},
+	"wikibase-linkitem-addlinks": "లింకులున్ సేర్ప్",
 	"wikibase-linkitem-title": "ఈ పెజింగ్ లింక్ ఇధర్",
-	"wikibase-rc-hide-wikidata-hide": "డాప్"
+	"wikibase-linkitem-linkpage": "ఈ పెజింగ్ లింక్ ఇధర్",
+	"wikibase-linkitem-selectlink": "ఈ పేజింగ్ లింక్ ఇదరేక సైటున్,పెజిన్ అసుర్.",
+	"wikibase-linkitem-input-page": "పేజీ:",
+	"wikibase-rc-hide-wikidata-hide": "డాప్",
+	"wikibase-rc-hide-wikidata-show": "ఒళిప్"
 }

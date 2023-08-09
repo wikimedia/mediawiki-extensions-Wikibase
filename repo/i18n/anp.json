@@ -14,5 +14,6 @@
 	"wikibase-statementsection-statements": "कथन",
 	"wikibase-sitelinks-special": "अन्य वेबसाइट",
 	"wikibase-statementview-rank-normal": "सामान्य पद",
-	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|स्रोत|स्रोत सब}}"
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|स्रोत|स्रोत सब}}",
+	"wikibase-api-permissiondenied": "तोरा पास हैय कार्य क करै के आवश्यक अनुमति नाय छौं।"
 }
