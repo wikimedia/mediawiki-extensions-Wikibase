@@ -11,7 +11,7 @@ use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\GetItemDescriptionValidator
+ * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItemDescription\GetItemDescriptionValidator
  *
  * @group Wikibase
  *

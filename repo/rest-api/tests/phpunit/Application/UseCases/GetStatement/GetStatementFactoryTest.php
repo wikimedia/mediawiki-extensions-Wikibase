@@ -12,7 +12,7 @@ use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
 use Wikibase\Repo\RestApi\Domain\Services\StatementRetriever;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetStatementFactory
+ * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementFactory
  *
  * @group Wikibase
  *

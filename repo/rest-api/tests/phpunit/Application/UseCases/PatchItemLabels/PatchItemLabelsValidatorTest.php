@@ -14,7 +14,7 @@ use Wikibase\Repo\RestApi\Application\Validation\JsonPatchValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemLabelsValidator
+ * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsValidator
  *
  * @group Wikibase
  *

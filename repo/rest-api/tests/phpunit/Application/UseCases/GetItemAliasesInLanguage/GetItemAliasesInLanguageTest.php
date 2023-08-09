@@ -18,7 +18,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemAliasesInLanguageRetriever;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItemAliases\GetItemAliasesInLanguage
+ * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItemAliasesInLanguage\GetItemAliasesInLanguage
  *
  * @group Wikibase
  *
