@@ -5,10 +5,10 @@ namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
 use Generator;
 use LogicException;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\StatementListProvidingEntity;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Statement\StatementList;
@@ -51,7 +51,7 @@ class EntityUpdaterStatementUpdaterTest extends TestCase {
 	/**
 	 * @dataProvider provideStatementIdAndEntityWithStatement
 	 */
-	public function testUpdate( StatementGuid $statementId, EntityDocument $statementSubject ): void {
+	public function testUpdate( StatementGuid $statementId, StatementListProvidingEntity $statementSubject ): void {
 		$expectedRevisionId = 234;
 		$expectedRevisionTimestamp = '20221111070707';
 		$editMetaData = new EditMetadata( [], true, $this->createStub( EditSummary::class ) );
