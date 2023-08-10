@@ -91,7 +91,7 @@
 	"entityusage-summary": "این صفحه، صفحه‌هایی را فهرست می‌کند که از موجودیت وارد شده (مثلاً Q42) استفاده می‌کنند. این فهرست به‌صورت نزولی بر پایهٔ شناسهٔ صفحه مرتب شده است؛ بنابراین صفحه‌های جدیدتر در ابتدای فهرست آمده‌اند.",
 	"wikibase-entityusage-invalid-id": "$1 یک شناسه معتبر هستار نیست",
 	"wikibase-entityusage-legend": "فهرست صفحه‌هایی که یک هستار داده‌شده را استفاده می‌کنند",
-	"wikibase-entityusage-entity": "هستار:",
+	"wikibase-entityusage-entity": "موجودیت:",
 	"wikibase-entityusage-submit": "نمایش صفحه‌ها",
 	"wikibase-pageinfo-entity-id": "شناسۀ آیتم {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "هیچ",

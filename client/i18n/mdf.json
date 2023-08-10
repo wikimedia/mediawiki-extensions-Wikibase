@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Numulunj pilgae"
+			"Numulunj pilgae",
+			"Валгриш"
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}} элементсь",
@@ -11,5 +12,8 @@
 	"wikibase-linkitem-linkpage": "Сотомс лопа",
 	"wikibase-linkitem-selectlink": "Кочкак интернет лопа, конань ёралеть сюлмамс тя лопать мархта.",
 	"wikibase-linkitem-input-site": "Кяль:",
-	"wikibase-linkitem-input-page": "Лопа:"
+	"wikibase-linkitem-input-page": "Лопа:",
+	"wikibase-rc-hide-wikidata-hide": "Кяшемс",
+	"wikibase-rc-hide-wikidata-show": "Няфтемс",
+	"wikibase-otherprojects": "Лия проекттнень эса"
 }
