@@ -11,5 +11,7 @@
 	"wikibase-linkitem-linkpage": "Kolegament me pagina",
 	"wikibase-linkitem-selectlink": "Të parkales të zglidh gnë situ e gnë pagina çë do lidh me rtë.",
 	"wikibase-linkitem-input-site": "Gljuh:",
-	"wikibase-linkitem-input-page": "Pagina:"
+	"wikibase-linkitem-input-page": "Pagina:",
+	"wikibase-rc-hide-wikidata-hide": "Fshih",
+	"wikibase-rc-hide-wikidata-show": "Ftoje"
 }
