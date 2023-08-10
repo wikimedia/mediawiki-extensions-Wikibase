@@ -96,6 +96,13 @@ module.exports = {
 			.withJsonBodyParam( 'statement', statement );
 	},
 
+	newAddPropertyStatementRequestBuilder( propertyId, statement ) {
+		return new RequestBuilder()
+			.withRoute( 'POST', '/entities/properties/{property_id}/statements' )
+			.withPathParam( 'property_id', propertyId )
+			.withJsonBodyParam( 'statement', statement );
+	},
+
 	newGetItemStatementRequestBuilder( itemId, statementId ) {
 		return new RequestBuilder()
 			.withRoute( 'GET', '/entities/items/{item_id}/statements/{statement_id}' )
