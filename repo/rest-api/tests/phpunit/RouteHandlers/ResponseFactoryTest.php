@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\RestApi\RouteHandlers;
 
 use Generator;
+use LogicException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\RouteHandlers\ResponseFactory;
@@ -67,6 +68,12 @@ class ResponseFactoryTest extends TestCase {
 
 		$this->assertSame( 403, $httpResponse->getStatusCode() );
 		$this->assertStringContainsString( 'rest-write-denied', $httpResponse->getBody()->getContents() );
+	}
+
+	public function testGivenErrorCodeNotAssignedStatusCode_throwLogicException(): void {
+		$this->expectException( LogicException::class );
+
+		( new ResponseFactory() )->newErrorResponse( 'unknown-code', 'should throw a logic exception' );
 	}
 
 }
