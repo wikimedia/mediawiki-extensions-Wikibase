@@ -139,10 +139,19 @@ class HistoryEntityActionTest extends \PHPUnit\Framework\TestCase {
 		$labelLookup->method( 'getLabel' )
 			->willReturn( $label );
 
+		$pageTitle = null;
 		$output = $this->createMock( OutputPage::class );
-		$output->expects( $this->once() )
-			->method( 'setPageTitle' )
-			->with( $expected );
+		$output->method( 'setPageTitle' ) // used before 1.41
+			->willReturnCallback( function( $t ) use( &$pageTitle ) {
+				if ( !is_string( $t ) ) {
+					$t = $t->text();
+				}
+				$pageTitle = $t;
+			} );
+		$output->method( 'setPageTitleMsg' ) // introduced in 1.41
+			->willReturnCallback( function( $m ) use( &$pageTitle ) {
+				$pageTitle = $m->escaped();
+			} );
 
 		$action = new HistoryEntityAction(
 			$this->getArticle(),
@@ -151,6 +160,7 @@ class HistoryEntityActionTest extends \PHPUnit\Framework\TestCase {
 			$labelLookup
 		);
 		$action->show();
+		$this->assertEquals( $expected, $pageTitle );
 	}
 
 }
