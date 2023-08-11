@@ -1,9 +1,10 @@
 'use strict';
 
-const { assert } = require( 'api-testing' );
+const { assert, action } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { newAddPropertyStatementRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { formatStatementEditSummary } = require( '../helpers/formatEditSummaries' );
 
 describe( newAddPropertyStatementRequestBuilder().getRouteDescription(), () => {
 	let testPropertyId;
@@ -21,15 +22,46 @@ describe( newAddPropertyStatementRequestBuilder().getRouteDescription(), () => {
 		testStatement = entityHelper.newStatementWithRandomStringValue( testPropertyId );
 	} );
 
-	describe( '201 success response ', () => {
-		it( 'can add a statement to a property', async () => {
+	describe( '201 success response', () => {
+		it( 'can add a statement to a property with edit metadata omitted', async () => {
 			const response = await newAddPropertyStatementRequestBuilder( testPropertyId, testStatement )
 				.assertValidRequest().makeRequest();
+
 			assertValid201Response(
 				response,
 				testPropertyId,
 				testStatement.value.content
 			);
+		} );
+
+		it( 'can add a statement to a property with edit metadata', async () => {
+			const user = await action.robby(); // robby is a bot
+			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test' );
+			const editSummary = 'omg look i made an edit';
+			const response = await newAddPropertyStatementRequestBuilder( testPropertyId, testStatement )
+				.withJsonBodyParam( 'tags', [ tag ] )
+				.withJsonBodyParam( 'bot', true )
+				.withJsonBodyParam( 'comment', editSummary )
+				.withUser( user )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValid201Response( response );
+
+			const editMetadata = await entityHelper.getLatestEditMetadata( testPropertyId );
+			assert.deepEqual( editMetadata.tags, [ tag ] );
+			assert.property( editMetadata, 'bot' );
+			assert.strictEqual(
+				editMetadata.comment,
+				formatStatementEditSummary(
+					'wbsetclaim',
+					'create',
+					testStatement.property.id,
+					testStatement.value.content,
+					editSummary
+				)
+			);
+			assert.strictEqual( editMetadata.user, user.username );
 		} );
 	} );
 

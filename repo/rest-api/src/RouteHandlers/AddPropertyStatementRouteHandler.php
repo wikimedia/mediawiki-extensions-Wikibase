@@ -27,6 +27,9 @@ class AddPropertyStatementRouteHandler extends SimpleHandler {
 
 	public const PROPERTY_ID_PATH_PARAM = 'property_id';
 	public const STATEMENT_BODY_PARAM = 'statement';
+	public const TAGS_BODY_PARAM = 'tags';
+	public const BOT_BODY_PARAM = 'bot';
+	public const COMMENT_BODY_PARAM = 'comment';
 
 	private AddPropertyStatement $useCase;
 	private StatementSerializer $statementSerializer;
@@ -72,7 +75,11 @@ class AddPropertyStatementRouteHandler extends SimpleHandler {
 			$useCaseResponse = $this->useCase->execute(
 				new AddPropertyStatementRequest(
 					$propertyId,
-					$body[self::STATEMENT_BODY_PARAM]
+					$body[self::STATEMENT_BODY_PARAM],
+					$body[self::TAGS_BODY_PARAM],
+					$body[self::BOT_BODY_PARAM],
+					$body[self::COMMENT_BODY_PARAM],
+					$this->getUsername()
 				)
 			);
 			$httpResponse = $this->getResponseFactory()->create();
@@ -108,7 +115,29 @@ class AddPropertyStatementRouteHandler extends SimpleHandler {
 					ParamValidator::PARAM_TYPE => 'object',
 					ParamValidator::PARAM_REQUIRED => true,
 				],
+				self::TAGS_BODY_PARAM => [
+					self::PARAM_SOURCE => 'body',
+					ParamValidator::PARAM_TYPE => 'array',
+					ParamValidator::PARAM_REQUIRED => false,
+					ParamValidator::PARAM_DEFAULT => [],
+				],
+				self::BOT_BODY_PARAM => [
+					self::PARAM_SOURCE => 'body',
+					ParamValidator::PARAM_TYPE => 'boolean',
+					ParamValidator::PARAM_REQUIRED => false,
+					ParamValidator::PARAM_DEFAULT => false,
+				],
+				self::COMMENT_BODY_PARAM => [
+					self::PARAM_SOURCE => 'body',
+					ParamValidator::PARAM_TYPE => 'string',
+					ParamValidator::PARAM_REQUIRED => false,
+				],
 			] ) : parent::getBodyValidator( $contentType );
+	}
+
+	private function getUsername(): ?string {
+		$mwUser = $this->getAuthority()->getUser();
+		return $mwUser->isRegistered() ? $mwUser->getName() : null;
 	}
 
 }

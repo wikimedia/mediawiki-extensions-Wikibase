@@ -13,11 +13,13 @@ use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyS
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Property;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyRevision;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
+use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
 
 /**
@@ -28,6 +30,8 @@ use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
  * @license GPL-2.0-or-later
  */
 class AddPropertyStatementTest extends TestCase {
+
+	use EditMetadataHelper;
 
 	private AssertPropertyExists $assertPropertyExists;
 	private AddPropertyStatementValidator $validator;
@@ -48,7 +52,9 @@ class AddPropertyStatementTest extends TestCase {
 	public function testAddStatement(): void {
 		$id = new NumericPropertyId( 'P321' );
 		$newGuid = new StatementGuid( $id, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
-
+		$editTags = [ 'some', 'tags' ];
+		$isBot = false;
+		$comment = 'edit comment';
 		$statementWriteModel = NewStatement::noValueFor( 'P123' )->build();
 		$statementReadModel = NewStatementReadModel::noValueFor( 'P123' )
 			->withGuid( $newGuid )
@@ -69,14 +75,21 @@ class AddPropertyStatementTest extends TestCase {
 		$this->propertyUpdater->expects( $this->once() )
 			->method( 'update' )
 			->with(
-				$this->callback( fn( DataModelProperty $p ) => $p->getStatements()->getFirstStatementWithGuid( (string)$newGuid ) !== null )
+				$this->callback(
+					fn( DataModelProperty $p ) => $p->getStatements()->getFirstStatementWithGuid( (string)$newGuid ) !== null
+				),
+				$this->expectEquivalentMetadata( $editTags, $isBot, $comment, EditSummary::ADD_ACTION )
 			)
 			->willReturn( new PropertyRevision( new Property( new StatementList( $statementReadModel ) ), '', 321 ) );
 
 		$response = $this->newUseCase()->execute(
 			new AddPropertyStatementRequest(
 				"$id",
-				$this->getValidNoValueStatementSerialization()
+				$this->getValidNoValueStatementSerialization(),
+				$editTags,
+				$isBot,
+				$comment,
+				null
 			)
 		);
 
@@ -91,7 +104,14 @@ class AddPropertyStatementTest extends TestCase {
 
 		try {
 			$this->newUseCase()->execute(
-				new AddPropertyStatementRequest( 'P99999', $this->getValidNoValueStatementSerialization() )
+				new AddPropertyStatementRequest(
+					'P99999',
+					$this->getValidNoValueStatementSerialization(),
+					[],
+					false,
+					null,
+					null
+				)
 			);
 			$this->fail( 'Expected exception not thrown' );
 		} catch ( UseCaseError $e ) {

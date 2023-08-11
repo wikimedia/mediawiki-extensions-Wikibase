@@ -54,9 +54,9 @@ class AddPropertyStatement {
 			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
 			$property,
 			new EditMetadata(
-				[],
-				false,
-				StatementEditSummary::newAddSummary( null, $statement )
+				$request->getEditTags(),
+				$request->isBot(),
+				StatementEditSummary::newAddSummary( $request->getComment(), $statement )
 			)
 		);
 
