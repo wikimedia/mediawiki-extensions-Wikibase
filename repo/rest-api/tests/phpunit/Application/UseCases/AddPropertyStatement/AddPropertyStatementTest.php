@@ -11,6 +11,8 @@ use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Property;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyRevision;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
@@ -27,6 +29,7 @@ use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
  */
 class AddPropertyStatementTest extends TestCase {
 
+	private AssertPropertyExists $assertPropertyExists;
 	private AddPropertyStatementValidator $validator;
 	private PropertyRetriever $propertyRetriever;
 	private GuidGenerator $guidGenerator;
@@ -35,6 +38,7 @@ class AddPropertyStatementTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
+		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
 		$this->validator = $this->createStub( AddPropertyStatementValidator::class );
 		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
 		$this->guidGenerator = new GuidGenerator();
@@ -44,14 +48,7 @@ class AddPropertyStatementTest extends TestCase {
 	public function testAddStatement(): void {
 		$id = new NumericPropertyId( 'P321' );
 		$newGuid = new StatementGuid( $id, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
-		$statementSerialization = [
-			'property' => [
-				'id' => 'P123',
-			],
-			'value' => [
-				'type' => 'novalue',
-			],
-		];
+
 		$statementWriteModel = NewStatement::noValueFor( 'P123' )->build();
 		$statementReadModel = NewStatementReadModel::noValueFor( 'P123' )
 			->withGuid( $newGuid )
@@ -79,20 +76,48 @@ class AddPropertyStatementTest extends TestCase {
 		$response = $this->newUseCase()->execute(
 			new AddPropertyStatementRequest(
 				"$id",
-				$statementSerialization
+				$this->getValidNoValueStatementSerialization()
 			)
 		);
 
 		$this->assertSame( $statementReadModel, $response->getStatement() );
 	}
 
+	public function testGivenPropertyNotFound_throws(): void {
+		$expectedException = $this->createStub( UseCaseError::class );
+
+		$this->assertPropertyExists->method( 'execute' )
+			->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase()->execute(
+				new AddPropertyStatementRequest( 'P99999', $this->getValidNoValueStatementSerialization() )
+			);
+			$this->fail( 'Expected exception not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
 	private function newUseCase(): AddPropertyStatement {
 		return new AddPropertyStatement(
 			$this->validator,
+			$this->assertPropertyExists,
 			$this->propertyRetriever,
 			$this->guidGenerator,
 			$this->propertyUpdater
 		);
+	}
+
+	private function getValidNoValueStatementSerialization(): array {
+		return [
+			'property' => [
+				'id' => 'P123',
+			],
+			'value' => [
+				'type' => 'novalue',
+			],
+		];
 	}
 
 }

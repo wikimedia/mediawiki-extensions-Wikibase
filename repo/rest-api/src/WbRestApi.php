@@ -8,6 +8,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\SerializerFactory;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertStatementSubjectExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItem;
@@ -181,6 +182,11 @@ class WbRestApi {
 	public static function getAssertItemExists( ContainerInterface $services = null ): AssertItemExists {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.AssertItemExists' );
+	}
+
+	public static function getAssertPropertyExists( ContainerInterface $services = null ): AssertPropertyExists {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.AssertPropertyExists' );
 	}
 
 	public static function getAssertStatementSubjectExists( ContainerInterface $services = null ): AssertStatementSubjectExists {

@@ -11,6 +11,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupPropertyDataRetriever;
@@ -29,13 +30,16 @@ class AddPropertyStatementRouteHandler extends SimpleHandler {
 
 	private AddPropertyStatement $useCase;
 	private StatementSerializer $statementSerializer;
+	private ResponseFactory $responseFactory;
 
 	public function __construct(
 		AddPropertyStatement $useCase,
-		StatementSerializer $statementSerializer
+		StatementSerializer $statementSerializer,
+		ResponseFactory $responseFactory
 	) {
 		$this->useCase = $useCase;
 		$this->statementSerializer = $statementSerializer;
+		$this->responseFactory = $responseFactory;
 	}
 
 	public static function factory(): self {
@@ -46,6 +50,7 @@ class AddPropertyStatementRouteHandler extends SimpleHandler {
 		return new self(
 			new AddPropertyStatement(
 				new AddPropertyStatementValidator( new StatementValidator( WbRestApi::getStatementDeserializer() ) ),
+				WbRestApi::getAssertPropertyExists(),
 				new EntityRevisionLookupPropertyDataRetriever(
 					WikibaseRepo::getEntityRevisionLookup(),
 					$statementReadModelConverter
@@ -56,27 +61,30 @@ class AddPropertyStatementRouteHandler extends SimpleHandler {
 					$statementReadModelConverter
 				)
 			),
-			WbRestApi::getSerializerFactory()->newStatementSerializer()
+			WbRestApi::getSerializerFactory()->newStatementSerializer(),
+			new ResponseFactory()
 		);
 	}
 
 	public function run( string $propertyId ): Response {
 		$body = $this->getValidatedBody();
-		$useCaseResponse = $this->useCase->execute(
-			new AddPropertyStatementRequest(
-				$propertyId,
-				$body[self::STATEMENT_BODY_PARAM]
-			)
-		);
-
-		$httpResponse = $this->getResponseFactory()->create();
-		$httpResponse->setStatus( 201 );
-		$httpResponse->setHeader( 'Content-Type', 'application/json' );
-		$httpResponse->setBody( new StringStream( json_encode(
-			$this->statementSerializer->serialize( $useCaseResponse->getStatement() )
-		) ) );
-
-		return $httpResponse;
+		try {
+			$useCaseResponse = $this->useCase->execute(
+				new AddPropertyStatementRequest(
+					$propertyId,
+					$body[self::STATEMENT_BODY_PARAM]
+				)
+			);
+			$httpResponse = $this->getResponseFactory()->create();
+			$httpResponse->setStatus( 201 );
+			$httpResponse->setHeader( 'Content-Type', 'application/json' );
+			$httpResponse->setBody( new StringStream( json_encode(
+				$this->statementSerializer->serialize( $useCaseResponse->getStatement() )
+			) ) );
+			return $httpResponse;
+		} catch ( UseCaseError $e ) {
+			return $this->responseFactory->newErrorResponseFromException( $e );
+		}
 	}
 
 	public function getParamSettings(): array {
