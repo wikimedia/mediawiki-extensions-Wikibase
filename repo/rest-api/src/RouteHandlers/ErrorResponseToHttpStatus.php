@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\RouteHandlers;
 
+use LogicException;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 
 /**
@@ -55,6 +56,9 @@ class ErrorResponseToHttpStatus {
 	];
 
 	public static function lookup( string $errorCode ): int {
-		return self::$lookupTable[ $errorCode ];
+		if ( !array_key_exists( $errorCode, self::$lookupTable ) ) {
+			throw new LogicException( "Error code '$errorCode' not found in lookup table" );
+		}
+		return self::$lookupTable[$errorCode];
 	}
 }
