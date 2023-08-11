@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Specials\HTMLForm;
 
 use HTMLComboboxField;
+use IContextSource;
 use InvalidArgumentException;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Repo\WikibaseRepo;
@@ -27,13 +28,12 @@ class HTMLContentLanguageField extends HTMLComboboxField {
 			'label-message' => 'wikibase-content-language-edit-label',
 		];
 
-		if ( isset( $params['parent'] ) && $params['parent'] instanceof \IContextSource ) {
-			/** @var \IContextSource $form */
-			$form = $params['parent'];
-			if ( !isset( $params['default'] ) ) {
-				$params['default'] = $form->getLanguage()->getCode();
-			}
+		$parent = $params['parent'] ?? null;
+		if ( !( $parent instanceof IContextSource ) ) {
+			throw new InvalidArgumentException( 'parent option must be an IContextSource' );
 		}
+		$languageCode = $parent->getLanguage()->getCode();
+		$params['default'] ??= $languageCode;
 
 		if ( isset( $params['options'] )
 			 || isset( $params['options-message'] )
@@ -47,7 +47,7 @@ class HTMLContentLanguageField extends HTMLComboboxField {
 		$contentLanguages = WikibaseRepo::getTermsLanguages();
 		$params['options'] = $this->constructOptions(
 			$contentLanguages->getLanguages(),
-			WikibaseRepo::getLanguageNameLookup()
+			WikibaseRepo::getLanguageNameLookupFactory()->getForLanguageCode( $languageCode )
 		);
 
 		parent::__construct( array_merge( $defaultParameters, $params ) );
