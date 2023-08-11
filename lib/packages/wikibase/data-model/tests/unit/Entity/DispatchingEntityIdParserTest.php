@@ -63,6 +63,7 @@ class DispatchingEntityIdParserTest extends \PHPUnit\Framework\TestCase {
 			[ ':Q1337' ],
 			[ 'foo:' ],
 			[ 'foo:bar:' ],
+			[ ':Q1337' ],
 			[ '::Q1337' ],
 			[ ':' ],
 			[ 'q:0' ],

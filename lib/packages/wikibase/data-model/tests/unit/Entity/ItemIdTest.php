@@ -36,7 +36,6 @@ class ItemIdTest extends \PHPUnit\Framework\TestCase {
 			[ 'q31337', 'Q31337' ],
 			[ 'Q31337', 'Q31337' ],
 			[ 'Q42', 'Q42' ],
-			[ ':Q42', 'Q42' ],
 			[ 'Q2147483647', 'Q2147483647' ],
 		];
 	}
@@ -71,6 +70,7 @@ class ItemIdTest extends \PHPUnit\Framework\TestCase {
 			// no longer supported (T291823, T338223)
 			[ 'foo:Q42', 'foo:Q42' ],
 			[ 'foo:bar:q42', 'foo:bar:Q42' ],
+			[ ':Q42', 'Q42' ],
 		];
 	}
 
