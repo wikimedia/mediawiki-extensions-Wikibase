@@ -5,21 +5,35 @@ const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { newAddPropertyStatementRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { formatStatementEditSummary } = require( '../helpers/formatEditSummaries' );
+const { makeEtag } = require( '../helpers/httpHelper' );
 
 describe( newAddPropertyStatementRequestBuilder().getRouteDescription(), () => {
 	let testPropertyId;
 	let testStatement;
+	let originalLastModified;
+	let originalRevisionId;
 
-	function assertValid201Response( response, propertyId = null, valueContent = null ) {
+	function assertValid201Response( response ) {
 		expect( response ).to.have.status( 201 );
+		assert.strictEqual( response.body.property.id, testStatement.property.id );
+		assert.deepStrictEqual( response.body.value.content, testStatement.value.content );
 		assert.strictEqual( response.header[ 'content-type' ], 'application/json' );
-		assert.strictEqual( response.body.property.id, propertyId || testStatement.property.id );
-		assert.deepStrictEqual( response.body.value.content, valueContent || testStatement.value.content );
+		assert.isAbove( new Date( response.header[ 'last-modified' ] ), originalLastModified );
+		assert.notStrictEqual( response.header.etag, makeEtag( originalRevisionId ) );
 	}
 
 	before( async () => {
 		testPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
 		testStatement = entityHelper.newStatementWithRandomStringValue( testPropertyId );
+
+		const testPropertyCreationMetadata = await entityHelper.getLatestEditMetadata( testPropertyId );
+		originalLastModified = new Date( testPropertyCreationMetadata.timestamp );
+		originalRevisionId = testPropertyCreationMetadata.revid;
+
+		// wait 1s before adding any statements to verify the last-modified timestamps are different
+		await new Promise( ( resolve ) => {
+			setTimeout( resolve, 1000 );
+		} );
 	} );
 
 	describe( '201 success response', () => {
@@ -27,11 +41,7 @@ describe( newAddPropertyStatementRequestBuilder().getRouteDescription(), () => {
 			const response = await newAddPropertyStatementRequestBuilder( testPropertyId, testStatement )
 				.assertValidRequest().makeRequest();
 
-			assertValid201Response(
-				response,
-				testPropertyId,
-				testStatement.value.content
-			);
+			assertValid201Response( response );
 		} );
 
 		it( 'can add a statement to a property with edit metadata', async () => {

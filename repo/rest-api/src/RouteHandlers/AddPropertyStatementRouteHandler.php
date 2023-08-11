@@ -85,6 +85,11 @@ class AddPropertyStatementRouteHandler extends SimpleHandler {
 			$httpResponse = $this->getResponseFactory()->create();
 			$httpResponse->setStatus( 201 );
 			$httpResponse->setHeader( 'Content-Type', 'application/json' );
+			$httpResponse->setHeader(
+				'Last-Modified',
+				wfTimestamp( TS_RFC2822, $useCaseResponse->getLastModified() )
+			);
+			$httpResponse->setHeader( 'ETag', "\"{$useCaseResponse->getRevisionId()}\"" );
 			$httpResponse->setBody( new StringStream( json_encode(
 				$this->statementSerializer->serialize( $useCaseResponse->getStatement() )
 			) ) );

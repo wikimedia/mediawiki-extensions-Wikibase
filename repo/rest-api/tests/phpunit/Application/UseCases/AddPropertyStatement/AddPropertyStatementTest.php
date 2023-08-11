@@ -59,6 +59,8 @@ class AddPropertyStatementTest extends TestCase {
 		$statementReadModel = NewStatementReadModel::noValueFor( 'P123' )
 			->withGuid( $newGuid )
 			->build();
+		$lastModified = '20221111070707';
+		$revisionId = 321;
 
 		$property = new DataModelProperty( $id, null, 'string' );
 
@@ -80,7 +82,7 @@ class AddPropertyStatementTest extends TestCase {
 				),
 				$this->expectEquivalentMetadata( $editTags, $isBot, $comment, EditSummary::ADD_ACTION )
 			)
-			->willReturn( new PropertyRevision( new Property( new StatementList( $statementReadModel ) ), '', 321 ) );
+			->willReturn( new PropertyRevision( new Property( new StatementList( $statementReadModel ) ), $lastModified, $revisionId ) );
 
 		$response = $this->newUseCase()->execute(
 			new AddPropertyStatementRequest(
@@ -94,6 +96,8 @@ class AddPropertyStatementTest extends TestCase {
 		);
 
 		$this->assertSame( $statementReadModel, $response->getStatement() );
+		$this->assertSame( $lastModified, $response->getLastModified() );
+		$this->assertSame( $revisionId, $response->getRevisionId() );
 	}
 
 	public function testGivenPropertyNotFound_throws(): void {

@@ -60,8 +60,12 @@ class AddPropertyStatement {
 			)
 		);
 
-		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-		return new AddPropertyStatementResponse( $revision->getProperty()->getStatements()->getStatementById( $newStatementGuid ) );
+		return new AddPropertyStatementResponse(
+			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
+			$revision->getProperty()->getStatements()->getStatementById( $newStatementGuid ),
+			$revision->getLastModified(),
+			$revision->getRevisionId()
+		);
 	}
 
 }
