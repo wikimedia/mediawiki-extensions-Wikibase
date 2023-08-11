@@ -8,9 +8,7 @@ use DataValues\Geo\Formatters\GlobeCoordinateFormatter;
 use DataValues\Geo\Formatters\LatLongFormatter;
 use InvalidArgumentException;
 use MediaWiki\Languages\LanguageFactory;
-use MediaWiki\Logger\LoggerFactory;
 use RequestContext;
-use RuntimeException;
 use ValueFormatters\DecimalFormatter;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\QuantityFormatter;
@@ -534,8 +532,6 @@ class WikibaseValueFormatterBuilders {
 	}
 
 	private function newLanguageNameLookup( FormatterOptions $options ): LanguageNameLookup {
-		global $wgLang;
-
 		if ( $options->hasOption( ValueFormatter::OPT_LANG ) ) {
 			return $this->languageNameLookupFactory->getForLanguageCode(
 				$options->getOption( ValueFormatter::OPT_LANG )
@@ -548,13 +544,7 @@ class WikibaseValueFormatterBuilders {
 				$chain->getFallbackChain()[0]->getLanguageCode()
 			);
 		} else {
-			LoggerFactory::getInstance( 'Wikibase' )
-				->warning( __METHOD__ . ': FormatterOptions without OPT_LANG or OPT_LANGUAGE_FALLBACK_CHAIN', [
-					// unfortunately, we cannot usefully log $options :/ no way to access its keys
-					'exception' => new RuntimeException(), // capture stack trace
-				] );
-			// TODO remove warning and throw exception instead
-			return $this->languageNameLookupFactory->getForLanguageCode( $wgLang->getCode() );
+			throw new InvalidArgumentException( 'FormatterOptions must have OPT_LANG or OPT_LANGUAGE_FALLBACK_CHAIN' );
 		}
 	}
 
