@@ -31,8 +31,9 @@ describe( 'POST /entities/items/{item_id}/statements', () => {
 		originalLastModified = new Date( testItemCreationMetadata.timestamp );
 		originalRevisionId = testItemCreationMetadata.revid;
 
-		const stringPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
-		testStatement = entityHelper.newStatementWithRandomStringValue( stringPropertyId );
+		testStatement = entityHelper.newStatementWithRandomStringValue(
+			( await entityHelper.createUniqueStringProperty() ).entity.id
+		);
 
 		// wait 1s before adding any statements to verify the last-modified timestamps are different
 		await new Promise( ( resolve ) => {

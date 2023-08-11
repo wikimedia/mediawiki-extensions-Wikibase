@@ -6,7 +6,7 @@ const entityHelper = require( '../helpers/entityHelper' );
 const { newGetItemRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
 async function createItemWithAllFields() {
-	const stringPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+	const statementPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
 	const siteId = ( await action.getAnon().meta(
 		'wikibase',
 		{ wbprop: 'siteid' }
@@ -28,28 +28,28 @@ async function createItemWithAllFields() {
 			{ // with value, without qualifiers or references
 				mainsnak: {
 					snaktype: 'value',
-					property: stringPropertyId,
+					property: statementPropertyId,
 					datavalue: { value: 'im a statement value', type: 'string' }
 				}, type: 'statement', rank: 'normal'
 			},
 			{ // no value, with qualifier and reference
 				mainsnak: {
 					snaktype: 'novalue',
-					property: stringPropertyId
+					property: statementPropertyId
 				},
 				type: 'statement',
 				rank: 'normal',
 				qualifiers: [
 					{
 						snaktype: 'value',
-						property: stringPropertyId,
+						property: statementPropertyId,
 						datavalue: { value: 'im a qualifier value', type: 'string' }
 					}
 				],
 				references: [ {
 					snaks: [ {
 						snaktype: 'value',
-						property: stringPropertyId,
+						property: statementPropertyId,
 						datavalue: { value: 'im a reference value', type: 'string' }
 					} ]
 				} ]

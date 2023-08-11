@@ -26,10 +26,10 @@ describe( 'Auth', () => {
 	let user;
 
 	before( async () => {
-		const propertyId = ( await createUniqueStringProperty() ).entity.id;
+		const statementPropertyId = ( await createUniqueStringProperty() ).entity.id;
 
 		const entityParts = {
-			claims: [ newLegacyStatementWithRandomStringValue( propertyId ) ],
+			claims: [ newLegacyStatementWithRandomStringValue( statementPropertyId ) ],
 			descriptions: { en: { language: 'en', value: `entity-with-statements-${utils.uniq()}` } },
 			labels: { en: { language: 'en', value: `entity-with-statements-${utils.uniq()}` } },
 			aliases: {
@@ -38,15 +38,15 @@ describe( 'Auth', () => {
 		};
 
 		const createItemResponse = await createEntity( 'item', entityParts );
-		itemRequestInputs.stringPropertyId = propertyId;
 		itemRequestInputs.itemId = createItemResponse.entity.id;
-		itemRequestInputs.statementId = createItemResponse.entity.claims[ propertyId ][ 0 ].id;
+		itemRequestInputs.statementId = createItemResponse.entity.claims[ statementPropertyId ][ 0 ].id;
+		itemRequestInputs.statementPropertyId = statementPropertyId;
 
 		entityParts.datatype = 'string';
 		const createPropertyResponse = await createEntity( 'property', entityParts );
-		propertyRequestInputs.stringPropertyId = createPropertyResponse.entity.id;
-		propertyRequestInputs.statementId = createPropertyResponse.entity.claims[ propertyId ][ 0 ].id;
-		propertyRequestInputs.statementPropertyId = propertyId;
+		propertyRequestInputs.propertyId = createPropertyResponse.entity.id;
+		propertyRequestInputs.statementId = createPropertyResponse.entity.claims[ statementPropertyId ][ 0 ].id;
+		propertyRequestInputs.statementPropertyId = statementPropertyId;
 
 		user = await action.mindy();
 	} );
@@ -65,7 +65,7 @@ describe( 'Auth', () => {
 				if ( newRequestBuilder().getMethod() === 'DELETE' ) {
 					itemRequestInputs.statementId = ( await rbf.newAddItemStatementRequestBuilder(
 						itemRequestInputs.itemId,
-						newStatementWithRandomStringValue( itemRequestInputs.stringPropertyId )
+						newStatementWithRandomStringValue( itemRequestInputs.statementPropertyId )
 					).makeRequest() ).body.id;
 				}
 			} );

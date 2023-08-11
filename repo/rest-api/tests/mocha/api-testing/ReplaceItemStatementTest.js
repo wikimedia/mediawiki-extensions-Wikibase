@@ -26,17 +26,17 @@ function assertValid404Response( response, responseBodyErrorCode ) {
 describe( 'PUT statement tests', () => {
 	let testItemId;
 	let testStatementId;
-	let testPropertyId;
+	let testStatementPropertyId;
 	let originalLastModified;
 	let originalRevisionId;
 
 	before( async () => {
-		testPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+		testStatementPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
 		const createItemResponse = await entityHelper.createItemWithStatements( [
-			entityHelper.newLegacyStatementWithRandomStringValue( testPropertyId )
+			entityHelper.newLegacyStatementWithRandomStringValue( testStatementPropertyId )
 		] );
 		testItemId = createItemResponse.entity.id;
-		testStatementId = createItemResponse.entity.claims[ testPropertyId ][ 0 ].id;
+		testStatementId = createItemResponse.entity.claims[ testStatementPropertyId ][ 0 ].id;
 
 		const testItemCreationMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 		originalLastModified = new Date( testItemCreationMetadata.timestamp );
@@ -65,7 +65,9 @@ describe( 'PUT statement tests', () => {
 			describe( '200 success response ', () => {
 
 				it( 'can replace a statement to an item with edit metadata omitted', async () => {
-					const statementSerialization = entityHelper.newStatementWithRandomStringValue( testPropertyId );
+					const statementSerialization = entityHelper.newStatementWithRandomStringValue(
+						testStatementPropertyId
+					);
 					const response = await newReplaceRequestBuilder(
 						testItemId,
 						testStatementId,
@@ -94,7 +96,9 @@ describe( 'PUT statement tests', () => {
 					const user = await action.robby(); // robby is a bot
 					const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test' );
 					const editSummary = 'omg look i made an edit';
-					const statementSerialization = entityHelper.newStatementWithRandomStringValue( testPropertyId );
+					const statementSerialization = entityHelper.newStatementWithRandomStringValue(
+						testStatementPropertyId
+					);
 					const response = await newReplaceRequestBuilder(
 						testItemId,
 						testStatementId,
@@ -128,7 +132,9 @@ describe( 'PUT statement tests', () => {
 				} );
 
 				it( 'is idempotent: repeating the same request only results in one edit', async () => {
-					const statementSerialization = entityHelper.newStatementWithRandomStringValue( testPropertyId );
+					const statementSerialization = entityHelper.newStatementWithRandomStringValue(
+						testStatementPropertyId
+					);
 					const requestTemplate = newReplaceRequestBuilder(
 						testItemId,
 						testStatementId,
@@ -150,13 +156,15 @@ describe( 'PUT statement tests', () => {
 					// This is tested here by creating a new test item with three statements, replacing the
 					// middle one and then checking that it's still in the middle afterwards.
 					const newTestItem = ( await entityHelper.createItemWithStatements( [
-						entityHelper.newLegacyStatementWithRandomStringValue( testPropertyId ),
-						entityHelper.newLegacyStatementWithRandomStringValue( testPropertyId ),
-						entityHelper.newLegacyStatementWithRandomStringValue( testPropertyId )
+						entityHelper.newLegacyStatementWithRandomStringValue( testStatementPropertyId ),
+						entityHelper.newLegacyStatementWithRandomStringValue( testStatementPropertyId ),
+						entityHelper.newLegacyStatementWithRandomStringValue( testStatementPropertyId )
 					] ) ).entity;
 
-					const originalSecondStatement = newTestItem.claims[ testPropertyId ][ 1 ];
-					const newSecondStatement = entityHelper.newStatementWithRandomStringValue( testPropertyId );
+					const originalSecondStatement = newTestItem.claims[ testStatementPropertyId ][ 1 ];
+					const newSecondStatement = entityHelper.newStatementWithRandomStringValue(
+						testStatementPropertyId
+					);
 
 					await newReplaceRequestBuilder(
 						newTestItem.id,
@@ -166,7 +174,7 @@ describe( 'PUT statement tests', () => {
 
 					const actualSecondStatement = ( await newGetItemStatementsRequestBuilder(
 						newTestItem.id
-					).makeRequest() ).body[ testPropertyId ][ 1 ];
+					).makeRequest() ).body[ testStatementPropertyId ][ 1 ];
 
 					assert.strictEqual( actualSecondStatement.id, originalSecondStatement.id );
 					assert.strictEqual(
@@ -185,7 +193,9 @@ describe( 'PUT statement tests', () => {
 
 				it( 'statement ID contains invalid entity ID', async () => {
 					const statementId = testStatementId.replace( 'Q', 'X' );
-					const statementSerialization = entityHelper.newStatementWithRandomStringValue( testPropertyId );
+					const statementSerialization = entityHelper.newStatementWithRandomStringValue(
+						testStatementPropertyId
+					);
 					const response = await newReplaceRequestBuilder( testItemId, statementId, statementSerialization )
 						.assertInvalidRequest().makeRequest();
 
@@ -195,7 +205,9 @@ describe( 'PUT statement tests', () => {
 
 				it( 'statement ID is invalid format', async () => {
 					const statementId = 'not-a-valid-format';
-					const statementSerialization = entityHelper.newStatementWithRandomStringValue( testPropertyId );
+					const statementSerialization = entityHelper.newStatementWithRandomStringValue(
+						testStatementPropertyId
+					);
 					const response = await newReplaceRequestBuilder( testItemId, statementId, statementSerialization )
 						.assertInvalidRequest().makeRequest();
 
@@ -205,7 +217,9 @@ describe( 'PUT statement tests', () => {
 
 				it( 'comment too long', async () => {
 					const comment = 'x'.repeat( 501 );
-					const statementSerialization = entityHelper.newStatementWithRandomStringValue( testPropertyId );
+					const statementSerialization = entityHelper.newStatementWithRandomStringValue(
+						testStatementPropertyId
+					);
 					const response = await newReplaceRequestBuilder(
 						testItemId,
 						testStatementId,
@@ -218,7 +232,9 @@ describe( 'PUT statement tests', () => {
 				} );
 
 				it( 'invalid operation - new statement has a different Statement ID', async () => {
-					const newStatementData = entityHelper.newStatementWithRandomStringValue( testPropertyId );
+					const newStatementData = entityHelper.newStatementWithRandomStringValue(
+						testStatementPropertyId
+					);
 					newStatementData.id = testItemId + '$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 					const response = await newReplaceRequestBuilder(
 						testItemId,
@@ -245,7 +261,9 @@ describe( 'PUT statement tests', () => {
 
 				it( 'invalid edit tag', async () => {
 					const invalidEditTag = 'invalid tag';
-					const statementSerialization = entityHelper.newStatementWithRandomStringValue( testPropertyId );
+					const statementSerialization = entityHelper.newStatementWithRandomStringValue(
+						testStatementPropertyId
+					);
 					const response = await newReplaceRequestBuilder(
 						testItemId,
 						testStatementId,
@@ -258,7 +276,9 @@ describe( 'PUT statement tests', () => {
 				} );
 
 				it( 'invalid edit tag type', async () => {
-					const statementSerialization = entityHelper.newStatementWithRandomStringValue( testPropertyId );
+					const statementSerialization = entityHelper.newStatementWithRandomStringValue(
+						testStatementPropertyId
+					);
 					const response = await newReplaceRequestBuilder(
 						testItemId,
 						testStatementId,
@@ -273,7 +293,9 @@ describe( 'PUT statement tests', () => {
 				} );
 
 				it( 'invalid bot flag type', async () => {
-					const statementSerialization = entityHelper.newStatementWithRandomStringValue( testPropertyId );
+					const statementSerialization = entityHelper.newStatementWithRandomStringValue(
+						testStatementPropertyId
+					);
 					const response = await newReplaceRequestBuilder(
 						testItemId,
 						testStatementId,
@@ -288,7 +310,9 @@ describe( 'PUT statement tests', () => {
 				} );
 
 				it( 'invalid comment type', async () => {
-					const statementSerialization = entityHelper.newStatementWithRandomStringValue( testPropertyId );
+					const statementSerialization = entityHelper.newStatementWithRandomStringValue(
+						testStatementPropertyId
+					);
 					const response = await newReplaceRequestBuilder(
 						testItemId,
 						testStatementId,
@@ -313,7 +337,9 @@ describe( 'PUT statement tests', () => {
 				} );
 
 				it( 'invalid statement field', async () => {
-					const statementSerialization = entityHelper.newStatementWithRandomStringValue( testPropertyId );
+					const statementSerialization = entityHelper.newStatementWithRandomStringValue(
+						testStatementPropertyId
+					);
 					const invalidField = 'rank';
 					const invalidValue = 'not-a-valid-rank';
 					statementSerialization[ invalidField ] = invalidValue;
@@ -332,7 +358,9 @@ describe( 'PUT statement tests', () => {
 
 				it( 'missing statement field', async () => {
 					const missingField = 'value';
-					const statementSerialization = entityHelper.newStatementWithRandomStringValue( testPropertyId );
+					const statementSerialization = entityHelper.newStatementWithRandomStringValue(
+						testStatementPropertyId
+					);
 					delete statementSerialization[ missingField ];
 
 					const response = await newReplaceRequestBuilder(
@@ -355,7 +383,7 @@ describe( 'PUT statement tests', () => {
 					const response = await newReplaceRequestBuilder(
 						testItemId,
 						statementId,
-						entityHelper.newStatementWithRandomStringValue( testPropertyId )
+						entityHelper.newStatementWithRandomStringValue( testStatementPropertyId )
 					).assertValidRequest().makeRequest();
 
 					expect( response ).to.have.status( 404 );
@@ -370,7 +398,7 @@ describe( 'PUT statement tests', () => {
 					const response = await newReplaceRequestBuilder(
 						testItemId,
 						statementId,
-						entityHelper.newStatementWithRandomStringValue( testPropertyId )
+						entityHelper.newStatementWithRandomStringValue( testStatementPropertyId )
 					).assertValidRequest().makeRequest();
 
 					expect( response ).to.have.status( 404 );
@@ -387,7 +415,7 @@ describe( 'PUT statement tests', () => {
 					const response = await newReplaceRequestBuilder(
 						testItemId,
 						testStatementId,
-						entityHelper.newStatementWithRandomStringValue( testPropertyId )
+						entityHelper.newStatementWithRandomStringValue( testStatementPropertyId )
 					).withHeader( 'content-type', contentType ).makeRequest();
 
 					expect( response ).to.have.status( 415 );
@@ -403,7 +431,9 @@ describe( 'PUT statement tests', () => {
 
 		it( 'responds 400 for invalid item ID', async () => {
 			const itemId = 'X123';
-			const statementSerialization = entityHelper.newStatementWithRandomStringValue( testPropertyId );
+			const statementSerialization = entityHelper.newStatementWithRandomStringValue(
+				testStatementPropertyId
+			);
 			const response = await newReplaceItemStatementRequestBuilder(
 				itemId,
 				testStatementId,
@@ -418,7 +448,10 @@ describe( 'PUT statement tests', () => {
 			const itemId = 'Q9999999';
 			const statementId = `${itemId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
 			const response = await newReplaceItemStatementRequestBuilder( itemId, statementId )
-				.withJsonBodyParam( 'statement', entityHelper.newStatementWithRandomStringValue( testPropertyId ) )
+				.withJsonBodyParam(
+					'statement',
+					entityHelper.newStatementWithRandomStringValue( testStatementPropertyId )
+				)
 				.assertValidRequest().makeRequest();
 
 			assertValid404Response( response, 'item-not-found' );
@@ -430,7 +463,9 @@ describe( 'PUT statement tests', () => {
 	describe( 'short route specific errors', () => {
 		it( 'responds 400 invalid-statement-id if statement is not on a valid entity', async () => {
 			const statementId = testStatementId.replace( 'Q', 'X' );
-			const statementSerialization = entityHelper.newStatementWithRandomStringValue( testPropertyId );
+			const statementSerialization = entityHelper.newStatementWithRandomStringValue(
+				testStatementPropertyId
+			);
 			const response = await newReplaceStatementRequestBuilder( statementId, statementSerialization )
 				.assertInvalidRequest().makeRequest();
 
@@ -441,7 +476,10 @@ describe( 'PUT statement tests', () => {
 		it( 'responds 404 statement-not-found for nonexistent item', async () => {
 			const statementId = 'Q9999999$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 			const response = await newReplaceStatementRequestBuilder( statementId )
-				.withJsonBodyParam( 'statement', entityHelper.newStatementWithRandomStringValue( testPropertyId ) )
+				.withJsonBodyParam(
+					'statement',
+					entityHelper.newStatementWithRandomStringValue( testStatementPropertyId )
+				)
 				.assertValidRequest().makeRequest();
 
 			assertValid404Response( response, 'statement-not-found' );

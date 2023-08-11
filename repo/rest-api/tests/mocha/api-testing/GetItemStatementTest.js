@@ -37,19 +37,19 @@ describe( 'GET statement', () => {
 	}
 
 	before( async () => {
-		const testPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
-		const testPropertyIdToDelete = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+		const testStatementPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+		const testStatementPropertyIdToDelete = ( await entityHelper.createUniqueStringProperty() ).entity.id;
 
 		const createItemResponse = await entityHelper.createItemWithStatements( [
-			entityHelper.newLegacyStatementWithRandomStringValue( testPropertyId ),
-			entityHelper.newLegacyStatementWithRandomStringValue( testPropertyIdToDelete )
+			entityHelper.newLegacyStatementWithRandomStringValue( testStatementPropertyId ),
+			entityHelper.newLegacyStatementWithRandomStringValue( testStatementPropertyIdToDelete )
 		] );
 
 		testItemId = createItemResponse.entity.id;
-		testStatement = createItemResponse.entity.claims[ testPropertyId ][ 0 ];
+		testStatement = createItemResponse.entity.claims[ testStatementPropertyId ][ 0 ];
 
-		testStatementWithDeletedProperty = createItemResponse.entity.claims[ testPropertyIdToDelete ][ 0 ];
-		await entityHelper.deleteProperty( testPropertyIdToDelete );
+		testStatementWithDeletedProperty = createItemResponse.entity.claims[ testStatementPropertyIdToDelete ][ 0 ];
+		await entityHelper.deleteProperty( testStatementPropertyIdToDelete );
 
 		const testItemCreationMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 		testLastModified = testItemCreationMetadata.timestamp;

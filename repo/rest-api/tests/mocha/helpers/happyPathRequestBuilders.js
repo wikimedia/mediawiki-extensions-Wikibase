@@ -18,18 +18,18 @@ module.exports.getRequestsOnItem = [
 ];
 
 module.exports.getRequestsOnProperty = [
-	( { stringPropertyId } ) => rbf.newGetPropertyRequestBuilder( stringPropertyId ),
-	( { stringPropertyId } ) => rbf.newGetPropertyStatementsRequestBuilder( stringPropertyId ),
+	( { propertyId } ) => rbf.newGetPropertyRequestBuilder( propertyId ),
+	( { propertyId } ) => rbf.newGetPropertyStatementsRequestBuilder( propertyId ),
 	( { statementId } ) => rbf.newGetStatementRequestBuilder( statementId ),
-	( { stringPropertyId, statementId } ) => rbf.newGetPropertyStatementRequestBuilder(
-		stringPropertyId,
+	( { propertyId, statementId } ) => rbf.newGetPropertyStatementRequestBuilder(
+		propertyId,
 		statementId
 	)
 ];
 
 module.exports.editRequestsOnProperty = [
-	( { stringPropertyId, statementId, statementPropertyId } ) => rbf.newReplacePropertyStatementRequestBuilder(
-		stringPropertyId,
+	( { propertyId, statementId, statementPropertyId } ) => rbf.newReplacePropertyStatementRequestBuilder(
+		propertyId,
 		statementId,
 		newStatementWithRandomStringValue( statementPropertyId )
 	),
@@ -40,18 +40,18 @@ module.exports.editRequestsOnProperty = [
 ];
 
 module.exports.editRequestsOnItem = [
-	( { itemId, stringPropertyId } ) => rbf.newAddItemStatementRequestBuilder(
+	( { itemId, statementPropertyId } ) => rbf.newAddItemStatementRequestBuilder(
 		itemId,
-		newStatementWithRandomStringValue( stringPropertyId )
+		newStatementWithRandomStringValue( statementPropertyId )
 	),
-	( { itemId, statementId, stringPropertyId } ) => rbf.newReplaceItemStatementRequestBuilder(
+	( { itemId, statementId, statementPropertyId } ) => rbf.newReplaceItemStatementRequestBuilder(
 		itemId,
 		statementId,
-		newStatementWithRandomStringValue( stringPropertyId )
+		newStatementWithRandomStringValue( statementPropertyId )
 	),
-	( { statementId, stringPropertyId } ) => rbf.newReplaceStatementRequestBuilder(
+	( { statementId, statementPropertyId } ) => rbf.newReplaceStatementRequestBuilder(
 		statementId,
-		newStatementWithRandomStringValue( stringPropertyId )
+		newStatementWithRandomStringValue( statementPropertyId )
 	),
 	( { itemId, statementId } ) => rbf.newRemoveItemStatementRequestBuilder( itemId, statementId ),
 	( { statementId } ) => rbf.newRemoveStatementRequestBuilder( statementId ),

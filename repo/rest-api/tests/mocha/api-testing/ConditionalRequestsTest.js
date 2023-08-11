@@ -43,10 +43,10 @@ describe( 'Conditional requests', () => {
 	const propertyRequestInputs = {};
 
 	before( async () => {
-		const propertyId = ( await createUniqueStringProperty() ).entity.id;
+		const statementPropertyId = ( await createUniqueStringProperty() ).entity.id;
 
 		const entityParts = {
-			claims: [ newLegacyStatementWithRandomStringValue( propertyId ) ],
+			claims: [ newLegacyStatementWithRandomStringValue( statementPropertyId ) ],
 			descriptions: { en: { language: 'en', value: `entity-with-statements-${utils.uniq()}` } },
 			labels: { en: { language: 'en', value: `entity-with-statements-${utils.uniq()}` } },
 			aliases: {
@@ -55,18 +55,18 @@ describe( 'Conditional requests', () => {
 		};
 
 		const createItemResponse = await createEntity( 'item', entityParts );
-		itemRequestInputs.stringPropertyId = propertyId;
 		itemRequestInputs.itemId = createItemResponse.entity.id;
-		itemRequestInputs.statementId = createItemResponse.entity.claims[ propertyId ][ 0 ].id;
+		itemRequestInputs.statementId = createItemResponse.entity.claims[ statementPropertyId ][ 0 ].id;
+		itemRequestInputs.statementPropertyId = statementPropertyId;
 		itemRequestInputs.mainTestSubject = itemRequestInputs.itemId;
 		itemRequestInputs.latestRevision = await getLatestEditMetadata( itemRequestInputs.mainTestSubject );
 
 		entityParts.datatype = 'string';
 		const createPropertyResponse = await createEntity( 'property', entityParts );
-		propertyRequestInputs.statementPropertyId = propertyId;
-		propertyRequestInputs.stringPropertyId = createPropertyResponse.entity.id;
-		propertyRequestInputs.statementId = createPropertyResponse.entity.claims[ propertyId ][ 0 ].id;
-		propertyRequestInputs.mainTestSubject = propertyRequestInputs.stringPropertyId;
+		propertyRequestInputs.propertyId = createPropertyResponse.entity.id;
+		propertyRequestInputs.statementId = createPropertyResponse.entity.claims[ statementPropertyId ][ 0 ].id;
+		propertyRequestInputs.statementPropertyId = statementPropertyId;
+		propertyRequestInputs.mainTestSubject = propertyRequestInputs.propertyId;
 		propertyRequestInputs.latestRevision = await getLatestEditMetadata( propertyRequestInputs.mainTestSubject );
 	} );
 	const useRequestInputs = ( requestInputs, newReqBuilder ) => () => newReqBuilder( requestInputs );
@@ -434,7 +434,7 @@ describe( 'Conditional requests', () => {
 					// restore the item state in between tests that removed the statement
 					itemRequestInputs.statementId = ( await newAddItemStatementRequestBuilder(
 						itemRequestInputs.itemId,
-						newStatementWithRandomStringValue( itemRequestInputs.stringPropertyId )
+						newStatementWithRandomStringValue( itemRequestInputs.statementPropertyId )
 					).makeRequest() ).body.id;
 				}
 			} );
