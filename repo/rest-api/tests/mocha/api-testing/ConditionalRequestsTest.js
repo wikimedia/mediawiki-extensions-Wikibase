@@ -12,9 +12,10 @@ const {
 const { newAddItemStatementRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const {
+	editRequestsOnItem,
+	editRequestsOnProperty,
 	getRequestsOnItem,
-	getRequestsOnProperty,
-	editRequestsOnItem
+	getRequestsOnProperty
 } = require( '../helpers/happyPathRequestBuilders' );
 
 function assertValid304Response( response, revisionId ) {
@@ -65,6 +66,7 @@ describe( 'Conditional requests', () => {
 
 		entityParts.datatype = 'string';
 		const createPropertyResponse = await createEntity( 'property', entityParts );
+		propertyRequestInputs.statementPropertyId = propertyId;
 		propertyRequestInputs.stringPropertyId = createPropertyResponse.entity.id;
 		propertyRequestInputs.statementId = createPropertyResponse.entity.claims[ propertyId ][ 0 ].id;
 
@@ -73,13 +75,14 @@ describe( 'Conditional requests', () => {
 	} );
 	const useRequestInputs = ( requestInputs ) => ( newReqBuilder ) => () => newReqBuilder( requestInputs );
 
-	const requestsByEntityType = [
+	const getRequestsByEntityType = [
 		{ requests: getRequestsOnItem.map( useRequestInputs( itemRequestInputs ) ), entityType: 'item' },
 		{ requests: getRequestsOnProperty.map( useRequestInputs( propertyRequestInputs ) ), entityType: 'property' }
 	];
 
-	requestsByEntityType.forEach( ( requestSet ) => {
+	getRequestsByEntityType.forEach( ( requestSet ) => {
 		describe( `${requestSet.entityType} GET requests`, () => {
+
 			before( () => {
 				lastModifiedDate = testCreationMetadata[ requestSet.entityType ].timestamp;
 				latestRevisionId = testCreationMetadata[ requestSet.entityType ].revid;
@@ -338,128 +341,142 @@ describe( 'Conditional requests', () => {
 					} );
 				} );
 			} );
+
 		} );
 	} );
 
-	describe( 'Conditional edit requests', () => {
-		editRequestsOnItem.forEach( ( newRequestBuilder ) => {
-			describe( newRequestBuilder( itemRequestInputs ).getRouteDescription(), () => {
+	const editRequestsByEntityType = [
+		{ requests: editRequestsOnItem.map( useRequestInputs( itemRequestInputs ) ), entityType: 'item' },
+		{ requests: editRequestsOnProperty.map( useRequestInputs( propertyRequestInputs ) ), entityType: 'property' }
+	];
 
-				beforeEach( async () => {
-					const testItemCreationMetadata = await getLatestEditMetadata( itemRequestInputs.itemId );
-					lastModifiedDate = new Date( testItemCreationMetadata.timestamp );
-					latestRevisionId = testItemCreationMetadata.revid;
-				} );
+	editRequestsByEntityType.forEach( ( requestSet ) => {
+		describe( `${requestSet.entityType} edit requests`, () => {
 
-				afterEach( async () => {
-					if ( newRequestBuilder( itemRequestInputs ).getMethod() === 'DELETE' ) {
-						// restore the item state in between tests that removed the statement
-						itemRequestInputs.statementId = ( await newAddItemStatementRequestBuilder(
-							itemRequestInputs.itemId,
-							newStatementWithRandomStringValue( itemRequestInputs.stringPropertyId )
-						).makeRequest() ).body.id;
-					}
-				} );
+			requestSet.requests.forEach( ( newRequestBuilder ) => {
+				describe( newRequestBuilder().getRouteDescription(), () => {
 
-				describe( 'If-Match', () => {
-					it( 'responds with 412 given an outdated revision id', async () => {
-						const response = await newRequestBuilder( itemRequestInputs )
-							.withHeader( 'If-Match', makeEtag( latestRevisionId - 1 ) )
-							.makeRequest();
-
-						assertValid412Response( response );
+					beforeEach( async () => {
+						const testEntityCreationMetadata =
+							( requestSet.entityType === 'item' ) ?
+								await getLatestEditMetadata( itemRequestInputs.itemId ) :
+								await getLatestEditMetadata( propertyRequestInputs.stringPropertyId );
+						lastModifiedDate = new Date( testEntityCreationMetadata.timestamp );
+						latestRevisionId = testEntityCreationMetadata.revid;
 					} );
 
-					it( 'responds with 2xx and makes the edit given the latest revision id', async () => {
-						const response = await newRequestBuilder( itemRequestInputs )
-							.withHeader( 'If-Match', makeEtag( latestRevisionId ) )
-							.makeRequest();
-
-						expect( response ).status.to.be.within( 200, 299 );
-					} );
-				} );
-
-				describe( 'If-Unmodified-Since', () => {
-					it( 'responds with 412 given an outdated last modified date', async () => {
-						const response = await newRequestBuilder( itemRequestInputs )
-							.withHeader( 'If-Unmodified-Since', 'Wed, 27 Jul 2022 08:24:29 GMT' )
-							.makeRequest();
-
-						assertValid412Response( response );
+					afterEach( async () => {
+						if ( newRequestBuilder().getMethod() === 'DELETE' ) {
+							// restore the item state in between tests that removed the statement
+							itemRequestInputs.statementId = ( await newAddItemStatementRequestBuilder(
+								itemRequestInputs.itemId,
+								newStatementWithRandomStringValue( itemRequestInputs.stringPropertyId )
+							).makeRequest() ).body.id;
+						}
 					} );
 
-					it( 'responds with 2xx and makes the edit given the latest modified date', async () => {
-						const response = await newRequestBuilder( itemRequestInputs )
-							.withHeader( 'If-Unmodified-Since', lastModifiedDate )
-							.makeRequest();
-
-						expect( response ).status.to.be.within( 200, 299 );
-					} );
-				} );
-
-				describe( 'If-None-Match', () => {
-					it( 'responds 2xx if the header does not match the current revision id', async () => {
-						const response = await newRequestBuilder( itemRequestInputs )
-							.assertValidRequest()
-							.withHeader( 'If-None-Match', makeEtag( latestRevisionId - 1 ) )
-							.makeRequest();
-
-						expect( response ).status.to.be.within( 200, 299 );
-					} );
-
-					describe( '412 response', () => {
-						it( 'If-None-Match header is same as current revision', async () => {
-							const response = await newRequestBuilder( itemRequestInputs )
-								.assertValidRequest()
-								.withHeader( 'If-None-Match', makeEtag( latestRevisionId ) )
+					describe( 'If-Match', () => {
+						it( 'responds with 412 given an outdated revision id', async () => {
+							const response = await newRequestBuilder()
+								.withHeader( 'If-Match', makeEtag( latestRevisionId - 1 ) )
 								.makeRequest();
 
 							assertValid412Response( response );
 						} );
 
-						it( 'If-None-Match header is a wildcard', async () => {
-							const response = await newRequestBuilder( itemRequestInputs )
-								.withHeader( 'If-None-Match', '*' )
+						it( 'responds with 2xx and makes the edit given the latest revision id', async () => {
+							const response = await newRequestBuilder()
+								.withHeader( 'If-Match', makeEtag( latestRevisionId ) )
+								.makeRequest();
+
+							expect( response ).status.to.be.within( 200, 299 );
+						} );
+					} );
+
+					describe( 'If-Unmodified-Since', () => {
+						it( 'responds with 412 given an outdated last modified date', async () => {
+							const response = await newRequestBuilder()
+								.withHeader( 'If-Unmodified-Since', 'Wed, 27 Jul 2022 08:24:29 GMT' )
 								.makeRequest();
 
 							assertValid412Response( response );
 						} );
-					} );
-				} );
 
-				describe( 'If-Modified-Since', () => {
-					describe( 'header ignored - 2xx response', () => {
-						it( 'If-Modified-Since header is same as current revision', async () => {
-							const response = await newRequestBuilder( itemRequestInputs )
-								.assertValidRequest()
-								.withHeader( 'If-Modified-Since', lastModifiedDate )
-								.makeRequest();
-
-							expect( response ).status.to.be.within( 200, 299 );
-						} );
-
-						it( 'If-Modified-Since header is after current revision', async () => {
-							const tomorrow = new Date( Date.now() + 24 * 60 * 60 * 1000 ).toUTCString();
-							const response = await newRequestBuilder( itemRequestInputs )
-								.assertValidRequest()
-								.withHeader( 'If-Modified-Since', tomorrow )
-								.makeRequest();
-
-							expect( response ).status.to.be.within( 200, 299 );
-						} );
-
-						it( 'If-Modified-Since header is before the current revision', async () => {
-							const yesterday = new Date( Date.now() - 24 * 60 * 60 * 1000 ).toUTCString();
-							const response = await newRequestBuilder( itemRequestInputs )
-								.assertValidRequest()
-								.withHeader( 'If-Modified-Since', yesterday )
+						it( 'responds with 2xx and makes the edit given the latest modified date', async () => {
+							const response = await newRequestBuilder()
+								.withHeader( 'If-Unmodified-Since', lastModifiedDate )
 								.makeRequest();
 
 							expect( response ).status.to.be.within( 200, 299 );
 						} );
 					} );
+
+					describe( 'If-None-Match', () => {
+						it( 'responds 2xx if the header does not match the current revision id', async () => {
+							const response = await newRequestBuilder()
+								.assertValidRequest()
+								.withHeader( 'If-None-Match', makeEtag( latestRevisionId - 1 ) )
+								.makeRequest();
+
+							expect( response ).status.to.be.within( 200, 299 );
+						} );
+
+						describe( '412 response', () => {
+							it( 'If-None-Match header is same as current revision', async () => {
+								const response = await newRequestBuilder()
+									.assertValidRequest()
+									.withHeader( 'If-None-Match', makeEtag( latestRevisionId ) )
+									.makeRequest();
+
+								assertValid412Response( response );
+							} );
+
+							it( 'If-None-Match header is a wildcard', async () => {
+								const response = await newRequestBuilder()
+									.withHeader( 'If-None-Match', '*' )
+									.makeRequest();
+
+								assertValid412Response( response );
+							} );
+						} );
+					} );
+
+					describe( 'If-Modified-Since', () => {
+						describe( 'header ignored - 2xx response', () => {
+							it( 'If-Modified-Since header is same as current revision', async () => {
+								const response = await newRequestBuilder()
+									.assertValidRequest()
+									.withHeader( 'If-Modified-Since', lastModifiedDate )
+									.makeRequest();
+
+								expect( response ).status.to.be.within( 200, 299 );
+							} );
+
+							it( 'If-Modified-Since header is after current revision', async () => {
+								const tomorrow = new Date( Date.now() + 24 * 60 * 60 * 1000 ).toUTCString();
+								const response = await newRequestBuilder()
+									.assertValidRequest()
+									.withHeader( 'If-Modified-Since', tomorrow )
+									.makeRequest();
+
+								expect( response ).status.to.be.within( 200, 299 );
+							} );
+
+							it( 'If-Modified-Since header is before the current revision', async () => {
+								const yesterday = new Date( Date.now() - 24 * 60 * 60 * 1000 ).toUTCString();
+								const response = await newRequestBuilder()
+									.assertValidRequest()
+									.withHeader( 'If-Modified-Since', yesterday )
+									.makeRequest();
+
+								expect( response ).status.to.be.within( 200, 299 );
+							} );
+						} );
+					} );
+
 				} );
 			} );
+
 		} );
 	} );
 

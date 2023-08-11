@@ -131,6 +131,14 @@ module.exports = {
 			.withJsonBodyParam( 'statement', statement );
 	},
 
+	newReplacePropertyStatementRequestBuilder( propertyId, statementId, statement ) {
+		return new RequestBuilder()
+			.withRoute( 'PUT', '/entities/properties/{property_id}/statements/{statement_id}' )
+			.withPathParam( 'property_id', propertyId )
+			.withPathParam( 'statement_id', statementId )
+			.withJsonBodyParam( 'statement', statement );
+	},
+
 	newReplaceStatementRequestBuilder( statementId, statement ) {
 		return new RequestBuilder()
 			.withRoute( 'PUT', '/statements/{statement_id}' )

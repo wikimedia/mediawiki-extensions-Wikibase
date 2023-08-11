@@ -9,6 +9,7 @@ const {
 } = require( '../helpers/entityHelper' );
 const {
 	editRequestsOnItem,
+	editRequestsOnProperty,
 	getRequestsOnItem,
 	getRequestsOnProperty
 } = require( '../helpers/happyPathRequestBuilders' );
@@ -39,6 +40,7 @@ describe( 'User-Agent requests', () => {
 			[ newLegacyStatementWithRandomStringValue( propertyId ) ],
 			'property'
 		);
+		propertyRequestInputs.statementPropertyId = propertyId;
 		propertyRequestInputs.stringPropertyId = createPropertyResponse.entity.id;
 		propertyRequestInputs.statementId = createPropertyResponse.entity.claims[ propertyId ][ 0 ].id;
 	} );
@@ -46,9 +48,10 @@ describe( 'User-Agent requests', () => {
 	const useRequestInputs = ( requestInputs ) => ( newReqBuilder ) => () => newReqBuilder( requestInputs );
 
 	[
+		...editRequestsOnItem.map( useRequestInputs( itemRequestInputs ) ),
+		...editRequestsOnProperty.map( useRequestInputs( propertyRequestInputs ) ),
 		...getRequestsOnItem.map( useRequestInputs( itemRequestInputs ) ),
-		...getRequestsOnProperty.map( useRequestInputs( propertyRequestInputs ) ),
-		...editRequestsOnItem.map( useRequestInputs( itemRequestInputs ) )
+		...getRequestsOnProperty.map( useRequestInputs( propertyRequestInputs ) )
 	].forEach( ( newRequestBuilder ) => {
 		describe( newRequestBuilder().getRouteDescription(), () => {
 

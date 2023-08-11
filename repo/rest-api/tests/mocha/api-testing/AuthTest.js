@@ -13,6 +13,7 @@ const {
 const { requireExtensions } = require( '../../../../../tests/api-testing/utils' );
 const {
 	editRequestsOnItem,
+	editRequestsOnProperty,
 	getRequestsOnItem,
 	getRequestsOnProperty
 } = require( '../helpers/happyPathRequestBuilders' );
@@ -45,6 +46,7 @@ describe( 'Auth', () => {
 		const createPropertyResponse = await createEntity( 'property', entityParts );
 		propertyRequestInputs.stringPropertyId = createPropertyResponse.entity.id;
 		propertyRequestInputs.statementId = createPropertyResponse.entity.claims[ propertyId ][ 0 ].id;
+		propertyRequestInputs.statementPropertyId = propertyId;
 
 		user = await action.mindy();
 	} );
@@ -52,9 +54,10 @@ describe( 'Auth', () => {
 	const useRequestInputs = ( requestInputs ) => ( newReqBuilder ) => () => newReqBuilder( requestInputs );
 
 	[
+		...editRequestsOnItem.map( useRequestInputs( itemRequestInputs ) ),
+		...editRequestsOnProperty.map( useRequestInputs( propertyRequestInputs ) ),
 		...getRequestsOnItem.map( useRequestInputs( itemRequestInputs ) ),
-		...getRequestsOnProperty.map( useRequestInputs( propertyRequestInputs ) ),
-		...editRequestsOnItem.map( useRequestInputs( itemRequestInputs ) )
+		...getRequestsOnProperty.map( useRequestInputs( propertyRequestInputs ) )
 	].forEach( ( newRequestBuilder ) => {
 		describe( `Authentication - ${newRequestBuilder().getRouteDescription()}`, () => {
 
