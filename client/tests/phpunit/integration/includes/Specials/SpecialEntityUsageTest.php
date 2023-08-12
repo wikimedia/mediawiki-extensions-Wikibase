@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Tests\Integration\Specials;
 
-use LanguageQqx;
 use MediaWiki\Languages\LanguageConverterFactory;
 use MediaWiki\MediaWikiServices;
 use SpecialPageTestBase;
@@ -68,13 +67,14 @@ class SpecialEntityUsageTest extends SpecialPageTestBase {
 	}
 
 	private function languageConverterFactory(): LanguageConverterFactory {
+		$lang = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'qqx' );
 		$languageConverterFactory = $this
 			->getMockBuilder( LanguageConverterFactory::class )
 			->disableOriginalConstructor()
 			->onlyMethods( [ 'getLanguageConverter' ] )
 			->getMock();
 		$languageConverterFactory->method( 'getLanguageConverter' )
-			->willReturn( new TrivialLanguageConverter( new LanguageQqx() ) );
+			->willReturn( new TrivialLanguageConverter( $lang ) );
 
 		return $languageConverterFactory;
 	}

@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Tests\Formatters;
 
 use DataValues\DataValue;
 use DataValues\StringValue;
-use LanguageQqx;
 use MediaWiki\MediaWikiServices;
 use Message;
 use ValueFormatters\FormatterOptions;
@@ -45,6 +44,7 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 			},
 		];
 
+		$languageFactory = MediaWikiServices::getInstance()->getLanguageFactory();
 		$valueFormatterCallbacks = [
 			'VT:string' => function( $format, FormatterOptions $options ) {
 				return $this->makeMockValueFormatter( $format );
@@ -52,7 +52,7 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 		];
 		$valueFormatterFactory = new OutputFormatValueFormatterFactory(
 			$valueFormatterCallbacks,
-			MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'en' ),
+			$languageFactory->getLanguage( 'en' ),
 			new LanguageFallbackChainFactory()
 		);
 
@@ -62,9 +62,9 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 
 		$messageInLanguageProvider = $this->createMock( MessageInLanguageProvider::class );
 		$messageInLanguageProvider->method( 'msgInLang' )
-			->willReturnCallback( function ( $key, $lang, ...$params ) {
+			->willReturnCallback( function ( $key, $lang, ...$params ) use ( $languageFactory ) {
 				// ignore $lang, always use qqx
-				return new Message( $key, $params, new LanguageQqx() );
+				return new Message( $key, $params, $languageFactory->getLanguage( 'qqx' ) );
 			} );
 
 		return new OutputFormatSnakFormatterFactory(
