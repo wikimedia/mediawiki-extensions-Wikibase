@@ -14,6 +14,7 @@
 	"wikibase-add": "adjuntar",
 	"wikibase-addqualifier": "adjuntez qualifiko",
 	"wikibase-addreference": "inkluzez refero",
+	"wikibase-save-inprogress": "Konservado en progreso...",
 	"wikibase-statementlistview-add": "adjuntez valoro",
 	"wikibase-statementgrouplistview-add": "adjuntez deklaro",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "En altra lingui",

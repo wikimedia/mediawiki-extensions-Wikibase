@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"CrownedWharf566",
 			"Diskdance",
 			"GuoPC",
 			"Liuxinyu970226",
@@ -49,7 +50,7 @@
 	"apihelp-query+wikibase-example": "获取有关Wikibase客户端和仓库的URL路径和其他信息。",
 	"apihelp-query+wikibase-param-prop": "要获取的属性：",
 	"apihelp-query+wikibase-paramvalue-prop-url": "Base URL，Wikibase仓库的脚本路径和条目路径。",
-	"apihelp-query+wikibase-paramvalue-prop-siteid": "网站的siteid。",
+	"apihelp-query+wikibase-paramvalue-prop-siteid": "该站点的 siteid。",
 	"apihelp-wbformatreference-summary": "格式化参考文献以显示给用户。",
 	"apihelp-wbformatreference-example-1": "使用数据桥样式将空参考文献格式化为HTML。",
 	"apihelp-wbformatreference-example-2": "使用数据桥样式将包含一个字符串的引用格式化为HTML。",

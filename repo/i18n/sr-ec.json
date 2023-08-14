@@ -123,6 +123,7 @@
 	"wikibase-snakview-snaktypeselector-value": "прилагођена вредност",
 	"wikibase-snakformat-invalid-value": "Погрешна вредност.",
 	"wikibase-snakformat-propertynotfound": "Својство није пронађено.",
+	"wikibase-shortcopyrightwarning-minimal": "Кликом на „$1” прихватате [[$2|услове коришћења]].",
 	"wikibase-shortcopyrightwarning": "Кликом на „$1” прихватате [[$2|услове коришћења]] и неопозиво се слажете да свој допринос објавите под лиценцом [$3 $4].",
 	"wikibase-shortcopyrightwarning-accept-persist": "Прихватам ове услове за своје будуће измене. Не приказуј ову поруку поново.",
 	"wikibase-copyrighttooltip-acknowledge": "Прихватам ове услове за своје будуће измене. Не приказуј ову поруку поново.",
