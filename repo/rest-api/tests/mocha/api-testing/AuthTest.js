@@ -7,7 +7,7 @@ const {
 	createUniqueStringProperty,
 	newStatementWithRandomStringValue,
 	newLegacyStatementWithRandomStringValue,
-	changeItemProtectionStatus,
+	changeEntityProtectionStatus,
 	createEntity
 } = require( '../helpers/entityHelper' );
 const { requireExtensions } = require( '../../../../../tests/api-testing/utils' );
@@ -39,12 +39,14 @@ describe( 'Auth', () => {
 
 		const createItemResponse = await createEntity( 'item', entityParts );
 		itemRequestInputs.itemId = createItemResponse.entity.id;
+		itemRequestInputs.mainTestSubject = itemRequestInputs.itemId;
 		itemRequestInputs.statementId = createItemResponse.entity.claims[ statementPropertyId ][ 0 ].id;
 		itemRequestInputs.statementPropertyId = statementPropertyId;
 
 		entityParts.datatype = 'string';
 		const createPropertyResponse = await createEntity( 'property', entityParts );
 		propertyRequestInputs.propertyId = createPropertyResponse.entity.id;
+		propertyRequestInputs.mainTestSubject = propertyRequestInputs.propertyId;
 		propertyRequestInputs.statementId = createPropertyResponse.entity.claims[ statementPropertyId ][ 0 ].id;
 		propertyRequestInputs.statementPropertyId = statementPropertyId;
 
@@ -100,14 +102,24 @@ describe( 'Auth', () => {
 			assert.strictEqual( response.body.error, 'rest-write-denied' );
 		}
 
-		editRequestsOnItem.map( useRequestInputs( itemRequestInputs ) ).forEach( ( newRequestBuilder ) => {
-			describe( 'Protected item', () => {
+		[
+			...editRequestsOnItem.map( ( newRequestBuilder ) => ( {
+				newRequestBuilder,
+				requestInputs: itemRequestInputs
+			} ) ),
+			...editRequestsOnProperty.map( ( newRequestBuilder ) => ( {
+				newRequestBuilder,
+				requestInputs: propertyRequestInputs
+			} ) )
+		].forEach( ( { newRequestBuilder, requestInputs } ) => {
+			newRequestBuilder = useRequestInputs( requestInputs )( newRequestBuilder );
+			describe( 'Protected entity page', () => {
 				before( async () => {
-					await changeItemProtectionStatus( itemRequestInputs.itemId, 'sysop' ); // protect
+					await changeEntityProtectionStatus( requestInputs.mainTestSubject, 'sysop' ); // protect
 				} );
 
 				after( async () => {
-					await changeItemProtectionStatus( itemRequestInputs.itemId, 'all' ); // unprotect
+					await changeEntityProtectionStatus( requestInputs.mainTestSubject, 'all' ); // unprotect
 				} );
 
 				it( `Permission denied - ${newRequestBuilder().getRouteDescription()}`, async () => {

@@ -86,10 +86,11 @@ async function getLatestEditMetadata( entityId ) {
 	};
 }
 
-async function changeItemProtectionStatus( itemId, allowedUserGroup ) {
+async function changeEntityProtectionStatus( entityId, allowedUserGroup ) {
 	const mindy = await action.mindy();
+	const pageNamespace = entityId.startsWith( 'Q' ) ? 'Item' : 'Property';
 	await mindy.action( 'protect', {
-		title: `Item:${itemId}`,
+		title: `${pageNamespace}:${entityId}`,
 		token: await mindy.token(),
 		protections: `edit=${allowedUserGroup}`,
 		expiry: 'infinite'
@@ -139,7 +140,7 @@ module.exports = {
 	createUniqueStringProperty,
 	createRedirectForItem,
 	getLatestEditMetadata,
-	changeItemProtectionStatus,
+	changeEntityProtectionStatus,
 	newStatementWithRandomStringValue,
 	newLegacyStatementWithRandomStringValue
 };
