@@ -6,6 +6,7 @@
 		]
 	},
 	"wikibase-entity": "Ento",
+	"wikibase-entity-property": "Atributo",
 	"wikibase-edit": "redaktar",
 	"wikibase-save": "konservar",
 	"wikibase-publish": "publikigar",
@@ -46,6 +47,7 @@
 	"wikibase-propertypage-datatype": "Tipo di dato",
 	"wikibase-statementview-rank-normal": "Normala rango",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|refero|referi}}",
+	"wikibase-snakview-property-input-placeholder": "Proprajo",
 	"wikibase-shortcopyrightwarning-accept-persist": "Me aceptas ca termini por futura redakturi. Ne montrez itere ca mesajo.",
 	"wikibase-copyrighttooltip-acknowledge": "Me aceptas ca termini por futura redakturi. Ne montrez ca mesajo pluse.",
 	"wikibase-entityselector-more": "pluse",
@@ -79,7 +81,11 @@
 	"wikibase-entity-summary-restore": "Restaurar revizuro $3 da [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-entity-summary-undo": "Desfacar revizo $3 da [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|skribar mesajo]])",
 	"wikibase-noentity": "Ca ento ne existas. Vu povas [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} searchar l'etiketi asociita] por deskovrar ube ol povas renkontresar.",
+	"wikibase-listdatatypes-wikibase-property-head": "Atributo",
+	"wikibase-listdatatypes-monolingualtext-head": "Singlalinguala texto",
+	"wikibase-listdatatypes-multilingualtext-head": "Pluralinguala texto",
 	"wikibase-listdatatypes-time-head": "Horo",
+	"datatypes-type-url": "URL",
 	"wikibase-pageinfo-subscription-none": "Nula",
 	"wikibase-entity-save-error-heading": "Ulu faliis",
 	"wikibase-federated-properties-leaving-site-notice-cancel": "Nuligar"

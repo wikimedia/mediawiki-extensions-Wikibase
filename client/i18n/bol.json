@@ -8,8 +8,10 @@
 	"wikibase-editlinks": "Rama goggo gwamo",
 	"wikibase-linkitem-addlinks": "Sauwi goggo gwamo",
 	"wikibase-linkitem-title": "Gwanto ga shafi",
+	"wikibase-linkitem-linkpage": "Gwanti page 'yame",
 	"wikibase-linkitem-selectlink": "Nko Allah zaɓi yanar gizo shafi ga yalla ma dolan ma ayi gwanto ye",
 	"wikibase-linkitem-input-site": "bòo:",
 	"wikibase-linkitem-input-page": "Ngafe:",
-	"wikibase-rc-hide-wikidata-hide": "Bunko"
+	"wikibase-rc-hide-wikidata-hide": "Bunko",
+	"wikibase-rc-hide-wikidata-show": "'yawe"
 }

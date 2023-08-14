@@ -7,11 +7,11 @@
 			"Patriot Kor"
 		]
 	},
-	"tooltip-t-wikibase": "Link bə elementon repozitoriyə rımuz",
-	"wikibase-comment-update": "{{WBREPONAME}} елемент овахтә бе",
+	"tooltip-t-wikibase": "Link bə elementon repozitorijə məlumot",
+	"wikibase-comment-update": "{{WBREPONAME}} element ovaxtə byə",
 	"wikibase-dataitem": "{{WBREPONAME}} element",
 	"wikibase-editlinks": "Linkon sərost karde",
-	"wikibase-editlinkstitle": "Че зывонарә линкон сәрост быкә",
+	"wikibase-editlinkstitle": "Bə čo zyvonon linkon sərost karde",
 	"wikibase-linkitem-addlinks": "Linkon əlovəkə",
 	"wikibase-linkitem-title": "De səhifə əloǧəjn karde",
 	"wikibase-linkitem-linkpage": "De səhifə əloǧəjn karde",
@@ -21,8 +21,8 @@
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Nijo karde",
 	"wikibase-rc-hide-wikidata-show": "Nišo doj",
-	"wikibase-rc-wikibase-edit-letter": "Д",
+	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} redaktə kardə",
 	"wikibase-otherprojects": "Čo naxšonədə",
-	"wikibase-client-data-bridge-references-heading": "Ğeydon"
+	"wikibase-client-data-bridge-references-heading": "Ǧejdon"
 }
