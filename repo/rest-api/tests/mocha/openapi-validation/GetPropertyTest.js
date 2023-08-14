@@ -6,7 +6,7 @@ const entityHelper = require( '../helpers/entityHelper' );
 const { newGetPropertyRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
 async function createPropertyWithAllFields() {
-	const stringPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+	const statementPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
 
 	return entityHelper.createEntity( 'property', {
 		labels: { en: { language: 'en', value: `non-empty-string-property-${utils.uniq()}` } },
@@ -17,28 +17,28 @@ async function createPropertyWithAllFields() {
 			{ // with value, without qualifiers or references
 				mainsnak: {
 					snaktype: 'value',
-					property: stringPropertyId,
+					property: statementPropertyId,
 					datavalue: { value: 'im a statement value', type: 'string' }
 				}, type: 'statement', rank: 'normal'
 			},
 			{ // no value, with qualifier and reference
 				mainsnak: {
 					snaktype: 'novalue',
-					property: stringPropertyId
+					property: statementPropertyId
 				},
 				type: 'statement',
 				rank: 'normal',
 				qualifiers: [
 					{
 						snaktype: 'value',
-						property: stringPropertyId,
+						property: statementPropertyId,
 						datavalue: { value: 'im a qualifier value', type: 'string' }
 					}
 				],
 				references: [ {
 					snaks: [ {
 						snaktype: 'value',
-						property: stringPropertyId,
+						property: statementPropertyId,
 						datavalue: { value: 'im a reference value', type: 'string' }
 					} ]
 				} ]

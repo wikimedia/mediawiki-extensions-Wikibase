@@ -16,6 +16,7 @@ describe( newGetPropertyRequestBuilder().getRouteDescription(), () => {
 	const englishLabel = 'an-English-label-' + utils.uniq();
 	const englishDescription = 'an-English-description-' + utils.uniq();
 	const testPropertyDataType = 'wikibase-item';
+
 	let testPropertyId;
 	let testStatementPropertyId;
 	let testModified;

@@ -31,20 +31,21 @@ function assertValid404Response( response, responseBodyErrorCode ) {
 
 describe( 'PATCH statement tests', () => {
 	let testItemId;
-	let testPropertyId;
 	let testStatement;
 	let testStatementId;
 	let previousLastModified;
 	let previousEtag;
 
 	before( async function () {
-		testPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
 		testItemId = ( await entityHelper.createItemWithStatements( [] ) ).entity.id;
 
 		const addStatementResponse = await newAddItemStatementRequestBuilder(
 			testItemId,
-			entityHelper.newStatementWithRandomStringValue( testPropertyId )
+			entityHelper.newStatementWithRandomStringValue(
+				( await entityHelper.createUniqueStringProperty() ).entity.id
+			)
 		).assertValidRequest().makeRequest();
+
 		expect( addStatementResponse ).to.have.status( 201 );
 		testStatement = addStatementResponse.body;
 		testStatementId = testStatement.id;

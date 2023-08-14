@@ -21,7 +21,7 @@ describe( 'GET /entities/items/{id}', () => {
 	let testModified;
 	let testRevisionId;
 	let siteId;
-	let testPropertyId;
+	let testStatementPropertyId;
 	let testStatement;
 	const linkedArticle = utils.title( 'Article-linked-to-test-item' );
 
@@ -36,8 +36,8 @@ describe( 'GET /entities/items/{id}', () => {
 		) ).siteid;
 		await action.getAnon().edit( linkedArticle, { text: 'sitelink test' } );
 
-		testPropertyId = ( await createUniqueStringProperty() ).entity.id;
-		testStatement = newLegacyStatementWithRandomStringValue( testPropertyId );
+		testStatementPropertyId = ( await createUniqueStringProperty() ).entity.id;
+		testStatement = newLegacyStatementWithRandomStringValue( testStatementPropertyId );
 
 		const createItemResponse = await createEntity( 'item', {
 			labels: {
@@ -76,7 +76,7 @@ describe( 'GET /entities/items/{id}', () => {
 		assert.deepEqual( response.body.descriptions, { en: englishDescription } );
 
 		assert.strictEqual(
-			response.body.statements[ testPropertyId ][ 0 ].value.content,
+			response.body.statements[ testStatementPropertyId ][ 0 ].value.content,
 			testStatement.mainsnak.datavalue.value
 		);
 

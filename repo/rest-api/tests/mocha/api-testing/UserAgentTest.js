@@ -26,23 +26,23 @@ describe( 'User-Agent requests', () => {
 	const propertyRequestInputs = {};
 
 	before( async () => {
-		const propertyId = ( await createUniqueStringProperty() ).entity.id;
+		const statementPropertyId = ( await createUniqueStringProperty() ).entity.id;
 
 		const createItemResponse = await createEntityWithStatements(
-			[ newLegacyStatementWithRandomStringValue( propertyId ) ],
+			[ newLegacyStatementWithRandomStringValue( statementPropertyId ) ],
 			'item'
 		);
-		itemRequestInputs.stringPropertyId = propertyId;
 		itemRequestInputs.itemId = createItemResponse.entity.id;
-		itemRequestInputs.statementId = createItemResponse.entity.claims[ propertyId ][ 0 ].id;
+		itemRequestInputs.statementId = createItemResponse.entity.claims[ statementPropertyId ][ 0 ].id;
+		itemRequestInputs.statementPropertyId = statementPropertyId;
 
 		const createPropertyResponse = await createEntityWithStatements(
-			[ newLegacyStatementWithRandomStringValue( propertyId ) ],
+			[ newLegacyStatementWithRandomStringValue( statementPropertyId ) ],
 			'property'
 		);
-		propertyRequestInputs.statementPropertyId = propertyId;
-		propertyRequestInputs.stringPropertyId = createPropertyResponse.entity.id;
-		propertyRequestInputs.statementId = createPropertyResponse.entity.claims[ propertyId ][ 0 ].id;
+		propertyRequestInputs.propertyId = createPropertyResponse.entity.id;
+		propertyRequestInputs.statementId = createPropertyResponse.entity.claims[ statementPropertyId ][ 0 ].id;
+		propertyRequestInputs.statementPropertyId = statementPropertyId;
 	} );
 
 	const useRequestInputs = ( requestInputs ) => ( newReqBuilder ) => () => newReqBuilder( requestInputs );

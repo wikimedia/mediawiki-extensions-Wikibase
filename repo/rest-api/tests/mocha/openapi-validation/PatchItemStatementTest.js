@@ -14,15 +14,15 @@ const {
 describe( 'validate PATCH endpoints against OpenAPI definition', () => {
 	let testItemId;
 	let testStatementId;
-	let stringPropertyId;
+	let statementPropertyId;
 
 	before( async function () {
-		stringPropertyId = ( await createUniqueStringProperty() ).entity.id;
+		statementPropertyId = ( await createUniqueStringProperty() ).entity.id;
 		const createEntityResponse = await createItemWithStatements( [
-			newLegacyStatementWithRandomStringValue( stringPropertyId )
+			newLegacyStatementWithRandomStringValue( statementPropertyId )
 		] );
 		testItemId = createEntityResponse.entity.id;
-		testStatementId = createEntityResponse.entity.claims[ stringPropertyId ][ 0 ].id;
+		testStatementId = createEntityResponse.entity.claims[ statementPropertyId ][ 0 ].id;
 	} );
 
 	[

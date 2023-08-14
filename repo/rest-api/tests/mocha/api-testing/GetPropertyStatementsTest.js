@@ -13,8 +13,8 @@ describe( 'GET /entities/properties/{id}/statements', () => {
 
 	let propertyId;
 
-	let testPropertyId1;
-	let testPropertyId2;
+	let testStatementPropertyId1;
+	let testStatementPropertyId2;
 
 	let testStatements;
 
@@ -22,13 +22,13 @@ describe( 'GET /entities/properties/{id}/statements', () => {
 	let testRevisionId;
 
 	before( async () => {
-		testPropertyId1 = ( await createUniqueStringProperty() ).entity.id;
-		testPropertyId2 = ( await createUniqueStringProperty() ).entity.id;
+		testStatementPropertyId1 = ( await createUniqueStringProperty() ).entity.id;
+		testStatementPropertyId2 = ( await createUniqueStringProperty() ).entity.id;
 
 		testStatements = [
-			newLegacyStatementWithRandomStringValue( testPropertyId1 ),
-			newLegacyStatementWithRandomStringValue( testPropertyId1 ),
-			newLegacyStatementWithRandomStringValue( testPropertyId2 )
+			newLegacyStatementWithRandomStringValue( testStatementPropertyId1 ),
+			newLegacyStatementWithRandomStringValue( testStatementPropertyId1 ),
+			newLegacyStatementWithRandomStringValue( testStatementPropertyId2 )
 		];
 
 		testStatements.forEach( ( statement ) => {
@@ -53,13 +53,13 @@ describe( 'GET /entities/properties/{id}/statements', () => {
 			.makeRequest();
 
 		expect( response ).to.have.status( 200 );
-		assert.exists( response.body[ testPropertyId1 ] );
+		assert.exists( response.body[ testStatementPropertyId1 ] );
 		assert.equal(
-			response.body[ testPropertyId1 ][ 0 ].value.content,
+			response.body[ testStatementPropertyId1 ][ 0 ].value.content,
 			testStatements[ 0 ].mainsnak.datavalue.value
 		);
 		assert.equal(
-			response.body[ testPropertyId1 ][ 1 ].value.content,
+			response.body[ testStatementPropertyId1 ][ 1 ].value.content,
 			testStatements[ 1 ].mainsnak.datavalue.value
 		);
 		assert.equal( response.header[ 'last-modified' ], testModified );
@@ -69,13 +69,13 @@ describe( 'GET /entities/properties/{id}/statements', () => {
 
 	it( 'can filter statements by property', async () => {
 		const response = await newGetPropertyStatementsRequestBuilder( propertyId )
-			.withQueryParam( 'property', testPropertyId1 )
+			.withQueryParam( 'property', testStatementPropertyId1 )
 			.assertValidRequest()
 			.makeRequest();
 
 		expect( response ).to.have.status( 200 );
-		assert.deepEqual( Object.keys( response.body ), [ testPropertyId1 ] );
-		assert.strictEqual( response.body[ testPropertyId1 ].length, 2 );
+		assert.deepEqual( Object.keys( response.body ), [ testStatementPropertyId1 ] );
+		assert.strictEqual( response.body[ testStatementPropertyId1 ].length, 2 );
 	} );
 
 	it( 'can GET empty statements list', async () => {

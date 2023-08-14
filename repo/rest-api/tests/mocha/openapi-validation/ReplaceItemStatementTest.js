@@ -16,15 +16,15 @@ describe( 'validate PUT endpoints against OpenAPI definition', () => {
 
 	let testItemId;
 	let testStatementId;
-	let stringPropertyId;
+	let statementPropertyId;
 
 	before( async () => {
-		stringPropertyId = ( await createUniqueStringProperty() ).entity.id;
+		statementPropertyId = ( await createUniqueStringProperty() ).entity.id;
 		const createItemResponse = await createItemWithStatements( [
-			newLegacyStatementWithRandomStringValue( stringPropertyId )
+			newLegacyStatementWithRandomStringValue( statementPropertyId )
 		] );
 		testItemId = createItemResponse.entity.id;
-		testStatementId = createItemResponse.entity.claims[ stringPropertyId ][ 0 ].id;
+		testStatementId = createItemResponse.entity.claims[ statementPropertyId ][ 0 ].id;
 	} );
 
 	[
@@ -36,7 +36,7 @@ describe( 'validate PUT endpoints against OpenAPI definition', () => {
 			it( '200', async () => {
 				const response = await newReplaceRequestBuilder(
 					testStatementId,
-					newStatementWithRandomStringValue( stringPropertyId )
+					newStatementWithRandomStringValue( statementPropertyId )
 				).makeRequest();
 
 				expect( response ).to.have.status( 200 );
@@ -56,7 +56,7 @@ describe( 'validate PUT endpoints against OpenAPI definition', () => {
 			it( '404 - statement does not exist', async () => {
 				const response = await newReplaceRequestBuilder(
 					`${testItemId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`,
-					newStatementWithRandomStringValue( stringPropertyId )
+					newStatementWithRandomStringValue( statementPropertyId )
 				).makeRequest();
 
 				expect( response ).to.have.status( 404 );
@@ -67,7 +67,7 @@ describe( 'validate PUT endpoints against OpenAPI definition', () => {
 				const yesterday = new Date( Date.now() - 24 * 60 * 60 * 1000 ).toUTCString();
 				const response = await newReplaceRequestBuilder(
 					testStatementId,
-					newStatementWithRandomStringValue( stringPropertyId )
+					newStatementWithRandomStringValue( statementPropertyId )
 				)
 					.withHeader( 'If-Unmodified-Since', yesterday )
 					.makeRequest();
@@ -79,7 +79,7 @@ describe( 'validate PUT endpoints against OpenAPI definition', () => {
 			it( '415 - unsupported media type', async () => {
 				const response = await newReplaceRequestBuilder(
 					testStatementId,
-					newStatementWithRandomStringValue( stringPropertyId )
+					newStatementWithRandomStringValue( statementPropertyId )
 				)
 					.withHeader( 'Content-Type', 'text/plain' )
 					.makeRequest();

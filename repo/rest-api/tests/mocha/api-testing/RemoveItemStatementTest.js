@@ -14,11 +14,11 @@ const {
 describe( 'DELETE statement', () => {
 
 	let testItemId;
-	let testPropertyId;
+	let testStatementPropertyId;
 
 	before( async () => {
 		testItemId = ( await entityHelper.createEntity( 'item', {} ) ).entity.id;
-		testPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+		testStatementPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
 	} );
 
 	[
@@ -30,10 +30,10 @@ describe( 'DELETE statement', () => {
 			describe( '200 success response', () => {
 				let testStatement;
 
-				async function addStatementWithRandomStringValue( itemId, propertyId ) {
+				async function addStatementWithRandomStringValue( itemId, statementPropertyId ) {
 					return ( await newAddItemStatementRequestBuilder(
 						itemId,
-						entityHelper.newStatementWithRandomStringValue( propertyId )
+						entityHelper.newStatementWithRandomStringValue( statementPropertyId )
 					).makeRequest() ).body;
 				}
 
@@ -50,7 +50,7 @@ describe( 'DELETE statement', () => {
 				}
 
 				beforeEach( async () => {
-					testStatement = await addStatementWithRandomStringValue( testItemId, testPropertyId );
+					testStatement = await addStatementWithRandomStringValue( testItemId, testStatementPropertyId );
 				} );
 
 				it( 'can remove a statement without request body', async () => {

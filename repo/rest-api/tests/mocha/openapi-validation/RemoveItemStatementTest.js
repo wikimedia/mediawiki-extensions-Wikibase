@@ -10,11 +10,11 @@ const {
 
 describe( 'validate DELETE endpoints against OpenAPI definition', () => {
 	let testItemId;
-	let testPropertyId;
+	let statementPropertyId;
 
 	before( async () => {
 		testItemId = ( await entityHelper.createEntity( 'item', {} ) ).entity.id;
-		testPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+		statementPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
 
 	} );
 
@@ -30,7 +30,7 @@ describe( 'validate DELETE endpoints against OpenAPI definition', () => {
 				beforeEach( async () => {
 					testStatementId = ( await newAddItemStatementRequestBuilder(
 						testItemId,
-						entityHelper.newStatementWithRandomStringValue( testPropertyId )
+						entityHelper.newStatementWithRandomStringValue( statementPropertyId )
 					).makeRequest() ).body.id;
 				} );
 
