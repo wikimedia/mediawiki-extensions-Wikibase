@@ -103,6 +103,19 @@ class AddPropertyStatementTest extends TestCase {
 		$this->assertSame( $revisionId, $response->getRevisionId() );
 	}
 
+	public function testGivenInvalidRequest_throwsUseCaseError(): void {
+		$expectedException = $this->createStub( UseCaseError::class );
+		$this->validator = $this->createStub( AddPropertyStatementValidator::class );
+		$this->validator->method( 'assertValidRequest' )->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase()->execute( $this->createStub( AddPropertyStatementRequest::class ) );
+			$this->fail( 'Exception not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
 	public function testGivenPropertyNotFound_throws(): void {
 		$expectedException = $this->createStub( UseCaseError::class );
 

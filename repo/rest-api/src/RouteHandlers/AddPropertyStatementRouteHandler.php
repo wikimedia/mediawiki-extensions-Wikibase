@@ -2,25 +2,16 @@
 
 namespace Wikibase\Repo\RestApi\RouteHandlers;
 
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
 use MediaWiki\Rest\Validator\BodyValidator;
-use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatementRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatementValidator;
-use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
+use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
-use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupPropertyDataRetriever;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdaterPropertyUpdater;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\RestApi\WbRestApi;
-use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\ParamValidator\ParamValidator;
 
 /**
@@ -49,30 +40,8 @@ class AddPropertyStatementRouteHandler extends SimpleHandler {
 	}
 
 	public static function factory(): self {
-		$statementReadModelConverter = new StatementReadModelConverter(
-			WikibaseRepo::getStatementGuidParser(),
-			WikibaseRepo::getPropertyDataTypeLookup()
-		);
 		return new self(
-			new AddPropertyStatement(
-				new AddPropertyStatementValidator( new StatementValidator( WbRestApi::getStatementDeserializer() ) ),
-				WbRestApi::getAssertPropertyExists(),
-				new EntityRevisionLookupPropertyDataRetriever(
-					WikibaseRepo::getEntityRevisionLookup(),
-					$statementReadModelConverter
-				),
-				new GuidGenerator(),
-				new EntityUpdaterPropertyUpdater(
-					WbRestApi::getEntityUpdater(),
-					$statementReadModelConverter
-				),
-				new AssertUserIsAuthorized(
-					new WikibaseEntityPermissionChecker(
-						WikibaseRepo::getEntityPermissionChecker(),
-						MediaWikiServices::getInstance()->getUserFactory()
-					)
-				)
-			),
+			WbRestApi::getAddPropertyStatement(),
 			WbRestApi::getSerializerFactory()->newStatementSerializer(),
 			new ResponseFactory()
 		);
@@ -81,31 +50,37 @@ class AddPropertyStatementRouteHandler extends SimpleHandler {
 	public function run( string $propertyId ): Response {
 		$body = $this->getValidatedBody();
 		try {
-			$useCaseResponse = $this->useCase->execute(
-				new AddPropertyStatementRequest(
-					$propertyId,
-					$body[self::STATEMENT_BODY_PARAM],
-					$body[self::TAGS_BODY_PARAM],
-					$body[self::BOT_BODY_PARAM],
-					$body[self::COMMENT_BODY_PARAM],
-					$this->getUsername()
+			return $this->newSuccessHttpResponse(
+				$this->useCase->execute(
+					new AddPropertyStatementRequest(
+						$propertyId,
+						$body[self::STATEMENT_BODY_PARAM],
+						$body[self::TAGS_BODY_PARAM],
+						$body[self::BOT_BODY_PARAM],
+						$body[self::COMMENT_BODY_PARAM],
+						$this->getUsername()
+					)
 				)
 			);
-			$httpResponse = $this->getResponseFactory()->create();
-			$httpResponse->setStatus( 201 );
-			$httpResponse->setHeader( 'Content-Type', 'application/json' );
-			$httpResponse->setHeader(
-				'Last-Modified',
-				wfTimestamp( TS_RFC2822, $useCaseResponse->getLastModified() )
-			);
-			$httpResponse->setHeader( 'ETag', "\"{$useCaseResponse->getRevisionId()}\"" );
-			$httpResponse->setBody( new StringStream( json_encode(
-				$this->statementSerializer->serialize( $useCaseResponse->getStatement() )
-			) ) );
-			return $httpResponse;
 		} catch ( UseCaseError $e ) {
 			return $this->responseFactory->newErrorResponseFromException( $e );
 		}
+	}
+
+	private function newSuccessHttpResponse( AddPropertyStatementResponse $useCaseResponse ): Response {
+		$httpResponse = $this->getResponseFactory()->create();
+		$httpResponse->setStatus( 201 );
+		$httpResponse->setHeader( 'Content-Type', 'application/json' );
+		$httpResponse->setHeader(
+			'Last-Modified',
+			wfTimestamp( TS_RFC2822, $useCaseResponse->getLastModified() )
+		);
+		$httpResponse->setHeader( 'ETag', "\"{$useCaseResponse->getRevisionId()}\"" );
+		$httpResponse->setBody( new StringStream( json_encode(
+			$this->statementSerializer->serialize( $useCaseResponse->getStatement() )
+		) ) );
+
+		return $httpResponse;
 	}
 
 	public function getParamSettings(): array {

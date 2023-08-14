@@ -16,6 +16,8 @@ use Wikibase\Repo\RestApi\Application\Serialization\SerializerFactory;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertStatementSubjectExists;
@@ -71,6 +73,7 @@ use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupProperty
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupStatementRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdaterItemUpdater;
+use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdaterPropertyUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdaterStatementUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\PrefetchingTermLookupAliasesRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\StatementSubjectRetriever;
@@ -114,6 +117,36 @@ return [
 			WbRestApi::getItemUpdater( $services ),
 			new GuidGenerator(),
 			WbRestApi::getAssertUserIsAuthorized( $services )
+		);
+	},
+
+	'WbRestApi.AddPropertyStatement' => function( MediaWikiServices $services ): AddPropertyStatement {
+		$statementReadModelConverter = new StatementReadModelConverter(
+			WikibaseRepo::getStatementGuidParser( $services ),
+			WikibaseRepo::getPropertyDataTypeLookup( $services )
+		);
+		return new AddPropertyStatement(
+			new AddPropertyStatementValidator(
+				new PropertyIdValidator(),
+				new StatementValidator( WbRestApi::getStatementDeserializer( $services ) ),
+				new EditMetadataValidator(
+					CommentStore::COMMENT_CHARACTER_LIMIT,
+					ChangeTags::listExplicitlyDefinedTags()
+				)
+			),
+			WbRestApi::getAssertPropertyExists(),
+			new EntityRevisionLookupPropertyDataRetriever(
+				WikibaseRepo::getEntityRevisionLookup(),
+				$statementReadModelConverter
+			),
+			new GuidGenerator(),
+			new EntityUpdaterPropertyUpdater( WbRestApi::getEntityUpdater(), $statementReadModelConverter ),
+			new AssertUserIsAuthorized(
+				new WikibaseEntityPermissionChecker(
+					WikibaseRepo::getEntityPermissionChecker( $services ),
+					$services->getUserFactory()
+				)
+			)
 		);
 	},
 

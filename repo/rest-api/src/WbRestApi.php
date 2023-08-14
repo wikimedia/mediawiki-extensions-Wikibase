@@ -7,6 +7,7 @@ use Psr\Container\ContainerInterface;
 use Wikibase\Repo\RestApi\Application\Serialization\SerializerFactory;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertStatementSubjectExists;
@@ -108,6 +109,10 @@ class WbRestApi {
 	public static function getAddItemStatement( ContainerInterface $services = null ): AddItemStatement {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.AddItemStatement' );
+	}
+
+	public static function getAddPropertyStatement( ContainerInterface $services = null ): AddPropertyStatement {
+		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbRestApi.AddPropertyStatement' );
 	}
 
 	public static function getReplaceStatementFactory( ContainerInterface $services = null ): ReplaceStatementFactory {

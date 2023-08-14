@@ -22,6 +22,17 @@ describe( newAddPropertyStatementRequestBuilder().getRouteDescription(), () => {
 		assert.notStrictEqual( response.header.etag, makeEtag( originalRevisionId ) );
 	}
 
+	function assertValidErrorResponse( response, statusCode, responseBodyErrorCode, context = null ) {
+		expect( response ).to.have.status( statusCode );
+		assert.header( response, 'Content-Language', 'en' );
+		assert.strictEqual( response.body.code, responseBodyErrorCode );
+		if ( context === null ) {
+			assert.notProperty( response.body, 'context' );
+		} else {
+			assert.deepStrictEqual( response.body.context, context );
+		}
+	}
+
 	before( async () => {
 		testPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
 		testStatement = entityHelper.newStatementWithRandomStringValue( testPropertyId );
@@ -75,6 +86,80 @@ describe( newAddPropertyStatementRequestBuilder().getRouteDescription(), () => {
 		} );
 	} );
 
+	describe( '400 error response', () => {
+		it( 'invalid request data', async () => {
+			const response = await newAddPropertyStatementRequestBuilder( testPropertyId, testStatement )
+				.withJsonBodyParam( 'statement', 1234 )
+				.assertInvalidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assert.strictEqual( response.body.code, 'invalid-request-body' );
+			assert.strictEqual( response.body.fieldName, 'statement' );
+			assert.strictEqual( response.body.expectedType, 'object' );
+		} );
+
+		it( 'invalid property id', async () => {
+			const propertyId = 'X123';
+			const response = await newAddPropertyStatementRequestBuilder( propertyId, testStatement )
+				.assertInvalidRequest()
+				.makeRequest();
+
+			assertValidErrorResponse( response, 400, 'invalid-property-id', { 'property-id': propertyId } );
+			assert.include( response.body.message, propertyId );
+		} );
+
+		it( 'comment too long', async () => {
+			const comment = 'x'.repeat( 501 );
+			const response = await newAddPropertyStatementRequestBuilder( testPropertyId, testStatement )
+				.withJsonBodyParam( 'comment', comment )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValidErrorResponse( response, 400, 'comment-too-long' );
+			assert.include( response.body.message, '500' );
+		} );
+
+		it( 'invalid edit tag', async () => {
+			const invalidEditTag = 'invalid tag';
+			const response = await newAddPropertyStatementRequestBuilder( testPropertyId, testStatement )
+				.withJsonBodyParam( 'tags', [ invalidEditTag ] )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValidErrorResponse( response, 400, 'invalid-edit-tag' );
+			assert.include( response.body.message, invalidEditTag );
+		} );
+
+		it( 'invalid statement field', async () => {
+			const invalidField = 'rank';
+			const invalidValue = 'not-a-valid-rank';
+			const invalidStatement = { ...testStatement };
+			invalidStatement[ invalidField ] = invalidValue;
+
+			const response = await newAddPropertyStatementRequestBuilder( testPropertyId, invalidStatement )
+				.assertInvalidRequest()
+				.makeRequest();
+
+			const context = { path: invalidField, value: invalidValue };
+			assertValidErrorResponse( response, 400, 'statement-data-invalid-field', context );
+			assert.include( response.body.message, invalidField );
+		} );
+
+		it( 'missing statement field', async () => {
+			const missingField = 'value';
+			const invalidStatement = { ...testStatement };
+			delete invalidStatement[ missingField ];
+
+			const response = await newAddPropertyStatementRequestBuilder( testPropertyId, invalidStatement )
+				.assertInvalidRequest()
+				.makeRequest();
+
+			assertValidErrorResponse( response, 400, 'statement-data-missing-field', { path: missingField } );
+			assert.include( response.body.message, missingField );
+		} );
+	} );
+
 	describe( '404 error response', () => {
 		it( 'property not found', async () => {
 			const propertyId = 'P999999';
@@ -82,11 +167,8 @@ describe( newAddPropertyStatementRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 404 );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			assert.strictEqual( response.body.code, 'property-not-found' );
+			assertValidErrorResponse( response, 404, 'property-not-found' );
 			assert.include( response.body.message, propertyId );
 		} );
 	} );
-
 } );
