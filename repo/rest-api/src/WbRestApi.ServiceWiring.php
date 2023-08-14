@@ -17,6 +17,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertStatementSubjectExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItem;
@@ -118,6 +119,10 @@ return [
 
 	'WbRestApi.AssertItemExists' => function( MediaWikiServices $services ): AssertItemExists {
 		return new AssertItemExists( WbRestApi::getGetLatestItemRevisionMetadata( $services ) );
+	},
+
+	'WbRestApi.AssertPropertyExists' => function( MediaWikiServices $services ): AssertPropertyExists {
+		return new AssertPropertyExists( WbRestApi::getGetLatestPropertyRevisionMetadata( $services ) );
 	},
 
 	'WbRestApi.AssertStatementSubjectExists' => function( MediaWikiServices $services ): AssertStatementSubjectExists {

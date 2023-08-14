@@ -4,6 +4,7 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement;
 
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
@@ -15,17 +16,20 @@ use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
 class AddPropertyStatement {
 
 	private AddPropertyStatementValidator $validator;
+	private AssertPropertyExists $assertPropertyExists;
 	private PropertyRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
 	private GuidGenerator $guidGenerator;
 
 	public function __construct(
 		AddPropertyStatementValidator $validator,
+		AssertPropertyExists $assertPropertyExists,
 		PropertyRetriever $propertyRetriever,
 		GuidGenerator $guidGenerator,
 		PropertyUpdater $propertyUpdater
 	) {
 		$this->validator = $validator;
+		$this->assertPropertyExists = $assertPropertyExists;
 		$this->propertyRetriever = $propertyRetriever;
 		$this->guidGenerator = $guidGenerator;
 		$this->propertyUpdater = $propertyUpdater;
@@ -35,6 +39,9 @@ class AddPropertyStatement {
 		$this->validator->assertValidRequest( $request );
 
 		$propertyId = new NumericPropertyId( $request->getPropertyId() );
+
+		$this->assertPropertyExists->execute( $propertyId );
+
 		$property = $this->propertyRetriever->getProperty( $propertyId );
 		$statement = $this->validator->getValidatedStatement();
 

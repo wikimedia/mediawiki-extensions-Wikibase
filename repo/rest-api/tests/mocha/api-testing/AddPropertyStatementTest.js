@@ -33,4 +33,18 @@ describe( newAddPropertyStatementRequestBuilder().getRouteDescription(), () => {
 		} );
 	} );
 
+	describe( '404 error response', () => {
+		it( 'property not found', async () => {
+			const propertyId = 'P999999';
+			const response = await newAddPropertyStatementRequestBuilder( propertyId, testStatement )
+				.assertValidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 404 );
+			assert.strictEqual( response.header[ 'content-language' ], 'en' );
+			assert.strictEqual( response.body.code, 'property-not-found' );
+			assert.include( response.body.message, propertyId );
+		} );
+	} );
+
 } );
