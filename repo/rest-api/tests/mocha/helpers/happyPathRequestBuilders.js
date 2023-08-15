@@ -28,6 +28,10 @@ module.exports.getRequestsOnProperty = [
 ];
 
 module.exports.editRequestsOnProperty = [
+	( { propertyId, statementPropertyId } ) => rbf.newAddPropertyStatementRequestBuilder(
+		propertyId,
+		newStatementWithRandomStringValue( statementPropertyId )
+	),
 	( { propertyId, statementId, statementPropertyId } ) => rbf.newReplacePropertyStatementRequestBuilder(
 		propertyId,
 		statementId,
