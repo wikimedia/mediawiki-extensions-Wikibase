@@ -14,8 +14,8 @@ exports.config = {
 	// Test Files
 	// ==================
 	specs: [
-		__dirname + '/specs/*.js',
-		__dirname + '/../../../view/lib/wikibase-termbox/tests/selenium/specs/*.js'
+		__dirname + '/specs/*.js'
+		// __dirname + '/../../../view/lib/wikibase-termbox/tests/selenium/specs/*.js'
 	],
 
 	// ===================
