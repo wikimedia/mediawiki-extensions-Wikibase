@@ -21,8 +21,9 @@
 	"wikibase-rc-hide-wikidata-hide": "Жашыруу",
 	"wikibase-rc-hide-wikidata-show": "Көрсөтүү",
 	"wikibase-rc-wikibase-edit-letter": "ВМ",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} оңдоо",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} түзөтүү",
 	"wikibase-pageinfo-entity-usage-T": "Аталыш",
 	"wikibase-otherprojects": "Башка долбоорлордо",
-	"wikibase-sitelinks-sitename-columnheading": "Тил"
+	"wikibase-sitelinks-sitename-columnheading": "Тил",
+	"notification-header-page-connection": "<strong>«$‎3»</strong> барагы {{PLURAL:$4|-1=a {{WBREPONAME}}тын элементи|{{WBREPONAME}}тын $4 элементи}} менен {{GENDER:$2|туташтырылды}}."
 }

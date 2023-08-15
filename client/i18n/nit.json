@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"Athram Rajkumar",
+			"Madavi Jangu"
+		]
+	},
+	"wikibase-dataitem": "ఐటమ్",
+	"wikibase-editlinks": "లింకు బాద్లిప్",
+	"wikibase-linkitem-addlinks": "లింకులున్ సేర్ప్",
+	"wikibase-linkitem-title": "ఈ పెజింగ్ లింక్ ఇధర్",
+	"wikibase-linkitem-linkpage": "ఈ పెజింగ్ లింక్ ఇధర్",
+	"wikibase-linkitem-selectlink": "ఈ పేజింగ్ లింక్ ఇదరేక సైటున్,పెజిన్ అసుర్.",
+	"wikibase-linkitem-input-site": "గొట్టి",
+	"wikibase-linkitem-input-page": "పేజీ:",
+	"wikibase-rc-hide-wikidata-hide": "డాప్",
+	"wikibase-rc-hide-wikidata-show": "ఒళిప్",
+	"wikibase-otherprojects": "మరోకో ప్రోజెక్ట్ లత్తి"
+}
