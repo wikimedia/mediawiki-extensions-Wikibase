@@ -113,8 +113,14 @@ class AddPropertyStatementRouteHandler extends SimpleHandler {
 			wfTimestamp( TS_RFC2822, $useCaseResponse->getLastModified() )
 		);
 		$httpResponse->setHeader( 'ETag', "\"{$useCaseResponse->getRevisionId()}\"" );
+		$statement = $useCaseResponse->getStatement();
+		$this->setLocationHeader(
+			$httpResponse,
+			$statement->getProperty()->getId()->getSerialization(),
+			"{$statement->getGuid()}"
+		);
 		$httpResponse->setBody( new StringStream( json_encode(
-			$this->statementSerializer->serialize( $useCaseResponse->getStatement() )
+			$this->statementSerializer->serialize( $statement )
 		) ) );
 
 		return $httpResponse;
@@ -159,6 +165,18 @@ class AddPropertyStatementRouteHandler extends SimpleHandler {
 					ParamValidator::PARAM_REQUIRED => false,
 				],
 			] ) : parent::getBodyValidator( $contentType );
+	}
+
+	private function setLocationHeader( Response $httpResponse, string $propertyId, string $statementGuid ): void {
+		$newStatementUrl = $this->getRouter()->getRouteUrl(
+			GetPropertyStatementRouteHandler::ROUTE,
+			[
+				GetPropertyStatementRouteHandler::PROPERTY_ID_PATH_PARAM => $propertyId,
+				GetPropertyStatementRouteHandler::STATEMENT_ID_PATH_PARAM => $statementGuid,
+			]
+		);
+
+		$httpResponse->setHeader( 'Location', $newStatementUrl );
 	}
 
 	private function getUsername(): ?string {

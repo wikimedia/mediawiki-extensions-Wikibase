@@ -17,6 +17,7 @@ describe( newAddPropertyStatementRequestBuilder().getRouteDescription(), () => {
 		expect( response ).to.have.status( 201 );
 		assert.strictEqual( response.body.property.id, propertyId || testStatement.property.id );
 		assert.deepStrictEqual( response.body.value.content, content || testStatement.value.content );
+		assert.header( response, 'Location', response.request.url + '/' + encodeURIComponent( response.body.id ) );
 		assert.strictEqual( response.header[ 'content-type' ], 'application/json' );
 		assert.isAbove( new Date( response.header[ 'last-modified' ] ), originalLastModified );
 		assert.notStrictEqual( response.header.etag, makeEtag( originalRevisionId ) );
