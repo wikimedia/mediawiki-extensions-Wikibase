@@ -627,23 +627,9 @@ return [
 	},
 
 	'WikibaseRepo.EnabledEntityTypes' => function ( MediaWikiServices $services ): array {
-		$types = array_keys(
+		return array_keys(
 			WikibaseRepo::getEntitySourceDefinitions( $services )
 				->getEntityTypeToDatabaseSourceMapping()
-		);
-		$subEntityTypes = WikibaseRepo::getEntityTypeDefinitions( $services )
-			->get( EntityTypeDefinitions::SUB_ENTITY_TYPES );
-
-		return array_reduce(
-			$types,
-			function ( $entityTypes, $type ) use ( $subEntityTypes ) {
-				$entityTypes[] = $type;
-				if ( array_key_exists( $type, $subEntityTypes ) ) {
-					$entityTypes = array_merge( $entityTypes, $subEntityTypes[$type] );
-				}
-				return $entityTypes;
-			},
-			[]
 		);
 	},
 
