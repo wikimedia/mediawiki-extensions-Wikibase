@@ -225,7 +225,7 @@
 	"wikibase-newitem-fieldset": "새 항목 만들기",
 	"wikibase-newitem-site": "첫 링크한 문서의 사이트",
 	"wikibase-newitem-page": "첫 링크한 문서의 이름",
-	"wikibase-newitem-no-external-page": "\"$2\" 문서는 \"$1\" 문서에서 찾을 수 없습니다.",
+	"wikibase-newitem-no-external-page": "\"$2\" 문서는 \"$1\"에서 찾을 수 없습니다.",
 	"wikibase-newitem-not-recognized-siteid": "지정한 사이트 식별자는 인식되지 않았습니다.",
 	"wikibase-newitem-same-label-and-description": "레이블과 설명은 같은 값을 가질 수 없습니다.",
 	"wikibase-newitem-insufficient-data": "적어도 레이블, 설명, 다른 이름 중 하나를 채워야 합니다.",
