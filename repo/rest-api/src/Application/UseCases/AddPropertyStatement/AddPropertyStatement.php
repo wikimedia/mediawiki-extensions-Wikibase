@@ -5,6 +5,7 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
@@ -20,19 +21,22 @@ class AddPropertyStatement {
 	private PropertyRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
 	private GuidGenerator $guidGenerator;
+	private AssertUserIsAuthorized $assertUserIsAuthorized;
 
 	public function __construct(
 		AddPropertyStatementValidator $validator,
 		AssertPropertyExists $assertPropertyExists,
 		PropertyRetriever $propertyRetriever,
 		GuidGenerator $guidGenerator,
-		PropertyUpdater $propertyUpdater
+		PropertyUpdater $propertyUpdater,
+		AssertUserIsAuthorized $assertUserIsAuthorized
 	) {
 		$this->validator = $validator;
 		$this->assertPropertyExists = $assertPropertyExists;
 		$this->propertyRetriever = $propertyRetriever;
 		$this->guidGenerator = $guidGenerator;
 		$this->propertyUpdater = $propertyUpdater;
+		$this->assertUserIsAuthorized = $assertUserIsAuthorized;
 	}
 
 	public function execute( AddPropertyStatementRequest $request ): AddPropertyStatementResponse {
@@ -41,6 +45,7 @@ class AddPropertyStatement {
 		$propertyId = new NumericPropertyId( $request->getPropertyId() );
 
 		$this->assertPropertyExists->execute( $propertyId );
+		$this->assertUserIsAuthorized->execute( $propertyId, $request->getUsername() );
 
 		$property = $this->propertyRetriever->getProperty( $propertyId );
 		$statement = $this->validator->getValidatedStatement();

@@ -12,6 +12,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyS
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Property;
@@ -38,6 +39,7 @@ class AddPropertyStatementTest extends TestCase {
 	private PropertyRetriever $propertyRetriever;
 	private GuidGenerator $guidGenerator;
 	private PropertyUpdater $propertyUpdater;
+	private AssertUserIsAuthorized $assertUserIsAuthorized;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -47,6 +49,7 @@ class AddPropertyStatementTest extends TestCase {
 		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
 		$this->guidGenerator = new GuidGenerator();
 		$this->propertyUpdater = $this->createStub( PropertyUpdater::class );
+		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
 	}
 
 	public function testAddStatement(): void {
@@ -108,14 +111,23 @@ class AddPropertyStatementTest extends TestCase {
 
 		try {
 			$this->newUseCase()->execute(
-				new AddPropertyStatementRequest(
-					'P99999',
-					$this->getValidNoValueStatementSerialization(),
-					[],
-					false,
-					null,
-					null
-				)
+				$this->newRequest( [ 'id' => 'P999999' ] )
+			);
+			$this->fail( 'Expected exception not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
+	public function testGivenUnauthorizedRequest_throws(): void {
+		$expectedException = $this->createStub( UseCaseError::class );
+
+		$this->assertUserIsAuthorized->method( 'execute' )
+			->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase()->execute(
+				$this->newRequest( [ 'id' => 'P321' ] )
 			);
 			$this->fail( 'Expected exception not thrown' );
 		} catch ( UseCaseError $e ) {
@@ -129,7 +141,19 @@ class AddPropertyStatementTest extends TestCase {
 			$this->assertPropertyExists,
 			$this->propertyRetriever,
 			$this->guidGenerator,
-			$this->propertyUpdater
+			$this->propertyUpdater,
+			$this->assertUserIsAuthorized
+		);
+	}
+
+	private function newRequest( array $req ): AddPropertyStatementRequest {
+		return new AddPropertyStatementRequest(
+			$req['id'],
+			$req['statement'] ?? $this->getValidNoValueStatementSerialization(),
+			$req['tags'] ?? [],
+			$req['bot'] ?? false,
+			$req['comment'] ?? null,
+			$req['user'] ?? null
 		);
 	}
 
