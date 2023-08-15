@@ -45,11 +45,7 @@ class AddItemStatementValidator {
 	/**
 	 * @throws UseCaseError
 	 */
-	private function validateItemId( ?string $itemId ): void {
-		if ( $itemId === null ) {
-			return;
-		}
-
+	private function validateItemId( string $itemId ): void {
 		$validationError = $this->itemIdValidator->validate( $itemId );
 		if ( $validationError ) {
 			throw new UseCaseError(
