@@ -10,9 +10,11 @@ use MediaWiki\Tests\Rest\Handler\HandlerTestTrait;
 use MediaWikiIntegrationTestCase;
 use RuntimeException;
 use Throwable;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Domain\ReadModel\PredicateProperty;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
 use Wikibase\Repo\RestApi\RouteHandlers\AddPropertyStatementRouteHandler;
 
@@ -35,7 +37,11 @@ class AddPropertyStatementRouteHandlerTest extends MediaWikiIntegrationTestCase 
 	}
 
 	public function testValidHttpResponse(): void {
-		$useCaseResponse = new AddPropertyStatementResponse( $this->createStub( Statement::class ), '20230731042031', 42 );
+		$statement = $this->createStub( Statement::class );
+		$statement->method( 'getProperty' )->willReturn(
+			new PredicateProperty( new NumericPropertyId( 'P123' ), 'string' )
+		);
+		$useCaseResponse = new AddPropertyStatementResponse( $statement, '20230731042031', 42 );
 		$useCase = $this->createStub( AddPropertyStatement::class );
 		$useCase->method( 'execute' )->willReturn( $useCaseResponse );
 
