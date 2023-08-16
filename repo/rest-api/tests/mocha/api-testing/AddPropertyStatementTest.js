@@ -1,6 +1,6 @@
 'use strict';
 
-const { assert, action } = require( 'api-testing' );
+const { assert, action, utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { newAddPropertyStatementRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
@@ -84,6 +84,71 @@ describe( newAddPropertyStatementRequestBuilder().getRouteDescription(), () => {
 				)
 			);
 			assert.strictEqual( editMetadata.user, user.username );
+		} );
+
+		it( 'can add a statement with a globecoordinate value in new format', async () => {
+			const createPropertyResponse = await entityHelper.createEntity( 'property', {
+				labels: { en: { language: 'en', value: `globe-coordinate-property-${utils.uniq()}` } },
+				datatype: 'globe-coordinate'
+			} );
+			const statementPropertyId = createPropertyResponse.entity.id;
+			const globecoordinate = {
+				latitude: 100,
+				longitude: 100,
+				precision: 1,
+				globe: 'http://www.wikidata.org/entity/Q2'
+			};
+			const statement = {
+				property: { id: statementPropertyId },
+				value: { type: 'value', content: globecoordinate }
+			};
+
+			const response = await newAddPropertyStatementRequestBuilder( testPropertyId, statement )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValid201Response( response, statementPropertyId, globecoordinate );
+		} );
+
+		it( 'can add a statement with a time value in new format', async () => {
+			const createPropertyResponse = await entityHelper.createEntity( 'property', {
+				labels: { en: { language: 'en', value: `time-property-${utils.uniq()}` } },
+				datatype: 'time'
+			} );
+			const statementPropertyId = createPropertyResponse.entity.id;
+			const time = {
+				time: '+0001-00-00T00:00:00Z',
+				precision: 9,
+				calendarmodel: 'http://www.wikidata.org/entity/Q1985727'
+			};
+			const statement = {
+				property: { id: statementPropertyId },
+				value: { type: 'value', content: time }
+			};
+
+			const response = await newAddPropertyStatementRequestBuilder( testPropertyId, statement )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValid201Response( response, statementPropertyId, time );
+		} );
+
+		it( 'can add a statement with a wikibase-entityid value in new format', async () => {
+			const createPropertyResponse = await entityHelper.createEntity( 'property', {
+				labels: { en: { language: 'en', value: `property-${utils.uniq()}` } },
+				datatype: 'wikibase-property'
+			} );
+			const statementPropertyId = createPropertyResponse.entity.id;
+			const statement = {
+				property: { id: statementPropertyId },
+				value: { type: 'value', content: testPropertyId }
+			};
+
+			const response = await newAddPropertyStatementRequestBuilder( testPropertyId, statement )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValid201Response( response, statementPropertyId, testPropertyId );
 		} );
 	} );
 
