@@ -130,6 +130,7 @@
 	"wikibase-snakview-snaktypeselector-value": "egendefinert verdi",
 	"wikibase-snakformat-invalid-value": "Ugyldig verdi.",
 	"wikibase-snakformat-propertynotfound": "Egenskapen ble ikke funnet.",
+	"wikibase-shortcopyrightwarning-minimal": "Ved å trykke på «$1» godtar du [[$2|bruksvilkårene]].",
 	"wikibase-shortcopyrightwarning": "Ved å trykke på «$1» godtar du [[$2|bruksvilkårene]] og samtykker ugjenkallelig til å gi ut bidraget ditt under [$3 $4].",
 	"wikibase-shortcopyrightwarning-accept-persist": "Jeg godtar disse vilkårene for mine framtidige endringer. Ikke vis denne beskjeden igjen.",
 	"wikibase-copyrighttooltip-acknowledge": "Jeg godtar disse vilkårene for mine fremtidige redigeringer. Ikke vis denne meldingen igjen.",
