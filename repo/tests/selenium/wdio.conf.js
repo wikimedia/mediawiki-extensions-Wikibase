@@ -35,7 +35,7 @@ exports.config = {
 	// =====
 	// Hooks
 	// =====
-	beforeSuite: function () {
-		browser.call( () => WikibaseApi.initialize() );
+	async beforeSuite() {
+		await WikibaseApi.initialize();
 	}
 };
