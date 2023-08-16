@@ -1,10 +1,5 @@
 [
 	{
-		"path": "/wikibase/v0/entities/properties/{property_id}/statements/{statement_id}",
-		"method": "PUT",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\ReplacePropertyStatementRouteHandler::factory"
-	},
-	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/statements",
 		"method": "POST",
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\AddPropertyStatementRouteHandler::factory"

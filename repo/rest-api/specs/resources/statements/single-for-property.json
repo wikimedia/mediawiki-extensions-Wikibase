@@ -28,8 +28,8 @@
 	"put": {
 		"operationId": "replacePropertyStatement",
 		"tags": [ "statements" ],
-		"summary": "[WIP] Replace a single Statement of a Property",
-		"description": "This endpoint is currently in development and is not recommended for production use.\n\nThis endpoint is also accessible through `/statements/{statement_id}`",
+		"summary": "Replace a single Statement of a Property",
+		"description": "This endpoint is also accessible through `/statements/{statement_id}`",
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/PropertyId" },
 			{ "$ref": "../../global/parameters.json#/PropertyStatementId" },
