@@ -24,7 +24,9 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class BotEditTest extends WikibaseApiTestCase {
 
-	private static $hasSetup;
+	public function addDBDataOnce() {
+		$this->initTestEntities( [ 'Empty', 'Leipzig', 'Osaka' ] );
+	}
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -38,12 +40,6 @@ class BotEditTest extends WikibaseApiTestCase {
 		$this->mergeMwGlobalArrayValue( 'wgGroupPermissions', [
 			'user' => [ 'item-merge' => true, 'item-redirect' => true ],
 		] );
-
-		if ( !isset( self::$hasSetup ) ) {
-			$this->initTestEntities( [ 'Empty', 'Leipzig', 'Osaka' ] );
-		}
-
-		self::$hasSetup = true;
 	}
 
 	public static function provideData() {
@@ -82,12 +78,12 @@ class BotEditTest extends WikibaseApiTestCase {
 				'e' => [ 'bot' => false, 'new' => false ] ],
 			[ //8
 				'p' => [ 'bot' => '', 'action' => 'wblinktitles', 'tosite' => 'enwiki',
-					'totitle' => 'PageEn', 'fromsite' => 'svwiki', 'fromtitle' => 'SvPage' ],
-				'e' => [ 'bot' => true, 'new' => false ] ],
+					'totitle' => 'PageEn2', 'fromsite' => 'svwiki', 'fromtitle' => 'SvPage' ],
+				'e' => [ 'bot' => true, 'new' => true ] ],
 			[ //9
 				'p' => [ 'action' => 'wblinktitles', 'tosite' => 'dewiki',
-					'totitle' => 'PageDe', 'fromsite' => 'nowiki', 'fromtitle' => 'NoPage' ],
-				'e' => [ 'bot' => false, 'new' => false ] ],
+					'totitle' => 'PageDe2', 'fromsite' => 'nowiki', 'fromtitle' => 'NoPage' ],
+				'e' => [ 'bot' => false, 'new' => true ] ],
 			[ //10
 				'p' => [ 'bot' => '', 'action' => 'wbeditentity', 'new' => 'item',
 					'data' => '{}' ],

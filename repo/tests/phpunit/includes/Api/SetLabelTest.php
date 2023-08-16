@@ -28,20 +28,10 @@ use Wikibase\DataModel\Entity\ItemId;
  */
 class SetLabelTest extends ModifyTermTestCase {
 
-	/**
-	 * @var bool
-	 */
-	private static $hasSetup;
-
 	protected function setUp(): void {
 		parent::setUp();
 
 		self::$testAction = 'wbsetlabel';
-
-		if ( !isset( self::$hasSetup ) ) {
-			$this->initTestEntities( [ 'Empty' ] );
-		}
-		self::$hasSetup = true;
 	}
 
 	public function testGetAllowedParams_listsItemsAndProperties() {

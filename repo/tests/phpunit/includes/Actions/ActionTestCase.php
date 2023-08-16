@@ -28,14 +28,10 @@ use WikiPage;
 class ActionTestCase extends MediaWikiIntegrationTestCase {
 
 	/** @var User */
-	protected $user;
+	protected static $user;
 
 	protected function setUp(): void {
 		parent::setUp();
-
-		$testUser = new \TestUser( 'ActionTestUser' );
-		$user = $testUser->getUser();
-		$this->user = $user;
 
 		$this->setRequest( new FauxRequest() );
 		$this->setMwGlobals( [
@@ -59,6 +55,20 @@ class ActionTestCase extends MediaWikiIntegrationTestCase {
 		'Berlin2' => true,
 		'Berlin3' => true,
 	];
+
+	/**
+	 * Creates the test items defined by makeTestItemData() in the database.
+	 */
+	public function addDBDataOnce() {
+		$testUser = new \TestUser( 'ActionTestUser' );
+		self::$user = $testUser->getUser();
+		$itemData = $this->makeTestItemData();
+
+		foreach ( $itemData as $handle => $revisions ) {
+			$item = $this->createTestContent( $revisions );
+			self::$testItems[$handle] = $item;
+		}
+	}
 
 	private function makeTestItemData() {
 		$items = [];
@@ -154,7 +164,7 @@ class ActionTestCase extends MediaWikiIntegrationTestCase {
 
 		$context = new RequestContext();
 		$context->setRequest( new FauxRequest( $params, $wasPosted ) );
-		$context->setUser( $this->user );     // determined by setUser()
+		$context->setUser( self::$user );     // determined by setUser()
 		$context->setLanguage( $wgLang ); // qqx as per setUp()
 		$context->setWikiPage( $page );
 		$article = Article::newFromWikiPage( $page, $context );
@@ -194,22 +204,6 @@ class ActionTestCase extends MediaWikiIntegrationTestCase {
 	}
 
 	/**
-	 * Creates the test items defined by makeTestItemData() in the database.
-	 */
-	private function initTestItems() {
-		if ( self::$testItems ) {
-			return;
-		}
-
-		$itemData = $this->makeTestItemData();
-
-		foreach ( $itemData as $handle => $revisions ) {
-			$item = $this->createTestContent( $revisions );
-			self::$testItems[$handle] = $item;
-		}
-	}
-
-	/**
 	 * Creates a test item defined by $revisions.
 	 *
 	 * @todo Provide this for all kinds of entities.
@@ -226,7 +220,7 @@ class ActionTestCase extends MediaWikiIntegrationTestCase {
 
 		foreach ( $revisions as $entity ) {
 			$flags = ( $id !== null ) ? EDIT_UPDATE : EDIT_NEW;
-			$result = $this->createTestContentRevision( $entity, $id, $this->user, $flags );
+			$result = $this->createTestContentRevision( $entity, $id, self::$user, $flags );
 
 			if ( $result instanceof EntityRedirect ) {
 				$id = $result->getEntityId();
@@ -314,7 +308,6 @@ class ActionTestCase extends MediaWikiIntegrationTestCase {
 	 * @param string $handle
 	 */
 	protected function resetTestItem( $handle ) {
-		$this->initTestItems();
 		if ( isset( self::$testItems[ $handle ] ) ) {
 			$item = self::$testItems[ $handle ];
 
@@ -394,8 +387,6 @@ class ActionTestCase extends MediaWikiIntegrationTestCase {
 	 * @throws Exception if the handle is not known
 	 */
 	protected function getTestItemPage( $handle ) {
-		$this->initTestItems();
-
 		$itemId = $this->getTestItemId( $handle );
 		$title = WikibaseRepo::getEntityTitleStoreLookup()->getTitleForId( $itemId );
 

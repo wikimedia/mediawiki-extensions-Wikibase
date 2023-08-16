@@ -16,16 +16,9 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 
 	/** @var string */
 	protected static $testAction;
-	/** @var bool */
-	private static $hasSetup;
 
-	protected function setUp(): void {
-		parent::setUp();
-
-		if ( !isset( self::$hasSetup ) ) {
-			$this->initTestEntities( [ 'Empty' ] );
-		}
-		self::$hasSetup = true;
+	public function addDBDataOnce() {
+		$this->initTestEntities( [ 'Empty' ] );
 	}
 
 	public static function provideData() {

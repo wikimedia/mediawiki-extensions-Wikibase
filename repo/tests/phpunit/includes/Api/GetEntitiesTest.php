@@ -22,16 +22,10 @@ use MediaWiki\Title\Title;
  */
 class GetEntitiesTest extends WikibaseApiTestCase {
 
-	private static $hasSetup;
 	private static $usedHandles = [ 'StringProp', 'Berlin', 'London', 'Oslo', 'Guangzhou', 'Empty' ];
 
-	protected function setUp(): void {
-		parent::setUp();
-
-		if ( !isset( self::$hasSetup ) ) {
-			$this->initTestEntities( self::$usedHandles );
-		}
-		self::$hasSetup = true;
+	public function addDBDataOnce() {
+		$this->initTestEntities( self::$usedHandles );
 	}
 
 	/**

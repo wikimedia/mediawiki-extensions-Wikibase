@@ -29,19 +29,9 @@ use Wikimedia\TestingAccessWrapper;
  */
 class SetAliasesTest extends ModifyTermTestCase {
 
-	/**
-	 * @var bool
-	 */
-	private static $hasSetup;
-
 	protected function setUp(): void {
-		self::$testAction = 'wbsetaliases';
 		parent::setUp();
-
-		if ( !isset( self::$hasSetup ) ) {
-			$this->initTestEntities( [ 'Empty' ] );
-		}
-		self::$hasSetup = true;
+		self::$testAction = 'wbsetaliases';
 	}
 
 	public function testGetAllowedParams_listsItemsAndProperties() {

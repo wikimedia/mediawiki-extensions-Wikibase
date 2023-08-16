@@ -36,56 +36,49 @@ class EditEntityTest extends WikibaseApiTestCase {
 	 */
 	private static $idMap;
 
-	/**
-	 * @var bool
-	 */
-	private static $hasSetup;
+	public function addDBDataOnce() {
+		$this->setupUser();
+		$store = $this->getEntityStore();
+
+		$prop = Property::newFromType( 'string' );
+		$store->saveEntity( $prop, 'EditEntityTestP56', $this->user, EDIT_NEW );
+		self::$idMap['%P56%'] = $prop->getId()->getSerialization();
+		self::$idMap['%StringProp%'] = $prop->getId()->getSerialization();
+
+		$prop = Property::newFromType( 'string' );
+		$store->saveEntity( $prop, 'EditEntityTestP72', $this->user, EDIT_NEW );
+		self::$idMap['%P72%'] = $prop->getId()->getSerialization();
+
+		$this->initTestEntities( [ 'Berlin' ], self::$idMap );
+		self::$idMap['%Berlin%'] = EntityTestHelper::getId( 'Berlin' );
+
+		$p56 = self::$idMap['%P56%'];
+		$berlinData = EntityTestHelper::getEntityOutput( 'Berlin' );
+		self::$idMap['%BerlinP56%'] = $berlinData['claims'][$p56][0]['id'];
+
+		$badge = new Item();
+		$store->saveEntity( $badge, 'EditEntityTestQ42', $this->user, EDIT_NEW );
+		self::$idMap['%Q42%'] = $badge->getId()->getSerialization();
+
+		$badge = new Item();
+		$store->saveEntity( $badge, 'EditEntityTestQ149', $this->user, EDIT_NEW );
+		self::$idMap['%Q149%'] = $badge->getId()->getSerialization();
+
+		$badge = new Item();
+		$store->saveEntity( $badge, 'EditEntityTestQ32', $this->user, EDIT_NEW );
+		self::$idMap['%Q32%'] = $badge->getId()->getSerialization();
+
+		// self::$idMap['%UppercaseStringProp%'] is added in testEditEntity
+	}
 
 	protected function setUp(): void {
 		parent::setUp();
-
-		// XXX: This test doesn't mark tablesUsed so things created here will remain through all tests in the class.
-		if ( !isset( self::$hasSetup ) ) {
-			$store = $this->getEntityStore();
-
-			$prop = Property::newFromType( 'string' );
-			$store->saveEntity( $prop, 'EditEntityTestP56', $this->user, EDIT_NEW );
-			self::$idMap['%P56%'] = $prop->getId()->getSerialization();
-			self::$idMap['%StringProp%'] = $prop->getId()->getSerialization();
-
-			$prop = Property::newFromType( 'string' );
-			$store->saveEntity( $prop, 'EditEntityTestP72', $this->user, EDIT_NEW );
-			self::$idMap['%P72%'] = $prop->getId()->getSerialization();
-
-			$this->initTestEntities( [ 'Berlin' ], self::$idMap );
-			self::$idMap['%Berlin%'] = EntityTestHelper::getId( 'Berlin' );
-
-			$p56 = self::$idMap['%P56%'];
-			$berlinData = EntityTestHelper::getEntityOutput( 'Berlin' );
-			self::$idMap['%BerlinP56%'] = $berlinData['claims'][$p56][0]['id'];
-
-			$badge = new Item();
-			$store->saveEntity( $badge, 'EditEntityTestQ42', $this->user, EDIT_NEW );
-			self::$idMap['%Q42%'] = $badge->getId()->getSerialization();
-
-			$badge = new Item();
-			$store->saveEntity( $badge, 'EditEntityTestQ149', $this->user, EDIT_NEW );
-			self::$idMap['%Q149%'] = $badge->getId()->getSerialization();
-
-			$badge = new Item();
-			$store->saveEntity( $badge, 'EditEntityTestQ32', $this->user, EDIT_NEW );
-			self::$idMap['%Q32%'] = $badge->getId()->getSerialization();
-
-			// self::$idMap['%UppercaseStringProp%'] is added in testEditEntity
-		}
 
 		WikibaseRepo::getSettings()->setSetting( 'badgeItems', [
 			self::$idMap['%Q42%'] => '',
 			self::$idMap['%Q149%'] => '',
 			'Q99999' => '', // Just in case we have a wrong config
 		] );
-
-		self::$hasSetup = true;
 	}
 
 	/**
