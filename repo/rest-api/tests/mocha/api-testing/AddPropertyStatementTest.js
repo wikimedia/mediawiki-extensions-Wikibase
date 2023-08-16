@@ -13,10 +13,10 @@ describe( newAddPropertyStatementRequestBuilder().getRouteDescription(), () => {
 	let originalLastModified;
 	let originalRevisionId;
 
-	function assertValid201Response( response ) {
+	function assertValid201Response( response, propertyId = null, content = null ) {
 		expect( response ).to.have.status( 201 );
-		assert.strictEqual( response.body.property.id, testStatement.property.id );
-		assert.deepStrictEqual( response.body.value.content, testStatement.value.content );
+		assert.strictEqual( response.body.property.id, propertyId || testStatement.property.id );
+		assert.deepStrictEqual( response.body.value.content, content || testStatement.value.content );
 		assert.strictEqual( response.header[ 'content-type' ], 'application/json' );
 		assert.isAbove( new Date( response.header[ 'last-modified' ] ), originalLastModified );
 		assert.notStrictEqual( response.header.etag, makeEtag( originalRevisionId ) );
@@ -169,6 +169,18 @@ describe( newAddPropertyStatementRequestBuilder().getRouteDescription(), () => {
 
 			assertValidErrorResponse( response, 404, 'property-not-found' );
 			assert.include( response.body.message, propertyId );
+		} );
+	} );
+
+	describe( '415 error response', () => {
+		it( 'unsupported media type', async () => {
+			const contentType = 'multipart/form-data';
+			const response = await newAddPropertyStatementRequestBuilder( testPropertyId, testStatement )
+				.withHeader( 'content-type', contentType )
+				.makeRequest();
+
+			expect( response ).to.have.status( 415 );
+			assert.strictEqual( response.body.message, `Unsupported Content-Type: '${contentType}'` );
 		} );
 	} );
 } );
