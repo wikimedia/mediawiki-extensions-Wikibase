@@ -11,17 +11,17 @@ const bot = new MWBot( {
 
 describe( 'blocked user cannot use', function () {
 
-	before( function () {
-		bot.loginGetEditToken( {
+	before( async () => {
+		await bot.loginGetEditToken( {
 			username: browser.config.mwUser,
 			password: browser.config.mwPwd
 		} );
 
-		LoginPage.loginAdmin();
+		await LoginPage.loginAdmin();
 	} );
 
-	beforeEach( function blockUser() {
-		return bot.request( {
+	beforeEach( async () => {
+		await bot.request( {
 			action: 'block',
 			user: browser.config.mwUser,
 			expiry: '1 minute',
@@ -30,8 +30,8 @@ describe( 'blocked user cannot use', function () {
 		} );
 	} );
 
-	afterEach( function unblockUser() {
-		return bot.request( {
+	afterEach( async () => {
+		await bot.request( {
 			action: 'unblock',
 			user: browser.config.mwUser,
 			reason: 'Wikibase browser test done (T211120)',
@@ -39,10 +39,10 @@ describe( 'blocked user cannot use', function () {
 		} );
 	} );
 
-	function assertIsUserBlockedError() {
-		$( '#mw-returnto' ).waitForDisplayed();
+	async function assertIsUserBlockedError() {
+		await $( '#mw-returnto' ).waitForDisplayed();
 
-		assert.strictEqual( $( '#firstHeading' ).getText(), 'User is blocked' );
+		assert.strictEqual( await $( '#firstHeading' ).getText(), 'User is blocked' );
 	}
 
 	const tests = [
@@ -60,15 +60,16 @@ describe( 'blocked user cannot use', function () {
 	for ( const test of tests ) {
 		// eslint-disable-next-line mocha/no-setup-in-describe
 		const title = `Special:${test.name}`;
-		it( title, function () {
-			( new Page() ).openTitle( title );
+		it( title, async () => {
+			await ( new Page() ).openTitle( title );
 
-			assertIsUserBlockedError();
+			await assertIsUserBlockedError();
 
 			for ( const id of test.ids ) {
 				const selector = `#${id}`;
-				assert(
-					!$( selector ).isExisting(),
+				assert.strictEqual(
+					await $( selector ).isExisting(),
+					false,
 					`element "${selector}" should not exist`
 				);
 			}
