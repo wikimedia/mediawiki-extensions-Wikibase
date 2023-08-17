@@ -30,6 +30,7 @@ use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\SubEntityTypesMapper;
+use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\Content\EntityContent;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Content\EntityInstanceHolder;
@@ -59,7 +60,9 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 			'WikibaseRepo.EntityTypeDefinitions',
 			$this->getEntityTypeDefinitions()
 		);
-		$this->setService( 'WikibaseClient.SiteGroup', Site::GROUP_NONE );
+		if ( WikibaseSettings::isClientEnabled() ) {
+			$this->setService( 'WikibaseClient.SiteGroup', Site::GROUP_NONE );
+		}
 	}
 
 	abstract public function getModelId();
