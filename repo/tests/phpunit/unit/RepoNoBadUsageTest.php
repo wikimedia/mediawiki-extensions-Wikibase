@@ -21,7 +21,7 @@ class RepoNoBadUsageTest extends NoBadUsageTest {
 				'includes/ChangeModification/DispatchChangesJob.php' => 1, // guarded by isClientEnabled()
 			],
 			'WikibaseClient.' => [
-				'tests/phpunit/includes/Content/EntityHandlerTestCase.php' => 1, // mock
+				'tests/phpunit/includes/Content/EntityHandlerTestCase.php' => 1, // mock, guarded by isClientEnabled()
 			],
 			'Wikibase\\Client\\' => [
 				'includes/ChangeModification/DispatchChangesJob.php' => 1, // see above
