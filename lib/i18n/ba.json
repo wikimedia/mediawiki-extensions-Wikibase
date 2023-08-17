@@ -2,12 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"Lizalizaufa",
+			"З. ӘЙЛЕ",
 			"Ләйсән",
 			"Рустам Нурыев"
 		]
 	},
 	"wikibase-sitelinks-wikipedia": "Википедия",
-	"datatypes-type-quantity": "Миҡдары",
+	"datatypes-type-quantity": "Күләме",
 	"datatypes-type-monolingualtext": "Бер телле текст",
 	"datatypes-type-multilingualtext": "Күп телле текст",
 	"datatypes-type-mediawiki-title": "MediaWiki исеме",
