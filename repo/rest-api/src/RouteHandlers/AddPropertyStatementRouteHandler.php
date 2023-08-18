@@ -88,6 +88,7 @@ class AddPropertyStatementRouteHandler extends SimpleHandler {
 		$body = $this->getValidatedBody();
 		try {
 			return $this->newSuccessHttpResponse(
+				$propertyId,
 				$this->useCase->execute(
 					new AddPropertyStatementRequest(
 						$propertyId,
@@ -104,7 +105,7 @@ class AddPropertyStatementRouteHandler extends SimpleHandler {
 		}
 	}
 
-	private function newSuccessHttpResponse( AddPropertyStatementResponse $useCaseResponse ): Response {
+	private function newSuccessHttpResponse( string $propertyId, AddPropertyStatementResponse $useCaseResponse ): Response {
 		$httpResponse = $this->getResponseFactory()->create();
 		$httpResponse->setStatus( 201 );
 		$httpResponse->setHeader( 'Content-Type', 'application/json' );
@@ -114,11 +115,7 @@ class AddPropertyStatementRouteHandler extends SimpleHandler {
 		);
 		$httpResponse->setHeader( 'ETag', "\"{$useCaseResponse->getRevisionId()}\"" );
 		$statement = $useCaseResponse->getStatement();
-		$this->setLocationHeader(
-			$httpResponse,
-			$statement->getProperty()->getId()->getSerialization(),
-			"{$statement->getGuid()}"
-		);
+		$this->setLocationHeader( $httpResponse, $propertyId, "{$statement->getGuid()}" );
 		$httpResponse->setBody( new StringStream( json_encode(
 			$this->statementSerializer->serialize( $statement )
 		) ) );
