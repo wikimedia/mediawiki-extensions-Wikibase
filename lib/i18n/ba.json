@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Lizalizaufa",
+			"Айсар",
 			"З. ӘЙЛЕ",
 			"Ләйсән",
 			"Рустам Нурыев"
@@ -11,8 +12,8 @@
 	"datatypes-type-quantity": "Күләме",
 	"datatypes-type-monolingualtext": "Бер телле текст",
 	"datatypes-type-multilingualtext": "Күп телле текст",
-	"datatypes-type-mediawiki-title": "MediaWiki исеме",
+	"datatypes-type-mediawiki-title": "MediaWiki атамаһы",
 	"datatypes-type-unknown": "Аныҡланмаған",
-	"datatypes-type-globe-coordinate": "Географик координаталар",
+	"datatypes-type-globe-coordinate": "Географик координаттар",
 	"datatypes-type-time": "Ваҡыт мәле"
 }
