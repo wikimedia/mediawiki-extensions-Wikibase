@@ -227,16 +227,6 @@ class CreateClaimTest extends WikibaseApiTestCase {
 		return $argLists;
 	}
 
-	public function getItemAndPropertyForInvalid(): array {
-		static $array = null;
-
-		if ( $array === null ) {
-			$array = $this->getNewItemAndProperty();
-		}
-
-		return $array;
-	}
-
 	/**
 	 * @dataProvider invalidRequestProvider
 	 *
@@ -248,7 +238,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 		 * @var Item $item
 		 * @var Property $property
 		 */
-		list( $item, $property ) = $this->getItemAndPropertyForInvalid();
+		list( $item, $property ) = $this->getNewItemAndProperty();
 
 		if ( array_key_exists( 'entity', $params ) && $params['entity'] === '-' ) {
 			$params['entity'] = $item->getId()->getSerialization();

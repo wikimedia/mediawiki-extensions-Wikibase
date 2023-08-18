@@ -52,23 +52,21 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	 */
 	private $deserializerFactory;
 
+	public function addDBDataOnce() {
+		self::$propertyIds = [];
+
+		$this->initTestEntities( [ 'StringProp', 'Berlin' ] );
+		$store = $this->getEntityStore();
+		for ( $i = 0; $i < 4; $i++ ) {
+			$property = Property::newFromType( 'string' );
+			$store->saveEntity( $property, '', $this->user, EDIT_NEW );
+
+			self::$propertyIds[] = $property->getId();
+		}
+	}
+
 	protected function setUp(): void {
 		parent::setUp();
-
-		$store = $this->getEntityStore();
-
-		if ( !self::$propertyIds ) {
-			self::$propertyIds = [];
-
-			for ( $i = 0; $i < 4; $i++ ) {
-				$property = Property::newFromType( 'string' );
-				$store->saveEntity( $property, '', $this->user, EDIT_NEW );
-
-				self::$propertyIds[] = $property->getId();
-			}
-
-			$this->initTestEntities( [ 'StringProp', 'Berlin' ] );
-		}
 
 		$this->serializerFactory = new SerializerFactory(
 			new DataValueSerializer(),

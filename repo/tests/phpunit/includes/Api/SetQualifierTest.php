@@ -36,15 +36,8 @@ use Wikimedia\TestingAccessWrapper;
  */
 class SetQualifierTest extends WikibaseApiTestCase {
 
-	protected function setUp(): void {
-		parent::setUp();
-
-		static $hasEntities = false;
-
-		if ( !$hasEntities ) {
-			$this->initTestEntities( [ 'StringProp', 'Berlin' ] );
-			$hasEntities = true;
-		}
+	public function addDBDataOnce(): void {
+		$this->initTestEntities( [ 'StringProp', 'Berlin' ] );
 	}
 
 	/**

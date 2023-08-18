@@ -67,6 +67,16 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 	 */
 	private static $oldBadgeItemsSetting;
 
+	public function addDBDataOnce(): void {
+		self::$matchers = self::createMatchers();
+		$sitesTable = MediaWikiServices::getInstance()->getSiteStore();
+		$sitesTable->clear();
+		$sitesTable->saveSites( TestSites::getSites() );
+
+		$this->createItems();
+		$this->addBadgeMatcher();
+	}
+
 	protected function newSpecialPage() {
 		$siteLookup = $this->getServiceContainer()->getSiteLookup();
 		$settings = WikibaseRepo::getSettings();
@@ -98,17 +108,6 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		parent::setUp();
 
 		$this->setMwGlobals( 'wgGroupPermissions', [ '*' => [ 'read' => true, 'edit' => true ] ] );
-
-		if ( !self::$badgeId ) {
-			self::$matchers = self::createMatchers();
-			$sitesTable = MediaWikiServices::getInstance()->getSiteStore();
-			$sitesTable->clear();
-			$sitesTable->saveSites( TestSites::getSites() );
-
-			$this->createItems();
-			$this->addBadgeMatcher();
-		}
-
 		$settings = clone WikibaseRepo::getSettings();
 		$settings->setSetting( 'badgeItems', [ self::$badgeId => '' ] );
 		$this->setService( 'WikibaseRepo.Settings', $settings );
