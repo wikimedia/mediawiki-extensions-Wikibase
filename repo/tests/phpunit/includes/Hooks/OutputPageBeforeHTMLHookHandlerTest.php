@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Hooks;
 
 use MediaWiki\Request\FauxRequest;
+use MediaWiki\Title\Title;
 use MediaWiki\User\StaticUserOptionsLookup;
 use MediaWikiIntegrationTestCase;
 use NullHttpRequestFactory;
@@ -10,7 +11,6 @@ use NullStatsdDataFactory;
 use OutputPage;
 use PHPUnit\Framework\MockObject\MockObject;
 use RequestContext;
-use Title;
 use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;

@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\Tests\Integration\DataAccess\Scribunto;
 
-use Title;
+use MediaWiki\Title\Title;
 
 /**
  * Tests for pages that are not connected to any Item.

@@ -2,9 +2,9 @@
 
 namespace Wikibase\Client\UpdateRepo;
 
+use MediaWiki\Title\Title;
 use MediaWiki\User\UserIdentity;
 use Psr\Log\LoggerInterface;
-use Title;
 use Wikibase\Lib\Rdbms\ClientDomainDb;
 use Wikibase\Lib\Store\SiteLinkLookup;
 

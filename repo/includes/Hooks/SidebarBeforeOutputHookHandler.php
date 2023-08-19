@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Hooks;
 
+use MediaWiki\Title\Title;
 use Psr\Log\LoggerInterface;
 use Skin;
-use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityLookupException;

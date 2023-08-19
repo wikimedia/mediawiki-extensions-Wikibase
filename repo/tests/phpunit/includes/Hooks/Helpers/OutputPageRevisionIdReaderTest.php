@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Tests\Hooks\Helpers;
 
+use MediaWiki\Title\Title;
 use OutputPage;
 use PHPUnit\Framework\TestCase;
-use Title;
 use Wikibase\Repo\Hooks\Helpers\OutputPageRevisionIdReader;
 
 /**

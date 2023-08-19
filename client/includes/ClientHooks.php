@@ -3,8 +3,8 @@
 namespace Wikibase\Client;
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Title\Title;
 use Skin;
-use Title;
 use User;
 use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseEntityLibrary;
 use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary;

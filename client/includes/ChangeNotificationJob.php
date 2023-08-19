@@ -3,8 +3,8 @@
 namespace Wikibase\Client;
 
 use Job;
+use MediaWiki\Title\Title;
 use Psr\Log\LoggerInterface;
-use Title;
 use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikimedia\Assert\Assert;

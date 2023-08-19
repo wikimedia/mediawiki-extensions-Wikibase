@@ -3,8 +3,8 @@
 namespace Wikibase\Lib\Store;
 
 use MediaWiki\Page\WikiPageFactory;
+use MediaWiki\Title\Title;
 use TextContent;
-use Title;
 
 /**
  * Provides a list of ordered Property numbers

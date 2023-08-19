@@ -4,10 +4,10 @@ namespace Wikibase\Repo\Tests\Interactors;
 
 use IContextSource;
 use MediaWiki\Request\FauxRequest;
+use MediaWiki\Title\Title;
 use PHPUnit\Framework\MockObject\Matcher\InvokedRecorder;
 use RequestContext;
 use Status;
-use Title;
 use User;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;

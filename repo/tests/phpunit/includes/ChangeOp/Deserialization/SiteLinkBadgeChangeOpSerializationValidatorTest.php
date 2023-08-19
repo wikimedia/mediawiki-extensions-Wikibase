@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\ChangeOp\Deserialization;
 
-use Title;
+use MediaWiki\Title\Title;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationValidator;

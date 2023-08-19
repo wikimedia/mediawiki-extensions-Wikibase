@@ -3,8 +3,8 @@
 namespace Wikibase\Client\Hooks;
 
 use MediaWiki\HookContainer\HookContainer;
+use MediaWiki\Title\Title;
 use Psr\Log\LoggerInterface;
-use Title;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;

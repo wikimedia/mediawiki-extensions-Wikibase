@@ -6,7 +6,7 @@ namespace Wikibase\Client\Hooks;
 
 use MediaWiki\Page\PageIdentity;
 use MediaWiki\Rest\Hook\SearchResultProvideDescriptionHook;
-use Title;
+use MediaWiki\Title\Title;
 use Wikibase\Client\Store\DescriptionLookup;
 use Wikibase\Lib\SettingsArray;
 

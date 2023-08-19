@@ -5,7 +5,7 @@ namespace Wikibase\Client\Hooks;
 use Html;
 use IContextSource;
 use MediaWiki\Hook\InfoActionHook;
-use Title;
+use MediaWiki\Title\Title;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Store\ClientStore;

@@ -6,9 +6,9 @@ namespace Wikibase\Client\Tests\Integration\Hooks;
 
 use JobQueueGroup;
 use LinksUpdate;
+use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
 use ParserOutput;
-use Title;
 use Wikibase\Client\Hooks\DataUpdateHookHandler;
 use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\EntityUsage;

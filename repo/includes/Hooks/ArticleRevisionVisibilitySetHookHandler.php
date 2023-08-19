@@ -6,7 +6,7 @@ namespace Wikibase\Repo\Hooks;
 
 use JobQueueGroup;
 use MediaWiki\Hook\ArticleRevisionVisibilitySetHook;
-use Title;
+use MediaWiki\Title\Title;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\ChangeModification\DispatchChangeVisibilityNotificationJob;
 

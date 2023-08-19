@@ -5,8 +5,8 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Test\Hooks\FederatedProperties;
 
 use MediaWiki\Linker\LinkRenderer;
+use MediaWiki\Title\Title;
 use RequestContext;
-use Title;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Repo\FederatedProperties\ApiRequestExecutionException;

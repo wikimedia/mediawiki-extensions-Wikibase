@@ -3,7 +3,7 @@
 namespace Wikibase\Client\Tests\Maintenance;
 
 use MediaWiki\Tests\Maintenance\MaintenanceBaseTestCase;
-use Title;
+use MediaWiki\Title\Title;
 use Wikibase\Client\Maintenance\PopulateUnexpectedUnconnectedPagePageProp;
 use Wikibase\Client\NamespaceChecker;
 use Wikimedia\Rdbms\IDatabase;

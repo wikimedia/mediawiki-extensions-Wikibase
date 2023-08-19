@@ -6,7 +6,7 @@ use BadMethodCallException;
 use InvalidArgumentException;
 use LogicException;
 use MediaWiki\MediaWikiServices;
-use Title;
+use MediaWiki\Title\Title;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Repo\ItemSearchTextGenerator;

@@ -4,7 +4,7 @@ namespace Wikibase\Client\Notifications;
 
 use EchoEvent;
 use EchoEventPresentationModel;
-use Title;
+use MediaWiki\Title\Title;
 use Wikibase\Client\Hooks\EchoNotificationsHandlers;
 
 /**

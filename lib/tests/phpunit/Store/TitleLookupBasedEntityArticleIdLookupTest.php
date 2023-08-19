@@ -2,8 +2,8 @@
 
 namespace Wikibase\Lib\Tests\Store;
 
+use MediaWiki\Title\Title;
 use PHPUnit\Framework\TestCase;
-use Title;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\TitleLookupBasedEntityArticleIdLookup;

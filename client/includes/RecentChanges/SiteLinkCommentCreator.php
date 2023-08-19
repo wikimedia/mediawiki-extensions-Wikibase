@@ -8,9 +8,9 @@ use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
 use Language;
+use MediaWiki\Title\Title;
 use Message;
 use SiteLookup;
-use Title;
 
 /**
  * Creates an array structure with comment information for storing

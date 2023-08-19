@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiTestCase;
+use MediaWiki\Title\Title;
 use TestUser;
-use Title;
 use Wikibase\Repo\WikibaseRepo;
 
 /**

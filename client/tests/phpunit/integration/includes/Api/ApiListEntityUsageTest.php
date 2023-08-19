@@ -8,9 +8,9 @@ use ApiContinuationManager;
 use ApiMain;
 use ApiPageSet;
 use MediaWiki\Request\FauxRequest;
+use MediaWiki\Title\Title;
 use MediaWikiLangTestCase;
 use RequestContext;
-use Title;
 use Wikibase\Client\Api\ApiListEntityUsage;
 use Wikibase\Client\WikibaseClient;
 

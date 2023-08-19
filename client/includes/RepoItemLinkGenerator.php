@@ -3,7 +3,7 @@
 namespace Wikibase\Client;
 
 use Html;
-use Title;
+use MediaWiki\Title\Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 

@@ -10,8 +10,8 @@ use Elastica\Query\MatchAll;
 use Elastica\Query\MoreLikeThis;
 use ExtensionRegistry;
 use LinkCacheTestTrait;
+use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
-use Title;
 use Wikibase\Client\MoreLikeWikibase;
 
 /**

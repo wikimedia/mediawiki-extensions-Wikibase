@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Tests\Specials;
 
 use MediaWiki\Request\FauxRequest;
+use MediaWiki\Title\Title;
 use SpecialPageTestBase;
-use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\TermFallback;

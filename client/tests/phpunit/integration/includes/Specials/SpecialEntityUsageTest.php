@@ -4,8 +4,8 @@ namespace Wikibase\Client\Tests\Integration\Specials;
 
 use MediaWiki\Languages\LanguageConverterFactory;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Title\Title;
 use SpecialPageTestBase;
-use Title;
 use TrivialLanguageConverter;
 use Wikibase\Client\Specials\SpecialEntityUsage;
 use Wikibase\Client\WikibaseClient;

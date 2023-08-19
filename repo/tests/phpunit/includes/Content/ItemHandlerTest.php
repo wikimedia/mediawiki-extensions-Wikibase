@@ -4,8 +4,8 @@ namespace Wikibase\Repo\Tests\Content;
 
 use BadMethodCallException;
 use DataValues\StringValue;
+use MediaWiki\Title\Title;
 use ParserOutput;
-use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;

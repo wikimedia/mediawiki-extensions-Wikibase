@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Tests\Content;
 
 use MediaWiki\Revision\SlotRecord;
+use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
-use Title;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Repo\Content\ContentHandlerEntityIdLookup;

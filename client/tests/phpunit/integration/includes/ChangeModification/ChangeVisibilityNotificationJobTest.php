@@ -5,7 +5,7 @@ declare( strict_types=1 );
 namespace Wikibase\Client\Tests\Integration\ChangeModification;
 
 use MediaWiki\MediaWikiServices;
-use Title;
+use MediaWiki\Title\Title;
 use Wikibase\Client\ChangeModification\ChangeVisibilityNotificationJob;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\RecentChanges\SiteLinkCommentCreator;

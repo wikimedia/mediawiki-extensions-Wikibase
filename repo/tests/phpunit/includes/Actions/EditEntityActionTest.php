@@ -4,9 +4,9 @@ namespace Wikibase\Repo\Tests\Actions;
 
 use IContextSource;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Title\Title;
 use RuntimeException;
 use Status;
-use Title;
 use User;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Repo\Actions\EditEntityAction;

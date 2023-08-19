@@ -6,8 +6,8 @@ namespace Wikibase\Client\Tests\Integration\Hooks;
 
 use DatabaseUpdater;
 use Maintenance;
+use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
-use Title;
 use Wikibase\Client\Hooks\LoadExtensionSchemaUpdatesHookHandler;
 use Wikibase\Client\NamespaceChecker;
 use Wikimedia\Rdbms\IDatabase;

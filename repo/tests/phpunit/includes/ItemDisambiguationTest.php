@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Tests;
 
+use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
-use Title;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Interactors\TermSearchResult;

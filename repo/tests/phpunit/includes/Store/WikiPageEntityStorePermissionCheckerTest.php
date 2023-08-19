@@ -4,8 +4,8 @@ namespace Wikibase\Repo\Tests\Store;
 
 use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
-use Title;
 use TitleValue;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;

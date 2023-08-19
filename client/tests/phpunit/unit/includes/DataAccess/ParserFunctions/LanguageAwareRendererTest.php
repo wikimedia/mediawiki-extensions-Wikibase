@@ -6,9 +6,9 @@ namespace Wikibase\Client\Tests\Unit\DataAccess\ParserFunctions;
 
 use DataValues\StringValue;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Title\Title;
 use MediaWikiTestCaseTrait;
 use ParserOutput;
-use Title;
 use Wikibase\Client\DataAccess\ParserFunctions\LanguageAwareRenderer;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\DataAccess\SnaksFinder;

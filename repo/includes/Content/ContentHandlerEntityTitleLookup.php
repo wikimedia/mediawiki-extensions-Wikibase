@@ -6,8 +6,8 @@ namespace Wikibase\Repo\Content;
 
 use InvalidArgumentException;
 use MediaWiki\Interwiki\InterwikiLookup;
+use MediaWiki\Title\Title;
 use OutOfBoundsException;
-use Title;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityId;

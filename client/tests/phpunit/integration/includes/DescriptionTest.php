@@ -3,9 +3,9 @@
 namespace Wikibase\Client\Tests\Unit\Api;
 
 use ApiMain;
+use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
-use Title;
 use Wikibase\Client\Api\Description;
 use Wikibase\Client\Store\DescriptionLookup;
 use Wikimedia\TestingAccessWrapper;

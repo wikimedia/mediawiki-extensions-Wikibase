@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\Changes;
 
-use Title;
+use MediaWiki\Title\Title;
 use Wikibase\Lib\Changes\EntityChange;
 
 /**

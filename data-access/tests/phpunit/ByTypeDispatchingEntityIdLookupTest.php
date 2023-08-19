@@ -4,8 +4,8 @@ namespace Wikibase\DataAccess\Tests;
 
 use InvalidArgumentException;
 use MediaWiki\HookContainer\HookContainer;
+use MediaWiki\Title\Title;
 use PHPUnit\Framework\TestCase;
-use Title;
 use Wikibase\DataAccess\ByTypeDispatchingEntityIdLookup;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityIdLookup;

@@ -2,10 +2,10 @@
 
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
+use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
 use MovePageForm;
 use OutputPage;
-use Title;
 use Wikibase\Client\Hooks\MovePageNotice;
 use Wikibase\Client\RepoLinker;
 use Wikibase\DataAccess\EntitySourceDefinitions;

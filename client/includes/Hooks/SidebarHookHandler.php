@@ -7,10 +7,10 @@ namespace Wikibase\Client\Hooks;
 use MediaWiki\Hook\OutputPageParserOutputHook;
 use MediaWiki\Hook\SidebarBeforeOutputHook;
 use MediaWiki\Hook\SkinTemplateGetLanguageLinkHook;
+use MediaWiki\Title\Title;
 use OutputPage;
 use ParserOutput;
 use Skin;
-use Title;
 use Wikibase\Client\ClientHooks;
 use Wikibase\Client\NamespaceChecker;
 

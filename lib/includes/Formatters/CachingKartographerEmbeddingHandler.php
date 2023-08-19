@@ -8,11 +8,11 @@ use Html;
 use InvalidArgumentException;
 use Language;
 use MapCacheLRU;
+use MediaWiki\Title\Title;
 use Parser;
 use ParserOptions;
 use ParserOutput;
 use RequestContext;
-use Title;
 
 /**
  * Service for embedding Kartographer mapframes for GlobeCoordinateValues.

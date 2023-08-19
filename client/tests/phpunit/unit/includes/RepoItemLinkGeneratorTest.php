@@ -2,8 +2,8 @@
 
 namespace Wikibase\Client\Tests\Unit;
 
+use MediaWiki\Title\Title;
 use MediaWikiTestCaseTrait;
-use Title;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\RepoItemLinkGenerator;
 use Wikibase\Client\RepoLinker;

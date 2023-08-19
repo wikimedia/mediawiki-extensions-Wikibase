@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib\Store;
 
-use Title;
+use MediaWiki\Title\Title;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**

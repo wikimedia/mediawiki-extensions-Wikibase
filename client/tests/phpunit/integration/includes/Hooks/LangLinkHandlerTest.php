@@ -4,12 +4,12 @@ namespace Wikibase\Client\Tests\Integration\Hooks;
 
 use HashSiteStore;
 use MediaWiki\HookContainer\HookContainer;
+use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
 use ParserOutput;
 use Psr\Log\NullLogger;
 use Site;
 use TestSites;
-use Title;
 use Wikibase\Client\Hooks\LangLinkHandler;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\NoLangLinkHandler;

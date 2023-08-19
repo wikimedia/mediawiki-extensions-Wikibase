@@ -4,11 +4,11 @@ namespace Wikibase\Repo\Tests\Interactors;
 
 use HashSiteStore;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
 use RequestContext;
 use Status;
 use TestSites;
-use Title;
 use User;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;

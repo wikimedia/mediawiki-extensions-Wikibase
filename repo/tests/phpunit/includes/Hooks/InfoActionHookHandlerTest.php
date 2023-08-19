@@ -4,11 +4,11 @@ namespace Wikibase\Repo\Tests\Hooks;
 
 use Html;
 use IContextSource;
+use MediaWiki\Title\Title;
 use PageProps;
 use RequestContext;
 use Site;
 use SiteLookup;
-use Title;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityIdLookup;

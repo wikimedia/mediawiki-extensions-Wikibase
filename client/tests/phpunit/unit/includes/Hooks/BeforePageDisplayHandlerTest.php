@@ -2,11 +2,11 @@
 
 namespace Wikibase\Client\Tests\Unit\Hooks;
 
+use MediaWiki\Title\Title;
 use PHPUnit\Framework\TestCase;
 use RequestContext;
 use Skin;
 use SkinFallback;
-use Title;
 use User;
 use Wikibase\Client\Hooks\BeforePageDisplayHandler;
 use Wikibase\Client\NamespaceChecker;

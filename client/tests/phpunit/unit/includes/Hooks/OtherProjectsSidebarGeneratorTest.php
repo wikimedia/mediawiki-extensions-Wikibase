@@ -4,10 +4,10 @@ namespace Wikibase\Client\Tests\Integration\Hooks;
 
 use HashSiteStore;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Title\Title;
 use MediaWikiSite;
 use SiteLookup;
 use TestSites;
-use Title;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\Client\Hooks\SiteLinksForDisplayLookup;

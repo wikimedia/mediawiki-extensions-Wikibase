@@ -4,8 +4,8 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\ParserOutput;
 
 use DataValues\StringValue;
+use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
-use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;

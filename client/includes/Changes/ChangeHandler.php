@@ -5,9 +5,9 @@ namespace Wikibase\Client\Changes;
 
 use InvalidArgumentException;
 use MediaWiki\Page\PageStore;
+use MediaWiki\Title\Title;
 use MediaWiki\Title\TitleFactory;
 use Psr\Log\LoggerInterface;
-use Title;
 use Wikibase\Client\Hooks\WikibaseClientHookRunner;
 use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\Lib\Changes\Change;

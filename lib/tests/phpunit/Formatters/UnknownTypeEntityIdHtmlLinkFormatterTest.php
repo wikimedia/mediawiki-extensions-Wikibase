@@ -3,8 +3,8 @@
 namespace Wikibase\Lib\Tests\Formatters;
 
 use HamcrestPHPUnitIntegration;
+use MediaWiki\Title\Title;
 use PHPUnit\Framework\TestCase;
-use Title;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Formatters\NonExistingEntityIdHtmlFormatter;
 use Wikibase\Lib\Formatters\UnknownTypeEntityIdHtmlLinkFormatter;

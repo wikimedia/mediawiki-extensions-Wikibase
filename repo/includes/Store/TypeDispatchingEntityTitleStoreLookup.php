@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Store;
 
-use Title;
+use MediaWiki\Title\Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\ServiceByTypeDispatcher;
 

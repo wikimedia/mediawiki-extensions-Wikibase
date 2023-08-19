@@ -3,13 +3,13 @@
 namespace Wikibase\Repo\Tests;
 
 use MediaWiki\Request\FauxRequest;
+use MediaWiki\Title\Title;
 use MediaWiki\User\UserIdentity;
 use MediaWikiIntegrationTestCase;
 use ObjectCache;
 use ReflectionMethod;
 use RequestContext;
 use Status;
-use Title;
 use User;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;

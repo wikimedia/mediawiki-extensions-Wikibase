@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Tests\ParserOutput;
 
+use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
 use ParserOutput;
-use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;

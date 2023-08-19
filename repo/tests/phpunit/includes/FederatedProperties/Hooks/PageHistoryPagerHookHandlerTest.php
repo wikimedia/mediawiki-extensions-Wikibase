@@ -6,8 +6,8 @@ namespace Wikibase\Repo\Tests\FederatedProperties\Hooks;
 
 use HistoryPager;
 use IContextSource;
+use MediaWiki\Title\Title;
 use PHPUnit\Framework\TestCase;
-use Title;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;

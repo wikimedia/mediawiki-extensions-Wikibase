@@ -3,7 +3,7 @@
 namespace Wikibase\Lib\Formatters;
 
 use DataValues\StringValue;
-use Title;
+use MediaWiki\Title\Title;
 use ValueFormatters\ValueFormatter;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Assert\ParameterTypeException;

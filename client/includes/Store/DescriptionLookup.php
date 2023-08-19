@@ -5,8 +5,8 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Store;
 
 use InvalidArgumentException;
+use MediaWiki\Title\Title;
 use PageProps;
-use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\Store\EntityIdLookup;

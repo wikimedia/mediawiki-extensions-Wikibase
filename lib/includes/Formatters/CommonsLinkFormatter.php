@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Formatters;
 use DataValues\StringValue;
 use Html;
 use InvalidArgumentException;
-use Title;
+use MediaWiki\Title\Title;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 

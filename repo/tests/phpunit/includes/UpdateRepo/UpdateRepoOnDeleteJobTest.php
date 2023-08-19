@@ -3,13 +3,13 @@
 namespace Wikibase\Repo\Tests\UpdateRepo;
 
 use HashSiteStore;
+use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
 use NullStatsdDataFactory;
 use Psr\Log\NullLogger;
 use Site;
 use SiteLookup;
 use Status;
-use Title;
 use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;

@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\Tests\Integration\Changes;
 
-use Title;
+use MediaWiki\Title\Title;
 use Wikibase\Client\Changes\PageUpdater;
 use Wikibase\Lib\Changes\EntityChange;
 

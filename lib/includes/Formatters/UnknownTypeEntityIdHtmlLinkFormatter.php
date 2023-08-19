@@ -3,7 +3,7 @@
 namespace Wikibase\Lib\Formatters;
 
 use Html;
-use Title;
+use MediaWiki\Title\Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;

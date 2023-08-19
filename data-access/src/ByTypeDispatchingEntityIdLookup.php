@@ -3,7 +3,7 @@
 namespace Wikibase\DataAccess;
 
 use MediaWiki\HookContainer\HookContainer;
-use Title;
+use MediaWiki\Title\Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\ServiceByTypeDispatcher;
 use Wikibase\Lib\Store\EntityIdLookup;

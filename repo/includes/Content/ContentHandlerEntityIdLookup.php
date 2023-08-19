@@ -5,8 +5,8 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Content;
 
 use MediaWiki\HookContainer\HookContainer;
+use MediaWiki\Title\Title;
 use OutOfBoundsException;
-use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\Store\EntityIdLookup;

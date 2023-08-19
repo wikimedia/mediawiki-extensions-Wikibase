@@ -3,11 +3,11 @@
 namespace Wikibase\Client\Tests\Unit\DataAccess\ParserFunctions;
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Title\Title;
 use Parser;
 use ParserOptions;
 use PPFrame;
 use PPNode;
-use Title;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\DataAccess\ParserFunctions\Runner;
 use Wikibase\Client\DataAccess\ParserFunctions\StatementGroupRenderer;

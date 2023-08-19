@@ -4,8 +4,8 @@ declare( strict_types=1 );
 
 namespace Wikibase\Client\Tests\Integration\Store\Sql;
 
+use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
-use Title;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\Store\Sql\UnexpectedUnconnectedPagePrimer;
 use Wikibase\Client\WikibaseClient;

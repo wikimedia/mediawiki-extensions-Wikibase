@@ -4,9 +4,9 @@ namespace Wikibase\Repo\Hooks;
 
 use Html;
 use IContextSource;
+use MediaWiki\Title\Title;
 use PageProps;
 use SiteLookup;
-use Title;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Store\SubscriptionLookup;

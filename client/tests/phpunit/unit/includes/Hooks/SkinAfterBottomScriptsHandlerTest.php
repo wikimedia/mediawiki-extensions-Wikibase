@@ -5,7 +5,7 @@ namespace Wikibase\Client\Tests\Unit\Hooks;
 use File;
 use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Revision\RevisionRecord;
-use Title;
+use MediaWiki\Title\Title;
 use Wikibase\Client\Hooks\SkinAfterBottomScriptsHandler;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\WikibaseClient;

@@ -6,7 +6,7 @@ namespace Wikibase\Client\DataAccess\Scribunto;
 
 use InvalidArgumentException;
 use MalformedTitleException;
-use Title;
+use MediaWiki\Title\Title;
 use TitleFormatter;
 use TitleParser;
 use Wikibase\Client\Usage\UsageAccumulator;

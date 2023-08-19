@@ -6,9 +6,9 @@ use ApiMain;
 use ApiPageSet;
 use ApiQuery;
 use MediaWiki\Request\FauxRequest;
+use MediaWiki\Title\Title;
 use MediaWikiLangTestCase;
 use RequestContext;
-use Title;
 use Wikibase\Client\Api\ApiPropsEntityUsage;
 use Wikibase\Client\WikibaseClient;
 

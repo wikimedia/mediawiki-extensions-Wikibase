@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\DataAccess;
 
-use Title;
+use MediaWiki\Title\Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityTitleLookup;

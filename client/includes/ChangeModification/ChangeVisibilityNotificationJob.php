@@ -5,7 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\ChangeModification;
 
 use MediaWiki\MediaWikiServices;
-use Title;
+use MediaWiki\Title\Title;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Rdbms\ClientDomainDb;
 use Wikimedia\Assert\Assert;

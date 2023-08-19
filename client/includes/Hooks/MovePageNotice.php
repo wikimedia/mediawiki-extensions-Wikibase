@@ -6,8 +6,8 @@ namespace Wikibase\Client\Hooks;
 
 use Html;
 use MediaWiki\Hook\SpecialMovepageAfterMoveHook;
+use MediaWiki\Title\Title;
 use MovePageForm;
-use Title;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Store\ClientStore;
 use Wikibase\Lib\SettingsArray;

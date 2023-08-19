@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Formatters;
 
-use Title;
+use MediaWiki\Title\Title;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\SiteLink;

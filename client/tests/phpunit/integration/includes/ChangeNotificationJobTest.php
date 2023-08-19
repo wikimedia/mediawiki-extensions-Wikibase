@@ -2,8 +2,8 @@
 
 namespace Wikibase\Client\Tests\Integration;
 
+use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
-use Title;
 use Wikibase\Client\ChangeNotificationJob;
 
 /**

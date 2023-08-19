@@ -3,8 +3,8 @@
 namespace Wikibase\Client\Tests\Integration\DataAccess\Scribunto;
 
 use ExtensionRegistry;
+use MediaWiki\Title\Title;
 use Scribunto_LuaEngineTestBase;
-use Title;
 use Wikibase\Client\Tests\Integration\DataAccess\WikibaseDataAccessTestItemSetUpHelper;
 use Wikibase\Client\Tests\Mocks\MockClientStore;
 use Wikibase\Client\WikibaseClient;

@@ -9,7 +9,7 @@ use ApiPageSet;
 use ApiQuery;
 use ApiQueryGeneratorBase;
 use ApiResult;
-use Title;
+use MediaWiki\Title\Title;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikimedia\ParamValidator\ParamValidator;

@@ -9,7 +9,7 @@ use JobQueueGroup;
 use JobSpecification;
 use MediaWiki\Hook\ArticleRevisionVisibilitySetHook;
 use MediaWiki\Page\Hook\ArticleDeleteCompleteHook;
-use Title;
+use MediaWiki\Title\Title;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;
 

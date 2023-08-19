@@ -3,7 +3,7 @@
 namespace Wikibase\Client\Tests\Unit\Store;
 
 use InvalidArgumentException;
-use Title;
+use MediaWiki\Title\Title;
 use Wikibase\Client\Store\AddUsagesForPageJob;
 use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\EntityUsage;

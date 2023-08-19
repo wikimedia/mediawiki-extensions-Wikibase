@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Store\Sql;
 
-use Title;
+use MediaWiki\Title\Title;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\EntityIdLookup;

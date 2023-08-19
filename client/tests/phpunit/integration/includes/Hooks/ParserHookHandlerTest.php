@@ -5,9 +5,9 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
 use ParserOptions;
-use Title;
 use User;
 use Wikibase\Client\Tests\Mocks\MockClientStore;
 use Wikibase\Client\WikibaseClient;

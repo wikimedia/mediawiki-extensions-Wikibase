@@ -2,9 +2,9 @@
 
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
+use MediaWiki\Title\Title;
 use MediaWiki\User\UserOptionsManager;
 use MediaWikiIntegrationTestCase;
-use Title;
 use User;
 use Wikibase\Client\Hooks\EchoNotificationsHandlers;
 use Wikibase\Client\NamespaceChecker;

@@ -8,7 +8,7 @@ use ApiQuery;
 use ApiQueryBase;
 use ApiResult;
 use InvalidArgumentException;
-use Title;
+use MediaWiki\Title\Title;
 use Wikibase\DataAccess\AliasTermBuffer;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Term\TermBuffer;

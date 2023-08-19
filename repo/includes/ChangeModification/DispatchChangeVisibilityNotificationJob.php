@@ -6,7 +6,7 @@ use IJobSpecification;
 use JobSpecification;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionLookup;
-use Title;
+use MediaWiki\Title\Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Changes\RepoRevisionIdentifier;
 use Wikibase\Repo\WikibaseRepo;

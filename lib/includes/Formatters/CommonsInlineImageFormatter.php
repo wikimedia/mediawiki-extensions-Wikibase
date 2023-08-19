@@ -10,9 +10,9 @@ use Language;
 use Linker;
 use MediaWiki\Languages\LanguageFactory;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Title\Title;
 use ParserOptions;
 use RepoGroup;
-use Title;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 

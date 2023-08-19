@@ -5,10 +5,10 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Tests\Unit;
 
 use Content;
+use MediaWiki\Title\Title;
 use ParserOutput;
 use Psr\Log\LogLevel;
 use TestLogger;
-use Title;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;

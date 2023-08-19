@@ -4,8 +4,8 @@ namespace Wikibase\Client\Tests\Unit\Hooks;
 
 use Html;
 use IContextSource;
+use MediaWiki\Title\Title;
 use RequestContext;
-use Title;
 use Wikibase\Client\Hooks\InfoActionHookHandler;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\RepoLinker;

@@ -3,9 +3,9 @@
 namespace Wikibase\Lib\Tests\Formatters;
 
 use HamcrestPHPUnitIntegration;
+use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
-use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;

@@ -6,10 +6,10 @@ namespace Wikibase\Repo\UpdateRepo;
 
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Title\Title;
 use OutOfBoundsException;
 use Psr\Log\LoggerInterface;
 use SiteLookup;
-use Title;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\SiteLink;

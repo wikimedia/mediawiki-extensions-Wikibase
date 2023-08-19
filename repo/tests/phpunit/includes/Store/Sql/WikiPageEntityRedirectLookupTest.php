@@ -5,8 +5,8 @@ declare( strict_types=1 );
 namespace Wikibase\Repo\Tests\Store\Sql;
 
 use ContentHandler;
+use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
-use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;

@@ -3,8 +3,8 @@
 namespace Wikibase\Client\Tests\Integration\Specials;
 
 use Iterator;
+use MediaWiki\Title\Title;
 use SpecialPageTestBase;
-use Title;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\Specials\SpecialUnconnectedPages;
 use Wikibase\Client\WikibaseClient;

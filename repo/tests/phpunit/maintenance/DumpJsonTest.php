@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Tests\Maintenance;
 
 use DataValues\StringValue;
+use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
-use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;

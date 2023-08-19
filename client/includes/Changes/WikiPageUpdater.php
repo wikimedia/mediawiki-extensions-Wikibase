@@ -5,9 +5,9 @@ namespace Wikibase\Client\Changes;
 use HTMLCacheUpdateJob;
 use JobQueueGroup;
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
+use MediaWiki\Title\Title;
 use Psr\Log\LoggerInterface;
 use RefreshLinksJob;
-use Title;
 use Wikibase\Lib\Changes\EntityChange;
 
 /**

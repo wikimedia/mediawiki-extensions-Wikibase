@@ -3,9 +3,9 @@
 namespace Wikibase\Client\Hooks;
 
 use LanguageCode;
+use MediaWiki\Title\Title;
 use Site;
 use SiteLookup;
-use Title;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 

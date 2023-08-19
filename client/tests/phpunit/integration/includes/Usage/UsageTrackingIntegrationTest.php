@@ -2,8 +2,8 @@
 
 namespace Wikibase\Client\Tests\Integration\Usage;
 
+use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
-use Title;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;

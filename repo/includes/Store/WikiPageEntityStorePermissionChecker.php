@@ -4,8 +4,8 @@ namespace Wikibase\Repo\Store;
 
 use InvalidArgumentException;
 use MediaWiki\Permissions\PermissionManager;
+use MediaWiki\Title\Title;
 use Status;
-use Title;
 use User;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;

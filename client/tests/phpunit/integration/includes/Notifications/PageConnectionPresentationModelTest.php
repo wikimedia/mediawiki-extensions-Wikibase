@@ -4,9 +4,9 @@ namespace Wikibase\Client\Tests\Integration\Notifications;
 
 use EchoEvent;
 use EchoEventPresentationModel;
+use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
 use Message;
-use Title;
 use User;
 use Wikibase\Client\Hooks\EchoNotificationsHandlers;
 use Wikibase\Client\Hooks\EchoSetupHookHandler;

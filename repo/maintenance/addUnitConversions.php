@@ -7,7 +7,7 @@ use DataValues\QuantityValue;
 use Maintenance;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Sparql\SparqlClient;
-use Title;
+use MediaWiki\Title\Title;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Lib\Units\JsonUnitStorage;

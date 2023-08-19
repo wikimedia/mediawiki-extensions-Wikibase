@@ -7,7 +7,7 @@ namespace Wikibase\Repo\ChangeModification;
 use BatchRowIterator;
 use JobSpecification;
 use MediaWiki\MediaWikiServices;
-use Title;
+use MediaWiki\Title\Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Changes\RepoRevisionIdentifier;
 use Wikibase\Lib\Rdbms\RepoDomainDb;

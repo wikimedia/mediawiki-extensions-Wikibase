@@ -3,8 +3,8 @@ declare( strict_types=1 );
 
 namespace Wikibase\Lib\Tests\Store;
 
+use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
-use Title;
 use Wikibase\Lib\Store\WikiPageItemOrderProvider;
 use WikitextContent;
 

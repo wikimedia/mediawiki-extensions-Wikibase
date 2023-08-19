@@ -5,9 +5,9 @@ declare( strict_types=1 );
 namespace Wikibase\Client\Tests\Integration\Store\Sql;
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
 use PageProps;
-use Title;
 use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;

@@ -4,8 +4,8 @@ declare( strict_types = 1 );
 namespace Wikibase\Lib\Tests\Store;
 
 use MediaWiki\Cache\LinkBatchFactory;
+use MediaWiki\Title\Title;
 use PHPUnit\Framework\TestCase;
-use Title;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\TitleLookupBasedEntityExistenceChecker;

@@ -6,11 +6,11 @@ use HTMLCacheUpdateJob;
 use Job;
 use JobQueueGroup;
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
+use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Log\NullLogger;
 use RefreshLinksJob;
-use Title;
 use Wikibase\Client\Changes\WikiPageUpdater;
 use Wikibase\Lib\Changes\EntityChange;
 

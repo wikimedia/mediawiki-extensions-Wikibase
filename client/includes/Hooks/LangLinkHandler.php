@@ -2,10 +2,10 @@
 
 namespace Wikibase\Client\Hooks;
 
+use MediaWiki\Title\Title;
 use ParserOutput;
 use Site;
 use SiteLookup;
-use Title;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\DataModel\SiteLink;
 

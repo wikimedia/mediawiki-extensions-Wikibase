@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\LinkedData;
 
-use Title;
+use MediaWiki\Title\Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityTitleLookup;
 

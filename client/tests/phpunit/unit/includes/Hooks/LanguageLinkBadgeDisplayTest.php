@@ -3,10 +3,10 @@
 namespace Wikibase\Client\Tests\Unit\Hooks;
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Title\Title;
 use OutputPage;
 use ParserOutput;
 use RequestContext;
-use Title;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\DataModel\Entity\EntityId;

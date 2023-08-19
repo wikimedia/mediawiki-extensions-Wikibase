@@ -3,8 +3,8 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Hooks;
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Title\Title;
 use PHPUnit\Framework\TestCase;
-use Title;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;

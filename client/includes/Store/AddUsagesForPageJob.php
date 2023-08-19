@@ -4,7 +4,7 @@ namespace Wikibase\Client\Store;
 
 use Job;
 use JobSpecification;
-use Title;
+use MediaWiki\Title\Title;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParser;

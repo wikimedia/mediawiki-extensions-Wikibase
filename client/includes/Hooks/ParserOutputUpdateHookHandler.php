@@ -6,8 +6,8 @@ namespace Wikibase\Client\Hooks;
 
 use Content;
 use MediaWiki\Content\Hook\ContentAlterParserOutputHook;
+use MediaWiki\Title\Title;
 use ParserOutput;
-use Title;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\Usage\UsageAccumulatorFactory;

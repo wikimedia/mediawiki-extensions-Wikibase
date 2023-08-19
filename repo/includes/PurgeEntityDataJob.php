@@ -8,7 +8,7 @@ use BatchRowIterator;
 use HtmlCacheUpdater;
 use Job;
 use MediaWiki\MediaWikiServices;
-use Title;
+use MediaWiki\Title\Title;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;

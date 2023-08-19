@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Store\Sql;
 
-use Title;
+use MediaWiki\Title\Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;

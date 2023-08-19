@@ -3,7 +3,7 @@
 namespace Wikibase\Lib\Tests\Formatters;
 
 use LogicException;
-use Title;
+use MediaWiki\Title\Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;

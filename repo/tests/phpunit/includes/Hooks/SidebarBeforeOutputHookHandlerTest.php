@@ -2,11 +2,11 @@
 
 namespace Wikibase\Repo\Tests\Hooks;
 
+use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
 use Message;
 use Psr\Log\LoggerInterface;
 use Skin;
-use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityLookupException;

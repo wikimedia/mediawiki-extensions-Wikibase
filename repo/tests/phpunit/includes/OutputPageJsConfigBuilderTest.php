@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Tests;
 
+use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
 use OutputPage;
-use Title;
 use User;
 use Wikibase\Repo\OutputPageJsConfigBuilder;
 

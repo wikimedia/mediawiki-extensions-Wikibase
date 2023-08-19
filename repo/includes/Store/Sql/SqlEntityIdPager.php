@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Store\Sql;
 
 use LinkCache;
-use Title;
+use MediaWiki\Title\Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 use Wikibase\DataModel\Services\EntityId\SeekableEntityIdPager;

@@ -34,7 +34,7 @@ class MetaDataBridgeConfig extends ApiQueryBase {
 		$this->repoSettings = $repoSettings;
 
 		/**
-		 * Todo: Replace this callback when the {@see \Title} class is in better shape
+		 * Todo: Replace this callback when the {@see \MediaWiki\Title\Title} class is in better shape
 		 */
 		$this->resolveTitleStringToUrl = $resolveTitleStringToUrl;
 	}

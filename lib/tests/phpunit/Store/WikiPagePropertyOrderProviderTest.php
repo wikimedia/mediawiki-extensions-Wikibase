@@ -2,8 +2,8 @@
 
 namespace Wikibase\Lib\Tests\Store;
 
+use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
-use Title;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
 use WikitextContent;
 
