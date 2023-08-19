@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Tests\Specials;
 
-use FauxResponse;
 use MediaWiki\Languages\LanguageNameUtils;
 use MediaWiki\Request\FauxRequest;
+use MediaWiki\Request\FauxResponse;
 use NullStatsdDataFactory;
 use SpecialPageExecutor;
 use Status;

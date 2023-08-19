@@ -3,11 +3,11 @@
 namespace Wikibase\Repo\Tests\Specials;
 
 use ChangeTags;
-use FauxResponse;
 use Hamcrest\Matcher;
 use HamcrestPHPUnitIntegration;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Request\FauxRequest;
+use MediaWiki\Request\FauxResponse;
 use SpecialPageTestBase;
 use TestSites;
 use Wikibase\DataModel\Entity\EntityRedirect;

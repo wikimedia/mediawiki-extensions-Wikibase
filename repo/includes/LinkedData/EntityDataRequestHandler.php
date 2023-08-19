@@ -4,10 +4,10 @@ namespace Wikibase\Repo\LinkedData;
 
 use HtmlCacheUpdater;
 use HttpError;
+use MediaWiki\Request\WebResponse;
 use OutputPage;
 use Psr\Log\LoggerInterface;
 use WebRequest;
-use WebResponse;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
