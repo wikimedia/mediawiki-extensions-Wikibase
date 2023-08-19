@@ -50,7 +50,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 				'e' => [ 'value' => [ 'en' => 'Different Value' ] ] ],
 			[ //5
 				'p' => [ 'language' => 'sgs', 'value' => 'V?sata' ],
-				'e' => [ 'value' => [ 'sgs' => 'V?sata','en' => 'Different Value' ] ] ],
+				'e' => [ 'value' => [ 'sgs' => 'V?sata', 'en' => 'Different Value' ] ] ],
 			[ //6
 				'p' => [ 'language' => 'en', 'value' => '' ],
 				'e' => [ 'value' => [ 'sgs' => 'V?sata' ] ] ],

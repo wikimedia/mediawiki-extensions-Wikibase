@@ -394,13 +394,13 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 				'p' => [ 'titles' => 'Berlin' ],
 				'e' => [ 'exception' => [ 'type' => ApiUsageException::class, 'code' => 'param-missing' ] ] ],
 			[ //6 normalization fails with 2 titles
-				'p' => [ 'sites' => 'enwiki', 'titles' => 'Foo|Bar' ,'normalize' => '' ],
+				'p' => [ 'sites' => 'enwiki', 'titles' => 'Foo|Bar' , 'normalize' => '' ],
 				'e' => [ 'exception' => [ 'type' => ApiUsageException::class, 'code' => 'params-illegal' ] ] ],
 			[ //7 normalization fails with 2 sites
-				'p' => [ 'sites' => 'enwiki|dewiki', 'titles' => 'Boo' ,'normalize' => '' ],
+				'p' => [ 'sites' => 'enwiki|dewiki', 'titles' => 'Boo' , 'normalize' => '' ],
 				'e' => [ 'exception' => [ 'type' => ApiUsageException::class, 'code' => 'params-illegal' ] ] ],
 			[ //8 normalization fails with 2 sites and 2 titles
-				'p' => [ 'sites' => 'enwiki|dewiki', 'titles' => 'Foo|Bar' ,'normalize' => '' ],
+				'p' => [ 'sites' => 'enwiki|dewiki', 'titles' => 'Foo|Bar' , 'normalize' => '' ],
 				'e' => [ 'exception' => [ 'type' => ApiUsageException::class, 'code' => 'params-illegal' ] ] ],
 			[ //9 must request one site, one title, or an equal number of sites and titles
 				'p' => [ 'sites' => 'dewiki|enwiki', 'titles' => 'Oslo|Berlin|London' ],

@@ -802,7 +802,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 					'code' => 'invalid-entity-id',
 				] ] ],
 			'non existent sitelink' => [
-				'p' => [ 'site' => 'dewiki','title' => 'NonExistent', 'data' => '{}' ],
+				'p' => [ 'site' => 'dewiki', 'title' => 'NonExistent', 'data' => '{}' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
 					'code' => 'no-such-entity-link',
