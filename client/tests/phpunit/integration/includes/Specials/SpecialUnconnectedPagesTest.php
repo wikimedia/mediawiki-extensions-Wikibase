@@ -4,6 +4,7 @@ namespace Wikibase\Client\Tests\Integration\Specials;
 
 use Iterator;
 use MediaWiki\Title\Title;
+use MediaWiki\Title\TitleFactory;
 use SpecialPageTestBase;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\Specials\SpecialUnconnectedPages;
@@ -254,7 +255,7 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 
 		$namespaceChecker = new NamespaceChecker( [] );
 
-		$titleFactoryMock = $this->createMock( \TitleFactory::class );
+		$titleFactoryMock = $this->createMock( TitleFactory::class );
 
 		$titleFactoryMock->method( 'newFromID' )
 			->willReturn( null );
