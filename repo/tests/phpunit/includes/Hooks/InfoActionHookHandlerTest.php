@@ -4,8 +4,8 @@ namespace Wikibase\Repo\Tests\Hooks;
 
 use Html;
 use IContextSource;
+use MediaWiki\Page\PageProps;
 use MediaWiki\Title\Title;
-use PageProps;
 use RequestContext;
 use Site;
 use SiteLookup;

@@ -4,8 +4,8 @@ namespace Wikibase\Repo\Hooks;
 
 use Html;
 use IContextSource;
+use MediaWiki\Page\PageProps;
 use MediaWiki\Title\Title;
-use PageProps;
 use SiteLookup;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;

@@ -4,8 +4,8 @@ namespace Wikibase\Client\Tests\Unit\Store;
 
 use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Page\PageProps;
 use MediaWiki\Title\Title;
-use PageProps;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Client\Store\DescriptionLookup;

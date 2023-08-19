@@ -4,8 +4,8 @@ declare( strict_types=1 );
 
 namespace Wikibase\Client\Store\Sql;
 
+use MediaWiki\Page\PageProps;
 use MediaWiki\Title\Title;
-use PageProps;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Store\EntityIdLookup;
