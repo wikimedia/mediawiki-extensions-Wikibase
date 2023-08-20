@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Tests\Hooks\Helpers;
 
 use DerivativeContext;
-use FauxResponse;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Request\FauxResponse;
 use MediaWiki\Title\Title;
 use OutputPage;
 use PHPUnit\Framework\TestCase;

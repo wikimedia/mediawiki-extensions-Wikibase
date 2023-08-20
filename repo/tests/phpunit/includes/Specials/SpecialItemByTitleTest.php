@@ -3,13 +3,13 @@
 namespace Wikibase\Repo\Tests\Specials;
 
 use HashSiteStore;
+use MediaWiki\Request\WebResponse;
 use MediaWiki\Title\Title;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Log\NullLogger;
 use Site;
 use SiteLookup;
 use SpecialPageTestBase;
-use WebResponse;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\LanguageNameLookup;

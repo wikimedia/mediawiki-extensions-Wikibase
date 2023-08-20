@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Tests\Specials;
 
-use FauxResponse;
 use HashSiteStore;
 use InvalidArgumentException;
+use MediaWiki\Request\FauxResponse;
 use Site;
 use SiteLookup;
 use SpecialPageTestBase;

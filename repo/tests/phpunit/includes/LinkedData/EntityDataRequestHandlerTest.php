@@ -6,11 +6,11 @@ namespace Wikibase\Repo\Tests\LinkedData;
 
 use DataValues\Serializers\DataValueSerializer;
 use DerivativeContext;
-use FauxResponse;
 use HashSiteStore;
 use HtmlCacheUpdater;
 use HttpError;
 use MediaWiki\Request\FauxRequest;
+use MediaWiki\Request\FauxResponse;
 use MediaWiki\Revision\SlotRecord;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;

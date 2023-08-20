@@ -5,11 +5,11 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Specials;
 
 use DataValues\Serializers\DataValueSerializer;
-use FauxResponse;
 use HashSiteStore;
 use HtmlCacheUpdater;
 use HttpError;
 use MediaWiki\Request\FauxRequest;
+use MediaWiki\Request\FauxResponse;
 use MediaWiki\Revision\SlotRecord;
 use MediaWiki\Title\Title;
 use OutputPage;

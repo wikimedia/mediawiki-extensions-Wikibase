@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Actions;
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Request\FauxResponse;
 use OutputPage;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\Actions\ViewEntityAction;
@@ -170,7 +171,7 @@ class ViewEntityActionTest extends ActionTestCase {
 		$page = $this->getServiceContainer()->getWikiPageFactory()->newFromTitle( $title );
 		$action = $this->createAction( 'view', $page );
 
-		/** @var \FauxResponse $response */
+		/** @var FauxResponse $response */
 		$response = $action->getRequest()->response();
 		$response->header( "HTTP/1.1 200 OK" ); // reset
 

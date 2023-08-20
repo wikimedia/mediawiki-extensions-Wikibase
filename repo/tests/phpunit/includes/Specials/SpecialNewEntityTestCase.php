@@ -7,6 +7,7 @@ use CommentStoreComment;
 use MediaWiki\Block\AbstractBlock;
 use MediaWiki\Block\BlockManager;
 use MediaWiki\Request\FauxRequest;
+use MediaWiki\Request\FauxResponse;
 use PHPUnit\Framework\MockObject\MockObject;
 use RequestContext;
 use SpecialPageTestBase;
@@ -47,7 +48,7 @@ abstract class SpecialNewEntityTestCase extends SpecialPageTestBase {
 		$formData['wpEditToken'] = RequestContext::getMain()->getUser()->getEditToken();
 		$request = new FauxRequest( $formData, true );
 
-		/** @var \FauxResponse $webResponse */
+		/** @var FauxResponse $webResponse */
 		list( , $webResponse ) = $this->executeSpecialPage( '', $request );
 
 		$entityId = $this->extractEntityIdFromUrl( $webResponse->getHeader( 'location' ) );
@@ -119,7 +120,7 @@ abstract class SpecialNewEntityTestCase extends SpecialPageTestBase {
 		$formData['wpEditToken'] = RequestContext::getMain()->getUser()->getEditToken();
 		$request = new FauxRequest( $formData, true );
 
-		/** @var \FauxResponse $webResponse */
+		/** @var FauxResponse $webResponse */
 		list( $html ) = $this->executeSpecialPage( '', $request );
 
 		$this->assertHtmlContainsErrorMessage( $html, $errorMessageText );
