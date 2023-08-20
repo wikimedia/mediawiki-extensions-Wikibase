@@ -4,7 +4,7 @@ namespace Wikibase\Repo\LinkedData;
 
 use ApiMain;
 use DerivativeContext;
-use DerivativeRequest;
+use MediaWiki\Request\DerivativeRequest;
 use RequestContext;
 use Wikimedia\Purtle\RdfWriterFactory;
 
