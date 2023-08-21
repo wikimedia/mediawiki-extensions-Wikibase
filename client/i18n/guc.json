@@ -7,7 +7,7 @@
 	"tooltip-t-wikibase": "Süpüshii a'ttalee epe'ipajaanüka eere outkajain atüjayaakalu'u",
 	"wikibase-comment-update": "Awanajaanüsü wane süpüshii tüü {{WBREPONAME}}",
 	"wikibase-dataitem": "Süpüshii tüü {{WBREPONAME}}",
-	"wikibase-editlinks": "Anaataa sejepüsekalüirua",
+	"wikibase-editlinks": "Anoukta suurala tü ashajalaka",
 	"wikibase-editlinkstitle": "Anaataa tü a'ttaleekalu'u kojuyaka anüikii",
 	"wikibase-linkitem-addlinks": "E'itaa ejepüseirua sünain",
 	"wikibase-linkitem-title": "Eje'ipajiraa tü ee'iyalayaakalüirua",
@@ -20,5 +20,5 @@
 	"wikibase-rc-hide-wikidata-show": "Ee'iyataa",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Anaataa tüü {{WBREPONAME}}",
-	"wikibase-otherprojects": "Sulu'u waneeyan aa'innajatü"
+	"wikibase-otherprojects": "Aa'innajatü epe'ipajaaka sümaa"
 }

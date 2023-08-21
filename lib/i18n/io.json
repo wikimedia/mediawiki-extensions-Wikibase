@@ -80,5 +80,10 @@
 	"wikibase-entity-summary-wbremovequalifiers-remove": "Efacita {{PLURAL:$1|qualeso|qualesi}}",
 	"wikibase-entity-summary-wbremovereferences-remove": "Efacita {{PLURAL:$1|refero|referi}} de la demando",
 	"wikibase-entity-summary-wbmergeitems-from": "Artiklo o paragrafo absorbita de $3",
-	"wikibase-entity-summary-wbmergeitems-to": "Artiklo o paragrafo absorbita en $3"
+	"wikibase-entity-summary-wbmergeitems-to": "Artiklo o paragrafo absorbita en $3",
+	"wikibase-item-summary-wbcreate-new": "Kreita nova artiklo o paragrafo",
+	"wikibase-item-summary-wbeditentity": "Kreita nov artiklo o paragrafo",
+	"wikibase-item-summary-wbeditentity-create": "Kreita nov artiklo o paragrafo",
+	"wikibase-item-summary-wbeditentity-update": "Modifikita artiklo o paragrafo",
+	"wikibase-item-summary-wbeditentity-override": "Efacita ula parto"
 }
