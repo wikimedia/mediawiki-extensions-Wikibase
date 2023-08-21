@@ -289,7 +289,7 @@
 	"wikibase-newproperty-invalid-datatype": "Error message shown when the page gets an invalid datatype",
 	"wikibase-newproperty-insufficient-data": "Error message shown when a user tries to create a property and didn't fill in enough data",
 	"wikibase-newproperty-pick-data-type": "Label for default value of data type selector asking user to pick a data type",
-	"wikibase-description-helppage": "{{notranslate}} A link to a help page about using and editing labels.\n\nParameters:\n* $1 - link text",
+	"wikibase-description-helppage": "{{notranslate}}\n\nA link to a help page about using and editing labels.\n\nParameters:\n* $1 - link text",
 	"wikibase-label-helppage": "{{notranslate}} A link to a help page about using and editing descriptions.\n\nParameters:\n* $1 - link text",
 	"special-newitem": "{{doc-special|NewItem}}\nThe special page is for creating new items.\n{{Identical|Create new item}}",
 	"wikibase-newitem-summary": "Summary text for the CreateItem special page. This message could contain links to policy pages and guidelines for this specific type of entity.\n\nSee also:\n* {{msg-mw|Wikibase-newproperty-summary}}",
