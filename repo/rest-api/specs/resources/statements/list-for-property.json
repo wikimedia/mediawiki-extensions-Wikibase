@@ -24,8 +24,7 @@
 	"post": {
 		"operationId": "addPropertyStatement",
 		"tags": [ "statements" ],
-		"summary": "[WIP] Add a new Statement to a Property",
-		"description": "This endpoint is currently in development and is not recommended for production use.",
+		"summary": "Add a new Statement to a Property",
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/PropertyId" },
 			{ "$ref": "../../global/parameters.json#/IfMatch" },
