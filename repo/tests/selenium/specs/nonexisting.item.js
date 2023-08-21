@@ -1,7 +1,5 @@
 'use strict';
 
-const assert = require( 'assert' );
-
 const NonExistingItemPage = require( 'wdio-wikibase/pageobjects/nonexisting.item' );
 
 describe( 'WikibaseRepoNonExistingItemPage', () => {
@@ -9,7 +7,7 @@ describe( 'WikibaseRepoNonExistingItemPage', () => {
 	it( 'edit tab does should not be there', async () => {
 		await NonExistingItemPage.open();
 
-		assert.strictEqual( await NonExistingItemPage.editTab.isExisting(), false );
+		await expect( NonExistingItemPage.editTab ).not.toExist();
 	} );
 
 	it( 'the title should match', async () => {
@@ -18,7 +16,7 @@ describe( 'WikibaseRepoNonExistingItemPage', () => {
 		const fullTitle = await NonExistingItemPage.title.getText();
 		const title = fullTitle.slice( fullTitle.indexOf( ':' ) + 1 );
 
-		assert.strictEqual( title, 'Q999999999' );
+		expect( title ).toBe( 'Q999999999' );
 	} );
 
 } );

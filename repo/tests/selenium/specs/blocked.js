@@ -1,9 +1,8 @@
 'use strict';
 
-const assert = require( 'assert' ),
-	MWBot = require( 'mwbot' ),
-	Page = require( 'wdio-mediawiki/Page' ),
-	LoginPage = require( 'wdio-mediawiki/LoginPage' );
+const MWBot = require( 'mwbot' );
+const Page = require( 'wdio-mediawiki/Page' );
+const LoginPage = require( 'wdio-mediawiki/LoginPage' );
 
 const bot = new MWBot( {
 	apiUrl: browser.config.baseUrl + '/api.php'
@@ -42,7 +41,7 @@ describe( 'blocked user cannot use', function () {
 	async function assertIsUserBlockedError() {
 		await $( '#mw-returnto' ).waitForDisplayed();
 
-		assert.strictEqual( await $( '#firstHeading' ).getText(), 'User is blocked' );
+		await expect( $( '#firstHeading' ) ).toHaveText( 'User is blocked' );
 	}
 
 	const tests = [
@@ -67,11 +66,7 @@ describe( 'blocked user cannot use', function () {
 
 			for ( const id of test.ids ) {
 				const selector = `#${id}`;
-				assert.strictEqual(
-					await $( selector ).isExisting(),
-					false,
-					`element "${selector}" should not exist`
-				);
+				await expect( $( selector ) ).not.toExist();
 			}
 		} );
 	}
