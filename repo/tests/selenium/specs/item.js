@@ -1,7 +1,6 @@
 'use strict';
 
 const Util = require( 'wdio-mediawiki/Util' );
-const assert = require( 'assert' );
 const WikibaseApi = require( 'wdio-wikibase/wikibase.api' );
 const EntityPage = require( 'wdio-wikibase/pageobjects/entity.page' );
 const ItemPage = require( 'wdio-wikibase/pageobjects/item.page' );
@@ -70,7 +69,7 @@ describe( 'item', () => {
 		await browser.keys( [ 'Enter' ] );
 		await ItemPage.valueInputField.waitForExist( { reverse: true } );
 
-		assert( await $( `#${propertyId}` ).isExisting() );
+		await expect( $( `#${propertyId}` ) ).toExist();
 	} );
 
 	it.skip( 'old revisions do not have an edit link', async () => {
@@ -86,7 +85,7 @@ describe( 'item', () => {
 
 		// eslint-disable-next-line wdio/no-pause
 		await browser.pause( 1000 );
-		assert.strictEqual( await ItemPage.editButton.isExisting(), false );
+		await expect( ItemPage.editButton ).not.toExist();
 	} );
 
 	it( 'has its label not rendered when linked on a Wikipage', async () => {
@@ -114,6 +113,6 @@ describe( 'item', () => {
 
 		await $( '#wpSave' ).click();
 		await $( '#mw-content-text' ).waitForExist();
-		expect( await $( '#mw-content-text' ).getText() ).toBe( itemTitle );
+		await expect( $( '#mw-content-text' ) ).toHaveText( itemTitle );
 	} );
 } );
