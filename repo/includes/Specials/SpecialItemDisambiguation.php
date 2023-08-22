@@ -77,12 +77,9 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 		LanguageNameLookup $languageNameLookup,
 		ContentLanguages $termsLanguages
 	): self {
-		global $wgLang;
-
 		$itemDisambiguation = new ItemDisambiguation(
 			$entityTitleLookup,
-			$languageNameLookup,
-			$wgLang->getCode()
+			$languageNameLookup
 		);
 		return new self(
 			$termsLanguages,

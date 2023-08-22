@@ -44,8 +44,7 @@ class ItemDisambiguationTest extends MediaWikiIntegrationTestCase {
 
 		return new ItemDisambiguation(
 			$entityTitleLookup,
-			$languageNameLookup,
-			'en'
+			$languageNameLookup
 		);
 	}
 
