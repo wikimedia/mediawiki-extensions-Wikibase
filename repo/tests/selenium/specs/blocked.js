@@ -39,8 +39,6 @@ describe( 'blocked user cannot use', function () {
 	} );
 
 	async function assertIsUserBlockedError() {
-		await $( '#mw-returnto' ).waitForDisplayed();
-
 		await expect( $( '#firstHeading' ) ).toHaveText( 'User is blocked' );
 	}
 
@@ -65,8 +63,7 @@ describe( 'blocked user cannot use', function () {
 			await assertIsUserBlockedError();
 
 			for ( const id of test.ids ) {
-				const selector = `#${id}`;
-				await expect( $( selector ) ).not.toExist();
+				await expect( $( `#${id}` ) ).not.toExist();
 			}
 		} );
 	}

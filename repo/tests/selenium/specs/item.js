@@ -61,9 +61,7 @@ describe( 'item', () => {
 		await ItemPage.firstReference.waitForExist();
 		// focus auto moved after selection
 		await browser.keys( 'reference 1-1' );
-		await browser.waitUntil( () => {
-			return ItemPage.isSaveButtonEnabled();
-		} );
+		await browser.waitUntil( () => ItemPage.isSaveButtonEnabled() );
 
 		// focus still on reference value input, can save entire statement from there
 		await browser.keys( [ 'Enter' ] );
@@ -77,14 +75,11 @@ describe( 'item', () => {
 		const item = await WikibaseApi.getEntity( itemId );
 
 		await EntityPage.open( itemId );
-		await ItemPage.editButton.waitForExist();
 		await ItemPage.editItemDescription( 'revision 1' );
 		await ItemPage.editButton.waitForExist();
 
 		await ( new Page() ).openTitle( `Special:EntityPage/${itemId}`, { oldid: item.lastrevid } );
 
-		// eslint-disable-next-line wdio/no-pause
-		await browser.pause( 1000 );
 		await expect( ItemPage.editButton ).not.toExist();
 	} );
 
@@ -104,15 +99,15 @@ describe( 'item', () => {
 
 		await ( new Page() ).openTitle( talkPageTitle, { action: 'submit', vehidebetadialog: 1, hidewelcomedialog: 1 } );
 
-		await $( '#wpTextbox1' ).waitForExist();
-		await $( '#wpTextbox1' ).setValue( `[[${itemTitle}]]` );
+		const wpTextbox1 = $( '#wpTextbox1' );
+		await wpTextbox1.waitForExist();
+		await wpTextbox1.setValue( `[[${itemTitle}]]` );
 
 		// Now the actual action happens: an api request with action=stashedit that caused T111346
 		await $( '#wpSummary' ).click();
 		await browser.keys( 'typing some letters so the action=stashedit API request can finish' );
 
 		await $( '#wpSave' ).click();
-		await $( '#mw-content-text' ).waitForExist();
 		await expect( $( '#mw-content-text' ) ).toHaveText( itemTitle );
 	} );
 } );
