@@ -91,8 +91,7 @@ class EntityDiffVisualizerFactory {
 		);
 		$claimDiffView = new ClaimDifferenceVisualizer( $diffSnakView, $langCode );
 
-		if ( $type === null || !array_key_exists( $type, $this->entityDiffVisualizerInstantiators )
-		) {
+		if ( $type === null || !array_key_exists( $type, $this->entityDiffVisualizerInstantiators ) ) {
 			return new BasicEntityDiffVisualizer(
 				$context,
 				$this->claimDiffer,
