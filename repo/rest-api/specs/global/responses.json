@@ -604,6 +604,8 @@
 				"schema": { "$ref": "./response-parts.json#/ContextError" },
 				"examples": {
 					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
+					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
 					"invalid-patch": { "$ref": "./examples.json#/InvalidPatchExample" },
 					"invalid-patch-operation": { "$ref": "./examples.json#/InvalidPatchOperationExample" },
 					"invalid-patch-field-type": { "$ref": "./examples.json#/InvalidPatchFieldTypeExample" },
@@ -672,6 +674,8 @@
 				"schema": { "$ref": "./response-parts.json#/ContextError" },
 				"examples": {
 					"invalid-statement-id": { "$ref": "./examples.json#/InvalidStatementIdExample" },
+					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
 					"invalid-operation-change-statement-id": {
 						"$ref": "./examples.json#/InvalidOperationChangeStatementId"
 					},
@@ -700,6 +704,8 @@
 				"examples": {
 					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
 					"invalid-statement-id": { "$ref": "./examples.json#/InvalidStatementIdExample" },
+					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
 					"invalid-operation-change-statement-id": {
 						"$ref": "./examples.json#/InvalidOperationChangeStatementId"
 					},
