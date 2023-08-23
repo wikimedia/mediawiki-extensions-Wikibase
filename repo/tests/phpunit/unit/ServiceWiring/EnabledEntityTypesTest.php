@@ -65,8 +65,6 @@ class EnabledEntityTypesTest extends ServiceWiringTestCase {
 					'lexwiki'
 				),
 			], new SubEntityTypesMapper( $entityTypeDefinitions->get( EntityTypeDefinitions::SUB_ENTITY_TYPES ) ) ) );
-		$this->mockService( 'WikibaseRepo.EntityTypeDefinitions',
-			$entityTypeDefinitions );
 
 		/** @var string[] $enabled */
 		$enabled = $this->getService( 'WikibaseRepo.EnabledEntityTypes' );
