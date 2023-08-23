@@ -23,6 +23,8 @@ use Wikibase\Repo\ItemDisambiguation;
  */
 class SpecialItemDisambiguation extends SpecialWikibasePage {
 
+	private const LIMIT = 100;
+
 	/**
 	 * @var ContentLanguages
 	 */
@@ -44,23 +46,16 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	private $entitySearchHelper;
 
 	/**
-	 * @var int
-	 */
-	private $limit;
-
-	/**
 	 * @param ContentLanguages $contentLanguages
 	 * @param LanguageNameLookup $languageNameLookup
 	 * @param ItemDisambiguation $itemDisambiguation
 	 * @param EntitySearchHelper $entitySearchHelper
-	 * @param int $limit
 	 */
 	public function __construct(
 		ContentLanguages $contentLanguages,
 		LanguageNameLookup $languageNameLookup,
 		ItemDisambiguation $itemDisambiguation,
-		EntitySearchHelper $entitySearchHelper,
-		$limit = 100
+		EntitySearchHelper $entitySearchHelper
 	) {
 		parent::__construct( 'ItemDisambiguation' );
 
@@ -68,7 +63,6 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 		$this->languageNameLookup = $languageNameLookup;
 		$this->itemDisambiguation = $itemDisambiguation;
 		$this->entitySearchHelper = $entitySearchHelper;
-		$this->limit = $limit;
 	}
 
 	public static function factory(
@@ -190,7 +184,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 			$label,
 			$languageCode,
 			'item',
-			$this->limit,
+			self::LIMIT,
 			false,
 			null
 		);
@@ -285,7 +279,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 				'p',
 				[],
 				$this->msg( 'wikibase-itemdisambiguation-form-hints' )->numParams(
-					$this->limit
+					self::LIMIT
 				)->text()
 			) )
 			->setWrapperLegendMsg( 'wikibase-itemdisambiguation-lookup-fieldset' )
