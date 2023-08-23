@@ -13,10 +13,7 @@ describe( 'WikibaseRepoNonExistingItemPage', () => {
 	it( 'the title should match', async () => {
 		await NonExistingItemPage.open();
 
-		const fullTitle = await NonExistingItemPage.title.getText();
-		const title = fullTitle.slice( fullTitle.indexOf( ':' ) + 1 );
-
-		expect( title ).toBe( 'Q999999999' );
+		await expect( NonExistingItemPage.title ).toHaveText( 'Item:Q999999999' );
 	} );
 
 } );
