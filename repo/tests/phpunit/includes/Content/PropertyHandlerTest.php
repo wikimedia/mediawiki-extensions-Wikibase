@@ -135,11 +135,7 @@ class PropertyHandlerTest extends EntityHandlerTestCase {
 	}
 
 	protected function newEntityContent( EntityDocument $entity = null ): EntityContent {
-		if ( $entity === null ) {
-			$entity = $this->newEntity();
-		}
-
-		return new PropertyContent( new EntityInstanceHolder( $entity ) );
+		return new PropertyContent( new EntityInstanceHolder( $entity ?? $this->newEntity() ) );
 	}
 
 	protected function newRedirectContent( EntityId $id, EntityId $target ): ?EntityContent {

@@ -203,8 +203,7 @@ class ReplicaPrimaryAwareRecordIdsAcquirer {
 	}
 
 	private function fetchExistingRecordsFromPrimary( array $neededRecords, IDatabase $dbw = null ): array {
-		$dbw = $dbw ?? $this->getDbPrimary();
-		return $this->findExistingRecords( $dbw, $neededRecords );
+		return $this->findExistingRecords( $dbw ?? $this->getDbPrimary(), $neededRecords );
 	}
 
 	private function fetchExistingRecordsFromReplica( array $neededRecords ): array {

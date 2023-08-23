@@ -99,19 +99,13 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 		Status $status = null,
 		$expects = null
 	) {
-		if ( $status === null ) {
-			$status = Status::newGood();
-		}
-		if ( $expects === null ) {
-			$expects = $this->any();
-		}
 		$runner = $this->getMockBuilder( EditFilterHookRunner::class )
 			->onlyMethods( [ 'run' ] )
 			->disableOriginalConstructor()
 			->getMock();
-		$runner->expects( $expects )
+		$runner->expects( $expects ?? $this->any() )
 			->method( 'run' )
-			->willReturn( $status );
+			->willReturn( $status ?? Status::newGood() );
 		return $runner;
 	}
 
@@ -137,17 +131,9 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 		$editFilterHookRunner = null,
 		$localEntityTypes = null
 	) {
-		if ( $user === null ) {
-			$user = User::newFromName( 'EditEntityTestUser' );
-		}
-
 		$context = new RequestContext();
 		$context->setRequest( new FauxRequest() );
-		$context->setUser( $user );
-
-		if ( $editFilterHookRunner === null ) {
-			$editFilterHookRunner = $this->getMockEditFitlerHookRunner();
-		}
+		$context->setUser( $user ?? User::newFromName( 'EditEntityTestUser' ) );
 
 		$permissionChecker = $this->getEntityPermissionChecker( $permissions );
 		$repoSettings = WikibaseRepo::getSettings();
@@ -162,7 +148,7 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 			new EntityPatcher(),
 			$entityId,
 			$context,
-			$editFilterHookRunner,
+			$editFilterHookRunner ?? $this->getMockEditFitlerHookRunner(),
 			$this->getServiceContainer()->getUserOptionsLookup(),
 			$repoSettings['maxSerializedEntitySize'],
 			$localEntityTypes,

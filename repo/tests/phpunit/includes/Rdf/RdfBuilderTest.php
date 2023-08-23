@@ -267,10 +267,6 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 		DedupeBag $dedup = null,
 		RdfVocabulary $vocabulary = null
 	): RdfBuilder {
-		if ( $dedup === null ) {
-			$dedup = new HashDedupeBag();
-		}
-
 		$siteLookup = $this->getTestData()->getSiteLookup();
 
 		$entityContentFactory = $this->createMock( EntityContentFactory::class );
@@ -292,7 +288,7 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 			$entityRdfBuilderFactory,
 			$produce,
 			$emitter,
-			$dedup,
+			$dedup ?? new HashDedupeBag(),
 			$entityContentFactory,
 			$entityStubRdfBuilderFactory,
 			$entityRevisionLookup
