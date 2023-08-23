@@ -20,6 +20,7 @@ class SpecialListFederatedPropertiesTest extends SpecialPageTestBase {
 
 	protected function setUp(): void {
 		parent::setUp();
+		$this->clearHooks();
 		$this->setMwGlobals( 'wgLanguageCode', 'qqx' );
 	}
 
