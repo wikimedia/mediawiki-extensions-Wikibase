@@ -6,5 +6,8 @@
 	},
 	"apihelp-wbeditentity-param-data": "The serialised object that is used as the data source.\nA newly created entity will be assigned an 'id'.",
 	"apihelp-wbformatvalue-param-datavalue": "The data to format. This has to be the JSON serialisation of a DataValue object.",
+	"apihelp-wbgetentities-param-languages": "By default the internationalised values are returned in all available languages.\nThis parameter allows filtering these down to one or more languages by providing one or more language codes.",
+	"apihelp-wbgetentities-param-normalize": "Try to normalise the page title against the client site.\nThis only works if exactly one site and one page have been given.",
+	"apihelp-wbgetentities-example-11": "Get the item for page \"<var>Berlin</var>\" on the site \"<var>enwiki</var>\" after normalising the title from \"<var>berlin</var>\"",
 	"apihelp-wbsetclaim-param-claim": "Statement or Claim serialisation"
 }
