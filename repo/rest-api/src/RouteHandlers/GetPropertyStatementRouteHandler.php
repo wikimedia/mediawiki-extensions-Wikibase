@@ -9,12 +9,10 @@ use MediaWiki\Rest\ResponseInterface;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
-use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\GetPropertyStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\GetPropertyStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
-use Wikibase\Repo\RestApi\Application\Validation\RequiredRequestedSubjectIdValidator;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
@@ -30,13 +28,13 @@ class GetPropertyStatementRouteHandler extends SimpleHandler {
 	public const STATEMENT_ID_PATH_PARAM = 'statement_id';
 	public const ROUTE = '/wikibase/v0/entities/properties/{property_id}/statements/{statement_id}';
 
-	private GetStatement $getStatement;
+	private GetPropertyStatement $getStatement;
 	private StatementSerializer $statementSerializer;
 	private ResponseFactory $responseFactory;
 	private MiddlewareHandler $middlewareHandler;
 
 	public function __construct(
-		GetStatement $getStatement,
+		GetPropertyStatement $getStatement,
 		StatementSerializer $statementSerializer,
 		ResponseFactory $responseFactory,
 		MiddlewareHandler $middlewareHandler
@@ -50,9 +48,7 @@ class GetPropertyStatementRouteHandler extends SimpleHandler {
 	public static function factory(): Handler {
 		$responseFactory = new ResponseFactory();
 		return new self(
-			WbRestApi::getStatementFactory()->newGetStatement(
-				new RequiredRequestedSubjectIdValidator( new PropertyIdValidator() )
-			),
+			WbRestApi::getGetPropertyStatement(),
 			WbRestApi::getSerializerFactory()->newStatementSerializer(),
 			$responseFactory,
 			new MiddlewareHandler( [
@@ -77,23 +73,10 @@ class GetPropertyStatementRouteHandler extends SimpleHandler {
 		try {
 			return $this->newSuccessHttpResponse(
 				$this->getStatement->execute(
-					new GetStatementRequest( $statementId, $propertyId )
+					new GetPropertyStatementRequest( $propertyId, $statementId )
 				)
 			);
 		} catch ( UseCaseError $e ) {
-			if ( $e->getErrorCode() === UseCaseError::STATEMENT_SUBJECT_NOT_FOUND ) {
-				return $this->responseFactory->newErrorResponse(
-					UseCaseError::PROPERTY_NOT_FOUND,
-					"Could not find a property with the ID: {$e->getErrorContext()['subject-id']}"
-				);
-			}
-			if ( $e->getErrorCode() === UseCaseError::INVALID_STATEMENT_SUBJECT_ID ) {
-				return $this->responseFactory->newErrorResponse(
-					UseCaseError::INVALID_PROPERTY_ID,
-					"Not a valid property ID: {$e->getErrorContext()['subject-id']}",
-					[ 'property-id' => $e->getErrorContext()['subject-id'] ]
-				);
-			}
 			return $this->responseFactory->newErrorResponseFromException( $e );
 		}
 	}

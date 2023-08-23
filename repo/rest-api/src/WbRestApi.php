@@ -24,6 +24,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestPropertyRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestStatementSubjectRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetProperty;
+use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\GetPropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetPropertyStatements;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementFactory;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
@@ -219,6 +220,11 @@ class WbRestApi {
 	): GetLatestStatementSubjectRevisionMetadata {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.GetLatestStatementSubjectRevisionMetadata' );
+	}
+
+	public static function getGetPropertyStatement( ContainerInterface $services = null ): GetPropertyStatement {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.GetPropertyStatement' );
 	}
 
 	public static function getGetPropertyStatements( ContainerInterface $services = null ): GetPropertyStatements {

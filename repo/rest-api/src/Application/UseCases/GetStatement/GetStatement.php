@@ -32,7 +32,7 @@ class GetStatement {
 	 * @throws UseCaseError
 	 */
 	public function execute( GetStatementRequest $statementRequest ): GetStatementResponse {
-		$this->validator->assertValidRequest( $statementRequest );
+		$this->assertValidRequest( $statementRequest );
 
 		$statementIdParser = new StatementGuidParser( new BasicEntityIdParser() );
 		$statementId = $statementIdParser->parse( $statementRequest->getStatementId() );
@@ -53,6 +53,7 @@ class GetStatement {
 			$this->throwStatementNotFoundException( $statementRequest->getStatementId() );
 		}
 
+		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable $statement is checked
 		return new GetStatementResponse( $statement, $lastModified, $revisionId );
 	}
 
@@ -65,5 +66,9 @@ class GetStatement {
 			UseCaseError::STATEMENT_NOT_FOUND,
 			"Could not find a statement with the ID: $statementId"
 		);
+	}
+
+	public function assertValidRequest( GetStatementRequest $request ): void {
+		$this->validator->assertValidRequest( $request );
 	}
 }
