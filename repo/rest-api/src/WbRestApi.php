@@ -32,6 +32,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplacePropertyStatement\ReplacePropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementFactory;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescription;
@@ -101,8 +102,7 @@ class WbRestApi {
 	}
 
 	public static function getGetItemStatement( ContainerInterface $services = null ): GetItemStatement {
-		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.GetItemStatement' );
+		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbRestApi.GetItemStatement' );
 	}
 
 	public static function getGetStatement( ContainerInterface $services = null ): GetStatement {
@@ -122,6 +122,11 @@ class WbRestApi {
 
 	public static function getAddPropertyStatement( ContainerInterface $services = null ): AddPropertyStatement {
 		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbRestApi.AddPropertyStatement' );
+	}
+
+	public static function getReplaceItemStatement( ContainerInterface $services = null ): ReplaceItemStatement {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.ReplaceItemStatement' );
 	}
 
 	public static function getReplacePropertyStatement( ContainerInterface $services = null ): ReplacePropertyStatement {

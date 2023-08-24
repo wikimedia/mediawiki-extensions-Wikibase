@@ -444,6 +444,21 @@ describe( 'PUT statement tests', () => {
 			assert.include( response.body.message, itemId );
 		} );
 
+		it( 'responds 400 if subject ID is not an item ID', async () => {
+			const itemId = 'P123';
+			const statementSerialization = entityHelper.newStatementWithRandomStringValue(
+				testStatementPropertyId
+			);
+			const response = await newReplaceItemStatementRequestBuilder(
+				itemId,
+				testStatementId,
+				statementSerialization
+			).assertInvalidRequest().makeRequest();
+
+			assertValid400Response( response, 'invalid-item-id' );
+			assert.include( response.body.message, itemId );
+		} );
+
 		it( 'responds 404 item-not-found for nonexistent item', async () => {
 			const itemId = 'Q9999999';
 			const statementId = `${itemId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
@@ -456,6 +471,33 @@ describe( 'PUT statement tests', () => {
 
 			assertValid404Response( response, 'item-not-found' );
 			assert.include( response.body.message, itemId );
+		} );
+
+		it( 'responds statement-not-found if item exists but statement prefix does not', async () => {
+			const itemId = ( await entityHelper.createEntity( 'item', {} ) ).entity.id;
+			const statementId = 'Q999999$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+			const response = await newReplaceItemStatementRequestBuilder( itemId, statementId )
+				.withJsonBodyParam(
+					'statement',
+					entityHelper.newStatementWithRandomStringValue( testStatementPropertyId )
+				)
+				.assertValidRequest().makeRequest();
+
+			assertValid404Response( response, 'statement-not-found' );
+			assert.include( response.body.message, statementId );
+		} );
+
+		it( 'responds statement-not-found if item and statement exist, but do not match', async () => {
+			const itemId = ( await entityHelper.createEntity( 'item', {} ) ).entity.id;
+			const response = await newReplaceItemStatementRequestBuilder( itemId, testStatementId )
+				.withJsonBodyParam(
+					'statement',
+					entityHelper.newStatementWithRandomStringValue( testStatementPropertyId )
+				)
+				.assertValidRequest().makeRequest();
+
+			assertValid404Response( response, 'statement-not-found' );
+			assert.include( response.body.message, testStatementId );
 		} );
 
 	} );

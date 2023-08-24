@@ -11,12 +11,10 @@ use MediaWiki\Rest\StringStream;
 use MediaWiki\Rest\Validator\BodyValidator;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
-use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
-use Wikibase\Repo\RestApi\Application\Validation\RequiredRequestedSubjectIdValidator;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\BotRightCheckMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\ContentTypeCheckMiddleware;
@@ -37,13 +35,13 @@ class ReplaceItemStatementRouteHandler extends SimpleHandler {
 	public const BOT_BODY_PARAM = 'bot';
 	public const COMMENT_BODY_PARAM = 'comment';
 
-	private ReplaceStatement $useCase;
+	private ReplaceItemStatement $useCase;
 	private StatementSerializer $statementSerializer;
 	private MiddlewareHandler $middlewareHandler;
 	private ResponseFactory $responseFactory;
 
 	public function __construct(
-		ReplaceStatement $useCase,
+		ReplaceItemStatement $useCase,
 		StatementSerializer $statementSerializer,
 		MiddlewareHandler $middlewareHandler,
 		ResponseFactory $responseFactory
@@ -57,9 +55,7 @@ class ReplaceItemStatementRouteHandler extends SimpleHandler {
 	public static function factory(): Handler {
 		$responseFactory = new ResponseFactory();
 		return new self(
-			WbRestApi::getReplaceStatementFactory()->newReplaceStatement(
-				new RequiredRequestedSubjectIdValidator( new ItemIdValidator() )
-			),
+			WbRestApi::getReplaceItemStatement(),
 			WbRestApi::getSerializerFactory()->newStatementSerializer(),
 			new MiddlewareHandler( [
 				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
@@ -95,29 +91,17 @@ class ReplaceItemStatementRouteHandler extends SimpleHandler {
 		$requestBody = $this->getValidatedBody();
 
 		try {
-			$useCaseResponse = $this->useCase->execute( new ReplaceStatementRequest(
+			$useCaseResponse = $this->useCase->execute( new ReplaceItemStatementRequest(
+				$itemId,
 				$statementId,
 				$requestBody[self::STATEMENT_BODY_PARAM],
 				$requestBody[self::TAGS_BODY_PARAM],
 				$requestBody[self::BOT_BODY_PARAM],
 				$requestBody[self::COMMENT_BODY_PARAM],
-				$this->getUsername(),
-				$itemId
+				$this->getUsername()
 			) );
 			return $this->newSuccessHttpResponse( $useCaseResponse );
 		} catch ( UseCaseError $e ) {
-			if ( $e->getErrorCode() === UseCaseError::INVALID_STATEMENT_SUBJECT_ID ) {
-				return $this->responseFactory->newErrorResponse(
-					UseCaseError::INVALID_ITEM_ID,
-					"Not a valid item ID: $itemId"
-				);
-			}
-			if ( $e->getErrorCode() === UseCaseError::STATEMENT_SUBJECT_NOT_FOUND ) {
-				return $this->responseFactory->newErrorResponse(
-					UseCaseError::ITEM_NOT_FOUND,
-					"Could not find an item with the ID: $itemId"
-				);
-			}
 			return $this->responseFactory->newErrorResponseFromException( $e );
 		} catch ( ItemRedirect $e ) {
 			return $this->responseFactory->newErrorResponse(
