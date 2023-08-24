@@ -34,9 +34,10 @@ class GetPropertyStatement {
 	 */
 	public function execute( GetPropertyStatementRequest $request ): GetStatementResponse {
 		$this->validator->assertValidRequest( $request );
-		$this->assertPropertyExists->execute( new NumericPropertyId( $request->getPropertyId() ) );
 		$getStatementRequest = new GetStatementRequest( $request->getStatementId() );
 		$this->getStatement->assertValidRequest( $getStatementRequest );
+
+		$this->assertPropertyExists->execute( new NumericPropertyId( $request->getPropertyId() ) );
 
 		if ( strpos( $request->getStatementId(), $request->getPropertyId() . StatementGuid::SEPARATOR ) !== 0 ) {
 			throw new UseCaseError(

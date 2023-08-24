@@ -34,9 +34,10 @@ class GetItemStatement {
 	 */
 	public function execute( GetItemStatementRequest $request ): GetStatementResponse {
 		$this->validator->assertValidRequest( $request );
-		$this->assertItemExists->execute( new ItemId( $request->getItemId() ) );
 		$getStatementRequest = new GetStatementRequest( $request->getStatementId() );
 		$this->getStatement->assertValidRequest( $getStatementRequest );
+
+		$this->assertItemExists->execute( new ItemId( $request->getItemId() ) );
 
 		if ( strpos( $request->getStatementId(), $request->getItemId() . StatementGuid::SEPARATOR ) !== 0 ) {
 			throw new UseCaseError(
