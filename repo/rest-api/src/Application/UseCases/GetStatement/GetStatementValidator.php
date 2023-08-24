@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetStatement;
 
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\RequestedSubjectIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
 
 /**
@@ -12,26 +11,15 @@ use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
 class GetStatementValidator {
 
 	private StatementIdValidator $statementIdValidator;
-	private RequestedSubjectIdValidator $requestedSubjectIdValidator;
 
-	public function __construct( StatementIdValidator $statementIdValidator, RequestedSubjectIdValidator $requestedSubjectIdValidator ) {
+	public function __construct( StatementIdValidator $statementIdValidator ) {
 		$this->statementIdValidator = $statementIdValidator;
-		$this->requestedSubjectIdValidator = $requestedSubjectIdValidator;
 	}
 
 	/**
 	 * @throws UseCaseError
 	 */
 	public function assertValidRequest( GetStatementRequest $statementRequest ): void {
-		$validationError = $this->requestedSubjectIdValidator->validate( $statementRequest->getSubjectId() );
-		if ( $validationError ) {
-			throw new UseCaseError(
-				UseCaseError::INVALID_STATEMENT_SUBJECT_ID,
-				"Not a valid subject ID: {$validationError->getContext()[RequestedSubjectIdValidator::CONTEXT_VALUE]}",
-				[ 'subject-id' => $validationError->getContext()[RequestedSubjectIdValidator::CONTEXT_VALUE] ]
-			);
-		}
-
 		$validationError = $this->statementIdValidator->validate( $statementRequest->getStatementId() );
 		if ( $validationError ) {
 			throw new UseCaseError(

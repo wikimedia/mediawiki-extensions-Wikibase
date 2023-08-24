@@ -12,7 +12,6 @@ use MediaWikiIntegrationTestCase;
 use RuntimeException;
 use Throwable;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementFactory;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
@@ -40,10 +39,8 @@ class GetStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 		$useCaseResponse = new GetStatementResponse( $this->createStub( Statement::class ), '20230731042031', 42 );
 		$useCase = $this->createStub( GetStatement::class );
 		$useCase->method( 'execute' )->willReturn( $useCaseResponse );
-		$useCaseFactory = $this->createStub( GetStatementFactory::class );
-		$useCaseFactory->method( 'newGetStatement' )->willReturn( $useCase );
 
-		$this->setService( 'WbRestApi.GetStatementFactory', $useCaseFactory );
+		$this->setService( 'WbRestApi.GetStatement', $useCase );
 
 		/** @var Response $response */
 		$response = $this->newHandlerWithValidRequest()->execute();
@@ -62,10 +59,8 @@ class GetStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 	public function testHandlesErrors( Throwable $exception, string $expectedErrorCode ): void {
 		$useCase = $this->createStub( GetStatement::class );
 		$useCase->method( 'execute' )->willThrowException( $exception );
-		$useCaseFactory = $this->createStub( GetStatementFactory::class );
-		$useCaseFactory->method( 'newGetStatement' )->willReturn( $useCase );
 
-		$this->setService( 'WbRestApi.GetStatementFactory', $useCaseFactory );
+		$this->setService( 'WbRestApi.GetStatement', $useCase );
 		$this->setService( 'WbRestApi.ErrorReporter', $this->createStub( ErrorReporter::class ) );
 
 		/** @var Response $response */

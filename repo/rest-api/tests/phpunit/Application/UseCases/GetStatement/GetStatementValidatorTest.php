@@ -7,13 +7,7 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\EntityIdValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
-use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
-use Wikibase\Repo\RestApi\Application\Validation\RequestedSubjectIdValidator;
-use Wikibase\Repo\RestApi\Application\Validation\RequiredRequestedSubjectIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
-use Wikibase\Repo\RestApi\Application\Validation\UnexpectedRequestedSubjectIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 
 /**
@@ -25,13 +19,12 @@ use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
  */
 class GetStatementValidatorTest extends TestCase {
 
-	private RequestedSubjectIdValidator $requestedSubjectIdValidator;
+	private StatementIdValidator $statementIdValidator;
 
 	protected function setUp(): void {
 		parent::setUp();
 
 		$this->statementIdValidator = $this->createStub( StatementIdValidator::class );
-		$this->requestedSubjectIdValidator = $this->createStub( RequestedSubjectIdValidator::class );
 	}
 
 	/**
@@ -39,7 +32,6 @@ class GetStatementValidatorTest extends TestCase {
 	 * @doesNotPerformAssertions
 	 */
 	public function testGivenValidStatementId_noErrorIsThrown( string $statementIdPrefix ): void {
-		$this->requestedSubjectIdValidator = new UnexpectedRequestedSubjectIdValidator();
 		$this->newStatementValidator()->assertValidRequest(
 			new GetStatementRequest( "$statementIdPrefix\$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE" )
 		);
@@ -48,45 +40,6 @@ class GetStatementValidatorTest extends TestCase {
 	public static function provideStatementIdPrefix(): Generator {
 		yield 'item id' => [ 'Q123' ];
 		yield 'property id' => [ 'P123' ];
-	}
-
-	/**
-	 * @dataProvider provideEntityIdValidatorAndValidSubjectId
-	 * @doesNotPerformAssertions
-	 */
-	public function testGivenValidStatementIdAndSubjectId_noErrorIsThrown( EntityIdValidator $entityIdValidator, string $subjectId ): void {
-		$this->requestedSubjectIdValidator = new RequiredRequestedSubjectIdValidator( $entityIdValidator );
-		$this->newStatementValidator()->assertValidRequest(
-			new GetStatementRequest( "$subjectId\$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE", $subjectId )
-		);
-	}
-
-	public static function provideEntityIdValidatorAndValidSubjectId(): Generator {
-		yield 'item id' => [ new ItemIdValidator(), 'Q123' ];
-		yield 'property id' => [ new PropertyIdValidator(), 'P123' ];
-	}
-
-	public function testGivenRequestedSubjectIdValidatorReturnsValidationError_throwsUseCaseError(): void {
-		$invalidSubjectId = 'X123';
-		$this->requestedSubjectIdValidator = $this->createMock( RequestedSubjectIdValidator::class );
-		$this->requestedSubjectIdValidator->expects( $this->once() )
-			->method( 'validate' )
-			->with( $invalidSubjectId )
-			->willReturn( new ValidationError(
-				RequestedSubjectIdValidator::CODE_INVALID,
-				[ RequestedSubjectIdValidator::CONTEXT_VALUE => $invalidSubjectId ]
-			) );
-
-		try {
-			$this->newStatementValidator()->assertValidRequest(
-				new GetStatementRequest( "$invalidSubjectId\$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE", $invalidSubjectId )
-			);
-
-			$this->fail( 'Exception not thrown' );
-		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::INVALID_STATEMENT_SUBJECT_ID, $e->getErrorCode() );
-			$this->assertStringContainsString( $invalidSubjectId, $e->getErrorMessage() );
-		}
 	}
 
 	public function testGivenStatementIdValidatorReturnsValidationError_throwsUseCaseError(): void {
@@ -111,7 +64,7 @@ class GetStatementValidatorTest extends TestCase {
 	}
 
 	private function newStatementValidator(): GetStatementValidator {
-		return new GetStatementValidator( $this->statementIdValidator, $this->requestedSubjectIdValidator );
+		return new GetStatementValidator( $this->statementIdValidator );
 	}
 
 }

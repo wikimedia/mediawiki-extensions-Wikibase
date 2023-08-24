@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetStatement;
 
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestStatementSubjectRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
@@ -36,36 +35,18 @@ class GetStatement {
 
 		$statementIdParser = new StatementGuidParser( new BasicEntityIdParser() );
 		$statementId = $statementIdParser->parse( $statementRequest->getStatementId() );
-		$requestedSubjectId = $statementRequest->getSubjectId();
 
-		/** @var EntityId $subjectId */
-		$subjectId = $requestedSubjectId ? ( new BasicEntityIdParser() )->parse( $requestedSubjectId ) : $statementId->getEntityId();
-		'@phan-var EntityId $subjectId';
-
-		[ $revisionId, $lastModified ] = $this->getRevisionMetadata->execute( $subjectId );
-
-		if ( $requestedSubjectId && $requestedSubjectId !== (string)$statementId->getEntityId() ) {
-			$this->throwStatementNotFoundException( $statementRequest->getStatementId() );
-		}
+		[ $revisionId, $lastModified ] = $this->getRevisionMetadata->execute( $statementId->getEntityId() );
 
 		$statement = $this->statementRetriever->getStatement( $statementId );
 		if ( !$statement ) {
-			$this->throwStatementNotFoundException( $statementRequest->getStatementId() );
+			throw new UseCaseError(
+				UseCaseError::STATEMENT_NOT_FOUND,
+				"Could not find a statement with the ID: $statementId"
+			);
 		}
 
-		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
 		return new GetStatementResponse( $statement, $lastModified, $revisionId );
-	}
-
-	/**
-	 * @return never
-	 * @throws UseCaseError
-	 */
-	private function throwStatementNotFoundException( string $statementId ): void {
-		throw new UseCaseError(
-			UseCaseError::STATEMENT_NOT_FOUND,
-			"Could not find a statement with the ID: $statementId"
-		);
 	}
 
 	public function assertValidRequest( GetStatementRequest $request ): void {

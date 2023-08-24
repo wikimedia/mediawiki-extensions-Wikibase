@@ -109,34 +109,6 @@ class GetStatementTest extends TestCase {
 		}
 	}
 
-	/**
-	 * @dataProvider provideTwoDifferentSubjectIds
-	 */
-	public function testRequestedStatementSubjectIdNotFoundOrRedirect_throws(
-		EntityId $requestedSubjectId,
-		EntityId $statementSubjectId
-	): void {
-		// using a different item id below on purpose to check that the *requested* item is being checked, if provided
-		$statementId = $statementSubjectId . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-		$expectedException = $this->createStub( UseCaseException::class );
-
-		$this->getRevisionMetadata = $this->createMock( GetLatestStatementSubjectRevisionMetadata::class );
-		$this->getRevisionMetadata->expects( $this->once() )
-			->method( 'execute' )
-			->with( $requestedSubjectId->getSerialization() )
-			->willThrowException( $expectedException );
-
-		try {
-			$this->newUseCase()->execute(
-				new GetStatementRequest( $statementId, $requestedSubjectId->getSerialization() )
-			);
-
-			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
-			$this->assertSame( $expectedException, $e );
-		}
-	}
-
 	public function testStatementNotFound_throwsUseCaseError(): void {
 		$subjectId = new ItemId( 'Q321' );
 		$revision = 987;
@@ -155,42 +127,9 @@ class GetStatementTest extends TestCase {
 		}
 	}
 
-	/**
-	 * @dataProvider provideTwoDifferentSubjectIds
-	 */
-	public function testStatementIdNotMatchingSubjectId_throwsUseCaseError(
-		EntityId $requestedSubjectId,
-		EntityId $statementSubjectId
-	): void {
-		$revision = 987;
-		$lastModified = '20201111070707';
-		$statementId = $statementSubjectId . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-
-		$this->getRevisionMetadata = $this->createStub( GetLatestStatementSubjectRevisionMetadata::class );
-		$this->getRevisionMetadata->method( 'execute' )->willReturn( [ $revision, $lastModified ] );
-
-		$this->statementRetriever = $this->createMock( StatementRetriever::class );
-		$this->statementRetriever->expects( $this->never() )->method( $this->anything() );
-
-		try {
-			$this->newUseCase()->execute(
-				new GetStatementRequest( $statementId, $requestedSubjectId->getSerialization() )
-			);
-
-			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::STATEMENT_NOT_FOUND, $e->getErrorCode() );
-		}
-	}
-
 	public static function subjectIdProvider(): Generator {
 		yield 'item id' => [ new ItemId( 'Q123' ) ];
 		yield 'property id' => [ new NumericPropertyId( 'P123' ) ];
-	}
-
-	public static function provideTwoDifferentSubjectIds(): Generator {
-		yield 'item id' => [ new ItemId( 'Q123' ), new ItemId( 'Q321' ) ];
-		yield 'property id' => [ new NumericPropertyId( 'P123' ), new NumericPropertyId( 'P321' ) ];
 	}
 
 	private function newUseCase(): GetStatement {

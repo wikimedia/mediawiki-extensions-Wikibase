@@ -49,7 +49,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\GetPropertyS
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\GetPropertyStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetPropertyStatements;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetPropertyStatementsValidator;
-use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementFactory;
+use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchedLabelsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsValidator;
@@ -69,7 +70,6 @@ use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
-use Wikibase\Repo\RestApi\Application\Validation\UnexpectedRequestedSubjectIdValidator;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\RestApi\Domain\Services\StatementUpdater;
@@ -280,7 +280,7 @@ return [
 		return new GetItemStatement(
 			new GetItemStatementValidator( new ItemIdValidator() ),
 			WbRestApi::getAssertItemExists( $services ),
-			WbRestApi::getStatementFactory( $services )->newGetStatement( new UnexpectedRequestedSubjectIdValidator() )
+			WbRestApi::getGetStatement( $services )
 		);
 	},
 
@@ -324,7 +324,7 @@ return [
 		return new GetPropertyStatement(
 			new GetPropertyStatementValidator( new PropertyIdValidator() ),
 			WbRestApi::getAssertPropertyExists( $services ),
-			WbRestApi::getStatementFactory( $services )->newGetStatement( new UnexpectedRequestedSubjectIdValidator() )
+			WbRestApi::getGetStatement( $services )
 		);
 	},
 
@@ -336,9 +336,9 @@ return [
 		);
 	},
 
-	'WbRestApi.GetStatementFactory' => function( MediaWikiServices $services ): GetStatementFactory {
-		return new GetStatementFactory(
-			new StatementIdValidator( new BasicEntityIdParser() ),
+	'WbRestApi.GetStatement' => function( MediaWikiServices $services ): GetStatement {
+		return new GetStatement(
+			new GetStatementValidator( new StatementIdValidator( new BasicEntityIdParser() ) ),
 			WbRestApi::getStatementRetriever( $services ),
 			WbRestApi::getGetLatestStatementSubjectRevisionMetadata( $services )
 		);

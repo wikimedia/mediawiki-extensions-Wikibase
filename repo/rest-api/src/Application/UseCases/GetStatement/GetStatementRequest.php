@@ -8,18 +8,12 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\GetStatement;
 class GetStatementRequest {
 
 	private string $statementId;
-	private ?string $subjectId;
 
-	public function __construct( string $statementId, string $subjectId = null ) {
+	public function __construct( string $statementId ) {
 		$this->statementId = $statementId;
-		$this->subjectId = $subjectId;
 	}
 
 	public function getStatementId(): string {
 		return $this->statementId;
-	}
-
-	public function getSubjectId(): ?string {
-		return $this->subjectId;
 	}
 }
