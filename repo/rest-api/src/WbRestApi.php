@@ -28,6 +28,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\GetPropertyS
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetPropertyStatements;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementFactory;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementFactory;
@@ -134,6 +135,11 @@ class WbRestApi {
 	public static function getPatchStatement( ContainerInterface $services = null ): PatchStatement {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.PatchStatement' );
+	}
+
+	public static function getPatchItemStatement( ContainerInterface $services = null ): PatchItemStatement {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.PatchItemStatement' );
 	}
 
 	public static function getEntityUpdater( ContainerInterface $services = null ): EntityUpdater {

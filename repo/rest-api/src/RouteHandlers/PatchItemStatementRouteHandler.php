@@ -11,8 +11,8 @@ use MediaWiki\Rest\StringStream;
 use MediaWiki\Rest\Validator\BodyValidator;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
@@ -35,13 +35,13 @@ class PatchItemStatementRouteHandler extends SimpleHandler {
 	public const BOT_BODY_PARAM = 'bot';
 	public const COMMENT_BODY_PARAM = 'comment';
 
-	private PatchStatement $useCase;
+	private PatchItemStatement $useCase;
 	private MiddlewareHandler $middlewareHandler;
 	private StatementSerializer $statementSerializer;
 	private ResponseFactory $responseFactory;
 
 	public function __construct(
-		PatchStatement $useCase,
+		PatchItemStatement $useCase,
 		MiddlewareHandler $middlewareHandler,
 		StatementSerializer $statementSerializer,
 		ResponseFactory $responseFactory
@@ -56,7 +56,7 @@ class PatchItemStatementRouteHandler extends SimpleHandler {
 		$responseFactory = new ResponseFactory();
 
 		return new self(
-			WbRestApi::getPatchStatement(),
+			WbRestApi::getPatchItemStatement(),
 			new MiddlewareHandler( [
 				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
 				new UserAgentCheckMiddleware(),
@@ -97,14 +97,14 @@ class PatchItemStatementRouteHandler extends SimpleHandler {
 		try {
 			return $this->newSuccessHttpResponse(
 				$this->useCase->execute(
-					new PatchStatementRequest(
+					new PatchItemStatementRequest(
+						$itemId,
 						$statementId,
 						$requestBody[self::PATCH_BODY_PARAM],
 						$requestBody[self::TAGS_BODY_PARAM],
 						$requestBody[self::BOT_BODY_PARAM],
 						$requestBody[self::COMMENT_BODY_PARAM],
-						$this->getUsername(),
-						$itemId
+						$this->getUsername()
 					)
 				)
 			);
