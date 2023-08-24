@@ -278,11 +278,7 @@ class ListSubscribers extends ApiQueryBase {
 	 */
 	private function getEntityUsageUrl( string $subscription, string $entityIdString ): ?string {
 		$site = $this->siteLookup->getSite( $subscription );
-		if ( !$site ) {
-			return null;
-		}
-
-		return $site->getPageUrl( 'Special:EntityUsage/' . $entityIdString );
+		return $site ? $site->getPageUrl( 'Special:EntityUsage/' . $entityIdString ) : null;
 	}
 
 	/**

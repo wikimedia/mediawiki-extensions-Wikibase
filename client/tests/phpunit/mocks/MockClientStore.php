@@ -104,11 +104,7 @@ class MockClientStore implements ClientStore {
 	 * @return EntityLookup
 	 */
 	public function getEntityLookup() {
-		if ( !self::$entityLookup ) {
-			return $this->getMockRepository();
-		}
-
-		return self::$entityLookup;
+		return self::$entityLookup ?? $this->getMockRepository();
 	}
 
 	/**

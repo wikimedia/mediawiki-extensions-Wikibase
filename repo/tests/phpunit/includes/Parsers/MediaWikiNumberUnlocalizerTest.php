@@ -72,10 +72,6 @@ class MediaWikiNumberUnlocalizerTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideLocalizationRoundTrip
 	 */
 	public function testLocalizationRoundTrip( $number, $languageCode, $canonical = null ) {
-		if ( $canonical === null ) {
-			$canonical = "$number";
-		}
-
 		$language = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( $languageCode );
 
 		$localizer = new MediaWikiNumberLocalizer( $language );
@@ -84,7 +80,7 @@ class MediaWikiNumberUnlocalizerTest extends \PHPUnit\Framework\TestCase {
 		$localized = $localizer->localizeNumber( $number );
 		$unlocalized = $unlocalizer->unlocalizeNumber( $localized );
 
-		$this->assertEquals( $canonical, $unlocalized );
+		$this->assertSame( $canonical ?? (string)$number, $unlocalized );
 	}
 
 	/**

@@ -412,12 +412,8 @@ class SetClaimTest extends WikibaseApiTestCase {
 			$params['ignoreduplicatemainsnak'] = $ignoreDuplicateMainSnak;
 		}
 
-		$resultArray = $this->assertApiRequest( $params, $error );
-
-		if ( $resultArray ) {
-			return $resultArray;
-		}
-		return [];
+		$response = $this->assertApiRequest( $params, $error );
+		return $response ?: [];
 	}
 
 	/**
@@ -460,7 +456,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 	 * @param array $params
 	 * @param string|null $error
 	 *
-	 * @return array|bool
+	 * @return array|false
 	 */
 	private function assertApiRequest( array $params, ?string $error ) {
 		$resultArray = false;

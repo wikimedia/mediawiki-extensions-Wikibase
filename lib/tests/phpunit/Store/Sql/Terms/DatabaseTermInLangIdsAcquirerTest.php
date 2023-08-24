@@ -494,7 +494,7 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 	}
 
 	private function assertTermsArrayExistInDb( $termsArray, $typeIds, $db = null ) {
-		$db = $db ?? $this->db;
+		$db ??= $this->db;
 
 		foreach ( $termsArray as $type => $textsPerLang ) {
 			foreach ( $textsPerLang as $lang => $texts ) {
