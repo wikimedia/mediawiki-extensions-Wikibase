@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement;
+namespace Wikibase\Repo\RestApi\Application\UseCases\PatchStatement;
 
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Exception\PropertyChangedException;
@@ -24,9 +24,9 @@ use Wikibase\Repo\RestApi\Domain\Services\StatementRetriever;
 /**
  * @license GPL-2.0-or-later
  */
-class PatchItemStatement {
+class PatchStatement {
 
-	private PatchItemStatementValidator $useCaseValidator;
+	private PatchStatementValidator $useCaseValidator;
 	private PatchedStatementValidator $patchedStatementValidator;
 	private JsonPatcher $jsonPatcher;
 	private StatementSerializer $statementSerializer;
@@ -38,7 +38,7 @@ class PatchItemStatement {
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
 
 	public function __construct(
-		PatchItemStatementValidator $useCaseValidator,
+		PatchStatementValidator $useCaseValidator,
 		PatchedStatementValidator $patchedStatementValidator,
 		JsonPatcher $jsonPatcher,
 		StatementSerializer $statementSerializer,
@@ -65,7 +65,7 @@ class PatchItemStatement {
 	 * @throws ItemRedirect
 	 * @throws UseCaseError
 	 */
-	public function execute( PatchItemStatementRequest $request ): PatchItemStatementResponse {
+	public function execute( PatchStatementRequest $request ): PatchStatementResponse {
 		$this->useCaseValidator->assertValidRequest( $request );
 
 		$requestedItemId = $request->getItemId();
@@ -136,7 +136,7 @@ class PatchItemStatement {
 		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Item validated and exists
 		$newRevision = $this->itemUpdater->update( $item, $editMetadata );
 
-		return new PatchItemStatementResponse(
+		return new PatchStatementResponse(
 			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Statement validated and exists
 			$newRevision->getItem()->getStatements()->getStatementById( $statementId ),
 			$newRevision->getLastModified(),
