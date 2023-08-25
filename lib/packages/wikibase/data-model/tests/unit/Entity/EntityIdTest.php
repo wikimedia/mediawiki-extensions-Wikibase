@@ -129,29 +129,6 @@ class EntityIdTest extends \PHPUnit\Framework\TestCase {
 		SerializableEntityId::splitSerialization( $serialization );
 	}
 
-	/**
-	 * @dataProvider serializationSplitProvider
-	 */
-	public function testJoinSerialization( $serialization, $split ) {
-		$this->assertSame( $serialization, SerializableEntityId::joinSerialization( $split ) );
-	}
-
-	/**
-	 * @dataProvider invalidJoinSerializationDataProvider
-	 */
-	public function testJoinSerializationFails_GivenEmptyId( $parts ) {
-		$this->expectException( InvalidArgumentException::class );
-		SerializableEntityId::joinSerialization( $parts );
-	}
-
-	public static function invalidJoinSerializationDataProvider() {
-		return [
-			[ [ 'Q42', '', '' ] ],
-			[ [ '', 'Q42', '' ] ],
-			[ [ 'foo', 'Q42', '' ] ],
-		];
-	}
-
 	public function testGetLocalPart() {
 		$id = new ItemId( 'Q42' );
 		$this->assertSame( 'Q42', $id->getLocalPart() );

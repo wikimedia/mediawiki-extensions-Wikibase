@@ -110,27 +110,6 @@ abstract class SerializableEntityId implements EntityId {
 	}
 
 	/**
-	 * Builds an ID serialization from the parts returned by SerializableEntityId::splitSerialization.
-	 *
-	 * @param string[] $parts
-	 *
-	 * @throws InvalidArgumentException
-	 * @return string
-	 */
-	public static function joinSerialization( array $parts ) {
-		if ( end( $parts ) === '' ) {
-			throw new InvalidArgumentException( 'The last element of $parts must not be empty.' );
-		}
-
-		return implode(
-			':',
-			array_filter( $parts, function( $part ) {
-				return $part !== '';
-			} )
-		);
-	}
-
-	/**
 	 * Returns '' for local IDs and the foreign repository name for foreign IDs. For chained IDs (e.g. foo:bar:Q42) it
 	 * will return only the first part.
 	 *
