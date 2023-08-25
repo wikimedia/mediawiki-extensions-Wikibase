@@ -37,6 +37,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\ReplacePropertyStatement\ReplaceP
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel;
+use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\StatementUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupItemDataRetriever;
@@ -251,6 +252,10 @@ class WbRestApi {
 	public static function getGetPropertyStatements( ContainerInterface $services = null ): GetPropertyStatements {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.GetPropertyStatements' );
+	}
+
+	public static function getEditMetadataValidator( ContainerInterface $services = null ): EditMetadataValidator {
+		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbRestApi.EditMetadataValidator' );
 	}
 
 }

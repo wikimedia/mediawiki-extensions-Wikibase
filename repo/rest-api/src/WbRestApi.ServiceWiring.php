@@ -119,10 +119,7 @@ return [
 			new AddItemStatementValidator(
 				new ItemIdValidator(),
 				new StatementValidator( WbRestApi::getStatementDeserializer() ),
-				new EditMetadataValidator(
-					CommentStore::COMMENT_CHARACTER_LIMIT,
-					ChangeTags::listExplicitlyDefinedTags()
-				)
+				WbRestApi::getEditMetadataValidator( $services )
 			),
 			WbRestApi::getAssertItemExists( $services ),
 			WbRestApi::getItemDataRetriever( $services ),
@@ -141,10 +138,7 @@ return [
 			new AddPropertyStatementValidator(
 				new PropertyIdValidator(),
 				new StatementValidator( WbRestApi::getStatementDeserializer( $services ) ),
-				new EditMetadataValidator(
-					CommentStore::COMMENT_CHARACTER_LIMIT,
-					ChangeTags::listExplicitlyDefinedTags()
-				)
+				WbRestApi::getEditMetadataValidator( $services )
 			),
 			WbRestApi::getAssertPropertyExists(),
 			new EntityRevisionLookupPropertyDataRetriever(
@@ -182,6 +176,11 @@ return [
 			)
 		);
 	},
+
+	'WbRestApi.EditMetadataValidator' => fn( MediaWikiServices $services ) => new EditMetadataValidator(
+		CommentStore::COMMENT_CHARACTER_LIMIT,
+		ChangeTags::listExplicitlyDefinedTags()
+	),
 
 	'WbRestApi.EntityUpdater' => function( MediaWikiServices $services ): EntityUpdater {
 		return new EntityUpdater(
@@ -395,10 +394,7 @@ return [
 			new PatchItemLabelsValidator(
 				new ItemIdValidator(),
 				new JsonDiffJsonPatchValidator(),
-				new EditMetadataValidator(
-					CommentStore::COMMENT_CHARACTER_LIMIT,
-					ChangeTags::listExplicitlyDefinedTags()
-				)
+				WbRestApi::getEditMetadataValidator( $services )
 			),
 			WbRestApi::getAssertUserIsAuthorized( $services )
 		);
@@ -417,10 +413,7 @@ return [
 			new PatchStatementValidator(
 				new StatementIdValidator( new ItemIdParser() ),
 				new JsonDiffJsonPatchValidator(),
-				new EditMetadataValidator(
-					CommentStore::COMMENT_CHARACTER_LIMIT,
-					ChangeTags::listExplicitlyDefinedTags()
-				)
+				WbRestApi::getEditMetadataValidator( $services )
 			),
 			new PatchedStatementValidator( new StatementValidator( WbRestApi::getStatementDeserializer( $services ) ) ),
 			new JsonDiffJsonPatcher(),
@@ -457,10 +450,7 @@ return [
 			new RemoveItemStatementValidator(
 				new ItemIdValidator(),
 				new StatementIdValidator( new ItemIdParser() ),
-				new EditMetadataValidator(
-					CommentStore::COMMENT_CHARACTER_LIMIT,
-					ChangeTags::listExplicitlyDefinedTags()
-				)
+				WbRestApi::getEditMetadataValidator( $services )
 			),
 			new StatementGuidParser( new ItemIdParser() ),
 			WbRestApi::getAssertItemExists( $services ),
@@ -492,10 +482,7 @@ return [
 			new ReplaceStatementValidator(
 				new StatementIdValidator( $entityIdParser ),
 				new StatementValidator( WbRestApi::getStatementDeserializer() ),
-				new EditMetadataValidator(
-					CommentStore::COMMENT_CHARACTER_LIMIT,
-					ChangeTags::listExplicitlyDefinedTags()
-				),
+				WbRestApi::getEditMetadataValidator( $services ),
 			),
 			WikibaseRepo::getStatementGuidParser( $services ),
 			WbRestApi::getAssertStatementSubjectExists( $services ),
@@ -522,10 +509,7 @@ return [
 					WikibaseRepo::getItemTermsCollisionDetector( $services ),
 					$itemDataRetriever
 				),
-				new EditMetadataValidator(
-					CommentStore::COMMENT_CHARACTER_LIMIT,
-					ChangeTags::listExplicitlyDefinedTags()
-				)
+				WbRestApi::getEditMetadataValidator( $services )
 			),
 			WbRestApi::getAssertItemExists( $services ),
 			$itemDataRetriever,
@@ -539,10 +523,7 @@ return [
 			new SetItemLabelValidator(
 				new ItemIdValidator(),
 				new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() ),
-				new EditMetadataValidator(
-					CommentStore::COMMENT_CHARACTER_LIMIT,
-					ChangeTags::listExplicitlyDefinedTags(),
-				),
+				WbRestApi::getEditMetadataValidator( $services ),
 				new WikibaseRepoItemLabelValidator(
 					new TermValidatorFactoryLabelTextValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
 					WikibaseRepo::getItemTermsCollisionDetector( $services ),
