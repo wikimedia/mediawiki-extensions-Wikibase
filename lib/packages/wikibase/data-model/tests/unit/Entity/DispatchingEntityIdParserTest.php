@@ -38,7 +38,6 @@ class DispatchingEntityIdParserTest extends \PHPUnit\Framework\TestCase {
 			[ 'Q1337', new ItemId( 'Q1337' ) ],
 			[ 'p1', new NumericPropertyId( 'p1' ) ],
 			[ 'P100000', new NumericPropertyId( 'P100000' ) ],
-			[ ':Q1337', new ItemId( ':Q1337' ) ],
 		];
 	}
 
@@ -61,6 +60,7 @@ class DispatchingEntityIdParserTest extends \PHPUnit\Framework\TestCase {
 			[ '' ],
 			[ 'q0' ],
 			[ '1p' ],
+			[ ':Q1337' ],
 			[ 'foo:' ],
 			[ 'foo:bar:' ],
 			[ '::Q1337' ],
