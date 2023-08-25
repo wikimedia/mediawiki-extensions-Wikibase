@@ -11,7 +11,6 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementRequ
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\JsonPatchValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
@@ -46,8 +45,7 @@ class PatchStatementValidatorTest extends TestCase {
 	}
 
 	public static function provideValidRequest(): Generator {
-		$itemId = 'Q123';
-		$statementId = $itemId . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+		$statementId = 'Q123' . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 		yield 'Valid with item ID' => [
 			[
 				'$statementId' => $statementId,
@@ -56,7 +54,6 @@ class PatchStatementValidatorTest extends TestCase {
 				'$isBot' => false,
 				'$comment' => null,
 				'$username' => null,
-				'$itemId' => $itemId,
 			],
 		];
 		yield 'Valid without item ID' => [
@@ -71,30 +68,8 @@ class PatchStatementValidatorTest extends TestCase {
 		];
 	}
 
-	public function testAssertValidRequest_withInvalidItemId(): void {
-		$itemId = 'X123';
-		try {
-			$this->newValidator()->assertValidRequest(
-				$this->newUseCaseRequest( [
-					'$statementId' => 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
-					'$patch' => [ 'valid' => 'patch' ],
-					'$editTags' => [],
-					'$isBot' => false,
-					'$comment' => null,
-					'$username' => null,
-					'$itemId' => $itemId,
-				] )
-			);
-			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::INVALID_ITEM_ID, $e->getErrorCode() );
-			$this->assertSame( "Not a valid item ID: $itemId", $e->getErrorMessage() );
-		}
-	}
-
 	public function testAssertValidRequest_withInvalidStatementId(): void {
-		$itemId = 'Q123';
-		$statementId = $itemId . StatementGuid::SEPARATOR . 'INVALID-STATEMENT-ID';
+		$statementId = 'Q123' . StatementGuid::SEPARATOR . 'INVALID-STATEMENT-ID';
 		try {
 			$this->newValidator()->assertValidRequest(
 				$this->newUseCaseRequest( [
@@ -104,7 +79,6 @@ class PatchStatementValidatorTest extends TestCase {
 					'$isBot' => false,
 					'$comment' => null,
 					'$username' => null,
-					'$itemId' => $itemId,
 				] )
 			);
 			$this->fail( 'this should not be reached' );
@@ -138,7 +112,6 @@ class PatchStatementValidatorTest extends TestCase {
 					'$isBot' => false,
 					'$comment' => null,
 					'$username' => null,
-					'$itemId' => null,
 				] )
 			);
 			$this->fail( 'this should not be reached' );
@@ -203,7 +176,6 @@ class PatchStatementValidatorTest extends TestCase {
 					'$isBot' => false,
 					'$comment' => $comment,
 					'$username' => null,
-					'$itemId' => null,
 				] )
 			);
 			$this->fail( 'this should not be reached' );
@@ -227,7 +199,6 @@ class PatchStatementValidatorTest extends TestCase {
 					'$isBot' => false,
 					'$comment' => null,
 					'$username' => null,
-					'$itemId' => null,
 				] )
 			);
 			$this->fail( 'this should not be reached' );
@@ -239,7 +210,6 @@ class PatchStatementValidatorTest extends TestCase {
 
 	private function newValidator(): PatchStatementValidator {
 		return new PatchStatementValidator(
-			new ItemIdValidator(),
 			new StatementIdValidator( new ItemIdParser() ),
 			$this->jsonPatchValidator,
 			new EditMetadataValidator( CommentStore::COMMENT_CHARACTER_LIMIT, self::ALLOWED_TAGS )
@@ -253,8 +223,7 @@ class PatchStatementValidatorTest extends TestCase {
 			$requestData['$editTags'],
 			$requestData['$isBot'],
 			$requestData['$comment'] ?? null,
-			$requestData['$username'] ?? null,
-			$requestData['$itemId'] ?? null
+			$requestData['$username'] ?? null
 		);
 	}
 

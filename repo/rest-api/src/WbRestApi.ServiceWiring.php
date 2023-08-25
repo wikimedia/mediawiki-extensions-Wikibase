@@ -413,7 +413,6 @@ return [
 	'WbRestApi.PatchStatement' => function( MediaWikiServices $services ): PatchStatement {
 		return new PatchStatement(
 			new PatchStatementValidator(
-				new ItemIdValidator(),
 				new StatementIdValidator( new ItemIdParser() ),
 				new JsonDiffJsonPatchValidator(),
 				new EditMetadataValidator(

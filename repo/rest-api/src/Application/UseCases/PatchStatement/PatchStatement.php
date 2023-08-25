@@ -6,7 +6,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Exception\PropertyChangedException;
 use Wikibase\DataModel\Exception\StatementGuidChangedException;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
-use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
@@ -68,27 +67,24 @@ class PatchStatement {
 	public function execute( PatchStatementRequest $request ): PatchStatementResponse {
 		$this->assertValidRequest( $request );
 
-		$requestedItemId = $request->getItemId();
 		$statementId = $this->statementIdParser->parse( $request->getStatementId() );
 		/** @var ItemId $itemId */
-		$itemId = $requestedItemId ? new ItemId( $requestedItemId ) : $statementId->getEntityId();
+		$itemId = $statementId->getEntityId();
 		'@phan-var ItemId $itemId';
 
 		$this->assertItemExists->execute( $itemId );
 
-		if ( !$itemId->equals( $statementId->getEntityId() ) ) {
-			$this->throwStatementNotFoundException( $statementId );
-		}
-
 		$statementToPatch = $this->statementRetriever->getStatement( $statementId );
 
 		if ( !$statementToPatch ) {
-			$this->throwStatementNotFoundException( $statementId );
+			throw new UseCaseError(
+				UseCaseError::STATEMENT_NOT_FOUND,
+				"Could not find a statement with the ID: $statementId"
+			);
 		}
 
 		$this->assertUserIsAuthorized->execute( $itemId, $request->getUsername() );
 
-		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
 		$serialization = $this->statementSerializer->serialize( $statementToPatch );
 
 		try {
@@ -142,17 +138,6 @@ class PatchStatement {
 			$newRevision->getItem()->getStatements()->getStatementById( $statementId ),
 			$newRevision->getLastModified(),
 			$newRevision->getRevisionId()
-		);
-	}
-
-	/**
-	 * @return never
-	 * @throws UseCaseError
-	 */
-	private function throwStatementNotFoundException( StatementGuid $statementId ): void {
-		throw new UseCaseError(
-			UseCaseError::STATEMENT_NOT_FOUND,
-			"Could not find a statement with the ID: $statementId"
 		);
 	}
 

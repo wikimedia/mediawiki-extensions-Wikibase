@@ -108,7 +108,6 @@ class PatchStatementTest extends TestCase {
 			'$isBot' => $isBot,
 			'$comment' => $comment,
 			'$username' => null,
-			'$itemId' => $itemId,
 		];
 
 		$request = $this->newUseCaseRequest( $requestData );
@@ -158,29 +157,6 @@ class PatchStatementTest extends TestCase {
 		$this->assertSame( $postModificationRevisionId, $response->getRevisionId() );
 	}
 
-	public function testRequestedItemNotFoundOrRedirect_throws(): void {
-		$requestedItemId = new ItemId( 'Q42' );
-		$expectedException = $this->createStub( UseCaseException::class );
-		$this->getRevisionMetadata = $this->createMock( GetLatestItemRevisionMetadata::class );
-		$this->getRevisionMetadata
-			->method( 'execute' )
-			->with( $requestedItemId )
-			->willThrowException( $expectedException );
-
-		try {
-			$this->newUseCase()->execute(
-				$this->newUseCaseRequest( [
-					'$itemId' => "$requestedItemId",
-					'$statementId' => 'Q43$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
-					'$patch' => $this->getValidValueReplacingPatch(),
-				] )
-			);
-			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseException $e ) {
-			$this->assertSame( $expectedException, $e );
-		}
-	}
-
 	public function testItemForStatementNotFoundOrRedirect_throws(): void {
 		$subjectItemId = new ItemId( 'Q42' );
 		$expectedException = $this->createStub( UseCaseException::class );
@@ -200,25 +176,6 @@ class PatchStatementTest extends TestCase {
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
 			$this->assertSame( $expectedException, $e );
-		}
-	}
-
-	public function testStatementIdMismatchingItemId_throwsUseCaseError(): void {
-		try {
-			$this->newUseCase()->execute(
-				$this->newUseCaseRequest( [
-					'$itemId' => 'Q666',
-					'$statementId' => 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
-					'$patch' => $this->getValidValueReplacingPatch(),
-				] )
-			);
-			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::STATEMENT_NOT_FOUND, $e->getErrorCode() );
-			$this->assertSame(
-				'Could not find a statement with the ID: Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
-				$e->getErrorMessage()
-			);
 		}
 	}
 
@@ -436,8 +393,7 @@ class PatchStatementTest extends TestCase {
 			$requestData['$editTags'] ?? [],
 			$requestData['$isBot'] ?? false,
 			$requestData['$comment'] ?? null,
-			$requestData['$username'] ?? null,
-			$requestData['$itemId'] ?? null
+			$requestData['$username'] ?? null
 		);
 	}
 
