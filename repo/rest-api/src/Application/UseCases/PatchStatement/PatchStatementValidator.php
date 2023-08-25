@@ -5,7 +5,6 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\PatchStatement;
 use LogicException;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\JsonPatchValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
 
@@ -14,18 +13,15 @@ use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
  */
 class PatchStatementValidator {
 
-	private ItemIdValidator $itemIdValidator;
 	private StatementIdValidator $statementIdValidator;
 	private JsonPatchValidator $jsonPatchValidator;
 	private EditMetadataValidator $editMetadataValidator;
 
 	public function __construct(
-		ItemIdValidator $itemIdValidator,
 		StatementIdValidator $statementIdValidator,
 		JsonPatchValidator $jsonPatchValidator,
 		EditMetadataValidator $editMetadataValidator
 	) {
-		$this->itemIdValidator = $itemIdValidator;
 		$this->statementIdValidator = $statementIdValidator;
 		$this->jsonPatchValidator = $jsonPatchValidator;
 		$this->editMetadataValidator = $editMetadataValidator;
@@ -35,28 +31,10 @@ class PatchStatementValidator {
 	 * @throws UseCaseError
 	 */
 	public function assertValidRequest( PatchStatementRequest $request ): void {
-		$this->validateItemId( $request->getItemId() );
 		$this->validateStatementId( $request->getStatementId() );
 		$this->validatePatch( $request->getPatch() );
 		$this->validateEditTags( $request->getEditTags() );
 		$this->validateComment( $request->getComment() );
-	}
-
-	/**
-	 * @throws UseCaseError
-	 */
-	private function validateItemId( ?string $itemId ): void {
-		if ( $itemId === null ) {
-			return;
-		}
-
-		$validationError = $this->itemIdValidator->validate( $itemId );
-		if ( $validationError ) {
-			throw new UseCaseError(
-				UseCaseError::INVALID_ITEM_ID,
-				"Not a valid item ID: {$validationError->getContext()[ItemIdValidator::CONTEXT_VALUE]}"
-			);
-		}
 	}
 
 	/**

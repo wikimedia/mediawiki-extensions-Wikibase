@@ -42,8 +42,7 @@ class PatchItemStatement {
 			$request->getEditTags(),
 			$request->isBot(),
 			$request->getComment(),
-			$request->getUsername(),
-			$request->getItemId()
+			$request->getUsername()
 		);
 		$this->patchStatement->assertValidRequest( $patchStatementRequest );
 		$this->assertItemExists->execute( new ItemId( $request->getItemId() ) );

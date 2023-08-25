@@ -7,7 +7,6 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\PatchStatement;
  */
 class PatchStatementRequest {
 
-	private ?string $itemId;
 	private string $statementId;
 	private array $patch;
 	private array $editTags;
@@ -21,8 +20,7 @@ class PatchStatementRequest {
 		array $editTags,
 		bool $isBot,
 		?string $comment,
-		?string $username,
-		string $itemId = null
+		?string $username
 	) {
 		$this->statementId = $statementId;
 		$this->patch = $patch;
@@ -30,11 +28,6 @@ class PatchStatementRequest {
 		$this->isBot = $isBot;
 		$this->comment = $comment;
 		$this->username = $username;
-		$this->itemId = $itemId;
-	}
-
-	public function getItemId(): ?string {
-		return $this->itemId;
 	}
 
 	public function getStatementId(): string {
