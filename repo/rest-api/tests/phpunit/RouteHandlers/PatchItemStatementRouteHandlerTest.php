@@ -12,8 +12,8 @@ use MediaWikiIntegrationTestCase;
 use RuntimeException;
 use Throwable;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatementResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
 use Wikibase\Repo\RestApi\RouteHandlers\PatchItemStatementRouteHandler;
@@ -37,11 +37,11 @@ class PatchItemStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testValidHttpResponse(): void {
-		$useCaseResponse = new PatchItemStatementResponse( $this->createStub( Statement::class ), '20230731042031', 42 );
-		$useCase = $this->createStub( PatchItemStatement::class );
+		$useCaseResponse = new PatchStatementResponse( $this->createStub( Statement::class ), '20230731042031', 42 );
+		$useCase = $this->createStub( PatchStatement::class );
 		$useCase->method( 'execute' )->willReturn( $useCaseResponse );
 
-		$this->setService( 'WbRestApi.PatchItemStatement', $useCase );
+		$this->setService( 'WbRestApi.PatchStatement', $useCase );
 
 		/** @var Response $response */
 		$response = $this->newHandlerWithValidRequest()->execute();
@@ -58,9 +58,9 @@ class PatchItemStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider provideExceptionAndExpectedErrorCode
 	 */
 	public function testHandlesErrors( Throwable $exception, string $expectedErrorCode ): void {
-		$useCase = $this->createStub( PatchItemStatement::class );
+		$useCase = $this->createStub( PatchStatement::class );
 		$useCase->method( 'execute' )->willThrowException( $exception );
-		$this->setService( 'WbRestApi.PatchItemStatement', $useCase );
+		$this->setService( 'WbRestApi.PatchStatement', $useCase );
 		$this->setService( 'WbRestApi.ErrorReporter', $this->createStub( ErrorReporter::class ) );
 
 		/** @var Response $response */

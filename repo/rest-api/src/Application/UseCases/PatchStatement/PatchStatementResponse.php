@@ -1,13 +1,13 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement;
+namespace Wikibase\Repo\RestApi\Application\UseCases\PatchStatement;
 
 use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
 
 /**
  * @license GPL-2.0-or-later
  */
-class PatchItemStatementResponse {
+class PatchStatementResponse {
 
 	private Statement $statement;
 	private string $lastModified;

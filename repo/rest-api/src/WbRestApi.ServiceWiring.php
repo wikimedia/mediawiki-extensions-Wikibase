@@ -54,9 +54,9 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementValidato
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchedLabelsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsValidator;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchedStatementValidator;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchedStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementFactory;
@@ -397,9 +397,9 @@ return [
 		);
 	},
 
-	'WbRestApi.PatchItemStatement' => function( MediaWikiServices $services ): PatchItemStatement {
-		return new PatchItemStatement(
-			new PatchItemStatementValidator(
+	'WbRestApi.PatchStatement' => function( MediaWikiServices $services ): PatchStatement {
+		return new PatchStatement(
+			new PatchStatementValidator(
 				new ItemIdValidator(),
 				new StatementIdValidator( new ItemIdParser() ),
 				new JsonDiffJsonPatchValidator(),

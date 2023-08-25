@@ -11,9 +11,9 @@ use MediaWiki\Rest\StringStream;
 use MediaWiki\Rest\Validator\BodyValidator;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatementRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatementResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\BotRightCheckMiddleware;
@@ -35,13 +35,13 @@ class PatchStatementRouteHandler extends SimpleHandler {
 	public const BOT_BODY_PARAM = 'bot';
 	public const COMMENT_BODY_PARAM = 'comment';
 
-	private PatchItemStatement $useCase;
+	private PatchStatement $useCase;
 	private MiddlewareHandler $middlewareHandler;
 	private StatementSerializer $statementSerializer;
 	private ResponseFactory $responseFactory;
 
 	public function __construct(
-		PatchItemStatement $useCase,
+		PatchStatement $useCase,
 		MiddlewareHandler $middlewareHandler,
 		StatementSerializer $statementSerializer,
 		ResponseFactory $responseFactory
@@ -56,7 +56,7 @@ class PatchStatementRouteHandler extends SimpleHandler {
 		$responseFactory = new ResponseFactory();
 
 		return new self(
-			WbRestApi::getPatchItemStatement(),
+			WbRestApi::getPatchStatement(),
 			new MiddlewareHandler( [
 				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
 				new UserAgentCheckMiddleware(),
@@ -99,7 +99,7 @@ class PatchStatementRouteHandler extends SimpleHandler {
 		try {
 			return $this->newSuccessHttpResponse(
 				$this->useCase->execute(
-					new PatchItemStatementRequest(
+					new PatchStatementRequest(
 						$statementId,
 						$requestBody[self::PATCH_BODY_PARAM],
 						$requestBody[self::TAGS_BODY_PARAM],
@@ -169,7 +169,7 @@ class PatchStatementRouteHandler extends SimpleHandler {
 			] ) : parent::getBodyValidator( $contentType );
 	}
 
-	private function newSuccessHttpResponse( PatchItemStatementResponse $useCaseResponse ): Response {
+	private function newSuccessHttpResponse( PatchStatementResponse $useCaseResponse ): Response {
 		$httpResponse = $this->getResponseFactory()->create();
 		$httpResponse->setStatus( 200 );
 		$httpResponse->setHeader( 'Content-Type', 'application/json' );

@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\PatchItemStatement;
+namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\PatchStatement;
 
 use Exception;
 use Generator;
@@ -18,11 +18,11 @@ use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchedStatementValidator;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatementRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatementResponse;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchedStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
@@ -39,19 +39,19 @@ use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatement
+ * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatement
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class PatchItemStatementTest extends TestCase {
+class PatchStatementTest extends TestCase {
 
 	use EditMetadataHelper;
 
 	private const STRING_PROPERTY = 'P123';
 
-	private PatchItemStatementValidator $useCaseValidator;
+	private PatchStatementValidator $useCaseValidator;
 	private PatchedStatementValidator $patchedStatementValidator;
 
 	private StatementSerializer $statementSerializer;
@@ -64,7 +64,7 @@ class PatchItemStatementTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->useCaseValidator = $this->createStub( PatchItemStatementValidator::class );
+		$this->useCaseValidator = $this->createStub( PatchStatementValidator::class );
 		$this->patchedStatementValidator = $this->createStub( PatchedStatementValidator::class );
 		$this->statementRetriever = $this->createStub( StatementRetriever::class );
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
@@ -149,7 +149,7 @@ class PatchItemStatementTest extends TestCase {
 
 		$response = $this->newUseCase()->execute( $request );
 
-		$this->assertInstanceOf( PatchItemStatementResponse::class, $response );
+		$this->assertInstanceOf( PatchStatementResponse::class, $response );
 		$this->assertSame(
 			$updatedItem->getStatements()->getStatementById( $statementId ),
 			$response->getStatement()
@@ -376,8 +376,8 @@ class PatchItemStatementTest extends TestCase {
 		}
 	}
 
-	private function newUseCase(): PatchItemStatement {
-		return new PatchItemStatement(
+	private function newUseCase(): PatchStatement {
+		return new PatchStatement(
 			$this->useCaseValidator,
 			$this->patchedStatementValidator,
 			new JsonDiffJsonPatcher(),
@@ -429,8 +429,8 @@ class PatchItemStatementTest extends TestCase {
 		}
 	}
 
-	private function newUseCaseRequest( array $requestData ): PatchItemStatementRequest {
-		return new PatchItemStatementRequest(
+	private function newUseCaseRequest( array $requestData ): PatchStatementRequest {
+		return new PatchStatementRequest(
 			$requestData['$statementId'],
 			$requestData['$patch'],
 			$requestData['$editTags'] ?? [],

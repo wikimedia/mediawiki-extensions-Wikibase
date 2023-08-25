@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement;
+namespace Wikibase\Repo\RestApi\Application\UseCases\PatchStatement;
 
 use LogicException;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
@@ -12,7 +12,7 @@ use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
 /**
  * @license GPL-2.0-or-later
  */
-class PatchItemStatementValidator {
+class PatchStatementValidator {
 
 	private ItemIdValidator $itemIdValidator;
 	private StatementIdValidator $statementIdValidator;
@@ -34,7 +34,7 @@ class PatchItemStatementValidator {
 	/**
 	 * @throws UseCaseError
 	 */
-	public function assertValidRequest( PatchItemStatementRequest $request ): void {
+	public function assertValidRequest( PatchStatementRequest $request ): void {
 		$this->validateItemId( $request->getItemId() );
 		$this->validateStatementId( $request->getStatementId() );
 		$this->validatePatch( $request->getPatch() );

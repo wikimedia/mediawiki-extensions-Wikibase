@@ -1,14 +1,14 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\PatchItemStatement;
+namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\PatchStatement;
 
 use CommentStore;
 use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Statement\StatementGuid;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatementRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
@@ -17,13 +17,13 @@ use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatementValidator
+ * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementValidator
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class PatchItemStatementValidatorTest extends TestCase {
+class PatchStatementValidatorTest extends TestCase {
 
 	private JsonPatchValidator $jsonPatchValidator;
 
@@ -237,8 +237,8 @@ class PatchItemStatementValidatorTest extends TestCase {
 		}
 	}
 
-	private function newValidator(): PatchItemStatementValidator {
-		return new PatchItemStatementValidator(
+	private function newValidator(): PatchStatementValidator {
+		return new PatchStatementValidator(
 			new ItemIdValidator(),
 			new StatementIdValidator( new ItemIdParser() ),
 			$this->jsonPatchValidator,
@@ -246,8 +246,8 @@ class PatchItemStatementValidatorTest extends TestCase {
 		);
 	}
 
-	private function newUseCaseRequest( array $requestData ): PatchItemStatementRequest {
-		return new PatchItemStatementRequest(
+	private function newUseCaseRequest( array $requestData ): PatchStatementRequest {
+		return new PatchStatementRequest(
 			$requestData['$statementId'],
 			$requestData['$patch'],
 			$requestData['$editTags'],

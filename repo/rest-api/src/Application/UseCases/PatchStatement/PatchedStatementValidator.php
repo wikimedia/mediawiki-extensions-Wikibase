@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement;
+namespace Wikibase\Repo\RestApi\Application\UseCases\PatchStatement;
 
 use LogicException;
 use Wikibase\DataModel\Statement\Statement;
