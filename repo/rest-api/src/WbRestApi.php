@@ -34,7 +34,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplacePropertyStatement\ReplacePropertyStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementFactory;
+use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
@@ -133,9 +133,8 @@ class WbRestApi {
 		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbRestApi.ReplacePropertyStatement' );
 	}
 
-	public static function getReplaceStatementFactory( ContainerInterface $services = null ): ReplaceStatementFactory {
-		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.ReplaceStatementFactory' );
+	public static function getReplaceStatement( ContainerInterface $services = null ): ReplaceStatement {
+		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbRestApi.ReplaceStatement' );
 	}
 
 	public static function getRemoveItemStatement( ContainerInterface $services = null ): RemoveItemStatement {

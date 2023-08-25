@@ -94,7 +94,6 @@ class ReplaceStatementTest extends TestCase {
 				'$editTags' => $editTags,
 				'$isBot' => $isBot,
 				'$comment' => $comment,
-				'$subjectId' => (string)$subjectId,
 			] )
 		);
 
@@ -147,32 +146,9 @@ class ReplaceStatementTest extends TestCase {
 	}
 
 	/**
-	 * @dataProvider provideTwoSubjectIds
-	 */
-	public function testGivenStatementIdMismatchingRequestedSubjectId_throwsUseCaseError( EntityId $id1, EntityId $id2 ): void {
-		try {
-			$this->newUseCase()->execute(
-				$this->newUseCaseRequest( [
-					'$subjectId' => "$id1",
-					'$statementId' => "$id2\$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
-					'$statement' => $this->getValidStatementSerialization(),
-				] )
-			);
-			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::STATEMENT_NOT_FOUND, $e->getErrorCode() );
-		}
-	}
-
-	public function provideTwoSubjectIds(): Generator {
-		yield 'item ids' => [ new ItemId( 'Q123' ), new ItemId( 'Q456' ) ];
-		yield 'property ids' => [ new NumericPropertyId( 'P123' ), new NumericPropertyId( 'P456' ) ];
-	}
-
-	/**
 	 * @dataProvider provideSubjectId
 	 */
-	public function testProtectedStatementSubject_throwsUseCaseError( EntityId $subjectId ): void {
+	public function testGivenProtectedStatementSubject_throwsUseCaseError( EntityId $subjectId ): void {
 		$expectedError = $this->createStub( UseCaseError::class );
 		$this->assertUserIsAuthorized = $this->createMock( AssertUserIsAuthorized::class );
 		$this->assertUserIsAuthorized->expects( $this->once() )
@@ -275,7 +251,6 @@ class ReplaceStatementTest extends TestCase {
 		return new ReplaceStatement(
 			$this->replaceStatementValidator,
 			new StatementGuidParser( new BasicEntityIdParser() ),
-			new BasicEntityIdParser(),
 			$this->assertStatementSubjectExists,
 			$this->assertUserIsAuthorized,
 			$this->statementUpdater,
@@ -289,8 +264,7 @@ class ReplaceStatementTest extends TestCase {
 			$requestData['$editTags'] ?? [],
 			$requestData['$isBot'] ?? false,
 			$requestData['$comment'] ?? null,
-			$requestData['$username'] ?? null,
-			$requestData['$subjectId'] ?? null
+			$requestData['$username'] ?? null
 		);
 	}
 

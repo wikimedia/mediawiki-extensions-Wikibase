@@ -65,7 +65,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemS
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplacePropertyStatement\ReplacePropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplacePropertyStatement\ReplacePropertyStatementValidator;
-use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementFactory;
+use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel;
@@ -76,7 +77,6 @@ use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
-use Wikibase\Repo\RestApi\Application\Validation\UnexpectedRequestedSubjectIdValidator;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\RestApi\Domain\Services\StatementUpdater;
@@ -475,8 +475,7 @@ return [
 		return new ReplaceItemStatement(
 			new ReplaceItemStatementValidator( new ItemIdValidator() ),
 			WbRestApi::getAssertItemExists( $services ),
-			WbRestApi::getReplaceStatementFactory( $services )
-				->newReplaceStatement( new UnexpectedRequestedSubjectIdValidator() )
+			WbRestApi::getReplaceStatement( $services )
 		);
 	},
 
@@ -484,23 +483,22 @@ return [
 		return new ReplacePropertyStatement(
 			new ReplacePropertyStatementValidator( new PropertyIdValidator() ),
 			WbRestApi::getAssertPropertyExists( $services ),
-			WbRestApi::getReplaceStatementFactory( $services )->newReplaceStatement(
-				new UnexpectedRequestedSubjectIdValidator()
-			)
+			WbRestApi::getReplaceStatement( $services )
 		);
 	},
 
-	'WbRestApi.ReplaceStatementFactory' => function( MediaWikiServices $services ): ReplaceStatementFactory {
+	'WbRestApi.ReplaceStatement' => function( MediaWikiServices $services ): ReplaceStatement {
 		$entityIdParser = WikibaseRepo::getEntityIdParser( $services );
-		return new ReplaceStatementFactory(
-			new StatementIdValidator( $entityIdParser ),
-			new StatementValidator( WbRestApi::getStatementDeserializer() ),
-			new EditMetadataValidator(
-				CommentStore::COMMENT_CHARACTER_LIMIT,
-				ChangeTags::listExplicitlyDefinedTags()
+		return new ReplaceStatement(
+			new ReplaceStatementValidator(
+				new StatementIdValidator( $entityIdParser ),
+				new StatementValidator( WbRestApi::getStatementDeserializer() ),
+				new EditMetadataValidator(
+					CommentStore::COMMENT_CHARACTER_LIMIT,
+					ChangeTags::listExplicitlyDefinedTags()
+				),
 			),
 			WikibaseRepo::getStatementGuidParser( $services ),
-			$entityIdParser,
 			WbRestApi::getAssertStatementSubjectExists( $services ),
 			WbRestApi::getAssertUserIsAuthorized( $services ),
 			WbRestApi::getStatementUpdater( $services )

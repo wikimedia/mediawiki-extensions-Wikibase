@@ -6,7 +6,6 @@ use LogicException;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
-use Wikibase\Repo\RestApi\Application\Validation\RequestedSubjectIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
 
@@ -15,18 +14,15 @@ use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
  */
 class ReplaceStatementValidator {
 
-	private RequestedSubjectIdValidator $subjectIdValidator;
 	private StatementIdValidator $statementIdValidator;
 	private EditMetadataValidator $editMetadataValidator;
 	private StatementValidator $statementValidator;
 
 	public function __construct(
-		RequestedSubjectIdValidator $subjectIdValidator,
 		StatementIdValidator $statementIdValidator,
 		StatementValidator $statementValidator,
 		EditMetadataValidator $editMetadataValidator
 	) {
-		$this->subjectIdValidator = $subjectIdValidator;
 		$this->statementIdValidator = $statementIdValidator;
 		$this->statementValidator = $statementValidator;
 		$this->editMetadataValidator = $editMetadataValidator;
@@ -36,7 +32,6 @@ class ReplaceStatementValidator {
 	 * @throws UseCaseError
 	 */
 	public function assertValidRequest( ReplaceStatementRequest $request ): void {
-		$this->validateSubjectId( $request->getSubjectId() );
 		$this->validateStatementId( $request->getStatementId() );
 		$this->validateStatement( $request->getStatement() );
 		$this->validateEditTags( $request->getEditTags() );
@@ -45,20 +40,6 @@ class ReplaceStatementValidator {
 
 	public function getValidatedStatement(): Statement {
 		return $this->statementValidator->getValidatedStatement();
-	}
-
-	/**
-	 * @throws UseCaseError
-	 */
-	private function validateSubjectId( ?string $subjectId ): void {
-		$validationError = $this->subjectIdValidator->validate( $subjectId );
-		if ( $validationError ) {
-			throw new UseCaseError(
-				UseCaseError::INVALID_STATEMENT_SUBJECT_ID,
-				'Invalid Subject ID',
-				[ UseCaseError::CONTEXT_SUBJECT_ID => $validationError->getContext()[RequestedSubjectIdValidator::CONTEXT_VALUE] ]
-			);
-		}
 	}
 
 	/**
