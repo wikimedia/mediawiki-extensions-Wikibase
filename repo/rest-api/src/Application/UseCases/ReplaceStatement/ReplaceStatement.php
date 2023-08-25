@@ -48,7 +48,7 @@ class ReplaceStatement {
 	 * @throws UseCaseError
 	 */
 	public function execute( ReplaceStatementRequest $request ): ReplaceStatementResponse {
-		$this->validator->assertValidRequest( $request );
+		$this->assertValidRequest( $request );
 
 		$requestedSubjectId = $request->getSubjectId();
 		$statementId = $this->statementIdParser->parse( $request->getStatementId() );
@@ -94,6 +94,10 @@ class ReplaceStatement {
 			$newRevision->getLastModified(),
 			$newRevision->getRevisionId()
 		);
+	}
+
+	public function assertValidRequest( ReplaceStatementRequest $request ): void {
+		$this->validator->assertValidRequest( $request );
 	}
 
 	/**

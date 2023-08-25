@@ -11,8 +11,7 @@ use MediaWiki\Tests\Rest\Handler\HandlerTestTrait;
 use MediaWikiIntegrationTestCase;
 use RuntimeException;
 use Throwable;
-use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementFactory;
+use Wikibase\Repo\RestApi\Application\UseCases\ReplacePropertyStatement\ReplacePropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
@@ -41,12 +40,10 @@ class ReplacePropertyStatementRouteHandlerTest extends MediaWikiIntegrationTestC
 		$useCaseResponse = new ReplaceStatementResponse(
 			$this->createStub( Statement::class ), '20230731042031', 42
 		);
-		$useCase = $this->createStub( ReplaceStatement::class );
+		$useCase = $this->createStub( ReplacePropertyStatement::class );
 		$useCase->method( 'execute' )->willReturn( $useCaseResponse );
-		$useCaseFactory = $this->createStub( ReplaceStatementFactory::class );
-		$useCaseFactory->method( 'newReplaceStatement' )->willReturn( $useCase );
 
-		$this->setService( 'WbRestApi.ReplaceStatementFactory', $useCaseFactory );
+		$this->setService( 'WbRestApi.ReplacePropertyStatement', $useCase );
 
 		/** @var Response $response */
 		$response = $this->newHandlerWithValidRequest()->execute();
@@ -63,12 +60,10 @@ class ReplacePropertyStatementRouteHandlerTest extends MediaWikiIntegrationTestC
 	 * @dataProvider provideExceptionAndExpectedErrorCode
 	 */
 	public function testHandlesErrors( Throwable $exception, string $expectedErrorCode ): void {
-		$useCase = $this->createStub( ReplaceStatement::class );
+		$useCase = $this->createStub( ReplacePropertyStatement::class );
 		$useCase->method( 'execute' )->willThrowException( $exception );
-		$useCaseFactory = $this->createStub( ReplaceStatementFactory::class );
-		$useCaseFactory->method( 'newReplaceStatement' )->willReturn( $useCase );
 
-		$this->setService( 'WbRestApi.ReplaceStatementFactory', $useCaseFactory );
+		$this->setService( 'WbRestApi.ReplacePropertyStatement', $useCase );
 		$this->setService( 'WbRestApi.ErrorReporter', $this->createStub( ErrorReporter::class ) );
 
 		/** @var Response $response */
@@ -83,16 +78,6 @@ class ReplacePropertyStatementRouteHandlerTest extends MediaWikiIntegrationTestC
 		yield 'Error handled by ResponseFactory' => [
 			new UseCaseError( UseCaseError::INVALID_STATEMENT_ID, '' ),
 			UseCaseError::INVALID_STATEMENT_ID,
-		];
-
-		yield 'Invalid Statement Subject Id' => [
-			new UseCaseError( UseCaseError::INVALID_STATEMENT_SUBJECT_ID, '', [ 'subject-id' => 'P123' ] ),
-			UseCaseError::INVALID_PROPERTY_ID,
-		];
-
-		yield 'Statement Subject Not Found' => [
-			new UseCaseError( UseCaseError::STATEMENT_SUBJECT_NOT_FOUND, '', [ 'subject-id' => 'P123' ] ),
-			UseCaseError::PROPERTY_NOT_FOUND,
 		];
 
 		yield 'Unexpected Error' => [ new RuntimeException(), UseCaseError::UNEXPECTED_ERROR ];

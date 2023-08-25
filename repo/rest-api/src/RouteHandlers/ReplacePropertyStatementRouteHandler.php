@@ -10,12 +10,10 @@ use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
 use MediaWiki\Rest\Validator\BodyValidator;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
-use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\ReplacePropertyStatement\ReplacePropertyStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\ReplacePropertyStatement\ReplacePropertyStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
-use Wikibase\Repo\RestApi\Application\Validation\RequiredRequestedSubjectIdValidator;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\BotRightCheckMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\ContentTypeCheckMiddleware;
@@ -36,13 +34,13 @@ class ReplacePropertyStatementRouteHandler extends SimpleHandler {
 	public const BOT_BODY_PARAM = 'bot';
 	public const COMMENT_BODY_PARAM = 'comment';
 
-	private ReplaceStatement $useCase;
+	private ReplacePropertyStatement $useCase;
 	private StatementSerializer $statementSerializer;
 	private MiddlewareHandler $middlewareHandler;
 	private ResponseFactory $responseFactory;
 
 	public function __construct(
-		ReplaceStatement $useCase,
+		ReplacePropertyStatement $useCase,
 		StatementSerializer $statementSerializer,
 		MiddlewareHandler $middlewareHandler,
 		ResponseFactory $responseFactory
@@ -56,9 +54,7 @@ class ReplacePropertyStatementRouteHandler extends SimpleHandler {
 	public static function factory(): Handler {
 		$responseFactory = new ResponseFactory();
 		return new self(
-			WbRestApi::getReplaceStatementFactory()->newReplaceStatement(
-				new RequiredRequestedSubjectIdValidator( new PropertyIdValidator() )
-			),
+			WbRestApi::getReplacePropertyStatement(),
 			WbRestApi::getSerializerFactory()->newStatementSerializer(),
 			new MiddlewareHandler( [
 				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
@@ -94,29 +90,20 @@ class ReplacePropertyStatementRouteHandler extends SimpleHandler {
 		$requestBody = $this->getValidatedBody();
 
 		try {
-			$useCaseResponse = $this->useCase->execute( new ReplaceStatementRequest(
-				$statementId,
-				$requestBody[self::STATEMENT_BODY_PARAM],
-				$requestBody[self::TAGS_BODY_PARAM],
-				$requestBody[self::BOT_BODY_PARAM],
-				$requestBody[self::COMMENT_BODY_PARAM],
-				$this->getUsername(),
-				$propertyId
-			) );
-			return $this->newSuccessHttpResponse( $useCaseResponse );
+			return $this->newSuccessHttpResponse(
+				$this->useCase->execute(
+					new ReplacePropertyStatementRequest(
+						$propertyId,
+						$statementId,
+						$requestBody[ self::STATEMENT_BODY_PARAM ],
+						$requestBody[ self::TAGS_BODY_PARAM ],
+						$requestBody[ self::BOT_BODY_PARAM ],
+						$requestBody[ self::COMMENT_BODY_PARAM ],
+						$this->getUsername(),
+					)
+				)
+			);
 		} catch ( UseCaseError $e ) {
-			if ( $e->getErrorCode() === UseCaseError::INVALID_STATEMENT_SUBJECT_ID ) {
-				return $this->responseFactory->newErrorResponse(
-					UseCaseError::INVALID_PROPERTY_ID,
-					"Not a valid property ID: $propertyId"
-				);
-			}
-			if ( $e->getErrorCode() === UseCaseError::STATEMENT_SUBJECT_NOT_FOUND ) {
-				return $this->responseFactory->newErrorResponse(
-					UseCaseError::PROPERTY_NOT_FOUND,
-					"Could not find an property with the ID: $propertyId"
-				);
-			}
 			return $this->responseFactory->newErrorResponseFromException( $e );
 		}
 	}
