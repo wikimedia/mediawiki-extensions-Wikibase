@@ -726,6 +726,36 @@
 			}
 		}
 	},
+	"InvalidPropertyStatementPatch": {
+		"description": "The provided JSON Patch is invalid",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/ContextError" },
+				"examples": {
+					"invalid-property-id": { "$ref": "./examples.json#/InvalidPropertyIdExample" },
+					"invalid-statement-id": { "$ref": "./examples.json#/InvalidStatementIdExample" },
+					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
+					"invalid-operation-change-statement-id": {
+						"$ref": "./examples.json#/InvalidOperationChangeStatementId"
+					},
+					"invalid-operation-change-property-of-statement": {
+						"$ref": "./examples.json#/InvalidOperationChangePropertyOfStatement"
+					},
+					"invalid-patch": { "$ref": "./examples.json#/InvalidPatchExample" },
+					"invalid-patch-operation": { "$ref": "./examples.json#/InvalidPatchOperationExample" },
+					"invalid-patch-field-type": { "$ref": "./examples.json#/InvalidPatchFieldTypeExample" },
+					"missing-json-patch-field": { "$ref": "./examples.json#/MissingJsonPatchFieldExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
 	"CannotApplyStatementPatch": {
 		"description": "The provided JSON Patch cannot be applied to the given statement",
 		"content": {

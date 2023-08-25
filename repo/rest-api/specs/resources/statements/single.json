@@ -48,7 +48,7 @@
 		"operationId": "patchStatement",
 		"tags": [ "statements" ],
 		"summary": "Change elements of a single Statement",
-		"description": "This endpoint is also accessible through `/entities/items/{item_id}/statements/{statement_id}`",
+		"description": "This endpoint is also accessible through `/entities/items/{item_id}/statements/{statement_id}` and `/entities/properties/{property_id}/statements/{statement_id}`",
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/StatementId" },
 			{ "$ref": "../../global/parameters.json#/IfMatch" },

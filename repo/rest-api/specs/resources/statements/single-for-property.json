@@ -46,5 +46,29 @@
 			"415": { "$ref": "../../global/responses.json#/InvalidMediaType" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
 		}
+	},
+	"patch": {
+		"operationId": "patchPropertyStatement",
+		"tags": [ "statements" ],
+		"summary": "[WIP] Change elements of a single Statement of a Property",
+		"description": "This endpoint is currently in development and is not recommended for production use.\n\nThis endpoint is also accessible through `/statements/{statement_id}`.",
+		"parameters": [
+			{ "$ref": "../../global/parameters.json#/PropertyId" },
+			{ "$ref": "../../global/parameters.json#/PropertyStatementId" },
+			{ "$ref": "../../global/parameters.json#/IfMatch" },
+			{ "$ref": "../../global/parameters.json#/IfNoneMatch" },
+			{ "$ref": "../../global/parameters.json#/IfUnmodifiedSince" }
+		],
+		"requestBody": { "$ref": "../../global/requests.json#/StatementPatch" },
+		"responses": {
+			"200": { "$ref": "../../global/responses.json#/PropertyStatement" },
+			"400": { "$ref": "../../global/responses.json#/InvalidPropertyStatementPatch" },
+			"404": { "$ref": "../../global/responses.json#/PropertyStatementNotFound" },
+			"409": { "$ref": "../../global/responses.json#/CannotApplyStatementPatch" },
+			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
+			"415": { "$ref": "../../global/responses.json#/InvalidMediaType" },
+			"422": { "$ref": "../../global/responses.json#/InvalidPatchedStatement" },
+			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
+		}
 	}
 }
