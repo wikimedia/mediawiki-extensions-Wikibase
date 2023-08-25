@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
 /**
  * @license GPL-2.0-or-later
  */
-class PropertyIdValidator implements EntityIdValidator {
+class PropertyIdValidator {
 
 	public const CODE_INVALID = 'invalid-property-id';
 	public const CONTEXT_VALUE = 'property-id-value';
