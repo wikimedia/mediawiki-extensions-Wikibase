@@ -63,53 +63,6 @@ abstract class SerializableEntityId implements EntityId {
 	}
 
 	/**
-	 * Returns an array with 3 elements: the foreign repository name as the first element, the local ID as the last
-	 * element and everything that is in between as the second element.
-	 *
-	 * SerializableEntityId::joinSerialization can be used to restore the original serialization from the parts returned.
-	 *
-	 * @param string $serialization
-	 *
-	 * @throws InvalidArgumentException
-	 * @return string[] Array containing the serialization split into 3 parts.
-	 */
-	public static function splitSerialization( $serialization ) {
-		self::assertValidSerialization( $serialization );
-
-		return self::extractSerializationParts( self::normalizeIdSerialization( $serialization ) );
-	}
-
-	/**
-	 * Splits the given ID serialization into an array with the following three elements:
-	 *  - the repository name as the first element (empty string for local repository)
-	 *  - any parts of the ID serialization but the repository name and the local ID (if any, empty string
-	 *    if nothing else present)
-	 *  - the local ID
-	 * Note: this method does not perform any validation of the given input. Calling code should take
-	 * care of this!
-	 *
-	 * @param string $serialization
-	 *
-	 * @return string[]
-	 */
-	private static function extractSerializationParts( $serialization ) {
-		$parts = explode( ':', $serialization );
-		$localPart = array_pop( $parts );
-		$repoName = array_shift( $parts );
-		$prefixRemainder = implode( ':', $parts );
-
-		if ( $repoName !== null ) {
-			throw new InvalidArgumentException( 'repo name no longer supported (T291823)' );
-		}
-
-		return [
-			is_string( $repoName ) ? $repoName : '',
-			$prefixRemainder,
-			$localPart,
-		];
-	}
-
-	/**
 	 * Returns '' for local IDs and the foreign repository name for foreign IDs. For chained IDs (e.g. foo:bar:Q42) it
 	 * will return only the first part.
 	 *

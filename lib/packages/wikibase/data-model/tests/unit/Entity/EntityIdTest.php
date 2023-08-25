@@ -108,27 +108,6 @@ class EntityIdTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $repoName, $id->getRepositoryName() );
 	}
 
-	public static function serializationSplitProvider() {
-		return [
-			[ 'Q42', [ '', '', 'Q42' ] ],
-		];
-	}
-
-	/**
-	 * @dataProvider serializationSplitProvider
-	 */
-	public function testSplitSerialization( $serialization, $split ) {
-		$this->assertSame( $split, SerializableEntityId::splitSerialization( $serialization ) );
-	}
-
-	/**
-	 * @dataProvider invalidSerializationProvider
-	 */
-	public function testSplitSerializationFails_GivenInvalidSerialization( $serialization ) {
-		$this->expectException( InvalidArgumentException::class );
-		SerializableEntityId::splitSerialization( $serialization );
-	}
-
 	public function testGetLocalPart() {
 		$id = new ItemId( 'Q42' );
 		$this->assertSame( 'Q42', $id->getLocalPart() );
