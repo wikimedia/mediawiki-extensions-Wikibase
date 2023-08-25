@@ -66,7 +66,7 @@ class PatchStatement {
 	 * @throws UseCaseError
 	 */
 	public function execute( PatchStatementRequest $request ): PatchStatementResponse {
-		$this->useCaseValidator->assertValidRequest( $request );
+		$this->assertValidRequest( $request );
 
 		$requestedItemId = $request->getItemId();
 		$statementId = $this->statementIdParser->parse( $request->getStatementId() );
@@ -88,6 +88,7 @@ class PatchStatement {
 
 		$this->assertUserIsAuthorized->execute( $itemId, $request->getUsername() );
 
+		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
 		$serialization = $this->statementSerializer->serialize( $statementToPatch );
 
 		try {
@@ -153,6 +154,10 @@ class PatchStatement {
 			UseCaseError::STATEMENT_NOT_FOUND,
 			"Could not find a statement with the ID: $statementId"
 		);
+	}
+
+	public function assertValidRequest( PatchStatementRequest $request ): void {
+		$this->useCaseValidator->assertValidRequest( $request );
 	}
 
 }
