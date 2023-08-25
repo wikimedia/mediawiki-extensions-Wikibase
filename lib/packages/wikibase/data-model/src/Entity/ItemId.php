@@ -22,14 +22,15 @@ class ItemId extends SerializableEntityId implements Int32EntityId {
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct( $idSerialization ) {
-		$parts = self::splitSerialization( $idSerialization );
-		$this->assertValidIdFormat( $parts[2] );
-		parent::__construct( self::joinSerialization(
-			[ $parts[0], $parts[1], strtoupper( $parts[2] ) ]
-		) );
+		$this->assertValidIdFormat( $idSerialization );
+		parent::__construct( strtoupper( $idSerialization ) );
 	}
 
 	private function assertValidIdFormat( $idSerialization ) {
+		if ( !is_string( $idSerialization ) ) {
+			throw new InvalidArgumentException( '$idSerialization must be a string' );
+		}
+
 		if ( !preg_match( self::PATTERN, $idSerialization ) ) {
 			throw new InvalidArgumentException( '$idSerialization must match ' . self::PATTERN );
 		}
@@ -48,8 +49,7 @@ class ItemId extends SerializableEntityId implements Int32EntityId {
 	 * @return int Guaranteed to be a distinct integer in the range [1..2147483647].
 	 */
 	public function getNumericId() {
-		$serializationParts = self::splitSerialization( $this->serialization );
-		return (int)substr( $serializationParts[2], 1 );
+		return (int)substr( $this->serialization, 1 );
 	}
 
 	/**
