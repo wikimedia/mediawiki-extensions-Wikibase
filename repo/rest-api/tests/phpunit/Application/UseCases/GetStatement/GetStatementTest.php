@@ -45,16 +45,16 @@ class GetStatementTest extends TestCase {
 		$revision = 987;
 		$lastModified = '20201111070707';
 		$guidPart = 'c48c32c3-42b5-498f-9586-84608b88747c';
-		$statementId = $subjectId . StatementGuid::SEPARATOR . $guidPart;
+		$statementId = new StatementGuid( $subjectId, $guidPart );
 		$expectedStatement = NewStatementReadModel::forProperty( 'P123' )
-			->withGuid( $statementId )
+			->withGuid( (string)$statementId )
 			->withValue( 'potato' )
 			->build();
 
 		$this->getRevisionMetadata = $this->createMock( GetLatestStatementSubjectRevisionMetadata::class );
 		$this->getRevisionMetadata->expects( $this->once() )
 			->method( 'execute' )
-			->with( $subjectId )
+			->with( $statementId )
 			->willReturn( [ $revision, $lastModified ] );
 
 		$this->statementRetriever = $this->createMock( StatementRetriever::class );

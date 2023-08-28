@@ -46,10 +46,8 @@ class ReplaceStatement {
 		$this->assertValidRequest( $request );
 
 		$statementId = $this->statementIdParser->parse( $request->getStatementId() );
-		$subjectId = $statementId->getEntityId();
-
-		$this->assertStatementSubjectExists->execute( $subjectId );
-		$this->assertUserIsAuthorized->execute( $subjectId, $request->getUsername() );
+		$this->assertStatementSubjectExists->execute( $statementId );
+		$this->assertUserIsAuthorized->execute( $statementId->getEntityId(), $request->getUsername() );
 
 		$statement = $this->validator->getValidatedStatement();
 		if ( $statement->getGuid() === null ) {

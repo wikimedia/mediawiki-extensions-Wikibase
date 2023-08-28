@@ -36,7 +36,7 @@ class GetStatement {
 		$statementIdParser = new StatementGuidParser( new BasicEntityIdParser() );
 		$statementId = $statementIdParser->parse( $statementRequest->getStatementId() );
 
-		[ $revisionId, $lastModified ] = $this->getRevisionMetadata->execute( $statementId->getEntityId() );
+		[ $revisionId, $lastModified ] = $this->getRevisionMetadata->execute( $statementId );
 
 		$statement = $this->statementRetriever->getStatement( $statementId );
 		if ( !$statement ) {
@@ -52,4 +52,5 @@ class GetStatement {
 	public function assertValidRequest( GetStatementRequest $request ): void {
 		$this->validator->assertValidRequest( $request );
 	}
+
 }

@@ -4,9 +4,9 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestStatementSubjectRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
@@ -23,51 +23,52 @@ use Wikibase\Repo\RestApi\Domain\Services\StatementSubjectRevisionMetaDataRetrie
 class GetLatestStatementSubjectRevisionMetadataTest extends TestCase {
 
 	/**
-	 * @dataProvider provideStatementSubjectId
+	 * @dataProvider provideStatementId
 	 */
-	public function testExecute( EntityId $subjectId ): void {
+	public function testExecute( StatementGuid $statementId ): void {
 		$expectedRevisionId = 123;
 		$expectedLastModified = '20220101001122';
 
 		$metadataRetriever = $this->createMock( StatementSubjectRevisionMetadataRetriever::class );
 		$metadataRetriever->expects( $this->once() )
 			->method( 'getLatestRevisionMetadata' )
-			->with( $subjectId )
+			->with( $statementId )
 			->willReturn( LatestStatementSubjectRevisionMetadataResult::concreteRevision( $expectedRevisionId, $expectedLastModified ) );
 
-		[ $revId, $lastModified ] = $this->newGetRevisionMetadata( $metadataRetriever )->execute( $subjectId );
+		[ $revId, $lastModified ] = $this->newGetRevisionMetadata( $metadataRetriever )->execute( $statementId );
 
 		$this->assertSame( $expectedRevisionId, $revId );
 		$this->assertSame( $expectedLastModified, $lastModified );
 	}
 
 	/**
-	 * @dataProvider provideStatementSubjectId
+	 * @dataProvider provideStatementId
 	 */
-	public function testGivenStatementSubjectDoesNotExist_throwsUseCaseError( EntityId $subjectId ): void {
+	public function testGivenStatementSubjectDoesNotExist_throwsUseCaseError( StatementGuid $statementId ): void {
 		$metadataRetriever = $this->createStub( StatementSubjectRevisionMetadataRetriever::class );
 		$metadataRetriever->method( 'getLatestRevisionMetadata' )
 			->willReturn( LatestStatementSubjectRevisionMetadataResult::subjectNotFound() );
 
 		try {
-			$this->newGetRevisionMetadata( $metadataRetriever )->execute( $subjectId );
+			$this->newGetRevisionMetadata( $metadataRetriever )->execute( $statementId );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::STATEMENT_SUBJECT_NOT_FOUND, $e->getErrorCode() );
-			$this->assertSame( "Could not find the statement subject with the ID: {$subjectId}", $e->getErrorMessage() );
+			$this->assertStringContainsString( "{$statementId->getEntityId()}", $e->getErrorMessage() );
 		}
 	}
 
 	public function testGivenItemRedirect_throwsItemRedirect(): void {
 		$redirectSource = new ItemId( 'Q321' );
 		$redirectTarget = 'Q123';
+		$statementId = new StatementGuid( $redirectSource, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 
 		$metadataRetriever = $this->createStub( StatementSubjectRevisionMetadataRetriever::class );
 		$metadataRetriever->method( 'getLatestRevisionMetadata' )
 			->willReturn( LatestStatementSubjectRevisionMetadataResult::redirect( new ItemId( $redirectTarget ) ) );
 
 		try {
-			$this->newGetRevisionMetadata( $metadataRetriever )->execute( $redirectSource );
+			$this->newGetRevisionMetadata( $metadataRetriever )->execute( $statementId );
 			$this->fail( 'this should not be reached' );
 		} catch ( ItemRedirect $e ) {
 			$this->assertSame( $redirectTarget, $e->getRedirectTargetId() );
@@ -79,9 +80,10 @@ class GetLatestStatementSubjectRevisionMetadataTest extends TestCase {
 		return new GetLatestStatementSubjectRevisionMetadata( $metadataRetriever );
 	}
 
-	public function provideStatementSubjectId(): Generator {
-		yield 'item id' => [ new ItemId( 'Q123' ) ];
-		yield 'property id' => [ new NumericPropertyId( 'P123' ) ];
+	public function provideStatementId(): Generator {
+		$guidPart = 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+		yield 'statement on an item' => [ new StatementGuid( new ItemId( 'Q123' ), $guidPart ) ];
+		yield 'statement on a property' => [ new StatementGuid( new NumericPropertyId( 'P123' ), $guidPart ) ];
 	}
 
 }
