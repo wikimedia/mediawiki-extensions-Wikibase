@@ -7,6 +7,9 @@ use InvalidArgumentException;
 /**
  * Immutable value object.
  *
+ * Beware that {@link TermFallback} extends this class in an unintuitive way
+ * which arguably even violates the Liskov substitution principle.
+ *
  * @since 0.7.3
  *
  * @license GPL-2.0-or-later
@@ -45,6 +48,11 @@ class Term {
 	}
 
 	/**
+	 * Language code.
+	 *
+	 * Note that in {@link TermFallback}, this is the *requested* language code,
+	 * and there is a separate {@link TermFallback::getActualLanguageCode()} method.
+	 *
 	 * @return string
 	 */
 	public function getLanguageCode() {
