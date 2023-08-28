@@ -77,11 +77,6 @@ class PatchStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 			UseCaseError::INVALID_STATEMENT_ID,
 		];
 
-		yield 'Item Not Found' => [
-			new UseCaseError( UseCaseError::ITEM_NOT_FOUND, '' ),
-			UseCaseError::STATEMENT_NOT_FOUND,
-		];
-
 		yield 'Item Redirect' => [ new ItemRedirect( 'Q123' ), UseCaseError::STATEMENT_NOT_FOUND ];
 
 		yield 'Unexpected Error' => [ new RuntimeException(), UseCaseError::UNEXPECTED_ERROR ];

@@ -2,12 +2,10 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\PatchStatement;
 
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Exception\PropertyChangedException;
-use Wikibase\DataModel\Exception\StatementGuidChangedException;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
-use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertStatementSubjectExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
@@ -15,10 +13,9 @@ use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\PatchPathException;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\PatchTestConditionFailedException;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\JsonPatcher;
 use Wikibase\Repo\RestApi\Domain\Services\StatementRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\StatementUpdater;
 
 /**
  * @license GPL-2.0-or-later
@@ -30,10 +27,9 @@ class PatchStatement {
 	private JsonPatcher $jsonPatcher;
 	private StatementSerializer $statementSerializer;
 	private StatementGuidParser $statementIdParser;
-	private AssertItemExists $assertItemExists;
+	private AssertStatementSubjectExists $assertStatementSubjectExists;
 	private StatementRetriever $statementRetriever;
-	private ItemRetriever $itemRetriever;
-	private ItemUpdater $itemUpdater;
+	private StatementUpdater $statementUpdater;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
 
 	public function __construct(
@@ -42,10 +38,9 @@ class PatchStatement {
 		JsonPatcher $jsonPatcher,
 		StatementSerializer $statementSerializer,
 		StatementGuidParser $statementIdParser,
-		AssertItemExists $assertItemExists,
+		AssertStatementSubjectExists $assertStatementSubjectExists,
 		StatementRetriever $statementRetriever,
-		ItemRetriever $itemRetriever,
-		ItemUpdater $itemUpdater,
+		StatementUpdater $statementUpdater,
 		AssertUserIsAuthorized $assertUserIsAuthorized
 	) {
 		$this->useCaseValidator = $useCaseValidator;
@@ -54,9 +49,8 @@ class PatchStatement {
 		$this->statementRetriever = $statementRetriever;
 		$this->jsonPatcher = $jsonPatcher;
 		$this->statementIdParser = $statementIdParser;
-		$this->assertItemExists = $assertItemExists;
-		$this->itemRetriever = $itemRetriever;
-		$this->itemUpdater = $itemUpdater;
+		$this->assertStatementSubjectExists = $assertStatementSubjectExists;
+		$this->statementUpdater = $statementUpdater;
 		$this->assertUserIsAuthorized = $assertUserIsAuthorized;
 	}
 
@@ -68,11 +62,8 @@ class PatchStatement {
 		$this->assertValidRequest( $request );
 
 		$statementId = $this->statementIdParser->parse( $request->getStatementId() );
-		/** @var ItemId $itemId */
-		$itemId = $statementId->getEntityId();
-		'@phan-var ItemId $itemId';
 
-		$this->assertItemExists->execute( $itemId );
+		$this->assertStatementSubjectExists->execute( $statementId );
 
 		$statementToPatch = $this->statementRetriever->getStatement( $statementId );
 
@@ -83,7 +74,7 @@ class PatchStatement {
 			);
 		}
 
-		$this->assertUserIsAuthorized->execute( $itemId, $request->getUsername() );
+		$this->assertUserIsAuthorized->execute( $statementId->getEntityId(), $request->getUsername() );
 
 		$serialization = $this->statementSerializer->serialize( $statementToPatch );
 
@@ -109,16 +100,9 @@ class PatchStatement {
 
 		$patchedStatement = $this->patchedStatementValidator->validateAndDeserializeStatement( $patchedSerialization );
 
-		$item = $this->itemRetriever->getItem( $itemId );
-
-		try {
-			$item->getStatements()->replaceStatement( $statementId, $patchedStatement );
-		} catch ( PropertyChangedException $e ) {
-			throw new UseCaseError(
-				UseCaseError::INVALID_OPERATION_CHANGED_PROPERTY,
-				'Cannot change the property of the existing statement'
-			);
-		} catch ( StatementGuidChangedException $e ) {
+		if ( $patchedStatement->getGuid() === null ) {
+			$patchedStatement->setGuid( $request->getStatementId() );
+		} elseif ( $patchedStatement->getGuid() !== $request->getStatementId() ) {
 			throw new UseCaseError(
 				UseCaseError::INVALID_OPERATION_CHANGED_STATEMENT_ID,
 				'Cannot change the ID of the existing statement'
@@ -130,15 +114,17 @@ class PatchStatement {
 			$request->isBot(),
 			StatementEditSummary::newPatchSummary( $request->getComment(), $patchedStatement )
 		);
-		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Item validated and exists
-		$newRevision = $this->itemUpdater->update( $item, $editMetadata );
 
-		return new PatchStatementResponse(
-			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Statement validated and exists
-			$newRevision->getItem()->getStatements()->getStatementById( $statementId ),
-			$newRevision->getLastModified(),
-			$newRevision->getRevisionId()
-		);
+		try {
+			$newRevision = $this->statementUpdater->update( $patchedStatement, $editMetadata );
+		} catch ( PropertyChangedException $e ) {
+			throw new UseCaseError(
+				UseCaseError::INVALID_OPERATION_CHANGED_PROPERTY,
+				'Cannot change the property of the existing statement'
+			);
+		}
+
+		return new PatchStatementResponse( $newRevision->getStatement(), $newRevision->getLastModified(), $newRevision->getRevisionId() );
 	}
 
 	public function assertValidRequest( PatchStatementRequest $request ): void {

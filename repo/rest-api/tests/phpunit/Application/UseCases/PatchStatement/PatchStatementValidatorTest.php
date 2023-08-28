@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\PatchStatement;
 use CommentStore;
 use Generator;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\ItemIdParser;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementValidator;
@@ -36,40 +36,25 @@ class PatchStatementValidatorTest extends TestCase {
 	}
 
 	/**
-	 * @dataProvider provideValidRequest
-	 *
+	 * @dataProvider provideStatementSubjectId
 	 * @doesNotPerformAssertions
 	 */
-	public function testAssertValidRequest_withValidRequest( array $requestData ): void {
-		$this->newValidator()->assertValidRequest( $this->newUseCaseRequest( $requestData ) );
+	public function testAssertValidRequest_withValidRequest( string $subjectId ): void {
+		$this->newValidator()->assertValidRequest( $this->newUseCaseRequest( [
+			'$statementId' => $subjectId . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+			'$patch' => [ 'valid' => 'patch' ],
+			'$editTags' => [],
+			'$isBot' => false,
+			'$comment' => null,
+			'$username' => null,
+		] ) );
 	}
 
-	public static function provideValidRequest(): Generator {
-		$statementId = 'Q123' . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-		yield 'Valid with item ID' => [
-			[
-				'$statementId' => $statementId,
-				'$patch' => [ 'valid' => 'patch' ],
-				'$editTags' => [],
-				'$isBot' => false,
-				'$comment' => null,
-				'$username' => null,
-			],
-		];
-		yield 'Valid without item ID' => [
-			[
-				'$statementId' => $statementId,
-				'$patch' => [ 'valid' => 'patch' ],
-				'$editTags' => [],
-				'$isBot' => false,
-				'$comment' => null,
-				'$username' => null,
-			],
-		];
-	}
-
-	public function testAssertValidRequest_withInvalidStatementId(): void {
-		$statementId = 'Q123' . StatementGuid::SEPARATOR . 'INVALID-STATEMENT-ID';
+	/**
+	 * @dataProvider provideStatementSubjectId
+	 */
+	public function testAssertValidRequest_withInvalidStatementId( string $subjectId ): void {
+		$statementId = $subjectId . StatementGuid::SEPARATOR . 'INVALID-STATEMENT-ID';
 		try {
 			$this->newValidator()->assertValidRequest(
 				$this->newUseCaseRequest( [
@@ -165,12 +150,15 @@ class PatchStatementValidatorTest extends TestCase {
 		];
 	}
 
-	public function testAssertValidRequest_withCommentTooLong(): void {
+	/**
+	 * @dataProvider provideStatementSubjectId
+	 */
+	public function testAssertValidRequest_withCommentTooLong( string $subjectId ): void {
 		$comment = str_repeat( 'x', CommentStore::COMMENT_CHARACTER_LIMIT + 1 );
 		try {
 			$this->newValidator()->assertValidRequest(
 				$this->newUseCaseRequest( [
-					'$statementId' => 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+					'$statementId' => "$subjectId\$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
 					'$patch' => [ 'valid' => 'patch' ],
 					'$editTags' => [],
 					'$isBot' => false,
@@ -188,12 +176,15 @@ class PatchStatementValidatorTest extends TestCase {
 		}
 	}
 
-	public function testAssertValidRequest_withInvalidEditTags(): void {
+	/**
+	 * @dataProvider provideStatementSubjectId
+	 */
+	public function testAssertValidRequest_withInvalidEditTags( string $subjectId ): void {
 		$invalid = 'invalid';
 		try {
 			$this->newValidator()->assertValidRequest(
 				$this->newUseCaseRequest( [
-					'$statementId' => 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+					'$statementId' => "$subjectId\$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
 					'$patch' => [ 'valid' => 'patch' ],
 					'$editTags' => [ 'some', 'tags', 'are', $invalid ],
 					'$isBot' => false,
@@ -208,9 +199,14 @@ class PatchStatementValidatorTest extends TestCase {
 		}
 	}
 
+	public function provideStatementSubjectId(): Generator {
+		yield 'item id' => [ 'Q123' ];
+		yield 'property id' => [ 'P123' ];
+	}
+
 	private function newValidator(): PatchStatementValidator {
 		return new PatchStatementValidator(
-			new StatementIdValidator( new ItemIdParser() ),
+			new StatementIdValidator( new BasicEntityIdParser() ),
 			$this->jsonPatchValidator,
 			new EditMetadataValidator( CommentStore::COMMENT_CHARACTER_LIMIT, self::ALLOWED_TAGS )
 		);
