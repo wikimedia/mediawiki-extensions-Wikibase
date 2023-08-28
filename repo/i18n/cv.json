@@ -1,11 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
+			"Astahar",
 			"Chuvash",
 			"Chuvash2014"
 		]
 	},
 	"wikibase-edit": "тӳрлет",
+	"wikibase-add": "хуш",
+	"wikibase-label-empty": "Ятне кӑтартман",
+	"wikibase-description-empty": "Ӑнлантарӑвне ҫырса тултарман",
 	"wikibase-sitelinks-special": "Урăх сайтсем",
 	"wikibase-entityselector-more": "нумайрах",
 	"wikibase-validator-no-such-entity": "$1 тупăнмарĕ",
