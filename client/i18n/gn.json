@@ -1,8 +1,19 @@
 {
 	"@metadata": {
 		"authors": [
-			"Hugo.arg"
+			"Hugo.arg",
+			"P. S. F. Freitas"
 		]
 	},
+	"wikibase-dataitem": "{{WBREPONAME}} mba'e",
+	"wikibase-editlinks": "Emoambue joajuhakuéra",
+	"wikibase-linkitem-addlinks": "Emoĩve joajuhakuéra",
+	"wikibase-linkitem-title": "Embojoaju kuatiakuéra",
+	"wikibase-linkitem-linkpage": "Embojoaju kuatiakuéra",
+	"wikibase-linkitem-selectlink": "Eiporavo peteĩ ñanduti renda ha peteĩ kuatia rembojoajuséva kóva rehe.",
+	"wikibase-linkitem-input-site": "Ñe'ẽ:",
+	"wikibase-linkitem-input-page": "Kuatiaː",
+	"wikibase-rc-hide-wikidata-hide": "Eñomi",
+	"wikibase-rc-hide-wikidata-show": "Ehecha",
 	"wikibase-rc-wikibase-edit-letter": "d"
 }

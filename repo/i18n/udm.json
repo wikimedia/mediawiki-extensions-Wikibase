@@ -20,7 +20,7 @@
 	"wikibase-history-title-with-label": "«$2» ($1) воштонъёслэн историзы",
 	"wikibase-history-title-without-label": "$1 — воштонъёслэн историзы",
 	"wikibase-mylanguagefallbackchain-babel": "<nowiki>{{$babel: }}</nowiki> {{GENDER:$1|ас}} [[Special:MyPage|пыриськись бамады]] поныса сое тупатэмды луэ.",
-	"wikibase-federated-properties-leaving-site-notice-cancel": "Берытсконо",
+	"wikibase-federated-properties-leaving-site-notice-cancel": "Берланьтон",
 	"wikibase-federated-properties-leaving-site-notice-header": "Интыысь Викибазаысь кошкиськоды",
 	"wikibase-federated-properties-leaving-site-notice-checkbox-label": "Та ивортонэз выльысь возьматоно ӧвӧл"
 }

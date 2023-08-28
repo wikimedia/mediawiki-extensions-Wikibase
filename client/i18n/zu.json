@@ -4,13 +4,19 @@
 			"Irus",
 			"Nkankane",
 			"3atbulletz",
-			"Weather Top Wizard"
+			"Weather Top Wizard",
+			"INgobemnyama"
 		]
 	},
 	"tooltip-t-wikibase": "Xhumanisa nento yenqolobane yemininingwane",
 	"wikibase-dataitem": "{{WBREPONAME}} into",
-	"wikibase-editlinks": "Hlela links",
+	"wikibase-editlinks": "Hlela izixhumanisi",
 	"wikibase-editlinkstitle": "Hlela interlanguage links",
-	"wikibase-linkitem-addlinks": "Faka ama-links",
+	"wikibase-linkitem-addlinks": "Faka izixhumanisi",
+	"wikibase-linkitem-title": "xhumanisa nelinye ikhasi",
+	"wikibase-linkitem-linkpage": "xhumanisa nelinye ikhasi",
+	"wikibase-linkitem-input-site": "uLimi:",
+	"wikibase-linkitem-input-page": "ikhasi",
+	"wikibase-rc-hide-wikidata-hide": "Fihla",
 	"wikibase-rc-hide-wikidata-show": "Khombisa"
 }

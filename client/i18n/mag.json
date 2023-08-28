@@ -48,5 +48,17 @@
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} सम्पादन",
 	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}} सम्पादन",
 	"wikibase-rcfilters-hide-wikibase-description": "{{WBREPONAME}} से आवित सम्पादन।",
-	"wikibase-otherprojects": "अन्य परियोजनामे"
+	"wikibase-otherprojects": "अन्य परियोजनामे",
+	"wikibase-sitelinks-sitename-columnheading": "भासा",
+	"wikibase-sitelinks-link-columnheading": "जुटल पन्ना",
+	"echo-category-title-wikibase-action": "{{WBREPONAME}} से {{PLURAL:$1|सम्बन्ध}}",
+	"echo-pref-tooltip-wikibase-action": "हमर बनावल पन्नाके कौनो {{WBREPONAME}} बस्तुसे जुटेपर हमरा सूचित करी।",
+	"notification-link-text-view-item": "बस्तु {{GENDER:$1|देखी}}",
+	"notification-subject-page-connection": "{{SITENAME}} पर अपनेद्वारा {{GENDER:$3|बनावल}} एगो पन्नाके {{WBREPONAME}} बस्तुसे {{GENDER:$2|जोड़ल गेल}}",
+	"unresolved-property-category": "अनसुलझल गुणधर्मवाला पन्ना",
+	"unresolved-property-category-desc": "ई श्रेणीमे ऊ पन्ना हे जेपर {{WBREPONAME}} के गुणधर्मके सन्दर्भ हे जे न त एकर गुणधर्म पहचानसे खोजल जा सकहे आउ नहिँए नामपत्रसे।",
+	"connected-redirect-category": "{{WBREPONAME}} बस्तुसे जुटल पुनर्निर्देश",
+	"connected-redirect-category-desc": "ई श्रेणीमे ऊ पुनर्निर्देशपन्ना हे जे कौनो {{WBREPONAME}} बस्तुसे जुटल हे।",
+	"wikibase-client-data-bridge-dialog-title": "$1 के सम्पादित करी",
+	"wikibase-client-data-bridge-permissions-error-info": "अधिक बिवरण"
 }
