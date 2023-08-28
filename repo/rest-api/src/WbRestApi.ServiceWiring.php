@@ -56,6 +56,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyStatement\PatchPropertyStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyStatement\PatchPropertyStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchedStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementValidator;
@@ -404,6 +406,14 @@ return [
 		return new PatchItemStatement(
 			new PatchItemStatementValidator( new ItemIdValidator() ),
 			WbRestApi::getAssertItemExists( $services ),
+			WbRestApi::getPatchStatement( $services )
+		);
+	},
+
+	'WbRestApi.PatchPropertyStatement' => function( MediaWikiServices $services ): PatchPropertyStatement {
+		return new PatchPropertyStatement(
+			new PatchPropertyStatementValidator( new PropertyIdValidator() ),
+			WbRestApi::getAssertPropertyExists( $services ),
 			WbRestApi::getPatchStatement( $services )
 		);
 	},
