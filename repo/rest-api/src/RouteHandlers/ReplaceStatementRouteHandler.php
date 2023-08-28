@@ -103,21 +103,13 @@ class ReplaceStatementRouteHandler extends SimpleHandler {
 			) );
 			return $this->newSuccessHttpResponse( $useCaseResponse );
 		} catch ( UseCaseError $e ) {
-			if ( $e->getErrorCode() === UseCaseError::STATEMENT_SUBJECT_NOT_FOUND ) {
-				return $this->respondStatementNotFound( $statementId );
-			}
-
 			return $this->responseFactory->newErrorResponseFromException( $e );
 		} catch ( ItemRedirect $e ) {
-			return $this->respondStatementNotFound( $statementId );
+			return $this->responseFactory->newErrorResponse(
+				UseCaseError::STATEMENT_NOT_FOUND,
+				"Could not find a statement with the ID: $statementId"
+			);
 		}
-	}
-
-	private function respondStatementNotFound( string $statementId ): Response {
-		return $this->responseFactory->newErrorResponse(
-			UseCaseError::STATEMENT_NOT_FOUND,
-			"Could not find a statement with the ID: $statementId"
-		);
 	}
 
 	public function getParamSettings(): array {
