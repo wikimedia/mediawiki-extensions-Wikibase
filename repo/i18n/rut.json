@@ -6,5 +6,7 @@
 	},
 	"wikibase-edit": "дегиш",
 	"wikibase-add": "уу-лихъихьин",
+	"wikibase-label-empty": "Лышан (дур) адишь",
+	"wikibase-description-empty": "Хасиет кихьед дишь",
 	"wikibase-sitelinks-special": "Мадды сайтбыр"
 }

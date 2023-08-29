@@ -193,7 +193,7 @@
 	"wikibase-validator-illegal-entity-schema-title": "值必須以<code>E</code>作為開頭，剩餘部份則為數字。",
 	"wikibase-validator-no-such-media": "文件\"$1\"在[https://commons.wikimedia.org/ Wikimedia Commons]中不存在",
 	"wikibase-validator-no-such-sitelink": "當嘗試編輯徽章時無法找尋至 \"$1\" 的網站連結。",
-	"wikibase-validator-page-not-exists": "頁面 \"$1\" 不存在。",
+	"wikibase-validator-page-not-exists": "頁面「$1」不存在。",
 	"wikibase-validator-not-a-language": "\"$1\" 不是已知的語言代碼。",
 	"wikibase-itemlink": "$1$2",
 	"wikibase-itemlink-id-wrapper": "（$1）",
