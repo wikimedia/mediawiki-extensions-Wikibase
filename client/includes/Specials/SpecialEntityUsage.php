@@ -132,31 +132,26 @@ class SpecialEntityUsage extends QueryPage {
 	 * @return array[]
 	 */
 	public function getQueryInfo() {
-		$joinConds = [ 'wbc_entity_usage' => [ 'JOIN', [ 'page_id = eu_page_id' ] ] ];
+		$dbr = $this->db->connections()->getReadConnection();
 		$conds = [ 'eu_entity_id' => $this->entityId->getSerialization() ];
-		$groupConcat = $this->db->connections()->getReadConnection()->buildGroupConcatField(
-			'|',
-			'wbc_entity_usage',
-			'eu_aspect',
-			[ 'eu_page_id = page_id' ] + $conds
-		);
-
-		return [
-			'tables' => [
-				'page',
-				'wbc_entity_usage',
-			],
-			'fields' => [
+		return $dbr->newSelectQueryBuilder()
+			->select( [
 				'value' => 'page_id',
 				'namespace' => 'page_namespace',
 				'title' => 'page_title',
-				'aspects' => $groupConcat,
+				'aspects' => $dbr->buildGroupConcatField(
+					'|',
+					'wbc_entity_usage',
+					'eu_aspect',
+					[ 'eu_page_id = page_id' ] + $conds
+				),
 				'eu_page_id',
-			],
-			'conds' => $conds,
-			'options' => [ 'GROUP BY' => 'eu_page_id' ],
-			'join_conds' => $joinConds,
-		];
+			] )
+			->from( 'page' )
+			->join( 'wbc_entity_usage', null, [ 'page_id = eu_page_id' ] )
+			->where( $conds )
+			->groupBy( 'eu_page_id' )
+			->getQueryInfo();
 	}
 
 	/**

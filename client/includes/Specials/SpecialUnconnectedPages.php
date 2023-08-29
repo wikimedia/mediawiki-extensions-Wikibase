@@ -100,26 +100,20 @@ class SpecialUnconnectedPages extends QueryPage {
 	 * @return array[]
 	 */
 	public function getQueryInfo() {
-		return [
-			'tables' => [
-				'page',
-				'page_props',
-			],
-			'fields' => [
+		return $this->db->connections()->getReadConnection()->newSelectQueryBuilder()
+			->select( [
 				'value' => 'page_id',
 				'namespace' => 'page_namespace',
 				'title' => 'page_title',
-			],
-			'conds' => $this->buildNamespaceConditionals(),
-			// Sorting is determined getOrderFields()
-			'options' => [],
-			'join_conds' => [
-				'page_props' => [
-					'INNER JOIN',
-					[ 'page_id = pp_page', 'pp_propname' => 'unexpectedUnconnectedPage' ],
-				],
-			],
-		];
+			] )
+			->from( 'page' )
+			->join( 'page_props', null, [
+				'page_id = pp_page',
+				'pp_propname' => 'unexpectedUnconnectedPage',
+			] )
+			->where( $this->buildNamespaceConditionals() )
+			// sorting is determined by getOrderFields()
+			->getQueryInfo();
 	}
 
 	/**

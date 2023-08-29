@@ -175,24 +175,19 @@ class SpecialPagesWithBadges extends QueryPage {
 	 * @return array[]
 	 */
 	public function getQueryInfo() {
-		return [
-			'tables' => [
-				'page',
-				'page_props',
-			],
-			'fields' => [
+		return $this->getDatabaseProvider()->getReplicaDatabase()->newSelectQueryBuilder()
+			->select( [
 				'value' => 'page_id',
 				'namespace' => 'page_namespace',
 				'title' => 'page_title',
-			],
-			'conds' => [
+			] )
+			->from( 'page' )
+			->join( 'page_props', null, [ 'page_id = pp_page' ] )
+			->where( [
 				'pp_propname' => 'wikibase-badge-' . $this->badgeId->getSerialization(),
-			],
-			'options' => [], // sorting is determined getOrderFields(), which returns [ 'value' ] per default.
-			'join_conds' => [
-				'page_props' => [ 'JOIN', [ 'page_id = pp_page' ] ],
-			],
-		];
+			] )
+			// sorting is determined by getOrderFields(), which returns [ 'value' ] per default.
+			->getQueryInfo();
 	}
 
 	/**
