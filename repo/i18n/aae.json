@@ -6,6 +6,7 @@
 	},
 	"wikibase-edit": "ndroje",
 	"wikibase-add": "jungir",
+	"wikibase-label-empty": "Mosgnë etiket difinirtur",
 	"wikibase-description-empty": "Mosgnë diskrizion",
 	"wikibase-sitelinks-special": "Tjerë siti"
 }
