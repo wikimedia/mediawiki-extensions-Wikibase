@@ -145,6 +145,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 			} );
 
 		$titleLookup = $this->getEntityTitleLookup();
+		$editFilterHookRunner = $this->getMockEditFilterHookRunner();
 		$specialPage = new SpecialMergeItems(
 			WikibaseRepo::getEntityIdParser(),
 			$titleLookup,
@@ -160,12 +161,13 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 						$this->mockRepository,
 						$this->getPermissionCheckers(),
 						$summaryFormatter,
-						$this->getMockEditFilterHookRunner(),
+						$editFilterHookRunner,
 						$this->mockRepository,
 						$this->getMockEntityTitleLookup()
 				),
 				$titleLookup,
-				MediaWikiServices::getInstance()->getPermissionManager()
+				MediaWikiServices::getInstance()->getPermissionManager(),
+				$editFilterHookRunner
 			),
 			false,
 			WikibaseRepo::getTokenCheckInteractor()
