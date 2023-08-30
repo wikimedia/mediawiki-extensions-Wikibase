@@ -53,14 +53,21 @@ describe( 'Auth', () => {
 		user = await action.mindy();
 	} );
 
-	const useRequestInputs = ( requestInputs ) => ( newReqBuilder ) => () => newReqBuilder( requestInputs );
+	const useRequestInputs = ( requestInputs ) => ( newReqBuilder ) => ( {
+		newRequestBuilder: () => newReqBuilder( requestInputs ),
+		requestInputs
+	} );
+
+	const editRequestsWithInputs = [
+		...editRequestsOnItem.map( useRequestInputs( itemRequestInputs ) ),
+		...editRequestsOnProperty.map( useRequestInputs( propertyRequestInputs ) )
+	];
 
 	[
-		...editRequestsOnItem.map( useRequestInputs( itemRequestInputs ) ),
-		...editRequestsOnProperty.map( useRequestInputs( propertyRequestInputs ) ),
+		...editRequestsWithInputs,
 		...getRequestsOnItem.map( useRequestInputs( itemRequestInputs ) ),
 		...getRequestsOnProperty.map( useRequestInputs( propertyRequestInputs ) )
-	].forEach( ( newRequestBuilder ) => {
+	].forEach( ( { newRequestBuilder } ) => {
 		describe( `Authentication - ${newRequestBuilder().getRouteDescription()}`, () => {
 
 			afterEach( async () => {
@@ -102,17 +109,7 @@ describe( 'Auth', () => {
 			assert.strictEqual( response.body.error, 'rest-write-denied' );
 		}
 
-		[
-			...editRequestsOnItem.map( ( newRequestBuilder ) => ( {
-				newRequestBuilder,
-				requestInputs: itemRequestInputs
-			} ) ),
-			...editRequestsOnProperty.map( ( newRequestBuilder ) => ( {
-				newRequestBuilder,
-				requestInputs: propertyRequestInputs
-			} ) )
-		].forEach( ( { newRequestBuilder, requestInputs } ) => {
-			newRequestBuilder = useRequestInputs( requestInputs )( newRequestBuilder );
+		editRequestsWithInputs.forEach( ( { newRequestBuilder, requestInputs } ) => {
 			describe( 'Protected entity page', () => {
 				before( async () => {
 					await changeEntityProtectionStatus( requestInputs.mainTestSubject, 'sysop' ); // protect
