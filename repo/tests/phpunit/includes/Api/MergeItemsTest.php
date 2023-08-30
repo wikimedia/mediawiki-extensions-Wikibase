@@ -198,7 +198,8 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 				WikibaseRepo::getSummaryFormatter(),
 				$this->getMockRedirectCreationInteractor( $expectedRedirect ),
 				$this->getEntityTitleStoreLookup(),
-				MediaWikiServices::getInstance()->getPermissionManager()
+				MediaWikiServices::getInstance()->getPermissionManager(),
+				WikibaseRepo::getEditFilterHookRunner()
 			),
 			$errorReporter,
 			function ( $module ) use ( $apiResultBuilder ) {

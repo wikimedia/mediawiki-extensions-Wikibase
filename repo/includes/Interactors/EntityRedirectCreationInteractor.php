@@ -108,6 +108,7 @@ abstract class EntityRedirectCreationInteractor {
 	): EntityRedirect {
 		$this->checkCompatible( $fromId, $toId );
 		$this->checkPermissions( $fromId, $context );
+		$this->checkRateLimits( $context );
 
 		$this->checkExistsNoRedirect( $toId );
 		$this->checkCanCreateRedirect( $fromId );
@@ -140,6 +141,14 @@ abstract class EntityRedirectCreationInteractor {
 			// XXX: This is silly, we really want to pass the Status object to the API error handler.
 			// Perhaps we should get rid of RedirectCreationException and use Status throughout.
 			throw new RedirectCreationException( $status->getWikiText(), 'permissiondenied' );
+		}
+	}
+
+	private function checkRateLimits( IContextSource $context ): void {
+		if ( $context->getUser()->pingLimiter( 'edit' ) ) {
+			// use generic 'failed-save' because RedirectCreationException prepends 'wikibase-redirect-' for the message key,
+			// so we can’t easily use the correct actionthrottledtext message (using Status would solve this)
+			throw new RedirectCreationException( 'rate limit hit', 'permissiondenied' );
 		}
 	}
 
