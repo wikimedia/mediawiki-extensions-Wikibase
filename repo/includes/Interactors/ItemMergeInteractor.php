@@ -20,6 +20,7 @@ use Wikibase\Lib\Summary;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\ChangeOpsMerge;
 use Wikibase\Repo\Content\EntityContent;
+use Wikibase\Repo\EditEntity\EditFilterHookRunner;
 use Wikibase\Repo\Merge\MergeFactory;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
@@ -73,6 +74,8 @@ class ItemMergeInteractor {
 	 */
 	private $permissionManager;
 
+	private EditFilterHookRunner $editFilterHookRunner;
+
 	public function __construct(
 		MergeFactory $mergeFactory,
 		EntityRevisionLookup $entityRevisionLookup,
@@ -81,7 +84,8 @@ class ItemMergeInteractor {
 		SummaryFormatter $summaryFormatter,
 		ItemRedirectCreationInteractor $interactorRedirect,
 		EntityTitleStoreLookup $entityTitleLookup,
-		PermissionManager $permissionManager
+		PermissionManager $permissionManager,
+		EditFilterHookRunner $editFilterHookRunner
 	) {
 		$this->mergeFactory = $mergeFactory;
 		$this->entityRevisionLookup = $entityRevisionLookup;
@@ -91,6 +95,7 @@ class ItemMergeInteractor {
 		$this->interactorRedirect = $interactorRedirect;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->permissionManager = $permissionManager;
+		$this->editFilterHookRunner = $editFilterHookRunner;
 	}
 
 	/**
@@ -111,6 +116,14 @@ class ItemMergeInteractor {
 			// XXX: This is silly, we really want to pass the Status object to the API error handler.
 			// Perhaps we should get rid of ItemMergeException and use Status throughout.
 			throw new ItemMergeException( $status->getWikiText(), 'permissiondenied' );
+		}
+	}
+
+	private function checkRateLimits( User $user ): void {
+		if ( $user->pingLimiter( 'edit', 2 ) ) { // attemptSaveMerge() makes two edits
+			// use generic 'failed-save' because ItemMergeException prepends 'wikibase-itemmerge-' for the message key,
+			// so we can’t easily use the correct actionthrottledtext message (using Status would solve this)
+			throw new ItemMergeException( 'rate limit hit', 'failed-save' );
 		}
 	}
 
@@ -149,6 +162,7 @@ class ItemMergeInteractor {
 		$user = $context->getUser();
 		$this->checkPermissions( $fromId, $user );
 		$this->checkPermissions( $toId, $user );
+		$this->checkRateLimits( $user );
 
 		/**
 		 * @var Item $fromItem
@@ -174,7 +188,7 @@ class ItemMergeInteractor {
 			throw new ItemMergeException( $e->getMessage(), 'failed-modify', $e );
 		}
 
-		$result = $this->attemptSaveMerge( $fromItem, $toItem, $summary, $user, $bot, $tags );
+		$result = $this->attemptSaveMerge( $fromItem, $toItem, $summary, $context, $bot, $tags );
 		$this->updateWatchlistEntries( $fromId, $toId );
 
 		$redirected = false;
@@ -261,23 +275,26 @@ class ItemMergeInteractor {
 	 * @param Item $fromItem
 	 * @param Item $toItem
 	 * @param string|null $summary
+	 * @param IContextSource $context
 	 * @param bool $bot
 	 * @param string[] $tags
 	 *
 	 * @return array A list of exactly two EntityRevision objects. The first one represents the
 	 *  modified source item, the second one represents the modified target item.
 	 */
-	private function attemptSaveMerge( Item $fromItem, Item $toItem, ?string $summary, User $user, bool $bot, array $tags ) {
+	private function attemptSaveMerge( Item $fromItem, Item $toItem, ?string $summary, IContextSource $context, bool $bot, array $tags ) {
 		$toSummary = $this->getSummary( 'to', $toItem->getId(), $summary );
-		$fromRev = $this->saveItem( $fromItem, $toSummary, $user, $bot, $tags );
+		$fromRev = $this->saveItem( $fromItem, $toSummary, $context, $bot, $tags );
 
 		$fromSummary = $this->getSummary( 'from', $fromItem->getId(), $summary );
-		$toRev = $this->saveItem( $toItem, $fromSummary, $user, $bot, $tags );
+		$toRev = $this->saveItem( $toItem, $fromSummary, $context, $bot, $tags );
 
 		return [ $fromRev, $toRev ];
 	}
 
-	private function saveItem( Item $item, FormatableSummary $summary, User $user, bool $bot, array $tags ) {
+	private function saveItem( Item $item, FormatableSummary $summary, IContextSource $context, bool $bot, array $tags ) {
+		$user = $context->getUser();
+
 		// Given we already check all constraints in ChangeOpsMerge, it's
 		// fine to ignore them here. This is also needed to not run into
 		// the constraints we're supposed to ignore (see ChangeOpsMerge::removeConflictsWithEntity
@@ -287,10 +304,18 @@ class ItemMergeInteractor {
 			$flags |= EDIT_FORCE_BOT;
 		}
 
+		$formattedSummary = $this->summaryFormatter->formatSummary( $summary );
+
+		$status = $this->editFilterHookRunner->run( $item, $context, $formattedSummary );
+		if ( !$status->isOK() ) {
+			// as in checkPermissions() above, it would be better to just pass the Status to the API
+			throw new ItemMergeException( $status->getWikiText(), 'failed-save' );
+		}
+
 		try {
 			return $this->entityStore->saveEntity(
 				$item,
-				$this->summaryFormatter->formatSummary( $summary ),
+				$formattedSummary,
 				$user,
 				$flags,
 				false,

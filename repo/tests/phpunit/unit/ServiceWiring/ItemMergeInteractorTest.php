@@ -6,6 +6,7 @@ namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
+use Wikibase\Repo\EditEntity\EditFilterHookRunner;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\Merge\MergeFactory;
@@ -40,6 +41,8 @@ class ItemMergeInteractorTest extends ServiceWiringTestCase {
 				=> $this->createMock( ItemRedirectCreationInteractor::class ),
 			'WikibaseRepo.EntityTitleStoreLookup'
 				=> $this->createMock( EntityTitleStoreLookup::class ),
+			'WikibaseRepo.EditFilterHookRunner'
+				=> $this->createMock( EditFilterHookRunner::class ),
 		] );
 
 		$this->serviceContainer
