@@ -259,7 +259,7 @@ class DescriptionLookupTest extends TestCase {
 		$termBuffer->method( 'getPrefetchedTerm' )
 			->willReturnCallback(
 				function ( $entityId, $termType, $langCode ) use ( $centralDescriptions ) {
-					$pageId = (int)substr( $entityId->getLocalPart(), 1 );
+					$pageId = (int)substr( $entityId->getSerialization(), 1 );
 					$description = $centralDescriptions[$pageId];
 					if ( is_array( $description ) ) {
 						$description = $description[$langCode] ?? false;
