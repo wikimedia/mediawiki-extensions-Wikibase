@@ -152,28 +152,16 @@ class EntityIdTest extends \PHPUnit\Framework\TestCase {
 		];
 	}
 
-	public function testGivenNotNormalizedSerialization_splitSerializationReturnsNormalizedParts() {
-		$this->assertSame( [ '', '', 'Q42' ], SerializableEntityId::splitSerialization( ':Q42' ) );
-	}
-
-	public static function localPartDataProvider() {
-		return [
-			[ 'Q42', 'Q42' ],
-			[ ':Q42', 'Q42' ],
-		];
-	}
-
-	/**
-	 * @dataProvider localPartDataProvider
-	 */
-	public function testGetLocalPart( $serialization, $localPart ) {
-		$id = new ItemId( $serialization );
-		$this->assertSame( $localPart, $id->getLocalPart() );
+	public function testGetLocalPart() {
+		$id = new ItemId( 'Q42' );
+		$this->assertSame( 'Q42', $id->getLocalPart() );
 	}
 
 	public static function invalidSerializationProvider() {
 		return [
+			[ 'foo:Q42' ],
 			[ 's p a c e s:Q42' ],
+			[ ':Q42' ],
 			[ '::Q42' ],
 			[ '' ],
 			[ ':' ],

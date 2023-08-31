@@ -22,7 +22,7 @@ abstract class SerializableEntityId implements EntityId {
 	 */
 	protected $localPart;
 
-	public const PATTERN = '/^:?(\w+:)*[^:]+\z/';
+	public const PATTERN = '/^[^:]+\z/';
 
 	/**
 	 * @param string $serialization

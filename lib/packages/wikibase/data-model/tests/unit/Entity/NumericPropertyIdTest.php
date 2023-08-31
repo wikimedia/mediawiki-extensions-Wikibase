@@ -35,7 +35,6 @@ class NumericPropertyIdTest extends \PHPUnit\Framework\TestCase {
 			[ 'p31337', 'P31337' ],
 			[ 'P31337', 'P31337' ],
 			[ 'P42', 'P42' ],
-			[ ':P42', 'P42' ],
 			[ 'P2147483647', 'P2147483647' ],
 		];
 	}
@@ -70,6 +69,7 @@ class NumericPropertyIdTest extends \PHPUnit\Framework\TestCase {
 			// no longer supported (T291823, T338223)
 			[ 'foo:P42', 'foo:P42' ],
 			[ 'foo:bar:p42', 'foo:bar:P42' ],
+			[ ':P42', 'P42' ],
 		];
 	}
 

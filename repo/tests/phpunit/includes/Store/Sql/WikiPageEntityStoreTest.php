@@ -916,13 +916,6 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( $expected, $store->canCreateWithCustomId( $id ), $id->getSerialization() );
 	}
 
-	public function testGivenForeignId_canCreateWithCustomIdReturnsFalse() {
-		/** @var WikiPageEntityStore $store */
-		list( $store, ) = $this->createStoreAndLookup();
-
-		$this->assertFalse( $store->canCreateWithCustomId( $this->newCustomEntityId( 'foo:F7' ) ) );
-	}
-
 	public function testGivenIdOfTypeNotFromTheSource_canCreateWithCustomIdReturnsFalse() {
 		$store = $this->createStoreForItemsOnly();
 

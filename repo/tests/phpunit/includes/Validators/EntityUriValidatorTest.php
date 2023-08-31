@@ -85,23 +85,17 @@ class EntityUriValidatorTest extends MediaWikiIntegrationTestCase {
 		$this->assertError( $result );
 	}
 
-	/** @dataProvider provideUnnormalizedItemIdStrings */
-	public function testUnnormalizedEntityId( string $itemIdString ): void {
+	public function testUnnormalizedEntityId(): void {
 		$entityIdParser = $this->createConfiguredMock( EntityIdParser::class, [
-			'parse' => new ItemId( $itemIdString ) ] );
+			'parse' => new ItemId( 'q1' ) ] );
 		$validator = new EntityUriValidator(
 			$entityIdParser,
 			'http://www.wikidata.org/entity/'
 		);
 
-		$result = $validator->validate( "http://www.wikidata.org/entity/$itemIdString" );
+		$result = $validator->validate( "http://www.wikidata.org/entity/q1" );
 
 		$this->assertError( $result );
-	}
-
-	public static function provideUnnormalizedItemIdStrings(): iterable {
-		yield 'lowercase' => [ 'q1' ];
-		yield 'empty repository name' => [ ':Q1' ];
 	}
 
 	public function testBadEntityType(): void {
