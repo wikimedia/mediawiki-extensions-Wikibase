@@ -13,6 +13,7 @@ use MediaWiki\Title\Title;
  * @group WikibaseIntegration
  * @group WikibaseClient
  * @group Wikibase
+ * @group Database
  *
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
