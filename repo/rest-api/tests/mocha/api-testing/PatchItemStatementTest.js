@@ -515,10 +515,10 @@ describe( 'PATCH statement tests', () => {
 	} );
 
 	describe( 'short route specific errors', () => {
-		it( 'responds 400 invalid-statement-id if statement is not on an item', async () => {
-			const statementId = testStatementId.replace( 'Q', 'P' );
+		it( 'responds 400 invalid-statement-id if statement is on an unsupported entity', async () => {
+			const statementId = testStatementId.replace( 'Q', 'L' );
 			const response = await newPatchStatementRequestBuilder( statementId, [] )
-				.assertValidRequest().makeRequest();
+				.assertInvalidRequest().makeRequest();
 
 			assertValid400Response( response, 'invalid-statement-id' );
 			assert.include( response.body.message, statementId );

@@ -411,18 +411,17 @@ return [
 	'WbRestApi.PatchStatement' => function( MediaWikiServices $services ): PatchStatement {
 		return new PatchStatement(
 			new PatchStatementValidator(
-				new StatementIdValidator( new ItemIdParser() ),
+				new StatementIdValidator( new BasicEntityIdParser() ),
 				new JsonDiffJsonPatchValidator(),
 				WbRestApi::getEditMetadataValidator( $services )
 			),
 			new PatchedStatementValidator( new StatementValidator( WbRestApi::getStatementDeserializer( $services ) ) ),
 			new JsonDiffJsonPatcher(),
 			WbRestApi::getSerializerFactory( $services )->newStatementSerializer(),
-			new StatementGuidParser( new ItemIdParser() ),
-			WbRestApi::getAssertItemExists( $services ),
+			new StatementGuidParser( new BasicEntityIdParser() ),
+			WbRestApi::getAssertStatementSubjectExists( $services ),
 			WbRestApi::getStatementRetriever( $services ),
-			WbRestApi::getItemDataRetriever( $services ),
-			WbRestApi::getItemUpdater( $services ),
+			WbRestApi::getStatementUpdater( $services ),
 			WbRestApi::getAssertUserIsAuthorized( $services )
 		);
 	},
