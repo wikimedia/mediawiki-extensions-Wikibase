@@ -3,30 +3,30 @@
 const { expect } = require( '../helpers/chaiHelper' );
 const {
 	createUniqueStringProperty,
-	createItemWithStatements,
+	createPropertyWithStatements,
 	newLegacyStatementWithRandomStringValue
 } = require( '../helpers/entityHelper' );
 const {
-	newPatchItemStatementRequestBuilder,
+	newPatchPropertyStatementRequestBuilder,
 	newPatchStatementRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
 
-describe( 'validate PATCH endpoints for item statements against OpenAPI definition', () => {
-	let testItemId;
+describe( 'validate PATCH endpoints for property statements against OpenAPI definition', () => {
+	let testPropertyId;
 	let testStatementId;
 	let statementPropertyId;
 
 	before( async function () {
 		statementPropertyId = ( await createUniqueStringProperty() ).entity.id;
-		const createEntityResponse = await createItemWithStatements( [
+		const createEntityResponse = await createPropertyWithStatements( [
 			newLegacyStatementWithRandomStringValue( statementPropertyId )
 		] );
-		testItemId = createEntityResponse.entity.id;
+		testPropertyId = createEntityResponse.entity.id;
 		testStatementId = createEntityResponse.entity.claims[ statementPropertyId ][ 0 ].id;
 	} );
 
 	[
-		( statementId, patch ) => newPatchItemStatementRequestBuilder( testItemId, statementId, patch ),
+		( statementId, patch ) => newPatchPropertyStatementRequestBuilder( testPropertyId, statementId, patch ),
 		newPatchStatementRequestBuilder
 	].forEach( ( newPatchRequestBuilder ) => {
 		describe( newPatchRequestBuilder().getRouteDescription(), () => {
@@ -55,7 +55,7 @@ describe( 'validate PATCH endpoints for item statements against OpenAPI definiti
 
 			it( '404 - statement does not exist', async () => {
 				const response = await newPatchRequestBuilder(
-					`${testItemId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`,
+					`${testPropertyId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`,
 					[
 						{ op: 'replace', path: '/value/content', value: 'no patchy :(' }
 					]
