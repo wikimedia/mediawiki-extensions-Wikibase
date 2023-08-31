@@ -40,6 +40,15 @@ module.exports.editRequestsOnProperty = [
 	( { statementId, statementPropertyId } ) => rbf.newReplaceStatementRequestBuilder(
 		statementId,
 		newStatementWithRandomStringValue( statementPropertyId )
+	),
+	( { propertyId, statementId } ) => rbf.newPatchPropertyStatementRequestBuilder(
+		propertyId,
+		statementId,
+		[ {
+			op: 'replace',
+			path: '/value/content',
+			value: 'random-string-value-' + utils.uniq()
+		} ]
 	)
 ];
 
