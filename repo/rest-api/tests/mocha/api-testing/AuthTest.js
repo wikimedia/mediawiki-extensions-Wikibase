@@ -109,6 +109,16 @@ describe( 'Auth', () => {
 			assert.strictEqual( response.body.error, 'rest-write-denied' );
 		}
 
+		editRequestsWithInputs.forEach( ( { newRequestBuilder } ) => {
+			it( `Unauthorized bot edit - ${newRequestBuilder().getRouteDescription()}`, async () => {
+				assertPermissionDenied(
+					await newRequestBuilder()
+						.withJsonBodyParam( 'bot', true )
+						.makeRequest()
+				);
+			} );
+		} );
+
 		editRequestsWithInputs.forEach( ( { newRequestBuilder, requestInputs } ) => {
 			describe( 'Protected entity page', () => {
 				before( async () => {
@@ -140,18 +150,10 @@ describe( 'Auth', () => {
 					}, 'POST' );
 				} );
 
-				it( 'can not edit if blocked', async () => {
+				it( 'cannot edit if blocked', async () => {
 					const response = await newRequestBuilder().withUser( user ).makeRequest();
 					expect( response ).to.have.status( 403 );
 				} );
-			} );
-
-			it( `Unauthorized bot edit - ${newRequestBuilder().getRouteDescription()}`, async () => {
-				assertPermissionDenied(
-					await newRequestBuilder()
-						.withJsonBodyParam( 'bot', true )
-						.makeRequest()
-				);
 			} );
 		} );
 	} );
