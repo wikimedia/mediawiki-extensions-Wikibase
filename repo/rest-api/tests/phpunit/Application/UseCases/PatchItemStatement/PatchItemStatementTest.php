@@ -111,6 +111,20 @@ class PatchItemStatementTest extends TestCase {
 		}
 	}
 
+	public function testGivenInvalidPatchStatementRequest_throws(): void {
+		$usecaseRequest = $this->createStub( PatchItemStatementRequest::class );
+		$expectedUseCaseError = $this->createStub( UseCaseError::class );
+		$this->patchStatement  = $this->createStub( PatchStatement::class );
+		$this->patchStatement->method( 'assertValidRequest' )->willThrowException( $expectedUseCaseError );
+
+		try {
+			$this->newUseCase()->execute( $usecaseRequest );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedUseCaseError, $e );
+		}
+	}
+
 	public function testGivenItemNotFoundOrRedirect_throwsUseCaseError(): void {
 		$itemId = new ItemId( 'Q123' );
 		$statementId = new StatementGuid( $itemId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
@@ -140,6 +154,21 @@ class PatchItemStatementTest extends TestCase {
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
 			$this->assertSame( $expectedException, $e );
+		}
+	}
+
+	public function testGivenStatementIdDoesNotMatchItemId_throws(): void {
+		$statementId = 'Q456$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+		$request = $this->createStub( PatchItemStatementRequest::class );
+		$request->method( 'getItemId' )->willReturn( 'Q123' );
+		$request->method( 'getStatementId' )->willReturn( $statementId );
+
+		try {
+			$this->newUseCase()->execute( $request );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::STATEMENT_NOT_FOUND, $e->getErrorCode() );
+			$this->assertStringContainsString( $statementId, $e->getErrorMessage() );
 		}
 	}
 

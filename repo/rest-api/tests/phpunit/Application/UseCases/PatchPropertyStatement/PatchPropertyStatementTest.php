@@ -110,7 +110,21 @@ class PatchPropertyStatementTest extends TestCase {
 		}
 	}
 
-	public function testGivenPropertyNotFoundOrRedirect_throwsUseCaseError(): void {
+	public function testGivenInvalidPatchStatementRequest_throws(): void {
+		$usecaseRequest = $this->createStub( PatchPropertyStatementRequest::class );
+		$expectedUseCaseError = $this->createStub( UseCaseError::class );
+		$this->patchStatement  = $this->createStub( PatchStatement::class );
+		$this->patchStatement->method( 'assertValidRequest' )->willThrowException( $expectedUseCaseError );
+
+		try {
+			$this->newUseCase()->execute( $usecaseRequest );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedUseCaseError, $e );
+		}
+	}
+
+	public function testGivenPropertyNotFound_throwsUseCaseError(): void {
 		$propertyId = new NumericPropertyId( 'P123' );
 		$statementId = new StatementGuid( $propertyId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 		$patch = $this->getValidValueReplacingPatch( 'new statement value' );
@@ -139,6 +153,21 @@ class PatchPropertyStatementTest extends TestCase {
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
 			$this->assertSame( $expectedException, $e );
+		}
+	}
+
+	public function testGivenStatementIdDoesNotMatchPropertyId_throws(): void {
+		$statementId = 'P1$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+		$request = $this->createStub( PatchPropertyStatementRequest::class );
+		$request->method( 'getPropertyId' )->willReturn( 'P2' );
+		$request->method( 'getStatementId' )->willReturn( $statementId );
+
+		try {
+			$this->newUseCase()->execute( $request );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::STATEMENT_NOT_FOUND, $e->getErrorCode() );
+			$this->assertStringContainsString( $statementId, $e->getErrorMessage() );
 		}
 	}
 
