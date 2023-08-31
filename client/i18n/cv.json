@@ -3,17 +3,25 @@
 		"authors": [
 			"Chavash",
 			"Chuvash",
-			"Chuvash2014"
+			"Chuvash2014",
+			"Astahar"
 		]
 	},
 	"wikibase-comment-update": "{{WBREPONAME}} япалана улӑштарнӑ",
 	"wikibase-dataitem": "{{WBREPONAME}}",
 	"wikibase-editlinks": "Каҫӑсене тӳрлет",
 	"wikibase-editlinkstitle": "Чӗлхесем хушшинчи каҫӑсем",
+	"wikibase-linkitem-addlinks": "Каҫӑсем хуш",
+	"wikibase-linkitem-title": "Страницӑпа ҫыхӑнтарасси",
+	"wikibase-linkitem-linkpage": "Страницӑпа ҫыхӑнтарасси",
+	"wikibase-linkitem-selectlink": "Тархасшӑн, ҫыхӑнтарас текен сайта е страницӑна суйлӑр.",
+	"wikibase-linkitem-input-site": "Чӗлхе:",
+	"wikibase-linkitem-input-page": "Страница:",
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
 	"wikibase-rc-hide-wikidata-hide": "кăтартмалла мар",
 	"wikibase-rc-hide-wikidata-show": "кăтартмалла",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} тӳрлетни",
-	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}} тӳрлетнисем"
+	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}} тӳрлетнисем",
+	"wikibase-otherprojects": "Ытти проектсенче"
 }

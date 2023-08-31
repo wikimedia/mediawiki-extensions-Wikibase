@@ -3,15 +3,17 @@
 		"authors": [
 			"Lizalizaufa",
 			"Ләйсән",
-			"Рустам Нурыев"
+			"Рустам Нурыев",
+			"Айсар",
+			"З. ӘЙЛЕ"
 		]
 	},
 	"wikibase-sitelinks-wikipedia": "Википедия",
-	"datatypes-type-quantity": "Миҡдары",
+	"datatypes-type-quantity": "Күләме",
 	"datatypes-type-monolingualtext": "Бер телле текст",
 	"datatypes-type-multilingualtext": "Күп телле текст",
-	"datatypes-type-mediawiki-title": "MediaWiki исеме",
+	"datatypes-type-mediawiki-title": "MediaWiki атамаһы",
 	"datatypes-type-unknown": "Аныҡланмаған",
-	"datatypes-type-globe-coordinate": "Географик координаталар",
+	"datatypes-type-globe-coordinate": "Географик координаттар",
 	"datatypes-type-time": "Ваҡыт мәле"
 }

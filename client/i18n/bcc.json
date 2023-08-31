@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Moshtank"
+		]
+	},
+	"wikibase-dataitem": "{{WBREPONAME}}ءِ آیٹم",
+	"wikibase-editlinks": "لینکانءِ ٹگلݔنگ",
+	"wikibase-linkitem-addlinks": "لینکانءِ ھۏر کنگ",
+	"wikibase-linkitem-title": "لینک کنگ گۏن تاک",
+	"wikibase-linkitem-linkpage": "گۏن تاکئی لینک کن",
+	"wikibase-linkitem-selectlink": "یک سایت یا اینترنتی آدرسے کہ لۏٹ اِت گۏن اۏدا لینک بہ بیت ادئی ھۏر کن اِت",
+	"wikibase-linkitem-input-site": "زبان:",
+	"wikibase-linkitem-input-page": "تاک:",
+	"wikibase-rc-hide-wikidata-hide": "اندݔم",
+	"wikibase-rc-hide-wikidata-show": "سۏج",
+	"wikibase-otherprojects": "مہ اݔدگہ پروجکتان"
+}

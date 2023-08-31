@@ -63,7 +63,7 @@
 	"wikibase-watchlist-show-changes-pref": "{{WBREPONAME}}-változások mutatása a figyelőlistádon",
 	"wikibase-error-deserialize-error": "Az adatok deszerializációja sikertelen.",
 	"wikibase-error-serialize-error": "Az adatok szerializációja sikertelen",
-	"wikibase-error-invalid-entity-id": "A(z) „$2” azonosító ismeretlen a rendszeren. Használjon érvényes entitásazonosítót.",
+	"wikibase-error-invalid-entity-id": "A(z) „$2” azonosító ismeretlen a rendszeren. Használj érvényes entitásazonosítót.",
 	"wikibase-error-exceeded-referenced-entity-id-limit": "Túl sok „mw.wikibase.getReferencedEntityId” hívás, legfeljebb $2 engedélyezett.",
 	"unconnectedpages": "{{WBREPONAME}}-hivatkozás nélküli lapok",
 	"unconnectedpages-summary": "Ez a lap listázza azokat a lapokat, amik nincsenek összekapcsolva {{WBREPONAME}}-elemekkel (azokban a névterekben, amik támogatják ezt).",
