@@ -12,16 +12,6 @@ abstract class SerializableEntityId implements EntityId {
 
 	protected $serialization;
 
-	/**
-	 * @var string
-	 */
-	protected $repositoryName;
-
-	/**
-	 * @var string
-	 */
-	protected $localPart;
-
 	public const PATTERN = '/^[^:]+\z/';
 
 	/**
@@ -32,8 +22,6 @@ abstract class SerializableEntityId implements EntityId {
 	public function __construct( $serialization ) {
 		self::assertValidSerialization( $serialization );
 		$this->serialization = self::normalizeIdSerialization( $serialization );
-
-		list( $this->repositoryName, $this->localPart ) = self::extractRepositoryNameAndLocalPart( $serialization );
 	}
 
 	private static function assertValidSerialization( $serialization ) {
@@ -60,25 +48,6 @@ abstract class SerializableEntityId implements EntityId {
 	 */
 	public function getSerialization() {
 		return $this->serialization;
-	}
-
-	/**
-	 * Returns '' for local IDs and the foreign repository name for foreign IDs. For chained IDs (e.g. foo:bar:Q42) it
-	 * will return only the first part.
-	 *
-	 * @return string
-	 */
-	public function getRepositoryName() {
-		return $this->repositoryName;
-	}
-
-	/**
-	 * Returns the serialization without the first repository prefix.
-	 *
-	 * @return string
-	 */
-	public function getLocalPart() {
-		return $this->localPart;
 	}
 
 	/**
@@ -118,18 +87,5 @@ abstract class SerializableEntityId implements EntityId {
 	abstract public function __serialize(): array;
 
 	abstract public function __unserialize( array $serialized ): void;
-
-	/**
-	 * Returns a pair (repository name, local part of ID) from the given ID serialization.
-	 * Note: this does not perform any validation of the given input. Calling code should take
-	 * care of this!
-	 *
-	 * @param string $serialization
-	 *
-	 * @return string[] Array of form [ string $repositoryName, string $localPart ]
-	 */
-	protected static function extractRepositoryNameAndLocalPart( $serialization ) {
-		return array_pad( explode( ':', $serialization, 2 ), -2, '' );
-	}
 
 }

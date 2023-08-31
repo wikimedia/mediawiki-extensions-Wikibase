@@ -76,8 +76,6 @@ class ItemId extends SerializableEntityId implements Int32EntityId {
 
 	public function __unserialize( array $data ): void {
 		$this->serialization = $data['serialization'];
-		list( $this->repositoryName, $this->localPart ) =
-			self::extractRepositoryNameAndLocalPart( $this->serialization );
 	}
 
 	/**
@@ -89,8 +87,6 @@ class ItemId extends SerializableEntityId implements Int32EntityId {
 		$array = json_decode( $serialized );
 		$this->serialization = is_array( $array ) ? $array[1] : $serialized;
 		$this->serialization = $this->serialization ?? '';
-		list( $this->repositoryName, $this->localPart ) =
-			self::extractRepositoryNameAndLocalPart( $this->serialization );
 	}
 
 	/**

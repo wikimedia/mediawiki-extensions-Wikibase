@@ -33,22 +33,6 @@ interface EntityId extends Serializable {
 	public function equals( $target );
 
 	/**
-	 * TODO: This method shouldn't exist on this interface as it doesn't make sense for certain types of IDs. It should be moved to a
-	 *       separate interface, or removed altogether.
-	 *
-	 * @return string
-	 */
-	public function getLocalPart();
-
-	/**
-	 * TODO: This method shouldn't exist on this interface as it doesn't make sense for certain types of IDs. It should be moved to a
-	 *       separate interface, or removed altogether.
-	 *
-	 * @return string
-	 */
-	public function getRepositoryName();
-
-	/**
 	 * This method replaces {@link Serializable::serialize()}.
 	 * Do not call it manually.
 	 * Also, consider using {@link getSerialization()} and an {@link EntityIdParser}
