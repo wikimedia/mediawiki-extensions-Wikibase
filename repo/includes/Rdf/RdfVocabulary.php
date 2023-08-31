@@ -6,7 +6,6 @@ use DataValues\DataValue;
 use InvalidArgumentException;
 use OutOfBoundsException;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataModel\Assert\RepositoryNameAssert;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Statement\Statement;
 use Wikimedia\Assert\Assert;
@@ -162,8 +161,6 @@ class RdfVocabulary {
 		string $licenseUrl = 'http://creativecommons.org/publicdomain/zero/1.0/'
 	) {
 		Assert::parameterElementType( 'string', $conceptUris, '$conceptUris' );
-		RepositoryNameAssert::assertParameterKeysAreValidRepositoryNames( $conceptUris, '$conceptUris' );
-
 		Assert::parameterElementType( 'string', $dataUris, '$dataUris' );
 
 		Assert::parameter(
