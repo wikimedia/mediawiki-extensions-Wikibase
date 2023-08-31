@@ -71,17 +71,15 @@ describe( 'Conditional requests', () => {
 		propertyRequestInputs.latestRevId = latestPropertyRevision.revid;
 		propertyRequestInputs.latestRevTimestamp = latestPropertyRevision.timestamp;
 	} );
-	const useRequestInputs = ( requestInputs, newReqBuilder ) => () => newReqBuilder( requestInputs );
+	const useRequestInputs = ( requestInputs ) => ( newReqBuilder ) => ( {
+		newRequestBuilder: () => newReqBuilder( requestInputs ),
+		requestInputs
+	} );
 
 	[
-		...getRequestsOnItem.map(
-			( newRequestBuilder ) => ( { newRequestBuilder, requestInputs: itemRequestInputs } )
-		),
-		...getRequestsOnProperty.map(
-			( newRequestBuilder ) => ( { newRequestBuilder, requestInputs: propertyRequestInputs } )
-		)
+		...getRequestsOnItem.map( useRequestInputs( itemRequestInputs ) ),
+		...getRequestsOnProperty.map( useRequestInputs( propertyRequestInputs ) )
 	].forEach( ( { newRequestBuilder, requestInputs } ) => {
-		newRequestBuilder = useRequestInputs( requestInputs, newRequestBuilder );
 		describe( newRequestBuilder().getRouteDescription(), () => {
 			describe( 'If-None-Match - 200 response', () => {
 				it( 'if the current revision is newer than the ETag provided', async () => {
@@ -330,14 +328,9 @@ describe( 'Conditional requests', () => {
 	} );
 
 	[
-		...editRequestsOnItem.map(
-			( newRequestBuilder ) => ( { newRequestBuilder, requestInputs: itemRequestInputs } )
-		),
-		...editRequestsOnProperty.map(
-			( newRequestBuilder ) => ( { newRequestBuilder, requestInputs: propertyRequestInputs } )
-		)
+		...editRequestsOnItem.map( useRequestInputs( itemRequestInputs ) ),
+		...editRequestsOnProperty.map( useRequestInputs( propertyRequestInputs ) )
 	].forEach( ( { newRequestBuilder, requestInputs } ) => {
-		newRequestBuilder = useRequestInputs( requestInputs, newRequestBuilder );
 		describe( newRequestBuilder().getRouteDescription(), () => {
 			beforeEach( async () => {
 				const latestRevision = await getLatestEditMetadata( requestInputs.mainTestSubject );
