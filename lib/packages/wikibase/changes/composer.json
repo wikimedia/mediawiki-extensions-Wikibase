@@ -10,7 +10,7 @@
 		"wikibase/data-model-services": "~5.1",
 		"wikimedia/assert": "^0.5.0",
 		"wikimedia/at-ease": "^2.0.0",
-		"wikimedia/timestamp": "^3.0.0"
+		"wikimedia/timestamp": "^4.1.0"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "^8.5",
