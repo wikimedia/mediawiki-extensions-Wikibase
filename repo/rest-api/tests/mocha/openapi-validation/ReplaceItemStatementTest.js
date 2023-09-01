@@ -12,7 +12,7 @@ const {
 	newReplaceStatementRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
 
-describe( 'validate PUT endpoints against OpenAPI definition', () => {
+describe( 'validate PUT endpoints for item statements against OpenAPI definition', () => {
 
 	let testItemId;
 	let testStatementId;

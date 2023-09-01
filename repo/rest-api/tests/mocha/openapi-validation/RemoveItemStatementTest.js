@@ -8,7 +8,7 @@ const {
 	newAddItemStatementRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
 
-describe( 'validate DELETE endpoints against OpenAPI definition', () => {
+describe( 'validate DELETE endpoints for item statements against OpenAPI definition', () => {
 	let testItemId;
 	let statementPropertyId;
 
