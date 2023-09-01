@@ -8,5 +8,7 @@
 	"apihelp-query+pageterms-example-label-en": "Hangi inglise keeles leheküljega \"London\" seotud sildid ja rööpkujud.",
 	"apihelp-query+pageterms-param-terms": "Millist tüüpi termid hankida, nt 'description' (kirjeldused). Iga termi kohta tagastatakse sõnede massiiv, kus võtmeks on tüüp, nt {\"description\": [\"foo\"]}. Kui määramata, tagastatakse kõik tüübid.",
 	"apihelp-query+wikibase-example": "Hangi internetiaadressi tee ja muu teave Vikibaasi kliendi ja hoida kohta.",
-	"apihelp-query+wikibase-param-prop": "Millised atribuudid hankida:\n;<kbd>url</kbd>: Vikibaasi hoidla baas-URL, skriptitee ja artiklitee.\n;<kbd>siteid</kbd>: Selle võrgukoha identifikaator."
+	"apihelp-query+wikibase-param-prop": "Millised atribuudid hankida:",
+	"apihelp-query+wikibase-paramvalue-prop-url": "Vikibaasi hoidla baas-URL, skriptitee ja artiklitee.",
+	"apihelp-query+wikibase-paramvalue-prop-siteid": "Selle võrgukoha identifikaator."
 }

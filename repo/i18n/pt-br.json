@@ -3,6 +3,7 @@
 		"authors": [
 			"Almondega",
 			"Cainamarques",
+			"Dgstranz",
 			"Eduardo Addad de Oliveira",
 			"Eduardoaddad",
 			"Fasouzafreitas",
@@ -71,7 +72,7 @@
 	"wikibase-description-edit-placeholder": "insira uma descrição",
 	"wikibase-description-edit-placeholder-language-aware": "insira uma descrição em $1",
 	"wikibase-description-edit-placeholder-not-applicable": "não aplicável",
-	"wikibase-description-edit-mul-not-applicable-accessibility-label": "A\n  a descrição não é aplicável para vários idiomas",
+	"wikibase-description-edit-mul-not-applicable-accessibility-label": "A descrição não é aplicável para vários idiomas",
 	"wikibase-aliases-edit-placeholder": "insira alguns nomes alternativos",
 	"wikibase-aliases-edit-placeholder-language-aware": "insira alguns nomes alternativos em $1",
 	"wikibase-aliases-edit-label": "Nomes alternativos, separados por barras retas (|):",
