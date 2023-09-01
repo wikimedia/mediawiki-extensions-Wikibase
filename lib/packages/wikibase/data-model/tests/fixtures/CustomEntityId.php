@@ -27,8 +27,6 @@ class CustomEntityId extends SerializableEntityId {
 
 	public function __unserialize( array $data ): void {
 		$this->serialization = $data['serialization'];
-		$this->repositoryName = '';
-		$this->localPart = $data['serialization'];
 	}
 
 	/**
@@ -38,8 +36,6 @@ class CustomEntityId extends SerializableEntityId {
 	 */
 	public function unserialize( $serialized ) {
 		$this->serialization = $serialized;
-		$this->repositoryName = '';
-		$this->localPart = $serialized;
 	}
 
 	/**

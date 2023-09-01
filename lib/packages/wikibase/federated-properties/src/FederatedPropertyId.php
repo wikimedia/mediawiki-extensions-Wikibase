@@ -4,7 +4,6 @@ declare( strict_types=1 );
 namespace Wikibase\Lib\FederatedProperties;
 
 use InvalidArgumentException;
-use LogicException;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 
@@ -77,16 +76,6 @@ class FederatedPropertyId implements PropertyId {
 	public function equals( $target ) {
 		return $target instanceof FederatedPropertyId &&
 			$target->getSerialization() === $this->serialization;
-	}
-
-	public function getLocalPart() {
-		// @phan-suppress-previous-line PhanPluginNeverReturnMethod
-		throw new LogicException( 'Not implemented for FederatedPropertyId' );
-	}
-
-	public function getRepositoryName() {
-		// @phan-suppress-previous-line PhanPluginNeverReturnMethod
-		throw new LogicException( 'Not implemented for FederatedPropertyId' );
 	}
 
 }

@@ -101,18 +101,6 @@ class EntityIdTest extends \PHPUnit\Framework\TestCase {
 		$this->assertIsString( $id->__toString() );
 	}
 
-	/**
-	 * @dataProvider instanceProvider
-	 */
-	public function testGetRepositoryName( EntityId $id, $repoName ) {
-		$this->assertSame( $repoName, $id->getRepositoryName() );
-	}
-
-	public function testGetLocalPart() {
-		$id = new ItemId( 'Q42' );
-		$this->assertSame( 'Q42', $id->getLocalPart() );
-	}
-
 	public static function invalidSerializationProvider() {
 		return [
 			[ 'foo:Q42' ],
