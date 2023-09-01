@@ -50,8 +50,8 @@
 	"patch": {
 		"operationId": "patchPropertyStatement",
 		"tags": [ "statements" ],
-		"summary": "[WIP] Change elements of a single Statement of a Property",
-		"description": "This endpoint is currently in development and is not recommended for production use.\n\nThis endpoint is also accessible through `/statements/{statement_id}`.",
+		"summary": "Change elements of a single Statement of a Property",
+		"description": "This endpoint is also accessible through `/statements/{statement_id}`.",
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/PropertyId" },
 			{ "$ref": "../../global/parameters.json#/PropertyStatementId" },
