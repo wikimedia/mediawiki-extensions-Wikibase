@@ -7,7 +7,7 @@ const {
 	newGetStatementRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
 
-describe( 'validate GET statement responses', () => {
+describe( 'validate GET property statement responses', () => {
 
 	let testPropertyId;
 	let testStatementId;
