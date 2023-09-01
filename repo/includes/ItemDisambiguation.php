@@ -27,23 +27,15 @@ class ItemDisambiguation {
 	private $languageNameLookup;
 
 	/**
-	 * @var string
-	 */
-	private $displayLanguageCode;
-
-	/**
 	 * @param EntityTitleLookup $titleLookup
 	 * @param LanguageNameLookup $languageNameLookup
-	 * @param string $displayLanguageCode
 	 */
 	public function __construct(
 		EntityTitleLookup $titleLookup,
-		LanguageNameLookup $languageNameLookup,
-		$displayLanguageCode
+		LanguageNameLookup $languageNameLookup
 	) {
 		$this->titleLookup = $titleLookup;
 		$this->languageNameLookup = $languageNameLookup;
-		$this->displayLanguageCode = $displayLanguageCode;
 	}
 
 	/**
