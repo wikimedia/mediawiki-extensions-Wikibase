@@ -26,9 +26,9 @@ class TypeDispatchingWikiPageEntityMetaDataAccessorTest extends TestCase {
 				$this->assertEquals( 'db', $paramOne );
 				$this->assertEquals( 'repo', $paramTwo );
 				$callbackCalled = true;
-				return $this->prophesize( WikiPageEntityMetaDataAccessor::class )->reveal();
+				return $this->createMock( WikiPageEntityMetaDataAccessor::class );
 			} ],
-			$this->prophesize( WikiPageEntityMetaDataAccessor::class )->reveal(),
+			$this->createMock( WikiPageEntityMetaDataAccessor::class ),
 			'db',
 			'repo'
 		);
@@ -38,16 +38,11 @@ class TypeDispatchingWikiPageEntityMetaDataAccessorTest extends TestCase {
 		$this->assertTrue( $callbackCalled, 'Assert the callback was called with the correct parameters' );
 	}
 
-	/**
-	 * @param string $type
-	 * @param string $serialization
-	 * @return EntityId
-	 */
-	private function getMockEntityId( $type, $serialization ) {
-		$id = $this->prophesize( EntityId::class );
-		$id->getSerialization()->willReturn( $serialization );
-		$id->getEntityType()->willReturn( $type );
-		return $id->reveal();
+	private function getMockEntityId( string $type, string $serialization ): EntityId {
+		$id = $this->createMock( EntityId::class );
+		$id->method( 'getSerialization' )->willReturn( $serialization );
+		$id->method( 'getEntityType' )->willReturn( $type );
+		return $id;
 	}
 
 	public function testLoadRevisionInformationDispatching() {
@@ -55,17 +50,18 @@ class TypeDispatchingWikiPageEntityMetaDataAccessorTest extends TestCase {
 		$entityIdTwo = $this->getMockEntityId( 'type2', 'ID2' );
 		$mode = LookupConstants::LATEST_FROM_REPLICA_WITH_FALLBACK;
 
-		$accessor = $this->prophesize( WikiPageEntityMetaDataAccessor::class );
-		$accessor->loadRevisionInformation( [ $entityIdOne ], $mode )
+		$accessor = $this->createMock( WikiPageEntityMetaDataAccessor::class );
+		$accessor->method( 'loadRevisionInformation' )
+			->with( [ $entityIdOne ], $mode )
 			->willReturn( [ 'ID1' => 1 ] );
-		$accessor = $accessor->reveal();
 
 		$i = new TypeDispatchingWikiPageEntityMetaDataAccessor(
 			[ 'type2' => function() use ( $entityIdTwo, $mode ) {
-				$accessor = $this->prophesize( WikiPageEntityMetaDataAccessor::class );
-				$accessor->loadRevisionInformation( [ $entityIdTwo ], $mode )
+				$accessor = $this->createMock( WikiPageEntityMetaDataAccessor::class );
+				$accessor->method( 'loadRevisionInformation' )
+					->with( [ $entityIdTwo ], $mode )
 					->willReturn( [ 'ID2' => 2 ] );
-				return $accessor->reveal();
+				return $accessor;
 			} ],
 			$accessor,
 			'db',
@@ -87,17 +83,18 @@ class TypeDispatchingWikiPageEntityMetaDataAccessorTest extends TestCase {
 		$entityIdTwo = $this->getMockEntityId( 'type2', 'ID2' );
 		$mode = LookupConstants::LATEST_FROM_REPLICA_WITH_FALLBACK;
 
-		$accessor = $this->prophesize( WikiPageEntityMetaDataAccessor::class );
-		$accessor->loadRevisionInformationByRevisionId( $entityIdOne, 1, $mode )
+		$accessor = $this->createMock( WikiPageEntityMetaDataAccessor::class );
+		$accessor->method( 'loadRevisionInformationByRevisionId' )
+			->with( $entityIdOne, 1, $mode )
 			->willReturn( 'ID1' );
-		$accessor = $accessor->reveal();
 
 		$i = new TypeDispatchingWikiPageEntityMetaDataAccessor(
 			[ 'type2' => function() use ( $entityIdTwo, $mode ) {
-				$accessor = $this->prophesize( WikiPageEntityMetaDataAccessor::class );
-				$accessor->loadRevisionInformationByRevisionId( $entityIdTwo, 2, $mode )
+				$accessor = $this->createMock( WikiPageEntityMetaDataAccessor::class );
+				$accessor->method( 'loadRevisionInformationByRevisionId' )
+					->with( $entityIdTwo, 2, $mode )
 					->willReturn( 'ID2' );
-				return $accessor->reveal();
+				return $accessor;
 			} ],
 			$accessor,
 			'db',
@@ -116,17 +113,18 @@ class TypeDispatchingWikiPageEntityMetaDataAccessorTest extends TestCase {
 		$entityIdTwo = $this->getMockEntityId( 'type2', 'ID2' );
 		$mode = LookupConstants::LATEST_FROM_REPLICA_WITH_FALLBACK;
 
-		$accessor = $this->prophesize( WikiPageEntityMetaDataAccessor::class );
-		$accessor->loadLatestRevisionIds( [ $entityIdOne ], $mode )
+		$accessor = $this->createMock( WikiPageEntityMetaDataAccessor::class );
+		$accessor->method( 'loadLatestRevisionIds' )
+			->with( [ $entityIdOne ], $mode )
 			->willReturn( [ 'ID1' => 1 ] );
-		$accessor = $accessor->reveal();
 
 		$i = new TypeDispatchingWikiPageEntityMetaDataAccessor(
 			[ 'type2' => function() use ( $entityIdTwo, $mode ) {
-				$accessor = $this->prophesize( WikiPageEntityMetaDataAccessor::class );
-				$accessor->loadLatestRevisionIds( [ $entityIdTwo ], $mode )
+				$accessor = $this->createMock( WikiPageEntityMetaDataAccessor::class );
+				$accessor->method( 'loadLatestRevisionIds' )
+					->with( [ $entityIdTwo ], $mode )
 					->willReturn( [ 'ID2' => 2 ] );
-				return $accessor->reveal();
+				return $accessor;
 			} ],
 			$accessor,
 			'db',
