@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Store\Sql;
 
+use Error;
 use MediaWiki\Storage\NameTableStore;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\EntityId;
@@ -75,29 +76,31 @@ class EntityIdLocalPartPageTableEntityQueryDbTest extends MediaWikiIntegrationTe
 	}
 
 	private function getQuery() {
-		$slotRoleStore = $this->prophesize( NameTableStore::class );
-		$slotRoleStore->getId( 'main' )->wilLReturn( 0 );
-		$slotRoleStore->getId( 'second' )->willReturn( 22 );
+		$slotRoleStore = $this->createMock( NameTableStore::class );
+		$slotRoleStore->method( 'getId' )
+			->willReturnCallback( static function ( string $name ) {
+				if ( $name === 'main' ) {
+					return 0;
+				} elseif ( $name === 'second' ) {
+					return 22;
+				} else {
+					throw new Error( 'Unexpected getId() call' );
+				}
+			} );
 
 		return new EntityIdLocalPartPageTableEntityQuery(
 			new EntityNamespaceLookup(
 				[ 'entityTypeOne' => 1, 'entityTypeTwo' => 2 ],
 				[ 'entityTypeTwo' => 'second' ]
-			), $slotRoleStore->reveal()
+			), $slotRoleStore
 		);
 	}
 
-	/**
-	 * @param string $type
-	 * @param string $localPart
-	 * @return EntityId
-	 */
-	private function getMockEntityId( $type, $localPart ) {
-		$id = $this->prophesize( EntityId::class );
-		$id->getLocalPart()->willReturn( $localPart );
-		$id->getEntityType()->willReturn( $type );
-
-		return $id->reveal();
+	private function getMockEntityId( string $type, string $localPart ): EntityId {
+		$id = $this->createMock( EntityId::class );
+		$id->method( 'getLocalPart' )->willReturn( $localPart );
+		$id->method( 'getEntityType' )->willReturn( $type );
+		return $id;
 	}
 
 	public function provideSelectRows() {
