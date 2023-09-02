@@ -706,11 +706,14 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 	 * @return RevisionRecord
 	 */
 	private function getMockRevisionRecord( $hasSlotCalls = [] ) {
-		$rec = $this->prophesize( RevisionRecord::class );
-		foreach ( $hasSlotCalls as $slotChecked => $return ) {
-			$rec->hasSlot( $slotChecked )->willReturn( $return );
-		}
-		return $rec->reveal();
+		$rec = $this->createMock( RevisionRecord::class );
+		$rec->method( 'hasSlot' )
+			->willReturnCallback( function ( $slotChecked ) use ( $hasSlotCalls ) {
+				$this->assertArrayHasKey( $slotChecked, $hasSlotCalls,
+					'hasSlot() should be called with one of the expected slot roles' );
+				return $hasSlotCalls[$slotChecked];
+			} );
+		return $rec;
 	}
 
 	public function provideAdjustFlagsForMCR() {
@@ -770,11 +773,11 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 	public function testAdjustFlagsForMCR( $flagsIn, $expected, $parentRevision, $slotRole ) {
 		$services = $this->getServiceContainer();
 		$store = new WikiPageEntityStore(
-			$this->prophesize( EntityContentFactory::class )->reveal(),
-			$this->prophesize( EntityTitleStoreLookup::class )->reveal(),
-			$this->prophesize( IdGenerator::class )->reveal(),
-			$this->prophesize( EntityIdComposer::class )->reveal(),
-			$this->prophesize( RevisionStore::class )->reveal(),
+			$this->createMock( EntityContentFactory::class ),
+			$this->createMock( EntityTitleStoreLookup::class ),
+			$this->createMock( IdGenerator::class ),
+			$this->createMock( EntityIdComposer::class ),
+			$this->createMock( RevisionStore::class ),
 			new DatabaseEntitySource( 'test', 'testdb', [], '', '', '', '' ),
 			$services->getPermissionManager(),
 			$services->getWatchlistManager(),
