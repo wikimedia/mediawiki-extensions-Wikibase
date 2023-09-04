@@ -102,7 +102,7 @@
 	"wikibase-property-render-error": "Не ўдалося адлюстраваць уласцівасць $1: $2",
 	"wikibase-otherprojects": "У іншых праектах",
 	"wikibase-otherprojects-beta-message": "Бакавая панэль іншых праектаў",
-	"wikibase-otherprojects-beta-description": "Дадае на бакавую панэль раздзел «{{int:wikibase-otherprojects}}», які ўтрымлівае спасылкі на іншыя праекты «Вікімедыі», заснаваныя на дадзеных з {{WBREPONAME}}.",
+	"wikibase-otherprojects-beta-description": "Дадае на бакавую панэль раздзел «{{int:wikibase-otherprojects}}», які змяшчае спасылкі на іншыя праекты «Вікімедыі», заснаваныя на даных з {{WBREPONAME}}.",
 	"wikibase-sitelinks-sitename-columnheading": "Мова",
 	"wikibase-sitelinks-link-columnheading": "Злучаная старонка",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Злучэнне|Злучэнні}} з элементам {{grammar:родны|{{WBREPONAME}}}}",
