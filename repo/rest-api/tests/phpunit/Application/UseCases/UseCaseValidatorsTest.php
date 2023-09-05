@@ -4,12 +4,16 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\DeserializedGetItemDescriptionsRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\GetItemDescriptionsRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\GetItemDescriptionsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\DeserializedGetItemLabelsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabelsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabelsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
 
 /**
+ * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\GetItemDescriptionsValidator
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabelsValidator
  *
  * @group Wikibase
@@ -36,6 +40,11 @@ class UseCaseValidatorsTest extends TestCase {
 	}
 
 	public function validatorProvider(): Generator {
+		yield [
+			GetItemDescriptionsValidator::class,
+			GetItemDescriptionsRequest::class,
+			DeserializedGetItemDescriptionsRequest::class,
+		];
 		yield [
 			GetItemLabelsValidator::class,
 			GetItemLabelsRequest::class,
