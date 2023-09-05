@@ -2,10 +2,13 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels;
 
+use Wikibase\Repo\RestApi\Application\UseCases\ItemIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseRequest;
+
 /**
  * @license GPL-2.0-or-later
  */
-class GetItemLabelsRequest {
+class GetItemLabelsRequest implements UseCaseRequest, ItemIdRequest {
 
 	private string $itemId;
 
