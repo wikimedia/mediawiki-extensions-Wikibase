@@ -3,7 +3,8 @@
 		"authors": [
 			"Bikarhêner",
 			"George Animal",
-			"Ghybu"
+			"Ghybu",
+			"Balyozxane"
 		]
 	},
 	"wikibase-error-unexpected": "Çewtî: $1.",
@@ -12,5 +13,5 @@
 	"wikibase-globedetails-latitude": "Hêlîpan",
 	"wikibase-sitelinks-wikipedia": "Wîkîpediya",
 	"wikibase-time-precision-century": "sedsala $1{{PLURAL:$1|ê|an}}",
-	"wikibase-entity-summary-wbsetsitelink-add": "Girêdanê li [$2] zêde bike"
+	"wikibase-entity-summary-wbsetsitelink-add": "Girêdana [$2] lê zêde kir"
 }
