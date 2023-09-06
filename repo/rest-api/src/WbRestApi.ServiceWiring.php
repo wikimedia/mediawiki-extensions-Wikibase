@@ -257,7 +257,7 @@ return [
 				WikibaseRepo::getTermLookup( $services ),
 				WikibaseRepo::getTermsLanguages( $services )
 			),
-			new GetItemDescriptionsValidator( new ItemIdValidator() )
+			new GetItemDescriptionsValidator( new ValidatingRequestDeserializer( new ValidatingRequestFieldDeserializerFactory() ) )
 		);
 	},
 

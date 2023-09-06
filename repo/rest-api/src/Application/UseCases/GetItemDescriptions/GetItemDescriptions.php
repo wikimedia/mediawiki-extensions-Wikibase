@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions;
 
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
@@ -29,13 +28,10 @@ class GetItemDescriptions {
 
 	/**
 	 * @throws UseCaseError
-	 *
 	 * @throws ItemRedirect
 	 */
 	public function execute( GetItemDescriptionsRequest $request ): GetItemDescriptionsResponse {
-		$this->validator->assertValidRequest( $request );
-
-		$itemId = new ItemId( $request->getItemId() );
+		$itemId = $this->validator->validateAndDeserialize( $request )->getItemId();
 
 		[ $revisionId, $lastModified ] = $this->getLatestRevisionMetadata->execute( $itemId );
 
