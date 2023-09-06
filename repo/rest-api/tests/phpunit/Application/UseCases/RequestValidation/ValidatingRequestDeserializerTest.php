@@ -4,10 +4,13 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\RequestValidation;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ItemIdRequestValidatingDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\StatementIdRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestFieldDeserializerFactory;
+use Wikibase\Repo\RestApi\Application\UseCases\StatementIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseRequest;
 
@@ -55,8 +58,42 @@ class ValidatingRequestDeserializerTest extends TestCase {
 		}
 	}
 
+	public function testGivenValidStatementIdRequest_returnsDeserializedStatementId(): void {
+		$request = new class implements UseCaseRequest, StatementIdRequest {
+			public function getStatementId(): string {
+				return 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+			}
+		};
+		$statementId = new StatementGuid( new ItemId( 'Q123' ), 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
+
+		$this->assertEquals(
+			[ StatementIdRequestValidatingDeserializer::DESERIALIZED_VALUE => $statementId ],
+			$this->newRequestDeserializer()->validateAndDeserialize( $request )
+		);
+	}
+
+	public function testGivenInvalidStatementIdRequest_throws(): void {
+		$expectedError = $this->createStub( UseCaseError::class );
+		$itemIdValidator = $this->createStub( StatementIdRequestValidatingDeserializer::class );
+		$itemIdValidator->method( 'validateAndDeserialize' )->willThrowException( $expectedError );
+		$factory = $this->createStub( ValidatingRequestFieldDeserializerFactory::class );
+		$factory->method( 'newStatementIdRequestValidatingDeserializer' )->willReturn( $itemIdValidator );
+
+		try {
+			$this->newRequestDeserializer( $factory )->validateAndDeserialize(
+				new class implements UseCaseRequest, StatementIdRequest {
+					public function getStatementId(): string {
+						return 'Q123$invalid';
+					}
+				}
+			);
+			$this->fail( 'expected exception was not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedError, $e );
+		}
+	}
+
 	// property id
-	// statement id
 	// statement
 	// property id filter
 	// requested fields

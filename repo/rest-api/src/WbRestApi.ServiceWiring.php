@@ -348,7 +348,7 @@ return [
 
 	'WbRestApi.GetStatement' => function( MediaWikiServices $services ): GetStatement {
 		return new GetStatement(
-			new GetStatementValidator( new StatementIdValidator( new BasicEntityIdParser() ) ),
+			new GetStatementValidator( new ValidatingRequestDeserializer( new ValidatingRequestFieldDeserializerFactory() ) ),
 			WbRestApi::getStatementRetriever( $services ),
 			WbRestApi::getGetLatestStatementSubjectRevisionMetadata( $services )
 		);
