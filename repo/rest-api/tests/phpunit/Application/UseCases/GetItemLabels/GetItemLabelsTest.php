@@ -9,9 +9,10 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabelsReques
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabelsResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabelsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestFieldDeserializerFactory;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
-use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\Services\ItemLabelsRetriever;
@@ -97,7 +98,7 @@ class GetItemLabelsTest extends TestCase {
 		return new GetItemLabels(
 			$this->getRevisionMetadata,
 			$this->labelsRetriever,
-			new GetItemLabelsValidator( new ItemIdValidator() )
+			new GetItemLabelsValidator( new ValidatingRequestDeserializer( new ValidatingRequestFieldDeserializerFactory() ) )
 		);
 	}
 

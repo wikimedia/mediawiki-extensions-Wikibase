@@ -69,6 +69,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\ReplacePropertyStatement\ReplaceP
 use Wikibase\Repo\RestApi\Application\UseCases\ReplacePropertyStatement\ReplacePropertyStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestFieldDeserializerFactory;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel;
@@ -280,7 +282,7 @@ return [
 				WikibaseRepo::getTermLookup( $services ),
 				WikibaseRepo::getTermsLanguages( $services )
 			),
-			new GetItemLabelsValidator( new ItemIdValidator() )
+			new GetItemLabelsValidator( new ValidatingRequestDeserializer( new ValidatingRequestFieldDeserializerFactory() ) )
 		);
 	},
 
