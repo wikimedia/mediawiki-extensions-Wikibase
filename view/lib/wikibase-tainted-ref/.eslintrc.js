@@ -40,10 +40,11 @@ module.exports = {
 
 		'vue/html-indent': [ 'error', 'tab' ],
 		'vue/max-attributes-per-line': [ 'error', {
-			singleline: 3,
+			singleline: {
+				max: 3,
+			},
 			multiline: {
 				max: 1,
-				allowFirstLine: false,
 			},
 		} ],
 
@@ -60,6 +61,12 @@ module.exports = {
 		'@typescript-eslint/no-var-requires': 'off',
 
 		'@typescript-eslint/ban-types': 'off',
+
+		// disabled in context of T345660; TODO: check and reenable when development continues
+		'node/no-missing-import': 'off',
+		'vue/multi-word-component-names': 'off',
+		'vue/v-slot-style': 'off',
+		'jsdoc/require-returns': 'off',
 	},
 
 	overrides: [

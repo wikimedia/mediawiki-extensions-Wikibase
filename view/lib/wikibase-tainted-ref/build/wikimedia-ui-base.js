@@ -11,7 +11,7 @@ const lessTree = gonzales.parse(
 	fs.readFileSync( `${WIKIMEDIA_UI_BASE_DIR}/wikimedia-ui-base.less`, 'utf8' ),
 	{ syntax: 'less' },
 );
-lessVariableResolver.log.level = process.argv.indexOf( '--debug' ) !== -1 ? 'debug' : 'warn';
+lessVariableResolver.log.level = process.argv.includes( '--debug' ) ? 'debug' : 'warn';
 lessVariableResolver.resolveVariablesInTree( lessTree );
 const scssTree = sast.parse( lessTree.toString(), { syntax: 'less' } );
 fs.writeFileSync(
