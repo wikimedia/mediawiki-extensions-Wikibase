@@ -1,7 +1,6 @@
 .DS_Store
 node_modules
 coverage/
-storybook-static/
 dist/*
 !dist/*.js
 !dist/css/data-bridge.app.css

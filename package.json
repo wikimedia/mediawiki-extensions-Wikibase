@@ -8,7 +8,6 @@
 		"api-testing:rest-api": "npm --prefix repo/rest-api run api-testing",
 		"doc": "npm-run-all doc:*",
 		"doc:jsduck": "jsduck",
-		"doc:data-bridge-storybook": "npm --prefix client/data-bridge run build-storybook -- -o ../../docs/data-bridge-storybook",
 		"doc:data-bridge-dist-size": "node build/dist-size/analyze docs/data-bridge-dist-size wikimedia mediawiki-extensions-Wikibase client/data-bridge/dist/data-bridge.init.js client/data-bridge/dist/data-bridge.common.js client/data-bridge/dist/data-bridge.app.js client/data-bridge/dist/data-bridge.app.modern.js client/data-bridge/dist/vendor-chunks.js client/data-bridge/dist/css/data-bridge.app.css client/data-bridge/dist/data-bridge.css",
 		"doc:tainted-ref-dist-size": "echo 'disabled (T345660)' # node build/dist-size/analyze docs/tainted-ref-dist-size wikimedia mediawiki-extensions-Wikibase view/lib/wikibase-tainted-ref/dist/tainted-ref.init.js view/lib/wikibase-tainted-ref/dist/tainted-ref.common.js view/lib/wikibase-tainted-ref/dist/tainted-ref.app.css",
 		"doc:rest-api": "npm --prefix repo/rest-api run build",

@@ -16,7 +16,6 @@ docker-compose up
 This uses the values from `.env` for configuration - create a `.env.local` file if you desire diverging values.
 
 * `CSR_PORT` is the port at which you can reach the development server on your machine to live-preview changes to the application. This allows development outside of MediaWiki, using a simulated environment as configured in `src/dev-entry.ts`.
-* `STORYBOOK_PORT` is the port at which you can reach the storybook server on your machine to live-preview changes in the component library
 * `NODE_ENV` is the environment to set for node.js
 
 
@@ -49,11 +48,6 @@ docker-compose run --rm node npm run test:unit -- --watch
 ### Lints files for code style violations
 ```
 docker-compose run --rm node npm run test:lint
-```
-
-### Storybook
-```
-docker-compose run --rm node npm run storybook
 ```
 
 ### Git helpers
@@ -106,3 +100,10 @@ For debugging of a specific scenario you can also subscribe to those events loca
 ```javascript
 mediaWiki.trackSubscribe( '', console.log );
 ```
+
+## Storybook
+
+Data Bridge used to contain Storybook stories.
+Due to providing little value outside of active development but causing significant cost upgrading the dependencies,
+they were deleted in Id062a14693c10c5300f7f4509db529d65b03175d.
+If needed, they can be restored from git.
