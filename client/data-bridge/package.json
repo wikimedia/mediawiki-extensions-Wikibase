@@ -18,12 +18,9 @@
     "test:integration": "jest -c ./jest.config.integration.js",
     "test:e2e": "jest -c ./jest.config.e2e.js",
     "test:distnodiff": "npm run build -- --dest /tmp/dist && diff -q ./dist/data-bridge.app.js /tmp/dist/data-bridge.app.js && diff -q ./dist/css/data-bridge.app.css /tmp/dist/css/data-bridge.app.css && diff -q ./dist/data-bridge.init.js /tmp/dist/data-bridge.init.js && diff -q ./dist/data-bridge.chunk-vendors.js /tmp/dist/data-bridge.chunk-vendors.js",
-    "test:storybook": "CHOKIDAR_USEPOLLING=1 start-storybook --ci --smoke-test --quiet",
     "test:mwlibs": "echo 'disabled (T297381)' # ZUUL_BRANCH=${ZUUL_BRANCH:-master} lib-version-check",
     "test-unit-coverage": "jest -c ./jest.config.unit.js --coverage && sed -i 's|SF:/src/client/data-bridge/|SF:|g' coverage/lcov.info",
-    "selenium-test": "wdio tests/selenium/wdio.conf.js",
-    "storybook": "start-storybook",
-    "build-storybook": "build-storybook"
+    "selenium-test": "wdio tests/selenium/wdio.conf.js"
   },
   "dependencies": {
     "core-js": "^3.18.2",
@@ -37,15 +34,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",
-    "@storybook/addon-a11y": "^6.5.13",
-    "@storybook/addon-actions": "^6.5.13",
-    "@storybook/addon-controls": "^6.5.13",
-    "@storybook/addon-docs": "^6.5.13",
-    "@storybook/addon-links": "^6.5.13",
-    "@storybook/addons": "^6.5.13",
-    "@storybook/builder-webpack5": "^6.5.13",
-    "@storybook/manager-webpack5": "^6.5.13",
-    "@storybook/vue3": "^6.5.13",
     "@types/deep-equal": "^1.0.1",
     "@types/jest": "^27.0.3",
     "@types/jquery": "^3.5.6",
