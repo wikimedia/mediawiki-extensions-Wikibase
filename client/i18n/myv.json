@@ -2,20 +2,21 @@
 	"@metadata": {
 		"authors": [
 			"Botuzhaleny-sodamo",
-			"Rueter"
+			"Rueter",
+			"Сантяй"
 		]
 	},
 	"tooltip-t-wikibase": "Сюлмазь датань утомсо тевс сюлмавома пене",
 	"wikibase-comment-update": "{{WBREPONAME}} элементэсь полавтовсь",
-	"wikibase-dataitem": "{{WBREPONAME}} элементэсь",
-	"wikibase-editlinks": "Витнемс-петнемс сюлмавома петнень",
+	"wikibase-dataitem": "{{WBREPONAME}} пелькс",
+	"wikibase-editlinks": "Витнемс невтемат",
 	"wikibase-editlinkstitle": "Витнемс-петнемс кельютконь сюлмавома петнень",
-	"wikibase-linkitem-addlinks": "Поладомс лияв сюлмавкст",
-	"wikibase-linkitem-title": "Путт сюлмавкс лопас",
-	"wikibase-linkitem-linkpage": "Путт сюлмавкс лопас",
-	"wikibase-linkitem-selectlink": "Кочкак сайт ды лопа, конатнень сюлмавлить те лопанть марто.",
-	"wikibase-linkitem-input-site": "Келесь:",
-	"wikibase-linkitem-input-page": "Лопась:",
+	"wikibase-linkitem-addlinks": "Поладомс невтемат",
+	"wikibase-linkitem-title": "Лопанть марто сюлмавома",
+	"wikibase-linkitem-linkpage": "Лопанть марто сюлмавома",
+	"wikibase-linkitem-selectlink": "Инескеть, кочкак сайт ды лопа, конатнень сюлмавлить те лопанть марто.",
+	"wikibase-linkitem-input-site": "Кель:",
+	"wikibase-linkitem-input-page": "Лопа:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Кекшемс",
 	"wikibase-rc-hide-wikidata-show": "Невтемс",
