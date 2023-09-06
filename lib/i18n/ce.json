@@ -3,7 +3,8 @@
 		"authors": [
 			"Fitoschido",
 			"Macofe",
-			"Умар"
+			"Умар",
+			"Саид Мисарбиев"
 		]
 	},
 	"specialpages-group-wikibase": "Викибазан репозитори",
@@ -98,6 +99,7 @@
 	"wikibase-entity-summary-wbremovequalifiers-remove": "{{PLURAL:$1|ДӀайаьккхина квалификатор}}",
 	"wikibase-entity-summary-wbremovereferences-remove": "{{PLURAL:$3|ДӀаьккхина хьажорг}}",
 	"wikibase-entity-summary-wbmergeitems-from": "Цхьаьнатоьхна элемент '$3' чуьра",
+	"wikibase-entity-summary-wbmergeitems-to": "Цхьанатоьхна элемент «$3» чохь",
 	"wikibase-item-summary-wbcreate-new": "Керла элемент кхоьллина",
 	"wikibase-item-summary-wbeditentity": "Керла элемент кхоьллина",
 	"wikibase-item-summary-wbeditentity-create": "Керла элемент кхоьллина",

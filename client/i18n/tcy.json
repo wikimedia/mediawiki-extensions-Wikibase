@@ -7,7 +7,8 @@
 			"Kiranpoojary",
 			"VASANTH S.N.",
 			"Vishwanatha Badikana",
-			"రహ్మానుద్దీన్"
+			"రహ్మానుద్దీన్",
+			"ChiK"
 		]
 	},
 	"tooltip-t-wikibase": "ಸಂಪರ್ಕೊ ಮಾಹಿತಿ ಸಂಗ್ರಹೊ ಮಲ್ಪುನ ಬಾಗೊದ ಕೊಂಡಿ",
@@ -16,6 +17,7 @@
 	"wikibase-editlinks": "ಕೊಂಡಿಲೆನ್ ಸಂಪೊಲಿಪುಲೆ",
 	"wikibase-editlinkstitle": "ಬೇತೆ ಬಾಸೆದ ಕೊಂಡಿಲೆನ್ ಸಂಪೊಲಿಪುಲೆ",
 	"wikibase-linkitem-addlinks": "ಕೊಂಡಿ ಸೆರಾಲೆ",
+	"wikibase-linkitem-title": "ಪುಟೊತೊಟ್ಟುಗು ಸೇರವೊನ್ಲೆ",
 	"wikibase-linkitem-input-site": "ಬಾಸೆ:",
 	"wikibase-linkitem-input-page": "ಪುಟೊ:",
 	"wikibase-rc-hide-wikidata": "$1{{WBREPONAME}}",
