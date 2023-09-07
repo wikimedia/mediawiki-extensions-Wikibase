@@ -13,6 +13,7 @@ use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\UserInputException;
+use Wikibase\Repo\AnonymousEditWarningBuilder;
 use Wikibase\Repo\Interactors\ItemMergeException;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\TokenCheckInteractor;
@@ -219,13 +220,13 @@ class SpecialMergeItems extends SpecialWikibasePage {
 
 		$pre = '';
 		if ( !$this->getUser()->isRegistered() ) {
+			$anonymousEditWarningBuilder = new AnonymousEditWarningBuilder(
+				$this->getSpecialPageFactory()
+			);
 			$pre = Html::rawElement(
 				'p',
 				[ 'class' => 'warning' ],
-				$this->msg(
-					'wikibase-anonymouseditwarning',
-					$this->msg( 'wikibase-entity-item' )->text()
-				)->parse()
+				$anonymousEditWarningBuilder->buildAnonymousEditWarningHTML( $this->getPageTitle()->getPrefixedText() )
 			);
 		}
 

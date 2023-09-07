@@ -12,6 +12,7 @@ use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Summary;
+use Wikibase\Repo\AnonymousEditWarningBuilder;
 use Wikibase\Repo\CopyrightMessageBuilder;
 use Wikibase\Repo\DataTypeSelector;
 use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
@@ -223,11 +224,11 @@ class SpecialNewProperty extends SpecialNewEntity {
 	 */
 	protected function getWarnings() {
 		if ( !$this->getUser()->isRegistered() ) {
+			$anonymousEditWarningBuilder = new AnonymousEditWarningBuilder(
+				$this->getSpecialPageFactory()
+			);
 			return [
-				$this->msg(
-					'wikibase-anonymouseditwarning',
-					$this->msg( 'wikibase-entity-property' )
-				)->parse(),
+				$anonymousEditWarningBuilder->buildAnonymousEditWarningHTML( $this->getPageTitle()->getPrefixedText() ),
 			];
 		}
 
