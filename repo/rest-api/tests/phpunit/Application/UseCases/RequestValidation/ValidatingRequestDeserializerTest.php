@@ -13,8 +13,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdFilterRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ItemIdRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\LanguageCodeRequestValidatingDeserializer;
-use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\PropertyIdFilterRequestValidatingDeserializer;
-use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\PropertyIdRequestValidatingDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\MappedRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\StatementIdRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestFieldDeserializerFactory;
@@ -113,7 +112,7 @@ class ValidatingRequestDeserializerTest extends TestCase {
 		];
 		yield [
 			PropertyIdUseCaseRequest::class,
-			PropertyIdRequestValidatingDeserializer::class,
+			MappedRequestValidatingDeserializer::class,
 			'newPropertyIdRequestValidatingDeserializer',
 		];
 		yield [
@@ -123,7 +122,7 @@ class ValidatingRequestDeserializerTest extends TestCase {
 		];
 		yield [
 			PropertyIdFilterUseCaseRequest::class,
-			PropertyIdFilterRequestValidatingDeserializer::class,
+			MappedRequestValidatingDeserializer::class,
 			'newPropertyIdFilterRequestValidatingDeserializer',
 		];
 		yield [

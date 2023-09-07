@@ -3,14 +3,13 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\RequestValidation;
 
 use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
 
 /**
  * @license GPL-2.0-or-later
  */
-class PropertyIdRequestValidatingDeserializer {
+class PropertyIdValidatingDeserializer {
 	private PropertyIdValidator $propertyIdValidator;
 
 	public function __construct( PropertyIdValidator $validator ) {
@@ -20,8 +19,8 @@ class PropertyIdRequestValidatingDeserializer {
 	/**
 	 * @throws UseCaseError
 	 */
-	public function validateAndDeserialize( PropertyIdRequest $request ): NumericPropertyId {
-		$validationError = $this->propertyIdValidator->validate( $request->getPropertyId() );
+	public function validateAndDeserialize( string $propertyId ): NumericPropertyId {
+		$validationError = $this->propertyIdValidator->validate( $propertyId );
 		if ( $validationError ) {
 			$invalidPropertyId = $validationError->getContext()[PropertyIdValidator::CONTEXT_VALUE];
 			throw new UseCaseError(
@@ -30,7 +29,7 @@ class PropertyIdRequestValidatingDeserializer {
 				[ UseCaseError::CONTEXT_PROPERTY_ID => $invalidPropertyId ]
 			);
 		}
-		return new NumericPropertyId( $request->getPropertyId() );
+		return new NumericPropertyId( $propertyId );
 	}
 
 }
