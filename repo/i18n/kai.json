@@ -5,5 +5,8 @@
 		]
 	},
 	"wikibase-edit": "yawantu",
-	"wikibase-add": "ara"
+	"wikibase-add": "ara",
+	"wikibase-label-empty": "Ka label bai",
+	"wikibase-description-empty": "Ka bayani bai",
+	"wikibase-sitelinks-special": "shagi kinē"
 }
