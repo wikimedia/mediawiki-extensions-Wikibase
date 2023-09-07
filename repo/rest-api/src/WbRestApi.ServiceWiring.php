@@ -257,7 +257,7 @@ return [
 				WikibaseRepo::getTermLookup( $services ),
 				WikibaseRepo::getTermsLanguages( $services )
 			),
-			new GetItemDescriptionsValidator( new ValidatingRequestDeserializer( new ValidatingRequestFieldDeserializerFactory() ) )
+			new GetItemDescriptionsValidator( WbRestApi::getValidatingRequestDeserializer( $services ) )
 		);
 	},
 
@@ -268,10 +268,7 @@ return [
 				WikibaseRepo::getTermLookup( $services ),
 				WikibaseRepo::getTermsLanguages( $services )
 			),
-			new GetItemLabelValidator(
-				new ItemIdValidator(),
-				new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() )
-			)
+			new GetItemLabelValidator( WbRestApi::getValidatingRequestDeserializer( $services ) )
 		);
 	},
 
@@ -282,7 +279,7 @@ return [
 				WikibaseRepo::getTermLookup( $services ),
 				WikibaseRepo::getTermsLanguages( $services )
 			),
-			new GetItemLabelsValidator( new ValidatingRequestDeserializer( new ValidatingRequestFieldDeserializerFactory() ) )
+			new GetItemLabelsValidator( WbRestApi::getValidatingRequestDeserializer( $services ) )
 		);
 	},
 
@@ -296,7 +293,7 @@ return [
 
 	'WbRestApi.GetItemStatements' => function( MediaWikiServices $services ): GetItemStatements {
 		return new GetItemStatements(
-			new GetItemStatementsValidator( new ValidatingRequestDeserializer( new ValidatingRequestFieldDeserializerFactory() ) ),
+			new GetItemStatementsValidator( WbRestApi::getValidatingRequestDeserializer( $services ) ),
 			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getGetLatestItemRevisionMetadata( $services )
 		);
@@ -332,7 +329,7 @@ return [
 
 	'WbRestApi.GetPropertyStatement' => function( MediaWikiServices $services ): GetPropertyStatement {
 		return new GetPropertyStatement(
-			new GetPropertyStatementValidator( new ValidatingRequestDeserializer( new ValidatingRequestFieldDeserializerFactory() ) ),
+			new GetPropertyStatementValidator( WbRestApi::getValidatingRequestDeserializer( $services ) ),
 			WbRestApi::getAssertPropertyExists( $services ),
 			WbRestApi::getGetStatement( $services )
 		);
@@ -348,7 +345,7 @@ return [
 
 	'WbRestApi.GetStatement' => function( MediaWikiServices $services ): GetStatement {
 		return new GetStatement(
-			new GetStatementValidator( new ValidatingRequestDeserializer( new ValidatingRequestFieldDeserializerFactory() ) ),
+			new GetStatementValidator( WbRestApi::getValidatingRequestDeserializer( $services ) ),
 			WbRestApi::getStatementRetriever( $services ),
 			WbRestApi::getGetLatestStatementSubjectRevisionMetadata( $services )
 		);
@@ -594,6 +591,12 @@ return [
 			$services->get( 'WbRestApi.ErrorReporter' ),
 			WikibaseRepo::getLogger( $services )
 		);
+	},
+
+	'WbRestApi.ValidatingRequestDeserializer' => function( MediaWikiServices $services ): ValidatingRequestDeserializer {
+		return new ValidatingRequestDeserializer( new ValidatingRequestFieldDeserializerFactory(
+			new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() )
+		) );
 	},
 
 ];

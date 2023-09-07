@@ -11,11 +11,9 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\GetItemLabelValidato
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
-use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
-use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
 use Wikibase\Repo\RestApi\Domain\Services\ItemLabelRetriever;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\RestApi\WbRestApi;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\GetItemLabel
@@ -126,10 +124,7 @@ class GetItemLabelTest extends TestCase {
 		return new GetItemLabel(
 			$this->getRevisionMetadata,
 			$this->labelRetriever,
-			new GetItemLabelValidator(
-				new ItemIdValidator(),
-				new LanguageCodeValidator( WikibaseRepo::getTermsLanguages()->getLanguages() )
-			)
+			new GetItemLabelValidator( WbRestApi::getValidatingRequestDeserializer() )
 		);
 	}
 

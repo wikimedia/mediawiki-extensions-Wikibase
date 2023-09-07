@@ -9,13 +9,12 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\GetItemDescri
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\GetItemDescriptionsResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\GetItemDescriptionsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
-use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
-use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestFieldDeserializerFactory;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\Services\ItemDescriptionsRetriever;
+use Wikibase\Repo\RestApi\WbRestApi;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\GetItemDescriptions
@@ -96,7 +95,7 @@ class GetItemDescriptionsTest extends TestCase {
 		return new GetItemDescriptions(
 			$this->getRevisionMetadata,
 			$this->descriptionsRetriever,
-			new GetItemDescriptionsValidator( new ValidatingRequestDeserializer( new ValidatingRequestFieldDeserializerFactory() ) )
+			new GetItemDescriptionsValidator( WbRestApi::getValidatingRequestDeserializer() )
 		);
 	}
 

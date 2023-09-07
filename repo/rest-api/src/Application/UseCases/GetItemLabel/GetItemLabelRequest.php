@@ -2,10 +2,14 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel;
 
+use Wikibase\Repo\RestApi\Application\UseCases\ItemIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\LanguageCodeRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseRequest;
+
 /**
  * @license GPL-2.0-or-later
  */
-class GetItemLabelRequest {
+class GetItemLabelRequest implements UseCaseRequest, ItemIdRequest, LanguageCodeRequest {
 
 	private string $itemId;
 	private string $languageCode;

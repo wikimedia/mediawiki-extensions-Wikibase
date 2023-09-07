@@ -9,11 +9,10 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetLatestStatementSubjectRevision
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementValidator;
-use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
-use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestFieldDeserializerFactory;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Services\StatementRetriever;
+use Wikibase\Repo\RestApi\WbRestApi;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
 
 /**
@@ -32,9 +31,7 @@ class GetStatementTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->requestValidator = new GetStatementValidator(
-			new ValidatingRequestDeserializer( new ValidatingRequestFieldDeserializerFactory() )
-		);
+		$this->requestValidator = new GetStatementValidator( WbRestApi::getValidatingRequestDeserializer() );
 		$this->statementRetriever = $this->createStub( StatementRetriever::class );
 		$this->getRevisionMetadata = $this->createStub( GetLatestStatementSubjectRevisionMetadata::class );
 	}

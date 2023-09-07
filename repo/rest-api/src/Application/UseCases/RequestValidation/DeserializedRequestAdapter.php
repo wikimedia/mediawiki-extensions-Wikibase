@@ -8,6 +8,7 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\Application\UseCases\DeserializedItemIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\DeserializedLanguageCodeRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\DeserializedPropertyIdFilterRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\DeserializedPropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\DeserializedStatementIdRequest;
@@ -19,7 +20,8 @@ class DeserializedRequestAdapter implements
 	DeserializedItemIdRequest,
 	DeserializedPropertyIdRequest,
 	DeserializedStatementIdRequest,
-	DeserializedPropertyIdFilterRequest
+	DeserializedPropertyIdFilterRequest,
+	DeserializedLanguageCodeRequest
 {
 	private array $deserializedRequest;
 
@@ -41,6 +43,10 @@ class DeserializedRequestAdapter implements
 
 	public function getPropertyIdFilter(): ?PropertyId {
 		return $this->getRequestField( PropertyIdFilterRequestValidatingDeserializer::DESERIALIZED_VALUE );
+	}
+
+	public function getLanguageCode(): string {
+		return $this->getRequestField( LanguageCodeRequestValidatingDeserializer::DESERIALIZED_VALUE );
 	}
 
 	/**

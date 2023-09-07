@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel;
 
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
@@ -29,21 +28,20 @@ class GetItemLabel {
 
 	/**
 	 * @throws UseCaseError
-	 *
 	 * @throws ItemRedirect
 	 */
 	public function execute( GetItemLabelRequest $request ): GetItemLabelResponse {
-		$this->validator->assertValidRequest( $request );
-
-		$itemId = new ItemId( $request->getItemId() );
+		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
+		$itemId = $deserializedRequest->getItemId();
+		$languageCode = $deserializedRequest->getLanguageCode();
 
 		[ $revisionId, $lastModified ] = $this->getLatestRevisionMetadata->execute( $itemId );
 
-		$label = $this->itemLabelRetriever->getLabel( $itemId, $request->getLanguageCode() );
+		$label = $this->itemLabelRetriever->getLabel( $itemId, $languageCode );
 		if ( !$label ) {
 			throw new UseCaseError(
 				UseCaseError::LABEL_NOT_DEFINED,
-				"Item with the ID {$request->getItemId()} does not have a label in the language: {$request->getLanguageCode()}"
+				"Item with the ID {$itemId->getSerialization()} does not have a label in the language: {$languageCode}"
 			);
 		}
 

@@ -36,6 +36,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemSta
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplacePropertyStatement\ReplacePropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
@@ -262,6 +263,10 @@ class WbRestApi {
 
 	public static function getEditMetadataValidator( ContainerInterface $services = null ): EditMetadataValidator {
 		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbRestApi.EditMetadataValidator' );
+	}
+
+	public static function getValidatingRequestDeserializer( ContainerInterface $services = null ): ValidatingRequestDeserializer {
+		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbRestApi.ValidatingRequestDeserializer' );
 	}
 
 }

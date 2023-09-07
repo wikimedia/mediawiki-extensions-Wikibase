@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\DeserializedRequestAdapter;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ItemIdRequestValidatingDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\LanguageCodeRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\PropertyIdFilterRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\PropertyIdRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\StatementIdRequestValidatingDeserializer;
@@ -80,6 +81,19 @@ class DeserializedRequestAdapterTest extends TestCase {
 	public function testGivenNoStatementId_getStatementIdThrows(): void {
 		$this->expectException( LogicException::class );
 		( new DeserializedRequestAdapter( [] ) )->getStatementId();
+	}
+
+	public function testGetLanguageCode(): void {
+		$languageCode = 'en';
+		$requestAdapter = new DeserializedRequestAdapter(
+			[ LanguageCodeRequestValidatingDeserializer::DESERIALIZED_VALUE => $languageCode ]
+		);
+		$this->assertSame( $languageCode, $requestAdapter->getLanguageCode() );
+	}
+
+	public function testGivenNoLanguageCode_getLanguageCodeThrows(): void {
+		$this->expectException( LogicException::class );
+		( new DeserializedRequestAdapter( [] ) )->getLanguageCode();
 	}
 
 }
