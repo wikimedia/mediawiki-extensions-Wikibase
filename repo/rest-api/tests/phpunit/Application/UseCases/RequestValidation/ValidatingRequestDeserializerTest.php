@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\RequestValidation;
 
+use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
@@ -43,20 +44,6 @@ class ValidatingRequestDeserializerTest extends TestCase {
 		);
 	}
 
-	public function testGivenInvalidItemIdRequest_throws(): void {
-		$expectedError = $this->createStub( UseCaseError::class );
-		$factory = $this->newFactoryWithThrowingValidator( ItemIdRequestValidatingDeserializer::class, $expectedError );
-		$request = $this->createStub( ItemIdUseCaseRequest::class );
-		$request->method( 'getItemId' )->willReturn( 'P123' );
-
-		try {
-			$this->newRequestDeserializer( $factory )->validateAndDeserialize( $request );
-			$this->fail( 'expected exception was not thrown' );
-		} catch ( UseCaseError $e ) {
-			$this->assertSame( $expectedError, $e );
-		}
-	}
-
 	public function testGivenValidPropertyIdRequest_returnsDeserializedPropertyId(): void {
 		$request = $this->createStub( PropertyIdUseCaseRequest::class );
 		$request->method( 'getPropertyId' )->willReturn( 'P123' );
@@ -67,20 +54,6 @@ class ValidatingRequestDeserializerTest extends TestCase {
 		);
 	}
 
-	public function testGivenInvalidPropertyIdRequest_throws(): void {
-		$expectedError = $this->createStub( UseCaseError::class );
-		$factory = $this->newFactoryWithThrowingValidator( PropertyIdRequestValidatingDeserializer::class, $expectedError );
-		$request = $this->createStub( PropertyIdUseCaseRequest::class );
-		$request->method( 'getPropertyId' )->willReturn( 'Q123' );
-
-		try {
-			$this->newRequestDeserializer( $factory )->validateAndDeserialize( $request );
-			$this->fail( 'expected exception was not thrown' );
-		} catch ( UseCaseError $e ) {
-			$this->assertSame( $expectedError, $e );
-		}
-	}
-
 	public function testGivenValidLanguageCodeRequest_returnsLanguageCode(): void {
 		$request = $this->createStub( LanguageCodeUseCaseRequest::class );
 		$request->method( 'getLanguageCode' )->willReturn( self::VALID_LANGUAGE_CODE );
@@ -89,18 +62,6 @@ class ValidatingRequestDeserializerTest extends TestCase {
 			[ LanguageCodeRequestValidatingDeserializer::DESERIALIZED_VALUE => self::VALID_LANGUAGE_CODE ],
 			$this->newRequestDeserializer()->validateAndDeserialize( $request )
 		);
-	}
-
-	public function testGivenInvalidLanguageCodeRequest_throws(): void {
-		$expectedError = $this->createStub( UseCaseError::class );
-		$factory = $this->newFactoryWithThrowingValidator( LanguageCodeRequestValidatingDeserializer::class, $expectedError );
-		$request = $this->createStub( LanguageCodeUseCaseRequest::class );
-		try {
-			$this->newRequestDeserializer( $factory )->validateAndDeserialize( $request );
-			$this->fail( 'expected exception was not thrown' );
-		} catch ( UseCaseError $e ) {
-			$this->assertSame( $expectedError, $e );
-		}
 	}
 
 	public function testGivenValidStatementIdRequest_returnsDeserializedStatementId(): void {
@@ -115,20 +76,6 @@ class ValidatingRequestDeserializerTest extends TestCase {
 		);
 	}
 
-	public function testGivenInvalidStatementIdRequest_throws(): void {
-		$expectedError = $this->createStub( UseCaseError::class );
-		$factory = $this->newFactoryWithThrowingValidator( StatementIdRequestValidatingDeserializer::class, $expectedError );
-		$request = $this->createStub( StatementIdUseCaseRequest::class );
-		$request->method( 'getStatementId' )->willReturn( 'Q123$invalid' );
-
-		try {
-			$this->newRequestDeserializer( $factory )->validateAndDeserialize( $request );
-			$this->fail( 'expected exception was not thrown' );
-		} catch ( UseCaseError $e ) {
-			$this->assertSame( $expectedError, $e );
-		}
-	}
-
 	public function testGivenValidPropertyIdFilterRequest_returnsDeserializedPropertyId(): void {
 		$request = $this->createStub( PropertyIdFilterUseCaseRequest::class );
 		$request->method( 'getPropertyIdFilter' )->willReturn( 'P123' );
@@ -139,26 +86,57 @@ class ValidatingRequestDeserializerTest extends TestCase {
 		);
 	}
 
-	private function newRequestDeserializer( ValidatingRequestFieldDeserializerFactory $factory = null ): ValidatingRequestDeserializer {
-		$factory ??= new ValidatingRequestFieldDeserializerFactory( new LanguageCodeValidator( [ self::VALID_LANGUAGE_CODE ] ) );
-		return new ValidatingRequestDeserializer( $factory );
-	}
-
-	private function newFactoryWithThrowingValidator(
-		string $validatorClass,
-		UseCaseError $expectedError
-	): ValidatingRequestFieldDeserializerFactory {
+	/**
+	 * @dataProvider invalidRequestProvider
+	 */
+	public function testGivenInvalidRequest_throws( string $requestClass, string $validatorClass, string $factoryMethod ): void {
+		$expectedError = $this->createStub( UseCaseError::class );
 		$validator = $this->createStub( $validatorClass );
 		$validator->method( 'validateAndDeserialize' )->willThrowException( $expectedError );
 		$factory = $this->createStub( ValidatingRequestFieldDeserializerFactory::class );
-		$factory->method( [
-			ItemIdRequestValidatingDeserializer::class => 'newItemIdRequestValidatingDeserializer',
-			PropertyIdRequestValidatingDeserializer::class => 'newPropertyIdRequestValidatingDeserializer',
-			StatementIdRequestValidatingDeserializer::class => 'newStatementIdRequestValidatingDeserializer',
-			LanguageCodeRequestValidatingDeserializer::class => 'newLanguageCodeRequestValidatingDeserializer',
-		][$validatorClass] )->willReturn( $validator );
+		$factory->method( $factoryMethod )->willReturn( $validator );
 
-		return $factory;
+		$request = $this->createStub( $requestClass );
+
+		try {
+			$this->newRequestDeserializer( $factory )->validateAndDeserialize( $request );
+			$this->fail( 'expected exception was not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedError, $e );
+		}
+	}
+
+	public function invalidRequestProvider(): Generator {
+		yield [
+			ItemIdUseCaseRequest::class,
+			ItemIdRequestValidatingDeserializer::class,
+			'newItemIdRequestValidatingDeserializer',
+		];
+		yield [
+			PropertyIdUseCaseRequest::class,
+			PropertyIdRequestValidatingDeserializer::class,
+			'newPropertyIdRequestValidatingDeserializer',
+		];
+		yield [
+			StatementIdUseCaseRequest::class,
+			StatementIdRequestValidatingDeserializer::class,
+			'newStatementIdRequestValidatingDeserializer',
+		];
+		yield [
+			PropertyIdFilterUseCaseRequest::class,
+			PropertyIdFilterRequestValidatingDeserializer::class,
+			'newPropertyIdFilterRequestValidatingDeserializer',
+		];
+		yield [
+			LanguageCodeUseCaseRequest::class,
+			LanguageCodeRequestValidatingDeserializer::class,
+			'newLanguageCodeRequestValidatingDeserializer',
+		];
+	}
+
+	private function newRequestDeserializer( ValidatingRequestFieldDeserializerFactory $factory = null ): ValidatingRequestDeserializer {
+		$factory ??= new ValidatingRequestFieldDeserializerFactory( new LanguageCodeValidator( [ self::VALID_LANGUAGE_CODE ] ) );
+		return new ValidatingRequestDeserializer( $factory );
 	}
 
 }
