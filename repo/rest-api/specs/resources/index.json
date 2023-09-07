@@ -18,7 +18,10 @@
 		"$ref": "./statements/single-for-item.json"
 	},
 	"/entities/items/{item_id}/labels": {
-		"$ref": "./labels/list.json"
+		"$ref": "./labels/list-for-item.json"
+	},
+	"/entities/properties/{property_id}/labels": {
+		"$ref": "./labels/list-for-property.json"
 	},
 	"/entities/items/{item_id}/labels/{language_code}": {
 		"$ref": "./labels/label-in-language.json"
