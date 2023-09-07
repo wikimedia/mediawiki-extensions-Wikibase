@@ -5,9 +5,11 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\RequestValidation;
 use LogicException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\DeserializedRequestAdapter;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ItemIdRequestValidatingDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\PropertyIdRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\StatementIdRequestValidatingDeserializer;
 
 /**
@@ -31,6 +33,20 @@ class DeserializedRequestAdapterTest extends TestCase {
 	public function testGivenNoItemId_getItemIdThrows(): void {
 		$this->expectException( LogicException::class );
 		( new DeserializedRequestAdapter( [] ) )->getItemId();
+	}
+
+	public function testGetPropertyId(): void {
+		$propertyId = new NumericPropertyId( 'P123' );
+		$requestAdapter = new DeserializedRequestAdapter( [ PropertyIdRequestValidatingDeserializer::DESERIALIZED_VALUE => $propertyId ] );
+		$this->assertSame(
+			$propertyId,
+			$requestAdapter->getPropertyId()
+		);
+	}
+
+	public function testGivenNoPropertyId_getPropertyIdThrows(): void {
+		$this->expectException( LogicException::class );
+		( new DeserializedRequestAdapter( [] ) )->getPropertyId();
 	}
 
 	public function testGetStatementId(): void {

@@ -332,7 +332,7 @@ return [
 
 	'WbRestApi.GetPropertyStatement' => function( MediaWikiServices $services ): GetPropertyStatement {
 		return new GetPropertyStatement(
-			new GetPropertyStatementValidator( new PropertyIdValidator() ),
+			new GetPropertyStatementValidator( new ValidatingRequestDeserializer( new ValidatingRequestFieldDeserializerFactory() ) ),
 			WbRestApi::getAssertPropertyExists( $services ),
 			WbRestApi::getGetStatement( $services )
 		);

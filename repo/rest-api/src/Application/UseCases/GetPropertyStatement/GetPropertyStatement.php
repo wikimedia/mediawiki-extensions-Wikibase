@@ -2,8 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement;
 
-use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementRequest;
@@ -33,13 +31,12 @@ class GetPropertyStatement {
 	 * @throws UseCaseError
 	 */
 	public function execute( GetPropertyStatementRequest $request ): GetStatementResponse {
-		$this->validator->assertValidRequest( $request );
+		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
 		$getStatementRequest = new GetStatementRequest( $request->getStatementId() );
-		$this->getStatement->assertValidRequest( $getStatementRequest );
 
-		$this->assertPropertyExists->execute( new NumericPropertyId( $request->getPropertyId() ) );
+		$this->assertPropertyExists->execute( $deserializedRequest->getPropertyId() );
 
-		if ( strpos( $request->getStatementId(), $request->getPropertyId() . StatementGuid::SEPARATOR ) !== 0 ) {
+		if ( !$deserializedRequest->getStatementId()->getEntityId()->equals( $deserializedRequest->getPropertyId() ) ) {
 			throw new UseCaseError(
 				UseCaseError::STATEMENT_NOT_FOUND,
 				"Could not find a statement with the ID: {$request->getStatementId()}"

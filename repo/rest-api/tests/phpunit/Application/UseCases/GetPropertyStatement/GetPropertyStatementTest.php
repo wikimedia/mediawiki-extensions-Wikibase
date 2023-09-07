@@ -10,6 +10,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\GetPropertyS
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\GetPropertyStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestFieldDeserializerFactory;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 
@@ -29,7 +31,9 @@ class GetPropertyStatementTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->validator = $this->createStub( GetPropertyStatementValidator::class );
+		$this->validator = new GetPropertyStatementValidator(
+			new ValidatingRequestDeserializer( new ValidatingRequestFieldDeserializerFactory() )
+		);
 		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
 		$this->getStatement = $this->createStub( GetStatement::class );
 	}
@@ -51,7 +55,7 @@ class GetPropertyStatementTest extends TestCase {
 	public function testGivenInvalidGetPropertyStatementRequest_throws(): void {
 		$expectedException = $this->createStub( UseCaseException::class );
 		$this->validator = $this->createStub( GetPropertyStatementValidator::class );
-		$this->validator->method( 'assertValidRequest' )->willThrowException( $expectedException );
+		$this->validator->method( 'validateAndDeserialize' )->willThrowException( $expectedException );
 
 		try {
 			$this->newUseCase()->execute(
@@ -78,19 +82,6 @@ class GetPropertyStatementTest extends TestCase {
 					'P999999999$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE'
 				)
 			);
-			$this->fail( 'expected exception was not thrown' );
-		} catch ( UseCaseException $e ) {
-			$this->assertSame( $expectedException, $e );
-		}
-	}
-
-	public function testGivenInvalidGetStatementRequest_throws(): void {
-		$expectedException = $this->createStub( UseCaseException::class );
-		$this->getStatement = $this->createStub( GetStatement::class );
-		$this->getStatement->method( 'assertValidRequest' )->willThrowException( $expectedException );
-
-		try {
-			$this->newUseCase()->execute( new GetPropertyStatementRequest( 'P123', 'P123$invalid' ) );
 			$this->fail( 'expected exception was not thrown' );
 		} catch ( UseCaseException $e ) {
 			$this->assertSame( $expectedException, $e );

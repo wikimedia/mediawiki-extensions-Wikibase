@@ -5,6 +5,7 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\RequestValidation;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
+use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
 
 /**
@@ -14,6 +15,10 @@ class ValidatingRequestFieldDeserializerFactory {
 
 	public function newItemIdRequestValidatingDeserializer(): ItemIdRequestValidatingDeserializer {
 		return new ItemIdRequestValidatingDeserializer( new ItemIdValidator() );
+	}
+
+	public function newPropertyIdRequestValidatingDeserializer(): PropertyIdRequestValidatingDeserializer {
+		return new PropertyIdRequestValidatingDeserializer( new PropertyIdValidator() );
 	}
 
 	public function newStatementIdRequestValidatingDeserializer(): StatementIdRequestValidatingDeserializer {

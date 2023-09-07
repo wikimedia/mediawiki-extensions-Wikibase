@@ -4,14 +4,16 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\RequestValidation;
 
 use LogicException;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\Application\UseCases\DeserializedItemIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\DeserializedPropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\DeserializedStatementIdRequest;
 
 /**
  * @license GPL-2.0-or-later
  */
-class DeserializedRequestAdapter implements DeserializedItemIdRequest, DeserializedStatementIdRequest {
+class DeserializedRequestAdapter implements DeserializedItemIdRequest, DeserializedPropertyIdRequest, DeserializedStatementIdRequest {
 	private array $deserializedRequest;
 
 	public function __construct( array $deserializedRequest ) {
@@ -20,6 +22,10 @@ class DeserializedRequestAdapter implements DeserializedItemIdRequest, Deseriali
 
 	public function getItemId(): ItemId {
 		return $this->getRequestField( ItemIdRequestValidatingDeserializer::DESERIALIZED_VALUE );
+	}
+
+	public function getPropertyId(): NumericPropertyId {
+		return $this->getRequestField( PropertyIdRequestValidatingDeserializer::DESERIALIZED_VALUE );
 	}
 
 	public function getStatementId(): StatementGuid {
