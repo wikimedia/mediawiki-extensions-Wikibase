@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Specials;
 
 use Html;
 use HTMLForm;
-use RequestContext;
 use WebRequest;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Interactors\TermSearchResult;
@@ -12,7 +11,6 @@ use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Api\EntitySearchException;
 use Wikibase\Repo\Api\EntitySearchHelper;
-use Wikibase\Repo\Api\TypeDispatchingEntitySearchHelper;
 use Wikibase\Repo\ItemDisambiguation;
 
 /**
@@ -66,7 +64,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	}
 
 	public static function factory(
-		array $entitySearchHelperCallbacks,
+		EntitySearchHelper $entitySearchHelper,
 		EntityTitleLookup $entityTitleLookup,
 		LanguageNameLookup $languageNameLookup,
 		ContentLanguages $termsLanguages
@@ -79,10 +77,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 			$termsLanguages,
 			$languageNameLookup,
 			$itemDisambiguation,
-			new TypeDispatchingEntitySearchHelper(
-				$entitySearchHelperCallbacks,
-				RequestContext::getMain()->getRequest()
-			)
+			$entitySearchHelper
 		);
 	}
 
