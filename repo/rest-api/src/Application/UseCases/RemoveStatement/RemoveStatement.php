@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement;
+namespace Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement;
 
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
@@ -16,9 +16,9 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 /**
  * @license GPL-2.0-or-later
  */
-class RemoveItemStatement {
+class RemoveStatement {
 
-	private RemoveItemStatementValidator $validator;
+	private RemoveStatementValidator $validator;
 	private StatementGuidParser $statementIdParser;
 	private AssertItemExists $assertItemExists;
 	private ItemRetriever $itemRetriever;
@@ -26,7 +26,7 @@ class RemoveItemStatement {
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
 
 	public function __construct(
-		RemoveItemStatementValidator $validator,
+		RemoveStatementValidator $validator,
 		StatementGuidParser $statementGuidParser,
 		AssertItemExists $assertItemExists,
 		ItemRetriever $itemRetriever,
@@ -45,7 +45,7 @@ class RemoveItemStatement {
 	 * @throws ItemRedirect
 	 * @throws UseCaseError
 	 */
-	public function execute( RemoveItemStatementRequest $request ): void {
+	public function execute( RemoveStatementRequest $request ): void {
 		$this->validator->assertValidRequest( $request );
 
 		$statementId = $this->statementIdParser->parse( $request->getStatementId() );

@@ -61,8 +61,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyStatement\PatchPrope
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchedStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementValidator;
-use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplacePropertyStatement\ReplacePropertyStatement;
@@ -456,9 +456,9 @@ return [
 		);
 	},
 
-	'WbRestApi.RemoveItemStatement' => function( MediaWikiServices $services ): RemoveItemStatement {
-		return new RemoveItemStatement(
-			new RemoveItemStatementValidator(
+	'WbRestApi.RemoveStatement' => function( MediaWikiServices $services ): RemoveStatement {
+		return new RemoveStatement(
+			new RemoveStatementValidator(
 				new ItemIdValidator(),
 				new StatementIdValidator( new ItemIdParser() ),
 				WbRestApi::getEditMetadataValidator( $services )

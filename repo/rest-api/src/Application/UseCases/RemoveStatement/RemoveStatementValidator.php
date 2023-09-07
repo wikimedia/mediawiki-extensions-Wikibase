@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement;
+namespace Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement;
 
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
@@ -10,7 +10,7 @@ use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
 /**
  * @license GPL-2.0-or-later
  */
-class RemoveItemStatementValidator {
+class RemoveStatementValidator {
 
 	private StatementIdValidator $statementIdValidator;
 	private ItemIdValidator $itemIdValidator;
@@ -26,7 +26,7 @@ class RemoveItemStatementValidator {
 		$this->editMetadataValidator = $editMetadataValidator;
 	}
 
-	public function assertValidRequest( RemoveItemStatementRequest $request ): void {
+	public function assertValidRequest( RemoveStatementRequest $request ): void {
 		$this->assertValidItemId( $request->getItemId() );
 		$this->assertValidStatementId( $request->getStatementId() );
 		$this->assertValidComment( $request->getComment() );
