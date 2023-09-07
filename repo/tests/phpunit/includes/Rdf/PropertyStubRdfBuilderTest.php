@@ -134,4 +134,27 @@ class PropertyStubRdfBuilderTest extends MediaWikiIntegrationTestCase {
 		$this->assertOrCreateNTriples( 'P2_terms', $this->writer );
 	}
 
+	public function testAddEntityStub_whenPropertiesFromOtherWikibase(): void {
+		$propertyId = new NumericPropertyId( 'P2' );
+		$this->termLookup->setData( [
+			$this->getTestData()->getEntity( 'P2' ),
+		] );
+		$writer = $this->getTestData()->getNTriplesWriterForPropertiesFromOtherWikibase();
+		$builder = new PropertyStubRdfBuilder(
+			$this->termLookup,
+			$this->dataTypeLookup,
+			$this->termsLanguages,
+			$this->getTestData()->getVocabularyForPropertiesFromOtherWikibase(),
+			$writer,
+			[],
+			[]
+		);
+
+		$builder->markForPrefetchingEntityStub( $propertyId );
+
+		$builder->addEntityStub( $propertyId );
+
+		$this->assertOrCreateNTriples( 'P2_terms_foreignsource', $writer );
+	}
+
 }

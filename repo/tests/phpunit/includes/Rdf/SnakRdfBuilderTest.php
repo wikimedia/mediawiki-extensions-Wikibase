@@ -52,22 +52,14 @@ class SnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		return $this->helper->getTestData();
 	}
 
-	/**
-	 * @param string $propertyNamespace
-	 * @param string $propertyValueLName
-	 * @param string $dataType
-	 * @param Snak|null $snak
-	 * @param EntityId[] &$mentioned receives the IDs of any mentioned entities.
-	 *
-	 * @return SnakRdfBuilder
-	 */
 	private function newBuilder(
-		$propertyNamespace,
-		$propertyValueLName,
-		$dataType,
-		Snak $snak = null,
-		array &$mentioned = []
-	) {
+		string $propertyNamespace,
+		string $propertyValueLName,
+		string $dataType,
+		?Snak $snak = null,
+		array &$mentioned = [],
+		?RdfVocabulary $vocabulary = null
+	): SnakRdfBuilder {
 		$mentionTracker = $this->createMock( EntityMentionListener::class );
 		$mentionTracker->method( 'propertyMentioned' )
 			->willReturnCallback( function( EntityId $id ) use ( &$mentioned ) {
@@ -86,7 +78,9 @@ class SnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 				->method( 'addValue' );
 		}
 
-		$vocabulary = $this->getTestData()->getVocabulary();
+		if ( $vocabulary === null ) {
+			$vocabulary = $this->getTestData()->getVocabulary();
+		}
 
 		$builder = new SnakRdfBuilder( $vocabulary, $valueBuilder, $this->getTestData()->getMockRepository() );
 		$builder->setEntityMentionListener( $mentionTracker );
@@ -147,6 +141,33 @@ class SnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			RdfVocabulary::NSP_DIRECT_CLAIM,
 			$propertyId->getSerialization(),
 			'wikibase-item'
+		);
+
+		$expectedTriples = [
+			'<http://acme.test/Q11> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://acme.test/prop/novalue/P2> .',
+		];
+
+		$builder->addSnak( $writer, RdfVocabulary::NS_VALUE, $snak, RdfVocabulary::NSP_DIRECT_CLAIM, 'statement-ID' );
+
+		$this->helper->assertNTriplesEquals( $expectedTriples, $writer->drain() );
+	}
+
+	public function testAddSnakValue_novalue_whenPropertiesFromOtherWikibase() {
+		$propertyId = new NumericPropertyId( 'P2' );
+		$snak = new PropertyNoValueSnak( $propertyId );
+
+		$writer = $this->getTestData()->getNTriplesWriterForPropertiesFromOtherWikibase();
+		$writer->about( RdfVocabulary::NS_ENTITY, 'Q11' );
+
+		$mentioned = [];
+
+		$builder = $this->newBuilder(
+			RdfVocabulary::NSP_DIRECT_CLAIM,
+			$propertyId->getSerialization(),
+			'wikibase-item',
+			null,
+			$mentioned,
+			$this->getTestData()->getVocabularyForPropertiesFromOtherWikibase()
 		);
 
 		$expectedTriples = [
