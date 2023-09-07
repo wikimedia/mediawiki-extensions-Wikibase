@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Specials;
 
 use Message;
@@ -39,28 +41,18 @@ class SpecialNewItem extends SpecialNewEntity {
 	public const FIELD_SITE = 'site';
 	public const FIELD_PAGE = 'page';
 
-	/**
-	 * @var TermValidatorFactory
-	 */
-	private $termValidatorFactory;
+	private TermValidatorFactory $termValidatorFactory;
 
-	/**
-	 * @var TermsCollisionDetector
-	 */
-	private $termsCollisionDetector;
+	private TermsCollisionDetector $termsCollisionDetector;
 
-	/** @var ValidatorErrorLocalizer */
-	private $errorLocalizer;
+	private ValidatorErrorLocalizer $errorLocalizer;
 
-	/**
-	 * @var SiteLinkTargetProvider
-	 */
-	private $siteLinkTargetProvider;
+	private SiteLinkTargetProvider $siteLinkTargetProvider;
 
 	/**
 	 * @var string[]
 	 */
-	private $siteLinkGroups;
+	private array $siteLinkGroups;
 
 	public function __construct(
 		array $tags,
@@ -130,21 +122,15 @@ class SpecialNewItem extends SpecialNewEntity {
 
 	/**
 	 * @see SpecialNewEntity::doesWrites
-	 *
-	 * @return bool
 	 */
-	public function doesWrites() {
+	public function doesWrites(): bool {
 		return true;
 	}
 
 	/**
 	 * @see SpecialNewEntity::createEntityFromFormData
-	 *
-	 * @param array $formData
-	 *
-	 * @return Item
 	 */
-	protected function createEntityFromFormData( array $formData ) {
+	protected function createEntityFromFormData( array $formData ): Item {
 		$languageCode = $formData[ self::FIELD_LANG ];
 
 		$item = new Item();
@@ -166,7 +152,7 @@ class SpecialNewItem extends SpecialNewEntity {
 	/**
 	 * @return array[]
 	 */
-	protected function getFormFields() {
+	protected function getFormFields(): array {
 		$formFields = [
 			self::FIELD_LANG => [
 				'name' => self::FIELD_LANG,
@@ -249,12 +235,7 @@ class SpecialNewItem extends SpecialNewEntity {
 		return $formFields;
 	}
 
-	/**
-	 * @see SpecialNewEntity::getLegend
-	 *
-	 * @return string|Message Message key or Message object
-	 */
-	protected function getLegend() {
+	protected function getLegend(): Message {
 		return $this->msg( 'wikibase-newitem-fieldset' );
 	}
 
@@ -263,7 +244,7 @@ class SpecialNewItem extends SpecialNewEntity {
 	 *
 	 * @return string[]
 	 */
-	protected function getWarnings() {
+	protected function getWarnings(): array {
 		if ( !$this->getUser()->isRegistered() ) {
 			return [
 				$this->msg( 'wikibase-anonymouseditwarning', $this->msg( 'wikibase-entity-item' ) )->parse(),
@@ -273,12 +254,7 @@ class SpecialNewItem extends SpecialNewEntity {
 		return [];
 	}
 
-	/**
-	 * @param array $formData
-	 *
-	 * @return Status
-	 */
-	protected function validateFormData( array $formData ) {
+	protected function validateFormData( array $formData ): Status {
 		$status = Status::newGood();
 
 		if ( $formData[ self::FIELD_LABEL ] == ''
@@ -363,7 +339,7 @@ class SpecialNewItem extends SpecialNewEntity {
 	 * @return Summary
 	 * @suppress PhanParamSignatureMismatch Uses intersection types
 	 */
-	protected function createSummary( EntityDocument $item ) {
+	protected function createSummary( EntityDocument $item ): Summary {
 		$uiLanguageCode = $this->getLanguage()->getCode();
 
 		$summary = new Summary( 'wbeditentity', 'create' );
@@ -380,7 +356,7 @@ class SpecialNewItem extends SpecialNewEntity {
 		return $summary;
 	}
 
-	protected function displayBeforeForm( OutputPage $output ) {
+	protected function displayBeforeForm( OutputPage $output ): void {
 		parent::displayBeforeForm( $output );
 		$output->addModules( 'wikibase.special.languageLabelDescriptionAliases' );
 	}
@@ -388,7 +364,7 @@ class SpecialNewItem extends SpecialNewEntity {
 	/**
 	 * @inheritDoc
 	 */
-	protected function getEntityType() {
+	protected function getEntityType(): string {
 		return Item::ENTITY_TYPE;
 	}
 
