@@ -3,7 +3,9 @@
 namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
 
 use PHPUnit\Framework\TestCase;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookupException;
 use Wikibase\Lib\StaticContentLanguages;
@@ -11,21 +13,22 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\TermLookupItemDataRetriever;
+use Wikibase\Repo\RestApi\Infrastructure\DataAccess\TermLookupEntityTermsRetriever;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Infrastructure\DataAccess\TermLookupItemDataRetriever
+ * @covers \Wikibase\Repo\RestApi\Infrastructure\DataAccess\TermLookupEntityTermsRetriever
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class TermLookupItemDataRetrieverTest extends TestCase {
+class TermLookupEntityTermsRetrieverTest extends TestCase {
 
 	private const ALL_TERM_LANGUAGES = [ 'de', 'en', 'ko' ];
 	private const ITEM_ID = 'Q123';
+	private const PROPERTY_ID = 'P123';
 
-	public function testGetLabels(): void {
+	public function testGetItemLabels(): void {
 		$itemId = new ItemId( self::ITEM_ID );
 
 		$termLookup = $this->createMock( TermLookup::class );
@@ -48,14 +51,37 @@ class TermLookupItemDataRetrieverTest extends TestCase {
 		);
 	}
 
+	public function testGetPropertyLabels(): void {
+		$propertyId = new NumericPropertyId( self::PROPERTY_ID );
+
+		$termLookup = $this->createMock( TermLookup::class );
+		$termLookup->expects( $this->once() )
+			->method( 'getLabels' )
+			->with( $propertyId, self::ALL_TERM_LANGUAGES )
+			->willReturn( [
+				'en' => 'potato',
+				'de' => 'Kartoffel',
+				'ko' => '감자',
+			] );
+
+		$this->assertEquals(
+			( $this->newTermRetriever( $termLookup ) )->getLabels( $propertyId ),
+			new Labels(
+				new Label( 'en', 'potato' ),
+				new Label( 'de', 'Kartoffel' ),
+				new Label( 'ko', '감자' ),
+			)
+		);
+	}
+
 	public function testLabelsLookupThrowsLookupException_returnsNull(): void {
-		$itemId = new ItemId( self::ITEM_ID );
+		$entityId = $this->createStub( EntityId::class );
 
 		$termLookup = $this->createStub( TermLookup::class );
 		$termLookup->method( 'getLabels' )
-			->willThrowException( new TermLookupException( $itemId, [] ) );
+			->willThrowException( new TermLookupException( $entityId, [] ) );
 
-		$this->assertNull( $this->newTermRetriever( $termLookup )->getLabels( $itemId ) );
+		$this->assertNull( $this->newTermRetriever( $termLookup )->getLabels( $entityId ) );
 	}
 
 	public function testGetLabel(): void {
@@ -114,8 +140,8 @@ class TermLookupItemDataRetrieverTest extends TestCase {
 		$this->assertNull( $this->newTermRetriever( $termLookup )->getDescriptions( $itemId ) );
 	}
 
-	private function newTermRetriever( TermLookup $termLookup ): TermLookupItemDataRetriever {
-		return new TermLookupItemDataRetriever(
+	private function newTermRetriever( TermLookup $termLookup ): TermLookupEntityTermsRetriever {
+		return new TermLookupEntityTermsRetriever(
 			$termLookup,
 			new StaticContentLanguages( self::ALL_TERM_LANGUAGES )
 		);

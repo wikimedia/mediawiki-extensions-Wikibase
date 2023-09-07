@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
 
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookupException;
@@ -14,11 +15,18 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemDescriptionRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemDescriptionsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemLabelRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemLabelsRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyLabelsRetriever;
 
 /**
  * @license GPL-2.0-or-later
  */
-class TermLookupItemDataRetriever implements ItemLabelRetriever, ItemLabelsRetriever, ItemDescriptionRetriever, ItemDescriptionsRetriever {
+class TermLookupEntityTermsRetriever implements
+	ItemLabelRetriever,
+	ItemLabelsRetriever,
+	ItemDescriptionRetriever,
+	ItemDescriptionsRetriever,
+	PropertyLabelsRetriever
+{
 
 	private TermLookup $termLookup;
 	private ContentLanguages $termLanguages;
@@ -39,9 +47,9 @@ class TermLookupItemDataRetriever implements ItemLabelRetriever, ItemLabelsRetri
 		return $labelText !== null ? new Label( $languageCode, $labelText ) : null;
 	}
 
-	public function getLabels( ItemId $itemId ): ?Labels {
+	public function getLabels( EntityId $entityId ): ?Labels {
 		try {
-			$labels = $this->termLookup->getLabels( $itemId, $this->termLanguages->getLanguages() );
+			$labels = $this->termLookup->getLabels( $entityId, $this->termLanguages->getLanguages() );
 		} catch ( TermLookupException $e ) {
 			// this probably means that the item does not exist, which should be checked prior to calling this method
 			return null;
