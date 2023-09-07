@@ -2,25 +2,29 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements;
 
+use Wikibase\Repo\RestApi\Application\UseCases\ItemIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdFilterRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseRequest;
+
 /**
  * @license GPL-2.0-or-later
  */
-class GetItemStatementsRequest {
+class GetItemStatementsRequest implements UseCaseRequest, ItemIdRequest, PropertyIdFilterRequest {
 
 	private string $itemId;
-	private ?string $statementPropertyId;
+	private ?string $propertyIdFilter;
 
-	public function __construct( string $itemId, ?string $statementPropertyId = null ) {
+	public function __construct( string $itemId, ?string $propertyIdFilter = null ) {
 		$this->itemId = $itemId;
-		$this->statementPropertyId = $statementPropertyId;
+		$this->propertyIdFilter = $propertyIdFilter;
 	}
 
 	public function getItemId(): string {
 		return $this->itemId;
 	}
 
-	public function getStatementPropertyId(): ?string {
-		return $this->statementPropertyId;
+	public function getPropertyIdFilter(): ?string {
+		return $this->propertyIdFilter;
 	}
 
 }

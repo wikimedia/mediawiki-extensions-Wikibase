@@ -9,10 +9,10 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\GetItemStatemen
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\GetItemStatementsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\GetItemStatementsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestFieldDeserializerFactory;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
-use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
-use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementsRetriever;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
@@ -26,12 +26,16 @@ use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
  */
 class GetItemStatementsTest extends TestCase {
 
+	private GetItemStatementsValidator $requestValidator;
 	private GetLatestItemRevisionMetadata $getRevisionMetadata;
 	private ItemStatementsRetriever $statementsRetriever;
 
 	protected function setUp(): void {
 		parent::setUp();
 
+		$this->requestValidator = new GetItemStatementsValidator(
+			new ValidatingRequestDeserializer( new ValidatingRequestFieldDeserializerFactory() )
+		);
 		$this->getRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
 		$this->statementsRetriever = $this->createStub( ItemStatementsRetriever::class );
 	}
@@ -89,14 +93,22 @@ class GetItemStatementsTest extends TestCase {
 		$this->assertSame( $expectedStatements, $response->getStatements() );
 	}
 
-	public function testGivenInvalidItemId_throwsException(): void {
+	public function testGivenInvalidRequest_throwsException(): void {
+		$request = $this->createStub( GetItemStatementsRequest::class );
+		$expectedError = $this->createStub( UseCaseError::class );
+
+		$this->requestValidator = $this->createMock( GetItemStatementsValidator::class );
+		$this->requestValidator->expects( $this->once() )
+			->method( 'validateAndDeserialize' )
+			->with( $request )
+			->willThrowException( $expectedError );
+
 		try {
-			$this->newUseCase()->execute( new GetItemStatementsRequest( 'X321' ) );
+			$this->newUseCase()->execute( $request );
 
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::INVALID_ITEM_ID, $e->getErrorCode() );
-			$this->assertSame( 'Not a valid item ID: X321', $e->getErrorMessage() );
+			$this->assertSame( $expectedError, $e );
 		}
 	}
 
@@ -118,7 +130,7 @@ class GetItemStatementsTest extends TestCase {
 
 	private function newUseCase(): GetItemStatements {
 		return new GetItemStatements(
-			new GetItemStatementsValidator( new ItemIdValidator(), new PropertyIdValidator() ),
+			$this->requestValidator,
 			$this->statementsRetriever,
 			$this->getRevisionMetadata
 		);

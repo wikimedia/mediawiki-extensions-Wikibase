@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\RequestValidation;
 
 use Wikibase\Repo\RestApi\Application\UseCases\ItemIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdFilterRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\StatementIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
@@ -27,6 +28,7 @@ class ValidatingRequestDeserializer {
 			ItemIdRequest::class => [ $this->factory, 'newItemIdRequestValidatingDeserializer' ],
 			PropertyIdRequest::class => [ $this->factory, 'newPropertyIdRequestValidatingDeserializer' ],
 			StatementIdRequest::class => [ $this->factory, 'newStatementIdRequestValidatingDeserializer' ],
+			PropertyIdFilterRequest::class => [ $this->factory, 'newPropertyIdFilterRequestValidatingDeserializer' ],
 		];
 		$result = [];
 

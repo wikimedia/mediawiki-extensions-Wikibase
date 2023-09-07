@@ -7,8 +7,10 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdFilterRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ItemIdRequestValidatingDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\PropertyIdFilterRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\PropertyIdRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\StatementIdRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
@@ -100,6 +102,16 @@ class ValidatingRequestDeserializerTest extends TestCase {
 		}
 	}
 
+	public function testGivenValidPropertyIdFilterRequest_returnsDeserializedPropertyId(): void {
+		$request = $this->createStub( PropertyIdFilterUseCaseRequest::class );
+		$request->method( 'getPropertyIdFilter' )->willReturn( 'P123' );
+
+		$this->assertEquals(
+			[ PropertyIdFilterRequestValidatingDeserializer::DESERIALIZED_VALUE => new NumericPropertyId( 'P123' ) ],
+			$this->newRequestDeserializer()->validateAndDeserialize( $request )
+		);
+	}
+
 	private function newRequestDeserializer( ValidatingRequestFieldDeserializerFactory $factory = null ): ValidatingRequestDeserializer {
 		$factory ??= new ValidatingRequestFieldDeserializerFactory();
 		return new ValidatingRequestDeserializer( $factory );
@@ -128,4 +140,5 @@ class ValidatingRequestDeserializerTest extends TestCase {
 interface ItemIdUseCaseRequest extends UseCaseRequest, ItemIdRequest {}
 interface PropertyIdUseCaseRequest extends UseCaseRequest, PropertyIdRequest {}
 interface StatementIdUseCaseRequest extends UseCaseRequest, StatementIdRequest {}
+interface PropertyIdFilterUseCaseRequest extends UseCaseRequest, PropertyIdFilterRequest {}
 // @codingStandardsIgnoreEnd

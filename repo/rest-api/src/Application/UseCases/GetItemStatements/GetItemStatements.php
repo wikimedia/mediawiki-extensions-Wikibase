@@ -2,8 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements;
 
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
@@ -33,19 +31,14 @@ class GetItemStatements {
 	 * @throws UseCaseError
 	 */
 	public function execute( GetItemStatementsRequest $request ): GetItemStatementsResponse {
-		$this->validator->assertValidRequest( $request );
-
-		$itemId = new ItemId( $request->getItemId() );
-		$requestedFilterPropertyId = $request->getStatementPropertyId();
-		$filterPropertyId = $requestedFilterPropertyId
-			? new NumericPropertyId( $requestedFilterPropertyId )
-			: null;
+		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
+		$itemId = $deserializedRequest->getItemId();
 
 		[ $revisionId, $lastModified ] = $this->getLatestRevisionMetadata->execute( $itemId );
 
 		return new GetItemStatementsResponse(
 			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Item validated and exists
-			$this->statementsRetriever->getStatements( $itemId, $filterPropertyId ),
+			$this->statementsRetriever->getStatements( $itemId, $deserializedRequest->getPropertyIdFilter() ),
 			$lastModified,
 			$revisionId,
 		);

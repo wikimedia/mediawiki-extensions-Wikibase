@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\DeserializedRequestAdapter;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ItemIdRequestValidatingDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\PropertyIdFilterRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\PropertyIdRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\StatementIdRequestValidatingDeserializer;
 
@@ -47,6 +48,22 @@ class DeserializedRequestAdapterTest extends TestCase {
 	public function testGivenNoPropertyId_getPropertyIdThrows(): void {
 		$this->expectException( LogicException::class );
 		( new DeserializedRequestAdapter( [] ) )->getPropertyId();
+	}
+
+	public function testGetPropertyIdFilter(): void {
+		$propertyId = new NumericPropertyId( 'P123' );
+		$requestAdapter = new DeserializedRequestAdapter(
+			[ PropertyIdFilterRequestValidatingDeserializer::DESERIALIZED_VALUE => $propertyId ]
+		);
+		$this->assertSame(
+			$propertyId,
+			$requestAdapter->getPropertyIdFilter()
+		);
+	}
+
+	public function testGivenNoPropertyIdFilter_getPropertyIdFilterThrows(): void {
+		$this->expectException( LogicException::class );
+		( new DeserializedRequestAdapter( [] ) )->getPropertyIdFilter();
 	}
 
 	public function testGetStatementId(): void {

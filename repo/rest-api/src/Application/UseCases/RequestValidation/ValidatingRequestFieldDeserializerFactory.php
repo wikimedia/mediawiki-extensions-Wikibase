@@ -30,4 +30,8 @@ class ValidatingRequestFieldDeserializerFactory {
 		);
 	}
 
+	public function newPropertyIdFilterRequestValidatingDeserializer(): PropertyIdFilterRequestValidatingDeserializer {
+		return new PropertyIdFilterRequestValidatingDeserializer( new PropertyIdValidator() );
+	}
+
 }
