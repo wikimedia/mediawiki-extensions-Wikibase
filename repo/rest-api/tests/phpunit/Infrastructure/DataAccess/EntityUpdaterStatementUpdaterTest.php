@@ -24,7 +24,7 @@ use Wikibase\Repo\RestApi\Infrastructure\DataAccess\Exceptions\StatementUpdateFa
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\StatementSubjectRetriever;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdater
+ * @covers \Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdaterStatementUpdater
  *
  * @group Wikibase
  *

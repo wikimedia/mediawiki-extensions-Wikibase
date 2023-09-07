@@ -20,7 +20,9 @@ use Wikibase\Repo\RestApi\RouteHandlers\SetItemLabelRouteHandler;
 
 /**
  * @covers \Wikibase\Repo\RestApi\RouteHandlers\SetItemLabelRouteHandler
+ *
  * @group Wikibase
+ *
  * @license GPL-2.0-or-later
  */
 class SetItemLabelRouteHandlerTest extends MediaWikiIntegrationTestCase {
