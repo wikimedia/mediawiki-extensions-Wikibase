@@ -36,7 +36,7 @@ class ValidatingRequestDeserializer {
 
 		foreach ( class_implements( $request ) as $requestType ) {
 			if ( isset( $requestTypeToValidatorMap[$requestType] ) ) {
-				$result = array_merge( $result, $requestTypeToValidatorMap[$requestType]()->validateAndDeserialize( $request ) );
+				$result[$requestType] = $requestTypeToValidatorMap[$requestType]()->validateAndDeserialize( $request );
 			}
 		}
 

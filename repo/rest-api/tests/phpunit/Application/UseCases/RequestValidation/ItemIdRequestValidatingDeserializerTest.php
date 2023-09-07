@@ -23,7 +23,7 @@ class ItemIdRequestValidatingDeserializerTest extends TestCase {
 		$request->method( 'getItemId' )->willReturn( 'Q123' );
 
 		$this->assertEquals(
-			[ ItemIdRequestValidatingDeserializer::DESERIALIZED_VALUE => new ItemId( 'Q123' ) ],
+			new ItemId( 'Q123' ),
 			( new ItemIdRequestValidatingDeserializer( new ItemIdValidator() ) )->validateAndDeserialize( $request )
 		);
 	}

@@ -7,12 +7,12 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Statement\StatementGuid;
+use Wikibase\Repo\RestApi\Application\UseCases\ItemIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\LanguageCodeRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdFilterRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\DeserializedRequestAdapter;
-use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ItemIdRequestValidatingDeserializer;
-use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\LanguageCodeRequestValidatingDeserializer;
-use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\PropertyIdFilterRequestValidatingDeserializer;
-use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\PropertyIdRequestValidatingDeserializer;
-use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\StatementIdRequestValidatingDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCases\StatementIdRequest;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\DeserializedRequestAdapter
@@ -25,7 +25,7 @@ class DeserializedRequestAdapterTest extends TestCase {
 
 	public function testGetItemId(): void {
 		$itemId = new ItemId( 'Q123' );
-		$requestAdapter = new DeserializedRequestAdapter( [ ItemIdRequestValidatingDeserializer::DESERIALIZED_VALUE => $itemId ] );
+		$requestAdapter = new DeserializedRequestAdapter( [ ItemIdRequest::class => $itemId ] );
 		$this->assertSame(
 			$itemId,
 			$requestAdapter->getItemId()
@@ -39,7 +39,7 @@ class DeserializedRequestAdapterTest extends TestCase {
 
 	public function testGetPropertyId(): void {
 		$propertyId = new NumericPropertyId( 'P123' );
-		$requestAdapter = new DeserializedRequestAdapter( [ PropertyIdRequestValidatingDeserializer::DESERIALIZED_VALUE => $propertyId ] );
+		$requestAdapter = new DeserializedRequestAdapter( [ PropertyIdRequest::class => $propertyId ] );
 		$this->assertSame(
 			$propertyId,
 			$requestAdapter->getPropertyId()
@@ -53,9 +53,7 @@ class DeserializedRequestAdapterTest extends TestCase {
 
 	public function testGetPropertyIdFilter(): void {
 		$propertyId = new NumericPropertyId( 'P123' );
-		$requestAdapter = new DeserializedRequestAdapter(
-			[ PropertyIdFilterRequestValidatingDeserializer::DESERIALIZED_VALUE => $propertyId ]
-		);
+		$requestAdapter = new DeserializedRequestAdapter( [ PropertyIdFilterRequest::class => $propertyId ] );
 		$this->assertSame(
 			$propertyId,
 			$requestAdapter->getPropertyIdFilter()
@@ -69,9 +67,7 @@ class DeserializedRequestAdapterTest extends TestCase {
 
 	public function testGetStatementId(): void {
 		$statementId = new StatementGuid( new ItemId( 'Q123' ), 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
-		$requestAdapter = new DeserializedRequestAdapter(
-			[ StatementIdRequestValidatingDeserializer::DESERIALIZED_VALUE => $statementId ]
-		);
+		$requestAdapter = new DeserializedRequestAdapter( [ StatementIdRequest::class => $statementId ] );
 		$this->assertSame(
 			$statementId,
 			$requestAdapter->getStatementId()
@@ -85,9 +81,7 @@ class DeserializedRequestAdapterTest extends TestCase {
 
 	public function testGetLanguageCode(): void {
 		$languageCode = 'en';
-		$requestAdapter = new DeserializedRequestAdapter(
-			[ LanguageCodeRequestValidatingDeserializer::DESERIALIZED_VALUE => $languageCode ]
-		);
+		$requestAdapter = new DeserializedRequestAdapter( [ LanguageCodeRequest::class => $languageCode ] );
 		$this->assertSame( $languageCode, $requestAdapter->getLanguageCode() );
 	}
 

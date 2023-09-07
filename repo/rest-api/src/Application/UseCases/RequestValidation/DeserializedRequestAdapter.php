@@ -12,6 +12,11 @@ use Wikibase\Repo\RestApi\Application\UseCases\DeserializedLanguageCodeRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\DeserializedPropertyIdFilterRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\DeserializedPropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\DeserializedStatementIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\ItemIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\LanguageCodeRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdFilterRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\StatementIdRequest;
 
 /**
  * @license GPL-2.0-or-later
@@ -30,23 +35,23 @@ class DeserializedRequestAdapter implements
 	}
 
 	public function getItemId(): ItemId {
-		return $this->getRequestField( ItemIdRequestValidatingDeserializer::DESERIALIZED_VALUE );
+		return $this->getRequestField( ItemIdRequest::class );
 	}
 
 	public function getPropertyId(): NumericPropertyId {
-		return $this->getRequestField( PropertyIdRequestValidatingDeserializer::DESERIALIZED_VALUE );
+		return $this->getRequestField( PropertyIdRequest::class );
 	}
 
 	public function getStatementId(): StatementGuid {
-		return $this->getRequestField( StatementIdRequestValidatingDeserializer::DESERIALIZED_VALUE );
+		return $this->getRequestField( StatementIdRequest::class );
 	}
 
 	public function getPropertyIdFilter(): ?PropertyId {
-		return $this->getRequestField( PropertyIdFilterRequestValidatingDeserializer::DESERIALIZED_VALUE );
+		return $this->getRequestField( PropertyIdFilterRequest::class );
 	}
 
 	public function getLanguageCode(): string {
-		return $this->getRequestField( LanguageCodeRequestValidatingDeserializer::DESERIALIZED_VALUE );
+		return $this->getRequestField( LanguageCodeRequest::class );
 	}
 
 	/**

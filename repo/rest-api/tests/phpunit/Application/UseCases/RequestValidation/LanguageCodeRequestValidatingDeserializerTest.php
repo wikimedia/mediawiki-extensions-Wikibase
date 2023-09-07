@@ -23,7 +23,7 @@ class LanguageCodeRequestValidatingDeserializerTest extends TestCase {
 		$request->method( 'getLanguageCode' )->willReturn( 'en' );
 
 		$this->assertEquals(
-			[ LanguageCodeRequestValidatingDeserializer::DESERIALIZED_VALUE => 'en' ],
+			'en',
 			$this->newValidatingDeserializerRequest()->validateAndDeserialize( $request )
 		);
 	}

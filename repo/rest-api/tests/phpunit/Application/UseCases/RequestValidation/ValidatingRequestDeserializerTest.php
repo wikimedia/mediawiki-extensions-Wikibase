@@ -39,7 +39,7 @@ class ValidatingRequestDeserializerTest extends TestCase {
 		$request->method( 'getItemId' )->willReturn( 'Q123' );
 
 		$this->assertEquals(
-			[ ItemIdRequestValidatingDeserializer::DESERIALIZED_VALUE => new ItemId( 'Q123' ) ],
+			[ ItemIdRequest::class => new ItemId( 'Q123' ) ],
 			$this->newRequestDeserializer()->validateAndDeserialize( $request )
 		);
 	}
@@ -49,7 +49,7 @@ class ValidatingRequestDeserializerTest extends TestCase {
 		$request->method( 'getPropertyId' )->willReturn( 'P123' );
 
 		$this->assertEquals(
-			[ PropertyIdRequestValidatingDeserializer::DESERIALIZED_VALUE => new NumericPropertyId( 'P123' ) ],
+			[ PropertyIdRequest::class => new NumericPropertyId( 'P123' ) ],
 			$this->newRequestDeserializer()->validateAndDeserialize( $request )
 		);
 	}
@@ -59,7 +59,7 @@ class ValidatingRequestDeserializerTest extends TestCase {
 		$request->method( 'getLanguageCode' )->willReturn( self::VALID_LANGUAGE_CODE );
 
 		$this->assertEquals(
-			[ LanguageCodeRequestValidatingDeserializer::DESERIALIZED_VALUE => self::VALID_LANGUAGE_CODE ],
+			[ LanguageCodeRequest::class => self::VALID_LANGUAGE_CODE ],
 			$this->newRequestDeserializer()->validateAndDeserialize( $request )
 		);
 	}
@@ -68,10 +68,9 @@ class ValidatingRequestDeserializerTest extends TestCase {
 		$statementId = new StatementGuid( new ItemId( 'Q123' ), 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 		$request = $this->createStub( StatementIdUseCaseRequest::class );
 		$request->method( 'getStatementId' )->willReturn( "$statementId" );
-		$statementId = new StatementGuid( new ItemId( 'Q123' ), 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 
 		$this->assertEquals(
-			[ StatementIdRequestValidatingDeserializer::DESERIALIZED_VALUE => $statementId ],
+			[ StatementIdRequest::class => $statementId ],
 			$this->newRequestDeserializer()->validateAndDeserialize( $request )
 		);
 	}
@@ -81,7 +80,7 @@ class ValidatingRequestDeserializerTest extends TestCase {
 		$request->method( 'getPropertyIdFilter' )->willReturn( 'P123' );
 
 		$this->assertEquals(
-			[ PropertyIdFilterRequestValidatingDeserializer::DESERIALIZED_VALUE => new NumericPropertyId( 'P123' ) ],
+			[ PropertyIdFilterRequest::class => new NumericPropertyId( 'P123' ) ],
 			$this->newRequestDeserializer()->validateAndDeserialize( $request )
 		);
 	}

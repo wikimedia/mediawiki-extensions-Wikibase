@@ -11,7 +11,6 @@ use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
  * @license GPL-2.0-or-later
  */
 class ItemIdRequestValidatingDeserializer {
-	public const DESERIALIZED_VALUE = 'item-id';
 	private ItemIdValidator $itemIdValidator;
 
 	public function __construct( ItemIdValidator $validator ) {
@@ -21,7 +20,7 @@ class ItemIdRequestValidatingDeserializer {
 	/**
 	 * @throws UseCaseError
 	 */
-	public function validateAndDeserialize( ItemIdRequest $request ): array {
+	public function validateAndDeserialize( ItemIdRequest $request ): ItemId {
 		$validationError = $this->itemIdValidator->validate( $request->getItemId() );
 		if ( $validationError ) {
 			throw new UseCaseError(
@@ -29,7 +28,7 @@ class ItemIdRequestValidatingDeserializer {
 				"Not a valid item ID: {$validationError->getContext()[ItemIdValidator::CONTEXT_VALUE]}"
 			);
 		}
-		return [ self::DESERIALIZED_VALUE => new ItemId( $request->getItemId() ) ];
+		return new ItemId( $request->getItemId() );
 	}
 
 }
