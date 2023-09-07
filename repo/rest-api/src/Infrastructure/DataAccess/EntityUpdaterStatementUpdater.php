@@ -10,7 +10,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\StatementRevision;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\RestApi\Domain\Services\StatementUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\Exceptions\EntityUpdateFailed;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\Exceptions\StatementUpdateFailed;
+use Wikibase\Repo\RestApi\Infrastructure\DataAccess\Exceptions\StatementSubjectDisappeared;
 
 /**
  * @license GPL-2.0-or-later
@@ -36,7 +36,7 @@ class EntityUpdaterStatementUpdater implements StatementUpdater {
 
 	/**
 	 * @throws EntityUpdateFailed
-	 * @throws StatementUpdateFailed
+	 * @throws StatementSubjectDisappeared
 	 */
 	public function update( Statement $statement, EditMetadata $editMetadata ): StatementRevision {
 		if ( $statement->getGuid() === null ) {
@@ -50,7 +50,7 @@ class EntityUpdaterStatementUpdater implements StatementUpdater {
 		// if $subject is null, then it went missing between the use case
 		// subject assertion and invoking the statement updater by the use case
 		if ( $subject === null ) {
-			throw new StatementUpdateFailed();
+			throw new StatementSubjectDisappeared();
 		}
 
 		$subject->getStatements()->replaceStatement( $statementId, $statement );
