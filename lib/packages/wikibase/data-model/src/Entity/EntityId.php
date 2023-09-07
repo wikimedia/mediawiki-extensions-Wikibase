@@ -33,6 +33,21 @@ interface EntityId extends Serializable {
 	public function equals( $target );
 
 	/**
+	 * @see Serializable::serialize()
+	 * @return string|null
+	 * @deprecated Use {@link self::getSerialization()} instead.
+	 */
+	public function serialize();
+
+	/**
+	 * @see Serializable::unserialize()
+	 * @param string $data
+	 * @return void
+	 * @deprecated There should be no reason to use this.
+	 */
+	public function unserialize( $data );
+
+	/**
 	 * This method replaces {@link Serializable::serialize()}.
 	 * Do not call it manually.
 	 * Also, consider using {@link getSerialization()} and an {@link EntityIdParser}

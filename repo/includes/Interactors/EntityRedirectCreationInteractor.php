@@ -162,7 +162,7 @@ abstract class EntityRedirectCreationInteractor {
 					throw new RedirectCreationException(
 						"Couldn't get Title for $entityId or Title is not deleted",
 						'no-such-entity',
-						[ $entityId->serialize() ]
+						[ $entityId->getSerialization() ]
 					);
 				}
 			} else {
@@ -191,7 +191,7 @@ abstract class EntityRedirectCreationInteractor {
 			throw new RedirectCreationException(
 				$ex->getMessage(),
 				'no-such-entity',
-				[ $entityId->serialize() ],
+				[ $entityId->getSerialization() ],
 				$ex
 			);
 		}
@@ -200,7 +200,7 @@ abstract class EntityRedirectCreationInteractor {
 			throw new RedirectCreationException(
 				"Entity $entityId is a redirect",
 				'target-is-redirect',
-				[ $entityId->serialize() ]
+				[ $entityId->getSerialization() ]
 			);
 		}
 	}

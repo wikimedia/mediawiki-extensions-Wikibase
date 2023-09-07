@@ -37,7 +37,7 @@ class EntityIdValue extends DataValueObject {
 	 * @return string
 	 */
 	public function getSerializationForHash(): string {
-		$data = $this->entityId->serialize();
+		$data = $this->entityId->getSerialization();
 		$innerSerialization = 'C:' . strlen( get_class( $this->entityId ) ) . ':"' . get_class( $this->entityId ) .
 		'":' . strlen( $data ) . ':{' . $data . '}';
 
