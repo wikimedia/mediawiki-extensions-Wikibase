@@ -1,46 +1,28 @@
-<?php declare( strict_types=1 );
+<?php declare( strict_types = 1 );
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetItem;
 
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\DeserializedRequestAdapter;
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
-use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
 
 /**
  * @license GPL-2.0-or-later
  */
 class GetItemValidator {
 
-	private ItemIdValidator $itemIdValidator;
+	private ValidatingRequestDeserializer $requestDeserializer;
 
-	public function __construct( ItemIdValidator $itemIdValidator ) {
-		$this->itemIdValidator = $itemIdValidator;
+	public function __construct( ValidatingRequestDeserializer $requestDeserializer ) {
+		$this->requestDeserializer = $requestDeserializer;
 	}
 
 	/**
 	 * @throws UseCaseError
 	 */
-	public function assertValidRequest( GetItemRequest $request ): void {
-		$validationError = $this->itemIdValidator->validate( $request->getItemId() );
-		if ( $validationError ) {
-			throw new UseCaseError(
-				UseCaseError::INVALID_ITEM_ID,
-				"Not a valid item ID: {$validationError->getContext()[ItemIdValidator::CONTEXT_VALUE]}"
-			);
-		}
-
-		$this->validateFields( $request->getFields() );
+	public function validateAndDeserialize( GetItemRequest $request ): DeserializedGetItemRequest {
+		return new class( $this->requestDeserializer->validateAndDeserialize( $request ) )
+			extends DeserializedRequestAdapter implements DeserializedGetItemRequest {
+		};
 	}
-
-	/**
-	 * @throws UseCaseError
-	 */
-	private function validateFields( array $fields ): void {
-		foreach ( $fields as $field ) {
-			if ( !in_array( $field, ItemParts::VALID_FIELDS ) ) {
-				throw new UseCaseError( UseCaseError::INVALID_FIELD, "Not a valid field: $field" );
-			}
-		}
-	}
-
 }

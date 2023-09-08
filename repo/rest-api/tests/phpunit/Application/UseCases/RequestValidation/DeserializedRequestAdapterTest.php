@@ -7,6 +7,7 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Statement\StatementGuid;
+use Wikibase\Repo\RestApi\Application\UseCases\ItemFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\LanguageCodeRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdFilterRequest;
@@ -88,6 +89,17 @@ class DeserializedRequestAdapterTest extends TestCase {
 	public function testGivenNoLanguageCode_getLanguageCodeThrows(): void {
 		$this->expectException( LogicException::class );
 		( new DeserializedRequestAdapter( [] ) )->getLanguageCode();
+	}
+
+	public function testGetItemFields(): void {
+		$fields = [ 'labels' ];
+		$requestAdapter = new DeserializedRequestAdapter( [ ItemFieldsRequest::class => $fields ] );
+		$this->assertSame( $fields, $requestAdapter->getItemFields() );
+	}
+
+	public function testGivenNoItemFields_getItemFieldsThrows(): void {
+		$this->expectException( LogicException::class );
+		( new DeserializedRequestAdapter( [] ) )->getItemFields();
 	}
 
 }

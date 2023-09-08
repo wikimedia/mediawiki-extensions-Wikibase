@@ -207,7 +207,7 @@ return [
 		return new GetItem(
 			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
 			WbRestApi::getItemDataRetriever( $services ),
-			new GetItemValidator( new ItemIdValidator() )
+			new GetItemValidator( WbRestApi::getValidatingRequestDeserializer( $services ) )
 		);
 	},
 

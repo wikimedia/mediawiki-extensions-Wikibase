@@ -4,6 +4,9 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItem\DeserializedGetItemRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItemRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItemValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\DeserializedGetItemDescriptionsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\GetItemDescriptionsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\GetItemDescriptionsValidator;
@@ -25,6 +28,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementValidato
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
 
 /**
+ * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItemValidator
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\GetItemDescriptionsValidator
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabelsValidator
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\GetItemStatementsValidator
@@ -85,6 +89,11 @@ class UseCaseValidatorsTest extends TestCase {
 			GetItemLabelValidator::class,
 			GetItemLabelRequest::class,
 			DeserializedGetItemLabelRequest::class,
+		];
+		yield [
+			GetItemValidator::class,
+			GetItemRequest::class,
+			DeserializedGetItemRequest::class,
 		];
 	}
 

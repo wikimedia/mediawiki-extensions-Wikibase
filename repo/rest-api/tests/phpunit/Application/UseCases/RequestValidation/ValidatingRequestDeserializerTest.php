@@ -7,6 +7,7 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Statement\StatementGuid;
+use Wikibase\Repo\RestApi\Application\UseCases\ItemFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\LanguageCodeRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdFilterRequest;
@@ -84,6 +85,17 @@ class ValidatingRequestDeserializerTest extends TestCase {
 		);
 	}
 
+	public function testGivenValidItemFieldsRequest_returnsDeserializedItemFields(): void {
+		$fields = [ 'labels', 'descriptions' ];
+		$request = $this->createStub( ItemFieldsUseCaseRequest::class );
+		$request->method( 'getItemFields' )->willReturn( $fields );
+
+		$this->assertEquals(
+			[ ItemFieldsRequest::class => $fields ],
+			$this->newRequestDeserializer()->validateAndDeserialize( $request )
+		);
+	}
+
 	/**
 	 * @dataProvider invalidRequestProvider
 	 */
@@ -130,6 +142,11 @@ class ValidatingRequestDeserializerTest extends TestCase {
 			LanguageCodeRequestValidatingDeserializer::class,
 			'newLanguageCodeRequestValidatingDeserializer',
 		];
+		yield [
+			ItemFieldsUseCaseRequest::class,
+			MappedRequestValidatingDeserializer::class,
+			'newItemFieldsRequestValidatingDeserializer',
+		];
 	}
 
 	private function newRequestDeserializer( ValidatingRequestFieldDeserializerFactory $factory = null ): ValidatingRequestDeserializer {
@@ -146,4 +163,5 @@ interface PropertyIdUseCaseRequest extends UseCaseRequest, PropertyIdRequest {}
 interface StatementIdUseCaseRequest extends UseCaseRequest, StatementIdRequest {}
 interface PropertyIdFilterUseCaseRequest extends UseCaseRequest, PropertyIdFilterRequest {}
 interface LanguageCodeUseCaseRequest extends UseCaseRequest, LanguageCodeRequest {}
+interface ItemFieldsUseCaseRequest extends UseCaseRequest, ItemFieldsRequest {}
 // @codingStandardsIgnoreEnd

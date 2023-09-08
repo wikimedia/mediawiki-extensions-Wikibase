@@ -7,11 +7,13 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Statement\StatementGuid;
+use Wikibase\Repo\RestApi\Application\UseCases\DeserializedItemFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\DeserializedItemIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\DeserializedLanguageCodeRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\DeserializedPropertyIdFilterRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\DeserializedPropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\DeserializedStatementIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\ItemFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\LanguageCodeRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdFilterRequest;
@@ -26,7 +28,8 @@ class DeserializedRequestAdapter implements
 	DeserializedPropertyIdRequest,
 	DeserializedStatementIdRequest,
 	DeserializedPropertyIdFilterRequest,
-	DeserializedLanguageCodeRequest
+	DeserializedLanguageCodeRequest,
+	DeserializedItemFieldsRequest
 {
 	private array $deserializedRequest;
 
@@ -52,6 +55,10 @@ class DeserializedRequestAdapter implements
 
 	public function getLanguageCode(): string {
 		return $this->getRequestField( LanguageCodeRequest::class );
+	}
+
+	public function getItemFields(): array {
+		return $this->getRequestField( ItemFieldsRequest::class );
 	}
 
 	/**

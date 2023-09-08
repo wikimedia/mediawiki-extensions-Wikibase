@@ -11,13 +11,13 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItemValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
-use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemPartsBuilder;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemPartsRetriever;
+use Wikibase\Repo\RestApi\WbRestApi;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItem
@@ -53,7 +53,7 @@ class GetItemTest extends TestCase {
 		$itemResponse = ( new GetItem(
 			$getRevisionMetadata,
 			$itemPartsRetriever,
-			new GetItemValidator( new ItemIdValidator() )
+			new GetItemValidator( WbRestApi::getValidatingRequestDeserializer() )
 		) )->execute( new GetItemRequest( self::ITEM_ID, $requestedFields ) );
 
 		$this->assertInstanceOf( GetItemResponse::class, $itemResponse );
@@ -74,7 +74,7 @@ class GetItemTest extends TestCase {
 			( new GetItem(
 				$getRevisionMetadata,
 				$this->createStub( ItemPartsRetriever::class ),
-				new GetItemValidator( new ItemIdValidator() )
+				new GetItemValidator( WbRestApi::getValidatingRequestDeserializer() )
 			) )->execute( new GetItemRequest( $itemId ) );
 
 			$this->fail( 'this should not be reached' );
@@ -89,7 +89,7 @@ class GetItemTest extends TestCase {
 			( new GetItem(
 				$this->createStub( GetLatestItemRevisionMetadata::class ),
 				$this->createStub( ItemPartsRetriever::class ),
-				new GetItemValidator( new ItemIdValidator() )
+				new GetItemValidator( WbRestApi::getValidatingRequestDeserializer() )
 			) )->execute( new GetItemRequest( $itemId ) );
 
 			$this->fail( 'this should not be reached' );

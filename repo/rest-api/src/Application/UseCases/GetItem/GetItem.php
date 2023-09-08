@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetItem;
 
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
@@ -32,14 +31,14 @@ class GetItem {
 	 * @throws ItemRedirect
 	 */
 	public function execute( GetItemRequest $itemRequest ): GetItemResponse {
-		$this->validator->assertValidRequest( $itemRequest );
+		$deserializedRequest = $this->validator->validateAndDeserialize( $itemRequest );
+		$itemId = $deserializedRequest->getItemId();
 
-		$itemId = new ItemId( $itemRequest->getItemId() );
 		[ $revisionId, $lastModified ] = $this->getLatestRevisionMetadata->execute( $itemId );
 
 		return new GetItemResponse(
 			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Item validated and exists
-			$this->itemPartsRetriever->getItemParts( $itemId, $itemRequest->getFields() ),
+			$this->itemPartsRetriever->getItemParts( $itemId, $deserializedRequest->getItemFields() ),
 			$lastModified,
 			$revisionId
 		);

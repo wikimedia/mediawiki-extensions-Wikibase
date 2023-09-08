@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\RequestValidation;
 
+use Wikibase\Repo\RestApi\Application\UseCases\ItemFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\LanguageCodeRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdFilterRequest;
@@ -31,6 +32,7 @@ class ValidatingRequestDeserializer {
 			StatementIdRequest::class => [ $this->factory, 'newStatementIdRequestValidatingDeserializer' ],
 			PropertyIdFilterRequest::class => [ $this->factory, 'newPropertyIdFilterRequestValidatingDeserializer' ],
 			LanguageCodeRequest::class => [ $this->factory, 'newLanguageCodeRequestValidatingDeserializer' ],
+			ItemFieldsRequest::class => [ $this->factory, 'newItemFieldsRequestValidatingDeserializer' ],
 		];
 		$result = [];
 
