@@ -62,6 +62,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyStatement\PatchPrope
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchedStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatement;
@@ -84,6 +85,7 @@ use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
+use Wikibase\Repo\RestApi\Domain\Services\StatementRemover;
 use Wikibase\Repo\RestApi\Domain\Services\StatementUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupItemDataRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupPropertyDataRetriever;
@@ -91,6 +93,7 @@ use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupStatemen
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdaterItemUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdaterPropertyUpdater;
+use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdaterStatementRemover;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdaterStatementUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\PrefetchingTermLookupAliasesRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\StatementSubjectRetriever;
@@ -456,18 +459,24 @@ return [
 		);
 	},
 
+	'WbRestApi.RemoveItemStatement' => function( MediaWikiServices $services ): RemoveItemStatement {
+		return new RemoveItemStatement(
+			WbRestApi::getAssertItemExists( $services ),
+			WbRestApi::getRemoveStatement( $services )
+		);
+	},
+
 	'WbRestApi.RemoveStatement' => function( MediaWikiServices $services ): RemoveStatement {
 		return new RemoveStatement(
 			new RemoveStatementValidator(
-				new ItemIdValidator(),
 				new StatementIdValidator( new ItemIdParser() ),
 				WbRestApi::getEditMetadataValidator( $services )
 			),
 			new StatementGuidParser( new ItemIdParser() ),
-			WbRestApi::getAssertItemExists( $services ),
-			WbRestApi::getItemDataRetriever( $services ),
-			WbRestApi::getItemUpdater( $services ),
-			WbRestApi::getAssertUserIsAuthorized( $services )
+			WbRestApi::getAssertUserIsAuthorized( $services ),
+			WbRestApi::getAssertStatementSubjectExists( $services ),
+			WbRestApi::getStatementRetriever( $services ),
+			WbRestApi::getStatementRemover( $services )
 		);
 	},
 
@@ -563,6 +572,13 @@ return [
 		return new StatementDeserializer(
 			$propertyValuePairDeserializer,
 			new ReferenceDeserializer( $propertyValuePairDeserializer )
+		);
+	},
+
+	'WbRestApi.StatementRemover' => function( MediaWikiServices $services ): StatementRemover {
+		return new EntityUpdaterStatementRemover(
+			new StatementSubjectRetriever( WikibaseRepo::getEntityRevisionLookup( $services ) ),
+			WbRestApi::getEntityUpdater( $services ),
 		);
 	},
 

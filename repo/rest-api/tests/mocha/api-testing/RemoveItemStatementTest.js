@@ -174,7 +174,6 @@ describe( 'DELETE statement', () => {
 	} );
 
 	describe( 'long route specific errors', () => {
-
 		it( 'responds 400 for invalid item ID', async () => {
 			const itemId = 'X123';
 			const statementId = 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';

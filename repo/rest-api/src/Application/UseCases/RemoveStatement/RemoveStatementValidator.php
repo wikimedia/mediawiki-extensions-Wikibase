@@ -4,7 +4,6 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement;
 
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
 
 /**
@@ -13,38 +12,20 @@ use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
 class RemoveStatementValidator {
 
 	private StatementIdValidator $statementIdValidator;
-	private ItemIdValidator $itemIdValidator;
 	private EditMetadataValidator $editMetadataValidator;
 
 	public function __construct(
-		ItemIdValidator $itemIdValidator,
 		StatementIdValidator $statementIdValidator,
 		EditMetadataValidator $editMetadataValidator
 	) {
-		$this->itemIdValidator = $itemIdValidator;
 		$this->statementIdValidator = $statementIdValidator;
 		$this->editMetadataValidator = $editMetadataValidator;
 	}
 
 	public function assertValidRequest( RemoveStatementRequest $request ): void {
-		$this->assertValidItemId( $request->getItemId() );
 		$this->assertValidStatementId( $request->getStatementId() );
 		$this->assertValidComment( $request->getComment() );
 		$this->assertValidEditTags( $request->getEditTags() );
-	}
-
-	private function assertValidItemId( ?string $itemId ): void {
-		if ( $itemId === null ) {
-			return;
-		}
-
-		$validationError = $this->itemIdValidator->validate( $itemId );
-		if ( $validationError ) {
-			throw new UseCaseError(
-				UseCaseError::INVALID_ITEM_ID,
-				"Not a valid item ID: {$validationError->getContext()[ItemIdValidator::CONTEXT_VALUE]}"
-			);
-		}
 	}
 
 	private function assertValidStatementId( string $statementId ): void {
