@@ -387,7 +387,7 @@
 			"class": "Wikibase\\Repo\\Specials\\SpecialItemDisambiguation",
 			"factory": "Wikibase\\Repo\\Specials\\SpecialItemDisambiguation::factory",
 			"services": [
-				"WikibaseRepo.EntitySearchHelperCallbacks",
+				"WikibaseRepo.EntitySearchHelper",
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.LanguageNameLookup",
 				"WikibaseRepo.TermsLanguages"
