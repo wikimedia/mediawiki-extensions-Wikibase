@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests;
 
 use MediaWiki\Title\Title;
@@ -30,10 +32,7 @@ class ItemDisambiguationTest extends MediaWikiIntegrationTestCase {
 		$this->setUserLang( 'qqx' );
 	}
 
-	/**
-	 * @return ItemDisambiguation
-	 */
-	private function newInstance() {
+	private function newInstance(): ItemDisambiguation {
 		$entityTitleLookup = $this->createMock( EntityTitleLookup::class );
 		$entityTitleLookup->method( 'getTitleForId' )
 			->willReturn( $this->createMock( Title::class ) );
