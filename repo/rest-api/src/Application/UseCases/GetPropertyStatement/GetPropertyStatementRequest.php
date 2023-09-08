@@ -2,10 +2,14 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement;
 
+use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\StatementIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseRequest;
+
 /**
  * @license GPL-2.0-or-later
  */
-class GetPropertyStatementRequest {
+class GetPropertyStatementRequest implements UseCaseRequest, PropertyIdRequest, StatementIdRequest {
 
 	private string $propertyId;
 	private string $statementId;

@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\RequestValidation;
 
 use Wikibase\Repo\RestApi\Application\UseCases\ItemIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\StatementIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseRequest;
@@ -24,6 +25,7 @@ class ValidatingRequestDeserializer {
 	public function validateAndDeserialize( UseCaseRequest $request ): array {
 		$requestTypeToValidatorMap = [
 			ItemIdRequest::class => [ $this->factory, 'newItemIdRequestValidatingDeserializer' ],
+			PropertyIdRequest::class => [ $this->factory, 'newPropertyIdRequestValidatingDeserializer' ],
 			StatementIdRequest::class => [ $this->factory, 'newStatementIdRequestValidatingDeserializer' ],
 		];
 		$result = [];
