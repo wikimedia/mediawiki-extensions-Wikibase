@@ -2,16 +2,15 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\GetStatement;
 
-use Generator;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestStatementSubjectRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestFieldDeserializerFactory;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Services\StatementRetriever;
@@ -33,19 +32,18 @@ class GetStatementTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->requestValidator = $this->createStub( GetStatementValidator::class );
+		$this->requestValidator = new GetStatementValidator(
+			new ValidatingRequestDeserializer( new ValidatingRequestFieldDeserializerFactory() )
+		);
 		$this->statementRetriever = $this->createStub( StatementRetriever::class );
 		$this->getRevisionMetadata = $this->createStub( GetLatestStatementSubjectRevisionMetadata::class );
 	}
 
-	/**
-	 * @dataProvider subjectIdProvider
-	 */
-	public function testGetStatement( EntityId $subjectId ): void {
+	public function testGetStatement(): void {
 		$revision = 987;
 		$lastModified = '20201111070707';
 		$guidPart = 'c48c32c3-42b5-498f-9586-84608b88747c';
-		$statementId = new StatementGuid( $subjectId, $guidPart );
+		$statementId = new StatementGuid( new ItemId( 'Q123' ), $guidPart );
 		$expectedStatement = NewStatementReadModel::forProperty( 'P123' )
 			->withGuid( (string)$statementId )
 			->withValue( 'potato' )
@@ -78,7 +76,7 @@ class GetStatementTest extends TestCase {
 
 		$this->requestValidator = $this->createMock( GetStatementValidator::class );
 		$this->requestValidator->expects( $this->once() )
-			->method( 'assertValidRequest' )
+			->method( 'validateAndDeserialize' )
 			->with( $request )
 			->willThrowException( $useCaseError );
 
@@ -90,12 +88,9 @@ class GetStatementTest extends TestCase {
 		}
 	}
 
-	/**
-	 * @dataProvider subjectIdProvider
-	 */
-	public function testStatementSubjectNotFoundOrRedirect_throws( EntityId $subjectId ): void {
+	public function testStatementSubjectNotFoundOrRedirect_throws(): void {
 		$expectedException = $this->createStub( UseCaseException::class );
-		$statementId = $subjectId . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+		$statementId = 'P123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 
 		$this->getRevisionMetadata = $this->createStub( GetLatestStatementSubjectRevisionMetadata::class );
 		$this->getRevisionMetadata->method( 'execute' )->willThrowException( $expectedException );
@@ -110,10 +105,9 @@ class GetStatementTest extends TestCase {
 	}
 
 	public function testStatementNotFound_throwsUseCaseError(): void {
-		$subjectId = new ItemId( 'Q321' );
 		$revision = 987;
 		$lastModified = '20201111070707';
-		$statementId = $subjectId . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+		$statementId = 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 
 		$this->getRevisionMetadata = $this->createStub( GetLatestStatementSubjectRevisionMetadata::class );
 		$this->getRevisionMetadata->method( 'execute' )->willReturn( [ $revision, $lastModified ] );
@@ -125,11 +119,6 @@ class GetStatementTest extends TestCase {
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::STATEMENT_NOT_FOUND, $e->getErrorCode() );
 		}
-	}
-
-	public static function subjectIdProvider(): Generator {
-		yield 'item id' => [ new ItemId( 'Q123' ) ];
-		yield 'property id' => [ new NumericPropertyId( 'P123' ) ];
 	}
 
 	private function newUseCase(): GetStatement {

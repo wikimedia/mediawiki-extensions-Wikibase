@@ -2,8 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetStatement;
 
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestStatementSubjectRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Services\StatementRetriever;
@@ -30,11 +28,8 @@ class GetStatement {
 	/**
 	 * @throws UseCaseError
 	 */
-	public function execute( GetStatementRequest $statementRequest ): GetStatementResponse {
-		$this->assertValidRequest( $statementRequest );
-
-		$statementIdParser = new StatementGuidParser( new BasicEntityIdParser() );
-		$statementId = $statementIdParser->parse( $statementRequest->getStatementId() );
+	public function execute( GetStatementRequest $request ): GetStatementResponse {
+		$statementId = $this->validator->validateAndDeserialize( $request )->getStatementId();
 
 		[ $revisionId, $lastModified ] = $this->getRevisionMetadata->execute( $statementId );
 
@@ -49,8 +44,9 @@ class GetStatement {
 		return new GetStatementResponse( $statement, $lastModified, $revisionId );
 	}
 
-	public function assertValidRequest( GetStatementRequest $request ): void {
-		$this->validator->assertValidRequest( $request );
+	// will be obsolete once T344994 is done
+	public function assertValidRequest( GetStatementRequest $request ): DeserializedGetStatementRequest {
+		return $this->validator->validateAndDeserialize( $request );
 	}
 
 }

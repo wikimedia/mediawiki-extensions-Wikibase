@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\RequestValidation;
 
 use Wikibase\Repo\RestApi\Application\UseCases\ItemIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\StatementIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseRequest;
 
@@ -23,12 +24,12 @@ class ValidatingRequestDeserializer {
 	public function validateAndDeserialize( UseCaseRequest $request ): array {
 		$requestTypeToValidatorMap = [
 			ItemIdRequest::class => [ $this->factory, 'newItemIdRequestValidatingDeserializer' ],
+			StatementIdRequest::class => [ $this->factory, 'newStatementIdRequestValidatingDeserializer' ],
 		];
 		$result = [];
 
 		foreach ( class_implements( $request ) as $requestType ) {
 			if ( isset( $requestTypeToValidatorMap[$requestType] ) ) {
-				// @phan-suppress-next-line PhanTypeMismatchArgument - We know what we're doing here but might think of a better way later.
 				$result = array_merge( $result, $requestTypeToValidatorMap[$requestType]()->validateAndDeserialize( $request ) );
 			}
 		}
