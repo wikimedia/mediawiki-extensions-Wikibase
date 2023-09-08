@@ -11,11 +11,13 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\LanguageNameLookupFactory;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\TermIndexEntry;
 use Wikibase\Repo\Api\EntitySearchException;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\ItemDisambiguation;
+use Wikibase\Repo\ItemDisambiguationFactory;
 use Wikibase\Repo\Specials\SpecialItemDisambiguation;
 
 /**
@@ -40,14 +42,15 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 		$this->simulateSearchBackendError = false;
 	}
 
-	private function getMockItemDisambiguation(): ItemDisambiguation {
+	private function getMockItemDisambiguationFactory(): ItemDisambiguationFactory {
 		$mock = $this->createMock( ItemDisambiguation::class );
 		$mock->method( 'getHTML' )
 			->willReturnCallback( function ( $searchResult ) {
 				return '<span class="mock-span" >ItemDisambiguationHTML-' . count( $searchResult ) . '</span>';
 			} );
 
-		return $mock;
+		return $this->createConfiguredMock( ItemDisambiguationFactory::class,
+			[ 'getForLanguage' => $mock ] );
 	}
 
 	private function getMockSearchHelper(): EntitySearchHelper {
@@ -98,20 +101,21 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 		return new StaticContentLanguages( [ 'ar', 'de', 'en', 'fr' ] );
 	}
 
-	private function getMockLanguageNameLookup(): LanguageNameLookup {
+	private function getMockLanguageNameLookupFactory(): LanguageNameLookupFactory {
 		$mock = $this->createMock( LanguageNameLookup::class );
 		$mock->method( 'getName' )
 			->willReturn( '<LANG>' );
 
-		return $mock;
+		return $this->createConfiguredMock( LanguageNameLookupFactory::class,
+			[ 'getForLanguage' => $mock ] );
 	}
 
 	protected function newSpecialPage(): SpecialItemDisambiguation {
 		return new SpecialItemDisambiguation(
-			$this->getContentLanguages(),
-			$this->getMockLanguageNameLookup(),
-			$this->getMockItemDisambiguation(),
-			$this->getMockSearchHelper()
+			$this->getMockSearchHelper(),
+			$this->getMockItemDisambiguationFactory(),
+			$this->getMockLanguageNameLookupFactory(),
+			$this->getContentLanguages()
 		);
 	}
 

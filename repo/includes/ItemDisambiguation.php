@@ -14,6 +14,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 /**
  * Class representing the disambiguation of a list of WikibaseItems.
  *
+ * @see ItemDisambiguationFactory
  * @license GPL-2.0-or-later
  */
 class ItemDisambiguation {

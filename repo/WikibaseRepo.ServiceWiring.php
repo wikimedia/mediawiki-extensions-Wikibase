@@ -187,6 +187,7 @@ use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\Interactors\TokenCheckInteractor;
+use Wikibase\Repo\ItemDisambiguationFactory;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataSerializationService;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;
@@ -1260,6 +1261,13 @@ return [
 
 	'WikibaseRepo.InternalFormatEntityDeserializer' => function ( MediaWikiServices $services ): Deserializer {
 		return WikibaseRepo::getInternalFormatDeserializerFactory( $services )->newEntityDeserializer();
+	},
+
+	'WikibaseRepo.ItemDisambiguationFactory' => function ( MediaWikiServices $services ): ItemDisambiguationFactory {
+		return new ItemDisambiguationFactory(
+			WikibaseRepo::getEntityTitleLookup( $services ),
+			WikibaseRepo::getLanguageNameLookupFactory( $services )
+		);
 	},
 
 	'WikibaseRepo.ItemHandler' => function ( MediaWikiServices $services ): ItemHandler {

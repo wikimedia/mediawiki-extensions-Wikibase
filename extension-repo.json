@@ -385,11 +385,10 @@
 		},
 		"ItemDisambiguation": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialItemDisambiguation",
-			"factory": "Wikibase\\Repo\\Specials\\SpecialItemDisambiguation::factory",
 			"services": [
 				"WikibaseRepo.EntitySearchHelper",
-				"WikibaseRepo.EntityTitleLookup",
-				"WikibaseRepo.LanguageNameLookup",
+				"WikibaseRepo.ItemDisambiguationFactory",
+				"WikibaseRepo.LanguageNameLookupFactory",
 				"WikibaseRepo.TermsLanguages"
 			]
 		},
