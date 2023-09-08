@@ -24,12 +24,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseRequest;
 class ValidatingRequestDeserializerTest extends TestCase {
 
 	public function testGivenValidItemIdRequest_returnsDeserializedItemId(): void {
-		// We're using an anonymous class here because PHPUnit 9 does not support stubbing multiple interfaces
-		$request = new class implements UseCaseRequest, ItemIdRequest {
-			public function getItemId(): string {
-				return 'Q123';
-			}
-		};
+		$request = $this->createStub( ItemIdUseCaseRequest::class );
+		$request->method( 'getItemId' )->willReturn( 'Q123' );
 
 		$this->assertEquals(
 			[ ItemIdRequestValidatingDeserializer::DESERIALIZED_VALUE => new ItemId( 'Q123' ) ],
@@ -39,19 +35,12 @@ class ValidatingRequestDeserializerTest extends TestCase {
 
 	public function testGivenInvalidItemIdRequest_throws(): void {
 		$expectedError = $this->createStub( UseCaseError::class );
-		$itemIdValidator = $this->createStub( ItemIdRequestValidatingDeserializer::class );
-		$itemIdValidator->method( 'validateAndDeserialize' )->willThrowException( $expectedError );
-		$factory = $this->createStub( ValidatingRequestFieldDeserializerFactory::class );
-		$factory->method( 'newItemIdRequestValidatingDeserializer' )->willReturn( $itemIdValidator );
+		$factory = $this->newFactoryWithThrowingValidator( ItemIdRequestValidatingDeserializer::class, $expectedError );
+		$request = $this->createStub( ItemIdUseCaseRequest::class );
+		$request->method( 'getItemId' )->willReturn( 'P123' );
 
 		try {
-			$this->newRequestDeserializer( $factory )->validateAndDeserialize(
-				new class implements UseCaseRequest, ItemIdRequest {
-					public function getItemId(): string {
-						return 'P123';
-					}
-				}
-			);
+			$this->newRequestDeserializer( $factory )->validateAndDeserialize( $request );
 			$this->fail( 'expected exception was not thrown' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( $expectedError, $e );
@@ -59,11 +48,9 @@ class ValidatingRequestDeserializerTest extends TestCase {
 	}
 
 	public function testGivenValidStatementIdRequest_returnsDeserializedStatementId(): void {
-		$request = new class implements UseCaseRequest, StatementIdRequest {
-			public function getStatementId(): string {
-				return 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-			}
-		};
+		$statementId = new StatementGuid( new ItemId( 'Q123' ), 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
+		$request = $this->createStub( StatementIdUseCaseRequest::class );
+		$request->method( 'getStatementId' )->willReturn( "$statementId" );
 		$statementId = new StatementGuid( new ItemId( 'Q123' ), 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 
 		$this->assertEquals(
@@ -74,34 +61,42 @@ class ValidatingRequestDeserializerTest extends TestCase {
 
 	public function testGivenInvalidStatementIdRequest_throws(): void {
 		$expectedError = $this->createStub( UseCaseError::class );
-		$itemIdValidator = $this->createStub( StatementIdRequestValidatingDeserializer::class );
-		$itemIdValidator->method( 'validateAndDeserialize' )->willThrowException( $expectedError );
-		$factory = $this->createStub( ValidatingRequestFieldDeserializerFactory::class );
-		$factory->method( 'newStatementIdRequestValidatingDeserializer' )->willReturn( $itemIdValidator );
+		$factory = $this->newFactoryWithThrowingValidator( StatementIdRequestValidatingDeserializer::class, $expectedError );
+		$request = $this->createStub( StatementIdUseCaseRequest::class );
+		$request->method( 'getStatementId' )->willReturn( 'Q123$invalid' );
 
 		try {
-			$this->newRequestDeserializer( $factory )->validateAndDeserialize(
-				new class implements UseCaseRequest, StatementIdRequest {
-					public function getStatementId(): string {
-						return 'Q123$invalid';
-					}
-				}
-			);
+			$this->newRequestDeserializer( $factory )->validateAndDeserialize( $request );
 			$this->fail( 'expected exception was not thrown' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( $expectedError, $e );
 		}
 	}
 
-	// property id
-	// statement
-	// property id filter
-	// requested fields
-	// edit metadata
-
 	private function newRequestDeserializer( ValidatingRequestFieldDeserializerFactory $factory = null ): ValidatingRequestDeserializer {
 		$factory ??= new ValidatingRequestFieldDeserializerFactory();
 		return new ValidatingRequestDeserializer( $factory );
 	}
 
+	private function newFactoryWithThrowingValidator(
+		string $validatorClass,
+		UseCaseError $expectedError
+	): ValidatingRequestFieldDeserializerFactory {
+		$validator = $this->createStub( $validatorClass );
+		$validator->method( 'validateAndDeserialize' )->willThrowException( $expectedError );
+		$factory = $this->createStub( ValidatingRequestFieldDeserializerFactory::class );
+		$factory->method( [
+			ItemIdRequestValidatingDeserializer::class => 'newItemIdRequestValidatingDeserializer',
+			StatementIdRequestValidatingDeserializer::class => 'newStatementIdRequestValidatingDeserializer',
+		][$validatorClass] )->willReturn( $validator );
+
+		return $factory;
+	}
+
 }
+
+// @codingStandardsIgnoreStart Various rules are unhappy about these interface one-liners, but there isn't much that can go wrong...
+// We're creating some combined interfaces here because PHPUnit 9 does not support stubbing multiple interfaces
+interface ItemIdUseCaseRequest extends UseCaseRequest, ItemIdRequest {}
+interface StatementIdUseCaseRequest extends UseCaseRequest, StatementIdRequest {}
+// @codingStandardsIgnoreEnd
