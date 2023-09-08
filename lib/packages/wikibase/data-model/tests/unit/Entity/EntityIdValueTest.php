@@ -3,6 +3,7 @@
 namespace Wikibase\DataModel\Tests\Entity;
 
 use DataValues\IllegalValueException;
+use MediaWikiUnitTestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
@@ -20,7 +21,7 @@ use Wikibase\DataModel\Fixtures\CustomEntityId;
  * @author Thiemo Kreuz
  * @author Daniel Kinzler
  */
-class EntityIdValueTest extends \PHPUnit\Framework\TestCase {
+class EntityIdValueTest extends MediaWikiUnitTestCase {
 
 	public function testCanConstruct() {
 		$entityId = new ItemId( 'Q123' );
@@ -160,6 +161,9 @@ class EntityIdValueTest extends \PHPUnit\Framework\TestCase {
 	 * @param EntityIdValue $expected
 	 */
 	public function testDeserializationCompatibility( $serialized, EntityIdValue $expected ) {
+		if ( str_contains( $serialized, 'C:32:"Wikibase\DataModel\Entity\ItemId"' ) ) {
+			$this->expectDeprecationAndContinue( '/::unserialize/' );
+		}
 		$id = unserialize( $serialized );
 
 		$this->assertEquals( $expected, $id );
