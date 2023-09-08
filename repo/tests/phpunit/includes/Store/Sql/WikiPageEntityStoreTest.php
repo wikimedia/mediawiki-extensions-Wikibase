@@ -80,7 +80,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 	private function newCustomEntityId( $idString ) {
 		$id = $this->getMockBuilder( SerializableEntityId::class )
 			->setConstructorArgs( [ $idString ] )
-			->onlyMethods( [ 'getEntityType', 'serialize', 'unserialize' ] )
+			->onlyMethods( [ 'getEntityType' ] )
 			->getMockForAbstractClass();
 
 		$id->method( 'getEntityType' )

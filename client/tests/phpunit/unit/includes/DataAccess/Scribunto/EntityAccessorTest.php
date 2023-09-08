@@ -459,7 +459,7 @@ class EntityAccessorTest extends \PHPUnit\Framework\TestCase {
 			->with(
 				'Unresolved redirect encountered loading {prefixedEntityId}. This is typically cleaned up asynchronously.',
 				[
-					'prefixedEntityId' => $entityId->serialize(),
+					'prefixedEntityId' => $entityId->getSerialization(),
 				]
 			);
 

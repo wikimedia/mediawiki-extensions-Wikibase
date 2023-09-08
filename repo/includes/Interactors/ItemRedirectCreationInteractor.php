@@ -20,7 +20,7 @@ class ItemRedirectCreationInteractor extends EntityRedirectCreationInteractor {
 			throw new RedirectCreationException(
 				"Can't create redirect on non empty item " . $entity->getId(),
 				'origin-not-empty',
-				[ $entity->getId()->serialize() ]
+				[ $entity->getId()->getSerialization() ]
 			);
 		}
 	}

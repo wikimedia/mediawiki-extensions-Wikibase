@@ -33,7 +33,7 @@ class FederatedPropertyId implements PropertyId {
 	}
 
 	public function __serialize(): array {
-		return [ $this->serialize() ];
+		return [ $this->serialization ];
 	}
 
 	public function unserialize( $serialization ): void {
