@@ -33,6 +33,7 @@ class GetStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 	protected function setUp(): void {
 		parent::setUp();
 		$this->setMockPreconditionMiddlewareFactory();
+		$this->setMockChangeTagsStore();
 	}
 
 	public function testValidHttpResponse(): void {

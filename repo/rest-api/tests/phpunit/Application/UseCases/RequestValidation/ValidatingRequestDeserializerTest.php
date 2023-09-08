@@ -6,22 +6,29 @@ use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Statement\StatementGuid;
+use Wikibase\DataModel\Tests\NewStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\EditMetadataRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\LanguageCodeRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdFilterRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\EditMetadataRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ItemIdRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\LanguageCodeRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\MappedRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\StatementIdRequestValidatingDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\StatementSerializationRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestFieldDeserializerFactory;
 use Wikibase\Repo\RestApi\Application\UseCases\StatementIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\StatementSerializationRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseRequest;
-use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
+use Wikibase\Repo\RestApi\Domain\Model\User;
+use Wikibase\Repo\RestApi\Domain\Model\UserProvidedEditMetadata;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer
@@ -33,6 +40,7 @@ use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 class ValidatingRequestDeserializerTest extends TestCase {
 
 	private const VALID_LANGUAGE_CODE = 'en';
+	private const EXISTING_PROPERTY = 'P123';
 
 	public function testGivenValidItemIdRequest_returnsDeserializedItemId(): void {
 		$request = $this->createStub( ItemIdUseCaseRequest::class );
@@ -96,6 +104,36 @@ class ValidatingRequestDeserializerTest extends TestCase {
 		);
 	}
 
+	public function testGivenValidStatementSerializationRequest_returnsStatement(): void {
+		$request = $this->createStub( StatementSerializationUseCaseRequest::class );
+		$request->method( 'getStatement' )->willReturn( [
+			'property' => [ 'id' => self::EXISTING_PROPERTY ],
+			'value' => [ 'type' => 'novalue' ],
+		] );
+
+		$this->assertEquals(
+			[ StatementSerializationRequest::class => NewStatement::noValueFor( 'P123' )->build() ],
+			$this->newRequestDeserializer()->validateAndDeserialize( $request )
+		);
+	}
+
+	public function testGivenValidEditMetadataRequest_returnsEditMetadata(): void {
+		$user = 'potato';
+		$isBot = false;
+		$editTags = [ 'allowed' ];
+		$comment = 'edit comment';
+		$request = $this->createStub( EditMetadataUseCaseRequest::class );
+		$request->method( 'getUsername' )->willReturn( $user );
+		$request->method( 'isBot' )->willReturn( $isBot );
+		$request->method( 'getComment' )->willReturn( $comment );
+		$request->method( 'getEditTags' )->willReturn( $editTags );
+
+		$this->assertEquals(
+			[ EditMetadataRequest::class => new UserProvidedEditMetadata( User::withUsername( $user ), $isBot, $comment, $editTags ) ],
+			$this->newRequestDeserializer()->validateAndDeserialize( $request )
+		);
+	}
+
 	/**
 	 * @dataProvider invalidRequestProvider
 	 */
@@ -147,11 +185,25 @@ class ValidatingRequestDeserializerTest extends TestCase {
 			MappedRequestValidatingDeserializer::class,
 			'newItemFieldsRequestValidatingDeserializer',
 		];
+		yield [
+			StatementSerializationUseCaseRequest::class,
+			StatementSerializationRequestValidatingDeserializer::class,
+			'newStatementSerializationRequestValidatingDeserializer',
+		];
+		yield [
+			EditMetadataUseCaseRequest::class,
+			EditMetadataRequestValidatingDeserializer::class,
+			'newEditMetadataRequestValidatingDeserializer',
+		];
 	}
 
 	private function newRequestDeserializer( ValidatingRequestFieldDeserializerFactory $factory = null ): ValidatingRequestDeserializer {
-		$factory ??= new ValidatingRequestFieldDeserializerFactory( new LanguageCodeValidator( [ self::VALID_LANGUAGE_CODE ] ) );
-		return new ValidatingRequestDeserializer( $factory );
+		$dataTypeLookup = new InMemoryDataTypeLookup();
+		$dataTypeLookup->setDataTypeForProperty( new NumericPropertyId( self::EXISTING_PROPERTY ), 'string' );
+
+		return new ValidatingRequestDeserializer(
+			$factory ?? TestValidatingRequestFieldDeserializerFactory::newFactory( $dataTypeLookup )
+		);
 	}
 
 }
@@ -164,4 +216,6 @@ interface StatementIdUseCaseRequest extends UseCaseRequest, StatementIdRequest {
 interface PropertyIdFilterUseCaseRequest extends UseCaseRequest, PropertyIdFilterRequest {}
 interface LanguageCodeUseCaseRequest extends UseCaseRequest, LanguageCodeRequest {}
 interface ItemFieldsUseCaseRequest extends UseCaseRequest, ItemFieldsRequest {}
+interface StatementSerializationUseCaseRequest extends UseCaseRequest, StatementSerializationRequest {}
+interface EditMetadataUseCaseRequest extends UseCaseRequest, EditMetadataRequest {}
 // @codingStandardsIgnoreEnd

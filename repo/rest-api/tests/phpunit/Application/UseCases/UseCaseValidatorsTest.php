@@ -4,6 +4,9 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
+use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatementRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\DeserializedAddItemStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\DeserializedGetItemRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItemRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItemValidator;
@@ -34,7 +37,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingReque
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\GetItemStatementsValidator
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\GetPropertyStatementValidator
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementValidator
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabelValidator
+ * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\GetItemLabelValidator
+ * @covers \Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatementValidator
  *
  * @group Wikibase
  *
@@ -94,6 +98,11 @@ class UseCaseValidatorsTest extends TestCase {
 			GetItemValidator::class,
 			GetItemRequest::class,
 			DeserializedGetItemRequest::class,
+		];
+		yield [
+			AddItemStatementValidator::class,
+			AddItemStatementRequest::class,
+			DeserializedAddItemStatementRequest::class,
 		];
 	}
 

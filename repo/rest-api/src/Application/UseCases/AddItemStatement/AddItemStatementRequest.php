@@ -2,10 +2,15 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement;
 
+use Wikibase\Repo\RestApi\Application\UseCases\EditMetadataRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\ItemIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\StatementSerializationRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseRequest;
+
 /**
  * @license GPL-2.0-or-later
  */
-class AddItemStatementRequest {
+class AddItemStatementRequest implements UseCaseRequest, ItemIdRequest, StatementSerializationRequest, EditMetadataRequest {
 
 	private string $itemId;
 	private array $statement;
@@ -41,10 +46,6 @@ class AddItemStatementRequest {
 
 	public function getComment(): ?string {
 		return $this->comment;
-	}
-
-	public function hasUser(): bool {
-		return $this->username !== null;
 	}
 
 	public function getUsername(): ?string {

@@ -9,6 +9,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItemRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItemResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItemValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
@@ -17,7 +18,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemPartsRetriever;
-use Wikibase\Repo\RestApi\WbRestApi;
+use Wikibase\Repo\Tests\RestApi\Application\UseCases\RequestValidation\TestValidatingRequestFieldDeserializerFactory;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItem
@@ -53,7 +54,7 @@ class GetItemTest extends TestCase {
 		$itemResponse = ( new GetItem(
 			$getRevisionMetadata,
 			$itemPartsRetriever,
-			new GetItemValidator( WbRestApi::getValidatingRequestDeserializer() )
+			new GetItemValidator( new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() ) )
 		) )->execute( new GetItemRequest( self::ITEM_ID, $requestedFields ) );
 
 		$this->assertInstanceOf( GetItemResponse::class, $itemResponse );
@@ -74,7 +75,7 @@ class GetItemTest extends TestCase {
 			( new GetItem(
 				$getRevisionMetadata,
 				$this->createStub( ItemPartsRetriever::class ),
-				new GetItemValidator( WbRestApi::getValidatingRequestDeserializer() )
+				new GetItemValidator( new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() ) )
 			) )->execute( new GetItemRequest( $itemId ) );
 
 			$this->fail( 'this should not be reached' );
@@ -89,7 +90,7 @@ class GetItemTest extends TestCase {
 			( new GetItem(
 				$this->createStub( GetLatestItemRevisionMetadata::class ),
 				$this->createStub( ItemPartsRetriever::class ),
-				new GetItemValidator( WbRestApi::getValidatingRequestDeserializer() )
+				new GetItemValidator( new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() ) )
 			) )->execute( new GetItemRequest( $itemId ) );
 
 			$this->fail( 'this should not be reached' );

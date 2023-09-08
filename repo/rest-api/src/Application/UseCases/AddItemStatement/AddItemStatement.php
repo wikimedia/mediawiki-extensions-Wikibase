@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement;
 
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
@@ -44,27 +43,28 @@ class AddItemStatement {
 	 * @throws UseCaseError
 	 */
 	public function execute( AddItemStatementRequest $request ): AddItemStatementResponse {
-		$this->validator->assertValidRequest( $request );
-
-		$statement = $this->validator->getValidatedStatement();
-		$itemId = new ItemId( $request->getItemId() );
+		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
+		$itemId = $deserializedRequest->getItemId();
+		$statement = $deserializedRequest->getStatement();
 
 		$this->assertItemExists->execute( $itemId );
 
-		$this->assertUserIsAuthorized->execute( $itemId, $request->getUsername() );
+		$editMetadata = $deserializedRequest->getEditMetadata();
+		$this->assertUserIsAuthorized->execute( $itemId, $editMetadata->getUser()->getUsername() );
 
 		$newStatementGuid = $this->guidGenerator->newStatementId( $itemId );
 		$statement->setGuid( (string)$newStatementGuid );
 		$item = $this->itemRetriever->getItem( $itemId );
 		$item->getStatements()->addStatement( $statement );
 
-		$editMetadata = new EditMetadata(
-			$request->getEditTags(),
-			$request->isBot(),
-			StatementEditSummary::newAddSummary( $request->getComment(), $statement )
+		$newRevision = $this->itemUpdater->update(
+			$item, // @phan-suppress-current-line PhanTypeMismatchArgumentNullable Item validated and exists
+			new EditMetadata(
+				$editMetadata->getTags(),
+				$editMetadata->isBot(),
+				StatementEditSummary::newAddSummary( $editMetadata->getComment(), $statement )
+			)
 		);
-		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Item validated and exists
-		$newRevision = $this->itemUpdater->update( $item, $editMetadata );
 
 		return new AddItemStatementResponse(
 			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Item validated and exists

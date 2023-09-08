@@ -9,11 +9,12 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\GetItemLabelRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\GetItemLabelResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\GetItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
 use Wikibase\Repo\RestApi\Domain\Services\ItemLabelRetriever;
-use Wikibase\Repo\RestApi\WbRestApi;
+use Wikibase\Repo\Tests\RestApi\Application\UseCases\RequestValidation\TestValidatingRequestFieldDeserializerFactory;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\GetItemLabel
@@ -124,7 +125,7 @@ class GetItemLabelTest extends TestCase {
 		return new GetItemLabel(
 			$this->getRevisionMetadata,
 			$this->labelRetriever,
-			new GetItemLabelValidator( WbRestApi::getValidatingRequestDeserializer() )
+			new GetItemLabelValidator( new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() ) )
 		);
 	}
 
