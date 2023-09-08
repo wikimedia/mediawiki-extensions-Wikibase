@@ -7,6 +7,6 @@ use Exception;
 /**
  * @license GPL-2.0-or-later
  */
-class StatementUpdateFailed extends Exception {
+class StatementSubjectDisappeared extends Exception {
 
 }
