@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests\Specials;
 
 use InvalidArgumentException;
@@ -7,6 +9,7 @@ use MediaWiki\Request\FauxRequest;
 use SpecialPageTestBase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
+use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\TermIndexEntry;
@@ -29,20 +32,15 @@ use Wikibase\Repo\Specials\SpecialItemDisambiguation;
  * @license GPL-2.0-or-later
  */
 class SpecialItemDisambiguationTest extends SpecialPageTestBase {
-	/**
-	 * @var bool
-	 */
-	private $simulateSearchBackendError;
+
+	private bool $simulateSearchBackendError;
 
 	protected function setUp(): void {
 		parent::setUp();
 		$this->simulateSearchBackendError = false;
 	}
 
-	/**
-	 * @return ItemDisambiguation
-	 */
-	private function getMockItemDisambiguation() {
+	private function getMockItemDisambiguation(): ItemDisambiguation {
 		$mock = $this->createMock( ItemDisambiguation::class );
 		$mock->method( 'getHTML' )
 			->willReturnCallback( function ( $searchResult ) {
@@ -52,10 +50,7 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 		return $mock;
 	}
 
-	/**
-	 * @return EntitySearchHelper
-	 */
-	private function getMockSearchHelper() {
+	private function getMockSearchHelper(): EntitySearchHelper {
 		$searchResults = [
 			[
 				'entityId' => new ItemId( 'Q2' ),
@@ -99,14 +94,11 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 		return $mock;
 	}
 
-	private function getContentLanguages() {
+	private function getContentLanguages(): ContentLanguages {
 		return new StaticContentLanguages( [ 'ar', 'de', 'en', 'fr' ] );
 	}
 
-	/**
-	 * @return LanguageNameLookup
-	 */
-	private function getMockLanguageNameLookup() {
+	private function getMockLanguageNameLookup(): LanguageNameLookup {
 		$mock = $this->createMock( LanguageNameLookup::class );
 		$mock->method( 'getName' )
 			->willReturn( '<LANG>' );
@@ -114,7 +106,7 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 		return $mock;
 	}
 
-	protected function newSpecialPage() {
+	protected function newSpecialPage(): SpecialItemDisambiguation {
 		return new SpecialItemDisambiguation(
 			$this->getContentLanguages(),
 			$this->getMockLanguageNameLookup(),
