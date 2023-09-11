@@ -3,6 +3,9 @@ on:
   push:
     branches: [ master ]
 
+env:
+  COMPOSER_HOME: ${{ github.workspace }}/.composer
+
 jobs:
   secondary-ci:
     runs-on: ubuntu-latest
@@ -57,7 +60,7 @@ jobs:
     - name: Cache Composer cache
       uses: actions/cache@v3.2.6
       with:
-        path: $HOME/.composer/cache
+        path: ${{ env.COMPOSER_HOME }}/cache
         key: composer-cache-php${{ matrix.php-versions }}
     - name: install.sh
       env: ${{ matrix.env }}
