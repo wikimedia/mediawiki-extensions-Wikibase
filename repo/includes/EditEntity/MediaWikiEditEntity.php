@@ -596,7 +596,7 @@ class MediaWikiEditEntity implements EditEntity {
 			throw new ReadOnlyError();
 		}
 		if ( $this->entityTypeIsReadOnly( $entity ) ) {
-			$services->getConfiguredReadOnlyMode()->setReason(
+			$services->getReadOnlyMode()->setReason(
 				'Editing of entity type: ' . $entity->getType() . ' is currently disabled. It will be enabled soon.'
 			);
 			throw new ReadOnlyError();
