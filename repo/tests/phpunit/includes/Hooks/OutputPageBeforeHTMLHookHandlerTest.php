@@ -18,6 +18,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\EntityFactory;
 use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\LanguageNameLookupFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\Hooks\Helpers\OutputPageEditability;
@@ -104,7 +105,8 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 			$this->settings,
 			TemplateFactory::getDefaultInstance(),
 			$this->entityRevisionLookup,
-			$this->languageNameLookup,
+			$this->createConfiguredMock( LanguageNameLookupFactory::class,
+				[ 'getForLanguage' => $this->languageNameLookup ] ),
 			$this->outputPageEntityIdReader,
 			$this->entityFactory,
 			'',
