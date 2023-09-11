@@ -2,17 +2,19 @@
 	"@metadata": {
 		"authors": [
 			"Kurdbuddha",
-			"Paraw2"
+			"Paraw2",
+			"TerranBoy"
 		]
 	},
-	"wikibase-edit": "وێراشتە",
-	"wikibase-add": "فرە بکە",
+	"wikibase-edit": "دەسکاری",
+	"wikibase-add": "ئزافەبکە",
+	"wikibase-description-empty": "وەسفێگ دیاری نەکریاێە",
 	"wikibase-sitelink-page-edit-placeholder": "پەڕە",
 	"wikibase-sitelinks-special": "ماڵپەڕەگان ترەک",
 	"wikibase-itembytitle-lookup-page": "پەڕە:",
 	"wikibase-itembytitle-submit": "مینە",
 	"wikibase-gotolinkedpage-submit": "بچوو",
-	"wikibase-itemdisambiguation-lookup-language": "زوان:",
+	"wikibase-itemdisambiguation-lookup-language": "کۆد زوان:",
 	"wikibase-itemdisambiguation-submit": "مینە",
-	"wikibase-modifyterm-language": "زوان:"
+	"wikibase-modifyterm-language": "کۆد زوان:"
 }
