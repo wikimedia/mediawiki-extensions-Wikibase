@@ -1,11 +1,11 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement;
+namespace Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement;
 
 /**
  * @license GPL-2.0-or-later
  */
-class RemoveItemStatementRequest {
+class RemoveStatementRequest {
 
 	private string $statementId;
 	private array $editTags;

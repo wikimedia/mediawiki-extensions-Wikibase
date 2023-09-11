@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\RemoveItemStatement;
+namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\RemoveStatement;
 
 use CommentStore;
 use PHPUnit\Framework\TestCase;
@@ -14,9 +14,9 @@ use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
-use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatementRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatementRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
@@ -28,14 +28,14 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatement
+ * @covers \Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatement
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  *
  */
-class RemoveItemStatementTest extends TestCase {
+class RemoveStatementTest extends TestCase {
 
 	use EditMetadataHelper;
 
@@ -212,10 +212,10 @@ class RemoveItemStatementTest extends TestCase {
 		}
 	}
 
-	private function newUseCase(): RemoveItemStatement {
+	private function newUseCase(): RemoveStatement {
 		$itemIdParser = new ItemIdParser();
-		return new RemoveItemStatement(
-			new RemoveItemStatementValidator(
+		return new RemoveStatement(
+			new RemoveStatementValidator(
 				new ItemIdValidator(),
 				new StatementIdValidator( $itemIdParser ),
 				new EditMetadataValidator( CommentStore::COMMENT_CHARACTER_LIMIT, self::ALLOWED_TAGS )
@@ -228,8 +228,8 @@ class RemoveItemStatementTest extends TestCase {
 		);
 	}
 
-	private function newUseCaseRequest( array $requestData ): RemoveItemStatementRequest {
-		return new RemoveItemStatementRequest(
+	private function newUseCaseRequest( array $requestData ): RemoveStatementRequest {
+		return new RemoveStatementRequest(
 			$requestData['$statementId'],
 			$requestData['$editTags'] ?? [],
 			$requestData['$isBot'] ?? false,

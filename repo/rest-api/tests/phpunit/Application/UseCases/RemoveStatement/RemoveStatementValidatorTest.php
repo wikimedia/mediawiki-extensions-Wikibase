@@ -1,27 +1,27 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\RemoveItemStatement;
+namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\RemoveStatement;
 
 use CommentStore;
 use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Statement\StatementGuid;
-use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatementRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatementRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatementValidator
+ * @covers \Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatementValidator
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class RemoveItemStatementValidatorTest extends TestCase {
+class RemoveStatementValidatorTest extends TestCase {
 
 	private const ALLOWED_TAGS = [ 'some', 'tags', 'are', 'allowed' ];
 
@@ -157,16 +157,16 @@ class RemoveItemStatementValidatorTest extends TestCase {
 		];
 	}
 
-	private function newValidator(): RemoveItemStatementValidator {
-		return new RemoveItemStatementValidator(
+	private function newValidator(): RemoveStatementValidator {
+		return new RemoveStatementValidator(
 			new ItemIdValidator(),
 			new StatementIdValidator( new ItemIdParser() ),
 			new EditMetadataValidator( CommentStore::COMMENT_CHARACTER_LIMIT, self::ALLOWED_TAGS )
 		);
 	}
 
-	private function newUseCaseRequest( array $requestData ): RemoveItemStatementRequest {
-		return new RemoveItemStatementRequest(
+	private function newUseCaseRequest( array $requestData ): RemoveStatementRequest {
+		return new RemoveStatementRequest(
 			$requestData['$statementId'],
 			$requestData['$editTags'],
 			$requestData['$isBot'],
