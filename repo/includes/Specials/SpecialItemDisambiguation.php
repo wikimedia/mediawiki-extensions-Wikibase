@@ -9,11 +9,10 @@ use HTMLForm;
 use WebRequest;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Interactors\TermSearchResult;
-use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\LanguageNameLookupFactory;
 use Wikibase\Repo\Api\EntitySearchException;
 use Wikibase\Repo\Api\EntitySearchHelper;
-use Wikibase\Repo\ItemDisambiguation;
+use Wikibase\Repo\ItemDisambiguationFactory;
 
 /**
  * Enables accessing items by providing the label of the item and the language of the label.
@@ -25,41 +24,23 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 
 	private const LIMIT = 100;
 
-	private ContentLanguages $contentLanguages;
-	private LanguageNameLookup $languageNameLookup;
-	private ItemDisambiguation $itemDisambiguation;
 	private EntitySearchHelper $entitySearchHelper;
+	private ItemDisambiguationFactory $itemDisambiguationFactory;
+	private LanguageNameLookupFactory $languageNameLookupFactory;
+	private ContentLanguages $contentLanguages;
 
 	public function __construct(
-		ContentLanguages $contentLanguages,
-		LanguageNameLookup $languageNameLookup,
-		ItemDisambiguation $itemDisambiguation,
-		EntitySearchHelper $entitySearchHelper
+		EntitySearchHelper $entitySearchHelper,
+		ItemDisambiguationFactory $itemDisambiguationFactory,
+		LanguageNameLookupFactory $languageNameLookupFactory,
+		ContentLanguages $contentLanguages
 	) {
 		parent::__construct( 'ItemDisambiguation' );
 
-		$this->contentLanguages = $contentLanguages;
-		$this->languageNameLookup = $languageNameLookup;
-		$this->itemDisambiguation = $itemDisambiguation;
 		$this->entitySearchHelper = $entitySearchHelper;
-	}
-
-	public static function factory(
-		EntitySearchHelper $entitySearchHelper,
-		EntityTitleLookup $entityTitleLookup,
-		LanguageNameLookup $languageNameLookup,
-		ContentLanguages $termsLanguages
-	): self {
-		$itemDisambiguation = new ItemDisambiguation(
-			$entityTitleLookup,
-			$languageNameLookup
-		);
-		return new self(
-			$termsLanguages,
-			$languageNameLookup,
-			$itemDisambiguation,
-			$entitySearchHelper
-		);
+		$this->itemDisambiguationFactory = $itemDisambiguationFactory;
+		$this->languageNameLookupFactory = $languageNameLookupFactory;
+		$this->contentLanguages = $contentLanguages;
 	}
 
 	/**
@@ -180,7 +161,9 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	 * @param TermSearchResult[] $searchResults
 	 */
 	private function displayDisambiguationPage( array $searchResults ): void {
-		$html = $this->itemDisambiguation->getHTML( $searchResults );
+		$itemDisambiguation = $this->itemDisambiguationFactory
+			->getForLanguage( $this->getLanguage() );
+		$html = $itemDisambiguation->getHTML( $searchResults );
 		$this->getOutput()->addHTML( $html );
 	}
 
@@ -188,9 +171,11 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	 * Return options for the language input field.
 	 */
 	private function getLanguageOptions(): array {
+		$languageNameLookup = $this->languageNameLookupFactory
+			->getForLanguage( $this->getLanguage() );
 		$options = [];
 		foreach ( $this->contentLanguages->getLanguages() as $languageCode ) {
-			$languageName = $this->languageNameLookup->getName( $languageCode );
+			$languageName = $languageNameLookup->getName( $languageCode );
 			$options["$languageName ($languageCode)"] = $languageCode;
 		}
 		return $options;

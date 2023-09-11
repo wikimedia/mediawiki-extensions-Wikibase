@@ -1092,4 +1092,11 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.FallbackLabelDescriptionLookupFactory' );
 	}
 
+	public static function getItemDisambiguationFactory(
+		ContainerInterface $services = null
+	): ItemDisambiguationFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.ItemDisambiguationFactory' );
+	}
+
 }
