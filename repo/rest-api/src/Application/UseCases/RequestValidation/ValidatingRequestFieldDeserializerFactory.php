@@ -4,6 +4,8 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\RequestValidation;
 
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
+use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdFilterRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
@@ -24,8 +26,11 @@ class ValidatingRequestFieldDeserializerFactory {
 		return new ItemIdRequestValidatingDeserializer( new ItemIdValidator() );
 	}
 
-	public function newPropertyIdRequestValidatingDeserializer(): PropertyIdRequestValidatingDeserializer {
-		return new PropertyIdRequestValidatingDeserializer( new PropertyIdValidator() );
+	public function newPropertyIdRequestValidatingDeserializer(): MappedRequestValidatingDeserializer {
+		$propertyIdValidatingDeserializer = new PropertyIdValidatingDeserializer( new PropertyIdValidator() );
+		return new MappedRequestValidatingDeserializer(
+			fn( PropertyIdRequest $r ) => $propertyIdValidatingDeserializer->validateAndDeserialize( $r->getPropertyId() )
+		);
 	}
 
 	public function newStatementIdRequestValidatingDeserializer(): StatementIdRequestValidatingDeserializer {
@@ -37,8 +42,14 @@ class ValidatingRequestFieldDeserializerFactory {
 		);
 	}
 
-	public function newPropertyIdFilterRequestValidatingDeserializer(): PropertyIdFilterRequestValidatingDeserializer {
-		return new PropertyIdFilterRequestValidatingDeserializer( new PropertyIdValidator() );
+	public function newPropertyIdFilterRequestValidatingDeserializer(): MappedRequestValidatingDeserializer {
+		$propertyIdValidatingDeserializer = new PropertyIdValidatingDeserializer( new PropertyIdValidator() );
+		return new MappedRequestValidatingDeserializer(
+			fn( PropertyIdFilterRequest $r ) => $r->getPropertyIdFilter() === null
+				? null
+				// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
+				: $propertyIdValidatingDeserializer->validateAndDeserialize( $r->getPropertyIdFilter() )
+		);
 	}
 
 	public function newLanguageCodeRequestValidatingDeserializer(): LanguageCodeRequestValidatingDeserializer {
