@@ -27,6 +27,7 @@
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-rievdadus",
 	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}}-rievdadusat",
+	"wikibase-rcfilters-hide-wikibase-description": "Rievdadusat, mat leat {{GRAMMAR:locative|WBREPONAME}} eret.",
 	"wikibase-watchlist-show-changes-pref": "Čájet {{WBREPONAME}} rievdadusaid iežat čuovvunlisttus",
 	"wikibase-unconnectedpages-submit": "Čájet siidduid",
 	"wikibase-pageswithbadges-submit": "Čájet siidduid",
