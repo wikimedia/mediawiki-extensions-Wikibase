@@ -31,7 +31,7 @@ class StatementIdRequestValidatingDeserializerTest extends TestCase {
 		$request->method( 'getStatementId' )->willReturn( "$id" );
 
 		$this->assertEquals(
-			[ StatementIdRequestValidatingDeserializer::DESERIALIZED_VALUE => $id ],
+			$id,
 			$this->newValidatingDeserializer()->validateAndDeserialize( $request )
 		);
 	}

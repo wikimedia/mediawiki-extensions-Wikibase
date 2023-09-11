@@ -11,8 +11,6 @@ use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
  */
 class LanguageCodeRequestValidatingDeserializer {
 
-	public const DESERIALIZED_VALUE = 'language_code';
-
 	private LanguageCodeValidator $languageCodeValidator;
 
 	public function __construct( LanguageCodeValidator $languageCodeValidator ) {
@@ -22,7 +20,7 @@ class LanguageCodeRequestValidatingDeserializer {
 	/**
 	 * @throws UseCaseError
 	 */
-	public function validateAndDeserialize( LanguageCodeRequest $request ): array {
+	public function validateAndDeserialize( LanguageCodeRequest $request ): string {
 		$validationError = $this->languageCodeValidator->validate( $request->getLanguageCode() );
 		if ( $validationError ) {
 			throw new UseCaseError(
@@ -30,7 +28,7 @@ class LanguageCodeRequestValidatingDeserializer {
 				"Not a valid language code: {$validationError->getContext()[LanguageCodeValidator::CONTEXT_LANGUAGE_CODE_VALUE]}"
 			);
 		}
-		return [ self::DESERIALIZED_VALUE => $request->getLanguageCode() ];
+		return $request->getLanguageCode();
 	}
 
 }

@@ -11,7 +11,6 @@ use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
  * @license GPL-2.0-or-later
  */
 class PropertyIdFilterRequestValidatingDeserializer {
-	public const DESERIALIZED_VALUE = 'property-id-filter';
 	private PropertyIdValidator $propertyIdValidator;
 
 	public function __construct( PropertyIdValidator $validator ) {
@@ -21,10 +20,10 @@ class PropertyIdFilterRequestValidatingDeserializer {
 	/**
 	 * @throws UseCaseError
 	 */
-	public function validateAndDeserialize( PropertyIdFilterRequest $request ): array {
+	public function validateAndDeserialize( PropertyIdFilterRequest $request ): ?NumericPropertyId {
 		$filterPropertyId = $request->getPropertyIdFilter();
 		if ( $filterPropertyId === null ) {
-			return [ self::DESERIALIZED_VALUE => null ];
+			return null;
 		}
 
 		$validationError = $this->propertyIdValidator->validate( $filterPropertyId );
@@ -36,7 +35,7 @@ class PropertyIdFilterRequestValidatingDeserializer {
 				[ UseCaseError::CONTEXT_PROPERTY_ID => $context[PropertyIdValidator::CONTEXT_VALUE] ]
 			);
 		}
-		return [ self::DESERIALIZED_VALUE => new NumericPropertyId( $filterPropertyId ) ];
+		return new NumericPropertyId( $filterPropertyId );
 	}
 
 }

@@ -23,7 +23,7 @@ class PropertyIdRequestValidatingDeserializerTest extends TestCase {
 		$request->method( 'getPropertyId' )->willReturn( 'P123' );
 
 		$this->assertEquals(
-			[ PropertyIdRequestValidatingDeserializer::DESERIALIZED_VALUE => new NumericPropertyId( 'P123' ) ],
+			new NumericPropertyId( 'P123' ),
 			( new PropertyIdRequestValidatingDeserializer( new PropertyIdValidator() ) )->validateAndDeserialize( $request )
 		);
 	}

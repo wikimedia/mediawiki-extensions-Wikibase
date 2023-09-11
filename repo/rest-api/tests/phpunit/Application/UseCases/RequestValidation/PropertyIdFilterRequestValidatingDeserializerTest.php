@@ -25,7 +25,7 @@ class PropertyIdFilterRequestValidatingDeserializerTest extends TestCase {
 		$request->method( 'getPropertyIdFilter' )->willReturn( 'P123' );
 
 		$this->assertEquals(
-			[ PropertyIdFilterRequestValidatingDeserializer::DESERIALIZED_VALUE => new NumericPropertyId( 'P123' ) ],
+			new NumericPropertyId( 'P123' ),
 			( new PropertyIdFilterRequestValidatingDeserializer( new PropertyIdValidator() ) )
 				->validateAndDeserialize( $request )
 		);
@@ -35,8 +35,7 @@ class PropertyIdFilterRequestValidatingDeserializerTest extends TestCase {
 		$request = $this->createStub( PropertyIdFilterRequest::class );
 		$request->method( 'getPropertyIdFilter' )->willReturn( null );
 
-		$this->assertEquals(
-			[ PropertyIdFilterRequestValidatingDeserializer::DESERIALIZED_VALUE => null ],
+		$this->assertNull(
 			( new PropertyIdFilterRequestValidatingDeserializer( new PropertyIdValidator() ) )
 				->validateAndDeserialize( $request )
 		);

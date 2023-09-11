@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\RequestValidation;
 
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
+use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\Application\UseCases\StatementIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
@@ -11,8 +12,6 @@ use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
  * @license GPL-2.0-or-later
  */
 class StatementIdRequestValidatingDeserializer {
-	public const DESERIALIZED_VALUE = 'statement-id';
-
 	private StatementIdValidator $validator;
 	private StatementGuidParser $parser;
 
@@ -21,7 +20,7 @@ class StatementIdRequestValidatingDeserializer {
 		$this->parser = $parser;
 	}
 
-	public function validateAndDeserialize( StatementIdRequest $request ): array {
+	public function validateAndDeserialize( StatementIdRequest $request ): StatementGuid {
 		$validationError = $this->validator->validate( $request->getStatementId() );
 		if ( $validationError ) {
 			throw new UseCaseError(
@@ -30,7 +29,7 @@ class StatementIdRequestValidatingDeserializer {
 			);
 		}
 
-		return [ self::DESERIALIZED_VALUE => $this->parser->parse( $request->getStatementId() ) ];
+		return $this->parser->parse( $request->getStatementId() );
 	}
 
 }
