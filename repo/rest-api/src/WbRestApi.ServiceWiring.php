@@ -93,7 +93,7 @@ use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdaterPropertyUpdater
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdaterStatementUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\PrefetchingTermLookupAliasesRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\StatementSubjectRetriever;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\TermLookupItemDataRetriever;
+use Wikibase\Repo\RestApi\Infrastructure\DataAccess\TermLookupEntityTermsRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\WikibaseEntityRevisionLookupItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\WikibaseEntityRevisionLookupPropertyRevisionMetadataRetriever;
@@ -239,7 +239,7 @@ return [
 	'WbRestApi.GetItemDescription' => function( MediaWikiServices $services ): GetItemDescription {
 		return new GetItemDescription(
 			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
-			new TermLookupItemDataRetriever(
+			new TermLookupEntityTermsRetriever(
 				WikibaseRepo::getTermLookup( $services ),
 				WikibaseRepo::getTermsLanguages( $services )
 			),
@@ -253,7 +253,7 @@ return [
 	'WbRestApi.GetItemDescriptions' => function( MediaWikiServices $services ): GetItemDescriptions {
 		return new GetItemDescriptions(
 			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
-			new TermLookupItemDataRetriever(
+			new TermLookupEntityTermsRetriever(
 				WikibaseRepo::getTermLookup( $services ),
 				WikibaseRepo::getTermsLanguages( $services )
 			),
@@ -264,7 +264,7 @@ return [
 	'WbRestApi.GetItemLabel' => function( MediaWikiServices $services ): GetItemLabel {
 		return new GetItemLabel(
 			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
-			new TermLookupItemDataRetriever(
+			new TermLookupEntityTermsRetriever(
 				WikibaseRepo::getTermLookup( $services ),
 				WikibaseRepo::getTermsLanguages( $services )
 			),
@@ -275,7 +275,7 @@ return [
 	'WbRestApi.GetItemLabels' => function( MediaWikiServices $services ): GetItemLabels {
 		return new GetItemLabels(
 			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
-			new TermLookupItemDataRetriever(
+			new TermLookupEntityTermsRetriever(
 				WikibaseRepo::getTermLookup( $services ),
 				WikibaseRepo::getTermsLanguages( $services )
 			),
@@ -375,7 +375,7 @@ return [
 	'WbRestApi.PatchItemLabels' => function( MediaWikiServices $services ): PatchItemLabels {
 		return new PatchItemLabels(
 			WbRestApi::getAssertItemExists( $services ),
-			new TermLookupItemDataRetriever(
+			new TermLookupEntityTermsRetriever(
 				WikibaseRepo::getTermLookup( $services ),
 				WikibaseRepo::getTermsLanguages( $services )
 			),
