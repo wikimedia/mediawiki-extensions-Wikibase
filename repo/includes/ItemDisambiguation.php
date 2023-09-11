@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo;
 
 use Html;
@@ -16,20 +18,9 @@ use Wikibase\Lib\Store\EntityTitleLookup;
  */
 class ItemDisambiguation {
 
-	/**
-	 * @var EntityTitleLookup
-	 */
-	private $titleLookup;
+	private EntityTitleLookup $titleLookup;
+	private LanguageNameLookup $languageNameLookup;
 
-	/**
-	 * @var LanguageNameLookup
-	 */
-	private $languageNameLookup;
-
-	/**
-	 * @param EntityTitleLookup $titleLookup
-	 * @param LanguageNameLookup $languageNameLookup
-	 */
 	public function __construct(
 		EntityTitleLookup $titleLookup,
 		LanguageNameLookup $languageNameLookup
@@ -45,18 +36,16 @@ class ItemDisambiguation {
 	 *
 	 * @return string HTML
 	 */
-	public function getHTML( array $searchResults ) {
+	public function getHTML( array $searchResults ): string {
 		return '<ul class="wikibase-disambiguation">'
 			. implode( '', array_map( [ $this, 'getResultHtml' ], $searchResults ) )
 			. '</ul>';
 	}
 
 	/**
-	 * @param TermSearchResult $searchResult
-	 *
 	 * @return string HTML
 	 */
-	public function getResultHtml( TermSearchResult $searchResult ) {
+	public function getResultHtml( TermSearchResult $searchResult ): string {
 		$idHtml = $this->getIdHtml( $searchResult->getEntityId() );
 
 		$displayLabel = $searchResult->getDisplayLabel();
@@ -104,11 +93,9 @@ class ItemDisambiguation {
 	/**
 	 * Returns HTML representing the label in the display language (or an appropriate fallback).
 	 *
-	 * @param EntityId|null $entityId
-	 *
 	 * @return string HTML
 	 */
-	private function getIdHtml( EntityId $entityId = null ) {
+	private function getIdHtml( EntityId $entityId ): string {
 		$title = $this->titleLookup->getTitleForId( $entityId );
 
 		$idElement = Html::element(
@@ -127,11 +114,9 @@ class ItemDisambiguation {
 	/**
 	 * Returns HTML representing the label in the display language (or an appropriate fallback).
 	 *
-	 * @param Term|null $label
-	 *
 	 * @return string HTML
 	 */
-	private function getLabelHtml( Term $label = null ) {
+	private function getLabelHtml( ?Term $label ): string {
 		if ( !$label ) {
 			return '';
 		}
@@ -148,11 +133,9 @@ class ItemDisambiguation {
 	/**
 	 * Returns HTML representing the description in the display language (or an appropriate fallback).
 	 *
-	 * @param Term|null $description
-	 *
 	 * @return string HTML
 	 */
-	private function getDescriptionHtml( Term $description = null ) {
+	private function getDescriptionHtml( ?Term $description ): string {
 		if ( !$description ) {
 			return '';
 		}
@@ -171,16 +154,9 @@ class ItemDisambiguation {
 	 * The matched text and language are wrapped using the wikibase-itemlink-userlang-wrapper message.
 	 * If the matched term has the same text as the display label, an empty string is returned.
 	 *
-	 * @param Term|null $match
-	 * @param Term|null $label
-	 *
 	 * @return string HTML
 	 */
-	private function getMatchHtml( Term $match = null, Term $label = null ) {
-		if ( !$match ) {
-			return '';
-		}
-
+	private function getMatchHtml( Term $match, ?Term $label ): string {
 		if ( $label && $label->getText() == $match->getText() ) {
 			return '';
 		}
