@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests\Hooks;
 
 use MediaWiki\Request\FauxRequest;
@@ -42,18 +44,10 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 	private $entityRevisionLookup;
 	private $outputPageEntityIdReader;
 	private $entityFactory;
-
-	/**
-	 * @var ItemId
-	 */
-	private $itemId;
+	private ItemId $itemId;
 	private $languageNameLookup;
 	private $preferredLanguageLookup;
-
-	/**
-	 * @var bool
-	 */
-	private $isExternallyRendered;
+	private bool $isExternallyRendered;
 
 	/**
 	 * @var MockObject|OutputPageEntityViewChecker
@@ -89,10 +83,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 			->willReturn( true );
 	}
 
-	/**
-	 * @return OutputPage
-	 */
-	private function newOutputPage() {
+	private function newOutputPage(): OutputPage {
 		$mockContext = $this->createMock( RequestContext::class );
 		$mockContext->method( 'getLanguage' )
 			->willReturn( $this->getServiceContainer()->getLanguageFactory()->getLanguage( $this->uiLanguageCode ) );
@@ -106,7 +97,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 		return $outputPage;
 	}
 
-	private function getHookHandler() {
+	private function getHookHandler(): OutputPageBeforeHTMLHookHandler {
 		return new OutputPageBeforeHTMLHookHandler(
 			new NullHttpRequestFactory(),
 			new NullStatsdDataFactory(),
@@ -210,11 +201,9 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( $expectedHtml, $html );
 	}
 
-	/**
-	 * @param $itemId
-	 * @return \PHPUnit\Framework\MockObject\MockObject
-	 */
-	private function getOutputPageEntityIdReaderReturningEntity( $itemId ) {
+	private function getOutputPageEntityIdReaderReturningEntity(
+		ItemId $itemId
+	): OutputPageEntityIdReader {
 		$outputPageEntityIdReader = $this->createMock( OutputPageEntityIdReader::class );
 		$outputPageEntityIdReader->expects( $this->once() )
 			->method( 'getEntityIdFromOutputPage' )
@@ -296,13 +285,13 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	private function mockEditability( $permissive = true ) {
+	private function mockEditability( bool $permissive = true ): OutputPageEditability {
 		$editability = $this->createMock( OutputPageEditability::class );
 		$editability->method( 'validate' )->willReturn( $permissive );
 		return $editability;
 	}
 
-	private function mockEditabilityDismissive() {
+	private function mockEditabilityDismissive(): OutputPageEditability {
 		return $this->mockEditability( false );
 	}
 
