@@ -20,6 +20,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\EditMetadataRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\LanguageCodeRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdFilterRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\StatementIdRequest;
@@ -75,6 +76,10 @@ class DeserializedRequestAdapter implements
 
 	public function getStatement(): Statement {
 		return $this->getRequestField( StatementSerializationRequest::class );
+	}
+
+	public function getPatch(): array {
+		return $this->getRequestField( PatchRequest::class );
 	}
 
 	/**

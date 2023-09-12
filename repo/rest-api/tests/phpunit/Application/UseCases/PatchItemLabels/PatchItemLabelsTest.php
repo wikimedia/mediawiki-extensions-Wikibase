@@ -17,6 +17,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchedLabelsVali
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
@@ -33,6 +34,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\JsonPatcher;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
+use Wikibase\Repo\Tests\RestApi\Application\UseCases\RequestValidation\TestValidatingRequestFieldDeserializerFactory;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 
 /**
@@ -73,7 +75,11 @@ class PatchItemLabelsTest extends TestCase {
 		$this->getRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
 		$this->getRevisionMetadata->method( 'execute' )
 			->willReturn( [ 321, '20201111070707' ] );
-		$this->validator = $this->createStub( PatchItemLabelsValidator::class );
+		$this->validator = new PatchItemLabelsValidator(
+			new ValidatingRequestDeserializer(
+				TestValidatingRequestFieldDeserializerFactory::newFactory()
+			)
+		);
 	}
 
 	public function testHappyPath(): void {
@@ -91,7 +97,7 @@ class PatchItemLabelsTest extends TestCase {
 
 		$revisionId = 657;
 		$lastModified = '20221212040506';
-		$editTags = [ 'some', 'tags' ];
+		$editTags = TestValidatingRequestFieldDeserializerFactory::ALLOWED_TAGS;
 		$isBot = false;
 		$comment = 'labels replaced by ' . __method__;
 
@@ -130,7 +136,7 @@ class PatchItemLabelsTest extends TestCase {
 	public function testInvalidRequest_throwsException(): void {
 		$expectedException = new UseCaseException( 'invalid-label-patch-test' );
 		$this->validator = $this->createStub( PatchItemLabelsValidator::class );
-		$this->validator->method( 'assertValidRequest' )->willThrowException( $expectedException );
+		$this->validator->method( 'validateAndDeserialize' )->willThrowException( $expectedException );
 		try {
 			$this->newUseCase()->execute( $this->createStub( PatchItemLabelsRequest::class ) );
 			$this->fail( 'this should not be reached' );

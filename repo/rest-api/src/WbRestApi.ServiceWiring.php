@@ -399,11 +399,7 @@ return [
 			),
 			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getItemUpdater( $services ),
-			new PatchItemLabelsValidator(
-				new ItemIdValidator(),
-				new JsonDiffJsonPatchValidator(),
-				WbRestApi::getEditMetadataValidator( $services )
-			),
+			new PatchItemLabelsValidator( WbRestApi::getValidatingRequestDeserializer( $services ) ),
 			WbRestApi::getAssertUserIsAuthorized( $services )
 		);
 	},
@@ -604,6 +600,7 @@ return [
 		return new ValidatingRequestDeserializer( new ValidatingRequestFieldDeserializerFactory(
 			new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() ),
 			WbRestApi::getStatementDeserializer( $services ),
+			new JsonDiffJsonPatchValidator(),
 			CommentStore::COMMENT_CHARACTER_LIMIT,
 			ChangeTags::listExplicitlyDefinedTags()
 		) );

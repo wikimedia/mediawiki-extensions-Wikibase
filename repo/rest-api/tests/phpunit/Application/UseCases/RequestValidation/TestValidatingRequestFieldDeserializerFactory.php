@@ -15,6 +15,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingReque
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
 use Wikibase\Repo\RestApi\Infrastructure\DataValuesValueDeserializer;
+use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatchValidator;
 
 /**
  * @license GPL-2.0-or-later
@@ -44,6 +45,7 @@ class TestValidatingRequestFieldDeserializerFactory {
 				$propertyValuePairDeserializer,
 				new ReferenceDeserializer( $propertyValuePairDeserializer )
 			),
+			new JsonDiffJsonPatchValidator(),
 			500,
 			self::ALLOWED_TAGS
 		);

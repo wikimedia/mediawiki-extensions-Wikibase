@@ -12,6 +12,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\EditMetadataRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\LanguageCodeRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdFilterRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\DeserializedRequestAdapter;
@@ -126,6 +127,17 @@ class DeserializedRequestAdapterTest extends TestCase {
 	public function testGivenNoEditMetadata_getEditMetadataThrows(): void {
 		$this->expectException( LogicException::class );
 		( new DeserializedRequestAdapter( [] ) )->getEditMetadata();
+	}
+
+	public function testGetPatch(): void {
+		$patch = [ [ 'op' => 'test', 'path' => '/some-path', 'value' => 'abc' ] ];
+		$requestAdapter = new DeserializedRequestAdapter( [ PatchRequest::class => $patch ] );
+		$this->assertSame( $patch, $requestAdapter->getPatch() );
+	}
+
+	public function testGivenNoPatch_getPatchThrows(): void {
+		$this->expectException( LogicException::class );
+		( new DeserializedRequestAdapter( [] ) )->getPatch();
 	}
 
 }

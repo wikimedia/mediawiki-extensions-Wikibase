@@ -13,12 +13,14 @@ use Wikibase\Repo\RestApi\Application\UseCases\EditMetadataRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\LanguageCodeRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdFilterRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\EditMetadataRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ItemIdRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\LanguageCodeRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\MappedRequestValidatingDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\PatchRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\StatementIdRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\StatementSerializationRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
@@ -134,6 +136,17 @@ class ValidatingRequestDeserializerTest extends TestCase {
 		);
 	}
 
+	public function testGivenValidPatchRequest_returnsPatch(): void {
+		$patch = [ [ 'op' => 'test', 'path' => '/some/path', 'value' => 'abc' ] ];
+		$request = $this->createStub( PatchUseCaseRequest::class );
+		$request->method( 'getPatch' )->willReturn( $patch );
+
+		$this->assertEquals(
+			[ PatchRequest::class => $patch ],
+			$this->newRequestDeserializer()->validateAndDeserialize( $request )
+		);
+	}
+
 	/**
 	 * @dataProvider invalidRequestProvider
 	 */
@@ -195,6 +208,11 @@ class ValidatingRequestDeserializerTest extends TestCase {
 			EditMetadataRequestValidatingDeserializer::class,
 			'newEditMetadataRequestValidatingDeserializer',
 		];
+		yield [
+			PatchUseCaseRequest::class,
+			PatchRequestValidatingDeserializer::class,
+			'newPatchRequestValidatingDeserializer',
+		];
 	}
 
 	private function newRequestDeserializer( ValidatingRequestFieldDeserializerFactory $factory = null ): ValidatingRequestDeserializer {
@@ -218,4 +236,5 @@ interface LanguageCodeUseCaseRequest extends UseCaseRequest, LanguageCodeRequest
 interface ItemFieldsUseCaseRequest extends UseCaseRequest, ItemFieldsRequest {}
 interface StatementSerializationUseCaseRequest extends UseCaseRequest, StatementSerializationRequest {}
 interface EditMetadataUseCaseRequest extends UseCaseRequest, EditMetadataRequest {}
+interface PatchUseCaseRequest extends UseCaseRequest, PatchRequest {}
 // @codingStandardsIgnoreEnd

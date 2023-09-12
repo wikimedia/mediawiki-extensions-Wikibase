@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels;
 
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
@@ -59,20 +58,19 @@ class PatchItemLabels {
 	 * @throws UseCaseError
 	 */
 	public function execute( PatchItemLabelsRequest $request ): PatchItemLabelsResponse {
-		$this->useCaseValidator->assertValidRequest( $request );
-
-		$itemId = new ItemId( $request->getItemId() );
+		$deserializedRequest = $this->useCaseValidator->validateAndDeserialize( $request );
+		$itemId = $deserializedRequest->getItemId();
 
 		$this->assertItemExists->execute( $itemId );
 
-		$this->assertUserIsAuthorized->execute( $itemId, $request->getUsername() );
+		$this->assertUserIsAuthorized->execute( $itemId, $deserializedRequest->getEditMetadata()->getUser()->getUsername() );
 
 		$labels = $this->labelsRetriever->getLabels( $itemId );
 		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
 		$serialization = $this->labelsSerializer->serialize( $labels );
 
 		try {
-			$patchedLabels = $this->patcher->patch( iterator_to_array( $serialization ), $request->getPatch() );
+			$patchedLabels = $this->patcher->patch( iterator_to_array( $serialization ), $deserializedRequest->getPatch() );
 		} catch ( PatchPathException $e ) {
 			throw new UseCaseError(
 				UseCaseError::PATCH_TARGET_NOT_FOUND,
@@ -100,9 +98,9 @@ class PatchItemLabels {
 		$item->getFingerprint()->setLabels( $modifiedLabels );
 
 		$editMetadata = new EditMetadata(
-			$request->getEditTags(),
-			$request->isBot(),
-			LabelsEditSummary::newPatchSummary( $request->getComment(), $originalLabels, $modifiedLabels )
+			$deserializedRequest->getEditMetadata()->getTags(),
+			$deserializedRequest->getEditMetadata()->isBot(),
+			LabelsEditSummary::newPatchSummary( $deserializedRequest->getEditMetadata()->getComment(), $originalLabels, $modifiedLabels )
 		);
 
 		$revision = $this->itemUpdater->update(
