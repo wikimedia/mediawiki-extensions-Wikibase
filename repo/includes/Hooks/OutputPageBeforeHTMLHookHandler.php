@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Hooks;
 
 use IBufferingStatsdDataFactory;
@@ -49,76 +51,23 @@ use Wikibase\View\ToolbarEditSectionGenerator;
  */
 class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 
-	/** @var HttpRequestFactory */
-	private $httpRequestFactory;
-
-	/** @var IBufferingStatsdDataFactory */
-	private $statsDataFactory;
-
-	/** @var SettingsArray */
-	private $repoSettings;
-
-	/**
-	 * @var TemplateFactory
-	 */
-	private $templateFactory;
-
-	/**
-	 * @var EntityRevisionLookup
-	 */
-	private $entityRevisionLookup;
-
-	/**
-	 * @var LanguageNameLookup
-	 */
-	private $languageNameLookup;
-
-	/**
-	 * @var OutputPageEntityIdReader
-	 */
-	private $outputPageEntityIdReader;
-
-	/**
-	 * @var EntityFactory
-	 */
-	private $entityFactory;
-
-	/**
-	 * @var string
-	 */
-	private $cookiePrefix;
-
-	/**
-	 * @var OutputPageEditability
-	 */
-	private $editability;
-
-	/**
-	 * @var bool
-	 */
-	private $isExternallyRendered;
-
-	/**
-	 * @var UserPreferredContentLanguagesLookup
-	 */
-	private $userPreferredTermsLanguages;
-
-	/**
-	 * @var OutputPageEntityViewChecker
-	 */
-	private $entityViewChecker;
-
-	/** @var LanguageFallbackChainFactory */
-	private $languageFallbackChainFactory;
-
-	/** @var LanguageDirectionalityLookup */
-	private $languageDirectionalityLookup;
-
-	/** @var UserOptionsLookup */
-	private $userOptionsLookup;
-
-	/** @var LoggerInterface */
-	private $logger;
+	private HttpRequestFactory $httpRequestFactory;
+	private IBufferingStatsdDataFactory $statsDataFactory;
+	private SettingsArray $repoSettings;
+	private TemplateFactory $templateFactory;
+	private EntityRevisionLookup $entityRevisionLookup;
+	private LanguageNameLookup $languageNameLookup;
+	private OutputPageEntityIdReader $outputPageEntityIdReader;
+	private EntityFactory $entityFactory;
+	private string $cookiePrefix;
+	private OutputPageEditability $editability;
+	private bool $isExternallyRendered;
+	private UserPreferredContentLanguagesLookup $userPreferredTermsLanguages;
+	private OutputPageEntityViewChecker $entityViewChecker;
+	private LanguageFallbackChainFactory $languageFallbackChainFactory;
+	private LanguageDirectionalityLookup $languageDirectionalityLookup;
+	private UserOptionsLookup $userOptionsLookup;
+	private LoggerInterface $logger;
 
 	public function __construct(
 		HttpRequestFactory $httpRequestFactory,
@@ -158,9 +107,6 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		$this->logger = $logger ?: new NullLogger();
 	}
 
-	/**
-	 * @return self
-	 */
 	public static function factory(
 		Language $contentLanguage,
 		HttpRequestFactory $httpRequestFactory,
@@ -226,13 +172,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		$html = $this->showOrHideEditLinks( $out, $html );
 	}
 
-	/**
-	 * @param OutputPage $out
-	 * @param string $html
-	 *
-	 * @return string
-	 */
-	private function replacePlaceholders( OutputPage $out, $html ) {
+	private function replacePlaceholders( OutputPage $out, string $html ): string {
 		$placeholders = $out->getProperty( 'wikibase-view-chunks' );
 		if ( !$placeholders ) {
 			return $html;
@@ -251,12 +191,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		return $injector->inject( $html, $getHtmlCallback );
 	}
 
-	/**
-	 * @param OutputPage $out
-	 *
-	 * @return EntityDocument|null
-	 */
-	private function getEntity( OutputPage $out ) {
+	private function getEntity( OutputPage $out ): ?EntityDocument {
 		$entityId = $this->getEntityId( $out );
 
 		if ( !$entityId ) {
@@ -295,16 +230,10 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 			);
 	}
 
-	/**
-	 * @param EntityDocument $entity
-	 * @param OutputPage $out
-	 *
-	 * @return EntityViewPlaceholderExpander
-	 */
 	private function getLocallyRenderedEntityViewPlaceholderExpander(
 		EntityDocument $entity,
 		OutputPage $out
-	) {
+	): EntityViewPlaceholderExpander {
 		$language = $out->getLanguage();
 		$user = $out->getUser();
 		$entityTermsListHtml = $this->getEntityTermsListHtml( $out );
@@ -365,7 +294,9 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		return $userPreferredTermsLanguages;
 	}
 
-	private function getExternallyRenderedEntityViewPlaceholderExpander( OutputPage $out ) {
+	private function getExternallyRenderedEntityViewPlaceholderExpander(
+		OutputPage $out
+	): ExternallyRenderedEntityViewPlaceholderExpander {
 		return new ExternallyRenderedEntityViewPlaceholderExpander(
 			$out,
 			new TermboxRequestInspector( $this->languageFallbackChainFactory ),
@@ -399,19 +330,14 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		}
 	}
 
-	private function showOrHideEditLinks( OutputPage $out, $html ) {
+	private function showOrHideEditLinks( OutputPage $out, string $html ): string {
 		return ToolbarEditSectionGenerator::enableSectionEditLinks(
 			$html,
 			$this->editability->validate( $out )
 		);
 	}
 
-	/**
-	 * @param OutputPage $out
-	 *
-	 * @return EntityId|null
-	 */
-	private function getEntityId( OutputPage $out ) {
+	private function getEntityId( OutputPage $out ): ?EntityId {
 		return $this->outputPageEntityIdReader->getEntityIdFromOutputPage( $out );
 	}
 
