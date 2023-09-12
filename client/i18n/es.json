@@ -107,7 +107,7 @@
 	"wikibase-pageinfo-entity-usage-T": "Título",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Declaración: $1",
 	"wikibase-pageinfo-entity-usage-X": "Todos los datos de la entidad",
-	"wikibase-pageinfo-entity-usage-O": "Otro (declaraciones)",
+	"wikibase-pageinfo-entity-usage-O": "Otros (p. ej.: alias, existencia de entidades)",
 	"wikibase-property-render-error": "Error al procesar propiedad $1: $2",
 	"wikibase-otherprojects": "En otros proyectos",
 	"wikibase-otherprojects-beta-message": "Barra lateral de otros proyectos",
