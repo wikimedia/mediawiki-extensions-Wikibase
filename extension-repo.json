@@ -881,7 +881,7 @@
 				"WikibaseRepo.EntityRevisionLookup",
 				"WikibaseRepo.LanguageDirectionalityLookup",
 				"WikibaseRepo.LanguageFallbackChainFactory",
-				"WikibaseRepo.LanguageNameLookup",
+				"WikibaseRepo.LanguageNameLookupFactory",
 				"WikibaseRepo.Logger",
 				"WikibaseRepo.Settings",
 				"WikibaseRepo.TermsLanguages"

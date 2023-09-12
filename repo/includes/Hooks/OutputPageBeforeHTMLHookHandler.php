@@ -21,7 +21,7 @@ use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\EntityFactory;
 use Wikibase\Lib\LanguageFallbackChainFactory;
-use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\LanguageNameLookupFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\BabelUserLanguageLookup;
@@ -56,7 +56,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 	private SettingsArray $repoSettings;
 	private TemplateFactory $templateFactory;
 	private EntityRevisionLookup $entityRevisionLookup;
-	private LanguageNameLookup $languageNameLookup;
+	private LanguageNameLookupFactory $languageNameLookupFactory;
 	private OutputPageEntityIdReader $outputPageEntityIdReader;
 	private EntityFactory $entityFactory;
 	private string $cookiePrefix;
@@ -75,7 +75,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		SettingsArray $repoSettings,
 		TemplateFactory $templateFactory,
 		EntityRevisionLookup $entityRevisionLookup,
-		LanguageNameLookup $languageNameLookup,
+		LanguageNameLookupFactory $languageNameLookupFactory,
 		OutputPageEntityIdReader $outputPageEntityIdReader,
 		EntityFactory $entityFactory,
 		$cookiePrefix,
@@ -93,7 +93,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		$this->repoSettings = $repoSettings;
 		$this->templateFactory = $templateFactory;
 		$this->entityRevisionLookup = $entityRevisionLookup;
-		$this->languageNameLookup = $languageNameLookup;
+		$this->languageNameLookupFactory = $languageNameLookupFactory;
 		$this->outputPageEntityIdReader = $outputPageEntityIdReader;
 		$this->entityFactory = $entityFactory;
 		$this->cookiePrefix = $cookiePrefix;
@@ -118,7 +118,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		EntityRevisionLookup $entityRevisionLookup,
 		LanguageDirectionalityLookup $languageDirectionalityLookup,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
-		LanguageNameLookup $languageNameLookup,
+		LanguageNameLookupFactory $languageNameLookupFactory,
 		LoggerInterface $logger,
 		SettingsArray $settings,
 		ContentLanguages $termsLanguages
@@ -133,7 +133,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 			$settings,
 			TemplateFactory::getDefaultInstance(),
 			$entityRevisionLookup,
-			$languageNameLookup,
+			$languageNameLookupFactory,
 			new OutputPageEntityIdReader(
 				$entityViewChecker,
 				$entityIdParser
@@ -248,7 +248,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 				$entityTermsListHtml
 			),
 			$this->languageDirectionalityLookup,
-			$this->languageNameLookup,
+			$this->languageNameLookupFactory->getForLanguage( $language ),
 			new MediaWikiLocalizedTextProvider( $language ),
 			$this->userOptionsLookup,
 			$this->cookiePrefix,
