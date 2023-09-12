@@ -5,6 +5,7 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\RequestValidation;
 use Wikibase\Repo\RestApi\Application\UseCases\EditMetadataRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\ItemLabelEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\LanguageCodeRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdFilterRequest;
@@ -39,6 +40,7 @@ class ValidatingRequestDeserializer {
 			StatementSerializationRequest::class => [ $this->factory, 'newStatementSerializationRequestValidatingDeserializer' ],
 			EditMetadataRequest::class => [ $this->factory, 'newEditMetadataRequestValidatingDeserializer' ],
 			PatchRequest::class => [ $this->factory, 'newPatchRequestValidatingDeserializer' ],
+			ItemLabelEditRequest::class => [ $this->factory, 'newItemLabelEditRequestValidatingDeserializer' ],
 		];
 		$result = [];
 

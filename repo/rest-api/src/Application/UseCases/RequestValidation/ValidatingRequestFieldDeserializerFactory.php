@@ -10,6 +10,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdFilterRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
+use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\JsonPatchValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
@@ -25,6 +26,7 @@ class ValidatingRequestFieldDeserializerFactory {
 	private LanguageCodeValidator $languageCodeValidator;
 	private StatementDeserializer $statementDeserializer;
 	private JsonPatchValidator $patchValidator;
+	private ItemLabelValidator $itemLabelValidator;
 	private int $maxCommentLength;
 	private array $allowedTags;
 
@@ -32,12 +34,14 @@ class ValidatingRequestFieldDeserializerFactory {
 		LanguageCodeValidator $languageCodeValidator,
 		StatementDeserializer $statementDeserializer,
 		JsonPatchValidator $patchValidator,
+		ItemLabelValidator $itemLabelValidator,
 		int $maxCommentLength,
 		array $allowedTags
 	) {
 		$this->languageCodeValidator = $languageCodeValidator;
 		$this->statementDeserializer = $statementDeserializer;
 		$this->patchValidator = $patchValidator;
+		$this->itemLabelValidator = $itemLabelValidator;
 		$this->maxCommentLength = $maxCommentLength;
 		$this->allowedTags = $allowedTags;
 	}
@@ -97,6 +101,10 @@ class ValidatingRequestFieldDeserializerFactory {
 
 	public function newPatchRequestValidatingDeserializer(): PatchRequestValidatingDeserializer {
 		return new PatchRequestValidatingDeserializer( $this->patchValidator );
+	}
+
+	public function newItemLabelEditRequestValidatingDeserializer(): ItemLabelEditRequestValidatingDeserializer {
+		return new ItemLabelEditRequestValidatingDeserializer( $this->itemLabelValidator );
 	}
 
 }

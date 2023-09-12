@@ -2,8 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel;
 
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Term\Term;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
@@ -43,29 +41,30 @@ class SetItemLabel {
 	 * @throws UseCaseError
 	 */
 	public function execute( SetItemLabelRequest $request ): SetItemLabelResponse {
-		$this->validator->assertValidRequest( $request );
-
-		$itemId = new ItemId( $request->getItemId() );
-		$term = new Term( $request->getLanguageCode(), $request->getLabel() );
+		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
+		$itemId = $deserializedRequest->getItemId();
+		$label = $deserializedRequest->getLabel();
 
 		$this->assertItemExists->execute( $itemId );
 
-		$this->assertUserIsAuthorized->execute( $itemId, $request->getUsername() );
+		$editMetadata = $deserializedRequest->getEditMetadata();
+		$this->assertUserIsAuthorized->execute( $itemId, $editMetadata->getUser()->getUsername() );
 
 		$item = $this->itemRetriever->getItem( $itemId );
-		$labelExists = $item->getLabels()->hasTermForLanguage( $request->getLanguageCode() );
-		$item->getLabels()->setTerm( $term );
+		$labelExists = $item->getLabels()->hasTermForLanguage( $label->getLanguageCode() );
+		$item->getLabels()->setTerm( $label );
 
 		$editSummary = $labelExists
-			? LabelEditSummary::newReplaceSummary( $request->getComment(), $term )
-			: LabelEditSummary::newAddSummary( $request->getComment(), $term );
+			? LabelEditSummary::newReplaceSummary( $editMetadata->getComment(), $label )
+			: LabelEditSummary::newAddSummary( $editMetadata->getComment(), $label );
 
-		$editMetadata = new EditMetadata( $request->getEditTags(), $request->isBot(), $editSummary );
-		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Item validated and exists
-		$newRevision = $this->itemUpdater->update( $item, $editMetadata );
+		$newRevision = $this->itemUpdater->update(
+			$item, // @phan-suppress-current-line PhanTypeMismatchArgumentNullable
+			new EditMetadata( $editMetadata->getTags(), $editMetadata->isBot(), $editSummary )
+		);
 
 		return new SetItemLabelResponse(
-			$newRevision->getItem()->getLabels()[$request->getLanguageCode()],
+			$newRevision->getItem()->getLabels()[$label->getLanguageCode()],
 			$newRevision->getLastModified(),
 			$newRevision->getRevisionId(),
 			$labelExists

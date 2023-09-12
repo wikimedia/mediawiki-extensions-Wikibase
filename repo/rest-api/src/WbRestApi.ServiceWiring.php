@@ -531,16 +531,7 @@ return [
 
 	'WbRestApi.SetItemLabel' => function( MediaWikiServices $services ): SetItemLabel {
 		return new SetItemLabel(
-			new SetItemLabelValidator(
-				new ItemIdValidator(),
-				new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() ),
-				WbRestApi::getEditMetadataValidator( $services ),
-				new WikibaseRepoItemLabelValidator(
-					new TermValidatorFactoryLabelTextValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
-					WikibaseRepo::getItemTermsCollisionDetector( $services ),
-					WbRestApi::getItemDataRetriever( $services )
-				)
-			),
+			new SetItemLabelValidator( WbRestApi::getValidatingRequestDeserializer( $services ) ),
 			WbRestApi::getAssertItemExists( $services ),
 			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getItemUpdater( $services ),
@@ -601,6 +592,11 @@ return [
 			new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() ),
 			WbRestApi::getStatementDeserializer( $services ),
 			new JsonDiffJsonPatchValidator(),
+			new WikibaseRepoItemLabelValidator(
+				new TermValidatorFactoryLabelTextValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
+				WikibaseRepo::getItemTermsCollisionDetector( $services ),
+				WbRestApi::getItemDataRetriever( $services )
+			),
 			CommentStore::COMMENT_CHARACTER_LIMIT,
 			ChangeTags::listExplicitlyDefinedTags()
 		) );

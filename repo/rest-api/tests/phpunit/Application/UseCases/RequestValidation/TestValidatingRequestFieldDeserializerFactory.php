@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\RequestValidation;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\DataTypeFactory;
@@ -12,7 +13,9 @@ use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserialize
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestFieldDeserializerFactory;
+use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
+use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
 use Wikibase\Repo\RestApi\Infrastructure\DataValuesValueDeserializer;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatchValidator;
@@ -46,6 +49,11 @@ class TestValidatingRequestFieldDeserializerFactory {
 				new ReferenceDeserializer( $propertyValuePairDeserializer )
 			),
 			new JsonDiffJsonPatchValidator(),
+			new class() implements ItemLabelValidator {
+				public function validate( ItemId $itemId, string $language, string $label ): ?ValidationError {
+					return null;
+				}
+			},
 			500,
 			self::ALLOWED_TAGS
 		);
