@@ -3,7 +3,6 @@
 namespace Wikibase\DataModel\Tests\Entity;
 
 use InvalidArgumentException;
-use MediaWikiUnitTestCase;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
@@ -15,7 +14,7 @@ use Wikibase\DataModel\Entity\ItemId;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ItemIdTest extends MediaWikiUnitTestCase {
+class ItemIdTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider idSerializationProvider
@@ -87,7 +86,6 @@ class ItemIdTest extends MediaWikiUnitTestCase {
 
 	public function testSerialize() {
 		$id = new ItemId( 'Q1' );
-		$this->expectDeprecationAndContinue( '/ItemId::serialize/' );
 		$this->assertSame( 'Q1', $id->serialize() );
 	}
 
@@ -96,7 +94,6 @@ class ItemIdTest extends MediaWikiUnitTestCase {
 	 */
 	public function testUnserialize( $json, $expected ) {
 		$id = new ItemId( 'Q1' );
-		$this->expectDeprecationAndContinue( '/ItemId::unserialize/' );
 		$id->unserialize( $json );
 		$this->assertSame( $expected, $id->getSerialization() );
 	}
