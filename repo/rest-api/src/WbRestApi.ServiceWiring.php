@@ -120,11 +120,7 @@ return [
 
 	'WbRestApi.AddItemStatement' => function( MediaWikiServices $services ): AddItemStatement {
 		return new AddItemStatement(
-			new AddItemStatementValidator(
-				new ItemIdValidator(),
-				new StatementValidator( WbRestApi::getStatementDeserializer() ),
-				WbRestApi::getEditMetadataValidator( $services )
-			),
+			new AddItemStatementValidator( WbRestApi::getValidatingRequestDeserializer( $services ) ),
 			WbRestApi::getAssertItemExists( $services ),
 			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getItemUpdater( $services ),
@@ -595,7 +591,10 @@ return [
 
 	'WbRestApi.ValidatingRequestDeserializer' => function( MediaWikiServices $services ): ValidatingRequestDeserializer {
 		return new ValidatingRequestDeserializer( new ValidatingRequestFieldDeserializerFactory(
-			new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() )
+			new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() ),
+			WbRestApi::getStatementDeserializer( $services ),
+			CommentStore::COMMENT_CHARACTER_LIMIT,
+			ChangeTags::listExplicitlyDefinedTags()
 		) );
 	},
 

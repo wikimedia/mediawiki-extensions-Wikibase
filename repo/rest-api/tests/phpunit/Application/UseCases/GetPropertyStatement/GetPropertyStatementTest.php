@@ -10,9 +10,10 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\GetPropertyS
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\GetPropertyStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
-use Wikibase\Repo\RestApi\WbRestApi;
+use Wikibase\Repo\Tests\RestApi\Application\UseCases\RequestValidation\TestValidatingRequestFieldDeserializerFactory;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\GetPropertyStatement
@@ -30,7 +31,9 @@ class GetPropertyStatementTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->validator = new GetPropertyStatementValidator( WbRestApi::getValidatingRequestDeserializer() );
+		$this->validator = new GetPropertyStatementValidator(
+			new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() )
+		);
 		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
 		$this->getStatement = $this->createStub( GetStatement::class );
 	}

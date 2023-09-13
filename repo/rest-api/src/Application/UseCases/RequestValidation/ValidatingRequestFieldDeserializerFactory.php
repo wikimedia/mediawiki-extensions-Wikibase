@@ -4,13 +4,16 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\RequestValidation;
 
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
+use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdFilterRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdRequest;
+use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
+use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
 
 /**
@@ -19,9 +22,20 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
 class ValidatingRequestFieldDeserializerFactory {
 
 	private LanguageCodeValidator $languageCodeValidator;
+	private StatementDeserializer $statementDeserializer;
+	private int $maxCommentLength;
+	private array $allowedTags;
 
-	public function __construct( LanguageCodeValidator $languageCodeValidator ) {
+	public function __construct(
+		LanguageCodeValidator $languageCodeValidator,
+		StatementDeserializer $statementDeserializer,
+		int $maxCommentLength,
+		array $allowedTags
+	) {
 		$this->languageCodeValidator = $languageCodeValidator;
+		$this->statementDeserializer = $statementDeserializer;
+		$this->maxCommentLength = $maxCommentLength;
+		$this->allowedTags = $allowedTags;
 	}
 
 	public function newItemIdRequestValidatingDeserializer(): ItemIdRequestValidatingDeserializer {
@@ -62,6 +76,18 @@ class ValidatingRequestFieldDeserializerFactory {
 		$fieldsValidator = new FieldsFilterValidatingDeserializer( ItemParts::VALID_FIELDS );
 		return new MappedRequestValidatingDeserializer(
 			fn( ItemFieldsRequest $r ) => $fieldsValidator->validateAndDeserialize( $r->getItemFields() )
+		);
+	}
+
+	public function newStatementSerializationRequestValidatingDeserializer(): StatementSerializationRequestValidatingDeserializer {
+		return new StatementSerializationRequestValidatingDeserializer(
+			new StatementValidator( $this->statementDeserializer )
+		);
+	}
+
+	public function newEditMetadataRequestValidatingDeserializer(): EditMetadataRequestValidatingDeserializer {
+		return new EditMetadataRequestValidatingDeserializer(
+			new EditMetadataValidator( $this->maxCommentLength, $this->allowedTags )
 		);
 	}
 

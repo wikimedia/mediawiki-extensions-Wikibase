@@ -31,6 +31,7 @@ class GetPropertyStatementRouteHandlerTest extends MediaWikiIntegrationTestCase 
 
 	protected function setUp(): void {
 		parent::setUp();
+		$this->setMockChangeTagsStore();
 		$this->setMockPreconditionMiddlewareFactory();
 	}
 

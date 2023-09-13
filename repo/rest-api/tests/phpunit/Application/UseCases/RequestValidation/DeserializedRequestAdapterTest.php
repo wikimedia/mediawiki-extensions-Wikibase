@@ -6,7 +6,9 @@ use LogicException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementGuid;
+use Wikibase\Repo\RestApi\Application\UseCases\EditMetadataRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\LanguageCodeRequest;
@@ -14,6 +16,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdFilterRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\DeserializedRequestAdapter;
 use Wikibase\Repo\RestApi\Application\UseCases\StatementIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\StatementSerializationRequest;
+use Wikibase\Repo\RestApi\Domain\Model\UserProvidedEditMetadata;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\DeserializedRequestAdapter
@@ -100,6 +104,28 @@ class DeserializedRequestAdapterTest extends TestCase {
 	public function testGivenNoItemFields_getItemFieldsThrows(): void {
 		$this->expectException( LogicException::class );
 		( new DeserializedRequestAdapter( [] ) )->getItemFields();
+	}
+
+	public function testGetStatementSerialization(): void {
+		$statement = $this->createStub( Statement::class );
+		$requestAdapter = new DeserializedRequestAdapter( [ StatementSerializationRequest::class => $statement ] );
+		$this->assertSame( $statement, $requestAdapter->getStatement() );
+	}
+
+	public function testGivenNoStatementSerialization_getStatementSerializationThrows(): void {
+		$this->expectException( LogicException::class );
+		( new DeserializedRequestAdapter( [] ) )->getStatement();
+	}
+
+	public function testGetEditMetadata(): void {
+		$editMetadata = $this->createStub( UserProvidedEditMetadata::class );
+		$requestAdapter = new DeserializedRequestAdapter( [ EditMetadataRequest::class => $editMetadata ] );
+		$this->assertSame( $editMetadata, $requestAdapter->getEditMetadata() );
+	}
+
+	public function testGivenNoEditMetadata_getEditMetadataThrows(): void {
+		$this->expectException( LogicException::class );
+		( new DeserializedRequestAdapter( [] ) )->getEditMetadata();
 	}
 
 }

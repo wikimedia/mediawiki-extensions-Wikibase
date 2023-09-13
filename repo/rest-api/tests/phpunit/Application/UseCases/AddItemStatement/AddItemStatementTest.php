@@ -2,11 +2,11 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\AddItemStatement;
 
-use CommentStore;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Tests\NewItem;
@@ -17,11 +17,9 @@ use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatement
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
-use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
-use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Item as ReadModelItem;
@@ -30,7 +28,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
-use Wikibase\Repo\Tests\RestApi\Application\Serialization\DeserializerFactory;
+use Wikibase\Repo\Tests\RestApi\Application\UseCases\RequestValidation\TestValidatingRequestFieldDeserializerFactory;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
 
@@ -52,6 +50,7 @@ class AddItemStatementTest extends TestCase {
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
 
 	private const ALLOWED_TAGS = [ 'some', 'tags', 'are', 'allowed' ];
+	private const EXISTING_PROPERTY = 'P123';
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -69,7 +68,7 @@ class AddItemStatementTest extends TestCase {
 		$postModificationRevisionId = 322;
 		$modificationTimestamp = '20221111070707';
 		$newGuid = new StatementGuid( $item->getId(), 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
-		$editTags = [ 'some', 'tags' ];
+		$editTags = [ TestValidatingRequestFieldDeserializerFactory::ALLOWED_TAGS[0] ];
 		$isBot = false;
 		$comment = 'potato';
 
@@ -176,8 +175,15 @@ class AddItemStatementTest extends TestCase {
 	}
 
 	private function newUseCase(): AddItemStatement {
+		$dataTypeLookup = new InMemoryDataTypeLookup();
+		$dataTypeLookup->setDataTypeForProperty( new NumericPropertyId( self::EXISTING_PROPERTY ), 'string' );
+
 		return new AddItemStatement(
-			$this->newValidator(),
+			new AddItemStatementValidator(
+				new ValidatingRequestDeserializer(
+					TestValidatingRequestFieldDeserializerFactory::newFactory( $dataTypeLookup )
+				)
+			),
 			new AssertItemExists( $this->getRevisionMetadata ),
 			$this->itemRetriever,
 			$this->itemUpdater,
@@ -186,23 +192,10 @@ class AddItemStatementTest extends TestCase {
 		);
 	}
 
-	private function newValidator(): AddItemStatementValidator {
-		return new AddItemStatementValidator(
-			new ItemIdValidator(),
-			new StatementValidator( DeserializerFactory::newStatementDeserializer(
-				$this->createStub( PropertyDataTypeLookup::class )
-			) ),
-			new EditMetadataValidator(
-				CommentStore::COMMENT_CHARACTER_LIMIT,
-				self::ALLOWED_TAGS
-			)
-		);
-	}
-
 	private function getValidNoValueStatementSerialization(): array {
 		return [
 			'property' => [
-				'id' => 'P123',
+				'id' => self::EXISTING_PROPERTY,
 			],
 			'value' => [
 				'type' => 'novalue',
