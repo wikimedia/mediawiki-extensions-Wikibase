@@ -4,7 +4,6 @@ declare( strict_types=1 );
 namespace Wikibase\Lib\Tests\FederatedProperties;
 
 use InvalidArgumentException;
-use MediaWikiTestCaseTrait;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Lib\FederatedProperties\FederatedPropertyId;
 
@@ -15,12 +14,9 @@ use Wikibase\Lib\FederatedProperties\FederatedPropertyId;
  */
 class FederatedPropertyIdTest extends TestCase {
 
-	use MediaWikiTestCaseTrait;
-
 	public function testCreateAndSerializeId() {
 		$serialization = 'http://www.wikidata.org/entity/P31';
 		$id = new FederatedPropertyId( $serialization, 'P31' );
-		$this->expectDeprecationAndContinue( '/FederatedPropertyId::serialize/' );
 		$this->assertEquals( $serialization, $id->serialize() );
 		$this->assertEquals( $serialization, $id->getSerialization() );
 	}
@@ -40,7 +36,6 @@ class FederatedPropertyIdTest extends TestCase {
 	public function testUnserializationWithValidSerialization() {
 		$serialization = 'http://www.wikidata.org/entity/P32';
 		$id = new FederatedPropertyId( 'http://www.wikidata.org/entity/P31', 'P31' );
-		$this->expectDeprecationAndContinue( '/FederatedPropertyId::unserialize/' );
 		$id->unserialize( $serialization );
 		$this->assertEquals( $serialization, $id->getSerialization() );
 	}
