@@ -45,6 +45,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetLatestPropertyRevisionMetadata
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestStatementSubjectRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetProperty;
 use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetPropertyValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabels\GetPropertyLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\GetPropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\GetPropertyStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetPropertyStatements;
@@ -320,6 +321,16 @@ return [
 			WbRestApi::getGetLatestPropertyRevisionMetadata( $services ),
 			WbRestApi::getPropertyDataRetriever( $services ),
 			new GetPropertyValidator( new PropertyIdValidator() )
+		);
+	},
+
+	'WbRestApi.GetPropertyLabels' => function( MediaWikiServices $services ): GetPropertyLabels {
+		return new GetPropertyLabels(
+			WbRestApi::getGetLatestPropertyRevisionMetadata( $services ),
+			new TermLookupEntityTermsRetriever(
+				WikibaseRepo::getTermLookup( $services ),
+				WikibaseRepo::getTermsLanguages( $services )
+			)
 		);
 	},
 
