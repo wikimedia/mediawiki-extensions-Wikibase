@@ -3,15 +3,13 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel;
 
 use Wikibase\Repo\RestApi\Application\UseCases\EditMetadataRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\ItemIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemLabelEditRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\LanguageCodeRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseRequest;
 
 /**
  * @license GPL-2.0-or-later
  */
-class SetItemLabelRequest implements UseCaseRequest, ItemIdRequest, LanguageCodeRequest, ItemLabelEditRequest, EditMetadataRequest {
+class SetItemLabelRequest implements UseCaseRequest, ItemLabelEditRequest, EditMetadataRequest {
 
 	private string $itemId;
 	private string $languageCode;
