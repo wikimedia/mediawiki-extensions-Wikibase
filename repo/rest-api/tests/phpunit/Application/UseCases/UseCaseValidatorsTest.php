@@ -22,6 +22,9 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabelsValida
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\DeserializedGetItemStatementsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\GetItemStatementsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\GetItemStatementsValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabels\DeserializedGetPropertyLabelsRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabels\GetPropertyLabelsRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabels\GetPropertyLabelsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\DeserializedGetPropertyStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\GetPropertyStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\GetPropertyStatementValidator;
@@ -157,6 +160,11 @@ class UseCaseValidatorsTest extends TestCase {
 			ReplacePropertyStatementValidator::class,
 			ReplacePropertyStatementRequest::class,
 			DeserializedReplacePropertyStatementRequest::class,
+		];
+		yield [
+			GetPropertyLabelsValidator::class,
+			GetPropertyLabelsRequest::class,
+			DeserializedGetPropertyLabelsRequest::class,
 		];
 	}
 

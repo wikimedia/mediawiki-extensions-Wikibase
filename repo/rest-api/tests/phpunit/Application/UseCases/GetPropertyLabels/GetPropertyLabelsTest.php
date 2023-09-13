@@ -8,10 +8,13 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetLatestPropertyRevisionMetadata
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabels\GetPropertyLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabels\GetPropertyLabelsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabels\GetPropertyLabelsResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabels\GetPropertyLabelsValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyLabelsRetriever;
+use Wikibase\Repo\RestApi\WbRestApi;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabels\GetPropertyLabels
@@ -56,6 +59,20 @@ class GetPropertyLabelsTest extends TestCase {
 		$this->assertEquals( new GetPropertyLabelsResponse( $labels, $lastModified, $revisionId ), $response );
 	}
 
+	public function testGivenInvalidPropertyId_throws(): void {
+		try {
+			$this->newUseCase()->execute(
+				new GetPropertyLabelsRequest( 'X321' )
+			);
+
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::INVALID_PROPERTY_ID, $e->getErrorCode() );
+			$this->assertSame( 'Not a valid property ID: X321', $e->getErrorMessage() );
+			$this->assertSame( [ UseCaseError::CONTEXT_PROPERTY_ID => 'X321' ], $e->getErrorContext() );
+		}
+	}
+
 	public function testGivenPropertyNotFound_throws(): void {
 		$propertyId = new NumericPropertyId( 'P10' );
 
@@ -79,7 +96,8 @@ class GetPropertyLabelsTest extends TestCase {
 	private function newUseCase(): GetPropertyLabels {
 		return new GetPropertyLabels(
 			$this->getRevisionMetadata,
-			$this->labelsRetriever
+			$this->labelsRetriever,
+			new GetPropertyLabelsValidator( WbRestApi::getValidatingRequestDeserializer() )
 		);
 	}
 

@@ -26,6 +26,18 @@ describe( 'GET /entities/properties/{id}/labels', () => {
 		assert.strictEqual( response.header[ 'last-modified' ], testPropertyCreationMetadata.timestamp );
 	} );
 
+	it( '400 error - bad request, invalid property ID', async () => {
+		const invalidPropertyId = 'X123';
+		const response = await newGetPropertyLabelsRequestBuilder( invalidPropertyId )
+			.assertInvalidRequest()
+			.makeRequest();
+
+		expect( response ).to.have.status( 400 );
+		assert.header( response, 'Content-Language', 'en' );
+		assert.strictEqual( response.body.code, 'invalid-property-id' );
+		assert.include( response.body.message, invalidPropertyId );
+	} );
+
 	it( 'responds 404 in case the property does not exist', async () => {
 		const nonExistentProperty = 'P99999999';
 		const response = await newGetPropertyLabelsRequestBuilder( nonExistentProperty )

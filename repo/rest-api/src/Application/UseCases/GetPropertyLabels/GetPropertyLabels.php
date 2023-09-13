@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabels;
 
-use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestPropertyRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyLabelsRetriever;
@@ -14,22 +13,23 @@ class GetPropertyLabels {
 
 	private GetLatestPropertyRevisionMetadata $getLatestRevisionMetadata;
 	private PropertyLabelsRetriever $propertyLabelsRetriever;
+	private GetPropertyLabelsValidator $validator;
 
 	public function __construct(
 		GetLatestPropertyRevisionMetadata $getLatestRevisionMetadata,
-		PropertyLabelsRetriever $propertyLabelsRetriever
+		PropertyLabelsRetriever $propertyLabelsRetriever,
+		GetPropertyLabelsValidator $validator
 	) {
 		$this->getLatestRevisionMetadata = $getLatestRevisionMetadata;
 		$this->propertyLabelsRetriever = $propertyLabelsRetriever;
+		$this->validator = $validator;
 	}
 
 	/**
 	 * @throws UseCaseError
 	 */
 	public function execute( GetPropertyLabelsRequest $request ): GetPropertyLabelsResponse {
-		// TODO: validation
-
-		$propertyId = new NumericPropertyId( $request->getPropertyId() );
+		$propertyId = $this->validator->validateAndDeserialize( $request )->getPropertyId();
 
 		[ $revisionId, $lastModified ] = $this->getLatestRevisionMetadata->execute( $propertyId );
 

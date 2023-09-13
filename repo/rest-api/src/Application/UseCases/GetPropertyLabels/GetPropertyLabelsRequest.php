@@ -2,10 +2,13 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabels;
 
+use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseRequest;
+
 /**
  * @license GPL-2.0-or-later
  */
-class GetPropertyLabelsRequest {
+class GetPropertyLabelsRequest implements UseCaseRequest, PropertyIdRequest {
 
 	private string $propertyId;
 
