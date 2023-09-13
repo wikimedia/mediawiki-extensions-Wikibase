@@ -8,6 +8,7 @@ use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescriptionRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescriptionValidator;
@@ -22,6 +23,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\Tests\RestApi\Application\UseCases\RequestValidation\TestValidatingRequestFieldDeserializerFactory;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 
 /**
@@ -44,7 +46,9 @@ class SetItemDescriptionTest extends \PHPUnit\Framework\TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->validator = $this->createStub( SetItemDescriptionValidator::class );
+		$this->validator = new SetItemDescriptionValidator(
+			new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() )
+		);
 		$this->getRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
 		$this->getRevisionMetadata->method( 'execute' )
 			->willReturn( [ 123, '20221212040505' ] );
@@ -57,7 +61,7 @@ class SetItemDescriptionTest extends \PHPUnit\Framework\TestCase {
 		$language = 'en';
 		$description = 'Hello world again.';
 		$itemId = 'Q123';
-		$editTags = [ 'some', 'tags' ];
+		$editTags = TestValidatingRequestFieldDeserializerFactory::ALLOWED_TAGS;
 		$isBot = false;
 		$comment = 'add description edit comment';
 
@@ -95,7 +99,7 @@ class SetItemDescriptionTest extends \PHPUnit\Framework\TestCase {
 		$language = 'en';
 		$newDescription = 'Hello world again.';
 		$itemId = 'Q123';
-		$editTags = [ 'some', 'tags' ];
+		$editTags = TestValidatingRequestFieldDeserializerFactory::ALLOWED_TAGS;
 		$isBot = false;
 		$item = NewItem::withId( $itemId )->andDescription( $language, 'Hello world' )->build();
 		$comment = 'replace description edit comment';
@@ -140,7 +144,7 @@ class SetItemDescriptionTest extends \PHPUnit\Framework\TestCase {
 		$expectedException = new UseCaseException( 'invalid-description-test' );
 
 		$this->validator = $this->createStub( SetItemDescriptionValidator::class );
-		$this->validator->method( 'assertValidRequest' )->willThrowException( $expectedException );
+		$this->validator->method( 'validateAndDeserialize' )->willThrowException( $expectedException );
 
 		try {
 			$this->newUseCase()->execute(

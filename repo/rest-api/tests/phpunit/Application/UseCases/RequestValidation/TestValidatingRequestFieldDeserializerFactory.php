@@ -13,6 +13,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserialize
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestFieldDeserializerFactory;
+use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
@@ -51,6 +52,11 @@ class TestValidatingRequestFieldDeserializerFactory {
 			new JsonDiffJsonPatchValidator(),
 			new class() implements ItemLabelValidator {
 				public function validate( ItemId $itemId, string $language, string $label ): ?ValidationError {
+					return null;
+				}
+			},
+			new class() implements ItemDescriptionValidator {
+				public function validate( ItemId $itemId, string $language, string $description ): ?ValidationError {
 					return null;
 				}
 			},

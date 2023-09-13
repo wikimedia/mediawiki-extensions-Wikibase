@@ -2,10 +2,14 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription;
 
+use Wikibase\Repo\RestApi\Application\UseCases\EditMetadataRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\ItemDescriptionEditRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseRequest;
+
 /**
  * @license GPL-2.0-or-later
  */
-class SetItemDescriptionRequest {
+class SetItemDescriptionRequest implements UseCaseRequest, ItemDescriptionEditRequest, EditMetadataRequest {
 
 	private string $itemId;
 	private string $languageCode;

@@ -10,6 +10,7 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Repo\RestApi\Application\UseCases\EditMetadataRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\ItemDescriptionEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemLabelEditRequest;
@@ -151,6 +152,17 @@ class DeserializedRequestAdapterTest extends TestCase {
 	public function testGivenNoLabel_getLabelThrows(): void {
 		$this->expectException( LogicException::class );
 		( new DeserializedRequestAdapter( [] ) )->getLabel();
+	}
+
+	public function testGetDescription(): void {
+		$label = new Term( 'en', 'root vegetable' );
+		$requestAdapter = new DeserializedRequestAdapter( [ ItemDescriptionEditRequest::class => $label ] );
+		$this->assertSame( $label, $requestAdapter->getDescription() );
+	}
+
+	public function testGivenNoDescription_getDescriptionThrows(): void {
+		$this->expectException( LogicException::class );
+		( new DeserializedRequestAdapter( [] ) )->getDescription();
 	}
 
 }

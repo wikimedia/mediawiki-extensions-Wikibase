@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\RequestValidation;
 
 use Wikibase\Repo\RestApi\Application\UseCases\EditMetadataRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\ItemDescriptionEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemLabelEditRequest;
@@ -41,6 +42,7 @@ class ValidatingRequestDeserializer {
 			EditMetadataRequest::class => [ $this->factory, 'newEditMetadataRequestValidatingDeserializer' ],
 			PatchRequest::class => [ $this->factory, 'newPatchRequestValidatingDeserializer' ],
 			ItemLabelEditRequest::class => [ $this->factory, 'newItemLabelEditRequestValidatingDeserializer' ],
+			ItemDescriptionEditRequest::class => [ $this->factory, 'newItemDescriptionEditRequestValidatingDeserializer' ],
 		];
 		$result = [];
 

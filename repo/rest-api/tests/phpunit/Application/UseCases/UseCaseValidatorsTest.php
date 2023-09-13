@@ -32,6 +32,9 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\DeserializedPatch
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\DeserializedSetItemDescriptionRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescriptionRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\DeserializedSetItemLabelRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabelRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabelValidator;
@@ -47,6 +50,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabelValidato
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatementValidator
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsValidator
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabelValidator
+ * @covers \Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescriptionValidator
  *
  * @group Wikibase
  *
@@ -121,6 +125,11 @@ class UseCaseValidatorsTest extends TestCase {
 			SetItemLabelValidator::class,
 			SetItemLabelRequest::class,
 			DeserializedSetItemLabelRequest::class,
+		];
+		yield [
+			SetItemDescriptionValidator::class,
+			SetItemDescriptionRequest::class,
+			DeserializedSetItemDescriptionRequest::class,
 		];
 	}
 

@@ -110,7 +110,6 @@ use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatchValidator;
 use Wikibase\Repo\RestApi\Infrastructure\LabelsEditSummaryToFormattableSummaryConverter;
 use Wikibase\Repo\RestApi\Infrastructure\SiteLinksReadModelConverter;
 use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryLabelTextValidator;
-use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoDescriptionLanguageCodeValidator;
 use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoItemLabelValidator;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
@@ -518,21 +517,10 @@ return [
 	},
 
 	'WbRestApi.SetItemDescription' => function( MediaWikiServices $services ): SetItemDescription {
-		$itemDataRetriever = WbRestApi::getItemDataRetriever( $services );
-		$termValidatorFactory = WikibaseRepo::getTermValidatorFactory( $services );
 		return new SetItemDescription(
-			new SetItemDescriptionValidator(
-				new ItemIdValidator(),
-				new WikibaseRepoDescriptionLanguageCodeValidator( $termValidatorFactory ),
-				new WikibaseRepoItemDescriptionValidator(
-					$termValidatorFactory,
-					WikibaseRepo::getItemTermsCollisionDetector( $services ),
-					$itemDataRetriever
-				),
-				WbRestApi::getEditMetadataValidator( $services )
-			),
+			new SetItemDescriptionValidator( WbRestApi::getValidatingRequestDeserializer( $services ) ),
 			WbRestApi::getAssertItemExists( $services ),
-			$itemDataRetriever,
+			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getItemUpdater( $services ),
 			WbRestApi::getAssertUserIsAuthorized( $services )
 		);
@@ -610,6 +598,11 @@ return [
 			new JsonDiffJsonPatchValidator(),
 			new WikibaseRepoItemLabelValidator(
 				new TermValidatorFactoryLabelTextValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
+				WikibaseRepo::getItemTermsCollisionDetector( $services ),
+				WbRestApi::getItemDataRetriever( $services )
+			),
+			new WikibaseRepoItemDescriptionValidator(
+				WikibaseRepo::getTermValidatorFactory( $services ),
 				WikibaseRepo::getItemTermsCollisionDetector( $services ),
 				WbRestApi::getItemDataRetriever( $services )
 			),

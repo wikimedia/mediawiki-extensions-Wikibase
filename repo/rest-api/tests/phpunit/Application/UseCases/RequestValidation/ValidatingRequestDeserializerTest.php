@@ -11,6 +11,7 @@ use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\EditMetadataRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\ItemDescriptionEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemLabelEditRequest;
@@ -19,6 +20,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdFilterRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\EditMetadataRequestValidatingDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ItemDescriptionEditRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ItemIdRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ItemLabelEditRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\LanguageCodeRequestValidatingDeserializer;
@@ -162,6 +164,18 @@ class ValidatingRequestDeserializerTest extends TestCase {
 		$this->assertEquals( $result[ItemLabelEditRequest::class], new Term( 'en', 'potato' ) );
 	}
 
+	public function testGivenValidItemDescriptionEditRequest_returnsDescription(): void {
+		$request = $this->createStub( ItemDescriptionEditUseCaseRequest::class );
+		$request->method( 'getItemId' )->willReturn( 'Q123' );
+		$request->method( 'getLanguageCode' )->willReturn( 'en' );
+		$request->method( 'getDescription' )->willReturn( 'root vegetable' );
+
+		$result = $this->newRequestDeserializer()->validateAndDeserialize( $request );
+
+		$this->assertArrayHasKey( ItemDescriptionEditRequest::class, $result );
+		$this->assertEquals( $result[ItemDescriptionEditRequest::class], new Term( 'en', 'root vegetable' ) );
+	}
+
 	/**
 	 * @dataProvider invalidRequestProvider
 	 */
@@ -233,6 +247,11 @@ class ValidatingRequestDeserializerTest extends TestCase {
 			ItemLabelEditRequestValidatingDeserializer::class,
 			'newItemLabelEditRequestValidatingDeserializer',
 		];
+		yield [
+			ItemDescriptionEditUseCaseRequest::class,
+			ItemDescriptionEditRequestValidatingDeserializer::class,
+			'newItemDescriptionEditRequestValidatingDeserializer',
+		];
 	}
 
 	private function newRequestDeserializer( ValidatingRequestFieldDeserializerFactory $factory = null ): ValidatingRequestDeserializer {
@@ -258,4 +277,5 @@ interface StatementSerializationUseCaseRequest extends UseCaseRequest, Statement
 interface EditMetadataUseCaseRequest extends UseCaseRequest, EditMetadataRequest {}
 interface PatchUseCaseRequest extends UseCaseRequest, PatchRequest {}
 interface ItemLabelEditUseCaseRequest extends UseCaseRequest, ItemLabelEditRequest {}
+interface ItemDescriptionEditUseCaseRequest extends UseCaseRequest, ItemDescriptionEditRequest {}
 // @codingStandardsIgnoreEnd

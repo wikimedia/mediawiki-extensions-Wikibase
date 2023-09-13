@@ -9,6 +9,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\ItemFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdFilterRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
+use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\JsonPatchValidator;
@@ -27,6 +28,7 @@ class ValidatingRequestFieldDeserializerFactory {
 	private StatementDeserializer $statementDeserializer;
 	private JsonPatchValidator $patchValidator;
 	private ItemLabelValidator $itemLabelValidator;
+	private ItemDescriptionValidator $itemDescriptionValidator;
 	private int $maxCommentLength;
 	private array $allowedTags;
 
@@ -35,6 +37,7 @@ class ValidatingRequestFieldDeserializerFactory {
 		StatementDeserializer $statementDeserializer,
 		JsonPatchValidator $patchValidator,
 		ItemLabelValidator $itemLabelValidator,
+		ItemDescriptionValidator $itemDescriptionValidator,
 		int $maxCommentLength,
 		array $allowedTags
 	) {
@@ -42,6 +45,7 @@ class ValidatingRequestFieldDeserializerFactory {
 		$this->statementDeserializer = $statementDeserializer;
 		$this->patchValidator = $patchValidator;
 		$this->itemLabelValidator = $itemLabelValidator;
+		$this->itemDescriptionValidator = $itemDescriptionValidator;
 		$this->maxCommentLength = $maxCommentLength;
 		$this->allowedTags = $allowedTags;
 	}
@@ -105,6 +109,10 @@ class ValidatingRequestFieldDeserializerFactory {
 
 	public function newItemLabelEditRequestValidatingDeserializer(): ItemLabelEditRequestValidatingDeserializer {
 		return new ItemLabelEditRequestValidatingDeserializer( $this->itemLabelValidator );
+	}
+
+	public function newItemDescriptionEditRequestValidatingDeserializer(): ItemDescriptionEditRequestValidatingDeserializer {
+		return new ItemDescriptionEditRequestValidatingDeserializer( $this->itemDescriptionValidator );
 	}
 
 }

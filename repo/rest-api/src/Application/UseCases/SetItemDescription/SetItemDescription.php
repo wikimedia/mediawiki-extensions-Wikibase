@@ -2,8 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription;
 
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Term\Term;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
@@ -43,35 +41,35 @@ class SetItemDescription {
 	 * @throws UseCaseError
 	 */
 	public function execute( SetItemDescriptionRequest $request ): SetItemDescriptionResponse {
-		$this->validator->assertValidRequest( $request );
-
-		$itemId = new ItemId( $request->getItemId() );
-		$description = new Term( $request->getLanguageCode(), $request->getDescription() );
+		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
+		$itemId = $deserializedRequest->getItemId();
+		$description = $deserializedRequest->getDescription();
+		$editMetadata = $deserializedRequest->getEditMetadata();
 
 		$this->assertItemExists->execute( $itemId );
 
-		$this->assertUserIsAuthorized->execute( $itemId, $request->getUsername() );
+		$this->assertUserIsAuthorized->execute( $itemId, $editMetadata->getUser()->getUsername() );
 
 		$item = $this->itemRetriever->getItem( $itemId );
 		$descriptionExists = $item->getDescriptions()->hasTermForLanguage( $request->getLanguageCode() );
 		$item->getDescriptions()->setTerm( $description );
 
 		$editSummary = $descriptionExists
-			? DescriptionEditSummary::newReplaceSummary( $request->getComment(), $description )
-			: DescriptionEditSummary::newAddSummary( $request->getComment(), $description );
+			? DescriptionEditSummary::newReplaceSummary( $editMetadata->getComment(), $description )
+			: DescriptionEditSummary::newAddSummary( $editMetadata->getComment(), $description );
 
 		$revision = $this->itemUpdater->update(
 			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Item validated and exists
 			$item,
 			new EditMetadata(
-				$request->getEditTags(),
-				$request->isBot(),
+				$editMetadata->getTags(),
+				$editMetadata->isBot(),
 				$editSummary
 			)
 		);
 
 		return new SetItemDescriptionResponse(
-			$revision->getItem()->getDescriptions()[$request->getLanguageCode()],
+			$revision->getItem()->getDescriptions()[$description->getLanguageCode()],
 			$revision->getLastModified(),
 			$revision->getRevisionId(),
 			$descriptionExists

@@ -10,6 +10,7 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Repo\RestApi\Application\UseCases\DeserializedEditMetadataRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\DeserializedItemDescriptionEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\DeserializedItemFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\DeserializedItemIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\DeserializedItemLabelEditRequest;
@@ -19,6 +20,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\DeserializedPropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\DeserializedStatementIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\DeserializedStatementSerializationRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\EditMetadataRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\ItemDescriptionEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemLabelEditRequest;
@@ -42,7 +44,8 @@ class DeserializedRequestAdapter implements
 	DeserializedItemFieldsRequest,
 	DeserializedStatementSerializationRequest,
 	DeserializedEditMetadataRequest,
-	DeserializedItemLabelEditRequest
+	DeserializedItemLabelEditRequest,
+	DeserializedItemDescriptionEditRequest
 {
 	private array $deserializedRequest;
 
@@ -88,6 +91,10 @@ class DeserializedRequestAdapter implements
 
 	public function getLabel(): Term {
 		return $this->getRequestField( ItemLabelEditRequest::class );
+	}
+
+	public function getDescription(): Term {
+		return $this->getRequestField( ItemDescriptionEditRequest::class );
 	}
 
 	/**
