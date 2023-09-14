@@ -2,10 +2,15 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\PatchStatement;
 
+use Wikibase\Repo\RestApi\Application\UseCases\EditMetadataRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\StatementIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseRequest;
+
 /**
  * @license GPL-2.0-or-later
  */
-class PatchStatementRequest {
+class PatchStatementRequest implements UseCaseRequest, StatementIdRequest, PatchRequest, EditMetadataRequest {
 
 	private string $statementId;
 	private array $patch;

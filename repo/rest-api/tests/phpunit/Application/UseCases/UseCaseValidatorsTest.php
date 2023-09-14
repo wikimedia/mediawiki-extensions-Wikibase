@@ -34,6 +34,15 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementValidato
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\DeserializedPatchItemLabelsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\DeserializedPatchItemStatementRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatementRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyStatement\DeserializedPatchPropertyStatementRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyStatement\PatchPropertyStatementRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyStatement\PatchPropertyStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\DeserializedPatchStatementRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\DeserializedReplaceItemStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatementValidator;
@@ -66,6 +75,9 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabelValidato
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementValidator
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatementValidator
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\ReplacePropertyStatement\ReplacePropertyStatementValidator
+ * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatementValidator
+ * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyStatement\PatchPropertyStatementValidator
+ * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementValidator
  *
  * @group Wikibase
  *
@@ -165,6 +177,21 @@ class UseCaseValidatorsTest extends TestCase {
 			GetPropertyLabelsValidator::class,
 			GetPropertyLabelsRequest::class,
 			DeserializedGetPropertyLabelsRequest::class,
+		];
+		yield [
+			PatchItemStatementValidator::class,
+			PatchItemStatementRequest::class,
+			DeserializedPatchItemStatementRequest::class,
+		];
+		yield [
+			PatchPropertyStatementValidator::class,
+			PatchPropertyStatementRequest::class,
+			DeserializedPatchPropertyStatementRequest::class,
+		];
+		yield [
+			PatchStatementValidator::class,
+			PatchStatementRequest::class,
+			DeserializedPatchStatementRequest::class,
 		];
 	}
 

@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\PatchStatement;
 
 use Wikibase\DataModel\Exception\PropertyChangedException;
-use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertStatementSubjectExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
@@ -26,7 +25,6 @@ class PatchStatement {
 	private PatchedStatementValidator $patchedStatementValidator;
 	private JsonPatcher $jsonPatcher;
 	private StatementSerializer $statementSerializer;
-	private StatementGuidParser $statementIdParser;
 	private AssertStatementSubjectExists $assertStatementSubjectExists;
 	private StatementRetriever $statementRetriever;
 	private StatementUpdater $statementUpdater;
@@ -37,7 +35,6 @@ class PatchStatement {
 		PatchedStatementValidator $patchedStatementValidator,
 		JsonPatcher $jsonPatcher,
 		StatementSerializer $statementSerializer,
-		StatementGuidParser $statementIdParser,
 		AssertStatementSubjectExists $assertStatementSubjectExists,
 		StatementRetriever $statementRetriever,
 		StatementUpdater $statementUpdater,
@@ -48,7 +45,6 @@ class PatchStatement {
 		$this->statementSerializer = $statementSerializer;
 		$this->statementRetriever = $statementRetriever;
 		$this->jsonPatcher = $jsonPatcher;
-		$this->statementIdParser = $statementIdParser;
 		$this->assertStatementSubjectExists = $assertStatementSubjectExists;
 		$this->statementUpdater = $statementUpdater;
 		$this->assertUserIsAuthorized = $assertUserIsAuthorized;
@@ -59,9 +55,9 @@ class PatchStatement {
 	 * @throws UseCaseError
 	 */
 	public function execute( PatchStatementRequest $request ): PatchStatementResponse {
-		$this->assertValidRequest( $request );
-
-		$statementId = $this->statementIdParser->parse( $request->getStatementId() );
+		$deserializedRequest = $this->useCaseValidator->validateAndDeserialize( $request );
+		$statementId = $deserializedRequest->getStatementId();
+		$editMetadata = $deserializedRequest->getEditMetadata();
 
 		$this->assertStatementSubjectExists->execute( $statementId );
 
@@ -74,12 +70,12 @@ class PatchStatement {
 			);
 		}
 
-		$this->assertUserIsAuthorized->execute( $statementId->getEntityId(), $request->getUsername() );
+		$this->assertUserIsAuthorized->execute( $statementId->getEntityId(), $editMetadata->getUser()->getUsername() );
 
 		$serialization = $this->statementSerializer->serialize( $statementToPatch );
 
 		try {
-			$patchedSerialization = $this->jsonPatcher->patch( $serialization, $request->getPatch() );
+			$patchedSerialization = $this->jsonPatcher->patch( $serialization, $deserializedRequest->getPatch() );
 		} catch ( PatchPathException $e ) {
 			throw new UseCaseError(
 				UseCaseError::PATCH_TARGET_NOT_FOUND,
@@ -101,22 +97,23 @@ class PatchStatement {
 		$patchedStatement = $this->patchedStatementValidator->validateAndDeserializeStatement( $patchedSerialization );
 
 		if ( $patchedStatement->getGuid() === null ) {
-			$patchedStatement->setGuid( $request->getStatementId() );
-		} elseif ( $patchedStatement->getGuid() !== $request->getStatementId() ) {
+			$patchedStatement->setGuid( (string)$deserializedRequest->getStatementId() );
+		} elseif ( $patchedStatement->getGuid() !== (string)$deserializedRequest->getStatementId() ) {
 			throw new UseCaseError(
 				UseCaseError::INVALID_OPERATION_CHANGED_STATEMENT_ID,
 				'Cannot change the ID of the existing statement'
 			);
 		}
 
-		$editMetadata = new EditMetadata(
-			$request->getEditTags(),
-			$request->isBot(),
-			StatementEditSummary::newPatchSummary( $request->getComment(), $patchedStatement )
-		);
-
 		try {
-			$newRevision = $this->statementUpdater->update( $patchedStatement, $editMetadata );
+			$newRevision = $this->statementUpdater->update(
+				$patchedStatement,
+				new EditMetadata(
+					$editMetadata->getTags(),
+					$editMetadata->isBot(),
+					StatementEditSummary::newPatchSummary( $editMetadata->getComment(), $patchedStatement )
+				)
+			);
 		} catch ( PropertyChangedException $e ) {
 			throw new UseCaseError(
 				UseCaseError::INVALID_OPERATION_CHANGED_PROPERTY,
@@ -125,10 +122,6 @@ class PatchStatement {
 		}
 
 		return new PatchStatementResponse( $newRevision->getStatement(), $newRevision->getLastModified(), $newRevision->getRevisionId() );
-	}
-
-	public function assertValidRequest( PatchStatementRequest $request ): void {
-		$this->useCaseValidator->assertValidRequest( $request );
 	}
 
 }

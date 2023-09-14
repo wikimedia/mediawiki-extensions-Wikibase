@@ -10,10 +10,11 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemState
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
+use Wikibase\Repo\Tests\RestApi\Application\UseCases\RequestValidation\TestValidatingRequestFieldDeserializerFactory;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 
 /**
@@ -34,7 +35,9 @@ class PatchItemStatementTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->patchItemStatementValidator = $this->createStub( PatchItemStatementValidator::class );
+		$this->patchItemStatementValidator = new PatchItemStatementValidator(
+			new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() )
+		);
 		$this->assertItemExists = $this->createStub( AssertItemExists::class );
 		$this->patchStatement  = $this->createStub( PatchStatement::class );
 	}
@@ -43,7 +46,7 @@ class PatchItemStatementTest extends TestCase {
 		$itemId = new ItemId( 'Q123' );
 		$statementId = new StatementGuid( $itemId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 		$patch = $this->getValidValueReplacingPatch( 'new statement value' );
-		$editTags = [ 'some', 'tags' ];
+		$editTags = TestValidatingRequestFieldDeserializerFactory::ALLOWED_TAGS;
 		$isBot = false;
 		$comment = 'statement replaced by ' . __method__;
 
@@ -56,21 +59,11 @@ class PatchItemStatementTest extends TestCase {
 			'$comment' => $comment,
 		] );
 
-		$patchStatementRequest = new PatchStatementRequest(
-			(string)$statementId,
-			$patch,
-			$editTags,
-			$isBot,
-			$comment,
-			null,
-			(string)$itemId,
-		);
-
 		$expectedResponse = $this->createStub( PatchStatementResponse::class );
 		$this->patchStatement  = $this->createMock( PatchStatement::class );
 		$this->patchStatement->expects( $this->once() )
 			->method( 'execute' )
-			->with( $patchStatementRequest )
+			->with( $request )
 			->willReturn( $expectedResponse );
 
 		$this->assertSame( $expectedResponse, $this->newUseCase()->execute( $request ) );
@@ -99,7 +92,7 @@ class PatchItemStatementTest extends TestCase {
 
 		$this->patchItemStatementValidator = $this->createMock( PatchItemStatementValidator::class );
 		$this->patchItemStatementValidator->expects( $this->once() )
-			->method( 'assertValidRequest' )
+			->method( 'validateAndDeserialize' )
 			->with( $useCaseRequest )
 			->willThrowException( $expectedUseCaseError );
 
@@ -111,25 +104,11 @@ class PatchItemStatementTest extends TestCase {
 		}
 	}
 
-	public function testGivenInvalidPatchStatementRequest_throws(): void {
-		$usecaseRequest = $this->createStub( PatchItemStatementRequest::class );
-		$expectedUseCaseError = $this->createStub( UseCaseError::class );
-		$this->patchStatement  = $this->createStub( PatchStatement::class );
-		$this->patchStatement->method( 'assertValidRequest' )->willThrowException( $expectedUseCaseError );
-
-		try {
-			$this->newUseCase()->execute( $usecaseRequest );
-			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseError $e ) {
-			$this->assertSame( $expectedUseCaseError, $e );
-		}
-	}
-
 	public function testGivenItemNotFoundOrRedirect_throwsUseCaseError(): void {
 		$itemId = new ItemId( 'Q123' );
 		$statementId = new StatementGuid( $itemId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 		$patch = $this->getValidValueReplacingPatch( 'new statement value' );
-		$editTags = [ 'some', 'tags' ];
+		$editTags = TestValidatingRequestFieldDeserializerFactory::ALLOWED_TAGS;
 		$isBot = false;
 		$comment = 'statement replaced by ' . __method__;
 

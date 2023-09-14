@@ -10,10 +10,11 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyStatement\PatchPrope
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyStatement\PatchPropertyStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyStatement\PatchPropertyStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
+use Wikibase\Repo\Tests\RestApi\Application\UseCases\RequestValidation\TestValidatingRequestFieldDeserializerFactory;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 
 /**
@@ -34,7 +35,9 @@ class PatchPropertyStatementTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->patchPropertyStatementValidator = $this->createStub( PatchPropertyStatementValidator::class );
+		$this->patchPropertyStatementValidator = new PatchPropertyStatementValidator(
+			new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() )
+		);
 		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
 		$this->patchStatement  = $this->createStub( PatchStatement::class );
 	}
@@ -43,7 +46,7 @@ class PatchPropertyStatementTest extends TestCase {
 		$propertyId = new NumericPropertyId( 'P123' );
 		$statementId = new StatementGuid( $propertyId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 		$patch = $this->getValidValueReplacingPatch( 'new statement value' );
-		$editTags = [ 'some', 'tags' ];
+		$editTags = TestValidatingRequestFieldDeserializerFactory::ALLOWED_TAGS;
 		$isBot = false;
 		$comment = 'statement replaced by ' . __method__;
 
@@ -56,20 +59,11 @@ class PatchPropertyStatementTest extends TestCase {
 			'$comment' => $comment,
 		] );
 
-		$patchStatementRequest = new PatchStatementRequest(
-			(string)$statementId,
-			$patch,
-			$editTags,
-			$isBot,
-			$comment,
-			null
-		);
-
 		$expectedResponse = $this->createStub( PatchStatementResponse::class );
 		$this->patchStatement  = $this->createMock( PatchStatement::class );
 		$this->patchStatement->expects( $this->once() )
 			->method( 'execute' )
-			->with( $patchStatementRequest )
+			->with( $request )
 			->willReturn( $expectedResponse );
 
 		$this->assertSame( $expectedResponse, $this->newUseCase()->execute( $request ) );
@@ -98,7 +92,7 @@ class PatchPropertyStatementTest extends TestCase {
 
 		$this->patchPropertyStatementValidator = $this->createMock( PatchPropertyStatementValidator::class );
 		$this->patchPropertyStatementValidator->expects( $this->once() )
-			->method( 'assertValidRequest' )
+			->method( 'validateAndDeserialize' )
 			->with( $useCaseRequest )
 			->willThrowException( $expectedUseCaseError );
 
@@ -110,25 +104,11 @@ class PatchPropertyStatementTest extends TestCase {
 		}
 	}
 
-	public function testGivenInvalidPatchStatementRequest_throws(): void {
-		$usecaseRequest = $this->createStub( PatchPropertyStatementRequest::class );
-		$expectedUseCaseError = $this->createStub( UseCaseError::class );
-		$this->patchStatement  = $this->createStub( PatchStatement::class );
-		$this->patchStatement->method( 'assertValidRequest' )->willThrowException( $expectedUseCaseError );
-
-		try {
-			$this->newUseCase()->execute( $usecaseRequest );
-			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseError $e ) {
-			$this->assertSame( $expectedUseCaseError, $e );
-		}
-	}
-
 	public function testGivenPropertyNotFound_throwsUseCaseError(): void {
 		$propertyId = new NumericPropertyId( 'P123' );
 		$statementId = new StatementGuid( $propertyId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 		$patch = $this->getValidValueReplacingPatch( 'new statement value' );
-		$editTags = [ 'some', 'tags' ];
+		$editTags = TestValidatingRequestFieldDeserializerFactory::ALLOWED_TAGS;
 		$isBot = false;
 		$comment = 'statement replaced by ' . __method__;
 

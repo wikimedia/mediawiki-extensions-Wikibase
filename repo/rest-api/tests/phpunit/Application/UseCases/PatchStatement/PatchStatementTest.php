@@ -5,12 +5,10 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\PatchStatement;
 use Exception;
 use Generator;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Exception\PropertyChangedException;
-use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairSerializer;
@@ -24,6 +22,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementRevision;
@@ -31,6 +30,7 @@ use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\RestApi\Domain\Services\StatementRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\StatementUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
+use Wikibase\Repo\Tests\RestApi\Application\UseCases\RequestValidation\TestValidatingRequestFieldDeserializerFactory;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\StatementReadModelHelper;
@@ -61,7 +61,9 @@ class PatchStatementTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->useCaseValidator = $this->createStub( PatchStatementValidator::class );
+		$this->useCaseValidator = new PatchStatementValidator(
+			new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() )
+		);
 		$this->patchedStatementValidator = $this->createStub( PatchedStatementValidator::class );
 		$this->statementRetriever = $this->createStub( StatementRetriever::class );
 		$this->statementUpdater = $this->createStub( StatementUpdater::class );
@@ -87,7 +89,7 @@ class PatchStatementTest extends TestCase {
 
 		$postModificationRevisionId = 567;
 		$modificationTimestamp = '20221111070707';
-		$editTags = [ 'some', 'tags' ];
+		$editTags = TestValidatingRequestFieldDeserializerFactory::ALLOWED_TAGS;
 		$isBot = false;
 		$comment = 'statement replaced by ' . __method__;
 
@@ -343,7 +345,6 @@ class PatchStatementTest extends TestCase {
 			$this->patchedStatementValidator,
 			new JsonDiffJsonPatcher(),
 			$this->statementSerializer,
-			new StatementGuidParser( new BasicEntityIdParser() ),
 			new AssertStatementSubjectExists( $this->getRevisionMetadata ),
 			$this->statementRetriever,
 			$this->statementUpdater,

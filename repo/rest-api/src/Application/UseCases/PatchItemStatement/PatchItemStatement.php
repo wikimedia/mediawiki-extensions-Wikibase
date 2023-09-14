@@ -2,12 +2,9 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement;
 
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 
@@ -35,26 +32,17 @@ class PatchItemStatement {
 	 * @throws UseCaseError
 	 */
 	public function execute( PatchItemStatementRequest $request ): PatchStatementResponse {
-		$this->validator->assertValidRequest( $request );
-		$patchStatementRequest = new PatchStatementRequest(
-			$request->getStatementId(),
-			$request->getPatch(),
-			$request->getEditTags(),
-			$request->isBot(),
-			$request->getComment(),
-			$request->getUsername()
-		);
-		$this->patchStatement->assertValidRequest( $patchStatementRequest );
-		$this->assertItemExists->execute( new ItemId( $request->getItemId() ) );
+		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
+		$this->assertItemExists->execute( $deserializedRequest->getItemId() );
 
-		if ( strpos( $request->getStatementId(), $request->getItemId() . StatementGuid::SEPARATOR ) !== 0 ) {
+		if ( !$deserializedRequest->getStatementId()->getEntityId()->equals( $deserializedRequest->getItemId() ) ) {
 			throw new UseCaseError(
 				UseCaseError::STATEMENT_NOT_FOUND,
-				"Could not find a statement with the ID: {$request->getStatementId()}"
+				"Could not find a statement with the ID: {$deserializedRequest->getStatementId()}"
 			);
 		}
 
-		return $this->patchStatement->execute( $patchStatementRequest );
+		return $this->patchStatement->execute( $request );
 	}
 
 }

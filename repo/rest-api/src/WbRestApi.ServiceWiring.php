@@ -4,7 +4,6 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\ConditionalHeaderUtil;
 use MediaWiki\Rest\Reporter\ErrorReporter;
 use MediaWiki\Rest\Reporter\MWErrorReporter;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
@@ -410,7 +409,7 @@ return [
 
 	'WbRestApi.PatchItemStatement' => function( MediaWikiServices $services ): PatchItemStatement {
 		return new PatchItemStatement(
-			new PatchItemStatementValidator( new ItemIdValidator() ),
+			new PatchItemStatementValidator( WbRestApi::getValidatingRequestDeserializer( $services ) ),
 			WbRestApi::getAssertItemExists( $services ),
 			WbRestApi::getPatchStatement( $services )
 		);
@@ -418,7 +417,7 @@ return [
 
 	'WbRestApi.PatchPropertyStatement' => function( MediaWikiServices $services ): PatchPropertyStatement {
 		return new PatchPropertyStatement(
-			new PatchPropertyStatementValidator( new PropertyIdValidator() ),
+			new PatchPropertyStatementValidator( WbRestApi::getValidatingRequestDeserializer( $services ) ),
 			WbRestApi::getAssertPropertyExists( $services ),
 			WbRestApi::getPatchStatement( $services )
 		);
@@ -426,15 +425,10 @@ return [
 
 	'WbRestApi.PatchStatement' => function( MediaWikiServices $services ): PatchStatement {
 		return new PatchStatement(
-			new PatchStatementValidator(
-				new StatementIdValidator( new BasicEntityIdParser() ),
-				new JsonDiffJsonPatchValidator(),
-				WbRestApi::getEditMetadataValidator( $services )
-			),
+			new PatchStatementValidator( WbRestApi::getValidatingRequestDeserializer( $services ) ),
 			new PatchedStatementValidator( new StatementValidator( WbRestApi::getStatementDeserializer( $services ) ) ),
 			new JsonDiffJsonPatcher(),
 			WbRestApi::getSerializerFactory( $services )->newStatementSerializer(),
-			new StatementGuidParser( new BasicEntityIdParser() ),
 			WbRestApi::getAssertStatementSubjectExists( $services ),
 			WbRestApi::getStatementRetriever( $services ),
 			WbRestApi::getStatementUpdater( $services ),

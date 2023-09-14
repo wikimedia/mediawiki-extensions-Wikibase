@@ -2,11 +2,8 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyStatement;
 
-use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 
@@ -33,26 +30,17 @@ class PatchPropertyStatement {
 	 * @throws UseCaseError
 	 */
 	public function execute( PatchPropertyStatementRequest $request ): PatchStatementResponse {
-		$this->validator->assertValidRequest( $request );
-		$patchStatementRequest = new PatchStatementRequest(
-			$request->getStatementId(),
-			$request->getPatch(),
-			$request->getEditTags(),
-			$request->isBot(),
-			$request->getComment(),
-			$request->getUsername()
-		);
-		$this->patchStatement->assertValidRequest( $patchStatementRequest );
-		$this->assertPropertyExists->execute( new NumericPropertyId( $request->getPropertyId() ) );
+		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
+		$this->assertPropertyExists->execute( $deserializedRequest->getPropertyId() );
 
-		if ( strpos( $request->getStatementId(), $request->getPropertyId() . StatementGuid::SEPARATOR ) !== 0 ) {
+		if ( !$deserializedRequest->getStatementId()->getEntityId()->equals( $deserializedRequest->getPropertyId() ) ) {
 			throw new UseCaseError(
 				UseCaseError::STATEMENT_NOT_FOUND,
-				"Could not find a statement with the ID: {$request->getStatementId()}"
+				"Could not find a statement with the ID: {$deserializedRequest->getStatementId()}"
 			);
 		}
 
-		return $this->patchStatement->execute( $patchStatementRequest );
+		return $this->patchStatement->execute( $request );
 	}
 
 }

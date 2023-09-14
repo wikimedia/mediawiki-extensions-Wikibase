@@ -2,18 +2,15 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyStatement;
 
+use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdRequest;
+
 /**
  * @license GPL-2.0-or-later
  */
-class PatchPropertyStatementRequest {
+class PatchPropertyStatementRequest extends PatchStatementRequest implements PropertyIdRequest {
 
 	private string $propertyId;
-	private string $statementId;
-	private array $patch;
-	private array $editTags;
-	private bool $isBot;
-	private ?string $comment;
-	private ?string $username;
 
 	public function __construct(
 		string $propertyId,
@@ -24,41 +21,12 @@ class PatchPropertyStatementRequest {
 		?string $comment,
 		?string $username
 	) {
+		parent::__construct( $statementId, $patch, $editTags, $isBot, $comment, $username );
 		$this->propertyId = $propertyId;
-		$this->statementId = $statementId;
-		$this->patch = $patch;
-		$this->editTags = $editTags;
-		$this->isBot = $isBot;
-		$this->comment = $comment;
-		$this->username = $username;
 	}
 
 	public function getPropertyId(): string {
 		return $this->propertyId;
-	}
-
-	public function getStatementId(): string {
-		return $this->statementId;
-	}
-
-	public function getPatch(): array {
-		return $this->patch;
-	}
-
-	public function getEditTags(): array {
-		return $this->editTags;
-	}
-
-	public function isBot(): bool {
-		return $this->isBot;
-	}
-
-	public function getComment(): ?string {
-		return $this->comment;
-	}
-
-	public function getUsername(): ?string {
-		return $this->username;
 	}
 
 }
