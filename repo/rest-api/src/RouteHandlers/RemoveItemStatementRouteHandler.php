@@ -10,8 +10,8 @@ use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
 use MediaWiki\Rest\Validator\BodyValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
-use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatementRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\BotRightCheckMiddleware;
@@ -36,12 +36,12 @@ class RemoveItemStatementRouteHandler extends SimpleHandler {
 	private const BOT_PARAM_DEFAULT = false;
 	private const COMMENT_PARAM_DEFAULT = null;
 
-	private RemoveStatement $useCase;
+	private RemoveItemStatement $useCase;
 	private ResponseFactory $responseFactory;
 	private MiddlewareHandler $middlewareHandler;
 
 	public function __construct(
-		RemoveStatement $useCase,
+		RemoveItemStatement $useCase,
 		ResponseFactory $responseFactory,
 		MiddlewareHandler $middlewareHandler
 	) {
@@ -53,7 +53,7 @@ class RemoveItemStatementRouteHandler extends SimpleHandler {
 	public static function factory(): Handler {
 		$responseFactory = new ResponseFactory();
 		return new self(
-			WbRestApi::getRemoveStatement(),
+			WbRestApi::getRemoveItemStatement(),
 			new ResponseFactory(),
 			new MiddlewareHandler( [
 				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
@@ -92,13 +92,13 @@ class RemoveItemStatementRouteHandler extends SimpleHandler {
 
 		try {
 			$this->useCase->execute(
-				new RemoveStatementRequest(
+				new RemoveItemStatementRequest(
+					$itemId,
 					$statementId,
 					$requestBody[self::TAGS_BODY_PARAM] ?? self::TAGS_PARAM_DEFAULT,
 					$requestBody[self::BOT_BODY_PARAM] ?? self::BOT_PARAM_DEFAULT,
 					$requestBody[self::COMMENT_BODY_PARAM] ?? self::COMMENT_PARAM_DEFAULT,
-					$this->getUsername(),
-					$itemId
+					$this->getUsername()
 				)
 			);
 		} catch ( UseCaseError $exception ) {

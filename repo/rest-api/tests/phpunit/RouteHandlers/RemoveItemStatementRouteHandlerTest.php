@@ -12,7 +12,7 @@ use MediaWikiIntegrationTestCase;
 use RuntimeException;
 use Throwable;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
-use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\RouteHandlers\RemoveItemStatementRouteHandler;
 
@@ -35,7 +35,7 @@ class RemoveItemStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testValidHttpResponse(): void {
-		$this->setService( 'WbRestApi.RemoveStatement', $this->createStub( RemoveStatement::class ) );
+		$this->setService( 'WbRestApi.RemoveItemStatement', $this->createStub( RemoveItemStatement::class ) );
 
 		/** @var Response $response */
 		$response = $this->newHandlerWithValidRequest()->execute();
@@ -49,10 +49,10 @@ class RemoveItemStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider provideExceptionAndExpectedErrorCode
 	 */
 	public function testHandlesErrors( Throwable $exception, string $expectedErrorCode ): void {
-		$useCase = $this->createStub( RemoveStatement::class );
+		$useCase = $this->createStub( RemoveItemStatement::class );
 		$useCase->method( 'execute' )->willThrowException( $exception );
 
-		$this->setService( 'WbRestApi.RemoveStatement', $useCase );
+		$this->setService( 'WbRestApi.RemoveItemStatement', $useCase );
 		$this->setService( 'WbRestApi.ErrorReporter', $this->createStub( ErrorReporter::class ) );
 
 		/** @var Response $response */

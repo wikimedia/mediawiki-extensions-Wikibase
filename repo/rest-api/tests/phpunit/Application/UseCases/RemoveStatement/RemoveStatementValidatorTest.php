@@ -11,7 +11,6 @@ use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatementRe
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
 
 /**
@@ -26,11 +25,19 @@ class RemoveStatementValidatorTest extends TestCase {
 	private const ALLOWED_TAGS = [ 'some', 'tags', 'are', 'allowed' ];
 
 	/**
-	 * @dataProvider provideValidRequest
 	 * @doesNotPerformAssertions
 	 */
-	public function testValidatePass( array $requestData ): void {
-		$this->newValidator()->assertValidRequest( $this->newUseCaseRequest( $requestData ) );
+	public function testValidatePass(): void {
+		$itemId = 'Q123';
+		$statementId = $itemId . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+
+		$this->newValidator()->assertValidRequest( $this->newUseCaseRequest( [
+			'$statementId' => $statementId,
+			'$editTags' => [],
+			'$isBot' => false,
+			'$comment' => null,
+			'$username' => null,
+		] ) );
 	}
 
 	/**
@@ -46,73 +53,8 @@ class RemoveStatementValidatorTest extends TestCase {
 		}
 	}
 
-	public static function provideValidRequest(): Generator {
-		$itemId = 'Q123';
-		$statementId = $itemId . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-		yield 'Valid with item ID' => [
-			[
-				'$statementId' => $statementId,
-				'$editTags' => [],
-				'$isBot' => false,
-				'$comment' => null,
-				'$username' => null,
-				'$itemId' => $itemId,
-			],
-		];
-		yield 'Valid without item ID' => [
-			[
-				'$statementId' => $statementId,
-				'$editTags' => [],
-				'$isBot' => false,
-				'$comment' => null,
-				'$username' => null,
-			],
-		];
-	}
-
 	public static function provideInvalidRequest(): Generator {
-		$itemId = 'Z2Z';
-		yield 'Invalid truthy item ID' => [
-			[
-				'$statementId' => $itemId . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
-				'$editTags' => [],
-				'$isBot' => false,
-				'$comment' => null,
-				'$username' => null,
-				'$itemId' => $itemId,
-			],
-			ItemIdValidator::CODE_INVALID,
-			"Not a valid item ID: $itemId",
-		];
-
-		$itemId = '0';
-		yield 'Invalid falsy item ID' => [
-			[
-				'$statementId' => $itemId . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
-				'$editTags' => [],
-				'$isBot' => false,
-				'$comment' => null,
-				'$username' => null,
-				'$itemId' => $itemId,
-			],
-			ItemIdValidator::CODE_INVALID,
-			"Not a valid item ID: $itemId",
-		];
-
-		$itemId = 'Q123';
-		$statementId = $itemId . StatementGuid::SEPARATOR . 'INVALID-STATEMENT-ID';
-		yield 'Invalid statement ID (with item ID)' => [
-			[
-				'$statementId' => $statementId,
-				'$editTags' => [],
-				'$isBot' => false,
-				'$comment' => null,
-				'$username' => null,
-				'$itemId' => $itemId,
-			],
-			StatementIdValidator::CODE_INVALID,
-			"Not a valid statement ID: $statementId",
-		];
+		$statementId = 'Q123' . StatementGuid::SEPARATOR . 'INVALID-STATEMENT-ID';
 		yield 'Invalid statement ID (without item ID)' => [
 			[
 				'$statementId' => $statementId,
@@ -120,7 +62,6 @@ class RemoveStatementValidatorTest extends TestCase {
 				'$isBot' => false,
 				'$comment' => null,
 				'$username' => null,
-				'$itemId' => null,
 			],
 			StatementIdValidator::CODE_INVALID,
 			"Not a valid statement ID: $statementId",
@@ -135,7 +76,6 @@ class RemoveStatementValidatorTest extends TestCase {
 				'$isBot' => false,
 				'$comment' => $comment,
 				'$username' => null,
-				'$itemId' => $itemId,
 			],
 			EditMetadataValidator::CODE_COMMENT_TOO_LONG,
 			'Comment must not be longer than ' . CommentStore::COMMENT_CHARACTER_LIMIT . ' characters.',
@@ -150,7 +90,6 @@ class RemoveStatementValidatorTest extends TestCase {
 				'$isBot' => false,
 				'$comment' => null,
 				'$username' => null,
-				'$itemId' => null,
 			],
 			EditMetadataValidator::CODE_INVALID_TAG,
 			"Invalid MediaWiki tag: \"$invalidTag\"",
@@ -159,7 +98,6 @@ class RemoveStatementValidatorTest extends TestCase {
 
 	private function newValidator(): RemoveStatementValidator {
 		return new RemoveStatementValidator(
-			new ItemIdValidator(),
 			new StatementIdValidator( new ItemIdParser() ),
 			new EditMetadataValidator( CommentStore::COMMENT_CHARACTER_LIMIT, self::ALLOWED_TAGS )
 		);
@@ -172,7 +110,6 @@ class RemoveStatementValidatorTest extends TestCase {
 			$requestData['$isBot'],
 			$requestData['$comment'] ?? null,
 			$requestData['$username'] ?? null,
-			$requestData['$itemId'] ?? null
 		);
 	}
 }

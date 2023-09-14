@@ -33,6 +33,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyStatement\PatchPropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplacePropertyStatement\ReplacePropertyStatement;
@@ -42,6 +43,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescrip
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\StatementRemover;
 use Wikibase\Repo\RestApi\Domain\Services\StatementUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupItemDataRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupPropertyDataRetriever;
@@ -141,6 +143,11 @@ class WbRestApi {
 		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbRestApi.ReplaceStatement' );
 	}
 
+	public static function getRemoveItemStatement( ContainerInterface $services = null ): RemoveItemStatement {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.RemoveItemStatement' );
+	}
+
 	public static function getRemoveStatement( ContainerInterface $services = null ): RemoveStatement {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.RemoveStatement' );
@@ -178,6 +185,11 @@ class WbRestApi {
 	public static function getStatementUpdater( ContainerInterface $services = null ): StatementUpdater {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.StatementUpdater' );
+	}
+
+	public static function getStatementRemover( ContainerInterface $services = null ): StatementRemover {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.StatementRemover' );
 	}
 
 	public static function getItemDataRetriever( ContainerInterface $services = null ): EntityRevisionLookupItemDataRetriever {

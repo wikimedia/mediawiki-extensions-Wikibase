@@ -4,28 +4,28 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\RemoveStatement;
 
 use CommentStore;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertStatementSubjectExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
-use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\StatementRemover;
+use Wikibase\Repo\RestApi\Domain\Services\StatementWriteModelRetriever;
+use Wikibase\Repo\RestApi\Infrastructure\DataAccess\StatementSubjectRetriever;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
+use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\StatementReadModelHelper;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatement
@@ -38,49 +38,50 @@ use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 class RemoveStatementTest extends TestCase {
 
 	use EditMetadataHelper;
+	use StatementReadModelHelper;
 
-	private GetLatestItemRevisionMetadata $getRevisionMetadata;
-	private ItemRetriever $itemRetriever;
-	private ItemUpdater $itemUpdater;
+	private AssertStatementSubjectExists $assertStatementSubjectExists;
+	private StatementWriteModelRetriever $statementRetriever;
+	private StatementRemover $statementRemover;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
+	private StatementSubjectRetriever $statementSubjectRetriever;
 
 	private const ALLOWED_TAGS = [ 'some', 'tags', 'are', 'allowed' ];
 
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->getRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
-		$this->getRevisionMetadata->method( 'execute' )->willReturn( [ 223, '20210809030405' ] );
-		$this->itemRetriever = $this->createStub( ItemRetriever::class );
-		$this->itemUpdater = $this->createStub( ItemUpdater::class );
+		$this->assertStatementSubjectExists = $this->createStub( AssertStatementSubjectExists::class );
+		$this->statementRetriever = $this->createStub( StatementWriteModelRetriever::class );
+		$this->statementRemover = $this->createStub( StatementRemover::class );
 		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
+		$this->statementSubjectRetriever = $this->createStub( StatementSubjectRetriever::class );
 	}
 
 	public function testRemoveStatement_success(): void {
-		$itemId = 'Q123';
-		$statementId = $itemId . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-		$statement = NewStatement::forProperty( 'P123' )->withGuid( $statementId )->withValue( 'statement value' )->build();
-		$item = NewItem::withId( $itemId )->andStatement( $statement )->build();
+		$statementGuid = new StatementGuid( new ItemId( 'Q123' ), 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
+		$statement = NewStatement::forProperty( 'P123' )
+			->withGuid( $statementGuid )
+			->withValue( 'statement value' )
+			->build();
 
 		$requestData = [
-			'$statementId' => $statementId,
+			'$statementId' => (string)$statementGuid,
 			'$editTags' => [ 'some', 'tags' ],
 			'$isBot' => false,
 			'$comment' => 'statement removed by ' . __method__,
 			'$username' => null,
-			'$itemId' => $itemId,
 		];
 
-		$this->itemRetriever = $this->createStub( ItemRetriever::class );
-		$this->itemRetriever->expects( $this->once() )
-			->method( 'getItem' )
-			->willReturn( $item );
+		$this->statementRetriever->expects( $this->once() )
+			->method( 'getStatementWriteModel' )
+			->willReturn( $statement );
 
-		$this->itemUpdater = $this->createMock( ItemUpdater::class );
-		$this->itemUpdater->expects( $this->once() )
-			->method( 'update' )
+		$this->statementRemover = $this->createMock( StatementRemover::class );
+		$this->statementRemover->expects( $this->once() )
+			->method( 'remove' )
 			->with(
-				$this->callback( fn( Item $item ) => $item->getStatements()->isEmpty() ),
+				$statementGuid,
 				$this->expectEquivalentMetadata(
 					$requestData['$editTags'],
 					$requestData['$isBot'],
@@ -99,7 +100,6 @@ class RemoveStatementTest extends TestCase {
 			'$isBot' => false,
 			'$comment' => null,
 			'$username' => null,
-			'$itemId' => null,
 		];
 
 		try {
@@ -112,43 +112,23 @@ class RemoveStatementTest extends TestCase {
 		}
 	}
 
-	public function testRequestedItemNotFoundOrRedirect_throws(): void {
-		$itemId = new ItemId( 'Q999999' );
+	public function testGivenStatementSubjectNotFoundOrRedirect_throwsUseCaseError(): void {
+		$statementId = new StatementGuid( new ItemId( 'Q42' ), 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 		$expectedException = $this->createStub( UseCaseException::class );
-		$this->getRevisionMetadata = $this->createMock( GetLatestItemRevisionMetadata::class );
-		$this->getRevisionMetadata->method( 'execute' )
-			->with( $itemId )
+
+		$this->assertStatementSubjectExists = $this->createMock( AssertStatementSubjectExists::class );
+		$this->assertStatementSubjectExists->expects( $this->once() )
+			->method( 'execute' )
+			->with( $statementId )
 			->willThrowException( $expectedException );
+
 		try {
 			$this->newUseCase()->execute(
 				$this->newUseCaseRequest( [
-					'$itemId' => "$itemId",
-					'$statementId' => 'Q199999$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+					'$statementId' => (string)$statementId,
 				] )
 			);
-
-			$this->fail( 'Exception was not thrown.' );
-		} catch ( UseCaseException $e ) {
-			$this->assertSame( $expectedException, $e );
-		}
-	}
-
-	public function testItemSubjectForStatementNotFoundOrRedirect_throws(): void {
-		$itemId = 'Q42';
-		$expectedException = $this->createStub( UseCaseException::class );
-		$this->getRevisionMetadata = $this->createMock( GetLatestItemRevisionMetadata::class );
-		$this->getRevisionMetadata->method( 'execute' )
-			->with( $itemId )
-			->willThrowException( $expectedException );
-		$statementId = $itemId . '$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-		try {
-			$this->newUseCase()->execute(
-				$this->newUseCaseRequest( [
-					'$statementId' => $statementId,
-				] )
-			);
-
-			$this->fail( 'Exception was not thrown.' );
+			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
 			$this->assertSame( $expectedException, $e );
 		}
@@ -172,8 +152,8 @@ class RemoveStatementTest extends TestCase {
 	}
 
 	public function testStatementNotFoundOnItem_throws(): void {
-		$this->itemRetriever = $this->createStub( ItemRetriever::class );
-		$this->itemRetriever->method( 'getItem' )->willReturn( NewItem::withId( 'Q42' )->build() );
+		$itemRetriever = $this->createMock( ItemRetriever::class );
+		$itemRetriever->method( 'getItem' )->willReturn( NewItem::withId( 'Q42' )->build() );
 		$statementId = 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 		try {
 			$this->newUseCase()->execute(
@@ -216,15 +196,14 @@ class RemoveStatementTest extends TestCase {
 		$itemIdParser = new ItemIdParser();
 		return new RemoveStatement(
 			new RemoveStatementValidator(
-				new ItemIdValidator(),
 				new StatementIdValidator( $itemIdParser ),
 				new EditMetadataValidator( CommentStore::COMMENT_CHARACTER_LIMIT, self::ALLOWED_TAGS )
 			),
 			new StatementGuidParser( $itemIdParser ),
-			new AssertItemExists( $this->getRevisionMetadata ),
-			$this->itemRetriever,
-			$this->itemUpdater,
-			$this->assertUserIsAuthorized
+			$this->assertUserIsAuthorized,
+			$this->assertStatementSubjectExists,
+			$this->statementRetriever,
+			$this->statementRemover
 		);
 	}
 
@@ -234,8 +213,7 @@ class RemoveStatementTest extends TestCase {
 			$requestData['$editTags'] ?? [],
 			$requestData['$isBot'] ?? false,
 			$requestData['$comment'] ?? null,
-			$requestData['$username'] ?? null,
-			$requestData['$itemId'] ?? null
+			$requestData['$username'] ?? null
 		);
 	}
 
