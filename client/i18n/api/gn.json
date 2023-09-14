@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"P. S. F. Freitas"
+		]
+	},
+	"apihelp-query+description-paramvalue-prefersource-local": "Descripciones locales mediante la función <code><nowiki>{{SHORTDESC:...}}</nowiki></code> del analizador sintáctico en el wikitexto de la página."
+}
