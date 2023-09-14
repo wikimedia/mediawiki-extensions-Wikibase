@@ -6,7 +6,8 @@ use Article;
 use Html;
 use IContextSource;
 use Linker;
-use MediaWiki\MediaWikiServices;
+use MediaWiki\Permissions\PermissionManager;
+use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
 use OOUI\ButtonInputWidget;
@@ -21,7 +22,7 @@ use Wikibase\Repo\Content\EntityContent;
 use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\Diff\BasicEntityDiffVisualizer;
 use Wikibase\Repo\Diff\DispatchingEntityDiffVisualizer;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Diff\EntityDiffVisualizerFactory;
 
 /**
  * Handles the edit action for Wikibase entities.
@@ -35,22 +36,27 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class EditEntityAction extends ViewEntityAction {
 
+	protected PermissionManager $permissionManager;
+	private RevisionLookup $revisionLookup;
+
 	/**
 	 * @var BasicEntityDiffVisualizer
 	 */
 	private $entityDiffVisualizer;
 
-	/**
-	 * @see Action::__construct
-	 *
-	 * @param Article $article
-	 * @param IContextSource $context
-	 */
-	public function __construct( Article $article, IContextSource $context ) {
+	public function __construct(
+		Article $article,
+		IContextSource $context,
+		PermissionManager $permissionManager,
+		RevisionLookup $revisionLookup,
+		EntityDiffVisualizerFactory $entityDiffVisualizerFactory
+	) {
 		parent::__construct( $article, $context );
 
+		$this->permissionManager = $permissionManager;
+		$this->revisionLookup = $revisionLookup;
 		$this->entityDiffVisualizer = new DispatchingEntityDiffVisualizer(
-			WikibaseRepo::getEntityDiffVisualizerFactory(),
+			$entityDiffVisualizerFactory,
 			$this->getContext()
 		);
 	}
@@ -73,10 +79,9 @@ class EditEntityAction extends ViewEntityAction {
 	 */
 	protected function showPermissionError( $action ) {
 		$rigor = $this->getRequest()->wasPosted() ? 'secure' : 'full';
-		$pm = MediaWikiServices::getInstance()->getPermissionManager();
-		if ( !$pm->userCan( $action, $this->getUser(), $this->getTitle(), $rigor ) ) {
+		if ( !$this->permissionManager->userCan( $action, $this->getUser(), $this->getTitle(), $rigor ) ) {
 			$this->getOutput()->showPermissionsErrorPage(
-				$pm->getPermissionErrors( $action, $this->getUser(), $this->getTitle(), $rigor ),
+				$this->permissionManager->getPermissionErrors( $action, $this->getUser(), $this->getTitle(), $rigor ),
 				$action
 			);
 
@@ -101,9 +106,7 @@ class EditEntityAction extends ViewEntityAction {
 			return Status::newFatal( 'missing-article', $this->getTitle()->getPrefixedText(), '' );
 		}
 
-		$latestRevision = MediaWikiServices::getInstance()
-			->getRevisionLookup()
-			->getRevisionById( $latestRevId );
+		$latestRevision = $this->revisionLookup->getRevisionById( $latestRevId );
 
 		if ( !$latestRevId ) {
 			throw new RuntimeException( "latest revision not found: $latestRevId" );
@@ -119,9 +122,8 @@ class EditEntityAction extends ViewEntityAction {
 	 * @return Status
 	 */
 	private function getStatus( WebRequest $req, RevisionRecord $latestRevision ) {
-		$revLookup = MediaWikiServices::getInstance()->getRevisionLookup();
 		if ( $req->getCheck( 'restore' ) ) { // nearly the same as undoafter without undo
-			$olderRevision = $revLookup->getRevisionById( $req->getInt( 'restore' ) );
+			$olderRevision = $this->revisionLookup->getRevisionById( $req->getInt( 'restore' ) );
 
 			if ( !$olderRevision ) {
 				return Status::newFatal( 'undo-norev', $req->getInt( 'restore' ) );
@@ -130,27 +132,27 @@ class EditEntityAction extends ViewEntityAction {
 			// ignore undo, even if set
 			$newerRevision = $latestRevision;
 		} elseif ( $req->getCheck( 'undo' ) ) {
-			$newerRevision = $revLookup->getRevisionById( $req->getInt( 'undo' ) );
+			$newerRevision = $this->revisionLookup->getRevisionById( $req->getInt( 'undo' ) );
 
 			if ( !$newerRevision ) {
 				return Status::newFatal( 'undo-norev', $req->getInt( 'undo' ) );
 			}
 
 			if ( $req->getCheck( 'undoafter' ) ) {
-				$olderRevision = $revLookup->getRevisionById( $req->getInt( 'undoafter' ) );
+				$olderRevision = $this->revisionLookup->getRevisionById( $req->getInt( 'undoafter' ) );
 
 				if ( !$olderRevision ) {
 					return Status::newFatal( 'undo-norev', $req->getInt( 'undoafter' ) );
 				}
 			} else {
-				$olderRevision = $revLookup->getPreviousRevision( $newerRevision );
+				$olderRevision = $this->revisionLookup->getPreviousRevision( $newerRevision );
 
 				if ( !$olderRevision ) {
 					return Status::newFatal( 'wikibase-undo-firstrev' );
 				}
 			}
 		} elseif ( $req->getCheck( 'undoafter' ) ) {
-			$olderRevision = $revLookup->getRevisionById( $req->getInt( 'undoafter' ) );
+			$olderRevision = $this->revisionLookup->getRevisionById( $req->getInt( 'undoafter' ) );
 
 			if ( !$olderRevision ) {
 				return Status::newFatal( 'undo-norev', $req->getInt( 'undo' ) );

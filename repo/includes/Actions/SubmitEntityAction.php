@@ -5,17 +5,20 @@ namespace Wikibase\Repo\Actions;
 use Article;
 use IContextSource;
 use LogicException;
-use MediaWiki\MediaWikiServices;
+use MediaWiki\Page\WikiPageFactory;
 use MediaWiki\Permissions\PermissionManager;
+use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
 use MediaWiki\Title\Title;
+use MediaWiki\User\UserOptionsLookup;
+use MediaWiki\Watchlist\WatchlistManager;
 use Status;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\Content\EntityContent;
+use Wikibase\Repo\Diff\EntityDiffVisualizerFactory;
 use Wikibase\Repo\EditEntity\EditFilterHookRunner;
 use Wikibase\Repo\SummaryFormatter;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Handles the submit action for Wikibase entities.
@@ -29,20 +32,37 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class SubmitEntityAction extends EditEntityAction {
 
+	private UserOptionsLookup $userOptionsLookup;
+	private WatchlistManager $watchlistManager;
+	private WikiPageFactory $wikiPageFactory;
 	private EditFilterHookRunner $editFilterHookRunner;
 	private SummaryFormatter $summaryFormatter;
 
-	/**
-	 * @see EditEntityAction::__construct
-	 *
-	 * @param Article $article
-	 * @param IContextSource $context
-	 */
-	public function __construct( Article $article, IContextSource $context ) {
-		parent::__construct( $article, $context );
+	public function __construct(
+		Article $article,
+		IContextSource $context,
+		PermissionManager $permissionManager,
+		RevisionLookup $revisionLookup,
+		UserOptionsLookup $userOptionsLookup,
+		WatchlistManager $watchlistManager,
+		WikiPageFactory $wikiPageFactory,
+		EditFilterHookRunner $editFilterHookRunner,
+		EntityDiffVisualizerFactory $entityDiffVisualizerFactory,
+		SummaryFormatter $summaryFormatter
+	) {
+		parent::__construct(
+			$article,
+			$context,
+			$permissionManager,
+			$revisionLookup,
+			$entityDiffVisualizerFactory
+		);
 
-		$this->editFilterHookRunner = WikibaseRepo::getEditFilterHookRunner();
-		$this->summaryFormatter = WikibaseRepo::getSummaryFormatter();
+		$this->userOptionsLookup = $userOptionsLookup;
+		$this->watchlistManager = $watchlistManager;
+		$this->wikiPageFactory = $wikiPageFactory;
+		$this->editFilterHookRunner = $editFilterHookRunner;
+		$this->summaryFormatter = $summaryFormatter;
 	}
 
 	public function getName() {
@@ -242,8 +262,7 @@ class SubmitEntityAction extends EditEntityAction {
 		}
 
 		// save edit
-		$page = MediaWikiServices::getInstance()->getWikiPageFactory()
-			->newFromTitle( $title );
+		$page = $this->wikiPageFactory->newFromTitle( $title );
 
 		// NOTE: Constraint checks are performed automatically via EntityHandler::validateSave.
 		$status = $page->doUserEditContent(
@@ -279,7 +298,7 @@ class SubmitEntityAction extends EditEntityAction {
 		Title $title,
 		$rigor = PermissionManager::RIGOR_SECURE
 	) {
-		$errors = MediaWikiServices::getInstance()->getPermissionManager()
+		$errors = $this->permissionManager
 			->getPermissionErrors( $permission, $this->getUser(), $title, $rigor );
 		$status = Status::newGood();
 
@@ -315,14 +334,11 @@ class SubmitEntityAction extends EditEntityAction {
 	private function doWatch( Title $title ) {
 		$user = $this->getUser();
 
-		$services = MediaWikiServices::getInstance();
-		$userOptionsLookup = $services->getUserOptionsLookup();
-		$watchlistManager = $services->getWatchlistManager();
 		if ( $user->isRegistered()
-			&& $userOptionsLookup->getOption( $user, 'watchdefault' )
-			&& !$watchlistManager->isWatchedIgnoringRights( $user, $title )
+			&& $this->userOptionsLookup->getOption( $user, 'watchdefault' )
+			&& !$this->watchlistManager->isWatchedIgnoringRights( $user, $title )
 		) {
-			$watchlistManager->addWatchIgnoringRights( $user, $title );
+			$this->watchlistManager->addWatchIgnoringRights( $user, $title );
 		}
 	}
 
