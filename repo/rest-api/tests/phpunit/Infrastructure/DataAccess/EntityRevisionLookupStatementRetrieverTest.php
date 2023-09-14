@@ -10,6 +10,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\StatementListProvidingEntity as StatementSubject;
+use Wikibase\DataModel\Statement\Statement as StatementWriteModel;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\Fingerprint;
@@ -73,6 +74,46 @@ class EntityRevisionLookupStatementRetrieverTest extends TestCase {
 			$statementId,
 			new Property( $propertyId, new Fingerprint(), 'string', new StatementList( $statement ) ),
 			$this->newStatementReadModelConverter()->convert( $statement ),
+		];
+	}
+
+	/**
+	 * @dataProvider provideStatementSubjectWithStatementWriteModel
+	 */
+	public function testGetStatementWriteModel(
+		StatementGuid $statementId,
+		StatementSubject $subject,
+		StatementWriteModel $expected
+	): void {
+		$this->entityRevisionLookup = $this->newLookupForIdWithReturnValue( $subject->getId(), $subject );
+		$this->assertEquals( $expected, $this->newRetriever()->getStatementWriteModel( $statementId ) );
+	}
+
+	public function provideStatementSubjectWithStatementWriteModel(): Generator {
+		$itemId = new ItemId( 'Q123' );
+		$statementId = new StatementGuid( $itemId, 'c48c32c3-42b5-498f-9586-84608b88747c' );
+		$statement = NewStatement::forProperty( 'P123' )
+			->withValue( 'potato' )
+			->withGuid( $statementId )
+			->build();
+
+		yield 'Item with Statement' => [
+			$statementId,
+			NewItem::withId( $itemId )->andStatement( $statement )->build(),
+			$statement,
+		];
+
+		$propertyId = new NumericPropertyId( 'P567' );
+		$statementId = new StatementGuid( $propertyId, 'c48c32c3-42b5-498f-9586-84608b88747c' );
+		$statement = NewStatement::forProperty( 'P123' )
+			->withValue( 'potato' )
+			->withGuid( $statementId )
+			->build();
+
+		yield 'Property with Statement' => [
+			$statementId,
+			new Property( $propertyId, new Fingerprint(), 'string', new StatementList( $statement ) ),
+			$statement,
 		];
 	}
 

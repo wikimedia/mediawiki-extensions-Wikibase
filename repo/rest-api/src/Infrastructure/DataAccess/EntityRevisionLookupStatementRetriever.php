@@ -2,15 +2,17 @@
 
 namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
 
+use Wikibase\DataModel\Statement\Statement as StatementWriteModel;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\RestApi\Domain\Services\StatementRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\StatementWriteModelRetriever;
 
 /**
  * @license GPL-2.0-or-later
  */
-class EntityRevisionLookupStatementRetriever implements StatementRetriever {
+class EntityRevisionLookupStatementRetriever implements StatementRetriever, StatementWriteModelRetriever {
 
 	private StatementSubjectRetriever $statementSubjectRetriever;
 	private StatementReadModelConverter $statementReadModelConverter;
@@ -24,6 +26,11 @@ class EntityRevisionLookupStatementRetriever implements StatementRetriever {
 	}
 
 	public function getStatement( StatementGuid $statementId ): ?Statement {
+		$statement = $this->getStatementWriteModel( $statementId );
+		return $statement ? $this->statementReadModelConverter->convert( $statement ) : null;
+	}
+
+	public function getStatementWriteModel( StatementGuid $statementId ): ?StatementWriteModel {
 		$subjectId = $statementId->getEntityId();
 		$subject = $this->statementSubjectRetriever->getStatementSubject( $subjectId );
 
@@ -31,8 +38,7 @@ class EntityRevisionLookupStatementRetriever implements StatementRetriever {
 			return null;
 		}
 
-		$statement = $subject->getStatements()->getFirstStatementWithGuid( (string)$statementId );
-		return $statement ? $this->statementReadModelConverter->convert( $statement ) : null;
+		return $subject->getStatements()->getFirstStatementWithGuid( (string)$statementId );
 	}
 
 }
