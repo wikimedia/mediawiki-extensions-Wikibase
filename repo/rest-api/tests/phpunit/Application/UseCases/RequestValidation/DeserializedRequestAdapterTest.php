@@ -8,9 +8,11 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementGuid;
+use Wikibase\DataModel\Term\Term;
 use Wikibase\Repo\RestApi\Application\UseCases\EditMetadataRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\ItemLabelEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\LanguageCodeRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdFilterRequest;
@@ -138,6 +140,17 @@ class DeserializedRequestAdapterTest extends TestCase {
 	public function testGivenNoPatch_getPatchThrows(): void {
 		$this->expectException( LogicException::class );
 		( new DeserializedRequestAdapter( [] ) )->getPatch();
+	}
+
+	public function testGetLabel(): void {
+		$label = new Term( 'en', 'potato' );
+		$requestAdapter = new DeserializedRequestAdapter( [ ItemLabelEditRequest::class => $label ] );
+		$this->assertSame( $label, $requestAdapter->getLabel() );
+	}
+
+	public function testGivenNoLabel_getLabelThrows(): void {
+		$this->expectException( LogicException::class );
+		( new DeserializedRequestAdapter( [] ) )->getLabel();
 	}
 
 }

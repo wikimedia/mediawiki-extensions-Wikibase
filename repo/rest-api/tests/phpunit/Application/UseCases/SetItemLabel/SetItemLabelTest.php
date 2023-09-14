@@ -9,6 +9,7 @@ use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabelRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabelValidator;
@@ -23,6 +24,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\Tests\RestApi\Application\UseCases\RequestValidation\TestValidatingRequestFieldDeserializerFactory;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 
 /**
@@ -43,7 +45,9 @@ class SetItemLabelTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->validator = $this->createStub( SetItemLabelValidator::class );
+		$this->validator = new SetItemLabelValidator(
+			new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() )
+		);
 		$this->getRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
 		$this->getRevisionMetadata->method( 'execute' )
 			->willReturn( [ 321, '20201111070707' ] );
@@ -57,7 +61,7 @@ class SetItemLabelTest extends TestCase {
 		$itemId = 'Q123';
 		$langCode = 'en';
 		$newLabelText = 'New label';
-		$editTags = [ 'some', 'tags' ];
+		$editTags = TestValidatingRequestFieldDeserializerFactory::ALLOWED_TAGS;
 		$isBot = false;
 		$comment = "{$this->getName()} Comment";
 		$revisionId = 657;
@@ -93,7 +97,7 @@ class SetItemLabelTest extends TestCase {
 		$itemId = 'Q123';
 		$langCode = 'en';
 		$updatedLabelText = 'Replaced label';
-		$editTags = [ 'some', 'tags' ];
+		$editTags = TestValidatingRequestFieldDeserializerFactory::ALLOWED_TAGS;
 		$isBot = false;
 		$comment = "{$this->getName()} Comment";
 		$revisionId = 657;
@@ -128,7 +132,7 @@ class SetItemLabelTest extends TestCase {
 	public function testGivenInvalidRequest_throwsUseCaseException(): void {
 		$expectedException = new UseCaseException( 'invalid-label-test' );
 		$this->validator = $this->createStub( SetItemLabelValidator::class );
-		$this->validator->method( 'assertValidRequest' )->willThrowException( $expectedException );
+		$this->validator->method( 'validateAndDeserialize' )->willThrowException( $expectedException );
 		try {
 			$this->newUseCase()->execute(
 				new SetItemLabelRequest( 'Q123', 'en', 'label', [], false, null, null )

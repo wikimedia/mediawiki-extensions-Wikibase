@@ -8,9 +8,11 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementGuid;
+use Wikibase\DataModel\Term\Term;
 use Wikibase\Repo\RestApi\Application\UseCases\DeserializedEditMetadataRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\DeserializedItemFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\DeserializedItemIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\DeserializedItemLabelEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\DeserializedLanguageCodeRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\DeserializedPropertyIdFilterRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\DeserializedPropertyIdRequest;
@@ -19,6 +21,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\DeserializedStatementSerializatio
 use Wikibase\Repo\RestApi\Application\UseCases\EditMetadataRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\ItemLabelEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\LanguageCodeRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdFilterRequest;
@@ -38,7 +41,8 @@ class DeserializedRequestAdapter implements
 	DeserializedLanguageCodeRequest,
 	DeserializedItemFieldsRequest,
 	DeserializedStatementSerializationRequest,
-	DeserializedEditMetadataRequest
+	DeserializedEditMetadataRequest,
+	DeserializedItemLabelEditRequest
 {
 	private array $deserializedRequest;
 
@@ -80,6 +84,10 @@ class DeserializedRequestAdapter implements
 
 	public function getPatch(): array {
 		return $this->getRequestField( PatchRequest::class );
+	}
+
+	public function getLabel(): Term {
+		return $this->getRequestField( ItemLabelEditRequest::class );
 	}
 
 	/**
