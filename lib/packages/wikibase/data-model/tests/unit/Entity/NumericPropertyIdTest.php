@@ -3,6 +3,7 @@
 namespace Wikibase\DataModel\Tests\Entity;
 
 use InvalidArgumentException;
+use MediaWikiUnitTestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 
 /**
@@ -13,7 +14,7 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
  *
  * @license GPL-2.0-or-later
  */
-class NumericPropertyIdTest extends \PHPUnit\Framework\TestCase {
+class NumericPropertyIdTest extends MediaWikiUnitTestCase {
 
 	/**
 	 * @dataProvider idSerializationProvider
@@ -85,6 +86,7 @@ class NumericPropertyIdTest extends \PHPUnit\Framework\TestCase {
 
 	public function testSerialize() {
 		$id = new NumericPropertyId( 'P1' );
+		$this->expectDeprecationAndContinue( '/NumericPropertyId::serialize/' );
 		$this->assertSame( 'P1', $id->serialize() );
 	}
 
@@ -93,6 +95,7 @@ class NumericPropertyIdTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testUnserialize( $json, $expected ) {
 		$id = new NumericPropertyId( 'P1' );
+		$this->expectDeprecationAndContinue( '/NumericPropertyId::unserialize/' );
 		$id->unserialize( $json );
 		$this->assertSame( $expected, $id->getSerialization() );
 	}
