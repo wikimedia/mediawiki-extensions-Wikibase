@@ -1,6 +1,6 @@
 <?php declare( strict_types = 1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement;
+namespace Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement;
 
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\DeserializedRequestAdapter;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
@@ -9,7 +9,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 /**
  * @license GPL-2.0-or-later
  */
-class RemoveStatementValidator {
+class RemoveItemStatementValidator {
 
 	private ValidatingRequestDeserializer $requestDeserializer;
 
@@ -20,9 +20,9 @@ class RemoveStatementValidator {
 	/**
 	 * @throws UseCaseError
 	 */
-	public function validateAndDeserialize( RemoveStatementRequest $request ): DeserializedRemoveStatementRequest {
+	public function validateAndDeserialize( RemoveItemStatementRequest $request ): DeserializedRemoveItemStatementRequest {
 		return new class( $this->requestDeserializer->validateAndDeserialize( $request ) )
-			extends DeserializedRequestAdapter implements DeserializedRemoveStatementRequest {
+			extends DeserializedRequestAdapter implements DeserializedRemoveItemStatementRequest {
 		};
 	}
 

@@ -4,9 +4,7 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\ConditionalHeaderUtil;
 use MediaWiki\Rest\Reporter\ErrorReporter;
 use MediaWiki\Rest\Reporter\MWErrorReporter;
-use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
-use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserializer;
@@ -63,6 +61,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchedStatementVa
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatement;
@@ -81,7 +80,6 @@ use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
-use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
@@ -457,17 +455,16 @@ return [
 	'WbRestApi.RemoveItemStatement' => function( MediaWikiServices $services ): RemoveItemStatement {
 		return new RemoveItemStatement(
 			WbRestApi::getAssertItemExists( $services ),
-			WbRestApi::getRemoveStatement( $services )
+			WbRestApi::getRemoveStatement( $services ),
+			new RemoveItemStatementValidator( WbRestApi::getValidatingRequestDeserializer( $services ) )
 		);
 	},
 
 	'WbRestApi.RemoveStatement' => function( MediaWikiServices $services ): RemoveStatement {
 		return new RemoveStatement(
 			new RemoveStatementValidator(
-				new StatementIdValidator( new ItemIdParser() ),
-				WbRestApi::getEditMetadataValidator( $services )
+				WbRestApi::getValidatingRequestDeserializer( $services )
 			),
-			new StatementGuidParser( new ItemIdParser() ),
 			WbRestApi::getAssertUserIsAuthorized( $services ),
 			WbRestApi::getAssertStatementSubjectExists( $services ),
 			WbRestApi::getStatementRetriever( $services ),

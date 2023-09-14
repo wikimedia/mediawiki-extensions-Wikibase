@@ -2,10 +2,15 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement;
 
+use Wikibase\Repo\RestApi\Application\UseCases\EditMetadataRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\ItemIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\StatementIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseRequest;
+
 /**
  * @license GPL-2.0-or-later
  */
-class RemoveItemStatementRequest {
+class RemoveItemStatementRequest implements UseCaseRequest, ItemIdRequest, StatementIdRequest, EditMetadataRequest {
 
 	private string $itemId;
 	private string $statementId;
