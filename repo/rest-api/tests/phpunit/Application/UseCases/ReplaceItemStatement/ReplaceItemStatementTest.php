@@ -10,10 +10,11 @@ use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemS
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
+use Wikibase\Repo\Tests\RestApi\Application\UseCases\RequestValidation\TestValidatingRequestFieldDeserializerFactory;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 
 /**
@@ -34,7 +35,9 @@ class ReplaceItemStatementTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->replaceItemStatementValidator = $this->createStub( ReplaceItemStatementValidator::class );
+		$this->replaceItemStatementValidator = new ReplaceItemStatementValidator(
+			new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() )
+		);
 		$this->assertItemExists = $this->createStub( AssertItemExists::class );
 		$this->replaceStatement  = $this->createStub( ReplaceStatement::class );
 	}
@@ -42,33 +45,22 @@ class ReplaceItemStatementTest extends TestCase {
 	public function testGivenValidReplaceItemStatementRequest_callsReplaceStatementUseCase(): void {
 		$itemId = new ItemId( 'Q123' );
 		$statementId = new StatementGuid( $itemId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
-		$newStatementSerialization = [ 'some' => 'statement' ];
-		$editTags = [ 'some', 'tags' ];
+		$editTags = TestValidatingRequestFieldDeserializerFactory::ALLOWED_TAGS;
 		$isBot = false;
 		$comment = 'statement replaced by ' . __method__;
 		$request = $this->newUseCaseRequest( [
 			'$itemId' => (string)$itemId,
 			'$statementId' => (string)$statementId,
-			'$statement' => $newStatementSerialization,
 			'$editTags' => $editTags,
 			'$isBot' => $isBot,
 			'$comment' => $comment,
 		] );
 
-		$replaceStatementRequest = new ReplaceStatementRequest(
-			(string)$statementId,
-			$newStatementSerialization,
-			$editTags,
-			$isBot,
-			$comment,
-			null
-		);
-
 		$expectedResponse = $this->createStub( ReplaceStatementResponse::class );
 		$this->replaceStatement  = $this->createMock( ReplaceStatement::class );
 		$this->replaceStatement->expects( $this->once() )
 			->method( 'execute' )
-			->with( $replaceStatementRequest )
+			->with( $request )
 			->willReturn( $expectedResponse );
 
 		$this->assertSame( $expectedResponse, $this->newUseCase()->execute( $request ) );
@@ -80,7 +72,7 @@ class ReplaceItemStatementTest extends TestCase {
 
 		$this->replaceItemStatementValidator = $this->createMock( ReplaceItemStatementValidator::class );
 		$this->replaceItemStatementValidator->expects( $this->once() )
-			->method( 'assertValidRequest' )
+			->method( 'validateAndDeserialize' )
 			->with( $useCaseRequest )
 			->willThrowException( $expectedUseCaseError );
 
@@ -92,25 +84,12 @@ class ReplaceItemStatementTest extends TestCase {
 		}
 	}
 
-	public function testGivenInvalidReplaceStatementRequest_throws(): void {
-		$usecaseRequest = $this->createStub( ReplaceItemStatementRequest::class );
-		$expectedUseCaseError = $this->createStub( UseCaseError::class );
-		$this->replaceStatement  = $this->createStub( ReplaceStatement::class );
-		$this->replaceStatement->method( 'assertValidRequest' )->willThrowException( $expectedUseCaseError );
-
-		try {
-			$this->newUseCase()->execute( $usecaseRequest );
-			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseError $e ) {
-			$this->assertSame( $expectedUseCaseError, $e );
-		}
-	}
-
 	public function testGivenStatementIdDoesNotMatchItemId_throws(): void {
 		$statementId = 'Q456$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-		$request = $this->createStub( ReplaceItemStatementRequest::class );
-		$request->method( 'getItemId' )->willReturn( 'Q123' );
-		$request->method( 'getStatementId' )->willReturn( $statementId );
+		$request = $this->newUseCaseRequest( [
+			'$itemId' => 'Q123',
+			'$statementId' => $statementId,
+		] );
 
 		try {
 			$this->newUseCase()->execute( $request );
@@ -124,17 +103,9 @@ class ReplaceItemStatementTest extends TestCase {
 	public function testGivenItemNotFoundOrRedirect_throws(): void {
 		$itemId = new ItemId( 'Q123' );
 		$statementId = new StatementGuid( $itemId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
-		$newStatementSerialization = [ 'some' => 'statement' ];
-		$editTags = [ 'some', 'tags' ];
-		$isBot = false;
-		$comment = 'statement replaced by ' . __method__;
 		$request = $this->newUseCaseRequest( [
 			'$itemId' => (string)$itemId,
 			'$statementId' => (string)$statementId,
-			'$statement' => $newStatementSerialization,
-			'$editTags' => $editTags,
-			'$isBot' => $isBot,
-			'$comment' => $comment,
 		] );
 
 		$expectedException = $this->createStub( UseCaseException::class );
@@ -153,13 +124,13 @@ class ReplaceItemStatementTest extends TestCase {
 	}
 
 	public function testGivenReplaceStatementThrows_rethrows(): void {
-		$request = $this->createStub( ReplaceItemStatementRequest::class );
-		$request->method( 'getItemId' )->willReturn( 'Q123' );
-		$request->method( 'getStatementId' )->willReturn( 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
+		$request = $this->newUseCaseRequest( [
+			'$itemId' => 'Q123',
+			'$statementId' => 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
+		] );
 
 		$expectedUseCaseError = $this->createStub( UseCaseError::class );
 		$this->replaceStatement  = $this->createStub( ReplaceStatement::class );
-		$this->replaceStatement->method( 'execute' )->willThrowException( $expectedUseCaseError );
 		$this->replaceStatement->method( 'execute' )->willThrowException( $expectedUseCaseError );
 
 		try {
@@ -182,7 +153,10 @@ class ReplaceItemStatementTest extends TestCase {
 		return new ReplaceItemStatementRequest(
 			$requestData['$itemId'],
 			$requestData['$statementId'],
-			$requestData['$statement'],
+			$requestData['$statement'] ?? [
+				'property' => [ 'id' => TestValidatingRequestFieldDeserializerFactory::EXISTING_STRING_PROPERTY ],
+				'value' => [ 'type' => 'novalue' ],
+			],
 			$requestData['$editTags'] ?? [],
 			$requestData['$isBot'] ?? false,
 			$requestData['$comment'] ?? null,

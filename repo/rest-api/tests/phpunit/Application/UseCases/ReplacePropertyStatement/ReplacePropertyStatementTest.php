@@ -9,8 +9,10 @@ use Wikibase\Repo\RestApi\Application\UseCases\ReplacePropertyStatement\ReplaceP
 use Wikibase\Repo\RestApi\Application\UseCases\ReplacePropertyStatement\ReplacePropertyStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
+use Wikibase\Repo\Tests\RestApi\Application\UseCases\RequestValidation\TestValidatingRequestFieldDeserializerFactory;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\ReplacePropertyStatement\ReplacePropertyStatement
@@ -29,48 +31,33 @@ class ReplacePropertyStatementTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->validator = $this->createStub( ReplacePropertyStatementValidator::class );
+		$this->validator = new ReplacePropertyStatementValidator(
+			new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() )
+		);
 		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
 		$this->replaceStatement = $this->createStub( ReplaceStatement::class );
 	}
 
 	public function testGivenValidRequest_returnsReplaceStatementResponse(): void {
+		$propertyId = TestValidatingRequestFieldDeserializerFactory::EXISTING_STRING_PROPERTY;
+		$request = $this->newUseCaseRequest( $propertyId, "$propertyId\$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE" );
 		$expectedResponse = $this->createStub( ReplaceStatementResponse::class );
-		$this->replaceStatement = $this->createStub( ReplaceStatement::class );
-		$this->replaceStatement->method( 'execute' )->willReturn( $expectedResponse );
+		$this->replaceStatement = $this->createMock( ReplaceStatement::class );
+		$this->replaceStatement->method( 'execute' )
+			->with( $request )
+			->willReturn( $expectedResponse );
 
-		$this->assertSame(
-			$expectedResponse,
-			$this->newUseCase()->execute(
-				$this->newUseCaseRequest( 'P123', 'P123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
-			)
-		);
+		$this->assertSame( $expectedResponse, $this->newUseCase()->execute( $request ) );
 	}
 
 	public function testGivenInvalidReplacePropertyStatementRequest_throwsUseCaseError(): void {
 		$expectedException = $this->createStub( UseCaseError::class );
 		$this->validator = $this->createStub( ReplacePropertyStatementValidator::class );
-		$this->validator->method( 'assertValidRequest' )->willThrowException( $expectedException );
+		$this->validator->method( 'validateAndDeserialize' )->willThrowException( $expectedException );
 
 		try {
 			$this->newUseCase()->execute(
 				$this->newUseCaseRequest( 'X123', 'P123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
-			);
-
-			$this->fail( 'Exception not thrown' );
-		} catch ( UseCaseException $e ) {
-			$this->assertSame( $expectedException, $e );
-		}
-	}
-
-	public function testGivenInvalidPropertyStatementRequest_throwsUseCaseError(): void {
-		$expectedException = $this->createStub( UseCaseError::class );
-		$this->replaceStatement = $this->createStub( ReplaceStatement::class );
-		$this->replaceStatement->method( 'assertValidRequest' )->willThrowException( $expectedException );
-
-		try {
-			$this->newUseCase()->execute(
-				$this->newUseCaseRequest( 'P123', 'X123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
 			);
 
 			$this->fail( 'Exception not thrown' );
@@ -119,6 +106,10 @@ class ReplacePropertyStatementTest extends TestCase {
 		$useCaseRequest = $this->createStub( ReplacePropertyStatementRequest::class );
 		$useCaseRequest->method( 'getPropertyId' )->willReturn( $propertyId );
 		$useCaseRequest->method( 'getStatementId' )->willReturn( $statementId );
+		$useCaseRequest->method( 'getStatement' )->willReturn( [
+			'property' => [ 'id' => TestValidatingRequestFieldDeserializerFactory::EXISTING_STRING_PROPERTY ],
+			'value' => [ 'type' => 'novalue' ],
+		] );
 
 		return $useCaseRequest;
 	}

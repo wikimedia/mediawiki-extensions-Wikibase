@@ -481,7 +481,7 @@ return [
 
 	'WbRestApi.ReplaceItemStatement' => function( MediaWikiServices $services ): ReplaceItemStatement {
 		return new ReplaceItemStatement(
-			new ReplaceItemStatementValidator( new ItemIdValidator() ),
+			new ReplaceItemStatementValidator( WbRestApi::getValidatingRequestDeserializer( $services ) ),
 			WbRestApi::getAssertItemExists( $services ),
 			WbRestApi::getReplaceStatement( $services )
 		);
@@ -489,21 +489,15 @@ return [
 
 	'WbRestApi.ReplacePropertyStatement' => function( MediaWikiServices $services ): ReplacePropertyStatement {
 		return new ReplacePropertyStatement(
-			new ReplacePropertyStatementValidator( new PropertyIdValidator() ),
+			new ReplacePropertyStatementValidator( WbRestApi::getValidatingRequestDeserializer( $services ) ),
 			WbRestApi::getAssertPropertyExists( $services ),
 			WbRestApi::getReplaceStatement( $services )
 		);
 	},
 
 	'WbRestApi.ReplaceStatement' => function( MediaWikiServices $services ): ReplaceStatement {
-		$entityIdParser = WikibaseRepo::getEntityIdParser( $services );
 		return new ReplaceStatement(
-			new ReplaceStatementValidator(
-				new StatementIdValidator( $entityIdParser ),
-				new StatementValidator( WbRestApi::getStatementDeserializer() ),
-				WbRestApi::getEditMetadataValidator( $services ),
-			),
-			WikibaseRepo::getStatementGuidParser( $services ),
+			new ReplaceStatementValidator( WbRestApi::getValidatingRequestDeserializer( $services ) ),
 			WbRestApi::getAssertStatementSubjectExists( $services ),
 			WbRestApi::getAssertUserIsAuthorized( $services ),
 			WbRestApi::getStatementUpdater( $services )

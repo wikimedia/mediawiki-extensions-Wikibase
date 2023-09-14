@@ -2,12 +2,9 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement;
 
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 
@@ -35,27 +32,17 @@ class ReplaceItemStatement {
 	 * @throws UseCaseError
 	 */
 	public function execute( ReplaceItemStatementRequest $request ): ReplaceStatementResponse {
-		$this->validator->assertValidRequest( $request );
+		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
 
-		$replaceStatementRequest = new ReplaceStatementRequest(
-			$request->getStatementId(),
-			$request->getStatement(),
-			$request->getEditTags(),
-			$request->isBot(),
-			$request->getComment(),
-			$request->getUsername()
-		);
-		$this->replaceStatement->assertValidRequest( $replaceStatementRequest );
+		$this->assertItemExists->execute( $deserializedRequest->getItemId() );
 
-		$this->assertItemExists->execute( new ItemId( $request->getItemId() ) );
-
-		if ( strpos( $request->getStatementId(), $request->getItemId() . StatementGuid::SEPARATOR ) !== 0 ) {
+		if ( !$deserializedRequest->getStatementId()->getEntityId()->equals( $deserializedRequest->getItemId() ) ) {
 			throw new UseCaseError(
 				UseCaseError::STATEMENT_NOT_FOUND,
-				"Could not find a statement with the ID: {$request->getStatementId()}"
+				"Could not find a statement with the ID: {$deserializedRequest->getStatementId()}"
 			);
 		}
 
-		return $this->replaceStatement->execute( $replaceStatementRequest );
+		return $this->replaceStatement->execute( $request );
 	}
 }

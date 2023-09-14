@@ -1,33 +1,28 @@
-<?php declare( strict_types=1 );
+<?php declare( strict_types = 1 );
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\ReplacePropertyStatement;
 
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\DeserializedRequestAdapter;
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
 
 /**
  * @license GPL-2.0-or-later
  */
 class ReplacePropertyStatementValidator {
 
-	private PropertyIdValidator $propertyIdValidator;
+	private ValidatingRequestDeserializer $requestDeserializer;
 
-	public function __construct( PropertyIdValidator $propertyIdValidator ) {
-		$this->propertyIdValidator = $propertyIdValidator;
+	public function __construct( ValidatingRequestDeserializer $requestDeserializer ) {
+		$this->requestDeserializer = $requestDeserializer;
 	}
 
 	/**
 	 * @throws UseCaseError
 	 */
-	public function assertValidRequest( ReplacePropertyStatementRequest $request ): void {
-		$validationError = $this->propertyIdValidator->validate( $request->getPropertyId() );
-		if ( $validationError ) {
-			throw new UseCaseError(
-				UseCaseError::INVALID_PROPERTY_ID,
-				"Not a valid property ID: {$validationError->getContext()[PropertyIdValidator::CONTEXT_VALUE]}",
-				[ 'property-id' => $validationError->getContext()[PropertyIdValidator::CONTEXT_VALUE] ]
-			);
-		}
+	public function validateAndDeserialize( ReplacePropertyStatementRequest $request ): DeserializedReplacePropertyStatementRequest {
+		return new class( $this->requestDeserializer->validateAndDeserialize( $request ) )
+			extends DeserializedRequestAdapter implements DeserializedReplacePropertyStatementRequest {
+		};
 	}
-
 }

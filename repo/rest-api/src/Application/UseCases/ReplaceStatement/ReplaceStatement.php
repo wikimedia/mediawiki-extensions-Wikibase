@@ -4,7 +4,6 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement;
 
 use Wikibase\DataModel\Exception\PropertyChangedException;
 use Wikibase\DataModel\Exception\StatementNotFoundException;
-use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertStatementSubjectExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
@@ -19,20 +18,17 @@ use Wikibase\Repo\RestApi\Domain\Services\StatementUpdater;
 class ReplaceStatement {
 
 	private ReplaceStatementValidator $validator;
-	private StatementGuidParser $statementIdParser;
 	private AssertStatementSubjectExists $assertStatementSubjectExists;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
 	private StatementUpdater $statementUpdater;
 
 	public function __construct(
 		ReplaceStatementValidator $validator,
-		StatementGuidParser $statementIdParser,
 		AssertStatementSubjectExists $assertStatementSubjectExists,
 		AssertUserIsAuthorized $assertUserIsAuthorized,
 		StatementUpdater $statementUpdater
 	) {
 		$this->validator = $validator;
-		$this->statementIdParser = $statementIdParser;
 		$this->assertStatementSubjectExists = $assertStatementSubjectExists;
 		$this->assertUserIsAuthorized = $assertUserIsAuthorized;
 		$this->statementUpdater = $statementUpdater;
@@ -43,30 +39,32 @@ class ReplaceStatement {
 	 * @throws UseCaseError
 	 */
 	public function execute( ReplaceStatementRequest $request ): ReplaceStatementResponse {
-		$this->assertValidRequest( $request );
+		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
+		$statementId = $deserializedRequest->getStatementId();
+		$statement = $deserializedRequest->getStatement();
+		$editMetadata = $deserializedRequest->getEditMetadata();
 
-		$statementId = $this->statementIdParser->parse( $request->getStatementId() );
 		$this->assertStatementSubjectExists->execute( $statementId );
-		$this->assertUserIsAuthorized->execute( $statementId->getEntityId(), $request->getUsername() );
+		$this->assertUserIsAuthorized->execute( $statementId->getEntityId(), $editMetadata->getUser()->getUsername() );
 
-		$statement = $this->validator->getValidatedStatement();
 		if ( $statement->getGuid() === null ) {
-			$statement->setGuid( $request->getStatementId() );
-		} elseif ( $statement->getGuid() !== $request->getStatementId() ) {
+			$statement->setGuid( "$statementId" );
+		} elseif ( $statement->getGuid() !== "$statementId" ) {
 			throw new UseCaseError(
 				UseCaseError::INVALID_OPERATION_CHANGED_STATEMENT_ID,
 				'Cannot change the ID of the existing statement'
 			);
 		}
 
-		$editMetadata = new EditMetadata(
-			$request->getEditTags(),
-			$request->isBot(),
-			StatementEditSummary::newReplaceSummary( $request->getComment(), $statement )
-		);
-
 		try {
-			$newRevision = $this->statementUpdater->update( $statement, $editMetadata );
+			$newRevision = $this->statementUpdater->update(
+				$statement,
+				new EditMetadata(
+					$editMetadata->getTags(),
+					$editMetadata->isBot(),
+					StatementEditSummary::newReplaceSummary( $editMetadata->getComment(), $statement )
+				)
+			);
 		} catch ( StatementNotFoundException $e ) {
 			throw new UseCaseError(
 				UseCaseError::STATEMENT_NOT_FOUND,
@@ -84,10 +82,6 @@ class ReplaceStatement {
 			$newRevision->getLastModified(),
 			$newRevision->getRevisionId()
 		);
-	}
-
-	public function assertValidRequest( ReplaceStatementRequest $request ): void {
-		$this->validator->assertValidRequest( $request );
 	}
 
 }

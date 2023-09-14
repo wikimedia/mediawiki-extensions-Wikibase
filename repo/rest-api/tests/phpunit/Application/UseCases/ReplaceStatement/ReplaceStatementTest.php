@@ -4,13 +4,11 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\ReplaceStatement;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Exception\PropertyChangedException;
 use Wikibase\DataModel\Exception\StatementNotFoundException;
-use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertStatementSubjectExists;
@@ -19,12 +17,14 @@ use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatement
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementRevision;
 use Wikibase\Repo\RestApi\Domain\Services\StatementUpdater;
+use Wikibase\Repo\Tests\RestApi\Application\UseCases\RequestValidation\TestValidatingRequestFieldDeserializerFactory;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
 
@@ -44,12 +44,12 @@ class ReplaceStatementTest extends TestCase {
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
 	private StatementUpdater $statementUpdater;
 
-	private const ALLOWED_TAGS = [ 'some', 'tags', 'are', 'allowed' ];
-
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->replaceStatementValidator = $this->createStub( ReplaceStatementValidator::class );
+		$this->replaceStatementValidator = new ReplaceStatementValidator(
+			new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() )
+		);
 		$this->assertStatementSubjectExists = $this->createStub( AssertStatementSubjectExists::class );
 		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
 		$this->statementUpdater = $this->createStub( StatementUpdater::class );
@@ -62,7 +62,7 @@ class ReplaceStatementTest extends TestCase {
 		$statementId = new StatementGuid( $subjectId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 		$newStatementSerialization = [
 			'id' => (string)$statementId,
-			'property' => [ 'id' => 'P123' ],
+			'property' => [ 'id' => TestValidatingRequestFieldDeserializerFactory::EXISTING_STRING_PROPERTY ],
 			'value' => [
 				'type' => 'somevalue',
 			],
@@ -70,12 +70,9 @@ class ReplaceStatementTest extends TestCase {
 		$newStatementWriteModel = NewStatement::someValueFor( 'P123' )->withGuid( $statementId )->build();
 		$modificationRevisionId = 322;
 		$modificationTimestamp = '20221111070707';
-		$editTags = [ 'some', 'tags' ];
+		$editTags = TestValidatingRequestFieldDeserializerFactory::ALLOWED_TAGS;
 		$isBot = false;
 		$comment = 'statement replaced by ' . __method__;
-
-		$this->replaceStatementValidator = $this->createStub( ReplaceStatementValidator::class );
-		$this->replaceStatementValidator->method( 'getValidatedStatement' )->willReturn( $newStatementWriteModel );
 
 		$expectedStatementReadModel = NewStatementReadModel::someValueFor( 'P123' )->withGuid( $statementId )->build();
 		$this->statementUpdater = $this->createMock( StatementUpdater::class );
@@ -109,7 +106,7 @@ class ReplaceStatementTest extends TestCase {
 
 		$this->replaceStatementValidator = $this->createMock( ReplaceStatementValidator::class );
 		$this->replaceStatementValidator->expects( $this->once() )
-			->method( 'assertValidRequest' )
+			->method( 'validateAndDeserialize' )
 			->with( $expectedUseCaseRequest )
 			->willThrowException( $expectedUseCaseError );
 
@@ -174,18 +171,18 @@ class ReplaceStatementTest extends TestCase {
 	 * @dataProvider provideSubjectId
 	 */
 	public function testGivenStatementIdChangedInSerialization_throwsUseCaseError( EntityId $subjectId ): void {
-		$originalStatementId = new StatementGuid( $subjectId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
-		$changedStatementID = new StatementGuid( $subjectId, 'LLLLLLL-MMMM-NNNN-OOOO-PPPPPPPPPPPP' );
-		$newStatementWriteModel = NewStatement::someValueFor( 'P321' )->withGuid( $changedStatementID )->build();
-
-		$this->replaceStatementValidator = $this->createStub( ReplaceStatementValidator::class );
-		$this->replaceStatementValidator->method( 'getValidatedStatement' )->willReturn( $newStatementWriteModel );
+		$originalStatementId = "$subjectId\$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE";
+		$changedStatementID = "$subjectId\$LLLLLLL-MMMM-NNNN-OOOO-PPPPPPPPPPPP";
 
 		try {
 			$this->newUseCase()->execute(
 				$this->newUseCaseRequest( [
 					'$statementId' => (string)$originalStatementId,
-					'$statement' => [ 'statement' => 'with different id' ],
+					'$statement' => [
+						'id' => "$changedStatementID",
+						'property' => [ 'id' => TestValidatingRequestFieldDeserializerFactory::EXISTING_STRING_PROPERTY ],
+						'value' => [ 'type' => 'novalue' ],
+					],
 				] )
 			);
 			$this->fail( 'this should not be reached' );
@@ -199,10 +196,14 @@ class ReplaceStatementTest extends TestCase {
 	 */
 	public function testStatementNotFoundOnSubject_throwsUseCaseError( EntityId $subjectId ): void {
 		$statementId = new StatementGuid( $subjectId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
-		$newStatementWriteModel = NewStatement::someValueFor( 'P123' )->withGuid( $statementId )->build();
-
-		$this->replaceStatementValidator = $this->createStub( ReplaceStatementValidator::class );
-		$this->replaceStatementValidator->method( 'getValidatedStatement' )->willReturn( $newStatementWriteModel );
+		$newStatementWriteModel = NewStatement::someValueFor(
+			TestValidatingRequestFieldDeserializerFactory::EXISTING_STRING_PROPERTY
+		)->withGuid( $statementId )->build();
+		$statementSerialization = [
+			'id' => "$statementId",
+			'property' => [ 'id' => TestValidatingRequestFieldDeserializerFactory::EXISTING_STRING_PROPERTY ],
+			'value' => [ 'type' => 'somevalue' ],
+		];
 
 		$this->statementUpdater = $this->createMock( StatementUpdater::class );
 		$this->statementUpdater->expects( $this->once() )
@@ -214,7 +215,7 @@ class ReplaceStatementTest extends TestCase {
 			$this->newUseCase()->execute(
 				$this->newUseCaseRequest( [
 					'$statementId' => (string)$statementId,
-					'$statement' => $this->getValidStatementSerialization(),
+					'$statement' => $statementSerialization,
 				] )
 			);
 			$this->fail( 'this should not be reached' );
@@ -234,7 +235,7 @@ class ReplaceStatementTest extends TestCase {
 			$this->newUseCase()->execute(
 				$this->newUseCaseRequest( [
 					'$statementId' => "$subjectId\$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
-					'$statement' => [ 'statement' => 'with different property' ],
+					'$statement' => $this->getValidStatementSerialization(),
 				] )
 			);
 			$this->fail( 'this should not be reached' );
@@ -251,7 +252,6 @@ class ReplaceStatementTest extends TestCase {
 	private function newUseCase(): ReplaceStatement {
 		return new ReplaceStatement(
 			$this->replaceStatementValidator,
-			new StatementGuidParser( new BasicEntityIdParser() ),
 			$this->assertStatementSubjectExists,
 			$this->assertUserIsAuthorized,
 			$this->statementUpdater,
@@ -271,7 +271,7 @@ class ReplaceStatementTest extends TestCase {
 
 	private function getValidStatementSerialization(): array {
 		return [
-			'property' => [ 'id' => 'P666' ],
+			'property' => [ 'id' => TestValidatingRequestFieldDeserializerFactory::EXISTING_STRING_PROPERTY ],
 			'value' => [ 'type' => 'novalue' ],
 		];
 	}

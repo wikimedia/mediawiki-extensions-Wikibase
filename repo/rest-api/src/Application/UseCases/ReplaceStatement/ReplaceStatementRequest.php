@@ -2,10 +2,15 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement;
 
+use Wikibase\Repo\RestApi\Application\UseCases\EditMetadataRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\StatementIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\StatementSerializationRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseRequest;
+
 /**
  * @license GPL-2.0-or-later
  */
-class ReplaceStatementRequest {
+class ReplaceStatementRequest implements UseCaseRequest, StatementIdRequest, StatementSerializationRequest, EditMetadataRequest {
 
 	private string $statementId;
 	private array $statement;

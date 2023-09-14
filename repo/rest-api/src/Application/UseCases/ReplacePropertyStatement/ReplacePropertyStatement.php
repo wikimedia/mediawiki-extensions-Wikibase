@@ -2,11 +2,8 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\ReplacePropertyStatement;
 
-use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 
@@ -33,31 +30,18 @@ class ReplacePropertyStatement {
 	 * @throws UseCaseError
 	 */
 	public function execute( ReplacePropertyStatementRequest $request ): ReplaceStatementResponse {
-		$this->validator->assertValidRequest( $request );
-		$replaceStatementRequest = $this->createReplaceStatementRequest( $request );
-		$this->replaceStatement->assertValidRequest( $replaceStatementRequest );
+		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
 
-		$this->assertPropertyExists->execute( new NumericPropertyId( $request->getPropertyId() ) );
+		$this->assertPropertyExists->execute( $deserializedRequest->getPropertyId() );
 
-		if ( strpos( $request->getStatementId(), $request->getPropertyId() . StatementGuid::SEPARATOR ) !== 0 ) {
+		if ( !$deserializedRequest->getStatementId()->getEntityId()->equals( $deserializedRequest->getPropertyId() ) ) {
 			throw new UseCaseError(
 				UseCaseError::STATEMENT_NOT_FOUND,
-				"Could not find a statement with the ID: {$request->getStatementId()}"
+				"Could not find a statement with the ID: {$deserializedRequest->getStatementId()}"
 			);
 		}
 
-		return $this->replaceStatement->execute( $replaceStatementRequest );
-	}
-
-	public function createReplaceStatementRequest( ReplacePropertyStatementRequest $request ): ReplaceStatementRequest {
-		return new ReplaceStatementRequest(
-			$request->getStatementId(),
-			$request->getStatement(),
-			$request->getEditTags(),
-			$request->isBot(),
-			$request->getComment(),
-			$request->getUsername()
-		);
+		return $this->replaceStatement->execute( $request );
 	}
 
 }

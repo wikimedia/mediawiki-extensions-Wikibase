@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\RequestValidation;
 use DataValues\Deserializers\DataValueDeserializer;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\DataTypeFactory;
@@ -28,9 +29,11 @@ class TestValidatingRequestFieldDeserializerFactory {
 
 	public const VALID_LANGUAGE_CODES = [ 'ar', 'de', 'en', 'fr' ];
 	public const ALLOWED_TAGS = [ 'allowed', 'also-allowed' ];
+	public const EXISTING_STRING_PROPERTY = 'P123';
 
 	public static function newFactory( PropertyDataTypeLookup $dataTypeLookup = null ): ValidatingRequestFieldDeserializerFactory {
 		$dataTypeLookup ??= new InMemoryDataTypeLookup();
+		$dataTypeLookup->setDataTypeForProperty( new NumericPropertyId( self::EXISTING_STRING_PROPERTY ), 'string' );
 		$entityIdParser = new BasicEntityIdParser();
 		$propertyValuePairDeserializer = new PropertyValuePairDeserializer(
 			$entityIdParser,
