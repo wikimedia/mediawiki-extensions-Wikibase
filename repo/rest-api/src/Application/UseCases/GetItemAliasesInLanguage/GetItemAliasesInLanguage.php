@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetItemAliasesInLanguage;
 
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
@@ -33,25 +32,21 @@ class GetItemAliasesInLanguage {
 	 * @throws ItemRedirect
 	 */
 	public function execute( GetItemAliasesInLanguageRequest $request ): GetItemAliasesInLanguageResponse {
-		$this->validator->assertValidRequest( $request );
-
-		$itemId = new ItemId( $request->getItemId() );
+		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
+		$itemId = $deserializedRequest->getItemId();
+		$languageCode = $deserializedRequest->getLanguageCode();
 
 		[ $revisionId, $lastModified ] = $this->getLatestRevisionMetadata->execute( $itemId );
 
-		$aliases = $this->itemAliasesInLanguageRetriever->getAliasesInLanguage( $itemId, $request->getLanguageCode() );
-
+		$aliases = $this->itemAliasesInLanguageRetriever->getAliasesInLanguage( $itemId, $languageCode );
 		if ( !$aliases ) {
 			throw new UseCaseError(
 				UseCaseError::ALIASES_NOT_DEFINED,
-				"Item with the ID {$request->getItemId()} does not have aliases in the language: {$request->getLanguageCode()}"
+				"Item with the ID $itemId does not have aliases in the language: $languageCode"
 			);
 		}
 
-		return new GetItemAliasesInLanguageResponse(
-			$aliases,
-			$lastModified,
-			$revisionId,
-		);
+		return new GetItemAliasesInLanguageResponse( $aliases, $lastModified, $revisionId );
 	}
+
 }
