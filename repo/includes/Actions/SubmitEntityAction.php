@@ -32,6 +32,24 @@ use Wikibase\Repo\SummaryFormatter;
  */
 class SubmitEntityAction extends EditEntityAction {
 
+	/**
+	 * {@link ObjectFactory} specification for this class,
+	 * to be returned by {@link EntityHandler::getActionOverrides()} implementations.
+	 */
+	public const SPEC = [
+		'class' => self::class,
+		'services' => [
+			'PermissionManager',
+			'RevisionLookup',
+			'UserOptionsLookup',
+			'WatchlistManager',
+			'WikiPageFactory',
+			'WikibaseRepo.EditFilterHookRunner',
+			'WikibaseRepo.EntityDiffVisualizerFactory',
+			'WikibaseRepo.SummaryFormatter',
+		],
+	];
+
 	private UserOptionsLookup $userOptionsLookup;
 	private WatchlistManager $watchlistManager;
 	private WikiPageFactory $wikiPageFactory;
