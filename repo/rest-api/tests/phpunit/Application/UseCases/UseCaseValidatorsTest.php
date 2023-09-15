@@ -13,6 +13,9 @@ use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\Deserialized
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\DeserializedGetItemRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItemRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItemValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliases\DeserializedGetItemAliasesRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliases\GetItemAliasesRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliases\GetItemAliasesValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\DeserializedGetItemDescriptionsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\GetItemDescriptionsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\GetItemDescriptionsValidator;
@@ -74,6 +77,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabelValidato
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItemValidator
+ * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItemAliases\GetItemAliasesValidator
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\GetItemDescriptionsValidator
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabelsValidator
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\GetItemStatementsValidator
@@ -119,6 +123,11 @@ class UseCaseValidatorsTest extends TestCase {
 	}
 
 	public function validatorProvider(): Generator {
+		yield [
+			GetItemAliasesValidator::class,
+			GetItemAliasesRequest::class,
+			DeserializedGetItemAliasesRequest::class,
+		];
 		yield [
 			GetItemDescriptionsValidator::class,
 			GetItemDescriptionsRequest::class,
