@@ -138,11 +138,7 @@ return [
 			WikibaseRepo::getPropertyDataTypeLookup( $services )
 		);
 		return new AddPropertyStatement(
-			new AddPropertyStatementValidator(
-				new PropertyIdValidator(),
-				new StatementValidator( WbRestApi::getStatementDeserializer( $services ) ),
-				WbRestApi::getEditMetadataValidator( $services )
-			),
+			new AddPropertyStatementValidator( WbRestApi::getValidatingRequestDeserializer( $services ) ),
 			WbRestApi::getAssertPropertyExists(),
 			new EntityRevisionLookupPropertyDataRetriever(
 				WikibaseRepo::getEntityRevisionLookup(),

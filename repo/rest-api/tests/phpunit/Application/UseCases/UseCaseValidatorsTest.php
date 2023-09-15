@@ -7,6 +7,9 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\DeserializedAddItemStatementRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatementRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\DeserializedAddPropertyStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\DeserializedGetItemRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItemRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItemValidator;
@@ -82,6 +85,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabelValidato
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyStatement\PatchPropertyStatementValidator
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementValidator
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetPropertyStatementsValidator
+ * @covers \Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatementValidator
  *
  * @group Wikibase
  *
@@ -201,6 +205,11 @@ class UseCaseValidatorsTest extends TestCase {
 			GetPropertyStatementsValidator::class,
 			GetPropertyStatementsRequest::class,
 			DeserializedGetPropertyStatementsRequest::class,
+		];
+		yield [
+			AddPropertyStatementValidator::class,
+			AddPropertyStatementRequest::class,
+			DeserializedAddPropertyStatementRequest::class,
 		];
 	}
 

@@ -7,12 +7,12 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property as DataModelProperty;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Statement\StatementGuid;
-use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Property;
@@ -20,6 +20,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyRevision;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
+use Wikibase\Repo\Tests\RestApi\Application\UseCases\RequestValidation\TestValidatingRequestFieldDeserializerFactory;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
 
@@ -45,7 +46,9 @@ class AddPropertyStatementTest extends TestCase {
 		parent::setUp();
 
 		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
-		$this->validator = $this->createStub( AddPropertyStatementValidator::class );
+		$this->validator = new AddPropertyStatementValidator(
+			new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() )
+		);
 		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
 		$this->guidGenerator = new GuidGenerator();
 		$this->propertyUpdater = $this->createStub( PropertyUpdater::class );
@@ -55,10 +58,9 @@ class AddPropertyStatementTest extends TestCase {
 	public function testAddStatement(): void {
 		$id = new NumericPropertyId( 'P321' );
 		$newGuid = new StatementGuid( $id, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
-		$editTags = [ 'some', 'tags' ];
+		$editTags = TestValidatingRequestFieldDeserializerFactory::ALLOWED_TAGS;
 		$isBot = false;
 		$comment = 'edit comment';
-		$statementWriteModel = NewStatement::noValueFor( 'P123' )->build();
 		$statementReadModel = NewStatementReadModel::noValueFor( 'P123' )
 			->withGuid( $newGuid )
 			->build();
@@ -66,9 +68,6 @@ class AddPropertyStatementTest extends TestCase {
 		$revisionId = 321;
 
 		$property = new DataModelProperty( $id, null, 'string' );
-
-		$this->validator = $this->createStub( AddPropertyStatementValidator::class );
-		$this->validator->method( 'getValidatedStatement' )->willReturn( $statementWriteModel );
 
 		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
 		$this->propertyRetriever->method( 'getProperty' )->willReturn( $property );
@@ -106,7 +105,7 @@ class AddPropertyStatementTest extends TestCase {
 	public function testGivenInvalidRequest_throwsUseCaseError(): void {
 		$expectedException = $this->createStub( UseCaseError::class );
 		$this->validator = $this->createStub( AddPropertyStatementValidator::class );
-		$this->validator->method( 'assertValidRequest' )->willThrowException( $expectedException );
+		$this->validator->method( 'validateAndDeserialize' )->willThrowException( $expectedException );
 
 		try {
 			$this->newUseCase()->execute( $this->createStub( AddPropertyStatementRequest::class ) );
