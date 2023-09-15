@@ -111,9 +111,6 @@ class ItemHandler extends EntityHandler {
 		$this->db = $db;
 	}
 
-	/**
-	 * @return (\Closure|class-string)[]
-	 */
 	public function getActionOverrides() {
 		return [
 			'history' => function ( Article $article, IContextSource $context ) {
@@ -125,8 +122,27 @@ class ItemHandler extends EntityHandler {
 				);
 			},
 			'view' => ViewEntityAction::class,
-			'edit' => EditEntityAction::class,
-			'submit' => SubmitEntityAction::class,
+			'edit' => [
+				'class' => EditEntityAction::class,
+				'services' => [
+					'PermissionManager',
+					'RevisionLookup',
+					'WikibaseRepo.EntityDiffVisualizerFactory',
+				],
+			],
+			'submit' => [
+				'class' => SubmitEntityAction::class,
+				'services' => [
+					'PermissionManager',
+					'RevisionLookup',
+					'UserOptionsLookup',
+					'WatchlistManager',
+					'WikiPageFactory',
+					'WikibaseRepo.EditFilterHookRunner',
+					'WikibaseRepo.EntityDiffVisualizerFactory',
+					'WikibaseRepo.SummaryFormatter',
+				],
+			],
 		];
 	}
 
