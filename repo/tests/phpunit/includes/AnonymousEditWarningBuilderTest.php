@@ -17,7 +17,7 @@ use Wikibase\Repo\AnonymousEditWarningBuilder;
 class AnonymousEditWarningBuilderTest extends MediaWikiIntegrationTestCase {
 
 	public function testBuildAnonymousEditWarningHTML(): void {
-		$this->setUserLang( 'qqx' );
+		$this->overrideConfigValue( 'LanguageCode', 'qqx' );
 		$builder = new AnonymousEditWarningBuilder(
 			MediaWikiServices::getInstance()->getSpecialPageFactory()
 		);
