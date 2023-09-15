@@ -14,6 +14,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Summary;
 use Wikibase\Lib\UserInputException;
+use Wikibase\Repo\AnonymousEditWarningBuilder;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\ChangeOpValidationException;
@@ -282,13 +283,13 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 			$this->getOutput()->addHTML( $this->getCopyrightHTML( $submitKey ) );
 		}
 		if ( !$this->getUser()->isRegistered() ) {
+			$anonymousEditWarningBuilder = new AnonymousEditWarningBuilder(
+				$this->getSpecialPageFactory()
+			);
 			$this->getOutput()->addHTML( Html::rawElement(
 				'p',
 				[ 'class' => 'warning' ],
-				$this->msg(
-					'wikibase-anonymouseditwarning',
-					$this->msg( 'wikibase-entity-item' )->text()
-				)->parse()
+				$anonymousEditWarningBuilder->buildAnonymousEditWarningHTML( $this->getPageTitle()->getPrefixedText() )
 			) );
 		}
 

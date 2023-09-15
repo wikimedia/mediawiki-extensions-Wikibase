@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\UserInputException;
+use Wikibase\Repo\AnonymousEditWarningBuilder;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\Interactors\TokenCheckInteractor;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
@@ -143,13 +144,13 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 	protected function createForm() {
 		$pre = '';
 		if ( !$this->getUser()->isRegistered() ) {
+			$anonymousEditWarningBuilder = new AnonymousEditWarningBuilder(
+				$this->getSpecialPageFactory()
+			);
 			$pre = Html::rawElement(
 				'p',
 				[ 'class' => 'warning' ],
-				$this->msg(
-					'wikibase-anonymouseditwarning',
-					$this->msg( 'wikibase-entity' )->text()
-				)->parse()
+				$anonymousEditWarningBuilder->buildAnonymousEditWarningHTML( $this->getPageTitle()->getPrefixedText() )
 			);
 		}
 

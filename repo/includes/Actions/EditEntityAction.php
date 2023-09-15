@@ -6,10 +6,12 @@ use Article;
 use Html;
 use IContextSource;
 use Linker;
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Permissions\PermissionManager;
 use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
+use MediaWiki\SpecialPage\SpecialPageFactory;
 use OOUI\ButtonInputWidget;
 use OOUI\ButtonWidget;
 use OOUI\FieldLayout;
@@ -18,6 +20,7 @@ use OOUI\TextInputWidget;
 use RuntimeException;
 use Status;
 use WebRequest;
+use Wikibase\Repo\AnonymousEditWarningBuilder;
 use Wikibase\Repo\Content\EntityContent;
 use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\Diff\BasicEntityDiffVisualizer;
@@ -43,6 +46,7 @@ class EditEntityAction extends ViewEntityAction {
 	 * @var BasicEntityDiffVisualizer
 	 */
 	private $entityDiffVisualizer;
+	private SpecialPageFactory $specialPageFactory;
 
 	public function __construct(
 		Article $article,
@@ -59,6 +63,7 @@ class EditEntityAction extends ViewEntityAction {
 			$entityDiffVisualizerFactory,
 			$this->getContext()
 		);
+		$this->specialPageFactory = MediaWikiServices::getInstance()->getSpecialPageFactory();
 	}
 
 	/**
@@ -299,13 +304,13 @@ class EditEntityAction extends ViewEntityAction {
 		}
 
 		if ( !$this->getUser()->isRegistered() ) {
+			$anonymousEditWarningBuilder = new AnonymousEditWarningBuilder(
+				$this->specialPageFactory
+			);
 			$this->getOutput()->addHTML( Html::rawElement(
 				'p',
 				[ 'class' => 'warning' ],
-				$this->msg(
-					'wikibase-anonymouseditwarning',
-					$this->msg( 'wikibase-entity-item' )->text()
-				)->parse()
+				$anonymousEditWarningBuilder->buildAnonymousEditWarningHTML( $this->getTitle()->getPrefixedText() ),
 			) );
 		}
 

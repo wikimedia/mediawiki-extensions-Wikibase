@@ -15,6 +15,7 @@ use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Summary;
+use Wikibase\Repo\AnonymousEditWarningBuilder;
 use Wikibase\Repo\CopyrightMessageBuilder;
 use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\SiteLinkTargetProvider;
@@ -246,9 +247,10 @@ class SpecialNewItem extends SpecialNewEntity {
 	 */
 	protected function getWarnings(): array {
 		if ( !$this->getUser()->isRegistered() ) {
-			return [
-				$this->msg( 'wikibase-anonymouseditwarning', $this->msg( 'wikibase-entity-item' ) )->parse(),
-			];
+			$anonymousEditWarningBuilder = new AnonymousEditWarningBuilder(
+				$this->getSpecialPageFactory()
+			);
+			return [ $anonymousEditWarningBuilder->buildAnonymousEditWarningHTML( $this->getPageTitle()->getPrefixedText() ) ];
 		}
 
 		return [];

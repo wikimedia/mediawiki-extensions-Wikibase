@@ -164,13 +164,11 @@
 			if ( !$.find( '.mw-notification-content' ).length
 				&& !mw.cookie.get( 'wikibase-no-anonymouseditwarning' )
 			) {
+				var currentPage = mw.config.get( 'wgPageName' );
 				var message = mw.message(
 					'wikibase-anonymouseditwarning',
-					// The following messages can be used here:
-					// * wikibase-entity-item
-					// * wikibase-entity-property
-					// * wikibase-entity-query
-					mw.msg( 'wikibase-entity-' + entityType )
+					mw.util.getUrl( 'Special:UserLogin', { returnto: currentPage } ),
+					mw.util.getUrl( 'Special:CreateAccount', { returnto: currentPage } )
 				);
 				mw.notify( message, { autoHide: false, type: 'warn', tag: 'wikibase-anonymouseditwarning' } );
 			}
