@@ -22,6 +22,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseRequest;
 class ValidatingRequestDeserializer {
 
 	private ValidatingRequestFieldDeserializerFactory $factory;
+	private array $validRequestResults = [];
 
 	public function __construct( ValidatingRequestFieldDeserializerFactory $factory ) {
 		$this->factory = $factory;
@@ -31,6 +32,11 @@ class ValidatingRequestDeserializer {
 	 * @throws UseCaseError
 	 */
 	public function validateAndDeserialize( UseCaseRequest $request ): array {
+		$requestObjectId = spl_object_id( $request );
+		if ( array_key_exists( $requestObjectId, $this->validRequestResults ) ) {
+			return $this->validRequestResults[$requestObjectId];
+		}
+
 		$requestTypeToValidatorMap = [
 			ItemIdRequest::class => [ $this->factory, 'newItemIdRequestValidatingDeserializer' ],
 			PropertyIdRequest::class => [ $this->factory, 'newPropertyIdRequestValidatingDeserializer' ],
@@ -51,6 +57,8 @@ class ValidatingRequestDeserializer {
 				$result[$requestType] = $newValidator()->validateAndDeserialize( $request );
 			}
 		}
+
+		$this->validRequestResults[$requestObjectId] = $result;
 
 		return $result;
 	}
