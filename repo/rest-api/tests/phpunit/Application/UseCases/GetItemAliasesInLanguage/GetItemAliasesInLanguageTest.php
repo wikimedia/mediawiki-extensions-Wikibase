@@ -9,13 +9,12 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliasesInLanguage\GetItemA
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliasesInLanguage\GetItemAliasesInLanguageResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliasesInLanguage\GetItemAliasesInLanguageValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
-use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
-use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
 use Wikibase\Repo\RestApi\Domain\Services\ItemAliasesInLanguageRetriever;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\RestApi\Application\UseCases\RequestValidation\TestValidatingRequestFieldDeserializerFactory;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItemAliasesInLanguage\GetItemAliasesInLanguage
@@ -126,8 +125,7 @@ class GetItemAliasesInLanguageTest extends TestCase {
 			$this->getRevisionMetadata,
 			$this->aliasesInLanguageRetriever,
 			new GetItemAliasesInLanguageValidator(
-				new ItemIdValidator(),
-				new LanguageCodeValidator( WikibaseRepo::getTermsLanguages()->getLanguages() )
+				new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() )
 			)
 		);
 	}

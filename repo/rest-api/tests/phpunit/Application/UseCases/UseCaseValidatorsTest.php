@@ -16,6 +16,9 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItemValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliases\DeserializedGetItemAliasesRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliases\GetItemAliasesRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliases\GetItemAliasesValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliasesInLanguage\DeserializedGetItemAliasesInLanguageRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliasesInLanguage\GetItemAliasesInLanguageRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliasesInLanguage\GetItemAliasesInLanguageValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\DeserializedGetItemDescriptionsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\GetItemDescriptionsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\GetItemDescriptionsValidator;
@@ -78,6 +81,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabelValidato
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItemValidator
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItemAliases\GetItemAliasesValidator
+ * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItemAliases\GetItemAliasesInLanguageValidator
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\GetItemDescriptionsValidator
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabelsValidator
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\GetItemStatementsValidator
@@ -127,6 +131,11 @@ class UseCaseValidatorsTest extends TestCase {
 			GetItemAliasesValidator::class,
 			GetItemAliasesRequest::class,
 			DeserializedGetItemAliasesRequest::class,
+		];
+		yield [
+			GetItemAliasesInLanguageValidator::class,
+			GetItemAliasesInLanguageRequest::class,
+			DeserializedGetItemAliasesInLanguageRequest::class,
 		];
 		yield [
 			GetItemDescriptionsValidator::class,
