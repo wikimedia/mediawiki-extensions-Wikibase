@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement;
 
-use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertStatementSubjectExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
@@ -18,7 +17,6 @@ use Wikibase\Repo\RestApi\Domain\Services\StatementWriteModelRetriever;
 class RemoveStatement {
 
 	private RemoveStatementValidator $validator;
-	private StatementGuidParser $statementIdParser;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
 	private AssertStatementSubjectExists $assertStatementSubjectExists;
 	private StatementWriteModelRetriever $statementRetriever;
@@ -26,14 +24,12 @@ class RemoveStatement {
 
 	public function __construct(
 		RemoveStatementValidator $validator,
-		StatementGuidParser $statementGuidParser,
 		AssertUserIsAuthorized $assertUserIsAuthorized,
 		AssertStatementSubjectExists $assertStatementSubjectExists,
 		StatementWriteModelRetriever $statementRetriever,
 		StatementRemover $statementRemover
 	) {
 		$this->validator = $validator;
-		$this->statementIdParser = $statementGuidParser;
 		$this->assertUserIsAuthorized = $assertUserIsAuthorized;
 		$this->assertStatementSubjectExists = $assertStatementSubjectExists;
 		$this->statementRetriever = $statementRetriever;
@@ -45,32 +41,30 @@ class RemoveStatement {
 	 * @throws UseCaseError
 	 */
 	public function execute( RemoveStatementRequest $request ): void {
-		$this->assertValidRequest( $request );
+		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
 
-		$statementId = $this->statementIdParser->parse( $request->getStatementId() );
+		$this->assertStatementSubjectExists->execute( $deserializedRequest->getStatementId() );
 
-		$this->assertStatementSubjectExists->execute( $statementId );
+		$this->assertUserIsAuthorized->execute(
+			$deserializedRequest->getStatementId()->getEntityId(),
+			$deserializedRequest->getEditMetadata()->getUser()->getUsername()
+		);
 
-		$this->assertUserIsAuthorized->execute( $statementId->getEntityId(), $request->getUsername() );
-
-		$statementToRemove = $this->statementRetriever->getStatementWriteModel( $statementId );
+		$statementToRemove = $this->statementRetriever->getStatementWriteModel( $deserializedRequest->getStatementId() );
 		if ( !$statementToRemove ) {
 			throw new UseCaseError(
 				UseCaseError::STATEMENT_NOT_FOUND,
-				"Could not find a statement with the ID: $statementId"
+				"Could not find a statement with the ID: {$deserializedRequest->getStatementId()}"
 			);
 		}
 
 		$editMetadata = new EditMetadata(
-			$request->getEditTags(),
-			$request->isBot(),
-			StatementEditSummary::newRemoveSummary( $request->getComment(), $statementToRemove )
+			$deserializedRequest->getEditMetadata()->getTags(),
+			$deserializedRequest->getEditMetadata()->isBot(),
+			StatementEditSummary::newRemoveSummary( $deserializedRequest->getEditMetadata()->getComment(), $statementToRemove )
 		);
 
-		$this->statementRemover->remove( $statementId, $editMetadata );
+		$this->statementRemover->remove( $deserializedRequest->getStatementId(), $editMetadata );
 	}
 
-	public function assertValidRequest( RemoveStatementRequest $request ): void {
-		$this->validator->assertValidRequest( $request );
-	}
 }

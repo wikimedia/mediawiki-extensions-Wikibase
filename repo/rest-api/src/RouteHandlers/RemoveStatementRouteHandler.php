@@ -102,10 +102,6 @@ class RemoveStatementRouteHandler extends SimpleHandler {
 				)
 			);
 		} catch ( UseCaseError $e ) {
-			if ( $e->getErrorCode() === UseCaseError::ITEM_NOT_FOUND ) {
-				return $this->respondStatementNotFound( $statementId );
-			}
-
 			return $this->responseFactory->newErrorResponseFromException( $e );
 		} catch ( ItemRedirect $e ) {
 			return $this->respondStatementNotFound( $statementId );

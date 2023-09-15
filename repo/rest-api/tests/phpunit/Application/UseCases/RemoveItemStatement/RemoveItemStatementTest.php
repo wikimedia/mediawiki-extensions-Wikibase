@@ -8,10 +8,13 @@ use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatementRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatementRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
+use Wikibase\Repo\Tests\RestApi\Application\UseCases\RequestValidation\TestValidatingRequestFieldDeserializerFactory;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 
 /**
@@ -23,34 +26,30 @@ use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
  *
  */
 class RemoveItemStatementTest extends TestCase {
+
 	use EditMetadataHelper;
 
 	private AssertItemExists $assertItemExists;
 	private RemoveStatement $removeStatement;
+	private RemoveItemStatementValidator $removeItemStatementValidator;
 
 	protected function setUp(): void {
 		parent::setUp();
 
 		$this->assertItemExists = $this->createStub( AssertItemExists::class );
 		$this->removeStatement  = $this->createStub( RemoveStatement::class );
+		$this->removeItemStatementValidator = new RemoveItemStatementValidator(
+			new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() )
+		);
 	}
 
 	public function testGivenValidRemoveItemStatementRequest_callsRemoveStatementUseCase(): void {
 		$itemId = new ItemId( 'Q123' );
 		$statementId = new StatementGuid( $itemId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 		$newStatementSerialization = [ 'some' => 'statement' ];
-		$editTags = [ 'some', 'tags' ];
+		$editTags = [ TestValidatingRequestFieldDeserializerFactory::ALLOWED_TAGS[0] ];
 		$isBot = false;
 		$comment = 'statement removed by ' . __method__;
-
-		$request = $this->newUseCaseRequest( [
-			'$itemId' => (string)$itemId,
-			'$statementId' => (string)$statementId,
-			'$statement' => $newStatementSerialization,
-			'$editTags' => $editTags,
-			'$isBot' => $isBot,
-			'$comment' => $comment,
-		] );
 
 		$removeStatementRequest = new RemoveStatementRequest(
 			(string)$statementId,
@@ -65,14 +64,27 @@ class RemoveItemStatementTest extends TestCase {
 			->method( 'execute' )
 			->with( $removeStatementRequest );
 
-		$this->newUseCase()->execute( $request );
+		$this->newUseCase()->execute(
+			$this->newUseCaseRequest( [
+				'$itemId' => (string)$itemId,
+				'$statementId' => (string)$statementId,
+				'$statement' => $newStatementSerialization,
+				'$editTags' => $editTags,
+				'$isBot' => $isBot,
+				'$comment' => $comment,
+			] )
+		);
 	}
 
-	public function testGivenInvalidRemoveStatementRequest_throws(): void {
+	public function testGivenInvalidRemoveItemStatementRequest_throws(): void {
 		$useCaseRequest = $this->createStub( RemoveItemStatementRequest::class );
 		$expectedUseCaseError = $this->createStub( UseCaseError::class );
-		$this->removeStatement  = $this->createStub( RemoveStatement::class );
-		$this->removeStatement->method( 'assertValidRequest' )->willThrowException( $expectedUseCaseError );
+
+		$this->removeItemStatementValidator = $this->createMock( RemoveItemStatementValidator::class );
+		$this->removeItemStatementValidator->expects( $this->once() )
+			->method( 'validateAndDeserialize' )
+			->with( $useCaseRequest )
+			->willThrowException( $expectedUseCaseError );
 
 		try {
 			$this->newUseCase()->execute( $useCaseRequest );
@@ -100,7 +112,7 @@ class RemoveItemStatementTest extends TestCase {
 	public function testGivenItemNotFoundOrRedirect_throws(): void {
 		$itemId = new ItemId( 'Q123' );
 		$statementId = new StatementGuid( $itemId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
-		$editTags = [ 'some', 'tags' ];
+		$editTags = [ TestValidatingRequestFieldDeserializerFactory::ALLOWED_TAGS[0] ];
 		$isBot = false;
 		$comment = 'statement removed by ' . __method__;
 		$request = $this->newUseCaseRequest( [
@@ -148,6 +160,7 @@ class RemoveItemStatementTest extends TestCase {
 		return new RemoveItemStatement(
 			$this->assertItemExists,
 			$this->removeStatement,
+			$this->removeItemStatementValidator
 		);
 	}
 
@@ -161,4 +174,5 @@ class RemoveItemStatementTest extends TestCase {
 			$requestData['$username'] ?? null
 		);
 	}
+
 }

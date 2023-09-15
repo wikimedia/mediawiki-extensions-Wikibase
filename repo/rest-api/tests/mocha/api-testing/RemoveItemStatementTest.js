@@ -215,10 +215,10 @@ describe( 'DELETE statement', () => {
 	} );
 
 	describe( 'short route specific errors', () => {
-		it( 'responds 400 invalid-statement-id if statement is not on an item', async () => {
-			const statementId = 'P123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+		it( 'responds 400 invalid-statement-id if statement is not on a supported entity', async () => {
+			const statementId = 'L123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 			const response = await newRemoveStatementRequestBuilder( statementId )
-				.assertValidRequest()
+				.assertInvalidRequest()
 				.makeRequest();
 
 			expect( response ).to.have.status( 400 );

@@ -43,6 +43,12 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyStatement\PatchPrope
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\DeserializedPatchStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\DeserializedRemoveItemStatementRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatementRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\DeserializedRemoveStatementRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatementRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\DeserializedReplaceItemStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatementValidator;
@@ -70,6 +76,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabelValidato
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\GetItemLabelValidator
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatementValidator
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsValidator
+ * @covers \Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatementValidator
+ * @covers \Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatementValidator
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabelValidator
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescriptionValidator
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementValidator
@@ -147,6 +155,16 @@ class UseCaseValidatorsTest extends TestCase {
 			PatchItemLabelsValidator::class,
 			PatchItemLabelsRequest::class,
 			DeserializedPatchItemLabelsRequest::class,
+		];
+		yield [
+			RemoveItemStatementValidator::class,
+			RemoveItemStatementRequest::class,
+			DeserializedRemoveItemStatementRequest::class,
+		];
+		yield [
+			RemoveStatementValidator::class,
+			RemoveStatementRequest::class,
+			DeserializedRemoveStatementRequest::class,
 		];
 		yield [
 			SetItemLabelValidator::class,

@@ -2,9 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement;
 
-use InvalidArgumentException;
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatement;
@@ -18,13 +15,16 @@ class RemoveItemStatement {
 
 	private AssertItemExists $assertItemExists;
 	private RemoveStatement $removeStatement;
+	private RemoveItemStatementValidator $validator;
 
 	public function __construct(
 		AssertItemExists $assertItemExists,
-		RemoveStatement $removeStatement
+		RemoveStatement $removeStatement,
+		RemoveItemStatementValidator $validator
 	) {
 		$this->assertItemExists = $assertItemExists;
 		$this->removeStatement = $removeStatement;
+		$this->validator = $validator;
 	}
 
 	/**
@@ -32,35 +32,26 @@ class RemoveItemStatement {
 	 * @throws UseCaseError
 	 */
 	public function execute( RemoveItemStatementRequest $request ): void {
-		$removeStatementRequest = new RemoveStatementRequest(
-			$request->getStatementId(),
-			$request->getEditTags(),
-			$request->isBot(),
-			$request->getComment(),
-			$request->getUsername()
-		);
-		$this->removeStatement->assertValidRequest( $removeStatementRequest );
+		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
 
-		// TODO: remove try catch block after adding proper validation
-		try {
-			$itemId = new ItemId( $request->getItemId() );
-		} catch ( InvalidArgumentException $e ) {
-			throw new UseCaseError(
-				UseCaseError::INVALID_ITEM_ID,
-				"Not a valid item ID: {$request->getItemId()}"
-			);
-		}
+		$this->assertItemExists->execute( $deserializedRequest->getItemId() );
 
-		$this->assertItemExists->execute( $itemId );
-
-		if ( strpos( $request->getStatementId(), $request->getItemId() . StatementGuid::SEPARATOR ) !== 0 ) {
+		if ( !$deserializedRequest->getStatementId()->getEntityId()->equals( $deserializedRequest->getItemId() ) ) {
 			throw new UseCaseError(
 				UseCaseError::STATEMENT_NOT_FOUND,
-				"Could not find a statement with the ID: {$request->getStatementId()}"
+				"Could not find a statement with the ID: {$deserializedRequest->getStatementId()}"
 			);
 		}
 
-		$this->removeStatement->execute( $removeStatementRequest );
+		$this->removeStatement->execute(
+			new RemoveStatementRequest(
+				(string)$deserializedRequest->getStatementId(),
+				$deserializedRequest->getEditMetadata()->getTags(),
+				$deserializedRequest->getEditMetadata()->isBot(),
+				$deserializedRequest->getEditMetadata()->getComment(),
+				$deserializedRequest->getEditMetadata()->getUser()->getUsername()
+			)
+		);
 	}
 
 }
