@@ -15,6 +15,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\DeserializedItemFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\DeserializedItemIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\DeserializedItemLabelEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\DeserializedLanguageCodeRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\DeserializedPropertyFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\DeserializedPropertyIdFilterRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\DeserializedPropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\DeserializedStatementIdRequest;
@@ -26,6 +27,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\ItemIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemLabelEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\LanguageCodeRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\PropertyFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdFilterRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\StatementIdRequest;
@@ -42,6 +44,7 @@ class DeserializedRequestAdapter implements
 	DeserializedPropertyIdFilterRequest,
 	DeserializedLanguageCodeRequest,
 	DeserializedItemFieldsRequest,
+	DeserializedPropertyFieldsRequest,
 	DeserializedStatementSerializationRequest,
 	DeserializedEditMetadataRequest,
 	DeserializedItemLabelEditRequest,
@@ -75,6 +78,10 @@ class DeserializedRequestAdapter implements
 
 	public function getItemFields(): array {
 		return $this->getRequestField( ItemFieldsRequest::class );
+	}
+
+	public function getPropertyFields(): array {
+		return $this->getRequestField( PropertyFieldsRequest::class );
 	}
 
 	public function getEditMetadata(): UserProvidedEditMetadata {

@@ -16,6 +16,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\ItemIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemLabelEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\LanguageCodeRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\PropertyFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdFilterRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\DeserializedRequestAdapter;
@@ -108,6 +109,17 @@ class DeserializedRequestAdapterTest extends TestCase {
 	public function testGivenNoItemFields_getItemFieldsThrows(): void {
 		$this->expectException( LogicException::class );
 		( new DeserializedRequestAdapter( [] ) )->getItemFields();
+	}
+
+	public function testGetPropertyFields(): void {
+		$fields = [ 'labels' ];
+		$requestAdapter = new DeserializedRequestAdapter( [ PropertyFieldsRequest::class => $fields ] );
+		$this->assertSame( $fields, $requestAdapter->getPropertyFields() );
+	}
+
+	public function testGivenNoPropertyFields_getPropertyFieldsThrows(): void {
+		$this->expectException( LogicException::class );
+		( new DeserializedRequestAdapter( [] ) )->getPropertyFields();
 	}
 
 	public function testGetStatementSerialization(): void {

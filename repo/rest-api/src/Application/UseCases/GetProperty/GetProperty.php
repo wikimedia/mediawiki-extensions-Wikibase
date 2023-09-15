@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetProperty;
 
-use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestPropertyRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyPartsRetriever;
@@ -29,13 +28,14 @@ class GetProperty {
 	 * @throws UseCaseError
 	 */
 	public function execute( GetPropertyRequest $propertyRequest ): GetPropertyResponse {
-		$this->validator->assertValidRequest( $propertyRequest );
-		$propertyId = new NumericPropertyId( $propertyRequest->getPropertyId() );
-		[ $revisionId, $lastModified ] = $this->getLatestPropertyRevisionMetadata->execute( $propertyId );
+		$deserializedRequest = $this->validator->validateAndDeserialize( $propertyRequest );
+		[ $revisionId, $lastModified ] = $this->getLatestPropertyRevisionMetadata->execute( $deserializedRequest->getPropertyId() );
 
 		return new GetPropertyResponse(
-			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Property exists
-			$this->propertyPartsRetriever->getPropertyParts( $propertyId, $propertyRequest->getFields() ),
+			$this->propertyPartsRetriever->getPropertyParts( // @phan-suppress-current-line PhanTypeMismatchArgumentNullable
+				$deserializedRequest->getPropertyId(),
+				$deserializedRequest->getPropertyFields()
+			),
 			$lastModified,
 			$revisionId
 		);
