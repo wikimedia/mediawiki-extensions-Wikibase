@@ -9,7 +9,10 @@ const {
 	createUniqueStringProperty,
 	createEntity
 } = require( '../helpers/entityHelper' );
-const { newAddItemStatementRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const {
+	newAddItemStatementRequestBuilder,
+	newAddPropertyStatementRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const {
 	editRequestsOnItem,
@@ -344,6 +347,11 @@ describe( 'Conditional requests', () => {
 					itemRequestInputs.statementId = ( await newAddItemStatementRequestBuilder(
 						itemRequestInputs.itemId,
 						newStatementWithRandomStringValue( itemRequestInputs.statementPropertyId )
+					).makeRequest() ).body.id;
+
+					propertyRequestInputs.statementId = ( await newAddPropertyStatementRequestBuilder(
+						propertyRequestInputs.propertyId,
+						newStatementWithRandomStringValue( propertyRequestInputs.statementPropertyId )
 					).makeRequest() ).body.id;
 				}
 			} );

@@ -62,6 +62,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyStatement\RemovePropertyStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyStatement\RemovePropertyStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatement;
@@ -457,6 +459,14 @@ return [
 			WbRestApi::getAssertItemExists( $services ),
 			WbRestApi::getRemoveStatement( $services ),
 			new RemoveItemStatementValidator( WbRestApi::getValidatingRequestDeserializer( $services ) )
+		);
+	},
+
+	'WbRestApi.RemovePropertyStatement' => function( MediaWikiServices $services ): RemovePropertyStatement {
+		return new RemovePropertyStatement(
+			WbRestApi::getAssertPropertyExists( $services ),
+			WbRestApi::getRemoveStatement( $services ),
+			new RemovePropertyStatementValidator( WbRestApi::getValidatingRequestDeserializer( $services ) )
 		);
 	},
 

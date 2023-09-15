@@ -17,6 +17,7 @@ const {
 	getRequestsOnItem,
 	getRequestsOnProperty
 } = require( '../helpers/happyPathRequestBuilders' );
+const { newAddPropertyStatementRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
 describe( 'Auth', () => {
 
@@ -75,6 +76,11 @@ describe( 'Auth', () => {
 					itemRequestInputs.statementId = ( await rbf.newAddItemStatementRequestBuilder(
 						itemRequestInputs.itemId,
 						newStatementWithRandomStringValue( itemRequestInputs.statementPropertyId )
+					).makeRequest() ).body.id;
+
+					propertyRequestInputs.statementId = ( await newAddPropertyStatementRequestBuilder(
+						propertyRequestInputs.propertyId,
+						newStatementWithRandomStringValue( propertyRequestInputs.statementPropertyId )
 					).makeRequest() ).body.id;
 				}
 			} );

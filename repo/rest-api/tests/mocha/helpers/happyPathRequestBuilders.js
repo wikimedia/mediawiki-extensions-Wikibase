@@ -49,7 +49,9 @@ module.exports.editRequestsOnProperty = [
 			path: '/value/content',
 			value: 'random-string-value-' + utils.uniq()
 		} ]
-	)
+	),
+	( { propertyId, statementId } ) => rbf.newRemovePropertyStatementRequestBuilder( propertyId, statementId ),
+	( { statementId } ) => rbf.newRemoveStatementRequestBuilder( statementId )
 ];
 
 module.exports.editRequestsOnItem = [
