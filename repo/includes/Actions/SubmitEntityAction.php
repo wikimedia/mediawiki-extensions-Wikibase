@@ -151,7 +151,7 @@ class SubmitEntityAction extends EditEntityAction {
 		 * @var RevisionRecord $newerRevision
 		 * @var RevisionRecord $latestRevision
 		 */
-		list( $olderRevision, $newerRevision, $latestRevision ) = $revisions->getValue();
+		[ $olderRevision, $newerRevision, $latestRevision ] = $revisions->getValue();
 		$patchedContent = $this->getPatchContent( $olderRevision, $newerRevision, $latestRevision );
 		if ( !$patchedContent->isOK() ) {
 			$this->showUndoErrorPage( $patchedContent );

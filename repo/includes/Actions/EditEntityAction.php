@@ -259,7 +259,7 @@ class EditEntityAction extends ViewEntityAction {
 		 * @var RevisionRecord $newerRevision
 		 * @var RevisionRecord $latestRevision
 		 */
-		list( $olderRevision, $newerRevision, $latestRevision ) = $revisions->getValue();
+		[ $olderRevision, $newerRevision, $latestRevision ] = $revisions->getValue();
 
 		/**
 		 * @var EntityContent $olderContent
