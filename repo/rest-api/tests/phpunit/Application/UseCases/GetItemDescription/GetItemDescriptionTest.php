@@ -9,13 +9,12 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescription\GetItemDescrip
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescription\GetItemDescriptionResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescription\GetItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
-use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
-use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
 use Wikibase\Repo\RestApi\Domain\Services\ItemDescriptionRetriever;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\RestApi\Application\UseCases\RequestValidation\TestValidatingRequestFieldDeserializerFactory;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItemDescription\GetItemDescription
@@ -110,25 +109,12 @@ class GetItemDescriptionTest extends TestCase {
 		}
 	}
 
-	public function testGivenInvalidLanguageCode_throwsUseCaseException(): void {
-		try {
-			$this->newUseCase()->execute( new GetItemDescriptionRequest( 'Q123', '1e' ) );
-
-			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseError $useCaseEx ) {
-			$this->assertSame( UseCaseError::INVALID_LANGUAGE_CODE, $useCaseEx->getErrorCode() );
-			$this->assertSame( 'Not a valid language code: 1e', $useCaseEx->getErrorMessage() );
-			$this->assertSame( [], $useCaseEx->getErrorContext() );
-		}
-	}
-
 	private function newUseCase(): GetItemDescription {
 		return new GetItemDescription(
 			$this->getRevisionMetadata,
 			$this->descriptionRetriever,
 			new GetItemDescriptionValidator(
-				new ItemIdValidator(),
-				new LanguageCodeValidator( WikibaseRepo::getTermsLanguages()->getLanguages() )
+				new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() )
 			)
 		);
 	}

@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetItemDescription;
 
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
@@ -32,17 +31,17 @@ class GetItemDescription {
 	 * @throws ItemRedirect
 	 */
 	public function execute( GetItemDescriptionRequest $request ): GetItemDescriptionResponse {
-		$this->validator->assertValidRequest( $request );
-
-		$itemId = new ItemId( $request->getItemId() );
+		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
+		$itemId = $deserializedRequest->getItemId();
+		$languageCode = $deserializedRequest->getLanguageCode();
 
 		[ $revisionId, $lastModified ] = $this->getRevisionMetadata->execute( $itemId );
 
-		$description = $this->itemDescriptionRetriever->getDescription( $itemId, $request->getLanguageCode() );
+		$description = $this->itemDescriptionRetriever->getDescription( $itemId, $languageCode );
 		if ( $description === null ) {
 			throw new UseCaseError(
 				UseCaseError::DESCRIPTION_NOT_DEFINED,
-				"Item with the ID {$itemId} does not have a description in the language: {$request->getLanguageCode()}"
+				"Item with the ID {$itemId} does not have a description in the language: {$languageCode}"
 			);
 		}
 
