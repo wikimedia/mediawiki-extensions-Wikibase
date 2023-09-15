@@ -2,16 +2,11 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement;
 
-use Wikibase\Repo\RestApi\Application\UseCases\DeserializedEditMetadataRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\DeserializedItemIdRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\DeserializedStatementIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\DeserializedRemoveStatementRequest;
 
 /**
  * @license GPL-2.0-or-later
  */
-interface DeserializedRemoveItemStatementRequest extends
-	DeserializedItemIdRequest,
-	DeserializedStatementIdRequest,
-	DeserializedEditMetadataRequest
-{
+interface DeserializedRemoveItemStatementRequest extends DeserializedItemIdRequest, DeserializedRemoveStatementRequest {
 }

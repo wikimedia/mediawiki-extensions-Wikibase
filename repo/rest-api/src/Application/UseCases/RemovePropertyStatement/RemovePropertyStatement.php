@@ -4,7 +4,6 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyStatement;
 
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 
 /**
@@ -41,15 +40,7 @@ class RemovePropertyStatement {
 			);
 		}
 
-		$this->removeStatement->execute(
-			new RemoveStatementRequest(
-				(string)$deserializedRequest->getStatementId(),
-				$deserializedRequest->getEditMetadata()->getTags(),
-				$deserializedRequest->getEditMetadata()->isBot(),
-				$deserializedRequest->getEditMetadata()->getComment(),
-				$deserializedRequest->getEditMetadata()->getUser()->getUsername()
-			)
-		);
+		$this->removeStatement->execute( $request );
 	}
 
 }

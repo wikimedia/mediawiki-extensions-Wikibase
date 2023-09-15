@@ -10,7 +10,6 @@ use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemSta
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
@@ -51,29 +50,21 @@ class RemoveItemStatementTest extends TestCase {
 		$isBot = false;
 		$comment = 'statement removed by ' . __method__;
 
-		$removeStatementRequest = new RemoveStatementRequest(
-			(string)$statementId,
-			$editTags,
-			$isBot,
-			$comment,
-			null
-		);
+		$request = $this->newUseCaseRequest( [
+			'$itemId' => (string)$itemId,
+			'$statementId' => (string)$statementId,
+			'$statement' => $newStatementSerialization,
+			'$editTags' => $editTags,
+			'$isBot' => $isBot,
+			'$comment' => $comment,
+		] );
 
 		$this->removeStatement = $this->createMock( RemoveStatement::class );
 		$this->removeStatement->expects( $this->once() )
 			->method( 'execute' )
-			->with( $removeStatementRequest );
+			->with( $request );
 
-		$this->newUseCase()->execute(
-			$this->newUseCaseRequest( [
-				'$itemId' => (string)$itemId,
-				'$statementId' => (string)$statementId,
-				'$statement' => $newStatementSerialization,
-				'$editTags' => $editTags,
-				'$isBot' => $isBot,
-				'$comment' => $comment,
-			] )
-		);
+		$this->newUseCase()->execute( $request );
 	}
 
 	public function testGivenInvalidRemoveItemStatementRequest_throws(): void {

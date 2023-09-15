@@ -2,22 +2,15 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyStatement;
 
-use Wikibase\Repo\RestApi\Application\UseCases\EditMetadataRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\StatementIdRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatementRequest;
 
 /**
  * @license GPL-2.0-or-later
  */
-class RemovePropertyStatementRequest implements UseCaseRequest, PropertyIdRequest, StatementIdRequest, EditMetadataRequest {
+class RemovePropertyStatementRequest extends RemoveStatementRequest implements PropertyIdRequest {
 
 	private string $propertyId;
-	private string $statementId;
-	private array $editTags;
-	private bool $isBot;
-	private ?string $comment;
-	private ?string $username;
 
 	public function __construct(
 		string $propertyId,
@@ -27,40 +20,12 @@ class RemovePropertyStatementRequest implements UseCaseRequest, PropertyIdReques
 		?string $comment,
 		?string $username
 	) {
+		parent::__construct( $statementId, $editTags, $isBot, $comment, $username );
 		$this->propertyId = $propertyId;
-		$this->statementId = $statementId;
-		$this->editTags = $editTags;
-		$this->isBot = $isBot;
-		$this->comment = $comment;
-		$this->username = $username;
 	}
 
 	public function getPropertyId(): string {
 		return $this->propertyId;
-	}
-
-	public function getStatementId(): string {
-		return $this->statementId;
-	}
-
-	public function getEditTags(): array {
-		return $this->editTags;
-	}
-
-	public function isBot(): bool {
-		return $this->isBot;
-	}
-
-	public function getComment(): ?string {
-		return $this->comment;
-	}
-
-	public function hasUser(): bool {
-		return $this->username !== null;
-	}
-
-	public function getUsername(): ?string {
-		return $this->username;
 	}
 
 }

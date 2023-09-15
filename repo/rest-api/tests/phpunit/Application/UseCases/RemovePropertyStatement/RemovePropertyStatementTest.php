@@ -10,7 +10,6 @@ use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyStatement\RemovePro
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyStatement\RemovePropertyStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyStatement\RemovePropertyStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Tests\RestApi\Application\UseCases\RequestValidation\TestValidatingRequestFieldDeserializerFactory;
@@ -50,29 +49,21 @@ class RemovePropertyStatementTest extends TestCase {
 		$isBot = false;
 		$comment = 'statement removed by ' . __method__;
 
-		$removeStatementRequest = new RemoveStatementRequest(
-			(string)$statementId,
-			$editTags,
-			$isBot,
-			$comment,
-			null
-		);
+		$request = $this->newUseCaseRequest( [
+			'$propertyId' => (string)$propertyId,
+			'$statementId' => (string)$statementId,
+			'$statement' => $newStatementSerialization,
+			'$editTags' => $editTags,
+			'$isBot' => $isBot,
+			'$comment' => $comment,
+		] );
 
 		$this->removeStatement = $this->createMock( RemoveStatement::class );
 		$this->removeStatement->expects( $this->once() )
 			->method( 'execute' )
-			->with( $removeStatementRequest );
+			->with( $request );
 
-		$this->newUseCase()->execute(
-			$this->newUseCaseRequest( [
-				'$propertyId' => (string)$propertyId,
-				'$statementId' => (string)$statementId,
-				'$statement' => $newStatementSerialization,
-				'$editTags' => $editTags,
-				'$isBot' => $isBot,
-				'$comment' => $comment,
-			] )
-		);
+		$this->newUseCase()->execute( $request );
 	}
 
 	public function testGivenInvalidRemovePropertyStatementRequest_throws(): void {
