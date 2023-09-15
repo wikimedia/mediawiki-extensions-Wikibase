@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetItemAliases;
 
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
@@ -29,19 +28,16 @@ class GetItemAliases {
 
 	/**
 	 * @throws UseCaseError
-	 *
 	 * @throws ItemRedirect
 	 */
 	public function execute( GetItemAliasesRequest $request ): GetItemAliasesResponse {
-		$this->validator->assertValidRequest( $request );
+		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
 
-		$itemId = new ItemId( $request->getItemId() );
-
-		[ $revisionId, $lastModified ] = $this->getLatestRevisionMetadata->execute( $itemId );
+		[ $revisionId, $lastModified ] = $this->getLatestRevisionMetadata->execute( $deserializedRequest->getItemId() );
 
 		return new GetItemAliasesResponse(
 			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Item validated and exists
-			$this->itemAliasesRetriever->getAliases( $itemId ),
+			$this->itemAliasesRetriever->getAliases( $deserializedRequest->getItemId() ),
 			$lastModified,
 			$revisionId,
 		);

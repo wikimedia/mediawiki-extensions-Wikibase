@@ -215,7 +215,7 @@ return [
 				WikibaseRepo::getPrefetchingTermLookup( $services ),
 				WikibaseRepo::getTermsLanguages( $services )
 			),
-			new GetItemAliasesValidator( new ItemIdValidator() )
+			new GetItemAliasesValidator( WbRestApi::getValidatingRequestDeserializer( $services ) )
 		);
 	},
 
