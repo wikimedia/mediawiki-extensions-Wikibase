@@ -6,7 +6,6 @@ use Article;
 use Html;
 use IContextSource;
 use Linker;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Permissions\PermissionManager;
 use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Revision\RevisionRecord;
@@ -48,6 +47,7 @@ class EditEntityAction extends ViewEntityAction {
 		'services' => [
 			'PermissionManager',
 			'RevisionLookup',
+			'SpecialPageFactory',
 			'WikibaseRepo.EntityDiffVisualizerFactory',
 		],
 	];
@@ -66,6 +66,7 @@ class EditEntityAction extends ViewEntityAction {
 		IContextSource $context,
 		PermissionManager $permissionManager,
 		RevisionLookup $revisionLookup,
+		SpecialPageFactory $specialPageFactory,
 		EntityDiffVisualizerFactory $entityDiffVisualizerFactory
 	) {
 		parent::__construct( $article, $context );
@@ -76,7 +77,7 @@ class EditEntityAction extends ViewEntityAction {
 			$entityDiffVisualizerFactory,
 			$this->getContext()
 		);
-		$this->specialPageFactory = MediaWikiServices::getInstance()->getSpecialPageFactory();
+		$this->specialPageFactory = $specialPageFactory;
 	}
 
 	/**

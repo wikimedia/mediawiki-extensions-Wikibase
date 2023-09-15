@@ -10,6 +10,7 @@ use MediaWiki\Permissions\PermissionManager;
 use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
+use MediaWiki\SpecialPage\SpecialPageFactory;
 use MediaWiki\Title\Title;
 use MediaWiki\User\UserOptionsLookup;
 use MediaWiki\Watchlist\WatchlistManager;
@@ -41,6 +42,7 @@ class SubmitEntityAction extends EditEntityAction {
 		'services' => [
 			'PermissionManager',
 			'RevisionLookup',
+			'SpecialPageFactory',
 			'UserOptionsLookup',
 			'WatchlistManager',
 			'WikiPageFactory',
@@ -61,6 +63,7 @@ class SubmitEntityAction extends EditEntityAction {
 		IContextSource $context,
 		PermissionManager $permissionManager,
 		RevisionLookup $revisionLookup,
+		SpecialPageFactory $specialPageFactory,
 		UserOptionsLookup $userOptionsLookup,
 		WatchlistManager $watchlistManager,
 		WikiPageFactory $wikiPageFactory,
@@ -73,6 +76,7 @@ class SubmitEntityAction extends EditEntityAction {
 			$context,
 			$permissionManager,
 			$revisionLookup,
+			$specialPageFactory,
 			$entityDiffVisualizerFactory
 		);
 
