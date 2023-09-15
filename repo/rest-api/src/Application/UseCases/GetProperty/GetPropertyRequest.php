@@ -2,12 +2,15 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetProperty;
 
+use Wikibase\Repo\RestApi\Application\UseCases\PropertyFieldsRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseRequest;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyParts;
 
 /**
  * @license GPL-2.0-or-later
  */
-class GetPropertyRequest {
+class GetPropertyRequest implements UseCaseRequest, PropertyIdRequest, PropertyFieldsRequest {
 
 	private string $propertyId;
 	private array $fields;
@@ -21,7 +24,7 @@ class GetPropertyRequest {
 		return $this->propertyId;
 	}
 
-	public function getFields(): array {
+	public function getPropertyFields(): array {
 		return $this->fields;
 	}
 }

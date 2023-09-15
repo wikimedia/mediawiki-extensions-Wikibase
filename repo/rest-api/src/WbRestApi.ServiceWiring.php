@@ -79,7 +79,6 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabelValidato
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
-use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
@@ -316,7 +315,7 @@ return [
 		return new GetProperty(
 			WbRestApi::getGetLatestPropertyRevisionMetadata( $services ),
 			WbRestApi::getPropertyDataRetriever( $services ),
-			new GetPropertyValidator( new PropertyIdValidator() )
+			new GetPropertyValidator( WbRestApi::getValidatingRequestDeserializer( $services ) )
 		);
 	},
 

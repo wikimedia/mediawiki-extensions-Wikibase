@@ -9,6 +9,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\ItemIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemLabelEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\LanguageCodeRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\PropertyFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdFilterRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\StatementIdRequest;
@@ -38,6 +39,7 @@ class ValidatingRequestDeserializer {
 			PropertyIdFilterRequest::class => [ $this->factory, 'newPropertyIdFilterRequestValidatingDeserializer' ],
 			LanguageCodeRequest::class => [ $this->factory, 'newLanguageCodeRequestValidatingDeserializer' ],
 			ItemFieldsRequest::class => [ $this->factory, 'newItemFieldsRequestValidatingDeserializer' ],
+			PropertyFieldsRequest::class => [ $this->factory, 'newPropertyFieldsRequestValidatingDeserializer' ],
 			StatementSerializationRequest::class => [ $this->factory, 'newStatementSerializationRequestValidatingDeserializer' ],
 			EditMetadataRequest::class => [ $this->factory, 'newEditMetadataRequestValidatingDeserializer' ],
 			PatchRequest::class => [ $this->factory, 'newPatchRequestValidatingDeserializer' ],

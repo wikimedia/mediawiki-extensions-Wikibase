@@ -6,6 +6,7 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemFieldsRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\PropertyFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdFilterRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
@@ -18,6 +19,7 @@ use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
+use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyParts;
 
 /**
  * @license GPL-2.0-or-later
@@ -88,6 +90,13 @@ class ValidatingRequestFieldDeserializerFactory {
 		$fieldsValidator = new FieldsFilterValidatingDeserializer( ItemParts::VALID_FIELDS );
 		return new MappedRequestValidatingDeserializer(
 			fn( ItemFieldsRequest $r ) => $fieldsValidator->validateAndDeserialize( $r->getItemFields() )
+		);
+	}
+
+	public function newPropertyFieldsRequestValidatingDeserializer(): MappedRequestValidatingDeserializer {
+		$fieldsValidator = new FieldsFilterValidatingDeserializer( PropertyParts::VALID_FIELDS );
+		return new MappedRequestValidatingDeserializer(
+			fn( PropertyFieldsRequest $r ) => $fieldsValidator->validateAndDeserialize( $r->getPropertyFields() )
 		);
 	}
 

@@ -17,6 +17,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\ItemIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemLabelEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\LanguageCodeRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\PropertyFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdFilterRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\EditMetadataRequestValidatingDeserializer;
@@ -107,6 +108,17 @@ class ValidatingRequestDeserializerTest extends TestCase {
 
 		$this->assertEquals(
 			[ ItemFieldsRequest::class => $fields ],
+			$this->newRequestDeserializer()->validateAndDeserialize( $request )
+		);
+	}
+
+	public function testGivenValidPropertyFieldsRequest_returnsDeserializedPropertyFields(): void {
+		$fields = [ 'labels', 'descriptions' ];
+		$request = $this->createStub( PropertyFieldsUseCaseRequest::class );
+		$request->method( 'getPropertyFields' )->willReturn( $fields );
+
+		$this->assertEquals(
+			[ PropertyFieldsRequest::class => $fields ],
 			$this->newRequestDeserializer()->validateAndDeserialize( $request )
 		);
 	}
@@ -228,6 +240,11 @@ class ValidatingRequestDeserializerTest extends TestCase {
 			'newItemFieldsRequestValidatingDeserializer',
 		];
 		yield [
+			PropertyFieldsUseCaseRequest::class,
+			MappedRequestValidatingDeserializer::class,
+			'newPropertyFieldsRequestValidatingDeserializer',
+		];
+		yield [
 			StatementSerializationUseCaseRequest::class,
 			StatementSerializationRequestValidatingDeserializer::class,
 			'newStatementSerializationRequestValidatingDeserializer',
@@ -278,4 +295,5 @@ interface EditMetadataUseCaseRequest extends UseCaseRequest, EditMetadataRequest
 interface PatchUseCaseRequest extends UseCaseRequest, PatchRequest {}
 interface ItemLabelEditUseCaseRequest extends UseCaseRequest, ItemLabelEditRequest {}
 interface ItemDescriptionEditUseCaseRequest extends UseCaseRequest, ItemDescriptionEditRequest {}
+interface PropertyFieldsUseCaseRequest extends UseCaseRequest, PropertyFieldsRequest {}
 // @codingStandardsIgnoreEnd
