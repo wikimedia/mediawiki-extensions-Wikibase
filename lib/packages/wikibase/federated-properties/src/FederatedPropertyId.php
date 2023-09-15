@@ -29,6 +29,7 @@ class FederatedPropertyId implements PropertyId {
 	}
 
 	public function serialize(): ?string {
+		wfDeprecated( __METHOD__, '1.41' );
 		return $this->serialization;
 	}
 
@@ -37,12 +38,14 @@ class FederatedPropertyId implements PropertyId {
 	}
 
 	public function unserialize( $serialization ): void {
-		self::assertValidSerialization( $serialization );
-		$this->serialization = $serialization;
+		wfDeprecated( __METHOD__, '1.41' );
+		$this->__unserialize( [ $serialization ] );
 	}
 
 	public function __unserialize( array $data ): void {
-		$this->unserialize( $data[0] );
+		[ $serialization ] = $data;
+		self::assertValidSerialization( $serialization );
+		$this->serialization = $serialization;
 	}
 
 	public function getEntityType(): string {
