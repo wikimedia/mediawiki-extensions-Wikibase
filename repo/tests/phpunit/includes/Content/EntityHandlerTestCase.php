@@ -674,19 +674,25 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 		$handler = $this->getHandler();
 		$overrides = $handler->getActionOverrides();
 
-		foreach ( $overrides as $name => $classOrCallback ) {
-			if ( is_string( $classOrCallback ) ) {
+		foreach ( $overrides as $name => $spec ) {
+			if ( is_string( $spec ) ) {
 				$this->assertTrue(
-					is_subclass_of( $classOrCallback, Action::class ),
-					'Override for ' . $name . ' must be an action class, found ' . $classOrCallback
+					is_subclass_of( $spec, Action::class ),
+					'Override for ' . $name . ' must be an action class, found ' . $spec
 				);
-			} elseif ( is_callable( $classOrCallback ) ) {
+			} elseif ( is_callable( $spec ) ) {
 				$article = $this->getMockArticle( $handler );
-				$action = $classOrCallback( $article, $article->getContext() );
+				$action = $spec( $article, $article->getContext() );
 				$this->assertTrue(
 					is_subclass_of( $action, Action::class ),
 					'Callback for action ' . $name . ' must return an Action instance!'
 				);
+			} elseif ( is_array( $spec ) ) {
+				$action = $this->getServiceContainer()->getObjectFactory()
+					->createObject( $spec, [
+						'extraArgs' => [ $article, $article->getContext() ],
+					] );
+				$this->assertInstanceOf( Action::class, $action );
 			} else {
 				$this->fail( 'Expected a class name or callback as action override for ' . $name );
 			}
