@@ -39,6 +39,19 @@ use Wikibase\Repo\Diff\EntityDiffVisualizerFactory;
  */
 class EditEntityAction extends ViewEntityAction {
 
+	/**
+	 * {@link ObjectFactory} specification for this class,
+	 * to be returned by {@link EntityHandler::getActionOverrides()} implementations.
+	 */
+	public const SPEC = [
+		'class' => self::class,
+		'services' => [
+			'PermissionManager',
+			'RevisionLookup',
+			'WikibaseRepo.EntityDiffVisualizerFactory',
+		],
+	];
+
 	protected PermissionManager $permissionManager;
 	private RevisionLookup $revisionLookup;
 
