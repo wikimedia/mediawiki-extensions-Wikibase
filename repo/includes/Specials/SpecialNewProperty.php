@@ -228,7 +228,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 				$this->getSpecialPageFactory()
 			);
 			return [
-				$anonymousEditWarningBuilder->buildAnonymousEditWarningHTML( $this->getPageTitle()->getPrefixedText() ),
+				$anonymousEditWarningBuilder->buildAnonymousEditWarningHTML( $this->getFullTitle()->getPrefixedText() ),
 			];
 		}
 

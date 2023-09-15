@@ -250,7 +250,7 @@ class SpecialNewItem extends SpecialNewEntity {
 			$anonymousEditWarningBuilder = new AnonymousEditWarningBuilder(
 				$this->getSpecialPageFactory()
 			);
-			return [ $anonymousEditWarningBuilder->buildAnonymousEditWarningHTML( $this->getPageTitle()->getPrefixedText() ) ];
+			return [ $anonymousEditWarningBuilder->buildAnonymousEditWarningHTML( $this->getFullTitle()->getPrefixedText() ) ];
 		}
 
 		return [];

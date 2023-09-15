@@ -150,7 +150,7 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 			$pre = Html::rawElement(
 				'p',
 				[ 'class' => 'warning' ],
-				$anonymousEditWarningBuilder->buildAnonymousEditWarningHTML( $this->getPageTitle()->getPrefixedText() )
+				$anonymousEditWarningBuilder->buildAnonymousEditWarningHTML( $this->getFullTitle()->getPrefixedText() )
 			);
 		}
 
