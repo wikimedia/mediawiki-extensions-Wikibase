@@ -19,7 +19,7 @@ describe( 'validate DELETE endpoints for item statements against OpenAPI definit
 	} );
 
 	[
-		( statementId, patch ) => newRemoveItemStatementRequestBuilder( testItemId, statementId, patch ),
+		( statementId ) => newRemoveItemStatementRequestBuilder( testItemId, statementId ),
 		newRemoveStatementRequestBuilder
 	].forEach( ( newRemoveRequestBuilder ) => {
 		describe( newRemoveRequestBuilder().getRouteDescription(), () => {

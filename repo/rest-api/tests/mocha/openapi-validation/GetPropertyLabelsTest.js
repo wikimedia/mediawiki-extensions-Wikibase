@@ -4,7 +4,7 @@ const { expect } = require( '../helpers/chaiHelper' );
 const { createEntity, createUniqueStringProperty } = require( '../helpers/entityHelper' );
 const { newGetPropertyLabelsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
-describe( 'validate GET /entities/properties/{id}/labels responses against OpenAPI spec', () => {
+describe( newGetPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 
 	let testPropertyId;
 	let lastRevisionId;

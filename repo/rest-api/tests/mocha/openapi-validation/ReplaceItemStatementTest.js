@@ -28,7 +28,7 @@ describe( 'validate PUT endpoints for item statements against OpenAPI definition
 	} );
 
 	[
-		( statementId, patch ) => newReplaceItemStatementRequestBuilder( testItemId, statementId, patch ),
+		( statementId, statement ) => newReplaceItemStatementRequestBuilder( testItemId, statementId, statement ),
 		newReplaceStatementRequestBuilder
 	].forEach( ( newReplaceRequestBuilder ) => {
 		describe( newReplaceRequestBuilder().getRouteDescription(), () => {

@@ -28,7 +28,8 @@ describe( 'validate PUT endpoints for property statements against OpenAPI defini
 	} );
 
 	[
-		( statementId, patch ) => newReplacePropertyStatementRequestBuilder( testPropertyId, statementId, patch ),
+		( statementId, statement ) =>
+			newReplacePropertyStatementRequestBuilder( testPropertyId, statementId, statement ),
 		newReplaceStatementRequestBuilder
 	].forEach( ( newReplaceRequestBuilder ) => {
 

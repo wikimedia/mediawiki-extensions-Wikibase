@@ -10,7 +10,7 @@ const {
 } = require( '../helpers/entityHelper' );
 const { newGetItemStatementsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
-describe( 'validate GET /entities/items/{id}/statements responses against OpenAPI spec', () => {
+describe( newGetItemStatementsRequestBuilder().getRouteDescription(), () => {
 
 	let itemId;
 	let latestRevisionId;

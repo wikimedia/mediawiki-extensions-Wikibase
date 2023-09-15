@@ -5,7 +5,7 @@ const { expect } = require( '../helpers/chaiHelper' );
 const { createEntity, createRedirectForItem } = require( '../helpers/entityHelper' );
 const { newGetItemLabelsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
-describe( 'validate GET /entities/items/{id}/labels responses against OpenAPI spec', () => {
+describe( newGetItemLabelsRequestBuilder().getRouteDescription(), () => {
 
 	let testItemId;
 	let lastRevisionId;

@@ -47,7 +47,7 @@ async function createPropertyWithAllFields() {
 	} );
 }
 
-describe( 'validate GET /entities/properties/{id} responses against OpenAPI document', () => {
+describe( newGetPropertyRequestBuilder().getRouteDescription(), () => {
 
 	let propertyId;
 
