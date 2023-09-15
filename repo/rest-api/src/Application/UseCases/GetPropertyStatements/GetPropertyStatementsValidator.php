@@ -1,46 +1,29 @@
-<?php declare( strict_types=1 );
+<?php declare( strict_types = 1 );
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements;
 
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\DeserializedRequestAdapter;
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
 
 /**
  * @license GPL-2.0-or-later
  */
 class GetPropertyStatementsValidator {
 
-	private PropertyIdValidator $propertyIdValidator;
+	private ValidatingRequestDeserializer $requestDeserializer;
 
-	public function __construct( PropertyIdValidator $propertyIdValidator ) {
-		$this->propertyIdValidator = $propertyIdValidator;
+	public function __construct( ValidatingRequestDeserializer $requestDeserializer ) {
+		$this->requestDeserializer = $requestDeserializer;
 	}
 
 	/**
 	 * @throws UseCaseError
 	 */
-	public function assertValidRequest( GetPropertyStatementsRequest $request ): void {
-		$this->assertValidPropertyId( $request->getPropertyId() );
-
-		if ( $request->getFilterPropertyId() !== null ) {
-			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-			$this->assertValidPropertyId( $request->getFilterPropertyId() );
-		}
-	}
-
-	/**
-	 * @throws UseCaseError
-	 */
-	private function assertValidPropertyId( string $propertyId ): void {
-		$validationError = $this->propertyIdValidator->validate( $propertyId );
-		if ( $validationError ) {
-			$invalidPropertyId = $validationError->getContext()[PropertyIdValidator::CONTEXT_VALUE];
-			throw new UseCaseError(
-				UseCaseError::INVALID_PROPERTY_ID,
-				"Not a valid property ID: $invalidPropertyId",
-				[ UseCaseError::CONTEXT_PROPERTY_ID => $invalidPropertyId ]
-			);
-		}
+	public function validateAndDeserialize( GetPropertyStatementsRequest $request ): DeserializedGetPropertyStatementsRequest {
+		return new class( $this->requestDeserializer->validateAndDeserialize( $request ) )
+			extends DeserializedRequestAdapter implements DeserializedGetPropertyStatementsRequest {
+		};
 	}
 
 }
