@@ -9,8 +9,10 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatement
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
+use Wikibase\Repo\Tests\RestApi\Application\UseCases\RequestValidation\TestValidatingRequestFieldDeserializerFactory;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatement
@@ -28,7 +30,9 @@ class GetItemStatementTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->validator = $this->createStub( GetItemStatementValidator::class );
+		$this->validator = new GetItemStatementValidator(
+			new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() )
+		);
 		$this->assertItemExists = $this->createStub( AssertItemExists::class );
 		$this->getStatement = $this->createStub( GetStatement::class );
 	}
@@ -50,7 +54,7 @@ class GetItemStatementTest extends TestCase {
 	public function testGivenInvalidGetItemStatementRequest_throws(): void {
 		$expectedException = $this->createStub( UseCaseError::class );
 		$this->validator = $this->createStub( GetItemStatementValidator::class );
-		$this->validator->method( 'assertValidRequest' )->willThrowException( $expectedException );
+		$this->validator->method( 'validateAndDeserialize' )->willThrowException( $expectedException );
 
 		try {
 			$this->newUseCase()->execute(
@@ -79,21 +83,6 @@ class GetItemStatementTest extends TestCase {
 			);
 			$this->fail( 'expected exception was not thrown' );
 		} catch ( UseCaseException $e ) {
-			$this->assertSame( $expectedException, $e );
-		}
-	}
-
-	public function testGivenInvalidGetStatementRequest_throws(): void {
-		$expectedException = $this->createStub( UseCaseError::class );
-		$this->getStatement = $this->createStub( GetStatement::class );
-		$this->getStatement->method( 'assertValidRequest' )->willThrowException( $expectedException );
-
-		try {
-			$this->newUseCase()->execute(
-				new GetItemStatementRequest( 'Q123', 'Q123$invalid' )
-			);
-			$this->fail( 'expected exception was not thrown' );
-		} catch ( UseCaseError $e ) {
 			$this->assertSame( $expectedException, $e );
 		}
 	}

@@ -44,9 +44,4 @@ class GetStatement {
 		return new GetStatementResponse( $statement, $lastModified, $revisionId );
 	}
 
-	// will be obsolete once T344994 is done
-	public function assertValidRequest( GetStatementRequest $request ): DeserializedGetStatementRequest {
-		return $this->validator->validateAndDeserialize( $request );
-	}
-
 }
