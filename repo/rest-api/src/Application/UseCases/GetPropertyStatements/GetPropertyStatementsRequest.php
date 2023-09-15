@@ -2,10 +2,14 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements;
 
+use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdFilterRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseRequest;
+
 /**
  * @license GPL-2.0-or-later
  */
-class GetPropertyStatementsRequest {
+class GetPropertyStatementsRequest implements UseCaseRequest, PropertyIdRequest, PropertyIdFilterRequest {
 
 	private string $propertyId;
 	private ?string $filterPropertyId;
@@ -19,7 +23,7 @@ class GetPropertyStatementsRequest {
 		return $this->propertyId;
 	}
 
-	public function getFilterPropertyId(): ?string {
+	public function getPropertyIdFilter(): ?string {
 		return $this->filterPropertyId;
 	}
 
