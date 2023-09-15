@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement;
 
-use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
@@ -40,15 +39,15 @@ class AddPropertyStatement {
 	}
 
 	public function execute( AddPropertyStatementRequest $request ): AddPropertyStatementResponse {
-		$this->validator->assertValidRequest( $request );
-
-		$propertyId = new NumericPropertyId( $request->getPropertyId() );
+		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
+		$propertyId = $deserializedRequest->getPropertyId();
+		$statement = $deserializedRequest->getStatement();
+		$editMetadata = $deserializedRequest->getEditMetadata();
 
 		$this->assertPropertyExists->execute( $propertyId );
-		$this->assertUserIsAuthorized->execute( $propertyId, $request->getUsername() );
+		$this->assertUserIsAuthorized->execute( $propertyId, $editMetadata->getUser()->getUsername() );
 
 		$property = $this->propertyRetriever->getProperty( $propertyId );
-		$statement = $this->validator->getValidatedStatement();
 
 		$newStatementGuid = $this->guidGenerator->newStatementId( $propertyId );
 		$statement->setGuid( (string)$newStatementGuid );
@@ -56,12 +55,11 @@ class AddPropertyStatement {
 		$property->getStatements()->addStatement( $statement );
 
 		$revision = $this->propertyUpdater->update(
-			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-			$property,
+			$property, // @phan-suppress-current-line PhanTypeMismatchArgumentNullable
 			new EditMetadata(
-				$request->getEditTags(),
-				$request->isBot(),
-				StatementEditSummary::newAddSummary( $request->getComment(), $statement )
+				$editMetadata->getTags(),
+				$editMetadata->isBot(),
+				StatementEditSummary::newAddSummary( $editMetadata->getComment(), $statement )
 			)
 		);
 
