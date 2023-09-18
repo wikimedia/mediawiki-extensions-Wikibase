@@ -274,7 +274,7 @@ return [
 
 	'WbRestApi.GetItemStatement' => function( MediaWikiServices $services ): GetItemStatement {
 		return new GetItemStatement(
-			new GetItemStatementValidator( new ItemIdValidator() ),
+			new GetItemStatementValidator( WbRestApi::getValidatingRequestDeserializer( $services ) ),
 			WbRestApi::getAssertItemExists( $services ),
 			WbRestApi::getGetStatement( $services )
 		);

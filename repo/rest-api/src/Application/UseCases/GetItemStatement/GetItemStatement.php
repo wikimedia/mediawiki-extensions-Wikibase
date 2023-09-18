@@ -2,11 +2,8 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement;
 
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 
@@ -33,20 +30,18 @@ class GetItemStatement {
 	 * @throws UseCaseError
 	 */
 	public function execute( GetItemStatementRequest $request ): GetStatementResponse {
-		$this->validator->assertValidRequest( $request );
-		$getStatementRequest = new GetStatementRequest( $request->getStatementId() );
-		$this->getStatement->assertValidRequest( $getStatementRequest );
+		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
 
-		$this->assertItemExists->execute( new ItemId( $request->getItemId() ) );
+		$this->assertItemExists->execute( $deserializedRequest->getItemId() );
 
-		if ( strpos( $request->getStatementId(), $request->getItemId() . StatementGuid::SEPARATOR ) !== 0 ) {
+		if ( !$deserializedRequest->getStatementId()->getEntityId()->equals( $deserializedRequest->getItemId() ) ) {
 			throw new UseCaseError(
 				UseCaseError::STATEMENT_NOT_FOUND,
-				"Could not find a statement with the ID: {$request->getStatementId()}"
+				"Could not find a statement with the ID: {$deserializedRequest->getStatementId()}"
 			);
 		}
 
-		return $this->getStatement->execute( $getStatementRequest );
+		return $this->getStatement->execute( $request );
 	}
 
 }

@@ -2,24 +2,22 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement;
 
+use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\ItemIdRequest;
+
 /**
  * @license GPL-2.0-or-later
  */
-class GetItemStatementRequest {
+class GetItemStatementRequest extends GetStatementRequest implements ItemIdRequest {
 
 	private string $itemId;
-	private string $statementId;
 
-	public function __construct( string $itemId, string $statementId ) {
-		$this->itemId = $itemId;
-		$this->statementId = $statementId;
+	public function __construct( string $propertyId, string $statementId ) {
+		parent::__construct( $statementId );
+		$this->itemId = $propertyId;
 	}
 
 	public function getItemId(): string {
 		return $this->itemId;
-	}
-
-	public function getStatementId(): string {
-		return $this->statementId;
 	}
 }
