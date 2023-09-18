@@ -58,7 +58,7 @@ async function createItemWithAllFields() {
 	} );
 }
 
-describe( 'validate GET /entities/items/{id} responses against OpenAPI document', () => {
+describe( newGetItemRequestBuilder().getRouteDescription(), () => {
 
 	let itemId;
 	let latestRevisionId;

@@ -4,7 +4,7 @@ const { expect } = require( '../helpers/chaiHelper' );
 const { createUniqueStringProperty, createEntity, createRedirectForItem } = require( '../helpers/entityHelper' );
 const { newAddItemStatementRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
-describe( 'validate POST /entities/items/{id}/statements', () => {
+describe( newAddItemStatementRequestBuilder().getRouteDescription(), () => {
 
 	let validStatementSerialization;
 	let itemId;

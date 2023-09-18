@@ -8,7 +8,7 @@ const {
 } = require( '../helpers/entityHelper' );
 const { newGetPropertyStatementsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
-describe( 'validate GET /entities/properties/{id}/statements responses against OpenAPI spec', () => {
+describe( newGetPropertyStatementsRequestBuilder().getRouteDescription(), () => {
 
 	let propertyId;
 	let latestRevisionId;

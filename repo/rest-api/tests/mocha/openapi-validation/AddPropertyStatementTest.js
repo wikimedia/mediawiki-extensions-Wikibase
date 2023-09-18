@@ -4,7 +4,7 @@ const { expect } = require( '../helpers/chaiHelper' );
 const { createUniqueStringProperty } = require( '../helpers/entityHelper' );
 const { newAddPropertyStatementRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
-describe( 'validate POST /entities/properties/{id}/statements', () => {
+describe( newAddPropertyStatementRequestBuilder().getRouteDescription(), () => {
 
 	let propertyId;
 	let validStatementSerialization;

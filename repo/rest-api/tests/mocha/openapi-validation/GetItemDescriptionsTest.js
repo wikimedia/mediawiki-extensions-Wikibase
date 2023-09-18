@@ -5,7 +5,7 @@ const { expect } = require( '../helpers/chaiHelper' );
 const { createEntity, createRedirectForItem } = require( '../helpers/entityHelper' );
 const { newGetItemDescriptionsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
-describe( 'validate GET /entities/items/{id}/descriptions responses against OpenAPI spec', () => {
+describe( newGetItemDescriptionsRequestBuilder().getRouteDescription(), () => {
 
 	let testItemId;
 	let lastRevisionId;
