@@ -74,8 +74,8 @@
 	"delete": {
 		"operationId": "deletePropertyStatement",
 		"tags": [ "statements" ],
-		"summary": "[WIP] Delete a single Statement from a Property",
-		"description": "This endpoint is currently in development and is not recommended for production use.\n\nThis endpoint is also accessible through `/statements/{statement_id}`.",
+		"summary": "Delete a single Statement from a Property",
+		"description": "This endpoint is also accessible through `/statements/{statement_id}`.",
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/PropertyId" },
 			{ "$ref": "../../global/parameters.json#/PropertyStatementId" },
