@@ -1,12 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Winston Sung"
+			"Winston Sung",
+			"Benojan"
 		]
 	},
-	"wikibase-dataitem": "{{WBREPONAME}}項",
+	"wikibase-dataitem": "{{WBREPONAME}}條",
 	"wikibase-linkitem-input-site": "閒話：",
 	"wikibase-linkitem-input-page": "頁面：",
-	"wikibase-rc-hide-wikidata-hide": "囥脫",
+	"wikibase-rc-hide-wikidata-hide": "囥起來",
 	"wikibase-rc-hide-wikidata-show": "顯示"
 }
