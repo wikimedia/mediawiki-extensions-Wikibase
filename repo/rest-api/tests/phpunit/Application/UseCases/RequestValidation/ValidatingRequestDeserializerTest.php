@@ -7,6 +7,7 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Tests\NewStatement;
@@ -186,6 +187,28 @@ class ValidatingRequestDeserializerTest extends TestCase {
 
 		$this->assertArrayHasKey( ItemDescriptionEditRequest::class, $result );
 		$this->assertEquals( $result[ItemDescriptionEditRequest::class], new Term( 'en', 'root vegetable' ) );
+	}
+
+	public function testGivenRepeatedValidRequests_returnsTheSameResultAndValidatesOnlyOnce(): void {
+		$stubStatementSerialization = [ 'statement' => 'serialization' ];
+		$request = $this->createStub( StatementSerializationUseCaseRequest::class );
+		$request->method( 'getStatement' )->willReturn( $stubStatementSerialization );
+
+		$statementValidator = $this->createMock( StatementSerializationRequestValidatingDeserializer::class );
+		$statementValidator->expects( $this->once() )
+			->method( 'validateAndDeserialize' )
+			->with( $request )
+			->willReturnCallback( fn() => $this->createStub( Statement::class ) );
+
+		$factory = $this->createStub( ValidatingRequestFieldDeserializerFactory::class );
+		$factory->method( 'newStatementSerializationRequestValidatingDeserializer' )->willReturn( $statementValidator );
+
+		$validatingDeserializer = new ValidatingRequestDeserializer( $factory );
+
+		$this->assertSame(
+			$validatingDeserializer->validateAndDeserialize( $request ),
+			$validatingDeserializer->validateAndDeserialize( $request )
+		);
 	}
 
 	/**
