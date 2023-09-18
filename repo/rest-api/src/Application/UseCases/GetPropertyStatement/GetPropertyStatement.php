@@ -4,7 +4,6 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement;
 
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 
@@ -32,18 +31,17 @@ class GetPropertyStatement {
 	 */
 	public function execute( GetPropertyStatementRequest $request ): GetStatementResponse {
 		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
-		$getStatementRequest = new GetStatementRequest( $request->getStatementId() );
 
 		$this->assertPropertyExists->execute( $deserializedRequest->getPropertyId() );
 
 		if ( !$deserializedRequest->getStatementId()->getEntityId()->equals( $deserializedRequest->getPropertyId() ) ) {
 			throw new UseCaseError(
 				UseCaseError::STATEMENT_NOT_FOUND,
-				"Could not find a statement with the ID: {$request->getStatementId()}"
+				"Could not find a statement with the ID: {$deserializedRequest->getStatementId()}"
 			);
 		}
 
-		return $this->getStatement->execute( $getStatementRequest );
+		return $this->getStatement->execute( $request );
 	}
 
 }
