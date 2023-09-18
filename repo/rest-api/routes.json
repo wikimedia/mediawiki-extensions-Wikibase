@@ -70,6 +70,11 @@
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\RemoveItemStatementRouteHandler::factory"
 	},
 	{
+		"path": "/wikibase/v0/entities/properties/{property_id}/statements/{statement_id}",
+		"method": "DELETE",
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\RemovePropertyStatementRouteHandler::factory"
+	},
+	{
 		"path": "/wikibase/v0/statements/{statement_id}",
 		"method": "PATCH",
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\PatchStatementRouteHandler::factory"
