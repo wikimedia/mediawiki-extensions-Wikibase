@@ -77,7 +77,6 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescrip
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
@@ -232,10 +231,7 @@ return [
 				WikibaseRepo::getTermLookup( $services ),
 				WikibaseRepo::getTermsLanguages( $services )
 			),
-			new GetItemDescriptionValidator(
-				new ItemIdValidator(),
-				new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() )
-			)
+			new GetItemDescriptionValidator( WbRestApi::getValidatingRequestDeserializer( $services ) )
 		);
 	},
 
