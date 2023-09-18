@@ -9,10 +9,7 @@ const {
 	createUniqueStringProperty,
 	createEntity
 } = require( '../helpers/entityHelper' );
-const {
-	newAddItemStatementRequestBuilder,
-	newAddPropertyStatementRequestBuilder
-} = require( '../helpers/RequestBuilderFactory' );
+const rbf = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const {
 	editRequestsOnItem,
@@ -343,15 +340,12 @@ describe( 'Conditional requests', () => {
 
 			afterEach( async () => {
 				if ( newRequestBuilder().getMethod() === 'DELETE' ) {
-					// restore the item state in between tests that removed the statement
-					itemRequestInputs.statementId = ( await newAddItemStatementRequestBuilder(
-						itemRequestInputs.itemId,
-						newStatementWithRandomStringValue( itemRequestInputs.statementPropertyId )
-					).makeRequest() ).body.id;
-
-					propertyRequestInputs.statementId = ( await newAddPropertyStatementRequestBuilder(
-						propertyRequestInputs.propertyId,
-						newStatementWithRandomStringValue( propertyRequestInputs.statementPropertyId )
+					const addStatementRequestBuilder = requestInputs.mainTestSubject === requestInputs.itemId ?
+						rbf.newAddItemStatementRequestBuilder :
+						rbf.newAddPropertyStatementRequestBuilder;
+					requestInputs.statementId = ( await addStatementRequestBuilder(
+						requestInputs.mainTestSubject,
+						newStatementWithRandomStringValue( requestInputs.statementPropertyId )
 					).makeRequest() ).body.id;
 				}
 			} );
