@@ -30,16 +30,14 @@ class RemoveItemStatementTest extends TestCase {
 
 	private AssertItemExists $assertItemExists;
 	private RemoveStatement $removeStatement;
-	private RemoveItemStatementValidator $removeItemStatementValidator;
+	private RemoveItemStatementValidator $validator;
 
 	protected function setUp(): void {
 		parent::setUp();
 
 		$this->assertItemExists = $this->createStub( AssertItemExists::class );
 		$this->removeStatement  = $this->createStub( RemoveStatement::class );
-		$this->removeItemStatementValidator = new RemoveItemStatementValidator(
-			new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() )
-		);
+		$this->validator = new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() );
 	}
 
 	public function testGivenValidRemoveItemStatementRequest_callsRemoveStatementUseCase(): void {
@@ -71,8 +69,8 @@ class RemoveItemStatementTest extends TestCase {
 		$useCaseRequest = $this->createStub( RemoveItemStatementRequest::class );
 		$expectedUseCaseError = $this->createStub( UseCaseError::class );
 
-		$this->removeItemStatementValidator = $this->createMock( RemoveItemStatementValidator::class );
-		$this->removeItemStatementValidator->expects( $this->once() )
+		$this->validator = $this->createMock( RemoveItemStatementValidator::class );
+		$this->validator->expects( $this->once() )
 			->method( 'validateAndDeserialize' )
 			->with( $useCaseRequest )
 			->willThrowException( $expectedUseCaseError );
@@ -151,7 +149,7 @@ class RemoveItemStatementTest extends TestCase {
 		return new RemoveItemStatement(
 			$this->assertItemExists,
 			$this->removeStatement,
-			$this->removeItemStatementValidator
+			$this->validator
 		);
 	}
 

@@ -13,7 +13,6 @@ use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatementResponse;
-use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
@@ -179,10 +178,8 @@ class AddItemStatementTest extends TestCase {
 		$dataTypeLookup->setDataTypeForProperty( new NumericPropertyId( self::EXISTING_PROPERTY ), 'string' );
 
 		return new AddItemStatement(
-			new AddItemStatementValidator(
-				new ValidatingRequestDeserializer(
-					TestValidatingRequestFieldDeserializerFactory::newFactory( $dataTypeLookup )
-				)
+			new ValidatingRequestDeserializer(
+				TestValidatingRequestFieldDeserializerFactory::newFactory( $dataTypeLookup )
 			),
 			new AssertItemExists( $this->getRevisionMetadata ),
 			$this->itemRetriever,

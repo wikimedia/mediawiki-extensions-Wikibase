@@ -28,16 +28,14 @@ class PatchPropertyStatementTest extends TestCase {
 
 	use EditMetadataHelper;
 
-	private PatchPropertyStatementValidator $patchPropertyStatementValidator;
+	private PatchPropertyStatementValidator $validator;
 	private AssertPropertyExists $assertPropertyExists;
 	private PatchStatement $patchStatement;
 
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->patchPropertyStatementValidator = new PatchPropertyStatementValidator(
-			new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() )
-		);
+		$this->validator = new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() );
 		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
 		$this->patchStatement  = $this->createStub( PatchStatement::class );
 	}
@@ -90,8 +88,8 @@ class PatchPropertyStatementTest extends TestCase {
 		$useCaseRequest = $this->createStub( PatchPropertyStatementRequest::class );
 		$expectedUseCaseError = $this->createStub( UseCaseError::class );
 
-		$this->patchPropertyStatementValidator = $this->createMock( PatchPropertyStatementValidator::class );
-		$this->patchPropertyStatementValidator->expects( $this->once() )
+		$this->validator = $this->createMock( PatchPropertyStatementValidator::class );
+		$this->validator->expects( $this->once() )
 			->method( 'validateAndDeserialize' )
 			->with( $useCaseRequest )
 			->willThrowException( $expectedUseCaseError );
@@ -153,7 +151,7 @@ class PatchPropertyStatementTest extends TestCase {
 
 	private function newUseCase(): PatchPropertyStatement {
 		return new PatchPropertyStatement(
-			$this->patchPropertyStatementValidator,
+			$this->validator,
 			$this->assertPropertyExists,
 			$this->patchStatement,
 		);

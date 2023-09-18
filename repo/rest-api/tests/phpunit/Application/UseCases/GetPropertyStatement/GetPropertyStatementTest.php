@@ -31,9 +31,7 @@ class GetPropertyStatementTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->validator = new GetPropertyStatementValidator(
-			new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() )
-		);
+		$this->validator = new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() );
 		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
 		$this->getStatement = $this->createStub( GetStatement::class );
 	}

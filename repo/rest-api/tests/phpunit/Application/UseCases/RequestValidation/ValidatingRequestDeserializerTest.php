@@ -55,30 +55,24 @@ class ValidatingRequestDeserializerTest extends TestCase {
 		$request = $this->createStub( ItemIdUseCaseRequest::class );
 		$request->method( 'getItemId' )->willReturn( 'Q123' );
 
-		$this->assertEquals(
-			[ ItemIdRequest::class => new ItemId( 'Q123' ) ],
-			$this->newRequestDeserializer()->validateAndDeserialize( $request )
-		);
+		$result = $this->newRequestDeserializer()->validateAndDeserialize( $request );
+		$this->assertEquals( new ItemId( 'Q123' ), $result->getItemId() );
 	}
 
 	public function testGivenValidPropertyIdRequest_returnsDeserializedPropertyId(): void {
 		$request = $this->createStub( PropertyIdUseCaseRequest::class );
 		$request->method( 'getPropertyId' )->willReturn( 'P123' );
 
-		$this->assertEquals(
-			[ PropertyIdRequest::class => new NumericPropertyId( 'P123' ) ],
-			$this->newRequestDeserializer()->validateAndDeserialize( $request )
-		);
+		$result = $this->newRequestDeserializer()->validateAndDeserialize( $request );
+		$this->assertEquals( new NumericPropertyId( 'P123' ), $result->getPropertyId() );
 	}
 
 	public function testGivenValidLanguageCodeRequest_returnsLanguageCode(): void {
 		$request = $this->createStub( LanguageCodeUseCaseRequest::class );
 		$request->method( 'getLanguageCode' )->willReturn( self::VALID_LANGUAGE_CODE );
 
-		$this->assertEquals(
-			[ LanguageCodeRequest::class => self::VALID_LANGUAGE_CODE ],
-			$this->newRequestDeserializer()->validateAndDeserialize( $request )
-		);
+		$result = $this->newRequestDeserializer()->validateAndDeserialize( $request );
+		$this->assertEquals( self::VALID_LANGUAGE_CODE, $result->getLanguageCode() );
 	}
 
 	public function testGivenValidStatementIdRequest_returnsDeserializedStatementId(): void {
@@ -86,20 +80,16 @@ class ValidatingRequestDeserializerTest extends TestCase {
 		$request = $this->createStub( StatementIdUseCaseRequest::class );
 		$request->method( 'getStatementId' )->willReturn( "$statementId" );
 
-		$this->assertEquals(
-			[ StatementIdRequest::class => $statementId ],
-			$this->newRequestDeserializer()->validateAndDeserialize( $request )
-		);
+		$result = $this->newRequestDeserializer()->validateAndDeserialize( $request );
+		$this->assertEquals( $statementId, $result->getStatementId() );
 	}
 
 	public function testGivenValidPropertyIdFilterRequest_returnsDeserializedPropertyId(): void {
 		$request = $this->createStub( PropertyIdFilterUseCaseRequest::class );
 		$request->method( 'getPropertyIdFilter' )->willReturn( 'P123' );
 
-		$this->assertEquals(
-			[ PropertyIdFilterRequest::class => new NumericPropertyId( 'P123' ) ],
-			$this->newRequestDeserializer()->validateAndDeserialize( $request )
-		);
+		$result = $this->newRequestDeserializer()->validateAndDeserialize( $request );
+		$this->assertEquals( new NumericPropertyId( 'P123' ), $result->getPropertyIdFilter() );
 	}
 
 	public function testGivenValidItemFieldsRequest_returnsDeserializedItemFields(): void {
@@ -107,10 +97,8 @@ class ValidatingRequestDeserializerTest extends TestCase {
 		$request = $this->createStub( ItemFieldsUseCaseRequest::class );
 		$request->method( 'getItemFields' )->willReturn( $fields );
 
-		$this->assertEquals(
-			[ ItemFieldsRequest::class => $fields ],
-			$this->newRequestDeserializer()->validateAndDeserialize( $request )
-		);
+		$result = $this->newRequestDeserializer()->validateAndDeserialize( $request );
+		$this->assertEquals( $fields, $result->getItemFields() );
 	}
 
 	public function testGivenValidPropertyFieldsRequest_returnsDeserializedPropertyFields(): void {
@@ -118,10 +106,8 @@ class ValidatingRequestDeserializerTest extends TestCase {
 		$request = $this->createStub( PropertyFieldsUseCaseRequest::class );
 		$request->method( 'getPropertyFields' )->willReturn( $fields );
 
-		$this->assertEquals(
-			[ PropertyFieldsRequest::class => $fields ],
-			$this->newRequestDeserializer()->validateAndDeserialize( $request )
-		);
+		$result = $this->newRequestDeserializer()->validateAndDeserialize( $request );
+		$this->assertEquals( $fields, $result->getPropertyFields() );
 	}
 
 	public function testGivenValidStatementSerializationRequest_returnsStatement(): void {
@@ -131,10 +117,8 @@ class ValidatingRequestDeserializerTest extends TestCase {
 			'value' => [ 'type' => 'novalue' ],
 		] );
 
-		$this->assertEquals(
-			[ StatementSerializationRequest::class => NewStatement::noValueFor( 'P123' )->build() ],
-			$this->newRequestDeserializer()->validateAndDeserialize( $request )
-		);
+		$result = $this->newRequestDeserializer()->validateAndDeserialize( $request );
+		$this->assertEquals( NewStatement::noValueFor( 'P123' )->build(), $result->getStatement() );
 	}
 
 	public function testGivenValidEditMetadataRequest_returnsEditMetadata(): void {
@@ -148,9 +132,10 @@ class ValidatingRequestDeserializerTest extends TestCase {
 		$request->method( 'getComment' )->willReturn( $comment );
 		$request->method( 'getEditTags' )->willReturn( $editTags );
 
+		$result = $this->newRequestDeserializer()->validateAndDeserialize( $request );
 		$this->assertEquals(
-			[ EditMetadataRequest::class => new UserProvidedEditMetadata( User::withUsername( $user ), $isBot, $comment, $editTags ) ],
-			$this->newRequestDeserializer()->validateAndDeserialize( $request )
+			new UserProvidedEditMetadata( User::withUsername( $user ), $isBot, $comment, $editTags ),
+			$result->getEditMetadata()
 		);
 	}
 
@@ -159,10 +144,8 @@ class ValidatingRequestDeserializerTest extends TestCase {
 		$request = $this->createStub( PatchUseCaseRequest::class );
 		$request->method( 'getPatch' )->willReturn( $patch );
 
-		$this->assertEquals(
-			[ PatchRequest::class => $patch ],
-			$this->newRequestDeserializer()->validateAndDeserialize( $request )
-		);
+		$result = $this->newRequestDeserializer()->validateAndDeserialize( $request );
+		$this->assertEquals( $patch, $result->getPatch() );
 	}
 
 	public function testGivenValidItemLabelEditRequest_returnsLabel(): void {
@@ -172,9 +155,7 @@ class ValidatingRequestDeserializerTest extends TestCase {
 		$request->method( 'getLabel' )->willReturn( 'potato' );
 
 		$result = $this->newRequestDeserializer()->validateAndDeserialize( $request );
-
-		$this->assertArrayHasKey( ItemLabelEditRequest::class, $result );
-		$this->assertEquals( $result[ItemLabelEditRequest::class], new Term( 'en', 'potato' ) );
+		$this->assertEquals( new Term( 'en', 'potato' ), $result->getLabel() );
 	}
 
 	public function testGivenValidItemDescriptionEditRequest_returnsDescription(): void {
@@ -185,8 +166,7 @@ class ValidatingRequestDeserializerTest extends TestCase {
 
 		$result = $this->newRequestDeserializer()->validateAndDeserialize( $request );
 
-		$this->assertArrayHasKey( ItemDescriptionEditRequest::class, $result );
-		$this->assertEquals( $result[ItemDescriptionEditRequest::class], new Term( 'en', 'root vegetable' ) );
+		$this->assertEquals( new Term( 'en', 'root vegetable' ), $result->getDescription() );
 	}
 
 	public function testGivenRepeatedValidRequests_returnsTheSameResultAndValidatesOnlyOnce(): void {

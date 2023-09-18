@@ -12,72 +12,44 @@ use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SerializerFactory;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertStatementSubjectExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItem;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItemValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliases\GetItemAliases;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliases\GetItemAliasesValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliasesInLanguage\GetItemAliasesInLanguage;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliasesInLanguage\GetItemAliasesInLanguageValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescription\GetItemDescription;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescription\GetItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\GetItemDescriptions;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\GetItemDescriptionsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\GetItemLabel;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\GetItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabels;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabelsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\GetItemStatements;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\GetItemStatementsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestPropertyRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestStatementSubjectRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetProperty;
-use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetPropertyValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabels\GetPropertyLabels;
-use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabels\GetPropertyLabelsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\GetPropertyStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\GetPropertyStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetPropertyStatements;
-use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetPropertyStatementsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchedLabelsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyStatement\PatchPropertyStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyStatement\PatchPropertyStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchedStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyStatement\RemovePropertyStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyStatement\RemovePropertyStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplacePropertyStatement\ReplacePropertyStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\ReplacePropertyStatement\ReplacePropertyStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestFieldDeserializerFactory;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescription;
-use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel;
-use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
@@ -121,7 +93,7 @@ return [
 
 	'WbRestApi.AddItemStatement' => function( MediaWikiServices $services ): AddItemStatement {
 		return new AddItemStatement(
-			new AddItemStatementValidator( WbRestApi::getValidatingRequestDeserializer( $services ) ),
+			WbRestApi::getValidatingRequestDeserializer( $services ),
 			WbRestApi::getAssertItemExists( $services ),
 			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getItemUpdater( $services ),
@@ -136,7 +108,7 @@ return [
 			WikibaseRepo::getPropertyDataTypeLookup( $services )
 		);
 		return new AddPropertyStatement(
-			new AddPropertyStatementValidator( WbRestApi::getValidatingRequestDeserializer( $services ) ),
+			WbRestApi::getValidatingRequestDeserializer( $services ),
 			WbRestApi::getAssertPropertyExists(),
 			new EntityRevisionLookupPropertyDataRetriever(
 				WikibaseRepo::getEntityRevisionLookup(),
@@ -200,7 +172,7 @@ return [
 		return new GetItem(
 			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
 			WbRestApi::getItemDataRetriever( $services ),
-			new GetItemValidator( WbRestApi::getValidatingRequestDeserializer( $services ) )
+			WbRestApi::getValidatingRequestDeserializer( $services )
 		);
 	},
 
@@ -211,7 +183,7 @@ return [
 				WikibaseRepo::getPrefetchingTermLookup( $services ),
 				WikibaseRepo::getTermsLanguages( $services )
 			),
-			new GetItemAliasesValidator( WbRestApi::getValidatingRequestDeserializer( $services ) )
+			WbRestApi::getValidatingRequestDeserializer( $services )
 		);
 	},
 
@@ -222,7 +194,7 @@ return [
 				WikibaseRepo::getPrefetchingTermLookup( $services ),
 				WikibaseRepo::getTermsLanguages( $services )
 			),
-			new GetItemAliasesInLanguageValidator( WbRestApi::getValidatingRequestDeserializer( $services ) )
+			WbRestApi::getValidatingRequestDeserializer( $services )
 		);
 	},
 
@@ -233,7 +205,7 @@ return [
 				WikibaseRepo::getTermLookup( $services ),
 				WikibaseRepo::getTermsLanguages( $services )
 			),
-			new GetItemDescriptionValidator( WbRestApi::getValidatingRequestDeserializer( $services ) )
+			WbRestApi::getValidatingRequestDeserializer( $services )
 		);
 	},
 
@@ -244,7 +216,7 @@ return [
 				WikibaseRepo::getTermLookup( $services ),
 				WikibaseRepo::getTermsLanguages( $services )
 			),
-			new GetItemDescriptionsValidator( WbRestApi::getValidatingRequestDeserializer( $services ) )
+			WbRestApi::getValidatingRequestDeserializer( $services )
 		);
 	},
 
@@ -255,7 +227,7 @@ return [
 				WikibaseRepo::getTermLookup( $services ),
 				WikibaseRepo::getTermsLanguages( $services )
 			),
-			new GetItemLabelValidator( WbRestApi::getValidatingRequestDeserializer( $services ) )
+			WbRestApi::getValidatingRequestDeserializer( $services )
 		);
 	},
 
@@ -266,13 +238,13 @@ return [
 				WikibaseRepo::getTermLookup( $services ),
 				WikibaseRepo::getTermsLanguages( $services )
 			),
-			new GetItemLabelsValidator( WbRestApi::getValidatingRequestDeserializer( $services ) )
+			WbRestApi::getValidatingRequestDeserializer( $services )
 		);
 	},
 
 	'WbRestApi.GetItemStatement' => function( MediaWikiServices $services ): GetItemStatement {
 		return new GetItemStatement(
-			new GetItemStatementValidator( WbRestApi::getValidatingRequestDeserializer( $services ) ),
+			WbRestApi::getValidatingRequestDeserializer( $services ),
 			WbRestApi::getAssertItemExists( $services ),
 			WbRestApi::getGetStatement( $services )
 		);
@@ -280,7 +252,7 @@ return [
 
 	'WbRestApi.GetItemStatements' => function( MediaWikiServices $services ): GetItemStatements {
 		return new GetItemStatements(
-			new GetItemStatementsValidator( WbRestApi::getValidatingRequestDeserializer( $services ) ),
+			WbRestApi::getValidatingRequestDeserializer( $services ),
 			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getGetLatestItemRevisionMetadata( $services )
 		);
@@ -310,7 +282,7 @@ return [
 		return new GetProperty(
 			WbRestApi::getGetLatestPropertyRevisionMetadata( $services ),
 			WbRestApi::getPropertyDataRetriever( $services ),
-			new GetPropertyValidator( WbRestApi::getValidatingRequestDeserializer( $services ) )
+			WbRestApi::getValidatingRequestDeserializer( $services )
 		);
 	},
 
@@ -321,13 +293,13 @@ return [
 				WikibaseRepo::getTermLookup( $services ),
 				WikibaseRepo::getTermsLanguages( $services )
 			),
-			new GetPropertyLabelsValidator( WbRestApi::getValidatingRequestDeserializer( $services ) )
+			WbRestApi::getValidatingRequestDeserializer( $services )
 		);
 	},
 
 	'WbRestApi.GetPropertyStatement' => function( MediaWikiServices $services ): GetPropertyStatement {
 		return new GetPropertyStatement(
-			new GetPropertyStatementValidator( WbRestApi::getValidatingRequestDeserializer( $services ) ),
+			WbRestApi::getValidatingRequestDeserializer( $services ),
 			WbRestApi::getAssertPropertyExists( $services ),
 			WbRestApi::getGetStatement( $services )
 		);
@@ -335,7 +307,7 @@ return [
 
 	'WbRestApi.GetPropertyStatements' => function( MediaWikiServices $services ): GetPropertyStatements {
 		return new GetPropertyStatements(
-			new GetPropertyStatementsValidator( WbRestApi::getValidatingRequestDeserializer( $services ) ),
+			WbRestApi::getValidatingRequestDeserializer( $services ),
 			WbRestApi::getPropertyDataRetriever( $services ),
 			WbRestApi::getGetLatestPropertyRevisionMetadata( $services )
 		);
@@ -343,7 +315,7 @@ return [
 
 	'WbRestApi.GetStatement' => function( MediaWikiServices $services ): GetStatement {
 		return new GetStatement(
-			new GetStatementValidator( WbRestApi::getValidatingRequestDeserializer( $services ) ),
+			WbRestApi::getValidatingRequestDeserializer( $services ),
 			WbRestApi::getStatementRetriever( $services ),
 			WbRestApi::getGetLatestStatementSubjectRevisionMetadata( $services )
 		);
@@ -390,14 +362,14 @@ return [
 			),
 			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getItemUpdater( $services ),
-			new PatchItemLabelsValidator( WbRestApi::getValidatingRequestDeserializer( $services ) ),
+			WbRestApi::getValidatingRequestDeserializer( $services ),
 			WbRestApi::getAssertUserIsAuthorized( $services )
 		);
 	},
 
 	'WbRestApi.PatchItemStatement' => function( MediaWikiServices $services ): PatchItemStatement {
 		return new PatchItemStatement(
-			new PatchItemStatementValidator( WbRestApi::getValidatingRequestDeserializer( $services ) ),
+			WbRestApi::getValidatingRequestDeserializer( $services ),
 			WbRestApi::getAssertItemExists( $services ),
 			WbRestApi::getPatchStatement( $services )
 		);
@@ -405,7 +377,7 @@ return [
 
 	'WbRestApi.PatchPropertyStatement' => function( MediaWikiServices $services ): PatchPropertyStatement {
 		return new PatchPropertyStatement(
-			new PatchPropertyStatementValidator( WbRestApi::getValidatingRequestDeserializer( $services ) ),
+			WbRestApi::getValidatingRequestDeserializer( $services ),
 			WbRestApi::getAssertPropertyExists( $services ),
 			WbRestApi::getPatchStatement( $services )
 		);
@@ -413,7 +385,7 @@ return [
 
 	'WbRestApi.PatchStatement' => function( MediaWikiServices $services ): PatchStatement {
 		return new PatchStatement(
-			new PatchStatementValidator( WbRestApi::getValidatingRequestDeserializer( $services ) ),
+			WbRestApi::getValidatingRequestDeserializer( $services ),
 			new PatchedStatementValidator( new StatementValidator( WbRestApi::getStatementDeserializer( $services ) ) ),
 			new JsonDiffJsonPatcher(),
 			WbRestApi::getSerializerFactory( $services )->newStatementSerializer(),
@@ -446,7 +418,7 @@ return [
 		return new RemoveItemStatement(
 			WbRestApi::getAssertItemExists( $services ),
 			WbRestApi::getRemoveStatement( $services ),
-			new RemoveItemStatementValidator( WbRestApi::getValidatingRequestDeserializer( $services ) )
+			WbRestApi::getValidatingRequestDeserializer( $services )
 		);
 	},
 
@@ -454,15 +426,13 @@ return [
 		return new RemovePropertyStatement(
 			WbRestApi::getAssertPropertyExists( $services ),
 			WbRestApi::getRemoveStatement( $services ),
-			new RemovePropertyStatementValidator( WbRestApi::getValidatingRequestDeserializer( $services ) )
+			WbRestApi::getValidatingRequestDeserializer( $services )
 		);
 	},
 
 	'WbRestApi.RemoveStatement' => function( MediaWikiServices $services ): RemoveStatement {
 		return new RemoveStatement(
-			new RemoveStatementValidator(
-				WbRestApi::getValidatingRequestDeserializer( $services )
-			),
+			WbRestApi::getValidatingRequestDeserializer( $services ),
 			WbRestApi::getAssertUserIsAuthorized( $services ),
 			WbRestApi::getAssertStatementSubjectExists( $services ),
 			WbRestApi::getStatementRetriever( $services ),
@@ -472,7 +442,7 @@ return [
 
 	'WbRestApi.ReplaceItemStatement' => function( MediaWikiServices $services ): ReplaceItemStatement {
 		return new ReplaceItemStatement(
-			new ReplaceItemStatementValidator( WbRestApi::getValidatingRequestDeserializer( $services ) ),
+			WbRestApi::getValidatingRequestDeserializer( $services ),
 			WbRestApi::getAssertItemExists( $services ),
 			WbRestApi::getReplaceStatement( $services )
 		);
@@ -480,7 +450,7 @@ return [
 
 	'WbRestApi.ReplacePropertyStatement' => function( MediaWikiServices $services ): ReplacePropertyStatement {
 		return new ReplacePropertyStatement(
-			new ReplacePropertyStatementValidator( WbRestApi::getValidatingRequestDeserializer( $services ) ),
+			WbRestApi::getValidatingRequestDeserializer( $services ),
 			WbRestApi::getAssertPropertyExists( $services ),
 			WbRestApi::getReplaceStatement( $services )
 		);
@@ -488,7 +458,7 @@ return [
 
 	'WbRestApi.ReplaceStatement' => function( MediaWikiServices $services ): ReplaceStatement {
 		return new ReplaceStatement(
-			new ReplaceStatementValidator( WbRestApi::getValidatingRequestDeserializer( $services ) ),
+			WbRestApi::getValidatingRequestDeserializer( $services ),
 			WbRestApi::getAssertStatementSubjectExists( $services ),
 			WbRestApi::getAssertUserIsAuthorized( $services ),
 			WbRestApi::getStatementUpdater( $services )
@@ -503,7 +473,7 @@ return [
 
 	'WbRestApi.SetItemDescription' => function( MediaWikiServices $services ): SetItemDescription {
 		return new SetItemDescription(
-			new SetItemDescriptionValidator( WbRestApi::getValidatingRequestDeserializer( $services ) ),
+			WbRestApi::getValidatingRequestDeserializer( $services ),
 			WbRestApi::getAssertItemExists( $services ),
 			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getItemUpdater( $services ),
@@ -513,7 +483,7 @@ return [
 
 	'WbRestApi.SetItemLabel' => function( MediaWikiServices $services ): SetItemLabel {
 		return new SetItemLabel(
-			new SetItemLabelValidator( WbRestApi::getValidatingRequestDeserializer( $services ) ),
+			WbRestApi::getValidatingRequestDeserializer( $services ),
 			WbRestApi::getAssertItemExists( $services ),
 			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getItemUpdater( $services ),

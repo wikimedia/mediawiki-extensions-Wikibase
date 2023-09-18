@@ -7,7 +7,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItemRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItemResponse;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItemValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
@@ -54,7 +53,7 @@ class GetItemTest extends TestCase {
 		$itemResponse = ( new GetItem(
 			$getRevisionMetadata,
 			$itemPartsRetriever,
-			new GetItemValidator( new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() ) )
+			new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() )
 		) )->execute( new GetItemRequest( self::ITEM_ID, $requestedFields ) );
 
 		$this->assertInstanceOf( GetItemResponse::class, $itemResponse );
@@ -75,7 +74,7 @@ class GetItemTest extends TestCase {
 			( new GetItem(
 				$getRevisionMetadata,
 				$this->createStub( ItemPartsRetriever::class ),
-				new GetItemValidator( new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() ) )
+				new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() )
 			) )->execute( new GetItemRequest( $itemId ) );
 
 			$this->fail( 'this should not be reached' );
@@ -90,7 +89,7 @@ class GetItemTest extends TestCase {
 			( new GetItem(
 				$this->createStub( GetLatestItemRevisionMetadata::class ),
 				$this->createStub( ItemPartsRetriever::class ),
-				new GetItemValidator( new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() ) )
+				new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() )
 			) )->execute( new GetItemRequest( $itemId ) );
 
 			$this->fail( 'this should not be reached' );

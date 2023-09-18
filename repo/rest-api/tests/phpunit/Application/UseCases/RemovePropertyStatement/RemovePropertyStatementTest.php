@@ -29,16 +29,14 @@ class RemovePropertyStatementTest extends TestCase {
 
 	private AssertPropertyExists $assertPropertyExists;
 	private RemoveStatement $removeStatement;
-	private RemovePropertyStatementValidator $removePropertyStatementValidator;
+	private RemovePropertyStatementValidator $validator;
 
 	protected function setUp(): void {
 		parent::setUp();
 
 		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
 		$this->removeStatement  = $this->createStub( RemoveStatement::class );
-		$this->removePropertyStatementValidator = new RemovePropertyStatementValidator(
-			new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() )
-		);
+		$this->validator = new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() );
 	}
 
 	public function testGivenValidRemovePropertyStatementRequest_callsRemoveStatementUseCase(): void {
@@ -70,8 +68,8 @@ class RemovePropertyStatementTest extends TestCase {
 		$useCaseRequest = $this->createStub( RemovePropertyStatementRequest::class );
 		$expectedUseCaseError = $this->createStub( UseCaseError::class );
 
-		$this->removePropertyStatementValidator = $this->createMock( RemovePropertyStatementValidator::class );
-		$this->removePropertyStatementValidator->expects( $this->once() )
+		$this->validator = $this->createMock( RemovePropertyStatementValidator::class );
+		$this->validator->expects( $this->once() )
 			->method( 'validateAndDeserialize' )
 			->with( $useCaseRequest )
 			->willThrowException( $expectedUseCaseError );
@@ -150,7 +148,7 @@ class RemovePropertyStatementTest extends TestCase {
 		return new RemovePropertyStatement(
 			$this->assertPropertyExists,
 			$this->removeStatement,
-			$this->removePropertyStatementValidator
+			$this->validator
 		);
 	}
 

@@ -46,9 +46,7 @@ class AddPropertyStatementTest extends TestCase {
 		parent::setUp();
 
 		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
-		$this->validator = new AddPropertyStatementValidator(
-			new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() )
-		);
+		$this->validator = new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() );
 		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
 		$this->guidGenerator = new GuidGenerator();
 		$this->propertyUpdater = $this->createStub( PropertyUpdater::class );

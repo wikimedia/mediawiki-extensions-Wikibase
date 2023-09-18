@@ -32,9 +32,7 @@ class GetStatementTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->requestValidator = new GetStatementValidator(
-			new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() )
-		);
+		$this->requestValidator = new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() );
 		$this->statementRetriever = $this->createStub( StatementRetriever::class );
 		$this->getRevisionMetadata = $this->createStub( GetLatestStatementSubjectRevisionMetadata::class );
 	}

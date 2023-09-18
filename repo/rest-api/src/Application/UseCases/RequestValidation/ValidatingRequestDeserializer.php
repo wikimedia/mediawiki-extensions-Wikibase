@@ -2,16 +2,44 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\RequestValidation;
 
+use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\EditMetadataRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItemValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliases\GetItemAliasesValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliasesInLanguage\GetItemAliasesInLanguageValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescription\GetItemDescriptionValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\GetItemDescriptionsValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\GetItemLabelValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabelsValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\GetItemStatementsValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetPropertyValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabels\GetPropertyLabelsValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\GetPropertyStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetPropertyStatementsValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemDescriptionEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemLabelEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\LanguageCodeRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyStatement\PatchPropertyStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PropertyFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdFilterRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyStatement\RemovePropertyStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\ReplacePropertyStatement\ReplacePropertyStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescriptionValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\StatementIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\StatementSerializationRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
@@ -20,7 +48,37 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseRequest;
 /**
  * @license GPL-2.0-or-later
  */
-class ValidatingRequestDeserializer {
+class ValidatingRequestDeserializer
+	implements
+	AddItemStatementValidator,
+	AddPropertyStatementValidator,
+	GetItemValidator,
+	GetItemAliasesValidator,
+	GetItemAliasesInLanguageValidator,
+	GetItemDescriptionValidator,
+	GetItemDescriptionsValidator,
+	GetItemLabelValidator,
+	GetItemLabelsValidator,
+	GetItemStatementValidator,
+	GetItemStatementsValidator,
+	GetPropertyValidator,
+	GetPropertyLabelsValidator,
+	GetPropertyStatementValidator,
+	GetPropertyStatementsValidator,
+	GetStatementValidator,
+	PatchItemLabelsValidator,
+	PatchItemStatementValidator,
+	PatchPropertyStatementValidator,
+	PatchStatementValidator,
+	RemoveItemStatementValidator,
+	RemovePropertyStatementValidator,
+	RemoveStatementValidator,
+	ReplaceItemStatementValidator,
+	ReplacePropertyStatementValidator,
+	ReplaceStatementValidator,
+	SetItemDescriptionValidator,
+	SetItemLabelValidator
+{
 
 	private ValidatingRequestFieldDeserializerFactory $factory;
 	private array $validRequestResults = [];
@@ -32,7 +90,7 @@ class ValidatingRequestDeserializer {
 	/**
 	 * @throws UseCaseError
 	 */
-	public function validateAndDeserialize( UseCaseRequest $request ): array {
+	public function validateAndDeserialize( UseCaseRequest $request ): DeserializedRequestAdapter {
 		$requestObjectId = spl_object_id( $request );
 		if ( array_key_exists( $requestObjectId, $this->validRequestResults ) ) {
 			return $this->validRequestResults[$requestObjectId];
@@ -60,9 +118,9 @@ class ValidatingRequestDeserializer {
 			}
 		}
 
-		$this->validRequestResults[$requestObjectId] = $result;
+		$this->validRequestResults[$requestObjectId] = new DeserializedRequestAdapter( $result );
 
-		return $result;
+		return $this->validRequestResults[$requestObjectId];
 	}
 
 }

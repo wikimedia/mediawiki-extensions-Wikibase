@@ -7,7 +7,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\GetItemDescriptions;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\GetItemDescriptionsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\GetItemDescriptionsResponse;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\GetItemDescriptionsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
@@ -96,9 +95,7 @@ class GetItemDescriptionsTest extends TestCase {
 		return new GetItemDescriptions(
 			$this->getRevisionMetadata,
 			$this->descriptionsRetriever,
-			new GetItemDescriptionsValidator(
-				new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() )
-			)
+			new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() )
 		);
 	}
 

@@ -2,28 +2,16 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels;
 
-use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\DeserializedRequestAdapter;
-use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 
 /**
  * @license GPL-2.0-or-later
  */
-class GetItemLabelsValidator {
-
-	private ValidatingRequestDeserializer $requestDeserializer;
-
-	public function __construct( ValidatingRequestDeserializer $requestDeserializer ) {
-		$this->requestDeserializer = $requestDeserializer;
-	}
+interface GetItemLabelsValidator {
 
 	/**
 	 * @throws UseCaseError
 	 */
-	public function validateAndDeserialize( GetItemLabelsRequest $request ): DeserializedGetItemLabelsRequest {
-		return new class( $this->requestDeserializer->validateAndDeserialize( $request ) )
-			extends DeserializedRequestAdapter implements DeserializedGetItemLabelsRequest {
-		};
-	}
+	public function validateAndDeserialize( GetItemLabelsRequest $request ): DeserializedGetItemLabelsRequest;
 
 }

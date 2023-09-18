@@ -7,7 +7,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabelsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabelsResponse;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabelsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
@@ -98,7 +97,7 @@ class GetItemLabelsTest extends TestCase {
 		return new GetItemLabels(
 			$this->getRevisionMetadata,
 			$this->labelsRetriever,
-			new GetItemLabelsValidator( new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() ) )
+			new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() )
 		);
 	}
 
