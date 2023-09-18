@@ -32,7 +32,7 @@
 	"wikibase-pageinfo-entity-usage-T": "Аталыш",
 	"wikibase-otherprojects": "Башка долбоорлордо",
 	"wikibase-sitelinks-sitename-columnheading": "Тил",
-	"notification-header-page-connection": "<strong>«$‎3»</strong> барагы {{PLURAL:$4|-1=a {{WBREPONAME}}тын элементи|{{WBREPONAME}}тын $4 элементи}} менен {{GENDER:$2|туташтырылды}}.",
+	"notification-header-page-connection": "<strong>$‎3</strong> барагы {{PLURAL:$4|-1=a {{WBREPONAME}}тын элементи|{{WBREPONAME}}тын $4 элементи}} менен {{GENDER:$2|туташтырылды}}.",
 	"wikibase-client-data-bridge-dialog-title": "«‎$1» түзөтүү",
 	"wikibase-client-data-bridge-permissions-error-info": "Чоо-жайы",
 	"wikibase-client-data-bridge-references-heading": "Булактар",

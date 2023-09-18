@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
 			"C.R.",
 			"Candalua",
 			"Macofe",
@@ -54,7 +55,7 @@
 	"apihelp-wbformatvalue-example-2": "Furmata nu valore 'e stringa comm'a na URL int'a n'HTML.",
 	"apihelp-wbgetclaims-param-entity": "ID 'e ll'entità addò s'avessero a uttenè 'asserziune. Servesse si nun è ca l'asserziune GUID songo date.",
 	"apihelp-wbgetclaims-param-property": "Filtro opzionale pe' turnà surtanto l'asserziune cu nu snak prencepale c'avesse 'a pruprietà specificata.",
-	"apihelp-wbgetclaims-param-claim": "Na GUID facenno mmosta d' 'asserzione. Nce vulesse si nun è ca n'entità è data. 'O  GUID è l'identificatore globbale unico pe' n'asserzione, e.g. \"q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F\".",
+	"apihelp-wbgetclaims-param-claim": "Na GUID facenno mmosta d' 'asserzione. Nce vulesse si nun è ca n'entità è data. 'O GUID è l'identificatore globbale unico pe' n'asserzione, e.g. \"q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F\".",
 	"apihelp-wbgetclaims-param-rank": "Filtro opzionale pe' turnà surtanto ll'asserziune c'avessero na classifeca specifica",
 	"apihelp-wbgetclaims-param-props": "Cocche parte 'e ll'asserziune songo turnate comm'a n'opzione. Stu parametro cuntrullasse quale parta se turnasse.",
 	"apihelp-wbgetclaims-example-1": "Piglia-accucchia asserziune pe' n'elemento cu l'ID Q42",
@@ -121,7 +122,7 @@
 	"apihelp-wbremovereferences-param-statement": "Na GUID identificanno 'a dichiarazione p' 'a quale 'o riferimento se stà mpustanno",
 	"apihelp-wbremovereferences-param-summary": "Sommario pe' l'edizione.\nSarrà pre'appiso 'a nu cummento automatecamente criato. 'O lemmeto 'e luongo 'e n'autocommento nziem'a sommario fosse 260 carattere. Pe' piacere stateve accuorte ca tutto pe' coppa fosse nu lemmeto 'e passa e ferma.",
 	"apihelp-wbremovereferences-param-references": "'E hash 'e riferimente ca s'avesser'a luvà",
-	"apihelp-wbremovereferences-example-1": "Lèva 'o riferimento 'e tag \"455481eeac76e6a8af71a6b493c073d54788e7e9\" 'e ll'asserziune cu nu GUID  'e \"Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F\"",
+	"apihelp-wbremovereferences-example-1": "Lèva 'o riferimento 'e tag \"455481eeac76e6a8af71a6b493c073d54788e7e9\" 'e ll'asserziune cu nu GUID 'e \"Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F\"",
 	"apihelp-wbsearchentities-param-search": "Ascìa pe stu testo.",
 	"apihelp-wbsearchentities-param-language": "Ascìa dint'a sta lengua.",
 	"apihelp-wbsearchentities-param-strictlanguage": "Si se stutasse 'a funziona lengua 'e supponta",
@@ -187,7 +188,7 @@
 	"apihelp-wbsetlabel-param-bot": "Nzegna stu cagnamiento comm'a nu bot. Sta bannera 'URL sarrà surtanto rispettata si l'utente appartene a 'o gruppo \"bot\".",
 	"apihelp-wbsetlabel-param-language": "Lengua 'e ll'etichetta",
 	"apihelp-wbsetlabel-param-value": "Valore 'e ll'etichetta",
-	"apihelp-wbsetlabel-example-1": "Mpusta 'a stringa \"Wikimedia\" p' 'a paggena cu ll'ID \"Q42\" comm'a n'etichetta 'n lengua ngrese  pòrta chesta a na bella stampata json",
+	"apihelp-wbsetlabel-example-1": "Mpusta 'a stringa \"Wikimedia\" p' 'a paggena cu ll'ID \"Q42\" comm'a n'etichetta 'n lengua ngrese pòrta chesta a na bella stampata json",
 	"apihelp-wbsetlabel-example-2": "Mpusta l'etichetta 'e lengua ngrese a \"Earth\" pe' ll'elemento c' 'o sitelink enwiki => \"Earth\".",
 	"apihelp-wbsetqualifier-param-claim": "Na GUID identificanno l'asserzione p' 'a quale l'identificatore s'èra mpustato",
 	"apihelp-wbsetqualifier-param-property": "ID d' 'e pruprieta snak.\nAvess'a essere dato quanno se criava nu qualificatore nuovo o se cagnava 'a pruprietà 'e n'identificatore ch'esisteva già",

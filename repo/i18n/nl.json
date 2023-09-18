@@ -151,7 +151,7 @@
 	"wikibase-copyrighttooltip-acknowledge": "Ik accepteer deze voorwaarden voor mijn toekomstige bewerkingen. Geef dit bericht niet opnieuw weer.",
 	"wikibase-entityselector-more": "meer",
 	"wikibase-entityselector-notfound": "Geen overeenkomsten gevonden",
-	"wikibase-anonymouseditwarning": "Waarschuwing: u bent niet aangemeld. Uw [https://nl.wikipedia.org/wiki/IP-adres IP-adres] is publiekelijk zichtbaar wanneer uw bewerkingen maakt. Wanneer u zich <strong>[[Special:UserLogin|aanmeld]]</strong> of een <strong>[[Special:CreateAccount|account aanmaakt]]</strong> worden uw bewerkingen aan een gebruikersnaam gekoppeld, naast andere voordelen.",
+	"wikibase-anonymouseditwarning": "Waarschuwing: u bent niet aangemeld. Uw [https://nl.wikipedia.org/wiki/IP-adres IP-adres] is publiekelijk zichtbaar wanneer u bewerkingen maakt. Wanneer u zich <strong>[$1 aanmeldt]</strong> of een <strong>[$2 account aanmaakt]</strong> worden uw bewerkingen aan een gebruikersnaam gekoppeld, naast andere voordelen.",
 	"wikibase-anonymouseditwarning-heading": "U bent niet aangemeld",
 	"wikibase-anonymouseditwarning-message": "Uw IP-adres is publiekelijk zichtbaar wanneer uw bewerkingen maakt. Wanneer u zich aanmeld of een account aanmaakt worden uw bewerkingen aan een gebruikersnaam toegewezen, naast andere voordelen.",
 	"wikibase-anonymouseditwarning-dismiss-persist": "Waarschuw me wanneer ik niet aangemeld ben.",

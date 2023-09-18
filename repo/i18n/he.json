@@ -141,7 +141,7 @@
 	"wikibase-copyrighttooltip-acknowledge": "קיבלתי את התנאים האלה לכל העריכות העתידיות שלי. אל תראו לי את ההודעה הזאת שוב.",
 	"wikibase-entityselector-more": "עוד",
 	"wikibase-entityselector-notfound": "לא נמצאה התאמה",
-	"wikibase-anonymouseditwarning": "אזהרה: לא נכנסת לחשבון. [https://he.wikipedia.org/wiki/%D7%9B%D7%AA%D7%95%D7%91%D7%AA_IP כתובת ה־IP] שלך תוצג לציבור אם {{GENDER:|תעשה|תעשי}} עריכות כלשהן. אם <strong>[[Special:UserLogin|{{GENDER:|תיכנס|תיכנסי}}]]</strong> או <strong>[[Special:CreateAccount|{{GENDER:|תיצור|תיצרי}} חשבון]]</strong>, העריכות שלך תשויכנה לשם משתמש, ויש לזה עוד יתרונות.",
+	"wikibase-anonymouseditwarning": "אזהרה: לא נכנסת לחשבון. [https://he.wikipedia.org/wiki/%D7%9B%D7%AA%D7%95%D7%91%D7%AA_IP כתובת ה־IP] שלך תוצג לציבור אם {{GENDER:|תעשה|תעשי}} עריכות כלשהן. אם <strong>[$1 {{GENDER:|תיכנס|תיכנסי}}]</strong> או <strong>[$2 {{GENDER:|תיצור|תיצרי}} חשבון]</strong>, העריכות שלך תשויכנה לשם משתמש, ויש לזה עוד יתרונות.",
 	"wikibase-anonymouseditwarning-heading": "לא נכנסת לחשבון",
 	"wikibase-anonymouseditwarning-message": "כתובת ה־IP שלך תהיה מוצגת לכולם אחרי ביצוע עריכות. יצירת חשבון כניסה אליו תגרום לכך שהעריכות שלך תיוחסנה לשם המשתמש שלך, ויש לזה גם יתרונות נוספים.",
 	"wikibase-anonymouseditwarning-dismiss-persist": "להזהיר אותי כשלא נכנסתי לחשבון.",

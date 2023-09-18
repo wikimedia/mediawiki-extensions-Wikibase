@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
 			"Purodha"
 		]
 	},
@@ -12,7 +13,7 @@
 	"apihelp-wbmergeitems-param-toid": "De Kännong, noh woh zesamme lähje",
 	"apihelp-wbmergeitems-param-summary": "Zersammefaßong för de Änderong.\nDerförhr weed ene automattesch jennerehrte Täx eenjeföhsch. De Jesampläng för se beijds zersamme es 260 Zeijsche. Alles, wat ze lang es, weed automattesch afjeschnedde un flüsch fott.",
 	"apihelp-wbmergeitems-param-bot": "Makkehr heh di Änderong als eine vun enem Bot_Projramm. Dat hät blohß ene Effäk, wann dä Metmaacher och en dä Metmaacherjopp \n<code lang=\"en\" xml:lang=\"en\" dir=\"ltr\">bot</code> dren es.",
-	"apihelp-wbmergeitems-example-3": "Läht de Dahte vun <code>Q96</code> noh <code>Q99</code> zesamme un övverjeiht derbei alle Lengks  di neit zesamme paße.",
+	"apihelp-wbmergeitems-example-3": "Läht de Dahte vun <code>Q96</code> noh <code>Q99</code> zesamme un övverjeiht derbei alle Lengks di neit zesamme paße.",
 	"apihelp-wbparsevalue-param-parser": "De Kännong vun däm „<code lang=\"en\" xml:lang=\"en\" dir=\"ltr\">ValueParser</code>“, dä jebruch wähde sull. <span class=\"apihelp-deprecated\">Övvehollt</span>. Doht der Parramehter „<vr lang=\"en\" xml:lang=\"en\" dir=\"ltr\">ValueParser</var>“ doför nämme.",
 	"apihelp-wbparsevalue-param-values": "De Wääte zom pahse",
 	"apihelp-wbparsevalue-example-1": "Donn ene einfache Reih vun Zeijsche en e Objäk vun dä Zoot „<code lang=\"en\" xml:lang=\"en\" dir=\"ltr\">StringValue </code>“ wandelle.",

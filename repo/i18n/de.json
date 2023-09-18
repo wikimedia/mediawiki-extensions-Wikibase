@@ -158,7 +158,7 @@
 	"wikibase-copyrighttooltip-acknowledge": "Ich akzeptiere diese Bedingungen für meine zukünftigen Bearbeitungen. Diese Nachricht nicht mehr anzeigen.",
 	"wikibase-entityselector-more": "mehr",
 	"wikibase-entityselector-notfound": "Kein Treffer gefunden",
-	"wikibase-anonymouseditwarning": "Warnung: Du bist nicht angemeldet. Deine [https://de.wikipedia.org/wiki/IP-Adresse IP-Adresse] wird öffentlich sichtbar sein, falls du Bearbeitungen durchführst. Wenn du dich <strong>[[Special:UserLogin|anmeldest]]</strong> oder <strong>[[Special:CreateAccount|ein Benutzerkonto erstellst]]</strong>, werden neben anderen Vorteilen deine Bearbeitungen einem Benutzernamen zugeordnet.",
+	"wikibase-anonymouseditwarning": "Warnung: Du bist nicht angemeldet. Deine [https://de.wikipedia.org/wiki/IP-Adresse IP-Adresse] wird öffentlich sichtbar sein, falls du Bearbeitungen durchführst. Wenn du dich <strong>[$1 anmeldest]</strong> oder <strong>[$2 ein Benutzerkonto erstellst]</strong>, werden neben anderen Vorteilen deine Bearbeitungen einem Benutzernamen zugeordnet.",
 	"wikibase-anonymouseditwarning-heading": "Du bist nicht angemeldet",
 	"wikibase-anonymouseditwarning-message": "Derzeit wird deine IP-Adresse öffentlich sichtbar sein, wenn du irgendwelche Bearbeitungen durchführst. Wenn du dich anmeldest oder ein Benutzerkonto erstellst, werden deine Bearbeitungen neben anderen Vorteilen deinem Benutzerkonto zugeordnet.",
 	"wikibase-anonymouseditwarning-dismiss-persist": "Warne mich immer, wenn ich nicht angemeldet bin.",

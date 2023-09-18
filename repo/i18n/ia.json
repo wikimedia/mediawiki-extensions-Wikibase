@@ -128,7 +128,7 @@
 	"wikibase-copyrighttooltip-acknowledge": "Io accepta iste conditiones pro mi modificationes futur. Non monstrar iste message de novo.",
 	"wikibase-entityselector-more": "plus",
 	"wikibase-entityselector-notfound": "Nulle correspondentia ha essite trovate",
-	"wikibase-anonymouseditwarning": "Attention: Tu non ha aperite session. Tu [https://ia.wikipedia.org/wiki/Adresse_IP adresse IP] essera publicamente visibile si tu face modificationes. Si tu <strong>[[Special:UserLogin|aperi session]]</strong> o <strong>[[Special:CreateAccount|crea un conto]]</strong>, le modificationes essera attribuite a tu nomine de usator, inter altere avantages.",
+	"wikibase-anonymouseditwarning": "Attention: Tu non ha aperite session. Tu [https://ia.wikipedia.org/wiki/Adresse_IP adresse IP] essera publicamente visibile si tu face modificationes. Si tu <strong>[$1 aperi session]</strong> o <strong>[$2 crea un conto]</strong>, le modificationes essera attribuite a tu nomine de usator, inter altere avantages.",
 	"wikibase-anonymouseditwarning-heading": "Tu non ha aperite session",
 	"wikibase-anonymouseditwarning-message": "Actualmente tu adresse IP essera visibile publicamente si tu face alcun modification. Si tu aperi session o crea un conto, tu modificationes essera attribuite a tu nomine de usator, inter altere avantages.",
 	"wikibase-anonymouseditwarning-dismiss-persist": "Advertir me quandocunque io non ha aperite session.",

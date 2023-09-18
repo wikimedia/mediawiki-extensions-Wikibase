@@ -129,7 +129,7 @@
 	"wikibase-copyrighttooltip-acknowledge": "Прихватам ове услове за своје будуће измене. Не приказуј ову поруку поново.",
 	"wikibase-entityselector-more": "још",
 	"wikibase-entityselector-notfound": "Нема подударања",
-	"wikibase-anonymouseditwarning": "Упозорење: Нисте пријављени. Ваша IP адреса биће јавно видљива ако начините било какву измену. <strong>[[Special:UserLogin|Пријавите се]]</strong> или <strong>[[Special:CreateAccount|отворите налог]]</strong>. Тиме ће ваши доприноси бити приписивани корисничком имену које одаберете и стећи ћете многе погодности.",
+	"wikibase-anonymouseditwarning": "Упозорење: Нисте пријављени. Ваша IP адреса биће јавно видљива ако начините било какву измену. <strong>[$1 Пријавите се]</strong> или <strong>[$2 отворите налог]</strong>. Тиме ће ваши доприноси бити приписивани корисничком имену које одаберете и стећи ћете многе погодности.",
 	"wikibase-anonymouseditwarning-heading": "Нисте пријављени",
 	"wikibase-anonymouseditwarning-message": "Ваша IP адреса биће јавно видљива ако начините било какву измену. Пријавите се или отворите налог. Тиме ће Ваши доприноси бити приписивани корисничком имену које одаберете и стећи ћете многе погодности.",
 	"wikibase-anonymouseditwarning-dismiss-persist": "Упозори ме када нисам пријављен/а.",

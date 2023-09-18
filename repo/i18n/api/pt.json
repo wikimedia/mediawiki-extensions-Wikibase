@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
 			"Athena in Wonderland",
 			"Fúlvio",
 			"Hamilton Abreu",
@@ -107,7 +108,7 @@
 	"apihelp-wbmergeitems-param-tags": "Etiquetas de modificação a aplicar às revisões.",
 	"apihelp-wbmergeitems-param-bot": "Marcar esta edição como uma edição por robô. Esta etiqueta URL só será respeitada se o utilizador pertencer ao grupo \"robôs\".",
 	"apihelp-wbmergeitems-example-1": "Funde os dados de <samp>$1</samp> nos de <samp>$2</samp>",
-	"apihelp-wbmergeitems-example-3": "Funde os dados de <samp>$1</samp> nos de <samp>$2</samp>, ignorando  todas as hiperligações intersites que estejam em conflito",
+	"apihelp-wbmergeitems-example-3": "Funde os dados de <samp>$1</samp> nos de <samp>$2</samp>, ignorando todas as hiperligações intersites que estejam em conflito",
 	"apihelp-wbmergeitems-example-4": "Funde os dados de <samp>$1</samp> nos de <samp>$2</samp>, ignorando todas as hiperligações intersites e descrições que estejam em conflito",
 	"apihelp-wbparsevalue-summary": "Analisa os valores usando um analisador de valores (<code>ValueParser</code>)",
 	"apihelp-wbparsevalue-param-parser": "Identificador do analisador de valores (<code>ValueParser</code>) a ser usado. <span class=\"apihelp-deprecated\">Obsoleto</span>. Em vez deste parâmetro, use o parâmetro <var>datatype</var>.",

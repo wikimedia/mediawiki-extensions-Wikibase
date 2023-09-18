@@ -135,7 +135,7 @@
 	"wikibase-copyrighttooltip-acknowledge": "আমি আমার ভবিষ্যত সম্পাদনাগুলি জন্য এই শর্তাবলী গ্রহণ করলাম। পুনরায় এই বার্তাটি দেখাবেন না।",
 	"wikibase-entityselector-more": "আরও",
 	"wikibase-entityselector-notfound": "মিলে যায় এমন কিছু পাওয়া যায়নি।",
-	"wikibase-anonymouseditwarning": "সতর্কতা: আপনি প্রবেশ করেন নি। আপনি কোন সম্পাদনা করলে এই পাতার ইতিহাসে আপনার [https://bn.wikipedia.org/wiki/আইপি_ঠিকানা আইপি ঠিকানা] সার্বজনীনভাবে দৃশ্যমান হবে। আপনি যদি <strong>[[Special:UserLogin|প্রবেশ করেন]]</strong> বা <strong>[[Special:CreateAccount|একটি অ্যাকাউন্ট তৈরি করেন]]</strong>, তাহলে আপনার সম্পাদনায় আপনার নামকে কৃতিত্ব দেয়া হবে ও আরও অনেক সুবিধা পাবেন।",
+	"wikibase-anonymouseditwarning": "সতর্কতা: আপনি প্রবেশ করেন নি। আপনি কোনও সম্পাদনা করলে এই পাতার ইতিহাসে আপনার [https://bn.wikipedia.org/wiki/আইপি_ঠিকানা আইপি ঠিকানা] সার্বজনীনভাবে দৃশ্যমান হবে। আপনি যদি <strong>[$1 প্রবেশ করেন]</strong> বা <strong>[$2 একটি অ্যাকাউন্ট তৈরি করেন]</strong>, তাহলে আপনার সম্পাদনায় আপনার নামকে কৃতিত্ব দেয়া হবে ও আরও অনেক সুবিধা পাবেন।",
 	"wikibase-anonymouseditwarning-heading": "আপনি প্রবেশ করেন নি",
 	"wikibase-anonymouseditwarning-message": "আপনি যদি কোন সম্পাদনা করেন, আপনার আইপি ঠিকানা সার্বজনীনভাবে দৃশ্যমান হবে। আপনি যদি প্রবেশ করেন বা একটি অ্যাকাউন্ট তৈরি করেন, তাহলে আপনার সম্পাদনায় আপনার নামকে কৃতিত্ব দেয়া হবে ও আরও অনেক সুবিধা পাবেন।",
 	"wikibase-anonymouseditwarning-dismiss-button": "প্রবেশ ছাড়াই সম্পাদনা করুন",
