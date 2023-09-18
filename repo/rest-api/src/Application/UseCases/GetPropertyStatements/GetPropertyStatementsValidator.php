@@ -2,28 +2,16 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements;
 
-use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\DeserializedRequestAdapter;
-use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 
 /**
  * @license GPL-2.0-or-later
  */
-class GetPropertyStatementsValidator {
-
-	private ValidatingRequestDeserializer $requestDeserializer;
-
-	public function __construct( ValidatingRequestDeserializer $requestDeserializer ) {
-		$this->requestDeserializer = $requestDeserializer;
-	}
+interface GetPropertyStatementsValidator {
 
 	/**
 	 * @throws UseCaseError
 	 */
-	public function validateAndDeserialize( GetPropertyStatementsRequest $request ): DeserializedGetPropertyStatementsRequest {
-		return new class( $this->requestDeserializer->validateAndDeserialize( $request ) )
-			extends DeserializedRequestAdapter implements DeserializedGetPropertyStatementsRequest {
-		};
-	}
+	public function validateAndDeserialize( GetPropertyStatementsRequest $request ): DeserializedGetPropertyStatementsRequest;
 
 }

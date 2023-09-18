@@ -31,9 +31,7 @@ class ReplacePropertyStatementTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->validator = new ReplacePropertyStatementValidator(
-			new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() )
-		);
+		$this->validator = new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() );
 		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
 		$this->replaceStatement = $this->createStub( ReplaceStatement::class );
 	}

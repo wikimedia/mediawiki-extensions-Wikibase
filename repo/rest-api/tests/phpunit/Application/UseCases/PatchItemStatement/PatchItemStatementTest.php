@@ -28,16 +28,14 @@ class PatchItemStatementTest extends TestCase {
 
 	use EditMetadataHelper;
 
-	private PatchItemStatementValidator $patchItemStatementValidator;
+	private PatchItemStatementValidator $validator;
 	private AssertItemExists $assertItemExists;
 	private PatchStatement $patchStatement;
 
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->patchItemStatementValidator = new PatchItemStatementValidator(
-			new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() )
-		);
+		$this->validator = new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() );
 		$this->assertItemExists = $this->createStub( AssertItemExists::class );
 		$this->patchStatement  = $this->createStub( PatchStatement::class );
 	}
@@ -90,8 +88,8 @@ class PatchItemStatementTest extends TestCase {
 		$useCaseRequest = $this->createStub( PatchItemStatementRequest::class );
 		$expectedUseCaseError = $this->createStub( UseCaseError::class );
 
-		$this->patchItemStatementValidator = $this->createMock( PatchItemStatementValidator::class );
-		$this->patchItemStatementValidator->expects( $this->once() )
+		$this->validator = $this->createMock( PatchItemStatementValidator::class );
+		$this->validator->expects( $this->once() )
 			->method( 'validateAndDeserialize' )
 			->with( $useCaseRequest )
 			->willThrowException( $expectedUseCaseError );
@@ -153,7 +151,7 @@ class PatchItemStatementTest extends TestCase {
 
 	private function newUseCase(): PatchItemStatement {
 		return new PatchItemStatement(
-			$this->patchItemStatementValidator,
+			$this->validator,
 			$this->assertItemExists,
 			$this->patchStatement,
 		);

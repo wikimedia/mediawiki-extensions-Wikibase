@@ -69,6 +69,6 @@ class GetPropertyTest extends TestCase {
 	}
 
 	private function newValidator(): GetPropertyValidator {
-		return new GetPropertyValidator( new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() ) );
+		return new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() );
 	}
 }

@@ -2,27 +2,16 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement;
 
-use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\DeserializedRequestAdapter;
-use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 
 /**
  * @license GPL-2.0-or-later
  */
-class ReplaceItemStatementValidator {
-
-	private ValidatingRequestDeserializer $requestDeserializer;
-
-	public function __construct( ValidatingRequestDeserializer $requestDeserializer ) {
-		$this->requestDeserializer = $requestDeserializer;
-	}
+interface ReplaceItemStatementValidator {
 
 	/**
 	 * @throws UseCaseError
 	 */
-	public function validateAndDeserialize( ReplaceItemStatementRequest $request ): DeserializedReplaceItemStatementRequest {
-		return new class( $this->requestDeserializer->validateAndDeserialize( $request ) )
-			extends DeserializedRequestAdapter implements DeserializedReplaceItemStatementRequest {
-		};
-	}
+	public function validateAndDeserialize( ReplaceItemStatementRequest $request ): DeserializedReplaceItemStatementRequest;
+
 }

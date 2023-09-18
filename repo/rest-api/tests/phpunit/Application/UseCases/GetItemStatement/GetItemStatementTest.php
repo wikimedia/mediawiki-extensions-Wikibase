@@ -30,9 +30,7 @@ class GetItemStatementTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->validator = new GetItemStatementValidator(
-			new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() )
-		);
+		$this->validator = new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() );
 		$this->assertItemExists = $this->createStub( AssertItemExists::class );
 		$this->getStatement = $this->createStub( GetStatement::class );
 	}

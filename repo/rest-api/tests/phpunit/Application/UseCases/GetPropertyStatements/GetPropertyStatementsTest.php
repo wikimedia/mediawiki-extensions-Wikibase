@@ -7,7 +7,6 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestPropertyRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetPropertyStatements;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetPropertyStatementsRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetPropertyStatementsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
@@ -116,9 +115,7 @@ class GetPropertyStatementsTest extends TestCase {
 
 	private function newUseCase(): GetPropertyStatements {
 		return new GetPropertyStatements(
-			new GetPropertyStatementsValidator(
-				new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() )
-			),
+			new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() ),
 			$this->statementsRetriever,
 			$this->getRevisionMetadata
 		);

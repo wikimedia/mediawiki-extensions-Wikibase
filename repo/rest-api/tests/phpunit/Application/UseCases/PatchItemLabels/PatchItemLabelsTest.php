@@ -75,11 +75,7 @@ class PatchItemLabelsTest extends TestCase {
 		$this->getRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
 		$this->getRevisionMetadata->method( 'execute' )
 			->willReturn( [ 321, '20201111070707' ] );
-		$this->validator = new PatchItemLabelsValidator(
-			new ValidatingRequestDeserializer(
-				TestValidatingRequestFieldDeserializerFactory::newFactory()
-			)
-		);
+		$this->validator = new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() );
 	}
 
 	public function testHappyPath(): void {

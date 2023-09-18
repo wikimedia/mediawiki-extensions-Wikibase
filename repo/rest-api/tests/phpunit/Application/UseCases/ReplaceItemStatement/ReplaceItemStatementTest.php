@@ -28,16 +28,14 @@ class ReplaceItemStatementTest extends TestCase {
 
 	use EditMetadataHelper;
 
-	private ReplaceItemStatementValidator $replaceItemStatementValidator;
+	private ReplaceItemStatementValidator $validator;
 	private AssertItemExists $assertItemExists;
 	private ReplaceStatement $replaceStatement;
 
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->replaceItemStatementValidator = new ReplaceItemStatementValidator(
-			new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() )
-		);
+		$this->validator = new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() );
 		$this->assertItemExists = $this->createStub( AssertItemExists::class );
 		$this->replaceStatement  = $this->createStub( ReplaceStatement::class );
 	}
@@ -70,8 +68,8 @@ class ReplaceItemStatementTest extends TestCase {
 		$useCaseRequest = $this->createStub( ReplaceItemStatementRequest::class );
 		$expectedUseCaseError = $this->createStub( UseCaseError::class );
 
-		$this->replaceItemStatementValidator = $this->createMock( ReplaceItemStatementValidator::class );
-		$this->replaceItemStatementValidator->expects( $this->once() )
+		$this->validator = $this->createMock( ReplaceItemStatementValidator::class );
+		$this->validator->expects( $this->once() )
 			->method( 'validateAndDeserialize' )
 			->with( $useCaseRequest )
 			->willThrowException( $expectedUseCaseError );
@@ -143,7 +141,7 @@ class ReplaceItemStatementTest extends TestCase {
 
 	private function newUseCase(): ReplaceItemStatement {
 		return new ReplaceItemStatement(
-			$this->replaceItemStatementValidator,
+			$this->validator,
 			$this->assertItemExists,
 			$this->replaceStatement,
 		);

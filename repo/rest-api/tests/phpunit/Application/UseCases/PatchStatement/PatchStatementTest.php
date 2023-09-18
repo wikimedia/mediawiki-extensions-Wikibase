@@ -61,9 +61,7 @@ class PatchStatementTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->useCaseValidator = new PatchStatementValidator(
-			new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() )
-		);
+		$this->useCaseValidator = new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() );
 		$this->patchedStatementValidator = $this->createStub( PatchedStatementValidator::class );
 		$this->statementRetriever = $this->createStub( StatementRetriever::class );
 		$this->statementUpdater = $this->createStub( StatementUpdater::class );

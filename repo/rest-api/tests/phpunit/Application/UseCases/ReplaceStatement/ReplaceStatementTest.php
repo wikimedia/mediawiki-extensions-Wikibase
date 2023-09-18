@@ -47,9 +47,7 @@ class ReplaceStatementTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->replaceStatementValidator = new ReplaceStatementValidator(
-			new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() )
-		);
+		$this->replaceStatementValidator = new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() );
 		$this->assertStatementSubjectExists = $this->createStub( AssertStatementSubjectExists::class );
 		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
 		$this->statementUpdater = $this->createStub( StatementUpdater::class );

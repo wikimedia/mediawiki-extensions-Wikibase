@@ -13,7 +13,6 @@ use Wikibase\Repo\RestApi\Application\UseCases\AssertStatementSubjectExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatementRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
@@ -185,9 +184,7 @@ class RemoveStatementTest extends TestCase {
 
 	private function newUseCase(): RemoveStatement {
 		return new RemoveStatement(
-			new RemoveStatementValidator(
-				new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() )
-			),
+			new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() ),
 			$this->assertUserIsAuthorized,
 			$this->assertStatementSubjectExists,
 			$this->statementRetriever,
