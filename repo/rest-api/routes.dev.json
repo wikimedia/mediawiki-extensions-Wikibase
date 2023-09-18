@@ -3,5 +3,10 @@
 		"path": "/wikibase/v0/entities/properties/{property_id}/labels",
 		"method": "GET",
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetPropertyLabelsRouteHandler::factory"
+	},
+	{
+		"path": "/wikibase/v0/entities/properties/{property_id}/statements/{statement_id}",
+		"method": "DELETE",
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\RemovePropertyStatementRouteHandler::factory"
 	}
 ]

@@ -159,6 +159,13 @@ module.exports = {
 			.withPathParam( 'statement_id', statementId );
 	},
 
+	newRemovePropertyStatementRequestBuilder( propertyId, statementId ) {
+		return new RequestBuilder()
+			.withRoute( 'DELETE', '/entities/properties/{property_id}/statements/{statement_id}' )
+			.withPathParam( 'property_id', propertyId )
+			.withPathParam( 'statement_id', statementId );
+	},
+
 	newRemoveStatementRequestBuilder( statementId ) {
 		return new RequestBuilder()
 			.withRoute( 'DELETE', '/statements/{statement_id}' )

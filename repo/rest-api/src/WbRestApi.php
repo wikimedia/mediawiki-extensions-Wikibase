@@ -34,6 +34,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemState
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyStatement\PatchPropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyStatement\RemovePropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplacePropertyStatement\ReplacePropertyStatement;
@@ -146,6 +147,11 @@ class WbRestApi {
 	public static function getRemoveItemStatement( ContainerInterface $services = null ): RemoveItemStatement {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.RemoveItemStatement' );
+	}
+
+	public static function getRemovePropertyStatement( ContainerInterface $services = null ): RemovePropertyStatement {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.RemovePropertyStatement' );
 	}
 
 	public static function getRemoveStatement( ContainerInterface $services = null ): RemoveStatement {

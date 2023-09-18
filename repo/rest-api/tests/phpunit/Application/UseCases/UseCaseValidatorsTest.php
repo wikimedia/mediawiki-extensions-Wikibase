@@ -67,6 +67,9 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementVali
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\DeserializedRemoveItemStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyStatement\DeserializedRemovePropertyStatementRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyStatement\RemovePropertyStatementRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyStatement\RemovePropertyStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\DeserializedRemoveStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatementValidator;
@@ -100,6 +103,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabelValidato
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatementValidator
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsValidator
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatementValidator
+ * @covers \Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyStatement\RemovePropertyStatementValidator
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatementValidator
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabelValidator
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescriptionValidator
@@ -198,6 +202,11 @@ class UseCaseValidatorsTest extends TestCase {
 			RemoveItemStatementValidator::class,
 			RemoveItemStatementRequest::class,
 			DeserializedRemoveItemStatementRequest::class,
+		];
+		yield [
+			RemovePropertyStatementValidator::class,
+			RemovePropertyStatementRequest::class,
+			DeserializedRemovePropertyStatementRequest::class,
 		];
 		yield [
 			RemoveStatementValidator::class,
