@@ -171,7 +171,7 @@
 	"wikibase-copyrighttooltip-acknowledge": "Acepto estos términos para mis futuras contribuciones. No volver a mostrar este mensaje otra vez.",
 	"wikibase-entityselector-more": "más",
 	"wikibase-entityselector-notfound": "No se encontraron coincidencias",
-	"wikibase-anonymouseditwarning": "Atención: no has accedido a tu cuenta. Tu [https://es.wikipedia.org/wiki/Dirección_IP dirección IP] será visible públicamente si realizas ediciones. Si <strong>[[Special:UserLogin|accedes]]</strong> o <strong>[[Special:CreateAccount|creas una cuenta]]</strong>, tus ediciones se atribuirán a un nombre de usuario, entre otros beneficios.",
+	"wikibase-anonymouseditwarning": "Atención: no has accedido a tu cuenta. Tu [https://es.wikipedia.org/wiki/Dirección_IP dirección IP] será visible públicamente si realizas ediciones. Si <strong>[$1 accedes]</strong> o <strong>[$2 creas una cuenta]</strong>, tus ediciones se atribuirán a un nombre de usuario, entre otros beneficios.",
 	"wikibase-anonymouseditwarning-heading": "No has iniciado sesión",
 	"wikibase-anonymouseditwarning-message": "Tu dirección IP será visible al público si haces cualquier edición. Si inicias sesión o creas una cuenta tus ediciones se atribuirán a tu nombre de usuario, entre otros beneficios.",
 	"wikibase-anonymouseditwarning-dismiss-persist": "Avisarme cuando no haya accedido a mi cuenta.",

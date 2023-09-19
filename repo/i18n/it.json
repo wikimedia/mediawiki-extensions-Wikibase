@@ -146,7 +146,7 @@
 	"wikibase-copyrighttooltip-acknowledge": "Accetto questi termini per le mie future modifiche. Non mostrare di nuovo questo messaggio.",
 	"wikibase-entityselector-more": "altro",
 	"wikibase-entityselector-notfound": "Nessun risultato trovato",
-	"wikibase-anonymouseditwarning": "Attenzione: non hai effettuato l'accesso. Il tuo [https://it.wikipedia.org/wiki/Indirizzo_IP indirizzo IP] sarà visibile pubblicamente se effettuerai qualsiasi modifica. Se <strong>[[Special:UserLogin|accedi]]</strong> o <strong>[[Special:CreateAccount|crei un'utenza]]</strong>, le tue modifiche saranno attribuite al tuo nome utente, oltre ad altri benefici.",
+	"wikibase-anonymouseditwarning": "Attenzione: non hai effettuato l'accesso. Il tuo [https://it.wikipedia.org/wiki/Indirizzo_IP indirizzo IP] sarà visibile pubblicamente se effettuerai qualsiasi modifica. Se <strong>[$1 accedi]</strong> o <strong>[$2 crei un'utenza]</strong>, le tue modifiche saranno attribuite al tuo nome utente, oltre ad altri benefici.",
 	"wikibase-anonymouseditwarning-heading": "Non hai effettuato l'accesso",
 	"wikibase-anonymouseditwarning-message": "Attualmente il tuo indirizzo IP sarà visibile pubblicamente se effettuerai qualsiasi modifica. Se accedi o crei un'utenza, le tue modifiche saranno attribuite al tuo nome utente, oltre ad altri benefici.",
 	"wikibase-anonymouseditwarning-dismiss-button": "Modifica senza effettuare l'accesso",

@@ -133,7 +133,7 @@
 	"wikibase-copyrighttooltip-acknowledge": "Te pogoje sprejmem za vsa svoja prihodnja urejanja. Tega sporočila ne prikaži več.",
 	"wikibase-entityselector-more": "več",
 	"wikibase-entityselector-notfound": "Ni zadetkov.",
-	"wikibase-anonymouseditwarning": "Opozorilo: Niste prijavljeni. Vaš [https://sl.wikipedia.org/wiki/IP-naslov IP-naslov] bo javno viden, če naredite kakršno koli urejanje. Če se <strong>[[Special:UserLogin|prijavite]]</strong> ali <strong>[[Special:CreateAccount|ustvarite račun]]</strong>, bodo vaša urejanja pripisana vašemu uporabniškemu imenu skupaj z drugimi prednostmi.",
+	"wikibase-anonymouseditwarning": "Opozorilo: Niste prijavljeni. Č\ne boste opravili kakršno koli urejanje, bo vaš IP-naslov javno viden. Če se boste <strong>[$1 prijavili]</strong> ali če si boste <strong>[$2 ustvarili račun]</strong>, bodo poleg drugih prednosti vaša urejanja pripisana vašemu uporabniškemu imenu.",
 	"wikibase-anonymouseditwarning-heading": "Niste prijavljeni.",
 	"wikibase-anonymouseditwarning-message": "Trenutno bo vaš IP-naslov javno viden, če boste opravili kakšno urejanje. Če se boste prijavili ali če si boste ustvarili račun, bodo poleg drugih koristi vaši prispevki pripisani vašemu uporabniškemu imenu.",
 	"wikibase-anonymouseditwarning-dismiss-persist": "Opozori me, če nisem {{GENDER:|prijavljen|prijavljena|prijavljen_a}}",

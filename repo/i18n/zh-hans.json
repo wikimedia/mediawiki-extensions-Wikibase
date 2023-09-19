@@ -160,7 +160,7 @@
 	"wikibase-copyrighttooltip-acknowledge": "我接受对我未来的编辑也采用这些条款。不再显示该信息。",
 	"wikibase-entityselector-more": "更多",
 	"wikibase-entityselector-notfound": "未找到匹配项",
-	"wikibase-anonymouseditwarning": "警告：您尚未登录。若您有做出任何编辑，会以您的[https://zh.wikipedia.org/wiki/IP%E5%9C%B0%E5%9D%80 IP地址]来公开出。若您有<strong>[[Special:UserLogin|登录]]</strong>或是<strong>[[Special:CreateAccount|创建账号]]</strong>，您做出的编辑会归在您的用户名之下。",
+	"wikibase-anonymouseditwarning": "警告：您尚未登录。若您有做出任何编辑，会以您的[https://zh.wikipedia.org/wiki/IP%E5%9C%B0%E5%9D%80 IP地址]来公开出。若您有<strong>[$1 登录]</strong>或是<strong>[$2 创建账号]</strong>，您做出的编辑会归在您的用户名之下。",
 	"wikibase-anonymouseditwarning-heading": "您尚未登录。",
 	"wikibase-anonymouseditwarning-message": "保存本次编辑后，将公开显示您当前的ip地址。现在登录或注册账号，您将能以用户身份保存编辑，同时还有其他权益。",
 	"wikibase-anonymouseditwarning-dismiss-persist": "每当我没有登录时警告我。",
