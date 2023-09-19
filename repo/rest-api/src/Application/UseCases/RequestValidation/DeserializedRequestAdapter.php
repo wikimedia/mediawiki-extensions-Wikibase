@@ -11,17 +11,6 @@ use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\DeserializedAddItemStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\DeserializedAddPropertyStatementRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\DeserializedEditMetadataRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\DeserializedItemDescriptionEditRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\DeserializedItemFieldsRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\DeserializedItemIdRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\DeserializedItemLabelEditRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\DeserializedLanguageCodeRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\DeserializedPropertyFieldsRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\DeserializedPropertyIdFilterRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\DeserializedPropertyIdRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\DeserializedStatementIdRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\DeserializedStatementSerializationRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\EditMetadataRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\DeserializedGetItemRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliases\DeserializedGetItemAliasesRequest;
@@ -62,20 +51,6 @@ use Wikibase\Repo\RestApi\Domain\Model\UserProvidedEditMetadata;
  * @license GPL-2.0-or-later
  */
 class DeserializedRequestAdapter implements
-	// individual request field interfaces
-	DeserializedItemIdRequest,
-	DeserializedPropertyIdRequest,
-	DeserializedStatementIdRequest,
-	DeserializedPropertyIdFilterRequest,
-	DeserializedLanguageCodeRequest,
-	DeserializedItemFieldsRequest,
-	DeserializedPropertyFieldsRequest,
-	DeserializedStatementSerializationRequest,
-	DeserializedEditMetadataRequest,
-	DeserializedItemLabelEditRequest,
-	DeserializedItemDescriptionEditRequest,
-
-	// deserialized use case request interfaces
 	DeserializedAddItemStatementRequest,
 	DeserializedAddPropertyStatementRequest,
 	DeserializedGetItemRequest,
