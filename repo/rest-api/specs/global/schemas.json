@@ -156,7 +156,7 @@
 			"items": { "type": "string" }
 		},
 		"example": {
-			"en": [ ], "fr": [ ]
+			"en": [ "en-alias1", "en-alias2" ], "fr": [ "fr-alias1", "fr-alias2" ]
 		}
 	},
 	"Sitelink": {
