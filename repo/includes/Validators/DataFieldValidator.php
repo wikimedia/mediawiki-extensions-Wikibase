@@ -30,7 +30,7 @@ class DataFieldValidator implements ValueValidator {
 	private $validator;
 
 	/**
-	 * @param string|int     $field     The field on the target DataValue's array representation to check
+	 * @param string|int $field The field on the target DataValue's array representation to check
 	 * @param ValueValidator $validator The validator to apply to the given field
 	 *
 	 * @throws InvalidArgumentException

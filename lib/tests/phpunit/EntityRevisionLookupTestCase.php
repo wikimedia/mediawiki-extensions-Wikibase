@@ -112,10 +112,10 @@ abstract class EntityRevisionLookupTestCase extends MediaWikiIntegrationTestCase
 	/**
 	 * @dataProvider provideGetEntityRevision
 	 *
-	 * @param EntityId $id    The entity to get
-	 * @param int             $revision The revision to get (or 0 for latest)
-	 * @param bool            $shouldExist
-	 * @param string|null     $expectException
+	 * @param EntityId $id The entity to get
+	 * @param int $revision The revision to get (or 0 for latest)
+	 * @param bool $shouldExist
+	 * @param string|null $expectException
 	 */
 	public function testGetEntityRevision( EntityId $id, $revision, $shouldExist, $expectException = null ) {
 		if ( $expectException !== null ) {

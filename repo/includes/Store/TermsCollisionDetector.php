@@ -14,8 +14,8 @@ interface TermsCollisionDetector {
 
 	/**
 	 * Returns an entity id that collides with given label in given languages, if any
-	 * @param  string        $lang
-	 * @param  string        $label
+	 * @param string $lang
+	 * @param string $label
 	 * @return EntityId|null
 	 */
 	public function detectLabelCollision(
@@ -25,9 +25,9 @@ interface TermsCollisionDetector {
 
 	/**
 	 * Returns an entity id that collides with given label and description in given languages, if any
-	 * @param  string        $lang
-	 * @param  string        $label
-	 * @param  string        $description
+	 * @param string $lang
+	 * @param string $label
+	 * @param string $description
 	 * @return EntityId|null
 	 */
 	public function detectLabelAndDescriptionCollision(
@@ -38,7 +38,7 @@ interface TermsCollisionDetector {
 
 	/**
 	 * Returns entity ids that collides with given labels in given languages
-	 * @param  TermList        $labels
+	 * @param TermList $labels
 	 *
 	 * // example return array
 	 * [
