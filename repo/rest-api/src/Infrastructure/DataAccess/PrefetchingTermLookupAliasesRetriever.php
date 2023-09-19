@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
 
 use Wikibase\DataAccess\PrefetchingTermLookup;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\ContentLanguages;
@@ -10,11 +11,16 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
 use Wikibase\Repo\RestApi\Domain\Services\ItemAliasesInLanguageRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemAliasesRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyAliasesRetriever;
 
 /**
  * @license GPL-2.0-or-later
  */
-class PrefetchingTermLookupAliasesRetriever implements ItemAliasesRetriever, ItemAliasesInLanguageRetriever {
+class PrefetchingTermLookupAliasesRetriever implements
+	ItemAliasesRetriever,
+	ItemAliasesInLanguageRetriever,
+	PropertyAliasesRetriever
+{
 
 	private PrefetchingTermLookup $prefetchingTermLookup;
 	private ContentLanguages $termLanguages;
@@ -24,9 +30,9 @@ class PrefetchingTermLookupAliasesRetriever implements ItemAliasesRetriever, Ite
 		$this->termLanguages = $termLanguages;
 	}
 
-	public function getAliases( ItemId $itemId ): ?Aliases {
+	public function getAliases( EntityId $entityId ): ?Aliases {
 		$this->prefetchingTermLookup->prefetchTerms(
-			[ $itemId ],
+			[ $entityId ],
 			[ TermTypes::TYPE_ALIAS ],
 			$this->termLanguages->getLanguages()
 		);
@@ -34,7 +40,7 @@ class PrefetchingTermLookupAliasesRetriever implements ItemAliasesRetriever, Ite
 		$aliases = new Aliases();
 
 		foreach ( $this->termLanguages->getLanguages() as $lang ) {
-			$prefetchedAliases = $this->prefetchingTermLookup->getPrefetchedAliases( $itemId, $lang );
+			$prefetchedAliases = $this->prefetchingTermLookup->getPrefetchedAliases( $entityId, $lang );
 
 			if ( $prefetchedAliases ) {
 				$aliases[$lang] = new AliasesInLanguage( $lang, $prefetchedAliases );
