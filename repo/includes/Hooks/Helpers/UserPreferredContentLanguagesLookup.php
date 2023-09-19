@@ -37,7 +37,7 @@ class UserPreferredContentLanguagesLookup {
 	}
 
 	/**
-	 * @param $uiLanguage - user interface language; will be returned as the first language in the list if valid
+	 * @param string $uiLanguage User interface language; will be returned as the first language in the list if valid
 	 * @param User $user
 	 *
 	 * @return array language codes

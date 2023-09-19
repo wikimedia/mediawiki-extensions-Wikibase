@@ -4,6 +4,7 @@ namespace Wikibase\Client\DataAccess\ParserFunctions;
 
 use Parser;
 use PPFrame;
+use PPNode;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
@@ -76,7 +77,7 @@ class Runner {
 	/**
 	 * @param Parser $parser
 	 * @param PPFrame $frame
-	 * @param array $args
+	 * @param PPNode[] $args
 	 * @param string $type One of DataAccessSnakFormatterFactory::TYPE_*
 	 *
 	 * @return array Wikitext in element 0, flags in named elements

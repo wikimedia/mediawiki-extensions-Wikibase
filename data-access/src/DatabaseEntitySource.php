@@ -56,7 +56,7 @@ class DatabaseEntitySource implements EntitySource {
 	 * @param string $name Unique name for the source for a given configuration / site, used for indexing the sources internally.
 	 *        This does not have to be a wikiname, sitename or dbname, it can for example just be 'properties'.
 	 * @param string|false $databaseName The name of the database to use (use false for the local db)
-	 * @param array $entityNamespaceIdsAndSlots Associative array indexed by entity type (string), values are
+	 * @param array<string,array> $entityNamespaceIdsAndSlots Associative array indexed by entity type (string), values are
 	 * array of form [ 'namespaceId' => int, 'slot' => string ]
 	 * @param string $conceptBaseUri
 	 * @param string $rdfNodeNamespacePrefix

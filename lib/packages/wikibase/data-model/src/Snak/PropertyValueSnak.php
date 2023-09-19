@@ -19,6 +19,7 @@ use Wikibase\DataModel\Entity\PropertyId;
  */
 class PropertyValueSnak extends SnakObject {
 
+	/** @var DataValue */
 	protected $dataValue;
 
 	/**

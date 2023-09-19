@@ -20,7 +20,7 @@ use Wikibase\Client\Hooks\ExtensionLoadHandler;
 class ExtensionLoadHandlerTest extends TestCase {
 
 	/**
-	 * @param &$hooks
+	 * @param array &$hooks
 	 *
 	 * @return MockObject&HookContainer
 	 */

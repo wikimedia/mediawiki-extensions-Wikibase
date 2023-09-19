@@ -66,7 +66,7 @@ class PropertyViewTest extends EntityViewTestCase {
 	 * That is, this method should add any extra data from $entity to $entityData.
 	 *
 	 * @param EntityDocument $entity
-	 * @param array $entityData
+	 * @param array &$entityData
 	 */
 	protected function prepareEntityData( EntityDocument $entity, array &$entityData ) {
 		/** @var Property $entity */

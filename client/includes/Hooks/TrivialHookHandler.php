@@ -99,7 +99,7 @@ class TrivialHookHandler implements
 	}
 
 	/**
-	 * @param array $fields
+	 * @param array &$fields
 	 * @param ParserOutput $parserOutput
 	 */
 	private function doSearchDataForIndex( array &$fields, ParserOutput $parserOutput ): void {

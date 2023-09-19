@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Hooks;
 
 use MediaWiki\HookContainer\HookContainer;
+use Wikibase\Lib\Changes\EntityChange;
 
 /**
  * Handle Changes' hooks
@@ -24,7 +25,7 @@ class WikibaseClientHookRunner implements WikibaseHandleChangeHook, WikibaseHand
 	/**
 	 * Hook runner for the 'WikibaseHandleChange' hook
 	 *
-	 * @param $change
+	 * @param EntityChange $change
 	 * @param array $rootJobParams
 	 * @return bool
 	 */

@@ -35,7 +35,7 @@ class ItemTermsRebuilder {
 
 	/**
 	 * @param ItemTermStoreWriter $itemTermStoreWriter
-	 * @param $itemIdIterable
+	 * @param iterable $itemIdIterable
 	 * @param MessageReporter $progressReporter
 	 * @param MessageReporter $errorReporter
 	 * @param RepoDomainDb $db

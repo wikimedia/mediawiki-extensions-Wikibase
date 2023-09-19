@@ -76,7 +76,7 @@ class LanguageAwareRendererTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * Return a mock ParserOutput object that checks how many times it adds a tracking category.
-	 * @param $num Number of times a tracking category should be added
+	 * @param int $num Number of times a tracking category should be added
 	 *
 	 * @return ParserOutput
 	 */

@@ -9,7 +9,6 @@ use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityIdLookup;
@@ -55,7 +54,6 @@ abstract class LabelPrefetchHookHandlerTestBase extends TestCase {
 	 * @param string[] $termTypes
 	 * @param string[] $languageCodes
 	 * @param PrefetchingTermLookup|null $prefetchingTermLookup
-	 * @param EntityLookup|null $entityLookup
 	 * @param bool $federatedPropertiesEnabled
 	 * @return LabelPrefetchHookHandler
 	 */

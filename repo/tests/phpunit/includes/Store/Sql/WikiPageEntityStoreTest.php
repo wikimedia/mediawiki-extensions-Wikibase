@@ -1082,9 +1082,6 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 			->map();
 	}
 
-	/**
-	 * @param $latestRevisionIdResult
-	 */
 	private function assertNonexistentRevision( LatestRevisionIdResult $latestRevisionIdResult ) {
 		$shouldNotBeCalled = function () {
 			$this->fail( 'Not a nonexistent revision given' );

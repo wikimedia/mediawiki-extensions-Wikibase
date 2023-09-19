@@ -8,6 +8,7 @@ use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\LatestRevisionIdResult;
 use Wikibase\Lib\Store\LookupConstants;
+use Wikibase\Lib\Store\RedirectRevision;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Store\StorageException;
 
@@ -19,8 +20,10 @@ class MockEntityRevisionLookup implements EntityRevisionLookup {
 	private $entities;
 
 	/**
-	 * @param [ Serialised EntityId ][ int $revisionId ][ RedirectEntityRevision $revision ] $redirects
-	 * @param [ Serialised EntityId ][ int $revisionId ][ EntityRevision $revision ] $entities
+	 * @param array<string,RedirectRevision> $redirects
+	 *  [ Serialised EntityId ][ RedirectEntityRevision $revision ]
+	 * @param array<string,array<int,EntityRevision>> $entities
+	 *  [ Serialised EntityId ][ int $revisionId ][ EntityRevision $revision ]
 	 */
 	public function __construct( array $redirects, array $entities ) {
 		$this->redirects = $redirects;

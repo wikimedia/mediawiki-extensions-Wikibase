@@ -45,7 +45,7 @@ class TypeDispatchingWikiPageEntityMetaDataAccessor implements WikiPageEntityMet
 	 * An associative array mapping entity types to instansiator callbacks.
 	 *  Callback signature: function( $databaseName, $repositoryName ): WikiPageEntityMetaDataAccessor
 	 *  Parameter Types: string|false $databaseName, string $repositoryName
-	 * @param WikiPageEntityMetaDataAccessor $defaultAccessor,
+	 * @param WikiPageEntityMetaDataAccessor $defaultAccessor
 	 * @param string|false $databaseName
 	 * @param string $repositoryName
 	 */

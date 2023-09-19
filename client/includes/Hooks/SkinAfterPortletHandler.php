@@ -50,7 +50,7 @@ class SkinAfterPortletHandler implements SkinAfterPortletHook {
 	/**
 	 * @param Skin $skin
 	 * @param string $portlet
-	 * @param string $html
+	 * @param string &$html
 	 */
 	public function onSkinAfterPortlet( $skin, $portlet, &$html ): void {
 		if ( $portlet === 'lang' ) {

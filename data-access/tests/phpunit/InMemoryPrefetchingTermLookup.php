@@ -49,8 +49,8 @@ class InMemoryPrefetchingTermLookup implements PrefetchingTermLookup {
 
 	/**
 	 * @param array $entityIds
-	 * @param array $termTypes if null, defaults to labels and descriptions only
-	 * @param array $languageCodes if null, defaults to nothing
+	 * @param array|null $termTypes if null, defaults to labels and descriptions only
+	 * @param array|null $languageCodes if null, defaults to nothing
 	 * @note These defaults do not strictly obey the definitions of the interface
 	 * but instead are similar to the FakePrefetchingTermLookup
 	 */

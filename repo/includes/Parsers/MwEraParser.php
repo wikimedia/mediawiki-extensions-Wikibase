@@ -103,7 +103,7 @@ class MwEraParser extends EraParser {
 
 	/**
 	 * Transform the message to a pattern we can match era against.
-	 * @param $msgText string
+	 * @param string $msgText
 	 * @return string
 	 */
 	private function getRegexpFromMessageText( $msgText ) {

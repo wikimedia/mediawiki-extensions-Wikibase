@@ -166,11 +166,7 @@ abstract class EntityHandler extends ContentHandler {
 			] ) . "\n$text\n</div>" );
 	}
 
-	/**
-	 * @see ContentHandler::getDiffEngineClass
-	 *
-	 * @return string
-	 */
+	/** @inheritDoc */
 	protected function getDiffEngineClass() {
 		return EntityContentDiffView::class;
 	}

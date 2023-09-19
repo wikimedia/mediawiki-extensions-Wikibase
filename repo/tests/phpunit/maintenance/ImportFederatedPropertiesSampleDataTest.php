@@ -39,10 +39,6 @@ class ImportFederatedPropertiesSampleDataTest extends MaintenanceBaseTestCase {
 		$this->assertEquals( 'somedescription', $item->getDescriptions()->getByLanguage( 'en' )->getText() );
 	}
 
-	/**
-	 * @param $dataFile
-	 * @param $expectedDataLines
-	 */
 	public function testGetDataToImport() {
 		$dataFile = __DIR__ . '/../data/maintenance/federatedPropertiesTestDataFile.tsv';
 		$expectedDataLines = [

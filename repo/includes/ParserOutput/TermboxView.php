@@ -68,9 +68,7 @@ class TermboxView implements CacheableEntityTermsView {
 		return $this->textProvider->getEscaped( 'parentheses', [ $entityId->getSerialization() ] );
 	}
 
-	/**
-	 * @see \Wikibase\View\ViewPlaceHolderEmitter
-	 */
+	/** @inheritDoc */
 	public function getPlaceholders(
 		EntityDocument $entity,
 		$revision,

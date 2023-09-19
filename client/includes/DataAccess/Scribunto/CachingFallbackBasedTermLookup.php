@@ -170,7 +170,7 @@ class CachingFallbackBasedTermLookup implements TermLookup {
 	/**
 	 * @param EntityId $entityId
 	 * @param Language $language
-	 * @param $termType
+	 * @param string $termType
 	 * @return TermFallback|null
 	 */
 	private function lookupWithoutCache( EntityId $entityId, Language $language, $termType ): ?TermFallback {

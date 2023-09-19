@@ -120,7 +120,7 @@ class PropertyContent extends EntityContent {
 	 *
 	 * Returns false if the entity does not have a DataType set.
 	 *
-	 * @see Content::isValid()
+	 * @inheritDoc
 	 */
 	public function isValid() {
 		// TODO: provide a way to get the data type from the holder directly!

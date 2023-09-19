@@ -251,7 +251,7 @@ class EntityAccessor {
 
 	/**
 	 * @see UnresolvedEntityRedirectException
-	 * @param $prefixedEntityId
+	 * @param string $prefixedEntityId
 	 */
 	private function logPossibleDoubleRedirect( $prefixedEntityId ) {
 		$this->logger->info( 'Unresolved redirect encountered loading {prefixedEntityId}. This is typically cleaned up asynchronously.',

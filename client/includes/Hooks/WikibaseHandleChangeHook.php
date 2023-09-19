@@ -2,6 +2,8 @@
 
 namespace Wikibase\Client\Hooks;
 
+use Wikibase\Lib\Changes\EntityChange;
+
 /**
  * @license GPL-2.0-or-later
  */
@@ -10,7 +12,7 @@ interface WikibaseHandleChangeHook {
 	/**
 	 * Hook runner for the 'WikibaseHandleChange' hook
 	 *
-	 * @param $change
+	 * @param EntityChange $change
 	 * @param array $rootJobParams
 	 * @return bool
 	 */

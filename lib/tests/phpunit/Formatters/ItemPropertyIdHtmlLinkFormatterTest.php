@@ -609,6 +609,7 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @param string $propertyId
+	 * @return object
 	 */
 	private function givenPropertyExists( $propertyId ) {
 		$title = $this->createMock( Title::class );

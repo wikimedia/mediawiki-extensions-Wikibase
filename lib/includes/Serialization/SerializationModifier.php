@@ -38,7 +38,7 @@ class SerializationModifier {
 	 * Iterates the value and modifications and runs all the needed sub-modifications,
 	 * then runs the modifications of the current array level ('' key), if any.
 	 *
-	 * @param mixed $value The value to modify (usually an array except on leaf nodes).
+	 * @param mixed &$value The value to modify (usually an array except on leaf nodes).
 	 * @param array $modifications Modifications as returned by {@link unflattenPaths}.
 	 */
 	private function modifyUsingUnflattenedCallbacks( &$value, array $modifications ): void {

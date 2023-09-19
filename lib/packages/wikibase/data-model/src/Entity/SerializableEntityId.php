@@ -10,6 +10,7 @@ use InvalidArgumentException;
  */
 abstract class SerializableEntityId implements EntityId {
 
+	/** @var string */
 	protected $serialization;
 
 	public const PATTERN = '/^[^:]+\z/';

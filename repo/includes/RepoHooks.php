@@ -1122,7 +1122,7 @@ final class RepoHooks {
 	 * or the 'edit' rate limit if no 'create' limit is defined,
 	 * unless the 'wikibase-idgenerator' rate limit was itself customized.
 	 *
-	 * @param array $rateLimits should be $wgRateLimits or a similar array
+	 * @param array &$rateLimits should be $wgRateLimits or a similar array
 	 */
 	public static function inheritDefaultRateLimits( array &$rateLimits ) {
 		if ( isset( $rateLimits['wikibase-idgenerator']['&inherit-create-edit'] ) ) {
@@ -1160,7 +1160,7 @@ final class RepoHooks {
 		$apiMain->getUser()->pingLimiter( RateLimitingIdGenerator::RATELIMIT_NAME, $idGeneratorInErrorPingLimiterValue );
 	}
 
-	/** @param ContentLanguages[] $contentLanguages */
+	/** @param ContentLanguages[] &$contentLanguages */
 	public static function onWikibaseContentLanguages( array &$contentLanguages ): void {
 		if ( !WikibaseRepo::getSettings()->getSetting( 'tmpEnableMulLanguageCode' ) ) {
 			return;

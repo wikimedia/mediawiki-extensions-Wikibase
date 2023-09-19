@@ -71,7 +71,7 @@ class RebuildEntityQuantityUnitTest extends MaintenanceBaseTestCase {
 	}
 
 	/**
-	 * @param $unitValue
+	 * @param string $unitValue
 	 * @return ItemId|null
 	 * @throws PermissionsError
 	 * @throws StorageException

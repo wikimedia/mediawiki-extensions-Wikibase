@@ -102,7 +102,7 @@ class MakeGlobalVariablesScriptHookHandler implements MakeGlobalVariablesScriptH
 	}
 
 	/**
-	 * @param array $vars
+	 * @param array &$vars
 	 * @param OutputPage $out
 	 */
 	public function onMakeGlobalVariablesScript( &$vars, $out ): void {

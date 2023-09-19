@@ -72,7 +72,7 @@ class ChangesListLinesHandler implements
 	}
 
 	/**
-	 * @param OldChangesList &$changesList
+	 * @param OldChangesList $changesList
 	 * @param string &$s
 	 * @param RecentChange $rc
 	 * @param string[] &$classes

@@ -23,7 +23,7 @@ use Psr\SimpleCache\InvalidArgumentException as SimpleCacheInvalidArgumentExcept
 abstract class SimpleCacheTestCase extends TestCase {
 
 	/**
-	 * @var array with functionName => reason.
+	 * @var array<string,string> with functionName => reason.
 	 */
 	protected $skippedTests = [];
 

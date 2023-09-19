@@ -145,7 +145,7 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 	 * @param EntityId[] $ids
 	 * @param string $entityType
 	 * @param int $limit
-	 * @param int $offset
+	 * @param int &$offset
 	 *
 	 * @return EntityId[]
 	 */

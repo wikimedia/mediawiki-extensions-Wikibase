@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client;
 
+use CirrusSearch\SearchConfig;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Title\Title;
 use Skin;
@@ -165,7 +166,7 @@ final class ClientHooks {
 
 	/**
 	 * Add morelikewithwikibase keyword.
-	 * @param $config
+	 * @param SearchConfig $config
 	 * @param array &$extraFeatures
 	 */
 	public static function onCirrusSearchAddQueryFeatures(
@@ -260,7 +261,7 @@ final class ClientHooks {
 		);
 	}
 
-	/** @param ContentLanguages[] $contentLanguages */
+	/** @param ContentLanguages[] &$contentLanguages */
 	public static function onWikibaseContentLanguages( array &$contentLanguages ): void {
 		if ( !WikibaseClient::getSettings()->getSetting( 'tmpEnableMulLanguageCode' ) ) {
 			return;

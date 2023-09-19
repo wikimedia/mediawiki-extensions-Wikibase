@@ -183,7 +183,7 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	/**
-	 * @param Item[] $entities Map ID -> Entity
+	 * @param Item[]|null $entities Map ID -> Entity
 	 * @return EntityLookup
 	 */
 	private function getEntityLookup( array $entities = null ) {

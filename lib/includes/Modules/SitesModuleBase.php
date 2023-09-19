@@ -58,6 +58,7 @@ abstract class SitesModuleBase extends RL\Module {
 
 	/**
 	 * Get a setting from the repo or client settings, with repo overriding client.
+	 * @return mixed
 	 */
 	public function getSetting( string $settingName ) {
 		if ( $this->repoSettings->hasSetting( $settingName ) ) {

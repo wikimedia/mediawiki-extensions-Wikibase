@@ -238,7 +238,8 @@ abstract class EntityContent extends AbstractContent {
 	 * Returns an array structure for the redirect represented by this EntityContent, if any.
 	 *
 	 * @note This may or may not be consistent with what EntityContentCodec does.
-	 *       It it intended to be used primarily for diffing.
+	 *       It is intended to be used primarily for diffing.
+	 * @return string[]
 	 */
 	private function getRedirectData(): array {
 		// NOTE: keep in sync with getPatchedRedirect
@@ -261,7 +262,7 @@ abstract class EntityContent extends AbstractContent {
 	 * @note Avoid relying on this method! It bypasses EntityContentCodec, and does
 	 *       not make any guarantees about the structure of the array returned.
 	 *
-	 * @return array|EntityDocument An undefined data structure representing the content. This is
+	 * @return string[]|EntityDocument An undefined data structure representing the content. This is
 	 *  not guaranteed to conform to any serialization structure used in the database or externally.
 	 */
 	public function getNativeData() {
