@@ -29,10 +29,7 @@ class ApiModuleTestHelper {
 	 * @return ApiBase
 	 */
 	public function newApiModule( $instantiator, $name, array $params, User $user ) {
-		if ( !array_key_exists( 'token', $params ) ) {
-			$params['token'] = $user->getToken();
-		}
-
+		$params['token'] ??= $user->getToken();
 		$request = new FauxRequest( $params, true );
 		$main = new ApiMain( $request, true );
 		$main->getContext()->setUser( $user );
