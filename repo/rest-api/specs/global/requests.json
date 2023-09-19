@@ -61,6 +61,22 @@
 			}
 		}
 	},
+	"DescriptionsPatch": {
+		"description": "Payload containing a JSON Patch document to be applied to an Item's descriptions and edit metadata",
+		"required": true,
+		"content": {
+			"application/json-patch+json": {
+				"schema": {
+					"$ref": "./request-parts.json#/DescriptionsPatchRequest"
+				}
+			},
+			"application/json": {
+				"schema": {
+					"$ref": "./request-parts.json#/DescriptionsPatchRequest"
+				}
+			}
+		}
+	},
 	"Statement": {
 		"description": "Payload containing a Wikibase Statement object and edit metadata",
 		"required": true,

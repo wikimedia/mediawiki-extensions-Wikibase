@@ -657,8 +657,8 @@
 			}
 		}
 	},
-	"CannotApplyLabelsPatch": {
-		"description": "The provided JSON Patch cannot be applied to the Labels of the given Item",
+	"CannotApplyLabelsDescriptionsPatch": {
+		"description": "The provided JSON Patch cannot be applied",
 		"content": {
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/ContextError" },
@@ -688,6 +688,34 @@
 					"patched-label-empty": { "$ref": "./examples.json#/PatchedLabelEmptyExample" },
 					"patched-label-too-long": { "$ref": "./examples.json#/PatchedLabelTooLongExample" },
 					"patched-label-invalid": { "$ref": "./examples.json#/PatchedLabelInvalidExample" },
+					"patched-item-label-description-same-value": {
+						"$ref": "./examples.json#/PatchedItemLabelDescriptionSameValueExample"
+					},
+					"patched-item-label-description-duplicate": {
+						"$ref": "./examples.json#/PatchedItemLabelDescriptionDuplicateExample"
+					}
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
+	"InvalidPatchedDescriptions": {
+		"description": "Applying the provided JSON Patch results in invalid descriptions",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/ContextError" },
+				"examples": {
+					"patched-descriptions-invalid-language-code": {
+						"$ref": "./examples.json#/PatchedDescriptionsInvalidLanguageCodeExample"
+					},
+					"patched-description-empty": { "$ref": "./examples.json#/PatchedDescriptionEmptyExample" },
+					"patched-description-too-long": { "$ref": "./examples.json#/PatchedDescriptionTooLongExample" },
+					"patched-description-invalid": { "$ref": "./examples.json#/PatchedDescriptionInvalidExample" },
 					"patched-item-label-description-same-value": {
 						"$ref": "./examples.json#/PatchedItemLabelDescriptionSameValueExample"
 					},
@@ -794,7 +822,7 @@
 		}
 	},
 	"CannotApplyStatementPatch": {
-		"description": "The provided JSON Patch cannot be applied to the given statement",
+		"description": "The provided JSON Patch cannot be applied",
 		"content": {
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/ContextError" },

@@ -21,6 +21,28 @@
 			{ "$ref": "#/MediawikiEdit" }
 		]
 	},
+	"DescriptionsPatchRequest": {
+		"allOf": [
+			{ "$ref": "#/PatchDocument" },
+			{
+				"properties": {
+					"patch": {
+						"items": {
+							"properties": {
+								"path": {
+									"example": "/en"
+								},
+								"value": {
+									"example": "patched description"
+								}
+							}
+						}
+					}
+				}
+			},
+			{ "$ref": "#/MediawikiEdit" }
+		]
+	},
 	"StatementRequest": {
 		"allOf": [
 			{
