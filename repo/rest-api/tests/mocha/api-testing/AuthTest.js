@@ -17,7 +17,6 @@ const {
 	getRequestsOnItem,
 	getRequestsOnProperty
 } = require( '../helpers/happyPathRequestBuilders' );
-const { newAddPropertyStatementRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
 describe( 'Auth', () => {
 
@@ -68,19 +67,17 @@ describe( 'Auth', () => {
 		...editRequestsWithInputs,
 		...getRequestsOnItem.map( useRequestInputs( itemRequestInputs ) ),
 		...getRequestsOnProperty.map( useRequestInputs( propertyRequestInputs ) )
-	].forEach( ( { newRequestBuilder } ) => {
+	].forEach( ( { newRequestBuilder, requestInputs } ) => {
 		describe( `Authentication - ${newRequestBuilder().getRouteDescription()}`, () => {
 
 			afterEach( async () => {
 				if ( newRequestBuilder().getMethod() === 'DELETE' ) {
-					itemRequestInputs.statementId = ( await rbf.newAddItemStatementRequestBuilder(
-						itemRequestInputs.itemId,
-						newStatementWithRandomStringValue( itemRequestInputs.statementPropertyId )
-					).makeRequest() ).body.id;
-
-					propertyRequestInputs.statementId = ( await newAddPropertyStatementRequestBuilder(
-						propertyRequestInputs.propertyId,
-						newStatementWithRandomStringValue( propertyRequestInputs.statementPropertyId )
+					const addStatementRequestBuilder = requestInputs.mainTestSubject === requestInputs.itemId ?
+						rbf.newAddItemStatementRequestBuilder :
+						rbf.newAddPropertyStatementRequestBuilder;
+					requestInputs.statementId = ( await addStatementRequestBuilder(
+						requestInputs.mainTestSubject,
+						newStatementWithRandomStringValue( requestInputs.statementPropertyId )
 					).makeRequest() ).body.id;
 				}
 			} );
