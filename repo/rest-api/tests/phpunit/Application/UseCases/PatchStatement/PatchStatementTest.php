@@ -14,7 +14,6 @@ use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertStatementSubjectExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestStatementSubjectRevisionMetadata;
@@ -30,7 +29,7 @@ use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\RestApi\Domain\Services\StatementRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\StatementUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
-use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestFieldDeserializerFactory;
+use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\StatementReadModelHelper;
@@ -61,7 +60,7 @@ class PatchStatementTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->useCaseValidator = new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() );
+		$this->useCaseValidator = new TestValidatingRequestDeserializer();
 		$this->patchedStatementValidator = $this->createStub( PatchedStatementValidator::class );
 		$this->statementRetriever = $this->createStub( StatementRetriever::class );
 		$this->statementUpdater = $this->createStub( StatementUpdater::class );
@@ -87,7 +86,7 @@ class PatchStatementTest extends TestCase {
 
 		$postModificationRevisionId = 567;
 		$modificationTimestamp = '20221111070707';
-		$editTags = TestValidatingRequestFieldDeserializerFactory::ALLOWED_TAGS;
+		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
 		$comment = 'statement replaced by ' . __method__;
 

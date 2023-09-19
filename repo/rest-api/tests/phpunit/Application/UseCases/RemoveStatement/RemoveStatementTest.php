@@ -9,7 +9,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Tests\NewStatement;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertStatementSubjectExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatement;
@@ -19,7 +18,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Services\StatementRemover;
 use Wikibase\Repo\RestApi\Domain\Services\StatementWriteModelRetriever;
-use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestFieldDeserializerFactory;
+use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\StatementReadModelHelper;
 
@@ -62,7 +61,7 @@ class RemoveStatementTest extends TestCase {
 
 		$requestData = [
 			'$statementId' => (string)$statementGuid,
-			'$editTags' => [ TestValidatingRequestFieldDeserializerFactory::ALLOWED_TAGS[0] ],
+			'$editTags' => [ TestValidatingRequestDeserializer::ALLOWED_TAGS[0] ],
 			'$isBot' => false,
 			'$comment' => 'statement removed by ' . __method__,
 			'$username' => null,
@@ -184,7 +183,7 @@ class RemoveStatementTest extends TestCase {
 
 	private function newUseCase(): RemoveStatement {
 		return new RemoveStatement(
-			new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() ),
+			new TestValidatingRequestDeserializer(),
 			$this->assertUserIsAuthorized,
 			$this->assertStatementSubjectExists,
 			$this->statementRetriever,

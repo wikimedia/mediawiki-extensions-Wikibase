@@ -1,12 +1,12 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation;
+namespace Wikibase\Repo\Tests\RestApi\Infrastructure;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
+use Psr\Container\ContainerInterface;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Term\Term;
@@ -33,14 +33,14 @@ use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementIdReques
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementSerializationRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementSerializationRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\UseCaseRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ValidatingRequestDeserializer;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ValidatingRequestFieldDeserializerFactory;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\Model\UserProvidedEditMetadata;
+use Wikibase\Repo\RestApi\Infrastructure\ValidatingRequestDeserializer;
+use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializerServiceContainer;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ValidatingRequestDeserializer
+ * @covers \Wikibase\Repo\RestApi\Infrastructure\ValidatingRequestDeserializer
  *
  * @group Wikibase
  *
@@ -180,10 +180,13 @@ class ValidatingRequestDeserializerTest extends TestCase {
 			->with( $request )
 			->willReturnCallback( fn() => $this->createStub( Statement::class ) );
 
-		$factory = $this->createStub( ValidatingRequestFieldDeserializerFactory::class );
-		$factory->method( 'newStatementSerializationRequestValidatingDeserializer' )->willReturn( $statementValidator );
+		$serviceContainer = $this->createMock( ContainerInterface::class );
+		$serviceContainer->expects( $this->once() )
+			->method( 'get' )
+			->with( ValidatingRequestDeserializer::STATEMENT_SERIALIZATION_REQUEST_VALIDATING_DESERIALIZER )
+			->willReturn( $statementValidator );
 
-		$validatingDeserializer = new ValidatingRequestDeserializer( $factory );
+		$validatingDeserializer = new ValidatingRequestDeserializer( $serviceContainer );
 
 		$this->assertSame(
 			$validatingDeserializer->validateAndDeserialize( $request ),
@@ -194,17 +197,21 @@ class ValidatingRequestDeserializerTest extends TestCase {
 	/**
 	 * @dataProvider invalidRequestProvider
 	 */
-	public function testGivenInvalidRequest_throws( string $requestClass, string $validatorClass, string $factoryMethod ): void {
+	public function testGivenInvalidRequest_throws( string $requestClass, string $validatorClass, string $stubbedServiceName ): void {
 		$expectedError = $this->createStub( UseCaseError::class );
 		$validator = $this->createStub( $validatorClass );
 		$validator->method( 'validateAndDeserialize' )->willThrowException( $expectedError );
-		$factory = $this->createStub( ValidatingRequestFieldDeserializerFactory::class );
-		$factory->method( $factoryMethod )->willReturn( $validator );
+		$serviceContainer = $this->createMock( ContainerInterface::class );
+		$serviceContainer->expects( $this->atLeastOnce() )
+			->method( 'get' )
+			->willReturnCallback(
+				fn( string $serviceName ) => $serviceName === $stubbedServiceName ? $validator : new NullValidator()
+			);
 
 		$request = $this->createStub( $requestClass );
 
 		try {
-			$this->newRequestDeserializer( $factory )->validateAndDeserialize( $request );
+			$this->newRequestDeserializer( $serviceContainer )->validateAndDeserialize( $request );
 			$this->fail( 'expected exception was not thrown' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( $expectedError, $e );
@@ -215,71 +222,68 @@ class ValidatingRequestDeserializerTest extends TestCase {
 		yield [
 			ItemIdUseCaseRequest::class,
 			ItemIdRequestValidatingDeserializer::class,
-			'newItemIdRequestValidatingDeserializer',
+			ValidatingRequestDeserializer::ITEM_ID_REQUEST_VALIDATING_DESERIALIZER,
 		];
 		yield [
 			PropertyIdUseCaseRequest::class,
 			MappedRequestValidatingDeserializer::class,
-			'newPropertyIdRequestValidatingDeserializer',
+			ValidatingRequestDeserializer::PROPERTY_ID_REQUEST_VALIDATING_DESERIALIZER,
 		];
 		yield [
 			StatementIdUseCaseRequest::class,
 			StatementIdRequestValidatingDeserializer::class,
-			'newStatementIdRequestValidatingDeserializer',
+			ValidatingRequestDeserializer::STATEMENT_ID_REQUEST_VALIDATING_DESERIALIZER,
 		];
 		yield [
 			PropertyIdFilterUseCaseRequest::class,
 			MappedRequestValidatingDeserializer::class,
-			'newPropertyIdFilterRequestValidatingDeserializer',
+			ValidatingRequestDeserializer::PROPERTY_ID_FILTER_REQUEST_VALIDATING_DESERIALIZER,
 		];
 		yield [
 			LanguageCodeUseCaseRequest::class,
 			LanguageCodeRequestValidatingDeserializer::class,
-			'newLanguageCodeRequestValidatingDeserializer',
+			ValidatingRequestDeserializer::LANGUAGE_CODE_REQUEST_VALIDATING_DESERIALIZER,
 		];
 		yield [
 			ItemFieldsUseCaseRequest::class,
 			MappedRequestValidatingDeserializer::class,
-			'newItemFieldsRequestValidatingDeserializer',
+			ValidatingRequestDeserializer::ITEM_FIELDS_REQUEST_VALIDATING_DESERIALIZER,
 		];
 		yield [
 			PropertyFieldsUseCaseRequest::class,
 			MappedRequestValidatingDeserializer::class,
-			'newPropertyFieldsRequestValidatingDeserializer',
+			ValidatingRequestDeserializer::PROPERTY_FIELDS_REQUEST_VALIDATING_DESERIALIZER,
 		];
 		yield [
 			StatementSerializationUseCaseRequest::class,
 			StatementSerializationRequestValidatingDeserializer::class,
-			'newStatementSerializationRequestValidatingDeserializer',
+			ValidatingRequestDeserializer::STATEMENT_SERIALIZATION_REQUEST_VALIDATING_DESERIALIZER,
 		];
 		yield [
 			EditMetadataUseCaseRequest::class,
 			EditMetadataRequestValidatingDeserializer::class,
-			'newEditMetadataRequestValidatingDeserializer',
+			ValidatingRequestDeserializer::EDIT_METADATA_REQUEST_VALIDATING_DESERIALIZER,
 		];
 		yield [
 			PatchUseCaseRequest::class,
 			PatchRequestValidatingDeserializer::class,
-			'newPatchRequestValidatingDeserializer',
+			ValidatingRequestDeserializer::PATCH_REQUEST_VALIDATING_DESERIALIZER,
 		];
 		yield [
 			ItemLabelEditUseCaseRequest::class,
 			ItemLabelEditRequestValidatingDeserializer::class,
-			'newItemLabelEditRequestValidatingDeserializer',
+			ValidatingRequestDeserializer::ITEM_LABEL_EDIT_REQUEST_VALIDATING_DESERIALIZER,
 		];
 		yield [
 			ItemDescriptionEditUseCaseRequest::class,
 			ItemDescriptionEditRequestValidatingDeserializer::class,
-			'newItemDescriptionEditRequestValidatingDeserializer',
+			ValidatingRequestDeserializer::ITEM_DESCRIPTION_EDIT_REQUEST_VALIDATING_DESERIALIZER,
 		];
 	}
 
-	private function newRequestDeserializer( ValidatingRequestFieldDeserializerFactory $factory = null ): ValidatingRequestDeserializer {
-		$dataTypeLookup = new InMemoryDataTypeLookup();
-		$dataTypeLookup->setDataTypeForProperty( new NumericPropertyId( self::EXISTING_PROPERTY ), 'string' );
-
+	private function newRequestDeserializer( ContainerInterface $serviceContainer = null ): ValidatingRequestDeserializer {
 		return new ValidatingRequestDeserializer(
-			$factory ?? TestValidatingRequestFieldDeserializerFactory::newFactory( $dataTypeLookup )
+			$serviceContainer ?? new TestValidatingRequestDeserializerServiceContainer()
 		);
 	}
 
@@ -299,4 +303,9 @@ interface PatchUseCaseRequest extends UseCaseRequest, PatchRequest {}
 interface ItemLabelEditUseCaseRequest extends UseCaseRequest, ItemLabelEditRequest {}
 interface ItemDescriptionEditUseCaseRequest extends UseCaseRequest, ItemDescriptionEditRequest {}
 interface PropertyFieldsUseCaseRequest extends UseCaseRequest, PropertyFieldsRequest {}
+class NullValidator {
+	public function validateAndDeserialize() {
+		return null;
+	}
+}
 // @codingStandardsIgnoreEnd

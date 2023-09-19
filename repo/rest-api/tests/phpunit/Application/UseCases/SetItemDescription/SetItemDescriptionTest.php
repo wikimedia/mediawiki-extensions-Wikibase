@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\SetItemDescription;
 use Wikibase\DataModel\Entity\Item as DataModelItem;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Tests\NewItem;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
@@ -23,7 +22,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
-use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestFieldDeserializerFactory;
+use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 
 /**
@@ -46,7 +45,7 @@ class SetItemDescriptionTest extends \PHPUnit\Framework\TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->validator = new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() );
+		$this->validator = new TestValidatingRequestDeserializer();
 		$this->getRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
 		$this->getRevisionMetadata->method( 'execute' )
 			->willReturn( [ 123, '20221212040505' ] );
@@ -59,7 +58,7 @@ class SetItemDescriptionTest extends \PHPUnit\Framework\TestCase {
 		$language = 'en';
 		$description = 'Hello world again.';
 		$itemId = 'Q123';
-		$editTags = TestValidatingRequestFieldDeserializerFactory::ALLOWED_TAGS;
+		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
 		$comment = 'add description edit comment';
 
@@ -97,7 +96,7 @@ class SetItemDescriptionTest extends \PHPUnit\Framework\TestCase {
 		$language = 'en';
 		$newDescription = 'Hello world again.';
 		$itemId = 'Q123';
-		$editTags = TestValidatingRequestFieldDeserializerFactory::ALLOWED_TAGS;
+		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
 		$item = NewItem::withId( $itemId )->andDescription( $language, 'Hello world' )->build();
 		$comment = 'replace description edit comment';

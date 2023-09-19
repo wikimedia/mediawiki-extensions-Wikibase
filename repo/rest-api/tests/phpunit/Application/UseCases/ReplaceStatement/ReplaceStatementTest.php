@@ -11,7 +11,6 @@ use Wikibase\DataModel\Exception\PropertyChangedException;
 use Wikibase\DataModel\Exception\StatementNotFoundException;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Tests\NewStatement;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertStatementSubjectExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatement;
@@ -24,7 +23,7 @@ use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementRevision;
 use Wikibase\Repo\RestApi\Domain\Services\StatementUpdater;
-use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestFieldDeserializerFactory;
+use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
 
@@ -47,7 +46,7 @@ class ReplaceStatementTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->replaceStatementValidator = new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() );
+		$this->replaceStatementValidator = new TestValidatingRequestDeserializer();
 		$this->assertStatementSubjectExists = $this->createStub( AssertStatementSubjectExists::class );
 		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
 		$this->statementUpdater = $this->createStub( StatementUpdater::class );
@@ -60,7 +59,7 @@ class ReplaceStatementTest extends TestCase {
 		$statementId = new StatementGuid( $subjectId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 		$newStatementSerialization = [
 			'id' => (string)$statementId,
-			'property' => [ 'id' => TestValidatingRequestFieldDeserializerFactory::EXISTING_STRING_PROPERTY ],
+			'property' => [ 'id' => TestValidatingRequestDeserializer::EXISTING_STRING_PROPERTY ],
 			'value' => [
 				'type' => 'somevalue',
 			],
@@ -68,7 +67,7 @@ class ReplaceStatementTest extends TestCase {
 		$newStatementWriteModel = NewStatement::someValueFor( 'P123' )->withGuid( $statementId )->build();
 		$modificationRevisionId = 322;
 		$modificationTimestamp = '20221111070707';
-		$editTags = TestValidatingRequestFieldDeserializerFactory::ALLOWED_TAGS;
+		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
 		$comment = 'statement replaced by ' . __method__;
 
@@ -178,7 +177,7 @@ class ReplaceStatementTest extends TestCase {
 					'$statementId' => (string)$originalStatementId,
 					'$statement' => [
 						'id' => "$changedStatementID",
-						'property' => [ 'id' => TestValidatingRequestFieldDeserializerFactory::EXISTING_STRING_PROPERTY ],
+						'property' => [ 'id' => TestValidatingRequestDeserializer::EXISTING_STRING_PROPERTY ],
 						'value' => [ 'type' => 'novalue' ],
 					],
 				] )
@@ -195,11 +194,11 @@ class ReplaceStatementTest extends TestCase {
 	public function testStatementNotFoundOnSubject_throwsUseCaseError( EntityId $subjectId ): void {
 		$statementId = new StatementGuid( $subjectId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 		$newStatementWriteModel = NewStatement::someValueFor(
-			TestValidatingRequestFieldDeserializerFactory::EXISTING_STRING_PROPERTY
+			TestValidatingRequestDeserializer::EXISTING_STRING_PROPERTY
 		)->withGuid( $statementId )->build();
 		$statementSerialization = [
 			'id' => "$statementId",
-			'property' => [ 'id' => TestValidatingRequestFieldDeserializerFactory::EXISTING_STRING_PROPERTY ],
+			'property' => [ 'id' => TestValidatingRequestDeserializer::EXISTING_STRING_PROPERTY ],
 			'value' => [ 'type' => 'somevalue' ],
 		];
 
@@ -269,7 +268,7 @@ class ReplaceStatementTest extends TestCase {
 
 	private function getValidStatementSerialization(): array {
 		return [
-			'property' => [ 'id' => TestValidatingRequestFieldDeserializerFactory::EXISTING_STRING_PROPERTY ],
+			'property' => [ 'id' => TestValidatingRequestDeserializer::EXISTING_STRING_PROPERTY ],
 			'value' => [ 'type' => 'novalue' ],
 		];
 	}

@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\RemoveItemStatement;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Statement\StatementGuid;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatementRequest;
@@ -13,7 +12,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemSta
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
-use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestFieldDeserializerFactory;
+use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 
 /**
@@ -37,14 +36,14 @@ class RemoveItemStatementTest extends TestCase {
 
 		$this->assertItemExists = $this->createStub( AssertItemExists::class );
 		$this->removeStatement  = $this->createStub( RemoveStatement::class );
-		$this->validator = new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() );
+		$this->validator = new TestValidatingRequestDeserializer();
 	}
 
 	public function testGivenValidRemoveItemStatementRequest_callsRemoveStatementUseCase(): void {
 		$itemId = new ItemId( 'Q123' );
 		$statementId = new StatementGuid( $itemId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 		$newStatementSerialization = [ 'some' => 'statement' ];
-		$editTags = [ TestValidatingRequestFieldDeserializerFactory::ALLOWED_TAGS[0] ];
+		$editTags = [ TestValidatingRequestDeserializer::ALLOWED_TAGS[0] ];
 		$isBot = false;
 		$comment = 'statement removed by ' . __method__;
 
@@ -101,7 +100,7 @@ class RemoveItemStatementTest extends TestCase {
 	public function testGivenItemNotFoundOrRedirect_throws(): void {
 		$itemId = new ItemId( 'Q123' );
 		$statementId = new StatementGuid( $itemId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
-		$editTags = [ TestValidatingRequestFieldDeserializerFactory::ALLOWED_TAGS[0] ];
+		$editTags = [ TestValidatingRequestDeserializer::ALLOWED_TAGS[0] ];
 		$isBot = false;
 		$comment = 'statement removed by ' . __method__;
 		$request = $this->newUseCaseRequest( [

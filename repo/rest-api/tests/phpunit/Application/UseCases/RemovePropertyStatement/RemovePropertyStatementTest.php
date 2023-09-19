@@ -5,14 +5,13 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\RemovePropertyStateme
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Statement\StatementGuid;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyStatement\RemovePropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyStatement\RemovePropertyStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyStatement\RemovePropertyStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestFieldDeserializerFactory;
+use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 
 /**
@@ -36,14 +35,14 @@ class RemovePropertyStatementTest extends TestCase {
 
 		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
 		$this->removeStatement  = $this->createStub( RemoveStatement::class );
-		$this->validator = new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() );
+		$this->validator = new TestValidatingRequestDeserializer();
 	}
 
 	public function testGivenValidRemovePropertyStatementRequest_callsRemoveStatementUseCase(): void {
 		$propertyId = new NumericPropertyId( 'P123' );
 		$statementId = new StatementGuid( $propertyId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 		$newStatementSerialization = [ 'some' => 'statement' ];
-		$editTags = [ TestValidatingRequestFieldDeserializerFactory::ALLOWED_TAGS[0] ];
+		$editTags = [ TestValidatingRequestDeserializer::ALLOWED_TAGS[0] ];
 		$isBot = false;
 		$comment = 'statement removed by ' . __method__;
 
@@ -100,7 +99,7 @@ class RemovePropertyStatementTest extends TestCase {
 	public function testGivenPropertyNotFound_throws(): void {
 		$propertyId = new NumericPropertyId( 'P123' );
 		$statementId = new StatementGuid( $propertyId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
-		$editTags = [ TestValidatingRequestFieldDeserializerFactory::ALLOWED_TAGS[0] ];
+		$editTags = [ TestValidatingRequestDeserializer::ALLOWED_TAGS[0] ];
 		$isBot = false;
 		$comment = 'statement removed by ' . __method__;
 		$request = $this->newUseCaseRequest( [

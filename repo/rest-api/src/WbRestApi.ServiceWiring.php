@@ -4,15 +4,30 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\ConditionalHeaderUtil;
 use MediaWiki\Rest\Reporter\ErrorReporter;
 use MediaWiki\Rest\Reporter\MWErrorReporter;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
+use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SerializerFactory;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ValidatingRequestDeserializer;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ValidatingRequestFieldDeserializerFactory;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataRequestValidatingDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\FieldsFilterValidatingDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemDescriptionEditRequestValidatingDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemFieldsRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemIdRequestValidatingDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemLabelEditRequestValidatingDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\LanguageCodeRequestValidatingDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\MappedRequestValidatingDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PatchRequestValidatingDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyFieldsRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdFilterRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdValidatingDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementIdRequestValidatingDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementSerializationRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
@@ -51,8 +66,13 @@ use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatement
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
+use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
+use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
+use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
+use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
+use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyParts;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\RestApi\Domain\Services\StatementRemover;
@@ -80,6 +100,7 @@ use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatchValidator;
 use Wikibase\Repo\RestApi\Infrastructure\LabelsEditSummaryToFormattableSummaryConverter;
 use Wikibase\Repo\RestApi\Infrastructure\SiteLinksReadModelConverter;
 use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryLabelTextValidator;
+use Wikibase\Repo\RestApi\Infrastructure\ValidatingRequestDeserializer as VRD;
 use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoItemLabelValidator;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
@@ -90,6 +111,103 @@ use Wikibase\Repo\WikibaseRepo;
 
 /** @phpcs-require-sorted-array */
 return [
+	// phpcs:disable MediaWiki.Arrays.AlphabeticArraySort.Duplicate
+	// The rule is re-enabled further down. The sniff is unable to handle class constant keys properly.
+
+	VRD::ITEM_ID_REQUEST_VALIDATING_DESERIALIZER => function(): ItemIdRequestValidatingDeserializer {
+		return new ItemIdRequestValidatingDeserializer( new ItemIdValidator() );
+	},
+
+	VRD::PROPERTY_ID_REQUEST_VALIDATING_DESERIALIZER => function(): MappedRequestValidatingDeserializer {
+		$propertyIdValidatingDeserializer = new PropertyIdValidatingDeserializer( new PropertyIdValidator() );
+		return new MappedRequestValidatingDeserializer(
+			fn( PropertyIdRequest $r ) => $propertyIdValidatingDeserializer->validateAndDeserialize( $r->getPropertyId() )
+		);
+	},
+
+	VRD::STATEMENT_ID_REQUEST_VALIDATING_DESERIALIZER => function(): StatementIdRequestValidatingDeserializer {
+		$entityIdParser = new BasicEntityIdParser();
+
+		return new StatementIdRequestValidatingDeserializer(
+			new StatementIdValidator( $entityIdParser ),
+			new StatementGuidParser( $entityIdParser )
+		);
+	},
+
+	VRD::PROPERTY_ID_FILTER_REQUEST_VALIDATING_DESERIALIZER => function(): MappedRequestValidatingDeserializer {
+		$propertyIdValidatingDeserializer = new PropertyIdValidatingDeserializer( new PropertyIdValidator() );
+		return new MappedRequestValidatingDeserializer(
+			fn( PropertyIdFilterRequest $r ) => $r->getPropertyIdFilter() === null
+				? null
+				// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
+				: $propertyIdValidatingDeserializer->validateAndDeserialize( $r->getPropertyIdFilter() )
+		);
+	},
+
+	VRD::LANGUAGE_CODE_REQUEST_VALIDATING_DESERIALIZER =>
+		function ( MediaWikiServices $services ): LanguageCodeRequestValidatingDeserializer {
+			return new LanguageCodeRequestValidatingDeserializer(
+				new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() )
+			);
+		},
+
+	VRD::ITEM_FIELDS_REQUEST_VALIDATING_DESERIALIZER => function (): MappedRequestValidatingDeserializer {
+		$fieldsValidator = new FieldsFilterValidatingDeserializer( ItemParts::VALID_FIELDS );
+		return new MappedRequestValidatingDeserializer(
+			fn( ItemFieldsRequest $r ) => $fieldsValidator->validateAndDeserialize( $r->getItemFields() )
+		);
+	},
+
+	VRD::PROPERTY_FIELDS_REQUEST_VALIDATING_DESERIALIZER => function (): MappedRequestValidatingDeserializer {
+		$fieldsValidator = new FieldsFilterValidatingDeserializer( PropertyParts::VALID_FIELDS );
+		return new MappedRequestValidatingDeserializer(
+			fn( PropertyFieldsRequest $r ) => $fieldsValidator->validateAndDeserialize( $r->getPropertyFields() )
+		);
+	},
+
+	VRD::STATEMENT_SERIALIZATION_REQUEST_VALIDATING_DESERIALIZER =>
+		function ( MediaWikiServices $services ): StatementSerializationRequestValidatingDeserializer {
+			return new StatementSerializationRequestValidatingDeserializer(
+				new StatementValidator( WbRestApi::getStatementDeserializer( $services ) )
+			);
+		},
+
+	VRD::EDIT_METADATA_REQUEST_VALIDATING_DESERIALIZER => function (): EditMetadataRequestValidatingDeserializer {
+		return new EditMetadataRequestValidatingDeserializer(
+			new EditMetadataValidator(
+				CommentStore::COMMENT_CHARACTER_LIMIT,
+				ChangeTags::listExplicitlyDefinedTags()
+			)
+		);
+	},
+
+	VRD::PATCH_REQUEST_VALIDATING_DESERIALIZER => function (): PatchRequestValidatingDeserializer {
+		return new PatchRequestValidatingDeserializer( new JsonDiffJsonPatchValidator() );
+	},
+
+	VRD::ITEM_LABEL_EDIT_REQUEST_VALIDATING_DESERIALIZER =>
+		function ( MediaWikiServices $services ): ItemLabelEditRequestValidatingDeserializer {
+			return new ItemLabelEditRequestValidatingDeserializer(
+				new WikibaseRepoItemLabelValidator(
+					new TermValidatorFactoryLabelTextValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
+					WikibaseRepo::getItemTermsCollisionDetector( $services ),
+					WbRestApi::getItemDataRetriever( $services )
+				)
+			);
+		},
+
+	VRD::ITEM_DESCRIPTION_EDIT_REQUEST_VALIDATING_DESERIALIZER =>
+		function ( MediaWikiServices $services ): ItemDescriptionEditRequestValidatingDeserializer {
+			return new ItemDescriptionEditRequestValidatingDeserializer(
+				new WikibaseRepoItemDescriptionValidator(
+					WikibaseRepo::getTermValidatorFactory( $services ),
+					WikibaseRepo::getItemTermsCollisionDetector( $services ),
+					WbRestApi::getItemDataRetriever( $services )
+				)
+			);
+		},
+
+	// phpcs:enable
 
 	'WbRestApi.AddItemStatement' => function( MediaWikiServices $services ): AddItemStatement {
 		return new AddItemStatement(
@@ -145,11 +263,6 @@ return [
 			)
 		);
 	},
-
-	'WbRestApi.EditMetadataValidator' => fn( MediaWikiServices $services ) => new EditMetadataValidator(
-		CommentStore::COMMENT_CHARACTER_LIMIT,
-		ChangeTags::listExplicitlyDefinedTags()
-	),
 
 	'WbRestApi.EntityUpdater' => function( MediaWikiServices $services ): EntityUpdater {
 		return new EntityUpdater(
@@ -546,24 +659,8 @@ return [
 		);
 	},
 
-	'WbRestApi.ValidatingRequestDeserializer' => function( MediaWikiServices $services ): ValidatingRequestDeserializer {
-		return new ValidatingRequestDeserializer( new ValidatingRequestFieldDeserializerFactory(
-			new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() ),
-			WbRestApi::getStatementDeserializer( $services ),
-			new JsonDiffJsonPatchValidator(),
-			new WikibaseRepoItemLabelValidator(
-				new TermValidatorFactoryLabelTextValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
-				WikibaseRepo::getItemTermsCollisionDetector( $services ),
-				WbRestApi::getItemDataRetriever( $services )
-			),
-			new WikibaseRepoItemDescriptionValidator(
-				WikibaseRepo::getTermValidatorFactory( $services ),
-				WikibaseRepo::getItemTermsCollisionDetector( $services ),
-				WbRestApi::getItemDataRetriever( $services )
-			),
-			CommentStore::COMMENT_CHARACTER_LIMIT,
-			ChangeTags::listExplicitlyDefinedTags()
-		) );
+	'WbRestApi.ValidatingRequestDeserializer' => function( MediaWikiServices $services ): VRD {
+		return new VRD( $services );
 	},
 
 ];

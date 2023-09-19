@@ -4,15 +4,13 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\GetProperty;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestPropertyRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetProperty;
 use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetPropertyRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetPropertyValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyParts;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyPartsRetriever;
-use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestFieldDeserializerFactory;
+use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetProperty
@@ -43,7 +41,7 @@ class GetPropertyTest extends TestCase {
 		$response = ( new GetProperty(
 			$getRevisionMetadata,
 			$propertyPartsRetriever,
-			$this->newValidator()
+			new TestValidatingRequestDeserializer()
 		) )->execute(
 			new GetPropertyRequest( "$propertyId" )
 		);
@@ -59,7 +57,7 @@ class GetPropertyTest extends TestCase {
 			( new GetProperty(
 				$this->createStub( GetLatestPropertyRevisionMetadata::class ),
 				$this->createStub( PropertyPartsRetriever::class ),
-				$this->newValidator()
+				new TestValidatingRequestDeserializer()
 			) )->execute( new GetPropertyRequest( $propertyId ) );
 
 			$this->fail( 'this should not be reached' );
@@ -68,7 +66,4 @@ class GetPropertyTest extends TestCase {
 		}
 	}
 
-	private function newValidator(): GetPropertyValidator {
-		return new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() );
-	}
 }

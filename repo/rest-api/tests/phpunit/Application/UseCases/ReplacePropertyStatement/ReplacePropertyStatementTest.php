@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\ReplacePropertyStatement;
 
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplacePropertyStatement\ReplacePropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplacePropertyStatement\ReplacePropertyStatementRequest;
@@ -12,7 +11,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatement
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
-use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestFieldDeserializerFactory;
+use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\ReplacePropertyStatement\ReplacePropertyStatement
@@ -31,13 +30,13 @@ class ReplacePropertyStatementTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->validator = new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() );
+		$this->validator = new TestValidatingRequestDeserializer();
 		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
 		$this->replaceStatement = $this->createStub( ReplaceStatement::class );
 	}
 
 	public function testGivenValidRequest_returnsReplaceStatementResponse(): void {
-		$propertyId = TestValidatingRequestFieldDeserializerFactory::EXISTING_STRING_PROPERTY;
+		$propertyId = TestValidatingRequestDeserializer::EXISTING_STRING_PROPERTY;
 		$request = $this->newUseCaseRequest( $propertyId, "$propertyId\$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE" );
 		$expectedResponse = $this->createStub( ReplaceStatementResponse::class );
 		$this->replaceStatement = $this->createMock( ReplaceStatement::class );
@@ -105,7 +104,7 @@ class ReplacePropertyStatementTest extends TestCase {
 		$useCaseRequest->method( 'getPropertyId' )->willReturn( $propertyId );
 		$useCaseRequest->method( 'getStatementId' )->willReturn( $statementId );
 		$useCaseRequest->method( 'getStatement' )->willReturn( [
-			'property' => [ 'id' => TestValidatingRequestFieldDeserializerFactory::EXISTING_STRING_PROPERTY ],
+			'property' => [ 'id' => TestValidatingRequestDeserializer::EXISTING_STRING_PROPERTY ],
 			'value' => [ 'type' => 'novalue' ],
 		] );
 

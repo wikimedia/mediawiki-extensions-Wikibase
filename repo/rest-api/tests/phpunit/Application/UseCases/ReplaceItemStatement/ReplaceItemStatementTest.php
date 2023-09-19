@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\ReplaceItemStatement;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Statement\StatementGuid;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatementRequest;
@@ -14,7 +13,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatement
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
-use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestFieldDeserializerFactory;
+use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 
 /**
@@ -35,7 +34,7 @@ class ReplaceItemStatementTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->validator = new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() );
+		$this->validator = new TestValidatingRequestDeserializer();
 		$this->assertItemExists = $this->createStub( AssertItemExists::class );
 		$this->replaceStatement  = $this->createStub( ReplaceStatement::class );
 	}
@@ -43,7 +42,7 @@ class ReplaceItemStatementTest extends TestCase {
 	public function testGivenValidReplaceItemStatementRequest_callsReplaceStatementUseCase(): void {
 		$itemId = new ItemId( 'Q123' );
 		$statementId = new StatementGuid( $itemId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
-		$editTags = TestValidatingRequestFieldDeserializerFactory::ALLOWED_TAGS;
+		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
 		$comment = 'statement replaced by ' . __method__;
 		$request = $this->newUseCaseRequest( [
@@ -152,7 +151,7 @@ class ReplaceItemStatementTest extends TestCase {
 			$requestData['$itemId'],
 			$requestData['$statementId'],
 			$requestData['$statement'] ?? [
-				'property' => [ 'id' => TestValidatingRequestFieldDeserializerFactory::EXISTING_STRING_PROPERTY ],
+				'property' => [ 'id' => TestValidatingRequestDeserializer::EXISTING_STRING_PROPERTY ],
 				'value' => [ 'type' => 'novalue' ],
 			],
 			$requestData['$editTags'] ?? [],
