@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
+use JobQueueGroup;
 use MediaWikiIntegrationTestCase;
 use WANObjectCache;
 use Wikibase\DataModel\Entity\ItemId;
@@ -45,7 +46,7 @@ class DatabaseItemTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 	/** @var Fingerprint */
 	private $fingerprintEmpty;
 
-	private $jobQueueMock;
+	private JobQueueGroup $jobQueueMock;
 
 	/** * @var MockJobQueueFactory */
 	private $mockJobQueueFactory;

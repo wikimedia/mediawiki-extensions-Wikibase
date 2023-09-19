@@ -240,7 +240,7 @@ abstract class EntityContent extends AbstractContent {
 	 * @note This may or may not be consistent with what EntityContentCodec does.
 	 *       It it intended to be used primarily for diffing.
 	 */
-	private function getRedirectData() {
+	private function getRedirectData(): array {
 		// NOTE: keep in sync with getPatchedRedirect
 		$data = [];
 

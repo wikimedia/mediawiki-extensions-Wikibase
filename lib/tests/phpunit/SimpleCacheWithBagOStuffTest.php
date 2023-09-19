@@ -147,11 +147,7 @@ class SimpleCacheWithBagOStuffTest extends SimpleCacheTestCase {
 		new SimpleCacheWithBagOStuff( $inner, 'prefix', '' );
 	}
 
-	/**
-	 * @param $inner
-	 * @param $key
-	 */
-	protected function spoilTheSignature( $inner, $key ) {
+	protected function spoilTheSignature( HashBagOStuff $inner, string $key ): void {
 		$value = $inner->get( $key );
 		list( $signature, $data ) = json_decode( $value );
 		$inner->set( $key, json_encode( [ 'wrong signature', $data ] ) );

@@ -94,7 +94,7 @@ class EntityTermsViewFactory {
 	 * This is because the objects created from this factory are assumed to
 	 * write into ParserOutput which should not include any user-specific markup.
 	 */
-	private function newTermboxView( Language $language ) {
+	private function newTermboxView( Language $language ): TermboxView {
 		$textProvider = new MediaWikiLocalizedTextProvider( $language );
 		$services = MediaWikiServices::getInstance();
 		$repoSettings = WikibaseRepo::getSettings( $services );

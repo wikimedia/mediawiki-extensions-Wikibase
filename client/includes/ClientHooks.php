@@ -232,7 +232,7 @@ final class ClientHooks {
 	 * Used to propagate configuration for the linkitem feature to JavaScript.
 	 * This is used in the "wikibase.client.linkitem.init" module.
 	 */
-	public static function getLinkitemConfiguration() {
+	public static function getLinkitemConfiguration(): array {
 		$cache = MediaWikiServices::getInstance()->getLocalServerObjectCache();
 		$key = $cache->makeKey(
 			'wikibase-client',
