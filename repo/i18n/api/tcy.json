@@ -1,14 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ravi Mundkur"
+			"Ravi Mundkur",
+			"Amire80"
 		]
 	},
 	"apihelp-wbformatentities-summary": "HTML ದ ವಸ್ತು ID ಲೆನ್ ರೂಪನ ಮಲ್ಪುಂಡು",
 	"apihelp-wbformatentities-extended-description": "global <var> uselang </var> ಪಾರಮಾನದ ಒಟ್ಟುಗು ಭಾಷೆನ್ ವಿಸೂಚಿಸಾವೊಲಿ.",
 	"apihelp-wbformatentities-param-ids": "ವಸ್ತು ID ಲೆನ ರೂಪನ ಮಲ್ಪರೆ",
 	"apihelp-wbformatentities-example-1": "ಒಂಜಿ ಏಕ ವಿಷಯಾಂಶ ID ನ್ ರೂಪನ ಮಲ್ಪುಲೆ.",
-	"apihelp-wbformatentities-example-2": "ಒಂಜಿ  ವಿಷಯಾಂಶ ID ಬೊಕ ಒಂಜಿ ಗುಣಾಂಶ ID ನ್ ರೂಪನ ಮಲ್ಪುಲೆ.",
-	"apihelp-wbformatentities-example-3": "ಒಂಜಿ  ವಿಷಯಾಂಶ ID ,  ಒಂಜಿ ಗುಣಾಂಶ ID, ಬೊಕ ಒಂಜಿ ಪದಕಣ ID ನ್ ರೂಪನ ಮಲ್ಪುಲೆ.",
+	"apihelp-wbformatentities-example-2": "ಒಂಜಿ ವಿಷಯಾಂಶ ID ಬೊಕ ಒಂಜಿ ಗುಣಾಂಶ ID ನ್ ರೂಪನ ಮಲ್ಪುಲೆ.",
+	"apihelp-wbformatentities-example-3": "ಒಂಜಿ ವಿಷಯಾಂಶ ID , ಒಂಜಿ ಗುಣಾಂಶ ID, ಬೊಕ ಒಂಜಿ ಪದಕಣ ID ನ್ ರೂಪನ ಮಲ್ಪುಲೆ.",
 	"apihelp-wbformatentities-example-4": "ಫ್ರೆಂಚಿಡ್ ಮೂಜಿ ವಿಷಯಾಂಶ ID ಲೆನ್ ರೂಪನ ಮಲ್ಪುಲೆ."
 }

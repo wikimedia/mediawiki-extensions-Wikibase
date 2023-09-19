@@ -10,7 +10,8 @@
 			"Mr. Ibrahem",
 			"SaldırganSincap",
 			"ديفيد",
-			"محمد أحمد عبد الفتاح"
+			"محمد أحمد عبد الفتاح",
+			"Amire80"
 		]
 	},
 	"apihelp-wbavailablebadges-description": "استعلم عن العناصر المتوفرة بشارات.",
@@ -139,7 +140,7 @@
 	"apihelp-wbremoveclaims-summary": "يزيل ادعاءات Wikibase.",
 	"apihelp-wbremoveclaims-param-baserevid": "المعرف الرقمي للمراجعة لنسب التعديل عليها.\nهذا يستخدم لكشف التعارضات أثناء الحفظ.",
 	"apihelp-wbremoveclaims-param-bot": "علم على هذا التعديل كبوت. علم المسار هذا سيتم احترامه فقط لو كان المستخدم ينتمي للمجموعة \"bot\".",
-	"apihelp-wbremoveclaims-param-claim": "GUID واحد أو عدة GUIDs (مفصولة باستخدام pipe)  لتعريف الادعاءات للإزالة.\nكل الادعاءات ينبغي أن تنتمي لنفس الكيان.",
+	"apihelp-wbremoveclaims-param-claim": "GUID واحد أو عدة GUIDs (مفصولة باستخدام pipe) لتعريف الادعاءات للإزالة.\nكل الادعاءات ينبغي أن تنتمي لنفس الكيان.",
 	"apihelp-wbremoveclaims-param-summary": "ملخص التعديل.\nستتم إضافته بعد تعليق مولد تلقائيا. حد الطول للتعليق التلقائي مع الملخص هو 260 حرف. انتبه إلى أن كل شيء فوق هذا الحد ستتم إزالته.",
 	"apihelp-wbremoveclaims-param-tags": "وسوم التغيير لتطبيقها على المراجعة.",
 	"apihelp-wbremoveclaims-example-1": "أزل الادعاء بGUID \"$1\"",
@@ -329,7 +330,7 @@
 	"apihelp-wbsetsitelink-example-4": "إزالة وصلة الموقع الألمانية من العنصر",
 	"apihelp-wbsetsitelink-example-5": "أضف وصلة موقع للصفحة بالبولندية \"Wodór\" للعنصر المربوط مع المقال بالإنجليزية \"Hydrogen\"، مع شارة واحدة تشير للعنصر بالرقم \"Q149\"",
 	"apihelp-wbsetsitelink-example-6": "غير الشارات للوصلة للصفحة البولندية من العنصر بالرقم <samp>$1</samp> لشاراتين تشيران للعنصرين بالرقمين \"Q2\" و \"Q149\" بدون توفير عنوان الوصلة",
-	"apihelp-wbsetsitelink-example-7": "غير الوصلة للصفحة البولندية من العنصر بالرقم <samp>$1</samp>  بدون تغيير الشارات",
+	"apihelp-wbsetsitelink-example-7": "غير الوصلة للصفحة البولندية من العنصر بالرقم <samp>$1</samp> بدون تغيير الشارات",
 	"apihelp-wbsetsitelink-example-8": "غير الوصلة للصفحة البولندية من العنصر بالرقم <samp>$1</samp> وأزل كل شاراته",
 	"apihelp-wbformatentities-summary": "ينظم معرفات الكيانات إلى HTML.",
 	"apihelp-wbformatentities-extended-description": "يمكن تحديد اللغة باستخدام الوسيط العالمي <var>uselang</var>.",

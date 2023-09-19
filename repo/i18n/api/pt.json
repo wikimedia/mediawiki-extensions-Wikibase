@@ -4,7 +4,8 @@
 			"Athena in Wonderland",
 			"Fúlvio",
 			"Hamilton Abreu",
-			"SaldırganSincap"
+			"SaldırganSincap",
+			"Amire80"
 		]
 	},
 	"apihelp-wbavailablebadges-description": "Consulta os objetos de emblemas disponíveis.",
@@ -115,7 +116,7 @@
 	"apihelp-wbmergeitems-param-tags": "Etiquetas de modificação a aplicar às revisões.",
 	"apihelp-wbmergeitems-param-bot": "Marcar esta edição como uma edição por robô. Esta etiqueta URL só será respeitada se o utilizador pertencer ao grupo \"robôs\".",
 	"apihelp-wbmergeitems-example-1": "Funde os dados de <samp>$1</samp> nos de <samp>$2</samp>",
-	"apihelp-wbmergeitems-example-3": "Funde os dados de <samp>$1</samp> nos de <samp>$2</samp>, ignorando  todas as hiperligações intersites que estejam em conflito",
+	"apihelp-wbmergeitems-example-3": "Funde os dados de <samp>$1</samp> nos de <samp>$2</samp>, ignorando todas as hiperligações intersites que estejam em conflito",
 	"apihelp-wbmergeitems-example-4": "Funde os dados de <samp>$1</samp> nos de <samp>$2</samp>, ignorando todas as hiperligações intersites e descrições que estejam em conflito",
 	"apihelp-wbparsevalue-description": "Analisa os valores usando um analisador de valores (<code>ValueParser</code>)",
 	"apihelp-wbparsevalue-summary": "Analisa os valores usando um analisador de valores (<code>ValueParser</code>)",
