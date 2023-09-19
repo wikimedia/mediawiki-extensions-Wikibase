@@ -135,7 +135,7 @@ class LineReader implements Iterator {
 	 * next() has been called at least once and the end of file has not yet been reached.
 	 *
 	 * @see http://php.net/manual/en/iterator.valid.php
-	 * @return boolean whether there is a current line
+	 * @return bool whether there is a current line
 	 */
 	public function valid(): bool {
 		return is_string( $this->current );

@@ -13,7 +13,7 @@ interface StatementFilter {
 	/**
 	 * @param Statement $statement
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function statementMatches( Statement $statement );
 

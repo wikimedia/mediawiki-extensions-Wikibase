@@ -40,7 +40,7 @@ class ItemPatcher implements EntityPatcherStrategy {
 	/**
 	 * @param string $entityType
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function canPatchEntityType( $entityType ) {
 		return $entityType === 'item';

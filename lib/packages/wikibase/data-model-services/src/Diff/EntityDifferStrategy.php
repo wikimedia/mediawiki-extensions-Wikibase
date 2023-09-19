@@ -16,7 +16,7 @@ interface EntityDifferStrategy {
 	/**
 	 * @param string $entityType
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function canDiffEntityType( $entityType );
 

@@ -202,8 +202,8 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	}
 
 	/**
-	 * @param integer $offset Start to include at number of entries from the start title
-	 * @param integer $limit Stop at number of entries after start of inclusion
+	 * @param int $offset Start to include at number of entries from the start title
+	 * @param int $limit Stop at number of entries after start of inclusion
 	 *
 	 * @return NumericPropertyId[]
 	 */

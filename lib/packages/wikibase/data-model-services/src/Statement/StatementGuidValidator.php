@@ -30,7 +30,7 @@ class StatementGuidValidator {
 	 *
 	 * @param string $guid
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function validate( $guid ) {
 		if ( !$this->validateFormat( $guid ) ) {
@@ -53,7 +53,7 @@ class StatementGuidValidator {
 	 *
 	 * @param string $guid
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function validateFormat( $guid ) {
 		if ( !is_string( $guid ) ) {
@@ -76,7 +76,7 @@ class StatementGuidValidator {
 	 *
 	 * @param string $guid
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	private function validateGuid( $guid ) {
 		return (bool)preg_match(
@@ -92,7 +92,7 @@ class StatementGuidValidator {
 	 *
 	 * @param string $prefixedId
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	private function validateStatementGuidPrefix( $prefixedId ) {
 		try {

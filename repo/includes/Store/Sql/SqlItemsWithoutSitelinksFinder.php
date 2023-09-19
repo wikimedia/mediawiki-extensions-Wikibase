@@ -37,8 +37,8 @@ class SqlItemsWithoutSitelinksFinder implements ItemsWithoutSitelinksFinder {
 	}
 
 	/**
-	 * @param integer $limit Limit of the query.
-	 * @param integer $offset Offset of the query.
+	 * @param int $limit Limit of the query.
+	 * @param int $offset Offset of the query.
 	 *
 	 * @return ItemId[]
 	 */

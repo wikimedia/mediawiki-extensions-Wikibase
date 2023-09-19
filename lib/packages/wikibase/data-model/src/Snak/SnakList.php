@@ -51,7 +51,7 @@ class SnakList extends ArrayObject {
 	 *
 	 * @param string $snakHash
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function hasSnakHash( $snakHash ) {
 		return array_key_exists( $snakHash, $this->offsetHashes );
@@ -74,7 +74,7 @@ class SnakList extends ArrayObject {
 	 *
 	 * @param Snak $snak
 	 *
-	 * @return boolean Indicates if the snak was added or not.
+	 * @return bool Indicates if the snak was added or not.
 	 */
 	public function addSnak( Snak $snak ) {
 		if ( $this->hasSnak( $snak ) ) {
@@ -90,7 +90,7 @@ class SnakList extends ArrayObject {
 	 *
 	 * @param Snak $snak
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function hasSnak( Snak $snak ) {
 		return $this->hasSnakHash( $snak->getHash() );

@@ -343,7 +343,7 @@ class ExternalChangeFactoryTest extends MediaWikiIntegrationTestCase {
 	 * @param null|string|array $legacyComment
 	 * @param null|string|array $compositeLegacyComment
 	 * @param string $changeType
-	 * @param boolean $bot
+	 * @param bool $bot
 	 *
 	 * @return array
 	 */

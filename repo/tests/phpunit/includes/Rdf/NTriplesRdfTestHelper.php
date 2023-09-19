@@ -31,7 +31,7 @@ class NTriplesRdfTestHelper {
 	}
 
 	/**
-	 * @return boolean whether all blank nodes are considered equal
+	 * @return bool whether all blank nodes are considered equal
 	 */
 	public function getAllBlanksEqual() {
 		return $this->allBlanksEqual;
@@ -42,7 +42,7 @@ class NTriplesRdfTestHelper {
 	 * numbering of blank nodes. However, it also means that no test can reöly on the identity
 	 * of a blank node.
 	 *
-	 * @param boolean $allBlanksEqual whether all blank nodes are considered equal
+	 * @param bool $allBlanksEqual whether all blank nodes are considered equal
 	 */
 	public function setAllBlanksEqual( $allBlanksEqual ) {
 		$this->allBlanksEqual = $allBlanksEqual;

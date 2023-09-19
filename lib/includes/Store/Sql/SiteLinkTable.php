@@ -200,7 +200,7 @@ class SiteLinkTable implements SiteLinkStore {
 	 *
 	 * @param ItemId $itemId
 	 *
-	 * @return boolean Success indicator
+	 * @return bool Success indicator
 	 */
 	public function deleteLinksOfItem( ItemId $itemId ): bool {
 		if ( $this->readonly ) {

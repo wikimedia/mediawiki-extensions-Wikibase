@@ -442,7 +442,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @param string[] $badges
 	 * @param Status $status
 	 *
-	 * @return ItemId[]|boolean
+	 * @return ItemId[]|false
 	 */
 	private function parseBadges( array $badges, Status $status ) {
 		$badgesObjects = [];

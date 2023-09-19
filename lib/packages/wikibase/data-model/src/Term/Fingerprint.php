@@ -71,7 +71,7 @@ class Fingerprint implements LabelsProvider, DescriptionsProvider, AliasesProvid
 	 *
 	 * @param string $languageCode
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function hasLabel( $languageCode ) {
 		return $this->labels->hasTermForLanguage( $languageCode );
@@ -125,7 +125,7 @@ class Fingerprint implements LabelsProvider, DescriptionsProvider, AliasesProvid
 	 *
 	 * @param string $languageCode
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function hasDescription( $languageCode ) {
 		return $this->descriptions->hasTermForLanguage( $languageCode );
@@ -179,7 +179,7 @@ class Fingerprint implements LabelsProvider, DescriptionsProvider, AliasesProvid
 	 *
 	 * @param string $languageCode
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function hasAliasGroup( $languageCode ) {
 		return $this->aliasGroups->hasGroupForLanguage( $languageCode );

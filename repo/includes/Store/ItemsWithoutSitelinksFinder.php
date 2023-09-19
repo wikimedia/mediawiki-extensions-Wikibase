@@ -16,8 +16,8 @@ interface ItemsWithoutSitelinksFinder {
 	/**
 	 * TODO: In the future, we probably want a non-numeric offset here, see T67333.
 	 *
-	 * @param integer $limit Limit of the query.
-	 * @param integer $offset Offset of the query.
+	 * @param int $limit Limit of the query.
+	 * @param int $offset Offset of the query.
 	 *
 	 * @return EntityId[]
 	 */
