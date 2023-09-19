@@ -51,9 +51,9 @@ class CacheAwarePropertyInfoStore implements PropertyInfoStore {
 	/**
 	 * @param PropertyInfoStore $store The info store to call back to.
 	 * @param WANObjectCache $cache
-	 * @param int $cacheDuration       Number of seconds to keep the cached version for.
+	 * @param int $cacheDuration Number of seconds to keep the cached version for.
 	 *                                 Defaults to 3600 seconds = 1 hour.
-	 * @param string $cacheKeyGroup    Group name of the Wikibases to be used when generating global cache keys
+	 * @param string $cacheKeyGroup Group name of the Wikibases to be used when generating global cache keys
 	 */
 	public function __construct(
 		PropertyInfoStore $store,
