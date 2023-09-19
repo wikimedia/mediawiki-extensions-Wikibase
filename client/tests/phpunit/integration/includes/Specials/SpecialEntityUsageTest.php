@@ -104,7 +104,7 @@ class SpecialEntityUsageTest extends SpecialPageTestBase {
 	}
 
 	public function testExecuteWithInvalidParam() {
-		list( $result, ) = $this->executeSpecialPage( 'FooBar', null, 'qqx' );
+		[ $result ] = $this->executeSpecialPage( 'FooBar' );
 
 		$this->assertStringContainsString( '<p class="error"', $result );
 		$this->assertStringContainsString( '(wikibase-entityusage-invalid-id: FooBar)', $result );

@@ -31,9 +31,6 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 
 	use HtmlAssertionHelpers;
 
-	/** @see \LanguageQqx */
-	private const DUMMY_LANGUAGE = 'qqx';
-
 	/**
 	 * @return SiteLinkLookup
 	 */
@@ -149,7 +146,7 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 	 */
 	public function testExecuteWithoutRedirect( $sub, $target, $site, $item, $error ) {
 		/** @var FauxResponse $response */
-		list( $output, $response ) = $this->executeSpecialPage( $sub, null, self::DUMMY_LANGUAGE );
+		[ $output, $response ] = $this->executeSpecialPage( $sub );
 
 		$this->assertEquals( $target, $response->getHeader( 'Location' ), 'Redirect' );
 

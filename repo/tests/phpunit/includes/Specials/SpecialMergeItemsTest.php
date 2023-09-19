@@ -213,7 +213,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 
 		$request = new FauxRequest( $params, true );
 
-		list( $html, ) = $this->executeSpecialPage( '', $request, 'qqx', $user );
+		[ $html ] = $this->executeSpecialPage( '', $request, null, $user );
 		return $html;
 	}
 
