@@ -171,12 +171,8 @@ class SetAliasesTest extends ModifyTermTestCase {
 	public function testSetAliases( $params, $expected ) {
 		// -- set any defaults ------------------------------------
 		$params['action'] = self::$testAction;
-		if ( !array_key_exists( 'id', $params ) ) {
-			$params['id'] = EntityTestHelper::getId( 'Empty' );
-		}
-		if ( !array_key_exists( 'value', $expected ) ) {
-			$expected['value'] = [];
-		}
+		$params['id'] ??= EntityTestHelper::getId( 'Empty' );
+		$expected['value'] ??= [];
 
 		// -- do the request --------------------------------------------------
 		list( $result, , ) = $this->doApiRequestWithToken( $params );
