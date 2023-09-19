@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabels;
 
-use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\UseCaseRequest;
 
 /**
  * @license GPL-2.0-or-later

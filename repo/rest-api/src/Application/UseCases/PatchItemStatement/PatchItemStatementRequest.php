@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement;
 
-use Wikibase\Repo\RestApi\Application\UseCases\ItemIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementRequest;
 
 /**

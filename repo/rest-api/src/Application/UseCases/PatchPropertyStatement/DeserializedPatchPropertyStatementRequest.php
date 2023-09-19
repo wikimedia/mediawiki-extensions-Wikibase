@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyStatement;
 
-use Wikibase\Repo\RestApi\Application\UseCases\DeserializedPropertyIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\DeserializedPropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\DeserializedPatchStatementRequest;
 
 /**

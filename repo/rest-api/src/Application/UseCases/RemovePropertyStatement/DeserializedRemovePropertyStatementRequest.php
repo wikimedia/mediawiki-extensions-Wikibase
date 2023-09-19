@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyStatement;
 
-use Wikibase\Repo\RestApi\Application\UseCases\DeserializedPropertyIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\DeserializedPropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\DeserializedRemoveStatementRequest;
 
 /**

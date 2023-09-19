@@ -4,15 +4,15 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\GetProperty;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestPropertyRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetProperty;
 use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetPropertyRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetPropertyValidator;
-use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyParts;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyPartsRetriever;
-use Wikibase\Repo\Tests\RestApi\Application\UseCases\RequestValidation\TestValidatingRequestFieldDeserializerFactory;
+use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestFieldDeserializerFactory;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetProperty

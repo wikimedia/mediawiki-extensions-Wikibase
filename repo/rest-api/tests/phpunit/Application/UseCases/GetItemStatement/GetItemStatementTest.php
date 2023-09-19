@@ -3,16 +3,16 @@
 namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\GetItemStatement;
 
 use PHPUnit\Framework\TestCase;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementResponse;
-use Wikibase\Repo\RestApi\Application\UseCases\RequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
-use Wikibase\Repo\Tests\RestApi\Application\UseCases\RequestValidation\TestValidatingRequestFieldDeserializerFactory;
+use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestFieldDeserializerFactory;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatement

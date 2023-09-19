@@ -2,10 +2,10 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement;
 
-use Wikibase\Repo\RestApi\Application\UseCases\EditMetadataRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\StatementSerializationRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementSerializationRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\UseCaseRequest;
 
 /**
  * @license GPL-2.0-or-later

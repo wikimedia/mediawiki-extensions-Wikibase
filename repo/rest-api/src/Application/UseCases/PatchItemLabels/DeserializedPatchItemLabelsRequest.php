@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels;
 
-use Wikibase\Repo\RestApi\Application\UseCases\DeserializedEditMetadataRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\DeserializedItemIdRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\DeserializedPatchRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\DeserializedEditMetadataRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\DeserializedItemIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\DeserializedPatchRequest;
 
 /**
  * @license GPL-2.0-or-later

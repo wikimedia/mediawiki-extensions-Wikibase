@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetProperty;
 
-use Wikibase\Repo\RestApi\Application\UseCases\PropertyFieldsRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyFieldsRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\UseCaseRequest;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyParts;
 
 /**

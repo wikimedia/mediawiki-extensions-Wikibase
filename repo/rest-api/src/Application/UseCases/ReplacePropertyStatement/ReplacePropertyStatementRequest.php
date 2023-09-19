@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\ReplacePropertyStatement;
 
-use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementRequest;
 
 /**

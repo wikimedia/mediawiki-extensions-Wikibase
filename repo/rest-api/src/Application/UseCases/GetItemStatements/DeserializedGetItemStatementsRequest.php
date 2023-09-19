@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements;
 
-use Wikibase\Repo\RestApi\Application\UseCases\DeserializedItemIdRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\DeserializedPropertyIdFilterRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\DeserializedItemIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\DeserializedPropertyIdFilterRequest;
 
 /**
  * @license GPL-2.0-or-later

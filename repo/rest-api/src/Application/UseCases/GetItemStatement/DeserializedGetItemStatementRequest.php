@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement;
 
-use Wikibase\Repo\RestApi\Application\UseCases\DeserializedItemIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\DeserializedItemIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\DeserializedGetStatementRequest;
 
 /**

@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement;
 
-use Wikibase\Repo\RestApi\Application\UseCases\DeserializedItemIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\DeserializedItemIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\DeserializedReplaceStatementRequest;
 
 /**
