@@ -1,5 +1,6 @@
 {
 	"get": {
+		"operationId": "getItemDescriptions",
 		"tags": [ "descriptions" ],
 		"summary": "Retrieve an Item's descriptions",
 		"parameters": [

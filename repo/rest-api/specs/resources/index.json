@@ -6,7 +6,10 @@
 		"$ref": "./properties/single.json"
 	},
 	"/entities/items/{item_id}/descriptions": {
-		"$ref": "./descriptions/list.json"
+		"$ref": "./descriptions/list-for-item.json"
+	},
+	"/entities/properties/{property_id}/descriptions": {
+		"$ref": "./descriptions/list-for-property.json"
 	},
 	"/entities/items/{item_id}/descriptions/{language_code}": {
 		"$ref": "./descriptions/description-in-language.json"
