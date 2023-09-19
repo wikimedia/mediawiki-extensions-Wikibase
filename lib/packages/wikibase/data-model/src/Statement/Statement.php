@@ -178,7 +178,7 @@ class Statement implements PropertyIdProvider {
 	 *
 	 * @since 0.1
 	 *
-	 * @param integer $rank
+	 * @param int $rank
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -195,7 +195,7 @@ class Statement implements PropertyIdProvider {
 	/**
 	 * @since 0.1
 	 *
-	 * @return integer
+	 * @return int
 	 */
 	public function getRank(): int {
 		return $this->rank;

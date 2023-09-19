@@ -68,7 +68,7 @@ class InterWikiLinkExistsValidator implements ValueValidator {
 
 	/**
 	 * @param string $pageName
-	 * @return boolean
+	 * @return bool
 	 */
 	private function isPageNameExisting( $pageName ) {
 		$actualPageName = $this->mediaWikiPageNameNormalizer->normalizePageName(

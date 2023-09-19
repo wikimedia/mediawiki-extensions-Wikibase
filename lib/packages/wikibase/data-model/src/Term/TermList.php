@@ -172,7 +172,7 @@ class TermList implements Countable, IteratorAggregate {
 	 *
 	 * @param Term $term
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function hasTerm( Term $term ) {
 		return array_key_exists( $term->getLanguageCode(), $this->terms )

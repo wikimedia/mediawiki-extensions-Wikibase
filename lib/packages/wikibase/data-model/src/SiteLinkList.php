@@ -138,7 +138,7 @@ class SiteLinkList implements IteratorAggregate, Countable {
 	 *
 	 * @param string $siteId
 	 *
-	 * @return boolean
+	 * @return bool
 	 * @throws InvalidArgumentException
 	 */
 	public function hasLinkWithSiteId( $siteId ) {

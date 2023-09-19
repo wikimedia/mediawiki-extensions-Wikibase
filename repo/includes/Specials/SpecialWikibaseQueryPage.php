@@ -87,8 +87,8 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	/**
 	 * Return the result of the query
 	 *
-	 * @param integer $offset Start to include at number of entries from the start title
-	 * @param integer $limit Stop at number of entries after start of inclusion
+	 * @param int $offset Start to include at number of entries from the start title
+	 * @param int $limit Stop at number of entries after start of inclusion
 	 *
 	 * @return EntityId[]
 	 */
@@ -153,8 +153,8 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	 * Format and output report results using the given information plus OutputPage
 	 *
 	 * @param EntityId[] $entityIds
-	 * @param integer $num number of available result rows
-	 * @param integer $offset paging offset
+	 * @param int $num number of available result rows
+	 * @param int $offset paging offset
 	 */
 	protected function outputResults( array $entityIds, $num, $offset ) {
 		if ( $num > 0 ) {

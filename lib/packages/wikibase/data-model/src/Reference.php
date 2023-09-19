@@ -58,7 +58,7 @@ class Reference implements Countable {
 	 *
 	 * @since 0.3
 	 *
-	 * @return integer
+	 * @return int
 	 */
 	public function count(): int {
 		return count( $this->snaks );

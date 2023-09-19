@@ -18,7 +18,7 @@ interface EntityTermStoreWriter {
 	 *  declared by the TermIndexEntry::TYPE_... constants.
 	 *
 	 * @throws InvalidArgumentException when $entity does not have an ID.
-	 * @return boolean Success indicator
+	 * @return bool Success indicator
 	 */
 	public function saveTermsOfEntity( EntityDocument $entity );
 
@@ -27,7 +27,7 @@ interface EntityTermStoreWriter {
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @return boolean Success indicator
+	 * @return bool Success indicator
 	 */
 	public function deleteTermsOfEntity( EntityId $entityId );
 

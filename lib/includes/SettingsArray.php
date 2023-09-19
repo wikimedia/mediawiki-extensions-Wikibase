@@ -106,7 +106,7 @@ class SettingsArray extends ArrayObject {
 	 *
 	 * @param string $settingName
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function hasSetting( $settingName ) {
 		return $this->offsetExists( $settingName );

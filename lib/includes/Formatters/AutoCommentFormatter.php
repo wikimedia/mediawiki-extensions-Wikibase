@@ -116,9 +116,9 @@ class AutoCommentFormatter {
 	 *
 	 * @note This code should be kept in sync with what MediaWiki\CommentFormatter\CommentParser::doSectionLinks does.
 	 *
-	 * @param boolean $pre True if there is text before the comment, so a prefix separator is needed.
+	 * @param bool $pre True if there is text before the comment, so a prefix separator is needed.
 	 * @param string $comment the localized comment, as returned by formatAutoComment()
-	 * @param boolean $post True if there is text after the comment, so a postfix separator is needed.
+	 * @param bool $post True if there is text after the comment, so a postfix separator is needed.
 	 *
 	 * @return string
 	 */

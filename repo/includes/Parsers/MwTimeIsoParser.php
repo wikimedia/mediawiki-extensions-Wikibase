@@ -244,7 +244,7 @@ class MwTimeIsoParser extends StringValueParser {
 	 * @param Language $lang
 	 * @param string[] $matches
 	 * @param int $precision
-	 * @param boolean $isBceMsg
+	 * @param bool $isBceMsg
 	 *
 	 * @return TimeValue|bool
 	 */
@@ -276,7 +276,7 @@ class MwTimeIsoParser extends StringValueParser {
 	/**
 	 * @param string $msgKey
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	private function isBceMsg( $msgKey ) {
 		return strstr( $msgKey, '-BCE-' );

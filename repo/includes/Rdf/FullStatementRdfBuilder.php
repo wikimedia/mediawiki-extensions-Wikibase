@@ -79,28 +79,28 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 	}
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function getProduceQualifiers() {
 		return $this->produceQualifiers;
 	}
 
 	/**
-	 * @param boolean $produceQualifiers
+	 * @param bool $produceQualifiers
 	 */
 	public function setProduceQualifiers( $produceQualifiers ) {
 		$this->produceQualifiers = $produceQualifiers;
 	}
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function getProduceReferences() {
 		return $this->produceReferences;
 	}
 
 	/**
-	 * @param boolean $produceReferences
+	 * @param bool $produceReferences
 	 */
 	public function setProduceReferences( $produceReferences ) {
 		$this->produceReferences = $produceReferences;
