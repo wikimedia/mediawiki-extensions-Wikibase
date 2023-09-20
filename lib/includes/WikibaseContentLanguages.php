@@ -263,6 +263,8 @@ class WikibaseContentLanguages {
 					'syc', // T164580
 					'tlb', // T216798
 					'tli', // T230145
+					'tlh-latn', // T286239
+					'tlh-piqd', // T286239
 					'tnq', // T220284
 					'txg', // T331094
 					'tzl', // T98314
