@@ -23,7 +23,7 @@
 		}
 	},
 	"LabelsPatch": {
-		"description": "Payload containing a JSON Patch document to be applied to a Item's Labels and edit metadata",
+		"description": "Payload containing a JSON Patch document to be applied to an Item's Labels and edit metadata",
 		"required": true,
 		"content": {
 			"application/json-patch+json": {
