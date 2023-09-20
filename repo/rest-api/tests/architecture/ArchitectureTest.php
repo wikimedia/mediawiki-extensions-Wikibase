@@ -23,6 +23,7 @@ class ArchitectureTest {
 	private const SERIALIZATION = 'Wikibase\Repo\RestApi\Application\Serialization';
 	private const VALIDATION = 'Wikibase\Repo\RestApi\Application\Validation';
 	private const USE_CASES = 'Wikibase\Repo\RestApi\Application\UseCases';
+	private const USE_CASE_REQUEST_VALIDATION = 'Wikibase\Repo\RestApi\Application\UseCaseRequestValidation';
 
 	public function testDomainModel(): Rule {
 		return PHPat::rule()
@@ -119,11 +120,34 @@ class ArchitectureTest {
 	/**
 	 * Use cases may depend on:
 	 *  - the validation namespace and everything it depends on
+	 *  - the use case request validation namespace
 	 *  - other classes from their own namespace
 	 */
 	private function allowedUseCasesDependencies(): array {
 		return array_merge( $this->allowedValidationDependencies(), [
+			Selector::namespace( self::USE_CASE_REQUEST_VALIDATION ),
 			Selector::namespace( self::USE_CASES ),
+		] );
+	}
+
+	public function testUseCaseRequestValidation(): Rule {
+		return PHPat::rule()
+			->classes( Selector::namespace( self::USE_CASE_REQUEST_VALIDATION ) )
+			->shouldNotDependOn()
+			->classes( Selector::all() )
+			->excluding( ...$this->allowedUseCaseRequestValidationDependencies() );
+	}
+
+	/**
+	 * Use case request validation may depend on:
+	 *  - the validation namespace and everything it depends on
+	 *  - the use case namespace
+	 *  - other classes from their own namespace
+	 */
+	private function allowedUseCaseRequestValidationDependencies(): array {
+		return array_merge( $this->allowedValidationDependencies(), [
+			Selector::namespace( self::USE_CASES ),
+			Selector::namespace( self::USE_CASE_REQUEST_VALIDATION ),
 		] );
 	}
 

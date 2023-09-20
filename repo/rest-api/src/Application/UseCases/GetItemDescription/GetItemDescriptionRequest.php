@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetItemDescription;
 
-use Wikibase\Repo\RestApi\Application\UseCases\ItemIdRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\LanguageCodeRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\LanguageCodeRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\UseCaseRequest;
 
 /**
  * @license GPL-2.0-or-later

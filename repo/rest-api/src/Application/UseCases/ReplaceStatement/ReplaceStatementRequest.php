@@ -2,10 +2,10 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement;
 
-use Wikibase\Repo\RestApi\Application\UseCases\EditMetadataRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\StatementIdRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\StatementSerializationRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementSerializationRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\UseCaseRequest;
 
 /**
  * @license GPL-2.0-or-later

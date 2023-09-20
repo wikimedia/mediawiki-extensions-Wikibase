@@ -2,10 +2,10 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels;
 
-use Wikibase\Repo\RestApi\Application\UseCases\EditMetadataRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\ItemIdRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PatchRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\UseCaseRequest;
 
 /**
  * @license GPL-2.0-or-later

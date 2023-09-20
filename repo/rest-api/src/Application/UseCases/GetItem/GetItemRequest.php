@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetItem;
 
-use Wikibase\Repo\RestApi\Application\UseCases\ItemFieldsRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\ItemIdRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemFieldsRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\UseCaseRequest;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
 
 /**

@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetStatement;
 
-use Wikibase\Repo\RestApi\Application\UseCases\DeserializedStatementIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\DeserializedStatementIdRequest;
 
 /**
  * @license GPL-2.0-or-later

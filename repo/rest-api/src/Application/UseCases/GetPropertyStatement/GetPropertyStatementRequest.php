@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement;
 
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\PropertyIdRequest;
 
 /**
  * @license GPL-2.0-or-later

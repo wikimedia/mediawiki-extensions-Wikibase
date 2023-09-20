@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement;
 
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\ItemIdRequest;
 
 /**
  * @license GPL-2.0-or-later
