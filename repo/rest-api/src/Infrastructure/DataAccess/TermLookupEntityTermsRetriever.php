@@ -15,6 +15,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemDescriptionRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemDescriptionsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemLabelRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemLabelsRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyDescriptionsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyLabelsRetriever;
 
 /**
@@ -25,7 +26,8 @@ class TermLookupEntityTermsRetriever implements
 	ItemLabelsRetriever,
 	ItemDescriptionRetriever,
 	ItemDescriptionsRetriever,
-	PropertyLabelsRetriever
+	PropertyLabelsRetriever,
+	PropertyDescriptionsRetriever
 {
 
 	private TermLookup $termLookup;
@@ -51,7 +53,7 @@ class TermLookupEntityTermsRetriever implements
 		try {
 			$labels = $this->termLookup->getLabels( $entityId, $this->termLanguages->getLanguages() );
 		} catch ( TermLookupException $e ) {
-			// this probably means that the item does not exist, which should be checked prior to calling this method
+			// this probably means that the entity does not exist, which should be checked prior to calling this method
 			return null;
 		}
 
@@ -72,11 +74,11 @@ class TermLookupEntityTermsRetriever implements
 		return $descriptionText !== null ? new Description( $languageCode, $descriptionText ) : null;
 	}
 
-	public function getDescriptions( ItemId $itemId ): ?Descriptions {
+	public function getDescriptions( EntityId $entityId ): ?Descriptions {
 		try {
-			$descriptions = $this->termLookup->getDescriptions( $itemId, $this->termLanguages->getLanguages() );
+			$descriptions = $this->termLookup->getDescriptions( $entityId, $this->termLanguages->getLanguages() );
 		} catch ( TermLookupException $e ) {
-			// this probably means that the item does not exist, which should be checked prior to calling this method
+			// this probably means that the entity does not exist, which should be checked prior to calling this method
 			return null;
 		}
 
