@@ -9,6 +9,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescriptions\GetPropertyDescriptions;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescriptions\GetPropertyDescriptionsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescriptions\GetPropertyDescriptionsResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -47,9 +48,13 @@ class GetPropertyDescriptionsRouteHandler extends SimpleHandler {
 	}
 
 	public function run( string $propertyId ): Response {
-		return $this->newSuccessHttpResponse(
-			$this->useCase->execute( new GetPropertyDescriptionsRequest( $propertyId ) )
-		);
+		try {
+			return $this->newSuccessHttpResponse(
+				$this->useCase->execute( new GetPropertyDescriptionsRequest( $propertyId ) )
+			);
+		} catch ( UseCaseError $e ) {
+			return $this->responseFactory->newErrorResponseFromException( $e );
+		}
 	}
 
 	public function getParamSettings(): array {
@@ -68,8 +73,14 @@ class GetPropertyDescriptionsRouteHandler extends SimpleHandler {
 		$httpResponse->setBody( new StringStream( json_encode(
 			$this->descriptionsSerializer->serialize( $useCaseResponse->getDescriptions() )
 		) ) );
+		$httpResponse->setHeader( 'Last-Modified', wfTimestamp( TS_RFC2822, $useCaseResponse->getLastModified() ) );
+		$this->setEtagFromRevId( $httpResponse, $useCaseResponse->getRevisionId() );
 
 		return $httpResponse;
+	}
+
+	private function setEtagFromRevId( Response $response, int $revId ): void {
+		$response->setHeader( 'ETag', "\"$revId\"" );
 	}
 
 }

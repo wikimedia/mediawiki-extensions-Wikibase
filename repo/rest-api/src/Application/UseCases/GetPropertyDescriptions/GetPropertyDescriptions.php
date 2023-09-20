@@ -3,6 +3,8 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescriptions;
 
 use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikibase\Repo\RestApi\Application\UseCases\GetLatestPropertyRevisionMetadata;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyDescriptionsRetriever;
 
 /**
@@ -10,18 +12,30 @@ use Wikibase\Repo\RestApi\Domain\Services\PropertyDescriptionsRetriever;
  */
 class GetPropertyDescriptions {
 
+	private GetLatestPropertyRevisionMetadata $getLatestRevisionMetadata;
 	private PropertyDescriptionsRetriever $propertyDescriptionsRetriever;
 
-	public function __construct( PropertyDescriptionsRetriever $propertyDescriptionsRetriever ) {
+	public function __construct(
+		GetLatestPropertyRevisionMetadata $getLatestRevisionMetadata,
+		PropertyDescriptionsRetriever $propertyDescriptionsRetriever
+	) {
+		$this->getLatestRevisionMetadata = $getLatestRevisionMetadata;
 		$this->propertyDescriptionsRetriever = $propertyDescriptionsRetriever;
 	}
 
+	/**
+	 * @throws UseCaseError
+	 */
 	public function execute( GetPropertyDescriptionsRequest $request ): GetPropertyDescriptionsResponse {
 		$propertyId = new NumericPropertyId( $request->getPropertyId() );
 
+		[ $revisionId, $lastModified ] = $this->getLatestRevisionMetadata->execute( $propertyId );
+
 		return new GetPropertyDescriptionsResponse(
 			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable happy path
-			$this->propertyDescriptionsRetriever->getDescriptions( $propertyId )
+			$this->propertyDescriptionsRetriever->getDescriptions( $propertyId ),
+			$lastModified,
+			$revisionId,
 		);
 	}
 }
