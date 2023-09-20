@@ -634,7 +634,7 @@
 			}
 		}
 	},
-	"InvalidLabelsPatchRequest": {
+	"InvalidItemPatchRequest": {
 		"description": "The provided JSON Patch request is invalid",
 		"content": {
 			"application/json": {

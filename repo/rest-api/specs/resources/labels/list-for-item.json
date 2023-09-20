@@ -34,7 +34,7 @@
 		"requestBody": { "$ref": "../../global/requests.json#/LabelsPatch" },
 		"responses": {
 			"200": { "$ref": "../../global/responses.json#/ItemLabels" },
-			"400": { "$ref": "../../global/responses.json#/InvalidLabelsPatchRequest" },
+			"400": { "$ref": "../../global/responses.json#/InvalidItemPatchRequest" },
 			"404": { "$ref": "../../global/responses.json#/ItemNotFound" },
 			"409": { "$ref": "../../global/responses.json#/CannotApplyLabelsPatch" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
