@@ -1,1 +1,7 @@
-[ ]
+[
+	{
+		"path": "/wikibase/v0/entities/properties/{property_id}/aliases",
+		"method": "GET",
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetPropertyAliasesRouteHandler::factory"
+	}
+]

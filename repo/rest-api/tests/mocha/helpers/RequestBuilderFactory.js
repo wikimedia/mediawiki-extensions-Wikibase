@@ -21,6 +21,12 @@ module.exports = {
 			.withPathParam( 'item_id', itemId );
 	},
 
+	newGetPropertyAliasesRequestBuilder( propertyId ) {
+		return new RequestBuilder()
+			.withRoute( 'GET', '/entities/properties/{property_id}/aliases' )
+			.withPathParam( 'property_id', propertyId );
+	},
+
 	newGetItemAliasesInLanguageRequestBuilder( itemId, languageCode ) {
 		return new RequestBuilder()
 			.withRoute( 'GET', '/entities/items/{item_id}/aliases/{language_code}' )
