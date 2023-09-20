@@ -5,12 +5,9 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\AddItemStatement;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Tests\NewItem;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatementResponse;
@@ -27,7 +24,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
-use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestFieldDeserializerFactory;
+use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
 
@@ -48,9 +45,6 @@ class AddItemStatementTest extends TestCase {
 	private GuidGenerator $guidGenerator;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
 
-	private const ALLOWED_TAGS = [ 'some', 'tags', 'are', 'allowed' ];
-	private const EXISTING_PROPERTY = 'P123';
-
 	protected function setUp(): void {
 		parent::setUp();
 
@@ -67,7 +61,7 @@ class AddItemStatementTest extends TestCase {
 		$postModificationRevisionId = 322;
 		$modificationTimestamp = '20221111070707';
 		$newGuid = new StatementGuid( $item->getId(), 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
-		$editTags = [ TestValidatingRequestFieldDeserializerFactory::ALLOWED_TAGS[0] ];
+		$editTags = [ TestValidatingRequestDeserializer::ALLOWED_TAGS[0] ];
 		$isBot = false;
 		$comment = 'potato';
 
@@ -89,7 +83,9 @@ class AddItemStatementTest extends TestCase {
 		$updatedItem = new ReadModelItem(
 			new Labels(),
 			new Descriptions(),
-			new StatementList( NewStatementReadModel::noValueFor( 'P123' )->withGuid( $newGuid )->build() )
+			new StatementList( NewStatementReadModel::noValueFor(
+				TestValidatingRequestDeserializer::EXISTING_STRING_PROPERTY
+			)->withGuid( $newGuid )->build() )
 		);
 		$this->itemUpdater = $this->createMock( ItemUpdater::class );
 		$this->itemUpdater->method( 'update' )
@@ -174,13 +170,8 @@ class AddItemStatementTest extends TestCase {
 	}
 
 	private function newUseCase(): AddItemStatement {
-		$dataTypeLookup = new InMemoryDataTypeLookup();
-		$dataTypeLookup->setDataTypeForProperty( new NumericPropertyId( self::EXISTING_PROPERTY ), 'string' );
-
 		return new AddItemStatement(
-			new ValidatingRequestDeserializer(
-				TestValidatingRequestFieldDeserializerFactory::newFactory( $dataTypeLookup )
-			),
+			new TestValidatingRequestDeserializer(),
 			new AssertItemExists( $this->getRevisionMetadata ),
 			$this->itemRetriever,
 			$this->itemUpdater,
@@ -192,7 +183,7 @@ class AddItemStatementTest extends TestCase {
 	private function getValidNoValueStatementSerialization(): array {
 		return [
 			'property' => [
-				'id' => self::EXISTING_PROPERTY,
+				'id' => TestValidatingRequestDeserializer::EXISTING_STRING_PROPERTY,
 			],
 			'value' => [
 				'type' => 'novalue',

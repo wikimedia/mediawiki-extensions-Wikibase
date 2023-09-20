@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\GetPropertyStatements
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestPropertyRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetPropertyStatements;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetPropertyStatementsRequest;
@@ -12,7 +11,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyStatementsRetriever;
-use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestFieldDeserializerFactory;
+use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
 
 /**
@@ -115,7 +114,7 @@ class GetPropertyStatementsTest extends TestCase {
 
 	private function newUseCase(): GetPropertyStatements {
 		return new GetPropertyStatements(
-			new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() ),
+			new TestValidatingRequestDeserializer(),
 			$this->statementsRetriever,
 			$this->getRevisionMetadata
 		);

@@ -7,7 +7,6 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property as DataModelProperty;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Statement\StatementGuid;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatementValidator;
@@ -20,7 +19,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyRevision;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
-use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestFieldDeserializerFactory;
+use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
 
@@ -46,7 +45,7 @@ class AddPropertyStatementTest extends TestCase {
 		parent::setUp();
 
 		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
-		$this->validator = new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() );
+		$this->validator = new TestValidatingRequestDeserializer();
 		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
 		$this->guidGenerator = new GuidGenerator();
 		$this->propertyUpdater = $this->createStub( PropertyUpdater::class );
@@ -56,7 +55,7 @@ class AddPropertyStatementTest extends TestCase {
 	public function testAddStatement(): void {
 		$id = new NumericPropertyId( 'P321' );
 		$newGuid = new StatementGuid( $id, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
-		$editTags = TestValidatingRequestFieldDeserializerFactory::ALLOWED_TAGS;
+		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
 		$comment = 'edit comment';
 		$statementReadModel = NewStatementReadModel::noValueFor( 'P123' )

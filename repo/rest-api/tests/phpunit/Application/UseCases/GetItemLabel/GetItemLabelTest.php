@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\GetItemLabel;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\GetItemLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\GetItemLabelRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\GetItemLabelResponse;
@@ -13,7 +12,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
 use Wikibase\Repo\RestApi\Domain\Services\ItemLabelRetriever;
-use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestFieldDeserializerFactory;
+use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\GetItemLabel
@@ -124,7 +123,7 @@ class GetItemLabelTest extends TestCase {
 		return new GetItemLabel(
 			$this->getRevisionMetadata,
 			$this->labelRetriever,
-			new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() )
+			new TestValidatingRequestDeserializer()
 		);
 	}
 

@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\GetItemStatement;
 
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatementRequest;
@@ -12,7 +11,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
-use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestFieldDeserializerFactory;
+use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatement
@@ -30,7 +29,7 @@ class GetItemStatementTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->validator = new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() );
+		$this->validator = new TestValidatingRequestDeserializer();
 		$this->assertItemExists = $this->createStub( AssertItemExists::class );
 		$this->getStatement = $this->createStub( GetStatement::class );
 	}

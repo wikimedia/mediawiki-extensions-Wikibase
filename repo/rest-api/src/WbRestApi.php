@@ -6,7 +6,6 @@ use MediaWiki\MediaWikiServices;
 use Psr\Container\ContainerInterface;
 use Wikibase\Repo\RestApi\Application\Serialization\SerializerFactory;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
@@ -42,7 +41,6 @@ use Wikibase\Repo\RestApi\Application\UseCases\ReplacePropertyStatement\ReplaceP
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel;
-use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\StatementRemover;
 use Wikibase\Repo\RestApi\Domain\Services\StatementUpdater;
@@ -50,6 +48,7 @@ use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupItemData
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupPropertyDataRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupStatementRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdater;
+use Wikibase\Repo\RestApi\Infrastructure\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
 
@@ -283,10 +282,6 @@ class WbRestApi {
 	public static function getGetPropertyLabels( ContainerInterface $services = null ): GetPropertyLabels {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.GetPropertyLabels' );
-	}
-
-	public static function getEditMetadataValidator( ContainerInterface $services = null ): EditMetadataValidator {
-		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbRestApi.EditMetadataValidator' );
 	}
 
 	public static function getValidatingRequestDeserializer( ContainerInterface $services = null ): ValidatingRequestDeserializer {

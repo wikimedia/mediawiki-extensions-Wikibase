@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\PatchItemStatement;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Statement\StatementGuid;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatementRequest;
@@ -14,7 +13,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
-use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestFieldDeserializerFactory;
+use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 
 /**
@@ -35,7 +34,7 @@ class PatchItemStatementTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->validator = new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() );
+		$this->validator = new TestValidatingRequestDeserializer();
 		$this->assertItemExists = $this->createStub( AssertItemExists::class );
 		$this->patchStatement  = $this->createStub( PatchStatement::class );
 	}
@@ -44,7 +43,7 @@ class PatchItemStatementTest extends TestCase {
 		$itemId = new ItemId( 'Q123' );
 		$statementId = new StatementGuid( $itemId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 		$patch = $this->getValidValueReplacingPatch( 'new statement value' );
-		$editTags = TestValidatingRequestFieldDeserializerFactory::ALLOWED_TAGS;
+		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
 		$comment = 'statement replaced by ' . __method__;
 
@@ -106,7 +105,7 @@ class PatchItemStatementTest extends TestCase {
 		$itemId = new ItemId( 'Q123' );
 		$statementId = new StatementGuid( $itemId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 		$patch = $this->getValidValueReplacingPatch( 'new statement value' );
-		$editTags = TestValidatingRequestFieldDeserializerFactory::ALLOWED_TAGS;
+		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
 		$comment = 'statement replaced by ' . __method__;
 

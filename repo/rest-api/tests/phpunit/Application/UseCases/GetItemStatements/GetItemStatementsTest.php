@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\GetItemStatements;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\GetItemStatements;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\GetItemStatementsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\GetItemStatementsValidator;
@@ -14,7 +13,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementsRetriever;
-use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestFieldDeserializerFactory;
+use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
 
 /**
@@ -33,7 +32,7 @@ class GetItemStatementsTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->requestValidator = new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() );
+		$this->requestValidator = new TestValidatingRequestDeserializer();
 		$this->getRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
 		$this->statementsRetriever = $this->createStub( ItemStatementsRetriever::class );
 	}

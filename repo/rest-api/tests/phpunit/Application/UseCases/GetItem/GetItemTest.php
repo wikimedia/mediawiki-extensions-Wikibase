@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\GetItem;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItemRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItemResponse;
@@ -17,7 +16,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemPartsRetriever;
-use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestFieldDeserializerFactory;
+use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItem
@@ -53,7 +52,7 @@ class GetItemTest extends TestCase {
 		$itemResponse = ( new GetItem(
 			$getRevisionMetadata,
 			$itemPartsRetriever,
-			new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() )
+			new TestValidatingRequestDeserializer()
 		) )->execute( new GetItemRequest( self::ITEM_ID, $requestedFields ) );
 
 		$this->assertInstanceOf( GetItemResponse::class, $itemResponse );
@@ -74,7 +73,7 @@ class GetItemTest extends TestCase {
 			( new GetItem(
 				$getRevisionMetadata,
 				$this->createStub( ItemPartsRetriever::class ),
-				new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() )
+				new TestValidatingRequestDeserializer()
 			) )->execute( new GetItemRequest( $itemId ) );
 
 			$this->fail( 'this should not be reached' );
@@ -89,7 +88,7 @@ class GetItemTest extends TestCase {
 			( new GetItem(
 				$this->createStub( GetLatestItemRevisionMetadata::class ),
 				$this->createStub( ItemPartsRetriever::class ),
-				new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() )
+				new TestValidatingRequestDeserializer()
 			) )->execute( new GetItemRequest( $itemId ) );
 
 			$this->fail( 'this should not be reached' );

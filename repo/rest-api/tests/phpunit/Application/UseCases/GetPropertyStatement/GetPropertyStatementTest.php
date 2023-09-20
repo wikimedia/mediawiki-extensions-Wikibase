@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\GetPropertyStatement;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Statement\StatementGuid;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\GetPropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\GetPropertyStatementRequest;
@@ -13,7 +12,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
-use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestFieldDeserializerFactory;
+use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\GetPropertyStatement
@@ -31,7 +30,7 @@ class GetPropertyStatementTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->validator = new ValidatingRequestDeserializer( TestValidatingRequestFieldDeserializerFactory::newFactory() );
+		$this->validator = new TestValidatingRequestDeserializer();
 		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
 		$this->getStatement = $this->createStub( GetStatement::class );
 	}
