@@ -59,17 +59,17 @@ class TermLookupEntityTermsRetrieverTest extends TestCase {
 			->method( 'getLabels' )
 			->with( $propertyId, self::ALL_TERM_LANGUAGES )
 			->willReturn( [
-				'en' => 'potato',
-				'de' => 'Kartoffel',
-				'ko' => '감자',
+				'en' => 'weight',
+				'de' => 'Gewicht',
+				'ko' => '무게',
 			] );
 
 		$this->assertEquals(
 			( $this->newTermRetriever( $termLookup ) )->getLabels( $propertyId ),
 			new Labels(
-				new Label( 'en', 'potato' ),
-				new Label( 'de', 'Kartoffel' ),
-				new Label( 'ko', '감자' ),
+				new Label( 'en', 'weight' ),
+				new Label( 'de', 'Gewicht' ),
+				new Label( 'ko', '무게' ),
 			)
 		);
 	}
