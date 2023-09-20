@@ -16,7 +16,7 @@ const germanLabel = 'a-German-label-' + utils.uniq();
 const englishLabel = 'an-English-label-' + utils.uniq();
 const englishDescription = 'an-English-description-' + utils.uniq();
 
-describe( 'GET /entities/items/{id}', () => {
+describe( newGetItemRequestBuilder().getRouteDescription(), () => {
 	let testItemId;
 	let testModified;
 	let testRevisionId;

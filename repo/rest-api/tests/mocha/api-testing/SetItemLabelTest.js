@@ -7,7 +7,7 @@ const { newSetItemLabelRequestBuilder } = require( '../helpers/RequestBuilderFac
 const { formatTermEditSummary } = require( '../helpers/formatEditSummaries' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 
-describe( 'PUT /entities/items/{item_id}/labels/{language_code}', () => {
+describe( newSetItemLabelRequestBuilder().getRouteDescription(), () => {
 	let testItemId;
 	let testEnDescription;
 	let originalLastModified;
