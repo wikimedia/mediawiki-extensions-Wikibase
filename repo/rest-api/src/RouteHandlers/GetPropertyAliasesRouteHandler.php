@@ -8,6 +8,7 @@ use MediaWiki\Rest\StringStream;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyAliases\GetPropertyAliases;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyAliases\GetPropertyAliasesRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -20,31 +21,49 @@ class GetPropertyAliasesRouteHandler extends SimpleHandler {
 
 	private GetPropertyAliases $useCase;
 	private AliasesSerializer $aliasesSerializer;
+	private ResponseFactory $responseFactory;
 
 	public function __construct(
 		GetPropertyAliases $useCase,
-		AliasesSerializer $aliasesSerializer
+		AliasesSerializer $aliasesSerializer,
+		ResponseFactory $responseFactory
 	) {
 		$this->useCase = $useCase;
 		$this->aliasesSerializer = $aliasesSerializer;
+		$this->responseFactory = $responseFactory;
 	}
 
 	public static function factory(): self {
 		return new self(
 			WbRestApi::getGetPropertyAliases(),
 			new AliasesSerializer(),
+			new ResponseFactory()
 		);
 	}
 
 	public function run( string $propertyId ): Response {
-		$useCaseResponse = $this->useCase->execute( new GetPropertyAliasesRequest( $propertyId ) );
-		$httpResponse = $this->getResponseFactory()->create();
-		$httpResponse->setHeader( 'Content-Type', 'application/json' );
-		$httpResponse->setBody(
-			new StringStream( json_encode( $this->aliasesSerializer->serialize( $useCaseResponse->getAliases() ) ) )
-		);
+		try {
+			$useCaseResponse = $this->useCase->execute( new GetPropertyAliasesRequest( $propertyId ) );
+			$httpResponse = $this->getResponseFactory()->create();
+			$httpResponse->setHeader( 'Content-Type', 'application/json' );
+			$httpResponse->setHeader( 'Last-Modified', wfTimestamp( TS_RFC2822, $useCaseResponse->getLastModified() ) );
+			$this->setEtagFromRevId( $httpResponse, $useCaseResponse->getRevisionId() );
+			$httpResponse->setBody(
+				new StringStream( json_encode( $this->aliasesSerializer->serialize( $useCaseResponse->getAliases() ) ) )
+			);
 
-		return $httpResponse;
+			return $httpResponse;
+		} catch ( UseCaseError $e ) {
+			return $this->responseFactory->newErrorResponseFromException( $e );
+		}
+	}
+
+	private function setEtagFromRevId( Response $response, int $revId ): void {
+		$response->setHeader( 'ETag', "\"$revId\"" );
+	}
+
+	public function needsWriteAccess(): bool {
+		return false;
 	}
 
 	public function getParamSettings(): array {
