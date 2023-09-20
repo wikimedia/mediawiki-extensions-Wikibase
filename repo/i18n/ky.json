@@ -9,7 +9,9 @@
 			"Элдин беги"
 		]
 	},
+	"wikibase-desc": "Түзүмдөлгөн маалымат сактагычы",
 	"wikibase-entity-item": "Элемент",
+	"nstab-item": "Элемент",
 	"wikibase-edit": "түзөтүү",
 	"wikibase-save": "сактоо",
 	"wikibase-publish": "жарыялоо",
@@ -23,6 +25,7 @@
 	"wikibase-entitytermsforlanguagelistview-description": "Сыпаттама",
 	"wikibase-entitytermsforlanguagelistview-label": "Аталыш",
 	"wikibase-entitytermsforlanguagelistview-language": "Тил",
+	"wikibase-entitytermsforlanguagelistview-more": "Бардык жазуулар",
 	"wikibase-label-empty": "белги аныкталган жок",
 	"wikibase-description-empty": "Сыпаттама жок",
 	"wikibase-content-language-edit-label": "Тил:",
@@ -43,6 +46,8 @@
 	"wikibase-itemdisambiguation-lookup-language": "Тилдин коду:",
 	"wikibase-itemdisambiguation-lookup-label": "Аталыш:",
 	"wikibase-itemdisambiguation-submit": "Издөө",
+	"special-newitem": "Жаңы элемент түзүү",
+	"wikibase-newitem-fieldset": "Жаңы элемент түзүү",
 	"wikibase-newentity-language": "Тил:",
 	"wikibase-newentity-label": "Аталыш:",
 	"wikibase-newentity-description": "Сыпаттама:",
@@ -52,6 +57,8 @@
 	"wikibase-setlabeldescriptionaliases-label-label": "Аталыш:",
 	"wikibase-setlabeldescriptionaliases-description-label": "Сыпаттама:",
 	"wikibase-modifyterm-language": "Тилдин коду:",
+	"wikibase-itemmerge-no-such-entity": "Элемент табылган жок.",
+	"wikibase-api-not-item": "Элемент эмес.",
 	"wikibase-restoreold": "калыбына келтирүү",
 	"wikibase-listdatatypes-wikibase-item-head": "Элемент",
 	"wikibase-federated-properties-leaving-site-notice-cancel": "Жокко чыгаруу"

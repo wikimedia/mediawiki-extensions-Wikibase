@@ -12,6 +12,7 @@
 	"wikibase-editlinkstitle": "Башка тилдерге шилтемени түзөтүү",
 	"wikibase-addlinkstitle": "Башка тилдерге байланыштыруу",
 	"wikibase-linkitem-addlinks": "Шилтемелерди кошуу",
+	"wikibase-linkitem-close": "Баракты жабып, кайра жүктөө",
 	"wikibase-linkitem-title": "Байланыштыруу",
 	"wikibase-linkitem-linkpage": "Байланыштыруу",
 	"wikibase-linkitem-selectlink": "Бул баракты кайсы тилдеги барак менен байланыштыруу керегин тандаңыз.",
@@ -24,9 +25,12 @@
 	"wikibase-rc-hide-wikidata-show": "Көрсөтүү",
 	"wikibase-rc-wikibase-edit-letter": "ВМ",
 	"wikibase-rc-wikibase-edit-title": "― {{WBREPONAME}}ты түзөтүү;",
+	"unconnectedpages": "Элементтерге байланышпаган барактар",
 	"wikibase-unconnectedpages-submit": "Барактарды көрсөтүү",
 	"wikibase-pageswithbadges-submit": "Барактарды көрсөтүү",
 	"wikibase-entityusage-submit": "Барактарды көрсөтүү",
+	"wikibase-pageinfo-description-local": "Жергиликтүү сыпаттама",
+	"wikibase-pageinfo-description-central": "Борборлоштурулган сыпаттама",
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "Аталыш: $1",
 	"wikibase-pageinfo-entity-usage-D-with-modifier": "Сыпаттама: $1",
 	"wikibase-pageinfo-entity-usage-T": "Аталыш",
@@ -38,5 +42,10 @@
 	"wikibase-client-data-bridge-references-heading": "Булактар",
 	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Кирген жоксуз",
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Кирбестен түзөтүү",
-	"wikibase-client-data-bridge-anonymous-edit-warning-login": "Кирүү же катталуу"
+	"wikibase-client-data-bridge-anonymous-edit-warning-login": "Кирүү же катталуу",
+	"wikibase-client-data-bridge-error-reload-bridge": "Кайра жүктөө",
+	"wikibase-client-data-bridge-error-reload-page": "Баракты кайра жүктөө",
+	"wikibase-client-data-bridge-error-go-back": "Кайтуу",
+	"wikibase-client-data-bridge-thank-you-head": "Түзөткөнүңүз үчүн рахмат !",
+	"wikibase-client-data-bridge-saving-error-assertuser-heading": "Кирген жоксуз"
 }
