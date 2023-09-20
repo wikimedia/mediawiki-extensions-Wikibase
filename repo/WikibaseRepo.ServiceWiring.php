@@ -83,7 +83,6 @@ use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\Formatters\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\LanguageFallbackChainFactory;
-use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\LanguageNameLookupFactory;
 use Wikibase\Lib\MediaWikiMessageInLanguageProvider;
 use Wikibase\Lib\MessageInLanguageProvider;
@@ -1387,12 +1386,6 @@ return [
 			$services->getLanguageConverterFactory(),
 			$services->getLanguageFallback()
 		);
-	},
-
-	'WikibaseRepo.LanguageNameLookup' => function ( MediaWikiServices $services ): LanguageNameLookup {
-		$userLanguage = WikibaseRepo::getUserLanguage( $services );
-		return WikibaseRepo::getLanguageNameLookupFactory( $services )
-			->getForLanguage( $userLanguage );
 	},
 
 	'WikibaseRepo.LanguageNameLookupFactory' => function ( MediaWikiServices $services ): LanguageNameLookupFactory {

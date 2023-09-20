@@ -47,7 +47,6 @@ use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\Formatters\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\LanguageFallbackChainFactory;
-use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\LanguageNameLookupFactory;
 use Wikibase\Lib\MessageInLanguageProvider;
 use Wikibase\Lib\Modules\PropertyValueExpertsModule;
@@ -172,14 +171,6 @@ class WikibaseRepo {
 	public static function getLanguageDirectionalityLookup( ContainerInterface $services = null ): LanguageDirectionalityLookup {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.LanguageDirectionalityLookup' );
-	}
-
-	/**
-	 * @deprecated use {@link LanguageNameLookupFactory} or {@link LanguageNameUtils} instead
-	 */
-	public static function getLanguageNameLookup( ContainerInterface $services = null ): LanguageNameLookup {
-		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WikibaseRepo.LanguageNameLookup' );
 	}
 
 	public static function getLanguageNameLookupFactory( ContainerInterface $services = null ): LanguageNameLookupFactory {
