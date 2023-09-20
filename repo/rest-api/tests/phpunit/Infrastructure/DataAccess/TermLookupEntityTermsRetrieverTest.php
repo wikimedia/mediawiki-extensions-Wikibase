@@ -107,7 +107,7 @@ class TermLookupEntityTermsRetrieverTest extends TestCase {
 		);
 	}
 
-	public function testGetDescriptions(): void {
+	public function testGetItemDescriptions(): void {
 		$itemId = new ItemId( self::ITEM_ID );
 
 		$termLookup = $this->createMock( TermLookup::class );
@@ -130,14 +130,37 @@ class TermLookupEntityTermsRetrieverTest extends TestCase {
 		);
 	}
 
+	public function testGetPropertyDescriptions(): void {
+		$propertyId = new NumericPropertyId( self::PROPERTY_ID );
+
+		$termLookup = $this->createMock( TermLookup::class );
+		$termLookup->expects( $this->once() )
+			->method( 'getDescriptions' )
+			->with( $propertyId, self::ALL_TERM_LANGUAGES )
+			->willReturn( [
+				'en' => 'english test property',
+				'de' => 'deutsche Test-Eigenschaft',
+				'ko' => '한국어 시험 속성',
+			] );
+
+		$this->assertEquals(
+			( $this->newTermRetriever( $termLookup ) )->getDescriptions( $propertyId ),
+			new Descriptions(
+				new Description( 'en', 'english test property' ),
+				new Description( 'de', 'deutsche Test-Eigenschaft' ),
+				new Description( 'ko', '한국어 시험 속성' ),
+			)
+		);
+	}
+
 	public function testDescriptionsLookupThrowsLookupException_returnsNull(): void {
-		$itemId = new ItemId( self::ITEM_ID );
+		$entityId = $this->createStub( EntityId::class );
 
 		$termLookup = $this->createStub( TermLookup::class );
 		$termLookup->method( 'getDescriptions' )
-			->willThrowException( new TermLookupException( $itemId, [] ) );
+			->willThrowException( new TermLookupException( $entityId, [] ) );
 
-		$this->assertNull( $this->newTermRetriever( $termLookup )->getDescriptions( $itemId ) );
+		$this->assertNull( $this->newTermRetriever( $termLookup )->getDescriptions( $entityId ) );
 	}
 
 	private function newTermRetriever( TermLookup $termLookup ): TermLookupEntityTermsRetriever {
