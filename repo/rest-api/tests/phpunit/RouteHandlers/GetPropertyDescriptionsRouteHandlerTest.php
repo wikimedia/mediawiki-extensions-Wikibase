@@ -2,12 +2,15 @@
 
 namespace Wikibase\Repo\Tests\RestApi\RouteHandlers;
 
+use Generator;
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Reporter\ErrorReporter;
 use MediaWiki\Rest\RequestData;
 use MediaWiki\Rest\Response;
 use MediaWiki\Tests\Rest\Handler\HandlerTestTrait;
 use MediaWikiIntegrationTestCase;
+use RuntimeException;
+use Throwable;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescriptions\GetPropertyDescriptions;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescriptions\GetPropertyDescriptionsResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
@@ -25,6 +28,12 @@ use Wikibase\Repo\RestApi\RouteHandlers\GetPropertyDescriptionsRouteHandler;
 class GetPropertyDescriptionsRouteHandlerTest extends MediaWikiIntegrationTestCase {
 
 	use HandlerTestTrait;
+	use RestHandlerTestUtilsTrait;
+
+	protected function setUp(): void {
+		parent::setUp();
+		$this->setMockPreconditionMiddlewareFactory();
+	}
 
 	public function testValidSuccessHttpResponse(): void {
 		$enDescription = 'test description';
@@ -52,11 +61,12 @@ class GetPropertyDescriptionsRouteHandlerTest extends MediaWikiIntegrationTestCa
 		);
 	}
 
-	public function testHandlesErrors(): void {
+	/**
+	 * @dataProvider provideExceptionAndExpectedErrorCode
+	 */
+	public function testHandlesErrors( Throwable $exception, string $expectedErrorCode ): void {
 		$useCase = $this->createStub( GetPropertyDescriptions::class );
-		$useCase->method( 'execute' )->willThrowException(
-			new UseCaseError( UseCaseError::PROPERTY_NOT_FOUND, 'Could not find a property with the ID: P321' )
-		);
+		$useCase->method( 'execute' )->willThrowException( $exception );
 
 		$this->setService( 'WbRestApi.GetPropertyDescriptions', $useCase );
 		$this->setService( 'WbRestApi.ErrorReporter', $this->createStub( ErrorReporter::class ) );
@@ -66,7 +76,16 @@ class GetPropertyDescriptionsRouteHandlerTest extends MediaWikiIntegrationTestCa
 		$responseBody = json_decode( $response->getBody()->getContents() );
 
 		$this->assertSame( [ 'en' ], $response->getHeader( 'Content-Language' ) );
-		$this->assertSame( UseCaseError::PROPERTY_NOT_FOUND, $responseBody->code );
+		$this->assertSame( $expectedErrorCode, $responseBody->code );
+	}
+
+	public function provideExceptionAndExpectedErrorCode(): Generator {
+		yield 'Error handled by ResponseFactory' => [
+			new UseCaseError( UseCaseError::PROPERTY_NOT_FOUND, 'Could not find a property with the ID: P321' ),
+			UseCaseError::PROPERTY_NOT_FOUND,
+		];
+
+		yield 'Unexpected Error' => [ new RuntimeException(), UseCaseError::UNEXPECTED_ERROR ];
 	}
 
 	public function testReadWriteAccess(): void {
