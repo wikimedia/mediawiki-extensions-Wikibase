@@ -2,24 +2,29 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions;
 
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemIdRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PatchRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\UseCaseRequest;
-
 /**
  * @license GPL-2.0-or-later
  */
-class PatchItemDescriptionsRequest implements UseCaseRequest, ItemIdRequest, PatchRequest {
+class PatchItemDescriptionsRequest {
 
 	private string $itemId;
 	private array $patch;
+	private array $editTags;
+	private bool $isBot;
+	private ?string $comment;
 
 	public function __construct(
 		string $itemId,
-		array $patch
+		array $patch,
+		array $editTags,
+		bool $isBot,
+		?string $comment
 	) {
 		$this->itemId = $itemId;
 		$this->patch = $patch;
+		$this->editTags = $editTags;
+		$this->isBot = $isBot;
+		$this->comment = $comment;
 	}
 
 	public function getItemId(): string {
@@ -28,6 +33,18 @@ class PatchItemDescriptionsRequest implements UseCaseRequest, ItemIdRequest, Pat
 
 	public function getPatch(): array {
 		return $this->patch;
+	}
+
+	public function getEditTags(): array {
+		return $this->editTags;
+	}
+
+	public function isBot(): bool {
+		return $this->isBot;
+	}
+
+	public function getComment(): ?string {
+		return $this->comment;
 	}
 
 }

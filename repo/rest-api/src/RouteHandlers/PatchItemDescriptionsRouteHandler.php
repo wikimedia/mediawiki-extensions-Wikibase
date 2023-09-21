@@ -6,6 +6,7 @@ use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
+use MediaWiki\Rest\Validator\BodyValidator;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptions;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptionsRequest;
@@ -20,6 +21,9 @@ class PatchItemDescriptionsRouteHandler extends SimpleHandler {
 
 	public const ITEM_ID_PATH_PARAM = 'item_id';
 	public const PATCH_BODY_PARAM = 'patch';
+	public const TAGS_BODY_PARAM = 'tags';
+	public const BOT_BODY_PARAM = 'bot';
+	public const COMMENT_BODY_PARAM = 'comment';
 
 	private PatchItemDescriptions $useCase;
 	private DescriptionsSerializer $serializer;
@@ -37,12 +41,16 @@ class PatchItemDescriptionsRouteHandler extends SimpleHandler {
 	}
 
 	public function run( string $itemId ): Response {
+		$jsonBody = $this->getValidatedBody();
+
 		return $this->newSuccessHttpResponse(
 			$this->useCase->execute(
 				new PatchItemDescriptionsRequest(
 					$itemId,
-					// @phan-suppress-next-line PhanTypeArraySuspiciousNullable
-					json_decode( $this->getRequest()->getBody()->getContents(), true )[ self::PATCH_BODY_PARAM ]
+					$jsonBody[ self::PATCH_BODY_PARAM ],
+					$jsonBody[ self::TAGS_BODY_PARAM ],
+					$jsonBody[ self::BOT_BODY_PARAM ],
+					$jsonBody[ self::COMMENT_BODY_PARAM ]
 				)
 			)
 		);
@@ -67,6 +75,38 @@ class PatchItemDescriptionsRouteHandler extends SimpleHandler {
 				ParamValidator::PARAM_REQUIRED => true,
 			],
 		];
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function getBodyValidator( $contentType ): BodyValidator {
+		return $contentType === 'application/json' || $contentType === 'application/json-patch+json' ?
+			new TypeValidatingJsonBodyValidator( [
+				self::PATCH_BODY_PARAM => [
+					self::PARAM_SOURCE => 'body',
+					ParamValidator::PARAM_TYPE => 'array',
+					ParamValidator::PARAM_REQUIRED => true,
+				],
+				self::TAGS_BODY_PARAM => [
+					self::PARAM_SOURCE => 'body',
+					ParamValidator::PARAM_TYPE => 'array',
+					ParamValidator::PARAM_REQUIRED => false,
+					ParamValidator::PARAM_DEFAULT => [],
+				],
+				self::BOT_BODY_PARAM => [
+					self::PARAM_SOURCE => 'body',
+					ParamValidator::PARAM_TYPE => 'boolean',
+					ParamValidator::PARAM_REQUIRED => false,
+					ParamValidator::PARAM_DEFAULT => false,
+				],
+				self::COMMENT_BODY_PARAM => [
+					self::PARAM_SOURCE => 'body',
+					ParamValidator::PARAM_TYPE => 'string',
+					ParamValidator::PARAM_REQUIRED => false,
+					ParamValidator::PARAM_DEFAULT => null,
+				],
+			] ) : parent::getBodyValidator( $contentType );
 	}
 
 }
