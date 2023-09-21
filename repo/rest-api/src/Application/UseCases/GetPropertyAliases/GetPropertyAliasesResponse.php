@@ -10,13 +10,25 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 class GetPropertyAliasesResponse {
 
 	private Aliases $aliases;
+	private string $lastModified;
+	private int $revisionId;
 
-	public function __construct( Aliases $aliases ) {
+	public function __construct( Aliases $aliases, string $lastModified, int $revisionId ) {
 		$this->aliases = $aliases;
+		$this->lastModified = $lastModified;
+		$this->revisionId = $revisionId;
 	}
 
 	public function getAliases(): Aliases {
 		return $this->aliases;
+	}
+
+	public function getLastModified(): string {
+		return $this->lastModified;
+	}
+
+	public function getRevisionId(): int {
+		return $this->revisionId;
 	}
 
 }
