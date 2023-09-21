@@ -47,6 +47,12 @@ module.exports = {
 			.withPathParam( 'item_id', itemId );
 	},
 
+	newGetPropertyDescriptionsRequestBuilder( propertyId ) {
+		return new RequestBuilder()
+			.withRoute( 'GET', '/entities/properties/{property_id}/descriptions' )
+			.withPathParam( 'property_id', propertyId );
+	},
+
 	newGetItemLabelsRequestBuilder( itemId ) {
 		return new RequestBuilder()
 			.withRoute( 'GET', '/entities/items/{item_id}/labels' )
