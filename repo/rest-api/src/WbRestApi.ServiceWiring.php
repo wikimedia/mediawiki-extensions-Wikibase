@@ -413,6 +413,7 @@ return [
 
 	'WbRestApi.GetPropertyDescriptions' => function( MediaWikiServices $services ): GetPropertyDescriptions {
 		return new GetPropertyDescriptions(
+			WbRestApi::getGetLatestPropertyRevisionMetadata( $services ),
 			new TermLookupEntityTermsRetriever(
 				WikibaseRepo::getTermLookup( $services ),
 				WikibaseRepo::getTermsLanguages( $services )

@@ -4,15 +4,17 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\GetPropertyDescriptio
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikibase\Repo\RestApi\Application\UseCases\GetLatestPropertyRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescriptions\GetPropertyDescriptions;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescriptions\GetPropertyDescriptionsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescriptions\GetPropertyDescriptionsResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyDescriptionsRetriever;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabels\GetPropertyDescriptions
+ * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescriptions\GetPropertyDescriptions
  *
  * @group Wikibase
  *
@@ -20,11 +22,13 @@ use Wikibase\Repo\RestApi\Domain\Services\PropertyDescriptionsRetriever;
  */
 class GetPropertyDescriptionsTest extends TestCase {
 
+	private GetLatestPropertyRevisionMetadata $getRevisionMetadata;
 	private PropertyDescriptionsRetriever $descriptionsRetriever;
 
 	protected function setUp(): void {
 		parent::setUp();
 
+		$this->getRevisionMetadata = $this->createStub( GetLatestPropertyRevisionMetadata::class );
 		$this->descriptionsRetriever = $this->createStub( PropertyDescriptionsRetriever::class );
 	}
 
@@ -35,6 +39,11 @@ class GetPropertyDescriptionsTest extends TestCase {
 		);
 
 		$propertyId = new NumericPropertyId( 'P10' );
+		$lastModified = '20201111070707';
+		$revisionId = 2;
+
+		$this->getRevisionMetadata = $this->createStub( GetLatestPropertyRevisionMetadata::class );
+		$this->getRevisionMetadata->method( 'execute' )->willReturn( [ $revisionId, $lastModified ] );
 
 		$this->descriptionsRetriever = $this->createMock( PropertyDescriptionsRetriever::class );
 		$this->descriptionsRetriever->expects( $this->once() )
@@ -42,8 +51,35 @@ class GetPropertyDescriptionsTest extends TestCase {
 			->with( $propertyId )
 			->willReturn( $descriptions );
 
-		$response = ( new GetPropertyDescriptions( $this->descriptionsRetriever ) )
+		$response = $this->newUseCase()
 			->execute( new GetPropertyDescriptionsRequest( 'P10' ) );
-		$this->assertEquals( new GetPropertyDescriptionsResponse( $descriptions ), $response );
+		$this->assertEquals( new GetPropertyDescriptionsResponse( $descriptions, $lastModified, $revisionId ), $response );
+	}
+
+	public function testGivenPropertyNotFound_throws(): void {
+		$propertyId = new NumericPropertyId( 'P10' );
+
+		$expectedException = $this->createStub( UseCaseException::class );
+
+		$this->getRevisionMetadata = $this->createStub( GetLatestPropertyRevisionMetadata::class );
+		$this->getRevisionMetadata->method( 'execute' )
+			->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase()->execute(
+				new GetPropertyDescriptionsRequest( $propertyId->getSerialization() )
+			);
+
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
+	private function newUseCase(): GetPropertyDescriptions {
+		return new GetPropertyDescriptions(
+			$this->getRevisionMetadata,
+			$this->descriptionsRetriever
+		);
 	}
 }
