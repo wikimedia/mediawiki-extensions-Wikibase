@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Vyolla"
+			"Vyolla",
+			"Amire80"
 		]
 	},
 	"apihelp-wbavailablebadges-description": "Shikoni artikujt e distinktivit në dispozicion.",
@@ -138,7 +139,7 @@
 	"apihelp-wbremovequalifiers-summary": "Heq një kualifikues nga një kërkesë.",
 	"apihelp-wbremovequalifiers-param-baserevid": "Identifikuesi numerik për rishikimin për të mbështetur modifikimin.\nKy përdoret për zbulimin e konflikteve gjatë ruajtjes.",
 	"apihelp-wbremovequalifiers-param-bot": "Shënojeni këtë redaktim si bot. Ky flamur URL do të respektohet vetëm nëse përdoruesi i përket grupit \"{{int:group-bot}}\".",
-	"apihelp-wbremovequalifiers-param-claim": "Një GUID që identifikon kërkesëngan  i cili hiqen kualifikuesit",
+	"apihelp-wbremovequalifiers-param-claim": "Një GUID që identifikon kërkesëngan i cili hiqen kualifikuesit",
 	"apihelp-wbremovequalifiers-param-qualifiers": "Elemente selektore të menjëhershëm të kualifikuesve për t'u hequr",
 	"apihelp-wbremovequalifiers-param-summary": "Përmbledhje për redaktimin.\nDo të paraprihet nga një koment i krijuar automatikisht. Kufiri i gjatësisë së autokomentimit së bashku me përmbledhjen është 260 karaktere. Jini të vetëdijshëm se gjithçka mbi atë kufi do të pritet.",
 	"apihelp-wbremovequalifiers-param-tags": "Ndryshoni etiketat për të aplikuar rishikimim.",

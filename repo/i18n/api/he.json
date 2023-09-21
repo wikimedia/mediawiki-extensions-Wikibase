@@ -225,7 +225,7 @@
 	"apihelp-wbsetaliases-param-tags": "אילו תגי שינוי להחיל על הגרסה.",
 	"apihelp-wbsetaliases-example-1": "הגדרת הכינויים באנגלית לישות שהמזהה שלה הוא <samp>$1</samp> לערכים <var>Foo</var> ו־<var>Bar</var>",
 	"apihelp-wbsetaliases-example-2": "הוספת <var>Foo</var> ו־<var>Bar</var> לרשימת הכינויים באנגלית לישות שהמזהה שלה הוא <samp>$1</samp>",
-	"apihelp-wbsetaliases-example-3": "הסרת <var>Foo</var> ו־<var>Bar</var>  מרשימת הכינויים באנגלית לישות שהמזהה שלה הוא <samp>$1</samp>",
+	"apihelp-wbsetaliases-example-3": "הסרת <var>Foo</var> ו־<var>Bar</var> מרשימת הכינויים באנגלית לישות שהמזהה שלה הוא <samp>$1</samp>",
 	"apihelp-wbsetaliases-example-4": "הסרת <var>Foo</var> מהרשימה של הכינויים באנגלית לישות <samp>$1</samp> והוספת <var>Bar</var> אליה",
 	"apihelp-wbsetclaim-description": "יצירה או עדכון של קביעה או טענה שלמה.",
 	"apihelp-wbsetclaim-summary": "יצירה או עדכון של קביעה או טענה שלמה.",
