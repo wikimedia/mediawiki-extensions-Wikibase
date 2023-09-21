@@ -100,7 +100,7 @@ class PropertyInfoTableBuilder {
 	 * Database updates a batched into multiple transactions. Do not call this
 	 * method within an (explicit) database transaction.
 	 */
-	public function rebuildPropertyInfo() {
+	public function rebuildPropertyInfo(): int {
 		$propertyNamespace = $this->entityNamespaceLookup->getEntityNamespace(
 			Property::ENTITY_TYPE
 		);

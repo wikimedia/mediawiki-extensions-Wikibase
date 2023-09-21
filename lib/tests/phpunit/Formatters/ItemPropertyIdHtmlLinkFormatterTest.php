@@ -40,7 +40,7 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 
 	/** @var LanguageNameLookup|MockObject */
 	private $languageNameLookup;
-
+	/** @var string */
 	protected $currentUserLanguage;
 	/** @var string[] List of fallback languages */
 	protected $fallbackChain = [];

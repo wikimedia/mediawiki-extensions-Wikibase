@@ -5,9 +5,12 @@ namespace Wikibase\Client\Tests\Integration\RecentChanges;
 use ChangesList;
 use DerivativeContext;
 use HamcrestPHPUnitIntegration;
+use MediaWiki\CommentFormatter\CommentFormatter;
+use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Title\Title;
+use MediaWiki\User\UserNameUtils;
 use MediaWikiLangTestCase;
 use RecentChange;
 use RequestContext;
@@ -35,13 +38,10 @@ use Wikibase\Lib\SubEntityTypesMapper;
 class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 	use HamcrestPHPUnitIntegration;
 
-	protected $repoLinker;
-
-	protected $userNameUtils;
-
-	protected $linkRenderer;
-
-	protected $commentFormatter;
+	protected RepoLinker $repoLinker;
+	protected UserNameUtils $userNameUtils;
+	protected LinkRenderer $linkRenderer;
+	protected CommentFormatter $commentFormatter;
 
 	protected function setUp(): void {
 		parent::setUp();
