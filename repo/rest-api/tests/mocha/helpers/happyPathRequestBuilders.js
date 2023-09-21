@@ -22,6 +22,7 @@ module.exports.getRequestsOnProperty = [
 	( { propertyId } ) => rbf.newGetPropertyLabelsRequestBuilder( propertyId ),
 	( { propertyId } ) => rbf.newGetPropertyDescriptionsRequestBuilder( propertyId ),
 	( { propertyId } ) => rbf.newGetPropertyStatementsRequestBuilder( propertyId ),
+	( { propertyId } ) => rbf.newGetPropertyAliasesRequestBuilder( propertyId ),
 	( { statementId } ) => rbf.newGetStatementRequestBuilder( statementId ),
 	( { propertyId, statementId } ) => rbf.newGetPropertyStatementRequestBuilder(
 		propertyId,
