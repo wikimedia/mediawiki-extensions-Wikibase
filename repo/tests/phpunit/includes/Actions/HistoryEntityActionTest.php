@@ -141,14 +141,7 @@ class HistoryEntityActionTest extends \PHPUnit\Framework\TestCase {
 
 		$pageTitle = null;
 		$output = $this->createMock( OutputPage::class );
-		$output->method( 'setPageTitle' ) // used before 1.41
-			->willReturnCallback( function( $t ) use( &$pageTitle ) {
-				if ( !is_string( $t ) ) {
-					$t = $t->text();
-				}
-				$pageTitle = $t;
-			} );
-		$output->method( 'setPageTitleMsg' ) // introduced in 1.41
+		$output->method( 'setPageTitleMsg' )
 			->willReturnCallback( function( $m ) use( &$pageTitle ) {
 				$pageTitle = $m->escaped();
 			} );
