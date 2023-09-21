@@ -16,7 +16,10 @@ class SiteLink {
 	private string $url;
 
 	/**
+	 * @param string $site
+	 * @param string $title
 	 * @param ItemId[] $badges
+	 * @param string $url
 	 */
 	public function __construct( string $site, string $title, array $badges, string $url ) {
 		foreach ( $badges as $badge ) {

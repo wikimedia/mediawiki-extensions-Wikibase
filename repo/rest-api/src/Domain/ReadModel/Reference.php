@@ -11,6 +11,7 @@ class Reference {
 	private array $parts;
 
 	/**
+	 * @param string $hash
 	 * @param PropertyValuePair[] $parts
 	 */
 	public function __construct( string $hash, array $parts ) {

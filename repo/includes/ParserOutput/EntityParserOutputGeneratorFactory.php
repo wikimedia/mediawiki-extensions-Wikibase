@@ -118,6 +118,7 @@ class EntityParserOutputGeneratorFactory {
 	 * @param RepoGroup $repoGroup
 	 * @param LinkBatchFactory $linkBatchFactory
 	 * @param HookContainer $hookContainer
+	 * @param bool $isMobileView
 	 * @param string[] $preferredGeoDataProperties
 	 * @param string[] $preferredPageImagesProperties
 	 * @param string[] $globeUris Mapping of globe URIs to canonical globe names, as recognized by

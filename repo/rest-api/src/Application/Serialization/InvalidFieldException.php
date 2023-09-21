@@ -14,7 +14,10 @@ class InvalidFieldException extends SerializationException {
 	private $value;
 
 	/**
+	 * @param string $field
 	 * @param mixed $value
+	 * @param string $message
+	 * @param Throwable|null $previous
 	 */
 	public function __construct( string $field, $value, string $message = '', Throwable $previous = null ) {
 		$this->field = $field;

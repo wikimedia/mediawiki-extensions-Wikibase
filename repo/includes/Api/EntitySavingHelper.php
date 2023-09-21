@@ -333,6 +333,8 @@ class EntitySavingHelper extends EntityLoadingHelper {
 	 *
 	 * @param EntityDocument $entity The entity to save
 	 * @param string|FormatableSummary $summary The edit summary
+	 * @param array $requestParams
+	 * @param IContextSource $context
 	 * @param int $flags The edit flags (see WikiPage::doEditContent)
 	 *
 	 * @throws LogicException if not in write mode

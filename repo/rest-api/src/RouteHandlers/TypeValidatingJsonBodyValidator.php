@@ -45,7 +45,9 @@ class TypeValidatingJsonBodyValidator extends JsonBodyValidator {
 	}
 
 	/**
+	 * @param string $fieldName
 	 * @param mixed $fieldValue
+	 * @return bool
 	 */
 	private function hasExpectedType( string $fieldName, $fieldValue ): bool {
 		$typeAsSpecifiedInSettings = $this->getFieldTypeFromSettings( $fieldName );
@@ -57,7 +59,9 @@ class TypeValidatingJsonBodyValidator extends JsonBodyValidator {
 	}
 
 	/**
+	 * @param string $fieldName
 	 * @param mixed $fieldValue
+	 * @return bool
 	 */
 	private function isOptionalAndNull( string $fieldName, $fieldValue ): bool {
 		$isRequired = $this->settings[$fieldName][ParamValidator::PARAM_REQUIRED] ?? false;

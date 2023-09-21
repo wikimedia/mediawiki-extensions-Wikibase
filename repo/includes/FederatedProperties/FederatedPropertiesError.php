@@ -20,6 +20,7 @@ use Wikibase\View\Template\TemplateFactory;
 class FederatedPropertiesError extends ErrorPageError {
 
 	/**
+	 * @param string $languageCode
 	 * @param LabelsProvider $entity
 	 * @param string $msg Message key (string) for error text
 	 * @param array $params Array with parameters to wfMessage()

@@ -271,6 +271,7 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 	 * @param string $flavor
 	 * @param EntityRevision[] $entityRevisions
 	 * @param EntityId[] $redirects
+	 * @return RdfDumpGenerator
 	 */
 	protected function newDumpGenerator( string $flavor, array $entityRevisions = [], array $redirects = [] ): RdfDumpGenerator {
 		$out = fopen( 'php://output', 'w' );

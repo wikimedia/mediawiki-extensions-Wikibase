@@ -64,6 +64,7 @@ class ComplexValueRdfHelper {
 	 * @param string $propertyValueLName Property value relation name
 	 * @param string $dataType Property data type (unused, passed here for symmetry
 	 *        with the signature of ValueSnakRdfBuilder::addValue).
+	 * @param string $snakNamespace
 	 * @param DataValue $value
 	 * @param bool $normalized Is this a normalized value?
 	 *

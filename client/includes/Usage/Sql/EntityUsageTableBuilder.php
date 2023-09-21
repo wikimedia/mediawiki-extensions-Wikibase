@@ -132,6 +132,7 @@ class EntityUsageTableBuilder {
 	}
 
 	/**
+	 * @param IDatabase $dbw
 	 * @param EntityId[] $entityPerPage
 	 *
 	 * @return int The number of rows inserted.
