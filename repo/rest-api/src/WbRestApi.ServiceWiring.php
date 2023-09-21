@@ -417,7 +417,8 @@ return [
 			new TermLookupEntityTermsRetriever(
 				WikibaseRepo::getTermLookup( $services ),
 				WikibaseRepo::getTermsLanguages( $services )
-			)
+			),
+			WbRestApi::getValidatingRequestDeserializer( $services )
 		);
 	},
 
