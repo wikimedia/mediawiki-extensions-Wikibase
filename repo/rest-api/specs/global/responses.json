@@ -168,6 +168,30 @@
 			}
 		}
 	},
+	"PropertyLabelNotFound": {
+		"description": "The specified resource was not found",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/Error" },
+				"examples": {
+					"property-not-found": {
+						"$ref": "./examples.json#/PropertyNotFoundExample"
+					},
+					"label-not-defined": {
+						"$ref": "./examples.json#/PropertyLabelNotDefinedExample"
+					}
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
 	"ItemAliasesInLanguageNotFound": {
 		"description": "The specified resource was not found",
 		"content": {
@@ -623,6 +647,24 @@
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
+					"invalid-language-code": { "$ref": "./examples.json#/InvalidLanguageCodeExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
+	"InvalidPropertyTermByLanguageInput": {
+		"description": "The request cannot be processed",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/Error" },
+				"examples": {
+					"invalid-property-id": { "$ref": "./examples.json#/InvalidPropertyIdExample" },
 					"invalid-language-code": { "$ref": "./examples.json#/InvalidLanguageCodeExample" }
 				}
 			}
@@ -1169,6 +1211,37 @@
 			"application/json": {
 				"schema": {
 					"$ref": "./schemas.json#/Labels"
+				}
+			}
+		}
+	},
+	"PropertyLabel": {
+		"description": "Property's label in a specific language",
+		"headers": {
+			"Last-Modified": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Last modified date"
+			},
+			"ETag": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Last entity revision number"
+			},
+			"X-Authenticated-User": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Optional username of the user making the request"
+			}
+		},
+		"content": {
+			"application/json": {
+				"schema": {
+					"type": "string",
+					"example": "instance of"
 				}
 			}
 		}
