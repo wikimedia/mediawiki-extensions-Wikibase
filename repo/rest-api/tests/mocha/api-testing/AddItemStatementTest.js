@@ -7,7 +7,7 @@ const { formatStatementEditSummary } = require( '../helpers/formatEditSummaries'
 const { newAddItemStatementRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 
-describe( 'POST /entities/items/{item_id}/statements', () => {
+describe( newAddItemStatementRequestBuilder().getRouteDescription(), () => {
 	let testItemId;
 	let originalLastModified;
 	let originalRevisionId;

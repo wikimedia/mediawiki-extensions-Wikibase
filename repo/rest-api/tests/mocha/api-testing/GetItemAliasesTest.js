@@ -5,7 +5,7 @@ const { expect } = require( '../helpers/chaiHelper' );
 const { createEntity, getLatestEditMetadata, createRedirectForItem } = require( '../helpers/entityHelper' );
 const { newGetItemAliasesRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
-describe( 'GET /entities/items/{id}/aliases', () => {
+describe( newGetItemAliasesRequestBuilder().getRouteDescription(), () => {
 	let itemId;
 
 	before( async () => {

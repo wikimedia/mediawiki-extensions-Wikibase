@@ -9,7 +9,7 @@ const {
 const { newGetPropertyStatementsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 
-describe( 'GET /entities/properties/{id}/statements', () => {
+describe( newGetPropertyStatementsRequestBuilder().getRouteDescription(), () => {
 
 	let propertyId;
 

@@ -13,7 +13,7 @@ const {
 const { newGetItemStatementsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 
-describe( 'GET /entities/items/{id}/statements', () => {
+describe( newGetItemStatementsRequestBuilder().getRouteDescription(), () => {
 
 	let testItemId;
 	let testStatementPropertyId;

@@ -5,7 +5,7 @@ const { expect } = require( '../helpers/chaiHelper' );
 const { createUniqueStringProperty, getLatestEditMetadata } = require( '../helpers/entityHelper' );
 const { newGetPropertyLabelsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
-describe( 'GET /entities/properties/{id}/labels', () => {
+describe( newGetPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 	let propertyId;
 	let propertyEnLabel;
 
