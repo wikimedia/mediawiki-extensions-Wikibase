@@ -28,7 +28,7 @@ use Wikibase\Lib\Formatters\SnakFormatter;
 class WikitextPreprocessingSnakFormatterTest extends MediaWikiIntegrationTestCase {
 
 	/**
-	 * @param Snak $expectedSnak
+	 * @param Snak|null $expectedSnak
 	 * @param string|null $formattedValue
 	 *
 	 * @return SnakFormatter

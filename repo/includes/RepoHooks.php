@@ -57,6 +57,7 @@ use Wikibase\Repo\ParserOutput\TermboxView;
 use Wikibase\Repo\Store\RateLimitingIdGenerator;
 use Wikibase\Repo\Store\Sql\SqlSubscriptionLookup;
 use Wikibase\View\ViewHooks;
+use WikiImporter;
 use WikiPage;
 
 /**
@@ -450,7 +451,7 @@ final class RepoHooks {
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/PageHistoryLineEnding
 	 *
 	 * @param HistoryPager $history
-	 * @param object $row
+	 * @param \stdClass $row
 	 * @param string &$html
 	 * @param array $classes
 	 */
@@ -885,7 +886,7 @@ final class RepoHooks {
 	/**
 	 * Called by Import.php. Implemented to prevent the import of entities.
 	 *
-	 * @param object $importer unclear, see Bug T66657
+	 * @param WikiImporter $importer
 	 * @param array $pageInfo
 	 * @param array $revisionInfo
 	 */

@@ -116,7 +116,7 @@ class LabelPrefetchHookHandler implements ChangesListInitRowsHook {
 
 	/**
 	 * @param ChangesList $list
-	 * @param IResultWrapper|object[] $rows
+	 * @param IResultWrapper|\stdClass[] $rows
 	 */
 	public function onChangesListInitRows( $list, $rows ): void {
 		try {
@@ -140,7 +140,7 @@ class LabelPrefetchHookHandler implements ChangesListInitRowsHook {
 	}
 
 	/**
-	 * @param IResultWrapper|object[] $rows
+	 * @param IResultWrapper|\stdClass[] $rows
 	 *
 	 * @return Title[]
 	 */

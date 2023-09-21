@@ -148,7 +148,7 @@ class SpecialUnconnectedPages extends QueryPage {
 	 * @see QueryPage::formatResult
 	 *
 	 * @param Skin $skin
-	 * @param object $result
+	 * @param \stdClass $result
 	 *
 	 * @return string|bool
 	 */

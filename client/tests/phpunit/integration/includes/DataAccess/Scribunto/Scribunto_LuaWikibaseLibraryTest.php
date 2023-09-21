@@ -34,6 +34,7 @@ use Wikimedia\TestingAccessWrapper;
  */
 class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestCase {
 
+	/** @inheritDoc */
 	protected static $moduleName = 'LuaWikibaseLibraryTests';
 
 	/**

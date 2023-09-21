@@ -62,7 +62,7 @@ class DispatchChangesJob extends Job {
 	 */
 	private $changeStore;
 
-	/*
+	/**
 	 * @var LoggerInterface
 	 */
 	private $logger;

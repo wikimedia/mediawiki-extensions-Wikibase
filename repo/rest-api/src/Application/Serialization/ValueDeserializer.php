@@ -9,7 +9,7 @@ use DataValues\DataValue;
  */
 interface ValueDeserializer {
 
-	/*
+	/**
 	 * @throws MissingFieldException
 	 * @throws InvalidFieldException
 	 */

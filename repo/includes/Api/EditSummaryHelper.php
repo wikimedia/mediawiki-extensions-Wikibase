@@ -37,8 +37,8 @@ class EditSummaryHelper {
 	 * Prepares edit summaries with appropriate action and comment args
 	 * based on what has changed on the entity.
 	 *
-	 * @param  Summary $summary
-	 * @param  ChangeOpResult $changeOpResult
+	 * @param Summary $summary
+	 * @param ChangeOpResult $changeOpResult
 	 * @return void
 	 */
 	public function prepareEditSummary( Summary $summary, ChangeOpResult $changeOpResult ) {

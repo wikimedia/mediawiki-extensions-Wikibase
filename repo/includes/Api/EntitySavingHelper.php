@@ -157,6 +157,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 	}
 
 	/**
+	 * @param array $requestParams
 	 * @param EntityId|null $entityId ID of the entity to load. If not given, the ID is taken
 	 *        from the request parameters. If $entityId is given, the 'baserevid' parameter must
 	 *        belong to it.

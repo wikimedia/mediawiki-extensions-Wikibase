@@ -33,6 +33,7 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 	 */
 	private $oldAllowDataAccessInUserLanguage;
 
+	/** @inheritDoc */
 	protected static $moduleName = 'LuaWikibaseEntityLibraryTests';
 
 	protected function getTestModules() {

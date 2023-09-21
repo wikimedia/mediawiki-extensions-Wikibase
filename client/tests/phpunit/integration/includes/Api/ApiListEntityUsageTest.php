@@ -28,6 +28,7 @@ use Wikibase\Client\WikibaseClient;
  */
 class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 
+	/** @inheritDoc */
 	protected $tablesUsed = [
 		'page',
 		'wbc_entity_usage',

@@ -3,6 +3,7 @@
 namespace Wikibase\Repo;
 
 use InvalidArgumentException;
+use Wikibase\Lib\Store\EntityStoreWatcher;
 
 /**
  * Dispatches a notification to a set of watchers.
@@ -15,7 +16,7 @@ use InvalidArgumentException;
 class GenericEventDispatcher {
 
 	/**
-	 * @var array
+	 * @var array<int,EntityStoreWatcher>
 	 */
 	private $watchers = [];
 
@@ -25,12 +26,12 @@ class GenericEventDispatcher {
 	private $key = 0;
 
 	/**
-	 * @var string
+	 * @var class-string
 	 */
 	private $interface;
 
 	/**
-	 * @param string $interface the interface watchers must implement
+	 * @param class-string $interface the interface watchers must implement
 	 */
 	public function __construct( $interface ) {
 		$this->interface = $interface;
@@ -40,10 +41,10 @@ class GenericEventDispatcher {
 	 * Registers a watcher. The watcher will be called whenever
 	 * the dispatch() method is called, until the watcher is unregistered.
 	 *
-	 * @param object $listener
+	 * @param EntityStoreWatcher $listener
 	 *
 	 * @throws InvalidArgumentException
-	 * @return mixed The listener key, for removing the listener later.
+	 * @return int The listener key, for removing the listener later.
 	 */
 	public function registerWatcher( $listener ) {
 		if ( !is_subclass_of( $listener, $this->interface ) ) {
@@ -59,7 +60,7 @@ class GenericEventDispatcher {
 	 * Unregisters a watcher using its registration key. The watcher will no longer
 	 * be called by dispatch().
 	 *
-	 * @param mixed $key A watcher key as returned by registerWatcher().
+	 * @param int $key A watcher key as returned by registerWatcher().
 	 *
 	 * @throws InvalidArgumentException
 	 */

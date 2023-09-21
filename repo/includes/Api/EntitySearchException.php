@@ -18,7 +18,7 @@ class EntitySearchException extends \Exception {
 
 	/**
 	 * @param Status $status status with errors
-	 * @param String $message
+	 * @param string $message
 	 */
 	public function __construct( Status $status, string $message = "" ) {
 		parent::__construct( $message );

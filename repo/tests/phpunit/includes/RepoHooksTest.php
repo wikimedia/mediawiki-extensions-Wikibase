@@ -29,6 +29,7 @@ use Wikibase\Repo\ParserOutput\TermboxView;
 use Wikibase\Repo\RepoHooks;
 use Wikibase\Repo\Store\RateLimitingIdGenerator;
 use Wikibase\Repo\WikibaseRepo;
+use WikiImporter;
 
 /**
  * @covers \Wikibase\Repo\RepoHooks
@@ -204,8 +205,7 @@ class RepoHooksTest extends MediaWikiIntegrationTestCase {
 		$allowEntityImport,
 		$expectedException = null
 	) {
-		//NOTE: class is unclear, see Bug T66657. But we don't use that object anyway.
-		$importer = (object)[];
+		$importer = $this->createNoOpMock( WikiImporter::class );
 
 		$this->getSettings()->setSetting( 'allowEntityImport', $allowEntityImport );
 

@@ -164,7 +164,7 @@ class NTriplesRdfTestHelper {
 	/**
 	 * @param string|string[] $dataSetNames
 	 * @param string|string[] $actual
-	 * @param string $message
+	 * @param string|null $message
 	 */
 	public function assertNTriplesEqualsDataset( $dataSetNames, $actual, $message = null ) {
 		$testData = $this->getTestData();

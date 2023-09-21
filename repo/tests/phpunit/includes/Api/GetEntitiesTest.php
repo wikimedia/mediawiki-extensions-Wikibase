@@ -35,6 +35,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 	}
 
 	/**
+	 * @var array[]
 	 * The key 'p' contains the params, the key 'e' contains things to expect
 	 * handles will automatically be converted into the ID pointing to the item
 	 */
@@ -87,7 +88,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 	];
 
 	/**
-	 * goodProps contains many combinations of props that should work when used with the api module
+	 * @var string[] Contains many combinations of props that should work when used with the api module
 	 * Each property in the array will cause extra assertions when the tests run
 	 */
 	protected static $goodProps = [
@@ -104,6 +105,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 	];
 
 	/**
+	 * @var string[]
 	 * Each language in the array will cause extra assertions when the tests run
 	 */
 	protected static $goodLangs = [
@@ -115,6 +117,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 	];
 
 	/**
+	 * @var string[]
 	 * These are all available formats for the API. we need to make sure they all work
 	 * Each format is only tested against the first set of good parameters, from then on json is always used
 	 */

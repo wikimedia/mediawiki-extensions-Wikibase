@@ -113,9 +113,9 @@ class RdfBuilderTestData {
 	/**
 	 * Load serialized ntriples.
 	 *
-	 * @param string... $dataSets one or more data set names
+	 * @param string ...$dataSets One or more data set names
 	 *
-	 * @return string N-Triples
+	 * @return string[] N-Triples
 	 */
 	public function getNTriples( ...$dataSets ) {
 		$triples = [];

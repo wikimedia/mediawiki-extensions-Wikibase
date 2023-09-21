@@ -18,6 +18,7 @@ namespace Wikibase\Client\Tests\Integration\DataAccess\Scribunto;
  */
 class Scribunto_LuaWikibaseLibraryNoArbitraryAccessTest extends Scribunto_LuaWikibaseLibraryTestCase {
 
+	/** @inheritDoc */
 	protected static $moduleName = 'LuaWikibaseLibraryNoArbitraryAccessTests';
 
 	protected function getTestModules() {

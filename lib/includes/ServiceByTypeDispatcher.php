@@ -1,5 +1,9 @@
 <?php
 
+// phpcs:disable MediaWiki.Commenting.FunctionComment.ObjectTypeHintParam
+// phpcs:disable MediaWiki.Commenting.FunctionComment.ObjectTypeHintReturn
+// phpcs:disable MediaWiki.Commenting.PropertyDocumentation.ObjectTypeHintVar
+
 declare( strict_types=1 );
 
 namespace Wikibase\Lib;
@@ -23,11 +27,11 @@ class ServiceByTypeDispatcher {
 	/** @var object */
 	private $defaultService;
 
-	/** @var string */
+	/** @var class-string */
 	private $type;
 
 	/**
-	 * @param string $type type of the dispatched services, i.e. type of the default service and the return value of the callbacks
+	 * @param class-string $type type of the dispatched services, i.e. type of the default service and the return value of the callbacks
 	 * @param callable[] $callbacks map of entity types to callbacks creating the service to be used
 	 * @param object $defaultService the service to be used when there is no callback defined for the given entity type
 	 */

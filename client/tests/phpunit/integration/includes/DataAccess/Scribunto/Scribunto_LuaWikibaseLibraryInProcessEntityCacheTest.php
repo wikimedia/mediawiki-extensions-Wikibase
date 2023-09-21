@@ -23,6 +23,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
  */
 class Scribunto_LuaWikibaseLibraryInProcessEntityCacheTest extends Scribunto_LuaWikibaseLibraryTestCase {
 
+	/** @inheritDoc */
 	protected static $moduleName = 'LuaWikibaseLibraryInProcessEntityCacheTests';
 
 	public function provideLuaData() {

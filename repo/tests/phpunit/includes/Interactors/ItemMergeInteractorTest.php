@@ -133,8 +133,6 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 	}
 
 	/**
-	 * @param User|null $user
-	 *
 	 * @return ItemMergeInteractor
 	 */
 	private function newInteractor() {

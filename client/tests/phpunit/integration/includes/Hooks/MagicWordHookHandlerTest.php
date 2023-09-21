@@ -42,10 +42,10 @@ class MagicWordHookHandlerTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	// I looked at mocking the messages, but MessageCache
-	// is not in ServiceWiring (yet), so these are real messsages,
-	// except non-existent-message to test that feature.
-
+	/**
+	 * I looked at mocking the messages, but MessageCache is not in ServiceWiring (yet), so these
+	 * are real messsages, except non-existent-message to test that feature.
+	 */
 	public static function provideGetRepoName() {
 		return [
 			[

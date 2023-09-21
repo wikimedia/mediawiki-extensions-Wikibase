@@ -240,10 +240,12 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 		return $result !== false;
 	}
 
-	/*
+	/**
 	 * Due to the fact that in PHP array indices are automatically casted
 	 * to integers if possible, e.g. `['0' => ''] === [0 => '']`, we have to
 	 * allow integers to be present as keys in $values in `setMultiple()`
+	 *
+	 * @param array $keys
 	 */
 	private function assertKeysAreValidAllowIntegers( $keys ): void {
 		$this->assertKeysAreValid(

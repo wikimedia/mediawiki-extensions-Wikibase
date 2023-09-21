@@ -26,6 +26,7 @@ class Scribunto_LuaWikibaseStatsTest extends Scribunto_LuaWikibaseLibraryTestCas
 	private $oldTrackLuaFunctionCallsPerSiteGroup;
 	private $oldTrackLuaFunctionCallsSampleRate;
 
+	/** @inheritDoc */
 	protected static $moduleName = 'LuaWikibaseStatsTest';
 
 	protected function getTestModules() {

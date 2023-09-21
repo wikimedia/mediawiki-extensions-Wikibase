@@ -90,8 +90,10 @@ class EchoNotificationsHandlers {
 		$this->repoSiteName = $repoSiteName;
 	}
 
-	// TODO convert this to a proper hook handler class,
-	// register factory with services in extension JSON file
+	/**
+	 * TODO: Convert this to a proper hook handler class,
+	 * register factory with services in extension JSON file
+	 */
 	public static function factory(): self {
 		$services = MediaWikiServices::getInstance();
 		$settings = WikibaseClient::getSettings( $services );

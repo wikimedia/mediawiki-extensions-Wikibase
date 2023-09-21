@@ -258,9 +258,9 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 	}
 
 	/**
-	 * @param int           $produce One of the RdfProducer::PRODUCE_... constants.
-	 * @param DedupeBag     $dedup
-	 * @param RdfVocabulary $vocabulary
+	 * @param int $produce One of the RdfProducer::PRODUCE_... constants.
+	 * @param DedupeBag|null $dedup
+	 * @param RdfVocabulary|null $vocabulary
 	 */
 	private function newRdfBuilder(
 		int $produce,

@@ -48,7 +48,7 @@ class DatabaseItemTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 
 	private JobQueueGroup $jobQueueMock;
 
-	/** * @var MockJobQueueFactory */
+	/** @var MockJobQueueFactory */
 	private $mockJobQueueFactory;
 
 	protected function setUp(): void {

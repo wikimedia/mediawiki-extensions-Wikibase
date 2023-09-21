@@ -131,12 +131,16 @@ class DatabaseTermInLangIdsAcquirer implements TermInLangIdsAcquirer {
 		return $termsArray;
 	}
 
-	/*
+	/**
 	 * Since the wbx_text column can hold at most 255 bytes, we truncate the
 	 * the texts to that length before sending them to the acquirer.
 	 * Additional mappings ensure that we can still return a map from full,
 	 * untruncated texts to text IDs (though multiple texts may share the same
 	 * ID if they only differ after more than 255 bytes).
+	 *
+	 * @param string[] $texts
+	 * @param ReplicaPrimaryAwareRecordIdsAcquirer $textIdsAcquirer
+	 * @return string[]
 	 */
 	private function acquireTextIds(
 		array $texts,

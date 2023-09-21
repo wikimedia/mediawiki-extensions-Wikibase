@@ -141,7 +141,7 @@ class EntityModificationTestHelper {
 	 * @param array $data
 	 * @param EntityId|string|null $id
 	 *
-	 * @return object
+	 * @return EntityDocument
 	 */
 	public function unserializeEntity( array $data, $id = null ) {
 		if ( $id !== null ) {

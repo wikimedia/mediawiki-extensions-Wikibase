@@ -20,6 +20,7 @@ use MediaWiki\Title\Title;
  */
 class Scribunto_LuaWikibaseLibraryNoLinkedEntityTest extends Scribunto_LuaWikibaseLibraryTestCase {
 
+	/** @inheritDoc */
 	protected static $moduleName = 'LuaWikibaseLibraryNoLinkedEntityTests';
 
 	protected function getTestModules() {

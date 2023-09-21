@@ -35,7 +35,7 @@ class SummaryParsingPrefetchHelper {
 	public const PROPERTY_SUMMARY_REGEXP = '/\[\[(\S+)(P[1-9]\d*)\]\]/';
 
 	/**
-	 * @param IResultWrapper|array $rows
+	 * @param IResultWrapper|\stdClass[]|RevisionRecord[] $rows
 	 * @param array $languageCodes
 	 * @param array $termTypes
 	 */
@@ -58,13 +58,12 @@ class SummaryParsingPrefetchHelper {
 	}
 
 	/**
-	 * @param IResultWrapper|array $result
+	 * @param IResultWrapper|\stdClass[]|RevisionRecord[] $result
 	 * @return PropertyId[]
 	 */
 	public function extractSummaryProperties( $result ): array {
 		$propertyIds = [];
 		foreach ( $result as $revisionRow ) {
-
 			$comment = $this->getCommentText( $revisionRow );
 			if ( $comment === null ) {
 				continue;
@@ -81,6 +80,10 @@ class SummaryParsingPrefetchHelper {
 		return $propertyIds;
 	}
 
+	/**
+	 * @param \stdClass|RevisionRecord|null $revisionRow
+	 * @return string|null
+	 */
 	private function getCommentText( $revisionRow ) {
 		if ( $revisionRow === null ) {
 			return null;

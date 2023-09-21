@@ -1,23 +1,20 @@
 <?xml version="1.0"?>
 <ruleset>
 	<rule ref="./vendor/mediawiki/mediawiki-codesniffer/MediaWiki">
-		<exclude name="MediaWiki.PHPUnit.AssertCount.NotUsed" />
+		<exclude name="MediaWiki.Commenting.FunctionComment.MissingDocumentationPrivate" />
+		<exclude name="MediaWiki.Commenting.FunctionComment.MissingDocumentationProtected" />
+		<exclude name="MediaWiki.Commenting.FunctionComment.MissingDocumentationPublic" />
+		<exclude name="MediaWiki.Commenting.FunctionComment.MissingParamTag" />
+		<exclude name="MediaWiki.Commenting.FunctionComment.MissingReturn" />
+		<!-- Note: NotPunctuationReturnType can be enabled when the sniff accepts array shapes -->
+		<exclude name="MediaWiki.Commenting.FunctionComment.NotPunctuationReturnType" />
+		<!-- Note: ParamNameNoMatch is probably a great candidate for the next round of fixes -->
+		<exclude name="MediaWiki.Commenting.FunctionComment.ParamNameNoMatch" />
+		<exclude name="MediaWiki.Commenting.FunctionComment.SpacingAfterParamName" />
+		<exclude name="MediaWiki.Commenting.FunctionComment.SpacingAfterParamType" />
+		<exclude name="MediaWiki.Commenting.FunctionComment.WrongStyle" />
+		<exclude name="MediaWiki.Commenting.PropertyDocumentation.MissingDocumentationPrivate" />
 		<exclude name="MediaWiki.Usage.StaticClosure.StaticClosure" />
-	</rule>
-
-	<!-- The function comment sniff is way to rigorous about way to many details that need
-		exceptions:
-		* It complains about missing documentation on fully self-explanatory function headers
-		  with strict type hints.
-		* It complains about missing documentation if there is a proper @see tag.
-		* It complains about duplicate spaces in "@param <type>  $<var>", but removing these
-		  doesn't make the code easier to read.
-		* It does not understand "@param <type> [$optional,…]. -->
-	<rule ref="MediaWiki.Commenting.FunctionComment">
-		<severity>0</severity>
-	</rule>
-	<rule ref="MediaWiki.Commenting.PropertyDocumentation">
-		<severity>0</severity>
 	</rule>
 
 	<!-- Starting a function's body with an empty line can be helpful after a very large header.

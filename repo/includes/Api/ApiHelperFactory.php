@@ -119,7 +119,7 @@ class ApiHelperFactory {
 	 * @param Serializer $entitySerializer
 	 * @param EntityIdParser $idParser
 	 * @param PermissionManager $permissionManager
-	 * @param RevisionLookup $revisionLookup,
+	 * @param RevisionLookup $revisionLookup
 	 * @param TitleFactory $titleFactory
 	 * @param EntityByLinkedTitleLookup|null $entityByLinkedTitleLookup
 	 * @param EntityFactory|null $entityFactory

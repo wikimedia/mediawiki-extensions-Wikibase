@@ -110,7 +110,6 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @param InvokedRecorder|null $efHookCalls
 	 * @param Status|null $efHookStatus
-	 * @param User|null $user
 	 *
 	 * @return ItemRedirectCreationInteractor
 	 */

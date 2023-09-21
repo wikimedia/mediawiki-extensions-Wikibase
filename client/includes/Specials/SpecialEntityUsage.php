@@ -158,7 +158,7 @@ class SpecialEntityUsage extends QueryPage {
 	 * @see QueryPage::formatResult
 	 *
 	 * @param Skin $skin
-	 * @param object $row
+	 * @param \stdClass $row
 	 *
 	 * @return string HTML
 	 */

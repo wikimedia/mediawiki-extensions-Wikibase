@@ -609,6 +609,7 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @param string $propertyId
+	 * phpcs:ignore MediaWiki.Commenting.FunctionComment.ObjectTypeHintReturn
 	 * @return object
 	 */
 	private function givenPropertyExists( $propertyId ) {

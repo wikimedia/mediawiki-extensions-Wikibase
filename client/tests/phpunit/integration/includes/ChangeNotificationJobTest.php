@@ -18,10 +18,6 @@ use Wikibase\Client\ChangeNotificationJob;
  */
 class ChangeNotificationJobTest extends MediaWikiIntegrationTestCase {
 
-	// TODO: testNewFromChanges
-	// TODO: testGetChanges
-	// TODO: testRun
-
 	public static function provideToString() {
 		return [
 			'empty' => [
@@ -48,5 +44,9 @@ class ChangeNotificationJobTest extends MediaWikiIntegrationTestCase {
 		$s = $job->toString();
 		$this->assertMatchesRegularExpression( $regex, $s );
 	}
+
+	// TODO: testNewFromChanges
+	// TODO: testGetChanges
+	// TODO: testRun
 
 }
