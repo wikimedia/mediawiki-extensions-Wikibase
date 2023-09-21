@@ -2,7 +2,9 @@
 
 namespace Wikibase\Repo\RestApi\RouteHandlers;
 
+use MediaWiki\Rest\RequestInterface;
 use MediaWiki\Rest\Response;
+use MediaWiki\Rest\ResponseInterface;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
@@ -10,6 +12,9 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescriptions\GetProper
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescriptions\GetPropertyDescriptionsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescriptions\GetPropertyDescriptionsResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -22,15 +27,18 @@ class GetPropertyDescriptionsRouteHandler extends SimpleHandler {
 
 	private GetPropertyDescriptions $useCase;
 	private ResponseFactory $responseFactory;
+	private MiddlewareHandler $middlewareHandler;
 	private DescriptionsSerializer $descriptionsSerializer;
 
 	public function __construct(
 		GetPropertyDescriptions $useCase,
 		DescriptionsSerializer $descriptionsSerializer,
+		MiddlewareHandler $middlewareHandler,
 		ResponseFactory $responseFactory
 	) {
 		$this->useCase = $useCase;
 		$this->descriptionsSerializer = $descriptionsSerializer;
+		$this->middlewareHandler = $middlewareHandler;
 		$this->responseFactory = $responseFactory;
 	}
 
@@ -39,6 +47,14 @@ class GetPropertyDescriptionsRouteHandler extends SimpleHandler {
 		return new self(
 			WbRestApi::getGetPropertyDescriptions(),
 			new DescriptionsSerializer(),
+			new MiddlewareHandler( [
+				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
+				new UserAgentCheckMiddleware(),
+				new AuthenticationMiddleware(),
+				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
+					fn( RequestInterface $request ): string => $request->getPathParam( self::PROPERTY_ID_PATH_PARAM )
+				),
+			] ),
 			$responseFactory
 		);
 	}
@@ -47,7 +63,14 @@ class GetPropertyDescriptionsRouteHandler extends SimpleHandler {
 		return false;
 	}
 
-	public function run( string $propertyId ): Response {
+	/**
+	 * @param mixed ...$args
+	 */
+	public function run( ...$args ): Response {
+		return $this->middlewareHandler->run( $this, [ $this, 'runUseCase' ], $args );
+	}
+
+	public function runUseCase( string $propertyId ): Response {
 		try {
 			return $this->newSuccessHttpResponse(
 				$this->useCase->execute( new GetPropertyDescriptionsRequest( $propertyId ) )
@@ -81,6 +104,15 @@ class GetPropertyDescriptionsRouteHandler extends SimpleHandler {
 
 	private function setEtagFromRevId( Response $response, int $revId ): void {
 		$response->setHeader( 'ETag', "\"$revId\"" );
+	}
+
+	/**
+	 * Preconditions are checked via {@link PreconditionMiddleware}
+	 *
+	 * @inheritDoc
+	 */
+	public function checkPreconditions(): ?ResponseInterface {
+		return null;
 	}
 
 }
