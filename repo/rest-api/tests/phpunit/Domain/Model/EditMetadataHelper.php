@@ -19,12 +19,13 @@ trait EditMetadataHelper {
 	): Callback {
 		return TestCase::callback(
 			function( EditMetadata $editMetadata ) use ( $editTags, $isBot, $comment, $editAction ): bool {
-				TestCase::assertSame( $editMetadata->getTags(), $editTags );
-				TestCase::assertSame( $editMetadata->isBot(), $isBot );
-				TestCase::assertSame( $editMetadata->getSummary()->getUserComment(), $comment );
-				TestCase::assertSame( $editMetadata->getSummary()->getEditAction(), $editAction );
+				TestCase::assertSame( $editTags, $editMetadata->getTags() );
+				TestCase::assertSame( $isBot, $editMetadata->isBot() );
+				TestCase::assertSame( $comment, $editMetadata->getSummary()->getUserComment() );
+				TestCase::assertSame( $editAction, $editMetadata->getSummary()->getEditAction() );
 				return true;
 			}
 		);
 	}
+
 }
