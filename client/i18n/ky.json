@@ -47,5 +47,7 @@
 	"wikibase-client-data-bridge-error-reload-page": "Баракты кайра жүктөө",
 	"wikibase-client-data-bridge-error-go-back": "Кайтуу",
 	"wikibase-client-data-bridge-thank-you-head": "Түзөткөнүңүз үчүн рахмат !",
-	"wikibase-client-data-bridge-saving-error-assertuser-heading": "Кирген жоксуз"
+	"wikibase-client-data-bridge-saving-error-assertuser-heading": "Кирген жоксуз",
+	"wikibase-client-data-bridge-saving-error-assertuser-publish": "Кирбестен жарыялоо",
+	"wikibase-client-data-bridge-saving-error-assertuser-save": "Кирбестен сактоо"
 }

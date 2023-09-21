@@ -158,7 +158,7 @@
 	"wikibase-copyrighttooltip-acknowledge": "Gelecekteki diğer düzenlemelerim için bu şartları kabul ediyorum. Bu mesajı bir daha gösterme.",
 	"wikibase-entityselector-more": "daha fazla",
 	"wikibase-entityselector-notfound": "Eşleşme bulunamadı",
-	"wikibase-anonymouseditwarning": "Uyarı: Oturum açmadınız. Herhangi bir düzenleme yaparsanız, [https://tr.wikipedia.org/wiki/IP_adresi IP adresiniz] herkes tarafından görülebilir. <strong>[[Special:UserLogin|Oturum açarsanız]]</strong> veya <strong>[[Special:CreateAccount|bir hesap oluşturursanız]]</strong>, düzenlemeleriniz diğer avantajların yanı sıra bir kullanıcı adıyla ilişkilendirilir.",
+	"wikibase-anonymouseditwarning": "Uyarı: Oturum açmadınız. Herhangi bir düzenleme yaparsanız, [https://tr.wikipedia.org/wiki/IP_adresi IP adresiniz] herkes tarafından görülebilir. <strong>[$1 Oturum açarsanız]</strong> veya <strong>[$2 bir hesap oluşturursanız]</strong>, düzenlemeleriniz diğer yararların yanı sıra bir kullanıcı adıyla ilişkilendirilir.",
 	"wikibase-anonymouseditwarning-heading": "Oturum açmadınız",
 	"wikibase-anonymouseditwarning-message": "Şu anda herhangi bir düzenleme yaparsanız IP adresiniz herkes tarafından görülebilir. Oturum açarsanız veya bir hesap oluşturursanız, düzenlemeleriniz diğer avantajların yanı sıra kullanıcı adınızla da ilişkilendirilir.",
 	"wikibase-anonymouseditwarning-dismiss-persist": "Oturum açmadığım zamanlarda beni uyar.",
