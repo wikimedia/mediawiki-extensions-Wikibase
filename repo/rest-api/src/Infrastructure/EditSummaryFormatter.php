@@ -6,6 +6,7 @@ use LogicException;
 use Wikibase\Lib\FormatableSummary;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionEditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\DescriptionsEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\LabelEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
@@ -51,6 +52,8 @@ class EditSummaryFormatter {
 				case EditSummary::REPLACE_ACTION:
 					return $this->newSummaryForDescriptionEdit( $editSummary, 'set' );
 			}
+		} elseif ( $editSummary instanceof DescriptionsEditSummary ) {
+			return new Summary();
 		} elseif ( $editSummary instanceof StatementEditSummary ) {
 			switch ( $editSummary->getEditAction() ) {
 				case EditSummary::ADD_ACTION:
