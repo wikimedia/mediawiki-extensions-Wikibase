@@ -8,10 +8,12 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetLatestPropertyRevisionMetadata
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyAliases\GetPropertyAliases;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyAliases\GetPropertyAliasesRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyAliases\GetPropertyAliasesResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyAliasesRetriever;
+use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetPropertyAliases\GetPropertyAliases
@@ -74,8 +76,26 @@ class GetPropertyAliasesTest extends TestCase {
 		}
 	}
 
+	public function testGivenInvalidPropertyId_throws(): void {
+		try {
+			$this->newUseCase()->execute(
+				new GetPropertyAliasesRequest( 'X321' )
+			);
+
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::INVALID_PROPERTY_ID, $e->getErrorCode() );
+			$this->assertSame( 'Not a valid property ID: X321', $e->getErrorMessage() );
+			$this->assertSame( [ UseCaseError::CONTEXT_PROPERTY_ID => 'X321' ], $e->getErrorContext() );
+		}
+	}
+
 	public function newUseCase(): GetPropertyAliases {
-		return new GetPropertyAliases( $this->getRevisionMetadata, $this->propertyAliasesRetriever );
+		return new GetPropertyAliases(
+			$this->getRevisionMetadata,
+			$this->propertyAliasesRetriever,
+			new TestValidatingRequestDeserializer()
+		);
 	}
 
 }

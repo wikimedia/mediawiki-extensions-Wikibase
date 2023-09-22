@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetPropertyAliases;
 
-use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestPropertyRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyAliasesRetriever;
@@ -13,22 +12,24 @@ use Wikibase\Repo\RestApi\Domain\Services\PropertyAliasesRetriever;
 class GetPropertyAliases {
 
 	private GetLatestPropertyRevisionMetadata $getLatestRevisionMetadata;
-
 	private PropertyAliasesRetriever $propertyAliasesRetriever;
+	private GetPropertyAliasesValidator $validator;
 
 	public function __construct(
 		GetLatestPropertyRevisionMetadata $getLatestPropertyRevisionMetadata,
-		PropertyAliasesRetriever $propertyAliasesRetriever
+		PropertyAliasesRetriever $propertyAliasesRetriever,
+		GetPropertyAliasesValidator $validator
 	) {
 		$this->getLatestRevisionMetadata = $getLatestPropertyRevisionMetadata;
 		$this->propertyAliasesRetriever = $propertyAliasesRetriever;
+		$this->validator = $validator;
 	}
 
 	/**
 	 * @throws UseCaseError
 	 */
 	public function execute( GetPropertyAliasesRequest $request ): GetPropertyAliasesResponse {
-		$propertyId = new NumericPropertyId( $request->getPropertyId() );
+		$propertyId = $this->validator->validateAndDeserialize( $request )->getPropertyId();
 
 		[ $revisionId, $lastModified ] = $this->getLatestRevisionMetadata->execute( $propertyId );
 

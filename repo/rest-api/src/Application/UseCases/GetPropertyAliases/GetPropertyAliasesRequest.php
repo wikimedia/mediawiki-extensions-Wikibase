@@ -2,10 +2,13 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetPropertyAliases;
 
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\UseCaseRequest;
+
 /**
  * @license GPL-2.0-or-later
  */
-class GetPropertyAliasesRequest {
+class GetPropertyAliasesRequest implements UseCaseRequest, PropertyIdRequest {
 	private string $propertyId;
 
 	public function __construct( string $propertyId ) {
