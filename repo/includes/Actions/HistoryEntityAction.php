@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Actions;
 use Article;
 use HistoryAction;
 use IContextSource;
+use Message;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\Lib\Store\EntityIdLookup;
 
@@ -46,9 +47,9 @@ class HistoryEntityAction extends HistoryAction {
 	}
 
 	/**
-	 * Return a string for use as title.
+	 * Return a Message for use as title.
 	 *
-	 * @return string
+	 * @return Message
 	 */
 	protected function getPageTitle() {
 		$entityId = $this->entityIdLookup->getEntityIdForTitle( $this->getTitle() );
@@ -63,10 +64,10 @@ class HistoryEntityAction extends HistoryAction {
 		if ( $label !== null ) {
 			$labelText = $label->getText();
 			return $this->msg( 'wikibase-history-title-with-label' )
-				->plaintextParams( $idSerialization, $labelText )->parse();
+				->plaintextParams( $idSerialization, $labelText );
 		} else {
 			return $this->msg( 'wikibase-history-title-without-label' )
-				->plaintextParams( $idSerialization )->parse();
+				->plaintextParams( $idSerialization );
 		}
 	}
 
