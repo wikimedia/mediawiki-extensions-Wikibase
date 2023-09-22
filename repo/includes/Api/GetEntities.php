@@ -95,6 +95,7 @@ class GetEntities extends ApiBase {
 	 * @param ResultBuilder $resultBuilder
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param EntityIdParser $idParser
+	 * @param SiteLookup $siteLookup
 	 * @param IBufferingStatsdDataFactory $stats
 	 * @param bool $federatedPropertiesEnabled
 	 *

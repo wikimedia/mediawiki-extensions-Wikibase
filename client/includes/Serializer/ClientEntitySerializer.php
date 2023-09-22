@@ -33,6 +33,7 @@ class ClientEntitySerializer extends ClientSerializer {
 	/**
 	 * @param Serializer $entitySerializer
 	 * @param PropertyDataTypeLookup $dataTypeLookup
+	 * @param EntityIdParser $entityIdParser
 	 * @param string[] $filterLangCodes
 	 * @param TermLanguageFallbackChain[] $termFallbackChains
 	 */

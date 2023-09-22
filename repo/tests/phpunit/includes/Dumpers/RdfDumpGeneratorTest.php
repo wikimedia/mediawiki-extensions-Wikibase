@@ -13,7 +13,6 @@ use SiteLookup;
 use stdClass;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
@@ -270,7 +269,7 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @param string $flavor
-	 * @param EntityDocument[] $entities
+	 * @param EntityRevision[] $entityRevisions
 	 * @param EntityId[] $redirects
 	 */
 	protected function newDumpGenerator( string $flavor, array $entityRevisions = [], array $redirects = [] ): RdfDumpGenerator {

@@ -24,6 +24,7 @@ class UpdateRepoOnMove extends UpdateRepo {
 	/**
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param LoggerInterface $logger
+	 * @param ClientDomainDb $clientDomainDb
 	 * @param UserIdentity $user
 	 * @param string $siteId Global id of the client wiki
 	 * @param Title $oldTitle

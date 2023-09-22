@@ -82,7 +82,7 @@ abstract class ServiceWiringTestCase extends TestCase {
 	/**
 	 * Get a WikibaseClient service by calling its wiring function.
 	 *
-	 * @param string $id full service name (including "WikibaseClient." prefix)
+	 * @param string $name full service name (including "WikibaseClient." prefix)
 	 * @return mixed service (typically an object)
 	 */
 	protected function getService( $name ) {

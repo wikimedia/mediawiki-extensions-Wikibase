@@ -60,6 +60,7 @@ abstract class UpdateRepo {
 	/**
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param LoggerInterface $logger
+	 * @param ClientDomainDb $clientDb
 	 * @param UserIdentity $user
 	 * @param string $siteId Global id of the client wiki
 	 * @param Title $title Title in the client that has been changed
