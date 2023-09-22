@@ -7,12 +7,21 @@ namespace Wikibase\Repo\RestApi\Domain\Model;
  */
 class DescriptionsEditSummary implements EditSummary {
 
+	private ?string $userComment;
+
+	public static function newPatchSummary( ?string $userComment ): self {
+		$summary = new self();
+		$summary->userComment = $userComment;
+
+		return $summary;
+	}
+
 	public function getEditAction(): string {
 		return '';
 	}
 
 	public function getUserComment(): ?string {
-		return '';
+		return $this->userComment;
 	}
 
 }

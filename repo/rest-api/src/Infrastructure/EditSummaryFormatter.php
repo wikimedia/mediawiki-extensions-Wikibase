@@ -53,7 +53,9 @@ class EditSummaryFormatter {
 					return $this->newSummaryForDescriptionEdit( $editSummary, 'set' );
 			}
 		} elseif ( $editSummary instanceof DescriptionsEditSummary ) {
-			return new Summary();
+			$summary = new Summary();
+			$summary->setUserSummary( $editSummary->getUserComment() );
+			return $summary;
 		} elseif ( $editSummary instanceof StatementEditSummary ) {
 			switch ( $editSummary->getEditAction() ) {
 				case EditSummary::ADD_ACTION:

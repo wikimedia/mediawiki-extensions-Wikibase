@@ -60,9 +60,12 @@ class PatchItemDescriptions {
 		$item = $this->itemRetriever->getItem( $itemId );
 		$item->getFingerprint()->setDescriptions( $modifiedDescriptions );
 
-		// T346768 - handle edit metadata
-		// T346770 - generate the expected edit summary
-		$editMetadata = new EditMetadata( [], false, new DescriptionsEditSummary() );
+		$editMetadata = new EditMetadata(
+			$request->getEditTags(),
+			$request->isBot(),
+			// T346770 - generate the expected edit summary
+			DescriptionsEditSummary::newPatchSummary( $request->getComment() )
+		);
 
 		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
 		$revision = $this->itemUpdater->update( $item, $editMetadata );

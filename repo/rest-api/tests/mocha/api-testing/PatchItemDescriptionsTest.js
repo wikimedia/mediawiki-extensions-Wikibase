@@ -1,6 +1,6 @@
 'use strict';
 
-const { assert, utils } = require( 'api-testing' );
+const { assert, utils, action } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { newPatchItemDescriptionsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
@@ -45,6 +45,32 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 
 			expect( response ).to.have.status( 200 );
 			assert.strictEqual( response.body.de, description );
+		} );
+
+		it( 'can patch descriptions with edit metadata', async () => {
+			const description = `${utils.uniq()} وصف عربي جديد`;
+			const user = await action.robby(); // robby is a bot
+			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test' );
+			const comment = 'I made a patch';
+			const response = await newPatchItemDescriptionsRequestBuilder(
+				testItemId,
+				[ { op: 'add', path: '/ar', value: description } ]
+			)
+				.withJsonBodyParam( 'tags', [ tag ] )
+				.withJsonBodyParam( 'bot', true )
+				.withJsonBodyParam( 'comment', comment )
+				.withUser( user )
+				.assertValidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 200 );
+			assert.strictEqual( response.body.ar, description );
+			assert.strictEqual( response.header[ 'content-type' ], 'application/json' );
+
+			const editMetadata = await entityHelper.getLatestEditMetadata( testItemId );
+			assert.include( editMetadata.tags, tag );
+			assert.include( editMetadata.comment, comment );
+			assert.property( editMetadata, 'bot' );
 		} );
 	} );
 

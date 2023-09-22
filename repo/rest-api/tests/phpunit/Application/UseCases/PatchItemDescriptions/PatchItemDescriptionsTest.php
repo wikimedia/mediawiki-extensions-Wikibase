@@ -9,7 +9,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
-use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptions;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptionsRequest;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
@@ -23,6 +22,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\JsonPatcher;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
+use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 
 /**
@@ -42,7 +42,6 @@ class PatchItemDescriptionsTest extends TestCase {
 	private ItemRetriever $itemRetriever;
 	private DescriptionsDeserializer $descriptionsDeserializer;
 	private ItemUpdater $itemUpdater;
-	private AssertUserIsAuthorized $assertUserIsAuthorized;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -70,6 +69,10 @@ class PatchItemDescriptionsTest extends TestCase {
 
 		$revisionId = 657;
 		$lastModified = '20221212040506';
+		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
+		$isBot = false;
+		$comment = 'descriptions patched by ' . __method__;
+
 		$updatedItem = new Item(
 			new Labels(),
 			new Descriptions( new Description( $newDescriptionLanguage, $newDescriptionText ) ),
@@ -78,13 +81,19 @@ class PatchItemDescriptionsTest extends TestCase {
 		$this->itemUpdater = $this->createMock( ItemUpdater::class );
 		$this->itemUpdater->expects( $this->once() )
 			->method( 'update' )
-			->with( $this->expectEquivalentItemByDescription( $newDescriptionLanguage, $newDescriptionText ) )
+			->with(
+				$this->expectEquivalentItemByDescription( $newDescriptionLanguage, $newDescriptionText ),
+				$this->expectEquivalentMetadata( $editTags, $isBot, $comment, '' )
+			)
 			->willReturn( new ItemRevision( $updatedItem, $lastModified, $revisionId ) );
 
 		$response = $this->newUseCase()->execute(
 			new PatchItemDescriptionsRequest(
 				(string)$itemId,
-				[ [ 'op' => 'add', 'path' => "/$newDescriptionLanguage", 'value' => $newDescriptionText ] ]
+				[ [ 'op' => 'add', 'path' => "/$newDescriptionLanguage", 'value' => $newDescriptionText ] ],
+				$editTags,
+				$isBot,
+				$comment
 			)
 		);
 
