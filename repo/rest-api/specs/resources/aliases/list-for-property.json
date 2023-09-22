@@ -2,8 +2,7 @@
 	"get": {
 		"operationId": "getPropertyAliases",
 		"tags": [ "aliases" ],
-		"summary": "[WIP] Retrieve a Property's aliases",
-		"description": "This endpoint is currently in development and is not recommended for production use.",
+		"summary": "Retrieve a Property's aliases",
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/PropertyId" },
 			{ "$ref": "../../global/parameters.json#/IfNoneMatch" },

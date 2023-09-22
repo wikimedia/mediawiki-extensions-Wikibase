@@ -5,11 +5,6 @@
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetPropertyDescriptionsRouteHandler::factory"
 	},
 	{
-		"path": "/wikibase/v0/entities/properties/{property_id}/aliases",
-		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetPropertyAliasesRouteHandler::factory"
-	},
-	{
 		"path": "/wikibase/v0/entities/items/{item_id}/descriptions",
 		"method": "PATCH",
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\PatchItemDescriptionsRouteHandler::factory"
