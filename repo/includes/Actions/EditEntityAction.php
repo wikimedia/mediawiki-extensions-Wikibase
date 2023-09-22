@@ -216,8 +216,11 @@ class EditEntityAction extends ViewEntityAction {
 	 * @param Status $status The status to report.
 	 */
 	protected function showUndoErrorPage( Status $status ) {
-		$this->getOutput()->prepareErrorPage(
-			$this->msg( 'wikibase-undo-revision-error' ),
+		$this->getOutput()->prepareErrorPage();
+		$this->getOutput()->setPageTitleMsg(
+			$this->msg( 'wikibase-undo-revision-error' )
+		);
+		$this->getOutput()->setHTMLTitle(
 			$this->msg( 'errorpagetitle' )
 		);
 
