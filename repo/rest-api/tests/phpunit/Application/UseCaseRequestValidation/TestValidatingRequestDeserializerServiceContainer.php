@@ -71,7 +71,7 @@ class TestValidatingRequestDeserializerServiceContainer implements ContainerInte
 	/**
 	 * @inheritDoc
 	 */
-	public function has( string $id ) {
+	public function has( string $id ): bool {
 		throw new LogicException( 'This is not expected to be called.' );
 	}
 }
