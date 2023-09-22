@@ -61,7 +61,7 @@ abstract class SpecialWikibasePage extends SpecialPage {
 	public function setHeaders() {
 		$out = $this->getOutput();
 		$out->setArticleRelated( false );
-		$out->setPageTitle( $this->getDescription() );
+		$out->setPageTitleMsg( $this->getDescription() );
 	}
 
 	/**

@@ -283,7 +283,7 @@ class EditEntityAction extends ViewEntityAction {
 
 		$restore = $req->getCheck( 'restore' );
 
-		$this->getOutput()->setPageTitle(
+		$this->getOutput()->setPageTitleMsg(
 			$this->msg(
 				$restore ? 'wikibase-restore-title' : 'wikibase-undo-title',
 				$this->getTitleText(),

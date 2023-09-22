@@ -180,10 +180,7 @@ class ViewEntityAction extends ViewAction {
 			);
 		}
 
-		// Escaping HTML characters in order to retain original label that may contain HTML
-		// characters. This prevents having characters evaluated or stripped via
-		// OutputPage::setPageTitle:
-		$outputPage->setPageTitle(
+		$outputPage->setPageTitleMsg(
 			$this->msg(
 				'difference-title'
 				// This should be something like the following,
@@ -191,7 +188,7 @@ class ViewEntityAction extends ViewAction {
 				// or should set the attribute of the h1 to correct direction.
 				// Still note that the direction is "auto" so guessing should
 				// give the right direction in most cases.
-			)->plaintextParams( htmlspecialchars( $titleText ) . $id )
+			)->plaintextParams( $titleText . $id )
 		);
 	}
 
