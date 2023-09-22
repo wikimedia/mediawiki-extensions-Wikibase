@@ -471,6 +471,7 @@ return [
 
 	'WbRestApi.PatchItemDescriptions' => function( MediaWikiServices $services ): PatchItemDescriptions {
 		return new PatchItemDescriptions(
+			WbRestApi::getAssertUserIsAuthorized( $services ),
 			WbRestApi::getTermLookupEntityTermsRetriever( $services ),
 			new DescriptionsSerializer(),
 			new JsonDiffJsonPatcher(),

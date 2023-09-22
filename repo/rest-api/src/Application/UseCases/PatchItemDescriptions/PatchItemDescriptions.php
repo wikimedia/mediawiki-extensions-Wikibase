@@ -5,6 +5,7 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionsEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Services\ItemDescriptionsRetriever;
@@ -17,6 +18,7 @@ use Wikibase\Repo\RestApi\Domain\Services\JsonPatcher;
  */
 class PatchItemDescriptions {
 
+	private AssertUserIsAuthorized $assertUserIsAuthorized;
 	private ItemDescriptionsRetriever $descriptionsRetriever;
 	private DescriptionsSerializer $descriptionsSerializer;
 	private JsonPatcher $patcher;
@@ -25,6 +27,7 @@ class PatchItemDescriptions {
 	private ItemUpdater $itemUpdater;
 
 	public function __construct(
+		AssertUserIsAuthorized $assertUserIsAuthorized,
 		ItemDescriptionsRetriever $descriptionsRetriever,
 		DescriptionsSerializer $descriptionsSerializer,
 		JsonPatcher $patcher,
@@ -32,6 +35,7 @@ class PatchItemDescriptions {
 		DescriptionsDeserializer $descriptionsDeserializer,
 		ItemUpdater $itemUpdater
 	) {
+		$this->assertUserIsAuthorized = $assertUserIsAuthorized;
 		$this->descriptionsRetriever = $descriptionsRetriever;
 		$this->descriptionsSerializer = $descriptionsSerializer;
 		$this->patcher = $patcher;
@@ -46,7 +50,7 @@ class PatchItemDescriptions {
 		$itemId = new ItemId( $request->getItemId() );
 
 		// T346774 - check if item not found or redirected
-		// T346769 - check if user is authorized
+		$this->assertUserIsAuthorized->execute( $itemId, $request->getUsername() );
 
 		$descriptions = $this->descriptionsRetriever->getDescriptions( $itemId );
 		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
