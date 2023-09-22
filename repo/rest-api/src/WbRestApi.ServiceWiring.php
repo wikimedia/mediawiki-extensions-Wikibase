@@ -320,10 +320,7 @@ return [
 	'WbRestApi.GetItemDescription' => function( MediaWikiServices $services ): GetItemDescription {
 		return new GetItemDescription(
 			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
-			new TermLookupEntityTermsRetriever(
-				WikibaseRepo::getTermLookup( $services ),
-				WikibaseRepo::getTermsLanguages( $services )
-			),
+			WbRestApi::getTermLookupEntityTermsRetriever( $services ),
 			WbRestApi::getValidatingRequestDeserializer( $services )
 		);
 	},
@@ -331,10 +328,7 @@ return [
 	'WbRestApi.GetItemDescriptions' => function( MediaWikiServices $services ): GetItemDescriptions {
 		return new GetItemDescriptions(
 			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
-			new TermLookupEntityTermsRetriever(
-				WikibaseRepo::getTermLookup( $services ),
-				WikibaseRepo::getTermsLanguages( $services )
-			),
+			WbRestApi::getTermLookupEntityTermsRetriever( $services ),
 			WbRestApi::getValidatingRequestDeserializer( $services )
 		);
 	},
@@ -342,10 +336,7 @@ return [
 	'WbRestApi.GetItemLabel' => function( MediaWikiServices $services ): GetItemLabel {
 		return new GetItemLabel(
 			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
-			new TermLookupEntityTermsRetriever(
-				WikibaseRepo::getTermLookup( $services ),
-				WikibaseRepo::getTermsLanguages( $services )
-			),
+			WbRestApi::getTermLookupEntityTermsRetriever( $services ),
 			WbRestApi::getValidatingRequestDeserializer( $services )
 		);
 	},
@@ -353,10 +344,7 @@ return [
 	'WbRestApi.GetItemLabels' => function( MediaWikiServices $services ): GetItemLabels {
 		return new GetItemLabels(
 			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
-			new TermLookupEntityTermsRetriever(
-				WikibaseRepo::getTermLookup( $services ),
-				WikibaseRepo::getTermsLanguages( $services )
-			),
+			WbRestApi::getTermLookupEntityTermsRetriever( $services ),
 			WbRestApi::getValidatingRequestDeserializer( $services )
 		);
 	},
@@ -419,30 +407,19 @@ return [
 	'WbRestApi.GetPropertyDescriptions' => function( MediaWikiServices $services ): GetPropertyDescriptions {
 		return new GetPropertyDescriptions(
 			WbRestApi::getGetLatestPropertyRevisionMetadata( $services ),
-			new TermLookupEntityTermsRetriever(
-				WikibaseRepo::getTermLookup( $services ),
-				WikibaseRepo::getTermsLanguages( $services )
-			),
+			WbRestApi::getTermLookupEntityTermsRetriever( $services ),
 			WbRestApi::getValidatingRequestDeserializer( $services )
 		);
 	},
 
 	'WbRestApi.GetPropertyLabel' => function( MediaWikiServices $services ): GetPropertyLabel {
-		return new GetPropertyLabel(
-			new TermLookupEntityTermsRetriever(
-				WikibaseRepo::getTermLookup( $services ),
-				WikibaseRepo::getTermsLanguages( $services )
-			)
-		);
+		return new GetPropertyLabel( WbRestApi::getTermLookupEntityTermsRetriever( $services ) );
 	},
 
 	'WbRestApi.GetPropertyLabels' => function( MediaWikiServices $services ): GetPropertyLabels {
 		return new GetPropertyLabels(
 			WbRestApi::getGetLatestPropertyRevisionMetadata( $services ),
-			new TermLookupEntityTermsRetriever(
-				WikibaseRepo::getTermLookup( $services ),
-				WikibaseRepo::getTermsLanguages( $services )
-			),
+			WbRestApi::getTermLookupEntityTermsRetriever( $services ),
 			WbRestApi::getValidatingRequestDeserializer( $services )
 		);
 	},
@@ -494,10 +471,7 @@ return [
 
 	'WbRestApi.PatchItemDescriptions' => function( MediaWikiServices $services ): PatchItemDescriptions {
 		return new PatchItemDescriptions(
-			new TermLookupEntityTermsRetriever(
-				WikibaseRepo::getTermLookup( $services ),
-				WikibaseRepo::getTermsLanguages( $services )
-			),
+			WbRestApi::getTermLookupEntityTermsRetriever( $services ),
 			new DescriptionsSerializer(),
 			new JsonDiffJsonPatcher(),
 			WbRestApi::getItemDataRetriever( $services ),
@@ -509,10 +483,7 @@ return [
 	'WbRestApi.PatchItemLabels' => function( MediaWikiServices $services ): PatchItemLabels {
 		return new PatchItemLabels(
 			WbRestApi::getAssertItemExists( $services ),
-			new TermLookupEntityTermsRetriever(
-				WikibaseRepo::getTermLookup( $services ),
-				WikibaseRepo::getTermsLanguages( $services )
-			),
+			WbRestApi::getTermLookupEntityTermsRetriever( $services ),
 			new LabelsSerializer(),
 			new JsonDiffJsonPatcher(),
 			new PatchedLabelsValidator(
@@ -699,6 +670,13 @@ return [
 				WikibaseRepo::getStatementGuidParser( $services ),
 				WikibaseRepo::getPropertyDataTypeLookup()
 			)
+		);
+	},
+
+	'WbRestApi.TermLookupEntityTermsRetriever' => function( MediaWikiServices $services ): TermLookupEntityTermsRetriever {
+		return new TermLookupEntityTermsRetriever(
+			WikibaseRepo::getTermLookup( $services ),
+			WikibaseRepo::getTermsLanguages( $services )
 		);
 	},
 
