@@ -110,8 +110,8 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	 * @param string $label
 	 */
 	private function displaySearchResults( array $searchResults, string $label ) {
-		$this->getOutput()->setPageTitle(
-			$this->msg( 'wikibase-disambiguation-title', $label )->escaped()
+		$this->getOutput()->setPageTitleMsg(
+			$this->msg( 'wikibase-disambiguation-title' )->plaintextParams( $label )
 		);
 
 		$this->displayDisambiguationPage( $searchResults );
