@@ -85,18 +85,19 @@ class TermLookupEntityTermsRetrieverTest extends TestCase {
 	}
 
 	public function testGetLabel(): void {
-		$itemId = new ItemId( self::ITEM_ID );
+		$entityId = $this->createStub( EntityId::class );
 		$languageCode = 'en';
+		$labelText = 'some label';
 
 		$termLookup = $this->createMock( TermLookup::class );
 		$termLookup->expects( $this->once() )
 			->method( 'getLabel' )
-			->with( $itemId, $languageCode )
-			->willReturn( 'potato' );
+			->with( $entityId, $languageCode )
+			->willReturn( $labelText );
 
 		$this->assertEquals(
-			( $this->newTermRetriever( $termLookup ) )->getLabel( $itemId, $languageCode ),
-			new Label( $languageCode, 'potato' )
+			( $this->newTermRetriever( $termLookup ) )->getLabel( $entityId, $languageCode ),
+			new Label( $languageCode, $labelText )
 		);
 	}
 

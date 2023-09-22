@@ -16,6 +16,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemDescriptionsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemLabelRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemLabelsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyDescriptionsRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyLabelRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyLabelsRetriever;
 
 /**
@@ -26,6 +27,7 @@ class TermLookupEntityTermsRetriever implements
 	ItemLabelsRetriever,
 	ItemDescriptionRetriever,
 	ItemDescriptionsRetriever,
+	PropertyLabelRetriever,
 	PropertyLabelsRetriever,
 	PropertyDescriptionsRetriever
 {
@@ -38,11 +40,11 @@ class TermLookupEntityTermsRetriever implements
 		$this->termLanguages = $termLanguages;
 	}
 
-	public function getLabel( ItemId $itemId, string $languageCode ): ?Label {
+	public function getLabel( EntityId $entityId, string $languageCode ): ?Label {
 		try {
-			$labelText = $this->termLookup->getLabel( $itemId, $languageCode );
+			$labelText = $this->termLookup->getLabel( $entityId, $languageCode );
 		} catch ( TermLookupException $e ) {
-			// this probably means that the item does not exist, which should be checked prior to calling this method
+			// this probably means that the entity does not exist, which should be checked prior to calling this method
 			return null;
 		}
 
