@@ -154,11 +154,11 @@ exports.config = {
 	 *
 	 * @param {Object} test Mocha Test object
 	 */
-	afterTest( test ) {
+	async afterTest( test ) {
 		videoUtil.stopVideoRecording( test );
 		networkUtil.enableNetwork();
 		if ( !test.passed ) {
-			const filePath = saveScreenshot( test.title );
+			const filePath = await saveScreenshot( test.title );
 			/* eslint-disable-next-line no-console */
 			console.log( `\n\tScreenshot: ${filePath}\n` );
 		}
