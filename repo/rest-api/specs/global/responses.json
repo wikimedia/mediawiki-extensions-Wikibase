@@ -240,6 +240,30 @@
 			}
 		}
 	},
+	"PropertyDescriptionNotFound": {
+		"description": "The specified resource was not found",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/Error" },
+				"examples": {
+					"property-not-found": {
+						"$ref": "./examples.json#/PropertyNotFoundExample"
+					},
+					"description-not-defined": {
+						"$ref": "./examples.json#/PropertyDescriptionNotDefinedExample"
+					}
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
 	"InvalidItemInput": {
 		"description": "The request cannot be processed",
 		"content": {
@@ -1272,6 +1296,37 @@
 			"application/json": {
 				"schema": {
 					"$ref": "./schemas.json#/Descriptions"
+				}
+			}
+		}
+	},
+	"PropertyDescription": {
+		"description": "Property's description in a specific language",
+		"headers": {
+			"Last-Modified": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Last modified date"
+			},
+			"ETag": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Last entity revision number"
+			},
+			"X-Authenticated-User": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Optional username of the user making the request"
+			}
+		},
+		"content": {
+			"application/json": {
+				"schema": {
+					"type": "string",
+					"example": "some property's description"
 				}
 			}
 		}

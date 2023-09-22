@@ -205,6 +205,12 @@
 			"message": "Item with the ID {item_id} does not have a description in the language: {language_code}"
 		}
 	},
+	"PropertyDescriptionNotDefinedExample": {
+		"value": {
+			"code": "description-not-defined",
+			"message": "Property with the ID {property_id} does not have a description in the language: {language_code}"
+		}
+	},
 	"ItemAliasesNotDefinedExample": {
 		"value": {
 			"code": "aliases-not-defined",

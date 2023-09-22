@@ -12,7 +12,10 @@
 		"$ref": "./descriptions/list-for-property.json"
 	},
 	"/entities/items/{item_id}/descriptions/{language_code}": {
-		"$ref": "./descriptions/description-in-language.json"
+		"$ref": "./descriptions/description-in-language-for-item.json"
+	},
+	"/entities/properties/{property_id}/descriptions/{language_code}": {
+		"$ref": "./descriptions/description-in-language-for-property.json"
 	},
 	"/entities/items/{item_id}/statements": {
 		"$ref": "./statements/list-for-item.json"
