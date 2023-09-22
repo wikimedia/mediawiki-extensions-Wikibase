@@ -137,7 +137,7 @@
 	"wikibase-copyrighttooltip-acknowledge": "Přijímám tyto podmínky pro své budoucí editace. Tuto zprávu už příště nezobrazovat.",
 	"wikibase-entityselector-more": "více",
 	"wikibase-entityselector-notfound": "Nenalezena žádná shoda",
-	"wikibase-anonymouseditwarning": "Varování: Nejste přihlášen(a). Pokud uložíte jakoukoli editaci, vaše [https://cs.wikipedia.org/wiki/IP_adresa IP adresa] bude zveřejněna v historii této stránky. Pokud se <strong>[[Special:UserLogin|přihlásíte]]</strong> nebo si <strong>[[Special:CreateAccount|vytvoříte účet]]</strong>, vaše editace budou připsány vašemu uživatelskému jménu a získáte i další výhody.",
+	"wikibase-anonymouseditwarning": "Varování: Nejste přihlášen(a). Pokud uložíte jakoukoli editaci, vaše [https://cs.wikipedia.org/wiki/IP_adresa IP adresa] bude zveřejněna v historii této stránky. Pokud se <strong>[$1 přihlásíte]</strong> nebo si <strong>[$2 vytvoříte účet]</strong>, vaše editace budou připsány vašemu uživatelskému jménu a získáte i další výhody.",
 	"wikibase-anonymouseditwarning-heading": "Nejste přihlášen(a)",
 	"wikibase-anonymouseditwarning-message": "Pokud uložíte jakoukoli editaci, vaše IP adresa bude zveřejněna v historii této stránky. Pokud se přihlásíte nebo si vytvoříte účet, vaše editace budou připsány vašemu uživatelskému jménu a získáte i další výhody.",
 	"wikibase-anonymouseditwarning-dismiss-persist": "Upozorněte mě, kdykoliv nejsem přihlášený.",
