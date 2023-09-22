@@ -47,7 +47,7 @@ class ParameterizedDescriptionTraitTest extends MediaWikiIntegrationTestCase {
 		$this->setFederatedPropertiesEnabled( false );
 		$this->assertSame(
 			$expected,
-			$page->getDescription()
+			$page->getDescription()->text()
 		);
 	}
 
@@ -58,7 +58,7 @@ class ParameterizedDescriptionTraitTest extends MediaWikiIntegrationTestCase {
 		$this->setFederatedPropertiesEnabled( true );
 		$this->assertSame(
 			$expected,
-			$page->getDescription()
+			$page->getDescription()->text()
 		);
 	}
 

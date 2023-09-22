@@ -9,6 +9,7 @@ use Html;
 use IContextSource;
 use MediaWiki\Languages\LanguageFactory;
 use MediaWiki\Languages\LanguageNameUtils;
+use Message;
 use SpecialPage;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\TermLanguageFallbackChain;
@@ -59,8 +60,8 @@ class SpecialMyLanguageFallbackChain extends SpecialPage {
 	}
 
 	/** @inheritDoc */
-	public function getDescription(): string {
-		return $this->msg( 'special-mylanguagefallbackchain' )->text();
+	public function getDescription(): Message {
+		return $this->msg( 'special-mylanguagefallbackchain' );
 	}
 
 	/**

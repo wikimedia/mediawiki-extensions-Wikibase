@@ -3,6 +3,7 @@
 declare( strict_types = 1 );
 namespace Wikibase\Repo\Specials;
 
+use Message;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -32,13 +33,13 @@ trait ParameterizedDescriptionTrait {
 	/**
 	 * @see SpecialPage::getDescription
 	 *
-	 * @return string
+	 * @return Message
 	 */
 	public function getDescription() {
 		return wfMessage(
 			'special-' . strtolower( $this->getName() . '-parameterized' ),
 			$this->getDescriptionParameters()
-		)->text();
+		);
 	}
 
 	private function getDescriptionParameters() {
