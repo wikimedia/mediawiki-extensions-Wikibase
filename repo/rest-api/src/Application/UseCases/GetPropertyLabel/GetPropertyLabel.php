@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabel;
 
 use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikibase\Repo\RestApi\Application\UseCases\GetLatestPropertyRevisionMetadata;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyLabelRetriever;
 
 /**
@@ -11,15 +12,26 @@ use Wikibase\Repo\RestApi\Domain\Services\PropertyLabelRetriever;
 class GetPropertyLabel {
 
 	private PropertyLabelRetriever $labelRetriever;
+	private GetLatestPropertyRevisionMetadata $getRevisionMetadata;
 
-	public function __construct( PropertyLabelRetriever $labelRetriever ) {
+	public function __construct(
+		GetLatestPropertyRevisionMetadata $getRevisionMetadata,
+		PropertyLabelRetriever $labelRetriever
+	) {
 		$this->labelRetriever = $labelRetriever;
+		$this->getRevisionMetadata = $getRevisionMetadata;
 	}
 
 	public function execute( GetPropertyLabelRequest $request ): GetPropertyLabelResponse {
+		$propertyId = new NumericPropertyId( $request->getPropertyId() );
+
+		[ $revisionId, $lastModified ] = $this->getRevisionMetadata->execute( $propertyId );
+
 		return new GetPropertyLabelResponse(
 			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-			$this->labelRetriever->getLabel( new NumericPropertyId( $request->getPropertyId() ), $request->getLanguageCode() )
+			$this->labelRetriever->getLabel( $propertyId, $request->getLanguageCode() ),
+			$lastModified,
+			$revisionId
 		);
 	}
 
