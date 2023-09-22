@@ -28,18 +28,8 @@ class FederatedPropertyId implements PropertyId {
 		$this->remoteId = $remoteId;
 	}
 
-	public function serialize(): ?string {
-		wfDeprecated( __METHOD__, '1.41' );
-		return $this->serialization;
-	}
-
 	public function __serialize(): array {
 		return [ $this->serialization ];
-	}
-
-	public function unserialize( $serialization ): void {
-		wfDeprecated( __METHOD__, '1.41' );
-		$this->__unserialize( [ $serialization ] );
 	}
 
 	public function __unserialize( array $data ): void {

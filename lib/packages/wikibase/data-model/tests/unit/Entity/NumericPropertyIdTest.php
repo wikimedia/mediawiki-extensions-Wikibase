@@ -86,33 +86,13 @@ class NumericPropertyIdTest extends MediaWikiUnitTestCase {
 
 	public function testSerialize() {
 		$id = new NumericPropertyId( 'P1' );
-		$this->expectDeprecationAndContinue( '/NumericPropertyId::serialize/' );
-		$this->assertSame( 'P1', $id->serialize() );
+		$this->assertSame( [ 'serialization' => 'P1' ], $id->__serialize() );
 	}
 
-	/**
-	 * @dataProvider serializationProvider
-	 */
-	public function testUnserialize( $json, $expected ) {
+	public function testUnserialize() {
 		$id = new NumericPropertyId( 'P1' );
-		$this->expectDeprecationAndContinue( '/NumericPropertyId::unserialize/' );
-		$id->unserialize( $json );
-		$this->assertSame( $expected, $id->getSerialization() );
-	}
-
-	public static function serializationProvider() {
-		return [
-			[ 'P2', 'P2' ],
-			[ '["property","P2"]', 'P2' ],
-
-			// All these cases are kind of an injection vector and allow constructing invalid ids.
-			[ '["string","P2"]', 'P2' ],
-			[ '["","string"]', 'string' ],
-			[ '["",""]', '' ],
-			[ '["",2]', 2 ],
-			[ '["",null]', '' ],
-			[ '', '' ],
-		];
+		$id->__unserialize( [ 'serialization' => 'P2' ] );
+		$this->assertSame( 'P2', $id->getSerialization() );
 	}
 
 	/**

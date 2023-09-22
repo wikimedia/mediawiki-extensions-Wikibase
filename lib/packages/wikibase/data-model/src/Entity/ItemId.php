@@ -63,32 +63,8 @@ class ItemId extends SerializableEntityId implements Int32EntityId {
 		return [ 'serialization' => $this->serialization ];
 	}
 
-	/**
-	 * @see Serializable::serialize
-	 *
-	 * @since 7.0 serialization format changed in an incompatible way
-	 *
-	 * @return string
-	 */
-	public function serialize() {
-		wfDeprecated( __METHOD__, '1.41' );
-		return $this->serialization;
-	}
-
 	public function __unserialize( array $data ): void {
 		$this->serialization = $data['serialization'];
-	}
-
-	/**
-	 * @see Serializable::unserialize
-	 *
-	 * @param string $serialized
-	 */
-	public function unserialize( $serialized ) {
-		wfDeprecated( __METHOD__, '1.41' );
-		$array = json_decode( $serialized );
-		$this->serialization = is_array( $array ) ? $array[1] : $serialized;
-		$this->serialization = $this->serialization ?? '';
 	}
 
 	/**

@@ -16,26 +16,8 @@ class CustomEntityId extends SerializableEntityId {
 		return [ 'serialization' => $this->serialization ];
 	}
 
-	/**
-	 * @see Serializable::serialize
-	 *
-	 * @return string
-	 */
-	public function serialize() {
-		return $this->serialization;
-	}
-
 	public function __unserialize( array $data ): void {
 		$this->serialization = $data['serialization'];
-	}
-
-	/**
-	 * @see Serializable::unserialize
-	 *
-	 * @param string $serialized
-	 */
-	public function unserialize( $serialized ) {
-		$this->serialization = $serialized;
 	}
 
 	/**

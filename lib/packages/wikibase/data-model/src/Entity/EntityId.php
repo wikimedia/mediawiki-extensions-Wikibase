@@ -2,12 +2,10 @@
 
 namespace Wikibase\DataModel\Entity;
 
-use Serializable;
-
 /**
  * @license GPL-2.0-or-later
  */
-interface EntityId extends Serializable {
+interface EntityId {
 
 	/**
 	 * @return string
@@ -31,21 +29,6 @@ interface EntityId extends Serializable {
 	 * @return bool
 	 */
 	public function equals( $target );
-
-	/**
-	 * @see Serializable::serialize()
-	 * @return string|null
-	 * @deprecated Use {@link self::getSerialization()} instead.
-	 */
-	public function serialize();
-
-	/**
-	 * @see Serializable::unserialize()
-	 * @param string $data
-	 * @return void
-	 * @deprecated There should be no reason to use this.
-	 */
-	public function unserialize( $data );
 
 	/**
 	 * This method replaces {@link Serializable::serialize()}.

@@ -132,24 +132,15 @@ class EntityIdValueTest extends MediaWikiUnitTestCase {
 		$custom = new EntityIdValue( new CustomEntityId( 'X567' ) );
 
 		return [
-			'local: Version 0.5 alpha (f5b8b64)' => [
-				'C:39:"Wikibase\DataModel\Entity\EntityIdValue":14:{["item",31337]}',
-				$local,
-			],
-			'local: Version 7.0 (7fcddfc)' => [
-				'C:39:"Wikibase\DataModel\Entity\EntityIdValue":'
-					. '50:{C:32:"Wikibase\DataModel\Entity\ItemId":6:{Q31337}}',
-				$local,
-			],
-			'custom: Version 7.0 (7fcddfc): custom' => [
-				'C:39:"Wikibase\DataModel\Entity\EntityIdValue":'
-					. '58:{C:42:"Wikibase\DataModel\Fixtures\CustomEntityId":4:{X567}}',
-				$custom,
-			],
 			'local 2022-03 PHP 7.4+' => [
 				'O:39:"Wikibase\DataModel\Entity\EntityIdValue":'
 					. '1:{s:8:"entityId";O:32:"Wikibase\DataModel\Entity\ItemId":1:{s:13:"serialization";s:6:"Q31337";}}',
 				$local,
+			],
+			'custom 2023-09 PHP 7.4+' => [
+				'O:39:"Wikibase\DataModel\Entity\EntityIdValue":'
+					. '1:{s:8:"entityId";O:42:"Wikibase\DataModel\Fixtures\CustomEntityId":1:{s:13:"serialization";s:4:"X567";}}',
+				$custom,
 			],
 		];
 	}
