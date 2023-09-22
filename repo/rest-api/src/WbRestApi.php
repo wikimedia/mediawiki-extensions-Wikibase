@@ -52,6 +52,7 @@ use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupItemData
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupPropertyDataRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupStatementRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdater;
+use Wikibase\Repo\RestApi\Infrastructure\DataAccess\TermLookupEntityTermsRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
@@ -310,6 +311,10 @@ class WbRestApi {
 
 	public static function getValidatingRequestDeserializer( ContainerInterface $services = null ): ValidatingRequestDeserializer {
 		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbRestApi.ValidatingRequestDeserializer' );
+	}
+
+	public static function getTermLookupEntityTermsRetriever( ContainerInterface $services = null ): TermLookupEntityTermsRetriever {
+		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbRestApi.TermLookupEntityTermsRetriever' );
 	}
 
 }
