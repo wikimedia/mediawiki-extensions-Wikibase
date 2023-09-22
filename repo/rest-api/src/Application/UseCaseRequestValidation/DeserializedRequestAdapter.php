@@ -44,17 +44,17 @@ class DeserializedRequestAdapter implements
 	DeserializedAddItemStatementRequest,
 	DeserializedAddPropertyStatementRequest,
 	DeserializedGetItemRequest,
+	DeserializedGetItemLabelsRequest,
+	DeserializedGetItemLabelRequest,
+	DeserializedGetItemDescriptionsRequest,
+	DeserializedGetItemDescriptionRequest,
 	DeserializedGetItemAliasesRequest,
 	DeserializedGetItemAliasesInLanguageRequest,
-	DeserializedGetItemDescriptionRequest,
-	DeserializedGetItemDescriptionsRequest,
-	DeserializedGetItemLabelRequest,
-	DeserializedGetItemLabelsRequest,
 	DeserializedGetItemStatementRequest,
 	DeserializedGetItemStatementsRequest,
 	DeserializedGetPropertyRequest,
-	DeserializedGetPropertyDescriptionsRequest,
 	DeserializedGetPropertyLabelsRequest,
+	DeserializedGetPropertyDescriptionsRequest,
 	DeserializedGetPropertyAliasesRequest,
 	DeserializedGetPropertyStatementRequest,
 	DeserializedGetPropertyStatementsRequest,
@@ -65,8 +65,8 @@ class DeserializedRequestAdapter implements
 	DeserializedRemovePropertyStatementRequest,
 	DeserializedReplaceItemStatementRequest,
 	DeserializedReplacePropertyStatementRequest,
-	DeserializedSetItemDescriptionRequest,
-	DeserializedSetItemLabelRequest
+	DeserializedSetItemLabelRequest,
+	DeserializedSetItemDescriptionRequest
 {
 	private array $deserializedRequest;
 

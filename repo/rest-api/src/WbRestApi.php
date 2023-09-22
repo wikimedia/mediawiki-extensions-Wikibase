@@ -65,6 +65,26 @@ class WbRestApi {
 			->get( 'WbRestApi.GetItem' );
 	}
 
+	public static function getGetItemLabels( ContainerInterface $services = null ): GetItemLabels {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.GetItemLabels' );
+	}
+
+	public static function getGetItemLabel( ContainerInterface $services = null ): GetItemLabel {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.GetItemLabel' );
+	}
+
+	public static function getGetItemDescriptions( ContainerInterface $services = null ): GetItemDescriptions {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.GetItemDescriptions' );
+	}
+
+	public static function getGetItemDescription( ContainerInterface $services = null ): GetItemDescription {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.GetItemDescription' );
+	}
+
 	public static function getGetItemAliases( ContainerInterface $services = null ): GetItemAliases {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.GetItemAliases' );
@@ -75,34 +95,14 @@ class WbRestApi {
 			->get( 'WbRestApi.GetItemAliasesInLanguage' );
 	}
 
-	public static function getGetItemDescription( ContainerInterface $services = null ): GetItemDescription {
+	public static function getSetItemLabel( ContainerInterface $services = null ): SetItemLabel {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.GetItemDescription' );
-	}
-
-	public static function getGetItemDescriptions( ContainerInterface $services = null ): GetItemDescriptions {
-		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.GetItemDescriptions' );
+			->get( 'WbRestApi.SetItemLabel' );
 	}
 
 	public static function getSetItemDescription( ContainerInterface $services = null ): SetItemDescription {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.SetItemDescription' );
-	}
-
-	public static function getGetItemLabel( ContainerInterface $services = null ): GetItemLabel {
-		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.GetItemLabel' );
-	}
-
-	public static function getGetItemLabels( ContainerInterface $services = null ): GetItemLabels {
-		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.GetItemLabels' );
-	}
-
-	public static function getSetItemLabel( ContainerInterface $services = null ): SetItemLabel {
-		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.SetItemLabel' );
 	}
 
 	public static function getGetItemStatements( ContainerInterface $services = null ): GetItemStatements {
@@ -292,14 +292,14 @@ class WbRestApi {
 			->get( 'WbRestApi.GetPropertyLabels' );
 	}
 
-	public static function getGetPropertyAliases( ContainerInterface $services = null ): GetPropertyAliases {
-		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.GetPropertyAliases' );
-	}
-
 	public static function getGetPropertyDescriptions( ContainerInterface $services = null ): GetPropertyDescriptions {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.GetPropertyDescriptions' );
+	}
+
+	public static function getGetPropertyAliases( ContainerInterface $services = null ): GetPropertyAliases {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.GetPropertyAliases' );
 	}
 
 	public static function getValidatingRequestDeserializer( ContainerInterface $services = null ): ValidatingRequestDeserializer {
