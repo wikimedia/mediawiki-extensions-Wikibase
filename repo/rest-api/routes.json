@@ -135,6 +135,11 @@
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetItemAliasesRouteHandler::factory"
 	},
 	{
+		"path": "/wikibase/v0/entities/properties/{property_id}/aliases",
+		"method": "GET",
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetPropertyAliasesRouteHandler::factory"
+	},
+	{
 		"path": "/wikibase/v0/entities/items/{item_id}/aliases/{language_code}",
 		"method": "GET",
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetItemAliasesInLanguageRouteHandler::factory"
