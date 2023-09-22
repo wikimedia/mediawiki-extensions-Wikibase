@@ -56,12 +56,12 @@ class ValidatingRequestDeserializer	implements
 	AddItemStatementValidator,
 	AddPropertyStatementValidator,
 	GetItemValidator,
+	GetItemLabelsValidator,
+	GetItemLabelValidator,
+	GetItemDescriptionsValidator,
+	GetItemDescriptionValidator,
 	GetItemAliasesValidator,
 	GetItemAliasesInLanguageValidator,
-	GetItemDescriptionValidator,
-	GetItemDescriptionsValidator,
-	GetItemLabelValidator,
-	GetItemLabelsValidator,
 	GetItemStatementValidator,
 	GetItemStatementsValidator,
 	GetPropertyValidator,
@@ -81,8 +81,8 @@ class ValidatingRequestDeserializer	implements
 	ReplaceItemStatementValidator,
 	ReplacePropertyStatementValidator,
 	ReplaceStatementValidator,
-	SetItemDescriptionValidator,
-	SetItemLabelValidator
+	SetItemLabelValidator,
+	SetItemDescriptionValidator
 {
 	private const PREFIX = 'WbRestApi.RequestValidation.';
 	public const ITEM_ID_REQUEST_VALIDATING_DESERIALIZER = self::PREFIX . 'ItemIdRequestValidatingDeserializer';
