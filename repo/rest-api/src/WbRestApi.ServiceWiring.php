@@ -407,7 +407,8 @@ return [
 			new PrefetchingTermLookupAliasesRetriever(
 				WikibaseRepo::getPrefetchingTermLookup( $services ),
 				WikibaseRepo::getTermsLanguages( $services )
-			)
+			),
+			WbRestApi::getValidatingRequestDeserializer( $services )
 		);
 	},
 

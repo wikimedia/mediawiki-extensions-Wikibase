@@ -46,4 +46,16 @@ describe( newGetPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 		assert.include( response.body.message, nonExistentProperty );
 	} );
 
+	it( '400 error - bad request, invalid property ID', async () => {
+		const invalidPropertyId = 'X123';
+		const response = await newGetPropertyAliasesRequestBuilder( invalidPropertyId )
+			.assertInvalidRequest()
+			.makeRequest();
+
+		expect( response ).to.have.status( 400 );
+		assert.header( response, 'Content-Language', 'en' );
+		assert.strictEqual( response.body.code, 'invalid-property-id' );
+		assert.include( response.body.message, invalidPropertyId );
+	} );
+
 } );
