@@ -38,7 +38,7 @@ class GetPropertyLabelsRouteHandlerTest extends MediaWikiIntegrationTestCase {
 	public function testValidSuccessHttpResponse(): void {
 		$enLabel = 'test label';
 		$arLabel = 'تسمية الاختبار';
-		$labels = new Labels( new Label( 'en', $enLabel ), new LAbel( 'ar', $arLabel ) );
+		$labels = new Labels( new Label( 'en', $enLabel ), new Label( 'ar', $arLabel ) );
 		$useCaseResponse = new GetPropertyLabelsResponse( $labels, '20230731042031', 42 );
 		$useCase = $this->createStub( GetPropertyLabels::class );
 		$useCase->method( 'execute' )->willReturn( $useCaseResponse );
