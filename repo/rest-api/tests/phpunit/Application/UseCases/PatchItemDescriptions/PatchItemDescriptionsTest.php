@@ -13,6 +13,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptions;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptionsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Item;
@@ -87,7 +88,7 @@ class PatchItemDescriptionsTest extends TestCase {
 			->method( 'update' )
 			->with(
 				$this->expectEquivalentItemByDescription( $newDescriptionLanguage, $newDescriptionText ),
-				$this->expectEquivalentMetadata( $editTags, $isBot, $comment, '' )
+				$this->expectEquivalentMetadata( $editTags, $isBot, $comment, EditSummary::PATCH_ACTION )
 			)
 			->willReturn( new ItemRevision( $updatedItem, $lastModified, $revisionId ) );
 

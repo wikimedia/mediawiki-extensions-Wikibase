@@ -8,12 +8,13 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionEditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\DescriptionsEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\LabelEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
-use Wikibase\Repo\RestApi\Infrastructure\LabelsEditSummaryToFormattableSummaryConverter;
+use Wikibase\Repo\RestApi\Infrastructure\TermsEditSummaryToFormattableSummaryConverter;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -33,7 +34,7 @@ class EditSummaryFormatterTest extends MediaWikiLangTestCase {
 	public function testFormat( EditSummary $editSummary, string $formattedSummary ): void {
 		$editSummaryFormatter = new EditSummaryFormatter(
 			WikibaseRepo::getSummaryFormatter(),
-			new LabelsEditSummaryToFormattableSummaryConverter()
+			new TermsEditSummaryToFormattableSummaryConverter()
 		);
 		$this->assertSame( $formattedSummary, $editSummaryFormatter->format( $editSummary ) );
 	}
@@ -125,9 +126,9 @@ class EditSummaryFormatterTest extends MediaWikiLangTestCase {
 
 	public function testGivenLabelsEditSummary_usesEditSummaryConverter(): void {
 		$labelsEditSummary = $this->createStub( LabelsEditSummary::class );
-		$converter = $this->createMock( LabelsEditSummaryToFormattableSummaryConverter::class );
+		$converter = $this->createMock( TermsEditSummaryToFormattableSummaryConverter::class );
 		$converter->expects( $this->once() )
-			->method( 'convert' )
+			->method( 'convertLabelsEditSummary' )
 			->with( $labelsEditSummary )
 			->willReturn(
 				new Summary( 'wbeditentity', 'update-languages-short', null, [ 'de, en' ] )
@@ -139,6 +140,25 @@ class EditSummaryFormatterTest extends MediaWikiLangTestCase {
 		$this->assertSame(
 			'/* wbeditentity-update-languages-short:0||de, en */',
 			$editSummaryFormatter->format( $labelsEditSummary )
+		);
+	}
+
+	public function testGivenDescriptionsEditSummary_usesEditSummaryConverter(): void {
+		$descriptionsEditSummary = $this->createStub( DescriptionsEditSummary::class );
+		$converter = $this->createMock( TermsEditSummaryToFormattableSummaryConverter::class );
+		$converter->expects( $this->once() )
+			->method( 'convertDescriptionsEditSummary' )
+			->with( $descriptionsEditSummary )
+			->willReturn(
+				new Summary( 'wbeditentity', 'update-languages-short', null, [ 'de, en' ] )
+			);
+		$editSummaryFormatter = new EditSummaryFormatter(
+			WikibaseRepo::getSummaryFormatter(),
+			$converter
+		);
+		$this->assertSame(
+			'/* wbeditentity-update-languages-short:0||de, en */',
+			$editSummaryFormatter->format( $descriptionsEditSummary )
 		);
 	}
 

@@ -4,6 +4,7 @@ const { assert, utils, action } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { newPatchItemDescriptionsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { formatLabelsEditSummary } = require( '../helpers/formatEditSummaries' );
 
 describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => {
 
@@ -69,8 +70,11 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 
 			const editMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 			assert.include( editMetadata.tags, tag );
-			assert.include( editMetadata.comment, comment );
 			assert.property( editMetadata, 'bot' );
+			assert.strictEqual(
+				editMetadata.comment,
+				formatLabelsEditSummary( 'update-languages-short', 'ar', comment )
+			);
 		} );
 	} );
 

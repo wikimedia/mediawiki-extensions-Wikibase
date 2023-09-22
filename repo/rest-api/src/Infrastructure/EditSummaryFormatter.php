@@ -19,11 +19,11 @@ use Wikibase\Repo\SummaryFormatter;
 class EditSummaryFormatter {
 
 	private SummaryFormatter $summaryFormatter;
-	private LabelsEditSummaryToFormattableSummaryConverter $summaryConverter;
+	private TermsEditSummaryToFormattableSummaryConverter $summaryConverter;
 
 	public function __construct(
 		SummaryFormatter $summaryFormatter,
-		LabelsEditSummaryToFormattableSummaryConverter $summaryConverter
+		TermsEditSummaryToFormattableSummaryConverter $summaryConverter
 	) {
 		$this->summaryFormatter = $summaryFormatter;
 		$this->summaryConverter = $summaryConverter;
@@ -37,7 +37,7 @@ class EditSummaryFormatter {
 
 	private function convertToFormattableSummary( EditSummary $editSummary ): FormatableSummary {
 		if ( $editSummary instanceof LabelsEditSummary ) {
-			return $this->summaryConverter->convert( $editSummary );
+			return $this->summaryConverter->convertLabelsEditSummary( $editSummary );
 		} elseif ( $editSummary instanceof LabelEditSummary ) {
 			switch ( $editSummary->getEditAction() ) {
 				case EditSummary::ADD_ACTION:
@@ -45,6 +45,8 @@ class EditSummaryFormatter {
 				case EditSummary::REPLACE_ACTION:
 					return $this->newSummaryForLabelEdit( $editSummary, 'set' );
 			}
+		} elseif ( $editSummary instanceof DescriptionsEditSummary ) {
+			return $this->summaryConverter->convertDescriptionsEditSummary( $editSummary );
 		} elseif ( $editSummary instanceof DescriptionEditSummary ) {
 			switch ( $editSummary->getEditAction() ) {
 				case EditSummary::ADD_ACTION:
@@ -52,10 +54,6 @@ class EditSummaryFormatter {
 				case EditSummary::REPLACE_ACTION:
 					return $this->newSummaryForDescriptionEdit( $editSummary, 'set' );
 			}
-		} elseif ( $editSummary instanceof DescriptionsEditSummary ) {
-			$summary = new Summary();
-			$summary->setUserSummary( $editSummary->getUserComment() );
-			return $summary;
 		} elseif ( $editSummary instanceof StatementEditSummary ) {
 			switch ( $editSummary->getEditAction() ) {
 				case EditSummary::ADD_ACTION:

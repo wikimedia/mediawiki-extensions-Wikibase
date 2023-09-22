@@ -103,8 +103,8 @@ use Wikibase\Repo\RestApi\Infrastructure\DataValuesValueDeserializer;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatchValidator;
-use Wikibase\Repo\RestApi\Infrastructure\LabelsEditSummaryToFormattableSummaryConverter;
 use Wikibase\Repo\RestApi\Infrastructure\SiteLinksReadModelConverter;
+use Wikibase\Repo\RestApi\Infrastructure\TermsEditSummaryToFormattableSummaryConverter;
 use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryLabelTextValidator;
 use Wikibase\Repo\RestApi\Infrastructure\ValidatingRequestDeserializer as VRD;
 use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoItemDescriptionValidator;
@@ -277,7 +277,7 @@ return [
 			WikibaseRepo::getLogger( $services ),
 			new EditSummaryFormatter(
 				WikibaseRepo::getSummaryFormatter( $services ),
-				new LabelsEditSummaryToFormattableSummaryConverter()
+				new TermsEditSummaryToFormattableSummaryConverter()
 			),
 			$services->getPermissionManager(),
 		);
