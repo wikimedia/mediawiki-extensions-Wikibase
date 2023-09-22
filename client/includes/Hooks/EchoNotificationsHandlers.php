@@ -67,6 +67,7 @@ class EchoNotificationsHandlers {
 	/**
 	 * @param RepoLinker $repoLinker
 	 * @param NamespaceChecker $namespaceChecker
+	 * @param RedirectLookup $redirectLookup
 	 * @param UserOptionsManager $userOptionsManager
 	 * @param string $siteId
 	 * @param bool $sendEchoNotification

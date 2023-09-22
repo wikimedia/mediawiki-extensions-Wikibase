@@ -87,6 +87,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @param SummaryFormatter $summaryFormatter
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param MediaWikiEditEntityFactory $editEntityFactory
+	 * @param SiteLinkPageNormalizer $siteLinkPageNormalizer
 	 * @param SiteLinkTargetProvider $siteLinkTargetProvider
 	 * @param string[] $siteLinkGroups
 	 * @param string[] $badgeItems

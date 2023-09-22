@@ -8,7 +8,6 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\Lib\Store\Sql\Terms\CachedDatabasePropertyLabelResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
-use Wikibase\Lib\TermIndexEntry;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\Terms\CachedDatabasePropertyLabelResolver
@@ -21,7 +20,7 @@ class CachedDatabasePropertyLabelResolverTest extends MediaWikiIntegrationTestCa
 
 	/**
 	 * @param string $lang
-	 * @param TermIndexEntry[] $terms
+	 * @param array[] $termsArray
 	 *
 	 * @return PropertyLabelResolver
 	 */

@@ -104,6 +104,7 @@ class WikiPageEntityStore implements EntityStore {
 	 * @param EntityIdComposer $entityIdComposer
 	 * @param RevisionStore $revisionStore A RevisionStore for the local database.
 	 * @param DatabaseEntitySource $entitySource
+	 * @param ActorNormalization $actorNormalization
 	 * @param PermissionManager $permissionManager
 	 * @param WatchlistManager $watchlistManager
 	 * @param WikiPageFactory $wikiPageFactory

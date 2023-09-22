@@ -120,7 +120,7 @@ class SkinAfterBottomScriptsHandlerTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @param string $baseURL
-	 * @param string $text
+	 * @param string $titleText
 	 * @return Title
 	 */
 	private function mockTitle( $baseURL, $titleText ) {

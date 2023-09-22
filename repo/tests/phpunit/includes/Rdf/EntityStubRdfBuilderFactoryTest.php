@@ -44,8 +44,8 @@ class EntityStubRdfBuilderFactoryTest extends TestCase {
 	/**
 	 * Constructs a closure that asserts that it is being called with the expected parameters.
 	 *
-	 * @param RdfVocabulary $vocabulary
-	 * @param RdfWriter $writer
+	 * @param RdfVocabulary $expectedVocabulary
+	 * @param RdfWriter $expectedWriter
 	 * @param bool &$called Will be set to true once the returned function has been called.
 	 *
 	 * @return Closure
