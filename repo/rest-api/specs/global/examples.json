@@ -193,6 +193,12 @@
 			"message": "Item with the ID {item_id} does not have a label in the language: {language_code}"
 		}
 	},
+	"PropertyLabelNotDefinedExample": {
+		"value": {
+			"code": "label-not-defined",
+			"message": "Property with the ID {property_id} does not have a label in the language: {language_code}"
+		}
+	},
 	"ItemDescriptionNotDefinedExample": {
 		"value": {
 			"code": "description-not-defined",

@@ -27,7 +27,10 @@
 		"$ref": "./labels/list-for-property.json"
 	},
 	"/entities/items/{item_id}/labels/{language_code}": {
-		"$ref": "./labels/label-in-language.json"
+		"$ref": "./labels/label-in-language-for-item.json"
+	},
+	"/entities/properties/{property_id}/labels/{language_code}": {
+		"$ref": "./labels/label-in-language-for-property.json"
 	},
 	"/entities/items/{item_id}/aliases": {
 		"$ref": "./aliases/list-for-item.json"
