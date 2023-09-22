@@ -27,6 +27,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetLatestStatementSubjectRevision
 use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetProperty;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyAliases\GetPropertyAliases;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescriptions\GetPropertyDescriptions;
+use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabel\GetPropertyLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabels\GetPropertyLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\GetPropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetPropertyStatements;
@@ -285,6 +286,11 @@ class WbRestApi {
 	public static function getGetPropertyStatements( ContainerInterface $services = null ): GetPropertyStatements {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.GetPropertyStatements' );
+	}
+
+	public static function getGetPropertyLabel( ContainerInterface $services = null ): GetPropertyLabel {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.GetPropertyLabel' );
 	}
 
 	public static function getGetPropertyLabels( ContainerInterface $services = null ): GetPropertyLabels {

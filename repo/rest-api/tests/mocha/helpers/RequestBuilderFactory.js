@@ -86,6 +86,13 @@ module.exports = {
 			.withPathParam( 'language_code', languageCode );
 	},
 
+	newGetPropertyLabelRequestBuilder( propertyId, languageCode ) {
+		return new RequestBuilder()
+			.withRoute( 'GET', '/entities/properties/{property_id}/labels/{language_code}' )
+			.withPathParam( 'property_id', propertyId )
+			.withPathParam( 'language_code', languageCode );
+	},
+
 	newSetItemLabelRequestBuilder( itemId, languageCode, label ) {
 		return new RequestBuilder()
 			.withRoute( 'PUT', '/entities/items/{item_id}/labels/{language_code}' )
