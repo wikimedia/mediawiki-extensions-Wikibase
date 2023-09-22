@@ -170,7 +170,6 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 */
 	public function setMultiple( $values, $ttl = null ) {
 		$values = $this->toAssociativeArray( $values );
-		$this->assertKeysAreValidAllowIntegers( array_keys( $values ) );
 
 		$ttl = $this->normalizeTtl( $ttl );
 
@@ -225,19 +224,6 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 		return $result !== false;
 	}
 
-	/**
-	 * Due to the fact that in PHP array indices are automatically casted
-	 * to integers if possible, e.g. `['0' => ''] === [0 => '']`, we have to
-	 * allow integers to be present as keys in $values in `setMultiple()`
-	 *
-	 * @param array $keys
-	 */
-	private function assertKeysAreValidAllowIntegers( $keys ): void {
-		foreach ( $keys as $key ) {
-			$this->assertKeyIsValid( is_int( $key ) ? (string)$key : $key );
-		}
-	}
-
 	private function assertKeysAreValid( $keys ): void {
 		foreach ( $keys as $key ) {
 			$this->assertKeyIsValid( $key );
@@ -270,16 +256,12 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	private function toArray( $var ) {
 		if ( is_array( $var ) ) {
 			return $var;
-		} elseif ( !is_iterable( $var ) ) {
+		} elseif ( !( $var instanceof \Traversable ) ) {
 			$type = gettype( $var );
 			throw new CacheInvalidArgumentException( "Expected iterable, `{$type}` given" );
 		}
 
-		$result = [];
-		foreach ( $var as $value ) {
-			$result[] = $value;
-		}
-		return $result;
+		return iterator_to_array( $var, false );
 	}
 
 	/**
@@ -297,10 +279,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 
 		$result = [];
 		foreach ( $var as $key => $value ) {
-			if ( !is_string( $key ) && !is_int( $key ) ) {
-				$type = gettype( $key );
-				throw new CacheInvalidArgumentException( "Cache key should be string or integer, `{$type}` is given" );
-			}
+			$this->assertKeyIsValid( is_int( $key ) ? (string)$key : $key );
 			$result[$key] = $value;
 		}
 		return $result;

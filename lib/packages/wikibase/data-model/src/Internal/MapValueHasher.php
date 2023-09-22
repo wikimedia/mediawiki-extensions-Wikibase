@@ -32,7 +32,7 @@ class MapValueHasher {
 	 * @throws InvalidArgumentException
 	 */
 	public function hash( $map ) {
-		if ( !is_array( $map ) && !( $map instanceof Traversable ) ) {
+		if ( !is_iterable( $map ) ) {
 			throw new InvalidArgumentException( '$map must be an array or an instance of Traversable' );
 		}
 

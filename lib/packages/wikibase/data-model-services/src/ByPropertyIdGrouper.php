@@ -34,7 +34,7 @@ class ByPropertyIdGrouper {
 	}
 
 	private function assertArePropertyIdProviders( $propertyIdProviders ) {
-		if ( !is_array( $propertyIdProviders ) && !( $propertyIdProviders instanceof Traversable ) ) {
+		if ( !is_iterable( $propertyIdProviders ) ) {
 			throw new InvalidArgumentException( '$propertyIdProviders must be an array or an instance of Traversable' );
 		}
 
