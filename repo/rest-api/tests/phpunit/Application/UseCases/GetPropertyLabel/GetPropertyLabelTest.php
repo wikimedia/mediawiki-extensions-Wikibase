@@ -69,6 +69,27 @@ class GetPropertyLabelTest extends TestCase {
 		}
 	}
 
+	public function testGivenLabelDoesNotExist_throws(): void {
+		$propertyId = 'P123';
+		$languageCode = 'en';
+
+		$this->getRevisionMetadata = $this->createStub( GetLatestPropertyRevisionMetadata::class );
+		$this->getRevisionMetadata->method( 'execute' )->willReturn( [ 123, '20230922070707' ] );
+
+		try {
+			$this->newUseCase()->execute( new GetPropertyLabelRequest( $propertyId, $languageCode ) );
+			$this->fail( 'expected exception was not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertEquals(
+				new UseCaseError(
+					UseCaseError::LABEL_NOT_DEFINED,
+					"Property with the ID {$propertyId} does not have a label in the language: {$languageCode}"
+				),
+				$e
+			);
+		}
+	}
+
 	private function newUseCase(): GetPropertyLabel {
 		return new GetPropertyLabel( $this->getRevisionMetadata, $this->labelRetriever );
 	}

@@ -4,6 +4,7 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabel;
 
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestPropertyRevisionMetadata;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyLabelRetriever;
 
 /**
@@ -22,17 +23,24 @@ class GetPropertyLabel {
 		$this->getRevisionMetadata = $getRevisionMetadata;
 	}
 
+	/**
+	 * @throws UseCaseError
+	 */
 	public function execute( GetPropertyLabelRequest $request ): GetPropertyLabelResponse {
 		$propertyId = new NumericPropertyId( $request->getPropertyId() );
+		$languageCode = $request->getLanguageCode();
 
 		[ $revisionId, $lastModified ] = $this->getRevisionMetadata->execute( $propertyId );
 
-		return new GetPropertyLabelResponse(
-			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-			$this->labelRetriever->getLabel( $propertyId, $request->getLanguageCode() ),
-			$lastModified,
-			$revisionId
-		);
+		$label = $this->labelRetriever->getLabel( $propertyId, $languageCode );
+		if ( !$label ) {
+			throw new UseCaseError(
+				UseCaseError::LABEL_NOT_DEFINED,
+				"Property with the ID {$propertyId->getSerialization()} does not have a label in the language: {$languageCode}"
+			);
+		}
+
+		return new GetPropertyLabelResponse( $label, $lastModified, $revisionId );
 	}
 
 }
