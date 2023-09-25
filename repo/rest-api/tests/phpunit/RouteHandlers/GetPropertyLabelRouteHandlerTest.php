@@ -49,6 +49,13 @@ class GetPropertyLabelRouteHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->assertJsonStringEqualsJsonString( json_encode( $label ), $response->getBody()->getContents() );
 	}
 
+	public function testReadWriteAccess(): void {
+		$routeHandler = $this->newHandlerWithValidRequest();
+
+		$this->assertTrue( $routeHandler->needsReadAccess() );
+		$this->assertFalse( $routeHandler->needsWriteAccess() );
+	}
+
 	/**
 	 * @dataProvider provideExceptionAndExpectedErrorCode
 	 */
