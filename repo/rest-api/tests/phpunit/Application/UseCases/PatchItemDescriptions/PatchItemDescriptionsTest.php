@@ -9,8 +9,10 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptions;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptionsRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Item;
@@ -36,6 +38,7 @@ class PatchItemDescriptionsTest extends TestCase {
 
 	use EditMetadataHelper;
 
+	private AssertUserIsAuthorized $assertUserIsAuthorized;
 	private ItemDescriptionsRetriever $descriptionsRetriever;
 	private DescriptionsSerializer $descriptionsSerializer;
 	private JsonPatcher $patcher;
@@ -46,6 +49,7 @@ class PatchItemDescriptionsTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
+		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
 		$this->descriptionsRetriever = $this->createStub( ItemDescriptionsRetriever::class );
 		$this->descriptionsSerializer = new DescriptionsSerializer();
 		$this->patcher = new JsonDiffJsonPatcher();
@@ -93,15 +97,36 @@ class PatchItemDescriptionsTest extends TestCase {
 				[ [ 'op' => 'add', 'path' => "/$newDescriptionLanguage", 'value' => $newDescriptionText ] ],
 				$editTags,
 				$isBot,
-				$comment
+				$comment,
+				null
 			)
 		);
 
 		$this->assertSame( $response->getDescriptions(), $updatedItem->getDescriptions() );
 	}
 
+	public function testGivenEditIsUnauthorized_throwsUseCaseError(): void {
+		$itemId = new ItemId( 'Q123' );
+
+		$expectedError = new UseCaseError( UseCaseError::PERMISSION_DENIED, 'permission denied' );
+		$this->assertUserIsAuthorized = $this->createMock( AssertUserIsAuthorized::class );
+		$this->assertUserIsAuthorized->method( 'execute' )
+			->with( $itemId, null )
+			->willThrowException( $expectedError );
+
+		try {
+			$this->newUseCase()->execute(
+				$this->newUseCaseRequest( "$itemId", [ [ 'op' => 'remove', 'path' => '/en' ] ] )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedError, $e );
+		}
+	}
+
 	private function newUseCase(): PatchItemDescriptions {
 		return new PatchItemDescriptions(
+			$this->assertUserIsAuthorized,
 			$this->descriptionsRetriever,
 			$this->descriptionsSerializer,
 			$this->patcher,
@@ -109,6 +134,10 @@ class PatchItemDescriptionsTest extends TestCase {
 			$this->descriptionsDeserializer,
 			$this->itemUpdater
 		);
+	}
+
+	private function newUseCaseRequest( string $itemId, array $patch ): PatchItemDescriptionsRequest {
+		return new PatchItemDescriptionsRequest( $itemId, $patch, [], false, null, null );
 	}
 
 	private function expectEquivalentItemByDescription( string $languageCode, string $descriptionText ): Callback {

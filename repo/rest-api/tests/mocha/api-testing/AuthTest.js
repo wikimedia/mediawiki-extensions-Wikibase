@@ -17,6 +17,7 @@ const {
 	getRequestsOnItem,
 	getRequestsOnProperty
 } = require( '../helpers/happyPathRequestBuilders' );
+const { newPatchItemDescriptionsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
 describe( 'Auth', () => {
 
@@ -60,7 +61,15 @@ describe( 'Auth', () => {
 
 	const editRequestsWithInputs = [
 		...editRequestsOnItem.map( useRequestInputs( itemRequestInputs ) ),
-		...editRequestsOnProperty.map( useRequestInputs( propertyRequestInputs ) )
+		...editRequestsOnProperty.map( useRequestInputs( propertyRequestInputs ) ),
+		useRequestInputs( itemRequestInputs )( ( { itemId } ) => newPatchItemDescriptionsRequestBuilder(
+			itemId,
+			[ {
+				op: 'replace',
+				path: '/en',
+				value: 'random-test-description-' + utils.uniq()
+			} ]
+		) )
 	];
 
 	[
