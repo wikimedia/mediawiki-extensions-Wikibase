@@ -414,6 +414,7 @@ return [
 
 	'WbRestApi.GetPropertyLabel' => function( MediaWikiServices $services ): GetPropertyLabel {
 		return new GetPropertyLabel(
+			WbRestApi::getValidatingRequestDeserializer( $services ),
 			WbRestApi::getGetLatestPropertyRevisionMetadata( $services ),
 			WbRestApi::getTermLookupEntityTermsRetriever( $services )
 		);

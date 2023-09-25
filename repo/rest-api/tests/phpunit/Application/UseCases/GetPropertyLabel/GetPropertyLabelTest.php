@@ -11,6 +11,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabel\GetPropertyLabel
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyLabelRetriever;
+use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabel\GetPropertyLabel
@@ -90,8 +91,17 @@ class GetPropertyLabelTest extends TestCase {
 		}
 	}
 
+	public function testGivenInvalidRequest_throws(): void {
+		try {
+			$this->newUseCase()->execute( new GetPropertyLabelRequest( 'X123', 'en' ) );
+			$this->fail( 'expected exception was not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::INVALID_PROPERTY_ID, $e->getErrorCode() );
+		}
+	}
+
 	private function newUseCase(): GetPropertyLabel {
-		return new GetPropertyLabel( $this->getRevisionMetadata, $this->labelRetriever );
+		return new GetPropertyLabel( new TestValidatingRequestDeserializer(), $this->getRevisionMetadata, $this->labelRetriever );
 	}
 
 }

@@ -53,4 +53,28 @@ describe( newGetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 		assert.include( response.body.message, languageCodeWithNoDefinedLabel );
 	} );
 
+	it( '400 - invalid property ID', async () => {
+		const invalidPropertyId = 'X123';
+		const response = await newGetPropertyLabelRequestBuilder( invalidPropertyId, 'en' )
+			.assertInvalidRequest()
+			.makeRequest();
+
+		expect( response ).to.have.status( 400 );
+		assert.header( response, 'Content-Language', 'en' );
+		assert.strictEqual( response.body.code, 'invalid-property-id' );
+		assert.include( response.body.message, invalidPropertyId );
+	} );
+
+	it( '400 - invalid language code', async () => {
+		const invalidLanguageCode = '1e';
+		const response = await newGetPropertyLabelRequestBuilder( propertyId, invalidLanguageCode )
+			.assertInvalidRequest()
+			.makeRequest();
+
+		expect( response ).to.have.status( 400 );
+		assert.header( response, 'Content-Language', 'en' );
+		assert.strictEqual( response.body.code, 'invalid-language-code' );
+		assert.include( response.body.message, invalidLanguageCode );
+	} );
+
 } );
