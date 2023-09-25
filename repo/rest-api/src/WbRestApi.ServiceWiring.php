@@ -413,7 +413,10 @@ return [
 	},
 
 	'WbRestApi.GetPropertyLabel' => function( MediaWikiServices $services ): GetPropertyLabel {
-		return new GetPropertyLabel( WbRestApi::getTermLookupEntityTermsRetriever( $services ) );
+		return new GetPropertyLabel(
+			WbRestApi::getGetLatestPropertyRevisionMetadata( $services ),
+			WbRestApi::getTermLookupEntityTermsRetriever( $services )
+		);
 	},
 
 	'WbRestApi.GetPropertyLabels' => function( MediaWikiServices $services ): GetPropertyLabels {
