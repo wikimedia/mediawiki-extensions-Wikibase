@@ -19,15 +19,13 @@ module.exports.getRequestsOnItem = [
 
 module.exports.getRequestsOnProperty = [
 	( { propertyId } ) => rbf.newGetPropertyRequestBuilder( propertyId ),
+	( { propertyId } ) => rbf.newGetPropertyLabelRequestBuilder( propertyId, 'en' ),
 	( { propertyId } ) => rbf.newGetPropertyLabelsRequestBuilder( propertyId ),
 	( { propertyId } ) => rbf.newGetPropertyDescriptionsRequestBuilder( propertyId ),
 	( { propertyId } ) => rbf.newGetPropertyStatementsRequestBuilder( propertyId ),
 	( { propertyId } ) => rbf.newGetPropertyAliasesRequestBuilder( propertyId ),
 	( { statementId } ) => rbf.newGetStatementRequestBuilder( statementId ),
-	( { propertyId, statementId } ) => rbf.newGetPropertyStatementRequestBuilder(
-		propertyId,
-		statementId
-	)
+	( { propertyId, statementId } ) => rbf.newGetPropertyStatementRequestBuilder( propertyId, statementId )
 ];
 
 module.exports.editRequestsOnProperty = [

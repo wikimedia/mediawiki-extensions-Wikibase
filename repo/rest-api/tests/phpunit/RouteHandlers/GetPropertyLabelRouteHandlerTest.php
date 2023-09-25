@@ -9,6 +9,7 @@ use MediaWiki\Rest\RequestData;
 use MediaWiki\Rest\Response;
 use MediaWiki\Tests\Rest\Handler\HandlerTestTrait;
 use MediaWikiIntegrationTestCase;
+use RuntimeException;
 use Throwable;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabel\GetPropertyLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabel\GetPropertyLabelResponse;
@@ -27,6 +28,11 @@ class GetPropertyLabelRouteHandlerTest extends MediaWikiIntegrationTestCase {
 
 	use HandlerTestTrait;
 	use RestHandlerTestUtilsTrait;
+
+	protected function setUp(): void {
+		parent::setUp();
+		$this->setMockPreconditionMiddlewareFactory();
+	}
 
 	public function testValidSuccessHttpResponse(): void {
 		$label = 'test label';
@@ -66,6 +72,8 @@ class GetPropertyLabelRouteHandlerTest extends MediaWikiIntegrationTestCase {
 			new UseCaseError( UseCaseError::INVALID_PROPERTY_ID, '', [ UseCaseError::CONTEXT_PROPERTY_ID => 'X123' ] ),
 			UseCaseError::INVALID_PROPERTY_ID,
 		];
+
+		yield 'Unexpected Error' => [ new RuntimeException(), UseCaseError::UNEXPECTED_ERROR ];
 	}
 
 	private function newHandlerWithValidRequest(): Handler {
