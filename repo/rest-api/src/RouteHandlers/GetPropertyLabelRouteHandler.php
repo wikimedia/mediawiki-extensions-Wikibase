@@ -100,6 +100,13 @@ class GetPropertyLabelRouteHandler extends SimpleHandler {
 	}
 
 	/**
+	 * @inheritDoc
+	 */
+	public function needsWriteAccess() {
+		return false;
+	}
+
+	/**
 	 * Preconditions are checked via {@link PreconditionMiddleware}
 	 *
 	 * @inheritDoc
