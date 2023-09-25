@@ -28,7 +28,7 @@ describe( newGetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 		assert.strictEqual( response.header[ 'last-modified' ], testPropertyCreationMetadata.timestamp );
 	} );
 
-	it( 'responds 404 in case the property does not exist', async () => {
+	it( 'responds 404 if the property does not exist', async () => {
 		const nonExistentProperty = 'P99999999';
 		const response = await newGetPropertyLabelRequestBuilder( nonExistentProperty, 'en' )
 			.assertValidRequest()
@@ -38,6 +38,19 @@ describe( newGetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 		assert.header( response, 'Content-Language', 'en' );
 		assert.strictEqual( response.body.code, 'property-not-found' );
 		assert.include( response.body.message, nonExistentProperty );
+	} );
+
+	it( 'responds 404 if the label does not exist', async () => {
+		const languageCodeWithNoDefinedLabel = 'ko';
+		const response = await newGetPropertyLabelRequestBuilder( propertyId, languageCodeWithNoDefinedLabel )
+			.assertValidRequest()
+			.makeRequest();
+
+		expect( response ).to.have.status( 404 );
+		assert.header( response, 'Content-Language', 'en' );
+		assert.strictEqual( response.body.code, 'label-not-defined' );
+		assert.include( response.body.message, propertyId );
+		assert.include( response.body.message, languageCodeWithNoDefinedLabel );
 	} );
 
 } );
