@@ -4,7 +4,8 @@
 			"Chrumps",
 			"InternerowyGołąb",
 			"Matma Rex",
-			"Kareyac"
+			"Kareyac",
+			"Amire80"
 		]
 	},
 	"apihelp-wbcreateclaim-description": "Tworzy stwierdzenia Wikibase.",
@@ -81,5 +82,5 @@
 	"apihelp-wbsetsitelink-param-linksite": "Identyfikator strony, na którą przekierowują linki",
 	"apihelp-wbsetsitelink-example-2": "Dodaj link do Angielskiej strony \"Hydrogen\" do elementu z ID \"Q42\", jeśli link nie istnieje. Dodaj też etykietę \"Kocha Tlen\" w opisie zmian.",
 	"apihelp-wbsetsitelink-example-4": "Usuń z elementu link do języka niemieckiego",
-	"apihelp-wbsetsitelink-example-5": "Dodaj link do polskiej strony  \"Wodór\" do elementu ze stroną angielską \"Hydrogen\" z jednym oznaczeniem wskazującym na obiekt z ID \"Q149\""
+	"apihelp-wbsetsitelink-example-5": "Dodaj link do polskiej strony \"Wodór\" do elementu ze stroną angielską \"Hydrogen\" z jednym oznaczeniem wskazującym na obiekt z ID \"Q149\""
 }

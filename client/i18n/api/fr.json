@@ -4,7 +4,8 @@
 			"Dgstranz",
 			"Gomoko",
 			"Wladek92",
-			"Verdy p"
+			"Verdy p",
+			"Amire80"
 		]
 	},
 	"apihelp-query+wbentityusage-description": "Renvoie tous les identifiants d’entité utilisés dans les pages données.",
@@ -41,7 +42,7 @@
 	"apihelp-query+description-extended-description": "La description est du texte sans mise en forme, tenant sur une seule ligne, mais par ailleurs arbitraire (contenant potentiellement des balises HTML brutes, qui seront interprétées comme du texte sans mise en forme). Elle ne doit pas être utilisée en HTML sans échappement !",
 	"apihelp-query+description-param-prefersource": "Quelle source de description préférer, si présente :",
 	"apihelp-query+description-paramvalue-prefersource-local": "Descriptions locales via la fonction de l’analyseur <code><nowiki>{{SHORTDESC:...}}</nowiki></code> dans le wikicode de la page.",
-	"apihelp-query+description-paramvalue-prefersource-central": "Descriptions centrales de l'élément associé  {{WBREPONAME}} .",
+	"apihelp-query+description-paramvalue-prefersource-central": "Descriptions centrales de l'élément associé {{WBREPONAME}} .",
 	"apihelp-query+description-example": "Obtenir la description de la page 'London'.",
 	"apihelp-query+description-example-central": "Obtenez la description de la page 'London', en préférant la description centrale si elle existe.",
 	"apihelp-query+wikibase-description": "Obtenir des informations sur le client Wikibase et le référentiel Wikibase associé.",

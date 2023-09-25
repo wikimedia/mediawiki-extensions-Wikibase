@@ -17,7 +17,8 @@
 			"Southparkfan",
 			"Wiki13",
 			"Romaine",
-			"Pennenetui3000"
+			"Pennenetui3000",
+			"McDutchie"
 		]
 	},
 	"specialpages-group-wikibase": "Wikibase",
@@ -74,14 +75,14 @@
 	"wikibase-time-calendar-julian": "Juliaans",
 	"wikibase-time-precision-Gannum": "$1 miljard jaar n.Chr.",
 	"wikibase-time-precision-Mannum": "$1 miljoen jaar n.Chr.",
-	"wikibase-time-precision-annum": "$1 jaar n.Chr.",
+	"wikibase-time-precision-annum": "$1 {{PLURAL:$1|jaar}} n.Chr.",
 	"wikibase-time-precision-millennium": "$1e millennium",
 	"wikibase-time-precision-century": "$1e eeuw",
 	"wikibase-time-precision-10annum": "jaren $1",
 	"wikibase-time-precision-BCE": "$1 v.Chr.",
 	"wikibase-time-precision-BCE-Gannum": "$1 miljard jaar v.Chr.",
 	"wikibase-time-precision-BCE-Mannum": "$1 miljoen jaar v.Chr.",
-	"wikibase-time-precision-BCE-annum": "$1 jaar v.Chr.",
+	"wikibase-time-precision-BCE-annum": "$1 {{PLURAL:$1|jaar}} v.Chr.",
 	"wikibase-time-precision-BCE-millennium": "$1e millennium v.Chr.",
 	"wikibase-time-precision-BCE-century": "$1e eeuw v.Chr.",
 	"wikibase-time-precision-BCE-10annum": "jaren $1 v.Chr.",

@@ -93,7 +93,7 @@
 	"apihelp-wbgetentities-example-7": "Obter entidades con identificadores <samp>P17</samp> e <samp>P3</samp> que só teñen tipos de datos",
 	"apihelp-wbgetentities-example-8": "Obter entidades con identificador <samp>Q42</samp> con todos os seus alias en inglés",
 	"apihelp-wbgetentities-example-9": "Obter entidades con identificadores <samp>Q1</samp> e <samp>Q42</samp> con descricións en inglés, alemán e francés",
-	"apihelp-wbgetentities-example-10": "Obtén o elemento para a páxina \"<var>Berlin</var>\"  no sitio \"<var>enwiki</var>\", cos atributos de idioma en inglés",
+	"apihelp-wbgetentities-example-10": "Obtén o elemento para a páxina \"<var>Berlin</var>\" no sitio \"<var>enwiki</var>\", cos atributos de idioma en inglés",
 	"apihelp-wbgetentities-example-11": "Obtén o elemento da páxina \"<var>Berlin</var>\" no sitio \"<var>enwiki</var>\" despois de normalizar o título a \"<var>berlin</var>\"",
 	"apihelp-wbgetentities-example-12": "Obter as ligazóns de sitio do elemento <samp>Q42</samp>",
 	"apihelp-wbgetentities-example-13": "Obter as entidades con identificador <samp>Q42</samp> que só teñen ligazóns de sitio de \"<var>enwiki</var>\"",
