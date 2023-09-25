@@ -27,6 +27,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabel\DeserializedGetP
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabels\DeserializedGetPropertyLabelsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\DeserializedGetPropertyStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\DeserializedGetPropertyStatementsRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\DeserializedPatchItemDescriptionsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\DeserializedPatchItemLabelsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\DeserializedPatchItemStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyStatement\DeserializedPatchPropertyStatementRequest;
@@ -60,6 +61,7 @@ class DeserializedRequestAdapter implements
 	DeserializedGetPropertyStatementRequest,
 	DeserializedGetPropertyStatementsRequest,
 	DeserializedPatchItemLabelsRequest,
+	DeserializedPatchItemDescriptionsRequest,
 	DeserializedPatchItemStatementRequest,
 	DeserializedPatchPropertyStatementRequest,
 	DeserializedRemoveItemStatementRequest,
