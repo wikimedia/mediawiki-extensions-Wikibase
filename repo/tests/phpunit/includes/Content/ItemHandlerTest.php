@@ -319,7 +319,7 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 		$title = Title::makeTitle( NS_MAIN, 'Foo' );
 		$parserOutput = $contentRenderer->getParserOutput( $content, $title );
 
-		$expectedUsedOptions = [ 'userlang', 'wb', 'termboxVersion' ];
+		$expectedUsedOptions = [ 'userlang', 'wb', 'termboxVersion', 'wbMobile' ];
 		$actualOptions = $parserOutput->getUsedOptions();
 		$this->assertEqualsCanonicalizing(
 			$expectedUsedOptions,

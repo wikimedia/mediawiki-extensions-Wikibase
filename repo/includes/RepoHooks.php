@@ -1058,6 +1058,9 @@ final class RepoHooks {
 				TermboxView::TERMBOX_VERSION . TermboxView::CACHE_VERSION :
 				PlaceholderEmittingEntityTermsView::TERMBOX_VERSION . PlaceholderEmittingEntityTermsView::CACHE_VERSION;
 		};
+		$defaults['wbMobile'] = null;
+		$inCacheKey['wbMobile'] = true;
+		$lazyOptions['wbMobile'] = fn () => WikibaseRepo::getMobileSite();
 	}
 
 	public static function onRejectParserCacheValue( ParserOutput $parserValue, WikiPage $wikiPage, ParserOptions $parserOpts ) {

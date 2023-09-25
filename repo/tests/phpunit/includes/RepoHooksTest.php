@@ -341,24 +341,30 @@ XML
 		$defaults = [];
 		$inCacheKey = [];
 		$lazyOptions = [];
+		$this->setService( 'WikibaseRepo.MobileSite', true );
 
 		RepoHooks::onParserOptionsRegister( $defaults, $inCacheKey, $lazyOptions );
 
 		$this->assertSame( [
 			'wb' => null,
 			'termboxVersion' => null,
-			], $defaults );
+			'wbMobile' => null,
+		], $defaults );
 		$this->assertSame( [
 			'wb' => true,
 			'termboxVersion' => true,
+			'wbMobile' => true,
 		], $inCacheKey );
 		$this->assertSame( [
 			'wb',
 			'termboxVersion',
+			'wbMobile',
 		], array_keys( $lazyOptions ) );
 		$this->assertIsCallable( $lazyOptions[ 'wb' ] );
 		$this->assertSame( EntityHandler::PARSER_VERSION, $lazyOptions[ 'wb' ]() );
 		$this->assertIsCallable( $lazyOptions[ 'termboxVersion' ] );
+		$this->assertIsCallable( $lazyOptions[ 'wbMobile' ] );
+		$this->assertSame( true, $lazyOptions[ 'wbMobile' ]() );
 	}
 
 	public function testOnParserOptionsRegister_hook() {
