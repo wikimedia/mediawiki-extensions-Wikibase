@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabel;
 
-use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestPropertyRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyLabelRetriever;
@@ -14,21 +13,25 @@ class GetPropertyLabel {
 
 	private PropertyLabelRetriever $labelRetriever;
 	private GetLatestPropertyRevisionMetadata $getRevisionMetadata;
+	private GetPropertyLabelValidator $validator;
 
 	public function __construct(
+		GetPropertyLabelValidator $validator,
 		GetLatestPropertyRevisionMetadata $getRevisionMetadata,
 		PropertyLabelRetriever $labelRetriever
 	) {
 		$this->labelRetriever = $labelRetriever;
 		$this->getRevisionMetadata = $getRevisionMetadata;
+		$this->validator = $validator;
 	}
 
 	/**
 	 * @throws UseCaseError
 	 */
 	public function execute( GetPropertyLabelRequest $request ): GetPropertyLabelResponse {
-		$propertyId = new NumericPropertyId( $request->getPropertyId() );
-		$languageCode = $request->getLanguageCode();
+		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
+		$propertyId = $deserializedRequest->getPropertyId();
+		$languageCode = $deserializedRequest->getLanguageCode();
 
 		[ $revisionId, $lastModified ] = $this->getRevisionMetadata->execute( $propertyId );
 
