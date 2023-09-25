@@ -4,14 +4,15 @@
 			")8",
 			"Li3939108",
 			"Linforest",
+			"LittlePaw365",
 			"Liuxinyu970226",
 			"Qiyue2001",
 			"Stevenliuyi"
 		]
 	},
-	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "尚不支持对“$1”取值的操作。",
-	"valueview-expert-unsupportedvalue-unsupporteddatatype": "尚不支持对“$1”数据类型取值的操作。",
-	"valueview-expert-emptyvalue-empty": "空白",
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "尚未支持处理“$1”值。",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "尚未支持处理“$1”数据类型的值。",
+	"valueview-expert-emptyvalue-empty": "空",
 	"valueview-expert-globecoordinateinput-precision": "精度：",
 	"valueview-expert-globecoordinateinput-nullprecision": "未指定",
 	"valueview-expert-globecoordinateinput-customprecision": "特殊（$1）",
