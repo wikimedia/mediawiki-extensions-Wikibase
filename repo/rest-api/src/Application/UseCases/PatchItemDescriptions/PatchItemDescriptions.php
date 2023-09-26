@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions;
 
-use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
@@ -26,7 +25,7 @@ class PatchItemDescriptions {
 	private DescriptionsSerializer $descriptionsSerializer;
 	private JsonPatcher $patcher;
 	private ItemRetriever $itemRetriever;
-	private DescriptionsDeserializer $descriptionsDeserializer;
+	private PatchedDescriptionsValidator $patchedDescriptionsValidator;
 	private ItemUpdater $itemUpdater;
 
 	public function __construct(
@@ -36,7 +35,7 @@ class PatchItemDescriptions {
 		DescriptionsSerializer $descriptionsSerializer,
 		JsonPatcher $patcher,
 		ItemRetriever $itemRetriever,
-		DescriptionsDeserializer $descriptionsDeserializer,
+		PatchedDescriptionsValidator $patchedDescriptionsValidator,
 		ItemUpdater $itemUpdater
 	) {
 		$this->requestValidator = $requestValidator;
@@ -45,7 +44,7 @@ class PatchItemDescriptions {
 		$this->descriptionsSerializer = $descriptionsSerializer;
 		$this->patcher = $patcher;
 		$this->itemRetriever = $itemRetriever;
-		$this->descriptionsDeserializer = $descriptionsDeserializer;
+		$this->patchedDescriptionsValidator = $patchedDescriptionsValidator;
 		$this->itemUpdater = $itemUpdater;
 	}
 
@@ -85,10 +84,14 @@ class PatchItemDescriptions {
 			);
 		}
 
-		// T346773 - validate the patched descriptions
-		$modifiedDescriptions = $this->descriptionsDeserializer->deserialize( $patchedDescriptions );
 		$item = $this->itemRetriever->getItem( $itemId );
 		$originalDescriptions = $item->getDescriptions();
+		$modifiedDescriptions = $this->patchedDescriptionsValidator->validateAndDeserialize(
+			$itemId,
+			$originalDescriptions,
+			$patchedDescriptions
+		);
+
 		$item->getFingerprint()->setDescriptions( $modifiedDescriptions );
 
 		$editMetadata = new EditMetadata(

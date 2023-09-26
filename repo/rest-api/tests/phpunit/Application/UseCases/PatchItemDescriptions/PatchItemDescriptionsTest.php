@@ -7,15 +7,19 @@ use PHPUnit\Framework\Constraint\Callback;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item as DataModelItem;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Term\TermList;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchedDescriptionsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptions;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptionsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptionsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
+use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
@@ -47,7 +51,7 @@ class PatchItemDescriptionsTest extends TestCase {
 	private DescriptionsSerializer $descriptionsSerializer;
 	private JsonPatcher $patcher;
 	private ItemRetriever $itemRetriever;
-	private DescriptionsDeserializer $descriptionsDeserializer;
+	private PatchedDescriptionsValidator $patchedDescriptionsValidator;
 	private ItemUpdater $itemUpdater;
 
 	protected function setUp(): void {
@@ -59,7 +63,11 @@ class PatchItemDescriptionsTest extends TestCase {
 		$this->descriptionsSerializer = new DescriptionsSerializer();
 		$this->patcher = new JsonDiffJsonPatcher();
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
-		$this->descriptionsDeserializer = new DescriptionsDeserializer();
+		$this->patchedDescriptionsValidator = new PatchedDescriptionsValidator(
+			new DescriptionsDeserializer(),
+			$this->createStub( ItemDescriptionValidator::class ),
+			$this->createStub( LanguageCodeValidator::class )
+		);
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
 	}
 
@@ -185,6 +193,34 @@ class PatchItemDescriptionsTest extends TestCase {
 		];
 	}
 
+	public function testGivenPatchedDescriptionsInvalid_throwsUseCaseError(): void {
+		$itemId = 'Q123';
+		$item = NewItem::withId( $itemId )->build();
+		$patchResult = [ 'ar' => '' ];
+
+		$this->itemRetriever = $this->createStub( ItemRetriever::class );
+		$this->itemRetriever->method( 'getItem' )->willReturn( $item );
+
+		$this->descriptionsRetriever = $this->createStub( ItemDescriptionsRetriever::class );
+		$this->descriptionsRetriever->method( 'getDescriptions' )->willReturn( new Descriptions() );
+
+		$expectedUseCaseError = $this->createStub( UseCaseError::class );
+		$this->patchedDescriptionsValidator = $this->createMock( PatchedDescriptionsValidator::class );
+		$this->patchedDescriptionsValidator->expects( $this->once() )
+			->method( 'validateAndDeserialize' )
+			->with( $item->getId(), new TermList(), $patchResult )
+			->willThrowException( $expectedUseCaseError );
+
+		try {
+			$this->newUseCase()->execute(
+				$this->newUseCaseRequest( $itemId, [ [ 'op' => 'add', 'path' => '/ar', 'value' => '' ] ] )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedUseCaseError, $e );
+		}
+	}
+
 	private function newUseCase(): PatchItemDescriptions {
 		return new PatchItemDescriptions(
 			$this->validator,
@@ -193,7 +229,7 @@ class PatchItemDescriptionsTest extends TestCase {
 			$this->descriptionsSerializer,
 			$this->patcher,
 			$this->itemRetriever,
-			$this->descriptionsDeserializer,
+			$this->patchedDescriptionsValidator,
 			$this->itemUpdater
 		);
 	}

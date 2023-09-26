@@ -58,6 +58,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabels\GetPropertyLabe
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\GetPropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetPropertyStatements;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchedDescriptionsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptions;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchedLabelsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
@@ -500,7 +501,15 @@ return [
 			new DescriptionsSerializer(),
 			new JsonDiffJsonPatcher(),
 			WbRestApi::getItemDataRetriever( $services ),
-			new DescriptionsDeserializer(),
+			new PatchedDescriptionsValidator(
+				new DescriptionsDeserializer(),
+				new WikibaseRepoItemDescriptionValidator(
+					WikibaseRepo::getTermValidatorFactory( $services ),
+					WikibaseRepo::getItemTermsCollisionDetector( $services ),
+					WbRestApi::getItemDataRetriever( $services )
+				),
+				new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() )
+			),
 			WbRestApi::getItemUpdater( $services )
 		);
 	},
