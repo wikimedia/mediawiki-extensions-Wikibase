@@ -1,0 +1,25 @@
+{
+	"get": {
+		"operationId": "getPropertyAliasesInLanguage",
+		"tags": [ "aliases" ],
+		"summary": "[WIP] Retrieve a Property's aliases in a specific language",
+		"description": "This endpoint is currently in development and is not recommended for production use.",
+		"parameters": [
+			{ "$ref": "../../global/parameters.json#/PropertyId" },
+			{ "$ref": "../../global/parameters.json#/LanguageCode" },
+			{ "$ref": "../../global/parameters.json#/IfNoneMatch" },
+			{ "$ref": "../../global/parameters.json#/IfModifiedSince" },
+			{ "$ref": "../../global/parameters.json#/IfMatch" },
+			{ "$ref": "../../global/parameters.json#/IfUnmodifiedSince" },
+			{ "$ref": "../../global/parameters.json#/Authorization" }
+		],
+		"responses": {
+			"200": { "$ref": "../../global/responses.json#/PropertyAliasesInLanguage" },
+			"304": { "$ref": "../../global/responses.json#/NotModified" },
+			"400": { "$ref": "../../global/responses.json#/InvalidPropertyTermByLanguageInput" },
+			"404": { "$ref": "../../global/responses.json#/PropertyAliasesInLanguageNotFound" },
+			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
+			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
+		}
+	}
+}
