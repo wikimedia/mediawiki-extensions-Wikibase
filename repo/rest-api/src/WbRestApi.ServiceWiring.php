@@ -50,6 +50,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetLatestPropertyRevisionMetadata
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestStatementSubjectRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetProperty;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyAliases\GetPropertyAliases;
+use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyAliasesInLanguage\GetPropertyAliasesInLanguage;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescription\GetPropertyDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescriptions\GetPropertyDescriptions;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabel\GetPropertyLabel;
@@ -402,6 +403,15 @@ return [
 				WikibaseRepo::getTermsLanguages( $services )
 			),
 			WbRestApi::getValidatingRequestDeserializer( $services )
+		);
+	},
+
+	'WbRestApi.GetPropertyAliasesInLanguage' => function( MediaWikiServices $services ): GetPropertyAliasesInLanguage {
+		return new GetPropertyAliasesInLanguage(
+			new PrefetchingTermLookupAliasesRetriever(
+				WikibaseRepo::getPrefetchingTermLookup( $services ),
+				WikibaseRepo::getTermsLanguages( $services )
+			)
 		);
 	},
 
