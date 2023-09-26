@@ -82,8 +82,10 @@ class PrefetchingTermLookupAliasesRetrieverTest extends TestCase {
 		$this->assertArrayNotHasKey( 'de', $aliases );
 	}
 
-	public function testGivenLanguageCodeWithNoAliasesFor_getAliasesInLanguageReturnsNull(): void {
-		$itemId = new ItemId( self::ITEM_ID );
+	/**
+	 * @dataProvider provideEntityId
+	 */
+	public function testGivenLanguageCodeWithNoAliasesFor_getAliasesInLanguageReturnsNull( EntityId $entityId ): void {
 		$languageCode = 'de';
 
 		$aliasesRetriever = new PrefetchingTermLookupAliasesRetriever(
@@ -91,12 +93,14 @@ class PrefetchingTermLookupAliasesRetrieverTest extends TestCase {
 			new StaticContentLanguages( [ $languageCode ] )
 		);
 
-		$aliasesInLanguage = $aliasesRetriever->getAliasesInLanguage( $itemId, $languageCode );
+		$aliasesInLanguage = $aliasesRetriever->getAliasesInLanguage( $entityId, $languageCode );
 		$this->assertNull( $aliasesInLanguage );
 	}
 
-	public function testGetAliasesInLanguage(): void {
-		$itemId = new ItemId( self::ITEM_ID );
+	/**
+	 * @dataProvider provideEntityId
+	 */
+	public function testGetAliasesInLanguage( EntityId $entityId ): void {
 		$languageCode = 'en';
 
 		$aliasesRetriever = new PrefetchingTermLookupAliasesRetriever(
@@ -104,10 +108,13 @@ class PrefetchingTermLookupAliasesRetrieverTest extends TestCase {
 			new StaticContentLanguages( [ $languageCode ] )
 		);
 
-		$aliasesInLanguage = $aliasesRetriever->getAliasesInLanguage( $itemId, $languageCode );
+		$aliasesInLanguage = $aliasesRetriever->getAliasesInLanguage( $entityId, $languageCode );
 
 		$this->assertEquals(
-			new AliasesInLanguage( 'en', [ 'Q123 en alias 1', 'Q123 en alias 2' ] ),
+			new AliasesInLanguage(
+				'en',
+				[ "{$entityId->getSerialization()} en alias 1", "{$entityId->getSerialization()} en alias 2" ]
+			),
 			$aliasesInLanguage
 		);
 	}
