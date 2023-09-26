@@ -8,6 +8,7 @@ use MediaWiki\Rest\StringStream;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescription\GetPropertyDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescription\GetPropertyDescriptionRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescription\GetPropertyDescriptionResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -20,19 +21,25 @@ class GetPropertyDescriptionRouteHandler extends SimpleHandler {
 	private const LANGUAGE_CODE_PATH_PARAM = 'language_code';
 
 	private GetPropertyDescription $useCase;
+	private ResponseFactory $responseFactory;
 
-	public function __construct( GetPropertyDescription $useCase ) {
+	public function __construct( GetPropertyDescription $useCase, ResponseFactory $responseFactory ) {
 		$this->useCase = $useCase;
+		$this->responseFactory = $responseFactory;
 	}
 
 	public static function factory(): self {
-		return new self( WbRestApi::getGetPropertyDescription() );
+		return new self( WbRestApi::getGetPropertyDescription(), new ResponseFactory() );
 	}
 
 	public function run( string $propertyId, string $languageCode ): Response {
-		return $this->newSuccessHttpResponse(
-			$this->useCase->execute( new GetPropertyDescriptionRequest( $propertyId, $languageCode ) )
-		);
+		try {
+			return $this->newSuccessHttpResponse(
+				$this->useCase->execute( new GetPropertyDescriptionRequest( $propertyId, $languageCode ) )
+			);
+		} catch ( UseCaseError $e ) {
+			return $this->responseFactory->newErrorResponseFromException( $e );
+		}
 	}
 
 	public function getParamSettings(): array {
@@ -53,8 +60,15 @@ class GetPropertyDescriptionRouteHandler extends SimpleHandler {
 	private function newSuccessHttpResponse( GetPropertyDescriptionResponse $useCaseResponse ): Response {
 		$httpResponse = $this->getResponseFactory()->create();
 		$httpResponse->setHeader( 'Content-Type', 'application/json' );
+		$httpResponse->setHeader( 'Last-Modified', wfTimestamp( TS_RFC2822, $useCaseResponse->getLastModified() ) );
+		$this->setEtagFromRevId( $httpResponse, $useCaseResponse->getRevisionId() );
 		$httpResponse->setBody( new StringStream( json_encode( $useCaseResponse->getDescription()->getText() ) ) );
 
 		return $httpResponse;
 	}
+
+	private function setEtagFromRevId( Response $response, int $revId ): void {
+		$response->setHeader( 'ETag', "\"$revId\"" );
+	}
+
 }

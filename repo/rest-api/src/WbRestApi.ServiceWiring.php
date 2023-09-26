@@ -406,7 +406,10 @@ return [
 	},
 
 	'WbRestApi.GetPropertyDescription' => function( MediaWikiServices $services ): GetPropertyDescription {
-		return new GetPropertyDescription( WbRestApi::getTermLookupEntityTermsRetriever( $services ) );
+		return new GetPropertyDescription(
+			WbRestApi::getGetLatestPropertyRevisionMetadata( $services ),
+			WbRestApi::getTermLookupEntityTermsRetriever( $services )
+		);
 	},
 
 	'WbRestApi.GetPropertyDescriptions' => function( MediaWikiServices $services ): GetPropertyDescriptions {

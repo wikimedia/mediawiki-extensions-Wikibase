@@ -4,9 +4,11 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\GetPropertyDescriptio
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikibase\Repo\RestApi\Application\UseCases\GetLatestPropertyRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescription\GetPropertyDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescription\GetPropertyDescriptionRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescription\GetPropertyDescriptionResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyDescriptionRetriever;
 
@@ -19,11 +21,13 @@ use Wikibase\Repo\RestApi\Domain\Services\PropertyDescriptionRetriever;
  */
 class GetPropertyDescriptionTest extends TestCase {
 
+	private GetLatestPropertyRevisionMetadata $getRevisionMetadata;
 	private PropertyDescriptionRetriever $descriptionRetriever;
 
 	protected function setUp(): void {
 		parent::setUp();
 
+		$this->getRevisionMetadata = $this->createStub( GetLatestPropertyRevisionMetadata::class );
 		$this->descriptionRetriever = $this->createStub( PropertyDescriptionRetriever::class );
 	}
 
@@ -32,6 +36,11 @@ class GetPropertyDescriptionTest extends TestCase {
 		$description = new Description( $languageCode, 'English test property' );
 
 		$propertyId = new NumericPropertyId( 'P10' );
+		$lastModified = '20201111070707';
+		$revisionId = 2;
+
+		$this->getRevisionMetadata = $this->createStub( GetLatestPropertyRevisionMetadata::class );
+		$this->getRevisionMetadata->method( 'execute' )->willReturn( [ $revisionId, $lastModified ] );
 
 		$this->descriptionRetriever = $this->createMock( PropertyDescriptionRetriever::class );
 		$this->descriptionRetriever->expects( $this->once() )
@@ -41,10 +50,27 @@ class GetPropertyDescriptionTest extends TestCase {
 
 		$response = $this->newUseCase()
 			->execute( new GetPropertyDescriptionRequest( "$propertyId", $languageCode ) );
-		$this->assertEquals( new GetPropertyDescriptionResponse( $description ), $response );
+		$this->assertEquals( new GetPropertyDescriptionResponse( $description, $lastModified, $revisionId ), $response );
+	}
+
+	public function testGivenPropertyNotFound_throws(): void {
+		$expectedException = $this->createStub( UseCaseError::class );
+		$this->getRevisionMetadata = $this->createStub( GetLatestPropertyRevisionMetadata::class );
+		$this->getRevisionMetadata->method( 'execute' )
+			->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase()->execute( new GetPropertyDescriptionRequest( 'P999999', 'en' ) );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
 	}
 
 	private function newUseCase(): GetPropertyDescription {
-		return new GetPropertyDescription( $this->descriptionRetriever );
+		return new GetPropertyDescription(
+			$this->getRevisionMetadata,
+			$this->descriptionRetriever
+		);
 	}
 }

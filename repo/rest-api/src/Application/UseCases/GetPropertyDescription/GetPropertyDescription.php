@@ -3,6 +3,8 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescription;
 
 use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikibase\Repo\RestApi\Application\UseCases\GetLatestPropertyRevisionMetadata;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyDescriptionRetriever;
 
 /**
@@ -10,19 +12,30 @@ use Wikibase\Repo\RestApi\Domain\Services\PropertyDescriptionRetriever;
  */
 class GetPropertyDescription {
 
+	private GetLatestPropertyRevisionMetadata $getRevisionMetadata;
 	private PropertyDescriptionRetriever $descriptionRetriever;
 
-	public function __construct( PropertyDescriptionRetriever $descriptionRetriever ) {
-		$this->descriptionRetriever = $descriptionRetriever;
+	public function __construct(
+		GetLatestPropertyRevisionMetadata $getRevisionMetadata,
+		PropertyDescriptionRetriever $descriptionsRetriever
+	) {
+		$this->getRevisionMetadata = $getRevisionMetadata;
+		$this->descriptionRetriever = $descriptionsRetriever;
 	}
 
+	/**
+	 * @throws UseCaseError
+	 */
 	public function execute( GetPropertyDescriptionRequest $request ): GetPropertyDescriptionResponse {
+		$propertyId = new NumericPropertyId( $request->getPropertyId() );
+
+		[ $revisionId, $lastModified ] = $this->getRevisionMetadata->execute( $propertyId );
+
 		return new GetPropertyDescriptionResponse(
 			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-			$this->descriptionRetriever->getDescription(
-				new NumericPropertyId( $request->getPropertyId() ),
-				$request->getLanguageCode()
-			)
+			$this->descriptionRetriever->getDescription( $propertyId, $request->getLanguageCode() ),
+			$lastModified,
+			$revisionId
 		);
 	}
 }

@@ -10,13 +10,25 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
 class GetPropertyDescriptionResponse {
 
 	private Description $description;
+	private string $lastModified;
+	private int $revisionId;
 
-	public function __construct( Description $description ) {
+	public function __construct( Description $description, string $lastModified, int $revisionId ) {
 		$this->description = $description;
+		$this->lastModified = $lastModified;
+		$this->revisionId = $revisionId;
 	}
 
 	public function getDescription(): Description {
 		return $this->description;
+	}
+
+	public function getLastModified(): string {
+		return $this->lastModified;
+	}
+
+	public function getRevisionId(): int {
+		return $this->revisionId;
 	}
 
 }
