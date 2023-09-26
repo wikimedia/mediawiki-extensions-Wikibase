@@ -45,4 +45,15 @@ describe( newGetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 		assert.include( response.body.message, nonExistentProperty );
 	} );
 
+	it( 'responds 404 in case the property has no description in the requested language', async () => {
+		const languageCode = 'ko';
+		const response = await newGetPropertyDescriptionRequestBuilder( propertyId, languageCode )
+			.assertValidRequest()
+			.makeRequest();
+		expect( response ).to.have.status( 404 );
+		assert.header( response, 'Content-Language', 'en' );
+		assert.strictEqual( response.body.code, 'description-not-defined' );
+		assert.include( response.body.message, languageCode );
+	} );
+
 } );

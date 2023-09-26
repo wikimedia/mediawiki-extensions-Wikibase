@@ -28,14 +28,18 @@ class GetPropertyDescription {
 	 */
 	public function execute( GetPropertyDescriptionRequest $request ): GetPropertyDescriptionResponse {
 		$propertyId = new NumericPropertyId( $request->getPropertyId() );
+		$languageCode = $request->getLanguageCode();
 
 		[ $revisionId, $lastModified ] = $this->getRevisionMetadata->execute( $propertyId );
 
-		return new GetPropertyDescriptionResponse(
-			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-			$this->descriptionRetriever->getDescription( $propertyId, $request->getLanguageCode() ),
-			$lastModified,
-			$revisionId
-		);
+		$description = $this->descriptionRetriever->getDescription( $propertyId, $languageCode );
+		if ( !$description ) {
+			throw new UseCaseError(
+				UseCaseError::DESCRIPTION_NOT_DEFINED,
+				"Property with the ID {$propertyId->getSerialization()} does not have a description in the language: $languageCode"
+			);
+		}
+
+		return new GetPropertyDescriptionResponse( $description, $lastModified, $revisionId );
 	}
 }
