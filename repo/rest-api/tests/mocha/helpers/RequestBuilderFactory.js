@@ -41,6 +41,13 @@ module.exports = {
 			.withPathParam( 'language_code', languageCode );
 	},
 
+	newGetPropertyDescriptionRequestBuilder( propertyId, languageCode ) {
+		return new RequestBuilder()
+			.withRoute( 'GET', '/entities/properties/{property_id}/descriptions/{language_code}' )
+			.withPathParam( 'property_id', propertyId )
+			.withPathParam( 'language_code', languageCode );
+	},
+
 	newGetItemDescriptionsRequestBuilder( itemId ) {
 		return new RequestBuilder()
 			.withRoute( 'GET', '/entities/items/{item_id}/descriptions' )

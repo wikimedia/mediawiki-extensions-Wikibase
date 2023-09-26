@@ -50,6 +50,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetLatestPropertyRevisionMetadata
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestStatementSubjectRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetProperty;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyAliases\GetPropertyAliases;
+use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescription\GetPropertyDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescriptions\GetPropertyDescriptions;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabel\GetPropertyLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabels\GetPropertyLabels;
@@ -402,6 +403,10 @@ return [
 			),
 			WbRestApi::getValidatingRequestDeserializer( $services )
 		);
+	},
+
+	'WbRestApi.GetPropertyDescription' => function( MediaWikiServices $services ): GetPropertyDescription {
+		return new GetPropertyDescription( WbRestApi::getTermLookupEntityTermsRetriever( $services ) );
 	},
 
 	'WbRestApi.GetPropertyDescriptions' => function( MediaWikiServices $services ): GetPropertyDescriptions {
