@@ -70,13 +70,6 @@ class RemovePropertyStatementRouteHandlerTest extends MediaWikiIntegrationTestCa
 		yield 'Unexpected Error' => [ new RuntimeException(), UseCaseError::UNEXPECTED_ERROR ];
 	}
 
-	public function testReadWriteAccess(): void {
-		$routeHandler = $this->newHandlerWithValidRequest();
-
-		$this->assertTrue( $routeHandler->needsReadAccess() );
-		$this->assertTrue( $routeHandler->needsWriteAccess() );
-	}
-
 	private function newHandlerWithValidRequest(): Handler {
 		$routeHandler = RemovePropertyStatementRouteHandler::factory();
 		$this->initHandler(

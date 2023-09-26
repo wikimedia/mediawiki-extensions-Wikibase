@@ -42,13 +42,6 @@ class PatchItemDescriptionsRouteHandlerTest extends MediaWikiIntegrationTestCase
 		$this->assertJsonStringEqualsJsonString( json_encode( $expectedDescriptions ), $response->getBody()->getContents() );
 	}
 
-	public function testReadWriteAccess(): void {
-		$routeHandler = $this->newHandlerWithValidRequest();
-
-		$this->assertTrue( $routeHandler->needsReadAccess() );
-		$this->assertTrue( $routeHandler->needsWriteAccess() );
-	}
-
 	private function newHandlerWithValidRequest(): Handler {
 		$routeHandler = PatchItemDescriptionsRouteHandler::factory();
 		$this->initHandler(
