@@ -62,13 +62,13 @@ class PatchItemDescriptions {
 		// T346773 - validate the patched descriptions
 		$modifiedDescriptions = $this->descriptionsDeserializer->deserialize( $patchedDescriptions );
 		$item = $this->itemRetriever->getItem( $itemId );
+		$originalDescriptions = $item->getDescriptions();
 		$item->getFingerprint()->setDescriptions( $modifiedDescriptions );
 
 		$editMetadata = new EditMetadata(
 			$request->getEditTags(),
 			$request->isBot(),
-			// T346770 - generate the expected edit summary
-			DescriptionsEditSummary::newPatchSummary( $request->getComment() )
+			DescriptionsEditSummary::newPatchSummary( $request->getComment(), $originalDescriptions, $modifiedDescriptions )
 		);
 
 		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
