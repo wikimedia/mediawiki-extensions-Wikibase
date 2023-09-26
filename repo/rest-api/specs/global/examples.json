@@ -217,6 +217,12 @@
 			"message": "Item with the ID {item_id} does not have aliases in the language: {language_code}"
 		}
 	},
+	"PropertyAliasesNotDefinedExample": {
+		"value": {
+			"code": "aliases-not-defined",
+			"message": "Property with the ID {property_id} does not have aliases in the language: {language_code}"
+		}
+	},
 	"InvalidLabelExample": {
 		"value": {
 			"code": "invalid-label",

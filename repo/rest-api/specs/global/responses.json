@@ -216,6 +216,30 @@
 			}
 		}
 	},
+	"PropertyAliasesInLanguageNotFound": {
+		"description": "The specified resource was not found",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/Error" },
+				"examples": {
+					"property-not-found": {
+						"$ref": "./examples.json#/PropertyNotFoundExample"
+					},
+					"aliases-not-defined": {
+						"$ref": "./examples.json#/PropertyAliasesNotDefinedExample"
+					}
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
 	"ItemDescriptionNotFound": {
 		"description": "The specified resource was not found",
 		"content": {
@@ -1357,6 +1381,41 @@
 			"application/json": {
 				"schema": {
 					"$ref": "./schemas.json#/Aliases"
+				}
+			}
+		}
+	},
+	"PropertyAliasesInLanguage": {
+		"description": "Property's aliases in a specific language",
+		"headers": {
+			"ETag": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Last entity revision number"
+			},
+			"Last-Modified": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Last modified date"
+			},
+			"X-Authenticated-User": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Optional username of the user making the request"
+			}
+		},
+		"content": {
+			"application/json": {
+				"schema": {
+					"type": "array",
+					"items": { "type": "string" },
+					"example": [
+						"is a",
+						"example of"
+					]
 				}
 			}
 		}
