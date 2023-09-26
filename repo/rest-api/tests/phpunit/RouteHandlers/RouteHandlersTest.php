@@ -53,11 +53,13 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 	use RestHandlerTestUtilsTrait;
 
 	private static array $routesData = [];
+	private static array $prodRoutesData = [];
 
 	public static function setUpBeforeClass(): void {
 		parent::setUpBeforeClass();
+		self::$prodRoutesData = json_decode( file_get_contents( __DIR__ . '/../../../routes.json' ), true );
 		self::$routesData = array_merge(
-			json_decode( file_get_contents( __DIR__ . '/../../../routes.json' ), true ),
+			self::$prodRoutesData,
 			json_decode( file_get_contents( __DIR__ . '/../../../routes.dev.json' ), true )
 		);
 	}
@@ -248,6 +250,20 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			],
 		] ];
 		// phpcs:enable
+	}
+
+	/**
+	 * @doesNotPerformAssertions
+	 */
+	public function testAllProductionRoutesAreCovered(): void {
+		foreach ( self::$prodRoutesData as $route ) {
+			foreach ( $this->routeHandlersProvider() as $routeTestData ) {
+				if ( $route === $this->getRouteForUseCase( $routeTestData[0]['useCase'] ) ) {
+					continue 2;
+				}
+			}
+			$this->fail( "Route handler {$route['factory']} is not covered by any tests" );
+		}
 	}
 
 	private function newHandlerWithValidRequest( array $routeData, array $validRequest ): Handler {
