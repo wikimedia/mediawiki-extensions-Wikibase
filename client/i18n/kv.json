@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Enye Lav"
+			"Enye Lav",
+			"СерМар"
 		]
 	},
 	"wikibase-dataitem": "{{grammar:genitive|{{WBREPONAME}}}}лӧн тор",
@@ -12,5 +13,7 @@
 	"wikibase-linkitem-selectlink": "Бӧрйы сайт да лист бок, кытчӧ ті кӧсъян вӧчны ыстӧг тайӧ лист боксянь.",
 	"wikibase-linkitem-input-site": "Кыв:",
 	"wikibase-linkitem-input-page": "Лист бок:",
+	"wikibase-rc-hide-wikidata-hide": "Сайӧдны",
+	"wikibase-rc-hide-wikidata-show": "Петкӧдлыны",
 	"wikibase-otherprojects": "Мукӧд проектын"
 }

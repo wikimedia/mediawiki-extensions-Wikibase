@@ -1,10 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Enye Lav"
+			"Enye Lav",
+			"СерМар"
 		]
 	},
 	"wikibase-edit": "веськӧдны",
+	"wikibase-add": "содтыны",
 	"wikibase-description-empty": "Абу гижалӧма",
 	"wikibase-sitelinks-special": "Мукӧд сайтыс"
 }
