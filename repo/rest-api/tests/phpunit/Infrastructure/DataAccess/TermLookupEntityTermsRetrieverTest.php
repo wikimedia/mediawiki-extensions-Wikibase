@@ -172,17 +172,19 @@ class TermLookupEntityTermsRetrieverTest extends TestCase {
 	}
 
 	public function testGetDescription(): void {
-		$itemId = new ItemId( self::ITEM_ID );
+		$entityId = $this->createMock( EntityId::class );
+		$languageCode = 'en';
+		$descriptionText = 'some description';
 
 		$termLookup = $this->createMock( TermLookup::class );
 		$termLookup->expects( $this->once() )
 			->method( 'getDescription' )
-			->with( $itemId, 'en' )
-			->willReturn( 'English science fiction writer and humourist' );
+			->with( $entityId, $languageCode )
+			->willReturn( $descriptionText );
 
 		$this->assertEquals(
-			( $this->newTermRetriever( $termLookup ) )->getDescription( $itemId, 'en' ),
-			new Description( 'en', 'English science fiction writer and humourist' ),
+			( $this->newTermRetriever( $termLookup ) )->getDescription( $entityId, $languageCode ),
+			new Description( $languageCode, $descriptionText ),
 		);
 	}
 
