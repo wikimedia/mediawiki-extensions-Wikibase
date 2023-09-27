@@ -47,10 +47,10 @@ class RdfDumpGenerator extends DumpGenerator {
 	private $timestamp = 0;
 
 	/**
-	 * @param resource             $out
+	 * @param resource $out
 	 * @param EntityRevisionLookup $lookup Must not resolve redirects
-	 * @param RdfBuilder           $rdfBuilder
-	 * @param EntityPrefetcher     $entityPrefetcher
+	 * @param RdfBuilder $rdfBuilder
+	 * @param EntityPrefetcher $entityPrefetcher
 	 */
 	public function __construct(
 		$out,

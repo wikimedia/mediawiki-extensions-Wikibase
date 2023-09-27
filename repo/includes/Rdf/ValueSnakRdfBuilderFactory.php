@@ -41,11 +41,11 @@ class ValueSnakRdfBuilderFactory {
 	/**
 	 * Returns an ValueSnakRdfBuilder for reified value output.
 	 *
-	 * @param int                   $flavorFlags Flavor flags to use for the snak builder
-	 * @param RdfVocabulary         $vocabulary
-	 * @param RdfWriter             $writer
+	 * @param int $flavorFlags Flavor flags to use for the snak builder
+	 * @param RdfVocabulary $vocabulary
+	 * @param RdfWriter $writer
 	 * @param EntityMentionListener $mentionedEntityTracker
-	 * @param DedupeBag             $dedupe
+	 * @param DedupeBag $dedupe
 	 *
 	 * @return DispatchingValueSnakRdfBuilder
 	 */
@@ -68,11 +68,11 @@ class ValueSnakRdfBuilderFactory {
 	}
 
 	/**
-	 * @param int                   $flavorFlags Flavor flags to use for the snak builder
-	 * @param RdfVocabulary         $vocabulary
-	 * @param RdfWriter             $writer
+	 * @param int $flavorFlags Flavor flags to use for the snak builder
+	 * @param RdfVocabulary $vocabulary
+	 * @param RdfWriter $writer
 	 * @param EntityMentionListener $mentionedEntityTracker
-	 * @param DedupeBag             $dedupe
+	 * @param DedupeBag $dedupe
 	 *
 	 * @return ValueSnakRdfBuilder[]
 	 */
