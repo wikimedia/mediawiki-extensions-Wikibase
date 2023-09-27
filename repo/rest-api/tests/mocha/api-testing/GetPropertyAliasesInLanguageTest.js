@@ -46,4 +46,16 @@ describe( newGetPropertyAliasesInLanguageRequestBuilder().getRouteDescription(),
 		assert.strictEqual( response.body.code, 'property-not-found' );
 		assert.include( response.body.message, nonExistentProperty );
 	} );
+
+	it( 'responds 404 in case the property has no aliases in the requested language', async () => {
+		const languageCode = 'ar';
+		const response = await newGetPropertyAliasesInLanguageRequestBuilder( propertyId, languageCode )
+			.assertValidRequest()
+			.makeRequest();
+
+		expect( response ).to.have.status( 404 );
+		assert.header( response, 'Content-Language', 'en' );
+		assert.strictEqual( response.body.code, 'aliases-not-defined' );
+		assert.include( response.body.message, languageCode );
+	} );
 } );
