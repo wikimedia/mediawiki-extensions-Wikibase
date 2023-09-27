@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\PatchItemDescriptions;
 
+use Generator;
 use PHPUnit\Framework\Constraint\Callback;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item as DataModelItem;
@@ -138,6 +139,50 @@ class PatchItemDescriptionsTest extends TestCase {
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( $expectedError, $e );
 		}
+	}
+
+	/**
+	 * @dataProvider provideInapplicablePatch
+	 */
+	public function testGivenValidInapplicablePatch_throwsUseCaseError(
+		array $patch,
+		string $expectedErrorCode,
+		array $expectedContext
+	): void {
+		$this->descriptionsRetriever = $this->createStub( ItemDescriptionsRetriever::class );
+		$this->descriptionsRetriever->method( 'getDescriptions' )
+			->willReturn( new Descriptions( new Description( 'en', 'English Description' ) ) );
+
+		try {
+			$this->newUseCase()->execute( $this->newUseCaseRequest( 'Q123', $patch ) );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedErrorCode, $e->getErrorCode() );
+			$this->assertEquals( $expectedContext, $e->getErrorContext() );
+		}
+	}
+
+	public static function provideInapplicablePatch(): Generator {
+		$patchOperation = [ 'op' => 'remove', 'path' => '/path/does/not/exist' ];
+		yield 'non-existent path' => [
+			[ $patchOperation ],
+			UseCaseError::PATCH_TARGET_NOT_FOUND,
+			[ 'operation' => $patchOperation, 'field' => 'path' ],
+		];
+
+		$patchOperation = [ 'op' => 'copy', 'from' => '/path/does/not/exist', 'path' => '/en' ];
+		yield 'non-existent from' => [
+			[ $patchOperation ],
+			UseCaseError::PATCH_TARGET_NOT_FOUND,
+			[ 'operation' => $patchOperation, 'field' => 'from' ],
+		];
+
+		$patchOperation = [ 'op' => 'test', 'path' => '/en', 'value' => 'incorrect value' ];
+		yield 'patch test operation failed' => [
+			[ $patchOperation ],
+			UseCaseError::PATCH_TEST_FAILED,
+			[ 'operation' => $patchOperation, 'actual-value' => 'English Description' ],
+		];
 	}
 
 	private function newUseCase(): PatchItemDescriptions {
