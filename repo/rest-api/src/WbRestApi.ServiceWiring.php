@@ -420,6 +420,7 @@ return [
 
 	'WbRestApi.GetPropertyDescription' => function( MediaWikiServices $services ): GetPropertyDescription {
 		return new GetPropertyDescription(
+			WbRestApi::getValidatingRequestDeserializer( $services ),
 			WbRestApi::getGetLatestPropertyRevisionMetadata( $services ),
 			WbRestApi::getTermLookupEntityTermsRetriever( $services )
 		);
