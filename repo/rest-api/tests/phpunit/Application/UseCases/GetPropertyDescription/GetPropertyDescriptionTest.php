@@ -67,6 +67,27 @@ class GetPropertyDescriptionTest extends TestCase {
 		}
 	}
 
+	public function testGivenDescriptionDoesNotExist_throws(): void {
+		$propertyId = 'P123';
+		$languageCode = 'en';
+
+		$this->getRevisionMetadata = $this->createStub( GetLatestPropertyRevisionMetadata::class );
+		$this->getRevisionMetadata->method( 'execute' )->willReturn( [ 123, '20230926070707' ] );
+
+		try {
+			$this->newUseCase()->execute( new GetPropertyDescriptionRequest( $propertyId, $languageCode ) );
+			$this->fail( 'expected exception was not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertEquals(
+				new UseCaseError(
+					UseCaseError::DESCRIPTION_NOT_DEFINED,
+					"Property with the ID $propertyId does not have a description in the language: $languageCode"
+				),
+				$e
+			);
+		}
+	}
+
 	private function newUseCase(): GetPropertyDescription {
 		return new GetPropertyDescription(
 			$this->getRevisionMetadata,
