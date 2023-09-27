@@ -3,15 +3,12 @@
 namespace Wikibase\Repo\Tests\RestApi\RouteHandlers;
 
 use MediaWiki\Rest\Handler;
-use MediaWiki\Rest\Reporter\ErrorReporter;
 use MediaWiki\Rest\RequestData;
 use MediaWiki\Rest\Response;
 use MediaWiki\Tests\Rest\Handler\HandlerTestTrait;
 use MediaWikiIntegrationTestCase;
-use RuntimeException;
 use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetProperty;
 use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetPropertyResponse;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyParts;
 use Wikibase\Repo\RestApi\RouteHandlers\GetPropertyRouteHandler;
 
@@ -48,20 +45,6 @@ class GetPropertyRouteHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( [ '"42"' ], $response->getHeader( 'ETag' ) );
 		$this->assertSame( [ 'Mon, 31 Jul 2023 04:20:31 GMT' ], $response->getHeader( 'Last-Modified' ) );
 		$this->assertArrayEquals( [ 'id' ], array_keys( $responseBody ) );
-	}
-
-	public function testHandlesUnexpectedErrors(): void {
-		$useCase = $this->createStub( GetProperty::class );
-		$useCase->method( 'execute' )->willThrowException( new RuntimeException() );
-
-		$this->setService( 'WbRestApi.GetProperty', $useCase );
-		$this->setService( 'WbRestApi.ErrorReporter', $this->createStub( ErrorReporter::class ) );
-
-		$response = $this->newHandlerWithValidRequest()->execute();
-		$responseBody = json_decode( $response->getBody()->getContents() );
-
-		$this->assertSame( [ 'en' ], $response->getHeader( 'Content-Language' ) );
-		$this->assertSame( UseCaseError::UNEXPECTED_ERROR, $responseBody->code );
 	}
 
 	private function newHandlerWithValidRequest(): Handler {

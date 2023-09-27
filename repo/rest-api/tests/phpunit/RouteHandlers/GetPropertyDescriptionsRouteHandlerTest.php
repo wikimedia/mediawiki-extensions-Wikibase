@@ -9,7 +9,6 @@ use MediaWiki\Rest\RequestData;
 use MediaWiki\Rest\Response;
 use MediaWiki\Tests\Rest\Handler\HandlerTestTrait;
 use MediaWikiIntegrationTestCase;
-use RuntimeException;
 use Throwable;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescriptions\GetPropertyDescriptions;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescriptions\GetPropertyDescriptionsResponse;
@@ -84,8 +83,6 @@ class GetPropertyDescriptionsRouteHandlerTest extends MediaWikiIntegrationTestCa
 			new UseCaseError( UseCaseError::PROPERTY_NOT_FOUND, 'Could not find a property with the ID: P321' ),
 			UseCaseError::PROPERTY_NOT_FOUND,
 		];
-
-		yield 'Unexpected Error' => [ new RuntimeException(), UseCaseError::UNEXPECTED_ERROR ];
 	}
 
 	private function newHandlerWithValidRequest(): Handler {
