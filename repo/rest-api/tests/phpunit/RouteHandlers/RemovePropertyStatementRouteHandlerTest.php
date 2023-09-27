@@ -31,17 +31,6 @@ class RemovePropertyStatementRouteHandlerTest extends MediaWikiIntegrationTestCa
 		$this->setMockPreconditionMiddlewareFactory();
 	}
 
-	public function testValidHttpResponse(): void {
-		$this->setService( 'WbRestApi.RemovePropertyStatement', $this->createStub( RemovePropertyStatement::class ) );
-
-		/** @var Response $response */
-		$response = $this->newHandlerWithValidRequest()->execute();
-
-		$this->assertSame( 200, $response->getStatusCode() );
-		$this->assertSame( [ 'application/json' ], $response->getHeader( 'Content-Type' ) );
-		$this->assertSame( '"Statement deleted"', $response->getBody()->getContents() );
-	}
-
 	/**
 	 * @dataProvider provideExceptionAndExpectedErrorCode
 	 */

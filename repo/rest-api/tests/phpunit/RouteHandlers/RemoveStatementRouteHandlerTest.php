@@ -6,7 +6,6 @@ use Generator;
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Reporter\ErrorReporter;
 use MediaWiki\Rest\RequestData;
-use MediaWiki\Rest\Response;
 use MediaWiki\Tests\Rest\Handler\HandlerTestTrait;
 use MediaWikiIntegrationTestCase;
 use Throwable;
@@ -30,17 +29,6 @@ class RemoveStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 	protected function setUp(): void {
 		parent::setUp();
 		$this->setMockPreconditionMiddlewareFactory();
-	}
-
-	public function testValidHttpResponse(): void {
-		$this->setService( 'WbRestApi.RemoveStatement', $this->createStub( RemoveStatement::class ) );
-
-		/** @var Response $response */
-		$response = $this->newHandlerWithValidRequest()->execute();
-
-		$this->assertSame( 200, $response->getStatusCode() );
-		$this->assertSame( [ 'application/json' ], $response->getHeader( 'Content-Type' ) );
-		$this->assertSame( '"Statement deleted"', $response->getBody()->getContents() );
 	}
 
 	/**

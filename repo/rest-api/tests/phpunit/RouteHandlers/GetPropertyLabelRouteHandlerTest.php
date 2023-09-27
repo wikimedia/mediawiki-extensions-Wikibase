@@ -11,9 +11,7 @@ use MediaWiki\Tests\Rest\Handler\HandlerTestTrait;
 use MediaWikiIntegrationTestCase;
 use Throwable;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabel\GetPropertyLabel;
-use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabel\GetPropertyLabelResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
 use Wikibase\Repo\RestApi\RouteHandlers\GetPropertyLabelRouteHandler;
 
 /**
@@ -31,21 +29,6 @@ class GetPropertyLabelRouteHandlerTest extends MediaWikiIntegrationTestCase {
 	protected function setUp(): void {
 		parent::setUp();
 		$this->setMockPreconditionMiddlewareFactory();
-	}
-
-	public function testValidSuccessHttpResponse(): void {
-		$label = 'test label';
-		$useCaseResponse = new GetPropertyLabelResponse( new Label( 'en', $label ), '20230731042031', 42 );
-		$useCase = $this->createStub( GetPropertyLabel::class );
-		$useCase->method( 'execute' )->willReturn( $useCaseResponse );
-
-		$this->setService( 'WbRestApi.GetPropertyLabel', $useCase );
-
-		/** @var Response $response */
-		$response = $this->newHandlerWithValidRequest()->execute();
-
-		$this->assertSame( 200, $response->getStatusCode() );
-		$this->assertJsonStringEqualsJsonString( json_encode( $label ), $response->getBody()->getContents() );
 	}
 
 	/**

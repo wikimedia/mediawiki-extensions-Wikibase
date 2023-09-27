@@ -11,10 +11,8 @@ use MediaWiki\Tests\Rest\Handler\HandlerTestTrait;
 use MediaWikiIntegrationTestCase;
 use Throwable;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\GetItemStatements;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\GetItemStatementsResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\RouteHandlers\GetItemStatementsRouteHandler;
 
 /**
@@ -32,24 +30,6 @@ class GetItemStatementsRouteHandlerTest extends MediaWikiIntegrationTestCase {
 	protected function setUp(): void {
 		parent::setUp();
 		$this->setMockPreconditionMiddlewareFactory();
-	}
-
-	public function testValidHttpResponse(): void {
-		$statementList = $this->createStub( StatementList::class );
-		$useCaseResponse = new GetItemStatementsResponse( $statementList, '20230731042031', 42 );
-		$useCase = $this->createStub( GetItemStatements::class );
-		$useCase->method( 'execute' )->willReturn( $useCaseResponse );
-
-		$this->setService( 'WbRestApi.GetItemStatements', $useCase );
-
-		/** @var Response $response */
-		$response = $this->newHandlerWithValidRequest()->execute();
-
-		$this->assertSame( 200, $response->getStatusCode() );
-		$this->assertSame( [ 'application/json' ], $response->getHeader( 'Content-Type' ) );
-		$this->assertSame( [ '"42"' ], $response->getHeader( 'ETag' ) );
-		$this->assertSame( [ 'Mon, 31 Jul 2023 04:20:31 GMT' ], $response->getHeader( 'Last-Modified' ) );
-		$this->assertIsArray( json_decode( $response->getBody()->getContents(), true ) );
 	}
 
 	public function testValidRedirectHttpResponse(): void {

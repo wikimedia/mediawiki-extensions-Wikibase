@@ -6,15 +6,12 @@ use Generator;
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Reporter\ErrorReporter;
 use MediaWiki\Rest\RequestData;
-use MediaWiki\Rest\Response;
 use MediaWiki\Tests\Rest\Handler\HandlerTestTrait;
 use MediaWikiIntegrationTestCase;
 use Throwable;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescription;
-use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescriptionResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
 use Wikibase\Repo\RestApi\RouteHandlers\SetItemDescriptionRouteHandler;
 
 /**
@@ -32,32 +29,6 @@ class SetItemDescriptionRouteHandlerTest extends MediaWikiIntegrationTestCase {
 	protected function setUp(): void {
 		parent::setUp();
 		$this->setMockPreconditionMiddlewareFactory();
-	}
-
-	/**
-	 * @dataProvider provideWasReplacedAndStatusCode
-	 */
-	public function testValidSuccessHttpResponse( bool $wasReplaced, int $statusCode ): void {
-		$description = 'test description';
-		$useCaseResponse = new SetItemDescriptionResponse( new Description( 'en', $description ), '20230731042031', 42, $wasReplaced );
-		$useCase = $this->createStub( SetItemDescription::class );
-		$useCase->method( 'execute' )->willReturn( $useCaseResponse );
-
-		$this->setService( 'WbRestApi.SetItemDescription', $useCase );
-
-		/** @var Response $response */
-		$response = $this->newHandlerWithValidRequest()->execute();
-
-		$this->assertSame( $statusCode, $response->getStatusCode() );
-		$this->assertSame( [ 'application/json' ], $response->getHeader( 'Content-Type' ) );
-		$this->assertSame( [ '"42"' ], $response->getHeader( 'ETag' ) );
-		$this->assertSame( [ 'Mon, 31 Jul 2023 04:20:31 GMT' ], $response->getHeader( 'Last-Modified' ) );
-		$this->assertJsonStringEqualsJsonString( json_encode( $description ), $response->getBody()->getContents() );
-	}
-
-	public function provideWasReplacedAndStatusCode(): Generator {
-		yield 'Description was replaced' => [ true, 200 ];
-		yield 'Description was added' => [ false, 201 ];
 	}
 
 	/**

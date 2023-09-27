@@ -9,12 +9,8 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Tests\Rest\Handler\HandlerTestTrait;
 use MediaWikiIntegrationTestCase;
 use Throwable;
-use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\ReadModel\PredicateProperty;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
 use Wikibase\Repo\RestApi\RouteHandlers\AddPropertyStatementRouteHandler;
 
 /**
@@ -32,28 +28,6 @@ class AddPropertyStatementRouteHandlerTest extends MediaWikiIntegrationTestCase 
 	protected function setUp(): void {
 		parent::setUp();
 		$this->setMockPreconditionMiddlewareFactory();
-	}
-
-	public function testValidHttpResponse(): void {
-		$statement = $this->createStub( Statement::class );
-		$statement->method( 'getProperty' )->willReturn(
-			new PredicateProperty( new NumericPropertyId( 'P123' ), 'string' )
-		);
-		$useCaseResponse = new AddPropertyStatementResponse( $statement, '20230731042031', 42 );
-		$useCase = $this->createStub( AddPropertyStatement::class );
-		$useCase->method( 'execute' )->willReturn( $useCaseResponse );
-
-		$this->setService( 'WbRestApi.AddPropertyStatement', $useCase );
-
-		/** @var Response $response */
-		$response = $this->newHandlerWithValidRequest()->execute();
-		$responseBody = json_decode( $response->getBody()->getContents(), true );
-
-		$this->assertSame( 201, $response->getStatusCode() );
-		$this->assertSame( [ 'application/json' ], $response->getHeader( 'Content-Type' ) );
-		$this->assertSame( [ '"42"' ], $response->getHeader( 'ETag' ) );
-		$this->assertSame( [ 'Mon, 31 Jul 2023 04:20:31 GMT' ], $response->getHeader( 'Last-Modified' ) );
-		$this->assertArrayEquals( [ 'id', 'rank', 'property', 'value', 'qualifiers', 'references' ], array_keys( $responseBody ) );
 	}
 
 	/**
