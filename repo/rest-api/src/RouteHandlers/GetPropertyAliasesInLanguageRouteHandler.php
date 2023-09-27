@@ -8,6 +8,7 @@ use MediaWiki\Rest\StringStream;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyAliasesInLanguage\GetPropertyAliasesInLanguage;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyAliasesInLanguage\GetPropertyAliasesInLanguageRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyAliasesInLanguage\GetPropertyAliasesInLanguageResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -20,19 +21,25 @@ class GetPropertyAliasesInLanguageRouteHandler extends SimpleHandler {
 	private const LANGUAGE_CODE_PATH_PARAM = 'language_code';
 
 	private GetPropertyAliasesInLanguage $useCase;
+	private ResponseFactory $responseFactory;
 
-	public function __construct( GetPropertyAliasesInLanguage $useCase ) {
+	public function __construct( GetPropertyAliasesInLanguage $useCase, ResponseFactory $responseFactory ) {
 		$this->useCase = $useCase;
+		$this->responseFactory = $responseFactory;
 	}
 
 	public static function factory(): self {
-		return new self( WbRestApi::getGetPropertyAliasesInLanguage() );
+		return new self( WbRestApi::getGetPropertyAliasesInLanguage(), new ResponseFactory() );
 	}
 
 	public function run( string $propertyId, string $languageCode ): Response {
-		return $this->newSuccessHttpResponse(
-			$this->useCase->execute( new GetPropertyAliasesInLanguageRequest( $propertyId, $languageCode ) )
-		);
+		try {
+			return $this->newSuccessHttpResponse(
+				$this->useCase->execute( new GetPropertyAliasesInLanguageRequest( $propertyId, $languageCode ) )
+			);
+		} catch ( UseCaseError $e ) {
+			return $this->responseFactory->newErrorResponseFromException( $e );
+		}
 	}
 
 	public function getParamSettings(): array {
@@ -54,7 +61,13 @@ class GetPropertyAliasesInLanguageRouteHandler extends SimpleHandler {
 		$httpResponse = $this->getResponseFactory()->create();
 		$httpResponse->setHeader( 'Content-Type', 'application/json' );
 		$httpResponse->setBody( new StringStream( json_encode( $useCaseResponse->getAliasesInLanguage()->getAliases() ) ) );
+		$httpResponse->setHeader( 'Last-Modified', wfTimestamp( TS_RFC2822, $useCaseResponse->getLastModified() ) );
+		$this->setEtagFromRevId( $httpResponse, $useCaseResponse->getRevisionId() );
 
 		return $httpResponse;
+	}
+
+	private function setEtagFromRevId( Response $response, int $revId ): void {
+		$response->setHeader( 'ETag', "\"$revId\"" );
 	}
 }

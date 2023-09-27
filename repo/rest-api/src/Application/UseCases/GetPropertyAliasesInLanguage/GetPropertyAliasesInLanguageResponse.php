@@ -10,13 +10,25 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
 class GetPropertyAliasesInLanguageResponse {
 
 	private AliasesInLanguage $aliasesInLanguage;
+	private string $lastModified;
+	private int $revisionId;
 
-	public function __construct( AliasesInLanguage $aliasesInLanguage ) {
+	public function __construct( AliasesInLanguage $aliasesInLanguage, string $lastModified, int $revisionId ) {
 		$this->aliasesInLanguage = $aliasesInLanguage;
+		$this->lastModified = $lastModified;
+		$this->revisionId = $revisionId;
 	}
 
 	public function getAliasesInLanguage(): AliasesInLanguage {
 		return $this->aliasesInLanguage;
+	}
+
+	public function getLastModified(): string {
+		return $this->lastModified;
+	}
+
+	public function getRevisionId(): int {
+		return $this->revisionId;
 	}
 
 }
