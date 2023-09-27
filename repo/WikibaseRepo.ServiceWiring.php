@@ -1301,7 +1301,8 @@ return [
 			WikibaseRepo::getSummaryFormatter( $services ),
 			WikibaseRepo::getItemRedirectCreationInteractor( $services ),
 			WikibaseRepo::getEntityTitleStoreLookup( $services ),
-			$services->getPermissionManager()
+			$services->getPermissionManager(),
+			WikibaseRepo::getEditFilterHookRunner( $services )
 		);
 	},
 

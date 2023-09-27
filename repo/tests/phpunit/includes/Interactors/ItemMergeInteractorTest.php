@@ -3,7 +3,9 @@
 namespace Wikibase\Repo\Tests\Interactors;
 
 use HashSiteStore;
+use IContextSource;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Permissions\RateLimiter;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
 use RequestContext;
@@ -39,6 +41,12 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Lucie-Aimée Kaffee
  */
 class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
+
+	/** @var string User name that gets blocked by the permission checker. */
+	private const USER_NAME_WITHOUT_PERMISSION = 'UserWithoutPermission';
+
+	/** @var string User name that gets blocked by the edit filter. */
+	private const USER_NAME_WITH_EDIT_FILTER = 'UserWithEditFilter';
 
 	/**
 	 * @var MockRepository|null
@@ -79,7 +87,13 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 		$mock->method( 'run' )
-			->willReturn( Status::newGood() );
+			->willReturnCallback( function ( $new, IContextSource $context, string $summary ) {
+				if ( $context->getUser()->getName() === self::USER_NAME_WITH_EDIT_FILTER ) {
+					return Status::newFatal( 'permissiondenied' );
+				} else {
+					return Status::newGood();
+				}
+			} );
 
 		return $mock;
 	}
@@ -92,9 +106,7 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 
 		$permissionChecker->method( 'getPermissionStatusForEntityId' )
 			->willReturnCallback( function( User $user ) {
-				$userWithoutPermissionName = 'UserWithoutPermission';
-
-				if ( $user->getName() === $userWithoutPermissionName ) {
+				if ( $user->getName() === self::USER_NAME_WITHOUT_PERMISSION ) {
 					return Status::newFatal( 'permissiondenied' );
 				} else {
 					return Status::newGood();
@@ -145,6 +157,7 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 			new HashSiteStore( TestSites::getSites() )
 		);
 
+		$editFilterHookRunner = $this->getMockEditFilterHookRunner();
 		$interactor = new ItemMergeInteractor(
 			$mergeFactory,
 			$this->mockRepository,
@@ -156,12 +169,13 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 				$this->mockRepository,
 				$this->getPermissionChecker(),
 				$summaryFormatter,
-				$this->getMockEditFilterHookRunner(),
+				$editFilterHookRunner,
 				$this->mockRepository,
 				$this->getMockEntityTitleLookup()
 			),
 			$this->getEntityTitleLookup(),
-			MediaWikiServices::getInstance()->getPermissionManager()
+			MediaWikiServices::getInstance()->getPermissionManager(),
+			$editFilterHookRunner
 		);
 
 		return $interactor;
@@ -455,16 +469,42 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	public function testSetRedirect_noPermission() {
+	public function testMergeItems_noPermission() {
 		$this->expectException( ItemMergeException::class );
 
-		$user = User::newFromName( 'UserWithoutPermission' );
+		$user = User::newFromName( self::USER_NAME_WITHOUT_PERMISSION );
 
 		$fromId = new ItemId( 'Q1' );
 		$toId = new ItemId( 'Q2' );
 
 		$interactor = $this->newInteractor();
 		$interactor->mergeItems( $fromId, $toId, $this->getContext( $user ) );
+	}
+
+	public function testMergeItems_editFilter(): void {
+		$user = $this->getServiceContainer()->getUserFactory()
+			->newFromName( self::USER_NAME_WITH_EDIT_FILTER );
+		$fromId = new ItemId( 'Q1' );
+		$toId = new ItemId( 'Q2' );
+		$interactor = $this->newInteractor();
+
+		$this->expectException( ItemMergeException::class );
+		$interactor->mergeItems( $fromId, $toId, $this->getContext( $user ) );
+	}
+
+	public function testMergeItems_rateLimit(): void {
+		$rateLimiter = $this->createConfiguredMock( RateLimiter::class, [
+			'isLimitable' => true,
+			'limit' => true, // limit was exceeded
+		] );
+		$this->setService( 'RateLimiter', $rateLimiter );
+
+		$fromId = new ItemId( 'Q1' );
+		$toId = new ItemId( 'Q2' );
+		$interactor = $this->newInteractor();
+
+		$this->expectException( ItemMergeException::class );
+		$interactor->mergeItems( $fromId, $toId, $this->getContext() );
 	}
 
 	private function extractConcreteRevisionId( LatestRevisionIdResult $result ) {
