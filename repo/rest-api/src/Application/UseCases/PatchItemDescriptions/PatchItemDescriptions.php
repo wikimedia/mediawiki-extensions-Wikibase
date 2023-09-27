@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions;
 
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
@@ -18,6 +17,7 @@ use Wikibase\Repo\RestApi\Domain\Services\JsonPatcher;
  */
 class PatchItemDescriptions {
 
+	private PatchItemDescriptionsValidator $requestValidator;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
 	private ItemDescriptionsRetriever $descriptionsRetriever;
 	private DescriptionsSerializer $descriptionsSerializer;
@@ -27,6 +27,7 @@ class PatchItemDescriptions {
 	private ItemUpdater $itemUpdater;
 
 	public function __construct(
+		PatchItemDescriptionsValidator $requestValidator,
 		AssertUserIsAuthorized $assertUserIsAuthorized,
 		ItemDescriptionsRetriever $descriptionsRetriever,
 		DescriptionsSerializer $descriptionsSerializer,
@@ -35,6 +36,7 @@ class PatchItemDescriptions {
 		DescriptionsDeserializer $descriptionsDeserializer,
 		ItemUpdater $itemUpdater
 	) {
+		$this->requestValidator = $requestValidator;
 		$this->assertUserIsAuthorized = $assertUserIsAuthorized;
 		$this->descriptionsRetriever = $descriptionsRetriever;
 		$this->descriptionsSerializer = $descriptionsSerializer;
@@ -45,19 +47,21 @@ class PatchItemDescriptions {
 	}
 
 	public function execute( PatchItemDescriptionsRequest $request ): PatchItemDescriptionsResponse {
-		// T346771 - validate user input
-
-		$itemId = new ItemId( $request->getItemId() );
+		$deserializedRequest = $this->requestValidator->validateAndDeserialize( $request );
+		$itemId = $deserializedRequest->getItemId();
 
 		// T346774 - check if item not found or redirected
-		$this->assertUserIsAuthorized->execute( $itemId, $request->getUsername() );
+		$this->assertUserIsAuthorized->execute( $itemId, $deserializedRequest->getEditMetadata()->getUser()->getUsername() );
 
 		$descriptions = $this->descriptionsRetriever->getDescriptions( $itemId );
 		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
 		$serialization = $this->descriptionsSerializer->serialize( $descriptions );
 
 		// T346772 - handle errors during patching
-		$patchedDescriptions = $this->patcher->patch( iterator_to_array( $serialization ), $request->getPatch() );
+		$patchedDescriptions = $this->patcher->patch(
+			iterator_to_array( $serialization ),
+			$deserializedRequest->getPatch()
+		);
 
 		// T346773 - validate the patched descriptions
 		$modifiedDescriptions = $this->descriptionsDeserializer->deserialize( $patchedDescriptions );
@@ -66,9 +70,13 @@ class PatchItemDescriptions {
 		$item->getFingerprint()->setDescriptions( $modifiedDescriptions );
 
 		$editMetadata = new EditMetadata(
-			$request->getEditTags(),
-			$request->isBot(),
-			DescriptionsEditSummary::newPatchSummary( $request->getComment(), $originalDescriptions, $modifiedDescriptions )
+			$deserializedRequest->getEditMetadata()->getTags(),
+			$deserializedRequest->getEditMetadata()->isBot(),
+			DescriptionsEditSummary::newPatchSummary(
+				$deserializedRequest->getEditMetadata()->getComment(),
+				$originalDescriptions,
+				$modifiedDescriptions
+			)
 		);
 
 		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable

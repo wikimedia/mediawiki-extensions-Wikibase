@@ -2,10 +2,15 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions;
 
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PatchRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\UseCaseRequest;
+
 /**
  * @license GPL-2.0-or-later
  */
-class PatchItemDescriptionsRequest {
+class PatchItemDescriptionsRequest implements UseCaseRequest, ItemIdRequest, PatchRequest, EditMetadataRequest {
 
 	private string $itemId;
 	private array $patch;

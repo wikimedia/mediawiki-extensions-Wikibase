@@ -12,7 +12,9 @@ use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptions;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptionsRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptionsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
@@ -50,6 +52,7 @@ class PatchItemDescriptionsTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
+		$this->validator = new TestValidatingRequestDeserializer();
 		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
 		$this->descriptionsRetriever = $this->createStub( ItemDescriptionsRetriever::class );
 		$this->descriptionsSerializer = new DescriptionsSerializer();
@@ -106,6 +109,18 @@ class PatchItemDescriptionsTest extends TestCase {
 		$this->assertSame( $response->getDescriptions(), $updatedItem->getDescriptions() );
 	}
 
+	public function testInvalidRequest_throwsException(): void {
+		$expectedException = new UseCaseException( 'invalid-description-patch-test' );
+		$this->validator = $this->createStub( PatchItemDescriptionsValidator::class );
+		$this->validator->method( 'validateAndDeserialize' )->willThrowException( $expectedException );
+		try {
+			$this->newUseCase()->execute( $this->createStub( PatchItemDescriptionsRequest::class ) );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
 	public function testGivenEditIsUnauthorized_throwsUseCaseError(): void {
 		$itemId = new ItemId( 'Q123' );
 
@@ -127,6 +142,7 @@ class PatchItemDescriptionsTest extends TestCase {
 
 	private function newUseCase(): PatchItemDescriptions {
 		return new PatchItemDescriptions(
+			$this->validator,
 			$this->assertUserIsAuthorized,
 			$this->descriptionsRetriever,
 			$this->descriptionsSerializer,
