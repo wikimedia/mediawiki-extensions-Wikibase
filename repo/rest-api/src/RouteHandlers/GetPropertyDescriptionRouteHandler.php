@@ -2,13 +2,18 @@
 
 namespace Wikibase\Repo\RestApi\RouteHandlers;
 
+use MediaWiki\Rest\RequestInterface;
 use MediaWiki\Rest\Response;
+use MediaWiki\Rest\ResponseInterface;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescription\GetPropertyDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescription\GetPropertyDescriptionRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescription\GetPropertyDescriptionResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -21,18 +26,46 @@ class GetPropertyDescriptionRouteHandler extends SimpleHandler {
 	private const LANGUAGE_CODE_PATH_PARAM = 'language_code';
 
 	private GetPropertyDescription $useCase;
+	private MiddlewareHandler $middlewareHandler;
 	private ResponseFactory $responseFactory;
 
-	public function __construct( GetPropertyDescription $useCase, ResponseFactory $responseFactory ) {
+	public function __construct(
+		GetPropertyDescription $useCase,
+		MiddlewareHandler $middlewareHandler,
+		ResponseFactory $responseFactory
+	) {
 		$this->useCase = $useCase;
+		$this->middlewareHandler = $middlewareHandler;
 		$this->responseFactory = $responseFactory;
 	}
 
 	public static function factory(): self {
-		return new self( WbRestApi::getGetPropertyDescription(), new ResponseFactory() );
+		return new self(
+			WbRestApi::getGetPropertyDescription(),
+			new MiddlewareHandler( [
+				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
+				new UserAgentCheckMiddleware(),
+				new AuthenticationMiddleware(),
+				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
+					fn( RequestInterface $request ): string => $request->getPathParam( self::PROPERTY_ID_PATH_PARAM )
+				),
+			] ),
+			new ResponseFactory()
+		);
 	}
 
-	public function run( string $propertyId, string $languageCode ): Response {
+	public function needsWriteAccess(): bool {
+		return false;
+	}
+
+	/**
+	 * @param mixed ...$args
+	 */
+	public function run( ...$args ): Response {
+		return $this->middlewareHandler->run( $this, [ $this, 'runUseCase' ], $args );
+	}
+
+	public function runUseCase( string $propertyId, string $languageCode ): Response {
 		try {
 			return $this->newSuccessHttpResponse(
 				$this->useCase->execute( new GetPropertyDescriptionRequest( $propertyId, $languageCode ) )
@@ -69,6 +102,15 @@ class GetPropertyDescriptionRouteHandler extends SimpleHandler {
 
 	private function setEtagFromRevId( Response $response, int $revId ): void {
 		$response->setHeader( 'ETag', "\"$revId\"" );
+	}
+
+	/**
+	 * Preconditions are checked via {@link PreconditionMiddleware}
+	 *
+	 * @inheritDoc
+	 */
+	public function checkPreconditions(): ?ResponseInterface {
+		return null;
 	}
 
 }

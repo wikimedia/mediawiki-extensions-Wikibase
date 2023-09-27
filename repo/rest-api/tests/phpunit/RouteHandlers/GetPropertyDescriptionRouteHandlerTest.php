@@ -4,10 +4,12 @@ namespace Wikibase\Repo\Tests\RestApi\RouteHandlers;
 
 use Generator;
 use MediaWiki\Rest\Handler;
+use MediaWiki\Rest\Reporter\ErrorReporter;
 use MediaWiki\Rest\RequestData;
 use MediaWiki\Rest\Response;
 use MediaWiki\Tests\Rest\Handler\HandlerTestTrait;
 use MediaWikiIntegrationTestCase;
+use RuntimeException;
 use Throwable;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescription\GetPropertyDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescription\GetPropertyDescriptionResponse;
@@ -25,6 +27,12 @@ use Wikibase\Repo\RestApi\RouteHandlers\GetPropertyDescriptionRouteHandler;
 class GetPropertyDescriptionRouteHandlerTest extends MediaWikiIntegrationTestCase {
 
 	use HandlerTestTrait;
+	use RestHandlerTestUtilsTrait;
+
+	protected function setUp(): void {
+		parent::setUp();
+		$this->setMockPreconditionMiddlewareFactory();
+	}
 
 	public function testValidSuccessHttpResponse(): void {
 		$descriptionText = 'test description';
@@ -59,6 +67,7 @@ class GetPropertyDescriptionRouteHandlerTest extends MediaWikiIntegrationTestCas
 		$useCase->method( 'execute' )->willThrowException( $exception );
 
 		$this->setService( 'WbRestApi.GetPropertyDescription', $useCase );
+		$this->setService( 'WbRestApi.ErrorReporter', $this->createStub( ErrorReporter::class ) );
 
 		/** @var Response $response */
 		$response = $this->newHandlerWithValidRequest()->execute();
@@ -73,6 +82,14 @@ class GetPropertyDescriptionRouteHandlerTest extends MediaWikiIntegrationTestCas
 			new UseCaseError( UseCaseError::PROPERTY_NOT_FOUND, 'Could not find a property with the ID: P321' ),
 			UseCaseError::PROPERTY_NOT_FOUND,
 		];
+		yield 'Unexpected Error' => [ new RuntimeException(), UseCaseError::UNEXPECTED_ERROR ];
+	}
+
+	public function testReadWriteAccess(): void {
+		$routeHandler = $this->newHandlerWithValidRequest();
+
+		$this->assertTrue( $routeHandler->needsReadAccess() );
+		$this->assertFalse( $routeHandler->needsWriteAccess() );
 	}
 
 	private function newHandlerWithValidRequest(): Handler {
