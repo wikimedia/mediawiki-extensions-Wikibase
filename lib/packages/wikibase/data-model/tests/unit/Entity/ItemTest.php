@@ -391,8 +391,6 @@ class ItemTest extends \PHPUnit\Framework\TestCase {
 		$this->assertFalse( $original->getSiteLinkList()->isEmpty() );
 	}
 
-	// Below are tests copied from EntityTest
-
 	public static function labelProvider() {
 		return [
 			[ 'en', 'spam' ],

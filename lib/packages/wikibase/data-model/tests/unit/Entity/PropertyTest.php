@@ -265,8 +265,6 @@ class PropertyTest extends \PHPUnit\Framework\TestCase {
 		$this->assertTrue( $originalStatement->getReferences()->isEmpty() );
 	}
 
-	// Below are tests copied from EntityTest
-
 	public static function labelProvider() {
 		return [
 			[ 'en', 'spam' ],

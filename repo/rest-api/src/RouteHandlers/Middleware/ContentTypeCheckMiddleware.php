@@ -37,7 +37,6 @@ class ContentTypeCheckMiddleware implements Middleware {
 		return $runNext();
 	}
 
-	// use the helper trait if Ie8650198c4afde4721da78ca506548f32732765d gets merged
 	private function getContentType( RequestInterface $request ): string {
 		list( $ct ) = explode( ';', $request->getHeaderLine( 'Content-Type' ), 2 );
 

@@ -12,7 +12,6 @@
 		<exclude name="MediaWiki.Commenting.FunctionComment.ParamNameNoMatch" />
 		<exclude name="MediaWiki.Commenting.FunctionComment.SpacingAfterParamName" />
 		<exclude name="MediaWiki.Commenting.FunctionComment.SpacingAfterParamType" />
-		<exclude name="MediaWiki.Commenting.FunctionComment.WrongStyle" />
 		<exclude name="MediaWiki.Commenting.PropertyDocumentation.MissingDocumentationPrivate" />
 		<exclude name="MediaWiki.Usage.StaticClosure.StaticClosure" />
 	</rule>

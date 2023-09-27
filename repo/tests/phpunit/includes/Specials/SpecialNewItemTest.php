@@ -76,10 +76,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 		);
 	}
 
-	//TODO: Add test testing site link addition
-
 	public function testAllNecessaryFormFieldsArePresent_WhenRendered() {
-
 		list( $html ) = $this->executeSpecialPage();
 
 		$this->assertHtmlContainsInputWithName( $html, SpecialNewItem::FIELD_LANG );
