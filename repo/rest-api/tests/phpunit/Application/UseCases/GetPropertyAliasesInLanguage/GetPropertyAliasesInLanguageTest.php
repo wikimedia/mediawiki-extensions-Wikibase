@@ -67,6 +67,27 @@ class GetPropertyAliasesInLanguageTest extends TestCase {
 		}
 	}
 
+	public function testGivenLanguageCodeWithNoAliasesFor_throwsUseCaseError(): void {
+		$propertyId = 'P123';
+		$languageCode = 'en';
+
+		$this->getRevisionMetadata = $this->createStub( GetLatestPropertyRevisionMetadata::class );
+		$this->getRevisionMetadata->method( 'execute' )->willReturn( [ 123, '20230927070707' ] );
+
+		try {
+			$this->newUseCase()->execute( new GetPropertyAliasesInLanguageRequest( $propertyId, $languageCode ) );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertEquals(
+				new UseCaseError(
+					UseCaseError::ALIASES_NOT_DEFINED,
+					"Property with the ID $propertyId does not have aliases in the language: $languageCode"
+				),
+				$e
+			);
+		}
+	}
+
 	private function newUseCase(): GetPropertyAliasesInLanguage {
 		return new GetPropertyAliasesInLanguage( $this->getRevisionMetadata, $this->aliasesRetriever );
 	}

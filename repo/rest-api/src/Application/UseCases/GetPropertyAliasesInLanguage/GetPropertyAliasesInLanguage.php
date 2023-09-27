@@ -29,15 +29,19 @@ class GetPropertyAliasesInLanguage {
 	 */
 	public function execute( GetPropertyAliasesInLanguageRequest $request ): GetPropertyAliasesInLanguageResponse {
 		$propertyId = new NumericPropertyId( $request->getPropertyId() );
+		$languageCode = $request->getLanguageCode();
 
 		[ $revisionId, $lastModified ] = $this->getRevisionMetadata->execute( $propertyId );
 
-		return new GetPropertyAliasesInLanguageResponse(
-			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-			$this->propertyAliasesRetriever->getAliasesInLanguage( $propertyId, $request->getLanguageCode() ),
-			$lastModified,
-			$revisionId
-		);
+		$aliases = $this->propertyAliasesRetriever->getAliasesInLanguage( $propertyId, $languageCode );
+		if ( !$aliases ) {
+			throw new UseCaseError(
+				UseCaseError::ALIASES_NOT_DEFINED,
+				"Property with the ID $propertyId does not have aliases in the language: $languageCode"
+			);
+		}
+
+		return new GetPropertyAliasesInLanguageResponse( $aliases, $lastModified, $revisionId );
 	}
 
 }
