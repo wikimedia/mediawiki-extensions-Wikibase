@@ -26,6 +26,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetLatestPropertyRevisionMetadata
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestStatementSubjectRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetProperty;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyAliases\GetPropertyAliases;
+use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyAliasesInLanguage\GetPropertyAliasesInLanguage;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescription\GetPropertyDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescriptions\GetPropertyDescriptions;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabel\GetPropertyLabel;
@@ -308,6 +309,11 @@ class WbRestApi {
 	public static function getGetPropertyDescriptions( ContainerInterface $services = null ): GetPropertyDescriptions {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.GetPropertyDescriptions' );
+	}
+
+	public static function getGetPropertyAliasesInLanguage( ContainerInterface $services = null ): GetPropertyAliasesInLanguage {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.GetPropertyAliasesInLanguage' );
 	}
 
 	public static function getGetPropertyAliases( ContainerInterface $services = null ): GetPropertyAliases {
