@@ -17,6 +17,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchedLabelsVali
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
@@ -31,7 +32,6 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemLabelsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
-use Wikibase\Repo\RestApi\Domain\Services\JsonPatcher;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
@@ -49,7 +49,7 @@ class PatchItemLabelsTest extends TestCase {
 
 	private ItemLabelsRetriever $labelsRetriever;
 	private LabelsSerializer $labelsSerializer;
-	private JsonPatcher $patcher;
+	private PatchJson $patcher;
 	private PatchedLabelsValidator $patchedLabelsValidator;
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
@@ -62,7 +62,7 @@ class PatchItemLabelsTest extends TestCase {
 
 		$this->labelsRetriever = $this->createStub( ItemLabelsRetriever::class );
 		$this->labelsSerializer = new LabelsSerializer();
-		$this->patcher = new JsonDiffJsonPatcher();
+		$this->patcher = new PatchJson( new JsonDiffJsonPatcher() );
 		$this->patchedLabelsValidator = new PatchedLabelsValidator(
 			new LabelsDeserializer(),
 			$this->createStub( ItemLabelValidator::class ),

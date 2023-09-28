@@ -63,6 +63,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDe
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchedLabelsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyStatement\PatchPropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchedStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatement;
@@ -501,7 +502,7 @@ return [
 			WbRestApi::getAssertUserIsAuthorized( $services ),
 			WbRestApi::getTermLookupEntityTermsRetriever( $services ),
 			new DescriptionsSerializer(),
-			new JsonDiffJsonPatcher(),
+			new PatchJson( new JsonDiffJsonPatcher() ),
 			WbRestApi::getItemDataRetriever( $services ),
 			new PatchedDescriptionsValidator(
 				new DescriptionsDeserializer(),
@@ -521,7 +522,7 @@ return [
 			WbRestApi::getAssertItemExists( $services ),
 			WbRestApi::getTermLookupEntityTermsRetriever( $services ),
 			new LabelsSerializer(),
-			new JsonDiffJsonPatcher(),
+			new PatchJson( new JsonDiffJsonPatcher() ),
 			new PatchedLabelsValidator(
 				new LabelsDeserializer(),
 				new WikibaseRepoItemLabelValidator(
@@ -558,7 +559,7 @@ return [
 		return new PatchStatement(
 			WbRestApi::getValidatingRequestDeserializer( $services ),
 			new PatchedStatementValidator( new StatementValidator( WbRestApi::getStatementDeserializer( $services ) ) ),
-			new JsonDiffJsonPatcher(),
+			new PatchJson( new JsonDiffJsonPatcher() ),
 			WbRestApi::getSerializerFactory( $services )->newStatementSerializer(),
 			WbRestApi::getAssertStatementSubjectExists( $services ),
 			WbRestApi::getStatementRetriever( $services ),

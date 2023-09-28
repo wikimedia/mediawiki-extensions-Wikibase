@@ -7,12 +7,10 @@ use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertStatementSubjectExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
-use Wikibase\Repo\RestApi\Domain\Services\Exceptions\PatchPathException;
-use Wikibase\Repo\RestApi\Domain\Services\Exceptions\PatchTestConditionFailedException;
-use Wikibase\Repo\RestApi\Domain\Services\JsonPatcher;
 use Wikibase\Repo\RestApi\Domain\Services\StatementRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\StatementUpdater;
 
@@ -23,7 +21,7 @@ class PatchStatement {
 
 	private PatchStatementValidator $useCaseValidator;
 	private PatchedStatementValidator $patchedStatementValidator;
-	private JsonPatcher $jsonPatcher;
+	private PatchJson $jsonPatcher;
 	private StatementSerializer $statementSerializer;
 	private AssertStatementSubjectExists $assertStatementSubjectExists;
 	private StatementRetriever $statementRetriever;
@@ -33,7 +31,7 @@ class PatchStatement {
 	public function __construct(
 		PatchStatementValidator $useCaseValidator,
 		PatchedStatementValidator $patchedStatementValidator,
-		JsonPatcher $jsonPatcher,
+		PatchJson $jsonPatcher,
 		StatementSerializer $statementSerializer,
 		AssertStatementSubjectExists $assertStatementSubjectExists,
 		StatementRetriever $statementRetriever,
@@ -74,25 +72,7 @@ class PatchStatement {
 
 		$serialization = $this->statementSerializer->serialize( $statementToPatch );
 
-		try {
-			$patchedSerialization = $this->jsonPatcher->patch( $serialization, $deserializedRequest->getPatch() );
-		} catch ( PatchPathException $e ) {
-			throw new UseCaseError(
-				UseCaseError::PATCH_TARGET_NOT_FOUND,
-				"Target '{$e->getOperation()[$e->getField()]}' not found on the resource",
-				[ UseCaseError::CONTEXT_OPERATION => $e->getOperation(), UseCaseError::CONTEXT_FIELD => $e->getField() ]
-			);
-		} catch ( PatchTestConditionFailedException $e ) {
-			$operation = $e->getOperation();
-			throw new UseCaseError(
-				UseCaseError::PATCH_TEST_FAILED,
-				'Test operation in the provided patch failed. ' .
-				"At path '" . $operation['path'] .
-				"' expected '" . json_encode( $operation['value'] ) .
-				"', actual: '" . json_encode( $e->getActualValue() ) . "'",
-				[ UseCaseError::CONTEXT_OPERATION => $operation, UseCaseError::CONTEXT_ACTUAL_VALUE => $e->getActualValue() ]
-			);
-		}
+		$patchedSerialization = $this->jsonPatcher->execute( $serialization, $deserializedRequest->getPatch() );
 
 		$patchedStatement = $this->patchedStatementValidator->validateAndDeserializeStatement( $patchedSerialization );
 

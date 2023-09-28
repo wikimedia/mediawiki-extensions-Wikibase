@@ -17,6 +17,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchedDesc
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptions;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptionsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptionsValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
@@ -31,7 +32,6 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemDescriptionsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
-use Wikibase\Repo\RestApi\Domain\Services\JsonPatcher;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
@@ -52,7 +52,7 @@ class PatchItemDescriptionsTest extends TestCase {
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
 	private ItemDescriptionsRetriever $descriptionsRetriever;
 	private DescriptionsSerializer $descriptionsSerializer;
-	private JsonPatcher $patcher;
+	private PatchJson $patcher;
 	private ItemRetriever $itemRetriever;
 	private PatchedDescriptionsValidator $patchedDescriptionsValidator;
 	private ItemUpdater $itemUpdater;
@@ -65,7 +65,7 @@ class PatchItemDescriptionsTest extends TestCase {
 		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
 		$this->descriptionsRetriever = $this->createStub( ItemDescriptionsRetriever::class );
 		$this->descriptionsSerializer = new DescriptionsSerializer();
-		$this->patcher = new JsonDiffJsonPatcher();
+		$this->patcher = new PatchJson( new JsonDiffJsonPatcher() );
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->patchedDescriptionsValidator = new PatchedDescriptionsValidator(
 			new DescriptionsDeserializer(),
