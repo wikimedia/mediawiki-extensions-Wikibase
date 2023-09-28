@@ -64,7 +64,10 @@ class ItemId extends SerializableEntityId implements Int32EntityId {
 	}
 
 	public function __unserialize( array $data ): void {
-		$this->serialization = $data['serialization'];
+		$this->__construct( $data['serialization'] );
+		if ( $this->serialization !== $data['serialization'] ) {
+			throw new InvalidArgumentException( '$data contained invalid serialization' );
+		}
 	}
 
 	/**
