@@ -11,6 +11,7 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Tests\Rest\Handler\HandlerTestTrait;
 use MediaWikiIntegrationTestCase;
 use RuntimeException;
+use Throwable;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatement;
@@ -51,6 +52,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetProperty
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetPropertyStatementsResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptions;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptionsResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
@@ -151,25 +153,28 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider routeHandlersProvider
 	 */
 	public function testHandlesUnexpectedErrors( array $routeHandler ): void {
-		$useCase = $this->createStub( $routeHandler['useCase'] );
-		$useCase->method( 'execute' )->willThrowException( new RuntimeException() );
-		$useCaseName = $this->getUseCaseName( $routeHandler['useCase'] );
+		$response = $this->getHttpResponseForThrowingUseCase( $routeHandler, new RuntimeException() );
 
-		$this->setService( "WbRestApi.$useCaseName", $useCase );
-		$this->setService( 'WbRestApi.ErrorReporter', $this->createStub( ErrorReporter::class ) );
-
-		/** @var Response $response */
-		$response = $this->newHandlerWithValidRequest(
-			$this->getRouteForUseCase( $routeHandler['useCase'] ),
-			$routeHandler['validRequest']
-		)->execute();
-
-		$this->assertSame( [ 'en' ], $response->getHeader( 'Content-Language' ) );
 		$this->assertSame( UseCaseError::UNEXPECTED_ERROR, json_decode( $response->getBody()->getContents() )->code );
+		$this->assertSame( [ 'en' ], $response->getHeader( 'Content-Language' ) );
+	}
+
+	/**
+	 * @dataProvider routeHandlersProvider
+	 */
+	public function testHandlesExpectedExceptions( array $routeHandler ): void {
+		foreach ( $routeHandler['expectedExceptions'] as [ $error, $assertExpectedResponse ] ) {
+			$assertExpectedResponse( $this->getHttpResponseForThrowingUseCase( $routeHandler, $error ) );
+		}
 	}
 
 	public function routeHandlersProvider(): Generator {
 		$lastModified = '20230731042031';
+		$hasHttpStatus = fn( int $status ) => fn( Response $r ) => $this->assertSame( $status, $r->getStatusCode() );
+		$hasErrorCode = fn ( string $errorCode ) => function ( Response $response ) use ( $errorCode ): void {
+			$this->assertSame( $errorCode, json_decode( $response->getBody()->getContents() )->code );
+			$this->assertSame( [ 'en' ], $response->getHeader( 'Content-Language' ) );
+		}; // phpcs:ignore -- phpcs doesn't like the semicolon here, but it's very much needed.
 
 		// phpcs:disable Generic.Arrays.ArrayIndent.CloseBraceNotNewLine
 		yield 'AddItemStatement' => [ [
@@ -179,6 +184,13 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 				'pathParams' => [ 'item_id' => 'Q1' ],
 				'bodyContents' => [ 'statement' => $this->noValueStatementSerialization() ],
 			],
+			'expectedExceptions' => [
+				[
+					new UseCaseError( UseCaseError::INVALID_ITEM_ID, '' ),
+					$hasErrorCode ( UseCaseError::INVALID_ITEM_ID ),
+				],
+				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::ITEM_REDIRECTED ) ],
+			],
 		] ];
 		yield 'AddPropertyStatement' => [ [
 			'useCase' => AddPropertyStatement::class,
@@ -187,6 +199,10 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 				'pathParams' => [ 'property_id' => 'P1' ],
 				'bodyContents' => [ 'statement' => $this->noValueStatementSerialization() ],
 			],
+			'expectedExceptions' => [ [
+				new UseCaseError( UseCaseError::INVALID_STATEMENT_ID, '' ),
+				$hasErrorCode( UseCaseError::INVALID_STATEMENT_ID ),
+			] ],
 		] ];
 		yield 'GetItemAliasesInLanguage' => [ [
 			'useCase' => GetItemAliasesInLanguage::class,
@@ -196,11 +212,25 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 				123
 			),
 			'validRequest' => [ 'pathParams' => [ 'item_id' => 'Q1', 'language_code' => 'en' ] ],
+			'expectedExceptions' => [
+				[
+					new UseCaseError( UseCaseError::ALIASES_NOT_DEFINED, '' ),
+					$hasErrorCode ( UseCaseError::ALIASES_NOT_DEFINED ),
+				],
+				[ new ItemRedirect( 'Q123' ), $hasHttpStatus( 308 ) ],
+			],
 		] ];
 		yield 'GetItemAliases' => [ [
 			'useCase' => GetItemAliases::class,
 			'useCaseResponse' => new GetItemAliasesResponse( new Aliases(), $lastModified, 123 ),
 			'validRequest' => [ 'pathParams' => [ 'item_id' => 'Q1' ] ],
+			'expectedExceptions' => [
+				[
+					new UseCaseError( UseCaseError::INVALID_ITEM_ID, '' ),
+					$hasErrorCode ( UseCaseError::INVALID_ITEM_ID ),
+				],
+				[ new ItemRedirect( 'Q123' ), $hasHttpStatus( 308 ) ],
+			],
 		] ];
 		yield 'GetItemDescription' => [ [
 			'useCase' => GetItemDescription::class,
@@ -210,11 +240,25 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 				123
 			),
 			'validRequest' => [ 'pathParams' => [ 'item_id' => 'Q1', 'language_code' => 'en' ] ],
+			'expectedExceptions' => [
+				[
+					new UseCaseError( UseCaseError::INVALID_ITEM_ID, '' ),
+					$hasErrorCode ( UseCaseError::INVALID_ITEM_ID ),
+				],
+				[ new ItemRedirect( 'Q123' ), $hasHttpStatus( 308 ) ],
+			],
 		] ];
 		yield 'GetItemDescriptions' => [ [
 			'useCase' => GetItemDescriptions::class,
 			'useCaseResponse' => new GetItemDescriptionsResponse( new Descriptions(), $lastModified, 123 ),
 			'validRequest' => [ 'pathParams' => [ 'item_id' => 'Q1' ] ],
+			'expectedExceptions' => [
+				[
+					new UseCaseError( UseCaseError::INVALID_ITEM_ID, '' ),
+					$hasErrorCode ( UseCaseError::INVALID_ITEM_ID ),
+				],
+				[ new ItemRedirect( 'Q123' ), $hasHttpStatus( 308 ) ],
+			],
 		] ];
 		yield 'GetItemLabel' => [ [
 			'useCase' => GetItemLabel::class,
@@ -224,11 +268,25 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 				123
 			),
 			'validRequest' => [ 'pathParams' => [ 'item_id' => 'Q1', 'language_code' => 'en' ] ],
+			'expectedExceptions' => [
+				[
+					new UseCaseError( UseCaseError::INVALID_ITEM_ID, '' ),
+					$hasErrorCode ( UseCaseError::INVALID_ITEM_ID ),
+				],
+				[ new ItemRedirect( 'Q123' ), $hasHttpStatus( 308 ) ],
+			],
 		] ];
 		yield 'GetItemLabels' => [ [
 			'useCase' => GetItemLabels::class,
 			'useCaseResponse' => new GetItemLabelsResponse( new Labels(), $lastModified, 123 ),
 			'validRequest' => [ 'pathParams' => [ 'item_id' => 'Q1' ] ],
+			'expectedExceptions' => [
+				[
+					new UseCaseError( UseCaseError::INVALID_ITEM_ID, '' ),
+					$hasErrorCode ( UseCaseError::INVALID_ITEM_ID ),
+				],
+				[ new ItemRedirect( 'Q123' ), $hasHttpStatus( 308 ) ],
+			],
 		] ];
 		yield 'GetItem' => [ [
 			'useCase' => GetItem::class,
@@ -238,21 +296,46 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 				123
 			),
 			'validRequest' => [ 'pathParams' => [ 'item_id' => 'Q1' ] ],
+			'expectedExceptions' => [
+				[
+					new UseCaseError( UseCaseError::INVALID_ITEM_ID, '' ),
+					$hasErrorCode ( UseCaseError::INVALID_ITEM_ID ),
+				],
+				[ new ItemRedirect( 'Q123' ), $hasHttpStatus( 308 ) ],
+			],
 		] ];
 		yield 'GetItemStatement' => [ [
 			'useCase' => GetItemStatement::class,
 			'useCaseResponse' => new GetStatementResponse( $this->noValueStatementReadModel(), $lastModified, 123 ),
 			'validRequest' => [ 'pathParams' => [ 'item_id' => 'Q1', 'statement_id' => 'Q1$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' ] ],
+			'expectedExceptions' => [
+				[
+					new UseCaseError( UseCaseError::INVALID_STATEMENT_ID, '' ),
+					$hasErrorCode ( UseCaseError::INVALID_STATEMENT_ID ),
+				],
+				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::STATEMENT_NOT_FOUND ) ],
+			],
 		] ];
 		yield 'GetItemStatements' => [ [
 			'useCase' => GetItemStatements::class,
 			'useCaseResponse' => new GetItemStatementsResponse( new StatementList(), $lastModified, 123 ),
 			'validRequest' => [ 'pathParams' => [ 'item_id' => 'Q1' ] ],
+			'expectedExceptions' => [
+				[
+					new UseCaseError( UseCaseError::INVALID_ITEM_ID, '' ),
+					$hasErrorCode ( UseCaseError::INVALID_ITEM_ID ),
+				],
+				[ new ItemRedirect( 'Q123' ), $hasHttpStatus( 308 ) ],
+			],
 		] ];
 		yield 'GetPropertyAliases' => [ [
 			'useCase' => GetPropertyAliases::class,
 			'useCaseResponse' => new GetPropertyAliasesResponse( new Aliases(), $lastModified, 123 ),
 			'validRequest' => [ 'pathParams' => [ 'property_id' => 'P1' ] ],
+			'expectedExceptions' => [ [
+				new UseCaseError( UseCaseError::PROPERTY_NOT_FOUND, '' ),
+				$hasErrorCode( UseCaseError::PROPERTY_NOT_FOUND ),
+			] ],
 		] ];
 		yield 'GetPropertyAliasesInLanguage' => [ [
 			'useCase' => GetPropertyAliasesInLanguage::class,
@@ -262,21 +345,37 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 				123
 			),
 			'validRequest' => [ 'pathParams' => [ 'property_id' => 'P1', 'language_code' => 'en' ] ],
+			'expectedExceptions' => [ [
+				new UseCaseError( UseCaseError::PROPERTY_NOT_FOUND, '' ),
+				$hasErrorCode( UseCaseError::PROPERTY_NOT_FOUND ),
+			] ],
 		] ];
 		yield 'GetPropertyDescriptions' => [ [
 			'useCase' => GetPropertyDescriptions::class,
 			'useCaseResponse' => new GetPropertyDescriptionsResponse( new Descriptions(), $lastModified, 123 ),
 			'validRequest' => [ 'pathParams' => [ 'property_id' => 'P1' ] ],
+			'expectedExceptions' => [ [
+				new UseCaseError( UseCaseError::PROPERTY_NOT_FOUND, '' ),
+				$hasErrorCode( UseCaseError::PROPERTY_NOT_FOUND ),
+			] ],
 		] ];
 		yield 'GetPropertyLabel' => [ [
 			'useCase' => GetPropertyLabel::class,
 			'useCaseResponse' => new GetPropertyLabelResponse( new Label( 'en', 'instance of' ), $lastModified, 123 ),
 			'validRequest' => [ 'pathParams' => [ 'property_id' => 'P1', 'language_code' => 'en' ] ],
+			'expectedExceptions' => [ [
+				new UseCaseError( UseCaseError::PROPERTY_NOT_FOUND, '' ),
+				$hasErrorCode( UseCaseError::PROPERTY_NOT_FOUND ),
+			] ],
 		] ];
 		yield 'GetPropertyLabels' => [ [
 			'useCase' => GetPropertyLabels::class,
 			'useCaseResponse' => new GetPropertyLabelsResponse( new Labels(), $lastModified, 123 ),
 			'validRequest' => [ 'pathParams' => [ 'property_id' => 'P1' ] ],
+			'expectedExceptions' => [ [
+				new UseCaseError( UseCaseError::PROPERTY_NOT_FOUND, '' ),
+				$hasErrorCode( UseCaseError::PROPERTY_NOT_FOUND ),
+			] ],
 		] ];
 		yield 'GetProperty' => [ [
 			'useCase' => GetProperty::class,
@@ -286,21 +385,40 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 				123
 			),
 			'validRequest' => [ 'pathParams' => [ 'property_id' => 'P1' ] ],
+			'expectedExceptions' => [ [
+				new UseCaseError( UseCaseError::PROPERTY_NOT_FOUND, '' ),
+				$hasErrorCode( UseCaseError::PROPERTY_NOT_FOUND ),
+			] ],
 		] ];
 		yield 'GetPropertyStatement' => [ [
 			'useCase' => GetPropertyStatement::class,
 			'useCaseResponse' => new GetStatementResponse( $this->noValueStatementReadModel(), $lastModified, 123 ),
 			'validRequest' => [ 'pathParams' => [ 'property_id' => 'P1', 'statement_id' => 'P1$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' ] ],
+			'expectedExceptions' => [ [
+				new UseCaseError( UseCaseError::INVALID_STATEMENT_ID, '' ),
+				$hasErrorCode( UseCaseError::INVALID_STATEMENT_ID ),
+			] ],
 		] ];
 		yield 'GetPropertyStatements' => [ [
 			'useCase' => GetPropertyStatements::class,
 			'useCaseResponse' => new GetPropertyStatementsResponse( new StatementList(), $lastModified, 123 ),
 			'validRequest' => [ 'pathParams' => [ 'property_id' => 'P1' ] ],
+			'expectedExceptions' => [ [
+				new UseCaseError( UseCaseError::PROPERTY_NOT_FOUND, '' ),
+				$hasErrorCode( UseCaseError::PROPERTY_NOT_FOUND ),
+			] ],
 		] ];
 		yield 'GetStatement' => [ [
 			'useCase' => GetStatement::class,
 			'useCaseResponse' => new GetStatementResponse( $this->noValueStatementReadModel(), $lastModified, 123 ),
 			'validRequest' => [ 'pathParams' => [ 'statement_id' => 'Q1$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' ] ],
+			'expectedExceptions' => [
+				[
+					new UseCaseError( UseCaseError::INVALID_STATEMENT_ID, '' ),
+					$hasErrorCode ( UseCaseError::INVALID_STATEMENT_ID ),
+				],
+				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::STATEMENT_NOT_FOUND ) ],
+			],
 		] ];
 		yield 'PatchItemLabels' => [ [
 			'useCase' => PatchItemLabels::class,
@@ -308,6 +426,13 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			'validRequest' => [
 				'pathParams' => [ 'item_id' => 'Q1' ],
 				'bodyContents' => [ 'patch' => [ [ 'op' => 'remove', 'path' => '/en' ] ] ],
+			],
+			'expectedExceptions' => [
+				[
+					new UseCaseError( UseCaseError::INVALID_ITEM_ID, '' ),
+					$hasErrorCode ( UseCaseError::INVALID_ITEM_ID ),
+				],
+				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::ITEM_REDIRECTED ) ],
 			],
 		] ];
 		yield 'PatchItemDescriptions' => [ [
@@ -317,6 +442,13 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 				'pathParams' => [ 'item_id' => 'Q1' ],
 				'bodyContents' => [ 'patch' => [ [ 'op' => 'remove', 'path' => '/en' ] ] ],
 			],
+			'expectedExceptions' => [
+				[
+					new UseCaseError( UseCaseError::INVALID_ITEM_ID, '' ),
+					$hasErrorCode ( UseCaseError::INVALID_ITEM_ID ),
+				],
+				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::ITEM_REDIRECTED ) ],
+			],
 		] ];
 		yield 'PatchItemStatement' => [ [
 			'useCase' => PatchItemStatement::class,
@@ -324,6 +456,13 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			'validRequest' => [
 				'pathParams' => [ 'item_id' => 'Q1', 'statement_id' => 'Q1$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' ],
 				'bodyContents' => [ 'patch' => [ [ 'op' => 'remove', 'path' => '/references' ] ] ],
+			],
+			'expectedExceptions' => [
+				[
+					new UseCaseError( UseCaseError::INVALID_STATEMENT_ID, '' ),
+					$hasErrorCode ( UseCaseError::INVALID_STATEMENT_ID ),
+				],
+				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::STATEMENT_NOT_FOUND ) ],
 			],
 		] ];
 		yield 'PatchPropertyStatement' => [ [
@@ -333,6 +472,10 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 				'pathParams' => [ 'property_id' => 'P1', 'statement_id' => 'P1$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' ],
 				'bodyContents' => [ 'patch' => [ [ 'op' => 'remove', 'path' => '/references' ] ] ],
 			],
+			'expectedExceptions' => [ [
+				new UseCaseError( UseCaseError::INVALID_STATEMENT_ID, '' ),
+				$hasErrorCode( UseCaseError::INVALID_STATEMENT_ID ),
+			] ],
 		] ];
 		yield 'PatchStatement' => [ [
 			'useCase' => PatchStatement::class,
@@ -340,6 +483,13 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			'validRequest' => [
 				'pathParams' => [ 'statement_id' => 'Q1$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' ],
 				'bodyContents' => [ 'patch' => [ [ 'op' => 'remove', 'path' => '/references' ] ] ],
+			],
+			'expectedExceptions' => [
+				[
+					new UseCaseError( UseCaseError::INVALID_STATEMENT_ID, '' ),
+					$hasErrorCode ( UseCaseError::INVALID_STATEMENT_ID ),
+				],
+				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::STATEMENT_NOT_FOUND ) ],
 			],
 		] ];
 		yield 'RemoveItemStatement' => [ [
@@ -349,6 +499,13 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 				'pathParams' => [ 'item_id' => 'Q1', 'statement_id' => 'Q1$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' ],
 				'bodyContents' => [],
 			],
+			'expectedExceptions' => [
+				[
+					new UseCaseError( UseCaseError::INVALID_STATEMENT_ID, '' ),
+					$hasErrorCode ( UseCaseError::INVALID_STATEMENT_ID ),
+				],
+				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::STATEMENT_NOT_FOUND ) ],
+			],
 		] ];
 		yield 'RemovePropertyStatement' => [ [
 			'useCase' => RemovePropertyStatement::class,
@@ -357,6 +514,10 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 				'pathParams' => [ 'property_id' => 'P1', 'statement_id' => 'P1$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' ],
 				'bodyContents' => [],
 			],
+			'expectedExceptions' => [ [
+				new UseCaseError( UseCaseError::INVALID_STATEMENT_ID, '' ),
+				$hasErrorCode( UseCaseError::INVALID_STATEMENT_ID ),
+			] ],
 		] ];
 		yield 'RemoveStatement' => [ [
 			'useCase' => RemoveStatement::class,
@@ -364,6 +525,13 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			'validRequest' => [
 				'pathParams' => [ 'statement_id' => 'P1$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' ],
 				'bodyContents' => [],
+			],
+			'expectedExceptions' => [
+				[
+					new UseCaseError( UseCaseError::INVALID_STATEMENT_ID, '' ),
+					$hasErrorCode ( UseCaseError::INVALID_STATEMENT_ID ),
+				],
+				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::STATEMENT_NOT_FOUND ) ],
 			],
 		] ];
 		yield 'ReplaceItemStatement' => [ [
@@ -373,6 +541,13 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 				'pathParams' => [ 'item_id' => 'Q1', 'statement_id' => 'Q1$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' ],
 				'bodyContents' => [ 'statement' => $this->noValueStatementSerialization() ],
 			],
+			'expectedExceptions' => [
+				[
+					new UseCaseError( UseCaseError::INVALID_STATEMENT_ID, '' ),
+					$hasErrorCode ( UseCaseError::INVALID_STATEMENT_ID ),
+				],
+				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::STATEMENT_NOT_FOUND ) ],
+			],
 		] ];
 		yield 'ReplacePropertyStatement' => [ [
 			'useCase' => ReplacePropertyStatement::class,
@@ -381,6 +556,10 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 				'pathParams' => [ 'property_id' => 'P1', 'statement_id' => 'P1$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' ],
 				'bodyContents' => [ 'statement' => $this->noValueStatementSerialization() ],
 			],
+			'expectedExceptions' => [ [
+				new UseCaseError( UseCaseError::INVALID_STATEMENT_ID, '' ),
+				$hasErrorCode( UseCaseError::INVALID_STATEMENT_ID ),
+			] ],
 		] ];
 		yield 'ReplaceStatement' => [ [
 			'useCase' => ReplaceStatement::class,
@@ -388,6 +567,13 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			'validRequest' => [
 				'pathParams' => [ 'statement_id' => 'P1$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' ],
 				'bodyContents' => [ 'statement' => $this->noValueStatementSerialization() ],
+			],
+			'expectedExceptions' => [
+				[
+					new UseCaseError( UseCaseError::INVALID_STATEMENT_ID, '' ),
+					$hasErrorCode ( UseCaseError::INVALID_STATEMENT_ID ),
+				],
+				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::STATEMENT_NOT_FOUND ) ],
 			],
 		] ];
 		yield 'SetItemLabel' => [ [
@@ -402,6 +588,13 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 				'pathParams' => [ 'item_id' => 'Q1', 'language_code' => 'en' ],
 				'bodyContents' => [ 'label' => 'potato' ],
 			],
+			'expectedExceptions' => [
+				[
+					new UseCaseError( UseCaseError::INVALID_ITEM_ID, '' ),
+					$hasErrorCode ( UseCaseError::INVALID_ITEM_ID ),
+				],
+				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::ITEM_REDIRECTED ) ],
+			],
 		] ];
 		yield 'SetItemDescription' => [ [
 			'useCase' => SetItemDescription::class,
@@ -414,6 +607,13 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			'validRequest' => [
 				'pathParams' => [ 'item_id' => 'Q1', 'language_code' => 'en' ],
 				'bodyContents' => [ 'description' => 'root vegetable' ],
+			],
+			'expectedExceptions' => [
+				[
+					new UseCaseError( UseCaseError::INVALID_ITEM_ID, '' ),
+					$hasErrorCode ( UseCaseError::INVALID_ITEM_ID ),
+				],
+				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::ITEM_REDIRECTED ) ],
 			],
 		] ];
 		// phpcs:enable
@@ -433,6 +633,19 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
+	private function getHttpResponseForThrowingUseCase( array $routeHandler, Throwable $error ): Response {
+		$useCase = $this->createStub( $routeHandler['useCase'] );
+		$useCase->method( 'execute' )->willThrowException( $error );
+
+		$this->setService( "WbRestApi.{$this->getUseCaseName( $routeHandler['useCase'] )}", $useCase );
+		$this->setService( 'WbRestApi.ErrorReporter', $this->createStub( ErrorReporter::class ) );
+
+		return $this->newHandlerWithValidRequest(
+			$this->getRouteForUseCase( $routeHandler['useCase'] ),
+			$routeHandler['validRequest']
+		)->execute();
+	}
+
 	private function newHandlerWithValidRequest( array $routeData, array $validRequest ): Handler {
 		$routeHandler = call_user_func( $routeData['factory'] );
 		$this->initHandler(
@@ -445,7 +658,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 				],
 				'pathParams' => $validRequest['pathParams'],
 				'bodyContents' => json_encode( $validRequest['bodyContents'] ?? null ),
-			] )
+			] ),
+			[ 'path' => $routeData['path'] ]
 		);
 		$this->validateHandler( $routeHandler );
 
