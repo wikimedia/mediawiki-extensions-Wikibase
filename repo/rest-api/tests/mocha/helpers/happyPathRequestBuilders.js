@@ -23,8 +23,9 @@ module.exports.getRequestsOnProperty = [
 	( { propertyId } ) => rbf.newGetPropertyLabelsRequestBuilder( propertyId ),
 	( { propertyId } ) => rbf.newGetPropertyDescriptionsRequestBuilder( propertyId ),
 	( { propertyId } ) => rbf.newGetPropertyDescriptionRequestBuilder( propertyId, 'en' ),
-	( { propertyId } ) => rbf.newGetPropertyStatementsRequestBuilder( propertyId ),
 	( { propertyId } ) => rbf.newGetPropertyAliasesRequestBuilder( propertyId ),
+	( { propertyId } ) => rbf.newGetPropertyAliasesInLanguageRequestBuilder( propertyId, 'en' ),
+	( { propertyId } ) => rbf.newGetPropertyStatementsRequestBuilder( propertyId ),
 	( { statementId } ) => rbf.newGetStatementRequestBuilder( statementId ),
 	( { propertyId, statementId } ) => rbf.newGetPropertyStatementRequestBuilder( propertyId, statementId )
 ];
