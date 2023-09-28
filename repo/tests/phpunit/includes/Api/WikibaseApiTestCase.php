@@ -221,10 +221,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 
 			if ( array_key_exists( 'message-key', $exception ) ) {
 				$status = $e->getStatusValue();
-				$this->assertTrue(
-					$status->hasMessage( $exception['message-key'] ),
-					'Status message key'
-				);
+				$this->assertStatusError( $exception['message-key'], $status );
 			}
 		}
 	}

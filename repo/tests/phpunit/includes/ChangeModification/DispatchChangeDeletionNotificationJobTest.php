@@ -193,7 +193,7 @@ class DispatchChangeDeletionNotificationJobTest extends MediaWikiIntegrationTest
 			'no reason', $this->getTestUser()->getUser(), false, null, $error,
 			null, [], 'delete', false
 		);
-		$this->assertTrue( $status->isOK() && $status->isGood() );
+		$this->assertStatusGood( $status );
 		$this->assertEquals( $initialCount + 1, $this->countArchive() );
 
 		return [ $pageId, $revisionRecordId, $page->getTitle() ];

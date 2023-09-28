@@ -115,7 +115,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 		$this->assertSame( EDIT_NEW, $helper->getSaveFlags() );
 
 		$status = $helper->attemptSaveEntity( $return, 'Testing', $params, $this->newContext( $params ) );
-		$this->assertTrue( $status->isGood(), 'isGood()' );
+		$this->assertStatusGood( $status );
 	}
 
 	public function testLoadEntity_create_from_id() {
@@ -137,7 +137,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 		$this->assertSame( EDIT_NEW, $helper->getSaveFlags() );
 
 		$status = $helper->attemptSaveEntity( $return, 'Testing', $params, $this->newContext( $params ) );
-		$this->assertTrue( $status->isGood(), 'isGood()' );
+		$this->assertStatusGood( $status );
 	}
 
 	public function testLoadEntity_without_creation_support() {
@@ -293,7 +293,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 		$flags = 0;
 
 		$status = $helper->attemptSaveEntity( $entity, $summary, [], $this->newContext( [] ), $flags );
-		$this->assertTrue( $status->isGood(), 'isGood()' );
+		$this->assertStatusGood( $status );
 	}
 
 	public function testSaveThrowsException_onNonWriteMode() {
