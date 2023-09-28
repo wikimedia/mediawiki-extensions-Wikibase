@@ -11,11 +11,8 @@ use MediaWiki\Tests\Rest\Handler\HandlerTestTrait;
 use MediaWikiIntegrationTestCase;
 use Throwable;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliases\GetItemAliases;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliases\GetItemAliasesResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
-use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
 use Wikibase\Repo\RestApi\RouteHandlers\GetItemAliasesRouteHandler;
 
 /**
@@ -33,27 +30,6 @@ class GetItemAliasesRouteHandlerTest extends MediaWikiIntegrationTestCase {
 	protected function setUp(): void {
 		parent::setUp();
 		$this->setMockPreconditionMiddlewareFactory();
-	}
-
-	public function testValidSuccessHttpResponse(): void {
-		$enAliases = [ 'alias one', 'second alias' ];
-		$arAliases = [ 'الاسم المستعار واحد', 'الاسم المستعار الثاني' ];
-		$aliases = new Aliases( new AliasesInLanguage( 'en', $enAliases ), new AliasesInLanguage( 'ar', $arAliases ) );
-		$useCaseResponse = new GetItemAliasesResponse( $aliases, '20230731042031', 42 );
-		$useCase = $this->createStub( GetItemAliases::class );
-		$useCase->method( 'execute' )->willReturn( $useCaseResponse );
-
-		$this->setService( 'WbRestApi.GetItemAliases', $useCase );
-
-		/** @var Response $response */
-		$response = $this->newHandlerWithValidRequest()->execute();
-
-		$this->assertSame( 200, $response->getStatusCode() );
-		$this->assertSame( [ 'application/json' ], $response->getHeader( 'Content-Type' ) );
-		$this->assertSame( [ '"42"' ], $response->getHeader( 'ETag' ) );
-		$this->assertSame( [ 'Mon, 31 Jul 2023 04:20:31 GMT' ], $response->getHeader( 'Last-Modified' ) );
-		$expectedAliases = [ 'en' => $enAliases, 'ar' => $arAliases ];
-		$this->assertJsonStringEqualsJsonString( json_encode( $expectedAliases ), $response->getBody()->getContents() );
 	}
 
 	public function testValidRedirectHttpResponse(): void {

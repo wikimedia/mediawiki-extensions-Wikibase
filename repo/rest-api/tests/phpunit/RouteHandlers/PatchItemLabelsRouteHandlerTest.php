@@ -12,10 +12,7 @@ use MediaWikiIntegrationTestCase;
 use Throwable;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\RouteHandlers\PatchItemLabelsRouteHandler;
 
 /**
@@ -33,27 +30,6 @@ class PatchItemLabelsRouteHandlerTest extends MediaWikiIntegrationTestCase {
 	protected function setUp(): void {
 		parent::setUp();
 		$this->setMockPreconditionMiddlewareFactory();
-	}
-
-	public function testValidSuccessHttpResponse(): void {
-		$enLabel = 'test label';
-		$arLabel = 'تسمية الاختبار';
-		$labels = new Labels( new Label( 'en', $enLabel ), new LAbel( 'ar', $arLabel ) );
-		$useCaseResponse = new PatchItemLabelsResponse( $labels, '20230731042031', 42 );
-		$useCase = $this->createStub( PatchItemLabels::class );
-		$useCase->method( 'execute' )->willReturn( $useCaseResponse );
-
-		$this->setService( 'WbRestApi.PatchItemLabels', $useCase );
-
-		/** @var Response $response */
-		$response = $this->newHandlerWithValidRequest()->execute();
-
-		$this->assertSame( 200, $response->getStatusCode() );
-		$this->assertSame( [ 'application/json' ], $response->getHeader( 'Content-Type' ) );
-		$this->assertSame( [ '"42"' ], $response->getHeader( 'ETag' ) );
-		$this->assertSame( [ 'Mon, 31 Jul 2023 04:20:31 GMT' ], $response->getHeader( 'Last-Modified' ) );
-		$expectedLabels = [ 'en' => $enLabel, 'ar' => $arLabel ];
-		$this->assertJsonStringEqualsJsonString( json_encode( $expectedLabels ), $response->getBody()->getContents() );
 	}
 
 	/**

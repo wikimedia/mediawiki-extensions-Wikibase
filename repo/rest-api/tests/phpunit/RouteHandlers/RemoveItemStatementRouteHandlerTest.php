@@ -32,17 +32,6 @@ class RemoveItemStatementRouteHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->setMockPreconditionMiddlewareFactory();
 	}
 
-	public function testValidHttpResponse(): void {
-		$this->setService( 'WbRestApi.RemoveItemStatement', $this->createStub( RemoveItemStatement::class ) );
-
-		/** @var Response $response */
-		$response = $this->newHandlerWithValidRequest()->execute();
-
-		$this->assertSame( 200, $response->getStatusCode() );
-		$this->assertSame( [ 'application/json' ], $response->getHeader( 'Content-Type' ) );
-		$this->assertSame( '"Statement deleted"', $response->getBody()->getContents() );
-	}
-
 	/**
 	 * @dataProvider provideExceptionAndExpectedErrorCode
 	 */

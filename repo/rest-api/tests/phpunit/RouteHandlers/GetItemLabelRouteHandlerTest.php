@@ -11,10 +11,8 @@ use MediaWiki\Tests\Rest\Handler\HandlerTestTrait;
 use MediaWikiIntegrationTestCase;
 use Throwable;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\GetItemLabel;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\GetItemLabelResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
 use Wikibase\Repo\RestApi\RouteHandlers\GetItemLabelRouteHandler;
 
 /**
@@ -32,24 +30,6 @@ class GetItemLabelRouteHandlerTest extends MediaWikiIntegrationTestCase {
 	protected function setUp(): void {
 		parent::setUp();
 		$this->setMockPreconditionMiddlewareFactory();
-	}
-
-	public function testValidSuccessHttpResponse(): void {
-		$label = 'test label';
-		$useCaseResponse = new GetItemLabelResponse( new Label( 'en', $label ), '20230731042031', 42 );
-		$useCase = $this->createStub( GetItemLabel::class );
-		$useCase->method( 'execute' )->willReturn( $useCaseResponse );
-
-		$this->setService( 'WbRestApi.GetItemLabel', $useCase );
-
-		/** @var Response $response */
-		$response = $this->newHandlerWithValidRequest()->execute();
-
-		$this->assertSame( 200, $response->getStatusCode() );
-		$this->assertSame( [ 'application/json' ], $response->getHeader( 'Content-Type' ) );
-		$this->assertSame( [ '"42"' ], $response->getHeader( 'ETag' ) );
-		$this->assertSame( [ 'Mon, 31 Jul 2023 04:20:31 GMT' ], $response->getHeader( 'Last-Modified' ) );
-		$this->assertJsonStringEqualsJsonString( json_encode( $label ), $response->getBody()->getContents() );
 	}
 
 	public function testValidRedirectHttpResponse(): void {

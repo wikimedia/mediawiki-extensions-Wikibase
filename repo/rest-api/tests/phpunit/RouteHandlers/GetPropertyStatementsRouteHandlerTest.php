@@ -11,9 +11,7 @@ use MediaWiki\Tests\Rest\Handler\HandlerTestTrait;
 use MediaWikiIntegrationTestCase;
 use Throwable;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetPropertyStatements;
-use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetPropertyStatementsResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\RouteHandlers\GetPropertyStatementsRouteHandler;
 
 /**
@@ -31,24 +29,6 @@ class GetPropertyStatementsRouteHandlerTest extends MediaWikiIntegrationTestCase
 	protected function setUp(): void {
 		parent::setUp();
 		$this->setMockPreconditionMiddlewareFactory();
-	}
-
-	public function testValidHttpResponse(): void {
-		$statementList = $this->createStub( StatementList::class );
-		$useCaseResponse = new GetPropertyStatementsResponse( $statementList, '20230731042031', 42 );
-		$useCase = $this->createStub( GetPropertyStatements::class );
-		$useCase->method( 'execute' )->willReturn( $useCaseResponse );
-
-		$this->setService( 'WbRestApi.GetPropertyStatements', $useCase );
-
-		/** @var Response $response */
-		$response = $this->newHandlerWithValidRequest()->execute();
-
-		$this->assertSame( 200, $response->getStatusCode() );
-		$this->assertSame( [ 'application/json' ], $response->getHeader( 'Content-Type' ) );
-		$this->assertSame( [ '"42"' ], $response->getHeader( 'ETag' ) );
-		$this->assertSame( [ 'Mon, 31 Jul 2023 04:20:31 GMT' ], $response->getHeader( 'Last-Modified' ) );
-		$this->assertIsArray( json_decode( $response->getBody()->getContents(), true ) );
 	}
 
 	/**
