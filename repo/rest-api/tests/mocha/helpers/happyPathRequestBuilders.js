@@ -103,5 +103,9 @@ module.exports.editRequestsOnItem = [
 			path: '/en',
 			value: 'random-test-label-' + utils.uniq()
 		} ]
+	),
+	( { itemId } ) => rbf.newPatchItemDescriptionsRequestBuilder(
+		itemId,
+		[ { op: 'replace', path: '/en', value: 'random-test-description-' + utils.uniq() } ]
 	)
 ];

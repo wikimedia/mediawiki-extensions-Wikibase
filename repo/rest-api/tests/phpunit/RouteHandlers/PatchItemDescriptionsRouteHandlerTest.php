@@ -12,10 +12,7 @@ use MediaWikiIntegrationTestCase;
 use Throwable;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptions;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptionsResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\RouteHandlers\PatchItemDescriptionsRouteHandler;
 
 /**
@@ -28,23 +25,11 @@ use Wikibase\Repo\RestApi\RouteHandlers\PatchItemDescriptionsRouteHandler;
 class PatchItemDescriptionsRouteHandlerTest extends MediaWikiIntegrationTestCase {
 
 	use HandlerTestTrait;
+	use RestHandlerTestUtilsTrait;
 
-	public function testValidSuccessHttpResponse(): void {
-		$enDescription = 'test description';
-		$arDescription = 'وصف الاختبار';
-		$descriptions = new Descriptions( new Description( 'en', $enDescription ), new Description( 'ar', $arDescription ) );
-		$useCase = $this->createStub( PatchItemDescriptions::class );
-		$useCase->method( 'execute' )->willReturn( new PatchItemDescriptionsResponse( $descriptions ) );
-
-		$this->setService( 'WbRestApi.PatchItemDescriptions', $useCase );
-
-		/** @var Response $response */
-		$response = $this->newHandlerWithValidRequest()->execute();
-
-		$this->assertSame( 200, $response->getStatusCode() );
-		$this->assertSame( [ 'application/json' ], $response->getHeader( 'Content-Type' ) );
-		$expectedDescriptions = [ 'en' => $enDescription, 'ar' => $arDescription ];
-		$this->assertJsonStringEqualsJsonString( json_encode( $expectedDescriptions ), $response->getBody()->getContents() );
+	protected function setUp(): void {
+		parent::setUp();
+		$this->setMockPreconditionMiddlewareFactory();
 	}
 
 	/**

@@ -358,6 +358,19 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 		} );
 	} );
 
+	describe( '415 error response', () => {
+		it( 'unsupported media type', async () => {
+			const contentType = 'multipart/form-data';
+			const response = await newPatchItemDescriptionsRequestBuilder(
+				'Q123',
+				[ { op: 'replace', path: '/en', value: utils.uniq() } ]
+			).withHeader( 'content-type', contentType ).makeRequest();
+
+			expect( response ).to.have.status( 415 );
+			assert.strictEqual( response.body.message, `Unsupported Content-Type: '${contentType}'` );
+		} );
+	} );
+
 	describe( '422 error response', () => {
 		const makeReplaceExistingDescriptionPatchOperation = ( newDescription ) => ( {
 			op: 'replace',
