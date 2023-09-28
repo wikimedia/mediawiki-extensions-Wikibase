@@ -11,6 +11,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyAliasesInLanguage\GetP
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyAliasesInLanguageRetriever;
+use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetPropertyAliasesInLanguage\GetPropertyAliasesInLanguage
@@ -88,8 +89,21 @@ class GetPropertyAliasesInLanguageTest extends TestCase {
 		}
 	}
 
+	public function testGivenInvalidRequest_throws(): void {
+		try {
+			$this->newUseCase()->execute( new GetPropertyAliasesInLanguageRequest( 'X321', 'en' ) );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::INVALID_PROPERTY_ID, $e->getErrorCode() );
+		}
+	}
+
 	private function newUseCase(): GetPropertyAliasesInLanguage {
-		return new GetPropertyAliasesInLanguage( $this->getRevisionMetadata, $this->aliasesRetriever );
+		return new GetPropertyAliasesInLanguage(
+			new TestValidatingRequestDeserializer(),
+			$this->getRevisionMetadata,
+			$this->aliasesRetriever
+		);
 	}
 
 }

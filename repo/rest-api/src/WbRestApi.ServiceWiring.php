@@ -409,6 +409,7 @@ return [
 
 	'WbRestApi.GetPropertyAliasesInLanguage' => function( MediaWikiServices $services ): GetPropertyAliasesInLanguage {
 		return new GetPropertyAliasesInLanguage(
+			WbRestApi::getValidatingRequestDeserializer( $services ),
 			WbRestApi::getGetLatestPropertyRevisionMetadata( $services ),
 			new PrefetchingTermLookupAliasesRetriever(
 				WikibaseRepo::getPrefetchingTermLookup( $services ),
