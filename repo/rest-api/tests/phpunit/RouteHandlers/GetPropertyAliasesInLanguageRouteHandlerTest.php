@@ -2,17 +2,13 @@
 
 namespace Wikibase\Repo\Tests\RestApi\RouteHandlers;
 
-use Generator;
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\RequestData;
 use MediaWiki\Rest\Response;
 use MediaWiki\Tests\Rest\Handler\HandlerTestTrait;
 use MediaWikiIntegrationTestCase;
-use Throwable;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyAliasesInLanguage\GetPropertyAliasesInLanguage;
-use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyAliasesInLanguage\GetPropertyAliasesInLanguageResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
 use Wikibase\Repo\RestApi\RouteHandlers\GetPropertyAliasesInLanguageRouteHandler;
 
 /**
@@ -25,38 +21,18 @@ use Wikibase\Repo\RestApi\RouteHandlers\GetPropertyAliasesInLanguageRouteHandler
 class GetPropertyAliasesInLanguageRouteHandlerTest extends MediaWikiIntegrationTestCase {
 
 	use HandlerTestTrait;
+	use RestHandlerTestUtilsTrait;
 
-	public function testValidSuccessHttpResponse(): void {
-		$aliases = [ 'is a', 'example of' ];
-		$useCaseResponse = new GetPropertyAliasesInLanguageResponse(
-			new AliasesInLanguage( 'en', $aliases ),
-			'20230831042031',
-			42
-		);
-		$useCase = $this->createStub( GetPropertyAliasesInLanguage::class );
-		$useCase->method( 'execute' )->willReturn( $useCaseResponse );
-
-		$this->setService( 'WbRestApi.GetPropertyAliasesInLanguage', $useCase );
-
-		/** @var Response $response */
-		$response = $this->newHandlerWithValidRequest()->execute();
-
-		$this->assertSame( 200, $response->getStatusCode() );
-		$this->assertSame( [ 'application/json' ], $response->getHeader( 'Content-Type' ) );
-		$this->assertSame( [ '"42"' ], $response->getHeader( 'ETag' ) );
-		$this->assertSame( [ 'Thu, 31 Aug 2023 04:20:31 GMT' ], $response->getHeader( 'Last-Modified' ) );
-		$this->assertJsonStringEqualsJsonString(
-			json_encode( $aliases ),
-			$response->getBody()->getContents()
-		);
+	protected function setUp(): void {
+		parent::setUp();
+		$this->setMockPreconditionMiddlewareFactory();
 	}
 
-	/**
-	 * @dataProvider provideExceptionAndExpectedErrorCode
-	 */
-	public function testHandlesErrors( Throwable $exception, string $expectedErrorCode ): void {
+	public function testHandlesErrors(): void {
 		$useCase = $this->createStub( GetPropertyAliasesInLanguage::class );
-		$useCase->method( 'execute' )->willThrowException( $exception );
+		$useCase->method( 'execute' )->willThrowException(
+			new UseCaseError( UseCaseError::PROPERTY_NOT_FOUND, 'Could not find a property with the ID: P321' )
+		);
 
 		$this->setService( 'WbRestApi.GetPropertyAliasesInLanguage', $useCase );
 
@@ -65,14 +41,7 @@ class GetPropertyAliasesInLanguageRouteHandlerTest extends MediaWikiIntegrationT
 		$responseBody = json_decode( $response->getBody()->getContents() );
 
 		$this->assertSame( [ 'en' ], $response->getHeader( 'Content-Language' ) );
-		$this->assertSame( $expectedErrorCode, $responseBody->code );
-	}
-
-	public function provideExceptionAndExpectedErrorCode(): Generator {
-		yield 'Error handled by ResponseFactory' => [
-			new UseCaseError( UseCaseError::PROPERTY_NOT_FOUND, 'Could not find a property with the ID: P321' ),
-			UseCaseError::PROPERTY_NOT_FOUND,
-		];
+		$this->assertSame( UseCaseError::PROPERTY_NOT_FOUND, $responseBody->code );
 	}
 
 	private function newHandlerWithValidRequest(): Handler {
