@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions;
 
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionsEditSummary;
@@ -20,6 +21,7 @@ use Wikibase\Repo\RestApi\Domain\Services\JsonPatcher;
 class PatchItemDescriptions {
 
 	private PatchItemDescriptionsValidator $requestValidator;
+	private AssertItemExists $assertItemExists;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
 	private ItemDescriptionsRetriever $descriptionsRetriever;
 	private DescriptionsSerializer $descriptionsSerializer;
@@ -30,6 +32,7 @@ class PatchItemDescriptions {
 
 	public function __construct(
 		PatchItemDescriptionsValidator $requestValidator,
+		AssertItemExists $assertItemExists,
 		AssertUserIsAuthorized $assertUserIsAuthorized,
 		ItemDescriptionsRetriever $descriptionsRetriever,
 		DescriptionsSerializer $descriptionsSerializer,
@@ -39,6 +42,7 @@ class PatchItemDescriptions {
 		ItemUpdater $itemUpdater
 	) {
 		$this->requestValidator = $requestValidator;
+		$this->assertItemExists = $assertItemExists;
 		$this->assertUserIsAuthorized = $assertUserIsAuthorized;
 		$this->descriptionsRetriever = $descriptionsRetriever;
 		$this->descriptionsSerializer = $descriptionsSerializer;
@@ -52,7 +56,7 @@ class PatchItemDescriptions {
 		$deserializedRequest = $this->requestValidator->validateAndDeserialize( $request );
 		$itemId = $deserializedRequest->getItemId();
 
-		// T346774 - check if item not found or redirected
+		$this->assertItemExists->execute( $itemId );
 		$this->assertUserIsAuthorized->execute( $itemId, $deserializedRequest->getEditMetadata()->getUser()->getUsername() );
 
 		$descriptions = $this->descriptionsRetriever->getDescriptions( $itemId );
