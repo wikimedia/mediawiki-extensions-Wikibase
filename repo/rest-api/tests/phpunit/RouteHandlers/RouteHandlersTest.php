@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\RestApi\RouteHandlers;
 
 use Generator;
 use LogicException;
+use MediaWiki\Rest\ConditionalHeaderUtil;
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Reporter\ErrorReporter;
 use MediaWiki\Rest\RequestData;
@@ -12,8 +13,11 @@ use MediaWiki\Tests\Rest\Handler\HandlerTestTrait;
 use MediaWikiIntegrationTestCase;
 use RuntimeException;
 use Throwable;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\LatestRevisionIdResult;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatement;
@@ -83,6 +87,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyPartsBuilder;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
 
 /**
@@ -95,7 +100,6 @@ use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
 class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 
 	use HandlerTestTrait;
-	use RestHandlerTestUtilsTrait;
 
 	private static array $routesData = [];
 	private static array $prodRoutesData = [];
@@ -697,6 +701,20 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 		return NewStatementReadModel::noValueFor( 'P1' )
 			->withGuid( 'Q1$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
 			->build();
+	}
+
+	/**
+	 * Overrides the PreconditionMiddlewareFactory service with one that doesn't need the database.
+	 */
+	private function setMockPreconditionMiddlewareFactory(): void {
+		$entityRevLookup = $this->createMock( EntityRevisionLookup::class );
+		$entityRevLookup->method( 'getLatestRevisionId' )->willReturn( LatestRevisionIdResult::nonexistentEntity() );
+		$preconditionMiddlewareFactory = new PreconditionMiddlewareFactory(
+			$entityRevLookup,
+			new BasicEntityIdParser(),
+			new ConditionalHeaderUtil()
+		);
+		$this->setService( 'WbRestApi.PreconditionMiddlewareFactory', $preconditionMiddlewareFactory );
 	}
 
 }
