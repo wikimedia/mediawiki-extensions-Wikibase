@@ -211,7 +211,6 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 		$this->assertArrayHasKey( 'Q32488#L.he', $usages );
 	}
 
-	// T287704
 	public function testAddLabelUsageWithoutLanguage(): void {
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
 		$luaWikibaseLibrary->addLabelUsage( 'Q32488', null );
@@ -228,7 +227,6 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 		$this->assertArrayHasKey( 'Q32488#D.he', $usages );
 	}
 
-	// T287704
 	public function testAddDescriptionUsageWithoutLanguage() {
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
 		$luaWikibaseLibrary->addDescriptionUsage( 'Q32488', null );
