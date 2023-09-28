@@ -15,7 +15,6 @@ interface ItemDescriptionValidator {
 	public const CODE_LABEL_DESCRIPTION_EQUAL = 'label-description-equal';
 	public const CODE_LABEL_DESCRIPTION_DUPLICATE = 'label-description-duplicate';
 
-	public const CONTEXT_VALUE = 'value';
 	public const CONTEXT_LIMIT = 'character-limit';
 	public const CONTEXT_LANGUAGE = 'language';
 	public const CONTEXT_LABEL = 'label';

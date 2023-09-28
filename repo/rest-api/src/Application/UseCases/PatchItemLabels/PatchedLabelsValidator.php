@@ -108,7 +108,7 @@ class PatchedLabelsValidator {
 					"Changed label for '{$label->getLanguageCode()}' must not be more than $maxLabelLength characters long",
 					[
 						UseCaseError::CONTEXT_LANGUAGE => $label->getLanguageCode(),
-						UseCaseError::CONTEXT_VALUE => $context[ItemLabelValidator::CONTEXT_VALUE],
+						UseCaseError::CONTEXT_VALUE => $context[ItemLabelValidator::CONTEXT_LABEL],
 						UseCaseError::CONTEXT_CHARACTER_LIMIT => $context[ItemLabelValidator::CONTEXT_LIMIT],
 					]
 				);

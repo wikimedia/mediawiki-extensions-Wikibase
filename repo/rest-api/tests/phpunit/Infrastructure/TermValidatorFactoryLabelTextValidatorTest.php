@@ -33,16 +33,16 @@ class TermValidatorFactoryLabelTextValidatorTest extends TestCase {
 	}
 
 	public function testLabelTooLong_returnsValidationError(): void {
-		$tooLonglabel = str_repeat( 'a', self::MAX_LENGTH + 1 );
+		$tooLongLabel = str_repeat( 'a', self::MAX_LENGTH + 1 );
 		$this->assertEquals(
 			new ValidationError(
 				ItemLabelValidator::CODE_TOO_LONG,
 				[
-					ItemLabelValidator::CONTEXT_VALUE => $tooLonglabel,
+					ItemLabelValidator::CONTEXT_LABEL => $tooLongLabel,
 					ItemLabelValidator::CONTEXT_LIMIT => self::MAX_LENGTH,
 				]
 			),
-			$this->newValidator()->validate( $tooLonglabel )
+			$this->newValidator()->validate( $tooLongLabel )
 		);
 	}
 
@@ -51,7 +51,7 @@ class TermValidatorFactoryLabelTextValidatorTest extends TestCase {
 		$this->assertEquals(
 			new ValidationError(
 				ItemLabelValidator::CODE_INVALID,
-				[ ItemLabelValidator::CONTEXT_VALUE => $invalidLabel ]
+				[ ItemLabelValidator::CONTEXT_LABEL => $invalidLabel ]
 			),
 			$this->newValidator()->validate( $invalidLabel )
 		);

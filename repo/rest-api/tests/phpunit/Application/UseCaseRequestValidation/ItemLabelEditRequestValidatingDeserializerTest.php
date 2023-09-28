@@ -66,7 +66,7 @@ class ItemLabelEditRequestValidatingDeserializerTest extends TestCase {
 		yield 'invalid label' => [
 			new ValidationError(
 				ItemLabelValidator::CODE_INVALID,
-				[ ItemLabelValidator::CONTEXT_VALUE => $label ],
+				[ ItemLabelValidator::CONTEXT_LABEL => $label ],
 			),
 			UseCaseError::INVALID_LABEL,
 			"Not a valid label: $label",
@@ -82,7 +82,7 @@ class ItemLabelEditRequestValidatingDeserializerTest extends TestCase {
 		$limit = 250;
 		yield 'label too long' => [
 			new ValidationError( ItemLabelValidator::CODE_TOO_LONG, [
-				ItemLabelValidator::CONTEXT_VALUE => $label,
+				ItemLabelValidator::CONTEXT_LABEL => $label,
 				ItemLabelValidator::CONTEXT_LIMIT => $limit,
 			] ),
 			UseCaseError::LABEL_TOO_LONG,

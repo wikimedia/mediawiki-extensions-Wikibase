@@ -95,7 +95,7 @@ class WikibaseRepoItemDescriptionValidatorTest extends TestCase {
 			$description,
 			ItemDescriptionValidator::CODE_TOO_LONG,
 			[
-				ItemDescriptionValidator::CONTEXT_VALUE => $description,
+				ItemDescriptionValidator::CONTEXT_DESCRIPTION => $description,
 				ItemDescriptionValidator::CONTEXT_LIMIT => self::MAX_LENGTH,
 			],
 		];
@@ -104,7 +104,7 @@ class WikibaseRepoItemDescriptionValidatorTest extends TestCase {
 		yield 'description has invalid character' => [
 			$description,
 			ItemDescriptionValidator::CODE_INVALID,
-			[ ItemDescriptionValidator::CONTEXT_VALUE => $description ],
+			[ ItemDescriptionValidator::CONTEXT_DESCRIPTION => $description ],
 		];
 	}
 

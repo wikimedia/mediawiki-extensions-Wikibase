@@ -101,7 +101,7 @@ class PatchedDescriptionsValidator {
 		$context = $validationError->getContext();
 		switch ( $validationError->getCode() ) {
 			case ItemDescriptionValidator::CODE_INVALID:
-				$descriptionText = $context[ ItemDescriptionValidator::CONTEXT_VALUE ];
+				$descriptionText = $context[ ItemDescriptionValidator::CONTEXT_DESCRIPTION ];
 				throw new UseCaseError(
 					UseCaseError::PATCHED_DESCRIPTION_INVALID,
 					"Changed description for '{$description->getLanguageCode()}' is invalid: $descriptionText",
@@ -118,7 +118,7 @@ class PatchedDescriptionsValidator {
 					"Changed description for '$languageCode' must not be more than $maxDescriptionLength characters long",
 					[
 						UseCaseError::CONTEXT_LANGUAGE => $languageCode,
-						UseCaseError::CONTEXT_VALUE => $context[ ItemDescriptionValidator::CONTEXT_VALUE ],
+						UseCaseError::CONTEXT_VALUE => $context[ ItemDescriptionValidator::CONTEXT_DESCRIPTION ],
 						UseCaseError::CONTEXT_CHARACTER_LIMIT => $context[ ItemDescriptionValidator::CONTEXT_LIMIT ],
 					]
 				);
