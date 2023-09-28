@@ -9,7 +9,6 @@ use MediaWiki\Rest\RequestData;
 use MediaWiki\Rest\Response;
 use MediaWiki\Tests\Rest\Handler\HandlerTestTrait;
 use MediaWikiIntegrationTestCase;
-use RuntimeException;
 use Throwable;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabelsResponse;
@@ -94,8 +93,6 @@ class GetItemLabelsRouteHandlerTest extends MediaWikiIntegrationTestCase {
 			new UseCaseError( UseCaseError::INVALID_ITEM_ID, '' ),
 			UseCaseError::INVALID_ITEM_ID,
 		];
-
-		yield 'Unexpected Error' => [ new RuntimeException(), UseCaseError::UNEXPECTED_ERROR ];
 	}
 
 	private function newHandlerWithValidRequest(): Handler {

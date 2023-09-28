@@ -5,9 +5,12 @@ namespace Wikibase\Repo\Tests\RestApi\RouteHandlers;
 use Generator;
 use LogicException;
 use MediaWiki\Rest\Handler;
+use MediaWiki\Rest\Reporter\ErrorReporter;
 use MediaWiki\Rest\RequestData;
+use MediaWiki\Rest\Response;
 use MediaWiki\Tests\Rest\Handler\HandlerTestTrait;
 use MediaWikiIntegrationTestCase;
+use RuntimeException;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItem;
@@ -39,6 +42,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\ReplacePropertyStatement\ReplaceP
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 
 /**
  * @coversNothing
@@ -79,6 +83,27 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 
 		$this->assertTrue( $routeHandler->needsReadAccess() );
 		$this->assertSame( $routeData['method'] !== 'GET', $routeHandler->needsWriteAccess() );
+	}
+
+	/**
+	 * @dataProvider routeHandlersProvider
+	 */
+	public function testHandlesUnexpectedErrors( array $routeHandler ): void {
+		$useCase = $this->createStub( $routeHandler['useCase'] );
+		$useCase->method( 'execute' )->willThrowException( new RuntimeException() );
+		$useCaseName = $this->getUseCaseName( $routeHandler['useCase'] );
+
+		$this->setService( "WbRestApi.$useCaseName", $useCase );
+		$this->setService( 'WbRestApi.ErrorReporter', $this->createStub( ErrorReporter::class ) );
+
+		/** @var Response $response */
+		$response = $this->newHandlerWithValidRequest(
+			$this->getRouteForUseCase( $routeHandler['useCase'] ),
+			$routeHandler['validRequest']
+		)->execute();
+
+		$this->assertSame( [ 'en' ], $response->getHeader( 'Content-Language' ) );
+		$this->assertSame( UseCaseError::UNEXPECTED_ERROR, json_decode( $response->getBody()->getContents() )->code );
 	}
 
 	public function routeHandlersProvider(): Generator {
