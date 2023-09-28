@@ -384,22 +384,8 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 		$token = $user->getEditToken();
 		$status = $editEntity->attemptSave( $entity, "Testing", EDIT_UPDATE, $token );
 
-		$id = $entity->getId()->getSerialization();
-
-		if ( $status->isOK() ) {
-			$statusMessage = "Status ($id): OK";
-		} else {
-			$statusMessage = "Status ($id): " . $status->getWikiText();
-		}
-
-		$this->assertFalse( $status->isOK(),
-			"Saving should have failed late\n$statusMessage" );
-
-		$this->assertTrue( $editEntity->hasError(),
-			"Saving should have failed late\n$statusMessage" );
-
-		$this->assertTrue( $status->hasMessage( 'edit-conflict' ),
-			"Saving should have failed late\n$statusMessage" );
+		$this->assertTrue( $editEntity->hasError(), 'Saving should have failed late' );
+		$this->assertStatusError( 'edit-conflict', $status );
 	}
 
 	public static function provideCheckEditPermissions(): iterable {
@@ -888,7 +874,7 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 			[ 'mw-replace' ]
 		);
 
-		$this->assertTrue( $status->isGood() );
+		$this->assertStatusGood( $status );
 		/** @var EntityRevision $entityRevision */
 		$entityRevision = $status->getValue()['revision'];
 		$tags = $repo->getLogEntry( $entityRevision->getRevisionId() )['tags'];

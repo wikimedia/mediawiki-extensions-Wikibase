@@ -73,7 +73,7 @@ class EditFilterHookRunnerTest extends MediaWikiIntegrationTestCase {
 			$context,
 			'summary'
 		);
-		$this->assertTrue( $status->isGood() );
+		$this->assertStatusGood( $status );
 	}
 
 	public function runData() {
@@ -160,7 +160,7 @@ class EditFilterHookRunnerTest extends MediaWikiIntegrationTestCase {
 				$this->assertSame( $context->getTitle(), $wikiPage->getTitle() );
 				$this->assertSame( $expected['namespace'], $context->getTitle()->getNamespace() );
 				$this->assertEquals( new ItemContent( new EntityInstanceHolder( new Item() ) ), $content );
-				$this->assertTrue( $status->isGood() );
+				$this->assertStatusGood( $status );
 				$this->assertIsString( $summary );
 				$this->assertSame( 'EditFilterHookRunnerTestUser', $user->getName() );
 				$this->assertIsBool( $minoredit );
