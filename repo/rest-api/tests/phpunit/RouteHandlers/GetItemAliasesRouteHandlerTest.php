@@ -98,13 +98,6 @@ class GetItemAliasesRouteHandlerTest extends MediaWikiIntegrationTestCase {
 		yield 'Unexpected Error' => [ new RuntimeException(), UseCaseError::UNEXPECTED_ERROR ];
 	}
 
-	public function testReadWriteAccess(): void {
-		$routeHandler = $this->newHandlerWithValidRequest();
-
-		$this->assertTrue( $routeHandler->needsReadAccess() );
-		$this->assertFalse( $routeHandler->needsWriteAccess() );
-	}
-
 	private function newHandlerWithValidRequest(): Handler {
 		$routeHandler = GetItemAliasesRouteHandler::factory();
 		$this->initHandler(

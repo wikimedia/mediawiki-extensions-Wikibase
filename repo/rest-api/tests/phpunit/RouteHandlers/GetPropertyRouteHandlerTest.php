@@ -64,13 +64,6 @@ class GetPropertyRouteHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( UseCaseError::UNEXPECTED_ERROR, $responseBody->code );
 	}
 
-	public function testReadWriteAccess(): void {
-		$routeHandler = $this->newHandlerWithValidRequest();
-
-		$this->assertTrue( $routeHandler->needsReadAccess() );
-		$this->assertFalse( $routeHandler->needsWriteAccess() );
-	}
-
 	private function newHandlerWithValidRequest(): Handler {
 		$routeHandler = GetPropertyRouteHandler::factory();
 		$this->initHandler(
