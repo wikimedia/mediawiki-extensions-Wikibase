@@ -580,13 +580,13 @@ class EntityDataRequestHandler {
 	/**
 	 * Output the entity data and set the appropriate HTTP response headers.
 	 *
-	 * @param WebRequest  $request
-	 * @param EntityId    $requestId       the original entity ID of the request
-	 * @param int         $requestRevision the original revision ID of the request (0 for latest)
+	 * @param WebRequest $request
+	 * @param EntityId $requestId The original entity ID of the request
+	 * @param int $requestRevision The original revision ID of the request (0 for latest)
 	 * @param WebResponse $response
-	 * @param string      $data        the data to output
-	 * @param string      $contentType the data's mime type
-	 * @param string      $lastModified
+	 * @param string $data The data to output
+	 * @param string $contentType The data's mime type
+	 * @param string $lastModified
 	 */
 	public function outputData(
 		WebRequest $request,

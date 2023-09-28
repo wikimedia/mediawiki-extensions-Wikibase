@@ -151,7 +151,7 @@ class AddUnitsTest extends MediaWikiLangTestCase {
 	}
 
 	/**
-	 * @param array $values  List of values linked to unit
+	 * @param array $values List of values linked to unit
 	 * @param array $statements List of statements using values from $values
 	 * @param array|null $converted Converted value
 	 * @param string $result Expected result filename, in tests/phpunit/data/maintenance/

@@ -33,11 +33,12 @@ class EntityDataUriManager {
 	private $entityTitleLookup;
 
 	/**
-	 * @param Title                $interfaceTitle
-	 * @param string[]             $supportedExtensions an associative Array mapping canonical format names to file extensions.
-	 * @param string[]             $cachePaths List of additional URL paths for which entity data should be cached,
-	 *                                         with {entity_id} and {revision_id} placeholders.
-	 * @param EntityTitleLookup    $entityTitleLookup
+	 * @param Title $interfaceTitle
+	 * @param array<string,string> $supportedExtensions An associative array mapping canonical
+	 *  format names to file extensions.
+	 * @param string[] $cachePaths List of additional URL paths for which entity data should be
+	 *  cached, with {entity_id} and {revision_id} placeholders.
+	 * @param EntityTitleLookup $entityTitleLookup
 	 */
 	public function __construct(
 		Title $interfaceTitle,
@@ -113,8 +114,8 @@ class EntityDataUriManager {
 	 * Returns the canonical subpage name used to address a given set
 	 * of entity data.
 	 *
-	 * @param EntityId $id       The entity
-	 * @param string|null   $format   The (normalized) format name, or ''
+	 * @param EntityId $id The entity
+	 * @param string|null $format The (normalized) format name, or ''
 	 *
 	 * @return string
 	 */
@@ -141,8 +142,8 @@ class EntityDataUriManager {
 	/**
 	 * Returns a Title representing the given document.
 	 *
-	 * @param EntityId $id       The entity
-	 * @param string|null   $format   The (normalized) format name, or ''
+	 * @param EntityId $id The entity
+	 * @param string|null $format The (normalized) format name, or ''
 	 *
 	 * @return Title|null
 	 */
@@ -166,9 +167,9 @@ class EntityDataUriManager {
 	/**
 	 * Returns a Title representing the given document.
 	 *
-	 * @param EntityId    $id       The entity
-	 * @param string|null $format   The (normalized) format name, or ''
-	 * @param int         $revision
+	 * @param EntityId $id The entity
+	 * @param string|null $format The (normalized) format name, or ''
+	 * @param int $revision
 	 *
 	 * @return string|null
 	 */

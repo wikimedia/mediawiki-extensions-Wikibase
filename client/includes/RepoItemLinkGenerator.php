@@ -41,10 +41,10 @@ class RepoItemLinkGenerator {
 
 	/**
 	 * @param NamespaceChecker $namespaceChecker
-	 * @param RepoLinker       $repoLinker
-	 * @param EntityIdParser   $entityIdParser
-	 * @param string           $langLinkSiteGroup
-	 * @param string           $siteGlobalId
+	 * @param RepoLinker $repoLinker
+	 * @param EntityIdParser $entityIdParser
+	 * @param string $langLinkSiteGroup
+	 * @param string $siteGlobalId
 	 */
 	public function __construct(
 		NamespaceChecker $namespaceChecker,

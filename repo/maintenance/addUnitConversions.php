@@ -237,8 +237,8 @@ QUERY;
 	/**
 	 * Normalize unit and return the hash of the normalized node.
 	 *
-	 * @param string   $id Original value ID (hash)
-	 * @param string   $unit Short ID of the unit
+	 * @param string $id Original value ID (hash)
+	 * @param string $unit Short ID of the unit
 	 * @param string[] $value Value data array
 	 *
 	 * @return string Hash of the normalized node

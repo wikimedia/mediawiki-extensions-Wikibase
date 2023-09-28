@@ -606,9 +606,9 @@ final class RepoHooks {
 	 * namespaces.
 	 *
 	 * @param ApiBase $module The API module being called
-	 * @param User    $user   The user calling the API
-	 * @param array|string|null &$message Output-parameter holding for the message the call should fail with.
-	 *                            This can be a message key or an array as expected by ApiBase::dieWithError().
+	 * @param User $user The user calling the API
+	 * @param array|string|null &$message Output-parameter for the message the call should fail
+	 *  with. This can be a message key or an array as expected by {@see ApiBase::dieWithError}.
 	 *
 	 * @return bool true to continue execution, false to abort and with $message as an error message.
 	 */

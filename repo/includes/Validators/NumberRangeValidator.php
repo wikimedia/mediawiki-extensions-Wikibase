@@ -25,8 +25,8 @@ class NumberRangeValidator implements ValueValidator {
 	private $max;
 
 	/**
-	 * @param int|float  $min
-	 * @param int|float  $max
+	 * @param int|float $min
+	 * @param int|float $max
 	 */
 	public function __construct( $min, $max ) {
 		$this->min = $min;

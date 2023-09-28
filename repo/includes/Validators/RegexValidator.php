@@ -30,9 +30,9 @@ class RegexValidator implements ValueValidator {
 	private $errorCode;
 
 	/**
-	 * @param string  $expression
-	 * @param bool    $inverse
-	 * @param string  $errorCode code to use when this validator fails.
+	 * @param string $expression
+	 * @param bool $inverse
+	 * @param string $errorCode code to use when this validator fails.
 	 */
 	public function __construct( $expression, $inverse = false, $errorCode = 'malformed-value' ) {
 		//TODO: check type

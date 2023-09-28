@@ -251,7 +251,7 @@ class LangLinkHandler {
 	 * link on the page.
 	 *
 	 * @param Title $title The page's title
-	 * @param ParserOutput $parserOutput   Parsed representation of the page
+	 * @param ParserOutput $parserOutput Parsed representation of the page
 	 *
 	 * @return SiteLink[] An associative array, using site IDs for keys
 	 *         and the target pages in the respective languages as the associated value.
