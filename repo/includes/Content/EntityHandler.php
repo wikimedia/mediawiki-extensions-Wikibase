@@ -822,8 +822,12 @@ abstract class EntityHandler extends ContentHandler {
 		$parserOutput->recordOption( 'wb' );
 		if ( $generateHtml ) {
 			$language = $this->getPageViewLanguage( $target );
-			$html = Article::getRedirectHeaderHtml( $language, $target, false );
-			$parserOutput->setText( $html );
+			$services = MediaWikiServices::getInstance();
+			$html = $services->getLinkRenderer()->makeRedirectHeader(
+				$language, $target, false
+			);
+			$parserOutput->setRedirectHeader( $html );
+			$parserOutput->setText( '' );
 		}
 
 		return $parserOutput;
