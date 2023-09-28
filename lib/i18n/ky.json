@@ -6,6 +6,8 @@
 			"Bosogo"
 		]
 	},
+	"wikibase-timedetails-time": "Убакыт",
+	"wikibase-timedetails-isotime": "Дата/убакыт",
 	"wikibase-sitelinks-wikipedia": "Википедия",
 	"datatypes-type-wikibase-item": "Элемент"
 }

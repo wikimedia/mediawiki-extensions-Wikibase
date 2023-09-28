@@ -19,7 +19,8 @@
 			"乌拉跨氪",
 			"列维劳德",
 			"夢蝶葬花",
-			"沈澄心"
+			"沈澄心",
+			"LittlePaw365"
 		]
 	},
 	"specialpages-group-wikibase": "维基数据库",
@@ -58,7 +59,7 @@
 	"datatypes-type-quantity": "数量",
 	"datatypes-type-monolingualtext": "单语文本",
 	"datatypes-type-multilingualtext": "多语文本",
-	"datatypes-type-number": "数值",
+	"datatypes-type-number": "数字",
 	"datatypes-type-mediawiki-title": "MediaWiki标题",
 	"datatypes-type-unknown": "未指定",
 	"datatypes-type-boolean": "布尔值",
