@@ -35,6 +35,30 @@ describe( newGetPropertyAliasesInLanguageRequestBuilder().getRouteDescription(),
 		assert.strictEqual( response.header[ 'last-modified' ], testPropertyCreationMetadata.timestamp );
 	} );
 
+	it( '400 - invalid property ID', async () => {
+		const invalidPropertyId = 'X123';
+		const response = await newGetPropertyAliasesInLanguageRequestBuilder( invalidPropertyId, 'en' )
+			.assertInvalidRequest()
+			.makeRequest();
+
+		expect( response ).to.have.status( 400 );
+		assert.header( response, 'Content-Language', 'en' );
+		assert.strictEqual( response.body.code, 'invalid-property-id' );
+		assert.include( response.body.message, invalidPropertyId );
+	} );
+
+	it( '400 - invalid language code', async () => {
+		const invalidLanguageCode = '1e';
+		const response = await newGetPropertyAliasesInLanguageRequestBuilder( propertyId, invalidLanguageCode )
+			.assertInvalidRequest()
+			.makeRequest();
+
+		expect( response ).to.have.status( 400 );
+		assert.header( response, 'Content-Language', 'en' );
+		assert.strictEqual( response.body.code, 'invalid-language-code' );
+		assert.include( response.body.message, invalidLanguageCode );
+	} );
+
 	it( 'responds 404 in case the property does not exist', async () => {
 		const nonExistentProperty = 'P99999999';
 		const response = await newGetPropertyAliasesInLanguageRequestBuilder( nonExistentProperty, 'en' )

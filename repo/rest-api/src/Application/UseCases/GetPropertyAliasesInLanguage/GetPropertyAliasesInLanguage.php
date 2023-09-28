@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetPropertyAliasesInLanguage;
 
-use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestPropertyRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyAliasesInLanguageRetriever;
@@ -12,14 +11,16 @@ use Wikibase\Repo\RestApi\Domain\Services\PropertyAliasesInLanguageRetriever;
  */
 class GetPropertyAliasesInLanguage {
 
+	private GetPropertyAliasesInLanguageValidator $validator;
 	private GetLatestPropertyRevisionMetadata $getRevisionMetadata;
-
 	private PropertyAliasesInLanguageRetriever $propertyAliasesRetriever;
 
 	public function __construct(
+		GetPropertyAliasesInLanguageValidator $validator,
 		GetLatestPropertyRevisionMetadata $getRevisionMetadata,
 		PropertyAliasesInLanguageRetriever $propertyAliasesRetriever
 	) {
+		$this->validator = $validator;
 		$this->getRevisionMetadata = $getRevisionMetadata;
 		$this->propertyAliasesRetriever = $propertyAliasesRetriever;
 	}
@@ -28,8 +29,9 @@ class GetPropertyAliasesInLanguage {
 	 * @throws UseCaseError
 	 */
 	public function execute( GetPropertyAliasesInLanguageRequest $request ): GetPropertyAliasesInLanguageResponse {
-		$propertyId = new NumericPropertyId( $request->getPropertyId() );
-		$languageCode = $request->getLanguageCode();
+		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
+		$propertyId = $deserializedRequest->getPropertyId();
+		$languageCode = $deserializedRequest->getLanguageCode();
 
 		[ $revisionId, $lastModified ] = $this->getRevisionMetadata->execute( $propertyId );
 
