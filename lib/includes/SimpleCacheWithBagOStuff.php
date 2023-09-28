@@ -9,31 +9,16 @@ use DateTime;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\NullLogger;
 use Psr\SimpleCache\CacheInterface;
-use Traversable;
 
 /**
  * @license GPL-2.0-or-later
  */
 class SimpleCacheWithBagOStuff implements CacheInterface {
-
 	use LoggerAwareTrait;
 
-	private const INVALID_KEY_REGEX = '/[\{\}\(\)\/\\\\@:]/';
-
-	/**
-	 * @var BagOStuff
-	 */
-	private $inner;
-
-	/**
-	 * @var string
-	 */
-	private $prefix;
-
-	/**
-	 * @var string
-	 */
-	private $secret;
+	private BagOStuff $inner;
+	private string $prefix;
+	private string $secret;
 
 	/**
 	 * @param BagOStuff $inner
@@ -248,17 +233,9 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 * @param array $keys
 	 */
 	private function assertKeysAreValidAllowIntegers( $keys ): void {
-		$this->assertKeysAreValid(
-			array_map(
-				function ( $key ) {
-					if ( is_int( $key ) ) {
-						return (string)$key;
-					}
-					return $key;
-				},
-				$keys
-			)
-		);
+		foreach ( $keys as $key ) {
+			$this->assertKeyIsValid( is_int( $key ) ? (string)$key : $key );
+		}
 	}
 
 	private function assertKeysAreValid( $keys ): void {
@@ -280,7 +257,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 			throw new CacheInvalidArgumentException( "Cache key cannot be an empty string" );
 		}
 
-		if ( preg_match( self::INVALID_KEY_REGEX, $key ) ) {
+		if ( preg_match( '/[{}()\/\\\\@:]/', $key ) ) {
 			throw new CacheInvalidArgumentException( "Cache key contains characters that are not allowed: `{$key}`" );
 		}
 	}
@@ -291,20 +268,17 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 * @throws CacheInvalidArgumentException
 	 */
 	private function toArray( $var ) {
-		if ( !$this->isIterable( $var ) ) {
+		if ( is_array( $var ) ) {
+			return $var;
+		} elseif ( !is_iterable( $var ) ) {
 			$type = gettype( $var );
 			throw new CacheInvalidArgumentException( "Expected iterable, `{$type}` given" );
 		}
 
-		if ( $var instanceof Traversable ) {
-			$result = [];
-			foreach ( $var as $value ) {
-				$result[] = $value;
-			}
-		} else {
-			$result = $var;
+		$result = [];
+		foreach ( $var as $value ) {
+			$result[] = $value;
 		}
-
 		return $result;
 	}
 
@@ -314,29 +288,22 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 * @throws CacheInvalidArgumentException
 	 */
 	private function toAssociativeArray( $var ) {
-		if ( !$this->isIterable( $var ) ) {
+		if ( is_array( $var ) ) {
+			return $var;
+		} elseif ( !is_iterable( $var ) ) {
 			$type = gettype( $var );
 			throw new CacheInvalidArgumentException( "Expected iterable, `{$type}` given" );
 		}
 
-		if ( $var instanceof Traversable ) {
-			$result = [];
-			foreach ( $var as $key => $value ) {
-				if ( !( is_string( $key ) || is_int( $key ) ) ) {
-					$type = gettype( $key );
-					throw new CacheInvalidArgumentException( "Cache key should be string or integer, `{$type}` is given" );
-				}
-				$result[ $key ] = $value;
+		$result = [];
+		foreach ( $var as $key => $value ) {
+			if ( !is_string( $key ) && !is_int( $key ) ) {
+				$type = gettype( $key );
+				throw new CacheInvalidArgumentException( "Cache key should be string or integer, `{$type}` is given" );
 			}
-		} else {
-			$result = $var;
+			$result[$key] = $value;
 		}
-
 		return $result;
-	}
-
-	private function isIterable( $var ) {
-		return is_array( $var ) || ( is_object( $var ) && ( $var instanceof Traversable ) );
 	}
 
 	/**
@@ -353,9 +320,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 		// very small (in former example it will be 0.001). This issue makes tests flaky.
 		// @see https://phabricator.wikimedia.org/T201453
 		if ( $ttl instanceof DateInterval ) {
-			$date = new DateTime();
-			$date->add( $ttl );
-			return $date->getTimestamp() - time() + 1;
+			return ( new DateTime() )->add( $ttl )->getTimestamp() - time() + 1;
 		} elseif ( $ttl === 0 ) {
 			// BagOStuff treats zero as indefinite while PSR requires this to be ttl meaning zero
 			// is basically an expired entry (we have tests relying on this assumption)
@@ -364,15 +329,14 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 			return $ttl;
 		} elseif ( $ttl === null ) {
 			return BagOStuff::TTL_INDEFINITE;
-		} else {
-			$type = gettype( $ttl );
-			throw new CacheInvalidArgumentException( "Invalid TTL: `null|int|\DateInterval` expected, `$type` given" );
 		}
+
+		$type = gettype( $ttl );
+		throw new CacheInvalidArgumentException( "Invalid TTL: `null|int|\DateInterval` expected, `$type` given" );
 	}
 
 	private function serialize( $value ) {
-		$serializedValue = serialize( $value );
-		$dataToStore = utf8_encode( $serializedValue );
+		$dataToStore = utf8_encode( serialize( $value ) );
 
 		$signature = hash_hmac( 'sha256', $dataToStore, $this->secret );
 		return json_encode( [ $signature, $dataToStore ] );
@@ -400,7 +364,6 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 		$hashEquals = hash_equals( $correctSignature, $signatureToCheck );
 		if ( !$hashEquals ) {
 			$this->logger->alert( "Incorrect signature", $loggingContext );
-
 			return $default;
 		}
 		$decodedData = utf8_decode( $data );
@@ -419,7 +382,6 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 
 		if ( $value === false ) {
 			$this->logger->alert( "Cannot deserialize stored value", $loggingContext );
-
 			return $default;
 		}
 
