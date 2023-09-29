@@ -4,6 +4,7 @@ namespace Wikibase\Repo\RestApi\RouteHandlers;
 
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Handler;
+use MediaWiki\Rest\RequestInterface;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
@@ -16,7 +17,9 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDe
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\BotRightCheckMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\ContentTypeCheckMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -53,8 +56,17 @@ class PatchItemDescriptionsRouteHandler extends SimpleHandler {
 
 		return new self(
 			new MiddlewareHandler( [
+				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
+				new UserAgentCheckMiddleware(),
+				new ContentTypeCheckMiddleware( [
+					ContentTypeCheckMiddleware::TYPE_JSON_PATCH,
+					ContentTypeCheckMiddleware::TYPE_APPLICATION_JSON,
+				] ),
 				new AuthenticationMiddleware(),
 				new BotRightCheckMiddleware( MediaWikiServices::getInstance()->getPermissionManager(), $responseFactory ),
+				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
+					fn ( RequestInterface $request ): string => $request->getPathParam( self::ITEM_ID_PATH_PARAM )
+				),
 			] ),
 			WbRestApi::getPatchItemDescriptions(),
 			new DescriptionsSerializer(),
@@ -146,6 +158,15 @@ class PatchItemDescriptionsRouteHandler extends SimpleHandler {
 					ParamValidator::PARAM_DEFAULT => null,
 				],
 			] ) : parent::getBodyValidator( $contentType );
+	}
+
+	/**
+	 * Preconditions are checked via {@link PreconditionMiddleware}
+	 *
+	 * @inheritDoc
+	 */
+	public function checkPreconditions() {
+		return null;
 	}
 
 	private function getUsername(): ?string {

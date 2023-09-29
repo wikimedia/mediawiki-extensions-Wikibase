@@ -51,6 +51,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetProperty
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetPropertyStatementsResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptions;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptionsResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatement;
@@ -303,6 +305,14 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 		yield 'PatchItemLabels' => [ [
 			'useCase' => PatchItemLabels::class,
 			'useCaseResponse' => new PatchItemLabelsResponse( new Labels(), $lastModified, 123 ),
+			'validRequest' => [
+				'pathParams' => [ 'item_id' => 'Q1' ],
+				'bodyContents' => [ 'patch' => [ [ 'op' => 'remove', 'path' => '/en' ] ] ],
+			],
+		] ];
+		yield 'PatchItemDescriptions' => [ [
+			'useCase' => PatchItemDescriptions::class,
+			'useCaseResponse' => new PatchItemDescriptionsResponse( new Descriptions() ),
 			'validRequest' => [
 				'pathParams' => [ 'item_id' => 'Q1' ],
 				'bodyContents' => [ 'patch' => [ [ 'op' => 'remove', 'path' => '/en' ] ] ],
