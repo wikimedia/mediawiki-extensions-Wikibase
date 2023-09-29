@@ -11,6 +11,7 @@ use Wikibase\DataModel\Term\TermList;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchedDescriptionsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptions;
@@ -46,6 +47,8 @@ class PatchItemDescriptionsTest extends TestCase {
 
 	use EditMetadataHelper;
 
+	private PatchItemDescriptionsValidator $validator;
+	private AssertItemExists $assertItemExists;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
 	private ItemDescriptionsRetriever $descriptionsRetriever;
 	private DescriptionsSerializer $descriptionsSerializer;
@@ -58,6 +61,7 @@ class PatchItemDescriptionsTest extends TestCase {
 		parent::setUp();
 
 		$this->validator = new TestValidatingRequestDeserializer();
+		$this->assertItemExists = $this->createStub( AssertItemExists::class );
 		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
 		$this->descriptionsRetriever = $this->createStub( ItemDescriptionsRetriever::class );
 		$this->descriptionsSerializer = new DescriptionsSerializer();
@@ -124,6 +128,26 @@ class PatchItemDescriptionsTest extends TestCase {
 		$this->validator->method( 'validateAndDeserialize' )->willThrowException( $expectedException );
 		try {
 			$this->newUseCase()->execute( $this->createStub( PatchItemDescriptionsRequest::class ) );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
+	public function testGivenItemNotFoundOrRedirect_throws(): void {
+		$itemId = 'Q789';
+		$expectedException = $this->createStub( UseCaseException::class );
+
+		$this->assertItemExists = $this->createStub( AssertItemExists::class );
+		$this->assertItemExists->method( 'execute' )->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase()->execute(
+				$this->newUseCaseRequest(
+					$itemId,
+					[ [ 'op' => 'add', 'path' => '/ar', 'value' => 'الوصف العربي الجديد' ] ]
+				)
+			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
 			$this->assertSame( $expectedException, $e );
@@ -224,6 +248,7 @@ class PatchItemDescriptionsTest extends TestCase {
 	private function newUseCase(): PatchItemDescriptions {
 		return new PatchItemDescriptions(
 			$this->validator,
+			$this->assertItemExists,
 			$this->assertUserIsAuthorized,
 			$this->descriptionsRetriever,
 			$this->descriptionsSerializer,

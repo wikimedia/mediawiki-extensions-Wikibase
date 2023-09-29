@@ -9,6 +9,7 @@ use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
 use MediaWiki\Rest\Validator\BodyValidator;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
+use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptions;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptionsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptionsResponse;
@@ -83,6 +84,11 @@ class PatchItemDescriptionsRouteHandler extends SimpleHandler {
 						$this->getUsername()
 					)
 				)
+			);
+		} catch ( ItemRedirect $e ) {
+			return $this->responseFactory->newErrorResponse(
+				UseCaseError::ITEM_REDIRECTED,
+				"Item $itemId has been merged into {$e->getRedirectTargetId()}."
 			);
 		} catch ( UseCaseError $e ) {
 			return $this->responseFactory->newErrorResponseFromException( $e );

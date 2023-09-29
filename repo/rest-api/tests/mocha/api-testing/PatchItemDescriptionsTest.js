@@ -269,7 +269,36 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 		} );
 	} );
 
+	describe( '404 error response', () => {
+		it( 'item not found', async () => {
+			const itemId = 'Q999999';
+			const response = await newPatchItemDescriptionsRequestBuilder(
+				itemId,
+				[ { op: 'replace', path: '/en', value: utils.uniq() } ]
+			).assertValidRequest().makeRequest();
+
+			expect( response ).to.have.status( 404 );
+			assert.strictEqual( response.header[ 'content-language' ], 'en' );
+			assert.strictEqual( response.body.code, 'item-not-found' );
+			assert.include( response.body.message, itemId );
+		} );
+	} );
+
 	describe( '409 error response', () => {
+		it( 'item is a redirect', async () => {
+			const redirectTarget = testItemId;
+			const redirectSource = await entityHelper.createRedirectForItem( redirectTarget );
+
+			const response = await newPatchItemDescriptionsRequestBuilder(
+				redirectSource,
+				[ { op: 'replace', path: '/en', value: utils.uniq() } ]
+			).assertValidRequest().makeRequest();
+
+			assertValidErrorResponse( response, 409, 'redirected-item' );
+			assert.include( response.body.message, redirectSource );
+			assert.include( response.body.message, redirectTarget );
+		} );
+
 		it( '"path" field target does not exist', async () => {
 			const operation = { op: 'remove', path: '/path/does/not/exist' };
 
