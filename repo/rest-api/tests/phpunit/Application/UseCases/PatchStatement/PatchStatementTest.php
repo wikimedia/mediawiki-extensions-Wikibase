@@ -17,6 +17,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertStatementSubjectExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestStatementSubjectRevisionMetadata;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchedStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementRequest;
@@ -340,7 +341,7 @@ class PatchStatementTest extends TestCase {
 		return new PatchStatement(
 			$this->useCaseValidator,
 			$this->patchedStatementValidator,
-			new JsonDiffJsonPatcher(),
+			new PatchJson( new JsonDiffJsonPatcher() ),
 			$this->statementSerializer,
 			new AssertStatementSubjectExists( $this->getRevisionMetadata ),
 			$this->statementRetriever,

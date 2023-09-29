@@ -5,15 +5,12 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionsEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
-use Wikibase\Repo\RestApi\Domain\Services\Exceptions\PatchPathException;
-use Wikibase\Repo\RestApi\Domain\Services\Exceptions\PatchTestConditionFailedException;
 use Wikibase\Repo\RestApi\Domain\Services\ItemDescriptionsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
-use Wikibase\Repo\RestApi\Domain\Services\JsonPatcher;
 
 /**
  * @license GPL-2.0-or-later
@@ -25,7 +22,7 @@ class PatchItemDescriptions {
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
 	private ItemDescriptionsRetriever $descriptionsRetriever;
 	private DescriptionsSerializer $descriptionsSerializer;
-	private JsonPatcher $patcher;
+	private PatchJson $patcher;
 	private ItemRetriever $itemRetriever;
 	private PatchedDescriptionsValidator $patchedDescriptionsValidator;
 	private ItemUpdater $itemUpdater;
@@ -36,7 +33,7 @@ class PatchItemDescriptions {
 		AssertUserIsAuthorized $assertUserIsAuthorized,
 		ItemDescriptionsRetriever $descriptionsRetriever,
 		DescriptionsSerializer $descriptionsSerializer,
-		JsonPatcher $patcher,
+		PatchJson $patcher,
 		ItemRetriever $itemRetriever,
 		PatchedDescriptionsValidator $patchedDescriptionsValidator,
 		ItemUpdater $itemUpdater
@@ -63,30 +60,7 @@ class PatchItemDescriptions {
 		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
 		$serialization = $this->descriptionsSerializer->serialize( $descriptions );
 
-		try {
-			$patchedDescriptions = $this->patcher->patch(
-				iterator_to_array( $serialization ),
-				$deserializedRequest->getPatch()
-			);
-		} catch ( PatchPathException $e ) {
-			throw new UseCaseError(
-				UseCaseError::PATCH_TARGET_NOT_FOUND,
-				"Target '{$e->getOperation()[$e->getField()]}' not found on the resource",
-				[ UseCaseError::CONTEXT_OPERATION => $e->getOperation(), UseCaseError::CONTEXT_FIELD => $e->getField() ]
-			);
-		} catch ( PatchTestConditionFailedException $e ) {
-			$operation = $e->getOperation();
-			throw new UseCaseError(
-				UseCaseError::PATCH_TEST_FAILED,
-				"Test operation in the provided patch failed. At path '${operation[ 'path' ]}'" .
-				" expected '" . json_encode( $operation[ 'value' ] ) .
-				"', actual: '" . json_encode( $e->getActualValue() ) . "'",
-				[
-					UseCaseError::CONTEXT_OPERATION => $operation,
-					UseCaseError::CONTEXT_ACTUAL_VALUE => $e->getActualValue(),
-				]
-			);
-		}
+		$patchedDescriptions = $this->patcher->execute( iterator_to_array( $serialization ), $deserializedRequest->getPatch() );
 
 		$item = $this->itemRetriever->getItem( $itemId );
 		$originalDescriptions = $item->getDescriptions();
