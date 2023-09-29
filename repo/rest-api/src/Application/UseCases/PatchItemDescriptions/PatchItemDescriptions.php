@@ -111,7 +111,11 @@ class PatchItemDescriptions {
 		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
 		$revision = $this->itemUpdater->update( $item, $editMetadata );
 
-		return new PatchItemDescriptionsResponse( $revision->getItem()->getDescriptions() );
+		return new PatchItemDescriptionsResponse(
+			$revision->getItem()->getDescriptions(),
+			$revision->getLastModified(),
+			$revision->getRevisionId()
+		);
 	}
 
 }

@@ -5,6 +5,7 @@ const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { newPatchItemDescriptionsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { formatLabelsEditSummary } = require( '../helpers/formatEditSummaries' );
+const { makeEtag } = require( '../helpers/httpHelper' );
 
 function assertValidErrorResponse( response, statusCode, responseBodyErrorCode, context = null ) {
 	expect( response ).to.have.status( statusCode );
@@ -22,6 +23,8 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 	let testItemId;
 	let testLabel;
 	let testDescription;
+	let originalLastModified;
+	let originalRevisionId;
 	const testLanguage = 'en';
 
 	before( async function () {
@@ -31,6 +34,10 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 			labels: [ { language: testLanguage, value: testLabel } ],
 			descriptions: [ { language: testLanguage, value: testDescription } ]
 		} ) ).entity.id;
+
+		const testItemCreationMetadata = await entityHelper.getLatestEditMetadata( testItemId );
+		originalLastModified = new Date( testItemCreationMetadata.timestamp );
+		originalRevisionId = testItemCreationMetadata.revid;
 
 		// wait 1s before modifying labels to verify the last-modified timestamps are different
 		await new Promise( ( resolve ) => {
@@ -49,6 +56,8 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 			expect( response ).to.have.status( 200 );
 			assert.strictEqual( response.body.de, description );
 			assert.strictEqual( response.header[ 'content-type' ], 'application/json' );
+			assert.isAbove( new Date( response.header[ 'last-modified' ] ), originalLastModified );
+			assert.notStrictEqual( response.header.etag, makeEtag( originalRevisionId ) );
 		} );
 
 		it( 'trims whitespace around the description', async () => {
@@ -81,6 +90,8 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 			expect( response ).to.have.status( 200 );
 			assert.strictEqual( response.body.ar, description );
 			assert.strictEqual( response.header[ 'content-type' ], 'application/json' );
+			assert.isAbove( new Date( response.header[ 'last-modified' ] ), originalLastModified );
+			assert.notStrictEqual( response.header.etag, makeEtag( originalRevisionId ) );
 
 			const editMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 			assert.include( editMetadata.tags, tag );

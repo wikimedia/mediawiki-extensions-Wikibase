@@ -312,7 +312,7 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 		] ];
 		yield 'PatchItemDescriptions' => [ [
 			'useCase' => PatchItemDescriptions::class,
-			'useCaseResponse' => new PatchItemDescriptionsResponse( new Descriptions() ),
+			'useCaseResponse' => new PatchItemDescriptionsResponse( new Descriptions(), $lastModified, 123 ),
 			'validRequest' => [
 				'pathParams' => [ 'item_id' => 'Q1' ],
 				'bodyContents' => [ 'patch' => [ [ 'op' => 'remove', 'path' => '/en' ] ] ],
