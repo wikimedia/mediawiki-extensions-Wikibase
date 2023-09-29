@@ -41,6 +41,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyAliases\GetPropertyAli
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyAliases\GetPropertyAliasesResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyAliasesInLanguage\GetPropertyAliasesInLanguage;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyAliasesInLanguage\GetPropertyAliasesInLanguageResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescription\GetPropertyDescription;
+use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescription\GetPropertyDescriptionResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescriptions\GetPropertyDescriptions;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescriptions\GetPropertyDescriptionsResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabel\GetPropertyLabel;
@@ -341,6 +343,19 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			'useCase' => GetPropertyAliasesInLanguage::class,
 			'useCaseResponse' => new GetPropertyAliasesInLanguageResponse(
 				new AliasesInLanguage( 'en', [ 'is a', 'example of' ] ),
+				$lastModified,
+				123
+			),
+			'validRequest' => [ 'pathParams' => [ 'property_id' => 'P1', 'language_code' => 'en' ] ],
+			'expectedExceptions' => [ [
+				new UseCaseError( UseCaseError::PROPERTY_NOT_FOUND, '' ),
+				$hasErrorCode( UseCaseError::PROPERTY_NOT_FOUND ),
+			] ],
+		] ];
+		yield 'GetPropertyDescription' => [ [
+			'useCase' => GetPropertyDescription::class,
+			'useCaseResponse' => new GetPropertyDescriptionResponse(
+				new Description( 'en', 'property description' ),
 				$lastModified,
 				123
 			),
