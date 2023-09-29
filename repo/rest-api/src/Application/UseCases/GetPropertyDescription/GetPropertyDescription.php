@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescription;
 
-use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestPropertyRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyDescriptionRetriever;
@@ -12,23 +11,27 @@ use Wikibase\Repo\RestApi\Domain\Services\PropertyDescriptionRetriever;
  */
 class GetPropertyDescription {
 
+	private GetPropertyDescriptionValidator $validator;
 	private GetLatestPropertyRevisionMetadata $getRevisionMetadata;
 	private PropertyDescriptionRetriever $descriptionRetriever;
 
 	public function __construct(
+		GetPropertyDescriptionValidator $validator,
 		GetLatestPropertyRevisionMetadata $getRevisionMetadata,
-		PropertyDescriptionRetriever $descriptionsRetriever
+		PropertyDescriptionRetriever $descriptionRetriever
 	) {
+		$this->validator = $validator;
 		$this->getRevisionMetadata = $getRevisionMetadata;
-		$this->descriptionRetriever = $descriptionsRetriever;
+		$this->descriptionRetriever = $descriptionRetriever;
 	}
 
 	/**
 	 * @throws UseCaseError
 	 */
 	public function execute( GetPropertyDescriptionRequest $request ): GetPropertyDescriptionResponse {
-		$propertyId = new NumericPropertyId( $request->getPropertyId() );
-		$languageCode = $request->getLanguageCode();
+		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
+		$propertyId = $deserializedRequest->getPropertyId();
+		$languageCode = $deserializedRequest->getLanguageCode();
 
 		[ $revisionId, $lastModified ] = $this->getRevisionMetadata->execute( $propertyId );
 

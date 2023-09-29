@@ -11,6 +11,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescription\GetPropert
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyDescriptionRetriever;
+use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescription\GetPropertyDescription
@@ -88,8 +89,18 @@ class GetPropertyDescriptionTest extends TestCase {
 		}
 	}
 
+	public function testGivenInvalidRequest_throws(): void {
+		try {
+			$this->newUseCase()->execute( new GetPropertyDescriptionRequest( 'X321', 'en' ) );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::INVALID_PROPERTY_ID, $e->getErrorCode() );
+		}
+	}
+
 	private function newUseCase(): GetPropertyDescription {
 		return new GetPropertyDescription(
+			new TestValidatingRequestDeserializer(),
 			$this->getRevisionMetadata,
 			$this->descriptionRetriever
 		);
