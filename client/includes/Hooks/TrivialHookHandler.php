@@ -8,6 +8,7 @@ use ContentHandler;
 use MediaWiki\Content\Hook\SearchDataForIndexHook;
 use MediaWiki\Hook\AbortEmailNotificationHook;
 use MediaWiki\Hook\BeforePageDisplayHook;
+use MediaWiki\Hook\MaintenanceShellStartHook;
 use MediaWiki\Hook\UnitTestsListHook;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Search\Hook\SearchIndexFieldsHook;
@@ -37,7 +38,8 @@ class TrivialHookHandler implements
 	SearchDataForIndexHook,
 	SearchIndexFieldsHook,
 	UnitTestsListHook,
-	WgQueryPagesHook
+	WgQueryPagesHook,
+	MaintenanceShellStartHook
 {
 	/**
 	 * @param User $editor
@@ -136,4 +138,7 @@ class TrivialHookHandler implements
 		// since they require a parameter (badge, entity id) to operate
 	}
 
+	public function onMaintenanceShellStart(): void {
+		require_once __DIR__ . '/MaintenanceShellStart.php';
+	}
 }

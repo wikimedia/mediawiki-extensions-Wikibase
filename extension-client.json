@@ -273,7 +273,7 @@
 		"LocalUserCreated": "Wikibase\\Client\\Hooks\\EchoNotificationsHandlers::onLocalUserCreated",
 		"LoginFormValidErrorMessages": "\\Wikibase\\Client\\Hooks\\LoginFormValidErrorMessagesHandler::handle",
 		"MagicWordwgVariableIDs": "Magic",
-		"MaintenanceShellStart": "\\Wikibase\\Client\\ClientHooks::onMaintenanceShellStart",
+		"MaintenanceShellStart": "Trivial",
 		"OldChangesListRecentChangesLine": "ChangesListLines",
 		"OutputPageParserOutput": "Sidebar",
 		"ParserCacheSaveComplete": "DataUpdate",
