@@ -14,9 +14,4 @@ class LoginFormValidErrorMessagesHandler implements LoginFormValidErrorMessagesH
 		$messages[] = 'wikibase-client-data-bridge-login-warning';
 	}
 
-	/** compatibility stub for old hooks system, avoid using if possible */
-	public static function handle( &$messages ): void {
-		( new self() )->onLoginFormValidErrorMessages( $messages );
-	}
-
 }

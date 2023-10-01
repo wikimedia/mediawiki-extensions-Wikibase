@@ -237,6 +237,9 @@
 				"WikibaseClient.Settings",
 				"WikibaseClient.Store"
 			]
+		},
+		"LoginFormValidErrorMessages": {
+			"class": "Wikibase\\Client\\Hooks\\LoginFormValidErrorMessagesHandler"
 		}
 	},
 	"Hooks": {
@@ -271,7 +274,7 @@
 			"SqlUsageTrackerSchemaUpdater"
 		],
 		"LocalUserCreated": "Wikibase\\Client\\Hooks\\EchoNotificationsHandlers::onLocalUserCreated",
-		"LoginFormValidErrorMessages": "\\Wikibase\\Client\\Hooks\\LoginFormValidErrorMessagesHandler::handle",
+		"LoginFormValidErrorMessages": "LoginFormValidErrorMessages",
 		"MagicWordwgVariableIDs": "Magic",
 		"MaintenanceShellStart": "Trivial",
 		"OldChangesListRecentChangesLine": "ChangesListLines",
