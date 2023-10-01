@@ -262,7 +262,7 @@
 		"EnhancedChangesListModifyLineData": "ChangesListLines",
 		"ExtensionTypes": "LibHooks",
 		"FormatAutocomments": "\\Wikibase\\Client\\ClientHooks::onFormat",
-		"GetDoubleUnderscoreIDs": "\\Wikibase\\Client\\ClientHooks::onGetDoubleUnderscoreIDs",
+		"GetDoubleUnderscoreIDs": "ParserFunctionRegistrant",
 		"GetPreferences": "\\Wikibase\\Client\\ClientHooks::onGetPreferences",
 		"InfoAction": "InfoAction",
 		"LinksUpdateComplete": "DataUpdate",
