@@ -139,6 +139,6 @@ class TrivialHookHandler implements
 	}
 
 	public function onMaintenanceShellStart(): void {
-		require_once __DIR__ . '/MaintenanceShellStart.php';
+		require_once __DIR__ . '/../MaintenanceShellStart.php';
 	}
 }
