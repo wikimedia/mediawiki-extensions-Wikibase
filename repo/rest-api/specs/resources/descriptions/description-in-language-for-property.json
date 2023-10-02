@@ -2,8 +2,7 @@
 	"get": {
 		"operationId": "getPropertyDescription",
 		"tags": [ "descriptions" ],
-		"summary": "[WIP] Retrieve a Property's description in a specific language",
-		"description": "This endpoint is currently in development and is not recommended for production use.",
+		"summary": "Retrieve a Property's description in a specific language",
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/PropertyId" },
 			{ "$ref": "../../global/parameters.json#/LanguageCode" },

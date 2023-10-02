@@ -125,9 +125,19 @@
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetItemDescriptionsRouteHandler::factory"
 	},
 	{
+		"path": "/wikibase/v0/entities/items/{item_id}/descriptions",
+		"method": "PATCH",
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\PatchItemDescriptionsRouteHandler::factory"
+	},
+	{
 		"path": "/wikibase/v0/entities/items/{item_id}/descriptions/{language_code}",
 		"method": "GET",
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetItemDescriptionRouteHandler::factory"
+	},
+	{
+		"path": "/wikibase/v0/entities/properties/{property_id}/descriptions/{language_code}",
+		"method": "GET",
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetPropertyDescriptionRouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/descriptions/{language_code}",
@@ -153,5 +163,10 @@
 		"path": "/wikibase/v0/entities/items/{item_id}/aliases/{language_code}",
 		"method": "GET",
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetItemAliasesInLanguageRouteHandler::factory"
+	},
+	{
+		"path": "/wikibase/v0/entities/properties/{property_id}/aliases/{language_code}",
+		"method": "GET",
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetPropertyAliasesInLanguageRouteHandler::factory"
 	}
 ]
