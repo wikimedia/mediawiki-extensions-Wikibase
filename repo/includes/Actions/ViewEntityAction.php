@@ -188,7 +188,7 @@ class ViewEntityAction extends ViewAction {
 				// or should set the attribute of the h1 to correct direction.
 				// Still note that the direction is "auto" so guessing should
 				// give the right direction in most cases.
-			)->plaintextParams( $titleText . $id )
+			)->rawParams( htmlspecialchars( $titleText ) . $id )
 		);
 	}
 
