@@ -12,7 +12,8 @@
 			"GuoPC",
 			"Lakejason0",
 			"SaldırganSincap",
-			"Shizhao"
+			"Shizhao",
+			"LittlePaw365"
 		]
 	},
 	"apihelp-wbavailablebadges-description": "查询可用的徽章项目。",
@@ -65,7 +66,7 @@
 	"apihelp-wbformatvalue-description": "格式数据值。",
 	"apihelp-wbformatvalue-summary": "格式数据值。",
 	"apihelp-wbformatvalue-param-generate": "要生成的预期输出格式。",
-	"apihelp-wbformatvalue-param-datatype": "值的数据类型。这明显与数据值不同",
+	"apihelp-wbformatvalue-param-datatype": "值的数据类型。这与值的类型不同",
 	"apihelp-wbformatvalue-param-datavalue": "要格式化的数据。这必须为数据类型对象的JSON序列化。",
 	"apihelp-wbformatvalue-param-options": "格式化程序应使用的选项。以JSON对象提供。",
 	"apihelp-wbformatvalue-param-property": "数据值所属的属性ID，应在没有<var>datatype</var>参数时使用。",
