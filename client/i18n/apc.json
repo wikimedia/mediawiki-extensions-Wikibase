@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"FunLater"
+		]
+	},
+	"wikibase-dataitem": "عنصر {{WBREPONAME}}",
+	"wikibase-editlinks": "عدل الروابط",
+	"wikibase-linkitem-addlinks": "زيد وصلات",
+	"wikibase-linkitem-title": "روبط مع الصفحة",
+	"wikibase-linkitem-linkpage": "ربوط بالصفحة",
+	"wikibase-linkitem-selectlink": "نقى موقع وصفحة لتربطن بهيدي الصفحة.",
+	"wikibase-linkitem-input-site": "اللغة:",
+	"wikibase-linkitem-input-page": "صفحة:",
+	"wikibase-rc-hide-wikidata-hide": "خبي",
+	"wikibase-rc-hide-wikidata-show": "فرجى",
+	"wikibase-otherprojects": "بغير مشاريع"
+}

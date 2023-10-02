@@ -269,5 +269,6 @@
 	"right-item-merge": "Fletta saman element",
 	"action-property-create": "oppretta eigenskapar",
 	"right-property-create": "Oppretta eigenskapar",
-	"wikibase-pageinfo-subscription": "Wikiar som tingar denne eininga"
+	"wikibase-pageinfo-subscription": "Wikiar som tingar denne eininga",
+	"wikibase-entity-save-error-message": "Endringa di kunne ikkje publiserast. Du kan freista å trykka på publiseringsknappen att."
 }
