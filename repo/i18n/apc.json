@@ -4,5 +4,8 @@
 			"FunLater"
 		]
 	},
+	"wikibase-edit": "عدّل",
+	"wikibase-add": "زيد",
+	"wikibase-description-empty": "ما في وصف",
 	"wikibase-sitelinks-special": "غير مواقع"
 }

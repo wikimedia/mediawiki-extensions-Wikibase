@@ -8,7 +8,7 @@
 		]
 	},
 	"wikibase-comment-update": "{{WBREPONAME}} япалана улӑштарнӑ",
-	"wikibase-dataitem": "{{WBREPONAME}}",
+	"wikibase-dataitem": "{{WBREPONAME}} элеменчӗ",
 	"wikibase-editlinks": "Каҫӑсене тӳрлет",
 	"wikibase-editlinkstitle": "Чӗлхесем хушшинчи каҫӑсем",
 	"wikibase-linkitem-addlinks": "Каҫӑсем хуш",
@@ -18,10 +18,12 @@
 	"wikibase-linkitem-input-site": "Чӗлхе:",
 	"wikibase-linkitem-input-page": "Страница:",
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
-	"wikibase-rc-hide-wikidata-hide": "кăтартмалла мар",
-	"wikibase-rc-hide-wikidata-show": "кăтартмалла",
+	"wikibase-rc-hide-wikidata-hide": "Пытар",
+	"wikibase-rc-hide-wikidata-show": "Кӑтарт",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} тӳрлетни",
 	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}} тӳрлетнисем",
+	"wikibase-pageinfo-entity-id": "{{grammar:genitive|{{WBREPONAME}}}}-ри элемент идентификаторӗ",
+	"wikibase-pageinfo-entity-usage": "Ку страницӑра усӑ куракан {{WBREPONAME}} сущность",
 	"wikibase-otherprojects": "Ытти проектсенче"
 }

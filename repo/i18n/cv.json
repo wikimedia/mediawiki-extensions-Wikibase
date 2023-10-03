@@ -10,10 +10,10 @@
 	"wikibase-add": "хуш",
 	"wikibase-label-empty": "Ятне кӑтартман",
 	"wikibase-description-empty": "Ӑнлантарӑвне ҫырса тултарман",
-	"wikibase-sitelinks-special": "Урăх сайтсем",
+	"wikibase-sitelinks-special": "Ытти сайтсем",
 	"wikibase-entityselector-more": "нумайрах",
-	"wikibase-validator-no-such-entity": "$1 тупăнмарĕ",
+	"wikibase-validator-no-such-entity": "$1 элемент тупӑнмарӗ",
 	"wikibase-gotolinkedpage-submit": "Куç",
-	"wikibase-gotolinkedpage-error-item-not-found": "Элеменчĕ тупăнмарĕ",
-	"wikibase-itemmerge-no-such-entity": "Элеменчĕ тупăнмарĕ."
+	"wikibase-gotolinkedpage-error-item-not-found": "Элемент тупӑнмарӗ",
+	"wikibase-itemmerge-no-such-entity": "Элемент тупӑнмарӗ."
 }

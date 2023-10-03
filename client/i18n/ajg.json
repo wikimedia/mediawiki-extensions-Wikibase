@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Samatics"
+			"Samatics",
+			"Medaho"
 		]
 	},
+	"wikibase-linkitem-input-site": "Egbe:",
 	"wikibase-linkitem-input-page": "Kpashi:"
 }
