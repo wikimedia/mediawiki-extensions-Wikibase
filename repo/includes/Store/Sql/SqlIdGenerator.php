@@ -93,7 +93,7 @@ class SqlIdGenerator implements IdGenerator {
 			$id = 1;
 
 			$database->newInsertQueryBuilder()
-				->insert( 'wb_id_counters' )
+				->insertInto( 'wb_id_counters' )
 				->row( [
 					'id_value' => $id,
 					'id_type' => $type,

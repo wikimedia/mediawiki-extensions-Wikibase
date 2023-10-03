@@ -141,7 +141,7 @@ class BulkSubscriptionUpdater {
 		$rows = $this->makeSubscriptionRows( $entities );
 
 		$dbw->newInsertQueryBuilder()
-			->insert( 'wb_changes_subscription' )
+			->insertInto( 'wb_changes_subscription' )
 			->ignore()
 			->rows( $rows )
 			->caller( __METHOD__ )->execute();
@@ -328,7 +328,7 @@ class BulkSubscriptionUpdater {
 		$dbw->startAtomic( __METHOD__ );
 
 		$dbw->newDeleteQueryBuilder()
-			->delete( 'wb_changes_subscription' )
+			->deleteFrom( 'wb_changes_subscription' )
 			->where( [ 'cs_subscriber_id' => $this->subscriberWikiId ] )
 			->andWhere( $dbw->buildComparison( '>=', [ 'cs_entity_id' => $minId ] ) )
 			->andWhere( $dbw->buildComparison( '<=', [ 'cs_entity_id' => $maxId ] ) )

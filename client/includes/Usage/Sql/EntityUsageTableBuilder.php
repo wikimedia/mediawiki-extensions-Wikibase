@@ -142,7 +142,7 @@ class EntityUsageTableBuilder {
 		$c = 0;
 		foreach ( $entityPerPage as $pageId => $entityId ) {
 			$dbw->newInsertQueryBuilder()
-				->insert( $this->usageTableName )
+				->insertInto( $this->usageTableName )
 				->ignore()
 				->row( [
 					'eu_page_id' => (int)$pageId,

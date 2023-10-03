@@ -148,7 +148,7 @@ class SiteLinkTable implements SiteLinkStore {
 		);
 
 		$insertQueryBuilder = $dbw->newInsertQueryBuilder()
-			->insert( $this->table )
+			->insertInto( $this->table )
 			->ignore();
 		foreach ( $links as $siteLink ) {
 			$insertQueryBuilder->row( [

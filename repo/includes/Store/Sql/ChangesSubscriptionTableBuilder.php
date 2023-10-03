@@ -160,7 +160,7 @@ class ChangesSubscriptionTableBuilder {
 			$rows = $this->makeSubscriptionRows( $itemId, $subscribers );
 
 			$db->newInsertQueryBuilder()
-				->insert( $this->tableName )
+				->insertInto( $this->tableName )
 				->ignore()
 				->rows( $rows )
 				->caller( __METHOD__ )->execute();

@@ -287,7 +287,7 @@ class WikibasePingback {
 				$id = MWCryptRand::generateHex( 32 );
 				$dbw = $this->repoConnections->getWriteConnection();
 				$dbw->newInsertQueryBuilder()
-					->insert( 'updatelog' )
+					->insertInto( 'updatelog' )
 					->ignore()
 					->row( [
 						'ul_key' => 'WikibasePingback',

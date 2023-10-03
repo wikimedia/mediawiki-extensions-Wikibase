@@ -119,7 +119,7 @@ class SqlSubscriptionManager implements SubscriptionManager {
 		$rows = $this->makeSubscriptionRows( $subscriber, $subscriptions );
 
 		$db->newInsertQueryBuilder()
-			->insert( 'wb_changes_subscription' )
+			->insertInto( 'wb_changes_subscription' )
 			->ignore()
 			->rows( $rows )
 			->caller( __METHOD__ )->execute();
@@ -135,7 +135,7 @@ class SqlSubscriptionManager implements SubscriptionManager {
 	private function deleteSubscriptions( IDatabase $db, string $subscriber, array $subscriptions ): void {
 		if ( $subscriptions ) {
 			$db->newDeleteQueryBuilder()
-				->delete( 'wb_changes_subscription' )
+				->deleteFrom( 'wb_changes_subscription' )
 				->where( [
 					'cs_subscriber_id' => $subscriber,
 					'cs_entity_id' => $subscriptions,

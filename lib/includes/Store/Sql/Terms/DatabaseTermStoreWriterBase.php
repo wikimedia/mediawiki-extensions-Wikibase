@@ -144,7 +144,7 @@ abstract class DatabaseTermStoreWriterBase {
 
 				$dbw->onTransactionPreCommitOrIdle( function () use ( $dbw, $rowsToInsert, $fname ) {
 					$dbw->newInsertQueryBuilder()
-						->insert( $this->getMapping()->getTableName() )
+						->insertInto( $this->getMapping()->getTableName() )
 						->ignore()
 						->rows( $rowsToInsert )
 						->caller( $fname )->execute();
@@ -156,7 +156,7 @@ abstract class DatabaseTermStoreWriterBase {
 			// Delete entries in the table that are no longer needed
 			// Further cleanup should then done by the caller of this method
 			$dbw->newDeleteQueryBuilder()
-				->delete( $this->getMapping()->getTableName() )
+				->deleteFrom( $this->getMapping()->getTableName() )
 				->where( [
 					$this->getMapping()->getEntityIdColumn() => $entityNumericId,
 					$this->getMapping()->getTermInLangIdColumn() => $termInLangIdsToClean,
@@ -200,7 +200,7 @@ abstract class DatabaseTermStoreWriterBase {
 
 		if ( $rowIdsToDelete !== [] ) {
 			$dbw->newDeleteQueryBuilder()
-				->delete( $this->getMapping()->getTableName() )
+				->deleteFrom( $this->getMapping()->getTableName() )
 				->where( [ $this->getMapping()->getRowIdColumn() => $rowIdsToDelete ] )
 				->caller( __METHOD__ )->execute();
 		}

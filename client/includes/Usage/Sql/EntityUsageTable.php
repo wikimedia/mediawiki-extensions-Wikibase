@@ -182,7 +182,7 @@ class EntityUsageTable {
 		$writeConnection = $this->getWriteConnection();
 		foreach ( $batches as $rows ) {
 			$writeConnection->newInsertQueryBuilder()
-				->insert( $this->tableName )
+				->insertInto( $this->tableName )
 				->ignore()
 				->rows( $rows )
 				->caller( __METHOD__ )->execute();

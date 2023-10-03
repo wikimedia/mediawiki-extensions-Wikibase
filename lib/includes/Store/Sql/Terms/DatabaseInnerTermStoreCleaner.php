@@ -91,7 +91,7 @@ class DatabaseInnerTermStoreCleaner {
 
 		$this->incrementForQuery( 'DatabaseTermIdsCleaner_cleanTermInLangIds' );
 		$this->dbw->newDeleteQueryBuilder()
-			->delete( 'wbt_term_in_lang' )
+			->deleteFrom( 'wbt_term_in_lang' )
 			->where( [ 'wbtl_id' => $termInLangIds ] )
 			->caller( __METHOD__ )->execute();
 
@@ -200,7 +200,7 @@ class DatabaseInnerTermStoreCleaner {
 
 		$this->incrementForQuery( 'DatabaseTermIdsCleaner_cleanTextInLangIds' );
 		$this->dbw->newDeleteQueryBuilder()
-			->delete( 'wbt_text_in_lang' )
+			->deleteFrom( 'wbt_text_in_lang' )
 			->where( [ 'wbxl_id' => $textInLangIds ] )
 			->caller( __METHOD__ )->execute();
 
@@ -277,7 +277,7 @@ class DatabaseInnerTermStoreCleaner {
 
 		$this->incrementForQuery( 'DatabaseTermIdsCleaner_cleanTextIds' );
 		$this->dbw->newDeleteQueryBuilder()
-			->delete( 'wbt_text' )
+			->deleteFrom( 'wbt_text' )
 			->where( [ 'wbx_id' => $textIds ] )
 			->caller( __METHOD__ )->execute();
 	}
