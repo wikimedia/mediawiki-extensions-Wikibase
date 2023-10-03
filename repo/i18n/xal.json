@@ -6,5 +6,7 @@
 		]
 	},
 	"wikibase-edit": "ясх",
-	"wikibase-add": "немх"
+	"wikibase-add": "немх",
+	"wikibase-description-empty": "Тодрхала уга тодрхалт",
+	"wikibase-sitelinks-special": "Талдан сайтмуд"
 }
