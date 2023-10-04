@@ -34,17 +34,42 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class SetSiteLinkTest extends WikibaseApiTestCase {
 
-	/**
-	 * @var bool
-	 */
-	private static $hasSetup;
-
 	/** @var ItemId */
 	private static $gaItemId;
 	/** @var ItemId */
 	private static $faItemId;
 	/** @var ItemId */
 	private static $otherItemId;
+
+	public function addDBDataOnce() {
+		$store = $this->getEntityStore();
+
+		$this->initTestEntities( [ 'StringProp', 'Leipzig', 'Berlin' ] );
+
+		$badge = new Item();
+		$store->saveEntity( $badge, 'SetSiteLinkTestGA', $this->user, EDIT_NEW );
+		self::$gaItemId = $badge->getId();
+
+		$badge = new Item();
+		$store->saveEntity( $badge, 'SetSiteLinkTestFA', $this->user, EDIT_NEW );
+		self::$faItemId = $badge->getId();
+
+		$badge = new Item();
+		$store->saveEntity( $badge, 'SetSiteLinkTestOther', $this->user, EDIT_NEW );
+		self::$otherItemId = $badge->getId();
+	}
+
+	protected function setUp(): void {
+		parent::setUp();
+
+		$settings = clone WikibaseRepo::getSettings( $this->getServiceContainer() );
+		$settings->setSetting( 'badgeItems', [
+			self::$gaItemId->getSerialization() => '',
+			self::$faItemId->getSerialization() => '',
+			'Q99999' => '', // Just in case we have a wrong config
+		] );
+		$this->setService( 'WikibaseRepo.Settings', $settings );
+	}
 
 	public static function provideData() {
 		return [
@@ -364,39 +389,6 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 				],
 			],
 		];
-	}
-
-	protected function setUp(): void {
-		parent::setUp();
-
-		// XXX: This test doesn't mark tablesUsed so things created here will remain through all tests in the class.
-		if ( !isset( self::$hasSetup ) ) {
-			$store = $this->getEntityStore();
-
-			$this->initTestEntities( [ 'StringProp', 'Leipzig', 'Berlin' ] );
-
-			$badge = new Item();
-			$store->saveEntity( $badge, 'SetSiteLinkTestGA', $this->user, EDIT_NEW );
-			self::$gaItemId = $badge->getId();
-
-			$badge = new Item();
-			$store->saveEntity( $badge, 'SetSiteLinkTestFA', $this->user, EDIT_NEW );
-			self::$faItemId = $badge->getId();
-
-			$badge = new Item();
-			$store->saveEntity( $badge, 'SetSiteLinkTestOther', $this->user, EDIT_NEW );
-			self::$otherItemId = $badge->getId();
-		}
-
-		$settings = clone WikibaseRepo::getSettings( $this->getServiceContainer() );
-		$settings->setSetting( 'badgeItems', [
-			self::$gaItemId->getSerialization() => '',
-			self::$faItemId->getSerialization() => '',
-			'Q99999' => '', // Just in case we have a wrong config
-		] );
-		$this->setService( 'WikibaseRepo.Settings', $settings );
-
-		self::$hasSetup = true;
 	}
 
 	/**

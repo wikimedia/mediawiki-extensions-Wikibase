@@ -23,15 +23,8 @@ use ApiUsageException;
  */
 class LinkTitlesTest extends WikibaseApiTestCase {
 
-	private static $hasSetup;
-
-	protected function setUp(): void {
-		parent::setUp();
-
-		if ( !isset( self::$hasSetup ) ) {
-			$this->initTestEntities( [ 'StringProp', 'Oslo', 'Berlin' ] );
-		}
-		self::$hasSetup = true;
+	public function addDBDataOnce(): void {
+		$this->initTestEntities( [ 'StringProp', 'Oslo', 'Berlin' ] );
 	}
 
 	public static function provideLinkTitles(): iterable {

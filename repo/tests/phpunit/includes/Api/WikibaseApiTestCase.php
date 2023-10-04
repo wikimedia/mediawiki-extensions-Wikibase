@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiTestCase;
+use ApiTestContext;
 use ApiUsageException;
 use ChangeTags;
 use CommentStoreComment;
@@ -32,16 +33,15 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	/** @var User */
 	protected $user;
 
+	private bool $setupDone = false;
+
 	protected function setUp(): void {
 		parent::setUp();
 
 		$this->setupUser();
 
-		$this->setupSiteLinkGroups();
-
-		$siteStore = new \HashSiteStore( TestSites::getSites() );
-		$this->setService( 'SiteStore', $siteStore );
-		$this->setService( 'SiteLookup', $siteStore );
+		$this->setupSites();
+		$this->setupDone = true;
 	}
 
 	protected function createTestUser() {
@@ -57,7 +57,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		return WikibaseRepo::getEntityStore();
 	}
 
-	private function setupUser() {
+	protected function setupUser() {
 		self::$users['wbeditor'] = $this->createTestUser();
 
 		$this->user = self::$users['wbeditor']->getUser();
@@ -75,13 +75,18 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		] ] );
 	}
 
-	private function setupSiteLinkGroups() {
+	private function setupSites() {
 		global $wgWBRepoSettings;
 
 		$customRepoSettings = $wgWBRepoSettings;
 		$customRepoSettings['siteLinkGroups'] = [ 'wikipedia' ];
 		$this->setMwGlobals( 'wgWBRepoSettings', $customRepoSettings );
 		MediaWikiServices::getInstance()->resetServiceForTesting( 'SiteLookup' );
+
+		$siteStore = new \HashSiteStore( TestSites::getSites() );
+		$this->setService( 'SiteStore', $siteStore );
+		$this->setService( 'SiteLookup', $siteStore );
+		$this->sitesSetup = true;
 	}
 
 	/**
@@ -89,6 +94,11 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	 * @param string[] $idMap
 	 */
 	protected function initTestEntities( array $handles, array $idMap = [] ) {
+		// Make sure to run the setup because this can be called from addDBDataOnce (before setUp).
+		if ( !$this->setupDone ) {
+			$this->setupUser();
+			$this->setupSites();
+		}
 		$activeHandles = EntityTestHelper::getActiveHandles();
 		$user = $this->getTestSysop()->getUser();
 
@@ -100,6 +110,12 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 			EntityTestHelper::unRegisterEntity( $handle );
 		}
 
+		// Hack: make it possible to call this method from addDBDataOnce, which is called before ApiTestCase::setUp,
+		// when apiContext is still unset.
+		$oldContext = $this->apiContext;
+		if ( !$oldContext ) {
+			$this->apiContext = new ApiTestContext();
+		}
 		foreach ( $handles as $handle ) {
 			$params = EntityTestHelper::getEntity( $handle );
 			$params['action'] = 'wbeditentity';
@@ -112,6 +128,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 
 			$idMap["%$handle%"] = $res['entity']['id'];
 		}
+		$this->apiContext = $oldContext;
 	}
 
 	/**
