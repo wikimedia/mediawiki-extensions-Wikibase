@@ -60,7 +60,7 @@ class UnexpectedErrorHandlerMiddlewareTest extends TestCase {
 
 		$response = $this->newMiddleware()->run(
 			$this->createStub( Handler::class ),
-			fn () => $expectedResponse
+			fn() => $expectedResponse
 		);
 
 		$this->assertSame( $expectedResponse, $response );

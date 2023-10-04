@@ -177,7 +177,7 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 	public function routeHandlersProvider(): Generator {
 		$lastModified = '20230731042031';
 		$hasHttpStatus = fn( int $status ) => fn( Response $r ) => $this->assertSame( $status, $r->getStatusCode() );
-		$hasErrorCode = fn ( string $errorCode ) => function ( Response $response ) use ( $errorCode ): void {
+		$hasErrorCode = fn( string $errorCode ) => function ( Response $response ) use ( $errorCode ): void {
 			$this->assertSame( $errorCode, json_decode( $response->getBody()->getContents() )->code );
 			$this->assertSame( [ 'en' ], $response->getHeader( 'Content-Language' ) );
 		}; // phpcs:ignore -- phpcs doesn't like the semicolon here, but it's very much needed.

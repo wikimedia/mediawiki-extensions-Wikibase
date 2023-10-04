@@ -61,7 +61,7 @@ class GetPropertyRouteHandler extends SimpleHandler {
 				new UserAgentCheckMiddleware(),
 				new AuthenticationMiddleware(),
 				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
-					fn ( RequestInterface $request ): string => $request->getPathParam( self::PROPERTY_ID_PATH_PARAM )
+					fn( RequestInterface $request ): string => $request->getPathParam( self::PROPERTY_ID_PATH_PARAM )
 				),
 			] ),
 			new ResponseFactory()

@@ -64,7 +64,7 @@ class RemovePropertyStatementRouteHandler extends SimpleHandler {
 				] ),
 				new BotRightCheckMiddleware( MediaWikiServices::getInstance()->getPermissionManager(), $responseFactory ),
 				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
-					fn ( RequestInterface $request ): string => $request->getPathParam( self::PROPERTY_ID_PATH_PARAM )
+					fn( RequestInterface $request ): string => $request->getPathParam( self::PROPERTY_ID_PATH_PARAM )
 				),
 			] )
 		);

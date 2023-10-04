@@ -49,7 +49,7 @@ class ItemPartsSerializer {
 			fn( callable $serializeField ) => $serializeField(),
 			array_filter(
 				$fieldSerializers,
-				fn ( string $fieldName ) => $itemParts->isRequested( $fieldName ),
+				fn( string $fieldName ) => $itemParts->isRequested( $fieldName ),
 				ARRAY_FILTER_USE_KEY
 			)
 		);
