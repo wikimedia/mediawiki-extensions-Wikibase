@@ -45,7 +45,7 @@ class PropertyPartsSerializer {
 			fn( callable $serializeField ) => $serializeField(),
 			array_filter(
 				$fieldSerializers,
-				fn ( string $fieldName ) => $propertyParts->isRequested( $fieldName ),
+				fn( string $fieldName ) => $propertyParts->isRequested( $fieldName ),
 				ARRAY_FILTER_USE_KEY
 			),
 		);

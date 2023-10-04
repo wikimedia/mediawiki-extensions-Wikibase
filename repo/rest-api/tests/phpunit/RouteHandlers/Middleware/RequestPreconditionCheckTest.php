@@ -38,7 +38,7 @@ class RequestPreconditionCheckTest extends TestCase {
 		$preconditionCheck = new RequestPreconditionCheck(
 			$this->newEntityRevisionLookupReturningResult( $subjectId, $revisionIdResult ),
 			WikibaseRepo::getEntityIdParser(),
-			fn () => $subjectId->getSerialization(),
+			fn() => $subjectId->getSerialization(),
 			new ConditionalHeaderUtil()
 		);
 
@@ -104,7 +104,7 @@ class RequestPreconditionCheckTest extends TestCase {
 		$preconditionCheck = new RequestPreconditionCheck(
 			$this->createStub( EntityRevisionLookup::class ),
 			WikibaseRepo::getEntityIdParser(),
-			fn () => 'some-invalid-item-id',
+			fn() => 'some-invalid-item-id',
 			$conditionalHeaderUtil
 		);
 
@@ -125,7 +125,7 @@ class RequestPreconditionCheckTest extends TestCase {
 		$preconditionCheck = new RequestPreconditionCheck(
 			$this->newEntityRevisionLookupReturningResult( $entityId, $revisionIdResult ),
 			WikibaseRepo::getEntityIdParser(),
-			fn () => $entityId->getSerialization(),
+			fn() => $entityId->getSerialization(),
 			$conditionalHeaderUtil
 		);
 

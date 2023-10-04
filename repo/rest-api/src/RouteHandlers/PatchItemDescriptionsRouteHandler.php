@@ -65,7 +65,7 @@ class PatchItemDescriptionsRouteHandler extends SimpleHandler {
 				new AuthenticationMiddleware(),
 				new BotRightCheckMiddleware( MediaWikiServices::getInstance()->getPermissionManager(), $responseFactory ),
 				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
-					fn ( RequestInterface $request ): string => $request->getPathParam( self::ITEM_ID_PATH_PARAM )
+					fn( RequestInterface $request ): string => $request->getPathParam( self::ITEM_ID_PATH_PARAM )
 				),
 			] ),
 			WbRestApi::getPatchItemDescriptions(),

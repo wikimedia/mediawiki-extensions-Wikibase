@@ -63,7 +63,7 @@ class StatementReadModelConverter {
 	private function convertReferences( ReferenceList $references ): References {
 		return new References(
 			...array_map(
-				fn ( DataModelReference $ref ) => new ReadModelReference(
+				fn( DataModelReference $ref ) => new ReadModelReference(
 					$ref->getHash(),
 					array_map(
 						[ $this, 'convertSnakToPropertyValuePair' ],

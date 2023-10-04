@@ -23,7 +23,7 @@ class AuthenticationMiddlewareTest extends TestCase {
 
 		$response = $middleware->run(
 			$this->newRouteHandlerWithUser( UserIdentityValue::newAnonymous( 'im anonymous' ) ),
-			fn () => new Response()
+			fn() => new Response()
 		);
 
 		$this->assertFalse( $response->hasHeader( AuthenticationMiddleware::USER_AUTHENTICATED_HEADER ) );
@@ -35,7 +35,7 @@ class AuthenticationMiddlewareTest extends TestCase {
 
 		$response = $middleware->run(
 			$this->newRouteHandlerWithUser( UserIdentityValue::newRegistered( 123, $username ) ),
-			fn () => new Response()
+			fn() => new Response()
 		);
 
 		$this->assertTrue( $response->hasHeader( AuthenticationMiddleware::USER_AUTHENTICATED_HEADER ) );

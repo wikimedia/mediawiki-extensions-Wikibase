@@ -23,7 +23,7 @@ class Aliases extends ArrayObject {
 	public static function fromAliasGroupList( AliasGroupList $aliasGroupList ): self {
 		return new Aliases(
 			...array_map(
-				fn ( AliasGroup $a ) => new AliasesInLanguage( $a->getLanguageCode(), $a->getAliases() ),
+				fn( AliasGroup $a ) => new AliasesInLanguage( $a->getLanguageCode(), $a->getAliases() ),
 				array_values( $aliasGroupList->toArray() )
 			)
 		);

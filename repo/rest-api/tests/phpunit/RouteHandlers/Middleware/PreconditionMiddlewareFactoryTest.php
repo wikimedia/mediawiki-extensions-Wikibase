@@ -35,7 +35,7 @@ class PreconditionMiddlewareFactoryTest extends TestCase {
 			$entityRevisionLookup,
 			WikibaseRepo::getEntityIdParser(),
 			new ConditionalHeaderUtil()
-		) )->newPreconditionMiddleware( fn () => $itemId->getSerialization() );
+		) )->newPreconditionMiddleware( fn() => $itemId->getSerialization() );
 
 		$middleware->run( $this->newRouteHandler(), fn() => $this->createStub( Response::class ) );
 	}
