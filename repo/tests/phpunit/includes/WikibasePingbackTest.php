@@ -7,6 +7,8 @@ use ExtensionRegistry;
 use HashConfig;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\MainConfigNames;
+use MediaWiki\SiteStats\SiteStats;
+use MediaWiki\SiteStats\SiteStatsInit;
 use MediaWikiIntegrationTestCase;
 use MWTimestamp;
 use Psr\Log\LoggerInterface;
@@ -40,6 +42,7 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 		$settings['pingbackHost'] = 'http://localhost/event/beacon';
 		$this->setMwGlobals( 'wgWBRepoSettings', $settings );
 		$this->tablesUsed[] = 'updatelog';
+		SiteStatsInit::doPlaceholderInit();
 	}
 
 	public function testGetSystemInfo() {
@@ -160,7 +163,7 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 		$logger = $this->createMock( LoggerInterface::class );
 		$extensions = $this->createMock( ExtensionRegistry::class );
 		$wikibaseRepoSettings = $this->createMock( SettingsArray::class );
-		$requestFactory ??= $this->createMock( HTTPRequestFactory::class );
+		$requestFactory ??= $this->createMock( HttpRequestFactory::class );
 		$lbFactory = new FakeLBFactory( [ 'lb' => new FakeLoadBalancer( [ 'dbr' => $this->db ] ) ] );
 
 		$wikibaseRepoSettings
@@ -187,8 +190,14 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 	private function populateSiteStats() {
 		$this->db->newUpdateQueryBuilder()
 			->update( 'site_stats' )
-			->set( [ 'ss_total_pages' => 11 ] )
+			->set( [
+				'ss_total_pages' => 11,
+				// Specify edits as well to make sure that the row is considered sensible
+				'ss_total_edits' => 11,
+			] )
 			->where( [ 'ss_row_id' => 1 ] )
 			->caller( __METHOD__ )->execute();
+		// Clear stale cache
+		SiteStats::unload();
 	}
 }

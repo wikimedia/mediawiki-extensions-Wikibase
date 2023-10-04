@@ -53,15 +53,8 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 	 */
 	private $propertyValueFormatter = null;
 
-	protected function setUp(): void {
-		parent::setUp();
-
-		static $hasEntities = false;
-
-		if ( !$hasEntities ) {
-			$this->initTestEntities( [ 'StringProp', 'Berlin' ] );
-			$hasEntities = true;
-		}
+	public function addDBDataOnce(): void {
+		$this->initTestEntities( [ 'StringProp', 'Berlin' ] );
 	}
 
 	private function addStatementsAndSave(

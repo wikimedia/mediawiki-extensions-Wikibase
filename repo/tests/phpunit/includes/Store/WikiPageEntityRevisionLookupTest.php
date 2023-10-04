@@ -54,6 +54,11 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 	 */
 	private static $testEntities = [];
 
+	public function addDBDataOnce() {
+		// Force creation of all test entities
+		$this->newEntityRevisionLookup( $this->getTestRevisions(), [] );
+	}
+
 	protected function storeTestEntity( EntityDocument $entity ): EntityRevision {
 		$store = WikibaseRepo::getEntityStore();
 		$revision = $store->saveEntity( $entity, "storeTestEntity", $this->getTestUser()->getUser() );
@@ -137,9 +142,6 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 	}
 
 	public function testGetEntityRevision_byRevisionIdWithMode(): void {
-		// Needed to fill the database.
-		$this->newEntityRevisionLookup( $this->getTestRevisions(), [] );
-
 		$testEntityRevision = reset( self::$testEntities );
 		$entityId = $testEntityRevision->getEntity()->getId();
 		$revisionId = $testEntityRevision->getRevisionId();

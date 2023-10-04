@@ -25,43 +25,20 @@ class SqlItemsWithoutSitelinksFinderTest extends MediaWikiIntegrationTestCase {
 
 	use LocalRepoDbTestHelper;
 
-	protected function setUp(): void {
-		parent::setUp();
+	public function addDBDataOnce() {
+		$dbw = $this->getDb();
 
-		static $setUp = false;
-		if ( !$setUp ) {
-			$setUp = true;
+		$dbw->delete( 'page', '*' );
+		$dbw->delete( 'page_props', '*' );
 
-			$dbw = $this->db;
+		// Create page row for Q100, ..., Q106
+		$pages = [];
+		for ( $i = 0; $i < 7; $i++ ) {
+			$n = 100 + $i;
 
-			$dbw->delete( 'page', '*' );
-			$dbw->delete( 'page_props', '*' );
-
-			// Create page row for Q100, ..., Q106
-			$pages = [];
-			for ( $i = 0; $i < 7; $i++ ) {
-				$n = 100 + $i;
-
-				$pages[] = [
-					'page_namespace' => 123,
-					'page_title' => "Q$n",
-					'page_random' => 0,
-					'page_latest' => 0,
-					'page_len' => 1,
-					'page_is_redirect' => 0,
-					'page_touched' => $dbw->timestamp(),
-				];
-
-				// Make Q105 a redirect
-				if ( $i === 5 ) {
-					$pages[$i]['page_is_redirect'] = 1;
-				}
-			}
-
-			// Wrong namespace (will still get the page prop entry)
 			$pages[] = [
-				'page_namespace' => 4,
-				'page_title' => 'Q5',
+				'page_namespace' => 123,
+				'page_title' => "Q$n",
 				'page_random' => 0,
 				'page_latest' => 0,
 				'page_len' => 1,
@@ -69,37 +46,53 @@ class SqlItemsWithoutSitelinksFinderTest extends MediaWikiIntegrationTestCase {
 				'page_touched' => $dbw->timestamp(),
 			];
 
-			$dbw->insert(
-				'page',
-				$pages,
-				__METHOD__
-			);
-
-			// Add wb-sitelinks = 0 for Items with id <= Q105
-			$dbw->insertSelect(
-				'page_props',
-				'page',
-				[
-					'pp_page' => 'page_id',
-					'pp_propname' => $dbw->addQuotes( 'wb-sitelinks' ),
-					'pp_value' => 0,
-				],
-				'page_title <= ' . $dbw->addQuotes( 'Q105' )
-			);
-			// Add wb-sitelinks = 12 for Item Q106
-			$dbw->insertSelect(
-				'page_props',
-				'page',
-				[
-					'pp_page' => 'page_id',
-					'pp_propname' => $dbw->addQuotes( 'wb-sitelinks' ),
-					'pp_value' => 12,
-				],
-				[
-					'page_title' => 'Q106',
-				]
-			);
+			// Make Q105 a redirect
+			if ( $i === 5 ) {
+				$pages[$i]['page_is_redirect'] = 1;
+			}
 		}
+
+		// Wrong namespace (will still get the page prop entry)
+		$pages[] = [
+			'page_namespace' => 4,
+			'page_title' => 'Q5',
+			'page_random' => 0,
+			'page_latest' => 0,
+			'page_len' => 1,
+			'page_is_redirect' => 0,
+			'page_touched' => $dbw->timestamp(),
+		];
+
+		$dbw->insert(
+			'page',
+			$pages,
+			__METHOD__
+		);
+
+		// Add wb-sitelinks = 0 for Items with id <= Q105
+		$dbw->insertSelect(
+			'page_props',
+			'page',
+			[
+				'pp_page' => 'page_id',
+				'pp_propname' => $dbw->addQuotes( 'wb-sitelinks' ),
+				'pp_value' => 0,
+			],
+			'page_title <= ' . $dbw->addQuotes( 'Q105' )
+		);
+		// Add wb-sitelinks = 12 for Item Q106
+		$dbw->insertSelect(
+			'page_props',
+			'page',
+			[
+				'pp_page' => 'page_id',
+				'pp_propname' => $dbw->addQuotes( 'wb-sitelinks' ),
+				'pp_value' => 12,
+			],
+			[
+				'page_title' => 'Q106',
+			]
+		);
 	}
 
 	private function getSqlItemsWithoutSitelinksFinder() {

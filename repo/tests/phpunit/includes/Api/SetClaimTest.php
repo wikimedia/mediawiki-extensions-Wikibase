@@ -46,28 +46,19 @@ class SetClaimTest extends WikibaseApiTestCase {
 
 	private static $propertyIds;
 
-	protected function setUp(): void {
-		parent::setUp();
-
-		if ( !self::$propertyIds ) {
-			self::$propertyIds = $this->getPropertyIds();
-		}
-	}
-
-	private function getPropertyIds(): array {
+	public function addDBDataOnce() {
+		$this->setupUser();
 		$store = $this->getEntityStore();
 
-		$propertyIds = [];
+		self::$propertyIds = [];
 
 		for ( $i = 0; $i < 4; $i++ ) {
 			$property = Property::newFromType( 'string' );
 
 			$store->saveEntity( $property, 'testing', $this->user, EDIT_NEW );
 
-			$propertyIds[] = $property->getId();
+			self::$propertyIds[] = $property->getId();
 		}
-
-		return $propertyIds;
 	}
 
 	/**
