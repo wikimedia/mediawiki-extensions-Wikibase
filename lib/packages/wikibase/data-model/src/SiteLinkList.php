@@ -35,7 +35,7 @@ class SiteLinkList implements IteratorAggregate, Countable {
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct( /* iterable */ $siteLinks = [] ) {
-		if ( !is_array( $siteLinks ) && !( $siteLinks instanceof Traversable ) ) {
+		if ( !is_iterable( $siteLinks ) ) {
 			throw new InvalidArgumentException( '$siteLinks must be iterable' );
 		}
 

@@ -61,7 +61,7 @@ class ByPropertyIdArray extends ArrayObject {
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct( $input = null ) {
-		if ( is_object( $input ) && !( $input instanceof Traversable ) ) {
+		if ( $input && !is_iterable( $input ) ) {
 			throw new InvalidArgumentException( '$input must be an array, Traversable or null' );
 		}
 

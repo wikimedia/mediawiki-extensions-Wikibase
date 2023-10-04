@@ -37,7 +37,7 @@ class SnakList extends ArrayObject {
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct( $snaks = [] ) {
-		if ( !is_array( $snaks ) && !( $snaks instanceof Traversable ) ) {
+		if ( !is_iterable( $snaks ) ) {
 			throw new InvalidArgumentException( '$snaks must be an array or an instance of Traversable' );
 		}
 
