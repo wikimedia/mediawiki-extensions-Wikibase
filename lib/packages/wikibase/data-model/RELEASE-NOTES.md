@@ -6,7 +6,7 @@
   single array argument, which was deprecated in `Version 9.6.0 (2021-03-31)`. These should now be
   called with a variadic argument list.
 * Added `__serialize()` and `__unserialize()` methods to the `EntityId` interface,
-  and deprecated the `serialize()` and `unserialize()` methods.
+  and removed the `serialize()` and `unserialize()` methods and the `Serializable` interface.
 * Added native type hints to the `Statement` and `StatementList` classes
 * Added `strict_types=1` to `Statement.php`, `StatementList.php`, and related test files
 * Removed support for repository names in entity IDs (e.g. `foo:Q1234`)

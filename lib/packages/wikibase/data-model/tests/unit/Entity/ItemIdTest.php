@@ -87,33 +87,13 @@ class ItemIdTest extends MediaWikiUnitTestCase {
 
 	public function testSerialize() {
 		$id = new ItemId( 'Q1' );
-		$this->expectDeprecationAndContinue( '/ItemId::serialize/' );
-		$this->assertSame( 'Q1', $id->serialize() );
+		$this->assertSame( [ 'serialization' => 'Q1' ], $id->__serialize() );
 	}
 
-	/**
-	 * @dataProvider serializationProvider
-	 */
-	public function testUnserialize( $json, $expected ) {
+	public function testUnserialize() {
 		$id = new ItemId( 'Q1' );
-		$this->expectDeprecationAndContinue( '/ItemId::unserialize/' );
-		$id->unserialize( $json );
-		$this->assertSame( $expected, $id->getSerialization() );
-	}
-
-	public static function serializationProvider() {
-		return [
-			[ 'Q2', 'Q2' ],
-			[ '["item","Q2"]', 'Q2' ],
-
-			// All these cases are kind of an injection vector and allow constructing invalid ids.
-			[ '["string","Q2"]', 'Q2' ],
-			[ '["","string"]', 'string' ],
-			[ '["",""]', '' ],
-			[ '["",2]', 2 ],
-			[ '["",null]', '' ],
-			[ '', '' ],
-		];
+		$id->__unserialize( [ 'serialization' => 'Q2' ] );
+		$this->assertSame( 'Q2', $id->getSerialization() );
 	}
 
 	/**

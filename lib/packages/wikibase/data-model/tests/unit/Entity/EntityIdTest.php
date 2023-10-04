@@ -55,14 +55,6 @@ class EntityIdTest extends MediaWikiUnitTestCase {
 
 	public static function deserializationCompatibilityProvider(): array {
 		return [
-			'v05serialization' => [
-				new ItemId( 'q123' ),
-				'C:32:"Wikibase\DataModel\Entity\ItemId":15:{["item","Q123"]}',
-			],
-			'v07serialization' => [
-				new ItemId( 'q123' ),
-				'C:32:"Wikibase\DataModel\Entity\ItemId":4:{Q123}',
-			],
 			'2022-03 PHP 7.4+' => [
 				new ItemId( 'q123' ),
 				'O:32:"Wikibase\DataModel\Entity\ItemId":1:{s:13:"serialization";s:4:"Q123";}',
@@ -74,9 +66,6 @@ class EntityIdTest extends MediaWikiUnitTestCase {
 	 * @dataProvider deserializationCompatibilityProvider
 	 */
 	public function testDeserializationCompatibility( $expected, $serialization ) {
-		if ( str_starts_with( $serialization, 'C:' ) ) {
-			$this->expectDeprecationAndContinue( '/::unserialize/' );
-		}
 		$this->assertEquals(
 			$expected,
 			unserialize( $serialization )

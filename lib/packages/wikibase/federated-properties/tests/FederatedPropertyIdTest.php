@@ -20,8 +20,7 @@ class FederatedPropertyIdTest extends TestCase {
 	public function testCreateAndSerializeId() {
 		$serialization = 'http://www.wikidata.org/entity/P31';
 		$id = new FederatedPropertyId( $serialization, 'P31' );
-		$this->expectDeprecationAndContinue( '/FederatedPropertyId::serialize/' );
-		$this->assertEquals( $serialization, $id->serialize() );
+		$this->assertEquals( [ $serialization ], $id->__serialize() );
 		$this->assertEquals( $serialization, $id->getSerialization() );
 	}
 
@@ -40,8 +39,7 @@ class FederatedPropertyIdTest extends TestCase {
 	public function testUnserializationWithValidSerialization() {
 		$serialization = 'http://www.wikidata.org/entity/P32';
 		$id = new FederatedPropertyId( 'http://www.wikidata.org/entity/P31', 'P31' );
-		$this->expectDeprecationAndContinue( '/FederatedPropertyId::unserialize/' );
-		$id->unserialize( $serialization );
+		$id->__unserialize( [ $serialization ] );
 		$this->assertEquals( $serialization, $id->getSerialization() );
 	}
 
