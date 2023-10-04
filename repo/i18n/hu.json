@@ -130,7 +130,7 @@
 	"wikibase-copyrighttooltip-acknowledge": "A további szerkesztéseim során elfogadom a fenti feltételeket. Ez az üzenet ne jelenjen meg újra.",
 	"wikibase-entityselector-more": "több",
 	"wikibase-entityselector-notfound": "Nincs találat",
-	"wikibase-anonymouseditwarning": "<strong>Figyelem:</strong> Nem vagy bejelentkezve. Ha szerkesztesz, az [https://hu.wikipedia.org/wiki/IP-c%C3%ADm IP-címed] nyilvánosan látható lesz a laptörténetben. Ha <strong>[[Special:UserLogin|bejelentkezel]]</strong> vagy <strong>[[Special:CreateAccount|regisztrálsz]]</strong>, a szerkesztéseid a felhasználónevedhez lesznek társítva, egyéb hasznos dolgok mellett.",
+	"wikibase-anonymouseditwarning": "<strong>Figyelem:</strong> Nem vagy bejelentkezve. Ha szerkesztesz, az [https://hu.wikipedia.org/wiki/IP-c%C3%ADm IP-címed] nyilvánosan látható lesz a laptörténetben. Ha <strong>[$1 bejelentkezel]</strong> vagy <strong>[$2 regisztrálsz]</strong>, a szerkesztéseid a felhasználónevedhez lesznek társítva, egyéb hasznos dolgok mellett.",
 	"wikibase-anonymouseditwarning-heading": "Nem vagy bejelentkezve",
 	"wikibase-anonymouseditwarning-message": "Ha szerkesztesz, az IP-címed nyilvánosan látható lesz a laptörténetben. Ha bejelentkezel vagy regisztrálsz, a szerkesztéseid a felhasználónevedhez lesznek társítva, egyéb hasznos dolgok mellett.",
 	"wikibase-anonymouseditwarning-dismiss-persist": "Figyelmeztetést kérek, ha nem vagyok bejelentkezve.",
