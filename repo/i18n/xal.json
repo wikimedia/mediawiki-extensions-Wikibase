@@ -1,8 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Huuchin"
+			"Huuchin",
+			"Ukhant Erdemt"
 		]
 	},
-	"wikibase-edit": "ясх"
+	"wikibase-edit": "ясх",
+	"wikibase-add": "немх",
+	"wikibase-description-empty": "Тодрхала уга тодрхалт",
+	"wikibase-sitelinks-special": "Талдан сайтмуд"
 }
