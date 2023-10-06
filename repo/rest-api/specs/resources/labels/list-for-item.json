@@ -36,7 +36,7 @@
 			"200": { "$ref": "../../global/responses.json#/ItemLabels" },
 			"400": { "$ref": "../../global/responses.json#/InvalidItemPatchRequest" },
 			"404": { "$ref": "../../global/responses.json#/ItemNotFound" },
-			"409": { "$ref": "../../global/responses.json#/CannotApplyLabelsDescriptionsPatch" },
+			"409": { "$ref": "../../global/responses.json#/CannotApplyItemPatch" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"415": { "$ref": "../../global/responses.json#/InvalidMediaType" },
 			"422": { "$ref": "../../global/responses.json#/InvalidPatchedLabels" },

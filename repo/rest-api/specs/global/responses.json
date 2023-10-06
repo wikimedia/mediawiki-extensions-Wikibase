@@ -773,7 +773,7 @@
 			}
 		}
 	},
-	"CannotApplyLabelsDescriptionsPatch": {
+	"CannotApplyItemPatch": {
 		"description": "The provided JSON Patch cannot be applied",
 		"content": {
 			"application/json": {
@@ -838,6 +838,29 @@
 					"patched-item-label-description-duplicate": {
 						"$ref": "./examples.json#/PatchedItemLabelDescriptionDuplicateExample"
 					}
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
+	"InvalidPatchedAliases": {
+		"description": "Applying the provided JSON Patch results in invalid Aliases",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/ContextError" },
+				"examples": {
+					"patched-aliases-invalid-language-code": {
+						"$ref": "./examples.json#/PatchedAliasesInvalidLanguageCodeExample"
+					},
+					"patched-alias-empty": { "$ref": "./examples.json#/PatchedAliasEmptyExample" },
+					"patched-alias-too-long": { "$ref": "./examples.json#/PatchedAliasTooLongExample" },
+					"patched-alias-invalid": { "$ref": "./examples.json#/PatchedAliasInvalidExample" },
+					"patched-duplicate-alias": { "$ref": "./examples.json#/PatchedDuplicateAliasExample" }
 				}
 			}
 		},

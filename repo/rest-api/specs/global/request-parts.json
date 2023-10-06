@@ -43,6 +43,28 @@
 			{ "$ref": "#/MediawikiEdit" }
 		]
 	},
+	"AliasesPatchRequest": {
+		"allOf": [
+			{ "$ref": "#/PatchDocument" },
+			{
+				"properties": {
+					"patch": {
+						"items": {
+							"properties": {
+								"path": {
+									"example": "/en/0"
+								},
+								"value": {
+									"example": "patched alias"
+								}
+							}
+						}
+					}
+				}
+			},
+			{ "$ref": "#/MediawikiEdit" }
+		]
+	},
 	"StatementRequest": {
 		"allOf": [
 			{
