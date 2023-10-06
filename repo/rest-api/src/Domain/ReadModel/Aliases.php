@@ -14,7 +14,7 @@ class Aliases extends ArrayObject {
 	public function __construct( AliasesInLanguage ...$aliases ) {
 		parent::__construct(
 			array_combine(
-				array_map( fn( AliasesInLanguage $desc ) => $desc->getLanguageCode(), $aliases ),
+				array_map( fn( AliasesInLanguage $a ) => $a->getLanguageCode(), $aliases ),
 				$aliases
 			)
 		);

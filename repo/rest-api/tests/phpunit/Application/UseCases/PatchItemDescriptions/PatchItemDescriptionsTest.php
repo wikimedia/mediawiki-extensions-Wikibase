@@ -23,6 +23,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Item;
@@ -97,6 +98,7 @@ class PatchItemDescriptionsTest extends TestCase {
 		$updatedItem = new Item(
 			new Labels(),
 			new Descriptions( new Description( $newDescriptionLanguage, $newDescriptionText ) ),
+			new Aliases(),
 			new StatementList()
 		);
 		$this->itemUpdater = $this->createMock( ItemUpdater::class );

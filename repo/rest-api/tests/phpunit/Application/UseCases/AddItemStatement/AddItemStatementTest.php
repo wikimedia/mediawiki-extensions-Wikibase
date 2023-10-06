@@ -17,6 +17,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Item as ReadModelItem;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
@@ -83,6 +84,7 @@ class AddItemStatementTest extends TestCase {
 		$updatedItem = new ReadModelItem(
 			new Labels(),
 			new Descriptions(),
+			new Aliases(),
 			new StatementList( NewStatementReadModel::noValueFor(
 				TestValidatingRequestDeserializer::EXISTING_STRING_PROPERTY
 			)->withGuid( $newGuid )->build() )

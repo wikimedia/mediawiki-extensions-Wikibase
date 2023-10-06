@@ -4,6 +4,7 @@ namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
 
 use Wikibase\DataModel\Entity\Item as DataModelItem;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Item;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
@@ -43,6 +44,7 @@ class EntityUpdaterItemUpdater implements ItemUpdater {
 		return new Item(
 			Labels::fromTermList( $item->getLabels() ),
 			Descriptions::fromTermList( $item->getDescriptions() ),
+			Aliases::fromAliasGroupList( $item->getAliasGroups() ),
 			new StatementList(
 				...array_map(
 					[ $this->statementReadModelConverter, 'convert' ],

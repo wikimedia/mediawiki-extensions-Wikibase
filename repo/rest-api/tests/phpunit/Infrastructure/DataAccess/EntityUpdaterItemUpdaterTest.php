@@ -8,6 +8,8 @@ use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
+use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Item;
@@ -51,16 +53,9 @@ class EntityUpdaterItemUpdaterTest extends TestCase {
 		$this->entityUpdater->expects( $this->once() )
 			->method( 'update' )
 			->with( $itemToUpdate, $editMetaData )
-			->willReturn( new EntityRevision(
-				$itemToUpdate,
-				$expectedRevisionId,
-				$expectedRevisionTimestamp
-			) );
+			->willReturn( new EntityRevision( $itemToUpdate, $expectedRevisionId, $expectedRevisionTimestamp ) );
 
-		$itemRevision = $this->newItemUpdater()->update(
-			$itemToUpdate,
-			$editMetaData
-		);
+		$itemRevision = $this->newItemUpdater()->update( $itemToUpdate, $editMetaData );
 
 		$this->assertEquals( $expectedResultingItem, $itemRevision->getItem() );
 		$this->assertSame( $expectedRevisionId, $itemRevision->getRevisionId() );
@@ -79,11 +74,13 @@ class EntityUpdaterItemUpdaterTest extends TestCase {
 			NewItem::withId( 'Q123' )
 				->andLabel( 'en', 'English Label' )
 				->andDescription( 'en', 'English Description' )
+				->andAliases( 'en', [ 'English alias', 'alias in English' ] )
 				->andStatement( $writeModelStatement )
 				->build(),
 			new Item(
 				new Labels( new Label( 'en', 'English Label' ) ),
 				new Descriptions( new Description( 'en', 'English Description' ) ),
+				new Aliases( new AliasesInLanguage( 'en', [ 'English alias', 'alias in English' ] ) ),
 				new StatementList( $readModelStatement )
 			),
 		];

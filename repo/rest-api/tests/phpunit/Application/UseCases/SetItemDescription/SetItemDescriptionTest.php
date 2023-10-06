@@ -14,6 +14,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescrip
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Item as ReadModelItem;
@@ -65,10 +66,8 @@ class SetItemDescriptionTest extends \PHPUnit\Framework\TestCase {
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemRetriever->method( 'getItem' )->willReturn( new DataModelItem() );
 
-		$updatedItem = new ReadModelItem(
-			new Labels(),
-			new Descriptions( new Description( $language, $description ) ),
-			new StatementList()
+		$updatedItem = $this->newReadModelItemWithDescriptions(
+			new Descriptions( new Description( $language, $description ) )
 		);
 		$revisionId = 123;
 		$lastModified = '20221212040506';
@@ -108,10 +107,8 @@ class SetItemDescriptionTest extends \PHPUnit\Framework\TestCase {
 			->with( $itemId )
 			->willReturn( $item );
 
-		$updatedItem = new ReadModelItem(
-			new Labels(),
-			new Descriptions( new Description( $language, $newDescription ) ),
-			new StatementList()
+		$updatedItem = $this->newReadModelItemWithDescriptions(
+			new Descriptions( new Description( $language, $newDescription ) )
 		);
 		$revisionId = 123;
 		$lastModified = '20221212040506';
@@ -203,6 +200,15 @@ class SetItemDescriptionTest extends \PHPUnit\Framework\TestCase {
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( $expectedError, $e );
 		}
+	}
+
+	public function newReadModelItemWithDescriptions( Descriptions $descriptions ): ReadModelItem {
+		return new ReadModelItem(
+			new Labels(),
+			$descriptions,
+			new Aliases(),
+			new StatementList()
+		);
 	}
 
 	private function newUseCase(): SetItemDescription {

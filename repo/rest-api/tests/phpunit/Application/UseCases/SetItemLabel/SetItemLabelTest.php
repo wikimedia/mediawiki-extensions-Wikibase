@@ -15,6 +15,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabelValidato
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Item;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
@@ -68,11 +69,7 @@ class SetItemLabelTest extends TestCase {
 		$this->itemRetriever = $this->createMock( ItemRetriever::class );
 		$this->itemRetriever->expects( $this->once() )->method( 'getItem' )->with( $itemId )->willReturn( $item );
 
-		$updatedItem = new Item(
-			new Labels( new Label( $langCode, $newLabelText ) ),
-			new Descriptions(),
-			new StatementList()
-		);
+		$updatedItem = $this->newItemWithLabels( new Labels( new Label( $langCode, $newLabelText ) ) );
 		$this->itemUpdater = $this->createMock( ItemUpdater::class );
 		$this->itemUpdater->expects( $this->once() )->method( 'update' )
 			->with(
@@ -104,11 +101,7 @@ class SetItemLabelTest extends TestCase {
 		$this->itemRetriever = $this->createMock( ItemRetriever::class );
 		$this->itemRetriever->expects( $this->once() )->method( 'getItem' )->with( $itemId )->willReturn( $item );
 
-		$updatedItem = new Item(
-			new Labels( new Label( $langCode, $updatedLabelText ) ),
-			new Descriptions(),
-			new StatementList()
-		);
+		$updatedItem = $this->newItemWithLabels( new Labels( new Label( $langCode, $updatedLabelText ) ) );
 		$this->itemUpdater = $this->createMock( ItemUpdater::class );
 		$this->itemUpdater->expects( $this->once() )->method( 'update' )
 			->with(
@@ -177,6 +170,10 @@ class SetItemLabelTest extends TestCase {
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( $expectedError, $e );
 		}
+	}
+
+	public function newItemWithLabels( Labels $labels ): Item {
+		return new Item( $labels, new Descriptions(), new Aliases(), new StatementList() );
 	}
 
 	private function newUseCase(): SetItemLabel {

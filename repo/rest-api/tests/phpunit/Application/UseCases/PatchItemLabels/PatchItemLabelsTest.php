@@ -23,6 +23,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Item;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
@@ -99,6 +100,7 @@ class PatchItemLabelsTest extends TestCase {
 		$updatedItem = new Item(
 			new Labels( new Label( $newLabelLanguage, $newLabelText ) ),
 			new Descriptions(),
+			new Aliases(),
 			new StatementList()
 		);
 		$this->itemUpdater = $this->createMock( ItemUpdater::class );
