@@ -436,6 +436,17 @@
 			}
 		}
 	},
+	"PropertyLabelDuplicateExample": {
+		"value": {
+			"code": "property-label-duplicate",
+			"message": "Property '{duplicate_property_id}' already has label '{label}' associated with language code {language}",
+			"context": {
+				"language": "{language}",
+				"label": "{label}",
+				"matching-property-id": "{duplicate_property_id}"
+			}
+		}
+	},
 	"ItemStatementIdExample": {
 		"value": "Q42$F078E5B3-F9A8-480E-B7AC-D97778CBBEF9"
 	},

@@ -659,6 +659,35 @@
 			}
 		}
 	},
+	"InvalidSetPropertyLabelInput": {
+		"description": "The request cannot be processed",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/ContextError" },
+				"examples": {
+					"invalid-property-id": { "$ref": "./examples.json#/InvalidPropertyIdExample" },
+					"invalid-language-code": { "$ref": "./examples.json#/InvalidLanguageCodeExample" },
+					"invalid-label": { "$ref": "./examples.json#/InvalidLabelExample" },
+					"label-empty": { "$ref": "./examples.json#/LabelEmptyExample" },
+					"label-too-long": { "$ref": "./examples.json#/LabelTooLongExample" },
+					"label-description-same-value": {
+						"$ref": "./examples.json#/LabelDescriptionSameValueExample"
+					},
+					"property-label-duplicate": {
+						"$ref": "./examples.json#/PropertyLabelDuplicateExample"
+					},
+					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
 	"InvalidSetItemDescriptionInput": {
 		"description": "The request cannot be processed",
 		"content": {
@@ -1136,37 +1165,6 @@
 			}
 		}
 	},
-	"ItemLabel": {
-		"description": "Item's label in a specific language",
-		"headers": {
-			"Last-Modified": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Last modified date"
-			},
-			"ETag": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Last entity revision number"
-			},
-			"X-Authenticated-User": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Optional username of the user making the request"
-			}
-		},
-		"content": {
-			"application/json": {
-				"schema": {
-					"type": "string",
-					"example": "Douglas Adams"
-				}
-			}
-		}
-	},
 	"ItemDescriptions": {
 		"description": "Item's descriptions by language",
 		"headers": {
@@ -1322,8 +1320,8 @@
 			}
 		}
 	},
-	"PropertyLabel": {
-		"description": "Property's label in a specific language",
+	"Label": {
+		"description": "A label in a specific language",
 		"headers": {
 			"Last-Modified": {
 				"schema": {
@@ -1348,7 +1346,7 @@
 			"application/json": {
 				"schema": {
 					"type": "string",
-					"example": "instance of"
+					"example": "an example label"
 				}
 			}
 		}
