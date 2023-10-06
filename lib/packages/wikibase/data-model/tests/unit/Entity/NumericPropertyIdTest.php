@@ -95,6 +95,19 @@ class NumericPropertyIdTest extends MediaWikiUnitTestCase {
 		$this->assertSame( 'P2', $id->getSerialization() );
 	}
 
+	public function testUnserializeInvalid(): void {
+		$id = new NumericPropertyId( 'P1' );
+		$this->expectException( InvalidArgumentException::class );
+		$id->__unserialize( [ 'serialization' => 'p' ] );
+	}
+
+	public function testUnserializeNotNormalized(): void {
+		$id = new NumericPropertyId( 'P1' );
+		$this->expectException( InvalidArgumentException::class );
+		$id->__unserialize( [ 'serialization' => 'p2' ] );
+		// 'p2' is allowed in the constructor (silently uppercased) but not in unserialize()
+	}
+
 	/**
 	 * @dataProvider numericIdProvider
 	 */

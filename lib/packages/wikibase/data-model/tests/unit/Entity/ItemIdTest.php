@@ -96,6 +96,19 @@ class ItemIdTest extends MediaWikiUnitTestCase {
 		$this->assertSame( 'Q2', $id->getSerialization() );
 	}
 
+	public function testUnserializeInvalid(): void {
+		$id = new ItemId( 'Q1' );
+		$this->expectException( InvalidArgumentException::class );
+		$id->__unserialize( [ 'serialization' => 'q' ] );
+	}
+
+	public function testUnserializeNotNormalized(): void {
+		$id = new ItemId( 'Q1' );
+		$this->expectException( InvalidArgumentException::class );
+		$id->__unserialize( [ 'serialization' => 'q2' ] );
+		// 'q2' is allowed in the constructor (silently uppercased) but not in unserialize()
+	}
+
 	/**
 	 * @dataProvider numericIdProvider
 	 */
