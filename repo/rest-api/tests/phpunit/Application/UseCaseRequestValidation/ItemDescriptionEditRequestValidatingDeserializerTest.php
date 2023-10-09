@@ -74,7 +74,7 @@ class ItemDescriptionEditRequestValidatingDeserializerTest extends TestCase {
 			new ValidationError(
 				ItemDescriptionValidator::CODE_TOO_LONG,
 				[
-					ItemDescriptionValidator::CONTEXT_VALUE => $description,
+					ItemDescriptionValidator::CONTEXT_DESCRIPTION => $description,
 					ItemDescriptionValidator::CONTEXT_LIMIT => $limit,
 				]
 			),
@@ -90,7 +90,7 @@ class ItemDescriptionEditRequestValidatingDeserializerTest extends TestCase {
 		yield 'invalid description' => [
 			new ValidationError(
 				ItemDescriptionValidator::CODE_INVALID,
-				[ ItemDescriptionValidator::CONTEXT_VALUE => $description ],
+				[ ItemDescriptionValidator::CONTEXT_DESCRIPTION => $description ],
 			),
 			UseCaseError::INVALID_DESCRIPTION,
 			"Not a valid description: $description",

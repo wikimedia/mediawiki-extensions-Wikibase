@@ -31,14 +31,14 @@ class TermValidatorFactoryLabelTextValidator {
 					return new ValidationError(
 						ItemLabelValidator::CODE_TOO_LONG,
 						[
-							ItemLabelValidator::CONTEXT_VALUE => $labelText,
+							ItemLabelValidator::CONTEXT_LABEL => $labelText,
 							ItemLabelValidator::CONTEXT_LIMIT => $error->getParameters()[0],
 						]
 					);
 				default:
 					return new ValidationError(
 						ItemLabelValidator::CODE_INVALID,
-						[ ItemLabelValidator::CONTEXT_VALUE => $labelText ]
+						[ ItemLabelValidator::CONTEXT_LABEL => $labelText ]
 					);
 			}
 		}

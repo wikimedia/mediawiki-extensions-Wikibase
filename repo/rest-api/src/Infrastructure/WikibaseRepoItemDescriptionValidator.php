@@ -46,14 +46,14 @@ class WikibaseRepoItemDescriptionValidator implements ItemDescriptionValidator {
 					return new ValidationError(
 						self::CODE_TOO_LONG,
 						[
-							self::CONTEXT_VALUE => $description,
+							self::CONTEXT_DESCRIPTION => $description,
 							self::CONTEXT_LIMIT => $error->getParameters()[0],
 						]
 					);
 				default:
 					return new ValidationError(
 						self::CODE_INVALID,
-						[ self::CONTEXT_VALUE => $description ]
+						[ self::CONTEXT_DESCRIPTION => $description ]
 					);
 			}
 		}

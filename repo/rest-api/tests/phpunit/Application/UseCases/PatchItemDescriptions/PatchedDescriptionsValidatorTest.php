@@ -114,7 +114,7 @@ class PatchedDescriptionsValidatorTest extends TestCase {
 			[ $language => $description ],
 			new ValidationError(
 				ItemDescriptionValidator::CODE_INVALID,
-				[ ItemDescriptionValidator::CONTEXT_VALUE => $description ],
+				[ ItemDescriptionValidator::CONTEXT_DESCRIPTION => $description ],
 			),
 			UseCaseError::PATCHED_DESCRIPTION_INVALID,
 			"Changed description for '$language' is invalid: {$description}",
@@ -130,7 +130,7 @@ class PatchedDescriptionsValidatorTest extends TestCase {
 			new ValidationError(
 				ItemDescriptionValidator::CODE_TOO_LONG,
 				[
-					ItemDescriptionValidator::CONTEXT_VALUE => $tooLongDescription,
+					ItemDescriptionValidator::CONTEXT_DESCRIPTION => $tooLongDescription,
 					ItemDescriptionValidator::CONTEXT_LIMIT => 250,
 					ItemDescriptionValidator::CONTEXT_LANGUAGE => $language,
 				]

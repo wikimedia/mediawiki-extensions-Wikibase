@@ -114,7 +114,7 @@ class PatchedLabelsValidatorTest extends TestCase {
 			[ $language => $label ],
 			new ValidationError(
 				ItemLabelValidator::CODE_INVALID,
-				[ ItemLabelValidator::CONTEXT_VALUE => $label ],
+				[ ItemLabelValidator::CONTEXT_LABEL => $label ],
 			),
 			UseCaseError::PATCHED_LABEL_INVALID,
 			"Changed label for '$language' is invalid: {$label}",
@@ -130,7 +130,7 @@ class PatchedLabelsValidatorTest extends TestCase {
 			new ValidationError(
 				ItemLabelValidator::CODE_TOO_LONG,
 				[
-					ItemLabelValidator::CONTEXT_VALUE => $tooLongLabel,
+					ItemLabelValidator::CONTEXT_LABEL => $tooLongLabel,
 					ItemLabelValidator::CONTEXT_LIMIT => 250,
 					ItemLabelValidator::CONTEXT_LANGUAGE => $language,
 				]

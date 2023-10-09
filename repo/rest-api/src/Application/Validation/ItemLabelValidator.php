@@ -19,7 +19,6 @@ interface ItemLabelValidator {
 	public const CONTEXT_LABEL = 'label';
 	public const CONTEXT_DESCRIPTION = 'description';
 	public const CONTEXT_MATCHING_ITEM_ID = 'matching-item-id';
-	public const CONTEXT_VALUE = 'value';
 	public const CONTEXT_LIMIT = 'character-limit';
 
 	public function validate( ItemId $itemId, string $language, string $label ): ?ValidationError;
