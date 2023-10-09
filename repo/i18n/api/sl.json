@@ -52,6 +52,7 @@
 	"apihelp-wbsetaliases-description": "Nastavi sopomenke za entiteto Wikibase.",
 	"apihelp-wbsetaliases-summary": "Nastavi sopomenke za entiteto Wikibase.",
 	"apihelp-wbsetaliases-param-language": "Jezik za nastavitev sopomenk",
+	"apihelp-wbsetclaimvalue-param-value": "Vrednost, na katero želite nastaviti DataValue glavnega določila zahtevka",
 	"apihelp-wbsetdescription-param-language": "Jezik opisa",
 	"apihelp-wbsetlabel-param-value": "Vrednost oznake",
 	"apihelp-wbsetlabel-example-2": "Nastavitev oznake v angleščini na »<var>Earth</var>« za predmet s povezavo spletišča <var>enwiki</var> => »<var>Earth</var>«.",

@@ -3,17 +3,24 @@
 		"authors": [
 			"Ghiutun",
 			"Sebranik",
-			"Игорь Бродский"
+			"Игорь Бродский",
+			"Лариса Чиркова"
 		]
 	},
 	"wikibase-comment-update": "{{WBREPONAME}}-element om toižetadud",
 	"wikibase-dataitem": "{{WBREPONAME}}-element",
-	"wikibase-editlinks": "Redaktiruida kosketused",
+	"wikibase-editlinks": "Vajehta tarkendused",
 	"wikibase-editlinkstitle": "Redaktiruida kelidenkeskeižid kosketusid",
-	"wikibase-linkitem-addlinks": "Ližata kosketused",
+	"wikibase-linkitem-addlinks": "Ližada tarkendused",
+	"wikibase-linkitem-title": "Kacu lehtpol'",
+	"wikibase-linkitem-linkpage": "Tarkenduz lehtpole",
+	"wikibase-linkitem-selectlink": "Valiče, ole hüvä, sait libo lehtpol’, miččele sinä tahtoižid mända.",
+	"wikibase-linkitem-input-site": "Kel':",
+	"wikibase-linkitem-input-page": "Lehtpol':",
 	"wikibase-rc-hide-wikidata": "$1 Wikidata",
-	"wikibase-rc-hide-wikidata-hide": "Peitta",
-	"wikibase-rc-hide-wikidata-show": "Ozutada",
+	"wikibase-rc-hide-wikidata-hide": "Peitä",
+	"wikibase-rc-hide-wikidata-show": "Ozuta",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-redakcii"
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-redakcii",
+	"wikibase-otherprojects": "Toižiš projektoiš"
 }

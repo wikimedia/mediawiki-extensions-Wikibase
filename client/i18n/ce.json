@@ -91,7 +91,7 @@
 	"wikibase-otherprojects-beta-message": "Кхечу проектийн агӀонгара панель",
 	"wikibase-otherprojects-beta-description": "АгӀорар панель тӀетуху дакъа «{{int:wikibase-otherprojects}}», цуна тӀехь хьулу Викимедиа фондан кхечу проекташка хьажоргаш {{WBREPONAME}}кара.",
 	"wikibase-sitelinks-sitename-columnheading": "Мотт",
-	"wikibase-sitelinks-link-columnheading": "Вовшахтесна йолу агӀонаш",
+	"wikibase-sitelinks-link-columnheading": "Йихкина агӀо",
 	"echo-category-title-wikibase-action": "{{grammar:genitive|{{WBREPONAME}}}} {{PLURAL:$1|тӀетасадалар}}",
 	"notification-header-page-connection": "АгӀо <strong>$3</strong> {{GENDER:$2|тӀетесна}} {{PLURAL:$4|-1=a {{WBREPONAME}} |{{WBREPONAME}} $4}}, темица йогӀуш йолучунца.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong>, {{PLURAL:$4|кхин тӀе цхьа агӀо|$4 кхин тӀе агӀо|100=99+ кхин тӀе агӀо}} {{GENDER:$2|тӀетесна}} {{WBREPONAME}} элементаш тӀе, цигахь хила мега дийцарца богӀуш болу хаамаш.",

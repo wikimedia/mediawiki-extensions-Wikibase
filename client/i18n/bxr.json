@@ -1,9 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Elvonudinium"
+			"Elvonudinium",
+			"Баир Балданов"
 		]
 	},
 	"wikibase-dataitem": "Мэдээнэй зүйл",
-	"wikibase-editlinks": "Холбооһые заһабарилха"
+	"wikibase-editlinks": "Холбооһые заһабарилха",
+	"wikibase-linkitem-addlinks": "Ссылкэнүүдые нэмэхэ",
+	"wikibase-linkitem-title": "Хуудаһантай холболго",
+	"wikibase-linkitem-input-site": "Хэлэн"
 }
