@@ -344,6 +344,55 @@
 			}
 		}
 	},
+	"PatchedAliasesInvalidLanguageCodeExample": {
+		"value": {
+			"code": "patched-aliases-invalid-language-code",
+			"message": "Not a valid language code '{language_code}' in changed aliases",
+			"context": {
+				"language": "<language_code>"
+			}
+		}
+	},
+	"PatchedAliasEmptyExample": {
+		"value": {
+			"code": "patched-alias-empty",
+			"message": "Changed alias for '{language_code}' cannot be empty",
+			"context": {
+				"language": "<language_code>"
+			}
+		}
+	},
+	"PatchedAliasTooLongExample": {
+		"value": {
+			"code": "patched-alias-too-long",
+			"message": "Changed alias for '{language_code}' must not be more than '{limit}' characters long",
+			"context": {
+				"language": "<language_code>",
+				"value": "<alias>",
+				"limit": 250
+			}
+		}
+	},
+	"PatchedAliasInvalidExample": {
+		"value": {
+			"code": "patched-alias-invalid",
+			"message": "Changed alias for '{language_code}' is invalid: '{alias}'",
+			"context": {
+				"language": "<language_code>",
+				"value": "<alias>"
+			}
+		}
+	},
+	"PatchedDuplicateAliasExample": {
+		"value": {
+			"code": "patched-duplicate-alias",
+			"message": "Aliases in language '{language_code}' contain duplicate alias: '{alias}'",
+			"context": {
+				"language": "<language_code>",
+				"value": "<alias>"
+			}
+		}
+	},
 	"InvalidDescriptionExample": {
 		"value": {
 			"code": "invalid-description",

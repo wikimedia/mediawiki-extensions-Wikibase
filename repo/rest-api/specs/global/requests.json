@@ -38,6 +38,18 @@
 			}
 		}
 	},
+	"AliasesPatch": {
+		"description": "Payload containing a JSON Patch document to be applied to an Item's aliases and edit metadata",
+		"required": true,
+		"content": {
+			"application/json-patch+json": {
+				"schema": { "$ref": "./request-parts.json#/AliasesPatchRequest" }
+			},
+			"application/json": {
+				"schema": { "$ref": "./request-parts.json#/AliasesPatchRequest" }
+			}
+		}
+	},
 	"Description": {
 		"description": "Payload containing a Wikibase description in the specified language and edit metadata",
 		"required": true,
