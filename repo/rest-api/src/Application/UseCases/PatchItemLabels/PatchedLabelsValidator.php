@@ -72,16 +72,11 @@ class PatchedLabelsValidator {
 	}
 
 	private function getModifiedLabels( TermList $original, TermList $modified ): array {
-		$modifiedLabels = [];
-		foreach ( $modified as $label ) {
-			if ( !$original->hasTermForLanguage( $label->getLanguageCode() ) ) {
-				$modifiedLabels[] = $label;
-			} elseif ( $original->getByLanguage( $label->getLanguageCode() )->getText() != $label->getText() ) {
-				$modifiedLabels[] = $label;
-			}
-		}
-
-		return $modifiedLabels;
+		return array_filter(
+			iterator_to_array( $modified ),
+			fn( Term $label ) => !$original->hasTermForLanguage( $label->getLanguageCode() ) ||
+				!$original->getByLanguage( $label->getLanguageCode() )->equals( $label )
+		);
 	}
 
 	private function validateLabel( ItemId $itemId, Term $label ): void {
