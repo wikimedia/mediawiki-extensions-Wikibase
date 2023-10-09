@@ -773,6 +773,29 @@
 			}
 		}
 	},
+	"InvalidPropertyPatchRequest": {
+		"description": "The provided JSON Patch request is invalid",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/ContextError" },
+				"examples": {
+					"invalid-property-id": { "$ref": "./examples.json#/InvalidPropertyIdExample" },
+					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
+					"invalid-patch": { "$ref": "./examples.json#/InvalidPatchExample" },
+					"invalid-patch-operation": { "$ref": "./examples.json#/InvalidPatchOperationExample" },
+					"invalid-patch-field-type": { "$ref": "./examples.json#/InvalidPatchFieldTypeExample" },
+					"missing-json-patch-field": { "$ref": "./examples.json#/MissingJsonPatchFieldExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
 	"CannotApplyItemPatch": {
 		"description": "The provided JSON Patch cannot be applied",
 		"content": {
@@ -780,6 +803,24 @@
 				"schema": { "$ref": "./response-parts.json#/ContextError" },
 				"examples": {
 					"redirected-item": { "$ref": "./examples.json#/RedirectedItemExample" },
+					"patch-test-failed": { "$ref": "./examples.json#/PatchTestFailedExample" },
+					"patch-target-not-found": { "$ref": "./examples.json#/PatchTargetNotFoundExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
+	"CannotApplyPropertyPatch": {
+		"description": "The provided JSON Patch cannot be applied",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/ContextError" },
+				"examples": {
 					"patch-test-failed": { "$ref": "./examples.json#/PatchTestFailedExample" },
 					"patch-target-not-found": { "$ref": "./examples.json#/PatchTargetNotFoundExample" }
 				}
