@@ -38,6 +38,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabels\GetPropertyLabe
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\GetPropertyStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetPropertyStatementsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchItemAliasesValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptionsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatementValidator;
@@ -78,6 +79,7 @@ class ValidatingRequestDeserializer	implements
 	GetStatementValidator,
 	PatchItemLabelsValidator,
 	PatchItemDescriptionsValidator,
+	PatchItemAliasesValidator,
 	PatchItemStatementValidator,
 	PatchPropertyStatementValidator,
 	PatchStatementValidator,

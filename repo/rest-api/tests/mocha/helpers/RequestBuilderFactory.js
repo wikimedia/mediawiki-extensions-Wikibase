@@ -93,6 +93,13 @@ module.exports = {
 			.withJsonBodyParam( 'patch', patch );
 	},
 
+	newPatchItemAliasesRequestBuilder( itemId, patch ) {
+		return new RequestBuilder()
+			.withRoute( 'PATCH', '/entities/items/{item_id}/aliases' )
+			.withPathParam( 'item_id', itemId )
+			.withJsonBodyParam( 'patch', patch );
+	},
+
 	newGetItemLabelRequestBuilder( itemId, languageCode ) {
 		return new RequestBuilder()
 			.withRoute( 'GET', '/entities/items/{item_id}/labels/{language_code}' )

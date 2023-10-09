@@ -7,6 +7,8 @@ use MediaWiki\Rest\Reporter\MWErrorReporter;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
+use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
@@ -58,6 +60,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabels\GetPropertyLabe
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\GetPropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetPropertyStatements;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchItemAliases;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchedDescriptionsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptions;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchedLabelsValidator;
@@ -493,6 +496,21 @@ return [
 				WikibaseRepo::getStatementGuidParser( $services ),
 				WikibaseRepo::getPropertyDataTypeLookup( $services )
 			)
+		);
+	},
+
+	'WbRestApi.PatchItemAliases' => function( MediaWikiServices $services ): PatchItemAliases {
+		return new PatchItemAliases(
+			WbRestApi::getValidatingRequestDeserializer( $services ),
+			new PrefetchingTermLookupAliasesRetriever(
+				WikibaseRepo::getPrefetchingTermLookup( $services ),
+				WikibaseRepo::getTermsLanguages( $services )
+			),
+			new AliasesSerializer(),
+			new PatchJson( new JsonDiffJsonPatcher() ),
+			WbRestApi::getItemDataRetriever( $services ),
+			new AliasesDeserializer(),
+			WbRestApi::getItemUpdater( $services )
 		);
 	},
 

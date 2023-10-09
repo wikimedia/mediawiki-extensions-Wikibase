@@ -1,1 +1,7 @@
-[ ]
+[
+	{
+		"path": "/wikibase/v0/entities/items/{item_id}/aliases",
+		"method": "PATCH",
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\PatchItemAliasesRouteHandler::factory"
+	}
+]

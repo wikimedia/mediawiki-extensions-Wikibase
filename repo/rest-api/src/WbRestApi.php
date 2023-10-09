@@ -34,6 +34,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabels\GetPropertyLabe
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\GetPropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetPropertyStatements;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchItemAliases;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptions;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatement;
@@ -232,6 +233,11 @@ class WbRestApi {
 	public static function getPatchItemDescriptions( ContainerInterface $services = null ): PatchItemDescriptions {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.PatchItemDescriptions' );
+	}
+
+	public static function getPatchItemAliases( ContainerInterface $services = null ): PatchItemAliases {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.PatchItemAliases' );
 	}
 
 	public static function getAssertUserIsAuthorized( ContainerInterface $services = null ): AssertUserIsAuthorized {
