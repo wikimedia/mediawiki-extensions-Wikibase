@@ -50,7 +50,7 @@
 							"properties": {
 								"description": {
 									"type": "string",
-									"example": "English science fiction writer and humourist"
+									"example": "an example description"
 								}
 							},
 							"required": [ "description" ]
