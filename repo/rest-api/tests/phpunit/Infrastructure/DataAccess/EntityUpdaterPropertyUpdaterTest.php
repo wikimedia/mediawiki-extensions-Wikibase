@@ -9,6 +9,7 @@ use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Property;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
@@ -79,6 +80,7 @@ class EntityUpdaterPropertyUpdaterTest extends TestCase {
 				new DataModelStatementList( $writeModelStatement )
 			),
 			new Property(
+				new Aliases(),
 				new StatementList( $readModelStatement )
 			),
 		];

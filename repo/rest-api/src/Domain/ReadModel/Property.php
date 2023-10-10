@@ -8,9 +8,15 @@ namespace Wikibase\Repo\RestApi\Domain\ReadModel;
 class Property {
 
 	private StatementList $statements;
+	private Aliases $aliases;
 
-	public function __construct( StatementList $statements ) {
+	public function __construct( Aliases $aliases, StatementList $statements ) {
+		$this->aliases = $aliases;
 		$this->statements = $statements;
+	}
+
+	public function getAliases(): Aliases {
+		return $this->aliases;
 	}
 
 	public function getStatements(): StatementList {

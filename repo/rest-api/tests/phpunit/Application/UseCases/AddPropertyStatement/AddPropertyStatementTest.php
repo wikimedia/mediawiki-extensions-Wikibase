@@ -14,6 +14,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Property;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyRevision;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
@@ -81,7 +82,11 @@ class AddPropertyStatementTest extends TestCase {
 				),
 				$this->expectEquivalentMetadata( $editTags, $isBot, $comment, EditSummary::ADD_ACTION )
 			)
-			->willReturn( new PropertyRevision( new Property( new StatementList( $statementReadModel ) ), $lastModified, $revisionId ) );
+			->willReturn( new PropertyRevision(
+				new Property( new Aliases(), new StatementList( $statementReadModel ) ),
+				$lastModified,
+				$revisionId
+			) );
 
 		$response = $this->newUseCase()->execute(
 			new AddPropertyStatementRequest(
