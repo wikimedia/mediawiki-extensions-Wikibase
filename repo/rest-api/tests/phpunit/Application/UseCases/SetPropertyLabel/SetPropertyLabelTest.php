@@ -11,6 +11,7 @@ use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\SetPropertyLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\SetPropertyLabelRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\SetPropertyLabelValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
@@ -123,6 +124,20 @@ class SetPropertyLabelTest extends TestCase {
 		$this->assertEquals( new Label( $langCode, $updatedLabelText ), $response->getLabel() );
 		$this->assertSame( $revisionId, $response->getRevisionId() );
 		$this->assertSame( $lastModified, $response->getLastModified() );
+	}
+
+	public function testGivenInvalidRequest_throwsUseCaseException(): void {
+		$expectedException = new UseCaseException( 'invalid-label-test' );
+		$this->validator = $this->createStub( SetPropertyLabelValidator::class );
+		$this->validator->method( 'validateAndDeserialize' )->willThrowException( $expectedException );
+		try {
+			$this->newUseCase()->execute(
+				new SetPropertyLabelRequest( 'P123', 'en', 'label', [], false, null, null )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
 	}
 
 	private function newUseCase(): SetPropertyLabel {

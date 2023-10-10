@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel;
 
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\LabelEditSummary;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
@@ -26,6 +27,9 @@ class SetPropertyLabel {
 		$this->propertyUpdater = $propertyUpdater;
 	}
 
+	/**
+	 * @throws UseCaseError
+	 */
 	public function execute( SetPropertyLabelRequest $request ): SetPropertyLabelResponse {
 		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
 		$propertyId = $deserializedRequest->getPropertyId();

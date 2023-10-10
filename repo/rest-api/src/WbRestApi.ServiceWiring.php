@@ -122,6 +122,7 @@ use Wikibase\Repo\RestApi\Infrastructure\ValidatingRequestDeserializer as VRD;
 use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoItemLabelValidator;
 use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoPropertyDescriptionValidator;
+use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoPropertyLabelValidator;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\ResponseFactory;
@@ -227,8 +228,14 @@ return [
 		},
 
 	VRD::PROPERTY_LABEL_EDIT_REQUEST_VALIDATING_DESERIALIZER =>
-		function (): PropertyLabelEditRequestValidatingDeserializer {
-			return new PropertyLabelEditRequestValidatingDeserializer();
+		function ( MediaWikiServices $services ): PropertyLabelEditRequestValidatingDeserializer {
+			return new PropertyLabelEditRequestValidatingDeserializer(
+				new WikibaseRepoPropertyLabelValidator(
+					WikibaseRepo::getTermValidatorFactory( $services ),
+					WikibaseRepo::getPropertyTermsCollisionDetector( $services ),
+					WbRestApi::getPropertyDataRetriever( $services )
+				)
+			);
 		},
 
 	VRD::PROPERTY_DESCRIPTION_EDIT_REQUEST_VALIDATING_DESERIALIZER =>
