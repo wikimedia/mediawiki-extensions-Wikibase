@@ -43,7 +43,7 @@ class SetItemLabel {
 	public function execute( SetItemLabelRequest $request ): SetItemLabelResponse {
 		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
 		$itemId = $deserializedRequest->getItemId();
-		$label = $deserializedRequest->getLabel();
+		$label = $deserializedRequest->getItemLabel();
 
 		$this->assertItemExists->execute( $itemId );
 

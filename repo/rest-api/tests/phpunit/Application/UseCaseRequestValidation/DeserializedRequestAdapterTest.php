@@ -21,6 +21,7 @@ use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyDescripti
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdFilterRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyLabelEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementSerializationRequest;
 use Wikibase\Repo\RestApi\Domain\Model\UserProvidedEditMetadata;
@@ -156,15 +157,26 @@ class DeserializedRequestAdapterTest extends TestCase {
 		( new DeserializedRequestAdapter( [] ) )->getPatch();
 	}
 
-	public function testGetLabel(): void {
+	public function testGetItemLabel(): void {
 		$label = new Term( 'en', 'potato' );
 		$requestAdapter = new DeserializedRequestAdapter( [ ItemLabelEditRequest::class => $label ] );
-		$this->assertSame( $label, $requestAdapter->getLabel() );
+		$this->assertSame( $label, $requestAdapter->getItemLabel() );
 	}
 
-	public function testGivenNoLabel_getLabelThrows(): void {
+	public function testGivenNoLabel_getItemLabelThrows(): void {
 		$this->expectException( LogicException::class );
-		( new DeserializedRequestAdapter( [] ) )->getLabel();
+		( new DeserializedRequestAdapter( [] ) )->getItemLabel();
+	}
+
+	public function testGetPropertyLabel(): void {
+		$label = new Term( 'en', 'potato' );
+		$requestAdapter = new DeserializedRequestAdapter( [ PropertyLabelEditRequest::class => $label ] );
+		$this->assertSame( $label, $requestAdapter->getPropertyLabel() );
+	}
+
+	public function testGivenNoLabel_getPropertyLabelThrows(): void {
+		$this->expectException( LogicException::class );
+		( new DeserializedRequestAdapter( [] ) )->getPropertyLabel();
 	}
 
 	public function testGetItemDescription(): void {

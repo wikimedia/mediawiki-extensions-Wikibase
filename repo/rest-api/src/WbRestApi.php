@@ -49,6 +49,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatement
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription\SetPropertyDescription;
+use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\SetPropertyLabel;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\StatementRemover;
@@ -105,6 +106,11 @@ class WbRestApi {
 	public static function getSetItemLabel( ContainerInterface $services = null ): SetItemLabel {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.SetItemLabel' );
+	}
+
+	public static function getSetPropertyLabel( ContainerInterface $services = null ): SetPropertyLabel {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.SetPropertyLabel' );
 	}
 
 	public static function getSetItemDescription( ContainerInterface $services = null ): SetItemDescription {

@@ -15,6 +15,7 @@ use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyDescripti
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdFilterRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyLabelEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementSerializationRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\UseCaseRequest;
@@ -55,6 +56,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatement
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription\SetPropertyDescriptionValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\SetPropertyLabelValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 
 /**
@@ -97,7 +99,8 @@ class ValidatingRequestDeserializer	implements
 	GetPropertyLabelValidator,
 	GetPropertyDescriptionValidator,
 	SetPropertyDescriptionValidator,
-	PatchPropertyAliasesValidator
+	PatchPropertyAliasesValidator,
+	SetPropertyLabelValidator
 {
 	private const PREFIX = 'WbRestApi.RequestValidation.';
 	public const ITEM_ID_REQUEST_VALIDATING_DESERIALIZER = self::PREFIX . 'ItemIdRequestValidatingDeserializer';
@@ -115,6 +118,7 @@ class ValidatingRequestDeserializer	implements
 	public const ITEM_DESCRIPTION_EDIT_REQUEST_VALIDATING_DESERIALIZER = self::PREFIX . 'ItemDescriptionEditRequestValidatingDeserializer';
 	public const PROPERTY_DESCRIPTION_EDIT_REQUEST_VALIDATING_DESERIALIZER =
 		self::PREFIX . 'PropertyDescriptionEditRequestValidatingDeserializer';
+	public const PROPERTY_LABEL_EDIT_REQUEST_VALIDATING_DESERIALIZER = self::PREFIX . 'PropertyLabelEditRequestValidatingDeserializer';
 
 	private ContainerInterface $serviceContainer;
 	private array $validRequestResults = [];
@@ -149,6 +153,7 @@ class ValidatingRequestDeserializer	implements
 			PatchRequest::class => self::PATCH_REQUEST_VALIDATING_DESERIALIZER,
 			ItemLabelEditRequest::class => self::ITEM_LABEL_EDIT_REQUEST_VALIDATING_DESERIALIZER,
 			ItemDescriptionEditRequest::class => self::ITEM_DESCRIPTION_EDIT_REQUEST_VALIDATING_DESERIALIZER,
+			PropertyLabelEditRequest::class => self::PROPERTY_LABEL_EDIT_REQUEST_VALIDATING_DESERIALIZER,
 			PropertyDescriptionEditRequest::class => self::PROPERTY_DESCRIPTION_EDIT_REQUEST_VALIDATING_DESERIALIZER,
 		];
 		$result = [];
