@@ -5,6 +5,7 @@ namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
 use Wikibase\DataModel\Entity\Property as DataModelProperty;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Property;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyRevision;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
@@ -40,6 +41,7 @@ class EntityUpdaterPropertyUpdater implements PropertyUpdater {
 
 	private function convertDataModelPropertyToReadModel( DataModelProperty $property ): Property {
 		return new Property(
+			Descriptions::fromTermList( $property->getDescriptions() ),
 			Aliases::fromAliasGroupList( $property->getAliasGroups() ),
 			new StatementList(
 				...array_map(
