@@ -1184,12 +1184,10 @@ final class RepoHooks {
 	/**
 	 * Handler for the VectorSearchResourceLoaderConfig hook to overwrite search pattern highlighting for wikibase
 	 */
-	public static function onVectorSearchResourceLoaderConfig( array &$vectorSearchConfig ): bool {
+	public static function onVectorSearchResourceLoaderConfig( array &$vectorSearchConfig ): void {
 		$settings = WikibaseRepo::getSettings();
 		if ( $settings->getSetting( 'enableEntitySearchUI' ) === true ) {
 			$vectorSearchConfig['highlightQuery'] = false;
 		}
-
-		return true;
 	}
 }
