@@ -76,16 +76,11 @@ class PatchedDescriptionsValidator {
 	}
 
 	private function getModifiedDescriptions( TermList $original, TermList $modified ): array {
-		$modifiedDescriptions = [];
-		foreach ( $modified as $description ) {
-			if ( !$original->hasTermForLanguage( $description->getLanguageCode() ) ) {
-				$modifiedDescriptions[] = $description;
-			} elseif ( $original->getByLanguage( $description->getLanguageCode() )->getText() != $description->getText() ) {
-				$modifiedDescriptions[] = $description;
-			}
-		}
-
-		return $modifiedDescriptions;
+		return array_filter(
+			iterator_to_array( $modified ),
+			fn( Term $description ) => !$original->hasTermForLanguage( $description->getLanguageCode() ) ||
+				!$original->getByLanguage( $description->getLanguageCode() )->equals( $description )
+		);
 	}
 
 	private function validateDescription( ItemId $itemId, Term $description ): void {
