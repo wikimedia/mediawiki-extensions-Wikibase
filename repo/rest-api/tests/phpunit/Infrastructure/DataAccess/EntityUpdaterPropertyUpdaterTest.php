@@ -15,6 +15,8 @@ use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Property;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
@@ -80,11 +82,15 @@ class EntityUpdaterPropertyUpdaterTest extends TestCase {
 		return [
 			new DataModelProperty(
 				null,
-				new Fingerprint( null, new TermList( [ new Term( 'en', 'English Description' ) ] ), null ),
+				new Fingerprint(
+					new TermList( [ new Term( 'en', 'English Label' ) ] ),
+					new TermList( [ new Term( 'en', 'English Description' ) ] )
+				),
 				'string',
 				new DataModelStatementList( $writeModelStatement )
 			),
 			new Property(
+				new Labels( new Label( 'en', 'English Label' ) ),
 				new Descriptions( new Description( 'en', 'English Description' ) ),
 				new Aliases(),
 				new StatementList( $readModelStatement )

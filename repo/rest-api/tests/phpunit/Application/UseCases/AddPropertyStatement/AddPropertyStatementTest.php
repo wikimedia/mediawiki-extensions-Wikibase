@@ -17,6 +17,7 @@ use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Property;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyRevision;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
@@ -86,6 +87,7 @@ class AddPropertyStatementTest extends TestCase {
 			)
 			->willReturn( new PropertyRevision(
 				new Property(
+					new Labels(),
 					new Descriptions( new Description( 'en', 'English Description' ) ),
 					new Aliases(),
 					new StatementList( $statementReadModel )
