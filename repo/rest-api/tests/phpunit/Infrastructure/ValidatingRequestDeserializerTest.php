@@ -25,6 +25,8 @@ use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\LanguageCodeReque
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\MappedRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PatchRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PatchRequestValidatingDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyDescriptionEditRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyDescriptionEditRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdFilterRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdRequest;
@@ -166,7 +168,21 @@ class ValidatingRequestDeserializerTest extends TestCase {
 
 		$result = $this->newRequestDeserializer()->validateAndDeserialize( $request );
 
-		$this->assertEquals( new Term( 'en', 'root vegetable' ), $result->getDescription() );
+		$this->assertEquals( new Term( 'en', 'root vegetable' ), $result->getItemDescription() );
+	}
+
+	public function testGivenValidPropertyDescriptionEditRequest_returnsDescription(): void {
+		$request = $this->createStub( PropertyDescriptionEditUseCaseRequest::class );
+		$request->method( 'getPropertyId' )->willReturn( 'P123' );
+		$request->method( 'getLanguageCode' )->willReturn( 'en' );
+		$request->method( 'getDescription' )->willReturn( 'that class of which this subject is a particular example and member' );
+
+		$result = $this->newRequestDeserializer()->validateAndDeserialize( $request );
+
+		$this->assertEquals(
+			new Term( 'en', 'that class of which this subject is a particular example and member' ),
+			$result->getPropertyDescription()
+		);
 	}
 
 	public function testGivenRepeatedValidRequests_returnsTheSameResultAndValidatesOnlyOnce(): void {
@@ -279,6 +295,11 @@ class ValidatingRequestDeserializerTest extends TestCase {
 			ItemDescriptionEditRequestValidatingDeserializer::class,
 			ValidatingRequestDeserializer::ITEM_DESCRIPTION_EDIT_REQUEST_VALIDATING_DESERIALIZER,
 		];
+		yield [
+			PropertyDescriptionEditUseCaseRequest::class,
+			PropertyDescriptionEditRequestValidatingDeserializer::class,
+			ValidatingRequestDeserializer::PROPERTY_DESCRIPTION_EDIT_REQUEST_VALIDATING_DESERIALIZER,
+		];
 	}
 
 	private function newRequestDeserializer( ContainerInterface $serviceContainer = null ): ValidatingRequestDeserializer {
@@ -302,6 +323,7 @@ interface EditMetadataUseCaseRequest extends UseCaseRequest, EditMetadataRequest
 interface PatchUseCaseRequest extends UseCaseRequest, PatchRequest {}
 interface ItemLabelEditUseCaseRequest extends UseCaseRequest, ItemLabelEditRequest {}
 interface ItemDescriptionEditUseCaseRequest extends UseCaseRequest, ItemDescriptionEditRequest {}
+interface PropertyDescriptionEditUseCaseRequest extends UseCaseRequest, PropertyDescriptionEditRequest {}
 interface PropertyFieldsUseCaseRequest extends UseCaseRequest, PropertyFieldsRequest {}
 class NullValidator {
 	public function validateAndDeserialize() {

@@ -137,6 +137,14 @@ module.exports = {
 			.withJsonBodyParam( 'description', description );
 	},
 
+	newSetPropertyDescriptionRequestBuilder( propertyId, languageCode, description ) {
+		return new RequestBuilder()
+			.withRoute( 'PUT', '/entities/properties/{property_id}/descriptions/{language_code}' )
+			.withPathParam( 'property_id', propertyId )
+			.withPathParam( 'language_code', languageCode )
+			.withJsonBodyParam( 'description', description );
+	},
+
 	newGetItemStatementsRequestBuilder( itemId ) {
 		return new RequestBuilder()
 			.withRoute( 'GET', '/entities/items/{item_id}/statements' )

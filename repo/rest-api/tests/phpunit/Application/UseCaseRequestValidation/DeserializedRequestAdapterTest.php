@@ -17,6 +17,7 @@ use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemLabelEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\LanguageCodeRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PatchRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyDescriptionEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdFilterRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdRequest;
@@ -166,15 +167,26 @@ class DeserializedRequestAdapterTest extends TestCase {
 		( new DeserializedRequestAdapter( [] ) )->getLabel();
 	}
 
-	public function testGetDescription(): void {
-		$label = new Term( 'en', 'root vegetable' );
-		$requestAdapter = new DeserializedRequestAdapter( [ ItemDescriptionEditRequest::class => $label ] );
-		$this->assertSame( $label, $requestAdapter->getDescription() );
+	public function testGetItemDescription(): void {
+		$description = new Term( 'en', 'root vegetable' );
+		$requestAdapter = new DeserializedRequestAdapter( [ ItemDescriptionEditRequest::class => $description ] );
+		$this->assertSame( $description, $requestAdapter->getItemDescription() );
 	}
 
-	public function testGivenNoDescription_getDescriptionThrows(): void {
+	public function testGivenNoDescriptionForItem_getItemDescriptionThrows(): void {
 		$this->expectException( LogicException::class );
-		( new DeserializedRequestAdapter( [] ) )->getDescription();
+		( new DeserializedRequestAdapter( [] ) )->getItemDescription();
+	}
+
+	public function testGetPropertyDescription(): void {
+		$description = new Term( 'en', 'that class of which this subject is a particular example and member' );
+		$requestAdapter = new DeserializedRequestAdapter( [ PropertyDescriptionEditRequest::class => $description ] );
+		$this->assertSame( $description, $requestAdapter->getPropertyDescription() );
+	}
+
+	public function testGivenNoDescriptionForProperty_getPropertyDescriptionThrows(): void {
+		$this->expectException( LogicException::class );
+		( new DeserializedRequestAdapter( [] ) )->getPropertyDescription();
 	}
 
 }

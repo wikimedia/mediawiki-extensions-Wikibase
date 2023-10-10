@@ -48,7 +48,9 @@ use Wikibase\Repo\RestApi\Application\UseCases\ReplacePropertyStatement\ReplaceP
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel;
+use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription\SetPropertyDescription;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\StatementRemover;
 use Wikibase\Repo\RestApi\Domain\Services\StatementUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupItemDataRetriever;
@@ -108,6 +110,11 @@ class WbRestApi {
 	public static function getSetItemDescription( ContainerInterface $services = null ): SetItemDescription {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.SetItemDescription' );
+	}
+
+	public static function getSetPropertyDescription( ContainerInterface $services = null ): SetPropertyDescription {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.SetPropertyDescription' );
 	}
 
 	public static function getGetItemStatements( ContainerInterface $services = null ): GetItemStatements {
@@ -193,6 +200,11 @@ class WbRestApi {
 	public static function getItemUpdater( ContainerInterface $services = null ): ItemUpdater {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.ItemUpdater' );
+	}
+
+	public static function getPropertyUpdater( ContainerInterface $services = null ): PropertyUpdater {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.PropertyUpdater' );
 	}
 
 	public static function getStatementUpdater( ContainerInterface $services = null ): StatementUpdater {

@@ -43,7 +43,7 @@ class SetItemDescription {
 	public function execute( SetItemDescriptionRequest $request ): SetItemDescriptionResponse {
 		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
 		$itemId = $deserializedRequest->getItemId();
-		$description = $deserializedRequest->getDescription();
+		$description = $deserializedRequest->getItemDescription();
 		$editMetadata = $deserializedRequest->getEditMetadata();
 
 		$this->assertItemExists->execute( $itemId );

@@ -1,5 +1,10 @@
 [
 	{
+		"path": "/wikibase/v0/entities/properties/{property_id}/descriptions/{language_code}",
+		"method": "PUT",
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\SetPropertyDescriptionRouteHandler::factory"
+	},
+	{
 		"path": "/wikibase/v0/entities/items/{item_id}/aliases",
 		"method": "PATCH",
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\PatchItemAliasesRouteHandler::factory"

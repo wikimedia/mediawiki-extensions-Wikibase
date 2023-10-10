@@ -26,6 +26,7 @@ use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemLabelEditRequ
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\LanguageCodeRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\MappedRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PatchRequestValidatingDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyDescriptionEditRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdFilterRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdRequest;
@@ -78,6 +79,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\ReplacePropertyStatement\ReplaceP
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel;
+use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription\SetPropertyDescription;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
@@ -87,6 +89,7 @@ use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyParts;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\RestApi\Domain\Services\StatementRemover;
 use Wikibase\Repo\RestApi\Domain\Services\StatementUpdater;
@@ -116,6 +119,7 @@ use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryLabelTextValidator;
 use Wikibase\Repo\RestApi\Infrastructure\ValidatingRequestDeserializer as VRD;
 use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoItemLabelValidator;
+use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoPropertyDescriptionValidator;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\ResponseFactory;
@@ -216,6 +220,16 @@ return [
 					WikibaseRepo::getTermValidatorFactory( $services ),
 					WikibaseRepo::getItemTermsCollisionDetector( $services ),
 					WbRestApi::getItemDataRetriever( $services )
+				)
+			);
+		},
+
+	VRD::PROPERTY_DESCRIPTION_EDIT_REQUEST_VALIDATING_DESERIALIZER =>
+		function ( MediaWikiServices $services ): PropertyDescriptionEditRequestValidatingDeserializer {
+			return new PropertyDescriptionEditRequestValidatingDeserializer(
+				new WikibaseRepoPropertyDescriptionValidator(
+					WikibaseRepo::getTermValidatorFactory( $services ),
+					WbRestApi::getPropertyDataRetriever( $services )
 				)
 			);
 		},
@@ -605,6 +619,16 @@ return [
 		);
 	},
 
+	'WbRestApi.PropertyUpdater' => function( MediaWikiServices $services ): PropertyUpdater {
+		return new EntityUpdaterPropertyUpdater(
+			WbRestApi::getEntityUpdater( $services ),
+			new StatementReadModelConverter(
+				WikibaseRepo::getStatementGuidParser( $services ),
+				WikibaseRepo::getPropertyDataTypeLookup( $services )
+			)
+		);
+	},
+
 	'WbRestApi.RemoveItemStatement' => function( MediaWikiServices $services ): RemoveItemStatement {
 		return new RemoveItemStatement(
 			WbRestApi::getAssertItemExists( $services ),
@@ -679,6 +703,14 @@ return [
 			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getItemUpdater( $services ),
 			WbRestApi::getAssertUserIsAuthorized( $services )
+		);
+	},
+
+	'WbRestApi.SetPropertyDescription' => function( MediaWikiServices $services ): SetPropertyDescription {
+		return new SetPropertyDescription(
+			WbRestApi::getValidatingRequestDeserializer( $services ),
+			WbRestApi::getPropertyDataRetriever( $services ),
+			WbRestApi::getPropertyUpdater( $services ),
 		);
 	},
 
