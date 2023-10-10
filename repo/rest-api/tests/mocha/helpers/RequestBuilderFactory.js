@@ -100,6 +100,13 @@ module.exports = {
 			.withJsonBodyParam( 'patch', patch );
 	},
 
+	newPatchPropertyAliasesRequestBuilder( propertyId, patch ) {
+		return new RequestBuilder()
+			.withRoute( 'PATCH', '/entities/properties/{property_id}/aliases' )
+			.withPathParam( 'property_id', propertyId )
+			.withJsonBodyParam( 'patch', patch );
+	},
+
 	newGetItemLabelRequestBuilder( itemId, languageCode ) {
 		return new RequestBuilder()
 			.withRoute( 'GET', '/entities/items/{item_id}/labels/{language_code}' )

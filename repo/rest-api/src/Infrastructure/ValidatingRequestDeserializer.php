@@ -42,6 +42,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchItemAliases
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptionsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchPropertyAliasesValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyStatement\PatchPropertyStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatementValidator;
@@ -92,7 +93,8 @@ class ValidatingRequestDeserializer	implements
 	SetItemLabelValidator,
 	SetItemDescriptionValidator,
 	GetPropertyLabelValidator,
-	GetPropertyDescriptionValidator
+	GetPropertyDescriptionValidator,
+	PatchPropertyAliasesValidator
 {
 	private const PREFIX = 'WbRestApi.RequestValidation.';
 	public const ITEM_ID_REQUEST_VALIDATING_DESERIALIZER = self::PREFIX . 'ItemIdRequestValidatingDeserializer';
