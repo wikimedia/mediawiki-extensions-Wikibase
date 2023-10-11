@@ -5,6 +5,7 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\AliasesEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyAliasesRetriever;
@@ -42,6 +43,9 @@ class PatchPropertyAliases {
 		$this->propertyUpdater = $propertyUpdater;
 	}
 
+	/**
+	 * @throws UseCaseError
+	 */
 	public function execute( PatchPropertyAliasesRequest $request ): PatchPropertyAliasesResponse {
 		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
 

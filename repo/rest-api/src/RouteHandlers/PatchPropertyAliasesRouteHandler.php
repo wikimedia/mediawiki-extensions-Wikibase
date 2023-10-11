@@ -13,6 +13,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchPropertyAliases;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchPropertyAliasesRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchPropertyAliasesResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdaterPropertyUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\PrefetchingTermLookupAliasesRetriever;
@@ -28,16 +29,22 @@ class PatchPropertyAliasesRouteHandler extends SimpleHandler {
 
 	public const PROPERTY_ID_PATH_PARAM = 'property_id';
 	public const PATCH_BODY_PARAM = 'patch';
+	public const TAGS_BODY_PARAM = 'tags';
+	public const BOT_BODY_PARAM = 'bot';
+	public const COMMENT_BODY_PARAM = 'comment';
 
 	private PatchPropertyAliases $useCase;
 	private AliasesSerializer $serializer;
+	private ResponseFactory $responseFactory;
 
 	public function __construct(
 		PatchPropertyAliases $useCase,
-		AliasesSerializer $serializer
+		AliasesSerializer $serializer,
+		ResponseFactory $responseFactory
 	) {
 		$this->useCase = $useCase;
 		$this->serializer = $serializer;
+		$this->responseFactory = $responseFactory;
 	}
 
 	public static function factory(): Handler {
@@ -60,15 +67,27 @@ class PatchPropertyAliasesRouteHandler extends SimpleHandler {
 					)
 				)
 			),
-			new AliasesSerializer()
+			new AliasesSerializer(),
+			new ResponseFactory()
 		);
 	}
 
 	public function run( string $propertyId ): Response {
 		$jsonBody = $this->getValidatedBody();
-		return $this->newSuccessHttpResponse(
-			$this->useCase->execute( new PatchPropertyAliasesRequest( $propertyId, $jsonBody[self::PATCH_BODY_PARAM] ) )
-		);
+		try {
+			return $this->newSuccessHttpResponse(
+				$this->useCase->execute( new PatchPropertyAliasesRequest(
+					$propertyId,
+					$jsonBody[self::PATCH_BODY_PARAM],
+					$jsonBody[self::TAGS_BODY_PARAM],
+					$jsonBody[self::BOT_BODY_PARAM],
+					$jsonBody[self::COMMENT_BODY_PARAM],
+					$this->getUsername()
+				) )
+			);
+		} catch ( UseCaseError $e ) {
+			return $this->responseFactory->newErrorResponseFromException( $e );
+		}
 	}
 
 	private function newSuccessHttpResponse( PatchPropertyAliasesResponse $useCaseResponse ): Response {
@@ -112,7 +131,30 @@ class PatchPropertyAliasesRouteHandler extends SimpleHandler {
 					ParamValidator::PARAM_TYPE => 'array',
 					ParamValidator::PARAM_REQUIRED => true,
 				],
+				self::TAGS_BODY_PARAM => [
+					self::PARAM_SOURCE => 'body',
+					ParamValidator::PARAM_TYPE => 'array',
+					ParamValidator::PARAM_REQUIRED => false,
+					ParamValidator::PARAM_DEFAULT => [],
+				],
+				self::BOT_BODY_PARAM => [
+					self::PARAM_SOURCE => 'body',
+					ParamValidator::PARAM_TYPE => 'boolean',
+					ParamValidator::PARAM_REQUIRED => false,
+					ParamValidator::PARAM_DEFAULT => false,
+				],
+				self::COMMENT_BODY_PARAM => [
+					self::PARAM_SOURCE => 'body',
+					ParamValidator::PARAM_TYPE => 'string',
+					ParamValidator::PARAM_REQUIRED => false,
+					ParamValidator::PARAM_DEFAULT => null,
+				],
 			] ) : parent::getBodyValidator( $contentType );
+	}
+
+	private function getUsername(): ?string {
+		$mwUser = $this->getAuthority()->getUser();
+		return $mwUser->isRegistered() ? $mwUser->getName() : null;
 	}
 
 }
