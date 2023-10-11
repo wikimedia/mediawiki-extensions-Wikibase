@@ -7,6 +7,16 @@ const { newSetPropertyDescriptionRequestBuilder } = require( '../helpers/Request
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { formatTermEditSummary } = require( '../helpers/formatEditSummaries' );
 
+function assertValidErrorResponse( response, responseBodyErrorCode ) {
+	assert.header( response, 'Content-Language', 'en' );
+	assert.strictEqual( response.body.code, responseBodyErrorCode );
+}
+
+function assertValid400Response( response, responseBodyErrorCode ) {
+	expect( response ).to.have.status( 400 );
+	assertValidErrorResponse( response, responseBodyErrorCode );
+}
+
 describe( newSetPropertyDescriptionRequestBuilder().getRouteDescription(), () => {
 	let testPropertyId;
 	let testEnLabel;
@@ -150,6 +160,95 @@ describe( newSetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 				.makeRequest();
 
 			assertValid200Response( response, newDescription );
+		} );
+
+	} );
+
+	describe( '400 error response', () => {
+
+		it( 'invalid property ID', async () => {
+			const invalidPropertyId = 'X11';
+			const response = await newSetPropertyDescriptionRequestBuilder(
+				invalidPropertyId, 'en', 'description' )
+				.assertInvalidRequest().makeRequest();
+
+			assertValid400Response( response, 'invalid-property-id' );
+			assert.include( response.body.message, invalidPropertyId );
+		} );
+
+		it( 'invalid language code', async () => {
+			const invalidLanguage = 'xyz';
+			const response = await newSetPropertyDescriptionRequestBuilder(
+				testPropertyId,
+				invalidLanguage,
+				'property description'
+			).assertValidRequest().makeRequest();
+
+			assertValid400Response( response, 'invalid-language-code' );
+			assert.include( response.body.message, invalidLanguage );
+		} );
+
+		it( 'invalid description', async () => {
+			const invalidDescription = 'tab characters \t not allowed';
+			const response = await newSetPropertyDescriptionRequestBuilder( testPropertyId, 'en', invalidDescription )
+				.assertValidRequest().makeRequest();
+
+			assertValid400Response( response, 'invalid-description' );
+			assert.include( response.body.message, invalidDescription );
+		} );
+
+		it( 'description empty', async () => {
+			const response = await newSetPropertyDescriptionRequestBuilder( testPropertyId, 'en', '' )
+				.assertValidRequest().makeRequest();
+
+			assertValid400Response( response, 'description-empty' );
+		} );
+
+		it( 'description too long', async () => {
+			// this assumes the default value of 250 from Wikibase.default.php is in place and
+			// may fail if $wgWBRepoSettings['string-limits']['multilang']['length'] is overwritten
+			const limit = 250;
+			const tooLongDescription = 'a'.repeat( limit + 1 );
+			const response = await newSetPropertyDescriptionRequestBuilder( testPropertyId, 'en', tooLongDescription )
+				.assertValidRequest().makeRequest();
+
+			assertValid400Response( response, 'description-too-long' );
+			assert.include( response.body.message, limit );
+			assert.deepEqual(
+				response.body.context,
+				{ value: tooLongDescription, 'character-limit': limit }
+			);
+		} );
+
+		it( 'description is the same as the label', async () => {
+			const response = await newSetPropertyDescriptionRequestBuilder( testPropertyId, 'en', testEnLabel )
+				.assertValidRequest().makeRequest();
+
+			assertValid400Response( response, 'label-description-same-value' );
+			assert.include( response.body.message, 'en' );
+			assert.deepEqual( response.body.context, { language: 'en' } );
+		} );
+
+		it( 'invalid edit tag', async () => {
+			const invalidEditTag = 'invalid tag';
+			const response = await newSetPropertyDescriptionRequestBuilder( testPropertyId, 'en', 'description' )
+				.withJsonBodyParam( 'tags', [ invalidEditTag ] )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValid400Response( response, 'invalid-edit-tag' );
+			assert.include( response.body.message, invalidEditTag );
+		} );
+
+		it( 'comment too long', async () => {
+			const comment = 'x'.repeat( 501 );
+			const response = await newSetPropertyDescriptionRequestBuilder( testPropertyId, 'en', 'description' )
+				.withJsonBodyParam( 'comment', comment )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValid400Response( response, 'comment-too-long' );
+			assert.include( response.body.message, '500' );
 		} );
 
 	} );

@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\Property as DataModelProperty;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription\SetPropertyDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription\SetPropertyDescriptionRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription\SetPropertyDescriptionValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
@@ -133,6 +134,20 @@ class SetPropertyDescriptionTest extends TestCase {
 		$this->assertSame( $revisionId, $response->getRevisionId() );
 		$this->assertSame( $lastModified, $response->getLastModified() );
 		$this->assertTrue( $response->wasReplaced() );
+	}
+
+	public function testGivenInvalidRequest_throwsUseCaseException(): void {
+		$expectedException = new UseCaseException( 'invalid-description-test' );
+		$this->validator = $this->createStub( SetPropertyDescriptionValidator::class );
+		$this->validator->method( 'validateAndDeserialize' )->willThrowException( $expectedException );
+		try {
+			$this->newUseCase()->execute(
+				new SetPropertyDescriptionRequest( 'P123', 'en', 'description', [], false, null, null )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
 	}
 
 	private function newUseCase(): SetPropertyDescription {

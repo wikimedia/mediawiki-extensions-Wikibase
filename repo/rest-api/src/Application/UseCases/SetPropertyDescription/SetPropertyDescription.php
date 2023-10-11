@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription;
 
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
@@ -26,6 +27,9 @@ class SetPropertyDescription {
 		$this->propertyUpdater = $propertyUpdater;
 	}
 
+	/**
+	 * @throws UseCaseError
+	 */
 	public function execute( SetPropertyDescriptionRequest $request ): SetPropertyDescriptionResponse {
 		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
 		$propertyId = $deserializedRequest->getPropertyId();
