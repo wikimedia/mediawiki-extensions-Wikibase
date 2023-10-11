@@ -11,7 +11,7 @@
 							"properties": {
 								"label": {
 									"type": "string",
-									"example": "Douglas Adams"
+									"example": "an example label"
 								}
 							},
 							"required": [ "label" ]

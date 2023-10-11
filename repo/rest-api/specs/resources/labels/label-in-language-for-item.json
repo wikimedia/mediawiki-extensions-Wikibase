@@ -13,7 +13,7 @@
 			{ "$ref": "../../global/parameters.json#/Authorization" }
 		],
 		"responses": {
-			"200": { "$ref": "../../global/responses.json#/ItemLabel" },
+			"200": { "$ref": "../../global/responses.json#/Label" },
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
 			"308": { "$ref": "../../global/responses.json#/Moved" },
 			"400": { "$ref": "../../global/responses.json#/InvalidItemTermByLanguageInput" },
@@ -38,11 +38,11 @@
 		"requestBody": { "$ref": "../../global/requests.json#/Label" },
 		"responses": {
 			"200": {
-				"$ref": "../../global/responses.json#/ItemLabel",
+				"$ref": "../../global/responses.json#/Label",
 				"description": "The updated Label in a specific language"
 			},
 			"201": {
-				"$ref": "../../global/responses.json#/ItemLabel",
+				"$ref": "../../global/responses.json#/Label",
 				"description": "The newly added Label in a specific language"
 			},
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
