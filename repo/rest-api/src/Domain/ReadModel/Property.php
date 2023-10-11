@@ -7,12 +7,18 @@ namespace Wikibase\Repo\RestApi\Domain\ReadModel;
  */
 class Property {
 
-	private StatementList $statements;
+	private Descriptions $descriptions;
 	private Aliases $aliases;
+	private StatementList $statements;
 
-	public function __construct( Aliases $aliases, StatementList $statements ) {
+	public function __construct( Descriptions $descriptions, Aliases $aliases, StatementList $statements ) {
+		$this->descriptions = $descriptions;
 		$this->aliases = $aliases;
 		$this->statements = $statements;
+	}
+
+	public function getDescriptions(): Descriptions {
+		return $this->descriptions;
 	}
 
 	public function getAliases(): Aliases {

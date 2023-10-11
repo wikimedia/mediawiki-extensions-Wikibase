@@ -5,11 +5,16 @@ namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Property as DataModelProperty;
 use Wikibase\DataModel\Statement\StatementList as DataModelStatementList;
+use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\Term\TermList;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Property;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
@@ -75,11 +80,12 @@ class EntityUpdaterPropertyUpdaterTest extends TestCase {
 		return [
 			new DataModelProperty(
 				null,
-				null,
+				new Fingerprint( null, new TermList( [ new Term( 'en', 'English Description' ) ] ), null ),
 				'string',
 				new DataModelStatementList( $writeModelStatement )
 			),
 			new Property(
+				new Descriptions( new Description( 'en', 'English Description' ) ),
 				new Aliases(),
 				new StatementList( $readModelStatement )
 			),
