@@ -2,6 +2,7 @@
 
 const { assert, utils, action } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
+const testValidatesPatch = require( '../helpers/testValidatesPatch' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { newPatchItemLabelsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
@@ -421,121 +422,7 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 			assert.include( response.body.message, itemId );
 		} );
 
-		it( 'invalid patch', async () => {
-			const invalidPatch = { foo: 'this is not a valid JSON Patch' };
-			const response = await newPatchItemLabelsRequestBuilder( testItemId, invalidPatch )
-				.assertInvalidRequest().makeRequest();
-
-			assertValidErrorResponse( response, 400, 'invalid-patch' );
-		} );
-
-		it( "invalid patch - missing 'op' field", async () => {
-			const invalidOperation = { path: '/a/b/c', value: 'test' };
-			const response = await newPatchItemLabelsRequestBuilder( testItemId, [ invalidOperation ] )
-				.assertInvalidRequest().makeRequest();
-
-			assertValidErrorResponse(
-				response,
-				400,
-				'missing-json-patch-field',
-				{ operation: invalidOperation, field: 'op' }
-			);
-			assert.include( response.body.message, "'op'" );
-		} );
-
-		it( "invalid patch - missing 'path' field", async () => {
-			const invalidOperation = { op: 'remove' };
-			const response = await newPatchItemLabelsRequestBuilder( testItemId, [ invalidOperation ] )
-				.assertInvalidRequest().makeRequest();
-			assertValidErrorResponse(
-				response,
-				400,
-				'missing-json-patch-field',
-				{ operation: invalidOperation, field: 'path' }
-			);
-			assert.include( response.body.message, "'path'" );
-		} );
-
-		it( "invalid patch - missing 'value' field", async () => {
-			const invalidOperation = { op: 'add', path: '/a/b/c' };
-			const response = await newPatchItemLabelsRequestBuilder( testItemId, [ invalidOperation ] )
-				.makeRequest();
-
-			assertValidErrorResponse(
-				response,
-				400,
-				'missing-json-patch-field',
-				{ operation: invalidOperation, field: 'value' }
-			);
-			assert.include( response.body.message, "'value'" );
-		} );
-
-		it( "invalid patch - missing 'from' field", async () => {
-			const invalidOperation = { op: 'move', path: '/a/b/c' };
-			const response = await newPatchItemLabelsRequestBuilder( testItemId, [ invalidOperation ] )
-				.makeRequest();
-
-			assertValidErrorResponse(
-				response,
-				400,
-				'missing-json-patch-field',
-				{ operation: invalidOperation, field: 'from' }
-			);
-			assert.include( response.body.message, "'from'" );
-		} );
-
-		it( "invalid patch - invalid 'op' field", async () => {
-			const invalidOperation = { op: 'foobar', path: '/a/b/c', value: 'test' };
-			const response = await newPatchItemLabelsRequestBuilder( testItemId, [ invalidOperation ] )
-				.assertInvalidRequest().makeRequest();
-
-			assertValidErrorResponse( response, 400, 'invalid-patch-operation', { operation: invalidOperation } );
-			assert.include( response.body.message, "'foobar'" );
-		} );
-
-		it( "invalid patch - 'op' is not a string", async () => {
-			const invalidOperation = { op: { foo: [ 'bar' ], baz: 42 }, path: '/a/b/c', value: 'test' };
-			const response = await newPatchItemLabelsRequestBuilder( testItemId, [ invalidOperation ] )
-				.assertInvalidRequest().makeRequest();
-
-			assertValidErrorResponse(
-				response,
-				400,
-				'invalid-patch-field-type',
-				{ operation: invalidOperation, field: 'op' }
-			);
-			assert.include( response.body.message, "'op'" );
-			assert.deepEqual( response.body.context.operation, invalidOperation );
-			assert.strictEqual( response.body.context.field, 'op' );
-		} );
-
-		it( "invalid patch - 'path' is not a string", async () => {
-			const invalidOperation = { op: 'add', path: { foo: [ 'bar' ], baz: 42 }, value: 'test' };
-			const response = await newPatchItemLabelsRequestBuilder( testItemId, [ invalidOperation ] )
-				.assertInvalidRequest().makeRequest();
-
-			assertValidErrorResponse(
-				response,
-				400,
-				'invalid-patch-field-type',
-				{ operation: invalidOperation, field: 'path' }
-			);
-			assert.include( response.body.message, "'path'" );
-		} );
-
-		it( "invalid patch - 'from' is not a string", async () => {
-			const invalidOperation = { op: 'move', from: { foo: [ 'bar' ], baz: 42 }, path: '/a/b/c' };
-			const response = await newPatchItemLabelsRequestBuilder( testItemId, [ invalidOperation ] )
-				.makeRequest();
-
-			assertValidErrorResponse(
-				response,
-				400,
-				'invalid-patch-field-type',
-				{ operation: invalidOperation, field: 'from' }
-			);
-			assert.include( response.body.message, "'from'" );
-		} );
+		testValidatesPatch( ( patch ) => newPatchItemLabelsRequestBuilder( testItemId, patch ) );
 
 		it( 'invalid edit tag', async () => {
 			const invalidEditTag = 'invalid tag';
