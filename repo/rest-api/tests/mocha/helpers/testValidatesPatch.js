@@ -3,8 +3,8 @@
 const { assert } = require( 'api-testing' );
 const { expect } = require( './chaiHelper' );
 
-function assertValidErrorResponse( response, statusCode, responseBodyErrorCode, context = null ) {
-	expect( response ).to.have.status( statusCode );
+function assertValid400Response( response, responseBodyErrorCode, context = null ) {
+	expect( response ).to.have.status( 400 );
 	assert.header( response, 'Content-Language', 'en' );
 	assert.strictEqual( response.body.code, responseBodyErrorCode );
 	if ( context === null ) {
@@ -22,7 +22,7 @@ module.exports = function testValidatesPatch( newRequestBuilder ) {
 			const response = await newRequestBuilder( invalidPatch )
 				.assertInvalidRequest().makeRequest();
 
-			assertValidErrorResponse( response, 400, 'invalid-patch' );
+			assertValid400Response( response, 'invalid-patch' );
 		} );
 
 		it( "invalid patch - missing 'op' field", async () => {
@@ -30,9 +30,8 @@ module.exports = function testValidatesPatch( newRequestBuilder ) {
 			const response = await newRequestBuilder( [ invalidOperation ] )
 				.assertInvalidRequest().makeRequest();
 
-			assertValidErrorResponse(
+			assertValid400Response(
 				response,
-				400,
 				'missing-json-patch-field',
 				{ operation: invalidOperation, field: 'op' }
 			);
@@ -43,9 +42,8 @@ module.exports = function testValidatesPatch( newRequestBuilder ) {
 			const invalidOperation = { op: 'remove' };
 			const response = await newRequestBuilder( [ invalidOperation ] )
 				.assertInvalidRequest().makeRequest();
-			assertValidErrorResponse(
+			assertValid400Response(
 				response,
-				400,
 				'missing-json-patch-field',
 				{ operation: invalidOperation, field: 'path' }
 			);
@@ -57,9 +55,8 @@ module.exports = function testValidatesPatch( newRequestBuilder ) {
 			const response = await newRequestBuilder( [ invalidOperation ] )
 				.makeRequest();
 
-			assertValidErrorResponse(
+			assertValid400Response(
 				response,
-				400,
 				'missing-json-patch-field',
 				{ operation: invalidOperation, field: 'value' }
 			);
@@ -71,9 +68,8 @@ module.exports = function testValidatesPatch( newRequestBuilder ) {
 			const response = await newRequestBuilder( [ invalidOperation ] )
 				.makeRequest();
 
-			assertValidErrorResponse(
+			assertValid400Response(
 				response,
-				400,
 				'missing-json-patch-field',
 				{ operation: invalidOperation, field: 'from' }
 			);
@@ -85,7 +81,7 @@ module.exports = function testValidatesPatch( newRequestBuilder ) {
 			const response = await newRequestBuilder( [ invalidOperation ] )
 				.assertInvalidRequest().makeRequest();
 
-			assertValidErrorResponse( response, 400, 'invalid-patch-operation', { operation: invalidOperation } );
+			assertValid400Response( response, 'invalid-patch-operation', { operation: invalidOperation } );
 			assert.include( response.body.message, "'foobar'" );
 		} );
 
@@ -94,9 +90,8 @@ module.exports = function testValidatesPatch( newRequestBuilder ) {
 			const response = await newRequestBuilder( [ invalidOperation ] )
 				.assertInvalidRequest().makeRequest();
 
-			assertValidErrorResponse(
+			assertValid400Response(
 				response,
-				400,
 				'invalid-patch-field-type',
 				{ operation: invalidOperation, field: 'op' }
 			);
@@ -110,9 +105,8 @@ module.exports = function testValidatesPatch( newRequestBuilder ) {
 			const response = await newRequestBuilder( [ invalidOperation ] )
 				.assertInvalidRequest().makeRequest();
 
-			assertValidErrorResponse(
+			assertValid400Response(
 				response,
-				400,
 				'invalid-patch-field-type',
 				{ operation: invalidOperation, field: 'path' }
 			);
@@ -124,9 +118,8 @@ module.exports = function testValidatesPatch( newRequestBuilder ) {
 			const response = await newRequestBuilder( [ invalidOperation ] )
 				.makeRequest();
 
-			assertValidErrorResponse(
+			assertValid400Response(
 				response,
-				400,
 				'invalid-patch-field-type',
 				{ operation: invalidOperation, field: 'from' }
 			);
