@@ -15,6 +15,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchPropert
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchPropertyAliasesRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchPropertyAliasesValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\Domain\Model\AliasesEditSummary;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
@@ -27,6 +28,7 @@ use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
+use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchPropertyAliases
@@ -36,6 +38,8 @@ use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidat
  * @license GPL-2.0-or-later
  */
 class PatchPropertyAliasesTest extends TestCase {
+
+	use EditMetadataHelper;
 
 	private PatchPropertyAliasesValidator $validator;
 	private PropertyAliasesRetriever $aliasesRetriever;
@@ -63,15 +67,18 @@ class PatchPropertyAliasesTest extends TestCase {
 			new AliasGroup( 'en', [ 'spud', 'tater' ] ),
 			new AliasGroup( 'de', [ 'Erdapfel' ] ),
 		] );
+		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
+		$isBot = false;
+		$comment = 'statement replaced by ' . __method__;
 		$request = new PatchPropertyAliasesRequest(
 			"$propertyId",
 			[
 				[ 'op' => 'remove', 'path' => '/de' ],
 				[ 'op' => 'add', 'path' => '/en/-', 'value' => 'Solanum tuberosum' ],
 			],
-			[],
-			false,
-			null,
+			$editTags,
+			$isBot,
+			$comment,
 			null
 		);
 		$patchedAliasesSerialization = [ 'en' => [ 'spud', 'tater', 'Solanum tuberosum' ] ];
@@ -91,7 +98,8 @@ class PatchPropertyAliasesTest extends TestCase {
 		$this->propertyUpdater->expects( $this->once() )
 			->method( 'update' )
 			->with(
-				$this->callback( fn( DataModelProperty $p ) => $p->getAliasGroups()->toTextArray() === $patchedAliasesSerialization )
+				$this->callback( fn( DataModelProperty $p ) => $p->getAliasGroups()->toTextArray() === $patchedAliasesSerialization ),
+				$this->expectEquivalentMetadata( $editTags, $isBot, $comment, AliasesEditSummary::PATCH_ACTION )
 			)
 			->willReturn( new PropertyRevision(
 				new Property(
