@@ -31,6 +31,7 @@ use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyFieldsReq
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdFilterRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdValidatingDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyLabelEditRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementIdRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementSerializationRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatement;
@@ -80,6 +81,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatement
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription\SetPropertyDescription;
+use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\SetPropertyLabel;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
@@ -224,6 +226,11 @@ return [
 			);
 		},
 
+	VRD::PROPERTY_LABEL_EDIT_REQUEST_VALIDATING_DESERIALIZER =>
+		function (): PropertyLabelEditRequestValidatingDeserializer {
+			return new PropertyLabelEditRequestValidatingDeserializer();
+		},
+
 	VRD::PROPERTY_DESCRIPTION_EDIT_REQUEST_VALIDATING_DESERIALIZER =>
 		function ( MediaWikiServices $services ): PropertyDescriptionEditRequestValidatingDeserializer {
 			return new PropertyDescriptionEditRequestValidatingDeserializer(
@@ -260,7 +267,7 @@ return [
 				$statementReadModelConverter
 			),
 			new GuidGenerator(),
-			new EntityUpdaterPropertyUpdater( WbRestApi::getEntityUpdater(), $statementReadModelConverter ),
+			WbRestApi::getPropertyUpdater( $services ),
 			new AssertUserIsAuthorized(
 				new WikibaseEntityPermissionChecker(
 					WikibaseRepo::getEntityPermissionChecker( $services ),
@@ -708,6 +715,14 @@ return [
 
 	'WbRestApi.SetPropertyDescription' => function( MediaWikiServices $services ): SetPropertyDescription {
 		return new SetPropertyDescription(
+			WbRestApi::getValidatingRequestDeserializer( $services ),
+			WbRestApi::getPropertyDataRetriever( $services ),
+			WbRestApi::getPropertyUpdater( $services ),
+		);
+	},
+
+	'WbRestApi.SetPropertyLabel' => function( MediaWikiServices $services ): SetPropertyLabel {
+		return new SetPropertyLabel(
 			WbRestApi::getValidatingRequestDeserializer( $services ),
 			WbRestApi::getPropertyDataRetriever( $services ),
 			WbRestApi::getPropertyUpdater( $services ),

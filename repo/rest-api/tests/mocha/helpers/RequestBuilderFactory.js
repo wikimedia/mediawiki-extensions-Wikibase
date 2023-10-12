@@ -129,6 +129,14 @@ module.exports = {
 			.withJsonBodyParam( 'label', label );
 	},
 
+	newSetPropertyLabelRequestBuilder( propertyId, languageCode, label ) {
+		return new RequestBuilder()
+			.withRoute( 'PUT', '/entities/properties/{property_id}/labels/{language_code}' )
+			.withPathParam( 'property_id', propertyId )
+			.withPathParam( 'language_code', languageCode )
+			.withJsonBodyParam( 'label', label );
+	},
+
 	newSetItemDescriptionRequestBuilder( itemId, languageCode, description ) {
 		return new RequestBuilder()
 			.withRoute( 'PUT', '/entities/items/{item_id}/descriptions/{language_code}' )

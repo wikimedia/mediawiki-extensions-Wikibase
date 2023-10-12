@@ -42,6 +42,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\ReplacePropertyStatement\Deserial
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\DeserializedSetItemDescriptionRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\DeserializedSetItemLabelRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription\DeserializedSetPropertyDescriptionRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\DeserializedSetPropertyLabelRequest;
 use Wikibase\Repo\RestApi\Domain\Model\UserProvidedEditMetadata;
 
 /**
@@ -80,7 +81,8 @@ class DeserializedRequestAdapter implements
 	DeserializedGetPropertyLabelRequest,
 	DeserializedGetPropertyDescriptionRequest,
 	DeserializedSetPropertyDescriptionRequest,
-	DeserializedPatchPropertyAliasesRequest
+	DeserializedPatchPropertyAliasesRequest,
+	DeserializedSetPropertyLabelRequest
 {
 	private array $deserializedRequest;
 
@@ -128,12 +130,16 @@ class DeserializedRequestAdapter implements
 		return $this->getRequestField( PatchRequest::class );
 	}
 
-	public function getLabel(): Term {
+	public function getItemLabel(): Term {
 		return $this->getRequestField( ItemLabelEditRequest::class );
 	}
 
 	public function getItemDescription(): Term {
 		return $this->getRequestField( ItemDescriptionEditRequest::class );
+	}
+
+	public function getPropertyLabel(): Term {
+		return $this->getRequestField( PropertyLabelEditRequest::class );
 	}
 
 	public function getPropertyDescription(): Term {

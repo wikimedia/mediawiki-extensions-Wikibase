@@ -7,6 +7,6 @@ use Wikibase\DataModel\Term\Term;
 /**
  * @license GPL-2.0-or-later
  */
-interface DeserializedItemLabelEditRequest extends DeserializedItemIdRequest {
-	public function getItemLabel(): Term;
+interface DeserializedPropertyLabelEditRequest extends DeserializedPropertyIdRequest {
+	public function getPropertyLabel(): Term;
 }

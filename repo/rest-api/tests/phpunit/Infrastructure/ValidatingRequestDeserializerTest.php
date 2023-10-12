@@ -30,6 +30,8 @@ use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyDescripti
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdFilterRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyLabelEditRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyLabelEditRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementIdRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementSerializationRequest;
@@ -157,7 +159,17 @@ class ValidatingRequestDeserializerTest extends TestCase {
 		$request->method( 'getLabel' )->willReturn( 'potato' );
 
 		$result = $this->newRequestDeserializer()->validateAndDeserialize( $request );
-		$this->assertEquals( new Term( 'en', 'potato' ), $result->getLabel() );
+		$this->assertEquals( new Term( 'en', 'potato' ), $result->getItemLabel() );
+	}
+
+	public function testGivenValidPropertyLabelEditRequest_returnsLabel(): void {
+		$request = $this->createStub( PropertyLabelEditUseCaseRequest::class );
+		$request->method( 'getPropertyId' )->willReturn( 'P123' );
+		$request->method( 'getLanguageCode' )->willReturn( 'en' );
+		$request->method( 'getLabel' )->willReturn( 'instance of' );
+
+		$result = $this->newRequestDeserializer()->validateAndDeserialize( $request );
+		$this->assertEquals( new Term( 'en', 'instance of' ), $result->getPropertyLabel() );
 	}
 
 	public function testGivenValidItemDescriptionEditRequest_returnsDescription(): void {
@@ -291,6 +303,11 @@ class ValidatingRequestDeserializerTest extends TestCase {
 			ValidatingRequestDeserializer::ITEM_LABEL_EDIT_REQUEST_VALIDATING_DESERIALIZER,
 		];
 		yield [
+			PropertyLabelEditUseCaseRequest::class,
+			PropertyLabelEditRequestValidatingDeserializer::class,
+			ValidatingRequestDeserializer::PROPERTY_LABEL_EDIT_REQUEST_VALIDATING_DESERIALIZER,
+		];
+		yield [
 			ItemDescriptionEditUseCaseRequest::class,
 			ItemDescriptionEditRequestValidatingDeserializer::class,
 			ValidatingRequestDeserializer::ITEM_DESCRIPTION_EDIT_REQUEST_VALIDATING_DESERIALIZER,
@@ -322,6 +339,7 @@ interface StatementSerializationUseCaseRequest extends UseCaseRequest, Statement
 interface EditMetadataUseCaseRequest extends UseCaseRequest, EditMetadataRequest {}
 interface PatchUseCaseRequest extends UseCaseRequest, PatchRequest {}
 interface ItemLabelEditUseCaseRequest extends UseCaseRequest, ItemLabelEditRequest {}
+interface PropertyLabelEditUseCaseRequest extends UseCaseRequest, PropertyLabelEditRequest {}
 interface ItemDescriptionEditUseCaseRequest extends UseCaseRequest, ItemDescriptionEditRequest {}
 interface PropertyDescriptionEditUseCaseRequest extends UseCaseRequest, PropertyDescriptionEditRequest {}
 interface PropertyFieldsUseCaseRequest extends UseCaseRequest, PropertyFieldsRequest {}
