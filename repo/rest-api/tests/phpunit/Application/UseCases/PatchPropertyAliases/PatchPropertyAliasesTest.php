@@ -13,6 +13,8 @@ use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchPropertyAliases;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchPropertyAliasesRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchPropertyAliasesValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
@@ -24,7 +26,6 @@ use Wikibase\Repo\RestApi\Domain\Services\PropertyAliasesRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
-use Wikibase\Repo\RestApi\Infrastructure\ValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 
 /**
@@ -36,7 +37,7 @@ use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidat
  */
 class PatchPropertyAliasesTest extends TestCase {
 
-	private ValidatingRequestDeserializer $validator;
+	private PatchPropertyAliasesValidator $validator;
 	private PropertyAliasesRetriever $aliasesRetriever;
 	private AliasesSerializer $aliasesSerializer;
 	private PatchJson $patchJson;
@@ -67,7 +68,11 @@ class PatchPropertyAliasesTest extends TestCase {
 			[
 				[ 'op' => 'remove', 'path' => '/de' ],
 				[ 'op' => 'add', 'path' => '/en/-', 'value' => 'Solanum tuberosum' ],
-			]
+			],
+			[],
+			false,
+			null,
+			null
 		);
 		$patchedAliasesSerialization = [ 'en' => [ 'spud', 'tater', 'Solanum tuberosum' ] ];
 		$expectedAliases = new Aliases( new AliasesInLanguage( 'en', $patchedAliasesSerialization['en'] ) );
@@ -104,6 +109,19 @@ class PatchPropertyAliasesTest extends TestCase {
 		$this->assertSame( $expectedAliases, $response->getAliases() );
 		$this->assertSame( $revisionId, $response->getRevisionId() );
 		$this->assertSame( $lastModified, $response->getLastModified() );
+	}
+
+	public function testGivenInvalidRequest_throws(): void {
+		$expectedException = new UseCaseException( 'invalid-alias-patch-test' );
+		$this->validator = $this->createStub( PatchPropertyAliasesValidator::class );
+		$this->validator->method( 'validateAndDeserialize' )->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase()->execute( $this->createStub( PatchPropertyAliasesRequest::class ) );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
 	}
 
 	private function newUseCase(): PatchPropertyAliases {
