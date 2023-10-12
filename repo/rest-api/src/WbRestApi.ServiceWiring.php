@@ -711,6 +711,7 @@ return [
 			WbRestApi::getValidatingRequestDeserializer( $services ),
 			WbRestApi::getPropertyDataRetriever( $services ),
 			WbRestApi::getPropertyUpdater( $services ),
+			WbRestApi::getAssertPropertyExists( $services )
 		);
 	},
 

@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\Property as DataModelProperty;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription\SetPropertyDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription\SetPropertyDescriptionRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription\SetPropertyDescriptionValidator;
@@ -31,11 +32,13 @@ use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
  * @license GPL-2.0-or-later
  */
 class SetPropertyDescriptionTest extends TestCase {
+
 	use EditMetadataHelper;
 
 	private SetPropertyDescriptionValidator $validator;
 	private PropertyRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
+	private AssertPropertyExists $assertPropertyExists;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -43,6 +46,7 @@ class SetPropertyDescriptionTest extends TestCase {
 		$this->validator = new TestValidatingRequestDeserializer();
 		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
 		$this->propertyUpdater = $this->createStub( PropertyUpdater::class );
+		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
 	}
 
 	public function testAddDescription(): void {
@@ -150,11 +154,24 @@ class SetPropertyDescriptionTest extends TestCase {
 		}
 	}
 
+	public function testGivenPropertyNotFound_throws(): void {
+		$expectedException = $this->createStub( UseCaseException::class );
+		$this->assertPropertyExists->method( 'execute' )
+			->willThrowException( $expectedException );
+		try {
+			$this->newUseCase()->execute( new SetPropertyDescriptionRequest( 'P999', 'en', 'test description', [], false, null, null ) );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
 	private function newUseCase(): SetPropertyDescription {
 		return new SetPropertyDescription(
 			$this->validator,
 			$this->propertyRetriever,
-			$this->propertyUpdater
+			$this->propertyUpdater,
+			$this->assertPropertyExists
 		);
 	}
 
