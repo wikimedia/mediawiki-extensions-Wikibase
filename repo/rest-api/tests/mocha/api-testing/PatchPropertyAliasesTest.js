@@ -1,11 +1,12 @@
 'use strict';
 
-const { assert, utils } = require( 'api-testing' );
+const { assert, utils, action } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { newPatchPropertyAliasesRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const testValidatesPatch = require( '../helpers/testValidatesPatch' );
+const { formatLabelsEditSummary } = require( '../helpers/formatEditSummaries' );
 
 function assertValid400Response( response, responseBodyErrorCode, context = null ) {
 	expect( response ).to.have.status( 400 );
@@ -62,6 +63,32 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 			assert.strictEqual( response.header[ 'content-type' ], 'application/json' );
 			assert.isAbove( new Date( response.header[ 'last-modified' ] ), originalLastModified );
 			assert.notStrictEqual( response.header.etag, makeEtag( originalRevisionId ) );
+		} );
+
+		it( 'can patch aliases providing edit metadata', async () => {
+			const newDeAlias = `de-alias-${utils.uniq()}`;
+			const user = await action.robby(); // robby is a bot
+			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test' );
+			const editSummary = 'I made a patch';
+			const response = await newPatchPropertyAliasesRequestBuilder(
+				testPropertyId,
+				[ { op: 'add', path: '/de', value: [ newDeAlias ] } ]
+			).withJsonBodyParam( 'tags', [ tag ] )
+				.withJsonBodyParam( 'bot', true )
+				.withJsonBodyParam( 'comment', editSummary )
+				.withUser( user )
+				.assertValidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 200 );
+
+			const editMetadata = await entityHelper.getLatestEditMetadata( testPropertyId );
+			assert.include( editMetadata.tags, tag );
+			assert.property( editMetadata, 'bot' );
+			assert.strictEqual(
+				editMetadata.comment,
+				formatLabelsEditSummary( 'update-languages-short', 'de', editSummary )
+			);
 		} );
 	} );
 

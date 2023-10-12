@@ -48,20 +48,27 @@ class PatchPropertyAliases {
 	 */
 	public function execute( PatchPropertyAliasesRequest $request ): PatchPropertyAliasesResponse {
 		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
+		$editMetadata = $deserializedRequest->getEditMetadata();
 
-		$aliases = $this->aliasesRetriever->getAliases( $deserializedRequest->getPropertyId() );
 		$patchedAliases = $this->aliasesDeserializer->deserialize( $this->patchJson->execute(
-			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-			iterator_to_array( $this->aliasesSerializer->serialize( $aliases ) ),
+			iterator_to_array( $this->aliasesSerializer->serialize(
+				// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
+				$this->aliasesRetriever->getAliases( $deserializedRequest->getPropertyId() )
+			) ),
 			$deserializedRequest->getPatch()
 		) );
 
 		$property = $this->propertyRetriever->getProperty( $deserializedRequest->getPropertyId() );
+		$originalAliases = $property->getAliasGroups();
 		$property->getFingerprint()->setAliasGroups( $patchedAliases );
 
 		$revision = $this->propertyUpdater->update(
 			$property, // @phan-suppress-current-line PhanTypeMismatchArgumentNullable
-			new EditMetadata( [], false, new AliasesEditSummary() )
+			new EditMetadata(
+				$editMetadata->getTags(),
+				$editMetadata->isBot(),
+				AliasesEditSummary::newPatchSummary( $editMetadata->getComment(), $originalAliases, $patchedAliases )
+			)
 		);
 
 		return new PatchPropertyAliasesResponse(

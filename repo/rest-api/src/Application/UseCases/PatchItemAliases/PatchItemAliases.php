@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases;
 
+use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
@@ -64,7 +65,11 @@ class PatchItemAliases {
 		$editMetadata = new EditMetadata(
 			$deserializedRequest->getEditMetadata()->getTags(),
 			$deserializedRequest->getEditMetadata()->isBot(),
-			AliasesEditSummary::newPatchSummary( $deserializedRequest->getEditMetadata()->getComment() )
+			AliasesEditSummary::newPatchSummary(
+				$deserializedRequest->getEditMetadata()->getComment(),
+				new AliasGroupList(), // TODO
+				$modifiedAliases
+			)
 		);
 		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
 		$revision = $this->itemUpdater->update( $item, $editMetadata );
