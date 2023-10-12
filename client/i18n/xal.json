@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Huuchin",
-			"Ukhant Erdemt"
+			"Ukhant Erdemt",
+			"Алия"
 		]
 	},
 	"tooltip-t-wikibase": "То-дигин хадһллң холвсн махбуд тал заалһ",
@@ -13,11 +14,11 @@
 	"wikibase-linkitem-addlinks": "Холвас немх",
 	"wikibase-linkitem-title": "Халхла холвх",
 	"wikibase-linkitem-linkpage": "Халхта холвх",
-	"wikibase-linkitem-selectlink": "Эн халхин холвасиг дарҗ, күсч бәәһә сайт, халхиг суңһтн",
+	"wikibase-linkitem-selectlink": "Эн халхта холвх гиҗәх сайт болн халхиг суңһтн",
 	"wikibase-linkitem-input-site": "Келн:",
 	"wikibase-linkitem-input-page": "Халх:",
 	"wikibase-rc-hide-wikidata-hide": "Нуух",
-	"wikibase-rc-hide-wikidata-show": "үзүлх",
+	"wikibase-rc-hide-wikidata-show": "Үзүлх",
 	"wikibase-rc-wikibase-edit-letter": "Ө",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} ясвр",
 	"wikibase-otherprojects": "Талдан төслмүдт"

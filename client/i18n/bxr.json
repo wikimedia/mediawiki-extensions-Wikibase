@@ -1,9 +1,19 @@
 {
 	"@metadata": {
 		"authors": [
-			"Elvonudinium"
+			"Elvonudinium",
+			"Баир Балданов"
 		]
 	},
-	"wikibase-dataitem": "Мэдээнэй зүйл",
-	"wikibase-editlinks": "Холбооһые заһабарилха"
+	"wikibase-dataitem": "{{grammar:genitive|{{WBREPONAME}}}} хуби",
+	"wikibase-editlinks": "Ссылкэнүүдые заһаха",
+	"wikibase-linkitem-addlinks": "Ссылкэнүүдые нэмэхэ",
+	"wikibase-linkitem-title": "Хуудаһантай холболго",
+	"wikibase-linkitem-linkpage": "Хуудаһантай холбохо",
+	"wikibase-linkitem-selectlink": "Энэ хуудаһа холбохоо һанаһан сайт болон хуудаһа шэлэгты.",
+	"wikibase-linkitem-input-site": "Хэлэн",
+	"wikibase-linkitem-input-page": "Хуудаһан",
+	"wikibase-rc-hide-wikidata-hide": "Нюуха",
+	"wikibase-rc-hide-wikidata-show": "Харуулха",
+	"wikibase-otherprojects": "Ондоо түсэлнүүдтэ"
 }

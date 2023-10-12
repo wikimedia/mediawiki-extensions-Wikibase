@@ -55,7 +55,7 @@
 	"wikibase-linkitem-failed-modify": "No se pudieron vincular páginas: no se pudieron fusionar los elementos correspondientes en {{WBREPONAME}}.",
 	"wikibase-linkitem-title": "Enlazar las páginas",
 	"wikibase-linkitem-linkpage": "Enlazar las páginas",
-	"wikibase-linkitem-selectlink": "Selecciona un sitio y la página que quieres enlazar con esta.",
+	"wikibase-linkitem-selectlink": "Selecciona un sitio y una página que desee enlazar a esta página.",
 	"wikibase-linkitem-input-site": "Idioma:",
 	"wikibase-linkitem-input-page": "Página:",
 	"wikibase-linkitem-confirmitem-text": "La página elegida ya está asociada con un [$1 elemento de nuestro depósito central de datos]. Confirma que {{PLURAL:$2|la página|las páginas}} que se {{PLURAL:$2|muestra|muestran}} a continuación {{PLURAL:$2|es la|son las}} que quieres enlazar con esta página.",

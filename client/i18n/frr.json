@@ -18,7 +18,7 @@
 	"wikibase-comment-sitelink-change": "Spriaklink $1 feranert tu $2",
 	"wikibase-comment-sitelink-remove": "Spriaklink wechnimen: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|feranrang|feranrangen}}",
-	"wikibase-dataitem": "{{WBREPONAME}}-dootenobjekt",
+	"wikibase-dataitem": "{{WBREPONAME}} dootenobjekt",
 	"wikibase-editlinks": "Ferwisangen bewerke",
 	"wikibase-editlinkstitle": "Ferwisangen üüb ööder spriaken bewerke",
 	"wikibase-addlinkstitle": "Nei ferwisangen tu ööder spriaken maage",
