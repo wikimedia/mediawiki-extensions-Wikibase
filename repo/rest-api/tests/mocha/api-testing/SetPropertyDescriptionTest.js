@@ -253,4 +253,20 @@ describe( newSetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 
 	} );
 
+	describe( '404 error response', () => {
+		it( 'property not found', async () => {
+			const propertyId = 'P99999';
+			const response = await newSetPropertyDescriptionRequestBuilder(
+				propertyId,
+				'en',
+				'test description'
+			).assertValidRequest().makeRequest();
+
+			expect( response ).to.have.status( 404 );
+			assert.strictEqual( response.header[ 'content-language' ], 'en' );
+			assert.strictEqual( response.body.code, 'property-not-found' );
+			assert.include( response.body.message, propertyId );
+		} );
+	} );
+
 } );

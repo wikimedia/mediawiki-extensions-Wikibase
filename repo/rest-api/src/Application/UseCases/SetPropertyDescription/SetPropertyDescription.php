@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription;
 
+use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
@@ -16,15 +17,18 @@ class SetPropertyDescription {
 	private SetPropertyDescriptionValidator $validator;
 	private PropertyRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
+	private AssertPropertyExists $assertPropertyExists;
 
 	public function __construct(
 		SetPropertyDescriptionValidator $validator,
 		PropertyRetriever $propertyRetriever,
-		PropertyUpdater $propertyUpdater
+		PropertyUpdater $propertyUpdater,
+		AssertPropertyExists $assertPropertyExists
 	) {
 		$this->validator = $validator;
 		$this->propertyRetriever = $propertyRetriever;
 		$this->propertyUpdater = $propertyUpdater;
+		$this->assertPropertyExists = $assertPropertyExists;
 	}
 
 	/**
@@ -35,6 +39,8 @@ class SetPropertyDescription {
 		$propertyId = $deserializedRequest->getPropertyId();
 		$description = $deserializedRequest->getPropertyDescription();
 		$editMetadata = $deserializedRequest->getEditMetadata();
+
+		$this->assertPropertyExists->execute( $propertyId );
 
 		$property = $this->propertyRetriever->getProperty( $propertyId );
 		$descriptionExists = $property->getDescriptions()->hasTermForLanguage( $request->getLanguageCode() );
