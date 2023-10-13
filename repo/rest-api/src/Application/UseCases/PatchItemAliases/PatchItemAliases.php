@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases;
 
-use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
@@ -59,6 +58,7 @@ class PatchItemAliases {
 		$patchedAliases = $this->patcher->execute( iterator_to_array( $serialization ), $deserializedRequest->getPatch() );
 
 		$item = $this->itemRetriever->getItem( $deserializedRequest->getItemId() );
+		$originalAliases = $item->getAliasGroups();
 		$modifiedAliases = $this->aliasesDeserializer->deserialize( $patchedAliases );
 		$item->getFingerprint()->setAliasGroups( $modifiedAliases );
 
@@ -67,7 +67,7 @@ class PatchItemAliases {
 			$deserializedRequest->getEditMetadata()->isBot(),
 			AliasesEditSummary::newPatchSummary(
 				$deserializedRequest->getEditMetadata()->getComment(),
-				new AliasGroupList(), // TODO
+				$originalAliases,
 				$modifiedAliases
 			)
 		);

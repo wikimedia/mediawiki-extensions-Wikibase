@@ -13,7 +13,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchItemAliases
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchItemAliasesRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchItemAliasesValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
-use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
+use Wikibase\Repo\RestApi\Domain\Model\AliasesEditSummary;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
@@ -26,6 +26,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
+use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchItemAliases
@@ -35,6 +36,8 @@ use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidat
  * @license GPL-2.0-or-later
  */
 class PatchItemAliasesTest extends TestCase {
+
+	use EditMetadataHelper;
 
 	private PatchItemAliasesValidator $validator;
 	private ItemAliasesRetriever $aliasesRetriever;
@@ -85,7 +88,7 @@ class PatchItemAliasesTest extends TestCase {
 			->method( 'update' )
 			->with(
 				$this->expectEquivalentItemByAliases( $aliasLanguage, [ 'English alias', $newAliasText ] ),
-				$this->isInstanceOf( EditMetadata::class )
+				$this->expectEquivalentMetadata( $editTags, $isBot, $comment, AliasesEditSummary::PATCH_ACTION )
 			)
 			->willReturn( new ItemRevision( $updatedItem, $lastModified, $revisionId ) );
 
