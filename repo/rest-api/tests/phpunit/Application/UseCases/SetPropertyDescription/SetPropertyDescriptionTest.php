@@ -7,9 +7,11 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\Property as DataModelProperty;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription\SetPropertyDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription\SetPropertyDescriptionRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription\SetPropertyDescriptionValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
@@ -39,6 +41,7 @@ class SetPropertyDescriptionTest extends TestCase {
 	private PropertyRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
 	private AssertPropertyExists $assertPropertyExists;
+	private AssertUserIsAuthorized $assertUserIsAuthorized;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -47,6 +50,7 @@ class SetPropertyDescriptionTest extends TestCase {
 		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
 		$this->propertyUpdater = $this->createStub( PropertyUpdater::class );
 		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
+		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
 	}
 
 	public function testAddDescription(): void {
@@ -166,12 +170,35 @@ class SetPropertyDescriptionTest extends TestCase {
 		}
 	}
 
+	public function testGivenEditIsUnauthorized_throwsUseCaseError(): void {
+		$propertyId = new NumericPropertyId( 'P123' );
+
+		$expectedError = new UseCaseError(
+			UseCaseError::PERMISSION_DENIED,
+			'You have no permission to edit this item.'
+		);
+		$this->assertUserIsAuthorized = $this->createMock( AssertUserIsAuthorized::class );
+		$this->assertUserIsAuthorized->method( 'execute' )
+			->with( $propertyId, null )
+			->willThrowException( $expectedError );
+
+		try {
+			$this->newUseCase()->execute(
+				new SetPropertyDescriptionRequest( "$propertyId", 'en', 'test description', [], false, null, null )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedError, $e );
+		}
+	}
+
 	private function newUseCase(): SetPropertyDescription {
 		return new SetPropertyDescription(
 			$this->validator,
 			$this->propertyRetriever,
 			$this->propertyUpdater,
-			$this->assertPropertyExists
+			$this->assertPropertyExists,
+			$this->assertUserIsAuthorized
 		);
 	}
 
