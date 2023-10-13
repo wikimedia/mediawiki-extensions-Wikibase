@@ -3,14 +3,14 @@
 namespace Wikibase\Repo\RestApi\Infrastructure;
 
 use Wikibase\DataModel\Term\AliasGroup;
-use Wikibase\Repo\RestApi\Application\Validation\ItemAliasesInLanguageValidator;
+use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 
 /**
  * @license GPL-2.0-or-later
  */
-class WikibaseRepoItemAliasesInLanguageValidator implements ItemAliasesInLanguageValidator {
+class WikibaseRepoAliasesInLanguageValidator implements AliasesInLanguageValidator {
 
 	private TermValidatorFactory $termValidatorFactory;
 
@@ -36,16 +36,16 @@ class WikibaseRepoItemAliasesInLanguageValidator implements ItemAliasesInLanguag
 			switch ( $error->getCode() ) {
 				case 'alias-too-long':
 					return new ValidationError(
-						ItemAliasesInLanguageValidator::CODE_TOO_LONG,
+						AliasesInLanguageValidator::CODE_TOO_LONG,
 						[
-							ItemAliasesInLanguageValidator::CONTEXT_VALUE => $aliasText,
-							ItemAliasesInLanguageValidator::CONTEXT_LIMIT => $error->getParameters()[ 0 ],
+							AliasesInLanguageValidator::CONTEXT_VALUE => $aliasText,
+							AliasesInLanguageValidator::CONTEXT_LIMIT => $error->getParameters()[ 0 ],
 						]
 					);
 				default:
 					return new ValidationError(
-						ItemAliasesInLanguageValidator::CODE_INVALID,
-						[ ItemAliasesInLanguageValidator::CONTEXT_VALUE => $aliasText ]
+						AliasesInLanguageValidator::CODE_INVALID,
+						[ AliasesInLanguageValidator::CONTEXT_VALUE => $aliasText ]
 					);
 			}
 		}
