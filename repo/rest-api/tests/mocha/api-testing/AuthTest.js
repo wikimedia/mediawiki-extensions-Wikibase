@@ -17,7 +17,6 @@ const {
 	getRequestsOnItem,
 	getRequestsOnProperty
 } = require( '../helpers/happyPathRequestBuilders' );
-const { newSetPropertyDescriptionRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
 describe( 'Auth', () => {
 
@@ -61,10 +60,7 @@ describe( 'Auth', () => {
 
 	const editRequestsWithInputs = [
 		...editRequestsOnItem.map( useRequestInputs( itemRequestInputs ) ),
-		...editRequestsOnProperty.map( useRequestInputs( propertyRequestInputs ) ),
-		useRequestInputs( propertyRequestInputs )( ( { propertyId } ) =>
-			newSetPropertyDescriptionRequestBuilder( propertyId, 'en', 'random-description-' + utils.uniq() )
-		)
+		...editRequestsOnProperty.map( useRequestInputs( propertyRequestInputs ) )
 	];
 
 	[

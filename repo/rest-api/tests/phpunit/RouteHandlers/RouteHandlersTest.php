@@ -78,6 +78,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescrip
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescriptionResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabelResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription\SetPropertyDescription;
+use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription\SetPropertyDescriptionResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\SetPropertyLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\SetPropertyLabelResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
@@ -648,6 +650,25 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			'validRequest' => [
 				'pathParams' => [ 'property_id' => 'P1', 'language_code' => 'en' ],
 				'bodyContents' => [ 'label' => 'instance of' ],
+			],
+			'expectedExceptions' => [
+				[
+					new UseCaseError( UseCaseError::PROPERTY_NOT_FOUND, '' ),
+					$hasErrorCode ( UseCaseError::PROPERTY_NOT_FOUND ),
+				],
+			],
+		] ];
+		yield 'SetPropertyDescription' => [ [
+			'useCase' => SetPropertyDescription::class,
+			'useCaseResponse' => new SetPropertyDescriptionResponse(
+				new Description( 'en', 'that class of which this subject is a particular example and member' ),
+				$lastModified,
+				123,
+				true
+			),
+			'validRequest' => [
+				'pathParams' => [ 'property_id' => 'P1', 'language_code' => 'en' ],
+				'bodyContents' => [ 'description' => 'that class of which this subject is a particular example and member' ],
 			],
 			'expectedExceptions' => [
 				[
