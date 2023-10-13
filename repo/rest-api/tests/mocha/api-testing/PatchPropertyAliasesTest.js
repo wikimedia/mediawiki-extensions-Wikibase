@@ -153,4 +153,77 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 		} );
 	} );
 
+	describe( '422 Unprocessable Content', () => {
+		it( 'empty alias', async () => {
+			const language = 'de';
+			const response = await newPatchPropertyAliasesRequestBuilder( testPropertyId, [
+				{ op: 'add', path: `/${language}`, value: [ '' ] }
+			] ).assertValidRequest().makeRequest();
+
+			expect( response ).to.have.status( 422 );
+			assert.strictEqual( response.body.code, 'patched-alias-empty' );
+			assert.include( response.body.message, language );
+			assert.deepEqual( response.body.context, { language } );
+		} );
+
+		it( 'alias too long', async () => {
+			const language = 'de';
+			// this assumes the default value of 250 from Wikibase.default.php is in place and
+			// may fail if $wgWBRepoSettings['string-limits']['multilang']['length'] is overwritten
+			const maxLength = 250;
+			const tooLongAlias = 'x'.repeat( maxLength + 1 );
+			const response = await newPatchPropertyAliasesRequestBuilder( testPropertyId, [
+				{ op: 'add', path: `/${language}`, value: [ tooLongAlias ] }
+			] ).assertValidRequest().makeRequest();
+
+			expect( response ).to.have.status( 422 );
+			assert.strictEqual( response.body.code, 'patched-alias-too-long' );
+			assert.include( response.body.message, language );
+			assert.deepEqual(
+				response.body.context,
+				{ language, value: tooLongAlias, 'character-limit': maxLength }
+			);
+		} );
+
+		it( 'duplicate alias', async () => {
+			const language = 'en';
+			const duplicate = 'tomato';
+			const response = await newPatchPropertyAliasesRequestBuilder( testPropertyId, [
+				{ op: 'add', path: `/${language}`, value: [ duplicate, duplicate ] }
+			] ).assertValidRequest().makeRequest();
+
+			expect( response ).to.have.status( 422 );
+			assert.strictEqual( response.body.code, 'patched-duplicate-alias' );
+			assert.include( response.body.message, language );
+			assert.include( response.body.message, duplicate );
+			assert.deepEqual( response.body.context, { language, value: duplicate } );
+		} );
+
+		it( 'alias contains invalid characters', async () => {
+			const language = 'en';
+			const invalidAlias = 'tab\t tab\t tab';
+			const response = await newPatchPropertyAliasesRequestBuilder( testPropertyId, [
+				{ op: 'add', path: `/${language}`, value: [ invalidAlias ] }
+			] ).assertValidRequest().makeRequest();
+
+			expect( response ).to.have.status( 422 );
+			assert.strictEqual( response.body.code, 'patched-alias-invalid' );
+			assert.include( response.body.message, language );
+			assert.include( response.body.message, invalidAlias );
+			assert.deepEqual( response.body.context, { language, value: invalidAlias } );
+		} );
+
+		it( 'invalid language code', async () => {
+			const language = 'not-a-valid-language';
+			const response = await newPatchPropertyAliasesRequestBuilder( testPropertyId, [
+				{ op: 'add', path: `/${language}`, value: [ 'alias' ] }
+			] ).assertValidRequest().makeRequest();
+
+			expect( response ).to.have.status( 422 );
+			assert.strictEqual( response.body.code, 'patched-alias-invalid-language-code' );
+			assert.include( response.body.message, language );
+			assert.deepEqual( response.body.context, { language } );
+		} );
+	} );
+
 } );

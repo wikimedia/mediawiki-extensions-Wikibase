@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases;
 
-use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
@@ -21,8 +20,8 @@ class PatchPropertyAliases {
 	private PropertyAliasesRetriever $aliasesRetriever;
 	private AliasesSerializer $aliasesSerializer;
 	private PatchJson $patchJson;
+	private PatchedAliasesValidator $patchedAliasesValidator;
 	private PropertyRetriever $propertyRetriever;
-	private AliasesDeserializer $aliasesDeserializer;
 	private PropertyUpdater $propertyUpdater;
 
 	public function __construct(
@@ -30,16 +29,16 @@ class PatchPropertyAliases {
 		PropertyAliasesRetriever $aliasesRetriever,
 		AliasesSerializer $aliasesSerializer,
 		PatchJson $patchJson,
+		PatchedAliasesValidator $patchedAliasesValidator,
 		PropertyRetriever $propertyRetriever,
-		AliasesDeserializer $aliasesDeserializer,
 		PropertyUpdater $propertyUpdater
 	) {
 		$this->validator = $validator;
 		$this->aliasesRetriever = $aliasesRetriever;
 		$this->aliasesSerializer = $aliasesSerializer;
 		$this->patchJson = $patchJson;
+		$this->patchedAliasesValidator = $patchedAliasesValidator;
 		$this->propertyRetriever = $propertyRetriever;
-		$this->aliasesDeserializer = $aliasesDeserializer;
 		$this->propertyUpdater = $propertyUpdater;
 	}
 
@@ -50,7 +49,7 @@ class PatchPropertyAliases {
 		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
 		$editMetadata = $deserializedRequest->getEditMetadata();
 
-		$patchedAliases = $this->aliasesDeserializer->deserialize( $this->patchJson->execute(
+		$patchedAliases = $this->patchedAliasesValidator->validateAndDeserialize( $this->patchJson->execute(
 			iterator_to_array( $this->aliasesSerializer->serialize(
 				// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
 				$this->aliasesRetriever->getAliases( $deserializedRequest->getPropertyId() )

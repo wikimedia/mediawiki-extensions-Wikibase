@@ -11,9 +11,11 @@ use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchedAliasesValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchPropertyAliases;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchPropertyAliasesRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchPropertyAliasesValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\AliasesEditSummary;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
@@ -45,6 +47,7 @@ class PatchPropertyAliasesTest extends TestCase {
 	private PropertyAliasesRetriever $aliasesRetriever;
 	private AliasesSerializer $aliasesSerializer;
 	private PatchJson $patchJson;
+	private PatchedAliasesValidator $patchedAliasesValidator;
 	private PropertyRetriever $propertyRetriever;
 	private AliasesDeserializer $aliasesDeserializer;
 	private PropertyUpdater $propertyUpdater;
@@ -56,6 +59,9 @@ class PatchPropertyAliasesTest extends TestCase {
 		$this->aliasesRetriever = $this->createStub( PropertyAliasesRetriever::class );
 		$this->aliasesSerializer = new AliasesSerializer();
 		$this->patchJson = new PatchJson( new JsonDiffJsonPatcher() );
+		$this->patchedAliasesValidator = $this->createStub( PatchedAliasesValidator::class );
+		$this->patchedAliasesValidator->method( 'validateAndDeserialize' )
+			->willReturnCallback( [ new AliasesDeserializer(), 'deserialize' ] );
 		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
 		$this->aliasesDeserializer = new AliasesDeserializer();
 		$this->propertyUpdater = $this->createStub( PropertyUpdater::class );
@@ -132,14 +138,41 @@ class PatchPropertyAliasesTest extends TestCase {
 		}
 	}
 
+	public function testGivenPatchedAliasesInvalid_throws(): void {
+		$propertyId = new NumericPropertyId( 'P123' );
+		$request = new PatchPropertyAliasesRequest(
+			"$propertyId",
+			[
+				[ 'op' => 'add', 'path' => '/bad-language-code', 'value' => [ 'alias' ] ],
+			],
+			[],
+			false,
+			null,
+			null
+		);
+		$this->aliasesRetriever = $this->createStub( PropertyAliasesRetriever::class );
+		$this->aliasesRetriever->method( 'getAliases' )->willReturn( new Aliases() );
+
+		$expectedException = $this->createStub( UseCaseError::class );
+		$this->patchedAliasesValidator = $this->createStub( PatchedAliasesValidator::class );
+		$this->patchedAliasesValidator->method( 'validateAndDeserialize' )->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase()->execute( $request );
+			$this->fail( 'expected exception was not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
 	private function newUseCase(): PatchPropertyAliases {
 		return new PatchPropertyAliases(
 			$this->validator,
 			$this->aliasesRetriever,
 			$this->aliasesSerializer,
 			$this->patchJson,
+			$this->patchedAliasesValidator,
 			$this->propertyRetriever,
-			$this->aliasesDeserializer,
 			$this->propertyUpdater
 		);
 	}

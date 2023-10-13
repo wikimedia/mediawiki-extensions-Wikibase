@@ -10,10 +10,8 @@ use Wikibase\DataModel\Term\AliasGroup;
 interface AliasesInLanguageValidator {
 
 	public const CODE_INVALID = 'invalid-alias';
-	public const CODE_EMPTY = 'alias-empty';
 	public const CODE_TOO_LONG = 'alias-too-long';
 
-	public const CONTEXT_LANGUAGE = 'language';
 	public const CONTEXT_VALUE = 'value';
 	public const CONTEXT_LIMIT = 'character-limit';
 
