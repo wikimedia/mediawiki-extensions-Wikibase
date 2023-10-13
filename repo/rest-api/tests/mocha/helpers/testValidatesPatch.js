@@ -96,8 +96,6 @@ module.exports = function testValidatesPatch( newRequestBuilder ) {
 				{ operation: invalidOperation, field: 'op' }
 			);
 			assert.include( response.body.message, "'op'" );
-			assert.deepEqual( response.body.context.operation, invalidOperation );
-			assert.strictEqual( response.body.context.field, 'op' );
 		} );
 
 		it( "invalid patch - 'path' is not a string", async () => {
