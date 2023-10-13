@@ -202,7 +202,7 @@ class PropertyHandlerTest extends EntityHandlerTestCase {
 		$title->setContentModel( CONTENT_MODEL_WIKITEXT );
 		$parserOutput = $contentRenderer->getParserOutput( $content, $title );
 
-		$expectedUsedOptions = [ 'userlang', 'wb', 'termboxVersion' ];
+		$expectedUsedOptions = [ 'userlang', 'wb', 'termboxVersion', 'wbMobile' ];
 		$actualOptions = $parserOutput->getUsedOptions();
 		$this->assertEqualsCanonicalizing(
 			$expectedUsedOptions,

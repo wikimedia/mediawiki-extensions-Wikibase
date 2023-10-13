@@ -162,6 +162,8 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 		$parserOutput->addModuleStyles( [
 			'wikibase.alltargets',
 		] );
+		// split parser cache by desktop/mobile (T344362)
+		$parserOutput->recordOption( 'wbMobile' );
 		// T324991
 		if ( !$this->isMobileView ) {
 			$parserOutput->addModuleStyles( [
