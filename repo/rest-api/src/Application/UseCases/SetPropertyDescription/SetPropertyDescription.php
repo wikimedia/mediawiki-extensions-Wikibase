@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription;
 
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
@@ -18,17 +19,20 @@ class SetPropertyDescription {
 	private PropertyRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
 	private AssertPropertyExists $assertPropertyExists;
+	private AssertUserIsAuthorized $assertUserIsAuthorized;
 
 	public function __construct(
 		SetPropertyDescriptionValidator $validator,
 		PropertyRetriever $propertyRetriever,
 		PropertyUpdater $propertyUpdater,
-		AssertPropertyExists $assertPropertyExists
+		AssertPropertyExists $assertPropertyExists,
+		AssertUserIsAuthorized $assertUserIsAuthorized
 	) {
 		$this->validator = $validator;
 		$this->propertyRetriever = $propertyRetriever;
 		$this->propertyUpdater = $propertyUpdater;
 		$this->assertPropertyExists = $assertPropertyExists;
+		$this->assertUserIsAuthorized = $assertUserIsAuthorized;
 	}
 
 	/**
@@ -41,6 +45,8 @@ class SetPropertyDescription {
 		$editMetadata = $deserializedRequest->getEditMetadata();
 
 		$this->assertPropertyExists->execute( $propertyId );
+
+		$this->assertUserIsAuthorized->execute( $propertyId, $editMetadata->getUser()->getUsername() );
 
 		$property = $this->propertyRetriever->getProperty( $propertyId );
 		$descriptionExists = $property->getDescriptions()->hasTermForLanguage( $request->getLanguageCode() );

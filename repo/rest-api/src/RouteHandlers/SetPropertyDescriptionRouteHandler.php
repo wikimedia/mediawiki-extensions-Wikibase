@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\RouteHandlers;
 
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
@@ -10,6 +11,9 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription\SetPropert
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription\SetPropertyDescriptionRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription\SetPropertyDescriptionResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\BotRightCheckMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -27,17 +31,38 @@ class SetPropertyDescriptionRouteHandler extends SimpleHandler {
 
 	private SetPropertyDescription $useCase;
 	private ResponseFactory $responseFactory;
+	private MiddlewareHandler $middlewareHandler;
 
-	public function __construct( SetPropertyDescription $useCase, ResponseFactory $responseFactory ) {
+	public function __construct(
+		SetPropertyDescription $useCase,
+		ResponseFactory $responseFactory,
+		MiddlewareHandler $middlewareHandler
+	) {
 		$this->useCase = $useCase;
 		$this->responseFactory = $responseFactory;
+		$this->middlewareHandler = $middlewareHandler;
 	}
 
 	public static function factory(): self {
-		return new self( WbRestApi::getSetPropertyDescription(), new ResponseFactory() );
+		$responseFactory = new ResponseFactory();
+		return new self(
+			WbRestApi::getSetPropertyDescription(),
+			$responseFactory,
+			new MiddlewareHandler( [
+				new AuthenticationMiddleware(),
+				new BotRightCheckMiddleware( MediaWikiServices::getInstance()->getPermissionManager(), $responseFactory ),
+			] ),
+		);
 	}
 
-	public function run( string $propertyId, string $languageCode ): Response {
+	/**
+	 * @param mixed ...$args
+	 */
+	public function run( ...$args ): Response {
+		return $this->middlewareHandler->run( $this, [ $this, 'runUseCase' ], $args );
+	}
+
+	public function runUseCase( string $propertyId, string $languageCode ): Response {
 		$jsonBody = $this->getValidatedBody();
 
 		try {
@@ -50,7 +75,7 @@ class SetPropertyDescriptionRouteHandler extends SimpleHandler {
 						$jsonBody[self::TAGS_BODY_PARAM],
 						$jsonBody[self::BOT_BODY_PARAM],
 						$jsonBody[self::COMMENT_BODY_PARAM],
-						null
+						$this->getUsername()
 					)
 				)
 			);
@@ -119,6 +144,11 @@ class SetPropertyDescriptionRouteHandler extends SimpleHandler {
 		);
 
 		return $httpResponse;
+	}
+
+	private function getUsername(): ?string {
+		$mwUser = $this->getAuthority()->getUser();
+		return $mwUser->isRegistered() ? $mwUser->getName() : null;
 	}
 
 }
