@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel;
 
+use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\LabelEditSummary;
@@ -16,15 +17,18 @@ class SetPropertyLabel {
 	private PropertyRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
 	private SetPropertyLabelValidator $validator;
+	private AssertPropertyExists $assertPropertyExists;
 
 	public function __construct(
 		SetPropertyLabelValidator $validator,
 		PropertyRetriever $propertyRetriever,
-		PropertyUpdater $propertyUpdater
+		PropertyUpdater $propertyUpdater,
+		AssertPropertyExists $assertPropertyExists
 	) {
 		$this->validator = $validator;
 		$this->propertyRetriever = $propertyRetriever;
 		$this->propertyUpdater = $propertyUpdater;
+		$this->assertPropertyExists = $assertPropertyExists;
 	}
 
 	/**
@@ -35,6 +39,8 @@ class SetPropertyLabel {
 		$propertyId = $deserializedRequest->getPropertyId();
 		$label = $deserializedRequest->getPropertyLabel();
 		$editMetadata = $deserializedRequest->getEditMetadata();
+
+		$this->assertPropertyExists->execute( $propertyId );
 
 		$property = $this->propertyRetriever->getProperty( $propertyId );
 		$labelExists = $property->getLabels()->hasTermForLanguage( $label->getLanguageCode() );
