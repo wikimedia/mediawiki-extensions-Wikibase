@@ -1,10 +1,11 @@
 'use strict';
 
-const { assert, utils } = require( 'api-testing' );
+const { assert, utils, action } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { newPatchItemAliasesRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
+const { formatLabelsEditSummary } = require( '../helpers/formatEditSummaries' );
 
 describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 
@@ -59,6 +60,34 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 			expect( response ).to.have.status( 200 );
 			assert.include( response.body.en, testAlias );
 			assert.include( response.body.en, alias );
+		} );
+
+		it( 'can patch aliases providing edit metadata', async () => {
+			const newDeAlias = `de-alias-${utils.uniq()}`;
+			const user = await action.robby(); // robby is a bot
+			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test' );
+			const editSummary = 'I made a patch';
+			const response = await newPatchItemAliasesRequestBuilder(
+				testItemId,
+				[ { op: 'add', path: '/de', value: [ newDeAlias ] } ]
+			).withJsonBodyParam( 'tags', [ tag ] )
+				.withJsonBodyParam( 'bot', true )
+				.withJsonBodyParam( 'comment', editSummary )
+				.withUser( user )
+				.assertValidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 200 );
+			assert.include( response.body.en, testAlias );
+			assert.include( response.body.de, newDeAlias );
+
+			const editMetadata = await entityHelper.getLatestEditMetadata( testItemId );
+			assert.include( editMetadata.tags, tag );
+			assert.property( editMetadata, 'bot' );
+			assert.strictEqual(
+				editMetadata.comment,
+				formatLabelsEditSummary( 'update-languages-short', 'de', editSummary )
+			);
 		} );
 	} );
 
