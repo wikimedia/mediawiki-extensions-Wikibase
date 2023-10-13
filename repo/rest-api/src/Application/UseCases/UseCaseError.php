@@ -52,6 +52,7 @@ class UseCaseError extends UseCaseException {
 	public const PATCH_TEST_FAILED = 'patch-test-failed';
 	public const PERMISSION_DENIED = 'permission-denied';
 	public const PROPERTY_NOT_FOUND = 'property-not-found';
+	public const PROPERTY_LABEL_DUPLICATE = 'property-label-duplicate';
 	public const STATEMENT_DATA_INVALID_FIELD = 'statement-data-invalid-field';
 	public const STATEMENT_DATA_MISSING_FIELD = 'statement-data-missing-field';
 	public const STATEMENT_NOT_FOUND = 'statement-not-found';
@@ -64,6 +65,7 @@ class UseCaseError extends UseCaseException {
 	public const CONTEXT_LABEL = 'label';
 	public const CONTEXT_LANGUAGE = 'language';
 	public const CONTEXT_MATCHING_ITEM_ID = 'matching-item-id';
+	public const CONTEXT_MATCHING_PROPERTY_ID = 'matching-property-id';
 	public const CONTEXT_OPERATION = 'operation';
 	public const CONTEXT_PATH = 'path';
 	public const CONTEXT_PROPERTY_ID = 'property-id';
@@ -124,6 +126,11 @@ class UseCaseError extends UseCaseException {
 		self::PATCH_TEST_FAILED => [ self::CONTEXT_OPERATION, self::CONTEXT_ACTUAL_VALUE ],
 		self::PERMISSION_DENIED => [],
 		self::PROPERTY_NOT_FOUND => [],
+		self::PROPERTY_LABEL_DUPLICATE => [
+			self::CONTEXT_LANGUAGE,
+			self::CONTEXT_LABEL,
+			self::CONTEXT_MATCHING_PROPERTY_ID,
+		],
 		self::STATEMENT_DATA_INVALID_FIELD => [ self::CONTEXT_PATH, self::CONTEXT_VALUE ],
 		self::STATEMENT_DATA_MISSING_FIELD => [ self::CONTEXT_PATH ],
 		self::STATEMENT_NOT_FOUND => [],

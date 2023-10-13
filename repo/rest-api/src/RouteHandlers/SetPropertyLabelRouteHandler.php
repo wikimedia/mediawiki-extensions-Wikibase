@@ -10,6 +10,7 @@ use MediaWiki\Rest\Validator\BodyValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\SetPropertyLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\SetPropertyLabelRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\SetPropertyLabelResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -27,28 +28,35 @@ class SetPropertyLabelRouteHandler extends SimpleHandler {
 	public const COMMENT_BODY_PARAM = 'comment';
 
 	private SetPropertyLabel $setPropertyLabel;
+	private ResponseFactory $responseFactory;
 
-	public function __construct( SetPropertyLabel $setPropertyLabel ) {
+	public function __construct( SetPropertyLabel $setPropertyLabel, ResponseFactory $responseFactory ) {
 		$this->setPropertyLabel = $setPropertyLabel;
+		$this->responseFactory = $responseFactory;
 	}
 
 	public static function factory(): Handler {
-		return new self( WbRestApi::getSetPropertyLabel() );
+		return new self( WbRestApi::getSetPropertyLabel(), new ResponseFactory() );
 	}
 
 	public function run( string $propertyId, string $languageCode ): Response {
 		$jsonBody = $this->getValidatedBody();
-		$useCaseResponse = $this->setPropertyLabel->execute(
-			new SetPropertyLabelRequest(
-				$propertyId,
-				$languageCode,
-				$jsonBody[self::LABEL_BODY_PARAM],
-				$jsonBody[self::TAGS_BODY_PARAM],
-				$jsonBody[self::BOT_BODY_PARAM],
-				$jsonBody[self::COMMENT_BODY_PARAM],
-				$this->getUsername()
-			)
-		);
+
+		try {
+			$useCaseResponse = $this->setPropertyLabel->execute(
+				new SetPropertyLabelRequest(
+					$propertyId,
+					$languageCode,
+					$jsonBody[self::LABEL_BODY_PARAM],
+					$jsonBody[self::TAGS_BODY_PARAM],
+					$jsonBody[self::BOT_BODY_PARAM],
+					$jsonBody[self::COMMENT_BODY_PARAM],
+					$this->getUsername()
+				)
+			);
+		} catch ( UseCaseError $e ) {
+			return $this->responseFactory->newErrorResponseFromException( $e );
+		}
 		return $this->newSuccessHttpResponse( $useCaseResponse );
 	}
 
