@@ -8,6 +8,7 @@ use Wikibase\DataModel\Entity\Property as DataModelProperty;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\SetPropertyLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\SetPropertyLabelRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\SetPropertyLabelValidator;
@@ -37,6 +38,7 @@ class SetPropertyLabelTest extends TestCase {
 	private SetPropertyLabelValidator $validator;
 	private PropertyRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
+	private AssertPropertyExists $assertPropertyExists;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -44,6 +46,7 @@ class SetPropertyLabelTest extends TestCase {
 		$this->validator = new TestValidatingRequestDeserializer();
 		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
 		$this->propertyUpdater = $this->createStub( PropertyUpdater::class );
+		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
 	}
 
 	public function testAddLabel(): void {
@@ -140,11 +143,26 @@ class SetPropertyLabelTest extends TestCase {
 		}
 	}
 
+	public function testGivenPropertyNotFound_throws(): void {
+		$expectedException = $this->createStub( UseCaseException::class );
+		$this->assertPropertyExists->method( 'execute' )
+			->willThrowException( $expectedException );
+		try {
+			$this->newUseCase()->execute(
+				new SetPropertyLabelRequest( 'P999', 'en', 'test label', [], false, null, null )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
 	private function newUseCase(): SetPropertyLabel {
 		return new SetPropertyLabel(
 			$this->validator,
 			$this->propertyRetriever,
-			$this->propertyUpdater
+			$this->propertyUpdater,
+			$this->assertPropertyExists
 		);
 	}
 

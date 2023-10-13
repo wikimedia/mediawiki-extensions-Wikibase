@@ -29,6 +29,11 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 		assertValidResponse( response, labelText );
 	}
 
+	function assertValidErrorResponse( response, responseBodyErrorCode ) {
+		assert.header( response, 'Content-Language', 'en' );
+		assert.strictEqual( response.body.code, responseBodyErrorCode );
+	}
+
 	before( async () => {
 		const createEntityResponse = await entityHelper.createEntity( 'property', {
 			labels: { en: { language: 'en', value: `english label ${utils.uniq()}` } },
@@ -187,8 +192,7 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 				.makeRequest();
 
 			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			assert.strictEqual( response.body.code, 'invalid-property-id' );
+			assertValidErrorResponse( response, 'invalid-property-id' );
 			assert.include( response.body.message, propertyId );
 		} );
 
@@ -199,8 +203,7 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 				.makeRequest();
 
 			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			assert.strictEqual( response.body.code, 'invalid-language-code' );
+			assertValidErrorResponse( response, 'invalid-language-code' );
 			assert.include( response.body.message, invalidLanguageCode );
 		} );
 
@@ -211,8 +214,7 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 				.makeRequest();
 
 			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			assert.strictEqual( response.body.code, 'invalid-label' );
+			assertValidErrorResponse( response, 'invalid-label' );
 			assert.include( response.body.message, invalidLabel );
 		} );
 
@@ -225,8 +227,7 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 				.makeRequest();
 
 			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			assert.strictEqual( response.body.code, 'label-empty' );
+			assertValidErrorResponse( response, 'label-empty' );
 			assert.strictEqual( response.body.message, 'Label must not be empty' );
 		} );
 
@@ -242,8 +243,7 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 				.makeRequest();
 
 			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			assert.strictEqual( response.body.code, 'label-too-long' );
+			assertValidErrorResponse( response, 'label-too-long' );
 			assert.strictEqual(
 				response.body.message,
 				`Label must be no more than ${maxLabelLength} characters long`
@@ -275,8 +275,7 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 				.makeRequest();
 
 			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			assert.strictEqual( response.body.code, 'label-description-same-value' );
+			assertValidErrorResponse( response, 'label-description-same-value' );
 			assert.strictEqual(
 				response.body.message,
 				`Label and description for language code '${language}' can not have the same value.`
@@ -301,8 +300,7 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 			const response = await newSetPropertyLabelRequestBuilder( testPropertyId, languageCode, label )
 				.assertValidRequest().makeRequest();
 			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			assert.strictEqual( response.body.code, 'property-label-duplicate' );
+			assertValidErrorResponse( response, 'property-label-duplicate' );
 			assert.strictEqual(
 				response.body.message,
 				`Property ${existingPropertyId} already has label '${label}' associated with ` +
@@ -326,8 +324,7 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 				.makeRequest();
 
 			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			assert.strictEqual( response.body.code, 'comment-too-long' );
+			assertValidErrorResponse( response, 'comment-too-long' );
 			assert.include( response.body.message, '500' );
 		} );
 
@@ -339,8 +336,7 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 				.makeRequest();
 
 			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			assert.strictEqual( response.body.code, 'invalid-edit-tag' );
+			assertValidErrorResponse( response, 'invalid-edit-tag' );
 			assert.include( response.body.message, invalidEditTag );
 		} );
 
@@ -354,6 +350,19 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 			assert.strictEqual( response.body.code, 'invalid-request-body' );
 			assert.strictEqual( response.body.fieldName, 'bot' );
 			assert.strictEqual( response.body.expectedType, 'boolean' );
+		} );
+	} );
+
+	describe( '404 error response', () => {
+		it( 'property not found', async () => {
+			const propertyId = 'P999999';
+			const response = await newSetPropertyLabelRequestBuilder( propertyId, 'en', 'test label' )
+				.assertValidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 404 );
+			assertValidErrorResponse( response, 'property-not-found' );
+			assert.include( response.body.message, propertyId );
 		} );
 	} );
 
