@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\RouteHandlers;
 
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
@@ -11,6 +12,9 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\SetPropertyLabel
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\SetPropertyLabelRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\SetPropertyLabelResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\BotRightCheckMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -29,19 +33,40 @@ class SetPropertyLabelRouteHandler extends SimpleHandler {
 
 	private SetPropertyLabel $setPropertyLabel;
 	private ResponseFactory $responseFactory;
+	private MiddlewareHandler $middlewareHandler;
 
-	public function __construct( SetPropertyLabel $setPropertyLabel, ResponseFactory $responseFactory ) {
+	public function __construct(
+		SetPropertyLabel $setPropertyLabel,
+		ResponseFactory $responseFactory,
+		MiddlewareHandler $middlewareHandler
+	) {
 		$this->setPropertyLabel = $setPropertyLabel;
 		$this->responseFactory = $responseFactory;
+		$this->middlewareHandler = $middlewareHandler;
 	}
 
 	public static function factory(): Handler {
-		return new self( WbRestApi::getSetPropertyLabel(), new ResponseFactory() );
+		$responseFactory = new ResponseFactory();
+
+		return new self(
+			WbRestApi::getSetPropertyLabel(),
+			$responseFactory,
+			new MiddlewareHandler( [
+				new AuthenticationMiddleware(),
+				new BotRightCheckMiddleware( MediaWikiServices::getInstance()->getPermissionManager(), $responseFactory ),
+			] )
+		);
 	}
 
-	public function run( string $propertyId, string $languageCode ): Response {
-		$jsonBody = $this->getValidatedBody();
+	/**
+	 * @param mixed ...$args
+	 */
+	public function run( ...$args ): Response {
+		return $this->middlewareHandler->run( $this, [ $this, 'runUseCase' ], $args );
+	}
 
+	public function runUseCase( string $propertyId, string $languageCode ): Response {
+		$jsonBody = $this->getValidatedBody();
 		try {
 			$useCaseResponse = $this->setPropertyLabel->execute(
 				new SetPropertyLabelRequest(

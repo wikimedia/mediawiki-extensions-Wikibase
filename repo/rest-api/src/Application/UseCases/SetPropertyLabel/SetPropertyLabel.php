@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel;
 
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\LabelEditSummary;
@@ -18,17 +19,20 @@ class SetPropertyLabel {
 	private PropertyUpdater $propertyUpdater;
 	private SetPropertyLabelValidator $validator;
 	private AssertPropertyExists $assertPropertyExists;
+	private AssertUserIsAuthorized $assertUserIsAuthorized;
 
 	public function __construct(
 		SetPropertyLabelValidator $validator,
 		PropertyRetriever $propertyRetriever,
 		PropertyUpdater $propertyUpdater,
-		AssertPropertyExists $assertPropertyExists
+		AssertPropertyExists $assertPropertyExists,
+		AssertUserIsAuthorized $assertUserIsAuthorized
 	) {
 		$this->validator = $validator;
 		$this->propertyRetriever = $propertyRetriever;
 		$this->propertyUpdater = $propertyUpdater;
 		$this->assertPropertyExists = $assertPropertyExists;
+		$this->assertUserIsAuthorized = $assertUserIsAuthorized;
 	}
 
 	/**
@@ -41,6 +45,7 @@ class SetPropertyLabel {
 		$editMetadata = $deserializedRequest->getEditMetadata();
 
 		$this->assertPropertyExists->execute( $propertyId );
+		$this->assertUserIsAuthorized->execute( $propertyId, $editMetadata->getUser()->getUsername() );
 
 		$property = $this->propertyRetriever->getProperty( $propertyId );
 		$labelExists = $property->getLabels()->hasTermForLanguage( $label->getLanguageCode() );
