@@ -4,7 +4,9 @@ namespace Wikibase\Repo\RestApi\RouteHandlers;
 
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Handler;
+use MediaWiki\Rest\RequestInterface;
 use MediaWiki\Rest\Response;
+use MediaWiki\Rest\ResponseInterface;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
 use MediaWiki\Rest\Validator\BodyValidator;
@@ -14,7 +16,9 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\SetPropertyLabel
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\BotRightCheckMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\ContentTypeCheckMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -52,8 +56,14 @@ class SetPropertyLabelRouteHandler extends SimpleHandler {
 			WbRestApi::getSetPropertyLabel(),
 			$responseFactory,
 			new MiddlewareHandler( [
+				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
+				new UserAgentCheckMiddleware(),
 				new AuthenticationMiddleware(),
+				new ContentTypeCheckMiddleware( [ ContentTypeCheckMiddleware::TYPE_APPLICATION_JSON ] ),
 				new BotRightCheckMiddleware( MediaWikiServices::getInstance()->getPermissionManager(), $responseFactory ),
+				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
+					fn( RequestInterface $request ): string => $request->getPathParam( self::PROPERTY_ID_PATH_PARAM )
+				),
 			] )
 		);
 	}
@@ -132,6 +142,13 @@ class SetPropertyLabelRouteHandler extends SimpleHandler {
 					ParamValidator::PARAM_REQUIRED => false,
 				],
 			] ) : parent::getBodyValidator( $contentType );
+	}
+
+	/**
+	 * Preconditions are checked via {@link PreconditionMiddleware}
+	 */
+	public function checkPreconditions(): ?ResponseInterface {
+		return null;
 	}
 
 	private function newSuccessHttpResponse( SetPropertyLabelResponse $useCaseResponse ): Response {

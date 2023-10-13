@@ -366,4 +366,17 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 		} );
 	} );
 
+	describe( '415 error response', () => {
+		it( 'unsupported media type', async () => {
+			const contentType = 'multipart/form-data';
+			const response = await newSetPropertyLabelRequestBuilder(
+				testPropertyId,
+				'en',
+				'test label'
+			).withHeader( 'content-type', contentType ).makeRequest();
+
+			expect( response ).to.have.status( 415 );
+			assert.strictEqual( response.body.message, `Unsupported Content-Type: '${contentType}'` );
+		} );
+	} );
 } );

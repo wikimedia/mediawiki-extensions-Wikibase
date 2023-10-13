@@ -78,6 +78,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescrip
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescriptionResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabelResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\SetPropertyLabel;
+use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\SetPropertyLabelResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
@@ -633,6 +635,25 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 					$hasErrorCode ( UseCaseError::INVALID_ITEM_ID ),
 				],
 				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::ITEM_REDIRECTED ) ],
+			],
+		] ];
+		yield 'SetPropertyLabel' => [ [
+			'useCase' => SetPropertyLabel::class,
+			'useCaseResponse' => new SetPropertyLabelResponse(
+				new Label( 'en', 'instance of' ),
+				$lastModified,
+				123,
+				true
+			),
+			'validRequest' => [
+				'pathParams' => [ 'property_id' => 'P1', 'language_code' => 'en' ],
+				'bodyContents' => [ 'label' => 'instance of' ],
+			],
+			'expectedExceptions' => [
+				[
+					new UseCaseError( UseCaseError::PROPERTY_NOT_FOUND, '' ),
+					$hasErrorCode ( UseCaseError::PROPERTY_NOT_FOUND ),
+				],
 			],
 		] ];
 		// phpcs:enable

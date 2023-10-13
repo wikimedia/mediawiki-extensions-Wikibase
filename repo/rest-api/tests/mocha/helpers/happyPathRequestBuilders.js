@@ -54,7 +54,9 @@ module.exports.editRequestsOnProperty = [
 		} ]
 	),
 	( { propertyId, statementId } ) => rbf.newRemovePropertyStatementRequestBuilder( propertyId, statementId ),
-	( { statementId } ) => rbf.newRemoveStatementRequestBuilder( statementId )
+	( { statementId } ) => rbf.newRemoveStatementRequestBuilder( statementId ),
+	( { propertyId } ) => rbf.newSetPropertyLabelRequestBuilder( propertyId, 'en', 'random-label-' + utils.uniq() )
+
 ];
 
 module.exports.editRequestsOnItem = [
