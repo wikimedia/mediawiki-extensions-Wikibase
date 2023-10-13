@@ -8,7 +8,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
-use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabelRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabelValidator;
@@ -29,7 +28,9 @@ use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel
+ *
  * @group Wikibase
+ *
  * @license GPL-2.0-or-later
  */
 class SetItemLabelTest extends TestCase {
@@ -37,7 +38,7 @@ class SetItemLabelTest extends TestCase {
 	use EditMetadataHelper;
 
 	private SetItemLabelValidator $validator;
-	private GetLatestItemRevisionMetadata $getRevisionMetadata;
+	private AssertItemExists $assertItemExists;
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
@@ -46,10 +47,7 @@ class SetItemLabelTest extends TestCase {
 		parent::setUp();
 
 		$this->validator = new TestValidatingRequestDeserializer();
-		$this->getRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
-		$this->getRevisionMetadata->method( 'execute' )
-			->willReturn( [ 321, '20201111070707' ] );
-
+		$this->assertItemExists = $this->createStub( AssertItemExists::class );
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
 		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
@@ -135,15 +133,10 @@ class SetItemLabelTest extends TestCase {
 
 	public function testGivenItemNotFoundOrRedirect_throws(): void {
 		$expectedException = $this->createStub( UseCaseException::class );
-
-		$this->getRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
-		$this->getRevisionMetadata->method( 'execute' )
+		$this->assertItemExists->method( 'execute' )
 			->willThrowException( $expectedException );
-
 		try {
-			$this->newUseCase()->execute(
-				new SetItemLabelRequest( 'Q321', 'en', 'test label', [], false, null, null )
-			);
+			$this->newUseCase()->execute( new SetItemLabelRequest( 'Q321', 'en', 'test label', [], false, null, null ) );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
 			$this->assertSame( $expectedException, $e );
@@ -179,7 +172,7 @@ class SetItemLabelTest extends TestCase {
 	private function newUseCase(): SetItemLabel {
 		return new SetItemLabel(
 			$this->validator,
-			new AssertItemExists( $this->getRevisionMetadata ),
+			$this->assertItemExists,
 			$this->itemRetriever,
 			$this->itemUpdater,
 			$this->assertUserIsAuthorized

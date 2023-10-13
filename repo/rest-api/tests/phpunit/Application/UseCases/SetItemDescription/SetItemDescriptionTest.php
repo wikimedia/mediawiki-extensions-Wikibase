@@ -7,7 +7,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
-use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescriptionRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescriptionValidator;
@@ -38,7 +37,7 @@ class SetItemDescriptionTest extends \PHPUnit\Framework\TestCase {
 	use EditMetadataHelper;
 
 	private SetItemDescriptionValidator $validator;
-	private GetLatestItemRevisionMetadata $getRevisionMetadata;
+	private AssertItemExists $assertItemExists;
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
@@ -47,9 +46,7 @@ class SetItemDescriptionTest extends \PHPUnit\Framework\TestCase {
 		parent::setUp();
 
 		$this->validator = new TestValidatingRequestDeserializer();
-		$this->getRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
-		$this->getRevisionMetadata->method( 'execute' )
-			->willReturn( [ 123, '20221212040505' ] );
+		$this->assertItemExists = $this->createStub( AssertItemExists::class );
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
 		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
@@ -154,20 +151,10 @@ class SetItemDescriptionTest extends \PHPUnit\Framework\TestCase {
 	public function testGivenItemNotFoundOrRedirect_throws(): void {
 		$itemId = 'Q789';
 		$expectedException = $this->createStub( UseCaseException::class );
-		$this->getRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
-		$this->getRevisionMetadata->method( 'execute' )
+		$this->assertItemExists->method( 'execute' )
 			->willThrowException( $expectedException );
-
 		try {
-			$this->newUseCase()->execute( new SetItemDescriptionRequest(
-				$itemId,
-				'en',
-				'test description',
-				[],
-				false,
-				null,
-				null
-			) );
+			$this->newUseCase()->execute( new SetItemDescriptionRequest( $itemId, 'en', 'test description', [], false, null, null ) );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseException $e ) {
 			$this->assertSame( $expectedException, $e );
@@ -214,7 +201,7 @@ class SetItemDescriptionTest extends \PHPUnit\Framework\TestCase {
 	private function newUseCase(): SetItemDescription {
 		return new SetItemDescription(
 			$this->validator,
-			new AssertItemExists( $this->getRevisionMetadata ),
+			$this->assertItemExists,
 			$this->itemRetriever,
 			$this->itemUpdater,
 			$this->assertUserIsAuthorized
