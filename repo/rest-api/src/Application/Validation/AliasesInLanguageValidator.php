@@ -7,7 +7,7 @@ use Wikibase\DataModel\Term\AliasGroup;
 /**
  * @license GPL-2.0-or-later
  */
-interface ItemAliasesInLanguageValidator {
+interface AliasesInLanguageValidator {
 
 	public const CODE_INVALID = 'invalid-alias';
 	public const CODE_EMPTY = 'alias-empty';
