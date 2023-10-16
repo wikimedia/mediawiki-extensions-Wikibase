@@ -534,6 +534,7 @@ return [
 		return new PatchItemAliases(
 			WbRestApi::getValidatingRequestDeserializer( $services ),
 			WbRestApi::getAssertItemExists( $services ),
+			WbRestApi::getAssertUserIsAuthorized( $services ),
 			new PrefetchingTermLookupAliasesRetriever(
 				WikibaseRepo::getPrefetchingTermLookup( $services ),
 				WikibaseRepo::getTermsLanguages( $services )

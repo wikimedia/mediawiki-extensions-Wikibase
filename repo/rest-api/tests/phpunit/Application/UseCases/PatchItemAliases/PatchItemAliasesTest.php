@@ -10,10 +10,12 @@ use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchItemAliases;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchItemAliasesRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchItemAliasesValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\AliasesEditSummary;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
@@ -43,6 +45,7 @@ class PatchItemAliasesTest extends TestCase {
 
 	private PatchItemAliasesValidator $validator;
 	private AssertItemExists $assertItemExists;
+	private AssertUserIsAuthorized $assertUserIsAuthorized;
 	private ItemAliasesRetriever $aliasesRetriever;
 	private AliasesSerializer $aliasesSerializer;
 	private PatchJson $patcher;
@@ -54,6 +57,7 @@ class PatchItemAliasesTest extends TestCase {
 
 		$this->validator = new TestValidatingRequestDeserializer();
 		$this->assertItemExists = $this->createStub( AssertItemExists::class );
+		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
 		$this->aliasesRetriever = $this->createStub( ItemAliasesRetriever::class );
 		$this->aliasesSerializer = new AliasesSerializer();
 		$this->patcher = new PatchJson( new JsonDiffJsonPatcher() );
@@ -138,10 +142,30 @@ class PatchItemAliasesTest extends TestCase {
 		}
 	}
 
+	public function testGivenUnauthorizedRequest_throws(): void {
+		$user = 'bad-user';
+		$itemId = new ItemId( 'Q123' );
+		$expectedException = $this->createStub( UseCaseError::class );
+
+		$this->assertUserIsAuthorized = $this->createMock( AssertUserIsAuthorized::class );
+		$this->assertUserIsAuthorized->expects( $this->once() )
+			->method( 'execute' )
+			->with( $itemId, $user )
+			->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase()->execute( new PatchItemAliasesRequest( (string)$itemId, [], [], false, null, $user ) );
+			$this->fail( 'expected exception was not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
 	private function newUseCase(): PatchItemAliases {
 		return new PatchItemAliases(
 			$this->validator,
 			$this->assertItemExists,
+			$this->assertUserIsAuthorized,
 			$this->aliasesRetriever,
 			$this->aliasesSerializer,
 			$this->patcher,

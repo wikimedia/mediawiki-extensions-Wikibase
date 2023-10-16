@@ -5,6 +5,7 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
@@ -21,6 +22,7 @@ class PatchItemAliases {
 
 	private PatchItemAliasesValidator $useCaseValidator;
 	private AssertItemExists $assertItemExists;
+	private AssertUserIsAuthorized $assertUserIsAuthorized;
 	private ItemAliasesRetriever $aliasesRetriever;
 	private AliasesSerializer $aliasesSerializer;
 	private PatchJson $patcher;
@@ -31,6 +33,7 @@ class PatchItemAliases {
 	public function __construct(
 		PatchItemAliasesValidator $useCaseValidator,
 		AssertItemExists $assertItemExists,
+		AssertUserIsAuthorized $assertUserIsAuthorized,
 		ItemAliasesRetriever $aliasesRetriever,
 		AliasesSerializer $aliasesSerializer,
 		PatchJson $patcher,
@@ -40,6 +43,7 @@ class PatchItemAliases {
 	) {
 		$this->useCaseValidator = $useCaseValidator;
 		$this->assertItemExists = $assertItemExists;
+		$this->assertUserIsAuthorized = $assertUserIsAuthorized;
 		$this->aliasesRetriever = $aliasesRetriever;
 		$this->aliasesSerializer = $aliasesSerializer;
 		$this->patcher = $patcher;
@@ -54,28 +58,27 @@ class PatchItemAliases {
 	 */
 	public function execute( PatchItemAliasesRequest $request ): PatchItemAliasesResponse {
 		$deserializedRequest = $this->useCaseValidator->validateAndDeserialize( $request );
+		$itemId = $deserializedRequest->getItemId();
+		$userProvidedMetadata = $deserializedRequest->getEditMetadata();
 
-		$this->assertItemExists->execute( $deserializedRequest->getItemId() );
+		$this->assertItemExists->execute( $itemId );
+		$this->assertUserIsAuthorized->execute( $itemId, $userProvidedMetadata->getUser()->getUsername() );
 
-		$aliases = $this->aliasesRetriever->getAliases( $deserializedRequest->getItemId() );
+		$aliases = $this->aliasesRetriever->getAliases( $itemId );
 		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
 		$serialization = $this->aliasesSerializer->serialize( $aliases );
 
 		$patchedAliases = $this->patcher->execute( iterator_to_array( $serialization ), $deserializedRequest->getPatch() );
 
-		$item = $this->itemRetriever->getItem( $deserializedRequest->getItemId() );
+		$item = $this->itemRetriever->getItem( $itemId );
 		$originalAliases = $item->getAliasGroups();
 		$modifiedAliases = $this->aliasesDeserializer->deserialize( $patchedAliases );
 		$item->getFingerprint()->setAliasGroups( $modifiedAliases );
 
 		$editMetadata = new EditMetadata(
-			$deserializedRequest->getEditMetadata()->getTags(),
-			$deserializedRequest->getEditMetadata()->isBot(),
-			AliasesEditSummary::newPatchSummary(
-				$deserializedRequest->getEditMetadata()->getComment(),
-				$originalAliases,
-				$modifiedAliases
-			)
+			$userProvidedMetadata->getTags(),
+			$userProvidedMetadata->isBot(),
+			AliasesEditSummary::newPatchSummary( $userProvidedMetadata->getComment(), $originalAliases, $modifiedAliases )
 		);
 		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
 		$revision = $this->itemUpdater->update( $item, $editMetadata );

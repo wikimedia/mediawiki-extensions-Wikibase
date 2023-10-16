@@ -122,7 +122,13 @@ describe( 'Auth', () => {
 			} );
 		} );
 
-		editRequestsWithInputs.forEach( ( { newRequestBuilder, requestInputs } ) => {
+		[
+			...editRequestsWithInputs,
+			{
+				newRequestBuilder: () => rbf.newPatchItemAliasesRequestBuilder( itemRequestInputs.itemId, [] ),
+				requestInputs: itemRequestInputs
+			}
+		].forEach( ( { newRequestBuilder, requestInputs } ) => {
 			describe( 'Protected entity page', () => {
 				before( async () => {
 					await changeEntityProtectionStatus( requestInputs.mainTestSubject, 'sysop' ); // protect
