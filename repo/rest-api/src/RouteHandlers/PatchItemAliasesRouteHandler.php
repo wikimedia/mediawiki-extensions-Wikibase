@@ -11,6 +11,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchItemAliases;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchItemAliasesRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchItemAliasesResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -27,37 +28,45 @@ class PatchItemAliasesRouteHandler extends SimpleHandler {
 
 	private PatchItemAliases $useCase;
 	private AliasesSerializer $serializer;
+	private ResponseFactory $responseFactory;
 
 	public function __construct(
 		PatchItemAliases $useCase,
-		AliasesSerializer $serializer
+		AliasesSerializer $serializer,
+		ResponseFactory $responseFactory
 	) {
 		$this->useCase = $useCase;
 		$this->serializer = $serializer;
+		$this->responseFactory = $responseFactory;
 	}
 
 	public static function factory(): Handler {
 		return new self(
 			WbRestApi::getPatchItemAliases(),
-			new AliasesSerializer()
+			new AliasesSerializer(),
+			new ResponseFactory()
 		);
 	}
 
 	public function run( string $itemId ): Response {
 		$jsonBody = $this->getValidatedBody();
 
-		return $this->newSuccessHttpResponse(
-			$this->useCase->execute(
-				new PatchItemAliasesRequest(
-					$itemId,
-					$jsonBody[ self::PATCH_BODY_PARAM ],
-					$jsonBody[ self::TAGS_BODY_PARAM ],
-					$jsonBody[ self::BOT_BODY_PARAM ],
-					$jsonBody[ self::COMMENT_BODY_PARAM ],
-					$this->getUsername()
+		try {
+			return $this->newSuccessHttpResponse(
+				$this->useCase->execute(
+					new PatchItemAliasesRequest(
+						$itemId,
+						$jsonBody[ self::PATCH_BODY_PARAM ],
+						$jsonBody[ self::TAGS_BODY_PARAM ],
+						$jsonBody[ self::BOT_BODY_PARAM ],
+						$jsonBody[ self::COMMENT_BODY_PARAM ],
+						$this->getUsername()
+					)
 				)
-			)
-		);
+			);
+		} catch ( UseCaseError $e ) {
+			return $this->responseFactory->newErrorResponseFromException( $e );
+		}
 	}
 
 	private function newSuccessHttpResponse( PatchItemAliasesResponse $useCaseResponse ): Response {
