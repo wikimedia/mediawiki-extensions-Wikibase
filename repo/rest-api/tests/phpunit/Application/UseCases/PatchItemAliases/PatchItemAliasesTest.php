@@ -13,6 +13,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchItemAliases
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchItemAliasesRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchItemAliasesValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\AliasesEditSummary;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
@@ -104,6 +105,19 @@ class PatchItemAliasesTest extends TestCase {
 		);
 
 		$this->assertSame( $response->getAliases(), $updatedItem->getAliases() );
+	}
+
+	public function testGivenInvalidRequest_throws(): void {
+		$expectedException = new UseCaseException( 'invalid-alias-patch-test' );
+		$this->validator = $this->createStub( PatchItemAliasesValidator::class );
+		$this->validator->method( 'validateAndDeserialize' )->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase()->execute( $this->createStub( PatchItemAliasesRequest::class ) );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
 	}
 
 	private function newUseCase(): PatchItemAliases {
