@@ -31,6 +31,14 @@ module.exports.getRequestsOnProperty = [
 ];
 
 module.exports.editRequestsOnProperty = [
+	( { propertyId } ) => rbf.newPatchPropertyAliasesRequestBuilder(
+		propertyId,
+		[ {
+			op: 'replace',
+			path: '/en',
+			value: [ 'en-alias-' + utils.uniq() ]
+		} ]
+	),
 	( { propertyId, statementPropertyId } ) => rbf.newAddPropertyStatementRequestBuilder(
 		propertyId,
 		newStatementWithRandomStringValue( statementPropertyId )

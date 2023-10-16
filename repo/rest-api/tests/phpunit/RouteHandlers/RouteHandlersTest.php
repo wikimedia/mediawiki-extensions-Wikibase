@@ -64,6 +64,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDe
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchPropertyAliases;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchPropertyAliasesResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyStatement\PatchPropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementResponse;
@@ -676,6 +678,18 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 					$hasErrorCode ( UseCaseError::PROPERTY_NOT_FOUND ),
 				],
 			],
+		] ];
+		yield 'PatchPropertyAliases' => [ [
+			'useCase' => PatchPropertyAliases::class,
+			'useCaseResponse' => new PatchPropertyAliasesResponse( new Aliases(), $lastModified, 123 ),
+			'validRequest' => [
+				'pathParams' => [ 'property_id' => 'P1' ],
+				'bodyContents' => [ 'patch' => [ [ 'op' => 'remove', 'path' => '/fr' ] ] ],
+			],
+			'expectedExceptions' => [ [
+				new UseCaseError( UseCaseError::PROPERTY_NOT_FOUND, '' ),
+				$hasErrorCode( UseCaseError::PROPERTY_NOT_FOUND ),
+			] ],
 		] ];
 		// phpcs:enable
 	}
