@@ -62,6 +62,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabels\GetPropertyLabe
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\GetPropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetPropertyStatements;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchedAliasesValidator as PatchedItemAliasesValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchItemAliases;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchedDescriptionsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptions;
@@ -69,7 +70,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchedLabelsVali
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchedAliasesValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchedAliasesValidator as PatchedPropertyAliasesValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchPropertyAliases;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyStatement\PatchPropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchedStatementValidator;
@@ -541,8 +542,12 @@ return [
 			),
 			new AliasesSerializer(),
 			new PatchJson( new JsonDiffJsonPatcher() ),
+			new PatchedItemAliasesValidator(
+				new AliasesDeserializer(),
+				new WikibaseRepoAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory() ),
+				new LanguageCodeValidator( WikibaseRepo::getTermsLanguages()->getLanguages() )
+			),
 			WbRestApi::getItemDataRetriever( $services ),
-			new AliasesDeserializer(),
 			WbRestApi::getItemUpdater( $services )
 		);
 	},
@@ -612,7 +617,7 @@ return [
 			),
 			new AliasesSerializer(),
 			new PatchJson( new JsonDiffJsonPatcher() ),
-			new PatchedAliasesValidator(
+			new PatchedPropertyAliasesValidator(
 				new AliasesDeserializer(),
 				new WikibaseRepoAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
 				new LanguageCodeValidator( $termLanguages->getLanguages() )

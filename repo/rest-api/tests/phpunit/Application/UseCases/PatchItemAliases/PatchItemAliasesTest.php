@@ -11,6 +11,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchedAliasesValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchItemAliases;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchItemAliasesRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchItemAliasesValidator;
@@ -49,6 +50,7 @@ class PatchItemAliasesTest extends TestCase {
 	private ItemAliasesRetriever $aliasesRetriever;
 	private AliasesSerializer $aliasesSerializer;
 	private PatchJson $patcher;
+	private PatchedAliasesValidator $patchedAliasesValidator;
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
 
@@ -59,8 +61,12 @@ class PatchItemAliasesTest extends TestCase {
 		$this->assertItemExists = $this->createStub( AssertItemExists::class );
 		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
 		$this->aliasesRetriever = $this->createStub( ItemAliasesRetriever::class );
+		$this->aliasesRetriever->method( 'getAliases' )->willReturn( new Aliases() );
 		$this->aliasesSerializer = new AliasesSerializer();
 		$this->patcher = new PatchJson( new JsonDiffJsonPatcher() );
+		$this->patchedAliasesValidator = $this->createStub( PatchedAliasesValidator::class );
+		$this->patchedAliasesValidator->method( 'validateAndDeserialize' )
+			->willReturnCallback( [ new AliasesDeserializer(), 'deserialize' ] );
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
 	}
@@ -161,6 +167,24 @@ class PatchItemAliasesTest extends TestCase {
 		}
 	}
 
+	public function testGivenPatchedAliasesInvalid_throws(): void {
+		$expectedException = $this->createStub( UseCaseError::class );
+		$this->patchedAliasesValidator = $this->createStub( PatchedAliasesValidator::class );
+		$this->patchedAliasesValidator->method( 'validateAndDeserialize' )->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase()->execute(
+				$this->newUseCaseRequest(
+					'Q123',
+					[ [ 'op' => 'add', 'path' => '/bad-language-code', 'value' => [ 'alias' ] ] ]
+				)
+			);
+			$this->fail( 'expected exception was not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
 	private function newUseCase(): PatchItemAliases {
 		return new PatchItemAliases(
 			$this->validator,
@@ -169,8 +193,8 @@ class PatchItemAliasesTest extends TestCase {
 			$this->aliasesRetriever,
 			$this->aliasesSerializer,
 			$this->patcher,
+			$this->patchedAliasesValidator,
 			$this->itemRetriever,
-			new AliasesDeserializer(),
 			$this->itemUpdater
 		);
 	}
