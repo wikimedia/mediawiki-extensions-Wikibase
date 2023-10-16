@@ -8,8 +8,8 @@ const { makeEtag } = require( '../helpers/httpHelper' );
 const { formatLabelsEditSummary } = require( '../helpers/formatEditSummaries' );
 const testValidatesPatch = require( '../helpers/testValidatesPatch' );
 
-function assertValid400Response( response, responseBodyErrorCode, context = null ) {
-	expect( response ).to.have.status( 400 );
+function assertValidErrorResponse( response, statusCode, responseBodyErrorCode, context = null ) {
+	expect( response ).to.have.status( statusCode );
 	assert.header( response, 'Content-Language', 'en' );
 	assert.strictEqual( response.body.code, responseBodyErrorCode );
 	if ( context === null ) {
@@ -109,7 +109,7 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchItemAliasesRequestBuilder( itemId, [] )
 				.assertInvalidRequest().makeRequest();
 
-			assertValid400Response( response, 'invalid-item-id' );
+			assertValidErrorResponse( response, 400, 'invalid-item-id' );
 			assert.include( response.body.message, itemId );
 		} );
 
@@ -120,7 +120,7 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchItemAliasesRequestBuilder( testItemId, [] )
 				.withJsonBodyParam( 'comment', comment ).assertValidRequest().makeRequest();
 
-			assertValid400Response( response, 'comment-too-long' );
+			assertValidErrorResponse( response, 400, 'comment-too-long' );
 			assert.include( response.body.message, '500' );
 		} );
 
@@ -129,7 +129,7 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchItemAliasesRequestBuilder( testItemId, [] )
 				.withJsonBodyParam( 'tags', [ invalidEditTag ] ).assertValidRequest().makeRequest();
 
-			assertValid400Response( response, 'invalid-edit-tag' );
+			assertValidErrorResponse( response, 400, 'invalid-edit-tag' );
 			assert.include( response.body.message, invalidEditTag );
 		} );
 
@@ -161,6 +161,31 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 			assert.strictEqual( response.body.code, 'invalid-request-body' );
 			assert.strictEqual( response.body.fieldName, 'comment' );
 			assert.strictEqual( response.body.expectedType, 'string' );
+		} );
+	} );
+
+	describe( '404 error response', () => {
+		it( 'item not found', async () => {
+			const itemId = 'Q999999';
+			const response = await newPatchItemAliasesRequestBuilder( itemId, [] )
+				.assertValidRequest().makeRequest();
+
+			assertValidErrorResponse( response, 404, 'item-not-found' );
+			assert.include( response.body.message, itemId );
+		} );
+	} );
+
+	describe( '409 error response', () => {
+		it( 'item is a redirect', async () => {
+			const redirectTarget = testItemId;
+			const redirectSource = await entityHelper.createRedirectForItem( redirectTarget );
+
+			const response = await newPatchItemAliasesRequestBuilder( redirectSource, [] )
+				.assertValidRequest().makeRequest();
+
+			assertValidErrorResponse( response, 409, 'redirected-item' );
+			assert.include( response.body.message, redirectSource );
+			assert.include( response.body.message, redirectTarget );
 		} );
 	} );
 

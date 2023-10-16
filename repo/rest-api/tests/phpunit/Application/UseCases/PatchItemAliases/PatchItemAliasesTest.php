@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchItemAliases;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchItemAliasesRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchItemAliasesValidator;
@@ -41,6 +42,7 @@ class PatchItemAliasesTest extends TestCase {
 	use EditMetadataHelper;
 
 	private PatchItemAliasesValidator $validator;
+	private AssertItemExists $assertItemExists;
 	private ItemAliasesRetriever $aliasesRetriever;
 	private AliasesSerializer $aliasesSerializer;
 	private PatchJson $patcher;
@@ -51,6 +53,7 @@ class PatchItemAliasesTest extends TestCase {
 		parent::setUp();
 
 		$this->validator = new TestValidatingRequestDeserializer();
+		$this->assertItemExists = $this->createStub( AssertItemExists::class );
 		$this->aliasesRetriever = $this->createStub( ItemAliasesRetriever::class );
 		$this->aliasesSerializer = new AliasesSerializer();
 		$this->patcher = new PatchJson( new JsonDiffJsonPatcher() );
@@ -120,9 +123,25 @@ class PatchItemAliasesTest extends TestCase {
 		}
 	}
 
+	public function testGivenItemNotFoundOrRedirect_throws(): void {
+		$itemId = 'Q789';
+		$expectedException = $this->createStub( UseCaseException::class );
+
+		$this->assertItemExists = $this->createStub( AssertItemExists::class );
+		$this->assertItemExists->method( 'execute' )->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase()->execute( $this->newUseCaseRequest( $itemId, [] ) );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
 	private function newUseCase(): PatchItemAliases {
 		return new PatchItemAliases(
 			$this->validator,
+			$this->assertItemExists,
 			$this->aliasesRetriever,
 			$this->aliasesSerializer,
 			$this->patcher,
@@ -130,6 +149,10 @@ class PatchItemAliasesTest extends TestCase {
 			new AliasesDeserializer(),
 			$this->itemUpdater
 		);
+	}
+
+	private function newUseCaseRequest( string $itemId, array $patch ): PatchItemAliasesRequest {
+		return new PatchItemAliasesRequest( $itemId, $patch, [], false, null, null );
 	}
 
 	private function expectEquivalentItemByAliases( string $languageCode, array $aliasInLanguage ): Callback {

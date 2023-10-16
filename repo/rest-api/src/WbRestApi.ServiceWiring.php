@@ -533,6 +533,7 @@ return [
 	'WbRestApi.PatchItemAliases' => function( MediaWikiServices $services ): PatchItemAliases {
 		return new PatchItemAliases(
 			WbRestApi::getValidatingRequestDeserializer( $services ),
+			WbRestApi::getAssertItemExists( $services ),
 			new PrefetchingTermLookupAliasesRetriever(
 				WikibaseRepo::getPrefetchingTermLookup( $services ),
 				WikibaseRepo::getTermsLanguages( $services )

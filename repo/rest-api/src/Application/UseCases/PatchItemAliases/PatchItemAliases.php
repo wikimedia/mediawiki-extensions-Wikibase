@@ -4,6 +4,7 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases;
 
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
@@ -19,6 +20,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 class PatchItemAliases {
 
 	private PatchItemAliasesValidator $useCaseValidator;
+	private AssertItemExists $assertItemExists;
 	private ItemAliasesRetriever $aliasesRetriever;
 	private AliasesSerializer $aliasesSerializer;
 	private PatchJson $patcher;
@@ -28,6 +30,7 @@ class PatchItemAliases {
 
 	public function __construct(
 		PatchItemAliasesValidator $useCaseValidator,
+		AssertItemExists $assertItemExists,
 		ItemAliasesRetriever $aliasesRetriever,
 		AliasesSerializer $aliasesSerializer,
 		PatchJson $patcher,
@@ -36,6 +39,7 @@ class PatchItemAliases {
 		ItemUpdater $itemUpdater
 	) {
 		$this->useCaseValidator = $useCaseValidator;
+		$this->assertItemExists = $assertItemExists;
 		$this->aliasesRetriever = $aliasesRetriever;
 		$this->aliasesSerializer = $aliasesSerializer;
 		$this->patcher = $patcher;
@@ -50,6 +54,8 @@ class PatchItemAliases {
 	 */
 	public function execute( PatchItemAliasesRequest $request ): PatchItemAliasesResponse {
 		$deserializedRequest = $this->useCaseValidator->validateAndDeserialize( $request );
+
+		$this->assertItemExists->execute( $deserializedRequest->getItemId() );
 
 		$aliases = $this->aliasesRetriever->getAliases( $deserializedRequest->getItemId() );
 		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
