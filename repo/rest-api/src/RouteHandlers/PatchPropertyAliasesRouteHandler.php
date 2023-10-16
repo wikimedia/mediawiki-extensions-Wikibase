@@ -54,6 +54,7 @@ class PatchPropertyAliasesRouteHandler extends SimpleHandler {
 		return new self(
 			new PatchPropertyAliases(
 				WbRestApi::getValidatingRequestDeserializer(),
+				WbRestApi::getAssertPropertyExists(),
 				new PrefetchingTermLookupAliasesRetriever(
 					WikibaseRepo::getPrefetchingTermLookup(),
 					WikibaseRepo::getTermsLanguages()

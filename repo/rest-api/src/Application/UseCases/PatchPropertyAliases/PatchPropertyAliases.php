@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases;
 
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\AliasesEditSummary;
@@ -17,6 +18,7 @@ use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
 class PatchPropertyAliases {
 
 	private PatchPropertyAliasesValidator $validator;
+	private AssertPropertyExists $assertPropertyExists;
 	private PropertyAliasesRetriever $aliasesRetriever;
 	private AliasesSerializer $aliasesSerializer;
 	private PatchJson $patchJson;
@@ -26,6 +28,7 @@ class PatchPropertyAliases {
 
 	public function __construct(
 		PatchPropertyAliasesValidator $validator,
+		AssertPropertyExists $assertPropertyExists,
 		PropertyAliasesRetriever $aliasesRetriever,
 		AliasesSerializer $aliasesSerializer,
 		PatchJson $patchJson,
@@ -34,6 +37,7 @@ class PatchPropertyAliases {
 		PropertyUpdater $propertyUpdater
 	) {
 		$this->validator = $validator;
+		$this->assertPropertyExists = $assertPropertyExists;
 		$this->aliasesRetriever = $aliasesRetriever;
 		$this->aliasesSerializer = $aliasesSerializer;
 		$this->patchJson = $patchJson;
@@ -48,6 +52,8 @@ class PatchPropertyAliases {
 	public function execute( PatchPropertyAliasesRequest $request ): PatchPropertyAliasesResponse {
 		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
 		$editMetadata = $deserializedRequest->getEditMetadata();
+
+		$this->assertPropertyExists->execute( $deserializedRequest->getPropertyId() );
 
 		$patchedAliases = $this->patchedAliasesValidator->validateAndDeserialize( $this->patchJson->execute(
 			iterator_to_array( $this->aliasesSerializer->serialize(

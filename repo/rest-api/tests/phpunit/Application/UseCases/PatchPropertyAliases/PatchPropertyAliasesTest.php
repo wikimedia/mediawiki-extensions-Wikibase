@@ -10,6 +10,7 @@ use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchedAliasesValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchPropertyAliases;
@@ -44,6 +45,7 @@ class PatchPropertyAliasesTest extends TestCase {
 	use EditMetadataHelper;
 
 	private PatchPropertyAliasesValidator $validator;
+	private AssertPropertyExists $assertPropertyExists;
 	private PropertyAliasesRetriever $aliasesRetriever;
 	private AliasesSerializer $aliasesSerializer;
 	private PatchJson $patchJson;
@@ -56,6 +58,7 @@ class PatchPropertyAliasesTest extends TestCase {
 		parent::setUp();
 
 		$this->validator = new TestValidatingRequestDeserializer();
+		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
 		$this->aliasesRetriever = $this->createStub( PropertyAliasesRetriever::class );
 		$this->aliasesSerializer = new AliasesSerializer();
 		$this->patchJson = new PatchJson( new JsonDiffJsonPatcher() );
@@ -165,9 +168,25 @@ class PatchPropertyAliasesTest extends TestCase {
 		}
 	}
 
+	public function testGivenPropertyNotFound_throws(): void {
+		$request = new PatchPropertyAliasesRequest( 'P999999', [], [], false, null, null );
+		$expectedException = $this->createStub( UseCaseError::class );
+
+		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
+		$this->assertPropertyExists->method( 'execute' )->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase()->execute( $request );
+			$this->fail( 'expected exception was not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
 	private function newUseCase(): PatchPropertyAliases {
 		return new PatchPropertyAliases(
 			$this->validator,
+			$this->assertPropertyExists,
 			$this->aliasesRetriever,
 			$this->aliasesSerializer,
 			$this->patchJson,

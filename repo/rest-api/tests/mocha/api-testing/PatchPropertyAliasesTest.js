@@ -26,7 +26,7 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 	const languageWithExistingAlias = 'en';
 	const existingEnAlias = `en-alias-${utils.uniq()}`;
 
-	before( async function () {
+	before( async () => {
 		const aliases = {};
 		aliases[ languageWithExistingAlias ] = [ { language: languageWithExistingAlias, value: existingEnAlias } ];
 		testPropertyId = ( await entityHelper.createEntity( 'property', {
@@ -224,6 +224,17 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 			assert.include( response.body.message, language );
 			assert.deepEqual( response.body.context, { language } );
 		} );
+	} );
+
+	it( '404 if the property does not exist', async () => {
+		const propertyId = 'P999999999';
+		const response = await newPatchPropertyAliasesRequestBuilder( propertyId, [] )
+			.assertValidRequest()
+			.makeRequest();
+
+		expect( response ).to.have.status( 404 );
+		assert.strictEqual( response.body.code, 'property-not-found' );
+		assert.include( response.body.message, propertyId );
 	} );
 
 } );
