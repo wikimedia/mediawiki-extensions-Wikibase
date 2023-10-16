@@ -176,6 +176,7 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 				'type' => 'text',
 				'id' => 'wb-redirectentity-fromid',
 				'label-message' => 'wikibase-redirectentity-fromid',
+				'required' => true,
 			],
 			'toid' => [
 				'name' => 'toid',
@@ -183,6 +184,7 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 				'type' => 'text',
 				'id' => 'wb-redirectentity-toid',
 				'label-message' => 'wikibase-redirectentity-toid',
+				'required' => true,
 			],
 		];
 	}
