@@ -69,6 +69,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchedLabelsVali
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchedAliasesValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchPropertyAliases;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyStatement\PatchPropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchedStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatement;
@@ -119,6 +121,7 @@ use Wikibase\Repo\RestApi\Infrastructure\SiteLinksReadModelConverter;
 use Wikibase\Repo\RestApi\Infrastructure\TermsEditSummaryToFormattableSummaryConverter;
 use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryLabelTextValidator;
 use Wikibase\Repo\RestApi\Infrastructure\ValidatingRequestDeserializer as VRD;
+use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoAliasesInLanguageValidator;
 use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoItemLabelValidator;
 use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoPropertyDescriptionValidator;
@@ -268,9 +271,9 @@ return [
 		);
 		return new AddPropertyStatement(
 			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getAssertPropertyExists(),
+			WbRestApi::getAssertPropertyExists( $services ),
 			new EntityRevisionLookupPropertyDataRetriever(
-				WikibaseRepo::getEntityRevisionLookup(),
+				WikibaseRepo::getEntityRevisionLookup( $services ),
 				$statementReadModelConverter
 			),
 			new GuidGenerator(),
@@ -591,6 +594,29 @@ return [
 			WbRestApi::getValidatingRequestDeserializer( $services ),
 			WbRestApi::getAssertItemExists( $services ),
 			WbRestApi::getPatchStatement( $services )
+		);
+	},
+
+	'WbRestApi.PatchPropertyAliases' => function( MediaWikiServices $services ): PatchPropertyAliases {
+		$termLanguages = WikibaseRepo::getTermsLanguages( $services );
+
+		return new PatchPropertyAliases(
+			WbRestApi::getValidatingRequestDeserializer( $services ),
+			WbRestApi::getAssertPropertyExists( $services ),
+			WbRestApi::getAssertUserIsAuthorized( $services ),
+			new PrefetchingTermLookupAliasesRetriever(
+				WikibaseRepo::getPrefetchingTermLookup( $services ),
+				$termLanguages
+			),
+			new AliasesSerializer(),
+			new PatchJson( new JsonDiffJsonPatcher() ),
+			new PatchedAliasesValidator(
+				new AliasesDeserializer(),
+				new WikibaseRepoAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
+				new LanguageCodeValidator( $termLanguages->getLanguages() )
+			),
+			WbRestApi::getPropertyDataRetriever( $services ),
+			WbRestApi::getPropertyUpdater( $services )
 		);
 	},
 

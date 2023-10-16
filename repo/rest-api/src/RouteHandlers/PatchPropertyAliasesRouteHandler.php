@@ -2,27 +2,24 @@
 
 namespace Wikibase\Repo\RestApi\RouteHandlers;
 
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Handler;
+use MediaWiki\Rest\RequestInterface;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
 use MediaWiki\Rest\Validator\BodyValidator;
-use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchedAliasesValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchPropertyAliases;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchPropertyAliasesRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchPropertyAliasesResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
-use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdaterPropertyUpdater;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\PrefetchingTermLookupAliasesRetriever;
-use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
-use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoAliasesInLanguageValidator;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\BotRightCheckMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\ContentTypeCheckMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
 use Wikibase\Repo\RestApi\WbRestApi;
-use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\ParamValidator\ParamValidator;
 
 /**
@@ -37,51 +34,53 @@ class PatchPropertyAliasesRouteHandler extends SimpleHandler {
 	public const COMMENT_BODY_PARAM = 'comment';
 
 	private PatchPropertyAliases $useCase;
+	private MiddlewareHandler $middlewareHandler;
 	private AliasesSerializer $serializer;
 	private ResponseFactory $responseFactory;
 
 	public function __construct(
 		PatchPropertyAliases $useCase,
+		MiddlewareHandler $middlewareHandler,
 		AliasesSerializer $serializer,
 		ResponseFactory $responseFactory
 	) {
 		$this->useCase = $useCase;
+		$this->middlewareHandler = $middlewareHandler;
 		$this->serializer = $serializer;
 		$this->responseFactory = $responseFactory;
 	}
 
 	public static function factory(): Handler {
+		$responseFactory = new ResponseFactory();
+
 		return new self(
-			new PatchPropertyAliases(
-				WbRestApi::getValidatingRequestDeserializer(),
-				WbRestApi::getAssertPropertyExists(),
-				WbRestApi::getAssertUserIsAuthorized(),
-				new PrefetchingTermLookupAliasesRetriever(
-					WikibaseRepo::getPrefetchingTermLookup(),
-					WikibaseRepo::getTermsLanguages()
+			WbRestApi::getPatchPropertyAliases(),
+			new MiddlewareHandler( [
+				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
+				new UserAgentCheckMiddleware(),
+				new AuthenticationMiddleware(),
+				new ContentTypeCheckMiddleware( [
+					ContentTypeCheckMiddleware::TYPE_APPLICATION_JSON,
+					ContentTypeCheckMiddleware::TYPE_JSON_PATCH,
+				] ),
+				new BotRightCheckMiddleware( MediaWikiServices::getInstance()->getPermissionManager(), $responseFactory ),
+				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
+					fn( RequestInterface $request ): string => $request->getPathParam( self::PROPERTY_ID_PATH_PARAM )
 				),
-				new AliasesSerializer(),
-				new PatchJson( new JsonDiffJsonPatcher() ),
-				new PatchedAliasesValidator(
-					new AliasesDeserializer(),
-					new WikibaseRepoAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory() ),
-					new LanguageCodeValidator( WikibaseRepo::getTermsLanguages()->getLanguages() )
-				),
-				WbRestApi::getPropertyDataRetriever(),
-				new EntityUpdaterPropertyUpdater(
-					WbRestApi::getEntityUpdater(),
-					new StatementReadModelConverter(
-						WikibaseRepo::getStatementGuidParser(),
-						WikibaseRepo::getPropertyDataTypeLookup()
-					)
-				)
-			),
+			] ),
 			new AliasesSerializer(),
-			new ResponseFactory()
+			$responseFactory
 		);
 	}
 
-	public function run( string $propertyId ): Response {
+	/**
+	 * @param mixed ...$args
+	 */
+	public function run( ...$args ): Response {
+		return $this->middlewareHandler->run( $this, [ $this, 'runUseCase' ], $args );
+	}
+
+	public function runUseCase( string $propertyId ): Response {
 		$jsonBody = $this->getValidatedBody();
 		try {
 			return $this->newSuccessHttpResponse(
@@ -164,6 +163,15 @@ class PatchPropertyAliasesRouteHandler extends SimpleHandler {
 	private function getUsername(): ?string {
 		$mwUser = $this->getAuthority()->getUser();
 		return $mwUser->isRegistered() ? $mwUser->getName() : null;
+	}
+
+	/**
+	 * Preconditions are checked via {@link PreconditionMiddleware}
+	 *
+	 * @inheritDoc
+	 */
+	public function checkPreconditions() {
+		return null;
 	}
 
 }
