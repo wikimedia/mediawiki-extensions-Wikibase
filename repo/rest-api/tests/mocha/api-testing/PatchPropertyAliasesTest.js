@@ -237,4 +237,46 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 		assert.include( response.body.message, propertyId );
 	} );
 
+	describe( '409', () => {
+		it( '"path" field target does not exist', async () => {
+			const operation = { op: 'remove', path: '/path/does/not/exist' };
+
+			const response = await newPatchPropertyAliasesRequestBuilder( testPropertyId, [ operation ] )
+				.assertValidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 409 );
+			assert.strictEqual( response.body.code, 'patch-target-not-found' );
+			assert.include( response.body.message, operation.path );
+			assert.deepEqual( response.body.context, { field: 'path', operation } );
+		} );
+
+		it( '"from" field target does not exist', async () => {
+			const operation = { op: 'copy', from: '/path/does/not/exist', path: '/en' };
+
+			const response = await newPatchPropertyAliasesRequestBuilder( testPropertyId, [ operation ] )
+				.assertValidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 409 );
+			assert.strictEqual( response.body.code, 'patch-target-not-found' );
+			assert.include( response.body.message, operation.from );
+			assert.deepEqual( response.body.context, { field: 'from', operation } );
+		} );
+
+		it( 'patch test condition failed', async () => {
+			const operation = { op: 'test', path: '/en/0', value: 'potato' };
+			const response = await newPatchPropertyAliasesRequestBuilder( testPropertyId, [ operation ] )
+				.assertValidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 409 );
+			assert.strictEqual( response.body.code, 'patch-test-failed' );
+			assert.deepEqual( response.body.context, { 'actual-value': existingEnAlias, operation } );
+			assert.include( response.body.message, operation.path );
+			assert.include( response.body.message, JSON.stringify( operation.value ) );
+			assert.include( response.body.message, existingEnAlias );
+		} );
+	} );
+
 } );

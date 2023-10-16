@@ -60,6 +60,7 @@ class PatchPropertyAliasesTest extends TestCase {
 		$this->validator = new TestValidatingRequestDeserializer();
 		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
 		$this->aliasesRetriever = $this->createStub( PropertyAliasesRetriever::class );
+		$this->aliasesRetriever->method( 'getAliases' )->willReturn( new Aliases() );
 		$this->aliasesSerializer = new AliasesSerializer();
 		$this->patchJson = new PatchJson( new JsonDiffJsonPatcher() );
 		$this->patchedAliasesValidator = $this->createStub( PatchedAliasesValidator::class );
@@ -153,8 +154,6 @@ class PatchPropertyAliasesTest extends TestCase {
 			null,
 			null
 		);
-		$this->aliasesRetriever = $this->createStub( PropertyAliasesRetriever::class );
-		$this->aliasesRetriever->method( 'getAliases' )->willReturn( new Aliases() );
 
 		$expectedException = $this->createStub( UseCaseError::class );
 		$this->patchedAliasesValidator = $this->createStub( PatchedAliasesValidator::class );
@@ -174,6 +173,21 @@ class PatchPropertyAliasesTest extends TestCase {
 
 		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
 		$this->assertPropertyExists->method( 'execute' )->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase()->execute( $request );
+			$this->fail( 'expected exception was not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
+	public function testGivenErrorWhilePatch_throws(): void {
+		$request = new PatchPropertyAliasesRequest( 'P123', [], [], false, null, null );
+		$expectedException = $this->createStub( UseCaseError::class );
+
+		$this->patchJson = $this->createStub( PatchJson::class );
+		$this->patchJson->method( 'execute' )->willThrowException( $expectedException );
 
 		try {
 			$this->newUseCase()->execute( $request );
