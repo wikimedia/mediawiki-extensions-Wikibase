@@ -11,6 +11,7 @@ use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchedAliasesValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchPropertyAliases;
@@ -46,6 +47,7 @@ class PatchPropertyAliasesTest extends TestCase {
 
 	private PatchPropertyAliasesValidator $validator;
 	private AssertPropertyExists $assertPropertyExists;
+	private AssertUserIsAuthorized $assertUserIsAuthorized;
 	private PropertyAliasesRetriever $aliasesRetriever;
 	private AliasesSerializer $aliasesSerializer;
 	private PatchJson $patchJson;
@@ -59,6 +61,7 @@ class PatchPropertyAliasesTest extends TestCase {
 
 		$this->validator = new TestValidatingRequestDeserializer();
 		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
+		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
 		$this->aliasesRetriever = $this->createStub( PropertyAliasesRetriever::class );
 		$this->aliasesRetriever->method( 'getAliases' )->willReturn( new Aliases() );
 		$this->aliasesSerializer = new AliasesSerializer();
@@ -197,10 +200,31 @@ class PatchPropertyAliasesTest extends TestCase {
 		}
 	}
 
+	public function testGivenUnauthorizedRequest_throws(): void {
+		$user = 'bad-user';
+		$propertyId = new NumericPropertyId( 'P123' );
+		$request = new PatchPropertyAliasesRequest( "$propertyId", [], [], false, null, $user );
+		$expectedException = $this->createStub( UseCaseError::class );
+
+		$this->assertUserIsAuthorized = $this->createMock( AssertUserIsAuthorized::class );
+		$this->assertUserIsAuthorized->expects( $this->once() )
+			->method( 'execute' )
+			->with( $propertyId, $user )
+			->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase()->execute( $request );
+			$this->fail( 'expected exception was not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
 	private function newUseCase(): PatchPropertyAliases {
 		return new PatchPropertyAliases(
 			$this->validator,
 			$this->assertPropertyExists,
+			$this->assertUserIsAuthorized,
 			$this->aliasesRetriever,
 			$this->aliasesSerializer,
 			$this->patchJson,
