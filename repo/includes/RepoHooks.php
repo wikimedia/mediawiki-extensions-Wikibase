@@ -23,7 +23,6 @@ use MediaWiki\Title\Title;
 use MediaWiki\User\UserIdentity;
 use OutputPage;
 use Parser;
-use ParserOptions;
 use ParserOutput;
 use RuntimeException;
 use Skin;
@@ -52,7 +51,6 @@ use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
 use Wikibase\Repo\Hooks\SidebarBeforeOutputHookHandler;
 use Wikibase\Repo\ParserOutput\PlaceholderEmittingEntityTermsView;
 use Wikibase\Repo\ParserOutput\TermboxFlag;
-use Wikibase\Repo\ParserOutput\TermboxVersionParserCacheValueRejector;
 use Wikibase\Repo\ParserOutput\TermboxView;
 use Wikibase\Repo\Store\RateLimitingIdGenerator;
 use Wikibase\Repo\Store\Sql\SqlSubscriptionLookup;
@@ -1061,11 +1059,6 @@ final class RepoHooks {
 		$defaults['wbMobile'] = null;
 		$inCacheKey['wbMobile'] = true;
 		$lazyOptions['wbMobile'] = fn () => WikibaseRepo::getMobileSite();
-	}
-
-	public static function onRejectParserCacheValue( ParserOutput $parserValue, WikiPage $wikiPage, ParserOptions $parserOpts ) {
-		$rejector = new TermboxVersionParserCacheValueRejector( TermboxFlag::getInstance() );
-		return $rejector->keepCachedValue( $parserValue, $parserOpts );
 	}
 
 	public static function onApiQueryModuleManager( ApiModuleManager $moduleManager ) {

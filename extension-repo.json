@@ -960,7 +960,6 @@
 		"ParserFirstCallInit": "\\Wikibase\\Repo\\RepoHooks::onParserFirstCallInit",
 		"ParserOptionsRegister": "\\Wikibase\\Repo\\RepoHooks::onParserOptionsRegister",
 		"RecentChange_save": "RecentChangeSave",
-		"RejectParserCacheValue": "\\Wikibase\\Repo\\RepoHooks::onRejectParserCacheValue",
 		"ResourceLoaderRegisterModules": [
 			"\\Wikibase\\Repo\\RepoHooks::onResourceLoaderRegisterModules",
 			"LibHooks",
