@@ -187,6 +187,37 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 			assert.include( response.body.message, redirectSource );
 			assert.include( response.body.message, redirectTarget );
 		} );
+
+		it( '"path" field target does not exist', async () => {
+			const operation = { op: 'remove', path: '/path/does/not/exist' };
+
+			const response = await newPatchItemAliasesRequestBuilder( testItemId, [ operation ] )
+				.assertValidRequest().makeRequest();
+
+			assertValidErrorResponse( response, 409, 'patch-target-not-found', { field: 'path', operation } );
+			assert.include( response.body.message, operation.path );
+		} );
+
+		it( '"from" field target does not exist', async () => {
+			const operation = { op: 'copy', from: '/path/does/not/exist', path: '/en' };
+
+			const response = await newPatchItemAliasesRequestBuilder( testItemId, [ operation ] )
+				.assertValidRequest().makeRequest();
+
+			assertValidErrorResponse( response, 409, 'patch-target-not-found', { field: 'from', operation } );
+			assert.include( response.body.message, operation.from );
+		} );
+
+		it( 'patch test condition failed', async () => {
+			const operation = { op: 'test', path: '/en/0', value: 'potato' };
+			const response = await newPatchItemAliasesRequestBuilder( testItemId, [ operation ] )
+				.assertValidRequest().makeRequest();
+
+			assertValidErrorResponse( response, 409, 'patch-test-failed', { 'actual-value': testAlias, operation } );
+			assert.include( response.body.message, operation.path );
+			assert.include( response.body.message, JSON.stringify( operation.value ) );
+			assert.include( response.body.message, testAlias );
+		} );
 	} );
 
 	describe( '422 Unprocessable Content', () => {

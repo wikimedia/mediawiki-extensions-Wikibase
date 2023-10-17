@@ -49,7 +49,7 @@ class PatchItemAliasesTest extends TestCase {
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
 	private ItemAliasesRetriever $aliasesRetriever;
 	private AliasesSerializer $aliasesSerializer;
-	private PatchJson $patcher;
+	private PatchJson $patchJson;
 	private PatchedAliasesValidator $patchedAliasesValidator;
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
@@ -63,7 +63,7 @@ class PatchItemAliasesTest extends TestCase {
 		$this->aliasesRetriever = $this->createStub( ItemAliasesRetriever::class );
 		$this->aliasesRetriever->method( 'getAliases' )->willReturn( new Aliases() );
 		$this->aliasesSerializer = new AliasesSerializer();
-		$this->patcher = new PatchJson( new JsonDiffJsonPatcher() );
+		$this->patchJson = new PatchJson( new JsonDiffJsonPatcher() );
 		$this->patchedAliasesValidator = $this->createStub( PatchedAliasesValidator::class );
 		$this->patchedAliasesValidator->method( 'validateAndDeserialize' )
 			->willReturnCallback( [ new AliasesDeserializer(), 'deserialize' ] );
@@ -148,6 +148,19 @@ class PatchItemAliasesTest extends TestCase {
 		}
 	}
 
+	public function testGivenErrorWhilePatch_throws(): void {
+		$expectedException = $this->createStub( UseCaseError::class );
+		$this->patchJson = $this->createStub( PatchJson::class );
+		$this->patchJson->method( 'execute' )->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase()->execute( $this->newUseCaseRequest( 'Q123', [] ) );
+			$this->fail( 'expected exception was not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
 	public function testGivenUnauthorizedRequest_throws(): void {
 		$user = 'bad-user';
 		$itemId = new ItemId( 'Q123' );
@@ -192,7 +205,7 @@ class PatchItemAliasesTest extends TestCase {
 			$this->assertUserIsAuthorized,
 			$this->aliasesRetriever,
 			$this->aliasesSerializer,
-			$this->patcher,
+			$this->patchJson,
 			$this->patchedAliasesValidator,
 			$this->itemRetriever,
 			$this->itemUpdater
