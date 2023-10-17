@@ -228,8 +228,9 @@
 	 * @param {jQuery} $entityview
 	 * @param {jQuery} $origin
 	 * @param {string} gravity
+	 * @param {string} viewName
 	 */
-	function showCopyrightTooltip( $entityview, $origin, gravity ) {
+	function showCopyrightTooltip( $entityview, $origin, gravity, viewName ) {
 		if ( !mw.config.exists( 'wbCopyright' ) ) {
 			return;
 		}
@@ -295,10 +296,12 @@
 				$anchor: edittoolbar.getContainer()
 			} );
 
+		var eventNamespace = '.wbCopyrightTooltip' + Math.random().toString( 36 ).slice( 2 );
+
 		$hideMessage.on( 'click', function ( event ) {
 			event.preventDefault();
 			$messageAnchor.data( 'wbtooltip' ).degrade( true );
-			$( window ).off( '.wbCopyrightTooltip' );
+			$( window ).off( eventNamespace );
 			if ( mw.user.isAnon() ) {
 				mw.cookie.set( cookieKey, copyRightVersion, { expires: 3 * 365 * 24 * 60 * 60, path: '/' } );
 			} else {
@@ -309,32 +312,43 @@
 
 		$messageAnchor.data( 'wbtooltip' ).show();
 
-		// destroy tooltip after edit mode gets closed again:
-		$entityview
-		.one( 'entityviewafterstopediting.wbCopyRightTooltip', function ( event, origin ) {
-			var tooltip = $messageAnchor.data( 'wbtooltip' );
-			if ( tooltip ) {
-				tooltip.degrade( true );
+		// Record the initial edit toolbar offset.
+		var initialToolbarOffset = edittoolbar.getContainer().offset().top;
+		// Destroy tooltip after edit mode gets closed again or if the position of the toolbar changed.
+		$entityview.on(
+			`${viewName}afterstopediting${eventNamespace} ${viewName}afterstartediting${eventNamespace}`,
+			function ( event, origin ) {
+				var tooltip = $messageAnchor.data( 'wbtooltip' );
+				// Don't close this copyright notice if we're still in edit mode (another widget left edit mode)
+				// and the position of the toolbar is unchanged (we don't bother re-positioning the tooltip).
+				var isInEditMode = event.type === viewName + 'afterstartediting' || ( editableTemplatedWidget && editableTemplatedWidget.isInEditMode() );
+				if ( edittoolbar.getContainer().offset().top === initialToolbarOffset && isInEditMode ) {
+					return;
+				}
+				if ( tooltip ) {
+					tooltip.degrade( true );
+				}
+				$( window ).off( eventNamespace );
 			}
-			$( window ).off( '.wbCopyrightTooltip' );
-		} );
+		);
 
 		$( window ).one(
-			'scroll.wbCopyrightTooltip touchmove.wbCopyrightTooltip resize.wbCopyrightTooltip',
+			`scroll${eventNamespace} touchmove${eventNamespace} resize${eventNamespace}`,
 			function () {
 				var tooltip = $messageAnchor.data( 'wbtooltip' );
 				if ( tooltip ) {
 					$messageAnchor.data( 'wbtooltip' ).hide();
 				}
-				$entityview.off( '.wbCopyRightTooltip' );
+				$entityview.off( eventNamespace );
 			}
 		);
 	}
 
 	/**
 	 * @param {jQuery} $entityview
+	 * @param {string} viewName
 	 */
-	function attachCopyrightTooltip( $entityview ) {
+	function attachCopyrightTooltip( $entityview, viewName ) {
 		$entityview.on(
 			'entitytermsafterstartediting sitelinkgroupviewafterstartediting statementviewafterstartediting',
 			function ( event ) {
@@ -347,7 +361,7 @@
 					gravity = 'w';
 				}
 
-				showCopyrightTooltip( $entityview, $target, gravity );
+				showCopyrightTooltip( $entityview, $target, gravity, viewName );
 			}
 		);
 	}
@@ -368,6 +382,7 @@
 				if ( canEdit ) {
 					attachAnonymousEditWarningTrigger( $entityview, viewName, entity.getType() );
 					attachWatchLinkUpdater( $entityview, viewName );
+					attachCopyrightTooltip( $entityview, viewName );
 				}
 
 				mw.hook( 'wikibase.entityPage.entityView.rendered' ).fire();
@@ -400,8 +415,6 @@
 					.find( '.wikibase-title-label' )
 					.text( isEmpty ? mw.msg( 'wikibase-label-empty' ) : label.getText() );
 			} );
-
-			attachCopyrightTooltip( $entityview );
 		}
 	} );
 
