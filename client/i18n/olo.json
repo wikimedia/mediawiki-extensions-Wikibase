@@ -3,13 +3,14 @@
 		"authors": [
 			"Denö",
 			"Ilja.mos",
-			"Mashoi7"
+			"Mashoi7",
+			"Ruppijeva"
 		]
 	},
 	"tooltip-t-wikibase": "Linku yhtistettyh data-arhiivutuotteheh",
 	"wikibase-comment-update": "{{WBREPONAME}} on muutettu",
 	"wikibase-dataitem": "{{WBREPONAME}} elementu",
-	"wikibase-editlinks": "Kohenda linkit",
+	"wikibase-editlinks": "Kohenda linkat",
 	"wikibase-editlinkstitle": "Kohenda kielienvälizet linkit",
 	"wikibase-linkitem-input-site": "Kieli:",
 	"wikibase-linkitem-input-page": "Sivu:",
