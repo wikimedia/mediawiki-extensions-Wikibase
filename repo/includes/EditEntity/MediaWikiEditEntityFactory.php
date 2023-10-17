@@ -5,6 +5,7 @@ namespace Wikibase\Repo\EditEntity;
 use IContextSource;
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use MediaWiki\User\Options\UserOptionsLookup;
+use MediaWiki\User\TempUser\TempUserCreator;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
@@ -65,6 +66,11 @@ class MediaWikiEditEntityFactory {
 	private $userOptionsLookup;
 
 	/**
+	 * @var TempUserCreator
+	 */
+	private $tempUserCreator;
+
+	/**
 	 * @var int
 	 */
 	private $maxSerializedEntitySize;
@@ -82,6 +88,7 @@ class MediaWikiEditEntityFactory {
 		EditFilterHookRunner $editFilterHookRunner,
 		StatsdDataFactoryInterface $statsdDataFactory,
 		UserOptionsLookup $userOptionsLookup,
+		TempUserCreator $tempUserCreator,
 		$maxSerializedEntitySize,
 		array $localEntityTypes
 	) {
@@ -94,6 +101,7 @@ class MediaWikiEditEntityFactory {
 		$this->editFilterHookRunner = $editFilterHookRunner;
 		$this->stats = $statsdDataFactory;
 		$this->userOptionsLookup = $userOptionsLookup;
+		$this->tempUserCreator = $tempUserCreator;
 		$this->maxSerializedEntitySize = $maxSerializedEntitySize;
 		$this->localEntityTypes = $localEntityTypes;
 	}
@@ -136,6 +144,7 @@ class MediaWikiEditEntityFactory {
 					$statsTimingPrefix . '.EditFilterHookRunner'
 				),
 				$this->userOptionsLookup,
+				$this->tempUserCreator,
 				$this->maxSerializedEntitySize,
 				$this->localEntityTypes,
 				$baseRevId,

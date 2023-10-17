@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Api;
 use ApiResult;
 use MediaWiki\Site\SiteLookup;
 use MediaWiki\Status\Status;
+use MediaWiki\User\UserIdentity;
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -1092,6 +1093,21 @@ class ResultBuilder {
 				// like core's ApiEditPage
 				$this->setValue( $path, 'nochange', true );
 			}
+		}
+	}
+
+	/**
+	 * Add the temp username if the Status object contains a temp user
+	 *
+	 * @param Status $status
+	 * @return void
+	 */
+	public function addTempUser( Status $status ) {
+		/** @var ?UserIdentity $savedTempUser */
+		$savedTempUser = $status->getValue()['savedTempUser'];
+		'@phan-var ?UserIdentity $savedTempUser';
+		if ( $savedTempUser ) {
+			$this->setValue( null, 'tempusercreated', $savedTempUser->getName() );
 		}
 	}
 

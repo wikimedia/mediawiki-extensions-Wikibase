@@ -1362,4 +1362,25 @@ class EditEntityTest extends WikibaseApiTestCase {
 			'Failed request should not have consumed item ID' );
 	}
 
+	public function testTempUserCreated(): void {
+		$autoCreateTempUser = $this->getConfVar( 'AutoCreateTempUser' );
+		$autoCreateTempUser['enabled'] = true;
+		$this->overrideConfigValue( 'AutoCreateTempUser', $autoCreateTempUser );
+		$this->setGroupPermissions( '*', 'createaccount', true );
+
+		[ $result ] = $this->doApiRequestWithToken( [
+			'action' => 'wbeditentity',
+			'new' => 'item',
+			'data' => json_encode( [
+				'labels' => [ 'en' => [ 'value' => 'temp user test item', 'language' => 'en' ] ],
+			] ),
+		], null, $this->getServiceContainer()->getUserFactory()->newAnonymous() );
+		$user = $this->getServiceContainer()->getRevisionLookup()
+			->getRevisionById( $result['entity']['lastrevid'] )
+			->getUser();
+		$this->assertTrue( $user->isRegistered() );
+		$userIdentityUtils = $this->getServiceContainer()->getUserIdentityUtils();
+		$this->assertTrue( $userIdentityUtils->isTemp( $user ) );
+	}
+
 }

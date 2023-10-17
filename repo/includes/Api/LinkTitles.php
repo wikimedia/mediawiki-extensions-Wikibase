@@ -252,6 +252,7 @@ class LinkTitles extends ApiBase {
 		}
 
 		$this->resultBuilder->markSuccess( $status->isOK() );
+		$this->resultBuilder->addTempUser( $status );
 	}
 
 	/**

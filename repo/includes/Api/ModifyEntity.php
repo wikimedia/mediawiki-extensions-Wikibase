@@ -418,6 +418,7 @@ abstract class ModifyEntity extends ApiBase {
 	private function addToOutput( EntityDocument $entity, Status $status, int $oldRevId ): void {
 		$this->getResultBuilder()->addBasicEntityInformation( $entity->getId(), 'entity' );
 		$this->getResultBuilder()->addRevisionIdFromStatusToResult( $status, 'entity', $oldRevId );
+		$this->getResultBuilder()->addTempUser( $status );
 
 		$params = $this->extractRequestParams();
 

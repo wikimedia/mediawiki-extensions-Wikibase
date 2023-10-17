@@ -75,6 +75,10 @@ class EditEntityFactoryTest extends ServiceWiringTestCase {
 			->expects( $this->once() )
 			->method( 'getUserOptionsLookup' );
 
+		$this->serviceContainer
+			->expects( $this->once() )
+			->method( 'getTempUserCreator' );
+
 		$this->mockService( 'WikibaseRepo.LocalEntityTypes',
 			[ 'item', 'property' ] );
 

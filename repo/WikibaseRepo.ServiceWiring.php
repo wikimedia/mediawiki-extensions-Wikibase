@@ -619,6 +619,7 @@ return [
 			WikibaseRepo::getEditFilterHookRunner( $services ),
 			$services->getStatsdDataFactory(),
 			$services->getUserOptionsLookup(),
+			$services->getTempUserCreator(),
 			WikibaseRepo::getSettings( $services )->getSetting( 'maxSerializedEntitySize' ),
 			WikibaseRepo::getLocalEntityTypes( $services )
 		);
