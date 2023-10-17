@@ -115,9 +115,7 @@ describe( 'Auth', () => {
 		editRequestsWithInputs.forEach( ( { newRequestBuilder } ) => {
 			it( `Unauthorized bot edit - ${newRequestBuilder().getRouteDescription()}`, async () => {
 				assertPermissionDenied(
-					await newRequestBuilder()
-						.withJsonBodyParam( 'bot', true )
-						.makeRequest()
+					await newRequestBuilder().withJsonBodyParam( 'bot', true ).makeRequest()
 				);
 			} );
 		} );
@@ -132,7 +130,10 @@ describe( 'Auth', () => {
 					await changeEntityProtectionStatus( requestInputs.mainTestSubject, 'all' ); // unprotect
 				} );
 
-				it( `Permission denied - ${newRequestBuilder().getRouteDescription()}`, async () => {
+				it( `Permission denied - ${newRequestBuilder().getRouteDescription()}`, async function () {
+					// this test often hits a race condition where this request is made before the entity is protected
+					this.retries( 3 );
+
 					assertPermissionDenied( await newRequestBuilder().makeRequest() );
 				} );
 			} );
