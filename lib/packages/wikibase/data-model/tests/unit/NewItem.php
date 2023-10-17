@@ -31,7 +31,7 @@ class NewItem {
 	private $descriptions = [];
 
 	/**
-	 * @var array[] Indexed by language on the first level
+	 * @var array<string,string[]> Indexed by language code on the first level
 	 */
 	private $aliases = [];
 
@@ -86,7 +86,8 @@ class NewItem {
 	}
 
 	/**
-	 * @see andId
+	 * @param ItemId|string $itemId
+	 * @return self
 	 */
 	public static function withId( $itemId ) {
 		return ( new self() )->andId( $itemId );
@@ -94,7 +95,6 @@ class NewItem {
 
 	/**
 	 * @param ItemId|string $itemId
-	 *
 	 * @return self
 	 */
 	public function andId( $itemId ) {
@@ -107,7 +107,9 @@ class NewItem {
 	}
 
 	/**
-	 * @see andLabel
+	 * @param string $languageCode
+	 * @param string $label
+	 * @return self
 	 */
 	public static function withLabel( $languageCode, $label ) {
 		return ( new self() )->andLabel( $languageCode, $label );
@@ -116,7 +118,6 @@ class NewItem {
 	/**
 	 * @param string $languageCode
 	 * @param string $label
-	 *
 	 * @return self
 	 */
 	public function andLabel( $languageCode, $label ) {
@@ -126,7 +127,9 @@ class NewItem {
 	}
 
 	/**
-	 * @see andDescription
+	 * @param string $languageCode
+	 * @param string $description
+	 * @return self
 	 */
 	public static function withDescription( $languageCode, $description ) {
 		return ( new self() )->andDescription( $languageCode, $description );
@@ -135,7 +138,6 @@ class NewItem {
 	/**
 	 * @param string $languageCode
 	 * @param string $description
-	 *
 	 * @return self
 	 */
 	public function andDescription( $languageCode, $description ) {
@@ -145,7 +147,9 @@ class NewItem {
 	}
 
 	/**
-	 * @see andAliases
+	 * @param string $languageCode
+	 * @param string[]|string $aliases
+	 * @return self
 	 */
 	public static function withAliases( $languageCode, $aliases ) {
 		return ( new self() )->andAliases( $languageCode, $aliases );
@@ -154,7 +158,6 @@ class NewItem {
 	/**
 	 * @param string $languageCode
 	 * @param string[]|string $aliases
-	 *
 	 * @return self
 	 */
 	public function andAliases( $languageCode, $aliases ) {
@@ -164,7 +167,11 @@ class NewItem {
 	}
 
 	/**
-	 * @see andSiteLink
+	 * @param string $siteId
+	 * @param string $pageName
+	 * @param ItemId[]|string[]|ItemId|string|null $badges Zero or more item ID references as either
+	 *  strings or ItemId objects. Can be an array or a single value.
+	 * @return self
 	 */
 	public static function withSiteLink( $siteId, $pageName, $badges = null ) {
 		return ( new self() )->andSiteLink( $siteId, $pageName, $badges );
@@ -175,7 +182,6 @@ class NewItem {
 	 * @param string $pageName
 	 * @param ItemId[]|string[]|ItemId|string|null $badges Zero or more item ID references as either
 	 *  strings or ItemId objects. Can be an array or a single value.
-	 *
 	 * @return self
 	 */
 	public function andSiteLink( $siteId, $pageName, $badges = null ) {
@@ -190,7 +196,8 @@ class NewItem {
 	}
 
 	/**
-	 * @see andStatement
+	 * @param NewStatement|Statement|Snak $statement
+	 * @return self
 	 */
 	public static function withStatement( $statement ) {
 		return ( new self() )->andStatement( $statement );
@@ -198,7 +205,6 @@ class NewItem {
 
 	/**
 	 * @param NewStatement|Statement|Snak $statement
-	 *
 	 * @return self
 	 */
 	public function andStatement( $statement ) {

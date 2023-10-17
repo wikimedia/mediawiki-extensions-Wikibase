@@ -162,6 +162,8 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * Gets a "lagged" database connection: We always leave out the first row on select.
+	 *
+	 * @return IDatabase
 	 */
 	private function getLaggedDatabase( IDatabase $realDB, $selectCount ) {
 		$db = $this->getMockBuilder( IDatabase::class )

@@ -94,14 +94,7 @@ class ChangeOpLabel extends ChangeOpBase {
 		return new ChangeOpLabelResult( $entityId, $this->languageCode, $oldLabelText, $newLabelText, $isEntityChanged );
 	}
 
-	/**
-	 * @see ChangeOp::apply()
-	 *
-	 * @param EntityDocument $entity
-	 * @param Summary|null $summary
-	 *
-	 * @throws InvalidArgumentException
-	 */
+	/** @inheritDoc */
 	public function apply( EntityDocument $entity, Summary $summary = null ) {
 		if ( !( $entity instanceof LabelsProvider ) ) {
 			throw new InvalidArgumentException( '$entity must be a LabelsProvider' );

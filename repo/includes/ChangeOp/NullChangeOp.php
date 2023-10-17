@@ -22,12 +22,7 @@ class NullChangeOp implements ChangeOp {
 		return Result::newSuccess();
 	}
 
-	/**
-	 * @see ChangeOp::apply
-	 *
-	 * @param EntityDocument $entity
-	 * @param Summary|null $summary Unused
-	 */
+	/** @inheritDoc */
 	public function apply( EntityDocument $entity, Summary $summary = null ) {
 		// no op
 

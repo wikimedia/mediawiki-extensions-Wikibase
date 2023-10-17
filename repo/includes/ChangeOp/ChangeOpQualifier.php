@@ -66,15 +66,10 @@ class ChangeOpQualifier extends ChangeOpBase {
 	}
 
 	/**
-	 * @see ChangeOp::apply()
 	 * - a new qualifier gets added when $snakHash is empty and $snak is set
 	 * - the qualifier gets set to $snak when $snakHash and $snak are set
 	 *
-	 * @param EntityDocument $entity
-	 * @param Summary|null $summary
-	 *
-	 * @throws InvalidArgumentException
-	 * @throws ChangeOpException
+	 * @inheritDoc
 	 */
 	public function apply( EntityDocument $entity, Summary $summary = null ) {
 		if ( !( $entity instanceof StatementListProvider ) ) {

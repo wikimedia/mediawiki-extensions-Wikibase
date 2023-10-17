@@ -5,7 +5,6 @@
 		<exclude name="MediaWiki.Commenting.FunctionComment.MissingDocumentationProtected" />
 		<exclude name="MediaWiki.Commenting.FunctionComment.MissingDocumentationPublic" />
 		<exclude name="MediaWiki.Commenting.FunctionComment.MissingParamTag" />
-		<exclude name="MediaWiki.Commenting.FunctionComment.MissingReturn" />
 		<!-- Note: NotPunctuationReturnType can be enabled when the sniff accepts array shapes -->
 		<exclude name="MediaWiki.Commenting.FunctionComment.NotPunctuationReturnType" />
 		<!-- Note: ParamNameNoMatch is probably a great candidate for the next round of fixes -->

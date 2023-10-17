@@ -137,6 +137,7 @@ class ChangeOpsMerge {
 
 	/**
 	 * @throws ChangeOpException
+	 * @return ChangeOpResult
 	 */
 	public function apply() {
 		// NOTE: we don't want to validate the ChangeOps individually, since they represent

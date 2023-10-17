@@ -4,6 +4,7 @@ use MediaWiki\MediaWikiServices;
 use Wikibase\Repo\WikibaseRepo;
 
 // phpcs:disable Squiz.Functions.GlobalFunction.Found
+// phpcs:disable MediaWiki.Commenting.FunctionComment.MissingReturn
 // phpcs:disable MediaWiki.NamingConventions.PrefixedGlobalFunctions.wfPrefix
 
 if ( !function_exists( 'mws' ) ) {
