@@ -134,7 +134,7 @@ class EntityChangeFactory {
 	/**
 	 * Constructs an EntityChange from the given old and new Entity.
 	 *
-	 * @param string      $action The action name
+	 * @param string $action The action name
 	 * @param EntityDocument|null $oldEntity
 	 * @param EntityDocument|null $newEntity
 	 *

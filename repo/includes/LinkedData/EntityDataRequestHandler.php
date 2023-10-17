@@ -334,7 +334,7 @@ class EntityDataRequestHandler {
 	 * @param WebRequest $request
 	 * @param OutputPage $output
 	 * @param EntityId $id The ID of the entity to show
-	 * @param int      $revision The desired revision
+	 * @param int $revision The desired revision
 	 *
 	 * @throws HttpError
 	 */

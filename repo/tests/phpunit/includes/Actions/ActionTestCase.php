@@ -149,7 +149,7 @@ class ActionTestCase extends MediaWikiIntegrationTestCase {
 	 * Creates an action and supplies it with a fake web request.
 	 *
 	 * @param string $actionName The name of the action to call
-	 * @param WikiPage  $page the wiki page to call the action on
+	 * @param WikiPage $page the wiki page to call the action on
 	 * @param array|null $params request parameters
 	 * @param bool $wasPosted
 	 *

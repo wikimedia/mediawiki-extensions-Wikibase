@@ -343,7 +343,7 @@ QUERY;
 	/**
 	 * Get vocabulary instance
 	 *
-	 * @param string   $baseUri
+	 * @param string $baseUri
 	 * @param string[] $typeUris
 	 *
 	 * @return RdfVocabulary

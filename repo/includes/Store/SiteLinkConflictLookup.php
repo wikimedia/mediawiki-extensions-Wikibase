@@ -21,7 +21,7 @@ interface SiteLinkConflictLookup {
 	 * - string siteId
 	 * - string sitePage
 	 *
-	 * @param Item          $item
+	 * @param Item $item
 	 * @param int|null $db The database flag to use (optional).
 	 *        Use one of DB_PRIMARY or DB_REPLICA. DB_PRIMARY can be used when you need the most recent data.
 	 *
