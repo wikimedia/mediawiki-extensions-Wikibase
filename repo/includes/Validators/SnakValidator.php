@@ -164,7 +164,7 @@ class SnakValidator implements ValueValidator {
 	 * Validates the given data value using the given data type.
 	 *
 	 * @param DataValue $dataValue
-	 * @param string    $dataTypeId
+	 * @param string $dataTypeId
 	 *
 	 * @return Result
 	 */

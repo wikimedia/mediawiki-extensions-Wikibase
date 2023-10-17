@@ -15,9 +15,9 @@ use Wikibase\DataModel\Entity\EntityId;
 interface PropertyLabelResolver {
 
 	/**
-	 * @param string[] $labels the labels
-	 * @param string   $recache Flag, set to 'recache' to discard cached data and fetch fresh data
-	 *                 from the database.
+	 * @param string[] $labels
+	 * @param string $recache Flag, set to 'recache' to discard cached data and fetch fresh data
+	 *  from the database
 	 *
 	 * @return EntityId[] a map of strings from $labels to the corresponding entity ID.
 	 */

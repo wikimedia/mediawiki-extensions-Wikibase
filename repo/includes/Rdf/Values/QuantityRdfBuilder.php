@@ -29,10 +29,6 @@ class QuantityRdfBuilder implements ValueSnakRdfBuilder {
 	 */
 	private $unitConverter;
 
-	/**
-	 * @param ComplexValueRdfHelper|null $complexValueHelper
-	 * @param UnitConverter|null         $unitConverter
-	 */
 	public function __construct( ComplexValueRdfHelper $complexValueHelper = null, UnitConverter $unitConverter = null ) {
 		$this->complexValueHelper = $complexValueHelper;
 		$this->unitConverter = $unitConverter;

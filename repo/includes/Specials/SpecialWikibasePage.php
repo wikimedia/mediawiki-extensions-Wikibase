@@ -27,7 +27,7 @@ abstract class SpecialWikibasePage extends SpecialPage {
 	/**
 	 * @param string $name
 	 * @param string $restriction
-	 * @param bool   $listed
+	 * @param bool $listed
 	 */
 	public function __construct( $name = '', $restriction = '', $listed = true ) {
 		parent::__construct( $name, $restriction, $listed );

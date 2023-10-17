@@ -698,7 +698,7 @@ final class RepoHooks {
 	 * to provide a custom text representation of Entities for filtering.
 	 *
 	 * @param Content $content
-	 * @param string  &$text The resulting text
+	 * @param string &$text The resulting text
 	 *
 	 * @return bool
 	 */

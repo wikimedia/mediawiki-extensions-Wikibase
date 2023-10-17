@@ -34,7 +34,7 @@ class MockPropertyLabelResolver implements PropertyLabelResolver {
 
 	/**
 	 * @param string[] $labels
-	 * @param string   $recache ignored
+	 * @param string $recache ignored
 	 *
 	 * @return EntityId[] a map of strings from $labels to the corresponding entity ID.
 	 */
