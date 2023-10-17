@@ -24,8 +24,7 @@
 	"put": {
 		"operationId": "replacePropertyLabel",
 		"tags": [ "labels" ],
-		"summary": "[WIP] Add / Replace a Property's label in a specific language",
-		"description": "This endpoint is currently in development and is not recommended for production use.",
+		"summary": "Add / Replace a Property's label in a specific language",
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/PropertyId" },
 			{ "$ref": "../../global/parameters.json#/LanguageCode" },

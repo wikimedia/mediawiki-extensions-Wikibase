@@ -115,6 +115,11 @@
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\SetItemLabelRouteHandler::factory"
 	},
 	{
+		"path": "/wikibase/v0/entities/properties/{property_id}/labels/{language_code}",
+		"method": "PUT",
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\SetPropertyLabelRouteHandler::factory"
+	},
+	{
 		"path": "/wikibase/v0/entities/items/{item_id}/labels",
 		"method": "PATCH",
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\PatchItemLabelsRouteHandler::factory"
