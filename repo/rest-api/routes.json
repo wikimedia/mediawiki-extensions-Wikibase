@@ -145,6 +145,11 @@
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\SetItemDescriptionRouteHandler::factory"
 	},
 	{
+		"path": "/wikibase/v0/entities/properties/{property_id}/descriptions/{language_code}",
+		"method": "PUT",
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\SetPropertyDescriptionRouteHandler::factory"
+	},
+	{
 		"path": "/wikibase/v0/entities/items/{item_id}/aliases",
 		"method": "GET",
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetItemAliasesRouteHandler::factory"
