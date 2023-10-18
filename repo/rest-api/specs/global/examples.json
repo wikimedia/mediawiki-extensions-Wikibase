@@ -332,6 +332,15 @@
 			}
 		}
 	},
+	"PatchedPropertyLabelDescriptionSameValueExample": {
+		"value": {
+			"code": "patched-property-label-description-same-value",
+			"message": "Label and description for language code '{language}' can not have the same value",
+			"context": {
+				"language": "<language_code>"
+			}
+		}
+	},
 	"PatchedItemLabelDescriptionDuplicateExample": {
 		"value": {
 			"code": "patched-item-label-description-duplicate",
@@ -439,6 +448,17 @@
 	"PropertyLabelDuplicateExample": {
 		"value": {
 			"code": "property-label-duplicate",
+			"message": "Property '{duplicate_property_id}' already has label '{label}' associated with language code {language}",
+			"context": {
+				"language": "{language}",
+				"label": "{label}",
+				"matching-property-id": "{duplicate_property_id}"
+			}
+		}
+	},
+	"PatchedPropertyLabelDuplicateExample": {
+		"value": {
+			"code": "patched-property-label-duplicate",
 			"message": "Property '{duplicate_property_id}' already has label '{label}' associated with language code {language}",
 			"context": {
 				"language": "{language}",
