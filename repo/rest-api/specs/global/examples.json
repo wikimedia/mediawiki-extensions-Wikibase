@@ -467,6 +467,42 @@
 			}
 		}
 	},
+	"AliasEmptyExample": {
+		"value": {
+			"code": "alias-empty",
+			"message": "Alias must not be empty"
+		}
+	},
+	"AliasListEmptyExample": {
+		"value": {
+			"code": "alias-list-empty",
+			"message": "Alias list must not be empty"
+		}
+	},
+	"AliasTooLongExample": {
+		"value": {
+			"code": "alias-too-long",
+			"message": "Alias must be no more than '{limit}' characters long",
+			"context": {
+				"value": "<alias>",
+				"character-limit": "<limit>"
+			}
+		}
+	},
+	"InvalidAliasExample": {
+		"value": {
+			"code": "invalid-alias",
+			"message": "Not a valid alias: '{alias}'",
+			"context": { "alias": "<alias>" }
+		}
+	},
+	"DuplicateAliasExample": {
+		"value": {
+			"code": "duplicate-alias",
+			"message": "Alias list contains a duplicate alias: '{alias}'",
+			"context": { "alias": "<alias>" }
+		}
+	},
 	"ItemStatementIdExample": {
 		"value": "Q42$F078E5B3-F9A8-480E-B7AC-D97778CBBEF9"
 	},

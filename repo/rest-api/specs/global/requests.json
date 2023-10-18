@@ -38,6 +38,29 @@
 			}
 		}
 	},
+	"Aliases": {
+		"description": "Payload containing a list of Wikibase aliases in the specified language and edit metadata",
+		"required": true,
+		"content": {
+			"application/json": {
+				"schema": {
+					"allOf": [
+						{
+							"type": "object",
+							"properties": {
+								"aliases": {
+									"type": "array",
+									"example": [ "Douglas Noel Adams", "Douglas Noël Adams" ]
+								}
+							},
+							"required": [ "aliases" ]
+						},
+						{ "$ref": "./request-parts.json#/MediawikiEdit" }
+					]
+				}
+			}
+		}
+	},
 	"AliasesPatch": {
 		"description": "Payload containing a JSON Patch document to be applied to an Item's aliases and edit metadata",
 		"required": true,
