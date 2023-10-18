@@ -86,7 +86,7 @@ class ChangesListSpecialPageHookHandler implements ChangesListSpecialPageQueryHo
 	public static function onChangesListSpecialPageStructuredFilters( $special ) {
 		$services = MediaWikiServices::getInstance();
 		$handler = self::factory(
-			MediaWikiServices::getInstance()->getUserOptionsLookup(),
+			$services->getUserOptionsLookup(),
 			WikibaseClient::getClientDomainDbFactory( $services ),
 			WikibaseClient::getMobileSite( $services ),
 			WikibaseClient::getSettings( $services )
