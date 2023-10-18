@@ -5,9 +5,9 @@ namespace Wikibase\Repo\Tests\Specials;
 use ChangeTags;
 use CommentStoreComment;
 use MediaWiki\Block\AbstractBlock;
-use MediaWiki\Block\BlockManager;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Request\FauxResponse;
+use MediaWiki\Tests\Unit\MockBlockTrait;
 use PHPUnit\Framework\MockObject\MockObject;
 use RequestContext;
 use SpecialPageTestBase;
@@ -24,6 +24,7 @@ use Wikibase\Repo\WikibaseRepo;
  */
 abstract class SpecialNewEntityTestCase extends SpecialPageTestBase {
 	use HtmlAssertionHelpers;
+	use MockBlockTrait;
 
 	protected const TAGS = [ 'mw-replace' ];
 
@@ -71,11 +72,7 @@ abstract class SpecialNewEntityTestCase extends SpecialPageTestBase {
 			->willReturn( false );
 		$block->method( 'getReasonComment' )
 			->willReturn( CommentStoreComment::newUnsavedComment( '' ) );
-		$blockManager = $this->createMock( BlockManager::class );
-		$blockManager->method( 'getUserBlock' )
-			->with( $user )
-			->willReturn( $block );
-		$this->setService( 'BlockManager', $blockManager );
+		$this->installMockBlockManager( $block, $user );
 		$this->overrideUserPermissions(
 			$user,
 			[ 'createpage', 'property-create' ]
