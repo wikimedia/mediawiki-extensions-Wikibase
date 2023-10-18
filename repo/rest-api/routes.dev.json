@@ -5,11 +5,6 @@
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\PatchItemAliasesRouteHandler::factory"
 	},
 	{
-		"path": "/wikibase/v0/entities/properties/{property_id}/labels/{language_code}",
-		"method": "PUT",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\SetPropertyLabelRouteHandler::factory"
-	},
-	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/aliases",
 		"method": "PATCH",
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\PatchPropertyAliasesRouteHandler::factory"
