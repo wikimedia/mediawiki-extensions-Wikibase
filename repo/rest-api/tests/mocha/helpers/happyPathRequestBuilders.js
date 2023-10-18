@@ -122,5 +122,9 @@ module.exports.editRequestsOnItem = [
 	( { itemId } ) => rbf.newPatchItemDescriptionsRequestBuilder(
 		itemId,
 		[ { op: 'replace', path: '/en', value: 'random-test-description-' + utils.uniq() } ]
+	),
+	( { itemId } ) => rbf.newPatchItemAliasesRequestBuilder(
+		itemId,
+		[ { op: 'replace', path: '/en', value: [ 'en-alias-' + utils.uniq() ] } ]
 	)
 ];

@@ -59,6 +59,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetProperty
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchItemAliases;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchItemAliasesResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptions;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptionsResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
@@ -474,6 +476,18 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 				],
 				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::ITEM_REDIRECTED ) ],
 			],
+		] ];
+		yield 'PatchItemAliases' => [ [
+			'useCase' => PatchItemAliases::class,
+			'useCaseResponse' => new PatchItemAliasesResponse( new Aliases(), $lastModified, 123 ),
+			'validRequest' => [
+				'pathParams' => [ 'item_id' => 'Q1' ],
+				'bodyContents' => [ 'patch' => [ [ 'op' => 'remove', 'path' => '/fr' ] ] ],
+			],
+			'expectedExceptions' => [ [
+				new UseCaseError( UseCaseError::ITEM_NOT_FOUND, '' ),
+				$hasErrorCode( UseCaseError::ITEM_NOT_FOUND ),
+			] ],
 		] ];
 		yield 'PatchItemStatement' => [ [
 			'useCase' => PatchItemStatement::class,
