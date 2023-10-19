@@ -250,7 +250,7 @@
 			"code": "patched-labels-invalid-language-code",
 			"message": "Not a valid language code '{language_code}' in changed labels",
 			"context": {
-				"language": "<language_code>"
+				"language": "{language_code}"
 			}
 		}
 	},
@@ -259,7 +259,7 @@
 			"code": "patched-label-empty",
 			"message": "Changed label for '{language_code}' cannot be empty",
 			"context": {
-				"language": "<language_code>"
+				"language": "{language_code}"
 			}
 		}
 	},
@@ -268,8 +268,8 @@
 			"code": "patched-label-too-long",
 			"message": "Changed label for '{language_code}' must not be more than {limit} characters long",
 			"context": {
-				"language": "<language_code>",
-				"value": "<label>",
+				"language": "{language_code}",
+				"value": "{label}",
 				"limit": 250
 			}
 		}
@@ -279,8 +279,8 @@
 			"code": "patched-label-invalid",
 			"message": "Changed label for '{language_code}' is invalid: '{label}'",
 			"context": {
-				"language": "<language_code>",
-				"value": "<label>"
+				"language": "{language_code}",
+				"value": "{label}"
 			}
 		}
 	},
@@ -289,7 +289,7 @@
 			"code": "patched-descriptions-invalid-language-code",
 			"message": "Not a valid language code '{language_code}' in changed descriptions",
 			"context": {
-				"language": "<language_code>"
+				"language": "{language_code}"
 			}
 		}
 	},
@@ -298,7 +298,7 @@
 			"code": "patched-description-empty",
 			"message": "Changed description for '{language_code}' cannot be empty",
 			"context": {
-				"language": "<language_code>"
+				"language": "{language_code}"
 			}
 		}
 	},
@@ -307,8 +307,8 @@
 			"code": "patched-description-too-long",
 			"message": "Changed description for '{language_code}' must not be more than {limit} characters long",
 			"context": {
-				"language": "<language_code>",
-				"value": "<description>",
+				"language": "{language_code}",
+				"value": "{description}",
 				"limit": 250
 			}
 		}
@@ -318,8 +318,8 @@
 			"code": "patched-description-invalid",
 			"message": "Changed description for '{language_code}' is invalid: '{label}'",
 			"context": {
-				"language": "<language_code>",
-				"value": "<description>"
+				"language": "{language_code}",
+				"value": "{description}"
 			}
 		}
 	},
@@ -328,7 +328,7 @@
 			"code": "patched-item-label-description-same-value",
 			"message": "Label and description for language code '{language}' can not have the same value",
 			"context": {
-				"language": "<language_code>"
+				"language": "{language_code}"
 			}
 		}
 	},
@@ -337,7 +337,7 @@
 			"code": "patched-property-label-description-same-value",
 			"message": "Label and description for language code '{language}' can not have the same value",
 			"context": {
-				"language": "<language_code>"
+				"language": "{language_code}"
 			}
 		}
 	},
@@ -346,10 +346,10 @@
 			"code": "patched-item-label-description-duplicate",
 			"message": "Item '{duplicate_id}' already has label '{label}' associated with language code '{language}', using the same description text",
 			"context": {
-				"language": "<language_code>",
-				"label": "<label>",
-				"description": "<description>",
-				"matching-item-id": "<duplicate_id>"
+				"language": "{language_code}",
+				"label": "{label}",
+				"description": "{description}",
+				"matching-item-id": "{duplicate_id}"
 			}
 		}
 	},
@@ -358,7 +358,7 @@
 			"code": "patched-aliases-invalid-language-code",
 			"message": "Not a valid language code '{language_code}' in changed aliases",
 			"context": {
-				"language": "<language_code>"
+				"language": "{language_code}"
 			}
 		}
 	},
@@ -367,7 +367,7 @@
 			"code": "patched-alias-empty",
 			"message": "Changed alias for '{language_code}' cannot be empty",
 			"context": {
-				"language": "<language_code>"
+				"language": "{language_code}"
 			}
 		}
 	},
@@ -376,8 +376,8 @@
 			"code": "patched-alias-too-long",
 			"message": "Changed alias for '{language_code}' must not be more than {limit} characters long",
 			"context": {
-				"language": "<language_code>",
-				"value": "<alias>",
+				"language": "{language_code}",
+				"value": "{alias}",
 				"limit": 250
 			}
 		}
@@ -387,8 +387,8 @@
 			"code": "patched-alias-invalid",
 			"message": "Changed alias for '{language_code}' is invalid: '{alias}'",
 			"context": {
-				"language": "<language_code>",
-				"value": "<alias>"
+				"language": "{language_code}",
+				"value": "{alias}"
 			}
 		}
 	},
@@ -397,8 +397,8 @@
 			"code": "patched-duplicate-alias",
 			"message": "Aliases in language '{language_code}' contain duplicate alias: '{alias}'",
 			"context": {
-				"language": "<language_code>",
-				"value": "<alias>"
+				"language": "{language_code}",
+				"value": "{alias}"
 			}
 		}
 	},
@@ -484,8 +484,8 @@
 			"code": "alias-too-long",
 			"message": "Alias must be no more than {limit} characters long",
 			"context": {
-				"value": "<alias>",
-				"character-limit": "<limit>"
+				"value": "{alias}",
+				"character-limit": "{limit}"
 			}
 		}
 	},
@@ -493,14 +493,14 @@
 		"value": {
 			"code": "invalid-alias",
 			"message": "Not a valid alias: '{alias}'",
-			"context": { "alias": "<alias>" }
+			"context": { "alias": "{alias}" }
 		}
 	},
 	"DuplicateAliasExample": {
 		"value": {
 			"code": "duplicate-alias",
 			"message": "Alias list contains a duplicate alias: '{alias}'",
-			"context": { "alias": "<alias>" }
+			"context": { "alias": "{alias}" }
 		}
 	},
 	"ItemStatementIdExample": {
