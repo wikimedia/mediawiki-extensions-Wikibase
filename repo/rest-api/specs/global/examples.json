@@ -266,7 +266,7 @@
 	"PatchedLabelTooLongExample": {
 		"value": {
 			"code": "patched-label-too-long",
-			"message": "Changed label for '{language_code}' must not be more than '{limit}' characters long",
+			"message": "Changed label for '{language_code}' must not be more than {limit} characters long",
 			"context": {
 				"language": "<language_code>",
 				"value": "<label>",
@@ -305,7 +305,7 @@
 	"PatchedDescriptionTooLongExample": {
 		"value": {
 			"code": "patched-description-too-long",
-			"message": "Changed description for '{language_code}' must not be more than '{limit}' characters long",
+			"message": "Changed description for '{language_code}' must not be more than {limit} characters long",
 			"context": {
 				"language": "<language_code>",
 				"value": "<description>",
@@ -374,7 +374,7 @@
 	"PatchedAliasTooLongExample": {
 		"value": {
 			"code": "patched-alias-too-long",
-			"message": "Changed alias for '{language_code}' must not be more than '{limit}' characters long",
+			"message": "Changed alias for '{language_code}' must not be more than {limit} characters long",
 			"context": {
 				"language": "<language_code>",
 				"value": "<alias>",
@@ -482,7 +482,7 @@
 	"AliasTooLongExample": {
 		"value": {
 			"code": "alias-too-long",
-			"message": "Alias must be no more than '{limit}' characters long",
+			"message": "Alias must be no more than {limit} characters long",
 			"context": {
 				"value": "<alias>",
 				"character-limit": "<limit>"
