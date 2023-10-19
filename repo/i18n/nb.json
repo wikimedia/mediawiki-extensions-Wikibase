@@ -136,7 +136,7 @@
 	"wikibase-copyrighttooltip-acknowledge": "Jeg godtar disse vilkårene for mine fremtidige redigeringer. Ikke vis denne meldingen igjen.",
 	"wikibase-entityselector-more": "mer",
 	"wikibase-entityselector-notfound": "Ingen treff funnet",
-	"wikibase-anonymouseditwarning": "Advarsel: Du er ikke innlogga. in [https://en.wikipedia.org/wiki/IP_address IP-adresse] vil bli lagret i redigeringshistorikken hvis du gjør endringer. Hvis du <strong>[[Special:UserLogin|logger inn]]</strong> eller <strong>[[Special:CreateAccount|oppretter en konto]]</strong>, vil endringene dine tilskrives et brukernavn, sammen med andre gunstige fordeler.",
+	"wikibase-anonymouseditwarning": "Advarsel: Du er ikke logget inn. Din [https://en.wikipedia.org/wiki/IP_address IP-adresse] vil bli lagret i redigeringshistorikken hvis du gjør endringer. Hvis du <strong>[$1 logger inn]</strong> eller <strong>[$2 oppretter en konto]</strong>, vil endringene dine tilskrives et brukernavn, sammen med andre gunstige fordeler.",
 	"wikibase-anonymouseditwarning-heading": "Du er ikke logget inn",
 	"wikibase-anonymouseditwarning-message": "IP-adressen din vil bli synlig offentlig om du gjør redigeringer. Hvis du logger inn eller oppretter en konto vil redigeringene dine tilskrives brukernavnet ditt, noe som er én av flere fordeler ved å ha en konto.",
 	"wikibase-anonymouseditwarning-dismiss-persist": "Advar meg når jeg ikke er logget inn.",
