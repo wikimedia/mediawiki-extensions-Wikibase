@@ -160,6 +160,14 @@ module.exports = {
 			.withJsonBodyParam( 'description', description );
 	},
 
+	newAddItemAliasesRequestBuilder( itemId, languageCode, aliases ) {
+		return new RequestBuilder()
+			.withRoute( 'POST', '/entities/items/{item_id}/aliases/{language_code}' )
+			.withPathParam( 'item_id', itemId )
+			.withPathParam( 'language_code', languageCode )
+			.withJsonBodyParam( 'aliases', aliases );
+	},
+
 	newGetItemStatementsRequestBuilder( itemId ) {
 		return new RequestBuilder()
 			.withRoute( 'GET', '/entities/items/{item_id}/statements' )
