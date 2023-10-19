@@ -11,6 +11,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchProperty
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchPropertyLabelsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchPropertyLabelsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
@@ -24,6 +25,7 @@ use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
+use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchPropertyLabels
@@ -33,6 +35,8 @@ use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidat
  * @license GPL-2.0-or-later
  */
 class PatchPropertyLabelsTest extends TestCase {
+
+	use EditMetadataHelper;
 
 	private PropertyLabelsRetriever $labelsRetriever;
 	private LabelsSerializer $labelsSerializer;
@@ -69,12 +73,18 @@ class PatchPropertyLabelsTest extends TestCase {
 
 		$revisionId = 657;
 		$lastModified = '20221212040506';
+
+		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
+		$isBot = false;
+		$comment = 'labels replaced by ' . __method__;
+
 		$updatedProperty = new Property(
 			new Labels( new Label( $newLabelLanguage, $newLabelText ) ),
 			new Descriptions(),
 			new Aliases(),
 			new StatementList()
 		);
+
 		$this->propertyUpdater = $this->createMock( PropertyUpdater::class );
 		$this->propertyUpdater->expects( $this->once() )
 			->method( 'update' )
@@ -83,6 +93,7 @@ class PatchPropertyLabelsTest extends TestCase {
 					fn( DataModelProperty $property ) => $property->getLabels()->getByLanguage( $newLabelLanguage )->getText()
 														 === $newLabelText
 				),
+				$this->expectEquivalentMetadata( $editTags, $isBot, $comment, LabelsEditSummary::PATCH_ACTION )
 			)
 			->willReturn( new PropertyRevision( $updatedProperty, $lastModified, $revisionId ) );
 
@@ -95,7 +106,11 @@ class PatchPropertyLabelsTest extends TestCase {
 						'path' => "/$newLabelLanguage",
 						'value' => $newLabelText,
 					],
-				]
+				],
+				$editTags,
+				$isBot,
+				$comment,
+				null
 			)
 		);
 

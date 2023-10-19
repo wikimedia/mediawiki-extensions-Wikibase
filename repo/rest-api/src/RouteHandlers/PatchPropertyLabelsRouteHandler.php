@@ -7,7 +7,6 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
 use MediaWiki\Rest\Validator\BodyValidator;
-use MediaWiki\Rest\Validator\JsonBodyValidator;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchPropertyLabels;
@@ -27,6 +26,9 @@ class PatchPropertyLabelsRouteHandler extends SimpleHandler {
 
 	private const PROPERTY_ID_PATH_PARAM = 'property_id';
 	private const PATCH_BODY_PARAM = 'patch';
+	public const TAGS_BODY_PARAM = 'tags';
+	public const BOT_BODY_PARAM = 'bot';
+	public const COMMENT_BODY_PARAM = 'comment';
 
 	private PatchPropertyLabels $useCase;
 	private LabelsSerializer $serializer;
@@ -68,7 +70,14 @@ class PatchPropertyLabelsRouteHandler extends SimpleHandler {
 		try {
 			return $this->newSuccessHttpResponse(
 				$this->useCase->execute(
-					new PatchPropertyLabelsRequest( $propertyId, $jsonBody[self::PATCH_BODY_PARAM] )
+					new PatchPropertyLabelsRequest(
+						$propertyId,
+						$jsonBody[self::PATCH_BODY_PARAM],
+						$jsonBody[self::TAGS_BODY_PARAM],
+						$jsonBody[self::BOT_BODY_PARAM],
+						$jsonBody[self::COMMENT_BODY_PARAM],
+						null
+					)
 				)
 			);
 		} catch ( UseCaseError $e ) {
@@ -90,13 +99,32 @@ class PatchPropertyLabelsRouteHandler extends SimpleHandler {
 	 * @inheritDoc
 	 */
 	public function getBodyValidator( $contentType ): BodyValidator {
-		return new JsonBodyValidator( [
-			self::PATCH_BODY_PARAM => [
-				self::PARAM_SOURCE => 'body',
-				ParamValidator::PARAM_TYPE => 'array',
-				ParamValidator::PARAM_REQUIRED => true,
-			],
-		] );
+		return $contentType === 'application/json' || $contentType === 'application/json-patch+json' ?
+			new TypeValidatingJsonBodyValidator( [
+				self::PATCH_BODY_PARAM => [
+					self::PARAM_SOURCE => 'body',
+					ParamValidator::PARAM_TYPE => 'array',
+					ParamValidator::PARAM_REQUIRED => true,
+				],
+				self::TAGS_BODY_PARAM => [
+					self::PARAM_SOURCE => 'body',
+					ParamValidator::PARAM_TYPE => 'array',
+					ParamValidator::PARAM_REQUIRED => false,
+					ParamValidator::PARAM_DEFAULT => [],
+				],
+				self::BOT_BODY_PARAM => [
+					self::PARAM_SOURCE => 'body',
+					ParamValidator::PARAM_TYPE => 'boolean',
+					ParamValidator::PARAM_REQUIRED => false,
+					ParamValidator::PARAM_DEFAULT => false,
+				],
+				self::COMMENT_BODY_PARAM => [
+					self::PARAM_SOURCE => 'body',
+					ParamValidator::PARAM_TYPE => 'string',
+					ParamValidator::PARAM_REQUIRED => false,
+					ParamValidator::PARAM_DEFAULT => null,
+				],
+			] ) : parent::getBodyValidator( $contentType );
 	}
 
 	private function newSuccessHttpResponse( PatchPropertyLabelsResponse $useCaseResponse ): Response {

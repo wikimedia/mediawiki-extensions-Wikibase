@@ -57,13 +57,19 @@ class PatchPropertyLabels {
 
 		$property->getFingerprint()->setLabels( $modifiedLabelsAsTermList );
 
+		$editMetadata = new EditMetadata(
+			$deserializedRequest->getEditMetadata()->getTags(),
+			$deserializedRequest->getEditMetadata()->isBot(),
+			LabelsEditSummary::newPatchSummary(
+				$deserializedRequest->getEditMetadata()->getComment(),
+				$originalLabels,
+				$modifiedLabelsAsTermList
+			)
+		);
+
 		$revision = $this->propertyUpdater->update(
 			$property, // @phan-suppress-current-line PhanTypeMismatchArgumentNullable
-			new EditMetadata(
-				[],
-				false,
-				LabelsEditSummary::newPatchSummary( '', $originalLabels, $modifiedLabelsAsTermList )
-			)
+			$editMetadata
 		);
 
 		return new PatchPropertyLabelsResponse(
