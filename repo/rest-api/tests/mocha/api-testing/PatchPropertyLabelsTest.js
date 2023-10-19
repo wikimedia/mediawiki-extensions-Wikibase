@@ -5,6 +5,18 @@ const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { newPatchPropertyLabelsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
+const testValidatesPatch = require( '../helpers/testValidatesPatch' );
+
+function assertValid400Response( response, responseBodyErrorCode, context = null ) {
+	expect( response ).to.have.status( 400 );
+	assert.header( response, 'Content-Language', 'en' );
+	assert.strictEqual( response.body.code, responseBodyErrorCode );
+	if ( context === null ) {
+		assert.notProperty( response.body, 'context' );
+	} else {
+		assert.deepStrictEqual( response.body.context, context );
+	}
+}
 
 describe( newPatchPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 
@@ -41,6 +53,19 @@ describe( newPatchPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 			assert.isAbove( new Date( response.header[ 'last-modified' ] ), originalLastModified );
 			assert.notStrictEqual( response.header.etag, makeEtag( originalRevisionId ) );
 		} );
+	} );
+
+	describe( '400 error response', () => {
+		it( 'invalid property id', async () => {
+			const propertyId = testPropertyId.replace( 'P', 'L' );
+			const response = await newPatchPropertyLabelsRequestBuilder( propertyId, [] )
+				.assertInvalidRequest().makeRequest();
+
+			assertValid400Response( response, 'invalid-property-id', { 'property-id': propertyId } );
+			assert.include( response.body.message, propertyId );
+		} );
+
+		testValidatesPatch( ( patch ) => newPatchPropertyLabelsRequestBuilder( testPropertyId, patch ) );
 	} );
 
 } );

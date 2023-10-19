@@ -9,6 +9,8 @@ use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchPropertyLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchPropertyLabelsRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchPropertyLabelsValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
@@ -21,6 +23,7 @@ use Wikibase\Repo\RestApi\Domain\Services\PropertyLabelsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
+use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchPropertyLabels
@@ -37,6 +40,7 @@ class PatchPropertyLabelsTest extends TestCase {
 	private LabelsDeserializer $labelsDeserializer;
 	private PropertyRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
+	private PatchPropertyLabelsValidator $validator;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -47,6 +51,7 @@ class PatchPropertyLabelsTest extends TestCase {
 		$this->labelsDeserializer = new LabelsDeserializer();
 		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
 		$this->propertyUpdater = $this->createStub( PropertyUpdater::class );
+		$this->validator = new TestValidatingRequestDeserializer();
 	}
 
 	public function testHappyPath(): void {
@@ -99,6 +104,19 @@ class PatchPropertyLabelsTest extends TestCase {
 		$this->assertSame( $revisionId, $response->getRevisionId() );
 	}
 
+	public function testGivenInvalidRequest_throws(): void {
+		$expectedException = new UseCaseException( 'invalid-label-patch-test' );
+		$this->validator = $this->createStub( PatchPropertyLabelsValidator::class );
+		$this->validator->method( 'validateAndDeserialize' )->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase()->execute( $this->createStub( PatchPropertyLabelsRequest::class ) );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
 	private function newUseCase(): PatchPropertyLabels {
 		return new PatchPropertyLabels(
 			$this->labelsRetriever,
@@ -106,7 +124,8 @@ class PatchPropertyLabelsTest extends TestCase {
 			$this->patcher,
 			$this->labelsDeserializer,
 			$this->propertyRetriever,
-			$this->propertyUpdater
+			$this->propertyUpdater,
+			$this->validator
 		);
 	}
 
