@@ -17,6 +17,7 @@ class EditMetadataValidator {
 	private array $allowedTags;
 
 	/**
+	 * @param int $maxCommentLength
 	 * @param string[] $allowedTags {@see \ChangeTags::listExplicitlyDefinedTags}
 	 */
 	public function __construct( int $maxCommentLength, array $allowedTags ) {

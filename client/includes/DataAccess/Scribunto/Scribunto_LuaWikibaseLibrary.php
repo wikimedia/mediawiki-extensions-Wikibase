@@ -406,6 +406,8 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	/**
 	 * Wrapper for getReferencedEntityId in WikibaseLanguageIndependentLuaBindings
 	 *
+	 * @param string $prefixedFromEntityId
+	 * @param string $prefixedPropertyId
 	 * @param string[] $prefixedToIds
 	 *
 	 * @throws ScribuntoException
@@ -461,6 +463,8 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	/**
 	 * Wrapper for getEntityStatements in EntityAccessor
 	 *
+	 * @param string $prefixedEntityId
+	 * @param string $propertyId
 	 * @param string $rank Which statements to include. Either "best" or "all".
 	 *
 	 * @throws ScribuntoException

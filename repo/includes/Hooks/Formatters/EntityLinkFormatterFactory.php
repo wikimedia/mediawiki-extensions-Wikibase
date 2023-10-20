@@ -24,6 +24,7 @@ class EntityLinkFormatterFactory {
 
 	/**
 	 * @param EntityTitleTextLookup $entityTitleTextLookup
+	 * @param LanguageFactory $languageFactory
 	 * @param callable[] $callbacks maps entity type strings to callbacks returning LinkFormatter
 	 */
 	public function __construct(

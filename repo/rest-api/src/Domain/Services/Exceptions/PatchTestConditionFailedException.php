@@ -14,6 +14,8 @@ class PatchTestConditionFailedException extends Exception {
 	private $actualValue;
 
 	/**
+	 * @param string $message
+	 * @param array $operation
 	 * @param mixed $actualValue
 	 */
 	public function __construct( string $message, array $operation, $actualValue ) {

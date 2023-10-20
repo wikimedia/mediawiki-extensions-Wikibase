@@ -84,7 +84,11 @@ class ChangeOpFactoryProvider {
 	 * @param SnakValidator $snakValidator
 	 * @param TermValidatorFactory $termValidatorFactory
 	 * @param SiteLookup $siteLookup
+	 * @param SnakNormalizer $snakNormalizer
+	 * @param ReferenceNormalizer $referenceNormalizer
+	 * @param StatementNormalizer $statementNormalizer
 	 * @param string[] $allowedBadgeItemIds
+	 * @param bool $normalize
 	 */
 	public function __construct(
 		EntityConstraintProvider $constraintProvider,

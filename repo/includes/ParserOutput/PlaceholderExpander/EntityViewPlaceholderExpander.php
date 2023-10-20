@@ -93,6 +93,8 @@ class EntityViewPlaceholderExpander implements PlaceholderExpander {
 	 * @param LocalizedTextProvider $textProvider
 	 * @param UserOptionsLookup $userOptionsLookup
 	 * @param string $cookiePrefix
+	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
+	 * @param bool $mulEnabled
 	 * @param string[] $termsListItems
 	 */
 	public function __construct(

@@ -13,6 +13,7 @@ class AliasesInLanguage {
 	private array $aliases;
 
 	/**
+	 * @param string $languageCode
 	 * @param string[] $aliases
 	 */
 	public function __construct( string $languageCode, array $aliases ) {

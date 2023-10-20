@@ -103,6 +103,7 @@ class QuantityRdfBuilder implements ValueSnakRdfBuilder {
 	/**
 	 * Connects a normalized value node to its base node via the quantityNormalized predicate.
 	 *
+	 * @param string $valueNamespace
 	 * @param string|null $valueLName
 	 * @param string|null $normLName
 	 */
@@ -123,6 +124,7 @@ class QuantityRdfBuilder implements ValueSnakRdfBuilder {
 	 * @param string $propertyValueNamespace Property value relation namespace
 	 * @param string $propertyValueLName Property value relation name
 	 * @param string $dataType Property data type
+	 * @param string $valueNamespace
 	 * @param UnboundedQuantityValue $value
 	 * @param bool $normalized Is this a normalized value?
 	 *

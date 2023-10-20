@@ -8,8 +8,6 @@
 		<exclude name="MediaWiki.Commenting.FunctionComment.MissingReturn" />
 		<!-- Note: NotPunctuationReturnType can be enabled when the sniff accepts array shapes -->
 		<exclude name="MediaWiki.Commenting.FunctionComment.NotPunctuationReturnType" />
-		<!-- Note: ParamNameNoMatch is probably a great candidate for the next round of fixes -->
-		<exclude name="MediaWiki.Commenting.FunctionComment.ParamNameNoMatch" />
 		<exclude name="MediaWiki.Commenting.PropertyDocumentation.MissingDocumentationPrivate" />
 		<exclude name="MediaWiki.Usage.StaticClosure.StaticClosure" />
 	</rule>

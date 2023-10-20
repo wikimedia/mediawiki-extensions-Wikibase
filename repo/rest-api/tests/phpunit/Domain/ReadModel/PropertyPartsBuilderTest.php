@@ -97,6 +97,8 @@ class PropertyPartsBuilderTest extends TestCase {
 	/**
 	 * @dataProvider nonRequiredFields
 	 *
+	 * @param string $field
+	 * @param string $setterFunction
 	 * @param mixed $param
 	 */
 	public function testNonRequiredField( string $field, string $setterFunction, $param ): void {
