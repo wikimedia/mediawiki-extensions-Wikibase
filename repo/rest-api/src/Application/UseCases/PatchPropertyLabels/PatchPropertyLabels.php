@@ -4,6 +4,8 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels;
 
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
 use Wikibase\Repo\RestApi\Domain\Services\JsonPatcher;
@@ -23,6 +25,7 @@ class PatchPropertyLabels {
 	private PropertyRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
 	private PatchPropertyLabelsValidator $useCaseValidator;
+	private AssertPropertyExists $assertPropertyExists;
 
 	public function __construct(
 		PropertyLabelsRetriever $labelsRetriever,
@@ -31,7 +34,8 @@ class PatchPropertyLabels {
 		LabelsDeserializer $labelsDeserializer,
 		PropertyRetriever $propertyRetriever,
 		PropertyUpdater $propertyUpdater,
-		PatchPropertyLabelsValidator $useCaseValidator
+		PatchPropertyLabelsValidator $useCaseValidator,
+		AssertPropertyExists $assertPropertyExists
 	) {
 		$this->labelsRetriever = $labelsRetriever;
 		$this->labelsSerializer = $labelsSerializer;
@@ -40,11 +44,18 @@ class PatchPropertyLabels {
 		$this->propertyRetriever = $propertyRetriever;
 		$this->propertyUpdater = $propertyUpdater;
 		$this->useCaseValidator = $useCaseValidator;
+		$this->assertPropertyExists = $assertPropertyExists;
 	}
 
+	/**
+	 * @throws UseCaseError
+	 */
 	public function execute( PatchPropertyLabelsRequest $request ): PatchPropertyLabelsResponse {
 		$deserializedRequest = $this->useCaseValidator->validateAndDeserialize( $request );
 		$propertyId = $deserializedRequest->getPropertyId();
+
+		$this->assertPropertyExists->execute( $propertyId );
+
 		$property = $this->propertyRetriever->getProperty( $propertyId );
 		$originalLabels = $property->getLabels();
 

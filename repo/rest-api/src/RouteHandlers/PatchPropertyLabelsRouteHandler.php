@@ -58,6 +58,7 @@ class PatchPropertyLabelsRouteHandler extends SimpleHandler {
 				WbRestApi::getPropertyDataRetriever(),
 				WbRestApi::getPropertyUpdater(),
 				WbRestApi::getValidatingRequestDeserializer(),
+				WbRestApi::getAssertPropertyExists()
 			),
 			$serializer,
 			new ResponseFactory()

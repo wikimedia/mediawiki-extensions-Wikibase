@@ -7,9 +7,11 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property as DataModelProperty;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchPropertyLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchPropertyLabelsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchPropertyLabelsValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
@@ -45,6 +47,7 @@ class PatchPropertyLabelsTest extends TestCase {
 	private PropertyRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
 	private PatchPropertyLabelsValidator $validator;
+	private AssertPropertyExists $assertPropertyExists;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -56,13 +59,14 @@ class PatchPropertyLabelsTest extends TestCase {
 		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
 		$this->propertyUpdater = $this->createStub( PropertyUpdater::class );
 		$this->validator = new TestValidatingRequestDeserializer();
+		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
 	}
 
 	public function testHappyPath(): void {
-		$propertyId = new NumericPropertyId( 'P42' );
+		$propertyId = new NumericPropertyId( 'P31' );
 		$property = new DataModelProperty( $propertyId, null, 'string' );
 
-		$newLabelText = 'pomme de terre';
+		$newLabelText = 'nature de l’élément';
 		$newLabelLanguage = 'fr';
 
 		$this->labelsRetriever = $this->createStub( PropertyLabelsRetriever::class );
@@ -132,6 +136,21 @@ class PatchPropertyLabelsTest extends TestCase {
 		}
 	}
 
+	public function testGivenPropertyNotFound_throws(): void {
+		$request = new PatchPropertyLabelsRequest( 'P999999', [], [], false, null, null );
+		$expectedException = $this->createStub( UseCaseError::class );
+
+		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
+		$this->assertPropertyExists->method( 'execute' )->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase()->execute( $request );
+			$this->fail( 'expected exception was not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
 	private function newUseCase(): PatchPropertyLabels {
 		return new PatchPropertyLabels(
 			$this->labelsRetriever,
@@ -140,7 +159,8 @@ class PatchPropertyLabelsTest extends TestCase {
 			$this->labelsDeserializer,
 			$this->propertyRetriever,
 			$this->propertyUpdater,
-			$this->validator
+			$this->validator,
+			$this->assertPropertyExists
 		);
 	}
 
