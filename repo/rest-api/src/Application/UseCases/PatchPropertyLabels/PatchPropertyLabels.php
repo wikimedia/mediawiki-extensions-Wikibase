@@ -5,6 +5,7 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
@@ -26,6 +27,7 @@ class PatchPropertyLabels {
 	private PropertyUpdater $propertyUpdater;
 	private PatchPropertyLabelsValidator $useCaseValidator;
 	private AssertPropertyExists $assertPropertyExists;
+	private AssertUserIsAuthorized $assertUserIsAuthorized;
 
 	public function __construct(
 		PropertyLabelsRetriever $labelsRetriever,
@@ -35,7 +37,8 @@ class PatchPropertyLabels {
 		PropertyRetriever $propertyRetriever,
 		PropertyUpdater $propertyUpdater,
 		PatchPropertyLabelsValidator $useCaseValidator,
-		AssertPropertyExists $assertPropertyExists
+		AssertPropertyExists $assertPropertyExists,
+		AssertUserIsAuthorized $assertUserIsAuthorized
 	) {
 		$this->labelsRetriever = $labelsRetriever;
 		$this->labelsSerializer = $labelsSerializer;
@@ -45,6 +48,7 @@ class PatchPropertyLabels {
 		$this->propertyUpdater = $propertyUpdater;
 		$this->useCaseValidator = $useCaseValidator;
 		$this->assertPropertyExists = $assertPropertyExists;
+		$this->assertUserIsAuthorized = $assertUserIsAuthorized;
 	}
 
 	/**
@@ -55,6 +59,11 @@ class PatchPropertyLabels {
 		$propertyId = $deserializedRequest->getPropertyId();
 
 		$this->assertPropertyExists->execute( $propertyId );
+
+		$this->assertUserIsAuthorized->execute(
+			$deserializedRequest->getPropertyId(),
+			$deserializedRequest->getEditMetadata()->getUser()->getUsername()
+		);
 
 		$property = $this->propertyRetriever->getProperty( $propertyId );
 		$originalLabels = $property->getLabels();

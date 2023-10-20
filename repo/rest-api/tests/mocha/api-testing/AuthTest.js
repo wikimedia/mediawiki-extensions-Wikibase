@@ -120,7 +120,20 @@ describe( 'Auth', () => {
 			} );
 		} );
 
-		editRequestsWithInputs.forEach( ( { newRequestBuilder, requestInputs } ) => {
+		[
+			...editRequestsWithInputs,
+			{
+				newRequestBuilder: () => rbf.newPatchItemAliasesRequestBuilder( itemRequestInputs.itemId, [] ),
+				requestInputs: itemRequestInputs
+			},
+			{
+				newRequestBuilder: () => rbf.newPatchPropertyLabelsRequestBuilder(
+					propertyRequestInputs.propertyId,
+					[]
+				),
+				requestInputs: propertyRequestInputs
+			}
+		].forEach( ( { newRequestBuilder, requestInputs } ) => {
 			describe( 'Protected entity page', () => {
 				before( async () => {
 					await changeEntityProtectionStatus( requestInputs.mainTestSubject, 'sysop' ); // protect
