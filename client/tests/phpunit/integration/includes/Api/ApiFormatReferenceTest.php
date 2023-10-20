@@ -36,7 +36,9 @@ class ApiFormatReferenceTest extends ApiTestCase {
 		}
 
 		$result = $this->doApiRequest( $this->decorateParamsAsModernApiRequest( $params ) );
-		$this->assertEquals( $expectedHtml, $result[0]['wbformatreference']['html'] );
+		$html = $result[0]['wbformatreference']['html'];
+		$html = preg_replace( '/<div[^>]*(mw-parser-output)[^>]*>/', '<div class="$1">', $html );
+		$this->assertEquals( $expectedHtml, $html );
 	}
 
 	/**
