@@ -66,11 +66,13 @@
 				// Tipsy, in general, makes use of the "title" attribute. Therefore, when setting a
 				// plain string as content, just assign it to the "title" attribute:
 				this.element.attr( 'title', this.options.content );
+			} else if ( this.options.content instanceof $ ) {
+				// with .html() compare html: true in .tipsy() options below
+				this.element.attr( 'title', this.options.content.html() );
 			} else {
+				// We have no content, yet. This happens when instantiated for an API error code.
 				// Init Tipsy with some placeholder since the tooltip message would not show without the
-				// title attribute being set. However, setting a complex HTML structure cannot be done
-				// via the title tag, so, the content is stored in a custom variable that will be
-				// injected when the message is about to get displayed.
+				// title attribute being set.
 				this.element.attr( 'title', '.' );
 			}
 
@@ -201,6 +203,13 @@
 
 			if ( this.options.content instanceof $ ) {
 				content = this.options.content;
+			} else if ( this.options.content.code ) {
+				// Content is an error object.
+				this._tipsy.tip().addClass( 'wb-error' );
+
+				// If not re-constructed on showing, click event on inner element (e.g. Details link)
+				// will be lost.
+				content = this._buildErrorTooltip();
 			}
 
 			// If a tooltip anchor is specified, use that for positioning the tip by overwriting the
@@ -209,7 +218,7 @@
 			if ( this.options.$anchor ) {
 				this._tipsy.$element = this.options.$anchor;
 				if ( !this._tipsy.$element.attr( 'title' ) ) {
-					this._tipsy.$element.attr( 'title', '.' );
+					this._tipsy.$element.attr( 'title', content.html() );
 				}
 			}
 
@@ -218,16 +227,8 @@
 			this._tipsy.$tip.addClass( this.widgetFullName + '-tip' );
 
 			var offset = this._tipsy.$tip.offset(),
-				height = this._tipsy.$tip.height();
-
-			if ( this.options.content.code ) {
-				// Content is an error object.
-				this._tipsy.tip().addClass( 'wb-error' );
-
-				// If not re-constructed on showing, click event on inner element (e.g. Details link)
-				// will be lost.
-				content = this._buildErrorTooltip();
-			}
+				height = this._tipsy.$tip.height(),
+				width = this._tipsy.$tip.width();
 
 			if ( this.options.permanent ) {
 				// Hide error tooltip when clicking outside of it by suppressing clicks on the $tip from
@@ -251,7 +252,10 @@
 			// Reposition $tip since Tipsy evaluated the position before we filled it with DOM content:
 			if ( this._tipsy.options.gravity.charAt( 0 ) === 's' ) {
 				this._tipsy.$tip.offset(
-					{ top: offset.top - this._tipsy.$tip.height() + height, left: offset.left }
+					{
+						top: offset.top - this._tipsy.$tip.height() + height,
+						left: offset.left - this._tipsy.$tip.width() + width
+					}
 				);
 			}
 		},
