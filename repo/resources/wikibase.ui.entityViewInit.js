@@ -256,10 +256,10 @@
 				.appendTo( $message ),
 			editableTemplatedWidget = $origin.data( 'EditableTemplatedWidget' );
 
-		// TODO: Use notification system for copyright messages on all widgets.
+		// TODO: Use editableTemplatedWidget's notification system for copyright messages on all widgets
 		if ( editableTemplatedWidget
 			&& !( editableTemplatedWidget instanceof $.wikibase.statementview )
-			&& !( editableTemplatedWidget instanceof $.wikibase.aliasesview )
+			&& !( editableTemplatedWidget instanceof $.wikibase.entitytermsview )
 		) {
 			editableTemplatedWidget.notification( $message, 'wb-edit' );
 
@@ -282,10 +282,10 @@
 			return;
 		}
 
-		// Tooltip gets its own anchor since other elements might have their own tooltip.
-		// we don't even have to add this new toolbar element to the toolbar, we only use it
-		// to manage the tooltip which will have the 'save' button as element to point to.
-		// The 'save' button can still have its own tooltip though.
+		// Tooltip gets its own anchor since other toolbar elements might have their own tooltip.
+		var $tooltipAnchor = $( '<span>' )
+			.appendTo( edittoolbar.getContainer().children( ':wikibase-toolbar' ) );
+
 		var $messageAnchor = $( '<span>' )
 			.appendTo( document.body )
 			.toolbaritem()
@@ -293,10 +293,15 @@
 				content: $message,
 				permanent: true,
 				gravity: gravity,
-				$anchor: edittoolbar.getContainer()
+				$anchor: $tooltipAnchor
 			} );
 
 		var eventNamespace = '.wbCopyrightTooltip' + Math.random().toString( 36 ).slice( 2 );
+
+		// Remove the no longer needed tooltip anchor
+		$messageAnchor.one( 'wbtooltipafterhide', function () {
+			$tooltipAnchor.remove();
+		} );
 
 		$hideMessage.on( 'click', function ( event ) {
 			event.preventDefault();
@@ -350,7 +355,7 @@
 	 */
 	function attachCopyrightTooltip( $entityview, viewName ) {
 		$entityview.on(
-			'entitytermsafterstartediting sitelinkgroupviewafterstartediting statementviewafterstartediting',
+			'entitytermsviewafterstartediting sitelinkgroupviewafterstartediting statementviewafterstartediting',
 			function ( event ) {
 				var $target = $( event.target ),
 					gravity = 'sw';
@@ -358,10 +363,14 @@
 				if ( $target.data( 'sitelinkgroupview' ) ) {
 					gravity = 'nw';
 				} else if ( $target.data( 'entitytermsview' ) ) {
-					gravity = 'w';
+					gravity = 'ne';
 				}
 
-				showCopyrightTooltip( $entityview, $target, gravity, viewName );
+				// Break out of stack to make sure this runs only after the editing toolbar is fully initialized.
+				// This is needed as showCopyrightTooltip manipulates the toolbar's DOM.
+				setTimeout( function () {
+					showCopyrightTooltip( $entityview, $target, gravity, viewName );
+				}, 0 );
 			}
 		);
 	}
