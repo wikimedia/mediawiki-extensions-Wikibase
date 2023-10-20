@@ -743,7 +743,7 @@
 			}
 		}
 	},
-	"InvalidSetItemAliasesInput": {
+	"InvalidAddItemAliasesInput": {
 		"description": "The request cannot be processed",
 		"content": {
 			"application/json": {
