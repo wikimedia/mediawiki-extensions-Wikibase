@@ -81,6 +81,9 @@ class ApiJsonFormatTest extends ApiFormatTestCase {
 	 * This mimics ApiMain::executeAction with the relevant parts,
 	 * including setupExternalResponse where the printer is set.
 	 * The module is then executed and results printed.
+	 *
+	 * @param ApiBase $module
+	 * @return array
 	 */
 	private function executeApiModule( ApiBase $module ) {
 		$printer = $module->getMain()->createPrinterByName( 'json' );

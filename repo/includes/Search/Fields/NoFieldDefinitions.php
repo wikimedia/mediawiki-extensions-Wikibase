@@ -8,9 +8,7 @@ namespace Wikibase\Repo\Search\Fields;
  */
 class NoFieldDefinitions implements FieldDefinitions {
 
-	/**
-	 * Get the list of definitions
-	 */
+	/** @inheritDoc */
 	public function getFields() {
 		return [];
 	}

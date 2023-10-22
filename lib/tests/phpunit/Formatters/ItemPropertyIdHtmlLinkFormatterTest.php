@@ -538,6 +538,8 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @param string $itemId
+	 * phpcs:ignore MediaWiki.Commenting.FunctionComment.ObjectTypeHintReturn
+	 * @return object
 	 */
 	private function givenItemExists( $itemId ) {
 		$title = $this->createMock( Title::class );

@@ -159,8 +159,6 @@ final class RepoHooks {
 				return $entityContentFactory->getContentHandlerForType( $entityType );
 			};
 		}
-
-		return true;
 	}
 
 	/**

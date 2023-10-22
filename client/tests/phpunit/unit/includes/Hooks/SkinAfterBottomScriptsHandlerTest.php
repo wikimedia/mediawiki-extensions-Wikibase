@@ -134,6 +134,7 @@ class SkinAfterBottomScriptsHandlerTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @param string|null $timestamp
+	 * @return RevisionLookup
 	 */
 	private function createMockRevisionLookup( $timestamp ) {
 		$revisionRecord = $this->createMock( RevisionRecord::class );

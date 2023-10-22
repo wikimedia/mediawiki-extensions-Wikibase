@@ -95,15 +95,7 @@ class ChangeOpDescription extends ChangeOpBase {
 		return new ChangeOpDescriptionResult( $entityId, $this->languageCode, $oldDescriptionText, $newDescriptionText, $isEntityChanged );
 	}
 
-	/**
-	 * @see ChangeOp::apply()
-	 *
-	 * @param EntityDocument $entity
-	 * @param Summary|null $summary
-	 *
-	 * @throws InvalidArgumentException
-	 * @throws ChangeOpException
-	 */
+	/** @inheritDoc */
 	public function apply( EntityDocument $entity, Summary $summary = null ) {
 		if ( !( $entity instanceof DescriptionsProvider ) ) {
 			throw new InvalidArgumentException( '$entity must be a DescriptionsProvider' );

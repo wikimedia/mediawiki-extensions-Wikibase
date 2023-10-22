@@ -62,15 +62,7 @@ class ChangeOps implements ChangeOp {
 		return $this->changeOps;
 	}
 
-	/**
-	 * @see ChangeOp::apply()
-	 * Applies all changes to the given entity
-	 *
-	 * @param EntityDocument $entity
-	 * @param Summary|null $summary
-	 *
-	 * @throws ChangeOpException
-	 */
+	/** @inheritDoc */
 	public function apply( EntityDocument $entity, Summary $summary = null ) {
 		$changeOpsResults = [];
 
