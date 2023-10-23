@@ -47,7 +47,7 @@
 	"wikibase-dataitem": "{{WBREPONAME}}-item",
 	"wikibase-editlinks": "Koppelingen bewerken",
 	"wikibase-editlinkstitle": "Taalkoppelingen bewerken",
-	"wikibase-addlinkstitle": "Intertaalkoppelingen toevoegen",
+	"wikibase-addlinkstitle": "Taalkoppelingen toevoegen",
 	"wikibase-linkitem-addlinks": "Koppelingen toevoegen",
 	"wikibase-linkitem-alreadylinked": "De pagina waar u naar wilde koppelen is al gekoppeld aan een [$1 item] in de centrale gegevensrepository die koppelt naar [[$2]] op deze site. Items kunnen slechts naar één pagina per site verwijzen. Kies een andere pagina om mee te koppelen.",
 	"wikibase-linkitem-close": "Venster sluiten en de pagina opnieuw laden",
