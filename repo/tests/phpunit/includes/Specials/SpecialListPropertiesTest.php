@@ -106,7 +106,7 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 	public function testExecute() {
 		// This also tests that there is no fatal error, that the restriction handling is working
 		// and doesn't block. That is, the default should let the user execute the page.
-		list( $output, ) = $this->executeSpecialPage( '', null, 'qqx' );
+		[ $output ] = $this->executeSpecialPage();
 
 		$this->assertIsString( $output );
 		$this->assertStringContainsString( 'wikibase-listproperties-summary', $output );
@@ -117,7 +117,7 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 
 	public function testOffsetAndLimit() {
 		$request = new FauxRequest( [ 'limit' => '1', 'offset' => '1' ] );
-		list( $output, ) = $this->executeSpecialPage( '', $request, 'qqx' );
+		[ $output ] = $this->executeSpecialPage( '', $request );
 
 		$this->assertStringNotContainsString( 'P45', $output );
 		$this->assertStringContainsString( 'P123', $output );
@@ -125,13 +125,13 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 	}
 
 	public function testExecute_empty() {
-		list( $output, ) = $this->executeSpecialPage( 'quantity', null, 'qqx' );
+		[ $output ] = $this->executeSpecialPage( 'quantity' );
 
 		$this->assertStringContainsString( 'specialpage-empty', $output );
 	}
 
 	public function testExecute_error() {
-		list( $output, ) = $this->executeSpecialPage( 'test<>', null, 'qqx' );
+		[ $output ] = $this->executeSpecialPage( 'test<>' );
 
 		$this->assertStringContainsString( 'wikibase-listproperties-invalid-datatype', $output );
 		$this->assertStringContainsString( 'test&lt;&gt;', $output );

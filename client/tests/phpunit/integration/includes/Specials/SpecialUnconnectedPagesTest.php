@@ -188,11 +188,6 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 		);
 	}
 
-	public function testExecuteDoesNotCauseFatalError() {
-		$this->executeSpecialPage( '' );
-		$this->assertTrue( true, 'Calling execute without any subpage value' );
-	}
-
 	/**
 	 * @dataProvider provideBuildNamespaceConditionals
 	 */

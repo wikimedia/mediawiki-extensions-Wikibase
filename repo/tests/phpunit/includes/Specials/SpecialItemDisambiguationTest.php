@@ -120,7 +120,7 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 	}
 
 	public function testForm() {
-		list( $html, ) = $this->executeSpecialPage( '', null, 'qqx' );
+		[ $html ] = $this->executeSpecialPage();
 
 		$this->assertStringContainsString( '(wikibase-itemdisambiguation-lookup-language)', $html );
 		$this->assertStringContainsString( 'name=\'language\'', $html );
@@ -157,13 +157,13 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 	}
 
 	public function testNoLanguage() {
-		list( $html, ) = $this->executeSpecialPage( '', null, 'qqx' );
+		[ $html ] = $this->executeSpecialPage();
 
 		$this->assertStringNotContainsString( 'mock-span', $html );
 	}
 
 	public function testInvalidLanguage() {
-		list( $html, ) = $this->executeSpecialPage( 'invalid/Foo', null, 'qqx' );
+		[ $html ] = $this->executeSpecialPage( 'invalid/Foo' );
 
 		$this->assertStringContainsString( '(wikibase-itemdisambiguation-invalid-langcode)', $html );
 	}
@@ -176,13 +176,13 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 	}
 
 	public function testNoLabel() {
-		list( $html, ) = $this->executeSpecialPage( 'fr', null, 'qqx' );
+		[ $html ] = $this->executeSpecialPage( 'fr' );
 
 		$this->assertStringNotContainsString( 'mock-span', $html );
 	}
 
 	public function testUnknownLabel() {
-		list( $html, ) = $this->executeSpecialPage( 'fr/Unknown', null, 'qqx' );
+		[ $html ] = $this->executeSpecialPage( 'fr/Unknown' );
 
 		$this->assertStringContainsString( 'value=\'fr\'', $html );
 		$this->assertStringContainsString( 'value=\'Unknown\'', $html );
@@ -190,7 +190,7 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 	}
 
 	public function testKnownLabel() {
-		list( $html, ) = $this->executeSpecialPage( 'fr/Foo', null, 'qqx' );
+		[ $html ] = $this->executeSpecialPage( 'fr/Foo' );
 
 		$this->assertStringContainsString( '<span class="mock-span" >ItemDisambiguationHTML-2</span>', $html );
 	}
