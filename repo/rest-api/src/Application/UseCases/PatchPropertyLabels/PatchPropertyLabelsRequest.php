@@ -2,10 +2,14 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels;
 
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PatchRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\UseCaseRequest;
+
 /**
  * @license GPL-2.0-or-later
  */
-class PatchPropertyLabelsRequest {
+class PatchPropertyLabelsRequest implements UseCaseRequest, PropertyIdRequest, PatchRequest {
 
 	private string $propertyId;
 	private array $patch;

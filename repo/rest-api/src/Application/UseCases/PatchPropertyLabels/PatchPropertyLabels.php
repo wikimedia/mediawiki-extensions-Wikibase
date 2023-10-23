@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels;
 
-use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
@@ -23,6 +22,7 @@ class PatchPropertyLabels {
 	private LabelsDeserializer $labelsDeserializer;
 	private PropertyRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
+	private PatchPropertyLabelsValidator $useCaseValidator;
 
 	public function __construct(
 		PropertyLabelsRetriever $labelsRetriever,
@@ -30,7 +30,8 @@ class PatchPropertyLabels {
 		JsonPatcher $patcher,
 		LabelsDeserializer $labelsDeserializer,
 		PropertyRetriever $propertyRetriever,
-		PropertyUpdater $propertyUpdater
+		PropertyUpdater $propertyUpdater,
+		PatchPropertyLabelsValidator $useCaseValidator
 	) {
 		$this->labelsRetriever = $labelsRetriever;
 		$this->labelsSerializer = $labelsSerializer;
@@ -38,10 +39,12 @@ class PatchPropertyLabels {
 		$this->labelsDeserializer = $labelsDeserializer;
 		$this->propertyRetriever = $propertyRetriever;
 		$this->propertyUpdater = $propertyUpdater;
+		$this->useCaseValidator = $useCaseValidator;
 	}
 
 	public function execute( PatchPropertyLabelsRequest $request ): PatchPropertyLabelsResponse {
-		$propertyId = new NumericPropertyId( $request->getPropertyId() );
+		$deserializedRequest = $this->useCaseValidator->validateAndDeserialize( $request );
+		$propertyId = $deserializedRequest->getPropertyId();
 		$property = $this->propertyRetriever->getProperty( $propertyId );
 		$originalLabels = $property->getLabels();
 
@@ -49,7 +52,7 @@ class PatchPropertyLabels {
 		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
 		$serialization = $this->labelsSerializer->serialize( $labels );
 
-		$modifiedLabels = $this->patcher->patch( iterator_to_array( $serialization ), $request->getPatch() );
+		$modifiedLabels = $this->patcher->patch( iterator_to_array( $serialization ), $deserializedRequest->getPatch() );
 		$modifiedLabelsAsTermList = $this->labelsDeserializer->deserialize( $modifiedLabels );
 
 		$property->getFingerprint()->setLabels( $modifiedLabelsAsTermList );
