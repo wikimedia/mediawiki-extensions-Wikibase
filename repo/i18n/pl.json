@@ -149,7 +149,7 @@
 	"wikibase-copyrighttooltip-acknowledge": "Przyjmuję te warunki dla moich przyszłych edycji. Nie pokazuj więcej tego komunikatu.",
 	"wikibase-entityselector-more": "więcej",
 	"wikibase-entityselector-notfound": "Brak wyników",
-	"wikibase-anonymouseditwarning": "Ostrzeżenie: Nie jesteś zalogowany. Jeśli wykonasz jakąkolwiek zmianę, Twój [https://pl.wikipedia.org/wiki/Adres_IP adres IP] będzie widoczny publicznie. Jeśli <strong>[[Special:UserLogin|zalogujesz się]]</strong> lub <strong>[[Special:CreateAccount|utworzysz konto]]</strong>, Twoje zmiany zostaną przypisane do konta, wraz z innymi korzyściami.",
+	"wikibase-anonymouseditwarning": "Ostrzeżenie: Nie jesteś zalogowany. Jeśli wykonasz jakąkolwiek zmianę, Twój [https://pl.wikipedia.org/wiki/Adres_IP adres IP] będzie widoczny publicznie. Jeśli <strong>[$1 zalogujesz się]</strong> lub <strong>[$2 utworzysz konto]</strong>, Twoje zmiany zostaną przypisane do nazwy użytkownika, wraz z innymi korzyściami posiadania konta.",
 	"wikibase-anonymouseditwarning-heading": "Nie jesteś zalogowany",
 	"wikibase-anonymouseditwarning-message": "Jeśli wykonasz jakąkolwiek zmianę, Twój adres IP będzie widoczny publicznie. Jeśli zalogujesz się lub utworzysz konto, Twoje zmiany zostaną przypisane do konta, wraz z innymi korzyściami.",
 	"wikibase-anonymouseditwarning-dismiss-persist": "Ostrzegaj mnie że jestem niezalogowany.",
