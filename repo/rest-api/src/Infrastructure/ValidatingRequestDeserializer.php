@@ -5,6 +5,7 @@ namespace Wikibase\Repo\RestApi\Infrastructure;
 use Psr\Container\ContainerInterface;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\DeserializedRequestAdapter;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemAliasesEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemDescriptionEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemIdRequest;
@@ -19,6 +20,7 @@ use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyLabelEdit
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementSerializationRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\UseCaseRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliases\AddItemAliasesValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItemValidator;
@@ -102,7 +104,8 @@ class ValidatingRequestDeserializer	implements
 	SetPropertyDescriptionValidator,
 	PatchPropertyLabelsValidator,
 	PatchPropertyAliasesValidator,
-	SetPropertyLabelValidator
+	SetPropertyLabelValidator,
+	AddItemAliasesValidator
 {
 	private const PREFIX = 'WbRestApi.RequestValidation.';
 	public const ITEM_ID_REQUEST_VALIDATING_DESERIALIZER = self::PREFIX . 'ItemIdRequestValidatingDeserializer';
@@ -118,6 +121,8 @@ class ValidatingRequestDeserializer	implements
 	public const PATCH_REQUEST_VALIDATING_DESERIALIZER = self::PREFIX . 'PatchRequestValidatingDeserializer';
 	public const ITEM_LABEL_EDIT_REQUEST_VALIDATING_DESERIALIZER = self::PREFIX . 'ItemLabelEditRequestValidatingDeserializer';
 	public const ITEM_DESCRIPTION_EDIT_REQUEST_VALIDATING_DESERIALIZER = self::PREFIX . 'ItemDescriptionEditRequestValidatingDeserializer';
+	public const ITEM_ALIASES_EDIT_REQUEST_VALIDATING_DESERIALIZER = self::PREFIX . 'ItemAliasesEditRequestValidatingDeserializer';
+
 	public const PROPERTY_DESCRIPTION_EDIT_REQUEST_VALIDATING_DESERIALIZER =
 		self::PREFIX . 'PropertyDescriptionEditRequestValidatingDeserializer';
 	public const PROPERTY_LABEL_EDIT_REQUEST_VALIDATING_DESERIALIZER = self::PREFIX . 'PropertyLabelEditRequestValidatingDeserializer';
@@ -155,6 +160,7 @@ class ValidatingRequestDeserializer	implements
 			PatchRequest::class => self::PATCH_REQUEST_VALIDATING_DESERIALIZER,
 			ItemLabelEditRequest::class => self::ITEM_LABEL_EDIT_REQUEST_VALIDATING_DESERIALIZER,
 			ItemDescriptionEditRequest::class => self::ITEM_DESCRIPTION_EDIT_REQUEST_VALIDATING_DESERIALIZER,
+			ItemAliasesEditRequest::class => self::ITEM_ALIASES_EDIT_REQUEST_VALIDATING_DESERIALIZER,
 			PropertyLabelEditRequest::class => self::PROPERTY_LABEL_EDIT_REQUEST_VALIDATING_DESERIALIZER,
 			PropertyDescriptionEditRequest::class => self::PROPERTY_DESCRIPTION_EDIT_REQUEST_VALIDATING_DESERIALIZER,
 		];

@@ -10,6 +10,11 @@ use LogicException;
 class UseCaseError extends UseCaseException {
 
 	public const ALIASES_NOT_DEFINED = 'aliases-not-defined';
+	public const ALIAS_EMPTY = 'alias-empty';
+	public const ALIAS_LIST_EMPTY = 'alias-list-empty';
+	public const ALIAS_TOO_LONG = 'alias-too-long';
+	public const ALIAS_DUPLICATE = 'duplicate-alias';
+	public const INVALID_ALIAS = 'invalid-alias';
 	public const COMMENT_TOO_LONG = 'comment-too-long';
 	public const DESCRIPTION_EMPTY = 'description-empty';
 	public const DESCRIPTION_NOT_DEFINED = 'description-not-defined';
@@ -64,6 +69,7 @@ class UseCaseError extends UseCaseException {
 	public const UNEXPECTED_ERROR = 'unexpected-error';
 
 	public const CONTEXT_ACTUAL_VALUE = 'actual-value';
+	public const CONTEXT_ALIAS = 'alias';
 	public const CONTEXT_CHARACTER_LIMIT = 'character-limit';
 	public const CONTEXT_DESCRIPTION = 'description';
 	public const CONTEXT_FIELD = 'field';
@@ -78,11 +84,16 @@ class UseCaseError extends UseCaseException {
 	public const CONTEXT_VALUE = 'value';
 
 	public const EXPECTED_CONTEXT_KEYS = [
+		self::ALIAS_DUPLICATE => [ self::CONTEXT_ALIAS ],
+		self::ALIAS_EMPTY => [],
+		self::ALIAS_LIST_EMPTY => [],
+		self::ALIAS_TOO_LONG => [ self::CONTEXT_VALUE, self::CONTEXT_CHARACTER_LIMIT ],
 		self::ALIASES_NOT_DEFINED => [],
 		self::COMMENT_TOO_LONG => [],
 		self::DESCRIPTION_EMPTY => [],
 		self::DESCRIPTION_NOT_DEFINED => [],
 		self::DESCRIPTION_TOO_LONG => [ self::CONTEXT_VALUE, self::CONTEXT_CHARACTER_LIMIT ],
+		self::INVALID_ALIAS => [ self::CONTEXT_ALIAS ],
 		self::INVALID_DESCRIPTION => [],
 		self::INVALID_EDIT_TAG => [],
 		self::INVALID_FIELD => [],

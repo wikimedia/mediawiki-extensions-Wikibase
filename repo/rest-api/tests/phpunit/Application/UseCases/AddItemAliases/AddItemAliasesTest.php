@@ -4,11 +4,15 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\AddItemAliases;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\AliasGroup;
+use Wikibase\DataModel\Term\AliasGroupList;
+use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliases\AddItemAliases;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliases\AddItemAliasesRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliases\AddItemAliasesResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
@@ -137,7 +141,45 @@ class AddItemAliasesTest extends TestCase {
 		$this->assertSame( $modificationTimestamp, $response->getLastModified() );
 	}
 
+	public function testValidationError_throwsUseCaseError(): void {
+		try {
+			$this->newUseCase()->execute(
+				new AddItemAliasesRequest( 'Q123', 'en', [ '' ], [], false, null )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::ALIAS_EMPTY, $e->getErrorCode() );
+		}
+	}
+
+	public function testAddDuplicateAlias_throwsUseCaseError(): void {
+		$itemId = new ItemId( 'Q123' );
+		$aliases = new AliasGroupList( [ new AliasGroup( 'en', [ 'duplicate alias' ] ) ] );
+		$item = new Item( $itemId, new Fingerprint( null, null, $aliases ) );
+
+		$this->itemRetriever = $this->createMock( ItemRetriever::class );
+		$this->itemRetriever->method( 'getItem' )
+			->with( $itemId )
+			->willReturn( $item );
+
+		try {
+			$this->newUseCase()->execute(
+				new AddItemAliasesRequest(
+					"$itemId",
+					'en',
+					[ 'duplicate alias' ],
+					[],
+					false,
+					null
+				)
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::ALIAS_DUPLICATE, $e->getErrorCode() );
+		}
+	}
+
 	private function newUseCase(): AddItemAliases {
-		return new AddItemAliases( $this->itemRetriever, $this->itemUpdater );
+		return new AddItemAliases( $this->itemRetriever, $this->itemUpdater, new TestValidatingRequestDeserializer() );
 	}
 }

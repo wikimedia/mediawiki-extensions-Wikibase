@@ -2,10 +2,13 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\AddItemAliases;
 
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemAliasesEditRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\UseCaseRequest;
+
 /**
  * @license GPL-2.0-or-later
  */
-class AddItemAliasesRequest {
+class AddItemAliasesRequest implements UseCaseRequest, ItemAliasesEditRequest {
 
 	private string $itemId;
 	private string $languageCode;

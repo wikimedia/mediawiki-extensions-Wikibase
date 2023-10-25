@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\AddItemAliases;
 
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\AliasesEditSummary;
@@ -17,19 +16,27 @@ class AddItemAliases {
 
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
+	private AddItemAliasesValidator $validator;
 
-	public function __construct( ItemRetriever $itemRetriever, ItemUpdater $itemUpdater ) {
+	public function __construct(
+		ItemRetriever $itemRetriever,
+		ItemUpdater $itemUpdater,
+		AddItemAliasesValidator $validator
+	) {
 		$this->itemRetriever = $itemRetriever;
 		$this->itemUpdater = $itemUpdater;
+		$this->validator = $validator;
 	}
 
 	/**
 	 * @throws UseCaseError
 	 */
 	public function execute( AddItemAliasesRequest $request ): AddItemAliasesResponse {
-		// TODO: validate
-		$itemId = new ItemId( $request->getItemId() );
-		$languageCode = $request->getLanguageCode();
+		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
+
+		$itemId = $deserializedRequest->getItemId();
+		$languageCode = $deserializedRequest->getLanguageCode();
+		$newAliases = $deserializedRequest->getItemAliases();
 
 		// TODO: existence check
 		// TODO: deserialize edit metadata
@@ -38,11 +45,8 @@ class AddItemAliases {
 		$item = $this->itemRetriever->getItem( $itemId );
 		$aliasesExist = $item->getAliasGroups()->hasGroupForLanguage( $languageCode );
 		$originalAliases = $aliasesExist ? $item->getAliasGroups()->getByLanguage( $languageCode )->getAliases() : [];
-		$modifiedAliases = array_merge( $originalAliases, $request->getAliases() );
 
-		// TODO: check duplicate aliases
-
-		$item->getAliasGroups()->setAliasesForLanguage( $languageCode, $modifiedAliases );
+		$item->getAliasGroups()->setAliasesForLanguage( $languageCode, $this->addAliases( $originalAliases, $newAliases ) );
 		$newRevision = $this->itemUpdater->update(
 			$item, // @phan-suppress-current-line PhanTypeMismatchArgumentNullable
 			new EditMetadata(
@@ -59,6 +63,19 @@ class AddItemAliases {
 			$newRevision->getRevisionId(),
 			$aliasesExist
 		);
+	}
+
+	private function addAliases( array $originalAliases, array $newAliases ): array {
+		$duplicates = array_intersect( $newAliases, $originalAliases );
+		if ( !empty( $duplicates ) ) {
+			throw new UseCaseError(
+				UseCaseError::ALIAS_DUPLICATE,
+				"Alias list contains a duplicate alias: '${duplicates[0]}'",
+				[ UseCaseError::CONTEXT_ALIAS => $duplicates[0] ]
+			);
+		}
+
+		return array_merge( $originalAliases, $newAliases );
 	}
 
 }
