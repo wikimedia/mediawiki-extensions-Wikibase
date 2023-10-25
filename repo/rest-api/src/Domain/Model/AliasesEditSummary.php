@@ -14,6 +14,17 @@ class AliasesEditSummary implements EditSummary {
 	private AliasGroupList $originalAliases;
 	private AliasGroupList $modifiedAliases;
 
+	public static function newAddSummary( ?string $userComment, AliasGroupList $modifiedAliases ): self {
+		$summary = new self();
+		$summary->editAction = self::ADD_ACTION;
+		$summary->userComment = $userComment;
+		// TODO: hacky? recheck when creating the edit summary for adding aliases
+		$summary->originalAliases = new AliasGroupList();
+		$summary->modifiedAliases = $modifiedAliases;
+
+		return $summary;
+	}
+
 	public static function newPatchSummary( ?string $userComment, AliasGroupList $originalAliases, AliasGroupList $patchedAliases ): self {
 		$summary = new self();
 		$summary->editAction = self::PATCH_ACTION;
