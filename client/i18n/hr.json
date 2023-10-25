@@ -29,7 +29,7 @@
 	"wikibase-dataitem": "Stavka na Wikipodatcima",
 	"wikibase-editlinks": "Uredi poveznice",
 	"wikibase-editlinkstitle": "Poveznice na druge jezike",
-	"wikibase-addlinkstitle": "Dodaj druge jezike",
+	"wikibase-addlinkstitle": "Poveznice na druge jezike",
 	"wikibase-linkitem-addlinks": "Dodaj poveznice",
 	"wikibase-linkitem-alreadylinked": "Stranica koju ste željeli povezati već je povezana sa [$1 stavkom] u središnjem repozitoriju podataka, a vodi na [[$2]] na ovom mrežnom sjedištu. Stavke se mogu povezati samo s jednom stranicom na mrežnom sjedištu. Molimo Vas, izaberite drugu stranicu za povezivanje.",
 	"wikibase-linkitem-close": "Zatvori dijalog i ponovno učitaj stranicu",

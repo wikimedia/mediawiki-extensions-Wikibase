@@ -8,12 +8,12 @@
 	},
 	"tooltip-t-wikibase": "То-дигин хадһллң холвсн махбуд тал заалһ",
 	"wikibase-comment-update": "{{WBREPONAME}} махбуд сольгдсн",
-	"wikibase-dataitem": "{{WBREPONAME}} махбуд",
-	"wikibase-editlinks": "Заалһс ясх",
+	"wikibase-dataitem": "{{WBREPONAME}} зүүл",
+	"wikibase-editlinks": "Холвас ясх",
 	"wikibase-editlinkstitle": "Келд дундк заалһ ясх",
 	"wikibase-linkitem-addlinks": "Холвас немх",
 	"wikibase-linkitem-title": "Халхла холвх",
-	"wikibase-linkitem-linkpage": "Халхта холвх",
+	"wikibase-linkitem-linkpage": "Халхла холвх",
 	"wikibase-linkitem-selectlink": "Эн халхта холвх гиҗәх сайт болн халхиг суңһтн",
 	"wikibase-linkitem-input-site": "Келн:",
 	"wikibase-linkitem-input-page": "Халх:",
@@ -21,5 +21,5 @@
 	"wikibase-rc-hide-wikidata-show": "Үзүлх",
 	"wikibase-rc-wikibase-edit-letter": "Ө",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} ясвр",
-	"wikibase-otherprojects": "Талдан төслмүдт"
+	"wikibase-otherprojects": "Бусд төсл"
 }
