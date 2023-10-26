@@ -21,8 +21,12 @@ class JsonDiffJsonPatcherTest extends TestCase {
 
 	/**
 	 * @dataProvider validPatchProvider
+	 *
+	 * @param array $target
+	 * @param array $patch
+	 * @param mixed $expected
 	 */
-	public function testPatch( array $target, array $patch, array $expected ): void {
+	public function testPatch( array $target, array $patch, $expected ): void {
 		$result = ( new JsonDiffJsonPatcher() )->patch( $target, $patch );
 
 		$this->assertEquals( $expected, $result );
@@ -51,6 +55,18 @@ class JsonDiffJsonPatcherTest extends TestCase {
 			[ 'foo' => 'bar', 'baz' => 42 ],
 			[ [ 'op' => 'test', 'path' => '/baz', 'value' => 42 ] ],
 			[ 'foo' => 'bar', 'baz' => 42 ],
+		];
+
+		yield 'add a key/value pair to an empty array' => [
+			[],
+			[ [ 'op' => 'add', 'path' => '/foo', 'value' => 'new value' ] ],
+			[ 'foo' => 'new value' ],
+		];
+
+		yield 'patch results in a string' => [
+			[ 'foo' => 'bar', 'baz' => 42 ],
+			[ [ 'op' => 'replace', 'path' => '', 'value' => 'replaced value' ] ],
+			'replaced value',
 		];
 	}
 

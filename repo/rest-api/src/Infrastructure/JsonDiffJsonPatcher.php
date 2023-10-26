@@ -19,7 +19,7 @@ class JsonDiffJsonPatcher implements JsonPatcher {
 	/**
 	 * @inheritDoc
 	 */
-	public function patch( array $target, array $patch ): array {
+	public function patch( array $target, array $patch ) {
 		try {
 			$patchDocument = JsonPatch::import( $patch );
 		} catch ( Exception $e ) {
@@ -41,7 +41,7 @@ class JsonDiffJsonPatcher implements JsonPatcher {
 		}
 
 		// TODO investigate. Casting to array is necessary if $target starts out as an empty array.
-		return (array)$target;
+		return is_object( $target ) ? (array)$target : $target;
 	}
 
 }
