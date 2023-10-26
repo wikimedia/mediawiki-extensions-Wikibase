@@ -6,10 +6,10 @@ use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
-use Wikibase\Repo\RestApi\Domain\Services\JsonPatcher;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyLabelsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
@@ -21,7 +21,7 @@ class PatchPropertyLabels {
 
 	private PropertyLabelsRetriever $labelsRetriever;
 	private LabelsSerializer $labelsSerializer;
-	private JsonPatcher $patcher;
+	private PatchJson $patcher;
 	private LabelsDeserializer $labelsDeserializer;
 	private PropertyRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
@@ -32,7 +32,7 @@ class PatchPropertyLabels {
 	public function __construct(
 		PropertyLabelsRetriever $labelsRetriever,
 		LabelsSerializer $labelsSerializer,
-		JsonPatcher $patcher,
+		PatchJson $patcher,
 		LabelsDeserializer $labelsDeserializer,
 		PropertyRetriever $propertyRetriever,
 		PropertyUpdater $propertyUpdater,
@@ -65,15 +65,18 @@ class PatchPropertyLabels {
 			$deserializedRequest->getEditMetadata()->getUser()->getUsername()
 		);
 
+		$modifiedLabels = $this->patcher->execute(
+			iterator_to_array(
+				// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
+				$this->labelsSerializer->serialize( $this->labelsRetriever->getLabels( $propertyId ) )
+			),
+			$deserializedRequest->getPatch()
+		);
+
+		$modifiedLabelsAsTermList = $this->labelsDeserializer->deserialize( $modifiedLabels );
+
 		$property = $this->propertyRetriever->getProperty( $propertyId );
 		$originalLabels = $property->getLabels();
-
-		$labels = $this->labelsRetriever->getLabels( $propertyId );
-		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-		$serialization = $this->labelsSerializer->serialize( $labels );
-
-		$modifiedLabels = $this->patcher->patch( iterator_to_array( $serialization ), $deserializedRequest->getPatch() );
-		$modifiedLabelsAsTermList = $this->labelsDeserializer->deserialize( $modifiedLabels );
 
 		$property->getFingerprint()->setLabels( $modifiedLabelsAsTermList );
 
