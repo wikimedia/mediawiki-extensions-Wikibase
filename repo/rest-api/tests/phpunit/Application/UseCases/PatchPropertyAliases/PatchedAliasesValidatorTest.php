@@ -25,6 +25,7 @@ use Wikibase\Repo\Validators\TermValidatorFactory;
  * @license GPL-2.0-or-later
  */
 class PatchedAliasesValidatorTest extends TestCase {
+
 	private const LIMIT = 50;
 
 	/**
@@ -38,26 +39,22 @@ class PatchedAliasesValidatorTest extends TestCase {
 	}
 
 	public static function validAliasesProvider(): Generator {
-		yield 'no aliases' => [
-			[],
-			new AliasGroupList(),
-		];
+		yield 'no aliases' => [ [], new AliasGroupList() ];
 
 		$enAliases = [ 'spud', 'tater' ];
 		$deAliases = [ 'Erdapfel', 'Grundbirne' ];
 		yield 'valid aliases' => [
 			[ 'en' => $enAliases, 'de' => $deAliases ],
-			new AliasGroupList( [
-				new AliasGroup( 'en', $enAliases ),
-				new AliasGroup( 'de', $deAliases ),
-			] ),
+			new AliasGroupList( [ new AliasGroup( 'en', $enAliases ), new AliasGroup( 'de', $deAliases ) ] ),
 		];
 	}
 
 	/**
 	 * @dataProvider invalidAliasesProvider
+	 *
+	 * @param mixed $serialization
 	 */
-	public function testWithInvalidAliases( array $serialization, UseCaseError $expectedError ): void {
+	public function testWithInvalidAliases( $serialization, UseCaseError $expectedError ): void {
 		try {
 			$this->newValidator()->validateAndDeserialize( $serialization );
 			$this->fail( 'expected exception was not thrown' );
@@ -91,7 +88,7 @@ class PatchedAliasesValidatorTest extends TestCase {
 			[ 'en' => [ $tooLongAlias ] ],
 			new UseCaseError(
 				UseCaseError::PATCHED_ALIAS_TOO_LONG,
-				"Changed alias for 'en' must not be more than '" . self::LIMIT . "'",
+				"Changed alias for 'en' must not be more than " . self::LIMIT . ' characters long',
 				[
 					UseCaseError::CONTEXT_LANGUAGE => 'en',
 					UseCaseError::CONTEXT_VALUE => $tooLongAlias,
@@ -104,11 +101,35 @@ class PatchedAliasesValidatorTest extends TestCase {
 		yield 'alias contains invalid character' => [
 			[ 'en' => [ $invalidAlias ] ],
 			new UseCaseError(
-				UseCaseError::PATCHED_ALIAS_INVALID,
-				"Changed alias for 'en' is invalid: '{$invalidAlias}'",
+				UseCaseError::PATCHED_ALIASES_INVALID_FIELD,
+				"Patched value for 'en' is invalid",
 				[
-					UseCaseError::CONTEXT_LANGUAGE => 'en',
+					UseCaseError::CONTEXT_PATH => 'en',
 					UseCaseError::CONTEXT_VALUE => $invalidAlias,
+				]
+			),
+		];
+
+		yield 'aliases in language is not a list' => [
+			[ 'en' => 'not a list' ],
+			new UseCaseError(
+				UseCaseError::PATCHED_ALIASES_INVALID_FIELD,
+				"Patched value for 'en' is invalid",
+				[
+					UseCaseError::CONTEXT_PATH => 'en',
+					UseCaseError::CONTEXT_VALUE => 'not a list',
+				]
+			),
+		];
+
+		yield 'aliases is not an object' => [
+			'not an object',
+			new UseCaseError(
+				UseCaseError::PATCHED_ALIASES_INVALID_FIELD,
+				"Patched value for '' is invalid",
+				[
+					UseCaseError::CONTEXT_PATH => '',
+					UseCaseError::CONTEXT_VALUE => 'not an object',
 				]
 			),
 		];
@@ -117,7 +138,7 @@ class PatchedAliasesValidatorTest extends TestCase {
 		yield 'invalid language code' => [
 			[ $invalidLanguage => [ 'alias' ] ],
 			new UseCaseError(
-				UseCaseError::PATCHED_ALIAS_INVALID_LANGUAGE_CODE,
+				UseCaseError::PATCHED_ALIASES_INVALID_LANGUAGE_CODE,
 				"Not a valid language code '{$invalidLanguage}' in changed aliases",
 				[ UseCaseError::CONTEXT_LANGUAGE => $invalidLanguage ]
 			),
@@ -128,14 +149,16 @@ class PatchedAliasesValidatorTest extends TestCase {
 		$validLanguageCodes = [ 'ar', 'de', 'en', 'fr' ];
 		return new PatchedAliasesValidator(
 			new AliasesDeserializer(),
-			new WikibaseRepoAliasesInLanguageValidator( new TermValidatorFactory(
-				self::LIMIT,
-				$validLanguageCodes,
-				$this->createStub( EntityIdParser::class ),
-				$this->createStub( TermsCollisionDetectorFactory::class ),
-				$this->createStub( TermLookup::class ),
-				$this->createStub( LanguageNameUtils::class )
-			) ),
+			new WikibaseRepoAliasesInLanguageValidator(
+				new TermValidatorFactory(
+					self::LIMIT,
+					$validLanguageCodes,
+					$this->createStub( EntityIdParser::class ),
+					$this->createStub( TermsCollisionDetectorFactory::class ),
+					$this->createStub( TermLookup::class ),
+					$this->createStub( LanguageNameUtils::class )
+				)
+			),
 			new LanguageCodeValidator( $validLanguageCodes )
 		);
 	}

@@ -17,7 +17,10 @@ class PatchJson {
 		$this->patcher = $patcher;
 	}
 
-	public function execute( array $serialization, array $patch ): array {
+	/**
+	 * @return mixed
+	 */
+	public function execute( array $serialization, array $patch ) {
 		try {
 			return $this->patcher->patch( $serialization, $patch );
 		} catch ( PatchPathException $e ) {

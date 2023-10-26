@@ -6,6 +6,7 @@ use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DuplicateAliasException;
 use Wikibase\Repo\RestApi\Application\Serialization\EmptyAliasException;
+use Wikibase\Repo\RestApi\Application\Serialization\InvalidFieldException;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
@@ -30,9 +31,19 @@ class PatchedAliasesValidator {
 	}
 
 	/**
+	 * @param mixed $serialization
+	 *
 	 * @throws UseCaseError
 	 */
-	public function validateAndDeserialize( array $serialization ): AliasGroupList {
+	public function validateAndDeserialize( $serialization ): AliasGroupList {
+		if ( !is_array( $serialization ) || ( array_is_list( $serialization ) && count( $serialization ) > 0 ) ) {
+			throw new UseCaseError(
+				UseCaseError::PATCHED_ALIASES_INVALID_FIELD,
+				"Patched value for '' is invalid",
+				[ UseCaseError::CONTEXT_PATH => '', UseCaseError::CONTEXT_VALUE => $serialization ]
+			);
+		}
+
 		$this->validateLanguageCodes( array_keys( $serialization ) );
 
 		$aliases = $this->deserialize( $serialization );
@@ -57,6 +68,12 @@ class PatchedAliasesValidator {
 				"Aliases in language '{$e->getField()}' contain duplicate alias: '{$e->getValue()}'",
 				[ UseCaseError::CONTEXT_LANGUAGE => $e->getField(), UseCaseError::CONTEXT_VALUE => $e->getValue() ]
 			);
+		} catch ( InvalidFieldException $e ) {
+			throw new UseCaseError(
+				UseCaseError::PATCHED_ALIASES_INVALID_FIELD,
+				"Patched value for '{$e->getField()}' is invalid",
+				[ UseCaseError::CONTEXT_PATH => $e->getField(), UseCaseError::CONTEXT_VALUE => $e->getValue() ]
+			);
 		}
 	}
 
@@ -70,7 +87,7 @@ class PatchedAliasesValidator {
 						$limit = $context[AliasesInLanguageValidator::CONTEXT_LIMIT];
 						throw new UseCaseError(
 							UseCaseError::PATCHED_ALIAS_TOO_LONG,
-							"Changed alias for '{$aliasGroup->getLanguageCode()}' must not be more than '$limit'",
+							"Changed alias for '{$aliasGroup->getLanguageCode()}' must not be more than $limit characters long",
 							[
 								UseCaseError::CONTEXT_LANGUAGE => $aliasGroup->getLanguageCode(),
 								UseCaseError::CONTEXT_VALUE => $context[AliasesInLanguageValidator::CONTEXT_VALUE],
@@ -78,13 +95,13 @@ class PatchedAliasesValidator {
 							]
 						);
 					default:
-						$alias = $context[AliasesInLanguageValidator::CONTEXT_VALUE];
+						$value = $context[AliasesInLanguageValidator::CONTEXT_VALUE];
 						throw new UseCaseError(
-							UseCaseError::PATCHED_ALIAS_INVALID,
-							"Changed alias for '{$aliasGroup->getLanguageCode()}' is invalid: '$alias'",
+							UseCaseError::PATCHED_ALIASES_INVALID_FIELD,
+							"Patched value for '{$aliasGroup->getLanguageCode()}' is invalid",
 							[
-								UseCaseError::CONTEXT_LANGUAGE => $aliasGroup->getLanguageCode(),
-								UseCaseError::CONTEXT_VALUE => $alias,
+								UseCaseError::CONTEXT_PATH => $aliasGroup->getLanguageCode(),
+								UseCaseError::CONTEXT_VALUE => $value,
 							]
 						);
 				}
@@ -96,11 +113,12 @@ class PatchedAliasesValidator {
 		foreach ( $languageCodes as $languageCode ) {
 			if ( $this->languageCodeValidator->validate( $languageCode ) ) {
 				throw new UseCaseError(
-					UseCaseError::PATCHED_ALIAS_INVALID_LANGUAGE_CODE,
+					UseCaseError::PATCHED_ALIASES_INVALID_LANGUAGE_CODE,
 					"Not a valid language code '$languageCode' in changed aliases",
 					[ UseCaseError::CONTEXT_LANGUAGE => $languageCode ]
 				);
 			}
 		}
 	}
+
 }

@@ -83,4 +83,15 @@ class AliasesDeserializerTest extends TestCase {
 		}
 	}
 
+	public function testGivenInvalidAliasesType_throwsException(): void {
+		$invalidAliasesInLanguage = [ 'associative' => 'not a list' ];
+		try {
+			( new AliasesDeserializer() )->deserialize( [ 'en' => $invalidAliasesInLanguage ] );
+			$this->fail( 'this should not be reached' );
+		} catch ( InvalidFieldException $e ) {
+			$this->assertSame( 'en', $e->getField() );
+			$this->assertSame( $invalidAliasesInLanguage, $e->getValue() );
+		}
+	}
+
 }

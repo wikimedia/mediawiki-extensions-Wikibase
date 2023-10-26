@@ -982,7 +982,7 @@
 					},
 					"patched-alias-empty": { "$ref": "./examples.json#/PatchedAliasEmptyExample" },
 					"patched-alias-too-long": { "$ref": "./examples.json#/PatchedAliasTooLongExample" },
-					"patched-alias-invalid": { "$ref": "./examples.json#/PatchedAliasInvalidExample" },
+					"patched-aliases-invalid-field": { "$ref": "./examples.json#/PatchedAliasesInvalidFieldExample" },
 					"patched-duplicate-alias": { "$ref": "./examples.json#/PatchedDuplicateAliasExample" }
 				}
 			}

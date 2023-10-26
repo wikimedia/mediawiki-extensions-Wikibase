@@ -14,7 +14,7 @@ class AliasesDeserializer {
 		$aliasGroups = [];
 
 		foreach ( $serialization as $language => $aliasesInLanguage ) {
-			if ( !is_array( $aliasesInLanguage ) ) {
+			if ( !is_array( $aliasesInLanguage ) || !array_is_list( $aliasesInLanguage ) ) {
 				throw new InvalidFieldException( $language, $aliasesInLanguage );
 			}
 

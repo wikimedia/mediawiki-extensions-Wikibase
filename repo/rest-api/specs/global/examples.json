@@ -382,13 +382,13 @@
 			}
 		}
 	},
-	"PatchedAliasInvalidExample": {
+	"PatchedAliasesInvalidFieldExample": {
 		"value": {
-			"code": "patched-alias-invalid",
-			"message": "Changed alias for '{language_code}' is invalid: '{alias}'",
+			"code": "patched-aliases-invalid-field",
+			"message": "Patched value for '{field}' is invalid",
 			"context": {
-				"language": "{language_code}",
-				"value": "{alias}"
+				"path": "{field}",
+				"value": "{value}"
 			}
 		}
 	},
@@ -397,8 +397,8 @@
 			"code": "patched-duplicate-alias",
 			"message": "Aliases in language '{language_code}' contain duplicate alias: '{alias}'",
 			"context": {
-				"language": "{language_code}",
-				"value": "{alias}"
+				"alias": "{alias}",
+				"language": "{language_code}"
 			}
 		}
 	},
