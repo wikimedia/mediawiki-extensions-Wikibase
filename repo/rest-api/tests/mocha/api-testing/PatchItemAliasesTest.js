@@ -263,17 +263,37 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'alias contains invalid characters', async () => {
-			const language = 'en';
 			const invalidAlias = 'tab\t tab\t tab';
 			const response = await newPatchItemAliasesRequestBuilder( testItemId, [
-				{ op: 'add', path: `/${language}`, value: [ invalidAlias ] }
+				{ op: 'add', path: `/${testLanguage}`, value: [ invalidAlias ] }
 			] ).assertValidRequest().makeRequest();
 
 			expect( response ).to.have.status( 422 );
-			assert.strictEqual( response.body.code, 'patched-alias-invalid' );
-			assert.include( response.body.message, language );
-			assert.include( response.body.message, invalidAlias );
-			assert.deepEqual( response.body.context, { language, value: invalidAlias } );
+			assert.strictEqual( response.body.code, 'patched-aliases-invalid-field' );
+			assert.include( response.body.message, testLanguage );
+			assert.deepEqual( response.body.context, { path: testLanguage, value: invalidAlias } );
+		} );
+
+		it( 'aliases in language is not a list', async () => {
+			const invalidAliasesInLanguage = { object: 'not a list' };
+			const response = await newPatchItemAliasesRequestBuilder( testItemId, [
+				{ op: 'add', path: `/${testLanguage}`, value: invalidAliasesInLanguage }
+			] ).assertValidRequest().makeRequest();
+
+			const context = { path: testLanguage, value: invalidAliasesInLanguage };
+			assertValidErrorResponse( response, 422, 'patched-aliases-invalid-field', context );
+			assert.include( response.body.message, testLanguage );
+		} );
+
+		it( 'aliases is not an object', async () => {
+			const invalidAliases = [ 'list, not an object' ];
+			const response = await newPatchItemAliasesRequestBuilder( testItemId, [
+				{ op: 'add', path: '', value: invalidAliases }
+			] ).assertValidRequest().makeRequest();
+
+			const context = { path: '', value: invalidAliases };
+			assertValidErrorResponse( response, 422, 'patched-aliases-invalid-field', context );
+			assert.strictEqual( response.body.message, "Patched value for '' is invalid" );
 		} );
 
 		it( 'invalid language code', async () => {
@@ -283,7 +303,7 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 			] ).assertValidRequest().makeRequest();
 
 			expect( response ).to.have.status( 422 );
-			assert.strictEqual( response.body.code, 'patched-alias-invalid-language-code' );
+			assert.strictEqual( response.body.code, 'patched-aliases-invalid-language-code' );
 			assert.include( response.body.message, language );
 			assert.deepEqual( response.body.context, { language } );
 		} );

@@ -47,8 +47,8 @@ class UseCaseError extends UseCaseException {
 	public const PATCHED_DESCRIPTION_INVALID_LANGUAGE_CODE = 'patched-descriptions-invalid-language-code';
 	public const PATCHED_DESCRIPTION_TOO_LONG = 'patched-description-too-long';
 	public const PATCHED_ALIAS_EMPTY = 'patched-alias-empty';
-	public const PATCHED_ALIAS_INVALID = 'patched-alias-invalid';
-	public const PATCHED_ALIAS_INVALID_LANGUAGE_CODE = 'patched-alias-invalid-language-code';
+	public const PATCHED_ALIASES_INVALID_FIELD = 'patched-aliases-invalid-field';
+	public const PATCHED_ALIASES_INVALID_LANGUAGE_CODE = 'patched-aliases-invalid-language-code';
 	public const PATCHED_ALIAS_TOO_LONG = 'patched-alias-too-long';
 	public const PATCHED_ALIAS_DUPLICATE = 'patched-duplicate-alias';
 	public const PATCHED_STATEMENT_INVALID_FIELD = 'patched-statement-invalid-field';
@@ -126,8 +126,8 @@ class UseCaseError extends UseCaseException {
 		self::PATCHED_DESCRIPTION_INVALID_LANGUAGE_CODE => [ self::CONTEXT_LANGUAGE ],
 		self::PATCHED_DESCRIPTION_TOO_LONG => [ self::CONTEXT_LANGUAGE, self::CONTEXT_VALUE, self::CONTEXT_CHARACTER_LIMIT ],
 		self::PATCHED_ALIAS_EMPTY => [ self::CONTEXT_LANGUAGE ],
-		self::PATCHED_ALIAS_INVALID => [ self::CONTEXT_LANGUAGE, self::CONTEXT_VALUE ],
-		self::PATCHED_ALIAS_INVALID_LANGUAGE_CODE => [ self::CONTEXT_LANGUAGE ],
+		self::PATCHED_ALIASES_INVALID_FIELD => [ self::CONTEXT_PATH, self::CONTEXT_VALUE ],
+		self::PATCHED_ALIASES_INVALID_LANGUAGE_CODE => [ self::CONTEXT_LANGUAGE ],
 		self::PATCHED_ALIAS_TOO_LONG => [ self::CONTEXT_LANGUAGE, self::CONTEXT_VALUE, self::CONTEXT_CHARACTER_LIMIT ],
 		self::PATCHED_ALIAS_DUPLICATE => [ self::CONTEXT_LANGUAGE, self::CONTEXT_VALUE ],
 		self::PATCHED_STATEMENT_INVALID_FIELD => [ self::CONTEXT_PATH, self::CONTEXT_VALUE ],

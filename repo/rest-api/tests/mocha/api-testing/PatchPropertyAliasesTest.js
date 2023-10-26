@@ -207,10 +207,9 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 			] ).assertValidRequest().makeRequest();
 
 			expect( response ).to.have.status( 422 );
-			assert.strictEqual( response.body.code, 'patched-alias-invalid' );
+			assert.strictEqual( response.body.code, 'patched-aliases-invalid-field' );
 			assert.include( response.body.message, language );
-			assert.include( response.body.message, invalidAlias );
-			assert.deepEqual( response.body.context, { language, value: invalidAlias } );
+			assert.deepEqual( response.body.context, { path: language, value: invalidAlias } );
 		} );
 
 		it( 'invalid language code', async () => {
@@ -220,7 +219,7 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 			] ).assertValidRequest().makeRequest();
 
 			expect( response ).to.have.status( 422 );
-			assert.strictEqual( response.body.code, 'patched-alias-invalid-language-code' );
+			assert.strictEqual( response.body.code, 'patched-aliases-invalid-language-code' );
 			assert.include( response.body.message, language );
 			assert.deepEqual( response.body.context, { language } );
 		} );
