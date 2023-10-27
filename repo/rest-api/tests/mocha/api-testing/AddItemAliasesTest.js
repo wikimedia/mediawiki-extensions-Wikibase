@@ -69,4 +69,115 @@ describe( newAddItemAliasesRequestBuilder().getRouteDescription(), () => {
 			);
 		} );
 	} );
+
+	describe( '400 error response', () => {
+		it( 'invalid item id', async () => {
+			const itemId = 'X123';
+			const response = await newAddItemAliasesRequestBuilder( itemId, 'en', [ 'new alias' ] )
+				.assertInvalidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assert.strictEqual( response.header[ 'content-language' ], 'en' );
+			assert.strictEqual( response.body.code, 'invalid-item-id' );
+			assert.include( response.body.message, itemId );
+		} );
+
+		it( 'invalid language code', async () => {
+			const invalidLanguageCode = '1e';
+			const response = await newAddItemAliasesRequestBuilder( testItemId, invalidLanguageCode, [ 'new alias' ] )
+				.assertInvalidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assert.strictEqual( response.header[ 'content-language' ], 'en' );
+			assert.strictEqual( response.body.code, 'invalid-language-code' );
+			assert.include( response.body.message, invalidLanguageCode );
+		} );
+
+		it( 'alias is empty', async () => {
+			const response = await newAddItemAliasesRequestBuilder( testItemId, 'en', [ '' ] )
+				.assertValidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assert.strictEqual( response.header[ 'content-language' ], 'en' );
+			assert.strictEqual( response.body.code, 'alias-empty' );
+			assert.strictEqual( response.body.message, 'Alias must not be empty' );
+		} );
+
+		it( 'alias list is empty', async () => {
+			const response = await newAddItemAliasesRequestBuilder( testItemId, 'en', [] )
+				.assertValidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assert.strictEqual( response.header[ 'content-language' ], 'en' );
+			assert.strictEqual( response.body.code, 'alias-list-empty' );
+			assert.strictEqual( response.body.message, 'Alias list must not be empty' );
+		} );
+
+		it( 'alias too long', async () => {
+			// this assumes the default value of 250 from Wikibase.default.php is in place and
+			// may fail if $wgWBRepoSettings['string-limits']['multilang']['length'] is overwritten
+			const maxLabelLength = 250;
+			const aliasTooLong = 'x'.repeat( maxLabelLength + 1 );
+			const response = await newAddItemAliasesRequestBuilder( testItemId, 'en', [ aliasTooLong ] )
+				.assertValidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assert.strictEqual( response.header[ 'content-language' ], 'en' );
+			assert.strictEqual( response.body.code, 'alias-too-long' );
+			assert.strictEqual(
+				response.body.message,
+				`Alias must be no more than ${maxLabelLength} characters long`
+			);
+			assert.deepEqual(
+				response.body.context,
+				{ value: aliasTooLong, 'character-limit': maxLabelLength }
+			);
+
+		} );
+
+		it( 'alias contains invalid characters', async () => {
+			const invalidAlias = 'tab characters \t not allowed';
+			const response = await newAddItemAliasesRequestBuilder( testItemId, 'en', [ invalidAlias ] )
+				.assertValidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assert.strictEqual( response.header[ 'content-language' ], 'en' );
+			assert.strictEqual( response.body.code, 'invalid-alias' );
+			assert.include( response.body.message, invalidAlias );
+		} );
+
+		it( 'duplicate input aliases', async () => {
+			const duplicateAlias = 'foo';
+			const response = await newAddItemAliasesRequestBuilder(
+				testItemId,
+				'en',
+				[ duplicateAlias, 'foo', duplicateAlias ]
+			).assertValidRequest().makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assert.strictEqual( response.header[ 'content-language' ], 'en' );
+			assert.strictEqual( response.body.code, 'duplicate-alias' );
+			assert.include( response.body.message, duplicateAlias );
+		} );
+
+		it( 'input alias already exist', async () => {
+			const duplicateAlias = 'first english alias'; // this alias was already added in before()
+			const response = await newAddItemAliasesRequestBuilder(
+				testItemId,
+				'en',
+				[ duplicateAlias ]
+			).assertValidRequest().makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assert.strictEqual( response.header[ 'content-language' ], 'en' );
+			assert.strictEqual( response.body.code, 'duplicate-alias' );
+			assert.include( response.body.message, duplicateAlias );
+		} );
+	} );
 } );

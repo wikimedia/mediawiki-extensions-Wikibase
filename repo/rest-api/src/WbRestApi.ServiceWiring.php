@@ -19,6 +19,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\SerializerFactory;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\FieldsFilterValidatingDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemAliasesEditRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemDescriptionEditRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemIdRequestValidatingDeserializer;
@@ -228,6 +229,14 @@ return [
 					WikibaseRepo::getItemTermsCollisionDetector( $services ),
 					WbRestApi::getItemDataRetriever( $services )
 				)
+			);
+		},
+
+	VRD::ITEM_ALIASES_EDIT_REQUEST_VALIDATING_DESERIALIZER =>
+		function ( MediaWikiServices $services ): ItemAliasesEditRequestValidatingDeserializer {
+			return new ItemAliasesEditRequestValidatingDeserializer(
+				new WikibaseRepoAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory() ),
+				new AliasesDeserializer()
 			);
 		},
 

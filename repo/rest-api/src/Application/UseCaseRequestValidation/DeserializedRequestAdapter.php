@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Term\Term;
+use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliases\DeserializedAddItemAliasesRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\DeserializedAddItemStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\DeserializedAddPropertyStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\DeserializedGetItemRequest;
@@ -84,7 +85,8 @@ class DeserializedRequestAdapter implements
 	DeserializedSetPropertyDescriptionRequest,
 	DeserializedPatchPropertyLabelsRequest,
 	DeserializedPatchPropertyAliasesRequest,
-	DeserializedSetPropertyLabelRequest
+	DeserializedSetPropertyLabelRequest,
+	DeserializedAddItemAliasesRequest
 {
 	private array $deserializedRequest;
 
@@ -138,6 +140,10 @@ class DeserializedRequestAdapter implements
 
 	public function getItemDescription(): Term {
 		return $this->getRequestField( ItemDescriptionEditRequest::class );
+	}
+
+	public function getItemAliases(): array {
+		return $this->getRequestField( ItemAliasesEditRequest::class );
 	}
 
 	public function getPropertyLabel(): Term {

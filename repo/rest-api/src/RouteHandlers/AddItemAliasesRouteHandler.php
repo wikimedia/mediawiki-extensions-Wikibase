@@ -10,6 +10,7 @@ use MediaWiki\Rest\Validator\BodyValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliases\AddItemAliases;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliases\AddItemAliasesRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliases\AddItemAliasesResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -39,23 +40,32 @@ class AddItemAliasesRouteHandler extends SimpleHandler {
 
 	public static function factory(): Handler {
 		return new self(
-			new AddItemAliases( WbRestApi::getItemDataRetriever(), WbRestApi::getItemUpdater() ),
+			new AddItemAliases(
+				WbRestApi::getItemDataRetriever(),
+				WbRestApi::getItemUpdater(),
+				WbRestApi::getValidatingRequestDeserializer(),
+			),
 			new ResponseFactory()
 		);
 	}
 
 	public function run( string $itemId, string $languageCode ): Response {
 		$jsonBody = $this->getValidatedBody();
-		$useCaseResponse = $this->addItemAliases->execute(
-			new AddItemAliasesRequest(
-				$itemId,
-				$languageCode,
-				$jsonBody[self::ALIASES_BODY_PARAM],
-				$jsonBody[self::TAGS_BODY_PARAM],
-				$jsonBody[self::BOT_BODY_PARAM],
-				$jsonBody[self::COMMENT_BODY_PARAM]
-			)
-		);
+		try {
+			$useCaseResponse = $this->addItemAliases->execute(
+				new AddItemAliasesRequest(
+					$itemId,
+					$languageCode,
+					$jsonBody[self::ALIASES_BODY_PARAM],
+					$jsonBody[self::TAGS_BODY_PARAM],
+					$jsonBody[self::BOT_BODY_PARAM],
+					$jsonBody[self::COMMENT_BODY_PARAM]
+				)
+			);
+		} catch ( UseCaseError $e ) {
+			return $this->responseFactory->newErrorResponseFromException( $e );
+		}
+
 		return $this->newSuccessHttpResponse( $useCaseResponse );
 	}
 
