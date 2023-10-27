@@ -34,9 +34,9 @@ class ItemAliasesEditRequestValidatingDeserializer {
 		}
 
 		$language = $request->getLanguageCode();
-		$aliases = $this->deserialize( [ $language => $request->getAliases() ] );
+		$deserializedAliases = $this->deserialize( [ $language => $aliases ] );
 
-		$aliasesInLanguage = $aliases->getByLanguage( $language );
+		$aliasesInLanguage = $deserializedAliases->getByLanguage( $language );
 		$this->validate( $aliasesInLanguage );
 
 		return $aliasesInLanguage->getAliases();
