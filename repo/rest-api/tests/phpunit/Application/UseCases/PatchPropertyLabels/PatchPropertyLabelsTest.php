@@ -8,6 +8,7 @@ use Wikibase\DataModel\Entity\Property as DataModelProperty;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchPropertyLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchPropertyLabelsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchPropertyLabelsValidator;
@@ -48,6 +49,7 @@ class PatchPropertyLabelsTest extends TestCase {
 	private PropertyUpdater $propertyUpdater;
 	private PatchPropertyLabelsValidator $validator;
 	private AssertPropertyExists $assertPropertyExists;
+	private AssertUserIsAuthorized $assertUserIsAuthorized;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -60,6 +62,7 @@ class PatchPropertyLabelsTest extends TestCase {
 		$this->propertyUpdater = $this->createStub( PropertyUpdater::class );
 		$this->validator = new TestValidatingRequestDeserializer();
 		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
+		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
 	}
 
 	public function testHappyPath(): void {
@@ -151,6 +154,26 @@ class PatchPropertyLabelsTest extends TestCase {
 		}
 	}
 
+	public function testGivenUnauthorizedRequest_throws(): void {
+		$user = 'bad-user';
+		$propertyId = new NumericPropertyId( 'P123' );
+		$request = new PatchPropertyLabelsRequest( "$propertyId", [], [], false, null, $user );
+		$expectedException = $this->createStub( UseCaseError::class );
+
+		$this->assertUserIsAuthorized = $this->createMock( AssertUserIsAuthorized::class );
+		$this->assertUserIsAuthorized->expects( $this->once() )
+			->method( 'execute' )
+			->with( $propertyId, $user )
+			->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase()->execute( $request );
+			$this->fail( 'expected exception was not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
 	private function newUseCase(): PatchPropertyLabels {
 		return new PatchPropertyLabels(
 			$this->labelsRetriever,
@@ -160,7 +183,8 @@ class PatchPropertyLabelsTest extends TestCase {
 			$this->propertyRetriever,
 			$this->propertyUpdater,
 			$this->validator,
-			$this->assertPropertyExists
+			$this->assertPropertyExists,
+			$this->assertUserIsAuthorized
 		);
 	}
 
