@@ -31,6 +31,14 @@ module.exports.getRequestsOnProperty = [
 ];
 
 module.exports.editRequestsOnProperty = [
+	( { propertyId } ) => rbf.newPatchPropertyLabelsRequestBuilder(
+		propertyId,
+		[ {
+			op: 'replace',
+			path: '/en',
+			value: 'en-label-' + utils.uniq()
+		} ]
+	),
 	( { propertyId } ) => rbf.newPatchPropertyAliasesRequestBuilder(
 		propertyId,
 		[ {
