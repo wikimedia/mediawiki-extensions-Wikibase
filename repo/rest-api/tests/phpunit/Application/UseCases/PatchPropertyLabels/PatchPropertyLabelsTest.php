@@ -5,16 +5,20 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\PatchPropertyLabels;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property as DataModelProperty;
+use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchedLabelsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchPropertyLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchPropertyLabelsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchPropertyLabelsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
+use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelValidator;
 use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
@@ -44,10 +48,10 @@ class PatchPropertyLabelsTest extends TestCase {
 	private PropertyLabelsRetriever $labelsRetriever;
 	private LabelsSerializer $labelsSerializer;
 	private PatchJson $patcher;
-	private LabelsDeserializer $labelsDeserializer;
 	private PropertyRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
 	private PatchPropertyLabelsValidator $validator;
+	private PatchedLabelsValidator $patchedLabelsValidator;
 	private AssertPropertyExists $assertPropertyExists;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
 
@@ -58,10 +62,14 @@ class PatchPropertyLabelsTest extends TestCase {
 		$this->labelsRetriever->method( 'getLabels' )->willReturn( new Labels() );
 		$this->labelsSerializer = new LabelsSerializer();
 		$this->patcher = new PatchJson( new JsonDiffJsonPatcher() );
-		$this->labelsDeserializer = new LabelsDeserializer();
 		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
 		$this->propertyUpdater = $this->createStub( PropertyUpdater::class );
 		$this->validator = new TestValidatingRequestDeserializer();
+		$this->patchedLabelsValidator = new PatchedLabelsValidator(
+			new LabelsDeserializer(),
+			$this->createStub( PropertyLabelValidator::class ),
+			$this->createStub( LanguageCodeValidator::class )
+		);
 		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
 		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
 	}
@@ -187,15 +195,50 @@ class PatchPropertyLabelsTest extends TestCase {
 		}
 	}
 
+	public function testGivenPatchedLabelsInvalid_throwsUseCaseError(): void {
+		$property = new DataModelProperty( new NumericPropertyId( 'P31' ), null, 'string' );
+
+		$patchResult = [ 'ar' => '' ];
+
+		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
+		$this->propertyRetriever->method( 'getProperty' )->willReturn( $property );
+
+		$this->labelsRetriever = $this->createStub( PropertyLabelsRetriever::class );
+		$this->labelsRetriever->method( 'getLabels' )->willReturn( new Labels() );
+
+		$expectedUseCaseError = $this->createStub( UseCaseError::class );
+		$this->patchedLabelsValidator = $this->createMock( PatchedLabelsValidator::class );
+		$this->patchedLabelsValidator->expects( $this->once() )
+			->method( 'validateAndDeserialize' )
+			->with( $property->getId(), new TermList(), $patchResult )
+			->willThrowException( $expectedUseCaseError );
+
+		try {
+			$this->newUseCase()->execute(
+				new PatchPropertyLabelsRequest(
+					$property->getId()->getSerialization(),
+					[ [ 'op' => 'add', 'path' => '/ar', 'value' => '' ] ],
+					[],
+					false,
+					null,
+					null
+				)
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedUseCaseError, $e );
+		}
+	}
+
 	private function newUseCase(): PatchPropertyLabels {
 		return new PatchPropertyLabels(
 			$this->labelsRetriever,
 			$this->labelsSerializer,
 			$this->patcher,
-			$this->labelsDeserializer,
 			$this->propertyRetriever,
 			$this->propertyUpdater,
 			$this->validator,
+			$this->patchedLabelsValidator,
 			$this->assertPropertyExists,
 			$this->assertUserIsAuthorized
 		);

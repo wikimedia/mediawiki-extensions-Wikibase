@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels;
 
-use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
@@ -22,10 +21,10 @@ class PatchPropertyLabels {
 	private PropertyLabelsRetriever $labelsRetriever;
 	private LabelsSerializer $labelsSerializer;
 	private PatchJson $patcher;
-	private LabelsDeserializer $labelsDeserializer;
 	private PropertyRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
 	private PatchPropertyLabelsValidator $useCaseValidator;
+	private PatchedLabelsValidator $patchedLabelsValidator;
 	private AssertPropertyExists $assertPropertyExists;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
 
@@ -33,20 +32,20 @@ class PatchPropertyLabels {
 		PropertyLabelsRetriever $labelsRetriever,
 		LabelsSerializer $labelsSerializer,
 		PatchJson $patcher,
-		LabelsDeserializer $labelsDeserializer,
 		PropertyRetriever $propertyRetriever,
 		PropertyUpdater $propertyUpdater,
 		PatchPropertyLabelsValidator $useCaseValidator,
+		PatchedLabelsValidator $patchedLabelsValidator,
 		AssertPropertyExists $assertPropertyExists,
 		AssertUserIsAuthorized $assertUserIsAuthorized
 	) {
 		$this->labelsRetriever = $labelsRetriever;
 		$this->labelsSerializer = $labelsSerializer;
 		$this->patcher = $patcher;
-		$this->labelsDeserializer = $labelsDeserializer;
 		$this->propertyRetriever = $propertyRetriever;
 		$this->propertyUpdater = $propertyUpdater;
 		$this->useCaseValidator = $useCaseValidator;
+		$this->patchedLabelsValidator = $patchedLabelsValidator;
 		$this->assertPropertyExists = $assertPropertyExists;
 		$this->assertUserIsAuthorized = $assertUserIsAuthorized;
 	}
@@ -73,11 +72,10 @@ class PatchPropertyLabels {
 			$deserializedRequest->getPatch()
 		);
 
-		$modifiedLabelsAsTermList = $this->labelsDeserializer->deserialize( $modifiedLabels );
-
 		$property = $this->propertyRetriever->getProperty( $propertyId );
 		$originalLabels = $property->getLabels();
 
+		$modifiedLabelsAsTermList = $this->patchedLabelsValidator->validateAndDeserialize( $propertyId, $originalLabels, $modifiedLabels );
 		$property->getFingerprint()->setLabels( $modifiedLabelsAsTermList );
 
 		$editMetadata = new EditMetadata(

@@ -43,6 +43,8 @@ class UseCaseError extends UseCaseException {
 	public const MISSING_JSON_PATCH_FIELD = 'missing-json-patch-field';
 	public const PATCHED_ITEM_LABEL_DESCRIPTION_DUPLICATE = 'patched-item-label-description-duplicate';
 	public const PATCHED_ITEM_LABEL_DESCRIPTION_SAME_VALUE = 'patched-item-label-description-same-value';
+	public const PATCHED_PROPERTY_LABEL_DESCRIPTION_SAME_VALUE = 'patched-property-label-description-same-value';
+	public const PATCHED_PROPERTY_LABEL_DUPLICATE = 'patched-property-label-duplicate';
 	public const PATCHED_LABEL_EMPTY = 'patched-label-empty';
 	public const PATCHED_LABEL_INVALID = 'patched-label-invalid';
 	public const PATCHED_LABEL_INVALID_LANGUAGE_CODE = 'patched-labels-invalid-language-code';
@@ -128,6 +130,7 @@ class UseCaseError extends UseCaseException {
 			self::CONTEXT_MATCHING_ITEM_ID,
 		],
 		self::PATCHED_ITEM_LABEL_DESCRIPTION_SAME_VALUE => [ self::CONTEXT_LANGUAGE ],
+		self::PATCHED_PROPERTY_LABEL_DESCRIPTION_SAME_VALUE => [ self::CONTEXT_LANGUAGE ],
 		self::PATCHED_LABEL_EMPTY => [ self::CONTEXT_LANGUAGE ],
 		self::PATCHED_LABEL_INVALID => [ self::CONTEXT_LANGUAGE, self::CONTEXT_VALUE ],
 		self::PATCHED_LABEL_INVALID_LANGUAGE_CODE => [ self::CONTEXT_LANGUAGE ],
@@ -148,6 +151,11 @@ class UseCaseError extends UseCaseException {
 		self::PERMISSION_DENIED => [],
 		self::PROPERTY_NOT_FOUND => [],
 		self::PROPERTY_LABEL_DUPLICATE => [
+			self::CONTEXT_LANGUAGE,
+			self::CONTEXT_LABEL,
+			self::CONTEXT_MATCHING_PROPERTY_ID,
+		],
+		self::PATCHED_PROPERTY_LABEL_DUPLICATE => [
 			self::CONTEXT_LANGUAGE,
 			self::CONTEXT_LABEL,
 			self::CONTEXT_MATCHING_PROPERTY_ID,
