@@ -167,7 +167,10 @@ describe( 'Auth', () => {
 					}, 'POST' );
 				} );
 
-				it( 'cannot edit if blocked', async () => {
+				it( 'cannot edit if blocked', async function () {
+					// this test often hits a race condition where this request is made before the user is blocked
+					this.retries( 3 );
+
 					const response = await newRequestBuilder().withUser( user ).makeRequest();
 					expect( response ).to.have.status( 403 );
 				} );
