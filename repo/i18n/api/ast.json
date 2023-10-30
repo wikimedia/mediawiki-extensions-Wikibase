@@ -4,7 +4,8 @@
 			"Macofe",
 			"Xuacu",
 			"SaldırganSincap",
-			"Tokvo"
+			"Tokvo",
+			"YoaR"
 		]
 	},
 	"apihelp-wbavailablebadges-description": "Consulta los elementos d'insinies disponibles.",
@@ -42,7 +43,7 @@
 	"apihelp-wbeditentity-param-new": "Si s'indica, crearáse una entidá nueva.\nConfigura esto como'l tipu d'entidá a crear.\nNun se permite configurar esto si <var>id</var> ta configuráu tamién.",
 	"apihelp-wbeditentity-example-1": "Crear un elementu baleru nuevu, devuelve la estructura d'entidá completa",
 	"apihelp-wbeditentity-example-2": "Crear un nuevu elementu y fixar les etiquetes pa <var>de</var> y <var>en</var>",
-	"apihelp-wbeditentity-example-3": "Crear una propiedá nueva que contien los datos json, devuelve la estructura completa de la entidá",
+	"apihelp-wbeditentity-example-3": "Crear una propiedá nueva que contién los datos json, devuelve la estructura completa de la entidá",
 	"apihelp-wbeditentity-example-4": "Llimpia tolos datos de la entidá col identificador <samp>Q42</samp>",
 	"apihelp-wbeditentity-example-5": "Llimpiar tolos datos de la entidá col identificador <samp>Q42</samp> y conseñar la etiqueta pa <var>en</var>",
 	"apihelp-wbeditentity-example-6": "Configura l'enllaz del sitiu pa <var>nowiki</var>, sobreescribiéndolu si yá existe",

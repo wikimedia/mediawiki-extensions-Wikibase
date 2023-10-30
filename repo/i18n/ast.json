@@ -5,7 +5,8 @@
 			"Fitoschido",
 			"Macofe",
 			"Xuacu",
-			"MuratTheTurkish"
+			"MuratTheTurkish",
+			"YoaR"
 		]
 	},
 	"wikibase-desc": "Depósitu de datos estructuraos",
@@ -16,7 +17,7 @@
 	"wikibase-edit": "editar",
 	"wikibase-save": "guardar",
 	"wikibase-publish": "publicar",
-	"wikibase-cancel": "encaboxar",
+	"wikibase-cancel": "zarrar",
 	"wikibase-add": "amestar",
 	"wikibase-addqualifier": "amestar un calificativu",
 	"wikibase-addreference": "amestar referencia",

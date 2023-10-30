@@ -2,12 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"Андрей Саг.",
-			"AlexandrL714"
+			"AlexandrL714",
+			"Oxianboal"
 		]
 	},
 	"wikibase-edit": "тӱзедерге",
-	"wikibase-add": "хозыбзарға",
+	"wikibase-add": "хозыбызарға",
 	"wikibase-label-empty": "Ады чох",
-	"wikibase-description-empty": "Пасханы толдырылбаан",
+	"wikibase-description-empty": "Хысхаҷахти пазылғаны чоғыл",
 	"wikibase-sitelinks-special": "Пасха сайттар"
 }
