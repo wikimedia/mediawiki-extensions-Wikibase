@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\AddItemAliases;
+namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\AddItemAliasesInLanguage;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
@@ -9,9 +9,9 @@ use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Tests\NewItem;
-use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliases\AddItemAliases;
-use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliases\AddItemAliasesRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliases\AddItemAliasesResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemAliasesInLanguage;
+use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemAliasesInLanguageRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemAliasesInLanguageResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
@@ -25,13 +25,13 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\AddItemAliases\AddItemAliases
+ * @covers \Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemAliasesInLanguage
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class AddItemAliasesTest extends TestCase {
+class AddItemAliasesInLanguageTest extends TestCase {
 
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
@@ -53,7 +53,7 @@ class AddItemAliasesTest extends TestCase {
 		$isBot = false;
 		$comment = 'potato';
 
-		$request = new AddItemAliasesRequest(
+		$request = new AddItemAliasesInLanguageRequest(
 			$item->getId()->getSerialization(),
 			$languageCode,
 			$aliasesToCreate,
@@ -84,7 +84,7 @@ class AddItemAliasesTest extends TestCase {
 
 		$response = $this->newUseCase()->execute( $request );
 
-		$this->assertInstanceOf( AddItemAliasesResponse::class, $response );
+		$this->assertInstanceOf( AddItemAliasesInLanguageResponse::class, $response );
 		$this->assertEquals( new AliasesInLanguage( $languageCode, $aliasesToCreate ), $response->getAliases() );
 		$this->assertFalse( $response->wasAddedToExistingAliasGroup() );
 		$this->assertSame( $postModificationRevisionId, $response->getRevisionId() );
@@ -102,7 +102,7 @@ class AddItemAliasesTest extends TestCase {
 		$isBot = false;
 		$comment = 'potato';
 
-		$request = new AddItemAliasesRequest(
+		$request = new AddItemAliasesInLanguageRequest(
 			$item->getId()->getSerialization(),
 			$languageCode,
 			$aliasesToAdd,
@@ -134,7 +134,7 @@ class AddItemAliasesTest extends TestCase {
 
 		$response = $this->newUseCase()->execute( $request );
 
-		$this->assertInstanceOf( AddItemAliasesResponse::class, $response );
+		$this->assertInstanceOf( AddItemAliasesInLanguageResponse::class, $response );
 		$this->assertEquals( new AliasesInLanguage( $languageCode, $updatedAliases ), $response->getAliases() );
 		$this->assertTrue( $response->wasAddedToExistingAliasGroup() );
 		$this->assertSame( $postModificationRevisionId, $response->getRevisionId() );
@@ -144,7 +144,7 @@ class AddItemAliasesTest extends TestCase {
 	public function testValidationError_throwsUseCaseError(): void {
 		try {
 			$this->newUseCase()->execute(
-				new AddItemAliasesRequest( 'Q123', 'en', [ '' ], [], false, null )
+				new AddItemAliasesInLanguageRequest( 'Q123', 'en', [ '' ], [], false, null )
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
@@ -164,7 +164,7 @@ class AddItemAliasesTest extends TestCase {
 
 		try {
 			$this->newUseCase()->execute(
-				new AddItemAliasesRequest(
+				new AddItemAliasesInLanguageRequest(
 					"$itemId",
 					'en',
 					[ 'duplicate alias' ],
@@ -179,7 +179,7 @@ class AddItemAliasesTest extends TestCase {
 		}
 	}
 
-	private function newUseCase(): AddItemAliases {
-		return new AddItemAliases( $this->itemRetriever, $this->itemUpdater, new TestValidatingRequestDeserializer() );
+	private function newUseCase(): AddItemAliasesInLanguage {
+		return new AddItemAliasesInLanguage( $this->itemRetriever, $this->itemUpdater, new TestValidatingRequestDeserializer() );
 	}
 }

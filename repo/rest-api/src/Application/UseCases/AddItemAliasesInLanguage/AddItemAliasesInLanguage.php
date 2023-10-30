@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\AddItemAliases;
+namespace Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage;
 
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
@@ -12,16 +12,16 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 /**
  * @license GPL-2.0-or-later
  */
-class AddItemAliases {
+class AddItemAliasesInLanguage {
 
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
-	private AddItemAliasesValidator $validator;
+	private AddItemAliasesInLanguageValidator $validator;
 
 	public function __construct(
 		ItemRetriever $itemRetriever,
 		ItemUpdater $itemUpdater,
-		AddItemAliasesValidator $validator
+		AddItemAliasesInLanguageValidator $validator
 	) {
 		$this->itemRetriever = $itemRetriever;
 		$this->itemUpdater = $itemUpdater;
@@ -31,12 +31,12 @@ class AddItemAliases {
 	/**
 	 * @throws UseCaseError
 	 */
-	public function execute( AddItemAliasesRequest $request ): AddItemAliasesResponse {
+	public function execute( AddItemAliasesInLanguageRequest $request ): AddItemAliasesInLanguageResponse {
 		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
 
 		$itemId = $deserializedRequest->getItemId();
 		$languageCode = $deserializedRequest->getLanguageCode();
-		$newAliases = $deserializedRequest->getItemAliases();
+		$newAliases = $deserializedRequest->getItemAliasesInLanguage();
 
 		// TODO: existence check
 		// TODO: deserialize edit metadata
@@ -57,7 +57,7 @@ class AddItemAliases {
 			)
 		);
 
-		return new AddItemAliasesResponse(
+		return new AddItemAliasesInLanguageResponse(
 			$newRevision->getItem()->getAliases()[ $languageCode ],
 			$newRevision->getLastModified(),
 			$newRevision->getRevisionId(),

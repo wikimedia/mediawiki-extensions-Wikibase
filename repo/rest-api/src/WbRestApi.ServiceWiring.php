@@ -19,7 +19,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\SerializerFactory;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\FieldsFilterValidatingDeserializer;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemAliasesEditRequestValidatingDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemAliasesInLanguageEditRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemDescriptionEditRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemIdRequestValidatingDeserializer;
@@ -232,9 +232,9 @@ return [
 			);
 		},
 
-	VRD::ITEM_ALIASES_EDIT_REQUEST_VALIDATING_DESERIALIZER =>
-		function ( MediaWikiServices $services ): ItemAliasesEditRequestValidatingDeserializer {
-			return new ItemAliasesEditRequestValidatingDeserializer(
+	VRD::ITEM_ALIASES_IN_LANGUAGE_EDIT_REQUEST_VALIDATING_DESERIALIZER =>
+		function ( MediaWikiServices $services ): ItemAliasesInLanguageEditRequestValidatingDeserializer {
+			return new ItemAliasesInLanguageEditRequestValidatingDeserializer(
 				new WikibaseRepoAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory() ),
 				new AliasesDeserializer()
 			);

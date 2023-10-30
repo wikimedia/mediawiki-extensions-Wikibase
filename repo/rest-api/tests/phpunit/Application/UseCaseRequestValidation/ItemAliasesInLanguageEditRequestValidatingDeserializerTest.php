@@ -5,31 +5,31 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation;
 use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemAliasesEditRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemAliasesEditRequestValidatingDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemAliasesInLanguageEditRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemAliasesInLanguageEditRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemAliasesEditRequestValidatingDeserializer
+ * @covers \Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemAliasesInLanguageEditRequestValidatingDeserializer
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class ItemAliasesEditRequestValidatingDeserializerTest extends TestCase {
+class ItemAliasesInLanguageEditRequestValidatingDeserializerTest extends TestCase {
 
 	public function testGivenValidRequest_returnsAliases(): void {
-		$request = $this->createStub( ItemAliasesEditRequest::class );
+		$request = $this->createStub( ItemAliasesInLanguageEditRequest::class );
 		$request->method( 'getItemId' )->willReturn( 'Q123' );
 		$request->method( 'getLanguageCode' )->willReturn( 'en' );
-		$request->method( 'getAliases' )->willReturn( [ 'first alias', 'second alias' ] );
+		$request->method( 'getAliasesInLanguage' )->willReturn( [ 'first alias', 'second alias' ] );
 
 		$this->assertEquals(
 			[ 'first alias', 'second alias' ],
-			( new ItemAliasesEditRequestValidatingDeserializer(
+			( new ItemAliasesInLanguageEditRequestValidatingDeserializer(
 				$this->createStub( AliasesInLanguageValidator::class ),
 				new AliasesDeserializer()
 			) )->validateAndDeserialize( $request )
@@ -46,16 +46,16 @@ class ItemAliasesEditRequestValidatingDeserializerTest extends TestCase {
 		string $expectedErrorMessage,
 		array $expectedContext = []
 	): void {
-		$request = $this->createStub( ItemAliasesEditRequest::class );
+		$request = $this->createStub( ItemAliasesInLanguageEditRequest::class );
 		$request->method( 'getItemId' )->willReturn( 'Q123' );
 		$request->method( 'getLanguageCode' )->willReturn( 'en' );
-		$request->method( 'getAliases' )->willReturn( $aliases );
+		$request->method( 'getAliasesInLanguage' )->willReturn( $aliases );
 
 		$aliasesValidator = $this->createStub( AliasesInLanguageValidator::class );
 		$aliasesValidator->method( 'validate' )->willReturn( $validationError );
 
 		try {
-			( new ItemAliasesEditRequestValidatingDeserializer( $aliasesValidator, new AliasesDeserializer() ) )
+			( new ItemAliasesInLanguageEditRequestValidatingDeserializer( $aliasesValidator, new AliasesDeserializer() ) )
 				->validateAndDeserialize( $request );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $error ) {

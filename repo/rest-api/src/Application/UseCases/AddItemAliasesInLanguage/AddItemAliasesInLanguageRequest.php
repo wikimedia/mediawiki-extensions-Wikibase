@@ -1,14 +1,14 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\AddItemAliases;
+namespace Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage;
 
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemAliasesEditRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemAliasesInLanguageEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\UseCaseRequest;
 
 /**
  * @license GPL-2.0-or-later
  */
-class AddItemAliasesRequest implements UseCaseRequest, ItemAliasesEditRequest {
+class AddItemAliasesInLanguageRequest implements UseCaseRequest, ItemAliasesInLanguageEditRequest {
 
 	private string $itemId;
 	private string $languageCode;
@@ -41,7 +41,7 @@ class AddItemAliasesRequest implements UseCaseRequest, ItemAliasesEditRequest {
 		return $this->languageCode;
 	}
 
-	public function getAliases(): array {
+	public function getAliasesInLanguage(): array {
 		return $this->aliases;
 	}
 

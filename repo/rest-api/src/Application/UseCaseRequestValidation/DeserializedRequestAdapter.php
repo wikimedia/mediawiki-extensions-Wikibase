@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Term\Term;
-use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliases\DeserializedAddItemAliasesRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\DeserializedAddItemAliasesInLanguageRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\DeserializedAddItemStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\DeserializedAddPropertyStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\DeserializedGetItemRequest;
@@ -86,7 +86,7 @@ class DeserializedRequestAdapter implements
 	DeserializedPatchPropertyLabelsRequest,
 	DeserializedPatchPropertyAliasesRequest,
 	DeserializedSetPropertyLabelRequest,
-	DeserializedAddItemAliasesRequest
+	DeserializedAddItemAliasesInLanguageRequest
 {
 	private array $deserializedRequest;
 
@@ -142,8 +142,8 @@ class DeserializedRequestAdapter implements
 		return $this->getRequestField( ItemDescriptionEditRequest::class );
 	}
 
-	public function getItemAliases(): array {
-		return $this->getRequestField( ItemAliasesEditRequest::class );
+	public function getItemAliasesInLanguage(): array {
+		return $this->getRequestField( ItemAliasesInLanguageEditRequest::class );
 	}
 
 	public function getPropertyLabel(): Term {

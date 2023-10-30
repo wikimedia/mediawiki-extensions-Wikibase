@@ -3,10 +3,10 @@
 const { assert, utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
-const { newAddItemAliasesRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { newAddItemAliasesInLanguageRequestBuilder: newRequest } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 
-describe( newAddItemAliasesRequestBuilder().getRouteDescription(), () => {
+describe( newRequest().getRouteDescription(), () => {
 	let testItemId;
 	let originalLastModified;
 	let originalRevisionId;
@@ -51,7 +51,7 @@ describe( newAddItemAliasesRequestBuilder().getRouteDescription(), () => {
 	describe( '20x success response ', () => {
 		it( 'can create a new list of aliases with edit metadata omitted', async () => {
 			const newAliases = [ 'first new alias', 'second new alias' ];
-			const response = await newAddItemAliasesRequestBuilder( testItemId, 'de', newAliases )
+			const response = await newRequest( testItemId, 'de', newAliases )
 				.assertValidRequest()
 				.makeRequest();
 
@@ -59,7 +59,7 @@ describe( newAddItemAliasesRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'can add to an existing list of aliases with edit metadata omitted', async () => {
-			const response = await newAddItemAliasesRequestBuilder( testItemId, 'en', [ 'next english alias' ] )
+			const response = await newRequest( testItemId, 'en', [ 'next english alias' ] )
 				.assertValidRequest()
 				.makeRequest();
 
@@ -73,7 +73,7 @@ describe( newAddItemAliasesRequestBuilder().getRouteDescription(), () => {
 	describe( '400 error response', () => {
 		it( 'invalid item id', async () => {
 			const itemId = 'X123';
-			const response = await newAddItemAliasesRequestBuilder( itemId, 'en', [ 'new alias' ] )
+			const response = await newRequest( itemId, 'en', [ 'new alias' ] )
 				.assertInvalidRequest()
 				.makeRequest();
 
@@ -85,7 +85,7 @@ describe( newAddItemAliasesRequestBuilder().getRouteDescription(), () => {
 
 		it( 'invalid language code', async () => {
 			const invalidLanguageCode = '1e';
-			const response = await newAddItemAliasesRequestBuilder( testItemId, invalidLanguageCode, [ 'new alias' ] )
+			const response = await newRequest( testItemId, invalidLanguageCode, [ 'new alias' ] )
 				.assertInvalidRequest()
 				.makeRequest();
 
@@ -96,7 +96,7 @@ describe( newAddItemAliasesRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'alias is empty', async () => {
-			const response = await newAddItemAliasesRequestBuilder( testItemId, 'en', [ '' ] )
+			const response = await newRequest( testItemId, 'en', [ '' ] )
 				.assertValidRequest()
 				.makeRequest();
 
@@ -107,7 +107,7 @@ describe( newAddItemAliasesRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'alias list is empty', async () => {
-			const response = await newAddItemAliasesRequestBuilder( testItemId, 'en', [] )
+			const response = await newRequest( testItemId, 'en', [] )
 				.assertValidRequest()
 				.makeRequest();
 
@@ -122,7 +122,7 @@ describe( newAddItemAliasesRequestBuilder().getRouteDescription(), () => {
 			// may fail if $wgWBRepoSettings['string-limits']['multilang']['length'] is overwritten
 			const maxLabelLength = 250;
 			const aliasTooLong = 'x'.repeat( maxLabelLength + 1 );
-			const response = await newAddItemAliasesRequestBuilder( testItemId, 'en', [ aliasTooLong ] )
+			const response = await newRequest( testItemId, 'en', [ aliasTooLong ] )
 				.assertValidRequest()
 				.makeRequest();
 
@@ -142,7 +142,7 @@ describe( newAddItemAliasesRequestBuilder().getRouteDescription(), () => {
 
 		it( 'alias contains invalid characters', async () => {
 			const invalidAlias = 'tab characters \t not allowed';
-			const response = await newAddItemAliasesRequestBuilder( testItemId, 'en', [ invalidAlias ] )
+			const response = await newRequest( testItemId, 'en', [ invalidAlias ] )
 				.assertValidRequest()
 				.makeRequest();
 
@@ -154,7 +154,7 @@ describe( newAddItemAliasesRequestBuilder().getRouteDescription(), () => {
 
 		it( 'duplicate input aliases', async () => {
 			const duplicateAlias = 'foo';
-			const response = await newAddItemAliasesRequestBuilder(
+			const response = await newRequest(
 				testItemId,
 				'en',
 				[ duplicateAlias, 'foo', duplicateAlias ]
@@ -168,7 +168,7 @@ describe( newAddItemAliasesRequestBuilder().getRouteDescription(), () => {
 
 		it( 'input alias already exist', async () => {
 			const duplicateAlias = 'first english alias'; // this alias was already added in before()
-			const response = await newAddItemAliasesRequestBuilder(
+			const response = await newRequest(
 				testItemId,
 				'en',
 				[ duplicateAlias ]

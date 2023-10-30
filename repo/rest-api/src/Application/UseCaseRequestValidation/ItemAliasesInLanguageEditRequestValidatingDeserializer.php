@@ -14,7 +14,7 @@ use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
 /**
  * @license GPL-2.0-or-later
  */
-class ItemAliasesEditRequestValidatingDeserializer {
+class ItemAliasesInLanguageEditRequestValidatingDeserializer {
 
 	private AliasesInLanguageValidator $validator;
 	private AliasesDeserializer $deserializer;
@@ -27,8 +27,8 @@ class ItemAliasesEditRequestValidatingDeserializer {
 	/**
 	 * @throws UseCaseError
 	 */
-	public function validateAndDeserialize( ItemAliasesEditRequest $request ): array {
-		$aliases = $request->getAliases();
+	public function validateAndDeserialize( ItemAliasesInLanguageEditRequest $request ): array {
+		$aliases = $request->getAliasesInLanguage();
 		if ( empty( $aliases ) ) {
 			throw new UseCaseError( UseCaseError::ALIAS_LIST_EMPTY, 'Alias list must not be empty' );
 		}

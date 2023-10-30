@@ -11,7 +11,7 @@ use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\DeserializedRequestAdapter;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemAliasesEditRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemAliasesInLanguageEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemDescriptionEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemIdRequest;
@@ -204,13 +204,13 @@ class DeserializedRequestAdapterTest extends TestCase {
 
 	public function testGetItemAliases(): void {
 		$aliases = [ 'first alias', 'second alias' ];
-		$requestAdapter = new DeserializedRequestAdapter( [ ItemAliasesEditRequest::class => $aliases ] );
-		$this->assertSame( $aliases, $requestAdapter->getItemAliases() );
+		$requestAdapter = new DeserializedRequestAdapter( [ ItemAliasesInLanguageEditRequest::class => $aliases ] );
+		$this->assertSame( $aliases, $requestAdapter->getItemAliasesInLanguage() );
 	}
 
 	public function testGivenNoAliasesForItem_getItemAliasesThrows(): void {
 		$this->expectException( LogicException::class );
-		( new DeserializedRequestAdapter( [] ) )->getItemAliases();
+		( new DeserializedRequestAdapter( [] ) )->getItemAliasesInLanguage();
 	}
 
 }

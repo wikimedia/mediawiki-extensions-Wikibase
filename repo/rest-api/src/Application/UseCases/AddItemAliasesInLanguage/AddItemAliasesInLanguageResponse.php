@@ -1,13 +1,13 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\AddItemAliases;
+namespace Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage;
 
 use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
 
 /**
  * @license GPL-2.0-or-later
  */
-class AddItemAliasesResponse {
+class AddItemAliasesInLanguageResponse {
 
 	private AliasesInLanguage $aliases;
 	private string $lastModified;

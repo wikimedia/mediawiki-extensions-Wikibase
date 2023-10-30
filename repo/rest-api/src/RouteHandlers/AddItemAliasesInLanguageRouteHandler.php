@@ -7,9 +7,9 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
 use MediaWiki\Rest\Validator\BodyValidator;
-use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliases\AddItemAliases;
-use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliases\AddItemAliasesRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliases\AddItemAliasesResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemAliasesInLanguage;
+use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemAliasesInLanguageRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemAliasesInLanguageResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
@@ -17,7 +17,7 @@ use Wikimedia\ParamValidator\ParamValidator;
 /**
  * @license GPL-2.0-or-later
  */
-class AddItemAliasesRouteHandler extends SimpleHandler {
+class AddItemAliasesInLanguageRouteHandler extends SimpleHandler {
 
 	public const ITEM_ID_PATH_PARAM = 'item_id';
 	public const LANGUAGE_CODE_PATH_PARAM = 'language_code';
@@ -27,11 +27,11 @@ class AddItemAliasesRouteHandler extends SimpleHandler {
 	public const BOT_BODY_PARAM = 'bot';
 	public const COMMENT_BODY_PARAM = 'comment';
 
-	private AddItemAliases $addItemAliases;
+	private AddItemAliasesInLanguage $addItemAliases;
 	private ResponseFactory $responseFactory;
 
 	public function __construct(
-		AddItemAliases $addItemAliases,
+		AddItemAliasesInLanguage $addItemAliases,
 		ResponseFactory $responseFactory
 	) {
 		$this->addItemAliases = $addItemAliases;
@@ -40,7 +40,7 @@ class AddItemAliasesRouteHandler extends SimpleHandler {
 
 	public static function factory(): Handler {
 		return new self(
-			new AddItemAliases(
+			new AddItemAliasesInLanguage(
 				WbRestApi::getItemDataRetriever(),
 				WbRestApi::getItemUpdater(),
 				WbRestApi::getValidatingRequestDeserializer(),
@@ -53,7 +53,7 @@ class AddItemAliasesRouteHandler extends SimpleHandler {
 		$jsonBody = $this->getValidatedBody();
 		try {
 			$useCaseResponse = $this->addItemAliases->execute(
-				new AddItemAliasesRequest(
+				new AddItemAliasesInLanguageRequest(
 					$itemId,
 					$languageCode,
 					$jsonBody[self::ALIASES_BODY_PARAM],
@@ -115,7 +115,7 @@ class AddItemAliasesRouteHandler extends SimpleHandler {
 		];
 	}
 
-	private function newSuccessHttpResponse( AddItemAliasesResponse $useCaseResponse ): Response {
+	private function newSuccessHttpResponse( AddItemAliasesInLanguageResponse $useCaseResponse ): Response {
 		$httpResponse = $this->getResponseFactory()->create();
 		$httpResponse->setStatus( $useCaseResponse->wasAddedToExistingAliasGroup() ? 200 : 201 );
 		$httpResponse->setHeader( 'Content-Type', 'application/json' );
