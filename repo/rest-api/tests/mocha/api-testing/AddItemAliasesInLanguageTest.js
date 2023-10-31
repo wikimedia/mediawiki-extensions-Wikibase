@@ -1,6 +1,6 @@
 'use strict';
 
-const { assert, utils } = require( 'api-testing' );
+const { assert } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { newAddItemAliasesInLanguageRequestBuilder: newRequest } = require( '../helpers/RequestBuilderFactory' );
@@ -10,6 +10,7 @@ describe( newRequest().getRouteDescription(), () => {
 	let testItemId;
 	let originalLastModified;
 	let originalRevisionId;
+	const existingEnglishAlias = 'first english alias';
 
 	function assertValidResponse( response, aliases ) {
 		assert.strictEqual( response.header[ 'content-type' ], 'application/json' );
@@ -30,10 +31,8 @@ describe( newRequest().getRouteDescription(), () => {
 
 	before( async () => {
 		const createEntityResponse = await entityHelper.createEntity( 'item', {
-			labels: { en: { language: 'en', value: `english label ${utils.uniq()}` } },
 			aliases: { en: [
-				{ language: 'en', value: 'first english alias' },
-				{ language: 'en', value: 'second english alias' }
+				{ language: 'en', value: existingEnglishAlias }
 			] }
 		} );
 		testItemId = createEntityResponse.entity.id;
@@ -65,7 +64,7 @@ describe( newRequest().getRouteDescription(), () => {
 
 			assertValid200Response(
 				response,
-				[ 'first english alias', 'second english alias', 'next english alias' ]
+				[ existingEnglishAlias, 'next english alias' ]
 			);
 		} );
 	} );
@@ -167,17 +166,16 @@ describe( newRequest().getRouteDescription(), () => {
 		} );
 
 		it( 'input alias already exist', async () => {
-			const duplicateAlias = 'first english alias'; // this alias was already added in before()
 			const response = await newRequest(
 				testItemId,
 				'en',
-				[ duplicateAlias ]
+				[ existingEnglishAlias ]
 			).assertValidRequest().makeRequest();
 
 			expect( response ).to.have.status( 400 );
 			assert.strictEqual( response.header[ 'content-language' ], 'en' );
 			assert.strictEqual( response.body.code, 'duplicate-alias' );
-			assert.include( response.body.message, duplicateAlias );
+			assert.include( response.body.message, existingEnglishAlias );
 		} );
 	} );
 } );
