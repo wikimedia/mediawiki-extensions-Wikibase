@@ -99,7 +99,7 @@
 	"wikibase-sitelinks-sitename-columnheading": "Lingua",
 	"wikibase-sitelinks-link-columnheading": "Pagina ligate",
 	"echo-category-title-wikibase-action": "Connexion{{PLURAL:$1||es}} con {{WBREPONAME}}",
-	"echo-pref-tooltip-wikibase-action": "Notificar me quando alcuno connecte in pagina que io ha create a un elemento de {{WBREPONAME}}.",
+	"echo-pref-tooltip-wikibase-action": "Notificar me quando alcuno connecte un pagina que io ha create a un elemento de {{WBREPONAME}}.",
 	"notification-header-page-connection": "Le pagina <strong>$3</strong> ha essite {{GENDER:$2|connectite}} {{PLURAL:$4|-1=a un elemento de {{WBREPONAME}}|le elemento de {{WBREPONAME}} $4}}, ubi le datos relevante al topico pote esser colligite.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> e {{PLURAL:$4|un altere pagina|$4 altere paginas|100=99+ altere paginas}} ha essite {{GENDER:$2|connectite}} a {{WBREPONAME}} objectos, ubi se pote colliger datos relevante al topicos.",
 	"notification-link-text-view-item": "{{GENDER:$1|Vider}} elemento",
