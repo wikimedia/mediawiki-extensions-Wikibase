@@ -8,8 +8,8 @@ const { makeEtag } = require( '../helpers/httpHelper' );
 const { formatLabelsEditSummary } = require( '../helpers/formatEditSummaries' );
 const testValidatesPatch = require( '../helpers/testValidatesPatch' );
 
-function assertValid400Response( response, responseBodyErrorCode, context = null ) {
-	expect( response ).to.have.status( 400 );
+function assertValidErrorResponse( response, statusCode, responseBodyErrorCode, context = null ) {
+	expect( response ).to.have.status( statusCode );
 	assert.header( response, 'Content-Language', 'en' );
 	assert.strictEqual( response.body.code, responseBodyErrorCode );
 	if ( context === null ) {
@@ -22,11 +22,17 @@ function assertValid400Response( response, responseBodyErrorCode, context = null
 describe( newPatchPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 
 	let testPropertyId;
+	let testEnLabel;
 	let originalLastModified;
 	let originalRevisionId;
 
 	before( async function () {
-		testPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+		testEnLabel = `some-label-${utils.uniq()}`;
+
+		testPropertyId = ( await entityHelper.createEntity( 'property', {
+			datatype: 'string',
+			labels: [ { language: 'en', value: testEnLabel } ]
+		} ) ).entity.id;
 
 		const testPropertyCreationMetadata = await entityHelper.getLatestEditMetadata( testPropertyId );
 		originalLastModified = new Date( testPropertyCreationMetadata.timestamp );
@@ -40,16 +46,16 @@ describe( newPatchPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 
 	describe( '200 OK', () => {
 		it( 'can add a label', async () => {
-			const label = `new english label ${utils.uniq()}`;
+			const label = `neues deutsches label ${utils.uniq()}`;
 			const response = await newPatchPropertyLabelsRequestBuilder(
 				testPropertyId,
 				[
-					{ op: 'add', path: '/en', value: label }
+					{ op: 'add', path: '/de', value: label }
 				]
 			).makeRequest();
 
 			expect( response ).to.have.status( 200 );
-			assert.strictEqual( response.body.en, label );
+			assert.strictEqual( response.body.de, label );
 			assert.strictEqual( response.header[ 'content-type' ], 'application/json' );
 			assert.isAbove( new Date( response.header[ 'last-modified' ] ), originalLastModified );
 			assert.notStrictEqual( response.header.etag, makeEtag( originalRevisionId ) );
@@ -97,7 +103,7 @@ describe( newPatchPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchPropertyLabelsRequestBuilder( propertyId, [] )
 				.assertInvalidRequest().makeRequest();
 
-			assertValid400Response( response, 'invalid-property-id', { 'property-id': propertyId } );
+			assertValidErrorResponse( response, 400, 'invalid-property-id', { 'property-id': propertyId } );
 			assert.include( response.body.message, propertyId );
 		} );
 
@@ -108,7 +114,7 @@ describe( newPatchPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchPropertyLabelsRequestBuilder( testPropertyId, [] )
 				.withJsonBodyParam( 'tags', [ invalidEditTag ] ).assertValidRequest().makeRequest();
 
-			assertValid400Response( response, 'invalid-edit-tag' );
+			assertValidErrorResponse( response, 400, 'invalid-edit-tag' );
 			assert.include( response.body.message, invalidEditTag );
 		} );
 
@@ -137,7 +143,7 @@ describe( newPatchPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchPropertyLabelsRequestBuilder( testPropertyId, [] )
 				.withJsonBodyParam( 'comment', comment ).assertValidRequest().makeRequest();
 
-			assertValid400Response( response, 'comment-too-long' );
+			assertValidErrorResponse( response, 400, 'comment-too-long' );
 			assert.include( response.body.message, '500' );
 		} );
 
@@ -166,10 +172,50 @@ describe( newPatchPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 				]
 			).assertValidRequest().makeRequest();
 
-			expect( response ).to.have.status( 404 );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			assert.strictEqual( response.body.code, 'property-not-found' );
+			assertValidErrorResponse( response, 404, 'property-not-found' );
 			assert.include( response.body.message, propertyId );
+		} );
+	} );
+
+	describe( '409 error response', () => {
+		it( '"path" field target does not exist', async () => {
+			const operation = { op: 'remove', path: '/path/does/not/exist' };
+
+			const response = await newPatchPropertyLabelsRequestBuilder( testPropertyId, [ operation ] )
+				.assertValidRequest().makeRequest();
+
+			assertValidErrorResponse( response, 409, 'patch-target-not-found', { field: 'path', operation } );
+			assert.include( response.body.message, operation.path );
+		} );
+
+		it( '"from" field target does not exist', async () => {
+			const operation = { op: 'copy', from: '/path/does/not/exist', path: '/en' };
+
+			const response = await newPatchPropertyLabelsRequestBuilder( testPropertyId, [ operation ] )
+				.assertValidRequest().makeRequest();
+
+			assertValidErrorResponse( response, 409, 'patch-target-not-found', { field: 'from', operation } );
+			assert.include( response.body.message, operation.from );
+		} );
+
+		it( 'patch test condition failed', async () => {
+			const operation = { op: 'test', path: '/en', value: 'instance of' };
+			const response = await newPatchPropertyLabelsRequestBuilder( testPropertyId, [ operation ] )
+				.assertValidRequest().makeRequest();
+
+			assertValidErrorResponse(
+				response,
+				409,
+				'patch-test-failed',
+				{
+					operation: operation,
+					'actual-value': testEnLabel
+				}
+			);
+
+			assert.include( response.body.message, operation.path );
+			assert.include( response.body.message, JSON.stringify( operation.value ) );
+			assert.include( response.body.message, testEnLabel );
 		} );
 	} );
 

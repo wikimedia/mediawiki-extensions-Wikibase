@@ -9,6 +9,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchPropertyLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchPropertyLabelsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchPropertyLabelsValidator;
@@ -22,7 +23,6 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Property;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyRevision;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
-use Wikibase\Repo\RestApi\Domain\Services\JsonPatcher;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyLabelsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
@@ -43,7 +43,7 @@ class PatchPropertyLabelsTest extends TestCase {
 
 	private PropertyLabelsRetriever $labelsRetriever;
 	private LabelsSerializer $labelsSerializer;
-	private JsonPatcher $patcher;
+	private PatchJson $patcher;
 	private LabelsDeserializer $labelsDeserializer;
 	private PropertyRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
@@ -55,8 +55,9 @@ class PatchPropertyLabelsTest extends TestCase {
 		parent::setUp();
 
 		$this->labelsRetriever = $this->createStub( PropertyLabelsRetriever::class );
+		$this->labelsRetriever->method( 'getLabels' )->willReturn( new Labels() );
 		$this->labelsSerializer = new LabelsSerializer();
-		$this->patcher = new JsonDiffJsonPatcher();
+		$this->patcher = new PatchJson( new JsonDiffJsonPatcher() );
 		$this->labelsDeserializer = new LabelsDeserializer();
 		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
 		$this->propertyUpdater = $this->createStub( PropertyUpdater::class );
@@ -71,9 +72,6 @@ class PatchPropertyLabelsTest extends TestCase {
 
 		$newLabelText = 'nature de l’élément';
 		$newLabelLanguage = 'fr';
-
-		$this->labelsRetriever = $this->createStub( PropertyLabelsRetriever::class );
-		$this->labelsRetriever->method( 'getLabels' )->willReturn( new Labels() );
 
 		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
 		$this->propertyRetriever->method( 'getProperty' )->willReturn( $property );
@@ -165,6 +163,21 @@ class PatchPropertyLabelsTest extends TestCase {
 			->method( 'execute' )
 			->with( $propertyId, $user )
 			->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase()->execute( $request );
+			$this->fail( 'expected exception was not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
+	public function testGivenErrorWhilePatch_throws(): void {
+		$request = new PatchPropertyLabelsRequest( 'P123', [], [], false, null, null );
+		$expectedException = $this->createStub( UseCaseError::class );
+
+		$this->patcher = $this->createStub( PatchJson::class );
+		$this->patcher->method( 'execute' )->willThrowException( $expectedException );
 
 		try {
 			$this->newUseCase()->execute( $request );

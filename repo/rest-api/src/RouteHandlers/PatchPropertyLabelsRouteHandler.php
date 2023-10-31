@@ -9,6 +9,7 @@ use MediaWiki\Rest\StringStream;
 use MediaWiki\Rest\Validator\BodyValidator;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchPropertyLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchPropertyLabelsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchPropertyLabelsResponse;
@@ -53,7 +54,7 @@ class PatchPropertyLabelsRouteHandler extends SimpleHandler {
 					WikibaseRepo::getTermsLanguages()
 				),
 				$serializer,
-				new JsonDiffJsonPatcher(),
+				new PatchJson( new JsonDiffJsonPatcher() ),
 				new LabelsDeserializer(),
 				WbRestApi::getPropertyDataRetriever(),
 				WbRestApi::getPropertyUpdater(),
@@ -78,7 +79,7 @@ class PatchPropertyLabelsRouteHandler extends SimpleHandler {
 						$jsonBody[self::TAGS_BODY_PARAM],
 						$jsonBody[self::BOT_BODY_PARAM],
 						$jsonBody[self::COMMENT_BODY_PARAM],
-						null
+						$this->getUsername()
 					)
 				)
 			);
@@ -143,6 +144,11 @@ class PatchPropertyLabelsRouteHandler extends SimpleHandler {
 		) ) );
 
 		return $httpResponse;
+	}
+
+	private function getUsername(): ?string {
+		$mwUser = $this->getAuthority()->getUser();
+		return $mwUser->isRegistered() ? $mwUser->getName() : null;
 	}
 
 }
