@@ -10,12 +10,15 @@ use MediaWiki\Rest\Validator\BodyValidator;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchedLabelsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchPropertyLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchPropertyLabelsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchPropertyLabelsResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\TermLookupEntityTermsRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
+use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoPropertyLabelValidator;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\ParamValidator\ParamValidator;
@@ -55,10 +58,18 @@ class PatchPropertyLabelsRouteHandler extends SimpleHandler {
 				),
 				$serializer,
 				new PatchJson( new JsonDiffJsonPatcher() ),
-				new LabelsDeserializer(),
 				WbRestApi::getPropertyDataRetriever(),
 				WbRestApi::getPropertyUpdater(),
 				WbRestApi::getValidatingRequestDeserializer(),
+				new PatchedLabelsValidator(
+					new LabelsDeserializer(),
+					new WikibaseRepoPropertyLabelValidator(
+						WikibaseRepo::getTermValidatorFactory(),
+						WikibaseRepo::getPropertyTermsCollisionDetector(),
+						WbRestApi::getPropertyDataRetriever()
+					),
+					new LanguageCodeValidator( WikibaseRepo::getTermsLanguages()->getLanguages() )
+				),
 				WbRestApi::getAssertPropertyExists(),
 				WbRestApi::getAssertUserIsAuthorized()
 			),
