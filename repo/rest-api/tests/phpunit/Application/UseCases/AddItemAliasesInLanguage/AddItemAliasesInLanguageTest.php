@@ -13,6 +13,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemA
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemAliasesInLanguageRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemAliasesInLanguageResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
@@ -23,6 +24,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
+use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemAliasesInLanguage
@@ -32,6 +34,8 @@ use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidat
  * @license GPL-2.0-or-later
  */
 class AddItemAliasesInLanguageTest extends TestCase {
+
+	use EditMetadataHelper;
 
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
@@ -59,7 +63,8 @@ class AddItemAliasesInLanguageTest extends TestCase {
 			$aliasesToCreate,
 			$editTags,
 			$isBot,
-			$comment
+			$comment,
+			null
 		);
 
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
@@ -79,6 +84,7 @@ class AddItemAliasesInLanguageTest extends TestCase {
 						->getByLanguage( $languageCode )
 						->equals( new AliasGroup( $languageCode, $aliasesToCreate ) )
 				),
+				$this->expectEquivalentMetadata( $editTags, $isBot, $comment, EditSummary::ADD_ACTION )
 			)
 			->willReturn( new ItemRevision( $updatedItem, $modificationTimestamp, $postModificationRevisionId ) );
 
@@ -108,7 +114,8 @@ class AddItemAliasesInLanguageTest extends TestCase {
 			$aliasesToAdd,
 			$editTags,
 			$isBot,
-			$comment
+			$comment,
+			null
 		);
 
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
@@ -144,7 +151,7 @@ class AddItemAliasesInLanguageTest extends TestCase {
 	public function testValidationError_throwsUseCaseError(): void {
 		try {
 			$this->newUseCase()->execute(
-				new AddItemAliasesInLanguageRequest( 'Q123', 'en', [ '' ], [], false, null )
+				new AddItemAliasesInLanguageRequest( 'Q123', 'en', [ '' ], [], false, null, null )
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
@@ -170,6 +177,7 @@ class AddItemAliasesInLanguageTest extends TestCase {
 					[ 'duplicate alias' ],
 					[],
 					false,
+					null,
 					null
 				)
 			);

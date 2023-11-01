@@ -2,9 +2,8 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage;
 
-use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\Model\AliasesEditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\AliasesInLanguageEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
@@ -37,9 +36,9 @@ class AddItemAliasesInLanguage {
 		$itemId = $deserializedRequest->getItemId();
 		$languageCode = $deserializedRequest->getLanguageCode();
 		$newAliases = $deserializedRequest->getItemAliasesInLanguage();
+		$editMetadata = $deserializedRequest->getEditMetadata();
 
 		// TODO: existence check
-		// TODO: deserialize edit metadata
 		// TODO: assert user is authorized
 
 		$item = $this->itemRetriever->getItem( $itemId );
@@ -50,10 +49,12 @@ class AddItemAliasesInLanguage {
 		$newRevision = $this->itemUpdater->update(
 			$item, // @phan-suppress-current-line PhanTypeMismatchArgumentNullable
 			new EditMetadata(
-				[],
-				false,
-				// TODO: edit summary
-				AliasesEditSummary::newAddSummary( '', new AliasGroupList() )
+				$editMetadata->getTags(),
+				$editMetadata->isBot(),
+				AliasesInLanguageEditSummary::newAddSummary(
+					$editMetadata->getComment(),
+					$item->getAliasGroups()->getByLanguage( $languageCode )
+				)
 			)
 		);
 

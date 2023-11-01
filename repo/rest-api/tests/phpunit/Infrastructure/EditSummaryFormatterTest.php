@@ -4,9 +4,11 @@ namespace Wikibase\Repo\Tests\RestApi\Infrastructure;
 
 use Generator;
 use MediaWikiLangTestCase;
+use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Lib\Summary;
+use Wikibase\Repo\RestApi\Domain\Model\AliasesInLanguageEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionsEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
@@ -29,6 +31,7 @@ class EditSummaryFormatterTest extends MediaWikiLangTestCase {
 	/**
 	 * @dataProvider labelEditSummaryProvider
 	 * @dataProvider descriptionEditSummaryProvider
+	 * @dataProvider aliasesInLanguageEditSummaryProvider
 	 * @dataProvider statementEditSummaryProvider
 	 */
 	public function testFormat( EditSummary $editSummary, string $formattedSummary ): void {
@@ -75,6 +78,21 @@ class EditSummaryFormatterTest extends MediaWikiLangTestCase {
 		yield 'replace description with no user comment' => [
 			DescriptionEditSummary::newReplaceSummary( null, new Term( 'en', 'DESCRIPTION-TEXT' ) ),
 			'/* wbsetdescription-set:1|en */ DESCRIPTION-TEXT',
+		];
+	}
+
+	public static function aliasesInLanguageEditSummaryProvider(): Generator {
+		yield 'add en alias' => [
+			AliasesInLanguageEditSummary::newAddSummary( null, new AliasGroup( 'en', [ 'spud' ] ) ),
+			'/* wbsetaliases-add:1|en */ spud',
+		];
+
+		yield 'add de aliases with user comment' => [
+			AliasesInLanguageEditSummary::newAddSummary(
+				'added potato aliases',
+				new AliasGroup( 'de', [ 'Erdapfel', 'Grundbirne' ] )
+			),
+			'/* wbsetaliases-add:2|de */ Erdapfel, Grundbirne, added potato aliases',
 		];
 	}
 
