@@ -112,21 +112,13 @@ describe( 'Auth', () => {
 			assert.strictEqual( response.body.error, 'rest-write-denied' );
 		}
 
-		editRequestsWithInputs.forEach( ( { newRequestBuilder } ) => {
+		editRequestsWithInputs.forEach( ( { newRequestBuilder, requestInputs } ) => {
 			it( `Unauthorized bot edit - ${newRequestBuilder().getRouteDescription()}`, async () => {
 				assertPermissionDenied(
 					await newRequestBuilder().withJsonBodyParam( 'bot', true ).makeRequest()
 				);
 			} );
-		} );
 
-		[
-			...editRequestsWithInputs,
-			{
-				newRequestBuilder: () => rbf.newPatchItemAliasesRequestBuilder( itemRequestInputs.itemId, [] ),
-				requestInputs: itemRequestInputs
-			}
-		].forEach( ( { newRequestBuilder, requestInputs } ) => {
 			describe( 'Protected entity page', () => {
 				before( async () => {
 					await changeEntityProtectionStatus( requestInputs.mainTestSubject, 'sysop' ); // protect
