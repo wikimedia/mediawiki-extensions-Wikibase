@@ -38,8 +38,8 @@ class PatchedLabelsValidator {
 	public function validateAndDeserialize( PropertyId $propertyId, TermList $originalLabels, array $labelsSerialization ): TermList {
 		$patchedLabels = $this->deserializeLabels( $labelsSerialization );
 		foreach ( $this->getModifiedLabels( $originalLabels, $patchedLabels ) as $label ) {
-			$this->validateLabel( $propertyId, $label );
 			$this->validateLanguageCode( $label );
+			$this->validateLabel( $propertyId, $label );
 		}
 
 		return $patchedLabels;
