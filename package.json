@@ -48,7 +48,7 @@
 		"postcss-less": "^6.0.0",
 		"stylelint-config-wikimedia": "0.14.0",
 		"wdio-mediawiki": "^2.2.0",
-		"wdio-wikibase": "^6.0.0"
+		"wdio-wikibase": "^6.0.1"
 	},
 	"eslintIgnore": [
 		"extensions/**",
