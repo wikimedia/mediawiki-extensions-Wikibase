@@ -112,28 +112,11 @@ describe( 'Auth', () => {
 			assert.strictEqual( response.body.error, 'rest-write-denied' );
 		}
 
-		editRequestsWithInputs.forEach( ( { newRequestBuilder, requestInputs } ) => {
+		editRequestsWithInputs.forEach( ( { newRequestBuilder } ) => {
 			it( `Unauthorized bot edit - ${newRequestBuilder().getRouteDescription()}`, async () => {
 				assertPermissionDenied(
 					await newRequestBuilder().withJsonBodyParam( 'bot', true ).makeRequest()
 				);
-			} );
-
-			describe( 'Protected entity page', () => {
-				before( async () => {
-					await changeEntityProtectionStatus( requestInputs.mainTestSubject, 'sysop' ); // protect
-				} );
-
-				after( async () => {
-					await changeEntityProtectionStatus( requestInputs.mainTestSubject, 'all' ); // unprotect
-				} );
-
-				it( `Permission denied - ${newRequestBuilder().getRouteDescription()}`, async function () {
-					// this test often hits a race condition where this request is made before the entity is protected
-					this.retries( 3 );
-
-					assertPermissionDenied( await newRequestBuilder().makeRequest() );
-				} );
 			} );
 
 			describe( 'Blocked user', () => {
@@ -155,6 +138,27 @@ describe( 'Auth', () => {
 				it( 'cannot edit if blocked', async () => {
 					const response = await newRequestBuilder().withUser( user ).makeRequest();
 					expect( response ).to.have.status( 403 );
+				} );
+			} );
+		} );
+
+		// protecting/unprotecting does not always take effect immediately. These tests are isolated here to avoid
+		// accidentally testing against a protected page in the other tests and receiving false positive results.
+		editRequestsWithInputs.forEach( ( { newRequestBuilder, requestInputs } ) => {
+			describe( 'Protected entity page', () => {
+				before( async () => {
+					await changeEntityProtectionStatus( requestInputs.mainTestSubject, 'sysop' ); // protect
+				} );
+
+				after( async () => {
+					await changeEntityProtectionStatus( requestInputs.mainTestSubject, 'all' ); // unprotect
+				} );
+
+				it( `Permission denied - ${newRequestBuilder().getRouteDescription()}`, async function () {
+					// this test often hits a race condition where this request is made before the entity is protected
+					this.retries( 3 );
+
+					assertPermissionDenied( await newRequestBuilder().makeRequest() );
 				} );
 			} );
 		} );
