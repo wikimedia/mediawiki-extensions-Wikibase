@@ -42,8 +42,8 @@ class PatchedDescriptionsValidator {
 	): TermList {
 		$patchedDescriptions = $this->deserializeDescriptions( $descriptionsSerialization );
 		foreach ( $this->getModifiedDescriptions( $originalDescriptions, $patchedDescriptions ) as $description ) {
-			$this->validateDescription( $itemId, $description );
 			$this->validateLanguageCode( $description );
+			$this->validateDescription( $itemId, $description );
 		}
 
 		return $patchedDescriptions;
