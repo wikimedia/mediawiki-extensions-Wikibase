@@ -1,6 +1,6 @@
 'use strict';
 
-const { assert } = require( 'api-testing' );
+const { assert, action } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { newAddItemAliasesInLanguageRequestBuilder: newRequest } = require( '../helpers/RequestBuilderFactory' );
@@ -66,6 +66,36 @@ describe( newRequest().getRouteDescription(), () => {
 				response,
 				[ existingEnglishAlias, 'next english alias' ]
 			);
+		} );
+
+		it( 'can add aliases with edit metadata provided', async () => {
+			const user = await action.robby(); // robby is a bot
+			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test' );
+			const editSummary = 'omg look i made an edit';
+
+			const language = 'fr';
+			const newAlias = 'fr-alias';
+
+			const response = await newRequest( testItemId, language, [ newAlias ] )
+				.withJsonBodyParam( 'tags', [ tag ] )
+				.withJsonBodyParam( 'bot', true )
+				.withJsonBodyParam( 'comment', editSummary )
+				.withUser( user )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValid201Response(
+				response,
+				[ 'fr-alias' ]
+			);
+			const editMetadata = await entityHelper.getLatestEditMetadata( testItemId );
+			assert.deepEqual( editMetadata.tags, [ tag ] );
+			assert.property( editMetadata, 'bot' );
+			assert.strictEqual(
+				editMetadata.comment,
+				`/* wbsetaliases-add:1|${language} */ ${newAlias}, ${editSummary}`
+			);
+			assert.strictEqual( editMetadata.user, user.username );
 		} );
 	} );
 

@@ -2,13 +2,14 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage;
 
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemAliasesInLanguageEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\UseCaseRequest;
 
 /**
  * @license GPL-2.0-or-later
  */
-class AddItemAliasesInLanguageRequest implements UseCaseRequest, ItemAliasesInLanguageEditRequest {
+class AddItemAliasesInLanguageRequest implements UseCaseRequest, ItemAliasesInLanguageEditRequest, EditMetadataRequest {
 
 	private string $itemId;
 	private string $languageCode;
@@ -16,6 +17,7 @@ class AddItemAliasesInLanguageRequest implements UseCaseRequest, ItemAliasesInLa
 	private array $editTags;
 	private bool $isBot;
 	private ?string $comment;
+	private ?string $username;
 
 	public function __construct(
 		string $itemId,
@@ -23,7 +25,8 @@ class AddItemAliasesInLanguageRequest implements UseCaseRequest, ItemAliasesInLa
 		array $aliases,
 		array $editTags,
 		bool $isBot,
-		?string $comment
+		?string $comment,
+		?string $username
 	) {
 		$this->itemId = $itemId;
 		$this->languageCode = $languageCode;
@@ -31,6 +34,7 @@ class AddItemAliasesInLanguageRequest implements UseCaseRequest, ItemAliasesInLa
 		$this->editTags = $editTags;
 		$this->isBot = $isBot;
 		$this->comment = $comment;
+		$this->username = $username;
 	}
 
 	public function getItemId(): string {
@@ -55,5 +59,9 @@ class AddItemAliasesInLanguageRequest implements UseCaseRequest, ItemAliasesInLa
 
 	public function getComment(): ?string {
 		return $this->comment;
+	}
+
+	public function getUsername(): ?string {
+		return $this->username;
 	}
 }

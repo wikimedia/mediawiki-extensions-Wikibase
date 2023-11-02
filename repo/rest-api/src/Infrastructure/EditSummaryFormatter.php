@@ -6,6 +6,7 @@ use LogicException;
 use Wikibase\Lib\FormatableSummary;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\RestApi\Domain\Model\AliasesEditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\AliasesInLanguageEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionsEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
@@ -57,6 +58,8 @@ class EditSummaryFormatter {
 			}
 		} elseif ( $editSummary instanceof AliasesEditSummary ) {
 			return $this->summaryConverter->convertAliasesEditSummary( $editSummary );
+		} elseif ( $editSummary instanceof AliasesInLanguageEditSummary ) {
+			return $this->newSummaryForAliasesInLanguageEdit( $editSummary );
 		} elseif ( $editSummary instanceof StatementEditSummary ) {
 			switch ( $editSummary->getEditAction() ) {
 				case EditSummary::ADD_ACTION:
@@ -107,6 +110,15 @@ class EditSummaryFormatter {
 			// the number of edited statements in wbsetclaim-related messages
 			$summary->addAutoCommentArgs( $autoCommentArgs );
 		}
+
+		return $summary;
+	}
+
+	private function newSummaryForAliasesInLanguageEdit( AliasesInLanguageEditSummary $editSummary ): Summary {
+		$summary = new Summary( 'wbsetaliases', 'add' );
+		$summary->setLanguage( $editSummary->getAliases()->getLanguageCode() );
+		$summary->addAutoSummaryArgs( $editSummary->getAliases()->getAliases() );
+		$summary->setUserSummary( $editSummary->getUserComment() );
 
 		return $summary;
 	}

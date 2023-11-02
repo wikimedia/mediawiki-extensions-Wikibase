@@ -59,7 +59,8 @@ class AddItemAliasesInLanguageRouteHandler extends SimpleHandler {
 					$jsonBody[self::ALIASES_BODY_PARAM],
 					$jsonBody[self::TAGS_BODY_PARAM],
 					$jsonBody[self::BOT_BODY_PARAM],
-					$jsonBody[self::COMMENT_BODY_PARAM]
+					$jsonBody[self::COMMENT_BODY_PARAM],
+					$this->getUsername()
 				)
 			);
 		} catch ( UseCaseError $e ) {
@@ -131,6 +132,11 @@ class AddItemAliasesInLanguageRouteHandler extends SimpleHandler {
 
 	private function setEtagFromRevId( Response $httpResponse, int $revId ): void {
 		$httpResponse->setHeader( 'ETag', "\"$revId\"" );
+	}
+
+	private function getUsername(): ?string {
+		$mwUser = $this->getAuthority()->getUser();
+		return $mwUser->isRegistered() ? $mwUser->getName() : null;
 	}
 
 }
