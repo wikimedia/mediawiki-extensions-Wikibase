@@ -17,13 +17,13 @@ interface BridgeDialog extends Dialog {
 export default function prepareContainer( OO: MwWindowOO, $: JQueryStatic, id: string ): BridgeDialog {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const BridgeDialog: any = function ( this: BridgeDialog, config: object ) {
-		BridgeDialog.parent.call( this, config );
+		BridgeDialog.super.call( this, config );
 	};
 	OO.inheritClass( BridgeDialog, OO.ui.Dialog );
 	BridgeDialog.static.name = 'data-bridge';
 	BridgeDialog.static.escapable = false;
 	BridgeDialog.prototype.initialize = function (): void {
-		BridgeDialog.parent.prototype.initialize.call( this );
+		BridgeDialog.super.prototype.initialize.call( this );
 		this.content = new OO.ui.PanelLayout( { padded: false, expanded: false } );
 		this.content.$element.attr( 'id', id );
 		this.$body.append( this.content.$element );
