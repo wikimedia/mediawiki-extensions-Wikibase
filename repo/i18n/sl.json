@@ -160,7 +160,7 @@
 	"wikibase-validator-not-allowed": "Nedovoljena vrednost: $1",
 	"wikibase-validator-no-validators": "Prepovedano",
 	"wikibase-validator-sitelink-conflict": "Predmet $1 uporablja že predmet $2. Lahko ga odstranite s strani $2, če ne spada tja, ali predmeta združite, če gre za isto temo.",
-	"wikibase-validator-sitelink-conflict-redirects-supported": "Povezavo $1 že uporablja predmet $2. Lahko ga odstranite iz $2, če ne spada tja, ali združite predmete, če se nanašajo na popolnoma isto temo. Če je situacija bolj zapletena, glejte [https://www.wikidata.org/wiki/Special:MyLanguage/Help:Sitelinks#Linking_to_Wikimedia_site_pages Help:Sitelinks] (Pomoč:Projektne povezave).",
+	"wikibase-validator-sitelink-conflict-redirects-supported": "Povezavo $1 že uporablja predmet $2. Lahko jo odstranite iz $2, če ne spada tja, ali združite predmeta, če se nanašata na popolnoma isto temo. Če je situacija bolj zapletena, glejte [https://www.wikidata.org/wiki/Special:MyLanguage/Help:Sitelinks#Linking_to_Wikimedia_site_pages Help:Sitelinks] (Pomoč:Projektne povezave).",
 	"wikibase-validator-sitelink-conflict-unknown": "Povezavo $1 uporablja še en predmet, ki se trenutno shranjuje.",
 	"wikibase-validator-label-conflict": "Lastnost $3 že ima oznako »$1«, povezano z oznako jezika $2.",
 	"wikibase-validator-label-with-description-conflict": "Predmet $3 že ima oznako »$1«, povezano z oznako jezika $2 in z istim opisnim besedilom.",
