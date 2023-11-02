@@ -80,7 +80,7 @@
 		],
 		"requestBody": { "$ref": "../../global/requests.json#/Edit" },
 		"responses": {
-			"200": { "$ref": "../../global/responses.json#/ResourceDeleted" },
+			"200": { "$ref": "../../global/responses.json#/StatementDeleted" },
 			"400": { "$ref": "../../global/responses.json#/InvalidRemoveStatementInput" },
 			"404": { "$ref": "../../global/responses.json#/StatementNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
