@@ -9,6 +9,7 @@ use MediaWiki\Rest\StringStream;
 use MediaWiki\Rest\Validator\BodyValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemDescription\RemoveItemDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemDescription\RemoveItemDescriptionRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -28,28 +29,41 @@ class RemoveItemDescriptionRouteHandler extends SimpleHandler {
 	private const COMMENT_PARAM_DEFAULT = null;
 
 	private RemoveItemDescription $removeItemDescription;
+	private ResponseFactory $responseFactory;
 
-	public function __construct( RemoveItemDescription $removeItemDescription ) {
+	public function __construct( RemoveItemDescription $removeItemDescription, ResponseFactory $responseFactory ) {
 		$this->removeItemDescription = $removeItemDescription;
+		$this->responseFactory = $responseFactory;
 	}
 
 	public static function factory(): Handler {
-		return new self( new RemoveItemDescription( WbRestApi::getItemDataRetriever(), WbRestApi::getItemUpdater() ) );
+		return new self(
+			new RemoveItemDescription(
+				WbRestApi::getValidatingRequestDeserializer(),
+				WbRestApi::getItemDataRetriever(),
+				WbRestApi::getItemUpdater()
+			),
+			new ResponseFactory()
+		);
 	}
 
 	public function run( string $itemId, string $languageCode ): Response {
 		$requestBody = $this->getValidatedBody();
 
-		$this->removeItemDescription->execute(
-			new RemoveItemDescriptionRequest(
-				$itemId,
-				$languageCode,
-				$requestBody[ self::TAGS_BODY_PARAM ],
-				$requestBody[ self::BOT_BODY_PARAM ],
-				$requestBody[ self::COMMENT_BODY_PARAM ],
-				null
-			)
-		);
+		try {
+			$this->removeItemDescription->execute(
+				new RemoveItemDescriptionRequest(
+					$itemId,
+					$languageCode,
+					$requestBody[ self::TAGS_BODY_PARAM ] ?? self::TAGS_PARAM_DEFAULT,
+					$requestBody[ self::BOT_BODY_PARAM ] ?? self::BOT_PARAM_DEFAULT,
+					$requestBody[ self::COMMENT_BODY_PARAM ] ?? self::COMMENT_PARAM_DEFAULT,
+					null
+				)
+			);
+		} catch ( UseCaseError $e ) {
+			return $this->responseFactory->newErrorResponseFromException( $e );
+		}
 
 		return $this->newSuccessHttpResponse();
 	}
