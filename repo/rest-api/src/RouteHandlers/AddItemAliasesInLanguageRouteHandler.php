@@ -10,6 +10,7 @@ use MediaWiki\Rest\Validator\BodyValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemAliasesInLanguage;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemAliasesInLanguageRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemAliasesInLanguageResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
@@ -42,6 +43,7 @@ class AddItemAliasesInLanguageRouteHandler extends SimpleHandler {
 		return new self(
 			new AddItemAliasesInLanguage(
 				WbRestApi::getItemDataRetriever(),
+				WbRestApi::getAssertItemExists(),
 				WbRestApi::getItemUpdater(),
 				WbRestApi::getValidatingRequestDeserializer(),
 			),
@@ -62,6 +64,11 @@ class AddItemAliasesInLanguageRouteHandler extends SimpleHandler {
 					$jsonBody[self::COMMENT_BODY_PARAM],
 					$this->getUsername()
 				)
+			);
+		} catch ( ItemRedirect $e ) {
+			return $this->responseFactory->newErrorResponse(
+				UseCaseError::ITEM_REDIRECTED,
+				"Item $itemId has been merged into {$e->getRedirectTargetId()}."
 			);
 		} catch ( UseCaseError $e ) {
 			return $this->responseFactory->newErrorResponseFromException( $e );

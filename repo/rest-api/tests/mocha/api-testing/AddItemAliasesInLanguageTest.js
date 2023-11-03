@@ -208,4 +208,26 @@ describe( newRequest().getRouteDescription(), () => {
 			assert.include( response.body.message, existingEnglishAlias );
 		} );
 	} );
+
+	it( 'responds 404 if the item does not exist', async () => {
+		const itemId = 'Q9999999';
+		const response = await newRequest( itemId, 'en', [ 'potato' ] ).assertValidRequest().makeRequest();
+
+		expect( response ).to.have.status( 404 );
+		assert.strictEqual( response.header[ 'content-language' ], 'en' );
+		assert.strictEqual( response.body.code, 'item-not-found' );
+		assert.include( response.body.message, itemId );
+	} );
+
+	it( 'responds 409 if the item is a redirect', async () => {
+		const redirectTarget = testItemId;
+		const redirectSource = await entityHelper.createRedirectForItem( redirectTarget );
+
+		const response = await newRequest( redirectSource, 'en', [ 'potato' ] ).assertValidRequest().makeRequest();
+
+		expect( response ).to.have.status( 409 );
+		assert.include( response.body.message, redirectSource );
+		assert.include( response.body.message, redirectTarget );
+		assert.strictEqual( response.body.code, 'redirected-item' );
+	} );
 } );
