@@ -12,7 +12,9 @@ use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemAliasesInLanguage;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemAliasesInLanguageRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemAliasesInLanguageResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
@@ -38,12 +40,14 @@ class AddItemAliasesInLanguageTest extends TestCase {
 	use EditMetadataHelper;
 
 	private ItemRetriever $itemRetriever;
+	private AssertItemExists $assertItemExists;
 	private ItemUpdater $itemUpdater;
 
 	protected function setUp(): void {
 		parent::setUp();
 
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
+		$this->assertItemExists = $this->createStub( AssertItemExists::class );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
 	}
 
@@ -104,19 +108,8 @@ class AddItemAliasesInLanguageTest extends TestCase {
 		$aliasesToAdd = [ 'alias 3', 'alias 4' ];
 		$postModificationRevisionId = 322;
 		$modificationTimestamp = '20221111070707';
-		$editTags = [ TestValidatingRequestDeserializer::ALLOWED_TAGS[0] ];
-		$isBot = false;
-		$comment = 'potato';
 
-		$request = new AddItemAliasesInLanguageRequest(
-			$item->getId()->getSerialization(),
-			$languageCode,
-			$aliasesToAdd,
-			$editTags,
-			$isBot,
-			$comment,
-			null
-		);
+		$request = $this->newRequest( "{$item->getId()}", $languageCode, $aliasesToAdd );
 
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemRetriever->method( 'getItem' )->willReturn( $item );
@@ -171,15 +164,7 @@ class AddItemAliasesInLanguageTest extends TestCase {
 
 		try {
 			$this->newUseCase()->execute(
-				new AddItemAliasesInLanguageRequest(
-					"$itemId",
-					'en',
-					[ 'duplicate alias' ],
-					[],
-					false,
-					null,
-					null
-				)
+				$this->newRequest( "$itemId", 'en', [ 'duplicate alias' ] )
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
@@ -187,7 +172,37 @@ class AddItemAliasesInLanguageTest extends TestCase {
 		}
 	}
 
+	public function testGivenItemDoesNotExistOrRedirect_throws(): void {
+		$expectedException = $this->createStub( UseCaseException::class );
+		$this->assertItemExists = $this->createStub( AssertItemExists::class );
+		$this->assertItemExists->method( 'execute' )->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase()->execute( $this->newRequest( 'Q999', 'en', [ 'a' ] ) );
+			$this->fail( 'expected exception not thrown' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
 	private function newUseCase(): AddItemAliasesInLanguage {
-		return new AddItemAliasesInLanguage( $this->itemRetriever, $this->itemUpdater, new TestValidatingRequestDeserializer() );
+		return new AddItemAliasesInLanguage(
+			$this->itemRetriever,
+			$this->assertItemExists,
+			$this->itemUpdater,
+			new TestValidatingRequestDeserializer()
+		);
+	}
+
+	private function newRequest(
+		string $itemId,
+		string $languageCode,
+		array $aliases,
+		array $tags = [],
+		bool $isBot = false,
+		string $comment = null,
+		string $username = null
+	): AddItemAliasesInLanguageRequest {
+		return new AddItemAliasesInLanguageRequest( $itemId, $languageCode, $aliases, $tags, $isBot, $comment, $username );
 	}
 }

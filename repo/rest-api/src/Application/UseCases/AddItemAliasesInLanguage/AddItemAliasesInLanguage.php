@@ -2,6 +2,8 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage;
 
+use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
+use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\AliasesInLanguageEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
@@ -14,21 +16,25 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 class AddItemAliasesInLanguage {
 
 	private ItemRetriever $itemRetriever;
+	private AssertItemExists $assertItemExists;
 	private ItemUpdater $itemUpdater;
 	private AddItemAliasesInLanguageValidator $validator;
 
 	public function __construct(
 		ItemRetriever $itemRetriever,
+		AssertItemExists $assertItemExists,
 		ItemUpdater $itemUpdater,
 		AddItemAliasesInLanguageValidator $validator
 	) {
 		$this->itemRetriever = $itemRetriever;
+		$this->assertItemExists = $assertItemExists;
 		$this->itemUpdater = $itemUpdater;
 		$this->validator = $validator;
 	}
 
 	/**
 	 * @throws UseCaseError
+	 * @throws ItemRedirect
 	 */
 	public function execute( AddItemAliasesInLanguageRequest $request ): AddItemAliasesInLanguageResponse {
 		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
@@ -38,7 +44,7 @@ class AddItemAliasesInLanguage {
 		$newAliases = $deserializedRequest->getItemAliasesInLanguage();
 		$editMetadata = $deserializedRequest->getEditMetadata();
 
-		// TODO: existence check
+		$this->assertItemExists->execute( $itemId );
 		// TODO: assert user is authorized
 
 		$item = $this->itemRetriever->getItem( $itemId );
