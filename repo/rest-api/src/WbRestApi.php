@@ -6,6 +6,7 @@ use MediaWiki\MediaWikiServices;
 use Psr\Container\ContainerInterface;
 use Wikibase\Repo\RestApi\Application\Serialization\SerializerFactory;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemAliasesInLanguage;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
@@ -363,6 +364,10 @@ class WbRestApi {
 
 	public static function getTermLookupEntityTermsRetriever( ContainerInterface $services = null ): TermLookupEntityTermsRetriever {
 		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbRestApi.TermLookupEntityTermsRetriever' );
+	}
+
+	public static function getAddItemAliasesInLanguage( ContainerInterface $services = null ): AddItemAliasesInLanguage {
+		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbRestApi.AddItemAliasesInLanguage' );
 	}
 
 }
