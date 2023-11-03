@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage;
 
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\AliasesInLanguageEditSummary;
@@ -17,17 +18,20 @@ class AddItemAliasesInLanguage {
 
 	private ItemRetriever $itemRetriever;
 	private AssertItemExists $assertItemExists;
+	private AssertUserIsAuthorized $assertUserIsAuthorized;
 	private ItemUpdater $itemUpdater;
 	private AddItemAliasesInLanguageValidator $validator;
 
 	public function __construct(
 		ItemRetriever $itemRetriever,
 		AssertItemExists $assertItemExists,
+		AssertUserIsAuthorized $assertUserIsAuthorized,
 		ItemUpdater $itemUpdater,
 		AddItemAliasesInLanguageValidator $validator
 	) {
 		$this->itemRetriever = $itemRetriever;
 		$this->assertItemExists = $assertItemExists;
+		$this->assertUserIsAuthorized = $assertUserIsAuthorized;
 		$this->itemUpdater = $itemUpdater;
 		$this->validator = $validator;
 	}
@@ -45,7 +49,7 @@ class AddItemAliasesInLanguage {
 		$editMetadata = $deserializedRequest->getEditMetadata();
 
 		$this->assertItemExists->execute( $itemId );
-		// TODO: assert user is authorized
+		$this->assertUserIsAuthorized->execute( $itemId, $editMetadata->getUser()->getUsername() );
 
 		$item = $this->itemRetriever->getItem( $itemId );
 		$aliasesExist = $item->getAliasGroups()->hasGroupForLanguage( $languageCode );

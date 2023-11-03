@@ -13,6 +13,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemA
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemAliasesInLanguageRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemAliasesInLanguageResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
@@ -41,6 +42,7 @@ class AddItemAliasesInLanguageTest extends TestCase {
 
 	private ItemRetriever $itemRetriever;
 	private AssertItemExists $assertItemExists;
+	private AssertUserIsAuthorized $assertUserIsAuthorized;
 	private ItemUpdater $itemUpdater;
 
 	protected function setUp(): void {
@@ -48,6 +50,7 @@ class AddItemAliasesInLanguageTest extends TestCase {
 
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->assertItemExists = $this->createStub( AssertItemExists::class );
+		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
 	}
 
@@ -185,10 +188,24 @@ class AddItemAliasesInLanguageTest extends TestCase {
 		}
 	}
 
+	public function testGivenUserUnauthorized_throws(): void {
+		$expectedException = $this->createStub( UseCaseError::class );
+		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
+		$this->assertUserIsAuthorized->method( 'execute' )->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase()->execute( $this->newRequest( 'Q1', 'en', [ 'a' ] ) );
+			$this->fail( 'expected exception not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
 	private function newUseCase(): AddItemAliasesInLanguage {
 		return new AddItemAliasesInLanguage(
 			$this->itemRetriever,
 			$this->assertItemExists,
+			$this->assertUserIsAuthorized,
 			$this->itemUpdater,
 			new TestValidatingRequestDeserializer()
 		);
