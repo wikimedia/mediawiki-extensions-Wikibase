@@ -44,6 +44,7 @@ class AddItemAliasesInLanguageRouteHandler extends SimpleHandler {
 			new AddItemAliasesInLanguage(
 				WbRestApi::getItemDataRetriever(),
 				WbRestApi::getAssertItemExists(),
+				WbRestApi::getAssertUserIsAuthorized(),
 				WbRestApi::getItemUpdater(),
 				WbRestApi::getValidatingRequestDeserializer(),
 			),
