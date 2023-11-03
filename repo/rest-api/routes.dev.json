@@ -8,5 +8,10 @@
 		"path": "/wikibase/v0/entities/properties/{property_id}/labels",
 		"method": "PATCH",
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\PatchPropertyLabelsRouteHandler::factory"
+	},
+	{
+		"path": "/wikibase/v0/entities/items/{item_id}/descriptions/{language_code}",
+		"method": "DELETE",
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\RemoveItemDescriptionRouteHandler::factory"
 	}
 ]

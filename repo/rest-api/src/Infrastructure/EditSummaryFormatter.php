@@ -37,6 +37,7 @@ class EditSummaryFormatter {
 		);
 	}
 
+	// phpcs:ignore Generic.Metrics.CyclomaticComplexity.TooHigh
 	private function convertToFormattableSummary( EditSummary $editSummary ): FormatableSummary {
 		if ( $editSummary instanceof LabelsEditSummary ) {
 			return $this->summaryConverter->convertLabelsEditSummary( $editSummary );
@@ -55,6 +56,8 @@ class EditSummaryFormatter {
 					return $this->newSummaryForDescriptionEdit( $editSummary, 'add' );
 				case EditSummary::REPLACE_ACTION:
 					return $this->newSummaryForDescriptionEdit( $editSummary, 'set' );
+				case EditSummary::REMOVE_ACTION:
+					return new Summary();
 			}
 		} elseif ( $editSummary instanceof AliasesEditSummary ) {
 			return $this->summaryConverter->convertAliasesEditSummary( $editSummary );

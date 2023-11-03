@@ -27,6 +27,10 @@ class DescriptionEditSummary implements EditSummary {
 		return new self( self::REPLACE_ACTION, $userComment, $description );
 	}
 
+	public static function newRemoveSummary( ?string $userComment, Term $description ): self {
+		return new self( self::REMOVE_ACTION, $userComment, $description );
+	}
+
 	public function getEditAction(): string {
 		return $this->editAction;
 	}
