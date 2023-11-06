@@ -8,6 +8,7 @@ const {
 	newSetItemDescriptionRequestBuilder,
 	newGetItemDescriptionRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
+const { formatTermEditSummary } = require( '../helpers/formatEditSummaries' );
 
 function assertValidErrorResponse( response, statusCode, responseBodyErrorCode, context = null ) {
 	expect( response ).to.have.status( statusCode );
@@ -31,8 +32,8 @@ describe( newRemoveItemDescriptionsRequestBuilder().getRouteDescription(), () =>
 	describe( '200 success response', () => {
 		it( 'can remove a description', async () => {
 			const languageCode = 'en';
-			await newSetItemDescriptionRequestBuilder( testItemId, languageCode, 'english description ' + utils.uniq() )
-				.makeRequest();
+			const description = 'english description ' + utils.uniq();
+			await newSetItemDescriptionRequestBuilder( testItemId, languageCode, description ).makeRequest();
 
 			const user = await action.robby(); // robby is a bot
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test' );
@@ -56,6 +57,10 @@ describe( newRemoveItemDescriptionsRequestBuilder().getRouteDescription(), () =>
 			const editMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 			assert.include( editMetadata.tags, tag );
 			assert.property( editMetadata, 'bot' );
+			assert.strictEqual(
+				editMetadata.comment,
+				formatTermEditSummary( 'wbsetdescription', 'remove', languageCode, description, comment )
+			);
 		} );
 	} );
 

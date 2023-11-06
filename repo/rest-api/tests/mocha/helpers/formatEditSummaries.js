@@ -1,9 +1,9 @@
 'use strict';
 
 module.exports = {
-	formatTermEditSummary( module, action, languageCode, labelText, userComment ) {
+	formatTermEditSummary( module, action, languageCode, termText, userComment ) {
 		const commentArgs = `1|${languageCode}`;
-		const autoSummary = `/* ${module}-${action}:${commentArgs} */ ${labelText}`;
+		const autoSummary = `/* ${module}-${action}:${commentArgs} */ ${termText}`;
 
 		return userComment ? `${autoSummary}, ${userComment}` : autoSummary;
 	},
