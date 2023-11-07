@@ -79,6 +79,16 @@ class EditSummaryFormatterTest extends MediaWikiLangTestCase {
 			DescriptionEditSummary::newReplaceSummary( null, new Term( 'en', 'DESCRIPTION-TEXT' ) ),
 			'/* wbsetdescription-set:1|en */ DESCRIPTION-TEXT',
 		];
+
+		yield 'remove description' => [
+			DescriptionEditSummary::newRemoveSummary( 'remove user comment', new Term( 'en', 'DESCRIPTION-TEXT' ) ),
+			'/* wbsetdescription-remove:1|en */ DESCRIPTION-TEXT, remove user comment',
+		];
+
+		yield 'remove description with no user comment' => [
+			DescriptionEditSummary::newRemoveSummary( null, new Term( 'en', 'DESCRIPTION-TEXT' ) ),
+			'/* wbsetdescription-remove:1|en */ DESCRIPTION-TEXT',
+		];
 	}
 
 	public static function aliasesInLanguageEditSummaryProvider(): Generator {

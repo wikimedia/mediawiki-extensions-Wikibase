@@ -57,7 +57,7 @@ class EditSummaryFormatter {
 				case EditSummary::REPLACE_ACTION:
 					return $this->newSummaryForDescriptionEdit( $editSummary, 'set' );
 				case EditSummary::REMOVE_ACTION:
-					return new Summary();
+					return $this->newSummaryForDescriptionEdit( $editSummary, 'remove' );
 			}
 		} elseif ( $editSummary instanceof AliasesEditSummary ) {
 			return $this->summaryConverter->convertAliasesEditSummary( $editSummary );
