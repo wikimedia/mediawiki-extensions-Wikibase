@@ -4,7 +4,7 @@ const { assert, action, utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const {
-	newRemoveItemDescriptionsRequestBuilder,
+	newRemoveItemDescriptionRequestBuilder,
 	newSetItemDescriptionRequestBuilder,
 	newGetItemDescriptionRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
@@ -21,7 +21,7 @@ function assertValidErrorResponse( response, statusCode, responseBodyErrorCode, 
 	}
 }
 
-describe( newRemoveItemDescriptionsRequestBuilder().getRouteDescription(), () => {
+describe( newRemoveItemDescriptionRequestBuilder().getRouteDescription(), () => {
 
 	let testItemId;
 
@@ -39,7 +39,7 @@ describe( newRemoveItemDescriptionsRequestBuilder().getRouteDescription(), () =>
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test' );
 			const comment = 'remove english description';
 
-			const response = await newRemoveItemDescriptionsRequestBuilder( testItemId, languageCode )
+			const response = await newRemoveItemDescriptionRequestBuilder( testItemId, languageCode )
 				.withJsonBodyParam( 'tags', [ tag ] )
 				.withJsonBodyParam( 'bot', true )
 				.withJsonBodyParam( 'comment', comment )
@@ -67,7 +67,7 @@ describe( newRemoveItemDescriptionsRequestBuilder().getRouteDescription(), () =>
 	describe( '400 error response', () => {
 		it( 'invalid item id', async () => {
 			const itemId = testItemId.replace( 'Q', 'P' );
-			const response = await newRemoveItemDescriptionsRequestBuilder( itemId, 'en' )
+			const response = await newRemoveItemDescriptionRequestBuilder( itemId, 'en' )
 				.assertInvalidRequest().makeRequest();
 
 			assertValidErrorResponse( response, 400, 'invalid-item-id' );
@@ -76,7 +76,7 @@ describe( newRemoveItemDescriptionsRequestBuilder().getRouteDescription(), () =>
 
 		it( 'invalid language code', async () => {
 			const invalidLanguageCode = 'xyz';
-			const response = await newRemoveItemDescriptionsRequestBuilder( testItemId, invalidLanguageCode )
+			const response = await newRemoveItemDescriptionRequestBuilder( testItemId, invalidLanguageCode )
 				.assertValidRequest().makeRequest();
 
 			assertValidErrorResponse( response, 400, 'invalid-language-code' );
@@ -85,7 +85,7 @@ describe( newRemoveItemDescriptionsRequestBuilder().getRouteDescription(), () =>
 
 		it( 'invalid edit tag', async () => {
 			const invalidEditTag = 'invalid tag';
-			const response = await newRemoveItemDescriptionsRequestBuilder( testItemId, 'en' )
+			const response = await newRemoveItemDescriptionRequestBuilder( testItemId, 'en' )
 				.withJsonBodyParam( 'tags', [ invalidEditTag ] ).assertValidRequest().makeRequest();
 
 			assertValidErrorResponse( response, 400, 'invalid-edit-tag' );
@@ -93,7 +93,7 @@ describe( newRemoveItemDescriptionsRequestBuilder().getRouteDescription(), () =>
 		} );
 
 		it( 'invalid edit tag type', async () => {
-			const response = await newRemoveItemDescriptionsRequestBuilder( testItemId, 'en' )
+			const response = await newRemoveItemDescriptionRequestBuilder( testItemId, 'en' )
 				.withJsonBodyParam( 'tags', 'not an array' ).assertInvalidRequest().makeRequest();
 
 			expect( response ).to.have.status( 400 );
@@ -103,7 +103,7 @@ describe( newRemoveItemDescriptionsRequestBuilder().getRouteDescription(), () =>
 		} );
 
 		it( 'invalid bot flag type', async () => {
-			const response = await newRemoveItemDescriptionsRequestBuilder( testItemId, 'en' )
+			const response = await newRemoveItemDescriptionRequestBuilder( testItemId, 'en' )
 				.withJsonBodyParam( 'bot', 'not boolean' ).assertInvalidRequest().makeRequest();
 
 			expect( response ).to.have.status( 400 );
@@ -114,7 +114,7 @@ describe( newRemoveItemDescriptionsRequestBuilder().getRouteDescription(), () =>
 
 		it( 'comment too long', async () => {
 			const comment = 'x'.repeat( 501 );
-			const response = await newRemoveItemDescriptionsRequestBuilder( testItemId, 'en' )
+			const response = await newRemoveItemDescriptionRequestBuilder( testItemId, 'en' )
 				.withJsonBodyParam( 'comment', comment ).assertValidRequest().makeRequest();
 
 			assertValidErrorResponse( response, 400, 'comment-too-long' );
@@ -122,7 +122,7 @@ describe( newRemoveItemDescriptionsRequestBuilder().getRouteDescription(), () =>
 		} );
 
 		it( 'invalid comment type', async () => {
-			const response = await newRemoveItemDescriptionsRequestBuilder( testItemId, 'en' )
+			const response = await newRemoveItemDescriptionRequestBuilder( testItemId, 'en' )
 				.withJsonBodyParam( 'comment', 1234 ).assertInvalidRequest().makeRequest();
 
 			expect( response ).to.have.status( 400 );
