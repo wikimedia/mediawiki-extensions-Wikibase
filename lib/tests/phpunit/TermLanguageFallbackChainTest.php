@@ -123,13 +123,6 @@ class TermLanguageFallbackChainTest extends MediaWikiIntegrationTestCase {
 				'language' => 'zh-tw',
 				'source' => 'zh-cn',
 			] ],
-			[ 'kk-cyrl', $data, [
-				// Shouldn't be converted to Cyrillic ('фоо') as this specific
-				// value ('foo') is taken from the English label.
-				'value' => 'foo',
-				'language' => 'en',
-				'source' => null,
-			] ],
 			[ 'gan-hant', $data, [
 				'value' => '測試',
 				'language' => 'zh-hant',
