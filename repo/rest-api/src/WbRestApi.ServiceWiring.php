@@ -35,6 +35,7 @@ use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdValidat
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyLabelEditRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementIdRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementSerializationRequestValidatingDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemAliasesInLanguage;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
@@ -264,6 +265,16 @@ return [
 		},
 
 	// phpcs:enable
+
+	'WbRestApi.AddItemAliasesInLanguage' => function( MediaWikiServices $services ): AddItemAliasesInLanguage {
+		return new AddItemAliasesInLanguage(
+			WbRestApi::getItemDataRetriever( $services ),
+			WbRestApi::getAssertItemExists( $services ),
+			WbRestApi::getAssertUserIsAuthorized( $services ),
+			WbRestApi::getItemUpdater( $services ),
+			WbRestApi::getValidatingRequestDeserializer( $services )
+		);
+	},
 
 	'WbRestApi.AddItemStatement' => function( MediaWikiServices $services ): AddItemStatement {
 		return new AddItemStatement(

@@ -2,7 +2,9 @@
 
 namespace Wikibase\Repo\RestApi\RouteHandlers;
 
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Handler;
+use MediaWiki\Rest\RequestInterface;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
@@ -12,6 +14,11 @@ use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemA
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemAliasesInLanguageResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\BotRightCheckMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\ContentTypeCheckMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -30,29 +37,44 @@ class AddItemAliasesInLanguageRouteHandler extends SimpleHandler {
 
 	private AddItemAliasesInLanguage $addItemAliases;
 	private ResponseFactory $responseFactory;
+	private MiddlewareHandler $middlewareHandler;
 
 	public function __construct(
 		AddItemAliasesInLanguage $addItemAliases,
-		ResponseFactory $responseFactory
+		ResponseFactory $responseFactory,
+		MiddlewareHandler $middlewareHandler
 	) {
 		$this->addItemAliases = $addItemAliases;
 		$this->responseFactory = $responseFactory;
+		$this->middlewareHandler = $middlewareHandler;
 	}
 
 	public static function factory(): Handler {
+		$responseFactory = new ResponseFactory();
 		return new self(
-			new AddItemAliasesInLanguage(
-				WbRestApi::getItemDataRetriever(),
-				WbRestApi::getAssertItemExists(),
-				WbRestApi::getAssertUserIsAuthorized(),
-				WbRestApi::getItemUpdater(),
-				WbRestApi::getValidatingRequestDeserializer(),
-			),
-			new ResponseFactory()
+			WbRestApi::getAddItemAliasesInLanguage(),
+			$responseFactory,
+			new MiddlewareHandler( [
+				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
+				new UserAgentCheckMiddleware(),
+				new AuthenticationMiddleware(),
+				new ContentTypeCheckMiddleware( [ ContentTypeCheckMiddleware::TYPE_APPLICATION_JSON ] ),
+				new BotRightCheckMiddleware( MediaWikiServices::getInstance()->getPermissionManager(), $responseFactory ),
+				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
+					fn( RequestInterface $request ): string => $request->getPathParam( self::ITEM_ID_PATH_PARAM )
+				),
+			] )
 		);
 	}
 
-	public function run( string $itemId, string $languageCode ): Response {
+	/**
+	 * @param mixed ...$args
+	 */
+	public function run( ...$args ): Response {
+		return $this->middlewareHandler->run( $this, [ $this, 'runUseCase' ], $args );
+	}
+
+	public function runUseCase( string $itemId, string $languageCode ): Response {
 		$jsonBody = $this->getValidatedBody();
 		try {
 			$useCaseResponse = $this->addItemAliases->execute(
@@ -145,6 +167,15 @@ class AddItemAliasesInLanguageRouteHandler extends SimpleHandler {
 	private function getUsername(): ?string {
 		$mwUser = $this->getAuthority()->getUser();
 		return $mwUser->isRegistered() ? $mwUser->getName() : null;
+	}
+
+	/**
+	 * Preconditions are checked via {@link PreconditionMiddleware}
+	 *
+	 * @inheritDoc
+	 */
+	public function checkPreconditions() {
+		return null;
 	}
 
 }

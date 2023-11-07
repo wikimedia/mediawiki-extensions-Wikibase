@@ -134,5 +134,6 @@ module.exports.editRequestsOnItem = [
 	( { itemId } ) => rbf.newPatchItemAliasesRequestBuilder(
 		itemId,
 		[ { op: 'replace', path: '/en', value: [ 'en-alias-' + utils.uniq() ] } ]
-	)
+	),
+	( { itemId } ) => rbf.newAddItemAliasesInLanguageRequestBuilder( itemId, 'en', [ 'en-alias-' + utils.uniq() ] )
 ];

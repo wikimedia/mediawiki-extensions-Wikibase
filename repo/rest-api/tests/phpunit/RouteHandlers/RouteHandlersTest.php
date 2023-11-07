@@ -18,6 +18,8 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\LatestRevisionIdResult;
+use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemAliasesInLanguage;
+use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemAliasesInLanguageResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatement;
@@ -718,6 +720,26 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 				new UseCaseError( UseCaseError::PROPERTY_NOT_FOUND, '' ),
 				$hasErrorCode( UseCaseError::PROPERTY_NOT_FOUND ),
 			] ],
+		] ];
+		yield 'AddItemAliasesInLanguage' => [ [
+			'useCase' => AddItemAliasesInLanguage::class,
+			'useCaseResponse' => new AddItemAliasesInLanguageResponse(
+				new AliasesInLanguage( 'en', [] ),
+				$lastModified,
+				123,
+				true
+			),
+			'validRequest' => [
+				'pathParams' => [ 'item_id' => 'Q1', 'language_code' => 'en' ],
+				'bodyContents' => [ 'aliases' => [ 'spud', 'tater' ] ],
+			],
+			'expectedExceptions' => [
+				[
+					new UseCaseError( UseCaseError::INVALID_ITEM_ID, '' ),
+					$hasErrorCode ( UseCaseError::INVALID_ITEM_ID ),
+				],
+				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::ITEM_REDIRECTED ) ],
+			],
 		] ];
 		// phpcs:enable
 	}
