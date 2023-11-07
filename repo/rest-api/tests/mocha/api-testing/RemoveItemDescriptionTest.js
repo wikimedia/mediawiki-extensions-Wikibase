@@ -132,4 +132,39 @@ describe( newRemoveItemDescriptionRequestBuilder().getRouteDescription(), () => 
 		} );
 	} );
 
+	describe( '404 error response', () => {
+		it( 'item not found', async () => {
+			const itemId = 'Q999999';
+			const response = await newRemoveItemDescriptionRequestBuilder( itemId, 'en', 'test description' )
+				.assertValidRequest().makeRequest();
+
+			assertValidErrorResponse( response, 404, 'item-not-found' );
+			assert.include( response.body.message, itemId );
+		} );
+
+		it( 'description in the language specified does not exist', async () => {
+			const languageCode = 'ar';
+			const response = await newRemoveItemDescriptionRequestBuilder( testItemId, languageCode )
+				.assertValidRequest().makeRequest();
+
+			assertValidErrorResponse( response, 404, 'description-not-defined' );
+			assert.include( response.body.message, testItemId );
+			assert.include( response.body.message, languageCode );
+		} );
+	} );
+
+	describe( '409 error response', () => {
+		it( 'item is a redirect', async () => {
+			const redirectTarget = testItemId;
+			const redirectSource = await entityHelper.createRedirectForItem( redirectTarget );
+
+			const response = await newRemoveItemDescriptionRequestBuilder( redirectSource, 'en', 'test description' )
+				.assertValidRequest().makeRequest();
+
+			assertValidErrorResponse( response, 409, 'redirected-item' );
+			assert.include( response.body.message, redirectSource );
+			assert.include( response.body.message, redirectTarget );
+		} );
+	} );
+
 } );
