@@ -23,8 +23,7 @@
 	"patch": {
 		"operationId": "patchPropertyLabels",
 		"tags": [ "labels" ],
-		"summary": "[WIP] Change a Property's Labels",
-		"description": "This endpoint is currently in development and is not recommended for production use.",
+		"summary": "Change a Property's Labels",
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/PropertyId" },
 			{ "$ref": "../../global/parameters.json#/IfMatch" },
