@@ -486,10 +486,13 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 				'pathParams' => [ 'item_id' => 'Q1' ],
 				'bodyContents' => [ 'patch' => [ [ 'op' => 'remove', 'path' => '/fr' ] ] ],
 			],
-			'expectedExceptions' => [ [
-				new UseCaseError( UseCaseError::ITEM_NOT_FOUND, '' ),
-				$hasErrorCode( UseCaseError::ITEM_NOT_FOUND ),
-			] ],
+			'expectedExceptions' => [
+				[
+					new UseCaseError( UseCaseError::ITEM_NOT_FOUND, '' ),
+					$hasErrorCode( UseCaseError::ITEM_NOT_FOUND ),
+				],
+				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::ITEM_REDIRECTED ) ],
+			],
 		] ];
 		yield 'PatchItemStatement' => [ [
 			'useCase' => PatchItemStatement::class,
