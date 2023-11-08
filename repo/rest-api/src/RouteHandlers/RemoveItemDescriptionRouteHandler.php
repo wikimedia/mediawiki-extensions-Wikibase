@@ -42,6 +42,7 @@ class RemoveItemDescriptionRouteHandler extends SimpleHandler {
 			new RemoveItemDescription(
 				WbRestApi::getValidatingRequestDeserializer(),
 				WbRestApi::getAssertItemExists(),
+				WbRestApi::getAssertUserIsAuthorized(),
 				WbRestApi::getItemDataRetriever(),
 				WbRestApi::getItemUpdater()
 			),

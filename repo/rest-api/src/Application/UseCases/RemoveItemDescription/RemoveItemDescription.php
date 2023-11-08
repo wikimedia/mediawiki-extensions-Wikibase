@@ -4,6 +4,7 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\RemoveItemDescription;
 
 use OutOfBoundsException;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionEditSummary;
@@ -18,17 +19,20 @@ class RemoveItemDescription {
 
 	private RemoveItemDescriptionValidator $useCaseValidator;
 	private AssertItemExists $assertItemExists;
+	private AssertUserIsAuthorized $assertUserIsAuthorized;
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
 
 	public function __construct(
 		RemoveItemDescriptionValidator $useCaseValidator,
 		AssertItemExists $assertItemExists,
+		AssertUserIsAuthorized $assertUserIsAuthorized,
 		ItemRetriever $itemRetriever,
 		ItemUpdater $itemUpdater
 	) {
 		$this->useCaseValidator = $useCaseValidator;
 		$this->assertItemExists = $assertItemExists;
+		$this->assertUserIsAuthorized = $assertUserIsAuthorized;
 		$this->itemRetriever = $itemRetriever;
 		$this->itemUpdater = $itemUpdater;
 	}
@@ -41,8 +45,10 @@ class RemoveItemDescription {
 		$deserializedRequest = $this->useCaseValidator->validateAndDeserialize( $request );
 		$itemId = $deserializedRequest->getItemId();
 		$languageCode = $deserializedRequest->getLanguageCode();
+		$providedEditMetadata = $deserializedRequest->getEditMetadata();
 
 		$this->assertItemExists->execute( $itemId );
+		$this->assertUserIsAuthorized->execute( $itemId, $providedEditMetadata->getUser()->getUsername() );
 
 		$item = $this->itemRetriever->getItem( $itemId );
 		try {
@@ -55,7 +61,6 @@ class RemoveItemDescription {
 		}
 		$item->getDescriptions()->removeByLanguage( $languageCode );
 
-		$providedEditMetadata = $deserializedRequest->getEditMetadata();
 		$editMetadata = new EditMetadata(
 			$providedEditMetadata->getTags(),
 			$providedEditMetadata->isBot(),
