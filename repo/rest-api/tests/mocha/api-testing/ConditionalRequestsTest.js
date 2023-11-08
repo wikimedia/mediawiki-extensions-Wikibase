@@ -347,6 +347,14 @@ describe( 'Conditional requests', () => {
 						requestInputs.mainTestSubject,
 						newStatementWithRandomStringValue( requestInputs.statementPropertyId )
 					).makeRequest() ).body.id;
+
+					if ( requestInputs.mainTestSubject === requestInputs.itemId ) {
+						await rbf.newSetItemDescriptionRequestBuilder(
+							requestInputs.itemId,
+							'en',
+							`entity description ${utils.uniq()}`
+						).makeRequest();
+					}
 				}
 			} );
 
