@@ -18,7 +18,8 @@
 			"Vinhtantran",
 			"Winston Sung",
 			"Zolo",
-			"පසිඳු කාවින්ද"
+			"පසිඳු කාවින්ද",
+			"Pisceskaze"
 		]
 	},
 	"wikibase-desc": "Kho dữ liệu có cấu trúc",
@@ -27,8 +28,11 @@
 	"wikibase-entity-property": "Thuộc tính",
 	"wikibase-entity-query": "Truy vấn",
 	"nstab-item": "Khoản mục",
+	"tooltip-ca-nstab-item": "Xem mục",
 	"nstab-property": "Thuộc tính",
+	"tooltip-ca-nstab-property": "Xem thuộc tính",
 	"nstab-query": "Truy vấn",
+	"tooltip-ca-nstab-query": "Xem truy vấn",
 	"wikibase-edit": "sửa",
 	"wikibase-save": "lưu",
 	"wikibase-publish": "đăng",

@@ -5,7 +5,8 @@
 			"Caliburn",
 			"John Reid",
 			"Ladsgroup",
-			"MJL"
+			"MJL",
+			"CiphriusKane"
 		]
 	},
 	"wikibase-desc": "Structurt data repository",
@@ -17,7 +18,7 @@
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "In mair leids",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Configur",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Shaw labels, aliases an descriptions in aw ma leids on page laid",
-	"wikibase-entitytermsforlanguagelistview-aliases": "An aa kent as",
+	"wikibase-entitytermsforlanguagelistview-aliases": "Forbye kent as",
 	"wikibase-entitytermsforlanguagelistview-description": "Descreeption",
 	"wikibase-entitytermsforlanguagelistview-language": "Leid",
 	"wikibase-entitytermsforlanguagelistview-more": "Mair leids",
