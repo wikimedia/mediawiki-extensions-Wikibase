@@ -2,6 +2,10 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\RemoveItemDescription;
 
+use OutOfBoundsException;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
+use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
@@ -13,25 +17,43 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 class RemoveItemDescription {
 
 	private RemoveItemDescriptionValidator $useCaseValidator;
+	private AssertItemExists $assertItemExists;
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
 
 	public function __construct(
 		RemoveItemDescriptionValidator $useCaseValidator,
+		AssertItemExists $assertItemExists,
 		ItemRetriever $itemRetriever,
 		ItemUpdater $itemUpdater
 	) {
 		$this->useCaseValidator = $useCaseValidator;
+		$this->assertItemExists = $assertItemExists;
 		$this->itemRetriever = $itemRetriever;
 		$this->itemUpdater = $itemUpdater;
 	}
 
+	/**
+	 * @throws ItemRedirect
+	 * @throws UseCaseError
+	 */
 	public function execute( RemoveItemDescriptionRequest $request ): void {
 		$deserializedRequest = $this->useCaseValidator->validateAndDeserialize( $request );
+		$itemId = $deserializedRequest->getItemId();
+		$languageCode = $deserializedRequest->getLanguageCode();
 
-		$item = $this->itemRetriever->getItem( $deserializedRequest->getItemId() );
-		$description = $item->getDescriptions()->getByLanguage( $deserializedRequest->getLanguageCode() );
-		$item->getDescriptions()->removeByLanguage( $deserializedRequest->getLanguageCode() );
+		$this->assertItemExists->execute( $itemId );
+
+		$item = $this->itemRetriever->getItem( $itemId );
+		try {
+			$description = $item->getDescriptions()->getByLanguage( $languageCode );
+		} catch ( OutOfBoundsException $e ) {
+			throw new UseCaseError(
+				UseCaseError::DESCRIPTION_NOT_DEFINED,
+				"Item with the ID $itemId does not have a description in the language: $languageCode"
+			);
+		}
+		$item->getDescriptions()->removeByLanguage( $languageCode );
 
 		$providedEditMetadata = $deserializedRequest->getEditMetadata();
 		$editMetadata = new EditMetadata(
