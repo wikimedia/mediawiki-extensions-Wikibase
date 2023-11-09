@@ -2,7 +2,9 @@
 
 namespace Wikibase\Repo\RestApi\RouteHandlers;
 
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Handler;
+use MediaWiki\Rest\RequestInterface;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
@@ -11,6 +13,11 @@ use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemDescription\RemoveItemDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemDescription\RemoveItemDescriptionRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\BotRightCheckMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\ContentTypeCheckMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -29,28 +36,49 @@ class RemoveItemDescriptionRouteHandler extends SimpleHandler {
 	private const BOT_PARAM_DEFAULT = false;
 	private const COMMENT_PARAM_DEFAULT = null;
 
+	private MiddlewareHandler $middlewareHandler;
 	private RemoveItemDescription $removeItemDescription;
 	private ResponseFactory $responseFactory;
 
-	public function __construct( RemoveItemDescription $removeItemDescription, ResponseFactory $responseFactory ) {
+	public function __construct(
+		MiddlewareHandler $middlewareHandler,
+		RemoveItemDescription $removeItemDescription,
+		ResponseFactory $responseFactory
+	) {
+		$this->middlewareHandler = $middlewareHandler;
 		$this->removeItemDescription = $removeItemDescription;
 		$this->responseFactory = $responseFactory;
 	}
 
 	public static function factory(): Handler {
+		$responseFactory = new ResponseFactory();
 		return new self(
-			new RemoveItemDescription(
-				WbRestApi::getValidatingRequestDeserializer(),
-				WbRestApi::getAssertItemExists(),
-				WbRestApi::getAssertUserIsAuthorized(),
-				WbRestApi::getItemDataRetriever(),
-				WbRestApi::getItemUpdater()
-			),
-			new ResponseFactory()
+			new MiddlewareHandler( [
+				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
+				new UserAgentCheckMiddleware(),
+				new AuthenticationMiddleware(),
+				new ContentTypeCheckMiddleware( [
+					ContentTypeCheckMiddleware::TYPE_APPLICATION_JSON,
+					ContentTypeCheckMiddleware::TYPE_NONE,
+				] ),
+				new BotRightCheckMiddleware( MediaWikiServices::getInstance()->getPermissionManager(), $responseFactory ),
+				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
+					fn( RequestInterface $request ): string => $request->getPathParam( self::ITEM_ID_PATH_PARAM )
+				),
+			] ),
+			WbRestApi::getRemoveItemDescription(),
+			$responseFactory
 		);
 	}
 
-	public function run( string $itemId, string $languageCode ): Response {
+	/**
+	 * @param mixed ...$args
+	 */
+	public function run( ...$args ): Response {
+		return $this->middlewareHandler->run( $this, [ $this, 'runUseCase' ], $args );
+	}
+
+	public function runUseCase( string $itemId, string $languageCode ): Response {
 		$requestBody = $this->getValidatedBody();
 
 		try {
@@ -61,7 +89,7 @@ class RemoveItemDescriptionRouteHandler extends SimpleHandler {
 					$requestBody[ self::TAGS_BODY_PARAM ] ?? self::TAGS_PARAM_DEFAULT,
 					$requestBody[ self::BOT_BODY_PARAM ] ?? self::BOT_PARAM_DEFAULT,
 					$requestBody[ self::COMMENT_BODY_PARAM ] ?? self::COMMENT_PARAM_DEFAULT,
-					null
+					$this->getUsername()
 				)
 			);
 		} catch ( UseCaseError $e ) {
@@ -126,6 +154,20 @@ class RemoveItemDescriptionRouteHandler extends SimpleHandler {
 					ParamValidator::PARAM_DEFAULT => self::COMMENT_PARAM_DEFAULT,
 				],
 			] ) : parent::getBodyValidator( $contentType );
+	}
+
+	/**
+	 * Preconditions are checked via {@link PreconditionMiddleware}
+	 *
+	 * @inheritDoc
+	 */
+	public function checkPreconditions() {
+		return null;
+	}
+
+	private function getUsername(): ?string {
+		$mwUser = $this->getAuthority()->getUser();
+		return $mwUser->isRegistered() ? $mwUser->getName() : null;
 	}
 
 }

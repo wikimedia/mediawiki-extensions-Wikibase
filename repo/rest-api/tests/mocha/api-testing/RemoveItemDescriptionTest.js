@@ -167,4 +167,15 @@ describe( newRemoveItemDescriptionRequestBuilder().getRouteDescription(), () => 
 		} );
 	} );
 
+	describe( '415 error response', () => {
+		it( 'unsupported media type', async () => {
+			const contentType = 'multipart/form-data';
+			const response = await newRemoveItemDescriptionRequestBuilder( 'Q123', 'en' )
+				.withHeader( 'content-type', contentType ).assertInvalidRequest().makeRequest();
+
+			expect( response ).to.have.status( 415 );
+			assert.strictEqual( response.body.message, `Unsupported Content-Type: '${contentType}'` );
+		} );
+	} );
+
 } );

@@ -79,6 +79,14 @@ describe( 'Auth', () => {
 						requestInputs.mainTestSubject,
 						newStatementWithRandomStringValue( requestInputs.statementPropertyId )
 					).makeRequest() ).body.id;
+
+					if ( requestInputs.mainTestSubject === requestInputs.itemId ) {
+						await rbf.newSetItemDescriptionRequestBuilder(
+							requestInputs.itemId,
+							'en',
+							`entity description ${utils.uniq()}`
+						).makeRequest();
+					}
 				}
 			} );
 
@@ -146,13 +154,7 @@ describe( 'Auth', () => {
 
 		// protecting/unprotecting does not always take effect immediately. These tests are isolated here to avoid
 		// accidentally testing against a protected page in the other tests and receiving false positive results.
-		[
-			{
-				newRequestBuilder: () => rbf.newRemoveItemDescriptionRequestBuilder( itemRequestInputs.itemId, 'en' ),
-				requestInputs: itemRequestInputs
-			},
-			...editRequestsWithInputs
-		].forEach( ( { newRequestBuilder, requestInputs } ) => {
+		editRequestsWithInputs.forEach( ( { newRequestBuilder, requestInputs } ) => {
 			describe( 'Protected entity page', () => {
 				before( async () => {
 					await changeEntityProtectionStatus( requestInputs.mainTestSubject, 'sysop' ); // protect
