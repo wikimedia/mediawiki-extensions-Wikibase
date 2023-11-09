@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Римма"
+		]
+	},
+	"wikibase-dataitem": "{{WBREPONAME}} юкӧн",
+	"wikibase-editlinks": "Вильмӧтны ыстісьӧммез",
+	"wikibase-linkitem-addlinks": "Содтыны ыстісьӧммез",
+	"wikibase-linkitem-title": "Листбок вылӧ ыстісьӧм",
+	"wikibase-linkitem-linkpage": "Листбок вылӧ ыстісьӧм",
+	"wikibase-linkitem-selectlink": " Пожалуйста, бӧрйӧ везгӧрӧд и листбок, кӧдӧн ті мӧдат йитны этія листбоксӧ.",
+	"wikibase-linkitem-input-site": "Кыв:",
+	"wikibase-linkitem-input-page": "Листбок:",
+	"wikibase-rc-hide-wikidata-hide": "Дзебны",
+	"wikibase-rc-hide-wikidata-show": "Мыччавны",
+	"wikibase-otherprojects": "Модік проекттэзын"
+}
