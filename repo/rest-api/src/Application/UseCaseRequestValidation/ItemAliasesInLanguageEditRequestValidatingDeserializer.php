@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\RestApi\Application\UseCaseRequestValidation;
 
 use LogicException;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
@@ -10,6 +11,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\DuplicateAliasException;
 use Wikibase\Repo\RestApi\Application\Serialization\EmptyAliasException;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
+use Wikibase\Repo\RestApi\Domain\Services\ItemAliasesInLanguageRetriever;
 
 /**
  * @license GPL-2.0-or-later
@@ -18,10 +20,16 @@ class ItemAliasesInLanguageEditRequestValidatingDeserializer {
 
 	private AliasesInLanguageValidator $validator;
 	private AliasesDeserializer $deserializer;
+	private ItemAliasesInLanguageRetriever $aliasesRetriever;
 
-	public function __construct( AliasesInLanguageValidator $validator, AliasesDeserializer $deserializer ) {
+	public function __construct(
+		AliasesInLanguageValidator $validator,
+		AliasesDeserializer $deserializer,
+		ItemAliasesInLanguageRetriever $aliasesRetriever
+	) {
 		$this->validator = $validator;
 		$this->deserializer = $deserializer;
+		$this->aliasesRetriever = $aliasesRetriever;
 	}
 
 	/**
@@ -39,6 +47,8 @@ class ItemAliasesInLanguageEditRequestValidatingDeserializer {
 		$aliasesInLanguage = $deserializedAliases->getByLanguage( $language );
 		$this->validate( $aliasesInLanguage );
 
+		$this->checkForDuplicatesWithExistingAliases( new ItemId( $request->getItemId() ), $aliasesInLanguage );
+
 		return $aliasesInLanguage->getAliases();
 	}
 
@@ -48,12 +58,7 @@ class ItemAliasesInLanguageEditRequestValidatingDeserializer {
 		} catch ( EmptyAliasException $e ) {
 			throw new UseCaseError( UseCaseError::ALIAS_EMPTY, 'Alias must not be empty' );
 		} catch ( DuplicateAliasException $e ) {
-			$duplicateAlias = $e->getValue();
-			throw new UseCaseError(
-				UseCaseError::ALIAS_DUPLICATE,
-				"Alias list contains a duplicate alias: '$duplicateAlias'",
-				[ UseCaseError::CONTEXT_ALIAS => $duplicateAlias ]
-			);
+			$this->throwDuplicateAliasError( $e->getValue() );
 		}
 	}
 
@@ -84,6 +89,30 @@ class ItemAliasesInLanguageEditRequestValidatingDeserializer {
 					throw new LogicException( "Unexpected validation error code: $errorCode" );
 			}
 		}
+	}
+
+	private function checkForDuplicatesWithExistingAliases( ItemId $itemId, AliasGroup $newAliases ): void {
+		$existingAliases = $this->aliasesRetriever->getAliasesInLanguage( $itemId, $newAliases->getLanguageCode() );
+		if ( !$existingAliases ) {
+			return;
+		}
+
+		$duplicates = array_intersect( $newAliases->getAliases(), $existingAliases->getAliases() );
+		if ( !empty( $duplicates ) ) {
+			$this->throwDuplicateAliasError( $duplicates[0] );
+		}
+	}
+
+	/**
+	 * @throws UseCaseError
+	 * @return never
+	 */
+	private function throwDuplicateAliasError( string $duplicateAlias ): void {
+		throw new UseCaseError(
+			UseCaseError::ALIAS_DUPLICATE,
+			"Alias list contains a duplicate alias: '$duplicateAlias'",
+			[ UseCaseError::CONTEXT_ALIAS => $duplicateAlias ]
+		);
 	}
 
 }

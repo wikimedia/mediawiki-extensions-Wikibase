@@ -239,8 +239,12 @@ return [
 	VRD::ITEM_ALIASES_IN_LANGUAGE_EDIT_REQUEST_VALIDATING_DESERIALIZER =>
 		function ( MediaWikiServices $services ): ItemAliasesInLanguageEditRequestValidatingDeserializer {
 			return new ItemAliasesInLanguageEditRequestValidatingDeserializer(
-				new WikibaseRepoAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory() ),
-				new AliasesDeserializer()
+				new WikibaseRepoAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
+				new AliasesDeserializer(),
+				new PrefetchingTermLookupAliasesRetriever(
+					WikibaseRepo::getPrefetchingTermLookup( $services ),
+					WikibaseRepo::getTermsLanguages( $services )
+				)
 			);
 		},
 

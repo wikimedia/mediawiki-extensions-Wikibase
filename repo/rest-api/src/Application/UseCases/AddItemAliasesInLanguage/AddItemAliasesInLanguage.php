@@ -55,7 +55,7 @@ class AddItemAliasesInLanguage {
 		$aliasesExist = $item->getAliasGroups()->hasGroupForLanguage( $languageCode );
 		$originalAliases = $aliasesExist ? $item->getAliasGroups()->getByLanguage( $languageCode )->getAliases() : [];
 
-		$item->getAliasGroups()->setAliasesForLanguage( $languageCode, $this->addAliases( $originalAliases, $newAliases ) );
+		$item->getAliasGroups()->setAliasesForLanguage( $languageCode, array_merge( $originalAliases, $newAliases ) );
 		$newRevision = $this->itemUpdater->update(
 			$item, // @phan-suppress-current-line PhanTypeMismatchArgumentNullable
 			new EditMetadata(
@@ -74,19 +74,6 @@ class AddItemAliasesInLanguage {
 			$newRevision->getRevisionId(),
 			$aliasesExist
 		);
-	}
-
-	private function addAliases( array $originalAliases, array $newAliases ): array {
-		$duplicates = array_intersect( $newAliases, $originalAliases );
-		if ( !empty( $duplicates ) ) {
-			throw new UseCaseError(
-				UseCaseError::ALIAS_DUPLICATE,
-				"Alias list contains a duplicate alias: '${duplicates[0]}'",
-				[ UseCaseError::CONTEXT_ALIAS => $duplicates[0] ]
-			);
-		}
-
-		return array_merge( $originalAliases, $newAliases );
 	}
 
 }

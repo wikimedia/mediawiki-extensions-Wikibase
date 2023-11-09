@@ -11,6 +11,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
+use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
+use Wikibase\Repo\RestApi\Domain\Services\ItemAliasesInLanguageRetriever;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemAliasesInLanguageEditRequestValidatingDeserializer
@@ -31,7 +33,8 @@ class ItemAliasesInLanguageEditRequestValidatingDeserializerTest extends TestCas
 			[ 'first alias', 'second alias' ],
 			( new ItemAliasesInLanguageEditRequestValidatingDeserializer(
 				$this->createStub( AliasesInLanguageValidator::class ),
-				new AliasesDeserializer()
+				new AliasesDeserializer(),
+				$this->newStubItemAliasesInLanguageRetriever()
 			) )->validateAndDeserialize( $request )
 		);
 	}
@@ -44,7 +47,8 @@ class ItemAliasesInLanguageEditRequestValidatingDeserializerTest extends TestCas
 		?ValidationError $validationError,
 		string $expectedErrorCode,
 		string $expectedErrorMessage,
-		array $expectedContext = []
+		array $expectedContext = [],
+		array $existingAliases = []
 	): void {
 		$request = $this->createStub( ItemAliasesInLanguageEditRequest::class );
 		$request->method( 'getItemId' )->willReturn( 'Q123' );
@@ -55,7 +59,11 @@ class ItemAliasesInLanguageEditRequestValidatingDeserializerTest extends TestCas
 		$aliasesValidator->method( 'validate' )->willReturn( $validationError );
 
 		try {
-			( new ItemAliasesInLanguageEditRequestValidatingDeserializer( $aliasesValidator, new AliasesDeserializer() ) )
+			( new ItemAliasesInLanguageEditRequestValidatingDeserializer(
+				$aliasesValidator,
+				new AliasesDeserializer(),
+				$this->newStubItemAliasesInLanguageRetriever( $existingAliases )
+			) )
 				->validateAndDeserialize( $request );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $error ) {
@@ -112,13 +120,30 @@ class ItemAliasesInLanguageEditRequestValidatingDeserializerTest extends TestCas
 		];
 
 		$duplicateAlias = 'foo';
-		yield 'alias duplicate' => [
+		yield 'alias duplicate in the request' => [
 			[ $duplicateAlias, 'bar', $duplicateAlias ],
 			null,
 			UseCaseError::ALIAS_DUPLICATE,
 			"Alias list contains a duplicate alias: '{$duplicateAlias}'",
 			[ UseCaseError::CONTEXT_ALIAS => $duplicateAlias ],
 		];
+
+		$duplicateAlias = 'foo';
+		yield 'alias already exists' => [
+			[ $duplicateAlias, 'bar' ],
+			null,
+			UseCaseError::ALIAS_DUPLICATE,
+			"Alias list contains a duplicate alias: '{$duplicateAlias}'",
+			[ UseCaseError::CONTEXT_ALIAS => $duplicateAlias ],
+			[ $duplicateAlias, 'baz' ],
+		];
+	}
+
+	private function newStubItemAliasesInLanguageRetriever( array $enAliasesToReturn = [] ): ItemAliasesInLanguageRetriever {
+		$retriever = $this->createStub( ItemAliasesInLanguageRetriever::class );
+		$retriever->method( 'getAliasesInLanguage' )->willReturn( new AliasesInLanguage( 'en', $enAliasesToReturn ) );
+
+		return $retriever;
 	}
 
 }

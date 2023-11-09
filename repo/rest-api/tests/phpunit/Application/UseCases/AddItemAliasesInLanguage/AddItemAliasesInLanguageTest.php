@@ -4,10 +4,7 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\AddItemAliasesInLangu
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\AliasGroup;
-use Wikibase\DataModel\Term\AliasGroupList;
-use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemAliasesInLanguage;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemAliasesInLanguageRequest;
@@ -152,26 +149,6 @@ class AddItemAliasesInLanguageTest extends TestCase {
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::ALIAS_EMPTY, $e->getErrorCode() );
-		}
-	}
-
-	public function testAddDuplicateAlias_throwsUseCaseError(): void {
-		$itemId = new ItemId( 'Q123' );
-		$aliases = new AliasGroupList( [ new AliasGroup( 'en', [ 'duplicate alias' ] ) ] );
-		$item = new Item( $itemId, new Fingerprint( null, null, $aliases ) );
-
-		$this->itemRetriever = $this->createMock( ItemRetriever::class );
-		$this->itemRetriever->method( 'getItem' )
-			->with( $itemId )
-			->willReturn( $item );
-
-		try {
-			$this->newUseCase()->execute(
-				$this->newRequest( "$itemId", 'en', [ 'duplicate alias' ] )
-			);
-			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::ALIAS_DUPLICATE, $e->getErrorCode() );
 		}
 	}
 
