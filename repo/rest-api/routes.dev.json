@@ -1,10 +1,5 @@
 [
 	{
-		"path": "/wikibase/v0/entities/items/{item_id}/aliases/{language_code}",
-		"method": "POST",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\AddItemAliasesInLanguageRouteHandler::factory"
-	},
-	{
 		"path": "/wikibase/v0/entities/items/{item_id}/descriptions/{language_code}",
 		"method": "DELETE",
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\RemoveItemDescriptionRouteHandler::factory"
