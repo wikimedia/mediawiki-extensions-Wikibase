@@ -1,7 +1,1 @@
-[
-	{
-		"path": "/wikibase/v0/entities/items/{item_id}/descriptions/{language_code}",
-		"method": "DELETE",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\RemoveItemDescriptionRouteHandler::factory"
-	}
-]
+[ ]
