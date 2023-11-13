@@ -32,7 +32,9 @@
 			"Wiki13",
 			"아라",
 			"Dutchy45",
-			"Elderson"
+			"Elderson",
+			"DiGro",
+			"Jillids"
 		]
 	},
 	"wikibase-desc": "Opslagplaats voor gestructureerde gegevens",
@@ -157,6 +159,7 @@
 	"wikibase-validator-description-too-long": "De beschrijving mag niet langer zijn dan {{PLURAL:$1|één teken|$1 tekens}} lang zijn",
 	"wikibase-validator-description-too-short": "De beschrijving moet tenminste {{PLURAL:$1|één teken|$1 tekens}} lang zijn",
 	"wikibase-validator-alias-too-long": "Aliassen mogen elk niet meer dan {{PLURAL:$1|één teken|$1 tekens}} lang zijn",
+	"wikibase-validator-alias-too-short": "Elke alias moet ten minste {{PLURAL:$1|één teken|$1 tekens}} lang zijn",
 	"wikibase-validator-too-short": "Moet ten minste {{PLURAL:$1|één teken|$1 tekens}} lang zijn",
 	"wikibase-validator-too-high": "Buiten bereik, mag niet hoger zijn dan $1",
 	"wikibase-validator-too-low": "Buiten bereik, mag niet lager zijn dan $1",

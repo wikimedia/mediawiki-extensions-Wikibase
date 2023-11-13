@@ -12,7 +12,7 @@
 	"tooltip-t-wikibase": "Airt tae connected data reposeterie item",
 	"wikibase-after-page-move": "Ye sud update [$1 the associatit {{WBREPONAME}} item] tae maintain leid airtins on the flittit page an aw.",
 	"wikibase-after-page-move-queued": "The [$1 {{WBREPONAME}} item] associatit wi this page will be automatically updatit. Please note that this micht nae happen instantaneously.",
-	"wikibase-after-page-delete": "Ye sud remuive the airtin tae this page frae [$1 the associatit {{WBREPONAME}} item] an aa, tae maintain leid airtins.",
+	"wikibase-after-page-delete": "Airtin tae this page sud hae been reuived fae [$1 the associated {{WBREPONAME}} item]. We ask that ye check this haes happent.",
 	"wikibase-after-page-delete-queued": "The [$1 {{WBREPONAME}} item] associatit wi this page will be automatically updatit. Please note that this micht nae happen instantaneously.",
 	"wikibase-comment-add": "Ae {{WBREPONAME}} item haes been cræftit.",
 	"wikibase-comment-remove": "Associatit {{WBREPONAME}} item deleted. Leid links remuived.",

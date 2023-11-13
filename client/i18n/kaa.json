@@ -24,7 +24,7 @@
 	"wikibase-linkitem-selectlink": "Bul betke baylanıstırmaqshı bolǵan sayttı hám betti tańlań",
 	"wikibase-linkitem-input-site": "Til:",
 	"wikibase-linkitem-input-page": "Bet:",
-	"wikibase-linkitem-confirmitem-text": "Siz tańlaǵan bet álleqashan [oraylıq maǵlıwmatlar bazamızdaǵı $1 element] penen baylanısqan. Tómende kórsetilgen {{PLURAL:$2|bet|betler}} siz {{PLURAL:$2|jáne|}} usı betke silteme qılmaqshı bolǵan {{PLURAL:$2|bet|betler}} ekenligin tastıyıqlań.",
+	"wikibase-linkitem-confirmitem-text": "Siz tańlaǵan bet álleqashan oraylıq maǵlıwmatlar bazamızdaǵı $1 element penen baylanısqan. Tómende kórsetilgen {{PLURAL:$2|bet|betler}} siz silteme qılmaqshı bolǵan {{PLURAL:$2|bet|betler}} ekenligin tastıyıqlańız.",
 	"wikibase-linkitem-confirmitem-button": "Tastıyıqlaw",
 	"wikibase-linkitem-success-link": "Betlerge siltemeler sátli ornatıldı. Siltemelerdi ózinde saqlawshı elementti biziń [$1 oraylıq maǵlıwmatlar bazamızdan] tabıwıńız múmkin.",
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}}tı $1",
