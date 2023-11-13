@@ -342,7 +342,6 @@
 	},
 	"JobClasses": {
 		"wikibase-addUsagesForPage": "\\Wikibase\\Client\\Store\\AddUsagesForPageJob",
-		"ChangeNotification": "\\Wikibase\\Client\\ChangeNotificationJob",
 		"EntityChangeNotification": "\\Wikibase\\Client\\EntityChangeNotificationJob::newFromGlobalState",
 		"ChangeVisibilityNotification": "\\Wikibase\\Client\\ChangeModification\\ChangeVisibilityNotificationJob::newFromGlobalState",
 		"ChangeDeletionNotification": "\\Wikibase\\Client\\ChangeModification\\ChangeDeletionNotificationJob::newFromGlobalState",
