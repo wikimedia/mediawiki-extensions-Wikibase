@@ -3,6 +3,9 @@
 
 	var PARENT = $.ui.EditableTemplatedWidget,
 		datamodel = require( 'wikibase.datamodel' ),
+		rankClasses = Object.keys( datamodel.Statement.RANK ).map( function ( rankName ) {
+			return 'wb-' + rankName.toLowerCase();
+		} ),
 		buildCounter = require( '../../wikibase/utilities/wikibase.utilities.ui.js' );
 
 	/**
@@ -752,6 +755,9 @@
 				if ( value !== null ) {
 					if ( value.getClaim().getGuid() ) {
 						this.element.addClass( 'wikibase-statement-' + value.getClaim().getGuid() );
+					}
+					if ( value.getRank() !== null ) {
+						this.element.removeClass( rankClasses ).addClass( 'wb-' + this._getRankName( value.getRank() ) );
 					}
 
 					if ( this._mainSnakSnakView ) {
