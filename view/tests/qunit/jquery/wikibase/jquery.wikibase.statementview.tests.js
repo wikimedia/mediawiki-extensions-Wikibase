@@ -236,6 +236,26 @@
 		assert.false( $statementview.hasClass( 'wb-new' ) );
 	} );
 
+	QUnit.test( 'wb-rank class', function ( assert ) {
+		var $statementview = createStatementview(),
+			statementview = $statementview.data( 'statementview' );
+
+		assert.true( $statementview.hasClass( 'wb-normal' ), 'wb-normal class present' );
+
+		statementview.value( new datamodel.Statement(
+			new datamodel.Claim(
+				new datamodel.PropertyNoValueSnak( 'P1' ),
+				null,
+				'guid'
+			),
+			new datamodel.ReferenceList( [ ] ),
+			datamodel.Statement.RANK.PREFERRED
+		) );
+
+		assert.true( $statementview.hasClass( 'wb-preferred' ), 'wb-preferred class added' );
+		assert.false( $statementview.hasClass( 'wb-normal' ), 'wb-normal class removed' );
+	} );
+
 	QUnit.test( 'fires fireStartEditingHook when starting editing', function ( assert ) {
 		var fireSpy = sinon.spy(),
 			$statementview = createStatementview( {
