@@ -6,14 +6,14 @@
 	border: 1px solid #c8ccd1;
 	float: left;
 	margin: 0 2em 2em 0;
+	max-width: 30em;
 	padding-bottom: 0.6em;
-	width: 30em;
+	width: 100%;
 }
 
 @media screen and ( min-width: 1570px ) {
 	.wikibase-sitelinkgroupview {
 		margin-right: 0;
-		width: 100%;
 	}
 }
 
