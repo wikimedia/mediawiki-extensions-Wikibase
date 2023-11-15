@@ -428,8 +428,8 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 		$pageNormalizerMock = $this->createMock( SiteLinkPageNormalizer::class );
 		$pageNormalizerMock->expects( $this->once() )->method( 'normalize' )->with(
 			$this->anything(),
-			$this->equalTo( $params['linktitle'] ),
-			$this->equalTo( [ $params['badges'] ] )
+			$params['linktitle'],
+			[ $params['badges'] ]
 		)->willReturnArgument( 1 );
 		$this->setService( 'WikibaseRepo.SiteLinkPageNormalizer', $pageNormalizerMock );
 

@@ -83,7 +83,7 @@ class IntegrationApiTest extends ApiTestCase {
 	 * @dataProvider apiRequestProvider
 	 */
 	public function testApiModuleResult( $params, $expected ) {
-		list( $result ) = $this->doApiRequest( $params );
+		[ $result ] = $this->doApiRequest( $params );
 		$this->assertEquals( $expected, $result );
 	}
 

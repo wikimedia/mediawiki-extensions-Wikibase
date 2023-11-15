@@ -245,7 +245,7 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 		$pageSet = $this->callApiModuleAsGenerator( $params );
 
 		$pages = $pageSet->getGoodPages();
-		$this->assertCount( count( $expected ), $pages );
+		$this->assertSameSize( $expected, $pages );
 		foreach ( $pages as $page ) {
 			foreach ( $expected as $expectedPage ) {
 				if ( $expectedPage['pageid'] === $page->getId() ) {

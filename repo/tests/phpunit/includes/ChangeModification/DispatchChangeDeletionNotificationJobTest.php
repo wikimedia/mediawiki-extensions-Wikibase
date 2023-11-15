@@ -48,7 +48,7 @@ class DispatchChangeDeletionNotificationJobTest extends MediaWikiIntegrationTest
 	public function testShouldDispatchJobsForClientWikis() {
 		$timestamp = wfTimestampNow();
 		MWTimestamp::setFakeTime( $timestamp );
-		list( $pageId, $revisionRecordId, $pageTitle ) = $this->initArchive();
+		[ $pageId, $revisionRecordId, $pageTitle ] = $this->initArchive();
 		MWTimestamp::setFakeTime( false );
 
 		$params = [ 'archivedRevisionCount' => 1, 'pageId' => $pageId ];
@@ -65,7 +65,7 @@ class DispatchChangeDeletionNotificationJobTest extends MediaWikiIntegrationTest
 
 	public function testShouldNotDispatchJobsWhenToOld() {
 		MWTimestamp::setFakeTime( '20110401090000' );
-		list( $pageId, $revisionRecordId, $pageTitle ) = $this->initArchive();
+		[ $pageId, $revisionRecordId, $pageTitle ] = $this->initArchive();
 		MWTimestamp::setFakeTime( false );
 
 		$params = [ 'archivedRevisionCount' => 1, 'pageId' => $pageId ];

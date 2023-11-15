@@ -30,7 +30,7 @@ class EntitySourceDefinitionsConfigParser {
 				$namespaceSlotData = [];
 				foreach ( $sourceData['entityNamespaces'] as $entityType => $namespaceSlot ) {
 
-					list( $namespaceId, $slot ) = self::splitNamespaceAndSlot( $namespaceSlot );
+					[ $namespaceId, $slot ] = self::splitNamespaceAndSlot( $namespaceSlot );
 					$namespaceSlotData[$entityType] = [
 						'namespaceId' => $namespaceId,
 						'slot' => $slot,

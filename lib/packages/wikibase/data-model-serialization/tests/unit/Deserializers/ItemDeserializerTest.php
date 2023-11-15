@@ -28,8 +28,8 @@ class ItemDeserializerTest extends DispatchableDeserializerTest {
 		$entityIdDeserializerMock = $this->createMock( Deserializer::class );
 		$entityIdDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
-			->with( $this->equalTo( 'Q42' ) )
-			->will( $this->returnValue( new ItemId( 'Q42' ) ) );
+			->with( 'Q42' )
+			->willReturn( new ItemId( 'Q42' ) );
 
 		$termListDeserializerMock = $this->createMock( Deserializer::class );
 		$termListDeserializerMock->expects( $this->any() )
@@ -40,7 +40,7 @@ class ItemDeserializerTest extends DispatchableDeserializerTest {
 					'value' => 'foo',
 				],
 			] ) )
-			->will( $this->returnValue( new TermList( [ new Term( 'en', 'foo' ) ] ) ) );
+			->willReturn( new TermList( [ new Term( 'en', 'foo' ) ] ) );
 
 		$aliasGroupListDeserializerMock = $this->createMock( Deserializer::class );
 		$aliasGroupListDeserializerMock->expects( $this->any() )
@@ -51,9 +51,8 @@ class ItemDeserializerTest extends DispatchableDeserializerTest {
 					'values' => [ 'foo', 'bar' ],
 				],
 			] ) )
-			->will( $this->returnValue(
-				new AliasGroupList( [ new AliasGroup( 'en', [ 'foo', 'bar' ] ) ] ) )
-			);
+			->willReturn(
+				new AliasGroupList( [ new AliasGroup( 'en', [ 'foo', 'bar' ] ) ] ) );
 
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( 'test' );
@@ -73,7 +72,7 @@ class ItemDeserializerTest extends DispatchableDeserializerTest {
 					],
 				],
 			] ) )
-			->will( $this->returnValue( new StatementList( $statement ) ) );
+			->willReturn( new StatementList( $statement ) );
 
 		$siteLinkDeserializerMock = $this->createMock( Deserializer::class );
 		$siteLinkDeserializerMock->expects( $this->any() )
@@ -83,7 +82,7 @@ class ItemDeserializerTest extends DispatchableDeserializerTest {
 				'title' => 'Nyan Cat',
 				'badges' => [],
 			] ) )
-			->will( $this->returnValue( new SiteLink( 'enwiki', 'Nyan Cat' ) ) );
+			->willReturn( new SiteLink( 'enwiki', 'Nyan Cat' ) );
 
 		return new ItemDeserializer(
 			$entityIdDeserializerMock,

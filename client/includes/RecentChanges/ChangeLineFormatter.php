@@ -107,7 +107,7 @@ class ChangeLineFormatter {
 
 		$userLinks = $this->formatUserLinksHTML( $rev->getUserName(), $rev->getVisibility(), $lang, $user );
 		if ( count( $userLinks ) > 1 ) {
-			list( $data['userLink'], $data['userTalkLink'] ) = $userLinks;
+			[ $data['userLink'], $data['userTalkLink'] ] = $userLinks;
 		} else {
 			$data['userLink'] = array_pop( $userLinks );
 		}

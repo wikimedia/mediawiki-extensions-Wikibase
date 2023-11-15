@@ -103,7 +103,7 @@ class PropertyStubRdfBuilder implements PrefetchingEntityStubRdfBuilder {
 	 */
 	private function addDescriptions( $entityNamespace, $entityLName, array $descriptions ) {
 		foreach ( $descriptions as $languageCode => $description ) {
-		$this->writer->about( $entityNamespace, $entityLName )
+			$this->writer->about( $entityNamespace, $entityLName )
 			->say( RdfVocabulary::NS_SCHEMA_ORG, 'description' )->text( $description, $languageCode );
 		}
 	}

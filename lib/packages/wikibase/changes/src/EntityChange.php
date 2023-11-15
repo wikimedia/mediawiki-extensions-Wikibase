@@ -50,7 +50,7 @@ class EntityChange extends DiffChange {
 	}
 
 	public function getAction(): string {
-		list( , $action ) = explode( '~', $this->getType(), 2 );
+		[ , $action ] = explode( '~', $this->getType(), 2 );
 
 		return $action;
 	}

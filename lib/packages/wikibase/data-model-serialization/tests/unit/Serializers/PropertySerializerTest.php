@@ -25,7 +25,7 @@ class PropertySerializerTest extends DispatchableSerializerTest {
 		$termListSerializerMock = $this->createMock( Serializer::class );
 		$termListSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
-			->will( $this->returnCallback( static function( TermList $termList ) {
+			->willReturnCallback( static function( TermList $termList ) {
 				if ( $termList->isEmpty() ) {
 					return [];
 				}
@@ -33,12 +33,12 @@ class PropertySerializerTest extends DispatchableSerializerTest {
 				return [
 					'en' => [ 'lang' => 'en', 'value' => 'foo' ],
 				];
-			} ) );
+			} );
 
 		$aliasGroupListSerializerMock = $this->createMock( Serializer::class );
 		$aliasGroupListSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
-			->will( $this->returnCallback( static function( AliasGroupList $aliasGroupList ) {
+			->willReturnCallback( static function( AliasGroupList $aliasGroupList ) {
 				if ( $aliasGroupList->isEmpty() ) {
 					return [];
 				}
@@ -46,12 +46,12 @@ class PropertySerializerTest extends DispatchableSerializerTest {
 				return [
 					'en' => [ 'lang' => 'en', 'values' => [ 'foo', 'bar' ] ],
 				];
-			} ) );
+			} );
 
 		$statementListSerializerMock = $this->createMock( Serializer::class );
 		$statementListSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
-			->will( $this->returnCallback( static function( StatementList $statementList ) {
+			->willReturnCallback( static function( StatementList $statementList ) {
 				if ( $statementList->isEmpty() ) {
 					return [];
 				}
@@ -68,7 +68,7 @@ class PropertySerializerTest extends DispatchableSerializerTest {
 						],
 					],
 				];
-			} ) );
+			} );
 
 		return new PropertySerializer(
 			$termListSerializerMock,

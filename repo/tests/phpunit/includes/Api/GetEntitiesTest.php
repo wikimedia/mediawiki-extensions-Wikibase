@@ -161,7 +161,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		$expected = $this->calculateExpectedData( $expected, $params );
 
 		// -- do the request --------------------------------------------------------
-		list( $result,, ) = $this->doApiRequest( $params );
+		[ $result ] = $this->doApiRequest( $params );
 
 		// -- check the result --------------------------------------------------------
 		$this->assertArrayHasKey( 'success', $result, "Missing 'success' marker in response." );
@@ -582,7 +582,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 			$params['props'] = implode( '|', $props );
 		}
 
-		list( $res,, ) = $this->doApiRequest( $params );
+		[ $res ] = $this->doApiRequest( $params );
 
 		if ( $expectedLabels !== null ) {
 			$this->assertEquals( $expectedLabels, $res['entities'][$id]['labels'] );
@@ -595,7 +595,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 	public function testSiteLinkFilter() {
 		$id = EntityTestHelper::getId( 'Oslo' );
 
-		list( $res,, ) = $this->doApiRequest(
+		[ $res ] = $this->doApiRequest(
 			[
 				'action' => 'wbgetentities',
 				'sitefilter' => 'dewiki|enwiki',

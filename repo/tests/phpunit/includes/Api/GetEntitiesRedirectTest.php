@@ -64,7 +64,7 @@ class GetEntitiesRedirectTest extends ApiTestCase {
 		$params['action'] = 'wbgetentities';
 		$params['token'] = $user->getToken();
 		$params['ids'] = $redirectId->getSerialization();
-		list( $result,, ) = $this->doApiRequest( $params, null, false, $user );
+		[ $result ] = $this->doApiRequest( $params, null, false, $user );
 
 		$this->assertArrayHasKey( 'entities', $result );
 		$this->assertArrayHasKey( $redirectKey, $result['entities'],
@@ -81,7 +81,7 @@ class GetEntitiesRedirectTest extends ApiTestCase {
 
 		// double redirects should be treated like a missing entity
 		$params['ids'] = $doubleRedirectId->getSerialization();
-		list( $result,, ) = $this->doApiRequest( $params, null, false, $user );
+		[ $result ] = $this->doApiRequest( $params, null, false, $user );
 
 		$this->assertArrayHasKey( 'entities', $result );
 		$this->assertArrayHasKey( $doubleRedirectKey, $result['entities'],
@@ -101,7 +101,7 @@ class GetEntitiesRedirectTest extends ApiTestCase {
 		// if redirect resolution is disabled, the redirect should be treated like a missing entity
 		$params['redirects'] = 'no';
 		$params['ids'] = $redirectId->getSerialization();
-		list( $result,, ) = $this->doApiRequest( $params, null, false, $user );
+		[ $result ] = $this->doApiRequest( $params, null, false, $user );
 
 		$this->assertArrayHasKey( 'entities', $result );
 		$this->assertArrayHasKey( $redirectKey, $result['entities'],

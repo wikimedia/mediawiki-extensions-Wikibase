@@ -20,10 +20,10 @@ class ReferenceListSerializerTest extends DispatchableSerializerTest {
 		$referenceSerializerFake = $this->createMock( Serializer::class );
 		$referenceSerializerFake->expects( $this->any() )
 			->method( 'serialize' )
-			->will( $this->returnValue( [
+			->willReturn( [
 				'hash' => 'da39a3ee5e6b4b0d3255bfef95601890afd80709',
 				'snaks' => [],
-			] ) );
+			] );
 
 		return new ReferenceListSerializer( $referenceSerializerFake );
 	}

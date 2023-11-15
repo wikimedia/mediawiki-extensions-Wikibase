@@ -86,7 +86,7 @@ class EntityTestHelper {
 								'property' => '%StringProp%',
 								'datavalue' => [ 'value' => 'imastring1', 'type' => 'string' ],
 								'datatype' => 'string',
-							],
+							 ],
 						],
 						'references' => [
 							[

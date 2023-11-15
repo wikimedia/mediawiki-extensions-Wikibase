@@ -142,7 +142,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 			'snaktype' => 'value',
 		];
 
-		list( $resultArray, ) = $this->doApiRequestWithToken( $params );
+		[ $resultArray ] = $this->doApiRequestWithToken( $params );
 
 		$this->assertResultSuccess( $resultArray );
 		$this->assertIsArray( $resultArray, 'top level element is an array' );

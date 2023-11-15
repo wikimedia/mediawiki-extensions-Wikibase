@@ -190,7 +190,7 @@ class ChangesSubscriptionTableBuilder {
 
 		$continuationMsg = '';
 		if ( !empty( $continuation ) ) {
-			list( $fromItemId, $fromRowId ) = $continuation;
+			[ $fromItemId, $fromRowId ] = $continuation;
 			$continuationCondition = $db->buildComparison( '>', [
 				'ips_item_id' => (int)$fromItemId,
 				'ips_row_id' => $fromRowId,

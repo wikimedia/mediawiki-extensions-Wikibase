@@ -206,7 +206,7 @@ class EntityDataRequestHandler {
 
 		$revision = 0;
 
-		list( $id, $format ) = $this->uriManager->parseDocName( $doc );
+		[ $id, $format ] = $this->uriManager->parseDocName( $doc );
 
 		// get entity id and format from request parameter
 		$format = $request->getText( 'format', $format );
@@ -419,7 +419,7 @@ class EntityDataRequestHandler {
 
 			if ( $revision === 0 || $allowRedirects ) {
 				// If no specific revision is requested or redirects are explicitly allowed, resolve the redirect.
-				list( $entityRevision, ) = $this->getEntityRevision( $ex->getRedirectTargetId(), 0 );
+				[ $entityRevision ] = $this->getEntityRevision( $ex->getRedirectTargetId(), 0 );
 			} else {
 				// The requested revision is a redirect
 				$this->logger->debug(
@@ -523,7 +523,7 @@ class EntityDataRequestHandler {
 		/** @var RedirectRevision $followedRedirectRevision */
 		// If flavor is "dump", we allow fetching redirects by revision, since we won't
 		// be dumping the content of the target revision.
-		list( $entityRevision, $followedRedirectRevision ) = $this->getEntityRevision( $id, $revision, $flavor === 'dump' );
+		[ $entityRevision, $followedRedirectRevision ] = $this->getEntityRevision( $id, $revision, $flavor === 'dump' );
 
 		// handle If-Modified-Since
 		$imsHeader = $request->getHeader( 'IF-MODIFIED-SINCE' );
@@ -547,7 +547,7 @@ class EntityDataRequestHandler {
 		}
 
 		try {
-			list( $data, $contentType ) = $this->serializationService->getSerializedData(
+			[ $data, $contentType ] = $this->serializationService->getSerializedData(
 				$format,
 				$entityRevision,
 				$followedRedirectRevision,

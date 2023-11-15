@@ -65,7 +65,7 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 
 	public function testAllNecessaryFormFieldsArePresent_WhenRendered() {
 
-		list( $html ) = $this->executeSpecialPage();
+		[ $html ] = $this->executeSpecialPage();
 
 		$this->assertHtmlContainsInputWithName( $html, SpecialNewProperty::FIELD_LANG );
 		$this->assertHtmlContainsInputWithName( $html, SpecialNewProperty::FIELD_LABEL );
@@ -81,7 +81,7 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 		$subPagePart3 = 'url';
 		$subPage = "{$subPagePart1}/{$subPagePart2}/{$subPagePart3}";
 
-		list( $html ) = $this->executeSpecialPage( $subPage );
+		[ $html ] = $this->executeSpecialPage( $subPage );
 
 		$this->assertHtmlContainsInputWithNameAndValue(
 			$html,
@@ -110,7 +110,7 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 		];
 		$this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
 
-		list( $html ) = $this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
+		[ $html ] = $this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
 
 		$this->assertHtmlContainsErrorMessage( $html, '(wikibase-validator-label-conflict: label, en, ' );
 	}
@@ -344,7 +344,7 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 	}
 
 	private function assertHtmlContainsErrorTooLongMessage( $formData ) {
-		list( $html ) = $this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
+		[ $html ] = $this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
 
 		$this->assertHtmlContainsErrorMessage( $html, '(htmlform-invalid-input)' );
 	}

@@ -88,7 +88,7 @@ class CachingPropertyInfoTest extends MediaWikiIntegrationTestCase {
 		 * @var CacheAwarePropertyInfoStore $store
 		 * @var CachingPropertyInfoLookup $lookup
 		 */
-		list( $table, $cache, $store, $lookup ) = $this->getServices();
+		[ $table, $cache, $store, $lookup ] = $this->getServices();
 
 		$p1 = new NumericPropertyId( 'P1' );
 		$p1Info = $this->getInfo();
@@ -115,7 +115,7 @@ class CachingPropertyInfoTest extends MediaWikiIntegrationTestCase {
 		 * @var CacheAwarePropertyInfoStore $store
 		 * @var CachingPropertyInfoLookup $lookup
 		 */
-		list( $table, $cache, $store, $lookup ) = $this->getServices();
+		[ $table, $cache, $store, $lookup ] = $this->getServices();
 
 		$p1 = new NumericPropertyId( 'P1' );
 		$p1Info = $this->getInfo();
@@ -150,7 +150,7 @@ class CachingPropertyInfoTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( [], $lookup->getPropertyInfoForDataType( $p1TypeTwo ) );
 		$this->assertEquals( [ 'P1' => $p1Info ], $lookup->getPropertyInfoForDataType( $p1Type ) );
 
-		list( $table, $cache, $store, $lookup ) = $this->getServices();
+		[ $table, $cache, $store, $lookup ] = $this->getServices();
 
 		// But with a new set of services, we can see everything persisted
 		$this->assertCount( 1, $lookup->getAllPropertyInfo() );
@@ -167,7 +167,7 @@ class CachingPropertyInfoTest extends MediaWikiIntegrationTestCase {
 		 * @var CacheAwarePropertyInfoStore $store
 		 * @var CachingPropertyInfoLookup $lookup
 		 */
-		list( $table, $cache, $store, $lookup ) = $this->getServices();
+		[ $table, $cache, $store, $lookup ] = $this->getServices();
 
 		$p1 = new NumericPropertyId( 'P1' );
 		$p1Info = $this->getInfo();
@@ -195,7 +195,7 @@ class CachingPropertyInfoTest extends MediaWikiIntegrationTestCase {
 		 * @var CacheAwarePropertyInfoStore $store
 		 * @var CachingPropertyInfoLookup $lookup
 		 */
-		list( $table, $cache, $store, $lookup ) = $this->getServices();
+		[ $table, $cache, $store, $lookup ] = $this->getServices();
 
 		// Store some data
 		$p1 = new NumericPropertyId( 'P1' );
@@ -203,7 +203,7 @@ class CachingPropertyInfoTest extends MediaWikiIntegrationTestCase {
 		$p1Type = $p1Info[PropertyInfoLookup::KEY_DATA_TYPE];
 		$store->setPropertyInfo( $p1, $p1Info );
 
-		list( $table, $cache, $store, $lookup ) = $this->getServices();
+		[ $table, $cache, $store, $lookup ] = $this->getServices();
 
 		// When using new services, the caching store should lookup from the table
 		$this->assertCount( 1, $lookup->getAllPropertyInfo() );
@@ -219,7 +219,7 @@ class CachingPropertyInfoTest extends MediaWikiIntegrationTestCase {
 		 * @var CacheAwarePropertyInfoStore $store
 		 * @var CachingPropertyInfoLookup $lookup
 		 */
-		list( $table, $cache, $store, $lookup ) = $this->getServices();
+		[ $table, $cache, $store, $lookup ] = $this->getServices();
 
 		// Store some data
 		$p1 = new NumericPropertyId( 'P1' );

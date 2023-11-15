@@ -183,7 +183,7 @@ class SpecialMergeItems extends SpecialWikibasePage {
 
 		/** @var EntityRevision $newRevisionFrom */
 		/** @var EntityRevision $newRevisionTo */
-		list( $newRevisionFrom, $newRevisionTo, )
+		[ $newRevisionFrom, $newRevisionTo ]
 			= $this->interactor->mergeItems( $fromId, $toId, $this->getContext(), $ignoreConflicts, $summary );
 
 		$linkRenderer = $this->getLinkRenderer();

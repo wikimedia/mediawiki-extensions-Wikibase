@@ -24,15 +24,15 @@ class StatementListSerializerTest extends DispatchableSerializerTest {
 		$statementSerializerMock = $this->createMock( Serializer::class );
 		$statementSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
-			->with( $this->equalTo( $statement ) )
-			->will( $this->returnValue( [
+			->with( $statement )
+			->willReturn( [
 				'mainsnak' => [
 					'snaktype' => 'novalue',
 					'property' => 'P42',
 				],
 				'type' => 'statement',
 				'rank' => 'normal',
-			] ) );
+			] );
 
 		return new StatementListSerializer( $statementSerializerMock, false );
 	}
@@ -94,11 +94,11 @@ class StatementListSerializerTest extends DispatchableSerializerTest {
 		$statementSerializerMock = $this->createMock( Serializer::class );
 		$statementSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
-			->with( $this->equalTo( $statement ) )
-			->will( $this->returnValue( [
+			->with( $statement )
+			->willReturn( [
 				'mockedsuff' => [],
 				'type' => 'statement',
-			] ) );
+			] );
 		$serializer = new StatementListSerializer( $statementSerializerMock, true );
 
 		$statementList = new StatementList( $statement );

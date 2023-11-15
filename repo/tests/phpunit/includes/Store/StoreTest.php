@@ -92,7 +92,7 @@ class StoreTest extends MediaWikiIntegrationTestCase {
 			Store::LOOKUP_CACHING_DISABLED,
 			Store::LOOKUP_CACHING_RETRIEVE_ONLY,
 		];
-		$this->assertSame( count( $constants ), count( array_unique( $constants ) ) );
+		$this->assertSameSize( $constants, array_unique( $constants ) );
 	}
 
 }

@@ -120,7 +120,7 @@ class SimpleCacheWithBagOStuffTest extends SimpleCacheTestCase {
 		$cache->set( 'key', 'some_string' );
 		$key = $inner->makeKey( 'prefix', 'key' );
 		$value = $inner->get( $key );
-		list( $signature, $data ) = json_decode( $value );
+		[ $signature, $data ] = json_decode( $value );
 		$inner->set( $key, json_encode( [ 'wrong signature', $data ] ) );
 
 		$got = $cache->get( 'key', 'some default value' );
@@ -150,7 +150,7 @@ class SimpleCacheWithBagOStuffTest extends SimpleCacheTestCase {
 
 	protected function spoilTheSignature( HashBagOStuff $inner, string $key ): void {
 		$value = $inner->get( $key );
-		list( $signature, $data ) = json_decode( $value );
+		[ $signature, $data ] = json_decode( $value );
 		$inner->set( $key, json_encode( [ 'wrong signature', $data ] ) );
 	}
 

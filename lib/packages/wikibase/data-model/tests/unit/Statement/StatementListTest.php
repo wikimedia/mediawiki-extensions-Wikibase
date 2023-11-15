@@ -45,15 +45,15 @@ class StatementListTest extends \PHPUnit\Framework\TestCase {
 
 		$statement->expects( $this->any() )
 			->method( 'getGuid' )
-			->will( $this->returnValue( $guid ) );
+			->willReturn( $guid );
 
 		$statement->expects( $this->any() )
 			->method( 'getPropertyId' )
-			->will( $this->returnValue( new NumericPropertyId( $propertyId ) ) );
+			->willReturn( new NumericPropertyId( $propertyId ) );
 
 		$statement->expects( $this->any() )
 			->method( 'getRank' )
-			->will( $this->returnValue( $rank ) );
+			->willReturn( $rank );
 
 		return $statement;
 	}

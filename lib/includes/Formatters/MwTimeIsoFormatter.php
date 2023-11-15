@@ -197,7 +197,7 @@ class MwTimeIsoFormatter implements ValueFormatter {
 			throw new InvalidArgumentException( 'Unable to parse time value.' );
 		}
 
-		list( , $year, $month, $day ) = $matches;
+		[ , $year, $month, $day ] = $matches;
 
 		if ( $year == 0 && $precision < TimeValue::PRECISION_YEAR
 			|| $month == 0 && $precision >= TimeValue::PRECISION_MONTH
@@ -217,7 +217,7 @@ class MwTimeIsoFormatter implements ValueFormatter {
 	 */
 	private function getLocalizedYear( $isoTimestamp, $precision ) {
 		preg_match( '/^(\D*)(\d*)/', $isoTimestamp, $matches );
-		list( , $sign, $year ) = $matches;
+		[ , $sign, $year ] = $matches;
 		$isBCE = $sign === '-';
 
 		$shift = 1;

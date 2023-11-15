@@ -109,7 +109,7 @@ class HtmlTimeFormatterTest extends \PHPUnit\Framework\TestCase {
 		$testCases = [];
 
 		foreach ( $tests as $name => $data ) {
-			list( $timestamp, $precision, $calendarModel, $pattern ) = $data;
+			[ $timestamp, $precision, $calendarModel, $pattern ] = $data;
 
 			$testCases[$name] = [
 				$this->getTimeValue( $timestamp, $precision, $calendarModel ),

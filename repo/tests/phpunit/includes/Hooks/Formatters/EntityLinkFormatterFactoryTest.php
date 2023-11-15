@@ -32,7 +32,7 @@ class EntityLinkFormatterFactoryTest extends MediaWikiIntegrationTestCase {
 					$this->getServiceContainer()->getLanguageFactory()
 				);
 			},
-		] );
+			] );
 
 		$this->assertInstanceOf(
 			DefaultEntityLinkFormatter::class,
@@ -68,15 +68,17 @@ class EntityLinkFormatterFactoryTest extends MediaWikiIntegrationTestCase {
 	public function testGivenSameTypeAndLanguage_getLinkFormatterCachesResult() {
 		$factory = new EntityLinkFormatterFactory(
 			$this->createMock( EntityTitleTextLookup::class ),
-			$this->getServiceContainer()->getLanguageFactory(), [
-			'item' => function ( $language ) {
-				return new DefaultEntityLinkFormatter(
-					$language,
-					$this->createMock( EntityTitleTextLookup::class ),
-					$this->getServiceContainer()->getLanguageFactory()
-				);
-			},
-		] );
+			$this->getServiceContainer()->getLanguageFactory(),
+			[
+				'item' => function ( $language ) {
+					return new DefaultEntityLinkFormatter(
+						$language,
+						$this->createMock( EntityTitleTextLookup::class ),
+						$this->getServiceContainer()->getLanguageFactory()
+					);
+				},
+			]
+		);
 
 		$languageMock = $this->createMock( Language::class );
 		$languageMock->method( 'getCode' )->willReturn( 'en' );

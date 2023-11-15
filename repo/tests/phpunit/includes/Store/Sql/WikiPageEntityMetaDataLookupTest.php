@@ -297,7 +297,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 		);
 
 		// Verify that no further entities are part of the result
-		$this->assertCount( count( $entityIds ), $result );
+		$this->assertSameSize( $entityIds, $result );
 	}
 
 	public function testLoadRevisionInformation(): void {
@@ -426,7 +426,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 		);
 
 		// Verify that no further entities are part of the result
-		$this->assertCount( count( $entityIds ), $result );
+		$this->assertSameSize( $entityIds, $result );
 	}
 
 	public function testLoadLatestRevisionIds(): void {

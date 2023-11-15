@@ -35,7 +35,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 	}
 
 	public function testGetAllowedParams_listsItemsAndProperties() {
-		list( $result, ) = $this->doApiRequest(
+		[ $result ] = $this->doApiRequest(
 			[
 				'action' => 'paraminfo',
 				'modules' => self::$testAction,
@@ -84,7 +84,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 		];
 
 		// -- do the request --------------------------------------------------
-		list( $result, , ) = $this->doApiRequestWithToken( $params );
+		[ $result ] = $this->doApiRequestWithToken( $params );
 
 		// -- check the result ------------------------------------------------
 		$this->assertArrayHasKey( 'success', $result, "Missing 'success' marker in response." );
@@ -165,7 +165,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 		$expected['value'] ??= [];
 
 		// -- do the request --------------------------------------------------
-		list( $result, , ) = $this->doApiRequestWithToken( $params );
+		[ $result ] = $this->doApiRequestWithToken( $params );
 
 		// -- check the result ------------------------------------------------
 		$this->assertArrayHasKey( 'success', $result, "Missing 'success' marker in response." );
@@ -305,7 +305,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 
 		$newItem = $this->createItemUsing( $userWithAllPermissions );
 
-		list( $result, ) = $this->doApiRequestWithToken(
+		[ $result ] = $this->doApiRequestWithToken(
 			$this->getAddAliasRequestParams( $newItem->getId() ),
 			null,
 			$userWithAllPermissions
@@ -356,7 +356,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 			'*' => [ 'read' => true, 'edit' => true, 'writeapi' => true ],
 		] );
 
-		list( $result, ) = $this->doApiRequestWithToken(
+		[ $result ] = $this->doApiRequestWithToken(
 			$this->getCreateItemAndSetAliasRequestParams(),
 			null,
 			$userWithAllPermissions

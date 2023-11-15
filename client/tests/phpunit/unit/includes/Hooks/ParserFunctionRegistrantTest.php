@@ -61,7 +61,7 @@ class ParserFunctionRegistrantTest extends \PHPUnit\Framework\TestCase {
 	) {
 		$parser = MediaWikiServices::getInstance()->getParserFactory()->create();
 
-		list( $allowDataTransclusion, $allowLocalShortDesc ) = array_values( $constructorArgs );
+		[ $allowDataTransclusion, $allowLocalShortDesc ] = array_values( $constructorArgs );
 		$registrant = new ParserFunctionRegistrant( $allowDataTransclusion, $allowLocalShortDesc );
 		$registrant->onParserFirstCallInit( $parser );
 		$actual = $parser->getFunctionHooks();

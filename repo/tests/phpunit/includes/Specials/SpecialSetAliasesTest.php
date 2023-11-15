@@ -53,7 +53,7 @@ class SpecialSetAliasesTest extends SpecialModifyTermTestCase {
 		$store->saveEntity( $item, __METHOD__, $this->getTestUser()->getUser(), EDIT_NEW );
 		$id = $item->getId();
 		$editRequest = new FauxRequest( [ 'id' => $id, 'language' => $languageCode, 'value' => 'test' ], true );
-		list( $output, ) = $this->executeSpecialPage(
+		[ $output ] = $this->executeSpecialPage(
 			$id->getSerialization() . '/' . $languageCode,
 			$editRequest,
 			'qqx'

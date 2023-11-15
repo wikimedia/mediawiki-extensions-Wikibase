@@ -35,7 +35,7 @@ class SpecialItemsWithoutSitelinksTest extends SpecialPageTestBase {
 	public function testExecute() {
 		// This also tests that there is no fatal error, that the restriction handling is working
 		// and doesn't block. That is, the default should let the user execute the page.
-		list( $output, ) = $this->executeSpecialPage( '' );
+		[ $output ] = $this->executeSpecialPage( '' );
 
 		$this->assertIsString( $output );
 		$this->assertStringContainsString( 'wikibase-itemswithoutsitelinks-summary', $output );

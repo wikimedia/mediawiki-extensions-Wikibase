@@ -82,7 +82,7 @@ class EntityByTitleHelperTest extends \PHPUnit\Framework\TestCase {
 		$sites = [ 'FooSite' ];
 		$titles = [ 'Berlin', 'London' ];
 
-		list( $entityIds, ) = $entityByTitleHelper->getEntityIds( $sites, $titles, false );
+		[ $entityIds ] = $entityByTitleHelper->getEntityIds( $sites, $titles, false );
 
 		foreach ( $entityIds as $entityId ) {
 			$this->assertEquals( $expectedEntityId, $entityId );
@@ -105,7 +105,7 @@ class EntityByTitleHelperTest extends \PHPUnit\Framework\TestCase {
 		$sites = [ 'FooSite' ];
 		$titles = [ 'berlin_germany' ];
 
-		list( $entityIds, ) = $entityByTitleHelper->getEntityIds( $sites, $titles, true );
+		[ $entityIds ] = $entityByTitleHelper->getEntityIds( $sites, $titles, true );
 
 		// Still nothing could be found
 		$this->assertEquals( [], $entityIds );

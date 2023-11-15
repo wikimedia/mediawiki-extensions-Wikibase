@@ -118,7 +118,7 @@ class BotEditTest extends WikibaseApiTestCase {
 			$params['fromid'] = EntityTestHelper::getId( $params['fromid'] );
 			$params['toid'] = EntityTestHelper::getId( $params['toid'] );
 		}
-		list( $result, , ) = $this->doApiRequestWithToken( $params, null, self::$users['wbbot']->getUser() );
+		[ $result ] = $this->doApiRequestWithToken( $params, null, self::$users['wbbot']->getUser() );
 
 		// -- check the result ------------------------------------------------
 		$this->assertArrayHasKey( 'success', $result, "Missing 'success' marker in response." );

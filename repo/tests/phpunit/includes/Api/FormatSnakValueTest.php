@@ -248,14 +248,14 @@ class FormatSnakValueTest extends ApiTestCase {
 		 * @var string $propertyId
 		 * @var string $pattern
 		 */
-		list(
+		[
 			$value,
 			$dataType,
 			$format,
 			$options,
 			$propertyId,
-			$pattern
-			) = $providerCallback( $this );
+			$pattern,
+			] = $providerCallback( $this );
 
 		if ( is_callable( $value ) ) {
 			$value = $value();
@@ -270,7 +270,7 @@ class FormatSnakValueTest extends ApiTestCase {
 			'options' => $options === null ? null : json_encode( $options ),
 		];
 
-		list( $resultArray, ) = $this->doApiRequest( $params );
+		[ $resultArray ] = $this->doApiRequest( $params );
 
 		$this->assertIsArray( $resultArray, 'top level element must be an array' );
 		$this->assertArrayHasKey( 'result', $resultArray, 'top level element must have a "result" key' );

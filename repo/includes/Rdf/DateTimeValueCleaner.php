@@ -61,7 +61,7 @@ class DateTimeValueCleaner {
 	 */
 	protected function cleanupGregorianValue( $dateValue, $precision ) {
 		try {
-			list( $minus, $y, $m, $d, $time ) = $this->parseDateValue( $dateValue );
+			[ $minus, $y, $m, $d, $time ] = $this->parseDateValue( $dateValue );
 		} catch ( IllegalValueException $e ) {
 			return null;
 		}
@@ -120,13 +120,13 @@ class DateTimeValueCleaner {
 	 * @return array Parsed value in parts: $minus, $y, $m, $d, $time
 	 */
 	protected function parseDateValue( $dateValue ) {
-		list( $date, $time ) = explode( "T", $dateValue, 2 );
+		[ $date, $time ] = explode( "T", $dateValue, 2 );
 		if ( $date[0] == "-" ) {
 			$minus = "-";
 		} else {
 			$minus = '';
 		}
-		list( $y, $m, $d ) = explode( '-', substr( $date, 1 ), 3 );
+		[ $y, $m, $d ] = explode( '-', substr( $date, 1 ), 3 );
 
 		$m = (int)$m;
 		$d = (int)$d;

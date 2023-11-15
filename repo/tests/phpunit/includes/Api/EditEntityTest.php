@@ -514,7 +514,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 			'new' => 'item',
 			'data' =>
 				'{"labels":{"en":{"language":"en","value":"something"}}}' ];
-		list( $result, ) = $this->doApiRequestWithToken( $createItemParams, null, $user );
+		[ $result ] = $this->doApiRequestWithToken( $createItemParams, null, $user );
 		return $result['entity'];
 	}
 
@@ -574,7 +574,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 		}
 
 		// -- do the request --------------------------------------------------
-		list( $result, , ) = $this->doApiRequestWithToken( $params );
+		[ $result ] = $this->doApiRequestWithToken( $params );
 
 		// -- steal ids for later tests -------------------------------------
 		if ( array_key_exists( 'new', $params ) && stristr( $params['new'], 'item' ) ) {
@@ -732,7 +732,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 		$this->saveEntity( $item );
 		$params['id'] = $item->getId()->getSerialization();
 
-		list( $result ) = $this->doApiRequestWithToken( $params );
+		[ $result ] = $this->doApiRequestWithToken( $params );
 
 		$this->assertRevisionSummary(
 			$expectedSummaryPattern,
@@ -1242,7 +1242,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 				"descriptions": { "de": { "language": "de", "value": "Very German description" } }
 			}',
 		];
-		list( $result, ) = $this->doApiRequestWithToken( $params );
+		[ $result ] = $this->doApiRequestWithToken( $params );
 
 		$params = [
 			'action' => 'wbeditentity',
@@ -1256,7 +1256,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 				"descriptions": { "de": { "language": "de", "value": "Very German description" } }
 			}',
 		];
-		list( $result, ) = $this->doApiRequestWithToken( $params );
+		[ $result ] = $this->doApiRequestWithToken( $params );
 		$this->assertSame( 1, $result['success'] );
 	}
 
@@ -1276,7 +1276,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 			'data' => '{"descriptions":{"en":{"language":"en","value":"ClearFromBadRevidDesc1"}}}',
 		];
 
-		list( $result, , ) = $this->doApiRequestWithToken( $setupParams );
+		[ $result ] = $this->doApiRequestWithToken( $setupParams );
 		$params['baserevid'] = $result['entity']['lastrevid'];
 		$setupParams['data'] = '{"descriptions":{"en":{"language":"en","value":"ClearFromBadRevidDesc2"}}}';
 		$this->doApiRequestWithToken( $setupParams );

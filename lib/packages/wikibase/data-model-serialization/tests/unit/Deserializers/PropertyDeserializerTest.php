@@ -27,8 +27,8 @@ class PropertyDeserializerTest extends DispatchableDeserializerTest {
 		$entityIdDeserializerMock = $this->createMock( Deserializer::class );
 		$entityIdDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
-			->with( $this->equalTo( 'P42' ) )
-			->will( $this->returnValue( new NumericPropertyId( 'P42' ) ) );
+			->with( 'P42' )
+			->willReturn( new NumericPropertyId( 'P42' ) );
 
 		$termListDeserializerMock = $this->createMock( Deserializer::class );
 		$termListDeserializerMock->expects( $this->any() )
@@ -39,7 +39,7 @@ class PropertyDeserializerTest extends DispatchableDeserializerTest {
 					'value' => 'foo',
 				],
 			] ) )
-			->will( $this->returnValue( new TermList( [ new Term( 'en', 'foo' ) ] ) ) );
+			->willReturn( new TermList( [ new Term( 'en', 'foo' ) ] ) );
 
 		$aliasGroupListDeserializerMock = $this->createMock( Deserializer::class );
 		$aliasGroupListDeserializerMock->expects( $this->any() )
@@ -50,9 +50,8 @@ class PropertyDeserializerTest extends DispatchableDeserializerTest {
 					'values' => [ 'foo', 'bar' ],
 				],
 			] ) )
-			->will( $this->returnValue(
-				new AliasGroupList( [ new AliasGroup( 'en', [ 'foo', 'bar' ] ) ] ) )
-			);
+			->willReturn(
+				new AliasGroupList( [ new AliasGroup( 'en', [ 'foo', 'bar' ] ) ] ) );
 
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( 'test' );
@@ -72,7 +71,7 @@ class PropertyDeserializerTest extends DispatchableDeserializerTest {
 					],
 				],
 			] ) )
-			->will( $this->returnValue( new StatementList( $statement ) ) );
+			->willReturn( new StatementList( $statement ) );
 
 		return new PropertyDeserializer(
 			$entityIdDeserializerMock,

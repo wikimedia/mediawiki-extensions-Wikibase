@@ -25,7 +25,7 @@ class ByPropertyIdGrouperTest extends TestCase {
 	 */
 	public function testConstructor( $argument ) {
 		$instance = new ByPropertyIdGrouper( $argument );
-		$this->assertCount( count( $argument ), $instance->getPropertyIds() );
+		$this->assertSameSize( $argument, $instance->getPropertyIds() );
 	}
 
 	public function validConstructorArgumentProvider() {
@@ -181,11 +181,11 @@ class ByPropertyIdGrouperTest extends TestCase {
 
 		$propertyIdProvider->expects( $this->once() )
 			->method( 'getPropertyId' )
-			->will( $this->returnValue( new NumericPropertyId( $propertyId ) ) );
+			->willReturn( new NumericPropertyId( $propertyId ) );
 
 		$propertyIdProvider->expects( $this->any() )
 			->method( 'getType' )
-			->will( $this->returnValue( $type ) );
+			->willReturn( $type );
 
 		return $propertyIdProvider;
 	}

@@ -44,7 +44,7 @@ class DefaultEntityLinkFormatter implements EntityLinkFormatter {
 	 */
 	public function getHtml( EntityId $entityId, array $labelData = null ) {
 		/** @var Language $labelLang */
-		list( $labelText, $labelLang ) = $this->extractTextAndLanguage( $labelData );
+		[ $labelText, $labelLang ] = $this->extractTextAndLanguage( $labelData );
 
 		$idHtml = '<span class="wb-itemlink-id">'
 				  . wfMessage(
@@ -102,8 +102,8 @@ class DefaultEntityLinkFormatter implements EntityLinkFormatter {
 		/** @var Language $labelLang */
 		/** @var Language $descriptionLang */
 
-		list( $labelText, $labelLang ) = $this->extractTextAndLanguage( $labelData );
-		list( $descriptionText, $descriptionLang ) = $this->extractTextAndLanguage( $descriptionData );
+		[ $labelText, $labelLang ] = $this->extractTextAndLanguage( $labelData );
+		[ $descriptionText, $descriptionLang ] = $this->extractTextAndLanguage( $descriptionData );
 
 		// Set title attribute for constructed link, and make tricks with the directionality to get it right
 		$titleText = ( $labelText !== '' )

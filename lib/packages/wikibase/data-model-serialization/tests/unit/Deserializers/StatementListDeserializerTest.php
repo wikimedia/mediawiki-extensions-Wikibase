@@ -33,7 +33,7 @@ class StatementListDeserializerTest extends TestCase {
 				'type' => 'statement',
 				'rank' => 'normal',
 			] ) )
-			->will( $this->returnValue( $statement ) );
+			->willReturn( $statement );
 
 		return new StatementListDeserializer( $statementDeserializerMock );
 	}

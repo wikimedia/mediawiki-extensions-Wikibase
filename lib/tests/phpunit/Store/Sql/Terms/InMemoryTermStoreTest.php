@@ -92,9 +92,9 @@ class InMemoryTermStoreTest extends TestCase {
 	}
 
 	private function assertNoDuplicates( $ids ) {
-		$this->assertSame(
-			count( $ids ),
-			count( array_unique( $ids ) )
+		$this->assertSameSize(
+			$ids,
+			array_unique( $ids )
 		);
 	}
 

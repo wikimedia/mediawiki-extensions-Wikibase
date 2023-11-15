@@ -394,8 +394,8 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 
 		$results = $interactor->searchForEntities( ...$params );
 
-		$this->assertCount(
-			count( $expectedTermsDetails ),
+		$this->assertSameSize(
+			$expectedTermsDetails,
 			$results,
 			'Incorrect number of search results'
 		);

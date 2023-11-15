@@ -136,13 +136,13 @@ class LinkTitles extends ApiBase {
 		$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
 
 		/** @var Site $fromSite */
-		list( $fromSite, $fromPage ) = $this->getSiteAndNormalizedPageName(
+		[ $fromSite, $fromPage ] = $this->getSiteAndNormalizedPageName(
 			$sites,
 			$params['fromsite'],
 			$params['fromtitle']
 		);
 		/** @var Site $toSite */
-		list( $toSite, $toPage ) = $this->getSiteAndNormalizedPageName(
+		[ $toSite, $toPage ] = $this->getSiteAndNormalizedPageName(
 			$sites,
 			$params['tosite'],
 			$params['totitle']

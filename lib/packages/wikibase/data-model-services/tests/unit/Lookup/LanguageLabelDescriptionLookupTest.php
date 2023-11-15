@@ -21,8 +21,8 @@ class LanguageLabelDescriptionLookupTest extends TestCase {
 
 		$termLookup->expects( $this->once() )
 			->method( 'getLabel' )
-			->with( $this->equalTo( new ItemId( 'Q42' ) ), $this->equalTo( 'language_code' ) )
-			->will( $this->returnValue( 'term_text' ) );
+			->with( new ItemId( 'Q42' ), 'language_code' )
+			->willReturn( 'term_text' );
 
 		$lookup = new LanguageLabelDescriptionLookup( $termLookup, 'language_code' );
 
@@ -37,8 +37,8 @@ class LanguageLabelDescriptionLookupTest extends TestCase {
 
 		$termLookup->expects( $this->once() )
 			->method( 'getDescription' )
-			->with( $this->equalTo( new ItemId( 'Q42' ) ), $this->equalTo( 'language_code' ) )
-			->will( $this->returnValue( 'term_text' ) );
+			->with( new ItemId( 'Q42' ), 'language_code' )
+			->willReturn( 'term_text' );
 
 		$lookup = new LanguageLabelDescriptionLookup( $termLookup, 'language_code' );
 
@@ -53,7 +53,7 @@ class LanguageLabelDescriptionLookupTest extends TestCase {
 
 		$termLookup->expects( $this->once() )
 			->method( 'getLabel' )
-			->will( $this->returnValue( null ) );
+			->willReturn( null );
 
 		$lookup = new LanguageLabelDescriptionLookup( $termLookup, 'language_code' );
 
@@ -65,7 +65,7 @@ class LanguageLabelDescriptionLookupTest extends TestCase {
 
 		$termLookup->expects( $this->once() )
 			->method( 'getDescription' )
-			->will( $this->returnValue( null ) );
+			->willReturn( null );
 
 		$lookup = new LanguageLabelDescriptionLookup( $termLookup, 'language_code' );
 

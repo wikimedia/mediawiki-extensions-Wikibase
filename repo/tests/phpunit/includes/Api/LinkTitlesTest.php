@@ -52,7 +52,7 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 		$params['action'] = 'wblinktitles';
 
 		// -- do the request --------------------------------------------------
-		list( $result,, ) = $this->doApiRequestWithToken( $params );
+		[ $result ] = $this->doApiRequestWithToken( $params );
 
 		// -- check the result ------------------------------------------------
 		$this->assertArrayHasKey( 'success', $result, "Missing 'success' marker in response." );

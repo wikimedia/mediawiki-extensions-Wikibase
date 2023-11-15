@@ -81,7 +81,7 @@ class EntityIdValue extends DataValueObject {
 			return;
 		}
 
-		list( $entityType, $numericId ) = $array;
+		[ $entityType, $numericId ] = $array;
 
 		try {
 			$entityId = LegacyIdInterpreter::newIdFromTypeAndNumber( $entityType, $numericId );

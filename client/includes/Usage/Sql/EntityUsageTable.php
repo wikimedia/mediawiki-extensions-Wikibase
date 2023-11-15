@@ -237,7 +237,7 @@ class EntityUsageTable {
 				continue;
 			}
 
-			list( $aspect, $modifier ) = EntityUsage::splitAspectKey( $object->eu_aspect );
+			[ $aspect, $modifier ] = EntityUsage::splitAspectKey( $object->eu_aspect );
 
 			$usage = new EntityUsage( $entityId, $aspect, $modifier );
 			$key = $usage->getIdentityString();
@@ -348,7 +348,7 @@ class EntityUsageTable {
 			$pageEntityUsages = $usagesPerPage[$pageId] ?? new PageEntityUsages( $pageId );
 
 			$entityId = $this->idParser->parse( $row->eu_entity_id );
-			list( $aspect, $modifier ) = EntityUsage::splitAspectKey( $row->eu_aspect );
+			[ $aspect, $modifier ] = EntityUsage::splitAspectKey( $row->eu_aspect );
 
 			$usage = new EntityUsage( $entityId, $aspect, $modifier );
 			$pageEntityUsages->addUsages( [ $usage ] );

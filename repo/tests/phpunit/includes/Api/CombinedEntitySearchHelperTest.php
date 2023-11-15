@@ -79,7 +79,7 @@ class CombinedEntitySearchHelperTest extends \PHPUnit\Framework\TestCase {
 			->method( 'getRankedSearchResults' )
 			->willReturn( $q33 );
 		$mock2 = $this->createMock( EntitySearchHelper::class );
-		$mock2->expects( $this->exactly( 0 ) )
+		$mock2->expects( $this->never() )
 			->method( 'getRankedSearchResults' )
 			->willReturn( $q1 );
 

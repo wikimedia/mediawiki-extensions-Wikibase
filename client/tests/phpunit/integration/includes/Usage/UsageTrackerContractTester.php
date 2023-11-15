@@ -73,7 +73,7 @@ class UsageTrackerContractTester {
 	}
 
 	public function testAddUsedEntities() {
-		list( $usagesT1, $usagesT2 ) = $this->getTestUsages();
+		[ $usagesT1, $usagesT2 ] = $this->getTestUsages();
 
 		$this->tracker->addUsedEntities( 23, $usagesT1 );
 
@@ -90,7 +90,7 @@ class UsageTrackerContractTester {
 	}
 
 	public function testReplaceUsedEntities() {
-		list( $usagesT1, $usagesT2 ) = $this->getTestUsages();
+		[ $usagesT1, $usagesT2 ] = $this->getTestUsages();
 		$usageAll = array_unique( array_merge( $usagesT1, $usagesT2 ) );
 
 		$this->tracker->replaceUsedEntities( 23, $usagesT1 );
@@ -113,7 +113,7 @@ class UsageTrackerContractTester {
 	}
 
 	public function testPruneUsages() {
-		list( $usagesT1, ) = $this->getTestUsages();
+		[ $usagesT1 ] = $this->getTestUsages();
 
 		$this->tracker->addUsedEntities( 23, $usagesT1 );
 		$this->tracker->addUsedEntities( 24, $usagesT1 );

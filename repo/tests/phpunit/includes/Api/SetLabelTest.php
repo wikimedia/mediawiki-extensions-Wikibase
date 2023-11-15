@@ -35,7 +35,7 @@ class SetLabelTest extends ModifyTermTestCase {
 	}
 
 	public function testGetAllowedParams_listsItemsAndProperties() {
-		list( $result, ) = $this->doApiRequest(
+		[ $result ] = $this->doApiRequest(
 			[
 				'action' => 'paraminfo',
 				'modules' => self::$testAction,
@@ -59,7 +59,7 @@ class SetLabelTest extends ModifyTermTestCase {
 
 	public function testSetLabelOnRedirectRevision() {
 		// Create an item
-		list( $result, , ) = $this->doApiRequestWithToken( $this->getCreateItemAndSetLabelRequestParams() );
+		[ $result ] = $this->doApiRequestWithToken( $this->getCreateItemAndSetLabelRequestParams() );
 		$id = $result['entity']['id'];
 
 		// Add some data to it and record its base rev
@@ -68,11 +68,11 @@ class SetLabelTest extends ModifyTermTestCase {
 			'id' => $id,
 			'data' => '{"descriptions":{"en":{"language":"en","value":"SetLabelOnRedirectRevision2"}}}',
 		];
-		list( $result, , ) = $this->doApiRequestWithToken( $setupParams );
+		[ $result ] = $this->doApiRequestWithToken( $setupParams );
 		$baserevId = $result['entity']['lastrevid'];
 
 		// Create another item as future target of redirect
-		list( $result, , ) = $this->doApiRequestWithToken( $this->getCreateItemAndSetLabelRequestParams() );
+		[ $result ] = $this->doApiRequestWithToken( $this->getCreateItemAndSetLabelRequestParams() );
 		$newId = $result['entity']['id'];
 
 		// Clear the first item
@@ -132,7 +132,7 @@ class SetLabelTest extends ModifyTermTestCase {
 
 		$newItem = $this->createItemUsing( $userWithAllPermissions );
 
-		list( $result, ) = $this->doApiRequestWithToken(
+		[ $result ] = $this->doApiRequestWithToken(
 			$this->getSetLabelRequestParams( $newItem->getId() ),
 			null,
 			$userWithAllPermissions
@@ -177,7 +177,7 @@ class SetLabelTest extends ModifyTermTestCase {
 			'*' => [ 'read' => true, 'edit' => true, 'writeapi' => true ],
 		] );
 
-		list( $result, ) = $this->doApiRequestWithToken(
+		[ $result ] = $this->doApiRequestWithToken(
 			$this->getCreateItemAndSetLabelRequestParams(),
 			null,
 			$userWithAllPermissions

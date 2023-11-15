@@ -61,7 +61,7 @@ class EntityDataPurger implements ArticleRevisionVisibilitySetHook, ArticleDelet
 	 * @param int[] $ids
 	 * @param int[][] $visibilityChangeMap
 	 */
-   public function onArticleRevisionVisibilitySet( $title, $ids, $visibilityChangeMap ): void {
+	public function onArticleRevisionVisibilitySet( $title, $ids, $visibilityChangeMap ): void {
 		$entityId = $this->entityIdLookup->getEntityIdForTitle( $title );
 		if ( !$entityId ) {
 			return;
@@ -78,7 +78,7 @@ class EntityDataPurger implements ArticleRevisionVisibilitySetHook, ArticleDelet
 		if ( $urls !== [] ) {
 			$this->htmlCacheUpdater->purgeUrls( $urls );
 		}
-   }
+	}
 
 	/**
 	 * @param \WikiPage $wikiPage

@@ -111,7 +111,7 @@ class CachingFallbackLabelDescriptionLookup implements FallbackLabelDescriptionL
 			return null;
 		}
 
-		list( $revisionId, $targetEntityId ) = $resolutionResult;
+		[ $revisionId, $targetEntityId ] = $resolutionResult;
 
 		$termFallback = $this->cache->get( $targetEntityId, $revisionId, $languageCode, $termName );
 		if ( $termFallback === TermFallbackCacheFacade::NO_VALUE ) {

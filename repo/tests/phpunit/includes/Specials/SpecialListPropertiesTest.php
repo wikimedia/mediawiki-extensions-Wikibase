@@ -139,7 +139,7 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 
 	public function testExecute_wikibase_item() {
 		// Use en-gb as language to test language fallback
-		list( $output, ) = $this->executeSpecialPage( 'wikibase-item', null, 'en-gb' );
+		[ $output ] = $this->executeSpecialPage( 'wikibase-item', null, 'en-gb' );
 
 		$this->assertStringContainsString( 'Property with label P45', $output );
 		$this->assertStringContainsString( 'Property with label P123', $output );
@@ -150,7 +150,7 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 	}
 
 	public function testExecute_string() {
-		list( $output, ) = $this->executeSpecialPage( 'string', null, 'en-gb' );
+		[ $output ] = $this->executeSpecialPage( 'string', null, 'en-gb' );
 
 		$this->assertStringNotContainsString( 'P45', $output );
 		$this->assertStringNotContainsString( 'P123', $output );

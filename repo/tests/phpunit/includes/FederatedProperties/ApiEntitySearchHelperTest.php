@@ -104,7 +104,7 @@ class ApiEntitySearchHelperTest extends TestCase {
 			null
 		);
 
-		$this->assertSame( count( $expectedResultsEntityIds ), count( $results ) );
+		$this->assertSameSize( $expectedResultsEntityIds, $results );
 		$this->assertEquals( $expectedResultsEntityIds, array_keys( $results ) );
 	}
 
@@ -174,7 +174,7 @@ class ApiEntitySearchHelperTest extends TestCase {
 			null
 		);
 
-		$this->assertSame( count( $expectedResultsEntityIds ), count( $results ) );
+		$this->assertSameSize( $expectedResultsEntityIds, $results );
 		$this->assertEquals( $expectedResultsEntityIds, array_keys( $results ) );
 
 		foreach ( $expectedResultsEntityIds as $resultId ) {

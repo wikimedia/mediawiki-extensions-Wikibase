@@ -211,7 +211,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 
 		try {
 			/** @var FauxResponse $response */
-			list( $output, $response ) = $this->executeSpecialPage( $subpage, $request );
+			[ $output, $response ] = $this->executeSpecialPage( $subpage, $request );
 
 			$this->assertEquals( $expCode, $response->getStatusCode(), "status code" );
 			$this->assertMatchesRegularExpression( $expRegExp, $output, "output" );
@@ -240,7 +240,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 		$request = new FauxRequest();
 		$request->response()->header( 'Status: 200 OK', true, 200 ); // init/reset
 
-		list( $output, ) = $this->executeSpecialPage( '', $request );
+		[ $output ] = $this->executeSpecialPage( '', $request );
 
 		$expected = '(wikibase-entitydata-text: json(comma-separator)nt(comma-separator)' .
 			'rdf(comma-separator)html)';

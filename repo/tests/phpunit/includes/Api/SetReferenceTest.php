@@ -200,7 +200,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 			$index
 		);
 
-		list( $resultArray, ) = $this->doApiRequestWithToken( $params );
+		[ $resultArray ] = $this->doApiRequestWithToken( $params );
 
 		$this->assertIsArray( $resultArray, 'top level element is an array' );
 		$this->assertArrayHasKey( 'reference', $resultArray, 'top level element has a reference key' );

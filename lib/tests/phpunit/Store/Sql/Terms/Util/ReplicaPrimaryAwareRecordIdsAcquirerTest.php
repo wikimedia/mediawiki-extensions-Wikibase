@@ -102,9 +102,9 @@ class ReplicaPrimaryAwareRecordIdsAcquirerTest extends TestCase {
 		$idsAcquirer = $this->getTestSubjectInstance();
 		$acquiredRecordsWithIds = $idsAcquirer->acquireIds( $records );
 
-		$this->assertSame(
-			count( $acquiredRecordsWithIds ),
-			count( array_unique( $records, SORT_REGULAR ) )
+		$this->assertSameSize(
+			$acquiredRecordsWithIds,
+			array_unique( $records, SORT_REGULAR )
 		);
 		$this->assertSameRecordsInDb( [ $records[3] ], $this->dbPrimary );
 		$this->assertNoRecordsInDb( $recordsInReplica, $this->dbPrimary );
@@ -124,9 +124,9 @@ class ReplicaPrimaryAwareRecordIdsAcquirerTest extends TestCase {
 			ReplicaPrimaryAwareRecordIdsAcquirer::FLAG_IGNORE_REPLICA );
 		$acquiredRecordsWithIds = $idsAcquirer->acquireIds( $records );
 
-		$this->assertSame(
-			count( $acquiredRecordsWithIds ),
-			count( $records )
+		$this->assertSameSize(
+			$acquiredRecordsWithIds,
+			$records
 		);
 		$this->assertSameRecordsInDb( $records, $this->dbPrimary );
 	}

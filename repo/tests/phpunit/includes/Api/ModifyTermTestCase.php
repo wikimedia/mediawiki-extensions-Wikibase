@@ -63,7 +63,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 		$expected['value'] ??= [];
 
 		// -- do the request --------------------------------------------------
-		list( $result,, ) = $this->doApiRequestWithToken( $params );
+		[ $result ] = $this->doApiRequestWithToken( $params );
 
 		// -- check the result ------------------------------------------------
 		$this->assertArrayHasKey( 'success', $result, "Missing 'success' marker in response." );
@@ -110,7 +110,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 		$dbEntity = $this->loadEntity( EntityTestHelper::getId( 'Empty' ) );
 		$this->assertArrayHasKey( $attribute, $dbEntity );
 		$dbLabels = $this->flattenArray( $dbEntity[$attribute], 'language', 'value', true );
-		$this->assertCount( count( $expected['value'] ), $dbLabels, 'Database contains exact number of terms' );
+		$this->assertSameSize( $expected['value'], $dbLabels, 'Database contains exact number of terms' );
 		foreach ( $expected['value'] as $valueLanguage => $value ) {
 			$this->assertArrayHasKey( $valueLanguage, $dbLabels );
 			$this->assertEquals( $value, $dbLabels[$valueLanguage][0] );

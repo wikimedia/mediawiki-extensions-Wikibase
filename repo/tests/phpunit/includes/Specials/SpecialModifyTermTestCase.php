@@ -51,7 +51,7 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 	}
 
 	public function testRenderWithoutSubPage_AllInputFieldsPresent() {
-		list( $output, ) = $this->executeSpecialPage( '', null, self::USER_LANGUAGE );
+		[ $output ] = $this->executeSpecialPage( '', null, self::USER_LANGUAGE );
 
 		$expectedLanguage = self::USER_LANGUAGE;
 		$this->assertThatHamcrest( $output, is( htmlPiece( havingChild(
@@ -71,7 +71,7 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 		$notUserLanguage = 'de';
 		$id = $this->createNewItemWithTerms( $notUserLanguage, 'some-term-value' );
 
-		list( $output, ) = $this->executeSpecialPage( $id, null, self::USER_LANGUAGE );
+		[ $output ] = $this->executeSpecialPage( $id, null, self::USER_LANGUAGE );
 
 		$expectedLanguage = self::USER_LANGUAGE;
 		$this->assertThatHamcrest( $output, is( htmlPiece( havingChild(
@@ -94,7 +94,7 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 		$id = $this->createNewItemWithTerms( $itemTermLanguage = 'de', $termValue = 'foo' );
 
 		// execute with two subpage values
-		list( $output, ) = $this->executeSpecialPage( $id . '/' . $itemTermLanguage, null, self::USER_LANGUAGE );
+		[ $output ] = $this->executeSpecialPage( $id . '/' . $itemTermLanguage, null, self::USER_LANGUAGE );
 
 		$this->assertThatHamcrest( $output, is( htmlPiece( havingChild(
 			tagMatchingOutline( "<input name='id' type='hidden' value='$id'/>" )
@@ -117,7 +117,7 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 
 		$request = new FauxRequest( [ 'id' => $id, 'language' => $language, 'value' => '' ], true );
 
-		list( $output, ) = $this->executeSpecialPage( '', $request );
+		[ $output ] = $this->executeSpecialPage( '', $request );
 
 		$this->assertThatHamcrest( $output, is( htmlPiece( havingChild(
 			tagMatchingOutline( "<input name='value' value='$termValue'/>" )
@@ -131,7 +131,7 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 
 		$request = new FauxRequest( [ 'id' => $id, 'language' => $language, 'value' => 'test' ], true );
 
-		list( $output, ) = $this->executeSpecialPage( '', $request, self::USER_LANGUAGE );
+		[ $output ] = $this->executeSpecialPage( '', $request, self::USER_LANGUAGE );
 
 		$lang = $this->getServiceContainer()->getLanguageFactory()->getLanguage( self::USER_LANGUAGE );
 		$this->assertThatHamcrest( $output, is( htmlPiece( havingChild(

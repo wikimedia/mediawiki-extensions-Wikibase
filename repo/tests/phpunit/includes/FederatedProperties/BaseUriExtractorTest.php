@@ -34,12 +34,12 @@ class BaseUriExtractorTest extends TestCase {
 	}
 
 	public static function provideNonWikibaseUris() {
-	return [
-		'Has a Query' => [ 'http://www.wikdiata.org/entity/P12?action=catdog' ],
-		'Has a Fragment' => [ 'http://www.wikdiata.org/entity/P12#catdog' ],
-		'Has no Path' => [ 'http://www.wikdiata.org' ],
-		'Has malformed Path' => [ 'http://www.wikdiata.org/entity###;\'\';l\'' ],
-	];
+		return [
+			'Has a Query' => [ 'http://www.wikdiata.org/entity/P12?action=catdog' ],
+			'Has a Fragment' => [ 'http://www.wikdiata.org/entity/P12#catdog' ],
+			'Has no Path' => [ 'http://www.wikdiata.org' ],
+			'Has malformed Path' => [ 'http://www.wikdiata.org/entity###;\'\';l\'' ],
+		];
 	}
 
 }

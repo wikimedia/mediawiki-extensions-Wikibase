@@ -34,11 +34,11 @@ class EntityUsageFactory {
 			);
 		}
 
-		list( $entityIdSerialization, $aspectKey ) = explode( '#', $identity, 2 );
+		[ $entityIdSerialization, $aspectKey ] = explode( '#', $identity, 2 );
 		$entityId = $this->entityIdParser->parse( $entityIdSerialization );
 
 		if ( strpos( $aspectKey, '.' ) !== false ) {
-			list( $aspect, $modifier ) = explode( '.', $aspectKey, 2 );
+			[ $aspect, $modifier ] = explode( '.', $aspectKey, 2 );
 		} else {
 			$aspect = $aspectKey;
 			$modifier = null;

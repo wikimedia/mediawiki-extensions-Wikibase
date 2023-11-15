@@ -342,7 +342,7 @@ class MockRepositoryTest extends TestCase {
 		}
 
 		// check that we found the right number of entities
-		$this->assertSame( count( $expectedLabels ), count( $actualLabels ), 'number of entities found' );
+		$this->assertSameSize( $expectedLabels, $actualLabels, 'number of entities found' );
 
 		foreach ( $expectedLabels as $id => $labels ) {
 			// check that thew correct entity was found
@@ -687,7 +687,7 @@ class MockRepositoryTest extends TestCase {
 		$failTest = function () {
 			$this->fail( 'Redirect was expected' );
 		};
-		list( $gotRevisionId, $gotTargetId ) = $latestRevisionIdResult
+		[ $gotRevisionId, $gotTargetId ] = $latestRevisionIdResult
 			->onNonexistentEntity( $failTest )
 			->onConcreteRevision( $failTest )
 			->onRedirect(

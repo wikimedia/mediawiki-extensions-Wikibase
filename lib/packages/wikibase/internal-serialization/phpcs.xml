@@ -24,7 +24,7 @@
 
 		<!-- Starting a function's body with an empty line can be helpful after a very large header.
 			The code is not guaranteed to be easier to read if this is disallowed. -->
-		<exclude name="MediaWiki.WhiteSpace.DisallowEmptyLineFunctions" />
+		<exclude name="Squiz.WhiteSpace.FunctionOpeningBraceSpace" />
 
 		<!-- Even if we encourage to use a space in "function ()", we don't think this sniff should
 			block patches from being merged. -->

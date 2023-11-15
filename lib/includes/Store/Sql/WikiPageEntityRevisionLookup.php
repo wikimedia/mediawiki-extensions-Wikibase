@@ -108,7 +108,7 @@ class WikiPageEntityRevisionLookup implements EntityRevisionLookup {
 		if ( $row ) {
 			/** @var EntityRedirect $redirect */
 			try {
-				list( $entityRevision, $redirect ) = $this->loadEntity( $row, $mode );
+				[ $entityRevision, $redirect ] = $this->loadEntity( $row, $mode );
 			} catch ( MWContentSerializationException $ex ) {
 				throw new StorageException( 'Failed to unserialize the content object.', 0, $ex );
 			}
@@ -175,7 +175,7 @@ class WikiPageEntityRevisionLookup implements EntityRevisionLookup {
 		if ( $row && $row->page_latest ) {
 			if ( $row->page_is_redirect ) {
 				/** @var EntityRedirect $redirect */
-				list( , $redirect ) = $this->loadEntity( $row, $mode );
+				[ , $redirect ] = $this->loadEntity( $row, $mode );
 				if ( $redirect === null ) {
 					$revisionId = $row->rev_id;
 					$slot = $row->role_name ?? SlotRecord::MAIN;

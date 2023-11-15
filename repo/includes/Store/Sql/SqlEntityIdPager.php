@@ -140,7 +140,7 @@ class SqlEntityIdPager implements SeekableEntityIdPager {
 
 		$rows = $queryBuilder->caller( __METHOD__ )->fetchResultSet();
 
-		list( $entityIds, $position ) = $this->processRows( $rows );
+		[ $entityIds, $position ] = $this->processRows( $rows );
 		if ( $position !== null ) {
 			$this->position = $position;
 		}

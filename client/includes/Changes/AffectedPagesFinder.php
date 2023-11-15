@@ -340,7 +340,7 @@ class AffectedPagesFinder {
 	private function makeVirtualUsages( array $titles, EntityId $entityId, array $aspects ) {
 		$usagesForItem = [];
 		foreach ( $aspects as $aspect ) {
-			list( $aspect, $modifier ) = EntityUsage::splitAspectKey( $aspect );
+			[ $aspect, $modifier ] = EntityUsage::splitAspectKey( $aspect );
 			$usagesForItem[] = new EntityUsage( $entityId, $aspect, $modifier );
 		}
 

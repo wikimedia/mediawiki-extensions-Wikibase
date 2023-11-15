@@ -140,7 +140,7 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 			'language' => '<LANGUAGE>',
 			'label' => '<LABEL>',
 		] );
-		list( $html, ) = $this->executeSpecialPage( '', $request );
+		[ $html ] = $this->executeSpecialPage( '', $request );
 
 		$this->assertStringContainsString( '&lt;LANGUAGE&gt;', $html );
 		$this->assertStringContainsString( '&lt;LABEL&gt;', $html );
@@ -150,7 +150,7 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 	}
 
 	public function testSubPageParts() {
-		list( $html, ) = $this->executeSpecialPage( '<LANGUAGE>/<LABEL>' );
+		[ $html ] = $this->executeSpecialPage( '<LANGUAGE>/<LABEL>' );
 
 		$this->assertStringContainsString( '&lt;LANGUAGE&gt;', $html );
 		$this->assertStringContainsString( '&lt;LABEL&gt;', $html );
@@ -170,7 +170,7 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 
 	public function testSearchBackendError() {
 		$this->simulateSearchBackendError = true;
-		list( $html, ) = $this->executeSpecialPage( 'fr/Foo' );
+		[ $html ] = $this->executeSpecialPage( 'fr/Foo' );
 
 		$this->assertStringContainsString( 'search-backend-error', $html );
 	}

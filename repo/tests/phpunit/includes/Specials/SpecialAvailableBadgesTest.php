@@ -60,7 +60,7 @@ class SpecialAvailableBadgesTest extends SpecialPageTestBase {
 		$lrFactory = $this->createMock( LinkRendererFactory::class );
 		$lrFactory->method( 'create' )->willReturn( $linkRenderer );
 		$this->setService( 'LinkRendererFactory', $lrFactory );
-		list( $output, ) = $this->executeSpecialPage( '' );
+		[ $output ] = $this->executeSpecialPage( '' );
 
 		$this->assertIsString( $output );
 		$this->assertStringContainsString( 'mw-specialpage-summary', $output );

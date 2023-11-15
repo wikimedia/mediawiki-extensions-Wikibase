@@ -96,7 +96,7 @@ class EditEntityFingerprintUniquenessIntegrationTest extends WikibaseApiTestCase
 		$this->doApiRequestWithToken( $params );
 
 		// Repeating the same request with the same label should not fail.
-		list( $result, , ) = $this->doApiRequestWithToken( $params );
+		[ $result ] = $this->doApiRequestWithToken( $params );
 		$this->assertArrayHasKey( 'success', $result );
 	}
 

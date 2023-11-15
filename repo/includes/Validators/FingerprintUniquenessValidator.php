@@ -99,7 +99,7 @@ class FingerprintUniquenessValidator implements ValueValidator {
 	 *  [ language code => [ 'label' => label text, 'descripition' => description text ] ]
 	 */
 	private function getChangedLabelsAndDescriptionsPerLanguage( ChangeOpFingerprintResult $changeOpsResult ): Generator {
-		list( $newTerms, $oldTerms ) = $this->collectNewAndOldTerms( $changeOpsResult );
+		[ $newTerms, $oldTerms ] = $this->collectNewAndOldTerms( $changeOpsResult );
 
 		$labelDescriptionPairsPerLanguage = $this->generateLabelDescriptionPairs(
 			$newTerms,
