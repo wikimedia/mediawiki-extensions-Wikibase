@@ -6,7 +6,7 @@
 		"description": "OpenAPI definition of Wikibase REST API",
 		"contact": {
 			"name": "Wikimedia Deutschland - Wikibase Product Platform Team",
-			"url": "https://phabricator.wikimedia.org/project/board/5771/"
+			"url": "https://phabricator.wikimedia.org/project/board/6692/"
 		},
 		"license": {
 			"name": "GNU General Public License v2.0 or later",
