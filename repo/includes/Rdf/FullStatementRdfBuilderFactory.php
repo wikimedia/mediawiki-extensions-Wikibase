@@ -59,7 +59,7 @@ class FullStatementRdfBuilderFactory {
 		$fullStatementRdfBuilder = new FullStatementRdfBuilder( $this->vocabulary,
 			$this->writer,
 			$snakBuilder
- );
+		);
 
 		$fullStatementRdfBuilder->setDedupeBag( $this->dedupe );
 

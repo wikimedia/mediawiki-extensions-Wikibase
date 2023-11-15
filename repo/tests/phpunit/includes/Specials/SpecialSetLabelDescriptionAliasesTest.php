@@ -244,7 +244,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 		$this->mockRepository->putEntity( $inputEntity );
 		$id = $inputEntity->getId();
 
-		list( , $response ) = $this->executeSpecialPage( $id->getSerialization(), $request );
+		[ , $response ] = $this->executeSpecialPage( $id->getSerialization(), $request );
 
 		$redirect = $response instanceof FauxResponse ? $response->getHeader( 'Location' ) : null;
 		// TODO: Look for an error message in $output.
@@ -260,7 +260,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 	}
 
 	public function testAllFormFieldsRendered_WhenPageRendered() {
-		list( $output ) = $this->executeSpecialPage( '' );
+		[ $output ] = $this->executeSpecialPage( '' );
 
 		$this->assertHtmlContainsInputWithName( $output, 'id' );
 		$this->assertHtmlContainsInputWithNameAndValue( $output, 'language', 'qqx' );
@@ -268,7 +268,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 	}
 
 	public function testSubmitButtonMessages() {
-		list( $output ) = $this->executeSpecialPage( '' );
+		[ $output ] = $this->executeSpecialPage( '' );
 
 		$this->assertStringContainsString( 'wikibase-setlabeldescriptionaliases-continue', $output );
 
@@ -277,7 +277,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 
 		// Submit button copy is "Save changes"
 		$this->submitButtonMessage = 'savechanges';
-		list( $output ) = $this->executeSpecialPage( $item->getId()->getSerialization() );
+		[ $output ] = $this->executeSpecialPage( $item->getId()->getSerialization() );
 
 		$this->assertThatHamcrest( $output, is( htmlPiece( havingChild(
 			havingTextContents( containsString( 'savechanges' )
@@ -285,7 +285,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 
 		// Submit button copy is "Publish changes"
 		$this->submitButtonMessage = 'publishchanges';
-		list( $output ) = $this->executeSpecialPage( $item->getId()->getSerialization() );
+		[ $output ] = $this->executeSpecialPage( $item->getId()->getSerialization() );
 
 		$this->assertThatHamcrest( $output, is( htmlPiece( havingChild(
 			havingTextContents( containsString( 'publishchanges' )
@@ -296,7 +296,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 		$item = new Item();
 		$this->mockRepository->putEntity( $item );
 
-		list( $output ) = $this->executeSpecialPage( $item->getId()->getSerialization() );
+		[ $output ] = $this->executeSpecialPage( $item->getId()->getSerialization() );
 
 		$this->assertThatHamcrest( $output, is( htmlPiece( havingChild(
 			tagMatchingOutline( "<input name='id' type='hidden' value='{$item->getId()->getSerialization()}'/>" )
@@ -311,7 +311,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 		$language = 'de';
 
 		$subPage = $item->getId()->getSerialization() . '/' . $language;
-		list( $output ) = $this->executeSpecialPage( $subPage );
+		[ $output ] = $this->executeSpecialPage( $subPage );
 
 		$this->assertThatHamcrest( $output, is( htmlPiece( havingChild(
 			tagMatchingOutline( "<input name='language' type='hidden' value='$language'/>" )
@@ -334,7 +334,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 		);
 		$this->mockRepository->putEntity( $item );
 
-		list( $output ) = $this->executeSpecialPage( $item->getId()->getSerialization(), new FauxRequest( [ 'language' => $language ] ) );
+		[ $output ] = $this->executeSpecialPage( $item->getId()->getSerialization(), new FauxRequest( [ 'language' => $language ] ) );
 
 		$this->assertThatHamcrest( $output, is( htmlPiece( havingChild(
 			tagMatchingOutline( "<input name='language' type='hidden' value='$language'/>" )
@@ -344,7 +344,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 
 	public function testLanguageCodeEscaping() {
 		$request = new FauxRequest( [ 'language' => '<sup>' ], true );
-		list( $output, ) = $this->executeSpecialPage( null, $request );
+		[ $output ] = $this->executeSpecialPage( null, $request );
 
 		$this->assertStringContainsString( '<p class="error">', $output );
 		$this->assertStringContainsString( '&lt;sup&gt;', $output );
@@ -367,7 +367,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 
 		$request = new FauxRequest( [ 'language' => 'en', 'label' => 'new label' ], true );
 
-		list( $output, ) = ( new SpecialPageExecutor() )->executeSpecialPage( $specialPage, $id->getSerialization(), $request );
+		[ $output ] = ( new SpecialPageExecutor() )->executeSpecialPage( $specialPage, $id->getSerialization(), $request );
 
 		$this->assertThatHamcrest( $output, is( htmlPiece( havingChild(
 			both( tagMatchingOutline( "<p class='error'/>" ) )
@@ -417,7 +417,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 		$this->mockRepository->putEntity( $item );
 		$subPage = $item->getId()->getSerialization() . '/en';
 
-		list( $output, $response ) = $this->executeSpecialPage( $subPage, $request );
+		[ $output, $response ] = $this->executeSpecialPage( $subPage, $request );
 		$this->assertThatHamcrest( $output, is( htmlPiece( havingChild(
 			both( tagMatchingOutline( "<p class='error'/>" ) )
 				->andAlso( havingTextContents(
@@ -431,7 +431,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 		$this->mockRepository->putEntity( $item );
 
 		$subPage = $item->getId()->getSerialization() . '/mul';
-		list( $output ) = $this->executeSpecialPage( $subPage );
+		[ $output ] = $this->executeSpecialPage( $subPage );
 
 		$this->assertHtmlContainsTermFormFields( $output );
 
@@ -452,7 +452,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 		$this->mockRepository->putEntity( $item );
 
 		$subPage = $item->getId()->getSerialization() . '/de';
-		list( $output ) = $this->executeSpecialPage( $subPage );
+		[ $output ] = $this->executeSpecialPage( $subPage );
 
 		$this->assertHtmlContainsTermFormFields( $output );
 

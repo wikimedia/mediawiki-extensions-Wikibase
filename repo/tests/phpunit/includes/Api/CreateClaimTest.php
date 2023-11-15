@@ -52,7 +52,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 		 * @var Item $item
 		 * @var Property $property
 		 */
-		list( $item, $property ) = $this->getNewItemAndProperty();
+		[ $item, $property ] = $this->getNewItemAndProperty();
 
 		$params = [
 			'action' => 'wbcreateclaim',
@@ -62,7 +62,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 			'value' => '"Foo"',
 		];
 
-		list( $resultArray, ) = $this->doApiRequestWithToken( $params );
+		[ $resultArray ] = $this->doApiRequestWithToken( $params );
 
 		$this->assertRequestValidity( $resultArray );
 
@@ -86,7 +86,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 		 * @var Item $item
 		 * @var Property $property
 		 */
-		list( $item, $property ) = $this->getNewItemAndProperty();
+		[ $item, $property ] = $this->getNewItemAndProperty();
 
 		$this->assertCanTagSuccessfulRequest( [
 			'action' => 'wbcreateclaim',
@@ -238,7 +238,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 		 * @var Item $item
 		 * @var Property $property
 		 */
-		list( $item, $property ) = $this->getNewItemAndProperty();
+		[ $item, $property ] = $this->getNewItemAndProperty();
 
 		if ( array_key_exists( 'entity', $params ) && $params['entity'] === '-' ) {
 			$params['entity'] = $item->getId()->getSerialization();
@@ -271,7 +271,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 		 * @var Item $item
 		 * @var Property $property
 		 */
-		list( $item, $property ) = $this->getNewItemAndProperty();
+		[ $item, $property ] = $this->getNewItemAndProperty();
 
 		$params = [
 			'action' => 'wbcreateclaim',
@@ -281,7 +281,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 			'value' => '"Foo"',
 		];
 
-		list( $resultArray, ) = $this->doApiRequestWithToken( $params );
+		[ $resultArray ] = $this->doApiRequestWithToken( $params );
 
 		$this->assertRequestValidity( $resultArray );
 
@@ -298,7 +298,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 			'baserevid' => $revId,
 		];
 
-		list( $resultArray, ) = $this->doApiRequestWithToken( $params );
+		[ $resultArray ] = $this->doApiRequestWithToken( $params );
 
 		$this->assertRequestValidity( $resultArray );
 

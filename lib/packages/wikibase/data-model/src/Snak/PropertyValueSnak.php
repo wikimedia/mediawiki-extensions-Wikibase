@@ -109,7 +109,7 @@ class PropertyValueSnak extends SnakObject {
 	}
 
 	public function __unserialize( array $serialized ): void {
-		list( $propertyId, $this->dataValue ) = $serialized;
+		[ $propertyId, $this->dataValue ] = $serialized;
 
 		if ( is_string( $propertyId ) ) {
 			$this->propertyId = new NumericPropertyId( $propertyId );

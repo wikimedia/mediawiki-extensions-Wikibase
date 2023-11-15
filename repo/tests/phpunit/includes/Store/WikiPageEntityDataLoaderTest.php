@@ -46,7 +46,7 @@ class WikiPageEntityDataLoaderTest extends MediaWikiIntegrationTestCase {
 
 		$loader = new WikiPageEntityDataLoader( $codec, $blobStore, self::WIKI_ID );
 
-		list( $entityRevision, $redirect ) = $loader->loadEntityDataFromWikiPageRevision( $revision, $slotRole, 0 );
+		[ $entityRevision, $redirect ] = $loader->loadEntityDataFromWikiPageRevision( $revision, $slotRole, 0 );
 
 		$this->assertInstanceOf( EntityRevision::class, $entityRevision );
 		$this->assertEquals( $item, $entityRevision->getEntity() );
@@ -75,7 +75,7 @@ class WikiPageEntityDataLoaderTest extends MediaWikiIntegrationTestCase {
 
 		$loader = new WikiPageEntityDataLoader( $codec, $blobStore, self::WIKI_ID );
 
-		list( $entityRevision, $redirect ) = $loader->loadEntityDataFromWikiPageRevision( $revision, $slotRole, 0 );
+		[ $entityRevision, $redirect ] = $loader->loadEntityDataFromWikiPageRevision( $revision, $slotRole, 0 );
 
 		$this->assertNull( $entityRevision );
 		$this->assertInstanceOf( EntityRedirect::class, $redirect );
@@ -122,7 +122,7 @@ class WikiPageEntityDataLoaderTest extends MediaWikiIntegrationTestCase {
 
 		$loader = new WikiPageEntityDataLoader( $codec, $blobStore, self::WIKI_ID );
 
-		list( $entityRevision, $redirect ) = $loader->loadEntityDataFromWikiPageRevision( $revision, $slotRole, 0 );
+		[ $entityRevision, $redirect ] = $loader->loadEntityDataFromWikiPageRevision( $revision, $slotRole, 0 );
 
 		$this->assertNull( $entityRevision );
 		$this->assertNull( $redirect );
@@ -143,7 +143,7 @@ class WikiPageEntityDataLoaderTest extends MediaWikiIntegrationTestCase {
 
 		$loader = new WikiPageEntityDataLoader( $codec, $blobStore, self::WIKI_ID );
 
-		list( $entityRevision, $redirect ) = $loader->loadEntityDataFromWikiPageRevision( $revision, $slotRole, 0 );
+		[ $entityRevision, $redirect ] = $loader->loadEntityDataFromWikiPageRevision( $revision, $slotRole, 0 );
 
 		$this->assertNull( $entityRevision );
 		$this->assertNull( $redirect );

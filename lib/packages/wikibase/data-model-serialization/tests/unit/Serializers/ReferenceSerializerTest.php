@@ -22,8 +22,8 @@ class ReferenceSerializerTest extends DispatchableSerializerTest {
 		$snakListSerializerMock = $this->createMock( Serializer::class );
 		$snakListSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
-			->with( $this->equalTo( new SnakList( [] ) ) )
-			->will( $this->returnValue( [] ) );
+			->with( new SnakList( [] ) )
+			->willReturn( [] );
 
 		return new ReferenceSerializer( $snakListSerializerMock );
 	}
@@ -72,12 +72,12 @@ class ReferenceSerializerTest extends DispatchableSerializerTest {
 		$snakListSerializerMock = $this->createMock( Serializer::class );
 		$snakListSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
-			->with( $this->equalTo( new SnakList( [
+			->with( new SnakList( [
 				new PropertyNoValueSnak( new NumericPropertyId( 'P42' ) ),
 				new PropertySomeValueSnak( new NumericPropertyId( 'P24' ) ),
 				new PropertyNoValueSnak( new NumericPropertyId( 'P24' ) ),
-			] ) ) )
-			->will( $this->returnValue( [] ) );
+			] ) )
+			->willReturn( [] );
 
 		$referenceSerializer = new ReferenceSerializer( $snakListSerializerMock );
 

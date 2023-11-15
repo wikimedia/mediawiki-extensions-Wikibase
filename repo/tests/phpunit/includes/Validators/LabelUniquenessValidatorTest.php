@@ -87,7 +87,7 @@ class LabelUniquenessValidatorTest extends \PHPUnit\Framework\TestCase {
 		$result = $validator->validateEntity( $property );
 
 		$this->assertInstanceOf( Result::class, $result );
-		$this->assertCount( count( $conflicts ), $result->getErrors() );
+		$this->assertSameSize( $conflicts, $result->getErrors() );
 
 		$this->assertSame( $conflicts === [], $result->isValid() );
 

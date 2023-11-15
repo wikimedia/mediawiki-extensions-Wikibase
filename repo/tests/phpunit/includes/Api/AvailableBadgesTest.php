@@ -34,7 +34,7 @@ class AvailableBadgesTest extends ApiTestCase {
 	}
 
 	public function testExecute() {
-		list( $result,, ) = $this->doApiRequest( [
+		[ $result ] = $this->doApiRequest( [
 			'action' => 'wbavailablebadges',
 		] );
 

@@ -121,7 +121,7 @@ class GetClaims extends ApiBase {
 		$params = $this->extractRequestParams();
 		$this->validateParameters( $params );
 
-		list( $idString, $guid ) = $this->getIdentifiers( $params );
+		[ $idString, $guid ] = $this->getIdentifiers( $params );
 
 		try {
 			$entityId = $this->idParser->parse( $idString );

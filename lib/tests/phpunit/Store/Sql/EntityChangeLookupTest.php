@@ -83,7 +83,7 @@ class EntityChangeLookupTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function assertChangesEqual( array $expected, array $changes ) {
-		$this->assertCount( count( $expected ), $changes );
+		$this->assertSameSize( $expected, $changes );
 
 		$i = 0;
 		foreach ( $changes as $change ) {

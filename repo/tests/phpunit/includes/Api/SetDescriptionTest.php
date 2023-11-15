@@ -35,7 +35,7 @@ class SetDescriptionTest extends ModifyTermTestCase {
 	}
 
 	public function testGetAllowedParams_listsItemsAndProperties() {
-		list( $result, ) = $this->doApiRequest(
+		[ $result ] = $this->doApiRequest(
 			[
 				'action' => 'paraminfo',
 				'modules' => self::$testAction,
@@ -85,7 +85,7 @@ class SetDescriptionTest extends ModifyTermTestCase {
 
 		$newItem = $this->createItemUsing( $userWithAllPermissions );
 
-		list( $result, ) = $this->doApiRequestWithToken(
+		[ $result ] = $this->doApiRequestWithToken(
 			$this->getSetDescriptionRequestParams( $newItem->getId() ),
 			null,
 			$userWithAllPermissions
@@ -137,7 +137,7 @@ class SetDescriptionTest extends ModifyTermTestCase {
 			'*' => [ 'read' => true, 'edit' => true, 'writeapi' => true ],
 		] );
 
-		list( $result, ) = $this->doApiRequestWithToken(
+		[ $result ] = $this->doApiRequestWithToken(
 			$this->getCreateItemAndSetDescriptionRequestParams(),
 			null,
 			$userWithAllPermissions

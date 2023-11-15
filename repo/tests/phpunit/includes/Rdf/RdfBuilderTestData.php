@@ -394,7 +394,7 @@ class RdfBuilderTestData {
 
 		$repo = new MockRepository();
 
-		foreach ( self::getTestProperties() as list( $id, $type ) ) {
+		foreach ( self::getTestProperties() as [ $id, $type ] ) {
 			$fingerprint = new Fingerprint();
 			$fingerprint->setLabel( 'en', 'Property' . $id->getNumericId() );
 			$entity = new Property( $id, $fingerprint, $type );

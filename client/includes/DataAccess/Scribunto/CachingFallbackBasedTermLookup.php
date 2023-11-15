@@ -104,7 +104,7 @@ class CachingFallbackBasedTermLookup implements TermLookup {
 			return null;
 		}
 
-		list( $revisionId, $targetEntityId ) = $resolutionResult;
+		[ $revisionId, $targetEntityId ] = $resolutionResult;
 
 		$termFallback = $this->termFallbackCache->get( $targetEntityId, $revisionId, $languageCode, $termType );
 

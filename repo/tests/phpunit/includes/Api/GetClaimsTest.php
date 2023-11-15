@@ -142,7 +142,7 @@ class GetClaimsTest extends ApiTestCase {
 
 	public function testValidRequests() {
 		foreach ( $this->validRequestProvider() as $argList ) {
-			list( $params, $statements ) = $argList;
+			[ $params, $statements ] = $argList;
 
 			$this->doTestValidRequest( $params, $statements );
 		}
@@ -158,7 +158,7 @@ class GetClaimsTest extends ApiTestCase {
 		$serializer = $this->serializerFactory->newStatementListSerializer();
 		$expected = $serializer->serialize( $statements );
 
-		list( $resultArray, ) = $this->doApiRequest( $params );
+		[ $resultArray ] = $this->doApiRequest( $params );
 
 		$this->assertIsArray( $resultArray, 'top level element is an array' );
 		$this->assertArrayHasKey( 'claims', $resultArray, 'top level element has a claims key' );

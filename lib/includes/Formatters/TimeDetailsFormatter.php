@@ -113,7 +113,7 @@ class TimeDetailsFormatter implements ValueFormatter {
 			return htmlspecialchars( $timestamp );
 		}
 
-		list( , $sign, $year, $rest ) = $matches;
+		[ , $sign, $year, $rest ] = $matches;
 
 		// Actual MINUS SIGN (U+2212) instead of HYPHEN-MINUS (U+002D)
 		$sign = $sign === '-' ? "\xE2\x88\x92" : '+';

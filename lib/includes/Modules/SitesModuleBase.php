@@ -98,7 +98,7 @@ abstract class SitesModuleBase extends RL\Module {
 		}
 
 		// Use protocol relative URIs, as it's safe to assume that all wikis support the same protocol
-		list( $pageUrl, $apiUrl ) = preg_replace(
+		[ $pageUrl, $apiUrl ] = preg_replace(
 			"/^https?:/i",
 			'',
 			[

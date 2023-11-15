@@ -155,7 +155,7 @@ class MergeItems extends ApiBase {
 	 * @throws RedirectCreationException
 	 */
 	private function mergeItems( ItemId $fromId, ItemId $toId, array $ignoreConflicts, ?string $summary, bool $bot, array $tags ): void {
-		list( $newRevisionFrom, $newRevisionTo, $redirected )
+		[ $newRevisionFrom, $newRevisionTo, $redirected ]
 			= $this->interactor->mergeItems( $fromId, $toId, $this->getContext(), $ignoreConflicts, $summary, $bot, $tags );
 
 		$this->resultBuilder->setValue( null, 'success', 1 );

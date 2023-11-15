@@ -257,8 +257,8 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		$pageNormalizer = $this->createMock( SiteLinkPageNormalizer::class );
 		$pageNormalizer->expects( $this->once() )->method( 'normalize' )->with(
 			$this->anything(),
-			$this->equalTo( 'Wikipedia' ),
-			$this->equalTo( [ self::$badgeId ] )
+			'Wikipedia',
+			[ self::$badgeId ]
 		)->willReturnArgument( 1 );
 		$this->setService( 'WikibaseRepo.SiteLinkPageNormalizer', $pageNormalizer );
 

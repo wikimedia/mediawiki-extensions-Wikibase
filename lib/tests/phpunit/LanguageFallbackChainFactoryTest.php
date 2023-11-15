@@ -55,7 +55,7 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( $expectedChain, $actualChain );
 
 		// also compare the chains element by element, in case the string comparison missed a detail
-		$this->assertSame( count( $expectedItems ), count( $chain ) );
+		$this->assertSameSize( $expectedItems, $chain );
 		foreach ( $expectedItems as $i => $expected ) {
 			if ( is_array( $expected ) ) {
 				$this->assertSame( $expected[0], $chain[$i]->getLanguageCode() );

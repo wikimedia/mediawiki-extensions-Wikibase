@@ -23,8 +23,8 @@ class SiteLinkDeserializerTest extends TestCase {
 		$entityIdDeserializerMock = $this->createMock( Deserializer::class );
 		$entityIdDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
-			->with( $this->equalTo( 'Q42' ) )
-			->will( $this->returnValue( new ItemId( 'Q42' ) ) );
+			->with( 'Q42' )
+			->willReturn( new ItemId( 'Q42' ) );
 
 		return new SiteLinkDeserializer( $entityIdDeserializerMock );
 	}
@@ -98,8 +98,8 @@ class SiteLinkDeserializerTest extends TestCase {
 		$entityIdDeserializerMock = $this->createMock( Deserializer::class );
 		$entityIdDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
-			->with( $this->equalTo( 'P42' ) )
-			->will( $this->returnValue( new NumericPropertyId( 'P42' ) ) );
+			->with( 'P42' )
+			->willReturn( new NumericPropertyId( 'P42' ) );
 		$deserializer = new SiteLinkDeserializer( $entityIdDeserializerMock );
 
 		$this->expectException( InvalidAttributeException::class );

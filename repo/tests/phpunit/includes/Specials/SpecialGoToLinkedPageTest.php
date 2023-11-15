@@ -174,7 +174,7 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 	 */
 	public function testExecuteWithRedirect( $sub, $target ) {
 		/** @var FauxResponse $response */
-		list( $output, $response ) = $this->executeSpecialPage( $sub );
+		[ $output, $response ] = $this->executeSpecialPage( $sub );
 
 		$this->assertEquals( $target, $response->getHeader( 'Location' ), 'Redirect' );
 		$this->assertSame( '', $output );

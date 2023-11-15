@@ -65,7 +65,7 @@ class SpecialPagesWithBadgesTest extends SpecialPageTestBase {
 	}
 
 	public function testExecuteWithoutAnyParams() {
-		list( $result, ) = $this->executeSpecialPage( '' );
+		[ $result ] = $this->executeSpecialPage( '' );
 
 		$this->assertStringContainsString( "<option value='Q123'", $result );
 		$this->assertStringContainsString( "<option value='Q456'", $result );
@@ -75,13 +75,13 @@ class SpecialPagesWithBadgesTest extends SpecialPageTestBase {
 	}
 
 	public function testExecuteWithValidParam() {
-		list( $result, ) = $this->executeSpecialPage( 'Q456' );
+		[ $result ] = $this->executeSpecialPage( 'Q456' );
 
 		$this->assertStringContainsString( "<option value='Q456' selected='selected'", $result );
 	}
 
 	public function testExecuteWithInvalidParam() {
-		list( $result, ) = $this->executeSpecialPage( 'FooBar' );
+		[ $result ] = $this->executeSpecialPage( 'FooBar' );
 
 		$this->assertStringContainsString( '<p class="error"', $result );
 		$this->assertStringContainsString(

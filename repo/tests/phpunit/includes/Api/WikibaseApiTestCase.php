@@ -123,7 +123,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 			EntityTestHelper::injectIds( $params, $idMap );
 			EntityTestHelper::injectIds( $params, EntityTestHelper::$defaultPlaceholderValues );
 
-			list( $res, , ) = $this->doApiRequestWithToken( $params );
+			[ $res ] = $this->doApiRequestWithToken( $params );
 			EntityTestHelper::registerEntity( $handle, $res['entity']['id'], $res['entity'] );
 
 			$idMap["%$handle%"] = $res['entity']['id'];
@@ -156,7 +156,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	 * @return array
 	 */
 	protected function loadEntity( $id ) {
-		list( $res, , ) = $this->doApiRequest(
+		[ $res ] = $this->doApiRequest(
 			[
 				'action' => 'wbgetentities',
 				'format' => 'json', // make sure IDs are used as keys.
@@ -468,7 +468,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 
 		$params[ 'tags' ] = $dummyTag;
 
-		list( $result, , ) = $this->doApiRequestWithToken( $params, $session, $user, $tokenType );
+		[ $result ] = $this->doApiRequestWithToken( $params, $session, $user, $tokenType );
 
 		$this->assertArrayNotHasKey( 'warnings', $result, json_encode( $result ) );
 		$this->assertArrayHasKey( 'success', $result );

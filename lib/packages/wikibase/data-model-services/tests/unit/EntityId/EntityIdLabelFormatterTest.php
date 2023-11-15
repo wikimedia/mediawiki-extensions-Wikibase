@@ -64,13 +64,13 @@ class EntityIdLabelFormatterTest extends TestCase {
 
 		$labelLookup->expects( $this->any() )
 			->method( 'getLabel' )
-			->will( $this->returnCallback( static function( EntityId $id ) use ( $languageCode ) {
+			->willReturnCallback( static function( EntityId $id ) use ( $languageCode ) {
 				if ( $id->getSerialization() === 'Q42' && $languageCode === 'es' ) {
 					return new Term( 'es', 'foo' );
 				} else {
 					throw new LabelDescriptionLookupException( $id, 'Label not found' );
 				}
-			} ) );
+			} );
 
 		return $labelLookup;
 	}

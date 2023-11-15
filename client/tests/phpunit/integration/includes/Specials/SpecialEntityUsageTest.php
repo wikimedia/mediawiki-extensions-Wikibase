@@ -81,7 +81,7 @@ class SpecialEntityUsageTest extends SpecialPageTestBase {
 
 	public function testExecuteWithValidParam() {
 		$lang = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'qqx' );
-		list( $result, ) = $this->executeSpecialPage( 'Q3', null, $lang );
+		[ $result ] = $this->executeSpecialPage( 'Q3', null, $lang );
 		$aspectsTehran = [
 			'(wikibase-pageinfo-entity-usage-O: )',
 			'(wikibase-pageinfo-entity-usage-L-with-modifier: fa)',

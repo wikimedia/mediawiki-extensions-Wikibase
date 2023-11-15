@@ -24,8 +24,8 @@ class ReferenceDeserializerTest extends DispatchableDeserializerTest {
 		$snaksDeserializerMock = $this->createMock( Deserializer::class );
 		$snaksDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
-			->with( $this->equalTo( [] ) )
-			->will( $this->returnValue( new SnakList() ) );
+			->with( [] )
+			->willReturn( new SnakList() );
 
 		return new ReferenceDeserializer( $snaksDeserializerMock );
 	}
@@ -93,11 +93,11 @@ class ReferenceDeserializerTest extends DispatchableDeserializerTest {
 					],
 				]
 			) )
-			->will( $this->returnValue( new SnakList( [
+			->willReturn( new SnakList( [
 				new PropertyNoValueSnak( new NumericPropertyId( 'P24' ) ),
 				new PropertySomeValueSnak( new NumericPropertyId( 'P42' ) ),
 				new PropertyNoValueSnak( new NumericPropertyId( 'P42' ) ),
-			] ) ) );
+			] ) );
 
 		$referenceDeserializer = new ReferenceDeserializer( $snaksDeserializerMock );
 

@@ -13,7 +13,7 @@
 
 	<!-- Starting a function's body with an empty line can be helpful after a very large header.
 		The code is not guaranteed to be easier to read if this is disallowed. -->
-	<rule ref="MediaWiki.WhiteSpace.DisallowEmptyLineFunctions">
+	<rule ref="Squiz.WhiteSpace.FunctionOpeningBraceSpace">
 		<severity>0</severity>
 	</rule>
 

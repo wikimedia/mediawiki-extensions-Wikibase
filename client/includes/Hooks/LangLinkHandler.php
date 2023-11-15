@@ -227,7 +227,7 @@ class LangLinkHandler {
 				continue;
 			}
 
-			list( $lang, $page ) = $parts;
+			[ $lang, $page ] = $parts;
 
 			if ( $sites->hasNavigationId( $lang ) ) {
 				$site = $sites->getSiteByNavigationId( $lang );

@@ -21,14 +21,14 @@ class AddPageInfo {
 		$this->entityTitleStoreLookup = $entityTitleStoreLookup;
 	}
 
-  /**
-   * Adds Mediawiki page metadata to the record.
-   *
-   * @param array $record Record to which to add metadata.
-   * @param EntityRevision $entityRevision
-   *
-   * @return array Updated record.
-   */
+	/**
+	 * Adds Mediawiki page metadata to the record.
+	 *
+	 * @param array $record Record to which to add metadata.
+	 * @param EntityRevision $entityRevision
+	 *
+	 * @return array Updated record.
+	 */
 	public function add( array $record, EntityRevision $entityRevision ): array {
 		$title = $this->entityTitleStoreLookup->getTitleForId( $entityRevision->getEntity()->getId() );
 		$record['pageid'] = $title->getArticleID();

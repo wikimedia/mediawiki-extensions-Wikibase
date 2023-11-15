@@ -60,7 +60,7 @@ class PropertySpecificComponentsRdfBuilderTest extends TestCase {
 			$writer,
 			$dataTypeLookup,
 			[]
- );
+		);
 	}
 
 	private function getPropertyDataTypeLookup() {

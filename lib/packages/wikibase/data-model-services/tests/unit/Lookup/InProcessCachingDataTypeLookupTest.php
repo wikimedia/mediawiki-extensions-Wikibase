@@ -21,7 +21,7 @@ class InProcessCachingDataTypeLookupTest extends TestCase {
 		$decoratedLookup->expects( $this->once() )
 			->method( 'getDataTypeIdForProperty' )
 			->with( new NumericPropertyId( 'P1' ) )
-			->will( $this->returnValue( 'string' ) );
+			->willReturn( 'string' );
 
 		$cachingLookup = new InProcessCachingDataTypeLookup( $decoratedLookup );
 
@@ -36,7 +36,7 @@ class InProcessCachingDataTypeLookupTest extends TestCase {
 
 		$decoratedLookup->expects( $this->once() )
 			->method( 'getDataTypeIdForProperty' )
-			->will( $this->returnValue( 'string' ) );
+			->willReturn( 'string' );
 
 		$cachingLookup = new InProcessCachingDataTypeLookup( $decoratedLookup );
 		$cachingLookup->getDataTypeIdForProperty( new NumericPropertyId( 'P1' ) );

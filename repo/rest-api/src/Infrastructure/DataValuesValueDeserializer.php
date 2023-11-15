@@ -41,6 +41,7 @@ class DataValuesValueDeserializer implements ValueDeserializer {
 	public function deserialize( string $dataTypeId, array $valueSerialization ): DataValue {
 		$this->assertFieldExists( $valueSerialization, 'content' );
 
+		// phpcs:ignore Generic.CodeAnalysis.AssignmentInCondition.Found
 		switch ( $dataValueType = $this->valueTypeLookup->getValueType( $dataTypeId ) ) {
 			case 'wikibase-entityid':
 				$this->assertFieldIsString( $valueSerialization, 'content' );

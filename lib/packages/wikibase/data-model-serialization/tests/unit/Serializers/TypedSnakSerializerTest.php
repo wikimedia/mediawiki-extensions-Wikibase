@@ -28,10 +28,10 @@ class TypedSnakSerializerTest extends TestCase {
 
 		$snakSerializer->expects( $this->any() )
 			->method( 'serialize' )
-			->will( $this->returnValue( [
+			->willReturn( [
 				'foo' => 'bar',
 				'baz' => 42,
-			] ) );
+			] );
 
 		$this->serializer = new TypedSnakSerializer( $snakSerializer );
 	}

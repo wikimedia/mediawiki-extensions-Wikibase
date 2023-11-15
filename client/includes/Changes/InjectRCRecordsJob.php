@@ -228,7 +228,7 @@ class InjectRCRecordsJob extends Job {
 
 		$titles = [];
 
-		foreach ( $pages as $pageId => list( $namespace, $dbKey ) ) {
+		foreach ( $pages as $pageId => [ $namespace, $dbKey ] ) {
 			$titles[$pageId] = $this->titleFactory->makeTitle( $namespace, $dbKey );
 		}
 

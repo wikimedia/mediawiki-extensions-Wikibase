@@ -77,7 +77,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 	}
 
 	public function testAllNecessaryFormFieldsArePresent_WhenRendered() {
-		list( $html ) = $this->executeSpecialPage();
+		[ $html ] = $this->executeSpecialPage();
 
 		$this->assertHtmlContainsInputWithName( $html, SpecialNewItem::FIELD_LANG );
 		$this->assertHtmlContainsInputWithName( $html, SpecialNewItem::FIELD_LABEL );
@@ -92,7 +92,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 			SpecialNewItem::FIELD_PAGE => 'some-page',
 		];
 
-		list( $html ) = $this->executeSpecialPage( '', new FauxRequest( $getParameters ) );
+		[ $html ] = $this->executeSpecialPage( '', new FauxRequest( $getParameters ) );
 
 		$this->assertHtmlContainsInputWithNameAndValue(
 			$html,
@@ -111,7 +111,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 		$subPagePart2 = 'DescriptionText';
 		$subPage = "{$subPagePart1}/{$subPagePart2}";
 
-		list( $html, ) = $this->executeSpecialPage( $subPage );
+		[ $html ] = $this->executeSpecialPage( $subPage );
 
 		$this->assertHtmlContainsInputWithNameAndValue( $html, SpecialNewItem::FIELD_LABEL, $subPagePart1 );
 		$this->assertHtmlContainsInputWithNameAndValue( $html, SpecialNewItem::FIELD_DESCRIPTION, $subPagePart2 );
@@ -256,7 +256,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 		];
 		$this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
 
-		list( $html ) = $this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
+		[ $html ] = $this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
 
 		$this->assertHtmlContainsErrorMessage( $html, '(wikibase-validator-label-with-description-conflict: label1, en, ' );
 	}
@@ -273,7 +273,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 		];
 		$this->givenSiteWithNoPagesExists( $existingSiteId );
 
-		list( $html ) = $this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
+		[ $html ] = $this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
 
 		$this->assertHtmlContainsErrorMessage( $html, '(wikibase-newitem-no-external-page: existing-site, nonexistent-page)' );
 	}
@@ -290,7 +290,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 		];
 		$this->givenSiteWithWrongGroup( $existingSiteId );
 
-		list( $html ) = $this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
+		[ $html ] = $this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
 
 		$this->assertHtmlContainsErrorMessage( $html, '(wikibase-newitem-not-recognized-siteid)' );
 	}
@@ -328,7 +328,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 	}
 
 	private function assertHtmlContainsErrorTooLongMessage( $formData ) {
-		list( $html ) = $this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
+		[ $html ] = $this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
 
 		$this->assertHtmlContainsErrorMessage( $html, '(htmlform-invalid-input)' );
 	}

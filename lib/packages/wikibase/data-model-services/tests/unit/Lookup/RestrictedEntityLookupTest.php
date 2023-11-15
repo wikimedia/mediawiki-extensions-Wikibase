@@ -26,13 +26,13 @@ class RestrictedEntityLookupTest extends TestCase {
 
 		$entityLookup->expects( $this->any() )
 			->method( 'hasEntity' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$entityLookup->expects( $this->any() )
 			->method( 'getEntity' )
-			->will( $this->returnCallback( static function( EntityId $id ) {
+			->willReturnCallback( static function( EntityId $id ) {
 				return $id->getSerialization();
-			} ) );
+			} );
 
 		return $entityLookup;
 	}

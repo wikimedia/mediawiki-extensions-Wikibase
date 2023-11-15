@@ -50,7 +50,7 @@ abstract class SpecialNewEntityTestCase extends SpecialPageTestBase {
 		$request = new FauxRequest( $formData, true );
 
 		/** @var FauxResponse $webResponse */
-		list( , $webResponse ) = $this->executeSpecialPage( '', $request );
+		[ , $webResponse ] = $this->executeSpecialPage( '', $request );
 
 		$entityId = $this->extractEntityIdFromUrl( $webResponse->getHeader( 'location' ) );
 		$title = WikibaseRepo::getEntityTitleStoreLookup()->getTitleForId( $entityId );
@@ -118,7 +118,7 @@ abstract class SpecialNewEntityTestCase extends SpecialPageTestBase {
 		$request = new FauxRequest( $formData, true );
 
 		/** @var FauxResponse $webResponse */
-		list( $html ) = $this->executeSpecialPage( '', $request );
+		[ $html ] = $this->executeSpecialPage( '', $request );
 
 		$this->assertHtmlContainsErrorMessage( $html, $errorMessageText );
 	}

@@ -275,7 +275,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$cases = $this->getInvalidCases();
 
 		foreach ( $cases as $label => $case ) {
-			list( $entityId, $statement, $error ) = $case;
+			[ $entityId, $statement, $error ] = $case;
 
 			$this->makeRequestAndAssertResult( $statement, $entityId, 1, $label, null, null, $error );
 		}
@@ -453,7 +453,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$resultArray = false;
 
 		try {
-			list( $resultArray, ) = $this->doApiRequestWithToken( $params );
+			[ $resultArray ] = $this->doApiRequestWithToken( $params );
 
 			if ( $error !== null ) {
 				$this->fail( "Did not cause expected error $error" );

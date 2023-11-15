@@ -115,7 +115,7 @@ class SearchEntitiesIntegrationTest extends MediaWikiIntegrationTestCase {
 	 * @param array[] $resultData
 	 */
 	private function assertSameSearchResults( array $resultData, array $expectedIds ) {
-		$this->assertCount( count( $expectedIds ), $resultData['search'] );
+		$this->assertSameSize( $expectedIds, $resultData['search'] );
 
 		foreach ( $expectedIds as $index => $expectedId ) {
 			$this->assertSame( $expectedId, $resultData['search'][$index]['id'] );

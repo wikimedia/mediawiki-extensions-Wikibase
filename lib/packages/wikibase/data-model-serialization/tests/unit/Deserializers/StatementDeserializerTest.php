@@ -28,7 +28,7 @@ class StatementDeserializerTest extends DispatchableDeserializerTest {
 					'snaktype' => 'novalue',
 					'property' => 'P42',
 			] ) )
-			->will( $this->returnValue( new PropertyNoValueSnak( 42 ) ) );
+			->willReturn( new PropertyNoValueSnak( 42 ) );
 
 		$snakListDeserializer = $this->createMock( Deserializer::class );
 		$snakListDeserializer->expects( $this->any() )
@@ -41,15 +41,15 @@ class StatementDeserializerTest extends DispatchableDeserializerTest {
 					],
 				],
 			] ) )
-			->will( $this->returnValue( new SnakList( [
+			->willReturn( new SnakList( [
 				new PropertyNoValueSnak( 42 ),
-			] ) ) );
+			] ) );
 
 		$referenceListDeserializer = $this->createMock( Deserializer::class );
 		$referenceListDeserializer->expects( $this->any() )
 			->method( 'deserialize' )
-			->with( $this->equalTo( [] ) )
-			->will( $this->returnValue( new ReferenceList() ) );
+			->with( [] )
+			->willReturn( new ReferenceList() );
 
 		return new StatementDeserializer(
 			$snakDeserializer,
@@ -283,7 +283,7 @@ class StatementDeserializerTest extends DispatchableDeserializerTest {
 				'snaktype' => 'novalue',
 				'property' => 'P42',
 			] ) )
-			->will( $this->returnValue( new PropertyNoValueSnak( 42 ) ) );
+			->willReturn( new PropertyNoValueSnak( 42 ) );
 
 		$snaksDeserializerMock = $this->createMock( Deserializer::class );
 		$snaksDeserializerMock->expects( $this->any() )
@@ -307,11 +307,11 @@ class StatementDeserializerTest extends DispatchableDeserializerTest {
 					],
 				]
 			) )
-			->will( $this->returnValue( new SnakList( [
+			->willReturn( new SnakList( [
 				new PropertyNoValueSnak( 24 ),
 				new PropertySomeValueSnak( 42 ),
 				new PropertyNoValueSnak( 42 ),
-			] ) ) );
+			] ) );
 
 		$referencesDeserializerMock = $this->createMock( Deserializer::class );
 		$statementDeserializer = new StatementDeserializer(

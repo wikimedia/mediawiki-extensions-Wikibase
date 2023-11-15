@@ -105,7 +105,7 @@ class UsageAspectTransformer {
 		$usages = [];
 
 		foreach ( $aspects as $aspect ) {
-			list( $aspect, $modifier ) = EntityUsage::splitAspectKey( $aspect );
+			[ $aspect, $modifier ] = EntityUsage::splitAspectKey( $aspect );
 
 			$entityUsage = new EntityUsage( $entityId, $aspect, $modifier );
 			$key = $entityUsage->getIdentityString();

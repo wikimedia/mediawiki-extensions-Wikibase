@@ -53,7 +53,7 @@ class JulianDateTimeValueCleaner extends DateTimeValueCleaner {
 	 *  possible
 	 */
 	private function julianDateValue( $dateValue ) {
-		list( $minus, $y, $m, $d, $time ) = $this->parseDateValue( $dateValue );
+		[ $minus, $y, $m, $d, $time ] = $this->parseDateValue( $dateValue );
 
 		$y = $minus ? -$y : $y + 0;
 		// There are some weird overflows happening in the PHP functions before and after this year.
@@ -71,7 +71,7 @@ class JulianDateTimeValueCleaner extends DateTimeValueCleaner {
 			return null;
 		}
 
-		list( $m, $d, $y ) = explode( '/', $gregorian );
+		[ $m, $d, $y ] = explode( '/', $gregorian );
 
 		if ( $this->xsd11 && $y < 0 ) {
 			// To make year match XSD 1.1 we need to bump up the negative years by 1

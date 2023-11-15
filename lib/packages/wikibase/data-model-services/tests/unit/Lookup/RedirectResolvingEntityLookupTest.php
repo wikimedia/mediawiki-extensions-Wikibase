@@ -47,13 +47,13 @@ class RedirectResolvingEntityLookupTest extends TestCase {
 
 		$mock->expects( $this->any() )
 			->method( 'getEntity' )
-			->will( $this->returnCallback( [ $this, 'getEntity' ] ) );
+			->willReturnCallback( [ $this, 'getEntity' ] );
 
 		$mock->expects( $this->any() )
 			->method( 'hasEntity' )
-			->will( $this->returnCallback( function ( EntityId $id ) {
+			->willReturnCallback( function ( EntityId $id ) {
 				return $this->getEntity( $id ) !== null;
-			} ) );
+			} );
 
 		return $mock;
 	}

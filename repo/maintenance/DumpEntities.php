@@ -245,7 +245,8 @@ abstract class DumpEntities extends Maintenance {
 	 * @inheritDoc
 	 */
 	public function finalSetup( SettingsBuilder $settingsBuilder = null ) {
-		global $wgHooks;
+		// phpcs:ignore MediaWiki.Usage.DeprecatedGlobalVariables.Deprecated$wgHooks
+		global $wgHooks; // TODO stop using deprecated variable (T331602)
 
 		parent::finalSetup( $settingsBuilder );
 

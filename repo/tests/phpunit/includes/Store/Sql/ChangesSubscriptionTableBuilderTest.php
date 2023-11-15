@@ -58,7 +58,7 @@ class ChangesSubscriptionTableBuilderTest extends MediaWikiIntegrationTestCase {
 
 		$primer = $this->getChangesSubscriptionTableBuilder( 3, 'standard' );
 		$primer->setProgressReporter( $this->getMessageReporter( $this->exactly( 2 ) ) );
-		$primer->setExceptionHandler( $this->getExceptionHandler( $this->exactly( 0 ) ) );
+		$primer->setExceptionHandler( $this->getExceptionHandler( $this->never() ) );
 
 		$primer->fillSubscriptionTable();
 
@@ -86,7 +86,7 @@ class ChangesSubscriptionTableBuilderTest extends MediaWikiIntegrationTestCase {
 
 		$primer = $this->getChangesSubscriptionTableBuilder( 3, 'verbose' );
 		$primer->setProgressReporter( $this->getMessageReporter( $this->exactly( 4 ) ) );
-		$primer->setExceptionHandler( $this->getExceptionHandler( $this->exactly( 0 ) ) );
+		$primer->setExceptionHandler( $this->getExceptionHandler( $this->never() ) );
 
 		$primer->fillSubscriptionTable( new ItemId( 'Q20' ) );
 
@@ -109,7 +109,7 @@ class ChangesSubscriptionTableBuilderTest extends MediaWikiIntegrationTestCase {
 		$this->db->startAtomic( __METHOD__ );
 
 		foreach ( $entries as $entry ) {
-			list( $itemId, $siteId ) = $entry;
+			[ $itemId, $siteId ] = $entry;
 			$this->db->insert( 'wb_items_per_site', [
 				'ips_item_id' => (int)$itemId,
 				'ips_site_id' => $siteId,

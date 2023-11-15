@@ -338,7 +338,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	private function unserialize( $string, $default, array $loggingContext ) {
 		$result = json_decode( $string );
 
-		list( $signatureToCheck, $data ) = $result;
+		[ $signatureToCheck, $data ] = $result;
 		$correctSignature = hash_hmac( 'sha256', $data, $this->secret );
 		$hashEquals = hash_equals( $correctSignature, $signatureToCheck );
 		if ( !$hashEquals ) {

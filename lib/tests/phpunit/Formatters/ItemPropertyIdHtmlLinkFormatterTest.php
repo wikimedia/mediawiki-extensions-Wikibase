@@ -112,7 +112,7 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 			$result,
 			is( htmlPiece( havingDirectChild(
 				tagMatchingOutline( "<a href=\"{$expectedUrl}\"/>" ) )
-		) ) );
+			) ) );
 	}
 
 	public function testItemHasLabelInUserLanguage_ResultingLinkHasLabelAsAText() {
@@ -254,7 +254,7 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 			is( htmlPiece( havingChild(
 				both( withAttribute( 'href' )->havingValue( $isFullUrl ) )
 					->andAlso( withAttribute( 'title' )->havingValue( 'foo:Q1' ) )
-	   ) ) ) );
+			) ) ) );
 	}
 
 	public function testGivenItemIsRedirect_ResultHasRedirectCssClass() {

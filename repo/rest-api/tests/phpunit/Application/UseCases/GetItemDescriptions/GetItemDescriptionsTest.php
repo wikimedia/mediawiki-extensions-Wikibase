@@ -85,7 +85,7 @@ class GetItemDescriptionsTest extends TestCase {
 			);
 
 			$this->fail( 'Exception was not thrown.' );
-		}  catch ( UseCaseException $e ) {
+		} catch ( UseCaseException $e ) {
 			$this->assertSame( $expectedException, $e );
 		}
 	}

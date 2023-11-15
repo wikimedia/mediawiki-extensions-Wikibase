@@ -119,7 +119,7 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 
 	public function testAllNeededFieldsArePresent_WhenRendered() {
 
-		list( $output ) = $this->executeSpecialPage();
+		[ $output ] = $this->executeSpecialPage();
 
 		$this->assertHtmlContainsInputWithName( $output, 'site' );
 		$this->assertHtmlContainsInputWithName( $output, 'page' );
@@ -129,7 +129,7 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 	public function testSiteAndPageFieldsAreFilledIn_WhenRenderedWithSubpageReferingToNonexistentTitle() {
 		$wiki = 'non_existent_wiki';
 		$page = 'AnyPage';
-		list( $output ) = $this->executeSpecialPage( $wiki . '/' . $page );
+		[ $output ] = $this->executeSpecialPage( $wiki . '/' . $page );
 
 		$this->assertHtmlContainsInputWithNameAndValue( $output, 'site', $wiki );
 		$this->assertHtmlContainsInputWithNameAndValue( $output, 'page', $page );
@@ -141,7 +141,7 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 		$subPage = self::EXISTING_WIKI . '/' . self::EXISTING_PAGE;
 
 		/** @var WebResponse $response */
-		list( , $response ) = $this->executeSpecialPage( $subPage );
+		[ , $response ] = $this->executeSpecialPage( $subPage );
 
 		$itemUrl = Title::newFromTextThrow( $itemId )->getFullURL();
 		$expectedUrl = wfExpandUrl( $itemUrl, PROTO_CURRENT );

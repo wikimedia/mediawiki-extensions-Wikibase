@@ -38,7 +38,7 @@ class ContentTypeCheckMiddleware implements Middleware {
 	}
 
 	private function getContentType( RequestInterface $request ): string {
-		list( $ct ) = explode( ';', $request->getHeaderLine( 'Content-Type' ), 2 );
+		[ $ct ] = explode( ';', $request->getHeaderLine( 'Content-Type' ), 2 );
 
 		return strtolower( trim( $ct ) );
 	}

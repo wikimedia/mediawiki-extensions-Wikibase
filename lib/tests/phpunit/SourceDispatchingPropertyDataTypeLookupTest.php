@@ -22,9 +22,9 @@ use Wikibase\Lib\SourceDispatchingPropertyDataTypeLookup;
  */
 class SourceDispatchingPropertyDataTypeLookupTest extends TestCase {
 
-/**
- * @var MockObject|EntitySourceLookup
- */
+	/**
+	 * @var MockObject|EntitySourceLookup
+	 */
 	private $entitySourceLookup;
 
 	/**

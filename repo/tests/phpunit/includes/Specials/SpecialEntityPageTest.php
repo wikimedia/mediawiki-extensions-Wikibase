@@ -76,7 +76,7 @@ class SpecialEntityPageTest extends SpecialPageTestBase {
 		$request = new FauxRequest( $requestParams );
 
 		/** @var FauxResponse $response */
-		list( , $response ) = $this->executeSpecialPage( $subPage, $request );
+		[ , $response ] = $this->executeSpecialPage( $subPage, $request );
 
 		$this->assertSame( 301, $response->getStatusCode() );
 		$this->assertSame( self::LOCAL_ENTITY_PAGE_URL, $response->getHeader( 'Location' ) );
@@ -101,7 +101,7 @@ class SpecialEntityPageTest extends SpecialPageTestBase {
 		$request = new FauxRequest( $arguments );
 
 		/** @var FauxResponse $response */
-		list( , $response ) = $this->executeSpecialPage( 'Q100', $request );
+		[ , $response ] = $this->executeSpecialPage( 'Q100', $request );
 
 		$this->assertSame( 301, $response->getStatusCode() );
 		$expectedUrl = self::LOCAL_ENTITY_PAGE_URL . $expectedUrlSuffix;
@@ -167,7 +167,7 @@ class SpecialEntityPageTest extends SpecialPageTestBase {
 	public function testGivenNoEntityId_pageShowsHelpMessage( $subPage, array $requestParams = [] ) {
 		$request = new FauxRequest( $requestParams );
 
-		list( $output, ) = $this->executeSpecialPage( $subPage, $request );
+		[ $output ] = $this->executeSpecialPage( $subPage, $request );
 
 		$this->assertStringContainsString( '(wikibase-entitypage-text)', $output );
 	}

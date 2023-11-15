@@ -147,7 +147,7 @@ class RemoveQualifiersTest extends WikibaseApiTestCase {
 			'qualifiers' => implode( '|', $hashes ),
 		];
 
-		list( $resultArray, ) = $this->doApiRequestWithToken( $params );
+		[ $resultArray ] = $this->doApiRequestWithToken( $params );
 
 		$this->assertIsArray( $resultArray, 'top level element is an array' );
 		$this->assertArrayHasKey( 'pageinfo', $resultArray, 'top level element has a pageinfo key' );

@@ -226,7 +226,7 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 				'labels' => [
 				'en' => [ 'language' => 'en', 'value' => 'bar' ],
 				'de' => [ 'language' => 'de', 'value' => 'berlin' ],
-			],
+				],
 				'aliases' => [ 'en' => [ [ 'language' => 'en', 'value' => 'foo' ] ] ],
 			],
 			[ 'label' ],

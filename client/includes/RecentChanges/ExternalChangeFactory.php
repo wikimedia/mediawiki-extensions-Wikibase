@@ -152,7 +152,7 @@ class ExternalChangeFactory {
 			throw new UnexpectedValueException( '$type must be a string.' );
 		}
 
-		list( , $changeType ) = explode( '~', $type, 2 );
+		[ , $changeType ] = explode( '~', $type, 2 );
 
 		return $changeType;
 	}

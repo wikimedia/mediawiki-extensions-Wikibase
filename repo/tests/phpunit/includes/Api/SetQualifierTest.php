@@ -224,7 +224,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 	}
 
 	protected function makeValidRequest( array $params ): array {
-		list( $resultArray, ) = $this->doApiRequestWithToken( $params );
+		[ $resultArray ] = $this->doApiRequestWithToken( $params );
 
 		$this->assertIsArray( $resultArray, 'top level element is an array' );
 		$this->assertArrayHasKey( 'pageinfo', $resultArray, 'top level element has a pageinfo key' );

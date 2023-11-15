@@ -47,7 +47,7 @@ class SiteLinksChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 		$entityLookupMock = $this->createStub( EntityLookup::class );
 		if ( $item !== null ) {
 			$entityLookupMock->method( 'getEntity' )
-				->with( $this->equalTo( $item->getId() ) )
+				->with( $item->getId() )
 				->willReturn( $item );
 		}
 
@@ -257,8 +257,8 @@ class SiteLinksChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 		$pageNormalizer->expects( $this->once() )->method( 'normalize' )
 			->with(
 				$this->anything(),
-				$this->equalTo( $pageTitle ),
-				$this->equalTo( [ self::BADGE_ITEM_ID ] )
+				$pageTitle,
+				[ self::BADGE_ITEM_ID ]
 			)
 			->willReturn( $pageTitle );
 		$deserializer = new SiteLinksChangeOpDeserializer(
@@ -309,14 +309,14 @@ class SiteLinksChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 		$item = $this->getItemWithSiteLink();
 		$entityLookupMock = $this->createMock( EntityLookup::class );
 		$entityLookupMock->expects( $this->once() )->method( 'getEntity' )
-			->with( $this->equalTo( $item->getId() ) )
+			->with( $item->getId() )
 			->willReturn( $item );
 
 		$siteLinkChangeOpFactoryMock = $this->createMock( SiteLinkChangeOpFactory::class );
 		$siteLinkChangeOpFactoryMock->expects( $this->once() )->method( 'newSetSiteLinkOp' )->with(
-			$this->equalTo( self::SITE_ID ),
-			$this->equalTo( self::SITE_LINK_TITLE ),
-			$this->equalTo( [ new ItemId( self::BADGE_ITEM_ID ) ] )
+			self::SITE_ID,
+			self::SITE_LINK_TITLE,
+			[ new ItemId( self::BADGE_ITEM_ID ) ]
 		)->willReturn( new ChangeOpSiteLink( self::SITE_ID, self::SITE_LINK_TITLE, [ new ItemId( self::BADGE_ITEM_ID ) ] ) );
 
 		$deserializer = new SiteLinksChangeOpDeserializer(

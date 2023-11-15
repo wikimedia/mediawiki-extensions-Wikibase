@@ -258,10 +258,10 @@ class UpdateRepoOnMoveJobTest extends MediaWikiIntegrationTestCase {
 
 		$unresolvedRedirectionException = new UnresolvedEntityRedirectException( new ItemId( 'Q123' ), new ItemId( 'Q42' ) );
 		$this->entityLookup->method( 'getEntity' )
-			->will( $this->onConsecutiveCalls(
+			->willReturnOnConsecutiveCalls(
 				$this->throwException( $unresolvedRedirectionException ),
 				$redirectedItem
-			) );
+			);
 
 		$mockRepository->saveEntity( $item, 'UpdateRepoOnDeleteJobTest', $user, EDIT_NEW );
 		$mockRepository->saveEntity( $redirectedItem, 'UpdateRepoOnDeleteJobTest', $user, EDIT_NEW );

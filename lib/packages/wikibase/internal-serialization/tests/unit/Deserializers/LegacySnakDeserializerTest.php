@@ -32,7 +32,7 @@ class LegacySnakDeserializerTest extends \PHPUnit\Framework\TestCase {
 		$dataValueDeserializer->expects( $this->any() )
 			->method( 'deserialize' )
 			->with( $this->equalTo( [ 'type' => 'string', 'value' => 'foo' ] ) )
-			->will( $this->returnValue( new StringValue( 'foo' ) ) );
+			->willReturn( new StringValue( 'foo' ) );
 
 		$this->deserializer = new LegacySnakDeserializer( $dataValueDeserializer );
 	}

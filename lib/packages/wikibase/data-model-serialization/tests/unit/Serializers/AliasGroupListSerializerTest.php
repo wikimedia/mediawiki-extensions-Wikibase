@@ -28,9 +28,9 @@ class AliasGroupListSerializerTest extends TestCase {
 		$aliasGroupSerializer = $this->createMock( Serializer::class );
 		$aliasGroupSerializer->expects( $this->any() )
 			->method( 'serialize' )
-			->will( $this->returnCallback( static function( AliasGroup $aliasGroup ) {
+			->willReturnCallback( static function( AliasGroup $aliasGroup ) {
 				return $aliasGroup->getAliases();
-			} ) );
+			} );
 
 		return new AliasGroupListSerializer( $aliasGroupSerializer, $useObjectsForMaps );
 	}

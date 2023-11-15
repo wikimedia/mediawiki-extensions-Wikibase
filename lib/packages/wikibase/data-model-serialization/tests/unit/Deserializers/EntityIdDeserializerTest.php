@@ -21,8 +21,8 @@ class EntityIdDeserializerTest extends TestCase {
 		$entityIdParserMock = $this->createMock( EntityIdParser::class );
 		$entityIdParserMock->expects( $this->any() )
 			->method( 'parse' )
-			->with( $this->equalTo( 'Q42' ) )
-			->will( $this->returnValue( new ItemId( 'Q42' ) ) );
+			->with( 'Q42' )
+			->willReturn( new ItemId( 'Q42' ) );
 
 		return new EntityIdDeserializer( $entityIdParserMock );
 	}
@@ -69,7 +69,7 @@ class EntityIdDeserializerTest extends TestCase {
 		$entityIdParserMock = $this->createMock( EntityIdParser::class );
 		$entityIdParserMock->expects( $this->any() )
 			->method( 'parse' )
-			->will( $this->throwException( new EntityIdParsingException() ) );
+			->willThrowException( new EntityIdParsingException() );
 		$entityIdDeserializer = new EntityIdDeserializer( $entityIdParserMock );
 
 		$this->expectException( DeserializationException::class );

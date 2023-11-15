@@ -28,9 +28,9 @@ class FilteringStatementGrouperTest extends TestCase {
 
 		$filter->expects( $this->any() )
 			->method( 'statementMatches' )
-			->will( $this->returnCallback( static function( Statement $statement ) use ( $propertyId ) {
+			->willReturnCallback( static function( Statement $statement ) use ( $propertyId ) {
 				return $statement->getPropertyId()->getSerialization() === $propertyId;
-			} ) );
+			} );
 
 		return $filter;
 	}

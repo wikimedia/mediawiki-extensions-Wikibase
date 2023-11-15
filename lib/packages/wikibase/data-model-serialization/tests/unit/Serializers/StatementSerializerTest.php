@@ -24,32 +24,32 @@ class StatementSerializerTest extends DispatchableSerializerTest {
 		$snakSerializerFake = $this->createMock( Serializer::class );
 		$snakSerializerFake->expects( $this->any() )
 			->method( 'serialize' )
-			->will( $this->returnValue( [
+			->willReturn( [
 				'snaktype' => 'novalue',
 				'property' => "P42",
-			] ) );
+			] );
 
 		$snaksSerializerFake = $this->createMock( Serializer::class );
 		$snaksSerializerFake->expects( $this->any() )
 			->method( 'serialize' )
-			->will( $this->returnValue( [
+			->willReturn( [
 				'P42' => [
 					[
 						'snaktype' => 'novalue',
 						'property' => 'P42',
 					],
 				],
-			] ) );
+			] );
 
 		$referencesSerializerFake = $this->createMock( Serializer::class );
 		$referencesSerializerFake->expects( $this->any() )
 			->method( 'serialize' )
-			->will( $this->returnValue( [
+			->willReturn( [
 				[
 					'hash' => 'da39a3ee5e6b4b0d3255bfef95601890afd80709',
 					'snaks' => [],
 				],
-			] ) );
+			] );
 
 		return new StatementSerializer(
 			$snakSerializerFake,
@@ -208,15 +208,15 @@ class StatementSerializerTest extends DispatchableSerializerTest {
 		$snakSerializerMock = $this->createMock( Serializer::class );
 		$snakSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
-			->will( $this->returnValue( [
+			->willReturn( [
 				'snaktype' => 'novalue',
 				'property' => 'P42',
-			] ) );
+			] );
 
 		$snaksSerializerMock = $this->createMock( Serializer::class );
 		$snaksSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$referencesSerializerMock = $this->createMock( Serializer::class );
 		$statementSerializer = new StatementSerializer(

@@ -19,7 +19,7 @@ class EscapingEntityIdFormatterTest extends TestCase {
 		$entityIdFormatter = $this->createMock( EntityIdFormatter::class );
 		$entityIdFormatter->expects( $this->once() )
 			->method( 'formatEntityId' )
-			->will( $this->returnValue( 'Q1 is &%$;§ > Q2' ) );
+			->willReturn( 'Q1 is &%$;§ > Q2' );
 
 		$formatter = new EscapingEntityIdFormatter( $entityIdFormatter, 'htmlspecialchars' );
 		$value = new ItemId( 'Q1' );

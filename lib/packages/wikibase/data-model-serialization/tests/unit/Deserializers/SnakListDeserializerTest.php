@@ -26,7 +26,7 @@ class SnakListDeserializerTest extends TestCase {
 					'snaktype' => 'novalue',
 					'property' => 'P42',
 			] ) )
-			->will( $this->returnValue( new PropertyNoValueSnak( 42 ) ) );
+			->willReturn( new PropertyNoValueSnak( 42 ) );
 
 		return new SnakListDeserializer( $snakDeserializerMock );
 	}

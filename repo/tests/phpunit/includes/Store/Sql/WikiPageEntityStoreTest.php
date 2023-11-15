@@ -185,7 +185,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 		 * @var WikiPageEntityStore $store
 		 * @var EntityRevisionLookup $lookup
 		 */
-		list( $store, $lookup ) = $this->createStoreAndLookup();
+		[ $store, $lookup ] = $this->createStoreAndLookup();
 		$user = $this->getTestUser()->getUser();
 
 		// register mock watcher
@@ -233,7 +233,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 
 	public function testSaveEntity_invalidContent() {
 		/** @var WikiPageEntityStore $store */
-		list( $store, ) = $this->createStoreAndLookup();
+		[ $store ] = $this->createStoreAndLookup();
 		$store = TestingAccessWrapper::newFromObject( $store );
 
 		$user = $this->getTestUser()->getUser();
@@ -300,7 +300,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 	 */
 	public function testSaveEntityError( EntityDocument $entity, $flags, $baseRevId, $error ) {
 		/** @var WikiPageEntityStore $store */
-		list( $store, ) = $this->createStoreAndLookup();
+		[ $store ] = $this->createStoreAndLookup();
 		$user = $this->getTestUser()->getUser();
 
 		// setup target item
@@ -346,7 +346,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 		 * @var WikiPageEntityStore $store
 		 * @var EntityRevisionLookup $lookup
 		 */
-		list( $store, $lookup ) = $this->createStoreAndLookup();
+		[ $store, $lookup ] = $this->createStoreAndLookup();
 		$user = $this->getTestUser()->getUser();
 
 		// register mock watcher
@@ -369,7 +369,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 
 	public function testSaveRedirect() {
 		/** @var WikiPageEntityStore $store */
-		list( $store, ) = $this->createStoreAndLookup();
+		[ $store ] = $this->createStoreAndLookup();
 		$user = $this->getTestUser()->getUser();
 
 		// register mock watcher
@@ -459,7 +459,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 	 */
 	public function testSaveRedirectFailure( EntityRedirect $redirect ) {
 		/** @var WikiPageEntityStore $store */
-		list( $store, ) = $this->createStoreAndLookup();
+		[ $store ] = $this->createStoreAndLookup();
 		$user = $this->getTestUser()->getUser();
 
 		$this->expectException( StorageException::class );
@@ -471,7 +471,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 		 * @var WikiPageEntityStore $store
 		 * @var EntityRevisionLookup $lookup
 		 */
-		list( $store, $lookup ) = $this->createStoreAndLookup();
+		[ $store, $lookup ] = $this->createStoreAndLookup();
 
 		$anonUser = User::newFromId( 0 );
 		$anonUser->setName( '127.0.0.1' );
@@ -536,7 +536,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 
 	public function testUpdateWatchlist() {
 		/** @var WikiPageEntityStore $store */
-		list( $store, ) = $this->createStoreAndLookup();
+		[ $store ] = $this->createStoreAndLookup();
 
 		$user = User::newFromName( "WikiPageEntityStoreTestUser2" );
 
@@ -558,7 +558,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 
 	public function testUpdateWatchlist_withoutWatchlistRights() {
 		/** @var WikiPageEntityStore $store */
-		list( $store, ) = $this->createStoreAndLookup();
+		[ $store ] = $this->createStoreAndLookup();
 
 		$user = User::newFromName( "WikiPageEntityStoreTestUser2" );
 
@@ -632,7 +632,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 
 	public function testSaveFlags() {
 		/** @var WikiPageEntityStore $store */
-		list( $store, ) = $this->createStoreAndLookup();
+		[ $store ] = $this->createStoreAndLookup();
 
 		$entity = $this->newEntity();
 		$prefix = get_class( $this ) . '/';
@@ -775,7 +775,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 
 	public function testRepeatedSave() {
 		/** @var WikiPageEntityStore $store */
-		list( $store, ) = $this->createStoreAndLookup();
+		[ $store ] = $this->createStoreAndLookup();
 
 		$entity = $this->newEntity();
 		$prefix = get_class( $this ) . '/';
@@ -820,7 +820,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 		 * @var WikiPageEntityStore $store
 		 * @var EntityRevisionLookup $lookup
 		 */
-		list( $store, $lookup ) = $this->createStoreAndLookup();
+		[ $store, $lookup ] = $this->createStoreAndLookup();
 		$user = $this->getTestUser()->getUser();
 
 		// register mock watcher

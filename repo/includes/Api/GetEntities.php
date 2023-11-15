@@ -248,7 +248,7 @@ class GetEntities extends ApiBase {
 		if ( !empty( $params['sites'] ) && !empty( $params['titles'] ) ) {
 			$entityByTitleHelper = $this->getItemByTitleHelper();
 
-			list( $ids, $missingItems ) = $entityByTitleHelper->getEntityIds(
+			[ $ids, $missingItems ] = $entityByTitleHelper->getEntityIds(
 				$params['sites'],
 				$params['titles'],
 				$params['normalize']
@@ -346,7 +346,7 @@ class GetEntities extends ApiBase {
 		if ( $entityRevision === null ) {
 			$this->resultBuilder->addMissingEntity( $sourceEntityId, [ 'id' => $sourceEntityId ] );
 		} else {
-			list( $languageCodeFilter, $fallbackChains ) = $this->getLanguageCodesAndFallback( $params );
+			[ $languageCodeFilter, $fallbackChains ] = $this->getLanguageCodesAndFallback( $params );
 			$this->resultBuilder->addEntityRevision(
 				$sourceEntityId,
 				$entityRevision,
