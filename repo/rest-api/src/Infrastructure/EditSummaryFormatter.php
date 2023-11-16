@@ -47,6 +47,8 @@ class EditSummaryFormatter {
 					return $this->newSummaryForLabelEdit( $editSummary, 'add' );
 				case EditSummary::REPLACE_ACTION:
 					return $this->newSummaryForLabelEdit( $editSummary, 'set' );
+				case EditSummary::REMOVE_ACTION:
+					return new Summary();
 			}
 		} elseif ( $editSummary instanceof DescriptionsEditSummary ) {
 			return $this->summaryConverter->convertDescriptionsEditSummary( $editSummary );

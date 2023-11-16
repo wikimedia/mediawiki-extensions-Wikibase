@@ -1,1 +1,7 @@
-[ ]
+[
+	{
+		"path": "/wikibase/v0/entities/items/{item_id}/labels/{language_code}",
+		"method": "DELETE",
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\RemoveItemLabelRouteHandler::factory"
+	}
+]

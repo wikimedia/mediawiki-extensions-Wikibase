@@ -27,6 +27,10 @@ class LabelEditSummary implements EditSummary {
 		return new self( self::REPLACE_ACTION, $userComment, $term );
 	}
 
+	public static function newRemoveSummary( ?string $userComment, Term $label ): self {
+		return new self( self::REMOVE_ACTION, $userComment, $label );
+	}
+
 	public function getEditAction(): string {
 		return $this->editAction;
 	}
