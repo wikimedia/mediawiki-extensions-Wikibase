@@ -51,7 +51,7 @@
 	"wikibase-rc-hide-wikidata-show": "Diskouez",
 	"wikibase-rc-show-wikidata-pref": "Diskouez kemmoù {{WBREPONAME}} er c'hemmoù diwezhañ",
 	"wikibase-rc-wikibase-edit-letter": "R",
-	"wikibase-rc-wikibase-edit-title": "Ur c'hemm gant Wikiroadennoù",
+	"wikibase-rc-wikibase-edit-title": "Kemm gant {{WBREPONAME}}",
 	"wikibase-rcfilters-hide-wikibase-label": "Kemmoù eus {{WBREPONAME}}",
 	"wikibase-rcfilters-hide-wikibase-description": "Kemmoù a zeu eus {{WBREPONAME}}.",
 	"wikibase-replicationnote": "Notit mat e c'hall padout meur a vunutenn a-raok d'ar c'hemmoù dont war wel war an holl wikioù.",
