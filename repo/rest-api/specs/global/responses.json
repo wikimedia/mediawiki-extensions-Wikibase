@@ -1,4 +1,23 @@
 {
+	"LabelDeleted": {
+		"description": "The resource was deleted",
+		"headers": {
+			"Content-Language": {
+				"description": "Language code of the language in which response is provided",
+				"schema": {
+					"type": "string"
+				}
+			}
+		},
+		"content": {
+			"application/json": {
+				"schema": {
+					"type": "string"
+				},
+				"example": "Label deleted"
+			}
+		}
+	},
 	"DescriptionDeleted": {
 		"description": "The resource was deleted",
 		"headers": {
@@ -750,6 +769,26 @@
 					"label-description-same-value": {
 						"$ref": "./examples.json#/LabelDescriptionSameValueExample"
 					},
+					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
+	"InvalidRemoveItemLabelInput": {
+		"description": "The request cannot be processed",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/ContextError" },
+				"examples": {
+					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
+					"invalid-language-code": { "$ref": "./examples.json#/InvalidLanguageCodeExample" },
 					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" }
 				}
