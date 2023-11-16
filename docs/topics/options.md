@@ -250,9 +250,8 @@ EXAMPLE: On wikidata.org, this is set to `P1921`, a string property named “URI
 ### Dispatching
 
 #### localClientDatabases {#client_localClientDatabases}
-An array of locally accessible client databases, for use by the dispatchChanges.php script.
+An array of locally accessible client databases, for use by @ref docs_topics_change-propagation.
 
-See @ref docs_topics_change-propagation
 This setting determines to which wikis changes are pushed directly.
 It must be given either as an associative array, mapping site global IDs to logical database names, or, of the database names are the same as the site global IDs, as a list of databases.
 
@@ -732,7 +731,7 @@ DEFAULT: Everything in the Wikibase [siteLinkGroups] setting.
 #### injectRecentChanges {#client_injectRecentChanges}
 Whether changes on the repository should be injected into this wiki's recent changes table, so they show up on watchlists, etc.
 
-Requires the dispatchChanges.php script to run, and this wiki to be listed in the [localClientDatabases] setting on the repository.
+Requires this wiki to be listed in the [localClientDatabases] setting on the repository.
 See @ref docs_topics_change-propagation
 
 #### showExternalRecentChanges
