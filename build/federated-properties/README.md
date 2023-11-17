@@ -72,7 +72,7 @@ cd extensions/Wikibase/build/federated-properties
 make setup && make cloud
 ```
 
-`cloud` can be replaced with another instance identifer (see the Makefile).
+`cloud` can be replaced with another instance identifier (see the Makefile).
 
 ### Local VM
 

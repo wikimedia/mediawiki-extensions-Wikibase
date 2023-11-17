@@ -1,4 +1,4 @@
-* Run fillowing query in https://query.wikidata.org/
+* Run following query in https://query.wikidata.org/
 
 ```
 SELECT ?entity
@@ -15,7 +15,7 @@ WHERE
 
 * Download results as CSV and put them in the same directory with `test_wd_entity_page_performance.jmx` file.
 * Open `test_wd_entity_page_performance.jmx` with Apache JMeter and click "Start" button. 
-  Wait untill it finishes.
+  Wait until it finishes.
   Look at "Summary Report" in the left tree.
 
 **Note:** Select part of SPARQL query should be exactly `SELECT ?entity`, otherwise CSV file will be generated with different header and parsing script won't work correctly. 

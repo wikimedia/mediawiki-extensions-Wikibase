@@ -29,7 +29,7 @@ To ensure this compatibility there are two options:
 
 Doing the backporting results in leaving a possibly unknown amount of work for whoever is to make the release and adds lots of uncertainty.
 The additional backporting effort will need to be repeated for all upcoming Wikibase releases.
-This approach also means maintaing two different (even if only in the sense of git history) versions of the same functionality.
+This approach also means maintaining two different (even if only in the sense of git history) versions of the same functionality.
 
 Keeping Wikibase compatible with last stable MediaWiki adds to every developer's workload.
 It may result in having to delay using new features in MediaWiki or having to write a compatibility layer in order to use them.

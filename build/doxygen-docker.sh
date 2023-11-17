@@ -9,10 +9,10 @@
 
 echo "This script deliberately hides some Doxygen errors."
 
-# GREP #1, Ignore PHP file unknown commands as most of these are due to PHP namepsaces being used in comments
+# GREP #1, Ignore PHP file unknown commands as most of these are due to PHP namespaces being used in comments
 # GREP #2, Ignore PHP file comments with {@link CLASS} as this still generates the correct link in doxygen and
 #          and the @link is needed for clickable links in IDEs
-# GREP #3, Ignore erorrs caused by @var annotations without declaring the name of the var (only the type)
+# GREP #3, Ignore errors caused by @var annotations without declaring the name of the var (only the type)
 # GREP #4, Ignore doxygen trying to parse mediawiki parser functions like {{#property}} which we have in docs
 docker run --rm -v $(pwd):/src --user $(id -u):$(id -g) --entrypoint=doxygen --workdir=/src docker-registry.wikimedia.org/releng/doxygen:latest \
 |& grep -v -w -E -i "php:[0-9]+: warning: Found unknown command" \

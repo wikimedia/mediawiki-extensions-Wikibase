@@ -76,7 +76,7 @@ but with a setup that also extracts them as a separate Git repository
 This removes a source of uncertainty for new projects.
 
 Publishing these packages as separate repositories to GitHub is done for the following benfits:
-* being able to see their isolated history and contributers, e.g. [wikibase changes contributors][]
+* being able to see their isolated history and contributors, e.g. [wikibase changes contributors][]
 * being able to run their tests in CI in isolation without surrounding Wikibase code being present, e.g. [wikibase changes Travis CI][]
 
 [mediawiki/vendor]: https://gerrit.wikimedia.org/g/mediawiki/vendor/

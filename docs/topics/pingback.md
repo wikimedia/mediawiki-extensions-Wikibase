@@ -8,7 +8,7 @@ The pingback will be sent once Wikibase has been installed and will after that s
 
 ## Configuration
 
-By default the pingback mechanism is disabled on new installtions. To enable the pingback set the `wikibasePingback` setting to true for your repository.
+By default the pingback mechanism is disabled on new installations. To enable the pingback set the `wikibasePingback` setting to true for your repository.
 
 ```php
 $wgWBRepoSettings['wikibasePingback'] = true;

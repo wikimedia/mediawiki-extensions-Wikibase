@@ -43,7 +43,7 @@ class ViewContent {
 	 * meta data for single placeholders (e.g. wikibase-terms-list-item)
 	 * as well as
 	 * some placeholder record keeping (e.g. wikibase-view-chunks)
-	 * which would better be depicted as a hierarchie than a group of peers
+	 * which would better be depicted as a hierarchy than a group of peers
 	 *
 	 * @return array
 	 */
