@@ -97,7 +97,6 @@
 		}
 	},
 	"DescriptionsPatch": {
-		"description": "Payload containing a JSON Patch document to be applied to an Item's descriptions and edit metadata",
 		"required": true,
 		"content": {
 			"application/json-patch+json": {
