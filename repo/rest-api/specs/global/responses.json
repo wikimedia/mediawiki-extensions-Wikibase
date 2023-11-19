@@ -1021,7 +1021,7 @@
 			}
 		}
 	},
-	"InvalidPatchedDescriptions": {
+	"InvalidPatchedItemDescriptions": {
 		"description": "Applying the provided JSON Patch results in invalid descriptions",
 		"content": {
 			"application/json": {
@@ -1038,6 +1038,31 @@
 					},
 					"patched-item-label-description-duplicate": {
 						"$ref": "./examples.json#/PatchedItemLabelDescriptionDuplicateExample"
+					}
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
+	"InvalidPatchedPropertyDescriptions": {
+		"description": "Applying the provided JSON Patch results in invalid descriptions",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/ContextError" },
+				"examples": {
+					"patched-descriptions-invalid-language-code": {
+						"$ref": "./examples.json#/PatchedDescriptionsInvalidLanguageCodeExample"
+					},
+					"patched-description-empty": { "$ref": "./examples.json#/PatchedDescriptionEmptyExample" },
+					"patched-description-too-long": { "$ref": "./examples.json#/PatchedDescriptionTooLongExample" },
+					"patched-description-invalid": { "$ref": "./examples.json#/PatchedDescriptionInvalidExample" },
+					"patched-property-label-description-same-value": {
+						"$ref": "./examples.json#/PatchedPropertyLabelDescriptionSameValueExample"
 					}
 				}
 			}
