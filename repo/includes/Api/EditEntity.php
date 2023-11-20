@@ -190,7 +190,7 @@ class EditEntity extends ModifyEntity {
 					->onNonexistentEntity( $returnFalse )
 					->map();
 
-				if ( !$baseRevId === $latestRevision ) {
+				if ( $baseRevId !== $latestRevision ) {
 					$this->errorReporter->dieError(
 						'Tried to clear entity using baserevid of entity not equal to current revision',
 						'editconflict'
