@@ -120,10 +120,6 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 				return [ 'de' ];
 			case 'ii':
 				return [ 'zh-cn', 'zh-hans' ];
-			case 'kk':
-				return [ 'kk-cyrl' ];
-			case 'kk-cn':
-				return [ 'kk-arab', 'kk-cyrl' ];
 			case 'lzh':
 				return []; // actually [ 'zh-hant' ] as of 2022-01-24
 			case 'nl-informal': // added 2022-01-24
@@ -270,19 +266,6 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 				],
 			],
 
-			[
-				'languageCode' => 'kk',
-				'expected' => [
-					'kk',
-					[ 'kk', 'kk-cyrl' ],
-					[ 'kk', 'kk-latn' ],
-					[ 'kk', 'kk-arab' ],
-					[ 'kk', 'kk-kz' ],
-					[ 'kk', 'kk-tr' ],
-					[ 'kk', 'kk-cn' ],
-					'en',
-				],
-			],
 			[
 				'languageCode' => '⧼Lang⧽',
 				'expected' => [ 'en' ],
@@ -467,8 +450,7 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 			[
 				'babel' => [
 					'N' => [ 'en', 'de-formal', 'zh', 'zh-cn' ],
-					'4' => [ 'kk-cn' ],
-					'2' => [ 'zh-hk', 'kk' ],
+					'2' => [ 'zh-hk' ],
 				],
 				'expected' => [
 					'en',
@@ -482,13 +464,6 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 					[ 'zh', 'zh-sg' ],
 					[ 'zh', 'zh-mo' ],
 					[ 'zh', 'zh-my' ],
-					'kk-cn',
-					[ 'kk-cn', 'kk' ],
-					[ 'kk-cn', 'kk-cyrl' ],
-					[ 'kk-cn', 'kk-latn' ],
-					[ 'kk-cn', 'kk-arab' ],
-					[ 'kk-cn', 'kk-kz' ],
-					[ 'kk-cn', 'kk-tr' ],
 					'de',
 				],
 			],
