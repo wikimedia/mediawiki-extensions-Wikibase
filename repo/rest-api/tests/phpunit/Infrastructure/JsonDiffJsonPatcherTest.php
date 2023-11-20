@@ -29,7 +29,7 @@ class JsonDiffJsonPatcherTest extends TestCase {
 	public function testPatch( array $target, array $patch, $expected ): void {
 		$result = ( new JsonDiffJsonPatcher() )->patch( $target, $patch );
 
-		$this->assertEquals( $expected, $result );
+		$this->assertSame( $expected, $result );
 	}
 
 	public static function validPatchProvider(): Generator {
@@ -39,10 +39,16 @@ class JsonDiffJsonPatcherTest extends TestCase {
 			[ 'foo' => 'bar', 'baz' => 42, 'new' => 'value' ],
 		];
 
-		yield 'replace a field' => [
+		yield 'replace an object field' => [
 			[ 'foo' => 'bar', 'baz' => 42 ],
 			[ [ 'op' => 'replace', 'path' => '/foo', 'value' => 'patched' ] ],
-			[ 'foo' => 'patched', 'baz' => 42 ],
+			[ 'baz' => 42, 'foo' => 'patched' ],
+		];
+
+		yield 'replace a list item' => [
+			[ 'foo', 'bar', 'baz' ],
+			[ [ 'op' => 'replace', 'path' => '/1', 'value' => 'patched' ] ],
+			[ 'foo', 'patched', 'baz' ],
 		];
 
 		yield 'remove a field' => [
