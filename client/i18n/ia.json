@@ -38,7 +38,7 @@
 	"wikibase-linkitem-confirmitem-button": "Confirmar",
 	"wikibase-linkitem-not-loggedin-title": "Tu debe aperir session",
 	"wikibase-linkitem-not-loggedin": "Tu debe aperir session in iste wiki e in le [$1 repositorio central de datos] pro usar iste function.",
-	"wikibase-linkitem-success-link": "Le paginas ha essite ligate. Le elemento continente le ligamines se trova in nostre [$1 repositorio central de datos].",
+	"wikibase-linkitem-success-link": "Le paginas ha essite ligate. Le elemento que contine le ligamines se trova in nostre [$1 repositorio central de datos].",
 	"limitreport-entityaccesscount": "Numero de entitates Wikibase cargate",
 	"wikibase-property-notfound": "Proprietate $1 non trovate.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
