@@ -74,6 +74,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemState
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchedAliasesValidator as PatchedPropertyAliasesValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchPropertyAliases;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions\PatchPropertyDescriptions;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchedLabelsValidator as PatchedPropertyLabelsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchPropertyLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyStatement\PatchPropertyStatement;
@@ -650,6 +651,18 @@ return [
 				new LanguageCodeValidator( $termLanguages->getLanguages() )
 			),
 			WbRestApi::getPropertyDataRetriever( $services ),
+			WbRestApi::getPropertyUpdater( $services )
+		);
+	},
+
+	'WbRestApi.PatchPropertyDescriptions' => function( MediaWikiServices $services ): PatchPropertyDescriptions {
+		return new PatchPropertyDescriptions(
+			WbRestApi::getValidatingRequestDeserializer( $services ),
+			new TermLookupEntityTermsRetriever( WikibaseRepo::getTermLookup(), WikibaseRepo::getTermsLanguages() ),
+			new DescriptionsSerializer(),
+			new PatchJson( new JsonDiffJsonPatcher() ),
+			WbRestApi::getPropertyDataRetriever( $services ),
+			new DescriptionsDeserializer(),
 			WbRestApi::getPropertyUpdater( $services )
 		);
 	},
