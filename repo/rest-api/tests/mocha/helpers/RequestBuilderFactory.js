@@ -168,6 +168,13 @@ module.exports = {
 			.withJsonBodyParam( 'aliases', aliases );
 	},
 
+	newRemoveItemLabelRequestBuilder( itemId, languageCode ) {
+		return new RequestBuilder()
+			.withRoute( 'DELETE', '/entities/items/{item_id}/labels/{language_code}' )
+			.withPathParam( 'item_id', itemId )
+			.withPathParam( 'language_code', languageCode );
+	},
+
 	newRemoveItemDescriptionRequestBuilder( itemId, languageCode ) {
 		return new RequestBuilder()
 			.withRoute( 'DELETE', '/entities/items/{item_id}/descriptions/{language_code}' )
