@@ -9,6 +9,17 @@ const {
 	newGetItemLabelRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
 
+function assertValidErrorResponse( response, statusCode, responseBodyErrorCode, context = null ) {
+	expect( response ).to.have.status( statusCode );
+	assert.header( response, 'Content-Language', 'en' );
+	assert.strictEqual( response.body.code, responseBodyErrorCode );
+	if ( context === null ) {
+		assert.notProperty( response.body, 'context' );
+	} else {
+		assert.deepStrictEqual( response.body.context, context );
+	}
+}
+
 describe( newRemoveItemLabelRequestBuilder().getRouteDescription(), () => {
 
 	let testItemId;
@@ -45,6 +56,74 @@ describe( newRemoveItemLabelRequestBuilder().getRouteDescription(), () => {
 			const editMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 			assert.include( editMetadata.tags, tag );
 			assert.property( editMetadata, 'bot' );
+		} );
+	} );
+
+	describe( '400 error response', () => {
+		it( 'invalid item id', async () => {
+			const itemId = testItemId.replace( 'Q', 'P' );
+			const response = await newRemoveItemLabelRequestBuilder( itemId, 'en' )
+				.assertInvalidRequest().makeRequest();
+
+			assertValidErrorResponse( response, 400, 'invalid-item-id' );
+			assert.include( response.body.message, itemId );
+		} );
+
+		it( 'invalid language code', async () => {
+			const invalidLanguageCode = 'xyz';
+			const response = await newRemoveItemLabelRequestBuilder( testItemId, invalidLanguageCode )
+				.assertValidRequest().makeRequest();
+
+			assertValidErrorResponse( response, 400, 'invalid-language-code' );
+			assert.include( response.body.message, invalidLanguageCode );
+		} );
+
+		it( 'invalid edit tag', async () => {
+			const invalidEditTag = 'invalid tag';
+			const response = await newRemoveItemLabelRequestBuilder( testItemId, 'en' )
+				.withJsonBodyParam( 'tags', [ invalidEditTag ] ).assertValidRequest().makeRequest();
+
+			assertValidErrorResponse( response, 400, 'invalid-edit-tag' );
+			assert.include( response.body.message, invalidEditTag );
+		} );
+
+		it( 'invalid edit tag type', async () => {
+			const response = await newRemoveItemLabelRequestBuilder( testItemId, 'en' )
+				.withJsonBodyParam( 'tags', 'not an array' ).assertInvalidRequest().makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assert.strictEqual( response.body.code, 'invalid-request-body' );
+			assert.strictEqual( response.body.fieldName, 'tags' );
+			assert.strictEqual( response.body.expectedType, 'array' );
+		} );
+
+		it( 'invalid bot flag type', async () => {
+			const response = await newRemoveItemLabelRequestBuilder( testItemId, 'en' )
+				.withJsonBodyParam( 'bot', 'not boolean' ).assertInvalidRequest().makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assert.strictEqual( response.body.code, 'invalid-request-body' );
+			assert.strictEqual( response.body.fieldName, 'bot' );
+			assert.strictEqual( response.body.expectedType, 'boolean' );
+		} );
+
+		it( 'comment too long', async () => {
+			const comment = 'x'.repeat( 501 );
+			const response = await newRemoveItemLabelRequestBuilder( testItemId, 'en' )
+				.withJsonBodyParam( 'comment', comment ).assertValidRequest().makeRequest();
+
+			assertValidErrorResponse( response, 400, 'comment-too-long' );
+			assert.include( response.body.message, '500' );
+		} );
+
+		it( 'invalid comment type', async () => {
+			const response = await newRemoveItemLabelRequestBuilder( testItemId, 'en' )
+				.withJsonBodyParam( 'comment', 1234 ).assertInvalidRequest().makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assert.strictEqual( response.body.code, 'invalid-request-body' );
+			assert.strictEqual( response.body.fieldName, 'comment' );
+			assert.strictEqual( response.body.expectedType, 'string' );
 		} );
 	} );
 

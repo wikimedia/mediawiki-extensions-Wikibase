@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\RemoveItemLabel;
 
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\LabelEditSummary;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
@@ -13,26 +12,33 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
  */
 class RemoveItemLabel {
 
+	private RemoveItemLabelValidator $useCaseValidator;
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
 
-	public function __construct( ItemRetriever $itemRetriever, ItemUpdater $itemUpdater ) {
+	public function __construct(
+		RemoveItemLabelValidator $useCaseValidator,
+		ItemRetriever $itemRetriever,
+		ItemUpdater $itemUpdater
+	) {
+		$this->useCaseValidator = $useCaseValidator;
 		$this->itemRetriever = $itemRetriever;
 		$this->itemUpdater = $itemUpdater;
 	}
 
 	public function execute( RemoveItemLabelRequest $request ): void {
-		$itemId = new ItemId( $request->getItemId() );
+		$deserializedRequest = $this->useCaseValidator->validateAndDeserialize( $request );
 
-		$item = $this->itemRetriever->getItem( $itemId );
-		$label = $item->getLabels()->getByLanguage( $request->getLanguageCode() );
-		$item->getLabels()->removeByLanguage( $request->getLanguageCode() );
+		$item = $this->itemRetriever->getItem( $deserializedRequest->getItemId() );
+		$label = $item->getLabels()->getByLanguage( $deserializedRequest->getLanguageCode() );
+		$item->getLabels()->removeByLanguage( $deserializedRequest->getLanguageCode() );
 
-		$summary = LabelEditSummary::newRemoveSummary( $request->getComment(), $label );
+		$providedEditMetadata = $deserializedRequest->getEditMetadata();
+		$summary = LabelEditSummary::newRemoveSummary( $providedEditMetadata->getComment(), $label );
 
 		$this->itemUpdater->update(
 			$item, // @phan-suppress-current-line PhanTypeMismatchArgumentNullable
-			new EditMetadata( $request->getEditTags(), $request->isBot(), $summary )
+			new EditMetadata( $providedEditMetadata->getTags(), $providedEditMetadata->isBot(), $summary )
 		);
 	}
 

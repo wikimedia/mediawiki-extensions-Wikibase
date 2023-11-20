@@ -9,6 +9,7 @@ use MediaWiki\Rest\StringStream;
 use MediaWiki\Rest\Validator\BodyValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemLabel\RemoveItemLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemLabel\RemoveItemLabelRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -28,29 +29,44 @@ class RemoveItemLabelRouteHandler extends SimpleHandler {
 	private const COMMENT_PARAM_DEFAULT = null;
 
 	private RemoveItemLabel $removeItemLabel;
+	private ResponseFactory $responseFactory;
 
-	public function __construct( RemoveItemLabel $removeItemLabel ) {
+	public function __construct(
+		RemoveItemLabel $removeItemLabel,
+		ResponseFactory $responseFactory
+	) {
 		$this->removeItemLabel = $removeItemLabel;
+		$this->responseFactory = $responseFactory;
 	}
 
 	public static function factory(): Handler {
-		return new self( new RemoveItemLabel( WbRestApi::getItemDataRetriever(), WbRestApi::getItemUpdater() ) );
+		return new self(
+			new RemoveItemLabel(
+				WbRestApi::getValidatingRequestDeserializer(),
+				WbRestApi::getItemDataRetriever(),
+				WbRestApi::getItemUpdater()
+			),
+			new ResponseFactory()
+		);
 	}
 
 	public function run( string $itemId, string $languageCode ): Response {
 		$requestBody = $this->getValidatedBody();
 
-		$this->removeItemLabel->execute(
-			new RemoveItemLabelRequest(
-				$itemId,
-				$languageCode,
-				$requestBody[ self::TAGS_BODY_PARAM ],
-				$requestBody[ self::BOT_BODY_PARAM ],
-				$requestBody[ self::COMMENT_BODY_PARAM ],
-				null
-			)
-		);
-
+		try {
+			$this->removeItemLabel->execute(
+				new RemoveItemLabelRequest(
+					$itemId,
+					$languageCode,
+					$requestBody[ self::TAGS_BODY_PARAM ] ?? self::TAGS_PARAM_DEFAULT,
+					$requestBody[ self::BOT_BODY_PARAM ] ?? self::BOT_PARAM_DEFAULT,
+					$requestBody[ self::COMMENT_BODY_PARAM ] ?? self::COMMENT_PARAM_DEFAULT,
+					null
+				)
+			);
+		} catch ( UseCaseError $e ) {
+			return $this->responseFactory->newErrorResponseFromException( $e );
+		}
 		return $this->newSuccessHttpResponse();
 	}
 
