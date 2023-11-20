@@ -57,6 +57,16 @@ class EditSummaryFormatterTest extends MediaWikiLangTestCase {
 			LabelEditSummary::newReplaceSummary( null, new Term( 'en', 'LABEL-TEXT' ) ),
 			'/* wbsetlabel-set:1|en */ LABEL-TEXT',
 		];
+
+		yield 'remove label' => [
+			LabelEditSummary::newRemoveSummary( 'remove user comment', new Term( 'en', 'LABEL-TEXT' ) ),
+			'/* wbsetlabel-remove:1|en */ LABEL-TEXT, remove user comment',
+		];
+
+		yield 'remove label with no user comment' => [
+			LabelEditSummary::newRemoveSummary( null, new Term( 'en', 'LABEL-TEXT' ) ),
+			'/* wbsetlabel-remove:1|en */ LABEL-TEXT',
+		];
 	}
 
 	public static function descriptionEditSummaryProvider(): Generator {

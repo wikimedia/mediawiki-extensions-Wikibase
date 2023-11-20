@@ -8,6 +8,7 @@ const {
 	newSetItemLabelRequestBuilder,
 	newGetItemLabelRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
+const { formatTermEditSummary } = require( '../helpers/formatEditSummaries' );
 
 function assertValidErrorResponse( response, statusCode, responseBodyErrorCode, context = null ) {
 	expect( response ).to.have.status( statusCode );
@@ -31,8 +32,8 @@ describe( newRemoveItemLabelRequestBuilder().getRouteDescription(), () => {
 	describe( '200 success response', () => {
 		it( 'can remove a label', async () => {
 			const languageCode = 'en';
-			await newSetItemLabelRequestBuilder( testItemId, languageCode, 'english label ' + utils.uniq() )
-				.makeRequest();
+			const label = 'english label ' + utils.uniq();
+			await newSetItemLabelRequestBuilder( testItemId, languageCode, label ).makeRequest();
 
 			const user = await action.robby(); // robby is a bot
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test' );
@@ -56,6 +57,10 @@ describe( newRemoveItemLabelRequestBuilder().getRouteDescription(), () => {
 			const editMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 			assert.include( editMetadata.tags, tag );
 			assert.property( editMetadata, 'bot' );
+			assert.strictEqual(
+				editMetadata.comment,
+				formatTermEditSummary( 'wbsetlabel', 'remove', languageCode, label, comment )
+			);
 		} );
 	} );
 
