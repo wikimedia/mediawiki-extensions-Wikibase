@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemLabel\RemoveItemLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemLabel\RemoveItemLabelRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemLabel\RemoveItemLabelValidator;
@@ -31,6 +32,7 @@ class RemoveItemLabelTest extends TestCase {
 
 	private RemoveItemLabelValidator $validator;
 	private AssertItemExists $assertItemExists;
+	private AssertUserIsAuthorized $assertUserIsAuthorized;
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
 
@@ -38,6 +40,7 @@ class RemoveItemLabelTest extends TestCase {
 		parent::setUp();
 		$this->validator = new TestValidatingRequestDeserializer();
 		$this->assertItemExists = $this->createStub( AssertItemExists::class );
+		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
 	}
@@ -115,10 +118,28 @@ class RemoveItemLabelTest extends TestCase {
 		}
 	}
 
+	public function testGivenEditIsUnauthorized_throwsUseCaseError(): void {
+		$itemId = new ItemId( 'Q123' );
+
+		$expectedError = new UseCaseError( UseCaseError::PERMISSION_DENIED, 'You have no permission to edit this item.' );
+		$this->assertUserIsAuthorized = $this->createMock( AssertUserIsAuthorized::class );
+		$this->assertUserIsAuthorized->method( 'execute' )
+			->with( $itemId, null )
+			->willThrowException( $expectedError );
+
+		try {
+			$this->newUseCase()->execute( new RemoveItemLabelRequest( "$itemId", 'en', [], false, null, null ) );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedError, $e );
+		}
+	}
+
 	private function newUseCase(): RemoveItemLabel {
 		return new RemoveItemLabel(
 			$this->validator,
 			$this->assertItemExists,
+			$this->assertUserIsAuthorized,
 			$this->itemRetriever,
 			$this->itemUpdater
 		);

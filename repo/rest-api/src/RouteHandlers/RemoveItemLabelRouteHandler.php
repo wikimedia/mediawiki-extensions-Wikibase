@@ -45,6 +45,7 @@ class RemoveItemLabelRouteHandler extends SimpleHandler {
 			new RemoveItemLabel(
 				WbRestApi::getValidatingRequestDeserializer(),
 				WbRestApi::getAssertItemExists(),
+				WbRestApi::getAssertUserIsAuthorized(),
 				WbRestApi::getItemDataRetriever(),
 				WbRestApi::getItemUpdater()
 			),
