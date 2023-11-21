@@ -5,7 +5,7 @@ const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const testValidatesPatch = require( '../helpers/testValidatesPatch' );
 const { newPatchItemDescriptionsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
-const { formatLabelsEditSummary } = require( '../helpers/formatEditSummaries' );
+const { formatTermsEditSummary } = require( '../helpers/formatEditSummaries' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 
 function assertValidErrorResponse( response, statusCode, responseBodyErrorCode, context = null ) {
@@ -99,7 +99,7 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 			assert.property( editMetadata, 'bot' );
 			assert.strictEqual(
 				editMetadata.comment,
-				formatLabelsEditSummary( 'update-languages-short', 'ar', comment )
+				formatTermsEditSummary( 'update-languages-short', 'ar', comment )
 			);
 		} );
 	} );

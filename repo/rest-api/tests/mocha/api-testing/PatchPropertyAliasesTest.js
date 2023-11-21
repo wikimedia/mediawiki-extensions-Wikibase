@@ -6,7 +6,7 @@ const entityHelper = require( '../helpers/entityHelper' );
 const { newPatchPropertyAliasesRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const testValidatesPatch = require( '../helpers/testValidatesPatch' );
-const { formatLabelsEditSummary } = require( '../helpers/formatEditSummaries' );
+const { formatTermsEditSummary } = require( '../helpers/formatEditSummaries' );
 
 function assertValid400Response( response, responseBodyErrorCode, context = null ) {
 	expect( response ).to.have.status( 400 );
@@ -87,7 +87,7 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 			assert.property( editMetadata, 'bot' );
 			assert.strictEqual(
 				editMetadata.comment,
-				formatLabelsEditSummary( 'update-languages-short', 'de', editSummary )
+				formatTermsEditSummary( 'update-languages-short', 'de', editSummary )
 			);
 		} );
 	} );

@@ -15,7 +15,7 @@ module.exports = {
 		return userComment ? `${autoSummary}, ${userComment}` : autoSummary;
 	},
 
-	formatLabelsEditSummary( action, autoCommentArgs, userComment ) {
+	formatTermsEditSummary( action, autoCommentArgs, userComment ) {
 		return `/* wbeditentity-${action}:0||${autoCommentArgs} */ ${userComment}`;
 	}
 };

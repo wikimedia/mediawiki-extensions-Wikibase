@@ -6,7 +6,7 @@ const testValidatesPatch = require( '../helpers/testValidatesPatch' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { newPatchItemLabelsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
-const { formatLabelsEditSummary } = require( '../helpers/formatEditSummaries' );
+const { formatTermsEditSummary } = require( '../helpers/formatEditSummaries' );
 
 function assertValidErrorResponse( response, statusCode, responseBodyErrorCode, context = null ) {
 	expect( response ).to.have.status( statusCode );
@@ -106,7 +106,7 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 			assert.property( editMetadata, 'bot' );
 			assert.strictEqual(
 				editMetadata.comment,
-				formatLabelsEditSummary( 'update-languages-short', 'ar', editSummary )
+				formatTermsEditSummary( 'update-languages-short', 'ar', editSummary )
 			);
 		} );
 	} );
