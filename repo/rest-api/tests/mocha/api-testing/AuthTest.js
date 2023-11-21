@@ -86,6 +86,12 @@ describe( 'Auth', () => {
 							'en',
 							`entity description ${utils.uniq()}`
 						).makeRequest();
+
+						await rbf.newSetItemLabelRequestBuilder(
+							requestInputs.itemId,
+							'en',
+							`entity label ${utils.uniq()}`
+						).makeRequest();
 					}
 				}
 			} );
@@ -154,13 +160,7 @@ describe( 'Auth', () => {
 
 		// protecting/unprotecting does not always take effect immediately. These tests are isolated here to avoid
 		// accidentally testing against a protected page in the other tests and receiving false positive results.
-		[
-			{
-				newRequestBuilder: () => rbf.newRemoveItemLabelRequestBuilder( itemRequestInputs.itemId, 'en' ),
-				requestInputs: itemRequestInputs
-			},
-			...editRequestsWithInputs
-		].forEach( ( { newRequestBuilder, requestInputs } ) => {
+		editRequestsWithInputs.forEach( ( { newRequestBuilder, requestInputs } ) => {
 			describe( 'Protected entity page', () => {
 				before( async () => {
 					await changeEntityProtectionStatus( requestInputs.mainTestSubject, 'sysop' ); // protect

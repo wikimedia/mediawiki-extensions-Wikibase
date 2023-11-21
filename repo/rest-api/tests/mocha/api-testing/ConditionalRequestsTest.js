@@ -354,6 +354,12 @@ describe( 'Conditional requests', () => {
 							'en',
 							`entity description ${utils.uniq()}`
 						).makeRequest();
+
+						await rbf.newSetItemLabelRequestBuilder(
+							requestInputs.itemId,
+							'en',
+							`entity label ${utils.uniq()}`
+						).makeRequest();
 					}
 				}
 			} );

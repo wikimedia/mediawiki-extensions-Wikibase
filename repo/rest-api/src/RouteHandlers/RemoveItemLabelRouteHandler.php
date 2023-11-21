@@ -2,7 +2,9 @@
 
 namespace Wikibase\Repo\RestApi\RouteHandlers;
 
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Handler;
+use MediaWiki\Rest\RequestInterface;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
@@ -11,6 +13,11 @@ use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemLabel\RemoveItemLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemLabel\RemoveItemLabelRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\BotRightCheckMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\ContentTypeCheckMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -30,30 +37,48 @@ class RemoveItemLabelRouteHandler extends SimpleHandler {
 	private const COMMENT_PARAM_DEFAULT = null;
 
 	private RemoveItemLabel $removeItemLabel;
+	private MiddlewareHandler $middlewareHandler;
 	private ResponseFactory $responseFactory;
 
 	public function __construct(
 		RemoveItemLabel $removeItemLabel,
+		MiddlewareHandler $middlewareHandler,
 		ResponseFactory $responseFactory
 	) {
 		$this->removeItemLabel = $removeItemLabel;
+		$this->middlewareHandler = $middlewareHandler;
 		$this->responseFactory = $responseFactory;
 	}
 
 	public static function factory(): Handler {
+		$responseFactory = new ResponseFactory();
 		return new self(
-			new RemoveItemLabel(
-				WbRestApi::getValidatingRequestDeserializer(),
-				WbRestApi::getAssertItemExists(),
-				WbRestApi::getAssertUserIsAuthorized(),
-				WbRestApi::getItemDataRetriever(),
-				WbRestApi::getItemUpdater()
-			),
-			new ResponseFactory()
+			WbRestApi::getRemoveItemLabel(),
+			new MiddlewareHandler( [
+				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
+				new UserAgentCheckMiddleware(),
+				new AuthenticationMiddleware(),
+				new ContentTypeCheckMiddleware( [
+					ContentTypeCheckMiddleware::TYPE_APPLICATION_JSON,
+					ContentTypeCheckMiddleware::TYPE_NONE,
+				] ),
+				new BotRightCheckMiddleware( MediaWikiServices::getInstance()->getPermissionManager(), $responseFactory ),
+				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
+					fn( RequestInterface $request ): string => $request->getPathParam( self::ITEM_ID_PATH_PARAM )
+				),
+			] ),
+			$responseFactory
 		);
 	}
 
-	public function run( string $itemId, string $languageCode ): Response {
+	/**
+	 * @param mixed ...$args
+	 */
+	public function run( ...$args ): Response {
+		return $this->middlewareHandler->run( $this, [ $this, 'runUseCase' ], $args );
+	}
+
+	public function runUseCase( string $itemId, string $languageCode ): Response {
 		$requestBody = $this->getValidatedBody();
 
 		try {
@@ -64,7 +89,7 @@ class RemoveItemLabelRouteHandler extends SimpleHandler {
 					$requestBody[ self::TAGS_BODY_PARAM ] ?? self::TAGS_PARAM_DEFAULT,
 					$requestBody[ self::BOT_BODY_PARAM ] ?? self::BOT_PARAM_DEFAULT,
 					$requestBody[ self::COMMENT_BODY_PARAM ] ?? self::COMMENT_PARAM_DEFAULT,
-					null
+					$this->getUsername()
 				)
 			);
 		} catch ( UseCaseError $e ) {
@@ -129,6 +154,20 @@ class RemoveItemLabelRouteHandler extends SimpleHandler {
 					ParamValidator::PARAM_DEFAULT => self::COMMENT_PARAM_DEFAULT,
 				],
 			] ) : parent::getBodyValidator( $contentType );
+	}
+
+	/**
+	 * Preconditions are checked via {@link PreconditionMiddleware}
+	 *
+	 * @inheritDoc
+	 */
+	public function checkPreconditions() {
+		return null;
+	}
+
+	private function getUsername(): ?string {
+		$mwUser = $this->getAuthority()->getUser();
+		return $mwUser->isRegistered() ? $mwUser->getName() : null;
 	}
 
 }

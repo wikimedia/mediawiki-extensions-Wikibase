@@ -80,6 +80,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyStatement\PatchPrope
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchedStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemDescription\RemoveItemDescription;
+use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemLabel\RemoveItemLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyStatement\RemovePropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatement;
@@ -730,6 +731,16 @@ return [
 
 	'WbRestApi.RemoveItemDescription' => function( MediaWikiServices $services ): RemoveItemDescription {
 		return new RemoveItemDescription(
+			WbRestApi::getValidatingRequestDeserializer( $services ),
+			WbRestApi::getAssertItemExists( $services ),
+			WbRestApi::getAssertUserIsAuthorized( $services ),
+			WbRestApi::getItemDataRetriever( $services ),
+			WbRestApi::getItemUpdater( $services )
+		);
+	},
+
+	'WbRestApi.RemoveItemLabel' => function( MediaWikiServices $services ): RemoveItemLabel {
+		return new RemoveItemLabel(
 			WbRestApi::getValidatingRequestDeserializer( $services ),
 			WbRestApi::getAssertItemExists( $services ),
 			WbRestApi::getAssertUserIsAuthorized( $services ),
