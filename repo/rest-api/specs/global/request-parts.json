@@ -33,7 +33,7 @@
 									"example": "/en"
 								},
 								"value": {
-									"example": "patched description"
+									"example": "en-description"
 								}
 							}
 						}
@@ -55,7 +55,7 @@
 									"example": "/en/0"
 								},
 								"value": {
-									"example": "patched alias"
+									"example": "en-alias1"
 								}
 							}
 						}
@@ -94,7 +94,7 @@
 									"example": "/value/content"
 								},
 								"value": {
-									"example": "patched value"
+									"example": "Q5"
 								}
 							}
 						}
