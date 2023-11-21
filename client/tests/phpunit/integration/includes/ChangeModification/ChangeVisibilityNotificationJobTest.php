@@ -29,7 +29,7 @@ use Wikibase\Lib\SubEntityTypesMapper;
  * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
-class ChangeVisibilityNotificationJobTest extends RecentChangesModificationTest {
+class ChangeVisibilityNotificationJobTest extends RecentChangesModificationTestBase {
 
 	/**
 	 * @dataProvider revisionIdentifierProvider

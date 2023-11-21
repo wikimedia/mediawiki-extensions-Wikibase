@@ -92,16 +92,11 @@ class EntityDataPurgerTest extends TestCase {
 		$entityDataUriManager = $this->createMock( EntityDataUriManager::class );
 		$entityDataUriManager
 			->method( 'getPotentiallyCachedUrls' )
-			->withConsecutive(
-				[ $entityId, 1 ],
-				[ $entityId, 2 ],
-				[ $entityId, 3 ]
-			)
-			->willReturnOnConsecutiveCalls(
-				[ 'urlA/Q1/1', 'urlB/Q1/1' ],
-				[ 'urlA/Q1/2', 'urlB/Q1/2' ],
-				[ 'urlA/Q1/3', 'urlB/Q1/3' ]
-			);
+			->willReturnMap( [
+				[ $entityId, 1, [ 'urlA/Q1/1', 'urlB/Q1/1' ] ],
+				[ $entityId, 2, [ 'urlA/Q1/2', 'urlB/Q1/2' ] ],
+				[ $entityId, 3, [ 'urlA/Q1/3', 'urlB/Q1/3' ] ],
+			] );
 		$htmlCacheUpdater = $this->createMock( HtmlCacheUpdater::class );
 		$htmlCacheUpdater->expects( $this->once() )
 			->method( 'purgeUrls' )

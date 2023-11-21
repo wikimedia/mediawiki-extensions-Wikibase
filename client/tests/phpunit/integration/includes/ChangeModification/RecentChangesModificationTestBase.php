@@ -14,7 +14,7 @@ use Wikibase\Lib\Changes\RepoRevisionIdentifier;
  * `recentchanges` table
  * @license GPL-2.0-or-later
  */
-abstract class RecentChangesModificationTest extends MediaWikiIntegrationTestCase {
+abstract class RecentChangesModificationTestBase extends MediaWikiIntegrationTestCase {
 
 	protected function setUp(): void {
 		parent::setUp();

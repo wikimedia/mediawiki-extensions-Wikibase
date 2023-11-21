@@ -18,7 +18,7 @@ use Wikibase\Lib\Rdbms\ClientDomainDbFactory;
  *
  * @license GPL-2.0-or-later
  */
-class ChangeDeletionNotificationJobTest extends RecentChangesModificationTest {
+class ChangeDeletionNotificationJobTest extends RecentChangesModificationTestBase {
 
 	private function countRevisions( array $conditions = null ): int {
 		$selectQueryBuilder = $this->db->newSelectQueryBuilder();

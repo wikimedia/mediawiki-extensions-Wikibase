@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Tests\Unit;
 
-use Wikibase\Lib\Tests\NoBadUsageTest;
+use Wikibase\Lib\Tests\NoBadUsageTestBase;
 
 /**
  * @group Wikibase
@@ -12,7 +12,7 @@ use Wikibase\Lib\Tests\NoBadUsageTest;
  * @license GPL-2.0-or-later
  * @coversNothing
  */
-class ClientNoBadUsageTest extends NoBadUsageTest {
+class ClientNoBadUsageTest extends NoBadUsageTestBase {
 
 	protected function getBadPatternsWithAllowedUsages(): array {
 		return [

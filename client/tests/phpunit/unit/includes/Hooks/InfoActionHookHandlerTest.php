@@ -6,6 +6,7 @@ use Html;
 use IContextSource;
 use MediaWiki\Title\Title;
 use RequestContext;
+use UnexpectedValueException;
 use Wikibase\Client\Hooks\InfoActionHookHandler;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\RepoLinker;
@@ -165,8 +166,8 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @param bool $enabled
 	 * @param ItemId|null $itemId
-	 * @param string $localDescription
-	 * @param string $centralDescription
+	 * @param string|null $localDescription
+	 * @param string|null $centralDescription
 	 *
 	 * @return InfoActionHookHandler
 	 */
@@ -217,14 +218,16 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 
 		$descriptionLookup->expects( $this->atLeast( 2 ) )
 			->method( 'getDescription' )
-			->withConsecutive(
-				[ $this->anything(), DescriptionLookup::SOURCE_LOCAL ],
-				[ $this->anything(), DescriptionLookup::SOURCE_CENTRAL ]
-			)
-			->willReturnOnConsecutiveCalls(
-				$localDescription,
-				$centralDescription
-			);
+			->willReturnCallback( static function ( $title, $sources ) use ( $localDescription, $centralDescription ): ?string {
+				switch ( $sources ) {
+					case DescriptionLookup::SOURCE_LOCAL:
+						return $localDescription;
+					case DescriptionLookup::SOURCE_CENTRAL:
+						return $centralDescription;
+					default:
+						throw new UnexpectedValueException( "Unexpected source $sources" );
+				}
+			} );
 
 		return new InfoActionHookHandler(
 			$namespaceChecker,

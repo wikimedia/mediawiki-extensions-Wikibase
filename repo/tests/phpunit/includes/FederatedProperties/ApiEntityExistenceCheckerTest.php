@@ -63,14 +63,10 @@ class ApiEntityExistenceCheckerTest extends TestCase {
 			->with( $ids );
 		$apiEntityLookup->expects( $this->exactly( 2 ) )
 			->method( 'getResultPartForId' )
-			->withConsecutive(
-				[ $ids[0] ],
-				[ $ids[1] ]
-			)
-			->willReturnOnConsecutiveCalls(
-				[ 'id' => $p123->getRemoteIdSerialization(), 'datatype' => 'string' ],
-				[ 'id' => $p321->getRemoteIdSerialization(), 'missing' => '' ]
-			);
+			->willReturnMap( [
+				[ $ids[0], [ 'id' => $p123->getRemoteIdSerialization(), 'datatype' => 'string' ] ],
+				[ $ids[1], [ 'id' => $p321->getRemoteIdSerialization(), 'missing' => '' ] ],
+			] );
 
 		$existenceChecker = new ApiEntityExistenceChecker( $apiEntityLookup );
 		$result = $existenceChecker->existsBatch( $ids );

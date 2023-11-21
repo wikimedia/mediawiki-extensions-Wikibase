@@ -60,14 +60,10 @@ class PropertyDataTypeSearchHelperTest extends \PHPUnit\Framework\TestCase {
 
 		$dataTypeLookup->expects( $this->exactly( 2 ) )
 			->method( 'getDataTypeIdForProperty' )
-			->withConsecutive(
-				[ $property1 ],
-				[ $property2 ]
-			)
-			->willReturnOnConsecutiveCalls(
-				$property1Datatype,
-				$property2Datatype
-			);
+			->willReturnMap( [
+				[ $property1, $property1Datatype ],
+				[ $property2, $property2Datatype ],
+			] );
 
 		$results = ( new PropertyDataTypeSearchHelper( $searchHelper, $dataTypeLookup ) )
 			->getRankedSearchResults( $searchText, $searchLanguageCode, $searchEntityType, $searchLimit, $searchStrictLanguage, null );

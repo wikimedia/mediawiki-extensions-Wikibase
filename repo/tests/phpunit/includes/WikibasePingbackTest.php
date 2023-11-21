@@ -168,8 +168,11 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 
 		$wikibaseRepoSettings
 			->method( 'getSetting' )
-			->withConsecutive( [ 'pingbackHost' ], [ 'federatedPropertiesEnabled' ], [ 'termboxEnabled' ] )
-			->willReturn( 'http://localhost', true, true );
+			->willReturnMap( [
+				[ 'pingbackHost', 'http://localhost' ],
+				[ 'federatedPropertiesEnabled', true ],
+				[ 'termboxEnabled', true ],
+			] );
 
 		$extensions->method( 'getAllThings' )
 			->willReturn( [

@@ -22,7 +22,7 @@ use SplFileInfo;
  *
  * @license GPL-2.0-or-later
  */
-abstract class NoBadUsageTest extends TestCase {
+abstract class NoBadUsageTestBase extends TestCase {
 
 	/**
 	 * Get the bad patterns along with allowed usages.

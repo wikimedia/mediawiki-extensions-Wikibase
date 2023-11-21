@@ -247,11 +247,10 @@ class CachingFallbackBasedTermLookupTest extends TestCase {
 
 		$this->revisionLookup
 			->method( 'lookupLatestRevisionResolvingRedirect' )
-			->withConsecutive( [ $itemOneId ], [ $itemTwoId ] )
-			->willReturnOnConsecutiveCalls(
-				[ 1, $itemOneId ],
-				[ 2, $itemTwoId ]
-			);
+			->willReturnMap( [
+				[ $itemOneId, [ 1, $itemOneId ] ],
+				[ $itemTwoId, [ 2, $itemTwoId ] ],
+			] );
 
 		$this->termFallbackCache
 			->expects( $this->atLeastOnce() )
@@ -259,8 +258,10 @@ class CachingFallbackBasedTermLookupTest extends TestCase {
 			->willReturn( TermFallbackCacheFacade::NO_VALUE );
 
 		$this->factoryReturnLookup->method( 'getLabel' )
-			->withConsecutive( [ $itemOneId ], [ $itemTwoId ] )
-			->willReturnOnConsecutiveCalls( $termFallbackOne, $termFallbackTwo );
+			->willReturnMap( [
+				[ $itemOneId, $termFallbackOne ],
+				[ $itemTwoId, $termFallbackTwo ],
+			] );
 
 		$lookup = $this->getLookup( [
 			$language->getCode() => $this->factoryReturnLookup,

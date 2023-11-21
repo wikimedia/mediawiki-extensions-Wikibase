@@ -10,7 +10,7 @@ namespace Wikibase\Lib\Tests;
  * @license GPL-2.0-or-later
  * @coversNothing
  */
-class LibNoBadUsageTest extends NoBadUsageTest {
+class LibNoBadUsageTest extends NoBadUsageTestBase {
 
 	protected function getBadPatternsWithAllowedUsages(): array {
 		return [

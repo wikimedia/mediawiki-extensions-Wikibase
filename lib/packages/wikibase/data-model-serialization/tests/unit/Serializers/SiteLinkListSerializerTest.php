@@ -22,10 +22,10 @@ class SiteLinkListSerializerTest extends TestCase {
 		$siteLinkSerializer = $this->createMock( SiteLinkSerializer::class );
 		$siteLinkSerializer->expects( $this->exactly( 2 ) )
 			->method( 'serialize' )
-			->withConsecutive( [ $siteLink1 ], [ $siteLink2 ] )
-			->willReturnCallback( function ( SiteLink $siteLink ) {
-				return $siteLink->getPageName();
-			} );
+			->willReturnMap( [
+				[ $siteLink1, $siteLink1->getPageName() ],
+				[ $siteLink2, $siteLink2->getPageName() ],
+			] );
 
 		$serializer = new SiteLinkListSerializer( $siteLinkSerializer, false );
 
