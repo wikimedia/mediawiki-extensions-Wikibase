@@ -6,6 +6,8 @@
 		]
 	},
 	"wikibase-error-unexpected": "Meattáhus: $1.",
+	"wikibase-globedetails-longitude": "Guhkkodatgráda",
+	"wikibase-globedetails-latitude": "Govdodatgráda",
 	"wikibase-sitelinks-wikipedia": "Wikipedia",
 	"wikibase-snakview-snaktypeselector-somevalue": "dovdameahttun árvu",
 	"datatypes-type-string": "Sreaŋga",
