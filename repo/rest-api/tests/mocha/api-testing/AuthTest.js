@@ -154,7 +154,13 @@ describe( 'Auth', () => {
 
 		// protecting/unprotecting does not always take effect immediately. These tests are isolated here to avoid
 		// accidentally testing against a protected page in the other tests and receiving false positive results.
-		editRequestsWithInputs.forEach( ( { newRequestBuilder, requestInputs } ) => {
+		[
+			{
+				newRequestBuilder: () => rbf.newRemoveItemLabelRequestBuilder( itemRequestInputs.itemId, 'en' ),
+				requestInputs: itemRequestInputs
+			},
+			...editRequestsWithInputs
+		].forEach( ( { newRequestBuilder, requestInputs } ) => {
 			describe( 'Protected entity page', () => {
 				before( async () => {
 					await changeEntityProtectionStatus( requestInputs.mainTestSubject, 'sysop' ); // protect
