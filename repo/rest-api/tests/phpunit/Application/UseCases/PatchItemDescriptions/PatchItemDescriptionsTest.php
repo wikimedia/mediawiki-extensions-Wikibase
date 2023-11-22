@@ -105,7 +105,7 @@ class PatchItemDescriptionsTest extends TestCase {
 		$this->itemUpdater->expects( $this->once() )
 			->method( 'update' )
 			->with(
-				$this->expectEquivalentItemByDescription( $newDescriptionLanguage, $newDescriptionText ),
+				$this->expectItemWithDescription( $newDescriptionLanguage, $newDescriptionText ),
 				$this->expectEquivalentMetadata( $editTags, $isBot, $comment, EditSummary::PATCH_ACTION )
 			)
 			->willReturn( new ItemRevision( $updatedItem, $lastModified, $revisionId ) );
@@ -265,11 +265,9 @@ class PatchItemDescriptionsTest extends TestCase {
 		return new PatchItemDescriptionsRequest( $itemId, $patch, [], false, null, null );
 	}
 
-	private function expectEquivalentItemByDescription( string $languageCode, string $descriptionText ): Callback {
+	private function expectItemWithDescription( string $languageCode, string $descriptionText ): Callback {
 		return $this->callback(
-			function( DataModelItem $item ) use ( $languageCode, $descriptionText ) {
-				return $item->getDescriptions()->getByLanguage( $languageCode )->getText() === $descriptionText;
-			}
+			fn( DataModelItem $item ) => $item->getDescriptions()->getByLanguage( $languageCode )->getText() === $descriptionText
 		);
 	}
 
