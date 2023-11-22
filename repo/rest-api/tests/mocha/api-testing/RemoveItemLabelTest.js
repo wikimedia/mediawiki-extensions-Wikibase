@@ -132,4 +132,39 @@ describe( newRemoveItemLabelRequestBuilder().getRouteDescription(), () => {
 		} );
 	} );
 
+	describe( '404 error response', () => {
+		it( 'item not found', async () => {
+			const itemId = 'Q999999';
+			const response = await newRemoveItemLabelRequestBuilder( itemId, 'en' )
+				.assertValidRequest().makeRequest();
+
+			assertValidErrorResponse( response, 404, 'item-not-found' );
+			assert.include( response.body.message, itemId );
+		} );
+
+		it( 'label in the language specified does not exist', async () => {
+			const languageCode = 'ar';
+			const response = await newRemoveItemLabelRequestBuilder( testItemId, languageCode )
+				.assertValidRequest().makeRequest();
+
+			assertValidErrorResponse( response, 404, 'label-not-defined' );
+			assert.include( response.body.message, testItemId );
+			assert.include( response.body.message, languageCode );
+		} );
+	} );
+
+	describe( '409 error response', () => {
+		it( 'item is a redirect', async () => {
+			const redirectTarget = testItemId;
+			const redirectSource = await entityHelper.createRedirectForItem( redirectTarget );
+
+			const response = await newRemoveItemLabelRequestBuilder( redirectSource, 'en' )
+				.assertValidRequest().makeRequest();
+
+			assertValidErrorResponse( response, 409, 'redirected-item' );
+			assert.include( response.body.message, redirectSource );
+			assert.include( response.body.message, redirectTarget );
+		} );
+	} );
+
 } );
