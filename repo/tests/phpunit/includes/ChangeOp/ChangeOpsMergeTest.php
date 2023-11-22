@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\ChangeOp;
 
 use HashSiteStore;
 use InvalidArgumentException;
+use MediaWiki\Site\MediaWikiPageNameNormalizer;
 use MediaWikiIntegrationTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use Site;
@@ -431,11 +432,10 @@ class ChangeOpsMergeTest extends MediaWikiIntegrationTestCase {
 			->willReturn( 'enwiki' );
 		$enwiki->expects( $this->exactly( 2 ) )
 			->method( 'normalizePageName' )
-			->withConsecutive(
-				[ 'FOo' ],
-				[ 'Foo' ]
-			)
-			->willReturn( 'Foo' );
+			->willReturnMap( [
+				[ 'FOo', MediaWikiPageNameNormalizer::FOLLOW_REDIRECT, 'Foo' ],
+				[ 'Foo', MediaWikiPageNameNormalizer::FOLLOW_REDIRECT, 'Foo' ],
+			] );
 
 		$mockSiteStore = new HashSiteStore( TestSites::getSites() );
 		$mockSiteStore->saveSite( $enwiki );
