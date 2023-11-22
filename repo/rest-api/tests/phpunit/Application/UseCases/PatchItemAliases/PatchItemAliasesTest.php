@@ -101,7 +101,7 @@ class PatchItemAliasesTest extends TestCase {
 		$this->itemUpdater->expects( $this->once() )
 			->method( 'update' )
 			->with(
-				$this->expectEquivalentItemByAliases( $aliasLanguage, [ 'English alias', $newAliasText ] ),
+				$this->expectItemWithAliases( $aliasLanguage, [ 'English alias', $newAliasText ] ),
 				$this->expectEquivalentMetadata( $editTags, $isBot, $comment, AliasesEditSummary::PATCH_ACTION )
 			)
 			->willReturn( new ItemRevision( $updatedItem, $lastModified, $revisionId ) );
@@ -216,9 +216,9 @@ class PatchItemAliasesTest extends TestCase {
 		return new PatchItemAliasesRequest( $itemId, $patch, [], false, null, null );
 	}
 
-	private function expectEquivalentItemByAliases( string $languageCode, array $aliasInLanguage ): Callback {
+	private function expectItemWithAliases( string $languageCode, array $aliasesInLanguage ): Callback {
 		return $this->callback(
-			fn( DataModelItem $item ) => $item->getAliasGroups()->getByLanguage( $languageCode )->getAliases() === $aliasInLanguage
+			fn( DataModelItem $item ) => $item->getAliasGroups()->getByLanguage( $languageCode )->getAliases() === $aliasesInLanguage
 		);
 	}
 

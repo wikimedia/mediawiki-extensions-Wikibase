@@ -89,7 +89,7 @@ class PatchPropertyDescriptionsTest extends TestCase {
 		$this->propertyUpdater->expects( $this->once() )
 			->method( 'update' )
 			->with(
-				$this->expectEquivalentPropertyByDescription( $newDescriptionLanguage, $newDescriptionText ),
+				$this->expectPropertyWithDescription( $newDescriptionLanguage, $newDescriptionText ),
 				$this->expectEquivalentMetadata( $editTags, $isBot, $comment, LabelsEditSummary::PATCH_ACTION )
 			)
 			->willReturn( new PropertyRevision( $updatedProperty, $lastModified, $revisionId ) );
@@ -122,11 +122,9 @@ class PatchPropertyDescriptionsTest extends TestCase {
 		);
 	}
 
-	private function expectEquivalentPropertyByDescription( string $languageCode, string $descriptionText ): Callback {
+	private function expectPropertyWithDescription( string $languageCode, string $description ): Callback {
 		return $this->callback(
-			function( DataModelProperty $property ) use ( $languageCode, $descriptionText ) {
-				return $property->getDescriptions()->getByLanguage( $languageCode )->getText() === $descriptionText;
-			}
+			fn( DataModelProperty $property ) => $property->getDescriptions()->getByLanguage( $languageCode )->getText() === $description
 		);
 	}
 
