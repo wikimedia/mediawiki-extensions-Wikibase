@@ -2,12 +2,20 @@
 
 const { action, utils } = require( 'api-testing' );
 
-async function createEntity( type, entity ) {
+async function makeEditEntityRequest( params, entity ) {
 	return action.getAnon().action( 'wbeditentity', {
-		new: type,
 		token: '+\\',
-		data: JSON.stringify( entity )
+		data: JSON.stringify( entity ),
+		...params
 	}, 'POST' );
+}
+
+async function createEntity( type, entity ) {
+	return makeEditEntityRequest( { new: type }, entity );
+}
+
+async function editEntity( id, entityData ) {
+	return makeEditEntityRequest( { id }, entityData );
 }
 
 async function deleteProperty( propertyId ) {
@@ -133,6 +141,7 @@ function newStatementWithRandomStringValue( propertyId ) {
 
 module.exports = {
 	createEntity,
+	editEntity,
 	deleteProperty,
 	createEntityWithStatements,
 	createItemWithStatements,

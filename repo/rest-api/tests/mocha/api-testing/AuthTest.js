@@ -2,13 +2,12 @@
 
 const { assert, action, utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const rbf = require( '../helpers/RequestBuilderFactory' );
 const {
 	createUniqueStringProperty,
-	newStatementWithRandomStringValue,
 	newLegacyStatementWithRandomStringValue,
 	changeEntityProtectionStatus,
-	createEntity
+	createEntity,
+	editEntity
 } = require( '../helpers/entityHelper' );
 const { requireExtensions } = require( '../../../../../tests/api-testing/utils' );
 const {
@@ -18,36 +17,36 @@ const {
 	getRequestsOnProperty
 } = require( '../helpers/happyPathRequestBuilders' );
 
+async function resetEntityTestData( id, statementPropertyId ) {
+	return ( await editEntity( id, {
+		labels: [ { language: 'en', value: `entity-with-statements-${utils.uniq()}` } ],
+		descriptions: [ { language: 'en', value: `entity-with-statements-${utils.uniq()}` } ],
+		aliases: [ { language: 'en', value: 'entity' }, { language: 'en', value: 'thing' } ],
+		claims: [ newLegacyStatementWithRandomStringValue( statementPropertyId ) ]
+	} ) ).entity;
+}
+
 describe( 'Auth', () => {
 
 	const itemRequestInputs = {};
 	const propertyRequestInputs = {};
-
 	let user;
 
 	before( async () => {
 		const statementPropertyId = ( await createUniqueStringProperty() ).entity.id;
 
-		const entityParts = {
-			claims: [ newLegacyStatementWithRandomStringValue( statementPropertyId ) ],
-			descriptions: { en: { language: 'en', value: `entity-with-statements-${utils.uniq()}` } },
-			labels: { en: { language: 'en', value: `entity-with-statements-${utils.uniq()}` } },
-			aliases: {
-				en: [ { language: 'en', value: 'entity' }, { language: 'en', value: 'thing' } ]
-			}
-		};
-
-		const createItemResponse = await createEntity( 'item', entityParts );
-		itemRequestInputs.itemId = createItemResponse.entity.id;
-		itemRequestInputs.mainTestSubject = itemRequestInputs.itemId;
-		itemRequestInputs.statementId = createItemResponse.entity.claims[ statementPropertyId ][ 0 ].id;
+		const itemId = ( await createEntity( 'item', {} ) ).entity.id;
+		const itemData = await resetEntityTestData( itemId, statementPropertyId );
+		itemRequestInputs.mainTestSubject = itemId;
+		itemRequestInputs.itemId = itemId;
+		itemRequestInputs.statementId = itemData.claims[ statementPropertyId ][ 0 ].id;
 		itemRequestInputs.statementPropertyId = statementPropertyId;
 
-		entityParts.datatype = 'string';
-		const createPropertyResponse = await createEntity( 'property', entityParts );
-		propertyRequestInputs.propertyId = createPropertyResponse.entity.id;
-		propertyRequestInputs.mainTestSubject = propertyRequestInputs.propertyId;
-		propertyRequestInputs.statementId = createPropertyResponse.entity.claims[ statementPropertyId ][ 0 ].id;
+		const propertyId = ( await createUniqueStringProperty() ).entity.id;
+		const propertyData = await resetEntityTestData( propertyId, statementPropertyId );
+		propertyRequestInputs.mainTestSubject = propertyId;
+		propertyRequestInputs.propertyId = propertyId;
+		propertyRequestInputs.statementId = propertyData.claims[ statementPropertyId ][ 0 ].id;
 		propertyRequestInputs.statementPropertyId = statementPropertyId;
 
 		user = await action.mindy();
@@ -72,27 +71,11 @@ describe( 'Auth', () => {
 
 			afterEach( async () => {
 				if ( newRequestBuilder().getMethod() === 'DELETE' ) {
-					const addStatementRequestBuilder = requestInputs.mainTestSubject === requestInputs.itemId ?
-						rbf.newAddItemStatementRequestBuilder :
-						rbf.newAddPropertyStatementRequestBuilder;
-					requestInputs.statementId = ( await addStatementRequestBuilder(
+					const entityData = await resetEntityTestData(
 						requestInputs.mainTestSubject,
-						newStatementWithRandomStringValue( requestInputs.statementPropertyId )
-					).makeRequest() ).body.id;
-
-					if ( requestInputs.mainTestSubject === requestInputs.itemId ) {
-						await rbf.newSetItemDescriptionRequestBuilder(
-							requestInputs.itemId,
-							'en',
-							`entity description ${utils.uniq()}`
-						).makeRequest();
-
-						await rbf.newSetItemLabelRequestBuilder(
-							requestInputs.itemId,
-							'en',
-							`entity label ${utils.uniq()}`
-						).makeRequest();
-					}
+						requestInputs.statementPropertyId
+					);
+					requestInputs.statementId = entityData.claims[ requestInputs.statementPropertyId ][ 0 ].id;
 				}
 			} );
 

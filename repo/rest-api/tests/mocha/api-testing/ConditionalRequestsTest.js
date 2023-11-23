@@ -4,12 +4,11 @@ const { assert, utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const {
 	getLatestEditMetadata,
-	newStatementWithRandomStringValue,
 	newLegacyStatementWithRandomStringValue,
 	createUniqueStringProperty,
-	createEntity
+	createEntity,
+	editEntity
 } = require( '../helpers/entityHelper' );
-const rbf = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const {
 	editRequestsOnItem,
@@ -37,6 +36,15 @@ function assertValid412Response( response ) {
 	assert.isEmpty( response.text );
 }
 
+async function resetEntityTestData( id, statementPropertyId ) {
+	return ( await editEntity( id, {
+		labels: [ { language: 'en', value: `entity-with-statements-${utils.uniq()}` } ],
+		descriptions: [ { language: 'en', value: `entity-with-statements-${utils.uniq()}` } ],
+		aliases: [ { language: 'en', value: 'entity' }, { language: 'en', value: 'thing' } ],
+		claims: [ newLegacyStatementWithRandomStringValue( statementPropertyId ) ]
+	} ) ).entity;
+}
+
 describe( 'Conditional requests', () => {
 	const itemRequestInputs = {};
 	const propertyRequestInputs = {};
@@ -44,33 +52,29 @@ describe( 'Conditional requests', () => {
 	before( async () => {
 		const statementPropertyId = ( await createUniqueStringProperty() ).entity.id;
 
-		const entityParts = {
-			claims: [ newLegacyStatementWithRandomStringValue( statementPropertyId ) ],
-			descriptions: { en: { language: 'en', value: `entity-with-statements-${utils.uniq()}` } },
-			labels: { en: { language: 'en', value: `entity-with-statements-${utils.uniq()}` } },
-			aliases: { en: [ { language: 'en', value: 'entity' }, { language: 'en', value: 'thing' } ] }
-		};
-
-		const createItemResponse = await createEntity( 'item', entityParts );
-		itemRequestInputs.itemId = createItemResponse.entity.id;
-		itemRequestInputs.statementId = createItemResponse.entity.claims[ statementPropertyId ][ 0 ].id;
+		const itemId = ( await createEntity( 'item', {} ) ).entity.id;
+		const itemData = await resetEntityTestData( itemId, statementPropertyId );
+		itemRequestInputs.mainTestSubject = itemId;
+		itemRequestInputs.itemId = itemId;
+		itemRequestInputs.statementId = itemData.claims[ statementPropertyId ][ 0 ].id;
 		itemRequestInputs.statementPropertyId = statementPropertyId;
-		itemRequestInputs.mainTestSubject = itemRequestInputs.itemId;
-		const latestItemRevision = await getLatestEditMetadata( itemRequestInputs.mainTestSubject );
+
+		const latestItemRevision = await getLatestEditMetadata( itemId );
 		itemRequestInputs.latestRevId = latestItemRevision.revid;
 		itemRequestInputs.latestRevTimestamp = latestItemRevision.timestamp;
 
-		entityParts.datatype = 'string';
-
-		const createPropertyResponse = await createEntity( 'property', entityParts );
-		propertyRequestInputs.propertyId = createPropertyResponse.entity.id;
-		propertyRequestInputs.statementId = createPropertyResponse.entity.claims[ statementPropertyId ][ 0 ].id;
+		const propertyId = ( await createUniqueStringProperty() ).entity.id;
+		const propertyData = await resetEntityTestData( propertyId, statementPropertyId );
+		propertyRequestInputs.mainTestSubject = propertyId;
+		propertyRequestInputs.propertyId = propertyId;
+		propertyRequestInputs.statementId = propertyData.claims[ statementPropertyId ][ 0 ].id;
 		propertyRequestInputs.statementPropertyId = statementPropertyId;
-		propertyRequestInputs.mainTestSubject = propertyRequestInputs.propertyId;
-		const latestPropertyRevision = await getLatestEditMetadata( propertyRequestInputs.mainTestSubject );
+
+		const latestPropertyRevision = await getLatestEditMetadata( propertyId );
 		propertyRequestInputs.latestRevId = latestPropertyRevision.revid;
 		propertyRequestInputs.latestRevTimestamp = latestPropertyRevision.timestamp;
 	} );
+
 	const useRequestInputs = ( requestInputs ) => ( newReqBuilder ) => ( {
 		newRequestBuilder: () => newReqBuilder( requestInputs ),
 		requestInputs
@@ -340,27 +344,11 @@ describe( 'Conditional requests', () => {
 
 			afterEach( async () => {
 				if ( newRequestBuilder().getMethod() === 'DELETE' ) {
-					const addStatementRequestBuilder = requestInputs.mainTestSubject === requestInputs.itemId ?
-						rbf.newAddItemStatementRequestBuilder :
-						rbf.newAddPropertyStatementRequestBuilder;
-					requestInputs.statementId = ( await addStatementRequestBuilder(
+					const entityData = await resetEntityTestData(
 						requestInputs.mainTestSubject,
-						newStatementWithRandomStringValue( requestInputs.statementPropertyId )
-					).makeRequest() ).body.id;
-
-					if ( requestInputs.mainTestSubject === requestInputs.itemId ) {
-						await rbf.newSetItemDescriptionRequestBuilder(
-							requestInputs.itemId,
-							'en',
-							`entity description ${utils.uniq()}`
-						).makeRequest();
-
-						await rbf.newSetItemLabelRequestBuilder(
-							requestInputs.itemId,
-							'en',
-							`entity label ${utils.uniq()}`
-						).makeRequest();
-					}
+						requestInputs.statementPropertyId
+					);
+					requestInputs.statementId = entityData.claims[ requestInputs.statementPropertyId ][ 0 ].id;
 				}
 			} );
 
