@@ -11,6 +11,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions\PatchPropertyDescriptions;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions\PatchPropertyDescriptionsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions\PatchPropertyDescriptionsResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -27,37 +28,44 @@ class PatchPropertyDescriptionsRouteHandler extends SimpleHandler {
 
 	private PatchPropertyDescriptions $useCase;
 	private DescriptionsSerializer $serializer;
+	private ResponseFactory $responseFactory;
 
 	public function __construct(
 		PatchPropertyDescriptions $useCase,
-		DescriptionsSerializer $serializer
+		DescriptionsSerializer $serializer,
+		ResponseFactory $responseFactory
 	) {
 		$this->useCase = $useCase;
 		$this->serializer = $serializer;
+		$this->responseFactory = $responseFactory;
 	}
 
 	public static function factory(): Handler {
 		return new self(
 			WbRestApi::getPatchPropertyDescriptions(),
-			new DescriptionsSerializer()
+			new DescriptionsSerializer(),
+			new ResponseFactory()
 		);
 	}
 
 	public function run( string $propertyId ): Response {
 		$jsonBody = $this->getValidatedBody();
-
-		return $this->newSuccessHttpResponse(
-			$this->useCase->execute(
-				new PatchPropertyDescriptionsRequest(
-					$propertyId,
-					$jsonBody[ self::PATCH_BODY_PARAM ],
-					$jsonBody[ self::TAGS_BODY_PARAM ],
-					$jsonBody[ self::BOT_BODY_PARAM ],
-					$jsonBody[ self::COMMENT_BODY_PARAM ],
-					$this->getUsername()
+		try {
+			return $this->newSuccessHttpResponse(
+				$this->useCase->execute(
+					new PatchPropertyDescriptionsRequest(
+						$propertyId,
+						$jsonBody[ self::PATCH_BODY_PARAM ],
+						$jsonBody[ self::TAGS_BODY_PARAM ],
+						$jsonBody[ self::BOT_BODY_PARAM ],
+						$jsonBody[ self::COMMENT_BODY_PARAM ],
+						$this->getUsername()
+					)
 				)
-			)
-		);
+			);
+		} catch ( UseCaseError $e ) {
+			return $this->responseFactory->newErrorResponseFromException( $e );
+		}
 	}
 
 	public function getParamSettings(): array {

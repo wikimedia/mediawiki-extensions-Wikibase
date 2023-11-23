@@ -12,6 +12,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions\PatchPropertyDescriptions;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions\PatchPropertyDescriptionsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions\PatchPropertyDescriptionsValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
@@ -108,6 +109,18 @@ class PatchPropertyDescriptionsTest extends TestCase {
 		$this->assertSame( $response->getDescriptions(), $updatedProperty->getDescriptions() );
 		$this->assertSame( $lastModified, $response->getLastModified() );
 		$this->assertSame( $revisionId, $response->getRevisionId() );
+	}
+
+	public function testInvalidRequest_throwsException(): void {
+		$expectedException = new UseCaseException( 'invalid-description-patch-test' );
+		$this->validator = $this->createStub( PatchPropertyDescriptionsValidator::class );
+		$this->validator->method( 'validateAndDeserialize' )->willThrowException( $expectedException );
+		try {
+			$this->newUseCase()->execute( $this->createStub( PatchPropertyDescriptionsRequest::class ) );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
 	}
 
 	private function newUseCase(): PatchPropertyDescriptions {
