@@ -1264,7 +1264,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 		$params = [
 			'action' => 'wbeditentity',
 			'id' => '%Berlin%',
-			'data' => '{}',
+			'data' => '{"descriptions":{"de":{"language":"de","value":"ClearFromBadRevidDesc3"}}}',
 			// 'baserevid' => '', // baserevid is set below
 			'clear' => '' ];
 		$this->injectIds( $params );
