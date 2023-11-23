@@ -5,6 +5,7 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionsEditSummary;
@@ -20,6 +21,7 @@ class PatchPropertyDescriptions {
 
 	private PatchPropertyDescriptionsValidator $useCaseValidator;
 	private AssertPropertyExists $assertPropertyExists;
+	private AssertUserIsAuthorized $assertUserIsAuthorized;
 	private PropertyDescriptionsRetriever $descriptionsRetriever;
 	private DescriptionsSerializer $descriptionsSerializer;
 	private PatchJson $patcher;
@@ -30,6 +32,7 @@ class PatchPropertyDescriptions {
 	public function __construct(
 		PatchPropertyDescriptionsValidator $useCaseValidator,
 		AssertPropertyExists $assertPropertyExists,
+		AssertUserIsAuthorized $assertUserIsAuthorized,
 		PropertyDescriptionsRetriever $DescriptionsRetriever,
 		DescriptionsSerializer $descriptionsSerializer,
 		PatchJson $patcher,
@@ -39,6 +42,7 @@ class PatchPropertyDescriptions {
 	) {
 		$this->useCaseValidator = $useCaseValidator;
 		$this->assertPropertyExists = $assertPropertyExists;
+		$this->assertUserIsAuthorized = $assertUserIsAuthorized;
 		$this->descriptionsRetriever = $DescriptionsRetriever;
 		$this->descriptionsSerializer = $descriptionsSerializer;
 		$this->patcher = $patcher;
@@ -55,6 +59,8 @@ class PatchPropertyDescriptions {
 		$propertyId = $deserializedRequest->getPropertyId();
 
 		$this->assertPropertyExists->execute( $propertyId );
+
+		$this->assertUserIsAuthorized->execute( $propertyId, $deserializedRequest->getEditMetadata()->getUser()->getUsername() );
 
 		$modifiedDescriptions = $this->patcher->execute(
 			iterator_to_array(

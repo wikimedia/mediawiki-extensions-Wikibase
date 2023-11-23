@@ -660,6 +660,7 @@ return [
 		return new PatchPropertyDescriptions(
 			WbRestApi::getValidatingRequestDeserializer( $services ),
 			WbRestApi::getAssertPropertyExists( $services ),
+			WbRestApi::getAssertUserIsAuthorized( $services ),
 			new TermLookupEntityTermsRetriever( WikibaseRepo::getTermLookup(), WikibaseRepo::getTermsLanguages() ),
 			new DescriptionsSerializer(),
 			new PatchJson( new JsonDiffJsonPatcher() ),

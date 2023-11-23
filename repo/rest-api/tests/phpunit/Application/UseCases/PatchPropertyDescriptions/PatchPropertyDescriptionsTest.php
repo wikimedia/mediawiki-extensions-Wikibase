@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\Property as DataModelProperty;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions\PatchPropertyDescriptions;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions\PatchPropertyDescriptionsRequest;
@@ -43,6 +44,7 @@ class PatchPropertyDescriptionsTest extends TestCase {
 
 	private PatchPropertyDescriptionsValidator $validator;
 	private AssertPropertyExists $assertPropertyExists;
+	private AssertUserIsAuthorized $assertUserIsAuthorized;
 	private DescriptionsSerializer $descriptionsSerializer;
 	private PropertyDescriptionsRetriever $descriptionsRetriever;
 	private PatchJson $patcher;
@@ -55,6 +57,7 @@ class PatchPropertyDescriptionsTest extends TestCase {
 
 		$this->validator = new TestValidatingRequestDeserializer();
 		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
+		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
 		$this->descriptionsRetriever = $this->createStub( PropertyDescriptionsRetriever::class );
 		$this->descriptionsSerializer = new DescriptionsSerializer();
 		$this->patcher = new PatchJson( new JsonDiffJsonPatcher() );
@@ -142,10 +145,31 @@ class PatchPropertyDescriptionsTest extends TestCase {
 		}
 	}
 
+	public function testGivenUnauthorizedRequest_throws(): void {
+		$username = 'bad-user';
+		$propertyId = new NumericPropertyId( 'P31' );
+		$request = new PatchPropertyDescriptionsRequest( "$propertyId", [], [], false, null, $username );
+		$expectedException = $this->createStub( UseCaseError::class );
+
+		$this->assertUserIsAuthorized = $this->createMock( AssertUserIsAuthorized::class );
+		$this->assertUserIsAuthorized->expects( $this->once() )
+			->method( 'execute' )
+			->with( $propertyId, $username )
+			->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase()->execute( $request );
+			$this->fail( 'expected exception was not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
 	private function newUseCase(): PatchPropertyDescriptions {
 		return new PatchPropertyDescriptions(
 			$this->validator,
 			$this->assertPropertyExists,
+			$this->assertUserIsAuthorized,
 			$this->descriptionsRetriever,
 			$this->descriptionsSerializer,
 			$this->patcher,
