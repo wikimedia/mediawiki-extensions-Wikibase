@@ -471,6 +471,10 @@
 			var listview = this.$listview.data( 'listview' );
 			return listview.startEditing().done( function () {
 				self.updateInputSize();
+
+				if ( $( self.element ).find( '.mw-pulsating-dot-container' ).length ) {
+					self._onMulPulsatingDotClicked();
+				}
 			} );
 		},
 
@@ -478,6 +482,10 @@
 		 * @param {boolean} [dropValue]
 		 */
 		_stopEditing: function ( dropValue ) {
+			if ( this._popup ) {
+				this._popup.toggle( false );
+			}
+
 			var listview = this.$listview.data( 'listview' );
 
 			return $.when.apply( $, listview.value().map( function ( entitytermsforlanguageview ) {
