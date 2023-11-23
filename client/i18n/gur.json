@@ -2,11 +2,18 @@
 	"@metadata": {
 		"authors": [
 			"Akakiiri",
+			"Akolpoka",
 			"Amoramah",
 			"Ayire Adongo",
 			"Dnshitobu"
 		]
 	},
+	"wikibase-client-desc": "\"Client\" bɔ'ɔra \"wikibase\" pa'asegɔ la",
+	"tooltip-t-wikibase": "Dɔregɔ n wan yakɛ \"data repository\" lɔgerɔ",
+	"wikibase-after-page-move": "Fu ŋmɛregerɛ nananewa wan dɛna la [$1 reflected in the {{WBREPONAME}} item] Tu some ti fu bisɛ bala san iŋɛ ni.",
+	"wikibase-after-page-delete": "La nari ni ti ba yese ɔregɔ sɛka n boi pɛgera wa ze'ele la [$1 the associated {{WBREPONAME}} item]. Tumam soke ti fu bisɛ ti dina iŋɛ mɛ.",
+	"wikibase-after-page-delete-queued": "\n[$1 {{WBREPONAME}} item] la n naɛ ba miŋa la pɛgedina la wan pa'asɛ ni buyila. \nN beleni fu mɛ mina ti dina ta'am kan iŋɛ nananewa.",
+	"wikibase-comment-add": "{{WBREPONAME}} la lɔgerɔ la pa'alɛ ya.",
 	"wikibase-dataitem": "{{WBREPONAME}} lɔkɔ",
 	"wikibase-editlinks": "Demese toŋɛre",
 	"wikibase-editlinkstitle": "Demese tɔgewɔnɛ tongere",
