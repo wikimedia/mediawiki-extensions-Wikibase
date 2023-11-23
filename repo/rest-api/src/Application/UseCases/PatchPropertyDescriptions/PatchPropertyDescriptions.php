@@ -4,6 +4,7 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions;
 
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionsEditSummary;
@@ -18,6 +19,7 @@ use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
 class PatchPropertyDescriptions {
 
 	private PatchPropertyDescriptionsValidator $useCaseValidator;
+	private AssertPropertyExists $assertPropertyExists;
 	private PropertyDescriptionsRetriever $descriptionsRetriever;
 	private DescriptionsSerializer $descriptionsSerializer;
 	private PatchJson $patcher;
@@ -27,6 +29,7 @@ class PatchPropertyDescriptions {
 
 	public function __construct(
 		PatchPropertyDescriptionsValidator $useCaseValidator,
+		AssertPropertyExists $assertPropertyExists,
 		PropertyDescriptionsRetriever $DescriptionsRetriever,
 		DescriptionsSerializer $descriptionsSerializer,
 		PatchJson $patcher,
@@ -35,6 +38,7 @@ class PatchPropertyDescriptions {
 		PropertyUpdater $propertyUpdater
 	) {
 		$this->useCaseValidator = $useCaseValidator;
+		$this->assertPropertyExists = $assertPropertyExists;
 		$this->descriptionsRetriever = $DescriptionsRetriever;
 		$this->descriptionsSerializer = $descriptionsSerializer;
 		$this->patcher = $patcher;
@@ -49,6 +53,8 @@ class PatchPropertyDescriptions {
 	public function execute( PatchPropertyDescriptionsRequest $request ): PatchPropertyDescriptionsResponse {
 		$deserializedRequest = $this->useCaseValidator->validateAndDeserialize( $request );
 		$propertyId = $deserializedRequest->getPropertyId();
+
+		$this->assertPropertyExists->execute( $propertyId );
 
 		$modifiedDescriptions = $this->patcher->execute(
 			iterator_to_array(

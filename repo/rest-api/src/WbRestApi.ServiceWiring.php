@@ -659,6 +659,7 @@ return [
 	'WbRestApi.PatchPropertyDescriptions' => function( MediaWikiServices $services ): PatchPropertyDescriptions {
 		return new PatchPropertyDescriptions(
 			WbRestApi::getValidatingRequestDeserializer( $services ),
+			WbRestApi::getAssertPropertyExists( $services ),
 			new TermLookupEntityTermsRetriever( WikibaseRepo::getTermLookup(), WikibaseRepo::getTermsLanguages() ),
 			new DescriptionsSerializer(),
 			new PatchJson( new JsonDiffJsonPatcher() ),

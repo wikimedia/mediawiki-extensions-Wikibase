@@ -8,10 +8,12 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property as DataModelProperty;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions\PatchPropertyDescriptions;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions\PatchPropertyDescriptionsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions\PatchPropertyDescriptionsValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
@@ -40,6 +42,7 @@ class PatchPropertyDescriptionsTest extends TestCase {
 	use EditMetadataHelper;
 
 	private PatchPropertyDescriptionsValidator $validator;
+	private AssertPropertyExists $assertPropertyExists;
 	private DescriptionsSerializer $descriptionsSerializer;
 	private PropertyDescriptionsRetriever $descriptionsRetriever;
 	private PatchJson $patcher;
@@ -51,6 +54,7 @@ class PatchPropertyDescriptionsTest extends TestCase {
 		parent::setUp();
 
 		$this->validator = new TestValidatingRequestDeserializer();
+		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
 		$this->descriptionsRetriever = $this->createStub( PropertyDescriptionsRetriever::class );
 		$this->descriptionsSerializer = new DescriptionsSerializer();
 		$this->patcher = new PatchJson( new JsonDiffJsonPatcher() );
@@ -123,9 +127,25 @@ class PatchPropertyDescriptionsTest extends TestCase {
 		}
 	}
 
+	public function testGivenPropertyNotFound_throws(): void {
+		$request = new PatchPropertyDescriptionsRequest( 'P999999', [], [], false, null, null );
+		$expectedException = $this->createStub( UseCaseError::class );
+
+		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
+		$this->assertPropertyExists->method( 'execute' )->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase()->execute( $request );
+			$this->fail( 'expected exception was not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
 	private function newUseCase(): PatchPropertyDescriptions {
 		return new PatchPropertyDescriptions(
 			$this->validator,
+			$this->assertPropertyExists,
 			$this->descriptionsRetriever,
 			$this->descriptionsSerializer,
 			$this->patcher,
