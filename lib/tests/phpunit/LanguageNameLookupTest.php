@@ -1,8 +1,12 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Lib\Tests;
 
+use MediaWiki\Languages\LanguageNameUtils;
 use MediaWiki\MediaWikiServices;
+use MediaWikiIntegrationTestCase;
 use Wikibase\Lib\LanguageNameLookup;
 
 /**
@@ -12,26 +16,26 @@ use Wikibase\Lib\LanguageNameLookup;
  *
  * @license GPL-2.0-or-later
  */
-class LanguageNameLookupTest extends \PHPUnit\Framework\TestCase {
+class LanguageNameLookupTest extends MediaWikiIntegrationTestCase {
 
 	public static function getNameProvider() {
 		return [
-			[ // #0
+			'en autonym' => [
 				'en',
-				null,
+				LanguageNameUtils::AUTONYMS,
 				'English',
 			],
-			[ // #1
+			'de autonym' => [
 				'de',
-				null,
+				LanguageNameUtils::AUTONYMS,
 				'Deutsch',
 			],
-			[ // #2
+			'en in de' => [
 				'en',
 				'de',
 				'Englisch',
 			],
-			[ // #3
+			'de in en' => [
 				'de',
 				'en',
 				'German',
@@ -42,9 +46,9 @@ class LanguageNameLookupTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider getNameProvider
 	 */
-	public function testGetName( $lang, $in, $expected ) {
-		if ( $in !== null && !\ExtensionRegistry::getInstance()->isLoaded( 'CLDR' ) ) {
-			$this->markTestSkipped( 'CLDR extension required for full language name support' );
+	public function testGetName( string $lang, ?string $in, string $expected ) {
+		if ( $in !== LanguageNameUtils::AUTONYMS ) {
+			$this->markTestSkippedIfExtensionNotLoaded( 'CLDR' );
 		}
 
 		$languageNameLookup = new LanguageNameLookup(
