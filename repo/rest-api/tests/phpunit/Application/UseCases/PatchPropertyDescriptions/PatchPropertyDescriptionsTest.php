@@ -7,11 +7,14 @@ use PHPUnit\Framework\Constraint\Callback;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property as DataModelProperty;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions\PatchedPropertyDescriptionsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions\PatchPropertyDescriptions;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions\PatchPropertyDescriptionsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions\PatchPropertyDescriptionsValidator;
@@ -50,7 +53,7 @@ class PatchPropertyDescriptionsTest extends TestCase {
 	private PropertyDescriptionsRetriever $descriptionsRetriever;
 	private PatchJson $patcher;
 	private PropertyRetriever $propertyRetriever;
-	private DescriptionsDeserializer $descriptionsDeserializer;
+	private PatchedPropertyDescriptionsValidator $patchedDescriptionsValidator;
 	private PropertyUpdater $propertyUpdater;
 
 	protected function setUp(): void {
@@ -60,10 +63,18 @@ class PatchPropertyDescriptionsTest extends TestCase {
 		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
 		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
 		$this->descriptionsRetriever = $this->createStub( PropertyDescriptionsRetriever::class );
+		$this->descriptionsRetriever->method( 'getDescriptions' )->willReturn( new Descriptions() );
 		$this->descriptionsSerializer = new DescriptionsSerializer();
 		$this->patcher = new PatchJson( new JsonDiffJsonPatcher() );
 		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
-		$this->descriptionsDeserializer = new DescriptionsDeserializer();
+		$this->propertyRetriever->method( 'getProperty' )
+			->willReturn( new DataModelProperty( null, null, 'string' ) );
+		$this->patchedDescriptionsValidator = $this->createStub( PatchedPropertyDescriptionsValidator::class );
+		$this->patchedDescriptionsValidator->method( 'validateAndDeserialize' )
+			->willReturnCallback(
+				fn( PropertyId $id, TermList $descriptions, array $patchedDescriptions ) => ( new DescriptionsDeserializer() )
+					->deserialize( $patchedDescriptions )
+			);
 		$this->propertyUpdater = $this->createStub( PropertyUpdater::class );
 	}
 
@@ -210,6 +221,31 @@ class PatchPropertyDescriptionsTest extends TestCase {
 		];
 	}
 
+	public function testGivenPatchedDescriptionsInvalid_throws(): void {
+		$propertyId = new NumericPropertyId( 'P123' );
+		$request = new PatchPropertyDescriptionsRequest(
+			"$propertyId",
+			[
+				[ 'op' => 'add', 'path' => '/bad-language-code', 'value' => 'description text' ],
+			],
+			[],
+			false,
+			null,
+			null
+		);
+
+		$expectedException = $this->createStub( UseCaseError::class );
+		$this->patchedDescriptionsValidator = $this->createStub( PatchedPropertyDescriptionsValidator::class );
+		$this->patchedDescriptionsValidator->method( 'validateAndDeserialize' )->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase()->execute( $request );
+			$this->fail( 'expected exception was not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
 	private function newUseCase(): PatchPropertyDescriptions {
 		return new PatchPropertyDescriptions(
 			$this->validator,
@@ -219,7 +255,7 @@ class PatchPropertyDescriptionsTest extends TestCase {
 			$this->descriptionsSerializer,
 			$this->patcher,
 			$this->propertyRetriever,
-			$this->descriptionsDeserializer,
+			$this->patchedDescriptionsValidator,
 			$this->propertyUpdater
 		);
 	}

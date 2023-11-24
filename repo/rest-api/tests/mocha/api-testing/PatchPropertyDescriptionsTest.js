@@ -22,16 +22,16 @@ function assertValidErrorResponse( response, statusCode, responseBodyErrorCode, 
 describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), () => {
 
 	let testPropertyId;
-	let testEnDescription;
 	let originalLastModified;
 	let originalRevisionId;
 	const languageWithExistingDescription = 'en';
+	const testEnDescription = `some-description-${utils.uniq()}`;
+	const testEnLabel = `some-label-${utils.uniq()}`;
 
 	before( async function () {
-		testEnDescription = `some-description-${utils.uniq()}`;
-
 		testPropertyId = ( await entityHelper.createEntity( 'property', {
 			datatype: 'string',
+			labels: [ { language: 'en', value: testEnLabel } ],
 			descriptions: [ { language: languageWithExistingDescription, value: testEnDescription } ]
 		} ) ).entity.id;
 
@@ -229,6 +229,132 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 			assert.include( response.body.message, operation.path );
 			assert.include( response.body.message, JSON.stringify( operation.value ) );
 			assert.include( response.body.message, testEnDescription );
+		} );
+	} );
+
+	describe( '422 error response', () => {
+		const makeReplaceExistingDescriptionPatchOperation = ( newDescription ) => ( {
+			op: 'replace',
+			path: '/en',
+			value: newDescription
+		} );
+
+		it( 'invalid description', async () => {
+			const invalidDescription = 'tab characters \t not allowed';
+			const response = await newPatchPropertyDescriptionsRequestBuilder(
+				testPropertyId,
+				[ makeReplaceExistingDescriptionPatchOperation( invalidDescription ) ]
+			).assertValidRequest().makeRequest();
+
+			assertValidErrorResponse(
+				response,
+				422,
+				'patched-description-invalid',
+				{ language: 'en', value: invalidDescription }
+			);
+			assert.include( response.body.message, invalidDescription );
+			assert.include( response.body.message, "'en'" );
+		} );
+
+		it( 'invalid description type', async () => {
+			const invalidDescription = { object: 'not allowed' };
+			const response = await newPatchPropertyDescriptionsRequestBuilder(
+				testPropertyId,
+				[ makeReplaceExistingDescriptionPatchOperation( invalidDescription ) ]
+			).assertValidRequest().makeRequest();
+
+			assertValidErrorResponse(
+				response,
+				422,
+				'patched-description-invalid',
+				{ language: 'en', value: JSON.stringify( invalidDescription ) }
+			);
+			assert.include( response.body.message, JSON.stringify( invalidDescription ) );
+			assert.include( response.body.message, "'en'" );
+		} );
+
+		it( 'empty description', async () => {
+			const response = await newPatchPropertyDescriptionsRequestBuilder(
+				testPropertyId,
+				[ makeReplaceExistingDescriptionPatchOperation( '' ) ]
+			).assertValidRequest().makeRequest();
+
+			assertValidErrorResponse(
+				response,
+				422,
+				'patched-description-empty',
+				{ language: 'en' }
+			);
+		} );
+
+		it( 'empty description after trimming whitespace in the input', async () => {
+			const response = await newPatchPropertyDescriptionsRequestBuilder(
+				testPropertyId,
+				[ makeReplaceExistingDescriptionPatchOperation( ' \t ' ) ]
+			).assertValidRequest().makeRequest();
+
+			assertValidErrorResponse(
+				response,
+				422,
+				'patched-description-empty',
+				{ language: 'en' }
+			);
+		} );
+
+		it( 'description too long', async () => {
+			// this assumes the default value of 250 from Wikibase.default.php is in place and
+			// may fail if $wgWBRepoSettings['string-limits']['multilang']['length'] is overwritten
+			const maxLength = 250;
+			const tooLongDescription = 'x'.repeat( maxLength + 1 );
+			const response = await newPatchPropertyDescriptionsRequestBuilder(
+				testPropertyId,
+				[ makeReplaceExistingDescriptionPatchOperation( tooLongDescription ) ]
+			).assertValidRequest().makeRequest();
+
+			assertValidErrorResponse(
+				response,
+				422,
+				'patched-description-too-long',
+				{ value: tooLongDescription, 'character-limit': maxLength, language: 'en' }
+			);
+			assert.strictEqual(
+				response.body.message,
+				`Changed description for 'en' must not be more than ${maxLength} characters long`
+			);
+		} );
+
+		it( 'invalid language code', async () => {
+			const invalidLanguage = 'invalid-language-code';
+			const response = await newPatchPropertyDescriptionsRequestBuilder(
+				testPropertyId,
+				[ { op: 'add', path: `/${invalidLanguage}`, value: 'potato' } ]
+			).assertValidRequest().makeRequest();
+
+			assertValidErrorResponse(
+				response,
+				422,
+				'patched-descriptions-invalid-language-code',
+				{ language: invalidLanguage }
+			);
+			assert.include( response.body.message, invalidLanguage );
+		} );
+
+		it( 'patched-property-label-description-same-value', async () => {
+			const response = await newPatchPropertyDescriptionsRequestBuilder(
+				testPropertyId,
+				[ makeReplaceExistingDescriptionPatchOperation( testEnLabel ) ]
+			).assertValidRequest().makeRequest();
+
+			assertValidErrorResponse(
+				response,
+				422,
+				'patched-property-label-description-same-value',
+				{ language: 'en' }
+			);
+			assert.strictEqual(
+				response.body.message,
+				'Label and description for language code en can not have the same value.'
+			);
 		} );
 	} );
 } );

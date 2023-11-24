@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions;
 
-use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
@@ -26,28 +25,28 @@ class PatchPropertyDescriptions {
 	private DescriptionsSerializer $descriptionsSerializer;
 	private PatchJson $patcher;
 	private PropertyRetriever $propertyRetriever;
-	private DescriptionsDeserializer $descriptionsDeserializer;
+	private PatchedPropertyDescriptionsValidator $patchedDescriptionsValidator;
 	private PropertyUpdater $propertyUpdater;
 
 	public function __construct(
 		PatchPropertyDescriptionsValidator $useCaseValidator,
 		AssertPropertyExists $assertPropertyExists,
 		AssertUserIsAuthorized $assertUserIsAuthorized,
-		PropertyDescriptionsRetriever $DescriptionsRetriever,
+		PropertyDescriptionsRetriever $descriptionsRetriever,
 		DescriptionsSerializer $descriptionsSerializer,
 		PatchJson $patcher,
 		PropertyRetriever $propertyRetriever,
-		DescriptionsDeserializer $descriptionsDeserializer,
+		PatchedPropertyDescriptionsValidator $patchedDescriptionsValidator,
 		PropertyUpdater $propertyUpdater
 	) {
 		$this->useCaseValidator = $useCaseValidator;
 		$this->assertPropertyExists = $assertPropertyExists;
 		$this->assertUserIsAuthorized = $assertUserIsAuthorized;
-		$this->descriptionsRetriever = $DescriptionsRetriever;
+		$this->descriptionsRetriever = $descriptionsRetriever;
 		$this->descriptionsSerializer = $descriptionsSerializer;
 		$this->patcher = $patcher;
 		$this->propertyRetriever = $propertyRetriever;
-		$this->descriptionsDeserializer = $descriptionsDeserializer;
+		$this->patchedDescriptionsValidator = $patchedDescriptionsValidator;
 		$this->propertyUpdater = $propertyUpdater;
 	}
 
@@ -73,7 +72,11 @@ class PatchPropertyDescriptions {
 		$property = $this->propertyRetriever->getProperty( $propertyId );
 		$originalDescriptions = $property->getDescriptions();
 
-		$modifiedDescriptionsAsTermList = $this->descriptionsDeserializer->deserialize( $modifiedDescriptions );
+		$modifiedDescriptionsAsTermList = $this->patchedDescriptionsValidator->validateAndDeserialize(
+			$propertyId,
+			$originalDescriptions,
+			$modifiedDescriptions
+		);
 		$property->getFingerprint()->setDescriptions( $modifiedDescriptionsAsTermList );
 
 		$editMetadata = new EditMetadata(
