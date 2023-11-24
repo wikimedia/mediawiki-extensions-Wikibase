@@ -412,7 +412,7 @@
 		 */
 		_onMulPulsatingDotClicked: function ( _event ) {
 			if ( !this._popup ) {
-				var $target = $( this.element ).find( '.mw-pulsating-dot-container' );
+				var $target = $( this.element ).find( '.mw-pulsating-dot-popup-container' );
 
 				var dontShowMulPopupCheckbox = new OO.ui.CheckboxInputWidget( {
 					value: true,
@@ -442,7 +442,7 @@
 					$content: $tooltipContent,
 					classes: [ 'wikibase-entityterms-languagelistview-mul-popup' ],
 					$floatableContainer: $target,
-					position: 'after',
+					position: 'below',
 					align: 'forwards'
 				} );
 				$( document.body ).append( this._popup.$element );
@@ -619,11 +619,14 @@
 		_addPulsatingDotToMul: function () {
 			var $mulLanguageRow = this.element.find( '.wikibase-entitytermsforlanguageview-mul' );
 			if ( $mulLanguageRow.length ) {
-				var $pulsatingDot = $( '<span>' ).addClass( 'mw-pulsating-dot-container' );
-				$pulsatingDot.append( $( '<a>' ).addClass( 'mw-pulsating-dot' ) )
+				var $pulsatingDot = $( '<a>' ).addClass( 'mw-pulsating-dot' );
+				var $pulsatingDotPopupContainer = $( '<span>' ).addClass( 'mw-pulsating-dot-popup-container' )
+					.append( $pulsatingDot );
+				var $pulsatingDotContainer = $( '<span>' ).addClass( 'mw-pulsating-dot-container' )
+					.append( $pulsatingDotPopupContainer )
 					.on( 'click', this._onMulPulsatingDotClicked.bind( this ) );
-
-				$mulLanguageRow.find( '.wikibase-entitytermsforlanguageview-language' ).append( $pulsatingDot );
+				$mulLanguageRow.find( '.wikibase-entitytermsforlanguageview-language' )
+					.append( $pulsatingDotContainer );
 			}
 		}
 	} );
