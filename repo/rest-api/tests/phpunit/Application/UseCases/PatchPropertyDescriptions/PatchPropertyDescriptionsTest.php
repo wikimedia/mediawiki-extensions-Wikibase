@@ -31,7 +31,7 @@ use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidat
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions\PatchedDescriptions
+ * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions\PatchPropertyDescriptions
  *
  * @group Wikibase
  *
