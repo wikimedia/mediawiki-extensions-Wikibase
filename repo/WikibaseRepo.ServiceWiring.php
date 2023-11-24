@@ -1390,7 +1390,10 @@ return [
 	},
 
 	'WikibaseRepo.LanguageNameLookupFactory' => function ( MediaWikiServices $services ): LanguageNameLookupFactory {
-		return new LanguageNameLookupFactory( $services->getLanguageNameUtils() );
+		return new LanguageNameLookupFactory(
+			$services->getLanguageNameUtils(),
+			WikibaseRepo::getMessageInLanguageProvider( $services )
+		);
 	},
 
 	'WikibaseRepo.LegacyFormatDetectorCallback' => function ( MediaWikiServices $services ): ?callable {

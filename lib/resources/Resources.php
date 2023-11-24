@@ -3,6 +3,7 @@
 use MediaWiki\MediaWikiServices;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\LanguageNameLookupFactory;
+use Wikibase\Lib\MediaWikiMessageInLanguageProvider;
 use Wikibase\Lib\Modules\CurrentSiteModule;
 use Wikibase\Lib\Modules\RepoAccessModule;
 use Wikibase\Lib\Modules\SitesModule;
@@ -31,7 +32,10 @@ return call_user_func( function() {
 					WikibaseSettings::isRepoEnabled() ? WikibaseRepo::getSettings() : null,
 					MediaWikiServices::getInstance()->getSiteStore(),
 					MediaWikiServices::getInstance()->getLocalServerObjectCache(),
-					new LanguageNameLookupFactory( MediaWikiServices::getInstance()->getLanguageNameUtils() )
+					new LanguageNameLookupFactory(
+						MediaWikiServices::getInstance()->getLanguageNameUtils(),
+						new MediaWikiMessageInLanguageProvider()
+					)
 				);
 			},
 		],
@@ -43,7 +47,10 @@ return call_user_func( function() {
 					WikibaseSettings::isRepoEnabled() ? WikibaseRepo::getSettings() : null,
 					MediaWikiServices::getInstance()->getSiteStore(),
 					MediaWikiServices::getInstance()->getLocalServerObjectCache(),
-					new LanguageNameLookupFactory( MediaWikiServices::getInstance()->getLanguageNameUtils() )
+					new LanguageNameLookupFactory(
+						MediaWikiServices::getInstance()->getLanguageNameUtils(),
+						new MediaWikiMessageInLanguageProvider()
+					)
 				);
 			},
 		],

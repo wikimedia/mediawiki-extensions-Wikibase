@@ -8,6 +8,7 @@ use MediaWiki\Languages\LanguageNameUtils;
 use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\MediaWikiMessageInLanguageProvider;
 
 /**
  * @covers \Wikibase\Lib\LanguageNameLookup
@@ -53,10 +54,36 @@ class LanguageNameLookupTest extends MediaWikiIntegrationTestCase {
 
 		$languageNameLookup = new LanguageNameLookup(
 			MediaWikiServices::getInstance()->getLanguageNameUtils(),
+			new MediaWikiMessageInLanguageProvider(),
 			$in
 		);
 		$name = $languageNameLookup->getName( $lang );
 		$this->assertSame( $expected, $name );
+	}
+
+	/** @dataProvider getNameProvider */
+	public function testGetNameForTerms_notMul( string $lang, ?string $in, string $expected ): void {
+		if ( $in !== null ) {
+			$this->markTestSkippedIfExtensionNotLoaded( 'CLDR' );
+		}
+
+		$languageNameLookup = new LanguageNameLookup(
+			MediaWikiServices::getInstance()->getLanguageNameUtils(),
+			new MediaWikiMessageInLanguageProvider(),
+			$in
+		);
+		$name = $languageNameLookup->getNameForTerms( $lang );
+		$this->assertSame( $expected, $name );
+	}
+
+	public function testGetNameForTerms_mul(): void {
+		$languageNameLookup = new LanguageNameLookup(
+			MediaWikiServices::getInstance()->getLanguageNameUtils(),
+			new MediaWikiMessageInLanguageProvider(),
+			'en'
+		);
+		$name = $languageNameLookup->getNameForTerms( 'mul' );
+		$this->assertSame( 'default values (mul)', $name );
 	}
 
 }

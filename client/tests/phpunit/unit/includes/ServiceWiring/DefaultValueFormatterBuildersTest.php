@@ -11,6 +11,7 @@ use Wikibase\DataAccess\NullPrefetchingTermLookup;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
+use Wikibase\Lib\MediaWikiMessageInLanguageProvider;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\HashSiteLinkStore;
 use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
@@ -58,6 +59,8 @@ class DefaultValueFormatterBuildersTest extends ServiceWiringTestCase {
 			->method( 'getLinkBatchFactory' );
 		$this->serviceContainer->expects( $this->once() )
 			->method( 'getLanguageNameUtils' );
+		$this->mockService( 'WikibaseClient.MessageInLanguageProvider',
+			new MediaWikiMessageInLanguageProvider() );
 		$this->mockService( 'WikibaseClient.KartographerEmbeddingHandler',
 			null );
 		$this->serviceContainer->expects( $this->once() )

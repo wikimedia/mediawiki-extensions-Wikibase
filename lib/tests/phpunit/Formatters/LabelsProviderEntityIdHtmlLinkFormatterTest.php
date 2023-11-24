@@ -214,7 +214,7 @@ class LabelsProviderEntityIdHtmlLinkFormatterTest extends MediaWikiIntegrationTe
 
 	private function newMockLanguageNameLookup(): LanguageNameLookup {
 		$languageNameLookup = $this->createMock( LanguageNameLookup::class );
-		$languageNameLookup->method( 'getName' )
+		$languageNameLookup->method( 'getNameForTerms' )
 			->willReturnCallback(
 				function ( $languageCode ) {
 					$names = [

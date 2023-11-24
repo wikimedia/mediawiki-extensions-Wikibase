@@ -38,8 +38,10 @@ class ItemDisambiguationTest extends MediaWikiIntegrationTestCase {
 			->willReturn( $this->createMock( Title::class ) );
 
 		$languageNameLookup = $this->createMock( LanguageNameLookup::class );
-		$languageNameLookup->method( 'getName' )
+		$languageNameLookup->method( 'getNameForTerms' )
 			->willReturn( '<LANG>' );
+		$languageNameLookup->expects( $this->never() )
+			->method( 'getName' ); // should use getNameForTerms(), see above
 
 		return new ItemDisambiguation(
 			$entityTitleLookup,

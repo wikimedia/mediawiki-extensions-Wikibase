@@ -39,10 +39,12 @@ class TermsListViewTest extends \PHPUnit\Framework\TestCase {
 	) {
 		$languageNameLookup = $this->createMock( LanguageNameLookup::class );
 		$languageNameLookup->expects( $this->exactly( $languageNameCalls ) )
-			->method( 'getName' )
+			->method( 'getNameForTerms' )
 			->willReturnCallback( function( $languageCode ) {
 				return "<LANGUAGENAME-$languageCode>";
 			} );
+		$languageNameLookup->expects( $this->never() )
+			->method( 'getName' ); // should use getNameForTerms(), see above
 
 		$languageDirectionalityLookup = $this->createMock( LanguageDirectionalityLookup::class );
 		$languageDirectionalityLookup->method( 'getDirectionality' )

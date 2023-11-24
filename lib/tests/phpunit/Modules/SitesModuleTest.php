@@ -13,6 +13,7 @@ use MediaWiki\ResourceLoader\Context;
 use MediaWikiSite;
 use Site;
 use Wikibase\Lib\LanguageNameLookupFactory;
+use Wikibase\Lib\MediaWikiMessageInLanguageProvider;
 use Wikibase\Lib\Modules\SitesModule;
 use Wikibase\Lib\SettingsArray;
 
@@ -178,7 +179,7 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 			$repoSettings,
 			new HashSiteStore( [ $site1, $site2 ] ),
 			new HashBagOStuff(),
-			new LanguageNameLookupFactory( MediaWikiServices::getInstance()->getLanguageNameUtils() )
+			$this->newLanguageNameLookupFactory(),
 		);
 
 		$script = $module->getScript( $this->getContext() );
@@ -246,7 +247,7 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 			null,
 			new HashSiteStore( $sites ),
 			new HashBagOStuff(),
-			new LanguageNameLookupFactory( MediaWikiServices::getInstance()->getLanguageNameUtils() )
+			$this->newLanguageNameLookupFactory(),
 		);
 		$module->setName( 'test' );
 		return $module;
@@ -262,10 +263,17 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 				null,
 				new HashSiteStore( $sites ),
 				$cache,
-				new LanguageNameLookupFactory( MediaWikiServices::getInstance()->getLanguageNameUtils() ),
+				$this->newLanguageNameLookupFactory(),
 			] )
 			->onlyMethods( [ 'makeScript' ] )
 			->getMock();
+	}
+
+	private function newLanguageNameLookupFactory(): LanguageNameLookupFactory {
+		return new LanguageNameLookupFactory(
+			MediaWikiServices::getInstance()->getLanguageNameUtils(),
+			new MediaWikiMessageInLanguageProvider()
+		);
 	}
 
 }

@@ -62,7 +62,7 @@ class HTMLContentLanguageField extends HTMLComboboxField {
 	private function constructOptions( array $languageCodes, LanguageNameLookup $lookup ) {
 		$languageOptions = [];
 		foreach ( $languageCodes as $code ) {
-			$languageName = $lookup->getName( $code );
+			$languageName = $lookup->getNameForTerms( $code );
 			$languageOptions["$languageName ($code)"] = $code;
 		}
 

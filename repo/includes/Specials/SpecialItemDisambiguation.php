@@ -175,7 +175,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 			->getForLanguage( $this->getLanguage() );
 		$options = [];
 		foreach ( $this->contentLanguages->getLanguages() as $languageCode ) {
-			$languageName = $languageNameLookup->getName( $languageCode );
+			$languageName = $languageNameLookup->getNameForTerms( $languageCode );
 			$options["$languageName ($languageCode)"] = $languageCode;
 		}
 		return $options;

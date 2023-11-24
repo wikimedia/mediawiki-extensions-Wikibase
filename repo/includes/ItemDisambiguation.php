@@ -163,7 +163,7 @@ class ItemDisambiguation {
 		}
 
 		$text = $match->getText();
-		$language = $this->languageNameLookup->getName( $match->getLanguageCode() );
+		$language = $this->languageNameLookup->getNameForTerms( $match->getLanguageCode() );
 
 		$matchElement = $descriptionElement = Html::element(
 			'span',

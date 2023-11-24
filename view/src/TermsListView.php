@@ -94,7 +94,7 @@ class TermsListView {
 		?AliasGroupList $aliasGroups,
 		string $languageCode
 	): string {
-		$languageName = $this->languageNameLookup->getName( $languageCode );
+		$languageName = $this->languageNameLookup->getNameForTerms( $languageCode );
 
 		return $this->templateFactory->render(
 			'wikibase-entitytermsforlanguageview',

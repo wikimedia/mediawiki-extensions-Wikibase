@@ -13,9 +13,14 @@ use MediaWiki\Languages\LanguageNameUtils;
 class LanguageNameLookupFactory {
 
 	private LanguageNameUtils $languageNameUtils;
+	private MessageInLanguageProvider $messageInLanguageProvider;
 
-	public function __construct( LanguageNameUtils $languageNameUtils ) {
+	public function __construct(
+		LanguageNameUtils $languageNameUtils,
+		MessageInLanguageProvider $messageInLanguageProvider
+	) {
 		$this->languageNameUtils = $languageNameUtils;
+		$this->messageInLanguageProvider = $messageInLanguageProvider;
 	}
 
 	public function getForLanguage( Language $inLanguage ): LanguageNameLookup {
@@ -23,10 +28,18 @@ class LanguageNameLookupFactory {
 	}
 
 	public function getForLanguageCode( string $inLanguage ): LanguageNameLookup {
-		return new LanguageNameLookup( $this->languageNameUtils, $inLanguage );
+		return new LanguageNameLookup(
+			$this->languageNameUtils,
+			$this->messageInLanguageProvider,
+			$inLanguage
+		);
 	}
 
 	public function getForAutonyms(): LanguageNameLookup {
-		return new LanguageNameLookup( $this->languageNameUtils, LanguageNameUtils::AUTONYMS );
+		return new LanguageNameLookup(
+			$this->languageNameUtils,
+			$this->messageInLanguageProvider,
+			LanguageNameUtils::AUTONYMS
+		);
 	}
 }

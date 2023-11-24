@@ -18,6 +18,7 @@
 	"wikibase-error-ui-no-external-page": "A page \"$2\" could not be found on \"$1\".",
 	"wikibase-error-ui-edit-conflict": "The same value was edited in the meantime, causing an edit conflict. Please reload the page.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (transliterated)",
+	"wikibase-language-name-for-terms-mul": "default values (mul)",
 	"wikibase-quantitydetails-amount": "Amount",
 	"wikibase-quantitydetails-upperbound": "Upper bound",
 	"wikibase-quantitydetails-lowerbound": "Lower bound",

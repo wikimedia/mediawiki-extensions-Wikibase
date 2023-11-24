@@ -301,7 +301,10 @@ return [
 		);
 		$termFallbackCache = WikibaseClient::getTermFallbackCache( $services );
 		$redirectResolvingLatestRevisionLookup = WikibaseClient::getRedirectResolvingLatestRevisionLookup( $services );
-		$languageNameLookupFactory = new LanguageNameLookupFactory( $services->getLanguageNameUtils() );
+		$languageNameLookupFactory = new LanguageNameLookupFactory(
+			$services->getLanguageNameUtils(),
+			WikibaseClient::getMessageInLanguageProvider( $services )
+		);
 
 		return new WikibaseValueFormatterBuilders(
 			new FormatterLabelDescriptionLookupFactory(

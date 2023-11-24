@@ -46,12 +46,12 @@ class LanguageFallbackIndicator {
 			}
 		}
 
-		$text = $this->languageNameLookup->getName( $actualLanguage );
+		$text = $this->languageNameLookup->getNameForTerms( $actualLanguage );
 
 		if ( $isTransliteration ) {
 			$text = wfMessage(
 				'wikibase-language-fallback-transliteration-hint',
-				$this->languageNameLookup->getName( $sourceLanguage ),
+				$this->languageNameLookup->getNameForTerms( $sourceLanguage ),
 				$text
 			)->text();
 		}

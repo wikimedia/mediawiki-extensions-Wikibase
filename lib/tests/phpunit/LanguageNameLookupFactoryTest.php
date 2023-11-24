@@ -6,6 +6,7 @@ namespace Wikibase\Lib\Tests;
 
 use Language;
 use Wikibase\Lib\LanguageNameLookupFactory;
+use Wikibase\Lib\MediaWikiMessageInLanguageProvider;
 
 /**
  * @covers \Wikibase\Lib\LanguageNameLookupFactory
@@ -24,34 +25,40 @@ class LanguageNameLookupFactoryTest extends \MediaWikiIntegrationTestCase {
 			->method( 'getCode' )
 			->willReturn( 'de' );
 		$languageNameLookupFactory = new LanguageNameLookupFactory(
-			$this->getServiceContainer()->getLanguageNameUtils()
+			$this->getServiceContainer()->getLanguageNameUtils(),
+			new MediaWikiMessageInLanguageProvider()
 		);
 
 		$languageNameLookup = $languageNameLookupFactory->getForLanguage( $language );
 
-		$this->assertSame( 'Englisch', $languageNameLookup->getName( 'en' ) );
+		$this->assertSame( 'Englisch',
+			$languageNameLookup->getName( 'en' ) );
 	}
 
 	public function testForLanguageCode(): void {
 		$this->markTestSkippedIfExtensionNotLoaded( 'CLDR' );
 
 		$languageNameLookupFactory = new LanguageNameLookupFactory(
-			$this->getServiceContainer()->getLanguageNameUtils()
+			$this->getServiceContainer()->getLanguageNameUtils(),
+			new MediaWikiMessageInLanguageProvider()
 		);
 
 		$languageNameLookup = $languageNameLookupFactory->getForLanguageCode( 'de' );
 
-		$this->assertSame( 'Englisch', $languageNameLookup->getName( 'en' ) );
+		$this->assertSame( 'Englisch',
+			$languageNameLookup->getName( 'en' ) );
 	}
 
 	public function testForAutonyms(): void {
 		$languageNameLookupFactory = new LanguageNameLookupFactory(
-			$this->getServiceContainer()->getLanguageNameUtils()
+			$this->getServiceContainer()->getLanguageNameUtils(),
+			new MediaWikiMessageInLanguageProvider()
 		);
 
 		$languageNameLookup = $languageNameLookupFactory->getForAutonyms();
 
-		$this->assertSame( 'English', $languageNameLookup->getName( 'en' ) );
+		$this->assertSame( 'English',
+			$languageNameLookup->getName( 'en' ) );
 	}
 
 }
