@@ -2,7 +2,9 @@
 
 namespace Wikibase\Repo\RestApi\RouteHandlers;
 
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Handler;
+use MediaWiki\Rest\RequestInterface;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
@@ -12,6 +14,11 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions\PatchPr
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions\PatchPropertyDescriptionsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions\PatchPropertyDescriptionsResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\BotRightCheckMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\ContentTypeCheckMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -26,29 +33,53 @@ class PatchPropertyDescriptionsRouteHandler extends SimpleHandler {
 	public const BOT_BODY_PARAM = 'bot';
 	public const COMMENT_BODY_PARAM = 'comment';
 
+	private MiddlewareHandler $middlewareHandler;
 	private PatchPropertyDescriptions $useCase;
 	private DescriptionsSerializer $serializer;
 	private ResponseFactory $responseFactory;
 
 	public function __construct(
+		MiddlewareHandler $middlewareHandler,
 		PatchPropertyDescriptions $useCase,
 		DescriptionsSerializer $serializer,
 		ResponseFactory $responseFactory
 	) {
+		$this->middlewareHandler = $middlewareHandler;
 		$this->useCase = $useCase;
 		$this->serializer = $serializer;
 		$this->responseFactory = $responseFactory;
 	}
 
 	public static function factory(): Handler {
+		$responseFactory = new ResponseFactory();
 		return new self(
+			new MiddlewareHandler( [
+				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
+				new UserAgentCheckMiddleware(),
+				new ContentTypeCheckMiddleware( [
+					ContentTypeCheckMiddleware::TYPE_JSON_PATCH,
+					ContentTypeCheckMiddleware::TYPE_APPLICATION_JSON,
+				] ),
+				new AuthenticationMiddleware(),
+				new BotRightCheckMiddleware( MediaWikiServices::getInstance()->getPermissionManager(), $responseFactory ),
+				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
+					fn( RequestInterface $request ): string => $request->getPathParam( self::PROPERTY_ID_PATH_PARAM )
+				),
+			] ),
 			WbRestApi::getPatchPropertyDescriptions(),
 			new DescriptionsSerializer(),
-			new ResponseFactory()
+			$responseFactory
 		);
 	}
 
-	public function run( string $propertyId ): Response {
+	/**
+	 * @param mixed ...$args
+	 */
+	public function run( ...$args ): Response {
+		return $this->middlewareHandler->run( $this, [ $this, 'runUseCase' ], $args );
+	}
+
+	public function runUseCase( string $propertyId ): Response {
 		$jsonBody = $this->getValidatedBody();
 		try {
 			return $this->newSuccessHttpResponse(
@@ -121,6 +152,15 @@ class PatchPropertyDescriptionsRouteHandler extends SimpleHandler {
 		);
 
 		return $httpResponse;
+	}
+
+	/**
+	 * Preconditions are checked via {@link PreconditionMiddleware}
+	 *
+	 * @inheritDoc
+	 */
+	public function checkPreconditions() {
+		return null;
 	}
 
 	private function getUsername(): ?string {
