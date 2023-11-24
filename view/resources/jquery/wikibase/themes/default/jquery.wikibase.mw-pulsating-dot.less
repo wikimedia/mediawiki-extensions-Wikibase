@@ -1,12 +1,13 @@
 .wikibase-entitytermsforlanguageview-language .mw-pulsating-dot {
 	position: relative;
 	vertical-align: middle;
-	width: 10px; // distance from pulsating dot to popup anchor
 	display: inline-block;
 
 	&-container {
-		position: relative;
 		left: 15px; // distance from multiple languages label to pulsating dot
+		position: relative; // so the left has an effect
+		width: 12px; // width of the pulsating dot: the outer container should overflow rather than overlap the label
+		display: inline-block; // so the width has an effect
 
 		.wikibase-entitytermsforlanguagelistview:not( .wb-edit ) & {
 			display: none;
