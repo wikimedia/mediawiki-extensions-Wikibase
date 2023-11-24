@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\PatchPropertyDescriptions;
 
+use Generator;
 use PHPUnit\Framework\Constraint\Callback;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
@@ -165,6 +166,50 @@ class PatchPropertyDescriptionsTest extends TestCase {
 		}
 	}
 
+	/**
+	 * @dataProvider provideInapplicablePatch
+	 */
+	public function testGivenValidInapplicablePatch_throwsUseCaseError(
+		array $patch,
+		string $expectedErrorCode,
+		array $expectedContext
+	): void {
+		$this->descriptionsRetriever = $this->createStub( PropertyDescriptionsRetriever::class );
+		$this->descriptionsRetriever->method( 'getDescriptions' )
+			->willReturn( new Descriptions( new Description( 'en', 'English Description' ) ) );
+
+		try {
+			$this->newUseCase()->execute( $this->newUseCaseRequest( 'P123', $patch ) );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedErrorCode, $e->getErrorCode() );
+			$this->assertEquals( $expectedContext, $e->getErrorContext() );
+		}
+	}
+
+	public static function provideInapplicablePatch(): Generator {
+		$patchOperation = [ 'op' => 'remove', 'path' => '/path/does/not/exist' ];
+		yield 'non-existent path' => [
+			[ $patchOperation ],
+			UseCaseError::PATCH_TARGET_NOT_FOUND,
+			[ 'operation' => $patchOperation, 'field' => 'path' ],
+		];
+
+		$patchOperation = [ 'op' => 'copy', 'from' => '/path/does/not/exist', 'path' => '/en' ];
+		yield 'non-existent from' => [
+			[ $patchOperation ],
+			UseCaseError::PATCH_TARGET_NOT_FOUND,
+			[ 'operation' => $patchOperation, 'field' => 'from' ],
+		];
+
+		$patchOperation = [ 'op' => 'test', 'path' => '/en', 'value' => 'incorrect value' ];
+		yield 'patch test operation failed' => [
+			[ $patchOperation ],
+			UseCaseError::PATCH_TEST_FAILED,
+			[ 'operation' => $patchOperation, 'actual-value' => 'English Description' ],
+		];
+	}
+
 	private function newUseCase(): PatchPropertyDescriptions {
 		return new PatchPropertyDescriptions(
 			$this->validator,
@@ -177,6 +222,10 @@ class PatchPropertyDescriptionsTest extends TestCase {
 			$this->descriptionsDeserializer,
 			$this->propertyUpdater
 		);
+	}
+
+	private function newUseCaseRequest( string $itemId, array $patch ): PatchPropertyDescriptionsRequest {
+		return new PatchPropertyDescriptionsRequest( $itemId, $patch, [], false, null, null );
 	}
 
 	private function expectPropertyWithDescription( string $languageCode, string $description ): Callback {

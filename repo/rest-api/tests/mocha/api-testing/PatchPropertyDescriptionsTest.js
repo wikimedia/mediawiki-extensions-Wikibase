@@ -32,7 +32,7 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 
 		testPropertyId = ( await entityHelper.createEntity( 'property', {
 			datatype: 'string',
-			labels: [ { language: languageWithExistingDescription, value: testEnDescription } ]
+			descriptions: [ { language: languageWithExistingDescription, value: testEnDescription } ]
 		} ) ).entity.id;
 
 		const testPropertyCreationMetadata = await entityHelper.getLatestEditMetadata( testPropertyId );
@@ -184,4 +184,51 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 		} );
 	} );
 
+	describe( '409 error response', () => {
+		it( '"path" field target does not exist', async () => {
+			const operation = { op: 'remove', path: '/path/does/not/exist' };
+
+			const response = await newPatchPropertyDescriptionsRequestBuilder( testPropertyId, [ operation ] )
+				.assertValidRequest().makeRequest();
+
+			assertValidErrorResponse(
+				response,
+				409,
+				'patch-target-not-found',
+				{ field: 'path', operation: operation }
+			);
+			assert.include( response.body.message, operation.path );
+		} );
+
+		it( '"from" field target does not exist', async () => {
+			const operation = { op: 'copy', from: '/path/does/not/exist', path: '/en' };
+
+			const response = await newPatchPropertyDescriptionsRequestBuilder( testPropertyId, [ operation ] )
+				.assertValidRequest().makeRequest();
+
+			assertValidErrorResponse(
+				response,
+				409,
+				'patch-target-not-found',
+				{ field: 'from', operation: operation }
+			);
+			assert.include( response.body.message, operation.from );
+		} );
+
+		it( 'patch test condition failed', async () => {
+			const operation = { op: 'test', path: '/en', value: 'incorrect' };
+			const response = await newPatchPropertyDescriptionsRequestBuilder( testPropertyId, [ operation ] )
+				.assertValidRequest().makeRequest();
+
+			assertValidErrorResponse(
+				response,
+				409,
+				'patch-test-failed',
+				{ operation: operation, 'actual-value': testEnDescription }
+			);
+			assert.include( response.body.message, operation.path );
+			assert.include( response.body.message, JSON.stringify( operation.value ) );
+			assert.include( response.body.message, testEnDescription );
+		} );
+	} );
 } );
