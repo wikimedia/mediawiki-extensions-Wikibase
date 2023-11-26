@@ -39,6 +39,10 @@ module.exports.editRequestsOnProperty = [
 			value: 'en-label-' + utils.uniq()
 		} ]
 	),
+	( { propertyId } ) => rbf.newPatchPropertyDescriptionsRequestBuilder(
+		propertyId,
+		[ { op: 'replace', path: '/en', value: 'random-test-description-' + utils.uniq() } ]
+	),
 	( { propertyId } ) => rbf.newPatchPropertyAliasesRequestBuilder(
 		propertyId,
 		[ {

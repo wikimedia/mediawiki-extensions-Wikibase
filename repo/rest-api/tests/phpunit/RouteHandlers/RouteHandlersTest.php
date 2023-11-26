@@ -70,6 +70,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsRe
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchPropertyAliases;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchPropertyAliasesResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions\PatchPropertyDescriptions;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions\PatchPropertyDescriptionsResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchPropertyLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchPropertyLabelsResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyStatement\PatchPropertyStatement;
@@ -775,6 +777,18 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 				],
 				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::ITEM_REDIRECTED ) ],
 			],
+		] ];
+		yield 'PatchPropertyDescriptions' => [ [
+			'useCase' => PatchPropertyDescriptions::class,
+			'useCaseResponse' => new PatchPropertyDescriptionsResponse( new Descriptions(), $lastModified, 123 ),
+			'validRequest' => [
+				'pathParams' => [ 'property_id' => 'P1' ],
+				'bodyContents' => [ 'patch' => [ [ 'op' => 'remove', 'path' => '/en' ] ] ],
+			],
+			'expectedExceptions' => [ [
+				new UseCaseError( UseCaseError::INVALID_PROPERTY_ID, '', [ 'property-id' => 'P1' ] ),
+				$hasErrorCode ( UseCaseError::INVALID_PROPERTY_ID ),
+			] ],
 		] ];
 		// phpcs:enable
 	}

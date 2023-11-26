@@ -16,7 +16,6 @@ const {
 	getRequestsOnItem,
 	getRequestsOnProperty
 } = require( '../helpers/happyPathRequestBuilders' );
-const rbf = require( '../helpers/RequestBuilderFactory' );
 
 async function resetEntityTestData( id, statementPropertyId ) {
 	return ( await editEntity( id, {
@@ -118,22 +117,7 @@ describe( 'Auth', () => {
 			} );
 		} );
 
-		const authorizationTestRequests = [
-			...editRequestsWithInputs,
-			{
-				newRequestBuilder: () => rbf.newPatchPropertyDescriptionsRequestBuilder(
-					propertyRequestInputs.propertyId,
-					[ {
-						op: 'replace',
-						path: '/en',
-						value: 'random-test-description-' + utils.uniq()
-					} ]
-				),
-				requestInputs: propertyRequestInputs
-			}
-		];
-
-		authorizationTestRequests.forEach( ( { newRequestBuilder } ) => {
+		editRequestsWithInputs.forEach( ( { newRequestBuilder } ) => {
 			describe( 'Blocked user', () => {
 				before( async () => {
 					await user.action( 'block', {
@@ -159,7 +143,7 @@ describe( 'Auth', () => {
 
 		// protecting/unprotecting does not always take effect immediately. These tests are isolated here to avoid
 		// accidentally testing against a protected page in the other tests and receiving false positive results.
-		authorizationTestRequests.forEach( ( { newRequestBuilder, requestInputs } ) => {
+		editRequestsWithInputs.forEach( ( { newRequestBuilder, requestInputs } ) => {
 			describe( 'Protected entity page', () => {
 				before( async () => {
 					await changeEntityProtectionStatus( requestInputs.mainTestSubject, 'sysop' ); // protect
