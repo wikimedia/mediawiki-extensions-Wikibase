@@ -11,6 +11,7 @@ describe( newRequest().getRouteDescription(), () => {
 	let originalLastModified;
 	let originalRevisionId;
 	const existingEnglishAlias = 'first english alias';
+	const existingFrenchAlias = 'first french alias';
 
 	function assertValidResponse( response, aliases ) {
 		assert.strictEqual( response.header[ 'content-type' ], 'application/json' );
@@ -31,9 +32,10 @@ describe( newRequest().getRouteDescription(), () => {
 
 	before( async () => {
 		const createEntityResponse = await entityHelper.createEntity( 'item', {
-			aliases: { en: [
-				{ language: 'en', value: existingEnglishAlias }
-			] }
+			aliases: {
+				en: [ { language: 'en', value: existingEnglishAlias } ],
+				fr: [ { language: 'fr', value: existingFrenchAlias } ]
+			}
 		} );
 		testItemId = createEntityResponse.entity.id;
 
@@ -84,10 +86,7 @@ describe( newRequest().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValid201Response(
-				response,
-				[ 'fr-alias' ]
-			);
+			assertValid200Response( response, [ existingFrenchAlias, newAlias ] );
 			const editMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 			assert.deepEqual( editMetadata.tags, [ tag ] );
 			assert.property( editMetadata, 'bot' );

@@ -13,6 +13,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\Domain\Model\AliasesInLanguageEditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
@@ -127,8 +129,13 @@ class AddItemAliasesInLanguageTest extends TestCase {
 				$this->callback(
 					fn( Item $item ) => $item->getAliasGroups()
 						->getByLanguage( $languageCode )
-						->equals( new AliasGroup( $languageCode, $updatedAliases ) )
+						->equals( new AliasGroup( $languageCode, $updatedAliases ) ),
 				),
+				new EditMetadata(
+					[],
+					false,
+					AliasesInLanguageEditSummary::newAddSummary( null, new AliasGroup( $languageCode, $aliasesToAdd ) )
+				)
 			)
 			->willReturn( new ItemRevision( $updatedItem, $modificationTimestamp, $postModificationRevisionId ) );
 
