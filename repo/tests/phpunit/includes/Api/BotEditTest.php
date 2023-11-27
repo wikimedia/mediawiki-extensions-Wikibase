@@ -2,9 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
-use ApiTestCase;
 use MediaWiki\Title\Title;
-use TestUser;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -31,12 +29,6 @@ class BotEditTest extends WikibaseApiTestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		ApiTestCase::$users['wbbot'] = new TestUser(
-			'Apitestbot',
-			'Api Test Bot',
-			'api_test_bot@example.com',
-			[ 'bot' ]
-		);
 		$this->mergeMwGlobalArrayValue( 'wgGroupPermissions', [
 			'user' => [ 'item-merge' => true, 'item-redirect' => true ],
 		] );
@@ -118,7 +110,8 @@ class BotEditTest extends WikibaseApiTestCase {
 			$params['fromid'] = EntityTestHelper::getId( $params['fromid'] );
 			$params['toid'] = EntityTestHelper::getId( $params['toid'] );
 		}
-		[ $result ] = $this->doApiRequestWithToken( $params, null, self::$users['wbbot']->getUser() );
+		$testUserBot = $this->getTestUser( [ 'bot' ] );
+		[ $result ] = $this->doApiRequestWithToken( $params, null, $testUserBot->getUser() );
 
 		// -- check the result ------------------------------------------------
 		$this->assertArrayHasKey( 'success', $result, "Missing 'success' marker in response." );
@@ -142,7 +135,7 @@ class BotEditTest extends WikibaseApiTestCase {
 		];
 
 		//@todo this really makes this test slow, is there a better way?
-		$rcResult = $this->doApiRequest( $rcRequest, null, false, self::$users['wbbot']->getUser() );
+		$rcResult = $this->doApiRequest( $rcRequest, null, false, $testUserBot->getUser() );
 
 		// -- check the recent changes result ---------------------------------
 		$this->assertArrayHasKey( 'query', $rcResult[0], "Must have a 'query' key in the result from the API" );

@@ -14,7 +14,6 @@ use MediaWiki\Title\Title;
 use OutOfBoundsException;
 use PHPUnit\Framework\Constraint\Constraint;
 use TestSites;
-use TestUser;
 use User;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -45,12 +44,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	}
 
 	protected function createTestUser() {
-		return new TestUser(
-			'Apitesteditor',
-			'Api Test Editor',
-			'api_test_editor@example.com',
-			[ 'wbeditor' ]
-		);
+		return $this->getTestUser( [ 'wbeditor' ] );
 	}
 
 	protected function getEntityStore() {
@@ -58,9 +52,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	}
 
 	protected function setupUser() {
-		self::$users['wbeditor'] = $this->createTestUser();
-
-		$this->user = self::$users['wbeditor']->getUser();
+		$this->user = $this->createTestUser()->getUser();
 		$this->setMwGlobals( 'wgGroupPermissions', [ '*' => [
 			'property-create' => true,
 			'createpage' => true,
