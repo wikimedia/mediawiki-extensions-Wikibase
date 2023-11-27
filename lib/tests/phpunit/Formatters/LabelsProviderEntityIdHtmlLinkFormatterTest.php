@@ -102,33 +102,33 @@ class LabelsProviderEntityIdHtmlLinkFormatterTest extends MediaWikiIntegrationTe
 				'term' => $deTermFallback,
 			],
 			'fallback to base' => [
-				'expectedPattern' => '@ lang="de">Kätzchen</a>'
-					. "<sup class=\"wb-language-fallback-indicator wb-language-fallback-variant\">\u{00A0}Deutsch</sup>@",
+				'expectedPattern' => '@ lang="de">Kätzchen</a>@',
 				'term' => $deAtTerm,
 			],
 			'fallback to variant' => [
-				'expectedPattern' => '@ lang="de-at">Kätzchen</a>'
-					. "<sup class=\"wb-language-fallback-indicator wb-language-fallback-variant\">\u{00A0}Österreichisches Deutsch</sup>@",
+				'expectedPattern' => '@ lang="de-at">Kätzchen</a>@',
 				'term' => $atDeTerm,
 			],
 			'transliteration to requested language' => [
-				'expectedPattern' => '@>Frass</a>'
+				'expectedPattern' => '@>Frass</a>' . "\u{00A0}"
 					. '<sup class="wb-language-fallback-indicator wb-language-fallback-transliteration">'
-					. "\u{00A0}" . preg_quote( $translitDeCh, '@' )
+					. preg_quote( $translitDeCh, '@' )
 					. '</sup>@',
 				'term' => $deChTerm,
 			],
+			// note: since I894ef4df05, the next test case is equivalent to the previous one;
+			// it’s unclear whether real MediaWiki languages and language converters
+			// can produce a fallback situation like $enGbEnCaTerm at all
 			'transliteration to other variant' => [
-				'expectedPattern' => '@ lang="en">Kitten</a>'
-					. '<sup class="wb-language-fallback-indicator wb-language-fallback-transliteration '
-					. 'wb-language-fallback-variant">'
-					. "\u{00A0}" . preg_quote( $translitEnCa, '@' )
+				'expectedPattern' => '@ lang="en">Kitten</a>' . "\u{00A0}"
+					. '<sup class="wb-language-fallback-indicator wb-language-fallback-transliteration">'
+					. preg_quote( $translitEnCa, '@' )
 					. '</sup>@',
 				'term' => $enGbEnCaTerm,
 			],
 			'fallback to alternative language' => [
-				'expectedPattern' => '@ lang="en">Kitten</a>'
-					. "<sup class=\"wb-language-fallback-indicator\">\u{00A0}english in german</sup>@",
+				'expectedPattern' => '@ lang="en">Kitten</a>' . "\u{00A0}"
+					. "<sup class=\"wb-language-fallback-indicator\">english in german</sup>@",
 				'term' => $deEnTerm,
 			],
 		];

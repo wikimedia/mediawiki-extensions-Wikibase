@@ -178,7 +178,7 @@ class FormatSnakValueTest extends ApiTestCase {
 					[ 'lang' => 'de-ch' ], // fallback
 					null,
 					'/^<a title="[^"]*' . $idString . '" href="[^"]+' . $idString .
-					'" lang="en">George Washington<\/a>' .
+					'" lang="en">George Washington<\/a>' . "\u{00A0}" .
 					'<sup class="wb-language-fallback-indicator">[^<>]+<\/sup>$/',
 				];
 			} ],
