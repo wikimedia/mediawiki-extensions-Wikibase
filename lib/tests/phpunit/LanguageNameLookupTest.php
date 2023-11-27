@@ -63,7 +63,7 @@ class LanguageNameLookupTest extends MediaWikiIntegrationTestCase {
 
 	/** @dataProvider getNameProvider */
 	public function testGetNameForTerms_notMul( string $lang, ?string $in, string $expected ): void {
-		if ( $in !== null ) {
+		if ( $in !== LanguageNameUtils::AUTONYMS ) {
 			$this->markTestSkippedIfExtensionNotLoaded( 'CLDR' );
 		}
 
