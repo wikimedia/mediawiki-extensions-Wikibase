@@ -47,7 +47,7 @@
 		} );
 
 		function updatePlaceholders( languageCode ) {
-			var languageName = getLanguageNameByCode( languageCode ) || '[' + languageCode + ']',
+			var languageName = getLanguageNameByCode( languageCode ),
 				langDir = $.uls ? $.uls.data.getDir( languageCode ) : null;
 
 			fields.forEach( function ( field ) {
