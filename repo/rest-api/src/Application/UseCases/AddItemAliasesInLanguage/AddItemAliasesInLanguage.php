@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage;
 
+use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
@@ -63,7 +64,7 @@ class AddItemAliasesInLanguage {
 				$editMetadata->isBot(),
 				AliasesInLanguageEditSummary::newAddSummary(
 					$editMetadata->getComment(),
-					$item->getAliasGroups()->getByLanguage( $languageCode )
+					new AliasGroup( $languageCode, $newAliases )
 				)
 			)
 		);
