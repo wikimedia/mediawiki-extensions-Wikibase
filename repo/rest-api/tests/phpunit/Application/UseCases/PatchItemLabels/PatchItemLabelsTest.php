@@ -23,6 +23,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Item;
@@ -253,7 +254,7 @@ class PatchItemLabelsTest extends TestCase {
 		);
 		$this->assertUserIsAuthorized = $this->createMock( AssertUserIsAuthorized::class );
 		$this->assertUserIsAuthorized->method( 'execute' )
-			->with( $itemId, null )
+			->with( $itemId, User::newAnonymous() )
 			->willThrowException( $expectedError );
 
 		try {

@@ -48,7 +48,7 @@ class SetItemLabel {
 		$this->assertItemExists->execute( $itemId );
 
 		$editMetadata = $deserializedRequest->getEditMetadata();
-		$this->assertUserIsAuthorized->execute( $itemId, $editMetadata->getUser()->getUsername() );
+		$this->assertUserIsAuthorized->execute( $itemId, $editMetadata->getUser() );
 
 		$item = $this->itemRetriever->getItem( $itemId );
 		$labelExists = $item->getLabels()->hasTermForLanguage( $label->getLanguageCode() );

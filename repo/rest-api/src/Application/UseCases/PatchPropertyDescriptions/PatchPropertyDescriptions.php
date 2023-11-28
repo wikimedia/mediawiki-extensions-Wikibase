@@ -59,7 +59,7 @@ class PatchPropertyDescriptions {
 
 		$this->assertPropertyExists->execute( $propertyId );
 
-		$this->assertUserIsAuthorized->execute( $propertyId, $deserializedRequest->getEditMetadata()->getUser()->getUsername() );
+		$this->assertUserIsAuthorized->execute( $propertyId, $deserializedRequest->getEditMetadata()->getUser() );
 
 		$modifiedDescriptions = $this->patcher->execute(
 			iterator_to_array(

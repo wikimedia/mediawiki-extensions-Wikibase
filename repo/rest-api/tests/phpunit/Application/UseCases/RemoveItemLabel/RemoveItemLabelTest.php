@@ -13,6 +13,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemLabel\RemoveItemLabelVa
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
@@ -124,7 +125,7 @@ class RemoveItemLabelTest extends TestCase {
 		$expectedError = new UseCaseError( UseCaseError::PERMISSION_DENIED, 'You have no permission to edit this item.' );
 		$this->assertUserIsAuthorized = $this->createMock( AssertUserIsAuthorized::class );
 		$this->assertUserIsAuthorized->method( 'execute' )
-			->with( $itemId, null )
+			->with( $itemId, User::newAnonymous() )
 			->willThrowException( $expectedError );
 
 		try {

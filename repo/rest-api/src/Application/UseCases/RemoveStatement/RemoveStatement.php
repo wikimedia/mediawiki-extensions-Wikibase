@@ -47,7 +47,7 @@ class RemoveStatement {
 
 		$this->assertUserIsAuthorized->execute(
 			$deserializedRequest->getStatementId()->getEntityId(),
-			$deserializedRequest->getEditMetadata()->getUser()->getUsername()
+			$deserializedRequest->getEditMetadata()->getUser()
 		);
 
 		$statementToRemove = $this->statementRetriever->getStatementWriteModel( $deserializedRequest->getStatementId() );

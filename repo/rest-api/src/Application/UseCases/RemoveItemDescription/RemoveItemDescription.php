@@ -48,7 +48,7 @@ class RemoveItemDescription {
 		$providedEditMetadata = $deserializedRequest->getEditMetadata();
 
 		$this->assertItemExists->execute( $itemId );
-		$this->assertUserIsAuthorized->execute( $itemId, $providedEditMetadata->getUser()->getUsername() );
+		$this->assertUserIsAuthorized->execute( $itemId, $providedEditMetadata->getUser() );
 
 		$item = $this->itemRetriever->getItem( $itemId );
 		try {

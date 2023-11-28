@@ -19,6 +19,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\AliasesEditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
@@ -169,7 +170,7 @@ class PatchItemAliasesTest extends TestCase {
 		$this->assertUserIsAuthorized = $this->createMock( AssertUserIsAuthorized::class );
 		$this->assertUserIsAuthorized->expects( $this->once() )
 			->method( 'execute' )
-			->with( $itemId, $user )
+			->with( $itemId, User::withUsername( $user ) )
 			->willThrowException( $expectedException );
 
 		try {

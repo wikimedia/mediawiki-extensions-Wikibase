@@ -17,8 +17,7 @@ class AssertUserIsAuthorized {
 		$this->permissionChecker = $permissionChecker;
 	}
 
-	public function execute( EntityId $id, ?string $username ): void {
-		$user = $username !== null ? User::withUsername( $username ) : User::newAnonymous();
+	public function execute( EntityId $id, User $user ): void {
 		if ( !$this->permissionChecker->canEdit( $user, $id ) ) {
 			throw new UseCaseError(
 				UseCaseError::PERMISSION_DENIED,

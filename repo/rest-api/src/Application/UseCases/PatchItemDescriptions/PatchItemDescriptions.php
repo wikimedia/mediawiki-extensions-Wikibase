@@ -54,7 +54,7 @@ class PatchItemDescriptions {
 		$itemId = $deserializedRequest->getItemId();
 
 		$this->assertItemExists->execute( $itemId );
-		$this->assertUserIsAuthorized->execute( $itemId, $deserializedRequest->getEditMetadata()->getUser()->getUsername() );
+		$this->assertUserIsAuthorized->execute( $itemId, $deserializedRequest->getEditMetadata()->getUser() );
 
 		$descriptions = $this->descriptionsRetriever->getDescriptions( $itemId );
 		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable

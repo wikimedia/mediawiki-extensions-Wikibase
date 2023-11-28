@@ -50,7 +50,7 @@ class AddItemStatement {
 		$this->assertItemExists->execute( $itemId );
 
 		$editMetadata = $deserializedRequest->getEditMetadata();
-		$this->assertUserIsAuthorized->execute( $itemId, $editMetadata->getUser()->getUsername() );
+		$this->assertUserIsAuthorized->execute( $itemId, $editMetadata->getUser() );
 
 		$newStatementGuid = $this->guidGenerator->newStatementId( $itemId );
 		$statement->setGuid( (string)$newStatementGuid );

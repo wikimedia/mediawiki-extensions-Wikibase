@@ -23,6 +23,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
@@ -162,7 +163,7 @@ class PatchItemDescriptionsTest extends TestCase {
 		$expectedError = new UseCaseError( UseCaseError::PERMISSION_DENIED, 'permission denied' );
 		$this->assertUserIsAuthorized = $this->createMock( AssertUserIsAuthorized::class );
 		$this->assertUserIsAuthorized->method( 'execute' )
-			->with( $itemId, null )
+			->with( $itemId, User::newAnonymous() )
 			->willThrowException( $expectedError );
 
 		try {

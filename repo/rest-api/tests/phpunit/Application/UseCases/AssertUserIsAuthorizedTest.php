@@ -38,7 +38,7 @@ class AssertUserIsAuthorizedTest extends TestCase {
 			->with( User::newAnonymous(), $entityId )
 			->willReturn( true );
 
-		$this->newAssertUserIsAuthorized( $permissionChecker )->execute( $entityId, null );
+		$this->newAssertUserIsAuthorized( $permissionChecker )->execute( $entityId, User::newAnonymous() );
 	}
 
 	/**
@@ -56,7 +56,7 @@ class AssertUserIsAuthorizedTest extends TestCase {
 			->willReturn( false );
 
 		try {
-			$this->newAssertUserIsAuthorized( $permissionChecker )->execute( $entityId, null );
+			$this->newAssertUserIsAuthorized( $permissionChecker )->execute( $entityId, User::newAnonymous() );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame(

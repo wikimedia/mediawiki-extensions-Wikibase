@@ -21,6 +21,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementRevision;
 use Wikibase\Repo\RestApi\Domain\Services\StatementUpdater;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
@@ -148,7 +149,7 @@ class ReplaceStatementTest extends TestCase {
 		$this->assertUserIsAuthorized = $this->createMock( AssertUserIsAuthorized::class );
 		$this->assertUserIsAuthorized->expects( $this->once() )
 			->method( 'execute' )
-			->with( $subjectId, null )
+			->with( $subjectId, User::newAnonymous() )
 			->willThrowException( $expectedError );
 
 		try {

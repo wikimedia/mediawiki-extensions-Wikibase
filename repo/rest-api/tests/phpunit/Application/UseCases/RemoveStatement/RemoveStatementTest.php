@@ -16,6 +16,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatementRe
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\Services\StatementRemover;
 use Wikibase\Repo\RestApi\Domain\Services\StatementWriteModelRetriever;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
@@ -160,7 +161,7 @@ class RemoveStatementTest extends TestCase {
 
 		$this->assertUserIsAuthorized = $this->createMock( AssertUserIsAuthorized::class );
 		$this->assertUserIsAuthorized->method( 'execute' )
-			->with( $subjectId, null )
+			->with( $subjectId, User::newAnonymous() )
 			->willThrowException( $expectedError );
 
 		try {

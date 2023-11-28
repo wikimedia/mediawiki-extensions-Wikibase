@@ -61,7 +61,7 @@ class PatchItemLabels {
 
 		$this->assertItemExists->execute( $itemId );
 
-		$this->assertUserIsAuthorized->execute( $itemId, $deserializedRequest->getEditMetadata()->getUser()->getUsername() );
+		$this->assertUserIsAuthorized->execute( $itemId, $deserializedRequest->getEditMetadata()->getUser() );
 
 		$labels = $this->labelsRetriever->getLabels( $itemId );
 		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable

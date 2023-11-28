@@ -58,7 +58,7 @@ class PatchPropertyAliases {
 		$editMetadata = $deserializedRequest->getEditMetadata();
 
 		$this->assertPropertyExists->execute( $deserializedRequest->getPropertyId() );
-		$this->assertUserIsAuthorized->execute( $deserializedRequest->getPropertyId(), $editMetadata->getUser()->getUsername() );
+		$this->assertUserIsAuthorized->execute( $deserializedRequest->getPropertyId(), $editMetadata->getUser() );
 
 		$patchedAliases = $this->patchedAliasesValidator->validateAndDeserialize( $this->patchJson->execute(
 			iterator_to_array( $this->aliasesSerializer->serialize(
