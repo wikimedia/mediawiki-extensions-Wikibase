@@ -150,7 +150,7 @@
 				// * wikibase-description-edit-placeholder-language-aware
 				// * wikibase-description-edit-placeholder-not-applicable
 				this.options.placeholderMessage,
-				wb.getLanguageNameByCode( languageCode )
+				wb.getLanguageNameByCodeForTerms( languageCode )
 			) )
 			.attr( 'lang', languageCode )
 			.attr( 'dir', $.util.getDirectionality( languageCode ) )

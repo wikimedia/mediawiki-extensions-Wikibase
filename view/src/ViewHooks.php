@@ -76,6 +76,9 @@ final class ViewHooks implements UnitTestsListHook, ResourceLoaderRegisterModule
 						},
 					],
 				],
+				'messages' => [
+					'wikibase-language-name-for-terms-mul',
+				],
 				'dependencies' => [
 					'wikibase',
 				],

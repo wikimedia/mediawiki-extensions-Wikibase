@@ -3,7 +3,7 @@
  *
  * @license GPL-2.0-or-later
  */
-( function ( userLang, getLanguageNameByCode ) {
+( function ( userLang, getLanguageNameByCodeForTerms ) {
 	'use strict';
 
 	$( function () {
@@ -47,7 +47,7 @@
 		} );
 
 		function updatePlaceholders( languageCode ) {
-			var languageName = getLanguageNameByCode( languageCode ),
+			var languageName = getLanguageNameByCodeForTerms( languageCode ),
 				langDir = $.uls ? $.uls.data.getDir( languageCode ) : null;
 
 			fields.forEach( function ( field ) {
@@ -89,4 +89,4 @@
 		langWidget.on( 'change', indicateDescriptionSupport );
 	} );
 
-}( mw.config.values.wgUserLanguage, wikibase.getLanguageNameByCode ) );
+}( mw.config.values.wgUserLanguage, wikibase.getLanguageNameByCodeForTerms ) );

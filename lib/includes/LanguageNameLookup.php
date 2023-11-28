@@ -10,6 +10,8 @@ use MediaWiki\Languages\LanguageNameUtils;
  * Service for looking up language names based on MediaWiki's Language
  * class.
  *
+ * Implementation note: wikibase.getLanguageNameByCode.js contains similar functionality in JS.
+ *
  * @license GPL-2.0-or-later
  */
 class LanguageNameLookup {

@@ -13,11 +13,16 @@
 		assert.throws( function () {
 			new wb.WikibaseContentLanguages(); // eslint-disable-line no-new
 		}, 'instantiated without a language list' );
+
+		assert.throws( function () {
+			new wb.WikibaseContentLanguages( [ 'en' ] ); // eslint-disable-line no-new
+		}, 'instantiated without a getName function' );
 	} );
 
 	QUnit.test( 'getAll', function ( assert ) {
 		var expectedLanguages = [ 'ar', 'de', 'en', 'ko' ],
-			allLanguages = ( new wb.WikibaseContentLanguages( expectedLanguages ) ).getAll();
+			getName = sandbox.stub().throws( 'should not be called in this test' ),
+			allLanguages = ( new wb.WikibaseContentLanguages( expectedLanguages, getName ) ).getAll();
 
 		expectedLanguages.forEach( function ( languageCode ) {
 			assert.notStrictEqual( allLanguages.indexOf( languageCode ), -1 );
@@ -25,20 +30,20 @@
 	} );
 
 	QUnit.test( 'getName', function ( assert ) {
-		sandbox.stub( wb, 'getLanguageNameByCode' ).withArgs( 'eo' ).returns( 'Esperanto' );
+		var getName = sandbox.stub().withArgs( 'eo' ).returns( 'Esperanto' );
 
 		assert.strictEqual(
-			( new wb.WikibaseContentLanguages( [ 'eo' ] ) ).getName( 'eo' ),
+			( new wb.WikibaseContentLanguages( [ 'eo' ], getName ) ).getName( 'eo' ),
 			'Esperanto'
 		);
 	} );
 
 	QUnit.test( 'getLanguageNameMap', function ( assert ) {
-		var callback = sandbox.stub( wb, 'getLanguageNameByCode' );
-		callback.withArgs( 'en' ).returns( 'English' );
-		callback.withArgs( 'eo' ).returns( 'Esperanto' );
+		var getName = sandbox.stub();
+		getName.withArgs( 'en' ).returns( 'English' );
+		getName.withArgs( 'eo' ).returns( 'Esperanto' );
 
-		var result = ( new wb.WikibaseContentLanguages( [ 'en', 'eo' ] ) ).getLanguageNameMap();
+		var result = ( new wb.WikibaseContentLanguages( [ 'en', 'eo' ], getName ) ).getLanguageNameMap();
 		assert.deepEqual(
 			result,
 			{ en: 'English', eo: 'Esperanto' }

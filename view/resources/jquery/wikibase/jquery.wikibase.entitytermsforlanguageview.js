@@ -46,7 +46,7 @@
 					return this.options.value.language;
 				},
 				function () {
-					return wb.getLanguageNameByCode( this.options.value.language );
+					return wb.getLanguageNameByCodeForTerms( this.options.value.language );
 				},
 				'', // label
 				'', // description
@@ -167,7 +167,7 @@
 						// * wikibase-description-input-help-message
 						// * wikibase-aliases-input-help-message
 						'wikibase-' + subjectName + '-input-help-message',
-						wb.getLanguageNameByCode( self.options.value.language )
+						wb.getLanguageNameByCodeForTerms( self.options.value.language )
 					)
 				};
 				if ( subjectName === 'label' ) {

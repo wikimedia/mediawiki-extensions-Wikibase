@@ -170,7 +170,7 @@
 			var $input = $( document.createElement( this.options.inputNodeName ) );
 			var inputPlaceholder = mw.msg(
 				'wikibase-label-edit-placeholder-language-aware',
-				wb.getLanguageNameByCode( languageCode )
+				wb.getLanguageNameByCodeForTerms( languageCode )
 			);
 			if ( !labelText && this._getPlaceholderLabel( languageCode ) !== null ) {
 				inputPlaceholder = this._getPlaceholderLabel( languageCode ).getText();
