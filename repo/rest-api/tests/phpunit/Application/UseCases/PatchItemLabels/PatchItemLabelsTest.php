@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\PatchItemLabels;
 
-use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item as DataModelItem;
 use Wikibase\DataModel\Entity\ItemId;
@@ -167,47 +166,25 @@ class PatchItemLabelsTest extends TestCase {
 		}
 	}
 
-	/**
-	 * @dataProvider provideInapplicablePatch
-	 */
-	public function testGivenValidInapplicablePatch_throwsUseCaseError(
-		array $patch,
-		string $expectedErrorCode,
-		array $expectedContext
-	): void {
+	public function testGivenPatchJsonError_throwsUseCaseError(): void {
+		$expectedError = $this->createStub( UseCaseError::class );
+
 		$this->labelsRetriever = $this->createStub( ItemLabelsRetriever::class );
-		$this->labelsRetriever->method( 'getLabels' )->willReturn( new Labels( new Label( 'en', 'English Label' ) ) );
+		$this->labelsRetriever->method( 'getLabels' )
+			->willReturn( new Labels( new Label( 'en', 'English Label' ) ) );
+
+		$this->patcher = $this->createMock( PatchJson::class );
+		$this->patcher->expects( $this->once() )
+			->method( 'execute' )
+			->with( [ 'en' => 'English Label' ], [] )
+			->willThrowException( $expectedError );
 
 		try {
-			$this->newUseCase()->execute( $this->newUseCaseRequest( 'Q123', $patch ) );
+			$this->newUseCase()->execute( $this->newUseCaseRequest( 'Q123', [] ) );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame( $expectedErrorCode, $e->getErrorCode() );
-			$this->assertEquals( $expectedContext, $e->getErrorContext() );
+			$this->assertSame( $expectedError, $e );
 		}
-	}
-
-	public static function provideInapplicablePatch(): Generator {
-		$patchOperation = [ 'op' => 'remove', 'path' => '/path/does/not/exist' ];
-		yield 'non-existent path' => [
-			[ $patchOperation ],
-			UseCaseError::PATCH_TARGET_NOT_FOUND,
-			[ 'operation' => $patchOperation, 'field' => 'path' ],
-		];
-
-		$patchOperation = [ 'op' => 'copy', 'from' => '/path/does/not/exist', 'path' => '/en' ];
-		yield 'non-existent from' => [
-			[ $patchOperation ],
-			UseCaseError::PATCH_TARGET_NOT_FOUND,
-			[ 'operation' => $patchOperation, 'field' => 'from' ],
-		];
-
-		$patchOperation = [ 'op' => 'test', 'path' => '/en', 'value' => 'incorrect value' ];
-		yield 'patch test operation failed' => [
-			[ $patchOperation ],
-			UseCaseError::PATCH_TEST_FAILED,
-			[ 'operation' => $patchOperation, 'actual-value' => 'English Label' ],
-		];
 	}
 
 	public function testGivenPatchedLabelsInvalid_throwsUseCaseError(): void {
