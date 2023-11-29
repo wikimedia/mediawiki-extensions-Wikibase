@@ -6,7 +6,7 @@ namespace Wikibase\Repo\Tests\Hooks;
 
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Title\Title;
-use MediaWiki\User\StaticUserOptionsLookup;
+use MediaWiki\User\Options\StaticUserOptionsLookup;
 use MediaWikiIntegrationTestCase;
 use NullHttpRequestFactory;
 use NullStatsdDataFactory;
