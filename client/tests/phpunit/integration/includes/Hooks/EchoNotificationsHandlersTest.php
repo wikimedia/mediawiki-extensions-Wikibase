@@ -3,7 +3,7 @@
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
 use MediaWiki\Title\Title;
-use MediaWiki\User\UserOptionsManager;
+use MediaWiki\User\Options\UserOptionsManager;
 use MediaWikiIntegrationTestCase;
 use User;
 use Wikibase\Client\Hooks\EchoNotificationsHandlers;

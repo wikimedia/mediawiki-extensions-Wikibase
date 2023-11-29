@@ -10,7 +10,7 @@ use ExtensionRegistry;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Page\RedirectLookup;
 use MediaWiki\Title\Title;
-use MediaWiki\User\UserOptionsManager;
+use MediaWiki\User\Options\UserOptionsManager;
 use User;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\RepoLinker;
