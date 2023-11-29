@@ -50,7 +50,7 @@
 							"properties": {
 								"aliases": {
 									"type": "array",
-									"example": [ "Douglas Noel Adams", "Douglas Noël Adams" ]
+									"example": [ "alias-1", "alias-2" ]
 								}
 							},
 							"required": [ "aliases" ]
