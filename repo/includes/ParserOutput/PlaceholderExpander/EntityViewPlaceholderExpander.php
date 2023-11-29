@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\ParserOutput\PlaceholderExpander;
 
 use InvalidArgumentException;
+use MediaWiki\User\Options\UserOptionsLookup;
 use MediaWiki\User\UserIdentity;
-use MediaWiki\User\UserOptionsLookup;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\DescriptionsProvider;

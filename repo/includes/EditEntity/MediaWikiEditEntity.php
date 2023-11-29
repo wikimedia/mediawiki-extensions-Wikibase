@@ -6,7 +6,7 @@ use IContextSource;
 use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Title\Title;
-use MediaWiki\User\UserOptionsLookup;
+use MediaWiki\User\Options\UserOptionsLookup;
 use Message;
 use ReadOnlyError;
 use RuntimeException;

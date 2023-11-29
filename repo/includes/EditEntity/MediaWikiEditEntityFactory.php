@@ -4,7 +4,7 @@ namespace Wikibase\Repo\EditEntity;
 
 use IContextSource;
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
-use MediaWiki\User\UserOptionsLookup;
+use MediaWiki\User\Options\UserOptionsLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;

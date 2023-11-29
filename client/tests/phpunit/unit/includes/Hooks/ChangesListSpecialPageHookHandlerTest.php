@@ -6,7 +6,7 @@ use ChangesListBooleanFilter;
 use ExtensionRegistry;
 use MediaWiki\Html\FormOptions;
 use MediaWiki\MediaWikiServices;
-use MediaWiki\User\UserOptionsLookup;
+use MediaWiki\User\Options\UserOptionsLookup;
 use SpecialRecentChanges;
 use User;
 use Wikibase\Client\Hooks\ChangesListSpecialPageHookHandler;

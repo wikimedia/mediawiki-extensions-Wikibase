@@ -8,7 +8,7 @@ use IBufferingStatsdDataFactory;
 use Language;
 use MediaWiki\Hook\OutputPageBeforeHTMLHook;
 use MediaWiki\Http\HttpRequestFactory;
-use MediaWiki\User\UserOptionsLookup;
+use MediaWiki\User\Options\UserOptionsLookup;
 use OutputPage;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
