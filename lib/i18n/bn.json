@@ -28,7 +28,10 @@
 	"wikibase-error-ui-no-external-page": "\"$2\" পাতাটি \"$1\"-এ পাওয়া যায়নি।",
 	"wikibase-error-ui-edit-conflict": "ইতিমধ্যে একই মান সম্পাদনা করা হয়েছে, যা একটি সম্পাদনা সংঘাতের সৃষ্টি করেছে। দয়া করে পৃষ্ঠাটি পুনরায় লোড করুন।",
 	"wikibase-language-fallback-transliteration-hint": "$1 (প্রতিলিপিকৃত)",
+	"wikibase-language-name-for-terms-mul": "পূর্বনির্ধারিত মান (mul)",
 	"wikibase-quantitydetails-amount": "পরিমাণ",
+	"wikibase-quantitydetails-upperbound": "ঊর্ধ্বসীমা",
+	"wikibase-quantitydetails-lowerbound": "নিম্নসীমা",
 	"wikibase-quantitydetails-unit": "একক",
 	"wikibase-timedetails-time": "সময়",
 	"wikibase-timedetails-isotime": "সময়বার্তা",
@@ -143,5 +146,6 @@
 	"wikibase-property-summary-wbeditentity-update": "বৈশিষ্ট্য পরিবর্তন করা হয়েছে",
 	"wikibase-property-summary-wbeditentity-override": "বৈশিষ্ট্য পরিষ্কার করা হয়েছে",
 	"wikibase-reference-formatter-snak-separator": "।&#32;",
-	"wikibase-reference-formatter-snak-terminator": "।"
+	"wikibase-reference-formatter-snak-terminator": "।",
+	"wikibase-reference-formatter-snak-retrieved": "সংগ্রহের তারিখ $1"
 }

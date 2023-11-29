@@ -23,6 +23,7 @@
 	"wikibase-error-ui-no-external-page": "הדף \"$2\" לא נמצא ב־\"$1\".",
 	"wikibase-error-ui-edit-conflict": "אותו הערך נערך בינתיים, וזה גרם להתנגשות עריכה. נא לרענן את הדף.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (מתועתק)",
+	"wikibase-language-name-for-terms-mul": "ערכי ברירת מחדל (mul)",
 	"wikibase-quantitydetails-amount": "כמות",
 	"wikibase-quantitydetails-upperbound": "גבול עליון",
 	"wikibase-quantitydetails-lowerbound": "גבול תחתון",

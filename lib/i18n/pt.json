@@ -3,6 +3,7 @@
 		"authors": [
 			"Alchimista",
 			"Athena in Wonderland",
+			"Caiofernandes",
 			"Fúlvio",
 			"Hamilton Abreu",
 			"He7d3r",
@@ -34,6 +35,7 @@
 	"wikibase-error-ui-no-external-page": "Não foi possível encontrar uma página \"$2\" em \"$1\".",
 	"wikibase-error-ui-edit-conflict": "O mesmo valor foi entretanto alterado, causando um conflito entre edições. Volte a carregar a página, por favor.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (transliterado)",
+	"wikibase-language-name-for-terms-mul": "valores padrão (mul)",
 	"wikibase-quantitydetails-amount": "Quantidade",
 	"wikibase-quantitydetails-upperbound": "Limite superior",
 	"wikibase-quantitydetails-lowerbound": "Limite inferior",

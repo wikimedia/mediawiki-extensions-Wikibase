@@ -29,6 +29,7 @@
 	"wikibase-error-ui-no-external-page": "\"$1\" sayfasında \"$2\" sayfası bulunamadı.",
 	"wikibase-error-ui-edit-conflict": "Bu arada aynı değer düzenlendi ve düzenleme çakışmasına neden oldu. Lütfen sayfayı yenileyin.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (çevirilir)",
+	"wikibase-language-name-for-terms-mul": "varsayılan değerler (mul)",
 	"wikibase-quantitydetails-amount": "Miktar",
 	"wikibase-quantitydetails-upperbound": "Üst sınır",
 	"wikibase-quantitydetails-lowerbound": "Alt sınır",

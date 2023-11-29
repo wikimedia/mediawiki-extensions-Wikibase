@@ -27,6 +27,7 @@
 	"wikibase-error-ui-no-external-page": "Die Seite „$2“ konnte nicht auf „$1“ gefunden werden.",
 	"wikibase-error-ui-edit-conflict": "In der Zwischenzeit wurde der gleiche Wert bearbeitet, was einen Bearbeitungskonflikt verursacht hat. Lade bitte die Seite erneut.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (transkribiert)",
+	"wikibase-language-name-for-terms-mul": "Standardwerte (mul)",
 	"wikibase-quantitydetails-amount": "Menge",
 	"wikibase-quantitydetails-upperbound": "Obergrenze",
 	"wikibase-quantitydetails-lowerbound": "Untergrenze",

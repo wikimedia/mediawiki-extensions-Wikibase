@@ -3,7 +3,8 @@
 		"authors": [
 			"Les Meloures",
 			"Robby",
-			"Soued031"
+			"Soued031",
+			"Volvox"
 		]
 	},
 	"specialpages-group-wikibase": "Wikibase",
@@ -19,6 +20,7 @@
 	"wikibase-error-ui-no-external-page": "Eng Säit \"$2\" konnt op \"$1\" net fonnt ginn.",
 	"wikibase-error-ui-edit-conflict": "De selwechte Wäert gouf an der Tëschenzäit geännert an et koum zu engem Editiounskonflikt. Luet d'Säit nei.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (iwwerholl)",
+	"wikibase-language-name-for-terms-mul": "Standardwäerter (mul)",
 	"wikibase-quantitydetails-amount": "Quantitéit",
 	"wikibase-quantitydetails-upperbound": "Iewescht Limitt",
 	"wikibase-quantitydetails-lowerbound": "Ënnescht Limitt",
