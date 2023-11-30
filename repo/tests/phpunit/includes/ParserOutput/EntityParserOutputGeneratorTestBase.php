@@ -114,10 +114,10 @@ class EntityParserOutputGeneratorTestBase extends MediaWikiIntegrationTestCase {
 			->getMockForAbstractClass();
 
 		$entityView->method( 'getTitleHtml' )
-			->willReturn( '<TITLE>' );
+			->willReturn( 'EntityParserOutputGeneratorTestBase-TITLE' );
 
 		$viewContent = new ViewContent(
-			'<HTML>',
+			'EntityParserOutputGeneratorTestBase-HTML',
 			[]
 		);
 
