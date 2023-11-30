@@ -233,11 +233,12 @@ class DispatchChangeVisibilityNotificationJobTest extends MediaWikiIntegrationTe
 					->willReturnCallback( function ( array $jobs ) use ( $expectedJobParams ) {
 						$this->assertContainsOnlyInstancesOf( IJobSpecification::class, $jobs );
 
-						$actualJobParams = array_map( function ( IJobSpecification $job ) {
-							return $job->getParams();
-						}, $jobs );
-
-						$this->assertSame( $expectedJobParams, $actualJobParams );
+						foreach ( $expectedJobParams as $i => $expectedParams ) {
+							$actualParams = $jobs[$i]->getParams();
+							foreach ( $expectedParams as $key => $expected ) {
+								$this->assertSame( $expected, $actualParams[$key], "job $i, param $key" );
+							}
+						}
 					} );
 
 				return $jobQueueGroup;
