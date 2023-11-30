@@ -19,6 +19,7 @@
 	"wikibase-error-ui-no-external-page": "Страницата „$2“ не е најдена на „$1“.",
 	"wikibase-error-ui-edit-conflict": "Во меѓувреме е изменета истата вредност, предизвикувајќи спротивставеност во уредувањето. Превчитајте ја страницата.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (транслитерирано)",
+	"wikibase-language-name-for-terms-mul": "стандардни вредности (mul)",
 	"wikibase-quantitydetails-amount": "Износ",
 	"wikibase-quantitydetails-upperbound": "Горна граница",
 	"wikibase-quantitydetails-lowerbound": "Долна граница",

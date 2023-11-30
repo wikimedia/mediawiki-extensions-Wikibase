@@ -2,9 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Em-em",
-			"Gwanki"
+			"Gwanki",
+			"Hamza DK"
 		]
 	},
+	"wikibase-language-name-for-terms-mul": "Adadin dabi'u (mul)",
 	"wikibase-sitelinks-wikipedia": "Wikipedia",
 	"wikibase-time-precision-CE": "$1 CE"
 }
