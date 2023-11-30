@@ -10,14 +10,17 @@ use MediaWiki\Status\Status;
 use Message;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\AnonymousEditWarningBuilder;
 use Wikibase\Repo\CopyrightMessageBuilder;
 use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
+use Wikibase\Repo\SiteLinkPageNormalizer;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\Specials\HTMLForm\HTMLAliasesField;
 use Wikibase\Repo\Specials\HTMLForm\HTMLContentLanguageField;
@@ -41,6 +44,9 @@ class SpecialNewItem extends SpecialNewEntity {
 	public const FIELD_ALIASES = 'aliases';
 	public const FIELD_SITE = 'site';
 	public const FIELD_PAGE = 'page';
+	public const FIELD_BADGES = 'badges';
+
+	private SiteLinkPageNormalizer $siteLinkPageNormalizer;
 
 	private AnonymousEditWarningBuilder $anonymousEditWarningBuilder;
 
@@ -57,6 +63,13 @@ class SpecialNewItem extends SpecialNewEntity {
 	 */
 	private array $siteLinkGroups;
 
+	private FallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory;
+
+	/**
+	 * @var string[]
+	 */
+	private array $badgeItems;
+
 	public function __construct(
 		array $tags,
 		SpecialPageCopyrightView $copyrightView,
@@ -64,11 +77,14 @@ class SpecialNewItem extends SpecialNewEntity {
 		SummaryFormatter $summaryFormatter,
 		EntityTitleLookup $entityTitleLookup,
 		MediaWikiEditEntityFactory $editEntityFactory,
+		SiteLinkPageNormalizer $siteLinkPageNormalizer,
 		AnonymousEditWarningBuilder $anonymousEditWarningBuilder,
 		TermValidatorFactory $termValidatorFactory,
 		TermsCollisionDetector $termsCollisionDetector,
 		ValidatorErrorLocalizer $errorLocalizer,
 		SiteLinkTargetProvider $siteLinkTargetProvider,
+		FallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
+		array $badgeItems,
 		array $siteLinkGroups,
 		bool $isMobileView
 	) {
@@ -87,8 +103,11 @@ class SpecialNewItem extends SpecialNewEntity {
 		$this->termValidatorFactory = $termValidatorFactory;
 		$this->termsCollisionDetector = $termsCollisionDetector;
 		$this->errorLocalizer = $errorLocalizer;
+		$this->siteLinkPageNormalizer = $siteLinkPageNormalizer;
 		$this->siteLinkTargetProvider = $siteLinkTargetProvider;
 		$this->siteLinkGroups = $siteLinkGroups;
+		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
+		$this->badgeItems = $badgeItems;
 	}
 
 	public static function factory(
@@ -96,9 +115,11 @@ class SpecialNewItem extends SpecialNewEntity {
 		MediaWikiEditEntityFactory $editEntityFactory,
 		EntityNamespaceLookup $entityNamespaceLookup,
 		EntityTitleLookup $entityTitleLookup,
+		FallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		TermsCollisionDetector $itemTermsCollisionDetector,
 		bool $isMobileView,
 		SettingsArray $repoSettings,
+		SiteLinkPageNormalizer $siteLinkPageNormalizer,
 		SiteLinkTargetProvider $siteLinkTargetProvider,
 		SummaryFormatter $summaryFormatter,
 		TermValidatorFactory $termValidatorFactory,
@@ -117,11 +138,14 @@ class SpecialNewItem extends SpecialNewEntity {
 			$summaryFormatter,
 			$entityTitleLookup,
 			$editEntityFactory,
+			$siteLinkPageNormalizer,
 			$anonymousEditWarningBuilder,
 			$termValidatorFactory,
 			$itemTermsCollisionDetector,
 			$errorLocalizer,
 			$siteLinkTargetProvider,
+			$labelDescriptionLookupFactory,
+			$repoSettings->getSetting( 'badgeItems' ),
 			$repoSettings->getSetting( 'siteLinkGroups' ),
 			$isMobileView
 		);
@@ -148,9 +172,18 @@ class SpecialNewItem extends SpecialNewEntity {
 
 		if ( isset( $formData[ self::FIELD_SITE ] ) ) {
 			$site = $this->getSiteLinkTargetSite( $formData[ self::FIELD_SITE ] );
-			$normalizedPageName = $site->normalizePageName( $formData[ self::FIELD_PAGE ] );
+			'@phan-var Site $site'; // site is guaranteed to exist by this point
 
-			$item->getSiteLinkList()->addNewSiteLink( $site->getGlobalId(), $normalizedPageName );
+			$badges = $formData[ self::FIELD_BADGES ];
+
+			$normalizedPageName = $this->siteLinkPageNormalizer->normalize( $site, $formData[ self::FIELD_PAGE ], $badges );
+
+			$badgeItemIds = array_map(
+				fn ( $badgeId ) => new ItemId( $badgeId ),
+				$badges
+			);
+
+			$item->getSiteLinkList()->addNewSiteLink( $site->getGlobalId(), $normalizedPageName, $badgeItemIds );
 		}
 
 		return $item;
@@ -237,9 +270,44 @@ class SpecialNewItem extends SpecialNewEntity {
 				},
 				'label-message' => 'wikibase-newitem-page',
 			];
+
+			$formFields[ self::FIELD_BADGES ] = [
+				'name' => self::FIELD_BADGES,
+				'type' => 'multiselect',
+				'label-message' => 'wikibase-setsitelink-badges',
+				'options' => $this->getMultiSelectOptionsForBadges(),
+				'default' => [],
+				'id' => 'wb-newentity-badges',
+			];
 		}
 
 		return $formFields;
+	}
+
+	private function getMultiSelectOptionsForBadges(): array {
+		$badgesOptions = [];
+
+		/** @var ItemId[] $badgeItemIds */
+		$badgeItemIds = array_map(
+			fn ( $badgeId ) => new ItemId( $badgeId ),
+			array_keys( $this->badgeItems )
+		);
+
+		$labelLookup = $this->labelDescriptionLookupFactory->newLabelDescriptionLookup(
+			$this->getLanguage(),
+			$badgeItemIds
+		);
+
+		foreach ( $badgeItemIds as $badgeId ) {
+			$idSerialization = $badgeId->getSerialization();
+
+			$label = $labelLookup->getLabel( $badgeId );
+			$label = $label === null ? $idSerialization : $label->getText();
+
+			$badgesOptions[$label] = $idSerialization;
+		}
+
+		return $badgesOptions;
 	}
 
 	protected function getLegend(): Message {
