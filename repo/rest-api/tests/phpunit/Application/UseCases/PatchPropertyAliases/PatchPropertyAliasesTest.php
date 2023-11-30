@@ -20,6 +20,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchPropert
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\AliasesEditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
@@ -209,7 +210,7 @@ class PatchPropertyAliasesTest extends TestCase {
 		$this->assertUserIsAuthorized = $this->createMock( AssertUserIsAuthorized::class );
 		$this->assertUserIsAuthorized->expects( $this->once() )
 			->method( 'execute' )
-			->with( $propertyId, $user )
+			->with( $propertyId, User::withUsername( $user ) )
 			->willThrowException( $expectedException );
 
 		try {

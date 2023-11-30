@@ -61,7 +61,7 @@ class PatchPropertyLabels {
 
 		$this->assertUserIsAuthorized->execute(
 			$deserializedRequest->getPropertyId(),
-			$deserializedRequest->getEditMetadata()->getUser()->getUsername()
+			$deserializedRequest->getEditMetadata()->getUser()
 		);
 
 		$modifiedLabels = $this->patcher->execute(

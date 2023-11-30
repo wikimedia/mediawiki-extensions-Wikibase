@@ -61,7 +61,7 @@ class PatchItemAliases {
 		$editMetadata = $deserializedRequest->getEditMetadata();
 
 		$this->assertItemExists->execute( $itemId );
-		$this->assertUserIsAuthorized->execute( $itemId, $editMetadata->getUser()->getUsername() );
+		$this->assertUserIsAuthorized->execute( $itemId, $editMetadata->getUser() );
 
 		$aliases = $this->aliasesRetriever->getAliases( $itemId );
 		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable

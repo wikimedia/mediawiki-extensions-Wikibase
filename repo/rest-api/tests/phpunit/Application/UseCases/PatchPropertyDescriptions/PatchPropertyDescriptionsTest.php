@@ -21,6 +21,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions\PatchPr
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
@@ -166,7 +167,7 @@ class PatchPropertyDescriptionsTest extends TestCase {
 		$this->assertUserIsAuthorized = $this->createMock( AssertUserIsAuthorized::class );
 		$this->assertUserIsAuthorized->expects( $this->once() )
 			->method( 'execute' )
-			->with( $propertyId, $username )
+			->with( $propertyId, User::withUsername( $username ) )
 			->willThrowException( $expectedException );
 
 		try {

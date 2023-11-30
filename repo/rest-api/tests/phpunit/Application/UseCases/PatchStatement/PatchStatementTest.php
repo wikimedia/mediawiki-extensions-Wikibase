@@ -25,6 +25,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementResp
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementRevision;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\RestApi\Domain\Services\StatementRetriever;
@@ -314,7 +315,7 @@ class PatchStatementTest extends TestCase {
 
 		$this->assertUserIsAuthorized = $this->createMock( AssertUserIsAuthorized::class );
 		$this->assertUserIsAuthorized->method( 'execute' )
-			->with( $subjectId, null )
+			->with( $subjectId, User::newAnonymous() )
 			->willThrowException( $expectedError );
 
 		$this->statementRetriever->method( 'getStatement' )->willReturn( $statementReadModel );

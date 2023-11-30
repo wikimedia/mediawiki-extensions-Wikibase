@@ -45,7 +45,7 @@ class ReplaceStatement {
 		$editMetadata = $deserializedRequest->getEditMetadata();
 
 		$this->assertStatementSubjectExists->execute( $statementId );
-		$this->assertUserIsAuthorized->execute( $statementId->getEntityId(), $editMetadata->getUser()->getUsername() );
+		$this->assertUserIsAuthorized->execute( $statementId->getEntityId(), $editMetadata->getUser() );
 
 		if ( $statement->getGuid() === null ) {
 			$statement->setGuid( "$statementId" );
