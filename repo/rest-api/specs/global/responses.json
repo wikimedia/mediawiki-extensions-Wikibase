@@ -866,6 +866,31 @@
 			}
 		}
 	},
+	"InvalidAddPropertyAliasesInput": {
+		"description": "The request cannot be processed",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/ContextError" },
+				"examples": {
+					"invalid-property-id": { "$ref": "./examples.json#/InvalidPropertyIdExample" },
+					"invalid-language-code": { "$ref": "./examples.json#/InvalidLanguageCodeExample" },
+					"alias-empty": { "$ref": "./examples.json#/AliasEmptyExample" },
+					"alias-list-empty": { "$ref": "./examples.json#/AliasListEmptyExample" },
+					"alias-too-long": { "$ref": "./examples.json#/AliasTooLongExample" },
+					"invalid-alias": { "$ref": "./examples.json#/InvalidAliasExample" },
+					"duplicate-alias": { "$ref": "./examples.json#/DuplicateAliasExample" },
+					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
 	"InvalidItemTermByLanguageInput": {
 		"description": "The request cannot be processed",
 		"content": {
