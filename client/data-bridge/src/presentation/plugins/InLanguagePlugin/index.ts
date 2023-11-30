@@ -4,7 +4,7 @@ import { App } from 'vue';
 export default function InLanguagePlugin( app: App, resolver: LanguageInfoRepository ): void {
 	app.config.globalProperties.$inLanguage = ( mwLangCode: string ) => {
 		if ( !mwLangCode ) {
-			return {};
+			throw new Error( 'mwLangCode must be provided' );
 		}
 		const language = resolver.resolve( mwLangCode );
 		return {

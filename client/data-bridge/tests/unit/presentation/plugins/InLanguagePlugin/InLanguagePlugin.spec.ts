@@ -24,7 +24,7 @@ describe( 'InLanguage plugin', () => {
 		expect( actualLanguage.dir ).toBe( language.directionality );
 	} );
 
-	it( 'resolves to an empty object if called without language', () => {
+	it( 'throws an error if called without language', () => {
 		const resolver = {
 			resolve: jest.fn(),
 		};
@@ -34,9 +34,8 @@ describe( 'InLanguage plugin', () => {
 
 		InLanguagePlugin( app, resolver );
 
-		const actualLanguage = app.config.globalProperties.$inLanguage( '' );
-
-		expect( resolver.resolve ).not.toHaveBeenCalled();
-		expect( actualLanguage ).toStrictEqual( {} );
+		expect( () => {
+			app.config.globalProperties.$inLanguage( '' );
+		} ).toThrow( Error );
 	} );
 } );
