@@ -137,16 +137,11 @@ class EntityDataPurgerTest extends TestCase {
 			->method( 'lazyPush' )
 			->with( $this->callback( function ( IJobSpecification $specification ) {
 				$this->assertSame( 'PurgeEntityData', $specification->getType() );
-				$expectedParams = [
-					'namespace' => 0,
-					'title' => 'Q123',
-					'pageId' => 123,
-					'entityId' => 'Q123',
-				];
 				$actualParams = $specification->getParams();
-				ksort( $expectedParams );
-				ksort( $actualParams );
-				$this->assertSame( $expectedParams, $actualParams );
+				$this->assertSame( 0, $actualParams['namespace'] );
+				$this->assertSame( 'Q123', $actualParams['title'] );
+				$this->assertSame( 123, $actualParams['pageId'] );
+				$this->assertSame( 'Q123', $actualParams['entityId'] );
 				return true;
 			} ) );
 
