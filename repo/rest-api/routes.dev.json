@@ -1,7 +1,1 @@
-[
-	{
-		"path": "/wikibase/v0/entities/properties/{property_id}/descriptions",
-		"method": "PATCH",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\PatchPropertyDescriptionsRouteHandler::factory"
-	}
-]
+[ ]

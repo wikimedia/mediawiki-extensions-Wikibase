@@ -145,6 +145,11 @@
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\PatchItemDescriptionsRouteHandler::factory"
 	},
 	{
+		"path": "/wikibase/v0/entities/properties/{property_id}/descriptions",
+		"method": "PATCH",
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\PatchPropertyDescriptionsRouteHandler::factory"
+	},
+	{
 		"path": "/wikibase/v0/entities/items/{item_id}/descriptions/{language_code}",
 		"method": "GET",
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetItemDescriptionRouteHandler::factory"
