@@ -92,6 +92,7 @@ return call_user_func( function() {
 			'styles' => [
 				'wikibase/wikibase.badgedisplay.less',
 				'wikibase/wikibase.itemlink.less',
+				'wikibase/wikibase.monolingualtext.less',
 			],
 		],
 
