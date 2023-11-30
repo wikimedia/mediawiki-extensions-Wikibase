@@ -51,6 +51,29 @@
 			"415": { "$ref": "../../global/responses.json#/InvalidMediaType" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
 		}
+	},
+	"delete": {
+		"operationId": "deletePropertyLabel",
+		"tags": [ "labels" ],
+		"summary": "[WIP] Delete a Property's label in a specific language",
+		"description": "This endpoint is currently in development and is not recommended for production use",
+		"parameters": [
+			{ "$ref": "../../global/parameters.json#/PropertyId" },
+			{ "$ref": "../../global/parameters.json#/LanguageCode" },
+			{ "$ref": "../../global/parameters.json#/IfNoneMatch" },
+			{ "$ref": "../../global/parameters.json#/IfModifiedSince" },
+			{ "$ref": "../../global/parameters.json#/IfMatch" },
+			{ "$ref": "../../global/parameters.json#/IfUnmodifiedSince" },
+			{ "$ref": "../../global/parameters.json#/Authorization" }
+		],
+		"requestBody": { "$ref": "../../global/requests.json#/Edit" },
+		"responses": {
+			"200": { "$ref": "../../global/responses.json#/LabelDeleted" },
+			"400": { "$ref": "../../global/responses.json#/InvalidRemovePropertyLabelInput" },
+			"404": { "$ref": "../../global/responses.json#/PropertyLabelNotFound" },
+			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
+			"415": { "$ref": "../../global/responses.json#/InvalidMediaType" },
+			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
+		}
 	}
-
 }
