@@ -13,7 +13,8 @@
 			"予弦",
 			"夢蝶葬花",
 			"神樂坂秀吉",
-			"LittlePaw365"
+			"LittlePaw365",
+			"阿南之人"
 		]
 	},
 	"apihelp-wbavailablebadges-description": "查询可用的徽章项目。",
@@ -76,7 +77,7 @@
 	"apihelp-wbgetclaims-summary": "获取Wikibase声明。",
 	"apihelp-wbgetclaims-param-entity": "从中获取声明的实体ID。除非提供了声明GUID，否则是必需的。",
 	"apihelp-wbgetclaims-param-property": "只返回带主snak声明的可选过滤器，它包含指定属性。",
-	"apihelp-wbgetclaims-param-claim": "识别声明的GUID。除非提供实体否则必需。GUID是声明的全局唯一标识符，例如“<var>q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F</var>”。",
+	"apihelp-wbgetclaims-param-claim": "识别声明的GUID。除非提供实体否则必需。GUID是声明的全域唯一标识符，例如“<var>q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F</var>”。",
 	"apihelp-wbgetclaims-param-rank": "可选的过滤器，只返回有指定等级的声明",
 	"apihelp-wbgetclaims-param-props": "声明的某些部分是可选的。此参数控制返回哪些参数。",
 	"apihelp-wbgetclaims-example-1": "获取ID为<samp>Q42</samp>的项目的声明",
