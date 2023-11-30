@@ -95,7 +95,7 @@
 	"wikibase-entitytermsforlanguagelistview-more": "List of labels, aliases and descriptions in one or more languages: Label for the button to show all non-empty sets of terms.\n{{Identical|More languages}}",
 	"wikibase-entitytermsforlanguagelistview-less": "List of labels, aliases and descriptions in one or more languages: Label for the button to hide all but the default terms.",
 	"wikibase-entityterms-languagelistview-mul-popup-title": "Title in popup that appears when clicking pulsating dot for information about new Mul Language feature",
-	"wikibase-entityterms-languagelistview-mul-popup-content": "Message body in popup that appears when clicking pulsating dot for information about new Mul Language feature",
+	"wikibase-entityterms-languagelistview-mul-popup-content": "Message body in popup that appears when clicking pulsating dot for information about new Mul Language feature\n\nParameters:\n* $1 - url to a Wikidata wiki page with more information",
 	"wikibase-entityterms-languagelistview-mul-popup-dont-show-again": "Label for checkbox that saves user preference to opt out of showing the new MUL feature pulsating dot",
 	"wikibase-label-empty": "Placeholder message displayed instead of the item's label in case no label has been specified yet. This message is displayed only when the user has JavaScript disabled. (When JavaScript is enabled, an input box will be displayed instead.)",
 	"wikibase-label-edit-placeholder": "[[File:Screenshot WikidataRepo 2012-05-13 G.png|right|0x150px]]\nThis is a generic text used as a placeholder while editing a new label. See also the Wikidata glossary on [[d:Wikidata:Glossary#languageattribute-label|label]].",
