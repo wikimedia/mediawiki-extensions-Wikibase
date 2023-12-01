@@ -175,6 +175,14 @@ module.exports = {
 			.withJsonBodyParam( 'aliases', aliases );
 	},
 
+	newAddPropertyAliasesInLanguageRequestBuilder( propertyId, languageCode, aliases ) {
+		return new RequestBuilder()
+			.withRoute( 'POST', '/entities/properties/{property_id}/aliases/{language_code}' )
+			.withPathParam( 'property_id', propertyId )
+			.withPathParam( 'language_code', languageCode )
+			.withJsonBodyParam( 'aliases', aliases );
+	},
+
 	newRemovePropertyLabelRequestBuilder( propertyId, languageCode ) {
 		return new RequestBuilder()
 			.withRoute( 'DELETE', '/entities/properties/{property_id}/labels/{language_code}' )
