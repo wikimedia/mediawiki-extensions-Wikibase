@@ -2,13 +2,13 @@
 
 declare( strict_types = 1 );
 
-namespace Wikibase\Repo\Tests\Hooks;
+namespace Wikibase\Repo\Tests\Unit\Hooks;
 
 use HtmlCacheUpdater;
 use IJobSpecification;
 use JobQueueGroup;
 use MediaWiki\Title\Title;
-use PHPUnit\Framework\TestCase;
+use MediaWikiUnitTestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Repo\Hooks\EntityDataPurger;
@@ -22,7 +22,7 @@ use WikiPage;
  *
  * @license GPL-2.0-or-later
  */
-class EntityDataPurgerTest extends TestCase {
+class EntityDataPurgerTest extends MediaWikiUnitTestCase {
 
 	private function mockJobQueueGroupNoop(): JobQueueGroup {
 		$jobQueueGroup = $this->createMock( JobQueueGroup::class );
@@ -55,7 +55,7 @@ class EntityDataPurgerTest extends TestCase {
 	}
 
 	public function testGivenEntityIdLookupReturnsId_handlerPurgesCache() {
-		$title = Title::newFromTextThrow( 'Item:Q1' );
+		$title = Title::makeTitle( WB_NS_ITEM, 'Q1' );
 		$entityId = new ItemId( 'Q1' );
 		$entityIdLookup = $this->createMock( EntityIdLookup::class );
 		$entityIdLookup->expects( $this->once() )
@@ -82,7 +82,7 @@ class EntityDataPurgerTest extends TestCase {
 	}
 
 	public function testGivenMultipleRevisions_handlerPurgesCacheOnce() {
-		$title = Title::newFromTextThrow( 'Item:Q1' );
+		$title = Title::makeTitle( WB_NS_ITEM, 'Q1' );
 		$entityId = new ItemId( 'Q1' );
 		$entityIdLookup = $this->createMock( EntityIdLookup::class );
 		$entityIdLookup->expects( $this->once() )
@@ -132,18 +132,13 @@ class EntityDataPurgerTest extends TestCase {
 		$htmlCacheUpdater->expects( $this->never() )
 			->method( 'purgeUrls' );
 
+		$actualJob = null;
 		$jobQueueGroup = $this->createMock( JobQueueGroup::class );
 		$jobQueueGroup->expects( $this->once() )
 			->method( 'lazyPush' )
-			->with( $this->callback( function ( IJobSpecification $specification ) {
-				$this->assertSame( 'PurgeEntityData', $specification->getType() );
-				$actualParams = $specification->getParams();
-				$this->assertSame( 0, $actualParams['namespace'] );
-				$this->assertSame( 'Q123', $actualParams['title'] );
-				$this->assertSame( 123, $actualParams['pageId'] );
-				$this->assertSame( 'Q123', $actualParams['entityId'] );
-				return true;
-			} ) );
+			->willReturnCallback( function ( IJobSpecification $job ) use ( &$actualJob ) {
+				$actualJob = $job;
+			} );
 
 		$purger = new EntityDataPurger(
 			$entityIdLookup,
@@ -160,5 +155,13 @@ class EntityDataPurgerTest extends TestCase {
 			// unused
 			null, null, null
 		);
+
+		$this->assertSame( 'PurgeEntityData', $actualJob->getType() );
+		$this->assertArrayContains( [
+			'namespace' => 0,
+			'title' => 'Q123',
+			'pageId' => 123,
+			'entityId' => 'Q123',
+		], $actualJob->getParams() );
 	}
 }

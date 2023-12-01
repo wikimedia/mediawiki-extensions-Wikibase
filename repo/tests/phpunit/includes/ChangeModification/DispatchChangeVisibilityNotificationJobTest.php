@@ -4,7 +4,6 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\ChangeModification;
 
-use IJobSpecification;
 use JobQueueGroup;
 use MediaWiki\JobQueue\JobQueueGroupFactory;
 use MediaWiki\Revision\RevisionLookup;
@@ -58,12 +57,12 @@ class DispatchChangeVisibilityNotificationJobTest extends MediaWikiIntegrationTe
 
 		return [
 			'No jobs dispatched: Revision to old' => [
-				'expectedJobs' => null,
+				'expectedJobs' => [],
 				'revisionIds' => [ 408 ],
 				'visibilityChangeMap' => [ 408 => [ 'newBits' => 6, 'oldBits' => 2 ] ],
 			],
 			'No jobs dispatched: Unknown revision' => [
-				'expectedJobs' => null,
+				'expectedJobs' => [],
 				'revisionIds' => [ 404 ],
 				'visibilityChangeMap' => [ 404 => [ 'newBits' => 1, 'oldBits' => 0 ] ],
 			],
@@ -171,13 +170,13 @@ class DispatchChangeVisibilityNotificationJobTest extends MediaWikiIntegrationTe
 	 * @dataProvider parameterProvider
 	 */
 	public function testHandle(
-		?array $expectedJobParams,
+		array $expectedJobParams,
 		array $revisionIds,
 		array $visibilityChangeMap,
 		int $batchSize = 3
 	) {
 		$wikiIds = [ 'dummywiki', 'another_wiki' ];
-		$jobQueueGroupFactoryCallCount = 0;
+		$actualJobs = [];
 
 		$this->mergeMwGlobalArrayValue( 'wgWBRepoSettings', [
 			'localClientDatabases' => $wikiIds,
@@ -196,14 +195,17 @@ class DispatchChangeVisibilityNotificationJobTest extends MediaWikiIntegrationTe
 		$job->initServices(
 			$this->newEntityIdLookup(),
 			new NullLogger(),
-			$this->newJobQueueGroupFactory( $jobQueueGroupFactoryCallCount, $wikiIds, $expectedJobParams )
+			$this->newJobQueueGroupFactory( $actualJobs )
 		);
 		$job->run();
 
-		$this->assertSame(
-			$expectedJobParams !== null ? count( $wikiIds ) : 0,
-			$jobQueueGroupFactoryCallCount
-		);
+		foreach ( $wikiIds as $wikiId ) {
+			$this->assertArrayContains(
+				$expectedJobParams,
+				$actualJobs[$wikiId] ?? [],
+				"jobs for $wikiId"
+			);
+		}
 	}
 
 	/**
@@ -217,27 +219,15 @@ class DispatchChangeVisibilityNotificationJobTest extends MediaWikiIntegrationTe
 		return self::$mwTimestamp;
 	}
 
-	private function newJobQueueGroupFactory(
-		int &$jobQueueGroupFactoryCallCount,
-		array $wikiIds,
-		?array $expectedJobParams
-	): JobQueueGroupFactory {
+	private function newJobQueueGroupFactory( array &$actualJobs ): JobQueueGroupFactory {
 		$jobQueueGroupFactory = $this->createMock( JobQueueGroupFactory::class );
 		$jobQueueGroupFactory->method( 'makeJobQueueGroup' )
-			->willReturnCallback( function ( string $wikiId ) use ( &$jobQueueGroupFactoryCallCount, $wikiIds, $expectedJobParams ) {
-				$this->assertSame( $wikiIds[$jobQueueGroupFactoryCallCount++], $wikiId );
-
+			->willReturnCallback( function ( string $wikiId ) use ( &$actualJobs ) {
 				$jobQueueGroup = $this->createMock( JobQueueGroup::class );
-				$jobQueueGroup->expects( $this->once() )
-					->method( 'push' )
-					->willReturnCallback( function ( array $jobs ) use ( $expectedJobParams ) {
-						$this->assertContainsOnlyInstancesOf( IJobSpecification::class, $jobs );
-
-						foreach ( $expectedJobParams as $i => $expectedParams ) {
-							$actualParams = $jobs[$i]->getParams();
-							foreach ( $expectedParams as $key => $expected ) {
-								$this->assertSame( $expected, $actualParams[$key], "job $i, param $key" );
-							}
+				$jobQueueGroup->method( 'push' )
+					->willReturnCallback( function ( array $jobs ) use ( $wikiId, &$actualJobs ) {
+						foreach ( $jobs as $job ) {
+							$actualJobs[$wikiId][] = $job->getParams();
 						}
 					} );
 
