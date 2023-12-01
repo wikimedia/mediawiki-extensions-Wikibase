@@ -161,16 +161,23 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 	public function testConsecutivePrefetch() {
 		$api = $this->createMock( GenericActionApiClient::class );
 		// expect two API request
+		$expectedReturnMap = [
+			[
+				$this->getRequestParameters( [ 'P18' ] ),
+				$this->newMockResponse( json_encode( $this->data[ $this->responseDataFiles[ 'p18-en' ] ] ), 200 ),
+			],
+			[
+				$this->getRequestParameters( [ 'P31' ] ),
+				$this->newMockResponse( json_encode( $this->data[ $this->responseDataFiles[ 'p31-en' ] ] ), 200 ),
+			],
+		];
 		$api->expects( $this->exactly( 2 ) )
 			->method( 'get' )
-			->withConsecutive(
-				[ $this->getRequestParameters( [ 'P18' ] ) ],
-				[ $this->getRequestParameters( [ 'P31' ] ) ]
-			)
-			->willReturnOnConsecutiveCalls(
-				$this->newMockResponse( json_encode( $this->data[ $this->responseDataFiles[ 'p18-en' ] ] ), 200 ),
-				$this->newMockResponse( json_encode( $this->data[ $this->responseDataFiles[ 'p31-en' ] ] ), 200 )
-			);
+			->willReturnCallback( function ( $params ) use ( &$expectedReturnMap ) {
+				$curExpectedMap = array_shift( $expectedReturnMap );
+				$this->assertSame( $curExpectedMap[0], $params );
+				return $curExpectedMap[1];
+			} );
 
 		$apiLookup = new ApiPrefetchingTermLookup(
 			new ApiEntityLookup( $api )
@@ -188,17 +195,24 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 	public function testConsecutivePrefetch_alreadyInBuffer() {
 		$api = $this->createMock( GenericActionApiClient::class );
 		// expect two API request
+		$expectedReturnMap = [
+			[
+				$this->getRequestParameters( [ 'P18' ] ),
+				$this->newMockResponse( json_encode( $this->data[ $this->responseDataFiles[ 'p18-en' ] ] ), 200 ),
+			],
+			// the second request will NOT ask for P18, that has already been fetched
+			[
+				$this->getRequestParameters( [ 'P31' ] ),
+				$this->newMockResponse( json_encode( $this->data[ $this->responseDataFiles[ 'p31-en' ] ] ), 200 ),
+			],
+		];
 		$api->expects( $this->exactly( 2 ) )
 			->method( 'get' )
-			->withConsecutive(
-				[ $this->getRequestParameters( [ 'P18' ] ) ],
-				// the second request will NOT ask for P18, that has already been fetched
-				[ $this->getRequestParameters( [ 'P31' ] ) ]
-			)
-			->willReturnOnConsecutiveCalls(
-				$this->newMockResponse( json_encode( $this->data[ $this->responseDataFiles[ 'p18-en' ] ] ), 200 ),
-				$this->newMockResponse( json_encode( $this->data[ $this->responseDataFiles[ 'p31-en' ] ] ), 200 )
-			);
+			->willReturnCallback( function ( $params ) use ( &$expectedReturnMap ) {
+				$curExpectedMap = array_shift( $expectedReturnMap );
+				$this->assertSame( $curExpectedMap[0], $params );
+				return $curExpectedMap[1];
+			} );
 
 		$apiLookup = new ApiPrefetchingTermLookup(
 			new ApiEntityLookup( $api )

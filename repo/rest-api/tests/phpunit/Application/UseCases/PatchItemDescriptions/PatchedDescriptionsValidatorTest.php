@@ -66,12 +66,19 @@ class PatchedDescriptionsValidatorTest extends TestCase {
 
 		// expect validation only for the modified descriptions
 		$this->descriptionValidator = $this->createMock( ItemDescriptionValidator::class );
+		$expectedArgs = [
+			[ $itemId, 'en', 'description' ],
+			[ $itemId, 'ar', 'وصف' ],
+		];
 		$this->descriptionValidator->expects( $this->exactly( 2 ) )
 			->method( 'validate' )
-			->withConsecutive(
-				[ $itemId, 'en', 'description' ],
-				[ $itemId, 'ar', 'وصف' ],
-			);
+			->willReturnCallback( function ( $itemId, $language, $description ) use ( &$expectedArgs ) {
+				$curExpectedArgs = array_shift( $expectedArgs );
+				$this->assertSame( $curExpectedArgs[0], $itemId );
+				$this->assertSame( $curExpectedArgs[1], $language );
+				$this->assertSame( $curExpectedArgs[2], $description );
+				return null;
+			} );
 
 		$this->assertEquals(
 			new TermList( [

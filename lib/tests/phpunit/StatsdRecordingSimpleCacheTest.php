@@ -42,12 +42,20 @@ class StatsdRecordingSimpleCacheTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetMultipleIncrementsMetric() {
 		$stats = $this->getMockForAbstractClass( StatsdDataFactoryInterface::class );
+		$expectedArgs = [
+			[ 'statsKeyMiss', 2 ],
+			[ 'statsKeyHit', 1 ],
+		];
 		$stats->expects( $this->atLeast( 2 ) )
 			->method( 'updateCount' )
-			->withConsecutive(
-				[ 'statsKeyMiss', 2 ],
-				[ 'statsKeyHit', 1 ]
-			);
+			->willReturnCallback( function ( $key, $delta ) use ( &$expectedArgs ) {
+				if ( !$expectedArgs ) {
+					return;
+				}
+				$curExpectedArgs = array_shift( $expectedArgs );
+				$this->assertSame( $curExpectedArgs[0], $key );
+				$this->assertSame( $curExpectedArgs[1], $delta );
+			} );
 
 		// Inner cache that returns the default that has been passed to the get method (cache miss)
 		$innerCache = $this->getMockForAbstractClass( CacheInterface::class );
@@ -86,12 +94,20 @@ class StatsdRecordingSimpleCacheTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetMultipleDoesNotIncrementMetrics() {
 		$stats = $this->getMockForAbstractClass( StatsdDataFactoryInterface::class );
+		$expectedArgs = [
+			[ 'statsKeyMiss', 1 ],
+			[ 'statsKeyHit', 1 ],
+		];
 		$stats->expects( $this->atLeast( 2 ) )
 			->method( 'updateCount' )
-			->withConsecutive(
-				[ 'statsKeyMiss', 1 ],
-				[ 'statsKeyHit', 1 ]
-			);
+			->willReturnCallback( function ( $key, $delta ) use ( &$expectedArgs ) {
+				if ( !$expectedArgs ) {
+					return;
+				}
+				$curExpectedArgs = array_shift( $expectedArgs );
+				$this->assertSame( $curExpectedArgs[0], $key );
+				$this->assertSame( $curExpectedArgs[1], $delta );
+			} );
 
 		// Inner cache that returns the default that has been passed to the get method (cache miss)
 		$innerCache = $this->getMockForAbstractClass( CacheInterface::class );

@@ -85,7 +85,12 @@ class WikiPageUpdaterTest extends MediaWikiIntegrationTestCase {
 		}
 		$stats
 			->method( 'updateCount' )
-			->withConsecutive( ...$expectedArgs );
+			->willReturnCallback( function ( $key, $delta ) use ( &$expectedArgs ) {
+				if ( !$expectedArgs ) {
+					return;
+				}
+				$this->assertEquals( [ $key, $delta ], array_shift( $expectedArgs ) );
+			} );
 
 		return $stats;
 	}

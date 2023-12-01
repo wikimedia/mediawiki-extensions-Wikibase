@@ -138,16 +138,23 @@ class ApiEntityLookupTest extends TestCase {
 
 	public function testGivenFetchEntitiesCalledRepeatedly_requestsOnlyNotPreviouslyFetchedEntities() {
 		$api = $this->createMock( GenericActionApiClient::class );
+		$expectedReturnMap = [
+			[
+				$this->getRequestParameters( [ 'P1' ] ),
+				$this->newMockResponse( json_encode( $this->data[ $this->responseDataFiles[ 'p1-missing' ] ] ), 200 ),
+			],
+			[
+				$this->getRequestParameters( [ 'P18' ] ),
+				$this->newMockResponse( json_encode( $this->data[ $this->responseDataFiles[ 'p18-en' ] ] ), 200 ),
+			],
+		];
 		$api->expects( $this->exactly( 2 ) )
 			->method( 'get' )
-			->withConsecutive(
-				[ $this->getRequestParameters( [ 'P1' ] ) ],
-				[ $this->getRequestParameters( [ 'P18' ] ) ]
-			)
-			->willReturnOnConsecutiveCalls(
-				$this->newMockResponse( json_encode( $this->data[ $this->responseDataFiles[ 'p1-missing' ] ] ), 200 ),
-				$this->newMockResponse( json_encode( $this->data[ $this->responseDataFiles[ 'p18-en' ] ] ), 200 )
-			);
+			->willReturnCallback( function ( $params ) use ( &$expectedReturnMap ) {
+				$curExpectedMap = array_shift( $expectedReturnMap );
+				$this->assertSame( $curExpectedMap[0], $params );
+				return $curExpectedMap[1];
+			} );
 
 		$entityLookup = new ApiEntityLookup( $api );
 

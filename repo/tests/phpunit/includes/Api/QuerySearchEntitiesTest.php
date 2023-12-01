@@ -128,7 +128,9 @@ class QuerySearchEntitiesTest extends MediaWikiIntegrationTestCase {
 		}
 		$mock
 			->method( 'setGeneratorData' )
-			->withConsecutive( ...$expectedParams );
+			->willReturnCallback( function ( $title, $data ) use ( &$expectedParams ) {
+				$this->assertEquals( [ $title, $data ], array_shift( $expectedParams ) );
+			} );
 
 		$mock->expects( $this->once() )
 			->method( 'populateFromTitles' );
