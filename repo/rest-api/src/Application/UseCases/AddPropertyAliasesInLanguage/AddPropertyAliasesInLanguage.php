@@ -46,6 +46,7 @@ class AddPropertyAliasesInLanguage {
 
 		return new AddPropertyAliasesInLanguageResponse(
 			$newRevision->getProperty()->getAliases()[$request->getLanguageCode()],
+			$aliasesExist,
 			$newRevision->getLastModified(),
 			$newRevision->getRevisionId()
 		);
