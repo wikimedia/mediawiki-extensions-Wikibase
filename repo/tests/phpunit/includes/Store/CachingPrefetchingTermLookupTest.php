@@ -515,15 +515,19 @@ class CachingPrefetchingTermLookupTest extends TestCase {
 		] );
 
 		$cache = $this->createMock( CacheInterface::class );
+		$isFirstCall = true;
 		$cache->expects( $this->exactly( 2 ) )->method( 'getMultiple' )
-		->withConsecutive(
-			[ [ $cacheKeyEnglish ] ], // first call populates buffer
-			[ [ $cacheKeyGerman, $cacheKeyFrench ] ]
-		)
-		->willReturnOnConsecutiveCalls(
-			[ $cacheKeyEnglish => 'meow' ],
-			[ $cacheKeyGerman => 'miau', $cacheKeyFrench => null ]
-		);
+			->willReturnCallback( function ( $keys ) use ( &$isFirstCall, $cacheKeyEnglish, $cacheKeyFrench, $cacheKeyGerman ) {
+				if ( $isFirstCall ) {
+					// first call populates buffer
+					$this->assertSame( [ $cacheKeyEnglish ], $keys );
+					$isFirstCall = false;
+					return [ $cacheKeyEnglish => 'meow' ];
+				}
+
+				$this->assertSame( [ $cacheKeyGerman, $cacheKeyFrench ], $keys );
+				return [ $cacheKeyGerman => 'miau', $cacheKeyFrench => null ];
+			} );
 
 		$cachingLookup = new CachingPrefetchingTermLookup(
 			$cache,

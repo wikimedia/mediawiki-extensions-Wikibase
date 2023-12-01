@@ -8,6 +8,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceLookup;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Lib\ServiceBySourceAndTypeDispatcher;
@@ -75,15 +76,19 @@ class SourceAndTypeDispatchingExistenceCheckerTest extends TestCase {
 		$this->entitySourceLookup = $this->createMock( EntitySourceLookup::class );
 		$this->serviceBySourceAndTypeDispatcher = $this->createMock( ServiceBySourceAndTypeDispatcher::class );
 
+		$expectedReturnMap = [
+			[ $itemIds[0], $this->newEntitySourceWithName( $itemSourceName ) ],
+			[ $itemIds[1], $this->newEntitySourceWithName( $itemSourceName ) ],
+			[ $propertyIds[0], $this->newEntitySourceWithName( $propertySourceName ) ],
+			[ $propertyIds[1], $this->newEntitySourceWithName( $propertySourceName ) ],
+		];
 		$this->entitySourceLookup
 			->method( 'getEntitySourceById' )
-			->withConsecutive( [ $itemIds[0] ], [ $itemIds[1] ], [ $propertyIds[0] ], [ $propertyIds[1] ] )
-			->willReturnOnConsecutiveCalls(
-				$this->newEntitySourceWithName( $itemSourceName ),
-				$this->newEntitySourceWithName( $itemSourceName ),
-				$this->newEntitySourceWithName( $propertySourceName ),
-				$this->newEntitySourceWithName( $propertySourceName )
-			);
+			->willReturnCallback( function ( EntityId $id ) use ( &$expectedReturnMap ) {
+				$curExpectedMap = array_shift( $expectedReturnMap );
+				$this->assertSame( $curExpectedMap[0], $id );
+				return $curExpectedMap[1];
+			} );
 
 		$itemChecker = $this->createMock( EntityExistenceChecker::class );
 		$itemChecker->expects( $this->once() )
@@ -99,8 +104,10 @@ class SourceAndTypeDispatchingExistenceCheckerTest extends TestCase {
 
 		$this->serviceBySourceAndTypeDispatcher->expects( $this->exactly( 2 ) )
 			->method( 'getServiceForSourceAndType' )
-			->withConsecutive( [ $itemSourceName, 'item' ], [ $propertySourceName, 'property' ] )
-			->willReturnOnConsecutiveCalls( $itemChecker, $propertyChecker );
+			->willReturnMap( [
+				[ $itemSourceName, 'item', [], $itemChecker ],
+				[ $propertySourceName, 'property', [], $propertyChecker ],
+			] );
 
 		$result = $this->newDispatchingExistenceChecker()->existsBatch( array_merge( $itemIds, $propertyIds ) );
 

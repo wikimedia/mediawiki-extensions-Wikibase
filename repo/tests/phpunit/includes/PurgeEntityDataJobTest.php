@@ -83,18 +83,20 @@ class PurgeEntityDataJobTest extends MediaWikiIntegrationTestCase {
 		$itemId = new ItemId( 'Q123' );
 
 		$entityDataUriManager = $this->createMock( EntityDataUriManager::class );
+		$returnURLsByRevision = [
+			0 => '/Special:EntityData/Q123',
+			1234 => '/Special:EntityData/Q123?revision=1234',
+			1235 => '/Special:EntityData/Q123?revision=1235',
+		];
 		$entityDataUriManager->expects( $this->exactly( 3 ) )
 			->method( 'getPotentiallyCachedUrls' )
-			->withConsecutive(
-				[ $itemId ],
-				[ $itemId, 1234 ],
-				[ $itemId, 1235 ]
-			)
-			->willReturnOnConsecutiveCalls(
-				[ '/Special:EntityData/Q123' ],
-				[ '/Special:EntityData/Q123?revision=1234' ],
-				[ '/Special:EntityData/Q123?revision=1235' ]
-			);
+			->willReturnCallback( function ( $id, $revision ) use ( $itemId, &$returnURLsByRevision ) {
+				$this->assertEquals( $itemId, $id );
+				$this->assertArrayHasKey( $revision, $returnURLsByRevision );
+				$ret = $returnURLsByRevision[$revision];
+				unset( $returnURLsByRevision[$revision] );
+				return [ $ret ];
+			} );
 
 		$htmlCacheUpdater = $this->createMock( HtmlCacheUpdater::class );
 		$htmlCacheUpdater->expects( $this->once() )

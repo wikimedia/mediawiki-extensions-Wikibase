@@ -66,12 +66,19 @@ class PatchedLabelsValidatorTest extends TestCase {
 
 		// expect validation only for the modified labels
 		$this->labelValidator = $this->createMock( PropertyLabelValidator::class );
+		$expectedArgs = [
+			[ $propertyId, 'en', 'instance of' ],
+			[ $propertyId, 'bar', 'is a' ],
+		];
 		$this->labelValidator->expects( $this->exactly( 2 ) )
 			->method( 'validate' )
-			->withConsecutive(
-				[ $propertyId, 'en', 'instance of' ],
-				[ $propertyId, 'bar', 'is a' ],
-			);
+			->willReturnCallback( function ( $itemId, $language, $label ) use ( &$expectedArgs ) {
+				$curExpectedArgs = array_shift( $expectedArgs );
+				$this->assertSame( $curExpectedArgs[0], $itemId );
+				$this->assertSame( $curExpectedArgs[1], $language );
+				$this->assertSame( $curExpectedArgs[2], $label );
+				return null;
+			} );
 
 		$this->assertEquals(
 			new TermList( [
