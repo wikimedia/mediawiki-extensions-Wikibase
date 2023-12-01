@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Jilorisa",
 			"Meqqal"
 		]
 	},
@@ -13,5 +14,6 @@
 	"wikibase-linkitem-input-site": "Boros:",
 	"wikibase-linkitem-input-page": "Bolikon:",
 	"wikibase-rc-hide-wikidata-hide": "Polisoko'",
-	"wikibase-rc-hide-wikidata-show": "Popointalang"
+	"wikibase-rc-hide-wikidata-show": "Popointalang",
+	"wikibase-otherprojects": "Id projek suai"
 }

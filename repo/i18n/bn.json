@@ -54,7 +54,7 @@
 	"wikibase-entitytermsforlanguagelistview-language": "ভাষা",
 	"wikibase-entitytermsforlanguagelistview-more": "সকল অন্তর্ভুক্ত ভাষা",
 	"wikibase-entitytermsforlanguagelistview-less": "কম ভাষা দেখান",
-	"wikibase-entityterms-languagelistview-mul-popup-title": "নতুন! একাধিক ভাষার ফলব্যাক",
+	"wikibase-entityterms-languagelistview-mul-popup-title": "নতুন! একাধিক ভাষার জন্য পূর্বনির্ধারিত লেবেল ও উপনাম যোগ করুন (mul)",
 	"wikibase-entityterms-languagelistview-mul-popup-content": "সমস্ত ভাষার জন্য একটি পূর্বনির্ধারিত ফলব্যাক সংজ্ঞায়িত করে অপ্রয়োজনীয় ও ম্যানুয়াল সম্পাদনাগুলি এড়িয়ে চলুন। [https://www.wikidata.org/wiki/Special:MyLanguage/Help:Mul আরও তথ্য দেখুন]",
 	"wikibase-entityterms-languagelistview-mul-popup-dont-show-again": "এটি আবার দেখাবেন না",
 	"wikibase-label-empty": "কোনো লেবেল নেই",
