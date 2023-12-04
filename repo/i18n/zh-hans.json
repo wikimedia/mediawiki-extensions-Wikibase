@@ -46,7 +46,8 @@
 			"Hehua",
 			"Lakejason0",
 			"Winston Sung",
-			"LittlePaw365"
+			"LittlePaw365",
+			"阿南之人"
 		]
 	},
 	"wikibase-desc": "结构化数据仓库",
@@ -453,7 +454,7 @@
 	"wikibase-listdatatypes-monolingualtext-head": "单语文本",
 	"wikibase-listdatatypes-monolingualtext-body": "未翻译成其他语言的字符串的文字数据字段。这种类型的字符串定义一次并在所有语言中重复使用。典型用途是用当地语言书写的地名、某种标识符、化学式或拉丁学名。\n* 语言-用于识别文本部分语言的显式值\n* 值-语言特定变体字符串的显式值",
 	"wikibase-listdatatypes-multilingualtext-head": "多语文本",
-	"wikibase-listdatatypes-multilingualtext-body": "必须翻译成其他语言字符串的文字数据字段。典型用途是具有非本地书面形式的具有全局意义的实体名称。这些在语言和书写系统中可能有所不同。\n* 语言-用于识别文本部分语言的显式值\n* 值-语言特定变体字符串的显式值",
+	"wikibase-listdatatypes-multilingualtext-body": "必须翻译成其他语言字符串的文字数据字段。典型用途是具有非本地书面形式的具有全域意义的实体名称。这些在语言和书写系统中可能有所不同。\n* 语言-用于识别文本部分语言的显式值\n* 值-语言特定变体字符串的显式值",
 	"wikibase-listdatatypes-string-head": "字符串",
 	"wikibase-listdatatypes-string-body": "字形字符串的文字数据字段。典型用途是具有不依赖于阅读器语言的书面形式的标识符。\n* 值-语言特定变体字符串的显式值",
 	"wikibase-listdatatypes-time-head": "时间",

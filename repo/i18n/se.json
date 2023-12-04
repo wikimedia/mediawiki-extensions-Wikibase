@@ -15,6 +15,7 @@
 	"wikibase-addreference": "lasit gáldu",
 	"wikibase-save-inprogress": "Vurkemin…",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Eará gielaide",
+	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Heivet",
 	"wikibase-entitytermsforlanguagelistview-description": "Govvádus",
 	"wikibase-entitytermsforlanguagelistview-label": "Namma",
 	"wikibase-entitytermsforlanguagelistview-language": "Giella",
@@ -45,6 +46,7 @@
 	"wikibase-listdatatypes-url-head": "URL",
 	"datatypes-type-url": "URL",
 	"wikibase-entity-save-error-heading": "Juogamii manai endorii",
+	"wikibase-tainted-ref-popper-remove-warning": "Sihko várrehusa",
 	"wikibase-federated-properties-leaving-site-notice-cancel": "Gaskkalduhte",
 	"wikibase-federated-properties-leaving-site-notice-checkbox-label": "Ale čájet dán dieđu fas",
 	"wikibase-federated-properties-edit-request-failed-notice-try-again": "Geahččal fas"

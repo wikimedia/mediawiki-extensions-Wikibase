@@ -44,7 +44,7 @@
 	"wikibase-client-data-bridge-permissions-error-info": "Lassedieđut",
 	"wikibase-client-data-bridge-references-heading": "Gáldut",
 	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "It leat čálihuvvon sisa",
-	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>Váruhus:</strong> It leat čálihuvvon sisa. Du IP-čujuhus báhcá almmolaččat oidnosii dán siiddu rievdadushistorjái. Jus <strong>čálihat sisa</strong> dahje <strong>ráhkadat geavaheaddjidovddaldaga</strong>, de du rievdadeamit merkejuvvojit geavaheaddjinamain ja seammás oaččut eará ovdamuniid.",
+	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>Várrehus:</strong> It leat čálihuvvon sisa. Du IP-čujuhus báhcá almmolaččat oidnosii dán siiddu rievdadushistorjái. Jus <strong>čálihat sisa</strong> dahje <strong>ráhkadat geavaheaddjidovddaldaga</strong>, de du rievdadeamit merkejuvvojit geavaheaddjinamain ja seammás oaččut eará ovdamuniid.",
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "Čálit sisa dahje ráhkat dovddaldaga",
 	"wikibase-client-data-bridge-license-heading": "Geavahus ja liseansa",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "Rievdat árvvu {{GRAMMAR:locative|WBREPONAME}}",
