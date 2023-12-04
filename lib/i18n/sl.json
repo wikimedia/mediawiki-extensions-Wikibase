@@ -21,6 +21,7 @@
 	"wikibase-error-ui-no-external-page": "Strani »$2« ni bilo mogoče najti v »$1«.",
 	"wikibase-error-ui-edit-conflict": "Ista vrednost je bila medtem urejena, kar je povzročilo navzkrižje urejanj. Naložite stran znova.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (prečrkovano)",
+	"wikibase-language-name-for-terms-mul": "privzete vrednosti (mul)",
 	"wikibase-quantitydetails-amount": "Količina",
 	"wikibase-quantitydetails-upperbound": "Zgornja meja",
 	"wikibase-quantitydetails-lowerbound": "Spodnja meja",

@@ -13,7 +13,7 @@
 	"wikibase-after-page-move": "Ye sud update [$1 the associatit {{WBREPONAME}} item] tae maintain leid airtins on the flittit page an aw.",
 	"wikibase-after-page-delete": "Airtin tae this page sud hae been reuived fae [$1 the associated {{WBREPONAME}} item]. We ask that ye check this haes happent.",
 	"wikibase-after-page-delete-queued": "The [$1 {{WBREPONAME}} item] associatit wi this page will be automatically updatit. Please note that this micht nae happen instantaneously.",
-	"wikibase-comment-add": "Ae {{WBREPONAME}} item haes been cræftit.",
+	"wikibase-comment-add": "Ae {{WBREPONAME}} item haes been made.",
 	"wikibase-comment-remove": "Associatit {{WBREPONAME}} item deleted. Leid links remuived.",
 	"wikibase-comment-linked": "Ae {{WBREPONAME}} item haes been linkit til this page.",
 	"wikibase-comment-unlink": "This page haes been onlinkit fae {{WBREPONAME}} item. Leid links remuived.",

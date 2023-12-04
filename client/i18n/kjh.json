@@ -7,13 +7,13 @@
 			"Андрей Саг."
 		]
 	},
-	"wikibase-dataitem": "{{WBREPONAME}} элемент",
+	"wikibase-dataitem": "{{WBREPONAME}} элементi",
 	"wikibase-editlinks": "Ссылкаларны тӱзедерге",
 	"wikibase-editlinkstitle": "Тіллер аразындағы ссылкалар алыстырарға",
 	"wikibase-linkitem-addlinks": "Ссылкалар хозарға",
-	"wikibase-linkitem-title": "Страницанаң палғалыстырарға",
+	"wikibase-linkitem-title": "Страницанаң палғалыстырары",
 	"wikibase-linkitem-linkpage": "Страницанаң палғалыстырарға",
-	"wikibase-linkitem-selectlink": "Пу страницанаң палғалыстырар сайтты паза страницаны таллап алыңар.",
+	"wikibase-linkitem-selectlink": "Сайтты паза пу страницанаң палғалыстырар страницаны таллап алыңар.",
 	"wikibase-linkitem-input-site": "Тіл:",
 	"wikibase-linkitem-input-page": "Страница:",
 	"wikibase-rc-hide-wikidata-hide": "Чазырарға",

@@ -3,6 +3,7 @@
 		"authors": [
 			"Balajijagadesh",
 			"ElangoRamanujam",
+			"Fahimrazick",
 			"Jayarathina",
 			"Karthi.dr",
 			"Logicwiki",
@@ -19,7 +20,7 @@
 	"wikibase-entity-query": "வினவல்",
 	"wikibase-edit": "தொகு",
 	"wikibase-save": "சேமி",
-	"wikibase-cancel": "ரத்து செய்",
+	"wikibase-cancel": "கைவிடு",
 	"wikibase-add": "சேர்",
 	"wikibase-save-inprogress": "சேமிக்கப்படுகிறது...",
 	"wikibase-remove-inprogress": "நீக்கப்படுகிறது...",
