@@ -4,16 +4,11 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Api;
 
-use ApiMain;
-use ApiQuery;
-use MediaWiki\Request\FauxRequest;
-use PHPUnit\Framework\TestCase;
-use RequestContext;
+use ApiTestCase;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\LanguageNameLookupFactory;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\WikibaseContentLanguages;
-use Wikibase\Repo\Api\MetaContentLanguages;
 
 /**
  * @covers \Wikibase\Repo\Api\MetaContentLanguages
@@ -24,7 +19,7 @@ use Wikibase\Repo\Api\MetaContentLanguages;
  *
  * @license GPL-2.0-or-later
  */
-class MetaContentLanguagesTest extends TestCase {
+class MetaContentLanguagesTest extends ApiTestCase {
 
 	private const USER_LANGUAGE = 'de';
 
@@ -32,33 +27,18 @@ class MetaContentLanguagesTest extends TestCase {
 	 * @dataProvider provideParamsAndExpectedResults
 	 */
 	public function testExecute( array $params, array $expectedResults ) {
-		$query = $this->getQuery( $params );
-		$api = new MetaContentLanguages(
-			$query,
-			'wbcontentlanguages',
-			$this->getLanguageNameLookupFactory(),
-			$this->getContentLanguages()
-		);
+		$this->setService( 'WikibaseRepo.LanguageNameLookupFactory',
+			$this->getLanguageNameLookupFactory() );
+		$this->setService( 'WikibaseRepo.WikibaseContentLanguages',
+			$this->getContentLanguages() );
 
-		$api->execute();
-		$apiResult = $api->getResult();
-		$results = $apiResult->getResultData()['query']['wbcontentlanguages'];
+		$results = $this->doApiRequest( array_merge( [
+			'action' => 'query',
+			'uselang' => self::USER_LANGUAGE,
+			'meta' => 'wbcontentlanguages',
+		], $params ) )[0]['query']['wbcontentlanguages'];
 
 		$this->assertSame( $expectedResults, $results );
-	}
-
-	/**
-	 * @param array $params
-	 * @return ApiQuery
-	 */
-	private function getQuery( array $params ): ApiQuery {
-		$context = new RequestContext();
-		$context->setLanguage( self::USER_LANGUAGE );
-		$context->setRequest( new FauxRequest( $params ) );
-		$main = new ApiMain( $context );
-		$query = $main->getModuleManager()->getModule( 'query' );
-
-		return $query;
 	}
 
 	private function getContentLanguages(): WikibaseContentLanguages {
