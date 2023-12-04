@@ -6,11 +6,11 @@ namespace Wikibase\Repo\Tests\Api;
 
 use ApiMain;
 use ApiQuery;
-use Exception;
-use MediaWiki\Languages\LanguageNameUtils;
 use MediaWiki\Request\FauxRequest;
 use PHPUnit\Framework\TestCase;
 use RequestContext;
+use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\LanguageNameLookupFactory;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Repo\Api\MetaContentLanguages;
@@ -26,17 +26,18 @@ use Wikibase\Repo\Api\MetaContentLanguages;
  */
 class MetaContentLanguagesTest extends TestCase {
 
+	private const USER_LANGUAGE = 'de';
+
 	/**
 	 * @dataProvider provideParamsAndExpectedResults
 	 */
 	public function testExecute( array $params, array $expectedResults ) {
 		$query = $this->getQuery( $params );
 		$api = new MetaContentLanguages(
-			$this->getContentLanguages(),
-			false,
-			$this->getLanguageNameUtils(),
 			$query,
-			'wbcontentlanguages'
+			'wbcontentlanguages',
+			$this->getLanguageNameLookupFactory(),
+			$this->getContentLanguages()
 		);
 
 		$api->execute();
@@ -46,27 +47,13 @@ class MetaContentLanguagesTest extends TestCase {
 		$this->assertSame( $expectedResults, $results );
 	}
 
-	public function testExecute_warnsAboutUnknownLanguageNames() {
-		$query = $this->getQuery( [ 'wbclprop' => 'name' ] );
-		$api = new MetaContentLanguages(
-			new WikibaseContentLanguages( [ WikibaseContentLanguages::CONTEXT_TERM => new StaticContentLanguages( [ 'unknown' ] ) ] ),
-			true,
-			$this->getLanguageNameUtils(),
-			$query,
-			'wbcontentlanguages'
-		);
-
-		$this->expectWarning();
-		$api->execute();
-	}
-
 	/**
 	 * @param array $params
 	 * @return ApiQuery
 	 */
 	private function getQuery( array $params ): ApiQuery {
 		$context = new RequestContext();
-		$context->setLanguage( 'de' );
+		$context->setLanguage( self::USER_LANGUAGE );
 		$context->setRequest( new FauxRequest( $params ) );
 		$main = new ApiMain( $context );
 		$query = $main->getModuleManager()->getModule( 'query' );
@@ -76,32 +63,51 @@ class MetaContentLanguagesTest extends TestCase {
 
 	private function getContentLanguages(): WikibaseContentLanguages {
 		return new WikibaseContentLanguages( [
-			'term' => new StaticContentLanguages( [ 'en', 'de', 'es' ] ),
-			'test' => new StaticContentLanguages( [ 'en', 'mis', 'und' ] ),
+			'term' => new StaticContentLanguages( [ 'en', 'de', 'es', 'mul' ] ),
+			'test' => new StaticContentLanguages( [ 'en', 'mis', 'mul' ] ),
 		] );
 	}
 
-	private function getLanguageNameUtils(): LanguageNameUtils {
-		$languageNameUtils = $this->createMock( LanguageNameUtils::class );
-		$languageNameUtils->method( 'getLanguageName' )
-			->willReturnCallback( function ( $code, $inLanguage = null ) {
-				if ( $inLanguage === null ) {
-					return $code === 'en' ? 'English' : '';
-				}
-				$this->assertSame( 'de', $inLanguage );
-				switch ( $code ) {
-					case 'en':
-						return 'Englisch';
-					case 'mis':
-						return 'nicht unterstützte Sprache';
-					case 'und':
-						return 'Unbekannte Sprache';
-					case 'unknown':
-						return '';
-				}
-				throw new Exception( "unexpected call: getLanguage( $code, $inLanguage )" );
-			} );
-		return $languageNameUtils;
+	private function getLanguageNameLookupFactory(): LanguageNameLookupFactory {
+		$autonymsMap = [
+			[ 'en', 'English' ],
+			[ 'de', 'Deutsch' ],
+			[ 'es', 'español' ],
+			[ 'mul', 'mul' ],
+			[ 'mis', 'mis' ],
+		];
+		$autonymLookup = $this->createMock( LanguageNameLookup::class );
+		$autonymLookup->method( 'getName' )
+			->willReturnMap( $autonymsMap );
+		$autonymLookup->method( 'getNameForTerms' )
+			->willReturnMap( $autonymsMap );
+		$namesMap = [
+			[ 'en', 'Englisch' ],
+			[ 'de', 'Deutsch' ],
+			[ 'es', 'Spanisch' ],
+			[ 'mis', 'nicht unterstützte Sprache' ],
+		];
+		$nameLookup = $this->createMock( LanguageNameLookup::class );
+		$nameLookup->method( 'getName' )
+			->willReturnMap( [
+				...$namesMap,
+				[ 'mul', 'Mehrsprachig' ],
+			] );
+		$nameLookup->method( 'getNameForTerms' )
+			->willReturnMap( [
+				...$namesMap,
+				[ 'mul', 'Standardwerte (mul)' ],
+			] );
+
+		$factory = $this->createMock( LanguageNameLookupFactory::class );
+		$factory->expects( $this->once() )
+			->method( 'getForAutonyms' )
+			->willReturn( $autonymLookup );
+		$factory->expects( $this->once() )
+			->method( 'getForLanguageCode' )
+			->with( self::USER_LANGUAGE )
+			->willReturn( $nameLookup );
+		return $factory;
 	}
 
 	public static function provideParamsAndExpectedResults() {
@@ -111,6 +117,17 @@ class MetaContentLanguagesTest extends TestCase {
 				'en' => [ 'code' => 'en' ],
 				'de' => [ 'code' => 'de' ],
 				'es' => [ 'code' => 'es' ],
+				'mul' => [ 'code' => 'mul' ],
+			],
+		];
+
+		yield 'term context, with autonyms and language names' => [
+			[ 'wbclcontext' => 'term', 'wbclprop' => 'code|autonym|name' ],
+			[
+				'en' => [ 'code' => 'en', 'autonym' => 'English', 'name' => 'Englisch' ],
+				'de' => [ 'code' => 'de', 'autonym' => 'Deutsch', 'name' => 'Deutsch' ],
+				'es' => [ 'code' => 'es', 'autonym' => 'español', 'name' => 'Spanisch' ],
+				'mul' => [ 'code' => 'mul', 'autonym' => 'mul', 'name' => 'Standardwerte (mul)' ],
 			],
 		];
 
@@ -118,8 +135,8 @@ class MetaContentLanguagesTest extends TestCase {
 			[ 'wbclcontext' => 'test', 'wbclprop' => 'code|autonym' ],
 			[
 				'en' => [ 'code' => 'en', 'autonym' => 'English' ],
-				'mis' => [ 'code' => 'mis', 'autonym' => null ],
-				'und' => [ 'code' => 'und', 'autonym' => null ],
+				'mis' => [ 'code' => 'mis', 'autonym' => 'mis' ],
+				'mul' => [ 'code' => 'mul', 'autonym' => 'mul' ],
 			],
 		];
 
@@ -128,7 +145,7 @@ class MetaContentLanguagesTest extends TestCase {
 			[
 				'en' => [ 'name' => 'Englisch' ],
 				'mis' => [ 'name' => 'nicht unterstützte Sprache' ],
-				'und' => [ 'name' => 'Unbekannte Sprache' ],
+				'mul' => [ 'name' => 'Mehrsprachig' ],
 			],
 		];
 	}

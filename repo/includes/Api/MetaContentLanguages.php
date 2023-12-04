@@ -6,8 +6,8 @@ namespace Wikibase\Repo\Api;
 
 use ApiQuery;
 use ApiQueryBase;
-use ExtensionRegistry;
-use MediaWiki\Languages\LanguageNameUtils;
+use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\LanguageNameLookupFactory;
 use Wikibase\Lib\WikibaseContentLanguages;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -16,54 +16,18 @@ use Wikimedia\ParamValidator\ParamValidator;
  */
 class MetaContentLanguages extends ApiQueryBase {
 
-	/** @var WikibaseContentLanguages */
-	private $wikibaseContentLanguages;
+	private LanguageNameLookupFactory $languageNameLookupFactory;
+	private WikibaseContentLanguages $wikibaseContentLanguages;
 
-	/** @var bool */
-	private $expectKnownLanguageNames;
-
-	/** @var LanguageNameUtils */
-	private $languageNameUtils;
-
-	/**
-	 * @param WikibaseContentLanguages $wikibaseContentLanguages
-	 * @param bool $expectKnownLanguageNames whether we should expect MediaWiki
-	 * to know a language name for any language code that occurs in the content languages
-	 * (if true, warnings will be raised for any language without known language name)
-	 * @param LanguageNameUtils $languageNameUtils source of language names and autonyms
-	 * @param ApiQuery $queryModule
-	 * @param string $moduleName
-	 */
 	public function __construct(
-		WikibaseContentLanguages $wikibaseContentLanguages,
-		bool $expectKnownLanguageNames,
-		LanguageNameUtils $languageNameUtils,
 		ApiQuery $queryModule,
-		string $moduleName
+		string $moduleName,
+		LanguageNameLookupFactory $languageNameLookupFactory,
+		WikibaseContentLanguages $wikibaseContentLanguages
 	) {
 		parent::__construct( $queryModule, $moduleName, 'wbcl' );
+		$this->languageNameLookupFactory = $languageNameLookupFactory;
 		$this->wikibaseContentLanguages = $wikibaseContentLanguages;
-		$this->expectKnownLanguageNames = $expectKnownLanguageNames;
-		$this->languageNameUtils = $languageNameUtils;
-	}
-
-	public static function factory(
-		ApiQuery $apiQuery,
-		string $moduleName,
-		LanguageNameUtils $languageNameUtils,
-		WikibaseContentLanguages $wikibaseContentLanguages
-	): self {
-		// if CLDR is available, we expect to have some language name
-		// (falling back to English if necessary) for any content language
-		$expectKnownLanguageNames = ExtensionRegistry::getInstance()->isLoaded( 'cldr' );
-
-		return new self(
-			$wikibaseContentLanguages,
-			$expectKnownLanguageNames,
-			$languageNameUtils,
-			$apiQuery,
-			$moduleName
-		);
 	}
 
 	/**
@@ -82,6 +46,10 @@ class MetaContentLanguages extends ApiQueryBase {
 		$includeAutonym = in_array( 'autonym', $props );
 		$includeName = in_array( 'name', $props );
 
+		$autonymLookup = $this->languageNameLookupFactory->getForAutonyms();
+		$nameLookup = $this->languageNameLookupFactory->getForLanguageCode(
+			$this->getLanguage()->getCode() );
+
 		foreach ( $languageCodes as $languageCode ) {
 			$path = [
 				$this->getQuery()->getModuleName(),
@@ -94,24 +62,26 @@ class MetaContentLanguages extends ApiQueryBase {
 			}
 
 			if ( $includeAutonym ) {
-				$autonym = $this->languageNameUtils->getLanguageName( $languageCode );
-				if ( $autonym === '' ) {
-					$autonym = null;
-				}
+				$autonym = $this->getNameForContext( $autonymLookup, $context, $languageCode );
 				$result->addValue( $path, 'autonym', $autonym );
 			}
 
 			if ( $includeName ) {
-				$userLanguageCode = $this->getLanguage()->getCode();
-				$name = $this->languageNameUtils->getLanguageName( $languageCode, $userLanguageCode );
-				if ( $name === '' ) {
-					if ( $this->expectKnownLanguageNames ) {
-						wfLogWarning( 'No name known for language ' . $languageCode );
-					}
-					$name = null;
-				}
+				$name = $this->getNameForContext( $nameLookup, $context, $languageCode );
 				$result->addValue( $path, 'name', $name );
 			}
+		}
+	}
+
+	private function getNameForContext(
+		LanguageNameLookup $languageNameLookup,
+		string $context,
+		string $languageCode
+	): string {
+		if ( $context === WikibaseContentLanguages::CONTEXT_TERM ) {
+			return $languageNameLookup->getNameForTerms( $languageCode );
+		} else {
+			return $languageNameLookup->getName( $languageCode );
 		}
 	}
 
