@@ -15,18 +15,12 @@ use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\AliasesInLanguageEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
-use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Property as ReadModelProperty;
-use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyRevision;
-use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
+use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryPropertyRepository;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\AddPropertyAliasesInLanguage\AddPropertyAliasesInLanguage
@@ -55,51 +49,41 @@ class AddPropertyAliasesInLanguageTest extends TestCase {
 
 	public function testCreateAliases(): void {
 		$languageCode = 'en';
-		$property = new Property( new NumericPropertyId( 'P123' ), null, 'string' );
+		$propertyId = new NumericPropertyId( 'P123' );
 		$aliasesToCreate = [ 'alias 1', 'alias 2' ];
-		$postModificationRevisionId = 322;
-		$modificationTimestamp = '20221111070707';
 		$editTags = [ TestValidatingRequestDeserializer::ALLOWED_TAGS[0] ];
 		$isBot = false;
 		$comment = 'potato';
 
-		$request = $this->newRequest(
-			$property->getId()->getSerialization(),
-			$languageCode,
-			$aliasesToCreate,
-			$editTags,
-			$isBot,
-			$comment,
-			null
-		);
+		$propertyRepo = new InMemoryPropertyRepository();
+		$propertyRepo->addProperty( new Property( $propertyId, null, 'string' ) );
+		$this->propertyRetriever = $propertyRepo;
+		$this->propertyUpdater = $propertyRepo;
 
-		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
-		$this->propertyRetriever->method( 'getProperty' )->willReturn( $property );
-
-		$updatedProperty = new ReadModelProperty(
-			new Labels(),
-			new Descriptions(),
-			new Aliases( new AliasesInLanguage( $languageCode, $aliasesToCreate ) ),
-			new StatementList()
-		);
-		$this->propertyUpdater = $this->createMock( PropertyUpdater::class );
-		$this->propertyUpdater->method( 'update' )
-			->with(
-				$this->callback(
-					fn( Property $property ) => $property->getAliasGroups()
-						->getByLanguage( $languageCode )
-						->equals( new AliasGroup( $languageCode, $aliasesToCreate ) )
-				),
-				$this->expectEquivalentMetadata( $editTags, $isBot, $comment, EditSummary::ADD_ACTION )
+		$response = $this->newUseCase()->execute(
+			new AddPropertyAliasesInLanguageRequest(
+				"$propertyId",
+				$languageCode,
+				$aliasesToCreate,
+				$editTags,
+				$isBot,
+				$comment,
+				null
 			)
-			->willReturn( new PropertyRevision( $updatedProperty, $modificationTimestamp, $postModificationRevisionId ) );
-
-		$response = $this->newUseCase()->execute( $request );
+		);
 
 		$this->assertEquals( new AliasesInLanguage( $languageCode, $aliasesToCreate ), $response->getAliases() );
 		$this->assertFalse( $response->wasAddedToExistingAliasGroup() );
-		$this->assertSame( $postModificationRevisionId, $response->getRevisionId() );
-		$this->assertSame( $modificationTimestamp, $response->getLastModified() );
+		$this->assertSame( $propertyRepo->getLatestRevisionId( $propertyId ), $response->getRevisionId() );
+		$this->assertSame( $propertyRepo->getLatestRevisionTimestamp( $propertyId ), $response->getLastModified() );
+		$this->assertEquals(
+			new EditMetadata(
+				$editTags,
+				$isBot,
+				AliasesInLanguageEditSummary::newAddSummary( $comment, new AliasGroup( $languageCode, $aliasesToCreate ) )
+			),
+			$propertyRepo->getLatestRevisionEditMetadata( $propertyId )
+		);
 	}
 
 	public function testAddToExistingAliases(): void {
@@ -113,36 +97,26 @@ class AddPropertyAliasesInLanguageTest extends TestCase {
 		$aliasesToAdd = [ 'alias 3', 'alias 4' ];
 		$request = $this->newRequest( "{$property->getId()}", $languageCode, $aliasesToAdd );
 
-		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
-		$this->propertyRetriever->method( 'getProperty' )->willReturn( $property );
-
-		$updatedAliases = array_merge( $existingAliases, $aliasesToAdd );
-		$updatedProperty = new ReadModelProperty(
-			new Labels(),
-			new Descriptions(),
-			new Aliases( new AliasesInLanguage( $languageCode, $updatedAliases ) ),
-			new StatementList()
-		);
-		$this->propertyUpdater = $this->createMock( PropertyUpdater::class );
-		$this->propertyUpdater->method( 'update' )
-			->with(
-				$this->callback(
-					fn( Property $property ) => $property->getAliasGroups()
-						->getByLanguage( $languageCode )
-						->equals( new AliasGroup( $languageCode, $updatedAliases ) ),
-				),
-				new EditMetadata(
-					[],
-					false,
-					AliasesInLanguageEditSummary::newAddSummary( null, new AliasGroup( $languageCode, $aliasesToAdd ) )
-				)
-			)
-			->willReturn( new PropertyRevision( $updatedProperty, '20221111070707', 322 ) );
+		$propertyRepo = new InMemoryPropertyRepository();
+		$propertyRepo->addProperty( $property );
+		$this->propertyRetriever = $propertyRepo;
+		$this->propertyUpdater = $propertyRepo;
 
 		$response = $this->newUseCase()->execute( $request );
 
-		$this->assertEquals( new AliasesInLanguage( $languageCode, $updatedAliases ), $response->getAliases() );
+		$this->assertEquals(
+			new AliasesInLanguage( $languageCode, array_merge( $existingAliases, $aliasesToAdd ) ),
+			$response->getAliases()
+		);
 		$this->assertTrue( $response->wasAddedToExistingAliasGroup() );
+		$this->assertEquals(
+			new EditMetadata(
+				[],
+				false,
+				AliasesInLanguageEditSummary::newAddSummary( null, new AliasGroup( $languageCode, $aliasesToAdd ) )
+			),
+			$propertyRepo->getLatestRevisionEditMetadata( $property->getId() )
+		);
 	}
 
 	public function testGivenPropertyNotFound_throws(): void {
