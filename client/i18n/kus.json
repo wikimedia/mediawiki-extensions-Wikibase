@@ -3,7 +3,8 @@
 		"authors": [
 			"Bugirbiig",
 			"Musahfm",
-			"Mozanky"
+			"Mozanky",
+			"Poasana Anabah"
 		]
 	},
 	"wikibase-client-desc": "Tʋmmir linɛ sʋŋir Wikibase nɔbigir bɛɛ yadigir",
@@ -54,6 +55,7 @@
 	"wikibase-rcfilters-hide-wikibase-conflicts-ores-global": "{{WBREPONAME}} gbɛlim dɛmisa bʋnsiligir la zabid nɛ amɛŋa pian'ad paasʋg yinne bɛɛ bɛdegʋ bɛɛ tʋmtʋm suunr bɔɔdim bʋnsilisa. Yɛlmɛŋir nɛ suunrin pʋtɛn'ɛr pʋ bɛɛ tis {{WBREPONAME}} gbɛlim dɛmisaa. Bʋnsilisa banɛ zabid la zaminɛ ya bɛ bʋnsilisa banɛ sid tʋm amɛŋa la zin'ikanɛ bɛɛ agɔl.",
 	"wikibase-rcfilters-damaging-conflicts-hide-wikibase": "Amɛŋa suunrin pian'ad paasʋg pʋ bɛɛ tis ti'as sieba, alazug bʋnsiligir kaŋa zabid nɛ ti'asa buudi banɛ dɔl nwa la {{PLURAL:$2|bʋnsiligir|bʋnsilisa}}:$1",
 	"wikibase-rcfilters-goodfaith-conflicts-hide-wikibase": "Tʋmtʋm nɛ gban'e si'el bɛɛ suunrin la pʋ bɛɛ tis ti'asa buudi banɛ bɛɛ, alazug bʋnsiligir kaŋa zabid nɛ ti'asa buudi banɛ dɔl nwa la {{PLURAL:$2|bʋnsiligir|bʋnsilisa}}:$1",
+	"wikibase-rcfilters-hide-wikibase-conflicts-major-global": " {{WBREPONAME}} tiasig dim wʋsa anɛ woo \"fiin\". \nDimzugɔ {{WBREPONAME}} tiasig dim nɔɔr pʋ zɛmis nɛ banɛ ka'a tiak bibis dima.",
 	"wikibase-replicationnote": "Bɛllimnɛ baŋim ye li tʋn'e nɔk saŋ bɛdegʋ ka ti'asa la yʋ'ʋn nie bɛ wiki nam ni wʋsa",
 	"wikibase-watchlist-show-changes-pref": "Pa'alim {{WBREPONAME}} gbɛlima banɛ ka fʋ duoes la bɛ fʋn gɔsid zin'isi'a la",
 	"wikibase-error-deserialize-error": "Zan'as ye li kʋ la'asi lɛbig detaa",
@@ -71,8 +73,10 @@
 	"wikibase-pageswithbadges-badge": "Zamin laʋk",
 	"wikibase-pageswithbadges-submit": "Pa'alim lakisa",
 	"entityusage": "Nimua laʋk tʋʋm",
+	"entityusage-summary": "Lakir kaŋa nwa pa'al nɛ banɛ tʋm nɛ la'ad yʋda(e.g. Q42). Ba zaŋ yʋda la dɔlis nɛ lakir ID, din la lakir paala na nyaŋi naam.",
 	"wikibase-entityusage-invalid-id": "$1 ka' ID laʋk kanɛ vʋɛ bɛɛ tʋmma",
 	"wikibase-entityusage-legend": "Lakisa yʋda banɛ mɔr nimua laʋk kanɛ zaŋi tisi li",
+	"wikibase-entityusage-entity": "Entity",
 	"wikibase-entityusage-submit": "Pa'alim lakisa",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} laʋk ID",
 	"wikibase-pageinfo-entity-id-none": "Nɛɛm",
@@ -88,6 +92,7 @@
 	"wikibase-pageinfo-entity-usage-C": "Nɔyɛlʋg sieba",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Nɔyɛlʋg:$1",
 	"wikibase-pageinfo-entity-usage-X": "La'amɛŋa wʋsa deeta",
+	"wikibase-pageinfo-entity-usage-O": "Bʋna gʋn gʋn n la'as (e.g. woo yidim)",
 	"wikibase-property-render-error": "Zan'as ye li kʋ tis faarɛ.$1:$2",
 	"wikibase-otherprojects": "Tʋʋm sieba ni",
 	"wikibase-otherprojects-beta-message": "Tʋʋm sieba ni kpikpɛŋ fɔl",
