@@ -6,8 +6,12 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Term\AliasGroup;
+use Wikibase\DataModel\Term\AliasGroupList;
+use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyAliasesInLanguage\AddPropertyAliasesInLanguage;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyAliasesInLanguage\AddPropertyAliasesInLanguageRequest;
+use Wikibase\Repo\RestApi\Domain\Model\AliasesInLanguageEditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
@@ -86,8 +90,60 @@ class AddPropertyAliasesInLanguageTest extends TestCase {
 		$response = $this->newUseCase()->execute( $request );
 
 		$this->assertEquals( new AliasesInLanguage( $languageCode, $aliasesToCreate ), $response->getAliases() );
+		$this->assertFalse( $response->wasAddedToExistingAliasGroup() );
 		$this->assertSame( $postModificationRevisionId, $response->getRevisionId() );
 		$this->assertSame( $modificationTimestamp, $response->getLastModified() );
+	}
+
+	public function testAddToExistingAliases(): void {
+		$languageCode = 'en';
+		$existingAliases = [ 'alias 1', 'alias 2' ];
+		$property = new Property(
+			new NumericPropertyId( 'P123' ),
+			new Fingerprint( null, null, new AliasGroupList( [ new AliasGroup( $languageCode, $existingAliases ) ] ) ),
+			'string'
+		);
+		$aliasesToAdd = [ 'alias 3', 'alias 4' ];
+		$request = new AddPropertyAliasesInLanguageRequest(
+			"{$property->getId()}",
+			$languageCode,
+			$aliasesToAdd,
+			[],
+			false,
+			null,
+			null
+		);
+
+		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
+		$this->propertyRetriever->method( 'getProperty' )->willReturn( $property );
+
+		$updatedAliases = array_merge( $existingAliases, $aliasesToAdd );
+		$updatedProperty = new ReadModelProperty(
+			new Labels(),
+			new Descriptions(),
+			new Aliases( new AliasesInLanguage( $languageCode, $updatedAliases ) ),
+			new StatementList()
+		);
+		$this->propertyUpdater = $this->createMock( PropertyUpdater::class );
+		$this->propertyUpdater->method( 'update' )
+			->with(
+				$this->callback(
+					fn( Property $property ) => $property->getAliasGroups()
+						->getByLanguage( $languageCode )
+						->equals( new AliasGroup( $languageCode, $updatedAliases ) ),
+				),
+				new EditMetadata(
+					[],
+					false,
+					AliasesInLanguageEditSummary::newAddSummary( null, new AliasGroup( $languageCode, $aliasesToAdd ) )
+				)
+			)
+			->willReturn( new PropertyRevision( $updatedProperty, '20221111070707', 322 ) );
+
+		$response = $this->newUseCase()->execute( $request );
+
+		$this->assertEquals( new AliasesInLanguage( $languageCode, $updatedAliases ), $response->getAliases() );
+		$this->assertTrue( $response->wasAddedToExistingAliasGroup() );
 	}
 
 	private function newUseCase(): AddPropertyAliasesInLanguage {

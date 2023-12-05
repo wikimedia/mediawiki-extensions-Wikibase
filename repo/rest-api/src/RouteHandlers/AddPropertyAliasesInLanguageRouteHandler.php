@@ -107,6 +107,7 @@ class AddPropertyAliasesInLanguageRouteHandler extends SimpleHandler {
 
 	private function newSuccessHttpResponse( AddPropertyAliasesInLanguageResponse $useCaseResponse ): Response {
 		$httpResponse = $this->getResponseFactory()->create();
+		$httpResponse->setStatus( $useCaseResponse->wasAddedToExistingAliasGroup() ? 200 : 201 );
 		$httpResponse->setHeader( 'Content-Type', 'application/json' );
 		$httpResponse->setHeader(
 			'Last-Modified',

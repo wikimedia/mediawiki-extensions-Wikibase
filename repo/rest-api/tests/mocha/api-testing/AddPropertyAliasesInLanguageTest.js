@@ -25,6 +25,11 @@ describe( newRequest().getRouteDescription(), () => {
 		assertValidResponse( response, aliases );
 	}
 
+	function assertValid201Response( response, aliases ) {
+		expect( response ).to.have.status( 201 );
+		assertValidResponse( response, aliases );
+	}
+
 	before( async () => {
 		const createEntityResponse = await entityHelper.createEntity( 'property', {
 			datatype: 'string',
@@ -82,6 +87,15 @@ describe( newRequest().getRouteDescription(), () => {
 				`/* wbsetaliases-add:1|${language} */ ${newAlias}, ${editSummary}`
 			);
 			assert.strictEqual( editMetadata.user, user.username );
+		} );
+
+		it( 'can create a new list of aliases with edit metadata omitted', async () => {
+			const newAliases = [ 'first de alias', 'second de alias' ];
+			const response = await newRequest( testPropertyId, 'de', newAliases )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValid201Response( response, newAliases );
 		} );
 	} );
 } );
