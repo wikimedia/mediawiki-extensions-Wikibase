@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Arystanbek",
+			"Casserium",
 			"Ladsgroup",
 			"Macofe",
 			"Нұрлан Рахымжанов",
@@ -141,7 +142,7 @@
 	"wikibase-itemmerge-no-such-entity": "Элемент табылмады.",
 	"wikibase-itemmerge-cant-load-entity-content": "Элементті жүктеу болмады.",
 	"wikibase-itemmerge-cant-merge-self": "Элемент өзімен біріктірілмеді.",
-	"special-listdatatypes": "Барлық дерек түрінің тізіміқол жетімді",
+	"special-listdatatypes": "Барлық дерек түрінің тізімі қолжетімді",
 	"wikibase-listdatatypes-intro": "Бұл, орнатымдағы барлық дерек түрінің тізімі.",
 	"wikibase-history-title-without-label": "«$1» дегеннің нұсқа тарихы",
 	"special-listproperties": "Сипаттар тізімі",

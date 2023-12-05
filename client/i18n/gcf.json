@@ -1,10 +1,18 @@
 {
 	"@metadata": {
 		"authors": [
+			"EritajGwadloup",
 			"Laetitia Kb"
 		]
 	},
+	"wikibase-dataitem": "{{WBREPONAME}} éléman",
 	"wikibase-editlinks": "Mofifyé lyannaj-la",
+	"wikibase-linkitem-addlinks": "Ajouté lyen",
+	"wikibase-linkitem-title": "Fè on lyen èvè paj-la",
+	"wikibase-linkitem-linkpage": "Fè on lyen èvè paj-la",
+	"wikibase-linkitem-selectlink": "Syouplé chwazi on sit épi on paj ou vlé lyanné a paj-lasa",
+	"wikibase-linkitem-input-site": "Lang",
+	"wikibase-linkitem-input-page": "Paj",
 	"wikibase-rc-hide-wikidata-show": "Montré-y",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} modifyé"
