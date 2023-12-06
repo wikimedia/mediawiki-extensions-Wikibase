@@ -6,7 +6,7 @@ use MediaWiki\Languages\LanguageNameUtils;
 use MediaWiki\MediaWikiServices;
 
 /**
- * Provide languages supported as content languages based on MediaWiki's Language class.
+ * Provide languages supported as content languages based on MediaWiki's LanguageNameUtils.
  *
  * @license GPL-2.0-or-later
  * @author Adrian Heine <adrian.heine@wikimedia.de>
@@ -17,14 +17,25 @@ class MediaWikiContentLanguages implements ContentLanguages {
 	/** @var LanguageNameUtils */
 	private $languageNameUtils;
 
+	private string $languageNameUtilsInclude;
+
 	/**
 	 * @var string[]|null Array of language codes => language names.
 	 */
 	private $languageMap = null;
 
-	public function __construct( LanguageNameUtils $languageNameUtils = null ) {
+	/**
+	 * @param null|LanguageNameUtils $languageNameUtils
+	 * @param string $languageNameUtilsInclude Either LanguageNameUtils::DEFINED,
+	 *     LanguageNameUtils::ALL, or LanguageNameUtils::SUPPORTED.
+	 */
+	public function __construct(
+		?LanguageNameUtils $languageNameUtils = null,
+		string $languageNameUtilsInclude = LanguageNameUtils::DEFINED
+	) {
 		$this->languageNameUtils = $languageNameUtils ?:
 			MediaWikiServices::getInstance()->getLanguageNameUtils();
+		$this->languageNameUtilsInclude = $languageNameUtilsInclude;
 	}
 
 	/**
@@ -48,7 +59,7 @@ class MediaWikiContentLanguages implements ContentLanguages {
 	 */
 	private function getLanguageMap() {
 		if ( $this->languageMap === null ) {
-			$this->languageMap = $this->languageNameUtils->getLanguageNames();
+			$this->languageMap = $this->languageNameUtils->getLanguageNames( 'en', $this->languageNameUtilsInclude );
 		}
 
 		return $this->languageMap;
