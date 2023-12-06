@@ -2,6 +2,8 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyLabel;
 
+use OutOfBoundsException;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\LabelEditSummary;
@@ -14,15 +16,18 @@ use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
 class RemovePropertyLabel {
 
 	private RemovePropertyLabelValidator $requestValidator;
+	private AssertPropertyExists $assertPropertyExists;
 	private PropertyRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
 
 	public function __construct(
 		RemovePropertyLabelValidator $requestValidator,
+		AssertPropertyExists $assertPropertyExists,
 		PropertyRetriever $propertyRetriever,
 		PropertyUpdater $propertyUpdater
 	) {
 		$this->requestValidator = $requestValidator;
+		$this->assertPropertyExists = $assertPropertyExists;
 		$this->propertyRetriever = $propertyRetriever;
 		$this->propertyUpdater = $propertyUpdater;
 	}
@@ -36,8 +41,19 @@ class RemovePropertyLabel {
 		$languageCode = $deserializedRequest->getLanguageCode();
 		$providedEditMetadata = $deserializedRequest->getEditMetadata();
 
+		$this->assertPropertyExists->execute( $propertyId );
+
 		$property = $this->propertyRetriever->getProperty( $propertyId );
-		$label = $property->getLabels()->getByLanguage( $languageCode );
+
+		try {
+			$label = $property->getLabels()->getByLanguage( $languageCode );
+		} catch ( OutOfBoundsException $e ) {
+			throw new UseCaseError(
+				UseCaseError::LABEL_NOT_DEFINED,
+				"Property with the ID $propertyId does not have a label in the language: $languageCode"
+			);
+		}
+
 		$property->getLabels()->removeByLanguage( $languageCode );
 
 		$summary = LabelEditSummary::newRemoveSummary( $providedEditMetadata->getComment(), $label );
