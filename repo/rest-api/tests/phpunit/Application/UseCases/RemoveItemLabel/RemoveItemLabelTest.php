@@ -100,7 +100,7 @@ class RemoveItemLabelTest extends TestCase {
 		}
 	}
 
-	public function testGivenDescriptionDoesNotExist_throws(): void {
+	public function testGivenLabelDoesNotExist_throws(): void {
 		$itemId = new ItemId( 'Q123' );
 		$language = 'en';
 		$editTags = [ TestValidatingRequestDeserializer::ALLOWED_TAGS[ 1 ] ];
