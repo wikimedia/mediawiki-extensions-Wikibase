@@ -54,6 +54,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementVali
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemDescription\RemoveItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemLabel\RemoveItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyLabel\RemovePropertyLabelValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyStatement\RemovePropertyStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatementValidator;
@@ -97,6 +98,7 @@ class ValidatingRequestDeserializer	implements
 	RemoveItemLabelValidator,
 	RemoveItemDescriptionValidator,
 	RemoveItemStatementValidator,
+	RemovePropertyLabelValidator,
 	RemovePropertyStatementValidator,
 	RemoveStatementValidator,
 	ReplaceItemStatementValidator,

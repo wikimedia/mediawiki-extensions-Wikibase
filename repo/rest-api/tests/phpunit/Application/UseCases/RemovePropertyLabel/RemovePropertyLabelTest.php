@@ -10,9 +10,12 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyLabel\RemovePropertyLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyLabel\RemovePropertyLabelRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyLabel\RemovePropertyLabelValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
+use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 
 /**
@@ -27,12 +30,14 @@ class RemovePropertyLabelTest extends TestCase {
 
 	use EditMetadataHelper;
 
+	private RemovePropertyLabelValidator $requestValidator;
 	private PropertyRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
 
 	protected function setUp(): void {
 		parent::setUp();
 
+		$this->requestValidator = new TestValidatingRequestDeserializer();
 		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
 		$this->propertyUpdater = $this->createStub( PropertyUpdater::class );
 	}
@@ -52,6 +57,7 @@ class RemovePropertyLabelTest extends TestCase {
 			new Fingerprint( new TermList( [ $labelToKeep ] ) ),
 			'string'
 		);
+		$tags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 
 		$this->propertyRetriever = $this->createMock( PropertyRetriever::class );
 		$this->propertyRetriever->expects( $this->once() )
@@ -64,15 +70,27 @@ class RemovePropertyLabelTest extends TestCase {
 			->method( 'update' )
 			->with(
 				$updatedProperty,
-				$this->expectEquivalentMetadata( [ 'tag' ], false, 'test', EditSummary::REMOVE_ACTION )
+				$this->expectEquivalentMetadata( $tags, false, 'test', EditSummary::REMOVE_ACTION )
 			);
 
-		$request = new RemovePropertyLabelRequest( $propertyId, $languageCode, [ 'tag' ], false, 'test', null );
+		$request = new RemovePropertyLabelRequest( $propertyId, $languageCode, $tags, false, 'test', null );
 		$this->newUseCase()->execute( $request );
 	}
 
+	public function testInvalidRequest_throwsException(): void {
+		$expectedException = new UseCaseException( 'invalid-remove-label-test' );
+		$this->requestValidator = $this->createStub( RemovePropertyLabelValidator::class );
+		$this->requestValidator->method( 'validateAndDeserialize' )->willThrowException( $expectedException );
+		try {
+			$this->newUseCase()->execute( $this->createStub( RemovePropertyLabelRequest::class ) );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
 	private function newUseCase(): RemovePropertyLabel {
-		return new RemovePropertyLabel( $this->propertyRetriever, $this->propertyUpdater );
+		return new RemovePropertyLabel( $this->requestValidator, $this->propertyRetriever, $this->propertyUpdater );
 	}
 
 }

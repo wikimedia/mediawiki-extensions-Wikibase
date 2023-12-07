@@ -9,6 +9,7 @@ use MediaWiki\Rest\StringStream;
 use MediaWiki\Rest\Validator\BodyValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyLabel\RemovePropertyLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyLabel\RemovePropertyLabelRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -28,28 +29,41 @@ class RemovePropertyLabelRouteHandler extends SimpleHandler {
 	private const COMMENT_PARAM_DEFAULT = null;
 
 	private RemovePropertyLabel $removePropertyLabel;
+	private ResponseFactory $responseFactory;
 
-	public function __construct( RemovePropertyLabel $removePropertyLabel ) {
+	public function __construct( RemovePropertyLabel $removePropertyLabel, ResponseFactory $responseFactory ) {
 		$this->removePropertyLabel = $removePropertyLabel;
+		$this->responseFactory = $responseFactory;
 	}
 
 	public static function factory(): Handler {
-		return new self( new RemovePropertyLabel( WbRestApi::getPropertyDataRetriever(), WbRestApi::getPropertyUpdater() ) );
+		return new self(
+			new RemovePropertyLabel(
+				WbRestApi::getValidatingRequestDeserializer(),
+				WbRestApi::getPropertyDataRetriever(),
+				WbRestApi::getPropertyUpdater()
+			),
+			new ResponseFactory()
+		);
 	}
 
 	public function run( string $propertyId, string $languageCode ): Response {
 		$requestBody = $this->getValidatedBody();
 
-		$this->removePropertyLabel->execute(
-			new RemovePropertyLabelRequest(
-				$propertyId,
-				$languageCode,
-				$requestBody[ self::TAGS_BODY_PARAM ] ?? self::TAGS_PARAM_DEFAULT,
-				$requestBody[ self::BOT_BODY_PARAM ] ?? self::BOT_PARAM_DEFAULT,
-				$requestBody[ self::COMMENT_BODY_PARAM ] ?? self::COMMENT_PARAM_DEFAULT,
-				null
-			)
-		);
+		try {
+			$this->removePropertyLabel->execute(
+				new RemovePropertyLabelRequest(
+					$propertyId,
+					$languageCode,
+					$requestBody[ self::TAGS_BODY_PARAM ] ?? self::TAGS_PARAM_DEFAULT,
+					$requestBody[ self::BOT_BODY_PARAM ] ?? self::BOT_PARAM_DEFAULT,
+					$requestBody[ self::COMMENT_BODY_PARAM ] ?? self::COMMENT_PARAM_DEFAULT,
+					null
+				)
+			);
+		} catch ( UseCaseError $e ) {
+			return $this->responseFactory->newErrorResponseFromException( $e );
+		}
 
 		return $this->newSuccessHttpResponse();
 	}
