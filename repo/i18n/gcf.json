@@ -1,9 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"EritajGwadloup",
 			"Laetitia Kb"
 		]
 	},
 	"wikibase-edit": "Modifyé",
-	"wikibase-add": "Ajouté-y"
+	"wikibase-add": "Ajouté-y",
+	"wikibase-description-empty": "Yo pa ba pon déskripsyon",
+	"wikibase-sitelinks-special": "Dòt sit"
 }

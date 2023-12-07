@@ -7,9 +7,12 @@
 		]
 	},
 	"tooltip-t-wikibase": "Connected data repository item ke jorr",
+	"wikibase-dataitem": "{{WBREPONAME}} item",
 	"wikibase-editlinks": "Links ke badlo",
 	"wikibase-editlinkstitle": "Interlanguage jorr ke badlo",
 	"wikibase-linkitem-addlinks": "Links ke jorro",
+	"wikibase-linkitem-input-site": "Bhasa:",
+	"wikibase-linkitem-input-page": "Panna:",
 	"wikibase-rc-hide-wikidata-hide": "Lukao",
 	"wikibase-rc-hide-wikidata-show": "Dekhao",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} badlo",

@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Agurwin Isaac",
 			"Bugirbiig"
 		]
 	},
@@ -8,5 +9,12 @@
 	"wikibase-add": "paasim",
 	"wikibase-label-empty": "Li pʋ sɔbi pa'alɛ",
 	"wikibase-description-empty": "Pa'alʋg pʋ nie pa'alɛ",
+	"wikibase-diffview-reference": "Gbanvɛɛnsa",
+	"wikibase-diffview-rank": "Tɛbisim",
+	"wikibase-diffview-description": "Pa'alʋg",
+	"wikibase-diffview-link": "Linki",
+	"wikibase-diffview-link-name": "Yʋ'ʋr",
+	"wikibase-sitelink-site-edit-placeholder": "Wiki",
+	"wikibase-sitelink-page-edit-placeholder": "Lakir",
 	"wikibase-sitelinks-special": "Babsieba"
 }
