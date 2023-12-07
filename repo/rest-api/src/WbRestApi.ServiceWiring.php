@@ -27,6 +27,7 @@ use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemLabelEditRequ
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\LanguageCodeRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\MappedRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PatchRequestValidatingDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyAliasesInLanguageEditRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyDescriptionEditRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdFilterRequest;
@@ -268,6 +269,18 @@ return [
 				new WikibaseRepoPropertyDescriptionValidator(
 					WikibaseRepo::getTermValidatorFactory( $services ),
 					WbRestApi::getPropertyDataRetriever( $services )
+				)
+			);
+		},
+
+	VRD::PROPERTY_ALIASES_IN_LANGUAGE_EDIT_REQUEST_VALIDATING_DESERIALIZER =>
+		function ( MediaWikiServices $services ): PropertyAliasesInLanguageEditRequestValidatingDeserializer {
+			return new PropertyAliasesInLanguageEditRequestValidatingDeserializer(
+				new WikibaseRepoAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory() ),
+				new AliasesDeserializer(),
+				new PrefetchingTermLookupAliasesRetriever(
+					WikibaseRepo::getPrefetchingTermLookup( $services ),
+					WikibaseRepo::getTermsLanguages( $services )
 				)
 			);
 		},

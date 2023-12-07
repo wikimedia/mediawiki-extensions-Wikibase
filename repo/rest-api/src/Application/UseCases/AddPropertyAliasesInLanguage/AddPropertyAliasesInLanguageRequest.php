@@ -3,12 +3,13 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\AddPropertyAliasesInLanguage;
 
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyAliasesInLanguageEditRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\UseCaseRequest;
 
 /**
  * @license GPL-2.0-or-later
  */
-class AddPropertyAliasesInLanguageRequest implements PropertyIdRequest, EditMetadataRequest {
+class AddPropertyAliasesInLanguageRequest implements UseCaseRequest, PropertyAliasesInLanguageEditRequest, EditMetadataRequest {
 
 	private string $propertyId;
 	private string $languageCode;
