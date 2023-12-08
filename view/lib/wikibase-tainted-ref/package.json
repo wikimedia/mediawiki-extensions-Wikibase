@@ -20,7 +20,7 @@
   "dependencies": {
     "core-js": "^3.6.5",
     "events": "^3.3.0",
-    "vue": "3.2.23"
+    "vue": "3.3.9"
   },
   "devDependencies": {
     "@babel/core": "^7.13.15",
@@ -36,7 +36,7 @@
     "@vue/cli-plugin-unit-jest": "^5.0.0-rc.2",
     "@vue/cli-service": "^4.5.12",
     "@vue/eslint-config-typescript": "^11.0.3",
-    "@vue/test-utils": "^2.0.0-rc.18",
+    "@vue/test-utils": "^2.4.3",
     "@vue/vue3-jest": "^27.0.0-alpha.4",
     "@wmde/eslint-config-wikimedia-typescript": "^0.2.5",
     "@wmde/lib-version-check": "^0.1.0",
