@@ -22,6 +22,8 @@ use Wikimedia\TestingAccessWrapper;
  */
 class HtmlPageLinkRendererEndHookHandlerTest extends HtmlPageLinkRendererEndHookHandlerTestBase {
 
+	protected const NAMESPACE_PROPERTY = 122;
+
 	/**
 	 * @dataProvider validLinkRendererAndContextProvider
 	 */
@@ -207,6 +209,55 @@ class HtmlPageLinkRendererEndHookHandlerTest extends HtmlPageLinkRendererEndHook
 		$this->assertArrayHasKey( 'title', $customAttribs );
 		$this->assertNotNull( $customAttribs['title'] );
 		$this->assertStringContainsString( self::ITEM_WITHOUT_LABEL, $customAttribs['title'] );
+	}
+
+	public function testDoHtmlPageLinkRendererBegin_itemWithNamespace_labelIsUsed() {
+		$handler = $this->newInstance();
+
+		$title = $this->newTitle( self::PROPERTY_WITH_LABEL, true, self::NAMESPACE_PROPERTY );
+		$text = $title->getFullText();
+		$customAttribs = [];
+
+		$context = $this->newContext();
+		$ret = $handler->doHtmlPageLinkRendererEnd(
+			$this->getLinkRenderer(), $title, $text, $customAttribs, $context );
+
+		$expected = '<span class="wb-itemlink">'
+			. '<span class="wb-itemlink-label" lang="en" dir="ltr">' . self::DUMMY_LABEL . '</span> '
+			. '<span class="wb-itemlink-id">(' . self::PROPERTY_WITH_LABEL . ')</span></span>';
+
+		$lang = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' );
+		$this->assertTrue( $ret );
+		$this->assertInstanceOf( HtmlArmor::class, $text );
+		$this->assertEquals( $expected, HtmlArmor::getHtml( $text ) );
+		$this->assertEquals(
+			$lang->getDirMark() . 'linkbegin-label' . $lang->getDirMark(),
+			$customAttribs['title']
+		);
+	}
+
+	public function testDoHtmlPageLinkRendererBegin_itemWithNamespace_labelIsUsedIfPagenameWithoutNamespaceSupplied() {
+		$handler = $this->newInstance();
+
+		$title = $this->newTitle( self::PROPERTY_WITH_LABEL, true, self::NAMESPACE_PROPERTY );
+		$text = $title->getText();
+		$customAttribs = [];
+
+		$context = $this->newContext();
+		$ret = $handler->doHtmlPageLinkRendererEnd(
+			$this->getLinkRenderer(), $title, $text, $customAttribs, $context );
+
+		$expected = '<span class="wb-itemlink">'
+			. '<span class="wb-itemlink-label" lang="en" dir="ltr">' . self::DUMMY_LABEL . '</span> '
+			. '<span class="wb-itemlink-id">(' . self::PROPERTY_WITH_LABEL . ')</span></span>';
+
+		$lang = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' );
+		$this->assertTrue( $ret );
+		$this->assertEquals( $expected, HtmlArmor::getHtml( $text ) );
+		$this->assertEquals(
+			$lang->getDirMark() . 'linkbegin-label' . $lang->getDirMark(),
+			$customAttribs['title']
+		);
 	}
 
 	public function testDoHtmlPageLinkRendererBegin_itemHasNoDescription() {
