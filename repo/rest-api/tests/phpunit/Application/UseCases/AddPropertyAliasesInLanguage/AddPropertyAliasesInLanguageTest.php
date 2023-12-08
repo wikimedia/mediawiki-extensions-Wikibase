@@ -10,6 +10,8 @@ use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyAliasesInLanguage\AddPropertyAliasesInLanguage;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyAliasesInLanguage\AddPropertyAliasesInLanguageRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\AliasesInLanguageEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
@@ -36,12 +38,14 @@ class AddPropertyAliasesInLanguageTest extends TestCase {
 
 	use EditMetadataHelper;
 
+	private AssertPropertyExists $assertPropertyExists;
 	private PropertyRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
 
 	protected function setUp(): void {
 		parent::setUp();
 
+		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
 		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
 		$this->propertyUpdater = $this->createStub( PropertyUpdater::class );
 	}
@@ -56,7 +60,7 @@ class AddPropertyAliasesInLanguageTest extends TestCase {
 		$isBot = false;
 		$comment = 'potato';
 
-		$request = new AddPropertyAliasesInLanguageRequest(
+		$request = $this->newRequest(
 			$property->getId()->getSerialization(),
 			$languageCode,
 			$aliasesToCreate,
@@ -104,15 +108,7 @@ class AddPropertyAliasesInLanguageTest extends TestCase {
 			'string'
 		);
 		$aliasesToAdd = [ 'alias 3', 'alias 4' ];
-		$request = new AddPropertyAliasesInLanguageRequest(
-			"{$property->getId()}",
-			$languageCode,
-			$aliasesToAdd,
-			[],
-			false,
-			null,
-			null
-		);
+		$request = $this->newRequest( "{$property->getId()}", $languageCode, $aliasesToAdd );
 
 		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
 		$this->propertyRetriever->method( 'getProperty' )->willReturn( $property );
@@ -146,11 +142,36 @@ class AddPropertyAliasesInLanguageTest extends TestCase {
 		$this->assertTrue( $response->wasAddedToExistingAliasGroup() );
 	}
 
+	public function testGivenPropertyNotFound_throws(): void {
+		$expectedError = $this->createStub( UseCaseError::class );
+		$this->assertPropertyExists->method( 'execute' )
+			->willThrowException( $expectedError );
+		try {
+			$this->newUseCase()->execute( $this->newRequest( 'P999', 'en', [ 'new alias' ] ) );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedError, $e );
+		}
+	}
+
 	private function newUseCase(): AddPropertyAliasesInLanguage {
 		return new AddPropertyAliasesInLanguage(
+			$this->assertPropertyExists,
 			$this->propertyRetriever,
 			$this->propertyUpdater
 		);
+	}
+
+	private function newRequest(
+		string $propertyId,
+		string $languageCode,
+		array $aliases,
+		array $tags = [],
+		bool $isBot = false,
+		string $comment = null,
+		string $username = null
+	): AddPropertyAliasesInLanguageRequest {
+		return new AddPropertyAliasesInLanguageRequest( $propertyId, $languageCode, $aliases, $tags, $isBot, $comment, $username );
 	}
 
 }

@@ -10,6 +10,7 @@ use MediaWiki\Rest\Validator\BodyValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyAliasesInLanguage\AddPropertyAliasesInLanguage;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyAliasesInLanguage\AddPropertyAliasesInLanguageRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyAliasesInLanguage\AddPropertyAliasesInLanguageResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -27,25 +28,34 @@ class AddPropertyAliasesInLanguageRouteHandler extends SimpleHandler {
 	private const COMMENT_BODY_PARAM = 'comment';
 
 	private AddPropertyAliasesInLanguage $addPropertyAliases;
+	private ResponseFactory $responseFactory;
 
-	public function __construct( AddPropertyAliasesInLanguage $addPropertyAliases ) {
+	public function __construct(
+		AddPropertyAliasesInLanguage $addPropertyAliases,
+		ResponseFactory $responseFactory
+	) {
 		$this->addPropertyAliases = $addPropertyAliases;
+		$this->responseFactory = $responseFactory;
 	}
 
 	public static function factory(): Handler {
+		$responseFactory = new ResponseFactory();
+
 		return new self(
 			new AddPropertyAliasesInLanguage(
+				WbRestApi::getAssertPropertyExists(),
 				WbRestApi::getPropertyDataRetriever(),
 				WbRestApi::getPropertyUpdater()
-			)
+			),
+			$responseFactory
 		);
 	}
 
 	public function run( string $propertyId, string $languageCode ): Response {
 		$jsonBody = $this->getValidatedBody();
 
-		return $this->newSuccessHttpResponse(
-			$this->addPropertyAliases->execute(
+		try {
+			$useCaseResponse = $this->addPropertyAliases->execute(
 				new AddPropertyAliasesInLanguageRequest(
 					$propertyId,
 					$languageCode,
@@ -55,8 +65,12 @@ class AddPropertyAliasesInLanguageRouteHandler extends SimpleHandler {
 					$jsonBody[self::COMMENT_BODY_PARAM],
 					$this->getUsername()
 				)
-			)
-		);
+			);
+		} catch ( UseCaseError $error ) {
+			return $this->responseFactory->newErrorResponseFromException( $error );
+		}
+
+		return $this->newSuccessHttpResponse( $useCaseResponse );
 	}
 
 	/**

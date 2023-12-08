@@ -97,5 +97,18 @@ describe( newRequest().getRouteDescription(), () => {
 
 			assertValid201Response( response, newAliases );
 		} );
+
+		it( 'responds 404 if the property does not exist', async () => {
+			const propertyId = 'P9999999';
+			const response = await newRequest( propertyId, 'en', [ 'my property alias' ] )
+				.assertValidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 404 );
+			assert.strictEqual( response.header[ 'content-language' ], 'en' );
+			assert.strictEqual( response.body.code, 'property-not-found' );
+			assert.include( response.body.message, propertyId );
+		} );
+
 	} );
 } );
