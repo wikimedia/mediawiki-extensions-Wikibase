@@ -107,6 +107,14 @@ describe( 'Auth', () => {
 			newRequestBuilder: () => rbf.newRemovePropertyLabelRequestBuilder( propertyRequestInputs.propertyId, 'en' ),
 			requestInputs: propertyRequestInputs
 		},
+		{
+			newRequestBuilder: () => rbf.newAddPropertyAliasesInLanguageRequestBuilder(
+				propertyRequestInputs.propertyId,
+				'en',
+				[ 'my property alias' ]
+			),
+			requestInputs: propertyRequestInputs
+		},
 		...editRequestsWithInputs
 	];
 

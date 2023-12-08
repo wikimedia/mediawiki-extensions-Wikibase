@@ -44,6 +44,7 @@ class AddPropertyAliasesInLanguageRouteHandler extends SimpleHandler {
 		return new self(
 			new AddPropertyAliasesInLanguage(
 				WbRestApi::getAssertPropertyExists(),
+				WbRestApi::getAssertUserIsAuthorized(),
 				WbRestApi::getPropertyDataRetriever(),
 				WbRestApi::getPropertyUpdater()
 			),

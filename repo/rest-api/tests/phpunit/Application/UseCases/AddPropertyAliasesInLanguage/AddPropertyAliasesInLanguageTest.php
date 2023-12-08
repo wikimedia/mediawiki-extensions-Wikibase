@@ -11,6 +11,7 @@ use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyAliasesInLanguage\AddPropertyAliasesInLanguage;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyAliasesInLanguage\AddPropertyAliasesInLanguageRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\AliasesInLanguageEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
@@ -39,6 +40,7 @@ class AddPropertyAliasesInLanguageTest extends TestCase {
 	use EditMetadataHelper;
 
 	private AssertPropertyExists $assertPropertyExists;
+	private AssertUserIsAuthorized $assertUserIsAuthorized;
 	private PropertyRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
 
@@ -46,6 +48,7 @@ class AddPropertyAliasesInLanguageTest extends TestCase {
 		parent::setUp();
 
 		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
+		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
 		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
 		$this->propertyUpdater = $this->createStub( PropertyUpdater::class );
 	}
@@ -154,9 +157,23 @@ class AddPropertyAliasesInLanguageTest extends TestCase {
 		}
 	}
 
+	public function testGivenUserUnauthorized_throws(): void {
+		$expectedException = $this->createStub( UseCaseError::class );
+		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
+		$this->assertUserIsAuthorized->method( 'execute' )->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase()->execute( $this->newRequest( 'P1', 'en', [ 'new alias' ] ) );
+			$this->fail( 'expected exception not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
 	private function newUseCase(): AddPropertyAliasesInLanguage {
 		return new AddPropertyAliasesInLanguage(
 			$this->assertPropertyExists,
+			$this->assertUserIsAuthorized,
 			$this->propertyRetriever,
 			$this->propertyUpdater
 		);

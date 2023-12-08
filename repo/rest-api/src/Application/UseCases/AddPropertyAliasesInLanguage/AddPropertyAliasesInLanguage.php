@@ -5,9 +5,11 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\AddPropertyAliasesInLanguag
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\AliasesInLanguageEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
+use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
 
@@ -17,17 +19,20 @@ use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
 class AddPropertyAliasesInLanguage {
 
 	private AssertPropertyExists $assertPropertyExists;
+	private AssertUserIsAuthorized $assertUserIsAuthorized;
 	private PropertyRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
 
 	public function __construct(
 		AssertPropertyExists $assertPropertyExists,
+		AssertUserIsAuthorized $assertUserIsAuthorized,
 		PropertyRetriever $propertyRetriever,
 		PropertyUpdater $propertyUpdater
 	) {
 		$this->propertyRetriever = $propertyRetriever;
 		$this->propertyUpdater = $propertyUpdater;
 		$this->assertPropertyExists = $assertPropertyExists;
+		$this->assertUserIsAuthorized = $assertUserIsAuthorized;
 	}
 
 	/**
@@ -35,8 +40,11 @@ class AddPropertyAliasesInLanguage {
 	 */
 	public function execute( AddPropertyAliasesInLanguageRequest $request ): AddPropertyAliasesInLanguageResponse {
 		$propertyId = new NumericPropertyId( $request->getPropertyId() );
+		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
+		$user = $request->getUsername() === null ? User::newAnonymous() : User::withUsername( $request->getUsername() );
 
 		$this->assertPropertyExists->execute( $propertyId );
+		$this->assertUserIsAuthorized->execute( $propertyId, $user );
 
 		$property = $this->propertyRetriever->getProperty( $propertyId );
 		$aliasesExist = $property->getAliasGroups()->hasGroupForLanguage( $request->getLanguageCode() );
