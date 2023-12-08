@@ -5,6 +5,7 @@
 			"Camillo Pellizzari",
 			"FRacco",
 			"Horcrux92",
+			"Luca.favorido",
 			"Macofe",
 			"Raoli"
 		]
@@ -22,6 +23,7 @@
 	"wikibase-error-ui-no-external-page": "Una pagina \"$2\" non è stata trovata su \"$1\".",
 	"wikibase-error-ui-edit-conflict": "Lo stesso valore è stato modificato nel frattempo, causando un conflitto di edizione. Ricarica la pagina.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (traslitterato)",
+	"wikibase-language-name-for-terms-mul": "valori predefiniti (mul)",
 	"wikibase-quantitydetails-amount": "Quantità",
 	"wikibase-quantitydetails-upperbound": "Limite superiore",
 	"wikibase-quantitydetails-lowerbound": "Limite inferiore",

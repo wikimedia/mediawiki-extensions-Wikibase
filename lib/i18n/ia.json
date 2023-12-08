@@ -17,6 +17,7 @@
 	"wikibase-error-ui-no-external-page": "Le pagina \"$2\" non poteva esser trovate in \"$1\".",
 	"wikibase-error-ui-edit-conflict": "Le mesme valor ha essite modificate intertanto, causante un conflicto inter modificationes. Recarga le pagina, per favor.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (translitterate)",
+	"wikibase-language-name-for-terms-mul": "valores predefinite (mul)",
 	"wikibase-quantitydetails-amount": "Quantitate",
 	"wikibase-quantitydetails-upperbound": "Limite superior",
 	"wikibase-quantitydetails-lowerbound": "Limite inferior",
