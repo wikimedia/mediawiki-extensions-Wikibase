@@ -296,7 +296,8 @@ XML
 		$this->getSettings()->setSetting( 'allowEntityImport', $allowImport );
 
 		$source = new ImportStringSource( $xml );
-		$importer = $this->getServiceContainer()->getWikiImporterFactory()->getWikiImporter( $source );
+		$importer = $this->getServiceContainer()->getWikiImporterFactory()
+			->getWikiImporter( $source, $this->getTestSysop()->getAuthority() );
 
 		$importer->setNoticeCallback( function() {
 			// Do nothing for now. Could collect and compare notices.
