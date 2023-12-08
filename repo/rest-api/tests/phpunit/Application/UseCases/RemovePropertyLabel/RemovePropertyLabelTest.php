@@ -8,9 +8,11 @@ use Wikibase\DataModel\Entity\Property as DataModelProperty;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyLabel\RemovePropertyLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyLabel\RemovePropertyLabelRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyLabel\RemovePropertyLabelValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
@@ -31,6 +33,8 @@ class RemovePropertyLabelTest extends TestCase {
 	use EditMetadataHelper;
 
 	private RemovePropertyLabelValidator $requestValidator;
+	private AssertPropertyExists $assertPropertyExists;
+
 	private PropertyRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
 
@@ -38,6 +42,7 @@ class RemovePropertyLabelTest extends TestCase {
 		parent::setUp();
 
 		$this->requestValidator = new TestValidatingRequestDeserializer();
+		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
 		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
 		$this->propertyUpdater = $this->createStub( PropertyUpdater::class );
 	}
@@ -89,8 +94,48 @@ class RemovePropertyLabelTest extends TestCase {
 		}
 	}
 
+	public function testGivenPropertyNotFound_throws(): void {
+		$expectedException = $this->createStub( UseCaseException::class );
+		$this->assertPropertyExists->method( 'execute' )
+			->willThrowException( $expectedException );
+		try {
+			$this->newUseCase()->execute(
+				new RemovePropertyLabelRequest( 'P999', 'en', [], false, null, null )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
+	public function testGivenLabelDoesNotExist_throws(): void {
+		$propertyId = new NumericPropertyId( 'P123' );
+		$language = 'en';
+		$editTags = [ TestValidatingRequestDeserializer::ALLOWED_TAGS[ 1 ] ];
+
+		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
+		$this->propertyRetriever->method( 'getProperty' )->willReturn(
+			new DataModelProperty( $propertyId, new Fingerprint(), 'string' )
+		);
+
+		try {
+			$request = new RemovePropertyLabelRequest( (string)$propertyId, $language, $editTags, false, 'test', null );
+			$this->newUseCase()->execute( $request );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::LABEL_NOT_DEFINED, $e->getErrorCode() );
+			$this->assertStringContainsString( (string)$propertyId, $e->getErrorMessage() );
+			$this->assertStringContainsString( $language, $e->getErrorMessage() );
+		}
+	}
+
 	private function newUseCase(): RemovePropertyLabel {
-		return new RemovePropertyLabel( $this->requestValidator, $this->propertyRetriever, $this->propertyUpdater );
+		return new RemovePropertyLabel(
+			$this->requestValidator,
+			$this->assertPropertyExists,
+			$this->propertyRetriever,
+			$this->propertyUpdater
+		);
 	}
 
 }

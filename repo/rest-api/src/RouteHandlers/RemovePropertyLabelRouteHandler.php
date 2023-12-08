@@ -40,6 +40,7 @@ class RemovePropertyLabelRouteHandler extends SimpleHandler {
 		return new self(
 			new RemovePropertyLabel(
 				WbRestApi::getValidatingRequestDeserializer(),
+				WbRestApi::getAssertPropertyExists(),
 				WbRestApi::getPropertyDataRetriever(),
 				WbRestApi::getPropertyUpdater()
 			),

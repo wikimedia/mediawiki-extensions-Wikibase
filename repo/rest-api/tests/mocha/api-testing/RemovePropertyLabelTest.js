@@ -149,4 +149,25 @@ describe( newRemovePropertyLabelRequestBuilder().getRouteDescription(), () => {
 		} );
 	} );
 
+	describe( '404 error response', () => {
+		it( 'property not found', async () => {
+			const propertyId = 'P999999';
+			const response = await newRemovePropertyLabelRequestBuilder( propertyId, 'en' )
+				.assertValidRequest().makeRequest();
+
+			assertValidErrorResponse( response, 404, 'property-not-found' );
+			assert.include( response.body.message, propertyId );
+		} );
+
+		it( 'label in the language specified does not exist', async () => {
+			const languageCode = 'ar';
+			const response = await newRemovePropertyLabelRequestBuilder( testPropertyId, languageCode )
+				.assertValidRequest().makeRequest();
+
+			assertValidErrorResponse( response, 404, 'label-not-defined' );
+			assert.include( response.body.message, testPropertyId );
+			assert.include( response.body.message, languageCode );
+		} );
+	} );
+
 } );
