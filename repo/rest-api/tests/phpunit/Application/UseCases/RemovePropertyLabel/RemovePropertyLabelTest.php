@@ -9,12 +9,14 @@ use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyLabel\RemovePropertyLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyLabel\RemovePropertyLabelRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyLabel\RemovePropertyLabelValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
@@ -34,7 +36,7 @@ class RemovePropertyLabelTest extends TestCase {
 
 	private RemovePropertyLabelValidator $requestValidator;
 	private AssertPropertyExists $assertPropertyExists;
-
+	private AssertUserIsAuthorized $assertUserIsAuthorized;
 	private PropertyRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
 
@@ -43,6 +45,7 @@ class RemovePropertyLabelTest extends TestCase {
 
 		$this->requestValidator = new TestValidatingRequestDeserializer();
 		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
+		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
 		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
 		$this->propertyUpdater = $this->createStub( PropertyUpdater::class );
 	}
@@ -129,10 +132,32 @@ class RemovePropertyLabelTest extends TestCase {
 		}
 	}
 
+	public function testGivenEditIsUnauthorized_throwsUseCaseError(): void {
+		$propertyId = new NumericPropertyId( 'P123' );
+
+		$expectedError = new UseCaseError(
+			UseCaseError::PERMISSION_DENIED,
+			'You have no permission to edit this property.'
+		);
+		$this->assertUserIsAuthorized = $this->createMock( AssertUserIsAuthorized::class );
+		$this->assertUserIsAuthorized->method( 'execute' )
+			->with( $propertyId, User::newAnonymous() )
+			->willThrowException( $expectedError );
+
+		try {
+			$this->newUseCase()->execute( new RemovePropertyLabelRequest( "$propertyId", 'en', [], false, null, null )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedError, $e );
+		}
+	}
+
 	private function newUseCase(): RemovePropertyLabel {
 		return new RemovePropertyLabel(
 			$this->requestValidator,
 			$this->assertPropertyExists,
+			$this->assertUserIsAuthorized,
 			$this->propertyRetriever,
 			$this->propertyUpdater
 		);
