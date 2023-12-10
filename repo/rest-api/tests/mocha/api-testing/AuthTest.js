@@ -104,10 +104,6 @@ describe( 'Auth', () => {
 
 	const authTestRequests = [
 		{
-			newRequestBuilder: () => rbf.newRemovePropertyLabelRequestBuilder( propertyRequestInputs.propertyId, 'en' ),
-			requestInputs: propertyRequestInputs
-		},
-		{
 			newRequestBuilder: () => rbf.newAddPropertyAliasesInLanguageRequestBuilder(
 				propertyRequestInputs.propertyId,
 				'en',

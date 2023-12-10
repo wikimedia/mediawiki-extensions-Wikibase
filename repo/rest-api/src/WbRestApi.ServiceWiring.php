@@ -84,6 +84,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemDescription\RemoveItemDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemLabel\RemoveItemLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyLabel\RemovePropertyLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyStatement\RemovePropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatement;
@@ -777,6 +778,16 @@ return [
 			WbRestApi::getAssertItemExists( $services ),
 			WbRestApi::getRemoveStatement( $services ),
 			WbRestApi::getValidatingRequestDeserializer( $services )
+		);
+	},
+
+	'WbRestApi.RemovePropertyLabel' => function( MediaWikiServices $services ): RemovePropertyLabel {
+		return new RemovePropertyLabel(
+			WbRestApi::getValidatingRequestDeserializer( $services ),
+			WbRestApi::getAssertPropertyExists( $services ),
+			WbRestApi::getAssertUserIsAuthorized( $services ),
+			WbRestApi::getPropertyDataRetriever( $services ),
+			WbRestApi::getPropertyUpdater( $services )
 		);
 	},
 

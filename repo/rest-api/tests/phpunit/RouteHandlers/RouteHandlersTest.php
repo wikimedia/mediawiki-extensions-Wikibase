@@ -80,6 +80,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementResp
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemDescription\RemoveItemDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemLabel\RemoveItemLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyLabel\RemovePropertyLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyStatement\RemovePropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatement;
@@ -555,6 +556,20 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 					$hasErrorCode ( UseCaseError::INVALID_ITEM_ID ),
 				],
 				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::ITEM_REDIRECTED ) ],
+			],
+		] ];
+		yield 'RemovePropertyLabel' => [ [
+			'useCase' => RemovePropertyLabel::class,
+			'useCaseResponse' => null,
+			'validRequest' => [
+				'pathParams' => [ 'property_id' => 'P1', 'language_code' => 'en' ],
+				'bodyContents' => [],
+			],
+			'expectedExceptions' => [
+				[
+					new UseCaseError( UseCaseError::PROPERTY_NOT_FOUND, '' ),
+					$hasErrorCode ( UseCaseError::PROPERTY_NOT_FOUND ),
+				],
 			],
 		] ];
 		yield 'RemoveItemDescription' => [ [

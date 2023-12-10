@@ -47,6 +47,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemDescription\RemoveItemDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemLabel\RemoveItemLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyLabel\RemovePropertyLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyStatement\RemovePropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatement;
@@ -173,6 +174,11 @@ class WbRestApi {
 	public static function getRemoveItemLabel( ContainerInterface $services = null ): RemoveItemLabel {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.RemoveItemLabel' );
+	}
+
+	public static function getRemovePropertyLabel( ContainerInterface $services = null ): RemovePropertyLabel {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.RemovePropertyLabel' );
 	}
 
 	public static function getRemoveItemDescription( ContainerInterface $services = null ): RemoveItemDescription {
