@@ -30,7 +30,7 @@ class PatchJson {
 			$operation = $e->getOperation();
 			throw new UseCaseError(
 				UseCaseError::PATCH_TEST_FAILED,
-				"Test operation in the provided patch failed. At path '${operation[ 'path' ]}'" .
+				"Test operation in the provided patch failed. At path '{$operation[ 'path' ]}'" .
 				" expected '" . json_encode( $operation[ 'value' ] ) .
 				"', actual: '" . json_encode( $e->getActualValue() ) . "'",
 				[
