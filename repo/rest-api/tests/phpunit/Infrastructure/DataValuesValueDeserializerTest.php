@@ -30,6 +30,8 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class DataValuesValueDeserializerTest extends TestCase {
 
+	private DataTypeValidatorFactory $dataTypeValidatorFactory;
+
 	protected function setUp(): void {
 		parent::setUp();
 

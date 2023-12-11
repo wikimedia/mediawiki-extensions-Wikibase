@@ -54,6 +54,8 @@ abstract class HtmlPageLinkRendererEndHookHandlerTestBase extends MediaWikiLangT
 	protected const DUMMY_DESCRIPTION = 'linkbegin-description';
 	protected const DUMMY_DESCRIPTION_FOREIGN_ITEM = 'linkbegin-foreign-item-description';
 
+	protected EntityUrlLookup $entityUrlLookup;
+
 	protected function setUp(): void {
 		parent::setUp();
 		$this->entityUrlLookup = $this->createMock( EntityUrlLookup::class );

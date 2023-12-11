@@ -27,6 +27,7 @@ class WikibaseRepoItemDescriptionValidatorTest extends TestCase {
 
 	private const MAX_LENGTH = 50;
 
+	private TermValidatorFactory $termsValidatorFactory;
 	private ItemRetriever $itemRetriever;
 	private TermsCollisionDetector $termsCollisionDetector;
 

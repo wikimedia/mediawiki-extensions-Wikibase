@@ -36,6 +36,9 @@ class NewDatabaseEntitySource {
 	/** @var string */
 	private $interwikiPrefix;
 
+	/** @var string */
+	private $type;
+
 	public static function create(): self {
 		return new self();
 	}

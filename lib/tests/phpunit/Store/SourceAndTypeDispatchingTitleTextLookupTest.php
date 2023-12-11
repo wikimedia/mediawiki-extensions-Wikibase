@@ -43,11 +43,11 @@ class SourceAndTypeDispatchingTitleTextLookupTest extends TestCase {
 		$titleText = 'Property:P321';
 		$propertySourceName = 'propertySource';
 
-		$this->propertyTitleTextLookup = $this->createMock( EntityTitleTextLookup::class );
+		$propertyTitleTextLookup = $this->createMock( EntityTitleTextLookup::class );
 		$this->entitySourceLookup = $this->createMock( EntitySourceLookup::class );
 		$this->serviceBySourceAndTypeDispatcher = $this->createMock( ServiceBySourceAndTypeDispatcher::class );
 
-		$this->propertyTitleTextLookup->expects( $this->once() )
+		$propertyTitleTextLookup->expects( $this->once() )
 			->method( 'getPrefixedText' )
 			->with( $entityId )
 			->willReturn( $titleText );
@@ -60,7 +60,7 @@ class SourceAndTypeDispatchingTitleTextLookupTest extends TestCase {
 		$this->serviceBySourceAndTypeDispatcher->expects( $this->once() )
 			->method( 'getServiceForSourceAndType' )
 			->with( $propertySourceName, 'property' )
-			->willReturn( $this->propertyTitleTextLookup );
+			->willReturn( $propertyTitleTextLookup );
 
 		$this->assertSame( $titleText, $this->newDispatchingTitleTextLookup()->getPrefixedText( $entityId ) );
 	}

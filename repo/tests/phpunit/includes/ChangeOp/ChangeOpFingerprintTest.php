@@ -23,6 +23,9 @@ use Wikibase\Repo\Validators\TermValidatorFactory;
  */
 class ChangeOpFingerprintTest extends TestCase {
 
+	/** @var ChangeOps */
+	private $innerChangeOp;
+
 	/** @var TermValidatorFactory */
 	private $termValidatorFactory;
 
