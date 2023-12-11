@@ -36,8 +36,6 @@ $wgEnableWikibaseRepo = false;
 $wgEnableWikibaseClient = true;
 // $wgWikimediaJenkinsCI is usually set by Jenkins/Quibble
 $wgWikimediaJenkinsCI = true;
-$wmgUseWikibaseRepo = false;
-$wmgUseWikibaseClient = true;
 PHP
   echo -n '?>' >> LocalSettings.php
   cat LocalSettings-$$.php >> LocalSettings.php
@@ -55,8 +53,6 @@ $wgEnableWikibaseRepo = true;
 $wgEnableWikibaseClient = true;
 // $wgWikimediaJenkinsCI is usually set by Jenkins/Quibble
 $wgWikimediaJenkinsCI = true;
-$wmgUseWikibaseRepo = true;
-$wmgUseWikibaseClient = true;
 PHP
   echo -n '?>' >> LocalSettings.php
   cat LocalSettings-$$.php >> LocalSettings.php
