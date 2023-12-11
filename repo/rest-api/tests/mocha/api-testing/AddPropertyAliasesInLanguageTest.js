@@ -220,4 +220,16 @@ describe( newRequest().getRouteDescription(), () => {
 		assert.strictEqual( response.body.code, 'property-not-found' );
 		assert.include( response.body.message, propertyId );
 	} );
+
+	describe( '415 error response', () => {
+		it( 'unsupported media type', async () => {
+			const contentType = 'multipart/form-data';
+			const response = await newRequest( testPropertyId, 'en', [ 'my property alias' ] )
+				.withHeader( 'content-type', contentType ).assertInvalidRequest().makeRequest();
+
+			expect( response ).to.have.status( 415 );
+			assert.strictEqual( response.body.message, `Unsupported Content-Type: '${contentType}'` );
+		} );
+	} );
+
 } );

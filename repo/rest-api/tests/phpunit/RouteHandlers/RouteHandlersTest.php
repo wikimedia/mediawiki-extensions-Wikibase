@@ -22,6 +22,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemA
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemAliasesInLanguageResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatementResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyAliasesInLanguage\AddPropertyAliasesInLanguage;
+use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyAliasesInLanguage\AddPropertyAliasesInLanguageResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItem;
@@ -792,6 +794,23 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 				],
 				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::ITEM_REDIRECTED ) ],
 			],
+		] ];
+		yield 'AddPropertyAliasesInLanguage' => [ [
+			'useCase' => AddPropertyAliasesInLanguage::class,
+			'useCaseResponse' => new AddPropertyAliasesInLanguageResponse(
+				new AliasesInLanguage( 'en', [] ),
+				true,
+				$lastModified,
+				123
+			),
+			'validRequest' => [
+				'pathParams' => [ 'property_id' => 'P1', 'language_code' => 'en' ],
+				'bodyContents' => [ 'aliases' => [ 'alias-1', 'alias-2' ] ],
+			],
+			'expectedExceptions' => [ [
+				new UseCaseError( UseCaseError::INVALID_PROPERTY_ID, '', [ 'property-id' => 'P1' ] ),
+				$hasErrorCode ( UseCaseError::INVALID_PROPERTY_ID ),
+			] ],
 		] ];
 		yield 'PatchPropertyDescriptions' => [ [
 			'useCase' => PatchPropertyDescriptions::class,

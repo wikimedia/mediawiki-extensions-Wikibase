@@ -8,6 +8,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\SerializerFactory;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemAliasesInLanguage;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyAliasesInLanguage\AddPropertyAliasesInLanguage;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
@@ -394,4 +395,7 @@ class WbRestApi {
 		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbRestApi.AddItemAliasesInLanguage' );
 	}
 
+	public static function getAddPropertyAliasesInLanguage( ContainerInterface $services = null ): AddPropertyAliasesInLanguage {
+		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbRestApi.AddPropertyAliasesInLanguage' );
+	}
 }

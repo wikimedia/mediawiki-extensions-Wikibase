@@ -51,6 +51,11 @@ module.exports.editRequestsOnProperty = [
 			value: [ 'en-alias-' + utils.uniq() ]
 		} ]
 	),
+	( { propertyId } ) => rbf.newAddPropertyAliasesInLanguageRequestBuilder(
+		propertyId,
+		'en',
+		[ 'en-alias-' + utils.uniq() ]
+	),
 	( { propertyId, statementPropertyId } ) => rbf.newAddPropertyStatementRequestBuilder(
 		propertyId,
 		newStatementWithRandomStringValue( statementPropertyId )

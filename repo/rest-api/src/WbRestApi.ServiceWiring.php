@@ -38,6 +38,7 @@ use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementIdReques
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementSerializationRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemAliasesInLanguage;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyAliasesInLanguage\AddPropertyAliasesInLanguage;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
@@ -306,6 +307,16 @@ return [
 			WbRestApi::getItemUpdater( $services ),
 			new GuidGenerator(),
 			WbRestApi::getAssertUserIsAuthorized( $services )
+		);
+	},
+
+	'WbRestApi.AddPropertyAliasesInLanguage' => function( MediaWikiServices $services ): AddPropertyAliasesInLanguage {
+		return new AddPropertyAliasesInLanguage(
+			WbRestApi::getValidatingRequestDeserializer( $services ),
+			WbRestApi::getAssertPropertyExists( $services ),
+			WbRestApi::getAssertUserIsAuthorized( $services ),
+			WbRestApi::getPropertyDataRetriever( $services ),
+			WbRestApi::getPropertyUpdater( $services ),
 		);
 	},
 

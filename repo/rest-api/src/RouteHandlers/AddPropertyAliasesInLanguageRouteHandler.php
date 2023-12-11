@@ -2,7 +2,9 @@
 
 namespace Wikibase\Repo\RestApi\RouteHandlers;
 
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Handler;
+use MediaWiki\Rest\RequestInterface;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
@@ -11,6 +13,11 @@ use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyAliasesInLanguage\AddP
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyAliasesInLanguage\AddPropertyAliasesInLanguageRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyAliasesInLanguage\AddPropertyAliasesInLanguageResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\BotRightCheckMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\ContentTypeCheckMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -28,13 +35,16 @@ class AddPropertyAliasesInLanguageRouteHandler extends SimpleHandler {
 	private const COMMENT_BODY_PARAM = 'comment';
 
 	private AddPropertyAliasesInLanguage $addPropertyAliases;
+	private MiddlewareHandler $middlewareHandler;
 	private ResponseFactory $responseFactory;
 
 	public function __construct(
 		AddPropertyAliasesInLanguage $addPropertyAliases,
+		MiddlewareHandler $middlewareHandler,
 		ResponseFactory $responseFactory
 	) {
 		$this->addPropertyAliases = $addPropertyAliases;
+		$this->middlewareHandler = $middlewareHandler;
 		$this->responseFactory = $responseFactory;
 	}
 
@@ -42,18 +52,32 @@ class AddPropertyAliasesInLanguageRouteHandler extends SimpleHandler {
 		$responseFactory = new ResponseFactory();
 
 		return new self(
-			new AddPropertyAliasesInLanguage(
-				WbRestApi::getValidatingRequestDeserializer(),
-				WbRestApi::getAssertPropertyExists(),
-				WbRestApi::getAssertUserIsAuthorized(),
-				WbRestApi::getPropertyDataRetriever(),
-				WbRestApi::getPropertyUpdater()
-			),
+			WbRestApi::getAddPropertyAliasesInLanguage(),
+			new MiddlewareHandler( [
+				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
+				new UserAgentCheckMiddleware(),
+				new AuthenticationMiddleware(),
+				new ContentTypeCheckMiddleware( [
+					ContentTypeCheckMiddleware::TYPE_APPLICATION_JSON,
+					ContentTypeCheckMiddleware::TYPE_NONE,
+				] ),
+				new BotRightCheckMiddleware( MediaWikiServices::getInstance()->getPermissionManager(), $responseFactory ),
+				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
+					fn( RequestInterface $request ): string => $request->getPathParam( self::PROPERTY_ID_PATH_PARAM )
+				),
+			] ),
 			$responseFactory
 		);
 	}
 
-	public function run( string $propertyId, string $languageCode ): Response {
+	/**
+	 * @param mixed ...$args
+	 */
+	public function run( ...$args ): Response {
+		return $this->middlewareHandler->run( $this, [ $this, 'runUseCase' ], $args );
+	}
+
+	public function runUseCase( string $propertyId, string $languageCode ): Response {
 		$jsonBody = $this->getValidatedBody();
 
 		try {
@@ -137,6 +161,15 @@ class AddPropertyAliasesInLanguageRouteHandler extends SimpleHandler {
 
 	private function setEtagFromRevId( Response $httpResponse, int $revId ): void {
 		$httpResponse->setHeader( 'ETag', "\"$revId\"" );
+	}
+
+	/**
+	 * Preconditions are checked via {@link PreconditionMiddleware}
+	 *
+	 * @inheritDoc
+	 */
+	public function checkPreconditions() {
+		return null;
 	}
 
 	private function getUsername(): ?string {
