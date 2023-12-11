@@ -18,6 +18,7 @@ class ChangeOpResultStub implements ChangeOpResult {
 	public $isEntityChanged;
 	/** @var EntityId|null */
 	public $entityId;
+	public ?array $validationErrors;
 
 	public function __construct(
 		EntityId $entityId = null,

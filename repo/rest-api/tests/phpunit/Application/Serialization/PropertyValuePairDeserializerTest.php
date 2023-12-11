@@ -41,6 +41,7 @@ class PropertyValuePairDeserializerTest extends TestCase {
 	private const STRING_URI_PROPERTY_ID = 'https://example.com/P1';
 
 	private DataTypeValidatorFactory $dataTypeValidatorFactory;
+	private ValueDeserializer $valueDeserializer;
 
 	protected function setUp(): void {
 		parent::setUp();

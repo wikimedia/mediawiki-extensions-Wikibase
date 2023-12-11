@@ -28,6 +28,7 @@ class TruthyStatementRdfBuilderFactoryTest extends TestCase {
 	private $writer;
 	private $mentionedEntityTracker;
 	private $valueSnakRdfBuilderFactory;
+	private $valueSnakRdfBuilder;
 	private $propertyDataLookup;
 
 	protected function setUp(): void {
