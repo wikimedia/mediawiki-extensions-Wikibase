@@ -18,7 +18,7 @@
 	},
 	"wikibase-client-desc": "Klient til Wikibase-udvidelsen",
 	"tooltip-t-wikibase": "Link til tilknyttet emne i Wikidata",
-	"wikibase-after-page-move": "Du kan også [$1 opdatere] det tilknyttede Wikidata-emne for at bevare sproghenvisninger på den flyttede side.",
+	"wikibase-after-page-move": "Din flytning skulle nu være opdateret i [$1 {{WBREPONAME}}-elementets] sproglink, men kontroller gerne at det er sket.",
 	"wikibase-after-page-move-queued": "[$1 Wikidataemnet] tilknyttet denne side vil snart blive opdateret automatisk.",
 	"wikibase-comment-add": "Et {{WBREPONAME}}-emne er blevet oprettet.",
 	"wikibase-comment-remove": "Det tilknyttede {{WBREPONAME}}-emne er slettet. Sproghenvisninger er fjernet.",

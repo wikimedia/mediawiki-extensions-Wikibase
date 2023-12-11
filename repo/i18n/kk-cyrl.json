@@ -5,7 +5,8 @@
 			"Ladsgroup",
 			"Macofe",
 			"Нұрлан Рахымжанов",
-			"СеніңШешең"
+			"СеніңШешең",
+			"Casserium"
 		]
 	},
 	"wikibase-desc": "Құрылымданған дерек қоймасы",
@@ -152,7 +153,7 @@
 	"wikibase-dispatchstats-large-lag": "(өте үлкен)",
 	"wikibase-dispatchstats-median": "Медиан",
 	"wikibase-dispatchstats-average": "Орташа",
-	"special-listdatatypes": "Барлық дерек түрінің тізіміқол жетімді",
+	"special-listdatatypes": "Барлық дерек түрінің тізімі қолжетімді",
 	"wikibase-listdatatypes-intro": "Бұл, орнатымдағы барлық дерек түрінің тізімі.",
 	"wikibase-history-title-without-label": "«$1» дегеннің нұсқа тарихы",
 	"special-listproperties": "Сипаттар тізімі",
