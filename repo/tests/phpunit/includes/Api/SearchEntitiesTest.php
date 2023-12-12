@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Api;
 
 use ApiMain;
 use FauxRequest;
+use MediaWiki\Cache\LinkBatchFactory;
 use RequestContext;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
@@ -17,6 +18,7 @@ use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\EntityArticleIdLookup;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Lib\SubEntityTypesMapper;
@@ -133,9 +135,11 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 		$module = new SearchEntities(
 			$this->getApiMain( $params ),
 			'wbsearchentities',
+			$this->createMock( LinkBatchFactory::class ),
 			$entitySearchHelper ?: $this->getMockEntitySearchHelper( $params ),
 			$this->getContentLanguages(),
 			new EntitySourceLookup( $entitySourceDefinitions, new SubEntityTypesMapper( [] ) ),
+			$this->createMock( EntityTitleLookup::class ),
 			$this->newMockTitleTextLookup(),
 			$this->newMockUrlLookup(),
 			$this->newMockArticleIdLookup(),
@@ -442,9 +446,11 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 		$module = new SearchEntities(
 			$this->getApiMain( $params ),
 			'wbsearchentities',
+			$this->createMock( LinkBatchFactory::class ),
 			$searchHelper,
 			$this->getContentLanguages(),
 			new EntitySourceLookup( $entitySourceDefinitions, new SubEntityTypesMapper( [] ) ),
+			$this->createMock( EntityTitleLookup::class ),
 			$this->newMockTitleTextLookup(),
 			$this->newMockUrlLookup(),
 			$this->newMockArticleIdLookup(),

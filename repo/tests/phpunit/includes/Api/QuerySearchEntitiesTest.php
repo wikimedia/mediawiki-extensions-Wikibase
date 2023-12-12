@@ -7,6 +7,7 @@ use ApiMain;
 use ApiPageSet;
 use ApiQuery;
 use FauxRequest;
+use MediaWiki\Cache\LinkBatchFactory;
 use MediaWikiIntegrationTestCase;
 use RequestContext;
 use Status;
@@ -143,6 +144,7 @@ class QuerySearchEntitiesTest extends MediaWikiIntegrationTestCase {
 		$api = new QuerySearchEntities(
 			$this->getApiQuery( $params ),
 			'wbsearch',
+			$this->createMock( LinkBatchFactory::class ),
 			$this->getMockEntitySearchHelper( $params, $matches, $failureStatus ),
 			$this->getMockTitleLookup(),
 			$this->getContentLanguages(),
