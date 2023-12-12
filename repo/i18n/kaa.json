@@ -8,8 +8,16 @@
 	},
 	"wikibase-edit": "redaktorlaw",
 	"wikibase-add": "qosıw",
+	"wikibase-entitytermsforlanguagelistview-description": "Sıpatlama",
+	"wikibase-entitytermsforlanguagelistview-label": "Tema",
 	"wikibase-label-empty": "Belgilenbegen",
 	"wikibase-description-empty": "Heshqanday minezleme belgilenbegen",
+	"wikibase-diffview-label": "tema",
+	"wikibase-diffview-description": "sıpatlama",
 	"wikibase-sitelinks-special": "Basqa saytlar",
-	"wikibase-gotolinkedpage-submit": "Ótiw"
+	"wikibase-gotolinkedpage-submit": "Ótiw",
+	"special-newitem": "Jańa element jaratıw",
+	"wikibase-newitem-fieldset": "Jańa element jaratıw",
+	"wikibase-newentity-label": "Tema:",
+	"wikibase-setlabel-label": "Tema:"
 }
