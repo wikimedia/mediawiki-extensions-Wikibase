@@ -61,14 +61,8 @@ abstract class HtmlPageLinkRendererEndHookHandlerTestBase extends MediaWikiLangT
 		$this->entityUrlLookup = $this->createMock( EntityUrlLookup::class );
 	}
 
-	/**
-	 * @param string $id
-	 * @param bool $exists
-	 *
-	 * @return Title
-	 */
-	protected function newTitle( $id, $exists = true ) {
-		$title = Title::makeTitle( NS_MAIN, $id );
+	protected function newTitle( string $id, bool $exists = true, int $namespace = NS_MAIN ): Title {
+		$title = Title::makeTitle( $namespace, $id );
 		$title->resetArticleID( $exists ? 1 : 0 );
 		$this->assertSame( $exists, $title->exists(), 'Sanity check' );
 		return $title;

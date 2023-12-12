@@ -189,7 +189,9 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 
 		// if custom link text is given, there is no point in overwriting it
 		// but not if it is similar to the plain title
-		if ( $text !== null && $target->getFullText() !== HtmlArmor::getHtml( $text ) ) {
+		if ( $text !== null
+				&& $target->getFullText() !== HtmlArmor::getHtml( $text )
+				&& $target->getText() !== HtmlArmor::getHtml( $text ) ) {
 			return true;
 		}
 
