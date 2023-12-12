@@ -18,6 +18,7 @@ use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemLabelEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\LanguageCodeRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PatchRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyAliasesInLanguageEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyDescriptionEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdFilterRequest;
@@ -211,6 +212,17 @@ class DeserializedRequestAdapterTest extends TestCase {
 	public function testGivenNoAliasesForItem_getItemAliasesThrows(): void {
 		$this->expectException( LogicException::class );
 		( new DeserializedRequestAdapter( [] ) )->getItemAliasesInLanguage();
+	}
+
+	public function testGetPropertyAliasesInLanguage(): void {
+		$aliases = [ 'first alias', 'second alias' ];
+		$requestAdapter = new DeserializedRequestAdapter( [ PropertyAliasesInLanguageEditRequest::class => $aliases ] );
+		$this->assertSame( $aliases, $requestAdapter->getPropertyAliasesInLanguage() );
+	}
+
+	public function testGivenNoAliasesForProperty_getPropertyAliasesInLanguageThrows(): void {
+		$this->expectException( LogicException::class );
+		( new DeserializedRequestAdapter( [] ) )->getPropertyAliasesInLanguage();
 	}
 
 }

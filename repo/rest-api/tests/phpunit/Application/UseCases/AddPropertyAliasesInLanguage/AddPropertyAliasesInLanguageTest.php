@@ -145,6 +145,15 @@ class AddPropertyAliasesInLanguageTest extends TestCase {
 		$this->assertTrue( $response->wasAddedToExistingAliasGroup() );
 	}
 
+	public function testValidationError_throwsUseCaseError(): void {
+		try {
+			$this->newUseCase()->execute( $this->newRequest( 'P123', 'en', [ '' ] ) );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::ALIAS_EMPTY, $e->getErrorCode() );
+		}
+	}
+
 	public function testGivenPropertyNotFound_throws(): void {
 		$expectedError = $this->createStub( UseCaseError::class );
 		$this->assertPropertyExists->method( 'execute' )
@@ -172,6 +181,7 @@ class AddPropertyAliasesInLanguageTest extends TestCase {
 
 	private function newUseCase(): AddPropertyAliasesInLanguage {
 		return new AddPropertyAliasesInLanguage(
+			new TestValidatingRequestDeserializer(),
 			$this->assertPropertyExists,
 			$this->assertUserIsAuthorized,
 			$this->propertyRetriever,

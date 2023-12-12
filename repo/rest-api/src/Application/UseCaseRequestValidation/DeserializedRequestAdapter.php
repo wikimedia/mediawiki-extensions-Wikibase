@@ -11,6 +11,7 @@ use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\DeserializedAddItemAliasesInLanguageRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\DeserializedAddItemStatementRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyAliasesInLanguage\DeserializedAddPropertyAliasesInLanguageRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\DeserializedAddPropertyStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\DeserializedGetItemRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliases\DeserializedGetItemAliasesRequest;
@@ -94,7 +95,8 @@ class DeserializedRequestAdapter implements
 	DeserializedPatchPropertyDescriptionsRequest,
 	DeserializedPatchPropertyAliasesRequest,
 	DeserializedSetPropertyLabelRequest,
-	DeserializedAddItemAliasesInLanguageRequest
+	DeserializedAddItemAliasesInLanguageRequest,
+	DeserializedAddPropertyAliasesInLanguageRequest
 {
 	private array $deserializedRequest;
 
@@ -160,6 +162,10 @@ class DeserializedRequestAdapter implements
 
 	public function getPropertyDescription(): Term {
 		return $this->getRequestField( PropertyDescriptionEditRequest::class );
+	}
+
+	public function getPropertyAliasesInLanguage(): array {
+		return $this->getRequestField( PropertyAliasesInLanguageEditRequest::class );
 	}
 
 	/**
