@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiContinuationManager;
@@ -36,12 +38,7 @@ use Wikibase\Repo\Api\QuerySearchEntities;
 class QuerySearchEntitiesTest extends MediaWikiIntegrationTestCase {
 	use MockAuthorityTrait;
 
-	/**
-	 * @param array $params
-	 *
-	 * @return ApiQuery
-	 */
-	private function getApiQuery( array $params ) {
+	private function getApiQuery( array $params ): ApiQuery {
 		$context = new RequestContext();
 		$context->setLanguage( 'en-ca' );
 		$context->setRequest( new FauxRequest( $params, true ) );
@@ -50,10 +47,7 @@ class QuerySearchEntitiesTest extends MediaWikiIntegrationTestCase {
 		return $main->getModuleManager()->getModule( 'query' );
 	}
 
-	/**
-	 * @return EntityTitleLookup
-	 */
-	private function getMockTitleLookup() {
+	private function getMockTitleLookup(): EntityTitleLookup {
 		$titleLookup = $this->createMock( EntityTitleLookup::class );
 		$titleLookup->method( 'getTitleForId' )
 			->willReturn( $this->getMockTitle() );
@@ -61,19 +55,13 @@ class QuerySearchEntitiesTest extends MediaWikiIntegrationTestCase {
 		return $titleLookup;
 	}
 
-	/**
-	 * @return ContentLanguages
-	 */
-	private function getContentLanguages() {
+	private function getContentLanguages(): ContentLanguages {
 		return new StaticContentLanguages(
 			[ 'de', 'de-ch', 'en', 'ii', 'nn', 'ru', 'zh-cn' ]
 		);
 	}
 
-	/**
-	 * @return Title
-	 */
-	public function getMockTitle() {
+	public function getMockTitle(): Title {
 		$mock = $this->createMock( Title::class );
 		$mock->method( 'getNamespace' )
 			->willReturn( 0 );
@@ -117,7 +105,7 @@ class QuerySearchEntitiesTest extends MediaWikiIntegrationTestCase {
 	 *
 	 * @return ApiPageSet
 	 */
-	private function getMockApiPageSet( array $expected ) {
+	private function getMockApiPageSet( array $expected ): ApiPageSet {
 		$mock = $this->createMock( ApiPageSet::class );
 
 		$expectedParams = [];
@@ -139,7 +127,12 @@ class QuerySearchEntitiesTest extends MediaWikiIntegrationTestCase {
 		return $mock;
 	}
 
-	private function callApi( array $params, array $matches, ApiPageSet $resultPageSet = null, Status $failureStatus = null ) {
+	private function callApi(
+		array $params,
+		array $matches,
+		ApiPageSet $resultPageSet = null,
+		Status $failureStatus = null
+	): ?array {
 		// defaults from SearchEntities
 		$params = array_merge( [
 			'wbstype' => 'item',
@@ -266,7 +259,7 @@ class QuerySearchEntitiesTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	private function assertResultLooksGood( array $result ) {
+	private function assertResultLooksGood( array $result ): void {
 		$this->assertArrayHasKey( 'query', $result );
 		$this->assertArrayHasKey( 'wbsearch', $result['query'] );
 
