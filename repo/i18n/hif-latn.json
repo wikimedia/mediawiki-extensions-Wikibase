@@ -2,11 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"Abdul Kadir",
-			"Girmitya"
+			"Girmitya",
+			"Thakurji"
 		]
 	},
 	"wikibase-edit": "badlo",
 	"wikibase-add": "jorro",
+	"wikibase-label-empty": "Koi label ke define nai karaa gais hai",
 	"wikibase-description-empty": "Koi description ke define nai karaa gais hai",
 	"wikibase-sitelinks-special": "Duusra site"
 }
