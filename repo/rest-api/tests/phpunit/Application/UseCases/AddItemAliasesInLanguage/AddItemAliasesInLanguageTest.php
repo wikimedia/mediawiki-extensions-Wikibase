@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\AddItemAliasesInLangu
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemAliasesInLanguage;
@@ -15,18 +16,12 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\AliasesInLanguageEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
-use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Item as ReadModelItem;
-use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
-use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
+use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryItemRepository;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemAliasesInLanguage
@@ -55,52 +50,42 @@ class AddItemAliasesInLanguageTest extends TestCase {
 
 	public function testCreateAliases(): void {
 		$languageCode = 'en';
-		$item = NewItem::withId( 'Q123' )->build();
+		$itemId = new ItemId( 'Q123' );
 		$aliasesToCreate = [ 'alias 1', 'alias 2' ];
-		$postModificationRevisionId = 322;
-		$modificationTimestamp = '20221111070707';
 		$editTags = [ TestValidatingRequestDeserializer::ALLOWED_TAGS[0] ];
 		$isBot = false;
 		$comment = 'potato';
 
-		$request = new AddItemAliasesInLanguageRequest(
-			$item->getId()->getSerialization(),
-			$languageCode,
-			$aliasesToCreate,
-			$editTags,
-			$isBot,
-			$comment,
-			null
-		);
+		$itemRepo = new InMemoryItemRepository();
+		$itemRepo->addItem( new Item( $itemId ) );
+		$this->itemRetriever = $itemRepo;
+		$this->itemUpdater = $itemRepo;
 
-		$this->itemRetriever = $this->createStub( ItemRetriever::class );
-		$this->itemRetriever->method( 'getItem' )->willReturn( $item );
-
-		$updatedItem = new ReadModelItem(
-			new Labels(),
-			new Descriptions(),
-			new Aliases( new AliasesInLanguage( $languageCode, $aliasesToCreate ) ),
-			new StatementList()
-		);
-		$this->itemUpdater = $this->createMock( ItemUpdater::class );
-		$this->itemUpdater->method( 'update' )
-			->with(
-				$this->callback(
-					fn( Item $item ) => $item->getAliasGroups()
-						->getByLanguage( $languageCode )
-						->equals( new AliasGroup( $languageCode, $aliasesToCreate ) )
-				),
-				$this->expectEquivalentMetadata( $editTags, $isBot, $comment, EditSummary::ADD_ACTION )
+		$response = $this->newUseCase()->execute(
+			new AddItemAliasesInLanguageRequest(
+				"$itemId",
+				$languageCode,
+				$aliasesToCreate,
+				$editTags,
+				$isBot,
+				$comment,
+				null
 			)
-			->willReturn( new ItemRevision( $updatedItem, $modificationTimestamp, $postModificationRevisionId ) );
-
-		$response = $this->newUseCase()->execute( $request );
+		);
 
 		$this->assertInstanceOf( AddItemAliasesInLanguageResponse::class, $response );
 		$this->assertEquals( new AliasesInLanguage( $languageCode, $aliasesToCreate ), $response->getAliases() );
 		$this->assertFalse( $response->wasAddedToExistingAliasGroup() );
-		$this->assertSame( $postModificationRevisionId, $response->getRevisionId() );
-		$this->assertSame( $modificationTimestamp, $response->getLastModified() );
+		$this->assertSame( $itemRepo->getLatestRevisionId( $itemId ), $response->getRevisionId() );
+		$this->assertSame( $itemRepo->getLatestRevisionTimestamp( $itemId ), $response->getLastModified() );
+		$this->assertEquals(
+			new EditMetadata(
+				$editTags,
+				$isBot,
+				AliasesInLanguageEditSummary::newAddSummary( $comment, new AliasGroup( $languageCode, $aliasesToCreate ) )
+			),
+			$itemRepo->getLatestRevisionEditMetadata( $itemId )
+		);
 	}
 
 	public function testAddAliases(): void {
@@ -108,44 +93,30 @@ class AddItemAliasesInLanguageTest extends TestCase {
 		$existingAliases = [ 'alias 1', 'alias 2' ];
 		$item = NewItem::withId( 'Q123' )->andAliases( $languageCode, $existingAliases )->build();
 		$aliasesToAdd = [ 'alias 3', 'alias 4' ];
-		$postModificationRevisionId = 322;
-		$modificationTimestamp = '20221111070707';
 
 		$request = $this->newRequest( "{$item->getId()}", $languageCode, $aliasesToAdd );
 
-		$this->itemRetriever = $this->createStub( ItemRetriever::class );
-		$this->itemRetriever->method( 'getItem' )->willReturn( $item );
-
-		$updatedAliases = array_merge( $existingAliases, $aliasesToAdd );
-		$updatedItem = new ReadModelItem(
-			new Labels(),
-			new Descriptions(),
-			new Aliases( new AliasesInLanguage( $languageCode, $updatedAliases ) ),
-			new StatementList()
-		);
-		$this->itemUpdater = $this->createMock( ItemUpdater::class );
-		$this->itemUpdater->method( 'update' )
-			->with(
-				$this->callback(
-					fn( Item $item ) => $item->getAliasGroups()
-						->getByLanguage( $languageCode )
-						->equals( new AliasGroup( $languageCode, $updatedAliases ) ),
-				),
-				new EditMetadata(
-					[],
-					false,
-					AliasesInLanguageEditSummary::newAddSummary( null, new AliasGroup( $languageCode, $aliasesToAdd ) )
-				)
-			)
-			->willReturn( new ItemRevision( $updatedItem, $modificationTimestamp, $postModificationRevisionId ) );
+		$itemRepo = new InMemoryItemRepository();
+		$itemRepo->addItem( $item );
+		$this->itemRetriever = $itemRepo;
+		$this->itemUpdater = $itemRepo;
 
 		$response = $this->newUseCase()->execute( $request );
 
 		$this->assertInstanceOf( AddItemAliasesInLanguageResponse::class, $response );
-		$this->assertEquals( new AliasesInLanguage( $languageCode, $updatedAliases ), $response->getAliases() );
+		$this->assertEquals(
+			new AliasesInLanguage( $languageCode, array_merge( $existingAliases, $aliasesToAdd ) ),
+			$response->getAliases()
+		);
+		$this->assertEquals(
+			new EditMetadata(
+				[],
+				false,
+				AliasesInLanguageEditSummary::newAddSummary( null, new AliasGroup( $languageCode, $aliasesToAdd ) )
+			),
+			$itemRepo->getLatestRevisionEditMetadata( $item->getId() )
+		);
 		$this->assertTrue( $response->wasAddedToExistingAliasGroup() );
-		$this->assertSame( $postModificationRevisionId, $response->getRevisionId() );
-		$this->assertSame( $modificationTimestamp, $response->getLastModified() );
 	}
 
 	public function testValidationError_throwsUseCaseError(): void {
