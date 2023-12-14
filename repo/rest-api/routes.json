@@ -213,5 +213,10 @@
 		"path": "/wikibase/v0/entities/items/{item_id}/aliases/{language_code}",
 		"method": "POST",
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\AddItemAliasesInLanguageRouteHandler::factory"
+	},
+	{
+		"path": "/wikibase/v0/entities/properties/{property_id}/aliases/{language_code}",
+		"method": "POST",
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\AddPropertyAliasesInLanguageRouteHandler::factory"
 	}
 ]
