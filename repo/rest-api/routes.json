@@ -135,6 +135,11 @@
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\RemoveItemLabelRouteHandler::factory"
 	},
 	{
+		"path": "/wikibase/v0/entities/properties/{property_id}/labels/{language_code}",
+		"method": "DELETE",
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\RemovePropertyLabelRouteHandler::factory"
+	},
+	{
 		"path": "/wikibase/v0/entities/items/{item_id}/descriptions",
 		"method": "GET",
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetItemDescriptionsRouteHandler::factory"
