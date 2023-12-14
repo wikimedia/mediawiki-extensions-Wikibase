@@ -19,6 +19,7 @@ use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
  * @license GPL-2.0-or-later
  */
 class InMemoryPropertyRepository implements PropertyRetriever, PropertyUpdater {
+	use StatementReadModelHelper;
 
 	private array $properties = [];
 	private array $latestRevisionData = [];
@@ -62,7 +63,10 @@ class InMemoryPropertyRepository implements PropertyRetriever, PropertyUpdater {
 				Labels::fromTermList( $property->getLabels() ),
 				Descriptions::fromTermList( $property->getDescriptions() ),
 				Aliases::fromAliasGroupList( $property->getAliasGroups() ),
-				new StatementList() // TODO in a later patch
+				new StatementList( ...array_map(
+					[ $this->newStatementReadModelConverter(), 'convert' ],
+					iterator_to_array( $property->getStatements() )
+				) )
 			),
 			$revisionData['revTime'],
 			$revisionData['revId']

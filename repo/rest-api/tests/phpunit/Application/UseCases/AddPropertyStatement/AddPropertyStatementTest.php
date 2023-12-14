@@ -13,19 +13,13 @@ use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyS
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Property;
-use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyRevision;
-use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
+use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
+use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
-use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
+use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryPropertyRepository;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatement
@@ -35,8 +29,6 @@ use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
  * @license GPL-2.0-or-later
  */
 class AddPropertyStatementTest extends TestCase {
-
-	use EditMetadataHelper;
 
 	private AssertPropertyExists $assertPropertyExists;
 	private AddPropertyStatementValidator $validator;
@@ -58,43 +50,22 @@ class AddPropertyStatementTest extends TestCase {
 
 	public function testAddStatement(): void {
 		$id = new NumericPropertyId( 'P321' );
+		$property = new DataModelProperty( $id, null, 'string' );
 		$newGuid = new StatementGuid( $id, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
 		$comment = 'edit comment';
-		$statementReadModel = NewStatementReadModel::noValueFor( 'P123' )
+		[ $statementReadModel, $statementWriteModel ] = NewStatementReadModel::noValueFor( 'P123' )
 			->withGuid( $newGuid )
-			->build();
-		$lastModified = '20221111070707';
-		$revisionId = 321;
-
-		$property = new DataModelProperty( $id, null, 'string' );
-
-		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
-		$this->propertyRetriever->method( 'getProperty' )->willReturn( $property );
+			->buildReadAndWriteModel();
 
 		$this->guidGenerator = $this->createStub( GuidGenerator::class );
 		$this->guidGenerator->method( 'newStatementId' )->willReturn( $newGuid );
 
-		$this->propertyUpdater = $this->createMock( PropertyUpdater::class );
-		$this->propertyUpdater->expects( $this->once() )
-			->method( 'update' )
-			->with(
-				$this->callback(
-					fn( DataModelProperty $p ) => $p->getStatements()->getFirstStatementWithGuid( (string)$newGuid ) !== null
-				),
-				$this->expectEquivalentMetadata( $editTags, $isBot, $comment, EditSummary::ADD_ACTION )
-			)
-			->willReturn( new PropertyRevision(
-				new Property(
-					new Labels(),
-					new Descriptions( new Description( 'en', 'English Description' ) ),
-					new Aliases(),
-					new StatementList( $statementReadModel )
-				),
-				$lastModified,
-				$revisionId
-			) );
+		$propertyRepo = new InMemoryPropertyRepository();
+		$propertyRepo->addProperty( $property );
+		$this->propertyRetriever = $propertyRepo;
+		$this->propertyUpdater = $propertyRepo;
 
 		$response = $this->newUseCase()->execute(
 			new AddPropertyStatementRequest(
@@ -107,9 +78,13 @@ class AddPropertyStatementTest extends TestCase {
 			)
 		);
 
-		$this->assertSame( $statementReadModel, $response->getStatement() );
-		$this->assertSame( $lastModified, $response->getLastModified() );
-		$this->assertSame( $revisionId, $response->getRevisionId() );
+		$this->assertEquals( $statementReadModel, $response->getStatement() );
+		$this->assertSame( $propertyRepo->getLatestRevisionTimestamp( $id ), $response->getLastModified() );
+		$this->assertSame( $propertyRepo->getLatestRevisionId( $id ), $response->getRevisionId() );
+		$this->assertEquals(
+			new EditMetadata( $editTags, $isBot, StatementEditSummary::newAddSummary( $comment, $statementWriteModel ) ),
+			$propertyRepo->getLatestRevisionEditMetadata( $id )
+		);
 	}
 
 	public function testGivenInvalidRequest_throwsUseCaseError(): void {
