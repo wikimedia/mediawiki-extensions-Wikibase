@@ -1,7 +1,1 @@
-[
-	{
-		"path": "/wikibase/v0/entities/properties/{property_id}/labels/{language_code}",
-		"method": "DELETE",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\RemovePropertyLabelRouteHandler::factory"
-	}
-]
+[ ]
