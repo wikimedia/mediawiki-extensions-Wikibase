@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\AddItemStatement;
 
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Statement\StatementGuid;
@@ -16,19 +15,14 @@ use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
-use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
+use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\User;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Item as ReadModelItem;
-use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
-use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
-use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
+use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryItemRepository;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatement
@@ -38,8 +32,6 @@ use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
  * @license GPL-2.0-or-later
  */
 class AddItemStatementTest extends TestCase {
-
-	use EditMetadataHelper;
 
 	private GetLatestItemRevisionMetadata $getRevisionMetadata;
 	private ItemRetriever $itemRetriever;
@@ -60,53 +52,44 @@ class AddItemStatementTest extends TestCase {
 
 	public function testAddStatement(): void {
 		$item = NewItem::withId( 'Q123' )->build();
-		$postModificationRevisionId = 322;
-		$modificationTimestamp = '20221111070707';
 		$newGuid = new StatementGuid( $item->getId(), 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
+		[ $statementReadModel, $statementWriteModel ] = NewStatementReadModel::noValueFor(
+			TestValidatingRequestDeserializer::EXISTING_STRING_PROPERTY
+		)->withGuid( $newGuid )->buildReadAndWriteModel();
 		$editTags = [ TestValidatingRequestDeserializer::ALLOWED_TAGS[0] ];
 		$isBot = false;
 		$comment = 'potato';
 
-		$request = new AddItemStatementRequest(
-			$item->getId()->getSerialization(),
-			$this->getValidNoValueStatementSerialization(),
-			$editTags,
-			$isBot,
-			$comment,
-			null
-		);
-
-		$this->itemRetriever = $this->createStub( ItemRetriever::class );
-		$this->itemRetriever->method( 'getItem' )->willReturn( $item );
-
 		$this->guidGenerator = $this->createStub( GuidGenerator::class );
 		$this->guidGenerator->method( 'newStatementId' )->willReturn( $newGuid );
 
-		$updatedItem = new ReadModelItem(
-			new Labels(),
-			new Descriptions(),
-			new Aliases(),
-			new StatementList( NewStatementReadModel::noValueFor(
-				TestValidatingRequestDeserializer::EXISTING_STRING_PROPERTY
-			)->withGuid( $newGuid )->build() )
-		);
-		$this->itemUpdater = $this->createMock( ItemUpdater::class );
-		$this->itemUpdater->method( 'update' )
-			->with(
-				$this->callback( fn( Item $item ) => $item->getStatements()->getFirstStatementWithGuid( (string)$newGuid ) !== null ),
-				$this->expectEquivalentMetadata( $editTags, $isBot, $comment, EditSummary::ADD_ACTION )
-			)
-			->willReturn( new ItemRevision( $updatedItem, $modificationTimestamp, $postModificationRevisionId ) );
+		$itemRepo = new InMemoryItemRepository();
+		$itemRepo->addItem( $item );
+		$this->itemRetriever = $itemRepo;
+		$this->itemUpdater = $itemRepo;
 
-		$response = $this->newUseCase()->execute( $request );
+		$response = $this->newUseCase()->execute(
+			new AddItemStatementRequest(
+				$item->getId()->getSerialization(),
+				$this->getValidNoValueStatementSerialization(),
+				$editTags,
+				$isBot,
+				$comment,
+				null
+			)
+		);
 
 		$this->assertInstanceOf( AddItemStatementResponse::class, $response );
-		$this->assertSame(
-			$updatedItem->getStatements()->getStatementById( $newGuid ),
+		$this->assertEquals(
+			$statementReadModel,
 			$response->getStatement()
 		);
-		$this->assertSame( $postModificationRevisionId, $response->getRevisionId() );
-		$this->assertSame( $modificationTimestamp, $response->getLastModified() );
+		$this->assertSame( $itemRepo->getLatestRevisionId( $item->getId() ), $response->getRevisionId() );
+		$this->assertSame( $itemRepo->getLatestRevisionTimestamp( $item->getId() ), $response->getLastModified() );
+		$this->assertEquals(
+			new EditMetadata( $editTags, $isBot, StatementEditSummary::newAddSummary( $comment, $statementWriteModel ) ),
+			$itemRepo->getLatestRevisionEditMetadata( $item->getId() )
+		);
 	}
 
 	public function testGivenItemNotFoundOrRedirect_throws(): void {
