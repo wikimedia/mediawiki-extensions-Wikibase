@@ -345,7 +345,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 			$this->logger->alert( "Incorrect signature", $loggingContext );
 			return $default;
 		}
-		$decodedData = utf8_decode( $data );
+		$decodedData = mb_convert_encoding( $data, 'ISO-8859-1', 'UTF-8' );
 
 		if ( $decodedData === serialize( false ) ) {
 			return false;
