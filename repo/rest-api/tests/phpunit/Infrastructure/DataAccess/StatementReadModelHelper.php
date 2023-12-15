@@ -2,7 +2,8 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
 
-use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -12,7 +13,14 @@ use Wikibase\Repo\WikibaseRepo;
 trait StatementReadModelHelper {
 
 	private function newStatementReadModelConverter(): StatementReadModelConverter {
-		return new StatementReadModelConverter( WikibaseRepo::getStatementGuidParser(), new InMemoryDataTypeLookup() );
+		return new StatementReadModelConverter(
+			WikibaseRepo::getStatementGuidParser(),
+			new class implements PropertyDataTypeLookup {
+				public function getDataTypeIdForProperty( PropertyId $propertyId ): string {
+					return 'string';
+				}
+			}
+		);
 	}
 
 }

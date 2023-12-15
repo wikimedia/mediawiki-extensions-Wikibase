@@ -2,20 +2,18 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Domain\ReadModel;
 
-use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
-use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\StatementReadModelHelper;
 
 /**
  * @license GPL-2.0-or-later
  */
 class NewStatementReadModel extends NewStatement {
+	use StatementReadModelHelper;
 
 	public function build(): Statement {
-		return ( new StatementReadModelConverter( WikibaseRepo::getStatementGuidParser(), new InMemoryDataTypeLookup() ) )
-			->convert( parent::build() );
+		return $this->newStatementReadModelConverter()->convert( parent::build() );
 	}
 
 	public function buildReadAndWriteModel(): array {
