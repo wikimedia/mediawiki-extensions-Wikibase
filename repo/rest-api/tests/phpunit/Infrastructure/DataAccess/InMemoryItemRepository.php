@@ -19,6 +19,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
  * @license GPL-2.0-or-later
  */
 class InMemoryItemRepository implements ItemRetriever, ItemUpdater {
+	use StatementReadModelHelper;
 
 	private array $items = [];
 	private array $latestRevisionData = [];
@@ -62,7 +63,10 @@ class InMemoryItemRepository implements ItemRetriever, ItemUpdater {
 				Labels::fromTermList( $item->getLabels() ),
 				Descriptions::fromTermList( $item->getDescriptions() ),
 				Aliases::fromAliasGroupList( $item->getAliasGroups() ),
-				new StatementList() // TODO in a later patch
+				new StatementList( ...array_map(
+					[ $this->newStatementReadModelConverter(), 'convert' ],
+					iterator_to_array( $item->getStatements() )
+				) )
 			),
 			$revisionData['revTime'],
 			$revisionData['revId']
