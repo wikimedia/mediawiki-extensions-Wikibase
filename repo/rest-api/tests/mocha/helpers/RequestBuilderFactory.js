@@ -314,6 +314,13 @@ module.exports = {
 			.withRoute( 'PATCH', '/statements/{statement_id}' )
 			.withPathParam( 'statement_id', statementId )
 			.withJsonBodyParam( 'patch', patch );
+	},
+
+	newRemovePropertyDescriptionRequestBuilder( propertyId, languageCode ) {
+		return new RequestBuilder()
+			.withRoute( 'DELETE', '/entities/properties/{property_id}/descriptions/{language_code}' )
+			.withPathParam( 'property_id', propertyId )
+			.withPathParam( 'language_code', languageCode );
 	}
 
 };
