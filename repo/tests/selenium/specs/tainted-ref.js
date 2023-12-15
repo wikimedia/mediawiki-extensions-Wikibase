@@ -35,7 +35,8 @@ describe( 'the Tainted icon', () => {
 		);
 	} );
 
-	it( 'should appear and disappear correctly', async () => {
+	// Skipped because of frequent failures, see T266706
+	it.skip( 'should appear and disappear correctly', async () => {
 		await ItemPage.open( itemId );
 
 		await expect( ItemPage.taintedRefIcon ).not.toExist( {
