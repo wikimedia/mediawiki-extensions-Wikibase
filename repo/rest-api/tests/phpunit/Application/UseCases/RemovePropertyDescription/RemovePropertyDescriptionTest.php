@@ -9,6 +9,7 @@ use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyDescription\RemovePropertyDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyDescription\RemovePropertyDescriptionRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyDescription\RemovePropertyDescriptionValidator;
@@ -16,6 +17,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
+use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
@@ -36,6 +38,7 @@ class RemovePropertyDescriptionTest extends TestCase {
 
 	private RemovePropertyDescriptionValidator $requestValidator;
 	private AssertPropertyExists $assertPropertyExists;
+	private AssertUserIsAuthorized $assertUserIsAuthorized;
 	private PropertyRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
 
@@ -44,6 +47,7 @@ class RemovePropertyDescriptionTest extends TestCase {
 
 		$this->requestValidator = new TestValidatingRequestDeserializer();
 		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
+		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
 		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
 		$this->propertyUpdater = $this->createStub( PropertyUpdater::class );
 	}
@@ -134,10 +138,33 @@ class RemovePropertyDescriptionTest extends TestCase {
 		}
 	}
 
+	public function testGivenEditIsUnauthorized_throwsUseCaseError(): void {
+		$propertyId = new NumericPropertyId( 'P123' );
+
+		$expectedError = new UseCaseError(
+			UseCaseError::PERMISSION_DENIED,
+			'You have no permission to edit this property.'
+		);
+		$this->assertUserIsAuthorized = $this->createMock( AssertUserIsAuthorized::class );
+		$this->assertUserIsAuthorized->method( 'execute' )
+			->with( $propertyId, User::newAnonymous() )
+			->willThrowException( $expectedError );
+
+		try {
+			$this->newUseCase()->execute(
+				new RemovePropertyDescriptionRequest( "$propertyId", 'en', [], false, null, null )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedError, $e );
+		}
+	}
+
 	private function newUseCase(): RemovePropertyDescription {
 		return new RemovePropertyDescription(
 			$this->requestValidator,
 			$this->assertPropertyExists,
+			$this->assertUserIsAuthorized,
 			$this->propertyRetriever,
 			$this->propertyUpdater
 		);
