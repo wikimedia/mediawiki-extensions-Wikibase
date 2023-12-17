@@ -2,6 +2,8 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyDescription;
 
+use OutOfBoundsException;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
@@ -14,15 +16,18 @@ use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
 class RemovePropertyDescription {
 
 	private RemovePropertyDescriptionValidator $requestValidator;
+	private AssertPropertyExists $assertPropertyExists;
 	private PropertyRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
 
 	public function __construct(
 		RemovePropertyDescriptionValidator $requestValidator,
+		AssertPropertyExists $assertPropertyExists,
 		PropertyRetriever $propertyRetriever,
 		PropertyUpdater $propertyUpdater
 	) {
 		$this->requestValidator = $requestValidator;
+		$this->assertPropertyExists = $assertPropertyExists;
 		$this->propertyRetriever = $propertyRetriever;
 		$this->propertyUpdater = $propertyUpdater;
 	}
@@ -37,8 +42,19 @@ class RemovePropertyDescription {
 		$languageCode = $deserializedRequest->getLanguageCode();
 		$providedEditMetadata = $deserializedRequest->getEditMetadata();
 
+		$this->assertPropertyExists->execute( $propertyId );
+
 		$property = $this->propertyRetriever->getProperty( $propertyId );
-		$description = $property->getDescriptions()->getByLanguage( $languageCode );
+
+		try {
+			$description = $property->getDescriptions()->getByLanguage( $languageCode );
+		} catch ( OutOfBoundsException $e ) {
+			throw new UseCaseError(
+				UseCaseError::DESCRIPTION_NOT_DEFINED,
+				"Property with the ID $propertyId does not have a description in the language: $languageCode"
+			);
+		}
+
 		$property->getDescriptions()->removeByLanguage( $languageCode );
 
 		$summary = DescriptionEditSummary::newRemoveSummary( $providedEditMetadata->getComment(), $description );

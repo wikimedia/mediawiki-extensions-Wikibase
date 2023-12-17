@@ -8,9 +8,11 @@ use Wikibase\DataModel\Entity\Property as DataModelProperty;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyDescription\RemovePropertyDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyDescription\RemovePropertyDescriptionRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyDescription\RemovePropertyDescriptionValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
@@ -33,6 +35,7 @@ class RemovePropertyDescriptionTest extends TestCase {
 	use EditMetadataHelper;
 
 	private RemovePropertyDescriptionValidator $requestValidator;
+	private AssertPropertyExists $assertPropertyExists;
 	private PropertyRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
 
@@ -40,6 +43,7 @@ class RemovePropertyDescriptionTest extends TestCase {
 		parent::setUp();
 
 		$this->requestValidator = new TestValidatingRequestDeserializer();
+		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
 		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
 		$this->propertyUpdater = $this->createStub( PropertyUpdater::class );
 	}
@@ -93,9 +97,47 @@ class RemovePropertyDescriptionTest extends TestCase {
 		}
 	}
 
+	public function testGivenPropertyNotFound_throws(): void {
+		$expectedException = $this->createStub( UseCaseException::class );
+
+		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
+		$this->assertPropertyExists->method( 'execute' )->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase()->execute(
+				new RemovePropertyDescriptionRequest( 'P999', 'en', [], false, null, null )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
+	public function testGivenDescriptionDoesNotExist_throws(): void {
+		$propertyId = new NumericPropertyId( 'P123' );
+		$language = 'en';
+		$editTags = [ TestValidatingRequestDeserializer::ALLOWED_TAGS[ 1 ] ];
+
+		$propertyRepo = new InMemoryPropertyRepository();
+		$propertyRepo->addProperty( new DataModelProperty( $propertyId, new Fingerprint(), 'string' ) );
+		$this->propertyRetriever = $propertyRepo;
+
+		try {
+			$this->newUseCase()->execute(
+				new RemovePropertyDescriptionRequest( (string)$propertyId, $language, $editTags, false, 'test', null )
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::DESCRIPTION_NOT_DEFINED, $e->getErrorCode() );
+			$this->assertStringContainsString( (string)$propertyId, $e->getErrorMessage() );
+			$this->assertStringContainsString( $language, $e->getErrorMessage() );
+		}
+	}
+
 	private function newUseCase(): RemovePropertyDescription {
 		return new RemovePropertyDescription(
 			$this->requestValidator,
+			$this->assertPropertyExists,
 			$this->propertyRetriever,
 			$this->propertyUpdater
 		);

@@ -43,6 +43,7 @@ class RemovePropertyDescriptionRouteHandler extends SimpleHandler {
 		return new self(
 			new RemovePropertyDescription(
 				WbRestApi::getValidatingRequestDeserializer(),
+				WbRestApi::getAssertPropertyExists(),
 				WbRestApi::getPropertyDataRetriever(),
 				WbRestApi::getPropertyUpdater()
 			),

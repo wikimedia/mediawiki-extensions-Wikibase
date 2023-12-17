@@ -151,4 +151,25 @@ describe( newRemovePropertyDescriptionRequestBuilder().getRouteDescription(), ()
 		} );
 	} );
 
+	describe( '404 error response', () => {
+		it( 'property not found', async () => {
+			const propertyId = 'P999999';
+			const response = await newRemovePropertyDescriptionRequestBuilder( propertyId, 'en' )
+				.assertValidRequest().makeRequest();
+
+			assertValidErrorResponse( response, 404, 'property-not-found' );
+			assert.include( response.body.message, propertyId );
+		} );
+
+		it( 'description in the language specified does not exist', async () => {
+			const languageCode = 'ar';
+			const response = await newRemovePropertyDescriptionRequestBuilder( testPropertyId, languageCode )
+				.assertValidRequest().makeRequest();
+
+			assertValidErrorResponse( response, 404, 'description-not-defined' );
+			assert.include( response.body.message, testPropertyId );
+			assert.include( response.body.message, languageCode );
+		} );
+	} );
+
 } );
