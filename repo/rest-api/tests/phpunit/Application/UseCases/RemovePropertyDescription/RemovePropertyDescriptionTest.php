@@ -10,6 +10,8 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyDescription\RemovePropertyDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyDescription\RemovePropertyDescriptionRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyDescription\RemovePropertyDescriptionValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
@@ -30,12 +32,14 @@ class RemovePropertyDescriptionTest extends TestCase {
 
 	use EditMetadataHelper;
 
+	private RemovePropertyDescriptionValidator $requestValidator;
 	private PropertyRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
 
 	protected function setUp(): void {
 		parent::setUp();
 
+		$this->requestValidator = new TestValidatingRequestDeserializer();
 		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
 		$this->propertyUpdater = $this->createStub( PropertyUpdater::class );
 	}
@@ -77,8 +81,24 @@ class RemovePropertyDescriptionTest extends TestCase {
 		);
 	}
 
+	public function testInvalidRequest_throwsException(): void {
+		$expectedException = new UseCaseException( 'invalid-remove-description-test' );
+		$this->requestValidator = $this->createStub( RemovePropertyDescriptionValidator::class );
+		$this->requestValidator->method( 'validateAndDeserialize' )->willThrowException( $expectedException );
+		try {
+			$this->newUseCase()->execute( $this->createStub( RemovePropertyDescriptionRequest::class ) );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
 	private function newUseCase(): RemovePropertyDescription {
-		return new RemovePropertyDescription( $this->propertyRetriever, $this->propertyUpdater );
+		return new RemovePropertyDescription(
+			$this->requestValidator,
+			$this->propertyRetriever,
+			$this->propertyUpdater
+		);
 	}
 
 }

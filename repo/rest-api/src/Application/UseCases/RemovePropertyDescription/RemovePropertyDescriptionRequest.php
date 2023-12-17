@@ -2,10 +2,15 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyDescription;
 
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\LanguageCodeRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\UseCaseRequest;
+
 /**
  * @license GPL-2.0-or-later
  */
-class RemovePropertyDescriptionRequest {
+class RemovePropertyDescriptionRequest implements UseCaseRequest, PropertyIdRequest, LanguageCodeRequest, EditMetadataRequest {
 
 	private string $propertyId;
 	private string $languageCode;

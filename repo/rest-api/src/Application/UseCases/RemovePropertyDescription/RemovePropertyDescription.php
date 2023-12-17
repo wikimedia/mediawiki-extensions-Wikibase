@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyDescription;
 
-use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
@@ -13,25 +13,38 @@ use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
  */
 class RemovePropertyDescription {
 
+	private RemovePropertyDescriptionValidator $requestValidator;
 	private PropertyRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
 
-	public function __construct( PropertyRetriever $propertyRetriever, PropertyUpdater $propertyUpdater ) {
+	public function __construct(
+		RemovePropertyDescriptionValidator $requestValidator,
+		PropertyRetriever $propertyRetriever,
+		PropertyUpdater $propertyUpdater
+	) {
+		$this->requestValidator = $requestValidator;
 		$this->propertyRetriever = $propertyRetriever;
 		$this->propertyUpdater = $propertyUpdater;
 	}
 
+	/**
+	 * @throws UseCaseError
+	 */
 	public function execute( RemovePropertyDescriptionRequest $request ): void {
-		$propertyId = new NumericPropertyId( $request->getPropertyId() );
+		$deserializedRequest = $this->requestValidator->validateAndDeserialize( $request );
+
+		$propertyId = $deserializedRequest->getPropertyId();
+		$languageCode = $deserializedRequest->getLanguageCode();
+		$providedEditMetadata = $deserializedRequest->getEditMetadata();
 
 		$property = $this->propertyRetriever->getProperty( $propertyId );
-		$description = $property->getDescriptions()->getByLanguage( $request->getLanguageCode() );
-		$property->getDescriptions()->removeByLanguage( $request->getLanguageCode() );
+		$description = $property->getDescriptions()->getByLanguage( $languageCode );
+		$property->getDescriptions()->removeByLanguage( $languageCode );
 
-		$summary = DescriptionEditSummary::newRemoveSummary( $request->getComment(), $description );
+		$summary = DescriptionEditSummary::newRemoveSummary( $providedEditMetadata->getComment(), $description );
 		$this->propertyUpdater->update(
 			$property, // @phan-suppress-current-line PhanTypeMismatchArgumentNullable
-			new EditMetadata( $request->getEditTags(), $request->isBot(), $summary )
+			new EditMetadata( $providedEditMetadata->getTags(), $providedEditMetadata->isBot(), $summary )
 		);
 	}
 

@@ -42,6 +42,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyStatement\Deserializ
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemDescription\DeserializedRemoveItemDescriptionRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemLabel\DeserializedRemoveItemLabelRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\DeserializedRemoveItemStatementRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyDescription\DeserializedRemovePropertyDescriptionRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyLabel\DeserializedRemovePropertyLabelRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyStatement\DeserializedRemovePropertyStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\DeserializedReplaceItemStatementRequest;
@@ -83,6 +84,7 @@ class DeserializedRequestAdapter implements
 	DeserializedRemoveItemDescriptionRequest,
 	DeserializedRemoveItemStatementRequest,
 	DeserializedRemovePropertyLabelRequest,
+	DeserializedRemovePropertyDescriptionRequest,
 	DeserializedRemovePropertyStatementRequest,
 	DeserializedReplaceItemStatementRequest,
 	DeserializedReplacePropertyStatementRequest,

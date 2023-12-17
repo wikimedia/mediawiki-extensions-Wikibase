@@ -9,6 +9,7 @@ use MediaWiki\Rest\StringStream;
 use MediaWiki\Rest\Validator\BodyValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyDescription\RemovePropertyDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyDescription\RemovePropertyDescriptionRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -28,30 +29,44 @@ class RemovePropertyDescriptionRouteHandler extends SimpleHandler {
 	private const COMMENT_PARAM_DEFAULT = null;
 
 	private RemovePropertyDescription $removePropertyDescription;
+	private ResponseFactory $responseFactory;
 
-	public function __construct( RemovePropertyDescription $removePropertyDescription ) {
+	public function __construct(
+		RemovePropertyDescription $removePropertyDescription,
+		ResponseFactory $responseFactory
+	) {
 		$this->removePropertyDescription = $removePropertyDescription;
+		$this->responseFactory = $responseFactory;
 	}
 
 	public static function factory(): Handler {
 		return new self(
-			new RemovePropertyDescription( WbRestApi::getPropertyDataRetriever(), WbRestApi::getPropertyUpdater() )
+			new RemovePropertyDescription(
+				WbRestApi::getValidatingRequestDeserializer(),
+				WbRestApi::getPropertyDataRetriever(),
+				WbRestApi::getPropertyUpdater()
+			),
+			new ResponseFactory()
 		);
 	}
 
 	public function run( string $propertyId, string $languageCode ): Response {
 		$requestBody = $this->getValidatedBody();
 
-		$this->removePropertyDescription->execute(
-			new RemovePropertyDescriptionRequest(
-				$propertyId,
-				$languageCode,
-				$requestBody[ self::TAGS_BODY_PARAM ] ?? self::TAGS_PARAM_DEFAULT,
-				$requestBody[ self::BOT_BODY_PARAM ] ?? self::BOT_PARAM_DEFAULT,
-				$requestBody[ self::COMMENT_BODY_PARAM ] ?? self::COMMENT_PARAM_DEFAULT,
-				null
-			)
-		);
+		try {
+			$this->removePropertyDescription->execute(
+				new RemovePropertyDescriptionRequest(
+					$propertyId,
+					$languageCode,
+					$requestBody[self::TAGS_BODY_PARAM] ?? self::TAGS_PARAM_DEFAULT,
+					$requestBody[self::BOT_BODY_PARAM] ?? self::BOT_PARAM_DEFAULT,
+					$requestBody[self::COMMENT_BODY_PARAM] ?? self::COMMENT_PARAM_DEFAULT,
+					null
+				)
+			);
+		} catch ( UseCaseError $e ) {
+			return $this->responseFactory->newErrorResponseFromException( $e );
+		}
 
 		return $this->newSuccessHttpResponse();
 	}
