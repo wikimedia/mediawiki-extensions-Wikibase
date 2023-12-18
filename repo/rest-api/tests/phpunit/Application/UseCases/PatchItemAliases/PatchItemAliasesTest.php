@@ -2,10 +2,10 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\PatchItemAliases;
 
-use PHPUnit\Framework\Constraint\Callback;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\Item as DataModelItem;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Term\AliasGroup;
+use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
@@ -19,20 +19,17 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\AliasesEditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Item;
-use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
-use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemAliasesRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
+use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryItemRepository;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchItemAliases
@@ -73,39 +70,24 @@ class PatchItemAliasesTest extends TestCase {
 	}
 
 	public function testHappyPath(): void {
+		$aliasText = 'English alias';
 		$newAliasText = 'another English alias';
 		$aliasLanguage = 'en';
 
 		$itemId = new ItemId( 'Q42' );
-		$item = NewItem::withId( $itemId )->andAliases( $aliasLanguage, [ 'English alias' ] )->build();
 
 		$this->aliasesRetriever = $this->createStub( ItemAliasesRetriever::class );
 		$this->aliasesRetriever->method( 'getAliases' )
-			->willReturn( new Aliases( new AliasesInLanguage( $aliasLanguage, [ 'English alias' ] ) ) );
+			->willReturn( new Aliases( new AliasesInLanguage( $aliasLanguage, [ $aliasText ] ) ) );
 
-		$this->itemRetriever = $this->createStub( ItemRetriever::class );
-		$this->itemRetriever->method( 'getItem' )->willReturn( $item );
-
-		$revisionId = 657;
-		$lastModified = '20221212040506';
 		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
 		$comment = 'aliases patched by ' . __method__;
 
-		$updatedItem = new Item(
-			new Labels(),
-			new Descriptions(),
-			new Aliases( new AliasesInLanguage( $aliasLanguage, [ 'English alias', $newAliasText ] ) ),
-			new StatementList()
-		);
-		$this->itemUpdater = $this->createMock( ItemUpdater::class );
-		$this->itemUpdater->expects( $this->once() )
-			->method( 'update' )
-			->with(
-				$this->expectItemWithAliases( $aliasLanguage, [ 'English alias', $newAliasText ] ),
-				$this->expectEquivalentMetadata( $editTags, $isBot, $comment, AliasesEditSummary::PATCH_ACTION )
-			)
-			->willReturn( new ItemRevision( $updatedItem, $lastModified, $revisionId ) );
+		$itemRepo = new InMemoryItemRepository();
+		$itemRepo->addItem( NewItem::withId( $itemId )->andAliases( $aliasLanguage, [ $aliasText ] )->build() );
+		$this->itemRetriever = $itemRepo;
+		$this->itemUpdater = $itemRepo;
 
 		$response = $this->newUseCase()->execute(
 			new PatchItemAliasesRequest(
@@ -118,7 +100,24 @@ class PatchItemAliasesTest extends TestCase {
 			)
 		);
 
-		$this->assertSame( $response->getAliases(), $updatedItem->getAliases() );
+		$this->assertEquals(
+			$response->getAliases(),
+			new Aliases( new AliasesInLanguage( $aliasLanguage, [ $aliasText, $newAliasText ] ) )
+		);
+		$this->assertSame( $itemRepo->getLatestRevisionId( $itemId ), $response->getRevisionId() );
+		$this->assertSame( $itemRepo->getLatestRevisionTimestamp( $itemId ), $response->getLastModified() );
+		$this->assertEquals(
+			new EditMetadata(
+				$editTags,
+				$isBot,
+				AliasesEditSummary::newPatchSummary(
+					$comment,
+					new AliasGroupList( [ new AliasGroup( $aliasLanguage, [ $aliasText ] ) ] ),
+					new AliasGroupList( [ new AliasGroup( $aliasLanguage, [ $aliasText, $newAliasText ] ) ] )
+				)
+			),
+			$itemRepo->getLatestRevisionEditMetadata( $itemId )
+		);
 	}
 
 	public function testGivenInvalidRequest_throws(): void {
@@ -215,12 +214,6 @@ class PatchItemAliasesTest extends TestCase {
 
 	private function newUseCaseRequest( string $itemId, array $patch ): PatchItemAliasesRequest {
 		return new PatchItemAliasesRequest( $itemId, $patch, [], false, null, null );
-	}
-
-	private function expectItemWithAliases( string $languageCode, array $aliasesInLanguage ): Callback {
-		return $this->callback(
-			fn( DataModelItem $item ) => $item->getAliasGroups()->getByLanguage( $languageCode )->getAliases() === $aliasesInLanguage
-		);
 	}
 
 }
