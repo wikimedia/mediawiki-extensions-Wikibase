@@ -25,28 +25,19 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 
 	private LinkBatchFactory $linkBatchFactory;
 
-	/**
-	 * @var EntitySearchHelper
-	 */
-	private $entitySearchHelper;
+	private EntitySearchHelper $entitySearchHelper;
 
-	/**
-	 * @var EntityTitleLookup
-	 */
-	private $titleLookup;
+	private EntityTitleLookup $titleLookup;
 
-	/**
-	 * @var ContentLanguages
-	 */
-	private $termsLanguages;
+	private ContentLanguages $termsLanguages;
 
 	/**
 	 * @var string[]
 	 */
-	private $entityTypes;
+	private array $entityTypes;
 
 	/** @var (string|null)[] */
-	private $searchProfiles;
+	private array $searchProfiles;
 
 	public function __construct(
 		ApiQuery $apiQuery,

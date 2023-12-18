@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types  = 1 );
+
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiMain;
@@ -45,10 +47,7 @@ use Wikibase\Repo\Api\SearchEntities;
  */
 class SearchEntitiesIntegrationTest extends MediaWikiIntegrationTestCase {
 
-	/**
-	 * @var EntityIdParser
-	 */
-	private $idParser;
+	private EntityIdParser $idParser;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -94,7 +93,7 @@ class SearchEntitiesIntegrationTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider provideQueriesForEntityIds
 	 */
-	public function testTermTableIntegration( $query, array $expectedIds ) {
+	public function testTermTableIntegration( string $query, array $expectedIds ) {
 		$searchHelper = new CombinedEntitySearchHelper(
 			[
 				new EntityIdSearchHelper(
@@ -124,13 +123,7 @@ class SearchEntitiesIntegrationTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	/**
-	 * @param EntitySearchHelper $entitySearchTermIndex
-	 * @param string $query
-	 *
-	 * @return array
-	 */
-	private function executeApiModule( EntitySearchHelper $entitySearchTermIndex, $query ) {
+	private function executeApiModule( EntitySearchHelper $entitySearchTermIndex, string $query ): array {
 		$context = new RequestContext();
 		$context->setRequest( new FauxRequest( [
 			'language' => 'en',
@@ -172,10 +165,7 @@ class SearchEntitiesIntegrationTest extends MediaWikiIntegrationTestCase {
 		return $apiModule->getResult()->getResultData( null, [ 'Strip' => 'all' ] );
 	}
 
-	/**
-	 * @return ConfigurableTermSearchInteractor
-	 */
-	private function newConfigurableTermSearchInteractor() {
+	private function newConfigurableTermSearchInteractor(): ConfigurableTermSearchInteractor {
 		$interactor = $this->createMock( ConfigurableTermSearchInteractor::class );
 		$interactor->method( 'searchForEntities' )->willReturnCallback(
 			function ( $text, $languageCode, $entityType, array $termTypes ) {
@@ -192,10 +182,7 @@ class SearchEntitiesIntegrationTest extends MediaWikiIntegrationTestCase {
 		return $interactor;
 	}
 
-	/**
-	 * @return EntityLookup
-	 */
-	private function newEntityLookup() {
+	private function newEntityLookup(): EntityLookup {
 		$lookup = $this->createMock( EntityLookup::class );
 		$lookup->method( 'hasEntity' )->willReturn( true );
 

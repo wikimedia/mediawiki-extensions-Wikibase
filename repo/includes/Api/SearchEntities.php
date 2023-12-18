@@ -33,50 +33,26 @@ class SearchEntities extends ApiBase {
 
 	private LinkBatchFactory $linkBatchFactory;
 
-	/**
-	 * @var EntitySearchHelper
-	 */
-	private $entitySearchHelper;
+	private EntitySearchHelper $entitySearchHelper;
 
-	/**
-	 * @var ContentLanguages
-	 */
-	private $termsLanguages;
+	private ContentLanguages $termsLanguages;
 
-	/**
-	 * @var EntitySourceLookup
-	 */
-	private $entitySourceLookup;
+	private EntitySourceLookup $entitySourceLookup;
 
 	private EntityTitleLookup $entityTitleLookup;
 
-	/**
-	 * @var EntityTitleTextLookup
-	 */
-	private $entityTitleTextLookup;
+	private EntityTitleTextLookup $entityTitleTextLookup;
 
-	/**
-	 * @var EntityUrlLookup
-	 */
-	private $entityUrlLookup;
+	private EntityUrlLookup $entityUrlLookup;
 
-	/**
-	 * @var EntityArticleIdLookup
-	 */
-	private $entityArticleIdLookup;
+	private EntityArticleIdLookup $entityArticleIdLookup;
 
-	/**
-	 * @var ApiErrorReporter
-	 */
-	private $errorReporter;
+	private ApiErrorReporter $errorReporter;
 
-	/**
-	 * @var array
-	 */
-	private $enabledEntityTypes;
+	private array $enabledEntityTypes;
 
 	/** @var (string|null)[] */
-	private $searchProfiles;
+	private array $searchProfiles;
 
 	/**
 	 * @see ApiBase::__construct

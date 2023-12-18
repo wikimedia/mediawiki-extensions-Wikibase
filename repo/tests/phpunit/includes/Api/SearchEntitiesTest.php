@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiMain;
@@ -51,12 +53,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 		$settings->setSetting( 'federatedPropertiesEnabled', false );
 	}
 
-	/**
-	 * @param array $params
-	 *
-	 * @return ApiMain
-	 */
-	private function getApiMain( array $params ) {
+	private function getApiMain( array $params ): ApiMain {
 		$context = new RequestContext();
 		$context->setLanguage( 'en-ca' );
 		$context->setRequest( new FauxRequest( $params, true ) );
@@ -64,10 +61,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 		return $main;
 	}
 
-	/**
-	 * @return ContentLanguages
-	 */
-	private function getContentLanguages() {
+	private function getContentLanguages(): ContentLanguages {
 		return new StaticContentLanguages(
 			[ 'de', 'de-ch', 'en', 'ii', 'nn', 'ru', 'zh-cn' ]
 		);
@@ -79,7 +73,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 	 *
 	 * @return EntitySearchHelper
 	 */
-	private function getMockEntitySearchHelper( array $params, array $returnResults = [] ) {
+	private function getMockEntitySearchHelper( array $params, array $returnResults = [] ): EntitySearchHelper {
 		// defaults from SearchEntities
 		$params = array_merge( [
 			'strictlanguage' => false,
@@ -111,7 +105,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 	 *
 	 * @return array[]
 	 */
-	private function callApiModule( array $params, EntitySearchHelper $entitySearchHelper = null ) {
+	private function callApiModule( array $params, EntitySearchHelper $entitySearchHelper = null ): array {
 		$entitySourceDefinitions = new EntitySourceDefinitions( [
 			new DatabaseEntitySource(
 				'items',
@@ -171,7 +165,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 		$this->callApiModule( $params );
 	}
 
-	public static function provideTestSearchEntities() {
+	public static function provideTestSearchEntities(): iterable {
 		$q111Match = new TermSearchResult(
 			new Term( 'qid', 'Q111' ),
 			'entityId',
@@ -391,7 +385,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $result['search'] );
 	}
 
-	private function assertResultLooksGood( $result ) {
+	private function assertResultLooksGood( array $result ): void {
 		$this->assertArrayHasKey( 'searchinfo', $result );
 		$this->assertArrayHasKey( 'search', $result['searchinfo'] );
 		$this->assertArrayHasKey( 'search', $result );
