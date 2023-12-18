@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Asav",
 			"Njardarlogar"
 		]
 	},
@@ -11,6 +12,7 @@
 	"valueview-expert-globecoordinateinput-precisionlabel-tenth-of-arcsecond": "til 1/10 av eit bogesekund",
 	"valueview-expert-globecoordinateinput-precisionlabel-hundredth-of-arcsecond": "til 1/100 av eit bogesekund",
 	"valueview-expert-globecoordinateinput-precisionlabel-thousandth-of-arcsecond": "til 1/1000 av eit bogesekund",
+	"valueview-expert-timevalue-calendar-julian": "juliansk",
 	"valueview-expert-timeinput-precision": "Presisjon",
 	"valueview-expert-timeinput-precision-year1g": "milliardar år",
 	"valueview-expert-timeinput-precision-year100m": "hundre millionar år",
