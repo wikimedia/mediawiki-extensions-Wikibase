@@ -44,6 +44,7 @@ class RemovePropertyDescriptionRouteHandler extends SimpleHandler {
 			new RemovePropertyDescription(
 				WbRestApi::getValidatingRequestDeserializer(),
 				WbRestApi::getAssertPropertyExists(),
+				WbRestApi::getAssertUserIsAuthorized(),
 				WbRestApi::getPropertyDataRetriever(),
 				WbRestApi::getPropertyUpdater()
 			),
@@ -62,7 +63,7 @@ class RemovePropertyDescriptionRouteHandler extends SimpleHandler {
 					$requestBody[self::TAGS_BODY_PARAM] ?? self::TAGS_PARAM_DEFAULT,
 					$requestBody[self::BOT_BODY_PARAM] ?? self::BOT_PARAM_DEFAULT,
 					$requestBody[self::COMMENT_BODY_PARAM] ?? self::COMMENT_PARAM_DEFAULT,
-					null
+					$this->getUsername()
 				)
 			);
 		} catch ( UseCaseError $e ) {
@@ -122,6 +123,11 @@ class RemovePropertyDescriptionRouteHandler extends SimpleHandler {
 					ParamValidator::PARAM_DEFAULT => self::COMMENT_PARAM_DEFAULT,
 				],
 			] ) : parent::getBodyValidator( $contentType );
+	}
+
+	private function getUsername(): ?string {
+		$mwUser = $this->getAuthority()->getUser();
+		return $mwUser->isRegistered() ? $mwUser->getName() : null;
 	}
 
 }

@@ -4,6 +4,7 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyDescription;
 
 use OutOfBoundsException;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
@@ -17,17 +18,20 @@ class RemovePropertyDescription {
 
 	private RemovePropertyDescriptionValidator $requestValidator;
 	private AssertPropertyExists $assertPropertyExists;
+	private AssertUserIsAuthorized $assertUserIsAuthorized;
 	private PropertyRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
 
 	public function __construct(
 		RemovePropertyDescriptionValidator $requestValidator,
 		AssertPropertyExists $assertPropertyExists,
+		AssertUserIsAuthorized $assertUserIsAuthorized,
 		PropertyRetriever $propertyRetriever,
 		PropertyUpdater $propertyUpdater
 	) {
 		$this->requestValidator = $requestValidator;
 		$this->assertPropertyExists = $assertPropertyExists;
+		$this->assertUserIsAuthorized = $assertUserIsAuthorized;
 		$this->propertyRetriever = $propertyRetriever;
 		$this->propertyUpdater = $propertyUpdater;
 	}
@@ -43,6 +47,7 @@ class RemovePropertyDescription {
 		$providedEditMetadata = $deserializedRequest->getEditMetadata();
 
 		$this->assertPropertyExists->execute( $propertyId );
+		$this->assertUserIsAuthorized->execute( $propertyId, $providedEditMetadata->getUser() );
 
 		$property = $this->propertyRetriever->getProperty( $propertyId );
 
