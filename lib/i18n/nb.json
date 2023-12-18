@@ -24,6 +24,7 @@
 	"wikibase-error-ui-no-external-page": "Siden «$2» ble ikke funnet på «$1».",
 	"wikibase-error-ui-edit-conflict": "Samme verdi ble redigert i mellomtiden, så en redigeringskonflikt oppsto. Oppdater siden.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (translitterert)",
+	"wikibase-language-name-for-terms-mul": "standardverdier (mul)",
 	"wikibase-quantitydetails-amount": "Mengde",
 	"wikibase-quantitydetails-upperbound": "Øvre grense",
 	"wikibase-quantitydetails-lowerbound": "Nedre grense",

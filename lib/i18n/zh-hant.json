@@ -34,6 +34,7 @@
 	"wikibase-error-ui-no-external-page": "在「$1」上找不到頁面「$2」。",
 	"wikibase-error-ui-edit-conflict": "在同一時間内相同的值被編輯，導致了編輯衝突。請重新載入此頁面。",
 	"wikibase-language-fallback-transliteration-hint": "$1 (已轉換拼寫)",
+	"wikibase-language-name-for-terms-mul": "預設值（mul）",
 	"wikibase-quantitydetails-amount": "總計",
 	"wikibase-quantitydetails-upperbound": "上限",
 	"wikibase-quantitydetails-lowerbound": "下限",
