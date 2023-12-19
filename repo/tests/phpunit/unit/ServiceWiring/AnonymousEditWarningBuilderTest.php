@@ -19,6 +19,8 @@ class AnonymousEditWarningBuilderTest extends ServiceWiringTestCase {
 	public function testConstruction(): void {
 		$this->serviceContainer->expects( $this->once() )
 			->method( 'getSpecialPageFactory' );
+		$this->serviceContainer->expects( $this->once() )
+			->method( 'getTempUserConfig' );
 
 		$this->assertInstanceOf(
 			AnonymousEditWarningBuilder::class,

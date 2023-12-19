@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo;
 
 use MediaWiki\SpecialPage\SpecialPageFactory;
+use MediaWiki\User\TempUser\TempUserConfig;
 
 /**
  * @license GPL-2.0-or-later
@@ -12,11 +13,14 @@ use MediaWiki\SpecialPage\SpecialPageFactory;
 class AnonymousEditWarningBuilder {
 
 	private SpecialPageFactory $specialPageFactory;
+	private TempUserConfig $tempUserConfig;
 
 	public function __construct(
-		SpecialPageFactory $specialPageFactory
+		SpecialPageFactory $specialPageFactory,
+		TempUserConfig $tempUserConfig
 	) {
 		$this->specialPageFactory = $specialPageFactory;
+		$this->tempUserConfig = $tempUserConfig;
 	}
 
 	public function buildAnonymousEditWarningHTML( string $returnToFullTitle ): string {
@@ -26,6 +30,10 @@ class AnonymousEditWarningBuilder {
 			->getPage( 'CreateAccount' )
 			->getPageTitle()
 			->getFullURL( 'returnto=' . $returnToFullTitle );
-		return $loginPage->msg( 'wikibase-anonymouseditwarning', $loginHref, $createAccountHref )->parse();
+		$messageKey = 'wikibase-anonymouseditwarning';
+		if ( $this->tempUserConfig->isEnabled() ) {
+			$messageKey = 'wikibase-anonymouseditnotificationtempuser';
+		}
+		return $loginPage->msg( $messageKey, $loginHref, $createAccountHref )->parse();
 	}
 }
