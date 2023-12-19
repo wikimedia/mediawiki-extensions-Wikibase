@@ -137,7 +137,7 @@
 	"connected-redirect-category": "تحويلات متصلة بعنصر {{WBREPONAME}}",
 	"connected-redirect-category-desc": "هذا التصنيف يعرض صفحات التحويل المرتبطة بعنصر {{WBREPONAME}}.",
 	"wikibase-client-data-bridge-dialog-title": "تحرير $1",
-	"wikibase-client-data-bridge-permissions-error": "ليست لديك صلاحية لتعديل هذه القيمة؛ {{PLURAL:$1|للسبب التالي|للأسباب التالية}}:",
+	"wikibase-client-data-bridge-permissions-error": "ليس لديك صلاحية لتعديل هذه القيمة؛ {{PLURAL:$1|للسبب التالي|للأسباب التالية}}:",
 	"wikibase-client-data-bridge-permissions-error-info": "مزيد من التفاصيل",
 	"wikibase-client-data-bridge-protected-on-repo-head": "<strong>هذه القيمة حاليا [$1 محمية بالكامل] في {{WBREPONAME}} ويمكن تحريرها فقط بواسطة [$2 الإداريين].</strong>",
 	"wikibase-client-data-bridge-protected-on-repo-body": "<p><strong>لماذا هذه القيمة محمية؟</strong></p>\n<ul>\n<li>بعض القوالب والعناصر (وقيمها) محمية بشكل دائم [$1] نظرا للرؤية، في بعض الأحيان، تكون محمية بسبب [$2 نزاعات التحرير]، يمكن تحرير معظم العناصر بواسطة أي شخص.</li>\n<li>يمكن العثور على سبب الحماية في [$3 سجل الحماية].</li>\n</ul>\n<p><strong>ماذا يمكنني أن أفعل؟</strong></p>\n<ul><li>[$4 ناقش هذا العنصر] مع الآخرين.</li></ul>",
