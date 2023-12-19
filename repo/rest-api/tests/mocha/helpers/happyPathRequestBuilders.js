@@ -86,7 +86,8 @@ module.exports.editRequestsOnProperty = [
 		'en',
 		'random-description-' + utils.uniq()
 	),
-	( { propertyId } ) => rbf.newRemovePropertyLabelRequestBuilder( propertyId, 'en' )
+	( { propertyId } ) => rbf.newRemovePropertyLabelRequestBuilder( propertyId, 'en' ),
+	( { propertyId } ) => rbf.newRemovePropertyDescriptionRequestBuilder( propertyId, 'en' )
 
 ];
 
