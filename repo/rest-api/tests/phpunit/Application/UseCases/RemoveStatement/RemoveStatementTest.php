@@ -15,12 +15,14 @@ use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
-use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
+use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\Services\StatementRemover;
 use Wikibase\Repo\RestApi\Domain\Services\StatementWriteModelRetriever;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
+use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryStatementRepository;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\StatementReadModelHelper;
 
 /**
@@ -68,24 +70,22 @@ class RemoveStatementTest extends TestCase {
 			'$username' => null,
 		];
 
-		$this->statementRetriever->expects( $this->once() )
-			->method( 'getStatementWriteModel' )
-			->willReturn( $statement );
-
-		$this->statementRemover = $this->createMock( StatementRemover::class );
-		$this->statementRemover->expects( $this->once() )
-			->method( 'remove' )
-			->with(
-				$statementGuid,
-				$this->expectEquivalentMetadata(
-					$requestData['$editTags'],
-					$requestData['$isBot'],
-					$requestData['$comment'],
-					EditSummary::REMOVE_ACTION
-				)
-			);
+		$statementsRepo = new InMemoryStatementRepository();
+		$statementsRepo->addStatement( $statement );
+		$this->statementRetriever = $statementsRepo;
+		$this->statementRemover = $statementsRepo;
 
 		$this->newUseCase()->execute( $this->newUseCaseRequest( $requestData ) );
+
+		$this->assertNull( $statementsRepo->getStatementWriteModel( $statementGuid ) );
+		$this->assertEquals(
+			new EditMetadata(
+				$requestData['$editTags'],
+				$requestData['$isBot'],
+				StatementEditSummary::newRemoveSummary( $requestData['$comment'], $statement )
+			),
+			$statementsRepo->getLatestRevisionEditMetadata( $statementGuid )
+		);
 	}
 
 	public function testRemoveStatement_invalidRequest(): void {
