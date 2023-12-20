@@ -165,12 +165,15 @@
 				&& !mw.cookie.get( 'wikibase-no-anonymouseditwarning' )
 			) {
 				var currentPage = mw.config.get( 'wgPageName' );
-				var message = mw.message(
-					'wikibase-anonymouseditwarning',
-					mw.util.getUrl( 'Special:UserLogin', { returnto: currentPage } ),
-					mw.util.getUrl( 'Special:CreateAccount', { returnto: currentPage } )
-				);
-				mw.notify( message, { autoHide: false, type: 'warn', tag: 'wikibase-anonymouseditwarning' } );
+				var userLoginUrl = mw.util.getUrl( 'Special:UserLogin', { returnto: currentPage } );
+				var createAccountUrl = mw.util.getUrl( 'Special:CreateAccount', { returnto: currentPage } );
+				var message;
+				if ( config.tempUserEnabled ) {
+					message = mw.message( 'wikibase-anonymouseditnotificationtempuser', userLoginUrl, createAccountUrl );
+				} else {
+					message = mw.message( 'wikibase-anonymouseditwarning', userLoginUrl, createAccountUrl );
+				}
+				mw.notify( message, { autoHide: false, type: 'warn', tag: 'wikibase-anonymouseditpopup' } );
 			}
 		} );
 	}
