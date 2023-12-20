@@ -2,10 +2,10 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\PatchItemDescriptions;
 
-use PHPUnit\Framework\Constraint\Callback;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\Item as DataModelItem;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
@@ -21,21 +21,18 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
-use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\DescriptionsEditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\User;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Item;
-use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
-use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemDescriptionsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
+use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryItemRepository;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptions
@@ -78,7 +75,6 @@ class PatchItemDescriptionsTest extends TestCase {
 
 	public function testHappyPath(): void {
 		$itemId = new ItemId( 'Q42' );
-		$item = NewItem::withId( $itemId )->build();
 
 		$newDescriptionText = 'a description of an Item';
 		$newDescriptionLanguage = 'en';
@@ -86,29 +82,14 @@ class PatchItemDescriptionsTest extends TestCase {
 		$this->descriptionsRetriever = $this->createStub( ItemDescriptionsRetriever::class );
 		$this->descriptionsRetriever->method( 'getDescriptions' )->willReturn( new Descriptions() );
 
-		$this->itemRetriever = $this->createStub( ItemRetriever::class );
-		$this->itemRetriever->method( 'getItem' )->willReturn( $item );
-
-		$revisionId = 657;
-		$lastModified = '20221212040506';
 		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
 		$comment = 'descriptions patched by ' . __method__;
 
-		$updatedItem = new Item(
-			new Labels(),
-			new Descriptions( new Description( $newDescriptionLanguage, $newDescriptionText ) ),
-			new Aliases(),
-			new StatementList()
-		);
-		$this->itemUpdater = $this->createMock( ItemUpdater::class );
-		$this->itemUpdater->expects( $this->once() )
-			->method( 'update' )
-			->with(
-				$this->expectItemWithDescription( $newDescriptionLanguage, $newDescriptionText ),
-				$this->expectEquivalentMetadata( $editTags, $isBot, $comment, EditSummary::PATCH_ACTION )
-			)
-			->willReturn( new ItemRevision( $updatedItem, $lastModified, $revisionId ) );
+		$itemRepo = new InMemoryItemRepository();
+		$itemRepo->addItem( new Item( $itemId ) );
+		$this->itemRetriever = $itemRepo;
+		$this->itemUpdater = $itemRepo;
 
 		$response = $this->newUseCase()->execute(
 			new PatchItemDescriptionsRequest(
@@ -121,7 +102,24 @@ class PatchItemDescriptionsTest extends TestCase {
 			)
 		);
 
-		$this->assertSame( $response->getDescriptions(), $updatedItem->getDescriptions() );
+		$this->assertSame( $itemRepo->getLatestRevisionId( $itemId ), $response->getRevisionId() );
+		$this->assertSame( $itemRepo->getLatestRevisionTimestamp( $itemId ), $response->getLastModified() );
+		$this->assertEquals(
+			$response->getDescriptions(),
+			new Descriptions( new Description( $newDescriptionLanguage, $newDescriptionText ) )
+		);
+		$this->assertEquals(
+			new EditMetadata(
+				$editTags,
+				$isBot,
+				DescriptionsEditSummary::newPatchSummary(
+					$comment,
+					new TermList(),
+					new TermList( [ new Term( $newDescriptionLanguage, $newDescriptionText ) ] )
+				)
+			),
+			$itemRepo->getLatestRevisionEditMetadata( $itemId )
+		);
 	}
 
 	public function testInvalidRequest_throwsException(): void {
@@ -240,12 +238,6 @@ class PatchItemDescriptionsTest extends TestCase {
 
 	private function newUseCaseRequest( string $itemId, array $patch ): PatchItemDescriptionsRequest {
 		return new PatchItemDescriptionsRequest( $itemId, $patch, [], false, null, null );
-	}
-
-	private function expectItemWithDescription( string $languageCode, string $descriptionText ): Callback {
-		return $this->callback(
-			fn( DataModelItem $item ) => $item->getDescriptions()->getByLanguage( $languageCode )->getText() === $descriptionText
-		);
 	}
 
 }
