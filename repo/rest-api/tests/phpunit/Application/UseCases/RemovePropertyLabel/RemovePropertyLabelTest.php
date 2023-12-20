@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\RemovePropertyLabel;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\DataModel\Entity\Property as DataModelProperty;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
@@ -15,12 +15,13 @@ use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyLabel\RemovePropert
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyLabel\RemovePropertyLabelValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
-use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
+use Wikibase\Repo\RestApi\Domain\Model\LabelEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
-use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
+use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryPropertyRepository;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyLabel\RemovePropertyLabel
@@ -31,8 +32,6 @@ use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
  *
  */
 class RemovePropertyLabelTest extends TestCase {
-
-	use EditMetadataHelper;
 
 	private RemovePropertyLabelValidator $requestValidator;
 	private AssertPropertyExists $assertPropertyExists;
@@ -51,38 +50,38 @@ class RemovePropertyLabelTest extends TestCase {
 	}
 
 	public function testHappyPath(): void {
-		$propertyId = 'P1';
+		$propertyId = new NumericPropertyId( 'P1' );
 		$languageCode = 'en';
 		$labelToRemove = new Term( $languageCode, 'Label to remove' );
 		$labelToKeep = new Term( 'fr', 'Label to keep' );
-		$propertyToUpdate = new DataModelProperty(
-			new NumericPropertyId( $propertyId ),
+		$propertyToUpdate = new Property(
+			$propertyId,
 			new Fingerprint( new TermList( [ $labelToRemove, $labelToKeep ] ) ),
 			'string'
 		);
-		$updatedProperty = new DataModelProperty(
-			new NumericPropertyId( $propertyId ),
-			new Fingerprint( new TermList( [ $labelToKeep ] ) ),
-			'string'
-		);
 		$tags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
+		$isBot = false;
+		$comment = 'test';
 
-		$this->propertyRetriever = $this->createMock( PropertyRetriever::class );
-		$this->propertyRetriever->expects( $this->once() )
-			->method( 'getProperty' )
-			->with( $propertyId )
-			->willReturn( $propertyToUpdate );
+		$propertyRepo = new InMemoryPropertyRepository();
+		$propertyRepo->addProperty( $propertyToUpdate );
+		$this->propertyRetriever = $propertyRepo;
+		$this->propertyUpdater = $propertyRepo;
 
-		$this->propertyUpdater = $this->createMock( PropertyUpdater::class );
-		$this->propertyUpdater->expects( $this->once() )
-			->method( 'update' )
-			->with(
-				$updatedProperty,
-				$this->expectEquivalentMetadata( $tags, false, 'test', EditSummary::REMOVE_ACTION )
-			);
-
-		$request = new RemovePropertyLabelRequest( $propertyId, $languageCode, $tags, false, 'test', null );
+		$request = new RemovePropertyLabelRequest( "$propertyId", $languageCode, $tags, $isBot, $comment, null );
 		$this->newUseCase()->execute( $request );
+
+		$this->assertEquals(
+			$propertyRepo->getProperty( $propertyId )->getLabels(),
+			new TermList( [ $labelToKeep ] )
+		);
+		$this->assertEquals(
+			new EditMetadata( $tags, $isBot, LabelEditSummary::newRemoveSummary(
+				$comment,
+				$labelToRemove
+			) ),
+			$propertyRepo->getLatestRevisionEditMetadata( $propertyId )
+		);
 	}
 
 	public function testInvalidRequest_throwsException(): void {
@@ -118,7 +117,7 @@ class RemovePropertyLabelTest extends TestCase {
 
 		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
 		$this->propertyRetriever->method( 'getProperty' )->willReturn(
-			new DataModelProperty( $propertyId, new Fingerprint(), 'string' )
+			new Property( $propertyId, new Fingerprint(), 'string' )
 		);
 
 		try {
