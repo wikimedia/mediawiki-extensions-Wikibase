@@ -21,9 +21,7 @@ use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\Services\StatementRemover;
 use Wikibase\Repo\RestApi\Domain\Services\StatementWriteModelRetriever;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
-use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryStatementRepository;
-use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\StatementReadModelHelper;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatement
@@ -34,9 +32,6 @@ use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\StatementReadModelHelp
  *
  */
 class RemoveStatementTest extends TestCase {
-
-	use EditMetadataHelper;
-	use StatementReadModelHelper;
 
 	private AssertStatementSubjectExists $assertStatementSubjectExists;
 	private StatementWriteModelRetriever $statementRetriever;

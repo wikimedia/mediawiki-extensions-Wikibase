@@ -20,7 +20,6 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
-use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryItemRepository;
 
 /**
@@ -31,8 +30,6 @@ use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryItemRepository
  * @license GPL-2.0-or-later
  */
 class AddItemAliasesInLanguageTest extends TestCase {
-
-	use EditMetadataHelper;
 
 	private ItemRetriever $itemRetriever;
 	private AssertItemExists $assertItemExists;
