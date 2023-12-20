@@ -4,7 +4,8 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\PatchPropertyLabels;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\DataModel\Entity\Property as DataModelProperty;
+use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
@@ -19,21 +20,17 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelValidator;
+use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\User;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Property;
-use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyRevision;
-use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyLabelsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
-use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
+use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryPropertyRepository;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchPropertyLabels
@@ -43,8 +40,6 @@ use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
  * @license GPL-2.0-or-later
  */
 class PatchPropertyLabelsTest extends TestCase {
-
-	use EditMetadataHelper;
 
 	private PropertyLabelsRetriever $labelsRetriever;
 	private LabelsSerializer $labelsSerializer;
@@ -77,39 +72,18 @@ class PatchPropertyLabelsTest extends TestCase {
 
 	public function testHappyPath(): void {
 		$propertyId = new NumericPropertyId( 'P31' );
-		$property = new DataModelProperty( $propertyId, null, 'string' );
 
 		$newLabelText = 'nature de l’élément';
 		$newLabelLanguage = 'fr';
-
-		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
-		$this->propertyRetriever->method( 'getProperty' )->willReturn( $property );
-
-		$revisionId = 657;
-		$lastModified = '20221212040506';
 
 		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
 		$comment = 'labels replaced by ' . __method__;
 
-		$updatedProperty = new Property(
-			new Labels( new Label( $newLabelLanguage, $newLabelText ) ),
-			new Descriptions(),
-			new Aliases(),
-			new StatementList()
-		);
-
-		$this->propertyUpdater = $this->createMock( PropertyUpdater::class );
-		$this->propertyUpdater->expects( $this->once() )
-			->method( 'update' )
-			->with(
-				$this->callback(
-					fn( DataModelProperty $property ) => $property->getLabels()->getByLanguage( $newLabelLanguage )->getText()
-														 === $newLabelText
-				),
-				$this->expectEquivalentMetadata( $editTags, $isBot, $comment, LabelsEditSummary::PATCH_ACTION )
-			)
-			->willReturn( new PropertyRevision( $updatedProperty, $lastModified, $revisionId ) );
+		$propertyRepo = new InMemoryPropertyRepository();
+		$propertyRepo->addProperty( new Property( $propertyId, null, 'string' ) );
+		$this->propertyRetriever = $propertyRepo;
+		$this->propertyUpdater = $propertyRepo;
 
 		$response = $this->newUseCase()->execute(
 			new PatchPropertyLabelsRequest(
@@ -128,9 +102,24 @@ class PatchPropertyLabelsTest extends TestCase {
 			)
 		);
 
-		$this->assertSame( $response->getLabels(), $updatedProperty->getLabels() );
-		$this->assertSame( $lastModified, $response->getLastModified() );
-		$this->assertSame( $revisionId, $response->getRevisionId() );
+		$this->assertSame( $propertyRepo->getLatestRevisionId( $propertyId ), $response->getRevisionId() );
+		$this->assertSame( $propertyRepo->getLatestRevisionTimestamp( $propertyId ), $response->getLastModified() );
+		$this->assertEquals(
+			$response->getLabels(),
+			new Labels( new Label( $newLabelLanguage, $newLabelText ) )
+		);
+		$this->assertEquals(
+			new EditMetadata(
+				$editTags,
+				$isBot,
+				LabelsEditSummary::newPatchSummary(
+					$comment,
+					new TermList(),
+					new TermList( [ new Term( $newLabelLanguage, $newLabelText ) ] )
+				)
+			),
+			$propertyRepo->getLatestRevisionEditMetadata( $propertyId )
+		);
 	}
 
 	public function testGivenInvalidRequest_throws(): void {
@@ -197,7 +186,7 @@ class PatchPropertyLabelsTest extends TestCase {
 	}
 
 	public function testGivenPatchedLabelsInvalid_throwsUseCaseError(): void {
-		$property = new DataModelProperty( new NumericPropertyId( 'P31' ), null, 'string' );
+		$property = new Property( new NumericPropertyId( 'P31' ), null, 'string' );
 
 		$patchResult = [ 'ar' => '' ];
 
