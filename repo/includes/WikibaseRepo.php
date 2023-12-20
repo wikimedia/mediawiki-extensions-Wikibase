@@ -1090,4 +1090,11 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.ItemDisambiguationFactory' );
 	}
 
+	public static function getAnonymousEditWarningBuilder(
+		ContainerInterface $services = null
+	): AnonymousEditWarningBuilder {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.AnonymousEditWarningBuilder' );
+	}
+
 }

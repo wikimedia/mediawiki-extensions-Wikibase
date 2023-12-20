@@ -28,6 +28,8 @@ use Wikibase\Repo\Localizer\ExceptionLocalizer;
  */
 class SpecialMergeItems extends SpecialWikibasePage {
 
+	private AnonymousEditWarningBuilder $anonymousEditWarningBuilder;
+
 	/**
 	 * @var EntityIdParser
 	 */
@@ -55,6 +57,7 @@ class SpecialMergeItems extends SpecialWikibasePage {
 	private bool $isMobileView;
 
 	public function __construct(
+		AnonymousEditWarningBuilder $anonymousEditWarningBuilder,
 		EntityIdParser $idParser,
 		EntityTitleLookup $titleLookup,
 		ExceptionLocalizer $exceptionLocalizer,
@@ -64,6 +67,7 @@ class SpecialMergeItems extends SpecialWikibasePage {
 	) {
 		parent::__construct( 'MergeItems', 'item-merge' );
 
+		$this->anonymousEditWarningBuilder = $anonymousEditWarningBuilder;
 		$this->idParser = $idParser;
 		$this->exceptionLocalizer = $exceptionLocalizer;
 		$this->interactor = $interactor;
@@ -220,13 +224,10 @@ class SpecialMergeItems extends SpecialWikibasePage {
 
 		$pre = '';
 		if ( !$this->getUser()->isRegistered() ) {
-			$anonymousEditWarningBuilder = new AnonymousEditWarningBuilder(
-				$this->getSpecialPageFactory()
-			);
 			$pre = Html::rawElement(
 				'p',
 				[ 'class' => 'warning' ],
-				$anonymousEditWarningBuilder->buildAnonymousEditWarningHTML( $this->getFullTitle()->getPrefixedText() )
+				$this->anonymousEditWarningBuilder->buildAnonymousEditWarningHTML( $this->getFullTitle()->getPrefixedText() )
 			);
 		}
 

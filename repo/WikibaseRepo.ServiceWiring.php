@@ -149,6 +149,7 @@ use Wikibase\Lib\Units\UnitConverter;
 use Wikibase\Lib\Units\UnitStorage;
 use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Lib\WikibaseSettings;
+use Wikibase\Repo\AnonymousEditWarningBuilder;
 use Wikibase\Repo\Api\ApiHelperFactory;
 use Wikibase\Repo\Api\CombinedEntitySearchHelper;
 use Wikibase\Repo\Api\EntitySearchHelper;
@@ -283,6 +284,10 @@ return [
 		}
 
 		return new DispatchingSerializer( $serializers );
+	},
+
+	'WikibaseRepo.AnonymousEditWarningBuilder' => function ( MediaWikiServices $services ): AnonymousEditWarningBuilder {
+		return new AnonymousEditWarningBuilder( $services->getSpecialPageFactory() );
 	},
 
 	'WikibaseRepo.ApiHelperFactory' => function ( MediaWikiServices $services ): ApiHelperFactory {

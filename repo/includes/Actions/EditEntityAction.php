@@ -10,7 +10,6 @@ use MediaWiki\Permissions\PermissionManager;
 use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
-use MediaWiki\SpecialPage\SpecialPageFactory;
 use OOUI\ButtonInputWidget;
 use OOUI\ButtonWidget;
 use OOUI\FieldLayout;
@@ -47,7 +46,7 @@ class EditEntityAction extends ViewEntityAction {
 		'services' => [
 			'PermissionManager',
 			'RevisionLookup',
-			'SpecialPageFactory',
+			'WikibaseRepo.AnonymousEditWarningBuilder',
 			'WikibaseRepo.EntityDiffVisualizerFactory',
 		],
 	];
@@ -59,14 +58,14 @@ class EditEntityAction extends ViewEntityAction {
 	 * @var BasicEntityDiffVisualizer
 	 */
 	private $entityDiffVisualizer;
-	private SpecialPageFactory $specialPageFactory;
+	private AnonymousEditWarningBuilder $anonymousEditWarningBuilder;
 
 	public function __construct(
 		Article $article,
 		IContextSource $context,
 		PermissionManager $permissionManager,
 		RevisionLookup $revisionLookup,
-		SpecialPageFactory $specialPageFactory,
+		AnonymousEditWarningBuilder $anonymousEditWarningBuilder,
 		EntityDiffVisualizerFactory $entityDiffVisualizerFactory
 	) {
 		parent::__construct( $article, $context );
@@ -77,7 +76,7 @@ class EditEntityAction extends ViewEntityAction {
 			$entityDiffVisualizerFactory,
 			$this->getContext()
 		);
-		$this->specialPageFactory = $specialPageFactory;
+		$this->anonymousEditWarningBuilder = $anonymousEditWarningBuilder;
 	}
 
 	/**
@@ -321,13 +320,10 @@ class EditEntityAction extends ViewEntityAction {
 		}
 
 		if ( !$this->getUser()->isRegistered() ) {
-			$anonymousEditWarningBuilder = new AnonymousEditWarningBuilder(
-				$this->specialPageFactory
-			);
 			$this->getOutput()->addHTML( Html::rawElement(
 				'p',
 				[ 'class' => 'warning' ],
-				$anonymousEditWarningBuilder->buildAnonymousEditWarningHTML( $this->getTitle()->getPrefixedText() ),
+				$this->anonymousEditWarningBuilder->buildAnonymousEditWarningHTML( $this->getTitle()->getPrefixedText() ),
 			) );
 		}
 

@@ -37,6 +37,8 @@ class SpecialNewProperty extends SpecialNewEntity {
 	public const FIELD_DESCRIPTION = 'description';
 	public const FIELD_ALIASES = 'aliases';
 
+	private AnonymousEditWarningBuilder $anonymousEditWarningBuilder;
+
 	/** @var DataTypeFactory */
 	private $dataTypeFactory;
 
@@ -58,6 +60,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 		SummaryFormatter $summaryFormatter,
 		EntityTitleLookup $entityTitleLookup,
 		MediaWikiEditEntityFactory $editEntityFactory,
+		AnonymousEditWarningBuilder $anonymousEditWarningBuilder,
 		DataTypeFactory $dataTypeFactory,
 		TermValidatorFactory $termValidatorFactory,
 		TermsCollisionDetector $termsCollisionDetector,
@@ -76,6 +79,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 			$isMobileView
 		);
 
+		$this->anonymousEditWarningBuilder = $anonymousEditWarningBuilder;
 		$this->dataTypeFactory = $dataTypeFactory;
 		$this->termValidatorFactory = $termValidatorFactory;
 		$this->termsCollisionDetector = $termsCollisionDetector;
@@ -83,6 +87,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 	}
 
 	public static function factory(
+		AnonymousEditWarningBuilder $anonymousEditWarningBuilder,
 		DataTypeFactory $dataTypeFactory,
 		MediaWikiEditEntityFactory $editEntityFactory,
 		EntityNamespaceLookup $entityNamespaceLookup,
@@ -107,6 +112,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 			$summaryFormatter,
 			$entityTitleLookup,
 			$editEntityFactory,
+			$anonymousEditWarningBuilder,
 			$dataTypeFactory,
 			$termValidatorFactory,
 			$propertyTermsCollisionDetector,
@@ -224,11 +230,8 @@ class SpecialNewProperty extends SpecialNewEntity {
 	 */
 	protected function getWarnings() {
 		if ( !$this->getUser()->isRegistered() ) {
-			$anonymousEditWarningBuilder = new AnonymousEditWarningBuilder(
-				$this->getSpecialPageFactory()
-			);
 			return [
-				$anonymousEditWarningBuilder->buildAnonymousEditWarningHTML( $this->getFullTitle()->getPrefixedText() ),
+				$this->anonymousEditWarningBuilder->buildAnonymousEditWarningHTML( $this->getFullTitle()->getPrefixedText() ),
 			];
 		}
 

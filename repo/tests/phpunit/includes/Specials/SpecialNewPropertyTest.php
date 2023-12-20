@@ -55,6 +55,7 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 			WikibaseRepo::getSummaryFormatter(),
 			WikibaseRepo::getEntityTitleLookup(),
 			WikibaseRepo::getEditEntityFactory(),
+			WikibaseRepo::getAnonymousEditWarningBuilder(),
 			WikibaseRepo::getDataTypeFactory(),
 			$this->getTermValidatorFactoryMock(),
 			WikibaseRepo::getPropertyTermsCollisionDetector(),

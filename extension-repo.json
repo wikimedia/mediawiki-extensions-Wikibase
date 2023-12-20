@@ -335,6 +335,7 @@
 			"class": "Wikibase\\Repo\\Specials\\SpecialNewItem",
 			"factory": "Wikibase\\Repo\\Specials\\SpecialNewItem::factory",
 			"services": [
+				"WikibaseRepo.AnonymousEditWarningBuilder",
 				"WikibaseRepo.EditEntityFactory",
 				"WikibaseRepo.EntityNamespaceLookup",
 				"WikibaseRepo.EntityTitleLookup",
@@ -351,6 +352,7 @@
 			"class": "Wikibase\\Repo\\Specials\\SpecialNewProperty",
 			"factory": "Wikibase\\Repo\\Specials\\SpecialNewProperty::factory",
 			"services": [
+				"WikibaseRepo.AnonymousEditWarningBuilder",
 				"WikibaseRepo.DataTypeFactory",
 				"WikibaseRepo.EditEntityFactory",
 				"WikibaseRepo.EntityNamespaceLookup",
@@ -400,6 +402,7 @@
 			"factory": "Wikibase\\Repo\\Specials\\SpecialSetLabel::factory",
 			"services": [
 				"LanguageNameUtils",
+				"WikibaseRepo.AnonymousEditWarningBuilder",
 				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EditEntityFactory",
 				"WikibaseRepo.EntityPermissionChecker",
@@ -414,6 +417,7 @@
 			"factory": "Wikibase\\Repo\\Specials\\SpecialSetDescription::factory",
 			"services": [
 				"LanguageNameUtils",
+				"WikibaseRepo.AnonymousEditWarningBuilder",
 				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EditEntityFactory",
 				"WikibaseRepo.EntityPermissionChecker",
@@ -428,6 +432,7 @@
 			"factory": "Wikibase\\Repo\\Specials\\SpecialSetAliases::factory",
 			"services": [
 				"LanguageNameUtils",
+				"WikibaseRepo.AnonymousEditWarningBuilder",
 				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EditEntityFactory",
 				"WikibaseRepo.EntityPermissionChecker",
@@ -443,6 +448,7 @@
 			"services": [
 				"LanguageNameUtils",
 				"MainConfig",
+				"WikibaseRepo.AnonymousEditWarningBuilder",
 				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EditEntityFactory",
 				"WikibaseRepo.EntityPermissionChecker",
@@ -456,6 +462,7 @@
 			"class": "Wikibase\\Repo\\Specials\\SpecialSetSiteLink",
 			"factory": "Wikibase\\Repo\\Specials\\SpecialSetSiteLink::factory",
 			"services": [
+				"WikibaseRepo.AnonymousEditWarningBuilder",
 				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EditEntityFactory",
 				"WikibaseRepo.EntityTitleLookup",
@@ -512,6 +519,7 @@
 		"MergeItems": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialMergeItems",
 			"services": [
+				"WikibaseRepo.AnonymousEditWarningBuilder",
 				"WikibaseRepo.EntityIdParser",
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.ExceptionLocalizer",
@@ -523,6 +531,7 @@
 		"RedirectEntity": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialRedirectEntity",
 			"services": [
+				"WikibaseRepo.AnonymousEditWarningBuilder",
 				"WikibaseRepo.EntityIdParser",
 				"WikibaseRepo.ExceptionLocalizer",
 				"WikibaseRepo.ItemRedirectCreationInteractor",

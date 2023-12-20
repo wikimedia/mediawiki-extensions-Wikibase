@@ -22,6 +22,8 @@ use Wikibase\Repo\Localizer\ExceptionLocalizer;
  */
 class SpecialRedirectEntity extends SpecialWikibasePage {
 
+	private AnonymousEditWarningBuilder $anonymousEditWarningBuilder;
+
 	/**
 	 * @var EntityIdParser
 	 */
@@ -43,6 +45,7 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 	private $tokenCheck;
 
 	public function __construct(
+		AnonymousEditWarningBuilder $anonymousEditWarningBuilder,
 		EntityIdParser $idParser,
 		ExceptionLocalizer $exceptionLocalizer,
 		ItemRedirectCreationInteractor $interactor,
@@ -50,6 +53,7 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 	) {
 		parent::__construct( 'RedirectEntity' );
 
+		$this->anonymousEditWarningBuilder = $anonymousEditWarningBuilder;
 		$this->idParser = $idParser;
 		$this->exceptionLocalizer = $exceptionLocalizer;
 		$this->interactor = $interactor;
@@ -144,13 +148,10 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 	protected function createForm() {
 		$pre = '';
 		if ( !$this->getUser()->isRegistered() ) {
-			$anonymousEditWarningBuilder = new AnonymousEditWarningBuilder(
-				$this->getSpecialPageFactory()
-			);
 			$pre = Html::rawElement(
 				'p',
 				[ 'class' => 'warning' ],
-				$anonymousEditWarningBuilder->buildAnonymousEditWarningHTML( $this->getFullTitle()->getPrefixedText() )
+				$this->anonymousEditWarningBuilder->buildAnonymousEditWarningHTML( $this->getFullTitle()->getPrefixedText() )
 			);
 		}
 

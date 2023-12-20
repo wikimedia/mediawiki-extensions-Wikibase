@@ -12,6 +12,7 @@ use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Summary;
 use Wikibase\Lib\UserInputException;
+use Wikibase\Repo\AnonymousEditWarningBuilder;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
@@ -72,6 +73,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		SummaryFormatter $summaryFormatter,
 		EntityTitleLookup $entityTitleLookup,
 		MediaWikiEditEntityFactory $editEntityFactory,
+		AnonymousEditWarningBuilder $anonymousEditWarningBuilder,
 		EntityPermissionChecker $permissionChecker,
 		ContentLanguages $termsLanguages,
 		LanguageNameUtils $languageNameUtils
@@ -82,7 +84,8 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 			$copyrightView,
 			$summaryFormatter,
 			$entityTitleLookup,
-			$editEntityFactory
+			$editEntityFactory,
+			$anonymousEditWarningBuilder
 		);
 
 		$this->termChangeOpFactory = $changeOpFactoryProvider->getFingerprintChangeOpFactory();

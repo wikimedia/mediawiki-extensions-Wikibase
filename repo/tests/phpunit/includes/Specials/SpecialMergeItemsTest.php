@@ -147,6 +147,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 		$titleLookup = $this->getEntityTitleLookup();
 		$editFilterHookRunner = $this->getMockEditFilterHookRunner();
 		$specialPage = new SpecialMergeItems(
+			WikibaseRepo::getAnonymousEditWarningBuilder(),
 			WikibaseRepo::getEntityIdParser(),
 			$titleLookup,
 			$exceptionLocalizer,

@@ -15,6 +15,7 @@ use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Summary;
+use Wikibase\Repo\AnonymousEditWarningBuilder;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
@@ -87,6 +88,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @param SummaryFormatter $summaryFormatter
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param MediaWikiEditEntityFactory $editEntityFactory
+	 * @param AnonymousEditWarningBuilder $anonymousEditWarningBuilder
 	 * @param SiteLinkPageNormalizer $siteLinkPageNormalizer
 	 * @param SiteLinkTargetProvider $siteLinkTargetProvider
 	 * @param string[] $siteLinkGroups
@@ -100,6 +102,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		SummaryFormatter $summaryFormatter,
 		EntityTitleLookup $entityTitleLookup,
 		MediaWikiEditEntityFactory $editEntityFactory,
+		AnonymousEditWarningBuilder $anonymousEditWarningBuilder,
 		SiteLinkPageNormalizer $siteLinkPageNormalizer,
 		SiteLinkTargetProvider $siteLinkTargetProvider,
 		array $siteLinkGroups,
@@ -113,7 +116,8 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			$copyrightView,
 			$summaryFormatter,
 			$entityTitleLookup,
-			$editEntityFactory
+			$editEntityFactory,
+			$anonymousEditWarningBuilder
 		);
 
 		$this->siteLinkPageNormalizer = $siteLinkPageNormalizer;
@@ -125,6 +129,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	}
 
 	public static function factory(
+		AnonymousEditWarningBuilder $anonymousEditWarningBuilder,
 		ChangeOpFactoryProvider $changeOpFactoryProvider,
 		MediaWikiEditEntityFactory $editEntityFactory,
 		EntityTitleLookup $entityTitleLookup,
@@ -148,6 +153,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			$summaryFormatter,
 			$entityTitleLookup,
 			$editEntityFactory,
+			$anonymousEditWarningBuilder,
 			$siteLinkPageNormalizer,
 			$siteLinkTargetProvider,
 			$repoSettings->getSetting( 'siteLinkGroups' ),
