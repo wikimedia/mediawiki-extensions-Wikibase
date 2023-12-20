@@ -32,7 +32,7 @@
 	"wikibase-statementgrouplistview-add-tooltip": "Tambah pernyataan baru",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Dalem laèn-laèn basa",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Atur",
-	"wikibase-setting-entitytermsview-showEntitytermslistview": "Kasi unjuk ènclèkan, poyokan, èn jabaran di semua gua punya basa pas muat halaman",
+	"wikibase-setting-entitytermsview-showEntitytermslistview": "Kasi unjuk ènclèkan, poyokan, èn jabaran di semua gua punya basa pas munggah halaman",
 	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Basa perorangan tambahan deri basa telampangan pemaké bisa disetèl paké nahwu [[mw:Special:MyLanguage/Extension:Babel|ata-été Babel]] di halaman pemaké.",
 	"wikibase-entitytermsforlanguagelistview-aliases": "Bekèn juga' sebagé",
 	"wikibase-entitytermsforlanguagelistview-description": "Jabaran",
