@@ -20,13 +20,12 @@ use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatement
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
-use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\User;
-use Wikibase\Repo\RestApi\Domain\ReadModel\StatementRevision;
 use Wikibase\Repo\RestApi\Domain\Services\StatementUpdater;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
-use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
+use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryStatementRepository;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatement
@@ -36,8 +35,6 @@ use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
  * @license GPL-2.0-or-later
  */
 class ReplaceStatementTest extends TestCase {
-
-	use EditMetadataHelper;
 
 	private ReplaceStatementValidator $replaceStatementValidator;
 	private AssertStatementSubjectExists $assertStatementSubjectExists;
@@ -65,22 +62,17 @@ class ReplaceStatementTest extends TestCase {
 				'type' => 'somevalue',
 			],
 		];
-		$newStatementWriteModel = NewStatement::someValueFor( 'P123' )->withGuid( $statementId )->build();
-		$modificationRevisionId = 322;
-		$modificationTimestamp = '20221111070707';
 		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
 		$comment = 'statement replaced by ' . __method__;
 
-		$expectedStatementReadModel = NewStatementReadModel::someValueFor( 'P123' )->withGuid( $statementId )->build();
-		$this->statementUpdater = $this->createMock( StatementUpdater::class );
-		$this->statementUpdater->expects( $this->once() )
-			->method( 'update' )
-			->with(
-				$newStatementWriteModel,
-				$this->expectEquivalentMetadata( $editTags, $isBot, $comment, EditSummary::REPLACE_ACTION )
-			)
-			->willReturn( new StatementRevision( $expectedStatementReadModel, $modificationTimestamp, $modificationRevisionId ) );
+		[ $expectedStatementReadModel, $expectedStatementWriteModel ] = NewStatementReadModel::someValueFor( 'P123' )
+			->withGuid( $statementId )
+			->buildReadAndWriteModel();
+
+		$statementsRepo = new InMemoryStatementRepository();
+		$statementsRepo->addStatement( NewStatement::noValueFor( 'P123' )->withGuid( $statementId )->build() );
+		$this->statementUpdater = $statementsRepo;
 
 		$response = $this->newUseCase()->execute(
 			$this->newUseCaseRequest( [
@@ -93,9 +85,16 @@ class ReplaceStatementTest extends TestCase {
 		);
 
 		$this->assertInstanceOf( ReplaceStatementResponse::class, $response );
-		$this->assertSame( $expectedStatementReadModel, $response->getStatement() );
-		$this->assertSame( $modificationRevisionId, $response->getRevisionId() );
-		$this->assertSame( $modificationTimestamp, $response->getLastModified() );
+		$this->assertEquals( $expectedStatementReadModel, $response->getStatement() );
+		$this->assertSame( $statementsRepo->getLatestRevisionId( $statementId ), $response->getRevisionId() );
+		$this->assertSame( $statementsRepo->getLatestRevisionTimestamp( $statementId ), $response->getLastModified() );
+		$this->assertEquals(
+			new EditMetadata( $editTags, $isBot, StatementEditSummary::newReplaceSummary(
+				$comment,
+				$expectedStatementWriteModel
+			) ),
+			$statementsRepo->getLatestRevisionEditMetadata( $statementId )
+		);
 	}
 
 	public function testGivenInvalidUseCaseRequest_throwsUseCaseError(): void {
@@ -175,7 +174,7 @@ class ReplaceStatementTest extends TestCase {
 		try {
 			$this->newUseCase()->execute(
 				$this->newUseCaseRequest( [
-					'$statementId' => (string)$originalStatementId,
+					'$statementId' => $originalStatementId,
 					'$statement' => [
 						'id' => "$changedStatementID",
 						'property' => [ 'id' => TestValidatingRequestDeserializer::EXISTING_STRING_PROPERTY ],
