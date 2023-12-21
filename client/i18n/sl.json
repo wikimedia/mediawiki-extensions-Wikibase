@@ -133,7 +133,7 @@
 	"wikibase-client-data-bridge-edit-decision-heading": "Prosimo, izberite vrsto urejanja, ki ste ga opravili:",
 	"wikibase-client-data-bridge-edit-decision-replace-label": "<strong>Popravil_a sem</strong> napačno vrednost",
 	"wikibase-client-data-bridge-edit-decision-replace-description": "Prejšnja vrednost ni in nikoli ni bila pravilna.",
-	"wikibase-client-data-bridge-edit-decision-update-label": "<strong>Posodobil/a sem</strong> zastarelo vrednost",
+	"wikibase-client-data-bridge-edit-decision-update-label": "<strong>Posodobil_a sem</strong> zastarelo vrednost",
 	"wikibase-client-data-bridge-edit-decision-update-description": "Prejšnja vrednost je bila pravilna, zdaj pa je zastarela.",
 	"wikibase-client-data-bridge-references-heading": "Sklici",
 	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Niste prijavljeni",
