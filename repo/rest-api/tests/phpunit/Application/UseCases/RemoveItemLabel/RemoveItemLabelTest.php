@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\RemoveItemLabel;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
@@ -12,12 +13,13 @@ use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemLabel\RemoveItemLabelRe
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemLabel\RemoveItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
-use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
+use Wikibase\Repo\RestApi\Domain\Model\LabelEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
-use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
+use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryItemRepository;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\RemoveItemLabel\RemoveItemLabel
@@ -28,8 +30,6 @@ use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
  *
  */
 class RemoveItemLabelTest extends TestCase {
-
-	use EditMetadataHelper;
 
 	private RemoveItemLabelValidator $validator;
 	private AssertItemExists $assertItemExists;
@@ -51,21 +51,26 @@ class RemoveItemLabelTest extends TestCase {
 		$languageCode = 'en';
 		$label = 'test label';
 		$tags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
+		$isBot = false;
+		$comment = 'test';
 
-		$this->itemRetriever = $this->createStub( ItemRetriever::class );
-		$this->itemRetriever->method( 'getItem' )
-			->willReturn( NewItem::withId( $itemId )->andLabel( $languageCode, $label )->build() );
+		$itemRepo = new InMemoryItemRepository();
+		$itemRepo->addItem( NewItem::withId( $itemId )->andLabel( $languageCode, $label )->build() );
+		$this->itemRetriever = $itemRepo;
+		$this->itemUpdater = $itemRepo;
 
-		$this->itemUpdater = $this->createMock( ItemUpdater::class );
-		$this->itemUpdater->expects( $this->once() )
-			->method( 'update' )
-			->with(
-				NewItem::withId( $itemId )->build(),
-				$this->expectEquivalentMetadata( $tags, false, 'test', EditSummary::REMOVE_ACTION )
-			);
+		$this->newUseCase()->execute(
+			new RemoveItemLabelRequest( (string)$itemId, $languageCode, $tags, $isBot, $comment, null )
+		);
 
-		$request = new RemoveItemLabelRequest( (string)$itemId, $languageCode, $tags, false, 'test', null );
-		$this->newUseCase()->execute( $request );
+		$this->assertFalse( $itemRepo->getItem( $itemId )->getLabels()->hasTermForLanguage( $languageCode ) );
+		$this->assertEquals(
+			new EditMetadata( $tags, $isBot, LabelEditSummary::newRemoveSummary(
+				$comment,
+				new Term( $languageCode, $label )
+			) ),
+			$itemRepo->getLatestRevisionEditMetadata( $itemId )
+		);
 	}
 
 	public function testInvalidRequest_throwsException(): void {

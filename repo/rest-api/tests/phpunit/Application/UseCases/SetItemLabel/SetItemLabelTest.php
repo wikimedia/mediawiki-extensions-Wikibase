@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\SetItemLabel;
 
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\Item as DataModelItem;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
@@ -13,19 +13,14 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabelRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
-use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
+use Wikibase\Repo\RestApi\Domain\Model\LabelEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\User;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Item;
-use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
-use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
-use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
+use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryItemRepository;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel
@@ -35,8 +30,6 @@ use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
  * @license GPL-2.0-or-later
  */
 class SetItemLabelTest extends TestCase {
-
-	use EditMetadataHelper;
 
 	private SetItemLabelValidator $validator;
 	private AssertItemExists $assertItemExists;
@@ -55,66 +48,64 @@ class SetItemLabelTest extends TestCase {
 	}
 
 	public function testAddLabel(): void {
-		$itemId = 'Q123';
+		$itemId = new ItemId( 'Q123' );
 		$langCode = 'en';
 		$newLabelText = 'New label';
 		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
 		$comment = "{$this->getName()} Comment";
-		$revisionId = 657;
-		$lastModified = '20221212040506';
-		$item = NewItem::withId( $itemId )->build();
 
-		$this->itemRetriever = $this->createMock( ItemRetriever::class );
-		$this->itemRetriever->expects( $this->once() )->method( 'getItem' )->with( $itemId )->willReturn( $item );
+		$itemRepo = new InMemoryItemRepository();
+		$itemRepo->addItem( NewItem::withId( $itemId )->build() );
+		$this->itemRetriever = $itemRepo;
+		$this->itemUpdater = $itemRepo;
 
-		$updatedItem = $this->newItemWithLabels( new Labels( new Label( $langCode, $newLabelText ) ) );
-		$this->itemUpdater = $this->createMock( ItemUpdater::class );
-		$this->itemUpdater->expects( $this->once() )->method( 'update' )
-			->with(
-				$this->callback( fn( DataModelItem $item ) => $item->getLabels()->toTextArray() === [ $langCode => $newLabelText ] ),
-				$this->expectEquivalentMetadata( $editTags, $isBot, $comment, EditSummary::ADD_ACTION )
-			)
-			->willReturn( new ItemRevision( $updatedItem, $lastModified, $revisionId ) );
-
-		$request = new SetItemLabelRequest( $itemId, $langCode, $newLabelText, $editTags, $isBot, $comment, null );
-		$response = $this->newUseCase()->execute( $request );
+		$response = $this->newUseCase()->execute(
+			new SetItemLabelRequest( "$itemId", $langCode, $newLabelText, $editTags, $isBot, $comment, null )
+		);
 
 		$this->assertEquals( new Label( $langCode, $newLabelText ), $response->getLabel() );
-		$this->assertSame( $revisionId, $response->getRevisionId() );
-		$this->assertSame( $lastModified, $response->getLastModified() );
+		$this->assertSame( $itemRepo->getLatestRevisionId( $itemId ), $response->getRevisionId() );
+		$this->assertSame( $itemRepo->getLatestRevisionTimestamp( $itemId ), $response->getLastModified() );
+		$this->assertEquals(
+			new EditMetadata(
+				$editTags,
+				$isBot,
+				LabelEditSummary::newAddSummary( $comment, new Term( $langCode, $newLabelText ) )
+			),
+			$itemRepo->getLatestRevisionEditMetadata( $itemId )
+		);
 		$this->assertFalse( $response->wasReplaced() );
 	}
 
 	public function testReplaceLabel(): void {
-		$itemId = 'Q123';
+		$itemId = new ItemId( 'Q123' );
 		$langCode = 'en';
 		$updatedLabelText = 'Replaced label';
 		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
 		$comment = "{$this->getName()} Comment";
-		$revisionId = 657;
-		$lastModified = '20221212040506';
-		$item = NewItem::withId( $itemId )->andLabel( $langCode, 'Label to replace' )->build();
 
-		$this->itemRetriever = $this->createMock( ItemRetriever::class );
-		$this->itemRetriever->expects( $this->once() )->method( 'getItem' )->with( $itemId )->willReturn( $item );
+		$itemRepo = new InMemoryItemRepository();
+		$itemRepo->addItem( NewItem::withId( $itemId )->andLabel( $langCode, 'Label to replace' )->build() );
+		$this->itemRetriever = $itemRepo;
+		$this->itemUpdater = $itemRepo;
 
-		$updatedItem = $this->newItemWithLabels( new Labels( new Label( $langCode, $updatedLabelText ) ) );
-		$this->itemUpdater = $this->createMock( ItemUpdater::class );
-		$this->itemUpdater->expects( $this->once() )->method( 'update' )
-			->with(
-				$this->callback( fn( DataModelItem $item ) => $item->getLabels()->toTextArray() === [ $langCode => $updatedLabelText ] ),
-				$this->expectEquivalentMetadata( $editTags, $isBot, $comment, EditSummary::REPLACE_ACTION )
-			)
-			->willReturn( new ItemRevision( $updatedItem, $lastModified, $revisionId ) );
-
-		$request = new SetItemLabelRequest( $itemId, $langCode, $updatedLabelText, $editTags, $isBot, $comment, null );
-		$response = $this->newUseCase()->execute( $request );
+		$response = $this->newUseCase()->execute(
+			new SetItemLabelRequest( "$itemId", $langCode, $updatedLabelText, $editTags, $isBot, $comment, null )
+		);
 
 		$this->assertEquals( new Label( $langCode, $updatedLabelText ), $response->getLabel() );
-		$this->assertSame( $revisionId, $response->getRevisionId() );
-		$this->assertSame( $lastModified, $response->getLastModified() );
+		$this->assertSame( $itemRepo->getLatestRevisionId( $itemId ), $response->getRevisionId() );
+		$this->assertSame( $itemRepo->getLatestRevisionTimestamp( $itemId ), $response->getLastModified() );
+		$this->assertEquals(
+			new EditMetadata(
+				$editTags,
+				$isBot,
+				LabelEditSummary::newReplaceSummary( $comment, new Term( $langCode, $updatedLabelText ) )
+			),
+			$itemRepo->getLatestRevisionEditMetadata( $itemId )
+		);
 		$this->assertTrue( $response->wasReplaced() );
 	}
 
@@ -164,10 +155,6 @@ class SetItemLabelTest extends TestCase {
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( $expectedError, $e );
 		}
-	}
-
-	public function newItemWithLabels( Labels $labels ): Item {
-		return new Item( $labels, new Descriptions(), new Aliases(), new StatementList() );
 	}
 
 	private function newUseCase(): SetItemLabel {

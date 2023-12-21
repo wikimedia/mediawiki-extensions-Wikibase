@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\SetPropertyDescriptio
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\Property as DataModelProperty;
+use Wikibase\DataModel\Term\Term;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription\SetPropertyDescription;
@@ -13,19 +13,14 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription\SetPropert
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription\SetPropertyDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
-use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\DescriptionEditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\User;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Property as ReadModelProperty;
-use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyRevision;
-use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
-use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
+use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryPropertyRepository;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription\SetPropertyDescription
@@ -35,8 +30,6 @@ use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
  * @license GPL-2.0-or-later
  */
 class SetPropertyDescriptionTest extends TestCase {
-
-	use EditMetadataHelper;
 
 	private SetPropertyDescriptionValidator $validator;
 	private PropertyRetriever $propertyRetriever;
@@ -57,91 +50,70 @@ class SetPropertyDescriptionTest extends TestCase {
 	public function testAddDescription(): void {
 		$language = 'en';
 		$description = 'Hello world again.';
-		$propertyId = 'P123';
+		$propertyId = new NumericPropertyId( 'P123' );
 		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
 		$comment = 'add description edit comment';
 
-		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
-		$this->propertyRetriever->method( 'getProperty' )->willReturn( new DataModelProperty( null, null, 'string' ) );
-
-		$updatedProperty = new ReadModelProperty(
-			new Labels(),
-			new Descriptions( new Description( $language, $description ) ),
-			new Aliases(),
-			new StatementList()
-		);
-		$revisionId = 123;
-		$lastModified = '20221212040506';
-
-		$this->propertyUpdater = $this->createMock( PropertyUpdater::class );
-		$this->propertyUpdater->expects( $this->once() )
-			->method( 'update' )
-			->with(
-				$this->callback(
-					fn( DataModelProperty $property ) => $property->getDescriptions()->toTextArray() === [ $language => $description ]
-				),
-				$this->expectEquivalentMetadata( $editTags, $isBot, $comment, EditSummary::ADD_ACTION )
-			)
-			->willReturn( new PropertyRevision( $updatedProperty, $lastModified, $revisionId ) );
+		$propertyRepo = new InMemoryPropertyRepository();
+		$propertyRepo->addProperty( new Property(
+			$propertyId,
+			null,
+			'string'
+		) );
+		$this->propertyRetriever = $propertyRepo;
+		$this->propertyUpdater = $propertyRepo;
 
 		$response = $this->newUseCase()->execute(
-			new SetPropertyDescriptionRequest( $propertyId, $language, $description, $editTags, $isBot, $comment, null )
+			new SetPropertyDescriptionRequest( "$propertyId", $language, $description, $editTags, $isBot, $comment, null )
 		);
 
 		$this->assertEquals( new Description( $language, $description ), $response->getDescription() );
-		$this->assertSame( $revisionId, $response->getRevisionId() );
-		$this->assertSame( $lastModified, $response->getLastModified() );
+		$this->assertSame( $propertyRepo->getLatestRevisionId( $propertyId ), $response->getRevisionId() );
+		$this->assertSame( $propertyRepo->getLatestRevisionTimestamp( $propertyId ), $response->getLastModified() );
+		$this->assertEquals(
+			new EditMetadata(
+				$editTags,
+				$isBot,
+				DescriptionEditSummary::newAddSummary( $comment, new Term( $language, $description ) )
+			),
+			$propertyRepo->getLatestRevisionEditMetadata( $propertyId )
+		);
 		$this->assertFalse( $response->wasReplaced() );
 	}
 
 	public function testReplaceDescription(): void {
 		$language = 'en';
 		$newDescription = 'Hello world again.';
-		$propertyId = 'P123';
+		$propertyId = new NumericPropertyId( 'P123' );
 		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
-
-		$property = Property::newFromType( 'string' );
-		$property->setId( new NumericPropertyId( $propertyId ) );
-		$property->setDescription( $language, 'Hello world' );
-
 		$comment = 'replace description edit comment';
 
-		$this->propertyRetriever = $this->createMock( PropertyRetriever::class );
-		$this->propertyRetriever
-			->expects( $this->once() )
-			->method( 'getProperty' )
-			->with( $propertyId )
-			->willReturn( $property );
+		$property = Property::newFromType( 'string' );
+		$property->setId( $propertyId );
+		$property->setDescription( $language, 'Hello world' );
 
-		$updatedProperty = new ReadModelProperty(
-			new Labels(),
-			new Descriptions( new Description( $language, $newDescription ) ),
-			new Aliases(),
-			new StatementList()
-		);
-		$revisionId = 123;
-		$lastModified = '20221212040506';
-
-		$this->propertyUpdater = $this->createMock( PropertyUpdater::class );
-		$this->propertyUpdater->expects( $this->once() )
-			->method( 'update' )
-			->with(
-				$this->callback(
-					fn( DataModelProperty $property ) => $property->getDescriptions()->toTextArray() === [ $language => $newDescription ]
-				),
-				$this->expectEquivalentMetadata( $editTags, $isBot, $comment, EditSummary::REPLACE_ACTION )
-			)
-			->willReturn( new PropertyRevision( $updatedProperty, $lastModified, $revisionId ) );
+		$propertyRepo = new InMemoryPropertyRepository();
+		$propertyRepo->addProperty( $property );
+		$this->propertyRetriever = $propertyRepo;
+		$this->propertyUpdater = $propertyRepo;
 
 		$response = $this->newUseCase()->execute(
-			new SetPropertyDescriptionRequest( $propertyId, $language, $newDescription, $editTags, $isBot, $comment, null )
+			new SetPropertyDescriptionRequest( "$propertyId", $language, $newDescription, $editTags, $isBot, $comment, null )
 		);
 
 		$this->assertEquals( new Description( $language, $newDescription ), $response->getDescription() );
-		$this->assertSame( $revisionId, $response->getRevisionId() );
-		$this->assertSame( $lastModified, $response->getLastModified() );
+		$this->assertSame( $propertyRepo->getLatestRevisionId( $propertyId ), $response->getRevisionId() );
+		$this->assertSame( $propertyRepo->getLatestRevisionTimestamp( $propertyId ), $response->getLastModified() );
+		$this->assertEquals(
+			new EditMetadata(
+				$editTags,
+				$isBot,
+				DescriptionEditSummary::newReplaceSummary( $comment, new Term( $language, $newDescription ) )
+			),
+			$propertyRepo->getLatestRevisionEditMetadata( $propertyId )
+		);
 		$this->assertTrue( $response->wasReplaced() );
 	}
 
