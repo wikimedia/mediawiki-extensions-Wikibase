@@ -6,13 +6,13 @@
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}} kakamot",
-	"wikibase-editlinks": "Simbanai link",
-	"wikibase-linkitem-addlinks": "Ruhangai link",
-	"wikibase-linkitem-title": "Link miampai bolikan",
-	"wikibase-linkitem-linkpage": "Link miampai bolikan",
+	"wikibase-editlinks": "Simbanai noputan",
+	"wikibase-linkitem-addlinks": "Ruhangai noputan",
+	"wikibase-linkitem-title": "Pioputo miampai bolikan",
+	"wikibase-linkitem-linkpage": "Pioputo miampai bolikan",
 	"wikibase-linkitem-selectlink": "Momili iso natad om bolikan di maan nu pioputo maya link montok bolikan diti.",
 	"wikibase-linkitem-input-site": "Boros:",
-	"wikibase-linkitem-input-page": "Bolikon:",
+	"wikibase-linkitem-input-page": "Bolikan:",
 	"wikibase-rc-hide-wikidata-hide": "Polisoko'",
 	"wikibase-rc-hide-wikidata-show": "Popointalang",
 	"wikibase-otherprojects": "Id projek suai"
