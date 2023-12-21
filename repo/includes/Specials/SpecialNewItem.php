@@ -42,6 +42,8 @@ class SpecialNewItem extends SpecialNewEntity {
 	public const FIELD_SITE = 'site';
 	public const FIELD_PAGE = 'page';
 
+	private AnonymousEditWarningBuilder $anonymousEditWarningBuilder;
+
 	private TermValidatorFactory $termValidatorFactory;
 
 	private TermsCollisionDetector $termsCollisionDetector;
@@ -62,6 +64,7 @@ class SpecialNewItem extends SpecialNewEntity {
 		SummaryFormatter $summaryFormatter,
 		EntityTitleLookup $entityTitleLookup,
 		MediaWikiEditEntityFactory $editEntityFactory,
+		AnonymousEditWarningBuilder $anonymousEditWarningBuilder,
 		TermValidatorFactory $termValidatorFactory,
 		TermsCollisionDetector $termsCollisionDetector,
 		ValidatorErrorLocalizer $errorLocalizer,
@@ -80,6 +83,7 @@ class SpecialNewItem extends SpecialNewEntity {
 			$editEntityFactory,
 			$isMobileView
 		);
+		$this->anonymousEditWarningBuilder = $anonymousEditWarningBuilder;
 		$this->termValidatorFactory = $termValidatorFactory;
 		$this->termsCollisionDetector = $termsCollisionDetector;
 		$this->errorLocalizer = $errorLocalizer;
@@ -88,6 +92,7 @@ class SpecialNewItem extends SpecialNewEntity {
 	}
 
 	public static function factory(
+		AnonymousEditWarningBuilder $anonymousEditWarningBuilder,
 		MediaWikiEditEntityFactory $editEntityFactory,
 		EntityNamespaceLookup $entityNamespaceLookup,
 		EntityTitleLookup $entityTitleLookup,
@@ -112,6 +117,7 @@ class SpecialNewItem extends SpecialNewEntity {
 			$summaryFormatter,
 			$entityTitleLookup,
 			$editEntityFactory,
+			$anonymousEditWarningBuilder,
 			$termValidatorFactory,
 			$itemTermsCollisionDetector,
 			$errorLocalizer,
@@ -247,10 +253,7 @@ class SpecialNewItem extends SpecialNewEntity {
 	 */
 	protected function getWarnings(): array {
 		if ( !$this->getUser()->isRegistered() ) {
-			$anonymousEditWarningBuilder = new AnonymousEditWarningBuilder(
-				$this->getSpecialPageFactory()
-			);
-			return [ $anonymousEditWarningBuilder->buildAnonymousEditWarningHTML( $this->getFullTitle()->getPrefixedText() ) ];
+			return [ $this->anonymousEditWarningBuilder->buildAnonymousEditWarningHTML( $this->getFullTitle()->getPrefixedText() ) ];
 		}
 
 		return [];

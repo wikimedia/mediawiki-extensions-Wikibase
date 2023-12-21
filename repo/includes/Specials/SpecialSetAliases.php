@@ -12,6 +12,7 @@ use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Summary;
 use Wikibase\Lib\UserInputException;
+use Wikibase\Repo\AnonymousEditWarningBuilder;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\ChangeOps;
 use Wikibase\Repo\CopyrightMessageBuilder;
@@ -34,6 +35,7 @@ class SpecialSetAliases extends SpecialModifyTerm {
 		SummaryFormatter $summaryFormatter,
 		EntityTitleLookup $entityTitleLookup,
 		MediaWikiEditEntityFactory $editEntityFactory,
+		AnonymousEditWarningBuilder $anonymousEditWarningBuilder,
 		EntityPermissionChecker $entityPermissionChecker,
 		ContentLanguages $termsLanguages,
 		LanguageNameUtils $languageNameUtils
@@ -46,6 +48,7 @@ class SpecialSetAliases extends SpecialModifyTerm {
 			$summaryFormatter,
 			$entityTitleLookup,
 			$editEntityFactory,
+			$anonymousEditWarningBuilder,
 			$entityPermissionChecker,
 			$termsLanguages,
 			$languageNameUtils
@@ -54,6 +57,7 @@ class SpecialSetAliases extends SpecialModifyTerm {
 
 	public static function factory(
 		LanguageNameUtils $languageNameUtils,
+		AnonymousEditWarningBuilder $anonymousEditWarningBuilder,
 		ChangeOpFactoryProvider $changeOpFactoryProvider,
 		MediaWikiEditEntityFactory $editEntityFactory,
 		EntityPermissionChecker $entityPermissionChecker,
@@ -75,6 +79,7 @@ class SpecialSetAliases extends SpecialModifyTerm {
 			$summaryFormatter,
 			$entityTitleLookup,
 			$editEntityFactory,
+			$anonymousEditWarningBuilder,
 			$entityPermissionChecker,
 			$termsLanguages,
 			$languageNameUtils

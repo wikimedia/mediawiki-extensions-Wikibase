@@ -95,6 +95,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 			WikibaseRepo::getSummaryFormatter(),
 			WikibaseRepo::getEntityTitleLookup(),
 			WikibaseRepo::getEditEntityFactory(),
+			WikibaseRepo::getAnonymousEditWarningBuilder(),
 			WikibaseRepo::getSiteLinkPageNormalizer(),
 			$siteLinkTargetProvider,
 			[ 'wikipedia' ],

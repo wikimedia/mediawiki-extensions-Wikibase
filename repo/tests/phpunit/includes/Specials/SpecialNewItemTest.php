@@ -67,6 +67,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 			WikibaseRepo::getSummaryFormatter(),
 			WikibaseRepo::getEntityTitleLookup(),
 			WikibaseRepo::getEditEntityFactory(),
+			WikibaseRepo::getAnonymousEditWarningBuilder(),
 			$this->getTermValidatorFactoryMock(),
 			WikibaseRepo::getItemTermsCollisionDetector(),
 			WikibaseRepo::getValidatorErrorLocalizer(),

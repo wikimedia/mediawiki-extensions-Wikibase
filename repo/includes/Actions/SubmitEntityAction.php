@@ -10,12 +10,12 @@ use MediaWiki\Permissions\PermissionManager;
 use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
-use MediaWiki\SpecialPage\SpecialPageFactory;
 use MediaWiki\Title\Title;
 use MediaWiki\User\Options\UserOptionsLookup;
 use MediaWiki\Watchlist\WatchlistManager;
 use Status;
 use Wikibase\Lib\Summary;
+use Wikibase\Repo\AnonymousEditWarningBuilder;
 use Wikibase\Repo\Content\EntityContent;
 use Wikibase\Repo\Diff\EntityDiffVisualizerFactory;
 use Wikibase\Repo\EditEntity\EditFilterHookRunner;
@@ -42,10 +42,10 @@ class SubmitEntityAction extends EditEntityAction {
 		'services' => [
 			'PermissionManager',
 			'RevisionLookup',
-			'SpecialPageFactory',
 			'UserOptionsLookup',
 			'WatchlistManager',
 			'WikiPageFactory',
+			'WikibaseRepo.AnonymousEditWarningBuilder',
 			'WikibaseRepo.EditFilterHookRunner',
 			'WikibaseRepo.EntityDiffVisualizerFactory',
 			'WikibaseRepo.SummaryFormatter',
@@ -63,10 +63,10 @@ class SubmitEntityAction extends EditEntityAction {
 		IContextSource $context,
 		PermissionManager $permissionManager,
 		RevisionLookup $revisionLookup,
-		SpecialPageFactory $specialPageFactory,
 		UserOptionsLookup $userOptionsLookup,
 		WatchlistManager $watchlistManager,
 		WikiPageFactory $wikiPageFactory,
+		AnonymousEditWarningBuilder $anonymousEditWarningBuilder,
 		EditFilterHookRunner $editFilterHookRunner,
 		EntityDiffVisualizerFactory $entityDiffVisualizerFactory,
 		SummaryFormatter $summaryFormatter
@@ -76,7 +76,7 @@ class SubmitEntityAction extends EditEntityAction {
 			$context,
 			$permissionManager,
 			$revisionLookup,
-			$specialPageFactory,
+			$anonymousEditWarningBuilder,
 			$entityDiffVisualizerFactory
 		);
 

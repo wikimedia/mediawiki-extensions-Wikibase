@@ -30,6 +30,8 @@ use Wikibase\Repo\SummaryFormatter;
  */
 abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 
+	private AnonymousEditWarningBuilder $anonymousEditWarningBuilder;
+
 	/**
 	 * @var EntityDocument|null
 	 */
@@ -54,7 +56,8 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 		SpecialPageCopyrightView $copyrightView,
 		SummaryFormatter $summaryFormatter,
 		EntityTitleLookup $entityTitleLookup,
-		MediaWikiEditEntityFactory $editEntityFactory
+		MediaWikiEditEntityFactory $editEntityFactory,
+		AnonymousEditWarningBuilder $anonymousEditWarningBuilder
 	) {
 		parent::__construct(
 			$title,
@@ -65,6 +68,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 			$entityTitleLookup,
 			$editEntityFactory
 		);
+		$this->anonymousEditWarningBuilder = $anonymousEditWarningBuilder;
 	}
 
 	public function doesWrites() {
@@ -283,13 +287,10 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 			$this->getOutput()->addHTML( $this->getCopyrightHTML( $submitKey ) );
 		}
 		if ( !$this->getUser()->isRegistered() ) {
-			$anonymousEditWarningBuilder = new AnonymousEditWarningBuilder(
-				$this->getSpecialPageFactory()
-			);
 			$this->getOutput()->addHTML( Html::rawElement(
 				'p',
 				[ 'class' => 'warning' ],
-				$anonymousEditWarningBuilder->buildAnonymousEditWarningHTML( $this->getFullTitle()->getPrefixedText() )
+				$this->anonymousEditWarningBuilder->buildAnonymousEditWarningHTML( $this->getFullTitle()->getPrefixedText() )
 			) );
 		}
 

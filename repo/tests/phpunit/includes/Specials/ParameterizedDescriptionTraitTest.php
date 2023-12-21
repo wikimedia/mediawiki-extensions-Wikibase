@@ -7,6 +7,7 @@ use MediaWiki\Languages\LanguageNameUtils;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Repo\AnonymousEditWarningBuilder;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
@@ -123,6 +124,7 @@ class ParameterizedDescriptionTraitTest extends MediaWikiIntegrationTestCase {
 			$this->createMock( SummaryFormatter::class ),
 			$this->createMock( EntityTitleLookup::class ),
 			$this->createMock( MediaWikiEditEntityFactory::class ),
+			$this->createMock( AnonymousEditWarningBuilder::class ),
 			$this->createMock( EntityPermissionChecker::class ),
 			$this->createMock( ContentLanguages::class ),
 			$this->createMock( LanguageNameUtils::class )
@@ -137,6 +139,7 @@ class ParameterizedDescriptionTraitTest extends MediaWikiIntegrationTestCase {
 			$this->createMock( SummaryFormatter::class ),
 			$this->createMock( EntityTitleLookup::class ),
 			$this->createMock( MediaWikiEditEntityFactory::class ),
+			$this->createMock( AnonymousEditWarningBuilder::class ),
 			$this->createMock( EntityPermissionChecker::class ),
 			$this->createMock( ContentLanguages::class ),
 			$this->createMock( LanguageNameUtils::class )
@@ -151,6 +154,7 @@ class ParameterizedDescriptionTraitTest extends MediaWikiIntegrationTestCase {
 			$this->createMock( SummaryFormatter::class ),
 			$this->createMock( EntityTitleLookup::class ),
 			$this->createMock( MediaWikiEditEntityFactory::class ),
+			$this->createMock( AnonymousEditWarningBuilder::class ),
 			$this->createMock( EntityPermissionChecker::class ),
 			$this->createMock( ContentLanguages::class ),
 			$this->createMock( LanguageNameUtils::class )
@@ -164,6 +168,7 @@ class ParameterizedDescriptionTraitTest extends MediaWikiIntegrationTestCase {
 			$this->createMock( SummaryFormatter::class ),
 			$this->createMock( EntityTitleLookup::class ),
 			$this->createMock( MediaWikiEditEntityFactory::class ),
+			$this->createMock( AnonymousEditWarningBuilder::class ),
 			$this->createMock( FingerprintChangeOpFactory::class ),
 			$this->createMock( ContentLanguages::class ),
 			$this->createMock( EntityPermissionChecker::class ),

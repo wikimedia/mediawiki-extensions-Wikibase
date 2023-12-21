@@ -16,6 +16,7 @@ use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Lib\StaticContentLanguages;
+use Wikibase\Repo\AnonymousEditWarningBuilder;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\Repo\CopyrightMessageBuilder;
 use Wikibase\Repo\EditEntity\EditFilterHookRunner;
@@ -82,6 +83,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 				PHP_INT_MAX,
 				[ 'item', 'property' ]
 			),
+			$this->createStub( AnonymousEditWarningBuilder::class ),
 			$this->getFingerprintChangeOpsFactory(),
 			new StaticContentLanguages( self::$languageCodes ),
 			$this->getEntityPermissionChecker(),
@@ -402,6 +404,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 				PHP_INT_MAX,
 				[ 'item', 'property' ],
 			),
+			$this->createStub( AnonymousEditWarningBuilder::class ),
 			$this->getFingerprintChangeOpsFactory(),
 			new StaticContentLanguages( self::$languageCodes ),
 			$permissionChecker,

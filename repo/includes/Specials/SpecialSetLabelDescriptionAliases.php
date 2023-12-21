@@ -16,6 +16,7 @@ use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Summary;
 use Wikibase\Lib\UserInputException;
+use Wikibase\Repo\AnonymousEditWarningBuilder;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
@@ -91,6 +92,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 		SummaryFormatter $summaryFormatter,
 		EntityTitleLookup $entityTitleLookup,
 		MediaWikiEditEntityFactory $editEntityFactory,
+		AnonymousEditWarningBuilder $anonymousEditWarningBuilder,
 		FingerprintChangeOpFactory $changeOpFactory,
 		ContentLanguages $termsLanguages,
 		EntityPermissionChecker $permissionChecker,
@@ -103,7 +105,8 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 			$copyrightView,
 			$summaryFormatter,
 			$entityTitleLookup,
-			$editEntityFactory
+			$editEntityFactory,
+			$anonymousEditWarningBuilder,
 		);
 
 		$this->changeOpFactory = $changeOpFactory;
@@ -116,6 +119,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	public static function factory(
 		LanguageNameUtils $languageNameUtils,
 		Config $mwConfig,
+		AnonymousEditWarningBuilder $anonymousEditWarningBuilder,
 		ChangeOpFactoryProvider $changeOpFactoryProvider,
 		MediaWikiEditEntityFactory $editEntityFactory,
 		EntityPermissionChecker $entityPermissionChecker,
@@ -136,6 +140,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 			$summaryFormatter,
 			$entityTitleLookup,
 			$editEntityFactory,
+			$anonymousEditWarningBuilder,
 			$changeOpFactoryProvider->getFingerprintChangeOpFactory(),
 			$termsLanguages,
 			$entityPermissionChecker,
