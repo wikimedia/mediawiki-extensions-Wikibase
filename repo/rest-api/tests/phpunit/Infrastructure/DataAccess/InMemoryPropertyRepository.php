@@ -12,13 +12,17 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Property as ReadModelProperty;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyRevision;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyAliasesRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyDescriptionsRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyLabelsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
 
 /**
  * @license GPL-2.0-or-later
  */
-class InMemoryPropertyRepository implements PropertyRetriever, PropertyUpdater {
+class InMemoryPropertyRepository
+	implements PropertyRetriever, PropertyLabelsRetriever, PropertyDescriptionsRetriever, PropertyAliasesRetriever, PropertyUpdater {
 	use StatementReadModelHelper;
 
 	private array $properties = [];
@@ -48,6 +52,18 @@ class InMemoryPropertyRepository implements PropertyRetriever, PropertyUpdater {
 		return $this->properties[$propertyId->getSerialization()] ?? null;
 	}
 
+	public function getLabels( PropertyId $propertyId ): ?Labels {
+		return $this->properties["$propertyId"] ? $this->convertToReadModel( $this->properties["$propertyId"] )->getLabels() : null;
+	}
+
+	public function getDescriptions( PropertyId $propertyId ): ?Descriptions {
+		return $this->properties["$propertyId"] ? $this->convertToReadModel( $this->properties["$propertyId"] )->getDescriptions() : null;
+	}
+
+	public function getAliases( PropertyId $propertyId ): ?Aliases {
+		return $this->properties["$propertyId"] ? $this->convertToReadModel( $this->properties["$propertyId"] )->getAliases() : null;
+	}
+
 	public function update( Property $property, EditMetadata $editMetadata ): PropertyRevision {
 		$this->properties[$property->getId()->getSerialization()] = $property;
 		$revisionData = [
@@ -58,18 +74,19 @@ class InMemoryPropertyRepository implements PropertyRetriever, PropertyUpdater {
 		];
 		$this->latestRevisionData[$property->getId()->getSerialization()] = $revisionData;
 
-		return new PropertyRevision(
-			new ReadModelProperty(
-				Labels::fromTermList( $property->getLabels() ),
-				Descriptions::fromTermList( $property->getDescriptions() ),
-				Aliases::fromAliasGroupList( $property->getAliasGroups() ),
-				new StatementList( ...array_map(
-					[ $this->newStatementReadModelConverter(), 'convert' ],
-					iterator_to_array( $property->getStatements() )
-				) )
-			),
-			$revisionData['revTime'],
-			$revisionData['revId']
+		return new PropertyRevision( $this->convertToReadModel( $property ), $revisionData['revTime'], $revisionData['revId'] );
+	}
+
+	private function convertToReadModel( Property $property ): ReadModelProperty {
+		return new ReadModelProperty(
+			Labels::fromTermList( $property->getLabels() ),
+			Descriptions::fromTermList( $property->getDescriptions() ),
+			Aliases::fromAliasGroupList( $property->getAliasGroups() ),
+			new StatementList( ...array_map(
+				[ $this->newStatementReadModelConverter(), 'convert' ],
+				iterator_to_array( $property->getStatements() )
+			) )
 		);
 	}
+
 }

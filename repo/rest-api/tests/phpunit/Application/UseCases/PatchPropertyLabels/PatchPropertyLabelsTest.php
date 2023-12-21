@@ -82,6 +82,7 @@ class PatchPropertyLabelsTest extends TestCase {
 
 		$propertyRepo = new InMemoryPropertyRepository();
 		$propertyRepo->addProperty( new Property( $propertyId, null, 'string' ) );
+		$this->labelsRetriever = $propertyRepo;
 		$this->propertyRetriever = $propertyRepo;
 		$this->propertyUpdater = $propertyRepo;
 
@@ -190,11 +191,10 @@ class PatchPropertyLabelsTest extends TestCase {
 
 		$patchResult = [ 'ar' => '' ];
 
-		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
-		$this->propertyRetriever->method( 'getProperty' )->willReturn( $property );
-
-		$this->labelsRetriever = $this->createStub( PropertyLabelsRetriever::class );
-		$this->labelsRetriever->method( 'getLabels' )->willReturn( new Labels() );
+		$propertyRepo = new InMemoryPropertyRepository();
+		$propertyRepo->addProperty( $property );
+		$this->labelsRetriever = $propertyRepo;
+		$this->propertyRetriever = $propertyRepo;
 
 		$expectedUseCaseError = $this->createStub( UseCaseError::class );
 		$this->patchedLabelsValidator = $this->createMock( PatchedLabelsValidator::class );

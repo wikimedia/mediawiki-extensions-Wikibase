@@ -48,7 +48,6 @@ class PatchPropertyAliasesTest extends TestCase {
 	private PatchJson $patchJson;
 	private PatchedAliasesValidator $patchedAliasesValidator;
 	private PropertyRetriever $propertyRetriever;
-	private AliasesDeserializer $aliasesDeserializer;
 	private PropertyUpdater $propertyUpdater;
 
 	protected function setUp(): void {
@@ -65,7 +64,6 @@ class PatchPropertyAliasesTest extends TestCase {
 		$this->patchedAliasesValidator->method( 'validateAndDeserialize' )
 			->willReturnCallback( [ new AliasesDeserializer(), 'deserialize' ] );
 		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
-		$this->aliasesDeserializer = new AliasesDeserializer();
 		$this->propertyUpdater = $this->createStub( PropertyUpdater::class );
 	}
 
@@ -82,13 +80,11 @@ class PatchPropertyAliasesTest extends TestCase {
 		$isBot = false;
 		$comment = 'statement replaced by ' . __method__;
 
-		$this->aliasesRetriever = $this->createStub( PropertyAliasesRetriever::class );
-		$this->aliasesRetriever->method( 'getAliases' )->willReturn( Aliases::fromAliasGroupList( $originalAliases ) );
-
 		$propertyRepo = new InMemoryPropertyRepository();
 		$propertyRepo->addProperty(
 			new Property( $propertyId, new Fingerprint( null, null, $originalAliases ), 'string' )
 		);
+		$this->aliasesRetriever = $propertyRepo;
 		$this->propertyRetriever = $propertyRepo;
 		$this->propertyUpdater = $propertyRepo;
 

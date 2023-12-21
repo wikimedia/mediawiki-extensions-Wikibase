@@ -79,15 +79,13 @@ class PatchItemLabelsTest extends TestCase {
 		$newLabelText = 'pomme de terre';
 		$newLabelLanguage = 'fr';
 
-		$this->labelsRetriever = $this->createStub( ItemLabelsRetriever::class );
-		$this->labelsRetriever->method( 'getLabels' )->willReturn( new Labels() );
-
 		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
 		$comment = 'labels replaced by ' . __method__;
 
 		$itemRepo = new InMemoryItemRepository();
 		$itemRepo->addItem( new Item( $itemId ) );
+		$this->labelsRetriever = $itemRepo;
 		$this->itemRetriever = $itemRepo;
 		$this->itemUpdater = $itemRepo;
 
@@ -184,11 +182,10 @@ class PatchItemLabelsTest extends TestCase {
 		$item = NewItem::withId( 'Q123' )->build();
 		$patchResult = [ 'ar' => '' ];
 
-		$this->itemRetriever = $this->createStub( ItemRetriever::class );
-		$this->itemRetriever->method( 'getItem' )->willReturn( $item );
-
-		$this->labelsRetriever = $this->createStub( ItemLabelsRetriever::class );
-		$this->labelsRetriever->method( 'getLabels' )->willReturn( new Labels() );
+		$itemRepo = new InMemoryItemRepository();
+		$itemRepo->addItem( $item );
+		$this->labelsRetriever = $itemRepo;
+		$this->itemRetriever = $itemRepo;
 
 		$expectedUseCaseError = $this->createStub( UseCaseError::class );
 		$this->patchedLabelsValidator = $this->createMock( PatchedLabelsValidator::class );
