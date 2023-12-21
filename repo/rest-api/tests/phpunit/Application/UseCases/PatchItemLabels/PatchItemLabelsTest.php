@@ -3,8 +3,9 @@
 namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\PatchItemLabels;
 
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\Item as DataModelItem;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
@@ -21,21 +22,17 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
-use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
+use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\User;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Item;
-use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
-use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemLabelsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
-use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
+use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryItemRepository;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels
@@ -45,8 +42,6 @@ use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
  * @license GPL-2.0-or-later
  */
 class PatchItemLabelsTest extends TestCase {
-
-	use EditMetadataHelper;
 
 	private ItemLabelsRetriever $labelsRetriever;
 	private LabelsSerializer $labelsSerializer;
@@ -80,7 +75,6 @@ class PatchItemLabelsTest extends TestCase {
 
 	public function testHappyPath(): void {
 		$itemId = new ItemId( 'Q42' );
-		$item = NewItem::withId( $itemId )->build();
 
 		$newLabelText = 'pomme de terre';
 		$newLabelLanguage = 'fr';
@@ -88,31 +82,14 @@ class PatchItemLabelsTest extends TestCase {
 		$this->labelsRetriever = $this->createStub( ItemLabelsRetriever::class );
 		$this->labelsRetriever->method( 'getLabels' )->willReturn( new Labels() );
 
-		$this->itemRetriever = $this->createStub( ItemRetriever::class );
-		$this->itemRetriever->method( 'getItem' )->willReturn( $item );
-
-		$revisionId = 657;
-		$lastModified = '20221212040506';
 		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
 		$comment = 'labels replaced by ' . __method__;
 
-		$updatedItem = new Item(
-			new Labels( new Label( $newLabelLanguage, $newLabelText ) ),
-			new Descriptions(),
-			new Aliases(),
-			new StatementList()
-		);
-		$this->itemUpdater = $this->createMock( ItemUpdater::class );
-		$this->itemUpdater->expects( $this->once() )
-			->method( 'update' )
-			->with(
-				$this->callback(
-					fn( DataModelItem $item ) => $item->getLabels()->getByLanguage( $newLabelLanguage )->getText() === $newLabelText
-				),
-				$this->expectEquivalentMetadata( $editTags, $isBot, $comment, EditSummary::PATCH_ACTION )
-			)
-			->willReturn( new ItemRevision( $updatedItem, $lastModified, $revisionId ) );
+		$itemRepo = new InMemoryItemRepository();
+		$itemRepo->addItem( new Item( $itemId ) );
+		$this->itemRetriever = $itemRepo;
+		$this->itemUpdater = $itemRepo;
 
 		$response = $this->newUseCase()->execute(
 			new PatchItemLabelsRequest(
@@ -125,9 +102,24 @@ class PatchItemLabelsTest extends TestCase {
 			)
 		);
 
-		$this->assertSame( $response->getLabels(), $updatedItem->getLabels() );
-		$this->assertSame( $lastModified, $response->getLastModified() );
-		$this->assertSame( $revisionId, $response->getRevisionId() );
+		$this->assertSame( $itemRepo->getLatestRevisionId( $itemId ), $response->getRevisionId() );
+		$this->assertSame( $itemRepo->getLatestRevisionTimestamp( $itemId ), $response->getLastModified() );
+		$this->assertEquals(
+			$response->getLabels(),
+			new Labels( new Label( $newLabelLanguage, $newLabelText ) )
+		);
+		$this->assertEquals(
+			new EditMetadata(
+				$editTags,
+				$isBot,
+				LabelsEditSummary::newPatchSummary(
+					$comment,
+					new TermList(),
+					new TermList( [ new Term( $newLabelLanguage, $newLabelText ) ] )
+				)
+			),
+			$itemRepo->getLatestRevisionEditMetadata( $itemId )
+		);
 	}
 
 	public function testInvalidRequest_throwsException(): void {
