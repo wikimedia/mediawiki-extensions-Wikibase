@@ -3,6 +3,7 @@
 		"authors": [
 			"Aftab1995",
 			"Aftabuzzaman",
+			"Aishik Rehman",
 			"Bellayet",
 			"Elias Ahmmad",
 			"Gitartha.bordoloi",
@@ -67,7 +68,7 @@
 	"wikibase-pageswithbadges-badge": "ব্যাজ:",
 	"wikibase-pageswithbadges-submit": "পাতা দেখাও",
 	"entityusage": "সত্তার ব্যবহার",
-	"wikibase-entityusage-invalid-id": "$1 কোন বৈধ সত্তার অভিজ্ঞান নয়",
+	"wikibase-entityusage-invalid-id": "$1 কোনো বৈধ সত্তার অভিজ্ঞান নয়",
 	"wikibase-entityusage-legend": "প্রদত্ত সত্তা ব্যবহৃত পৃষ্ঠাসমূহের তালিকা",
 	"wikibase-entityusage-entity": "সত্তা:",
 	"wikibase-entityusage-submit": "পৃষ্টা দেখাও",
