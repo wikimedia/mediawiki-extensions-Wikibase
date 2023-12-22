@@ -24,16 +24,16 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementRequ
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
+use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\User;
-use Wikibase\Repo\RestApi\Domain\ReadModel\StatementRevision;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\RestApi\Domain\Services\StatementRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\StatementUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
-use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
+use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryStatementRepository;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\StatementReadModelHelper;
 
 /**
@@ -45,7 +45,6 @@ use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\StatementReadModelHelp
  */
 class PatchStatementTest extends TestCase {
 
-	use EditMetadataHelper;
 	use StatementReadModelHelper;
 
 	private const STRING_PROPERTY = 'P123';
@@ -81,13 +80,11 @@ class PatchStatementTest extends TestCase {
 		$oldStatementValue = 'old statement value';
 		$newStatementValue = 'new statement value';
 
-		$statementToPatch = NewStatementReadModel::forProperty( self::STRING_PROPERTY )
+		$statementToPatch = NewStatement::forProperty( self::STRING_PROPERTY )
 			->withGuid( $statementId )
 			->withValue( $oldStatementValue )
 			->build();
 
-		$postModificationRevisionId = 567;
-		$modificationTimestamp = '20221111070707';
 		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
 		$comment = 'statement replaced by ' . __method__;
@@ -101,17 +98,13 @@ class PatchStatementTest extends TestCase {
 
 		$readModelPatchedStatement = $this->statementReadModelConverter->convert( $patchedStatement );
 
-		$this->statementRetriever->method( 'getStatement' )->willReturn( $statementToPatch );
-		$this->patchedStatementValidator->method( 'validateAndDeserializeStatement' )->willReturn( $patchedStatement );
+		$statementsRepo = new InMemoryStatementRepository();
+		$statementsRepo->addStatement( $statementToPatch );
+		$this->statementRetriever = $statementsRepo;
+		$this->statementUpdater = $statementsRepo;
 
-		$this->statementUpdater = $this->createMock( StatementUpdater::class );
-		$this->statementUpdater->expects( $this->once() )
-			->method( 'update' )
-			->with(
-				$patchedStatement,
-				$this->expectEquivalentMetadata( $editTags, $isBot, $comment, EditSummary::PATCH_ACTION )
-			)
-			->willReturn( new StatementRevision( $readModelPatchedStatement,	$modificationTimestamp, $postModificationRevisionId ) );
+		$this->patchedStatementValidator = $this->createStub( PatchedStatementValidator::class );
+		$this->patchedStatementValidator->method( 'validateAndDeserializeStatement' )->willReturn( $patchedStatement );
 
 		$response = $this->newUseCase()->execute(
 			$this->newUseCaseRequest( [
@@ -125,9 +118,16 @@ class PatchStatementTest extends TestCase {
 		);
 
 		$this->assertInstanceOf( PatchStatementResponse::class, $response );
-		$this->assertSame( $readModelPatchedStatement, $response->getStatement() );
-		$this->assertSame( $modificationTimestamp, $response->getLastModified() );
-		$this->assertSame( $postModificationRevisionId, $response->getRevisionId() );
+		$this->assertEquals( $readModelPatchedStatement, $response->getStatement() );
+		$this->assertSame( $statementsRepo->getLatestRevisionTimestamp( $statementId ), $response->getLastModified() );
+		$this->assertSame( $statementsRepo->getLatestRevisionId( $statementId ), $response->getRevisionId() );
+		$this->assertEquals(
+			new EditMetadata( $editTags, $isBot, StatementEditSummary::newPatchSummary(
+				$comment,
+				$patchedStatement
+			) ),
+			$statementsRepo->getLatestRevisionEditMetadata( $statementId )
+		);
 	}
 
 	/**
