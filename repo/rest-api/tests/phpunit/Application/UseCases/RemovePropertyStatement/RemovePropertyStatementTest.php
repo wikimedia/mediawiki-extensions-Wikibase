@@ -12,7 +12,6 @@ use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyStatement\RemovePro
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
-use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyStatement\RemovePropertyStatement
@@ -23,8 +22,6 @@ use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
  *
  */
 class RemovePropertyStatementTest extends TestCase {
-
-	use EditMetadataHelper;
 
 	private AssertPropertyExists $assertPropertyExists;
 	private RemoveStatement $removeStatement;
