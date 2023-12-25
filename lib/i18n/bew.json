@@ -15,7 +15,7 @@
 	"wikibase-error-save-timeout": "Kita lagi ngalamin masalah tèhnis. Padol dah, jal lagi entaran.",
 	"wikibase-error-remove-timeout": "Kita lagi ngalamin masalah tèhnis. Padol dah, jal lagi entaran.",
 	"wikibase-error-ui-no-external-page": "Halaman \"$2\" kaga' ketemu di \"$1\".",
-	"wikibase-error-ui-edit-conflict": "Nilé nyang sama dipermak dalem itu lat waktu juga', jadinya ada bentrok permakan. Padol dah, muat ulang halaman.",
+	"wikibase-error-ui-edit-conflict": "Nilé nyang sama dipermak dalem itu lat waktu juga', jadinya ada bentrok permakan. Padol dah, punggah ulang halaman.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (ditukerhurup)",
 	"wikibase-quantitydetails-amount": "Jumblah",
 	"wikibase-quantitydetails-upperbound": "Wates atas",

@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"ZhuofanWu"
+		]
+	},
+	"wikibase-dataitem": "{{WBREPONAME}}項目",
+	"wikibase-editlinks": "編輯連結",
+	"wikibase-linkitem-addlinks": "新增連結",
+	"wikibase-linkitem-title": "連結頁面",
+	"wikibase-linkitem-linkpage": "連結頁面",
+	"wikibase-linkitem-selectlink": "請選一個要連接到箇頁面嗰站點和頁面",
+	"wikibase-linkitem-input-site": "語言：",
+	"wikibase-linkitem-input-page": "頁面："
+}

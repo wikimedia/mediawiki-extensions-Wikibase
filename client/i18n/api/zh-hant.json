@@ -2,12 +2,21 @@
 	"@metadata": {
 		"authors": [
 			"Kly",
-			"Tranve"
+			"Tranve",
+			"Diskdance",
+			"SunAfterRain"
 		]
 	},
 	"apihelp-query+wbentityusage-description": "回傳在指定頁面的所有使用到的項目 ID。",
 	"apihelp-query+wbentityusage-summary": "回傳在指定頁面的所有使用到的項目 ID。",
 	"apihelp-query+wbentityusage-param-aspect": "僅回傳有使用到此方面的項目 ID。",
+	"apihelp-query+wbentityusage-paramvalue-aspect-S": "實體站點連結已使用",
+	"apihelp-query+wbentityusage-paramvalue-aspect-L": "實體標籤已使用",
+	"apihelp-query+wbentityusage-paramvalue-aspect-D": "實體描述已使用",
+	"apihelp-query+wbentityusage-paramvalue-aspect-T": "對應該實體的本地頁面標題已使用",
+	"apihelp-query+wbentityusage-paramvalue-aspect-C": "實體語句已使用",
+	"apihelp-query+wbentityusage-paramvalue-aspect-X": "所有的實體的特徵正在或者可能被使用。",
+	"apihelp-query+wbentityusage-paramvalue-aspect-O": "實體的某些其他東西正在被使用。這目前意味著別名的使用和對實體存在的顯示檢查。",
 	"apihelp-query+wbentityusage-param-prop": "添加至結果的屬性。",
 	"apihelp-query+wbentityusage-paramvalue-prop-url": "若有啟用，會被添加的項目 url",
 	"apihelp-query+wbentityusage-param-entities": "僅回傳使用到這些項目的頁面。",

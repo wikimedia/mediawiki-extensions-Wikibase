@@ -1,11 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Meqqal"
+			"Meqqal",
+			"CorrelMoris38"
 		]
 	},
 	"wikibase-edit": "idito",
 	"wikibase-add": "ruhang",
 	"wikibase-label-empty": "Aiso label pinatantu",
-	"wikibase-description-empty": "Aiso kotolinahasan pinotayad"
+	"wikibase-description-empty": "Aiso kotolinahasan pinotayad",
+	"wikibase-sitelinks-special": "Bolikan suai"
 }

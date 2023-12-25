@@ -16,7 +16,8 @@
 			"Titodutta",
 			"Nazrul Islam Nahid",
 			"Yahya",
-			"আজিজ"
+			"আজিজ",
+			"Aishik Rehman"
 		]
 	},
 	"wikibase-desc": "কাঠামোবদ্ধ তথ্য ভান্ডার",
@@ -81,7 +82,7 @@
 	"wikibase-sitelinks": "সাইট লিংক",
 	"wikibase-sitelinkgroupview-input-help-message": "একটি সাইট এবং সেই সাইটের একটি পৃষ্ঠা নির্দিষ্ট করে একটি সাইটলিঙ্ক যুক্ত করুন, বিদ্যমান সাইটলিঙ্কগুলি সম্পাদনা বা অপসারণ করুন।",
 	"wikibase-sitelinks-counter": "$1টি {{PLURAL:$1|ভুক্তি}}",
-	"wikibase-sitelinks-empty": "এই আইটেমে কোন পাতা সংযোগ করা নেই।",
+	"wikibase-sitelinks-empty": "এই আইটেমে কোনো পাতা সংযোগ করা নেই।",
 	"wikibase-sitelinks-special": "অন্যান্য সাইট",
 	"wikibase-badgeselector-badge-placeholder-title": "একটি ব্যাজ ধার্য করতে ক্লিক করুন।",
 	"wikibase-remove": "অপসারণ",
@@ -235,7 +236,7 @@
 	"wikibase-setsitelink-badges": "ব্যাজ:",
 	"wikibase-setsitelink-submit": "সাইটসংযোগ নির্ধারণ করুন",
 	"wikibase-setsitelink-invalid-site": "সাইট আইডি \"$1\" আজানা। একটি বিদ্যমান সাইট আইডি ব্যবহার করুন, যেমন \"bnwiki\"।",
-	"wikibase-setsitelink-not-badge": "আইটেম $1 কোন ব্যাজ নয়।",
+	"wikibase-setsitelink-not-badge": "আইটেম $1 কোনো ব্যাজ নয়।",
 	"wikibase-setsitelink-add-failed": "সাইটলিঙ্ক সংরক্ষণ করা যায়নি।",
 	"wikibase-setsitelink-remove-failed": "সাইটলিঙ্ক মুছে ফেলা যাবে না।",
 	"wikibase-modifyentity-id": "আইডি:",
@@ -279,7 +280,7 @@
 	"wikibase-listproperties-datatype": "উপাত্তের ধরন:",
 	"wikibase-listproperties-all": "সব উপাত্তের ধরন",
 	"wikibase-listproperties-submit": "খুঁজুন",
-	"wikibase-listproperties-invalid-datatype": "\"$1\" কোন বৈধ উপাত্তের ধরন নয়।",
+	"wikibase-listproperties-invalid-datatype": "\"$1\" কোনো বৈধ উপাত্তের ধরন নয়।",
 	"special-itemswithoutsitelinks": "সাইটলিংক বিহীন আইটেম",
 	"special-entitydata": "সত্তার উপাত্ত",
 	"wikibase-entitydata-bad-id": "অবৈধ আইডি: $1।",

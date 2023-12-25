@@ -10,7 +10,8 @@
 			"Pizza1016",
 			"SNN95",
 			"Zulfadli51",
-			"Tofeiku"
+			"Tofeiku",
+			"Hakimi97"
 		]
 	},
 	"wikibase-client-desc": "Pelanggan sambungan Wikibase",
@@ -51,6 +52,7 @@
 	"wikibase-rc-show-wikidata-pref": "Paparkan suntingan Wikidata dalam perubahan terkini",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Sunting {{WBREPONAME}}",
+	"wikibase-rcfilters-hide-wikibase-description": "Suntingan yang berasal dari {{WBREPONAME}}.",
 	"wikibase-replicationnote": "Sila ambil perhatian bahawa masa beberapa minit mungkin perlu diambil sehingga semua perubahan kelihatan di semua wiki",
 	"wikibase-watchlist-show-changes-pref": "Paparkan suntingan Wikidata dalam senarai pantau anda",
 	"wikibase-error-serialize-error": "Data gagal disirikan",
