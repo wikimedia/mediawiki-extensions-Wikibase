@@ -3,6 +3,7 @@
 		"authors": [
 			"Aftab1995",
 			"Aftabuzzaman",
+			"Aishik Rehman",
 			"Bellayet",
 			"আফতাবুজ্জামান"
 		]
@@ -20,6 +21,6 @@
 	"valueview-expertextender-languageselector-label": "ভাষা (আবশ্যিক):",
 	"valueview-expertextender-unitsuggester-label": "একক (ঐচ্ছিক):",
 	"valueview-preview-label": "যা হিসাবে প্রদর্শন করা হবে:",
-	"valueview-preview-novalue": "কোন বৈধ মান স্বীকৃত নয়",
+	"valueview-preview-novalue": "কোনো বৈধ মান স্বীকৃত নয়",
 	"valueview-listrotator-manually": "ম্যানুয়ালি নির্ধারণ করুন"
 }
