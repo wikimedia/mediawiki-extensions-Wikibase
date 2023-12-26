@@ -29,8 +29,11 @@
 	"wikibase-statementlistview-add-tooltip": "Jańa máni qosıw",
 	"wikibase-entitytermsforlanguagelistview-description": "Sıpatlama",
 	"wikibase-entitytermsforlanguagelistview-label": "Tema",
+	"wikibase-entitytermsforlanguagelistview-language": "Til",
 	"wikibase-label-empty": "Tema kórsetilmegen",
 	"wikibase-description-empty": "Hesh sıpatlama berilmegen",
+	"wikibase-description-edit-placeholder": "sıpatlamasın kirgizińiz",
+	"wikibase-description-edit-placeholder-language-aware": "$1 kórinisindegi sıpatlamasın kirgizińiz",
 	"wikibase-diffview-reference": "derek",
 	"wikibase-diffview-label": "tema",
 	"wikibase-diffview-description": "sıpatlama",
@@ -44,5 +47,6 @@
 	"wikibase-newitem-fieldset": "Jańa element jaratıw",
 	"wikibase-newentity-label": "Tema:",
 	"wikibase-setlabel-label": "Tema:",
-	"wikibase-setlabeldescriptionaliases-continue": "Dawam etiw"
+	"wikibase-setlabeldescriptionaliases-continue": "Dawam etiw",
+	"wikibase-modifyterm-language": "Til kodı:"
 }
