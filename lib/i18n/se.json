@@ -5,7 +5,13 @@
 			"Kimberli Mäkäräinen (WMNO)"
 		]
 	},
+	"wikibase-deletedentity-property": "Sihkkojuvvon iešvuohta",
+	"wikibase-deletedentity-query": "Sihkkojuvvon jearran",
 	"wikibase-error-unexpected": "Meattáhus: $1.",
+	"wikibase-error-unknown": "Meattáhus iđii.",
+	"wikibase-error-save-generic": "Vurken ii lihkostuvvan meattáhusa geažil.",
+	"wikibase-error-remove-generic": "Sihkkun ii lihkostuvvan meattáhusa geažil.",
+	"wikibase-timedetails-isotime": "Áigesteampal",
 	"wikibase-globedetails-longitude": "Guhkkodatgráda",
 	"wikibase-globedetails-latitude": "Govdodatgráda",
 	"wikibase-sitelinks-wikipedia": "Wikipedia",

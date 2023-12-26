@@ -35,7 +35,9 @@
 			"神樂坂秀吉",
 			"飞舞回堂前",
 			"아라",
-			"捍粵者"
+			"捍粵者",
+			"H78c67c",
+			"SunAfterRain"
 		]
 	},
 	"wikibase-desc": "結構化資料儲存庫",
@@ -383,9 +385,11 @@
 	"wikibase-api-illegal-entity-remove": "不可刪除帶有最高層級鍵值 <var>remove</var> 的實體",
 	"wikibase-api-illegal-id-or-site-page-selector": "您需要提供以下兩者其一：實體 <var>id</var>，或是 <var>site</var> 與 <var>page</var> 的結合。",
 	"wikibase-api-illegal-ids-or-sites-titles-selector": "為對應頁面提供「ids」，或是一組的「sites」與「titles」",
+	"wikibase-api-no-data": "沒有資料要進行操作。",
 	"wikibase-api-no-external-page": "外部客戶端網站「$1」未提供頁面「$2」的頁面資訊。",
 	"wikibase-api-no-such-entity": "找不到 ID 為「$1」的實體。",
 	"wikibase-api-no-such-sitelink": "當嘗試編輯徽章時無法找尋至 \"$1\" 的網站連結。",
+	"wikibase-api-not-supported": "請求的功能未被提供的實體支持。",
 	"wikibase-api-not-recognized-datatype": "缺少或無法識別應要有的資料類型。",
 	"wikibase-api-permissiondenied": "您無權操作",
 	"wikibase-api-tags-invalid": "標籤參數無效。",
