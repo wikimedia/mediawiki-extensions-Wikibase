@@ -6,15 +6,17 @@ use LogicException;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Statement as StatementReadModel;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementRevision;
 use Wikibase\Repo\RestApi\Domain\Services\StatementRemover;
+use Wikibase\Repo\RestApi\Domain\Services\StatementRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\StatementUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\StatementWriteModelRetriever;
 
 /**
  * @license GPL-2.0-or-later
  */
-class InMemoryStatementRepository implements StatementWriteModelRetriever, StatementUpdater, StatementRemover {
+class InMemoryStatementRepository implements StatementRetriever, StatementWriteModelRetriever, StatementUpdater, StatementRemover {
 	use StatementReadModelHelper;
 
 	private array $statements = [];
@@ -55,6 +57,10 @@ class InMemoryStatementRepository implements StatementWriteModelRetriever, State
 	public function remove( StatementGuid $id, EditMetadata $editMetadata ): void {
 		unset( $this->statements["$id"] );
 		$this->latestRevisionData["$id"] = $this->generateRevisionData( $editMetadata );
+	}
+
+	public function getStatement( StatementGuid $id ): ?StatementReadModel {
+		return $this->statements["$id"] ? $this->newStatementReadModelConverter()->convert( $this->statements["$id"] ) : null;
 	}
 
 	public function getStatementWriteModel( StatementGuid $id ): ?Statement {
