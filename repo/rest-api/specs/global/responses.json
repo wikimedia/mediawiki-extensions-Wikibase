@@ -1356,6 +1356,36 @@
 			}
 		}
 	},
+	"ItemSitelinks": {
+		"description": "A list of sitelinks by item id",
+		"headers": {
+			"Last-Modified": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Last modified date"
+			},
+			"ETag": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Last entity revision number"
+			},
+			"X-Authenticated-User": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Optional username of the user making the request"
+			}
+		},
+		"content": {
+			"application/json": {
+				"schema": {
+					"$ref": "./schema-parts.json#/Sitelinks"
+				}
+			}
+		}
+	},
 	"ItemLabels": {
 		"description": "Item's labels by language",
 		"headers": {

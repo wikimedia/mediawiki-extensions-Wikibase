@@ -2,6 +2,9 @@
 	"/entities/items/{item_id}": {
 		"$ref": "./items/single.json"
 	},
+	"/entities/items/{item_id}/sitelinks": {
+		"$ref": "./sitelinks/list.json"
+	},
 	"/entities/properties/{property_id}": {
 		"$ref": "./properties/single.json"
 	},
