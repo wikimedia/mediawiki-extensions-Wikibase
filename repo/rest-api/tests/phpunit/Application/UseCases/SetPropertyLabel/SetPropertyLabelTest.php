@@ -15,19 +15,15 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\SetPropertyLabel
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\SetPropertyLabelValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
-use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
+use Wikibase\Repo\RestApi\Domain\Model\LabelEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\User;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Property;
-use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyRevision;
-use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
+use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryPropertyRepository;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\SetPropertyLabel
@@ -55,83 +51,71 @@ class SetPropertyLabelTest extends TestCase {
 	}
 
 	public function testAddLabel(): void {
-		$propertyId = 'P1';
+		$propertyId = new NumericPropertyId( 'P1' );
 		$langCode = 'en';
 		$newLabelText = 'New label';
 		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
 		$comment = "{$this->getName()} Comment";
-		$revisionId = 432;
-		$lastModified = '20231006040506';
-		$property = new DataModelProperty( new NumericPropertyId( $propertyId ), null, 'string' );
+		$property = new DataModelProperty( $propertyId, null, 'string' );
 
-		$this->propertyRetriever = $this->createMock( PropertyRetriever::class );
-		$this->propertyRetriever->expects( $this->once() )->method( 'getProperty' )->with( $propertyId )->willReturn( $property );
+		$propertyRepo = new InMemoryPropertyRepository();
+		$propertyRepo->addProperty( $property );
+		$this->propertyRetriever = $propertyRepo;
+		$this->propertyUpdater = $propertyRepo;
 
-		$updatedProperty = new Property(
-			new Labels( new Label( $langCode, $newLabelText ) ),
-			new Descriptions(),
-			new Aliases(),
-			new StatementList()
+		$response = $this->newUseCase()->execute(
+			new SetPropertyLabelRequest( "$propertyId", $langCode, $newLabelText, $editTags, $isBot, $comment, null )
 		);
-		$this->propertyUpdater = $this->createMock( PropertyUpdater::class );
-		$this->propertyUpdater->expects( $this->once() )->method( 'update' )
-			->with(
-				$this->callback(
-					fn( DataModelProperty $property ) => $property->getLabels()->toTextArray() === [ $langCode => $newLabelText ]
-				),
-				$this->expectEquivalentMetadata( $editTags, $isBot, $comment, EditSummary::ADD_ACTION )
-			)
-			->willReturn( new PropertyRevision( $updatedProperty, $lastModified, $revisionId ) );
-
-		$request = new SetPropertyLabelRequest( $propertyId, $langCode, $newLabelText, $editTags, $isBot, $comment, null );
-		$response = $this->newUseCase()->execute( $request );
 
 		$this->assertEquals( new Label( $langCode, $newLabelText ), $response->getLabel() );
-		$this->assertSame( $revisionId, $response->getRevisionId() );
-		$this->assertSame( $lastModified, $response->getLastModified() );
+		$this->assertSame( $propertyRepo->getLatestRevisionId( $propertyId ), $response->getRevisionId() );
+		$this->assertSame( $propertyRepo->getLatestRevisionTimestamp( $propertyId ), $response->getLastModified() );
+		$this->assertEquals(
+			new EditMetadata(
+				$editTags,
+				$isBot,
+				LabelEditSummary::newAddSummary( $comment, new Term( $langCode, $newLabelText ) )
+			),
+			$propertyRepo->getLatestRevisionEditMetadata( $propertyId )
+		);
+		$this->assertFalse( $response->wasReplaced() );
 	}
 
 	public function testReplaceLabel(): void {
-		$propertyId = 'P1';
+		$propertyId = new NumericPropertyId( 'P1' );
 		$langCode = 'en';
 		$updatedLabelText = 'Replaced label';
 		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
 		$comment = "{$this->getName()} Comment";
-		$revisionId = 432;
-		$lastModified = '20231006040506';
 		$property = new DataModelProperty(
-			new NumericPropertyId( $propertyId ),
+			$propertyId,
 			new Fingerprint( new TermList( [ new Term( 'en', 'Label to replace' ) ] ) ),
 			'string'
 		);
 
-		$this->propertyRetriever = $this->createMock( PropertyRetriever::class );
-		$this->propertyRetriever->expects( $this->once() )->method( 'getProperty' )->with( $propertyId )->willReturn( $property );
+		$propertyRepo = new InMemoryPropertyRepository();
+		$propertyRepo->addProperty( $property );
+		$this->propertyRetriever = $propertyRepo;
+		$this->propertyUpdater = $propertyRepo;
 
-		$updatedProperty = new Property(
-			new Labels( new Label( $langCode, $updatedLabelText ) ),
-			new Descriptions(),
-			new Aliases(),
-			new StatementList()
+		$response = $this->newUseCase()->execute(
+			new SetPropertyLabelRequest( "$propertyId", $langCode, $updatedLabelText, $editTags, $isBot, $comment, null )
 		);
-		$this->propertyUpdater = $this->createMock( PropertyUpdater::class );
-		$this->propertyUpdater->expects( $this->once() )->method( 'update' )
-			->with(
-				$this->callback(
-					fn( DataModelProperty $property ) => $property->getLabels()->toTextArray() === [ $langCode => $updatedLabelText ]
-				),
-				$this->expectEquivalentMetadata( $editTags, $isBot, $comment, EditSummary::REPLACE_ACTION )
-			)
-			->willReturn( new PropertyRevision( $updatedProperty, $lastModified, $revisionId ) );
-
-		$request = new SetPropertyLabelRequest( $propertyId, $langCode, $updatedLabelText, $editTags, $isBot, $comment, null );
-		$response = $this->newUseCase()->execute( $request );
 
 		$this->assertEquals( new Label( $langCode, $updatedLabelText ), $response->getLabel() );
-		$this->assertSame( $revisionId, $response->getRevisionId() );
-		$this->assertSame( $lastModified, $response->getLastModified() );
+		$this->assertSame( $propertyRepo->getLatestRevisionId( $propertyId ), $response->getRevisionId() );
+		$this->assertSame( $propertyRepo->getLatestRevisionTimestamp( $propertyId ), $response->getLastModified() );
+		$this->assertEquals(
+			new EditMetadata(
+				$editTags,
+				$isBot,
+				LabelEditSummary::newReplaceSummary( $comment, new Term( $langCode, $updatedLabelText ) )
+			),
+			$propertyRepo->getLatestRevisionEditMetadata( $propertyId )
+		);
+		$this->assertTrue( $response->wasReplaced() );
 	}
 
 	public function testGivenInvalidRequest_throwsUseCaseException(): void {

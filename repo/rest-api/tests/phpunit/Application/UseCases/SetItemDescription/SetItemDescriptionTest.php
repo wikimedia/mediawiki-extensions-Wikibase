@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\SetItemDescription;
 
-use Wikibase\DataModel\Entity\Item as DataModelItem;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
@@ -12,19 +12,19 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescrip
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
-use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\DescriptionEditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Item as ReadModelItem;
-use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
-use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
+use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryItemRepository;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescription
@@ -34,8 +34,6 @@ use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
  * @license GPL-2.0-or-later
  */
 class SetItemDescriptionTest extends \PHPUnit\Framework\TestCase {
-
-	use EditMetadataHelper;
 
 	private SetItemDescriptionValidator $validator;
 	private AssertItemExists $assertItemExists;
@@ -56,79 +54,63 @@ class SetItemDescriptionTest extends \PHPUnit\Framework\TestCase {
 	public function testAddDescription(): void {
 		$language = 'en';
 		$description = 'Hello world again.';
-		$itemId = 'Q123';
+		$itemId = new ItemId( 'Q123' );
 		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
 		$comment = 'add description edit comment';
 
-		$this->itemRetriever = $this->createStub( ItemRetriever::class );
-		$this->itemRetriever->method( 'getItem' )->willReturn( new DataModelItem() );
-
-		$updatedItem = $this->newReadModelItemWithDescriptions(
-			new Descriptions( new Description( $language, $description ) )
-		);
-		$revisionId = 123;
-		$lastModified = '20221212040506';
-
-		$this->itemUpdater = $this->createMock( ItemUpdater::class );
-		$this->itemUpdater->expects( $this->once() )
-			->method( 'update' )
-			->with(
-				$this->callback( fn( DataModelItem $item ) => $item->getDescriptions()->toTextArray() === [ $language => $description ] ),
-				$this->expectEquivalentMetadata( $editTags, $isBot, $comment, EditSummary::ADD_ACTION )
-			)
-			->willReturn( new ItemRevision( $updatedItem, $lastModified, $revisionId ) );
+		$itemRepo = new InMemoryItemRepository();
+		$itemRepo->addItem( NewItem::withId( $itemId )->build() );
+		$this->itemRetriever = $itemRepo;
+		$this->itemUpdater = $itemRepo;
 
 		$response = $this->newUseCase()->execute(
-			new SetItemDescriptionRequest( $itemId, $language, $description, $editTags, $isBot, $comment, null )
+			new SetItemDescriptionRequest( "$itemId", $language, $description, $editTags, $isBot, $comment, null )
 		);
 
 		$this->assertEquals( new Description( $language, $description ), $response->getDescription() );
-		$this->assertSame( $revisionId, $response->getRevisionId() );
-		$this->assertSame( $lastModified, $response->getLastModified() );
+		$this->assertSame( $itemRepo->getLatestRevisionId( $itemId ), $response->getRevisionId() );
+		$this->assertSame( $itemRepo->getLatestRevisionTimestamp( $itemId ), $response->getLastModified() );
+		$this->assertEquals(
+			new EditMetadata(
+				$editTags,
+				$isBot,
+				DescriptionEditSummary::newAddSummary( $comment, new Term( $language, $description ) )
+			),
+			$itemRepo->getLatestRevisionEditMetadata( $itemId )
+		);
 		$this->assertFalse( $response->wasReplaced() );
 	}
 
 	public function testReplaceDescription(): void {
 		$language = 'en';
 		$newDescription = 'Hello world again.';
-		$itemId = 'Q123';
+		$itemId = new ItemId( 'Q123' );
 		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
 		$item = NewItem::withId( $itemId )->andDescription( $language, 'Hello world' )->build();
 		$comment = 'replace description edit comment';
 
-		$this->itemRetriever = $this->createMock( ItemRetriever::class );
-		$this->itemRetriever
-			->expects( $this->once() )
-			->method( 'getItem' )
-			->with( $itemId )
-			->willReturn( $item );
-
-		$updatedItem = $this->newReadModelItemWithDescriptions(
-			new Descriptions( new Description( $language, $newDescription ) )
-		);
-		$revisionId = 123;
-		$lastModified = '20221212040506';
-
-		$this->itemUpdater = $this->createMock( ItemUpdater::class );
-		$this->itemUpdater->expects( $this->once() )
-			->method( 'update' )
-			->with(
-				$this->callback(
-					fn( DataModelItem $item ) => $item->getDescriptions()->toTextArray() === [ $language => $newDescription ]
-				),
-				$this->expectEquivalentMetadata( $editTags, $isBot, $comment, EditSummary::REPLACE_ACTION )
-			)
-			->willReturn( new ItemRevision( $updatedItem, $lastModified, $revisionId ) );
+		$itemRepo = new InMemoryItemRepository();
+		$itemRepo->addItem( $item );
+		$this->itemRetriever = $itemRepo;
+		$this->itemUpdater = $itemRepo;
 
 		$response = $this->newUseCase()->execute(
-			new SetItemDescriptionRequest( $itemId, $language, $newDescription, $editTags, $isBot, $comment, null )
+			new SetItemDescriptionRequest( "$itemId", $language, $newDescription, $editTags, $isBot, $comment, null )
 		);
 
 		$this->assertEquals( new Description( $language, $newDescription ), $response->getDescription() );
-		$this->assertSame( $revisionId, $response->getRevisionId() );
-		$this->assertSame( $lastModified, $response->getLastModified() );
+		$this->assertSame( $itemRepo->getLatestRevisionId( $itemId ), $response->getRevisionId() );
+		$this->assertSame( $itemRepo->getLatestRevisionTimestamp( $itemId ), $response->getLastModified() );
+		$this->assertEquals(
+			new EditMetadata(
+				$editTags,
+				$isBot,
+				DescriptionEditSummary::newReplaceSummary( $comment, new Term( $language, $newDescription ) )
+			),
+			$itemRepo->getLatestRevisionEditMetadata( $itemId )
+		);
 		$this->assertTrue( $response->wasReplaced() );
 	}
 
