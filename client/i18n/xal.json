@@ -6,6 +6,7 @@
 			"Алия"
 		]
 	},
+	"wikibase-client-desc": "Wikibase өргдклин үүлчлүләч",
 	"tooltip-t-wikibase": "То-дигин хадһллң холвсн махбуд тал заалһ",
 	"wikibase-comment-update": "{{WBREPONAME}} махбуд сольгдсн",
 	"wikibase-dataitem": "{{WBREPONAME}} зүүл",
@@ -21,5 +22,6 @@
 	"wikibase-rc-hide-wikidata-show": "Үзүлх",
 	"wikibase-rc-wikibase-edit-letter": "Ө",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} ясвр",
-	"wikibase-otherprojects": "Бусд төсл"
+	"wikibase-otherprojects": "Бусд төсл",
+	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Ясврлхиг үрглҗлүлх"
 }

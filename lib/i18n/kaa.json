@@ -8,5 +8,7 @@
 	"wikibase-error-save-generic": "Qátelik sebepli saqlaw múmkin bolmadı.",
 	"wikibase-timedetails-isotime": "Waqıt belgisi",
 	"wikibase-sitelinks-wikipedia": "Wikipedia",
-	"wikibase-entity-summary-wbsetitem": "Jańa element jaratıw"
+	"wikibase-entity-summary-wbsetitem": "Jańa element jaratıw",
+	"wikibase-entity-summary-wbcreateclaim": "{{PLURAL:$1|1 málimleme|málimleme}} jaratıldı",
+	"wikibase-entity-summary-wbremoveclaims": "{{PLURAL:$1|1 málimleme|málimleme}} óshirildi"
 }

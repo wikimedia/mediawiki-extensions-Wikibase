@@ -35,7 +35,9 @@
 			"烈羽",
 			"神樂坂秀吉",
 			"飞舞回堂前",
-			"아라"
+			"아라",
+			"H78c67c",
+			"SunAfterRain"
 		]
 	},
 	"wikibase-desc": "結構化資料儲存庫",
@@ -153,7 +155,7 @@
 	"wikibase-copyrighttooltip-acknowledge": "我接受我未來的編輯使用這些條款。不要再顯示此訊息。",
 	"wikibase-entityselector-more": "更多",
 	"wikibase-entityselector-notfound": "沒有符合的資訊",
-	"wikibase-anonymouseditwarning": "警告：您尚未登入。若您有做出任何編輯，會以您的[https://zh.wikipedia.org/wiki/IP%E5%9C%B0%E5%9D%80 IP位址]來公開出。若您有<strong>[[Special:UserLogin|登入]]</strong>或是<strong>[[Special:CreateAccount|建立帳號]]</strong>，您做出的編輯會歸在您的使用者名稱之下。",
+	"wikibase-anonymouseditwarning": "警告：您尚未登入。若您有做出任何編輯，會以您的[https://zh.wikipedia.org/wiki/IP%E5%9C%B0%E5%9D%80 IP位址]來公開出。若您有<strong>[$1 登入]</strong>或是<strong>[$2 建立帳號]</strong>，您做出的編輯會歸在您的使用者名稱之下。",
 	"wikibase-anonymouseditwarning-heading": "您尚未登入",
 	"wikibase-anonymouseditwarning-message": "若您做出任何編輯，您目前的 IP 位址會公開可見。若您有登入或是建立帳號，您做出的編輯會歸在您的使用者名稱之下。",
 	"wikibase-anonymouseditwarning-dismiss-persist": "每當我沒有登入時警告我。",
@@ -386,9 +388,11 @@
 	"wikibase-api-illegal-entity-remove": "不可刪除帶有最高層級鍵值 <var>remove</var> 的實體",
 	"wikibase-api-illegal-id-or-site-page-selector": "您需要提供以下兩者其一：實體 <var>id</var>，或是 <var>site</var> 與 <var>page</var> 的結合。",
 	"wikibase-api-illegal-ids-or-sites-titles-selector": "為對應頁面提供「ids」，或是一組的「sites」與「titles」",
+	"wikibase-api-no-data": "沒有資料要進行操作。",
 	"wikibase-api-no-external-page": "外部客戶端網站「$1」未提供頁面「$2」的頁面資訊。",
 	"wikibase-api-no-such-entity": "找不到 ID 為「$1」的實體。",
 	"wikibase-api-no-such-sitelink": "當嘗試編輯徽章時無法找尋至 \"$1\" 的網站連結。",
+	"wikibase-api-not-supported": "請求的功能未被提供的實體支持。",
 	"wikibase-api-not-recognized-datatype": "缺少或無法識別應要有的資料類型。",
 	"wikibase-api-permissiondenied": "您無權操作",
 	"wikibase-api-tags-invalid": "標籤參數無效。",

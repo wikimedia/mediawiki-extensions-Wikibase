@@ -6,7 +6,8 @@
 			"Hedeyohu22",
 			"Nurlan",
 			"Нұрлан Рахымжанов",
-			"СеніңШешең"
+			"СеніңШешең",
+			"Casserium"
 		]
 	},
 	"tooltip-t-wikibase": "Сілтеме дерек қойма данасымен байланысқан",
@@ -45,6 +46,8 @@
 	"wikibase-rc-show-wikidata-pref": "{{WBREPONAME}} өңдемелерін жуықтағы өзгерістерден көрсету",
 	"wikibase-rc-wikibase-edit-letter": "Д",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} өңдемесі",
+	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}} өңдемелері",
+	"wikibase-rcfilters-hide-wikibase-description": "{{WBREPONAME}} жобасынан жасалған өңдемелер.",
 	"wikibase-watchlist-show-changes-pref": "{{WBREPONAME}} өңдемелерін бақылау тізіміңізден көрсету",
 	"unconnectedpages": "Беттер даналарға байланыспады",
 	"wikibase-unconnectedpages-submit": "Өту",
