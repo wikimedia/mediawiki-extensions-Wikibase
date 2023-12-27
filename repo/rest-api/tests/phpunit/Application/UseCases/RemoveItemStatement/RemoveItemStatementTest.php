@@ -13,7 +13,6 @@ use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
-use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatement
@@ -24,8 +23,6 @@ use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
  *
  */
 class RemoveItemStatementTest extends TestCase {
-
-	use EditMetadataHelper;
 
 	private AssertItemExists $assertItemExists;
 	private RemoveStatement $removeStatement;

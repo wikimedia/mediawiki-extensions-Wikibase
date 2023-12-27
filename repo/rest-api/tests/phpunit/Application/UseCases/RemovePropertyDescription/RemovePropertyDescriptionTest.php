@@ -21,7 +21,6 @@ use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
-use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryPropertyRepository;
 
 /**
@@ -33,8 +32,6 @@ use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryPropertyReposi
  *
  */
 class RemovePropertyDescriptionTest extends TestCase {
-
-	use EditMetadataHelper;
 
 	private RemovePropertyDescriptionValidator $requestValidator;
 	private AssertPropertyExists $assertPropertyExists;

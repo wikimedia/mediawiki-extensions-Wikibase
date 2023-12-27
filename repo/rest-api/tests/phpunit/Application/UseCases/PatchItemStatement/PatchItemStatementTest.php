@@ -14,7 +14,6 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementResp
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
-use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatement
@@ -24,8 +23,6 @@ use Wikibase\Repo\Tests\RestApi\Domain\Model\EditMetadataHelper;
  * @license GPL-2.0-or-later
  */
 class PatchItemStatementTest extends TestCase {
-
-	use EditMetadataHelper;
 
 	private PatchItemStatementValidator $validator;
 	private AssertItemExists $assertItemExists;
