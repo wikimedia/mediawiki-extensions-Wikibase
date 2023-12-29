@@ -163,6 +163,7 @@
 	"wikibase-anonymouseditwarning-message": "Derzeit wird deine IP-Adresse öffentlich sichtbar sein, wenn du irgendwelche Bearbeitungen durchführst. Wenn du dich anmeldest oder ein Benutzerkonto erstellst, werden deine Bearbeitungen neben anderen Vorteilen deinem Benutzerkonto zugeordnet.",
 	"wikibase-anonymouseditwarning-dismiss-persist": "Warne mich immer, wenn ich nicht angemeldet bin.",
 	"wikibase-anonymouseditwarning-dismiss-button": "Ohne Anmeldung bearbeiten",
+	"wikibase-anonymouseditnotificationtempuser": "Wenn du dich <strong>[$1 anmeldest]</strong> oder <strong>[$2 ein Konto erstellst]</strong>, werden deiner Änderungen neben anderen Vorteilen einem Benutzernamen zugeordnet.",
 	"wikibase-move-error": "Du kannst keine Seiten in einem Datennamensraum verschieben oder in ihn hinein schieben.",
 	"wikibase-validator-invalid": "Ungültiger Wert",
 	"wikibase-validator-missing-field": "Das erforderliche Feld „$1“ fehlt",
