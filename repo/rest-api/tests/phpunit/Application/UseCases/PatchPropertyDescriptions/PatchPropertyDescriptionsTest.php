@@ -82,11 +82,9 @@ class PatchPropertyDescriptionsTest extends TestCase {
 		$isBot = false;
 		$comment = 'descriptions patched by ' . __method__;
 
-		$this->descriptionsRetriever = $this->createStub( PropertyDescriptionsRetriever::class );
-		$this->descriptionsRetriever->method( 'getDescriptions' )->willReturn( new Descriptions() );
-
 		$propertyRepo = new InMemoryPropertyRepository();
 		$propertyRepo->addProperty( new Property( $propertyId, null, 'string' ) );
+		$this->descriptionsRetriever = $propertyRepo;
 		$this->propertyRetriever = $propertyRepo;
 		$this->propertyUpdater = $propertyRepo;
 

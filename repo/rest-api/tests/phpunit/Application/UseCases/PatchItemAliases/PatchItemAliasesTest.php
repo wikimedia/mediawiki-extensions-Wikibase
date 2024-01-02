@@ -73,16 +73,13 @@ class PatchItemAliasesTest extends TestCase {
 
 		$itemId = new ItemId( 'Q42' );
 
-		$this->aliasesRetriever = $this->createStub( ItemAliasesRetriever::class );
-		$this->aliasesRetriever->method( 'getAliases' )
-			->willReturn( new Aliases( new AliasesInLanguage( $aliasLanguage, [ $aliasText ] ) ) );
-
 		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
 		$comment = 'aliases patched by ' . __method__;
 
 		$itemRepo = new InMemoryItemRepository();
 		$itemRepo->addItem( NewItem::withId( $itemId )->andAliases( $aliasLanguage, [ $aliasText ] )->build() );
+		$this->aliasesRetriever = $itemRepo;
 		$this->itemRetriever = $itemRepo;
 		$this->itemUpdater = $itemRepo;
 

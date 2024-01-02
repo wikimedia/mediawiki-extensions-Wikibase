@@ -76,15 +76,13 @@ class PatchItemDescriptionsTest extends TestCase {
 		$newDescriptionText = 'a description of an Item';
 		$newDescriptionLanguage = 'en';
 
-		$this->descriptionsRetriever = $this->createStub( ItemDescriptionsRetriever::class );
-		$this->descriptionsRetriever->method( 'getDescriptions' )->willReturn( new Descriptions() );
-
 		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
 		$comment = 'descriptions patched by ' . __method__;
 
 		$itemRepo = new InMemoryItemRepository();
 		$itemRepo->addItem( new Item( $itemId ) );
+		$this->descriptionsRetriever = $itemRepo;
 		$this->itemRetriever = $itemRepo;
 		$this->itemUpdater = $itemRepo;
 
@@ -196,11 +194,10 @@ class PatchItemDescriptionsTest extends TestCase {
 		$item = NewItem::withId( $itemId )->build();
 		$patchResult = [ 'ar' => '' ];
 
-		$this->itemRetriever = $this->createStub( ItemRetriever::class );
-		$this->itemRetriever->method( 'getItem' )->willReturn( $item );
-
-		$this->descriptionsRetriever = $this->createStub( ItemDescriptionsRetriever::class );
-		$this->descriptionsRetriever->method( 'getDescriptions' )->willReturn( new Descriptions() );
+		$itemRepo = new InMemoryItemRepository();
+		$itemRepo->addItem( $item );
+		$this->descriptionsRetriever = $itemRepo;
+		$this->itemRetriever = $itemRepo;
 
 		$expectedUseCaseError = $this->createStub( UseCaseError::class );
 		$this->patchedDescriptionsValidator = $this->createMock( PatchedDescriptionsValidator::class );

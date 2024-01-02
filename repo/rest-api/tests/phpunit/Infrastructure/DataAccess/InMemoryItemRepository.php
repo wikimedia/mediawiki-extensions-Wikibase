@@ -12,13 +12,16 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Item as ReadModelItem;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
+use Wikibase\Repo\RestApi\Domain\Services\ItemAliasesRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\ItemDescriptionsRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\ItemLabelsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 
 /**
  * @license GPL-2.0-or-later
  */
-class InMemoryItemRepository implements ItemRetriever, ItemUpdater {
+class InMemoryItemRepository implements ItemRetriever, ItemLabelsRetriever, ItemDescriptionsRetriever, ItemAliasesRetriever, ItemUpdater {
 	use StatementReadModelHelper;
 
 	private array $items = [];
@@ -48,6 +51,18 @@ class InMemoryItemRepository implements ItemRetriever, ItemUpdater {
 		return $this->items[$itemId->getSerialization()] ?? null;
 	}
 
+	public function getLabels( ItemId $itemId ): ?Labels {
+		return $this->items["$itemId"] ? $this->convertToReadModel( $this->items["$itemId"] )->getLabels() : null;
+	}
+
+	public function getDescriptions( ItemId $itemId ): ?Descriptions {
+		return $this->items["$itemId"] ? $this->convertToReadModel( $this->items["$itemId"] )->getDescriptions() : null;
+	}
+
+	public function getAliases( ItemId $itemId ): ?Aliases {
+		return $this->items["$itemId"] ? $this->convertToReadModel( $this->items["$itemId"] )->getAliases() : null;
+	}
+
 	public function update( Item $item, EditMetadata $editMetadata ): ItemRevision {
 		$this->items[$item->getId()->getSerialization()] = $item;
 		$revisionData = [
@@ -58,18 +73,19 @@ class InMemoryItemRepository implements ItemRetriever, ItemUpdater {
 		];
 		$this->latestRevisionData[$item->getId()->getSerialization()] = $revisionData;
 
-		return new ItemRevision(
-			new ReadModelItem(
-				Labels::fromTermList( $item->getLabels() ),
-				Descriptions::fromTermList( $item->getDescriptions() ),
-				Aliases::fromAliasGroupList( $item->getAliasGroups() ),
-				new StatementList( ...array_map(
-					[ $this->newStatementReadModelConverter(), 'convert' ],
-					iterator_to_array( $item->getStatements() )
-				) )
-			),
-			$revisionData['revTime'],
-			$revisionData['revId']
+		return new ItemRevision( $this->convertToReadModel( $item ), $revisionData['revTime'], $revisionData['revId'] );
+	}
+
+	private function convertToReadModel( Item $item ): ReadModelItem {
+		return new ReadModelItem(
+			Labels::fromTermList( $item->getLabels() ),
+			Descriptions::fromTermList( $item->getDescriptions() ),
+			Aliases::fromAliasGroupList( $item->getAliasGroups() ),
+			new StatementList( ...array_map(
+				[ $this->newStatementReadModelConverter(), 'convert' ],
+				iterator_to_array( $item->getStatements() )
+			) )
 		);
 	}
+
 }
