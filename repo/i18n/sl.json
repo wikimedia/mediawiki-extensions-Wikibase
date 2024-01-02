@@ -138,6 +138,7 @@
 	"wikibase-anonymouseditwarning-message": "Trenutno bo vaš IP-naslov javno viden, če boste opravili kakšno urejanje. Če se boste prijavili ali če si boste ustvarili račun, bodo poleg drugih koristi vaši prispevki pripisani vašemu uporabniškemu imenu.",
 	"wikibase-anonymouseditwarning-dismiss-persist": "Opozori me, če nisem {{GENDER:|prijavljen|prijavljena|prijavljen_a}}",
 	"wikibase-anonymouseditwarning-dismiss-button": "Urejanje brez prijave",
+	"wikibase-anonymouseditnotificationtempuser": "Če se boste <strong>[$1 prijavili]</strong> ali si boste <strong>[$2 ustvarili račun]</strong>, bodo vaša urejanja med drugimi prednostmi pripisana uporabniškemu imenu.",
 	"wikibase-move-error": "Strani v imenskem prostoru podatkov ne morete prestavljati, prav tako tudi ne morete strani prestavljati vanj.",
 	"wikibase-validator-invalid": "Neveljavna vrednost",
 	"wikibase-validator-missing-field": "Manjka zahtevano polje »$1«",

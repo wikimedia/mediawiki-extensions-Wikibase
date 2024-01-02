@@ -147,6 +147,7 @@
 	"wikibase-anonymouseditwarning-message": "כתובת ה־IP שלך תהיה מוצגת לכולם אחרי ביצוע עריכות. יצירת חשבון כניסה אליו תגרום לכך שהעריכות שלך תיוחסנה לשם המשתמש שלך, ויש לזה גם יתרונות נוספים.",
 	"wikibase-anonymouseditwarning-dismiss-persist": "להזהיר אותי כשלא נכנסתי לחשבון.",
 	"wikibase-anonymouseditwarning-dismiss-button": "עריכה בלי כניסה",
+	"wikibase-anonymouseditnotificationtempuser": "<strong>[$1 התחברות]</strong> או <strong>[$2 כניסה לחשבון]</strong> תגרום לכך שהעריכת שלך ייוחסו לשם משתמש, ויהיו לזה עוד יתרונות.",
 	"wikibase-move-error": "לא ניתן להעביר דפים במרחב נתונים, ולא ניתן להעביר דפים אליו.",
 	"wikibase-validator-invalid": "ערך בלתי־תקין",
 	"wikibase-validator-missing-field": "חסר השדה הדרוש \"$1\"",

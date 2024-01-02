@@ -3,6 +3,7 @@
 		"authors": [
 			"Akakiiri",
 			"Ayire Adongo",
+			"Baba Ayɛ'ɛra",
 			"Dnshitobu"
 		]
 	},
@@ -11,5 +12,6 @@
 	"wikibase-label-empty": "Daalegɔ ka niɛ pa’alɛ",
 	"wikibase-description-empty": "Pa’alegɔ la ka niɛ",
 	"wikibase-sitelinks-special": "Bɔberɛ a si'a",
-	"wikibase-statementview-rank-normal": "Ma’a makerɛ"
+	"wikibase-statementview-rank-normal": "Ma’a makerɛ",
+	"wikibase-anonymouseditnotificationtempuser": "La san dɛna fum <strong>[$1 lɔgɛ kɛ]</strong> bii <strong>[$2 yo'e akanti]</strong>, fu demesego la wan tara yu'urɛ, gana suŋerɛ basɛba.."
 }
