@@ -43,6 +43,14 @@
 			}
 		},
 		{
+			"name": "sitelinks",
+			"description": "Wikibase Item Sitelinks",
+			"externalDocs": {
+				"description": "Wikibase Data Model - Sitelinks",
+				"url": "https://www.mediawiki.org/wiki/Wikibase/DataModel#Sitelinks"
+			}
+		},
+		{
 			"name": "properties",
 			"description": "Wikibase Properties",
 			"externalDocs": {
