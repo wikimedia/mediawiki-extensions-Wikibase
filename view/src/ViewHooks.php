@@ -6,9 +6,9 @@ use ExtensionRegistry;
 use MediaWiki\Hook\UnitTestsListHook;
 use MediaWiki\Languages\LanguageNameUtils;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\ResourceLoader\Context;
 use MediaWiki\ResourceLoader\Hook\ResourceLoaderRegisterModulesHook;
 use MediaWiki\ResourceLoader\ResourceLoader;
-use ResourceLoaderContext;
 
 /**
  * File defining the hook handlers for the WikibaseView extension.
@@ -55,7 +55,7 @@ final class ViewHooks implements UnitTestsListHook, ResourceLoaderRegisterModule
 					[
 						'name' => 'resources/wikibase/languageNames.json',
 						'callback' => static function (
-							ResourceLoaderContext $context
+							Context $context
 						) use ( $isUlsLoaded ) {
 							$languageNameUtils = MediaWikiServices::getInstance()->getLanguageNameUtils();
 							$languageNames = $languageNameUtils->getLanguageNames(
