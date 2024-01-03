@@ -14,7 +14,8 @@ module.exports.getRequestsOnItem = [
 	( { itemId } ) => rbf.newGetItemDescriptionsRequestBuilder( itemId ),
 	( { itemId } ) => rbf.newGetItemLabelRequestBuilder( itemId, 'en' ),
 	( { itemId } ) => rbf.newGetItemLabelsRequestBuilder( itemId ),
-	( { statementId } ) => rbf.newGetStatementRequestBuilder( statementId )
+	( { statementId } ) => rbf.newGetStatementRequestBuilder( statementId ),
+	( { itemId } ) => rbf.newGetItemSiteLinksRequestBuilder( itemId )
 ];
 
 module.exports.getRequestsOnProperty = [
