@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\GetItemSiteLinksTest;
+namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\GetItemSiteLinks;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
