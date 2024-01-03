@@ -2,7 +2,7 @@
 
 const { newGetItemSiteLinksRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { action, utils, assert } = require( 'api-testing' );
-const { createEntity } = require( '../helpers/entityHelper' );
+const { createEntity, createRedirectForItem } = require( '../helpers/entityHelper' );
 const { expect } = require( '../helpers/chaiHelper' );
 
 describe( newGetItemSiteLinksRequestBuilder().getRouteDescription(), () => {
@@ -60,6 +60,34 @@ describe( newGetItemSiteLinksRequestBuilder().getRouteDescription(), () => {
 		assert.header( response, 'Content-Language', 'en' );
 		assert.strictEqual( response.body.code, 'invalid-item-id' );
 		assert.include( response.body.message, invalidItemId );
+	} );
+
+	it( 'responds 404 in case the item does not exist', async () => {
+		const nonExistentItem = 'Q99999999';
+		const response = await newGetItemSiteLinksRequestBuilder( nonExistentItem )
+			.assertValidRequest()
+			.makeRequest();
+
+		expect( response ).to.have.status( 404 );
+		assert.header( response, 'Content-Language', 'en' );
+		assert.strictEqual( response.body.code, 'item-not-found' );
+		assert.include( response.body.message, nonExistentItem );
+	} );
+
+	it( '308 - item redirected', async () => {
+		const redirectTarget = testItemId;
+		const redirectSource = await createRedirectForItem( redirectTarget );
+
+		const response = await newGetItemSiteLinksRequestBuilder( redirectSource )
+			.assertValidRequest()
+			.makeRequest();
+
+		expect( response ).to.have.status( 308 );
+
+		assert.isTrue(
+			new URL( response.headers.location ).pathname
+				.endsWith( `rest.php/wikibase/v0/entities/items/${redirectTarget}/sitelinks` )
+		);
 	} );
 
 } );

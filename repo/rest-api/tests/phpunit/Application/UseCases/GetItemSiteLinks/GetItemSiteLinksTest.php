@@ -8,6 +8,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItemSiteLinks\GetItemSiteLinks
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemSiteLinks\GetItemSiteLinksRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\ReadModel\SiteLink;
 use Wikibase\Repo\RestApi\Domain\ReadModel\SiteLinks;
 use Wikibase\Repo\RestApi\Domain\Services\SiteLinksRetriever;
@@ -84,6 +85,22 @@ class GetItemSiteLinksTest extends TestCase {
 			$this->assertSame( UseCaseError::INVALID_ITEM_ID, $e->getErrorCode() );
 			$this->assertSame( 'Not a valid item ID: X321', $e->getErrorMessage() );
 			$this->assertSame( [], $e->getErrorContext() );
+		}
+	}
+
+	public function testGivenItemNotFoundOrRedirect_throws(): void {
+		$expectedException = $this->createStub( UseCaseException::class );
+
+		$this->getRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
+		$this->getRevisionMetadata->method( 'execute' )
+			->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase()->execute( new GetItemSiteLinksRequest( 'Q999999' ) );
+
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( $expectedException, $e );
 		}
 	}
 
