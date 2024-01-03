@@ -29,7 +29,7 @@
 	"wikibase-addlinkstitle": "Add interleid airtins",
 	"wikibase-linkitem-addlinks": "Eik airtins",
 	"wikibase-linkitem-alreadylinked": "The page that ye wantit tae airt wi is awreadie attached til ae [$1 item] on the central data repository that airts til [[$2]] on this steid. Items can anely hae ae page per steid attached. Please wale ae different page tae airt wi.",
-	"wikibase-linkitem-close": "Claise dialog n relaid page",
+	"wikibase-linkitem-close": "Close dialogue an reload page",
 	"wikibase-linkitem-failure": "Aen onkent mistak occurred while ettlin tae ait til the gien page.",
 	"wikibase-linkitem-title": "Airt wi page",
 	"wikibase-linkitem-linkpage": "Airt wi page",

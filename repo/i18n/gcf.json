@@ -2,11 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"EritajGwadloup",
+			"Histnou",
 			"Laetitia Kb"
 		]
 	},
 	"wikibase-edit": "Modifyé",
 	"wikibase-add": "Ajouté-y",
+	"wikibase-label-empty": "Pon labèl ki défini",
 	"wikibase-description-empty": "Yo pa ba pon déskripsyon",
 	"wikibase-sitelinks-special": "Dòt sit"
 }
