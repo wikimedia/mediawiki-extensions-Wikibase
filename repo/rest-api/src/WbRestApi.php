@@ -61,6 +61,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription\SetPropert
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\SetPropertyLabel;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\SiteLinksRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\StatementRemover;
 use Wikibase\Repo\RestApi\Domain\Services\StatementUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupItemDataRetriever;
@@ -80,6 +81,11 @@ class WbRestApi {
 	public static function getGetItem( ContainerInterface $services = null ): GetItem {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.GetItem' );
+	}
+
+	public static function getSiteLinksRetriever( ContainerInterface $services = null ): SiteLinksRetriever {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.SiteLinksRetriever' );
 	}
 
 	public static function getGetItemLabels( ContainerInterface $services = null ): GetItemLabels {

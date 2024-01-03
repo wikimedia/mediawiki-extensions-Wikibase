@@ -3,5 +3,10 @@
 		"path": "/wikibase/v0/entities/properties/{property_id}/descriptions/{language_code}",
 		"method": "DELETE",
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\RemovePropertyDescriptionRouteHandler::factory"
+	},
+	{
+		"path": "/wikibase/v0/entities/items/{item_id}/sitelinks",
+		"method": "GET",
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetItemSiteLinksRouteHandler::factory"
 	}
 ]

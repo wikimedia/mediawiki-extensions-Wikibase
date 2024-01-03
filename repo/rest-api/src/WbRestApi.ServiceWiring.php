@@ -107,6 +107,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyParts;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\SiteLinksRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\RestApi\Domain\Services\StatementRemover;
 use Wikibase\Repo\RestApi\Domain\Services\StatementUpdater;
@@ -119,6 +120,7 @@ use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdaterPropertyUpdater
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdaterStatementRemover;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdaterStatementUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\PrefetchingTermLookupAliasesRetriever;
+use Wikibase\Repo\RestApi\Infrastructure\DataAccess\SiteLinkLookupSiteLinksRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\StatementSubjectRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\TermLookupEntityTermsRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\WikibaseEntityPermissionChecker;
@@ -912,6 +914,13 @@ return [
 			WbRestApi::getPropertyUpdater( $services ),
 			WbRestApi::getAssertPropertyExists( $services ),
 			WbRestApi::getAssertUserIsAuthorized( $services )
+		);
+	},
+
+	'WbRestApi.SiteLinksRetriever' => function( MediaWikiServices $services ): SiteLinksRetriever {
+		return new SiteLinkLookupSiteLinksRetriever(
+			WikibaseRepo::getStore( $services )->newSiteLinkStore(),
+			new SiteLinksReadModelConverter( $services->getSiteLookup() )
 		);
 	},
 

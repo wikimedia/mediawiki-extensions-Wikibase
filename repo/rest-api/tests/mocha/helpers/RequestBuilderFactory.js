@@ -15,6 +15,12 @@ module.exports = {
 			.withPathParam( 'property_id', propertyId );
 	},
 
+	newGetItemSiteLinksRequestBuilder( itemId ) {
+		return new RequestBuilder()
+			.withRoute( 'GET', '/entities/items/{item_id}/sitelinks' )
+			.withPathParam( 'item_id', itemId );
+	},
+
 	newGetItemAliasesRequestBuilder( itemId ) {
 		return new RequestBuilder()
 			.withRoute( 'GET', '/entities/items/{item_id}/aliases' )
