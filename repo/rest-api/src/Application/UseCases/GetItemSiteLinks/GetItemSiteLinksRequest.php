@@ -2,10 +2,13 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetItemSiteLinks;
 
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\UseCaseRequest;
+
 /**
  * @license GPL-2.0-or-later
  */
-class GetItemSiteLinksRequest {
+class GetItemSiteLinksRequest implements UseCaseRequest, ItemIdRequest {
 
 	private string $itemId;
 

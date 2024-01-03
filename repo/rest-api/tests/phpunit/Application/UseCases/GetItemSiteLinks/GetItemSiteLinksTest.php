@@ -7,9 +7,11 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemSiteLinks\GetItemSiteLinks;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemSiteLinks\GetItemSiteLinksRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\ReadModel\SiteLink;
 use Wikibase\Repo\RestApi\Domain\ReadModel\SiteLinks;
 use Wikibase\Repo\RestApi\Domain\Services\SiteLinksRetriever;
+use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItemSiteLinks\GetItemSiteLinks
@@ -71,8 +73,23 @@ class GetItemSiteLinksTest extends TestCase {
 		$this->assertEquals( $response->getSiteLinks(), new SiteLinks() );
 	}
 
+	public function testGivenInvalidItemId_throws(): void {
+		try {
+			$this->newUseCase()->execute(
+				new GetItemSiteLinksRequest( 'X321' )
+			);
+
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::INVALID_ITEM_ID, $e->getErrorCode() );
+			$this->assertSame( 'Not a valid item ID: X321', $e->getErrorMessage() );
+			$this->assertSame( [], $e->getErrorContext() );
+		}
+	}
+
 	private function newUseCase(): GetItemSiteLinks {
 		return new GetItemSiteLinks(
+			new TestValidatingRequestDeserializer(),
 			$this->getRevisionMetadata,
 			$this->siteLinksRetriever
 		);

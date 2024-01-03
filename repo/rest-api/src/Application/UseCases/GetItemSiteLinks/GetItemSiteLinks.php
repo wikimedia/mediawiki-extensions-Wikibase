@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetItemSiteLinks;
 
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Services\SiteLinksRetriever;
 
 /**
@@ -11,19 +11,25 @@ use Wikibase\Repo\RestApi\Domain\Services\SiteLinksRetriever;
  */
 class GetItemSiteLinks {
 
+	private GetItemSiteLinksValidator $validator;
 	private GetLatestItemRevisionMetadata $getLatestRevisionMetadata;
 	private SiteLinksRetriever $siteLinksRetriever;
 
 	public function __construct(
+		GetItemSiteLinksValidator $validator,
 		GetLatestItemRevisionMetadata $getLatestRevisionMetadata,
 		SiteLinksRetriever $siteLinksRetriever
 	) {
+		$this->validator = $validator;
 		$this->getLatestRevisionMetadata = $getLatestRevisionMetadata;
 		$this->siteLinksRetriever = $siteLinksRetriever;
 	}
 
+	/**
+	 * @throws UseCaseError
+	 */
 	public function execute( GetItemSiteLinksRequest $request ): GetItemSiteLinksResponse {
-		$itemId = new ItemId( $request->getItemId() );
+		$itemId = $this->validator->validateAndDeserialize( $request )->getItemId();
 
 		[ $revisionId, $lastModified ] = $this->getLatestRevisionMetadata->execute( $itemId );
 

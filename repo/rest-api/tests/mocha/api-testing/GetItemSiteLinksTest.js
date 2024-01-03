@@ -50,4 +50,16 @@ describe( newGetItemSiteLinksRequestBuilder().getRouteDescription(), () => {
 		assert.deepEqual( response.body, {} );
 	} );
 
+	it( '400 error - bad request, invalid item ID', async () => {
+		const invalidItemId = 'X123';
+		const response = await newGetItemSiteLinksRequestBuilder( invalidItemId )
+			.assertInvalidRequest()
+			.makeRequest();
+
+		expect( response ).to.have.status( 400 );
+		assert.header( response, 'Content-Language', 'en' );
+		assert.strictEqual( response.body.code, 'invalid-item-id' );
+		assert.include( response.body.message, invalidItemId );
+	} );
+
 } );
