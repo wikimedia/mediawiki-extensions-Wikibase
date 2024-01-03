@@ -15,7 +15,7 @@ import {
 	addPropertyLabelResponse,
 	addDataBridgeConfigResponse,
 	addReferenceRenderingResponse,
-	addEntityDataResponse,
+	addEntityDataResponse, addTempUserConfigResponse,
 } from '../util/mocks';
 import { budge } from '../util/timer';
 import {
@@ -792,7 +792,10 @@ describe( 'app', () => {
 								addSiteinfoRestrictionsResponse(
 									addDataBridgeConfigResponse(
 										{},
-										{},
+										addTempUserConfigResponse(
+											{},
+											{},
+										),
 									),
 								),
 							),
@@ -841,10 +844,11 @@ describe( 'app', () => {
 							addPageInfoProtectedpageResponse(
 								DEFAULT_ENTITY,
 								addSiteinfoRestrictionsResponse(
-									addDataBridgeConfigResponse(
-										{},
-										{},
-									),
+									addDataBridgeConfigResponse( {},
+										addTempUserConfigResponse(
+											{},
+											{},
+										) ),
 								),
 							),
 						),

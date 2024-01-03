@@ -132,6 +132,7 @@ class DataBridgeResourceLoaderModules implements ResourceLoaderRegisterModulesHo
 					'wikibase-client-data-bridge-references-heading',
 					'wikibase-client-data-bridge-anonymous-edit-warning-heading',
 					'wikibase-client-data-bridge-anonymous-edit-warning-message',
+					'wikibase-client-data-bridge-anonymous-edit-warning-tempuser-message',
 					'wikibase-client-data-bridge-anonymous-edit-warning-proceed',
 					'wikibase-client-data-bridge-anonymous-edit-warning-login',
 					'wikibase-client-data-bridge-license-heading',

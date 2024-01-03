@@ -18,6 +18,7 @@ import ApiPageEditPermissionErrorsRepository from '@/data-access/ApiPageEditPerm
 import ApiPurge from '@/data-access/ApiPurge';
 import Tracker from '@/tracking/Tracker';
 import ApiRenderReferencesRepository from '@/data-access/ApiRenderReferencesRepository';
+import ApiTempUserConfigRepository from '@/data-access/ApiTempUserConfigRepository';
 
 export default function createServices(
 	mwWindow: MwWindow,
@@ -77,6 +78,10 @@ export default function createServices(
 	services.set( 'messagesRepository', new MwMessagesRepository( mwWindow.mw.message ) );
 
 	services.set( 'wikibaseRepoConfigRepository', new ApiRepoConfigRepository(
+		repoApi,
+	) );
+
+	services.set( 'tempUserConfigRepository', new ApiTempUserConfigRepository(
 		repoApi,
 	) );
 

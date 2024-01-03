@@ -10,6 +10,7 @@ import { BridgePermissionsRepository } from '@/definitions/data-access/BridgePer
 import MediaWikiRouter from '@/definitions/MediaWikiRouter';
 import MediaWikiPurge from '@/definitions/MediaWikiPurge';
 import ReferencesRenderingRepository from '@/definitions/data-access/ReferencesRenderingRepository';
+import TempUserConfigRepository from '@/definitions/data-access/TempUserConfigRepository';
 
 export interface Services {
 	readingEntityRepository: ReadingEntityRepository;
@@ -20,6 +21,7 @@ export interface Services {
 	propertyDatatypeRepository: PropertyDatatypeRepository;
 	messagesRepository: MessagesRepository;
 	wikibaseRepoConfigRepository: WikibaseRepoConfigRepository;
+	tempUserConfigRepository: TempUserConfigRepository;
 	tracker: BridgeTracker;
 	editAuthorizationChecker: BridgePermissionsRepository;
 	repoRouter: MediaWikiRouter;

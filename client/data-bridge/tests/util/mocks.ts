@@ -13,6 +13,7 @@ import {
 	ApiQueryResponsePage,
 } from '@/definitions/data-access/ApiQuery';
 import { WikibaseRepoConfiguration } from '@/definitions/data-access/WikibaseRepoConfigRepository';
+import { TempUserConfiguration } from '@/definitions/data-access/TempUserConfigRepository';
 import clone from '@/store/clone';
 
 export function mockMwConfig( values: {
@@ -24,6 +25,7 @@ export function mockMwConfig( values: {
 	wgPageContentLanguage?: string;
 	wgPageName?: string;
 	wgUserName?: string|null;
+	tempUserEnabled?: boolean;
 } = {} ): MwConfig {
 	if ( values.hrefRegExp === undefined ) {
 		values.hrefRegExp = 'https://www\\.wikidata\\.org/wiki/((Q[1-9][0-9]*)).*#(P[1-9][0-9]*)';
@@ -168,6 +170,14 @@ export function getOrCreateApiQueryResponsePage( response: ApiQueryResponseBody,
 	return page;
 }
 
+export function getMockTempUserConfig(
+	tempUserConfig: Partial<TempUserConfiguration> = {},
+): TempUserConfiguration {
+	return {
+		enabled: false,
+		...tempUserConfig,
+	};
+}
 export function getMockBridgeRepoConfig(
 	dataBridgeConfig: Partial<WikibaseRepoConfiguration> = {},
 ): WikibaseRepoConfiguration {
@@ -188,6 +198,15 @@ export function addDataBridgeConfigResponse(
 ): object {
 	const query: { wbdatabridgeconfig?: object } = response.query || ( response.query = {} );
 	query.wbdatabridgeconfig = getMockBridgeRepoConfig( dataBridgeConfig );
+	return response;
+}
+
+export function addTempUserConfigResponse(
+	tempUserConfig: Partial<TempUserConfiguration>,
+	response: { query?: object },
+): object {
+	const query: { autocreatetempuser?: object } = response.query || ( response.query = {} );
+	query.autocreatetempuser = getMockTempUserConfig( tempUserConfig );
 	return response;
 }
 
@@ -263,6 +282,7 @@ export function getMockFullRepoBatchedQueryResponse(
 	entityTitle: string,
 	entities: { entities: { [ id: string ]: object } },
 	dataBridgeConfig: Partial<WikibaseRepoConfiguration> = {},
+	tempUserConfig: Partial<TempUserConfiguration> = {},
 ): jest.Mock {
 	return jest.fn().mockResolvedValue(
 		addEntityDataResponse(
@@ -274,7 +294,10 @@ export function getMockFullRepoBatchedQueryResponse(
 					addSiteinfoRestrictionsResponse(
 						addDataBridgeConfigResponse(
 							dataBridgeConfig,
-							{},
+							addTempUserConfigResponse(
+								tempUserConfig,
+								{},
+							),
 						),
 					),
 				),

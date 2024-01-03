@@ -72,6 +72,12 @@ services.set( 'messagesRepository', {
 	},
 } );
 
+services.set( 'tempUserConfigRepository', {
+	async getTempUserConfiguration() {
+		return { enabled: false };
+	},
+} );
+
 services.set( 'wikibaseRepoConfigRepository', {
 	async getRepoConfiguration() {
 		return {

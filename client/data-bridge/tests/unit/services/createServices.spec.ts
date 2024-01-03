@@ -20,6 +20,7 @@ import ClientRouter from '@/data-access/ClientRouter';
 import ApiPurge from '@/data-access/ApiPurge';
 import Tracker from '@/tracking/Tracker';
 import ApiRenderReferencesRepository from '@/data-access/ApiRenderReferencesRepository';
+import ApiTempUserConfigRepository from '@/data-access/ApiTempUserConfigRepository';
 
 const mockReadingEntityRepository = {};
 jest.mock( '@/data-access/ApiReadingEntityRepository', () => {
@@ -79,6 +80,11 @@ jest.mock( '@/data-access/BatchingApi', () => {
 const mockWikibaseRepoConfigRepository = {};
 jest.mock( '@/data-access/ApiRepoConfigRepository', () => {
 	return jest.fn().mockImplementation( () => mockWikibaseRepoConfigRepository );
+} );
+
+const mockTempUserConfigRepository = {};
+jest.mock( '@/data-access/ApiTempUserConfigRepository', () => {
+	return jest.fn().mockImplementation( () => mockTempUserConfigRepository );
 } );
 
 const mockDataBridgeTrackerService = {};
@@ -367,6 +373,29 @@ describe( 'createServices', () => {
 			.toHaveBeenCalledWith( mockBatchingApi );
 		expect( services.get( 'wikibaseRepoConfigRepository' ) )
 			.toBe( mockWikibaseRepoConfigRepository );
+	} );
+
+	it( 'creates TempUserConfigRepository', () => {
+		const wbRepo = {
+			url: 'http://localhost',
+			scriptPath: '/w',
+			articlePath: '',
+		};
+		const mwWindow = mockMwWindow( {
+			wbRepo,
+		} );
+		const services = createServices( mwWindow, [], {} as Tracker );
+
+		expect( mwWindow.mw.ForeignApi )
+			.toHaveBeenCalledWith( 'http://localhost/w/api.php' );
+		expect( ( ApiCore as unknown as jest.Mock ).mock.calls[ 0 ][ 0 ] )
+			.toBeInstanceOf( mwWindow.mw.ForeignApi );
+		expect( BatchingApi )
+			.toHaveBeenCalledWith( mockRepoApiCore );
+		expect( ApiTempUserConfigRepository )
+			.toHaveBeenCalledWith( mockBatchingApi );
+		expect( services.get( 'tempUserConfigRepository' ) )
+			.toBe( mockTempUserConfigRepository );
 	} );
 
 	it( 'creates DataBridgeTrackerService', () => {

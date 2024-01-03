@@ -28,4 +28,5 @@ export class BaseState implements Application {
 		dataRightsUrl: null,
 		termsOfUseUrl: null,
 	};
+	public tempUserEnabled = false;
 }
