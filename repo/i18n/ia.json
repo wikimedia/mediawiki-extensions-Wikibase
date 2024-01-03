@@ -133,6 +133,7 @@
 	"wikibase-anonymouseditwarning-message": "Actualmente tu adresse IP essera visibile publicamente si tu face alcun modification. Si tu aperi session o crea un conto, tu modificationes essera attribuite a tu nomine de usator, inter altere avantages.",
 	"wikibase-anonymouseditwarning-dismiss-persist": "Advertir me quandocunque io non ha aperite session.",
 	"wikibase-anonymouseditwarning-dismiss-button": "Modificar sin aperir session",
+	"wikibase-anonymouseditnotificationtempuser": "Si tu <strong>[$1 aperi session]</strong> o <strong>[$2 crea un conto]</strong>, tu modificationes essera attribuite a un nomine de usator, inter altere beneficios.",
 	"wikibase-move-error": "Tu non pote renominar paginas que es in un spatio de nomines de datos, ni renominar altere paginas verso un tal spatio.",
 	"wikibase-validator-invalid": "Valor non valide",
 	"wikibase-validator-missing-field": "Campo obligatori \"$1\" mancante",

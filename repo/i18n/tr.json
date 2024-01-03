@@ -163,6 +163,7 @@
 	"wikibase-anonymouseditwarning-message": "Şu anda herhangi bir düzenleme yaparsanız IP adresiniz herkes tarafından görülebilir. Oturum açarsanız veya bir hesap oluşturursanız, düzenlemeleriniz diğer avantajların yanı sıra kullanıcı adınızla da ilişkilendirilir.",
 	"wikibase-anonymouseditwarning-dismiss-persist": "Oturum açmadığım zamanlarda beni uyar.",
 	"wikibase-anonymouseditwarning-dismiss-button": "Oturum açmadan düzenle",
+	"wikibase-anonymouseditnotificationtempuser": "<strong>[$1 Giriş yapar]</strong> ya da <strong>[$2 hesap oluştursanız]</strong>, düzenlemeleriniz, diğer faydaların yanı sıra bir kullanıcı adıyla ilişkilendirilecektir.",
 	"wikibase-move-error": "Veri ad alanında bulunan sayfaları ve bunun içine sayfaları taşıyamazsınız.",
 	"wikibase-validator-invalid": "Geçersiz değer",
 	"wikibase-validator-missing-field": "Gerekli alan \"$1\" eksik",

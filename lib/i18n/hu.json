@@ -15,6 +15,7 @@
 	"wikibase-deletedentity-property": "Törölt tulajdonság",
 	"wikibase-deletedentity-query": "Törölt lekérdezés",
 	"wikibase-error-unexpected": "Hiba: $1.",
+	"wikibase-error-unknown": "Hiba történt.",
 	"wikibase-error-save-generic": "A mentés sikertelen egy hiba miatt.",
 	"wikibase-error-remove-generic": "Az eltávolítás sikertelen egy hiba miatt.",
 	"wikibase-error-save-timeout": "Műszaki problémáink vannak. Kérjük, próbáld újra.",
@@ -22,6 +23,7 @@
 	"wikibase-error-ui-no-external-page": "„$2” lap nem található a(z) „$1” wikin.",
 	"wikibase-error-ui-edit-conflict": "Ugyanezt az értéket szerkesztették közben, így szerkesztési ütközés történt. Kérlek, töltsd újra a lapot.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (átírva)",
+	"wikibase-language-name-for-terms-mul": "alapértelmezett értékek (mul)",
 	"wikibase-quantitydetails-amount": "Mennyiség",
 	"wikibase-quantitydetails-upperbound": "Alsó határ",
 	"wikibase-quantitydetails-lowerbound": "Felső határ",
@@ -60,6 +62,7 @@
 	"version-wikibase": "Wikibase",
 	"wikibase-time-calendar-gregorian": "Gergely",
 	"wikibase-time-calendar-julian": "Juliánus",
+	"wikibase-time-precision-CE": "i.&nbsp;sz.&nbsp;$1",
 	"wikibase-time-precision-Gannum": "i. sz. $1 milliárd év",
 	"wikibase-time-precision-Mannum": "i. sz. $1 millió év",
 	"wikibase-time-precision-annum": "i. sz. $1 év",
@@ -75,7 +78,10 @@
 	"wikibase-snakformatter-property-not-found": "A(z) $1 tulajdonság nem található, nem lehet meghatározni a használandó adattípust.",
 	"wikibase-snakformatter-formatting-exception": "Formázási hiba: $1.",
 	"wikibase-entity-summary-wbsetitem": "Fogalom létrehozása",
+	"wikibase-entity-summary-wbcreate-new": "Új entitás létrehozása",
 	"wikibase-entity-summary-wbcreateredirect": "Átirányítás ide: $4",
+	"wikibase-entity-summary-wbeditentity": "Új entitás létrehozása",
+	"wikibase-entity-summary-wbeditentity-create": "Új entitás létrehozása",
 	"wikibase-entity-summary-wbsetreference": "Forráshivatkozás hozzáadása",
 	"wikibase-entity-summary-wbsetlabel-add": "[$2] címke hozzáadása",
 	"wikibase-entity-summary-wbsetlabel-set": "[$2] címke módosítása",
@@ -117,5 +123,6 @@
 	"wikibase-property-summary-wbeditentity-create": "Új tulajdonság létrehozása",
 	"wikibase-property-summary-wbeditentity-update": "Tulajdonság módosítása",
 	"wikibase-property-summary-wbeditentity-override": "Tulajdonság kiürítése",
-	"wikibase-property-summary-special-create-property": "[$2] tulajdonság létrehozása {{PLURAL:$1|értékkel|értékekkel}}"
+	"wikibase-property-summary-special-create-property": "[$2] tulajdonság létrehozása {{PLURAL:$1|értékkel|értékekkel}}",
+	"wikibase-reference-formatter-snak-retrieved": "Hozzáférés: $1"
 }

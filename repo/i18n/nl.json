@@ -165,6 +165,7 @@
 	"wikibase-anonymouseditwarning-message": "Uw IP-adres is publiekelijk zichtbaar wanneer uw bewerkingen maakt. Wanneer u zich aanmeld of een account aanmaakt worden uw bewerkingen aan een gebruikersnaam toegewezen, naast andere voordelen.",
 	"wikibase-anonymouseditwarning-dismiss-persist": "Waarschuw me wanneer ik niet aangemeld ben.",
 	"wikibase-anonymouseditwarning-dismiss-button": "Bewerken zonder aan te melden",
+	"wikibase-anonymouseditnotificationtempuser": "Als u <strong>[$1 zich aanmeldt]</strong> of <strong>[$2 een account aanmaakt]</strong> worden uw bewerkingen toegeschreven aan een gebruikersnaam, onder andere voordelen.",
 	"wikibase-move-error": "U kunt pagina's in de gegevensnaamruimte niet verplaatsen en u kunt er geen pagina naartoe verplaatsen.",
 	"wikibase-validator-invalid": "Ongeldige waarde",
 	"wikibase-validator-missing-field": "Het verplichte veld \"$1\" ontbreekt",
