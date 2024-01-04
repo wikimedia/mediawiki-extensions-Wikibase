@@ -3,7 +3,9 @@
 namespace Wikibase\Repo\RestApi\RouteHandlers;
 
 use MediaWiki\Rest\Handler;
+use MediaWiki\Rest\RequestInterface;
 use MediaWiki\Rest\Response;
+use MediaWiki\Rest\ResponseInterface;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
 use Wikibase\Repo\RestApi\Application\Serialization\SiteLinksSerializer;
@@ -12,6 +14,9 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItemSiteLinks\GetItemSiteLinks
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemSiteLinks\GetItemSiteLinksResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -23,31 +28,50 @@ class GetItemSiteLinksRouteHandler extends SimpleHandler {
 
 	private GetItemSiteLinks $getItemSiteLinks;
 	private SiteLinksSerializer $siteLinksSerializer;
+	private MiddlewareHandler $middlewareHandler;
+
 	private ResponseFactory $responseFactory;
 
 	public function __construct(
 		GetItemSiteLinks $getItemSiteLinks,
 		SiteLinksSerializer $siteLinksSerializer,
+		MiddlewareHandler $middlewareHandler,
 		ResponseFactory $responseFactory
 	) {
 		$this->getItemSiteLinks = $getItemSiteLinks;
 		$this->siteLinksSerializer = $siteLinksSerializer;
+		$this->middlewareHandler = $middlewareHandler;
 		$this->responseFactory = $responseFactory;
 	}
 
 	public static function factory(): Handler {
 		return new self(
-			new GetItemSiteLinks(
-				WbRestApi::getValidatingRequestDeserializer(),
-				WbRestApi::getGetLatestItemRevisionMetadata(),
-				WbRestApi::getSiteLinksRetriever()
-			),
+			WbRestApi::getGetItemSiteLinks(),
 			new SiteLinksSerializer(),
+			new MiddlewareHandler( [
+				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
+				new UserAgentCheckMiddleware(),
+				new AuthenticationMiddleware(),
+				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
+					fn( RequestInterface $request ): string => $request->getPathParam( self::ITEM_ID_PATH_PARAM )
+				),
+			] ),
 			new ResponseFactory()
 		);
 	}
 
-	public function run( string $id ): Response {
+	public function needsWriteAccess(): bool {
+		return false;
+	}
+
+	/**
+	 * @param mixed ...$args
+	 */
+	public function run( ...$args ): Response {
+		return $this->middlewareHandler->run( $this, [ $this, 'runUseCase' ], $args );
+	}
+
+	public function runUseCase( string $id ): Response {
 		try {
 			return $this->newSuccessHttpResponse(
 				$this->getItemSiteLinks->execute( new GetItemSiteLinksRequest( $id ) )
@@ -96,4 +120,12 @@ class GetItemSiteLinksRouteHandler extends SimpleHandler {
 		return $httpResponse;
 	}
 
+	/**
+	 * Preconditions are checked via {@link PreconditionMiddleware}
+	 *
+	 * @inheritDoc
+	 */
+	public function checkPreconditions(): ?ResponseInterface {
+		return null;
+	}
 }
