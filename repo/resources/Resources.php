@@ -1,5 +1,6 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
 use Wikibase\Lib\Modules\DataTypesModule;
 use Wikibase\Lib\Modules\MediaWikiConfigModule;
 use Wikibase\Lib\Modules\SettingsValueProvider;
@@ -213,9 +214,11 @@ return call_user_func( function() {
 					"name" => "repo/resources/config.json",
 					"callback" => function () {
 						$settings = WikibaseRepo::getSettings();
+						$tempUserEnabled = MediaWikiServices::getInstance()->getTempUserConfig()->isEnabled();
 						return [
 							'geoShapeStorageApiEndpoint' => $settings->getSetting( 'geoShapeStorageApiEndpointUrl' ),
 							'tags' => $settings->getSetting( 'viewUiTags' ),
+							'tempUserEnabled' => $tempUserEnabled,
 						];
 					},
 				],
@@ -260,6 +263,7 @@ return call_user_func( function() {
 				'pagetitle',
 				'wikibase-copyrighttooltip-acknowledge',
 				'wikibase-anonymouseditwarning',
+				'wikibase-anonymouseditnotificationtempuser',
 				'wikibase-entity-item',
 				'wikibase-entity-property',
 				'wikibase-add',
