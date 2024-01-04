@@ -102,7 +102,7 @@ class GetPropertyLabelRouteHandler extends SimpleHandler {
 	/**
 	 * @inheritDoc
 	 */
-	public function needsWriteAccess() {
+	public function needsWriteAccess(): bool {
 		return false;
 	}
 
