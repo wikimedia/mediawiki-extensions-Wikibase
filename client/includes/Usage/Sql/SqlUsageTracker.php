@@ -156,10 +156,42 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 
 		$newUsages = $this->reindexEntityUsages( $usages );
 
-		$added = array_diff_key( $newUsages, $oldUsages );
-
+		$added = $this->compareAndReturnNewUsagesAccountingForDeduplication( $newUsages, $oldUsages );
 		// Actually add the new entries
 		$usageTable->addUsages( $pageId, $added );
+
+		$removed = $this->findStatementsPrunedByDeduplication( $newUsages, $oldUsages );
+		// And remove any usages now made redundant by deduplication
+		$usageTable->removeUsages( $pageId, $removed );
+	}
+
+	private function findStatementsPrunedByDeduplication( array $newUsages, array $oldUsages ): array {
+		$result = [];
+		foreach ( $oldUsages as $oldIdentity => $oldUsage ) {
+			if (
+				EntityUsage::stripModifier( $oldIdentity ) !== $oldIdentity &&
+				array_key_exists( EntityUsage::stripModifier( $oldIdentity ), $newUsages )
+			) {
+				$result[ $oldIdentity ] = $oldUsage;
+			}
+		}
+		return $result;
+	}
+
+	private function compareAndReturnNewUsagesAccountingForDeduplication(
+		array $newUsages,
+		array $oldUsages
+	): array {
+		$result = [];
+		foreach ( $newUsages as $identity => $newUsage ) {
+			if ( array_key_exists( $identity, $oldUsages ) === false ) {
+				$withoutModifier = EntityUsage::stripModifier( $identity );
+				if ( array_key_exists( $withoutModifier, $oldUsages ) === false ) {
+					$result[ $identity ] = $newUsage;
+				}
+			}
+		}
+		return $result;
 	}
 
 	/**

@@ -69,11 +69,18 @@ class UsageTrackerContractTester {
 			new EntityUsage( $q5, EntityUsage::ALL_USAGE ),
 		];
 
-		return [ $usagesT1, $usagesT2 ];
+		$usagesT3 = [
+			new EntityUsage( $q3, EntityUsage::LABEL_USAGE, 'de' ),
+			new EntityUsage( $q3, EntityUsage::SITELINK_USAGE ),
+			new EntityUsage( $q4, EntityUsage::LABEL_USAGE ),
+			new EntityUsage( $q5, EntityUsage::ALL_USAGE ),
+		];
+
+		return [ $usagesT1, $usagesT2, $usagesT3 ];
 	}
 
 	public function testAddUsedEntities() {
-		[ $usagesT1, $usagesT2 ] = $this->getTestUsages();
+		[ $usagesT1, $usagesT2, $usagesT3 ] = $this->getTestUsages();
 
 		$this->tracker->addUsedEntities( 23, $usagesT1 );
 
@@ -83,10 +90,7 @@ class UsageTrackerContractTester {
 		// Also add $usagesT2 and check that both T1 and T2 are present.
 		$this->tracker->addUsedEntities( 23, $usagesT2 );
 
-		$this->assertSameUsages(
-				array_unique( array_merge( $usagesT1, $usagesT2 ) ),
-				$this->getUsages( 23 )
-		);
+		$this->assertSameUsages( $usagesT3, $this->getUsages( 23 ) );
 	}
 
 	public function testReplaceUsedEntities() {
