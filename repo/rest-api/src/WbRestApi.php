@@ -62,13 +62,13 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription\SetPropert
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\SetPropertyLabel;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
-use Wikibase\Repo\RestApi\Domain\Services\SiteLinksRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\StatementRemover;
 use Wikibase\Repo\RestApi\Domain\Services\StatementUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupItemDataRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupPropertyDataRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupStatementRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdater;
+use Wikibase\Repo\RestApi\Infrastructure\DataAccess\SiteLinkLookupSiteLinksRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\TermLookupEntityTermsRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
@@ -89,7 +89,7 @@ class WbRestApi {
 			->get( 'WbRestApi.GetItemSiteLinks' );
 	}
 
-	public static function getSiteLinksRetriever( ContainerInterface $services = null ): SiteLinksRetriever {
+	public static function getSiteLinksRetriever( ContainerInterface $services = null ): SiteLinkLookupSiteLinksRetriever {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.SiteLinksRetriever' );
 	}

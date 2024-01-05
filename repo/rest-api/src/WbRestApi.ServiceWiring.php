@@ -109,7 +109,6 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyParts;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
-use Wikibase\Repo\RestApi\Domain\Services\SiteLinksRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\RestApi\Domain\Services\StatementRemover;
 use Wikibase\Repo\RestApi\Domain\Services\StatementUpdater;
@@ -927,7 +926,7 @@ return [
 		);
 	},
 
-	'WbRestApi.SiteLinksRetriever' => function( MediaWikiServices $services ): SiteLinksRetriever {
+	'WbRestApi.SiteLinksRetriever' => function( MediaWikiServices $services ): SiteLinkLookupSiteLinksRetriever {
 		return new SiteLinkLookupSiteLinksRetriever(
 			WikibaseRepo::getStore( $services )->newSiteLinkStore(),
 			new SiteLinksReadModelConverter( $services->getSiteLookup() )
