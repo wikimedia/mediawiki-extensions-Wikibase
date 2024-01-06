@@ -1,5 +1,7 @@
 <?php
 
+use MediaWiki\Request\WebRequest;
+
 /**
  * CI configuration for the Wikibase Repo extension.
  *

@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo;
 
-use Site;
-use SiteList;
-use SiteLookup;
+use MediaWiki\Site\Site;
+use MediaWiki\Site\SiteList;
+use MediaWiki\Site\SiteLookup;
 
 /**
  * @license GPL-2.0-or-later

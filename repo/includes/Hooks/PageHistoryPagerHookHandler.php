@@ -4,8 +4,8 @@ declare( strict_types=1 );
 
 namespace Wikibase\Repo\Hooks;
 
-use HistoryPager;
 use MediaWiki\Hook\PageHistoryPager__doBatchLookupsHook;
+use MediaWiki\Pager\HistoryPager;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\LanguageFallbackChainFactory;

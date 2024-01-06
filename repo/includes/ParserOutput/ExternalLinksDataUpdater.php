@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\ParserOutput;
 
 use DataValues\StringValue;
-use ParserOutput;
+use MediaWiki\Parser\ParserOutput;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;

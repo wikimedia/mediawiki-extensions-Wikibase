@@ -10,6 +10,7 @@ use JobSpecification;
 use MediaWiki\Hook\ArticleRevisionVisibilitySetHook;
 use MediaWiki\Page\Hook\ArticleDeleteCompleteHook;
 use MediaWiki\Title\Title;
+use MediaWiki\User\User;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;
 
@@ -82,7 +83,7 @@ class EntityDataPurger implements ArticleRevisionVisibilitySetHook, ArticleDelet
 
 	/**
 	 * @param \WikiPage $wikiPage
-	 * @param \User $user
+	 * @param User $user
 	 * @param string $reason
 	 * @param int $id
 	 * @param \Content|null $content

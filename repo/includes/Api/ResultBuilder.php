@@ -3,9 +3,9 @@
 namespace Wikibase\Repo\Api;
 
 use ApiResult;
+use MediaWiki\Site\SiteLookup;
+use MediaWiki\Status\Status;
 use Serializers\Serializer;
-use SiteLookup;
-use Status;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;

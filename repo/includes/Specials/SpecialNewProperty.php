@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Specials;
 
-use OutputPage;
-use Status;
+use MediaWiki\Output\OutputPage;
+use MediaWiki\Status\Status;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Term\Term;

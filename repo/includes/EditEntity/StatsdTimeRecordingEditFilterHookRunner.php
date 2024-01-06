@@ -4,7 +4,7 @@ namespace Wikibase\Repo\EditEntity;
 
 use IContextSource;
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
-use Status;
+use MediaWiki\Status\Status;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\Repo\Content\EntityContent;

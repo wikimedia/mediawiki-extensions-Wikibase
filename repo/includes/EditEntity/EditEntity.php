@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\EditEntity;
 
+use MediaWiki\Status\Status;
 use ReadOnlyError;
-use Status;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityRevision;

@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Maintenance;
 
 use DataValues\QuantityValue;
 use DataValues\UnboundedQuantityValue;
+use MediaWiki\User\User;
 use Onoi\MessageReporter\MessageReporter;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -40,7 +41,7 @@ class EntityQuantityUnitRebuilder {
 	private $valueTo;
 	/** @var EntityStore */
 	private $entityStore;
-	/** @var \User */
+	/** @var User */
 	private $performer;
 
 	/**
@@ -73,7 +74,7 @@ class EntityQuantityUnitRebuilder {
 		$this->valueFrom = $valueFrom;
 		$this->valueTo = $valueTo;
 		$this->entityStore = WikibaseRepo::getEntityStore();
-		$this->performer = \User::newSystemUser( \User::MAINTENANCE_SCRIPT_USER, [ 'steal' => true ] );
+		$this->performer = User::newSystemUser( User::MAINTENANCE_SCRIPT_USER, [ 'steal' => true ] );
 	}
 
 	public function rebuild() {

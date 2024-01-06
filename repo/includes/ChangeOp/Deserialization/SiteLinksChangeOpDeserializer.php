@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\ChangeOp\Deserialization;
 
+use MediaWiki\Site\SiteList;
 use OutOfBoundsException;
-use SiteList;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;

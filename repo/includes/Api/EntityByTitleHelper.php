@@ -4,9 +4,9 @@ namespace Wikibase\Repo\Api;
 
 use ApiBase;
 use ApiUsageException;
+use MediaWiki\Site\Site;
+use MediaWiki\Site\SiteLookup;
 use Profiler;
-use Site;
-use SiteLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityByLinkedTitleLookup;
 use Wikibase\Lib\StringNormalizer;

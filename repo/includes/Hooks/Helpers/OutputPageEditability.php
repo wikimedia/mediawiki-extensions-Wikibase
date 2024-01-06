@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Hooks\Helpers;
 
-use OutputPage;
+use MediaWiki\Output\OutputPage;
 
 /**
  * Determined (likely) editability of an OutputPage by inspecting this god object's properties.

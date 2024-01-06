@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Merge;
 
 use InvalidArgumentException;
-use SiteLookup;
+use MediaWiki\Site\SiteLookup;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\ChangeOpsMerge;

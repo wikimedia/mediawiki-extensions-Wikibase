@@ -4,8 +4,8 @@ namespace Wikibase\Repo\EditEntity;
 
 use IContextSource;
 use InvalidArgumentException;
+use MediaWiki\Status\Status;
 use RuntimeException;
-use Status;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\Repo\Content\EntityContent;

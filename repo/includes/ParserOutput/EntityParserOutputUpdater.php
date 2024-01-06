@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\ParserOutput;
 
-use ParserOutput;
+use MediaWiki\Parser\ParserOutput;
 use Wikibase\DataModel\Entity\EntityDocument;
 
 /**

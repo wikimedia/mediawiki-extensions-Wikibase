@@ -4,9 +4,9 @@ namespace Wikibase\Repo\Store;
 
 use InvalidArgumentException;
 use MediaWiki\Permissions\PermissionManager;
+use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;
-use Status;
-use User;
+use MediaWiki\User\User;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityNamespaceLookup;

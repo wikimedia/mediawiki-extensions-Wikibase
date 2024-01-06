@@ -4,7 +4,7 @@ namespace Wikibase\Repo\ParserOutput;
 
 use DataValues\Geo\Values\GlobeCoordinateValue;
 use MediaWiki\MediaWikiServices;
-use ParserOutput;
+use MediaWiki\Parser\ParserOutput;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;

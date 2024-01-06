@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\ParserOutput;
 
 use MediaWiki\Cache\LinkBatchFactory;
+use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Title\Title;
-use ParserOutput;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractor;

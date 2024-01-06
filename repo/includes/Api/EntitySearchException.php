@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Api;
 
-use Status;
+use MediaWiki\Status\Status;
 use Wikimedia\Assert\Assert;
 
 /**

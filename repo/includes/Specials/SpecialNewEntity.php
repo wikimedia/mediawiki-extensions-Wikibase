@@ -2,11 +2,11 @@
 
 namespace Wikibase\Repo\Specials;
 
-use Html;
 use HTMLForm;
+use MediaWiki\Html\Html;
+use MediaWiki\Output\OutputPage;
+use MediaWiki\Status\Status;
 use Message;
-use OutputPage;
-use Status;
 use UserBlockedError;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\Lib\Store\EntityNamespaceLookup;

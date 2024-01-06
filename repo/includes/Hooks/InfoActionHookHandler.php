@@ -2,11 +2,11 @@
 
 namespace Wikibase\Repo\Hooks;
 
-use Html;
 use IContextSource;
+use MediaWiki\Html\Html;
 use MediaWiki\Page\PageProps;
+use MediaWiki\Site\SiteLookup;
 use MediaWiki\Title\Title;
-use SiteLookup;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Store\SubscriptionLookup;

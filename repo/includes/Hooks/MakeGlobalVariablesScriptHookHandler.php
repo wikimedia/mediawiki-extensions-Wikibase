@@ -6,7 +6,7 @@ namespace Wikibase\Repo\Hooks;
 
 use Language;
 use MediaWiki\Hook\MakeGlobalVariablesScriptHook;
-use OutputPage;
+use MediaWiki\Output\OutputPage;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\UserLanguageLookup;

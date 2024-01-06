@@ -4,9 +4,9 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Specials;
 
-use Html;
 use HTMLForm;
-use WebRequest;
+use MediaWiki\Html\Html;
+use MediaWiki\Request\WebRequest;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\LanguageNameLookupFactory;

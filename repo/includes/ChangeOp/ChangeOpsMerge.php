@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\ChangeOp;
 
 use InvalidArgumentException;
-use Site;
-use SiteLookup;
+use MediaWiki\Site\Site;
+use MediaWiki\Site\SiteLookup;
 use ValueValidators\Error;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityId;

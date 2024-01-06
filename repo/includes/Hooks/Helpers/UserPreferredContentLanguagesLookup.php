@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Hooks\Helpers;
 
-use User;
+use MediaWiki\User\User;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\UserLanguageLookup;
 

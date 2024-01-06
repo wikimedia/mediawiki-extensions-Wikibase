@@ -4,16 +4,16 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Hooks;
 
-use Html;
 use HtmlArmor;
 use InvalidArgumentException;
+use MediaWiki\Html\Html;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Search\Hook\ShowSearchHitHook;
 use MediaWiki\Search\Hook\ShowSearchHitTitleHook;
+use MediaWiki\Specials\SpecialSearch;
 use MediaWiki\Title\Title;
 use RequestContext;
 use SearchResult;
-use SpecialSearch;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;

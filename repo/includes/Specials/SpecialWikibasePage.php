@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Specials;
 
+use MediaWiki\SpecialPage\SpecialPage;
 use Message;
-use SpecialPage;
 use UserBlockedError;
 use Wikibase\Lib\StringNormalizer;
 

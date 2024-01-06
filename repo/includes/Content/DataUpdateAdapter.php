@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Content;
 
-use DataUpdate;
 use Exception;
 use InvalidArgumentException;
+use MediaWiki\Deferred\DataUpdate;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\LogWarningExceptionHandler;
 use Wikimedia\Rdbms\DBError;

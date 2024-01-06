@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\ParserOutput;
 
 use InvalidArgumentException;
-use ParserOutput;
+use MediaWiki\Parser\ParserOutput;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikimedia\Assert\Assert;
 

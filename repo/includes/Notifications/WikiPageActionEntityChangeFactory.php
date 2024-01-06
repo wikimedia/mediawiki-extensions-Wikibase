@@ -4,10 +4,10 @@ declare( strict_types=1 );
 
 namespace Wikibase\Repo\Notifications;
 
-use CentralIdLookup;
 use Exception;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
+use MediaWiki\User\CentralId\CentralIdLookup;
 use MediaWiki\User\UserIdentity;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\Lib\Changes\ChangeRow;

@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
 
+use MediaWiki\Status\Status;
 use MediaWiki\User\UserFactory;
 use PHPUnit\Framework\TestCase;
-use Status;
 use User as MediaWikiUser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
