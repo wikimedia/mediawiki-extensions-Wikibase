@@ -4,11 +4,11 @@ namespace Wikibase\Lib\Formatters;
 
 use DataValues\StringValue;
 use File;
-use Html;
 use InvalidArgumentException;
 use Language;
-use Linker;
+use MediaWiki\Html\Html;
 use MediaWiki\Languages\LanguageFactory;
+use MediaWiki\Linker\Linker;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Title\Title;
 use ParserOptions;

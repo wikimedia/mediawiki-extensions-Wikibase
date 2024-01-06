@@ -3,8 +3,8 @@
 namespace Wikibase\Lib\Formatters;
 
 use DataValues\Geo\Values\GlobeCoordinateValue;
-use Html;
 use InvalidArgumentException;
+use MediaWiki\Html\Html;
 use MediaWiki\Languages\LanguageFactory;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;

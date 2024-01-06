@@ -3,8 +3,8 @@
 namespace Wikibase\Lib\Sites;
 
 use InvalidArgumentException;
-use MediaWikiSite;
-use Site;
+use MediaWiki\Site\MediaWikiSite;
+use MediaWiki\Site\Site;
 
 /**
  * Translates api sitematrix results json into an array of Site objects

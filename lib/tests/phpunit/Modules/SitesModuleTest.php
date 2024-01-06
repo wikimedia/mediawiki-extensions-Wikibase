@@ -6,12 +6,12 @@ namespace Wikibase\Lib\Tests\Modules;
 
 use BagOStuff;
 use HashBagOStuff;
-use HashSiteStore;
 use MediaWiki\Language\RawMessage;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\ResourceLoader\Context;
-use MediaWikiSite;
-use Site;
+use MediaWiki\Site\HashSiteStore;
+use MediaWiki\Site\MediaWikiSite;
+use MediaWiki\Site\Site;
 use Wikibase\Lib\LanguageNameLookupFactory;
 use Wikibase\Lib\MediaWikiMessageInLanguageProvider;
 use Wikibase\Lib\Modules\SitesModule;

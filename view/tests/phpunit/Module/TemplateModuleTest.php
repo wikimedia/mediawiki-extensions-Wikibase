@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\View\Tests\Module;
 
-use HashConfig;
+use MediaWiki\Config\HashConfig;
 // phpcs:disable MediaWiki.Classes.FullQualifiedClassName -- T308814
 use MediaWiki\ResourceLoader as RL;
 use Wikibase\View\Module\TemplateModule;

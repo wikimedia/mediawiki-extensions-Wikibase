@@ -3,8 +3,8 @@
 namespace Wikibase\Lib\Formatters;
 
 use DataValues\UnDeserializableValue;
-use Html;
 use InvalidArgumentException;
+use MediaWiki\Html\Html;
 use ValueFormatters\Exceptions\MismatchingDataValueTypeException;
 use ValueFormatters\FormattingException;
 use ValueFormatters\ValueFormatter;

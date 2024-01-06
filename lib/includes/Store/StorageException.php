@@ -3,8 +3,8 @@
 namespace Wikibase\Lib\Store;
 
 use Exception;
+use MediaWiki\Status\Status;
 use MWException;
-use Status;
 
 /**
  * @license GPL-2.0-or-later

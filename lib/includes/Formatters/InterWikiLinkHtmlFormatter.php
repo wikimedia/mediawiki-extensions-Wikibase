@@ -3,8 +3,8 @@
 namespace Wikibase\Lib\Formatters;
 
 use DataValues\StringValue;
-use Html;
 use InvalidArgumentException;
+use MediaWiki\Html\Html;
 use ValueFormatters\ValueFormatter;
 
 /**

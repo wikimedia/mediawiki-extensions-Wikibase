@@ -2,8 +2,8 @@
 
 namespace Wikibase\Lib\Sites;
 
-use Site;
-use SiteStore;
+use MediaWiki\Site\Site;
+use MediaWiki\Site\SiteStore;
 
 /**
  * Builds the site identifiers table

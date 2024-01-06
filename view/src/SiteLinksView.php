@@ -3,9 +3,9 @@
 namespace Wikibase\View;
 
 use LanguageCode;
-use Sanitizer;
-use Site;
-use SiteList;
+use MediaWiki\Parser\Sanitizer;
+use MediaWiki\Site\Site;
+use MediaWiki\Site\SiteList;
 use ValueFormatters\NumberLocalizer;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;

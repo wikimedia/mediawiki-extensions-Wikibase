@@ -2,9 +2,9 @@
 
 namespace Wikibase\Lib\Tests\Sites;
 
-use HashSiteStore;
-use MediaWikiSite;
-use SiteList;
+use MediaWiki\Site\HashSiteStore;
+use MediaWiki\Site\MediaWikiSite;
+use MediaWiki\Site\SiteList;
 use Wikibase\Lib\Sites\SitesBuilder;
 
 /**

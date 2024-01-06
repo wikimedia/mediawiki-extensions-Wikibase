@@ -2,8 +2,8 @@
 
 namespace Wikibase\Lib\Formatters;
 
-use Html;
 use InvalidArgumentException;
+use MediaWiki\Html\Html;
 use Message;
 use RuntimeException;
 use Wikibase\DataModel\Snak\Snak;

@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib;
 
-use Html;
+use MediaWiki\Html\Html;
 use Wikibase\DataModel\Term\TermFallback;
 
 /**

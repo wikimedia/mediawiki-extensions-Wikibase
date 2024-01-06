@@ -2,6 +2,7 @@
 
 use MediaWiki\MediaWikiServices;
 use MediaWiki\ResourceLoader\Context;
+use MediaWiki\ResourceLoader\ResourceLoader;
 use Wikibase\Repo\CopyrightMessageBuilder;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\Module\TemplateModule;

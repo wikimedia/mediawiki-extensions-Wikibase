@@ -2,10 +2,10 @@
 
 namespace Wikibase\View\Tests;
 
-use HashSiteStore;
 use InvalidArgumentException;
 use MediaWiki\Languages\LanguageFactory;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Site\HashSiteStore;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Services\Statement\Grouper\NullStatementGrouper;
 use Wikibase\Lib\ContentLanguages;
