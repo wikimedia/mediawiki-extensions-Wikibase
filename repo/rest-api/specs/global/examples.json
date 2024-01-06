@@ -42,6 +42,15 @@
 			"message": "Not a valid language code: {language_code}"
 		}
 	},
+	"InvalidSiteIdExample": {
+		"value": {
+			"code": "invalid-site-id",
+			"message": "Not a valid site ID: {site_id}",
+			"context": {
+				"item-id": "{item_id}"
+			}
+		}
+	},
 	"StatementDataMissingFieldExample": {
 		"value": {
 			"code": "statement-data-missing-field",
@@ -185,6 +194,12 @@
 		"value": {
 			"code": "statement-not-found",
 			"message": "Could not find a statement with the ID: {statement_id}"
+		}
+	},
+	"ItemSiteLinkNotDefinedExample": {
+		"value": {
+			"code": "sitelink-not-defined",
+			"message": "No sitelink found for the ID: {item_id} for the site {site_id}"
 		}
 	},
 	"ItemLabelNotDefinedExample": {
