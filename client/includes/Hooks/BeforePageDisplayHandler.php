@@ -5,10 +5,10 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Hooks;
 
 use MediaWiki\Hook\BeforePageDisplayHook;
+use MediaWiki\Output\OutputPage;
 use MediaWiki\Title\Title;
-use OutputPage;
+use MediaWiki\User\User;
 use Skin;
-use User;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Lib\SettingsArray;
 

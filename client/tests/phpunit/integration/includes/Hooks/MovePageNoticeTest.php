@@ -2,10 +2,10 @@
 
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
+use MediaWiki\Output\OutputPage;
+use MediaWiki\Specials\SpecialMovePage;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
-use MovePageForm;
-use OutputPage;
 use Wikibase\Client\Hooks\MovePageNotice;
 use Wikibase\Client\RepoLinker;
 use Wikibase\DataAccess\EntitySourceDefinitions;
@@ -72,7 +72,7 @@ class MovePageNoticeTest extends MediaWikiIntegrationTestCase {
 				->method( 'addModules' )
 				->with( 'wikibase.client.miscStyles' );
 
-		$movePageForm = $this->createMock( MovePageForm::class );
+		$movePageForm = $this->createMock( SpecialMovePage::class );
 		$movePageForm->expects( $this->once() )
 				->method( 'getOutput' )
 				->willReturn( $outputPage );

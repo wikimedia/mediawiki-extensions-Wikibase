@@ -5,13 +5,13 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Hooks;
 
 use ChangesListBooleanFilter;
-use ChangesListSpecialPage;
 use ExtensionRegistry;
 use MediaWiki\Html\FormOptions;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\SpecialPage\ChangesListSpecialPage;
 use MediaWiki\SpecialPage\Hook\ChangesListSpecialPageQueryHook;
 use MediaWiki\User\Options\UserOptionsLookup;
-use User;
+use MediaWiki\User\User;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Rdbms\ClientDomainDbFactory;

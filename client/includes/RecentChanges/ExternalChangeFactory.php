@@ -2,8 +2,8 @@
 
 namespace Wikibase\Client\RecentChanges;
 
-use ExternalUserNames;
 use Language;
+use MediaWiki\User\ExternalUserNames;
 use RecentChange;
 use UnexpectedValueException;
 use Wikibase\DataModel\Entity\EntityId;

@@ -2,10 +2,10 @@
 
 namespace Wikibase\Client\Specials;
 
-use Html;
+use MediaWiki\Html\Html;
+use MediaWiki\SpecialPage\QueryPage;
+use MediaWiki\Title\NamespaceInfo;
 use MediaWiki\Title\TitleFactory;
-use NamespaceInfo;
-use QueryPage;
 use Skin;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Lib\Rdbms\ClientDomainDb;

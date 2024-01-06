@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client;
 
-use Html;
+use MediaWiki\Html\Html;
 use MediaWiki\Title\Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;

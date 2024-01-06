@@ -2,10 +2,10 @@
 
 namespace Wikibase\Client\Tests\Unit;
 
-use HashSiteStore;
+use MediaWiki\Site\HashSiteStore;
+use MediaWiki\Site\Site;
+use MediaWiki\Site\SiteLookup;
 use MediaWikiCoversValidator;
-use Site;
-use SiteLookup;
 use Wikibase\Client\OtherProjectsSitesGenerator;
 
 /**

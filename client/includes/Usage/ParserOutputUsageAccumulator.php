@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\Usage;
 
-use ParserOutput;
+use MediaWiki\Parser\ParserOutput;
 
 /**
  * This implementation of the UsageAccumulator interface acts as a wrapper around

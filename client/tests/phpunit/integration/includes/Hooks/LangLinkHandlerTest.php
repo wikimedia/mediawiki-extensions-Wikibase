@@ -2,13 +2,13 @@
 
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
-use HashSiteStore;
 use MediaWiki\HookContainer\HookContainer;
+use MediaWiki\Parser\ParserOutput;
+use MediaWiki\Site\HashSiteStore;
+use MediaWiki\Site\Site;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
-use ParserOutput;
 use Psr\Log\NullLogger;
-use Site;
 use TestSites;
 use Wikibase\Client\Hooks\LangLinkHandler;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;

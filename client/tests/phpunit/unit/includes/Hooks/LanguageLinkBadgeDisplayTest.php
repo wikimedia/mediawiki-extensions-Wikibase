@@ -3,9 +3,9 @@
 namespace Wikibase\Client\Tests\Unit\Hooks;
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Output\OutputPage;
+use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Title\Title;
-use OutputPage;
-use ParserOutput;
 use RequestContext;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;

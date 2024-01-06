@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\Tests\Unit\Usage;
 
-use ParserOutput;
+use MediaWiki\Parser\ParserOutput;
 use Wikibase\Client\Tests\Mocks\Usage\UsageAccumulatorContractTester;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\EntityUsageFactory;

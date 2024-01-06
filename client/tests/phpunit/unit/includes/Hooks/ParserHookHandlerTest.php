@@ -4,8 +4,8 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Tests\Unit\Hooks;
 
+use MediaWiki\Parser\ParserOutput;
 use Parser;
-use ParserOutput;
 use Wikibase\Client\Hooks\ParserHookHandler;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 

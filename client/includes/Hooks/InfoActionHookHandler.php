@@ -2,9 +2,9 @@
 
 namespace Wikibase\Client\Hooks;
 
-use Html;
 use IContextSource;
 use MediaWiki\Hook\InfoActionHook;
+use MediaWiki\Html\Html;
 use MediaWiki\Title\Title;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\RepoLinker;

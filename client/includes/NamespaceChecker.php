@@ -4,7 +4,7 @@ namespace Wikibase\Client;
 
 use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
-use NamespaceInfo;
+use MediaWiki\Title\NamespaceInfo;
 
 /**
  * Checks if a namespace in Wikibase Client shall have wikibase links, etc., based on settings

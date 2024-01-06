@@ -4,10 +4,10 @@ namespace Wikibase\Client\Tests\Unit\RecentChanges;
 
 use Diff\Differ\MapDiffer;
 use Diff\DiffOp\Diff\Diff;
-use ExternalUserNames;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Site\SiteLookup;
 use MediaWiki\Title\Title;
-use SiteLookup;
+use MediaWiki\User\ExternalUserNames;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\RecentChanges\SiteLinkCommentCreator;
 use Wikibase\DataAccess\DatabaseEntitySource;

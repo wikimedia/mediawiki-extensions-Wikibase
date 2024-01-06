@@ -5,10 +5,10 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
 use IContextSource;
+use MediaWiki\Output\OutputPage;
+use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
-use OutputPage;
-use ParserOutput;
 use RequestContext;
 use Skin;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;

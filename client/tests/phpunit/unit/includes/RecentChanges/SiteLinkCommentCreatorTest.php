@@ -4,8 +4,8 @@ namespace Wikibase\Client\Tests\Unit\RecentChanges;
 
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpChange;
-use HashSiteStore;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Title\Title;
 use TestSites;
 use Wikibase\Client\RecentChanges\SiteLinkCommentCreator;

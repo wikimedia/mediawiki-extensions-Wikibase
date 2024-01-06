@@ -3,9 +3,9 @@
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
 use MediaWiki\HookContainer\HookContainer;
+use MediaWiki\Site\SiteLookup;
 use MediaWikiIntegrationTestCase;
 use Psr\Log\LoggerInterface;
-use SiteLookup;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
