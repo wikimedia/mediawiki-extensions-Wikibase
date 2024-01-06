@@ -4,8 +4,8 @@ namespace Wikibase\Repo\Tests\Api;
 
 use ApiBase;
 use ApiResult;
-use HashSiteStore;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Site\HashSiteStore;
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Serializers\SerializerFactory;

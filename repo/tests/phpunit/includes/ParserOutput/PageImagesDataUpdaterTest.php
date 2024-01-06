@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\ParserOutput;
 
 use DataValues\BooleanValue;
 use DataValues\StringValue;
-use ParserOutput;
+use MediaWiki\Parser\ParserOutput;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;

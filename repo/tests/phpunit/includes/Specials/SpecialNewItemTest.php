@@ -2,13 +2,13 @@
 
 namespace Wikibase\Repo\Tests\Specials;
 
-use HashSiteStore;
 use MediaWiki\Languages\LanguageNameUtils;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Request\WebResponse;
+use MediaWiki\Site\HashSiteStore;
+use MediaWiki\Site\Site;
+use MediaWiki\Site\SiteStore;
 use PHPUnit\Framework\MockObject\MockObject;
-use Site;
-use SiteStore;
 use ValueValidators\Error;
 use ValueValidators\Result;
 use ValueValidators\ValueValidator;

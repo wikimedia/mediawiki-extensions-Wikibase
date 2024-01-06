@@ -6,9 +6,9 @@ namespace Wikibase\Repo\Tests\Rdf;
 
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\SlotRecord;
+use MediaWiki\Site\SiteLookup;
 use MediaWikiIntegrationTestCase;
 use RequestContext;
-use SiteLookup;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityDocument;

@@ -5,9 +5,9 @@ namespace Wikibase\Repo\Tests\Hooks;
 
 use HtmlArmor;
 use MediaWiki\Linker\LinkRenderer;
+use MediaWiki\SpecialPage\SpecialPage;
 use MediaWiki\Title\Title;
 use RequestContext;
-use SpecialPage;
 use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\TestingAccessWrapper;

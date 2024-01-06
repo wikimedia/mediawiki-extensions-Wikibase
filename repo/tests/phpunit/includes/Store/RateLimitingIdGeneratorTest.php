@@ -5,8 +5,8 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Store;
 
 use IContextSource;
+use MediaWiki\User\User;
 use MediaWikiIntegrationTestCase;
-use User;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\Store\IdGenerator;
 use Wikibase\Repo\Store\RateLimitingIdGenerator;

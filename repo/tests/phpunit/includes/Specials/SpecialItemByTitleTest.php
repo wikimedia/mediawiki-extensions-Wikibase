@@ -2,13 +2,13 @@
 
 namespace Wikibase\Repo\Tests\Specials;
 
-use HashSiteStore;
 use MediaWiki\Request\WebResponse;
+use MediaWiki\Site\HashSiteStore;
+use MediaWiki\Site\Site;
+use MediaWiki\Site\SiteLookup;
 use MediaWiki\Title\Title;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Log\NullLogger;
-use Site;
-use SiteLookup;
 use SpecialPageTestBase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;

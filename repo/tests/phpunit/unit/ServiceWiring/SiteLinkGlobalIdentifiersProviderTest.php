@@ -4,8 +4,8 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
-use HashConfig;
-use HashSiteStore;
+use MediaWiki\Config\HashConfig;
+use MediaWiki\Site\HashSiteStore;
 use Wikibase\Repo\SiteLinkGlobalIdentifiersProvider;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;

@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Tests\Content;
 
 use MediaWiki\Page\WikiPageFactory;
+use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Title\Title;
-use ParserOutput;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
@@ -188,7 +188,7 @@ class PropertyHandlerTest extends EntityHandlerTestCase {
 		$page = $this->getMockWikiPage( $handler );
 		$revision = $page->getRevisionRecord();
 
-		$data = $handler->getDataForSearchIndex( $page, new \ParserOutput(), $engine, $revision );
+		$data = $handler->getDataForSearchIndex( $page, new ParserOutput(), $engine, $revision );
 		$this->assertSame( PropertyContent::CONTENT_MODEL_ID, $data['content_model'], 'content_modek' );
 		$this->assertSame( "Kitten", $data['text'], 'text' );
 	}

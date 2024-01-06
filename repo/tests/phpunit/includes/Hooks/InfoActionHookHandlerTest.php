@@ -2,13 +2,13 @@
 
 namespace Wikibase\Repo\Tests\Hooks;
 
-use Html;
 use IContextSource;
+use MediaWiki\Html\Html;
 use MediaWiki\Page\PageProps;
+use MediaWiki\Site\Site;
+use MediaWiki\Site\SiteLookup;
 use MediaWiki\Title\Title;
 use RequestContext;
-use Site;
-use SiteLookup;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityIdLookup;

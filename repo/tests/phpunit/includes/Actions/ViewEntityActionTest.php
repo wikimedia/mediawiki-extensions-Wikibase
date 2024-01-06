@@ -5,8 +5,8 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Actions;
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Output\OutputPage;
 use MediaWiki\Request\FauxResponse;
-use OutputPage;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\Actions\ViewEntityAction;
 use Wikibase\Repo\WikibaseRepo;

@@ -4,12 +4,12 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Dumpers;
 
-use HashSiteStore;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\SlotRecord;
+use MediaWiki\Site\HashSiteStore;
+use MediaWiki\Site\Site;
+use MediaWiki\Site\SiteLookup;
 use MediaWikiIntegrationTestCase;
-use Site;
-use SiteLookup;
 use stdClass;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;

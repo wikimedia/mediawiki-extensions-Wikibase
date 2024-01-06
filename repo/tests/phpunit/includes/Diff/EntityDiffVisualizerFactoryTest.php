@@ -4,8 +4,8 @@ namespace Wikibase\Repo\Tests\Diff;
 
 use Diff\Comparer\ComparableComparer;
 use Diff\Differ\OrderedListDiffer;
+use MediaWiki\Site\SiteLookup;
 use RequestContext;
-use SiteLookup;
 use Wikibase\Repo\Diff\BasicEntityDiffVisualizer;
 use Wikibase\Repo\Diff\ClaimDiffer;
 use Wikibase\Repo\Diff\EntityDiffVisualizer;

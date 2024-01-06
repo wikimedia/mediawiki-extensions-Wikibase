@@ -6,7 +6,7 @@ use DataValues\Geo\Values\GlobeCoordinateValue;
 use DataValues\Geo\Values\LatLongValue;
 use DataValues\StringValue;
 use Language;
-use ParserOutput;
+use MediaWiki\Parser\ParserOutput;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;

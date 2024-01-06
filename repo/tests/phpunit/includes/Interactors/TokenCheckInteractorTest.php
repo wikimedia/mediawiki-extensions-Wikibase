@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Tests\Interactors;
 
 use MediaWiki\Request\FauxRequest;
+use MediaWiki\User\User;
 use RequestContext;
-use User;
 use Wikibase\Repo\Interactors\TokenCheckException;
 use Wikibase\Repo\Interactors\TokenCheckInteractor;
 

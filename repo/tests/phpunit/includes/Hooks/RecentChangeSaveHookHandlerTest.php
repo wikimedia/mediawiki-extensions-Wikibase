@@ -4,8 +4,8 @@ declare( strict_types=1 );
 
 namespace Wikibase\Repo\Tests\Hooks;
 
-use CentralIdLookup;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\User\CentralId\CentralIdLookup;
 use MediaWiki\User\UserIdentityValue;
 use MediaWiki\WikiMap\WikiMap;
 use MediaWikiIntegrationTestCase;

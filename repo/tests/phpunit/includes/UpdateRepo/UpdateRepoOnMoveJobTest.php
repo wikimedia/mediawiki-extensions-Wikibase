@@ -4,15 +4,15 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\UpdateRepo;
 
-use HashSiteStore;
+use MediaWiki\Site\HashSiteStore;
+use MediaWiki\Site\Site;
+use MediaWiki\Site\SiteLookup;
+use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;
+use MediaWiki\User\User;
 use MediaWikiIntegrationTestCase;
 use NullStatsdDataFactory;
 use Psr\Log\NullLogger;
-use Site;
-use SiteLookup;
-use Status;
-use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;

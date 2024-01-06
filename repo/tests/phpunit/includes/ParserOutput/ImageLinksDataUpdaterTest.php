@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\ParserOutput;
 
 use DataValues\StringValue;
 use File;
-use ParserOutput;
+use MediaWiki\Parser\ParserOutput;
 use RepoGroup;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;

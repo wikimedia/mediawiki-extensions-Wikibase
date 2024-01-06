@@ -5,8 +5,8 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\LinkedData;
 
 use DataValues\Serializers\DataValueSerializer;
-use HashSiteStore;
 use MediaWiki\Revision\SlotRecord;
+use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataAccess\DatabaseEntitySource;

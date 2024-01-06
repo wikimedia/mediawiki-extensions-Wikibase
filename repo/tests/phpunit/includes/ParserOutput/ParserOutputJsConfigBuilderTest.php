@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Tests\ParserOutput;
 
+use MediaWiki\Parser\ParserOutput;
 use MediaWikiIntegrationTestCase;
-use ParserOutput;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;

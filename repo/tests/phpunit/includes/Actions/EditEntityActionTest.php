@@ -4,10 +4,10 @@ namespace Wikibase\Repo\Tests\Actions;
 
 use IContextSource;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;
+use MediaWiki\User\User;
 use RuntimeException;
-use Status;
-use User;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Repo\Actions\EditEntityAction;
 use Wikibase\Repo\Actions\SubmitEntityAction;

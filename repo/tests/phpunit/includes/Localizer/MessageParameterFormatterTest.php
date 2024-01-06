@@ -4,10 +4,10 @@ namespace Wikibase\Repo\Tests\Localizer;
 
 use DataValues\DataValue;
 use DataValues\DecimalValue;
-use HashSiteStore;
 use MediaWiki\MediaWikiServices;
-use Site;
-use SiteLookup;
+use MediaWiki\Site\HashSiteStore;
+use MediaWiki\Site\Site;
+use MediaWiki\Site\SiteLookup;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;

@@ -5,8 +5,8 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests;
 
 use MediaWiki\Site\MediaWikiPageNameNormalizer;
+use MediaWiki\Site\Site;
 use MediaWikiUnitTestCase;
-use Site;
 use Wikibase\Repo\SiteLinkPageNormalizer;
 
 /**

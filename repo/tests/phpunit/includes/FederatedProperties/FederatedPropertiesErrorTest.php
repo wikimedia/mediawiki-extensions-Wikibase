@@ -3,7 +3,7 @@
 declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\FederatedProperties;
 
-use Html;
+use MediaWiki\Html\Html;
 use MediaWiki\Language\RawMessage;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\Item;

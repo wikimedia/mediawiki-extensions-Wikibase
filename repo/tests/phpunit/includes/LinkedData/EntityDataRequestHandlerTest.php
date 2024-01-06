@@ -6,15 +6,15 @@ namespace Wikibase\Repo\Tests\LinkedData;
 
 use DataValues\Serializers\DataValueSerializer;
 use DerivativeContext;
-use HashSiteStore;
 use HtmlCacheUpdater;
 use HttpError;
+use MediaWiki\Output\OutputPage;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Request\FauxResponse;
 use MediaWiki\Revision\SlotRecord;
+use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
-use OutputPage;
 use Psr\Log\NullLogger;
 use RequestContext;
 use Wikibase\DataAccess\DatabaseEntitySource;

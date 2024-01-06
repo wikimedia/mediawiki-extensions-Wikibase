@@ -8,7 +8,7 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
-use HashSiteStore;
+use MediaWiki\Site\HashSiteStore;
 use MediaWikiTestCaseTrait;
 use RequestContext;
 use TestSites;

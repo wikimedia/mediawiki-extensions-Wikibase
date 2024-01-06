@@ -4,9 +4,9 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Hooks;
 
+use MediaWiki\Output\OutputPage;
+use MediaWiki\User\User;
 use MediaWikiIntegrationTestCase;
-use OutputPage;
-use User;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\UserLanguageLookup;
 use Wikibase\Repo\Hooks\Helpers\OutputPageEntityViewChecker;

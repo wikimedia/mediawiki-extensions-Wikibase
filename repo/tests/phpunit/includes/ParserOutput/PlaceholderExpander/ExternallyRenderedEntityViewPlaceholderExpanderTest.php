@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\ParserOutput\PlaceholderExpander;
 
 use MediaWiki\MediaWikiServices;
-use OutputPage;
+use MediaWiki\Output\OutputPage;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;

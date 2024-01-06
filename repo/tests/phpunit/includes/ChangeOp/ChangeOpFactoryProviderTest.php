@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\ChangeOp;
 
-use HashSiteStore;
+use MediaWiki\Site\HashSiteStore;
 use TestSites;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;

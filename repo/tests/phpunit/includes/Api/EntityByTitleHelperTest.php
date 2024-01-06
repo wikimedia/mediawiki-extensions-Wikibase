@@ -4,11 +4,11 @@ namespace Wikibase\Repo\Tests\Api;
 
 use ApiBase;
 use ApiUsageException;
-use HashSiteStore;
+use MediaWiki\Site\HashSiteStore;
+use MediaWiki\Site\MediaWikiSite;
+use MediaWiki\Site\Site;
+use MediaWiki\Site\SiteLookup;
 use MediaWiki\Title\Title;
-use MediaWikiSite;
-use Site;
-use SiteLookup;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityByLinkedTitleLookup;
 use Wikibase\Lib\StringNormalizer;

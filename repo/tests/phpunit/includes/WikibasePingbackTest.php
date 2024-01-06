@@ -4,13 +4,13 @@ declare( strict_types=1 );
 namespace Wikibase\Repo\Tests;
 
 use ExtensionRegistry;
-use HashConfig;
+use MediaWiki\Config\HashConfig;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\MainConfigNames;
 use MediaWiki\SiteStats\SiteStats;
 use MediaWiki\SiteStats\SiteStatsInit;
+use MediaWiki\Utils\MWTimestamp;
 use MediaWikiIntegrationTestCase;
-use MWTimestamp;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 use TestLogger;
