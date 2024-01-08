@@ -6,7 +6,7 @@ use DataValues\Geo\Values\GlobeCoordinateValue;
 use ExtensionRegistry;
 use GeoData\Coord;
 use GeoData\CoordinatesOutput;
-use ParserOutput;
+use MediaWiki\Parser\ParserOutput;
 use RuntimeException;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
 use Wikibase\DataModel\Snak\PropertyValueSnak;

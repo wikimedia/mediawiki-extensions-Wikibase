@@ -5,7 +5,7 @@ namespace Wikibase\Repo;
 use ExtensionRegistry;
 use MediaWiki\Babel\Babel;
 use MediaWiki\MediaWikiServices;
-use User;
+use MediaWiki\User\User;
 use Wikibase\Lib\UserLanguageLookup;
 
 /**

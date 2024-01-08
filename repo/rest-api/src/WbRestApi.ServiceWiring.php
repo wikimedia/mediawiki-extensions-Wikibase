@@ -1,5 +1,6 @@
 <?php declare( strict_types=1 );
 
+use MediaWiki\CommentStore\CommentStore;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\ConditionalHeaderUtil;
 use MediaWiki\Rest\Reporter\ErrorReporter;

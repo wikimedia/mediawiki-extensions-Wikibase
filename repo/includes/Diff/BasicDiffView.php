@@ -9,7 +9,7 @@ use Diff\DiffOp\DiffOp;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
-use Html;
+use MediaWiki\Html\Html;
 use UnexpectedValueException;
 use Wikimedia\Diff\WordLevelDiff;
 

@@ -5,7 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo;
 
 use MediaWiki\Site\MediaWikiPageNameNormalizer;
-use Site;
+use MediaWiki\Site\Site;
 
 /**
  * @license GPL-2.0-or-later

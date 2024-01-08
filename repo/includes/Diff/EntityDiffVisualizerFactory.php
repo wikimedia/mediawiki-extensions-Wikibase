@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Diff;
 
 use IContextSource;
+use MediaWiki\Site\SiteLookup;
 use RequestContext;
-use SiteLookup;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;

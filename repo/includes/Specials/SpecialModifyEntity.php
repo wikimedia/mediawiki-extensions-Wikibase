@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Specials;
 
-use Html;
 use HTMLForm;
-use Status;
+use MediaWiki\Html\Html;
+use MediaWiki\Status\Status;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;

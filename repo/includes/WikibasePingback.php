@@ -3,19 +3,19 @@
 declare( strict_types=1 );
 namespace Wikibase\Repo;
 
-use Config;
-use DeferredUpdates;
 use ExtensionRegistry;
 use FormatJson;
+use MediaWiki\Config\Config;
+use MediaWiki\Deferred\DeferredUpdates;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\SiteStats\SiteStats;
+use MediaWiki\Utils\MWTimestamp;
 use MWCryptRand;
-use MWTimestamp;
 use ObjectCache;
 use Psr\Log\LoggerInterface;
 use RequestContext;
-use SiteStats;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\SettingsArray;
 use Wikimedia\Rdbms\ConnectionManager;

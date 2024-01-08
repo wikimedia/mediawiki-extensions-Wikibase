@@ -4,7 +4,7 @@ declare( strict_types=1 );
 
 namespace Wikibase\Repo\Hooks\Helpers;
 
-use OutputPage;
+use MediaWiki\Output\OutputPage;
 use Wikibase\Repo\Content\EntityContentFactory;
 
 /**

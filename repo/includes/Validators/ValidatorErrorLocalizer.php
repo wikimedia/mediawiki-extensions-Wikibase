@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Validators;
 
+use MediaWiki\Status\Status;
 use Message;
-use Status;
 use ValueFormatters\FormattingException;
 use ValueFormatters\ValueFormatter;
 use ValueValidators\Error;

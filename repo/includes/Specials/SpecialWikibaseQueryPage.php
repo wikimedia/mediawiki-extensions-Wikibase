@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Specials;
 
-use Html;
+use MediaWiki\Html\Html;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\WikibaseRepo;

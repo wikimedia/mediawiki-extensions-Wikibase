@@ -6,7 +6,7 @@ namespace Wikibase\Repo\Localizer;
 
 use DataValues\DataValue;
 use Language;
-use SiteLookup;
+use MediaWiki\Site\SiteLookup;
 use ValueFormatters\FormattingException;
 use ValueFormatters\NumberLocalizer;
 use ValueFormatters\ValueFormatter;

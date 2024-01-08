@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Specials;
 
-use Html;
+use MediaWiki\Html\Html;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\LanguageFallbackChainFactory;

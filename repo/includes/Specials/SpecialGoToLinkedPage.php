@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Specials;
 
 use HTMLForm;
-use SiteLookup;
+use MediaWiki\Site\SiteLookup;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;

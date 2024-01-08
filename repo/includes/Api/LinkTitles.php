@@ -6,9 +6,9 @@ namespace Wikibase\Repo\Api;
 
 use ApiBase;
 use ApiMain;
-use Site;
-use SiteList;
-use Status;
+use MediaWiki\Site\Site;
+use MediaWiki\Site\SiteList;
+use MediaWiki\Status\Status;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;

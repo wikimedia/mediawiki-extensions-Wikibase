@@ -6,8 +6,8 @@ namespace Wikibase\Repo\ParserOutput;
 
 use InvalidArgumentException;
 use Language;
-use ParserOutput;
-use SpecialPage;
+use MediaWiki\Parser\ParserOutput;
+use MediaWiki\SpecialPage\SpecialPage;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\TermLanguageFallbackChain;

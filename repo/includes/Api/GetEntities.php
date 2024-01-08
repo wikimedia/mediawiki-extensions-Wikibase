@@ -7,7 +7,7 @@ namespace Wikibase\Repo\Api;
 use ApiBase;
 use ApiMain;
 use IBufferingStatsdDataFactory;
-use SiteLookup;
+use MediaWiki\Site\SiteLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;

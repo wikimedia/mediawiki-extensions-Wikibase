@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\ParserOutput\PlaceholderExpander;
 
-use OutputPage;
+use MediaWiki\Output\OutputPage;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\Hooks\Helpers\OutputPageRevisionIdReader;

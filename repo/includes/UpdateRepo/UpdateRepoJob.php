@@ -6,9 +6,9 @@ namespace Wikibase\Repo\UpdateRepo;
 
 use DerivativeContext;
 use Job;
+use MediaWiki\User\User;
 use Psr\Log\LoggerInterface;
 use RequestContext;
-use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;

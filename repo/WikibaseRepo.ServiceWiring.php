@@ -18,6 +18,8 @@ use Diff\Differ\OrderedListDiffer;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Site\MediaWikiPageNameNormalizer;
+use MediaWiki\SpecialPage\SpecialPage;
+use MediaWiki\StubObject\StubObject;
 use Psr\Log\LoggerInterface;
 use Serializers\DispatchingSerializer;
 use Serializers\Serializer;

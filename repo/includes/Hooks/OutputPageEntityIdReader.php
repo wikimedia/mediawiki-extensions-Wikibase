@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Hooks;
 
-use OutputPage;
+use MediaWiki\Output\OutputPage;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;

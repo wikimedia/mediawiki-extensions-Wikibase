@@ -4,9 +4,10 @@ namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
 
 use IContextSource;
 use MediaWiki\Permissions\PermissionManager;
+use MediaWiki\Status\Status;
+use MediaWiki\User\User;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
-use User;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
@@ -70,7 +71,7 @@ class EntityUpdater {
 		return $status->getValue()['revision'];
 	}
 
-	private function isPreventedEdit( \Status $status ): bool {
+	private function isPreventedEdit( Status $status ): bool {
 		$errorMessage = $status->getErrors()[0]['message'];
 		$errorCode = is_string( $errorMessage ) ? $errorMessage : $errorMessage->getKey();
 

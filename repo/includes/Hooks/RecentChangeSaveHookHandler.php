@@ -4,8 +4,8 @@ declare( strict_types=1 );
 
 namespace Wikibase\Repo\Hooks;
 
-use CentralIdLookup;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\User\CentralId\CentralIdLookup;
 use MediaWiki\User\CentralId\CentralIdLookupFactory;
 use RecentChange;
 use Wikibase\Lib\Changes\Change;

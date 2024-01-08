@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\View;
 
-use SpecialPage;
+use MediaWiki\SpecialPage\SpecialPage;
 use Wikibase\View\SpecialPageLinker;
 
 /**

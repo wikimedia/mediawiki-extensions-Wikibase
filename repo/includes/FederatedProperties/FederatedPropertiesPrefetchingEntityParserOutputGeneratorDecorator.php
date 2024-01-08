@@ -3,7 +3,7 @@
 declare( strict_types = 1 );
 namespace Wikibase\Repo\FederatedProperties;
 
-use ParserOutput;
+use MediaWiki\Parser\ParserOutput;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Lib\FederatedProperties\FederatedPropertyId;

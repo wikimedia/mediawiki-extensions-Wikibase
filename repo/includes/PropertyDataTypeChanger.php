@@ -3,7 +3,7 @@
 namespace Wikibase\Repo;
 
 use InvalidArgumentException;
-use User;
+use MediaWiki\User\User;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\DataTypeFactory;

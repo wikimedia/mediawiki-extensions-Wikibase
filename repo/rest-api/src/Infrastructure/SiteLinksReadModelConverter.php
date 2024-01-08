@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Infrastructure;
 
-use SiteLookup;
+use MediaWiki\Site\SiteLookup;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\Repo\RestApi\Domain\ReadModel\SiteLink as SiteLinkReadModel;

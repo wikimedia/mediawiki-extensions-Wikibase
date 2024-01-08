@@ -4,10 +4,10 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Specials;
 
+use MediaWiki\Output\OutputPage;
+use MediaWiki\Site\Site;
+use MediaWiki\Status\Status;
 use Message;
-use OutputPage;
-use Site;
-use Status;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Term\Term;

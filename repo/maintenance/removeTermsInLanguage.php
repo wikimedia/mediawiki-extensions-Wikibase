@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Maintenance;
 
 use InvalidArgumentException;
 use Maintenance;
-use User;
+use MediaWiki\User\User;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;

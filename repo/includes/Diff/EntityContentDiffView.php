@@ -3,11 +3,11 @@
 namespace Wikibase\Repo\Diff;
 
 use DifferenceEngine;
-use Html;
 use Language;
+use MediaWiki\Html\Html;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Revision\RevisionRecord;
-use ParserOutput;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesError;
 use Wikibase\View\ToolbarEditSectionGenerator;
 use WikiPage;

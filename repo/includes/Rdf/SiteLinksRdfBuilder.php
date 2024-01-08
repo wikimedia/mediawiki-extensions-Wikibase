@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Rdf;
 
-use SiteList;
+use MediaWiki\Site\SiteList;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;

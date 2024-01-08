@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Diff;
 
 use Diff\DiffOp\Diff\Diff;
+use MediaWiki\Site\SiteLookup;
 use MessageLocalizer;
-use SiteLookup;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\Repo\Content\EntityContentDiff;

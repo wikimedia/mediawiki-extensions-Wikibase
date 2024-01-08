@@ -6,7 +6,7 @@ namespace Wikibase\Repo\ParserOutput;
 
 use InvalidArgumentException;
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
-use ParserOutput;
+use MediaWiki\Parser\ParserOutput;
 use Wikibase\Lib\Store\EntityRevision;
 
 /**

@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Api;
 
-use WebRequest;
+use MediaWiki\Request\WebRequest;
 
 /**
  * EntitySearchHelper implementation which uses entity configuration to

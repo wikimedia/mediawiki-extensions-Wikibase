@@ -2,10 +2,10 @@
 
 namespace Wikibase\Repo\Specials;
 
-use Config;
-use Html;
 use HTMLForm;
 use InvalidArgumentException;
+use MediaWiki\Config\Config;
+use MediaWiki\Html\Html;
 use MediaWiki\Languages\LanguageNameUtils;
 use MediaWiki\Logger\LoggerFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
