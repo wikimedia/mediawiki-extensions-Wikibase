@@ -5,14 +5,16 @@ namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\Repo\RestApi\Domain\ReadModel\SiteLink;
 use Wikibase\Repo\RestApi\Domain\ReadModel\SiteLinks;
+use Wikibase\Repo\RestApi\Domain\Services\SiteLinkRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\SiteLinksRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\SiteLinksReadModelConverter;
 
 /**
  * @license GPL-2.0-or-later
  */
-class SiteLinkLookupSiteLinksRetriever implements SiteLinksRetriever {
+class SiteLinkLookupSiteLinksRetriever implements SiteLinksRetriever, SiteLinkRetriever {
 
 	private SiteLinkLookup $siteLinkLookup;
 	private SiteLinksReadModelConverter $siteLinksReadModelConverter;
@@ -31,4 +33,13 @@ class SiteLinkLookupSiteLinksRetriever implements SiteLinksRetriever {
 		return $this->siteLinksReadModelConverter->convert( new SiteLinkList( $siteLinksArray ) );
 	}
 
+	public function getSiteLink( ItemId $itemId, string $site ): ?SiteLink {
+		foreach ( $this->getSiteLinks( $itemId ) as $siteLink ) {
+			if ( $siteLink->getSite() === $site ) {
+				return $siteLink;
+			}
+		}
+
+		return null;
+	}
 }
