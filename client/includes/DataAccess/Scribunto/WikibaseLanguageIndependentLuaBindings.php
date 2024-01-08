@@ -5,10 +5,10 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\DataAccess\Scribunto;
 
 use InvalidArgumentException;
-use MalformedTitleException;
+use MediaWiki\Title\MalformedTitleException;
 use MediaWiki\Title\Title;
-use TitleFormatter;
-use TitleParser;
+use MediaWiki\Title\TitleFormatter;
+use MediaWiki\Title\TitleParser;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;

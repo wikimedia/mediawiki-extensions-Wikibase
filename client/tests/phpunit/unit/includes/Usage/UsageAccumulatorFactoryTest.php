@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Tests\Unit\Usage;
 
-use ParserOutput;
+use MediaWiki\Parser\ParserOutput;
 use Wikibase\Client\Usage\EntityUsageFactory;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\Client\Usage\UsageAccumulatorFactory;

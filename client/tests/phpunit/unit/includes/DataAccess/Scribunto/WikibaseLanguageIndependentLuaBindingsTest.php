@@ -4,10 +4,10 @@ namespace Wikibase\Client\Tests\Unit\DataAccess\Scribunto;
 
 use Exception;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Title\TitleFormatter;
+use MediaWiki\Title\TitleParser;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use TitleFormatter;
-use TitleParser;
 use Wikibase\Client\DataAccess\Scribunto\WikibaseLanguageIndependentLuaBindings;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\HashUsageAccumulator;

@@ -4,7 +4,7 @@ declare( strict_types=1 );
 
 namespace Wikibase\Client\Usage;
 
-use ParserOutput;
+use MediaWiki\Parser\ParserOutput;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectTargetLookup;
 
 /**

@@ -4,10 +4,10 @@ namespace Wikibase\Client\Tests\Integration\Hooks;
 
 use EnhancedChangesList;
 use Language;
+use MediaWiki\User\User;
 use MediaWikiIntegrationTestCase;
 use OldChangesList;
 use RecentChange;
-use User;
 use Wikibase\Client\Hooks\ChangesListLinesHandler;
 use Wikibase\Client\RecentChanges\ChangeLineFormatter;
 use Wikibase\Client\RecentChanges\ExternalChange;

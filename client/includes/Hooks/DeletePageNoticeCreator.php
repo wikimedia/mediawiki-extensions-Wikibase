@@ -4,10 +4,10 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Hooks;
 
-use Html;
+use MediaWiki\Html\Html;
+use MediaWiki\Output\OutputPage;
 use MediaWiki\Page\Hook\ArticleDeleteAfterSuccessHook;
 use MediaWiki\Title\Title;
-use OutputPage;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Store\ClientStore;
 use Wikibase\Lib\SettingsArray;

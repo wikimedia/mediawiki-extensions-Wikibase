@@ -4,10 +4,10 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
-use ExternalUserNames;
-use HashSiteStore;
+use MediaWiki\Site\HashSiteStore;
+use MediaWiki\Site\Site;
+use MediaWiki\User\ExternalUserNames;
 use Psr\Log\Test\TestLogger;
-use Site;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\DataAccess\DatabaseEntitySource;
 

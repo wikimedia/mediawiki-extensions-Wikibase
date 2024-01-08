@@ -2,10 +2,10 @@
 
 namespace Wikibase\Client\RecentChanges;
 
-use CentralIdLookup;
-use ExternalUserNames;
 use Language;
 use MediaWiki\Title\Title;
+use MediaWiki\User\CentralId\CentralIdLookup;
+use MediaWiki\User\ExternalUserNames;
 use Message;
 use RecentChange;
 use Wikibase\DataAccess\EntitySourceDefinitions;

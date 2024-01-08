@@ -6,9 +6,9 @@ namespace Wikibase\Client\Tests\Integration\Hooks;
 
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Title\Title;
+use MediaWiki\User\User;
 use MediaWikiIntegrationTestCase;
 use ParserOptions;
-use User;
 use Wikibase\Client\Tests\Mocks\MockClientStore;
 use Wikibase\Client\WikibaseClient;
 

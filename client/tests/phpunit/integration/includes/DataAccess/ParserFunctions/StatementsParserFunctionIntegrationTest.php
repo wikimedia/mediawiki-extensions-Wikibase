@@ -3,11 +3,11 @@
 namespace Wikibase\Client\Tests\Integration\DataAccess\ParserFunctions;
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Title\Title;
+use MediaWiki\User\User;
 use MediaWikiIntegrationTestCase;
 use ParserOptions;
-use ParserOutput;
-use User;
 use Wikibase\Client\Tests\Integration\DataAccess\WikibaseDataAccessTestItemSetUpHelper;
 use Wikibase\Client\Tests\Mocks\MockClientStore;
 use Wikibase\Client\Usage\EntityUsageFactory;

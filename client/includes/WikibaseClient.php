@@ -3,13 +3,13 @@
 namespace Wikibase\Client;
 
 use DataValues\Deserializers\DataValueDeserializer;
-use ExternalUserNames;
 use Language;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Site\Site;
+use MediaWiki\User\ExternalUserNames;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 use Serializers\Serializer;
-use Site;
 use Wikibase\Client\Changes\AffectedPagesFinder;
 use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;

@@ -2,11 +2,11 @@
 
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
-use HashSiteStore;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Site\HashSiteStore;
+use MediaWiki\Site\MediaWikiSite;
+use MediaWiki\Site\SiteLookup;
 use MediaWiki\Title\Title;
-use MediaWikiSite;
-use SiteLookup;
 use TestSites;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;

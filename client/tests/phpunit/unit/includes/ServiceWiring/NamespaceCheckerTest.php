@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
-use NamespaceInfo;
+use MediaWiki\Title\NamespaceInfo;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\Lib\SettingsArray;

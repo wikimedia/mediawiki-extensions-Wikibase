@@ -4,10 +4,10 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Hooks;
 
-use Html;
 use MediaWiki\Hook\SpecialMovepageAfterMoveHook;
+use MediaWiki\Html\Html;
+use MediaWiki\Specials\SpecialMovePage;
 use MediaWiki\Title\Title;
-use MovePageForm;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Store\ClientStore;
 use Wikibase\Lib\SettingsArray;
@@ -66,7 +66,7 @@ class MovePageNotice implements SpecialMovepageAfterMoveHook {
 	 * Hook for injecting a message on [[Special:MovePage]]
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SpecialMovepageAfterMove
 	 *
-	 * @param MovePageForm $movePage
+	 * @param SpecialMovePage $movePage
 	 * @param Title $oldTitle
 	 * @param Title $newTitle
 	 */

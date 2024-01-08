@@ -2,8 +2,8 @@
 
 namespace Wikibase\Client;
 
-use Site;
-use SiteLookup;
+use MediaWiki\Site\Site;
+use MediaWiki\Site\SiteLookup;
 
 /**
  * Generates a list of sites that should be displayed in the "Other projects" sidebar.

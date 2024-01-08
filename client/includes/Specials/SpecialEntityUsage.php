@@ -2,13 +2,13 @@
 
 namespace Wikibase\Client\Specials;
 
-use Html;
 use HtmlArmor;
 use HTMLForm;
-use Linker;
+use MediaWiki\Html\Html;
 use MediaWiki\Languages\LanguageConverterFactory;
+use MediaWiki\Linker\Linker;
+use MediaWiki\SpecialPage\QueryPage;
 use MediaWiki\Title\Title;
-use QueryPage;
 use Skin;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\DataModel\Entity\EntityId;

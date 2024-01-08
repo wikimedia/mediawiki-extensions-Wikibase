@@ -4,7 +4,7 @@ namespace Wikibase\Client\Hooks;
 
 use ExtensionRegistry;
 use File;
-use Html;
+use MediaWiki\Html\Html;
 use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Title\Title;
 use PageImages\PageImages;

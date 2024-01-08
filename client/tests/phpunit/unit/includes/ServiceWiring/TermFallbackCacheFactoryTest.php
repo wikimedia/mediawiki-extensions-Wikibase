@@ -3,7 +3,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
-use HashConfig;
+use MediaWiki\Config\HashConfig;
 use NullStatsdDataFactory;
 use Psr\Log\NullLogger;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;

@@ -5,10 +5,10 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
 use JobQueueGroup;
-use LinksUpdate;
+use MediaWiki\Deferred\LinksUpdate\LinksUpdate;
+use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
-use ParserOutput;
 use Wikibase\Client\Hooks\DataUpdateHookHandler;
 use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\EntityUsage;

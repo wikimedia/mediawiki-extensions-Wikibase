@@ -4,9 +4,9 @@ namespace Wikibase\Client\Tests\Unit\Hooks;
 
 use IContextSource;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Output\OutputPage;
 use MediaWiki\Request\FauxRequest;
 use MockTitleTrait;
-use OutputPage;
 use PHPUnit\Framework\TestCase;
 use Skin;
 use Wikibase\Client\Hooks\SkinAfterPortletHandler;

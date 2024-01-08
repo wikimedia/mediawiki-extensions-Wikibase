@@ -4,8 +4,8 @@ namespace Wikibase\Client\Tests\Integration\Hooks;
 
 use MediaWiki\Title\Title;
 use MediaWiki\User\Options\UserOptionsManager;
+use MediaWiki\User\User;
 use MediaWikiIntegrationTestCase;
-use User;
 use Wikibase\Client\Hooks\EchoNotificationsHandlers;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\RepoLinker;

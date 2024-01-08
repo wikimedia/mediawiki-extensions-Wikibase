@@ -4,12 +4,12 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Hooks;
 
-use Html;
 use IContextSource;
 use MediaWiki\EditPage\EditPage;
 use MediaWiki\Hook\EditPage__showStandardInputs_optionsHook;
+use MediaWiki\Html\Html;
+use MediaWiki\Output\OutputPage;
 use MessageLocalizer;
-use OutputPage;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Store\ClientStore;
 use Wikibase\Client\Usage\EntityUsage;

@@ -4,9 +4,9 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client;
 
-use Html;
 use InvalidArgumentException;
 use LogicException;
+use MediaWiki\Html\Html;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityId;
 

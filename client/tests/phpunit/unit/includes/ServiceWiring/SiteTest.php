@@ -3,9 +3,9 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
+use MediaWiki\Site\Site;
+use MediaWiki\Site\SiteLookup;
 use Psr\Log\NullLogger;
-use Site;
-use SiteLookup;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\Lib\SettingsArray;
 

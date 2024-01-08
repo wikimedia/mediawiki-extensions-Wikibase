@@ -2,9 +2,9 @@
 
 namespace Wikibase\Client\Hooks;
 
+use MediaWiki\Output\OutputPage;
+use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Title\Title;
-use OutputPage;
-use ParserOutput;
 use Wikibase\DataModel\SiteLink;
 
 /**

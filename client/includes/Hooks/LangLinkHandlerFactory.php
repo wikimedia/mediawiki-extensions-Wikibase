@@ -3,8 +3,8 @@
 namespace Wikibase\Client\Hooks;
 
 use MediaWiki\HookContainer\HookContainer;
+use MediaWiki\Site\SiteLookup;
 use Psr\Log\LoggerInterface;
-use SiteLookup;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;

@@ -2,8 +2,8 @@
 
 namespace Wikibase\Client\Tests\Unit\Hooks;
 
-use Html;
 use IContextSource;
+use MediaWiki\Html\Html;
 use MediaWiki\Title\Title;
 use RequestContext;
 use UnexpectedValueException;

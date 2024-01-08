@@ -5,8 +5,8 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Tests\Unit;
 
 use Content;
+use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Title\Title;
-use ParserOutput;
 use Psr\Log\LogLevel;
 use TestLogger;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;

@@ -3,7 +3,7 @@
 namespace Wikibase\Client\Tests\Unit\Hooks;
 
 use MediaWiki\MediaWikiServices;
-use ParserOutput;
+use MediaWiki\Parser\ParserOutput;
 use PHPUnit\Framework\TestCase;
 use UtfNormal\Utils;
 use Wikibase\Client\Hooks\ShortDescHandler;
