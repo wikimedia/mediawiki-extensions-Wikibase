@@ -4,5 +4,9 @@
 			"Ahiise2"
 		]
 	},
-	"wikibase-edit": "foora"
+	"wikibase-edit": "foora",
+	"wikibase-add": "taho",
+	"wikibase-label-empty": "Tiharoho manyiikirizo",
+	"wikibase-description-empty": "Tiharoho nsoborra",
+	"wikibase-sitelinks-special": "Ebibanja bindi"
 }

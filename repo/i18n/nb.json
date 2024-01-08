@@ -141,6 +141,7 @@
 	"wikibase-anonymouseditwarning-message": "IP-adressen din vil bli synlig offentlig om du gjør redigeringer. Hvis du logger inn eller oppretter en konto vil redigeringene dine tilskrives brukernavnet ditt, noe som er én av flere fordeler ved å ha en konto.",
 	"wikibase-anonymouseditwarning-dismiss-persist": "Advar meg når jeg ikke er logget inn.",
 	"wikibase-anonymouseditwarning-dismiss-button": "Rediger uten å logge inn",
+	"wikibase-anonymouseditnotificationtempuser": "Hvis du <strong>[$1 logger inn]</strong> eller <strong>[$2 oppretter en konto]</strong> vil redigeringene dine tilskrives et brukernavn, i tillegg til at du får flere fordeler.",
 	"wikibase-move-error": "Du kan ikke flytte sider som er i et datanavnerom, og du kan ikke flytte sider inn i ett.",
 	"wikibase-validator-invalid": "Ugyldig verdi",
 	"wikibase-validator-missing-field": "Savner påkrevd felt «$1»",
