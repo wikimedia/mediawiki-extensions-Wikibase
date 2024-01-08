@@ -11,7 +11,7 @@ git clone -b $MW_BRANCH https://gerrit.wikimedia.org/r/mediawiki/core.git mediaw
 cd mediawiki/extensions
 
 if [ "$WB" != "repo" ]; then
-	git clone -b $MW_BRANCH https://gerrit.wikimedia.org/r/p/mediawiki/extensions/Scribunto.git --depth 1
+	git clone -b $MW_BRANCH https://gerrit.wikimedia.org/r/mediawiki/extensions/Scribunto.git --depth 1
 fi
 git clone -b $MW_BRANCH https://gerrit.wikimedia.org/r/mediawiki/extensions/cldr --depth 1
 
