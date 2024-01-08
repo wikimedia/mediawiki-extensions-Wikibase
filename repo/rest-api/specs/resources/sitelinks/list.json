@@ -2,8 +2,7 @@
 	"get": {
 		"operationId": "getSitelinks",
 		"tags": [ "sitelinks" ],
-		"summary": "[WIP] Retrieve an Item's sitelinks",
-		"description": "This endpoint is currently in development and is not recommended for production use",
+		"summary": "Retrieve an Item's sitelinks",
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/ItemId" },
 			{ "$ref": "../../global/parameters.json#/IfNoneMatch" },
