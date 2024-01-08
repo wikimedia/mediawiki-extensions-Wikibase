@@ -2,12 +2,12 @@
 
 namespace Wikibase\Repo\Tests\ChangeOp;
 
-use HashSiteStore;
 use InvalidArgumentException;
+use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Site\MediaWikiPageNameNormalizer;
+use MediaWiki\Site\Site;
 use MediaWikiIntegrationTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
-use Site;
 use TestSites;
 use ValueValidators\Error;
 use ValueValidators\Result;

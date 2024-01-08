@@ -2,10 +2,10 @@
 
 namespace Wikibase\Repo\Tests;
 
+use MediaWiki\Output\OutputPage;
 use MediaWiki\Title\Title;
+use MediaWiki\User\User;
 use MediaWikiIntegrationTestCase;
-use OutputPage;
-use User;
 use Wikibase\Repo\OutputPageJsConfigBuilder;
 
 /**

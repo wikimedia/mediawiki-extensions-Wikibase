@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Merge;
 
-use HashSiteStore;
+use MediaWiki\Site\HashSiteStore;
 use TestSites;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;

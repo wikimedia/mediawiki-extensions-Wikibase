@@ -6,6 +6,7 @@ namespace Wikibase\Repo\Tests\Specials;
 
 use InvalidArgumentException;
 use MediaWiki\Request\FauxRequest;
+use MediaWiki\Status\Status;
 use SpecialPageTestBase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
@@ -76,7 +77,7 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 
 		if ( $this->simulateSearchBackendError ) {
 			$mock->method( 'getRankedSearchResults' )
-				->willThrowException( new EntitySearchException( \Status::newFatal( 'search-backend-error' ) ) );
+				->willThrowException( new EntitySearchException( Status::newFatal( 'search-backend-error' ) ) );
 		} else {
 			$mock->method( 'getRankedSearchResults' )
 				->willReturnCallback(

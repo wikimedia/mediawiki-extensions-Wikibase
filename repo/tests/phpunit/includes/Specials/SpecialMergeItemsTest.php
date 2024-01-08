@@ -3,19 +3,19 @@
 namespace Wikibase\Repo\Tests\Specials;
 
 use Exception;
-use HashSiteStore;
 use MediaWiki\Language\RawMessage;
 use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Request\FauxRequest;
+use MediaWiki\Request\WebRequest;
+use MediaWiki\Site\HashSiteStore;
+use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;
+use MediaWiki\User\User;
 use PermissionsError;
 use PHPUnit\Framework\Error\Error;
 use SpecialPageTestBase;
-use Status;
 use TestSites;
-use User;
-use WebRequest;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\MessageException;
 use Wikibase\Lib\Tests\MockRepository;

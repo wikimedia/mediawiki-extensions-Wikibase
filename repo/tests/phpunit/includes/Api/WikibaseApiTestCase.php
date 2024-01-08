@@ -6,15 +6,16 @@ use ApiTestCase;
 use ApiTestContext;
 use ApiUsageException;
 use ChangeTags;
-use CommentStoreComment;
 use DataValues\StringValue;
+use MediaWiki\CommentStore\CommentStoreComment;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Permissions\Authority;
+use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Title\Title;
+use MediaWiki\User\User;
 use OutOfBoundsException;
 use PHPUnit\Framework\Constraint\Constraint;
 use TestSites;
-use User;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Normalization\DataValueNormalizer;
@@ -75,7 +76,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		$this->setMwGlobals( 'wgWBRepoSettings', $customRepoSettings );
 		MediaWikiServices::getInstance()->resetServiceForTesting( 'SiteLookup' );
 
-		$siteStore = new \HashSiteStore( TestSites::getSites() );
+		$siteStore = new HashSiteStore( TestSites::getSites() );
 		$this->setService( 'SiteStore', $siteStore );
 		$this->setService( 'SiteLookup', $siteStore );
 		$this->sitesSetup = true;

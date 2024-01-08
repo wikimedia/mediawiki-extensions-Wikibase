@@ -8,6 +8,7 @@ use ApiMain;
 use MediaWiki\Cache\LinkBatchFactory;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Revision\SlotRecord;
+use MediaWiki\Status\Status;
 use RequestContext;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
@@ -490,7 +491,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testEntitySearchErrorIsForwardedToApiModule() {
-		$errorValue = \Status::newFatal( "search-backend-error" );
+		$errorValue = Status::newFatal( "search-backend-error" );
 		$entitySearchHelper = $this->getMockBrokenEntitySearchHelper( $errorValue );
 		try {
 			$params = [
@@ -505,7 +506,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 		}
 	}
 
-	private function getMockBrokenEntitySearchHelper( \Status $errorStatus ): EntitySearchHelper {
+	private function getMockBrokenEntitySearchHelper( Status $errorStatus ): EntitySearchHelper {
 		$mock = $this->createMock( EntitySearchHelper::class );
 		$mock->expects( $this->atLeastOnce() )
 			->method( 'getRankedSearchResults' )

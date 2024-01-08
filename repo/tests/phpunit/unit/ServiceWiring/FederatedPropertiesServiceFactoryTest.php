@@ -4,8 +4,8 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
-use HashConfig;
 use LogicException;
+use MediaWiki\Config\HashConfig;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\Tests\NewDatabaseEntitySource;
 use Wikibase\Lib\DataTypeDefinitions;

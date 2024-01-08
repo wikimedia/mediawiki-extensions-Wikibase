@@ -2,16 +2,16 @@
 
 namespace Wikibase\Repo\Tests\Interactors;
 
-use HashSiteStore;
 use IContextSource;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Permissions\RateLimiter;
+use MediaWiki\Site\HashSiteStore;
+use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;
+use MediaWiki\User\User;
 use MediaWikiIntegrationTestCase;
 use RequestContext;
-use Status;
 use TestSites;
-use User;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\LatestRevisionIdResult;

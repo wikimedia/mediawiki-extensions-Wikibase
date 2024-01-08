@@ -4,8 +4,8 @@ namespace Wikibase\Repo\Tests\Content;
 
 use BadMethodCallException;
 use DataValues\StringValue;
+use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Title\Title;
-use ParserOutput;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -307,7 +307,7 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 		$page = $this->getMockWikiPage( $handler );
 		$revision = $page->getRevisionRecord();
 
-		$data = $handler->getDataForSearchIndex( $page, new \ParserOutput(), $engine, $revision );
+		$data = $handler->getDataForSearchIndex( $page, new ParserOutput(), $engine, $revision );
 		$this->assertSame( ItemContent::CONTENT_MODEL_ID, $data['content_model'], 'content_modek' );
 		$this->assertSame( "Kitten\nKitten", $data['text'], 'text' );
 	}

@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Tests\Specials;
 
 use ChangeTags;
-use CommentStoreComment;
 use MediaWiki\Block\AbstractBlock;
+use MediaWiki\CommentStore\CommentStoreComment;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Request\FauxResponse;
 use MediaWiki\Tests\Unit\MockBlockTrait;

@@ -2,11 +2,11 @@
 
 namespace Wikibase\Repo\Tests\Rdf;
 
-use HashSiteStore;
 use InvalidArgumentException;
 use MediaWiki\Revision\SlotRecord;
-use Site;
-use SiteLookup;
+use MediaWiki\Site\HashSiteStore;
+use MediaWiki\Site\Site;
+use MediaWiki\Site\SiteLookup;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\PrefetchingTermLookup;

@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\Hooks;
 
 use IContextSource;
-use OutputPage;
+use MediaWiki\Output\OutputPage;
 use RequestContext;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;

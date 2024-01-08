@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Tests\ChangeOp\Deserialization;
 
 use Exception;
-use HashSiteStore;
-use Site;
+use MediaWiki\Site\HashSiteStore;
+use MediaWiki\Site\Site;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;

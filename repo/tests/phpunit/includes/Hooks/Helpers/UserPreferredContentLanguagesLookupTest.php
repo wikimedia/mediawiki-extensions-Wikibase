@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Tests\Hooks\Helpers;
 
+use MediaWiki\User\User;
 use PHPUnit\Framework\TestCase;
-use User;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\UserLanguageLookup;
 use Wikibase\Repo\Hooks\Helpers\UserPreferredContentLanguagesLookup;

@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Maintenance;
 
 use MediaWiki\Tests\Maintenance\MaintenanceBaseTestCase;
-use User;
+use MediaWiki\User\User;
 use Wikibase\Repo\Maintenance\ImportFederatedPropertiesSampleData;
 use Wikibase\Repo\WikibaseRepo;
 

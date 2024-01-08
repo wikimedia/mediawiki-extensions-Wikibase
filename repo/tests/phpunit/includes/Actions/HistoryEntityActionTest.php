@@ -3,14 +3,14 @@
 namespace Wikibase\Repo\Tests\Actions;
 
 use Article;
-use HashConfig;
 use IContextSource;
+use MediaWiki\Config\HashConfig;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Output\OutputPage;
+use MediaWiki\Request\WebRequest;
 use MediaWiki\Title\Title;
-use OutputPage;
+use MediaWiki\User\User;
 use PHPUnit\Framework\MockObject\MockObject;
-use User;
-use WebRequest;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;

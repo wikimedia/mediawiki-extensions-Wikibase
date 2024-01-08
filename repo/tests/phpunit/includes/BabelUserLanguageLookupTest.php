@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Tests;
 
+use MediaWiki\User\User;
 use MediaWikiIntegrationTestCase;
-use User;
 
 /**
  * @covers \Wikibase\Repo\BabelUserLanguageLookup

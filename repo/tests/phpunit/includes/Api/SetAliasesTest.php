@@ -6,7 +6,7 @@ namespace Wikibase\Repo\Tests\Api;
 
 use ApiUsageException;
 use MediaWiki\MediaWikiServices;
-use User;
+use MediaWiki\User\User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\WikibaseRepo;

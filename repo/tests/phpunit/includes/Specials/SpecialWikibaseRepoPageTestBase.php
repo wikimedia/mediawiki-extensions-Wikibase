@@ -3,12 +3,12 @@
 namespace Wikibase\Repo\Tests\Specials;
 
 use DataValues\DataValue;
-use HashSiteStore;
 use Language;
+use MediaWiki\Site\HashSiteStore;
+use MediaWiki\Site\SiteLookup;
+use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;
-use SiteLookup;
 use SpecialPageTestBase;
-use Status;
 use TestSites;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityId;

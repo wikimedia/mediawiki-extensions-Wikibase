@@ -4,13 +4,13 @@ namespace Wikibase\Repo\Tests\Hooks\Helpers;
 
 use DerivativeContext;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Output\OutputPage;
 use MediaWiki\Request\FauxResponse;
+use MediaWiki\Request\WebRequest;
 use MediaWiki\Title\Title;
-use OutputPage;
+use MediaWiki\User\User;
 use PHPUnit\Framework\TestCase;
 use RequestContext;
-use User;
-use WebRequest;
 use Wikibase\Repo\Hooks\Helpers\OutputPageEditability;
 
 /**

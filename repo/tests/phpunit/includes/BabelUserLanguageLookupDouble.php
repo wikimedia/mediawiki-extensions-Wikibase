@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests;
 
 use MediaWiki\MediaWikiServices;
-use User;
+use MediaWiki\User\User;
 use Wikibase\Repo\BabelUserLanguageLookup;
 
 /**

@@ -4,8 +4,8 @@ namespace Wikibase\Repo\Tests\Maintenance;
 
 use DataValues\QuantityValue;
 use MediaWiki\Tests\Maintenance\MaintenanceBaseTestCase;
+use MediaWiki\User\User;
 use PermissionsError;
-use User;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;

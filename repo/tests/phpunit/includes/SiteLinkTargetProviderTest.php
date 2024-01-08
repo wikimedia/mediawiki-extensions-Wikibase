@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Tests;
 
-use HashSiteStore;
-use Site;
-use SiteLookup;
+use MediaWiki\Site\HashSiteStore;
+use MediaWiki\Site\Site;
+use MediaWiki\Site\SiteLookup;
 use Wikibase\Repo\SiteLinkTargetProvider;
 
 /**

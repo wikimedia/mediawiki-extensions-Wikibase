@@ -4,8 +4,8 @@ declare( strict_types=1 );
 
 namespace Wikibase\Repo\Tests\Hooks\Helpers;
 
+use MediaWiki\Output\OutputPage;
 use MediaWiki\Title\Title;
-use OutputPage;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Hooks\Helpers\OutputPageEntityViewChecker;
