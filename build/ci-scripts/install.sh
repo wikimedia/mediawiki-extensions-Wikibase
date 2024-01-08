@@ -6,8 +6,7 @@ originalDirectory=$(pwd)
 
 cd ..
 
-mkdir mediawiki
-wget -O- https://github.com/wikimedia/mediawiki/archive/$MW_BRANCH.tar.gz | tar -zxf - -C mediawiki --strip-components 1
+git clone -b $MW_BRANCH https://gerrit.wikimedia.org/r/mediawiki/core.git mediawiki --depth 1
 
 cd mediawiki/extensions
 
