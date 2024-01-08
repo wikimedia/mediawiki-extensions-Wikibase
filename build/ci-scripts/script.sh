@@ -4,4 +4,4 @@ set -ex
 
 cd ../mediawiki
 
-composer phpunit:entrypoint -- --group Wikibase
+composer phpunit -- --group Wikibase
