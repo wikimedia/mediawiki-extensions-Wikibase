@@ -2,8 +2,8 @@
 
 namespace Wikibase\Lib\Tests;
 
+use MediaWiki\User\User;
 use PHPUnit\Framework\TestCase;
-use User;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;

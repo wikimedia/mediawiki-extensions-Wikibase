@@ -5,7 +5,7 @@ namespace Wikibase\View;
 use InvalidArgumentException;
 use Language;
 use MediaWiki\Languages\LanguageFactory;
-use SiteLookup;
+use MediaWiki\Site\SiteLookup;
 use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\Formatters\NumberLocalizerFactory;

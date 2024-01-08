@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib\Formatters;
 
-use Html;
+use MediaWiki\Html\Html;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\SnakUrlExpander;

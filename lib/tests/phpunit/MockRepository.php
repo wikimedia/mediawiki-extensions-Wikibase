@@ -3,9 +3,9 @@
 namespace Wikibase\Lib\Tests;
 
 use InvalidArgumentException;
+use MediaWiki\Status\Status;
+use MediaWiki\User\User;
 use MediaWiki\User\UserIdentity;
-use Status;
-use User;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;

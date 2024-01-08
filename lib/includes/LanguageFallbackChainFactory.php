@@ -12,7 +12,7 @@ use MediaWiki\Languages\LanguageConverterFactory;
 use MediaWiki\Languages\LanguageFactory;
 use MediaWiki\Languages\LanguageFallback;
 use MediaWiki\MediaWikiServices;
-use User;
+use MediaWiki\User\User;
 
 /**
  * Object creating TermLanguageFallbackChain objects in Wikibase.

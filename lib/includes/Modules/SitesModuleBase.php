@@ -7,9 +7,9 @@ namespace Wikibase\Lib\Modules;
 use InvalidArgumentException;
 // phpcs:disable MediaWiki.Classes.FullQualifiedClassName -- T308814
 use MediaWiki\ResourceLoader as RL;
-use MediaWikiSite;
+use MediaWiki\Site\MediaWikiSite;
+use MediaWiki\Site\Site;
 use MessageLocalizer;
-use Site;
 use Wikibase\Lib\LanguageNameLookupFactory;
 use Wikibase\Lib\SettingsArray;
 

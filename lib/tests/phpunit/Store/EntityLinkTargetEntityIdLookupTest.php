@@ -2,8 +2,8 @@
 
 namespace Wikibase\Lib\Tests\Store;
 
+use MediaWiki\Title\TitleValue;
 use PHPUnit\Framework\TestCase;
-use TitleValue;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityId;

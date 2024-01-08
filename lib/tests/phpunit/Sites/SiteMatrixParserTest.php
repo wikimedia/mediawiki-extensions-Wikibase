@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Sites;
 
-use MediaWikiSite;
+use MediaWiki\Site\MediaWikiSite;
 use Wikibase\Lib\Sites\SiteMatrixParser;
 
 /**

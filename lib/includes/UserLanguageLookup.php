@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib;
 
-use User;
+use MediaWiki\User\User;
 
 /**
  * Service for looking up the languages understood by a user.

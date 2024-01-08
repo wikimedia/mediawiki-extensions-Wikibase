@@ -3,8 +3,8 @@
 namespace Wikibase\Lib\Tests\Store;
 
 use InvalidArgumentException;
+use MediaWiki\User\User;
 use MediaWikiCoversValidator;
-use User;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;

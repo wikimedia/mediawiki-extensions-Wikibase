@@ -4,14 +4,14 @@ namespace Wikibase\Lib\Formatters;
 
 use DataValues\Geo\Values\GlobeCoordinateValue;
 use FormatJson;
-use Html;
 use InvalidArgumentException;
 use Language;
 use MapCacheLRU;
+use MediaWiki\Html\Html;
+use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Title\Title;
 use Parser;
 use ParserOptions;
-use ParserOutput;
 use RequestContext;
 
 /**
