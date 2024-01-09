@@ -37,7 +37,8 @@
 			"飞舞回堂前",
 			"아라",
 			"H78c67c",
-			"SunAfterRain"
+			"SunAfterRain",
+			"列维劳德"
 		]
 	},
 	"wikibase-desc": "結構化資料儲存庫",
@@ -332,8 +333,8 @@
 	"special-listdatatypes": "所有可用的資料型態",
 	"wikibase-listdatatypes-intro": "此為帶有對應在此安裝上可用數值類型的所有資料型態清單：",
 	"wikibase-listdatatypes-listproperties": "使用此資料型態的屬性清單",
-	"wikibase-history-title-with-label": "「$2」（$1）的修訂歷史",
-	"wikibase-history-title-without-label": "（$1）的修訂歷史",
+	"wikibase-history-title-with-label": "「$2」（$1）的修訂紀錄",
+	"wikibase-history-title-without-label": "（$1）的修訂紀錄",
 	"special-listproperties": "屬性清單",
 	"wikibase-listproperties-legend": "依資料型態取得屬性清單",
 	"wikibase-listproperties-datatype": "資料型態：",

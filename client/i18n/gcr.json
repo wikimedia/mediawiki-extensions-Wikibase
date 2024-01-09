@@ -8,7 +8,7 @@
 	"tooltip-t-wikibase": "Yannaj bò'd éléman-an di référansyèl di data-ya ki konnègté",
 	"wikibase-comment-update": "Éléman {{WBREPONAME}} modifyé",
 	"wikibase-dataitem": "Éléman {{WBREPONAME}}",
-	"wikibase-editlinks": "Modifyé yannaj-ya",
+	"wikibase-editlinks": "Chanjé yannaj-ya",
 	"wikibase-editlinkstitle": "Modifyé yannaj entèrlanng-yan",
 	"wikibase-addlinkstitle": "Ajouté yannaj entèrlanng-yan",
 	"wikibase-linkitem-addlinks": "Ajouté yannaj-ya",
@@ -16,7 +16,7 @@
 	"wikibase-rc-hide-wikidata-hide": "Maské",
 	"wikibase-rc-hide-wikidata-show": "Afiché",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "Modifikasyon di {{WBREPONAME}}.",
+	"wikibase-rc-wikibase-edit-title": "Chanjman di {{WBREPONAME}}.",
 	"wikibase-pageinfo-entity-usage": "Antité di {{WBREPONAME}} ki itilizé asou sa paj",
 	"wikibase-otherprojects": "Annan ròt projè"
 }
