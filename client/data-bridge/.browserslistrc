@@ -1,6 +1,6 @@
 # Browserslist configuration of browsers with basic level of support.
 # Please see https://www.mediawiki.org/wiki/Compatibility#Mobile and
-# https://github.com/wikimedia/browserslist-config-wikimedia/
+# https://gitlab.wikimedia.org/repos/ci-tools/browserslist-config-wikimedia
 # See also browsers definition in ResourceLoader startup module
 # in MediaWiki core 'resources/src/startup/startup.js'.
 
