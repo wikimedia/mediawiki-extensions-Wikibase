@@ -7,6 +7,7 @@ namespace Wikibase\Repo\Api;
 use ApiPageSet;
 use ApiQuery;
 use ApiQueryGeneratorBase;
+use MediaWiki\Cache\LinkBatchFactory;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\SettingsArray;
@@ -21,6 +22,8 @@ use Wikimedia\ParamValidator\ParamValidator;
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class QuerySearchEntities extends ApiQueryGeneratorBase {
+
+	private LinkBatchFactory $linkBatchFactory;
 
 	/**
 	 * @var EntitySearchHelper
@@ -48,6 +51,7 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 	public function __construct(
 		ApiQuery $apiQuery,
 		string $moduleName,
+		LinkBatchFactory $linkBatchFactory,
 		EntitySearchHelper $entitySearchHelper,
 		EntityTitleLookup $titleLookup,
 		ContentLanguages $termsLanguages,
@@ -56,6 +60,7 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 	) {
 		parent::__construct( $apiQuery, $moduleName, 'wbs' );
 
+		$this->linkBatchFactory = $linkBatchFactory;
 		$this->entitySearchHelper = $entitySearchHelper;
 		$this->titleLookup = $titleLookup;
 		$this->termsLanguages = $termsLanguages;
@@ -66,6 +71,7 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 	public static function factory(
 		ApiQuery $apiQuery,
 		string $moduleName,
+		LinkBatchFactory $linkBatchFactory,
 		array $enabledEntityTypes,
 		array $entitySearchHelperCallbacks,
 		EntityTitleLookup $entityTitleLookup,
@@ -75,6 +81,7 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 		return new self(
 			$apiQuery,
 			$moduleName,
+			$linkBatchFactory,
 			new TypeDispatchingEntitySearchHelper(
 				$entitySearchHelperCallbacks,
 				$apiQuery->getRequest()
@@ -93,6 +100,12 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 		$params = $this->extractRequestParams();
 		$searchResults = $this->getSearchResults( $params );
 		$result = $this->getResult();
+
+		// prefetch page IDs
+		$this->linkBatchFactory->newLinkBatch( array_map(
+			fn ( TermSearchResult $match ) => $this->titleLookup->getTitleForId( $match->getEntityId() ),
+			$searchResults
+		) )->execute();
 
 		foreach ( $searchResults as $match ) {
 			$title = $this->titleLookup->getTitleForId( $match->getEntityId() );

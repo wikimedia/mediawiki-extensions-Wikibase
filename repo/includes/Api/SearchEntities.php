@@ -7,6 +7,7 @@ namespace Wikibase\Repo\Api;
 use ApiBase;
 use ApiMain;
 use ApiResult;
+use MediaWiki\Cache\LinkBatchFactory;
 use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\Term;
@@ -15,6 +16,7 @@ use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityArticleIdLookup;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesException;
@@ -28,6 +30,8 @@ use Wikimedia\ParamValidator\ParamValidator;
  * @license GPL-2.0-or-later
  */
 class SearchEntities extends ApiBase {
+
+	private LinkBatchFactory $linkBatchFactory;
 
 	/**
 	 * @var EntitySearchHelper
@@ -43,6 +47,8 @@ class SearchEntities extends ApiBase {
 	 * @var EntitySourceLookup
 	 */
 	private $entitySourceLookup;
+
+	private EntityTitleLookup $entityTitleLookup;
 
 	/**
 	 * @var EntityTitleTextLookup
@@ -78,9 +84,11 @@ class SearchEntities extends ApiBase {
 	public function __construct(
 		ApiMain $mainModule,
 		string $moduleName,
+		LinkBatchFactory $linkBatchFactory,
 		EntitySearchHelper $entitySearchHelper,
 		ContentLanguages $termLanguages,
 		EntitySourceLookup $entitySourceLookup,
+		EntityTitleLookup $entityTitleLookup,
 		EntityTitleTextLookup $entityTitleTextLookup,
 		EntityUrlLookup $entityUrlLookup,
 		EntityArticleIdLookup $entityArticleIdLookup,
@@ -93,8 +101,10 @@ class SearchEntities extends ApiBase {
 		// Always try to add a conceptUri to results if not already set
 		$this->entitySearchHelper = new ConceptUriSearchHelper( $entitySearchHelper, $entitySourceLookup );
 
+		$this->linkBatchFactory = $linkBatchFactory;
 		$this->termsLanguages = $termLanguages;
 		$this->entitySourceLookup = $entitySourceLookup;
+		$this->entityTitleLookup = $entityTitleLookup;
 		$this->entityTitleTextLookup = $entityTitleTextLookup;
 		$this->entityUrlLookup = $entityUrlLookup;
 		$this->entityArticleIdLookup = $entityArticleIdLookup;
@@ -106,11 +116,13 @@ class SearchEntities extends ApiBase {
 	public static function factory(
 		ApiMain $mainModule,
 		string $moduleName,
+		LinkBatchFactory $linkBatchFactory,
 		ApiHelperFactory $apiHelperFactory,
 		array $enabledEntityTypes,
 		EntityArticleIdLookup $entityArticleIdLookup,
 		EntitySearchHelper $entitySearchHelper,
 		EntitySourceLookup $entitySourceLookup,
+		EntityTitleLookup $entityTitleLookup,
 		EntityTitleTextLookup $entityTitleTextLookup,
 		EntityUrlLookup $entityUrlLookup,
 		SettingsArray $repoSettings,
@@ -120,9 +132,11 @@ class SearchEntities extends ApiBase {
 		return new self(
 			$mainModule,
 			$moduleName,
+			$linkBatchFactory,
 			$entitySearchHelper,
 			$termsLanguages,
 			$entitySourceLookup,
+			$entityTitleLookup,
 			$entityTitleTextLookup,
 			$entityUrlLookup,
 			$entityArticleIdLookup,
@@ -159,6 +173,12 @@ class SearchEntities extends ApiBase {
 			// @phan-suppress-next-line PhanPluginUnreachableCode Wanted
 			throw new InvariantException( "dieStatus() must throw an exception" );
 		}
+
+		// prefetch page IDs
+		$this->linkBatchFactory->newLinkBatch( array_map(
+			fn ( TermSearchResult $match ) => $this->entityTitleLookup->getTitleForId( $match->getEntityId() ),
+			$searchResults
+		) )->execute();
 
 		$entries = [];
 		foreach ( $searchResults as $match ) {
