@@ -9,12 +9,8 @@
 
 /* This is partially copied from core's resources/src/mediawiki.legacy/shared.css. */
 .wb-help-field-hint {
-	/* SVG support using a transparent gradient to guarantee cross-browser
-	 * compatibility (browsers able to understand gradient syntax support also SVG).
-	 * http://pauginer.tumblr.com/post/36614680636/invisible-gradient-technique */
-	background-image: url( images/icons/ooui/helpNotice.png );
 	/* @embed */
-	background-image: linear-gradient( transparent, transparent ), url( images/icons/ooui/helpNotice.svg );
+	background-image: url( images/icons/ooui/helpNotice.svg );
 	background-position: 0 0;
 	background-repeat: no-repeat;
 	background-size: 14px 14px;
