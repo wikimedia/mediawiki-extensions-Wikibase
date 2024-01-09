@@ -78,6 +78,21 @@
 		},
 		"example": "en"
 	},
+	"SiteId": {
+		"in": "path",
+		"name": "site_id",
+		"description": "The ID of the required Site",
+		"required": true,
+		"schema": {
+			"type": "string"
+		},
+		"examples": {
+			"item": {
+				"summary": "Example of Site ID",
+				"value": "dewiki"
+			}
+		}
+	},
 	"ItemFields": {
 		"in": "query",
 		"name": "_fields",

@@ -182,6 +182,30 @@
 			}
 		}
 	},
+	"ItemSiteLinkNotFound": {
+		"description": "The specified resource was not found",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/Error" },
+				"examples": {
+					"item-not-found": {
+						"$ref": "./examples.json#/ItemNotFoundExample"
+					},
+					"sitelink-not-defined": {
+						"$ref": "./examples.json#/ItemSiteLinkNotDefinedExample"
+					}
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
 	"ItemLabelNotFound": {
 		"description": "The specified resource was not found",
 		"content": {
@@ -911,6 +935,24 @@
 			}
 		}
 	},
+	"InvalidItemSiteLinkBySiteIdInput": {
+		"description": "The request cannot be processed",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/Error" },
+				"examples": {
+					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
+					"invalid-site-id": { "$ref": "./examples.json#/InvalidSiteIdExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
 	"InvalidItemTermByLanguageInput": {
 		"description": "The request cannot be processed",
 		"content": {
@@ -1382,6 +1424,36 @@
 			"application/json": {
 				"schema": {
 					"$ref": "./schema-parts.json#/Sitelinks"
+				}
+			}
+		}
+	},
+	"ItemSitelink": {
+		"description": "A sitelink by item id",
+		"headers": {
+			"Last-Modified": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Last modified date"
+			},
+			"ETag": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Last entity revision number"
+			},
+			"X-Authenticated-User": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Optional username of the user making the request"
+			}
+		},
+		"content": {
+			"application/json": {
+				"schema": {
+					"$ref": "./schema-parts.json#/Sitelink"
 				}
 			}
 		}
