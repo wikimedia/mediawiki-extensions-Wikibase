@@ -63,6 +63,28 @@ class SiteLinkLookupSiteLinksRetrieverTest extends TestCase {
 		$this->assertEquals( new SiteLinks(), $siteLinks );
 	}
 
+	public function testGetSiteLink(): void {
+		$itemId = new ItemId( 'Q123' );
+		$siteId = 'enwiki';
+		$pageName = 'potato';
+		$enWikiSiteLink = new SiteLink( $siteId, $pageName );
+
+		$this->siteLinkLookup = $this->newSiteLinkLookupForIdWithReturnValue( $itemId, [ $enWikiSiteLink ] );
+
+		$this->assertEquals(
+			$this->siteLinksReadModelConverter->convert( new SiteLinkList( [ $enWikiSiteLink ] ) )[0],
+			$this->newRetriever()->getSiteLink( $itemId, $siteId )
+		);
+	}
+
+	public function testGivenItemHasNoSiteLinksForRequestSite_returnsNull(): void {
+		$itemId = new ItemId( 'Q123' );
+
+		$this->siteLinkLookup = $this->newSiteLinkLookupForIdWithReturnValue( $itemId, [] );
+
+		$this->assertNull( $this->newRetriever()->getSiteLink( $itemId, 'enwiki' ) );
+	}
+
 	private function newSiteLinkLookupForIdWithReturnValue( ItemId $id, array $returnValue ): SiteLinkLookup {
 		$siteLinkLookup = $this->createMock( SiteLinkLookup::class );
 		$siteLinkLookup->expects( $this->once() )
