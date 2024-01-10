@@ -24,6 +24,7 @@ use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyFieldsReq
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdFilterRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyLabelEditRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\SiteIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementSerializationRequest;
 use Wikibase\Repo\RestApi\Domain\Model\UserProvidedEditMetadata;
@@ -102,6 +103,17 @@ class DeserializedRequestAdapterTest extends TestCase {
 	public function testGivenNoLanguageCode_getLanguageCodeThrows(): void {
 		$this->expectException( LogicException::class );
 		( new DeserializedRequestAdapter( [] ) )->getLanguageCode();
+	}
+
+	public function testGetSiteId(): void {
+		$siteId = 'enwiki';
+		$requestAdapter = new DeserializedRequestAdapter( [ SiteIdRequest::class => $siteId ] );
+		$this->assertSame( $siteId, $requestAdapter->getSiteId() );
+	}
+
+	public function testGivenNoSiteId_getSiteIdThrows(): void {
+		$this->expectException( LogicException::class );
+		( new DeserializedRequestAdapter( [] ) )->getSiteId();
 	}
 
 	public function testGetItemFields(): void {

@@ -11,6 +11,7 @@ class TestValidatingRequestDeserializer extends ValidatingRequestDeserializer {
 
 	public const ALLOWED_TAGS = [ 'allowed', 'also-allowed' ];
 	public const EXISTING_STRING_PROPERTY = 'P123';
+	public const ALLOWED_SITE_IDS = [ 'enwiki', 'dewiki', 'arwiki' ];
 
 	public function __construct() {
 		parent::__construct( new TestValidatingRequestDeserializerServiceContainer() );

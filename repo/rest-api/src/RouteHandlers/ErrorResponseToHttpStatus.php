@@ -13,6 +13,7 @@ class ErrorResponseToHttpStatus {
 	private static array $lookupTable = [
 		UseCaseError::INVALID_ITEM_ID => 400,
 		UseCaseError::INVALID_PROPERTY_ID => 400,
+		UseCaseError::INVALID_SITE_ID => 400,
 		UseCaseError::INVALID_STATEMENT_ID => 400,
 		UseCaseError::INVALID_FIELD => 400,
 		UseCaseError::INVALID_LANGUAGE_CODE => 400,

@@ -8,6 +8,8 @@ use MediaWiki\Rest\StringStream;
 use Wikibase\Repo\RestApi\Application\Serialization\SiteLinkSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemSiteLink\GetItemSiteLink;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemSiteLink\GetItemSiteLinkRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemSiteLink\GetItemSiteLinkResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -20,34 +22,38 @@ class GetItemSiteLinkRouteHandler extends SimpleHandler {
 	private const SITE_ID_PATH_PARAM = 'site_id';
 	private GetItemSiteLink $useCase;
 	private SiteLinkSerializer $siteLinkSerializer;
+	private ResponseFactory $responseFactory;
 
 	public static function factory(): self {
 		return new GetItemSiteLinkRouteHandler(
-			new GetItemSiteLink( WbRestApi::getGetLatestItemRevisionMetadata(), WbRestApi::getSiteLinksRetriever() ),
-			new SiteLinkSerializer()
+			new GetItemSiteLink(
+				WbRestApi::getValidatingRequestDeserializer(),
+				WbRestApi::getGetLatestItemRevisionMetadata(),
+				WbRestApi::getSiteLinksRetriever()
+			),
+			new SiteLinkSerializer(),
+			new ResponseFactory()
 		);
 	}
 
-	public function __construct( GetItemSiteLink $useCase, SiteLinkSerializer $siteLinkSerializer ) {
+	public function __construct(
+		GetItemSiteLink $useCase,
+		SiteLinkSerializer $siteLinkSerializer,
+		ResponseFactory $responseFactory
+	) {
 		$this->useCase = $useCase;
-
 		$this->siteLinkSerializer = $siteLinkSerializer;
+		$this->responseFactory = $responseFactory;
 	}
 
 	public function run( string $itemId, string $siteId ): Response {
-		$useCaseResponse = $this->useCase->execute( new GetItemSiteLinkRequest( $itemId, $siteId ) );
-		$httpResponse = $this->getResponseFactory()->create();
-		$httpResponse->setHeader( 'Content-Type', 'application/json' );
-		$httpResponse->setHeader( 'Last-Modified', wfTimestamp( TS_RFC2822, $useCaseResponse->getLastModified() ) );
-		$this->setEtagFromRevId( $httpResponse, $useCaseResponse->getRevisionId() );
-
-		$httpResponse->setBody(
-			new StringStream(
-				json_encode( $this->siteLinkSerializer->serialize( $useCaseResponse->getSiteLink() ), JSON_UNESCAPED_SLASHES )
-			)
-		);
-
-		return $httpResponse;
+		try {
+			return $this->newSuccessHttpResponse(
+				$this->useCase->execute( new GetItemSiteLinkRequest( $itemId, $siteId ) )
+			);
+		} catch ( UseCaseError $e ) {
+			return $this->responseFactory->newErrorResponseFromException( $e );
+		}
 	}
 
 	private function setEtagFromRevId( Response $response, int $revId ): void {
@@ -67,5 +73,20 @@ class GetItemSiteLinkRouteHandler extends SimpleHandler {
 				ParamValidator::PARAM_REQUIRED => true,
 			],
 		];
+	}
+
+	private function newSuccessHttpResponse( GetItemSiteLinkResponse $useCaseResponse ): Response {
+		$httpResponse = $this->getResponseFactory()->create();
+		$httpResponse->setHeader( 'Content-Type', 'application/json' );
+		$httpResponse->setHeader( 'Last-Modified', wfTimestamp( TS_RFC2822, $useCaseResponse->getLastModified() ) );
+		$this->setEtagFromRevId( $httpResponse, $useCaseResponse->getRevisionId() );
+
+		$httpResponse->setBody(
+			new StringStream(
+				json_encode( $this->siteLinkSerializer->serialize( $useCaseResponse->getSiteLink() ), JSON_UNESCAPED_SLASHES )
+			)
+		);
+
+		return $httpResponse;
 	}
 }

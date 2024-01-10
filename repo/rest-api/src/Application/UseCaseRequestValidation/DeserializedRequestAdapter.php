@@ -20,6 +20,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescription\DeserializedGe
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\DeserializedGetItemDescriptionsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\DeserializedGetItemLabelRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\DeserializedGetItemLabelsRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemSiteLink\DeserializedGetItemSiteLinkRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemSiteLinks\DeserializedGetItemSiteLinksRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\DeserializedGetItemStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\DeserializedGetItemStatementsRequest;
@@ -62,6 +63,7 @@ class DeserializedRequestAdapter implements
 	DeserializedAddPropertyStatementRequest,
 	DeserializedGetItemRequest,
 	DeserializedGetItemSiteLinksRequest,
+	DeserializedGetItemSiteLinkRequest,
 	DeserializedGetItemLabelsRequest,
 	DeserializedGetItemLabelRequest,
 	DeserializedGetItemDescriptionsRequest,
@@ -148,6 +150,10 @@ class DeserializedRequestAdapter implements
 		return $this->getRequestField( PatchRequest::class );
 	}
 
+	public function getSiteId(): string {
+		return $this->getRequestField( SiteIdRequest::class );
+	}
+
 	public function getItemLabel(): Term {
 		return $this->getRequestField( ItemLabelEditRequest::class );
 	}
@@ -182,4 +188,5 @@ class DeserializedRequestAdapter implements
 
 		return $this->deserializedRequest[$field];
 	}
+
 }

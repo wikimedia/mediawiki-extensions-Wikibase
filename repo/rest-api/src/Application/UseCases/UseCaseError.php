@@ -31,6 +31,7 @@ class UseCaseError extends UseCaseException {
 	public const INVALID_PATCH_FIELD_TYPE = 'invalid-patch-field-type';
 	public const INVALID_PATCH_OPERATION = 'invalid-patch-operation';
 	public const INVALID_PROPERTY_ID = 'invalid-property-id';
+	public const INVALID_SITE_ID = 'invalid-site-id';
 	public const INVALID_STATEMENT_ID = 'invalid-statement-id';
 	public const INVALID_STATEMENT_SUBJECT_ID = 'invalid-statement-subject-id';
 	public const ITEM_LABEL_DESCRIPTION_DUPLICATE = 'item-label-description-duplicate';
@@ -108,6 +109,7 @@ class UseCaseError extends UseCaseException {
 		self::INVALID_PATCH_FIELD_TYPE => [ self::CONTEXT_OPERATION, self::CONTEXT_FIELD ],
 		self::INVALID_PATCH_OPERATION => [ self::CONTEXT_OPERATION ],
 		self::INVALID_PROPERTY_ID => [ self::CONTEXT_PROPERTY_ID ],
+		self::INVALID_SITE_ID => [],
 		self::INVALID_STATEMENT_ID => [],
 		self::INVALID_STATEMENT_SUBJECT_ID => [ self::CONTEXT_SUBJECT_ID ],
 		self::ITEM_LABEL_DESCRIPTION_DUPLICATE => [

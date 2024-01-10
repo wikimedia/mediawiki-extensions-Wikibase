@@ -32,6 +32,8 @@ use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdFilterR
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyLabelEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyLabelEditRequestValidatingDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\SiteIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\SiteIdRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementIdRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementSerializationRequest;
@@ -53,6 +55,7 @@ use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidat
 class ValidatingRequestDeserializerTest extends TestCase {
 
 	private const VALID_LANGUAGE_CODE = 'en';
+	private const VALID_SITE_ID = 'enwiki';
 	private const EXISTING_PROPERTY = 'P123';
 
 	public function testGivenValidItemIdRequest_returnsDeserializedItemId(): void {
@@ -77,6 +80,14 @@ class ValidatingRequestDeserializerTest extends TestCase {
 
 		$result = $this->newRequestDeserializer()->validateAndDeserialize( $request );
 		$this->assertEquals( self::VALID_LANGUAGE_CODE, $result->getLanguageCode() );
+	}
+
+	public function testGivenValidSiteIdRequest_returnsSiteId(): void {
+		$request = $this->createStub( SiteIdUseCaseRequest::class );
+		$request->method( 'getSiteId' )->willReturn( self::VALID_SITE_ID );
+
+		$result = $this->newRequestDeserializer()->validateAndDeserialize( $request );
+		$this->assertEquals( self::VALID_SITE_ID, $result->getSiteId() );
 	}
 
 	public function testGivenValidStatementIdRequest_returnsDeserializedStatementId(): void {
@@ -317,6 +328,11 @@ class ValidatingRequestDeserializerTest extends TestCase {
 			PropertyDescriptionEditRequestValidatingDeserializer::class,
 			ValidatingRequestDeserializer::PROPERTY_DESCRIPTION_EDIT_REQUEST_VALIDATING_DESERIALIZER,
 		];
+		yield [
+			SiteIdUseCaseRequest::class,
+			SiteIdRequestValidatingDeserializer::class,
+			ValidatingRequestDeserializer::SITE_ID_REQUEST_VALIDATING_DESERIALIZER,
+		];
 	}
 
 	private function newRequestDeserializer( ContainerInterface $serviceContainer = null ): ValidatingRequestDeserializer {
@@ -343,6 +359,7 @@ interface PropertyLabelEditUseCaseRequest extends UseCaseRequest, PropertyLabelE
 interface ItemDescriptionEditUseCaseRequest extends UseCaseRequest, ItemDescriptionEditRequest {}
 interface PropertyDescriptionEditUseCaseRequest extends UseCaseRequest, PropertyDescriptionEditRequest {}
 interface PropertyFieldsUseCaseRequest extends UseCaseRequest, PropertyFieldsRequest {}
+interface SiteIdUseCaseRequest extends UseCaseRequest, SiteIdRequest {}
 class NullValidator {
 	public function validateAndDeserialize() {
 		return null;

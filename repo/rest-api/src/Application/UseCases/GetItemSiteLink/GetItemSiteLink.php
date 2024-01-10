@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetItemSiteLink;
 
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Services\SiteLinkRetriever;
 
 /**
@@ -11,22 +11,32 @@ use Wikibase\Repo\RestApi\Domain\Services\SiteLinkRetriever;
  */
 class GetItemSiteLink {
 
+	private GetItemSiteLinkValidator $validator;
 	private GetLatestItemRevisionMetadata $getRevisionMetadata;
 	private SiteLinkRetriever $siteLinkRetriever;
 
-	public function __construct( GetLatestItemRevisionMetadata $getRevisionMetadata, SiteLinkRetriever $siteLinkRetriever ) {
+	public function __construct(
+		GetItemSiteLinkValidator $validator,
+		GetLatestItemRevisionMetadata $getRevisionMetadata,
+		SiteLinkRetriever $siteLinkRetriever
+	) {
+		$this->validator = $validator;
 		$this->getRevisionMetadata = $getRevisionMetadata;
 		$this->siteLinkRetriever = $siteLinkRetriever;
 	}
 
+	/**
+	 * @throws UseCaseError
+	 */
 	public function execute( GetItemSiteLinkRequest $request ): GetItemSiteLinkResponse {
-		$itemId = new ItemId( $request->getItemId() );
+		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
+		$itemId = $deserializedRequest->getItemId();
 
 		[ $revisionId, $lastModified ] = $this->getRevisionMetadata->execute( $itemId );
 
 		return new GetItemSiteLinkResponse(
 			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-			$this->siteLinkRetriever->getSiteLink( $itemId, $request->getSiteId() ),
+			$this->siteLinkRetriever->getSiteLink( $itemId, $deserializedRequest->getSiteId() ),
 			$lastModified,
 			$revisionId
 		);

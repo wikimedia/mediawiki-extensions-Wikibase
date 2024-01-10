@@ -35,6 +35,7 @@ use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdFilterR
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyLabelEditRequestValidatingDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\SiteIdRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementIdRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementSerializationRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemAliasesInLanguage;
@@ -103,6 +104,7 @@ use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
+use Wikibase\Repo\RestApi\Application\Validation\SiteIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
@@ -182,6 +184,15 @@ return [
 				: $propertyIdValidatingDeserializer->validateAndDeserialize( $r->getPropertyIdFilter() )
 		);
 	},
+
+	VRD::SITE_ID_REQUEST_VALIDATING_DESERIALIZER =>
+		function ( MediaWikiServices $services ): SiteIdRequestValidatingDeserializer {
+			return new SiteIdRequestValidatingDeserializer(
+				new SiteIdValidator( WikibaseRepo::getSiteLinkGlobalIdentifiersProvider( $services )->getList(
+					WikibaseRepo::getSettings( $services )->getSetting( 'siteLinkGroups' )
+				) )
+			);
+		},
 
 	VRD::LANGUAGE_CODE_REQUEST_VALIDATING_DESERIALIZER =>
 		function ( MediaWikiServices $services ): LanguageCodeRequestValidatingDeserializer {
