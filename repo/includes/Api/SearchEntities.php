@@ -154,12 +154,12 @@ class SearchEntities extends ApiBase {
 	 *
 	 * @param array $params
 	 *
-	 * @return array[]
+	 * @return TermSearchResult[]
 	 * @throws \ApiUsageException
 	 */
-	private function getSearchEntries( array $params ): array {
+	private function getSearchResults( array $params ): array {
 		try {
-			$searchResults = $this->entitySearchHelper->getRankedSearchResults(
+			return $this->entitySearchHelper->getRankedSearchResults(
 				$params['search'],
 				$params['language'],
 				$params['type'],
@@ -171,19 +171,6 @@ class SearchEntities extends ApiBase {
 			$this->dieStatus( $ese->getStatus() );
 			throw new InvariantException( "dieStatus() must throw an exception" );
 		}
-
-		// prefetch page IDs
-		$this->linkBatchFactory->newLinkBatch( array_map(
-			fn ( TermSearchResult $match ) => $this->entityTitleLookup->getTitleForId( $match->getEntityId() ),
-			$searchResults
-		) )->execute();
-
-		$entries = [];
-		foreach ( $searchResults as $match ) {
-			$entries[] = $this->buildTermSearchMatchEntry( $match, $params['props'] );
-		}
-
-		return $entries;
 	}
 
 	/**
@@ -295,7 +282,7 @@ class SearchEntities extends ApiBase {
 
 		$params = $this->extractRequestParams();
 
-		$entries = $this->getSearchEntries( $params );
+		$results = $this->getSearchResults( $params );
 
 		$this->getResult()->addValue(
 			null,
@@ -311,12 +298,24 @@ class SearchEntities extends ApiBase {
 			[]
 		);
 
-		// getSearchEntities returns one more item than requested in order to determine if there
+		// getSearchResults returns one more item than requested in order to determine if there
 		// would be any more results coming up.
-		$hits = count( $entries );
+		$hits = count( $results );
+
+		// slice off the extra results at the beginning that $params['continue'] "skips" over
+		$returnedResults = array_slice( $results, $params['continue'], $params['limit'] );
+
+		// prefetch page IDs
+		$this->linkBatchFactory->newLinkBatch( array_map(
+			fn ( TermSearchResult $match ) => $this->entityTitleLookup->getTitleForId( $match->getEntityId() ),
+			$returnedResults
+		) )->execute();
 
 		// Actual result set.
-		$entries = array_slice( $entries, $params['continue'], $params['limit'] );
+		$entries = [];
+		foreach ( $returnedResults as $match ) {
+			$entries[] = $this->buildTermSearchMatchEntry( $match, $params['props'] );
+		}
 
 		$nextContinuation = $params['continue'] + $params['limit'];
 
