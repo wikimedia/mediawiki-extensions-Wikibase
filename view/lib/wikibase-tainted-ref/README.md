@@ -15,7 +15,6 @@ docker-compose up
 This uses the values from `.env` for configuration - create a `.env.local` file if you desire diverging values.
 
 * `CSR_PORT` is the port at which you can reach the development server on your machine to live-preview changes to the application
-* `STORYBOOK_PORT` is the port at which you can reach the storybook server on your machine to live-preview changes in the component library
 * `NODE_ENV` is the environment to set for node.js
 
 
@@ -40,11 +39,6 @@ docker-compose run --rm node npm run test
 ### Lints files for code style violations
 ```
 docker-compose run --rm node npm run test:lint
-```
-
-### Storybook
-```
-docker-compose run --rm node npm run storybook
 ```
 
 ### Entry point
@@ -90,3 +84,9 @@ If you see errors like:
 by `git add -p`
 * rebuilding again following the above Compiles and minifies for production
 * resetting your node-modules to match those checked in with `docker-compose run --rm node npm run ci`
+
+#### Storybook
+This Tainted References thing used to contain Storybook stories.
+Due to providing little value outside of active development but causing significant cost upgrading the dependencies,
+they were deleted in Ib57537a6fd08152f4412840819cfb449853de710.
+If needed, they can be restored from git.

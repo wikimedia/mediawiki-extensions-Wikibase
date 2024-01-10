@@ -24,10 +24,3 @@ services:
     ports:
       - '${CSR_PORT}:8080'
     command: 'npm run-script serve'
-
-  storybook:
-    extends:
-      service: node
-    ports:
-      - '${STORYBOOK_PORT}:${STORYBOOK_PORT}'
-    command: 'npm run storybook -- -p ${STORYBOOK_PORT} --ci'
