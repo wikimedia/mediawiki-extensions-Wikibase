@@ -26,9 +26,9 @@ function getDummyEditHook( guid: string ): Hook {
 	return dummyEditHook as any as Hook;
 }
 
-function getDummySaveHook( entityId: string, fakeGuid: string, s1?: Statement|null, s2?: Statement ): Hook {
+function getDummySaveHook( entityId: string, guid: string, s1?: Statement|null, s2?: Statement ): Hook {
 	const dummySaveHook = ( randomFunction: Function ): Hook => {
-		randomFunction( entityId, fakeGuid, s1, s2 );
+		randomFunction( entityId, guid, s1, s2 );
 		return { add: jest.fn() };
 	};
 	return dummySaveHook as any as Hook;

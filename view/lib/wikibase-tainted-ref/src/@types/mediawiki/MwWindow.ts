@@ -67,7 +67,7 @@ interface Message {
 	text(): string;
 }
 
-/** @see: https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/OO.ui.WindowInstance */
+/** see: https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/OO.ui.WindowInstance */
 export interface WindowInstance {
 	isClosed(): boolean;
 }
@@ -85,7 +85,7 @@ export interface OOElement {
 	initialize(): void;
 }
 
-/** @see: https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/OO.ui.Dialog */
+/** see: https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/OO.ui.Dialog */
 export type DialogConstructor = new( options: object ) => Dialog;
 export interface Dialog extends OOElement {
 	$body: JQuery;
