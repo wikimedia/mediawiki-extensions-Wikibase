@@ -1,10 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Cedric31"
+			"Cedric31",
+			"Lhanars"
 		]
 	},
 	"specialpages-group-wikibase": "Wikibase",
+	"wikibase-deletedentity-item": "Element suprimit",
+	"wikibase-deletedentity-property": "Proprietat suprimida",
 	"wikibase-error-unexpected": "Error : $1",
 	"wikibase-error-ui-no-external-page": "Una pagina « $2 » a pas pogut èsser trobada sus « $1 ».",
 	"wikibase-sitelinks-wikipedia": "Wikipèdia",
@@ -21,6 +24,8 @@
 	"datatypes-type-globe-coordinate": "Coordenadas geograficas",
 	"datatypes-type-time": "Punt dins lo temps",
 	"datatypes-type-wikibase-item": "Element",
+	"wikibase-time-calendar-gregorian": "Gregorian",
+	"wikibase-time-calendar-julian": "Julian",
 	"wikibase-entity-summary-wbsetitem": "Creacion d’un element novèl",
 	"wikibase-entity-summary-wbsetreference": "Referéncia modificada",
 	"wikibase-entity-summary-wbsetreference-add": "Apondon d'una referéncia a una afirmacion",

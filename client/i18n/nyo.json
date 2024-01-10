@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ahiise2"
+		]
+	},
+	"wikibase-dataitem": "{{WBREPONAME}} ekikozeso",
+	"wikibase-editlinks": "Hindura ebiyunganiza",
+	"wikibase-linkitem-addlinks": "Taho ebiyunganiza",
+	"wikibase-linkitem-title": "Yunganiza orupapura",
+	"wikibase-linkitem-linkpage": "Yunganiza orupapura",
+	"wikibase-linkitem-selectlink": "Komamu entembura n'orupapura ebi orukwenda kuyunganiza orupapura runu.",
+	"wikibase-linkitem-input-site": "Orulimi:",
+	"wikibase-linkitem-input-page": "Orupapura:",
+	"wikibase-rc-hide-wikidata-hide": "Sereka",
+	"wikibase-rc-hide-wikidata-show": "Yoleka"
+}
