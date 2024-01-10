@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\RestApi\Application\Serialization;
 
 use ArrayObject;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Domain\ReadModel\SiteLinks;
 
 /**
@@ -11,18 +10,17 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\SiteLinks;
  */
 class SiteLinksSerializer {
 
+	private SiteLinkSerializer $siteLinkSerializer;
+
+	public function __construct( SiteLinkSerializer $siteLinkSerializer ) {
+		$this->siteLinkSerializer = $siteLinkSerializer;
+	}
+
 	public function serialize( SiteLinks $siteLinks ): ArrayObject {
 		$serialization = new ArrayObject();
 
 		foreach ( $siteLinks as $siteLink ) {
-			$serialization[$siteLink->getSite()] = [
-				'title' => $siteLink->getTitle(),
-				'badges' => array_map(
-					fn( ItemId $badge ) => $badge->getSerialization(),
-					$siteLink->getBadges()
-				),
-				'url' => $siteLink->getUrl(),
-			];
+			$serialization[$siteLink->getSite()] = $this->siteLinkSerializer->serialize( $siteLink );
 		}
 
 		return $serialization;

@@ -5,10 +5,9 @@ namespace Wikibase\Repo\RestApi\RouteHandlers;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
-use Wikibase\Repo\RestApi\Application\Serialization\SiteLinksSerializer;
+use Wikibase\Repo\RestApi\Application\Serialization\SiteLinkSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemSiteLink\GetItemSiteLink;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemSiteLink\GetItemSiteLinkRequest;
-use Wikibase\Repo\RestApi\Domain\ReadModel\SiteLinks;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -20,19 +19,19 @@ class GetItemSiteLinkRouteHandler extends SimpleHandler {
 	private const ITEM_ID_PATH_PARAM = 'item_id';
 	private const SITE_ID_PATH_PARAM = 'site_id';
 	private GetItemSiteLink $useCase;
-	private SiteLinksSerializer $siteLinksSerializer;
+	private SiteLinkSerializer $siteLinkSerializer;
 
 	public static function factory(): self {
 		return new GetItemSiteLinkRouteHandler(
 			new GetItemSiteLink( WbRestApi::getGetLatestItemRevisionMetadata(), WbRestApi::getSiteLinksRetriever() ),
-			new SiteLinksSerializer()
+			new SiteLinkSerializer()
 		);
 	}
 
-	public function __construct( GetItemSiteLink $useCase, SiteLinksSerializer $siteLinksSerializer ) {
+	public function __construct( GetItemSiteLink $useCase, SiteLinkSerializer $siteLinkSerializer ) {
 		$this->useCase = $useCase;
 
-		$this->siteLinksSerializer = $siteLinksSerializer;
+		$this->siteLinkSerializer = $siteLinkSerializer;
 	}
 
 	public function run( string $itemId, string $siteId ): Response {
@@ -41,14 +40,10 @@ class GetItemSiteLinkRouteHandler extends SimpleHandler {
 		$httpResponse->setHeader( 'Content-Type', 'application/json' );
 		$httpResponse->setHeader( 'Last-Modified', wfTimestamp( TS_RFC2822, $useCaseResponse->getLastModified() ) );
 		$this->setEtagFromRevId( $httpResponse, $useCaseResponse->getRevisionId() );
-		$siteLinks = $useCaseResponse->getSiteLink();
 
-		$siteLinkSerialization = $this->siteLinksSerializer->serialize(
-			new SiteLinks( $siteLinks )
-		)[$siteLinks->getSite()];
 		$httpResponse->setBody(
 			new StringStream(
-				json_encode( $siteLinkSerialization, JSON_UNESCAPED_SLASHES )
+				json_encode( $this->siteLinkSerializer->serialize( $useCaseResponse->getSiteLink() ), JSON_UNESCAPED_SLASHES )
 			)
 		);
 
