@@ -244,10 +244,7 @@ abstract class DumpEntities extends Maintenance {
 	/**
 	 * @inheritDoc
 	 */
-	public function finalSetup( SettingsBuilder $settingsBuilder = null ) {
-		// phpcs:ignore MediaWiki.Usage.DeprecatedGlobalVariables.Deprecated$wgHooks
-		global $wgHooks; // TODO stop using deprecated variable (T331602)
-
+	public function finalSetup( SettingsBuilder $settingsBuilder ) {
 		parent::finalSetup( $settingsBuilder );
 
 		if ( $this->hasOption( 'dbgroupdefault' ) ) {
@@ -255,12 +252,13 @@ abstract class DumpEntities extends Maintenance {
 			return;
 		}
 
-		$wgHooks['MediaWikiServices'][] = function() {
+		$settingsBuilder->registerHookHandlers( [ 'MediaWikiServices' => [ function() {
 			global $wgDBDefaultGroup;
 			if ( !ExtensionRegistry::getInstance()->isLoaded( 'WikibaseRepository' ) ) {
 				// Something instantiates the MediaWikiServices before Wikibase
 				// is loaded, nothing we can do here.
 				wfWarn( self::class . ': Can not change default DB group.' );
+
 				return;
 			}
 
@@ -272,7 +270,7 @@ abstract class DumpEntities extends Maintenance {
 			if ( $dumpDBDefaultGroup !== null ) {
 				$wgDBDefaultGroup = $dumpDBDefaultGroup;
 			}
-		};
+		} ] ] );
 	}
 
 	/**
