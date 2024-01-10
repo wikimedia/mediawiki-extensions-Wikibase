@@ -31,7 +31,7 @@ class SerializerFactory {
 			new DescriptionsSerializer(),
 			new AliasesSerializer(),
 			new StatementListSerializer( $this->newStatementSerializer() ),
-			new SiteLinksSerializer()
+			new SiteLinksSerializer( new SiteLinkSerializer() )
 		);
 	}
 }

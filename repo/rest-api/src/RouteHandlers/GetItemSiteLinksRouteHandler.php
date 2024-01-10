@@ -8,6 +8,7 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Rest\ResponseInterface;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
+use Wikibase\Repo\RestApi\Application\Serialization\SiteLinkSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SiteLinksSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemSiteLinks\GetItemSiteLinks;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemSiteLinks\GetItemSiteLinksRequest;
@@ -47,7 +48,7 @@ class GetItemSiteLinksRouteHandler extends SimpleHandler {
 	public static function factory(): Handler {
 		return new self(
 			WbRestApi::getGetItemSiteLinks(),
-			new SiteLinksSerializer(),
+			new SiteLinksSerializer( new SiteLinkSerializer() ),
 			new MiddlewareHandler( [
 				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
 				new UserAgentCheckMiddleware(),

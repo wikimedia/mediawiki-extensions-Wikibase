@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\RestApi\Application\Serialization;
 use ArrayObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Repo\RestApi\Application\Serialization\SiteLinkSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SiteLinksSerializer;
 use Wikibase\Repo\RestApi\Domain\ReadModel\SiteLink;
 use Wikibase\Repo\RestApi\Domain\ReadModel\SiteLinks;
@@ -32,7 +33,7 @@ class SiteLinksSerializerTest extends TestCase {
 			'https://en.wikipedia.org/wiki/Potato'
 		);
 
-		$serializer = new SiteLinksSerializer();
+		$serializer = new SiteLinksSerializer( new SiteLinkSerializer() );
 
 		$this->assertEquals(
 			new ArrayObject( [
@@ -52,7 +53,7 @@ class SiteLinksSerializerTest extends TestCase {
 	}
 
 	public function testSerializeEmptyList(): void {
-		$serializer = new SiteLinksSerializer();
+		$serializer = new SiteLinksSerializer( new SiteLinkSerializer() );
 		$this->assertEquals(
 			new ArrayObject(),
 			$serializer->serialize( new SiteLinks() )
