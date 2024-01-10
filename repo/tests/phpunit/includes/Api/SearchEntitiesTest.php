@@ -143,7 +143,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			$this->createMock( EntityTitleLookup::class ),
 			$this->newMockTitleTextLookup(),
 			$this->newMockUrlLookup(),
-			$this->newMockArticleIdLookup(),
+			$this->newMockArticleIdLookup( $params['limit'] ?? 7 ),
 			$this->createMock( ApiErrorReporter::class ),
 			[ 'item', 'property' ],
 			[ 'default' => null, 'other' => 'other-internal' ]
@@ -454,7 +454,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			$this->createMock( EntityTitleLookup::class ),
 			$this->newMockTitleTextLookup(),
 			$this->newMockUrlLookup(),
-			$this->newMockArticleIdLookup(),
+			$this->newMockArticleIdLookup( 1 ),
 			$this->createMock( ApiErrorReporter::class ),
 			[ 'kitten' ],
 			[ 'default' => null ]
@@ -487,9 +487,10 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 		return $urlLookup;
 	}
 
-	private function newMockArticleIdLookup(): EntityArticleIdLookup {
+	private function newMockArticleIdLookup( int $maxCalls ): EntityArticleIdLookup {
 		$articleIdLookup = $this->createMock( EntityArticleIdLookup::class );
-		$articleIdLookup->method( 'getArticleID' )
+		$articleIdLookup->expects( $this->atMost( $maxCalls ) )
+			->method( 'getArticleID' )
 			->willReturn( 42 );
 
 		return $articleIdLookup;
