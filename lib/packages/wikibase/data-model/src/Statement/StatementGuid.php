@@ -1,8 +1,7 @@
-<?php
+<?php declare( strict_types=1 );
 
 namespace Wikibase\DataModel\Statement;
 
-use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
@@ -22,79 +21,49 @@ class StatementGuid {
 	 */
 	public const SEPARATOR = '$';
 
-	/**
-	 * @var EntityId
-	 */
-	private $entityId;
+	private EntityId $entityId;
+	private string $guidPart;
+	private string $serialization;
 
-	/**
-	 * @var string
-	 */
-	private $guidPart;
-
-	/**
-	 * @var string
-	 */
-	private $serialization;
-
-	/**
-	 * @param EntityId $entityId
-	 * @param string $guid
-	 *
-	 * @throws InvalidArgumentException
-	 */
-	public function __construct( EntityId $entityId, $guid ) {
-		if ( !is_string( $guid ) ) {
-			throw new InvalidArgumentException( '$guid must be a string' );
-		}
-
+	public function __construct( EntityId $entityId, string $guid ) {
 		$this->serialization = $entityId->getSerialization() . self::SEPARATOR . $guid;
 		$this->entityId = $entityId;
 		$this->guidPart = $guid;
 	}
 
-	/**
-	 * @return EntityId
-	 */
-	public function getEntityId() {
+	public function getEntityId(): EntityId {
 		return $this->entityId;
 	}
 
 	/**
 	 * @since 9.4
-	 *
-	 * @return string
 	 */
-	public function getGuidPart() {
+	public function getGuidPart(): string {
 		return $this->guidPart;
 	}
 
 	/**
-	 * @return string
 	 * @deprecated The value returned by this method might differ in case from the original, unparsed statement GUID
 	 * (the entity ID part might have been lowercase originally, but is always normalized in the return value here),
 	 * which means that the value should not be compared to other statement GUID serializations,
 	 * e.g. to look up a statement in a StatementList.
 	 */
-	public function getSerialization() {
+	public function getSerialization(): string {
 		return $this->serialization;
 	}
 
 	/**
 	 * @param mixed $target
-	 *
-	 * @return bool
 	 */
-	public function equals( $target ) {
+	public function equals( $target ): bool {
 		if ( $this === $target ) {
 			return true;
 		}
 
-		return $target instanceof self
-			&& $target->serialization === $this->serialization;
+		return $target instanceof self && $target->serialization === $this->serialization;
 	}
 
-	public function __toString() {
+	public function __toString(): string {
 		return $this->serialization;
 	}
 
