@@ -6,7 +6,10 @@ use Serializers\Serializer;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Serializers\AliasGroupListSerializer;
 use Wikibase\DataModel\Serializers\ItemSerializer;
+use Wikibase\DataModel\Serializers\SiteLinkSerializer;
+use Wikibase\DataModel\Serializers\StatementListSerializer;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
@@ -23,7 +26,7 @@ use Wikibase\DataModel\Term\TermList;
  */
 class ItemSerializerTest extends DispatchableSerializerTest {
 
-	protected function buildSerializer() {
+	protected function buildSerializer( bool $useObjectsForEmptyMaps = false ) {
 		$termListSerializerMock = $this->createMock( Serializer::class );
 		$termListSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
@@ -37,10 +40,10 @@ class ItemSerializerTest extends DispatchableSerializerTest {
 				];
 			} );
 
-		$aliasGroupListSerializerMock = $this->createMock( Serializer::class );
+		$aliasGroupListSerializerMock = $this->createMock( AliasGroupListSerializer::class );
 		$aliasGroupListSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
-			->willReturnCallback( static function( AliasGroupList $aliasGroupList ) {
+			->willReturnCallback( static function ( AliasGroupList $aliasGroupList ) {
 				if ( $aliasGroupList->isEmpty() ) {
 					return [];
 				}
@@ -50,11 +53,14 @@ class ItemSerializerTest extends DispatchableSerializerTest {
 				];
 			} );
 
-		$statementListSerializerMock = $this->createMock( Serializer::class );
+		$statementListSerializerMock = $this->createMock( StatementListSerializer::class );
 		$statementListSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
-			->willReturnCallback( static function( StatementList $statementList ) {
+			->willReturnCallback( static function ( StatementList $statementList ) use ( $useObjectsForEmptyMaps ) {
 				if ( $statementList->isEmpty() ) {
+					if ( $useObjectsForEmptyMaps ) {
+						return (object)[];
+					}
 					return [];
 				}
 
@@ -72,7 +78,7 @@ class ItemSerializerTest extends DispatchableSerializerTest {
 				];
 			} );
 
-		$siteLinkSerializerMock = $this->createMock( Serializer::class );
+		$siteLinkSerializerMock = $this->createMock( SiteLinkSerializer::class );
 		$siteLinkSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
 			->with( new SiteLink( 'enwiki', 'Nyan Cat' ) )
@@ -86,7 +92,8 @@ class ItemSerializerTest extends DispatchableSerializerTest {
 			$termListSerializerMock,
 			$aliasGroupListSerializerMock,
 			$statementListSerializerMock,
-			$siteLinkSerializerMock
+			$siteLinkSerializerMock,
+			$useObjectsForEmptyMaps,
 		);
 	}
 
@@ -239,7 +246,7 @@ class ItemSerializerTest extends DispatchableSerializerTest {
 	}
 
 	public function testItemSerializerEmptyMapsSerialization() {
-		$serializer = $this->buildSerializer();
+		$serializer = $this->buildSerializer( false );
 
 		$item = new Item();
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Nyan Cat' );
@@ -258,6 +265,23 @@ class ItemSerializerTest extends DispatchableSerializerTest {
 			'aliases' => [],
 			'claims' => [],
 			'sitelinks' => $sitelinks,
+		];
+
+		$this->assertEquals( $serial, $serializer->serialize( $item ) );
+	}
+
+	public function testItemSerializerUsesObjectsForEmptyMaps() {
+		$serializer = $this->buildSerializer( true );
+
+		$item = new Item();
+
+		$serial = [
+			'type' => 'item',
+			'labels' => [],
+			'descriptions' => [],
+			'aliases' => [],
+			'claims' => (object)[],
+			'sitelinks' => (object)[],
 		];
 
 		$this->assertEquals( $serial, $serializer->serialize( $item ) );

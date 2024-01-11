@@ -19,7 +19,7 @@ use Wikibase\DataModel\Term\AliasGroupList;
  */
 class AliasGroupListSerializerTest extends TestCase {
 
-	private function buildSerializer() {
+	private function buildSerializer( bool $useObjectsForEmptyMaps ) {
 		$aliasGroupSerializer = $this->createMock( Serializer::class );
 		$aliasGroupSerializer->expects( $this->any() )
 			->method( 'serialize' )
@@ -27,14 +27,14 @@ class AliasGroupListSerializerTest extends TestCase {
 				return $aliasGroup->getAliases();
 			} );
 
-		return new AliasGroupListSerializer( $aliasGroupSerializer );
+		return new AliasGroupListSerializer( $aliasGroupSerializer, $useObjectsForEmptyMaps );
 	}
 
 	/**
 	 * @dataProvider serializationProvider
 	 */
 	public function testSerialization( AliasGroupList $input, $expected ) {
-		$serializer = $this->buildSerializer();
+		$serializer = $this->buildSerializer( false );
 
 		$output = $serializer->serialize( $input );
 
@@ -69,15 +69,14 @@ class AliasGroupListSerializerTest extends TestCase {
 	}
 
 	public function testWithUnsupportedObject() {
-		$serializer = $this->buildSerializer();
+		$serializer = $this->buildSerializer( false );
 
 		$this->expectException( UnsupportedObjectException::class );
 		$serializer->serialize( new stdClass() );
 	}
 
-	public function testAliasGroupListSerializerReturnsArrayByDefault() {
-		$serializer = $this->buildSerializer( false );
-
-		$this->assertEquals( [], $serializer->serialize( new AliasGroupList() ) );
+	public function testAliasGroupListSerializerReturnsObjectWhenUseObjectsForEmptyMapsSet() {
+		$serializer = $this->buildSerializer( true );
+		$this->assertEquals( (object)[], $serializer->serialize( new AliasGroupList() ) );
 	}
 }

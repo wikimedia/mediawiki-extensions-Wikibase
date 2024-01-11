@@ -13,7 +13,7 @@ use Wikibase\DataModel\Term\TermList;
  * @license GPL-2.0-or-later
  * @author Addshore
  */
-class TermListSerializer implements Serializer {
+class TermListSerializer extends MapSerializer implements Serializer {
 
 	/**
 	 * @var Serializer
@@ -23,7 +23,8 @@ class TermListSerializer implements Serializer {
 	/**
 	 * @param Serializer $termSerializer
 	 */
-	public function __construct( Serializer $termSerializer ) {
+	public function __construct( Serializer $termSerializer, bool $useObjectsForEmptyMaps ) {
+		parent::__construct( $useObjectsForEmptyMaps );
 		$this->termSerializer = $termSerializer;
 	}
 
@@ -37,7 +38,7 @@ class TermListSerializer implements Serializer {
 	 */
 	public function serialize( $object ) {
 		$this->assertIsSerializerFor( $object );
-		return $this->getSerialized( $object );
+		return $this->serializeMap( $this->generateSerializedArrayRepresentation( $object ) );
 	}
 
 	private function assertIsSerializerFor( $object ) {
@@ -49,12 +50,7 @@ class TermListSerializer implements Serializer {
 		}
 	}
 
-	/**
-	 * @param TermList $termList
-	 *
-	 * @return array[]
-	 */
-	private function getSerialized( TermList $termList ) {
+	protected function generateSerializedArrayRepresentation( TermList $termList ): array {
 		$serialization = [];
 
 		foreach ( $termList->getIterator() as $term ) {
@@ -63,5 +59,4 @@ class TermListSerializer implements Serializer {
 
 		return $serialization;
 	}
-
 }

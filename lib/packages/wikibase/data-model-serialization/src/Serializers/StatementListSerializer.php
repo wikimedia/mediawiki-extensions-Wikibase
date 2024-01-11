@@ -14,7 +14,7 @@ use Wikibase\DataModel\Statement\StatementList;
  * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class StatementListSerializer implements DispatchableSerializer {
+class StatementListSerializer extends MapSerializer implements DispatchableSerializer {
 
 	/**
 	 * @var Serializer
@@ -24,7 +24,8 @@ class StatementListSerializer implements DispatchableSerializer {
 	/**
 	 * @param Serializer $statementSerializer
 	 */
-	public function __construct( Serializer $statementSerializer ) {
+	public function __construct( Serializer $statementSerializer, bool $useObjectsForEmptyMaps ) {
+		parent::__construct( $useObjectsForEmptyMaps );
 		$this->statementSerializer = $statementSerializer;
 	}
 
@@ -55,10 +56,10 @@ class StatementListSerializer implements DispatchableSerializer {
 			);
 		}
 
-		return $this->getSerialized( $object );
+		return $this->serializeMap( $this->generateSerializedArrayRepresentation( $object ) );
 	}
 
-	private function getSerialized( StatementList $statementList ) {
+	protected function generateSerializedArrayRepresentation( StatementList $statementList ): array {
 		$serialization = [];
 
 		foreach ( $statementList->toArray() as $statement ) {
@@ -73,5 +74,4 @@ class StatementListSerializer implements DispatchableSerializer {
 
 		return $serialization;
 	}
-
 }
