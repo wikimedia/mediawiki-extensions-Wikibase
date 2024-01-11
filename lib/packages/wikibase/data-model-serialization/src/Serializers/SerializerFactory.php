@@ -20,7 +20,10 @@ use Serializers\Serializer;
 class SerializerFactory {
 
 	public const OPTION_DEFAULT = 0;
-	/** @since 1.2.0 */
+	/**
+	 * @since 1.2.0
+	 * @deprecated since 2.10.0 option has no effect
+	 */
 	public const OPTION_OBJECTS_FOR_MAPS = 1;
 	/**
 	 * @since 1.7.0
@@ -74,13 +77,6 @@ class SerializerFactory {
 	/**
 	 * @return bool
 	 */
-	private function shouldUseObjectsForMaps() {
-		return (bool)( $this->options & self::OPTION_OBJECTS_FOR_MAPS );
-	}
-
-	/**
-	 * @return bool
-	 */
 	private function shouldSerializeMainSnaksWithHash() {
 		return !(bool)( $this->options & self::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH );
 	}
@@ -123,7 +119,6 @@ class SerializerFactory {
 			$this->newAliasGroupListSerializer(),
 			$this->newStatementListSerializer(),
 			$this->newSiteLinkSerializer(),
-			$this->shouldUseObjectsForMaps()
 		);
 	}
 
@@ -153,10 +148,7 @@ class SerializerFactory {
 	 * @since 1.4
 	 */
 	public function newStatementListSerializer(): StatementListSerializer {
-		return new StatementListSerializer(
-			$this->newStatementSerializer(),
-			$this->shouldUseObjectsForMaps()
-		);
+		return new StatementListSerializer( $this->newStatementSerializer() );
 	}
 
 	/**
@@ -198,10 +190,7 @@ class SerializerFactory {
 	 * @since 1.4
 	 */
 	public function newSnakListSerializer( $serializeSnaksWithHash = true ): SnakListSerializer {
-		return new SnakListSerializer(
-			$this->newSnakSerializer( $serializeSnaksWithHash ),
-			$this->shouldUseObjectsForMaps()
-		);
+		return new SnakListSerializer( $this->newSnakSerializer( $serializeSnaksWithHash ) );
 	}
 
 	/**
@@ -239,7 +228,7 @@ class SerializerFactory {
 	 * @since 1.5
 	 */
 	public function newTermListSerializer(): TermListSerializer {
-		return new TermListSerializer( $this->newTermSerializer(), $this->shouldUseObjectsForMaps() );
+		return new TermListSerializer( $this->newTermSerializer() );
 	}
 
 	/**
@@ -257,10 +246,7 @@ class SerializerFactory {
 	 * @since 1.5
 	 */
 	public function newAliasGroupListSerializer(): AliasGroupListSerializer {
-		return new AliasGroupListSerializer(
-			$this->newAliasGroupSerializer(),
-			$this->shouldUseObjectsForMaps()
-		);
+		return new AliasGroupListSerializer( $this->newAliasGroupSerializer() );
 	}
 
 }

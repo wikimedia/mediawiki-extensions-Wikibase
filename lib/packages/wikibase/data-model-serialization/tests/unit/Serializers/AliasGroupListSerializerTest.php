@@ -19,27 +19,22 @@ use Wikibase\DataModel\Term\AliasGroupList;
  */
 class AliasGroupListSerializerTest extends TestCase {
 
-	/**
-	 * @param bool $useObjectsForMaps
-	 *
-	 * @return AliasGroupListSerializer
-	 */
-	private function buildSerializer( $useObjectsForMaps = false ) {
+	private function buildSerializer() {
 		$aliasGroupSerializer = $this->createMock( Serializer::class );
 		$aliasGroupSerializer->expects( $this->any() )
 			->method( 'serialize' )
-			->willReturnCallback( static function( AliasGroup $aliasGroup ) {
+			->willReturnCallback( static function ( AliasGroup $aliasGroup ) {
 				return $aliasGroup->getAliases();
 			} );
 
-		return new AliasGroupListSerializer( $aliasGroupSerializer, $useObjectsForMaps );
+		return new AliasGroupListSerializer( $aliasGroupSerializer );
 	}
 
 	/**
 	 * @dataProvider serializationProvider
 	 */
-	public function testSerialization( AliasGroupList $input, $useObjectsForMaps, $expected ) {
-		$serializer = $this->buildSerializer( $useObjectsForMaps );
+	public function testSerialization( AliasGroupList $input, $expected ) {
+		$serializer = $this->buildSerializer();
 
 		$output = $serializer->serialize( $input );
 
@@ -50,22 +45,14 @@ class AliasGroupListSerializerTest extends TestCase {
 		return [
 			[
 				new AliasGroupList( [ new AliasGroup( 'en', [] ) ] ),
-				false,
 				[],
 			],
 			[
-				new AliasGroupList( [ new AliasGroup( 'en', [] ) ] ),
-				true,
-				new \stdClass(),
-			],
-			[
 				new AliasGroupList( [ new AliasGroup( 'en', [ 'One' ] ) ] ),
-				false,
 				[ 'en' => [ 'One' ] ],
 			],
 			[
 				new AliasGroupList( [ new AliasGroup( 'en', [ 'One', 'Pony' ] ) ] ),
-				false,
 				[ 'en' => [ 'One', 'Pony' ] ],
 			],
 			[
@@ -73,7 +60,6 @@ class AliasGroupListSerializerTest extends TestCase {
 					new AliasGroup( 'en', [ 'One', 'Pony' ] ),
 					new AliasGroup( 'de', [ 'foo', 'bar' ] ),
 				] ),
-				false,
 				[
 					'en' => [ 'One', 'Pony' ],
 					'de' => [ 'foo', 'bar' ],
@@ -89,15 +75,9 @@ class AliasGroupListSerializerTest extends TestCase {
 		$serializer->serialize( new stdClass() );
 	}
 
-	public function testAliasGroupListSerializerWithOptionObjectsForMaps() {
-		$serializer = $this->buildSerializer( true );
+	public function testAliasGroupListSerializerReturnsArrayByDefault() {
+		$serializer = $this->buildSerializer( false );
 
-		$aliases = new AliasGroupList( [ new AliasGroup( 'en', [ 'foo', 'bar' ] ) ] );
-
-		$serial = new \stdClass();
-		$serial->en = [ 'foo', 'bar' ];
-
-		$this->assertEquals( $serial, $serializer->serialize( $aliases ) );
+		$this->assertEquals( [], $serializer->serialize( new AliasGroupList() ) );
 	}
-
 }

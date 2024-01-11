@@ -3,8 +3,8 @@
 namespace Tests\Wikibase\DataModel\Serializers;
 
 use Serializers\Serializer;
-use stdClass;
 use Wikibase\DataModel\Serializers\StatementListSerializer;
+use Wikibase\DataModel\Serializers\StatementSerializer;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
@@ -34,7 +34,7 @@ class StatementListSerializerTest extends DispatchableSerializerTest {
 				'rank' => 'normal',
 			] );
 
-		return new StatementListSerializer( $statementSerializerMock, false );
+		return new StatementListSerializer( $statementSerializerMock );
 	}
 
 	public function serializableProvider() {
@@ -88,7 +88,7 @@ class StatementListSerializerTest extends DispatchableSerializerTest {
 		];
 	}
 
-	public function testStatementListSerializerWithOptionObjectsForMaps() {
+	public function testStatementListSerializerWithoutOptionUseObjectsForEmptyMaps() {
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( 'test' );
 		$statementSerializerMock = $this->createMock( Serializer::class );
@@ -99,16 +99,22 @@ class StatementListSerializerTest extends DispatchableSerializerTest {
 				'mockedsuff' => [],
 				'type' => 'statement',
 			] );
-		$serializer = new StatementListSerializer( $statementSerializerMock, true );
+		$serializer = new StatementListSerializer( $statementSerializerMock, false );
 
 		$statementList = new StatementList( $statement );
 
-		$serial = new stdClass();
-		$serial->P42 = [ [
+		$serial = [];
+		$serial['P42'] = [ [
 			'mockedsuff' => [],
 			'type' => 'statement',
 		] ];
 		$this->assertEquals( $serial, $serializer->serialize( $statementList ) );
 	}
 
+	public function testStatementListSerializerSerializesEmptyList() {
+		$statementSerializerMock = $this->createMock( StatementSerializer::class );
+		$serializer = new StatementListSerializer( $statementSerializerMock );
+
+		$this->assertEquals( [], $serializer->serialize( new StatementList() ) );
+	}
 }

@@ -27,7 +27,7 @@ class SiteLinkListSerializerTest extends TestCase {
 				[ $siteLink2, $siteLink2->getPageName() ],
 			] );
 
-		$serializer = new SiteLinkListSerializer( $siteLinkSerializer, false );
+		$serializer = new SiteLinkListSerializer( $siteLinkSerializer );
 
 		$this->assertEquals(
 			[
@@ -38,12 +38,37 @@ class SiteLinkListSerializerTest extends TestCase {
 		);
 	}
 
-	public function testSerializeAndUseObjects(): void {
-		$serializer = new SiteLinkListSerializer( $this->createStub( SiteLinkSerializer::class ), true );
+	public function testSerializeEmptyList(): void {
+		$serializer = new SiteLinkListSerializer( $this->createStub( SiteLinkSerializer::class ) );
 		$this->assertEquals(
-			(object)[],
+			[],
 			$serializer->serialize( new SiteLinkList() )
 		);
 	}
 
+	public function testSerializeEmptySubLists(): void {
+		$siteLink1 = new SiteLink( 'foo', 'bar' );
+		$siteLink2 = new SiteLink( 'omg', 'bbq' );
+
+		$siteLinkSerializer = $this->createMock( SiteLinkSerializer::class );
+		$siteLinkSerializer->expects( $this->exactly( 2 ) )
+			->method( 'serialize' )
+			->willReturnMap( [
+				[ $siteLink1, $siteLink1->getPageName() ],
+				[ $siteLink2, $siteLink2->getPageName() ],
+			] );
+
+		$serializer = new SiteLinkListSerializer( $siteLinkSerializer, true );
+		$this->assertEquals(
+			[
+				$siteLink1->getSiteId() => $siteLink1->getPageName(),
+				$siteLink2->getSiteId() => $siteLink2->getPageName(),
+			],
+			$serializer->serialize( new SiteLinkList( [ $siteLink1, $siteLink2 ] ) )
+		);
+		$this->assertEquals(
+			[],
+			$serializer->serialize( new SiteLinkList() )
+		);
+	}
 }

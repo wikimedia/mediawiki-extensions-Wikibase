@@ -39,29 +39,21 @@ class ItemSerializer implements DispatchableSerializer {
 	private $siteLinkListSerializer;
 
 	/**
-	 * @var bool
-	 */
-	private $useObjectsForMaps;
-
-	/**
 	 * @param Serializer $termListSerializer
 	 * @param Serializer $aliasGroupListSerializer
 	 * @param Serializer $statementListSerializer
 	 * @param Serializer $siteLinkSerializer
-	 * @param bool $useObjectsForMaps
 	 */
 	public function __construct(
 		Serializer $termListSerializer,
 		Serializer $aliasGroupListSerializer,
 		Serializer $statementListSerializer,
-		Serializer $siteLinkSerializer,
-		$useObjectsForMaps
+		Serializer $siteLinkSerializer
 	) {
 		$this->termListSerializer = $termListSerializer;
 		$this->aliasGroupListSerializer = $aliasGroupListSerializer;
 		$this->statementListSerializer = $statementListSerializer;
-		$this->siteLinkListSerializer = new SiteLinkListSerializer( $siteLinkSerializer, $useObjectsForMaps );
-		$this->useObjectsForMaps = $useObjectsForMaps;
+		$this->siteLinkListSerializer = new SiteLinkListSerializer( $siteLinkSerializer );
 	}
 
 	/**

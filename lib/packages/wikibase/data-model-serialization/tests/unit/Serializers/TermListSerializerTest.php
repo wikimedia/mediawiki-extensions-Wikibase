@@ -19,19 +19,17 @@ use Wikibase\DataModel\Term\TermList;
 class TermListSerializerTest extends TestCase {
 
 	/**
-	 * @param bool $useObjectsForMaps
-	 *
 	 * @return TermListSerializer
 	 */
-	private function buildSerializer( $useObjectsForMaps = false ) {
-		return new TermListSerializer( new TermSerializer(), $useObjectsForMaps );
+	private function buildSerializer() {
+		return new TermListSerializer( new TermSerializer() );
 	}
 
 	/**
 	 * @dataProvider serializationProvider
 	 */
-	public function testSerialization( TermList $input, $useObjectsForMaps, $expected ) {
-		$serializer = $this->buildSerializer( $useObjectsForMaps );
+	public function testSerialization( TermList $input, $expected ) {
+		$serializer = $this->buildSerializer();
 
 		$output = $serializer->serialize( $input );
 
@@ -42,13 +40,7 @@ class TermListSerializerTest extends TestCase {
 		return [
 			[
 				new TermList( [] ),
-				false,
 				[],
-			],
-			[
-				new TermList( [] ),
-				true,
-				new \stdClass(),
 			],
 			[
 				new TermList( [
@@ -56,7 +48,6 @@ class TermListSerializerTest extends TestCase {
 					new Term( 'it', 'Lama' ),
 					new TermFallback( 'pt', 'Lama', 'de', 'zh' ),
 				] ),
-				false,
 				[
 					'en' => [ 'language' => 'en', 'value' => 'Water' ],
 					'it' => [ 'language' => 'it', 'value' => 'Lama' ],
@@ -73,18 +64,18 @@ class TermListSerializerTest extends TestCase {
 		$serializer->serialize( new \stdClass() );
 	}
 
-	public function testTermListSerializerWithOptionObjectsForMaps() {
-		$serializer = $this->buildSerializer( true );
+	public function testTermListSerializerSerializesTermLists() {
+		$serializer = $this->buildSerializer();
 
 		$terms = new TermList( [ new Term( 'en', 'foo' ) ] );
 
-		$serial = new \stdClass();
-		$serial->en = [
+		$serial = [];
+		$serial['en'] = [
 			'language' => 'en',
 			'value' => 'foo',
 		];
 
 		$this->assertEquals( $serial, $serializer->serialize( $terms ) );
+		$this->assertEquals( [], $serializer->serialize( new TermList() ) );
 	}
-
 }

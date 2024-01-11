@@ -22,17 +22,10 @@ class StatementListSerializer implements DispatchableSerializer {
 	private $statementSerializer;
 
 	/**
-	 * @var bool
-	 */
-	private $useObjectsForMaps;
-
-	/**
 	 * @param Serializer $statementSerializer
-	 * @param bool $useObjectsForMaps
 	 */
-	public function __construct( Serializer $statementSerializer, $useObjectsForMaps ) {
+	public function __construct( Serializer $statementSerializer ) {
 		$this->statementSerializer = $statementSerializer;
-		$this->useObjectsForMaps = $useObjectsForMaps;
 	}
 
 	/**
@@ -76,10 +69,6 @@ class StatementListSerializer implements DispatchableSerializer {
 			}
 
 			$serialization[$idSerialization][] = $this->statementSerializer->serialize( $statement );
-		}
-
-		if ( $this->useObjectsForMaps ) {
-			$serialization = (object)$serialization;
 		}
 
 		return $serialization;

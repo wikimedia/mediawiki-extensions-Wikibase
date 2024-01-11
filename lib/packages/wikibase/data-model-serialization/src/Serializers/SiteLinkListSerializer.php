@@ -11,11 +11,9 @@ use Wikibase\DataModel\SiteLinkList;
 class SiteLinkListSerializer {
 
 	private $siteLinkSerializer;
-	private $useObjectsForMaps;
 
-	public function __construct( Serializer $siteLinkSerializer, bool $useObjectsForMaps ) {
+	public function __construct( Serializer $siteLinkSerializer ) {
 		$this->siteLinkSerializer = $siteLinkSerializer;
-		$this->useObjectsForMaps = $useObjectsForMaps;
 	}
 
 	public function serialize( SiteLinkList $siteLinkList ) {
@@ -24,7 +22,7 @@ class SiteLinkListSerializer {
 			$serialization[$siteLink->getSiteId()] = $this->siteLinkSerializer->serialize( $siteLink );
 		}
 
-		return $this->useObjectsForMaps ? (object)$serialization : $serialization;
+		return $serialization;
 	}
 
 }
