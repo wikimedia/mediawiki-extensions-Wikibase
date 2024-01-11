@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Statement;
 
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
@@ -25,10 +26,23 @@ class StatementGuid {
 	private string $guidPart;
 	private string $serialization;
 
-	public function __construct( EntityId $entityId, string $guid ) {
-		$this->serialization = $entityId->getSerialization() . self::SEPARATOR . $guid;
+	/**
+	 * @param EntityId $entityId the normalized entity id
+	 * @param string $guidPart the guid part of the statement id that appears after the separator
+	 * @param string|null $originalStatementId the original, non-normalized, statement id.
+	 * Defaults to `null` for compatability.
+	 */
+	public function __construct( EntityId $entityId, string $guidPart, string $originalStatementId = null ) {
+		$constructedStatementId = $entityId->getSerialization() . self::SEPARATOR . $guidPart;
+		if ( $originalStatementId !== null
+			 && strtolower( $originalStatementId ) !== strtolower( $constructedStatementId ) ) {
+			throw new InvalidArgumentException( '$originalStatementId does not match $entityId and/or $guidPart' );
+		}
+
+		// use the original serialization when available to avoid normalizing the entity id prefix
+		$this->serialization = $originalStatementId ?? $constructedStatementId;
 		$this->entityId = $entityId;
-		$this->guidPart = $guid;
+		$this->guidPart = $guidPart;
 	}
 
 	public function getEntityId(): EntityId {
@@ -43,9 +57,9 @@ class StatementGuid {
 	}
 
 	/**
-	 * @deprecated The value returned by this method might differ in case from the original, unparsed statement GUID
-	 * (the entity ID part might have been lowercase originally, but is always normalized in the return value here),
-	 * which means that the value should not be compared to other statement GUID serializations,
+	 * If the `$originalStatementId` parameter is not used when constructing the StatementGuid object,
+	 * then this method will return a statement id where the entity id prefix is normalized to upper case.
+	 * This could cause issues when comparing to other statement id serializations,
 	 * e.g. to look up a statement in a StatementList.
 	 */
 	public function getSerialization(): string {
