@@ -45,10 +45,7 @@
 	"InvalidSiteIdExample": {
 		"value": {
 			"code": "invalid-site-id",
-			"message": "Not a valid site ID: {site_id}",
-			"context": {
-				"item-id": "{item_id}"
-			}
+			"message": "Not a valid site ID: {site_id}"
 		}
 	},
 	"StatementDataMissingFieldExample": {
