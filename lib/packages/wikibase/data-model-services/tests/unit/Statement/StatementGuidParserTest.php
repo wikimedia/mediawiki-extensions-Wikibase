@@ -1,4 +1,4 @@
-<?php
+<?php declare( strict_types=1 );
 
 namespace Wikibase\DataModel\Services\Tests\Statement;
 
@@ -20,17 +20,17 @@ class StatementGuidParserTest extends TestCase {
 	/**
 	 * @dataProvider guidProvider
 	 */
-	public function testCanParseStatementGuid( StatementGuid $expected ) {
+	public function testCanParseStatementGuid( StatementGuid $expected ): void {
 		$actual = $this->newParser()->parse( $expected->getSerialization() );
 
 		$this->assertEquals( $expected, $actual );
 	}
 
-	private function newParser() {
+	private function newParser(): StatementGuidParser {
 		return new StatementGuidParser( new ItemIdParser() );
 	}
 
-	public static function guidProvider() {
+	public static function guidProvider(): array {
 		return [
 			[ new StatementGuid( new ItemId( 'q42' ), 'D8404CDA-25E4-4334-AF13-A3290BCD9C0N' ) ],
 			[ new StatementGuid( new ItemId( 'Q1234567' ), 'D4FDE516-F20C-4154-ADCE-7C5B609DFDFF' ) ],
@@ -43,17 +43,14 @@ class StatementGuidParserTest extends TestCase {
 	/**
 	 * @dataProvider invalidIdSerializationProvider
 	 */
-	public function testCannotParserInvalidId( $invalidIdSerialization ) {
+	public function testCannotParserInvalidId( string $invalidIdSerialization ): void {
 		$this->expectException( StatementGuidParsingException::class );
 		$this->newParser()->parse( $invalidIdSerialization );
 	}
 
-	public static function invalidIdSerializationProvider() {
+	public static function invalidIdSerializationProvider(): array {
 		return [
 			[ 'FOO' ],
-			[ null ],
-			[ 42 ],
-			[ [] ],
 			[ '' ],
 			[ 'q0' ],
 			[ '1p' ],

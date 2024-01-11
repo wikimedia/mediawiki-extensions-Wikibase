@@ -1,4 +1,4 @@
-<?php
+<?php declare( strict_types=1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
@@ -16,9 +16,8 @@ use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
  */
 class StatementGuidParserTest extends ServiceWiringTestCase {
 
-	public function testConstruction() {
-		$this->mockService( 'WikibaseRepo.EntityIdParser',
-			new ItemIdParser() );
+	public function testConstruction(): void {
+		$this->mockService( 'WikibaseRepo.EntityIdParser', new ItemIdParser() );
 
 		/** @var StatementGuidParser $statementGuidParser */
 		$statementGuidParser = $this->getService( 'WikibaseRepo.StatementGuidParser' );
