@@ -1,29 +1,16 @@
 'use strict';
 
-const { action, utils } = require( 'api-testing' );
+const { utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { newGetItemRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
 async function createItemWithAllFields() {
 	const statementPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
-	const siteId = ( await action.getAnon().meta(
-		'wikibase',
-		{ wbprop: 'siteid' }
-	) ).siteid;
-	const pageWithSiteLink = utils.title( 'SiteLink Test' );
-	await action.getAnon().edit( pageWithSiteLink, { text: 'sitelink test' } );
-
-	return entityHelper.createEntity( 'item', {
+	const itemId = ( await entityHelper.createEntity( 'item', {
 		labels: { en: { language: 'en', value: `non-empty-item-${utils.uniq()}` } },
 		descriptions: { en: { language: 'en', value: 'non-empty-item-description' } },
 		aliases: { en: [ { language: 'en', value: 'non-empty-item-alias' } ] },
-		sitelinks: {
-			[ siteId ]: {
-				site: siteId,
-				title: pageWithSiteLink
-			}
-		},
 		claims: [
 			{ // with value, without qualifiers or references
 				mainsnak: {
@@ -55,7 +42,11 @@ async function createItemWithAllFields() {
 				} ]
 			}
 		]
-	} );
+	} ) ).entity.id;
+
+	await entityHelper.createLocalSiteLink( itemId, utils.title( 'SiteLink Test' ) );
+
+	return itemId;
 }
 
 describe( newGetItemRequestBuilder().getRouteDescription(), () => {
@@ -77,7 +68,7 @@ describe( newGetItemRequestBuilder().getRouteDescription(), () => {
 	} );
 
 	it( '200 OK response is valid for a non-empty item', async () => {
-		const { entity: { id } } = await createItemWithAllFields();
+		const id = await createItemWithAllFields();
 		const response = await newGetItemRequestBuilder( id ).makeRequest();
 
 		expect( response ).to.have.status( 200 );

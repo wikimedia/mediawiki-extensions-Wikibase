@@ -1,8 +1,13 @@
 'use strict';
 
 const { newGetItemSiteLinksRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
-const { action, utils, assert } = require( 'api-testing' );
-const { createEntity, createRedirectForItem } = require( '../helpers/entityHelper' );
+const { utils, assert } = require( 'api-testing' );
+const {
+	createEntity,
+	createRedirectForItem,
+	getLocalSiteId,
+	createLocalSiteLink
+} = require( '../helpers/entityHelper' );
 const { expect } = require( '../helpers/chaiHelper' );
 
 describe( newGetItemSiteLinksRequestBuilder().getRouteDescription(), () => {
@@ -12,21 +17,11 @@ describe( newGetItemSiteLinksRequestBuilder().getRouteDescription(), () => {
 	const linkedArticle = utils.title( 'Article-linked-to-test-item' );
 
 	before( async () => {
-		siteId = ( await action.getAnon().meta(
-			'wikibase',
-			{ wbprop: 'siteid' }
-		) ).siteid;
-		await action.getAnon().edit( linkedArticle, { text: 'sitelink test' } );
-
-		const createItemResponse = await createEntity( 'item', {
-			sitelinks: {
-				[ siteId ]: {
-					site: siteId,
-					title: linkedArticle
-				}
-			}
-		} );
+		const createItemResponse = await createEntity( 'item', {} );
 		testItemId = createItemResponse.entity.id;
+
+		await createLocalSiteLink( testItemId, linkedArticle );
+		siteId = await getLocalSiteId();
 	} );
 
 	it( 'can GET sitelinks of an item', async () => {
