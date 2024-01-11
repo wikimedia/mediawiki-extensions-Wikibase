@@ -1,4 +1,4 @@
-<?php declare( strict_types=1 );
+<?php declare( strict_types = 1 );
 
 namespace Wikibase\Repo\RestApi\Infrastructure;
 
@@ -12,6 +12,7 @@ use Wikibase\Repo\RestApi\Domain\Model\DescriptionsEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\LabelEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\SiteLinkEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
 use Wikibase\Repo\SummaryFormatter;
 
@@ -75,6 +76,8 @@ class EditSummaryFormatter {
 				case EditSummary::PATCH_ACTION:
 					return $this->newSummaryForStatementEdit( $editSummary, 'wbsetclaim', 'update', 1 );
 			}
+		} elseif ( $editSummary instanceof SiteLinkEditSummary ) {
+			return new Summary();
 		}
 
 		throw new LogicException( "Unknown summary type '{$editSummary->getEditAction()}' " . get_class( $editSummary ) );

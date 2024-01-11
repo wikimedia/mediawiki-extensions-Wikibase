@@ -196,6 +196,13 @@ module.exports = {
 			.withJsonBodyParam( 'aliases', aliases );
 	},
 
+	newRemoveItemSiteLinkRequestBuilder( itemId, siteId ) {
+		return new RequestBuilder()
+			.withRoute( 'DELETE', '/entities/items/{item_id}/sitelinks/{site_id}' )
+			.withPathParam( 'item_id', itemId )
+			.withPathParam( 'site_id', siteId );
+	},
+
 	newRemovePropertyLabelRequestBuilder( propertyId, languageCode ) {
 		return new RequestBuilder()
 			.withRoute( 'DELETE', '/entities/properties/{property_id}/labels/{language_code}' )
