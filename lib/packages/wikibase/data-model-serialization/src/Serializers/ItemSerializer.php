@@ -1,11 +1,12 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\DataModel\Serializers;
 
 use Serializers\DispatchableSerializer;
 use Serializers\Exceptions\SerializationException;
 use Serializers\Exceptions\UnsupportedObjectException;
-use Serializers\Serializer;
 use Wikibase\DataModel\Entity\Item;
 
 /**
@@ -18,38 +19,16 @@ use Wikibase\DataModel\Entity\Item;
  */
 class ItemSerializer implements DispatchableSerializer {
 
-	/**
-	 * @var TermListSerializer
-	 */
-	private $termListSerializer;
+	private TermListSerializer $termListSerializer;
+	private AliasGroupListSerializer $aliasGroupListSerializer;
+	private StatementListSerializer $statementListSerializer;
+	private SiteLinkListSerializer $siteLinkListSerializer;
 
-	/**
-	 * @var AliasGroupListSerializer
-	 */
-	private $aliasGroupListSerializer;
-
-	/**
-	 * @var StatementListSerializer
-	 */
-	private $statementListSerializer;
-
-	/**
-	 * @var SiteLinkListSerializer
-	 */
-	private $siteLinkListSerializer;
-
-	/**
-	 * @param Serializer $termListSerializer
-	 * @param Serializer $aliasGroupListSerializer
-	 * @param Serializer $statementListSerializer
-	 * @param Serializer $siteLinkSerializer
-	 * @param bool $useObjectsForEmptyMaps
-	 */
 	public function __construct(
-		Serializer $termListSerializer,
-		Serializer $aliasGroupListSerializer,
-		Serializer $statementListSerializer,
-		Serializer $siteLinkSerializer,
+		TermListSerializer $termListSerializer,
+		AliasGroupListSerializer $aliasGroupListSerializer,
+		StatementListSerializer $statementListSerializer,
+		SiteLinkSerializer $siteLinkSerializer,
 		bool $useObjectsForEmptyMaps
 	) {
 		$this->termListSerializer = $termListSerializer;
@@ -88,7 +67,7 @@ class ItemSerializer implements DispatchableSerializer {
 		return $this->getSerialized( $object );
 	}
 
-	private function getSerialized( Item $item ) {
+	private function getSerialized( Item $item ): array {
 		$serialization = [
 			'type' => $item->getType(),
 		];
@@ -101,7 +80,7 @@ class ItemSerializer implements DispatchableSerializer {
 		return $serialization;
 	}
 
-	private function addIdToSerialization( Item $item, array &$serialization ) {
+	private function addIdToSerialization( Item $item, array &$serialization ): void {
 		$id = $item->getId();
 
 		if ( $id !== null ) {
@@ -109,7 +88,7 @@ class ItemSerializer implements DispatchableSerializer {
 		}
 	}
 
-	private function addTermsToSerialization( Item $item, array &$serialization ) {
+	private function addTermsToSerialization( Item $item, array &$serialization ): void {
 		$fingerprint = $item->getFingerprint();
 
 		$serialization['labels'] = $this->termListSerializer->serialize( $fingerprint->getLabels() );
@@ -119,11 +98,11 @@ class ItemSerializer implements DispatchableSerializer {
 			$this->aliasGroupListSerializer->serialize( $fingerprint->getAliasGroups() );
 	}
 
-	private function addStatementListToSerialization( Item $item, array &$serialization ) {
+	private function addStatementListToSerialization( Item $item, array &$serialization ): void {
 		$serialization['claims'] = $this->statementListSerializer->serialize( $item->getStatements() );
 	}
 
-	private function addSiteLinksToSerialization( Item $item, array &$serialization ) {
+	private function addSiteLinksToSerialization( Item $item, array &$serialization ): void {
 		$serialization['sitelinks'] = $this->siteLinkListSerializer->serialize( $item->getSiteLinkList() );
 	}
 

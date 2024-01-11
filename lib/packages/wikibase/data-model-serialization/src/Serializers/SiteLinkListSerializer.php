@@ -1,8 +1,9 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\DataModel\Serializers;
 
-use Serializers\Serializer;
 use Wikibase\DataModel\SiteLinkList;
 
 /**
@@ -10,9 +11,9 @@ use Wikibase\DataModel\SiteLinkList;
  */
 class SiteLinkListSerializer extends MapSerializer {
 
-	private $siteLinkSerializer;
+	private SiteLinkSerializer $siteLinkSerializer;
 
-	public function __construct( Serializer $siteLinkSerializer, bool $useObjectsForEmptyMaps ) {
+	public function __construct( SiteLinkSerializer $siteLinkSerializer, bool $useObjectsForEmptyMaps ) {
 		parent::__construct( $useObjectsForEmptyMaps );
 		$this->siteLinkSerializer = $siteLinkSerializer;
 	}

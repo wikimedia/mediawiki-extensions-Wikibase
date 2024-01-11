@@ -1,12 +1,14 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Tests\Wikibase\DataModel\Serializers;
 
 use PHPUnit\Framework\TestCase;
 use Serializers\Exceptions\UnsupportedObjectException;
-use Serializers\Serializer;
 use stdClass;
 use Wikibase\DataModel\Serializers\AliasGroupListSerializer;
+use Wikibase\DataModel\Serializers\AliasGroupSerializer;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 
@@ -19,8 +21,8 @@ use Wikibase\DataModel\Term\AliasGroupList;
  */
 class AliasGroupListSerializerTest extends TestCase {
 
-	private function buildSerializer( bool $useObjectsForEmptyMaps ) {
-		$aliasGroupSerializer = $this->createMock( Serializer::class );
+	private function buildSerializer( bool $useObjectsForEmptyMaps ): AliasGroupListSerializer {
+		$aliasGroupSerializer = $this->createMock( AliasGroupSerializer::class );
 		$aliasGroupSerializer->expects( $this->any() )
 			->method( 'serialize' )
 			->willReturnCallback( static function ( AliasGroup $aliasGroup ) {

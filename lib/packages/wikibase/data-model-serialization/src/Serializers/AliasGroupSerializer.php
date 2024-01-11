@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\DataModel\Serializers;
 
 use Serializers\Exceptions\UnsupportedObjectException;
@@ -35,11 +37,9 @@ class AliasGroupSerializer implements Serializer {
 	}
 
 	/**
-	 * @param AliasGroup $aliasGroup
-	 *
 	 * @return array[]
 	 */
-	private function getSerialized( AliasGroup $aliasGroup ) {
+	private function getSerialized( AliasGroup $aliasGroup ): array {
 		$serialization = [];
 		$language = $aliasGroup->getLanguageCode();
 

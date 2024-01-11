@@ -2,7 +2,6 @@
 
 namespace Tests\Wikibase\DataModel\Serializers;
 
-use Serializers\Serializer;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
@@ -10,6 +9,7 @@ use Wikibase\DataModel\Serializers\AliasGroupListSerializer;
 use Wikibase\DataModel\Serializers\ItemSerializer;
 use Wikibase\DataModel\Serializers\SiteLinkSerializer;
 use Wikibase\DataModel\Serializers\StatementListSerializer;
+use Wikibase\DataModel\Serializers\TermListSerializer;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
@@ -27,7 +27,7 @@ use Wikibase\DataModel\Term\TermList;
 class ItemSerializerTest extends DispatchableSerializerTest {
 
 	protected function buildSerializer( bool $useObjectsForEmptyMaps = false ) {
-		$termListSerializerMock = $this->createMock( Serializer::class );
+		$termListSerializerMock = $this->createMock( TermListSerializer::class );
 		$termListSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
 			->willReturnCallback( static function ( TermList $termList ) {
