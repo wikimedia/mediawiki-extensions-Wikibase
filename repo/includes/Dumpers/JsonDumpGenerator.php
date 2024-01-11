@@ -160,13 +160,6 @@ class JsonDumpGenerator extends DumpGenerator {
 
 		$data = $this->dataTypeInjector->injectEntitySerializationWithDataTypes( $data );
 
-		// HACK: replace empty arrays with objects at the first level of the array
-		foreach ( $data as &$element ) {
-			if ( empty( $element ) ) {
-				$element = (object)[];
-			}
-		}
-
 		if ( $this->addPageMetadata ) {
 			$data = $this->addPageInfo->add( $data, $revision );
 		} else {

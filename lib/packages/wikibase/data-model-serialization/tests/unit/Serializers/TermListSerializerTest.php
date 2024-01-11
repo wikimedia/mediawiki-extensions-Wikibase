@@ -21,15 +21,15 @@ class TermListSerializerTest extends TestCase {
 	/**
 	 * @return TermListSerializer
 	 */
-	private function buildSerializer() {
-		return new TermListSerializer( new TermSerializer() );
+	private function buildSerializer( bool $useObjectsForEmptyMaps ) {
+		return new TermListSerializer( new TermSerializer(), $useObjectsForEmptyMaps );
 	}
 
 	/**
 	 * @dataProvider serializationProvider
 	 */
 	public function testSerialization( TermList $input, $expected ) {
-		$serializer = $this->buildSerializer();
+		$serializer = $this->buildSerializer( false );
 
 		$output = $serializer->serialize( $input );
 
@@ -58,14 +58,14 @@ class TermListSerializerTest extends TestCase {
 	}
 
 	public function testWithUnsupportedObject() {
-		$serializer = $this->buildSerializer();
+		$serializer = $this->buildSerializer( false );
 
 		$this->expectException( UnsupportedObjectException::class );
 		$serializer->serialize( new \stdClass() );
 	}
 
 	public function testTermListSerializerSerializesTermLists() {
-		$serializer = $this->buildSerializer();
+		$serializer = $this->buildSerializer( false );
 
 		$terms = new TermList( [ new Term( 'en', 'foo' ) ] );
 
@@ -77,5 +77,10 @@ class TermListSerializerTest extends TestCase {
 
 		$this->assertEquals( $serial, $serializer->serialize( $terms ) );
 		$this->assertEquals( [], $serializer->serialize( new TermList() ) );
+	}
+
+	public function testTermListSerializerUsesObjectsForEmptyLists() {
+		$serializer = $this->buildSerializer( true );
+		$this->assertEquals( (object)[], $serializer->serialize( new TermList() ) );
 	}
 }
