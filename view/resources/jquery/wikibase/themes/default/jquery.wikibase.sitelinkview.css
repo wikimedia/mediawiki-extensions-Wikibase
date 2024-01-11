@@ -5,9 +5,8 @@
  */
 
 .wb-badge-empty {
-	background-image: url( images/wb-badges-empty.png );
 	/* @embed */
-	background-image: linear-gradient( transparent, transparent ), url( images/wb-badges-empty.svg );
+	background-image: url( images/wb-badges-empty.svg );
 }
 
 .wikibase-sitelinkview input {

@@ -57,38 +57,27 @@
 	opacity: 0.5;
 }
 
-/**
- * Icons below are enabling SVG support by using a transparent gradient to
- * guarantee cross-browser compatibility (browsers able to understand
- * gradient syntax support also SVG).
- * http://pauginer.tumblr.com/post/36614680636/invisible-gradient-technique
- */
 .wikibase-toolbar-button-edit .wb-icon {
-	background-image: url( images/icons/ooui/edit.png );
 	/* @embed */
-	background-image: linear-gradient( transparent, transparent ), url( images/icons/ooui/edit.svg );
+	background-image: url( images/icons/ooui/edit.svg );
 }
 
 .wikibase-toolbar-button-save .wb-icon {
-	background-image: url( images/icons/ooui/check.png );
 	/* @embed */
-	background-image: linear-gradient( transparent, transparent ), url( images/icons/ooui/check.svg );
+	background-image: url( images/icons/ooui/check.svg );
 }
 
 .wikibase-toolbar-button-remove .wb-icon {
-	background-image: url( images/icons/ooui/trash.png );
 	/* @embed */
-	background-image: linear-gradient( transparent, transparent ), url( images/icons/ooui/trash.svg );
+	background-image: url( images/icons/ooui/trash.svg );
 }
 
 .wikibase-toolbar-button-cancel .wb-icon {
-	background-image: url( images/icons/ooui/close.png );
 	/* @embed */
-	background-image: linear-gradient( transparent, transparent ), url( images/icons/ooui/close.svg );
+	background-image: url( images/icons/ooui/close.svg );
 }
 
 .wikibase-toolbar-button-add .wb-icon {
-	background-image: url( images/icons/ooui/add.png );
 	/* @embed */
-	background-image: linear-gradient( transparent, transparent ), url( images/icons/ooui/add.svg );
+	background-image: url( images/icons/ooui/add.svg );
 }
