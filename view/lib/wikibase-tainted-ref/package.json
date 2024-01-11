@@ -13,7 +13,7 @@
     "prepare": "node build/wikimedia-ui-base.js",
     "test": "npm-run-all test:*",
     "test:lint": "vue-cli-service lint --max-warnings 0 --no-fix . && stylelint --syntax scss 'src/**/*.(vue|scss)'",
-    "test:distnodiff": "npm run build-to-temp && build/testnodiff.sh dist/ $npm_package_config_tempBuildDirectory",
+    "@test:distnodiff": "npm run build-to-temp && build/testnodiff.sh dist/ $npm_package_config_tempBuildDirectory",
     "test:mwlibs": "echo 'disabled (T297381)' # ZUUL_BRANCH=${ZUUL_BRANCH:-master} lib-version-check",
     "watch": "vue-cli-service test:unit -c ./jest.config.js --watch"
   },
