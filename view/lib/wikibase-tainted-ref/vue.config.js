@@ -41,7 +41,7 @@ module.exports = {
 				] );
 			config.module
 				.rule( 'images' )
-				.test( ( s ) => s.replace( /\?.*$/, '' ).test( /\.(png|jpe?g|gif|svg)$/ ) )
+				.test( ( s ) => s.replace( /\?.*$/, '' ).match( /\.(png|jpe?g|gif|svg)$/ ) )
 				.use( 'url-loader' )
 				.loader( 'url-loader' )
 				.options( {
