@@ -881,9 +881,7 @@ return [
 	},
 
 	'WbRestApi.SerializerFactory' => function( MediaWikiServices $services ): SerializerFactory {
-		return new SerializerFactory(
-			WikibaseRepo::getPropertyDataTypeLookup( $services )
-		);
+		return new SerializerFactory();
 	},
 
 	'WbRestApi.SetItemDescription' => function( MediaWikiServices $services ): SetItemDescription {
