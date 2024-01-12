@@ -1,36 +1,28 @@
 'use strict';
 
-const { utils, action } = require( 'api-testing' );
+const { utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const { createEntity, createRedirectForItem } = require( '../helpers/entityHelper' );
+const {
+	createEntity,
+	createRedirectForItem,
+	createLocalSiteLink,
+	getLatestEditMetadata
+} = require( '../helpers/entityHelper' );
 const { newGetItemSiteLinksRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
 describe( newGetItemSiteLinksRequestBuilder().getRouteDescription(), () => {
 
 	let testItemId;
-	let siteId;
 	let lastRevisionId;
 
 	const linkedArticle = utils.title( 'Article-linked-to-test-item' );
 
 	before( async () => {
-		siteId = ( await action.getAnon().meta(
-			'wikibase',
-			{ wbprop: 'siteid' }
-		) ).siteid;
-		await action.getAnon().edit( linkedArticle, { text: 'sitelink test' } );
+		testItemId = ( await createEntity( 'item', {} ) ).entity.id;
+		await createLocalSiteLink( testItemId, linkedArticle );
 
-		const createItemResponse = await createEntity( 'item', {
-			sitelinks: {
-				[ siteId ]: {
-					site: siteId,
-					title: linkedArticle
-				}
-			}
-		} );
-
-		testItemId = createItemResponse.entity.id;
-		lastRevisionId = createItemResponse.entity.lastrevid;
+		const testItemCreationMetadata = await getLatestEditMetadata( testItemId );
+		lastRevisionId = testItemCreationMetadata.revid;
 	} );
 
 	it( '200 OK response is valid for an Item with siteLinks', async () => {

@@ -139,6 +139,23 @@ function newStatementWithRandomStringValue( propertyId ) {
 	};
 }
 
+async function getLocalSiteId() {
+	return ( await action.getAnon().meta(
+		'wikibase',
+		{ wbprop: 'siteid' }
+	) ).siteid;
+}
+
+async function createLocalSiteLink( itemId, articleTitle ) {
+	await action.getAnon().edit( articleTitle, { text: 'sitelink test' } );
+	await action.getAnon().action( 'wbsetsitelink', {
+		id: itemId,
+		linksite: await getLocalSiteId(),
+		linktitle: articleTitle,
+		token: '+\\'
+	}, true );
+}
+
 module.exports = {
 	createEntity,
 	editEntity,
@@ -151,5 +168,7 @@ module.exports = {
 	getLatestEditMetadata,
 	changeEntityProtectionStatus,
 	newStatementWithRandomStringValue,
-	newLegacyStatementWithRandomStringValue
+	newLegacyStatementWithRandomStringValue,
+	getLocalSiteId,
+	createLocalSiteLink
 };

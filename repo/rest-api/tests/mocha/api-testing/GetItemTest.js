@@ -1,13 +1,13 @@
 'use strict';
 
-const { assert, utils, action } = require( 'api-testing' );
+const { assert, utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const {
 	createEntity,
 	createRedirectForItem,
 	getLatestEditMetadata,
 	newLegacyStatementWithRandomStringValue,
-	createUniqueStringProperty
+	createUniqueStringProperty, getLocalSiteId, createLocalSiteLink
 } = require( '../helpers/entityHelper' );
 const { newGetItemRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
@@ -30,11 +30,7 @@ describe( newGetItemRequestBuilder().getRouteDescription(), () => {
 	}
 
 	before( async () => {
-		siteId = ( await action.getAnon().meta(
-			'wikibase',
-			{ wbprop: 'siteid' }
-		) ).siteid;
-		await action.getAnon().edit( linkedArticle, { text: 'sitelink test' } );
+		siteId = await getLocalSiteId();
 
 		testStatementPropertyId = ( await createUniqueStringProperty() ).entity.id;
 		testStatement = newLegacyStatementWithRandomStringValue( testStatementPropertyId );
@@ -47,15 +43,10 @@ describe( newGetItemRequestBuilder().getRouteDescription(), () => {
 			descriptions: {
 				en: { language: 'en', value: englishDescription }
 			},
-			sitelinks: {
-				[ siteId ]: {
-					site: siteId,
-					title: linkedArticle
-				}
-			},
 			claims: [ testStatement ]
 		} );
 		testItemId = createItemResponse.entity.id;
+		await createLocalSiteLink( testItemId, linkedArticle );
 
 		const testItemCreationMetadata = await getLatestEditMetadata( testItemId );
 		testModified = testItemCreationMetadata.timestamp;
