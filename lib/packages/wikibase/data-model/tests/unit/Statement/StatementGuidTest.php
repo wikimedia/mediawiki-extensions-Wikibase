@@ -1,8 +1,8 @@
-<?php
+<?php declare( strict_types=1 );
 
 namespace Wikibase\DataModel\Tests\Statement;
 
-use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Statement\StatementGuid;
@@ -16,12 +16,12 @@ use Wikibase\DataModel\Statement\StatementGuid;
  * @license GPL-2.0-or-later
  * @author Addshore
  */
-class StatementGuidTest extends \PHPUnit\Framework\TestCase {
+class StatementGuidTest extends TestCase {
 
 	/**
 	 * @dataProvider provideConstructionData
 	 */
-	public function testConstructor( EntityId $entityId, $guid, $expected ) {
+	public function testConstructor( EntityId $entityId, string $guid, string $expected ): void {
 		$statementGuid = new StatementGuid( $entityId, $guid );
 
 		$this->assertSame( $expected, $statementGuid->getSerialization() );
@@ -29,11 +29,11 @@ class StatementGuidTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $guid, $statementGuid->getGuidPart() );
 	}
 
-	public static function provideConstructionData() {
+	public static function provideConstructionData(): array {
 		return [
 			[
 				new ItemId( 'q42' ),
-				'D8404CDA-25E4-4334-AF13-A3290BCD9C0N' ,
+				'D8404CDA-25E4-4334-AF13-A3290BCD9C0N',
 				'Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0N',
 			],
 			[
@@ -49,24 +49,7 @@ class StatementGuidTest extends \PHPUnit\Framework\TestCase {
 		];
 	}
 
-	/**
-	 * @dataProvider provideBadConstruction
-	 */
-	public function testBadConstruction( EntityId $entityId, $guid ) {
-		$this->expectException( InvalidArgumentException::class );
-		new StatementGuid( $entityId, $guid );
-	}
-
-	public static function provideBadConstruction() {
-		$id = new ItemId( 'Q1' );
-
-		return [
-			[ $id, null ],
-			[ $id, 12345 ],
-		];
-	}
-
-	public function provideStatementGuids() {
+	public function provideStatementGuids(): array {
 		$argLists = [];
 
 		foreach ( $this->provideConstructionData() as $data ) {
@@ -79,7 +62,7 @@ class StatementGuidTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider provideStatementGuids
 	 */
-	public function testEquals( StatementGuid $statementGuid ) {
+	public function testEquals( StatementGuid $statementGuid ): void {
 		$statementGuidCopy = clone $statementGuid;
 		$this->assertTrue( $statementGuid->equals( $statementGuidCopy ) );
 		$this->assertTrue( $statementGuidCopy->equals( $statementGuid ) );
@@ -88,7 +71,7 @@ class StatementGuidTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider provideStatementGuids
 	 */
-	public function testNotEquals( StatementGuid $statementGuid ) {
+	public function testNotEquals( StatementGuid $statementGuid ): void {
 		$notEqualStatementGuid = new StatementGuid( new ItemId( 'q9999' ), 'someguid' );
 		$this->assertFalse( $statementGuid->equals( $notEqualStatementGuid ) );
 		$this->assertFalse( $notEqualStatementGuid->equals( $statementGuid ) );
