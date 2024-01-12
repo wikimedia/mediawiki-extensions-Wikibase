@@ -1,4 +1,4 @@
-<?php
+<?php declare( strict_types=1 );
 
 namespace Wikibase\DataModel\Services\Statement;
 
@@ -19,28 +19,17 @@ use Wikibase\DataModel\Statement\StatementGuid;
  */
 class StatementGuidParser {
 
-	/**
-	 * @var EntityIdParser
-	 */
-	private $entityIdParser;
+	private EntityIdParser $entityIdParser;
 
 	public function __construct( EntityIdParser $entityIdParser ) {
 		$this->entityIdParser = $entityIdParser;
 	}
 
 	/**
-	 * @param string $serialization
-	 *
-	 * @return StatementGuid
 	 * @throws StatementGuidParsingException
 	 */
-	public function parse( $serialization ) {
-		if ( !is_string( $serialization ) ) {
-			throw new StatementGuidParsingException( '$serialization must be a string' );
-		}
-
+	public function parse( string $serialization ): StatementGuid {
 		$keyParts = explode( StatementGuid::SEPARATOR, $serialization, 2 );
-
 		if ( count( $keyParts ) !== 2 ) {
 			throw new StatementGuidParsingException( '$serialization does not have the correct number of parts' );
 		}
@@ -48,8 +37,10 @@ class StatementGuidParser {
 		try {
 			return new StatementGuid( $this->entityIdParser->parse( $keyParts[0] ), $keyParts[1] );
 		} catch ( EntityIdParsingException $ex ) {
-			throw new StatementGuidParsingException( '$serialization contains invalid EntityId: '
-				. $ex->getMessage() );
+			throw new StatementGuidParsingException(
+				'$serialization contains invalid EntityId: '
+				. $ex->getMessage()
+			);
 		}
 	}
 
