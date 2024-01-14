@@ -18,7 +18,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\Specials\SpecialNewItem;
-use Wikibase\Repo\Tests\WikibaseTablesUsed;
 use Wikibase\Repo\Validators\NotMulValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\WikibaseRepo;
@@ -42,8 +41,6 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class SpecialNewItemTest extends SpecialNewEntityTestCase {
 
-	use WikibaseTablesUsed;
-
 	/**
 	 * @var SiteStore
 	 */
@@ -51,7 +48,6 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 
 	protected function setUp(): void {
 		parent::setUp();
-		$this->markTablesUsedForEntityEditing();
 		$this->siteStore = new HashSiteStore();
 
 		WikibaseRepo::getSettings()->setSetting( 'tmpEnableMulLanguageCode', true );

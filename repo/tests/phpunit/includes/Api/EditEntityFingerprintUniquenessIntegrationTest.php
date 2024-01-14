@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiUsageException;
-use Wikibase\Repo\Tests\WikibaseTablesUsed;
 
 /**
  * @covers \Wikibase\Repo\Api\EditEntity
@@ -18,13 +17,6 @@ use Wikibase\Repo\Tests\WikibaseTablesUsed;
  * @group medium
  */
 class EditEntityFingerprintUniquenessIntegrationTest extends WikibaseApiTestCase {
-
-	use WikibaseTablesUsed;
-
-	protected function setUp(): void {
-		parent::setUp();
-		$this->markAnyTermsStorageUsed();
-	}
 
 	public function testNewPropertyLabelConflict() {
 		$expectedFailureCode = 'failed-save';

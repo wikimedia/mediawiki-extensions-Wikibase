@@ -15,7 +15,6 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityStore;
-use Wikibase\Repo\Tests\WikibaseTablesUsed;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -28,8 +27,6 @@ use Wikibase\Repo\WikibaseRepo;
  * @license GPL-2.0-or-later
  */
 class FullEntityParserOutputGeneratorIntegrationTest extends MediaWikiIntegrationTestCase {
-
-	use WikibaseTablesUsed;
 
 	/**
 	 * @var EntityStore
@@ -126,8 +123,6 @@ class FullEntityParserOutputGeneratorIntegrationTest extends MediaWikiIntegratio
 	}
 
 	public function testGetParserOutputIncludesLabelsOfRedirectEntityUsedAsStatementValue() {
-		$this->markTablesUsedForEntityEditing();
-
 		$mwServices = MediaWikiServices::getInstance();
 
 		$property = new Property( new NumericPropertyId( 'P93' ), null, 'wikibase-item' );

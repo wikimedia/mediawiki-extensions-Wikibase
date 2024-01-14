@@ -13,7 +13,6 @@ use Wikibase\Lib\Store\Sql\Terms\StaticTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsLookup;
 use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
 use Wikibase\Repo\Store\Sql\Terms\DatabaseTermsCollisionDetector;
-use Wikibase\Repo\Tests\WikibaseTablesUsed;
 
 /**
  * @covers \Wikibase\Repo\Store\Sql\Terms\DatabaseTermsCollisionDetector
@@ -25,7 +24,6 @@ use Wikibase\Repo\Tests\WikibaseTablesUsed;
  */
 class DatabaseTermsCollisionDetectorTest extends MediaWikiIntegrationTestCase {
 
-	use WikibaseTablesUsed;
 	use LocalRepoDbTestHelper;
 
 	private const TYPE_LABEL = 1;
@@ -55,7 +53,6 @@ class DatabaseTermsCollisionDetectorTest extends MediaWikiIntegrationTestCase {
 
 	protected function setUp(): void {
 		parent::setUp();
-		$this->markAnyTermsStorageUsed();
 
 		$this->typeIdsLookup = new StaticTypeIdsStore( [
 			'label' => self::TYPE_LABEL,

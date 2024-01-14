@@ -13,7 +13,6 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Specials\SpecialNewProperty;
-use Wikibase\Repo\Tests\WikibaseTablesUsed;
 use Wikibase\Repo\Validators\NotMulValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\WikibaseRepo;
@@ -36,12 +35,9 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Addshore
  */
 class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
-	use WikibaseTablesUsed;
-
 	protected function setUp(): void {
 		parent::setUp();
 		$this->setUserLang( 'qqx' );
-		$this->markTablesUsedForEntityEditing();
 
 		WikibaseRepo::getSettings()->setSetting( 'tmpEnableMulLanguageCode', true );
 	}

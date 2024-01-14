@@ -20,7 +20,6 @@ use Wikibase\DataModel\Term\TermList;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\Maintenance\RebuildEntityQuantityUnit;
-use Wikibase\Repo\Tests\WikibaseTablesUsed;
 use Wikibase\Repo\WikibaseRepo;
 
 // files in maintenance/ are not autoloaded to avoid accidental usage, so load explicitly
@@ -36,8 +35,6 @@ require_once __DIR__ . '/../../../maintenance/rebuildEntityQuantityUnit.php';
  * @author Deniz Erdogan < deniz.erdogan@wikimedia.de >
  */
 class RebuildEntityQuantityUnitTest extends MaintenanceBaseTestCase {
-	use WikibaseTablesUsed;
-
 	/**
 	 * @var ItemId[]
 	 */
@@ -108,8 +105,6 @@ class RebuildEntityQuantityUnitTest extends MaintenanceBaseTestCase {
 
 	protected function setUp(): void {
 		parent::setUp();
-
-		$this->markTablesUsedForEntityEditing();
 
 		$this->store = WikibaseRepo::getEntityStore();
 		$this->user = $this->getTestUser()->getUser();

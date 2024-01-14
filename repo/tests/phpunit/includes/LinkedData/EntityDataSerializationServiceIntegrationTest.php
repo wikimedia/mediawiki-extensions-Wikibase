@@ -12,7 +12,6 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Repo\LinkedData\EntityDataSerializationService;
-use Wikibase\Repo\Tests\WikibaseTablesUsed;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -26,10 +25,7 @@ use Wikibase\Repo\WikibaseRepo;
  *
  */
 class EntityDataSerializationServiceIntegrationTest extends MediaWikiIntegrationTestCase {
-	use WikibaseTablesUsed;
-
 	public function testItemRdfWithStub() {
-		$this->markTablesUsedForEntityEditing();
 		$labelText1 = 'some uniquish string - 2342346345623';
 		$item1 = new Item(
 			null, $this->getFingerprintWithLabel( $labelText1 ), null, null

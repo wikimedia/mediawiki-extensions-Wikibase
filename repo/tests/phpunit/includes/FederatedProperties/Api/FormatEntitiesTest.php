@@ -9,7 +9,6 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\Repo\Tests\WikibaseTablesUsed;
 
 /**
  * @covers \Wikibase\Repo\Api\FormatEntities
@@ -24,11 +23,9 @@ use Wikibase\Repo\Tests\WikibaseTablesUsed;
 class FormatEntitiesTest extends FederatedPropertiesApiTestCase {
 
 	use HamcrestPHPUnitIntegration;
-	use WikibaseTablesUsed;
 
 	protected function setUp(): void {
 		$this->withLocalPropertySource = true;
-		$this->markTablesUsedForEntityEditing();
 
 		parent::setUp();
 	}
