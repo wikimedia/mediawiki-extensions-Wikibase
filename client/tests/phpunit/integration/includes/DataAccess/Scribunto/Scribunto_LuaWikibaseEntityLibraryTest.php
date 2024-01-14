@@ -4,7 +4,6 @@ namespace Wikibase\Client\Tests\Integration\DataAccess\Scribunto;
 
 use Language;
 use LuaSandboxFunction;
-use MediaWiki\MediaWikiServices;
 use ParserOptions;
 use Scribunto_LuaEngine;
 use Scribunto_LuaStandaloneInterpreterFunction;
@@ -125,7 +124,7 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 		$cacheSplit = false;
 		$this->setAllowDataAccessInUserLanguage( $allowDataAccessInUserLanguage );
 
-		$lang = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'es' );
+		$lang = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'es' );
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $cacheSplit, $lang );
 
 		$this->assertSame(
@@ -182,7 +181,7 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 		$cacheSplit = false;
 		$this->setAllowDataAccessInUserLanguage( $allowDataAccessInUserLanguage );
 
-		$lang = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'es' );
+		$lang = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'es' );
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $cacheSplit, $lang );
 
 		$this->assertSame(
