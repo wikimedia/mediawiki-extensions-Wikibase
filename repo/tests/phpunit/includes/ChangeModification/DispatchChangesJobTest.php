@@ -25,13 +25,6 @@ use Wikibase\Repo\WikibaseRepo;
  * @license GPL-2.0-or-later
  */
 class DispatchChangesJobTest extends MediaWikiIntegrationTestCase {
-	/** @inheritDoc */
-	protected $tablesUsed = [
-		'wb_changes',
-		'wb_changes_subscription',
-		'job',
-	];
-
 	protected function setUp(): void {
 		parent::setUp();
 

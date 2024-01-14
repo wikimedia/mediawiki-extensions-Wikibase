@@ -57,13 +57,6 @@ class DatabaseItemTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have local term store tables." );
 		}
 
-		$this->tablesUsed[] = 'wbt_type';
-		$this->tablesUsed[] = 'wbt_text';
-		$this->tablesUsed[] = 'wbt_text_in_lang';
-		$this->tablesUsed[] = 'wbt_term_in_lang';
-		$this->tablesUsed[] = 'wbt_item_terms';
-		$this->tablesUsed[] = 'wbt_property_terms';
-
 		$this->i1 = new ItemId( 'Q1' );
 
 		$this->fingerprint1 = new Fingerprint(

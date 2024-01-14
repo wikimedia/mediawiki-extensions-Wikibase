@@ -41,7 +41,6 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 		$settings['wikibasePingback'] = true;
 		$settings['pingbackHost'] = 'http://localhost/event/beacon';
 		$this->setMwGlobals( 'wgWBRepoSettings', $settings );
-		$this->tablesUsed[] = 'updatelog';
 		SiteStatsInit::doPlaceholderInit();
 	}
 

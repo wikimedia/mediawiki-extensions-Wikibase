@@ -27,13 +27,6 @@ use Wikimedia\Rdbms\LBFactorySingle;
  */
 class EntityUsageTableBuilderTest extends MediaWikiIntegrationTestCase {
 
-	protected function setUp(): void {
-		$this->tablesUsed[] = EntityUsageTable::DEFAULT_TABLE_NAME;
-		$this->tablesUsed[] = 'page_props';
-
-		parent::setUp();
-	}
-
 	public function testFillUsageTable(): void {
 		$this->putWikidataItemPageProps( [
 			11 => 'Q11',

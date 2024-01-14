@@ -21,12 +21,6 @@ use Wikimedia\Rdbms\SessionConsistentConnectionManager;
  */
 class RecentChangesFinderTest extends MediaWikiIntegrationTestCase {
 
-	protected function setUp(): void {
-		parent::setUp();
-
-		$this->tablesUsed[] = 'recentchanges';
-	}
-
 	public static function provideGetRecentChangeId() {
 		// Note: this provides change data without rc_user(_text);
 		// those fields will be filled in by newChange(),

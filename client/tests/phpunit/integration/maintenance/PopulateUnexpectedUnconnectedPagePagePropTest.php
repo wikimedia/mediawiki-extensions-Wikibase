@@ -37,8 +37,6 @@ class PopulateUnexpectedUnconnectedPagePagePropTest extends MaintenanceBaseTestC
 				},
 			]
 		);
-
-		$this->tablesUsed[] = 'page_props';
 	}
 
 	public function addDBDataOnce() {

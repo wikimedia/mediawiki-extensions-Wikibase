@@ -32,9 +32,6 @@ class BulkSubscriptionUpdaterTest extends MediaWikiIntegrationTestCase {
 			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have a local wb_changes_subscription table." );
 		}
 
-		$this->tablesUsed[] = 'wb_changes_subscription';
-		$this->tablesUsed[] = EntityUsageTable::DEFAULT_TABLE_NAME;
-
 		parent::setUp();
 	}
 

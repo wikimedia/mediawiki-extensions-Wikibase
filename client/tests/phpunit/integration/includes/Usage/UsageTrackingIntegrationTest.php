@@ -39,7 +39,6 @@ class UsageTrackingIntegrationTest extends MediaWikiIntegrationTestCase {
 		}
 
 		parent::setUp();
-		$this->tablesUsed[] = 'page';
 
 		// Disable caching to avoid Q33 vs Q22 mixup
 		$this->setMainCache( CACHE_NONE );

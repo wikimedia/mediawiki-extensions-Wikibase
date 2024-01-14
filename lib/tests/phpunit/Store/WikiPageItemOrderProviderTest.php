@@ -19,11 +19,6 @@ use WikitextContent;
  */
 class WikiPageItemOrderProviderTest extends MediaWikiIntegrationTestCase {
 
-	protected function setUp(): void {
-		parent::setUp();
-		$this->tablesUsed[] = 'page';
-	}
-
 	public static function provideGetItemOrder(): iterable {
 		return WikiPageItemOrderProviderTestHelper::provideGetItemOrder();
 	}

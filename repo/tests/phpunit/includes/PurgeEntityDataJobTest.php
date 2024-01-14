@@ -23,11 +23,6 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class PurgeEntityDataJobTest extends MediaWikiIntegrationTestCase {
 
-	protected function setUp(): void {
-		parent::setUp();
-		$this->tablesUsed[] = 'archive';
-	}
-
 	public function addDBData() {
 		$this->db->truncate( 'archive', __METHOD__ ); // T265033
 		$defaultArchiveRow = [

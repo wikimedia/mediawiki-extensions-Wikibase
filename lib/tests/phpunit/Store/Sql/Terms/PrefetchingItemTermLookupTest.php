@@ -48,15 +48,6 @@ class PrefetchingItemTermLookupTest extends MediaWikiIntegrationTestCase {
 		}
 
 		parent::setUp();
-		$tables = [
-			'wbt_item_terms',
-			'wbt_term_in_lang',
-			'wbt_text_in_lang',
-			'wbt_text',
-			'wbt_type',
-		];
-
-		$this->tablesUsed = array_merge( $this->tablesUsed, $tables );
 
 		$repoDb = $this->getRepoDomainDb();
 		$typeIdsStore = new DatabaseTypeIdsStore(

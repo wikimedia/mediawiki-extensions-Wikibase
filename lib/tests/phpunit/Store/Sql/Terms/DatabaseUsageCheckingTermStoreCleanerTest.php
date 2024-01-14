@@ -28,8 +28,6 @@ class DatabaseUsageCheckingTermStoreCleanerTest extends MediaWikiIntegrationTest
 		}
 
 		parent::setUp();
-		$this->tablesUsed[] = 'wbt_item_terms';
-		$this->tablesUsed[] = 'wbt_property_terms';
 		$this->innerCleaner = $this->createMock( DatabaseInnerTermStoreCleaner::class );
 	}
 

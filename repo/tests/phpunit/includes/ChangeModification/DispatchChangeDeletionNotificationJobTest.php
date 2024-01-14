@@ -32,9 +32,6 @@ class DispatchChangeDeletionNotificationJobTest extends MediaWikiIntegrationTest
 
 	protected function setUp(): void {
 		parent::setUp();
-		$this->tablesUsed[] = 'archive';
-		$this->tablesUsed[] = 'page';
-		$this->tablesUsed[] = 'text';
 
 		$this->expectedLocalClientWikis = [ 'dewiki', 'enwiki', 'poolwiki' ];
 

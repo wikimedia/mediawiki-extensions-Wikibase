@@ -60,12 +60,6 @@ class MatchingTermsLookupFactoryTest extends MediaWikiIntegrationTestCase {
 			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have local term store tables." );
 		}
 
-		$this->tablesUsed[] = 'wbt_type';
-		$this->tablesUsed[] = 'wbt_text';
-		$this->tablesUsed[] = 'wbt_text_in_lang';
-		$this->tablesUsed[] = 'wbt_term_in_lang';
-		$this->tablesUsed[] = 'wbt_item_terms';
-
 		$this->dbFactory = $this->getRepoDomainDbFactory();
 		$this->objectCache = MediaWikiServices::getInstance()->getMainWANObjectCache();
 		$repoDb = $this->dbFactory->newRepoDb();

@@ -25,10 +25,6 @@ class EntityIdLocalPartPageTableEntityQueryDbTest extends MediaWikiIntegrationTe
 
 	protected function setUp(): void {
 		parent::setUp();
-		$this->tablesUsed[] = 'page';
-		$this->tablesUsed[] = 'revision';
-		$this->tablesUsed[] = 'slots';
-		$this->tablesUsed[] = 'slot_roles';
 		$this->getExistingTestPage( Title::makeTitle( 1, 'LocalPartOne' ) );
 		$this->db->insert(
 			'page',

@@ -41,7 +41,6 @@ class SiteLinkTableTest extends MediaWikiIntegrationTestCase {
 			false,
 			$this->getRepoDomainDb()
 		);
-		$this->tablesUsed[] = 'wb_items_per_site';
 	}
 
 	public static function itemProvider() {

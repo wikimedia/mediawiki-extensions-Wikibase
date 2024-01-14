@@ -29,9 +29,6 @@ class PruneItemsPerSiteTest extends MaintenanceBaseTestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->tablesUsed[] = 'page';
-		$this->tablesUsed[] = 'wb_items_per_site';
-
 		$this->db->delete( 'wb_items_per_site', '*', __METHOD__ );
 	}
 

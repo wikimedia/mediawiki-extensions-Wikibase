@@ -36,9 +36,6 @@ class RebuildItemsPerSiteTest extends MaintenanceBaseTestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->tablesUsed[] = 'page';
-		$this->tablesUsed[] = 'wb_items_per_site';
-
 		if ( !$this->itemIds ) {
 			$this->itemIds = $this->storeItems();
 		}

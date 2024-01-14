@@ -472,7 +472,6 @@ class HtmlPageLinkRendererEndHookHandlerTest extends HtmlPageLinkRendererEndHook
 		);
 
 		$this->setMwGlobals( 'wgExtraInterlanguageLinkPrefixes', [ 'madeuplanguage' ] );
-		$this->tablesUsed[] = 'interwiki';
 		$linkTarget = $namespace !== null ?
 			Title::makeTitle( $namespace, $linkTargetText ) :
 			Title::newFromTextThrow( $linkTargetText );

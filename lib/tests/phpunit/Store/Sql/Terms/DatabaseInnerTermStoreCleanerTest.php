@@ -23,10 +23,6 @@ class DatabaseInnerTermStoreCleanerTest extends MediaWikiIntegrationTestCase {
 		}
 
 		parent::setUp();
-		$this->tablesUsed[] = 'wbt_type';
-		$this->tablesUsed[] = 'wbt_text';
-		$this->tablesUsed[] = 'wbt_text_in_lang';
-		$this->tablesUsed[] = 'wbt_term_in_lang';
 
 		// Make sure the tables we are inserting to are empty
 		$this->db->truncate(

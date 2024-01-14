@@ -16,12 +16,6 @@ use Wikibase\Lib\Changes\RepoRevisionIdentifier;
  */
 abstract class RecentChangesModificationTestBase extends MediaWikiIntegrationTestCase {
 
-	protected function setUp(): void {
-		parent::setUp();
-
-		$this->tablesUsed[] = 'recentchanges';
-	}
-
 	/**
 	 * JSON encode the given RepoRevisionIdentifiers
 	 *

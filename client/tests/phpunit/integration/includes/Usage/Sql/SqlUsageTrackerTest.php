@@ -44,9 +44,6 @@ class SqlUsageTrackerTest extends MediaWikiIntegrationTestCase {
 	private $lookupTester;
 
 	protected function setUp(): void {
-		$this->tablesUsed[] = EntityUsageTable::DEFAULT_TABLE_NAME;
-		$this->tablesUsed[] = 'page';
-
 		parent::setUp();
 
 		$this->sqlUsageTracker = new SqlUsageTracker(

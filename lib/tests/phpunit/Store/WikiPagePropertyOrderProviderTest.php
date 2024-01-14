@@ -20,11 +20,6 @@ use WikitextContent;
  */
 class WikiPagePropertyOrderProviderTest extends MediaWikiIntegrationTestCase {
 
-	protected function setUp(): void {
-		parent::setUp();
-		$this->tablesUsed[] = 'page';
-	}
-
 	public static function provideGetPropertyOrder() {
 		return WikiTextPropertyOrderProviderTestHelper::provideGetPropertyOrder();
 	}

@@ -20,12 +20,6 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class SqlSubscriptionLookupTest extends MediaWikiIntegrationTestCase {
 
-	protected function setUp(): void {
-		parent::setUp();
-
-		$this->tablesUsed[] = 'wb_changes_subscription';
-	}
-
 	private function insertSubscriptions( array $rows ) {
 		$this->db->insert( 'wb_changes_subscription', $rows, __METHOD__ );
 	}

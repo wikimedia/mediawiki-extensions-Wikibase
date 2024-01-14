@@ -46,11 +46,6 @@ class TermInLangIdsResolverFactoryTest extends MediaWikiIntegrationTestCase {
 			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have local term store tables." );
 		}
 
-		$this->tablesUsed[] = 'wbt_type';
-		$this->tablesUsed[] = 'wbt_text';
-		$this->tablesUsed[] = 'wbt_text_in_lang';
-		$this->tablesUsed[] = 'wbt_term_in_lang';
-
 		$this->db->insert( 'wbt_type', [
 			'wby_id' => self::MOCK_TYPE_LABEL,
 			'wby_name' => 'label',

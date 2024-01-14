@@ -36,12 +36,6 @@ class SqlEntityIdPagerTest extends MediaWikiIntegrationTestCase {
 
 	use LocalRepoDbTestHelper;
 
-	protected function setUp(): void {
-		parent::setUp();
-		$this->tablesUsed[] = 'page';
-		$this->tablesUsed[] = 'redirect';
-	}
-
 	public function addDBDataOnce() {
 		// We need to initially empty the table
 		$this->db->delete( 'page', '*', __METHOD__ );

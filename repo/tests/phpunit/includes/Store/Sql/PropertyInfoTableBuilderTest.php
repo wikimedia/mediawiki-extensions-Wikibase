@@ -33,11 +33,6 @@ class PropertyInfoTableBuilderTest extends MediaWikiIntegrationTestCase {
 
 	use LocalRepoDbTestHelper;
 
-	protected function setUp(): void {
-		parent::setUp();
-		$this->tablesUsed[] = 'wb_property_info';
-	}
-
 	private function initProperties() {
 		$infos = [
 			[ PropertyInfoLookup::KEY_DATA_TYPE => 'string', 'test' => 'one' ],

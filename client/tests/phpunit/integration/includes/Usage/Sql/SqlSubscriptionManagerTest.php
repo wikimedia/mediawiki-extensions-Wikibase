@@ -31,8 +31,6 @@ class SqlSubscriptionManagerTest extends MediaWikiIntegrationTestCase {
 				. 'because the repo-side table wb_changes_subscription is not available.' );
 		}
 
-		$this->tablesUsed[] = 'wb_changes_subscription';
-
 		parent::setUp();
 	}
 

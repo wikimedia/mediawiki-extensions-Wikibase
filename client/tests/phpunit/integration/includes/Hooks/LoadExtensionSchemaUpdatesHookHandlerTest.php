@@ -25,13 +25,6 @@ use Wikimedia\TestingAccessWrapper;
  */
 class LoadExtensionSchemaUpdatesHookHandlerTest extends MediaWikiIntegrationTestCase {
 
-	protected function setUp(): void {
-		parent::setUp();
-
-		$this->tablesUsed[] = 'page_props';
-		$this->tablesUsed[] = 'updatelog';
-	}
-
 	public function addDBDataOnce() {
 		$this->db->delete( 'page', IDatabase::ALL_ROWS, __METHOD__ );
 

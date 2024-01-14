@@ -34,8 +34,6 @@ class PropertyInfoTableTest extends MediaWikiIntegrationTestCase {
 		if ( !WikibaseSettings::isRepoEnabled() ) {
 			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have a local wb_property_info table." );
 		}
-
-		$this->tablesUsed[] = 'wb_property_info';
 	}
 
 	private function newPropertyInfoTable( bool $allowWrites = true ) {

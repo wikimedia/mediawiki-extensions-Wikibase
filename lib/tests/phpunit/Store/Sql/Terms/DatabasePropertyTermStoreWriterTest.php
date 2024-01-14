@@ -53,11 +53,6 @@ class DatabasePropertyTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 		}
 
 		parent::setUp();
-		$this->tablesUsed[] = 'wbt_type';
-		$this->tablesUsed[] = 'wbt_text';
-		$this->tablesUsed[] = 'wbt_text_in_lang';
-		$this->tablesUsed[] = 'wbt_term_in_lang';
-		$this->tablesUsed[] = 'wbt_property_terms';
 
 		$this->p1 = new NumericPropertyId( 'P1' );
 		$this->fingerprint1 = new Fingerprint(

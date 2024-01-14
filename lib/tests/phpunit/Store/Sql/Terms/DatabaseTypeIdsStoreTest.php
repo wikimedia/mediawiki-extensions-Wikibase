@@ -29,7 +29,6 @@ class DatabaseTypeIdsStoreTest extends MediaWikiIntegrationTestCase {
 		}
 
 		parent::setUp();
-		$this->tablesUsed[] = 'wbt_type';
 
 		$loadBalancer = $this->createMock( ILoadBalancer::class );
 		$loadBalancer->method( 'getConnection' )->willReturn( $this->db );

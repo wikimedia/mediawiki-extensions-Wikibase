@@ -31,8 +31,6 @@ class ResubmitChangesTest extends MaintenanceBaseTestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->tablesUsed[] = 'wb_changes';
-
 		$this->db->delete( 'wb_changes', '*', __METHOD__ );
 	}
 

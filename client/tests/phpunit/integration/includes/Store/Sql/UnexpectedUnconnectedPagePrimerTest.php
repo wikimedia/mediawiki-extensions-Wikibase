@@ -23,12 +23,6 @@ use Wikimedia\Rdbms\IDatabase;
  */
 class UnexpectedUnconnectedPagePrimerTest extends MediaWikiIntegrationTestCase {
 
-	protected function setUp(): void {
-		$this->tablesUsed[] = 'page_props';
-
-		parent::setUp();
-	}
-
 	public function addDBDataOnce() {
 		// Remove old stray pages.
 		$this->db->delete( 'page', IDatabase::ALL_ROWS, __METHOD__ );

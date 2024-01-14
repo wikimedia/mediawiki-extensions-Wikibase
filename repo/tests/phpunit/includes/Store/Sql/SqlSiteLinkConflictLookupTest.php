@@ -29,8 +29,6 @@ class SqlSiteLinkConflictLookupTest extends MediaWikiIntegrationTestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->tablesUsed[] = 'wb_items_per_site';
-
 		$siteLinkTable = new SiteLinkTable(
 			'wb_items_per_site',
 			false,

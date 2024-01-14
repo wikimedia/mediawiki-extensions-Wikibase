@@ -26,11 +26,6 @@ use Wikibase\DataModel\Entity\ItemIdParser;
  */
 class PagePropsEntityIdLookupTest extends MediaWikiIntegrationTestCase {
 
-	protected function setUp(): void {
-		$this->tablesUsed[] = 'page_props';
-		parent::setUp();
-	}
-
 	private function makeTitle( int $pageId, int $ns = NS_MAIN ): Title {
 		$title = Title::makeTitle( $ns, 'No' . $pageId );
 		if ( $title->canExist() ) {

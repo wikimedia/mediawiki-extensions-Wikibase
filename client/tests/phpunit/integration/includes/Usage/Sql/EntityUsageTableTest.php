@@ -24,12 +24,6 @@ use Wikibase\DataModel\Entity\ItemIdParser;
  */
 class EntityUsageTableTest extends MediaWikiIntegrationTestCase {
 
-	protected function setUp(): void {
-		parent::setUp();
-
-		$this->tablesUsed[] = EntityUsageTable::DEFAULT_TABLE_NAME;
-	}
-
 	/**
 	 * @param int $pageId
 	 * @param EntityUsage[] $usages
