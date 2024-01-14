@@ -50,8 +50,6 @@ class BulkSubscriptionUpdaterTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testPurgeSubscriptions(): void {
-		$this->truncateEntityUsage();
-		$this->truncateSubscriptions();
 		$this->putSubscriptions( [
 			[ 'P11', 'dewiki' ],
 			[ 'Q11', 'dewiki' ],
@@ -81,7 +79,6 @@ class BulkSubscriptionUpdaterTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testPurgeSubscriptions_startItem(): void {
-		$this->truncateEntityUsage();
 		$this->putSubscriptions( [
 			[ 'P11', 'dewiki' ],
 			[ 'Q11', 'dewiki' ],
@@ -113,7 +110,6 @@ class BulkSubscriptionUpdaterTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testUpdateSubscriptions(): void {
-		$this->truncateEntityUsage();
 		$this->putSubscriptions( [
 			[ 'P11', 'dewiki' ],
 			[ 'Q11', 'dewiki' ],
@@ -149,7 +145,6 @@ class BulkSubscriptionUpdaterTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testUpdateSubscriptions_startItem(): void {
-		$this->truncateEntityUsage();
 		$this->putSubscriptions( [
 			[ 'P11', 'dewiki' ],
 			[ 'Q11', 'dewiki' ],
@@ -182,10 +177,6 @@ class BulkSubscriptionUpdaterTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $expected, $actual );
 	}
 
-	private function truncateEntityUsage(): void {
-		$this->db->delete( EntityUsageTable::DEFAULT_TABLE_NAME, '*' );
-	}
-
 	private function putEntityUsage( array $entries ): void {
 		$this->db->startAtomic( __METHOD__ );
 
@@ -201,10 +192,6 @@ class BulkSubscriptionUpdaterTest extends MediaWikiIntegrationTestCase {
 		}
 
 		$this->db->endAtomic( __METHOD__ );
-	}
-
-	private function truncateSubscriptions(): void {
-		$this->db->delete( 'wb_changes_subscription', '*' );
 	}
 
 	private function putSubscriptions( array $entries ): void {

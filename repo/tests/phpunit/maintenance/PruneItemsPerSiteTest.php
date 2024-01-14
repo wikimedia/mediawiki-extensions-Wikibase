@@ -26,12 +26,6 @@ class PruneItemsPerSiteTest extends MaintenanceBaseTestCase {
 		return PruneItemsPerSite::class;
 	}
 
-	protected function setUp(): void {
-		parent::setUp();
-
-		$this->db->delete( 'wb_items_per_site', '*', __METHOD__ );
-	}
-
 	public static function batchSizeProvider() {
 		return [
 			[ 2 ],

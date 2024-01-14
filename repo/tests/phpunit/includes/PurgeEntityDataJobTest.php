@@ -24,7 +24,6 @@ use Wikibase\Repo\WikibaseRepo;
 class PurgeEntityDataJobTest extends MediaWikiIntegrationTestCase {
 
 	public function addDBData() {
-		$this->db->truncate( 'archive', __METHOD__ ); // T265033
 		$defaultArchiveRow = [
 			'ar_comment_id' => 1,
 			'ar_actor' => 1,
