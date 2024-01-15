@@ -178,11 +178,13 @@
 			"class": "\\Wikibase\\Repo\\Api\\SearchEntities",
 			"factory": "\\Wikibase\\Repo\\Api\\SearchEntities::factory",
 			"services": [
+				"LinkBatchFactory",
 				"WikibaseRepo.ApiHelperFactory",
 				"WikibaseRepo.EnabledEntityTypes",
 				"WikibaseRepo.EntityArticleIdLookup",
 				"WikibaseRepo.EntitySearchHelper",
 				"WikibaseRepo.EntitySourceLookup",
+				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.EntityTitleTextLookup",
 				"WikibaseRepo.EntityUrlLookup",
 				"WikibaseRepo.Settings",
@@ -290,6 +292,7 @@
 			"class": "\\Wikibase\\Repo\\Api\\QuerySearchEntities",
 			"factory": "\\Wikibase\\Repo\\Api\\QuerySearchEntities::factory",
 			"services": [
+				"LinkBatchFactory",
 				"WikibaseRepo.EnabledEntityTypes",
 				"WikibaseRepo.EntitySearchHelperCallbacks",
 				"WikibaseRepo.EntityTitleLookup",

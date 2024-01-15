@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Api;
 
 use ApiMain;
 use FauxRequest;
+use MediaWiki\Cache\LinkBatchFactory;
 use MediaWikiIntegrationTestCase;
 use RequestContext;
 use Wikibase\DataAccess\DatabaseEntitySource;
@@ -19,6 +20,7 @@ use Wikibase\Lib\Interactors\ConfigurableTermSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\EntityArticleIdLookup;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Lib\SubEntityTypesMapper;
@@ -151,9 +153,11 @@ class SearchEntitiesIntegrationTest extends MediaWikiIntegrationTestCase {
 		$apiModule = new SearchEntities(
 			new ApiMain( $context ),
 			'',
+			$this->createMock( LinkBatchFactory::class ),
 			$entitySearchTermIndex,
 			new StaticContentLanguages( [ 'en' ] ),
 			new EntitySourceLookup( $entitySourceDefinitions, new SubEntityTypesMapper( [] ) ),
+			$this->createMock( EntityTitleLookup::class ),
 			$this->createMock( EntityTitleTextLookup::class ),
 			$this->createMock( EntityUrlLookup::class ),
 			$this->createMock( EntityArticleIdLookup::class ),
