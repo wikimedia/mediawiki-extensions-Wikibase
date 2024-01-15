@@ -185,7 +185,7 @@ class RequestBuilder {
 			}
 			assert.isUndefined( errors, errorMessage );
 		} else {
-			assert.isDefined( errors );
+			assert.isDefined( errors, 'expected the request to be invalid, but it is not' );
 		}
 	}
 
