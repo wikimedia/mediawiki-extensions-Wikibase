@@ -263,6 +263,8 @@
 		if ( editableTemplatedWidget
 			&& !( editableTemplatedWidget instanceof $.wikibase.statementview )
 			&& !( editableTemplatedWidget instanceof $.wikibase.entitytermsview )
+			&& editableTemplatedWidget.widgetName !== 'lexemeformview'
+			&& editableTemplatedWidget.widgetName !== 'senseview'
 		) {
 			editableTemplatedWidget.notification( $message, 'wb-edit' );
 
@@ -279,15 +281,20 @@
 			return;
 		}
 
-		var edittoolbar = $origin.data( 'edittoolbar' );
-
-		if ( !edittoolbar ) {
+		// Tooltip gets its own anchor since other toolbar elements might have their own tooltip.
+		var $edittoolbarContainer, $tooltipAnchor;
+		if ( $origin.data( 'edittoolbar' ) ) {
+			$edittoolbarContainer = $origin.data( 'edittoolbar' ).getContainer();
+			$tooltipAnchor = $( '<span>' )
+				.appendTo( $edittoolbarContainer.children( ':wikibase-toolbar' ) );
+		} else if ( $origin.find( '.lemma-widget_controls' ).length ) {
+			// HACK: WikibaseLexeme's lemma widget is implemented in Vue, thus doesn't feature a legacy edittoolbar (T343999)
+			$edittoolbarContainer = $origin.find( '.lemma-widget_controls' );
+			$tooltipAnchor = $( '<span>' )
+				.appendTo( $edittoolbarContainer );
+		} else {
 			return;
 		}
-
-		// Tooltip gets its own anchor since other toolbar elements might have their own tooltip.
-		var $tooltipAnchor = $( '<span>' )
-			.appendTo( edittoolbar.getContainer().children( ':wikibase-toolbar' ) );
 
 		var $messageAnchor = $( '<span>' )
 			.appendTo( document.body )
@@ -321,7 +328,7 @@
 		$messageAnchor.data( 'wbtooltip' ).show();
 
 		// Record the initial edit toolbar offset.
-		var initialToolbarOffset = edittoolbar.getContainer().offset().top;
+		var initialToolbarOffset = $edittoolbarContainer.offset().top;
 		// Destroy tooltip after edit mode gets closed again or if the position of the toolbar changed.
 		$entityview.on(
 			`${viewName}afterstopediting${eventNamespace} ${viewName}afterstartediting${eventNamespace}`,
@@ -330,7 +337,7 @@
 				// Don't close this copyright notice if we're still in edit mode (another widget left edit mode)
 				// and the position of the toolbar is unchanged (we don't bother re-positioning the tooltip).
 				var isInEditMode = event.type === viewName + 'afterstartediting' || ( editableTemplatedWidget && editableTemplatedWidget.isInEditMode() );
-				if ( edittoolbar.getContainer().offset().top === initialToolbarOffset && isInEditMode ) {
+				if ( $edittoolbarContainer.offset().top === initialToolbarOffset && isInEditMode ) {
 					return;
 				}
 				if ( tooltip ) {
@@ -357,8 +364,21 @@
 	 * @param {string} viewName
 	 */
 	function attachCopyrightTooltip( $entityview, viewName ) {
+		var startEditingEvents = [
+			'entitytermsviewafterstartediting',
+			'sitelinkgroupviewafterstartediting',
+			'statementviewafterstartediting'
+		];
+		if ( viewName === 'lexemeview' ) {
+			// WikibaseLexeme specific events. These are handled here, as this legacy code can't be nicely extended/ re-used without a bigger refactoring.
+			startEditingEvents.push(
+				'senseviewafterstartediting',
+				'lexemeformviewafterstartediting',
+				'lexemeheaderafterstartediting'
+			);
+		}
 		$entityview.on(
-			'entitytermsviewafterstartediting sitelinkgroupviewafterstartediting statementviewafterstartediting',
+			startEditingEvents.join( ' ' ),
 			function ( event ) {
 				var $target = $( event.target ),
 					gravity = 'sw';
@@ -367,6 +387,9 @@
 					gravity = 'nw';
 				} else if ( $target.data( 'entitytermsview' ) ) {
 					gravity = 'ne';
+				} else if ( $target.find( '.lemma-widget_controls' ).length ) {
+					// WikibaseLexeme's lemma widget
+					gravity = 'nw';
 				}
 
 				// Break out of stack to make sure this runs only after the editing toolbar is fully initialized.
