@@ -4,7 +4,6 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Tests\Integration\Usage\Sql;
 
-use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Client\Tests\Integration\Usage\UsageLookupContractTester;
 use Wikibase\Client\Tests\Integration\Usage\UsageTrackerContractTester;
@@ -49,7 +48,7 @@ class SqlUsageTrackerTest extends MediaWikiIntegrationTestCase {
 		$this->sqlUsageTracker = new SqlUsageTracker(
 			new ItemIdParser(),
 			new SessionConsistentConnectionManager(
-				MediaWikiServices::getInstance()->getDBLoadBalancer()
+				$this->getServiceContainer()->getDBLoadBalancer()
 			),
 			[],
 			100
@@ -91,7 +90,7 @@ class SqlUsageTrackerTest extends MediaWikiIntegrationTestCase {
 		$sqlUsageTracker = new SqlUsageTracker(
 			new ItemIdParser(),
 			new SessionConsistentConnectionManager(
-				MediaWikiServices::getInstance()->getDBLoadBalancer()
+				$this->getServiceContainer()->getDBLoadBalancer()
 			),
 			[ EntityUsage::STATEMENT_USAGE, EntityUsage::DESCRIPTION_USAGE =>
 				EntityUsage::OTHER_USAGE ],
@@ -120,7 +119,7 @@ class SqlUsageTrackerTest extends MediaWikiIntegrationTestCase {
 			new EntityUsage( $q4, EntityUsage::LABEL_USAGE, 'de' ),
 		];
 
-		$lb = MediaWikiServices::getInstance()->getDBLoadBalancer();
+		$lb = $this->getServiceContainer()->getDBLoadBalancer();
 		$sqlUsageTracker = new SqlUsageTracker(
 			new ItemIdParser(),
 			new SessionConsistentConnectionManager( $lb ),

@@ -5,7 +5,6 @@ namespace Wikibase\Client\Tests\Integration\DataAccess\Scribunto;
 use Language;
 use LuaSandboxFunction;
 use MediaWiki\Extension\Scribunto\ScribuntoException;
-use MediaWiki\MediaWikiServices;
 use ParserOptions;
 use Scribunto_LuaEngine;
 use Scribunto_LuaStandaloneInterpreterFunction;
@@ -247,7 +246,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary(
 			$cacheSplit,
-			MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'de' )
+			$this->getServiceContainer()->getLanguageFactory()->getLanguage( 'de' )
 		);
 		$label = $luaWikibaseLibrary->getLabel( 'Q32487' );
 
@@ -305,7 +304,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	public function testRenderSnak( $allowDataAccessInUserLanguage ) {
 		$this->setAllowDataAccessInUserLanguage( $allowDataAccessInUserLanguage );
 		$cacheSplit = false;
-		$lang = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'es' );
+		$lang = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'es' );
 
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $cacheSplit, $lang );
 		$entityArr = $luaWikibaseLibrary->getEntity( 'Q32488' );
@@ -332,7 +331,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	public function testRenderSnak_languageFallback() {
 		$this->setAllowDataAccessInUserLanguage( true );
 		$cacheSplit = false;
-		$lang = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'ku' );
+		$lang = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'ku' );
 
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $cacheSplit, $lang );
 		$entityArr = $luaWikibaseLibrary->getEntity( 'Q32488' );
@@ -377,7 +376,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	public function testRenderSnaks( $allowDataAccessInUserLanguage ) {
 		$this->setAllowDataAccessInUserLanguage( $allowDataAccessInUserLanguage );
 		$cacheSplit = false;
-		$lang = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'es' );
+		$lang = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'es' );
 
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $cacheSplit, $lang );
 		$entityArr = $luaWikibaseLibrary->getEntity( 'Q32487' );

@@ -5,7 +5,6 @@ namespace Wikibase\Client\Tests\Integration\Changes;
 
 use ArrayIterator;
 use InvalidArgumentException;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Page\PageSelectQueryBuilder;
 use MediaWiki\Page\PageStore;
 use MediaWiki\Page\PageStoreRecord;
@@ -50,7 +49,7 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 			$usageLookup,
 			$titleFactory,
 			$pageStore,
-			MediaWikiServices::getInstance()->getLinkBatchFactory(),
+			$this->getServiceContainer()->getLinkBatchFactory(),
 			'enwiki',
 			null
 		);

@@ -4,7 +4,6 @@ declare( strict_types=1 );
 
 namespace Wikibase\Client\Tests\Integration\Store\Sql;
 
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Page\PageProps;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
@@ -54,7 +53,7 @@ class PagePropsEntityIdLookupTest extends MediaWikiIntegrationTestCase {
 		$this->insertPageProps( 22, $q22 );
 
 		$lookup = new PagePropsEntityIdLookup(
-			MediaWikiServices::getInstance()->getPageProps(),
+			$this->getServiceContainer()->getPageProps(),
 			new ItemIdParser()
 		);
 		$this->assertEquals( $q22, $lookup->getEntityIdForTitle( $title22 ) );
@@ -78,7 +77,7 @@ class PagePropsEntityIdLookupTest extends MediaWikiIntegrationTestCase {
 		];
 
 		$lookup = new PagePropsEntityIdLookup(
-			MediaWikiServices::getInstance()->getPageProps(),
+			$this->getServiceContainer()->getPageProps(),
 			new ItemIdParser()
 		);
 		$actual = $lookup->getEntityIds( [ $title22, $title99, $title11 ] );

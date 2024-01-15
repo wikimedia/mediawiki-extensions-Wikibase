@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Tests\Integration\DataAccess\Scribunto;
 
-use MediaWiki\MediaWikiServices;
 use Wikibase\Client\WikibaseClient;
 
 /**
@@ -38,7 +37,7 @@ class Scribunto_LuaWikibaseStatsTest extends Scribunto_LuaWikibaseLibraryTestCas
 	protected function setUp(): void {
 		parent::setUp();
 
-		$mwServices = MediaWikiServices::getInstance();
+		$mwServices = $this->getServiceContainer();
 		$mwServices->getStatsdDataFactory()->clearData();
 		$settings = WikibaseClient::getSettings();
 
@@ -59,7 +58,7 @@ class Scribunto_LuaWikibaseStatsTest extends Scribunto_LuaWikibaseLibraryTestCas
 	}
 
 	protected function tearDown(): void {
-		$mwServices = MediaWikiServices::getInstance();
+		$mwServices = $this->getServiceContainer();
 		$settings = WikibaseClient::getSettings();
 
 		$settings->setSetting(

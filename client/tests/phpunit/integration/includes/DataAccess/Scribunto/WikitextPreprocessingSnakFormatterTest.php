@@ -4,7 +4,6 @@ namespace Wikibase\Client\Tests\Integration\DataAccess\Scribunto;
 
 use DataValues\StringValue;
 use InvalidArgumentException;
-use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Parser;
 use ParserOptions;
@@ -56,12 +55,12 @@ class WikitextPreprocessingSnakFormatterTest extends MediaWikiIntegrationTestCas
 		$this->expectException( InvalidArgumentException::class );
 		new WikitextPreprocessingSnakFormatter(
 			$mockFormatter,
-			MediaWikiServices::getInstance()->getParserFactory()->create()
+			$this->getServiceContainer()->getParserFactory()->create()
 		);
 	}
 
 	public function testFormatSnak() {
-		$parser = MediaWikiServices::getInstance()->getParserFactory()->create();
+		$parser = $this->getServiceContainer()->getParserFactory()->create();
 		$parser->setHook(
 			'stripme',
 			function() {
@@ -94,7 +93,7 @@ class WikitextPreprocessingSnakFormatterTest extends MediaWikiIntegrationTestCas
 
 	public function testFormatSnak_onlyPreprocessed() {
 		$wikitext = '[[A|B]][[Image:A.jpg]]<thistagdoesnotexist>C</thistagdoesnotexist>';
-		$parser = MediaWikiServices::getInstance()->getParserFactory()->create();
+		$parser = $this->getServiceContainer()->getParserFactory()->create();
 		$parser->startExternalParse(
 			null,
 			ParserOptions::newFromAnon(),
@@ -120,7 +119,7 @@ class WikitextPreprocessingSnakFormatterTest extends MediaWikiIntegrationTestCas
 	public function testGetFormat() {
 		$formatter = new WikitextPreprocessingSnakFormatter(
 			$this->newMockSnakFormatter(),
-			MediaWikiServices::getInstance()->getParserFactory()->create()
+			$this->getServiceContainer()->getParserFactory()->create()
 		);
 
 		$this->assertEquals(

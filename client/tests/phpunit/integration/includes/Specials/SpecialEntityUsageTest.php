@@ -3,7 +3,6 @@
 namespace Wikibase\Client\Tests\Integration\Specials;
 
 use MediaWiki\Languages\LanguageConverterFactory;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Title\Title;
 use SpecialPageTestBase;
 use TrivialLanguageConverter;
@@ -96,7 +95,7 @@ class SpecialEntityUsageTest extends SpecialPageTestBase {
 		$this->assertStringContainsString( 'Tehran', $result );
 		$this->assertStringContainsString( 'Athena', $result );
 		$this->assertStringNotContainsString( '<p class="error"', $result );
-		$expected = MediaWikiServices::getInstance()->getSpecialPageFactory()
+		$expected = $this->getServiceContainer()->getSpecialPageFactory()
 			->getLocalNameFor( 'EntityUsage', 'Q3' );
 		$this->assertStringContainsString( $expected, $result );
 		$this->assertStringContainsString( '(colon-separator)' . $aspectListTehran . '</li>', $result );

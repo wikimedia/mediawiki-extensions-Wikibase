@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Tests\Integration\RecentChanges;
 
-use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use RecentChange;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
@@ -136,7 +135,7 @@ class RecentChangesFinderTest extends MediaWikiIntegrationTestCase {
 	 */
 	public function testGetRecentChangeId( $expected, array $changeData ) {
 		$connectionManager = new SessionConsistentConnectionManager(
-			MediaWikiServices::getInstance()->getDBLoadBalancer()
+			$this->getServiceContainer()->getDBLoadBalancer()
 		);
 		$detector = new RecentChangesFinder( $connectionManager );
 

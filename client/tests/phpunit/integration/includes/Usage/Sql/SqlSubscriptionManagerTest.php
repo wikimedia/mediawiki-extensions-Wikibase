@@ -4,7 +4,6 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Tests\Integration\Usage\Sql;
 
-use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Client\Usage\Sql\SqlSubscriptionManager;
 use Wikibase\DataModel\Entity\ItemId;
@@ -37,7 +36,7 @@ class SqlSubscriptionManagerTest extends MediaWikiIntegrationTestCase {
 	private function getSubscriptionManager(): SqlSubscriptionManager {
 		return new SqlSubscriptionManager(
 			new SessionConsistentConnectionManager(
-				MediaWikiServices::getInstance()->getDBLoadBalancer()
+				$this->getServiceContainer()->getDBLoadBalancer()
 			)
 		);
 	}

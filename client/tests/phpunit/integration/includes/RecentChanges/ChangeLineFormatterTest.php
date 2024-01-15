@@ -7,7 +7,6 @@ use DerivativeContext;
 use HamcrestPHPUnitIntegration;
 use MediaWiki\CommentFormatter\CommentFormatter;
 use MediaWiki\Linker\LinkRenderer;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
@@ -63,7 +62,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 
 		$this->userNameUtils = $this->getServiceContainer()->getUserNameUtils();
 
-		$this->linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
+		$this->linkRenderer = $this->getServiceContainer()->getLinkRenderer();
 
 		$this->commentFormatter = $this->getServiceContainer()->getCommentFormatter();
 	}
@@ -224,7 +223,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 			new BasicEntityIdParser()
 		);
 		$externalChange = $changeFactory->newFromRecentChange( $recentChange );
-		$linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
+		$linkRenderer = $this->getServiceContainer()->getLinkRenderer();
 		$data = [
 			'untouchedKey' => 'foo',
 			'articleLink' => $linkRenderer->makeKnownLink( $recentChange->getTitle() ),
