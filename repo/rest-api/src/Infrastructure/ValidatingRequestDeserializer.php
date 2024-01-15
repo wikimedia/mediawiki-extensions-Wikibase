@@ -18,6 +18,7 @@ use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyFieldsReq
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdFilterRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyLabelEditRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\SiteIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementSerializationRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\UseCaseRequest;
@@ -32,6 +33,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescription\GetItemDescrip
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\GetItemDescriptionsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\GetItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabelsValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemSiteLink\GetItemSiteLinkValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemSiteLinks\GetItemSiteLinksValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\GetItemStatementsValidator;
@@ -78,6 +80,7 @@ class ValidatingRequestDeserializer	implements
 	AddPropertyStatementValidator,
 	GetItemValidator,
 	GetItemSiteLinksValidator,
+	GetItemSiteLinkValidator,
 	GetItemLabelsValidator,
 	GetItemLabelValidator,
 	GetItemDescriptionsValidator,
@@ -128,6 +131,7 @@ class ValidatingRequestDeserializer	implements
 	public const STATEMENT_ID_REQUEST_VALIDATING_DESERIALIZER = self::PREFIX . 'StatementIdRequestValidatingDeserializer';
 	public const PROPERTY_ID_FILTER_REQUEST_VALIDATING_DESERIALIZER = self::PREFIX . 'PropertyIdFilterRequestValidatingDeserializer';
 	public const LANGUAGE_CODE_REQUEST_VALIDATING_DESERIALIZER = self::PREFIX . 'LanguageCodeRequestValidatingDeserializer';
+	public const SITE_ID_REQUEST_VALIDATING_DESERIALIZER = self::PREFIX . 'SiteIdRequestValidatingDeserializer';
 	public const ITEM_FIELDS_REQUEST_VALIDATING_DESERIALIZER = self::PREFIX . 'ItemFieldsRequestValidatingDeserializer';
 	public const PROPERTY_FIELDS_REQUEST_VALIDATING_DESERIALIZER = self::PREFIX . 'PropertyFieldsRequestValidatingDeserializer';
 	public const STATEMENT_SERIALIZATION_REQUEST_VALIDATING_DESERIALIZER =
@@ -168,6 +172,7 @@ class ValidatingRequestDeserializer	implements
 		$requestTypeToValidatorMap = [
 			ItemIdRequest::class => self::ITEM_ID_REQUEST_VALIDATING_DESERIALIZER,
 			PropertyIdRequest::class => self::PROPERTY_ID_REQUEST_VALIDATING_DESERIALIZER,
+			SiteIdRequest::class => self::SITE_ID_REQUEST_VALIDATING_DESERIALIZER,
 			StatementIdRequest::class => self::STATEMENT_ID_REQUEST_VALIDATING_DESERIALIZER,
 			PropertyIdFilterRequest::class => self::PROPERTY_ID_FILTER_REQUEST_VALIDATING_DESERIALIZER,
 			LanguageCodeRequest::class => self::LANGUAGE_CODE_REQUEST_VALIDATING_DESERIALIZER,

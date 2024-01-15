@@ -15,8 +15,10 @@ use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserialize
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataRequestValidatingDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\SiteIdRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementSerializationRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
+use Wikibase\Repo\RestApi\Application\Validation\SiteIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
 use Wikibase\Repo\RestApi\Infrastructure\DataValuesValueDeserializer;
@@ -37,6 +39,10 @@ class TestValidatingRequestDeserializerServiceContainer implements ContainerInte
 			case VRD::EDIT_METADATA_REQUEST_VALIDATING_DESERIALIZER:
 				return new EditMetadataRequestValidatingDeserializer(
 					new EditMetadataValidator( 500, TestValidatingRequestDeserializer::ALLOWED_TAGS )
+				);
+			case VRD::SITE_ID_REQUEST_VALIDATING_DESERIALIZER:
+				return new SiteIdRequestValidatingDeserializer(
+					new SiteIdValidator( TestValidatingRequestDeserializer::ALLOWED_SITE_IDS )
 				);
 			case VRD::STATEMENT_SERIALIZATION_REQUEST_VALIDATING_DESERIALIZER:
 				$entityIdParser = new BasicEntityIdParser();
