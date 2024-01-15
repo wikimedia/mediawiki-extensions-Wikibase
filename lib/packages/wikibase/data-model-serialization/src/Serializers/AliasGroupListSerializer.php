@@ -21,17 +21,10 @@ class AliasGroupListSerializer implements Serializer {
 	private $aliasGroupSerializer;
 
 	/**
-	 * @var bool
-	 */
-	private $useObjectsForMaps;
-
-	/**
 	 * @param Serializer $aliasGroupSerializer
-	 * @param bool $useObjectsForMaps
 	 */
-	public function __construct( Serializer $aliasGroupSerializer, $useObjectsForMaps ) {
+	public function __construct( Serializer $aliasGroupSerializer ) {
 		$this->aliasGroupSerializer = $aliasGroupSerializer;
-		$this->useObjectsForMaps = $useObjectsForMaps;
 	}
 
 	/**
@@ -64,10 +57,6 @@ class AliasGroupListSerializer implements Serializer {
 		foreach ( $aliasGroupList->getIterator() as $aliasGroup ) {
 			$serialization[$aliasGroup->getLanguageCode()] =
 				$this->aliasGroupSerializer->serialize( $aliasGroup );
-		}
-
-		if ( $this->useObjectsForMaps ) {
-			$serialization = (object)$serialization;
 		}
 
 		return $serialization;

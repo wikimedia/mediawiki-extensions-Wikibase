@@ -23,17 +23,10 @@ class SnakListSerializer implements DispatchableSerializer {
 	private $snakSerializer;
 
 	/**
-	 * @var bool
-	 */
-	private $useObjectsForMaps;
-
-	/**
 	 * @param Serializer $snakSerializer
-	 * @param bool $useObjectsForMaps
 	 */
-	public function __construct( Serializer $snakSerializer, $useObjectsForMaps ) {
+	public function __construct( Serializer $snakSerializer ) {
 		$this->snakSerializer = $snakSerializer;
-		$this->useObjectsForMaps = $useObjectsForMaps;
 	}
 
 	/**
@@ -77,9 +70,6 @@ class SnakListSerializer implements DispatchableSerializer {
 			$serialization[$propertyId][] = $this->snakSerializer->serialize( $snak );
 		}
 
-		if ( $this->useObjectsForMaps ) {
-			$serialization = (object)$serialization;
-		}
 		return $serialization;
 	}
 

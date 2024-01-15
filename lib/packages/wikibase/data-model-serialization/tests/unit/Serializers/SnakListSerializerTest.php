@@ -3,7 +3,6 @@
 namespace Tests\Wikibase\DataModel\Serializers;
 
 use Serializers\Serializer;
-use stdClass;
 use Wikibase\DataModel\Serializers\SnakListSerializer;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
@@ -26,7 +25,7 @@ class SnakListSerializerTest extends DispatchableSerializerTest {
 				'property' => "P42",
 			] );
 
-		return new SnakListSerializer( $snakSerializerMock, false );
+		return new SnakListSerializer( $snakSerializerMock );
 	}
 
 	public function serializableProvider() {
@@ -78,25 +77,17 @@ class SnakListSerializerTest extends DispatchableSerializerTest {
 		];
 	}
 
-	public function testSnakListSerializerWithOptionObjectsForMaps() {
-		$snakSerializerMock = $this->createMock( Serializer::class );
-		$snakSerializerMock->expects( $this->any() )
-			->method( 'serialize' )
-			->with( new PropertyNoValueSnak( 42 ) )
-			->willReturn( [
-				'snaktype' => 'novalue',
-				'property' => "P42",
-			] );
-		$serializer = new SnakListSerializer( $snakSerializerMock, true );
+	public function testSnakListSerializerSerializesSnakLists() {
+		$serializer = $this->buildSerializer();
 
 		$snaklist = new SnakList( [ new PropertyNoValueSnak( 42 ) ] );
 
-		$serial = new stdClass();
-		$serial->P42 = [ [
+		$serial = [];
+		$serial["P42"] = [ [
 			'snaktype' => 'novalue',
 			'property' => 'P42',
 		] ];
 		$this->assertEquals( $serial, $serializer->serialize( $snaklist ) );
+		$this->assertEquals( [], $serializer->serialize( new SnakList() ) );
 	}
-
 }

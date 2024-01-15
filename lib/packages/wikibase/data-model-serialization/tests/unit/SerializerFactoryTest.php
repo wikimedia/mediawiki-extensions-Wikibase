@@ -5,7 +5,6 @@ namespace Tests\Wikibase\DataModel;
 use DataValues\Serializers\DataValueSerializer;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use ReflectionObject;
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
@@ -119,21 +118,6 @@ class SerializerFactoryTest extends TestCase {
 	public function testFactoryCreateWithUnexpectedValue() {
 		$this->expectException( InvalidArgumentException::class );
 		new SerializerFactory( new DataValueSerializer(), 1.0 );
-	}
-
-	public function testNewSnakListSerializerWithUseObjectsForMaps() {
-		$factory = new SerializerFactory(
-			new DataValueSerializer(),
-			SerializerFactory::OPTION_OBJECTS_FOR_MAPS
-		);
-		$serializer = $factory->newSnakListSerializer();
-
-		$refObject   = new ReflectionObject( $serializer );
-		$refProperty = $refObject->getProperty( 'useObjectsForMaps' );
-		$refProperty->setAccessible( true );
-		$value = $refProperty->getValue( $serializer );
-
-		$this->assertTrue( $value );
 	}
 
 	public function testNewTypedSnakSerializer() {

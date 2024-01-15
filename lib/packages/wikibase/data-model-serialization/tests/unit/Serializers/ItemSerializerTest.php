@@ -23,11 +23,11 @@ use Wikibase\DataModel\Term\TermList;
  */
 class ItemSerializerTest extends DispatchableSerializerTest {
 
-	protected function buildSerializer( $useObjectsForMaps = false ) {
+	protected function buildSerializer() {
 		$termListSerializerMock = $this->createMock( Serializer::class );
 		$termListSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
-			->willReturnCallback( static function( TermList $termList ) {
+			->willReturnCallback( static function ( TermList $termList ) {
 				if ( $termList->isEmpty() ) {
 					return [];
 				}
@@ -86,8 +86,7 @@ class ItemSerializerTest extends DispatchableSerializerTest {
 			$termListSerializerMock,
 			$aliasGroupListSerializerMock,
 			$statementListSerializerMock,
-			$siteLinkSerializerMock,
-			$useObjectsForMaps
+			$siteLinkSerializerMock
 		);
 	}
 
@@ -239,14 +238,14 @@ class ItemSerializerTest extends DispatchableSerializerTest {
 		return $provider;
 	}
 
-	public function testItemSerializerWithOptionObjectsForMaps() {
-		$serializer = $this->buildSerializer( true );
+	public function testItemSerializerEmptyMapsSerialization() {
+		$serializer = $this->buildSerializer();
 
 		$item = new Item();
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Nyan Cat' );
 
-		$sitelinks = new \stdClass();
-		$sitelinks->enwiki = [
+		$sitelinks = [];
+		$sitelinks['enwiki'] = [
 			'site' => 'enwiki',
 			'title' => 'Nyan Cat',
 			'badges' => [],
@@ -263,5 +262,4 @@ class ItemSerializerTest extends DispatchableSerializerTest {
 
 		$this->assertEquals( $serial, $serializer->serialize( $item ) );
 	}
-
 }

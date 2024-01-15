@@ -21,17 +21,10 @@ class TermListSerializer implements Serializer {
 	private $termSerializer;
 
 	/**
-	 * @var bool
-	 */
-	private $useObjectsForMaps;
-
-	/**
 	 * @param Serializer $termSerializer
-	 * @param bool $useObjectsForMaps
 	 */
-	public function __construct( Serializer $termSerializer, $useObjectsForMaps ) {
+	public function __construct( Serializer $termSerializer ) {
 		$this->termSerializer = $termSerializer;
-		$this->useObjectsForMaps = $useObjectsForMaps;
 	}
 
 	/**
@@ -66,10 +59,6 @@ class TermListSerializer implements Serializer {
 
 		foreach ( $termList->getIterator() as $term ) {
 			$serialization[$term->getLanguageCode()] = $this->termSerializer->serialize( $term );
-		}
-
-		if ( $this->useObjectsForMaps ) {
-			$serialization = (object)$serialization;
 		}
 
 		return $serialization;
