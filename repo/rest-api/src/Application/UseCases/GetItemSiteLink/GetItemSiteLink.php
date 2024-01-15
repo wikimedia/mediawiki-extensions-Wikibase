@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetItemSiteLink;
 
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
+use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Services\SiteLinkRetriever;
 
@@ -27,6 +28,7 @@ class GetItemSiteLink {
 
 	/**
 	 * @throws UseCaseError
+	 * @throws ItemRedirect
 	 */
 	public function execute( GetItemSiteLinkRequest $request ): GetItemSiteLinkResponse {
 		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
