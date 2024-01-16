@@ -50,7 +50,6 @@ class EntityChangeLookupTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testLoadByChangeIds() {
-		$this->db->delete( 'wb_changes', '*', __METHOD__ );
 		$changesToStore = $this->getEntityChanges();
 		$changeStore = new SqlChangeStore( $this->getRepoDomainDb() );
 		foreach ( $changesToStore as $change ) {
@@ -67,7 +66,6 @@ class EntityChangeLookupTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testLoadChangesBefore(): void {
-		$this->db->delete( 'wb_changes', '*', __METHOD__ );
 		$changesToStore = $this->getEntityChanges();
 		$changeStore = new SqlChangeStore( $this->getRepoDomainDb() );
 		foreach ( $changesToStore as $change ) {

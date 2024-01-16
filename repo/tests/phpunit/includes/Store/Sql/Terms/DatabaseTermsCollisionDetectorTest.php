@@ -67,15 +67,6 @@ class DatabaseTermsCollisionDetectorTest extends MediaWikiIntegrationTestCase {
 	 * description => [ en => [ 'foo', 'bar' ], de => [ 'foo', 'bar' ] ]
 	 */
 	private function setUpTerms(): void {
-		$this->db->truncate( [
-				'wbt_text',
-				'wbt_type',
-				'wbt_text_in_lang',
-				'wbt_term_in_lang',
-				'wbt_property_terms',
-				'wbt_item_terms',
-			]
-		);
 		// text records
 		$this->db->insert( 'wbt_text',
 			[ 'wbx_text' => 'foo' ] );

@@ -41,7 +41,6 @@ class ChangesSubscriptionTableBuilderTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testFillSubscriptionTable() {
-		$this->truncateItemPerSite();
 		$this->putItemPerSite( [
 			[ 11, 'dewiki' ],
 			[ 11, 'enwiki' ],
@@ -69,7 +68,6 @@ class ChangesSubscriptionTableBuilderTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testFillSubscriptionTable_startItem() {
-		$this->truncateItemPerSite();
 		$this->putItemPerSite( [
 			[ 11, 'dewiki' ],
 			[ 11, 'enwiki' ],
@@ -92,10 +90,6 @@ class ChangesSubscriptionTableBuilderTest extends MediaWikiIntegrationTestCase {
 		];
 
 		$this->assertEquals( $expected, $actual );
-	}
-
-	private function truncateItemPerSite() {
-		$this->db->delete( 'wb_items_per_site', '*' );
 	}
 
 	private function putItemPerSite( array $entries ) {

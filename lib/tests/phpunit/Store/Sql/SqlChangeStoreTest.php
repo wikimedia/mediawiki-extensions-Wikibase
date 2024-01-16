@@ -37,7 +37,6 @@ class SqlChangeStoreTest extends MediaWikiIntegrationTestCase {
 		if ( !WikibaseSettings::isRepoEnabled() ) {
 			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have a local wb_changes table." );
 		}
-		$this->db->delete( 'wb_changes', '*', __METHOD__ );
 	}
 
 	private function newSqlChangeStore(): SqlChangeStore {

@@ -28,12 +28,6 @@ class ResubmitChangesTest extends MaintenanceBaseTestCase {
 		return ResubmitChanges::class;
 	}
 
-	protected function setUp(): void {
-		parent::setUp();
-
-		$this->db->delete( 'wb_changes', '*', __METHOD__ );
-	}
-
 	public function testExecute() {
 		$this->storeNewChanges();
 

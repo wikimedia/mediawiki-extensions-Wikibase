@@ -33,11 +33,6 @@ class CachingPropertyInfoTest extends MediaWikiIntegrationTestCase {
 
 	use LocalRepoDbTestHelper;
 
-	protected function setUp(): void {
-		parent::setUp();
-		$this->truncateTable( 'wb_property_info' );
-	}
-
 	private function newPropertyInfoTable() {
 		return new PropertyInfoTable(
 			$this->getEntityComposer(),
