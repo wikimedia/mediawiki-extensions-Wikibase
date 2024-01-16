@@ -5,6 +5,7 @@ namespace Wikibase\Repo\RestApi\RouteHandlers;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
+use MediaWiki\Rest\Validator\BodyValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemSiteLink\RemoveItemSiteLink;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemSiteLink\RemoveItemSiteLinkRequest;
 use Wikibase\Repo\RestApi\WbRestApi;
@@ -17,6 +18,12 @@ class RemoveItemSiteLinkRouteHandler extends SimpleHandler {
 
 	private const ITEM_ID_PATH_PARAM = 'item_id';
 	private const SITE_ID_PATH_PARAM = 'site_id';
+	private const TAGS_BODY_PARAM = 'tags';
+	private const BOT_BODY_PARAM = 'bot';
+	private const COMMENT_BODY_PARAM = 'comment';
+	private const TAGS_PARAM_DEFAULT = [];
+	private const BOT_PARAM_DEFAULT = false;
+	private const COMMENT_PARAM_DEFAULT = null;
 	private RemoveItemSiteLink $useCase;
 
 	public static function factory(): self {
@@ -30,7 +37,13 @@ class RemoveItemSiteLinkRouteHandler extends SimpleHandler {
 	}
 
 	public function run( string $itemId, string $siteId ): Response {
-		$this->useCase->execute( new RemoveItemSiteLinkRequest( $itemId, $siteId ) );
+		$requestBody = $this->getValidatedBody();
+		$this->useCase->execute( new RemoveItemSiteLinkRequest( $itemId, $siteId,
+			$requestBody[ self::TAGS_BODY_PARAM ] ?? self::TAGS_PARAM_DEFAULT,
+			$requestBody[ self::BOT_BODY_PARAM ] ?? self::BOT_PARAM_DEFAULT,
+			$requestBody[ self::COMMENT_BODY_PARAM ] ?? self::COMMENT_PARAM_DEFAULT,
+			$this->getUsername()
+		) );
 		$httpResponse = $this->getResponseFactory()->create();
 		$httpResponse->setHeader( 'Content-Type', 'application/json' );
 
@@ -55,4 +68,37 @@ class RemoveItemSiteLinkRouteHandler extends SimpleHandler {
 			],
 		];
 	}
+
+	private function getUsername(): ?string {
+		$mwUser = $this->getAuthority()->getUser();
+		return $mwUser->isRegistered() ? $mwUser->getName() : null;
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function getBodyValidator( $contentType ): BodyValidator {
+		return $contentType === 'application/json' ?
+			new TypeValidatingJsonBodyValidator( [
+				self::TAGS_BODY_PARAM => [
+					self::PARAM_SOURCE => 'body',
+					ParamValidator::PARAM_TYPE => 'array',
+					ParamValidator::PARAM_REQUIRED => false,
+					ParamValidator::PARAM_DEFAULT => self::TAGS_PARAM_DEFAULT,
+				],
+				self::BOT_BODY_PARAM => [
+					self::PARAM_SOURCE => 'body',
+					ParamValidator::PARAM_TYPE => 'boolean',
+					ParamValidator::PARAM_REQUIRED => false,
+					ParamValidator::PARAM_DEFAULT => self::BOT_PARAM_DEFAULT,
+				],
+				self::COMMENT_BODY_PARAM => [
+					self::PARAM_SOURCE => 'body',
+					ParamValidator::PARAM_TYPE => 'string',
+					ParamValidator::PARAM_REQUIRED => false,
+					ParamValidator::PARAM_DEFAULT => self::COMMENT_PARAM_DEFAULT,
+				],
+			] ) : parent::getBodyValidator( $contentType );
+	}
+
 }

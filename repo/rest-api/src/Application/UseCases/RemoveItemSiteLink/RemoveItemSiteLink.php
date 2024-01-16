@@ -26,7 +26,7 @@ class RemoveItemSiteLink {
 		$item->removeSiteLink( $request->getSiteId() );
 		$this->itemUpdater->update(
 			$item, // @phan-suppress-current-line PhanTypeMismatchArgumentNullable
-			new EditMetadata( [], false, new SiteLinkEditSummary() )
+			new EditMetadata( $request->getEditTags(), $request->isBot(), new SiteLinkEditSummary() )
 		);
 	}
 
