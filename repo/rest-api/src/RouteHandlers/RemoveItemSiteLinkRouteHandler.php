@@ -8,6 +8,7 @@ use MediaWiki\Rest\StringStream;
 use MediaWiki\Rest\Validator\BodyValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemSiteLink\RemoveItemSiteLink;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemSiteLink\RemoveItemSiteLinkRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -25,33 +26,38 @@ class RemoveItemSiteLinkRouteHandler extends SimpleHandler {
 	private const BOT_PARAM_DEFAULT = false;
 	private const COMMENT_PARAM_DEFAULT = null;
 	private RemoveItemSiteLink $useCase;
+	private ResponseFactory $responseFactory;
 
 	public static function factory(): self {
 		return new self(
-			new RemoveItemSiteLink( WbRestApi::getItemDataRetriever(), WbRestApi::getItemUpdater() )
+			new RemoveItemSiteLink( WbRestApi::getItemDataRetriever(), WbRestApi::getItemUpdater() ),
+			new ResponseFactory()
 		);
 	}
 
-	public function __construct( RemoveItemSiteLink $useCase ) {
+	public function __construct( RemoveItemSiteLink $useCase, ResponseFactory $responseFactory ) {
 		$this->useCase = $useCase;
+		$this->responseFactory = $responseFactory;
 	}
 
 	public function run( string $itemId, string $siteId ): Response {
 		$requestBody = $this->getValidatedBody();
-		$this->useCase->execute( new RemoveItemSiteLinkRequest( $itemId, $siteId,
-			$requestBody[ self::TAGS_BODY_PARAM ] ?? self::TAGS_PARAM_DEFAULT,
-			$requestBody[ self::BOT_BODY_PARAM ] ?? self::BOT_PARAM_DEFAULT,
-			$requestBody[ self::COMMENT_BODY_PARAM ] ?? self::COMMENT_PARAM_DEFAULT,
-			$this->getUsername()
-		) );
-		$httpResponse = $this->getResponseFactory()->create();
-		$httpResponse->setHeader( 'Content-Type', 'application/json' );
 
-		$httpResponse->setBody(
-			new StringStream( '"Sitelink deleted"' )
-		);
-
-		return $httpResponse;
+		try {
+			$this->useCase->execute(
+				new RemoveItemSiteLinkRequest(
+					$itemId,
+					$siteId,
+					$requestBody[self::TAGS_BODY_PARAM] ?? self::TAGS_PARAM_DEFAULT,
+					$requestBody[self::BOT_BODY_PARAM] ?? self::BOT_PARAM_DEFAULT,
+					$requestBody[self::COMMENT_BODY_PARAM] ?? self::COMMENT_PARAM_DEFAULT,
+					$this->getUsername()
+				)
+			);
+			return $this->newSuccessResponse();
+		} catch ( UseCaseError $e ) {
+			return $this->responseFactory->newErrorResponseFromException( $e );
+		}
 	}
 
 	public function getParamSettings(): array {
@@ -99,6 +105,16 @@ class RemoveItemSiteLinkRouteHandler extends SimpleHandler {
 					ParamValidator::PARAM_DEFAULT => self::COMMENT_PARAM_DEFAULT,
 				],
 			] ) : parent::getBodyValidator( $contentType );
+	}
+
+	private function newSuccessResponse(): Response {
+		$httpResponse = $this->getResponseFactory()->create();
+		$httpResponse->setHeader( 'Content-Type', 'application/json' );
+		$httpResponse->setBody(
+			new StringStream( '"Sitelink deleted"' )
+		);
+
+		return $httpResponse;
 	}
 
 }

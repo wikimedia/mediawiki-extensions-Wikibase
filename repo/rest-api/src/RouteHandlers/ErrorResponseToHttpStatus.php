@@ -70,6 +70,7 @@ class ErrorResponseToHttpStatus {
 		UseCaseError::PATCHED_STATEMENT_MISSING_FIELD => 422,
 		UseCaseError::PATCH_TEST_FAILED => 409,
 		UseCaseError::PATCH_TARGET_NOT_FOUND => 409,
+		UseCaseError::SITELINK_NOT_FOUND => 404,
 		UseCaseError::UNEXPECTED_ERROR => 500,
 	];
 

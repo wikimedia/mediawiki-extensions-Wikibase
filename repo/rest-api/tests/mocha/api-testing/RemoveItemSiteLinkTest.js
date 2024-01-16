@@ -20,39 +20,58 @@ describe( newRemoveItemSiteLinkRequestBuilder().getRouteDescription(), () => {
 
 		const createItemResponse = await createEntity( 'item', {} );
 		testItemId = createItemResponse.entity.id;
-	} );
-	beforeEach( async () => {
+
 		await createLocalSiteLink( testItemId, linkedArticle );
 	} );
 
-	it( 'can DELETE a single sitelink of an item', async () => {
-		const response = await newRemoveItemSiteLinkRequestBuilder( testItemId, siteId )
-			.assertValidRequest()
-			.makeRequest();
+	describe( '200', () => {
+		afterEach( async () => {
+			await createLocalSiteLink( testItemId, linkedArticle );
+		} );
 
-		expect( response ).to.have.status( 200 );
-		assert.equal( response.body, 'Sitelink deleted' );
+		it( 'can DELETE a single sitelink of an item', async () => {
+			const response = await newRemoveItemSiteLinkRequestBuilder( testItemId, siteId )
+				.assertValidRequest()
+				.makeRequest();
 
-		const itemSiteLinks = ( await newGetItemSiteLinksRequestBuilder( testItemId ).makeRequest() ).body;
-		assert.notProperty( itemSiteLinks, siteId );
+			expect( response ).to.have.status( 200 );
+			assert.equal( response.body, 'Sitelink deleted' );
+
+			const itemSiteLinks = ( await newGetItemSiteLinksRequestBuilder( testItemId ).makeRequest() ).body;
+			assert.notProperty( itemSiteLinks, siteId );
+		} );
+
+		it( 'can DELETE a sitelink with edit metadata provided', async () => {
+			const user = await action.robby(); // robby is a bot
+			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test' );
+
+			const response = await newRemoveItemSiteLinkRequestBuilder( testItemId, siteId )
+				.withUser( user )
+				.withJsonBodyParam( 'bot', true )
+				.withJsonBodyParam( 'tags', [ tag ] )
+				.assertValidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 200 );
+
+			const editMetadata = await entityHelper.getLatestEditMetadata( testItemId );
+			assert.include( editMetadata.tags, tag );
+			assert.property( editMetadata, 'bot' );
+		} );
 	} );
 
-	it( 'can DELETE a sitelink with edit metadata provided', async () => {
-		const user = await action.robby(); // robby is a bot
-		const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test' );
+	describe( '404', () => {
+		it( 'responds 404 if there is no sitelink for the requested site', async () => {
+			const itemWithNoSiteLink = ( await createEntity( 'item', {} ) ).entity.id;
+			const response = await newRemoveItemSiteLinkRequestBuilder( itemWithNoSiteLink, siteId )
+				.assertValidRequest()
+				.makeRequest();
 
-		const response = await newRemoveItemSiteLinkRequestBuilder( testItemId, siteId )
-			.withUser( user )
-			.withJsonBodyParam( 'bot', true )
-			.withJsonBodyParam( 'tags', [ tag ] )
-			.assertValidRequest()
-			.makeRequest();
-
-		expect( response ).to.have.status( 200 );
-
-		const editMetadata = await entityHelper.getLatestEditMetadata( testItemId );
-		assert.include( editMetadata.tags, tag );
-		assert.property( editMetadata, 'bot' );
+			expect( response ).to.have.status( 404 );
+			assert.strictEqual( response.body.code, 'sitelink-not-defined' );
+			assert.include( response.body.message, itemWithNoSiteLink );
+			assert.include( response.body.message, siteId );
+		} );
 	} );
 
 } );

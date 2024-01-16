@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\RemoveItemSiteLink;
 
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\SiteLinkEditSummary;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
@@ -22,8 +23,19 @@ class RemoveItemSiteLink {
 	}
 
 	public function execute( RemoveItemSiteLinkRequest $request ): void {
-		$item = $this->itemRetriever->getItem( new ItemId( $request->getItemId() ) );
-		$item->removeSiteLink( $request->getSiteId() );
+		$itemId = new ItemId( $request->getItemId() );
+		$siteId = $request->getSiteId();
+
+		$item = $this->itemRetriever->getItem( $itemId );
+
+		if ( !$item->hasLinkToSite( $siteId ) ) {
+			throw new UseCaseError(
+				UseCaseError::SITELINK_NOT_FOUND,
+				"No sitelink found for the ID: $itemId for the site $siteId"
+			);
+		}
+
+		$item->removeSiteLink( $siteId );
 		$this->itemUpdater->update(
 			$item, // @phan-suppress-current-line PhanTypeMismatchArgumentNullable
 			new EditMetadata( $request->getEditTags(), $request->isBot(), new SiteLinkEditSummary() )
