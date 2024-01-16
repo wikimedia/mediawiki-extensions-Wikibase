@@ -168,6 +168,7 @@ class WikibaseContentLanguages {
 				'es-formal',
 				'hu-formal',
 				'nl-informal',
+				'qqq',
 			] )
 		);
 	}
