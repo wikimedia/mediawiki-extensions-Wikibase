@@ -94,6 +94,30 @@ class GetItemSiteLinkTest extends TestCase {
 		}
 	}
 
+	public function testGivenRequestedSiteLinkForItemDoesNotExist_throwsUseCaseError(): void {
+		$itemId = new ItemId( 'Q11' );
+
+		$this->getLatestRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
+		$this->getLatestRevisionMetadata->method( 'execute' )->willReturn( [ 2, '20201111070707' ] );
+
+		$this->siteLinkRetriever = $this->createStub( SiteLinkRetriever::class );
+
+		try {
+			$this->newUseCase()->execute(
+				new GetItemSiteLinkRequest( $itemId->getSerialization(), TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0] )
+			);
+
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::SITELINK_NOT_DEFINED, $e->getErrorCode() );
+			$this->assertSame(
+				'No sitelink found for the ID: Q11 for the site ' . TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0],
+				$e->getErrorMessage()
+			);
+			$this->assertSame( [], $e->getErrorContext() );
+		}
+	}
+
 	private function newUseCase(): GetItemSiteLink {
 		return new GetItemSiteLink(
 			new TestValidatingRequestDeserializer(),

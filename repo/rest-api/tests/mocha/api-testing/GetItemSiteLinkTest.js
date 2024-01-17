@@ -63,16 +63,30 @@ describe( newGetItemSiteLinkRequestBuilder().getRouteDescription(), () => {
 		} );
 	} );
 
-	it( '404 in case the item does not exist', async () => {
-		const nonExistentItem = 'Q99999999';
-		const response = await newGetItemSiteLinkRequestBuilder( nonExistentItem, siteId )
-			.assertValidRequest()
-			.makeRequest();
+	describe( '404 resource not found', () => {
+		it( 'item does not exist', async () => {
+			const nonExistentItem = 'Q99999999';
+			const response = await newGetItemSiteLinkRequestBuilder( nonExistentItem, siteId )
+				.assertValidRequest()
+				.makeRequest();
 
-		expect( response ).to.have.status( 404 );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.strictEqual( response.body.code, 'item-not-found' );
-		assert.include( response.body.message, nonExistentItem );
+			expect( response ).to.have.status( 404 );
+			assert.header( response, 'Content-Language', 'en' );
+			assert.strictEqual( response.body.code, 'item-not-found' );
+			assert.include( response.body.message, nonExistentItem );
+		} );
+
+		it( 'item has no sitelink with the requested site id', async () => {
+			const item = await createEntity( 'item', {} );
+			const response = await newGetItemSiteLinkRequestBuilder( item.entity.id, siteId )
+				.assertValidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 404 );
+			assert.header( response, 'Content-Language', 'en' );
+			assert.strictEqual( response.body.code, 'sitelink-not-defined' );
+			assert.include( response.body.message, siteId );
+		} );
 	} );
 
 	it( '308 - item redirected', async () => {

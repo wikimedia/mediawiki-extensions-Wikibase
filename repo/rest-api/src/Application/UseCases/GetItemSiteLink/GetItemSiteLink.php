@@ -33,14 +33,18 @@ class GetItemSiteLink {
 	public function execute( GetItemSiteLinkRequest $request ): GetItemSiteLinkResponse {
 		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
 		$itemId = $deserializedRequest->getItemId();
+		$siteId = $deserializedRequest->getSiteId();
 
 		[ $revisionId, $lastModified ] = $this->getRevisionMetadata->execute( $itemId );
 
-		return new GetItemSiteLinkResponse(
-			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-			$this->siteLinkRetriever->getSiteLink( $itemId, $deserializedRequest->getSiteId() ),
-			$lastModified,
-			$revisionId
-		);
+		$siteLink = $this->siteLinkRetriever->getSiteLink( $itemId, $siteId );
+		if ( !$siteLink ) {
+			throw new UseCaseError(
+				UseCaseError::SITELINK_NOT_DEFINED,
+				"No sitelink found for the ID: {$itemId->getSerialization()} for the site $siteId"
+			);
+		}
+
+		return new GetItemSiteLinkResponse( $siteLink, $lastModified, $revisionId );
 	}
 }

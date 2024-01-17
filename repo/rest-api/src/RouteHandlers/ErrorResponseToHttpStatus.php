@@ -22,6 +22,7 @@ class ErrorResponseToHttpStatus {
 		UseCaseError::PATCHED_PROPERTY_LABEL_DESCRIPTION_SAME_VALUE => 422,
 		UseCaseError::COMMENT_TOO_LONG => 400,
 		UseCaseError::INVALID_EDIT_TAG => 400,
+		UseCaseError::SITELINK_NOT_DEFINED => 404,
 		UseCaseError::STATEMENT_DATA_INVALID_FIELD => 400,
 		UseCaseError::STATEMENT_DATA_MISSING_FIELD => 400,
 		UseCaseError::INVALID_OPERATION_CHANGED_STATEMENT_ID => 400,
@@ -70,7 +71,6 @@ class ErrorResponseToHttpStatus {
 		UseCaseError::PATCHED_STATEMENT_MISSING_FIELD => 422,
 		UseCaseError::PATCH_TEST_FAILED => 409,
 		UseCaseError::PATCH_TARGET_NOT_FOUND => 409,
-		UseCaseError::SITELINK_NOT_DEFINED => 404,
 		UseCaseError::UNEXPECTED_ERROR => 500,
 	];
 

@@ -66,10 +66,10 @@ class UseCaseError extends UseCaseException {
 	public const PERMISSION_DENIED = 'permission-denied';
 	public const PROPERTY_NOT_FOUND = 'property-not-found';
 	public const PROPERTY_LABEL_DUPLICATE = 'property-label-duplicate';
+	public const SITELINK_NOT_DEFINED = 'sitelink-not-defined';
 	public const STATEMENT_DATA_INVALID_FIELD = 'statement-data-invalid-field';
 	public const STATEMENT_DATA_MISSING_FIELD = 'statement-data-missing-field';
 	public const STATEMENT_NOT_FOUND = 'statement-not-found';
-	public const SITELINK_NOT_DEFINED = 'sitelink-not-defined';
 	public const UNEXPECTED_ERROR = 'unexpected-error';
 
 	public const CONTEXT_ACTUAL_VALUE = 'actual-value';
