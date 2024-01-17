@@ -23,6 +23,7 @@ use Wikibase\Repo\FederatedProperties\FederatedPropertiesException;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Assert\InvariantException;
 use Wikimedia\ParamValidator\ParamValidator;
+use Wikimedia\ParamValidator\TypeDef\IntegerDef;
 
 /**
  * API module to search for Wikibase entities.
@@ -30,6 +31,22 @@ use Wikimedia\ParamValidator\ParamValidator;
  * @license GPL-2.0-or-later
  */
 class SearchEntities extends ApiBase {
+
+	/**
+	 * "Soft" limit on the "continue" parameter.
+	 * Past this point, we won't add it to the response,
+	 * though users can still ask for higher continuation offsets manually.
+	 */
+	private const CONTINUE_SOFT_LIMIT = self::LIMIT_SML1;
+
+	/**
+	 * "Hard" limit on the "continue" parameter.
+	 * Past this point, continuation is not allowed (T355251).
+	 * The value is mostly arbitrary (could be somewhat higher or lower),
+	 * but chosen to coincide with CirrusSearch's Searcher::MAX_OFFSET_LIMIT:
+	 * when using CirrusSearch, it's not possible to get more than 10000 search results anyway.
+	 */
+	private const CONTINUE_HARD_LIMIT = 10000;
 
 	private LinkBatchFactory $linkBatchFactory;
 
@@ -299,7 +316,7 @@ class SearchEntities extends ApiBase {
 
 		// Only pass search-continue param if there are more results and the maximum continuation
 		// limit is not exceeded.
-		if ( $hits > $nextContinuation && $nextContinuation <= self::LIMIT_SML1 ) {
+		if ( $hits > $nextContinuation && $nextContinuation <= self::CONTINUE_SOFT_LIMIT ) {
 			$this->getResult()->addValue(
 				null,
 				'search-continue',
@@ -347,14 +364,16 @@ class SearchEntities extends ApiBase {
 			'limit' => [
 				ParamValidator::PARAM_TYPE => 'limit',
 				ParamValidator::PARAM_DEFAULT => 7,
-				self::PARAM_MAX => self::LIMIT_SML1,
-				self::PARAM_MAX2 => self::LIMIT_SML2,
-				self::PARAM_MIN => 0,
+				IntegerDef::PARAM_MAX => self::LIMIT_SML1,
+				IntegerDef::PARAM_MAX2 => self::LIMIT_SML2,
+				IntegerDef::PARAM_MIN => 0,
 			],
 			'continue' => [
 				ParamValidator::PARAM_TYPE => 'integer',
 				ParamValidator::PARAM_REQUIRED => false,
 				ParamValidator::PARAM_DEFAULT => 0,
+				IntegerDef::PARAM_MAX => self::CONTINUE_HARD_LIMIT,
+				IntegerDef::PARAM_MIN => 0,
 			],
 			'props' => [
 				ParamValidator::PARAM_TYPE => [ 'url' ],
