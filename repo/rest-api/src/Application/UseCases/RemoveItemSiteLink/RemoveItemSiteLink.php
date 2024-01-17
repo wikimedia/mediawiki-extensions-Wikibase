@@ -3,6 +3,8 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\RemoveItemSiteLink;
 
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
+use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\SiteLinkEditSummary;
@@ -16,16 +18,23 @@ class RemoveItemSiteLink {
 
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
+	private AssertItemExists $assertItemExists;
 
-	public function __construct( ItemRetriever $itemRetriever, ItemUpdater $itemUpdater ) {
+	public function __construct( ItemRetriever $itemRetriever, ItemUpdater $itemUpdater, AssertItemExists $assertItemExists ) {
 		$this->itemRetriever = $itemRetriever;
 		$this->itemUpdater = $itemUpdater;
+		$this->assertItemExists = $assertItemExists;
 	}
 
+	/**
+	 * @throws ItemRedirect if the item is a redirect
+	 * @throws UseCaseError if the item does not exist
+	 */
 	public function execute( RemoveItemSiteLinkRequest $request ): void {
 		$itemId = new ItemId( $request->getItemId() );
 		$siteId = $request->getSiteId();
 
+		$this->assertItemExists->execute( $itemId );
 		$item = $this->itemRetriever->getItem( $itemId );
 
 		if ( !$item->hasLinkToSite( $siteId ) ) {

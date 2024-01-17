@@ -72,6 +72,28 @@ describe( newRemoveItemSiteLinkRequestBuilder().getRouteDescription(), () => {
 			assert.include( response.body.message, itemWithNoSiteLink );
 			assert.include( response.body.message, siteId );
 		} );
+		it( 'responds with 404 if the item does not exist', async () => {
+			const itemDoesNotExist = 'Q999999';
+			const response = await newRemoveItemSiteLinkRequestBuilder( itemDoesNotExist, siteId )
+				.assertValidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 404 );
+			assert.strictEqual( response.body.code, 'item-not-found' );
+			assert.include( response.body.message, itemDoesNotExist );
+		} );
+	} );
+
+	it( 'responds 409 if the item is a redirect', async () => {
+		const redirectSource = await entityHelper.createRedirectForItem( testItemId );
+		const response = await newRemoveItemSiteLinkRequestBuilder( redirectSource, siteId )
+			.assertValidRequest()
+			.makeRequest();
+
+		expect( response ).to.have.status( 409 );
+		assert.strictEqual( response.body.code, 'redirected-item' );
+		assert.include( response.body.message, redirectSource );
+
 	} );
 
 } );
