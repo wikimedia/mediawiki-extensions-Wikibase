@@ -95,5 +95,82 @@ describe( newRemoveItemSiteLinkRequestBuilder().getRouteDescription(), () => {
 		assert.include( response.body.message, redirectSource );
 
 	} );
+	describe( '400', () => {
+		it( 'invalid item ID', async () => {
+			const invalidItemId = 'X123';
+			const response = await newRemoveItemSiteLinkRequestBuilder( invalidItemId, siteId )
+				.assertInvalidRequest()
+				.makeRequest();
 
+			expect( response ).to.have.status( 400 );
+			assert.header( response, 'Content-Language', 'en' );
+			assert.strictEqual( response.body.code, 'invalid-item-id' );
+			assert.include( response.body.message, invalidItemId );
+		} );
+
+		// From OAS point of view, this request is valid, as there is no specific pattern for the site id string,
+		// but site id can't be any string, so from Wikibase point of view it's invalid
+		// that's why the 'assertInvalidRequest' method was commented here.
+		it( 'invalid site ID', async () => {
+			const invalidSiteId = 'not-a-valid-site-id';
+			const response = await newRemoveItemSiteLinkRequestBuilder( testItemId, invalidSiteId )
+				// .assertInvalidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assert.header( response, 'Content-Language', 'en' );
+			assert.strictEqual( response.body.code, 'invalid-site-id' );
+			assert.include( response.body.message, invalidSiteId );
+		} );
+
+		it( 'invalid edit tag', async () => {
+			const invalidEditTag = 'invalid tag';
+			const response = await newRemoveItemSiteLinkRequestBuilder( testItemId, siteId )
+				.withJsonBodyParam( 'tags', [ invalidEditTag ] ).assertValidRequest().makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assert.strictEqual( response.body.code, 'invalid-edit-tag' );
+			assert.include( response.body.message, invalidEditTag );
+		} );
+
+		it( 'invalid edit tag type', async () => {
+			const response = await newRemoveItemSiteLinkRequestBuilder( testItemId, siteId )
+				.withJsonBodyParam( 'tags', 'not an array' ).assertInvalidRequest().makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assert.strictEqual( response.body.code, 'invalid-request-body' );
+			assert.strictEqual( response.body.fieldName, 'tags' );
+			assert.strictEqual( response.body.expectedType, 'array' );
+		} );
+
+		it( 'invalid bot flag type', async () => {
+			const response = await newRemoveItemSiteLinkRequestBuilder( testItemId, siteId )
+				.withJsonBodyParam( 'bot', 'not boolean' ).assertInvalidRequest().makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assert.strictEqual( response.body.code, 'invalid-request-body' );
+			assert.strictEqual( response.body.fieldName, 'bot' );
+			assert.strictEqual( response.body.expectedType, 'boolean' );
+		} );
+
+		it( 'comment too long', async () => {
+			const comment = 'x'.repeat( 501 );
+			const response = await newRemoveItemSiteLinkRequestBuilder( testItemId, siteId )
+				.withJsonBodyParam( 'comment', comment ).assertValidRequest().makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assert.strictEqual( response.body.code, 'comment-too-long' );
+			assert.include( response.body.message, '500' );
+		} );
+
+		it( 'invalid comment type', async () => {
+			const response = await newRemoveItemSiteLinkRequestBuilder( testItemId, siteId )
+				.withJsonBodyParam( 'comment', 1234 ).assertInvalidRequest().makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assert.strictEqual( response.body.code, 'invalid-request-body' );
+			assert.strictEqual( response.body.fieldName, 'comment' );
+			assert.strictEqual( response.body.expectedType, 'string' );
+		} );
+	} );
 } );

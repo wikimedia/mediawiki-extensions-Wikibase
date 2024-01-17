@@ -2,10 +2,15 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\RemoveItemSiteLink;
 
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\SiteIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\UseCaseRequest;
+
 /**
  * @license GPL-2.0-or-later
  */
-class RemoveItemSiteLinkRequest {
+class RemoveItemSiteLinkRequest implements SiteIdRequest, ItemIdRequest, EditMetadataRequest, UseCaseRequest {
 
 	private string $itemId;
 	private string $siteId;

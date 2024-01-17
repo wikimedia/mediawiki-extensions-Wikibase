@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\RemoveItemSiteLink;
 
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
@@ -19,20 +18,29 @@ class RemoveItemSiteLink {
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
 	private AssertItemExists $assertItemExists;
+	private RemoveItemSiteLinkValidator $validator;
 
-	public function __construct( ItemRetriever $itemRetriever, ItemUpdater $itemUpdater, AssertItemExists $assertItemExists ) {
+	public function __construct(
+		ItemRetriever $itemRetriever,
+		ItemUpdater $itemUpdater,
+		AssertItemExists $assertItemExists,
+		RemoveItemSiteLinkValidator $validator
+	) {
 		$this->itemRetriever = $itemRetriever;
 		$this->itemUpdater = $itemUpdater;
 		$this->assertItemExists = $assertItemExists;
+		$this->validator = $validator;
 	}
 
 	/**
-	 * @throws ItemRedirect if the item is a redirect
-	 * @throws UseCaseError if the item does not exist
+	 * @throws ItemRedirect
+	 * @throws UseCaseError
 	 */
 	public function execute( RemoveItemSiteLinkRequest $request ): void {
-		$itemId = new ItemId( $request->getItemId() );
-		$siteId = $request->getSiteId();
+		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
+		$itemId = $deserializedRequest->getItemId();
+		$siteId = $deserializedRequest->getSiteId();
+		$editMetadata = $deserializedRequest->getEditMetadata();
 
 		$this->assertItemExists->execute( $itemId );
 		$item = $this->itemRetriever->getItem( $itemId );
@@ -47,7 +55,7 @@ class RemoveItemSiteLink {
 		$item->removeSiteLink( $siteId );
 		$this->itemUpdater->update(
 			$item, // @phan-suppress-current-line PhanTypeMismatchArgumentNullable
-			new EditMetadata( $request->getEditTags(), $request->isBot(), new SiteLinkEditSummary() )
+			new EditMetadata( $editMetadata->getTags(), $editMetadata->isBot(), new SiteLinkEditSummary() )
 		);
 	}
 
