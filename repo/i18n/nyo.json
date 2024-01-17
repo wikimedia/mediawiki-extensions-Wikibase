@@ -5,5 +5,8 @@
 		]
 	},
 	"wikibase-edit": "hindura",
-	"wikibase-description-empty": "Ensoborra teroho"
+	"wikibase-add": "taho",
+	"wikibase-label-empty": "Tiharoho manyiikirizo",
+	"wikibase-description-empty": "Ensoborra teroho",
+	"wikibase-sitelinks-special": "Entembura zindi"
 }
