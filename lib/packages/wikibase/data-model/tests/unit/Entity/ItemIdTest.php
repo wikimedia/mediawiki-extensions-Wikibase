@@ -3,7 +3,6 @@
 namespace Wikibase\DataModel\Tests\Entity;
 
 use InvalidArgumentException;
-use MediaWikiUnitTestCase;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
@@ -15,7 +14,7 @@ use Wikibase\DataModel\Entity\ItemId;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ItemIdTest extends MediaWikiUnitTestCase {
+class ItemIdTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider idSerializationProvider
