@@ -9,6 +9,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\SiteLinkSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemSiteLink\GetItemSiteLink;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemSiteLink\GetItemSiteLinkRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemSiteLink\GetItemSiteLinkResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
@@ -51,6 +52,8 @@ class GetItemSiteLinkRouteHandler extends SimpleHandler {
 			return $this->newSuccessHttpResponse(
 				$this->useCase->execute( new GetItemSiteLinkRequest( $itemId, $siteId ) )
 			);
+		} catch ( ItemRedirect $redirect ) {
+			return $this->newRedirectHttpResponse( $redirect, $siteId );
 		} catch ( UseCaseError $e ) {
 			return $this->responseFactory->newErrorResponseFromException( $e );
 		}
@@ -86,6 +89,20 @@ class GetItemSiteLinkRouteHandler extends SimpleHandler {
 				json_encode( $this->siteLinkSerializer->serialize( $useCaseResponse->getSiteLink() ), JSON_UNESCAPED_SLASHES )
 			)
 		);
+
+		return $httpResponse;
+	}
+
+	private function newRedirectHttpResponse( ItemRedirect $redirect, string $siteId ): Response {
+		$httpResponse = $this->getResponseFactory()->create();
+		$httpResponse->setHeader(
+			'Location',
+			$this->getRouteUrl( [
+				self::ITEM_ID_PATH_PARAM => $redirect->getRedirectTargetId(),
+				self::SITE_ID_PATH_PARAM => $siteId,
+			] )
+		);
+		$httpResponse->setStatus( 308 );
 
 		return $httpResponse;
 	}

@@ -8,6 +8,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItemSiteLink\GetItemSiteLink;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemSiteLink\GetItemSiteLinkRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\ReadModel\SiteLink;
 use Wikibase\Repo\RestApi\Domain\Services\SiteLinkRetriever;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
@@ -75,6 +76,21 @@ class GetItemSiteLinkTest extends TestCase {
 			$this->assertSame( UseCaseError::INVALID_ITEM_ID, $e->getErrorCode() );
 			$this->assertSame( 'Not a valid item ID: X321', $e->getErrorMessage() );
 			$this->assertSame( [], $e->getErrorContext() );
+		}
+	}
+
+	public function testGivenItemNotFoundOrRedirect_throws(): void {
+		$expectedException = $this->createStub( UseCaseException::class );
+
+		$this->getLatestRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
+		$this->getLatestRevisionMetadata->method( 'execute' )
+			->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase()->execute( new GetItemSiteLinkRequest( 'Q999999', TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0] ) );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( $expectedException, $e );
 		}
 	}
 
