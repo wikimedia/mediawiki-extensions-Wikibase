@@ -69,7 +69,7 @@ class UseCaseError extends UseCaseException {
 	public const STATEMENT_DATA_INVALID_FIELD = 'statement-data-invalid-field';
 	public const STATEMENT_DATA_MISSING_FIELD = 'statement-data-missing-field';
 	public const STATEMENT_NOT_FOUND = 'statement-not-found';
-	public const SITELINK_NOT_FOUND = 'sitelink-not-defined';
+	public const SITELINK_NOT_DEFINED = 'sitelink-not-defined';
 	public const UNEXPECTED_ERROR = 'unexpected-error';
 
 	public const CONTEXT_ACTUAL_VALUE = 'actual-value';
@@ -166,7 +166,7 @@ class UseCaseError extends UseCaseException {
 		self::STATEMENT_DATA_INVALID_FIELD => [ self::CONTEXT_PATH, self::CONTEXT_VALUE ],
 		self::STATEMENT_DATA_MISSING_FIELD => [ self::CONTEXT_PATH ],
 		self::STATEMENT_NOT_FOUND => [],
-		self::SITELINK_NOT_FOUND => [],
+		self::SITELINK_NOT_DEFINED => [],
 		self::UNEXPECTED_ERROR => [],
 	];
 
