@@ -4,13 +4,13 @@ namespace Wikibase\Lib\Store;
 
 use Exception;
 use MediaWiki\Status\Status;
-use MWException;
+use RuntimeException;
 
 /**
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class StorageException extends MWException {
+class StorageException extends RuntimeException {
 
 	/**
 	 * @var Status|null

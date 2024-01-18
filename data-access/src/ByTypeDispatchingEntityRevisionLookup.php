@@ -23,7 +23,6 @@ use Wikimedia\Assert\Assert;
  *  - Wikibase\Lib\Store\EntityRevisionLookup;
  *   - Wikibase\Lib\Store\RevisionedUnresolvedRedirectException
  *   - Wikibase\Lib\Store\StorageException
- *    - MWException
  *    - Status
  *  - Wikibase\Lib\Store\LatestRevisionIdResult;
  *
