@@ -44,11 +44,13 @@ describe( newRemoveItemSiteLinkRequestBuilder().getRouteDescription(), () => {
 		it( 'can DELETE a sitelink with edit metadata provided', async () => {
 			const user = await action.robby(); // robby is a bot
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test' );
+			const comment = 'removed a bad sitelink!';
 
 			const response = await newRemoveItemSiteLinkRequestBuilder( testItemId, siteId )
 				.withUser( user )
 				.withJsonBodyParam( 'bot', true )
 				.withJsonBodyParam( 'tags', [ tag ] )
+				.withJsonBodyParam( 'comment', comment )
 				.assertValidRequest()
 				.makeRequest();
 
@@ -57,6 +59,10 @@ describe( newRemoveItemSiteLinkRequestBuilder().getRouteDescription(), () => {
 			const editMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 			assert.include( editMetadata.tags, tag );
 			assert.property( editMetadata, 'bot' );
+			assert.strictEqual(
+				editMetadata.comment,
+				`/* wbsetsitelink-remove:1|${siteId} */ ${linkedArticle}, ${comment}`
+			);
 		} );
 	} );
 

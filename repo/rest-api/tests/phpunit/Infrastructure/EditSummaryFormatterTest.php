@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\RestApi\Infrastructure;
 
 use Generator;
 use MediaWikiLangTestCase;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Tests\NewStatement;
@@ -14,6 +15,7 @@ use Wikibase\Repo\RestApi\Domain\Model\DescriptionsEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\LabelEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\SiteLinkEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
 use Wikibase\Repo\RestApi\Infrastructure\TermsEditSummaryToFormattableSummaryConverter;
@@ -33,6 +35,7 @@ class EditSummaryFormatterTest extends MediaWikiLangTestCase {
 	 * @dataProvider descriptionEditSummaryProvider
 	 * @dataProvider aliasesInLanguageEditSummaryProvider
 	 * @dataProvider statementEditSummaryProvider
+	 * @dataProvider siteLinkEditSummaryProvider
 	 */
 	public function testFormat( EditSummary $editSummary, string $formattedSummary ): void {
 		$editSummaryFormatter = new EditSummaryFormatter(
@@ -159,6 +162,19 @@ class EditSummaryFormatterTest extends MediaWikiLangTestCase {
 				NewStatement::noValueFor( 'P123' )->build()
 			),
 			'/* wbsetclaim-create:1||1 */ [[Property:P123]]: no value',
+		];
+	}
+
+	public function siteLinkEditSummaryProvider(): Generator {
+		$userComment = 'user comment';
+		$siteId = 'enwiki';
+		$article = 'Potato';
+		yield 'remove sitelink' => [
+			SiteLinkEditSummary::newRemoveSummary(
+				$userComment,
+				new SiteLink( $siteId, $article )
+			),
+			"/* wbsetsitelink-remove:1|$siteId */ $article, $userComment",
 		];
 	}
 
