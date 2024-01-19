@@ -6,7 +6,6 @@ use MediaWiki\Request\FauxRequest;
 use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
-use MediaWiki\User\UserIdentity;
 use MediaWikiIntegrationTestCase;
 use ObjectCache;
 use ReflectionMethod;
@@ -41,19 +40,6 @@ use Wikimedia\TestingAccessWrapper;
  */
 class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 
-	private function getUser( $name ) {
-		$user = User::newFromName( $name );
-
-		if ( $user->getId() === 0 ) {
-			$user = User::createNew( $user->getName() );
-		}
-
-		return $user;
-	}
-
-	/**
-	 * @return EntityTitleStoreLookup
-	 */
 	private function getEntityTitleLookup() {
 		$titleLookup = $this->createMock( EntityTitleStoreLookup::class );
 
@@ -125,7 +111,7 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 		MockRepository $mockRepository,
 		?EntityId $entityId,
 		EntityTitleStoreLookup $titleLookup,
-		User $user = null,
+		User $user,
 		$baseRevId = 0,
 		array $permissions = null,
 		$editFilterHookRunner = null,
@@ -133,7 +119,7 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 	) {
 		$context = new RequestContext();
 		$context->setRequest( new FauxRequest() );
-		$context->setUser( $user ?? User::newFromName( 'EditEntityTestUser' ) );
+		$context->setUser( $user );
 
 		$permissionChecker = $this->getEntityPermissionChecker( $permissions );
 		$repoSettings = WikibaseRepo::getSettings();
@@ -156,14 +142,11 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	/**
-	 * @return MockRepository
-	 */
-	private function getMockRepository() {
+	private function getMockRepository( User $user = null, User $otherUser = null ): MockRepository {
 		$repo = new MockRepository();
 
-		$user = $this->getUser( 'EditEntityTestUser1' );
-		$otherUser = $this->getUser( 'EditEntityTestUser2' );
+		$user ??= $this->getTestUser()->getUser();
+		$otherUser ??= $this->getTestUser( [ 'bot' ] )->getUser();
 
 		/** @var Item $item */
 		$item = new Item( new ItemId( 'Q17' ) );
@@ -279,15 +262,13 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 		$expectedFix,
 		array $expectedData = null
 	) {
-		$repo = $this->getMockRepository();
+		$user = $this->getTestUser()->getUser();
+		$repo = $this->getMockRepository( $user );
 
 		$entityId = new ItemId( 'Q17' );
 		$revision = $repo->getEntityRevision( $entityId, $baseRevisionId );
 		/** @var Item $item */
 		$item = $revision->getEntity();
-
-		// NOTE: The user name must be the one used in getMockRepository().
-		$user = $this->getUser( 'EditEntityTestUser1' );
 
 		// change entity ----------------------------------
 		if ( $inputData === null ) {
@@ -357,7 +338,7 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 	public function testAttemptSaveWithLateConflict() {
 		$repo = $this->getMockRepository();
 
-		$user = $this->getUser( 'EditEntityTestUser' );
+		$user = $this->getTestUser()->getUser();
 
 		// create item
 		$entity = new Item( new ItemId( 'Q42' ) );
@@ -377,7 +358,7 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 		$entity2 = new Item( new ItemId( 'Q42' ) );
 		$entity2->setLabel( 'en', 'Toast' );
 
-		$user2 = $this->getUser( 'EditEntityTestUser2' );
+		$user2 = $this->getTestUser()->getUser();
 		$repo->putEntity( $entity2, 0, 0, $user2 );
 
 		// now try to save the original edit. The conflict should still be detected
@@ -418,7 +399,7 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 	public function testCheckEditPermissions( $permissions, $create, $expectedOK ) {
 		$repo = $this->getMockRepository();
 
-		$user = $this->getUser( 'EditEntityTestUser' );
+		$user = $this->getTestUser()->getUser();
 		$item = $this->prepareItemForPermissionCheck( $user, $repo, $create );
 
 		$titleLookup = $this->getEntityTitleLookup();
@@ -436,7 +417,7 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 		$repo = $this->getMockRepository();
 		$titleLookup = $this->getEntityTitleLookup();
 
-		$user = $this->getUser( 'EditEntityTestUser' );
+		$user = $this->getTestUser()->getUser();
 		$item = $this->prepareItemForPermissionCheck( $user, $repo, $create );
 
 		$token = $user->getEditToken();
@@ -450,7 +431,7 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 
 	public function testCheckLocalEntityTypes() {
 		$item = new Item();
-		$user = $this->getUser( 'EditEntityTestUser' );
+		$user = $this->getTestUser()->getUser();
 		$token = $user->getEditToken();
 
 		$edit = $this->makeEditEntity(
@@ -467,30 +448,6 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 		$status = $edit->attemptSave( $item, 'testing', EDIT_NEW, $token );
 		$this->assertStatusNotOK( $status );
 		$this->assertStatusMessage( 'wikibase-error-entity-not-local', $status );
-	}
-
-	/**
-	 * Forces the group membership of the given user
-	 *
-	 * @param UserIdentity $user
-	 * @param array $groups
-	 */
-	private function setUserGroups( UserIdentity $user, array $groups ) {
-		if ( $user->getId() === 0 ) {
-			$user = User::createNew( $user->getName() );
-		}
-
-		$userGroupManager = $this->getServiceContainer()->getUserGroupManager();
-		$remove = array_diff( $userGroupManager->getUserGroups( $user ), $groups );
-		$add = array_diff( $groups, $userGroupManager->getUserGroups( $user ) );
-
-		foreach ( $remove as $group ) {
-			$userGroupManager->removeUserFromGroup( $user, $group );
-		}
-
-		foreach ( $add as $group ) {
-			$userGroupManager->addUserToGroup( $user, $group );
-		}
 	}
 
 	public static function provideAttemptSaveRateLimit(): iterable {
@@ -606,8 +563,7 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 		// make sure we have a fresh cache
 		ObjectCache::clear();
 
-		$user = $this->getUser( 'UserForTestAttemptSaveRateLimit' );
-		$this->setUserGroups( $user, $groups );
+		$user = $this->getTestUser( $groups )->getUser();
 
 		$items = [];
 		$titleLookup = $this->getEntityTitleLookup();
@@ -663,7 +619,7 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 	 */
 	public function testIsTokenOk( $token, $shouldWork ) {
 		$repo = $this->getMockRepository();
-		$user = $this->getUser( 'EditEntityTestUser' );
+		$user = $this->getTestUser()->getUser();
 
 		$item = new Item();
 		$titleLookup = $this->getEntityTitleLookup();
@@ -756,7 +712,7 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 	public function testAttemptSaveWatch( $watchdefault, $watchcreations, $new, $watched, $watch, $expected ) {
 		$repo = $this->getMockRepository();
 
-		$user = $this->getUser( 'EditEntityTestUser2' );
+		$user = $this->getTestUser()->getUser();
 
 		if ( $user->getId() === 0 ) {
 			$user->addToDatabase();
@@ -786,7 +742,7 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 	public function testAttemptSaveUnresolvedRedirect() {
 		$repo = $this->getMockRepository();
 
-		$user = $this->getUser( 'EditEntityTestUser2' );
+		$user = $this->getTestUser()->getUser();
 
 		if ( $user->getId() === 0 ) {
 			$user->addToDatabase();
@@ -810,19 +766,20 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 		$repo = $this->getMockRepository();
 		$titleLookup = $this->getEntityTitleLookup();
 		$item = new Item();
+		$user = $this->getTestUser()->getUser();
 
 		$isNew = new ReflectionMethod( MediaWikiEditEntity::class, 'isNew' );
 		$isNew->setAccessible( true );
 
-		$edit = $this->makeEditEntity( $repo, $item->getId(), $titleLookup );
+		$edit = $this->makeEditEntity( $repo, $item->getId(), $titleLookup, $user );
 		$this->assertTrue( $isNew->invoke( $edit ), 'New entity: No id' );
 
 		$repo->assignFreshId( $item );
-		$edit = $this->makeEditEntity( $repo, $item->getId(), $titleLookup );
+		$edit = $this->makeEditEntity( $repo, $item->getId(), $titleLookup, $user );
 		$this->assertTrue( $isNew->invoke( $edit ), "New entity: Has an id, but doesn't exist, yet" );
 
-		$repo->saveEntity( $item, 'testIsNew', $this->getUser( 'EditEntityTestUser1' ) );
-		$edit = $this->makeEditEntity( $repo, $item->getId(), $titleLookup );
+		$repo->saveEntity( $item, 'testIsNew', $user );
+		$edit = $this->makeEditEntity( $repo, $item->getId(), $titleLookup, $user );
 		$this->assertFalse( $isNew->invoke( $edit ), "Entity exists" );
 	}
 
@@ -835,16 +792,16 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider provideHookRunnerReturnStatus
 	 */
 	public function testEditFilterHookRunnerInteraction( Status $hookReturnStatus ) {
+		$user = $this->getTestUser()->getUser();
 		$edit = $this->makeEditEntity(
 			$this->getMockRepository(),
 			null,
 			$this->getEntityTitleLookup(),
-			null,
+			$user,
 			0,
 			null,
 			$this->getMockEditFitlerHookRunner( $hookReturnStatus, $this->once() )
 		);
-		$user = $this->getUser( 'EditEntityTestUser' );
 
 		$saveStatus = $edit->attemptSave(
 			new Item(),
@@ -858,12 +815,13 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 
 	public function testSaveWithTags() {
 		$repo = $this->getMockRepository();
+		$user = $this->getTestUser()->getUser();
 		$edit = $this->makeEditEntity(
 			$repo,
 			null,
-			$this->getEntityTitleLookup()
+			$this->getEntityTitleLookup(),
+			$user
 		);
-		$user = $this->getUser( 'EditEntityTestUser' );
 
 		$status = $edit->attemptSave(
 			new Item(),
