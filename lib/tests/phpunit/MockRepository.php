@@ -60,7 +60,7 @@ class MockRepository implements
 	private $siteLinkStore;
 
 	/**
-	 * Entity id serialization => array of EntityRevision
+	 * Entity id serialization => array of [ EntityRevision, user name ]
 	 *
 	 * @var array[]
 	 */
@@ -154,7 +154,6 @@ class MockRepository implements
 			$revisionId = 0;
 		}
 
-		/** @var EntityRevision[] $revisions */
 		$revisions = $this->entities[$key];
 
 		if ( $revisionId === 0 ) {
@@ -164,7 +163,8 @@ class MockRepository implements
 			throw new StorageException( "no such revision for entity $key: $revisionId" );
 		}
 
-		$revision = $revisions[$revisionId];
+		/** @var EntityRevision $revision */
+		[ $revision ] = $revisions[$revisionId];
 		$revision = new EntityRevision( // return a copy!
 			$revision->getEntity()->copy(), // return a copy!
 			$revision->getRevisionId(),
@@ -258,9 +258,6 @@ class MockRepository implements
 			if ( $user instanceof UserIdentity ) {
 				$user = $user->getName();
 			}
-
-			// just glue the user on here...
-			$revision->user = $user;
 		}
 
 		$key = $entity->getId()->getSerialization();
@@ -269,7 +266,7 @@ class MockRepository implements
 		if ( !array_key_exists( $key, $this->entities ) ) {
 			$this->entities[$key] = [];
 		}
-		$this->entities[$key][$revisionId] = $revision;
+		$this->entities[$key][$revisionId] = [ $revision, $user ];
 		ksort( $this->entities[$key] );
 
 		return $revision;
@@ -545,9 +542,9 @@ class MockRepository implements
 		}
 
 		/** @var EntityRevision $revision */
-		foreach ( $this->entities[$key] as $revision ) {
+		foreach ( $this->entities[$key] as [ $revision, $revisionUserName ] ) {
 			if ( $revision->getRevisionId() >= $lastRevisionId ) {
-				if ( isset( $revision->user ) && $revision->user !== $user->getName() ) {
+				if ( $revisionUserName !== null && $revisionUserName !== $user->getName() ) {
 					return false;
 				}
 			}
