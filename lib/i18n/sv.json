@@ -25,6 +25,7 @@
 	"wikibase-error-ui-no-external-page": "En sida \"$2\" kunde inte hittas på \"$1\".",
 	"wikibase-error-ui-edit-conflict": "Samma värde redigerades under tiden och orsakade en redigeringskonflikt. Vänligen ladda om sidan.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (translittererad)",
+	"wikibase-language-name-for-terms-mul": "standardvärden (mul)",
 	"wikibase-quantitydetails-amount": "Mängd",
 	"wikibase-quantitydetails-upperbound": "Övre gräns",
 	"wikibase-quantitydetails-lowerbound": "Undre gräns",
