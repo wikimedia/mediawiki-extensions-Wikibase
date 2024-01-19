@@ -72,8 +72,7 @@ class MockEntityRevisionLookup implements EntityRevisionLookup {
 		$revisions = $this->entities[$key];
 
 		if ( $revisionId === 0 ) {
-			$revisionIds = array_keys( $revisions );
-			$revisionId = end( $revisionIds );
+			$revisionId = array_key_last( $revisions );
 		} elseif ( !isset( $revisions[$revisionId] ) ) {
 			throw new StorageException( "no such revision for entity $key: $revisionId" );
 		}
