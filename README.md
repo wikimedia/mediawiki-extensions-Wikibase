@@ -59,7 +59,7 @@ git submodule update --init
 
 ### Development
 
-Wikibase uses tools to ensure the quality of software developed. To invoke these tools, inside the Wikibase folder, run
+Wikibase uses tools to ensure the quality of software developed. To invoke these tools, inside the Wikibase folder, run:
 
 ```bash
 composer install
