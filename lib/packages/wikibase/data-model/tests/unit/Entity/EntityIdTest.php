@@ -3,7 +3,6 @@
 namespace Wikibase\DataModel\Tests\Entity;
 
 use InvalidArgumentException;
-use MediaWikiUnitTestCase;
 use ReflectionClass;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
@@ -22,7 +21,7 @@ use Wikibase\DataModel\Entity\SerializableEntityId;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class EntityIdTest extends MediaWikiUnitTestCase {
+class EntityIdTest extends \PHPUnit\Framework\TestCase {
 
 	public static function instanceProvider() {
 		$ids = [];

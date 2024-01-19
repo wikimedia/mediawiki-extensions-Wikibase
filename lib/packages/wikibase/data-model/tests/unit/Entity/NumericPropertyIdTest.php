@@ -3,7 +3,6 @@
 namespace Wikibase\DataModel\Tests\Entity;
 
 use InvalidArgumentException;
-use MediaWikiUnitTestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 
 /**
@@ -14,7 +13,7 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
  *
  * @license GPL-2.0-or-later
  */
-class NumericPropertyIdTest extends MediaWikiUnitTestCase {
+class NumericPropertyIdTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider idSerializationProvider
