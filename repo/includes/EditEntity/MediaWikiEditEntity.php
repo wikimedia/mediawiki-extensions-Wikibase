@@ -734,18 +734,7 @@ class MediaWikiEditEntity implements EditEntity {
 			return $this->status;
 		}
 
-		try {
-			$hookStatus = $this->editFilterHookRunner->run( $newEntity, $this->context, $summary );
-		} catch ( EntityContentTooBigException $ex ) {
-			$this->status->setResult( false, [ 'errorFlags' => $this->errorType ] );
-			$this->status->error( wfMessage( 'wikibase-error-entity-too-big' )->sizeParams( $this->maxSerializedEntitySize * 1024 ) );
-			return $this->status;
-		}
-		if ( !$hookStatus->isOK() ) {
-			$this->errorType |= EditEntity::FILTERED;
-		}
-		$this->status->merge( $hookStatus );
-
+		$this->checkEditFilter( $newEntity, $summary );
 		if ( !$this->status->isOK() ) {
 			$this->status->setResult( false, [ 'errorFlags' => $this->errorType ] );
 			return $this->status;
@@ -790,6 +779,22 @@ class MediaWikiEditEntity implements EditEntity {
 		}
 
 		return $this->status;
+	}
+
+	/**
+	 * Check the entity against the {@link EditFilterHookRunner} and update $this->status accordingly.
+	 */
+	private function checkEditFilter( EntityDocument $newEntity, string $summary ): void {
+		try {
+			$hookStatus = $this->editFilterHookRunner->run( $newEntity, $this->context, $summary );
+		} catch ( EntityContentTooBigException $ex ) {
+			$this->status->error( wfMessage( 'wikibase-error-entity-too-big' )->sizeParams( $this->maxSerializedEntitySize * 1024 ) );
+			return;
+		}
+		if ( !$hookStatus->isOK() ) {
+			$this->errorType |= EditEntity::FILTERED;
+		}
+		$this->status->merge( $hookStatus );
 	}
 
 	/**
