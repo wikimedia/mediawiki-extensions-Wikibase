@@ -5,11 +5,15 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\RemoveItemSiteLink;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Tests\NewItem;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemSiteLink\RemoveItemSiteLink;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemSiteLink\RemoveItemSiteLinkRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\SiteLinkEditSummary;
+use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryItemRepository;
 
 /**
@@ -21,6 +25,19 @@ use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryItemRepository
  */
 class RemoveItemSiteLinkTest extends TestCase {
 
+	private ItemRetriever $itemRetriever;
+
+	private ItemUpdater $itemUpdater;
+
+	private AssertItemExists $assertItemExists;
+
+	protected function setUp(): void {
+		parent::setUp();
+		$this->itemRetriever = $this->createStub( ItemRetriever::class );
+		$this->itemUpdater = $this->createStub( ItemUpdater::class );
+		$this->assertItemExists = $this->createStub( AssertItemExists::class );
+	}
+
 	public function testHappyPath(): void {
 		$itemId = new ItemId( 'Q123' );
 		$siteId = 'enwiki';
@@ -30,9 +47,11 @@ class RemoveItemSiteLinkTest extends TestCase {
 		$item = NewItem::withId( $itemId )->andSiteLink( $siteId, 'dog page' )->build();
 		$itemRepo = new InMemoryItemRepository();
 		$itemRepo->addItem( $item );
+		$this->itemRetriever = $itemRepo;
+		$this->itemUpdater = $itemRepo;
 
 		$request = new RemoveItemSiteLinkRequest( "$itemId", $siteId, $tags, $isBot, null, null );
-		( new RemoveItemSiteLink( $itemRepo, $itemRepo ) )->execute( $request );
+		$this->newUseCase()->execute( $request );
 
 		$this->assertFalse( $itemRepo->getItem( $itemId )->hasLinkToSite( $siteId ) );
 		$this->assertEquals(
@@ -47,15 +66,38 @@ class RemoveItemSiteLinkTest extends TestCase {
 
 		$itemRepo = new InMemoryItemRepository();
 		$itemRepo->addItem( NewItem::withId( $itemId )->build() );
+		$this->itemRetriever = $itemRepo;
+		$this->itemUpdater = $itemRepo;
 
 		try {
-			( new RemoveItemSiteLink( $itemRepo, $itemRepo ) )
+			$this->newUseCase()
 				->execute( new RemoveItemSiteLinkRequest( "$itemId", $siteId, [], false, null, null ) );
 			$this->fail( 'expected exception was not thrown' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::SITELINK_NOT_DEFINED, $e->getErrorCode() );
 			$this->assertSame( "No sitelink found for the ID: $itemId for the site $siteId", $e->getErrorMessage() );
 		}
+	}
+
+	public function testGivenItemNotFoundOrRedirect_throws(): void {
+		$itemId = new ItemId( 'Q123' );
+		$siteId = 'enwiki';
+
+		$expectedException = $this->createStub( UseCaseException::class );
+		$this->assertItemExists = $this->createStub( AssertItemExists::class );
+		$this->assertItemExists->method( 'execute' )->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase()
+				->execute( new RemoveItemSiteLinkRequest( "$itemId", $siteId, [], false, null, null ) );
+			$this->fail( 'expected exception was not thrown' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
+	private function newUseCase(): RemoveItemSiteLink {
+		return new RemoveItemSiteLink( $this->itemRetriever, $this->itemUpdater, $this->assertItemExists );
 	}
 
 }

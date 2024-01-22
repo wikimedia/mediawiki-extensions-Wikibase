@@ -6,6 +6,7 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
 use MediaWiki\Rest\Validator\BodyValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemSiteLink\RemoveItemSiteLink;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemSiteLink\RemoveItemSiteLinkRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
@@ -30,7 +31,7 @@ class RemoveItemSiteLinkRouteHandler extends SimpleHandler {
 
 	public static function factory(): self {
 		return new self(
-			new RemoveItemSiteLink( WbRestApi::getItemDataRetriever(), WbRestApi::getItemUpdater() ),
+			new RemoveItemSiteLink( WbRestApi::getItemDataRetriever(), WbRestApi::getItemUpdater(), WbRestApi::getAssertItemExists() ),
 			new ResponseFactory()
 		);
 	}
@@ -57,6 +58,11 @@ class RemoveItemSiteLinkRouteHandler extends SimpleHandler {
 			return $this->newSuccessResponse();
 		} catch ( UseCaseError $e ) {
 			return $this->responseFactory->newErrorResponseFromException( $e );
+		} catch ( ItemRedirect $e ) {
+			return $this->responseFactory->newErrorResponse(
+				UseCaseError::ITEM_REDIRECTED,
+				"Item $itemId has been merged into {$e->getRedirectTargetId()}."
+			);
 		}
 	}
 
