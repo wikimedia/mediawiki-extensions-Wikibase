@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Usage;
 
+use Parser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 
@@ -99,4 +100,11 @@ abstract class UsageAccumulator {
 	 */
 	abstract public function getUsages();
 
+	/**
+	 * Returns true if the UsageAccumulator has cached a reference to a different
+	 * parser output to that which is currently active in the parser provided.
+	 */
+	public function hasStoredReferenceToDifferentParse( Parser $parser ): bool {
+		return false;
+	}
 }

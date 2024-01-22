@@ -19,10 +19,12 @@ class ClientNoBadUsageTest extends NoBadUsageTestBase {
 			// don’t reference repo in client
 			'WikibaseRepo::' => [
 				'config/WikibaseClient.default.php' => 2, // all guarded by thisWikiIsTheRepo
+				'tests/phpunit/integration/includes/Usage/ParsoidUsageTrackingTest.php' => true, // to test T255706
 			],
 			'WikibaseRepo.' => [],
 			'Wikibase\\Repo\\' => [
 				'config/WikibaseClient.default.php' => 1, // see above
+				'tests/phpunit/integration/includes/Usage/ParsoidUsageTrackingTest.php' => true, // to test T255706
 			],
 			'Wikibase\\\\Repo\\\\' => [],
 			// don’t use MediaWiki RDBMS – use our RDBMS instead (DomainDb etc.)

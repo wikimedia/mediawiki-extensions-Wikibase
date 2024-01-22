@@ -37,7 +37,7 @@ class UsageAccumulatorFactory {
 		$this->entityRedirectTargetLookup = $entityRedirectTargetLookup;
 	}
 
-	public function newFromParserOutput( ParserOutput $parserOutput ): UsageAccumulator {
+	public function newFromParserOutput( ParserOutput $parserOutput ): ParserUsageAccumulator {
 		return new RedirectTrackingUsageAccumulator(
 			new ParserOutputUsageAccumulator(
 				$parserOutput,

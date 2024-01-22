@@ -3,6 +3,7 @@
 namespace Wikibase\Client\DataAccess\Scribunto;
 
 use Language;
+use Parser;
 use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -193,4 +194,7 @@ class WikibaseLuaEntityBindings {
 		return $this->language->getCode();
 	}
 
+	public function hasStoredReferenceToDifferentParse( Parser $parser ): bool {
+		return $this->usageAccumulator->hasStoredReferenceToDifferentParse( $parser );
+	}
 }

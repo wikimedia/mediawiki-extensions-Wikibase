@@ -12,18 +12,13 @@ use MediaWiki\Parser\ParserOutput;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class ParserOutputUsageAccumulator extends UsageAccumulator {
+class ParserOutputUsageAccumulator extends ParserUsageAccumulator {
 
 	/**
 	 * Key used to store data in ParserOutput.  Exported for use by unit tests.
 	 * @var string
 	 */
 	public const EXTENSION_DATA_KEY = 'wikibase-entity-usage';
-
-	/**
-	 * @var ParserOutput
-	 */
-	private $parserOutput;
 
 	/**
 	 * @var EntityUsageFactory
@@ -40,7 +35,7 @@ class ParserOutputUsageAccumulator extends UsageAccumulator {
 		EntityUsageFactory $entityUsageFactory,
 		UsageDeduplicator $deduplicator
 	) {
-		$this->parserOutput = $parserOutput;
+		parent::__construct( $parserOutput );
 		$this->usageDeduplicator = $deduplicator;
 		$this->entityUsageFactory = $entityUsageFactory;
 	}
@@ -51,7 +46,7 @@ class ParserOutputUsageAccumulator extends UsageAccumulator {
 	 * @param EntityUsage $usage
 	 */
 	public function addUsage( EntityUsage $usage ) {
-		$this->parserOutput->appendExtensionData(
+		$this->getParserOutput()->appendExtensionData(
 			self::EXTENSION_DATA_KEY, $usage->getIdentityString()
 		);
 	}
@@ -62,7 +57,7 @@ class ParserOutputUsageAccumulator extends UsageAccumulator {
 	 * @return EntityUsage[]
 	 */
 	public function getUsages() {
-		$usageIdentities = $this->parserOutput->getExtensionData( self::EXTENSION_DATA_KEY ) ?: [];
+		$usageIdentities = $this->getParserOutput()->getExtensionData( self::EXTENSION_DATA_KEY ) ?: [];
 
 		$usages = [];
 		foreach ( $usageIdentities as $usageIdentity => $value ) {
@@ -74,5 +69,4 @@ class ParserOutputUsageAccumulator extends UsageAccumulator {
 		}
 		return [];
 	}
-
 }
