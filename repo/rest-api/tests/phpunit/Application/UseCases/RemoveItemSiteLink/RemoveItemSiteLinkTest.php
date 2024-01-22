@@ -35,6 +35,8 @@ class RemoveItemSiteLinkTest extends TestCase {
 
 	private RemoveItemSiteLinkValidator $validator;
 
+	private const VALID_SITE = TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0];
+
 	protected function setUp(): void {
 		parent::setUp();
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
@@ -45,20 +47,19 @@ class RemoveItemSiteLinkTest extends TestCase {
 
 	public function testHappyPath(): void {
 		$itemId = new ItemId( 'Q123' );
-		$siteId = 'enwiki';
 		$isBot = true;
 		$tags = [];
 
-		$item = NewItem::withId( $itemId )->andSiteLink( $siteId, 'dog page' )->build();
+		$item = NewItem::withId( $itemId )->andSiteLink( self::VALID_SITE, 'dog page' )->build();
 		$itemRepo = new InMemoryItemRepository();
 		$itemRepo->addItem( $item );
 		$this->itemRetriever = $itemRepo;
 		$this->itemUpdater = $itemRepo;
 
-		$request = new RemoveItemSiteLinkRequest( "$itemId", $siteId, $tags, $isBot, null, null );
+		$request = new RemoveItemSiteLinkRequest( "$itemId", self::VALID_SITE, $tags, $isBot, null, null );
 		$this->newUseCase()->execute( $request );
 
-		$this->assertFalse( $itemRepo->getItem( $itemId )->hasLinkToSite( $siteId ) );
+		$this->assertFalse( $itemRepo->getItem( $itemId )->hasLinkToSite( self::VALID_SITE ) );
 		$this->assertEquals(
 			$itemRepo->getLatestRevisionEditMetadata( $itemId ),
 			new EditMetadata( $tags, $isBot, new SiteLinkEditSummary() )
@@ -67,7 +68,7 @@ class RemoveItemSiteLinkTest extends TestCase {
 
 	public function testGivenSiteLinkNotFound_throws(): void {
 		$itemId = new ItemId( 'Q123' );
-		$siteId = 'enwiki';
+		$siteId = self::VALID_SITE;
 
 		$itemRepo = new InMemoryItemRepository();
 		$itemRepo->addItem( NewItem::withId( $itemId )->build() );
@@ -86,7 +87,6 @@ class RemoveItemSiteLinkTest extends TestCase {
 
 	public function testGivenItemNotFoundOrRedirect_throws(): void {
 		$itemId = new ItemId( 'Q123' );
-		$siteId = 'enwiki';
 
 		$expectedException = $this->createStub( UseCaseException::class );
 		$this->assertItemExists = $this->createStub( AssertItemExists::class );
@@ -94,7 +94,7 @@ class RemoveItemSiteLinkTest extends TestCase {
 
 		try {
 			$this->newUseCase()
-				->execute( new RemoveItemSiteLinkRequest( "$itemId", $siteId, [], false, null, null ) );
+				->execute( new RemoveItemSiteLinkRequest( "$itemId", self::VALID_SITE, [], false, null, null ) );
 			$this->fail( 'expected exception was not thrown' );
 		} catch ( UseCaseException $e ) {
 			$this->assertSame( $expectedException, $e );
