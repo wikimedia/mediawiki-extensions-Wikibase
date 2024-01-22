@@ -8,12 +8,14 @@ use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemSiteLink\RemoveItemSiteLink;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemSiteLink\RemoveItemSiteLinkRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemSiteLink\RemoveItemSiteLinkValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\SiteLinkEditSummary;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryItemRepository;
 
 /**
@@ -31,11 +33,14 @@ class RemoveItemSiteLinkTest extends TestCase {
 
 	private AssertItemExists $assertItemExists;
 
+	private RemoveItemSiteLinkValidator $validator;
+
 	protected function setUp(): void {
 		parent::setUp();
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
 		$this->assertItemExists = $this->createStub( AssertItemExists::class );
+		$this->validator = new TestValidatingRequestDeserializer();
 	}
 
 	public function testHappyPath(): void {
@@ -96,8 +101,20 @@ class RemoveItemSiteLinkTest extends TestCase {
 		}
 	}
 
+	public function testInvalidRequest_throwsException(): void {
+		$expectedException = new UseCaseException( 'invalid-item-id' );
+		$this->validator = $this->createStub( RemoveItemSiteLinkValidator::class );
+		$this->validator->method( 'validateAndDeserialize' )->willThrowException( $expectedException );
+		try {
+			$this->newUseCase()->execute( $this->createStub( RemoveItemSiteLinkRequest::class ) );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
 	private function newUseCase(): RemoveItemSiteLink {
-		return new RemoveItemSiteLink( $this->itemRetriever, $this->itemUpdater, $this->assertItemExists );
+		return new RemoveItemSiteLink( $this->itemRetriever, $this->itemUpdater, $this->assertItemExists, $this->validator );
 	}
 
 }

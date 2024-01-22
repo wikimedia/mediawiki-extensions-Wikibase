@@ -31,7 +31,12 @@ class RemoveItemSiteLinkRouteHandler extends SimpleHandler {
 
 	public static function factory(): self {
 		return new self(
-			new RemoveItemSiteLink( WbRestApi::getItemDataRetriever(), WbRestApi::getItemUpdater(), WbRestApi::getAssertItemExists() ),
+			new RemoveItemSiteLink(
+				WbRestApi::getItemDataRetriever(),
+				WbRestApi::getItemUpdater(),
+				WbRestApi::getAssertItemExists(),
+				WbRestApi::getValidatingRequestDeserializer()
+			),
 			new ResponseFactory()
 		);
 	}
