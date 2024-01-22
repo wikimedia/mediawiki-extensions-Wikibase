@@ -5,6 +5,8 @@ namespace Wikibase\Repo\Tests;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;
+use MediaWiki\User\TempUser\CreateStatus;
+use MediaWiki\User\TempUser\TempUserCreator;
 use MediaWiki\User\User;
 use MediaWikiIntegrationTestCase;
 use ObjectCache;
@@ -136,6 +138,7 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 			$context,
 			$editFilterHookRunner ?? $this->getMockEditFitlerHookRunner(),
 			$this->getServiceContainer()->getUserOptionsLookup(),
+			$this->getServiceContainer()->getTempUserCreator(),
 			$repoSettings['maxSerializedEntitySize'],
 			$localEntityTypes,
 			$baseRevId
@@ -837,6 +840,72 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 		$entityRevision = $status->getValue()['revision'];
 		$tags = $repo->getLogEntry( $entityRevision->getRevisionId() )['tags'];
 		$this->assertSame( [ 'mw-replace' ], $tags );
+	}
+
+	public function testSaveWithAnonymousUser(): void {
+		$tempUserCreator = $this->createMock( TempUserCreator::class );
+		$tempUserCreator->method( 'shouldAutoCreate' )->willReturn( false );
+		$this->setService( 'TempUserCreator', $tempUserCreator );
+		$repo = $this->getMockRepository();
+		$services = $this->getServiceContainer();
+		$user = $services->getUserFactory()->newAnonymous();
+		$edit = $this->makeEditEntity(
+			$repo,
+			null,
+			$this->getEntityTitleLookup(),
+			$user
+		);
+
+		$status = $edit->attemptSave(
+			new Item(),
+			'summary',
+			0,
+			$user->getEditToken()
+		);
+		$this->assertStatusGood( $status );
+		/** @var EntityRevision $entityRevision */
+		$entityRevision = $status->getValue()['revision'];
+		$editWasMadeByUser = $repo->userWasLastToEdit(
+			$user,
+			$entityRevision->getEntity()->getId(),
+			$entityRevision->getRevisionId()
+		);
+		$this->assertTrue( $editWasMadeByUser, 'edit should have been made by $user' );
+		$this->assertNull( $status->getValue()['savedTempUser'], 'no savedTempUser' );
+	}
+
+	public function testSaveWithTempUser(): void {
+		$tempUserCreator = $this->createMock( TempUserCreator::class );
+		$tempUserCreator->method( 'shouldAutoCreate' )->willReturn( true );
+		$tempUser = $this->getTestUser()->getUser();
+		$tempUserCreator->method( 'create' )->willReturn( CreateStatus::newGood( $tempUser ) );
+		$this->setService( 'TempUserCreator', $tempUserCreator );
+		$repo = $this->getMockRepository();
+		$services = $this->getServiceContainer();
+		$anonUser = $services->getUserFactory()->newAnonymous();
+		$edit = $this->makeEditEntity(
+			$repo,
+			null,
+			$this->getEntityTitleLookup(),
+			$anonUser
+		);
+
+		$status = $edit->attemptSave(
+			new Item(),
+			'summary',
+			0,
+			$anonUser->getEditToken()
+		);
+		$this->assertStatusGood( $status );
+		/** @var EntityRevision $entityRevision */
+		$entityRevision = $status->getValue()['revision'];
+		$entityId = $entityRevision->getEntity()->getId();
+		$revisionId = $entityRevision->getRevisionId();
+		$editWasMadeByAnonUser = $repo->userWasLastToEdit( $anonUser, $entityId, $revisionId );
+		$editWasMadeByTempUser = $repo->userWasLastToEdit( $tempUser, $entityId, $revisionId );
+		$this->assertTrue( $editWasMadeByTempUser, 'edit should have been made by $tempUser' );
+		$this->assertFalse( $editWasMadeByAnonUser, 'edit should not have been made by $anonUser' );
+		$this->assertSame( $tempUser, $status->getValue()['savedTempUser'] );
 	}
 
 }

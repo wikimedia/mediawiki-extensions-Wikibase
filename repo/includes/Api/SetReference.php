@@ -195,6 +195,7 @@ class SetReference extends ApiBase {
 		$this->resultBuilder->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
 		$this->resultBuilder->markSuccess();
 		$this->resultBuilder->addReference( $newReference );
+		$this->resultBuilder->addTempUser( $status );
 	}
 
 	private function validateParameters( array $params ): void {

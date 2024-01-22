@@ -153,6 +153,7 @@ class CreateClaim extends ApiBase {
 		$this->resultBuilder->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
 		$this->resultBuilder->markSuccess();
 		$this->resultBuilder->addStatement( $statement );
+		$this->resultBuilder->addTempUser( $status );
 	}
 
 	/**

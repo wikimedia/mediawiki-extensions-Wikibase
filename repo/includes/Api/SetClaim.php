@@ -217,6 +217,7 @@ class SetClaim extends ApiBase {
 		$this->resultBuilder->markSuccess();
 		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable statement given, guid already validated
 		$this->resultBuilder->addStatement( $statement );
+		$this->resultBuilder->addTempUser( $status );
 
 		$this->stats->increment( 'wikibase.repo.api.wbsetclaim.total' );
 		if ( $index !== null ) {

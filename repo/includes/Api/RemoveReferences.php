@@ -162,6 +162,7 @@ class RemoveReferences extends ApiBase {
 
 		$status = $this->entitySavingHelper->attemptSaveEntity( $entity, $summary, $params, $this->getContext() );
 		$this->resultBuilder->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
+		$this->resultBuilder->addTempUser( $status );
 		$this->resultBuilder->markSuccess();
 	}
 

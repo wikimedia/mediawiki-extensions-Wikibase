@@ -11,6 +11,7 @@ use InvalidArgumentException;
 use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;
+use MediaWiki\User\UserIdentity;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -1727,5 +1728,35 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 		$data = $result->getResultData();
 
 		$this->assertEquals( $expected, $data );
+	}
+
+	public function testAddTempUser_created(): void {
+		$result = $this->getDefaultResult();
+		$resultBuilder = $this->getResultBuilder( $result );
+		$tempUserName = '*Fake unregistered user 1';
+		$status = Status::newGood( [
+			'savedTempUser' => $this->createConfiguredMock( UserIdentity::class, [
+				'getName' => $tempUserName,
+			] ),
+		] );
+
+		$resultBuilder->addTempUser( $status );
+
+		$expected = [
+			'tempusercreated' => $tempUserName,
+			'_type' => 'assoc',
+		];
+		$this->assertSame( $expected, $result->getResultData() );
+	}
+
+	public function testAddTempUser_notCreated(): void {
+		$result = $this->getDefaultResult();
+		$resultBuilder = $this->getResultBuilder( $result );
+		$status = Status::newGood( [ 'savedTempUser' => null ] );
+
+		$resultBuilder->addTempUser( $status );
+
+		$expected = [ '_type' => 'assoc' ];
+		$this->assertSame( $expected, $result->getResultData() );
 	}
 }

@@ -159,6 +159,7 @@ class RemoveClaims extends ApiBase {
 		$this->resultBuilder->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
 		$this->resultBuilder->markSuccess();
 		$this->resultBuilder->setList( null, 'claims', $params['claim'], 'claim' );
+		$this->resultBuilder->addTempUser( $status );
 	}
 
 	/**

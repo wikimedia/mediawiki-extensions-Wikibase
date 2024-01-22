@@ -8,6 +8,7 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;
 use MediaWiki\User\Options\UserOptionsLookup;
+use MediaWiki\User\TempUser\TempUserCreator;
 use MediaWiki\User\User;
 use Message;
 use ReadOnlyError;
@@ -124,6 +125,11 @@ class MediaWikiEditEntity implements EditEntity {
 	private $userOptionsLookup;
 
 	/**
+	 * @var TempUserCreator
+	 */
+	private $tempUserCreator;
+
+	/**
 	 * @var int Bit field for error types, using the EditEntity::XXX_ERROR constants.
 	 */
 	private $errorType = 0;
@@ -153,6 +159,7 @@ class MediaWikiEditEntity implements EditEntity {
 	 * @param IContextSource $context the request context for the edit
 	 * @param EditFilterHookRunner $editFilterHookRunner
 	 * @param UserOptionsLookup $userOptionsLookup
+	 * @param TempUserCreator $tempUserCreator
 	 * @param int $maxSerializedEntitySize the maximal allowed entity size in Kilobytes
 	 * @param string[] $localEntityTypes
 	 * @param int $baseRevId the base revision ID for conflict checking.
@@ -173,6 +180,7 @@ class MediaWikiEditEntity implements EditEntity {
 		IContextSource $context,
 		EditFilterHookRunner $editFilterHookRunner,
 		UserOptionsLookup $userOptionsLookup,
+		TempUserCreator $tempUserCreator,
 		$maxSerializedEntitySize,
 		array $localEntityTypes,
 		int $baseRevId = 0,
@@ -196,6 +204,7 @@ class MediaWikiEditEntity implements EditEntity {
 
 		$this->editFilterHookRunner = $editFilterHookRunner;
 		$this->userOptionsLookup = $userOptionsLookup;
+		$this->tempUserCreator = $tempUserCreator;
 		$this->allowMasterConnection = $allowMasterConnection;
 		$this->maxSerializedEntitySize = $maxSerializedEntitySize;
 		$this->localEntityTypes = $localEntityTypes;
@@ -740,6 +749,12 @@ class MediaWikiEditEntity implements EditEntity {
 			return $this->status;
 		}
 
+		$savedTempUser = $this->createTempUserIfNeeded(); // updates $this->user and/or $this->status
+		if ( !$this->status->isOK() ) {
+			$this->status->setResult( false, [ 'errorFlags' => $this->errorType ] );
+			return $this->status;
+		}
+
 		try {
 			$entityRevision = $this->entityStore->saveEntity(
 				$newEntity,
@@ -751,7 +766,10 @@ class MediaWikiEditEntity implements EditEntity {
 			);
 
 			$this->entityId = $newEntity->getId();
-			$editStatus = Status::newGood( [ 'revision' => $entityRevision ] );
+			$editStatus = Status::newGood( [
+				'revision' => $entityRevision,
+				'savedTempUser' => $savedTempUser,
+			] );
 		} catch ( StorageException $ex ) {
 			$editStatus = $ex->getStatus();
 
@@ -795,6 +813,26 @@ class MediaWikiEditEntity implements EditEntity {
 			$this->errorType |= EditEntity::FILTERED;
 		}
 		$this->status->merge( $hookStatus );
+	}
+
+	/**
+	 * If a temp user ought to be created then create and return it, and update $this->user.
+	 * Also update $this->status with any potential error.
+	 * Returns null (and leaves $this->user unmodified, i.e. nonnull) if no temp user is needed.
+	 */
+	private function createTempUserIfNeeded(): ?User {
+		$savedTempUser = null;
+		if ( $this->tempUserCreator->shouldAutoCreate( $this->user, EntityPermissionChecker::ACTION_EDIT ) ) {
+			$status = $this->tempUserCreator->create( null, $this->context->getRequest() );
+			$this->status->merge( $status );
+			if ( $status->isOK() ) {
+				$savedTempUser = $status->getUser();
+				$this->user = $savedTempUser;
+			} else {
+				$this->errorType |= self::SAVE_ERROR;
+			}
+		}
+		return $savedTempUser;
 	}
 
 	/**

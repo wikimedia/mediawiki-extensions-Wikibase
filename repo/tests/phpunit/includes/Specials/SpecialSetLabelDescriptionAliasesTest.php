@@ -80,6 +80,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 				$this->getMockEditFitlerHookRunner(),
 				new NullStatsdDataFactory(),
 				$this->getServiceContainer()->getUserOptionsLookup(),
+				$this->getServiceContainer()->getTempUserCreator(),
 				PHP_INT_MAX,
 				[ 'item', 'property' ]
 			),
@@ -401,6 +402,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 				$this->getMockEditFitlerHookRunner(),
 				new NullStatsdDataFactory(),
 				$this->getServiceContainer()->getUserOptionsLookup(),
+				$this->getServiceContainer()->getTempUserCreator(),
 				PHP_INT_MAX,
 				[ 'item', 'property' ],
 			),
