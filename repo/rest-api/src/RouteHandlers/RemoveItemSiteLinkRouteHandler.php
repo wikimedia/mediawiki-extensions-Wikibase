@@ -35,7 +35,8 @@ class RemoveItemSiteLinkRouteHandler extends SimpleHandler {
 				WbRestApi::getItemDataRetriever(),
 				WbRestApi::getItemUpdater(),
 				WbRestApi::getAssertItemExists(),
-				WbRestApi::getValidatingRequestDeserializer()
+				WbRestApi::getValidatingRequestDeserializer(),
+				WbRestApi::getAssertUserIsAuthorized()
 			),
 			new ResponseFactory()
 		);
@@ -61,6 +62,7 @@ class RemoveItemSiteLinkRouteHandler extends SimpleHandler {
 				)
 			);
 			return $this->newSuccessResponse();
+
 		} catch ( UseCaseError $e ) {
 			return $this->responseFactory->newErrorResponseFromException( $e );
 		} catch ( ItemRedirect $e ) {

@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemSiteLink\RemoveItemSiteLink;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemSiteLink\RemoveItemSiteLinkRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemSiteLink\RemoveItemSiteLinkValidator;
@@ -13,6 +14,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\SiteLinkEditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
@@ -35,6 +37,8 @@ class RemoveItemSiteLinkTest extends TestCase {
 
 	private RemoveItemSiteLinkValidator $validator;
 
+	private AssertUserIsAuthorized $assertUserIsAuthorized;
+
 	private const VALID_SITE = TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0];
 
 	protected function setUp(): void {
@@ -43,6 +47,7 @@ class RemoveItemSiteLinkTest extends TestCase {
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
 		$this->assertItemExists = $this->createStub( AssertItemExists::class );
 		$this->validator = new TestValidatingRequestDeserializer();
+		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
 	}
 
 	public function testHappyPath(): void {
@@ -115,8 +120,31 @@ class RemoveItemSiteLinkTest extends TestCase {
 		}
 	}
 
+	public function testGivenEditIsUnauthorized_throwsUseCaseError(): void {
+		$itemId = new ItemId( 'Q123' );
+
+		$expectedError = new UseCaseError( UseCaseError::PERMISSION_DENIED, 'You have no permission to edit this item.' );
+		$this->assertUserIsAuthorized = $this->createMock( AssertUserIsAuthorized::class );
+		$this->assertUserIsAuthorized->method( 'execute' )
+			->with( $itemId, User::newAnonymous() )
+			->willThrowException( $expectedError );
+
+		try {
+			$this->newUseCase()->execute( new RemoveItemSiteLinkRequest( "$itemId", self::VALID_SITE, [], false, null, null ) );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedError, $e );
+		}
+	}
+
 	private function newUseCase(): RemoveItemSiteLink {
-		return new RemoveItemSiteLink( $this->itemRetriever, $this->itemUpdater, $this->assertItemExists, $this->validator );
+		return new RemoveItemSiteLink(
+			$this->itemRetriever,
+			$this->itemUpdater,
+			$this->assertItemExists,
+			$this->validator,
+			$this->assertUserIsAuthorized
+		);
 	}
 
 }

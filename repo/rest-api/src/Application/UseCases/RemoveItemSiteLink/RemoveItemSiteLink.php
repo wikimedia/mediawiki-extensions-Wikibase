@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\RemoveItemSiteLink;
 
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
@@ -19,17 +20,20 @@ class RemoveItemSiteLink {
 	private ItemUpdater $itemUpdater;
 	private AssertItemExists $assertItemExists;
 	private RemoveItemSiteLinkValidator $validator;
+	private AssertUserIsAuthorized $assertUserIsAuthorized;
 
 	public function __construct(
 		ItemRetriever $itemRetriever,
 		ItemUpdater $itemUpdater,
 		AssertItemExists $assertItemExists,
-		RemoveItemSiteLinkValidator $validator
+		RemoveItemSiteLinkValidator $validator,
+		AssertUserIsAuthorized $assertUserIsAuthorized
 	) {
 		$this->itemRetriever = $itemRetriever;
 		$this->itemUpdater = $itemUpdater;
 		$this->assertItemExists = $assertItemExists;
 		$this->validator = $validator;
+		$this->assertUserIsAuthorized = $assertUserIsAuthorized;
 	}
 
 	/**
@@ -43,6 +47,8 @@ class RemoveItemSiteLink {
 		$editMetadata = $deserializedRequest->getEditMetadata();
 
 		$this->assertItemExists->execute( $itemId );
+		$this->assertUserIsAuthorized->execute( $itemId, $editMetadata->getUser() );
+
 		$item = $this->itemRetriever->getItem( $itemId );
 
 		if ( !$item->hasLinkToSite( $siteId ) ) {

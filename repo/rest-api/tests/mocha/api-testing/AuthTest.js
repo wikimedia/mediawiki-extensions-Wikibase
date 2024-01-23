@@ -18,6 +18,7 @@ const {
 	getRequestsOnItem,
 	getRequestsOnProperty
 } = require( '../helpers/happyPathRequestBuilders' );
+const rbf = require( '../helpers/RequestBuilderFactory' );
 
 async function resetEntityTestData( id, statementPropertyId ) {
 	return ( await editEntity( id, {
@@ -40,13 +41,14 @@ describe( 'Auth', () => {
 
 		const itemId = ( await createEntity( 'item', {} ) ).entity.id;
 		const itemData = await resetEntityTestData( itemId, statementPropertyId );
+		const siteId = await getLocalSiteId();
 		await createLocalSiteLink( itemId, linkedArticle );
 
 		itemRequestInputs.mainTestSubject = itemId;
 		itemRequestInputs.itemId = itemId;
+		itemRequestInputs.siteId = siteId;
 		itemRequestInputs.statementId = itemData.claims[ statementPropertyId ][ 0 ].id;
 		itemRequestInputs.statementPropertyId = statementPropertyId;
-		itemRequestInputs.siteId = await getLocalSiteId();
 
 		const propertyId = ( await createUniqueStringProperty() ).entity.id;
 		const propertyData = await resetEntityTestData( propertyId, statementPropertyId );
@@ -107,6 +109,17 @@ describe( 'Auth', () => {
 		} );
 	} );
 
+	const authTestRequests = [
+		{
+			newRequestBuilder: () => rbf.newRemoveItemSiteLinkRequestBuilder(
+				itemRequestInputs.itemId,
+				itemRequestInputs.siteId
+			),
+			requestInputs: itemRequestInputs
+		},
+		...editRequestsWithInputs
+	];
+
 	describe( 'Authorization', () => {
 		function assertPermissionDenied( response ) {
 			expect( response ).to.have.status( 403 );
@@ -123,7 +136,7 @@ describe( 'Auth', () => {
 			} );
 		} );
 
-		editRequestsWithInputs.forEach( ( { newRequestBuilder } ) => {
+		authTestRequests.forEach( ( { newRequestBuilder } ) => {
 			describe( `Blocked user - ${newRequestBuilder().getRouteDescription()}`, () => {
 				before( async () => {
 					await user.action( 'block', {
@@ -149,7 +162,7 @@ describe( 'Auth', () => {
 
 		// protecting/unprotecting does not always take effect immediately. These tests are isolated here to avoid
 		// accidentally testing against a protected page in the other tests and receiving false positive results.
-		editRequestsWithInputs.forEach( ( { newRequestBuilder, requestInputs } ) => {
+		authTestRequests.forEach( ( { newRequestBuilder, requestInputs } ) => {
 			describe( `Protected entity page - ${newRequestBuilder().getRouteDescription()}`, () => {
 				before( async () => {
 					await changeEntityProtectionStatus( requestInputs.mainTestSubject, 'sysop' ); // protect
