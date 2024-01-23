@@ -89,6 +89,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchedStatementVa
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemDescription\RemoveItemDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemLabel\RemoveItemLabel;
+use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemSiteLink\RemoveItemSiteLink;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyDescription\RemovePropertyDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyLabel\RemovePropertyLabel;
@@ -826,6 +827,16 @@ return [
 			WbRestApi::getAssertUserIsAuthorized( $services ),
 			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getItemUpdater( $services )
+		);
+	},
+
+	'WbRestApi.RemoveItemSiteLink' => function( MediaWikiServices $services ): RemoveItemSiteLink {
+		return new RemoveItemSiteLink(
+			WbRestApi::getItemDataRetriever( $services ),
+			WbRestApi::getItemUpdater( $services ),
+			WbRestApi::getAssertItemExists( $services ),
+			WbRestApi::getValidatingRequestDeserializer( $services ),
+			WbRestApi::getAssertUserIsAuthorized( $services )
 		);
 	},
 

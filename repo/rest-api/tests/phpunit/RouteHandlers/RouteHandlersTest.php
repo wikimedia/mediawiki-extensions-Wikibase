@@ -85,6 +85,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemDescription\RemoveItemDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemLabel\RemoveItemLabel;
+use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemSiteLink\RemoveItemSiteLink;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyDescription\RemovePropertyDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyLabel\RemovePropertyLabel;
@@ -870,6 +871,21 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 				new UseCaseError( UseCaseError::INVALID_PROPERTY_ID, '', [ 'property-id' => 'P1' ] ),
 				$hasErrorCode ( UseCaseError::INVALID_PROPERTY_ID ),
 			] ],
+		] ];
+		yield 'RemoveItemSiteLink' => [ [
+			'useCase' => RemoveItemSiteLink::class,
+			'useCaseResponse' => null,
+			'validRequest' => [
+				'pathParams' => [ 'item_id' => 'Q1', 'site_id' => 'dewiki' ],
+				'bodyContents' => [],
+			],
+			'expectedExceptions' => [
+				[
+					new UseCaseError( UseCaseError::INVALID_ITEM_ID, '' ),
+					$hasErrorCode ( UseCaseError::INVALID_ITEM_ID ),
+				],
+				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::ITEM_REDIRECTED ) ],
+			],
 		] ];
 		// phpcs:enable
 	}

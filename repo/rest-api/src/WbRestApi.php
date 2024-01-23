@@ -49,6 +49,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyStatement\PatchPrope
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemDescription\RemoveItemDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemLabel\RemoveItemLabel;
+use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemSiteLink\RemoveItemSiteLink;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyDescription\RemovePropertyDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyLabel\RemovePropertyLabel;
@@ -421,5 +422,9 @@ class WbRestApi {
 
 	public static function getAddPropertyAliasesInLanguage( ContainerInterface $services = null ): AddPropertyAliasesInLanguage {
 		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbRestApi.AddPropertyAliasesInLanguage' );
+	}
+
+	public static function getRemoveItemSiteLink( ContainerInterface $services = null ): RemoveItemSiteLink {
+		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbRestApi.RemoveItemSiteLink' );
 	}
 }

@@ -150,5 +150,6 @@ module.exports.editRequestsOnItem = [
 	),
 	( { itemId } ) => rbf.newAddItemAliasesInLanguageRequestBuilder( itemId, 'en', [ 'en-alias-' + utils.uniq() ] ),
 	( { itemId } ) => rbf.newRemoveItemLabelRequestBuilder( itemId, 'en' ),
-	( { itemId } ) => rbf.newRemoveItemDescriptionRequestBuilder( itemId, 'en' )
+	( { itemId } ) => rbf.newRemoveItemDescriptionRequestBuilder( itemId, 'en' ),
+	( { itemId, siteId } ) => rbf.newRemoveItemSiteLinkRequestBuilder( itemId, siteId )
 ];

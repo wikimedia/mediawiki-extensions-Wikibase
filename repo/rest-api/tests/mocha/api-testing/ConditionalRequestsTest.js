@@ -38,26 +38,29 @@ function assertValid412Response( response ) {
 	assert.isEmpty( response.text );
 }
 
-async function resetEntityTestData( id, statementPropertyId ) {
-	return ( await editEntity( id, {
-		labels: [ { language: 'en', value: `entity-with-statements-${utils.uniq()}` } ],
-		descriptions: [ { language: 'en', value: `entity-with-statements-${utils.uniq()}` } ],
-		aliases: [ { language: 'en', value: 'entity' }, { language: 'en', value: 'thing' } ],
-		claims: [ newLegacyStatementWithRandomStringValue( statementPropertyId ) ]
-	} ) ).entity;
-}
-
 describe( 'Conditional requests', () => {
 	const itemRequestInputs = {};
 	const propertyRequestInputs = {};
+	const linkedArticle = utils.title( 'Article-linked-to-test-item' );
+
+	async function resetEntityTestData( id, statementPropertyId ) {
+		if ( id.startsWith( 'Q' ) ) {
+			await createLocalSiteLink( id, linkedArticle );
+		}
+
+		return ( await editEntity( id, {
+			labels: [ { language: 'en', value: `entity-with-statements-${utils.uniq()}` } ],
+			descriptions: [ { language: 'en', value: `entity-with-statements-${utils.uniq()}` } ],
+			aliases: [ { language: 'en', value: 'entity' }, { language: 'en', value: 'thing' } ],
+			claims: [ newLegacyStatementWithRandomStringValue( statementPropertyId ) ]
+		} ) ).entity;
+	}
 
 	before( async () => {
 		const statementPropertyId = ( await createUniqueStringProperty() ).entity.id;
-		const linkedArticle = utils.title( 'Article-linked-to-test-item' );
 
 		const itemId = ( await createEntity( 'item', {} ) ).entity.id;
 		const itemData = await resetEntityTestData( itemId, statementPropertyId );
-		await createLocalSiteLink( itemId, linkedArticle );
 
 		itemRequestInputs.mainTestSubject = itemId;
 		itemRequestInputs.itemId = itemId;
