@@ -68,6 +68,9 @@ class ReplaceStatementRouteHandler extends SimpleHandler {
 						$request->getPathParam( self::STATEMENT_ID_PATH_PARAM )
 					)
 				),
+				WbRestApi::getStatementRedirectMiddlewareFactory()->newStatementRedirectMiddleware(
+					self::STATEMENT_ID_PATH_PARAM
+				),
 			] ),
 			$responseFactory
 		);

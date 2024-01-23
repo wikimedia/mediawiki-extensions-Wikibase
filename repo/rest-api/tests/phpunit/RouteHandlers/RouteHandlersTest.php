@@ -16,6 +16,8 @@ use Throwable;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikibase\DataModel\Entity\StatementListProvidingEntity;
+use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\LatestRevisionIdResult;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemAliasesInLanguage;
@@ -112,8 +114,12 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyPartsBuilder;
 use Wikibase\Repo\RestApi\Domain\ReadModel\SiteLinks;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
+use Wikibase\Repo\RestApi\Infrastructure\DataAccess\StatementSubjectRetriever;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\StatementRedirectMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\StatementRedirectMiddlewareFactory;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @coversNothing
@@ -141,6 +147,7 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 	protected function setUp(): void {
 		parent::setUp();
 		$this->setMockPreconditionMiddlewareFactory();
+		$this->setMockStatementRedirectMiddlewareFactory();
 	}
 
 	/**
@@ -201,7 +208,7 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 		$lastModified = '20230731042031';
 		$hasHttpStatus = fn( int $status ) => fn( Response $r ) => $this->assertSame( $status, $r->getStatusCode() );
 		$hasErrorCode = fn( string $errorCode ) => function ( Response $response ) use ( $errorCode ): void {
-			$this->assertSame( $errorCode, json_decode( $response->getBody()->getContents() )->code );
+			$this->assertSame( $errorCode, json_decode( (string)$response->getBody() )->code );
 			$this->assertSame( [ 'en' ], $response->getHeader( 'Content-Language' ) );
 		}; // phpcs:ignore -- phpcs doesn't like the semicolon here, but it's very much needed.
 
@@ -949,6 +956,25 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			new ConditionalHeaderUtil()
 		);
 		$this->setService( 'WbRestApi.PreconditionMiddlewareFactory', $preconditionMiddlewareFactory );
+	}
+
+	private function setMockStatementRedirectMiddlewareFactory(): void {
+		$statementSubject = $this->createMock( StatementListProvidingEntity::class );
+		$statementSubject->method( 'getStatements' )->willReturn( new StatementList() );
+
+		$entityRevLookup = $this->createMock( EntityRevisionLookup::class );
+		$entityRevLookup->method( 'getEntityRevision' )->willReturn( new EntityRevision( $statementSubject ) );
+
+		$middleware = new StatementRedirectMiddleware(
+			WikibaseRepo::getEntityIdParser(),
+			new StatementSubjectRetriever( $entityRevLookup ),
+			'statement_id',
+			null
+		);
+
+		$factory = $this->createStub( StatementRedirectMiddlewareFactory::class );
+		$factory->method( 'newStatementRedirectMiddleware' )->willReturn( $middleware );
+		$this->setService( 'WbRestApi.StatementRedirectMiddlewareFactory', $factory );
 	}
 
 }

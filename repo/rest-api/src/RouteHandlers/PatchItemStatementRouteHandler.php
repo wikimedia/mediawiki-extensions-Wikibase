@@ -69,6 +69,10 @@ class PatchItemStatementRouteHandler extends SimpleHandler {
 				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
 					fn( RequestInterface $request ): string => $request->getPathParam( self::ITEM_ID_PATH_PARAM )
 				),
+				WbRestApi::getStatementRedirectMiddlewareFactory()->newStatementRedirectMiddleware(
+					self::STATEMENT_ID_PATH_PARAM,
+					self::ITEM_ID_PATH_PARAM
+				),
 			] ),
 			WbRestApi::getSerializerFactory()->newStatementSerializer(),
 			$responseFactory
