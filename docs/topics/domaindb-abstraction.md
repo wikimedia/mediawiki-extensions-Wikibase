@@ -8,7 +8,7 @@ This abstraction also allows us to typehint the type of connection we want to ob
 The DomainDb wrapper uses the LoadBalancerFactory and the ConnectionManager to allow DB access. This wrapper is then extended by the corresponding classes ClientDomainDb() and RepoDomainDb().
 The RepoDomainDbFactory class contains (among others) a newRepoDb() method, with which an Instance of RepoDomainDb() is obtained for the injected service.
 
-![Structure Overview](./diagrams/01-domaindb-diagram.drawio.svg)
+\image{inline} html ./diagrams/01-domaindb-diagram.drawio.svg "Structure Overview"
 
 ## Using the abstraction
 
