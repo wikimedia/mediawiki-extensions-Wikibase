@@ -1,17 +1,4 @@
 {
-	"Sitelink": {
-		"type": "object",
-		"additionalProperties": {
-			"$ref": "./schemas.json#/Sitelink"
-		},
-		"example": {
-			"dewiki": {
-				"title": "Douglas Adams",
-				"badges": [ ],
-				"url": "https://de.wikipedia.org/wiki/Douglas_Adams"
-			}
-		}
-	},
 	"Sitelinks": {
 		"type": "object",
 		"additionalProperties": {

@@ -166,6 +166,11 @@
 			"url": {
 				"type": "string"
 			}
+		},
+		"example": {
+			"title": "Douglas Adams",
+			"badges": [ ],
+			"url": "https://de.wikipedia.org/wiki/Douglas_Adams"
 		}
 	},
 	"Statement": {
