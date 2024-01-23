@@ -7,7 +7,9 @@ const {
 	newLegacyStatementWithRandomStringValue,
 	changeEntityProtectionStatus,
 	createEntity,
-	editEntity
+	editEntity,
+	createLocalSiteLink,
+	getLocalSiteId
 } = require( '../helpers/entityHelper' );
 const { requireExtensions } = require( '../../../../../tests/api-testing/utils' );
 const {
@@ -34,13 +36,17 @@ describe( 'Auth', () => {
 
 	before( async () => {
 		const statementPropertyId = ( await createUniqueStringProperty() ).entity.id;
+		const linkedArticle = utils.title( 'Article-linked-to-test-item' );
 
 		const itemId = ( await createEntity( 'item', {} ) ).entity.id;
 		const itemData = await resetEntityTestData( itemId, statementPropertyId );
+		await createLocalSiteLink( itemId, linkedArticle );
+
 		itemRequestInputs.mainTestSubject = itemId;
 		itemRequestInputs.itemId = itemId;
 		itemRequestInputs.statementId = itemData.claims[ statementPropertyId ][ 0 ].id;
 		itemRequestInputs.statementPropertyId = statementPropertyId;
+		itemRequestInputs.siteId = await getLocalSiteId();
 
 		const propertyId = ( await createUniqueStringProperty() ).entity.id;
 		const propertyData = await resetEntityTestData( propertyId, statementPropertyId );

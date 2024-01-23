@@ -7,7 +7,9 @@ const {
 	newLegacyStatementWithRandomStringValue,
 	createUniqueStringProperty,
 	createEntity,
-	editEntity
+	editEntity,
+	createLocalSiteLink,
+	getLocalSiteId
 } = require( '../helpers/entityHelper' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const {
@@ -51,13 +53,17 @@ describe( 'Conditional requests', () => {
 
 	before( async () => {
 		const statementPropertyId = ( await createUniqueStringProperty() ).entity.id;
+		const linkedArticle = utils.title( 'Article-linked-to-test-item' );
 
 		const itemId = ( await createEntity( 'item', {} ) ).entity.id;
 		const itemData = await resetEntityTestData( itemId, statementPropertyId );
+		await createLocalSiteLink( itemId, linkedArticle );
+
 		itemRequestInputs.mainTestSubject = itemId;
 		itemRequestInputs.itemId = itemId;
 		itemRequestInputs.statementId = itemData.claims[ statementPropertyId ][ 0 ].id;
 		itemRequestInputs.statementPropertyId = statementPropertyId;
+		itemRequestInputs.siteId = await getLocalSiteId();
 
 		const latestItemRevision = await getLatestEditMetadata( itemId );
 		itemRequestInputs.latestRevId = latestItemRevision.revid;

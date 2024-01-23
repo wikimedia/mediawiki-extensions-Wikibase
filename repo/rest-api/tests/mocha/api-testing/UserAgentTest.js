@@ -1,11 +1,13 @@
 'use strict';
 
-const { assert } = require( 'api-testing' );
+const { assert, utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const {
 	createEntityWithStatements,
 	createUniqueStringProperty,
-	newLegacyStatementWithRandomStringValue
+	newLegacyStatementWithRandomStringValue,
+	createLocalSiteLink,
+	getLocalSiteId
 } = require( '../helpers/entityHelper' );
 const {
 	editRequestsOnItem,
@@ -27,6 +29,7 @@ describe( 'User-Agent requests', () => {
 
 	before( async () => {
 		const statementPropertyId = ( await createUniqueStringProperty() ).entity.id;
+		const linkedArticle = utils.title( 'Article-linked-to-test-item' );
 
 		const createItemResponse = await createEntityWithStatements(
 			[ newLegacyStatementWithRandomStringValue( statementPropertyId ) ],
@@ -35,6 +38,9 @@ describe( 'User-Agent requests', () => {
 		itemRequestInputs.itemId = createItemResponse.entity.id;
 		itemRequestInputs.statementId = createItemResponse.entity.claims[ statementPropertyId ][ 0 ].id;
 		itemRequestInputs.statementPropertyId = statementPropertyId;
+
+		await createLocalSiteLink( createItemResponse.entity.id, linkedArticle );
+		itemRequestInputs.siteId = await getLocalSiteId();
 
 		const createPropertyResponse = await createEntityWithStatements(
 			[ newLegacyStatementWithRandomStringValue( statementPropertyId ) ],

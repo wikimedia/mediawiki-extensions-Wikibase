@@ -53,6 +53,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescription\GetItemDescrip
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\GetItemDescriptions;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\GetItemLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabels;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemSiteLink\GetItemSiteLink;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemSiteLinks\GetItemSiteLinks;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\GetItemStatements;
@@ -455,6 +456,14 @@ return [
 			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
 			WbRestApi::getTermLookupEntityTermsRetriever( $services ),
 			WbRestApi::getValidatingRequestDeserializer( $services )
+		);
+	},
+
+	'WbRestApi.GetItemSiteLink' => function( MediaWikiServices $services ): GetItemSiteLink {
+		return new GetItemSiteLink(
+			WbRestApi::getValidatingRequestDeserializer( $services ),
+			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
+			WbRestApi::getSiteLinksRetriever( $services ),
 		);
 	},
 

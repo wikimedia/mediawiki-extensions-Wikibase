@@ -40,6 +40,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\GetItemLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\GetItemLabelResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabelsResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemSiteLink\GetItemSiteLink;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemSiteLink\GetItemSiteLinkResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemSiteLinks\GetItemSiteLinks;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemSiteLinks\GetItemSiteLinksResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatement;
@@ -109,6 +111,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\ItemPartsBuilder;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyPartsBuilder;
+use Wikibase\Repo\RestApi\Domain\ReadModel\SiteLink;
 use Wikibase\Repo\RestApi\Domain\ReadModel\SiteLinks;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
@@ -325,6 +328,20 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 				123
 			),
 			'validRequest' => [ 'pathParams' => [ 'item_id' => 'Q1' ] ],
+			'expectedExceptions' => [
+				[
+					new UseCaseError( UseCaseError::INVALID_ITEM_ID, '' ),
+					$hasErrorCode ( UseCaseError::INVALID_ITEM_ID ),
+				],
+				[ new ItemRedirect( 'Q123' ), $hasHttpStatus( 308 ) ],
+			],
+		] ];
+		yield 'GetItemSiteLink' => [ [
+			'useCase' => GetItemSiteLink::class,
+			'useCaseResponse' => new GetItemSiteLinkResponse(
+				new SiteLink( 'dewiki', 'Kartoffel', [], 'https://de.wikipedia.org/wiki/Kartoffel' ), $lastModified, 123
+			),
+			'validRequest' => [ 'pathParams' => [ 'item_id' => 'Q1', 'site_id' => 'dewiki' ] ],
 			'expectedExceptions' => [
 				[
 					new UseCaseError( UseCaseError::INVALID_ITEM_ID, '' ),
