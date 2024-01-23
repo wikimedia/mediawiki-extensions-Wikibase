@@ -298,7 +298,6 @@ return call_user_func( function() {
 		],
 
 		'wikibase.vector.searchClient' => $moduleTemplate + [
-			'es6' => true,
 			'packageFiles' => [
 				'wikibase.vector.searchClient.js',
 			],

@@ -45,7 +45,6 @@ class DataBridgeResourceLoaderModules implements ResourceLoaderRegisterModulesHo
 		$clientSettings = WikibaseClient::getSettings();
 		return new FileModule(
 			[
-				'es6' => true,
 				'scripts' => [
 					'data-bridge.chunk-vendors.js',
 					'data-bridge.init.js',
@@ -78,7 +77,6 @@ class DataBridgeResourceLoaderModules implements ResourceLoaderRegisterModulesHo
 		$clientSettings = WikibaseClient::getSettings();
 		return new MediaWikiConfigModule(
 			[
-				'es6' => true,
 				'getconfigvalueprovider' => function () use ( $clientSettings ) {
 					return new DataBridgeConfigValueProvider(
 						$clientSettings,
@@ -93,7 +91,6 @@ class DataBridgeResourceLoaderModules implements ResourceLoaderRegisterModulesHo
 		$clientSettings = WikibaseClient::getSettings();
 		return new FileModule(
 			[
-				'es6' => true,
 				'scripts' => [
 					'data-bridge.app.js',
 				],
