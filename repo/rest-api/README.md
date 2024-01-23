@@ -65,7 +65,7 @@ The autodocs and the bundled OpenAPI specification files are generated in the `.
 ### Project structure
 This REST API follows the [Hexagonal Architecture](https://alistair.cockburn.us/hexagonal-architecture/) approach and takes inspiration from [an article about Netflix's use of the hexagonal architecture](https://netflixtechblog.com/ready-for-changes-with-hexagonal-architecture-b315ec967749). This decision is documented in [ADR 0001](docs/adr/0001_hexagonal_architecture.md).
 
-![Hexagonal Architecture Diagram](./hexagonal_architecture.drawio.svg)
+\image{inline} html ./hexagonal_architecture.drawio.svg "Hexagonal Architecture Diagram"
 
 The code is divided into three layers: Domain, Application, and Infrastructure. Domain and Application define the core business and application logic of the software, whereas the infrastructure layer deals with any external dependencies and concepts, such as transport or persistence details.
 
