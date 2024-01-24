@@ -28,15 +28,24 @@ class RemoveItemSiteLinkRouteHandler extends SimpleHandler {
 
 	private const ITEM_ID_PATH_PARAM = 'item_id';
 	private const SITE_ID_PATH_PARAM = 'site_id';
+
 	private const TAGS_BODY_PARAM = 'tags';
 	private const BOT_BODY_PARAM = 'bot';
 	private const COMMENT_BODY_PARAM = 'comment';
+
 	private const TAGS_PARAM_DEFAULT = [];
 	private const BOT_PARAM_DEFAULT = false;
 	private const COMMENT_PARAM_DEFAULT = null;
+
 	private RemoveItemSiteLink $useCase;
 	private MiddlewareHandler $middlewareHandler;
 	private ResponseFactory $responseFactory;
+
+	public function __construct( RemoveItemSiteLink $useCase, MiddlewareHandler $middlewareHandler, ResponseFactory $responseFactory ) {
+		$this->useCase = $useCase;
+		$this->middlewareHandler = $middlewareHandler;
+		$this->responseFactory = $responseFactory;
+	}
 
 	public static function factory(): self {
 		$responseFactory = new ResponseFactory();
@@ -57,12 +66,6 @@ class RemoveItemSiteLinkRouteHandler extends SimpleHandler {
 			] ),
 			$responseFactory
 		);
-	}
-
-	public function __construct( RemoveItemSiteLink $useCase, MiddlewareHandler $middlewareHandler, ResponseFactory $responseFactory ) {
-		$this->useCase = $useCase;
-		$this->middlewareHandler = $middlewareHandler;
-		$this->responseFactory = $responseFactory;
 	}
 
 	/**
