@@ -6,7 +6,6 @@ use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
 use InvalidArgumentException;
 use MWContentSerializationException;
-use MWExceptionHandler;
 use Serializers\Exceptions\SerializationException;
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -152,7 +151,6 @@ class EntityContentDataCodec {
 			$data = $this->entitySerializer->serialize( $entity );
 			$blob = $this->encodeEntityContentData( $data, $format );
 		} catch ( SerializationException $ex ) {
-			MWExceptionHandler::logException( $ex );
 			throw new MWContentSerializationException( $ex->getMessage(), 0, $ex );
 		}
 
