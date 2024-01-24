@@ -52,10 +52,15 @@ class RemoveItemSiteLink {
 			);
 		}
 
+		$removedSiteLink = $item->getSiteLink( $siteId );
 		$item->removeSiteLink( $siteId );
 		$this->itemUpdater->update(
 			$item, // @phan-suppress-current-line PhanTypeMismatchArgumentNullable
-			new EditMetadata( $editMetadata->getTags(), $editMetadata->isBot(), new SiteLinkEditSummary() )
+			new EditMetadata(
+				$editMetadata->getTags(),
+				$editMetadata->isBot(),
+				SiteLinkEditSummary::newRemoveSummary( $editMetadata->getComment(), $removedSiteLink )
+			)
 		);
 	}
 

@@ -76,8 +76,17 @@ class EditSummaryFormatter {
 				case EditSummary::PATCH_ACTION:
 					return $this->newSummaryForStatementEdit( $editSummary, 'wbsetclaim', 'update', 1 );
 			}
-		} elseif ( $editSummary instanceof SiteLinkEditSummary ) {
-			return new Summary();
+		} elseif ( $editSummary instanceof SiteLinkEditSummary && $editSummary->getEditAction() === EditSummary::REMOVE_ACTION ) {
+			$summary = new Summary(
+				'wbsetsitelink',
+				'remove',
+				$editSummary->getSiteLink()->getSiteId(),
+				[],
+				[ $editSummary->getSiteLink()->getPageName() ]
+			);
+			$summary->setUserSummary( $editSummary->getUserComment() );
+
+			return $summary;
 		}
 
 		throw new LogicException( "Unknown summary type '{$editSummary->getEditAction()}' " . get_class( $editSummary ) );

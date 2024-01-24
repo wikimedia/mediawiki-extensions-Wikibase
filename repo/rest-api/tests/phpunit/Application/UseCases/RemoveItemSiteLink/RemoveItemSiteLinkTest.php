@@ -49,20 +49,22 @@ class RemoveItemSiteLinkTest extends TestCase {
 		$itemId = new ItemId( 'Q123' );
 		$isBot = true;
 		$tags = [];
+		$comment = __METHOD__;
 
 		$item = NewItem::withId( $itemId )->andSiteLink( self::VALID_SITE, 'dog page' )->build();
+		$removedSiteLink = $item->getSiteLink( self::VALID_SITE );
 		$itemRepo = new InMemoryItemRepository();
 		$itemRepo->addItem( $item );
 		$this->itemRetriever = $itemRepo;
 		$this->itemUpdater = $itemRepo;
 
-		$request = new RemoveItemSiteLinkRequest( "$itemId", self::VALID_SITE, $tags, $isBot, null, null );
+		$request = new RemoveItemSiteLinkRequest( "$itemId", self::VALID_SITE, $tags, $isBot, $comment, null );
 		$this->newUseCase()->execute( $request );
 
 		$this->assertFalse( $itemRepo->getItem( $itemId )->hasLinkToSite( self::VALID_SITE ) );
 		$this->assertEquals(
 			$itemRepo->getLatestRevisionEditMetadata( $itemId ),
-			new EditMetadata( $tags, $isBot, new SiteLinkEditSummary() )
+			new EditMetadata( $tags, $isBot, SiteLinkEditSummary::newRemoveSummary( $comment, $removedSiteLink ) )
 		);
 	}
 
