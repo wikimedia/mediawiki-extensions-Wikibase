@@ -1492,7 +1492,7 @@
 		"content": {
 			"application/json": {
 				"schema": {
-					"$ref": "./schema-parts.json#/Sitelink"
+					"$ref": "./schemas.json#/Sitelink"
 				}
 			}
 		}
