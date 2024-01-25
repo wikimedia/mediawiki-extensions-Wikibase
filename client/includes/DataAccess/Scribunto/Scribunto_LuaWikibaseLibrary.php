@@ -142,9 +142,8 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 
 	public function getUsageAccumulator(): UsageAccumulator {
 		if ( $this->usageAccumulator === null ) {
-			$parserOutput = $this->getParser()->getOutput();
 			$usageAccumulatorFactory = WikibaseClient::getUsageAccumulatorFactory();
-			$this->usageAccumulator = $usageAccumulatorFactory->newFromParserOutput( $parserOutput );
+			$this->usageAccumulator = $usageAccumulatorFactory->newFromParserOutput( $this->getParser()->getOutput() );
 		}
 
 		return $this->usageAccumulator;

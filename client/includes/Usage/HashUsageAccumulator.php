@@ -34,5 +34,4 @@ class HashUsageAccumulator extends UsageAccumulator {
 	public function getUsages() {
 		return $this->usages;
 	}
-
 }

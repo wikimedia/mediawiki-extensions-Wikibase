@@ -14,7 +14,7 @@ use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\DataAccess\SnaksFinder;
 use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
 use Wikibase\Client\PropertyLabelNotResolvedException;
-use Wikibase\Client\Usage\UsageAccumulator;
+use Wikibase\Client\Usage\ParserUsageAccumulator;
 use Wikibase\Client\WikibaseClient;
 
 /**
@@ -38,6 +38,11 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 
 	private function getImplementation(): WikibaseLuaEntityBindings {
 		if ( !$this->wbLibrary ) {
+			$this->wbLibrary = $this->newImplementation();
+		}
+		if ( $this->wbLibrary->hasStoredReferenceToDifferentParse( $this->getEngine()->getParser() ) ) {
+			/* ParserOutput in the Engine has been reset - we need to dispose of references
+			 * to the old ParserOutput. */
 			$this->wbLibrary = $this->newImplementation();
 		}
 
@@ -153,7 +158,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 		return $settings->getSetting( 'allowDataAccessInUserLanguage' );
 	}
 
-	public function getUsageAccumulator(): UsageAccumulator {
+	public function getUsageAccumulator(): ParserUsageAccumulator {
 		return WikibaseClient::getUsageAccumulatorFactory()
 			->newFromParserOutput( $this->getParser()->getOutput() );
 	}
