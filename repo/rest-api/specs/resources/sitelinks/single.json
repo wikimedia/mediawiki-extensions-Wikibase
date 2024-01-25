@@ -23,6 +23,38 @@
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
 		}
 	},
+	"put": {
+		"operationId": "SetSitelink",
+		"tags": [ "sitelinks" ],
+		"summary": "[WIP] Add / Replace an item's sitelink",
+		"description": "This endpoint is currently in development and is not recommended for production use",
+		"parameters": [
+			{ "$ref": "../../global/parameters.json#/ItemId" },
+			{ "$ref": "../../global/parameters.json#/SiteId" },
+			{ "$ref": "../../global/parameters.json#/IfNoneMatch" },
+			{ "$ref": "../../global/parameters.json#/IfModifiedSince" },
+			{ "$ref": "../../global/parameters.json#/IfMatch" },
+			{ "$ref": "../../global/parameters.json#/IfUnmodifiedSince" },
+			{ "$ref": "../../global/parameters.json#/Authorization" }
+		],
+		"requestBody": { "$ref": "../../global/requests.json#/SiteLink" },
+		"responses": {
+			"200": {
+				"$ref": "../../global/responses.json#/ItemSitelink",
+				"description": "The updated Sitelink"
+			},
+			"201": {
+				"$ref": "../../global/responses.json#/ItemSitelink",
+				"description": "The newly added Sitelink"
+			},
+			"400": { "$ref": "../../global/responses.json#/InvalidSetSiteLinkInput" },
+			"404": { "$ref": "../../global/responses.json#/ItemNotFound" },
+			"409": { "$ref": "../../global/responses.json#/ItemRedirectedOrSiteLinkConflict" },
+			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
+			"415": { "$ref": "../../global/responses.json#/InvalidMediaType" },
+			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
+		}
+	},
 	"delete": {
 		"operationId": "deleteSitelink",
 		"tags": [ "sitelinks" ],

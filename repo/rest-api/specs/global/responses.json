@@ -132,6 +132,26 @@
 			}
 		}
 	},
+	"ItemRedirectedOrSiteLinkConflict": {
+		"description": "The specified Item was redirected or there is a Sitelink conflict",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/Error" },
+				"examples": {
+					"redirected-item": { "$ref": "./examples.json#/RedirectedItemExample" },
+					"sitelink-conflict": { "$ref": "./examples.json#/SiteLinkConflictExample " }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
 	"StatementNotFound": {
 		"description": "The specified Statement was not found",
 		"content": {
@@ -721,6 +741,33 @@
 					"invalid-site-id": { "$ref": "./examples.json#/InvalidSiteIdExample" },
 					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
+	"InvalidSetSiteLinkInput": {
+		"description": "The request cannot be processed",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/Error" },
+				"examples": {
+					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
+					"invalid-site-id": { "$ref": "./examples.json#/InvalidSiteIdExample" },
+					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
+					"invalid-title-field": { "$ref": "./examples.json#/InvalidTitleExample" },
+					"title-field-empty": { "$ref": "./examples.json#/TitleIsEmptyExample" },
+					"title-does-not-exist": { "$ref": "./examples.json#/TitleDoesNotExistOnGivenSiteExample" },
+					"sitelink-data-missing-title": { "$ref": "./examples.json#/SiteLinkTitleFieldNotProvidedExample" },
+					"invalid-sitelink-badges-format": { "$ref": "./examples.json#/ValueOfBadgesFieldIsNotAListExample" },
+					"item-not-a-badge": { "$ref": "./examples.json#/ItemProvidedIsNotAllowedAsASiteLinkBadgeExample" },
+					"invalid-input-sitelink-badge": { "$ref": "./examples.json#/ValueProvidedAsABadgeIsNotAnItemIDExample" }
 				}
 			}
 		},

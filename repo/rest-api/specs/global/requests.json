@@ -138,6 +138,48 @@
 			}
 		}
 	},
+	"SiteLink": {
+		"description": "Payload containing a Wikibase Sitelink object and edit metadata",
+		"required": true,
+		"content": {
+			"application/json": {
+				"schema": {
+					"allOf": [
+						{
+							"type": "object",
+							"properties": {
+								"sitelink": {
+									"type": "object",
+									"properties": {
+										"title": {
+											"type": "string",
+											"example": "Sitelink page title"
+										},
+										"badges": {
+											"type": "array",
+											"example": [ "Q45678", "Q87654" ],
+											"items": {
+												"type": "string"
+											}
+										}
+									},
+									"required": [
+										"title"
+									]
+								}
+							},
+							"required": [
+								"sitelink"
+							]
+						},
+						{
+							"$ref": "./request-parts.json#/MediawikiEdit"
+						}
+					]
+				}
+			}
+		}
+	},
 	"Edit": {
 		"description": "Edit payload containing edit metadata",
 		"required": false,
