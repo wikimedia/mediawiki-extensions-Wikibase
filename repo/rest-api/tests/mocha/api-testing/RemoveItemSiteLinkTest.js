@@ -115,13 +115,10 @@ describe( newRemoveItemSiteLinkRequestBuilder().getRouteDescription(), () => {
 			assert.include( response.body.message, invalidItemId );
 		} );
 
-		// From OAS point of view, this request is valid, as there is no specific pattern for the site id string,
-		// but site id can't be any string, so from Wikibase point of view it's invalid
-		// that's why the 'assertInvalidRequest' method was commented here.
 		it( 'invalid site ID', async () => {
 			const invalidSiteId = 'not-a-valid-site-id';
 			const response = await newRemoveItemSiteLinkRequestBuilder( testItemId, invalidSiteId )
-				// .assertInvalidRequest()
+				// .assertInvalidRequest() - valid per OAS because it only checks whether it is a string
 				.makeRequest();
 
 			expect( response ).to.have.status( 400 );
