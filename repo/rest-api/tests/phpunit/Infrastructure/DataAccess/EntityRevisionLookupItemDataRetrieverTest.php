@@ -9,6 +9,8 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Lib\Store\EntityRevision;
@@ -19,6 +21,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemPartsBuilder;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
+use Wikibase\Repo\RestApi\Domain\ReadModel\SiteLinks;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupItemDataRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\SiteLinksReadModelConverter;
@@ -220,6 +223,74 @@ class EntityRevisionLookupItemDataRetrieverTest extends TestCase {
 		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithRedirect( $itemId );
 
 		$this->assertNull( $this->newRetriever()->getItem( $itemId ) );
+	}
+
+	public function testGetItemSiteLinks(): void {
+		$itemId = new ItemId( 'Q123' );
+		$deSiteId = 'dewiki';
+		$dePageName = 'Kartoffel';
+
+		$enSiteId = 'enwiki';
+		$enPageName = 'Potato';
+
+		$badges = [ new ItemId( 'Q1' ) ];
+
+		$item = NewItem::withId( $itemId )
+			->andSiteLink( $deSiteId, $dePageName, $badges )
+			->andSiteLink( $enSiteId, $enPageName, $badges )
+			->build();
+
+		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $itemId, $item );
+
+		$siteLinks = $this->newRetriever()->getSiteLinks( $itemId );
+
+		$this->assertEquals(
+			$this->newSiteLinksReadModelConverter()->convert(
+				new SiteLinkList( [
+					new SiteLink( $deSiteId, $dePageName, $badges ),
+					new SiteLink( $enSiteId, $enPageName, $badges ),
+				] )
+			),
+			$siteLinks
+		);
+	}
+
+	public function testGivenItemHasNoSiteLinks_returnsEmptySiteLinks(): void {
+		$itemId = new ItemId( 'Q123' );
+
+		$item = NewItem::withId( $itemId )->build();
+
+		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $itemId, $item );
+
+		$siteLinks = $this->newRetriever()->getSiteLinks( $itemId );
+
+		$this->assertEquals( new SiteLinks(), $siteLinks );
+	}
+
+	public function testGetSiteLink(): void {
+		$itemId = new ItemId( 'Q123' );
+		$siteId = 'enwiki';
+		$pageName = 'potato';
+		$badges = [ new ItemId( 'Q1' ) ];
+
+		$item = NewItem::withId( $itemId )->andSiteLink( $siteId, $pageName, $badges )->build();
+
+		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $itemId, $item );
+
+		$this->assertEquals(
+			$this->newSiteLinksReadModelConverter()->convert( new SiteLinkList( [ new SiteLink( $siteId, $pageName, $badges ) ] ) )[0],
+			$this->newRetriever()->getSiteLink( $itemId, $siteId )
+		);
+	}
+
+	public function testGivenItemHasNoSiteLinksForRequestSite_returnsNull(): void {
+		$itemId = new ItemId( 'Q123' );
+
+		$item = NewItem::withId( $itemId )->build();
+
+		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $itemId, $item );
+
+		$this->assertNull( $this->newRetriever()->getSiteLink( $itemId, 'enwiki' ) );
 	}
 
 	private function newRetriever(): EntityRevisionLookupItemDataRetriever {

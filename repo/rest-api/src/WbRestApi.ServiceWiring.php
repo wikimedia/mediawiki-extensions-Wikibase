@@ -125,7 +125,6 @@ use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdaterPropertyUpdater
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdaterStatementRemover;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdaterStatementUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\PrefetchingTermLookupAliasesRetriever;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\SiteLinkLookupSiteLinksRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\StatementSubjectRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\TermLookupEntityTermsRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\WikibaseEntityPermissionChecker;
@@ -464,7 +463,7 @@ return [
 		return new GetItemSiteLink(
 			WbRestApi::getValidatingRequestDeserializer( $services ),
 			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
-			WbRestApi::getSiteLinksRetriever( $services ),
+			WbRestApi::getItemDataRetriever( $services ),
 		);
 	},
 
@@ -472,7 +471,7 @@ return [
 		return new GetItemSiteLinks(
 			WbRestApi::getValidatingRequestDeserializer( $services ),
 			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
-			WbRestApi::getSiteLinksRetriever( $services ),
+			WbRestApi::getItemDataRetriever( $services ),
 		);
 	},
 
@@ -952,13 +951,6 @@ return [
 			WbRestApi::getPropertyUpdater( $services ),
 			WbRestApi::getAssertPropertyExists( $services ),
 			WbRestApi::getAssertUserIsAuthorized( $services )
-		);
-	},
-
-	'WbRestApi.SiteLinksRetriever' => function( MediaWikiServices $services ): SiteLinkLookupSiteLinksRetriever {
-		return new SiteLinkLookupSiteLinksRetriever(
-			WikibaseRepo::getStore( $services )->newSiteLinkStore(),
-			new SiteLinksReadModelConverter( $services->getSiteLookup() )
 		);
 	},
 
