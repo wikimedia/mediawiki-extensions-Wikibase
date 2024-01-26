@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Lib\Tests\Changes;
 
+use IDBAccessObject;
 use LogicException;
 use MediaWiki\User\CentralId\CentralIdLookup;
 use MediaWiki\User\User;
@@ -46,19 +47,19 @@ class MockRepoClientCentralIdLookup extends CentralIdLookup {
 	}
 
 	public function lookupCentralIds(
-		array $idToName, $audience = self::AUDIENCE_PUBLIC, $flags = self::READ_NORMAL
+		array $idToName, $audience = self::AUDIENCE_PUBLIC, $flags = IDBAccessObject::READ_NORMAL
 	): array {
 		throw new LogicException( 'Not implemented' );
 	}
 
 	public function lookupUserNames(
-		array $nameToId, $audience = self::AUDIENCE_PUBLIC, $flags = self::READ_NORMAL
+		array $nameToId, $audience = self::AUDIENCE_PUBLIC, $flags = IDBAccessObject::READ_NORMAL
 	): array {
 		throw new LogicException( 'Not implemented' );
 	}
 
 	public function localUserFromCentralId(
-		$id, $audience = self::AUDIENCE_PUBLIC, $flags = self::READ_NORMAL
+		$id, $audience = self::AUDIENCE_PUBLIC, $flags = IDBAccessObject::READ_NORMAL
 	): ?UserIdentity {
 		if ( $id >= 0 ) {
 			// Invalid central ID
@@ -71,7 +72,7 @@ class MockRepoClientCentralIdLookup extends CentralIdLookup {
 	}
 
 	public function centralIdFromLocalUser(
-		UserIdentity $user, $audience = self::AUDIENCE_PUBLIC, $flags = self::READ_NORMAL
+		UserIdentity $user, $audience = self::AUDIENCE_PUBLIC, $flags = IDBAccessObject::READ_NORMAL
 	): int {
 		$localUserId = $user->getId();
 
