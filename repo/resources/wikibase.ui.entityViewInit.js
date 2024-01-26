@@ -168,12 +168,10 @@
 				var userLoginUrl = mw.util.getUrl( 'Special:UserLogin', { returnto: currentPage } );
 				var createAccountUrl = mw.util.getUrl( 'Special:CreateAccount', { returnto: currentPage } );
 				var message;
-				if ( config.tempUserEnabled ) {
-					message = mw.message( 'wikibase-anonymouseditnotificationtempuser', userLoginUrl, createAccountUrl );
-				} else {
+				if ( !config.tempUserEnabled ) {
 					message = mw.message( 'wikibase-anonymouseditwarning', userLoginUrl, createAccountUrl );
+					mw.notify( message, { autoHide: false, type: 'warn', tag: 'wikibase-anonymouseditpopup' } );
 				}
-				mw.notify( message, { autoHide: false, type: 'warn', tag: 'wikibase-anonymouseditpopup' } );
 			}
 		} );
 	}
