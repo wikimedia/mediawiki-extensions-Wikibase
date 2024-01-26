@@ -6,6 +6,7 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\Patcher\PatcherException;
+use IDBAccessObject;
 use InvalidArgumentException;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
@@ -383,7 +384,7 @@ abstract class EntityContentTestCase extends MediaWikiIntegrationTestCase {
 		$titleLookup = WikibaseRepo::getEntityTitleStoreLookup();
 		$title = $titleLookup->getTitleForId( $entity->getId() );
 
-		if ( !$title->exists( Title::GAID_FOR_UPDATE ) ) {
+		if ( !$title->exists( IDBAccessObject::READ_LATEST ) ) {
 			$store = WikibaseRepo::getEntityStore();
 			$store->saveEntity( $entity, 'test', $this->getTestUser()->getUser() );
 
@@ -392,7 +393,7 @@ abstract class EntityContentTestCase extends MediaWikiIntegrationTestCase {
 		}
 
 		// sanity check - page must exist now
-		$this->assertTrue( $title->exists( Title::GAID_FOR_UPDATE ), 'sanity check: exists()' );
+		$this->assertTrue( $title->exists( IDBAccessObject::READ_LATEST ), 'sanity check: exists()' );
 
 		return $title;
 	}
