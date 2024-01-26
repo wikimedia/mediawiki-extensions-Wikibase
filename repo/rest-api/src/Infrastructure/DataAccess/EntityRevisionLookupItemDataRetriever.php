@@ -13,17 +13,27 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemPartsBuilder;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
+use Wikibase\Repo\RestApi\Domain\ReadModel\SiteLink;
+use Wikibase\Repo\RestApi\Domain\ReadModel\SiteLinks;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemPartsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementsRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\SiteLinkRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\SiteLinksRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\RestApi\Infrastructure\SiteLinksReadModelConverter;
 
 /**
  * @license GPL-2.0-or-later
  */
-class EntityRevisionLookupItemDataRetriever implements ItemRetriever, ItemPartsRetriever, ItemStatementsRetriever {
+class EntityRevisionLookupItemDataRetriever implements
+	ItemRetriever,
+	ItemPartsRetriever,
+	ItemStatementsRetriever,
+	SiteLinkRetriever,
+	SiteLinksRetriever
+{
 
 	private EntityRevisionLookup $entityRevisionLookup;
 	private StatementReadModelConverter $statementReadModelConverter;
@@ -101,4 +111,20 @@ class EntityRevisionLookupItemDataRetriever implements ItemRetriever, ItemPartsR
 			iterator_to_array( $list )
 		) );
 	}
+
+	public function getSiteLinks( ItemId $itemId ): SiteLinks {
+		return $this->getItemParts( $itemId, [ ItemParts::FIELD_SITELINKS ] )->getSiteLinks() ?? new SiteLinks();
+	}
+
+	public function getSiteLink( ItemId $itemId, string $site ): ?SiteLink {
+		$siteLinks = $this->getItemParts( $itemId, [ ItemParts::FIELD_SITELINKS ] )->getSiteLinks();
+		foreach ( $siteLinks as $siteLink ) {
+			if ( $siteLink->getSite() === $site ) {
+				return $siteLink;
+			}
+		}
+
+		return null;
+	}
+
 }

@@ -70,7 +70,6 @@ use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupItemData
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupPropertyDataRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupStatementRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdater;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\SiteLinkLookupSiteLinksRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\TermLookupEntityTermsRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
@@ -94,11 +93,6 @@ class WbRestApi {
 	public static function getGetItemSiteLink( ContainerInterface $services = null ): GetItemSiteLink {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.GetItemSiteLink' );
-	}
-
-	public static function getSiteLinksRetriever( ContainerInterface $services = null ): SiteLinkLookupSiteLinksRetriever {
-		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.SiteLinksRetriever' );
 	}
 
 	public static function getGetItemLabels( ContainerInterface $services = null ): GetItemLabels {
