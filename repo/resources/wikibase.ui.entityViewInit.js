@@ -156,7 +156,7 @@
 	 * @param {string} entityType
 	 */
 	function attachAnonymousEditWarningTrigger( $entityview, viewName, entityType ) {
-		if ( !mw.user || !mw.user.isAnon() ) {
+		if ( config.tempUserEnabled || !mw.user || !mw.user.isAnon() ) {
 			return;
 		}
 
@@ -167,11 +167,8 @@
 				var currentPage = mw.config.get( 'wgPageName' );
 				var userLoginUrl = mw.util.getUrl( 'Special:UserLogin', { returnto: currentPage } );
 				var createAccountUrl = mw.util.getUrl( 'Special:CreateAccount', { returnto: currentPage } );
-				var message;
-				if ( !config.tempUserEnabled ) {
-					message = mw.message( 'wikibase-anonymouseditwarning', userLoginUrl, createAccountUrl );
-					mw.notify( message, { autoHide: false, type: 'warn', tag: 'wikibase-anonymouseditpopup' } );
-				}
+				var message = mw.message( 'wikibase-anonymouseditwarning', userLoginUrl, createAccountUrl );
+				mw.notify( message, { autoHide: false, type: 'warn', tag: 'wikibase-anonymouseditpopup' } );
 			}
 		} );
 	}
