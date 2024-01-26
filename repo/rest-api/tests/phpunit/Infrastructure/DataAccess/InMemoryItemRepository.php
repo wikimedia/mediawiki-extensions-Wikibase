@@ -2,7 +2,9 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
 
+use HashSiteStore;
 use LogicException;
+use MediaWiki\Site\Site;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
@@ -17,12 +19,18 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemDescriptionsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemLabelsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\Infrastructure\SiteLinksReadModelConverter;
 
 /**
  * @license GPL-2.0-or-later
  */
 class InMemoryItemRepository implements ItemRetriever, ItemLabelsRetriever, ItemDescriptionsRetriever, ItemAliasesRetriever, ItemUpdater {
 	use StatementReadModelHelper;
+
+	public const EN_WIKI_SITE_ID = 'enwiki';
+	public const DE_WIKI_SITE_ID = 'dewiki';
+	public const EN_WIKI_URL_PREFIX = 'https://en.wikipedia.org/wiki/';
+	public const DE_WIKI_URL_PREFIX = 'https://de.wikipedia.org/wiki/';
 
 	private array $items = [];
 	private array $latestRevisionData = [];
@@ -81,11 +89,23 @@ class InMemoryItemRepository implements ItemRetriever, ItemLabelsRetriever, Item
 			Labels::fromTermList( $item->getLabels() ),
 			Descriptions::fromTermList( $item->getDescriptions() ),
 			Aliases::fromAliasGroupList( $item->getAliasGroups() ),
+			$this->newSitelinksReadModelConverter()->convert( $item->getSiteLinkList() ),
 			new StatementList( ...array_map(
 				[ $this->newStatementReadModelConverter(), 'convert' ],
 				iterator_to_array( $item->getStatements() )
 			) )
 		);
+	}
+
+	private function newSitelinksReadModelConverter(): SiteLinksReadModelConverter {
+		$enSite = new Site();
+		$enSite->setGlobalId( self::EN_WIKI_SITE_ID );
+		$enSite->setLinkPath( self::EN_WIKI_URL_PREFIX . '$1' );
+		$deSite = new Site();
+		$deSite->setGlobalId( self::DE_WIKI_SITE_ID );
+		$deSite->setLinkPath( self::DE_WIKI_URL_PREFIX . '$1' );
+
+		return new SiteLinksReadModelConverter( new HashSiteStore( [ $enSite, $deSite ] ) );
 	}
 
 }

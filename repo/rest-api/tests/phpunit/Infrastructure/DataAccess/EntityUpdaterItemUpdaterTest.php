@@ -3,6 +3,9 @@
 namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
 
 use PHPUnit\Framework\TestCase;
+use Site;
+use SiteLookup;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Lib\Store\EntityRevision;
@@ -15,10 +18,13 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Item;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
+use Wikibase\Repo\RestApi\Domain\ReadModel\SiteLink;
+use Wikibase\Repo\RestApi\Domain\ReadModel\SiteLinks;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdaterItemUpdater;
+use Wikibase\Repo\RestApi\Infrastructure\SiteLinksReadModelConverter;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
 
 /**
@@ -31,6 +37,9 @@ use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
 class EntityUpdaterItemUpdaterTest extends TestCase {
 
 	use StatementReadModelHelper;
+
+	private const EN_WIKI_URL_PREFIX = 'https://en.wikipedia.org/wiki/';
+	private const DE_WIKI_URL_PREFIX = 'https://de.wikipedia.org/wiki/';
 
 	private EntityUpdater $entityUpdater;
 	private StatementReadModelConverter $statementReadModelConverter;
@@ -75,19 +84,36 @@ class EntityUpdaterItemUpdaterTest extends TestCase {
 				->andLabel( 'en', 'English Label' )
 				->andDescription( 'en', 'English Description' )
 				->andAliases( 'en', [ 'English alias', 'alias in English' ] )
+				->andSiteLink( 'enwiki', 'Title', [ 'Q789' ] )
 				->andStatement( $writeModelStatement )
 				->build(),
 			new Item(
 				new Labels( new Label( 'en', 'English Label' ) ),
 				new Descriptions( new Description( 'en', 'English Description' ) ),
 				new Aliases( new AliasesInLanguage( 'en', [ 'English alias', 'alias in English' ] ) ),
+				new SiteLinks( new SiteLink( 'enwiki', 'Title', [ new ItemId( 'Q789' ) ], self::EN_WIKI_URL_PREFIX . 'Title' ) ),
 				new StatementList( $readModelStatement )
 			),
 		];
 	}
 
 	private function newItemUpdater(): EntityUpdaterItemUpdater {
-		return new EntityUpdaterItemUpdater( $this->entityUpdater, $this->statementReadModelConverter );
+		return new EntityUpdaterItemUpdater( $this->entityUpdater, $this->newSitelinkConverter(),  $this->statementReadModelConverter );
+	}
+
+	private function newSitelinkConverter(): SiteLinksReadModelConverter {
+		$enSite = new Site();
+		$enSite->setLinkPath( self::EN_WIKI_URL_PREFIX . '$1' );
+		$deSite = new Site();
+		$deSite->setLinkPath( self::DE_WIKI_URL_PREFIX . '$1' );
+
+		$siteLookup = $this->createStub( SiteLookup::class );
+		$siteLookup->method( 'getSite' )->willReturnMap( [
+			[ 'enwiki', $enSite ],
+			[ 'dewiki', $deSite ],
+		] );
+
+		return new SiteLinksReadModelConverter( $siteLookup );
 	}
 
 }

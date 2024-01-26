@@ -10,12 +10,20 @@ class Item {
 	private Labels $labels;
 	private Descriptions $descriptions;
 	private Aliases $aliases;
+	private SiteLinks $sitelinks;
 	private StatementList $statements;
 
-	public function __construct( Labels $labels, Descriptions $descriptions, Aliases $aliases, StatementList $statements ) {
+	public function __construct(
+		Labels $labels,
+		Descriptions $descriptions,
+		Aliases $aliases,
+		SiteLinks $sitelinks,
+		StatementList $statements
+	) {
 		$this->labels = $labels;
 		$this->descriptions = $descriptions;
 		$this->aliases = $aliases;
+		$this->sitelinks = $sitelinks;
 		$this->statements = $statements;
 	}
 
@@ -29,6 +37,10 @@ class Item {
 
 	public function getAliases(): Aliases {
 		return $this->aliases;
+	}
+
+	public function getSitelinks(): SiteLinks {
+		return $this->sitelinks;
 	}
 
 	public function getStatements(): StatementList {

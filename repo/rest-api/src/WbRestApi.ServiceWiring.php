@@ -611,6 +611,7 @@ return [
 	'WbRestApi.ItemUpdater' => function( MediaWikiServices $services ): ItemUpdater {
 		return new EntityUpdaterItemUpdater(
 			WbRestApi::getEntityUpdater( $services ),
+			new SiteLinksReadModelConverter( $services->getSiteLookup() ),
 			new StatementReadModelConverter(
 				WikibaseRepo::getStatementGuidParser( $services ),
 				WikibaseRepo::getPropertyDataTypeLookup( $services )
