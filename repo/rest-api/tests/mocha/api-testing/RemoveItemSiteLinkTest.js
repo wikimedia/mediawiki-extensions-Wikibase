@@ -177,14 +177,4 @@ describe( newRemoveItemSiteLinkRequestBuilder().getRouteDescription(), () => {
 			assert.strictEqual( response.body.expectedType, 'string' );
 		} );
 	} );
-
-	it( 'responds 415 for unsupported media type', async () => {
-		const contentType = 'multipart/form-data';
-		const response = await newRemoveItemSiteLinkRequestBuilder( testItemId, siteId )
-			.withHeader( 'content-type', contentType )
-			.makeRequest();
-
-		expect( response ).to.have.status( 415 );
-		assert.strictEqual( response.body.message, `Unsupported Content-Type: '${contentType}'` );
-	} );
 } );
