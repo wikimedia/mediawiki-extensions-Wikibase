@@ -263,7 +263,6 @@ return call_user_func( function() {
 				'pagetitle',
 				'wikibase-copyrighttooltip-acknowledge',
 				'wikibase-anonymouseditwarning',
-				'wikibase-anonymouseditnotificationtempuser',
 				'wikibase-entity-item',
 				'wikibase-entity-property',
 				'wikibase-add',
