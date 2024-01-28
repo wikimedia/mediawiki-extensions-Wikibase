@@ -4,8 +4,12 @@
 			"POSSUM chowg"
 		]
 	},
+	"wikibase-dataitem": "{{WBREPONAME}} ikta",
 	"wikibase-editlinks": "Munk-tsəm kopa hayu-lakhlwa-łipayt",
 	"wikibase-linkitem-addlinks": "Pałach hayu-lakhlwa-łipayt",
+	"wikibase-linkitem-title": "Hayu-lakhlwa-łipait khanumakwst pipa",
+	"wikibase-linkitem-linkpage": "Hayu-lakhlwa-łipait khanumakwst pipa",
+	"wikibase-linkitem-selectlink": "Pik ixt inanet-iliʔi pi ixt pipa pus maika tikix mamuk hayu-lakhlwa-łipait kopa ukuk pipa.",
 	"wikibase-linkitem-input-site": "Ləlang:",
 	"wikibase-linkitem-input-page": "Pipa:",
 	"wikibase-rc-hide-wikidata-hide": "Mamuk-chako-ipsut",

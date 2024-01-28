@@ -19,6 +19,7 @@
 	"wikibase-error-ui-no-external-page": "'A vôsce \"$2\" non ge pò essere acchiate sus a \"$1\".",
 	"wikibase-error-ui-edit-conflict": "Stè 'nu conflitte de cangiamende. Recareche sta pàgene e reggistre arrete.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (translitterate)",
+	"wikibase-language-name-for-terms-mul": "valore predefinite (mul)",
 	"wikibase-quantitydetails-amount": "'Mborte",
 	"wikibase-quantitydetails-upperbound": "Limite superiore",
 	"wikibase-quantitydetails-lowerbound": "Limite 'nferiore",
