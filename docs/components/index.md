@@ -2,7 +2,7 @@
 
 Wikibase is made up of multiple components, some of which have sub components.
 
-The top level Mediawiki extensions are:
+The top level MediaWiki extensions are:
 
 * @subpage docs_components_repo (in the [repo directory])
   * @subpage docs_components_view (in the [view directory])

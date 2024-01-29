@@ -18,7 +18,7 @@ use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 
 /**
- * Class to run the Mediawiki EditFilterMergedContent hook.
+ * Class to run the MediaWiki EditFilterMergedContent hook.
  *
  * @license GPL-2.0-or-later
  * @author Addshore

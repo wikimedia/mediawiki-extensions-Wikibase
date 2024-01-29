@@ -51,14 +51,14 @@ The code in `src/main.ts` is executed by `src/mock-entry.ts` when in dev mode.
 
 It is executed by `src/init.ts` when part of a Wikibase page.
 
-`src/init.ts` contains code that is bound to the window environment present in Mediawiki/Wikibase. It uses [ResourceLoader](https://www.mediawiki.org/wiki/ResourceLoader)
+`src/init.ts` contains code that is bound to the window environment present in MediaWiki/Wikibase. It uses [ResourceLoader](https://www.mediawiki.org/wiki/ResourceLoader)
 to load the rest of the application.
 
 `src/tainted-ref.init.ts` is built into `dist/tainted-ref.init.js` and runs the exported function of init.ts after page load.
 
 
 ### Hooks
-This application listens to hooks fired by the Mediawiki UI and then proceeds to handle them. e.g. by dispatching vuex actions
+This application listens to hooks fired by the MediaWiki UI and then proceeds to handle them. e.g. by dispatching vuex actions
 or running other code.
 
 How hooks are handled is defined in `src/MWHookHandler.ts`
