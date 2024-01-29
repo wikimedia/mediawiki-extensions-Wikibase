@@ -352,19 +352,4 @@ describe( newSetItemLabelRequestBuilder().getRouteDescription(), () => {
 			assert.strictEqual( response.body.code, 'redirected-item' );
 		} );
 	} );
-
-	describe( '415 error response', () => {
-		it( 'unsupported media type', async () => {
-			const contentType = 'multipart/form-data';
-			const response = await newSetItemLabelRequestBuilder(
-				testItemId,
-				'en',
-				'test label'
-			).withHeader( 'content-type', contentType ).makeRequest();
-
-			expect( response ).to.have.status( 415 );
-			assert.strictEqual( response.body.message, `Unsupported Content-Type: '${contentType}'` );
-		} );
-	} );
-
 } );

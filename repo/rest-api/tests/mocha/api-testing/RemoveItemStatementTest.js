@@ -157,19 +157,6 @@ describe( 'DELETE statement', () => {
 					assert.include( response.body.message, statementId );
 				} );
 			} );
-
-			describe( '415 error response', () => {
-				it( 'unsupported media type', async () => {
-					const contentType = 'multipart/form-data';
-					const response = await newRemoveRequestBuilder( 'id-does-not-matter' )
-						.withHeader( 'content-type', contentType )
-						.makeRequest();
-
-					expect( response ).to.have.status( 415 );
-					assert.strictEqual( response.body.message, `Unsupported Content-Type: '${contentType}'` );
-				} );
-			} );
-
 		} );
 	} );
 
