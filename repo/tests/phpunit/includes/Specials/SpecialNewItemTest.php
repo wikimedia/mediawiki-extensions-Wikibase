@@ -6,6 +6,7 @@ use MediaWiki\Languages\LanguageNameUtils;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Request\WebResponse;
 use MediaWiki\Site\HashSiteStore;
+use MediaWiki\Site\MediaWikiPageNameNormalizer;
 use MediaWiki\Site\Site;
 use MediaWiki\Site\SiteStore;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -41,6 +42,9 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class SpecialNewItemTest extends SpecialNewEntityTestCase {
 
+	private const BADGE_GOOD_ARTICLE = 'Q17437798';
+	private const BADGE_SITELINK_TO_REDIRECT = 'Q70893996';
+
 	/**
 	 * @var SiteStore
 	 */
@@ -50,7 +54,16 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 		parent::setUp();
 		$this->siteStore = new HashSiteStore();
 
-		WikibaseRepo::getSettings()->setSetting( 'tmpEnableMulLanguageCode', true );
+		$settings = clone WikibaseRepo::getSettings();
+		$settings->setSetting( 'tmpEnableMulLanguageCode', true );
+		$settings->setSetting( 'badgeItems', [
+			self::BADGE_GOOD_ARTICLE => 'good-article',
+			self::BADGE_SITELINK_TO_REDIRECT => 'sitelink-to-redirect',
+		] );
+		$settings->setSetting( 'redirectBadgeItems', [
+			self::BADGE_SITELINK_TO_REDIRECT,
+		] );
+		$this->setService( 'WikibaseRepo.Settings', $settings );
 	}
 
 	protected function newSpecialPage() {
@@ -63,11 +76,14 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 			WikibaseRepo::getSummaryFormatter(),
 			WikibaseRepo::getEntityTitleLookup(),
 			WikibaseRepo::getEditEntityFactory(),
+			WikibaseRepo::getSiteLinkPageNormalizer(),
 			WikibaseRepo::getAnonymousEditWarningBuilder(),
 			$this->getTermValidatorFactoryMock(),
 			WikibaseRepo::getItemTermsCollisionDetector(),
 			WikibaseRepo::getValidatorErrorLocalizer(),
 			new SiteLinkTargetProvider( $this->siteStore ),
+			WikibaseRepo::getFallbackLabelDescriptionLookupFactory(),
+			WikibaseRepo::getSettings()->getSetting( 'badgeItems' ),
 			[ 'wikiblah' ],
 			false
 		);
@@ -364,6 +380,30 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 			'Failed request should not have consumed item ID' );
 	}
 
+	public function testCreateItemWithSitelinkWithBadges(): void {
+		$existingSiteId = 'existing-site';
+		$formData = [
+			SpecialNewItem::FIELD_LANG => 'en',
+			SpecialNewItem::FIELD_LABEL => 'some label',
+			SpecialNewItem::FIELD_DESCRIPTION => '',
+			SpecialNewItem::FIELD_ALIASES => '',
+			SpecialNewItem::FIELD_SITE => $existingSiteId,
+			SpecialNewItem::FIELD_PAGE => 'Some page',
+			SpecialNewItem::FIELD_BADGES => [ self::BADGE_SITELINK_TO_REDIRECT ],
+		];
+		$this->givenSiteNormalizingDependingOnRedirectFlag( $existingSiteId );
+
+		[ , $webResponse ] = $this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
+
+		$entityId = $this->extractEntityIdFromUrl( $webResponse->getHeader( 'location' ) );
+		/** @var Item $item */
+		$item = WikibaseRepo::getEntityLookup()->getEntity( $entityId );
+		$sitelink = $item->getSiteLink( $existingSiteId );
+		$this->assertSame( 'Some page', $sitelink->getPageName() );
+		$this->assertCount( 1, $sitelink->getBadges() );
+		$this->assertSame( self::BADGE_SITELINK_TO_REDIRECT, $sitelink->getBadges()[0]->getSerialization() );
+	}
+
 	/**
 	 * @param string $url
 	 *
@@ -430,6 +470,24 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 		$siteMock->setGroup( 'different-site-group' );
 		$siteMock->expects( $this->never() )->
 			method( 'normalizePageName' );
+
+		$this->siteStore->saveSite( $siteMock );
+	}
+
+	private function givenSiteNormalizingDependingOnRedirectFlag( $existingSiteId ) {
+		$siteMock = $this->getMockBuilder( Site::class )
+			->onlyMethods( [ 'normalizePageName' ] )
+			->getMock();
+		$siteMock->setGlobalId( $existingSiteId );
+		$siteMock->setGroup( 'wikiblah' );
+		$siteMock->method( 'normalizePageName' )
+			->willReturnCallback( function ( $pageName, $followRedirect ) {
+				if ( $followRedirect === MediaWikiPageNameNormalizer::FOLLOW_REDIRECT ) {
+					return "Redirect target of $pageName";
+				} else {
+					return $pageName;
+				}
+			} );
 
 		$this->siteStore->saveSite( $siteMock );
 	}
