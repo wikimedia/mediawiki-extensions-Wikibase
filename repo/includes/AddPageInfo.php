@@ -22,7 +22,7 @@ class AddPageInfo {
 	}
 
 	/**
-	 * Adds Mediawiki page metadata to the record.
+	 * Adds MediaWiki page metadata to the record.
 	 *
 	 * @param array $record Record to which to add metadata.
 	 * @param EntityRevision $entityRevision

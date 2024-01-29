@@ -190,7 +190,7 @@ final class WikibaseClient {
 	}
 
 	public static function getStringNormalizer( ContainerInterface $services = null ): StringNormalizer {
-		return ( $services ?: MediawikiServices::getInstance() )
+		return ( $services ?: MediaWikiServices::getInstance() )
 				->get( 'WikibaseClient.StringNormalizer' );
 	}
 

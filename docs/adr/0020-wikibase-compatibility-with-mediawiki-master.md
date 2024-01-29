@@ -1,4 +1,4 @@
-# 20) Keep Wikibase master compatible with Mediawiki Core master {#adr_0020}
+# 20) Keep Wikibase master compatible with MediaWiki Core master {#adr_0020}
 
 Date: 2021-06-30
 
@@ -8,7 +8,7 @@ accepted
 
 ## Context
 
-Wikibase is currently only tested to be compatible with Mediawiki core and other MediaWiki extensions for:
+Wikibase is currently only tested to be compatible with MediaWiki core and other MediaWiki extensions for:
 - sets of commits that are the HEAD of the master branch at one point in time
 - cut releases: either for the alpha, weekly train releases (i.e. releases delivered on WMF wikis), or the twice-yearly(ish) official MediaWiki releases
 
@@ -42,7 +42,7 @@ The overhead of the additional development effort will possibly be increasingly 
 the more code has been written that way, and the more Wikibase releases have been published following this approach.
 
 Keeping Wikibase compatible with last stable MediaWiki would likely mean avoiding the "double work" effort
-of developing the feature against the master branch, and "backporting" it to be compatible with the last stable version of Mediawiki
+of developing the feature against the master branch, and "backporting" it to be compatible with the last stable version of MediaWiki
 needed for the Wikibase release for non-WMF users.
 
 ## Decision
