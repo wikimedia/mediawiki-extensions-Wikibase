@@ -2,10 +2,16 @@
 	"@metadata": {
 		"authors": [
 			"Munkhzaya.E",
-			"Sembuk"
+			"Sembuk",
+			"Chinneeb",
+			"Enkhsaihan2005"
 		]
 	},
 	"wikibase-edit": "засварлах",
+	"wikibase-add": "нэмэх",
 	"wikibase-entitytermsforlanguagelistview-more": "Бусад хэлээр",
-	"wikibase-entitytermsforlanguagelistview-less": "Цөөн хэлээр"
+	"wikibase-entitytermsforlanguagelistview-less": "Цөөн хэлээр",
+	"wikibase-label-empty": "Тодорхойлолтгүй шошго",
+	"wikibase-description-empty": "Тодорхойлолт байхгүй",
+	"wikibase-sitelinks-special": "Бусад сайтууд"
 }

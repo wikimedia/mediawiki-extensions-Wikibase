@@ -372,6 +372,7 @@
 	"wikibase-pageinfo-subscription-none": "Нема",
 	"wikibase-pageinfo-wb-claims": "Број изјава у овом ентитету",
 	"wikibase-search-bad-entity-type": "Лоша врста јединице: $1",
+	"wikibase-shortcopyrightwarning-heading": "Ауторство",
 	"wikibase-entity-save-error-heading": "Дошло је до грешке",
 	"wikibase-entity-save-error-message": "Ваша измена није објављена. Молимо покушајте поново.",
 	"wikibase-tainted-ref-popper-text": "Вредност изјаве је промењена, али је референца остала иста. Уклоните ово упозорење само ако је референца и даље исправна.",
