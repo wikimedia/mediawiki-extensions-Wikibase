@@ -165,6 +165,7 @@
 	"wikibase-validator-bad-value": "Valor de dados corrompido: $1",
 	"wikibase-validator-bad-value-type": "Tipo de valor inválido $1; era esperado $2",
 	"wikibase-validator-bad-data-type": "Tipo de dados incorreto: $1",
+	"wikibase-validator-bad-prefix": "Valor incorreto $1, era esperado que começasse por $2",
 	"wikibase-validator-bad-url": "Os URL não podem conter certos caracteres, como espaços ou parênteses retos: $1",
 	"wikibase-validator-url-scheme-missing": "Falta um protocolo no URL, como \"https://\": $1",
 	"wikibase-validator-bad-url-scheme": "O protocolo do URL, \"$1\", não é suportado.",

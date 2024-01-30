@@ -4,16 +4,18 @@
 			"Amire80",
 			"Chinneeb",
 			"Elvonudinium",
-			"MongolWiki"
+			"MongolWiki",
+			"Enkhsaihan2005"
 		]
 	},
-	"wikibase-dataitem": "Бусад хэлний холбоос",
+	"wikibase-dataitem": "{{WBREPONAME}} зүйл",
 	"wikibase-editlinks": "Холбоос засах",
 	"wikibase-editlinkstitle": "Өөр хэлтэй холбосныг засах",
 	"wikibase-addlinkstitle": "Өөр хэлтэй холбох",
 	"wikibase-linkitem-addlinks": "Холбоос нэмэх",
 	"wikibase-linkitem-title": "Хуудастай холбох",
 	"wikibase-linkitem-linkpage": "Хуудастай холбох",
+	"wikibase-linkitem-selectlink": "Энэ хуудас руу холбохыг хүссэн сайт болон хуудсаа сонгоно уу.",
 	"wikibase-linkitem-input-site": "Хэл:",
 	"wikibase-linkitem-input-page": "Хуудас:",
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
