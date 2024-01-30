@@ -116,15 +116,9 @@ class EntityRevisionLookupItemDataRetriever implements
 		return $this->getItemParts( $itemId, [ ItemParts::FIELD_SITELINKS ] )->getSitelinks() ?? new Sitelinks();
 	}
 
-	public function getSitelink( ItemId $itemId, string $site ): ?Sitelink {
+	public function getSitelink( ItemId $itemId, string $siteId ): ?Sitelink {
 		$sitelinks = $this->getItemParts( $itemId, [ ItemParts::FIELD_SITELINKS ] )->getSitelinks();
-		foreach ( $sitelinks as $sitelink ) {
-			if ( $sitelink->getSite() === $site ) {
-				return $sitelink;
-			}
-		}
-
-		return null;
+		return $sitelinks[ $siteId ] ?? null;
 	}
 
 }

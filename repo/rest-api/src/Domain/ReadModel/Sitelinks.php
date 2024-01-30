@@ -12,7 +12,7 @@ class Sitelinks extends ArrayObject {
 	public function __construct( Sitelink ...$sitelinks ) {
 		parent::__construct(
 			array_combine(
-				array_map( fn( Sitelink $sitelink ) => $sitelink->getSite(), $sitelinks ),
+				array_map( fn( Sitelink $sitelink ) => $sitelink->getSiteId(), $sitelinks ),
 				$sitelinks
 			)
 		);
