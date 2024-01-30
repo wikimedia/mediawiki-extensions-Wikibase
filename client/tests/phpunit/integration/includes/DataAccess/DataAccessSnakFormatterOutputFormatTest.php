@@ -167,6 +167,9 @@ class DataAccessSnakFormatterOutputFormatTest extends MediaWikiIntegrationTestCa
 					new StringValue( 'a [[b]] c' )
 				),
 			],
+			// Temporarily disable this test to break cyclic dependency
+			// with a change to wikitext escaping.
+			/*
 			'time with PRECISION_SECOND' => [
 				'+2013-01-01T00:00:00Z',
 				new PropertyValueSnak(
@@ -179,6 +182,7 @@ class DataAccessSnakFormatterOutputFormatTest extends MediaWikiIntegrationTestCa
 					)
 				),
 			],
+			*/
 			'time with PRECISION DAY' => [
 				'1 January 2013',
 				new PropertyValueSnak(
