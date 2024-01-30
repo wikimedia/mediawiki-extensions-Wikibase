@@ -19,6 +19,14 @@ class SitelinkEditSummary implements EditSummary {
 		$this->sitelink = $sitelink;
 	}
 
+	public static function newAddSummary( ?string $userComment, SiteLink $sitelink ): self {
+		return new self( self::ADD_ACTION, $userComment, $sitelink );
+	}
+
+	public static function newReplaceSummary( ?string $userComment, SiteLink $sitelink ): self {
+		return new self( self::REPLACE_ACTION, $userComment, $sitelink );
+	}
+
 	public static function newRemoveSummary( ?string $userComment, SiteLink $sitelink ): self {
 		return new self( self::REMOVE_ACTION, $userComment, $sitelink );
 	}

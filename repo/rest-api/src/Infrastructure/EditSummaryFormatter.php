@@ -38,7 +38,7 @@ class EditSummaryFormatter {
 		);
 	}
 
-	// phpcs:ignore Generic.Metrics.CyclomaticComplexity.TooHigh
+	// phpcs:ignore Generic.Metrics.CyclomaticComplexity
 	private function convertToFormattableSummary( EditSummary $editSummary ): FormatableSummary {
 		if ( $editSummary instanceof LabelsEditSummary ) {
 			return $this->summaryConverter->convertLabelsEditSummary( $editSummary );
@@ -76,17 +76,23 @@ class EditSummaryFormatter {
 				case EditSummary::PATCH_ACTION:
 					return $this->newSummaryForStatementEdit( $editSummary, 'wbsetclaim', 'update', 1 );
 			}
-		} elseif ( $editSummary instanceof SitelinkEditSummary && $editSummary->getEditAction() === EditSummary::REMOVE_ACTION ) {
-			$summary = new Summary(
-				'wbsetsitelink',
-				'remove',
-				$editSummary->getSitelink()->getSiteId(),
-				[],
-				[ $editSummary->getSitelink()->getPageName() ]
-			);
-			$summary->setUserSummary( $editSummary->getUserComment() );
+		} elseif ( $editSummary instanceof SitelinkEditSummary ) {
+			switch ( $editSummary->getEditAction() ) {
+				case EditSummary::ADD_ACTION:
+				case EditSummary::REPLACE_ACTION:
+					return new Summary();
+				case EditSummary::REMOVE_ACTION:
+					$summary = new Summary(
+						'wbsetsitelink',
+						'remove',
+						$editSummary->getSitelink()->getSiteId(),
+						[],
+						[ $editSummary->getSitelink()->getPageName() ]
+					);
+					$summary->setUserSummary( $editSummary->getUserComment() );
 
-			return $summary;
+					return $summary;
+			}
 		}
 
 		throw new LogicException( "Unknown summary type '{$editSummary->getEditAction()}' " . get_class( $editSummary ) );

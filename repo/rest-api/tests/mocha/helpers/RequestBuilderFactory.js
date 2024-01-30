@@ -148,6 +148,14 @@ module.exports = {
 			.withPathParam( 'language_code', languageCode );
 	},
 
+	newSetSitelinkRequestBuilder( itemId, siteId, sitelink ) {
+		return new RequestBuilder()
+			.withRoute( 'PUT', '/entities/items/{item_id}/sitelinks/{site_id}' )
+			.withPathParam( 'item_id', itemId )
+			.withPathParam( 'site_id', siteId )
+			.withJsonBodyParam( 'sitelink', sitelink );
+	},
+
 	newSetItemLabelRequestBuilder( itemId, languageCode, label ) {
 		return new RequestBuilder()
 			.withRoute( 'PUT', '/entities/items/{item_id}/labels/{language_code}' )

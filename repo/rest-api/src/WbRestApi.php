@@ -62,6 +62,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescrip
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription\SetPropertyDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\SetPropertyLabel;
+use Wikibase\Repo\RestApi\Application\UseCases\SetSitelink\SetSitelink;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\StatementRemover;
@@ -428,5 +429,10 @@ class WbRestApi {
 
 	public static function getRemoveSitelink( ContainerInterface $services = null ): RemoveSitelink {
 		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbRestApi.RemoveSitelink' );
+	}
+
+	public static function getSetSitelink( ContainerInterface $services = null ): SetSitelink {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.SetSitelink' );
 	}
 }
