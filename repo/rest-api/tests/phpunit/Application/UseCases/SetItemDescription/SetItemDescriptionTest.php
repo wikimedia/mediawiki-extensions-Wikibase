@@ -15,12 +15,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\User;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Item as ReadModelItem;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
-use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
@@ -170,15 +165,6 @@ class SetItemDescriptionTest extends \PHPUnit\Framework\TestCase {
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( $expectedError, $e );
 		}
-	}
-
-	public function newReadModelItemWithDescriptions( Descriptions $descriptions ): ReadModelItem {
-		return new ReadModelItem(
-			new Labels(),
-			$descriptions,
-			new Aliases(),
-			new StatementList()
-		);
 	}
 
 	private function newUseCase(): SetItemDescription {
