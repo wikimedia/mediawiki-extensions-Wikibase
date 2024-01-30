@@ -20,7 +20,8 @@ import { PageNotEditable } from '@/definitions/data-access/BridgePermissionsRepo
 import clone from '@/store/clone';
 import EditDecision from '@/definitions/EditDecision';
 import newMockTracker from '../../util/newMockTracker';
-import { getMockBridgeRepoConfig } from '../../util/mocks';
+import { getMockBridgeRepoConfig, getMockTempUserConfig } from '../../util/mocks';
+import { TempUserConfiguration } from '@/definitions/data-access/TempUserConfigRepository';
 
 describe( 'store/actions', () => {
 	let store: Store<Application>;
@@ -124,6 +125,12 @@ describe( 'store/actions', () => {
 		services.set( 'wikibaseRepoConfigRepository', {
 			async getRepoConfiguration(): Promise<WikibaseRepoConfiguration> {
 				return getMockBridgeRepoConfig();
+			},
+		} );
+
+		services.set( 'tempUserConfigRepository', {
+			async getTempUserConfiguration(): Promise<TempUserConfiguration> {
+				return getMockTempUserConfig();
 			},
 		} );
 

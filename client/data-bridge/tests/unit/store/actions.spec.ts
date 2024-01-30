@@ -29,8 +29,9 @@ import newApplicationState from './newApplicationState';
 import { MainSnakPath } from '@/store/statements/MainSnakPath';
 import { StatementState } from '@/store/statements/StatementState';
 import MediaWikiPurge from '@/definitions/MediaWikiPurge';
-import { getMockBridgeRepoConfig } from '../../util/mocks';
+import { getMockBridgeRepoConfig, getMockTempUserConfig } from '../../util/mocks';
 import { budge } from '../../util/timer';
+import { TempUserConfiguration } from '@/definitions/data-access/TempUserConfigRepository';
 
 describe( 'root/actions', () => {
 	const defaultEntityId = 'Q32';
@@ -84,6 +85,9 @@ describe( 'root/actions', () => {
 		const wikibaseRepoConfigRepository = {
 			getRepoConfiguration: jest.fn( () => Promise.resolve() ),
 		};
+		const tempUserConfigRepository = {
+			getTempUserConfiguration: jest.fn( () => Promise.resolve() ),
+		};
 		const editAuthorizationChecker: BridgePermissionsRepository = {
 			canUseBridgeForItemAndPage: jest.fn().mockResolvedValue( [] ),
 		};
@@ -119,6 +123,7 @@ describe( 'root/actions', () => {
 				// @ts-ignore
 				actions.store = {
 					$services: newMockServiceContainer( {
+						tempUserConfigRepository,
 						wikibaseRepoConfigRepository,
 						editAuthorizationChecker,
 						propertyDatatypeRepository,
@@ -158,6 +163,7 @@ describe( 'root/actions', () => {
 				// @ts-ignore
 				actions.store = {
 					$services: newMockServiceContainer( {
+						tempUserConfigRepository,
 						wikibaseRepoConfigRepository,
 						editAuthorizationChecker,
 						propertyDatatypeRepository,
@@ -189,6 +195,7 @@ describe( 'root/actions', () => {
 			// @ts-ignore
 			actions.store = {
 				$services: newMockServiceContainer( {
+					tempUserConfigRepository,
 					wikibaseRepoConfigRepository,
 					editAuthorizationChecker,
 					propertyDatatypeRepository,
@@ -222,8 +229,12 @@ describe( 'root/actions', () => {
 			} );
 
 			const mockWikibaseRepoConfig = {};
+			const mockTempUserConfig = {};
 			const wikibaseRepoConfigRepository = {
 				getRepoConfiguration: jest.fn().mockResolvedValue( mockWikibaseRepoConfig ),
+			};
+			const tempUserConfigRepository = {
+				getTempUserConfiguration: jest.fn().mockResolvedValue( mockTempUserConfig ),
 			};
 			const mockListOfAuthorizationErrors: MissingPermissionsError[] = [];
 			const editAuthorizationChecker = {
@@ -237,6 +248,7 @@ describe( 'root/actions', () => {
 			// @ts-ignore
 			actions.store = {
 				$services: newMockServiceContainer( {
+					tempUserConfigRepository,
 					wikibaseRepoConfigRepository,
 					editAuthorizationChecker,
 					propertyDatatypeRepository,
@@ -263,6 +275,7 @@ describe( 'root/actions', () => {
 			expect( dispatch.mock.calls[ 1 ][ 1 ] ).toStrictEqual( {
 				results: [
 					mockWikibaseRepoConfig,
+					mockTempUserConfig,
 					mockListOfAuthorizationErrors,
 					propertyDataType,
 					ignoredEntityInitResult,
@@ -293,10 +306,14 @@ describe( 'root/actions', () => {
 				params: [ 'apierror-centralauth-badtoken' ],
 			} as ApiBadtokenError ] );
 			const mockWikibaseRepoConfig = {};
+			const mockTempUserConfig = {};
 			const wikibaseRepoConfigRepository = {
 				getRepoConfiguration: jest.fn()
 					.mockRejectedValueOnce( mockWikibaseRepoError )
 					.mockResolvedValue( mockWikibaseRepoConfig ),
+			};
+			const tempUserConfigRepository = {
+				getTempUserConfiguration: jest.fn().mockResolvedValue( mockTempUserConfig ),
 			};
 			const mockListOfAuthorizationErrors: MissingPermissionsError[] = [];
 			const editAuthorizationChecker = {
@@ -312,6 +329,7 @@ describe( 'root/actions', () => {
 			actions.store = {
 				$services: newMockServiceContainer( {
 					wikibaseRepoConfigRepository,
+					tempUserConfigRepository,
 					editAuthorizationChecker,
 					propertyDatatypeRepository,
 					tracker,
@@ -338,6 +356,7 @@ describe( 'root/actions', () => {
 			expect( dispatch.mock.calls[ 1 ][ 1 ] ).toStrictEqual( {
 				results: [
 					mockWikibaseRepoConfig,
+					mockTempUserConfig,
 					mockListOfAuthorizationErrors,
 					propertyDataType,
 					ignoredEntityInitResult,
@@ -361,6 +380,7 @@ describe( 'root/actions', () => {
 			// @ts-ignore
 			actions.store = {
 				$services: newMockServiceContainer( {
+					tempUserConfigRepository,
 					wikibaseRepoConfigRepository,
 					editAuthorizationChecker,
 					propertyDatatypeRepository,
@@ -395,10 +415,14 @@ describe( 'root/actions', () => {
 			const wikibaseRepoConfigRepository = {
 				getRepoConfiguration: jest.fn().mockRejectedValue( error ),
 			};
+			const tempUserConfigRepository = {
+				getTempUserConfiguration: jest.fn().mockResolvedValue( error ),
+			};
 
 			// @ts-ignore
 			actions.store = {
 				$services: newMockServiceContainer( {
+					tempUserConfigRepository,
 					wikibaseRepoConfigRepository,
 					editAuthorizationChecker,
 					propertyDatatypeRepository,
@@ -591,6 +615,7 @@ describe( 'root/actions', () => {
 
 			await actions.initBridgeWithRemoteData( { results: [
 				{} as WikibaseRepoConfiguration,
+				{ enabled: false } as TempUserConfiguration,
 				permissionErrors,
 				'string',
 				undefined,
@@ -625,6 +650,7 @@ describe( 'root/actions', () => {
 			};
 			await actions.initBridgeWithRemoteData( { results: [
 				{} as WikibaseRepoConfiguration,
+				{} as TempUserConfiguration,
 				[],
 				propertyDataType,
 				undefined,
@@ -655,6 +681,7 @@ describe( 'root/actions', () => {
 			actions.initBridgeWithRemoteData( {
 				results: [
 					{} as WikibaseRepoConfiguration,
+					{} as TempUserConfiguration,
 					[],
 					'string',
 					undefined,
@@ -696,6 +723,7 @@ describe( 'root/actions', () => {
 			actions.initBridgeWithRemoteData( {
 				results: [
 					{} as WikibaseRepoConfiguration,
+					{} as TempUserConfiguration,
 					[],
 					'string',
 					undefined,
@@ -733,9 +761,11 @@ describe( 'root/actions', () => {
 			};
 
 			const wikibaseRepoConfiguration = getMockBridgeRepoConfig();
+			const tempUserConfiguration = getMockTempUserConfig();
 
 			await actions.initBridgeWithRemoteData( { results: [
 				wikibaseRepoConfiguration,
+				tempUserConfiguration,
 				[],
 				'string',
 				undefined,
@@ -744,6 +774,10 @@ describe( 'root/actions', () => {
 			expect( commit ).toHaveBeenCalledWith(
 				'setRepoConfig',
 				wikibaseRepoConfiguration,
+			);
+			expect( commit ).toHaveBeenCalledWith(
+				'setTempUserConfig',
+				tempUserConfiguration,
 			);
 		} );
 
@@ -776,6 +810,7 @@ describe( 'root/actions', () => {
 
 			await actions.initBridgeWithRemoteData( { results: [
 				{} as WikibaseRepoConfiguration,
+				{} as TempUserConfiguration,
 				[],
 				'string',
 				undefined,

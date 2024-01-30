@@ -22,6 +22,7 @@ import ServiceContainer from '@/services/ServiceContainer';
 import statementMutationFactory from '@/change-op/statement-mutation/statementMutationFactory';
 import clone from '@/store/clone';
 import StatementMutationStrategy from '@/change-op/statement-mutation/strategies/StatementMutationStrategy';
+import { TempUserConfiguration } from '@/definitions/data-access/TempUserConfigRepository';
 
 export class RootActions extends Actions<
 Application,
@@ -75,9 +76,16 @@ RootActions
 			} );
 		};
 
-		const getRemoteData = (): Promise<[WikibaseRepoConfiguration, MissingPermissionsError[], string, unknown]> => {
+		const getRemoteData = (): Promise<[
+			WikibaseRepoConfiguration,
+			TempUserConfiguration,
+			MissingPermissionsError[],
+			string,
+			unknown
+		]> => {
 			return Promise.all( [
 				this.store.$services.get( 'wikibaseRepoConfigRepository' ).getRepoConfiguration(),
+				this.store.$services.get( 'tempUserConfigRepository' ).getTempUserConfiguration(),
 				this.store.$services.get( 'editAuthorizationChecker' ).canUseBridgeForItemAndPage(
 					information.entityTitle,
 					information.pageTitle,
@@ -122,12 +130,19 @@ RootActions
 	public async initBridgeWithRemoteData( {
 		results: [
 			wikibaseRepoConfiguration,
+			tempUserConfiguration,
 			permissionErrors,
 			dataType,
 			_entityInit,
 		],
 	}: {
-		results: [ WikibaseRepoConfiguration, readonly MissingPermissionsError[], string, unknown ];
+		results: [
+			WikibaseRepoConfiguration,
+			TempUserConfiguration,
+			readonly MissingPermissionsError[],
+			string,
+			unknown
+		];
 	} ): Promise<unknown> {
 		if ( permissionErrors.length ) {
 			this.commit( 'addApplicationErrors', permissionErrors );
@@ -143,6 +158,7 @@ RootActions
 		}
 
 		this.commit( 'setRepoConfig', wikibaseRepoConfiguration );
+		this.commit( 'setTempUserConfig', tempUserConfiguration );
 
 		return this.dispatch( 'postEntityLoad' );
 	}

@@ -12,7 +12,7 @@ import {
 	mockMwConfig,
 	mockMwEnv,
 	mockMwApiConstructor,
-	addEntityDataResponse,
+	addEntityDataResponse, addTempUserConfigResponse,
 } from '../util/mocks';
 import { budge } from '../util/timer';
 import {
@@ -230,15 +230,16 @@ describe( 'string data value', () => {
 					addPageInfoNoEditRestrictionsResponse(
 						DEFAULT_ENTITY,
 						addSiteinfoRestrictionsResponse(
-							addDataBridgeConfigResponse( {}, {
-								entities: {
-									[ propertyId ]: {
-										id: propertyId,
-										datatype: 'string',
-										labels: {},
+							addDataBridgeConfigResponse( {},
+								addTempUserConfigResponse( {}, {
+									entities: {
+										[ propertyId ]: {
+											id: propertyId,
+											datatype: 'string',
+											labels: {},
+										},
 									},
-								},
-							} as any ),
+								} as any ) ),
 						),
 					),
 				),

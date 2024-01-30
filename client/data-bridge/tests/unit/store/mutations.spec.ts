@@ -9,6 +9,7 @@ import newApplicationState from './newApplicationState';
 import { inject } from 'vuex-smart-module';
 import WikibaseClientConfiguration from '@/definitions/WikibaseClientConfiguration';
 import { WikibaseRepoConfiguration } from '@/definitions/data-access/WikibaseRepoConfigRepository';
+import { TempUserConfiguration } from '@/definitions/data-access/TempUserConfigRepository';
 
 describe( 'root/mutations', () => {
 	it( 'changes the targetProperty of the state', () => {
@@ -209,6 +210,18 @@ describe( 'root/mutations', () => {
 			termsOfUseUrl: repoConfig.termsOfUseUrl,
 			stringMaxLength: repoConfig.dataTypeLimits.string.maxLength,
 		} );
+	} );
+
+	it( 'sets the temp user config in the store', () => {
+		const state: Application = newApplicationState( { tempUserEnabled: false } );
+		const mutations = inject( RootMutations, { state } );
+
+		const tempUserConfig: TempUserConfiguration = {
+			enabled: true,
+		};
+		mutations.setTempUserConfig( tempUserConfig );
+
+		expect( state.tempUserEnabled ).toEqual( true );
 	} );
 
 	it( 'resets the root module of the store', () => {

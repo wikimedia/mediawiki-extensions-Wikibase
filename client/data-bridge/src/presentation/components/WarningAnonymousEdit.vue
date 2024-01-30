@@ -7,11 +7,11 @@
 		</h2>
 		<IconMessageBox
 			class="wb-db-warning-anonymous-edit__message"
-			type="warning"
+			:type="notificationType"
 		>
 			<p
 				class="wb-db-warning-anonymous-edit__message-text"
-				v-html="$messages.get( $messages.KEYS.ANONYMOUS_EDIT_WARNING_MESSAGE )"
+				v-html="$messages.get( notificationMessageKey )"
 			/>
 		</IconMessageBox>
 		<div class="wb-db-warning-anonymous-edit__buttons">
@@ -38,9 +38,12 @@
 import { defineComponent } from 'vue';
 import EventEmittingButton from '@/presentation/components/EventEmittingButton.vue';
 import IconMessageBox from '@/presentation/components/IconMessageBox.vue';
+import StateMixin from '@/presentation/StateMixin';
+import MessageKeys from '@/definitions/MessageKeys';
 
 export default defineComponent( {
 	name: 'WarningAnonymousEdit',
+	mixins: [ StateMixin ],
 	emits: [ 'proceed' ],
 	components: {
 		EventEmittingButton,
@@ -50,6 +53,23 @@ export default defineComponent( {
 		loginUrl: {
 			type: String,
 			required: true,
+		},
+	},
+	computed: {
+		tempUserEnabled(): boolean {
+			return this.rootModule.state.tempUserEnabled;
+		},
+		notificationMessageKey(): string {
+			if ( this.tempUserEnabled ) {
+				return MessageKeys.ANONYMOUS_EDIT_WARNING_TEMPUSER_MESSAGE;
+			}
+			return MessageKeys.ANONYMOUS_EDIT_WARNING_MESSAGE;
+		},
+		notificationType(): string {
+			if ( this.tempUserEnabled ) {
+				return 'notice';
+			}
+			return 'warning';
 		},
 	},
 	methods: {

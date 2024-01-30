@@ -72,6 +72,11 @@ describe( 'App.vue', () => {
 					},
 				} ),
 			},
+			'tempUserConfigRepository': {
+				getTempUserConfiguration: () => Promise.resolve( {
+					enabled: false,
+				} ),
+			},
 			'referencesRenderingRepository': {
 				getRenderedReferences: () => Promise.resolve( [] ),
 			},

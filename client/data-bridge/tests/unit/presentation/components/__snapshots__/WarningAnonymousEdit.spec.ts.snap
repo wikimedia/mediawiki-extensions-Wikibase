@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`WarningAnonymousEdit matches the snapshot 1`] = `
+exports[`WarningAnonymousEdit matches the snapshot with tempUserDisabled: WarningAnonymousEdit-TempUserDisabled.spec.ts 1`] = `
 <div
   class="wb-db-warning-anonymous-edit"
 >
@@ -17,11 +17,55 @@ exports[`WarningAnonymousEdit matches the snapshot 1`] = `
     <p
       class="wb-db-warning-anonymous-edit__message-text"
     >
-      Some 
-      <abbr>
-        HTML
-      </abbr>
-      .
+      wikibase-client-data-bridge-anonymous-edit-warning-message
+    </p>
+  </icon-message-box-stub>
+  <div
+    class="wb-db-warning-anonymous-edit__buttons"
+  >
+    <event-emitting-button-stub
+      class="wb-db-warning-anonymous-edit__proceed"
+      disabled="false"
+      message="Some 'text"
+      newtab="false"
+      preventdefault="true"
+      size="M"
+      squary="false"
+      type="primaryProgressive"
+    />
+    <event-emitting-button-stub
+      class="wb-db-warning-anonymous-edit__login"
+      disabled="false"
+      href="https://data-bridge.test/Login"
+      message="Some 'text"
+      newtab="false"
+      preventdefault="false"
+      size="M"
+      squary="false"
+      type="neutral"
+    />
+  </div>
+</div>
+`;
+
+exports[`WarningAnonymousEdit matches the snapshot with tempUserEnabled: WarningAnonymousEdit-TempUserEnabled.spec.ts 1`] = `
+<div
+  class="wb-db-warning-anonymous-edit"
+>
+  <h2
+    class="wb-db-warning-anonymous-edit__heading"
+  >
+    Some 'text
+  </h2>
+  <icon-message-box-stub
+    class="wb-db-warning-anonymous-edit__message"
+    inline="false"
+    type="notice"
+  >
+    <p
+      class="wb-db-warning-anonymous-edit__message-text"
+    >
+      wikibase-client-data-bridge-anonymous-edit-warning-tempuser-message
     </p>
   </icon-message-box-stub>
   <div

@@ -34,6 +34,7 @@ interface Application {
 	showWarningAnonymousEdit: boolean;
 	assertUserWhenSaving: boolean;
 	config: BridgeConfig;
+	tempUserEnabled: boolean;
 }
 
 export default Application;

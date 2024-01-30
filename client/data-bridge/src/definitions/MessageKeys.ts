@@ -13,6 +13,7 @@ enum MessageKeys {
 	ANONYMOUS_EDIT_WARNING_MESSAGE = 'wikibase-client-data-bridge-anonymous-edit-warning-message',
 	ANONYMOUS_EDIT_WARNING_PROCEED = 'wikibase-client-data-bridge-anonymous-edit-warning-proceed',
 	ANONYMOUS_EDIT_WARNING_LOGIN = 'wikibase-client-data-bridge-anonymous-edit-warning-login',
+	ANONYMOUS_EDIT_WARNING_TEMPUSER_MESSAGE = 'wikibase-client-data-bridge-anonymous-edit-warning-tempuser-message',
 	PERMISSIONS_HEADING = 'wikibase-client-data-bridge-permissions-error',
 	PERMISSIONS_MORE_INFO = 'wikibase-client-data-bridge-permissions-error-info',
 	PERMISSIONS_BLOCKED_ON_CLIENT_HEADING = 'wikibase-client-data-bridge-blocked-on-client-head',

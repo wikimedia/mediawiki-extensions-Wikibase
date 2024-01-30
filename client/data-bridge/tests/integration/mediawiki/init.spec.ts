@@ -28,6 +28,7 @@ import RepoRouter from '@/data-access/RepoRouter';
 import ApiPurge from '@/data-access/ApiPurge';
 import PrefixingEventTracker from '@/tracking/PrefixingEventTracker';
 import ApiRenderReferencesRepository from '@/data-access/ApiRenderReferencesRepository';
+import ApiTempUserConfigRepository from '@/data-access/ApiTempUserConfigRepository';
 
 const manager = jest.fn();
 const dialog = {
@@ -116,6 +117,7 @@ describe( 'init', () => {
 			window.mw.message,
 		) );
 		expectedServices.set( 'wikibaseRepoConfigRepository', new ApiRepoConfigRepository( repoApi ) );
+		expectedServices.set( 'tempUserConfigRepository', new ApiTempUserConfigRepository( repoApi ) );
 		expectedServices.set( 'tracker', new DataBridgeTrackerService(
 			new PrefixingEventTracker(
 				new EventTracker( window.mw.track ),

@@ -9,6 +9,7 @@ import { Mutations } from 'vuex-smart-module';
 import Application from '@/store/Application';
 import WikibaseClientConfiguration from '@/definitions/WikibaseClientConfiguration';
 import { WikibaseRepoConfiguration } from '@/definitions/data-access/WikibaseRepoConfigRepository';
+import { TempUserConfiguration } from '@/definitions/data-access/TempUserConfigRepository';
 
 export class RootMutations extends Mutations<Application> {
 
@@ -87,6 +88,10 @@ export class RootMutations extends Mutations<Application> {
 			dataRightsUrl: repoConfig.dataRightsUrl,
 			termsOfUseUrl: repoConfig.termsOfUseUrl,
 		};
+	}
+
+	public setTempUserConfig( tempUserConfig: TempUserConfiguration ): void {
+		this.state.tempUserEnabled = tempUserConfig.enabled;
 	}
 
 	public reset(): void {
