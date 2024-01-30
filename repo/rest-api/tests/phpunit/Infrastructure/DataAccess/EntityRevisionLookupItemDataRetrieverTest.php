@@ -277,8 +277,11 @@ class EntityRevisionLookupItemDataRetrieverTest extends TestCase {
 
 		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $itemId, $item );
 
+		$sitelinks = $this->newSiteLinksReadModelConverter()->convert(
+			new SiteLinkList( [ new SiteLink( $siteId, $pageName, $badges ) ] )
+		);
 		$this->assertEquals(
-			$this->newSiteLinksReadModelConverter()->convert( new SiteLinkList( [ new SiteLink( $siteId, $pageName, $badges ) ] ) )[0],
+			$sitelinks[ $siteId ],
 			$this->newRetriever()->getSiteLink( $itemId, $siteId )
 		);
 	}

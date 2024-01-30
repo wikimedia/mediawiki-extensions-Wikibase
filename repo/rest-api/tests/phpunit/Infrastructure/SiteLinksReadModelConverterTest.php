@@ -38,7 +38,7 @@ class SiteLinksReadModelConverterTest extends TestCase {
 				$enSiteLink->getBadges(),
 				self::EN_WIKI_URL_PREFIX . $enSiteLink->getPageName()
 			),
-			$readModel[0]
+			$readModel[ 'enwiki' ]
 		);
 		$this->assertEquals(
 			new SiteLinkReadModel(
@@ -47,7 +47,7 @@ class SiteLinksReadModelConverterTest extends TestCase {
 				$deSiteLink->getBadges(),
 				self::DE_WIKI_URL_PREFIX . $deSiteLink->getPageName()
 			),
-			$readModel[1]
+			$readModel[ 'dewiki' ]
 		);
 	}
 
