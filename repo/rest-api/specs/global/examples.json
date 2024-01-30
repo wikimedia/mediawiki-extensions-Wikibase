@@ -66,7 +66,7 @@
 			"message": "Page with title {title} does not exist on the given site"
 		}
 	},
-	"SiteLinkTitleFieldNotProvidedExample": {
+	"SitelinkTitleFieldNotProvidedExample": {
 		"value": {
 			"code": "sitelink-data-missing-title",
 			"message": "Mandatory sitelink title missing"
@@ -78,7 +78,7 @@
 			"message": "Value of badges field is not a list"
 		}
 	},
-	"ItemProvidedIsNotAllowedAsASiteLinkBadgeExample": {
+	"ItemProvidedIsNotAllowedAsSitelinkBadgeExample": {
 		"value": {
 			"code": "item-not-a-badge",
 			"message": "Item ID provided as badge is not allowed as a badge: {item_id}"
@@ -229,7 +229,7 @@
 			"message": "Item {item_id} has been merged into {other_id}"
 		}
 	},
-	"SiteLinkConflictExample": {
+	"SitelinkConflictExample": {
 		"value": {
 			"code": "sitelink-conflict",
 			"message": "Sitelink is already being used on {other_item_id}" }
@@ -240,7 +240,7 @@
 			"message": "Could not find a statement with the ID: {statement_id}"
 		}
 	},
-	"ItemSiteLinkNotDefinedExample": {
+	"SitelinkNotDefinedExample": {
 		"value": {
 			"code": "sitelink-not-defined",
 			"message": "No sitelink found for the ID: {item_id} for the site {site_id}"

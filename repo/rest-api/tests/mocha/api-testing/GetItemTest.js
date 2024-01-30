@@ -7,7 +7,9 @@ const {
 	createRedirectForItem,
 	getLatestEditMetadata,
 	newLegacyStatementWithRandomStringValue,
-	createUniqueStringProperty, getLocalSiteId, createLocalSiteLink
+	createUniqueStringProperty,
+	getLocalSiteId,
+	createLocalSitelink
 } = require( '../helpers/entityHelper' );
 const { newGetItemRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
@@ -46,7 +48,7 @@ describe( newGetItemRequestBuilder().getRouteDescription(), () => {
 			claims: [ testStatement ]
 		} );
 		testItemId = createItemResponse.entity.id;
-		await createLocalSiteLink( testItemId, linkedArticle );
+		await createLocalSitelink( testItemId, linkedArticle );
 
 		const testItemCreationMetadata = await getLatestEditMetadata( testItemId );
 		testModified = testItemCreationMetadata.timestamp;

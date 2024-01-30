@@ -19,7 +19,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemDescriptionsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemLabelsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
-use Wikibase\Repo\RestApi\Infrastructure\SiteLinksReadModelConverter;
+use Wikibase\Repo\RestApi\Infrastructure\SitelinksReadModelConverter;
 
 /**
  * @license GPL-2.0-or-later
@@ -97,7 +97,7 @@ class InMemoryItemRepository implements ItemRetriever, ItemLabelsRetriever, Item
 		);
 	}
 
-	private function newSitelinksReadModelConverter(): SiteLinksReadModelConverter {
+	private function newSitelinksReadModelConverter(): SitelinksReadModelConverter {
 		$enSite = new Site();
 		$enSite->setGlobalId( self::EN_WIKI_SITE_ID );
 		$enSite->setLinkPath( self::EN_WIKI_URL_PREFIX . '$1' );
@@ -105,7 +105,7 @@ class InMemoryItemRepository implements ItemRetriever, ItemLabelsRetriever, Item
 		$deSite->setGlobalId( self::DE_WIKI_SITE_ID );
 		$deSite->setLinkPath( self::DE_WIKI_URL_PREFIX . '$1' );
 
-		return new SiteLinksReadModelConverter( new HashSiteStore( [ $enSite, $deSite ] ) );
+		return new SitelinksReadModelConverter( new HashSiteStore( [ $enSite, $deSite ] ) );
 	}
 
 }

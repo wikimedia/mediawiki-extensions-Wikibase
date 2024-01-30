@@ -4,11 +4,11 @@ namespace Wikibase\Repo\Tests\RestApi\Domain\ReadModel;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\RestApi\Domain\ReadModel\SiteLink;
-use Wikibase\Repo\RestApi\Domain\ReadModel\SiteLinks;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelink;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelinks;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Domain\ReadModel\SiteLinks
+ * @covers \Wikibase\Repo\RestApi\Domain\ReadModel\Sitelinks
  *
  * @group Wikibase
  *
@@ -17,19 +17,19 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\SiteLinks;
 class SitelinksTest extends TestCase {
 
 	public function testConstructor(): void {
-		$enWikiSitelink = new SiteLink(
+		$enWikiSitelink = new Sitelink(
 			'enwiki',
 			'Potato',
 			[ new ItemId( 'Q567' ) ],
 			'https://en.wikipedia.org/wiki/Potato'
 		);
-		$deWikiSitelink = new SiteLink(
+		$deWikiSitelink = new Sitelink(
 			'dewiki',
 			'Kartoffel',
 			[ new ItemId( 'Q567' ), new ItemId( 'Q789' ) ],
 			'https://de.wikipedia.org/wiki/Kartoffel'
 		);
-		$sitelinks = new SiteLinks( $enWikiSitelink, $deWikiSitelink );
+		$sitelinks = new Sitelinks( $enWikiSitelink, $deWikiSitelink );
 
 		$this->assertSame( $enWikiSitelink, $sitelinks[ 'enwiki' ] );
 		$this->assertSame( $deWikiSitelink, $sitelinks[ 'dewiki' ] );

@@ -13,20 +13,20 @@ class ItemPartsSerializer {
 	private DescriptionsSerializer $descriptionsSerializer;
 	private AliasesSerializer $aliasesSerializer;
 	private StatementListSerializer $statementsSerializer;
-	private SiteLinksSerializer $siteLinksSerializer;
+	private SitelinksSerializer $sitelinksSerializer;
 
 	public function __construct(
 		LabelsSerializer $labelsSerializer,
 		DescriptionsSerializer $descriptionsSerializer,
 		AliasesSerializer $aliasesSerializer,
 		StatementListSerializer $statementsSerializer,
-		SiteLinksSerializer $siteLinksSerializer
+		SitelinksSerializer $sitelinksSerializer
 	) {
 		$this->labelsSerializer = $labelsSerializer;
 		$this->descriptionsSerializer = $descriptionsSerializer;
 		$this->aliasesSerializer = $aliasesSerializer;
 		$this->statementsSerializer = $statementsSerializer;
-		$this->siteLinksSerializer = $siteLinksSerializer;
+		$this->sitelinksSerializer = $sitelinksSerializer;
 	}
 
 	public function serialize( ItemParts $itemParts ): array {
@@ -41,7 +41,7 @@ class ItemPartsSerializer {
 			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
 			ItemParts::FIELD_STATEMENTS => fn() => $this->statementsSerializer->serialize( $itemParts->getStatements() ),
 			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-			ItemParts::FIELD_SITELINKS => fn() => $this->siteLinksSerializer->serialize( $itemParts->getSiteLinks() ),
+			ItemParts::FIELD_SITELINKS => fn() => $this->sitelinksSerializer->serialize( $itemParts->getSitelinks() ),
 		];
 
 		// serialize all fields, filtered by isRequested()

@@ -6,7 +6,7 @@ const {
 	createEntityWithStatements,
 	createUniqueStringProperty,
 	newLegacyStatementWithRandomStringValue,
-	createLocalSiteLink,
+	createLocalSitelink,
 	getLocalSiteId
 } = require( '../helpers/entityHelper' );
 const {
@@ -39,7 +39,7 @@ describe( 'User-Agent requests', () => {
 		itemRequestInputs.statementId = createItemResponse.entity.claims[ statementPropertyId ][ 0 ].id;
 		itemRequestInputs.statementPropertyId = statementPropertyId;
 
-		await createLocalSiteLink( createItemResponse.entity.id, linkedArticle );
+		await createLocalSitelink( createItemResponse.entity.id, linkedArticle );
 		itemRequestInputs.siteId = await getLocalSiteId();
 
 		const createPropertyResponse = await createEntityWithStatements(

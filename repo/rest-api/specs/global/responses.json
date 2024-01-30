@@ -56,7 +56,7 @@
 			}
 		}
 	},
-	"SiteLinkDeleted": {
+	"SitelinkDeleted": {
 		"description": "The resource was deleted",
 		"headers": {
 			"Content-Language": {
@@ -132,14 +132,14 @@
 			}
 		}
 	},
-	"ItemRedirectedOrSiteLinkConflict": {
+	"ItemRedirectedOrSitelinkConflict": {
 		"description": "The specified Item was redirected or there is a Sitelink conflict",
 		"content": {
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"redirected-item": { "$ref": "./examples.json#/RedirectedItemExample" },
-					"sitelink-conflict": { "$ref": "./examples.json#/SiteLinkConflictExample " }
+					"sitelink-conflict": { "$ref": "./examples.json#/SitelinkConflictExample " }
 				}
 			}
 		},
@@ -221,7 +221,7 @@
 			}
 		}
 	},
-	"ItemSiteLinkNotFound": {
+	"SitelinkNotFound": {
 		"description": "The specified resource was not found",
 		"content": {
 			"application/json": {
@@ -231,7 +231,7 @@
 						"$ref": "./examples.json#/ItemNotFoundExample"
 					},
 					"sitelink-not-defined": {
-						"$ref": "./examples.json#/ItemSiteLinkNotDefinedExample"
+						"$ref": "./examples.json#/SitelinkNotDefinedExample"
 					}
 				}
 			}
@@ -731,7 +731,7 @@
 			}
 		}
 	},
-	"InvalidRemoveSiteLinkInput": {
+	"InvalidRemoveSitelinkInput": {
 		"description": "The request cannot be processed",
 		"content": {
 			"application/json": {
@@ -751,7 +751,7 @@
 			}
 		}
 	},
-	"InvalidSetSiteLinkInput": {
+	"InvalidSetSitelinkInput": {
 		"description": "The request cannot be processed",
 		"content": {
 			"application/json": {
@@ -764,9 +764,9 @@
 					"invalid-title-field": { "$ref": "./examples.json#/InvalidTitleExample" },
 					"title-field-empty": { "$ref": "./examples.json#/TitleIsEmptyExample" },
 					"title-does-not-exist": { "$ref": "./examples.json#/TitleDoesNotExistOnGivenSiteExample" },
-					"sitelink-data-missing-title": { "$ref": "./examples.json#/SiteLinkTitleFieldNotProvidedExample" },
+					"sitelink-data-missing-title": { "$ref": "./examples.json#/SitelinkTitleFieldNotProvidedExample" },
 					"invalid-sitelink-badges-format": { "$ref": "./examples.json#/ValueOfBadgesFieldIsNotAListExample" },
-					"item-not-a-badge": { "$ref": "./examples.json#/ItemProvidedIsNotAllowedAsASiteLinkBadgeExample" },
+					"item-not-a-badge": { "$ref": "./examples.json#/ItemProvidedIsNotAllowedAsSitelinkBadgeExample" },
 					"invalid-input-sitelink-badge": { "$ref": "./examples.json#/ValueProvidedAsABadgeIsNotAnItemIDExample" }
 				}
 			}
@@ -1021,7 +1021,7 @@
 			}
 		}
 	},
-	"InvalidItemSiteLinkBySiteIdInput": {
+	"InvalidGetSitelinkInput": {
 		"description": "The request cannot be processed",
 		"content": {
 			"application/json": {
@@ -1484,7 +1484,7 @@
 			}
 		}
 	},
-	"ItemSitelinks": {
+	"Sitelinks": {
 		"description": "A list of sitelinks by item id",
 		"headers": {
 			"Last-Modified": {
@@ -1514,7 +1514,7 @@
 			}
 		}
 	},
-	"ItemSitelink": {
+	"Sitelink": {
 		"description": "A sitelink by item id",
 		"headers": {
 			"Last-Modified": {

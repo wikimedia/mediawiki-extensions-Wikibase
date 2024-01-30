@@ -14,11 +14,11 @@
 			{ "$ref": "../../global/parameters.json#/Authorization" }
 		],
 		"responses": {
-			"200": { "$ref": "../../global/responses.json#/ItemSitelink" },
+			"200": { "$ref": "../../global/responses.json#/Sitelink" },
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
 			"308": { "$ref": "../../global/responses.json#/Moved" },
-			"400": { "$ref": "../../global/responses.json#/InvalidItemSiteLinkBySiteIdInput" },
-			"404": { "$ref": "../../global/responses.json#/ItemSiteLinkNotFound" },
+			"400": { "$ref": "../../global/responses.json#/InvalidGetSitelinkInput" },
+			"404": { "$ref": "../../global/responses.json#/SitelinkNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
 		}
@@ -37,19 +37,19 @@
 			{ "$ref": "../../global/parameters.json#/IfUnmodifiedSince" },
 			{ "$ref": "../../global/parameters.json#/Authorization" }
 		],
-		"requestBody": { "$ref": "../../global/requests.json#/SiteLink" },
+		"requestBody": { "$ref": "../../global/requests.json#/Sitelink" },
 		"responses": {
 			"200": {
-				"$ref": "../../global/responses.json#/ItemSitelink",
+				"$ref": "../../global/responses.json#/Sitelink",
 				"description": "The updated Sitelink"
 			},
 			"201": {
-				"$ref": "../../global/responses.json#/ItemSitelink",
+				"$ref": "../../global/responses.json#/Sitelink",
 				"description": "The newly added Sitelink"
 			},
-			"400": { "$ref": "../../global/responses.json#/InvalidSetSiteLinkInput" },
+			"400": { "$ref": "../../global/responses.json#/InvalidSetSitelinkInput" },
 			"404": { "$ref": "../../global/responses.json#/ItemNotFound" },
-			"409": { "$ref": "../../global/responses.json#/ItemRedirectedOrSiteLinkConflict" },
+			"409": { "$ref": "../../global/responses.json#/ItemRedirectedOrSitelinkConflict" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"415": { "$ref": "../../global/responses.json#/InvalidMediaType" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
@@ -71,9 +71,9 @@
 		],
 		"requestBody": { "$ref": "../../global/requests.json#/Edit" },
 		"responses": {
-			"200": { "$ref": "../../global/responses.json#/SiteLinkDeleted" },
-			"400": { "$ref": "../../global/responses.json#/InvalidRemoveSiteLinkInput" },
-			"404": { "$ref": "../../global/responses.json#/ItemSiteLinkNotFound" },
+			"200": { "$ref": "../../global/responses.json#/SitelinkDeleted" },
+			"400": { "$ref": "../../global/responses.json#/InvalidRemoveSitelinkInput" },
+			"404": { "$ref": "../../global/responses.json#/SitelinkNotFound" },
 			"409": { "$ref": "../../global/responses.json#/ItemRedirected" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"415": { "$ref": "../../global/responses.json#/InvalidMediaType" },

@@ -10,14 +10,14 @@ class Item {
 	private Labels $labels;
 	private Descriptions $descriptions;
 	private Aliases $aliases;
-	private SiteLinks $sitelinks;
+	private Sitelinks $sitelinks;
 	private StatementList $statements;
 
 	public function __construct(
 		Labels $labels,
 		Descriptions $descriptions,
 		Aliases $aliases,
-		SiteLinks $sitelinks,
+		Sitelinks $sitelinks,
 		StatementList $statements
 	) {
 		$this->labels = $labels;
@@ -39,7 +39,7 @@ class Item {
 		return $this->aliases;
 	}
 
-	public function getSitelinks(): SiteLinks {
+	public function getSitelinks(): Sitelinks {
 		return $this->sitelinks;
 	}
 

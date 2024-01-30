@@ -13,7 +13,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemPartsBuilder;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
-use Wikibase\Repo\RestApi\Domain\ReadModel\SiteLinks;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelinks;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 
 /**
@@ -65,12 +65,12 @@ class ItemPartsBuilderTest extends TestCase {
 		$this->assertSame( $statements, $itemParts->getStatements() );
 	}
 
-	public function testSiteLinks(): void {
-		$siteLinks = new SiteLinks();
+	public function testSitelinks(): void {
+		$sitelinks = new Sitelinks();
 		$itemParts = $this->newBuilderWithSomeId( [ ItemParts::FIELD_SITELINKS ] )
-			->setSiteLinks( $siteLinks )
+			->setSitelinks( $sitelinks )
 			->build();
-		$this->assertSame( $siteLinks, $itemParts->getSiteLinks() );
+		$this->assertSame( $sitelinks, $itemParts->getSitelinks() );
 	}
 
 	public function testAll(): void {
@@ -78,21 +78,21 @@ class ItemPartsBuilderTest extends TestCase {
 		$descriptions = new Descriptions( new Description( 'en', 'root vegetable' ) );
 		$aliases = new Aliases();
 		$statements = new StatementList();
-		$siteLinks = new SiteLinks();
+		$sitelinks = new Sitelinks();
 
 		$itemParts = $this->newBuilderWithSomeId( ItemParts::VALID_FIELDS )
 			->setLabels( $labels )
 			->setDescriptions( $descriptions )
 			->setAliases( $aliases )
 			->setStatements( $statements )
-			->setSiteLinks( $siteLinks )
+			->setSitelinks( $sitelinks )
 			->build();
 
 		$this->assertSame( $labels, $itemParts->getLabels() );
 		$this->assertSame( $descriptions, $itemParts->getDescriptions() );
 		$this->assertSame( $aliases, $itemParts->getAliases() );
 		$this->assertSame( $statements, $itemParts->getStatements() );
-		$this->assertSame( $siteLinks, $itemParts->getSiteLinks() );
+		$this->assertSame( $sitelinks, $itemParts->getSitelinks() );
 	}
 
 	/**
@@ -137,8 +137,8 @@ class ItemPartsBuilderTest extends TestCase {
 
 		yield 'sitelinks' => [
 			ItemParts::FIELD_SITELINKS,
-			'setSiteLinks',
-			new SiteLinks(),
+			'setSitelinks',
+			new Sitelinks(),
 		];
 	}
 

@@ -8,7 +8,7 @@ const {
 	createUniqueStringProperty,
 	createEntity,
 	editEntity,
-	createLocalSiteLink,
+	createLocalSitelink,
 	getLocalSiteId
 } = require( '../helpers/entityHelper' );
 const { makeEtag } = require( '../helpers/httpHelper' );
@@ -45,7 +45,7 @@ describe( 'Conditional requests', () => {
 
 	async function resetEntityTestData( id, statementPropertyId ) {
 		if ( id.startsWith( 'Q' ) ) {
-			await createLocalSiteLink( id, linkedArticle );
+			await createLocalSitelink( id, linkedArticle );
 		}
 
 		return ( await editEntity( id, {

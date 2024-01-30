@@ -20,8 +20,6 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescription\DeserializedGe
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\DeserializedGetItemDescriptionsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\DeserializedGetItemLabelRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\DeserializedGetItemLabelsRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItemSiteLink\DeserializedGetItemSiteLinkRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItemSiteLinks\DeserializedGetItemSiteLinksRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\DeserializedGetItemStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\DeserializedGetItemStatementsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\DeserializedGetPropertyRequest;
@@ -33,6 +31,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabel\DeserializedGetP
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabels\DeserializedGetPropertyLabelsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\DeserializedGetPropertyStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\DeserializedGetPropertyStatementsRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\GetSitelink\DeserializedGetSitelinkRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\GetSitelinks\DeserializedGetSitelinksRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\DeserializedPatchItemAliasesRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\DeserializedPatchItemDescriptionsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\DeserializedPatchItemLabelsRequest;
@@ -43,11 +43,11 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\DeserializedP
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyStatement\DeserializedPatchPropertyStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemDescription\DeserializedRemoveItemDescriptionRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemLabel\DeserializedRemoveItemLabelRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemSiteLink\DeserializedRemoveItemSiteLinkRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\DeserializedRemoveItemStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyDescription\DeserializedRemovePropertyDescriptionRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyLabel\DeserializedRemovePropertyLabelRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyStatement\DeserializedRemovePropertyStatementRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\RemoveSitelink\DeserializedRemoveSitelinkRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\DeserializedReplaceItemStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplacePropertyStatement\DeserializedReplacePropertyStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\DeserializedSetItemDescriptionRequest;
@@ -63,8 +63,8 @@ class DeserializedRequestAdapter implements
 	DeserializedAddItemStatementRequest,
 	DeserializedAddPropertyStatementRequest,
 	DeserializedGetItemRequest,
-	DeserializedGetItemSiteLinksRequest,
-	DeserializedGetItemSiteLinkRequest,
+	DeserializedGetSitelinksRequest,
+	DeserializedGetSitelinkRequest,
 	DeserializedGetItemLabelsRequest,
 	DeserializedGetItemLabelRequest,
 	DeserializedGetItemDescriptionsRequest,
@@ -104,7 +104,7 @@ class DeserializedRequestAdapter implements
 	DeserializedSetPropertyLabelRequest,
 	DeserializedAddItemAliasesInLanguageRequest,
 	DeserializedAddPropertyAliasesInLanguageRequest,
-	DeserializedRemoveItemSiteLinkRequest
+	DeserializedRemoveSitelinkRequest
 {
 	private array $deserializedRequest;
 

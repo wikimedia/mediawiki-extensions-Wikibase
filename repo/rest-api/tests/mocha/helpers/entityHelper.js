@@ -146,7 +146,7 @@ async function getLocalSiteId() {
 	) ).siteid;
 }
 
-async function createLocalSiteLink( itemId, articleTitle ) {
+async function createLocalSitelink( itemId, articleTitle ) {
 	await action.getAnon().edit( articleTitle, { text: 'sitelink test' } );
 	await action.getAnon().action( 'wbsetsitelink', {
 		id: itemId,
@@ -170,5 +170,5 @@ module.exports = {
 	newStatementWithRandomStringValue,
 	newLegacyStatementWithRandomStringValue,
 	getLocalSiteId,
-	createLocalSiteLink
+	createLocalSitelink
 };

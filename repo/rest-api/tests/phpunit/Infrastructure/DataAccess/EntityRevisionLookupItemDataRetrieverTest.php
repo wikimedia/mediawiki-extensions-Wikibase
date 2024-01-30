@@ -21,10 +21,10 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemPartsBuilder;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
-use Wikibase\Repo\RestApi\Domain\ReadModel\SiteLinks;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelinks;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupItemDataRetriever;
-use Wikibase\Repo\RestApi\Infrastructure\SiteLinksReadModelConverter;
+use Wikibase\Repo\RestApi\Infrastructure\SitelinksReadModelConverter;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupItemDataRetriever
@@ -66,8 +66,8 @@ class EntityRevisionLookupItemDataRetrieverTest extends TestCase {
 			$itemParts->getStatements()
 		);
 		$this->assertEquals(
-			$this->newSiteLinksReadModelConverter()->convert( $item->getSiteLinkList() ),
-			$itemParts->getSiteLinks()
+			$this->newSitelinksReadModelConverter()->convert( $item->getSiteLinkList() ),
+			$itemParts->getSitelinks()
 		);
 	}
 
@@ -135,7 +135,7 @@ class EntityRevisionLookupItemDataRetrieverTest extends TestCase {
 				->setDescriptions( Descriptions::fromTermList( $item->getDescriptions() ) )
 				->setAliases( Aliases::fromAliasGroupList( $item->getAliasGroups() ) )
 				->setStatements( new StatementList( $this->newStatementReadModelConverter()->convert( $statement ) ) )
-				->setSiteLinks( $this->newSiteLinksReadModelConverter()->convert( $item->getSiteLinkList() ) )
+				->setSitelinks( $this->newSitelinksReadModelConverter()->convert( $item->getSiteLinkList() ) )
 				->build(),
 		];
 	}
@@ -225,7 +225,7 @@ class EntityRevisionLookupItemDataRetrieverTest extends TestCase {
 		$this->assertNull( $this->newRetriever()->getItem( $itemId ) );
 	}
 
-	public function testGetItemSiteLinks(): void {
+	public function testGetSitelinks(): void {
 		$itemId = new ItemId( 'Q123' );
 		$deSiteId = 'dewiki';
 		$dePageName = 'Kartoffel';
@@ -242,32 +242,32 @@ class EntityRevisionLookupItemDataRetrieverTest extends TestCase {
 
 		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $itemId, $item );
 
-		$siteLinks = $this->newRetriever()->getSiteLinks( $itemId );
+		$sitelinks = $this->newRetriever()->getSitelinks( $itemId );
 
 		$this->assertEquals(
-			$this->newSiteLinksReadModelConverter()->convert(
+			$this->newSitelinksReadModelConverter()->convert(
 				new SiteLinkList( [
 					new SiteLink( $deSiteId, $dePageName, $badges ),
 					new SiteLink( $enSiteId, $enPageName, $badges ),
 				] )
 			),
-			$siteLinks
+			$sitelinks
 		);
 	}
 
-	public function testGivenItemHasNoSiteLinks_returnsEmptySiteLinks(): void {
+	public function testGivenItemHasNoSitelinks_returnsEmptySitelinks(): void {
 		$itemId = new ItemId( 'Q123' );
 
 		$item = NewItem::withId( $itemId )->build();
 
 		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $itemId, $item );
 
-		$siteLinks = $this->newRetriever()->getSiteLinks( $itemId );
+		$sitelinks = $this->newRetriever()->getSitelinks( $itemId );
 
-		$this->assertEquals( new SiteLinks(), $siteLinks );
+		$this->assertEquals( new Sitelinks(), $sitelinks );
 	}
 
-	public function testGetSiteLink(): void {
+	public function testGetSitelink(): void {
 		$itemId = new ItemId( 'Q123' );
 		$siteId = 'enwiki';
 		$pageName = 'potato';
@@ -277,30 +277,30 @@ class EntityRevisionLookupItemDataRetrieverTest extends TestCase {
 
 		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $itemId, $item );
 
-		$sitelinks = $this->newSiteLinksReadModelConverter()->convert(
+		$sitelinks = $this->newSitelinksReadModelConverter()->convert(
 			new SiteLinkList( [ new SiteLink( $siteId, $pageName, $badges ) ] )
 		);
 		$this->assertEquals(
 			$sitelinks[ $siteId ],
-			$this->newRetriever()->getSiteLink( $itemId, $siteId )
+			$this->newRetriever()->getSitelink( $itemId, $siteId )
 		);
 	}
 
-	public function testGivenItemHasNoSiteLinksForRequestSite_returnsNull(): void {
+	public function testGivenItemHasNoSitelinksForRequestedSite_returnsNull(): void {
 		$itemId = new ItemId( 'Q123' );
 
 		$item = NewItem::withId( $itemId )->build();
 
 		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $itemId, $item );
 
-		$this->assertNull( $this->newRetriever()->getSiteLink( $itemId, 'enwiki' ) );
+		$this->assertNull( $this->newRetriever()->getSitelink( $itemId, 'enwiki' ) );
 	}
 
 	private function newRetriever(): EntityRevisionLookupItemDataRetriever {
 		return new EntityRevisionLookupItemDataRetriever(
 			$this->entityRevisionLookup,
 			$this->newStatementReadModelConverter(),
-			$this->newSiteLinksReadModelConverter()
+			$this->newSitelinksReadModelConverter()
 		);
 	}
 
@@ -324,14 +324,14 @@ class EntityRevisionLookupItemDataRetrieverTest extends TestCase {
 		return $entityRevisionLookup;
 	}
 
-	private function newSiteLinksReadModelConverter(): SiteLinksReadModelConverter {
+	private function newSitelinksReadModelConverter(): SitelinksReadModelConverter {
 		$site = new Site();
 		$site->setLinkPath( 'https://example.com/wiki/$1' );
 
 		$siteLookup = $this->createStub( SiteLookup::class );
 		$siteLookup->method( 'getSite' )->willReturn( $site );
 
-		return new SiteLinksReadModelConverter( $siteLookup );
+		return new SitelinksReadModelConverter( $siteLookup );
 	}
 
 }

@@ -15,7 +15,7 @@ class ItemPartsBuilder {
 	private ?Descriptions $descriptions = null;
 	private ?Aliases $aliases = null;
 	private ?StatementList $statements = null;
-	private ?SiteLinks $siteLinks = null;
+	private ?Sitelinks $sitelinks = null;
 	private array $requestedFields;
 
 	public function __construct( ItemId $id, array $requestedFields ) {
@@ -51,9 +51,9 @@ class ItemPartsBuilder {
 		return $this;
 	}
 
-	public function setSiteLinks( SiteLinks $siteLinks ): self {
+	public function setSitelinks( Sitelinks $sitelinks ): self {
 		$this->checkRequested( ItemParts::FIELD_SITELINKS );
-		$this->siteLinks = $siteLinks;
+		$this->sitelinks = $sitelinks;
 
 		return $this;
 	}
@@ -66,7 +66,7 @@ class ItemPartsBuilder {
 			$this->descriptions,
 			$this->aliases,
 			$this->statements,
-			$this->siteLinks
+			$this->sitelinks
 		);
 	}
 
