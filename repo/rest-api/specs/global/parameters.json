@@ -38,7 +38,7 @@
 		"required": true,
 		"schema": {
 			"type": "string",
-			"pattern": "^(Q|P)[1-9]\\d{0,9}\\$.+$"
+			"pattern": "^(Q|q|P|p)[1-9]\\d{0,9}\\$.+$"
 		},
 		"examples": {
 			"Statement on an Item": { "$ref": "./examples.json#/ItemStatementIdExample" },
@@ -52,7 +52,7 @@
 		"required": true,
 		"schema": {
 			"type": "string",
-			"pattern": "^Q[1-9]\\d{0,9}\\$.+$"
+			"pattern": "^(Q|q)[1-9]\\d{0,9}\\$.+$"
 		},
 		"example": { "$ref": "./examples.json#/ItemStatementIdExample/value" }
 	},
@@ -63,7 +63,7 @@
 		"required": true,
 		"schema": {
 			"type": "string",
-			"pattern": "^P[1-9]\\d{0,9}\\$.+$"
+			"pattern": "^(P|p)[1-9]\\d{0,9}\\$.+$"
 		},
 		"example": { "$ref": "./examples.json#/PropertyStatementIdExample/value" }
 	},

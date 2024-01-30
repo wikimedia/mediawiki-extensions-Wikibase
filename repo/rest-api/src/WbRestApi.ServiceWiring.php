@@ -146,6 +146,7 @@ use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoItemLabelValidator;
 use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoPropertyDescriptionValidator;
 use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoPropertyLabelValidator;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\StatementRedirectMiddlewareFactory;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\ResponseFactory;
 use Wikibase\Repo\RestApi\WbRestApi;
@@ -970,6 +971,13 @@ return [
 		return new StatementDeserializer(
 			$propertyValuePairDeserializer,
 			new ReferenceDeserializer( $propertyValuePairDeserializer )
+		);
+	},
+
+	'WbRestApi.StatementRedirectMiddlewareFactory' => function( MediaWikiServices $services ): StatementRedirectMiddlewareFactory {
+		return new StatementRedirectMiddlewareFactory(
+			WikibaseRepo::getEntityIdParser(),
+			new StatementSubjectRetriever( WikibaseRepo::getEntityRevisionLookup() )
 		);
 	},
 

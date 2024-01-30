@@ -73,6 +73,7 @@ use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\TermLookupEntityTermsRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\StatementRedirectMiddlewareFactory;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
 
 /**
@@ -288,6 +289,13 @@ class WbRestApi {
 	public static function getStatementDeserializer( ContainerInterface $services = null ): StatementDeserializer {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.StatementDeserializer' );
+	}
+
+	public static function getStatementRedirectMiddlewareFactory(
+		ContainerInterface $services = null
+	): StatementRedirectMiddlewareFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.StatementRedirectMiddlewareFactory' );
 	}
 
 	public static function getUnexpectedErrorHandlerMiddleware( ContainerInterface $services = null ): UnexpectedErrorHandlerMiddleware {
