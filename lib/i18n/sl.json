@@ -5,7 +5,8 @@
 			"Eleassar",
 			"HairyFotr",
 			"Janezdrilc",
-			"Pickle12"
+			"Pickle12",
+			"Upwinxp"
 		]
 	},
 	"specialpages-group-wikibase": "Wikibase",
@@ -102,7 +103,7 @@
 	"wikibase-entity-summary-wbsetaliases-set": "{{PLURAL:$1|določitev sopomenke|določitev sopomenk}} za [$2]",
 	"wikibase-entity-summary-wbsetaliases-add-remove": "{{PLURAL:$1|one=dodana in odstranjena sopomenka|dodane in odstranjene sopomenke}} za [$2]",
 	"wikibase-entity-summary-wbsetaliases-add": "{{PLURAL:$1|dodana sopomenka|dodane sopomenke}} za [$2]",
-	"wikibase-entity-summary-wbsetaliases-remove": "{{PLURAL:$1|one=odstranitev sopomenke|odstranitev sopomenk}} za [$2]",
+	"wikibase-entity-summary-wbsetaliases-remove": "{{PLURAL:$1|odstranitev sopomenke|odstranitev sopomenk}} za [$2]",
 	"wikibase-entity-summary-wbsetaliases-update": "{{PLURAL:$1|one=posodobitev sopomenke|posodobitev sopomenk}} za [$2]",
 	"wikibase-entity-summary-wbsetlabeldescriptionaliases": "sprememba oznake, opisa in sopomenk [$2]",
 	"wikibase-entity-summary-wbsetsitelink-add": "dodana povezava na [$2]",
