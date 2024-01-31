@@ -45,7 +45,7 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 		originalLastModified = new Date( testPropertyCreationMetadata.timestamp );
 		originalRevisionId = testPropertyCreationMetadata.revid;
 
-		// wait 1s before modifying labels to verify the last-modified timestamps are different
+		// wait 1s before next test to ensure the last-modified timestamps are different
 		await new Promise( ( resolve ) => {
 			setTimeout( resolve, 1000 );
 		} );

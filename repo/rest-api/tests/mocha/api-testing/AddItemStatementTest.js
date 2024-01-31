@@ -35,7 +35,7 @@ describe( newAddItemStatementRequestBuilder().getRouteDescription(), () => {
 			( await entityHelper.createUniqueStringProperty() ).entity.id
 		);
 
-		// wait 1s before adding any statements to verify the last-modified timestamps are different
+		// wait 1s before next test to ensure the last-modified timestamps are different
 		await new Promise( ( resolve ) => {
 			setTimeout( resolve, 1000 );
 		} );

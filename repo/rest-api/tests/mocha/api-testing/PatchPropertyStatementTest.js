@@ -52,7 +52,7 @@ describe( 'PATCH property statement', () => {
 		previousLastModified = new Date( testPropertyCreationMetadata.timestamp );
 		previousEtag = testPropertyCreationMetadata.revid;
 
-		// wait 1s before modifications to verify the last-modified timestamps are different
+		// wait 1s before next test to ensure the last-modified timestamps are different
 		await new Promise( ( resolve ) => {
 			setTimeout( resolve, 1000 );
 		} );

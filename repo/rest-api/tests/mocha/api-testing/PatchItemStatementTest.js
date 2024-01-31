@@ -55,7 +55,7 @@ describe( 'PATCH statement tests', () => {
 		previousLastModified = new Date( testItemCreationMetadata.timestamp );
 		previousEtag = makeEtag( testItemCreationMetadata.revid );
 
-		// wait 1s before adding any statements to verify the last-modified timestamps are different
+		// wait 1s before next test to ensure the last-modified timestamps are different
 		await new Promise( ( resolve ) => {
 			setTimeout( resolve, 1000 );
 		} );
