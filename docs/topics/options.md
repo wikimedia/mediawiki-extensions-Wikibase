@@ -573,7 +573,17 @@ List of namespaces on the client wiki that should have access to repository item
 DEFAULT: ```[]``` (Treated as setting is not set, ie. All namespaces are enabled.)
 
 #### excludeNamespaces
-List of namespaces on the client wiki to disable wikibase links, etc. for.
+List of namespaces on the client wiki where the display of some sitelink-related features is disabled.
+
+This means that for pages in these namespaces:
+* The link/button to connect this page to a Wikibase repo Item is not shown
+* The menu to show language links is not populated by the connected repo and might not be shown
+	* However it might still be populated by other extensions, for example Cognate
+* Pages in this namespace are not tracked as UnexpectedUnconnected pages
+* This namespace cannot be selected on Special:UnconnectedPages
+* However it _is_ still possible to create a sitelink to this page from the Wikibase repo,
+  and it will show up as a language link on connected wikis
+* Lua and parser functions that access Wikibase data are unaffected and work as usual
 
 DEFAULT: ```[]```
 
