@@ -1,4 +1,4 @@
-# wb_items_per_site
+# wb_property_info
 
 Part of the @ref docs_storage_propertyinfo storage system.
 
