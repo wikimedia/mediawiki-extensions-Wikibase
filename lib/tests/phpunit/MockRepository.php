@@ -503,9 +503,9 @@ class MockRepository implements
 			throw new StorageException( 'Entity type does not support redirects: ' . $redirect->getEntityId()->getEntityType() );
 		}
 
-		$this->putRedirect( $redirect );
-
 		$revisionId = ++$this->maxRevisionId;
+		$this->putRedirect( $redirect, $revisionId );
+
 		$this->putLog( $revisionId, $redirect->getEntityId(), $summary, $user->getName(), $tags );
 
 		return $revisionId;

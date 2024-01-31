@@ -4,10 +4,13 @@ namespace Wikibase\Repo\Tests\Interactors;
 
 use IContextSource;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Permissions\Authority;
 use MediaWiki\Permissions\RateLimiter;
 use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;
+use MediaWiki\User\TempUser\CreateStatus;
+use MediaWiki\User\TempUser\TempUserCreator;
 use MediaWiki\User\User;
 use MediaWikiIntegrationTestCase;
 use NullStatsdDataFactory;
@@ -17,7 +20,6 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
-use Wikibase\Lib\Store\LatestRevisionIdResult;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Repo\Content\ItemContent;
@@ -155,12 +157,13 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 	 * @return ItemMergeInteractor
 	 */
 	private function newInteractor() {
-		$summaryFormatter = WikibaseRepo::getSummaryFormatter();
+		$services = $this->getServiceContainer();
+		$summaryFormatter = WikibaseRepo::getSummaryFormatter( $services );
 
 		//XXX: we may want or need to mock some of these services
 		$mergeFactory = new MergeFactory(
-			WikibaseRepo::getEntityConstraintProvider(),
-			WikibaseRepo::getChangeOpFactoryProvider(),
+			WikibaseRepo::getEntityConstraintProvider( $services ),
+			WikibaseRepo::getChangeOpFactoryProvider( $services ),
 			new HashSiteStore( TestSites::getSites() )
 		);
 
@@ -168,6 +171,7 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 
 		$entityTitleLookup = $this->getMockEntityTitleLookup();
 		$permissionChecker = $this->getPermissionChecker();
+		$tempUserCreator = $services->getTempUserCreator();
 		$editEntityFactory = new MediaWikiEditEntityFactory(
 			$entityTitleLookup,
 			$this->mockRepository,
@@ -177,8 +181,8 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 			new EntityPatcher(),
 			$editFilterHookRunner,
 			new NullStatsdDataFactory(),
-			MediaWikiServices::getInstance()->getUserOptionsLookup(),
-			MediaWikiServices::getInstance()->getTempUserCreator(),
+			$services->getUserOptionsLookup(),
+			$tempUserCreator,
 			1024 * 1024,
 			[ 'item' ]
 		);
@@ -196,10 +200,11 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 				$summaryFormatter,
 				$editFilterHookRunner,
 				$this->mockRepository,
-				$entityTitleLookup
+				$entityTitleLookup,
+				$tempUserCreator
 			),
 			$this->getEntityTitleLookup(),
-			MediaWikiServices::getInstance()->getPermissionManager()
+			$services->getPermissionManager()
 		);
 
 		return $interactor;
@@ -387,16 +392,19 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 
 		$tag = __METHOD__ . '-tag';
 
-		$interactor->mergeItems( $fromId, $toId, $this->getContext(), $ignoreConflicts, 'CustomSummary', false, [ $tag ] );
+		[
+			'fromEntityRevision' => $fromEntityRevision,
+			'toEntityRevision' => $toEntityRevision,
+			'savedTempUser' => $savedTempUser,
+		] = $interactor->mergeItems( $fromId, $toId, $this->getContext(), $ignoreConflicts, 'CustomSummary', false, [ $tag ] );
 
 		$actualTo = $this->testHelper->getEntity( $toId );
 		$this->testHelper->assertEntityEquals( $expectedTo, $actualTo, 'modified target item' );
 
 		$this->assertRedirectWorks( $expectedFrom, $fromId, $toId );
 
-		$toRevId = $this->extractConcreteRevisionId(
-			$this->mockRepository->getLatestRevisionId( $toId )
-		);
+		$fromRevId = $fromEntityRevision->getRevisionId();
+		$toRevId = $toEntityRevision->getRevisionId();
 		$this->testHelper->assertRevisionSummary(
 			'@^/\* *wbmergeitems-from:0\|\|Q1 *\*/ *CustomSummary$@',
 			$toRevId,
@@ -408,10 +416,12 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 			'Item merged into is being watched'
 		);
 
-		$this->assertContains( $tag, $this->mockRepository->getLatestLogEntryFor( $fromId )['tags'],
+		$this->assertContains( $tag, $this->mockRepository->getLogEntry( $fromRevId )['tags'],
 			'Edit on item merged from is tagged' );
 		$this->assertContains( $tag, $this->mockRepository->getLogEntry( $toRevId )['tags'],
 			'Edit on item merged into is tagged' );
+
+		$this->assertNull( $savedTempUser );
 	}
 
 	private function assertRedirectWorks( $expectedFrom, ItemId $fromId, ItemId $toId ) {
@@ -531,17 +541,45 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 		$interactor->mergeItems( $fromId, $toId, $this->getContext() );
 	}
 
-	private function extractConcreteRevisionId( LatestRevisionIdResult $result ) {
-		$shouldNotBeCalled = function () {
-			$this->fail( 'Not a concrete revision result given' );
-		};
+	public function testMergeItems_tempUser(): void {
+		$anonUser = $this->getServiceContainer()->getUserFactory()->newAnonymous();
+		$originalContext = new RequestContext();
+		$originalContext->setUser( $anonUser );
+		$tempUser = $this->getTestUser()->getUser();
+		$tempUserCreator = $this->createMock( TempUserCreator::class );
+		$tempUserCreator->method( 'shouldAutoCreate' )
+			->willReturnCallback( fn( Authority $authority, $action ) => !$authority->isRegistered() );
+		$tempUserCreator->expects( $this->once() )
+			->method( 'create' )
+			->willReturn( CreateStatus::newGood( $tempUser ) );
+		$this->setService( 'TempUserCreator', $tempUserCreator );
 
-		return $result->onNonexistentEntity( $shouldNotBeCalled )
-			->onRedirect( $shouldNotBeCalled )
-			->onConcreteRevision( function ( $revId ) {
-				return $revId;
-			} )
-			->map();
+		$fromId = new ItemId( 'Q1' );
+		$toId = new ItemId( 'Q2' );
+		$this->testHelper->putEntities( [
+			'Q1' => [ 'labels' => [ 'en' => [ 'language' => 'en', 'value' => 'en label' ] ] ],
+			'Q2' => [ 'labels' => [ 'de' => [ 'language' => 'de', 'value' => 'de label' ] ] ],
+		] );
+
+		$result = $this->newInteractor()
+			->mergeItems( $fromId, $toId, $originalContext );
+
+		// assert that proper new context is returned and old context is not modified
+		$this->assertSame( $tempUser, $result['savedTempUser'] );
+		$newContext = $result['context'];
+		$this->assertNotSame( $originalContext, $newContext );
+		$this->assertSame( $tempUser, $newContext->getUser() );
+		$this->assertSame( $anonUser, $originalContext->getUser() );
+
+		// assert that all three edits (two on Q1, one on Q2) were made by the same user
+		$edit3 = $this->mockRepository->getLatestLogEntryFor( $fromId );
+		$edit2 = $this->mockRepository->getLatestLogEntryFor( $toId );
+		$this->assertSame( $edit2['revision'] + 1, $edit3['revision'] );
+		$edit1 = $this->mockRepository->getLogEntry( $edit2['revision'] - 1 );
+		$this->assertSame( $fromId->getSerialization(), $edit1['entity'] );
+		$this->assertSame( $tempUser->getName(), $edit1['user'] );
+		$this->assertSame( $tempUser->getName(), $edit2['user'] );
+		$this->assertSame( $tempUser->getName(), $edit3['user'] );
 	}
 
 }

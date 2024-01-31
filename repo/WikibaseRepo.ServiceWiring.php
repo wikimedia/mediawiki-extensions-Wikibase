@@ -1326,7 +1326,8 @@ return [
 			WikibaseRepo::getSummaryFormatter( $services ),
 			WikibaseRepo::getEditFilterHookRunner( $services ),
 			$store->getEntityRedirectLookup(),
-			WikibaseRepo::getEntityTitleStoreLookup( $services )
+			WikibaseRepo::getEntityTitleStoreLookup( $services ),
+			$services->getTempUserCreator()
 		);
 	},
 

@@ -5,7 +5,9 @@ namespace Wikibase\Repo\Tests\Api;
 use ApiMain;
 use ApiUsageException;
 use ChangeTags;
+use MediaWiki\Context\RequestContext;
 use MediaWiki\Languages\LanguageNameUtils;
+use MediaWiki\MainConfigNames;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Site\SiteLookup;
@@ -125,7 +127,11 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 				->method( 'createRedirect' )
 				->with( $redirect->getEntityId(), $redirect->getTargetId() )
 				->willReturnCallback( function() use ( $redirect ) {
-					return $redirect;
+					return [
+						'entityRedirect' => $redirect,
+						'context' => new RequestContext(),
+						'savedTempUser' => null,
+					];
 				} );
 		} else {
 			$mock->expects( $this->never() )
@@ -588,6 +594,42 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 		} catch ( ApiUsageException $ex ) {
 			$this->apiModuleTestHelper->assertUsageException( 'no-such-entity', $ex );
 		}
+	}
+
+	public function testMergeTempUserCreatedRedirect(): void {
+		$autoCreateTempUser = $this->getConfVar( MainConfigNames::AutoCreateTempUser );
+		$autoCreateTempUser['enabled'] = true;
+		$this->overrideConfigValue( MainConfigNames::AutoCreateTempUser, $autoCreateTempUser );
+		$this->setGroupPermissions( '*', 'createaccount', true );
+		$this->setTemporaryHook( 'TempUserCreatedRedirect', function (
+			$session,
+			$user,
+			string $returnTo,
+			string $returnToQuery,
+			string $returnToAnchor,
+			&$redirectUrl
+		) {
+			$this->assertSame( 'ReturnTo', $returnTo );
+			$this->assertSame( 'query=string', $returnToQuery );
+			$this->assertSame( '#anchor', $returnToAnchor );
+			$redirectUrl = 'https://wiki.example/';
+		} );
+		$q1 = [ 'labels' => [ 'en' => [ 'language' => 'en', 'value' => 'en label' ] ] ];
+		$q2 = [ 'labels' => [ 'de' => [ 'language' => 'de', 'value' => 'de label' ] ] ];
+		$this->entityModificationTestHelper->putEntity( $q1, 'Q1' );
+		$this->entityModificationTestHelper->putEntity( $q2, 'Q2' );
+
+		$result = $this->callApiModule( [
+			'action' => 'wbmergeitems',
+			'fromid' => 'q1',
+			'toid' => 'q2',
+			'returnto' => 'ReturnTo',
+			'returntoquery' => '?query=string',
+			'returntoanchor' => 'anchor',
+		], new EntityRedirect( new ItemId( 'Q1' ), new ItemId( 'Q2' ) ) );
+
+		$this->assertArrayHasKey( 'tempusercreated', $result );
+		$this->assertSame( 'https://wiki.example/', $result['tempuserredirect'] );
 	}
 
 }

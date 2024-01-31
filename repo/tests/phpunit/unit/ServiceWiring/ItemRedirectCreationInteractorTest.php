@@ -58,6 +58,9 @@ class ItemRedirectCreationInteractorTest extends ServiceWiringTestCase {
 			$this->createMock( EntityTitleStoreLookup::class )
 		);
 
+		$this->serviceContainer->expects( $this->once() )
+			->method( 'getTempUserCreator' );
+
 		$this->assertInstanceOf(
 			ItemRedirectCreationInteractor::class,
 			$this->getService( 'WikibaseRepo.ItemRedirectCreationInteractor' )

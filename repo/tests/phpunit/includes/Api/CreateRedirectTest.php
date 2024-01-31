@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Api;
 
 use ApiMain;
 use ApiUsageException;
+use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Status\Status;
@@ -133,7 +134,8 @@ class CreateRedirectTest extends MediaWikiIntegrationTestCase {
 				WikibaseRepo::getSummaryFormatter(),
 				$this->getMockEditFilterHookRunner(),
 				$this->mockRepository,
-				$this->getMockEntityTitleLookup()
+				$this->getMockEntityTitleLookup(),
+				$this->getServiceContainer()->getTempUserCreator()
 			);
 		}
 
@@ -298,6 +300,38 @@ class CreateRedirectTest extends MediaWikiIntegrationTestCase {
 
 		$params = [ 'from' => 'Q11', 'to' => 'Q12' ];
 		$this->callApiModule( $params, $user );
+	}
+
+	public function testRedirect_TempUserCreatedRedirect(): void {
+		$autoCreateTempUser = $this->getConfVar( MainConfigNames::AutoCreateTempUser );
+		$autoCreateTempUser['enabled'] = true;
+		$this->overrideConfigValue( MainConfigNames::AutoCreateTempUser, $autoCreateTempUser );
+		$this->setGroupPermissions( '*', 'createaccount', true );
+		$this->setTemporaryHook( 'TempUserCreatedRedirect', function (
+			$session,
+			$user,
+			string $returnTo,
+			string $returnToQuery,
+			string $returnToAnchor,
+			&$redirectUrl
+		) {
+			$this->assertSame( 'ReturnTo', $returnTo );
+			$this->assertSame( 'query=string', $returnToQuery );
+			$this->assertSame( '#anchor', $returnToAnchor );
+			$redirectUrl = 'https://wiki.example/';
+		} );
+		$user = $this->getServiceContainer()->getUserFactory()->newAnonymous();
+
+		$result = $this->callApiModule( [
+			'from' => 'Q11',
+			'to' => 'Q12',
+			'returnto' => 'ReturnTo',
+			'returntoquery' => '?query=string',
+			'returntoanchor' => 'anchor',
+		], $user );
+
+		$this->assertArrayHasKey( 'tempusercreated', $result );
+		$this->assertSame( 'https://wiki.example/', $result['tempuserredirect'] );
 	}
 
 	public function testModuleFlags() {

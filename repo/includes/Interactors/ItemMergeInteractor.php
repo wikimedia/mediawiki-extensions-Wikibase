@@ -131,9 +131,12 @@ class ItemMergeInteractor {
 	 * Callers are responsible for permission checks
 	 * (typically using {@link ChangeTags::canAddTagsAccompanyingChange}).
 	 *
-	 * @return array A list of exactly two EntityRevision objects and a boolean. The first
-	 *  EntityRevision object represents the modified source item, the second one represents the
-	 *  modified target item. The boolean indicates whether the redirect was successful.
+	 * @return array with five members:
+	 * - 'fromEntityRevision' (EntityRevision): modified source item
+	 * - 'toEntityRevision' (EntityRevision): modified target item
+	 * - 'context' (IContextSource): context that should be used for subsequent edits
+	 * - 'savedTempUser' (?User): temporary user if one was created, else null
+	 * - 'redirected' (bool): whether the redirect was successful
 	 *
 	 * @throws ItemMergeException
 	 * @throws RedirectCreationException
@@ -176,18 +179,34 @@ class ItemMergeInteractor {
 			throw new ItemMergeException( $e->getMessage(), 'failed-modify', $e );
 		}
 
-		$result = $this->attemptSaveMerge( $fromItem, $toItem, $summary, $context, $bot, $tags );
+		$mergeResult = $this->attemptSaveMerge( $fromItem, $toItem, $summary, $context, $bot, $tags );
+		[
+			'fromEntityRevision' => $fromRev,
+			'toEntityRevision' => $toRev,
+			'context' => $context,
+			'savedTempUser' => $mergeSavedTempUser,
+		] = $mergeResult;
 		$this->updateWatchlistEntries( $fromId, $toId );
 
 		$redirected = false;
+		$redirectSavedTempUser = null;
 
 		if ( $this->isEmpty( $fromId ) ) {
-			$this->interactorRedirect->createRedirect( $fromId, $toId, $bot, $tags, $context );
+			$redirectResult = $this->interactorRedirect->createRedirect( $fromId, $toId, $bot, $tags, $context );
+			[
+				'context' => $context,
+				'savedTempUser' => $redirectSavedTempUser,
+			] = $redirectResult;
 			$redirected = true;
 		}
 
-		array_push( $result, $redirected );
-		return $result;
+		return [
+			'fromEntityRevision' => $fromRev,
+			'toEntityRevision' => $toRev,
+			'context' => $context,
+			'savedTempUser' => $mergeSavedTempUser ?? $redirectSavedTempUser,
+			'redirected' => $redirected,
+		];
 	}
 
 	/**
@@ -267,8 +286,7 @@ class ItemMergeInteractor {
 	 * @param bool $bot
 	 * @param string[] $tags
 	 *
-	 * @return array A list of exactly two EntityRevision objects. The first one represents the
-	 *  modified source item, the second one represents the modified target item.
+	 * @return array with four members, as documented at {@link self::mergeItems()}, except with the `redirected` member missing.
 	 */
 	private function attemptSaveMerge( Item $fromItem, Item $toItem, ?string $summary, IContextSource $context, bool $bot, array $tags ) {
 		// Note: the edits and summaries are potentially confusing;
@@ -276,12 +294,27 @@ class ItemMergeInteractor {
 		// on the “to” item, we use the summary “Merged item *from*” and mention the “from” item ID.
 
 		$fromSummary = $this->getSummary( 'to', $toItem->getId(), $summary );
-		$fromRev = $this->saveItem( $fromItem, $fromSummary, $context, $bot, $tags );
+		$fromResult = $this->saveItem( $fromItem, $fromSummary, $context, $bot, $tags );
+		[
+			'revision' => $fromRev,
+			'context' => $context,
+			'savedTempUser' => $fromSavedTempUser,
+		] = $fromResult;
 
 		$toSummary = $this->getSummary( 'from', $fromItem->getId(), $summary );
-		$toRev = $this->saveItem( $toItem, $toSummary, $context, $bot, $tags );
+		$toResult = $this->saveItem( $toItem, $toSummary, $context, $bot, $tags );
+		[
+			'revision' => $toRev,
+			'context' => $context,
+			'savedTempUser' => $toSavedTempUser,
+		] = $toResult;
 
-		return [ $fromRev, $toRev ];
+		return [
+			'fromEntityRevision' => $fromRev,
+			'toEntityRevision' => $toRev,
+			'context' => $context,
+			'savedTempUser' => $fromSavedTempUser ?? $toSavedTempUser,
+		];
 	}
 
 	private function saveItem( Item $item, FormatableSummary $summary, IContextSource $context, bool $bot, array $tags ) {
@@ -310,7 +343,7 @@ class ItemMergeInteractor {
 			throw new ItemMergeException( $status->getWikiText(), 'failed-save' );
 		}
 
-		return $status->getValue()['revision'];
+		return $status->getValue();
 	}
 
 	private function updateWatchlistEntries( ItemId $fromId, ItemId $toId ) {
