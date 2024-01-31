@@ -5,7 +5,7 @@
 * Uses `statements` instead of `claims`
 
 ```
-GET /w/api.php?action=wbgetentities&ids=Q11&format=json                    GET /w/rest.php/wikibase/v0/entities/items/Q11
+ Action API                                                                 REST API
 
 {                                                                         |
     "entities": {                                                         |
@@ -20,7 +20,7 @@ GET /w/api.php?action=wbgetentities&ids=Q11&format=json                    GET /
                     { ... }                                               |                      { ... }
                 ]                                                         |                  ]
             },                                                            |              },
-            "sitelinks": {}                                               |              "sitelinks": {}
+            "sitelinks": { ... }                                          |              "sitelinks": { ... }
         }                                                                 |          }
     }                                                                     |
 }                                                                         |
@@ -30,7 +30,7 @@ GET /w/api.php?action=wbgetentities&ids=Q11&format=json                    GET /
 * Flat structure ([T305362](https://phabricator.wikimedia.org/T305362))
 
 ```
-GET /w/api.php?action=wbgetentities&ids=Q11&format=json                    GET /w/rest.php/wikibase/v0/entities/items/Q11
+ Action API                                                                 REST API
 
 {                                                                         |
     "entities": {                                                         |
@@ -70,7 +70,7 @@ GET /w/api.php?action=wbgetentities&ids=Q11&format=json                    GET /
 The REST API's response format for statements has been re-structured, compared to the Action API, see [T321459](https://phabricator.wikimedia.org/T321459).
 
 ```
-old                                                                         new
+ Action API                                                                 REST API
 
 {                                                                         |    {
   "claims": {                                                             |      "statements": {
@@ -109,7 +109,7 @@ old                                                                         new
 
 The qualifiers are turned from a map of lists of snak objects into a list of property-value pair objects. The field `qualifiers-order` is removed.
 ```
-old                                                                         new
+ Action API                                                                 REST API
 
 {                                                                         |  {
   ...                                                                     |    ...
@@ -138,7 +138,7 @@ old                                                                         new
 
 The field `references.snaks` is renamed to `references.parts` and turned from a map of lists of snak objects into a list of property-value pair objects. The field `references.snaks-order` is removed.
 ```
-old                                                                         new
+ Action API                                                                 REST API
 
 {                                                                         |  {
   ...                                                                     |    ...
@@ -167,6 +167,34 @@ old                                                                         new
   ...                                                                     |    ...
 }                                                                         |  }
 ```
+## Sitelinks
+
+In the Item's `sitelinks` section, the redundant `site` ID is left out and the page's `url` is always displayed:
+```
+ Action API                                                                 REST API
+
+{                                                                         | {
+  ...                                                                     |   ...
+  "sitelinks": {                                                          |   "sitelinks": {
+    "dewiki": {                                                           |     "dewiki": {
+      "site": "dewiki",                                                   |
+      "title": "Artikel",                                                 |       "title": "Artikel",
+      "badges": []                                                        |       "badges": [],
+                                                                          |       "url": "https://de.wikipedia.org/wiki/Artikel"
+    },                                                                    |     },
+    "enwiki": {                                                           |     "enwiki": {
+      "site": "enwiki",                                                   |
+      "title": "Article",                                                 |       "title": "Article",
+      "badges": ["Q123"]                                                  |       "badges": ["Q123"],
+                                                                          |       "url": "https://en.wikipedia.org/wiki/Article"
+    }                                                                     |     }
+  }                                                                       |   }
+  ...                                                                     |   ...
+}                                                                         | }
+```
+
+
+
 ## Metadata
 
 * `pageid`, `ns`, and `title` fields are omitted
@@ -174,7 +202,7 @@ old                                                                         new
 * success state is represented in HTTP response code (2xx vs 4xx)
 
 ```
-GET /w/api.php?action=wbgetentities&ids=Q11&format=json                    GET /w/rest.php/wikibase/v0/entities/items/Q11
+ Action API                                                                 REST API
 
 {                                                                         |
     "entities": {                                                         |
