@@ -48,6 +48,48 @@
 			"message": "Not a valid site ID: {site_id}"
 		}
 	},
+	"InvalidTitleExample": {
+		"value": {
+			"code": "invalid-title-field",
+			"message": "Not a valid input for title field"
+		}
+	},
+	"TitleIsEmptyExample": {
+		"value": {
+			"code": "title-field-empty",
+			"message": "Title must not be empty"
+		}
+	},
+	"TitleDoesNotExistOnGivenSiteExample": {
+		"value": {
+			"code": "title-does-not-exist",
+			"message": "Page with title {title} does not exist on the given site"
+		}
+	},
+	"SiteLinkTitleFieldNotProvidedExample": {
+		"value": {
+			"code": "sitelink-data-missing-title",
+			"message": "Mandatory sitelink title missing"
+		}
+	},
+	"ValueOfBadgesFieldIsNotAListExample": {
+		"value": {
+			"code": "invalid-sitelink-badges-format",
+			"message": "Value of badges field is not a list"
+		}
+	},
+	"ItemProvidedIsNotAllowedAsASiteLinkBadgeExample": {
+		"value": {
+			"code": "item-not-a-badge",
+			"message": "Item ID provided as badge is not allowed as a badge: {item_id}"
+		}
+	},
+	"ValueProvidedAsABadgeIsNotAnItemIDExample": {
+		"value": {
+			"code": "invalid-input-sitelink-badge",
+			"message": "Badge input is not an item ID: {value}"
+		}
+	},
 	"StatementDataMissingFieldExample": {
 		"value": {
 			"code": "statement-data-missing-field",
@@ -186,6 +228,11 @@
 			"code": "redirected-item",
 			"message": "Item {item_id} has been merged into {other_id}"
 		}
+	},
+	"SiteLinkConflictExample": {
+		"value": {
+			"code": "sitelink-conflict",
+			"message": "Sitelink is already being used on {other_item_id}" }
 	},
 	"StatementNotFoundExample": {
 		"value": {
