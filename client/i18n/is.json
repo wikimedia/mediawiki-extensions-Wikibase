@@ -104,7 +104,7 @@
 	"notification-subject-page-connection": "Síða á {{SITENAME}} sem þú {{GENDER:$3|bjóst til}} var {{GENDER:$2|tengd}} við {{WBREPONAME}} hlut",
 	"unresolved-property-category": "Síður með óleystum eiginleikum",
 	"unresolved-property-category-desc": "Þessi flokkur listar síður sem vísa í {{WBREPONAME}} eiginleika sem finnast ekki annaðhvort út frá auðkenni eiginleikans eða merkimiða.",
-	"connected-redirect-category": "Tilvísanir sem tengjast {{WBREPONAME}} hlut",
+	"connected-redirect-category": "Tilvísanir tengdar {{WBREPONAME}}-atriði",
 	"connected-redirect-category-desc": "Þessi flokkur listar tilvísanir sem eru tengd {{WBREPONAME}} hlut.",
 	"wikibase-client-data-bridge-dialog-title": "Breyta $1",
 	"wikibase-client-data-bridge-permissions-error": "Þú hefur ekki leyfi til að breyta þessu gildi, af eftirfarandi ástæðum {{PLURAL:$1|ástæðu|ástæðum}}:",
