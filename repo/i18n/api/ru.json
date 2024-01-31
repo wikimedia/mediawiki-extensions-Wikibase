@@ -5,7 +5,8 @@
 			"Kareyac",
 			"Okras",
 			"Stjn",
-			"Vlad5250"
+			"Vlad5250",
+			"Putnik"
 		]
 	},
 	"apihelp-wbavailablebadges-summary": "Запрашивает доступные элементы-бэджи.",
@@ -13,7 +14,7 @@
 	"apihelp-wbcreateclaim-summary": "Создаёт заявления Wikibase.",
 	"apihelp-wbcreateclaim-param-baserevid": "Числовой идентификатор для версии, на которой нужно основать изменение. Используется для обнаружения конфликтов во время записи.",
 	"apihelp-wbcreateclaim-param-bot": "Отметить правку как правку бота. Этот флаг URL-адреса будет считаться действительным только в случае, если пользователь принадлежит к группе «{{int:group-bot}}».",
-	"apihelp-wbcreateclaim-param-entity": "Идентификатор сущности, к которой добавляется заявление.",
+	"apihelp-wbcreateclaim-param-entity": "Идентификатор сущности, к которой добавляется утверждение.",
 	"apihelp-wbcreateclaim-param-property": "Идентификатор свойства снэка.",
 	"apihelp-wbcreateclaim-param-summary": "Описание изменения.\nБудет добавлено к началу автоматически сгенерированного комментария. Лимит на длину автокомментария с описанием правки — 260 символов. Учтите, что всё свыше этого лимита будет опущено.",
 	"apihelp-wbcreateredirect-example-1": "Превратить <samp>$1</samp> в перенаправление на <samp>$2</samp>",
