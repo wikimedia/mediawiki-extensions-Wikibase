@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\SetSitelink;
 
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\SitelinkEditSummary;
@@ -14,23 +13,27 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
  */
 class SetSitelink {
 
+	private SetSitelinkValidator $validator;
 	private SitelinkDeserializer $sitelinkDeserializer;
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
 
 	public function __construct(
+		SetSitelinkValidator $validator,
 		SitelinkDeserializer $sitelinkDeserializer,
 		ItemRetriever $itemRetriever,
 		ItemUpdater $itemUpdater
 	) {
+		$this->validator = $validator;
 		$this->sitelinkDeserializer = $sitelinkDeserializer;
 		$this->itemRetriever = $itemRetriever;
 		$this->itemUpdater = $itemUpdater;
 	}
 
 	public function execute( SetSitelinkRequest $request ): SetSitelinkResponse {
-		$itemId = new ItemId( $request->getItemId() );
-		$siteId = $request->getSiteId();
+		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
+		$itemId = $deserializedRequest->getItemId();
+		$siteId = $deserializedRequest->getSiteId();
 		$sitelink = $this->sitelinkDeserializer->deserialize( $siteId, $request->getSitelink() );
 
 		$item = $this->itemRetriever->getItem( $itemId );

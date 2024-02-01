@@ -71,6 +71,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\SetItemDescrip
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription\SetPropertyDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\SetPropertyLabelValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\SetSitelink\SetSitelinkValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 
 /**
@@ -125,7 +126,8 @@ class ValidatingRequestDeserializer	implements
 	SetPropertyLabelValidator,
 	AddItemAliasesInLanguageValidator,
 	AddPropertyAliasesInLanguageValidator,
-	RemoveSitelinkValidator
+	RemoveSitelinkValidator,
+	SetSitelinkValidator
 {
 	private const PREFIX = 'WbRestApi.RequestValidation.';
 	public const ITEM_ID_REQUEST_VALIDATING_DESERIALIZER = self::PREFIX . 'ItemIdRequestValidatingDeserializer';

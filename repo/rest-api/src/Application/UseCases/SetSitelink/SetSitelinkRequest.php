@@ -2,10 +2,15 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\SetSitelink;
 
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\SiteIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\UseCaseRequest;
+
 /**
  * @license GPL-2.0-or-later
  */
-class SetSitelinkRequest {
+class SetSitelinkRequest implements UseCaseRequest, ItemIdRequest, SiteIdRequest, EditMetadataRequest {
 
 	private string $itemId;
 	private string $siteId;
@@ -13,6 +18,7 @@ class SetSitelinkRequest {
 	private array $editTags;
 	private bool $isBot;
 	private ?string $comment;
+	private ?string $username;
 
 	public function __construct(
 		string $itemId,
@@ -20,7 +26,8 @@ class SetSitelinkRequest {
 		array $sitelink,
 		array $editTags,
 		bool $isBot,
-		?string $comment
+		?string $comment,
+		?string $username
 	) {
 		$this->itemId = $itemId;
 		$this->siteId = $siteId;
@@ -28,6 +35,7 @@ class SetSitelinkRequest {
 		$this->editTags = $editTags;
 		$this->isBot = $isBot;
 		$this->comment = $comment;
+		$this->username = $username;
 	}
 
 	public function getItemId(): string {
@@ -52,6 +60,10 @@ class SetSitelinkRequest {
 
 	public function getComment(): ?string {
 		return $this->comment;
+	}
+
+	public function getUsername(): ?string {
+		return $this->username;
 	}
 
 }

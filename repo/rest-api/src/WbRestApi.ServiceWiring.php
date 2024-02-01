@@ -963,6 +963,7 @@ return [
 
 	'WbRestApi.SetSitelink' => function( MediaWikiServices $services ): SetSitelink {
 		return new SetSitelink(
+			WbRestApi::getValidatingRequestDeserializer( $services ),
 			new SitelinkDeserializer(),
 			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getItemUpdater( $services ),

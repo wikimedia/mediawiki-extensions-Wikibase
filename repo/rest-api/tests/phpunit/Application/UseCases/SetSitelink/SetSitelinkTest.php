@@ -1,4 +1,4 @@
-<?php declare( strict_types=1 );
+<?php declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\SetSitelink;
 
@@ -8,9 +8,12 @@ use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\SetSitelink\SetSitelink;
 use Wikibase\Repo\RestApi\Application\UseCases\SetSitelink\SetSitelinkRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\SetSitelink\SetSitelinkValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\ReadModel\SiteLink;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryItemRepository;
 
 /**
@@ -22,12 +25,13 @@ use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryItemRepository
  */
 class SetSitelinkTest extends TestCase {
 
+	private SetSitelinkValidator $validator;
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
 
 	protected function setUp(): void {
 		parent::setUp();
-
+		$this->validator = new TestValidatingRequestDeserializer();
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
 	}
@@ -50,7 +54,8 @@ class SetSitelinkTest extends TestCase {
 				[ 'title' => $title, 'badges' => [ $badge ] ],
 				[],
 				false,
-				''
+				'',
+				null
 			)
 		);
 
@@ -82,7 +87,8 @@ class SetSitelinkTest extends TestCase {
 				[ 'title' => $title, 'badges' => [ $badge ] ],
 				[],
 				false,
-				''
+				'',
+				null
 			)
 		);
 
@@ -96,8 +102,28 @@ class SetSitelinkTest extends TestCase {
 		$this->assertTrue( $response->wasReplaced() );
 	}
 
+	public function testGivenInvalidRequest_throws(): void {
+		$expectedUseCaseRequest = $this->createStub( SetSitelinkRequest::class );
+		$expectedUseCaseError = $this->createStub( UseCaseError::class );
+
+		$this->validator = $this->createMock( SetSitelinkValidator::class );
+		$this->validator->method( 'validateAndDeserialize' )->with( $expectedUseCaseRequest )->willThrowException( $expectedUseCaseError );
+
+		try {
+			$this->newUseCase()->execute( $expectedUseCaseRequest );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedUseCaseError, $e );
+		}
+	}
+
 	private function newUseCase(): SetSitelink {
-		return new SetSitelink( new SitelinkDeserializer(), $this->itemRetriever, $this->itemUpdater );
+		return new SetSitelink(
+			$this->validator,
+			new SitelinkDeserializer(),
+			$this->itemRetriever,
+			$this->itemUpdater
+		);
 	}
 
 }

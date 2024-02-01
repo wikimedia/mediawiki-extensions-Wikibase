@@ -54,6 +54,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetItemDescription\DeserializedSe
 use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\DeserializedSetItemLabelRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription\DeserializedSetPropertyDescriptionRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\DeserializedSetPropertyLabelRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\SetSitelink\DeserializedSetSitelinkRequest;
 use Wikibase\Repo\RestApi\Domain\Model\UserProvidedEditMetadata;
 
 /**
@@ -104,7 +105,8 @@ class DeserializedRequestAdapter implements
 	DeserializedSetPropertyLabelRequest,
 	DeserializedAddItemAliasesInLanguageRequest,
 	DeserializedAddPropertyAliasesInLanguageRequest,
-	DeserializedRemoveSitelinkRequest
+	DeserializedRemoveSitelinkRequest,
+	DeserializedSetSitelinkRequest
 {
 	private array $deserializedRequest;
 

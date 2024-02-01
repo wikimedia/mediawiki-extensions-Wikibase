@@ -11,6 +11,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\SitelinkSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\SetSitelink\SetSitelink;
 use Wikibase\Repo\RestApi\Application\UseCases\SetSitelink\SetSitelinkRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\SetSitelink\SetSitelinkResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -29,34 +30,43 @@ class SetSitelinkRouteHandler extends SimpleHandler {
 
 	private SetSitelink $useCase;
 	private SiteLinkSerializer $sitelinkSerializer;
+	private ResponseFactory $responseFactory;
 
-	public function __construct( SetSitelink $useCase, SiteLinkSerializer $sitelinkSerializer
+	public function __construct( SetSitelink $useCase, ResponseFactory $responseFactory, SiteLinkSerializer $sitelinkSerializer
 	) {
 		$this->useCase = $useCase;
 		$this->sitelinkSerializer = $sitelinkSerializer;
+		$this->responseFactory = $responseFactory;
 	}
 
 	public static function factory(): Handler {
 		return new self(
-			WbRestApi::getSetSitelink(), new SitelinkSerializer(),
+			WbRestApi::getSetSitelink(),
+			new ResponseFactory(),
+			new SitelinkSerializer(),
 		);
 	}
 
 	public function run( string $itemId, string $siteId ): Response {
 		$jsonBody = $this->getValidatedBody();
 
-		return $this->newSuccessHttpResponse(
-			$this->useCase->execute(
-				new SetSitelinkRequest(
-					$itemId,
-					$siteId,
-					$jsonBody['sitelink'],
-					$jsonBody['tags'],
-					$jsonBody['bot'],
-					$jsonBody['comment']
+		try {
+			return $this->newSuccessHttpResponse(
+				$this->useCase->execute(
+					new SetSitelinkRequest(
+						$itemId,
+						$siteId,
+						$jsonBody['sitelink'],
+						$jsonBody['tags'],
+						$jsonBody['bot'],
+						$jsonBody['comment'],
+						null
+					)
 				)
-			)
-		);
+			);
+		} catch ( UseCaseError $e ) {
+			return $this->responseFactory->newErrorResponseFromException( $e );
+		}
 	}
 
 	/**
