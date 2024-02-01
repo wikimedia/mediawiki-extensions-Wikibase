@@ -156,6 +156,7 @@
 	"wikibase-client-data-bridge-edit-decision-update-description": "Önceki değer eskiden doğruydu ancak şimdi eski.",
 	"wikibase-client-data-bridge-references-heading": "Kaynakça",
 	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Oturum açmadınız",
+	"wikibase-client-data-bridge-anonymous-edit-warning-tempuser-message": "Giriş yapmadınız. <strong>Giriş yapar</strong>  ya da <strong>bir hesap oluşturursanız</strong>, yaptığınız düzenlemeler, diğer faydaların yanı sıra kullanıcı adınızla ilişkilendirilecektir.",
 	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>Uyarı:</strong> Oturum açmadınız. Herhangi bir düzenleme yaparsanız IP adresiniz herkes tarafından görülebilir. <strong>Oturum açarsanız</strong> veya <strong>bir hesap oluşturursanız</strong>, düzenlemeleriniz diğer avantajların yanı sıra kullanıcı adınızla da ilişkilendirilir.",
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Oturum açmadan düzenle",
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "Oturum açın veya kayıt olun",

@@ -135,6 +135,7 @@
 	"wikibase-client-data-bridge-permissions-error-unknown-head": "Error de permiso desconocido",
 	"wikibase-client-data-bridge-references-heading": "Referencias",
 	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Usted no se ha identificado",
+	"wikibase-client-data-bridge-anonymous-edit-warning-tempuser-message": "No has iniciado sesión. Si <strong>inicias sesión</strong> o <strong>creas una cuenta</strong>, tus ediciones se atribuirán a tu nombre de usuario, junto con otros beneficios.",
 	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong> Advertencia: </strong> no ha iniciado sesión. Su dirección IP será visible públicamente si realiza modificaciones. Si <strong> inicia sesión </strong> o <strong> crea una cuenta </strong>, sus ediciones se atribuirán a su nombre de usuario, junto con otros beneficios.",
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Editar sin acceder",
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "Acceder o registrarse",
