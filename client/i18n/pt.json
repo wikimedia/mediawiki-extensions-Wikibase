@@ -155,6 +155,7 @@
 	"wikibase-client-data-bridge-edit-decision-update-description": "O valor anterior costumava estar correto mas agora está desatualizado.",
 	"wikibase-client-data-bridge-references-heading": "Referências",
 	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Não tem sessão iniciada",
+	"wikibase-client-data-bridge-anonymous-edit-warning-tempuser-message": "Não iniciou uma sessão. Se <strong>iniciar uma sessão</strong> ou <strong>criar uma conta</strong>, as suas edições serão registadas com o seu nome de utilizador, podendo ainda usufruir de outros benefícios.",
 	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>Aviso:</strong> não iniciou uma sessão. O seu endereço IP poderá ser visto publicamente se realizar alguma edição. Se <strong>iniciar uma sessão</strong> ou <strong>criar uma conta</strong>, as suas edições serão registadas com o seu nome de utilizador, podendo ainda usufruir de outros benefícios.",
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Editar sem iniciar sessão",
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "Entrar ou criar conta",

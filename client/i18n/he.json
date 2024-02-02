@@ -143,6 +143,7 @@
 	"wikibase-client-data-bridge-edit-decision-update-description": "הערך הקודם היהי פעם נכון, אבל עכשיו הוא התיישן.",
 	"wikibase-client-data-bridge-references-heading": "מקורות",
 	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "לא נכנסת לחשבון",
+	"wikibase-client-data-bridge-anonymous-edit-warning-tempuser-message": "\"<strong>אזהרה:</strong> לא נכנסת לחשבון. <strong>כניסה</strong> או <strong>יצירת חשבון</strong> יאפשרו ייחוס של העריכות שלך לשם המשתמש שלך ויתרונות נוספים.",
 	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>אזהרה:</strong> לא נכנסת לחשבון. כתובת ה־IP שלך תוצג לציבור אם תעשה עריכות כלשהן. <strong>כניסה</strong> או <strong>יצירת חשבון</strong> יאפשרו ייחוס של העריכות שלך לשם המשתמש שלך ויתרונות נוספים.",
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "לערוך ללא כניסה לחשבון",
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "כניסה או הרשמה לחשבון",
