@@ -58,8 +58,7 @@
 	"delete": {
 		"operationId": "deleteSitelink",
 		"tags": [ "sitelinks" ],
-		"summary": "[WIP] Delete an Item's sitelink",
-		"description": "This endpoint is currently in development and is not recommended for production use",
+		"summary": "Delete an Item's sitelink",
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/ItemId" },
 			{ "$ref": "../../global/parameters.json#/SiteId" },
