@@ -34,12 +34,12 @@ class GetSitelinkTest extends TestCase {
 
 	public function testHappyPath(): void {
 		$itemId = new ItemId( 'Q123' );
-		$site = TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0];
+		$siteId = TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0];
 
 		$expectedRevisionId = 321;
 		$expectedRevisionTimestamp = '20241111070707';
 		$expectedSitelink = new Sitelink(
-			$site,
+			$siteId,
 			'Dog',
 			[],
 			'https://en.wikipedia.org/wiki/Dog'
@@ -48,7 +48,7 @@ class GetSitelinkTest extends TestCase {
 		$this->sitelinkRetriever = $this->createMock( SitelinkRetriever::class );
 		$this->sitelinkRetriever->expects( $this->once() )
 			->method( 'getSitelink' )
-			->with( $itemId, $site )
+			->with( $itemId, $siteId )
 			->willReturn( $expectedSitelink );
 
 		$this->getLatestRevisionMetadata = $this->createMock( GetLatestItemRevisionMetadata::class );
@@ -57,7 +57,7 @@ class GetSitelinkTest extends TestCase {
 			->with( $itemId )
 			->willReturn( [ $expectedRevisionId, $expectedRevisionTimestamp ] );
 
-		$request = new GetSitelinkRequest( "$itemId", $site );
+		$request = new GetSitelinkRequest( "$itemId", $siteId );
 
 		$response = $this->newUseCase()->execute( $request );
 

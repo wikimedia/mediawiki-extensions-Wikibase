@@ -10,32 +10,32 @@ use Wikibase\DataModel\Entity\ItemId;
  */
 class Sitelink {
 
-	private string $site;
+	private string $siteId;
 	private string $title;
 	private array $badges;
 	private string $url;
 
 	/**
-	 * @param string $site
+	 * @param string $siteId
 	 * @param string $title
 	 * @param ItemId[] $badges
 	 * @param string $url
 	 */
-	public function __construct( string $site, string $title, array $badges, string $url ) {
+	public function __construct( string $siteId, string $title, array $badges, string $url ) {
 		foreach ( $badges as $badge ) {
 			if ( !$badge instanceof ItemId ) {
 				throw new InvalidArgumentException( '$badges must be of type ItemId[]' );
 			}
 		}
 
-		$this->site = $site;
+		$this->siteId = $siteId;
 		$this->title = $title;
 		$this->badges = $badges;
 		$this->url = $url;
 	}
 
-	public function getSite(): string {
-		return $this->site;
+	public function getSiteId(): string {
+		return $this->siteId;
 	}
 
 	public function getTitle(): string {

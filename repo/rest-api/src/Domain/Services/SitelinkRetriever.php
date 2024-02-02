@@ -10,6 +10,6 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelink;
  */
 interface SitelinkRetriever {
 
-	public function getSitelink( ItemId $itemId, string $site ): ?Sitelink;
+	public function getSitelink( ItemId $itemId, string $siteId ): ?Sitelink;
 
 }

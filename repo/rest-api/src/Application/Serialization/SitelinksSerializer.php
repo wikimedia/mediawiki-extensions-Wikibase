@@ -20,7 +20,7 @@ class SitelinksSerializer {
 		$serialization = new ArrayObject();
 
 		foreach ( $sitelinks as $sitelink ) {
-			$serialization[$sitelink->getSite()] = $this->sitelinkSerializer->serialize( $sitelink );
+			$serialization[$sitelink->getSiteId()] = $this->sitelinkSerializer->serialize( $sitelink );
 		}
 
 		return $serialization;
