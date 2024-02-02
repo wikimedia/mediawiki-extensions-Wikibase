@@ -12,7 +12,7 @@ use Wikibase\Repo\RestApi\Domain\Model\DescriptionsEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\LabelEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\SiteLinkEditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\SitelinkEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
 use Wikibase\Repo\SummaryFormatter;
 
@@ -76,13 +76,13 @@ class EditSummaryFormatter {
 				case EditSummary::PATCH_ACTION:
 					return $this->newSummaryForStatementEdit( $editSummary, 'wbsetclaim', 'update', 1 );
 			}
-		} elseif ( $editSummary instanceof SiteLinkEditSummary && $editSummary->getEditAction() === EditSummary::REMOVE_ACTION ) {
+		} elseif ( $editSummary instanceof SitelinkEditSummary && $editSummary->getEditAction() === EditSummary::REMOVE_ACTION ) {
 			$summary = new Summary(
 				'wbsetsitelink',
 				'remove',
-				$editSummary->getSiteLink()->getSiteId(),
+				$editSummary->getSitelink()->getSiteId(),
 				[],
-				[ $editSummary->getSiteLink()->getPageName() ]
+				[ $editSummary->getSitelink()->getPageName() ]
 			);
 			$summary->setUserSummary( $editSummary->getUserComment() );
 

@@ -44,7 +44,7 @@ async function createItemWithAllFields() {
 		]
 	} ) ).entity.id;
 
-	await entityHelper.createLocalSiteLink( itemId, utils.title( 'SiteLink Test' ) );
+	await entityHelper.createLocalSitelink( itemId, utils.title( 'Sitelink Test' ) );
 
 	return itemId;
 }

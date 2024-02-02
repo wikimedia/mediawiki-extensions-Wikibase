@@ -8,7 +8,7 @@ const {
 	changeEntityProtectionStatus,
 	createEntity,
 	editEntity,
-	createLocalSiteLink,
+	createLocalSitelink,
 	getLocalSiteId
 } = require( '../helpers/entityHelper' );
 const { requireExtensions } = require( '../../../../../tests/api-testing/utils' );
@@ -28,7 +28,7 @@ describe( 'Auth', () => {
 
 	async function resetEntityTestData( id, statementPropertyId ) {
 		if ( id.startsWith( 'Q' ) ) {
-			await createLocalSiteLink( id, linkedArticle );
+			await createLocalSitelink( id, linkedArticle );
 		}
 
 		return ( await editEntity( id, {

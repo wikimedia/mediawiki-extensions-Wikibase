@@ -12,7 +12,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
-use Wikibase\Repo\RestApi\Infrastructure\SiteLinksReadModelConverter;
+use Wikibase\Repo\RestApi\Infrastructure\SitelinksReadModelConverter;
 
 /**
  * @license GPL-2.0-or-later
@@ -20,16 +20,16 @@ use Wikibase\Repo\RestApi\Infrastructure\SiteLinksReadModelConverter;
 class EntityUpdaterItemUpdater implements ItemUpdater {
 
 	private EntityUpdater $entityUpdater;
-	private SiteLinksReadModelConverter $siteLinksReadModelConverter;
+	private SitelinksReadModelConverter $sitelinksReadModelConverter;
 	private StatementReadModelConverter $statementReadModelConverter;
 
 	public function __construct(
 		EntityUpdater $entityUpdater,
-		SiteLinksReadModelConverter $siteLinksReadModelConverter,
+		SitelinksReadModelConverter $sitelinksReadModelConverter,
 		StatementReadModelConverter $statementReadModelConverter
 	) {
 		$this->entityUpdater = $entityUpdater;
-		$this->siteLinksReadModelConverter = $siteLinksReadModelConverter;
+		$this->sitelinksReadModelConverter = $sitelinksReadModelConverter;
 		$this->statementReadModelConverter = $statementReadModelConverter;
 	}
 
@@ -52,7 +52,7 @@ class EntityUpdaterItemUpdater implements ItemUpdater {
 			Labels::fromTermList( $item->getLabels() ),
 			Descriptions::fromTermList( $item->getDescriptions() ),
 			Aliases::fromAliasGroupList( $item->getAliasGroups() ),
-			$this->siteLinksReadModelConverter->convert( $item->getSiteLinkList() ),
+			$this->sitelinksReadModelConverter->convert( $item->getSiteLinkList() ),
 			new StatementList(
 				...array_map(
 					[ $this->statementReadModelConverter, 'convert' ],

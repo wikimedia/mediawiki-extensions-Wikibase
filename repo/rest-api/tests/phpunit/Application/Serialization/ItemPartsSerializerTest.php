@@ -11,7 +11,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ItemPartsSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
-use Wikibase\Repo\RestApi\Application\Serialization\SiteLinksSerializer;
+use Wikibase\Repo\RestApi\Application\Serialization\SitelinksSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementListSerializer;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
@@ -21,7 +21,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemPartsBuilder;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
-use Wikibase\Repo\RestApi\Domain\ReadModel\SiteLinks;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelinks;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 
 /**
@@ -37,14 +37,14 @@ class ItemPartsSerializerTest extends TestCase {
 	private DescriptionsSerializer $descriptionsSerializer;
 	private AliasesSerializer $aliasesSerializer;
 	private StatementListSerializer $statementsSerializer;
-	private SiteLinksSerializer $siteLinkListSerializer;
+	private SitelinksSerializer $sitelinksSerializer;
 
 	protected function setUp(): void {
 		$this->labelsSerializer = $this->createStub( LabelsSerializer::class );
 		$this->descriptionsSerializer = $this->createStub( DescriptionsSerializer::class );
 		$this->aliasesSerializer = $this->createStub( AliasesSerializer::class );
 		$this->statementsSerializer = $this->createStub( StatementListSerializer::class );
-		$this->siteLinkListSerializer = $this->createStub( SiteLinksSerializer::class );
+		$this->sitelinksSerializer = $this->createStub( SitelinksSerializer::class );
 	}
 
 	public function testSerializeId(): void {
@@ -149,18 +149,18 @@ class ItemPartsSerializerTest extends TestCase {
 		$this->assertSame( $expectedSerialization, $serialization['statements'] );
 	}
 
-	public function testSerializeSiteLinks(): void {
-		$siteLinks = $this->createStub( SiteLinks::class );
+	public function testSerializeSitelinks(): void {
+		$sitelinks = $this->createStub( Sitelinks::class );
 		$expectedSerialization = new ArrayObject( [ 'some' => 'serialization' ] );
 
 		$itemParts = $this->newItemPartsBuilderWithSomeId( [ ItemParts::FIELD_SITELINKS ] )
-			->setSiteLinks( $siteLinks )
+			->setSitelinks( $sitelinks )
 			->build();
 
-		$this->siteLinkListSerializer = $this->createMock( SiteLinksSerializer::class );
-		$this->siteLinkListSerializer->expects( $this->once() )
+		$this->sitelinksSerializer = $this->createMock( SitelinksSerializer::class );
+		$this->sitelinksSerializer->expects( $this->once() )
 			->method( 'serialize' )
-			->with( $siteLinks )
+			->with( $sitelinks )
 			->willReturn( $expectedSerialization );
 
 		$serialization = $this->newSerializer()->serialize( $itemParts );
@@ -209,7 +209,7 @@ class ItemPartsSerializerTest extends TestCase {
 				->setDescriptions( new Descriptions() )
 				->setAliases( new Aliases() )
 				->setStatements( new StatementList() )
-				->setSiteLinks( new SiteLinks() )
+				->setSitelinks( new Sitelinks() )
 				->build(),
 			[ 'id', 'type', 'labels', 'descriptions', 'aliases', 'statements', 'sitelinks' ],
 		];
@@ -221,7 +221,7 @@ class ItemPartsSerializerTest extends TestCase {
 			$this->descriptionsSerializer,
 			$this->aliasesSerializer,
 			$this->statementsSerializer,
-			$this->siteLinkListSerializer
+			$this->sitelinksSerializer
 		);
 	}
 

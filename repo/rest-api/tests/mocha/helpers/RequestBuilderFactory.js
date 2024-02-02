@@ -15,13 +15,13 @@ module.exports = {
 			.withPathParam( 'property_id', propertyId );
 	},
 
-	newGetItemSiteLinksRequestBuilder( itemId ) {
+	newGetSitelinksRequestBuilder( itemId ) {
 		return new RequestBuilder()
 			.withRoute( 'GET', '/entities/items/{item_id}/sitelinks' )
 			.withPathParam( 'item_id', itemId );
 	},
 
-	newGetItemSiteLinkRequestBuilder( itemId, siteId ) {
+	newGetSitelinkRequestBuilder( itemId, siteId ) {
 		return new RequestBuilder()
 			.withRoute( 'GET', '/entities/items/{item_id}/sitelinks/{site_id}' )
 			.withPathParam( 'item_id', itemId )
@@ -196,7 +196,7 @@ module.exports = {
 			.withJsonBodyParam( 'aliases', aliases );
 	},
 
-	newRemoveItemSiteLinkRequestBuilder( itemId, siteId ) {
+	newRemoveSitelinkRequestBuilder( itemId, siteId ) {
 		return new RequestBuilder()
 			.withRoute( 'DELETE', '/entities/items/{item_id}/sitelinks/{site_id}' )
 			.withPathParam( 'item_id', itemId )

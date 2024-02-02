@@ -13,16 +13,16 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemPartsBuilder;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
-use Wikibase\Repo\RestApi\Domain\ReadModel\SiteLink;
-use Wikibase\Repo\RestApi\Domain\ReadModel\SiteLinks;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelink;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelinks;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemPartsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementsRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\SiteLinkRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\SiteLinksRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\SitelinkRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\SitelinksRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
-use Wikibase\Repo\RestApi\Infrastructure\SiteLinksReadModelConverter;
+use Wikibase\Repo\RestApi\Infrastructure\SitelinksReadModelConverter;
 
 /**
  * @license GPL-2.0-or-later
@@ -31,22 +31,22 @@ class EntityRevisionLookupItemDataRetriever implements
 	ItemRetriever,
 	ItemPartsRetriever,
 	ItemStatementsRetriever,
-	SiteLinkRetriever,
-	SiteLinksRetriever
+	SitelinkRetriever,
+	SitelinksRetriever
 {
 
 	private EntityRevisionLookup $entityRevisionLookup;
 	private StatementReadModelConverter $statementReadModelConverter;
-	private SiteLinksReadModelConverter $siteLinksReadModelConverter;
+	private SitelinksReadModelConverter $sitelinksReadModelConverter;
 
 	public function __construct(
 		EntityRevisionLookup $entityRevisionLookup,
 		StatementReadModelConverter $statementReadModelConverter,
-		SiteLinksReadModelConverter $siteLinksReadModelConverter
+		SitelinksReadModelConverter $sitelinksReadModelConverter
 	) {
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->statementReadModelConverter = $statementReadModelConverter;
-		$this->siteLinksReadModelConverter = $siteLinksReadModelConverter;
+		$this->sitelinksReadModelConverter = $sitelinksReadModelConverter;
 	}
 
 	public function getItem( ItemId $itemId ): ?Item {
@@ -88,7 +88,7 @@ class EntityRevisionLookupItemDataRetriever implements
 			$itemParts->setStatements( $this->convertDataModelStatementListToReadModel( $item->getStatements() ) );
 		}
 		if ( in_array( ItemParts::FIELD_SITELINKS, $fields ) ) {
-			$itemParts->setSiteLinks( $this->siteLinksReadModelConverter->convert( $item->getSiteLinkList() ) );
+			$itemParts->setSitelinks( $this->sitelinksReadModelConverter->convert( $item->getSiteLinkList() ) );
 		}
 
 		return $itemParts->build();
@@ -112,15 +112,15 @@ class EntityRevisionLookupItemDataRetriever implements
 		) );
 	}
 
-	public function getSiteLinks( ItemId $itemId ): SiteLinks {
-		return $this->getItemParts( $itemId, [ ItemParts::FIELD_SITELINKS ] )->getSiteLinks() ?? new SiteLinks();
+	public function getSitelinks( ItemId $itemId ): Sitelinks {
+		return $this->getItemParts( $itemId, [ ItemParts::FIELD_SITELINKS ] )->getSitelinks() ?? new Sitelinks();
 	}
 
-	public function getSiteLink( ItemId $itemId, string $site ): ?SiteLink {
-		$siteLinks = $this->getItemParts( $itemId, [ ItemParts::FIELD_SITELINKS ] )->getSiteLinks();
-		foreach ( $siteLinks as $siteLink ) {
-			if ( $siteLink->getSite() === $site ) {
-				return $siteLink;
+	public function getSitelink( ItemId $itemId, string $site ): ?Sitelink {
+		$sitelinks = $this->getItemParts( $itemId, [ ItemParts::FIELD_SITELINKS ] )->getSitelinks();
+		foreach ( $sitelinks as $sitelink ) {
+			if ( $sitelink->getSite() === $site ) {
+				return $sitelink;
 			}
 		}
 

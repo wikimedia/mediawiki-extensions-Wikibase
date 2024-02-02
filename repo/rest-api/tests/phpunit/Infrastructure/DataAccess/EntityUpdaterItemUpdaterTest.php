@@ -18,13 +18,13 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Item;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
-use Wikibase\Repo\RestApi\Domain\ReadModel\SiteLink;
-use Wikibase\Repo\RestApi\Domain\ReadModel\SiteLinks;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelink;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelinks;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdaterItemUpdater;
-use Wikibase\Repo\RestApi\Infrastructure\SiteLinksReadModelConverter;
+use Wikibase\Repo\RestApi\Infrastructure\SitelinksReadModelConverter;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
 
 /**
@@ -91,7 +91,7 @@ class EntityUpdaterItemUpdaterTest extends TestCase {
 				new Labels( new Label( 'en', 'English Label' ) ),
 				new Descriptions( new Description( 'en', 'English Description' ) ),
 				new Aliases( new AliasesInLanguage( 'en', [ 'English alias', 'alias in English' ] ) ),
-				new SiteLinks( new SiteLink( 'enwiki', 'Title', [ new ItemId( 'Q789' ) ], self::EN_WIKI_URL_PREFIX . 'Title' ) ),
+				new Sitelinks( new Sitelink( 'enwiki', 'Title', [ new ItemId( 'Q789' ) ], self::EN_WIKI_URL_PREFIX . 'Title' ) ),
 				new StatementList( $readModelStatement )
 			),
 		];
@@ -101,7 +101,7 @@ class EntityUpdaterItemUpdaterTest extends TestCase {
 		return new EntityUpdaterItemUpdater( $this->entityUpdater, $this->newSitelinkConverter(),  $this->statementReadModelConverter );
 	}
 
-	private function newSitelinkConverter(): SiteLinksReadModelConverter {
+	private function newSitelinkConverter(): SitelinksReadModelConverter {
 		$enSite = new Site();
 		$enSite->setLinkPath( self::EN_WIKI_URL_PREFIX . '$1' );
 		$deSite = new Site();
@@ -113,7 +113,7 @@ class EntityUpdaterItemUpdaterTest extends TestCase {
 			[ 'dewiki', $deSite ],
 		] );
 
-		return new SiteLinksReadModelConverter( $siteLookup );
+		return new SitelinksReadModelConverter( $siteLookup );
 	}
 
 }

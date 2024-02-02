@@ -21,8 +21,6 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescription\GetItemDescrip
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\GetItemDescriptions;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\GetItemLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabels;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItemSiteLink\GetItemSiteLink;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItemSiteLinks\GetItemSiteLinks;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\GetItemStatements;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
@@ -37,6 +35,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabel\GetPropertyLabel
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabels\GetPropertyLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\GetPropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetPropertyStatements;
+use Wikibase\Repo\RestApi\Application\UseCases\GetSitelink\GetSitelink;
+use Wikibase\Repo\RestApi\Application\UseCases\GetSitelinks\GetSitelinks;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchItemAliases;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptions;
@@ -49,11 +49,11 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyStatement\PatchPrope
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemDescription\RemoveItemDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemLabel\RemoveItemLabel;
-use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemSiteLink\RemoveItemSiteLink;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyDescription\RemovePropertyDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyLabel\RemovePropertyLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyStatement\RemovePropertyStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\RemoveSitelink\RemoveSitelink;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplacePropertyStatement\ReplacePropertyStatement;
@@ -86,14 +86,14 @@ class WbRestApi {
 			->get( 'WbRestApi.GetItem' );
 	}
 
-	public static function getGetItemSiteLinks( ContainerInterface $services = null ): GetItemSiteLinks {
+	public static function getGetSitelinks( ContainerInterface $services = null ): GetSitelinks {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.GetItemSiteLinks' );
+			->get( 'WbRestApi.GetSitelinks' );
 	}
 
-	public static function getGetItemSiteLink( ContainerInterface $services = null ): GetItemSiteLink {
+	public static function getGetSitelink( ContainerInterface $services = null ): GetSitelink {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.GetItemSiteLink' );
+			->get( 'WbRestApi.GetSitelink' );
 	}
 
 	public static function getGetItemLabels( ContainerInterface $services = null ): GetItemLabels {
@@ -426,7 +426,7 @@ class WbRestApi {
 		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbRestApi.AddPropertyAliasesInLanguage' );
 	}
 
-	public static function getRemoveItemSiteLink( ContainerInterface $services = null ): RemoveItemSiteLink {
-		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbRestApi.RemoveItemSiteLink' );
+	public static function getRemoveSitelink( ContainerInterface $services = null ): RemoveSitelink {
+		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbRestApi.RemoveSitelink' );
 	}
 }

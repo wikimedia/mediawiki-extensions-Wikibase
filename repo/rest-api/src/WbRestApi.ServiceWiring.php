@@ -53,8 +53,6 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescription\GetItemDescrip
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\GetItemDescriptions;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\GetItemLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabels;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItemSiteLink\GetItemSiteLink;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItemSiteLinks\GetItemSiteLinks;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\GetItemStatements;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
@@ -69,6 +67,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabel\GetPropertyLabel
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabels\GetPropertyLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\GetPropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetPropertyStatements;
+use Wikibase\Repo\RestApi\Application\UseCases\GetSitelink\GetSitelink;
+use Wikibase\Repo\RestApi\Application\UseCases\GetSitelinks\GetSitelinks;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchedAliasesValidator as PatchedItemAliasesValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchItemAliases;
@@ -89,11 +89,11 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchedStatementVa
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemDescription\RemoveItemDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemLabel\RemoveItemLabel;
-use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemSiteLink\RemoveItemSiteLink;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyDescription\RemovePropertyDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyLabel\RemovePropertyLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyStatement\RemovePropertyStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\RemoveSitelink\RemoveSitelink;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplacePropertyStatement\ReplacePropertyStatement;
@@ -136,7 +136,7 @@ use Wikibase\Repo\RestApi\Infrastructure\DataValuesValueDeserializer;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatchValidator;
-use Wikibase\Repo\RestApi\Infrastructure\SiteLinksReadModelConverter;
+use Wikibase\Repo\RestApi\Infrastructure\SitelinksReadModelConverter;
 use Wikibase\Repo\RestApi\Infrastructure\TermsEditSummaryToFormattableSummaryConverter;
 use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryLabelTextValidator;
 use Wikibase\Repo\RestApi\Infrastructure\ValidatingRequestDeserializer as VRD;
@@ -460,22 +460,6 @@ return [
 		);
 	},
 
-	'WbRestApi.GetItemSiteLink' => function( MediaWikiServices $services ): GetItemSiteLink {
-		return new GetItemSiteLink(
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
-			WbRestApi::getItemDataRetriever( $services ),
-		);
-	},
-
-	'WbRestApi.GetItemSiteLinks' => function( MediaWikiServices $services ): GetItemSiteLinks {
-		return new GetItemSiteLinks(
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
-			WbRestApi::getItemDataRetriever( $services ),
-		);
-	},
-
 	'WbRestApi.GetItemStatement' => function( MediaWikiServices $services ): GetItemStatement {
 		return new GetItemStatement(
 			WbRestApi::getValidatingRequestDeserializer( $services ),
@@ -590,6 +574,22 @@ return [
 		);
 	},
 
+	'WbRestApi.GetSitelink' => function( MediaWikiServices $services ): GetSitelink {
+		return new GetSitelink(
+			WbRestApi::getValidatingRequestDeserializer( $services ),
+			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
+			WbRestApi::getItemDataRetriever( $services ),
+		);
+	},
+
+	'WbRestApi.GetSitelinks' => function( MediaWikiServices $services ): GetSitelinks {
+		return new GetSitelinks(
+			WbRestApi::getValidatingRequestDeserializer( $services ),
+			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
+			WbRestApi::getItemDataRetriever( $services ),
+		);
+	},
+
 	'WbRestApi.GetStatement' => function( MediaWikiServices $services ): GetStatement {
 		return new GetStatement(
 			WbRestApi::getValidatingRequestDeserializer( $services ),
@@ -605,14 +605,14 @@ return [
 				WikibaseRepo::getStatementGuidParser( $services ),
 				WikibaseRepo::getPropertyDataTypeLookup()
 			),
-			new SiteLinksReadModelConverter( $services->getSiteLookup() )
+			new SitelinksReadModelConverter( $services->getSiteLookup() )
 		);
 	},
 
 	'WbRestApi.ItemUpdater' => function( MediaWikiServices $services ): ItemUpdater {
 		return new EntityUpdaterItemUpdater(
 			WbRestApi::getEntityUpdater( $services ),
-			new SiteLinksReadModelConverter( $services->getSiteLookup() ),
+			new SitelinksReadModelConverter( $services->getSiteLookup() ),
 			new StatementReadModelConverter(
 				WikibaseRepo::getStatementGuidParser( $services ),
 				WikibaseRepo::getPropertyDataTypeLookup( $services )
@@ -831,16 +831,6 @@ return [
 		);
 	},
 
-	'WbRestApi.RemoveItemSiteLink' => function( MediaWikiServices $services ): RemoveItemSiteLink {
-		return new RemoveItemSiteLink(
-			WbRestApi::getItemDataRetriever( $services ),
-			WbRestApi::getItemUpdater( $services ),
-			WbRestApi::getAssertItemExists( $services ),
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getAssertUserIsAuthorized( $services )
-		);
-	},
-
 	'WbRestApi.RemoveItemStatement' => function( MediaWikiServices $services ): RemoveItemStatement {
 		return new RemoveItemStatement(
 			WbRestApi::getAssertItemExists( $services ),
@@ -874,6 +864,16 @@ return [
 			WbRestApi::getAssertPropertyExists( $services ),
 			WbRestApi::getRemoveStatement( $services ),
 			WbRestApi::getValidatingRequestDeserializer( $services )
+		);
+	},
+
+	'WbRestApi.RemoveSitelink' => function( MediaWikiServices $services ): RemoveSitelink {
+		return new RemoveSitelink(
+			WbRestApi::getItemDataRetriever( $services ),
+			WbRestApi::getItemUpdater( $services ),
+			WbRestApi::getAssertItemExists( $services ),
+			WbRestApi::getValidatingRequestDeserializer( $services ),
+			WbRestApi::getAssertUserIsAuthorized( $services )
 		);
 	},
 

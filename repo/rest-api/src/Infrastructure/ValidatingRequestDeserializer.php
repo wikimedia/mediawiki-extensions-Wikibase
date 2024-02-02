@@ -33,8 +33,6 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescription\GetItemDescrip
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\GetItemDescriptionsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\GetItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabelsValidator;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItemSiteLink\GetItemSiteLinkValidator;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItemSiteLinks\GetItemSiteLinksValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\GetItemStatementsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetPropertyValidator;
@@ -46,6 +44,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabel\GetPropertyLabel
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabels\GetPropertyLabelsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\GetPropertyStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetPropertyStatementsValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\GetSitelink\GetSitelinkValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\GetSitelinks\GetSitelinksValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchItemAliasesValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptionsValidator;
@@ -58,11 +58,11 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyStatement\PatchPrope
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemDescription\RemoveItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemLabel\RemoveItemLabelValidator;
-use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemSiteLink\RemoveItemSiteLinkValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\RemoveItemStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyDescription\RemovePropertyDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyLabel\RemovePropertyLabelValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyStatement\RemovePropertyStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\RemoveSitelink\RemoveSitelinkValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplacePropertyStatement\ReplacePropertyStatementValidator;
@@ -80,8 +80,8 @@ class ValidatingRequestDeserializer	implements
 	AddItemStatementValidator,
 	AddPropertyStatementValidator,
 	GetItemValidator,
-	GetItemSiteLinksValidator,
-	GetItemSiteLinkValidator,
+	GetSitelinksValidator,
+	GetSitelinkValidator,
 	GetItemLabelsValidator,
 	GetItemLabelValidator,
 	GetItemDescriptionsValidator,
@@ -125,7 +125,7 @@ class ValidatingRequestDeserializer	implements
 	SetPropertyLabelValidator,
 	AddItemAliasesInLanguageValidator,
 	AddPropertyAliasesInLanguageValidator,
-	RemoveItemSiteLinkValidator
+	RemoveSitelinkValidator
 {
 	private const PREFIX = 'WbRestApi.RequestValidation.';
 	public const ITEM_ID_REQUEST_VALIDATING_DESERIALIZER = self::PREFIX . 'ItemIdRequestValidatingDeserializer';

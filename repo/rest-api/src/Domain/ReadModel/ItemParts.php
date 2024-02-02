@@ -32,7 +32,7 @@ class ItemParts {
 	private ?Descriptions $descriptions;
 	private ?Aliases $aliases;
 	private ?StatementList $statements;
-	private ?SiteLinks $siteLinks;
+	private ?Sitelinks $sitelinks;
 
 	public function __construct(
 		ItemId $id,
@@ -41,7 +41,7 @@ class ItemParts {
 		?Descriptions $descriptions,
 		?Aliases $aliases,
 		?StatementList $statements,
-		?SiteLinks $siteLinks
+		?Sitelinks $sitelinks
 	) {
 		$this->id = $id;
 		$this->requestedFields = $requestedFields;
@@ -49,7 +49,7 @@ class ItemParts {
 		$this->descriptions = $descriptions;
 		$this->aliases = $aliases;
 		$this->statements = $statements;
-		$this->siteLinks = $siteLinks;
+		$this->sitelinks = $sitelinks;
 	}
 
 	public function getId(): ItemId {
@@ -72,8 +72,8 @@ class ItemParts {
 		return $this->statements;
 	}
 
-	public function getSiteLinks(): ?SiteLinks {
-		return $this->siteLinks;
+	public function getSitelinks(): ?Sitelinks {
+		return $this->sitelinks;
 	}
 
 	public function isRequested( string $field ): bool {
