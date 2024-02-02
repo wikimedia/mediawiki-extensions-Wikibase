@@ -295,7 +295,7 @@ return [
 	VRD::PROPERTY_ALIASES_IN_LANGUAGE_EDIT_REQUEST_VALIDATING_DESERIALIZER =>
 		function ( MediaWikiServices $services ): PropertyAliasesInLanguageEditRequestValidatingDeserializer {
 			return new PropertyAliasesInLanguageEditRequestValidatingDeserializer(
-				new WikibaseRepoAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory() ),
+				new WikibaseRepoAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
 				new AliasesDeserializer(),
 				new PrefetchingTermLookupAliasesRetriever(
 					WikibaseRepo::getPrefetchingTermLookup( $services ),
@@ -603,7 +603,7 @@ return [
 			WikibaseRepo::getEntityRevisionLookup( $services ),
 			new StatementReadModelConverter(
 				WikibaseRepo::getStatementGuidParser( $services ),
-				WikibaseRepo::getPropertyDataTypeLookup()
+				WikibaseRepo::getPropertyDataTypeLookup( $services )
 			),
 			new SitelinksReadModelConverter( $services->getSiteLookup() )
 		);
@@ -633,8 +633,8 @@ return [
 			new PatchJson( new JsonDiffJsonPatcher() ),
 			new PatchedItemAliasesValidator(
 				new AliasesDeserializer(),
-				new WikibaseRepoAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory() ),
-				new LanguageCodeValidator( WikibaseRepo::getTermsLanguages()->getLanguages() )
+				new WikibaseRepoAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
+				new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() )
 			),
 			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getItemUpdater( $services )
@@ -721,7 +721,10 @@ return [
 			WbRestApi::getValidatingRequestDeserializer( $services ),
 			WbRestApi::getAssertPropertyExists( $services ),
 			WbRestApi::getAssertUserIsAuthorized( $services ),
-			new TermLookupEntityTermsRetriever( WikibaseRepo::getTermLookup(), WikibaseRepo::getTermsLanguages() ),
+			new TermLookupEntityTermsRetriever(
+				WikibaseRepo::getTermLookup( $services ),
+				WikibaseRepo::getTermsLanguages( $services )
+			),
 			new DescriptionsSerializer(),
 			new PatchJson( new JsonDiffJsonPatcher() ),
 			WbRestApi::getPropertyDataRetriever( $services ),
@@ -731,7 +734,7 @@ return [
 					WikibaseRepo::getTermValidatorFactory( $services ),
 					WbRestApi::getPropertyDataRetriever( $services )
 				),
-				new LanguageCodeValidator( WikibaseRepo::getTermsLanguages()->getLanguages() )
+				new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() )
 			),
 			WbRestApi::getPropertyUpdater( $services )
 		);
@@ -740,25 +743,25 @@ return [
 	'WbRestApi.PatchPropertyLabels' => function( MediaWikiServices $services ): PatchPropertyLabels {
 		return new PatchPropertyLabels(
 			new TermLookupEntityTermsRetriever(
-				WikibaseRepo::getTermLookup(),
-				WikibaseRepo::getTermsLanguages()
+				WikibaseRepo::getTermLookup( $services ),
+				WikibaseRepo::getTermsLanguages( $services )
 			),
 			new LabelsSerializer(),
 			new PatchJson( new JsonDiffJsonPatcher() ),
-			WbRestApi::getPropertyDataRetriever(),
-			WbRestApi::getPropertyUpdater(),
-			WbRestApi::getValidatingRequestDeserializer(),
+			WbRestApi::getPropertyDataRetriever( $services ),
+			WbRestApi::getPropertyUpdater( $services ),
+			WbRestApi::getValidatingRequestDeserializer( $services ),
 			new PatchedPropertyLabelsValidator(
 				new LabelsDeserializer(),
 				new WikibaseRepoPropertyLabelValidator(
-					WikibaseRepo::getTermValidatorFactory(),
-					WikibaseRepo::getPropertyTermsCollisionDetector(),
-					WbRestApi::getPropertyDataRetriever()
+					WikibaseRepo::getTermValidatorFactory( $services ),
+					WikibaseRepo::getPropertyTermsCollisionDetector( $services ),
+					WbRestApi::getPropertyDataRetriever( $services )
 				),
-				new LanguageCodeValidator( WikibaseRepo::getTermsLanguages()->getLanguages() )
+				new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() )
 			),
-			WbRestApi::getAssertPropertyExists(),
-			WbRestApi::getAssertUserIsAuthorized()
+			WbRestApi::getAssertPropertyExists( $services ),
+			WbRestApi::getAssertUserIsAuthorized( $services )
 		);
 	},
 
@@ -796,7 +799,7 @@ return [
 			WikibaseRepo::getEntityRevisionLookup( $services ),
 			new StatementReadModelConverter(
 				WikibaseRepo::getStatementGuidParser( $services ),
-				WikibaseRepo::getPropertyDataTypeLookup()
+				WikibaseRepo::getPropertyDataTypeLookup( $services )
 			),
 		);
 	},
@@ -976,8 +979,8 @@ return [
 
 	'WbRestApi.StatementRedirectMiddlewareFactory' => function( MediaWikiServices $services ): StatementRedirectMiddlewareFactory {
 		return new StatementRedirectMiddlewareFactory(
-			WikibaseRepo::getEntityIdParser(),
-			new StatementSubjectRetriever( WikibaseRepo::getEntityRevisionLookup() )
+			WikibaseRepo::getEntityIdParser( $services ),
+			new StatementSubjectRetriever( WikibaseRepo::getEntityRevisionLookup( $services ) )
 		);
 	},
 
@@ -993,7 +996,7 @@ return [
 			new StatementSubjectRetriever( WikibaseRepo::getEntityRevisionLookup( $services ) ),
 			new StatementReadModelConverter(
 				WikibaseRepo::getStatementGuidParser( $services ),
-				WikibaseRepo::getPropertyDataTypeLookup()
+				WikibaseRepo::getPropertyDataTypeLookup( $services )
 			)
 		);
 	},
@@ -1005,7 +1008,7 @@ return [
 			WbRestApi::getEntityUpdater( $services ),
 			new StatementReadModelConverter(
 				WikibaseRepo::getStatementGuidParser( $services ),
-				WikibaseRepo::getPropertyDataTypeLookup()
+				WikibaseRepo::getPropertyDataTypeLookup( $services )
 			)
 		);
 	},
