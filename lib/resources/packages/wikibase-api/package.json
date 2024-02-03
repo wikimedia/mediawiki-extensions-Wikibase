@@ -28,12 +28,12 @@
 		"wikibase-data-values": "^0.10.0"
 	},
 	"devDependencies": {
-		"eslint-config-wikimedia": "0.25.0",
+		"eslint-config-wikimedia": "0.25.1",
 		"grunt": "1.6.1",
 		"grunt-contrib-qunit": "^5.1.0",
 		"grunt-eslint": "24.0.1",
 		"phantomjs-prebuilt": "^2.1.16",
-		"qunit": "2.19.4",
+		"qunit": "2.20.0",
 		"sinon": "^15.0.1"
 	}
 }
