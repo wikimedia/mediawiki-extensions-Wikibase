@@ -33,6 +33,7 @@
 	"wikibase-error-ui-no-external-page": "Nie udało się odnaleźć strony „$2” w „$1”.",
 	"wikibase-error-ui-edit-conflict": "Ta sama wartość była edytowana w tym samym czasie, co spowodowało konflikt edycji. Proszę przeładować stronę.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (transliterowane)",
+	"wikibase-language-name-for-terms-mul": "wartości domyślne (mul)",
 	"wikibase-quantitydetails-amount": "Liczność",
 	"wikibase-quantitydetails-upperbound": "Górna granica",
 	"wikibase-quantitydetails-lowerbound": "Dolna granica",

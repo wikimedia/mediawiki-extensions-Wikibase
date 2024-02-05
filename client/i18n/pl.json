@@ -149,6 +149,7 @@
 	"wikibase-client-data-bridge-edit-decision-update-description": "Poprzednia wartość kiedyś była poprawna, ale jest już nieaktualna.",
 	"wikibase-client-data-bridge-references-heading": "Przypisy",
 	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Nie jesteś zalogowany",
+	"wikibase-client-data-bridge-anonymous-edit-warning-tempuser-message": "Nie jesteś zalogowany. Jeśli <strong>się zalogujesz</strong> lub <strong>utworzysz konto</strong> , Twoje zmiany zostaną przypisane do Twojej nazwy użytkownika, wraz z innymi korzyściami posiadania konta.",
 	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>Uwaga:</strong> Nie jesteś zalogowany. Jeśli wykonasz jakąkolwiek zmianę, Twój adres IP będzie widoczny publicznie. Jeśli <strong>zalogujesz się</strong> lub <strong>utworzysz konto</strong>, wówczas twoje zmiany zostaną przypisane do konta, wraz z innymi korzyściami, które niesie posiadanie konta.",
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Edytuj bez logowania",
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "Zaloguj się lub Zarejestruj",
