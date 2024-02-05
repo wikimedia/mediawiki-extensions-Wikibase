@@ -1,7 +1,1 @@
-[
-	{
-		"path": "/wikibase/v0/entities/items/{item_id}/sitelinks/{site_id}",
-		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetSitelinkRouteHandler::factory"
-	}
-]
+[ ]
