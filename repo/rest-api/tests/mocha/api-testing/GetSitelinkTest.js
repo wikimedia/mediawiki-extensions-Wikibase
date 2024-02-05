@@ -13,14 +13,17 @@ const { expect } = require( '../helpers/chaiHelper' );
 describe( newGetSitelinkRequestBuilder().getRouteDescription(), () => {
 
 	let testItemId;
+	let badgeItemId;
 	let siteId;
 	const linkedArticle = utils.title( 'Article-linked-to-test-item' );
 
 	before( async () => {
 		const createItemResponse = await createEntity( 'item', {} );
+		const createBadgeItemResponse = await createEntity( 'item', {} );
 		testItemId = createItemResponse.entity.id;
+		badgeItemId = createBadgeItemResponse.entity.id;
 
-		await createLocalSitelink( testItemId, linkedArticle );
+		await createLocalSitelink( testItemId, linkedArticle, [ badgeItemId ] );
 		siteId = await getLocalSiteId();
 	} );
 
@@ -32,6 +35,7 @@ describe( newGetSitelinkRequestBuilder().getRouteDescription(), () => {
 		expect( response ).to.have.status( 200 );
 		assert.equal( response.body.title, linkedArticle );
 		assert.include( response.body.url, linkedArticle );
+		assert.deepEqual( response.body.badges, [ badgeItemId ] );
 	} );
 
 	describe( '400 invalid request', () => {
