@@ -67,6 +67,9 @@ class UseCaseError extends UseCaseException {
 	public const PROPERTY_NOT_FOUND = 'property-not-found';
 	public const PROPERTY_LABEL_DUPLICATE = 'property-label-duplicate';
 	public const SITELINK_NOT_DEFINED = 'sitelink-not-defined';
+	public const SITELINK_DATA_MISSING_TITLE = 'sitelink-data-missing-title';
+	public const TITLE_FIELD_EMPTY = 'title-field-empty';
+	public const INVALID_TITLE_FIELD = 'invalid-title-field';
 	public const STATEMENT_DATA_INVALID_FIELD = 'statement-data-invalid-field';
 	public const STATEMENT_DATA_MISSING_FIELD = 'statement-data-missing-field';
 	public const STATEMENT_NOT_FOUND = 'statement-not-found';
@@ -167,6 +170,9 @@ class UseCaseError extends UseCaseException {
 		self::STATEMENT_DATA_MISSING_FIELD => [ self::CONTEXT_PATH ],
 		self::STATEMENT_NOT_FOUND => [],
 		self::SITELINK_NOT_DEFINED => [],
+		self::SITELINK_DATA_MISSING_TITLE => [],
+		self::TITLE_FIELD_EMPTY => [],
+		self::INVALID_TITLE_FIELD => [],
 		self::UNEXPECTED_ERROR => [],
 	];
 

@@ -6,7 +6,6 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink as DataModelSitelink;
 use Wikibase\DataModel\Tests\NewItem;
-use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\SetSitelink\SetSitelink;
@@ -208,7 +207,6 @@ class SetSitelinkTest extends TestCase {
 	private function newUseCase(): SetSitelink {
 		return new SetSitelink(
 			$this->validator,
-			new SitelinkDeserializer(),
 			$this->assertItemExists,
 			$this->assertUserIsAuthorized,
 			$this->itemRetriever,

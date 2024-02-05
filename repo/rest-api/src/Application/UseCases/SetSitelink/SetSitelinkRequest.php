@@ -3,14 +3,13 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\SetSitelink;
 
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemIdRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\SiteIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\SitelinkEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\UseCaseRequest;
 
 /**
  * @license GPL-2.0-or-later
  */
-class SetSitelinkRequest implements UseCaseRequest, ItemIdRequest, SiteIdRequest, EditMetadataRequest {
+class SetSitelinkRequest implements UseCaseRequest, SitelinkEditRequest, EditMetadataRequest {
 
 	private string $itemId;
 	private string $siteId;

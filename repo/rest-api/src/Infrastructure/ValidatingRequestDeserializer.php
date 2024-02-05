@@ -19,6 +19,7 @@ use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdFilterR
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyLabelEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\SiteIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\SitelinkEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementSerializationRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\UseCaseRequest;
@@ -154,6 +155,7 @@ class ValidatingRequestDeserializer	implements
 	public const PROPERTY_LABEL_EDIT_REQUEST_VALIDATING_DESERIALIZER = self::PREFIX . 'PropertyLabelEditRequestValidatingDeserializer';
 	public const PROPERTY_ALIASES_IN_LANGUAGE_EDIT_REQUEST_VALIDATING_DESERIALIZER =
 		self::PREFIX . 'PropertyAliasesInLanguageEditRequestValidatingDeserializer';
+	public const SITELINK_EDIT_REQUEST_VALIDATING_DESERIALIZER = self::PREFIX . 'SitelinkEditRequestValidatingDeserializer';
 
 	private ContainerInterface $serviceContainer;
 	private array $validRequestResults = [];
@@ -193,6 +195,7 @@ class ValidatingRequestDeserializer	implements
 			PropertyLabelEditRequest::class => self::PROPERTY_LABEL_EDIT_REQUEST_VALIDATING_DESERIALIZER,
 			PropertyDescriptionEditRequest::class => self::PROPERTY_DESCRIPTION_EDIT_REQUEST_VALIDATING_DESERIALIZER,
 			PropertyAliasesInLanguageEditRequest::class => self::PROPERTY_ALIASES_IN_LANGUAGE_EDIT_REQUEST_VALIDATING_DESERIALIZER,
+			SitelinkEditRequest::class => self::SITELINK_EDIT_REQUEST_VALIDATING_DESERIALIZER,
 		];
 		$result = [];
 

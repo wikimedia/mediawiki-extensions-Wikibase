@@ -6,6 +6,7 @@ use LogicException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Term\Term;
@@ -25,6 +26,7 @@ use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdFilterR
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyLabelEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\SiteIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\SitelinkEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementSerializationRequest;
 use Wikibase\Repo\RestApi\Domain\Model\UserProvidedEditMetadata;
@@ -235,6 +237,17 @@ class DeserializedRequestAdapterTest extends TestCase {
 	public function testGivenNoAliasesForProperty_getPropertyAliasesInLanguageThrows(): void {
 		$this->expectException( LogicException::class );
 		( new DeserializedRequestAdapter( [] ) )->getPropertyAliasesInLanguage();
+	}
+
+	public function testGetSitelink(): void {
+		$sitelink = new SiteLink( 'enwiki', 'Potato', [ new ItemId( 'Q1234' ) ] );
+		$requestAdapter = new DeserializedRequestAdapter( [ SitelinkEditRequest::class => $sitelink ] );
+		$this->assertSame( $sitelink, $requestAdapter->getSitelink() );
+	}
+
+	public function testGivenNoSitelink_getSitelinkThrows(): void {
+		$this->expectException( LogicException::class );
+		( new DeserializedRequestAdapter( [] ) )->getSitelink();
 	}
 
 }

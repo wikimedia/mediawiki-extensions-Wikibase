@@ -37,6 +37,7 @@ use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdRequest
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyLabelEditRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\SiteIdRequestValidatingDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\SitelinkEditRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementIdRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementSerializationRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemAliasesInLanguage;
@@ -108,6 +109,7 @@ use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\SiteIdValidator;
+use Wikibase\Repo\RestApi\Application\Validation\SitelinkValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
@@ -302,6 +304,14 @@ return [
 					WikibaseRepo::getPrefetchingTermLookup( $services ),
 					WikibaseRepo::getTermsLanguages( $services )
 				)
+			);
+		},
+
+	VRD::SITELINK_EDIT_REQUEST_VALIDATING_DESERIALIZER =>
+		function( MediaWikiServices $services ): SitelinkEditRequestValidatingDeserializer {
+			return new SitelinkEditRequestValidatingDeserializer(
+				new SitelinkValidator( MediaWikiTitleCodec::getTitleInvalidRegex() ),
+				new SitelinkDeserializer()
 			);
 		},
 
@@ -963,7 +973,6 @@ return [
 	'WbRestApi.SetSitelink' => function( MediaWikiServices $services ): SetSitelink {
 		return new SetSitelink(
 			WbRestApi::getValidatingRequestDeserializer( $services ),
-			new SitelinkDeserializer(),
 			WbRestApi::getAssertItemExists( $services ),
 			WbRestApi::getAssertUserIsAuthorized( $services ),
 			WbRestApi::getItemDataRetriever( $services ),
