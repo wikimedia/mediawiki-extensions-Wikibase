@@ -8,8 +8,8 @@ use ChangeTags;
 use FauxRequest;
 use HashSiteStore;
 use MediaWiki\Languages\LanguageNameUtils;
-use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
+use NullStatsdDataFactory;
 use SiteLookup;
 use Status;
 use TestSites;
@@ -29,6 +29,7 @@ use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\MergeItems;
 use Wikibase\Repo\Api\ResultBuilder;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
+use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\Store\EntityPermissionChecker;
@@ -96,14 +97,17 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 	private function getPermissionCheckers() {
 		$permissionChecker = $this->createMock( EntityPermissionChecker::class );
 
+		$callback = function ( User $user, $permission ) {
+			if ( $user->getName() === 'UserWithoutPermission' && $permission === 'edit' ) {
+				return Status::newFatal( 'permissiondenied' );
+			} else {
+				return Status::newGood();
+			}
+		};
 		$permissionChecker->method( 'getPermissionStatusForEntityId' )
-			->willReturnCallback( function( User $user, $permission ) {
-				if ( $user->getName() === 'UserWithoutPermission' && $permission === 'edit' ) {
-					return Status::newFatal( 'permissiondenied' );
-				} else {
-					return Status::newGood();
-				}
-			} );
+			->willReturnCallback( $callback );
+		$permissionChecker->method( 'getPermissionStatusForEntity' )
+			->willReturnCallback( $callback );
 
 		return $permissionChecker;
 	}
@@ -151,6 +155,7 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 	 * @return MergeItems
 	 */
 	private function newMergeItemsApiModule( array $params, EntityRedirect $expectedRedirect = null ) {
+		$services = $this->getServiceContainer();
 		if ( !isset( $params['token'] ) ) {
 			$params['token'] = $this->getTestUser()->getUser()->getToken();
 		}
@@ -161,31 +166,46 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 		$changeOpsFactoryProvider = new ChangeOpFactoryProvider(
 			$this->getConstraintProvider(),
 			new GuidGenerator(),
-			WikibaseRepo::getStatementGuidValidator(),
-			WikibaseRepo::getStatementGuidParser(),
+			WikibaseRepo::getStatementGuidValidator( $services ),
+			WikibaseRepo::getStatementGuidParser( $services ),
 			$this->getSnakValidator(),
 			$this->getTermValidatorFactory(),
 			new HashSiteStore( TestSites::getSites() ),
-			WikibaseRepo::getSnakNormalizer(),
-			WikibaseRepo::getReferenceNormalizer(),
-			WikibaseRepo::getStatementNormalizer(),
+			WikibaseRepo::getSnakNormalizer( $services ),
+			WikibaseRepo::getReferenceNormalizer( $services ),
+			WikibaseRepo::getStatementNormalizer( $services ),
 			[],
 			true
+		);
+		$titleLookup = $this->getEntityTitleStoreLookup();
+		$permissionChecker = $this->getPermissionCheckers();
+		$editEntityFactory = new MediaWikiEditEntityFactory(
+			$titleLookup,
+			$this->mockRepository,
+			$this->mockRepository,
+			$permissionChecker,
+			WikibaseRepo::getEntityDiffer( $services ),
+			WikibaseRepo::getEntityPatcher( $services ),
+			WikibaseRepo::getEditFilterHookRunner( $services ),
+			new NullStatsdDataFactory(),
+			$services->getUserOptionsLookup(),
+			4096,
+			[ 'item' ]
 		);
 
 		$apiResultBuilder = new ResultBuilder(
 			$main->getResult(),
-			$this->getEntityTitleStoreLookup(),
+			$titleLookup,
 			$this->createMock( SerializerFactory::class ),
 			$this->createMock( ItemSerializer::class ),
 			$this->createMock( SiteLookup::class ),
 			new InMemoryDataTypeLookup(),
-			WikibaseRepo::getEntityIdParser()
+			WikibaseRepo::getEntityIdParser( $services )
 		);
 		$errorReporter = new ApiErrorReporter(
 			$main,
-			WikibaseRepo::getExceptionLocalizer(),
-			$this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' )
+			WikibaseRepo::getExceptionLocalizer( $services ),
+			$services->getLanguageFactory()->getLanguage( 'en' )
 		);
 		return new MergeItems(
 			$main,
@@ -193,13 +213,12 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 			new ItemMergeInteractor(
 				$changeOpsFactoryProvider->getMergeFactory(),
 				$this->mockRepository,
-				$this->mockRepository,
-				$this->getPermissionCheckers(),
-				WikibaseRepo::getSummaryFormatter(),
+				$editEntityFactory,
+				$permissionChecker,
+				WikibaseRepo::getSummaryFormatter( $services ),
 				$this->getMockRedirectCreationInteractor( $expectedRedirect ),
-				$this->getEntityTitleStoreLookup(),
-				MediaWikiServices::getInstance()->getPermissionManager(),
-				WikibaseRepo::getEditFilterHookRunner()
+				$titleLookup,
+				$services->getPermissionManager()
 			),
 			$errorReporter,
 			function ( $module ) use ( $apiResultBuilder ) {

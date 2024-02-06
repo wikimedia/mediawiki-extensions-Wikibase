@@ -7,6 +7,7 @@ use IContextSource;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Permissions\RateLimiter;
 use MediaWikiIntegrationTestCase;
+use NullStatsdDataFactory;
 use RequestContext;
 use Status;
 use TestSites;
@@ -14,11 +15,14 @@ use Title;
 use User;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Diff\EntityDiffer;
+use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\Lib\Store\LatestRevisionIdResult;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Repo\Content\ItemContent;
 use Wikibase\Repo\EditEntity\EditFilterHookRunner;
+use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\Interactors\ItemMergeException;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
@@ -104,14 +108,17 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 	private function getPermissionChecker() {
 		$permissionChecker = $this->createMock( EntityPermissionChecker::class );
 
+		$callback = function ( User $user ) {
+			if ( $user->getName() === self::USER_NAME_WITHOUT_PERMISSION ) {
+				return Status::newFatal( 'permissiondenied' );
+			} else {
+				return Status::newGood();
+			}
+		};
 		$permissionChecker->method( 'getPermissionStatusForEntityId' )
-			->willReturnCallback( function( User $user ) {
-				if ( $user->getName() === self::USER_NAME_WITHOUT_PERMISSION ) {
-					return Status::newFatal( 'permissiondenied' );
-				} else {
-					return Status::newGood();
-				}
-			} );
+			->willReturnCallback( $callback );
+		$permissionChecker->method( 'getPermissionStatusForEntity' )
+			->willReturnCallback( $callback );
 
 		return $permissionChecker;
 	}
@@ -160,24 +167,40 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 		);
 
 		$editFilterHookRunner = $this->getMockEditFilterHookRunner();
+
+		$entityTitleLookup = $this->getMockEntityTitleLookup();
+		$permissionChecker = $this->getPermissionChecker();
+		$editEntityFactory = new MediaWikiEditEntityFactory(
+			$entityTitleLookup,
+			$this->mockRepository,
+			$this->mockRepository,
+			$permissionChecker,
+			new EntityDiffer(),
+			new EntityPatcher(),
+			$editFilterHookRunner,
+			new NullStatsdDataFactory(),
+			MediaWikiServices::getInstance()->getUserOptionsLookup(),
+			1024 * 1024,
+			[ 'item' ]
+		);
+
 		$interactor = new ItemMergeInteractor(
 			$mergeFactory,
 			$this->mockRepository,
-			$this->mockRepository,
-			$this->getPermissionChecker(),
+			$editEntityFactory,
+			$permissionChecker,
 			$summaryFormatter,
 			new ItemRedirectCreationInteractor(
 				$this->mockRepository,
 				$this->mockRepository,
-				$this->getPermissionChecker(),
+				$permissionChecker,
 				$summaryFormatter,
 				$editFilterHookRunner,
 				$this->mockRepository,
-				$this->getMockEntityTitleLookup()
+				$entityTitleLookup
 			),
 			$this->getEntityTitleLookup(),
-			MediaWikiServices::getInstance()->getPermissionManager(),
-			$editFilterHookRunner
+			MediaWikiServices::getInstance()->getPermissionManager()
 		);
 
 		return $interactor;
