@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Snævar",
-			"Sveinn í Felli"
+			"Sveinn í Felli",
+			"Stefán Örvar Sigmundsson"
 		]
 	},
 	"wikibase-client-desc": "Biðlari fyrir Wikibase viðbótina",
@@ -103,12 +104,14 @@
 	"notification-subject-page-connection": "Síða á {{SITENAME}} sem þú {{GENDER:$3|bjóst til}} var {{GENDER:$2|tengd}} við {{WBREPONAME}} hlut",
 	"unresolved-property-category": "Síður með óleystum eiginleikum",
 	"unresolved-property-category-desc": "Þessi flokkur listar síður sem vísa í {{WBREPONAME}} eiginleika sem finnast ekki annaðhvort út frá auðkenni eiginleikans eða merkimiða.",
-	"connected-redirect-category": "Tilvísanir sem tengjast {{WBREPONAME}} hlut",
+	"connected-redirect-category": "Tilvísanir tengdar {{WBREPONAME}}-atriði",
 	"connected-redirect-category-desc": "Þessi flokkur listar tilvísanir sem eru tengd {{WBREPONAME}} hlut.",
 	"wikibase-client-data-bridge-dialog-title": "Breyta $1",
 	"wikibase-client-data-bridge-permissions-error": "Þú hefur ekki leyfi til að breyta þessu gildi, af eftirfarandi ástæðum {{PLURAL:$1|ástæðu|ástæðum}}:",
 	"wikibase-client-data-bridge-permissions-error-info": "Frekari upplýsingar",
 	"wikibase-client-data-bridge-protected-on-repo-head": "<strong>Þetta gildi er í augnablikinu [$1 full verndað] á {{WBREPONAME}} og er eingöngu hægt að breyta af [$2 stjórnendum].</strong>",
+	"wikibase-client-data-bridge-cascadeprotected-on-repo-body": "<p><strong>Af hverju er þetta gildi verndað?</strong></p>\n<p>Þetta gildi er innifalið í eftirfarandi {{PLURAL:$1|síðu sem er vernduð|síðum sem eru verndaðar}} með „keðjuverkandi“ valmöguleikanum:</p>\n$2",
+	"wikibase-client-data-bridge-cascadeprotected-on-client-body": "<p><strong>Af hverju er þessi síða vernduð?</strong></p>\n<p>Þessi síða er [[Project:Transclusion|innifalin]] í eftirfarandi {{PLURAL:$1|síðu sem er vernduð|síðum sem eru verndaðar}} „[[Project:Cascade|keðjuverkandi]]“ valmöguleikanum:</p>\n$2",
 	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Þú ert ekki skráð/ur inn",
 	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>Viðvörun:</strong> Þú ert ekki skráð/ur inn. IP talan þín verður sýnileg opinberlega ef þú gerir einhverjar breytingar. Ef þú <strong>skráir þig inn</strong> eða <strong>býrð til aðgang</strong>, þá munu breytingarnar þínar vera auðkenndar við notandanafnið þitt, ásamt öðrum kostum."
 }

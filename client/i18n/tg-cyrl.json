@@ -3,7 +3,8 @@
 		"authors": [
 			"Ibrahim",
 			"ToJack",
-			"Vashgird"
+			"Vashgird",
+			"ZulfiqorF"
 		]
 	},
 	"wikibase-comment-update": "Элементи {{WBREPONAME}} тағийр ёфт",
@@ -13,7 +14,11 @@
 	"wikibase-editlinkstitle": "Таҳрири пайвандҳои байнизабонӣ",
 	"wikibase-addlinkstitle": "Иловаи пайвандҳои байнизабонӣ",
 	"wikibase-linkitem-addlinks": "Иловаи пайвандҳо",
+	"wikibase-linkitem-title": "Бо саҳифа пайванд диҳед",
+	"wikibase-linkitem-linkpage": "Бо саҳифа пайванд диҳед",
+	"wikibase-linkitem-selectlink": "Лутфан сайт ва саҳифаеро интихоб кунед, ки мехоҳед ба ин саҳифа пайванд диҳед.",
 	"wikibase-linkitem-input-site": "Забон:",
+	"wikibase-linkitem-input-page": "Саҳифа",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Пинҳон кардани",
 	"wikibase-rc-hide-wikidata-show": "Намоиш",
