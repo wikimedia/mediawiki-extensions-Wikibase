@@ -1305,13 +1305,12 @@ return [
 				->getMergeFactory(),
 			WikibaseRepo::getStore( $services )
 				->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
-			WikibaseRepo::getEntityStore( $services ),
+			WikibaseRepo::getEditEntityFactory( $services ),
 			WikibaseRepo::getEntityPermissionChecker( $services ),
 			WikibaseRepo::getSummaryFormatter( $services ),
 			WikibaseRepo::getItemRedirectCreationInteractor( $services ),
 			WikibaseRepo::getEntityTitleStoreLookup( $services ),
-			$services->getPermissionManager(),
-			WikibaseRepo::getEditFilterHookRunner( $services )
+			$services->getPermissionManager()
 		);
 	},
 
