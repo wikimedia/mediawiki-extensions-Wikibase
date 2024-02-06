@@ -6,6 +6,7 @@ use Exception;
 use HashSiteStore;
 use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\MediaWikiServices;
+use NullStatsdDataFactory;
 use PermissionsError;
 use PHPUnit\Framework\Error\Error;
 use RawMessage;
@@ -19,6 +20,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\MessageException;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Repo\EditEntity\EditFilterHookRunner;
+use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\Interactors\ItemMergeException;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
@@ -113,11 +115,12 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	 * @return SpecialMergeItems
 	 */
 	protected function newSpecialPage() {
-		$summaryFormatter = WikibaseRepo::getSummaryFormatter();
+		$services = MediaWikiServices::getInstance();
+		$summaryFormatter = WikibaseRepo::getSummaryFormatter( $services );
 
 		$mergeFactory = new MergeFactory(
-			WikibaseRepo::getEntityConstraintProvider(),
-			WikibaseRepo::getChangeOpFactoryProvider(),
+			WikibaseRepo::getEntityConstraintProvider( $services ),
+			WikibaseRepo::getChangeOpFactoryProvider( $services ),
 			new HashSiteStore( TestSites::getSites() )
 		);
 
@@ -145,30 +148,43 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 
 		$titleLookup = $this->getEntityTitleLookup();
 		$editFilterHookRunner = $this->getMockEditFilterHookRunner();
+		$permissionChecker = $this->getPermissionCheckers();
+		$editEntityFactory = new MediaWikiEditEntityFactory(
+			$titleLookup,
+			$this->mockRepository,
+			$this->mockRepository,
+			$permissionChecker,
+			WikibaseRepo::getEntityDiffer( $services ),
+			WikibaseRepo::getEntityPatcher( $services ),
+			$editFilterHookRunner,
+			new NullStatsdDataFactory(),
+			$services->getUserOptionsLookup(),
+			4096,
+			[ 'item' ]
+		);
 		$specialPage = new SpecialMergeItems(
-			WikibaseRepo::getEntityIdParser(),
+			WikibaseRepo::getEntityIdParser( $services ),
 			$titleLookup,
 			$exceptionLocalizer,
 			new ItemMergeInteractor(
 				$mergeFactory,
 				$this->mockRepository,
-				$this->mockRepository,
-				$this->getPermissionCheckers(),
+				$editEntityFactory,
+				$permissionChecker,
 				$summaryFormatter,
 				new ItemRedirectCreationInteractor(
 						$this->mockRepository,
 						$this->mockRepository,
-						$this->getPermissionCheckers(),
+						$permissionChecker,
 						$summaryFormatter,
 						$editFilterHookRunner,
 						$this->mockRepository,
 						$this->getMockEntityTitleLookup()
 				),
 				$titleLookup,
-				MediaWikiServices::getInstance()->getPermissionManager(),
-				$editFilterHookRunner
+				$services->getPermissionManager()
 			),
-			WikibaseRepo::getTokenCheckInteractor()
+			WikibaseRepo::getTokenCheckInteractor( $services )
 		);
 
 		$linkRenderer = $this->createMock( LinkRenderer::class );
@@ -231,15 +247,18 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	private function getPermissionCheckers() {
 		$permissionChecker = $this->createMock( EntityPermissionChecker::class );
 
+		$callback = function ( User $user ) {
+			$name = 'UserWithoutPermission';
+			if ( $user->getName() === $name ) {
+				return Status::newFatal( 'permissiondenied' );
+			} else {
+				return Status::newGood();
+			}
+		};
 		$permissionChecker->method( 'getPermissionStatusForEntityId' )
-			->willReturnCallback( function( User $user ) {
-				$name = 'UserWithoutPermission';
-				if ( $user->getName() === $name ) {
-					return Status::newFatal( 'permissiondenied' );
-				} else {
-					return Status::newGood();
-				}
-			} );
+			->willReturnCallback( $callback );
+		$permissionChecker->method( 'getPermissionStatusForEntity' )
+			->willReturnCallback( $callback );
 
 		return $permissionChecker;
 	}
