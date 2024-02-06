@@ -12,7 +12,6 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\FormatableSummary;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Store\StorageException;
@@ -20,7 +19,7 @@ use Wikibase\Lib\Summary;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\ChangeOpsMerge;
 use Wikibase\Repo\Content\EntityContent;
-use Wikibase\Repo\EditEntity\EditFilterHookRunner;
+use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\Merge\MergeFactory;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
@@ -45,9 +44,9 @@ class ItemMergeInteractor {
 	private $entityRevisionLookup;
 
 	/**
-	 * @var EntityStore
+	 * @var MediaWikiEditEntityFactory
 	 */
-	private $entityStore;
+	private $editEntityFactory;
 
 	/**
 	 * @var EntityPermissionChecker
@@ -74,32 +73,30 @@ class ItemMergeInteractor {
 	 */
 	private $permissionManager;
 
-	private EditFilterHookRunner $editFilterHookRunner;
-
 	public function __construct(
 		MergeFactory $mergeFactory,
 		EntityRevisionLookup $entityRevisionLookup,
-		EntityStore $entityStore,
+		MediaWikiEditEntityFactory $editEntityFactory,
 		EntityPermissionChecker $permissionChecker,
 		SummaryFormatter $summaryFormatter,
 		ItemRedirectCreationInteractor $interactorRedirect,
 		EntityTitleStoreLookup $entityTitleLookup,
-		PermissionManager $permissionManager,
-		EditFilterHookRunner $editFilterHookRunner
+		PermissionManager $permissionManager
 	) {
 		$this->mergeFactory = $mergeFactory;
 		$this->entityRevisionLookup = $entityRevisionLookup;
-		$this->entityStore = $entityStore;
+		$this->editEntityFactory = $editEntityFactory;
 		$this->permissionChecker = $permissionChecker;
 		$this->summaryFormatter = $summaryFormatter;
 		$this->interactorRedirect = $interactorRedirect;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->permissionManager = $permissionManager;
-		$this->editFilterHookRunner = $editFilterHookRunner;
 	}
 
 	/**
-	 * Check user's for the given entity ID.
+	 * Check user's merge permissions for the given entity ID.
+	 * (Note that this is not redundant with the check in EditEntity later,
+	 * because that checks edit permissions, not merge.)
 	 *
 	 * @param EntityId $entityId
 	 *
@@ -116,14 +113,6 @@ class ItemMergeInteractor {
 			// XXX: This is silly, we really want to pass the Status object to the API error handler.
 			// Perhaps we should get rid of ItemMergeException and use Status throughout.
 			throw new ItemMergeException( $status->getWikiText(), 'permissiondenied' );
-		}
-	}
-
-	private function checkRateLimits( User $user ): void {
-		if ( $user->pingLimiter( 'edit', 2 ) ) { // attemptSaveMerge() makes two edits
-			// use generic 'failed-save' because ItemMergeException prepends 'wikibase-itemmerge-' for the message key,
-			// so we can’t easily use the correct actionthrottledtext message (using Status would solve this)
-			throw new ItemMergeException( 'rate limit hit', 'failed-save' );
 		}
 	}
 
@@ -162,7 +151,6 @@ class ItemMergeInteractor {
 		$user = $context->getUser();
 		$this->checkPermissions( $fromId, $user );
 		$this->checkPermissions( $toId, $user );
-		$this->checkRateLimits( $user );
 
 		/**
 		 * @var Item $fromItem
@@ -293,37 +281,32 @@ class ItemMergeInteractor {
 	}
 
 	private function saveItem( Item $item, FormatableSummary $summary, IContextSource $context, bool $bot, array $tags ) {
-		$user = $context->getUser();
-
 		// Given we already check all constraints in ChangeOpsMerge, it's
 		// fine to ignore them here. This is also needed to not run into
 		// the constraints we're supposed to ignore (see ChangeOpsMerge::removeConflictsWithEntity
 		// for reference)
 		$flags = EDIT_UPDATE | EntityContent::EDIT_IGNORE_CONSTRAINTS;
-		if ( $bot && $this->permissionManager->userHasRight( $user, 'bot' ) ) {
+		if ( $bot && $this->permissionManager->userHasRight( $context->getUser(), 'bot' ) ) {
 			$flags |= EDIT_FORCE_BOT;
 		}
 
 		$formattedSummary = $this->summaryFormatter->formatSummary( $summary );
 
-		$status = $this->editFilterHookRunner->run( $item, $context, $formattedSummary );
+		$editEntity = $this->editEntityFactory->newEditEntity( $context, $item->getId() );
+		$status = $editEntity->attemptSave(
+			$item,
+			$formattedSummary,
+			$flags,
+			false,
+			null,
+			$tags
+		);
 		if ( !$status->isOK() ) {
 			// as in checkPermissions() above, it would be better to just pass the Status to the API
 			throw new ItemMergeException( $status->getWikiText(), 'failed-save' );
 		}
 
-		try {
-			return $this->entityStore->saveEntity(
-				$item,
-				$formattedSummary,
-				$user,
-				$flags,
-				false,
-				$tags
-			);
-		} catch ( StorageException $ex ) {
-			throw new ItemMergeException( $ex->getMessage(), 'failed-save', $ex );
-		}
+		return $status->getValue()['revision'];
 	}
 
 	private function updateWatchlistEntries( ItemId $fromId, ItemId $toId ) {
