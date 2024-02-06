@@ -512,8 +512,7 @@ class MediaWikiEditEntity implements EditEntity {
 
 	/**
 	 * Checks the necessary permissions to perform this edit.
-	 * Per default, the 'edit' permission is checked.
-	 * Use addRequiredPermission() to check more permissions.
+	 * The 'edit' permission is always checked (currently not configurable).
 	 *
 	 * @param EntityDocument $newEntity
 	 */
