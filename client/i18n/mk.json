@@ -134,6 +134,7 @@
 	"wikibase-client-data-bridge-edit-decision-update-description": "Претходната вредност била исправна, но сега е застарена.",
 	"wikibase-client-data-bridge-references-heading": "Наводи",
 	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Не сте најавени",
+	"wikibase-client-data-bridge-anonymous-edit-warning-tempuser-message": "Не сте најавени. Ако <strong>се најавите</strong> или <strong>направите сметка</strong>, вашите уредувања ќе му бидат припишувани на вашето корисничко име, а има и други поволности.",
 	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>Предупредување:</strong> Не сте најавени. Вашата IP-адреса ќе биде јавно видлива ако уредувате. Ако <strong>се најавите</strong> или <strong>направите сметка</strong>, тогаш уредувањата ќе се припишуваат на вашето корисничко име, покрај другите погодности.",
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Уреди без најава",
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "Најава / Зачленување",

@@ -141,6 +141,7 @@
 	"wikibase-client-data-bridge-edit-decision-update-description": "Den forrige verdien var tidligere korrekt, men er nå utdatert.",
 	"wikibase-client-data-bridge-references-heading": "Referanser",
 	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Du er ikke logget inn",
+	"wikibase-client-data-bridge-anonymous-edit-warning-tempuser-message": "Du er ikke logget inn. Hvis du <strong>logger inn</strong> eller <strong>oppretter en konto</strong> blir redigeringene dine tilskrevet brukernavnet ditt, og du får tilgang til flere funksjoner.",
 	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>Advarsel:</strong> Du er ikke logget inn. IP-adressen din vil vises offentlig hvis du gjør noen redigeringer. Hvis du <strong>logger inn</strong> eller <strong>oppretter en konto</strong> vil redigeringene dine tilskrives brukernavnet ditt, sammen med andre fordeler.",
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Rediger uten å logge inn",
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "Logg inn eller opprett konto",
