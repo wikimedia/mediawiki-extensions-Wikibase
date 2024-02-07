@@ -2,9 +2,12 @@
 	"@metadata": {
 		"authors": [
 			"Bentong Isles",
-			"Leeheonjin"
+			"Leeheonjin",
+			"Như Gây Mê"
 		]
 	},
 	"wikibase-edit": "usba",
-	"wikibase-add": "ipuno"
+	"wikibase-add": "ipuno",
+	"wikibase-description-empty": "Walay deskripsyon nga gihubit",
+	"wikibase-sitelinks-special": "Ubang mga site"
 }

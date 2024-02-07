@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Bentong Isles"
+			"Bentong Isles",
+			"Như Gây Mê"
 		]
 	},
 	"tooltip-t-wikibase": "Sumpay ngadto sa aytem sa konektadong tipiganan sa datos",
@@ -9,8 +10,16 @@
 	"wikibase-dataitem": "Aytem sa {{WBREPONAME}}",
 	"wikibase-editlinks": "Usba ang mga sumpay",
 	"wikibase-editlinkstitle": "Usba ang mga sumpay sa ubang pinulongan",
+	"wikibase-linkitem-addlinks": "Idugang ang mga link",
+	"wikibase-linkitem-title": "Link sa panid",
+	"wikibase-linkitem-linkpage": "Link sa panid",
+	"wikibase-linkitem-selectlink": "Palihug pagpili og usa ka site ug usa ka panid nga gusto nimong i-link niini nga panid.",
+	"wikibase-linkitem-input-site": "Pinulongan:",
+	"wikibase-linkitem-input-page": "Panid:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Hide",
 	"wikibase-rc-hide-wikidata-show": "Ipakita",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} usba"
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} usba",
+	"wikibase-otherprojects": "Sa ubang mga proyekto"
 }

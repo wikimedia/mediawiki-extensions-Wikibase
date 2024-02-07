@@ -1,8 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
-			"FunLater"
+			"FunLater",
+			"CamelCaseCo"
 		]
 	},
-	"wikibase-sitelinks-wikipedia": "ويكيپيديا"
+	"wikibase-sitelinks-wikipedia": "ويكيبيديا"
 }
