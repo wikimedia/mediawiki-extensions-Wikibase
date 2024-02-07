@@ -146,12 +146,16 @@ async function getLocalSiteId() {
 	) ).siteid;
 }
 
-async function createLocalSitelink( itemId, articleTitle ) {
-	await action.getAnon().edit( articleTitle, { text: 'sitelink test' } );
-	await action.getAnon().action( 'wbsetsitelink', {
+async function createLocalSitelink( itemId, articleTitle, badges = [] ) {
+	const anon = action.getAnon();
+	anon.req.set( 'X-Wikibase-CI-Badges', badges.join( ', ' ) );
+
+	await anon.edit( articleTitle, { text: 'sitelink test' } );
+	await anon.action( 'wbsetsitelink', {
 		id: itemId,
 		linksite: await getLocalSiteId(),
 		linktitle: articleTitle,
+		badges: badges.join( ', ' ),
 		token: '+\\'
 	}, true );
 }
