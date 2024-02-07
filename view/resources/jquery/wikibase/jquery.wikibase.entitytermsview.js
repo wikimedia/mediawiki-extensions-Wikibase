@@ -8,6 +8,8 @@
 	var PARENT = $.ui.EditableTemplatedWidget,
 		datamodel = require( 'wikibase.datamodel' );
 
+	const TOGGLER_OPTION_KEY = 'wikibase-entitytermsview-showEntitytermslistview';
+
 	/**
 	 * Encapsulates a entitytermsforlanguagelistview widget.
 	 *
@@ -232,47 +234,7 @@
 		 * @private
 		 */
 		_createEntitytermsforlanguagelistviewToggler: function () {
-			var self = this,
-				api = new mw.Api();
-
-			this.$entitytermsforlanguagelistviewToggler = $( '<div>' )
-				.addClass( 'wikibase-entitytermsview-entitytermsforlanguagelistview-toggler' )
-				.text( mw.msg( 'wikibase-entitytermsview-entitytermsforlanguagelistview-toggler' ) )
-				.toggler( {
-					$subject: this.$entitytermsforlanguagelistviewContainer,
-					duration: 'fast'
-				} )
-				.on( 'toggleranimation.' + this.widgetName, function ( event, params ) {
-					if ( mw.user.isAnon() ) {
-						mw.cookie.set(
-							'wikibase-entitytermsview-showEntitytermslistview',
-							params.visible,
-							{ expires: 365 * 24 * 60 * 60, path: '/' }
-						);
-					} else {
-						api.saveOption(
-							'wikibase-entitytermsview-showEntitytermslistview',
-							params.visible ? '1' : '0'
-						)
-						.done( function () {
-							mw.user.options.set(
-								'wikibase-entitytermsview-showEntitytermslistview',
-								params.visible ? '1' : '0'
-							);
-						} );
-					}
-
-					// Show "help" link only if the toggler content is visible (decided by Product
-					// Management):
-					if ( self.$entitytermsforlanguagelistviewHelp ) {
-						self.$entitytermsforlanguagelistviewHelp.toggleClass(
-							'wikibase-entitytermsview-entitytermsforlanguagelistview-configure-hidden',
-							!params.visible
-						);
-					}
-
-					self._trackToggling( params.visible );
-				} );
+			this._registerTogglerForLanguagelistviewDiv( TOGGLER_OPTION_KEY );
 
 			this.$entitytermsforlanguagelistviewContainer.before(
 				this.$entitytermsforlanguagelistviewToggler
@@ -316,6 +278,61 @@
 			}
 		},
 
+		_languageListViewInitialStateIsVisible: function ( optionKey ) {
+			return ( mw.cookie.get( optionKey ) === 'true' ||
+				mw.user.options.get( optionKey ) === '1' );
+		},
+
+		/**
+		 * Registers the dedicated toggler itself on the element
+		 *
+		 * @see _createEntitytermsforlanguagelistviewToggler
+		 * @private
+		 */
+		_registerTogglerForLanguagelistviewDiv: function ( optionKey ) {
+			var self = this,
+				api = new mw.Api();
+			this.$entitytermsforlanguagelistviewToggler = $( '<div>' )
+				.addClass( 'wikibase-entitytermsview-entitytermsforlanguagelistview-toggler' )
+				.text( mw.msg( 'wikibase-entitytermsview-entitytermsforlanguagelistview-toggler' ) )
+				.toggler( {
+					$subject: this.$entitytermsforlanguagelistviewContainer,
+					duration: 'fast',
+					visible: this._languageListViewInitialStateIsVisible( optionKey )
+				} )
+				.on( 'toggleranimation.' + this.widgetName, function ( event, params ) {
+					if ( !mw.user.isNamed() ) {
+						mw.cookie.set(
+							optionKey,
+							params.visible,
+							{ expires: 365 * 24 * 60 * 60, path: '/' }
+						);
+					} else {
+						api.saveOption(
+							optionKey,
+							params.visible ? '1' : '0'
+						)
+						.done( function () {
+							mw.user.options.set(
+								optionKey,
+								params.visible ? '1' : '0'
+							);
+						} );
+					}
+
+					// Show "help" link only if the toggler content is visible (decided by Product
+					// Management):
+					if ( self.$entitytermsforlanguagelistviewHelp ) {
+						self.$entitytermsforlanguagelistviewHelp.toggleClass(
+							'wikibase-entitytermsview-entitytermsforlanguagelistview-configure-hidden',
+							!params.visible
+						);
+					}
+
+					self._trackToggling( params.visible );
+				} );
+		},
+
 		/**
 		 * @return {jQuery.wikibase.entitytermsforlanguagelistview}
 		 * @private
@@ -354,6 +371,9 @@
 				value: this.options.value,
 				userLanguages: this.options.userLanguages
 			} );
+			if ( !this._languageListViewInitialStateIsVisible( TOGGLER_OPTION_KEY ) ) {
+				this.$entitytermsforlanguagelistviewContainer.hide();
+			}
 		},
 
 		_startEditing: function () {

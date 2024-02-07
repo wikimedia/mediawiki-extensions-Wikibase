@@ -109,7 +109,6 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 				[ 'getForLanguage' => $this->languageNameLookup ] ),
 			$this->outputPageEntityIdReader,
 			$this->entityFactory,
-			'',
 			$this->editability,
 			$this->isExternallyRendered,
 			$this->preferredLanguageLookup,
