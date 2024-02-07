@@ -8,6 +8,7 @@ use DataValues\Geo\Formatters\GlobeCoordinateFormatter;
 use DataValues\Geo\Formatters\LatLongFormatter;
 use InvalidArgumentException;
 use MediaWiki\Languages\LanguageFactory;
+use ParserOptions;
 use RequestContext;
 use ValueFormatters\DecimalFormatter;
 use ValueFormatters\FormatterOptions;
@@ -331,7 +332,7 @@ class WikibaseValueFormatterBuilders {
 	public function newCommonsMediaFormatter( $format, FormatterOptions $options ) {
 		if ( $this->snakFormat->isPossibleFormat( SnakFormatter::FORMAT_HTML_VERBOSE, $format ) ) {
 			return new CommonsInlineImageFormatter(
-				RequestContext::getMain()->getOutput()->parserOptions(),
+				ParserOptions::newFromContext( RequestContext::getMain() ),
 				$this->thumbLimits,
 				$this->languageFactory,
 				$options
