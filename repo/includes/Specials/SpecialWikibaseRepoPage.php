@@ -4,17 +4,20 @@ namespace Wikibase\Repo\Specials;
 
 use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;
+use MediaWiki\User\User;
 use RuntimeException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\FormatableSummary;
+use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\UserInputException;
 use Wikibase\Repo\EditEntity\EditEntity;
 use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\SummaryFormatter;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\Assert\Assert;
 
 /**
  * Abstract base class for special pages of the WikibaseRepo extension.
@@ -193,6 +196,38 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 		);
 
 		return $status;
+	}
+
+	/**
+	 * Redirect to the page of the entity that was successfully edited.
+	 *
+	 * @param Status $status A status as returned by {@link self::saveEntity()}.
+	 * The status must be {@link Status::isOK() OK}.
+	 */
+	protected function redirectToEntityPage( Status $status ): void {
+		Assert::parameter( $status->isOK(), '$status', 'must be OK' );
+		/** @var EntityRevision $entityRevision */
+		/** @var ?User $savedTempUser */
+		[
+			'revision' => $entityRevision,
+			'savedTempUser' => $savedTempUser,
+		] = $status->getValue();
+		$title = $this->getEntityTitle( $entityRevision->getEntity()->getId() );
+		$redirectUrl = '';
+		if ( $savedTempUser !== null ) {
+			$this->getHookRunner()->onTempUserCreatedRedirect(
+				$this->getRequest()->getSession(),
+				$savedTempUser,
+				$title->getFullText(),
+				'',
+				'',
+				$redirectUrl
+			);
+		}
+		if ( !$redirectUrl ) {
+			$redirectUrl = $title->getFullURL();
+		}
+		$this->getOutput()->redirect( $redirectUrl );
 	}
 
 	/**

@@ -115,7 +115,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 		$submitStatus = $form->tryAuthorizedSubmit();
 
 		if ( $submitStatus && $submitStatus->isGood() ) {
-			$this->redirectToEntityPage( $submitStatus->getValue() );
+			$this->redirectToEntityPage( $submitStatus );
 
 			return;
 		}
@@ -164,18 +164,12 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 					$summary = $this->createSummary( $entity );
 
 					$this->prepareEditEntity();
-					$saveStatus = $this->saveEntity(
+					return $this->saveEntity(
 						$entity,
 						$summary,
 						$form->getRequest()->getRawVal( 'wpEditToken' ),
 						EDIT_NEW
 					);
-
-					if ( !$saveStatus->isGood() ) {
-						return $saveStatus;
-					}
-
-					return Status::newGood( $entity );
 				}
 			);
 	}
@@ -221,12 +215,6 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	 */
 	protected function getCopyrightHTML( $messageKey = null ) {
 		return parent::getCopyrightHTML( 'wikibase-newentity-submit' );
-	}
-
-	private function redirectToEntityPage( EntityDocument $entity ) {
-		$title = $this->getEntityTitle( $entity->getId() );
-		$entityUrl = $title->getFullURL();
-		$this->getOutput()->redirect( $entityUrl );
 	}
 
 	/**

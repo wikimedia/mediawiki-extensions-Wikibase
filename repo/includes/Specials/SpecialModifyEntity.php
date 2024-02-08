@@ -238,8 +238,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 
 	private function handleStatus( Status $status, EntityDocument $entity ) {
 		if ( $status->isOK() ) {
-			$entityUrl = $this->getEntityTitle( $this->getEntityId() )->getFullURL();
-			$this->getOutput()->redirect( $entityUrl );
+			$this->redirectToEntityPage( $status );
 		} else {
 			$errors = $status->getErrorsArray();
 			$this->showErrorHTML( $this->msg( $errors[0][0], array_slice( $errors[0], 1 ) )->parse() );

@@ -6,7 +6,9 @@ use MediaWiki\Languages\LanguageNameUtils;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Request\FauxResponse;
 use MediaWiki\Request\WebRequest;
+use MediaWiki\Session\Session;
 use MediaWiki\Status\Status;
+use MediaWiki\User\UserIdentity;
 use NullStatsdDataFactory;
 use SpecialPageExecutor;
 use Wikibase\DataModel\Entity\Item;
@@ -471,6 +473,35 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 			$output,
 			not( $this->getDescriptionNotSupportedNoticeMatcher() )
 		);
+	}
+
+	public function testTempUserCreatedRedirect(): void {
+		$autoCreateTempUser = $this->getConfVar( 'AutoCreateTempUser' );
+		$autoCreateTempUser['enabled'] = true;
+		$this->overrideConfigValue( 'AutoCreateTempUser', $autoCreateTempUser );
+		$request = new FauxRequest( [ 'language' => 'en', 'label' => 'new label' ], true );
+		$this->setTemporaryHook( 'TempUserCreatedRedirect', function (
+			Session $session,
+			UserIdentity $user,
+			string $returnTo,
+			string $returnToQuery,
+			string $returnToAnchor,
+			&$redirectUrl
+		): void {
+			$userNameUtils = $this->getServiceContainer()->getUserNameUtils();
+			$this->assertTrue( $userNameUtils->isTemp( $user ) );
+			$redirectUrl = 'http://centralwiki.test?returnto=' . $returnTo;
+		} );
+
+		$inputEntity = new Item( null, $this->makeFingerprint( [ 'en' => 'a label' ] ) );
+		$this->mockRepository->putEntity( $inputEntity );
+		$id = $inputEntity->getId();
+
+		[ , $webResponse ] = $this->executeSpecialPage( $id->getSerialization(), $request );
+
+		$redirectUrl = $webResponse->getHeader( 'location' );
+		$title = $this->getEntityTitleLookup()->getTitleForId( $id )->getFullText();
+		$this->assertsame( 'http://centralwiki.test?returnto=' . $title, $redirectUrl );
 	}
 
 	private function getDescriptionInputDisabledMatcher(): HtmlMatcher {

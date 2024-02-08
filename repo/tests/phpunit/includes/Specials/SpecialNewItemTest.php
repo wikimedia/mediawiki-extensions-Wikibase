@@ -5,10 +5,12 @@ namespace Wikibase\Repo\Tests\Specials;
 use MediaWiki\Languages\LanguageNameUtils;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Request\WebResponse;
+use MediaWiki\Session\Session;
 use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Site\MediaWikiPageNameNormalizer;
 use MediaWiki\Site\Site;
 use MediaWiki\Site\SiteStore;
+use MediaWiki\User\UserIdentity;
 use PHPUnit\Framework\MockObject\MockObject;
 use ValueValidators\Error;
 use ValueValidators\Result;
@@ -402,6 +404,39 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 		$this->assertSame( 'Some page', $sitelink->getPageName() );
 		$this->assertCount( 1, $sitelink->getBadges() );
 		$this->assertSame( self::BADGE_SITELINK_TO_REDIRECT, $sitelink->getBadges()[0]->getSerialization() );
+	}
+
+	public function testTempUserCreatedRedirect(): void {
+		$autoCreateTempUser = $this->getConfVar( 'AutoCreateTempUser' );
+		$autoCreateTempUser['enabled'] = true;
+		$this->overrideConfigValue( 'AutoCreateTempUser', $autoCreateTempUser );
+		$formData = [
+			SpecialNewItem::FIELD_LANG => 'en',
+			SpecialNewItem::FIELD_LABEL => __METHOD__,
+			SpecialNewItem::FIELD_DESCRIPTION => '',
+			SpecialNewItem::FIELD_ALIASES => '',
+		];
+		$this->setTemporaryHook( 'TempUserCreatedRedirect', function (
+			Session $session,
+			UserIdentity $user,
+			string $returnTo,
+			string $returnToQuery,
+			string $returnToAnchor,
+			&$redirectUrl
+		): void {
+			$userNameUtils = $this->getServiceContainer()->getUserNameUtils();
+			$this->assertTrue( $userNameUtils->isTemp( $user ) );
+			$redirectUrl = 'http://centralwiki.test?returnto=' . $returnTo;
+		} );
+
+		[ , $webResponse ] = $this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
+
+		$redirectUrl = $webResponse->getHeader( 'location' );
+		$this->assertStringStartsWith( 'http://centralwiki.test?returnto=', $redirectUrl );
+		$entityId = $this->extractEntityIdFromUrl( $redirectUrl );
+		/** @var Item $item */
+		$item = WikibaseRepo::getEntityLookup()->getEntity( $entityId );
+		$this->assertSame( __METHOD__, $item->getLabels()->getByLanguage( 'en' )->getText() );
 	}
 
 	/**
