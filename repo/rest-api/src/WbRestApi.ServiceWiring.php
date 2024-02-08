@@ -965,6 +965,7 @@ return [
 		return new SetSitelink(
 			WbRestApi::getValidatingRequestDeserializer( $services ),
 			new SitelinkDeserializer(),
+			WbRestApi::getAssertItemExists( $services ),
 			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getItemUpdater( $services ),
 		);
