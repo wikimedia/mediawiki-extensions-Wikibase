@@ -49,12 +49,17 @@ class SetSitelink {
 		$this->assertItemExists->execute( $itemId );
 
 		$item = $this->itemRetriever->getItem( $itemId );
-		$sitelinkExists = $item->getSiteLinkList()->hasLinkWithSiteId( $siteId );
-		$item->getSiteLinkList()->setSiteLink( $sitelink );
+		$sitelinkExists = $item->hasLinkToSite( $siteId );
 
-		$editSummary = $sitelinkExists
-			? SitelinkEditSummary::newReplaceSummary( '', $sitelink )
-			: SitelinkEditSummary::newAddSummary( '', $sitelink );
+		if ( $sitelinkExists ) {
+			$editSummary = $item->getSiteLink( $siteId )->getPageName() === $sitelink->getPageName() ?
+				SitelinkEditSummary::newReplaceBadgesSummary( $request->getComment(), $sitelink ) :
+				SitelinkEditSummary::newReplaceSummary( $request->getComment(), $sitelink );
+		} else {
+			$editSummary = SitelinkEditSummary::newAddSummary( $request->getComment(), $sitelink );
+		}
+
+		$item->getSiteLinkList()->setSiteLink( $sitelink );
 
 		$newRevision = $this->itemUpdater->update(
 			$item, // @phan-suppress-current-line PhanTypeMismatchArgumentNullable

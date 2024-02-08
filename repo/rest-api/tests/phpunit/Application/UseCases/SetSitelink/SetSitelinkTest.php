@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\SetSitelink;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\SiteLink as DataModelSitelink;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
@@ -12,6 +13,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetSitelink\SetSitelinkRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\SetSitelink\SetSitelinkValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
+use Wikibase\Repo\RestApi\Domain\Model\SitelinkEditSummary;
 use Wikibase\Repo\RestApi\Domain\ReadModel\SiteLink;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
@@ -41,7 +44,7 @@ class SetSitelinkTest extends TestCase {
 	}
 
 	public function testAddSitelink(): void {
-		$itemId = 'Q123';
+		$itemId = new ItemId( 'Q123' );
 		$siteId = InMemoryItemRepository::EN_WIKI_SITE_ID;
 		$title = 'Potato';
 		$badge = 'Q567';
@@ -53,7 +56,7 @@ class SetSitelinkTest extends TestCase {
 
 		$response = $this->newUseCase()->execute(
 			new SetSitelinkRequest(
-				$itemId,
+				"$itemId",
 				$siteId,
 				[ 'title' => $title, 'badges' => [ $badge ] ],
 				[],
@@ -68,13 +71,68 @@ class SetSitelinkTest extends TestCase {
 			),
 			$response->getSitelink()
 		);
-		$this->assertSame( $itemRepo->getLatestRevisionId( new ItemId( $itemId ) ), $response->getRevisionId() );
-		$this->assertSame( $itemRepo->getLatestRevisionTimestamp( new ItemId( $itemId ) ), $response->getLastModified() );
+		$this->assertSame( $itemRepo->getLatestRevisionId( $itemId ), $response->getRevisionId() );
+		$this->assertSame( $itemRepo->getLatestRevisionTimestamp( $itemId ), $response->getLastModified() );
+		$this->assertEquals(
+			new EditMetadata(
+				[],
+				false,
+				SitelinkEditSummary::newAddSummary(
+					'',
+					new DataModelSitelink( $siteId, $title, [ new ItemId( $badge ) ] )
+				)
+			),
+			$itemRepo->getLatestRevisionEditMetadata( $itemId )
+		);
 		$this->assertFalse( $response->wasReplaced() );
 	}
 
 	public function testReplaceSitelink(): void {
-		$itemId = 'Q123';
+		$itemId = new ItemId( 'Q123' );
+		$siteId = InMemoryItemRepository::EN_WIKI_SITE_ID;
+		$title = 'New_Potato';
+		$badge = 'Q567';
+
+		$itemRepo = new InMemoryItemRepository();
+		$itemRepo->addItem( NewItem::withId( $itemId )->andSiteLink( $siteId, 'Old_Potato', [] )->build() );
+		$this->itemRetriever = $itemRepo;
+		$this->itemUpdater = $itemRepo;
+
+		$response = $this->newUseCase()->execute(
+			new SetSitelinkRequest(
+				"$itemId",
+				$siteId,
+				[ 'title' => $title, 'badges' => [ $badge ] ],
+				[],
+				false,
+				'',
+				null
+			)
+		);
+
+		$this->assertEquals(
+			new SiteLink( $siteId, $title, [ new ItemId( $badge ) ], InMemoryItemRepository::EN_WIKI_URL_PREFIX . $title
+			),
+			$response->getSitelink()
+		);
+		$this->assertSame( $itemRepo->getLatestRevisionId( $itemId ), $response->getRevisionId() );
+		$this->assertSame( $itemRepo->getLatestRevisionTimestamp( $itemId ), $response->getLastModified() );
+		$this->assertEquals(
+			new EditMetadata(
+				[],
+				false,
+				SitelinkEditSummary::newReplaceSummary(
+					'',
+					new DataModelSitelink( $siteId, $title, [ new ItemId( $badge ) ] )
+				)
+			),
+			$itemRepo->getLatestRevisionEditMetadata( $itemId )
+		);
+		$this->assertTrue( $response->wasReplaced() );
+	}
+
+	public function testReplaceBadgesOnly(): void {
+		$itemId = new ItemId( 'Q123' );
 		$siteId = InMemoryItemRepository::EN_WIKI_SITE_ID;
 		$title = 'Potato';
 		$badge = 'Q567';
@@ -86,7 +144,7 @@ class SetSitelinkTest extends TestCase {
 
 		$response = $this->newUseCase()->execute(
 			new SetSitelinkRequest(
-				$itemId,
+				"$itemId",
 				$siteId,
 				[ 'title' => $title, 'badges' => [ $badge ] ],
 				[],
@@ -101,8 +159,19 @@ class SetSitelinkTest extends TestCase {
 			),
 			$response->getSitelink()
 		);
-		$this->assertSame( $itemRepo->getLatestRevisionId( new ItemId( $itemId ) ), $response->getRevisionId() );
-		$this->assertSame( $itemRepo->getLatestRevisionTimestamp( new ItemId( $itemId ) ), $response->getLastModified() );
+		$this->assertSame( $itemRepo->getLatestRevisionId( $itemId ), $response->getRevisionId() );
+		$this->assertSame( $itemRepo->getLatestRevisionTimestamp( $itemId ), $response->getLastModified() );
+		$this->assertEquals(
+			new EditMetadata(
+				[],
+				false,
+				SitelinkEditSummary::newReplaceBadgesSummary(
+					'',
+					new DataModelSitelink( $siteId, $title, [ new ItemId( $badge ) ] )
+				)
+			),
+			$itemRepo->getLatestRevisionEditMetadata( $itemId )
+		);
 		$this->assertTrue( $response->wasReplaced() );
 	}
 

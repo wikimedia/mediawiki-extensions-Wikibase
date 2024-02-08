@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\RestApi\Infrastructure;
 
 use LogicException;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\FormatableSummary;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\RestApi\Domain\Model\AliasesEditSummary;
@@ -79,8 +80,14 @@ class EditSummaryFormatter {
 		} elseif ( $editSummary instanceof SitelinkEditSummary ) {
 			switch ( $editSummary->getEditAction() ) {
 				case EditSummary::ADD_ACTION:
+					$actionName = $editSummary->hasBadges() ? 'add-both' : 'add';
+					return $this->newSummaryForSitelinkEdit( $editSummary, $actionName );
 				case EditSummary::REPLACE_ACTION:
-					return new Summary();
+					$actionName = 'set';
+					if ( $editSummary->hasBadges() ) {
+						$actionName = $editSummary->isBadgesOnly() ? 'set-badges' : 'set-both';
+					}
+					return $this->newSummaryForSitelinkEdit( $editSummary,  $actionName );
 				case EditSummary::REMOVE_ACTION:
 					$summary = new Summary(
 						'wbsetsitelink',
@@ -141,6 +148,29 @@ class EditSummaryFormatter {
 		$summary = new Summary( 'wbsetaliases', 'add' );
 		$summary->setLanguage( $editSummary->getAliases()->getLanguageCode() );
 		$summary->addAutoSummaryArgs( $editSummary->getAliases()->getAliases() );
+		$summary->setUserSummary( $editSummary->getUserComment() );
+
+		return $summary;
+	}
+
+	private function newSummaryForSitelinkEdit( SitelinkEditSummary $editSummary, string $actionName ): Summary {
+		$summary = new Summary( 'wbsetsitelink', $actionName );
+		$summary->setLanguage( $editSummary->getSitelink()->getSiteId() );
+
+		$formattedBadges = implode( ', ', array_map(
+			fn( ItemId $itemId ) => $itemId->getSerialization(),
+			$editSummary->getSitelink()->getBadges()
+		) );
+
+		if ( $editSummary->hasBadges() ) {
+			$summaryArgs = $editSummary->isBadgesOnly() ?
+				[ $formattedBadges ] :
+				[ $editSummary->getSitelink()->getPageName(), $formattedBadges ];
+		} else {
+			$summaryArgs = [ $editSummary->getSitelink()->getPageName() ];
+		}
+
+		$summary->addAutoSummaryArgs( $summaryArgs );
 		$summary->setUserSummary( $editSummary->getUserComment() );
 
 		return $summary;

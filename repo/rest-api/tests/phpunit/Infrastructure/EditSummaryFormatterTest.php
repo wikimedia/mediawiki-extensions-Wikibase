@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\RestApi\Infrastructure;
 
 use Generator;
 use MediaWikiLangTestCase;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\Term;
@@ -169,6 +170,43 @@ class EditSummaryFormatterTest extends MediaWikiLangTestCase {
 		$userComment = 'user comment';
 		$siteId = 'enwiki';
 		$article = 'Potato';
+		$badges = [ new ItemId( 'Q123' ), new ItemId( 'Q345' ) ];
+		$formattedBadgeItems = 'Q123, Q345';
+		yield 'add sitelink without badges' => [
+			SitelinkEditSummary::newAddSummary(
+				$userComment,
+				new SiteLink( $siteId, $article )
+			),
+			"/* wbsetsitelink-add:1|$siteId */ $article, $userComment",
+		];
+		yield 'add sitelink with badges' => [
+			SitelinkEditSummary::newAddSummary(
+				$userComment,
+				new SiteLink( $siteId, $article, $badges )
+			),
+			"/* wbsetsitelink-add-both:2|$siteId */ $article, $formattedBadgeItems, $userComment",
+		];
+		yield 'replace sitelink without badges' => [
+			SitelinkEditSummary::newReplaceSummary(
+				$userComment,
+				new SiteLink( $siteId, $article )
+			),
+			"/* wbsetsitelink-set:1|$siteId */ $article, $userComment",
+		];
+		yield 'replace sitelink with badges' => [
+			SitelinkEditSummary::newReplaceSummary(
+				$userComment,
+				new SiteLink( $siteId, $article, $badges )
+			),
+			"/* wbsetsitelink-set-both:2|$siteId */ $article, $formattedBadgeItems, $userComment",
+		];
+		yield 'replace badges of a sitelink only' => [
+			SitelinkEditSummary::newReplaceBadgesSummary(
+				$userComment,
+				new SiteLink( $siteId, $article, $badges )
+			),
+			"/* wbsetsitelink-set-badges:1|$siteId */ $formattedBadgeItems, $userComment",
+		];
 		yield 'remove sitelink' => [
 			SitelinkEditSummary::newRemoveSummary(
 				$userComment,

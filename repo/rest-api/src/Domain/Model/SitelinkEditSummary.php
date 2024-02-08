@@ -12,11 +12,13 @@ class SitelinkEditSummary implements EditSummary {
 	private string $action;
 	private ?string $userComment;
 	private SiteLink $sitelink;
+	private bool $badgesOnly;
 
-	private function __construct( string $action, ?string $userComment, SiteLink $sitelink ) {
+	private function __construct( string $action, ?string $userComment, SiteLink $sitelink, bool $badgesOnly = false ) {
 		$this->action = $action;
 		$this->userComment = $userComment;
 		$this->sitelink = $sitelink;
+		$this->badgesOnly = $badgesOnly;
 	}
 
 	public static function newAddSummary( ?string $userComment, SiteLink $sitelink ): self {
@@ -25,6 +27,10 @@ class SitelinkEditSummary implements EditSummary {
 
 	public static function newReplaceSummary( ?string $userComment, SiteLink $sitelink ): self {
 		return new self( self::REPLACE_ACTION, $userComment, $sitelink );
+	}
+
+	public static function newReplaceBadgesSummary( ?string $userComment, SiteLink $sitelink ): self {
+		return new self( self::REPLACE_ACTION, $userComment, $sitelink, true );
 	}
 
 	public static function newRemoveSummary( ?string $userComment, SiteLink $sitelink ): self {
@@ -42,4 +48,13 @@ class SitelinkEditSummary implements EditSummary {
 	public function getSitelink(): SiteLink {
 		return $this->sitelink;
 	}
+
+	public function hasBadges(): bool {
+		return !empty( $this->sitelink->getBadges() );
+	}
+
+	public function isBadgesOnly(): bool {
+		return $this->badgesOnly;
+	}
+
 }
