@@ -118,7 +118,7 @@ class DeletePageNoticeCreator implements ArticleDeleteAfterSuccessHook {
 	}
 
 	private function getMessage( Title $title ): string {
-		if ( isset( $title->wikibasePushedDeleteToRepo ) ) {
+		if ( isset( $title->wikibasePushedDeleteToRepo ) ) { // @phan-suppress-current-line PhanUndeclaredProperty
 			// We're going to update the item using the repo job queue \o/
 			return 'wikibase-after-page-delete-queued';
 		}
