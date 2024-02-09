@@ -1158,6 +1158,32 @@
 			}
 		}
 	},
+	"InvalidPatchedItemSitelinks": {
+		"description": "Applying the provided JSON Patch results in invalid sitelinks",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/ContextError" },
+				"examples": {
+					"patched-sitelink-invalid-site-id": { "$ref": "./examples.json#/PatchedSitelinkSiteIdInvalidExample" },
+					"patched-sitelink-missing-title": { "$ref": "./examples.json#/PatchedSitelinkTitleMissingExample" },
+					"patched-sitelink-title-empty": { "$ref": "./examples.json#/PatchedSitelinkTitleEmptyExample" },
+					"patched-sitelink-invalid-title": { "$ref": "./examples.json#/PatchedSitelinkTitleInvalidExample" },
+					"patched-sitelink-title-does-not-exist": { "$ref": "./examples.json#/PatchedSitelinkTitleNotExistExample" },
+					"patched-sitelink-invalid-badge": { "$ref": "./examples.json#/PatchedSitelinkBadgeInvalidExample" },
+					"patched-sitelink-item-not-a-badge": { "$ref": "./examples.json#/PatchedSitelinkItemBadgeNotBadgeExample" },
+					"patched-sitelink-badges-format": { "$ref": "./examples.json#/PatchedSiteLinkBadgeFormatExample" },
+					"sitelink-conflict": { "$ref": "./examples.json#/SitelinkConflictExample" },
+					"url-not-modifiable": { "$ref": "./examples.json#/SitelinkUrlNotModifiableExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
 	"InvalidPatchedItemLabels": {
 		"description": "Applying the provided JSON Patch results in invalid Labels",
 		"content": {

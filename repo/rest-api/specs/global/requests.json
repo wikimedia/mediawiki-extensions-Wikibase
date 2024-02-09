@@ -180,6 +180,21 @@
 			}
 		}
 	},
+	"SitelinksPatch": {
+		"required": true,
+		"content": {
+			"application/json-patch+json": {
+				"schema": {
+					"$ref": "./request-parts.json#/SitelinksPatchRequest"
+				}
+			},
+			"application/json": {
+				"schema": {
+					"$ref": "./request-parts.json#/SitelinksPatchRequest"
+				}
+			}
+		}
+	},
 	"Edit": {
 		"description": "Edit payload containing edit metadata",
 		"required": false,

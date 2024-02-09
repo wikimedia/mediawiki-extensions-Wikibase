@@ -1,4 +1,26 @@
 {
+	"SitelinksPatchRequest": {
+		"allOf": [
+			{ "$ref": "#/PatchDocument" },
+			{
+				"properties": {
+					"patch": {
+						"items": {
+							"properties": {
+								"path": {
+									"example": "/afwiki/title"
+								},
+								"value": {
+									"example": "Douglas Adams"
+								}
+							}
+						}
+					}
+				}
+			},
+			{ "$ref": "#/MediawikiEdit" }
+		]
+	},
 	"LabelsPatchRequest": {
 		"allOf": [
 			{ "$ref": "#/PatchDocument" },
