@@ -1,11 +1,12 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\DataModel\Serializers;
 
 use Serializers\DispatchableSerializer;
 use Serializers\Exceptions\SerializationException;
 use Serializers\Exceptions\UnsupportedObjectException;
-use Serializers\Serializer;
 use Wikibase\DataModel\Statement\StatementList;
 
 /**
@@ -16,15 +17,9 @@ use Wikibase\DataModel\Statement\StatementList;
  */
 class StatementListSerializer extends MapSerializer implements DispatchableSerializer {
 
-	/**
-	 * @var Serializer
-	 */
-	private $statementSerializer;
+	private StatementSerializer $statementSerializer;
 
-	/**
-	 * @param Serializer $statementSerializer
-	 */
-	public function __construct( Serializer $statementSerializer, bool $useObjectsForEmptyMaps ) {
+	public function __construct( StatementSerializer $statementSerializer, bool $useObjectsForEmptyMaps ) {
 		parent::__construct( $useObjectsForEmptyMaps );
 		$this->statementSerializer = $statementSerializer;
 	}

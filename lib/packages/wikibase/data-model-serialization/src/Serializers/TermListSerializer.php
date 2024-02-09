@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\DataModel\Serializers;
 
 use Serializers\Exceptions\SerializationException;
@@ -15,15 +17,9 @@ use Wikibase\DataModel\Term\TermList;
  */
 class TermListSerializer extends MapSerializer implements Serializer {
 
-	/**
-	 * @var Serializer
-	 */
-	private $termSerializer;
+	private TermSerializer $termSerializer;
 
-	/**
-	 * @param Serializer $termSerializer
-	 */
-	public function __construct( Serializer $termSerializer, bool $useObjectsForEmptyMaps ) {
+	public function __construct( TermSerializer $termSerializer, bool $useObjectsForEmptyMaps ) {
 		parent::__construct( $useObjectsForEmptyMaps );
 		$this->termSerializer = $termSerializer;
 	}

@@ -1,11 +1,12 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\DataModel\Serializers;
 
 use Serializers\DispatchableSerializer;
 use Serializers\Exceptions\SerializationException;
 use Serializers\Exceptions\UnsupportedObjectException;
-use Serializers\Serializer;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 
@@ -17,15 +18,9 @@ use Wikibase\DataModel\Snak\SnakList;
  */
 class SnakListSerializer extends MapSerializer implements DispatchableSerializer {
 
-	/**
-	 * @var Serializer
-	 */
-	private $snakSerializer;
+	private SnakSerializer $snakSerializer;
 
-	/**
-	 * @param Serializer $snakSerializer
-	 */
-	public function __construct( Serializer $snakSerializer, bool $useObjectsForEmptyMaps ) {
+	public function __construct( SnakSerializer $snakSerializer, bool $useObjectsForEmptyMaps ) {
 		parent::__construct( $useObjectsForEmptyMaps );
 		$this->snakSerializer = $snakSerializer;
 	}

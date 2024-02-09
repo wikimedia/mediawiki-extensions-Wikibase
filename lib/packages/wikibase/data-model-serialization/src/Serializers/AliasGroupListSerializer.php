@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\DataModel\Serializers;
 
 use Serializers\Exceptions\UnsupportedObjectException;
@@ -15,15 +17,9 @@ use Wikibase\DataModel\Term\AliasGroupList;
  */
 class AliasGroupListSerializer extends MapSerializer implements Serializer {
 
-	/**
-	 * @var AliasGroupSerializer
-	 */
-	private $aliasGroupSerializer;
+	private AliasGroupSerializer $aliasGroupSerializer;
 
-	/**
-	 * @param Serializer $aliasGroupSerializer
-	 */
-	public function __construct( Serializer $aliasGroupSerializer, bool $useObjectsForEmptyMaps ) {
+	public function __construct( AliasGroupSerializer $aliasGroupSerializer, bool $useObjectsForEmptyMaps ) {
 		parent::__construct( $useObjectsForEmptyMaps );
 		$this->aliasGroupSerializer = $aliasGroupSerializer;
 	}
