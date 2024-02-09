@@ -17,5 +17,19 @@ module.exports = {
 
 	formatTermsEditSummary( action, autoCommentArgs, userComment ) {
 		return `/* wbeditentity-${action}:0||${autoCommentArgs} */ ${userComment}`;
+	},
+
+	formatSitelinkEditSummary( action, siteId, title, badges, userComment ) {
+		const commentArgs = action.endsWith( '-both' ) ? `2|${siteId}` : `1|${siteId}`;
+		const summaryText = [];
+		if ( title ) {
+			summaryText.push( title );
+		}
+		if ( badges ) {
+			summaryText.push( badges.join( ', ' ) );
+		}
+		const autoSummary = `/* wbsetsitelink-${action}:${commentArgs} */ ${summaryText.join( ', ' )}`;
+
+		return userComment ? `${autoSummary}, ${userComment}` : autoSummary;
 	}
 };

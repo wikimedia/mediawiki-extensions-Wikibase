@@ -11,6 +11,8 @@ use Wikibase\DataModel\SiteLink;
 class SitelinkDeserializer {
 
 	public function deserialize( string $siteId, array $serialization ): SiteLink {
+		$serialization['badges'] ??= [];
+
 		$badges = [];
 		foreach ( $serialization[ 'badges' ] as $badge ) {
 			$badges[] = new ItemId( $badge );

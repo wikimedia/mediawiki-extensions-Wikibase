@@ -7,6 +7,7 @@ const {
 	newSetSitelinkRequestBuilder,
 	newRemoveSitelinkRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
+const { formatSitelinkEditSummary } = require( '../helpers/formatEditSummaries' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { createEntity, createLocalSitelink, getLocalSiteId } = require( '../helpers/entityHelper' );
 
@@ -47,24 +48,130 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 	} );
 
 	describe( '20x success response ', () => {
-		it( 'can add a sitelink of an item with edit metadata omitted', async () => {
+
+		it( 'can add a sitelink with badges and edit metadata', async () => {
 			await newRemoveSitelinkRequestBuilder( testItemId, siteId ).assertValidRequest().makeRequest();
 
-			const newSitelink = { title: utils.title( 'test-title-' ), badges: [ 'Q123' ] };
+			const testTitle = utils.title( 'test-title-' );
+			const testBadges = [ 'Q123', 'Q456' ];
+			const testComment = 'omg – i created a sitelink!';
+
+			const newSitelink = { title: testTitle, badges: testBadges };
+			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, newSitelink )
+				.assertValidRequest()
+				.withJsonBodyParam( 'comment', testComment )
+				.makeRequest();
+
+			assertValidResponse( response, 201, newSitelink.title, newSitelink.badges );
+
+			const editMetadata = await entityHelper.getLatestEditMetadata( testItemId );
+			assert.strictEqual(
+				editMetadata.comment,
+				formatSitelinkEditSummary(
+					'add-both',
+					siteId,
+					testTitle,
+					testBadges,
+					testComment
+				)
+			);
+		} );
+
+		it( 'can add a sitelink without badges (edit metadata ommited)', async () => {
+			await newRemoveSitelinkRequestBuilder( testItemId, siteId ).assertValidRequest().makeRequest();
+
+			const testTitle = utils.title( 'test-title-' );
+
+			const newSitelink = { title: testTitle };
 			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, newSitelink )
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidResponse( response, 201, newSitelink.title, newSitelink.badges );
+			assertValidResponse( response, 201, newSitelink.title, [] );
+
+			const editMetadata = await entityHelper.getLatestEditMetadata( testItemId );
+			assert.strictEqual(
+				editMetadata.comment,
+				formatSitelinkEditSummary(
+					'add',
+					siteId,
+					testTitle
+				)
+			);
 		} );
 
-		it( 'can replace the sitelink of an item with edit metadata omitted', async () => {
-			const newSitelink = { title: utils.title( 'test-title-' ), badges: [ 'Q123' ] };
+		it( 'can replace a sitelink with badges and edit metadata', async () => {
+			const testTitle = utils.title( 'test-title-' );
+			const testBadges = [ 'Q123', 'Q456' ];
+			const testComment = 'omg – i replaced a sitelink!';
+
+			const newSitelink = { title: testTitle, badges: testBadges };
 			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, newSitelink )
+				.withJsonBodyParam( 'comment', testComment )
 				.assertValidRequest()
 				.makeRequest();
 
 			assertValidResponse( response, 200, newSitelink.title, newSitelink.badges );
+			const editMetadata = await entityHelper.getLatestEditMetadata( testItemId );
+			assert.strictEqual(
+				editMetadata.comment,
+				formatSitelinkEditSummary(
+					'set-both',
+					siteId,
+					testTitle,
+					testBadges,
+					testComment
+				)
+			);
+		} );
+
+		it( 'can replace a sitelink without badges (edit metadata omitted)', async () => {
+			const testTitle = utils.title( 'test-title-' );
+
+			const newSitelink = { title: testTitle };
+			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, newSitelink )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValidResponse( response, 200, newSitelink.title, [] );
+			const editMetadata = await entityHelper.getLatestEditMetadata( testItemId );
+			assert.strictEqual(
+				editMetadata.comment,
+				formatSitelinkEditSummary(
+					'set',
+					siteId,
+					testTitle
+				)
+			);
+
+		} );
+
+		it( 'can add/replace only the badges of a sitelink with edit metadata', async () => {
+			const testTitle = utils.title( 'test-title-' );
+			const testBadges = [ 'Q123', 'Q456' ];
+			const testComment = "omg – i changed a sitelink's badges!";
+
+			await newSetSitelinkRequestBuilder( testItemId, siteId, { title: testTitle } )
+				.makeRequest();
+
+			const sitelinkWithChangedBadges = { title: testTitle, badges: testBadges };
+			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, sitelinkWithChangedBadges )
+				.withJsonBodyParam( 'comment', testComment )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValidResponse( response, 200, sitelinkWithChangedBadges.title, sitelinkWithChangedBadges.badges );
+			const editMetadata = await entityHelper.getLatestEditMetadata( testItemId );
+			assert.strictEqual(
+				editMetadata.comment,
+				formatSitelinkEditSummary(
+					'set-badges',
+					siteId,
+					null,
+					testBadges,
+					testComment
+				)
+			);
 		} );
 
 		it( 'idempotency check: can set the same sitelink twice', async () => {
