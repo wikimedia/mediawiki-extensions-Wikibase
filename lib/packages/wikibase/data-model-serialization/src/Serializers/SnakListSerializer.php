@@ -15,7 +15,7 @@ use Wikibase\DataModel\Snak\SnakList;
  * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon
  */
-class SnakListSerializer implements DispatchableSerializer {
+class SnakListSerializer extends MapSerializer implements DispatchableSerializer {
 
 	/**
 	 * @var Serializer
@@ -25,7 +25,8 @@ class SnakListSerializer implements DispatchableSerializer {
 	/**
 	 * @param Serializer $snakSerializer
 	 */
-	public function __construct( Serializer $snakSerializer ) {
+	public function __construct( Serializer $snakSerializer, bool $useObjectsForEmptyMaps ) {
+		parent::__construct( $useObjectsForEmptyMaps );
 		$this->snakSerializer = $snakSerializer;
 	}
 
@@ -55,11 +56,10 @@ class SnakListSerializer implements DispatchableSerializer {
 				'SnakListSerializer can only serialize SnakList objects'
 			);
 		}
-
-		return $this->getSerialized( $object );
+		return $this->serializeMap( $this->generateSerializedArrayRepresentation( $object ) );
 	}
 
-	private function getSerialized( SnakList $snaks ) {
+	protected function generateSerializedArrayRepresentation( SnakList $snaks ): array {
 		$serialization = [];
 
 		/**
@@ -72,5 +72,4 @@ class SnakListSerializer implements DispatchableSerializer {
 
 		return $serialization;
 	}
-
 }

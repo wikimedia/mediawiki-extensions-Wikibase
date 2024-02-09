@@ -58,7 +58,7 @@ abstract class DispatchableSerializerTest extends TestCase {
 	 * @dataProvider serializationProvider
 	 */
 	public function testSerialization( $serialization, $object ) {
-		$this->assertSame( $serialization, $this->buildSerializer()->serialize( $object ) );
+		$this->assertEquals( $serialization, $this->buildSerializer()->serialize( $object ) );
 	}
 
 	/**

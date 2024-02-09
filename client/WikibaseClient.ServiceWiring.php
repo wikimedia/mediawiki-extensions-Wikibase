@@ -203,6 +203,9 @@ return [
 	},
 
 	'WikibaseClient.CompactBaseDataModelSerializerFactory' => function ( MediaWikiServices $services ): SerializerFactory {
+		/* Note: Unlike in repo, we do not pass
+		 * SerializerFactory::OPTION_SERIALIZE_USE_OBJECTS_FOR_EMPTY_MAPS
+		 * because as of January 2024, Scribunto does not support stdClass objects as Lua arrays */
 		return new SerializerFactory(
 			new DataValueSerializer(),
 			SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +

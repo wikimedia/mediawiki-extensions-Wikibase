@@ -13,28 +13,28 @@ use Wikibase\DataModel\Term\AliasGroupList;
  * @author Addshore
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class AliasGroupListSerializer implements Serializer {
+class AliasGroupListSerializer extends MapSerializer implements Serializer {
 
 	/**
-	 * @var Serializer
+	 * @var AliasGroupSerializer
 	 */
 	private $aliasGroupSerializer;
 
 	/**
 	 * @param Serializer $aliasGroupSerializer
 	 */
-	public function __construct( Serializer $aliasGroupSerializer ) {
+	public function __construct( Serializer $aliasGroupSerializer, bool $useObjectsForEmptyMaps ) {
+		parent::__construct( $useObjectsForEmptyMaps );
 		$this->aliasGroupSerializer = $aliasGroupSerializer;
 	}
 
 	/**
 	 * @param AliasGroupList $object
-	 *
-	 * @return array[]
+	 * @return array|::stdClass
 	 */
 	public function serialize( $object ) {
 		$this->assertIsSerializerFor( $object );
-		return $this->getSerialized( $object );
+		return $this->serializeMap( $this->generateSerializedArrayRepresentation( $object ) );
 	}
 
 	private function assertIsSerializerFor( $object ) {
@@ -46,20 +46,14 @@ class AliasGroupListSerializer implements Serializer {
 		}
 	}
 
-	/**
-	 * @param AliasGroupList $aliasGroupList
-	 *
-	 * @return array[]
-	 */
-	private function getSerialized( AliasGroupList $aliasGroupList ) {
+	protected function generateSerializedArrayRepresentation( AliasGroupList $dataToSerialize ): array {
 		$serialization = [];
 
-		foreach ( $aliasGroupList->getIterator() as $aliasGroup ) {
+		foreach ( $dataToSerialize->getIterator() as $aliasGroup ) {
 			$serialization[$aliasGroup->getLanguageCode()] =
 				$this->aliasGroupSerializer->serialize( $aliasGroup );
 		}
 
 		return $serialization;
 	}
-
 }

@@ -19,22 +19,22 @@ use Wikibase\DataModel\Entity\Item;
 class ItemSerializer implements DispatchableSerializer {
 
 	/**
-	 * @var Serializer
+	 * @var TermListSerializer
 	 */
 	private $termListSerializer;
 
 	/**
-	 * @var Serializer
+	 * @var AliasGroupListSerializer
 	 */
 	private $aliasGroupListSerializer;
 
 	/**
-	 * @var Serializer
+	 * @var StatementListSerializer
 	 */
 	private $statementListSerializer;
 
 	/**
-	 * @var Serializer
+	 * @var SiteLinkListSerializer
 	 */
 	private $siteLinkListSerializer;
 
@@ -43,17 +43,19 @@ class ItemSerializer implements DispatchableSerializer {
 	 * @param Serializer $aliasGroupListSerializer
 	 * @param Serializer $statementListSerializer
 	 * @param Serializer $siteLinkSerializer
+	 * @param bool $useObjectsForEmptyMaps
 	 */
 	public function __construct(
 		Serializer $termListSerializer,
 		Serializer $aliasGroupListSerializer,
 		Serializer $statementListSerializer,
-		Serializer $siteLinkSerializer
+		Serializer $siteLinkSerializer,
+		bool $useObjectsForEmptyMaps
 	) {
 		$this->termListSerializer = $termListSerializer;
 		$this->aliasGroupListSerializer = $aliasGroupListSerializer;
 		$this->statementListSerializer = $statementListSerializer;
-		$this->siteLinkListSerializer = new SiteLinkListSerializer( $siteLinkSerializer );
+		$this->siteLinkListSerializer = new SiteLinkListSerializer( $siteLinkSerializer, $useObjectsForEmptyMaps );
 	}
 
 	/**

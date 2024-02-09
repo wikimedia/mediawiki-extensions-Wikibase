@@ -49,6 +49,8 @@ class SerializerFactory {
 		self::OPTION_SERIALIZE_QUALIFIER_SNAKS_WITHOUT_HASH |
 		self::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH; */
 
+	public const OPTION_SERIALIZE_USE_OBJECTS_FOR_EMPTY_MAPS = 16;
+
 	/**
 	 * @var int
 	 */
@@ -72,6 +74,10 @@ class SerializerFactory {
 
 		$this->dataValueSerializer = $dataValueSerializer;
 		$this->options = $options;
+	}
+
+	private function shouldUseObjectsForEmptyMaps(): bool {
+		return (bool)( $this->options & self::OPTION_SERIALIZE_USE_OBJECTS_FOR_EMPTY_MAPS );
 	}
 
 	/**
@@ -119,6 +125,7 @@ class SerializerFactory {
 			$this->newAliasGroupListSerializer(),
 			$this->newStatementListSerializer(),
 			$this->newSiteLinkSerializer(),
+			$this->shouldUseObjectsForEmptyMaps(),
 		);
 	}
 
@@ -148,7 +155,10 @@ class SerializerFactory {
 	 * @since 1.4
 	 */
 	public function newStatementListSerializer(): StatementListSerializer {
-		return new StatementListSerializer( $this->newStatementSerializer() );
+		return new StatementListSerializer(
+			$this->newStatementSerializer(),
+			$this->shouldUseObjectsForEmptyMaps(),
+		);
 	}
 
 	/**
@@ -190,7 +200,10 @@ class SerializerFactory {
 	 * @since 1.4
 	 */
 	public function newSnakListSerializer( $serializeSnaksWithHash = true ): SnakListSerializer {
-		return new SnakListSerializer( $this->newSnakSerializer( $serializeSnaksWithHash ) );
+		return new SnakListSerializer(
+			$this->newSnakSerializer( $serializeSnaksWithHash ),
+			$this->shouldUseObjectsForEmptyMaps(),
+		);
 	}
 
 	/**
@@ -228,7 +241,10 @@ class SerializerFactory {
 	 * @since 1.5
 	 */
 	public function newTermListSerializer(): TermListSerializer {
-		return new TermListSerializer( $this->newTermSerializer() );
+		return new TermListSerializer(
+			$this->newTermSerializer(),
+			$this->shouldUseObjectsForEmptyMaps(),
+		);
 	}
 
 	/**
@@ -246,7 +262,10 @@ class SerializerFactory {
 	 * @since 1.5
 	 */
 	public function newAliasGroupListSerializer(): AliasGroupListSerializer {
-		return new AliasGroupListSerializer( $this->newAliasGroupSerializer() );
+		return new AliasGroupListSerializer(
+			$this->newAliasGroupSerializer(),
+			$this->shouldUseObjectsForEmptyMaps(),
+		);
 	}
 
 }
