@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Tests\Wikibase\DataModel\Serializers;
 
 use Wikibase\DataModel\Entity\Item;
@@ -26,7 +28,7 @@ use Wikibase\DataModel\Term\TermList;
  */
 class ItemSerializerTest extends DispatchableSerializerTest {
 
-	protected function buildSerializer( bool $useObjectsForEmptyMaps = false ) {
+	protected function buildSerializer( bool $useObjectsForEmptyMaps = false ): ItemSerializer {
 		$termListSerializerMock = $this->createMock( TermListSerializer::class );
 		$termListSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
@@ -97,13 +99,13 @@ class ItemSerializerTest extends DispatchableSerializerTest {
 		);
 	}
 
-	public function serializableProvider() {
+	public function serializableProvider(): array {
 		return [
 			[ new Item() ],
 		];
 	}
 
-	public function nonSerializableProvider() {
+	public function nonSerializableProvider(): array {
 		return [
 			[ 5 ],
 			[ [] ],
@@ -111,7 +113,7 @@ class ItemSerializerTest extends DispatchableSerializerTest {
 		];
 	}
 
-	public function serializationProvider() {
+	public function serializationProvider(): array {
 		$provider = [
 			[
 				[
@@ -245,7 +247,7 @@ class ItemSerializerTest extends DispatchableSerializerTest {
 		return $provider;
 	}
 
-	public function testItemSerializerEmptyMapsSerialization() {
+	public function testItemSerializerEmptyMapsSerialization(): void {
 		$serializer = $this->buildSerializer( false );
 
 		$item = new Item();
@@ -270,7 +272,7 @@ class ItemSerializerTest extends DispatchableSerializerTest {
 		$this->assertEquals( $serial, $serializer->serialize( $item ) );
 	}
 
-	public function testItemSerializerUsesObjectsForEmptyMaps() {
+	public function testItemSerializerUsesObjectsForEmptyMaps(): void {
 		$serializer = $this->buildSerializer( true );
 
 		$item = new Item();

@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Usage;
 
 /**
@@ -14,14 +16,12 @@ class HashUsageAccumulator extends UsageAccumulator {
 	/**
 	 * @var EntityUsage[]
 	 */
-	private $usages = [];
+	private array $usages = [];
 
 	/**
 	 * @see UsageAccumulator::addUsage
-	 *
-	 * @param EntityUsage $usage
 	 */
-	public function addUsage( EntityUsage $usage ) {
+	public function addUsage( EntityUsage $usage ): void {
 		$key = $usage->getIdentityString();
 		$this->usages[$key] = $usage;
 	}
@@ -31,7 +31,7 @@ class HashUsageAccumulator extends UsageAccumulator {
 	 *
 	 * @return EntityUsage[]
 	 */
-	public function getUsages() {
+	public function getUsages(): array {
 		return $this->usages;
 	}
 }

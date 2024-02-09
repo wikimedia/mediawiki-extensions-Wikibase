@@ -47,7 +47,7 @@ class ParserOutputUsageAccumulatorTest extends \PHPUnit\Framework\TestCase {
 		$deduplicator->expects( $this->once() )
 			->method( 'deduplicate' )
 			->with( $this->containsOnlyInstancesOf( EntityUsage::class ) )
-			->willReturn( '<DEDUPLICATED>' );
+			->willReturn( [ '<DEDUPLICATED>' ] );
 
 		$id = new ItemId( 'Q1' );
 		$acc = new ParserOutputUsageAccumulator(
@@ -57,7 +57,7 @@ class ParserOutputUsageAccumulatorTest extends \PHPUnit\Framework\TestCase {
 		);
 		$acc->addUsage( new EntityUsage( $id, EntityUsage::LABEL_USAGE ) );
 		$acc->addUsage( new EntityUsage( $id, EntityUsage::DESCRIPTION_USAGE ) );
-		$this->assertSame( '<DEDUPLICATED>', $acc->getUsages() );
+		$this->assertSame( [ '<DEDUPLICATED>' ], $acc->getUsages() );
 	}
 
 }

@@ -1,7 +1,10 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Tests\Wikibase\DataModel\Serializers;
 
+use Serializers\DispatchableSerializer;
 use Serializers\Serializer;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
@@ -16,7 +19,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
  */
 class ReferenceListSerializerTest extends DispatchableSerializerTest {
 
-	protected function buildSerializer() {
+	protected function buildSerializer(): DispatchableSerializer {
 		$referenceSerializerFake = $this->createMock( Serializer::class );
 		$referenceSerializerFake->expects( $this->any() )
 			->method( 'serialize' )
@@ -28,7 +31,7 @@ class ReferenceListSerializerTest extends DispatchableSerializerTest {
 		return new ReferenceListSerializer( $referenceSerializerFake );
 	}
 
-	public function serializableProvider() {
+	public function serializableProvider(): array {
 		return [
 			[
 				new ReferenceList(),
@@ -41,7 +44,7 @@ class ReferenceListSerializerTest extends DispatchableSerializerTest {
 		];
 	}
 
-	public function nonSerializableProvider() {
+	public function nonSerializableProvider(): array {
 		return [
 			[
 				5,
@@ -55,7 +58,7 @@ class ReferenceListSerializerTest extends DispatchableSerializerTest {
 		];
 	}
 
-	public function serializationProvider() {
+	public function serializationProvider(): array {
 		return [
 			[
 				[],

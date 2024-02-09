@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 use MediaWiki\MediaWikiServices;
 use Wikibase\Lib\Modules\DataTypesModule;
 use Wikibase\Lib\Modules\MediaWikiConfigModule;

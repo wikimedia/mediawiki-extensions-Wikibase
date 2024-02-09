@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Dumpers;
 
 use InvalidArgumentException;
@@ -28,7 +30,7 @@ abstract class DumpGenerator {
 	 * @var int The max number of entities to process in a single batch.
 	 *      Also controls the interval for progress reports.
 	 */
-	protected $batchSize = 100;
+	protected int $batchSize = 100;
 
 	/**
 	 * @var resource File handle for output
@@ -38,39 +40,28 @@ abstract class DumpGenerator {
 	/**
 	 * @var int Total number of shards a request should be split into
 	 */
-	protected $shardingFactor = 1;
+	protected int $shardingFactor = 1;
 
 	/**
 	 * @var int Number of the requested shard
 	 */
-	protected $shard = 0;
+	protected int $shard = 0;
 
-	/**
-	 * @var MessageReporter
-	 */
-	protected $progressReporter;
+	protected MessageReporter $progressReporter;
 
-	/**
-	 * @var ExceptionHandler
-	 */
-	protected $exceptionHandler;
+	protected ExceptionHandler $exceptionHandler;
 
-	/**
-	 * @var EntityPrefetcher
-	 */
-	protected $entityPrefetcher;
+	protected EntityPrefetcher $entityPrefetcher;
 
 	/**
 	 * @var int[]|null String to int map of types to include.
 	 */
-	protected $entityTypes;
+	protected ?array $entityTypes = null;
 
 	/**
 	 * Entity count limit - dump will generate this many
-	 *
-	 * @var int
 	 */
-	protected $limit = 0;
+	protected int $limit = 0;
 
 	/** @var callable Callback called once per batch. */
 	private $batchCallback;
@@ -97,11 +88,9 @@ abstract class DumpGenerator {
 
 	/**
 	 * Set maximum number of entities produced
-	 *
-	 * @param int $limit
 	 */
-	public function setLimit( $limit ) {
-		$this->limit = (int)$limit;
+	public function setLimit( int $limit ): void {
+		$this->limit = $limit;
 	}
 
 	/**
@@ -109,12 +98,10 @@ abstract class DumpGenerator {
 	 * when listing IDs via the EntityIdPager::getNextBatchOfIds() method, and
 	 * also controls the interval of progress reports.
 	 *
-	 * @param int $batchSize
-	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function setBatchSize( $batchSize ) {
-		if ( !is_int( $batchSize ) || $batchSize < 1 ) {
+	public function setBatchSize( int $batchSize ): void {
+		if ( $batchSize < 1 ) {
 			throw new InvalidArgumentException( '$batchSize must be an integer >= 1' );
 		}
 
@@ -125,7 +112,7 @@ abstract class DumpGenerator {
 		$this->progressReporter = $progressReporter;
 	}
 
-	public function setExceptionHandler( ExceptionHandler $exceptionHandler ) {
+	public function setExceptionHandler( ExceptionHandler $exceptionHandler ): void {
 		$this->exceptionHandler = $exceptionHandler;
 	}
 
@@ -139,7 +126,7 @@ abstract class DumpGenerator {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function setShardingFilter( $shardingFactor, $shard ) {
+	public function setShardingFilter( $shardingFactor, $shard ): void {
 		if ( !is_int( $shardingFactor ) || $shardingFactor < 1 ) {
 			throw new InvalidArgumentException( '$shardingFactor must be a positive integer.' );
 		}
@@ -161,7 +148,7 @@ abstract class DumpGenerator {
 	 *
 	 * @param string[]|null $types The desired types (use null for any type).
 	 */
-	public function setEntityTypesFilter( $types ) {
+	public function setEntityTypesFilter( ?array $types ): void {
 		if ( is_array( $types ) ) {
 			$types = array_flip( $types );
 		}
@@ -171,15 +158,15 @@ abstract class DumpGenerator {
 	/**
 	 * Set a callback that is called once per batch, at the beginning of each batch.
 	 */
-	public function setBatchCallback( callable $callback ) {
+	public function setBatchCallback( callable $callback ): void {
 		$this->batchCallback = $callback;
 	}
 
-	private function idMatchesFilters( EntityId $entityId ) {
+	private function idMatchesFilters( EntityId $entityId ): bool {
 		return $this->idMatchesShard( $entityId ) && $this->idMatchesType( $entityId );
 	}
 
-	private function idMatchesShard( EntityId $entityId ) {
+	private function idMatchesShard( EntityId $entityId ): bool {
 		// Shorten out
 		if ( $this->shardingFactor === 1 ) {
 			return true;
@@ -193,16 +180,14 @@ abstract class DumpGenerator {
 		return $shard === $this->shard;
 	}
 
-	private function idMatchesType( EntityId $entityId ) {
+	private function idMatchesType( EntityId $entityId ): bool {
 		return $this->entityTypes === null || ( array_key_exists( $entityId->getEntityType(), $this->entityTypes ) );
 	}
 
 	/**
 	 * Writers the given string to the output provided to the constructor.
-	 *
-	 * @param string $data
 	 */
-	protected function writeToDump( $data ) {
+	protected function writeToDump( string $data ): void {
 		//TODO: use output stream object
 		fwrite( $this->out, $data );
 	}
@@ -210,14 +195,14 @@ abstract class DumpGenerator {
 	/**
 	 * Do something before dumping data
 	 */
-	protected function preDump() {
+	protected function preDump(): void {
 		// Nothing by default
 	}
 
 	/**
 	 * Do something after dumping data
 	 */
-	protected function postDump() {
+	protected function postDump(): void {
 		// Nothing by default
 	}
 
@@ -225,34 +210,28 @@ abstract class DumpGenerator {
 	 * Do something before dumping a batch of entities
 	 * @param EntityId[] $entities
 	 */
-	protected function preBatchDump( $entities ) {
+	protected function preBatchDump( array $entities ): void {
 		$this->entityPrefetcher->prefetch( $entities );
 	}
 
 	/**
 	 * Do something before dumping entity
-	 *
-	 * @param int $dumpCount
 	 */
-	protected function preEntityDump( $dumpCount ) {
+	protected function preEntityDump( int $dumpCount ): void {
 		// Nothing by default
 	}
 
 	/**
 	 * Do something after dumping entity
-	 *
-	 * @param int $dumpCount
 	 */
-	protected function postEntityDump( $dumpCount ) {
+	protected function postEntityDump( int $dumpCount ): void {
 		// Nothing by default
 	}
 
 	/**
 	 * Generates a dump, writing to the file handle provided to the constructor.
-	 *
-	 * @param EntityIdPager $idPager
 	 */
-	public function generateDump( EntityIdPager $idPager ) {
+	public function generateDump( EntityIdPager $idPager ): void {
 		$dumpCount = 0;
 
 		$this->preDump();
@@ -298,7 +277,7 @@ abstract class DumpGenerator {
 	 * @param EntityId[] $entityIds
 	 * @param int &$dumpCount The number of entities already dumped (will be updated).
 	 */
-	private function dumpEntities( array $entityIds, &$dumpCount ) {
+	private function dumpEntities( array $entityIds, int &$dumpCount ): void {
 		$toLoad = [];
 		foreach ( $entityIds as $entityId ) {
 			if ( $this->idMatchesFilters( $entityId ) ) {
@@ -338,6 +317,6 @@ abstract class DumpGenerator {
 	 * @throws StorageException
 	 * @return string|null
 	 */
-	abstract protected function generateDumpForEntityId( EntityId $entityId );
+	abstract protected function generateDumpForEntityId( EntityId $entityId ): ?string;
 
 }

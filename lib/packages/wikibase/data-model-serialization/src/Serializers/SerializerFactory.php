@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\DataModel\Serializers;
 
 use InvalidArgumentException;
@@ -51,15 +53,9 @@ class SerializerFactory {
 
 	public const OPTION_SERIALIZE_USE_OBJECTS_FOR_EMPTY_MAPS = 16;
 
-	/**
-	 * @var int
-	 */
-	private $options;
+	private int $options;
 
-	/**
-	 * @var Serializer
-	 */
-	private $dataValueSerializer;
+	private Serializer $dataValueSerializer;
 
 	/**
 	 * @param Serializer $dataValueSerializer serializer for DataValue objects
@@ -80,24 +76,15 @@ class SerializerFactory {
 		return (bool)( $this->options & self::OPTION_SERIALIZE_USE_OBJECTS_FOR_EMPTY_MAPS );
 	}
 
-	/**
-	 * @return bool
-	 */
-	private function shouldSerializeMainSnaksWithHash() {
+	private function shouldSerializeMainSnaksWithHash(): bool {
 		return !(bool)( $this->options & self::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH );
 	}
 
-	/**
-	 * @return bool
-	 */
-	private function shouldSerializeQualifierSnaksWithHash() {
+	private function shouldSerializeQualifierSnaksWithHash(): bool {
 		return !(bool)( $this->options & self::OPTION_SERIALIZE_QUALIFIER_SNAKS_WITHOUT_HASH );
 	}
 
-	/**
-	 * @return bool
-	 */
-	private function shouldSerializeReferenceSnaksWithHash() {
+	private function shouldSerializeReferenceSnaksWithHash(): bool {
 		return !(bool)( $this->options & self::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH );
 	}
 
@@ -107,7 +94,7 @@ class SerializerFactory {
 	 *  and properties this is not what you want. If in doubt, favor a custom
 	 *  `DispatchingSerializer` containing the exact entity serializers you need.
 	 */
-	public function newEntitySerializer() {
+	public function newEntitySerializer(): DispatchableSerializer {
 		return new DispatchingSerializer( [
 			$this->newItemSerializer(),
 			$this->newPropertySerializer(),

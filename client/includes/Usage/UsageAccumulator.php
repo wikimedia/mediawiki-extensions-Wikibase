@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Usage;
 
 use Parser;
@@ -17,28 +19,20 @@ abstract class UsageAccumulator {
 
 	/**
 	 * Registers usage of the given aspect of the given entity.
-	 *
-	 * @param EntityUsage $usage
 	 */
-	abstract public function addUsage( EntityUsage $usage );
+	abstract public function addUsage( EntityUsage $usage ): void;
 
 	/**
 	 * Registers the usage of an entity's label (in the given language).
-	 *
-	 * @param EntityId $id
-	 * @param string|null $languageCode
 	 */
-	public function addLabelUsage( EntityId $id, $languageCode = null ) {
+	public function addLabelUsage( EntityId $id, ?string $languageCode = null ): void {
 		$this->addUsage( new EntityUsage( $id, EntityUsage::LABEL_USAGE, $languageCode ) );
 	}
 
 	/**
 	 * Registers the usage of an entity's description (in the given language).
-	 *
-	 * @param EntityId $id
-	 * @param string|null $languageCode
 	 */
-	public function addDescriptionUsage( EntityId $id, $languageCode = null ) {
+	public function addDescriptionUsage( EntityId $id, ?string $languageCode = null ): void {
 		$this->addUsage( new EntityUsage( $id, EntityUsage::DESCRIPTION_USAGE, $languageCode ) );
 	}
 
@@ -46,19 +40,15 @@ abstract class UsageAccumulator {
 	 * Registers the usage of an entity's local page title,
 	 * i.e. the title of the local (client) page linked to the entity,
 	 * e.g. to refer to the corresponding page on the local wiki.
-	 *
-	 * @param EntityId $id
 	 */
-	public function addTitleUsage( EntityId $id ) {
+	public function addTitleUsage( EntityId $id ): void {
 		$this->addUsage( new EntityUsage( $id, EntityUsage::TITLE_USAGE ) );
 	}
 
 	/**
 	 * Registers the usage of an entity's sitelinks, e.g. to generate language links.
-	 *
-	 * @param EntityId $id
 	 */
-	public function addSiteLinksUsage( EntityId $id ) {
+	public function addSiteLinksUsage( EntityId $id ): void {
 		$this->addUsage( new EntityUsage( $id, EntityUsage::SITELINK_USAGE ) );
 	}
 
@@ -68,7 +58,7 @@ abstract class UsageAccumulator {
 	 * @param EntityId $id
 	 * @param NumericPropertyId $propertyId The NumericPropertyId of Statements that are used.
 	 */
-	public function addStatementUsage( EntityId $id, NumericPropertyId $propertyId ) {
+	public function addStatementUsage( EntityId $id, NumericPropertyId $propertyId ): void {
 		$this->addUsage( new EntityUsage( $id, EntityUsage::STATEMENT_USAGE, $propertyId->getSerialization() ) );
 	}
 
@@ -76,20 +66,16 @@ abstract class UsageAccumulator {
 	 * Registers the usage of other (i.e. not label, sitelink, or title) of an
 	 * entity (e.g. access to statements or labels in labels a language other
 	 * than the content language).
-	 *
-	 * @param EntityId $id
 	 */
-	public function addOtherUsage( EntityId $id ) {
+	public function addOtherUsage( EntityId $id ): void {
 		$this->addUsage( new EntityUsage( $id, EntityUsage::OTHER_USAGE ) );
 	}
 
 	/**
 	 * Registers the usage of any/all data of an entity (e.g. when accessed
 	 * programmatically using Lua).
-	 *
-	 * @param EntityId $id
 	 */
-	public function addAllUsage( EntityId $id ) {
+	public function addAllUsage( EntityId $id ): void {
 		$this->addUsage( new EntityUsage( $id, EntityUsage::ALL_USAGE ) );
 	}
 
@@ -98,7 +84,7 @@ abstract class UsageAccumulator {
 	 *
 	 * @return EntityUsage[]
 	 */
-	abstract public function getUsages();
+	abstract public function getUsages(): array;
 
 	/**
 	 * Returns true if the UsageAccumulator has cached a reference to a different

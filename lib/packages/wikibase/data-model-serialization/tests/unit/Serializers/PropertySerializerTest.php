@@ -1,7 +1,10 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Tests\Wikibase\DataModel\Serializers;
 
+use Serializers\DispatchableSerializer;
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\NumericPropertyId;
@@ -21,7 +24,7 @@ use Wikibase\DataModel\Term\TermList;
  */
 class PropertySerializerTest extends DispatchableSerializerTest {
 
-	protected function buildSerializer() {
+	protected function buildSerializer(): DispatchableSerializer {
 		$termListSerializerMock = $this->createMock( Serializer::class );
 		$termListSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
@@ -77,7 +80,7 @@ class PropertySerializerTest extends DispatchableSerializerTest {
 		);
 	}
 
-	public function serializableProvider() {
+	public function serializableProvider(): array {
 		return [
 			[
 				Property::newFromType( 'string' ),
@@ -85,7 +88,7 @@ class PropertySerializerTest extends DispatchableSerializerTest {
 		];
 	}
 
-	public function nonSerializableProvider() {
+	public function nonSerializableProvider(): array {
 		return [
 			[
 				5,
@@ -99,7 +102,7 @@ class PropertySerializerTest extends DispatchableSerializerTest {
 		];
 	}
 
-	public function serializationProvider() {
+	public function serializationProvider(): array {
 		$property = Property::newFromType( 'string' );
 
 		$provider = [

@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Tests\Wikibase\DataModel\Serializers;
 
 use PHPUnit\Framework\TestCase;
@@ -13,38 +15,35 @@ use Serializers\Exceptions\UnsupportedObjectException;
  */
 abstract class DispatchableSerializerTest extends TestCase {
 
-	/**
-	 * @return DispatchableSerializer
-	 */
-	abstract protected function buildSerializer();
+	abstract protected function buildSerializer(): DispatchableSerializer;
 
-	public function testImplementsDispatchableSerializerInterface() {
+	public function testImplementsDispatchableSerializerInterface(): void {
 		$this->assertInstanceOf( DispatchableSerializer::class, $this->buildSerializer() );
 	}
 
 	/**
 	 * @dataProvider serializableProvider
 	 */
-	public function testIsSerializerForReturnsTrue( $serializable ) {
+	public function testIsSerializerForReturnsTrue( $serializable ): void {
 		$this->assertTrue( $this->buildSerializer()->isSerializerFor( $serializable ) );
 	}
 
 	/**
 	 * @return array[] things that are serialized by the serializer
 	 */
-	abstract public function serializableProvider();
+	abstract public function serializableProvider(): array;
 
 	/**
 	 * @dataProvider nonSerializableProvider
 	 */
-	public function testIsSerializerForReturnsFalse( $nonSerializable ) {
+	public function testIsSerializerForReturnsFalse( $nonSerializable ): void {
 		$this->assertFalse( $this->buildSerializer()->isSerializerFor( $nonSerializable ) );
 	}
 
 	/**
 	 * @dataProvider nonSerializableProvider
 	 */
-	public function testSerializeThrowsUnsupportedObjectException( $nonSerializable ) {
+	public function testSerializeThrowsUnsupportedObjectException( $nonSerializable ): void {
 		$this->expectException( UnsupportedObjectException::class );
 		$this->buildSerializer()->serialize( $nonSerializable );
 	}
@@ -52,18 +51,18 @@ abstract class DispatchableSerializerTest extends TestCase {
 	/**
 	 * @return array[] things that aren't serialized by the serializer
 	 */
-	abstract public function nonSerializableProvider();
+	abstract public function nonSerializableProvider(): array;
 
 	/**
 	 * @dataProvider serializationProvider
 	 */
-	public function testSerialization( $serialization, $object ) {
+	public function testSerialization( $serialization, $object ): void {
 		$this->assertEquals( $serialization, $this->buildSerializer()->serialize( $object ) );
 	}
 
 	/**
 	 * @return array[] an array of array( serialization, object to serialize)
 	 */
-	abstract public function serializationProvider();
+	abstract public function serializationProvider(): array;
 
 }
