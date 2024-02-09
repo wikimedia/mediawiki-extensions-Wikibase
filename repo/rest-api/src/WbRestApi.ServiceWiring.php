@@ -105,7 +105,6 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription\SetPropert
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\SetPropertyLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\SetSitelink\SetSitelink;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\SiteIdValidator;
@@ -160,7 +159,7 @@ return [
 	// The rule is re-enabled further down. The sniff is unable to handle class constant keys properly.
 
 	VRD::ITEM_ID_REQUEST_VALIDATING_DESERIALIZER => function(): ItemIdRequestValidatingDeserializer {
-		return new ItemIdRequestValidatingDeserializer( new ItemIdValidator() );
+		return new ItemIdRequestValidatingDeserializer();
 	},
 
 	VRD::PROPERTY_ID_REQUEST_VALIDATING_DESERIALIZER => function(): MappedRequestValidatingDeserializer {
