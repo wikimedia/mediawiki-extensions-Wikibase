@@ -50,7 +50,7 @@ class SetSitelinkTest extends TestCase {
 		$itemId = new ItemId( 'Q123' );
 		$siteId = TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0];
 		$title = 'Potato';
-		$badge = 'Q567';
+		$badge = TestValidatingRequestDeserializer::ALLOWED_BADGES[ 0 ];
 
 		$itemRepo = new InMemoryItemRepository();
 		$itemRepo->addItem( NewItem::withId( $itemId )->build() );
@@ -94,7 +94,7 @@ class SetSitelinkTest extends TestCase {
 		$itemId = new ItemId( 'Q123' );
 		$siteId = TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0];
 		$title = 'New_Potato';
-		$badge = 'Q567';
+		$badge = TestValidatingRequestDeserializer::ALLOWED_BADGES[ 1 ];
 		$item = NewItem::withId( $itemId )->andSiteLink( $siteId, 'Old_Potato', [] )->build();
 		$replacedSitelink = $item->getSiteLink( $siteId );
 
@@ -161,7 +161,7 @@ class SetSitelinkTest extends TestCase {
 				new SetSitelinkRequest(
 					'Q123',
 					'enwiki',
-					[ 'title' => 'title', 'badges' => [ 'Q321' ] ],
+					[ 'title' => 'title', 'badges' => [ TestValidatingRequestDeserializer::ALLOWED_BADGES[ 2 ] ] ],
 					[],
 					false,
 					'',
@@ -191,7 +191,7 @@ class SetSitelinkTest extends TestCase {
 				new SetSitelinkRequest(
 					"$itemId",
 					'enwiki',
-					[ 'title' => 'title', 'badges' => [ 'Q321' ] ],
+					[ 'title' => 'title', 'badges' => [ TestValidatingRequestDeserializer::ALLOWED_BADGES[ 0 ] ] ],
 					[],
 					false,
 					null,

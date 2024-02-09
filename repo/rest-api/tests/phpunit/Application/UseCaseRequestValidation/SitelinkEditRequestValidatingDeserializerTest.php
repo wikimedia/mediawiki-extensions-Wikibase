@@ -78,6 +78,21 @@ class SitelinkEditRequestValidatingDeserializerTest extends TestCase {
 			UseCaseError::INVALID_TITLE_FIELD,
 			'Not a valid input for title field',
 		];
+		yield 'badges field is not an array' => [
+			new ValidationError( SitelinkValidator::CODE_INVALID_BADGES_TYPE ),
+			UseCaseError::INVALID_SITELINK_BADGES_FORMAT,
+			"Value of 'badges' field is not a list",
+		];
+		yield 'badge is not a valid item id' => [
+			new ValidationError( SitelinkValidator::CODE_INVALID_BADGE, [ SitelinkValidator::CONTEXT_BADGE => 'invalid' ] ),
+			UseCaseError::INVALID_INPUT_SITELINK_BADGE,
+			'Badge input is not an item ID: invalid',
+		];
+		yield 'badge is not allowed' => [
+			new ValidationError( SitelinkValidator::CODE_BADGE_NOT_ALLOWED, [ SitelinkValidator::CONTEXT_BADGE => 'Q654' ] ),
+			UseCaseError::ITEM_NOT_A_BADGE,
+			'Item ID provided as badge is not allowed as a badge: Q654',
+		];
 	}
 
 	private function newValidatingDeserializer(): SitelinkEditRequestValidatingDeserializer {

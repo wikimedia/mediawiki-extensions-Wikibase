@@ -2,6 +2,7 @@
 
 const { RequestBuilder } = require( './RequestBuilder' );
 module.exports = {
+	ALLOWED_BADGES: [ 'Q777', 'Q888', 'Q999' ],
 
 	newGetItemRequestBuilder( itemId ) {
 		return new RequestBuilder()
@@ -138,7 +139,8 @@ module.exports = {
 		return new RequestBuilder()
 			.withRoute( 'PATCH', '/entities/items/{item_id}/sitelinks' )
 			.withPathParam( 'item_id', itemId )
-			.withJsonBodyParam( 'patch', patch );
+			.withJsonBodyParam( 'patch', patch )
+			.withHeader( 'X-Wikibase-CI-Badges', module.exports.ALLOWED_BADGES.join( ',' ) );
 	},
 
 	newGetItemLabelRequestBuilder( itemId, languageCode ) {
@@ -160,7 +162,8 @@ module.exports = {
 			.withRoute( 'PUT', '/entities/items/{item_id}/sitelinks/{site_id}' )
 			.withPathParam( 'item_id', itemId )
 			.withPathParam( 'site_id', siteId )
-			.withJsonBodyParam( 'sitelink', sitelink );
+			.withJsonBodyParam( 'sitelink', sitelink )
+			.withHeader( 'X-Wikibase-CI-Badges', module.exports.ALLOWED_BADGES.join( ',' ) );
 	},
 
 	newSetItemLabelRequestBuilder( itemId, languageCode, label ) {

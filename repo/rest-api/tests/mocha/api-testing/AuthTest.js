@@ -77,7 +77,7 @@ describe( 'Auth', () => {
 					{
 						op: 'add',
 						path: `/${itemRequestInputs.siteId}`,
-						value: { title: utils.title( 'test-title-' ), badges: [ 'Q123' ] }
+						value: { title: utils.title( 'test-title-' ) }
 					}
 				]
 			),

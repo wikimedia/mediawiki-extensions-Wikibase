@@ -48,6 +48,8 @@ class PatchSitelinksTest extends TestCase {
 	private SitelinksDeserializer $sitelinksDeserializer;
 	private ItemUpdater $itemUpdater;
 
+	private const ALLOWED_BADGES = [ 'Q999' ];
+
 	protected function setUp(): void {
 		parent::setUp();
 
@@ -58,13 +60,13 @@ class PatchSitelinksTest extends TestCase {
 		$this->sitelinksSerializer = new SitelinksSerializer( new SitelinkSerializer() );
 		$this->patcher = new PatchJson( new JsonDiffJsonPatcher() );
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
-		$this->sitelinksDeserializer = new SitelinksDeserializer( new SitelinkDeserializer( '/\?/' ) );
+		$this->sitelinksDeserializer = new SitelinksDeserializer( new SitelinkDeserializer( '/\?/', self::ALLOWED_BADGES ) );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
 	}
 
 	public function testHappyPath(): void {
 		$itemId = new ItemId( 'Q123' );
-		$badgeItemId = new ItemId( 'Q321' );
+		$badgeItemId = new ItemId( self::ALLOWED_BADGES[ 0 ] );
 
 		$enSiteId = TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0];
 		$enSitelinkTitle = 'enTitle';

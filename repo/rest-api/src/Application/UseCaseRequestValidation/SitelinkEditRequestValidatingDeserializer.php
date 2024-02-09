@@ -40,6 +40,23 @@ class SitelinkEditRequestValidatingDeserializer {
 						UseCaseError::INVALID_TITLE_FIELD,
 						'Not a valid input for title field'
 					);
+				case SitelinkValidator::CODE_INVALID_BADGES_TYPE:
+					throw new UseCaseError(
+						UseCaseError::INVALID_SITELINK_BADGES_FORMAT,
+						"Value of 'badges' field is not a list"
+					);
+				case SitelinkValidator::CODE_INVALID_BADGE:
+					$badge = $validationError->getContext()[ SitelinkValidator::CONTEXT_BADGE ];
+					throw new UseCaseError(
+						UseCaseError::INVALID_INPUT_SITELINK_BADGE,
+						"Badge input is not an item ID: $badge"
+					);
+				case SitelinkValidator::CODE_BADGE_NOT_ALLOWED:
+					$badge = $validationError->getContext()[ SitelinkValidator::CONTEXT_BADGE ];
+					throw new UseCaseError(
+						UseCaseError::ITEM_NOT_A_BADGE,
+						"Item ID provided as badge is not allowed as a badge: $badge"
+					);
 				default:
 					throw new LogicException( "Unknown validation error code: {$validationError->getCode()}" );
 			}

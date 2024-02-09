@@ -135,7 +135,7 @@ module.exports.editRequestsOnItem = [
 	( { itemId, siteId } ) => rbf.newSetSitelinkRequestBuilder(
 		itemId,
 		siteId,
-		{ title: utils.title( 'test-title-' ), badges: [ 'Q123' ] }
+		{ title: utils.title( 'test-title-' ), badges: [ rbf.ALLOWED_BADGES[ 0 ] ] }
 	),
 	( { itemId } ) => rbf.newPatchItemLabelsRequestBuilder(
 		itemId,

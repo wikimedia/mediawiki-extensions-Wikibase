@@ -4,8 +4,11 @@ namespace Wikibase\Repo\RestApi\Application\Validation;
 
 use LogicException;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\Repo\RestApi\Application\Serialization\BadgeNotAllowed;
 use Wikibase\Repo\RestApi\Application\Serialization\EmptySitelinkException;
 use Wikibase\Repo\RestApi\Application\Serialization\InvalidFieldException;
+use Wikibase\Repo\RestApi\Application\Serialization\InvalidFieldTypeException;
+use Wikibase\Repo\RestApi\Application\Serialization\InvalidSitelinkBadgeException;
 use Wikibase\Repo\RestApi\Application\Serialization\MissingFieldException;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
 
@@ -17,6 +20,12 @@ class SitelinkValidator {
 	public const CODE_TITLE_MISSING = 'title-missing';
 	public const CODE_EMPTY_TITLE = 'empty-title';
 	public const CODE_INVALID_TITLE = 'invalid-title';
+
+	public const CODE_INVALID_BADGES_TYPE = 'invalid-badges-type';
+	public const CODE_INVALID_BADGE = 'invalid-badge';
+	public const CODE_BADGE_NOT_ALLOWED = 'badge-not-allowed';
+
+	public const CONTEXT_BADGE = 'badge';
 
 	private SitelinkDeserializer $sitelinkDeserializer;
 
@@ -34,12 +43,19 @@ class SitelinkValidator {
 		} catch ( EmptySitelinkException $e ) {
 			return new ValidationError( self::CODE_EMPTY_TITLE );
 		} catch ( InvalidFieldException $e ) {
-			switch ( $e->getField() ) {
-				case 'title':
-					return new ValidationError( self::CODE_INVALID_TITLE );
-				default:
-					throw new LogicException( "Unknown field '{$e->getField()}' in InvalidFieldException}" );
+			if ( $e->getField() !== 'title' ) {
+				throw new LogicException( "Unknown field '{$e->getField()}' in InvalidFieldException}" );
 			}
+			return new ValidationError( self::CODE_INVALID_TITLE );
+		} catch ( InvalidFieldTypeException $e ) {
+			if ( $e->getField() !== 'badges' ) {
+				throw new LogicException( "Unknown field '{$e->getField()}' in InvalidFieldTypeException}" );
+			}
+			return new ValidationError( self::CODE_INVALID_BADGES_TYPE );
+		} catch ( InvalidSitelinkBadgeException $e ) {
+			return new ValidationError( self::CODE_INVALID_BADGE, [ self::CONTEXT_BADGE => $e->getValue() ] );
+		} catch ( BadgeNotAllowed $e ) {
+			return new ValidationError( self::CODE_BADGE_NOT_ALLOWED, [ self::CONTEXT_BADGE => $e->getBadge() ] );
 		}
 
 		return null;
@@ -52,4 +68,5 @@ class SitelinkValidator {
 
 		return $this->deserializedSitelink;
 	}
+
 }

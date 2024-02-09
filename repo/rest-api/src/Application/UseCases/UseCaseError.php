@@ -70,6 +70,9 @@ class UseCaseError extends UseCaseException {
 	public const SITELINK_DATA_MISSING_TITLE = 'sitelink-data-missing-title';
 	public const TITLE_FIELD_EMPTY = 'title-field-empty';
 	public const INVALID_TITLE_FIELD = 'invalid-title-field';
+	public const INVALID_INPUT_SITELINK_BADGE = 'invalid-input-sitelink-badge';
+	public const INVALID_SITELINK_BADGES_FORMAT = 'invalid-sitelink-badges-format';
+	public const ITEM_NOT_A_BADGE = 'item-not-a-badge';
 	public const STATEMENT_DATA_INVALID_FIELD = 'statement-data-invalid-field';
 	public const STATEMENT_DATA_MISSING_FIELD = 'statement-data-missing-field';
 	public const STATEMENT_NOT_FOUND = 'statement-not-found';
@@ -173,6 +176,9 @@ class UseCaseError extends UseCaseException {
 		self::SITELINK_DATA_MISSING_TITLE => [],
 		self::TITLE_FIELD_EMPTY => [],
 		self::INVALID_TITLE_FIELD => [],
+		self::INVALID_INPUT_SITELINK_BADGE => [],
+		self::INVALID_SITELINK_BADGES_FORMAT => [],
+		self::ITEM_NOT_A_BADGE => [],
 		self::UNEXPECTED_ERROR => [],
 	];
 

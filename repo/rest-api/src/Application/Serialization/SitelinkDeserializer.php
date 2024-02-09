@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Application\Serialization;
 
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 
@@ -11,9 +12,15 @@ use Wikibase\DataModel\SiteLink;
 class SitelinkDeserializer {
 
 	private string $invalidTitleRegex;
+	private array $allowedBadgeItemIds;
 
-	public function __construct( string $invalidTitleRegex ) {
+	/**
+	 * @param string $invalidTitleRegex
+	 * @param string[] $allowedBadgeItemIds
+	 */
+	public function __construct( string $invalidTitleRegex, array $allowedBadgeItemIds ) {
 		$this->invalidTitleRegex = $invalidTitleRegex;
+		$this->allowedBadgeItemIds = $allowedBadgeItemIds;
 	}
 
 	public function deserialize( string $siteId, array $serialization ): SiteLink {
@@ -29,10 +36,22 @@ class SitelinkDeserializer {
 			throw new InvalidFieldException( 'title', $trimmedTitle );
 		}
 
-		$serialization['badges'] ??= [];
+		$serialization[ 'badges' ] ??= [];
+		if ( !is_array( $serialization[ 'badges' ] ) ) {
+			throw new InvalidFieldTypeException( 'badges' );
+		}
+
 		$badges = [];
 		foreach ( $serialization[ 'badges' ] as $badge ) {
-			$badges[] = new ItemId( $badge );
+			try {
+				$badgeItemId = new ItemId( $badge );
+			} catch ( InvalidArgumentException $e ) {
+				throw new InvalidSitelinkBadgeException( $badge );
+			}
+			if ( !in_array( (string)$badgeItemId, $this->allowedBadgeItemIds ) ) {
+				throw new BadgeNotAllowed( $badgeItemId );
+			}
+			$badges[] = $badgeItemId;
 		}
 
 		return new SiteLink( $siteId, $trimmedTitle, $badges );

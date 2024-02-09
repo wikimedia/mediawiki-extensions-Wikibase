@@ -24,6 +24,7 @@ use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\BotRightCheckMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\WbRestApi;
+use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\ParamValidator\ParamValidator;
 
 /**
@@ -67,7 +68,10 @@ class PatchSitelinksRouteHandler extends SimpleHandler {
 				new PatchJson( new JsonDiffJsonPatcher() ),
 				WbRestApi::getItemDataRetriever(),
 				new SitelinksDeserializer(
-					new SiteLinkDeserializer( MediaWikiTitleCodec::getTitleInvalidRegex() )
+					new SitelinkDeserializer(
+						MediaWikiTitleCodec::getTitleInvalidRegex(),
+						array_keys( WikibaseRepo::getSettings()->getSetting( 'badgeItems' ) )
+					)
 				),
 				WbRestApi::getItemUpdater()
 			),

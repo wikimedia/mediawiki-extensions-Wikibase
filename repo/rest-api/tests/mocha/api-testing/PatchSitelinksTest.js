@@ -3,7 +3,7 @@
 const { assert, utils, action } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
-const { newPatchSitelinksRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { newPatchSitelinksRequestBuilder, ALLOWED_BADGES } = require( '../helpers/RequestBuilderFactory' );
 const { createLocalSitelink, getLocalSiteId } = require( '../helpers/entityHelper' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { formatSitelinksEditSummary } = require( '../helpers/formatEditSummaries' );
@@ -55,7 +55,7 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 
 	describe( '200 OK', () => {
 		it( 'can add a sitelink', async () => {
-			const sitelink = { title: utils.title( 'test-title-' ), badges: [ 'Q123' ] };
+			const sitelink = { title: utils.title( 'test-title-' ), badges: [ ALLOWED_BADGES[ 0 ] ] };
 			const response = await newPatchSitelinksRequestBuilder(
 				testItemId,
 				[ { op: 'add', path: `/${siteId}`, value: sitelink } ]
@@ -65,7 +65,7 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'can patch sitelinks with edit metadata', async () => {
-			const sitelink = { title: utils.title( 'test-title-' ), badges: [ 'Q123' ] };
+			const sitelink = { title: utils.title( 'test-title-' ), badges: [ ALLOWED_BADGES[ 1 ] ] };
 			const user = await action.robby(); // robby is a bot
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test' );
 			const editSummary = 'I made a patch';

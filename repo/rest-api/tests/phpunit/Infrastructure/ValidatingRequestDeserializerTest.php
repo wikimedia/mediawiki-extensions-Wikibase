@@ -46,6 +46,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\Model\UserProvidedEditMetadata;
 use Wikibase\Repo\RestApi\Infrastructure\ValidatingRequestDeserializer;
+use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializerServiceContainer;
 
 /**
@@ -94,14 +95,17 @@ class ValidatingRequestDeserializerTest extends TestCase {
 	}
 
 	public function testGivenValidSitelinkEditRequest_returnsSitelink(): void {
-		$sitelink = [ 'title' => 'Potato', 'badges' => [ 'Q1234' ] ];
+		$sitelink = [ 'title' => 'Potato', 'badges' => [ TestValidatingRequestDeserializer::ALLOWED_BADGES[ 1 ] ] ];
 		$request = $this->createStub( SitelinkUseCaseRequest::class );
 		$request->method( 'getItemId' )->willReturn( 'Q123' );
 		$request->method( 'getSiteId' )->willReturn( self::VALID_SITE_ID );
 		$request->method( 'getSitelink' )->willReturn( $sitelink );
 
 		$result = $this->newRequestDeserializer()->validateAndDeserialize( $request );
-		$this->assertEquals( new SiteLink( 'enwiki', 'Potato', [ new ItemId( 'Q1234' ) ] ), $result->getSitelink() );
+		$this->assertEquals(
+			new SiteLink( 'enwiki', 'Potato', [ new ItemId( TestValidatingRequestDeserializer::ALLOWED_BADGES[ 1 ] ) ] ),
+			$result->getSitelink()
+		);
 	}
 
 	public function testGivenValidStatementIdRequest_returnsDeserializedStatementId(): void {
@@ -378,7 +382,9 @@ interface PropertyLabelEditUseCaseRequest extends UseCaseRequest, PropertyLabelE
 interface ItemDescriptionEditUseCaseRequest extends UseCaseRequest, ItemDescriptionEditRequest {}
 interface PropertyDescriptionEditUseCaseRequest extends UseCaseRequest, PropertyDescriptionEditRequest {}
 interface PropertyFieldsUseCaseRequest extends UseCaseRequest, PropertyFieldsRequest {}
+
 interface SiteIdUseCaseRequest extends UseCaseRequest, SiteIdRequest {
+
 }
 interface SitelinkUseCaseRequest extends UseCaseRequest, SitelinkEditRequest {}
 class NullValidator {

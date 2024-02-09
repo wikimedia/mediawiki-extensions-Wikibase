@@ -311,7 +311,10 @@ return [
 		function( MediaWikiServices $services ): SitelinkEditRequestValidatingDeserializer {
 			return new SitelinkEditRequestValidatingDeserializer(
 				new SitelinkValidator(
-					new SitelinkDeserializer( MediaWikiTitleCodec::getTitleInvalidRegex() )
+					new SitelinkDeserializer(
+						MediaWikiTitleCodec::getTitleInvalidRegex(),
+						array_keys( WikibaseRepo::getSettings( $services )->getSetting( 'badgeItems' ) )
+					)
 				),
 			);
 		},

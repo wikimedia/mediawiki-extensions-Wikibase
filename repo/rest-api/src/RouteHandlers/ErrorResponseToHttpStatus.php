@@ -74,6 +74,9 @@ class ErrorResponseToHttpStatus {
 		UseCaseError::UNEXPECTED_ERROR => 500,
 		UseCaseError::TITLE_FIELD_EMPTY => 400,
 		UseCaseError::INVALID_TITLE_FIELD => 400,
+		UseCaseError::INVALID_SITELINK_BADGES_FORMAT => 400,
+		UseCaseError::INVALID_INPUT_SITELINK_BADGE => 400,
+		UseCaseError::ITEM_NOT_A_BADGE => 400,
 		UseCaseError::SITELINK_DATA_MISSING_TITLE => 400,
 	];
 

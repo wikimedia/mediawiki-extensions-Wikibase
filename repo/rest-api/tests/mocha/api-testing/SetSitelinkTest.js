@@ -5,7 +5,8 @@ const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const {
 	newSetSitelinkRequestBuilder,
-	newRemoveSitelinkRequestBuilder
+	newRemoveSitelinkRequestBuilder,
+	ALLOWED_BADGES
 } = require( '../helpers/RequestBuilderFactory' );
 const { formatSitelinkEditSummary } = require( '../helpers/formatEditSummaries' );
 const { makeEtag } = require( '../helpers/httpHelper' );
@@ -15,7 +16,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 	let testItemId;
 	let siteId;
 	let testSitelink;
-	const linkedArticle = utils.title( 'Article-linked-to-test-item' );
+	const linkedArticle = utils.title( 'Article-linked-to-test-item-' );
 	let originalLastModified;
 	let originalRevisionId;
 
@@ -37,7 +38,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 	before( async () => {
 		const createItemResponse = await createEntity( 'item', {} );
 		testItemId = createItemResponse.entity.id;
-		testSitelink = { title: utils.title( 'test-title-' ), badges: [ 'Q123' ] };
+		testSitelink = { title: utils.title( 'test-title-' ), badges: [ ALLOWED_BADGES[ 2 ] ] };
 
 		await createLocalSitelink( testItemId, linkedArticle );
 		siteId = await getLocalSiteId();
@@ -58,7 +59,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 			await newRemoveSitelinkRequestBuilder( testItemId, siteId ).assertValidRequest().makeRequest();
 
 			const testTitle = utils.title( 'test-title-' );
-			const testBadges = [ 'Q123', 'Q456' ];
+			const testBadges = [ ALLOWED_BADGES[ 0 ], ALLOWED_BADGES[ 1 ] ];
 			const testComment = 'omg – i created a sitelink!';
 
 			const newSitelink = { title: testTitle, badges: testBadges };
@@ -107,7 +108,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 
 		it( 'can replace a sitelink with badges and edit metadata', async () => {
 			const testTitle = utils.title( 'test-title-' );
-			const testBadges = [ 'Q123', 'Q456' ];
+			const testBadges = [ ALLOWED_BADGES[ 0 ] ];
 			const testComment = 'omg – i replaced a sitelink!';
 
 			const newSitelink = { title: testTitle, badges: testBadges };
@@ -153,7 +154,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 
 		it( 'can add/replace only the badges of a sitelink with edit metadata', async () => {
 			const testTitle = utils.title( 'test-title-' );
-			const testBadges = [ 'Q123', 'Q456' ];
+			const testBadges = [ ALLOWED_BADGES[ 0 ] ];
 			const testComment = "omg – i changed a sitelink's badges!";
 
 			await newSetSitelinkRequestBuilder( testItemId, siteId, { title: testTitle } )
@@ -180,7 +181,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'idempotency check: can set the same sitelink twice', async () => {
-			const newSitelink = { title: utils.title( 'test-title-' ), badges: [ 'Q123' ] };
+			const newSitelink = { title: utils.title( 'test-title-' ), badges: [ ALLOWED_BADGES[ 1 ] ] };
 			let response = await newSetSitelinkRequestBuilder( testItemId, siteId, newSitelink )
 				.assertValidRequest()
 				.makeRequest();
@@ -266,7 +267,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'title is empty', async () => {
-			const newSitelinkWithEmptyTitle = { title: '', badges: [ 'Q123' ] };
+			const newSitelinkWithEmptyTitle = { title: '', badges: [ ALLOWED_BADGES[ 0 ] ] };
 			const response = await newSetSitelinkRequestBuilder(
 				testItemId,
 				siteId,
@@ -279,7 +280,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'sitelink title field not provided', async () => {
-			const newSitelinkWithTitleFieldMissing = { badges: [ 'Q123' ] };
+			const newSitelinkWithTitleFieldMissing = { badges: [ ALLOWED_BADGES[ 1 ] ] };
 			const response = await newSetSitelinkRequestBuilder(
 				testItemId,
 				siteId,
@@ -291,8 +292,8 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 			assert.strictEqual( response.body.message, 'Mandatory sitelink title missing' );
 		} );
 
-		it( 'Invalid title', async () => {
-			const newSitelinkWithInvalidTitle = { title: 'invalid title%00', badges: [ 'Q123' ] };
+		it( 'invalid title', async () => {
+			const newSitelinkWithInvalidTitle = { title: 'invalid title%00', badges: [ ALLOWED_BADGES[ 0 ] ] };
 			const response = await newSetSitelinkRequestBuilder(
 				testItemId,
 				siteId,
@@ -302,6 +303,38 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 			expect( response ).to.have.status( 400 );
 			assertValidErrorResponse( response, 'invalid-title-field' );
 			assert.strictEqual( response.body.message, 'Not a valid input for title field' );
+		} );
+
+		it( 'badges is not an array', async () => {
+			const sitelink = { title: utils.title( 'test-title-' ), badges: ALLOWED_BADGES[ 1 ] };
+			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, sitelink ).makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assertValidErrorResponse( response, 'invalid-sitelink-badges-format' );
+			assert.strictEqual( response.body.message, "Value of 'badges' field is not a list" );
+		} );
+
+		it( 'badge is not an item ID', async () => {
+			const invalidBadge = 'P33';
+			const sitelink = { title: utils.title( 'test-title-' ), badges: [ invalidBadge ] };
+			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, sitelink ).makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assertValidErrorResponse( response, 'invalid-input-sitelink-badge' );
+			assert.strictEqual( response.body.message, `Badge input is not an item ID: ${invalidBadge}` );
+		} );
+
+		it( 'not an allowed badge', async () => {
+			const badge = 'Q17';
+			const sitelink = { title: utils.title( 'test-title-' ), badges: [ badge ] };
+			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, sitelink ).makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assertValidErrorResponse( response, 'item-not-a-badge' );
+			assert.strictEqual(
+				response.body.message,
+				`Item ID provided as badge is not allowed as a badge: ${badge}`
+			);
 		} );
 	} );
 
