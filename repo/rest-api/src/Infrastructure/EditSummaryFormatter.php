@@ -102,7 +102,9 @@ class EditSummaryFormatter {
 					return $summary;
 			}
 		} elseif ( $editSummary instanceof SitelinksEditSummary ) {
-			return new Summary();
+			$summary = new Summary( 'wbeditentity', 'update' );
+			$summary->setUserSummary( $editSummary->getUserComment() );
+			return $summary;
 		}
 
 		throw new LogicException( "Unknown summary type '{$editSummary->getEditAction()}' " . get_class( $editSummary ) );

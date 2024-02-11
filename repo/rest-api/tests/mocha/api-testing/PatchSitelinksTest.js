@@ -6,6 +6,7 @@ const entityHelper = require( '../helpers/entityHelper' );
 const { newPatchSitelinksRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { createLocalSitelink, getLocalSiteId } = require( '../helpers/entityHelper' );
 const { makeEtag } = require( '../helpers/httpHelper' );
+const { formatSitelinksEditSummary } = require( '../helpers/formatEditSummaries' );
 
 describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 
@@ -71,6 +72,7 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 			const editMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 			assert.include( editMetadata.tags, tag );
 			assert.property( editMetadata, 'bot' );
+			assert.deepEqual( editMetadata.comment, formatSitelinksEditSummary( editSummary ) );
 		} );
 	} );
 

@@ -17,6 +17,7 @@ use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\LabelEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\SitelinkEditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\SitelinksEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
 use Wikibase\Repo\RestApi\Infrastructure\TermsEditSummaryToFormattableSummaryConverter;
@@ -37,6 +38,7 @@ class EditSummaryFormatterTest extends MediaWikiLangTestCase {
 	 * @dataProvider aliasesInLanguageEditSummaryProvider
 	 * @dataProvider statementEditSummaryProvider
 	 * @dataProvider sitelinkEditSummaryProvider
+	 * @dataProvider sitelinksEditSummaryProvider
 	 */
 	public function testFormat( EditSummary $editSummary, string $formattedSummary ): void {
 		$editSummaryFormatter = new EditSummaryFormatter(
@@ -180,6 +182,13 @@ class EditSummaryFormatterTest extends MediaWikiLangTestCase {
 		yield 'remove sitelink' => [
 			SitelinkEditSummary::newRemoveSummary( $userComment, new SiteLink( $siteId, $article ) ),
 			"/* wbsetsitelink-remove:1|$siteId */ $article, $userComment",
+		];
+	}
+
+	public function sitelinksEditSummaryProvider(): Generator {
+		yield 'patch sitelinks' => [
+			SitelinksEditSummary::newPatchSummary( 'user comment' ),
+			'/* wbeditentity-update:0| */ user comment',
 		];
 	}
 

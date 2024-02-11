@@ -31,5 +31,9 @@ module.exports = {
 		const autoSummary = `/* wbsetsitelink-${action}:${commentArgs} */ ${summaryText.join( ', ' )}`;
 
 		return userComment ? `${autoSummary}, ${userComment}` : autoSummary;
+	},
+
+	formatSitelinksEditSummary( userComment ) {
+		return `/* wbeditentity-update:0| */ ${userComment}`;
 	}
 };
