@@ -41,6 +41,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\Deserialized
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions\DeserializedPatchPropertyDescriptionsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\DeserializedPatchPropertyLabelsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyStatement\DeserializedPatchPropertyStatementRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchSitelinks\DeserializedPatchSitelinksRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemDescription\DeserializedRemoveItemDescriptionRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemLabel\DeserializedRemoveItemLabelRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement\DeserializedRemoveItemStatementRequest;
@@ -106,7 +107,8 @@ class DeserializedRequestAdapter implements
 	DeserializedAddItemAliasesInLanguageRequest,
 	DeserializedAddPropertyAliasesInLanguageRequest,
 	DeserializedRemoveSitelinkRequest,
-	DeserializedSetSitelinkRequest
+	DeserializedSetSitelinkRequest,
+	DeserializedPatchSitelinksRequest
 {
 	private array $deserializedRequest;
 

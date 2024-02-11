@@ -134,6 +134,13 @@ module.exports = {
 			.withJsonBodyParam( 'patch', patch );
 	},
 
+	newPatchSitelinksRequestBuilder( itemId, patch ) {
+		return new RequestBuilder()
+			.withRoute( 'PATCH', '/entities/items/{item_id}/sitelinks' )
+			.withPathParam( 'item_id', itemId )
+			.withJsonBodyParam( 'patch', patch );
+	},
+
 	newGetItemLabelRequestBuilder( itemId, languageCode ) {
 		return new RequestBuilder()
 			.withRoute( 'GET', '/entities/items/{item_id}/labels/{language_code}' )

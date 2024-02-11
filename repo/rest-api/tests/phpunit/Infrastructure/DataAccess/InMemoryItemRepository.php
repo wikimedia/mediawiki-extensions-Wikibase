@@ -13,18 +13,27 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Item as ReadModelItem;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelinks;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemAliasesRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemDescriptionsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemLabelsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\SitelinksRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\SitelinksReadModelConverter;
 
 /**
  * @license GPL-2.0-or-later
  */
-class InMemoryItemRepository implements ItemRetriever, ItemLabelsRetriever, ItemDescriptionsRetriever, ItemAliasesRetriever, ItemUpdater {
+class InMemoryItemRepository implements
+	ItemRetriever,
+	ItemLabelsRetriever,
+	ItemDescriptionsRetriever,
+	ItemAliasesRetriever,
+	SitelinksRetriever,
+	ItemUpdater
+{
 	use StatementReadModelHelper;
 
 	public const EN_WIKI_SITE_ID = 'enwiki';
@@ -69,6 +78,10 @@ class InMemoryItemRepository implements ItemRetriever, ItemLabelsRetriever, Item
 
 	public function getAliases( ItemId $itemId ): ?Aliases {
 		return $this->items["$itemId"] ? $this->convertToReadModel( $this->items["$itemId"] )->getAliases() : null;
+	}
+
+	public function getSitelinks( ItemId $itemId ): Sitelinks {
+		return $this->convertToReadModel( $this->items["$itemId"] )->getSitelinks();
 	}
 
 	public function update( Item $item, EditMetadata $editMetadata ): ItemRevision {

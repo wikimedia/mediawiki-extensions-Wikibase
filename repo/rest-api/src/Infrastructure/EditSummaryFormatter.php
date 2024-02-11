@@ -14,6 +14,7 @@ use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\LabelEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\SitelinkEditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\SitelinksEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
 use Wikibase\Repo\SummaryFormatter;
 
@@ -100,6 +101,8 @@ class EditSummaryFormatter {
 
 					return $summary;
 			}
+		} elseif ( $editSummary instanceof SitelinksEditSummary ) {
+			return new Summary();
 		}
 
 		throw new LogicException( "Unknown summary type '{$editSummary->getEditAction()}' " . get_class( $editSummary ) );
