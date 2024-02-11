@@ -8,6 +8,7 @@ use Wikibase\DataModel\SiteLink as DataModelSitelink;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\SetSitelink\SetSitelink;
 use Wikibase\Repo\RestApi\Application\UseCases\SetSitelink\SetSitelinkRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\SetSitelink\SetSitelinkValidator;
@@ -15,6 +16,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\SitelinkEditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\ReadModel\SiteLink;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
@@ -32,6 +34,7 @@ class SetSitelinkTest extends TestCase {
 
 	private SetSitelinkValidator $validator;
 	private AssertItemExists $assertItemExists;
+	private AssertUserIsAuthorized $assertUserIsAuthorized;
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
 
@@ -39,6 +42,7 @@ class SetSitelinkTest extends TestCase {
 		parent::setUp();
 		$this->validator = new TestValidatingRequestDeserializer();
 		$this->assertItemExists = $this->createStub( AssertItemExists::class );
+		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
 	}
@@ -212,11 +216,42 @@ class SetSitelinkTest extends TestCase {
 		}
 	}
 
+	public function testGivenEditIsUnauthorized_throwsUseCaseError(): void {
+		$itemId = new ItemId( 'Q123' );
+
+		$expectedError = new UseCaseError(
+			UseCaseError::PERMISSION_DENIED,
+			'You have no permission to edit this item.'
+		);
+		$this->assertUserIsAuthorized = $this->createMock( AssertUserIsAuthorized::class );
+		$this->assertUserIsAuthorized->method( 'execute' )
+			->with( $itemId, User::newAnonymous() )
+			->willThrowException( $expectedError );
+
+		try {
+			$this->newUseCase()->execute(
+				new SetSitelinkRequest(
+					"$itemId",
+					'enwiki',
+					[ 'title' => 'title', 'badges' => [ 'Q321' ] ],
+					[],
+					false,
+					null,
+					null
+				)
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedError, $e );
+		}
+	}
+
 	private function newUseCase(): SetSitelink {
 		return new SetSitelink(
 			$this->validator,
 			new SitelinkDeserializer(),
 			$this->assertItemExists,
+			$this->assertUserIsAuthorized,
 			$this->itemRetriever,
 			$this->itemUpdater
 		);

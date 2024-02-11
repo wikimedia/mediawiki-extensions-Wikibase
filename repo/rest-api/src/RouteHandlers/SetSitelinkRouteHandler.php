@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\RouteHandlers;
 
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
@@ -13,6 +14,9 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetSitelink\SetSitelink;
 use Wikibase\Repo\RestApi\Application\UseCases\SetSitelink\SetSitelinkRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\SetSitelink\SetSitelinkResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\BotRightCheckMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -32,23 +36,42 @@ class SetSitelinkRouteHandler extends SimpleHandler {
 	private SetSitelink $useCase;
 	private SiteLinkSerializer $sitelinkSerializer;
 	private ResponseFactory $responseFactory;
+	private MiddlewareHandler $middlewareHandler;
 
-	public function __construct( SetSitelink $useCase, ResponseFactory $responseFactory, SiteLinkSerializer $sitelinkSerializer
+	public function __construct(
+		SetSitelink $useCase,
+		ResponseFactory $responseFactory,
+		SiteLinkSerializer $sitelinkSerializer,
+		MiddlewareHandler $middlewareHandler
 	) {
 		$this->useCase = $useCase;
 		$this->sitelinkSerializer = $sitelinkSerializer;
 		$this->responseFactory = $responseFactory;
+		$this->middlewareHandler = $middlewareHandler;
 	}
 
 	public static function factory(): Handler {
+		$responseFactory = new ResponseFactory();
+
 		return new self(
 			WbRestApi::getSetSitelink(),
-			new ResponseFactory(),
+			$responseFactory,
 			new SitelinkSerializer(),
+			new MiddlewareHandler( [
+				new AuthenticationMiddleware(),
+				new BotRightCheckMiddleware( MediaWikiServices::getInstance()->getPermissionManager(), $responseFactory ),
+			] )
 		);
 	}
 
-	public function run( string $itemId, string $siteId ): Response {
+	/**
+	 * @param mixed ...$args
+	 */
+	public function run( ...$args ): Response {
+		return $this->middlewareHandler->run( $this, [ $this, 'runUseCase' ], $args );
+	}
+
+	public function runUseCase( string $itemId, string $siteId ): Response {
 		$jsonBody = $this->getValidatedBody();
 
 		try {
@@ -61,7 +84,7 @@ class SetSitelinkRouteHandler extends SimpleHandler {
 						$jsonBody['tags'],
 						$jsonBody['bot'],
 						$jsonBody['comment'],
-						null
+						$this->getUsername()
 					)
 				)
 			);
@@ -140,5 +163,10 @@ class SetSitelinkRouteHandler extends SimpleHandler {
 		);
 
 		return $httpResponse;
+	}
+
+	private function getUsername(): ?string {
+		$mwUser = $this->getAuthority()->getUser();
+		return $mwUser->isRegistered() ? $mwUser->getName() : null;
 	}
 }
