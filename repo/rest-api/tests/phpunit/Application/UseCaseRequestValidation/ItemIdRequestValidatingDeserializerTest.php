@@ -7,7 +7,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemIdRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\ItemIdValidator;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemIdRequestValidatingDeserializer
@@ -24,7 +23,7 @@ class ItemIdRequestValidatingDeserializerTest extends TestCase {
 
 		$this->assertEquals(
 			new ItemId( 'Q123' ),
-			( new ItemIdRequestValidatingDeserializer( new ItemIdValidator() ) )->validateAndDeserialize( $request )
+			( new ItemIdRequestValidatingDeserializer() )->validateAndDeserialize( $request )
 		);
 	}
 
@@ -34,7 +33,7 @@ class ItemIdRequestValidatingDeserializerTest extends TestCase {
 		$request->method( 'getItemId' )->willReturn( $invalidId );
 
 		try {
-			( new ItemIdRequestValidatingDeserializer( new ItemIdValidator() ) )->validateAndDeserialize( $request );
+			( new ItemIdRequestValidatingDeserializer() )->validateAndDeserialize( $request );
 			$this->fail( 'expected exception was not thrown' );
 		} catch ( UseCaseError $useCaseEx ) {
 			$this->assertSame( UseCaseError::INVALID_ITEM_ID, $useCaseEx->getErrorCode() );
