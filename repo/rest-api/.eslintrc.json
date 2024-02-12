@@ -5,6 +5,7 @@
 		"node_modules/",
 		"vendor",
 		"dist/",
-		"docs/"
+		"docs/",
+		"src/RouteHandlers/openapi.json"
 	]
 }
