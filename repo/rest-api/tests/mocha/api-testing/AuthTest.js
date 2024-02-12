@@ -18,7 +18,6 @@ const {
 	getRequestsOnItem,
 	getRequestsOnProperty
 } = require( '../helpers/happyPathRequestBuilders' );
-const rbf = require( '../helpers/RequestBuilderFactory' );
 
 describe( 'Auth', () => {
 
@@ -69,15 +68,7 @@ describe( 'Auth', () => {
 
 	const editRequestsWithInputs = [
 		...editRequestsOnItem.map( useRequestInputs( itemRequestInputs ) ),
-		...editRequestsOnProperty.map( useRequestInputs( propertyRequestInputs ) ),
-		{
-			newRequestBuilder: () => rbf.newSetSitelinkRequestBuilder(
-				itemRequestInputs.itemId,
-				itemRequestInputs.siteId,
-				{ title: utils.title( 'test-title-' ), badges: [ 'Q123' ] }
-			),
-			requestInputs: itemRequestInputs
-		}
+		...editRequestsOnProperty.map( useRequestInputs( propertyRequestInputs ) )
 	];
 
 	[

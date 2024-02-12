@@ -132,6 +132,11 @@ module.exports.editRequestsOnItem = [
 		'en',
 		'random-test-description-' + utils.uniq()
 	),
+	( { itemId, siteId } ) => rbf.newSetSitelinkRequestBuilder(
+		itemId,
+		siteId,
+		{ title: utils.title( 'test-title-' ), badges: [ 'Q123' ] }
+	),
 	( { itemId } ) => rbf.newPatchItemLabelsRequestBuilder(
 		itemId,
 		[ {

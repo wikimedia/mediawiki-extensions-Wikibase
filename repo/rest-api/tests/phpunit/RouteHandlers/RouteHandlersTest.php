@@ -105,6 +105,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription\SetPropert
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription\SetPropertyDescriptionResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\SetPropertyLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\SetPropertyLabelResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\SetSitelink\SetSitelink;
+use Wikibase\Repo\RestApi\Application\UseCases\SetSitelink\SetSitelinkResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
@@ -885,6 +887,26 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			'validRequest' => [
 				'pathParams' => [ 'item_id' => 'Q1', 'site_id' => 'dewiki' ],
 				'bodyContents' => [],
+			],
+			'expectedExceptions' => [
+				[
+					new UseCaseError( UseCaseError::INVALID_ITEM_ID, '' ),
+					$hasErrorCode ( UseCaseError::INVALID_ITEM_ID ),
+				],
+				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::ITEM_REDIRECTED ) ],
+			],
+		] ];
+		yield 'SetSitelink' => [ [
+			'useCase' => SetSitelink::class,
+			'useCaseResponse' => new SetSitelinkResponse(
+				new Sitelink( 'dewiki', 'title', [], '' ),
+				$lastModified,
+				123,
+				false
+			),
+			'validRequest' => [
+				'pathParams' => [ 'item_id' => 'Q1', 'site_id' => 'dewiki' ],
+				'bodyContents' => [ 'sitelink' => [ 'title' => 'title' ] ],
 			],
 			'expectedExceptions' => [
 				[
