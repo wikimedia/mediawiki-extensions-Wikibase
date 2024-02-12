@@ -112,6 +112,8 @@
 	"notification-bundle-header-page-connection": "<strong>$3</strong>と{{PLURAL:$4|もう一件のページ|$4件のページ|100=99件以上のページ}}が、この主題に関連したデータが収集されている、{{WBREPONAME}}の項目に{{GENDER:$2|結び付けられ}}ました。",
 	"notification-link-text-view-item": "項目を{{GENDER:$1|閲覧}}",
 	"notification-subject-page-connection": "あなたが{{SITENAME}}に{{GENDER:$3|作成した}}ページが{{WBREPONAME}}の項目に{{GENDER:$2|結び付けられました}}。",
+	"unresolved-property-category": "未解決のプロパティがあるページ",
+	"unresolved-property-category-desc": "このページはプロパティIDやラベルから見つけられない{{WBREPONAME}}プロパティを参照しているページをリストしています。",
 	"connected-redirect-category": "{{WBREPONAME}}項目に接続されているリダイレクト",
 	"connected-redirect-category-desc": "このカテゴリでは{{WBREPONAME}}項目に接続されているリダイレクトページを列挙します。",
 	"wikibase-client-data-bridge-dialog-title": "$1を編集",
