@@ -25,10 +25,10 @@
 		"test": "grunt test"
 	},
 	"devDependencies": {
-		"eslint-config-wikimedia": "0.24.0",
+		"eslint-config-wikimedia": "0.26.0",
 		"grunt": "1.6.1",
-		"grunt-banana-checker": "0.10.0",
-		"grunt-eslint": "24.0.1",
+		"grunt-banana-checker": "0.11.1",
+		"grunt-eslint": "24.3.0",
 		"grunt-karma": "^4.0.0",
 		"karma": "^6.1.0",
 		"karma-chrome-launcher": "^3.1.0",
@@ -36,7 +36,7 @@
 		"karma-firefox-launcher": "^2.1.1",
 		"karma-qunit": "^4.1.2",
 		"karma-webpack": "^5.0.0",
-		"qunit": "2.19.4",
+		"qunit": "2.20.0",
 		"sinon": "^15.0.1",
 		"webpack": "^5.53.0"
 	},

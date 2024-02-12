@@ -1,7 +1,7 @@
 module.exports = ( function( $, vv ) {
 	'use strict';
 
-	var PARENT = vv.experts.StringValue,
+	const PARENT = vv.experts.StringValue,
 		UnitSelector = require( '../ExpertExtender/ExpertExtender.UnitSelector.js' );
 
 	/**
@@ -13,12 +13,12 @@ module.exports = ( function( $, vv ) {
 	vv.experts.QuantityInput = vv.expert( 'QuantityInput', PARENT, function() {
 		PARENT.apply( this, arguments );
 
-		var self = this;
+		const self = this;
 
 		this._unitSelector = new UnitSelector(
 			this._messageProvider,
 			function() {
-				var value = self.viewState().value(),
+				const value = self.viewState().value(),
 					unit = value && value.getUnit(),
 					formattedValue = self.viewState().getFormattedValue(),
 					$unit = $( '<div>' ).html( formattedValue ).find( '.wb-unit' ).first();
@@ -36,7 +36,7 @@ module.exports = ( function( $, vv ) {
 			}
 		);
 
-		var inputExtender = new vv.ExpertExtender(
+		const inputExtender = new vv.ExpertExtender(
 			this.$input,
 			[
 				this._unitSelector

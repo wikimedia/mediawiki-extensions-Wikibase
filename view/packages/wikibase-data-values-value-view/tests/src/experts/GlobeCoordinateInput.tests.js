@@ -1,11 +1,14 @@
 /**
+ * @param QUnit
+ * @param valueview
+ * @param $
  * @license GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
 ( function( QUnit, valueview, $ ) {
 	'use strict';
 
-	var testExpert = valueview.tests.testExpert;
+	const testExpert = valueview.tests.testExpert;
 
 	QUnit.module( 'jquery.valueview.experts.GlobeCoordinateInput' );
 
@@ -14,8 +17,8 @@
 	} );
 
 	QUnit.test( 'don\'t crash with null precision', function( assert ) {
-		var $div = $( '<div/>' ).appendTo( 'body' );
-		var expert = new valueview.experts.GlobeCoordinateInput(
+		const $div = $( '<div/>' ).appendTo( 'body' );
+		const expert = new valueview.experts.GlobeCoordinateInput(
 			$div,
 			new valueview.tests.MockViewState( {
 				value: {
@@ -30,7 +33,7 @@
 				getTextValue: 'value'
 			} )
 		);
-		var done = assert.async();
+		const done = assert.async();
 		expert.init();
 		expert.draw();
 		expert.focus();

@@ -1,7 +1,7 @@
 module.exports = ( function( $, vv ) {
 	'use strict';
 
-	var PARENT = vv.Expert;
+	const PARENT = vv.Expert;
 
 	/**
 	 * `Valueview` expert for adding `String` data value support to `valueview` widget.
@@ -30,7 +30,7 @@ module.exports = ( function( $, vv ) {
 		 * @inheritdoc
 		 */
 		init: function() {
-			var notifier = this._viewNotifier;
+			const notifier = this._viewNotifier;
 
 			this.$input
 			.addClass( this.uiBaseClass + '-input valueview-input' )

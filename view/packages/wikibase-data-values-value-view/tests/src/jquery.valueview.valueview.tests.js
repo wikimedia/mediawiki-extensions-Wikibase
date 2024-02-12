@@ -6,9 +6,9 @@
 ( function( $, vv, dv, vf, vp, sinon, QUnit ) {
 	'use strict';
 
-	var $vvElem;
-	var vvInst;
-	var stringValue = new dv.StringValue( 'STRING VALUE' );
+	let $vvElem;
+	let vvInst;
+	const stringValue = new dv.StringValue( 'STRING VALUE' );
 
 	QUnit.module( 'jquery.valueview.valueview' );
 
@@ -24,7 +24,9 @@
 	}
 	initVv.defaultOpts = {
 		withExpert: false,
-		generateDom: function() { return $( '<div/>' ); },
+		generateDom: function() {
+ return $( '<div/>' );
+},
 		vvArgs: {
 			expertStore: new vv.ExpertStore(),
 			htmlFormatter: new vf.NullFormatter(),
@@ -116,7 +118,7 @@
 	} );
 
 	QUnit.test( 'getFormattedValue with DOM', function( assert ) {
-		var vvArgs = $.extend( {
+		const vvArgs = $.extend( {
 			value: stringValue
 		}, initVv.defaultOpts.vvArgs );
 		sinon.spy( vvArgs.htmlFormatter, 'format' );
@@ -143,7 +145,7 @@
 	} );
 
 	QUnit.test( 'getFormattedValue without DOM', function( assert ) {
-		var vvArgs = $.extend( {
+		const vvArgs = $.extend( {
 			value: stringValue
 		}, initVv.defaultOpts.vvArgs );
 		sinon.spy( vvArgs.htmlFormatter, 'format' );

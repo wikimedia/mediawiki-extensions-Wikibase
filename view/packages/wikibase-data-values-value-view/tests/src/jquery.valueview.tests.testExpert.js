@@ -20,7 +20,7 @@ function testExpert( testDefinition ) {
 	// Throw error if something is wrong with given test definition:
 	testExpert.verifyTestDefinition( testDefinition );
 
-	var Expert = testDefinition.expertConstructor;
+	const Expert = testDefinition.expertConstructor;
 
 	function createExpertDefinitions() {
 		return [
@@ -53,7 +53,7 @@ function testExpert( testDefinition ) {
 	function expertCasesTestAndCleanup( description, testFn ) {
 		createExpertDefinitions().forEach( function ( definition ) {
 			QUnit.test( description + ' (' + definition.title + ')', function( assert ) {
-				var $viewPort = definition.constructorArgs[0],
+				const $viewPort = definition.constructorArgs[0],
 					viewState = definition.constructorArgs[1],
 					notifier = definition.constructorArgs[2];
 
@@ -75,7 +75,7 @@ function testExpert( testDefinition ) {
 			'expert instance of jQuery.valueview.Expert'
 		);
 
-		var viewPortArg = args.constructorArgs[0],
+		const viewPortArg = args.constructorArgs[0],
 			viewPortElement = viewPortArg instanceof $ ? viewPortArg.get( 0 ) : viewPortArg;
 
 		assert.ok(
@@ -85,7 +85,7 @@ function testExpert( testDefinition ) {
 	} );
 
 	expertCasesTestAndCleanup( 'destroy', function( args, assert ) {
-		var $viewPort = $( args.constructorArgs[0] );
+		const $viewPort = $( args.constructorArgs[0] );
 
 		args.expert.destroy();
 
@@ -100,7 +100,7 @@ function testExpert( testDefinition ) {
 	} );
 
 	expertCasesTestAndCleanup( 'valueCharacteristics', function( args, assert ) {
-		var valueCharacteristics = args.expert.valueCharacteristics();
+		const valueCharacteristics = args.expert.valueCharacteristics();
 
 		assert.ok(
 			$.isPlainObject( valueCharacteristics ),
@@ -109,7 +109,7 @@ function testExpert( testDefinition ) {
 	} );
 
 	expertCasesTestAndCleanup( 'viewState', function( args, assert ) {
-		var viewState = args.expert.viewState();
+		const viewState = args.expert.viewState();
 		assert.notEqual(
 			viewState.getFormattedValue, 'undefined',
 			'viewState() returns a jQuery.valueview.ViewState instance'
@@ -117,14 +117,14 @@ function testExpert( testDefinition ) {
 	} );
 
 	expertCasesTestAndCleanup( 'rawValue: initial value', function( args, assert ) {
-		var rawValue = args.expert.rawValue();
+		const rawValue = args.expert.rawValue();
 		assert.ok(
 			rawValue === '' || rawValue === null,
 			'newly initialized expert has no value (rawValue() returns empty string or null)'
 		);
 	} );
 
-	var expertCasesMemberCallTest = function( memberName, additionalAssertionsFn ) {
+	const expertCasesMemberCallTest = function( memberName, additionalAssertionsFn ) {
 		expertCasesTestAndCleanup( memberName, function( args, assert ) {
 			args.expert[ memberName ]();
 			assert.ok(
@@ -137,7 +137,7 @@ function testExpert( testDefinition ) {
 		} );
 	};
 	expertCasesMemberCallTest( 'draw', function( args, assert ) {
-		var $viewPort = $( args.constructorArgs[0] );
+		const $viewPort = $( args.constructorArgs[0] );
 
 		assert.ok(
 			$viewPort.text() !== '' || $viewPort.children.length > 0,

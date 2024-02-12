@@ -6,7 +6,7 @@
 ( function( QUnit, valueview ) {
 	'use strict';
 
-	var ViewState = require( '../../src/jquery.valueview.ViewState.js' ),
+	const ViewState = require( '../../src/jquery.valueview.ViewState.js' ),
 		MockViewState = valueview.tests.MockViewState;
 
 	QUnit.module( 'jquery.valueview.MockViewState' );
@@ -20,7 +20,7 @@
 	 */
 	function buildMemberTestFn( params, memberName ) {
 		return function( assert ) {
-			var viewState = new MockViewState( params.constructorArg );
+			const viewState = new MockViewState( params.constructorArg );
 
 			assert.strictEqual(
 				viewState[ memberName ](),
@@ -30,7 +30,7 @@
 		};
 	}
 
-	var testCases = [
+	const testCases = [
 		{
 			title: 'without constructor argument',
 			constructorArg: undefined,
@@ -82,7 +82,7 @@
 
 	testCases.forEach( function ( params ) {
 		QUnit.test( 'constructor', function( assert ) {
-			var viewState = new MockViewState( params.constructorArg );
+			const viewState = new MockViewState( params.constructorArg );
 			assert.ok(
 				viewState instanceof MockViewState,
 				'MockViewState has been created successfully'
@@ -101,7 +101,7 @@
 		QUnit.test( 'value', buildMemberTestFn( params, 'value' ) );
 
 		QUnit.test( 'option', function( assert ) {
-			var viewState = new MockViewState( params.constructorArg );
+			const viewState = new MockViewState( params.constructorArg );
 
 			assert.strictEqual(
 				viewState.option( 'foo' ),
@@ -118,7 +118,7 @@
 	} );
 
 	QUnit.test( 'Changing state after construction', function( assert ) {
-		var state = {},
+		const state = {},
 			viewState = new MockViewState( state );
 
 		assert.strictEqual(

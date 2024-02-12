@@ -29,7 +29,7 @@ jQuery.valueview = jQuery.valueview || {};
 	 *        Constructor of a default expert that shall be returned when no expert is registered
 	 *        for a specific purpose.
 	 */
-	var SELF = $.valueview.ExpertStore = function ValueviewExpertStore( DefaultExpert ) {
+	const SELF = $.valueview.ExpertStore = function ValueviewExpertStore( DefaultExpert ) {
 		this._DefaultExpert = DefaultExpert || null;
 		this._expertsForDataValueTypes = {};
 		this._expertsForDataTypes = {};
@@ -117,7 +117,7 @@ jQuery.valueview = jQuery.valueview || {};
 		 * @throws {Error} if no proper parameters have been specified.
 		 */
 		getExpert: function( dataValueType, dataTypeId ) {
-			var expert;
+			let expert;
 
 			if ( typeof dataTypeId === 'string' ) {
 				expert = this._expertsForDataTypes[dataTypeId];

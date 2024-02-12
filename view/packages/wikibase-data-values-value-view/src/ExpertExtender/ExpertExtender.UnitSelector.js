@@ -19,7 +19,7 @@
 	 * @param {string|null} [options.language=null]
 	 * @param {string|null} [options.vocabularyLookupApiUrl=null]
 	 */
-	var UnitSelector = function(
+	const UnitSelector = function(
 		messageProvider,
 		getUpstreamValue,
 		onValueChange,
@@ -71,7 +71,7 @@
 		 * @param {jQuery} $extender
 		 */
 		init: function( $extender ) {
-			var upstreamValue = this._getUpstreamValue(),
+			const upstreamValue = this._getUpstreamValue(),
 				label = this._messageProvider.getMessage(
 					'valueview-expertextender-unitsuggester-label'
 				);
@@ -92,7 +92,7 @@
 		 * Callback for the `onInitialShow` `ExpertExtender` event.
 		 */
 		onInitialShow: function() {
-			var upstreamValue = this._getUpstreamValue(),
+			let upstreamValue = this._getUpstreamValue(),
 				value = upstreamValue ? upstreamValue.label : null;
 
 			if ( value === '1' ||
@@ -122,7 +122,7 @@
 		 * @return {string|null} The current value
 		 */
 		getConceptUri: function() {
-			var unitSuggester = this.$selector.data( 'unitsuggester' );
+			const unitSuggester = this.$selector.data( 'unitsuggester' );
 			return ( unitSuggester && unitSuggester.getSelectedConceptUri() ) ||
 				this.$selector.val();
 		}

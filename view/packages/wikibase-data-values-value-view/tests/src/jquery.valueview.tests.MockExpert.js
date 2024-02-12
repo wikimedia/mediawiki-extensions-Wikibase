@@ -7,7 +7,7 @@ jQuery.valueview.tests = jQuery.valueview.tests || {};
 ( function( $, vv ) {
 	'use strict';
 
-	var PARENT = vv.Expert;
+	const PARENT = vv.Expert;
 
 	/**
 	 * Valueview expert for tests. Simply overwrites all abstract functions with some mock

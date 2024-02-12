@@ -1,7 +1,7 @@
 ( function( vv ) {
 	'use strict';
 
-	var PARENT = vv.experts.StringValue;
+	const PARENT = vv.experts.StringValue;
 
 	// TODO: Implement this as an "extension" for the StringValue expert. This could be done by
 	//  adding a system for extensions which get initialized in addition to a specific expert.
@@ -26,7 +26,7 @@
 		_init: function() {
 			PARENT.prototype._init.call( this );
 
-			var notifier = this._viewNotifier,
+			const notifier = this._viewNotifier,
 				$input = this.$input;
 
 			$input.suggester();

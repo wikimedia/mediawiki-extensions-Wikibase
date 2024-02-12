@@ -16,7 +16,7 @@
 	 * @param {Function} getUpstreamValue
 	 * @param {Function} onValueChange
 	 */
-	var LanguageSelector = function(
+	const LanguageSelector = function(
 		contentLanguages,
 		messageProvider,
 		getUpstreamValue,
@@ -81,14 +81,14 @@
 		 * @private
 		 */
 		_initLabels: function() {
-			var languages = this._contentLanguages.getAll();
+			const languages = this._contentLanguages.getAll();
 
-			var self = this;
+			const self = this;
 
 			if ( languages !== null ) {
 				this._labels = {};
 				$.each( languages, function( i, code ) {
-					var languageName = self._contentLanguages.getName( code );
+					const languageName = self._contentLanguages.getName( code );
 
 					self._labels[code] = languageName ? self._messageProvider.getMessage(
 						'languagetemplate',
@@ -124,7 +124,7 @@
 		 * Callback for the `onInitialShow` `ExpertExtender` event.
 		 */
 		onInitialShow: function() {
-			var value = this._getUpstreamValue();
+			const value = this._getUpstreamValue();
 			if ( this._labels && value ) {
 				this.$selector.data( 'languagesuggester' ).setSelectedValue( value, this._labels[ value ] || value );
 			} else {
@@ -150,8 +150,8 @@
 		 * @return {string|null} The current value
 		 */
 		getValue: function() {
-			var languageSuggester = this.$selector.data( 'languagesuggester' );
-			var selectedMenuValue = languageSuggester && languageSuggester.getSelectedValue();
+			const languageSuggester = this.$selector.data( 'languagesuggester' );
+			const selectedMenuValue = languageSuggester && languageSuggester.getSelectedValue();
 			return selectedMenuValue || this.$selector.val();
 		}
 	} );

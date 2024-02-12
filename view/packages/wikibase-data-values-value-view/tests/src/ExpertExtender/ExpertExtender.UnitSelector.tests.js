@@ -6,11 +6,11 @@
 ( function( $, ExpertExtender, testExpertExtenderExtension, sinon, QUnit ) {
 	'use strict';
 
-	var UnitSelector = require( '../../../src/ExpertExtender/ExpertExtender.UnitSelector.js' );
+	const UnitSelector = require( '../../../src/ExpertExtender/ExpertExtender.UnitSelector.js' );
 
 	QUnit.module( 'UnitSelector' );
 
-	var messageProvider = {
+	const messageProvider = {
 		getMessage: function( key, params ) {
 			return params && params.length > 0 ? params.join( ' ' ) : key;
 		}
@@ -29,13 +29,13 @@
 	);
 
 	QUnit.test( 'getConceptUri() does change if input value changes', function( assert ) {
-		var unitSelector = new UnitSelector(
+		const unitSelector = new UnitSelector(
 			messageProvider,
 			function() {
 				return { label: 'Ultrameter' };
 			}
 		);
-		var $extender = $( '<div />' );
+		const $extender = $( '<div />' );
 
 		unitSelector.init( $extender );
 
@@ -55,13 +55,13 @@
 	} );
 
 	QUnit.test( 'returns correct value after initialization', function( assert ) {
-		var unitSelector = new UnitSelector(
+		const unitSelector = new UnitSelector(
 			messageProvider,
 			function() {
 				return { conceptUri: 'Ultrameter' };
 			}
 		);
-		var $extender = $( '<div />' );
+		const $extender = $( '<div />' );
 
 		unitSelector.init( $extender );
 

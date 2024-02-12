@@ -1,4 +1,7 @@
 /**
+ * @param $
+ * @param valueview
+ * @param QUnit
  * @license GNU GPL v2+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
@@ -15,7 +18,7 @@
 
 		constructor: function( constructor, getInstance ) {
 			QUnit.test( 'Constructor', function( assert ) {
-				var instance = getInstance();
+				const instance = getInstance();
 
 				assert.ok(
 					instance instanceof constructor,
@@ -30,7 +33,7 @@
 
 		destroy: function( constructor, getInstance ) {
 			QUnit.test( 'destroy cleans up properties', function( assert ) {
-				var instance = getInstance();
+				const instance = getInstance();
 
 				instance.destroy();
 
@@ -40,7 +43,7 @@
 
 		init: function( getInstance ) {
 			QUnit.test( 'init appends an element', function( assert ) {
-				var instance = getInstance(),
+				const instance = getInstance(),
 					$extender = $( '<div />' );
 
 				instance.init( $extender );

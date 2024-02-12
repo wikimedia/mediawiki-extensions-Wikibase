@@ -21,7 +21,7 @@
 		this.$input = $input;
 		extensions = extensions || [];
 
-		var extendable = this._extendable = new Extendable();
+		const extendable = this._extendable = new Extendable();
 
 		$.each( extensions, function( k, extension ) {
 			extendable.addExtension( extension );
@@ -89,7 +89,7 @@
 		 * @param {jQuery} $extender
 		 */
 		_initExtensions: function( $extender ) {
-			var self = this;
+			const self = this;
 			this._extendable.callExtensions( 'init', [ $extender ] );
 			this.$input.one( 'inputextenderaftertoggle', function() {
 				self._extendable.callExtensions( 'onInitialShow' );

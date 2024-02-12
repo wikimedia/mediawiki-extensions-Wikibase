@@ -7,9 +7,9 @@
 ( function( $, dv, QUnit ) {
 	'use strict';
 
-	var vv = $.valueview;
+	const vv = $.valueview;
 
-	var DataTypeMock = function( dataTypeId, DataValue ) {
+	const DataTypeMock = function( dataTypeId, DataValue ) {
 		this._dataTypeId = dataTypeId;
 		this._dataValueType = DataValue.TYPE;
 	};
@@ -50,7 +50,7 @@
 		);
 	}
 
-	var StringValue = dv.StringValue,
+	const StringValue = dv.StringValue,
 		UnknownValue = dv.UnknownValue,
 		stringType = new DataTypeMock( 'somestringtype', StringValue ),
 		numberType = new DataTypeMock( 'somenumbertype', dv.NumberValue ),
@@ -61,7 +61,7 @@
 	QUnit.module( 'jquery.valueview.ExpertStore' );
 
 	QUnit.test( 'Constructor', function( assert ) {
-		var expertStore = new vv.ExpertStore();
+		const expertStore = new vv.ExpertStore();
 
 		assert.ok(
 			expertStore instanceof vv.ExpertStore,
@@ -70,7 +70,7 @@
 	} );
 
 	QUnit.test( 'registerDataTypeExpert(): Error handling', function( assert ) {
-		var expertStore = new vv.ExpertStore();
+		const expertStore = new vv.ExpertStore();
 
 		assert.throws(
 			function() {
@@ -90,7 +90,7 @@
 	} );
 
 	QUnit.test( 'registerDataValueExpert(): Error handling', function( assert ) {
-		var expertStore = new vv.ExpertStore();
+		const expertStore = new vv.ExpertStore();
 
 		assert.throws(
 			function() {
@@ -110,7 +110,7 @@
 	} );
 
 	QUnit.test( 'Return default expert constructor on getExpert()', function( assert ) {
-		var expertStore = new vv.ExpertStore( MockExpertForUnsupportedValue );
+		const expertStore = new vv.ExpertStore( MockExpertForUnsupportedValue );
 
 		assert.strictEqual(
 			expertStore.getExpert( StringValue.TYPE ),
@@ -152,7 +152,7 @@
 	 *
 	 * @property {Object[]}
 	 */
-	var expertStoreRegistrationTestCases = [
+	const expertStoreRegistrationTestCases = [
 		{
 			title: 'Empty store',
 			register: [],
@@ -221,11 +221,11 @@
 	 *        constructor and an Expert constructor which is expected to be registered for it.
 	 */
 	function expertStoreRegistrationTest( assert, toRegister, toExpect ) {
-		var expertStore = new vv.ExpertStore();
+		const expertStore = new vv.ExpertStore();
 
 		// Register experts as per definition:
 		$.each( toRegister, function( i, registerPair ) {
-			var purpose = registerPair[0],
+			const purpose = registerPair[0],
 				Expert = registerPair[1];
 
 			if ( purpose instanceof DataTypeMock ) {
@@ -242,7 +242,7 @@
 
 		// Check for expected conditions:
 		$.each( toExpect, function( i, expectPair ) {
-			var purpose = expectPair[0],
+			let purpose = expectPair[0],
 				Expert = expectPair[1],
 				RetrievedExpert;
 

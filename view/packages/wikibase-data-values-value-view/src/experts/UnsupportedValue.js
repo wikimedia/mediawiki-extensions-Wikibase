@@ -1,7 +1,7 @@
 ( function( $, vv ) {
 	'use strict';
 
-	var PARENT = vv.Expert;
+	const PARENT = vv.Expert;
 
 	/**
 	 * `Valueview` expert for displaying (or rather not displaying) a data value not supported by
@@ -43,7 +43,7 @@
 			// This expert just displays a message that whatever value currently set in the
 			// valueview or whatever kind of value should be handled by the view is not supported.
 
-			var value = this.viewState().value(),
+			let value = this.viewState().value(),
 				unsupportedIndicator,
 				unsupportedMsg;
 
@@ -56,7 +56,7 @@
 				// NOTE: Of course, this also implies that the data value type is unsupported but
 				//  the message is actually more detailed than that.
 			} else if ( value || this.viewState().option( 'dataValueType' ) ) {
-				var dataValueType = ( value )
+				const dataValueType = ( value )
 					? value.getType()
 					: this.viewState().option( 'dataValueType' );
 				unsupportedMsg = this._messageProvider.getMessage(

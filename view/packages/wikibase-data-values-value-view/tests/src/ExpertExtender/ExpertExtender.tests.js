@@ -9,7 +9,7 @@
 	QUnit.module( 'jquery.valueview.ExpertExtender' );
 
 	QUnit.test( 'Constructor', function( assert ) {
-		var expertExtender = new ExpertExtender( $( '<input/>' ), [] );
+		const expertExtender = new ExpertExtender( $( '<input/>' ), [] );
 
 		assert.ok(
 			expertExtender instanceof ExpertExtender,
@@ -20,7 +20,7 @@
 	} );
 
 	QUnit.test( 'destroy cleans up properties', function( assert ) {
-		var expertExtender = new ExpertExtender( $( '<input/>' ), [] );
+		const expertExtender = new ExpertExtender( $( '<input/>' ), [] );
 
 		expertExtender.destroy();
 
@@ -28,7 +28,7 @@
 	} );
 
 	QUnit.test( 'destroy calls extensions', function( assert ) {
-		var destroy = sinon.spy(),
+		const destroy = sinon.spy(),
 			expertExtender = new ExpertExtender( $( '<input/>' ), [ {
 				destroy: destroy
 			} ] );
@@ -39,7 +39,7 @@
 	} );
 
 	QUnit.test( 'init calls extensions', function( assert ) {
-		var $input = $( '<input/>' ).appendTo( 'body' ),
+		const $input = $( '<input/>' ).appendTo( 'body' ),
 			init = sinon.spy(),
 			onInitialShow = sinon.spy(),
 			draw = sinon.spy(),

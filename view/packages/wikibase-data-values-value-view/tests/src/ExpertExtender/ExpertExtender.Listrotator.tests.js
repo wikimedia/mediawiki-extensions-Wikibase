@@ -8,7 +8,7 @@
 
 	QUnit.module( 'jquery.valueview.ExpertExtender.Listrotator' );
 
-	var messageProvider = {
+	const messageProvider = {
 		getMessage: function() { }
 	};
 
@@ -20,16 +20,16 @@
 	);
 
 	QUnit.test( 'supports custom values', function( assert ) {
-		var getUpstreamValue = function() {
+		const getUpstreamValue = function() {
 			return {
 				custom: true,
 				value: 'custom value',
 				label: 'label for custom value'
 			};
 		};
-		var $extender = $( '<div />' );
+		const $extender = $( '<div />' );
 
-		var listrotator = new ExpertExtender.Listrotator(
+		const listrotator = new ExpertExtender.Listrotator(
 			'',
 			[ { value: 'fixed value', label: 'label for fixed value' } ],
 			null,
@@ -44,19 +44,19 @@
 	} );
 
 	QUnit.test( 'supports switching away from custom values', function( assert ) {
-		var done = assert.async();
-		var onValueChange = sinon.spy();
-		var upstreamValue = {
+		const done = assert.async();
+		const onValueChange = sinon.spy();
+		const upstreamValue = {
 			custom: true,
 			value: 'custom value',
 			label: 'label for custom value'
 		};
-		var getUpstreamValue = function() {
+		const getUpstreamValue = function() {
 			return upstreamValue;
 		};
-		var $extender = $( '<div />' );
+		const $extender = $( '<div />' );
 
-		var listrotator = new ExpertExtender.Listrotator(
+		const listrotator = new ExpertExtender.Listrotator(
 			'',
 			[ { value: 'fixed value', label: 'label for fixed value' } ],
 			onValueChange,

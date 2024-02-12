@@ -1,4 +1,7 @@
 /**
+ * @param $
+ * @param QUnit
+ * @param vv
  * @license GNU GPL v2+
  */
 ( function( $, QUnit, vv ) {
@@ -20,7 +23,7 @@
 	}
 
 	QUnit.test( 'valueCharacteristics', function( assert ) {
-		var expert = newExpert(),
+		const expert = newExpert(),
 			characteristics = expert.valueCharacteristics();
 
 		assert.ok(

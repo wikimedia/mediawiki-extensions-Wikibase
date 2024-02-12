@@ -1,9 +1,9 @@
 module.exports = ( function( dv, vf, vp ) {
 'use strict';
 
-var ViewState = require( './jquery.valueview.ViewState.js' );
+const ViewState = require( './jquery.valueview.ViewState.js' );
 
-var PARENT = $.Widget;
+const PARENT = $.Widget;
 
 /**
  * Helper for defining a valueview member function which will just call a valueview's Expert's
@@ -295,7 +295,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * for editing the related data value.
 	 */
 	startEditing: function() {
-		var self = this;
+		const self = this;
 
 		if ( this.isInEditMode() ) {
 			return; // return nothing to allow chaining
@@ -346,7 +346,7 @@ $.widget( 'valueview.valueview', PARENT, {
 
 		dropValue = !!dropValue;
 
-		var self = this;
+		const self = this;
 
 		if ( dropValue ) {
 			// reinstate initial value from before edit mode
@@ -440,7 +440,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * @return {dataValues.DataValue|null|undefined}
 	 */
 	_initValue: function( value ) {
-		var formattedValue = this.element.html();
+		const formattedValue = this.element.html();
 		if ( !formattedValue ) {
 			return this.value( value );
 		} else {
@@ -478,7 +478,7 @@ $.widget( 'valueview.valueview', PARENT, {
 		//  to ultimately set a value without triggering validation, some kind of ValidatedDataValue,
 		//  as mentioned in the 'value' function's todo, would be required.
 
-		var self = this;
+		const self = this;
 
 		if ( this._value === null ) {
 			this.draw();
@@ -551,7 +551,7 @@ $.widget( 'valueview.valueview', PARENT, {
 			throw new Error( 'No ExpertStore set in valueview\'s "expertStore" option' );
 		}
 
-		var dataValueType = this._determineDataValueType();
+		const dataValueType = this._determineDataValueType();
 
 		this._expertConstructor = $.valueview.experts.EmptyValue;
 
@@ -616,7 +616,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * @return {Function} return.fail
 	 */
 	draw: function() {
-		var self = this;
+		const self = this;
 
 		this.element
 			.toggleClass( this.widgetBaseClass + '-instaticmode', !this._isInEditMode )
@@ -634,7 +634,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * @return {Function} return.fail
 	 */
 	drawContent: function() {
-		var self = this,
+		const self = this,
 			deferred = $.Deferred();
 
 		if ( this.isInEditMode() ) {
@@ -690,7 +690,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * @private
 	 */
 	_updateValue: function() {
-		var self = this;
+		const self = this;
 
 		this._value = null;
 		this._formattedValue = '';
@@ -752,7 +752,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * @throws {Error} if the parser result is neither a `DataValue` instance nor null.
 	 */
 	_parseValue: function() {
-		var self = this,
+		const self = this,
 			expert = this._expert,
 			rawValue = expert.rawValue(),
 			deferred = $.Deferred();
@@ -770,7 +770,7 @@ $.widget( 'valueview.valueview', PARENT, {
 			clearTimeout( this._parseTimer );
 		}
 
-		var valueParser = this._instantiateParser( expert.valueCharacteristics() );
+		const valueParser = this._instantiateParser( expert.valueCharacteristics() );
 
 		self.__lastUpdateValue = rawValue;
 		this._parseTimer = setTimeout( function() {
@@ -829,12 +829,12 @@ $.widget( 'valueview.valueview', PARENT, {
 			throw new Error( 'No value parser store in valueview\'s options specified' );
 		}
 
-		var Parser = this.options.parserStore.getParser(
+		const Parser = this.options.parserStore.getParser(
 			this._determineDataValueType(),
 			this.options.dataTypeId
 		);
 
-		var parserOptions = $.extend(
+		const parserOptions = $.extend(
 			{
 				lang: this.options.language
 			},
@@ -859,7 +859,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	 *         result shall be ignored.
 	 */
 	_formatValue: function( dataValue ) {
-		var self = this,
+		const self = this,
 			deferred = $.Deferred();
 
 		this.options.htmlFormatter.format( dataValue )
@@ -893,7 +893,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * @return {string} return.fail.message HTML error message.
 	 */
 	_updateTextValue: function() {
-		var self = this,
+		const self = this,
 			deferred = $.Deferred(),
 			dataValue = this._value;
 
@@ -925,7 +925,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * @return {string|null}
 	 */
 	_determineDataValueType: function() {
-		var value = this.value();
+		const value = this.value();
 		return ( !this.options.dataValueType && value )
 			? value.getType()
 			: this.options.dataValueType;
@@ -949,11 +949,11 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * @return {util.Notifier}
 	 */
 	viewNotifier: function() {
-		var self = this;
+		const self = this;
 
 		return new util.Notifier( {
 			change: function() {
-				var i;
+				let i;
 
 				if ( !self._expert ) {
 					// someone notified about change while there couldn't have been one since there
@@ -964,7 +964,7 @@ $.widget( 'valueview.valueview', PARENT, {
 				// we have currently. This is not the case when _setValue() sets a new value because
 				// the expert will get that new value's raw value while we already have the parsed
 				// version of the value.
-				var differentValueCharacteristics = false,
+				let differentValueCharacteristics = false,
 					newValueCharacteristics = self._expert.valueCharacteristics(),
 					lastValueCharacteristics = self.__lastValueCharacteristics || {};
 
@@ -977,7 +977,7 @@ $.widget( 'valueview.valueview', PARENT, {
 					|| newValueCharacteristics[i] !== lastValueCharacteristics[i];
 				}
 
-				var changeDetected = differentValueCharacteristics ||
+				const changeDetected = differentValueCharacteristics ||
 					self.getTextValue() !== self._expert.rawValue();
 
 				if ( changeDetected ) {

@@ -22,7 +22,7 @@
 		this._onValueChange = onValueChange;
 		this._getUpstreamValue = getUpstreamValue;
 
-		var $rotator = $( '<div/>' )
+		const $rotator = $( '<div/>' )
 			.addClass( className )
 			.listrotator( {
 				values: values,
@@ -68,7 +68,7 @@
 		 * @param {jQuery} $extender
 		 */
 		init: function( $extender ) {
-			var self = this,
+			const self = this,
 				listrotatorEvents = 'listrotatorauto listrotatorselected';
 
 			this.rotator.element
@@ -86,7 +86,7 @@
 		 * Callback for the `draw` `ExpertExtender` event.
 		 */
 		draw: function() {
-			var value = this._getUpstreamValue();
+			let value = this._getUpstreamValue();
 			if ( value === undefined || value === null ) {
 				return;
 			}

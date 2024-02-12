@@ -6,8 +6,8 @@
 ( function( QUnit, valueview ) {
 	'use strict';
 
-	var testExpert = valueview.tests.testExpert;
-	var expertToTest = valueview.experts.MonolingualText;
+	const testExpert = valueview.tests.testExpert;
+	const expertToTest = valueview.experts.MonolingualText;
 
 	QUnit.module( 'jquery.valueview.experts.MonolingualText' );
 

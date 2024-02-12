@@ -30,7 +30,7 @@ $.valueview = $.valueview || {};
 	 * @throws {Error} if the base constructor is not a function.
 	 */
 	vv.expert = function( name, base, constructorOrExpertDefinition, expertDefinition ) {
-		var constructor = null;
+		let constructor = null;
 
 		if ( expertDefinition ) {
 			constructor = constructorOrExpertDefinition;

@@ -3,7 +3,7 @@
 
 	require( './jquery.valueview.valueview.js' );
 
-	var origValueview = $.valueview || {};
+	const origValueview = $.valueview || {};
 
 	// The actual valueview jQuery widget is defined as jQuery.valueview.valueview. Since this is
 	// confusing and since we don't even need or want a namespace for the valueview, we just

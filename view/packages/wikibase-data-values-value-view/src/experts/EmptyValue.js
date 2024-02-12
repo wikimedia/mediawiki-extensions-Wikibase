@@ -1,7 +1,7 @@
 ( function( $, vv ) {
 	'use strict';
 
-	var PARENT = vv.Expert;
+	const PARENT = vv.Expert;
 
 	/**
 	 * `Valueview` expert for empty `valueview` objects without any hint about what kind of

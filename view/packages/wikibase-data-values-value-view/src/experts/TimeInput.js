@@ -1,7 +1,7 @@
 module.exports = ( function( $, vv, TimeValue ) {
 	'use strict';
 
-	var PARENT = vv.experts.StringValue;
+	const PARENT = vv.experts.StringValue;
 
 	/**
 	 * @ignore
@@ -10,10 +10,10 @@ module.exports = ( function( $, vv, TimeValue ) {
 	 * @return {Object[]} [{ value: <{number}>, label: <{string}>}, ...]
 	 */
 	function getPrecisionValues( messageProvider ) {
-		var precisionValues = [],
+		const precisionValues = [],
 			dayPrecision = TimeValue.getPrecisionById( 'DAY' );
 		$.each( TimeValue.PRECISIONS, function( precisionValue, precision ) {
-			var label;
+			let label;
 			if ( precisionValue <= dayPrecision ) {
 				// TODO: Remove this check as soon as time values are supported.
 				label = messageProvider.getMessage(
@@ -32,9 +32,9 @@ module.exports = ( function( $, vv, TimeValue ) {
 	 * @return {Object[]} [{ value: <{string}>, label: <{string}>}, ...]
 	 */
 	function getCalendarValues( messageProvider ) {
-		var calendarValues = [];
+		const calendarValues = [];
 		$.each( TimeValue.CALENDARS, function( key, uri ) {
-			var label = messageProvider.getMessage(
+			const label = messageProvider.getMessage(
 				'valueview-expert-timevalue-calendar-' + key.toLowerCase()
 			) || key.toLowerCase();
 			calendarValues.push( { value: uri, label: label } );
@@ -55,7 +55,7 @@ module.exports = ( function( $, vv, TimeValue ) {
 	vv.experts.TimeInput = vv.expert( 'TimeInput', PARENT, function() {
 		PARENT.apply( this, arguments );
 
-		var self = this;
+		const self = this;
 
 		this.preview = new vv.ExpertExtender.Preview(
 			function() {
@@ -64,8 +64,8 @@ module.exports = ( function( $, vv, TimeValue ) {
 			this._messageProvider
 		);
 
-		var precisionMsgKey = 'valueview-expert-timeinput-precision';
-		var $precisionContainer = $( '<div/>' )
+		const precisionMsgKey = 'valueview-expert-timeinput-precision';
+		const $precisionContainer = $( '<div/>' )
 			.addClass( this.uiBaseClass + '-precisioncontainer' )
 			.append( $( '<div/>' )
 				.addClass( 'ui-listrotator-caption' )
@@ -76,14 +76,14 @@ module.exports = ( function( $, vv, TimeValue ) {
 			getPrecisionValues( this._messageProvider ),
 			this._onRotatorChange.bind( this ),
 			function() {
-				var value = self.viewState().value();
+				const value = self.viewState().value();
 				return value && value.getOption( 'precision' );
 			},
 			this._messageProvider
 		);
 
-		var calendarMsgKey = 'valueview-expert-timeinput-calendar';
-		var $calendarContainer = $( '<div/>' )
+		const calendarMsgKey = 'valueview-expert-timeinput-calendar';
+		const $calendarContainer = $( '<div/>' )
 			.addClass( this.uiBaseClass + '-calendarcontainer' )
 			.append( $( '<div/>' )
 				.addClass( 'ui-listrotator-caption' )
@@ -94,13 +94,13 @@ module.exports = ( function( $, vv, TimeValue ) {
 			getCalendarValues( this._messageProvider ),
 			this._onRotatorChange.bind( this ),
 			function() {
-				var value = self.viewState().value();
+				const value = self.viewState().value();
 				return value && value.getOption( 'calendarModel' );
 			},
 			this._messageProvider
 		);
 
-		var inputExtender = new vv.ExpertExtender(
+		const inputExtender = new vv.ExpertExtender(
 			this.$input,
 			[
 				this.preview,
@@ -177,7 +177,7 @@ module.exports = ( function( $, vv, TimeValue ) {
 		 * @inheritdoc
 		 */
 		valueCharacteristics: function() {
-			var options = {},
+			const options = {},
 				precision = this.precisionRotator.getValue() || null,
 				calendarUri = this.calendarRotator.getValue() || null;
 

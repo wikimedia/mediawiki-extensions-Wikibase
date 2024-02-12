@@ -16,11 +16,11 @@
 	);
 
 	QUnit.test( 'init calls child', function( assert ) {
-		var $container = $( '<div />' );
-		var child = {
+		const $container = $( '<div />' );
+		const child = {
 			init: sinon.spy()
 		};
-		var container = new ExpertExtender.Container( $container, child );
+		const container = new ExpertExtender.Container( $container, child );
 
 		container.init( $( '<div />' ) );
 

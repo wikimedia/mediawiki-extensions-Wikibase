@@ -1,7 +1,7 @@
 ( function( $, vv ) {
 	'use strict';
 
-	var PARENT = vv.Expert;
+	const PARENT = vv.Expert;
 
 	/**
 	 * `Valueview` expert for displaying (or rather not displaying) a data value not supported by

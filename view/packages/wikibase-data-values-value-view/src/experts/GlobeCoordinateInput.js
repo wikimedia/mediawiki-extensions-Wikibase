@@ -1,9 +1,9 @@
 module.exports = ( function( $, vv ) {
 	'use strict';
 
-	var PARENT = vv.experts.StringValue;
+	const PARENT = vv.experts.StringValue;
 
-	var PRECISIONS = [
+	const PRECISIONS = [
 		10,
 		1,
 		0.1,
@@ -32,7 +32,7 @@ module.exports = ( function( $, vv ) {
 	vv.experts.GlobeCoordinateInput = vv.expert( 'GlobeCoordinateInput', PARENT, function() {
 		PARENT.apply( this, arguments );
 
-		var self = this;
+		const self = this;
 
 		this.preview = new vv.ExpertExtender.Preview(
 			function() {
@@ -41,8 +41,8 @@ module.exports = ( function( $, vv ) {
 			this._messageProvider
 		);
 
-		var precisionMsgKey = 'valueview-expert-globecoordinateinput-precision';
-		var $precisionContainer = $( '<div/>' )
+		const precisionMsgKey = 'valueview-expert-globecoordinateinput-precision';
+		const $precisionContainer = $( '<div/>' )
 			.addClass( this.uiBaseClass + '-precisioncontainer' )
 			.append( $( '<div/>' )
 				.addClass( 'ui-listrotator-caption' )
@@ -55,12 +55,12 @@ module.exports = ( function( $, vv ) {
 				self._viewNotifier.notify( 'change' );
 			},
 			function() {
-				var value = self.viewState().value();
+				const value = self.viewState().value();
 				if ( !value ) {
 					return value;
 				}
 
-				var precision = value.getValue().getPrecision();
+				const precision = value.getValue().getPrecision();
 				if ( !precision ) {
 					return {
 						custom: true,
@@ -83,7 +83,7 @@ module.exports = ( function( $, vv ) {
 			this._messageProvider
 		);
 
-		var inputExtender = new vv.ExpertExtender(
+		const inputExtender = new vv.ExpertExtender(
 			this.$input,
 			[
 				this.preview,
@@ -121,7 +121,7 @@ module.exports = ( function( $, vv ) {
 		 * @inheritdoc
 		 */
 		valueCharacteristics: function() {
-			var options = {},
+			const options = {},
 				precision = this.precisionRotator.getValue();
 
 			if ( precision !== null ) {
@@ -167,7 +167,7 @@ module.exports = ( function( $, vv ) {
 		 * @return {string}
 		 */
 		_getPrecisionLabel: function( precision ) {
-			var presets = {
+			const presets = {
 				'valueview-expert-globecoordinateinput-precisionlabel-arcminute': 1 / 60,
 				'valueview-expert-globecoordinateinput-precisionlabel-arcsecond': 1 / 3600,
 				'valueview-expert-globecoordinateinput-precisionlabel-tenth-of-arcsecond': 1 / 36000,
@@ -176,7 +176,7 @@ module.exports = ( function( $, vv ) {
 				'valueview-expert-globecoordinateinput-precisionlabel-tenthousandth-of-arcsecond': 1 / 36000000
 			};
 
-			for ( var labelMsg in presets ) {
+			for ( const labelMsg in presets ) {
 				if ( Math.abs( precision - presets[labelMsg] ) < 0.000000000001 ) {
 					return this._messageProvider.getMessage( labelMsg );
 				}
@@ -195,7 +195,7 @@ module.exports = ( function( $, vv ) {
 		 * @return {number|null}
 		 */
 		_getPrecisionSetting: function( precision ) {
-			var self = this,
+			let self = this,
 				actualPrecision = null,
 				roundedPrecision = this._roundPrecision( precision );
 
@@ -216,7 +216,7 @@ module.exports = ( function( $, vv ) {
 		 * @return {Object[]}
 		 */
 		_getPrecisionValues: function() {
-			var self = this,
+			const self = this,
 				precisionValues = [];
 			$.each( PRECISIONS, function( i, precision ) {
 				precisionValues.unshift( {

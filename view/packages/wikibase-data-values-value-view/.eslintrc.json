@@ -31,6 +31,7 @@
 		"vars-on-top": "off",
 		"wrap-iife": "off",
 		"no-shadow": "warn",
-		"mediawiki/class-doc": "warn"
+		"mediawiki/class-doc": "warn",
+		"prefer-const": "warn"
 	}
 }

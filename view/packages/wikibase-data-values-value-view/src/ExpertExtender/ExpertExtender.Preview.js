@@ -22,7 +22,7 @@
 			messageProvider
 		);
 
-		var $preview = $( '<div/>' ).preview( {
+		const $preview = $( '<div/>' ).preview( {
 			messageProvider: messageProvider
 		} );
 		this._preview = $preview.data( 'preview' );

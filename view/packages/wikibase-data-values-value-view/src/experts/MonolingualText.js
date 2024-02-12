@@ -1,7 +1,7 @@
 module.exports = ( function( vv ) {
 	'use strict';
 
-	var PARENT = vv.experts.StringValue,
+	const PARENT = vv.experts.StringValue,
 		LanguageSelector = require( '../ExpertExtender/ExpertExtender.LanguageSelector.js' );
 
 	/**
@@ -14,13 +14,13 @@ module.exports = ( function( vv ) {
 	vv.experts.MonolingualText = vv.expert( 'MonolingualText', PARENT, function() {
 		PARENT.apply( this, arguments );
 
-		var self = this;
+		const self = this;
 
 		this._languageSelector = new LanguageSelector(
 			this._options.contentLanguages,
 			this._messageProvider,
 			function() {
-				var value = self.viewState().value();
+				const value = self.viewState().value();
 				return value && value.getLanguageCode();
 			},
 			function() {
@@ -28,7 +28,7 @@ module.exports = ( function( vv ) {
 			}
 		);
 
-		var inputExtender = new vv.ExpertExtender(
+		const inputExtender = new vv.ExpertExtender(
 			this.$input,
 			[
 				this._languageSelector

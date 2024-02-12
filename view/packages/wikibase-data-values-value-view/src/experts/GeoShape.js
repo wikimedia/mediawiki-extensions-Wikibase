@@ -1,7 +1,7 @@
 module.exports = ( function( $, vv ) {
 	'use strict';
 
-	var PARENT = vv.experts.StringValue;
+	const PARENT = vv.experts.StringValue;
 
 	/**
 	 * `Valueview` expert for adding specialized handling for `geo-shape` data type.
@@ -24,7 +24,7 @@ module.exports = ( function( $, vv ) {
 		_init: function() {
 			PARENT.prototype._init.call( this );
 
-			var notifier = this._viewNotifier,
+			const notifier = this._viewNotifier,
 				$input = this.$input;
 
 			$input.commonssuggester( {
