@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Tests\Wikibase\DataModel\Serializers;
 
 use PHPUnit\Framework\TestCase;
@@ -47,7 +49,7 @@ class SiteLinkListSerializerTest extends TestCase {
 		);
 	}
 
-	public function testSerializeEmptyListUsesArrayByDefault() {
+	public function testSerializeEmptyListUsesArrayByDefault(): void {
 		$serializer = new SiteLinkListSerializer( $this->createSiteLinkSerializer(), false );
 		$this->assertEquals(
 			[],
@@ -55,7 +57,7 @@ class SiteLinkListSerializerTest extends TestCase {
 		);
 	}
 
-	public function testSerializeEmptyListUsesObjectWhenEmptyMapsFlagIsSet() {
+	public function testSerializeEmptyListUsesObjectWhenEmptyMapsFlagIsSet(): void {
 		$serializer = new SiteLinkListSerializer( $this->createSiteLinkSerializer(), true );
 		$this->assertEquals(
 			(object)[],

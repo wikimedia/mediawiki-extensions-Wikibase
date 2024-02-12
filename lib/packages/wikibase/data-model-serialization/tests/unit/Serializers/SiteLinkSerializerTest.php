@@ -1,7 +1,10 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Tests\Wikibase\DataModel\Serializers;
 
+use Serializers\DispatchableSerializer;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Serializers\SiteLinkSerializer;
 use Wikibase\DataModel\SiteLink;
@@ -14,11 +17,11 @@ use Wikibase\DataModel\SiteLink;
  */
 class SiteLinkSerializerTest extends DispatchableSerializerTest {
 
-	protected function buildSerializer() {
+	protected function buildSerializer(): DispatchableSerializer {
 		return new SiteLinkSerializer();
 	}
 
-	public function serializableProvider() {
+	public function serializableProvider(): array {
 		return [
 			[
 				new SiteLink( 'enwiki', 'Nyan Cat' ),
@@ -31,7 +34,7 @@ class SiteLinkSerializerTest extends DispatchableSerializerTest {
 		];
 	}
 
-	public function nonSerializableProvider() {
+	public function nonSerializableProvider(): array {
 		return [
 			[
 				5,
@@ -45,7 +48,7 @@ class SiteLinkSerializerTest extends DispatchableSerializerTest {
 		];
 	}
 
-	public function serializationProvider() {
+	public function serializationProvider(): array {
 		return [
 			[
 				[

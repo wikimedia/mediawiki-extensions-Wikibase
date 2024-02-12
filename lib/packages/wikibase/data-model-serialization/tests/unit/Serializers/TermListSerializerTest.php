@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Tests\Wikibase\DataModel\Serializers;
 
 use PHPUnit\Framework\TestCase;
@@ -18,17 +20,14 @@ use Wikibase\DataModel\Term\TermList;
  */
 class TermListSerializerTest extends TestCase {
 
-	/**
-	 * @return TermListSerializer
-	 */
-	private function buildSerializer( bool $useObjectsForEmptyMaps ) {
+	private function buildSerializer( bool $useObjectsForEmptyMaps ): TermListSerializer {
 		return new TermListSerializer( new TermSerializer(), $useObjectsForEmptyMaps );
 	}
 
 	/**
 	 * @dataProvider serializationProvider
 	 */
-	public function testSerialization( TermList $input, $expected ) {
+	public function testSerialization( TermList $input, $expected ): void {
 		$serializer = $this->buildSerializer( false );
 
 		$output = $serializer->serialize( $input );
@@ -36,7 +35,7 @@ class TermListSerializerTest extends TestCase {
 		$this->assertEquals( $expected, $output );
 	}
 
-	public static function serializationProvider() {
+	public static function serializationProvider(): array {
 		return [
 			[
 				new TermList( [] ),
@@ -57,14 +56,14 @@ class TermListSerializerTest extends TestCase {
 		];
 	}
 
-	public function testWithUnsupportedObject() {
+	public function testWithUnsupportedObject(): void {
 		$serializer = $this->buildSerializer( false );
 
 		$this->expectException( UnsupportedObjectException::class );
 		$serializer->serialize( new \stdClass() );
 	}
 
-	public function testTermListSerializerSerializesTermLists() {
+	public function testTermListSerializerSerializesTermLists(): void {
 		$serializer = $this->buildSerializer( false );
 
 		$terms = new TermList( [ new Term( 'en', 'foo' ) ] );
@@ -79,7 +78,7 @@ class TermListSerializerTest extends TestCase {
 		$this->assertEquals( [], $serializer->serialize( new TermList() ) );
 	}
 
-	public function testTermListSerializerUsesObjectsForEmptyLists() {
+	public function testTermListSerializerUsesObjectsForEmptyLists(): void {
 		$serializer = $this->buildSerializer( true );
 		$this->assertEquals( (object)[], $serializer->serialize( new TermList() ) );
 	}

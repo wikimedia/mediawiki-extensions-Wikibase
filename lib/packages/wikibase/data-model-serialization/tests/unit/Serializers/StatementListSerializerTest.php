@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Tests\Wikibase\DataModel\Serializers;
 
 use Wikibase\DataModel\Serializers\StatementListSerializer;
@@ -36,7 +38,7 @@ class StatementListSerializerTest extends DispatchableSerializerTest {
 		return new StatementListSerializer( $statementSerializerMock, $useObjectsForEmptyMaps );
 	}
 
-	public function serializableProvider() {
+	public function serializableProvider(): array {
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( 'test' );
 
@@ -46,7 +48,7 @@ class StatementListSerializerTest extends DispatchableSerializerTest {
 		];
 	}
 
-	public function nonSerializableProvider() {
+	public function nonSerializableProvider(): array {
 		return [
 			[
 				5,
@@ -60,7 +62,7 @@ class StatementListSerializerTest extends DispatchableSerializerTest {
 		];
 	}
 
-	public function serializationProvider() {
+	public function serializationProvider(): array {
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( 'test' );
 
@@ -87,7 +89,7 @@ class StatementListSerializerTest extends DispatchableSerializerTest {
 		];
 	}
 
-	public function testStatementListSerializerWithoutOptionUseObjectsForEmptyMaps() {
+	public function testStatementListSerializerWithoutOptionUseObjectsForEmptyMaps(): void {
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( 'test' );
 		$statementSerializerMock = $this->createMock( StatementSerializer::class );
@@ -110,14 +112,14 @@ class StatementListSerializerTest extends DispatchableSerializerTest {
 		$this->assertEquals( $serial, $serializer->serialize( $statementList ) );
 	}
 
-	public function testStatementListSerializerSerializesEmptyList() {
+	public function testStatementListSerializerSerializesEmptyList(): void {
 		$statementSerializerMock = $this->createMock( StatementSerializer::class );
 		$serializer = new StatementListSerializer( $statementSerializerMock, false );
 
 		$this->assertEquals( [], $serializer->serialize( new StatementList() ) );
 	}
 
-	public function testStatementListSerializerUseObjectForEmptyListWhenFlagIsSet() {
+	public function testStatementListSerializerUseObjectForEmptyListWhenFlagIsSet(): void {
 		$statementSerializerMock = $this->createMock( StatementSerializer::class );
 		$serializer = new StatementListSerializer( $statementSerializerMock, true );
 

@@ -40,7 +40,7 @@ class RedirectTrackingUsageAccumulator extends ParserUsageAccumulator {
 	 *
 	 * @return void
 	 */
-	public function addUsage( EntityUsage $usage ) {
+	public function addUsage( EntityUsage $usage ): void {
 
 		$redirectTarget = $this->entityRedirectTargetLookup->getRedirectForEntityId( $usage->getEntityId() );
 		if ( $redirectTarget !== null ) {
@@ -65,7 +65,7 @@ class RedirectTrackingUsageAccumulator extends ParserUsageAccumulator {
 	 *
 	 * @return EntityUsage[]
 	 */
-	public function getUsages() {
+	public function getUsages(): array {
 		return $this->innerUsageAccumulator->getUsages();
 	}
 }

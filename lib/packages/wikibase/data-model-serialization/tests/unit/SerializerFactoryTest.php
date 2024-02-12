@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Tests\Wikibase\DataModel;
 
 use DataValues\Serializers\DataValueSerializer;
@@ -31,16 +33,16 @@ use Wikibase\DataModel\Term\TermList;
  */
 class SerializerFactoryTest extends TestCase {
 
-	private function buildSerializerFactory() {
+	private function buildSerializerFactory(): SerializerFactory {
 		return new SerializerFactory( new DataValueSerializer() );
 	}
 
-	private function assertSerializesWithoutException( Serializer $serializer, $object ) {
+	private function assertSerializesWithoutException( Serializer $serializer, object $object ): void {
 		$serializer->serialize( $object );
 		$this->assertTrue( true, 'No exception occurred during serialization' );
 	}
 
-	public function testNewEntitySerializer() {
+	public function testNewEntitySerializer(): void {
 		$this->assertSerializesWithoutException(
 			$this->buildSerializerFactory()->newEntitySerializer(),
 			new Item()
@@ -52,110 +54,110 @@ class SerializerFactoryTest extends TestCase {
 		);
 	}
 
-	public function testNewItemSerializer() {
+	public function testNewItemSerializer(): void {
 		$this->assertSerializesWithoutException(
 			$this->buildSerializerFactory()->newItemSerializer(),
 			new Item()
 		);
 	}
 
-	public function testNewPropertySerializer() {
+	public function testNewPropertySerializer(): void {
 		$this->assertSerializesWithoutException(
 			$this->buildSerializerFactory()->newPropertySerializer(),
 			Property::newFromType( 'string' )
 		);
 	}
 
-	public function testNewSiteLinkSerializer() {
+	public function testNewSiteLinkSerializer(): void {
 		$this->assertSerializesWithoutException(
 			$this->buildSerializerFactory()->newSiteLinkSerializer(),
 			new SiteLink( 'enwiki', 'Nyan Cat' )
 		);
 	}
 
-	public function testNewStatementSerializer() {
+	public function testNewStatementSerializer(): void {
 		$this->assertSerializesWithoutException(
 			$this->buildSerializerFactory()->newStatementSerializer(),
 			new Statement( new PropertyNoValueSnak( 42 ) )
 		);
 	}
 
-	public function testNewStatementListSerializer() {
+	public function testNewStatementListSerializer(): void {
 		$this->assertSerializesWithoutException(
 			$this->buildSerializerFactory()->newStatementListSerializer(),
 			new StatementList()
 		);
 	}
 
-	public function testNewReferencesSerializer() {
+	public function testNewReferencesSerializer(): void {
 		$this->assertSerializesWithoutException(
 			$this->buildSerializerFactory()->newReferencesSerializer(),
 			new ReferenceList()
 		);
 	}
 
-	public function testNewReferenceSerializer() {
+	public function testNewReferenceSerializer(): void {
 		$this->assertSerializesWithoutException(
 			$this->buildSerializerFactory()->newReferenceSerializer(),
 			new Reference()
 		);
 	}
 
-	public function testNewSnakListSerializer() {
+	public function testNewSnakListSerializer(): void {
 		$this->assertSerializesWithoutException(
 			$this->buildSerializerFactory()->newSnakListSerializer(),
 			new SnakList( [] )
 		);
 	}
 
-	public function testNewSnakSerializer() {
+	public function testNewSnakSerializer(): void {
 		$this->assertSerializesWithoutException(
 			$this->buildSerializerFactory()->newSnakSerializer(),
 			new PropertyNoValueSnak( 42 )
 		);
 	}
 
-	public function testFactoryCreateWithUnexpectedValue() {
+	public function testFactoryCreateWithUnexpectedValue(): void {
 		$this->expectException( InvalidArgumentException::class );
 		new SerializerFactory( new DataValueSerializer(), 1.0 );
 	}
 
-	public function testNewTypedSnakSerializer() {
+	public function testNewTypedSnakSerializer(): void {
 		$this->assertSerializesWithoutException(
 			$this->buildSerializerFactory()->newTypedSnakSerializer(),
 			new TypedSnak( new PropertyNoValueSnak( 42 ), 'kittens' )
 		);
 	}
 
-	public function testNewTermSerializer() {
+	public function testNewTermSerializer(): void {
 		$this->assertSerializesWithoutException(
 			$this->buildSerializerFactory()->newTermSerializer(),
 			new Term( 'en', 'Foo' )
 		);
 	}
 
-	public function testNewTermListSerializer() {
+	public function testNewTermListSerializer(): void {
 		$this->assertSerializesWithoutException(
 			$this->buildSerializerFactory()->newTermListSerializer(),
 			new TermList( [ new Term( 'de', 'Foo' ) ] )
 		);
 	}
 
-	public function testNewAliasGroupSerializer() {
+	public function testNewAliasGroupSerializer(): void {
 		$this->assertSerializesWithoutException(
 			$this->buildSerializerFactory()->newAliasGroupSerializer(),
 			new AliasGroup( 'en', [ 'foo', 'bar' ] )
 		);
 	}
 
-	public function testNewAliasGroupListSerializer() {
+	public function testNewAliasGroupListSerializer(): void {
 		$this->assertSerializesWithoutException(
 			$this->buildSerializerFactory()->newAliasGroupListSerializer(),
 			new AliasGroupList( [ new AliasGroup( 'de', [ 'AA', 'BB' ] ) ] )
 		);
 	}
 
-	public function testSerializeSnaksWithoutHashConstant() {
+	public function testSerializeSnaksWithoutHashConstant(): void {
 		$this->assertSame(
 			// expected:
 			SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH |

@@ -21,11 +21,11 @@ class DummyUsageAccumulator extends ParserUsageAccumulator {
 		$this->hashUsageAccumulator = new HashUsageAccumulator();
 	}
 
-	public function addUsage( EntityUsage $usage ) {
+	public function addUsage( EntityUsage $usage ): void {
 		$this->hashUsageAccumulator->addUsage( $usage );
 	}
 
-	public function getUsages() {
+	public function getUsages(): array {
 		return $this->hashUsageAccumulator->getUsages();
 	}
 }

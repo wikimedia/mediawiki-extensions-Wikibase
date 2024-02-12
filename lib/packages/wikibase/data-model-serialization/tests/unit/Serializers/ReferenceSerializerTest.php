@@ -1,7 +1,10 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Tests\Wikibase\DataModel\Serializers;
 
+use Serializers\DispatchableSerializer;
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Reference;
@@ -18,7 +21,7 @@ use Wikibase\DataModel\Snak\SnakList;
  */
 class ReferenceSerializerTest extends DispatchableSerializerTest {
 
-	protected function buildSerializer() {
+	protected function buildSerializer(): DispatchableSerializer {
 		$snakListSerializerMock = $this->createMock( Serializer::class );
 		$snakListSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
@@ -28,7 +31,7 @@ class ReferenceSerializerTest extends DispatchableSerializerTest {
 		return new ReferenceSerializer( $snakListSerializerMock );
 	}
 
-	public function serializableProvider() {
+	public function serializableProvider(): array {
 		return [
 			[
 				new Reference(),
@@ -41,7 +44,7 @@ class ReferenceSerializerTest extends DispatchableSerializerTest {
 		];
 	}
 
-	public function nonSerializableProvider() {
+	public function nonSerializableProvider(): array {
 		return [
 			[
 				5,
@@ -55,7 +58,7 @@ class ReferenceSerializerTest extends DispatchableSerializerTest {
 		];
 	}
 
-	public function serializationProvider() {
+	public function serializationProvider(): array {
 		return [
 			[
 				[
@@ -68,7 +71,7 @@ class ReferenceSerializerTest extends DispatchableSerializerTest {
 		];
 	}
 
-	public function testSnaksOrderSerialization() {
+	public function testSnaksOrderSerialization(): void {
 		$snakListSerializerMock = $this->createMock( Serializer::class );
 		$snakListSerializerMock->expects( $this->any() )
 			->method( 'serialize' )

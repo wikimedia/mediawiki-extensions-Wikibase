@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\DataAccess\Scribunto;
 
 use Language;
@@ -18,40 +20,13 @@ use Wikibase\Lib\ContentLanguages;
  */
 class WikibaseLuaEntityBindings {
 
-	/**
-	 * @var StatementTransclusionInteractor
-	 */
-	private $plainTextTransclusionInteractor;
-
-	/**
-	 * @var StatementTransclusionInteractor
-	 */
-	private $richWikitextTransclusionInteractor;
-
-	/**
-	 * @var EntityIdParser
-	 */
-	private $entityIdParser;
-
-	/**
-	 * @var Language
-	 */
-	private $language;
-
-	/**
-	 * @var UsageAccumulator
-	 */
-	private $usageAccumulator;
-
-	/**
-	 * @var string
-	 */
-	private $siteId;
-
-	/**
-	 * @var ContentLanguages
-	 */
-	private $termsLanguages;
+	private StatementTransclusionInteractor $plainTextTransclusionInteractor;
+	private StatementTransclusionInteractor $richWikitextTransclusionInteractor;
+	private EntityIdParser $entityIdParser;
+	private Language $language;
+	private UsageAccumulator $usageAccumulator;
+	private string $siteId;
+	private ContentLanguages $termsLanguages;
 
 	public function __construct(
 		StatementTransclusionInteractor $plainTextTransclusionInteractor,
@@ -81,7 +56,11 @@ class WikibaseLuaEntityBindings {
 	 *
 	 * @return string Wikitext
 	 */
-	public function formatPropertyValues( $entityId, $propertyLabelOrId, array $acceptableRanks = null ) {
+	public function formatPropertyValues(
+		string $entityId,
+		string $propertyLabelOrId,
+		?array $acceptableRanks = null
+	): string {
 		$entityId = $this->entityIdParser->parse( $entityId );
 
 		return $this->plainTextTransclusionInteractor->render(
@@ -101,7 +80,11 @@ class WikibaseLuaEntityBindings {
 	 *
 	 * @return string Wikitext
 	 */
-	public function formatStatements( $entityId, $propertyLabelOrId, array $acceptableRanks = null ) {
+	public function formatStatements(
+		string $entityId,
+		string $propertyLabelOrId,
+		?array $acceptableRanks = null
+	): string {
 		$entityId = $this->entityIdParser->parse( $entityId );
 
 		return $this->richWikitextTransclusionInteractor->render(
@@ -117,7 +100,7 @@ class WikibaseLuaEntityBindings {
 	 * @param string $entityId The Entity from which the statements were accessed.
 	 * @param string $propertyId Property id of the statements accessed.
 	 */
-	public function addStatementUsage( $entityId, $propertyId ) {
+	public function addStatementUsage( string $entityId, string $propertyId ): void {
 		$entityId = $this->entityIdParser->parse( $entityId );
 		$propertyId = new NumericPropertyId( $propertyId );
 
@@ -130,7 +113,7 @@ class WikibaseLuaEntityBindings {
 	 * @param string $entityId The Entity from which the labels were accessed.
 	 * @param string|null $langCode Language code the labels accessed.
 	 */
-	public function addLabelUsage( $entityId, $langCode ) {
+	public function addLabelUsage( string $entityId, ?string $langCode ): void {
 		$entityId = $this->entityIdParser->parse( $entityId );
 		if ( !$this->termsLanguages->hasLanguage( $langCode ) ) {
 			$langCode = null;
@@ -144,7 +127,7 @@ class WikibaseLuaEntityBindings {
 	 * @param string $entityId The Entity from which the descriptions were accessed.
 	 * @param string|null $langCode Language code the descriptions accessed.
 	 */
-	public function addDescriptionUsage( $entityId, $langCode ) {
+	public function addDescriptionUsage( string $entityId, ?string $langCode ): void {
 		$entityId = $this->entityIdParser->parse( $entityId );
 		if ( !$this->termsLanguages->hasLanguage( $langCode ) ) {
 			$langCode = null;
@@ -157,7 +140,7 @@ class WikibaseLuaEntityBindings {
 	 *
 	 * @param string $entityId The Entity from which something was accessed.
 	 */
-	public function addOtherUsage( $entityId ) {
+	public function addOtherUsage( string $entityId ): void {
 		$entityId = $this->entityIdParser->parse( $entityId );
 		$this->usageAccumulator->addOtherUsage( $entityId );
 	}
@@ -167,7 +150,7 @@ class WikibaseLuaEntityBindings {
 	 *
 	 * @param string $entityId The Entity from which the sitelinks were accessed.
 	 */
-	public function addSiteLinksUsage( $entityId ) {
+	public function addSiteLinksUsage( string $entityId ): void {
 		$entityId = $this->entityIdParser->parse( $entityId );
 		$this->usageAccumulator->addSiteLinksUsage( $entityId );
 	}
@@ -179,7 +162,7 @@ class WikibaseLuaEntityBindings {
 	 *
 	 * @return string
 	 */
-	public function getGlobalSiteId() {
+	public function getGlobalSiteId(): string {
 		return $this->siteId;
 	}
 
@@ -190,7 +173,7 @@ class WikibaseLuaEntityBindings {
 	 *
 	 * @return string
 	 */
-	public function getLanguageCode() {
+	public function getLanguageCode(): string {
 		return $this->language->getCode();
 	}
 

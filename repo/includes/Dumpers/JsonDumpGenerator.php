@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Dumpers;
 
 use InvalidArgumentException;
@@ -30,42 +32,14 @@ class JsonDumpGenerator extends DumpGenerator {
 	/**
 	 * @var int flags to use with json_encode as a bit field, see PHP's JSON_XXX constants.
 	 */
-	private $jsonFlags = 0;
-
-	/**
-	 * @var Serializer
-	 */
-	private $entitySerializer;
-
-	/**
-	 * @var EntityRevisionLookup
-	 */
-	private $entityLookup;
-
-	/**
-	 * @var EntityTitleStoreLookup
-	 */
-	private $entityTitleStoreLookup;
-
-	/**
-	 * @var bool
-	 */
-	private $useSnippets = false;
-
-	/**
-	 * @var bool
-	 */
-	private $addPageMetadata = false;
-
-	/**
-	 * @var JsonDataTypeInjector
-	 */
-	private $dataTypeInjector;
-
-	/**
-	 * @var AddPageInfo
-	 */
-	private $addPageInfo;
+	private int $jsonFlags = 0;
+	private Serializer $entitySerializer;
+	private EntityRevisionLookup $entityLookup;
+	private EntityTitleStoreLookup $entityTitleStoreLookup;
+	private bool $useSnippets = false;
+	private bool $addPageMetadata = false;
+	private JsonDataTypeInjector $dataTypeInjector;
+	private AddPageInfo $addPageInfo;
 
 	/**
 	 * @param resource $out
@@ -106,7 +80,7 @@ class JsonDumpGenerator extends DumpGenerator {
 	/**
 	 * Do something before dumping data
 	 */
-	protected function preDump() {
+	protected function preDump(): void {
 		if ( !$this->useSnippets ) {
 			$this->writeToDump( "[\n" );
 		}
@@ -115,7 +89,7 @@ class JsonDumpGenerator extends DumpGenerator {
 	/**
 	 * Do something after dumping data
 	 */
-	protected function postDump() {
+	protected function postDump(): void {
 		if ( !$this->useSnippets ) {
 			$this->writeToDump( "\n]\n" );
 		}
@@ -123,23 +97,18 @@ class JsonDumpGenerator extends DumpGenerator {
 
 	/**
 	 * Do something before dumping entity
-	 *
-	 * @param int $dumpCount
 	 */
-	protected function preEntityDump( $dumpCount ) {
+	protected function preEntityDump( int $dumpCount ): void {
 		if ( $dumpCount > 0 ) {
 			$this->writeToDump( ",\n" );
 		}
 	}
 
 	/**
-	 * @param EntityId $entityId
-	 *
 	 * @throws EntityLookupException
 	 * @throws StorageException
-	 * @return string|null
 	 */
-	protected function generateDumpForEntityId( EntityId $entityId ) {
+	protected function generateDumpForEntityId( EntityId $entityId ): ?string {
 		try {
 			$revision = $this->entityLookup->getEntityRevision( $entityId );
 
@@ -176,10 +145,9 @@ class JsonDumpGenerator extends DumpGenerator {
 	 *
 	 * @param mixed $data
 	 *
-	 * @return string
 	 * @throws StorageException
 	 */
-	public function encode( $data ) {
+	public function encode( $data ): string {
 		$json = json_encode( $data, $this->jsonFlags );
 
 		if ( $json === false ) {
@@ -192,32 +160,28 @@ class JsonDumpGenerator extends DumpGenerator {
 	/**
 	 * @param bool $useSnippets Whether to output valid json (false) or only comma separated entities
 	 */
-	public function setUseSnippets( $useSnippets ) {
-		$this->useSnippets = (bool)$useSnippets;
+	public function setUseSnippets( bool $useSnippets ): void {
+		$this->useSnippets = $useSnippets;
 	}
 
 	/**
 	 * @param bool $addPageMetadata Whether to add page metadata to entities
 	 */
-	public function setAddPageMetadata( $addPageMetadata ) {
-		$this->addPageMetadata = (bool)$addPageMetadata;
+	public function setAddPageMetadata( bool $addPageMetadata ): void {
+		$this->addPageMetadata = $addPageMetadata;
 	}
 
 	/**
 	 * Flags to use with json_encode as a bit field, see PHP's JSON_XXX constants.
-	 *
-	 * @param int $jsonFlags
 	 */
-	public function setJsonFlags( $jsonFlags ) {
+	public function setJsonFlags( int $jsonFlags ): void {
 		$this->jsonFlags = $jsonFlags;
 	}
 
 	/**
-	 * @return int
-	 *
 	 * @see setJsonFlags
 	 */
-	public function getJsonFlags() {
+	public function getJsonFlags(): int {
 		return $this->jsonFlags;
 	}
 

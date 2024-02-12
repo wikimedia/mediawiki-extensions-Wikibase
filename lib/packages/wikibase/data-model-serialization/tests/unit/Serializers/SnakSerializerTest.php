@@ -1,9 +1,12 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Tests\Wikibase\DataModel\Serializers;
 
 use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
+use Serializers\DispatchableSerializer;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Serializers\SnakSerializer;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -18,12 +21,12 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
  */
 class SnakSerializerTest extends DispatchableSerializerTest {
 
-	protected function buildSerializer() {
+	protected function buildSerializer(): DispatchableSerializer {
 		$serializeWithHash = false;
 		return new SnakSerializer( new DataValueSerializer(), $serializeWithHash );
 	}
 
-	public function serializableProvider() {
+	public function serializableProvider(): array {
 		return [
 			[
 				new PropertyNoValueSnak( 42 ),
@@ -37,7 +40,7 @@ class SnakSerializerTest extends DispatchableSerializerTest {
 		];
 	}
 
-	public function nonSerializableProvider() {
+	public function nonSerializableProvider(): array {
 		return [
 			[
 				5,
@@ -51,7 +54,7 @@ class SnakSerializerTest extends DispatchableSerializerTest {
 		];
 	}
 
-	public function serializationProvider() {
+	public function serializationProvider(): array {
 		return [
 			[
 				[
@@ -81,7 +84,7 @@ class SnakSerializerTest extends DispatchableSerializerTest {
 		];
 	}
 
-	public function testSnakSerializationWithHash() {
+	public function testSnakSerializationWithHash(): void {
 		$serializer = new SnakSerializer( new DataValueSerializer() );
 
 		$snak = new PropertyValueSnak( 42, new StringValue( 'hax' ) );

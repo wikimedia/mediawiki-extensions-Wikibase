@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Usage;
 
 use MediaWiki\Parser\ParserOutput;
@@ -20,15 +22,8 @@ class ParserOutputUsageAccumulator extends ParserUsageAccumulator {
 	 */
 	public const EXTENSION_DATA_KEY = 'wikibase-entity-usage';
 
-	/**
-	 * @var EntityUsageFactory
-	 */
-	private $entityUsageFactory;
-
-	/**
-	 * @var UsageDeduplicator
-	 */
-	private $usageDeduplicator;
+	private EntityUsageFactory $entityUsageFactory;
+	private UsageDeduplicator $usageDeduplicator;
 
 	public function __construct(
 		ParserOutput $parserOutput,
@@ -42,10 +37,8 @@ class ParserOutputUsageAccumulator extends ParserUsageAccumulator {
 
 	/**
 	 * @see UsageAccumulator::addUsage
-	 *
-	 * @param EntityUsage $usage
 	 */
-	public function addUsage( EntityUsage $usage ) {
+	public function addUsage( EntityUsage $usage ): void {
 		$this->getParserOutput()->appendExtensionData(
 			self::EXTENSION_DATA_KEY, $usage->getIdentityString()
 		);
@@ -56,7 +49,7 @@ class ParserOutputUsageAccumulator extends ParserUsageAccumulator {
 	 *
 	 * @return EntityUsage[]
 	 */
-	public function getUsages() {
+	public function getUsages(): array {
 		$usageIdentities = $this->getParserOutput()->getExtensionData( self::EXTENSION_DATA_KEY ) ?: [];
 
 		$usages = [];
