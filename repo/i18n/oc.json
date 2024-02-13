@@ -5,7 +5,8 @@
 			"Ladsgroup",
 			"OpenStreetMap-oc",
 			"Shirayuki",
-			"Zolo"
+			"Zolo",
+			"Lhanars"
 		]
 	},
 	"wikibase-desc": "Referencial de donadas estructuradas",
@@ -20,6 +21,7 @@
 	"wikibase-addreference": "apondre una referéncia",
 	"wikibase-save-inprogress": "Salvament en cors...",
 	"wikibase-remove-inprogress": "Supression en cors…",
+	"wikibase-statementlistview-add": "Apondre una valor",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Mai de lengas",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Configurar",
 	"wikibase-entitytermsforlanguagelistview-aliases": "Tanben conegut coma",

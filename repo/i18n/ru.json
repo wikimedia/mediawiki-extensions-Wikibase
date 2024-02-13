@@ -45,7 +45,8 @@
 			"Александр Сигачёв",
 			"Умар",
 			"Чаховіч Уладзіслаў",
-			"Ядерный Трамвай"
+			"Ядерный Трамвай",
+			"Butko"
 		]
 	},
 	"wikibase-desc": "Хранилище структурированных данных",
@@ -437,6 +438,7 @@
 	"wikibase-tainted-ref-popper-help-link-text": "Справка",
 	"wikibase-tainted-ref-popper-remove-warning": "Убрать предупреждение",
 	"wikibase-tainted-ref-tainted-icon-title": "У этого утверждения обнаружен ряд возможных проблем.",
+	"wikibase-federated-properties-search-api-error-message": "Объекты временно недоступны.",
 	"wikibase-federated-properties-leaving-site-notice-cancel": "Отмена",
 	"wikibase-federated-properties-leaving-site-notice-checkbox-label": "Больше не показывать это сообщение",
 	"wikibase-federated-properties-edit-request-failed-notice-try-again": "Попробовать снова",
