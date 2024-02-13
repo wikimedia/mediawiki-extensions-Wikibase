@@ -157,6 +157,7 @@ class EditSummaryFormatterTest extends MediaWikiLangTestCase {
 		$userComment = 'user comment';
 		$siteId = 'enwiki';
 		$article = 'Potato';
+		$anotherArticle = 'Old_Potato';
 		$badges = [ new ItemId( 'Q123' ), new ItemId( 'Q345' ) ];
 		$formattedBadgeItems = 'Q123, Q345';
 		yield 'add sitelink without badges' => [
@@ -168,15 +169,27 @@ class EditSummaryFormatterTest extends MediaWikiLangTestCase {
 			"/* wbsetsitelink-add-both:2|$siteId */ $article, $formattedBadgeItems, $userComment",
 		];
 		yield 'replace sitelink without badges' => [
-			SitelinkEditSummary::newReplaceSummary( $userComment, new SiteLink( $siteId, $article ) ),
+			SitelinkEditSummary::newReplaceSummary(
+				$userComment,
+				new SiteLink( $siteId, $article ),
+				new SiteLink( $siteId, $anotherArticle )
+			),
 			"/* wbsetsitelink-set:1|$siteId */ $article, $userComment",
 		];
 		yield 'replace sitelink with badges' => [
-			SitelinkEditSummary::newReplaceSummary( $userComment, new SiteLink( $siteId, $article, $badges ) ),
+			SitelinkEditSummary::newReplaceSummary(
+				$userComment,
+				new SiteLink( $siteId, $article, $badges ),
+				new SiteLink( $siteId, $anotherArticle, [] )
+			),
 			"/* wbsetsitelink-set-both:2|$siteId */ $article, $formattedBadgeItems, $userComment",
 		];
 		yield 'replace badges of a sitelink only' => [
-			SitelinkEditSummary::newReplaceBadgesSummary( $userComment, new SiteLink( $siteId, $article, $badges ) ),
+			SitelinkEditSummary::newReplaceSummary(
+				$userComment,
+				new SiteLink( $siteId, $article, $badges ),
+				new SiteLink( $siteId, $article, [] )
+			),
 			"/* wbsetsitelink-set-badges:1|$siteId */ $formattedBadgeItems, $userComment",
 		];
 		yield 'remove sitelink' => [

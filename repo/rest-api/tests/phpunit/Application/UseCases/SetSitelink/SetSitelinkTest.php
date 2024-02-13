@@ -96,9 +96,11 @@ class SetSitelinkTest extends TestCase {
 		$siteId = TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0];
 		$title = 'New_Potato';
 		$badge = 'Q567';
+		$item = NewItem::withId( $itemId )->andSiteLink( $siteId, 'Old_Potato', [] )->build();
+		$replacedSitelink = $item->getSiteLink( $siteId );
 
 		$itemRepo = new InMemoryItemRepository();
-		$itemRepo->addItem( NewItem::withId( $itemId )->andSiteLink( $siteId, 'Old_Potato', [] )->build() );
+		$itemRepo->addItem( $item );
 		$this->itemRetriever = $itemRepo;
 		$this->itemUpdater = $itemRepo;
 
@@ -127,51 +129,8 @@ class SetSitelinkTest extends TestCase {
 				false,
 				SitelinkEditSummary::newReplaceSummary(
 					'',
-					new DataModelSitelink( $siteId, $title, [ new ItemId( $badge ) ] )
-				)
-			),
-			$itemRepo->getLatestRevisionEditMetadata( $itemId )
-		);
-		$this->assertTrue( $response->wasReplaced() );
-	}
-
-	public function testReplaceBadgesOnly(): void {
-		$itemId = new ItemId( 'Q123' );
-		$siteId = TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0];
-		$title = 'Potato';
-		$badge = 'Q567';
-
-		$itemRepo = new InMemoryItemRepository();
-		$itemRepo->addItem( NewItem::withId( $itemId )->andSiteLink( $siteId, $title, [] )->build() );
-		$this->itemRetriever = $itemRepo;
-		$this->itemUpdater = $itemRepo;
-
-		$response = $this->newUseCase()->execute(
-			new SetSitelinkRequest(
-				"$itemId",
-				$siteId,
-				[ 'title' => $title, 'badges' => [ $badge ] ],
-				[],
-				false,
-				'',
-				null
-			)
-		);
-
-		$this->assertEquals(
-			new SiteLink( $siteId, $title, [ new ItemId( $badge ) ], $itemRepo->urlForSitelink( $siteId, $title )
-			),
-			$response->getSitelink()
-		);
-		$this->assertSame( $itemRepo->getLatestRevisionId( $itemId ), $response->getRevisionId() );
-		$this->assertSame( $itemRepo->getLatestRevisionTimestamp( $itemId ), $response->getLastModified() );
-		$this->assertEquals(
-			new EditMetadata(
-				[],
-				false,
-				SitelinkEditSummary::newReplaceBadgesSummary(
-					'',
-					new DataModelSitelink( $siteId, $title, [ new ItemId( $badge ) ] )
+					new DataModelSitelink( $siteId, $title, [ new ItemId( $badge ) ] ),
+					$replacedSitelink
 				)
 			),
 			$itemRepo->getLatestRevisionEditMetadata( $itemId )
