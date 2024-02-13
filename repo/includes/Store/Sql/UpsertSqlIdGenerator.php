@@ -104,16 +104,7 @@ class UpsertSqlIdGenerator implements IdGenerator {
 	private function generateNewId( IDatabase $database, $type ) {
 		$database->startAtomic( __METHOD__ );
 
-		$success = $this->upsertId( $database, $type );
-
-		// Retry once
-		if ( !$success ) {
-			$success = $this->upsertId( $database, $type );
-		}
-
-		if ( !$success ) {
-			throw new RuntimeException( 'Could not generate a reliably unique ID.' );
-		}
+		$this->upsertId( $database, $type );
 
 		$id = $database->insertId();
 
@@ -130,10 +121,9 @@ class UpsertSqlIdGenerator implements IdGenerator {
 	/**
 	 * @param IDatabase $database
 	 * @param string $type
-	 * @return bool Query success
 	 */
 	private function upsertId( IDatabase $database, $type ) {
-		return $database->upsert(
+		$database->upsert(
 			'wb_id_counters',
 			[
 				'id_type' => $type,
