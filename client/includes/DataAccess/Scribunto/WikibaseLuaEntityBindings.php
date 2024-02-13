@@ -4,7 +4,6 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\DataAccess\Scribunto;
 
-use Language;
 use Parser;
 use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
 use Wikibase\Client\Usage\UsageAccumulator;
@@ -23,9 +22,7 @@ class WikibaseLuaEntityBindings {
 	private StatementTransclusionInteractor $plainTextTransclusionInteractor;
 	private StatementTransclusionInteractor $richWikitextTransclusionInteractor;
 	private EntityIdParser $entityIdParser;
-	private Language $language;
 	private UsageAccumulator $usageAccumulator;
-	private string $siteId;
 	private ContentLanguages $termsLanguages;
 
 	public function __construct(
@@ -33,16 +30,12 @@ class WikibaseLuaEntityBindings {
 		StatementTransclusionInteractor $richWikitextTransclusionInteractor,
 		EntityIdParser $entityIdParser,
 		ContentLanguages $termsLanguages,
-		Language $language,
-		UsageAccumulator $usageAccumulator,
-		$siteId
+		UsageAccumulator $usageAccumulator
 	) {
 		$this->plainTextTransclusionInteractor = $plainTextTransclusionInteractor;
 		$this->richWikitextTransclusionInteractor = $richWikitextTransclusionInteractor;
 		$this->entityIdParser = $entityIdParser;
-		$this->language = $language;
 		$this->usageAccumulator = $usageAccumulator;
-		$this->siteId = $siteId;
 		$this->termsLanguages = $termsLanguages;
 	}
 
@@ -153,28 +146,6 @@ class WikibaseLuaEntityBindings {
 	public function addSiteLinksUsage( string $entityId ): void {
 		$entityId = $this->entityIdParser->parse( $entityId );
 		$this->usageAccumulator->addSiteLinksUsage( $entityId );
-	}
-
-	/**
-	 * Get global site ID (e.g. "enwiki")
-	 * This is basically a helper function.
-	 * @todo Make this part of mw.site in the Scribunto extension.
-	 *
-	 * @return string
-	 */
-	public function getGlobalSiteId(): string {
-		return $this->siteId;
-	}
-
-	/**
-	 * Get the language we are currently working with.
-	 * @todo Once T114640 has been implemented, this should probably be
-	 * generally exposed in Scribunto as parser target language.
-	 *
-	 * @return string
-	 */
-	public function getLanguageCode(): string {
-		return $this->language->getCode();
 	}
 
 	public function hasStoredReferenceToDifferentParse( Parser $parser ): bool {
