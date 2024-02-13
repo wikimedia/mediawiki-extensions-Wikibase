@@ -22,6 +22,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\SitelinksRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\SitelinksReadModelConverter;
+use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 
 /**
  * @license GPL-2.0-or-later
@@ -35,11 +36,6 @@ class InMemoryItemRepository implements
 	ItemUpdater
 {
 	use StatementReadModelHelper;
-
-	public const EN_WIKI_SITE_ID = 'enwiki';
-	public const DE_WIKI_SITE_ID = 'dewiki';
-	public const EN_WIKI_URL_PREFIX = 'https://en.wikipedia.org/wiki/';
-	public const DE_WIKI_URL_PREFIX = 'https://de.wikipedia.org/wiki/';
 
 	private array $items = [];
 	private array $latestRevisionData = [];
@@ -97,6 +93,10 @@ class InMemoryItemRepository implements
 		return new ItemRevision( $this->convertToReadModel( $item ), $revisionData['revTime'], $revisionData['revId'] );
 	}
 
+	public function urlForSitelink( string $siteId, string $title ): string {
+		return $this->newSiteForSiteId( $siteId )->getPageUrl( $title );
+	}
+
 	private function convertToReadModel( Item $item ): ReadModelItem {
 		return new ReadModelItem(
 			Labels::fromTermList( $item->getLabels() ),
@@ -111,14 +111,18 @@ class InMemoryItemRepository implements
 	}
 
 	private function newSitelinksReadModelConverter(): SitelinksReadModelConverter {
-		$enSite = new Site();
-		$enSite->setGlobalId( self::EN_WIKI_SITE_ID );
-		$enSite->setLinkPath( self::EN_WIKI_URL_PREFIX . '$1' );
-		$deSite = new Site();
-		$deSite->setGlobalId( self::DE_WIKI_SITE_ID );
-		$deSite->setLinkPath( self::DE_WIKI_URL_PREFIX . '$1' );
+		return new SitelinksReadModelConverter( new HashSiteStore( array_map(
+			[ $this, 'newSiteForSiteId' ],
+			TestValidatingRequestDeserializer::ALLOWED_SITE_IDS
+		) ) );
+	}
 
-		return new SitelinksReadModelConverter( new HashSiteStore( [ $enSite, $deSite ] ) );
+	private function newSiteForSiteId( string $siteId ): Site {
+		$site = new Site();
+		$site->setGlobalId( $siteId );
+		$site->setLinkPath( "https://$siteId.example.wiki/\$1" );
+
+		return $site;
 	}
 
 }
