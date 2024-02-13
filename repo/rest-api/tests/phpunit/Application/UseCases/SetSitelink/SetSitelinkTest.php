@@ -49,7 +49,7 @@ class SetSitelinkTest extends TestCase {
 
 	public function testAddSitelink(): void {
 		$itemId = new ItemId( 'Q123' );
-		$siteId = InMemoryItemRepository::EN_WIKI_SITE_ID;
+		$siteId = TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0];
 		$title = 'Potato';
 		$badge = 'Q567';
 
@@ -71,7 +71,7 @@ class SetSitelinkTest extends TestCase {
 		);
 
 		$this->assertEquals(
-			new SiteLink( $siteId, $title, [ new ItemId( $badge ) ], InMemoryItemRepository::EN_WIKI_URL_PREFIX . $title
+			new SiteLink( $siteId, $title, [ new ItemId( $badge ) ], $itemRepo->urlForSitelink( $siteId, $title )
 			),
 			$response->getSitelink()
 		);
@@ -93,7 +93,7 @@ class SetSitelinkTest extends TestCase {
 
 	public function testReplaceSitelink(): void {
 		$itemId = new ItemId( 'Q123' );
-		$siteId = InMemoryItemRepository::EN_WIKI_SITE_ID;
+		$siteId = TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0];
 		$title = 'New_Potato';
 		$badge = 'Q567';
 
@@ -115,7 +115,7 @@ class SetSitelinkTest extends TestCase {
 		);
 
 		$this->assertEquals(
-			new SiteLink( $siteId, $title, [ new ItemId( $badge ) ], InMemoryItemRepository::EN_WIKI_URL_PREFIX . $title
+			new SiteLink( $siteId, $title, [ new ItemId( $badge ) ], $itemRepo->urlForSitelink( $siteId, $title )
 			),
 			$response->getSitelink()
 		);
@@ -137,7 +137,7 @@ class SetSitelinkTest extends TestCase {
 
 	public function testReplaceBadgesOnly(): void {
 		$itemId = new ItemId( 'Q123' );
-		$siteId = InMemoryItemRepository::EN_WIKI_SITE_ID;
+		$siteId = TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0];
 		$title = 'Potato';
 		$badge = 'Q567';
 
@@ -159,7 +159,7 @@ class SetSitelinkTest extends TestCase {
 		);
 
 		$this->assertEquals(
-			new SiteLink( $siteId, $title, [ new ItemId( $badge ) ], InMemoryItemRepository::EN_WIKI_URL_PREFIX . $title
+			new SiteLink( $siteId, $title, [ new ItemId( $badge ) ], $itemRepo->urlForSitelink( $siteId, $title )
 			),
 			$response->getSitelink()
 		);

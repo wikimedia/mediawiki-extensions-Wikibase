@@ -57,25 +57,11 @@ class PatchSitelinksTest extends TestCase {
 		$itemId = new ItemId( 'Q123' );
 		$badgeItemId = new ItemId( 'Q321' );
 
-		$enSiteId = InMemoryItemRepository::EN_WIKI_SITE_ID;
+		$enSiteId = TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0];
 		$enSitelinkTitle = 'enTitle';
 
-		$deSiteId = InMemoryItemRepository::DE_WIKI_SITE_ID;
+		$deSiteId = TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[1];
 		$deSitelinkTitle = 'deTitle';
-
-		$enSitelink = new Sitelink(
-			$enSiteId,
-			$enSitelinkTitle,
-			[ $badgeItemId ],
-			InMemoryItemRepository::EN_WIKI_URL_PREFIX . $enSitelinkTitle
-		);
-
-		$deSitelink = new Sitelink(
-			$deSiteId,
-			$deSitelinkTitle,
-			[ $badgeItemId ],
-			InMemoryItemRepository::DE_WIKI_URL_PREFIX . $deSitelinkTitle
-		);
 
 		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
@@ -111,7 +97,22 @@ class PatchSitelinksTest extends TestCase {
 
 		$this->assertSame( $itemRepo->getLatestRevisionId( $itemId ), $response->getRevisionId() );
 		$this->assertSame( $itemRepo->getLatestRevisionTimestamp( $itemId ), $response->getLastModified() );
-		$this->assertEquals( $response->getSitelinks(), new Sitelinks( $enSitelink, $deSitelink ) );
+		$this->assertEquals(
+			$response->getSitelinks(),
+			new Sitelinks(
+				new Sitelink(
+					$enSiteId,
+					$enSitelinkTitle,
+					[ $badgeItemId ],
+					$itemRepo->urlForSitelink( $enSiteId, $enSitelinkTitle )
+				), new Sitelink(
+					$deSiteId,
+					$deSitelinkTitle,
+					[ $badgeItemId ],
+					$itemRepo->urlForSitelink( $deSiteId, $deSitelinkTitle )
+				)
+			)
+		);
 		$this->assertEquals(
 			new EditMetadata( $editTags, $isBot, SitelinksEditSummary::newPatchSummary( $comment ) ),
 			$itemRepo->getLatestRevisionEditMetadata( $itemId )
