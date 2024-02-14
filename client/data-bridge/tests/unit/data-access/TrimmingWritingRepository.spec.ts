@@ -7,12 +7,16 @@ import TrimmingWritingRepository from '@/data-access/TrimmingWritingRepository';
 import TechnicalProblem from '@/data-access/error/TechnicalProblem';
 import Entity from '@/datamodel/Entity';
 import EntityRevision from '@/datamodel/EntityRevision';
+import EntityRevisionWithRedirect from '@/datamodel/EntityRevisionWithRedirect';
 
 describe( 'TrimmingWritingRepository', () => {
 	it( 'delegates to inner service without base revision', async () => {
-		const response: EntityRevision = {
-			entity: { id: 'Q123', statements: { 'P123': [] } },
-			revisionId: 123,
+		const response: EntityRevisionWithRedirect = {
+			entityRevision: {
+				entity: { id: 'Q123', statements: { 'P123': [] } },
+				revisionId: 123,
+			},
+			redirectUrl: undefined,
 		};
 		const inner: ApiWritingRepository = {
 			saveEntity: jest.fn().mockResolvedValue( response ),
@@ -23,6 +27,29 @@ describe( 'TrimmingWritingRepository', () => {
 		const actualResponse = await repo.saveEntity( entity );
 
 		expect( actualResponse ).toBe( response );
+		expect( inner.saveEntity ).toHaveBeenCalledTimes( 1 );
+		expect( inner.saveEntity ).toHaveBeenCalledWith( entity, undefined, true );
+	} );
+
+	it( 'handles redirectUrl when present', async () => {
+		const redirectUrl = new URL( 'https://wiki.example/?redirect=true' );
+		const response: EntityRevisionWithRedirect = {
+			entityRevision: {
+				entity: { id: 'Q123', statements: { 'P123': [] } },
+				revisionId: 123,
+			},
+			redirectUrl,
+		};
+		const inner: ApiWritingRepository = {
+			saveEntity: jest.fn().mockResolvedValue( response ),
+		} as unknown as ApiWritingRepository;
+		const repo = new TrimmingWritingRepository( inner );
+		const entity: Entity = { id: 'Q456', statements: { 'P456': [] } };
+
+		const actualResponse = await repo.saveEntity( entity );
+
+		expect( actualResponse ).toBe( response );
+		expect( actualResponse.redirectUrl ).toBe( redirectUrl );
 		expect( inner.saveEntity ).toHaveBeenCalledTimes( 1 );
 		expect( inner.saveEntity ).toHaveBeenCalledWith( entity, undefined, true );
 	} );

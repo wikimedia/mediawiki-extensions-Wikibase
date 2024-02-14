@@ -5,6 +5,7 @@ import { mockApi } from '../../util/mocks';
 import ApiErrors from '@/data-access/error/ApiErrors';
 import SavingError from '@/data-access/error/SavingError';
 import { ErrorTypes } from '@/definitions/ApplicationError';
+import EntityRevisionWithRedirect from '@/datamodel/EntityRevisionWithRedirect';
 
 describe( 'ApiWritingRepository', () => {
 	it( 'returns well formatted answer as expected', () => {
@@ -50,14 +51,75 @@ describe( 'ApiWritingRepository', () => {
 			entity: {} as Entity,
 		};
 
-		const expected = new EntityRevision(
-			new Entity( response.entity.id, response.entity.claims ),
-			response.entity.lastrevid,
+		const expected = new EntityRevisionWithRedirect(
+			new EntityRevision(
+				new Entity( response.entity.id, response.entity.claims ),
+				response.entity.lastrevid,
+			),
 		);
 
 		return entityWriter.saveEntity( toBeWrittenEntity, baseEntityRevision )
 			.then( ( entity ) => {
 				expect( entity ).toStrictEqual( expected );
+			} );
+	} );
+
+	it( 'returns a redirect if the API replies with a redirect', () => {
+		const redirectUrlString = 'https://wiki.example/redirect';
+		const response = {
+			entity: {
+				lastrevid: 2183,
+				type: 'item',
+				id: 'Q123',
+				labels: { en: { language: 'en', value: 'Wikidata bridge test item' } },
+				descriptions: [],
+				aliases: [],
+				claims: {
+					P20: [ {
+						mainsnak: {
+							snaktype: 'value',
+							property: 'P20',
+							datavalue: {
+								value: 'String for Wikidata bridge',
+								type: 'string',
+							},
+							datatype: 'string',
+						},
+						type: 'statement',
+						id: 'Q123$36ae6854-4e74-d74c-d583-701bc130166f',
+						rank: 'normal',
+					} ],
+				},
+				sitelinks: [],
+			} as any,
+			success: 1,
+			tempuserredirect: redirectUrlString,
+		};
+
+		const api = mockApi( response );
+
+		const entityWriter = new ApiWritingRepository( api );
+		const toBeWrittenEntity = {
+			id: 'Q123',
+			labels: { de: { language: 'de', value: 'test' } },
+			statements: {},
+		};
+		const baseEntityRevision = {
+			revisionId: 123,
+			entity: {} as Entity,
+		};
+
+		const expected = new EntityRevisionWithRedirect(
+			new EntityRevision(
+				new Entity( response.entity.id, response.entity.claims ),
+				response.entity.lastrevid,
+			),
+			new URL( redirectUrlString ),
+		);
+
+		return entityWriter.saveEntity( toBeWrittenEntity, baseEntityRevision )
+			.then( ( entityWithRedirect ) => {
+				expect( entityWithRedirect ).toStrictEqual( expected );
 			} );
 	} );
 

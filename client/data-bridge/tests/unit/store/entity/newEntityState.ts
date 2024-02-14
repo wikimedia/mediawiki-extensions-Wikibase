@@ -6,6 +6,7 @@ export default function newEntityState( entity: Partial<EntityState> = {} ): Ent
 			id: 'Q1',
 			baseRevision: 0,
 			statements: null,
+			tempUserRedirectUrl: null,
 		},
 		...entity,
 	};

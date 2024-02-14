@@ -8,6 +8,7 @@ import EditFlow from '@/definitions/EditFlow';
 import getOrEnforceUrlParameter from '@/mock-data/getOrEnforceUrlParameter';
 import ServiceContainer from '@/services/ServiceContainer';
 import EntityRevision from '@/datamodel/EntityRevision';
+import EntityRevisionWithRedirect from '@/datamodel/EntityRevisionWithRedirect';
 import { initEvents } from '@/events';
 import MessageKeys from '@/definitions/MessageKeys';
 import clone from '@/store/clone';
@@ -29,12 +30,12 @@ services.set( 'readingEntityRepository', new ApiReadingEntityRepository(
 ) );
 
 services.set( 'writingEntityRepository', {
-	saveEntity( entity: Entity, base?: EntityRevision ): Promise<EntityRevision> {
+	saveEntity( entity: Entity, base?: EntityRevision ): Promise<EntityRevisionWithRedirect> {
 		console.info( 'saving', entity );
-		const result: EntityRevision = {
+		const result = new EntityRevisionWithRedirect( {
 			entity: clone( entity ),
 			revisionId: ( base?.revisionId || 0 ) + 1,
-		};
+		} );
 		return new Promise( ( resolve ) => {
 			setTimeout( () => {
 				console.info( 'saved' );

@@ -7,6 +7,7 @@ import { EntityState } from './EntityState';
 import { Actions, Context, Getters } from 'vuex-smart-module';
 import { EntityMutations } from '@/store/entity/mutations';
 import { statementModule } from '@/store/statements';
+import EntityRevisionWithRedirect from '@/datamodel/EntityRevisionWithRedirect';
 
 export class EntityActions extends Actions<EntityState, Getters<EntityState>, EntityMutations, EntityActions> {
 	private store!: Store<Application>;
@@ -22,7 +23,8 @@ export class EntityActions extends Actions<EntityState, Getters<EntityState>, En
 	): Promise<unknown> {
 		return this.store.$services.get( 'readingEntityRepository' )
 			.getEntity( payload.entity )
-			.then( ( entityRevision: EntityRevision ) => this.dispatch( 'entityWrite', entityRevision ) );
+			.then( ( entityRevision: EntityRevision ) =>
+				this.dispatch( 'entityWrite', new EntityRevisionWithRedirect( entityRevision ) ) );
 	}
 
 	public entitySave(
@@ -37,18 +39,22 @@ export class EntityActions extends Actions<EntityState, Getters<EntityState>, En
 
 		return this.store.$services.get( 'writingEntityRepository' )
 			.saveEntity( entity, base, payload.assertUser )
-			.then( ( entityRevision: EntityRevision ) => this.dispatch( 'entityWrite', entityRevision ) );
+			.then( ( entityRevisionWithRedirect: EntityRevisionWithRedirect ) =>
+				this.dispatch( 'entityWrite', entityRevisionWithRedirect ) );
 	}
 
 	public entityWrite(
-		entityRevision: EntityRevision,
+		entityRevisionWithRedirect: EntityRevisionWithRedirect,
 	): Promise<unknown> {
-		this.commit( 'updateRevision', entityRevision.revisionId );
-		this.commit( 'updateEntity', entityRevision.entity );
+		this.commit( 'updateRevision', entityRevisionWithRedirect.entityRevision.revisionId );
+		this.commit( 'updateEntity', entityRevisionWithRedirect.entityRevision.entity );
+		if ( entityRevisionWithRedirect.redirectUrl ) {
+			this.commit( 'updateTempUserRedirectUrl', entityRevisionWithRedirect.redirectUrl );
+		}
 
 		return this.statementsModule.dispatch( 'initStatements', {
-			entityId: entityRevision.entity.id,
-			statements: entityRevision.entity.statements,
+			entityId: entityRevisionWithRedirect.entityRevision.entity.id,
+			statements: entityRevisionWithRedirect.entityRevision.entity.statements,
 		} );
 	}
 }

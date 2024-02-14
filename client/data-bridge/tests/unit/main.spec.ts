@@ -78,8 +78,9 @@ describe( 'launch', () => {
 		expect( mockCreateStore ).toHaveBeenCalledWith( services );
 		expect( store.dispatch ).toHaveBeenCalledWith( 'initBridge', appInformation );
 		expect( mockVue.mount ).toHaveBeenCalledWith( appConfiguration.containerSelector );
-		expect( mockEmitter.on ).toHaveBeenCalledTimes( 1 );
+		expect( mockEmitter.on ).toHaveBeenCalledTimes( 2 );
 		expect( mockEmitter.on.mock.calls[ 0 ][ 0 ] ).toBe( appEvents.relaunch );
+		expect( mockEmitter.on.mock.calls[ 1 ][ 0 ] ).toBe( appEvents.redirect );
 	} );
 
 } );

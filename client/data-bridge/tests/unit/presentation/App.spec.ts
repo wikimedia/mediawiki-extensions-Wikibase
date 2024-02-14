@@ -12,6 +12,7 @@ import { nextTick } from 'vue';
 import App from '@/presentation/App.vue';
 import { createStore } from '@/store';
 import Application from '@/store/Application';
+import { entityModule } from '@/store/entity';
 import { initEvents, appEvents } from '@/events';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 import EditFlow from '@/definitions/EditFlow';
@@ -273,6 +274,24 @@ describe( 'App.vue', () => {
 
 		expect( mockEmitter.emit ).toHaveBeenCalledTimes( 1 );
 		expect( mockEmitter.emit ).toHaveBeenCalledWith( initEvents.reload );
+	} );
+
+	it( 'emits redirect event if redirectUrl changes', async () => {
+		const wrapper = shallowMount( App, {
+			global: {
+				plugins: [ store ],
+			},
+			propsData: { emitter: mockEmitter },
+		} );
+
+		const targetUrl = new URL( 'https://www.wikidata.org/?=redirect' );
+		const entityState = entityModule.context( store );
+		entityState.commit( 'updateTempUserRedirectUrl', targetUrl );
+
+		await wrapper.findComponent( AppHeader ).vm.$nextTick();
+
+		expect( mockEmitter.emit ).toHaveBeenCalledTimes( 1 );
+		expect( mockEmitter.emit ).toHaveBeenCalledWith( appEvents.redirect, targetUrl );
 	} );
 
 	describe( 'component switch', () => {
