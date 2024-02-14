@@ -80,7 +80,7 @@ class PatchPropertyDescriptionsTest extends TestCase {
 
 		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
-		$comment = 'descriptions patched by ' . __method__;
+		$comment = 'descriptions patched by ' . __METHOD__;
 
 		$propertyRepo = new InMemoryPropertyRepository();
 		$propertyRepo->addProperty( new Property( $propertyId, null, 'string' ) );

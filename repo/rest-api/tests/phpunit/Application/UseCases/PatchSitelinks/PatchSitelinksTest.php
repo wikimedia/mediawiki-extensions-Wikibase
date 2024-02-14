@@ -65,7 +65,7 @@ class PatchSitelinksTest extends TestCase {
 
 		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
-		$comment = 'sitelinks replaced by ' . __method__;
+		$comment = 'sitelinks replaced by ' . __METHOD__;
 
 		$itemRepo = new InMemoryItemRepository();
 		$itemRepo->addItem(

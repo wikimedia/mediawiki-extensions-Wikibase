@@ -81,7 +81,7 @@ class PatchItemLabelsTest extends TestCase {
 
 		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
-		$comment = 'labels replaced by ' . __method__;
+		$comment = 'labels replaced by ' . __METHOD__;
 
 		$itemRepo = new InMemoryItemRepository();
 		$itemRepo->addItem( new Item( $itemId ) );

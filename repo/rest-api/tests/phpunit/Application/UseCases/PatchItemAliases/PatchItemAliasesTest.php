@@ -75,7 +75,7 @@ class PatchItemAliasesTest extends TestCase {
 
 		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
-		$comment = 'aliases patched by ' . __method__;
+		$comment = 'aliases patched by ' . __METHOD__;
 
 		$itemRepo = new InMemoryItemRepository();
 		$itemRepo->addItem( NewItem::withId( $itemId )->andAliases( $aliasLanguage, [ $aliasText ] )->build() );

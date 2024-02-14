@@ -42,7 +42,7 @@ class RemoveItemStatementTest extends TestCase {
 		$newStatementSerialization = [ 'some' => 'statement' ];
 		$editTags = [ TestValidatingRequestDeserializer::ALLOWED_TAGS[0] ];
 		$isBot = false;
-		$comment = 'statement removed by ' . __method__;
+		$comment = 'statement removed by ' . __METHOD__;
 
 		$request = $this->newUseCaseRequest( [
 			'$itemId' => (string)$itemId,
@@ -99,7 +99,7 @@ class RemoveItemStatementTest extends TestCase {
 		$statementId = new StatementGuid( $itemId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 		$editTags = [ TestValidatingRequestDeserializer::ALLOWED_TAGS[0] ];
 		$isBot = false;
-		$comment = 'statement removed by ' . __method__;
+		$comment = 'statement removed by ' . __METHOD__;
 		$request = $this->newUseCaseRequest( [
 			'$itemId' => (string)$itemId,
 			'$statementId' => (string)$statementId,

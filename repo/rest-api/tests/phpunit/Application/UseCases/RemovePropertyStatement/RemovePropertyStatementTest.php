@@ -41,7 +41,7 @@ class RemovePropertyStatementTest extends TestCase {
 		$newStatementSerialization = [ 'some' => 'statement' ];
 		$editTags = [ TestValidatingRequestDeserializer::ALLOWED_TAGS[0] ];
 		$isBot = false;
-		$comment = 'statement removed by ' . __method__;
+		$comment = 'statement removed by ' . __METHOD__;
 
 		$request = $this->newUseCaseRequest( [
 			'$propertyId' => (string)$propertyId,
@@ -98,7 +98,7 @@ class RemovePropertyStatementTest extends TestCase {
 		$statementId = new StatementGuid( $propertyId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 		$editTags = [ TestValidatingRequestDeserializer::ALLOWED_TAGS[0] ];
 		$isBot = false;
-		$comment = 'statement removed by ' . __method__;
+		$comment = 'statement removed by ' . __METHOD__;
 		$request = $this->newUseCaseRequest( [
 			'$propertyId' => (string)$propertyId,
 			'$statementId' => (string)$statementId,

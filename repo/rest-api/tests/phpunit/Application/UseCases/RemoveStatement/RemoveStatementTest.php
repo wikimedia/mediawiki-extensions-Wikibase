@@ -61,7 +61,7 @@ class RemoveStatementTest extends TestCase {
 			'$statementId' => (string)$statementGuid,
 			'$editTags' => [ TestValidatingRequestDeserializer::ALLOWED_TAGS[0] ],
 			'$isBot' => false,
-			'$comment' => 'statement removed by ' . __method__,
+			'$comment' => 'statement removed by ' . __METHOD__,
 			'$username' => null,
 		];
 

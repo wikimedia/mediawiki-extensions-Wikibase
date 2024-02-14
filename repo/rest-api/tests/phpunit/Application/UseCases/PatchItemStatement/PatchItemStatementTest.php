@@ -42,7 +42,7 @@ class PatchItemStatementTest extends TestCase {
 		$patch = $this->getValidValueReplacingPatch( 'new statement value' );
 		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
-		$comment = 'statement replaced by ' . __method__;
+		$comment = 'statement replaced by ' . __METHOD__;
 
 		$request = $this->newUseCaseRequest( [
 			'$itemId' => (string)$itemId,
@@ -104,7 +104,7 @@ class PatchItemStatementTest extends TestCase {
 		$patch = $this->getValidValueReplacingPatch( 'new statement value' );
 		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
-		$comment = 'statement replaced by ' . __method__;
+		$comment = 'statement replaced by ' . __METHOD__;
 
 		$request = $this->newUseCaseRequest( [
 			'$itemId' => (string)$itemId,

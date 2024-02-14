@@ -78,7 +78,7 @@ class PatchItemDescriptionsTest extends TestCase {
 
 		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
-		$comment = 'descriptions patched by ' . __method__;
+		$comment = 'descriptions patched by ' . __METHOD__;
 
 		$itemRepo = new InMemoryItemRepository();
 		$itemRepo->addItem( new Item( $itemId ) );

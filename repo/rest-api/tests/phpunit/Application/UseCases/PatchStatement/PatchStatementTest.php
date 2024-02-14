@@ -87,7 +87,7 @@ class PatchStatementTest extends TestCase {
 
 		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
-		$comment = 'statement replaced by ' . __method__;
+		$comment = 'statement replaced by ' . __METHOD__;
 
 		$patch = $this->getValidValueReplacingPatch( $newStatementValue );
 

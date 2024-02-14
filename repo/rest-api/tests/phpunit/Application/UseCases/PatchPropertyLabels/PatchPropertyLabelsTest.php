@@ -78,7 +78,7 @@ class PatchPropertyLabelsTest extends TestCase {
 
 		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
-		$comment = 'labels replaced by ' . __method__;
+		$comment = 'labels replaced by ' . __METHOD__;
 
 		$propertyRepo = new InMemoryPropertyRepository();
 		$propertyRepo->addProperty( new Property( $propertyId, null, 'string' ) );
