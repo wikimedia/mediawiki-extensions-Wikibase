@@ -103,7 +103,7 @@
 	"notification-link-text-view-item": "{{GENDER:$1|Skoða}} hlut",
 	"notification-subject-page-connection": "Síða á {{SITENAME}} sem þú {{GENDER:$3|bjóst til}} var {{GENDER:$2|tengd}} við {{WBREPONAME}} hlut",
 	"unresolved-property-category": "Síður með óleysta eiginleika",
-	"unresolved-property-category-desc": "Þessi flokkur listar síður sem vísa í {{WBREPONAME}} eiginleika sem finnast ekki annaðhvort út frá auðkenni eiginleikans eða merkimiða.",
+	"unresolved-property-category-desc": "Þessi flokkur listar síður sem vísa í {{WBREPONAME}}-eiginleika sem finnast ekki hvorki eftir eiginleikaauðkenni sínu né merkimiða.",
 	"connected-redirect-category": "Tilvísanir tengdar {{WBREPONAME}}-atriði",
 	"connected-redirect-category-desc": "Þessi flokkur listar tilvísanasíður sem eru tengdar {{WBREPONAME}}-atriði.",
 	"wikibase-client-data-bridge-dialog-title": "Breyta $1",

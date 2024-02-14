@@ -2,10 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"Bernardgift",
+			"Ekemini5",
 			"Okon Ibiono",
 			"Uduakj"
 		]
 	},
+	"wikibase-dataitem": "{{WBREPONAME}} mme nkpo",
+	"wikibase-linkitem-addlinks": "Diam udiana",
 	"wikibase-linkitem-title": "Adi diana ye ikpa nwed",
 	"wikibase-linkitem-linkpage": "Adi diana ye ikpa nwed",
 	"wikibase-linkitem-selectlink": "Mbok dad site ye ikpa nwed se ayem Ikama isangha ye ikpa nwed adam.",
