@@ -93,9 +93,11 @@ interface EditEntity {
 	 * just like the status returned by WikiPage::doUserEditContent(). Well known fields
 	 * in the status value are:
 	 *
-	 *  - new: bool whether the edit created a new page
-	 *  - revision: Revision the new revision object
-	 *  - errorFlags: bit field indicating errors, see the XXX_ERROR constants.
+	 *  - 'revision' (EntityRevision): the resulting revision
+	 *  - 'errorFlags' (int): bit field indicating errors, see the XXX_ERROR constants
+	 *  - 'savedTempUser' (?User): null, or a temporary user that was automatically created
+	 *  - 'context' (IContextSource): context that should be used for any future edits
+	 *    (if a temporary user was created, it will be set in this context, but not in the original one)
 	 *
 	 * @return Status
 	 */
@@ -144,7 +146,7 @@ interface EditEntity {
 	/**
 	 * Attempts to save the given Entity object.
 	 *
-	 * This method performs entity level permission checks, checks the edit toke, enforces rate
+	 * This method performs entity level permission checks, checks the edit token, enforces rate
 	 * limits, resolves edit conflicts, and updates user watchlists if appropriate.
 	 *
 	 * Success or failure are reported via the Status object returned by this method.
@@ -160,9 +162,10 @@ interface EditEntity {
 	 * @param bool|null $watch Whether the user wants to watch the entity.
 	 *                                Set to null to apply default according to getWatchDefault().
 	 * @param string[] $tags Change tags to add to the edit.
-	 * Callers are responsible for checking that the user is permitted to add these tags.
+	 * Callers are responsible for checking that the user is permitted to add these tags
+	 * (typically using {@link ChangeTags::canAddTagsAccompanyingChange}).
 	 *
-	 * @return Status
+	 * @return Status See {@link self::getStatus()} for the contents.
 	 *
 	 * @throws ReadOnlyError
 	 *

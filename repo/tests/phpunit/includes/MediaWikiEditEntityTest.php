@@ -872,6 +872,7 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 		);
 		$this->assertTrue( $editWasMadeByUser, 'edit should have been made by $user' );
 		$this->assertNull( $status->getValue()['savedTempUser'], 'no savedTempUser' );
+		$this->assertSame( $user, $status->getValue()['context']->getUser() );
 	}
 
 	public function testSaveWithTempUser(): void {
@@ -889,6 +890,7 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 			$this->getEntityTitleLookup(),
 			$anonUser
 		);
+		$originalContext = TestingAccessWrapper::newFromObject( $edit )->context;
 
 		$status = $edit->attemptSave(
 			new Item(),
@@ -906,6 +908,10 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 		$this->assertTrue( $editWasMadeByTempUser, 'edit should have been made by $tempUser' );
 		$this->assertFalse( $editWasMadeByAnonUser, 'edit should not have been made by $anonUser' );
 		$this->assertSame( $tempUser, $status->getValue()['savedTempUser'] );
+		$context = $status->getValue()['context'];
+		$this->assertNotSame( $originalContext, $context );
+		$this->assertSame( $anonUser, $originalContext->getUser() );
+		$this->assertSame( $tempUser, $context->getUser() );
 	}
 
 }
