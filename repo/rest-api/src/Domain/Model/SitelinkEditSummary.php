@@ -25,12 +25,9 @@ class SitelinkEditSummary implements EditSummary {
 		return new self( self::ADD_ACTION, $userComment, $sitelink );
 	}
 
-	public static function newReplaceSummary( ?string $userComment, SiteLink $sitelink ): self {
-		return new self( self::REPLACE_ACTION, $userComment, $sitelink );
-	}
-
-	public static function newReplaceBadgesSummary( ?string $userComment, SiteLink $sitelink ): self {
-		return new self( self::REPLACE_ACTION, $userComment, $sitelink, true );
+	public static function newReplaceSummary( ?string $userComment, SiteLink $sitelink, SiteLink $replacedSitelink ): self {
+		$badgesOnly = $sitelink->getPageName() === $replacedSitelink->getPageName();
+		return new self( self::REPLACE_ACTION, $userComment, $sitelink, $badgesOnly );
 	}
 
 	public static function newRemoveSummary( ?string $userComment, SiteLink $sitelink ): self {
