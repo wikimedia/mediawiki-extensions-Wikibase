@@ -2,7 +2,14 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Application\Validation;
 
+use LogicException;
 use PHPUnit\Framework\TestCase;
+use Wikibase\DataModel\SiteLink;
+use Wikibase\Repo\RestApi\Application\Serialization\EmptySitelinkException;
+use Wikibase\Repo\RestApi\Application\Serialization\InvalidFieldException;
+use Wikibase\Repo\RestApi\Application\Serialization\MissingFieldException;
+use Wikibase\Repo\RestApi\Application\Serialization\SerializationException;
+use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
 use Wikibase\Repo\RestApi\Application\Validation\SitelinkValidator;
 
 /**
@@ -14,25 +21,59 @@ use Wikibase\Repo\RestApi\Application\Validation\SitelinkValidator;
  */
 class SitelinkValidatorTest extends TestCase {
 
+	private SitelinkDeserializer $sitelinkDeserializer;
+
+	protected function setUp(): void {
+		parent::setUp();
+		$this->sitelinkDeserializer = $this->createStub( SitelinkDeserializer::class );
+	}
+
 	public function testGivenValidSitelink_returnsNull(): void {
 		$this->assertNull(
-			( new SitelinkValidator( '/\?/' ) )->validate( [ 'title' => 'test-title', 'badges' => [ 'Q123' ] ] )
+			$this->newSitelinkValidator()->validate( 'Q123', [ 'title' => 'test-title', 'badges' => [ 'Q123' ] ] )
 		);
 	}
 
 	/**
 	 * @dataProvider provideInvalidSitelink
 	 */
-	public function testGivenInvalidSitelink_returnsValidationErrors( array $sitelink, string $errorCode ): void {
-		$validationError = ( new SitelinkValidator( '/\?/' ) )->validate( $sitelink );
-		$this->assertSame( $errorCode, $validationError->getCode() );
+	public function testGivenSitelinkDeserializerThrows_returnsValidationErrors(
+		SerializationException $deserializerException,
+		string $validationErrorCode
+	): void {
+		$this->sitelinkDeserializer = $this->createStub( SitelinkDeserializer::class );
+		$this->sitelinkDeserializer->method( 'deserialize' )->willThrowException( $deserializerException );
+
+		$validationError = $this->newSitelinkValidator()->validate( 'Q123', [] );
+		$this->assertSame( $validationErrorCode, $validationError->getCode() );
 	}
 
 	public function provideInvalidSitelink(): \Generator {
-		yield 'missing title' => [ [ 'badges' => [ 'Q789' ] ], SitelinkValidator::CODE_TITLE_MISSING ];
+		yield 'missing title' => [ new MissingFieldException( 'title' ), SitelinkValidator::CODE_TITLE_MISSING ];
 
-		yield 'title is empty' => [ [ 'title' => '', 'badges' => [ 'Q789' ] ], SitelinkValidator::CODE_EMPTY_TITLE ];
+		yield 'title is empty' => [ new EmptySitelinkException( 'title', '' ), SitelinkValidator::CODE_EMPTY_TITLE ];
 
-		yield 'invalid title' => [ [ 'title' => 'invalid title?', 'badges' => [ 'Q789' ] ], SitelinkValidator::CODE_INVALID_TITLE ];
+		yield 'invalid title' => [ new InvalidFieldException( 'title', 'invalid?' ), SitelinkValidator::CODE_INVALID_TITLE ];
 	}
+
+	public function testGivenGetValidatedSitelinkCalledBeforeValidate_throws(): void {
+		$this->expectException( LogicException::class );
+
+		$this->newSitelinkValidator()->getValidatedSitelink();
+	}
+
+	public function testGivenGetValidatedSitelinkCalledAfterValidate_returnsSitelink(): void {
+		$deserializedSitelink = $this->createStub( SiteLink::class );
+		$this->sitelinkDeserializer = $this->createStub( SitelinkDeserializer::class );
+		$this->sitelinkDeserializer->method( 'deserialize' )->willReturn( $deserializedSitelink );
+
+		$sitelinkValidator = $this->newSitelinkValidator();
+		$this->assertNull( $sitelinkValidator->validate( 'Q123', [] ) );
+		$this->assertSame( $deserializedSitelink, $sitelinkValidator->getValidatedSitelink() );
+	}
+
+	private function newSitelinkValidator(): SitelinkValidator {
+		return new SitelinkValidator( $this->sitelinkDeserializer );
+	}
+
 }

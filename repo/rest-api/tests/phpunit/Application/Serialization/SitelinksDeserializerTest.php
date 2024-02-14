@@ -32,7 +32,7 @@ class SitelinksDeserializerTest extends TestCase {
 				new SiteLink( 'testWiki1', 'Test Title', [ new ItemId( 'Q123' ) ] ),
 				new SiteLink( 'testWiki2', 'Test Title', [ new ItemId( 'Q123' ) ] ),
 			] ),
-			( new SitelinksDeserializer( new SitelinkDeserializer() ) )->deserialize( [
+			( new SitelinksDeserializer( new SitelinkDeserializer( '/\?/' ) ) )->deserialize( [
 				$siteId => $serialization,
 				$anotherSiteId => $serialization,
 			] )

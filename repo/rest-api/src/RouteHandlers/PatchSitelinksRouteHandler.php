@@ -7,6 +7,7 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
 use MediaWiki\Rest\Validator\BodyValidator;
+use MediaWikiTitleCodec;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinksDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkSerializer;
@@ -49,7 +50,9 @@ class PatchSitelinksRouteHandler extends SimpleHandler {
 				new SitelinksSerializer( new SitelinkSerializer() ),
 				new PatchJson( new JsonDiffJsonPatcher() ),
 				WbRestApi::getItemDataRetriever(),
-				new SitelinksDeserializer( new SiteLinkDeserializer() ),
+				new SitelinksDeserializer(
+					new SiteLinkDeserializer( MediaWikiTitleCodec::getTitleInvalidRegex() )
+				),
 				WbRestApi::getItemUpdater()
 			),
 			new SitelinksSerializer( new SitelinkSerializer() ),

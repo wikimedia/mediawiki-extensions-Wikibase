@@ -4,7 +4,6 @@ namespace Wikibase\Repo\RestApi\Application\UseCaseRequestValidation;
 
 use LogicException;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\SitelinkValidator;
 
@@ -14,18 +13,16 @@ use Wikibase\Repo\RestApi\Application\Validation\SitelinkValidator;
 class SitelinkEditRequestValidatingDeserializer {
 
 	private SitelinkValidator $validator;
-	private SitelinkDeserializer $sitelinkDeserializer;
 
-	public function __construct( SitelinkValidator $validator, SitelinkDeserializer $sitelinkDeserializer ) {
+	public function __construct( SitelinkValidator $validator ) {
 		$this->validator = $validator;
-		$this->sitelinkDeserializer = $sitelinkDeserializer;
 	}
 
 	/**
 	 * @throws UseCaseError
 	 */
 	public function validateAndDeserialize( SitelinkEditRequest $request ): SiteLink {
-		$validationError = $this->validator->validate( $request->getSitelink() );
+		$validationError = $this->validator->validate( $request->getSiteId(), $request->getSitelink() );
 		if ( $validationError ) {
 			switch ( $validationError->getCode() ) {
 				case SitelinkValidator::CODE_TITLE_MISSING:
@@ -41,13 +38,14 @@ class SitelinkEditRequestValidatingDeserializer {
 				case SitelinkValidator::CODE_INVALID_TITLE:
 					throw new UseCaseError(
 						UseCaseError::INVALID_TITLE_FIELD,
-						'Not a valid input for title field',
+						'Not a valid input for title field'
 					);
 				default:
 					throw new LogicException( "Unknown validation error code: {$validationError->getCode()}" );
 			}
 		}
 
-		return $this->sitelinkDeserializer->deserialize( $request->getSiteId(), $request->getSitelink() );
+		return $this->validator->getValidatedSitelink();
 	}
+
 }

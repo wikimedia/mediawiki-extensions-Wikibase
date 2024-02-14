@@ -2,9 +2,14 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Application\Serialization;
 
+use Exception;
+use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\Repo\RestApi\Application\Serialization\EmptySitelinkException;
+use Wikibase\Repo\RestApi\Application\Serialization\InvalidFieldException;
+use Wikibase\Repo\RestApi\Application\Serialization\MissingFieldException;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
 
 /**
@@ -16,17 +21,35 @@ use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
  */
 class SitelinkDeserializerTest extends TestCase {
 
-	public function testDeserialize(): void {
+	public function testGivenValidSerialization_deserializeReturnsCorrectSitelink(): void {
 		$siteId = 'testwiki';
-		$serialization = [
-			'title' => 'Test Title',
-			'badges' => [ 'Q123' ],
-		];
+		$title = 'Test Title';
+		$badge = 'Q123';
+		$serialization = [ 'title' => $title, 'badges' => [ $badge ] ];
 
 		$this->assertEquals(
-			new SiteLink( 'testwiki', 'Test Title', [ new ItemId( 'Q123' ) ] ),
-			( new SitelinkDeserializer() )->deserialize( $siteId, $serialization )
+			new SiteLink( $siteId, $title, [ new ItemId( $badge ) ] ),
+			( new SitelinkDeserializer( '/\?/' ) )->deserialize( $siteId, $serialization )
 		);
+	}
+
+	/**
+	 * @dataProvider provideInvalidSitelinkSerialization
+	 */
+	public function testGivenInvalidSitelink_deserializeThrows( array $serialization, Exception $expectedError ): void {
+		try {
+			( new SitelinkDeserializer( '/\?/' ) )->deserialize( 'Q123', $serialization );
+			$this->fail( 'Expected exception was not thrown' );
+		} catch ( Exception $e ) {
+			$this->assertEquals( $expectedError, $e );
+		}
+	}
+
+	public function provideInvalidSitelinkSerialization(): Generator {
+		yield 'title missing' => [ [ 'badges' => [ 'Q456' ] ], new MissingFieldException( 'title' ) ];
+		yield 'title empty' => [ [ 'title' => '', 'badges' => [ 'Q456' ] ], new EmptySitelinkException( 'title', '' ) ];
+		yield 'title empty w/ whitespace' => [ [ 'title' => " \t" ], new EmptySitelinkException( 'title', '' ) ];
+		yield 'title invalid' => [ [ 'title' => 'invalid?' ], new InvalidFieldException( 'title', 'invalid?' ) ];
 	}
 
 }
