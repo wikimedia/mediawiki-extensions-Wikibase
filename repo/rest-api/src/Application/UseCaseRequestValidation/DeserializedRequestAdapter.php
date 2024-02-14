@@ -6,6 +6,7 @@ use LogicException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Term\Term;
@@ -182,6 +183,10 @@ class DeserializedRequestAdapter implements
 
 	public function getPropertyAliasesInLanguage(): array {
 		return $this->getRequestField( PropertyAliasesInLanguageEditRequest::class );
+	}
+
+	public function getSitelink(): SiteLink {
+		return $this->getRequestField( SitelinkEditRequest::class );
 	}
 
 	/**

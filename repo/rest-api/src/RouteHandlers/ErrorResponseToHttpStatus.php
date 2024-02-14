@@ -72,6 +72,9 @@ class ErrorResponseToHttpStatus {
 		UseCaseError::PATCH_TEST_FAILED => 409,
 		UseCaseError::PATCH_TARGET_NOT_FOUND => 409,
 		UseCaseError::UNEXPECTED_ERROR => 500,
+		UseCaseError::TITLE_FIELD_EMPTY => 400,
+		UseCaseError::INVALID_TITLE_FIELD => 400,
+		UseCaseError::SITELINK_DATA_MISSING_TITLE => 400,
 	];
 
 	public static function lookup( string $errorCode ): int {

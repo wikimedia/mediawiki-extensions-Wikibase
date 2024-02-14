@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\SetSitelink;
 
-use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
@@ -18,7 +17,6 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 class SetSitelink {
 
 	private SetSitelinkValidator $validator;
-	private SitelinkDeserializer $sitelinkDeserializer;
 	private AssertItemExists $assertItemExists;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
 	private ItemRetriever $itemRetriever;
@@ -26,14 +24,12 @@ class SetSitelink {
 
 	public function __construct(
 		SetSitelinkValidator $validator,
-		SitelinkDeserializer $sitelinkDeserializer,
 		AssertItemExists $assertItemExists,
 		AssertUserIsAuthorized $assertUserIsAuthorized,
 		ItemRetriever $itemRetriever,
 		ItemUpdater $itemUpdater
 	) {
 		$this->validator = $validator;
-		$this->sitelinkDeserializer = $sitelinkDeserializer;
 		$this->assertItemExists = $assertItemExists;
 		$this->assertUserIsAuthorized = $assertUserIsAuthorized;
 		$this->itemRetriever = $itemRetriever;
@@ -48,7 +44,7 @@ class SetSitelink {
 		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
 		$itemId = $deserializedRequest->getItemId();
 		$siteId = $deserializedRequest->getSiteId();
-		$sitelink = $this->sitelinkDeserializer->deserialize( $siteId, $request->getSitelink() );
+		$sitelink = $deserializedRequest->getSitelink();
 
 		$this->assertItemExists->execute( $itemId );
 		$this->assertUserIsAuthorized->execute( $itemId, $deserializedRequest->getEditMetadata()->getUser() );

@@ -29,6 +29,11 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 		assert.include( response.body.url, title );
 	}
 
+	function assertValidErrorResponse( response, responseBodyErrorCode ) {
+		assert.header( response, 'Content-Language', 'en' );
+		assert.strictEqual( response.body.code, responseBodyErrorCode );
+	}
+
 	before( async () => {
 		const createItemResponse = await createEntity( 'item', {} );
 		testItemId = createItemResponse.entity.id;
@@ -197,9 +202,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assert.header( response, 'Content-Language', 'en' );
-			assert.strictEqual( response.body.code, 'invalid-item-id' );
+			assertValidErrorResponse( response, 'invalid-item-id' );
 			assert.include( response.body.message, invalidItemId );
 		} );
 
@@ -209,9 +212,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 				// .assertInvalidRequest() - valid per OAS because it only checks whether it is a string
 				.makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assert.header( response, 'Content-Language', 'en' );
-			assert.strictEqual( response.body.code, 'invalid-site-id' );
+			assertValidErrorResponse( response, 'invalid-site-id' );
 			assert.include( response.body.message, invalidSiteId );
 		} );
 
@@ -220,8 +221,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, testSitelink )
 				.withJsonBodyParam( 'tags', [ invalidEditTag ] ).assertValidRequest().makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.body.code, 'invalid-edit-tag' );
+			assertValidErrorResponse( response, 'invalid-edit-tag' );
 			assert.include( response.body.message, invalidEditTag );
 		} );
 
@@ -263,6 +263,45 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 			assert.strictEqual( response.body.code, 'invalid-request-body' );
 			assert.strictEqual( response.body.fieldName, 'comment' );
 			assert.strictEqual( response.body.expectedType, 'string' );
+		} );
+
+		it( 'title is empty', async () => {
+			const newSitelinkWithEmptyTitle = { title: '', badges: [ 'Q123' ] };
+			const response = await newSetSitelinkRequestBuilder(
+				testItemId,
+				siteId,
+				newSitelinkWithEmptyTitle
+			).makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assertValidErrorResponse( response, 'title-field-empty' );
+			assert.strictEqual( response.body.message, 'Title must not be empty' );
+		} );
+
+		it( 'sitelink title field not provided', async () => {
+			const newSitelinkWithTitleFieldMissing = { badges: [ 'Q123' ] };
+			const response = await newSetSitelinkRequestBuilder(
+				testItemId,
+				siteId,
+				newSitelinkWithTitleFieldMissing
+			).makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assertValidErrorResponse( response, 'sitelink-data-missing-title' );
+			assert.strictEqual( response.body.message, 'Mandatory sitelink title missing' );
+		} );
+
+		it( 'Invalid title', async () => {
+			const newSitelinkWithInvalidTitle = { title: 'invalid title%00', badges: [ 'Q123' ] };
+			const response = await newSetSitelinkRequestBuilder(
+				testItemId,
+				siteId,
+				newSitelinkWithInvalidTitle
+			).makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assertValidErrorResponse( response, 'invalid-title-field' );
+			assert.strictEqual( response.body.message, 'Not a valid input for title field' );
 		} );
 	} );
 

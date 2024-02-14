@@ -7,6 +7,7 @@ use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Term\Term;
@@ -34,6 +35,8 @@ use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyLabelEdit
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyLabelEditRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\SiteIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\SiteIdRequestValidatingDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\SitelinkEditRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\SitelinkEditRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementIdRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementSerializationRequest;
@@ -88,6 +91,17 @@ class ValidatingRequestDeserializerTest extends TestCase {
 
 		$result = $this->newRequestDeserializer()->validateAndDeserialize( $request );
 		$this->assertEquals( self::VALID_SITE_ID, $result->getSiteId() );
+	}
+
+	public function testGivenValidSitelinkEditRequest_returnsSitelink(): void {
+		$sitelink = [ 'title' => 'Potato', 'badges' => [ 'Q1234' ] ];
+		$request = $this->createStub( SitelinkUseCaseRequest::class );
+		$request->method( 'getItemId' )->willReturn( 'Q123' );
+		$request->method( 'getSiteId' )->willReturn( self::VALID_SITE_ID );
+		$request->method( 'getSitelink' )->willReturn( $sitelink );
+
+		$result = $this->newRequestDeserializer()->validateAndDeserialize( $request );
+		$this->assertEquals( new SiteLink( 'enwiki', 'Potato', [ new ItemId( 'Q1234' ) ] ), $result->getSitelink() );
 	}
 
 	public function testGivenValidStatementIdRequest_returnsDeserializedStatementId(): void {
@@ -333,6 +347,11 @@ class ValidatingRequestDeserializerTest extends TestCase {
 			SiteIdRequestValidatingDeserializer::class,
 			ValidatingRequestDeserializer::SITE_ID_REQUEST_VALIDATING_DESERIALIZER,
 		];
+		yield [
+			SitelinkUseCaseRequest::class,
+			SitelinkEditRequestValidatingDeserializer::class,
+			ValidatingRequestDeserializer::SITELINK_EDIT_REQUEST_VALIDATING_DESERIALIZER,
+		];
 	}
 
 	private function newRequestDeserializer( ContainerInterface $serviceContainer = null ): ValidatingRequestDeserializer {
@@ -359,7 +378,9 @@ interface PropertyLabelEditUseCaseRequest extends UseCaseRequest, PropertyLabelE
 interface ItemDescriptionEditUseCaseRequest extends UseCaseRequest, ItemDescriptionEditRequest {}
 interface PropertyDescriptionEditUseCaseRequest extends UseCaseRequest, PropertyDescriptionEditRequest {}
 interface PropertyFieldsUseCaseRequest extends UseCaseRequest, PropertyFieldsRequest {}
-interface SiteIdUseCaseRequest extends UseCaseRequest, SiteIdRequest {}
+interface SiteIdUseCaseRequest extends UseCaseRequest, SiteIdRequest {
+}
+interface SitelinkUseCaseRequest extends UseCaseRequest, SitelinkEditRequest {}
 class NullValidator {
 	public function validateAndDeserialize() {
 		return null;
