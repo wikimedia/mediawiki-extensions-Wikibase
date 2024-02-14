@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Api;
 
 use ApiBase;
+use ApiCreateTempUserTrait;
 use ApiMain;
 use ApiUsageException;
 use LogicException;
@@ -40,6 +41,7 @@ use Wikimedia\ParamValidator\ParamValidator;
 abstract class ModifyEntity extends ApiBase {
 
 	use FederatedPropertyApiValidatorTrait;
+	use ApiCreateTempUserTrait;
 
 	/**
 	 * @var StringNormalizer
@@ -416,11 +418,11 @@ abstract class ModifyEntity extends ApiBase {
 	}
 
 	private function addToOutput( EntityDocument $entity, Status $status, int $oldRevId ): void {
+		$params = $this->extractRequestParams();
+
 		$this->getResultBuilder()->addBasicEntityInformation( $entity->getId(), 'entity' );
 		$this->getResultBuilder()->addRevisionIdFromStatusToResult( $status, 'entity', $oldRevId );
-		$this->getResultBuilder()->addTempUser( $status );
-
-		$params = $this->extractRequestParams();
+		$this->getResultBuilder()->addTempUser( $status, fn( $user ) => $this->getTempUserRedirectUrl( $params, $user ) );
 
 		if ( isset( $params['site'] ) && isset( $params['title'] ) ) {
 			$normTitle = $this->stringNormalizer->trimToNFC( $params['title'] );
@@ -440,7 +442,8 @@ abstract class ModifyEntity extends ApiBase {
 			parent::getAllowedParams(),
 			$this->getAllowedParamsForId(),
 			$this->getAllowedParamsForSiteLink(),
-			$this->getAllowedParamsForEntity()
+			$this->getAllowedParamsForEntity(),
+			$this->getCreateTempUserParams()
 		);
 	}
 
