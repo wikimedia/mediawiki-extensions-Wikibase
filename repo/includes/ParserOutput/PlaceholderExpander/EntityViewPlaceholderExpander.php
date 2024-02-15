@@ -72,11 +72,6 @@ class EntityViewPlaceholderExpander implements PlaceholderExpander {
 	private $userOptionsLookup;
 
 	/**
-	 * @var string
-	 */
-	private $cookiePrefix;
-
-	/**
 	 * @var string[]
 	 */
 	private $termsListItems;
@@ -92,7 +87,6 @@ class EntityViewPlaceholderExpander implements PlaceholderExpander {
 	 * @param LanguageNameLookup $languageNameLookup
 	 * @param LocalizedTextProvider $textProvider
 	 * @param UserOptionsLookup $userOptionsLookup
-	 * @param string $cookiePrefix
 	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
 	 * @param bool $mulEnabled
 	 * @param string[] $termsListItems
@@ -106,7 +100,6 @@ class EntityViewPlaceholderExpander implements PlaceholderExpander {
 		LanguageNameLookup $languageNameLookup,
 		LocalizedTextProvider $textProvider,
 		UserOptionsLookup $userOptionsLookup,
-		$cookiePrefix,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		bool $mulEnabled,
 		array $termsListItems = []
@@ -119,7 +112,6 @@ class EntityViewPlaceholderExpander implements PlaceholderExpander {
 		$this->languageNameLookup = $languageNameLookup;
 		$this->textProvider = $textProvider;
 		$this->userOptionsLookup = $userOptionsLookup;
-		$this->cookiePrefix = $cookiePrefix;
 		$this->termsListItems = $termsListItems;
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 		$this->mulEnabled = $mulEnabled;
@@ -167,8 +159,7 @@ class EntityViewPlaceholderExpander implements PlaceholderExpander {
 	 */
 	private function isInitiallyCollapsed() {
 		if ( !$this->user->isRegistered() ) {
-			$cookieName = $this->cookiePrefix . self::INITIALLY_COLLAPSED_SETTING_NAME;
-			return isset( $_COOKIE[$cookieName] ) && $_COOKIE[$cookieName] === 'false';
+			return false;
 		} else {
 			return !$this->userOptionsLookup->getOption(
 				$this->user,

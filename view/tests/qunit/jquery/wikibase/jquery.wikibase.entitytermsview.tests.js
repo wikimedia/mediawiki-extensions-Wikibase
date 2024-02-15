@@ -46,6 +46,23 @@
 			.entitytermsview( options );
 	}
 
+	function stubOptions( cookie, option ) {
+		const optionKey = 'wikibase-entitytermsview-showEntitytermslistview';
+		const userNameStub = sinon.stub( mw.config, 'get' );
+		userNameStub.withArgs( 'wgUserName' ).returns( null );
+		const cookieStub = sinon.stub( mw.cookie, 'get' );
+		cookieStub.withArgs( optionKey ).returns( cookie );
+		const optionsStub = sinon.stub( mw.user.options, 'get' );
+		optionsStub.withArgs( optionKey ).returns( option );
+		return [ userNameStub, cookieStub, optionsStub ];
+	}
+
+	function restoreStubs( stubs ) {
+		stubs.forEach( function ( stub ) {
+			stub.restore();
+		} );
+	}
+
 	QUnit.module( 'jquery.wikibase.entitytermsview', QUnit.newMwEnvironment( {
 		afterEach: function () {
 			$( '.test_entitytermsview' ).each( function () {
@@ -83,6 +100,46 @@
 			$entitytermsview.data( 'entitytermsview' ) === undefined,
 			'Destroyed widget.'
 		);
+	} );
+
+	QUnit.test( 'Initial state of listlanguageview is not-visible by default for logged-out users',
+		function ( assert ) {
+			const stubs = stubOptions( null, null );
+
+			var $entitytermsview = createEntitytermsview();
+			var $entitytermsforlanguagelistview = $entitytermsview.find( '.wikibase-entitytermsview-entitytermsforlanguagelistview' );
+			var display = $entitytermsforlanguagelistview.css( 'display' );
+
+			assert.false( mw.user.isNamed(), "User should not be set (got '" + mw.user.getName() + '")' );
+			assert.true( display === 'none', 'Element should not be visible - got display=' + display );
+
+			restoreStubs( stubs );
+		}
+	);
+
+	QUnit.test( 'Initial state of listlanguageview is visible if cookie is set', function ( assert ) {
+		const stubs = stubOptions( 'true', '0' );
+
+		var $entitytermsview = createEntitytermsview();
+		var $entitytermsforlanguagelistview = $entitytermsview.find( '.wikibase-entitytermsview-entitytermsforlanguagelistview' );
+		var display = $entitytermsforlanguagelistview.css( 'display' );
+
+		assert.true( display !== 'none', 'Element should be visible - got display=' + display );
+
+		restoreStubs( stubs );
+	} );
+
+	QUnit.test( 'Initial state of listlanguageview is visible if option is set', function ( assert ) {
+		const stubs = stubOptions( null, '1' );
+
+		var $entitytermsview = createEntitytermsview();
+		var $entitytermsforlanguagelistview = $entitytermsview.find( '.wikibase-entitytermsforlanguagelistview' );
+
+		// We want to see if the element is visible on the page, and not rely on model state here.
+		// eslint-disable-next-line no-jquery/no-sizzle
+		assert.true( $( $entitytermsforlanguagelistview ).is( ':visible' ) );
+
+		restoreStubs( stubs );
 	} );
 
 	QUnit.test( 'setError()', function ( assert ) {

@@ -59,7 +59,6 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 	private LanguageNameLookupFactory $languageNameLookupFactory;
 	private OutputPageEntityIdReader $outputPageEntityIdReader;
 	private EntityFactory $entityFactory;
-	private string $cookiePrefix;
 	private OutputPageEditability $editability;
 	private bool $isExternallyRendered;
 	private UserPreferredContentLanguagesLookup $userPreferredTermsLanguages;
@@ -78,7 +77,6 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		LanguageNameLookupFactory $languageNameLookupFactory,
 		OutputPageEntityIdReader $outputPageEntityIdReader,
 		EntityFactory $entityFactory,
-		$cookiePrefix,
 		OutputPageEditability $editability,
 		$isExternallyRendered,
 		UserPreferredContentLanguagesLookup $userPreferredTermsLanguages,
@@ -96,7 +94,6 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		$this->languageNameLookupFactory = $languageNameLookupFactory;
 		$this->outputPageEntityIdReader = $outputPageEntityIdReader;
 		$this->entityFactory = $entityFactory;
-		$this->cookiePrefix = $cookiePrefix;
 		$this->isExternallyRendered = $isExternallyRendered;
 		$this->editability = $editability;
 		$this->userPreferredTermsLanguages = $userPreferredTermsLanguages;
@@ -123,8 +120,6 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		SettingsArray $settings,
 		ContentLanguages $termsLanguages
 	): self {
-		global $wgCookiePrefix;
-
 		$entityViewChecker = new OutputPageEntityViewChecker( $entityContentFactory );
 
 		return new self(
@@ -139,7 +134,6 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 				$entityIdParser
 			),
 			$entityFactory,
-			$wgCookiePrefix,
 			new OutputPageEditability(),
 			TermboxFlag::getInstance()->shouldRenderTermbox(),
 			new UserPreferredContentLanguagesLookup(
@@ -251,7 +245,6 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 			$this->languageNameLookupFactory->getForLanguage( $language ),
 			new MediaWikiLocalizedTextProvider( $language ),
 			$this->userOptionsLookup,
-			$this->cookiePrefix,
 			$this->languageFallbackChainFactory,
 			$this->repoSettings->getSetting( 'tmpEnableMulLanguageCode' ),
 			$entityTermsListHtml
