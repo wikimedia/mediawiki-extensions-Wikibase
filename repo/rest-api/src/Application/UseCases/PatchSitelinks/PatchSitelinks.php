@@ -4,6 +4,7 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\PatchSitelinks;
 
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinksDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinksSerializer;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\SitelinksEditSummary;
@@ -16,6 +17,7 @@ use Wikibase\Repo\RestApi\Domain\Services\SitelinksRetriever;
  */
 class PatchSitelinks {
 	private PatchSitelinksValidator $useCaseValidator;
+	private AssertUserIsAuthorized $assertUserIsAuthorized;
 	private SitelinksRetriever $sitelinksRetriever;
 	private SitelinksSerializer $sitelinksSerializer;
 	private PatchJson $patcher;
@@ -25,6 +27,7 @@ class PatchSitelinks {
 
 	public function __construct(
 		PatchSitelinksValidator $useCaseValidator,
+		AssertUserIsAuthorized $assertUserIsAuthorized,
 		SitelinksRetriever $SitelinksRetriever,
 		SitelinksSerializer $sitelinksSerializer,
 		PatchJson $patcher,
@@ -33,6 +36,7 @@ class PatchSitelinks {
 		ItemUpdater $itemUpdater
 	) {
 		$this->useCaseValidator = $useCaseValidator;
+		$this->assertUserIsAuthorized = $assertUserIsAuthorized;
 		$this->sitelinksRetriever = $SitelinksRetriever;
 		$this->sitelinksSerializer = $sitelinksSerializer;
 		$this->patcher = $patcher;
@@ -44,6 +48,8 @@ class PatchSitelinks {
 	public function execute( PatchSitelinksRequest $request ): PatchSitelinksResponse {
 		$deserializedRequest = $this->useCaseValidator->validateAndDeserialize( $request );
 		$itemId = $deserializedRequest->getItemId();
+
+		$this->assertUserIsAuthorized->execute( $itemId, $deserializedRequest->getEditMetadata()->getUser() );
 
 		$patchedSitelinks = $this->patcher->execute(
 			iterator_to_array( $this->sitelinksSerializer->serialize( $this->sitelinksRetriever->getSitelinks( $itemId ) ) ),

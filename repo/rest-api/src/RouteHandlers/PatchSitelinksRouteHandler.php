@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\RouteHandlers;
 
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
@@ -15,7 +16,11 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchSitelinks\PatchSitelinks;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchSitelinks\PatchSitelinksRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchSitelinks\PatchSitelinksResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\BotRightCheckMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -32,19 +37,28 @@ class PatchSitelinksRouteHandler extends SimpleHandler {
 
 	private PatchSiteLinks $useCase;
 	private SitelinksSerializer $serializer;
+	private ResponseFactory $responseFactory;
+	private MiddlewareHandler $middlewareHandler;
 
 	public function __construct(
 		PatchSiteLinks $useCase,
-		SitelinksSerializer $serializer
+		SitelinksSerializer $serializer,
+		ResponseFactory $responseFactory,
+		MiddlewareHandler $middlewareHandler
 	) {
 		$this->useCase = $useCase;
 		$this->serializer = $serializer;
+		$this->responseFactory = $responseFactory;
+		$this->middlewareHandler = $middlewareHandler;
 	}
 
 	public static function factory(): Handler {
+		$responseFactory = new ResponseFactory();
+
 		return new self(
 			new PatchSitelinks(
 				WbRestApi::getValidatingRequestDeserializer(),
+				WbRestApi::getAssertUserIsAuthorized(),
 				WbRestApi::getItemDataRetriever(),
 				new SitelinksSerializer( new SitelinkSerializer() ),
 				new PatchJson( new JsonDiffJsonPatcher() ),
@@ -53,24 +67,40 @@ class PatchSitelinksRouteHandler extends SimpleHandler {
 				WbRestApi::getItemUpdater()
 			),
 			new SitelinksSerializer( new SitelinkSerializer() ),
+			$responseFactory,
+			new MiddlewareHandler( [
+				new AuthenticationMiddleware(),
+				new BotRightCheckMiddleware( MediaWikiServices::getInstance()->getPermissionManager(), $responseFactory ),
+			] )
 		);
 	}
 
-	public function run( string $itemId ): Response {
+	/**
+	 * @param mixed ...$args
+	 */
+	public function run( ...$args ): Response {
+		return $this->middlewareHandler->run( $this, [ $this, 'runUseCase' ], $args );
+	}
+
+	public function runUseCase( string $itemId ): Response {
 		$jsonBody = $this->getValidatedBody();
 
-		return $this->newSuccessHttpResponse(
-			$this->useCase->execute(
-				new PatchSitelinksRequest(
-					$itemId,
-					$jsonBody[ self::PATCH_BODY_PARAM ],
-					$jsonBody[ self::TAGS_BODY_PARAM ],
-					$jsonBody[ self::BOT_BODY_PARAM ],
-					$jsonBody[ self::COMMENT_BODY_PARAM ],
-					$this->getUsername()
+		try {
+			return $this->newSuccessHttpResponse(
+				$this->useCase->execute(
+					new PatchSitelinksRequest(
+						$itemId,
+						$jsonBody[self::PATCH_BODY_PARAM],
+						$jsonBody[self::TAGS_BODY_PARAM],
+						$jsonBody[self::BOT_BODY_PARAM],
+						$jsonBody[self::COMMENT_BODY_PARAM],
+						$this->getUsername()
+					)
 				)
-			)
-		);
+			);
+		} catch ( UseCaseError $e ) {
+			return $this->responseFactory->newErrorResponseFromException( $e );
+		}
 	}
 
 	public function getParamSettings(): array {
