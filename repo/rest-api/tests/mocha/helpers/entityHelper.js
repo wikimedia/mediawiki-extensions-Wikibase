@@ -154,6 +154,14 @@ async function createLocalSitelink( itemId, title, badges = [] ) {
 		.makeRequest();
 }
 
+/**
+ * @param {string} articleTitle
+ * @param {string} text
+ */
+async function createWikiPage( articleTitle, text ) {
+	await action.getAnon().edit( articleTitle, { text } );
+}
+
 module.exports = {
 	createEntity,
 	editEntity,
@@ -168,5 +176,6 @@ module.exports = {
 	newStatementWithRandomStringValue,
 	newLegacyStatementWithRandomStringValue,
 	getLocalSiteId,
-	createLocalSitelink
+	createLocalSitelink,
+	createWikiPage
 };
