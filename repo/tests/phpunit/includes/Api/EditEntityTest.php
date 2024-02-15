@@ -1367,6 +1367,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 		$autoCreateTempUser['enabled'] = true;
 		$this->overrideConfigValue( 'AutoCreateTempUser', $autoCreateTempUser );
 		$this->setGroupPermissions( '*', 'createaccount', true );
+		$actualReturnTo = null;
 		$this->setTemporaryHook( 'TempUserCreatedRedirect', function (
 			$session,
 			$user,
@@ -1374,8 +1375,8 @@ class EditEntityTest extends WikibaseApiTestCase {
 			$returnToQuery,
 			$returnToAnchor,
 			&$redirectUrl
-		) {
-			$this->assertSame( 'A', $returnTo );
+		) use ( &$actualReturnTo ) {
+			$actualReturnTo = $returnTo;
 			$this->assertSame( 'b=c', $returnToQuery );
 			$this->assertSame( '#d', $returnToAnchor );
 			$redirectUrl = 'https://example.com/A?b=c#d';
@@ -1387,7 +1388,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 			'data' => json_encode( [
 				'labels' => [ 'en' => [ 'value' => 'temp user test item', 'language' => 'en' ] ],
 			] ),
-			'returnto' => 'A',
+			// 'returnto' left empty, should default to new item ID
 			'returntoquery' => 'b=c',
 			'returntoanchor' => 'd',
 		], null, $this->getServiceContainer()->getUserFactory()->newAnonymous() );
@@ -1399,6 +1400,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 		$this->assertTrue( $userIdentityUtils->isTemp( $user ) );
 		$this->assertSame( $user->getName(), $result['tempusercreated'] );
 		$this->assertSame( 'https://example.com/A?b=c#d', $result['tempuserredirect'] );
+		$this->assertStringEndsWith( $result['entity']['id'], $actualReturnTo );
 	}
 
 }

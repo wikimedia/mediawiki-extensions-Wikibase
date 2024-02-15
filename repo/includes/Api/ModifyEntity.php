@@ -419,10 +419,15 @@ abstract class ModifyEntity extends ApiBase {
 
 	private function addToOutput( EntityDocument $entity, Status $status, int $oldRevId ): void {
 		$params = $this->extractRequestParams();
+		$paramsForRedirect = $params;
+		if ( isset( $params['new'] ) && !isset( $paramsForRedirect['returnto'] ) ) {
+			// return to created entity by default
+			$paramsForRedirect['returnto'] = $this->titleLookup->getTitleForId( $entity->getId() )->getFullText();
+		}
 
 		$this->getResultBuilder()->addBasicEntityInformation( $entity->getId(), 'entity' );
 		$this->getResultBuilder()->addRevisionIdFromStatusToResult( $status, 'entity', $oldRevId );
-		$this->getResultBuilder()->addTempUser( $status, fn( $user ) => $this->getTempUserRedirectUrl( $params, $user ) );
+		$this->getResultBuilder()->addTempUser( $status, fn( $user ) => $this->getTempUserRedirectUrl( $paramsForRedirect, $user ) );
 
 		if ( isset( $params['site'] ) && isset( $params['title'] ) ) {
 			$normTitle = $this->stringNormalizer->trimToNFC( $params['title'] );
