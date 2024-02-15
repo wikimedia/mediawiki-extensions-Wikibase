@@ -15,6 +15,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchSitelinks\PatchSitelinks;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchSitelinks\PatchSitelinksRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchSitelinks\PatchSitelinksValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\SitelinksEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\User;
@@ -122,6 +123,18 @@ class PatchSitelinksTest extends TestCase {
 			new EditMetadata( $editTags, $isBot, SitelinksEditSummary::newPatchSummary( $comment ) ),
 			$itemRepo->getLatestRevisionEditMetadata( $itemId )
 		);
+	}
+
+	public function testInvalidRequest_throwsException(): void {
+		$expectedException = new UseCaseException( 'invalid-sitelinks-patch-test' );
+		$this->validator = $this->createStub( PatchSitelinksValidator::class );
+		$this->validator->method( 'validateAndDeserialize' )->willThrowException( $expectedException );
+		try {
+			$this->newUseCase()->execute( $this->createStub( PatchSitelinksRequest::class ) );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
 	}
 
 	public function testGivenEditIsUnauthorized_throwsUseCaseError(): void {

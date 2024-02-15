@@ -6,6 +6,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\SitelinksDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinksSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\SitelinksEditSummary;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
@@ -45,6 +46,9 @@ class PatchSitelinks {
 		$this->itemUpdater = $itemUpdater;
 	}
 
+	/**
+	 * @throws UseCaseError
+	 */
 	public function execute( PatchSitelinksRequest $request ): PatchSitelinksResponse {
 		$deserializedRequest = $this->useCaseValidator->validateAndDeserialize( $request );
 		$itemId = $deserializedRequest->getItemId();
