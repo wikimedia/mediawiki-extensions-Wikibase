@@ -402,5 +402,20 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 			assert.include( response.body.message, redirectTarget );
 			assert.strictEqual( response.body.code, 'redirected-item' );
 		} );
+
+		it( 'sitelink conflict', async () => {
+			await newSetSitelinkRequestBuilder( testItemId, siteId, { title: testTitle1 } )
+				.assertValidRequest()
+				.makeRequest();
+
+			const newItem = await createEntity( 'item', {} );
+			const response = await newSetSitelinkRequestBuilder( newItem.entity.id, siteId, { title: testTitle1 } )
+				.assertValidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 409 );
+			assert.include( response.body.message, testItemId );
+			assert.strictEqual( response.body.code, 'sitelink-conflict' );
+		} );
 	} );
 } );
