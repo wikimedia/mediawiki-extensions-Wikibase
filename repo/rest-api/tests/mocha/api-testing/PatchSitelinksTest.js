@@ -151,4 +151,38 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 
 	} );
 
+	describe( '404 error response', () => {
+
+		it( 'item not found', async () => {
+			const itemId = 'Q999999';
+			const response = await newPatchSitelinksRequestBuilder( itemId, [] )
+				.assertValidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 404 );
+			assert.strictEqual( response.header[ 'content-language' ], 'en' );
+			assert.strictEqual( response.body.code, 'item-not-found' );
+			assert.include( response.body.message, itemId );
+		} );
+
+	} );
+
+	describe( '409 error response', () => {
+
+		it( 'item is a redirect', async () => {
+			const redirectTarget = testItemId;
+			const redirectSource = await entityHelper.createRedirectForItem( redirectTarget );
+
+			const response = await newPatchSitelinksRequestBuilder( redirectSource, [] )
+				.assertValidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 409 );
+			assert.include( response.body.message, redirectSource );
+			assert.include( response.body.message, redirectTarget );
+			assert.strictEqual( response.body.code, 'redirected-item' );
+		} );
+
+	} );
+
 } );

@@ -4,7 +4,9 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\PatchSitelinks;
 
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinksDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinksSerializer;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
+use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
@@ -18,6 +20,7 @@ use Wikibase\Repo\RestApi\Domain\Services\SitelinksRetriever;
  */
 class PatchSitelinks {
 	private PatchSitelinksValidator $useCaseValidator;
+	private AssertItemExists $assertItemExists;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
 	private SitelinksRetriever $sitelinksRetriever;
 	private SitelinksSerializer $sitelinksSerializer;
@@ -28,6 +31,7 @@ class PatchSitelinks {
 
 	public function __construct(
 		PatchSitelinksValidator $useCaseValidator,
+		AssertItemExists $assertItemExists,
 		AssertUserIsAuthorized $assertUserIsAuthorized,
 		SitelinksRetriever $SitelinksRetriever,
 		SitelinksSerializer $sitelinksSerializer,
@@ -37,6 +41,7 @@ class PatchSitelinks {
 		ItemUpdater $itemUpdater
 	) {
 		$this->useCaseValidator = $useCaseValidator;
+		$this->assertItemExists = $assertItemExists;
 		$this->assertUserIsAuthorized = $assertUserIsAuthorized;
 		$this->sitelinksRetriever = $SitelinksRetriever;
 		$this->sitelinksSerializer = $sitelinksSerializer;
@@ -48,11 +53,13 @@ class PatchSitelinks {
 
 	/**
 	 * @throws UseCaseError
+	 * @throws ItemRedirect
 	 */
 	public function execute( PatchSitelinksRequest $request ): PatchSitelinksResponse {
 		$deserializedRequest = $this->useCaseValidator->validateAndDeserialize( $request );
 		$itemId = $deserializedRequest->getItemId();
 
+		$this->assertItemExists->execute( $itemId );
 		$this->assertUserIsAuthorized->execute( $itemId, $deserializedRequest->getEditMetadata()->getUser() );
 
 		$patchedSitelinks = $this->patcher->execute(

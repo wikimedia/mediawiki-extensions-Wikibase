@@ -9,6 +9,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinksDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinksSerializer;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchSitelinks\PatchSitelinks;
@@ -38,6 +39,7 @@ use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryItemRepository
 class PatchSitelinksTest extends TestCase {
 
 	private PatchSitelinksValidator $validator;
+	private AssertItemExists $assertItemExists;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
 	private SitelinksRetriever $sitelinksRetriever;
 	private SitelinksSerializer $sitelinksSerializer;
@@ -50,6 +52,7 @@ class PatchSitelinksTest extends TestCase {
 		parent::setUp();
 
 		$this->validator = new TestValidatingRequestDeserializer();
+		$this->assertItemExists = $this->createStub( AssertItemExists::class );
 		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
 		$this->sitelinksRetriever = $this->createStub( SitelinksRetriever::class );
 		$this->sitelinksSerializer = new SitelinksSerializer( new SitelinkSerializer() );
@@ -156,9 +159,22 @@ class PatchSitelinksTest extends TestCase {
 		}
 	}
 
+	public function testGivenItemNotFoundOrRedirect_throws(): void {
+		$expectedException = $this->createStub( UseCaseException::class );
+		$this->assertItemExists->method( 'execute' )->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase()->execute( new PatchSitelinksRequest( 'Q123', [], [], false, null, null ) );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
 	private function newUseCase(): PatchSitelinks {
 		return new PatchSitelinks(
 			$this->validator,
+			$this->assertItemExists,
 			$this->assertUserIsAuthorized,
 			$this->sitelinksRetriever,
 			$this->sitelinksSerializer,

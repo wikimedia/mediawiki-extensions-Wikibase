@@ -12,6 +12,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinksDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinksSerializer;
+use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchSitelinks\PatchSitelinks;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchSitelinks\PatchSitelinksRequest;
@@ -58,6 +59,7 @@ class PatchSitelinksRouteHandler extends SimpleHandler {
 		return new self(
 			new PatchSitelinks(
 				WbRestApi::getValidatingRequestDeserializer(),
+				WbRestApi::getAssertItemExists(),
 				WbRestApi::getAssertUserIsAuthorized(),
 				WbRestApi::getItemDataRetriever(),
 				new SitelinksSerializer( new SitelinkSerializer() ),
@@ -97,6 +99,11 @@ class PatchSitelinksRouteHandler extends SimpleHandler {
 						$this->getUsername()
 					)
 				)
+			);
+		} catch ( ItemRedirect $e ) {
+			return $this->responseFactory->newErrorResponse(
+				UseCaseError::ITEM_REDIRECTED,
+				"Item $itemId has been merged into {$e->getRedirectTargetId()}."
 			);
 		} catch ( UseCaseError $e ) {
 			return $this->responseFactory->newErrorResponseFromException( $e );
