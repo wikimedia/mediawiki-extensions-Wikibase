@@ -64,7 +64,6 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 			'property-term' => true,
 			'read' => true,
 			'edit' => true,
-			'writeapi' => true,
 		] ] );
 	}
 

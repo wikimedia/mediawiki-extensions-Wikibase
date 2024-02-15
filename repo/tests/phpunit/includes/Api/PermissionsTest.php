@@ -34,7 +34,7 @@ class PermissionsTest extends PermissionsTestCase {
 	}
 
 	public function provideEditPermissions() {
-		yield from $this->provideReadPermissions();
+		yield from self::provideReadPermissions();
 
 		yield [
 			'permissions' => [
@@ -42,14 +42,6 @@ class PermissionsTest extends PermissionsTestCase {
 				'user' => [ 'edit' => false ],
 			],
 			'error' => 'permissiondenied',
-		];
-
-		yield [
-			'permissions' => [
-				'*'    => [ 'writeapi' => false ],
-				'user' => [ 'writeapi' => false ],
-			],
-			'error' => 'writeapidenied',
 		];
 
 		yield [

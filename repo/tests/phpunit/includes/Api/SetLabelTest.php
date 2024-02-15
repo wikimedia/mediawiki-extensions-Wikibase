@@ -127,7 +127,7 @@ class SetLabelTest extends ModifyTermTestCase {
 
 		$this->setMwGlobals( 'wgGroupPermissions', [
 			'all-permission' => [ 'item-term' => true ],
-			'*' => [ 'read' => true, 'edit' => true, 'writeapi' => true ],
+			'*' => [ 'read' => true, 'edit' => true ],
 		] );
 
 		$newItem = $this->createItemUsing( $userWithAllPermissions );
@@ -150,7 +150,7 @@ class SetLabelTest extends ModifyTermTestCase {
 		$this->setMwGlobals( 'wgGroupPermissions', [
 			'no-permission' => [ 'item-term' => false ],
 			'all-permission' => [ 'item-term' => true ],
-			'*' => [ 'read' => true, 'edit' => true, 'writeapi' => true ],
+			'*' => [ 'read' => true, 'edit' => true ],
 		] );
 
 		// And an item
@@ -174,7 +174,7 @@ class SetLabelTest extends ModifyTermTestCase {
 
 		$this->setMwGlobals( 'wgGroupPermissions', [
 			'all-permission' => [ 'item-term' => true, 'createpage' => true ],
-			'*' => [ 'read' => true, 'edit' => true, 'writeapi' => true ],
+			'*' => [ 'read' => true, 'edit' => true ],
 		] );
 
 		[ $result ] = $this->doApiRequestWithToken(
@@ -192,7 +192,7 @@ class SetLabelTest extends ModifyTermTestCase {
 
 		$this->setMwGlobals( 'wgGroupPermissions', [
 			'no-permission' => [ 'createpage' => false ],
-			'*' => [ 'read' => true, 'edit' => true, 'item-term' => true, 'writeapi' => true ],
+			'*' => [ 'read' => true, 'edit' => true, 'item-term' => true ],
 		] );
 
 		MediaWikiServices::getInstance()->resetServiceForTesting( 'PermissionManager' );

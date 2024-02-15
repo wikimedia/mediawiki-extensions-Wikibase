@@ -608,7 +608,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 
 		$this->setMwGlobals( 'wgGroupPermissions', [
 			'all-permission' => [ 'edit' => true ],
-			'*' => [ 'read' => true, 'writeapi' => true ],
+			'*' => [ 'read' => true ],
 		] );
 
 		$newItem = $this->createItemUsing( $userWithAllPermissions );
@@ -629,7 +629,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 		$this->setMwGlobals( 'wgGroupPermissions', [
 			'no-permission' => [ 'edit' => false ],
 			'all-permission' => [ 'edit' => true ],
-			'*' => [ 'read' => true, 'writeapi' => true ],
+			'*' => [ 'read' => true ],
 		] );
 
 		MediaWikiServices::getInstance()->resetServiceForTesting( 'PermissionManager' );
@@ -662,7 +662,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 
 		$this->setMwGlobals( 'wgGroupPermissions', [
 			'all-permission' => [ 'edit' => true, 'createpage' => true ],
-			'*' => [ 'read' => true, 'writeapi' => true ],
+			'*' => [ 'read' => true ],
 		] );
 
 		[ $result ] = $this->doApiRequestWithToken(
@@ -680,7 +680,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 
 		$this->setMwGlobals( 'wgGroupPermissions', [
 			'no-permission' => [ 'createpage' => false ],
-			'*' => [ 'read' => true, 'edit' => true, 'writeapi' => true ],
+			'*' => [ 'read' => true, 'edit' => true ],
 		] );
 
 		MediaWikiServices::getInstance()->resetServiceForTesting( 'PermissionManager' );
