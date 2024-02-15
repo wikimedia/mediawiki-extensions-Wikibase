@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Api;
 
 use ApiBase;
+use ApiCreateTempUserTrait;
 use ApiMain;
 use ApiUsageException;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -30,6 +31,7 @@ use Wikimedia\ParamValidator\ParamValidator;
 class RemoveQualifiers extends ApiBase {
 
 	use FederatedPropertyApiValidatorTrait;
+	use ApiCreateTempUserTrait;
 
 	/**
 	 * @var StatementChangeOpFactory
@@ -156,7 +158,7 @@ class RemoveQualifiers extends ApiBase {
 
 		$status = $this->entitySavingHelper->attemptSaveEntity( $entity, $summary, $params, $this->getContext() );
 		$this->resultBuilder->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
-		$this->resultBuilder->addTempUser( $status );
+		$this->resultBuilder->addTempUser( $status, fn( $user ) => $this->getTempUserRedirectUrl( $params, $user ) );
 		$this->resultBuilder->markSuccess();
 	}
 
@@ -255,6 +257,7 @@ class RemoveQualifiers extends ApiBase {
 				],
 				'bot' => false,
 			],
+			$this->getCreateTempUserParams(),
 			parent::getAllowedParams()
 		);
 	}

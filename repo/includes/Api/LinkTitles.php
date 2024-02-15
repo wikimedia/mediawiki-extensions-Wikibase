@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Api;
 
 use ApiBase;
+use ApiCreateTempUserTrait;
 use ApiMain;
 use MediaWiki\Site\Site;
 use MediaWiki\Site\SiteList;
@@ -31,6 +32,8 @@ use Wikimedia\ParamValidator\ParamValidator;
  * @author Addshore
  */
 class LinkTitles extends ApiBase {
+
+	use ApiCreateTempUserTrait;
 
 	/** @var SiteLinkStore */
 	private $siteLinkStore;
@@ -205,7 +208,7 @@ class LinkTitles extends ApiBase {
 
 		$this->resultBuilder->addSiteLinkList( $siteLinkList, 'entity' );
 		$status = $this->getAttemptSaveStatus( $item, $summary, $flags );
-		$this->buildResult( $item, $status );
+		$this->buildResult( $item, $status, $params );
 	}
 
 	/**
@@ -245,14 +248,14 @@ class LinkTitles extends ApiBase {
 		}
 	}
 
-	private function buildResult( ?Item $item, Status $status ): void {
+	private function buildResult( ?Item $item, Status $status, array $params ): void {
 		if ( $item !== null ) {
 			$this->resultBuilder->addRevisionIdFromStatusToResult( $status, 'entity' );
 			$this->resultBuilder->addBasicEntityInformation( $item->getId(), 'entity' );
 		}
 
 		$this->resultBuilder->markSuccess( $status->isOK() );
-		$this->resultBuilder->addTempUser( $status );
+		$this->resultBuilder->addTempUser( $status, fn( $user ) => $this->getTempUserRedirectUrl( $params, $user ) );
 	}
 
 	/**
@@ -288,7 +291,7 @@ class LinkTitles extends ApiBase {
 	protected function getAllowedParams(): array {
 		$siteIds = $this->siteLinkGlobalIdentifiersProvider->getList( $this->siteLinkGroups );
 
-		return array_merge( parent::getAllowedParams(), [
+		return array_merge( parent::getAllowedParams(), $this->getCreateTempUserParams(), [
 			'tosite' => [
 				ParamValidator::PARAM_TYPE => $siteIds,
 				ParamValidator::PARAM_REQUIRED => true,

@@ -1730,23 +1730,56 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $data );
 	}
 
-	public function testAddTempUser_created(): void {
+	public function testAddTempUser_createdWithoutRedirect(): void {
 		$result = $this->getDefaultResult();
 		$resultBuilder = $this->getResultBuilder( $result );
 		$tempUserName = '*Fake unregistered user 1';
+		$tempUser = $this->createConfiguredMock( UserIdentity::class, [
+			'getName' => $tempUserName,
+		] );
 		$status = Status::newGood( [
-			'savedTempUser' => $this->createConfiguredMock( UserIdentity::class, [
-				'getName' => $tempUserName,
-			] ),
+			'savedTempUser' => $tempUser,
 		] );
 
-		$resultBuilder->addTempUser( $status );
+		$calledWithUser = null;
+		$resultBuilder->addTempUser( $status, function ( $user ) use ( &$calledWithUser ) {
+			$calledWithUser = $user;
+			return '';
+		} );
 
 		$expected = [
 			'tempusercreated' => $tempUserName,
+			'tempuserredirect' => null,
 			'_type' => 'assoc',
 		];
 		$this->assertSame( $expected, $result->getResultData() );
+		$this->assertSame( $tempUser, $calledWithUser );
+	}
+
+	public function testAddTempUser_createdWithRedirect(): void {
+		$result = $this->getDefaultResult();
+		$resultBuilder = $this->getResultBuilder( $result );
+		$tempUserName = '*Fake unregistered user 1';
+		$tempUser = $this->createConfiguredMock( UserIdentity::class, [
+			'getName' => $tempUserName,
+		] );
+		$status = Status::newGood( [
+			'savedTempUser' => $tempUser,
+		] );
+
+		$calledWithUser = null;
+		$resultBuilder->addTempUser( $status, function ( $user ) use ( &$calledWithUser ) {
+			$calledWithUser = $user;
+			return 'https://example.com/?foo#bar';
+		} );
+
+		$expected = [
+			'tempusercreated' => $tempUserName,
+			'tempuserredirect' => 'https://example.com/?foo#bar',
+			'_type' => 'assoc',
+		];
+		$this->assertSame( $expected, $result->getResultData() );
+		$this->assertSame( $tempUser, $calledWithUser );
 	}
 
 	public function testAddTempUser_notCreated(): void {
@@ -1754,7 +1787,9 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 		$resultBuilder = $this->getResultBuilder( $result );
 		$status = Status::newGood( [ 'savedTempUser' => null ] );
 
-		$resultBuilder->addTempUser( $status );
+		$resultBuilder->addTempUser( $status, function () {
+			$this->fail( 'should not be called' );
+		} );
 
 		$expected = [ '_type' => 'assoc' ];
 		$this->assertSame( $expected, $result->getResultData() );

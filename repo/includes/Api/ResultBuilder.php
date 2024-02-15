@@ -1099,15 +1099,26 @@ class ResultBuilder {
 	/**
 	 * Add the temp username if the Status object contains a temp user
 	 *
-	 * @param Status $status
+	 * @param Status $status As returned by {@link \Wikibase\Repo\EditEntity\EditEntity::attemptSave()}
+	 * @param callable $getTempUserRedirectUrl When called with a temp user, should return a redirect URL;
+	 * callers should use the {@link ApiCreateTempUserTrait} and pass this as
+	 * `fn( $user ) => $this->getTempUserRedirectUrl( $params, $user )`
 	 * @return void
 	 */
-	public function addTempUser( Status $status ) {
+	public function addTempUser(
+		Status $status,
+		callable $getTempUserRedirectUrl
+	) {
 		/** @var ?UserIdentity $savedTempUser */
 		$savedTempUser = $status->getValue()['savedTempUser'];
 		'@phan-var ?UserIdentity $savedTempUser';
 		if ( $savedTempUser ) {
 			$this->setValue( null, 'tempusercreated', $savedTempUser->getName() );
+			$redirectUrl = $getTempUserRedirectUrl( $savedTempUser );
+			if ( $redirectUrl === '' ) {
+				$redirectUrl = null;
+			}
+			$this->setValue( null, 'tempuserredirect', $redirectUrl );
 		}
 	}
 

@@ -1367,6 +1367,19 @@ class EditEntityTest extends WikibaseApiTestCase {
 		$autoCreateTempUser['enabled'] = true;
 		$this->overrideConfigValue( 'AutoCreateTempUser', $autoCreateTempUser );
 		$this->setGroupPermissions( '*', 'createaccount', true );
+		$this->setTemporaryHook( 'TempUserCreatedRedirect', function (
+			$session,
+			$user,
+			$returnTo,
+			$returnToQuery,
+			$returnToAnchor,
+			&$redirectUrl
+		) {
+			$this->assertSame( 'A', $returnTo );
+			$this->assertSame( 'b=c', $returnToQuery );
+			$this->assertSame( '#d', $returnToAnchor );
+			$redirectUrl = 'https://example.com/A?b=c#d';
+		} );
 
 		[ $result ] = $this->doApiRequestWithToken( [
 			'action' => 'wbeditentity',
@@ -1374,6 +1387,9 @@ class EditEntityTest extends WikibaseApiTestCase {
 			'data' => json_encode( [
 				'labels' => [ 'en' => [ 'value' => 'temp user test item', 'language' => 'en' ] ],
 			] ),
+			'returnto' => 'A',
+			'returntoquery' => 'b=c',
+			'returntoanchor' => 'd',
 		], null, $this->getServiceContainer()->getUserFactory()->newAnonymous() );
 		$user = $this->getServiceContainer()->getRevisionLookup()
 			->getRevisionById( $result['entity']['lastrevid'] )
@@ -1381,6 +1397,8 @@ class EditEntityTest extends WikibaseApiTestCase {
 		$this->assertTrue( $user->isRegistered() );
 		$userIdentityUtils = $this->getServiceContainer()->getUserIdentityUtils();
 		$this->assertTrue( $userIdentityUtils->isTemp( $user ) );
+		$this->assertSame( $user->getName(), $result['tempusercreated'] );
+		$this->assertSame( 'https://example.com/A?b=c#d', $result['tempuserredirect'] );
 	}
 
 }

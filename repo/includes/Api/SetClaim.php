@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Api;
 
 use ApiBase;
+use ApiCreateTempUserTrait;
 use ApiMain;
 use ApiUsageException;
 use DataValues\IllegalValueException;
@@ -43,6 +44,7 @@ use Wikimedia\ParamValidator\ParamValidator;
 class SetClaim extends ApiBase {
 
 	use FederatedPropertyApiValidatorTrait;
+	use ApiCreateTempUserTrait;
 
 	/**
 	 * @var StatementChangeOpFactory
@@ -217,7 +219,7 @@ class SetClaim extends ApiBase {
 		$this->resultBuilder->markSuccess();
 		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable statement given, guid already validated
 		$this->resultBuilder->addStatement( $statement );
-		$this->resultBuilder->addTempUser( $status );
+		$this->resultBuilder->addTempUser( $status, fn( $user ) => $this->getTempUserRedirectUrl( $params, $user ) );
 
 		$this->stats->increment( 'wikibase.repo.api.wbsetclaim.total' );
 		if ( $index !== null ) {
@@ -347,6 +349,7 @@ class SetClaim extends ApiBase {
 				'bot' => false,
 				'ignoreduplicatemainsnak' => false,
 			],
+			$this->getCreateTempUserParams(),
 			parent::getAllowedParams()
 		);
 	}

@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Api;
 
 use ApiBase;
+use ApiCreateTempUserTrait;
 use ApiMain;
 use Deserializers\Exceptions\DeserializationException;
 use Psr\Log\LoggerInterface;
@@ -35,6 +36,7 @@ use Wikimedia\ParamValidator\ParamValidator;
 class SetReference extends ApiBase {
 
 	use FederatedPropertyApiValidatorTrait;
+	use ApiCreateTempUserTrait;
 
 	/**
 	 * @var StatementChangeOpFactory
@@ -195,7 +197,7 @@ class SetReference extends ApiBase {
 		$this->resultBuilder->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
 		$this->resultBuilder->markSuccess();
 		$this->resultBuilder->addReference( $newReference );
-		$this->resultBuilder->addTempUser( $status );
+		$this->resultBuilder->addTempUser( $status, fn( $user ) => $this->getTempUserRedirectUrl( $params, $user ) );
 	}
 
 	private function validateParameters( array $params ): void {
@@ -332,6 +334,7 @@ class SetReference extends ApiBase {
 				],
 				'bot' => false,
 			],
+			$this->getCreateTempUserParams(),
 			parent::getAllowedParams()
 		);
 	}
