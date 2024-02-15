@@ -54,7 +54,7 @@ class PatchSitelinksTest extends TestCase {
 		$this->sitelinksSerializer = new SitelinksSerializer( new SitelinkSerializer() );
 		$this->patcher = new PatchJson( new JsonDiffJsonPatcher() );
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
-		$this->sitelinksDeserializer = new SitelinksDeserializer( new SitelinkDeserializer() );
+		$this->sitelinksDeserializer = new SitelinksDeserializer( new SitelinkDeserializer( '/\?/' ) );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
 	}
 

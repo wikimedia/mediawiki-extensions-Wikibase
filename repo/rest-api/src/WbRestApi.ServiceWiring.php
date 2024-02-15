@@ -310,8 +310,9 @@ return [
 	VRD::SITELINK_EDIT_REQUEST_VALIDATING_DESERIALIZER =>
 		function( MediaWikiServices $services ): SitelinkEditRequestValidatingDeserializer {
 			return new SitelinkEditRequestValidatingDeserializer(
-				new SitelinkValidator( MediaWikiTitleCodec::getTitleInvalidRegex() ),
-				new SitelinkDeserializer()
+				new SitelinkValidator(
+					new SitelinkDeserializer( MediaWikiTitleCodec::getTitleInvalidRegex() )
+				),
 			);
 		},
 
