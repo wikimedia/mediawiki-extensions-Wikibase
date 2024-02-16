@@ -28,6 +28,10 @@ class SitelinkDeserializer {
 			throw new MissingFieldException( 'title' );
 		}
 
+		if ( !is_string( $serialization[ 'title' ] ) ) {
+			throw new InvalidFieldTypeException( 'title' );
+		}
+
 		$trimmedTitle = trim( $serialization[ 'title' ] );
 		if ( empty( $trimmedTitle ) ) {
 			throw new EmptySitelinkException( 'title', $trimmedTitle );

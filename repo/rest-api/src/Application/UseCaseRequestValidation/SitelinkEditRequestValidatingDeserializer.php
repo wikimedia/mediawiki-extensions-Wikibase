@@ -36,6 +36,7 @@ class SitelinkEditRequestValidatingDeserializer {
 						'Title must not be empty',
 					);
 				case SitelinkValidator::CODE_INVALID_TITLE:
+				case SitelinkValidator::CODE_INVALID_TITLE_TYPE:
 					throw new UseCaseError(
 						UseCaseError::INVALID_TITLE_FIELD,
 						'Not a valid input for title field'

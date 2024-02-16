@@ -58,6 +58,10 @@ class SitelinkDeserializerTest extends TestCase {
 		];
 		yield 'title empty w/ whitespace' => [ [ 'title' => " \t" ], new EmptySitelinkException( 'title', '' ) ];
 		yield 'title invalid' => [ [ 'title' => 'invalid?' ], new InvalidFieldException( 'title', 'invalid?' ) ];
+		yield 'title not a string' => [
+			[ 'title' => [ 'arrrays', 'not', 'allowed' ] ],
+			new InvalidFieldTypeException( 'title' ),
+		];
 
 		yield 'badges not an array' => [
 			[ 'title' => 'valid', 'badges' => self::ALLOWED_BADGES[ 0 ] ],

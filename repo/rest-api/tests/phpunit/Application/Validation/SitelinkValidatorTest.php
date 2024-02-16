@@ -7,6 +7,7 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Repo\RestApi\Application\Serialization\EmptySitelinkException;
 use Wikibase\Repo\RestApi\Application\Serialization\InvalidFieldException;
+use Wikibase\Repo\RestApi\Application\Serialization\InvalidFieldTypeException;
 use Wikibase\Repo\RestApi\Application\Serialization\MissingFieldException;
 use Wikibase\Repo\RestApi\Application\Serialization\SerializationException;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
@@ -54,6 +55,8 @@ class SitelinkValidatorTest extends TestCase {
 		yield 'title is empty' => [ new EmptySitelinkException( 'title', '' ), SitelinkValidator::CODE_EMPTY_TITLE ];
 
 		yield 'invalid title' => [ new InvalidFieldException( 'title', 'invalid?' ), SitelinkValidator::CODE_INVALID_TITLE ];
+
+		yield 'invalid title type' => [ new InvalidFieldTypeException( 'title' ), SitelinkValidator::CODE_INVALID_TITLE_TYPE ];
 	}
 
 	public function testGivenGetValidatedSitelinkCalledBeforeValidate_throws(): void {

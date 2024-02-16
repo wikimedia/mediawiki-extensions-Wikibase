@@ -305,6 +305,19 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 			assert.strictEqual( response.body.message, 'Not a valid input for title field' );
 		} );
 
+		it( 'title is not a string', async () => {
+			const newSitelinkWithInvalidTitle = { title: [ 'array', 'not', 'allowed' ] };
+			const response = await newSetSitelinkRequestBuilder(
+				testItemId,
+				siteId,
+				newSitelinkWithInvalidTitle
+			).makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assertValidErrorResponse( response, 'invalid-title-field' );
+			assert.strictEqual( response.body.message, 'Not a valid input for title field' );
+		} );
+
 		it( 'badges is not an array', async () => {
 			const sitelink = { title: utils.title( 'test-title-' ), badges: ALLOWED_BADGES[ 1 ] };
 			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, sitelink ).makeRequest();

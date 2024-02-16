@@ -20,6 +20,7 @@ class SitelinkValidator {
 	public const CODE_TITLE_MISSING = 'title-missing';
 	public const CODE_EMPTY_TITLE = 'empty-title';
 	public const CODE_INVALID_TITLE = 'invalid-title';
+	public const CODE_INVALID_TITLE_TYPE = 'invalid-title-type';
 
 	public const CODE_INVALID_BADGES_TYPE = 'invalid-badges-type';
 	public const CODE_INVALID_BADGE = 'invalid-badge';
@@ -48,10 +49,14 @@ class SitelinkValidator {
 			}
 			return new ValidationError( self::CODE_INVALID_TITLE );
 		} catch ( InvalidFieldTypeException $e ) {
-			if ( $e->getField() !== 'badges' ) {
-				throw new LogicException( "Unknown field '{$e->getField()}' in InvalidFieldTypeException}" );
+			switch ( $e->getField() ) {
+				case 'title':
+					return new ValidationError( self::CODE_INVALID_TITLE_TYPE );
+				case 'badges':
+					return new ValidationError( self::CODE_INVALID_BADGES_TYPE );
+				default:
+					throw new LogicException( "Unknown field '{$e->getField()}' in InvalidFieldTypeException}" );
 			}
-			return new ValidationError( self::CODE_INVALID_BADGES_TYPE );
 		} catch ( InvalidSitelinkBadgeException $e ) {
 			return new ValidationError( self::CODE_INVALID_BADGE, [ self::CONTEXT_BADGE => $e->getValue() ] );
 		} catch ( BadgeNotAllowed $e ) {

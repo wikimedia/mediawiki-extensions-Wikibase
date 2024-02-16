@@ -78,6 +78,11 @@ class SitelinkEditRequestValidatingDeserializerTest extends TestCase {
 			UseCaseError::INVALID_TITLE_FIELD,
 			'Not a valid input for title field',
 		];
+		yield 'title field is not a string' => [
+			new ValidationError( SitelinkValidator::CODE_INVALID_TITLE_TYPE ),
+			UseCaseError::INVALID_TITLE_FIELD,
+			'Not a valid input for title field',
+		];
 		yield 'badges field is not an array' => [
 			new ValidationError( SitelinkValidator::CODE_INVALID_BADGES_TYPE ),
 			UseCaseError::INVALID_SITELINK_BADGES_FORMAT,
