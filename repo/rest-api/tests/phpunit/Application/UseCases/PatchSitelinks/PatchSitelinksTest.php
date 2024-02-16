@@ -179,6 +179,31 @@ class PatchSitelinksTest extends TestCase {
 		}
 	}
 
+	public function testGivenPatchJsonError_throws(): void {
+		$itemId = 'Q123';
+
+		$itemRepo = new InMemoryItemRepository();
+		$itemRepo->addItem(
+			NewItem::withId( new ItemId( $itemId ) )->andSiteLink(
+				TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0],
+				'enTitle'
+			)->build()
+		);
+		$this->sitelinksRetriever = $itemRepo;
+
+		$this->patcher = $this->createStub( PatchJson::class );
+
+		$expectedException = $this->createStub( UseCaseException::class );
+		$this->patcher->method( 'execute' )->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase()->execute( new PatchSitelinksRequest( $itemId, [], [], false, null, null ) );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseException $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
 	private function newUseCase(): PatchSitelinks {
 		return new PatchSitelinks(
 			$this->validator,

@@ -183,6 +183,55 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 			assert.strictEqual( response.body.code, 'redirected-item' );
 		} );
 
+		it( '"path" field target does not exist', async () => {
+			const operation = { op: 'remove', path: '/path/does/not/exist' };
+
+			const response = await newPatchSitelinksRequestBuilder( testItemId, [ operation ] )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValidErrorResponse(
+				response,
+				409,
+				'patch-target-not-found',
+				{ field: 'path', operation: operation }
+			);
+			assert.include( response.body.message, operation.path );
+		} );
+
+		it( '"from" field target does not exist', async () => {
+			const operation = { op: 'copy', from: '/path/does/not/exist', path: `/${siteId}` };
+
+			const response = await newPatchSitelinksRequestBuilder( testItemId, [ operation ] )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValidErrorResponse(
+				response,
+				409,
+				'patch-target-not-found',
+				{ field: 'from', operation: operation }
+			);
+			assert.include( response.body.message, operation.from );
+		} );
+
+		it( 'patch test condition failed', async () => {
+			const operation = { op: 'test', path: `/${siteId}/title`, value: 'potato' };
+			const response = await newPatchSitelinksRequestBuilder( testItemId, [ operation ] )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValidErrorResponse(
+				response,
+				409,
+				'patch-test-failed',
+				{ operation: operation, 'actual-value': linkedArticle }
+			);
+			assert.include( response.body.message, operation.path );
+			assert.include( response.body.message, JSON.stringify( operation.value ) );
+			assert.include( response.body.message, linkedArticle );
+		} );
+
 	} );
 
 } );
