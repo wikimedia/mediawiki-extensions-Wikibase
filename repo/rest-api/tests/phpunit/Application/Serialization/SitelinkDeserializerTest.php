@@ -14,6 +14,9 @@ use Wikibase\Repo\RestApi\Application\Serialization\InvalidFieldTypeException;
 use Wikibase\Repo\RestApi\Application\Serialization\InvalidSitelinkBadgeException;
 use Wikibase\Repo\RestApi\Application\Serialization\MissingFieldException;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
+use Wikibase\Repo\RestApi\Domain\Services\Exceptions\SitelinkTargetNotFound;
+use Wikibase\Repo\RestApi\Domain\Services\SitelinkTargetTitleResolver;
+use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\SameTitleSitelinkTargetResolver;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer
@@ -26,15 +29,22 @@ class SitelinkDeserializerTest extends TestCase {
 
 	private const ALLOWED_BADGES = [ 'Q987', 'Q654' ];
 
-	public function testGivenValidSerialization_deserializeReturnsCorrectSitelink(): void {
+	public function testGivenValidSerialization_returnsCorrectSitelink(): void {
 		$siteId = 'testwiki';
 		$title = 'Test Title';
+		$resolvedTitle = 'Test Title redirect target';
 		$badge = self::ALLOWED_BADGES[ 1 ];
 		$serialization = [ 'title' => $title, 'badges' => [ $badge ] ];
 
+		$titleResolver = $this->createMock( SitelinkTargetTitleResolver::class );
+		$titleResolver->expects( $this->once() )
+			->method( 'resolveTitle' )
+			->with( $siteId, $title, [ new ItemId( $badge ) ] )
+			->willReturn( $resolvedTitle );
+
 		$this->assertEquals(
-			new SiteLink( $siteId, $title, [ new ItemId( $badge ) ] ),
-			$this->newSitelinkDeserializer()->deserialize( $siteId, $serialization )
+			new SiteLink( $siteId, $resolvedTitle, [ new ItemId( $badge ) ] ),
+			$this->newSitelinkDeserializer( $titleResolver )->deserialize( $siteId, $serialization )
 		);
 	}
 
@@ -43,7 +53,7 @@ class SitelinkDeserializerTest extends TestCase {
 	 */
 	public function testGivenInvalidSitelink_deserializeThrows( array $serialization, Exception $expectedError ): void {
 		try {
-			$this->newSitelinkDeserializer()->deserialize( 'Q123', $serialization );
+			$this->newSitelinkDeserializer( new SameTitleSitelinkTargetResolver() )->deserialize( 'Q123', $serialization );
 			$this->fail( 'Expected exception was not thrown' );
 		} catch ( Exception $e ) {
 			$this->assertEquals( $expectedError, $e );
@@ -77,8 +87,21 @@ class SitelinkDeserializerTest extends TestCase {
 		];
 	}
 
-	public function newSitelinkDeserializer(): SitelinkDeserializer {
-		return new SitelinkDeserializer( '/\?/', self::ALLOWED_BADGES );
+	public function testGivenSitelinkTargetNotFound_throws(): void {
+		$expectedException = new SitelinkTargetNotFound();
+		$titleResolver = $this->createStub( SitelinkTargetTitleResolver::class );
+		$titleResolver->method( 'resolveTitle' )->willThrowException( $expectedException );
+
+		try {
+			$this->newSitelinkDeserializer( $titleResolver )->deserialize( 'somewiki', [ 'title' => 'Page does not exist' ] );
+			$this->fail( 'Expected exception was not thrown' );
+		} catch ( SitelinkTargetNotFound $exception ) {
+			$this->assertSame( $expectedException, $exception );
+		}
+	}
+
+	public function newSitelinkDeserializer( SitelinkTargetTitleResolver $titleResolver ): SitelinkDeserializer {
+		return new SitelinkDeserializer( '/\?/', self::ALLOWED_BADGES, $titleResolver );
 	}
 
 }

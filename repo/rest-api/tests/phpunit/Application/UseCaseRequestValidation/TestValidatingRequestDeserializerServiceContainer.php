@@ -26,6 +26,7 @@ use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
 use Wikibase\Repo\RestApi\Infrastructure\DataValuesValueDeserializer;
 use Wikibase\Repo\RestApi\Infrastructure\ValidatingRequestDeserializer as VRD;
+use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\SameTitleSitelinkTargetResolver;
 
 /**
  * @license GPL-2.0-or-later
@@ -52,7 +53,8 @@ class TestValidatingRequestDeserializerServiceContainer implements ContainerInte
 					new SitelinkValidator(
 						new SitelinkDeserializer(
 							TestValidatingRequestDeserializer::INVALID_TITLE_REGEX,
-							TestValidatingRequestDeserializer::ALLOWED_BADGES
+							TestValidatingRequestDeserializer::ALLOWED_BADGES,
+							new SameTitleSitelinkTargetResolver()
 						)
 					)
 				);

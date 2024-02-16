@@ -21,6 +21,8 @@ class SitelinkEditRequestValidatingDeserializerTest extends TestCase {
 
 	private SitelinkValidator $sitelinkValidator;
 
+	private const SITELINK_TITLE = 'Potato';
+
 	protected function setUp(): void {
 		parent::setUp();
 
@@ -49,6 +51,7 @@ class SitelinkEditRequestValidatingDeserializerTest extends TestCase {
 		string $expectedErrorMessage
 	): void {
 		$request = $this->createStub( SitelinkEditRequest::class );
+		$request->method( 'getSitelink' )->willReturn( [ 'title' => self::SITELINK_TITLE ] );
 
 		$this->sitelinkValidator = $this->createStub( SitelinkValidator::class );
 		$this->sitelinkValidator->method( 'validate' )->willReturn( $validationError );
@@ -97,6 +100,11 @@ class SitelinkEditRequestValidatingDeserializerTest extends TestCase {
 			new ValidationError( SitelinkValidator::CODE_BADGE_NOT_ALLOWED, [ SitelinkValidator::CONTEXT_BADGE => 'Q654' ] ),
 			UseCaseError::ITEM_NOT_A_BADGE,
 			'Item ID provided as badge is not allowed as a badge: Q654',
+		];
+		yield 'title not found' => [
+			new ValidationError( SitelinkValidator::CODE_TITLE_NOT_FOUND ),
+			UseCaseError::SITELINK_TITLE_NOT_FOUND,
+			'Page with title ' . self::SITELINK_TITLE . ' does not exist on the given site',
 		];
 	}
 

@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Application\Validation;
 
+use Exception;
 use LogicException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\SiteLink;
@@ -9,9 +10,9 @@ use Wikibase\Repo\RestApi\Application\Serialization\EmptySitelinkException;
 use Wikibase\Repo\RestApi\Application\Serialization\InvalidFieldException;
 use Wikibase\Repo\RestApi\Application\Serialization\InvalidFieldTypeException;
 use Wikibase\Repo\RestApi\Application\Serialization\MissingFieldException;
-use Wikibase\Repo\RestApi\Application\Serialization\SerializationException;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
 use Wikibase\Repo\RestApi\Application\Validation\SitelinkValidator;
+use Wikibase\Repo\RestApi\Domain\Services\Exceptions\SitelinkTargetNotFound;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\Validation\SitelinkValidator
@@ -39,7 +40,7 @@ class SitelinkValidatorTest extends TestCase {
 	 * @dataProvider provideInvalidSitelink
 	 */
 	public function testGivenSitelinkDeserializerThrows_returnsValidationErrors(
-		SerializationException $deserializerException,
+		Exception $deserializerException,
 		string $validationErrorCode
 	): void {
 		$this->sitelinkDeserializer = $this->createStub( SitelinkDeserializer::class );
@@ -57,6 +58,8 @@ class SitelinkValidatorTest extends TestCase {
 		yield 'invalid title' => [ new InvalidFieldException( 'title', 'invalid?' ), SitelinkValidator::CODE_INVALID_TITLE ];
 
 		yield 'invalid title type' => [ new InvalidFieldTypeException( 'title' ), SitelinkValidator::CODE_INVALID_TITLE_TYPE ];
+
+		yield 'title not found' => [ new SitelinkTargetNotFound(), SitelinkValidator::CODE_TITLE_NOT_FOUND ];
 	}
 
 	public function testGivenGetValidatedSitelinkCalledBeforeValidate_throws(): void {

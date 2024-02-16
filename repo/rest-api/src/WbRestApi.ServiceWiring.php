@@ -128,6 +128,7 @@ use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdaterPropertyUpdater
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdaterStatementRemover;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdaterStatementUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\PrefetchingTermLookupAliasesRetriever;
+use Wikibase\Repo\RestApi\Infrastructure\DataAccess\SiteLinkPageNormalizerSitelinkTargetResolver;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\StatementSubjectRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\TermLookupEntityTermsRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\WikibaseEntityPermissionChecker;
@@ -313,7 +314,11 @@ return [
 				new SitelinkValidator(
 					new SitelinkDeserializer(
 						MediaWikiTitleCodec::getTitleInvalidRegex(),
-						array_keys( WikibaseRepo::getSettings( $services )->getSetting( 'badgeItems' ) )
+						array_keys( WikibaseRepo::getSettings( $services )->getSetting( 'badgeItems' ) ),
+						new SiteLinkPageNormalizerSitelinkTargetResolver(
+							$services->getSiteLookup(),
+							WikibaseRepo::getSiteLinkPageNormalizer( $services )
+						)
 					)
 				),
 			);

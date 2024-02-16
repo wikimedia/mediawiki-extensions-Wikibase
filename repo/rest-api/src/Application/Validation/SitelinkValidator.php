@@ -11,6 +11,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\InvalidFieldTypeException;
 use Wikibase\Repo\RestApi\Application\Serialization\InvalidSitelinkBadgeException;
 use Wikibase\Repo\RestApi\Application\Serialization\MissingFieldException;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
+use Wikibase\Repo\RestApi\Domain\Services\Exceptions\SitelinkTargetNotFound;
 
 /**
  * @license GPL-2.0-or-later
@@ -25,6 +26,7 @@ class SitelinkValidator {
 	public const CODE_INVALID_BADGES_TYPE = 'invalid-badges-type';
 	public const CODE_INVALID_BADGE = 'invalid-badge';
 	public const CODE_BADGE_NOT_ALLOWED = 'badge-not-allowed';
+	public const CODE_TITLE_NOT_FOUND = 'title-not-found';
 
 	public const CONTEXT_BADGE = 'badge';
 
@@ -61,6 +63,8 @@ class SitelinkValidator {
 			return new ValidationError( self::CODE_INVALID_BADGE, [ self::CONTEXT_BADGE => $e->getValue() ] );
 		} catch ( BadgeNotAllowed $e ) {
 			return new ValidationError( self::CODE_BADGE_NOT_ALLOWED, [ self::CONTEXT_BADGE => $e->getBadge() ] );
+		} catch ( SitelinkTargetNotFound $e ) {
+			return new ValidationError( self::CODE_TITLE_NOT_FOUND );
 		}
 
 		return null;

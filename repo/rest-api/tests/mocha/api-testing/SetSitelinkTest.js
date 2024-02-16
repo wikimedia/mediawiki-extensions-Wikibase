@@ -330,6 +330,18 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 				`Item ID provided as badge is not allowed as a badge: ${badge}`
 			);
 		} );
+
+		it( 'sitelink title does not exist', async () => {
+			const sitelink = { title: utils.title( 'does-not-exist-' ) };
+			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, sitelink ).makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assertValidErrorResponse( response, 'title-does-not-exist' );
+			assert.strictEqual(
+				response.body.message,
+				`Page with title ${sitelink.title} does not exist on the given site`
+			);
+		} );
 	} );
 
 	describe( '404', () => {

@@ -58,6 +58,11 @@ class SitelinkEditRequestValidatingDeserializer {
 						UseCaseError::ITEM_NOT_A_BADGE,
 						"Item ID provided as badge is not allowed as a badge: $badge"
 					);
+				case SitelinkValidator::CODE_TITLE_NOT_FOUND:
+					throw new UseCaseError(
+						UseCaseError::SITELINK_TITLE_NOT_FOUND,
+						"Page with title {$request->getSitelink()['title']} does not exist on the given site"
+					);
 				default:
 					throw new LogicException( "Unknown validation error code: {$validationError->getCode()}" );
 			}

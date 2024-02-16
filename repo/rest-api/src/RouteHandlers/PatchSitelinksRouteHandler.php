@@ -19,6 +19,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchSitelinks\PatchSitelinks;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchSitelinks\PatchSitelinksRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchSitelinks\PatchSitelinksResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Infrastructure\DataAccess\SiteLinkPageNormalizerSitelinkTargetResolver;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\BotRightCheckMiddleware;
@@ -70,7 +71,11 @@ class PatchSitelinksRouteHandler extends SimpleHandler {
 				new SitelinksDeserializer(
 					new SitelinkDeserializer(
 						MediaWikiTitleCodec::getTitleInvalidRegex(),
-						array_keys( WikibaseRepo::getSettings()->getSetting( 'badgeItems' ) )
+						array_keys( WikibaseRepo::getSettings()->getSetting( 'badgeItems' ) ),
+						new SiteLinkPageNormalizerSitelinkTargetResolver(
+							MediaWikiServices::getInstance()->getSiteLookup(),
+							WikibaseRepo::getSiteLinkPageNormalizer()
+						)
 					)
 				),
 				WbRestApi::getItemUpdater()
