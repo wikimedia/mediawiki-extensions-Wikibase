@@ -279,8 +279,14 @@
 		},
 
 		_languageListViewInitialStateIsVisible: function ( optionKey ) {
-			return ( mw.cookie.get( optionKey ) === 'true' ||
-				mw.user.options.get( optionKey ) === '1' );
+			if ( mw.cookie.get( optionKey ) === null &&
+				mw.user.options.get( optionKey ) === null ) {
+				return true;
+			}
+			if ( mw.user.options.get( optionKey ) !== null ) {
+				return mw.user.options.get( optionKey ) === '1';
+			}
+			return mw.cookie.get( optionKey ) === 'true';
 		},
 
 		/**

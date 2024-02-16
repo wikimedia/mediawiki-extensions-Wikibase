@@ -102,7 +102,7 @@
 		);
 	} );
 
-	QUnit.test( 'Initial state of listlanguageview is not-visible by default for logged-out users',
+	QUnit.test( 'Initial state of listlanguageview is visible by default for logged-out users',
 		function ( assert ) {
 			const stubs = stubOptions( null, null );
 
@@ -111,20 +111,56 @@
 			var display = $entitytermsforlanguagelistview.css( 'display' );
 
 			assert.false( mw.user.isNamed(), "User should not be set (got '" + mw.user.getName() + '")' );
-			assert.true( display === 'none', 'Element should not be visible - got display=' + display );
+			assert.true( display !== 'none', 'Element should be visible - got display=' + display );
 
 			restoreStubs( stubs );
 		}
 	);
 
-	QUnit.test( 'Initial state of listlanguageview is visible if cookie is set', function ( assert ) {
-		const stubs = stubOptions( 'true', '0' );
+	QUnit.test( 'Initial state of listlanguageview is visible if cookie is set and option is null', function ( assert ) {
+		const stubs = stubOptions( 'true', null );
 
 		var $entitytermsview = createEntitytermsview();
 		var $entitytermsforlanguagelistview = $entitytermsview.find( '.wikibase-entitytermsview-entitytermsforlanguagelistview' );
 		var display = $entitytermsforlanguagelistview.css( 'display' );
 
 		assert.true( display !== 'none', 'Element should be visible - got display=' + display );
+
+		restoreStubs( stubs );
+	} );
+
+	QUnit.test( 'Initial state of listlanguageview respects option above cookie', function ( assert ) {
+		const stubs = stubOptions( 'true', '0' );
+
+		var $entitytermsview = createEntitytermsview();
+		var $entitytermsforlanguagelistview = $entitytermsview.find( '.wikibase-entitytermsview-entitytermsforlanguagelistview' );
+		var display = $entitytermsforlanguagelistview.css( 'display' );
+
+		assert.true( display === 'none', 'Element should not be visible - got display=' + display );
+
+		restoreStubs( stubs );
+	} );
+
+	QUnit.test( 'Initial state of listlanguageview is not visible if cookie is not set and option is 0', function ( assert ) {
+		const stubs = stubOptions( null, '0' );
+
+		var $entitytermsview = createEntitytermsview();
+		var $entitytermsforlanguagelistview = $entitytermsview.find( '.wikibase-entitytermsview-entitytermsforlanguagelistview' );
+		var display = $entitytermsforlanguagelistview.css( 'display' );
+
+		assert.true( display === 'none', 'Element should not be visible - got display=' + display );
+
+		restoreStubs( stubs );
+	} );
+
+	QUnit.test( 'Initial state of listlanguageview is not visible if cookie is set to false', function ( assert ) {
+		const stubs = stubOptions( 'false', null );
+
+		var $entitytermsview = createEntitytermsview();
+		var $entitytermsforlanguagelistview = $entitytermsview.find( '.wikibase-entitytermsview-entitytermsforlanguagelistview' );
+		var display = $entitytermsforlanguagelistview.css( 'display' );
+
+		assert.true( display === 'none', 'Element should not be visible - got display=' + display );
 
 		restoreStubs( stubs );
 	} );
