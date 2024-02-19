@@ -38,6 +38,7 @@ describe( 'User-Agent requests', () => {
 		itemRequestInputs.itemId = createItemResponse.entity.id;
 		itemRequestInputs.statementId = createItemResponse.entity.claims[ statementPropertyId ][ 0 ].id;
 		itemRequestInputs.statementPropertyId = statementPropertyId;
+		itemRequestInputs.linkedArticle = linkedArticle;
 
 		await createLocalSitelink( createItemResponse.entity.id, linkedArticle );
 		itemRequestInputs.siteId = await getLocalSiteId();

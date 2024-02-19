@@ -67,6 +67,7 @@ describe( 'Conditional requests', () => {
 		itemRequestInputs.statementId = itemData.claims[ statementPropertyId ][ 0 ].id;
 		itemRequestInputs.statementPropertyId = statementPropertyId;
 		itemRequestInputs.siteId = await getLocalSiteId();
+		itemRequestInputs.linkedArticle = linkedArticle;
 
 		const latestItemRevision = await getLatestEditMetadata( itemId );
 		itemRequestInputs.latestRevId = latestItemRevision.revid;

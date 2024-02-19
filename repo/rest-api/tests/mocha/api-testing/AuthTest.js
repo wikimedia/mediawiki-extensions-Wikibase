@@ -51,6 +51,7 @@ describe( 'Auth', () => {
 		itemRequestInputs.statementId = itemData.claims[ statementPropertyId ][ 0 ].id;
 		itemRequestInputs.statementPropertyId = statementPropertyId;
 		itemRequestInputs.siteId = await getLocalSiteId();
+		itemRequestInputs.linkedArticle = linkedArticle;
 
 		const propertyId = ( await createUniqueStringProperty() ).entity.id;
 		const propertyData = await resetEntityTestData( propertyId, statementPropertyId );
@@ -77,7 +78,7 @@ describe( 'Auth', () => {
 					{
 						op: 'add',
 						path: `/${itemRequestInputs.siteId}`,
-						value: { title: utils.title( 'test-title-' ) }
+						value: { title: itemRequestInputs.linkedArticle }
 					}
 				]
 			),
