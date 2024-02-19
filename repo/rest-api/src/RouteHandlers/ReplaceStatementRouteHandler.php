@@ -93,7 +93,8 @@ class ReplaceStatementRouteHandler extends SimpleHandler {
 	}
 
 	public function runUseCase( string $statementId ): Response {
-		$requestBody = $this->getValidatedBody() ?? [];
+		$requestBody = $this->getValidatedBody();
+		'@phan-var array $requestBody'; // guaranteed to be an array per ContentTypeCheckMiddleware and TypeValidatingJsonBodyValidator
 
 		try {
 			$useCaseResponse = $this->useCase->execute( new ReplaceStatementRequest(

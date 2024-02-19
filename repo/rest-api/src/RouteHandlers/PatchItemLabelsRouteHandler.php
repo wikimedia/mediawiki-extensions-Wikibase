@@ -83,7 +83,8 @@ class PatchItemLabelsRouteHandler extends SimpleHandler {
 	}
 
 	public function runUseCase( string $itemId ): Response {
-		$jsonBody = $this->getValidatedBody() ?? [];
+		$jsonBody = $this->getValidatedBody();
+		'@phan-var array $jsonBody'; // guaranteed to be an array per ContentTypeCheckMiddleware and TypeValidatingJsonBodyValidator
 
 		try {
 			return $this->newSuccessHttpResponse(

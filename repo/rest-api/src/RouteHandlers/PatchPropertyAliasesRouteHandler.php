@@ -81,7 +81,8 @@ class PatchPropertyAliasesRouteHandler extends SimpleHandler {
 	}
 
 	public function runUseCase( string $propertyId ): Response {
-		$jsonBody = $this->getValidatedBody() ?? [];
+		$jsonBody = $this->getValidatedBody();
+		'@phan-var array $jsonBody'; // guaranteed to be an array per ContentTypeCheckMiddleware and TypeValidatingJsonBodyValidator
 		try {
 			return $this->newSuccessHttpResponse(
 				$this->useCase->execute( new PatchPropertyAliasesRequest(

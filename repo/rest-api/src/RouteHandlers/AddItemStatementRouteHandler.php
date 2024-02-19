@@ -91,7 +91,8 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 	 * @throws Exception
 	 */
 	public function runUseCase( string $itemId ): Response {
-		$jsonBody = $this->getValidatedBody() ?? [];
+		$jsonBody = $this->getValidatedBody();
+		'@phan-var array $jsonBody'; // guaranteed to be an array per ContentTypeCheckMiddleware and TypeValidatingJsonBodyValidator
 		try {
 			$useCaseResponse = $this->addItemStatement->execute(
 				new AddItemStatementRequest(
