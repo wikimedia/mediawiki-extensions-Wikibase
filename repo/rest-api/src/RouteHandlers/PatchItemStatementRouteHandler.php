@@ -96,7 +96,7 @@ class PatchItemStatementRouteHandler extends SimpleHandler {
 	}
 
 	public function runUseCase( string $itemId, string $statementId ): Response {
-		$requestBody = $this->getValidatedBody();
+		$requestBody = $this->getValidatedBody() ?? [];
 
 		try {
 			return $this->newSuccessHttpResponse(

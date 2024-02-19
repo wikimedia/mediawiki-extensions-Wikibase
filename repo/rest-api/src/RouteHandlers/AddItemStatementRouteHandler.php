@@ -91,7 +91,7 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 	 * @throws Exception
 	 */
 	public function runUseCase( string $itemId ): Response {
-		$jsonBody = $this->getValidatedBody();
+		$jsonBody = $this->getValidatedBody() ?? [];
 		try {
 			$useCaseResponse = $this->addItemStatement->execute(
 				new AddItemStatementRequest(

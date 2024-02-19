@@ -93,7 +93,7 @@ class ReplaceStatementRouteHandler extends SimpleHandler {
 	}
 
 	public function runUseCase( string $statementId ): Response {
-		$requestBody = $this->getValidatedBody();
+		$requestBody = $this->getValidatedBody() ?? [];
 
 		try {
 			$useCaseResponse = $this->useCase->execute( new ReplaceStatementRequest(

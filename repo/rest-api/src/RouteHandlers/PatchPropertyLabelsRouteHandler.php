@@ -80,7 +80,7 @@ class PatchPropertyLabelsRouteHandler extends SimpleHandler {
 	}
 
 	public function runUseCase( string $propertyId ): Response {
-		$jsonBody = $this->getValidatedBody();
+		$jsonBody = $this->getValidatedBody() ?? [];
 
 		try {
 			return $this->newSuccessHttpResponse(

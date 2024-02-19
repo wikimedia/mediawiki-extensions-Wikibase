@@ -73,7 +73,7 @@ class SetPropertyDescriptionRouteHandler extends SimpleHandler {
 	}
 
 	public function runUseCase( string $propertyId, string $languageCode ): Response {
-		$jsonBody = $this->getValidatedBody();
+		$jsonBody = $this->getValidatedBody() ?? [];
 
 		try {
 			return $this->newSuccessHttpResponse(

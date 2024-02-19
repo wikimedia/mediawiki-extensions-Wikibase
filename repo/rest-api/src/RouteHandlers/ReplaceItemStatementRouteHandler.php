@@ -92,7 +92,7 @@ class ReplaceItemStatementRouteHandler extends SimpleHandler {
 	}
 
 	public function runUseCase( string $itemId, string $statementId ): Response {
-		$requestBody = $this->getValidatedBody();
+		$requestBody = $this->getValidatedBody() ?? [];
 
 		try {
 			$useCaseResponse = $this->useCase->execute( new ReplaceItemStatementRequest(
