@@ -85,7 +85,8 @@ class AddPropertyStatementRouteHandler extends SimpleHandler {
 	}
 
 	public function runUseCase( string $propertyId ): Response {
-		$body = $this->getValidatedBody() ?? [];
+		$body = $this->getValidatedBody();
+		'@phan-var array $body'; // guaranteed to be an array per ContentTypeCheckMiddleware and TypeValidatingJsonBodyValidator
 		try {
 			return $this->newSuccessHttpResponse(
 				$propertyId,
