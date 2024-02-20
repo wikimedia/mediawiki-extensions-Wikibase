@@ -30,39 +30,12 @@ class CreateRedirect extends ApiBase {
 
 	use ApiCreateTempUserTrait;
 
-	/**
-	 * @var EntityIdParser
-	 */
-	private $idParser;
+	private EntityIdParser $idParser;
+	private ApiErrorReporter $errorReporter;
+	private ItemRedirectCreationInteractor $interactor;
+	private PermissionManager $permissionManager;
+	private array $sandboxEntityIds;
 
-	/**
-	 * @var ApiErrorReporter
-	 */
-	private $errorReporter;
-
-	/**
-	 * @var ItemRedirectCreationInteractor
-	 */
-	private $interactor;
-
-	/**
-	 * @var PermissionManager
-	 */
-	private $permissionManager;
-
-	/** @var string[] */
-	private $sandboxEntityIds;
-
-	/**
-	 * @see ApiBase::__construct
-	 *
-	 * @param ApiMain $mainModule
-	 * @param string $moduleName
-	 * @param EntityIdParser $idParser
-	 * @param ApiErrorReporter $errorReporter
-	 * @param ItemRedirectCreationInteractor $interactor
-	 * @param PermissionManager $permissionManager
-	 */
 	public function __construct(
 		ApiMain $mainModule,
 		string $moduleName,

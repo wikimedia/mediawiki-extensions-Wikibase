@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests\Interactors;
 
 use IContextSource;
@@ -10,7 +12,6 @@ use MediaWiki\Title\Title;
 use MediaWiki\User\TempUser\CreateStatus;
 use MediaWiki\User\TempUser\TempUserCreator;
 use MediaWiki\User\User;
-use PHPUnit\Framework\MockObject\Matcher\InvokedRecorder;
 use RequestContext;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -37,10 +38,7 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 
-	/**
-	 * @var MockRepository|null
-	 */
-	private $mockRepository = null;
+	private ?MockRepository $mockRepository = null;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -70,10 +68,7 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 		$this->mockRepository->putRedirect( $redirect );
 	}
 
-	/**
-	 * @return EntityPermissionChecker
-	 */
-	private function getPermissionChecker() {
+	private function getPermissionChecker(): EntityPermissionChecker {
 		$permissionChecker = $this->createMock( EntityPermissionChecker::class );
 
 		$permissionChecker->method( 'getPermissionStatusForEntityId' )
@@ -91,7 +86,7 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @param InvokedRecorder|null $invokeCount
+	 * @param mixed|null $invokeCount
 	 * @param Status|null $hookReturn
 	 *
 	 * @return EditFilterHookRunner
@@ -99,7 +94,7 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 	public function getMockEditFilterHookRunner(
 		$invokeCount = null,
 		Status $hookReturn = null
-	) {
+	): EditFilterHookRunner {
 		$mock = $this->getMockBuilder( EditFilterHookRunner::class )
 			->onlyMethods( [ 'run' ] )
 			->disableOriginalConstructor()
@@ -111,7 +106,7 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @param InvokedRecorder|null $efHookCalls
+	 * @param mixed|null $efHookCalls expected edit filter hook calls: either $this->once() or null
 	 * @param Status|null $efHookStatus
 	 * @param TempUserCreator|null $tempUserCreator
 	 *
@@ -121,7 +116,7 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 		$efHookCalls = null,
 		Status $efHookStatus = null,
 		TempUserCreator $tempUserCreator = null
-	) {
+	): ItemRedirectCreationInteractor {
 		$summaryFormatter = WikibaseRepo::getSummaryFormatter();
 
 		if ( $tempUserCreator === null ) {
@@ -143,10 +138,7 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	/**
-	 * @return EntityTitleStoreLookup
-	 */
-	private function getMockEntityTitleLookup() {
+	private function getMockEntityTitleLookup(): EntityTitleStoreLookup {
 		$titleLookup = $this->createMock( EntityTitleStoreLookup::class );
 
 		$titleLookup->method( 'getTitleForId' )
@@ -168,7 +160,7 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 		return $context;
 	}
 
-	public function createRedirectProvider_success() {
+	public function createRedirectProvider_success(): iterable {
 		return [
 			'redirect empty entity' => [ new ItemId( 'Q11' ), new ItemId( 'Q12' ) ],
 			'update redirect' => [ new ItemId( 'Q22' ), new ItemId( 'Q11' ) ],
@@ -204,7 +196,7 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 		}
 	}
 
-	public function createRedirectProvider_failure() {
+	public function createRedirectProvider_failure(): iterable {
 		return [
 			'source not found' => [
 				new ItemId( 'Q77' ),
@@ -265,10 +257,10 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 	public function testCreateRedirect_failure(
 		EntityId $fromId,
 		EntityId $toId,
-		$expectedCode,
+		string $expectedCode,
 		array $messageParams,
 		Status $efStatus = null
-	) {
+	): void {
 		$interactor = $this->newInteractor( null, $efStatus );
 
 		try {

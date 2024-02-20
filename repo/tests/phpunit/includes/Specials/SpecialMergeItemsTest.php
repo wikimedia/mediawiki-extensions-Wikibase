@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests\Specials;
 
 use Exception;
@@ -8,7 +10,6 @@ use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Request\FauxRequest;
-use MediaWiki\Request\WebRequest;
 use MediaWiki\Request\WebResponse;
 use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Status\Status;
@@ -56,18 +57,8 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 
 	use HtmlAssertionHelpers;
 
-	/**
-	 * @var MockRepository|null
-	 */
-	private $mockRepository = null;
-
-	/** @var WebRequest */
-	private $request;
-
-	/**
-	 * @var EntityModificationTestHelper|null
-	 */
-	private $entityModificationTestHelper = null;
+	private ?MockRepository $mockRepository = null;
+	private ?EntityModificationTestHelper $entityModificationTestHelper = null;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -89,10 +80,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 		] );
 	}
 
-	/**
-	 * @return EditFilterHookRunner
-	 */
-	public function getMockEditFilterHookRunner() {
+	public function getMockEditFilterHookRunner(): EditFilterHookRunner {
 		$mock = $this->createMock( EditFilterHookRunner::class );
 
 		$mock->method( 'run' )
@@ -101,10 +89,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 		return $mock;
 	}
 
-	/**
-	 * @return EntityTitleStoreLookup
-	 */
-	private function getEntityTitleLookup() {
+	private function getEntityTitleLookup(): EntityTitleStoreLookup {
 		$entityTitleLookup = $this->createMock( EntityTitleStoreLookup::class );
 		$entityTitleLookup->method( 'getTitleForId' )
 			->willReturnCallback( function( EntityId $entityId ) {
@@ -114,10 +99,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 		return $entityTitleLookup;
 	}
 
-	/**
-	 * @return SpecialMergeItems
-	 */
-	protected function newSpecialPage() {
+	protected function newSpecialPage(): SpecialMergeItems {
 		$services = MediaWikiServices::getInstance();
 		$summaryFormatter = WikibaseRepo::getSummaryFormatter( $services );
 
@@ -205,10 +187,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 		return $specialPage;
 	}
 
-	/**
-	 * @return EntityTitleStoreLookup
-	 */
-	private function getMockEntityTitleLookup() {
+	private function getMockEntityTitleLookup(): EntityTitleStoreLookup {
 		$titleLookup = $this->createMock( EntityTitleStoreLookup::class );
 
 		$titleLookup->method( 'getTitleForId' )
@@ -222,7 +201,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 		return $titleLookup;
 	}
 
-	private function executeSpecialMergeItems( $params, User $user = null ) {
+	private function executeSpecialMergeItems( array $params, User $user = null ): string {
 		if ( !$user ) {
 			// TODO Matching the token of a non-anonymous user is complicated.
 			$user = new User;
@@ -260,10 +239,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 		$this->assertStringContainsString( '(wikibase-mergeitems-success: Q1, 3, Q2, 4)', $output );
 	}
 
-	/**
-	 * @return EntityPermissionChecker
-	 */
-	private function getPermissionCheckers() {
+	private function getPermissionCheckers(): EntityPermissionChecker {
 		$permissionChecker = $this->createMock( EntityPermissionChecker::class );
 
 		$callback = function ( User $user ) {
@@ -282,22 +258,15 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 		return $permissionChecker;
 	}
 
-	/**
-	 * @param string $error
-	 * @param string $html
-	 */
-	private function assertError( $error, $html ) {
+	private function assertError( string $error, string $html ): void {
 		$this->assertStringContainsString( '<p class="error">(@' . $error . '@)</p>', $html );
 	}
 
-	/**
-	 * @param string $html
-	 */
-	private function assertNoError( $html ) {
+	private function assertNoError( string $html ): void {
 		$this->assertStringNotContainsString( 'class="error"', $html );
 	}
 
-	public static function mergeRequestProvider() {
+	public static function mergeRequestProvider(): iterable {
 		$testCases = [];
 		$testCases['labelMerge'] = [
 			[ 'labels' => [
@@ -354,7 +323,13 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	/**
 	 * @dataProvider mergeRequestProvider
 	 */
-	public function testMergeRequest( $fromBefore, $toBefore, $fromAfter, $toAfter, $ignoreConflicts = '' ) {
+	public function testMergeRequest(
+		array $fromBefore,
+		array $toBefore,
+		array $fromAfter,
+		array $toAfter,
+		string $ignoreConflicts = ''
+	): void {
 
 		// -- set up params ---------------------------------
 		$params = [
@@ -383,7 +358,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 		$this->entityModificationTestHelper->assertEntityEquals( $toAfter, $actualTo );
 	}
 
-	public static function provideExceptionParamsData() {
+	public static function provideExceptionParamsData(): iterable {
 		return [
 			[ //3 toid bad
 				'p' => [ 'fromid' => 'Q1', 'toid' => 'ABCDE' ],
@@ -409,12 +384,12 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	/**
 	 * @dataProvider provideExceptionParamsData
 	 */
-	public function testMergeItemsParamsExceptions( $params, $expected ) {
+	public function testMergeItemsParamsExceptions( array $params, string $expected ): void {
 		$html = $this->executeSpecialMergeItems( $params );
 		$this->assertError( $expected, $html );
 	}
 
-	public static function provideExceptionConflictsData() {
+	public static function provideExceptionConflictsData(): iterable {
 		return [
 			[
 				[ 'descriptions' => [ 'en' => [ 'language' => 'en', 'value' => 'foo' ] ] ],
@@ -430,7 +405,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	/**
 	 * @dataProvider provideExceptionConflictsData
 	 */
-	public function testMergeItemsConflictsExceptions( $pre1, $pre2 ) {
+	public function testMergeItemsConflictsExceptions( array $pre1, array $pre2 ): void {
 		// -- prefill the entities --------------------------------------------
 		$this->entityModificationTestHelper->putEntity( $pre1, 'Q1' );
 		$this->entityModificationTestHelper->putEntity( $pre2, 'Q2' );

@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Interactors;
 
 use IContextSource;
@@ -33,45 +35,14 @@ use Wikibase\Repo\SummaryFormatter;
  */
 class ItemMergeInteractor {
 
-	/**
-	 * @var MergeFactory
-	 */
-	private $mergeFactory;
-
-	/**
-	 * @var EntityRevisionLookup
-	 */
-	private $entityRevisionLookup;
-
-	/**
-	 * @var MediaWikiEditEntityFactory
-	 */
-	private $editEntityFactory;
-
-	/**
-	 * @var EntityPermissionChecker
-	 */
-	private $permissionChecker;
-
-	/**
-	 * @var SummaryFormatter
-	 */
-	private $summaryFormatter;
-
-	/**
-	 * @var ItemRedirectCreationInteractor
-	 */
-	private $interactorRedirect;
-
-	/**
-	 * @var EntityTitleStoreLookup
-	 */
-	private $entityTitleLookup;
-
-	/**
-	 * @var PermissionManager
-	 */
-	private $permissionManager;
+	private MergeFactory $mergeFactory;
+	private EntityRevisionLookup $entityRevisionLookup;
+	private MediaWikiEditEntityFactory $editEntityFactory;
+	private EntityPermissionChecker $permissionChecker;
+	private SummaryFormatter $summaryFormatter;
+	private ItemRedirectCreationInteractor $interactorRedirect;
+	private EntityTitleStoreLookup $entityTitleLookup;
+	private PermissionManager $permissionManager;
 
 	public function __construct(
 		MergeFactory $mergeFactory,
@@ -102,7 +73,7 @@ class ItemMergeInteractor {
 	 *
 	 * @throws ItemMergeException if the permission check fails
 	 */
-	private function checkPermissions( EntityId $entityId, User $user ) {
+	private function checkPermissions( EntityId $entityId, User $user ): void {
 		$status = $this->permissionChecker->getPermissionStatusForEntityId(
 			$user,
 			EntityPermissionChecker::ACTION_MERGE,
@@ -150,7 +121,7 @@ class ItemMergeInteractor {
 		?string $summary = null,
 		bool $bot = false,
 		array $tags = []
-	) {
+	): array {
 		$user = $context->getUser();
 		$this->checkPermissions( $fromId, $user );
 		$this->checkPermissions( $toId, $user );
@@ -209,12 +180,7 @@ class ItemMergeInteractor {
 		];
 	}
 
-	/**
-	 * @param ItemId $itemId
-	 *
-	 * @return bool
-	 */
-	private function isEmpty( ItemId $itemId ) {
+	private function isEmpty( ItemId $itemId ): bool {
 		return $this->loadEntity( $itemId )->isEmpty();
 	}
 
@@ -226,7 +192,7 @@ class ItemMergeInteractor {
 	 * @return EntityDocument
 	 * @throws ItemMergeException
 	 */
-	private function loadEntity( ItemId $itemId ) {
+	private function loadEntity( ItemId $itemId ): EntityDocument {
 		try {
 			$revision = $this->entityRevisionLookup->getEntityRevision(
 				$itemId,
@@ -253,7 +219,7 @@ class ItemMergeInteractor {
 	 *
 	 * @throws ItemMergeException
 	 */
-	private function validateEntities( EntityDocument $fromEntity, EntityDocument $toEntity ) {
+	private function validateEntities( EntityDocument $fromEntity, EntityDocument $toEntity ): void {
 		if ( !( $fromEntity instanceof Item && $toEntity instanceof Item ) ) {
 			throw new ItemMergeException( 'One or more of the entities are not items', 'not-item' );
 		}
@@ -270,7 +236,7 @@ class ItemMergeInteractor {
 	 *
 	 * @return Summary
 	 */
-	private function getSummary( $direction, ItemId $getId, $customSummary = null ) {
+	private function getSummary( string $direction, ItemId $getId, ?string $customSummary = null ): Summary {
 		$summary = new Summary( 'wbmergeitems', $direction, null, [ $getId->getSerialization() ] );
 		if ( $customSummary !== null ) {
 			$summary->setUserSummary( $customSummary );
@@ -288,7 +254,14 @@ class ItemMergeInteractor {
 	 *
 	 * @return array with four members, as documented at {@link self::mergeItems()}, except with the `redirected` member missing.
 	 */
-	private function attemptSaveMerge( Item $fromItem, Item $toItem, ?string $summary, IContextSource $context, bool $bot, array $tags ) {
+	private function attemptSaveMerge(
+		Item $fromItem,
+		Item $toItem,
+		?string $summary,
+		IContextSource $context,
+		bool $bot,
+		array $tags
+	): array {
 		// Note: the edits and summaries are potentially confusing;
 		// on the “from” item, we use the summary “Merged Item *into*” and mention the “to” item ID;
 		// on the “to” item, we use the summary “Merged item *from*” and mention the “from” item ID.
@@ -317,7 +290,7 @@ class ItemMergeInteractor {
 		];
 	}
 
-	private function saveItem( Item $item, FormatableSummary $summary, IContextSource $context, bool $bot, array $tags ) {
+	private function saveItem( Item $item, FormatableSummary $summary, IContextSource $context, bool $bot, array $tags ): array {
 		// Given we already check all constraints in ChangeOpsMerge, it's
 		// fine to ignore them here. This is also needed to not run into
 		// the constraints we're supposed to ignore (see ChangeOpsMerge::removeConflictsWithEntity
@@ -346,7 +319,7 @@ class ItemMergeInteractor {
 		return $status->getValue();
 	}
 
-	private function updateWatchlistEntries( ItemId $fromId, ItemId $toId ) {
+	private function updateWatchlistEntries( ItemId $fromId, ItemId $toId ): void {
 		$fromTitle = $this->entityTitleLookup->getTitleForId( $fromId );
 		$toTitle = $this->entityTitleLookup->getTitleForId( $toId );
 

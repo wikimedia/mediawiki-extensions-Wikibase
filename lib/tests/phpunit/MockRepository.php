@@ -1,8 +1,9 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Lib\Tests;
 
-use InvalidArgumentException;
 use MediaWiki\Status\Status;
 use MediaWiki\User\User;
 use MediaWiki\User\UserIdentity;
@@ -54,17 +55,14 @@ class MockRepository implements
 	SiteLinkLookup
 {
 
-	/**
-	 * @var SiteLinkStore
-	 */
-	private $siteLinkStore;
+	private SiteLinkStore $siteLinkStore;
 
 	/**
 	 * Entity id serialization => array of [ EntityRevision, user name ]
 	 *
 	 * @var array[]
 	 */
-	private $entities = [];
+	private array $entities = [];
 
 	/**
 	 * Log entries. Each entry has the following fields:
@@ -72,67 +70,41 @@ class MockRepository implements
 	 *
 	 * @var array[]
 	 */
-	private $log = [];
+	private array $log = [];
 
 	/**
 	 * Entity id serialization => EntityRedirect
 	 *
 	 * @var RedirectRevision[]
 	 */
-	private $redirects = [];
+	private array $redirects = [];
 
 	/**
 	 * User ID + Entity Id -> bool
 	 *
 	 * @var bool[]
 	 */
-	private $watchlist = [];
+	private array $watchlist = [];
 
-	/**
-	 * @var int
-	 */
-	private $maxEntityId = 0;
+	private int $maxEntityId = 0;
 
-	/**
-	 * @var int
-	 */
-	private $maxRevisionId = 0;
+	private int $maxRevisionId = 0;
 
 	public function __construct() {
 		$this->siteLinkStore = new HashSiteLinkStore();
 	}
 
-	/**
-	 * @see EntityLookup::getEntity
-	 *
-	 * @param EntityId $entityId
-	 *
-	 * @return EntityDocument|null
-	 * @throws StorageException
-	 */
-	public function getEntity( EntityId $entityId ) {
+	public function getEntity( EntityId $entityId ): ?EntityDocument {
 		$revision = $this->getEntityRevision( $entityId );
 
 		return $revision === null ? null : $revision->getEntity()->copy();
 	}
 
-	/**
-	 * @see EntityRevisionLookup::getEntityRevision
-	 *
-	 * @param EntityId $entityId
-	 * @param int $revisionId The desired revision id, or 0 for the latest revision.
-	 * @param string $mode LATEST_FROM_REPLICA, LATEST_FROM_REPLICA_WITH_FALLBACK or
-	 *        LATEST_FROM_MASTER.
-	 *
-	 * @throws RevisionedUnresolvedRedirectException
-	 * @throws StorageException
-	 * @return EntityRevision|null
-	 */
 	public function getEntityRevision(
 		EntityId $entityId,
 		$revisionId = 0,
 		$mode = LookupConstants::LATEST_FROM_REPLICA
-	) {
+	): ?EntityRevision {
 		$key = $entityId->getSerialization();
 
 		if ( isset( $this->redirects[$key] ) ) {
@@ -173,14 +145,7 @@ class MockRepository implements
 		return $revision;
 	}
 
-	/**
-	 * See EntityLookup::hasEntity()
-	 *
-	 * @param EntityId $entityId
-	 *
-	 * @return bool
-	 */
-	public function hasEntity( EntityId $entityId ) {
+	public function hasEntity( EntityId $entityId ): bool {
 		return $this->getEntity( $entityId ) !== null;
 	}
 
@@ -194,19 +159,15 @@ class MockRepository implements
 
 	/**
 	 * Registers the sitelinks of the given Item so they can later be found with getLinks, etc
-	 *
-	 * @param Item $item
 	 */
-	private function registerSiteLinks( Item $item ) {
+	private function registerSiteLinks( Item $item ): void {
 		$this->siteLinkStore->saveLinksOfItem( $item );
 	}
 
 	/**
 	 * Unregisters the sitelinks of the given Item so they are no longer found with getLinks, etc
-	 *
-	 * @param ItemId $itemId
 	 */
-	private function unregisterSiteLinks( ItemId $itemId ) {
+	private function unregisterSiteLinks( ItemId $itemId ): void {
 		$this->siteLinkStore->deleteLinksOfItem( $itemId );
 	}
 
@@ -223,7 +184,12 @@ class MockRepository implements
 	 * @throws StorageException
 	 * @return EntityRevision
 	 */
-	public function putEntity( EntityDocument $entity, $revisionId = 0, $timestamp = 0, $user = null ) {
+	public function putEntity(
+		EntityDocument $entity,
+		int $revisionId = 0,
+		$timestamp = 0,
+		$user = null
+	): EntityRevision {
 		if ( $entity->getId() === null ) {
 			$this->assignFreshId( $entity );
 		}
@@ -281,7 +247,11 @@ class MockRepository implements
 	 *
 	 * @throws StorageException
 	 */
-	public function putRedirect( EntityRedirect $redirect, $revisionId = 0, $timestamp = 0 ) {
+	public function putRedirect(
+		EntityRedirect $redirect,
+		int $revisionId = 0,
+		$timestamp = 0
+	): void {
 		$key = $redirect->getEntityId()->getSerialization();
 
 		if ( isset( $this->entities[$key] ) ) {
@@ -304,12 +274,8 @@ class MockRepository implements
 
 	/**
 	 * Removes an entity from the mock repository.
-	 *
-	 * @param EntityId $entityId
-	 *
-	 * @return EntityDocument
 	 */
-	public function removeEntity( EntityId $entityId ) {
+	public function removeEntity( EntityId $entityId ): EntityDocument {
 		try {
 			$oldEntity = $this->getEntity( $entityId );
 
@@ -349,7 +315,7 @@ class MockRepository implements
 	 *
 	 * @return EntityDocument[]|null[]
 	 */
-	public function getEntities( array $entityIds ) {
+	public function getEntities( array $entityIds ): array {
 		$entities = [];
 
 		foreach ( $entityIds as $entityId ) {
@@ -367,13 +333,7 @@ class MockRepository implements
 		return $this->siteLinkStore->getSiteLinksForItem( $itemId );
 	}
 
-	/**
-	 * @param string $propertyLabel
-	 * @param string $languageCode
-	 *
-	 * @return EntityDocument|null
-	 */
-	public function getPropertyByLabel( $propertyLabel, $languageCode ) {
+	public function getPropertyByLabel( string $propertyLabel, string $languageCode ): ?EntityDocument {
 		foreach ( array_keys( $this->entities ) as $idString ) {
 			$propertyId = $this->parseId( $idString );
 
@@ -399,15 +359,7 @@ class MockRepository implements
 		return null;
 	}
 
-	/**
-	 * @see PropertyDataTypeLookup::getDataTypeIdForProperty
-	 *
-	 * @param PropertyId $propertyId
-	 *
-	 * @return string
-	 * @throws PropertyDataTypeLookupException
-	 */
-	public function getDataTypeIdForProperty( PropertyId $propertyId ) {
+	public function getDataTypeIdForProperty( PropertyId $propertyId ): string {
 		$entity = $this->getEntity( $propertyId );
 
 		if ( $entity instanceof Property ) {
@@ -417,15 +369,10 @@ class MockRepository implements
 		throw new PropertyDataTypeLookupException( $propertyId );
 	}
 
-	/**
-	 * @see EntityRevisionLookup::getLatestRevisionId
-	 *
-	 * @param EntityId $entityId
-	 * @param string $mode
-	 *
-	 * @return LatestRevisionIdResult
-	 */
-	public function getLatestRevisionId( EntityId $entityId, $mode = LookupConstants::LATEST_FROM_REPLICA ) {
+	public function getLatestRevisionId(
+		EntityId $entityId,
+		$mode = LookupConstants::LATEST_FROM_REPLICA
+	): LatestRevisionIdResult {
 		try {
 			$revision = $this->getEntityRevision( $entityId, 0, $mode );
 		} catch ( RevisionedUnresolvedRedirectException $e ) {
@@ -453,7 +400,14 @@ class MockRepository implements
 	 * @return EntityRevision
 	 * @throws StorageException
 	 */
-	public function saveEntity( EntityDocument $entity, $summary, User $user, $flags = 0, $baseRevisionId = false, array $tags = [] ) {
+	public function saveEntity(
+		EntityDocument $entity,
+		$summary,
+		User $user,
+		$flags = 0,
+		$baseRevisionId = false,
+		array $tags = []
+	): EntityRevision {
 		$entityId = $entity->getId();
 
 		$status = Status::newGood();
@@ -485,20 +439,14 @@ class MockRepository implements
 		return $revision;
 	}
 
-	/**
-	 * @see EntityStore::saveRedirect
-	 *
-	 * @param EntityRedirect $redirect
-	 * @param string $summary
-	 * @param User $user
-	 * @param int $flags
-	 * @param int|bool $baseRevisionId
-	 * @param string[] $tags
-	 *
-	 * @throws StorageException If the given type of entity does not support redirects
-	 * @return int The revision id created by storing the redirect
-	 */
-	public function saveRedirect( EntityRedirect $redirect, $summary, User $user, $flags = 0, $baseRevisionId = false, array $tags = [] ) {
+	public function saveRedirect(
+		EntityRedirect $redirect,
+		$summary,
+		User $user,
+		$flags = 0,
+		$baseRevisionId = false,
+		array $tags = []
+	): int {
 		if ( !( $redirect->getEntityId() instanceof ItemId ) ) {
 			throw new StorageException( 'Entity type does not support redirects: ' . $redirect->getEntityId()->getEntityType() );
 		}
@@ -511,30 +459,11 @@ class MockRepository implements
 		return $revisionId;
 	}
 
-	/**
-	 * Deletes the given entity in some underlying storage mechanism.
-	 *
-	 * @param EntityId $entityId
-	 * @param string $reason the reason for deletion
-	 * @param User $user
-	 */
-	public function deleteEntity( EntityId $entityId, $reason, User $user ) {
+	public function deleteEntity( EntityId $entityId, $reason, User $user ): void {
 		$this->removeEntity( $entityId );
 	}
 
-	/**
-	 * Check if no edits were made by other users since the given revision.
-	 * This makes the assumption that revision ids are monotonically increasing.
-	 *
-	 * @see \MediaWiki\EditPage\EditPage::userWasLastToEdit
-	 *
-	 * @param User $user
-	 * @param EntityId $entityId the entity to check
-	 * @param int $lastRevisionId the revision to check from
-	 *
-	 * @return bool
-	 */
-	public function userWasLastToEdit( User $user, EntityId $entityId, $lastRevisionId ) {
+	public function userWasLastToEdit( User $user, EntityId $entityId, $lastRevisionId ): bool {
 		$key = $entityId->getSerialization();
 		if ( !isset( $this->entities[$key] ) ) {
 			return false;
@@ -552,14 +481,7 @@ class MockRepository implements
 		return true;
 	}
 
-	/**
-	 * Watches or unwatches the entity.
-	 *
-	 * @param User $user
-	 * @param EntityId $entityId the entity to watch
-	 * @param bool $watch whether to watch or unwatch the page.
-	 */
-	public function updateWatchlist( User $user, EntityId $entityId, $watch ) {
+	public function updateWatchlist( User $user, EntityId $entityId, $watch ): void {
 		if ( $watch ) {
 			$this->watchlist[ $user->getName() ][ $entityId->getSerialization() ] = true;
 		} else {
@@ -567,24 +489,11 @@ class MockRepository implements
 		}
 	}
 
-	/**
-	 * Determines whether the given user is watching the given item
-	 *
-	 * @param User $user
-	 * @param EntityId $entityId the entity to watch
-	 *
-	 * @return bool
-	 */
-	public function isWatching( User $user, EntityId $entityId ) {
+	public function isWatching( User $user, EntityId $entityId ): bool {
 		return isset( $this->watchlist[ $user->getName() ][ $entityId->getSerialization() ] );
 	}
 
-	/**
-	 * @param EntityId $id
-	 *
-	 * @throws StorageException
-	 */
-	private function updateMaxNumericId( EntityId $id ) {
+	private function updateMaxNumericId( EntityId $id ): void {
 		if ( !( $id instanceof Int32EntityId ) ) {
 			return;
 		}
@@ -592,14 +501,7 @@ class MockRepository implements
 		$this->maxEntityId = max( $this->maxEntityId, $id->getNumericId() );
 	}
 
-	/**
-	 * @see EntityStore::assignFreshId
-	 *
-	 * @param EntityDocument $entity
-	 *
-	 * @throws InvalidArgumentException when the entity type does not support setting numeric ids.
-	 */
-	public function assignFreshId( EntityDocument $entity ) {
+	public function assignFreshId( EntityDocument $entity ): void {
 		//TODO: Find a canonical way to generate an EntityId from the maxId number.
 		$numericId = ++$this->maxEntityId;
 
@@ -616,12 +518,7 @@ class MockRepository implements
 		throw new \RuntimeException( 'Cannot create a new ID for non-items and non-properties' );
 	}
 
-	/**
-	 * @param string $idString
-	 *
-	 * @return ItemId|PropertyId
-	 */
-	private function parseId( $idString ) {
+	private function parseId( string $idString ): EntityId {
 		$parser = new BasicEntityIdParser();
 		return $parser->parse( $idString );
 	}
@@ -633,7 +530,13 @@ class MockRepository implements
 	 * @param User|string $user
 	 * @param string[] $tags
 	 */
-	private function putLog( $revisionId, $entityId, $summary, $user, array $tags = [] ) {
+	private function putLog(
+		int $revisionId,
+		$entityId,
+		string $summary,
+		$user,
+		array $tags = []
+	): void {
 		if ( $entityId instanceof EntityId ) {
 			$entityId = $entityId->getSerialization();
 		}
@@ -659,7 +562,7 @@ class MockRepository implements
 	 * @return array|null An associative array containing the fields
 	 * 'revision', 'entity', 'summary', 'user', and 'tags'.
 	 */
-	public function getLogEntry( $revisionId ) {
+	public function getLogEntry( int $revisionId ): ?array {
 		return array_key_exists( $revisionId, $this->log ) ? $this->log[$revisionId] : null;
 	}
 
@@ -672,7 +575,7 @@ class MockRepository implements
 	 * @return array|null An associative array containing the fields
 	 * 'revision', 'entity', 'summary', 'user', and 'tags'.
 	 */
-	public function getLatestLogEntryFor( $entityId ) {
+	public function getLatestLogEntryFor( $entityId ): ?array {
 		if ( $entityId instanceof EntityId ) {
 			$entityId = $entityId->getSerialization();
 		}
@@ -690,14 +593,7 @@ class MockRepository implements
 		return null;
 	}
 
-	/**
-	 * Returns the IDs that redirect to (are aliases of) the given target entity.
-	 *
-	 * @param EntityId $targetId
-	 *
-	 * @return EntityId[]
-	 */
-	public function getRedirectIds( EntityId $targetId ) {
+	public function getRedirectIds( EntityId $targetId ): array {
 		$redirects = [];
 
 		foreach ( $this->redirects as $redirRev ) {
@@ -710,17 +606,7 @@ class MockRepository implements
 		return $redirects;
 	}
 
-	/**
-	 * Returns the redirect target associated with the given redirect ID.
-	 *
-	 * @param EntityId $entityId
-	 * @param string $forUpdate
-	 *
-	 * @return EntityId|null The ID of the redirect target, or null if $entityId
-	 *         does not refer to a redirect
-	 * @throws EntityRedirectLookupException
-	 */
-	public function getRedirectForEntityId( EntityId $entityId, $forUpdate = '' ) {
+	public function getRedirectForEntityId( EntityId $entityId, $forUpdate = '' ): ?EntityId {
 		$key = $entityId->getSerialization();
 
 		if ( isset( $this->redirects[$key] ) ) {
@@ -734,14 +620,7 @@ class MockRepository implements
 		throw new EntityRedirectLookupException( $entityId );
 	}
 
-	/**
-	 * @see EntityStore::canCreateWithCustomId
-	 *
-	 * @param EntityId $id
-	 *
-	 * @return bool
-	 */
-	public function canCreateWithCustomId( EntityId $id ) {
+	public function canCreateWithCustomId( EntityId $id ): bool {
 		return false;
 	}
 

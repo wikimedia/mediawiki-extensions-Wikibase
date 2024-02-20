@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Specials;
 
 use Exception;
@@ -30,31 +32,11 @@ use Wikibase\Repo\Localizer\ExceptionLocalizer;
 class SpecialMergeItems extends SpecialWikibasePage {
 
 	private AnonymousEditWarningBuilder $anonymousEditWarningBuilder;
-
-	/**
-	 * @var EntityIdParser
-	 */
-	private $idParser;
-
-	/**
-	 * @var ExceptionLocalizer
-	 */
-	private $exceptionLocalizer;
-
-	/**
-	 * @var ItemMergeInteractor
-	 */
-	private $interactor;
-
-	/**
-	 * @var EntityTitleLookup
-	 */
-	private $titleLookup;
-
-	/**
-	 * @var TokenCheckInteractor
-	 */
-	private $tokenCheck;
+	private EntityIdParser $idParser;
+	private ExceptionLocalizer $exceptionLocalizer;
+	private ItemMergeInteractor $interactor;
+	private EntityTitleLookup $titleLookup;
+	private TokenCheckInteractor $tokenCheck;
 	private bool $isMobileView;
 
 	public function __construct(
@@ -82,12 +64,9 @@ class SpecialMergeItems extends SpecialWikibasePage {
 	}
 
 	/**
-	 * @param string $name
-	 *
-	 * @return ItemId|null
 	 * @throws UserInputException
 	 */
-	private function getItemIdParam( $name ) {
+	private function getItemIdParam( string $name ): ?ItemId {
 		$rawId = $this->getTextParam( $name );
 
 		if ( $rawId === '' ) {
@@ -115,13 +94,13 @@ class SpecialMergeItems extends SpecialWikibasePage {
 		}
 	}
 
-	private function getStringListParam( $name ) {
+	private function getStringListParam( string $name ): array {
 		$list = $this->getTextParam( $name );
 
 		return $list === '' ? [] : explode( '|', $list );
 	}
 
-	private function getTextParam( $name ) {
+	private function getTextParam( string $name ): string {
 		return trim( $this->getRequest()->getText( $name, '' ) );
 	}
 
@@ -170,7 +149,7 @@ class SpecialMergeItems extends SpecialWikibasePage {
 		$this->createForm();
 	}
 
-	protected function showExceptionMessage( Exception $ex ) {
+	protected function showExceptionMessage( Exception $ex ): void {
 		$msg = $this->exceptionLocalizer->getExceptionMessage( $ex );
 
 		$this->showErrorHTML( $msg->parse() );
@@ -188,7 +167,7 @@ class SpecialMergeItems extends SpecialWikibasePage {
 	 * @param string[] $ignoreConflicts
 	 * @param string $summary
 	 */
-	private function mergeItems( ItemId $fromId, ItemId $toId, array $ignoreConflicts, $summary ) {
+	private function mergeItems( ItemId $fromId, ItemId $toId, array $ignoreConflicts, $summary ): void {
 		$this->tokenCheck->checkRequestToken( $this->getContext(), 'wpEditToken' );
 
 		/** @var EntityRevision $newRevisionFrom */
@@ -251,7 +230,7 @@ class SpecialMergeItems extends SpecialWikibasePage {
 	/**
 	 * Creates the HTML form for merging two items.
 	 */
-	protected function createForm() {
+	protected function createForm(): void {
 		// T324991
 		if ( !$this->isMobileView ) {
 			$this->getOutput()->addModules( 'wikibase.special.mergeItems' );
@@ -281,7 +260,7 @@ class SpecialMergeItems extends SpecialWikibasePage {
 	/**
 	 * @return array[]
 	 */
-	protected function getFormElements() {
+	protected function getFormElements(): array {
 		return [
 			'fromid' => [
 				'name' => 'fromid',

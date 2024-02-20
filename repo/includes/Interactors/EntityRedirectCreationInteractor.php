@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Interactors;
 
 use DerivativeContext;
@@ -31,41 +33,13 @@ use Wikibase\Repo\SummaryFormatter;
  */
 abstract class EntityRedirectCreationInteractor {
 
-	/**
-	 * @var EntityTitleStoreLookup
-	 */
-	private $entityTitleLookup;
-
-	/**
-	 * @var EntityRevisionLookup
-	 */
-	private $entityRevisionLookup;
-
-	/**
-	 * @var EntityStore
-	 */
-	private $entityStore;
-
-	/**
-	 * @var EntityPermissionChecker
-	 */
-	private $permissionChecker;
-
-	/**
-	 * @var SummaryFormatter
-	 */
-	private $summaryFormatter;
-
-	/**
-	 * @var EditFilterHookRunner
-	 */
-	private $editFilterHookRunner;
-
-	/**
-	 * @var EntityRedirectTargetLookup
-	 */
-	private $entityRedirectLookup;
-
+	private EntityTitleStoreLookup $entityTitleLookup;
+	private EntityRevisionLookup $entityRevisionLookup;
+	private EntityStore $entityStore;
+	private EntityPermissionChecker $permissionChecker;
+	private SummaryFormatter $summaryFormatter;
+	private EditFilterHookRunner $editFilterHookRunner;
+	private EntityRedirectTargetLookup $entityRedirectLookup;
 	private TempUserCreator $tempUserCreator;
 
 	public function __construct(
@@ -164,7 +138,7 @@ abstract class EntityRedirectCreationInteractor {
 	 *
 	 * @throws RedirectCreationException
 	 */
-	private function checkCanCreateRedirect( EntityId $entityId ) {
+	private function checkCanCreateRedirect( EntityId $entityId ): void {
 		try {
 			$revision = $this->entityRevisionLookup->getEntityRevision(
 				$entityId,
@@ -197,7 +171,7 @@ abstract class EntityRedirectCreationInteractor {
 	 *
 	 * @throws RedirectCreationException
 	 */
-	private function checkExistsNoRedirect( EntityId $entityId ) {
+	private function checkExistsNoRedirect( EntityId $entityId ): void {
 		try {
 			$redirect = $this->entityRedirectLookup->getRedirectForEntityId(
 				$entityId,
@@ -227,7 +201,7 @@ abstract class EntityRedirectCreationInteractor {
 	 *
 	 * @throws RedirectCreationException
 	 */
-	private function checkCompatible( EntityId $fromId, EntityId $toId ) {
+	private function checkCompatible( EntityId $fromId, EntityId $toId ): void {
 		if ( $fromId->getEntityType() !== $toId->getEntityType() ) {
 			throw new RedirectCreationException(
 				'Incompatible entity types',
@@ -236,7 +210,7 @@ abstract class EntityRedirectCreationInteractor {
 		}
 	}
 
-	private function checkSourceAndTargetNotTheSame( EntityId $fromId, EntityId $toId ) {
+	private function checkSourceAndTargetNotTheSame( EntityId $fromId, EntityId $toId ): void {
 		if ( $fromId->getSerialization() === $toId->getSerialization() ) {
 			throw new RedirectCreationException(
 				'Cannot redirect an entity to itself.',
