@@ -84,6 +84,7 @@
 	"wikibase-client-data-bridge-dialog-title": "Labot $1",
 	"wikibase-client-data-bridge-permissions-error": "Tev nav atļauts labot šo vērtību {{PLURAL:$1|šādu iemeslu|šāda iemesla|šādu iemeslu}} dēļ:",
 	"wikibase-client-data-bridge-permissions-error-info": "Vairāk informācijas",
+	"wikibase-client-data-bridge-blocked-on-client-head": "<strong>Tavs lietotājvārds vai IP adrese ir bloķēta šajā vikivietnē.</strong>",
 	"wikibase-client-data-bridge-permissions-error-unknown-head": "Nezināma atļauju kļūda",
 	"wikibase-client-data-bridge-permissions-error-unknown-body": "Šo vērtību nevar labot nezināmu iemeslu dēļ",
 	"wikibase-client-data-bridge-edit-decision-heading": "Lūdzu, izvēlies veiktā labojuma veidu:",

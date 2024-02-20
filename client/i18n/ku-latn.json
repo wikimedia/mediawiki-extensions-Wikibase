@@ -16,7 +16,7 @@
 	"wikibase-comment-update": "endamê/a {{WBREPONAME}}",
 	"wikibase-comment-sitelink-add": "Girêdana ziman lê hat zêdekirin:$1",
 	"wikibase-comment-sitelink-remove": "Girêdana ziman hat jêbirin:$1",
-	"wikibase-dataitem": "Hêmana {{WBREPONAME}}",
+	"wikibase-dataitem": "Hêmana {{GRAMMAR:oblique|{{WBREPONAME}}}}",
 	"wikibase-editlinks": "Girêdanan biguhêre",
 	"wikibase-editlinkstitle": "Girêdanên navzimanî sererast bike",
 	"wikibase-addlinkstitle": "Girêdanên navzimanî lê zêde bike",

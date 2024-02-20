@@ -3,9 +3,14 @@
 		"authors": [
 			"Bernardgift",
 			"Okon Ibiono",
-			"Uduakj"
+			"Uduakj",
+			"Ekemini5",
+			"Enojohn"
 		]
 	},
+	"wikibase-dataitem": "{{WBREPONAME}} mme nkpo",
+	"wikibase-editlinks": "Kpugho udiana",
+	"wikibase-linkitem-addlinks": "Diam udiana",
 	"wikibase-linkitem-title": "Adi diana ye ikpa nwed",
 	"wikibase-linkitem-linkpage": "Adi diana ye ikpa nwed",
 	"wikibase-linkitem-selectlink": "Mbok dad site ye ikpa nwed se ayem Ikama isangha ye ikpa nwed adam.",

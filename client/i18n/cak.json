@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Chocoj"
+			"Chocoj",
+			"CeciMagi"
 		]
 	},
 	"tooltip-t-wikibase": "Okb'äl pa yakb'äl ximon samajib'äl",
@@ -9,6 +10,8 @@
 	"wikibase-dataitem": "{{WBREPONAME}} rutzijol na'oj",
 	"wikibase-editlinks": "Tinuk' taq ximoj",
 	"wikibase-editlinkstitle": "Tajala' ri jalch'ab'äl okb'äl",
+	"wikibase-linkitem-addlinks": "ruya'ik ximonel",
+	"wikibase-linkitem-input-page": "ruxaq k'am",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-show": "Tak'utu'",
 	"wikibase-rc-wikibase-edit-letter": "T",
