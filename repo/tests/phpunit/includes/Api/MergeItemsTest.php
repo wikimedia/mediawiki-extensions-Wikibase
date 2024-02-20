@@ -9,11 +9,11 @@ use ApiUsageException;
 use ChangeTags;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Languages\LanguageNameUtils;
-use MediaWiki\MainConfigNames;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Site\SiteLookup;
 use MediaWiki\Status\Status;
+use MediaWiki\Tests\User\TempUser\TempUserTestTrait;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
 use MediaWikiIntegrationTestCase;
@@ -58,6 +58,8 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Lucie-Aimée Kaffee
  */
 class MergeItemsTest extends MediaWikiIntegrationTestCase {
+
+	use TempUserTestTrait;
 
 	private ?MockRepository $mockRepository = null;
 	private ?EntityModificationTestHelper $entityModificationTestHelper = null;
@@ -571,10 +573,7 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testMergeTempUserCreatedRedirect(): void {
-		$autoCreateTempUser = $this->getConfVar( MainConfigNames::AutoCreateTempUser );
-		$autoCreateTempUser['enabled'] = true;
-		$this->overrideConfigValue( MainConfigNames::AutoCreateTempUser, $autoCreateTempUser );
-		$this->setGroupPermissions( '*', 'createaccount', true );
+		$this->enableAutoCreateTempUser();
 		$this->setTemporaryHook( 'TempUserCreatedRedirect', function (
 			$session,
 			$user,

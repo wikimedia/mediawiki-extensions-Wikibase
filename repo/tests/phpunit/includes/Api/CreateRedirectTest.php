@@ -6,10 +6,10 @@ namespace Wikibase\Repo\Tests\Api;
 
 use ApiMain;
 use ApiUsageException;
-use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Status\Status;
+use MediaWiki\Tests\User\TempUser\TempUserTestTrait;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
 use MediaWikiIntegrationTestCase;
@@ -42,6 +42,8 @@ use Wikimedia\TestingAccessWrapper;
  * @author Daniel Kinzler
  */
 class CreateRedirectTest extends MediaWikiIntegrationTestCase {
+
+	use TempUserTestTrait;
 
 	private ?MockRepository $mockRepository = null;
 
@@ -285,10 +287,7 @@ class CreateRedirectTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testRedirect_TempUserCreatedRedirect(): void {
-		$autoCreateTempUser = $this->getConfVar( MainConfigNames::AutoCreateTempUser );
-		$autoCreateTempUser['enabled'] = true;
-		$this->overrideConfigValue( MainConfigNames::AutoCreateTempUser, $autoCreateTempUser );
-		$this->setGroupPermissions( '*', 'createaccount', true );
+		$this->enableAutoCreateTempUser();
 		$this->setTemporaryHook( 'TempUserCreatedRedirect', function (
 			$session,
 			$user,

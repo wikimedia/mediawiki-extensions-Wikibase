@@ -10,6 +10,7 @@ use MediaWiki\MainConfigNames;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Request\WebResponse;
 use MediaWiki\Status\Status;
+use MediaWiki\Tests\User\TempUser\TempUserTestTrait;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
 use PHPUnit\Framework\Error\Error;
@@ -45,6 +46,7 @@ use Wikibase\Repo\WikibaseRepo;
 class SpecialRedirectEntityTest extends SpecialPageTestBase {
 
 	use HtmlAssertionHelpers;
+	use TempUserTestTrait;
 
 	private ?MockRepository $mockRepository = null;
 	private ?EntityModificationTestHelper $entityModificationTestHelper = null;
@@ -272,13 +274,8 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 	}
 
 	public function testTempUserCreatedRedirect(): void {
-		$autoCreateTempUser = $this->getConfVar( MainConfigNames::AutoCreateTempUser );
-		$autoCreateTempUser['enabled'] = true;
-		$this->overrideConfigValues( [
-			MainConfigNames::AutoCreateTempUser => $autoCreateTempUser,
-			MainConfigNames::LanguageCode => 'en',
-		] );
-		$this->setGroupPermissions( '*', 'createaccount', true );
+		$this->enableAutoCreateTempUser();
+		$this->overrideConfigValue( MainConfigNames::LanguageCode, 'en' );
 
 		$params = [
 			'fromid' => 'Q1',

@@ -10,6 +10,7 @@ use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Site\MediaWikiPageNameNormalizer;
 use MediaWiki\Site\Site;
 use MediaWiki\Site\SiteStore;
+use MediaWiki\Tests\User\TempUser\TempUserTestTrait;
 use MediaWiki\User\UserIdentity;
 use PHPUnit\Framework\MockObject\MockObject;
 use ValueValidators\Error;
@@ -43,6 +44,8 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Addshore
  */
 class SpecialNewItemTest extends SpecialNewEntityTestCase {
+
+	use TempUserTestTrait;
 
 	private const BADGE_GOOD_ARTICLE = 'Q17437798';
 	private const BADGE_SITELINK_TO_REDIRECT = 'Q70893996';
@@ -407,9 +410,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 	}
 
 	public function testTempUserCreatedRedirect(): void {
-		$autoCreateTempUser = $this->getConfVar( 'AutoCreateTempUser' );
-		$autoCreateTempUser['enabled'] = true;
-		$this->overrideConfigValue( 'AutoCreateTempUser', $autoCreateTempUser );
+		$this->enableAutoCreateTempUser();
 		$formData = [
 			SpecialNewItem::FIELD_LANG => 'en',
 			SpecialNewItem::FIELD_LABEL => __METHOD__,
