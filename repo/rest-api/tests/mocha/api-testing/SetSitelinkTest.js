@@ -1,6 +1,6 @@
 'use strict';
 
-const { assert, utils } = require( 'api-testing' );
+const { action, assert, utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const {
@@ -10,17 +10,17 @@ const {
 } = require( '../helpers/RequestBuilderFactory' );
 const { formatSitelinkEditSummary } = require( '../helpers/formatEditSummaries' );
 const { makeEtag } = require( '../helpers/httpHelper' );
-const { createEntity, createLocalSitelink, getLocalSiteId } = require( '../helpers/entityHelper' );
+const { createEntity, getLocalSiteId } = require( '../helpers/entityHelper' );
 
 describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 	let testItemId;
 	let siteId;
-	let testSitelink;
-	const linkedArticle = utils.title( 'Article-linked-to-test-item-' );
+	const testTitle1 = utils.title( 'Sitelink-test-article1-' );
+	const testTitle2 = utils.title( 'Sitelink-test-article2-' );
 	let originalLastModified;
 	let originalRevisionId;
 
-	function assertValidResponse( response, status, title, badges ) {
+	function assertValidSuccessResponse( response, status, title, badges ) {
 		expect( response ).to.have.status( status );
 		assert.strictEqual( response.header[ 'content-type' ], 'application/json' );
 		assert.isAbove( new Date( response.header[ 'last-modified' ] ), originalLastModified );
@@ -38,10 +38,11 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 	before( async () => {
 		const createItemResponse = await createEntity( 'item', {} );
 		testItemId = createItemResponse.entity.id;
-		testSitelink = { title: utils.title( 'test-title-' ), badges: [ ALLOWED_BADGES[ 2 ] ] };
 
-		await createLocalSitelink( testItemId, linkedArticle );
 		siteId = await getLocalSiteId();
+
+		await action.getAnon().edit( testTitle1, { text: 'sitelink test' } );
+		await action.getAnon().edit( testTitle2, { text: 'sitelink test' } );
 
 		const testItemCreationMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 		originalLastModified = new Date( testItemCreationMetadata.timestamp );
@@ -53,22 +54,26 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 		} );
 	} );
 
-	describe( '20x success response ', () => {
+	describe( '201', () => {
+		afterEach( async () => {
+			await newRemoveSitelinkRequestBuilder( testItemId, siteId ).assertValidRequest().makeRequest();
+		} );
 
 		it( 'can add a sitelink with badges and edit metadata', async () => {
-			await newRemoveSitelinkRequestBuilder( testItemId, siteId ).assertValidRequest().makeRequest();
+			const badges = [ ALLOWED_BADGES[ 0 ], ALLOWED_BADGES[ 1 ] ];
+			const user = await action.robby(); // robby is a bot
+			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test' );
+			const comment = 'omg – i created a sitelink!';
 
-			const testTitle = utils.title( 'test-title-' );
-			const testBadges = [ ALLOWED_BADGES[ 0 ], ALLOWED_BADGES[ 1 ] ];
-			const testComment = 'omg – i created a sitelink!';
-
-			const newSitelink = { title: testTitle, badges: testBadges };
-			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, newSitelink )
+			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, { title: testTitle1, badges } )
+				.withJsonBodyParam( 'comment', comment )
+				.withJsonBodyParam( 'tags', [ tag ] )
+				.withJsonBodyParam( 'bot', true )
+				.withUser( user )
 				.assertValidRequest()
-				.withJsonBodyParam( 'comment', testComment )
 				.makeRequest();
 
-			assertValidResponse( response, 201, newSitelink.title, newSitelink.badges );
+			assertValidSuccessResponse( response, 201, testTitle1, badges );
 
 			const editMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 			assert.strictEqual(
@@ -76,24 +81,19 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 				formatSitelinkEditSummary(
 					'add-both',
 					siteId,
-					testTitle,
-					testBadges,
-					testComment
+					testTitle1,
+					badges,
+					comment
 				)
 			);
 		} );
 
-		it( 'can add a sitelink without badges (edit metadata ommited)', async () => {
-			await newRemoveSitelinkRequestBuilder( testItemId, siteId ).assertValidRequest().makeRequest();
-
-			const testTitle = utils.title( 'test-title-' );
-
-			const newSitelink = { title: testTitle };
-			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, newSitelink )
+		it( 'can add a sitelink without badges (edit metadata omitted)', async () => {
+			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, { title: testTitle1 } )
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidResponse( response, 201, newSitelink.title, [] );
+			assertValidSuccessResponse( response, 201, testTitle1, [] );
 
 			const editMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 			assert.strictEqual(
@@ -101,72 +101,60 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 				formatSitelinkEditSummary(
 					'add',
 					siteId,
-					testTitle
+					testTitle1
 				)
 			);
 		} );
+	} );
 
-		it( 'can replace a sitelink with badges and edit metadata', async () => {
-			const testTitle = utils.title( 'test-title-' );
-			const testBadges = [ ALLOWED_BADGES[ 0 ] ];
-			const testComment = 'omg – i replaced a sitelink!';
+	describe( '200', () => {
+		beforeEach( async () => {
+			await newSetSitelinkRequestBuilder( testItemId, siteId, { title: testTitle1 } ).makeRequest();
+		} );
 
-			const newSitelink = { title: testTitle, badges: testBadges };
-			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, newSitelink )
-				.withJsonBodyParam( 'comment', testComment )
+		it( 'can replace a sitelink with badges (edit metadata omitted)', async () => {
+			const badges = [ ALLOWED_BADGES[ 0 ] ];
+			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, { title: testTitle2, badges } )
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidResponse( response, 200, newSitelink.title, newSitelink.badges );
+			assertValidSuccessResponse( response, 200, testTitle2, badges );
 			const editMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 			assert.strictEqual(
 				editMetadata.comment,
 				formatSitelinkEditSummary(
 					'set-both',
 					siteId,
-					testTitle,
-					testBadges,
-					testComment
+					testTitle2,
+					badges
 				)
 			);
 		} );
 
 		it( 'can replace a sitelink without badges (edit metadata omitted)', async () => {
-			const testTitle = utils.title( 'test-title-' );
-
-			const newSitelink = { title: testTitle };
-			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, newSitelink )
+			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, { title: testTitle2 } )
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidResponse( response, 200, newSitelink.title, [] );
+			assertValidSuccessResponse( response, 200, testTitle2, [] );
 			const editMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 			assert.strictEqual(
 				editMetadata.comment,
 				formatSitelinkEditSummary(
 					'set',
 					siteId,
-					testTitle
+					testTitle2
 				)
 			);
-
 		} );
 
-		it( 'can add/replace only the badges of a sitelink with edit metadata', async () => {
-			const testTitle = utils.title( 'test-title-' );
-			const testBadges = [ ALLOWED_BADGES[ 0 ] ];
-			const testComment = "omg – i changed a sitelink's badges!";
-
-			await newSetSitelinkRequestBuilder( testItemId, siteId, { title: testTitle } )
-				.makeRequest();
-
-			const sitelinkWithChangedBadges = { title: testTitle, badges: testBadges };
-			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, sitelinkWithChangedBadges )
-				.withJsonBodyParam( 'comment', testComment )
+		it( 'can add/replace only the badges of a sitelink (edit metadata omitted)', async () => {
+			const badges = [ ALLOWED_BADGES[ 0 ] ];
+			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, { title: testTitle1, badges } )
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidResponse( response, 200, sitelinkWithChangedBadges.title, sitelinkWithChangedBadges.badges );
+			assertValidSuccessResponse( response, 200, testTitle1, badges );
 			const editMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 			assert.strictEqual(
 				editMetadata.comment,
@@ -174,32 +162,25 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 					'set-badges',
 					siteId,
 					null,
-					testBadges,
-					testComment
+					badges
 				)
 			);
 		} );
 
 		it( 'idempotency check: can set the same sitelink twice', async () => {
-			const newSitelink = { title: utils.title( 'test-title-' ), badges: [ ALLOWED_BADGES[ 1 ] ] };
-			let response = await newSetSitelinkRequestBuilder( testItemId, siteId, newSitelink )
-				.assertValidRequest()
-				.makeRequest();
+			const newSitelink = { title: testTitle2, badges: [ ALLOWED_BADGES[ 1 ] ] };
+			const reqBuilder = await newSetSitelinkRequestBuilder( testItemId, siteId, newSitelink )
+				.assertValidRequest();
 
-			assertValidResponse( response, 200, newSitelink.title, newSitelink.badges );
-
-			response = await newSetSitelinkRequestBuilder( testItemId, siteId, newSitelink )
-				.assertValidRequest()
-				.makeRequest();
-
-			assertValidResponse( response, 200, newSitelink.title, newSitelink.badges );
+			assertValidSuccessResponse( await reqBuilder.makeRequest(), 200, newSitelink.title, newSitelink.badges );
+			assertValidSuccessResponse( await reqBuilder.makeRequest(), 200, newSitelink.title, newSitelink.badges );
 		} );
 	} );
 
 	describe( '400', () => {
 		it( 'invalid item ID', async () => {
 			const invalidItemId = 'X123';
-			const response = await newSetSitelinkRequestBuilder( invalidItemId, siteId, testSitelink )
+			const response = await newSetSitelinkRequestBuilder( invalidItemId, siteId, { title: testTitle1 } )
 				.assertInvalidRequest()
 				.makeRequest();
 
@@ -209,7 +190,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 
 		it( 'invalid site ID', async () => {
 			const invalidSiteId = 'not-a-valid-site-id';
-			const response = await newSetSitelinkRequestBuilder( testItemId, invalidSiteId, testSitelink )
+			const response = await newSetSitelinkRequestBuilder( testItemId, invalidSiteId, { title: testTitle1 } )
 				// .assertInvalidRequest() - valid per OAS because it only checks whether it is a string
 				.makeRequest();
 
@@ -219,7 +200,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 
 		it( 'invalid edit tag', async () => {
 			const invalidEditTag = 'invalid tag';
-			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, testSitelink )
+			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, { title: testTitle1 } )
 				.withJsonBodyParam( 'tags', [ invalidEditTag ] ).assertValidRequest().makeRequest();
 
 			assertValidErrorResponse( response, 'invalid-edit-tag' );
@@ -227,7 +208,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'invalid edit tag type', async () => {
-			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, testSitelink )
+			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, { title: testTitle1 } )
 				.withJsonBodyParam( 'tags', 'not an array' ).assertInvalidRequest().makeRequest();
 
 			expect( response ).to.have.status( 400 );
@@ -237,7 +218,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'invalid bot flag type', async () => {
-			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, testSitelink )
+			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, { title: testTitle1 } )
 				.withJsonBodyParam( 'bot', 'not boolean' ).assertInvalidRequest().makeRequest();
 
 			expect( response ).to.have.status( 400 );
@@ -248,7 +229,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 
 		it( 'comment too long', async () => {
 			const comment = 'x'.repeat( 501 );
-			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, testSitelink )
+			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, { title: testTitle1 } )
 				.withJsonBodyParam( 'comment', comment ).assertValidRequest().makeRequest();
 
 			expect( response ).to.have.status( 400 );
@@ -257,7 +238,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'invalid comment type', async () => {
-			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, testSitelink )
+			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, { title: testTitle1 } )
 				.withJsonBodyParam( 'comment', 1234 ).assertInvalidRequest().makeRequest();
 
 			expect( response ).to.have.status( 400 );
@@ -267,7 +248,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'title is empty', async () => {
-			const newSitelinkWithEmptyTitle = { title: '', badges: [ ALLOWED_BADGES[ 0 ] ] };
+			const newSitelinkWithEmptyTitle = { title: '' };
 			const response = await newSetSitelinkRequestBuilder(
 				testItemId,
 				siteId,
@@ -293,7 +274,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'invalid title', async () => {
-			const newSitelinkWithInvalidTitle = { title: 'invalid title%00', badges: [ ALLOWED_BADGES[ 0 ] ] };
+			const newSitelinkWithInvalidTitle = { title: 'invalid title%00' };
 			const response = await newSetSitelinkRequestBuilder(
 				testItemId,
 				siteId,
@@ -338,7 +319,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'not an allowed badge', async () => {
-			const badge = 'Q17';
+			const badge = testItemId;
 			const sitelink = { title: utils.title( 'test-title-' ), badges: [ badge ] };
 			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, sitelink ).makeRequest();
 
@@ -354,7 +335,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 	describe( '404', () => {
 		it( 'item not found', async () => {
 			const itemId = 'Q999999';
-			const response = await newSetSitelinkRequestBuilder( itemId, siteId, testSitelink )
+			const response = await newSetSitelinkRequestBuilder( itemId, siteId, { title: testTitle1 } )
 				.assertValidRequest()
 				.makeRequest();
 
@@ -370,7 +351,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 			const redirectTarget = testItemId;
 			const redirectSource = await entityHelper.createRedirectForItem( redirectTarget );
 
-			const response = await newSetSitelinkRequestBuilder( redirectSource, siteId, testSitelink )
+			const response = await newSetSitelinkRequestBuilder( redirectSource, siteId, { title: testTitle1 } )
 				.assertValidRequest()
 				.makeRequest();
 
