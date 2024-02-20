@@ -55,7 +55,7 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 
 	describe( '200 OK', () => {
 		it( 'can add a sitelink', async () => {
-			const sitelink = { title: utils.title( 'test-title-' ), badges: [ ALLOWED_BADGES[ 0 ] ] };
+			const sitelink = { title: linkedArticle, badges: [ ALLOWED_BADGES[ 0 ] ] };
 			const response = await newPatchSitelinksRequestBuilder(
 				testItemId,
 				[ { op: 'add', path: `/${siteId}`, value: sitelink } ]
@@ -65,7 +65,7 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'can patch sitelinks with edit metadata', async () => {
-			const sitelink = { title: utils.title( 'test-title-' ), badges: [ ALLOWED_BADGES[ 1 ] ] };
+			const sitelink = { title: linkedArticle, badges: [ ALLOWED_BADGES[ 1 ] ] };
 			const user = await action.robby(); // robby is a bot
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test' );
 			const editSummary = 'I made a patch';
