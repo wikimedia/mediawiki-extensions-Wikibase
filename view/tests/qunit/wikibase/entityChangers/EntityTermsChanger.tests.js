@@ -137,8 +137,11 @@
 		return entityTermsChanger.save(
 			newFingerprint().withLabel( 'language', 'label' ),
 			currentFingerprint().empty()
-		).done( function ( savedFingerprint ) {
-			assert.strictEqual( savedFingerprint.getLabelFor( 'language' ).getText(), 'normalized label' );
+		).done( function ( entityTermChangeResult ) {
+			assert.strictEqual(
+				entityTermChangeResult.getSavedValue().getLabelFor( 'language' ).getText(),
+				'normalized label'
+			);
 		} );
 	} );
 
@@ -279,8 +282,11 @@
 		entityTermsChanger.save(
 			newFingerprint().withDescription( 'language', 'description' ),
 			currentFingerprint().empty()
-		).done( function ( savedFingerprint ) {
-			assert.strictEqual( savedFingerprint.getDescriptionFor( 'language' ).getText(), 'normalized description' );
+		).done( function ( entityTermChangeResult ) {
+			assert.strictEqual(
+				entityTermChangeResult.getSavedValue().getDescriptionFor( 'language' ).getText(),
+				'normalized description'
+			);
 		} ).fail( failOnError( assert ) ).always( done );
 	} );
 
@@ -410,8 +416,11 @@
 		return entityTermsChanger.save(
 			newFingerprint().withAliases( 'language', [ 'alias' ] ),
 			currentFingerprint().empty()
-		).done( function ( savedFingerprint ) {
-			assert.deepEqual( savedFingerprint.getAliasesFor( 'language' ).getTexts(), [ 'normalized alias' ] );
+		).done( function ( entityTermChangeResult ) {
+			assert.deepEqual(
+				entityTermChangeResult.getSavedValue().getAliasesFor( 'language' ).getTexts(),
+				[ 'normalized alias' ]
+			);
 		} ).fail( failOnError( assert ) ).always( done );
 	} );
 
@@ -440,6 +449,44 @@
 			assert.strictEqual( error.code, 'errorCode' );
 			assert.strictEqual( error.context.type, 'aliases' );
 			assert.true( error.context.value.equals( new datamodel.MultiTerm( 'language', [ 'alias' ] ) ) );
+		} ).always( done );
+	} );
+
+	QUnit.test( 'save tracks temp user redirect url if supplied', function ( assert ) {
+		const target = 'https://wiki.example';
+		var done = assert.async();
+		var api = {
+			setDescription: sinon.spy( function () {
+				return $.Deferred().resolve( {
+					entity: {
+						descriptions: {
+							langCode: {
+								language: 'langCode',
+								removed: ''
+							}
+						}
+					},
+					tempusercreated: 'SomeUser',
+					tempuserredirect: target
+				} ).promise();
+			} )
+		};
+		var entityTermsChanger = new EntityTermsChanger(
+			api,
+			stubRevisionStoreForRevision( REVISION_ID ),
+			new Item( 'Q1' )
+		);
+
+		return entityTermsChanger.save(
+			newFingerprint().empty(),
+			currentFingerprint().withDescription( 'langCode', 'old description' )
+		).done( function ( entityTermChangeResult ) {
+			assert.true( true, 'save succeeded' );
+			assert.strictEqual(
+				target,
+				entityTermChangeResult.getTempUserWatcher().getRedirectUrl(),
+				'redirect url should be set'
+			);
 		} ).always( done );
 	} );
 

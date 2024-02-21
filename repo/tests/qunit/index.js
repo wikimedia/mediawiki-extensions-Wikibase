@@ -58,6 +58,7 @@
 	require( '../../../view/tests/qunit/wikibase/entityChangers/LabelsChanger.tests.js' );
 	require( '../../../view/tests/qunit/wikibase/entityChangers/SiteLinksChanger.tests.js' );
 	require( '../../../view/tests/qunit/wikibase/entityChangers/SiteLinkSetsChanger.tests.js' );
+	require( '../../../view/tests/qunit/wikibase/entityChangers/TempUserWatcher.tests.js' );
 	require( '../../../view/tests/qunit/wikibase/utilities/ClaimGuidGenerator.tests.js' );
 	require( '../../../view/tests/qunit/wikibase/view/testViewController.js' );
 	require( '../../../view/tests/qunit/wikibase/wikibase.WikibaseContentLanguages.tests.js' );

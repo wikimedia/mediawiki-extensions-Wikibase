@@ -1,7 +1,8 @@
 module.exports = ( function ( wb ) {
 	'use strict';
 
-	var ViewController = require( './ViewController.js' );
+	var ViewController = require( './ViewController.js' ),
+		ENTITY_CHANGERS = wb.entityChangers;
 
 	/**
 	 * A view controller implementation for editing wikibase datamodel values
@@ -120,6 +121,16 @@ module.exports = ( function ( wb ) {
 		btnSave[ enableSave ? 'enable' : 'disable' ]();
 	};
 
+	// Temporary wrapper for portability while we migrate the 'save' API
+	function wrapResultInValueChange( result ) {
+		return {
+			getSavedValue: function () {
+				return result;
+			},
+			getTempUserWatcher: new ENTITY_CHANGERS.TempUserWatcher()
+		};
+	}
+
 	/**
 	 * @param {boolean} [dropValue=false] Whether the current value should be kept and
 	 * persisted or dropped
@@ -147,11 +158,19 @@ module.exports = ( function ( wb ) {
 				? 'wikibase-publish-inprogress'
 				: 'wikibase-save-inprogress'
 		) );
-		this._model.save( this._view.value(), this._value ).done( function ( savedValue ) {
-			self.setValue( savedValue );
-			self._view.value( savedValue );
+		this._model.save( this._view.value(), this._value ).done( function ( valueChangeResult ) {
+			// Handle the case where the model is not yet migrated to return a valueChangeResult
+			// This is currently the case for Senses / Forms - see T358323
+			if ( !valueChangeResult.getSavedValue ) {
+				valueChangeResult = wrapResultInValueChange( valueChangeResult );
+			}
+			self.setValue( valueChangeResult.getSavedValue() );
+			self._view.value( valueChangeResult.getSavedValue() );
 			self._toolbar.toggleActionMessage();
 			self._leaveEditMode( dropValue );
+			if ( valueChangeResult.getTempUserWatcher().getRedirectUrl() ) {
+				window.location.href = valueChangeResult.getTempUserWatcher().getRedirectUrl();
+			}
 		} ).fail( function ( error ) {
 			self._view.enable();
 			self.setError( error );
@@ -176,12 +195,21 @@ module.exports = ( function ( wb ) {
 		if ( this._value ) {
 			promise = this._model.remove( this._value );
 		} else {
-			promise = $.Deferred().resolve().promise();
+			var emptyTempUserWatcher = new ENTITY_CHANGERS.TempUserWatcher();
+			promise = $.Deferred().resolve( emptyTempUserWatcher ).promise();
 		}
-		return promise.done( function () {
+		return promise.done( function ( tempUserWatcher ) {
+			// Handle the case where the model is not yet migrated to return a tempUserWatcher
+			// This is currently the case for Senses / Forms - see T358323
+			if ( !tempUserWatcher || !tempUserWatcher.getRedirectUrl ) {
+				tempUserWatcher = new ENTITY_CHANGERS.TempUserWatcher();
+			}
 			self._value = null;
 			self._toolbar.toggleActionMessage();
 			self._leaveEditMode( true );
+			if ( tempUserWatcher.getRedirectUrl() ) {
+				window.location.href = tempUserWatcher.getRedirectUrl();
+			}
 		} ).fail( function ( error ) {
 			self._view.enable();
 			self.setError( error );

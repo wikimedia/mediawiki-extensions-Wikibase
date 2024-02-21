@@ -167,9 +167,11 @@ return call_user_func( function() {
 				'wikibase/entityChangers/StatementsChangerState.js',
 				'wikibase/entityChangers/DescriptionsChanger.js',
 				'wikibase/entityChangers/EntityTermsChanger.js',
+				'wikibase/entityChangers/ValueChangeResult.js',
 				'wikibase/entityChangers/LabelsChanger.js',
 				'wikibase/entityChangers/SiteLinksChanger.js',
 				'wikibase/entityChangers/SiteLinkSetsChanger.js',
+				'wikibase/entityChangers/TempUserWatcher.js',
 				'wikibase/entityChangers/EntityChangersFactory.js',
 			],
 			'dependencies' => [

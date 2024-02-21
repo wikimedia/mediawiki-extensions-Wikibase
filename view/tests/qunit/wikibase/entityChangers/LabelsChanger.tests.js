@@ -8,6 +8,7 @@
 	QUnit.module( 'wikibase.entityChangers.LabelsChanger', QUnit.newMwEnvironment() );
 
 	var SUBJECT = wikibase.entityChangers.LabelsChanger,
+		TempUserWatcher = wikibase.entityChangers.TempUserWatcher,
 		datamodel = require( 'wikibase.datamodel' );
 
 	QUnit.test( 'is a function', function ( assert ) {
@@ -34,7 +35,7 @@
 			new datamodel.Item( 'Q1' )
 		);
 
-		labelsChanger.setLabel( new datamodel.Term( 'language', 'label' ) );
+		labelsChanger.setLabel( new datamodel.Term( 'language', 'label' ), new TempUserWatcher() );
 
 		assert.true( api.setLabel.calledOnce );
 	} );
@@ -60,7 +61,7 @@
 			new datamodel.Item( 'Q1' )
 		);
 
-		return labelsChanger.setLabel( new datamodel.Term( 'language', 'label' ) )
+		return labelsChanger.setLabel( new datamodel.Term( 'language', 'label' ), new TempUserWatcher() )
 		.done( function ( savedLabel ) {
 			assert.strictEqual( savedLabel.getText(), 'label' );
 		} );
@@ -80,7 +81,7 @@
 
 		var done = assert.async();
 
-		labelsChanger.setLabel( new datamodel.Term( 'language', 'label' ) )
+		labelsChanger.setLabel( new datamodel.Term( 'language', 'label' ), new TempUserWatcher() )
 		.done( function ( savedLabel ) {
 			assert.true( false, 'setLabel should have failed' );
 		} )

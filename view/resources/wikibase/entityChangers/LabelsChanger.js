@@ -37,13 +37,14 @@
 
 		/**
 		 * @param {datamodel.Term} label
+		 * @param {entityChangers.TempUserWatcher} tempUserWatcher
 		 * @return {jQuery.Promise}
 		 *         Resolved parameters:
 		 *         - {string} The saved label
 		 *         Rejected parameters:
 		 *         - {wikibase.api.RepoApiError}
 		 */
-		setLabel: function ( label ) {
+		setLabel: function ( label, tempUserWatcher ) {
 			var self = this,
 				deferred = $.Deferred(),
 				language = label.getLanguageCode();
@@ -60,6 +61,8 @@
 
 				// Update revision store:
 				self._revisionStore.setLabelRevision( result.entity.lastrevid );
+				// Handle TempUser if one is created
+				tempUserWatcher.processApiResult( result );
 
 				// FIXME: Maybe check API's return value?
 

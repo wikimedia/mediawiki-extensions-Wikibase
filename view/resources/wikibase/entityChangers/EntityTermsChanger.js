@@ -52,7 +52,8 @@
 		 * @param {datamodel.Fingerprint} oldFingerprint
 		 * @return {jQuery.Promise}
 		 *         Resolved parameters:
-		 *         - {datamodel.Fingerprint} The saved fingerprint
+		 *         - {datamodel.ValueChangeResult} The saved value (a datamodel.Fingerprint)
+		 *           and details of any tempUser created
 		 *         Rejected parameters:
 		 *         - {wikibase.api.RepoApiError}
 		 */
@@ -61,14 +62,15 @@
 				descriptionsChanger = this._descriptionsChanger,
 				aliasesChanger = this._aliasesChanger,
 				changes = [],
-				resultFingerprint = newFingerprint;
+				resultFingerprint = newFingerprint,
+				tempUserWatcher = new MODULE.TempUserWatcher();
 
 			Array.prototype.push.apply( changes, this._getTermsChanges(
 				newFingerprint.getLabels(),
 				oldFingerprint.getLabels(),
 				function ( newTerm ) {
 					return function () {
-						return labelsChanger.setLabel( newTerm ).done( function ( savedLabel ) {
+						return labelsChanger.setLabel( newTerm, tempUserWatcher ).done( function ( savedLabel ) {
 							if ( savedLabel === null ) {
 								resultFingerprint.removeLabelFor( newTerm.getLanguageCode() );
 							} else {
@@ -85,7 +87,7 @@
 				oldFingerprint.getDescriptions(),
 				function ( newTerm ) {
 					return function () {
-						return descriptionsChanger.setDescription( newTerm ).done( function ( savedDescription ) {
+						return descriptionsChanger.setDescription( newTerm, tempUserWatcher ).done( function ( savedDescription ) {
 							if ( savedDescription === null ) {
 								resultFingerprint.removeDescriptionFor( newTerm.getLanguageCode() );
 							} else {
@@ -104,7 +106,7 @@
 				oldFingerprint.getAliases(),
 				function ( newMultiTerm ) {
 					return function () {
-						return aliasesChanger.setAliases( newMultiTerm ).done( function ( savedAliases ) {
+						return aliasesChanger.setAliases( newMultiTerm, tempUserWatcher ).done( function ( savedAliases ) {
 							resultFingerprint.setAliases( newMultiTerm.getLanguageCode(), savedAliases );
 						} ).fail( function ( error ) {
 							error.context = { type: 'aliases', value: newMultiTerm };
@@ -117,7 +119,7 @@
 			// However, the back-end produces edit conflicts when issuing multiple requests at once.
 			// Remove queueing as soon as the back-end is fixed; see bug T74020.
 			return chain( changes ).then( function () {
-				return resultFingerprint;
+				return new MODULE.ValueChangeResult( resultFingerprint, tempUserWatcher );
 			} );
 		},
 
