@@ -232,27 +232,20 @@ class LinkTitles extends ApiBase {
 		return [ $siteObj, $page ];
 	}
 
-	private function getAttemptSaveStatus( ?Item $item, Summary $summary, int $flags ): Status {
-		if ( $item === null ) {
-			// to not have an Item isn't really bad at this point
-			return Status::newGood( true );
-		} else {
-			// Do the actual save, or if it don't exist yet create it.
-			return $this->entitySavingHelper->attemptSaveEntity(
-				$item,
-				$summary,
-				$this->extractRequestParams(),
-				$this->getContext(),
-				$flags
-			);
-		}
+	private function getAttemptSaveStatus( Item $item, Summary $summary, int $flags ): Status {
+		// Do the actual save, or if it don't exist yet create it.
+		return $this->entitySavingHelper->attemptSaveEntity(
+			$item,
+			$summary,
+			$this->extractRequestParams(),
+			$this->getContext(),
+			$flags
+		);
 	}
 
-	private function buildResult( ?Item $item, Status $status, array $params ): void {
-		if ( $item !== null ) {
-			$this->resultBuilder->addRevisionIdFromStatusToResult( $status, 'entity' );
-			$this->resultBuilder->addBasicEntityInformation( $item->getId(), 'entity' );
-		}
+	private function buildResult( Item $item, Status $status, array $params ): void {
+		$this->resultBuilder->addRevisionIdFromStatusToResult( $status, 'entity' );
+		$this->resultBuilder->addBasicEntityInformation( $item->getId(), 'entity' );
 
 		$this->resultBuilder->markSuccess( $status->isOK() );
 		$this->resultBuilder->addTempUser( $status, fn( $user ) => $this->getTempUserRedirectUrl( $params, $user ) );
