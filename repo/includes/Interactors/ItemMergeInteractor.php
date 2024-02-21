@@ -271,11 +271,15 @@ class ItemMergeInteractor {
 	 *  modified source item, the second one represents the modified target item.
 	 */
 	private function attemptSaveMerge( Item $fromItem, Item $toItem, ?string $summary, IContextSource $context, bool $bot, array $tags ) {
-		$toSummary = $this->getSummary( 'to', $toItem->getId(), $summary );
-		$fromRev = $this->saveItem( $fromItem, $toSummary, $context, $bot, $tags );
+		// Note: the edits and summaries are potentially confusing;
+		// on the “from” item, we use the summary “Merged Item *into*” and mention the “to” item ID;
+		// on the “to” item, we use the summary “Merged item *from*” and mention the “from” item ID.
 
-		$fromSummary = $this->getSummary( 'from', $fromItem->getId(), $summary );
-		$toRev = $this->saveItem( $toItem, $fromSummary, $context, $bot, $tags );
+		$fromSummary = $this->getSummary( 'to', $toItem->getId(), $summary );
+		$fromRev = $this->saveItem( $fromItem, $fromSummary, $context, $bot, $tags );
+
+		$toSummary = $this->getSummary( 'from', $fromItem->getId(), $summary );
+		$toRev = $this->saveItem( $toItem, $toSummary, $context, $bot, $tags );
 
 		return [ $fromRev, $toRev ];
 	}
