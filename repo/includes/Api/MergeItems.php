@@ -11,8 +11,6 @@ use ApiUsageException;
 use Exception;
 use InvalidArgumentException;
 use LogicException;
-use MediaWiki\Status\Status;
-use MediaWiki\User\User;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\SettingsArray;
@@ -145,31 +143,14 @@ class MergeItems extends ApiBase {
 		array $tags,
 		array $params
 	): void {
-		/** @var EntityRevision $newRevisionFrom */
-		/** @var EntityRevision $newRevisionTo */
-		/** @var ?User $savedTempUser */
-		/** @var bool $redirected */
-		[
-			'fromEntityRevision' => $newRevisionFrom,
-			'toEntityRevision' => $newRevisionTo,
-			'savedTempUser' => $savedTempUser,
-			'redirected' => $redirected,
-		] = $this->interactor->mergeItems( $fromId, $toId, $this->getContext(), $ignoreConflicts, $summary, $bot, $tags );
+		$status = $this->interactor->mergeItems( $fromId, $toId, $this->getContext(), $ignoreConflicts, $summary, $bot, $tags );
 
 		$this->resultBuilder->setValue( null, 'success', 1 );
-		$this->resultBuilder->setValue( null, 'redirected', (int)$redirected );
+		$this->resultBuilder->setValue( null, 'redirected', (int)$status->getRedirected() );
 
-		$this->addEntityToOutput( $newRevisionFrom, 'from' );
-		$this->addEntityToOutput( $newRevisionTo, 'to' );
-
-		if ( $savedTempUser !== null ) {
-			$this->resultBuilder->addTempUser(
-				Status::newGood( [
-					'savedTempUser' => $savedTempUser,
-				] ),
-				fn( $user ) => $this->getTempUserRedirectUrl( $params, $user )
-			);
-		}
+		$this->addEntityToOutput( $status->getFromEntityRevision(), 'from' );
+		$this->addEntityToOutput( $status->getToEntityRevision(), 'to' );
+		$this->resultBuilder->addTempUser( $status, fn( $user ) => $this->getTempUserRedirectUrl( $params, $user ) );
 	}
 
 	/**

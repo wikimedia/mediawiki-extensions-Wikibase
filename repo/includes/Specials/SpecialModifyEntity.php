@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Specials;
 
 use HTMLForm;
 use MediaWiki\Html\Html;
-use MediaWiki\Status\Status;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
@@ -18,6 +17,7 @@ use Wikibase\Repo\AnonymousEditWarningBuilder;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\ChangeOpValidationException;
+use Wikibase\Repo\EditEntity\EditEntityStatus;
 use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\SummaryFormatter;
 
@@ -236,7 +236,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 		}
 	}
 
-	private function handleStatus( Status $status, EntityDocument $entity ) {
+	private function handleStatus( EditEntityStatus $status, EntityDocument $entity ) {
 		if ( $status->isOK() ) {
 			$this->redirectToEntityPage( $status );
 		} else {

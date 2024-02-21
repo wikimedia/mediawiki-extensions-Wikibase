@@ -174,11 +174,7 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 	public function testCreateRedirect_success( EntityId $fromId, EntityId $toId ) {
 		$interactor = $this->newInteractor( $this->once() );
 
-		[
-			'entityRedirect' => $entityRedirect,
-			'context' => $context,
-			'savedTempUser' => $savedTempUser,
-		] = $interactor->createRedirect( $fromId, $toId, false, [ 'tag' ], $this->getContext() );
+		$status = $interactor->createRedirect( $fromId, $toId, false, [ 'tag' ], $this->getContext() );
 
 		try {
 			$this->mockRepository->getEntity( $fromId );
@@ -187,13 +183,12 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 			$this->assertEquals( $toId->getSerialization(), $ex->getRedirectTargetId()->getSerialization() );
 			$this->assertSame( [ 'tag' ], $this->mockRepository->getLatestLogEntryFor( $fromId )['tags'] );
 		}
-		$this->assertInstanceOf( EntityRedirect::class, $entityRedirect );
+		$entityRedirect = $status->getRedirect();
 		$this->assertSame( $fromId, $entityRedirect->getEntityId() );
 		$this->assertSame( $toId, $entityRedirect->getTargetId() );
-		$this->assertInstanceOf( IContextSource::class, $context );
-		if ( $savedTempUser !== null ) {
-			$this->assertInstanceOf( User::class, $savedTempUser );
-		}
+		// assert that getContext() and getSavedTempUser() don’t throw a TypeError
+		$status->getContext();
+		$status->getSavedTempUser();
 	}
 
 	public function createRedirectProvider_failure(): iterable {
@@ -293,16 +288,15 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 			->willReturn( CreateStatus::newGood( $tempUser ) );
 		$interactor = $this->newInteractor( null, null, $tempUserCreator );
 
-		[
-			'context' => $context,
-			'savedTempUser' => $savedTempUser,
-		] = $interactor->createRedirect(
+		$status = $interactor->createRedirect(
 			new ItemId( 'Q11' ),
 			new ItemId( 'Q12' ),
 			false,
 			[],
 			$originalContext
 		);
+		$context = $status->getContext();
+		$savedTempUser = $status->getSavedTempUser();
 
 		$this->assertNotSame( $originalContext, $context, 'new context created' );
 		$this->assertNotNull( $savedTempUser, 'temp user saved' );

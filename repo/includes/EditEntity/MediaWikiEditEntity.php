@@ -55,7 +55,7 @@ class MediaWikiEditEntity implements EditEntity {
 	private $baseRevId;
 	private ?EntityRevision $latestRev = null;
 	private int $latestRevId = 0;
-	private Status $status;
+	private EditEntityStatus $status;
 	private IContextSource $context;
 	private User $user;
 	private ?Title $title = null;
@@ -115,7 +115,7 @@ class MediaWikiEditEntity implements EditEntity {
 		$this->baseRevId = $baseRevId;
 
 		$this->errorType = 0;
-		$this->status = Status::newGood();
+		$this->status = EditEntityStatus::newGood();
 
 		$this->titleLookup = $titleLookup;
 		$this->entityRevisionLookup = $entityLookup;
@@ -282,7 +282,7 @@ class MediaWikiEditEntity implements EditEntity {
 		}
 	}
 
-	public function getStatus(): Status {
+	public function getStatus(): EditEntityStatus {
 		return $this->status;
 	}
 
@@ -520,7 +520,7 @@ class MediaWikiEditEntity implements EditEntity {
 
 		$watch = $this->getDesiredWatchState( $watch );
 
-		$this->status = Status::newGood();
+		$this->status = EditEntityStatus::newGood();
 		$this->errorType = 0;
 
 		$this->checkLocal( $newEntity ); // modifies $this->status
@@ -534,7 +534,7 @@ class MediaWikiEditEntity implements EditEntity {
 		}
 
 		if ( !$this->status->isOK() ) {
-			$this->status->setResult( false, [ 'errorFlags' => $this->errorType ] );
+			$this->status->setErrorFlags( $this->errorType );
 			return $this->status;
 		}
 
@@ -543,7 +543,7 @@ class MediaWikiEditEntity implements EditEntity {
 		$this->checkRateLimits(); // modifies $this->status
 
 		if ( !$this->status->isOK() ) {
-			$this->status->setResult( false, [ 'errorFlags' => $this->errorType ] );
+			$this->status->setErrorFlags( $this->errorType );
 			return $this->status;
 		}
 
@@ -565,7 +565,7 @@ class MediaWikiEditEntity implements EditEntity {
 				$exception->getEntityId()->getSerialization(),
 				$exception->getRedirectTargetId()->getSerialization()
 			);
-			$this->status->setResult( false, [ 'errorFlags' => $this->errorType ] );
+			$this->status->setErrorFlags( $this->errorType );
 			return $this->status;
 		}
 
@@ -580,7 +580,7 @@ class MediaWikiEditEntity implements EditEntity {
 
 			if ( !$newEntity ) {
 				$this->errorType |= EditEntity::EDIT_CONFLICT_ERROR;
-				$this->status->setResult( false, [ 'errorFlags' => $this->errorType ] );
+				$this->status->setErrorFlags( $this->errorType );
 				$this->status->error( 'edit-conflict' );
 
 				return $this->status;
@@ -589,19 +589,19 @@ class MediaWikiEditEntity implements EditEntity {
 
 		if ( !$this->status->isOK() ) {
 			$this->errorType |= EditEntity::PRECONDITION_FAILED;
-			$this->status->setResult( false, [ 'errorFlags' => $this->errorType ] );
+			$this->status->setErrorFlags( $this->errorType );
 			return $this->status;
 		}
 
 		$this->checkEditFilter( $newEntity, $summary );
 		if ( !$this->status->isOK() ) {
-			$this->status->setResult( false, [ 'errorFlags' => $this->errorType ] );
+			$this->status->setErrorFlags( $this->errorType );
 			return $this->status;
 		}
 
 		$savedTempUser = $this->createTempUserIfNeeded(); // updates $this->user, $this->context and/or $this->status
 		if ( !$this->status->isOK() ) {
-			$this->status->setResult( false, [ 'errorFlags' => $this->errorType ] );
+			$this->status->setErrorFlags( $this->errorType );
 			return $this->status;
 		}
 
@@ -616,11 +616,7 @@ class MediaWikiEditEntity implements EditEntity {
 			);
 
 			$this->entityId = $newEntity->getId();
-			$editStatus = Status::newGood( [
-				'revision' => $entityRevision,
-				'savedTempUser' => $savedTempUser,
-				'context' => $this->context,
-			] );
+			$editStatus = EditEntityStatus::newEdit( $entityRevision, $savedTempUser, $this->context );
 		} catch ( StorageException $ex ) {
 			$editStatus = $ex->getStatus();
 
@@ -631,7 +627,7 @@ class MediaWikiEditEntity implements EditEntity {
 
 			$this->errorType |= EditEntity::SAVE_ERROR;
 		} catch ( EntityContentTooBigException $ex ) {
-			$this->status->setResult( false, [ 'errorFlags' => $this->errorType ] );
+			$this->status->setErrorFlags( $this->errorType );
 			$this->status->error( wfMessage( 'wikibase-error-entity-too-big' )->sizeParams( $this->maxSerializedEntitySize * 1024 ) );
 			return $this->status;
 		}
@@ -642,9 +638,7 @@ class MediaWikiEditEntity implements EditEntity {
 		if ( $this->status->isOK() ) {
 			$this->updateWatchlist( $watch );
 		} else {
-			$value = $this->status->getValue();
-			$value['errorFlags'] = $this->errorType;
-			$this->status->setResult( false, $value );
+			$this->status->setErrorFlags( $this->errorType );
 		}
 
 		return $this->status;

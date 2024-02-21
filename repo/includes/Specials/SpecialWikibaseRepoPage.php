@@ -2,18 +2,16 @@
 
 namespace Wikibase\Repo\Specials;
 
-use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;
-use MediaWiki\User\User;
 use RuntimeException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\FormatableSummary;
-use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\UserInputException;
 use Wikibase\Repo\EditEntity\EditEntity;
+use Wikibase\Repo\EditEntity\EditEntityStatus;
 use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\SummaryFormatter;
 use Wikibase\Repo\WikibaseRepo;
@@ -178,7 +176,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	 * @param string $token
 	 * @param int $flags The edit flags (see WikiPage::doEditContent)
 	 *
-	 * @return Status
+	 * @return EditEntityStatus
 	 */
 	protected function saveEntity(
 		EntityDocument $entity,
@@ -201,18 +199,13 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	/**
 	 * Redirect to the page of the entity that was successfully edited.
 	 *
-	 * @param Status $status A status as returned by {@link self::saveEntity()}.
-	 * The status must be {@link Status::isOK() OK}.
+	 * @param EditEntityStatus $status A status as returned by {@link self::saveEntity()}.
+	 * The status must be {@link StatusValue::isOK() OK}.
 	 */
-	protected function redirectToEntityPage( Status $status ): void {
+	protected function redirectToEntityPage( EditEntityStatus $status ): void {
 		Assert::parameter( $status->isOK(), '$status', 'must be OK' );
-		/** @var EntityRevision $entityRevision */
-		/** @var ?User $savedTempUser */
-		[
-			'revision' => $entityRevision,
-			'savedTempUser' => $savedTempUser,
-		] = $status->getValue();
-		$title = $this->getEntityTitle( $entityRevision->getEntity()->getId() );
+		$title = $this->getEntityTitle( $status->getRevision()->getEntity()->getId() );
+		$savedTempUser = $status->getSavedTempUser();
 		$redirectUrl = '';
 		if ( $savedTempUser !== null ) {
 			$this->getHookRunner()->onTempUserCreatedRedirect(

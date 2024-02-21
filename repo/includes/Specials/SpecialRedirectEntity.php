@@ -7,7 +7,6 @@ namespace Wikibase\Repo\Specials;
 use Exception;
 use HTMLForm;
 use MediaWiki\Html\Html;
-use MediaWiki\User\User;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -123,10 +122,8 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 	private function redirectEntity( EntityId $fromId, EntityId $toId ): void {
 		$this->tokenCheck->checkRequestToken( $this->getContext(), 'wpEditToken' );
 
-		/** @var ?User $savedTempUser */
-		[
-			'savedTempUser' => $savedTempUser,
-		] = $this->interactor->createRedirect( $fromId, $toId, false, [], $this->getContext() );
+		$status = $this->interactor->createRedirect( $fromId, $toId, false, [], $this->getContext() );
+		$savedTempUser = $status->getSavedTempUser();
 
 		if ( $savedTempUser !== null ) {
 			$redirectUrl = '';

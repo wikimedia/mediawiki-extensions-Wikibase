@@ -7,13 +7,11 @@ namespace Wikibase\Repo\Specials;
 use Exception;
 use HTMLForm;
 use MediaWiki\Html\Html;
-use MediaWiki\User\User;
 use Message;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
-use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\UserInputException;
 use Wikibase\Repo\AnonymousEditWarningBuilder;
@@ -170,16 +168,10 @@ class SpecialMergeItems extends SpecialWikibasePage {
 	private function mergeItems( ItemId $fromId, ItemId $toId, array $ignoreConflicts, $summary ): void {
 		$this->tokenCheck->checkRequestToken( $this->getContext(), 'wpEditToken' );
 
-		/** @var EntityRevision $newRevisionFrom */
-		/** @var EntityRevision $newRevisionTo */
-		/** @var ?User $savedTempUser */
-		[
-			'fromEntityRevision' => $newRevisionFrom,
-			'toEntityRevision' => $newRevisionTo,
-			'savedTempUser' => $savedTempUser,
-		] = $this->interactor->mergeItems( $fromId, $toId, $this->getContext(), $ignoreConflicts, $summary );
-		$newRevisionFromId = $newRevisionFrom->getRevisionId();
-		$newRevisionToId = $newRevisionTo->getRevisionId();
+		$status = $this->interactor->mergeItems( $fromId, $toId, $this->getContext(), $ignoreConflicts, $summary );
+		$newRevisionFromId = $status->getFromEntityRevision()->getRevisionId();
+		$newRevisionToId = $status->getToEntityRevision()->getRevisionId();
+		$savedTempUser = $status->getSavedTempUser();
 		if ( $savedTempUser !== null ) {
 			$redirectUrl = '';
 			$this->getHookRunner()->onTempUserCreatedRedirect(

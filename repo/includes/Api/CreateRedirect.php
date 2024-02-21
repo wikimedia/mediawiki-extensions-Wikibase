@@ -10,11 +10,9 @@ use ApiMain;
 use ApiResult;
 use ApiUsageException;
 use MediaWiki\Permissions\PermissionManager;
-use MediaWiki\User\User;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\Interactors\RedirectCreationException;
@@ -104,15 +102,11 @@ class CreateRedirect extends ApiBase {
 	 * @throws RedirectCreationException
 	 */
 	private function createRedirect( EntityId $fromId, EntityId $toId, bool $bot, ApiResult $result, array $params ): void {
-		/** @var EntityRedirect $entityRedirect */
-		/** @var ?User $savedTempUser */
-		[
-			'entityRedirect' => $entityRedirect,
-			'savedTempUser' => $savedTempUser,
-		] = $this->interactor->createRedirect( $fromId, $toId, $bot, [], $this->getContext() ); // TODO pass through $tags (T229918)
+		$status = $this->interactor->createRedirect( $fromId, $toId, $bot, [], $this->getContext() ); // TODO pass through $tags (T229918)
 
 		$result->addValue( null, 'success', 1 );
-		$result->addValue( null, 'redirect', $entityRedirect->getTargetId()->getSerialization() );
+		$result->addValue( null, 'redirect', $status->getRedirect()->getTargetId()->getSerialization() );
+		$savedTempUser = $status->getSavedTempUser();
 		if ( $savedTempUser !== null ) {
 			$result->addValue( null, 'tempusercreated', $savedTempUser->getName() );
 			$redirectUrl = $this->getTempUserRedirectUrl( $params, $savedTempUser );

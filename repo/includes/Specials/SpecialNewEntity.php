@@ -12,6 +12,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Summary;
+use Wikibase\Repo\EditEntity\EditEntityStatus;
 use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\SummaryFormatter;
 
@@ -115,6 +116,8 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 		$submitStatus = $form->tryAuthorizedSubmit();
 
 		if ( $submitStatus && $submitStatus->isGood() ) {
+			// wrap it, in case HTMLForm turned it into a generic Status
+			$submitStatus = EditEntityStatus::wrap( $submitStatus );
 			$this->redirectToEntityPage( $submitStatus );
 
 			return;

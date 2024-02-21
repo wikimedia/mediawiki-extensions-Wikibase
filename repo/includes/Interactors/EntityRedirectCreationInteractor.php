@@ -73,10 +73,10 @@ abstract class EntityRedirectCreationInteractor {
 	 * @param string[] $tags
 	 * @param IContextSource|null $context The context to pass to the edit filter hook and check permissions
 	 *
-	 * @return array with three members:
-	 * - 'entityRedirect' (EntityRedirect): the created redirect
-	 * - 'context' (IContextSource): context that should be used for subsequent edits
-	 * - 'savedTempUser' (?User): temporary user if one was created, else null
+	 * @return EntityRedirectCreationStatus Note that the status is only returned
+	 * to wrap the created redirect, context and saved temp user in a strongly typed container.
+	 * Errors are (currently) reported as exceptions, not as a failed status.
+	 * (It would be nice to fix this at some point and use status consistently.)
 	 * @throws RedirectCreationException If creating the redirect fails. Calling code may use
 	 * RedirectCreationException::getErrorCode() to get further information about the cause of
 	 * the failure.
@@ -88,7 +88,7 @@ abstract class EntityRedirectCreationInteractor {
 		bool $bot,
 		array $tags,
 		IContextSource $context
-	): array {
+	): EntityRedirectCreationStatus {
 		$this->checkCompatible( $fromId, $toId );
 		$this->checkPermissions( $fromId, $context );
 		$this->checkRateLimits( $context );
@@ -228,7 +228,7 @@ abstract class EntityRedirectCreationInteractor {
 		IContextSource $context,
 		bool $bot,
 		array $tags
-	): array {
+	): EntityRedirectCreationStatus {
 		$summary = $this->summaryFormatter->formatSummary( $summary );
 		$flags = 0;
 		if ( $bot ) {
@@ -280,11 +280,7 @@ abstract class EntityRedirectCreationInteractor {
 			throw new RedirectCreationException( $ex->getMessage(), 'cant-redirect', [], $ex );
 		}
 
-		return [
-			'entityRedirect' => $redirect,
-			'context' => $context,
-			'savedTempUser' => $savedTempUser,
-		];
+		return EntityRedirectCreationStatus::newRedirect( $redirect, $savedTempUser, $context );
 	}
 
 	/**
