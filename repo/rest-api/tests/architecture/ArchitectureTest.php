@@ -6,6 +6,7 @@ use PHPat\Selector\Selector;
 use PHPat\Test\Builder\Rule;
 use PHPat\Test\PHPat;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
@@ -43,7 +44,7 @@ class ArchitectureTest {
 	 */
 	private function allowedDomainModelDependencies(): array {
 		return [
-			...$this->dataModelEntityNamespaces(),
+			...$this->dataModelNamespaces(),
 			Selector::namespace( self::DOMAIN_MODEL ),
 			Selector::namespace( self::DOMAIN_READMODEL ),
 		];
@@ -154,13 +155,14 @@ class ArchitectureTest {
 	private function allowedDataModelServices(): array {
 		return [
 			Selector::classname( PropertyDataTypeLookup::class ),
+			Selector::classname( PropertyDataTypeLookupException::class ),
 			Selector::classname( StatementGuidParser::class ),
 			Selector::classname( StatementGuidValidator::class ),
 			Selector::classname( GuidGenerator::class ),
 		];
 	}
 
-	private function dataModelEntityNamespaces(): array {
+	private function dataModelNamespaces(): array {
 		return [
 			// These are listed in such a complicated way so that only DataModel entities and their parts are allowed without the
 			// namespaces nested within DataModel like e.g. Wikibase\DataModel\Serializers.
@@ -172,6 +174,7 @@ class ArchitectureTest {
 				[
 					'Wikibase\DataModel',
 					'Wikibase\DataModel\Entity',
+					'Wikibase\DataModel\Exception',
 					'Wikibase\DataModel\Snak',
 					'Wikibase\DataModel\Statement',
 					'Wikibase\DataModel\Term',
