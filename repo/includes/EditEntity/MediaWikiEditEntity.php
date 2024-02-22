@@ -4,6 +4,7 @@ namespace Wikibase\Repo\EditEntity;
 
 use IContextSource;
 use InvalidArgumentException;
+use MediaWiki\Context\DerivativeContext;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;
@@ -375,19 +376,6 @@ class MediaWikiEditEntity implements EditEntity {
 		}
 	}
 
-	/**
-	 * Get the status object. Only defined after attemptSave() was called.
-	 *
-	 * After a successful save, the Status object's value field will contain an array,
-	 * just like the status returned by WikiPage::doUserEditContent(). Well known fields
-	 * in the status value are:
-	 *
-	 *  - new: bool whether the edit created a new page
-	 *  - revision: Revision the new revision object
-	 *  - errorFlags: bit field indicating errors, see the XXX_ERROR constants.
-	 *
-	 * @return Status
-	 */
 	public function getStatus() {
 		return $this->status;
 	}
@@ -636,33 +624,6 @@ class MediaWikiEditEntity implements EditEntity {
 		return in_array( $entity->getType(), $this->localEntityTypes );
 	}
 
-	/**
-	 * Attempts to save the given Entity object.
-	 *
-	 * This method performs entity level permission checks, checks the edit toke, enforces rate
-	 * limits, resolves edit conflicts, and updates user watchlists if appropriate.
-	 *
-	 * Success or failure are reported via the Status object returned by this method.
-	 *
-	 * @param EntityDocument $newEntity
-	 * @param string $summary The edit summary.
-	 * @param int $flags The EDIT_XXX flags as used by WikiPage::doUserEditContent().
-	 *        Additionally, the EntityContent::EDIT_XXX constants can be used.
-	 * @param string|bool $token Edit token to check, or false to disable the token check.
-	 *                                Null will fail the token text, as will the empty string.
-	 * @param bool|null $watch Whether the user wants to watch the entity.
-	 *                                Set to null to apply default according to getWatchDefault().
-	 * @param string[] $tags Change tags to add to the edit.
-	 * Callers are responsible for checking that the user is permitted to add these tags
-	 * (typically using {@link ChangeTags::canAddTagsAccompanyingChange}).
-	 *
-	 * @return Status
-	 *
-	 * @throws ReadOnlyError
-	 *
-	 * @see    WikiPage::doUserEditContent
-	 * @see    EntityStore::saveEntity
-	 */
 	public function attemptSave( EntityDocument $newEntity, string $summary, $flags, $token, $watch = null, array $tags = [] ) {
 		$this->checkReadOnly( $newEntity ); // throws, exception formatted by MediaWiki (cf. MWExceptionRenderer::getExceptionTitle)
 		$this->checkEntityId( $newEntity->getId() ); // throws internal error (unexpected condition)
@@ -748,7 +709,7 @@ class MediaWikiEditEntity implements EditEntity {
 			return $this->status;
 		}
 
-		$savedTempUser = $this->createTempUserIfNeeded(); // updates $this->user and/or $this->status
+		$savedTempUser = $this->createTempUserIfNeeded(); // updates $this->user, $this->context and/or $this->status
 		if ( !$this->status->isOK() ) {
 			$this->status->setResult( false, [ 'errorFlags' => $this->errorType ] );
 			return $this->status;
@@ -768,6 +729,7 @@ class MediaWikiEditEntity implements EditEntity {
 			$editStatus = Status::newGood( [
 				'revision' => $entityRevision,
 				'savedTempUser' => $savedTempUser,
+				'context' => $this->context,
 			] );
 		} catch ( StorageException $ex ) {
 			$editStatus = $ex->getStatus();
@@ -815,7 +777,7 @@ class MediaWikiEditEntity implements EditEntity {
 	}
 
 	/**
-	 * If a temp user ought to be created then create and return it, and update $this->user.
+	 * If a temp user ought to be created then create and return it, and update $this->user and $this->context.
 	 * Also update $this->status with any potential error.
 	 * Returns null (and leaves $this->user unmodified, i.e. nonnull) if no temp user is needed.
 	 */
@@ -827,6 +789,8 @@ class MediaWikiEditEntity implements EditEntity {
 			if ( $status->isOK() ) {
 				$savedTempUser = $status->getUser();
 				$this->user = $savedTempUser;
+				$this->context = new DerivativeContext( $this->context );
+				$this->context->setUser( $savedTempUser );
 			} else {
 				$this->errorType |= self::SAVE_ERROR;
 			}
