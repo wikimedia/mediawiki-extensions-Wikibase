@@ -323,7 +323,8 @@ return [
 						new SiteLinkPageNormalizerSitelinkTargetResolver(
 							$services->getSiteLookup(),
 							WikibaseRepo::getSiteLinkPageNormalizer( $services )
-						)
+						),
+						new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever( WikibaseRepo::getEntityRevisionLookup( $services ) )
 					),
 					new SqlSiteLinkConflictLookup(
 						WikibaseRepo::getRepoDomainDbFactory( $services )->newRepoDb(),
@@ -818,7 +819,8 @@ return [
 					new SiteLinkPageNormalizerSitelinkTargetResolver(
 						MediaWikiServices::getInstance()->getSiteLookup(),
 						WikibaseRepo::getSiteLinkPageNormalizer( $services )
-					)
+					),
+					new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever( WikibaseRepo::getEntityRevisionLookup( $services ) )
 				)
 			),
 			WbRestApi::getItemUpdater( $services )

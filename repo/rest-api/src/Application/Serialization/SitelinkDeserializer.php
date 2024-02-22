@@ -6,6 +6,7 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\SitelinkTargetNotFound;
+use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\SitelinkTargetTitleResolver;
 
 /**
@@ -16,20 +17,24 @@ class SitelinkDeserializer {
 	private string $invalidTitleRegex;
 	private array $allowedBadgeItemIds;
 	private SitelinkTargetTitleResolver $titleResolver;
+	private ItemRevisionMetadataRetriever $revisionMetadataRetriever;
 
 	/**
 	 * @param string $invalidTitleRegex
 	 * @param string[] $allowedBadgeItemIds
 	 * @param SitelinkTargetTitleResolver $titleResolver
+	 * @param ItemRevisionMetadataRetriever $revisionMetadataRetriever
 	 */
 	public function __construct(
 		string $invalidTitleRegex,
 		array $allowedBadgeItemIds,
-		SitelinkTargetTitleResolver $titleResolver
+		SitelinkTargetTitleResolver $titleResolver,
+		ItemRevisionMetadataRetriever $revisionMetadataRetriever
 	) {
 		$this->invalidTitleRegex = $invalidTitleRegex;
 		$this->allowedBadgeItemIds = $allowedBadgeItemIds;
 		$this->titleResolver = $titleResolver;
+		$this->revisionMetadataRetriever = $revisionMetadataRetriever;
 	}
 
 	/**
@@ -70,7 +75,8 @@ class SitelinkDeserializer {
 			} catch ( InvalidArgumentException $e ) {
 				throw new InvalidSitelinkBadgeException( $badge );
 			}
-			if ( !in_array( (string)$badgeItemId, $this->allowedBadgeItemIds ) ) {
+			if ( !in_array( (string)$badgeItemId, $this->allowedBadgeItemIds ) ||
+				!$this->revisionMetadataRetriever->getLatestRevisionMetadata( $badgeItemId )->itemExists() ) {
 				throw new BadgeNotAllowed( $badgeItemId );
 			}
 			$badges[] = $badgeItemId;

@@ -27,6 +27,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\SitelinksRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
+use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\DummyItemRevisionMetaDataRetriever;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryItemRepository;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\SameTitleSitelinkTargetResolver;
 
@@ -64,7 +65,8 @@ class PatchSitelinksTest extends TestCase {
 		$this->sitelinksDeserializer = new SitelinksDeserializer( new SitelinkDeserializer(
 			'/\?/',
 			self::ALLOWED_BADGES,
-			new SameTitleSitelinkTargetResolver()
+			new SameTitleSitelinkTargetResolver(),
+			new DummyItemRevisionMetaDataRetriever()
 		) );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
 	}

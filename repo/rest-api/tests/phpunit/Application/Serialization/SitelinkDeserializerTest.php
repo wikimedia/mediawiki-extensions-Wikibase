@@ -14,8 +14,11 @@ use Wikibase\Repo\RestApi\Application\Serialization\InvalidFieldTypeException;
 use Wikibase\Repo\RestApi\Application\Serialization\InvalidSitelinkBadgeException;
 use Wikibase\Repo\RestApi\Application\Serialization\MissingFieldException;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
+use Wikibase\Repo\RestApi\Domain\ReadModel\LatestItemRevisionMetadataResult;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\SitelinkTargetNotFound;
+use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\SitelinkTargetTitleResolver;
+use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\DummyItemRevisionMetaDataRetriever;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\SameTitleSitelinkTargetResolver;
 
 /**
@@ -29,6 +32,16 @@ class SitelinkDeserializerTest extends TestCase {
 
 	private const ALLOWED_BADGES = [ 'Q987', 'Q654' ];
 
+	private SitelinkTargetTitleResolver $titleResolver;
+	private ItemRevisionMetadataRetriever $revisionMetadataRetriever;
+
+	protected function setUp(): void {
+		parent::setUp();
+
+		$this->titleResolver = new SameTitleSitelinkTargetResolver();
+		$this->revisionMetadataRetriever = new DummyItemRevisionMetaDataRetriever();
+	}
+
 	public function testGivenValidSerialization_returnsCorrectSitelink(): void {
 		$siteId = 'testwiki';
 		$title = 'Test Title';
@@ -36,15 +49,15 @@ class SitelinkDeserializerTest extends TestCase {
 		$badge = self::ALLOWED_BADGES[ 1 ];
 		$serialization = [ 'title' => $title, 'badges' => [ $badge ] ];
 
-		$titleResolver = $this->createMock( SitelinkTargetTitleResolver::class );
-		$titleResolver->expects( $this->once() )
+		$this->titleResolver = $this->createMock( SitelinkTargetTitleResolver::class );
+		$this->titleResolver->expects( $this->once() )
 			->method( 'resolveTitle' )
 			->with( $siteId, $title, [ new ItemId( $badge ) ] )
 			->willReturn( $resolvedTitle );
 
 		$this->assertEquals(
 			new SiteLink( $siteId, $resolvedTitle, [ new ItemId( $badge ) ] ),
-			$this->newSitelinkDeserializer( $titleResolver )->deserialize( $siteId, $serialization )
+			$this->newSitelinkDeserializer()->deserialize( $siteId, $serialization )
 		);
 	}
 
@@ -53,7 +66,7 @@ class SitelinkDeserializerTest extends TestCase {
 	 */
 	public function testGivenInvalidSitelink_deserializeThrows( array $serialization, Exception $expectedError ): void {
 		try {
-			$this->newSitelinkDeserializer( new SameTitleSitelinkTargetResolver() )->deserialize( 'Q123', $serialization );
+			$this->newSitelinkDeserializer()->deserialize( 'Q123', $serialization );
 			$this->fail( 'Expected exception was not thrown' );
 		} catch ( Exception $e ) {
 			$this->assertEquals( $expectedError, $e );
@@ -89,19 +102,40 @@ class SitelinkDeserializerTest extends TestCase {
 
 	public function testGivenSitelinkTargetNotFound_throws(): void {
 		$expectedException = new SitelinkTargetNotFound();
-		$titleResolver = $this->createStub( SitelinkTargetTitleResolver::class );
-		$titleResolver->method( 'resolveTitle' )->willThrowException( $expectedException );
+		$this->titleResolver = $this->createStub( SitelinkTargetTitleResolver::class );
+		$this->titleResolver->method( 'resolveTitle' )->willThrowException( $expectedException );
 
 		try {
-			$this->newSitelinkDeserializer( $titleResolver )->deserialize( 'somewiki', [ 'title' => 'Page does not exist' ] );
+			$this->newSitelinkDeserializer()->deserialize( 'somewiki', [ 'title' => 'Page does not exist' ] );
 			$this->fail( 'Expected exception was not thrown' );
 		} catch ( SitelinkTargetNotFound $exception ) {
 			$this->assertSame( $expectedException, $exception );
 		}
 	}
 
-	public function newSitelinkDeserializer( SitelinkTargetTitleResolver $titleResolver ): SitelinkDeserializer {
-		return new SitelinkDeserializer( '/\?/', self::ALLOWED_BADGES, $titleResolver );
+	public function testGivenBadgeItemDoesNotExist_throws(): void {
+		$badge = new ItemId( self::ALLOWED_BADGES[0] );
+		$serialization = [ 'title' => 'Potato', 'badges' => [ "$badge" ] ];
+
+		$this->revisionMetadataRetriever = $this->createStub( ItemRevisionMetadataRetriever::class );
+		$this->revisionMetadataRetriever->method( 'getLatestRevisionMetadata' )
+			->willReturn( LatestItemRevisionMetadataResult::itemNotFound() );
+
+		try {
+			$this->newSitelinkDeserializer()->deserialize( 'somewiki', $serialization );
+			$this->fail( 'Expected exception was not thrown' );
+		} catch ( BadgeNotAllowed $e ) {
+			$this->assertEquals( $badge, $e->getBadge() );
+		}
+	}
+
+	public function newSitelinkDeserializer(): SitelinkDeserializer {
+		return new SitelinkDeserializer(
+			'/\?/',
+			self::ALLOWED_BADGES,
+			$this->titleResolver,
+			$this->revisionMetadataRetriever
+		);
 	}
 
 }

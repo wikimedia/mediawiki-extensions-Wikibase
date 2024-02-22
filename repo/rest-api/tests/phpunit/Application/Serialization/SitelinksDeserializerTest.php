@@ -8,6 +8,7 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinksDeserializer;
+use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\DummyItemRevisionMetaDataRetriever;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\SameTitleSitelinkTargetResolver;
 
 /**
@@ -34,7 +35,12 @@ class SitelinksDeserializerTest extends TestCase {
 				new SiteLink( 'testWiki2', 'Test Title', [ new ItemId( 'Q123' ) ] ),
 			] ),
 			( new SitelinksDeserializer(
-				new SitelinkDeserializer( '/\?/', [ 'Q123' ], new SameTitleSitelinkTargetResolver() )
+				new SitelinkDeserializer(
+					'/\?/',
+					[ 'Q123' ],
+					new SameTitleSitelinkTargetResolver(),
+					new DummyItemRevisionMetaDataRetriever()
+				)
 			) )->deserialize( [
 				$siteId => $serialization,
 				$anotherSiteId => $serialization,
