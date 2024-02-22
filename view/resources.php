@@ -959,6 +959,7 @@ return call_user_func( function() {
 					'callback' => function () {
 						return [
 							'tags' => WikibaseRepo::getSettings()->getSetting( 'termboxTags' ),
+							'tempUserEnabled' => MediaWikiServices::getInstance()->getTempUserConfig()->isEnabled(),
 						];
 					},
 				],
