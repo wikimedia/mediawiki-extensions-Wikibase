@@ -1,6 +1,7 @@
 'use strict';
 
 const { action, utils } = require( 'api-testing' );
+const { newSetSitelinkRequestBuilder } = require( './RequestBuilderFactory' );
 
 async function makeEditEntityRequest( params, entity ) {
 	return action.getAnon().action( 'wbeditentity', {
@@ -146,18 +147,11 @@ async function getLocalSiteId() {
 	) ).siteid;
 }
 
-async function createLocalSitelink( itemId, articleTitle, badges = [] ) {
-	const anon = action.getAnon();
-	anon.req.set( 'X-Wikibase-CI-Badges', badges.join( ', ' ) );
-
-	await anon.edit( articleTitle, { text: 'sitelink test' } );
-	await anon.action( 'wbsetsitelink', {
-		id: itemId,
-		linksite: await getLocalSiteId(),
-		linktitle: articleTitle,
-		badges: badges.join( ', ' ),
-		token: '+\\'
-	}, true );
+async function createLocalSitelink( itemId, title, badges = [] ) {
+	await action.getAnon().edit( title, { text: 'sitelink test' } );
+	await newSetSitelinkRequestBuilder( itemId, await getLocalSiteId(), { title, badges } )
+		.withHeader( 'X-Wikibase-CI-Badges', badges.join( ', ' ) )
+		.makeRequest();
 }
 
 module.exports = {
