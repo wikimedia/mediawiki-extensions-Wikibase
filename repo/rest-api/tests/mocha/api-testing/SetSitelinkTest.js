@@ -10,7 +10,7 @@ const {
 } = require( '../helpers/RequestBuilderFactory' );
 const { formatSitelinkEditSummary } = require( '../helpers/formatEditSummaries' );
 const { makeEtag } = require( '../helpers/httpHelper' );
-const { createEntity, getLocalSiteId } = require( '../helpers/entityHelper' );
+const { createEntity, getLocalSiteId, createWikiPage } = require( '../helpers/entityHelper' );
 
 describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 	let testItemId;
@@ -41,8 +41,8 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 
 		siteId = await getLocalSiteId();
 
-		await action.getAnon().edit( testTitle1, { text: 'sitelink test' } );
-		await action.getAnon().edit( testTitle2, { text: 'sitelink test' } );
+		await createWikiPage( testTitle1, 'sitelink test' );
+		await createWikiPage( testTitle2, 'sitelink test' );
 
 		const testItemCreationMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 		originalLastModified = new Date( testItemCreationMetadata.timestamp );
@@ -179,7 +179,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 		describe( 'sitelinks to redirects', () => {
 			const redirectTitle = utils.title( 'Redirect-title-' );
 			before( async () => {
-				await action.getAnon().edit( redirectTitle, { text: `#REDIRECT [[${testTitle1}]]` } );
+				await createWikiPage( redirectTitle, `#REDIRECT [[${testTitle1}]]` );
 			} );
 
 			it( 'resolves title redirects without a redirect badge', async () => {
