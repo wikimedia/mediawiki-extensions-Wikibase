@@ -175,6 +175,36 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 			assertValidSuccessResponse( await reqBuilder.makeRequest(), 200, newSitelink.title, newSitelink.badges );
 			assertValidSuccessResponse( await reqBuilder.makeRequest(), 200, newSitelink.title, newSitelink.badges );
 		} );
+
+		describe( 'sitelinks to redirects', () => {
+			const redirectTitle = utils.title( 'Redirect-title-' );
+			before( async () => {
+				await action.getAnon().edit( redirectTitle, { text: `#REDIRECT [[${testTitle1}]]` } );
+			} );
+
+			it( 'resolves title redirects without a redirect badge', async () => {
+				const response = await newSetSitelinkRequestBuilder( testItemId, siteId, { title: redirectTitle } )
+					.assertValidRequest()
+					.makeRequest();
+
+				assertValidSuccessResponse( response, 200, testTitle1, [] );
+			} );
+
+			it( 'does not resolve redirects if the sitelink contains a redirect badge', async () => {
+				const redirectBadge = ( await createEntity( 'item', {} ) ).entity.id;
+				const response = await newSetSitelinkRequestBuilder(
+					testItemId,
+					siteId,
+					{ title: redirectTitle, badges: [ redirectBadge ] }
+				)
+					.withHeader( 'X-Wikibase-CI-Badges', redirectBadge )
+					.withHeader( 'X-Wikibase-CI-Redirect-Badges', redirectBadge )
+					.assertValidRequest()
+					.makeRequest();
+
+				assertValidSuccessResponse( response, 200, redirectTitle, [ redirectBadge ] );
+			} );
+		} );
 	} );
 
 	describe( '400', () => {
