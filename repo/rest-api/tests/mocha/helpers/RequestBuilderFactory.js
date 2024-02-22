@@ -1,9 +1,9 @@
 'use strict';
 
 const { RequestBuilder } = require( './RequestBuilder' );
-module.exports = {
-	ALLOWED_BADGES: [ 'Q777', 'Q888', 'Q999' ],
+const { getAllowedBadges } = require( './getAllowedBadges' );
 
+module.exports = {
 	newGetItemRequestBuilder( itemId ) {
 		return new RequestBuilder()
 			.withRoute( 'GET', '/entities/items/{item_id}' )
@@ -140,7 +140,7 @@ module.exports = {
 			.withRoute( 'PATCH', '/entities/items/{item_id}/sitelinks' )
 			.withPathParam( 'item_id', itemId )
 			.withJsonBodyParam( 'patch', patch )
-			.withHeader( 'X-Wikibase-CI-Badges', module.exports.ALLOWED_BADGES.join( ',' ) );
+			.withHeader( 'X-Wikibase-CI-Badges', async () => ( await getAllowedBadges() ).join( ',' ) );
 	},
 
 	newGetItemLabelRequestBuilder( itemId, languageCode ) {
@@ -163,7 +163,7 @@ module.exports = {
 			.withPathParam( 'item_id', itemId )
 			.withPathParam( 'site_id', siteId )
 			.withJsonBodyParam( 'sitelink', sitelink )
-			.withHeader( 'X-Wikibase-CI-Badges', module.exports.ALLOWED_BADGES.join( ',' ) );
+			.withHeader( 'X-Wikibase-CI-Badges', async () => ( await getAllowedBadges() ).join( ',' ) );
 	},
 
 	newSetItemLabelRequestBuilder( itemId, languageCode, label ) {

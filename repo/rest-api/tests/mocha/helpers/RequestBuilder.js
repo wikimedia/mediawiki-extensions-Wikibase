@@ -25,6 +25,7 @@ class RequestBuilder {
 		this.queryParams = {};
 		this.jsonBodyParams = {};
 		this.headers = { 'user-agent': 'e2e tests' };
+		this.headerCallbacks = {};
 		this.user = null;
 		this.validate = false;
 		this.assertValid = false;
@@ -62,8 +63,17 @@ class RequestBuilder {
 		return this;
 	}
 
+	/**
+	 * @param {string} name
+	 * @param {string|Function} value - function arguments will be evaluated when makeRequest() is called
+	 * @return {this}
+	 */
 	withHeader( name, value ) {
-		this.headers[ name.toLowerCase() ] = value;
+		if ( value instanceof Function ) {
+			this.headerCallbacks[ name.toLowerCase() ] = value;
+		} else {
+			this.headers[ name.toLowerCase() ] = value;
+		}
 		return this;
 	}
 
@@ -93,6 +103,11 @@ class RequestBuilder {
 		if ( XDEBUG_SESSION ) {
 			this.withHeader( 'Cookie', `XDEBUG_SESSION=${XDEBUG_SESSION}` );
 		}
+
+		( await Promise.all(
+			Object.entries( this.headerCallbacks )
+				.map( async ( [ name, fn ] ) => [ name, await fn() ] )
+		) ).forEach( ( [ name, value ] ) => this.withHeader( name, value ) );
 
 		const spec = await getOrLoadSpec();
 		this.validateRouteAndMethod( spec );

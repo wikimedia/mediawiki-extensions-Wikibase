@@ -3,11 +3,12 @@
 const { assert, utils, action } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
-const { newPatchSitelinksRequestBuilder, ALLOWED_BADGES } = require( '../helpers/RequestBuilderFactory' );
+const { newPatchSitelinksRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { createLocalSitelink, getLocalSiteId } = require( '../helpers/entityHelper' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { formatSitelinksEditSummary } = require( '../helpers/formatEditSummaries' );
 const testValidatesPatch = require( '../helpers/testValidatesPatch' );
+const { getAllowedBadges } = require( '../helpers/getAllowedBadges' );
 
 describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 
@@ -16,6 +17,7 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 	const linkedArticle = utils.title( 'Article-linked-to-test-item' );
 	let originalLastModified;
 	let originalRevisionId;
+	let allowedBadges;
 
 	function assertValidResponse( response, status, title, badges ) {
 		expect( response ).to.have.status( status );
@@ -42,6 +44,7 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 		testItemId = ( await entityHelper.createEntity( 'item', {} ) ).entity.id;
 		await createLocalSitelink( testItemId, linkedArticle );
 		siteId = await getLocalSiteId();
+		allowedBadges = await getAllowedBadges();
 
 		const testItemCreationMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 		originalLastModified = new Date( testItemCreationMetadata.timestamp );
@@ -55,7 +58,7 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 
 	describe( '200 OK', () => {
 		it( 'can add a sitelink', async () => {
-			const sitelink = { title: linkedArticle, badges: [ ALLOWED_BADGES[ 0 ] ] };
+			const sitelink = { title: linkedArticle, badges: [ allowedBadges[ 0 ] ] };
 			const response = await newPatchSitelinksRequestBuilder(
 				testItemId,
 				[ { op: 'add', path: `/${siteId}`, value: sitelink } ]
@@ -65,7 +68,7 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'can patch sitelinks with edit metadata', async () => {
-			const sitelink = { title: linkedArticle, badges: [ ALLOWED_BADGES[ 1 ] ] };
+			const sitelink = { title: linkedArticle, badges: [ allowedBadges[ 1 ] ] };
 			const user = await action.robby(); // robby is a bot
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test' );
 			const editSummary = 'I made a patch';
