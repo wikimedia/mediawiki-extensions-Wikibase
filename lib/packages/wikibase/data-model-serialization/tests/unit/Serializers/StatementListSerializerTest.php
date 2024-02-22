@@ -16,7 +16,7 @@ use Wikibase\DataModel\Statement\StatementList;
  * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class StatementListSerializerTest extends DispatchableSerializerTest {
+class StatementListSerializerTest extends DispatchableSerializerTestCase {
 
 	protected function buildSerializer( bool $useObjectsForEmptyMaps = false ): StatementListSerializer {
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );

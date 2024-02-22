@@ -19,7 +19,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
  * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon
  */
-class SnakSerializerTest extends DispatchableSerializerTest {
+class SnakSerializerTest extends DispatchableSerializerTestCase {
 
 	protected function buildSerializer(): DispatchableSerializer {
 		$serializeWithHash = false;

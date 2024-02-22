@@ -13,7 +13,7 @@ use Serializers\Exceptions\UnsupportedObjectException;
  * @author Thomas Pellissier Tanon
  * @author Thiemo Kreuz
  */
-abstract class DispatchableSerializerTest extends TestCase {
+abstract class DispatchableSerializerTestCase extends TestCase {
 
 	abstract protected function buildSerializer(): DispatchableSerializer;
 

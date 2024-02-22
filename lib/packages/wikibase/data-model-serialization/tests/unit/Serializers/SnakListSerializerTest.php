@@ -15,7 +15,7 @@ use Wikibase\DataModel\Snak\SnakList;
  * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon
  */
-class SnakListSerializerTest extends DispatchableSerializerTest {
+class SnakListSerializerTest extends DispatchableSerializerTestCase {
 
 	protected function buildSerializer( $useObjectsForEmptyMaps = false ): SnakListSerializer {
 		$snakSerializerMock = $this->createMock( SnakSerializer::class );

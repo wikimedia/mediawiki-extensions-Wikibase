@@ -26,7 +26,7 @@ use Wikibase\DataModel\Term\TermList;
  * @author Jan Zerebecki < jan.wikimedia@zerebecki.de >
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class ItemSerializerTest extends DispatchableSerializerTest {
+class ItemSerializerTest extends DispatchableSerializerTestCase {
 
 	protected function buildSerializer( bool $useObjectsForEmptyMaps = false ): ItemSerializer {
 		$termListSerializerMock = $this->createMock( TermListSerializer::class );

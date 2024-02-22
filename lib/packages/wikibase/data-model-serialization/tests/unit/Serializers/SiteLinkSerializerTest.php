@@ -15,7 +15,7 @@ use Wikibase\DataModel\SiteLink;
  * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon
  */
-class SiteLinkSerializerTest extends DispatchableSerializerTest {
+class SiteLinkSerializerTest extends DispatchableSerializerTestCase {
 
 	protected function buildSerializer(): DispatchableSerializer {
 		return new SiteLinkSerializer();
