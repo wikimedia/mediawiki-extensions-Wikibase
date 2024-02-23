@@ -17,7 +17,7 @@ use Wikibase\DataModel\Services\Diff\EntityPatcher;
  * @author Daniel Kinzler
  * @author Jens Ohlig <jens.ohlig@wikimedia.de>
  */
-abstract class EntityDiffOldTest extends TestCase {
+abstract class EntityDiffOldTestCase extends TestCase {
 
 	private static function newEntity( $entityType ) {
 		switch ( $entityType ) {

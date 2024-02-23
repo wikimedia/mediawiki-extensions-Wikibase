@@ -22,7 +22,7 @@ use Wikibase\DataModel\Term\TermList;
  * @author Thomas Pellissier Tanon
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class ItemDeserializerTest extends DispatchableDeserializerTest {
+class ItemDeserializerTest extends DispatchableDeserializerTestCase {
 
 	protected function buildDeserializer() {
 		$entityIdDeserializerMock = $this->createMock( Deserializer::class );

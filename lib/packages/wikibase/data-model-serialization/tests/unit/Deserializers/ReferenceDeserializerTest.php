@@ -18,7 +18,7 @@ use Wikibase\DataModel\Snak\SnakList;
  * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon
  */
-class ReferenceDeserializerTest extends DispatchableDeserializerTest {
+class ReferenceDeserializerTest extends DispatchableDeserializerTestCase {
 
 	protected function buildDeserializer() {
 		$snaksDeserializerMock = $this->createMock( Deserializer::class );

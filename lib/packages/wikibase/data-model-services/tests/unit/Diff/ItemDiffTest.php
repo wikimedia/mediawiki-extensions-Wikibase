@@ -22,7 +22,7 @@ use Wikibase\DataModel\SiteLink;
  * @author Daniel Kinzler
  * @author Michał Łazowik
  */
-class ItemDiffTest extends EntityDiffOldTest {
+class ItemDiffTest extends EntityDiffOldTestCase {
 
 	public function provideApplyData() {
 		$originalTests = $this->generateApplyData( Item::ENTITY_TYPE );

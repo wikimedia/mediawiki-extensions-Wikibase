@@ -21,7 +21,7 @@ use Wikibase\DataModel\Statement\Statement;
  * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon
  */
-class StatementSerializerTest extends DispatchableSerializerTest {
+class StatementSerializerTest extends DispatchableSerializerTestCase {
 
 	protected function buildSerializer(): DispatchableSerializer {
 		$snakSerializerFake = $this->createMock( Serializer::class );

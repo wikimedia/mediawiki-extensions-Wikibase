@@ -20,7 +20,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
  * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon
  */
-class SnakDeserializerTest extends DispatchableDeserializerTest {
+class SnakDeserializerTest extends DispatchableDeserializerTestCase {
 
 	protected function buildDeserializer() {
 		return new SnakDeserializer(

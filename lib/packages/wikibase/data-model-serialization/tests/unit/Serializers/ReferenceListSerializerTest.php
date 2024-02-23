@@ -17,7 +17,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
  * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon
  */
-class ReferenceListSerializerTest extends DispatchableSerializerTest {
+class ReferenceListSerializerTest extends DispatchableSerializerTestCase {
 
 	protected function buildSerializer(): DispatchableSerializer {
 		$referenceSerializerFake = $this->createMock( Serializer::class );

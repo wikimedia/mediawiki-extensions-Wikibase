@@ -19,7 +19,7 @@ use Wikibase\DataModel\Snak\SnakList;
  * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon
  */
-class ReferenceSerializerTest extends DispatchableSerializerTest {
+class ReferenceSerializerTest extends DispatchableSerializerTestCase {
 
 	protected function buildSerializer(): DispatchableSerializer {
 		$snakListSerializerMock = $this->createMock( Serializer::class );

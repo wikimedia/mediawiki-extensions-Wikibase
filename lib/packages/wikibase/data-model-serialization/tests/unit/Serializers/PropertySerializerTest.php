@@ -22,7 +22,7 @@ use Wikibase\DataModel\Term\TermList;
  * @author Thomas Pellissier Tanon
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class PropertySerializerTest extends DispatchableSerializerTest {
+class PropertySerializerTest extends DispatchableSerializerTestCase {
 
 	protected function buildSerializer(): DispatchableSerializer {
 		$termListSerializerMock = $this->createMock( Serializer::class );

@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  * @author Thomas Pellissier Tanon
  * @author Thiemo Kreuz
  */
-abstract class DispatchableDeserializerTest extends TestCase {
+abstract class DispatchableDeserializerTestCase extends TestCase {
 
 	/**
 	 * @return DispatchableDeserializer
