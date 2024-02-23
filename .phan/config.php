@@ -93,4 +93,8 @@ $cfg['suppress_issue_types'] = array_merge(
 	]
 );
 
+// To migrate later
+$cfg['suppress_issue_types'][] = 'MediaWikiNoBaseException';
+$cfg['suppress_issue_types'][] = 'MediaWikiNoEmptyIfDefined';
+
 return $cfg;
