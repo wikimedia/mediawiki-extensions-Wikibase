@@ -92,7 +92,7 @@
 	"wikibase-pageinfo-entity-usage-O": "Ýmislegt (þ.e. samnefni, tilurð einingar)",
 	"wikibase-property-render-error": "Mistókst að myndgera eiginleika $1: $2",
 	"wikibase-otherprojects": "Í öðrum verkefnum",
-	"wikibase-otherprojects-beta-message": "Hliðarstika annara verkefna",
+	"wikibase-otherprojects-beta-message": "Hliðarstika annarra verkefna",
 	"wikibase-otherprojects-beta-description": "Bætir við \"{{int:wikibase-otherprojects}}\" fyrirsögn í hliðarstikuna með tenglum á önnur Wikimedia verkefni, byggt á gögnum {{WBREPONAME}}.",
 	"wikibase-sitelinks-sitename-columnheading": "Tungumál",
 	"wikibase-sitelinks-link-columnheading": "Tengd síða",
