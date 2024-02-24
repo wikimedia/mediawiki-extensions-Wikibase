@@ -55,18 +55,21 @@ class SqlSiteLinkConflictLookupTest extends MediaWikiIntegrationTestCase {
 			'sitePage' => 'Kitten',
 		] ];
 
+		$item = $this->getItem( 'Kitten' );
+
 		$this->assertEquals(
 			$expected,
-			$siteLinkConflictLookup->getConflictsForItem( $this->getItem( 'Kitten' ) )
+			$siteLinkConflictLookup->getConflictsForItem( $item->getId(), $item->getSiteLinkList() )
 		);
 	}
 
 	public function testGetConflictsForItem_noConflict() {
 		$siteLinkConflictLookup = $this->newSqlSiteLinkConflictLookup();
+		$item = $this->getItem( 'Cat' );
 
 		$this->assertSame(
 			[],
-			$siteLinkConflictLookup->getConflictsForItem( $this->getItem( 'Cat' ) )
+			$siteLinkConflictLookup->getConflictsForItem( $item->getId(), $item->getSiteLinkList() )
 		);
 	}
 

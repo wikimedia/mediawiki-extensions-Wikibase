@@ -4,7 +4,9 @@ namespace Wikibase\Repo\Store\Sql;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
+use Wikibase\DataModel\SiteLinkList;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
 use Wikimedia\Rdbms\ILoadBalancer;
@@ -36,15 +38,14 @@ class SqlSiteLinkConflictLookup implements SiteLinkConflictLookup {
 	/**
 	 * @see SiteLinkConflictLookup::getConflictsForItem
 	 *
-	 * @param Item $item
+	 * @param ItemId $itemId
+	 * @param SiteLinkList $siteLinkList
 	 * @param int|null $db
 	 *
 	 * @return array[] An array of arrays, each with the keys "siteId", "itemId" and "sitePage".
 	 */
-	public function getConflictsForItem( Item $item, int $db = null ) {
-		$siteLinks = $item->getSiteLinkList();
-
-		if ( $siteLinks->isEmpty() ) {
+	public function getConflictsForItem( ItemId $itemId, SiteLinkList $siteLinkList, int $db = null ) {
+		if ( $siteLinkList->isEmpty() ) {
 			return [];
 		}
 
@@ -60,7 +61,7 @@ class SqlSiteLinkConflictLookup implements SiteLinkConflictLookup {
 
 		$linkConds = [];
 
-		foreach ( $siteLinks as $siteLink ) {
+		foreach ( $siteLinkList as $siteLink ) {
 			$linkConds[] = $dbr->makeList( [
 				'ips_site_id' => $siteLink->getSiteId(),
 				'ips_site_page' => $siteLink->getPageName(),
@@ -79,7 +80,7 @@ class SqlSiteLinkConflictLookup implements SiteLinkConflictLookup {
 			] )
 			->from( 'wb_items_per_site' )
 			->where( $dbr->makeList( $linkConds, $dbr::LIST_OR ) )
-			->andWhere( [ 'ips_item_id != ' . (int)$item->getId()->getNumericId() ] )
+			->andWhere( [ 'ips_item_id != ' . $itemId->getNumericId() ] )
 			->caller( __METHOD__ )
 			->fetchResultSet();
 

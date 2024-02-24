@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\RestApi\Infrastructure;
 
 use LogicException;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
@@ -75,13 +74,10 @@ class SiteLinkConflictLookupSitelinkValidator implements SitelinkValidator {
 	}
 
 	private function checkSitelinkConflict( string $itemId, string $siteId, array $sitelink ): ?ValidationError {
-		$item = new Item(
+		$sitelinkConflictArray = $this->siteLinkConflictLookup->getConflictsForItem(
 			new ItemId( $itemId ),
-			null,
 			new SiteLinkList( [ new SiteLink( $siteId, $sitelink[ 'title' ] ) ] )
 		);
-
-		$sitelinkConflictArray = $this->siteLinkConflictLookup->getConflictsForItem( $item );
 
 		if ( is_array( $sitelinkConflictArray ) && count( $sitelinkConflictArray ) > 0 ) {
 			return new ValidationError(

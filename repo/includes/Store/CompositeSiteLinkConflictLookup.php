@@ -4,7 +4,8 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Store;
 
-use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\SiteLinkList;
 
 /**
  * A {@link SiteLinkConflictLookup} composing several others.
@@ -24,9 +25,9 @@ class CompositeSiteLinkConflictLookup implements SiteLinkConflictLookup {
 		$this->lookups = $lookups;
 	}
 
-	public function getConflictsForItem( Item $item, int $db = null ): array {
+	public function getConflictsForItem( ItemId $itemId, SiteLinkList $siteLinkList, int $db = null ): array {
 		foreach ( $this->lookups as $lookup ) {
-			$conflicts = $lookup->getConflictsForItem( $item, $db );
+			$conflicts = $lookup->getConflictsForItem( $itemId, $siteLinkList, $db );
 			if ( $conflicts !== [] ) {
 				return $conflicts;
 			}
