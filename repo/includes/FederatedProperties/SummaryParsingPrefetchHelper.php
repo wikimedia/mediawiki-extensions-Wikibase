@@ -5,6 +5,7 @@ namespace Wikibase\Repo\FederatedProperties;
 
 use LogicException;
 use MediaWiki\Revision\RevisionRecord;
+use Psr\Log\LoggerInterface;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -22,11 +23,16 @@ class SummaryParsingPrefetchHelper {
 	 */
 	private $prefetchingLookup;
 
+	/** @var LoggerInterface */
+	private $logger;
+
 	public function __construct(
-		PrefetchingTermLookup $prefetchingLookup
+		PrefetchingTermLookup $prefetchingLookup,
+		LoggerInterface $logger
 
 	) {
 		$this->prefetchingLookup = $prefetchingLookup;
+		$this->logger = $logger;
 	}
 
 	/**
@@ -51,9 +57,10 @@ class SummaryParsingPrefetchHelper {
 				$languageCodes
 			);
 		} catch ( FederatedPropertiesException $ex ) {
-			wfLogWarning(
-				__METHOD__ . ': Prefetching failed for federated properties: ' . implode( ',', $resultProperties )
-			);
+			$this->logger->warning( 'Prefetching failed for federated properties: {resultProperties}', [
+				'resultProperties' => implode( ',', $resultProperties ),
+				'exception' => $ex,
+			] );
 		}
 	}
 
