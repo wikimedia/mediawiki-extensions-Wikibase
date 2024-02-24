@@ -61,6 +61,14 @@ class UseCaseError extends UseCaseException {
 	public const PATCHED_ALIAS_DUPLICATE = 'patched-duplicate-alias';
 	public const PATCHED_STATEMENT_INVALID_FIELD = 'patched-statement-invalid-field';
 	public const PATCHED_STATEMENT_MISSING_FIELD = 'patched-statement-missing-field';
+	public const PATCHED_SITELINK_INVALID_SITE_ID = 'patched-sitelink-invalid-site-id';
+	public const PATCHED_SITELINK_MISSING_TITLE = 'patched-sitelink-missing-title';
+	public const PATCHED_SITELINK_TITLE_EMPTY = 'patched-sitelink-title-empty';
+	public const PATCHED_SITELINK_INVALID_TITLE = 'patched-sitelink-invalid-title';
+	public const PATCHED_SITELINK_TITLE_DOES_NOT_EXIST = 'patched-sitelink-title-does-not-exist';
+	public const PATCHED_SITELINK_INVALID_BADGE = 'patched-sitelink-invalid-badge';
+	public const PATCHED_SITELINK_ITEM_NOT_A_BADGE = 'patched-sitelink-item-not-a-badge';
+	public const PATCHED_SITELINK_BADGES_FORMAT = 'patched-sitelink-badges-format';
 	public const PATCH_TARGET_NOT_FOUND = 'patch-target-not-found';
 	public const PATCH_TEST_FAILED = 'patch-test-failed';
 	public const PERMISSION_DENIED = 'permission-denied';
@@ -94,6 +102,10 @@ class UseCaseError extends UseCaseException {
 	public const CONTEXT_OPERATION = 'operation';
 	public const CONTEXT_PATH = 'path';
 	public const CONTEXT_PROPERTY_ID = 'property-id';
+	public const CONTEXT_SITE_ID = 'site-id';
+	public const CONTEXT_TITLE = 'title';
+	public const CONTEXT_BADGE = 'badge';
+	public const CONTEXT_BADGES = 'badges';
 	public const CONTEXT_SUBJECT_ID = 'subject-id';
 	public const CONTEXT_VALUE = 'value';
 
@@ -159,6 +171,14 @@ class UseCaseError extends UseCaseException {
 		self::PATCHED_ALIAS_DUPLICATE => [ self::CONTEXT_LANGUAGE, self::CONTEXT_VALUE ],
 		self::PATCHED_STATEMENT_INVALID_FIELD => [ self::CONTEXT_PATH, self::CONTEXT_VALUE ],
 		self::PATCHED_STATEMENT_MISSING_FIELD => [ self::CONTEXT_PATH ],
+		self::PATCHED_SITELINK_INVALID_SITE_ID => [ self::CONTEXT_SITE_ID ],
+		self::PATCHED_SITELINK_MISSING_TITLE => [ self::CONTEXT_SITE_ID ],
+		self::PATCHED_SITELINK_TITLE_EMPTY => [ self::CONTEXT_SITE_ID ],
+		self::PATCHED_SITELINK_INVALID_TITLE => [ self::CONTEXT_SITE_ID, self::CONTEXT_TITLE ],
+		self::PATCHED_SITELINK_TITLE_DOES_NOT_EXIST => [ self::CONTEXT_SITE_ID, self::CONTEXT_TITLE ],
+		self::PATCHED_SITELINK_INVALID_BADGE => [ self::CONTEXT_SITE_ID, self::CONTEXT_BADGE ],
+		self::PATCHED_SITELINK_ITEM_NOT_A_BADGE => [ self::CONTEXT_SITE_ID, self::CONTEXT_BADGE ],
+		self::PATCHED_SITELINK_BADGES_FORMAT => [ self::CONTEXT_SITE_ID, self::CONTEXT_BADGES ],
 		self::PATCH_TARGET_NOT_FOUND => [ self::CONTEXT_OPERATION, self::CONTEXT_FIELD ],
 		self::PATCH_TEST_FAILED => [ self::CONTEXT_OPERATION, self::CONTEXT_ACTUAL_VALUE ],
 		self::PERMISSION_DENIED => [],

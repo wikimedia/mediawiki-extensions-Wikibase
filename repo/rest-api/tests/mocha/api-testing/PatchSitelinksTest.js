@@ -237,4 +237,167 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 
 	} );
 
+	describe( '422 error response', () => {
+		const makeReplaceExistingSitelinkPatchOperation = ( newSitelink ) => ( {
+			op: 'replace',
+			path: `/${siteId}`,
+			value: newSitelink
+		} );
+
+		it( 'invalid site id', async () => {
+			const invalidSiteId = 'not-valid-site-id';
+			const sitelink = { title: linkedArticle, badges: [ allowedBadges[ 0 ] ] };
+
+			const response = await newPatchSitelinksRequestBuilder(
+				testItemId,
+				[ { op: 'add', path: `/${invalidSiteId}`, value: sitelink } ]
+			).assertValidRequest().makeRequest();
+
+			assertValidErrorResponse(
+				response,
+				422,
+				'patched-sitelink-invalid-site-id',
+				{ 'site-id': invalidSiteId }
+			);
+
+			assert.include( response.body.message, invalidSiteId );
+		} );
+
+		it( 'missing title', async () => {
+			const sitelink = { badges: [ allowedBadges[ 0 ] ] };
+
+			const response = await newPatchSitelinksRequestBuilder(
+				testItemId,
+				[ makeReplaceExistingSitelinkPatchOperation( sitelink ) ]
+			).assertValidRequest().makeRequest();
+
+			assertValidErrorResponse(
+				response,
+				422,
+				'patched-sitelink-missing-title',
+				{ 'site-id': siteId }
+			);
+
+			assert.include( response.body.message, siteId );
+		} );
+
+		it( 'empty title', async () => {
+			const sitelink = { title: '', badges: [ allowedBadges[ 0 ] ] };
+
+			const response = await newPatchSitelinksRequestBuilder(
+				testItemId,
+				[ makeReplaceExistingSitelinkPatchOperation( sitelink ) ]
+			).assertValidRequest().makeRequest();
+
+			assertValidErrorResponse(
+				response,
+				422,
+				'patched-sitelink-title-empty',
+				{ 'site-id': siteId }
+			);
+
+			assert.include( response.body.message, siteId );
+		} );
+
+		it( 'invalid title', async () => {
+			const invalidTitle = 'invalid??%00';
+			const sitelink = { title: invalidTitle, badges: [ allowedBadges[ 0 ] ] };
+
+			const response = await newPatchSitelinksRequestBuilder(
+				testItemId,
+				[ makeReplaceExistingSitelinkPatchOperation( sitelink ) ]
+			).assertValidRequest().makeRequest();
+
+			assertValidErrorResponse(
+				response,
+				422,
+				'patched-sitelink-invalid-title',
+				{ 'site-id': siteId, title: invalidTitle }
+			);
+
+			assert.include( response.body.message, siteId );
+			assert.include( response.body.message, invalidTitle );
+		} );
+
+		it( 'title does not exist', async () => {
+			const nonExistingTitle = 'this_title_does_not_exist';
+			const sitelink = { title: nonExistingTitle, badges: [ allowedBadges[ 0 ] ] };
+
+			const response = await newPatchSitelinksRequestBuilder(
+				testItemId,
+				[ makeReplaceExistingSitelinkPatchOperation( sitelink ) ]
+			).assertValidRequest().makeRequest();
+
+			assertValidErrorResponse(
+				response,
+				422,
+				'patched-sitelink-title-does-not-exist',
+				{ 'site-id': siteId, title: nonExistingTitle }
+			);
+
+			assert.include( response.body.message, siteId );
+			assert.include( response.body.message, nonExistingTitle );
+		} );
+
+		it( 'invalid badge', async () => {
+			const invalidBadge = 'not-an-item-id';
+			const sitelink = { title: linkedArticle, badges: [ invalidBadge ] };
+
+			const response = await newPatchSitelinksRequestBuilder(
+				testItemId,
+				[ makeReplaceExistingSitelinkPatchOperation( sitelink ) ]
+			).assertValidRequest().makeRequest();
+
+			assertValidErrorResponse(
+				response,
+				422,
+				'patched-sitelink-invalid-badge',
+				{ 'site-id': siteId, badge: invalidBadge }
+			);
+
+			assert.include( response.body.message, siteId );
+			assert.include( response.body.message, invalidBadge );
+		} );
+
+		it( 'item not a badge', async () => {
+			const notBadgeItemId = 'Q113';
+			const sitelink = { title: linkedArticle, badges: [ notBadgeItemId ] };
+
+			const response = await newPatchSitelinksRequestBuilder(
+				testItemId,
+				[ makeReplaceExistingSitelinkPatchOperation( sitelink ) ]
+			).assertValidRequest().makeRequest();
+
+			assertValidErrorResponse(
+				response,
+				422,
+				'patched-sitelink-item-not-a-badge',
+				{ 'site-id': siteId, badge: notBadgeItemId }
+			);
+
+			assert.include( response.body.message, siteId );
+			assert.include( response.body.message, notBadgeItemId );
+		} );
+
+		it( 'badges are not a list', async () => {
+			const badgesWithInvalidFormat = 'Q113, Q232, Q444';
+			const sitelink = { title: linkedArticle, badges: badgesWithInvalidFormat };
+
+			const response = await newPatchSitelinksRequestBuilder(
+				testItemId,
+				[ makeReplaceExistingSitelinkPatchOperation( sitelink ) ]
+			).assertValidRequest().makeRequest();
+
+			assertValidErrorResponse(
+				response,
+				422,
+				'patched-sitelink-badges-format',
+				{ 'site-id': siteId, badges: badgesWithInvalidFormat }
+			);
+
+			assert.include( response.body.message, siteId );
+		} );
+
+	} );
+
 } );

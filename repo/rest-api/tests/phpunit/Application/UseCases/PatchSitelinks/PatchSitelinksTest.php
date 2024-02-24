@@ -6,17 +6,18 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\SitelinksDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinksSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchSitelinks\PatchedSitelinksValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchSitelinks\PatchSitelinks;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchSitelinks\PatchSitelinksRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchSitelinks\PatchSitelinksValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\Application\Validation\SiteIdValidator;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\SitelinksEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\User;
@@ -47,7 +48,7 @@ class PatchSitelinksTest extends TestCase {
 	private SitelinksSerializer $sitelinksSerializer;
 	private PatchJson $patcher;
 	private ItemRetriever $itemRetriever;
-	private SitelinksDeserializer $sitelinksDeserializer;
+	private PatchedSitelinksValidator $patchedSitelinksValidator;
 	private ItemUpdater $itemUpdater;
 
 	private const ALLOWED_BADGES = [ 'Q999' ];
@@ -62,12 +63,15 @@ class PatchSitelinksTest extends TestCase {
 		$this->sitelinksSerializer = new SitelinksSerializer( new SitelinkSerializer() );
 		$this->patcher = new PatchJson( new JsonDiffJsonPatcher() );
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
-		$this->sitelinksDeserializer = new SitelinksDeserializer( new SitelinkDeserializer(
-			'/\?/',
-			self::ALLOWED_BADGES,
-			new SameTitleSitelinkTargetResolver(),
-			new DummyItemRevisionMetaDataRetriever()
-		) );
+		$this->patchedSitelinksValidator = new PatchedSitelinksValidator(
+			new SiteIdValidator( TestValidatingRequestDeserializer::ALLOWED_SITE_IDS ),
+			new SitelinkDeserializer(
+				'/\?/',
+				self::ALLOWED_BADGES,
+				new SameTitleSitelinkTargetResolver(),
+				new DummyItemRevisionMetaDataRetriever()
+			)
+		);
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
 	}
 
@@ -181,6 +185,39 @@ class PatchSitelinksTest extends TestCase {
 		}
 	}
 
+	public function testGivenPatchedSitelinksInvalid_throws(): void {
+		$item = NewItem::withId( 'Q123' )->build();
+		$patchResult = [ 'invalid-site-id' => [] ];
+
+		$itemRepo = new InMemoryItemRepository();
+		$itemRepo->addItem( $item );
+		$this->sitelinksRetriever = $itemRepo;
+		$this->itemRetriever = $itemRepo;
+
+		$expectedUseCaseError = $this->createStub( UseCaseError::class );
+		$this->patchedSitelinksValidator = $this->createMock( PatchedSitelinksValidator::class );
+		$this->patchedSitelinksValidator->expects( $this->once() )
+			->method( 'validateAndDeserialize' )
+			->with( $patchResult )
+			->willThrowException( $expectedUseCaseError );
+
+		try {
+			$this->newUseCase()->execute(
+				new PatchSitelinksRequest(
+					$item->getId()->getSerialization(),
+					[ [ 'op' => 'add', 'path' => '/invalid-site-id', 'value' => [] ] ],
+					[],
+					false,
+					null,
+					null
+				)
+			);
+			$this->fail( 'expected exception was not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedUseCaseError, $e );
+		}
+	}
+
 	public function testGivenPatchJsonError_throws(): void {
 		$itemId = 'Q123';
 
@@ -215,7 +252,7 @@ class PatchSitelinksTest extends TestCase {
 			$this->sitelinksSerializer,
 			$this->patcher,
 			$this->itemRetriever,
-			$this->sitelinksDeserializer,
+			$this->patchedSitelinksValidator,
 			$this->itemUpdater
 		);
 	}

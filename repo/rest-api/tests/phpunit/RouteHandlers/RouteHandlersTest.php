@@ -133,6 +133,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @coversNothing
  *
  * @group Wikibase
+ * @group Database
  *
  * @license GPL-2.0-or-later
  */
