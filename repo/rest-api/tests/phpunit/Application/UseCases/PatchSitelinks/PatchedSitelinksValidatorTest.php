@@ -132,7 +132,7 @@ class PatchedSitelinksValidatorTest extends TestCase {
 			[ $validSiteId => [ 'title' => 'test_title', 'badges' => $badgeItemId ] ],
 			new UseCaseError(
 				UseCaseError::PATCHED_SITELINK_BADGES_FORMAT,
-				"Badges for site '$validSiteId' is not a list in patched sitelinks",
+				"Badges value for site '$validSiteId' is not a list in patched sitelinks",
 				[
 					UseCaseError::CONTEXT_SITE_ID => $validSiteId,
 					UseCaseError::CONTEXT_BADGES => $badgeItemId,
