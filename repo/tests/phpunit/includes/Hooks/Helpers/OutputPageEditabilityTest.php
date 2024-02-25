@@ -3,13 +3,14 @@
 namespace Wikibase\Repo\Tests\Hooks\Helpers;
 
 use DerivativeContext;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Output\OutputPage;
+use MediaWiki\Permissions\SimpleAuthority;
+use MediaWiki\Permissions\UltimateAuthority;
 use MediaWiki\Request\FauxResponse;
 use MediaWiki\Request\WebRequest;
 use MediaWiki\Title\Title;
-use MediaWiki\User\User;
-use PHPUnit\Framework\TestCase;
+use MediaWiki\User\UserIdentityValue;
+use MediaWikiIntegrationTestCase;
 use RequestContext;
 use Wikibase\Repo\Hooks\Helpers\OutputPageEditability;
 
@@ -20,7 +21,7 @@ use Wikibase\Repo\Hooks\Helpers\OutputPageEditability;
  *
  * @license GPL-2.0-or-later
  */
-class OutputPageEditabilityTest extends TestCase {
+class OutputPageEditabilityTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @dataProvider nonEditableOutputPageProvider
@@ -31,12 +32,11 @@ class OutputPageEditabilityTest extends TestCase {
 	}
 
 	public function nonEditableOutputPageProvider() {
+		$user = new UserIdentityValue( 1, __METHOD__ );
 		$out = $this->newOutputPage();
-		$noRightsUser = User::newFromName( 'Test' );
-		MediaWikiServices::getInstance()->getPermissionManager()
-			->overrideUserRightsForTesting( $noRightsUser, [] );
-		$noRightsUserContext = new DerivativeContext( RequestContext::getMain() );
-		$noRightsUserContext->setUser( $noRightsUser );
+		$noRightsPerformer = new SimpleAuthority( $user, [] );
+		$noRightsUserContext = new RequestContext();
+		$noRightsUserContext->setAuthority( $noRightsPerformer );
 		$out->setContext( $noRightsUserContext );
 		$out->setTitle( Title::makeTitle( NS_MAIN, 'Test' ) );
 		yield 'user does not have edit permission' => [ $out ];
@@ -48,7 +48,8 @@ class OutputPageEditabilityTest extends TestCase {
 			->willReturn( true );
 		$request->method( 'response' )
 			->willReturn( new FauxResponse );
-		$context = new DerivativeContext( RequestContext::getMain() );
+		$context = new RequestContext();
+		$context->setAuthority( new UltimateAuthority( $user ) );
 		$context->setRequest( $request );
 		$context->setTitle( Title::makeTitle( NS_MAIN, __METHOD__ ) );
 		yield 'diff page' => [ new OutputPage( $context ) ];
@@ -64,6 +65,10 @@ class OutputPageEditabilityTest extends TestCase {
 		yield 'not latest revision' => [ $out ];
 
 		$out = $this->newOutputPage();
+		$context = new RequestContext();
+		$context->setAuthority( new UltimateAuthority( $user ) );
+		$context->setTitle( Title::makeTitle( NS_MAIN, 'Test' ) );
+		$out->setContext( $context );
 		$out->setPrintable();
 		yield 'print view' => [ $out ];
 	}
@@ -85,9 +90,8 @@ class OutputPageEditabilityTest extends TestCase {
 	private function getDefaultEditableOutputPage() {
 		$outputPage = $this->newOutputPage();
 
-		$user = User::newFromName( 'TestUser' );
-		MediaWikiServices::getInstance()->getPermissionManager()
-			->overrideUserRightsForTesting( $user, [ 'edit' ] );
+		$user = new UserIdentityValue( 1, __METHOD__ );
+		$performer = new UltimateAuthority( $user );
 
 		$title = $this->createMock( Title::class );
 		$title->method( 'getNamespace' )->willReturn( NS_MAIN );
@@ -101,7 +105,7 @@ class OutputPageEditabilityTest extends TestCase {
 			->with( 'diff' )
 			->willReturn( false );
 		$context = new DerivativeContext( RequestContext::getMain() );
-		$context->setUser( $user );
+		$context->setAuthority( $performer );
 		$context->setRequest( $request );
 		$context->setTitle( $title );
 
@@ -118,9 +122,8 @@ class OutputPageEditabilityTest extends TestCase {
 	private function getNullRevisionEditableOutputPage() {
 		$outputPage = $this->newOutputPage();
 
-		$user = User::newFromName( 'TestUser' );
-		MediaWikiServices::getInstance()->getPermissionManager()
-			->overrideUserRightsForTesting( $user, [ 'edit' ] );
+		$user = new UserIdentityValue( 1, __METHOD__ );
+		$performer = new UltimateAuthority( $user );
 
 		$title = $this->createMock( Title::class );
 		$title->method( 'getNamespace' )->willReturn( NS_MAIN );
@@ -134,7 +137,7 @@ class OutputPageEditabilityTest extends TestCase {
 			->with( 'diff' )
 			->willReturn( false );
 		$context = new DerivativeContext( RequestContext::getMain() );
-		$context->setUser( $user );
+		$context->setAuthority( $performer );
 		$context->setRequest( $request );
 		$context->setTitle( $title );
 
@@ -148,9 +151,8 @@ class OutputPageEditabilityTest extends TestCase {
 	private function getNonExistingTitleEditableOutputPage() {
 		$outputPage = $this->newOutputPage();
 
-		$user = User::newFromName( 'TestUser' );
-		MediaWikiServices::getInstance()->getPermissionManager()
-			->overrideUserRightsForTesting( $user, [ 'edit', 'create' ] );
+		$user = new UserIdentityValue( 1, __METHOD__ );
+		$performer = new UltimateAuthority( $user );
 
 		$title = $this->createMock( Title::class );
 		$title->method( 'getNamespace' )->willReturn( NS_MAIN );
@@ -168,7 +170,7 @@ class OutputPageEditabilityTest extends TestCase {
 		$context = new DerivativeContext( RequestContext::getMain() );
 		$context->setRequest( $request );
 		$context->setTitle( $title );
-		$context->setUser( $user );
+		$context->setAuthority( $performer );
 
 		$outputPage->setRevisionId( 123 );
 		$title->expects( $this->once() )
@@ -184,7 +186,7 @@ class OutputPageEditabilityTest extends TestCase {
 	 * @return OutputPage
 	 */
 	private function newOutputPage() {
-		$outputPage = new OutputPage( new DerivativeContext( RequestContext::getMain() ) );
+		$outputPage = new OutputPage( new RequestContext() );
 		$outputPage->setTitle( Title::makeTitle( NS_MAIN, __METHOD__ ) );
 
 		return $outputPage;
