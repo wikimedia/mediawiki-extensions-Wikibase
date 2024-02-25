@@ -6,17 +6,17 @@ use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\Application\Validation\DescriptionLanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
-use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoDescriptionLanguageCodeValidator;
+use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryDescriptionLanguageCodeValidator;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoDescriptionLanguageCodeValidator
+ * @covers \Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryDescriptionLanguageCodeValidator
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class WikibaseRepoDescriptionLanguageCodeValidatorTest extends TestCase {
+class TermValidatorFactoryDescriptionLanguageCodeValidatorTest extends TestCase {
 
 	/**
 	 * @dataProvider provideValidDescriptionLanguageCode
@@ -50,8 +50,8 @@ class WikibaseRepoDescriptionLanguageCodeValidatorTest extends TestCase {
 		yield "mul can't be used as a description language code" => [ 'mul' ];
 	}
 
-	private function newValidator(): WikibaseRepoDescriptionLanguageCodeValidator {
-		return new WikibaseRepoDescriptionLanguageCodeValidator(
+	private function newValidator(): TermValidatorFactoryDescriptionLanguageCodeValidator {
+		return new TermValidatorFactoryDescriptionLanguageCodeValidator(
 			WikibaseRepo::getTermValidatorFactory()
 		);
 	}

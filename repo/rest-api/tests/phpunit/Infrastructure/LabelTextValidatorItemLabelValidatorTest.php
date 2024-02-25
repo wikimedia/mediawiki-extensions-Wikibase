@@ -9,18 +9,18 @@ use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
+use Wikibase\Repo\RestApi\Infrastructure\LabelTextValidatorItemLabelValidator;
 use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryLabelTextValidator;
-use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoItemLabelValidator;
 use Wikibase\Repo\Store\TermsCollisionDetector;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoItemLabelValidator
+ * @covers \Wikibase\Repo\RestApi\Infrastructure\LabelTextValidatorItemLabelValidator
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class WikibaseRepoItemLabelValidatorTest extends TestCase {
+class LabelTextValidatorItemLabelValidatorTest extends TestCase {
 
 	private ItemRetriever $itemRetriever;
 	private TermsCollisionDetector $termsCollisionDetector;
@@ -134,8 +134,8 @@ class WikibaseRepoItemLabelValidatorTest extends TestCase {
 		);
 	}
 
-	private function newValidator(): WikibaseRepoItemLabelValidator {
-		return new WikibaseRepoItemLabelValidator(
+	private function newValidator(): LabelTextValidatorItemLabelValidator {
+		return new LabelTextValidatorItemLabelValidator(
 			$this->labelTextValidator,
 			$this->termsCollisionDetector,
 			$this->itemRetriever

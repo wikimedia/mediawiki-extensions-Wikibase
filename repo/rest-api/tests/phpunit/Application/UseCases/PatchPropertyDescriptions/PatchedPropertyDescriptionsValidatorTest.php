@@ -17,7 +17,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions\Patched
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
-use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoPropertyDescriptionValidator;
+use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryPropertyDescriptionValidator;
 use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 
@@ -137,7 +137,7 @@ class PatchedPropertyDescriptionsValidatorTest extends TestCase {
 
 		return new PatchedPropertyDescriptionsValidator(
 			new DescriptionsDeserializer(),
-			new WikibaseRepoPropertyDescriptionValidator(
+			new TermValidatorFactoryPropertyDescriptionValidator(
 				new TermValidatorFactory(
 					self::LIMIT,
 					$validLanguageCodes,

@@ -12,7 +12,7 @@ use Wikibase\Repo\Validators\TermValidatorFactory;
 /**
  * @license GPL-2.0-or-later
  */
-class WikibaseRepoItemDescriptionValidator implements ItemDescriptionValidator {
+class TermValidatorFactoryItemDescriptionValidator implements ItemDescriptionValidator {
 
 	private TermValidatorFactory $termValidatorFactory;
 	private TermsCollisionDetector $termsCollisionDetector;

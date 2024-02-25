@@ -11,7 +11,7 @@ use Wikibase\Repo\Validators\TermValidatorFactory;
 /**
  * @license GPL-2.0-or-later
  */
-class WikibaseRepoPropertyDescriptionValidator implements PropertyDescriptionValidator {
+class TermValidatorFactoryPropertyDescriptionValidator implements PropertyDescriptionValidator {
 
 	private TermValidatorFactory $termValidatorFactory;
 	private PropertyRetriever $propertyRetriever;

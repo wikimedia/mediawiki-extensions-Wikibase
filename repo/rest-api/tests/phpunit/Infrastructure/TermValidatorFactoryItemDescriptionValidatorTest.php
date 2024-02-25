@@ -11,19 +11,19 @@ use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
-use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoItemDescriptionValidator;
+use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryItemDescriptionValidator;
 use Wikibase\Repo\Store\TermsCollisionDetector;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoItemDescriptionValidator
+ * @covers \Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryItemDescriptionValidator
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class WikibaseRepoItemDescriptionValidatorTest extends TestCase {
+class TermValidatorFactoryItemDescriptionValidatorTest extends TestCase {
 
 	private const MAX_LENGTH = 50;
 
@@ -179,8 +179,8 @@ class WikibaseRepoItemDescriptionValidatorTest extends TestCase {
 		$this->assertNull( $this->newValidator()->validate( $itemId, $language, $description ) );
 	}
 
-	private function newValidator(): WikibaseRepoItemDescriptionValidator {
-		return new WikibaseRepoItemDescriptionValidator(
+	private function newValidator(): TermValidatorFactoryItemDescriptionValidator {
+		return new TermValidatorFactoryItemDescriptionValidator(
 			$this->newTermValidatorFactory(),
 			$this->termsCollisionDetector,
 			$this->itemRetriever

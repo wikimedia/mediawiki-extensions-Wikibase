@@ -11,18 +11,18 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
-use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoPropertyDescriptionValidator;
+use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryPropertyDescriptionValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoPropertyDescriptionValidator
+ * @covers \Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryPropertyDescriptionValidator
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class WikibaseRepoPropertyDescriptionValidatorTest extends TestCase {
+class TermValidatorFactoryPropertyDescriptionValidatorTest extends TestCase {
 
 	private const MAX_LENGTH = 50;
 
@@ -144,8 +144,8 @@ class WikibaseRepoPropertyDescriptionValidatorTest extends TestCase {
 		$this->assertNull( $this->newValidator()->validate( $propertyId, $language, $description ) );
 	}
 
-	private function newValidator(): WikibaseRepoPropertyDescriptionValidator {
-		return new WikibaseRepoPropertyDescriptionValidator(
+	private function newValidator(): TermValidatorFactoryPropertyDescriptionValidator {
+		return new TermValidatorFactoryPropertyDescriptionValidator(
 			$this->newTermValidatorFactory(),
 			$this->propertyRetriever
 		);

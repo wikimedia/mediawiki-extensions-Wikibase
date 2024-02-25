@@ -9,7 +9,7 @@ use Wikibase\Repo\Validators\TermValidatorFactory;
 /**
  * @license GPL-2.0-or-later
  */
-class WikibaseRepoDescriptionLanguageCodeValidator implements DescriptionLanguageCodeValidator {
+class TermValidatorFactoryDescriptionLanguageCodeValidator implements DescriptionLanguageCodeValidator {
 
 	private TermValidatorFactory $termValidatorFactory;
 
