@@ -83,6 +83,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions\PatchPr
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchPropertyLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchPropertyLabelsResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyStatement\PatchPropertyStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchSitelinks\PatchSitelinks;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchSitelinks\PatchSitelinksResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemDescription\RemoveItemDescription;
@@ -907,6 +909,25 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			'validRequest' => [
 				'pathParams' => [ 'item_id' => 'Q1', 'site_id' => 'dewiki' ],
 				'bodyContents' => [ 'sitelink' => [ 'title' => 'title' ] ],
+			],
+			'expectedExceptions' => [
+				[
+					new UseCaseError( UseCaseError::INVALID_ITEM_ID, '' ),
+					$hasErrorCode ( UseCaseError::INVALID_ITEM_ID ),
+				],
+				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::ITEM_REDIRECTED ) ],
+			],
+		] ];
+		yield 'PatchSitelinks' => [ [
+			'useCase' => PatchSitelinks::class,
+			'useCaseResponse' => new PatchSitelinksResponse(
+				new Sitelinks( new Sitelink( 'dewiki', 'title', [], '' ) ),
+				$lastModified,
+				123
+			),
+			'validRequest' => [
+				'pathParams' => [ 'item_id' => 'Q1' ],
+				'bodyContents' => [ 'patch' => [ [ 'op' => 'remove', 'path' => '/dewiki/badges' ] ] ],
 			],
 			'expectedExceptions' => [
 				[

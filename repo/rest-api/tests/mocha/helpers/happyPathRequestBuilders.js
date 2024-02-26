@@ -137,6 +137,14 @@ module.exports.editRequestsOnItem = [
 		siteId,
 		{ title: linkedArticle, badges: [ rbf.ALLOWED_BADGES[ 0 ] ] }
 	),
+	( { itemId, siteId } ) => rbf.newPatchSitelinksRequestBuilder(
+		itemId,
+		[ {
+			op: 'remove',
+			path: `/${siteId}/badges`
+		} ]
+
+	),
 	( { itemId } ) => rbf.newPatchItemLabelsRequestBuilder(
 		itemId,
 		[ {
