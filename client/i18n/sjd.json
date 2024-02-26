@@ -6,7 +6,7 @@
 		]
 	},
 	"wikibase-comment-update": "{{WBREPONAME}} вуайхма",
-	"wikibase-comment-multi": "$1 {{PLURAL:$1|вуайхэсс|вуайхэз|вуайхэссэ}}",
+	"wikibase-comment-multi": "$1 {{PLURAL:$1|воа̄йхэсс|воа̄йхэз|воа̄йхэссэ}}",
 	"wikibase-dataitem": "{{WBREPONAME}} элеменнт",
 	"wikibase-editlinks": "Вуайхэ ужэтҍ",
 	"wikibase-editlinkstitle": "Вуайхэ кӣлкэскса вӯлкхэллмужэнҍ",
@@ -19,6 +19,6 @@
 	"wikibase-rc-hide-wikidata-hide": "Пе̄ҋҋтэ",
 	"wikibase-rc-hide-wikidata-show": "Вӯзьхэ",
 	"wikibase-rc-wikibase-edit-letter": "д",
-	"wikibase-rc-wikibase-edit-title": "{{grammar:genitive|{{WBREPONAME}}}} вуайхэсс",
+	"wikibase-rc-wikibase-edit-title": "{{grammar:genitive|{{WBREPONAME}}}} воа̄йхэсс",
 	"wikibase-otherprojects": "Мудта проэктэнҍ"
 }

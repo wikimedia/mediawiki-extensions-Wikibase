@@ -161,6 +161,7 @@
 	"wikibase-anonymouseditwarning": "Uyarı: Oturum açmadınız. Herhangi bir düzenleme yaparsanız, [https://tr.wikipedia.org/wiki/IP_adresi IP adresiniz] herkes tarafından görülebilir. <strong>[$1 Oturum açarsanız]</strong> veya <strong>[$2 bir hesap oluşturursanız]</strong>, düzenlemeleriniz diğer yararların yanı sıra bir kullanıcı adıyla ilişkilendirilir.",
 	"wikibase-anonymouseditwarning-heading": "Oturum açmadınız",
 	"wikibase-anonymouseditwarning-message": "Şu anda herhangi bir düzenleme yaparsanız IP adresiniz herkes tarafından görülebilir. Oturum açarsanız veya bir hesap oluşturursanız, düzenlemeleriniz diğer avantajların yanı sıra kullanıcı adınızla da ilişkilendirilir.",
+	"wikibase-anonymouseditnotificationtempuser-message": "Giriş yapar ya da bir hesap oluşturursanız, diğer faydaların yanı sıra düzenlemeleriniz kullanıcı adınızla ilişkilendirilecektir.",
 	"wikibase-anonymouseditwarning-dismiss-persist": "Oturum açmadığım zamanlarda beni uyar.",
 	"wikibase-anonymouseditwarning-dismiss-button": "Oturum açmadan düzenle",
 	"wikibase-anonymouseditnotificationtempuser": "<strong>[$1 Giriş yapar]</strong> ya da <strong>[$2 hesap oluştursanız]</strong>, düzenlemeleriniz, diğer faydaların yanı sıra bir kullanıcı adıyla ilişkilendirilecektir.",

@@ -134,6 +134,7 @@
 	"wikibase-anonymouseditwarning": "Предупредување: Не сте најавени. Вашата [https://mk.wikipedia.org/wiki/IP-адреса IP-адреса] ќе биде јавно видлива доколку уредувате. Ако <strong>[$1 се најавите]</strong> или <strong>[$2 направите сметка]</strong>, уредувањата ќе му се припишуваат на вашето корисниичко име, меѓу останатите погодности.",
 	"wikibase-anonymouseditwarning-heading": "Не сте најавени",
 	"wikibase-anonymouseditwarning-message": "Ако уредувате, вашата IP-адреса ќе биде јавно видлива. Ако направите сметка (или се најавите со постоечка), уредувањата ќе се водат под вашето корисничко име, меѓу останатите погодности.",
+	"wikibase-anonymouseditnotificationtempuser-message": "Ако се најавите или направите сметка, вашите уредувања ќе му се припишуваат на вашето корисничко име, меѓу другите придобивки.",
 	"wikibase-anonymouseditwarning-dismiss-persist": "Предупреди ме ако не сум најавен.",
 	"wikibase-anonymouseditwarning-dismiss-button": "Уреди без најава",
 	"wikibase-anonymouseditnotificationtempuser": "Ако <strong>[$1 се најавите]</strong> или <strong>[$2 направите сметка]</strong>, вашите урдувања ќе му се припишуваат на корисничко име, меѓу другите придобивки.",
