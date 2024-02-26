@@ -46,6 +46,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchPropert
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions\PatchPropertyDescriptions;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchPropertyLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyStatement\PatchPropertyStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchSitelinks\PatchSitelinks;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemDescription\RemoveItemDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemLabel\RemoveItemLabel;
@@ -322,6 +323,11 @@ class WbRestApi {
 	public static function getPatchPropertyAliases( ContainerInterface $services = null ): PatchPropertyAliases {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.PatchPropertyAliases' );
+	}
+
+	public static function getPatchSitelinks( ContainerInterface $services = null ): PatchSitelinks {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.PatchSitelinks' );
 	}
 
 	public static function getAssertUserIsAuthorized( ContainerInterface $services = null ): AssertUserIsAuthorized {

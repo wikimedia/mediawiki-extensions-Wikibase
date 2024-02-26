@@ -18,6 +18,9 @@ use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserialize
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SerializerFactory;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\SitelinksDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\SitelinkSerializer;
+use Wikibase\Repo\RestApi\Application\Serialization\SitelinksSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\FieldsFilterValidatingDeserializer;
@@ -87,6 +90,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions\PatchPr
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchedLabelsValidator as PatchedPropertyLabelsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchPropertyLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyStatement\PatchPropertyStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchSitelinks\PatchSitelinks;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchedStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveItemDescription\RemoveItemDescription;
@@ -790,6 +794,29 @@ return [
 			WbRestApi::getValidatingRequestDeserializer( $services ),
 			WbRestApi::getAssertPropertyExists( $services ),
 			WbRestApi::getPatchStatement( $services )
+		);
+	},
+
+	'WbRestApi.PatchSitelinks' => function( MediaWikiServices $services ): PatchSitelinks {
+		return new PatchSitelinks(
+			WbRestApi::getValidatingRequestDeserializer(),
+			WbRestApi::getAssertItemExists(),
+			WbRestApi::getAssertUserIsAuthorized(),
+			WbRestApi::getItemDataRetriever(),
+			new SitelinksSerializer( new SitelinkSerializer() ),
+			new PatchJson( new JsonDiffJsonPatcher() ),
+			WbRestApi::getItemDataRetriever(),
+			new SitelinksDeserializer(
+				new SitelinkDeserializer(
+					MediaWikiTitleCodec::getTitleInvalidRegex(),
+					array_keys( WikibaseRepo::getSettings()->getSetting( 'badgeItems' ) ),
+					new SiteLinkPageNormalizerSitelinkTargetResolver(
+						MediaWikiServices::getInstance()->getSiteLookup(),
+						WikibaseRepo::getSiteLinkPageNormalizer()
+					)
+				)
+			),
+			WbRestApi::getItemUpdater()
 		);
 	},
 

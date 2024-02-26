@@ -4,28 +4,25 @@ namespace Wikibase\Repo\RestApi\RouteHandlers;
 
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Handler;
+use MediaWiki\Rest\RequestInterface;
 use MediaWiki\Rest\Response;
+use MediaWiki\Rest\ResponseInterface;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
 use MediaWiki\Rest\Validator\BodyValidator;
-use MediaWikiTitleCodec;
-use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\SitelinksDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinksSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchSitelinks\PatchSitelinks;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchSitelinks\PatchSitelinksRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchSitelinks\PatchSitelinksResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\SiteLinkPageNormalizerSitelinkTargetResolver;
-use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\BotRightCheckMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\ContentTypeCheckMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
 use Wikibase\Repo\RestApi\WbRestApi;
-use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\ParamValidator\ParamValidator;
 
 /**
@@ -60,31 +57,21 @@ class PatchSitelinksRouteHandler extends SimpleHandler {
 		$responseFactory = new ResponseFactory();
 
 		return new self(
-			new PatchSitelinks(
-				WbRestApi::getValidatingRequestDeserializer(),
-				WbRestApi::getAssertItemExists(),
-				WbRestApi::getAssertUserIsAuthorized(),
-				WbRestApi::getItemDataRetriever(),
-				new SitelinksSerializer( new SitelinkSerializer() ),
-				new PatchJson( new JsonDiffJsonPatcher() ),
-				WbRestApi::getItemDataRetriever(),
-				new SitelinksDeserializer(
-					new SitelinkDeserializer(
-						MediaWikiTitleCodec::getTitleInvalidRegex(),
-						array_keys( WikibaseRepo::getSettings()->getSetting( 'badgeItems' ) ),
-						new SiteLinkPageNormalizerSitelinkTargetResolver(
-							MediaWikiServices::getInstance()->getSiteLookup(),
-							WikibaseRepo::getSiteLinkPageNormalizer()
-						)
-					)
-				),
-				WbRestApi::getItemUpdater()
-			),
+			WbRestApi::getPatchSitelinks(),
 			new SitelinksSerializer( new SitelinkSerializer() ),
 			$responseFactory,
 			new MiddlewareHandler( [
+				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
+				new UserAgentCheckMiddleware(),
 				new AuthenticationMiddleware(),
+				new ContentTypeCheckMiddleware( [
+					ContentTypeCheckMiddleware::TYPE_APPLICATION_JSON,
+					ContentTypeCheckMiddleware::TYPE_JSON_PATCH,
+				] ),
 				new BotRightCheckMiddleware( MediaWikiServices::getInstance()->getPermissionManager(), $responseFactory ),
+				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
+					fn( RequestInterface $request ): string => $request->getPathParam( self::ITEM_ID_PATH_PARAM )
+				),
 			] )
 		);
 	}
@@ -183,6 +170,13 @@ class PatchSitelinksRouteHandler extends SimpleHandler {
 	private function getUsername(): ?string {
 		$mwUser = $this->getAuthority()->getUser();
 		return $mwUser->isRegistered() ? $mwUser->getName() : null;
+	}
+
+	/**
+	 * Preconditions are checked via {@link PreconditionMiddleware}
+	 */
+	public function checkPreconditions(): ?ResponseInterface {
+		return null;
 	}
 
 }
