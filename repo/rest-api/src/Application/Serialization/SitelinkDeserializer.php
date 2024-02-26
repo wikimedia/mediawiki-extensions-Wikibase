@@ -33,6 +33,12 @@ class SitelinkDeserializer {
 	}
 
 	/**
+	 * @throws MissingFieldException
+	 * @throws InvalidFieldTypeException
+	 * @throws EmptySitelinkException
+	 * @throws InvalidFieldException
+	 * @throws InvalidSitelinkBadgeException
+	 * @throws BadgeNotAllowed
 	 * @throws SitelinkTargetNotFound
 	 */
 	public function deserialize( string $siteId, array $serialization ): SiteLink {

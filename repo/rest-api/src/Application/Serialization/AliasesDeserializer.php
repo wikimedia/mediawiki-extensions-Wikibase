@@ -10,6 +10,11 @@ use Wikibase\DataModel\Term\AliasGroupList;
  */
 class AliasesDeserializer {
 
+	/**
+	 * @throws InvalidFieldException
+	 * @throws EmptyAliasException
+	 * @throws DuplicateAliasException
+	 */
 	public function deserialize( array $serialization ): AliasGroupList {
 		$aliasGroups = [];
 

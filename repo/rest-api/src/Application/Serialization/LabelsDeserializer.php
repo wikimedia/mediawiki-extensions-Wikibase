@@ -10,6 +10,10 @@ use Wikibase\DataModel\Term\TermList;
  */
 class LabelsDeserializer {
 
+	/**
+	 * @throws InvalidFieldException
+	 * @throws EmptyLabelException
+	 */
 	public function deserialize( array $serialization ): TermList {
 		$terms = [];
 
