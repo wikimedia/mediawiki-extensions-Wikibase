@@ -7,6 +7,8 @@ namespace Wikibase\Repo\Tests\Store;
 use HashBagOStuff;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\Store\BagOStuffSiteLinkConflictLookup;
 
@@ -20,14 +22,16 @@ use Wikibase\Repo\Store\BagOStuffSiteLinkConflictLookup;
 class BagOStuffSiteLinkConflictLookupTest extends TestCase {
 
 	public function testGetConflictsForItem_primary_writesAllSiteLinks(): void {
-		$item = NewItem::withId( 'Q1' )
-			->andSiteLink( 'site1', 'One' )
-			->andSiteLink( 'site2', 'Two' )
-			->build();
+		$itemId = new ItemId( 'Q1' );
+		$sitelinkList = new SiteLinkList( [
+			new SiteLink( 'site1', 'One' ),
+			new SiteLink( 'site2', 'Two' ),
+		] );
+
 		$bagOStuff = new HashBagOStuff();
 		$conflictLookup = new BagOStuffSiteLinkConflictLookup( $bagOStuff );
 
-		$conflicts = $conflictLookup->getConflictsForItem( $item, DB_PRIMARY );
+		$conflicts = $conflictLookup->getConflictsForItem( $itemId, $sitelinkList, DB_PRIMARY );
 
 		$this->assertSame( [], $conflicts );
 		$this->assertTrue( $bagOStuff->hasKey( $this->cacheKey( 'site1', 'One' ) ) );
@@ -35,18 +39,20 @@ class BagOStuffSiteLinkConflictLookupTest extends TestCase {
 	}
 
 	public function testGetConflictsForItem_primary_clearsConflicts(): void {
-		$item = NewItem::withId( 'Q1' )
-			->andSiteLink( 'site1', 'One' )
-			->andSiteLink( 'site2', 'Two' )
-			->andSiteLink( 'site3', 'Three' )
-			->andSiteLink( 'site4', 'Four' )
-			->build();
+		$itemId = new ItemId( 'Q1' );
+		$sitelinkList = new SiteLinkList( [
+			new SiteLink( 'site1', 'One' ),
+			new SiteLink( 'site2', 'Two' ),
+			new SiteLink( 'site3', 'Three' ),
+			new SiteLink( 'site4', 'Four' ),
+		] );
+
 		$bagOStuff = new HashBagOStuff();
 		$bagOStuff->set( $this->cacheKey( 'site2', 'Two' ), 'Q2' );
 		$bagOStuff->set( $this->cacheKey( 'site4', 'Four' ), 'Q2' );
 		$conflictLookup = new BagOStuffSiteLinkConflictLookup( $bagOStuff );
 
-		$conflicts = $conflictLookup->getConflictsForItem( $item, DB_PRIMARY );
+		$conflicts = $conflictLookup->getConflictsForItem( $itemId, $sitelinkList, DB_PRIMARY );
 
 		$this->assertCount( 2, $conflicts );
 		$this->assertContainsEquals( [
@@ -67,15 +73,17 @@ class BagOStuffSiteLinkConflictLookupTest extends TestCase {
 	}
 
 	public function testGetConflictsForItem_primary_ignoresSelfConflict(): void {
-		$item = NewItem::withId( 'Q1' )
-			->andSiteLink( 'site1', 'One' )
-			->andSiteLink( 'site2', 'Two' )
-			->build();
+		$itemId = new ItemId( 'Q1' );
+		$sitelinkList = new SiteLinkList( [
+			new SiteLink( 'site1', 'One' ),
+			new SiteLink( 'site2', 'Two' ),
+		] );
+
 		$bagOStuff = new HashBagOStuff();
 		$bagOStuff->set( $this->cacheKey( 'site1', 'One' ), 'Q1' );
 		$conflictLookup = new BagOStuffSiteLinkConflictLookup( $bagOStuff );
 
-		$conflicts = $conflictLookup->getConflictsForItem( $item, DB_PRIMARY );
+		$conflicts = $conflictLookup->getConflictsForItem( $itemId, $sitelinkList, DB_PRIMARY );
 
 		$this->assertSame( [], $conflicts );
 		$this->assertTrue( $bagOStuff->hasKey( $this->cacheKey( 'site1', 'One' ) ) );
@@ -83,14 +91,16 @@ class BagOStuffSiteLinkConflictLookupTest extends TestCase {
 	}
 
 	public function testGetConflictsForItem_replica_noConflicts(): void {
-		$item = NewItem::withId( 'Q1' )
-			->andSiteLink( 'site1', 'One' )
-			->andSiteLink( 'site2', 'Two' )
-			->build();
+		$itemId = new ItemId( 'Q1' );
+		$sitelinkList = new SiteLinkList( [
+			new SiteLink( 'site1', 'One' ),
+			new SiteLink( 'site2', 'Two' ),
+		] );
+
 		$bagOStuff = new HashBagOStuff();
 		$conflictLookup = new BagOStuffSiteLinkConflictLookup( $bagOStuff );
 
-		$conflicts = $conflictLookup->getConflictsForItem( $item, DB_REPLICA );
+		$conflicts = $conflictLookup->getConflictsForItem( $itemId, $sitelinkList, DB_REPLICA );
 
 		$this->assertSame( [], $conflicts );
 		$this->assertFalse( $bagOStuff->hasKey( $this->cacheKey( 'site1', 'One' ) ) );
@@ -98,15 +108,17 @@ class BagOStuffSiteLinkConflictLookupTest extends TestCase {
 	}
 
 	public function testGetConflictsForItem_replica_conflicts(): void {
-		$item = NewItem::withId( 'Q1' )
-			->andSiteLink( 'site1', 'One' )
-			->andSiteLink( 'site2', 'Two' )
-			->build();
+		$itemId = new ItemId( 'Q1' );
+		$sitelinkList = new SiteLinkList( [
+			new SiteLink( 'site1', 'One' ),
+			new SiteLink( 'site2', 'Two' ),
+		] );
+
 		$bagOStuff = new HashBagOStuff();
 		$bagOStuff->set( $this->cacheKey( 'site1', 'One' ), 'Q2' );
 		$conflictLookup = new BagOStuffSiteLinkConflictLookup( $bagOStuff );
 
-		$conflicts = $conflictLookup->getConflictsForItem( $item, DB_REPLICA );
+		$conflicts = $conflictLookup->getConflictsForItem( $itemId, $sitelinkList, DB_REPLICA );
 
 		$this->assertEquals( [ [
 			'siteId' => 'site1',

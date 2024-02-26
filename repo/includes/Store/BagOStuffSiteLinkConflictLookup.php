@@ -8,6 +8,7 @@ use BagOStuff;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\SiteLinkList;
 
 /**
  * Short-term sitelink conflict lookup using a BagOStuff (e.g. memcached).
@@ -34,14 +35,13 @@ class BagOStuffSiteLinkConflictLookup implements SiteLinkConflictLookup {
 		$this->bagOStuff = $bagOStuff;
 	}
 
-	public function getConflictsForItem( Item $item, int $db = null ): array {
-		$itemId = $item->getId()->getSerialization();
+	public function getConflictsForItem( ItemId $itemId, SiteLinkList $siteLinkList, int $db = null ): array {
 		$conflicts = [];
 		$siteLinksToClear = [];
 
-		foreach ( $item->getSiteLinkList()->toArray() as $siteLink ) {
+		foreach ( $siteLinkList->toArray() as $siteLink ) {
 			if ( $db === DB_PRIMARY ) { // write mode
-				$conflict = $this->getConflictForSiteLink( $itemId, $siteLink );
+				$conflict = $this->getConflictForSiteLink( "$itemId", $siteLink );
 				if ( $conflict !== null ) {
 					$conflicts[] = $conflict;
 					$this->clearConflictsForSiteLinks( $siteLinksToClear );
@@ -50,7 +50,7 @@ class BagOStuffSiteLinkConflictLookup implements SiteLinkConflictLookup {
 					$siteLinksToClear[] = $siteLink;
 				}
 			} else { // read mode
-				$conflict = $this->peekConflictForSiteLink( $itemId, $siteLink );
+				$conflict = $this->peekConflictForSiteLink( "$itemId", $siteLink );
 				if ( $conflict !== null ) {
 					$conflicts[] = $conflict;
 				}

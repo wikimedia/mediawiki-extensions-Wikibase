@@ -13,13 +13,13 @@ use ValueValidators\Error;
 use ValueValidators\Result;
 use ValueValidators\ValueValidator;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
+use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
@@ -303,10 +303,10 @@ class ChangeOpTestMockProvider {
 		$mock = $this->createMock( SiteLinkConflictLookup::class );
 
 		$mock->method( 'getConflictsForItem' )
-			->willReturnCallback( function ( Item $item ) {
+			->willReturnCallback( function ( ItemId $itemId, SiteLinkList $siteLinkList ) {
 				$conflicts = [];
 
-				foreach ( $item->getSiteLinkList()->toArray() as $link ) {
+				foreach ( $siteLinkList->toArray() as $link ) {
 					if ( $link->getPageName() === 'DUPE' ) {
 						$conflicts[] = [
 							'siteId' => $link->getSiteId(),
